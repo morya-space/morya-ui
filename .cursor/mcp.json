@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "icons": {
+      "command": "npx",
+      "args": ["-y", "icons-mcp"]
+    },
+    "primevue": {
+      "command": "npx",
+      "args": ["-y", "@primevue/mcp"]
+    }
+  }
+}

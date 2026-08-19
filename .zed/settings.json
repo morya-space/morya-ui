@@ -1,0 +1,15 @@
+{
+  "context_servers": {
+    "icons-mcp": {
+      "command": {
+        "path": "npx",
+        "args": ["-y", "icons-mcp"]
+      }
+    },
+    "primevue": {
+      "command": "npx",
+      "args": ["-y", "@primevue/mcp"]
+    }
+  },
+  "format_on_save": "on"
+}

@@ -1,0 +1,43 @@
+---
+title: Avatar
+category: 07 / MISC
+description: 头像用于展示用户或实体标识。支持图片、图标与文字回退，形状与尺寸可配置。
+---
+
+# Avatar
+
+头像用于展示用户或实体标识。展示优先级：`image` > `icon` > `label`。
+
+## 引入
+
+```ts
+import { WdAvatar } from '@well-insight/ui'
+```
+
+## Basic
+
+```vue preview
+<script setup lang="ts">
+import { WdAvatar } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+    <WdAvatar label="AB" />
+    <WdAvatar icon="check" />
+    <WdAvatar label="SQ" shape="square" />
+    <WdAvatar label="LG" size="large" />
+    <WdAvatar label="XL" size="xlarge" />
+  </div>
+</template>
+```
+
+## Props
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `label` | `string` | — | 无图片/图标时的文字回退。 |
+| `image` | `string` | — | 图片 URL，优先级最高。 |
+| `icon` | `IconName` | — | `WdIcon` 图标名称。 |
+| `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
+| `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |

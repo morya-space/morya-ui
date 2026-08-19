@@ -1,0 +1,59 @@
+---
+title: Inplace
+category: 07 / MISC
+description: 点击展示区切换为可编辑内容。
+---
+
+# Inplace
+
+在 display 与 content 两种视图间切换。
+
+## 引入
+
+```ts
+import { WdInplace } from '@well-insight/ui'
+```
+
+## Basic
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WdInplace, WdInput, WdButton } from '@well-insight/ui'
+
+const active = ref(false)
+const text = ref('点击编辑')
+</script>
+
+<template>
+  <WdInplace v-model="active">
+    <template #display>{{ text }}</template>
+    <template #content="{ close }">
+      <div style="display:flex;gap:8px">
+        <WdInput v-model="text" />
+        <WdButton label="完成" size="small" @click="close" />
+      </div>
+    </template>
+  </WdInplace>
+</template>
+```
+
+## Props
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `modelValue` | `boolean` | `false` | 是否处于编辑态。 |
+| `disabled` | `boolean` | `false` | 禁用切换。 |
+
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `display` | 默认展示。 |
+| `content` | 激活内容，提供 `{ close }`。 |
+
+## Events
+
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `update:modelValue` | `boolean` | 激活态变化。 |
