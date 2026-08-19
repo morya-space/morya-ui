@@ -15,6 +15,7 @@ docs: 补充快速开始说明
 1. **交互勾选**要写入 CHANGELOG 的提交（列出上一个 `v*` 以来的**全部**提交；默认预选改过 `src/`、`playground/` 等库路径的）
 2. **你自己选择** bump：`patch` / `minor` / `major`  
    （提示：`feat` → minor，`fix`/其他 → patch，`!`/BREAKING → major，仅作参考）
+3. **发版先登录**如果要发版请先获取npm的token，且执行命令 `npm config set //registry.npmjs.org/:_authToken=您的新Token`
 
 ## 发版步骤
 
