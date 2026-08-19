@@ -1,0 +1,51 @@
+---
+title: DataView
+category: 06 / DATA
+description: 列表或网格布局展示数据，可分页。
+---
+
+# DataView
+
+以 list / grid 布局渲染集合，可选分页。
+
+## 引入
+
+```ts
+import { WdDataView } from '@well-insight/ui'
+```
+
+## Basic
+
+```vue preview
+<script setup lang="ts">
+import { WdDataView } from '@well-insight/ui'
+
+const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
+</script>
+
+<template>
+  <WdDataView :value="items" layout="grid" paginator :rows="4">
+    <template #grid="{ items: page }">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+        <div v-for="item in page" :key="item">{{ item }}</div>
+      </div>
+    </template>
+  </WdDataView>
+</template>
+```
+
+## Props
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `value` | `any[]` | `[]` | 数据。 |
+| `layout` | `'list' \| 'grid'` | `'list'` | 布局。 |
+| `paginator` | `boolean` | `false` | 启用分页。 |
+| `rows` | `number` | `10` | 每页条数。 |
+
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `list` | 列表布局，`{ items }`。 |
+| `grid` | 网格布局，`{ items }`。 |

@@ -1,0 +1,187 @@
+:root {
+    --wd-color-primary: #2563eb;
+    --wd-color-primary-hover: #1d4ed8;
+    --wd-color-surface: #ffffff;
+    --wd-color-text: #0f172a;
+    --wd-color-text-muted: #64748b;
+    --wd-color-border: #e2e8f0;
+    --wd-color-focus-ring: #2563eb;
+    /* Naive-inspired control sizing (tiny omitted; medium = default) */
+    --wd-control-height-small: 28px;
+    --wd-control-height-medium: 34px;
+    --wd-control-height-large: 40px;
+    --wd-control-font-small: 14px;
+    --wd-control-font-medium: 14px;
+    --wd-control-font-large: 15px;
+    --wd-control-padding-x-small: 10px;
+    --wd-control-padding-x-medium: 12px;
+    --wd-control-padding-x-large: 14px;
+    --wd-button-padding-x-small: 10px;
+    --wd-button-padding-x-medium: 14px;
+    --wd-button-padding-x-large: 18px;
+    --wd-radius-control: 3px;
+    --wd-focus-shadow: 0 0 0 2px color-mix(in srgb, var(--wd-color-primary) 20%, transparent);
+    --wd-focus-shadow-danger: 0 0 0 2px color-mix(in srgb, var(--wd-color-danger) 20%, transparent);
+    --wd-color-success: #159570;
+    --wd-color-info: #2563eb;
+    --wd-color-warning: #d97706;
+    --wd-color-warn: var(--wd-color-warning);
+    --wd-color-help: #9333ea;
+    --wd-color-danger: #dc2626;
+    --wd-color-contrast: #0f172a;
+    --wd-color-contrast-fg: #ffffff;
+    --wd-color-contrast-hover: #1e293b;
+    --wd-color-contrast-active: #020617;
+    --wd-color-on-emphasis: #ffffff;
+    --wd-overlay-scrim: rgb(15 23 42 / 0.55);
+    --wd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
+    --wd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
+    --wd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --wd-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --wd-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --wd-terminal-bg: #111827;
+    --wd-terminal-fg: #e5e7eb;
+    --wd-terminal-prompt: #34d399;
+    --wd-terminal-border: color-mix(in srgb, #fff 12%, transparent);
+    /* Typography scale (component text, not control-height fonts) */
+    --wd-font-size-xs: 0.75rem;
+    --wd-font-size-sm: 0.8125rem;
+    --wd-font-size-md: 0.875rem;
+    --wd-font-size-lg: 1.125rem;
+    --wd-opacity-disabled: 0.55;
+    /* Layering: override --wd-z-base via ConfigProvider / createWellInsight */
+    --wd-z-base: 1000;
+    --wd-z-overlay: var(--wd-z-base);
+    --wd-z-overlay-raised: calc(var(--wd-z-base) + 1);
+    --wd-z-dropdown: calc(var(--wd-z-base) + 50);
+    --wd-z-toast: calc(var(--wd-z-base) + 100);
+    --wd-z-popper: 40;
+    --wd-menu-min-width: 10rem;
+    --wd-menu-min-width-lg: 12rem;
+    --wd-control-affix-size: 2rem;
+    --wd-control-affix-gap: 2.35rem;
+    --wd-control-affix-padding: 2.5rem;
+    --wd-space-1: 0.25rem;
+    --wd-space-2: 0.5rem;
+    --wd-space-3: 0.75rem;
+    --wd-space-4: 1rem;
+    --wd-space-6: 1.5rem;
+    --wd-space-8: 2rem;
+    --wd-radius-sm: 0.25rem;
+    --wd-radius-md: 0.5rem;
+    --wd-radius-lg: 0.75rem;
+    --wd-radius-full: 9999px;
+    --wd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --wd-motion-fast: 150ms;
+    --wd-motion-normal: 250ms;
+    --wd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --wd-motion-enter: 180ms;
+    --wd-motion-exit: 130ms;
+    --wd-motion-distance: 0.5rem;
+}
+
+:root[data-wd-motion="reduced"] {
+    --wd-motion-fast: 80ms;
+    --wd-motion-normal: 120ms;
+    --wd-motion-enter: 100ms;
+    --wd-motion-exit: 80ms;
+    --wd-motion-distance: 0;
+}
+
+:root[data-wd-motion="none"] {
+    --wd-motion-fast: 0ms;
+    --wd-motion-normal: 0ms;
+    --wd-motion-enter: 0ms;
+    --wd-motion-exit: 0ms;
+    --wd-motion-distance: 0;
+}
+
+/* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */
+:root,
+[data-wd-density="comfortable"] {
+    --wd-density-scale: 1;
+}
+
+[data-wd-density="compact"] {
+    --wd-space-1: 0.2rem;
+    --wd-space-2: 0.4rem;
+    --wd-space-3: 0.6rem;
+    --wd-space-4: 0.85rem;
+    --wd-space-6: 1.25rem;
+    --wd-space-8: 1.7rem;
+    --wd-control-height-small: 24px;
+    --wd-control-height-medium: 28px;
+    --wd-control-height-large: 34px;
+    --wd-control-font-small: 13px;
+    --wd-control-font-medium: 13px;
+    --wd-control-font-large: 14px;
+    --wd-control-padding-x-small: 8px;
+    --wd-control-padding-x-medium: 10px;
+    --wd-control-padding-x-large: 12px;
+    --wd-button-padding-x-small: 8px;
+    --wd-button-padding-x-medium: 12px;
+    --wd-button-padding-x-large: 16px;
+}
+
+[data-wd-density="spacious"] {
+    --wd-space-1: 0.3rem;
+    --wd-space-2: 0.6rem;
+    --wd-space-3: 0.9rem;
+    --wd-space-4: 1.15rem;
+    --wd-space-6: 1.75rem;
+    --wd-space-8: 2.35rem;
+    --wd-control-height-small: 32px;
+    --wd-control-height-medium: 40px;
+    --wd-control-height-large: 46px;
+    --wd-control-font-small: 14px;
+    --wd-control-font-medium: 15px;
+    --wd-control-font-large: 16px;
+    --wd-control-padding-x-small: 12px;
+    --wd-control-padding-x-medium: 14px;
+    --wd-control-padding-x-large: 16px;
+    --wd-button-padding-x-small: 12px;
+    --wd-button-padding-x-medium: 16px;
+    --wd-button-padding-x-large: 20px;
+}
+
+[data-theme="dark"] {
+    --wd-color-primary: #60a5fa;
+    --wd-color-primary-hover: #93c5fd;
+    --wd-color-surface: #0f172a;
+    --wd-color-text: #f8fafc;
+    --wd-color-text-muted: #94a3b8;
+    --wd-color-border: #334155;
+    --wd-color-focus-ring: #93c5fd;
+    --wd-focus-shadow: 0 0 0 2px color-mix(in srgb, var(--wd-color-primary) 28%, transparent);
+    --wd-focus-shadow-danger: 0 0 0 2px color-mix(in srgb, var(--wd-color-danger) 28%, transparent);
+    --wd-color-success: #5eead4;
+    --wd-color-info: #93c5fd;
+    --wd-color-warning: #fbbf24;
+    --wd-color-warn: var(--wd-color-warning);
+    --wd-color-help: #c084fc;
+    --wd-color-danger: #fca5a5;
+    --wd-color-contrast: #f8fafc;
+    --wd-color-contrast-fg: #0f172a;
+    --wd-color-contrast-hover: #e2e8f0;
+    --wd-color-contrast-active: #cbd5e1;
+    --wd-overlay-scrim: rgb(2 6 23 / 0.72);
+    --wd-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+    --wd-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
+    --wd-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
+    --wd-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --wd-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --wd-terminal-bg: #020617;
+    --wd-terminal-fg: #e2e8f0;
+    --wd-terminal-prompt: #5eead4;
+    --wd-terminal-border: color-mix(in srgb, #fff 14%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root:not([data-wd-motion="full"]) {
+        --wd-motion-fast: 80ms;
+        --wd-motion-normal: 120ms;
+        --wd-motion-enter: 100ms;
+        --wd-motion-exit: 80ms;
+        --wd-motion-distance: 0;
+    }
+}

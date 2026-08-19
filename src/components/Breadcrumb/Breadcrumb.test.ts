@@ -1,0 +1,32 @@
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+import WdBreadcrumb from './Breadcrumb.vue'
+
+describe('WdBreadcrumb', () => {
+  it('renders home and model items with separators', () => {
+    const wrapper = mount(WdBreadcrumb, {
+      props: {
+        home: { label: 'Home', to: '/' },
+        model: [
+          { label: 'Products', to: '/products' },
+          { label: 'Shoes', disabled: true },
+          { label: 'Detail' },
+        ],
+      },
+    })
+    expect(wrapper.findAll('.wd-breadcrumb__item')).toHaveLength(4)
+    expect(wrapper.findAll('.wd-breadcrumb__separator')).toHaveLength(3)
+    expect(wrapper.get('a[href="/"]').text()).toBe('Home')
+    expect(wrapper.get('a[href="/products"]').text()).toBe('Products')
+    expect(wrapper.find('.wd-breadcrumb__link--disabled').text()).toBe('Shoes')
+    expect(wrapper.find('[aria-current="page"]').text()).toBe('Detail')
+  })
+
+  it('renders span when to is missing', () => {
+    const wrapper = mount(WdBreadcrumb, {
+      props: { model: [{ label: 'Only' }] },
+    })
+    expect(wrapper.find('a').exists()).toBe(false)
+    expect(wrapper.get('.wd-breadcrumb__link').text()).toBe('Only')
+  })
+})

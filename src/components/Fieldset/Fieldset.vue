@@ -1,0 +1,43 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { FieldsetProps } from './types'
+
+const props = withDefaults(defineProps<FieldsetProps>(), {
+  toggleable: false,
+  collapsed: false,
+})
+
+const emit = defineEmits<{
+  (event: 'update:collapsed', value: boolean): void
+}>()
+
+const isCollapsed = computed(() => props.collapsed)
+
+function toggle() {
+  if (!props.toggleable) return
+  emit('update:collapsed', !isCollapsed.value)
+}
+</script>
+
+<template>
+  <fieldset class="wd-fieldset" :class="{ 'wd-fieldset--collapsed': isCollapsed }">
+    <legend v-if="$slots.legend || legend || toggleable" class="wd-fieldset__legend">
+      <button
+        v-if="toggleable"
+        type="button"
+        class="wd-fieldset__toggler"
+        :aria-expanded="!isCollapsed"
+        @click="toggle"
+      >
+        <span aria-hidden="true">{{ isCollapsed ? '▸' : '▾' }}</span>
+        <slot name="legend">{{ legend }}</slot>
+      </button>
+      <template v-else>
+        <slot name="legend">{{ legend }}</slot>
+      </template>
+    </legend>
+    <div v-show="!isCollapsed" class="wd-fieldset__content">
+      <slot />
+    </div>
+  </fieldset>
+</template>
