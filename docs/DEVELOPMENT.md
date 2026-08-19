@@ -24,9 +24,16 @@ pnpm build:docs
 pnpm typecheck
 pnpm test
 pnpm test:coverage
-pnpm release      # full release (CHANGELOG, bump, publish, tag)
-pnpm release:npm  # build + npm publish only (set version first)
-pnpm release:git  # create tag / release branch only
+pnpm release              # full pipeline (prepare → … → push)
+pnpm release:prepare      # write version & CHANGELOG
+pnpm release:commit       # commit release files
+pnpm release:branch       # create release/{version} branch
+pnpm release:build        # build
+pnpm release:publish      # npm publish
+pnpm release:tag          # create v{version} tag
+pnpm release:push         # push branches & tag
+pnpm release:npm          # build + publish only (set version first)
+pnpm release:git          # create tag / release branch only
 ```
 
 ## Related docs
