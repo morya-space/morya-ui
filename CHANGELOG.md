@@ -1,5 +1,15 @@
 # @well-insight/ui
 
+## 0.1.3
+
+### 新功能
+
+- bootstrap standalone @well-insight/ui component library
+
+### 变更
+
+- restructure release process and update documentation
+
 ## 0.1.2
 
 ### 新功能
