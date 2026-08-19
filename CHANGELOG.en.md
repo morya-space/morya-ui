@@ -1,5 +1,15 @@
 # @well-insight/ui
 
+## 0.1.3
+
+### Features
+
+- bootstrap standalone @well-insight/ui component library
+
+### Changes
+
+- restructure release process and update documentation
+
 ## 0.1.2
 
 ### Features
