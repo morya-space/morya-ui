@@ -40,7 +40,7 @@ docs: 补充快速开始说明
 ## 与发版的关系
 
 - **版本号由发版时手动选择**（`patch` / `minor` / `major`），不会根据 commit type 自动升版。
-- 约定上可参考：`feat` → minor，`fix` / 其他 → patch，`feat!:` / breaking → major；最终以你在 `pnpm release` 中的选择为准。
+- 约定上可参考：`feat` → minor，`fix` / 其他 → patch，`feat!:` / breaking → major；最终以你在 `pnpm release:prepare` 中的选择为准。
 - **不是所有 commit 都会进 CHANGELOG**：发版时会列出上一个 `v*` 以来的全部提交，交互勾选要写入的条目（默认预选改过 `src/`、`playground/` 等库路径的提交）。
 
 详见 [`scripts/README.md`](../scripts/README.md)。

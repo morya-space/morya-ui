@@ -49,8 +49,15 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "release": "node scripts/release-ui.mjs",
-    "release:npm": "pnpm run build && pnpm publish --access public --no-git-checks",
+    "release": "node scripts/release.mjs",
+    "release:prepare": "node scripts/release.mjs prepare",
+    "release:commit": "node scripts/release.mjs commit",
+    "release:branch": "node scripts/release.mjs branch",
+    "release:build": "node scripts/release.mjs build",
+    "release:publish": "node scripts/release.mjs publish",
+    "release:tag": "node scripts/release.mjs tag",
+    "release:push": "node scripts/release.mjs push",
+    "release:npm": "pnpm run release:build && pnpm run release:publish",
     "release:git": "node scripts/release-git.mjs --tag --branch"
   },
   "peerDependencies": {

@@ -34,14 +34,17 @@ Equivalent to `build` + `pnpm publish --access public --no-git-checks`.
 
 ## Full release
 
-Interactive CHANGELOG selection, bump, tag / branch:
+Run step-by-step or use the orchestrator. See [scripts/README.md](../scripts/README.md):
 
 ```bash
-pnpm release -- --dry-run
-pnpm release
-```
+pnpm release:prepare -- --dry-run   # preview
+pnpm release:prepare                # write version & CHANGELOG
+pnpm release:commit                 # commit release files
+# … branch / build / publish / tag / push
 
-Details: [scripts/README.md](../scripts/README.md).
+pnpm release                        # run all steps
+pnpm release -- --no-push           # local release, no push
+```
 
 Before publishing, verify:
 

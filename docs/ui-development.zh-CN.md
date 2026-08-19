@@ -32,13 +32,16 @@ pnpm release:npm
 
 ## 完整发版
 
-交互勾选 CHANGELOG、选择 bump、打 tag / 分支：
+分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)：
 
 ```bash
-pnpm release -- --dry-run
-pnpm release
-```
+pnpm release:prepare -- --dry-run   # 预览
+pnpm release:prepare                # 写版本与 CHANGELOG
+pnpm release:commit                 # 提交 release 文件
+# … branch / build / publish / tag / push
 
-详见 [scripts/README.md](../scripts/README.md)。
+pnpm release                        # 一键跑完全部步骤
+pnpm release -- --no-push           # 本地发版，不 push
+```
 
 发布前检查：`version` 与 CHANGELOG 一致；`build` / `typecheck` / `test` 通过；`files` 包含 `dist` 与 `CHANGELOG.md`；peer 为 `vue`。

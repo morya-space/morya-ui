@@ -24,9 +24,16 @@ pnpm build:docs
 pnpm typecheck
 pnpm test
 pnpm test:coverage
-pnpm release      # 完整发版（CHANGELOG、bump、publish、tag）
-pnpm release:npm  # 仅 build + npm publish（需先改 version）
-pnpm release:git  # 仅补 tag / release 分支
+pnpm release              # 一键发版（prepare → … → push）
+pnpm release:prepare      # 写版本与 CHANGELOG
+pnpm release:commit       # 提交 release 文件
+pnpm release:branch       # 创建 release/{version} 分支
+pnpm release:build        # 构建
+pnpm release:publish      # npm publish
+pnpm release:tag          # 打 v{version} 标签
+pnpm release:push         # 推送分支与 tag
+pnpm release:npm          # 仅 build + publish（需先改 version）
+pnpm release:git          # 仅补 tag / release 分支
 ```
 
 ## 相关文档

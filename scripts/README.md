@@ -16,46 +16,64 @@ docs: 补充快速开始说明
 2. **你自己选择** bump：`patch` / `minor` / `major`  
    （提示：`feat` → minor，`fix`/其他 → patch，`!`/BREAKING → major，仅作参考）
 
-## 发版
+## 发版步骤
 
-### 仅发布到 npm
+完整发版拆成 7 个原子步骤，可逐步执行，也可一条命令跑完。
 
-不写 CHANGELOG、不打 tag。先改好根目录 `package.json` 的 `version`，再执行：
+| 步骤 | 命令 | 说明 |
+| --- | --- | --- |
+| 1 | `pnpm release:prepare` | 交互选 CHANGELOG 条目与 bump，写 `package.json` / CHANGELOG |
+| 2 | `pnpm release:commit` | 提交 release 文件 |
+| 3 | `pnpm release:branch` | 从当前提交创建 `release/{version}` 分支（不切换） |
+| 4 | `pnpm release:build` | 构建 `dist/` |
+| 5 | `pnpm release:publish` | 发布到 npm |
+| 6 | `pnpm release:tag` | 打 `v{version}` 标签 |
+| 7 | `pnpm release:push` | 推送当前分支、发版分支与 tag |
+
+### 分步发版
 
 ```bash
-pnpm release:npm
+pnpm release:prepare -- --dry-run   # 预览
+pnpm release:prepare                # 写版本与 CHANGELOG
+pnpm release:commit                 # 检查 diff 后再提交
+pnpm release:branch
+pnpm release:build
+pnpm release:publish
+pnpm release:tag
+pnpm release:push
 ```
 
-等价于：`build` + `pnpm publish --access public --no-git-checks`。
+每步结束会提示下一步命令。
 
-### 完整发版
+### 一键发版（编排）
 
 ```bash
 pnpm release
 ```
 
-流程：
-
-1. 交互选 CHANGELOG 条目与版本 bump
-2. 更新 `package.json` 与 `CHANGELOG.md` / `CHANGELOG.en.md`
-3. 在**当前分支**提交 `release: @well-insight/ui v{version}`
-4. 从该提交新建（不切换）`release/{version}` 分支
-5. 构建、npm publish
-6. 打 `v{version}` 标签，并推送当前分支、发版分支和 tag
-
-只预览、不写文件不发版：
+等价于依次执行上述 7 步。只预览、不写文件：
 
 ```bash
 pnpm release -- --dry-run
 ```
 
-非交互 / CI 可用参数：
+本地发版、不 push：
 
 ```bash
-pnpm release -- --patch --ui-only --no-push
-pnpm release -- --minor --all
-pnpm release -- --major --ui-only --force
+pnpm release -- --no-push
 ```
+
+从某步开始或只跑到某步：
+
+```bash
+pnpm release -- --from=build              # build → publish → tag → push
+pnpm release -- --until=commit            # prepare → commit
+pnpm release -- --from=publish --until=tag
+```
+
+### prepare 参数
+
+适用于 `pnpm release:prepare` 与 `pnpm release`（prepare 步骤）：
 
 | 参数 | 说明 |
 | --- | --- |
@@ -63,14 +81,22 @@ pnpm release -- --major --ui-only --force
 | `--all` | 上一个标签以来全部提交写入 CHANGELOG |
 | `--ui-only` | 仅改过库路径（`src/`、`playground/` 等）的提交 |
 | `--none` | 不写条目（需配合 `--force`） |
-| `--no-push` | 本地发版，不 push |
 | `--force` | 无提交 / 未勾选时仍允许发版 |
-| `--dry-run` | 只预览 |
+| `--dry-run` | 只预览，不写文件 |
+
+非交互示例：
+
+```bash
+pnpm release:prepare -- --patch --ui-only
+pnpm release -- --minor --all --no-push
+pnpm release -- --major --ui-only --force
+```
 
 没有 `v*` 标签时，视为首次发布当前 `package.json` 版本，不会重复写入已有说明。
 
-只补 git 标签 / 分支：
+### 快捷命令
 
-```bash
-pnpm release:git
-```
+| 命令 | 说明 |
+| --- | --- |
+| `pnpm release:npm` | 仅 `build` + `publish`（需先改好 `package.json` 的 `version`） |
+| `pnpm release:git` | 仅补 `release/{version}` 分支与 `v{version}` 标签 |
