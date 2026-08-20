@@ -18,7 +18,7 @@ import Thumb from './Thumb.vue'
 import type { ScrollbarDirection, ScrollbarEmits, ScrollbarProps } from './types'
 import { GAP, addUnit, isNumber, isObject } from './util'
 
-defineOptions({ name: 'WdScrollbar' })
+defineOptions({ name: 'WiScrollbar' })
 
 const props = withDefaults(defineProps<ScrollbarProps>(), {
   distance: 0,
@@ -46,7 +46,7 @@ const sizeHeight = ref('')
 const ratioX = ref(1)
 const ratioY = ref(1)
 
-const fallbackViewId = `wd-scrollbar-view-${Math.random().toString(36).slice(2, 9)}`
+const fallbackViewId = `wi-scrollbar-view-${Math.random().toString(36).slice(2, 9)}`
 const contentId = computed(() => props.id ?? fallbackViewId)
 
 let wrapScrollTop = 0
@@ -79,12 +79,12 @@ const resolvedWrapStyle = computed<StyleValue>(() => {
 })
 
 const wrapClassList = computed(() => [
-  'wd-scrollbar__wrap',
+  'wi-scrollbar__wrap',
   props.wrapClass,
-  { 'wd-scrollbar__wrap--hidden-default': !props.native },
+  { 'wi-scrollbar__wrap--hidden-default': !props.native },
 ])
 
-const viewClassList = computed(() => ['wd-scrollbar__view', props.viewClass])
+const viewClassList = computed(() => ['wi-scrollbar__view', props.viewClass])
 
 provide(
   scrollbarContextKey,
@@ -284,7 +284,7 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="scrollbarRef" class="wd-scrollbar">
+  <div ref="scrollbarRef" class="wi-scrollbar">
     <div
       ref="wrapRef"
       :class="wrapClassList"

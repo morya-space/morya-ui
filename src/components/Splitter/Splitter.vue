@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Comment, Fragment, Text, computed, onBeforeUnmount, ref, useSlots, watch, type VNode } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { SplitterProps } from './types'
 
 const props = withDefaults(defineProps<SplitterProps>(), {
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (event: 'resize', value: number): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 const slots = useSlots()
 const root = ref<HTMLElement | null>(null)
 const dragging = ref(false)
@@ -140,19 +140,19 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="wd-splitter"
+    class="wi-splitter"
     :class="[
-      `wd-splitter--${layout}`,
-      { 'wd-splitter--dragging': dragging },
+      `wi-splitter--${layout}`,
+      { 'wi-splitter--dragging': dragging },
     ]"
     :aria-orientation="isVertical ? 'vertical' : 'horizontal'"
   >
-    <div class="wd-splitter__panel" :style="panel1Style">
+    <div class="wi-splitter__panel" :style="panel1Style">
       <slot v-if="useNamedPanels" name="panel1" />
       <component :is="defaultPanels[0]" v-else-if="defaultPanels[0]" />
     </div>
     <div
-      class="wd-splitter__gutter"
+      class="wi-splitter__gutter"
       role="separator"
       tabindex="0"
       :aria-orientation="isVertical ? 'horizontal' : 'vertical'"
@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
       @mousedown="startDrag"
       @keydown="onGutterKeydown"
     />
-    <div class="wd-splitter__panel wd-splitter__panel--fill">
+    <div class="wi-splitter__panel wi-splitter__panel--fill">
       <slot v-if="useNamedPanels" name="panel2" />
       <component :is="defaultPanels[1]" v-else-if="defaultPanels[1]" />
     </div>

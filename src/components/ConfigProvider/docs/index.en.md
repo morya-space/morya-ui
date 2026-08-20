@@ -6,7 +6,7 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 # ConfigProvider
 
-Provide global defaults for the component tree via `WdConfigProvider` or `createWellInsight`. Local props take precedence over global config.
+Provide global defaults for the component tree via `WiConfigProvider` or `createWellInsight`. Local props take precedence over global config.
 
 ## Capabilities
 
@@ -24,7 +24,7 @@ Provide global defaults for the component tree via `WdConfigProvider` or `create
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdInput, WdSelect } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -34,14 +34,14 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider size="small">
+  <WiConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Inherit small" />
-      <WdInput placeholder="Inherit small" style="width:10rem" />
-      <WdSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
-      <WdButton label="Override to large" size="large" />
+      <WiButton label="Inherit small" />
+      <WiInput placeholder="Inherit small" style="width:10rem" />
+      <WiSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
+      <WiButton label="Override to large" size="large" />
     </div>
-  </WdConfigProvider>
+  </WiConfigProvider>
 </template>
 ```
 
@@ -49,23 +49,23 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdConfigProvider, WdButton, WdInput } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WdConfigProvider density="compact">
+    <WiConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WdButton label="compact" />
-        <WdInput placeholder="compact" style="width:10rem" />
+        <WiButton label="compact" />
+        <WiInput placeholder="compact" style="width:10rem" />
       </div>
-    </WdConfigProvider>
-    <WdConfigProvider density="spacious">
+    </WiConfigProvider>
+    <WiConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WdButton label="spacious" />
-        <WdInput placeholder="spacious" style="width:10rem" />
+        <WiButton label="spacious" />
+        <WiInput placeholder="spacious" style="width:10rem" />
       </div>
-    </WdConfigProvider>
+    </WiConfigProvider>
   </div>
 </template>
 ```
@@ -75,7 +75,7 @@ import { WdConfigProvider, WdButton, WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdSelect, WdDialog } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiSelect, WiDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const visible = ref(false)
@@ -86,15 +86,15 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider input-variant="filled" append-to="body">
+  <WiConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
-      <WdButton label="Open dialog" @click="visible = true" />
+      <WiSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
+      <WiButton label="Open dialog" @click="visible = true" />
     </div>
-    <WdDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
+    <WiDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
       <p style="margin:0">Overlay mount target is provided by ConfigProvider.</p>
-    </WdDialog>
-  </WdConfigProvider>
+    </WiDialog>
+  </WiConfigProvider>
 </template>
 ```
 
@@ -122,12 +122,12 @@ createApp(App)
 ## Reading config
 
 ```ts
-import { useWdConfig } from '@well-insight/ui'
+import { useWiConfig } from '@well-insight/ui'
 
-const config = useWdConfig()
+const config = useWiConfig()
 ```
 
-Precedence: **component props > `WdConfigProvider` > `createWellInsight()` > built-in defaults**.
+Precedence: **component props > `WiConfigProvider` > `createWellInsight()` > built-in defaults**.
 
 ## Theme and motion
 

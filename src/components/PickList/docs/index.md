@@ -11,7 +11,7 @@ description: 双列表穿梭选择。
 ## 引入
 
 ```ts
-import { WdPickList } from '@well-insight/ui'
+import { WiPickList } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,14 +19,14 @@ import { WdPickList } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdPickList } from '@well-insight/ui'
+import { WiPickList } from '@well-insight/ui'
 
 const source = ref(['苹果', '香蕉', '樱桃', '葡萄'])
 const target = ref(['榴莲'])
 </script>
 
 <template>
-  <WdPickList
+  <WiPickList
     v-model:source="source"
     v-model:target="target"
     source-header="可选水果"
@@ -40,7 +40,7 @@ const target = ref(['榴莲'])
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdPickList } from '@well-insight/ui'
+import { WiPickList } from '@well-insight/ui'
 
 const source = ref([
   { id: 1, name: '设计' },
@@ -50,11 +50,11 @@ const target = ref([{ id: 3, name: '测试' }])
 </script>
 
 <template>
-  <WdPickList v-model:source="source" v-model:target="target" data-key="id">
+  <WiPickList v-model:source="source" v-model:target="target" data-key="id">
     <template #item="{ item }">
       <strong>{{ item.name }}</strong>
     </template>
-  </WdPickList>
+  </WiPickList>
 </template>
 ```
 

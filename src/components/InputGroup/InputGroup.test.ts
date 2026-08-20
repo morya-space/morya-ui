@@ -1,28 +1,28 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdInputGroup from './InputGroup.vue'
-import WdInputGroupAddon from './InputGroupAddon.vue'
+import WiInputGroup from './InputGroup.vue'
+import WiInputGroupAddon from './InputGroupAddon.vue'
 
-describe('WdInputGroup', () => {
+describe('WiInputGroup', () => {
   it('renders addons and default slot content', () => {
-    const wrapper = mount(WdInputGroup, {
+    const wrapper = mount(WiInputGroup, {
       slots: {
         default: [
-          '<span class="wd-inputgroup-addon">$</span>',
-          '<input class="wd-input" />',
-          '<span class="wd-inputgroup-addon">.00</span>',
+          '<span class="wi-inputgroup-addon">$</span>',
+          '<input class="wi-input" />',
+          '<span class="wi-inputgroup-addon">.00</span>',
         ].join(''),
       },
     })
-    expect(wrapper.classes()).toContain('wd-inputgroup')
-    expect(wrapper.findAll('.wd-inputgroup-addon')).toHaveLength(2)
+    expect(wrapper.classes()).toContain('wi-inputgroup')
+    expect(wrapper.findAll('.wi-inputgroup-addon')).toHaveLength(2)
   })
 })
 
-describe('WdInputGroupAddon', () => {
+describe('WiInputGroupAddon', () => {
   it('applies addon class to slotted content', () => {
-    const wrapper = mount(WdInputGroupAddon, { slots: { default: 'https://' } })
-    expect(wrapper.classes()).toContain('wd-inputgroup-addon')
+    const wrapper = mount(WiInputGroupAddon, { slots: { default: 'https://' } })
+    expect(wrapper.classes()).toContain('wi-inputgroup-addon')
     expect(wrapper.text()).toBe('https://')
   })
 })

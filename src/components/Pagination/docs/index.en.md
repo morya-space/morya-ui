@@ -11,7 +11,7 @@ Pagination. `v-model` uses a **1-based page number**. The instance property `fir
 ## Import
 
 ```ts
-import { WdPagination } from '@well-insight/ui'
+import { WiPagination } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,15 +19,15 @@ import { WdPagination } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdPagination } from '@well-insight/ui'
+import { WiPagination } from '@well-insight/ui'
 
 const page = ref(1)
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WdPagination v-model="page" :total-records="95" :rows="10" :page-link-size="5" />
-    <p style="margin:0;color:var(--wd-color-text-muted);font-size:0.875rem">
+    <WiPagination v-model="page" :total-records="95" :rows="10" :page-link-size="5" />
+    <p style="margin:0;color:var(--wi-color-text-muted);font-size:0.875rem">
       Page {{ page }} · first ≈ {{ (page - 1) * 10 }}
     </p>
   </div>

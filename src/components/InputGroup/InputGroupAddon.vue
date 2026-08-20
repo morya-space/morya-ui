@@ -5,7 +5,7 @@ defineProps<InputGroupAddonProps>()
 </script>
 
 <template>
-  <span class="wd-inputgroup-addon">
+  <span class="wi-inputgroup-addon">
     <slot />
   </span>
 </template>

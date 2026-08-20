@@ -26,27 +26,27 @@ function select(index: number, disabled?: boolean) {
 </script>
 
 <template>
-  <div class="wd-stepper" role="tablist">
+  <div class="wi-stepper" role="tablist">
     <button
       v-for="(step, index) in steps"
       :key="`${step.label}-${index}`"
       type="button"
-      class="wd-stepper__step"
+      class="wi-stepper__step"
       :class="{
-        'wd-stepper__step--active': index === activeIndex,
-        'wd-stepper__step--completed': index < activeIndex,
-        'wd-stepper__step--disabled': !canSelect(index, step.disabled),
+        'wi-stepper__step--active': index === activeIndex,
+        'wi-stepper__step--completed': index < activeIndex,
+        'wi-stepper__step--disabled': !canSelect(index, step.disabled),
       }"
       role="tab"
       :aria-selected="index === activeIndex"
       :disabled="!canSelect(index, step.disabled)"
       @click="select(index, step.disabled)"
     >
-      <span class="wd-stepper__marker" aria-hidden="true">{{ index + 1 }}</span>
-      <span class="wd-stepper__label">{{ step.label }}</span>
+      <span class="wi-stepper__marker" aria-hidden="true">{{ index + 1 }}</span>
+      <span class="wi-stepper__label">{{ step.label }}</span>
     </button>
   </div>
-  <div v-if="$slots.default" class="wd-stepper__content">
+  <div v-if="$slots.default" class="wi-stepper__content">
     <slot :active-index="activeIndex" />
   </div>
 </template>

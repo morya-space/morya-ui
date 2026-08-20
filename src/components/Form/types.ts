@@ -1,4 +1,4 @@
-import type { WdDensity } from '../../shared/config'
+import type { WiDensity } from '../../shared/config'
 import type { FormFieldValidator } from './context'
 
 export type FormLabelPosition = 'top' | 'left'
@@ -41,4 +41,4 @@ export interface FormItemProps {
   labelWidth?: string
 }
 
-export type { WdDensity }
+export type { WiDensity }

@@ -1,4 +1,4 @@
-export { default as WdButton } from './Button.vue'
+export { default as WiButton } from './Button.vue'
 export type {
   ButtonBadgeSeverity,
   ButtonEmits,

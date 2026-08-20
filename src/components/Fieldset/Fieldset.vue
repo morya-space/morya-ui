@@ -20,12 +20,12 @@ function toggle() {
 </script>
 
 <template>
-  <fieldset class="wd-fieldset" :class="{ 'wd-fieldset--collapsed': isCollapsed }">
-    <legend v-if="$slots.legend || legend || toggleable" class="wd-fieldset__legend">
+  <fieldset class="wi-fieldset" :class="{ 'wi-fieldset--collapsed': isCollapsed }">
+    <legend v-if="$slots.legend || legend || toggleable" class="wi-fieldset__legend">
       <button
         v-if="toggleable"
         type="button"
-        class="wd-fieldset__toggler"
+        class="wi-fieldset__toggler"
         :aria-expanded="!isCollapsed"
         @click="toggle"
       >
@@ -36,7 +36,7 @@ function toggle() {
         <slot name="legend">{{ legend }}</slot>
       </template>
     </legend>
-    <div v-show="!isCollapsed" class="wd-fieldset__content">
+    <div v-show="!isCollapsed" class="wi-fieldset__content">
       <slot />
     </div>
   </fieldset>

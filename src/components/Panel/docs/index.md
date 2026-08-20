@@ -11,7 +11,7 @@ description: 带可选折叠的内容面板。
 ## 引入
 
 ```ts
-import { WdPanel } from '@well-insight/ui'
+import { WiPanel } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,15 +19,15 @@ import { WdPanel } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdPanel } from '@well-insight/ui'
+import { WiPanel } from '@well-insight/ui'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdPanel v-model="collapsed" header="Panel" toggleable>
+  <WiPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">可折叠面板内容。</p>
-  </WdPanel>
+  </WiPanel>
 </template>
 ```
 

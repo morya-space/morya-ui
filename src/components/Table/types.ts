@@ -1,6 +1,6 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { WiSizeInput } from '../../shared/types'
 
-export type TableSize = WdSizeInput
+export type TableSize = WiSizeInput
 export type TableSortOrder = 'asc' | 'desc' | 0 | 1 | -1 | null
 export type TableSelectionMode = 'single' | 'multiple'
 export type TableSortMode = 'client' | 'emit'

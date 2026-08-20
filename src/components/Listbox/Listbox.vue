@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
 
 const props = withDefaults(defineProps<ListboxProps>(), {
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>()
 
 const filterQuery = ref('')
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const filteredOptions = computed(() => {
   const query = filterQuery.value.trim().toLowerCase()
@@ -23,10 +23,10 @@ const filteredOptions = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-listbox',
+  'wi-listbox',
   {
-    'wd-listbox--disabled': props.disabled,
-    'wd-listbox--multiple': props.multiple,
+    'wi-listbox--disabled': props.disabled,
+    'wi-listbox--multiple': props.multiple,
   },
 ])
 
@@ -57,19 +57,19 @@ function select(option: ListboxOption) {
     <input
       v-if="filter"
       v-model="filterQuery"
-      class="wd-listbox__filter"
+      class="wi-listbox__filter"
       type="search"
       :placeholder="locale.filterOptions"
       :disabled="disabled"
       :aria-label="locale.filterOptions"
     />
-    <ul class="wd-listbox__list" role="listbox" :aria-multiselectable="multiple || undefined" :style="listStyle">
+    <ul class="wi-listbox__list" role="listbox" :aria-multiselectable="multiple || undefined" :style="listStyle">
       <li v-for="option in filteredOptions" :key="String(option.value)" role="presentation">
         <button
           type="button"
-          class="wd-listbox__option"
+          class="wi-listbox__option"
           role="option"
-          :class="{ 'wd-listbox__option--selected': isSelected(option.value) }"
+          :class="{ 'wi-listbox__option--selected': isSelected(option.value) }"
           :aria-selected="isSelected(option.value)"
           :disabled="disabled || option.disabled"
           @click="select(option)"
@@ -77,7 +77,7 @@ function select(option: ListboxOption) {
           {{ option.label }}
         </button>
       </li>
-      <li v-if="!filteredOptions.length" class="wd-listbox__empty">{{ locale.emptyOptions }}</li>
+      <li v-if="!filteredOptions.length" class="wi-listbox__empty">{{ locale.emptyOptions }}</li>
     </ul>
   </div>
 </template>

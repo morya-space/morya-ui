@@ -11,7 +11,7 @@ description: 多级联级选择，支持嵌套 options 与分栏面板。
 ## 引入
 
 ```ts
-import { WdCascadeSelect } from '@well-insight/ui'
+import { WiCascadeSelect } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdCascadeSelect } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdCascadeSelect } from '@well-insight/ui'
+import { WiCascadeSelect } from '@well-insight/ui'
 
 const value = ref<string | number | null>(null)
 const options = [
@@ -36,7 +36,7 @@ const options = [
 </script>
 
 <template>
-  <WdCascadeSelect v-model="value" :options="options" placeholder="选择分类" />
+  <WiCascadeSelect v-model="value" :options="options" placeholder="选择分类" />
 </template>
 ```
 
@@ -45,7 +45,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdCascadeSelect } from '@well-insight/ui'
+import { WiCascadeSelect } from '@well-insight/ui'
 
 const a = ref(null)
 const b = ref(null)
@@ -58,9 +58,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WdCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <WdCascadeSelect v-model="b" :options="options" placeholder="Default" />
-    <WdCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <WiCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <WiCascadeSelect v-model="b" :options="options" placeholder="Default" />
+    <WiCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -72,7 +72,7 @@ const options = [
 | `modelValue` | `string \| number \| null` | `null` | 选中值。 |
 | `options` | `CascadeSelectOption[]` | — | 嵌套选项。 |
 | `placeholder` | `string` | `'请选择'` | 占位文案。 |
-| `size` | `WdSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |

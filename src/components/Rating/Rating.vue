@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
+import { formatLocale, useWiLocale } from '../../locale'
 import type { RatingProps } from './types'
 
 const props = withDefaults(defineProps<RatingProps>(), {
@@ -11,15 +11,15 @@ const props = withDefaults(defineProps<RatingProps>(), {
   cancel: true,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number): void }>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const starList = computed(() => Array.from({ length: Math.max(1, props.stars) }, (_, index) => index + 1))
 
 const rootClass = computed(() => [
-  'wd-rating',
+  'wi-rating',
   {
-    'wd-rating--disabled': props.disabled,
-    'wd-rating--readonly': props.readonly,
+    'wi-rating--disabled': props.disabled,
+    'wi-rating--readonly': props.readonly,
   },
 ])
 
@@ -39,7 +39,7 @@ function clearRating() {
     <button
       v-if="cancel"
       type="button"
-      class="wd-rating__cancel"
+      class="wi-rating__cancel"
       :aria-label="locale.clearRating"
       :disabled="disabled || readonly"
       @click="clearRating"
@@ -50,8 +50,8 @@ function clearRating() {
       v-for="star in starList"
       :key="star"
       type="button"
-      class="wd-rating__star"
-      :class="{ 'wd-rating__star--on': star <= modelValue }"
+      class="wi-rating__star"
+      :class="{ 'wi-rating__star--on': star <= modelValue }"
       :aria-label="formatLocale(locale.star, { value: star })"
       :disabled="disabled || readonly"
       @click="setValue(star)"

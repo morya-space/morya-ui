@@ -11,7 +11,7 @@ Toggle between display and content views.
 ## Import
 
 ```ts
-import { WdInplace } from '@well-insight/ui'
+import { WiInplace } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,22 +19,22 @@ import { WdInplace } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInplace, WdInput, WdButton } from '@well-insight/ui'
+import { WiInplace, WiInput, WiButton } from '@well-insight/ui'
 
 const active = ref(false)
 const text = ref('Click to edit')
 </script>
 
 <template>
-  <WdInplace v-model="active">
+  <WiInplace v-model="active">
     <template #display>{{ text }}</template>
     <template #content="{ close }">
       <div style="display:flex;gap:8px">
-        <WdInput v-model="text" />
-        <WdButton label="Done" size="small" @click="close" />
+        <WiInput v-model="text" />
+        <WiButton label="Done" size="small" @click="close" />
       </div>
     </template>
-  </WdInplace>
+  </WiInplace>
 </template>
 ```
 

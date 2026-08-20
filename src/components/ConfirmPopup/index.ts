@@ -1,2 +1,2 @@
-export { default as WdConfirmPopup } from './ConfirmPopup.vue'
+export { default as WiConfirmPopup } from './ConfirmPopup.vue'
 export type { ConfirmPopupEmits, ConfirmPopupProps } from './types'

@@ -6,7 +6,7 @@ const storageKey = 'well-insight-motion'
 const motionPreferences: readonly MotionPreference[] = ['full', 'reduced', 'none']
 
 export function applyMotion(preference: MotionPreference, target: HTMLElement = document.documentElement) {
-  target.dataset.wdMotion = preference
+  target.dataset.wiMotion = preference
 }
 
 export function getPreferredMotion(): MotionPreference {

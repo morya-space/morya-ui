@@ -11,14 +11,14 @@ Horizontal navigation menu. Child items appear in a single-level dropdown.
 ## Import
 
 ```ts
-import { WdMenubar } from '@well-insight/ui'
+import { WiMenubar } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenubar } from '@well-insight/ui'
+import { WiMenubar } from '@well-insight/ui'
 
 const model = [
   {
@@ -30,7 +30,7 @@ const model = [
 </script>
 
 <template>
-  <WdMenubar :model="model" />
+  <WiMenubar :model="model" />
 </template>
 ```
 

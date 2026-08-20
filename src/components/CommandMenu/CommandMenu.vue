@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nextTick, computed, ref, toRef, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import type { CommandMenuItem, CommandMenuProps } from './types'
@@ -16,8 +16,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const searchPlaceholder = computed(() => props.placeholder ?? locale.value.searchCommands)
 const query = ref('')
 const panelRef = ref<HTMLElement | null>(null)
@@ -87,11 +87,11 @@ watch(filtered, () => {
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-fade">
-      <div v-if="modelValue" class="wd-commandmenu-backdrop" @click.self="close">
+    <Transition name="wi-fade">
+      <div v-if="modelValue" class="wi-commandmenu-backdrop" @click.self="close">
         <div
           ref="panelRef"
-          class="wd-commandmenu"
+          class="wi-commandmenu"
           role="dialog"
           aria-modal="true"
           :aria-label="locale.commandPalette"
@@ -101,29 +101,29 @@ watch(filtered, () => {
           <input
             ref="inputRef"
             v-model="query"
-            class="wd-commandmenu__input"
+            class="wi-commandmenu__input"
             type="search"
             :placeholder="searchPlaceholder"
             :aria-label="locale.searchCommands"
           />
-          <ul class="wd-commandmenu__list" role="listbox">
+          <ul class="wi-commandmenu__list" role="listbox">
             <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
               <button
                 type="button"
-                class="wd-commandmenu__item"
+                class="wi-commandmenu__item"
                 role="option"
-                :class="{ 'wd-commandmenu__item--active': index === activeIndex }"
+                :class="{ 'wi-commandmenu__item--active': index === activeIndex }"
                 :aria-selected="index === activeIndex"
                 :disabled="item.disabled"
                 @click="activate(item)"
                 @mouseenter="activeIndex = index"
               >
-                <span v-if="item.icon" class="wd-commandmenu__icon" aria-hidden="true">{{ item.icon }}</span>
-                <span class="wd-commandmenu__label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="wd-commandmenu__shortcut">{{ item.shortcut }}</span>
+                <span v-if="item.icon" class="wi-commandmenu__icon" aria-hidden="true">{{ item.icon }}</span>
+                <span class="wi-commandmenu__label">{{ item.label }}</span>
+                <span v-if="item.shortcut" class="wi-commandmenu__shortcut">{{ item.shortcut }}</span>
               </button>
             </li>
-            <li v-if="!filtered.length" class="wd-commandmenu__empty">{{ locale.noMatch }}</li>
+            <li v-if="!filtered.length" class="wi-commandmenu__empty">{{ locale.noMatch }}</li>
           </ul>
         </div>
       </div>

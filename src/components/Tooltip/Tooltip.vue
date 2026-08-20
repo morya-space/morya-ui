@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { TooltipProps } from './types'
 
@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   teleport: true,
 })
 
-const config = useWdConfig()
+const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
 const visible = ref(false)
 const tipStyle = ref<Record<string, string>>({})
@@ -106,7 +106,7 @@ onBeforeUnmount(() => {
 <template>
   <span
     ref="root"
-    class="wd-tooltip"
+    class="wi-tooltip"
     @mouseenter="show"
     @mouseleave="hide"
     @focusin="show"
@@ -114,11 +114,11 @@ onBeforeUnmount(() => {
   >
     <slot />
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-fade">
+      <Transition name="wi-fade">
         <span
           v-if="visible"
-          class="wd-tooltip__content"
-          :class="[`wd-tooltip__content--${placement}`, { 'wd-tooltip__content--teleported': teleported }]"
+          class="wi-tooltip__content"
+          :class="[`wi-tooltip__content--${placement}`, { 'wi-tooltip__content--teleported': teleported }]"
           :style="teleported ? tipStyle : undefined"
           role="tooltip"
         >

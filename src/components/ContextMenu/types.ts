@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { WiAppendTo } from '../../shared/overlay'
 
 export interface ContextMenuItem {
   label?: string
@@ -19,7 +19,7 @@ export interface ContextMenuProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
 }
 
 export interface ContextMenuEmits {

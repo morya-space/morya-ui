@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
 
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:position', value: ContextMenuPosition): void
 }>()
 
-const config = useWdConfig()
+const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
 const localPosition = ref<ContextMenuPosition>({ x: 0, y: 0 })
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -85,22 +85,22 @@ defineExpose({ show, hide })
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-scale-fade">
+    <Transition name="wi-scale-fade">
       <div
         v-if="modelValue"
         ref="root"
-        class="wd-contextmenu"
-        :class="{ 'wd-contextmenu--teleported': teleported }"
+        class="wi-contextmenu"
+        :class="{ 'wi-contextmenu--teleported': teleported }"
         role="menu"
         :style="menuStyle"
         @click.stop
       >
         <template v-for="(item, index) in model" :key="`${item.label ?? 'sep'}-${index}`">
-          <div v-if="item.separator" class="wd-contextmenu__separator" role="separator" />
+          <div v-if="item.separator" class="wi-contextmenu__separator" role="separator" />
           <button
             v-else
             type="button"
-            class="wd-contextmenu__item"
+            class="wi-contextmenu__item"
             role="menuitem"
             :disabled="item.disabled"
             @click="activate(item)"

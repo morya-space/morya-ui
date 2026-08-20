@@ -1,5 +1,5 @@
 import type { Component } from 'vue'
-import type { WdSizeInput } from '../../shared/types'
+import type { WiSizeInput } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
 export interface InputPasswordProps {
@@ -8,14 +8,14 @@ export interface InputPasswordProps {
   disabled?: boolean
   invalid?: boolean
   fluid?: boolean
-  size?: WdSizeInput
+  size?: WiSizeInput
   /** Show password strength hint. */
   feedback?: boolean
   /** Show toggle mask button. */
   toggleMask?: boolean
-  /** Icon when the value is masked (click to reveal). Built-in `WdIcon` name or a Vue component. */
+  /** Icon when the value is masked (click to reveal). Built-in `WiIcon` name or a Vue component. */
   showIcon?: IconName | Component
-  /** Icon when the value is visible (click to hide). Built-in `WdIcon` name or a Vue component. */
+  /** Icon when the value is visible (click to hide). Built-in `WiIcon` name or a Vue component. */
   hideIcon?: IconName | Component
   id?: string
 }

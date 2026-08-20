@@ -11,23 +11,23 @@ Avatar displays a user or entity identity. Display priority: `image` > `icon` > 
 ## Import
 
 ```ts
-import { WdAvatar } from '@well-insight/ui'
+import { WiAvatar } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdAvatar } from '@well-insight/ui'
+import { WiAvatar } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdAvatar label="AB" />
-    <WdAvatar icon="check" />
-    <WdAvatar label="SQ" shape="square" />
-    <WdAvatar label="LG" size="large" />
-    <WdAvatar label="XL" size="xlarge" />
+    <WiAvatar label="AB" />
+    <WiAvatar icon="check" />
+    <WiAvatar label="SQ" shape="square" />
+    <WiAvatar label="LG" size="large" />
+    <WiAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
@@ -38,6 +38,6 @@ import { WdAvatar } from '@well-insight/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | Text fallback when there is no image or icon. |
 | `image` | `string` | — | Image URL; highest priority. |
-| `icon` | `IconName` | — | `WdIcon` icon name. |
+| `icon` | `IconName` | — | `WiIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |

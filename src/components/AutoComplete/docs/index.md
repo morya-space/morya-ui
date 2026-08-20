@@ -11,7 +11,7 @@ description: 输入时给出建议列表，可本地过滤或由父级提供。
 ## 引入
 
 ```ts
-import { WdAutoComplete } from '@well-insight/ui'
+import { WiAutoComplete } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,14 +19,14 @@ import { WdAutoComplete } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdAutoComplete } from '@well-insight/ui'
+import { WiAutoComplete } from '@well-insight/ui'
 
 const value = ref('')
 const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 </script>
 
 <template>
-  <WdAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="搜索…" />
+  <WiAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="搜索…" />
 </template>
 ```
 
@@ -35,7 +35,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdAutoComplete } from '@well-insight/ui'
+import { WiAutoComplete } from '@well-insight/ui'
 
 const a = ref('')
 const b = ref('')
@@ -45,9 +45,9 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WdAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
-    <WdAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
-    <WdAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
+    <WiAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
+    <WiAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
+    <WiAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
   </div>
 </template>
 ```
@@ -60,7 +60,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 | `suggestions` | `string[]` | `[]` | 建议列表。 |
 | `dropdown` | `boolean` | `false` | 显示下拉按钮。 |
 | `placeholder` | `string` | — | 占位。 |
-| `size` | `WdSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |

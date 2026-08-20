@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { WiAppendTo } from '../../shared/overlay'
 
 export interface MenuItem {
   label?: string
@@ -17,7 +17,7 @@ export interface MenuProps {
   /** Teleport overlay when `popup`. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
 }
 
 export interface MenuEmits {

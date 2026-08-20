@@ -1,2 +1,2 @@
-export { default as WdVirtualScroller } from './VirtualScroller.vue'
+export { default as WiVirtualScroller } from './VirtualScroller.vue'
 export type { VirtualScrollerItemSlotProps, VirtualScrollerProps } from './types'

@@ -11,7 +11,7 @@ description: 可搜索的命令面板对话框。
 ## 引入
 
 ```ts
-import { WdCommandMenu } from '@well-insight/ui'
+import { WiCommandMenu } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdCommandMenu } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdCommandMenu } from '@well-insight/ui'
+import { WiButton, WiCommandMenu } from '@well-insight/ui'
 
 const visible = ref(false)
 const model = [
@@ -30,8 +30,8 @@ const model = [
 </script>
 
 <template>
-  <WdButton label="打开命令面板" @click="visible = true" />
-  <WdCommandMenu v-model="visible" :model="model" />
+  <WiButton label="打开命令面板" @click="visible = true" />
+  <WiCommandMenu v-model="visible" :model="model" />
 </template>
 ```
 

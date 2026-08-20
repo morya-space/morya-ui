@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
 import { applyDensity } from '../../theme'
-import { provideWdConfig, type WdGlobalConfig } from '../../shared/config'
+import { provideWiConfig, type WiGlobalConfig } from '../../shared/config'
 
 const props = defineProps<{
   /** Global defaults for descendant Well Insight components. */
-  config?: WdGlobalConfig
+  config?: WiGlobalConfig
   /** Shorthand: default overlay Teleport target. */
-  appendTo?: WdGlobalConfig['appendTo']
+  appendTo?: WiGlobalConfig['appendTo']
   /** Shorthand: default control size. */
-  size?: WdGlobalConfig['size']
+  size?: WiGlobalConfig['size']
   /** Shorthand: default input variant. */
-  inputVariant?: WdGlobalConfig['inputVariant']
+  inputVariant?: WiGlobalConfig['inputVariant']
   /** Shorthand: overlay z-index base. */
-  zIndex?: WdGlobalConfig['zIndex']
+  zIndex?: WiGlobalConfig['zIndex']
   /** Shorthand: content density. */
-  density?: WdGlobalConfig['density']
+  density?: WiGlobalConfig['density']
   /** Shorthand: locale dictionary. */
-  locale?: WdGlobalConfig['locale']
+  locale?: WiGlobalConfig['locale']
   /**
    * When true (default), also write density to `documentElement`
    * so the whole page picks up token changes. Set false to scope
@@ -26,7 +26,7 @@ const props = defineProps<{
   globalDensity?: boolean
 }>()
 
-const resolved = computed<WdGlobalConfig>(() => ({
+const resolved = computed<WiGlobalConfig>(() => ({
   ...(props.config ?? {}),
   ...(props.appendTo !== undefined ? { appendTo: props.appendTo } : {}),
   ...(props.size !== undefined ? { size: props.size } : {}),
@@ -36,7 +36,7 @@ const resolved = computed<WdGlobalConfig>(() => ({
   ...(props.locale !== undefined ? { locale: props.locale } : {}),
 }))
 
-provideWdConfig(resolved)
+provideWiConfig(resolved)
 
 const densityAttr = computed(() => resolved.value.density ?? 'comfortable')
 const applyGlobal = computed(() => props.globalDensity !== false)
@@ -44,20 +44,20 @@ const applyGlobal = computed(() => props.globalDensity !== false)
 const layerStyle = computed(() => {
   const base = resolved.value.zIndex
   if (base == null) return undefined
-  return { '--wd-z-base': String(base) } as Record<string, string>
+  return { '--wi-z-base': String(base) } as Record<string, string>
 })
 
 watchEffect(() => {
   if (!applyGlobal.value || typeof document === 'undefined') return
   if (resolved.value.density) applyDensity(resolved.value.density)
   if (resolved.value.zIndex != null) {
-    document.documentElement.style.setProperty('--wd-z-base', String(resolved.value.zIndex))
+    document.documentElement.style.setProperty('--wi-z-base', String(resolved.value.zIndex))
   }
 })
 </script>
 
 <template>
-  <div class="wd-config-provider" :data-wd-density="densityAttr" :style="layerStyle">
+  <div class="wi-config-provider" :data-wi-density="densityAttr" :style="layerStyle">
     <slot />
   </div>
 </template>

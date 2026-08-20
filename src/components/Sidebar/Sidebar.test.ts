@@ -1,23 +1,23 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
-import WdSidebar from './Sidebar.vue'
+import WiSidebar from './Sidebar.vue'
 
-describe('WdSidebar', () => {
+describe('WiSidebar', () => {
   it('renders menu labels and runs command', async () => {
     const command = vi.fn()
-    const wrapper = mount(WdSidebar, {
+    const wrapper = mount(WiSidebar, {
       props: { model: [{ label: 'Dashboard', icon: '▦', command }] },
     })
     expect(wrapper.text()).toContain('Dashboard')
-    await wrapper.find('.wd-sidebar__link').trigger('click')
+    await wrapper.find('.wi-sidebar__link').trigger('click')
     expect(command).toHaveBeenCalled()
   })
 
   it('hides labels when collapsed', () => {
-    const wrapper = mount(WdSidebar, {
+    const wrapper = mount(WiSidebar, {
       props: { collapsed: true, model: [{ label: 'Dashboard', icon: '▦' }] },
     })
-    expect(wrapper.classes()).toContain('wd-sidebar--collapsed')
-    expect(wrapper.find('.wd-sidebar__label').exists()).toBe(false)
+    expect(wrapper.classes()).toContain('wi-sidebar--collapsed')
+    expect(wrapper.find('.wi-sidebar__label').exists()).toBe(false)
   })
 })

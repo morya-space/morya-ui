@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TreeSelectNode } from './types'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 defineProps<{
@@ -15,30 +15,30 @@ defineEmits<{
   (event: 'select', node: TreeSelectNode): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 </script>
 
 <template>
   <li
-    class="wd-treeselect__node"
+    class="wi-treeselect__node"
     role="treeitem"
     :aria-expanded="node.children?.length ? Boolean(expanded[node.key]) : undefined"
   >
-    <div class="wd-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
+    <div class="wi-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
       <button
         v-if="node.children?.length"
         type="button"
-        class="wd-treeselect__toggler"
+        class="wi-treeselect__toggler"
         :aria-label="expanded[node.key] ? locale.collapse : locale.expand"
         @click.stop="$emit('toggle', node.key)"
       >
         {{ expanded[node.key] ? '▾' : '▸' }}
       </button>
-      <span v-else class="wd-treeselect__toggler-spacer" />
+      <span v-else class="wi-treeselect__toggler-spacer" />
       <button
         type="button"
-        class="wd-treeselect__option"
-        :class="{ 'wd-treeselect__option--selected': selectedKey === node.key }"
+        class="wi-treeselect__option"
+        :class="{ 'wi-treeselect__option--selected': selectedKey === node.key }"
         :disabled="node.disabled"
         @click="$emit('select', node)"
       >

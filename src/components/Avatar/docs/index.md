@@ -11,23 +11,23 @@ description: 头像用于展示用户或实体标识。支持图片、图标与�
 ## 引入
 
 ```ts
-import { WdAvatar } from '@well-insight/ui'
+import { WiAvatar } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdAvatar } from '@well-insight/ui'
+import { WiAvatar } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdAvatar label="AB" />
-    <WdAvatar icon="check" />
-    <WdAvatar label="SQ" shape="square" />
-    <WdAvatar label="LG" size="large" />
-    <WdAvatar label="XL" size="xlarge" />
+    <WiAvatar label="AB" />
+    <WiAvatar icon="check" />
+    <WiAvatar label="SQ" shape="square" />
+    <WiAvatar label="LG" size="large" />
+    <WiAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
@@ -38,6 +38,6 @@ import { WdAvatar } from '@well-insight/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | 无图片/图标时的文字回退。 |
 | `image` | `string` | — | 图片 URL，优先级最高。 |
-| `icon` | `IconName` | — | `WdIcon` 图标名称。 |
+| `icon` | `IconName` | — | `WiIcon` 图标名称。 |
 | `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |

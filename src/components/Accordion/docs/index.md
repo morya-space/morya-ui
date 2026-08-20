@@ -11,7 +11,7 @@ description: 可折叠面板组。支持单开 / 多开，tabs 配置 header 与
 ## 引入
 
 ```ts
-import { WdAccordion } from '@well-insight/ui'
+import { WiAccordion } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdAccordion } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdAccordion } from '@well-insight/ui'
+import { WiAccordion } from '@well-insight/ui'
 
 const active = ref('design')
 const tabs = [
@@ -30,14 +30,14 @@ const tabs = [
 </script>
 
 <template>
-  <WdAccordion v-model="active" :tabs="tabs">
+  <WiAccordion v-model="active" :tabs="tabs">
     <template #design>
       <p style="margin:0">Design system tokens and layout rules.</p>
     </template>
     <template #code>
       <p style="margin:0">Implementation notes and API contracts.</p>
     </template>
-  </WdAccordion>
+  </WiAccordion>
 </template>
 ```
 
@@ -46,7 +46,7 @@ const tabs = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdAccordion } from '@well-insight/ui'
+import { WiAccordion } from '@well-insight/ui'
 
 const active = ref<string[]>(['a'])
 const tabs = [
@@ -56,14 +56,14 @@ const tabs = [
 </script>
 
 <template>
-  <WdAccordion v-model="active" multiple :tabs="tabs">
+  <WiAccordion v-model="active" multiple :tabs="tabs">
     <template #a>
       <p style="margin:0">First section content.</p>
     </template>
     <template #b>
       <p style="margin:0">Second section content.</p>
     </template>
-  </WdAccordion>
+  </WiAccordion>
 </template>
 ```
 

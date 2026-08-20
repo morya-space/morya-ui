@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
+import { formatLocale, useWiLocale } from '../../locale'
 import type { InputOtpProps } from './types'
 
 const props = withDefaults(defineProps<InputOtpProps>(), {
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 const inputs = ref<(HTMLInputElement | null)[]>([])
 
 const chars = computed(() => {
@@ -23,8 +23,8 @@ const chars = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-inputotp',
-  { 'wd-inputotp--disabled': props.disabled },
+  'wi-inputotp',
+  { 'wi-inputotp--disabled': props.disabled },
 ])
 
 function setInputRef(el: unknown, index: number) {
@@ -103,7 +103,7 @@ watch(
       v-for="(char, index) in chars"
       :key="index"
       :ref="(el) => setInputRef(el, index)"
-      class="wd-inputotp__input"
+      class="wi-inputotp__input"
       type="text"
       inputmode="text"
       maxlength="1"

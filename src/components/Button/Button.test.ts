@@ -1,26 +1,26 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdButton from './Button.vue'
+import WiButton from './Button.vue'
 
-describe('WdButton', () => {
+describe('WiButton', () => {
   it('renders slot label and emits click when enabled', async () => {
-    const wrapper = mount(WdButton, { slots: { default: 'Save' } })
+    const wrapper = mount(WiButton, { slots: { default: 'Save' } })
 
     await wrapper.get('button').trigger('click')
 
     expect(wrapper.text()).toContain('Save')
-    expect(wrapper.classes()).toContain('wd-button--primary')
+    expect(wrapper.classes()).toContain('wi-button--primary')
     expect(wrapper.emitted('click')).toHaveLength(1)
   })
 
   it('renders label prop when no default slot content', () => {
-    const wrapper = mount(WdButton, { props: { label: 'Submit' } })
+    const wrapper = mount(WiButton, { props: { label: 'Submit' } })
     expect(wrapper.text()).toContain('Submit')
   })
 
   it('does not emit click while disabled or loading', async () => {
-    const disabled = mount(WdButton, { props: { disabled: true, label: 'X' } })
-    const loading = mount(WdButton, { props: { loading: true, label: 'X' } })
+    const disabled = mount(WiButton, { props: { disabled: true, label: 'X' } })
+    const loading = mount(WiButton, { props: { loading: true, label: 'X' } })
 
     await disabled.get('button').trigger('click')
     await loading.get('button').trigger('click')
@@ -28,11 +28,11 @@ describe('WdButton', () => {
     expect(disabled.emitted('click')).toBeUndefined()
     expect(loading.emitted('click')).toBeUndefined()
     expect(loading.get('button').attributes('aria-busy')).toBe('true')
-    expect(loading.find('.wd-button__spinner').exists()).toBe(true)
+    expect(loading.find('.wi-button__spinner').exists()).toBe(true)
   })
 
   it('applies severity and style modifiers', () => {
-    const wrapper = mount(WdButton, {
+    const wrapper = mount(WiButton, {
       props: {
         label: 'Warn',
         severity: 'warn',
@@ -48,28 +48,28 @@ describe('WdButton', () => {
 
     expect(wrapper.classes()).toEqual(
       expect.arrayContaining([
-        'wd-button--warn',
-        'wd-button--raised',
-        'wd-button--rounded',
-        'wd-button--outlined',
-        'wd-button--text',
-        'wd-button--link',
-        'wd-button--plain',
-        'wd-button--fluid',
+        'wi-button--warn',
+        'wi-button--raised',
+        'wi-button--rounded',
+        'wi-button--outlined',
+        'wi-button--text',
+        'wi-button--link',
+        'wi-button--plain',
+        'wi-button--fluid',
       ]),
     )
   })
 
   it('supports variant shortcut and size aliases', () => {
-    const outlined = mount(WdButton, { props: { label: 'A', variant: 'outlined', size: 'small' } })
-    const large = mount(WdButton, { props: { label: 'B', size: 'lg' } })
+    const outlined = mount(WiButton, { props: { label: 'A', variant: 'outlined', size: 'small' } })
+    const large = mount(WiButton, { props: { label: 'B', size: 'lg' } })
 
-    expect(outlined.classes()).toEqual(expect.arrayContaining(['wd-button--outlined', 'wd-button--small']))
-    expect(large.classes()).toContain('wd-button--large')
+    expect(outlined.classes()).toEqual(expect.arrayContaining(['wi-button--outlined', 'wi-button--small']))
+    expect(large.classes()).toContain('wi-button--large')
   })
 
   it('renders icon, iconPos, iconOnly, badge and aria-label', () => {
-    const wrapper = mount(WdButton, {
+    const wrapper = mount(WiButton, {
       props: {
         icon: 'edit',
         iconOnly: true,
@@ -81,22 +81,22 @@ describe('WdButton', () => {
       },
     })
 
-    expect(wrapper.find('.wd-button__icon').exists()).toBe(true)
+    expect(wrapper.find('.wi-button__icon').exists()).toBe(true)
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(['wd-button--icon-only', 'wd-button--icon-top', 'wd-button--help']),
+      expect.arrayContaining(['wi-button--icon-only', 'wi-button--icon-top', 'wi-button--help']),
     )
     expect(wrapper.get('button').attributes('aria-label')).toBe('Edit item')
-    expect(wrapper.find('.wd-button__badge--danger').text()).toBe('2')
+    expect(wrapper.find('.wi-button__badge--danger').text()).toBe('2')
   })
 
   it('maps block to fluid and exposes focus/ref', () => {
-    const wrapper = mount(WdButton, {
+    const wrapper = mount(WiButton, {
       props: { label: 'Focus', block: true },
       attachTo: document.body,
     })
     const instance = wrapper.vm as unknown as { focus: () => void; ref: HTMLButtonElement | null }
 
-    expect(wrapper.classes()).toContain('wd-button--fluid')
+    expect(wrapper.classes()).toContain('wi-button--fluid')
     instance.focus()
     expect(document.activeElement).toBe(wrapper.get('button').element)
     expect(instance.ref).toBe(wrapper.get('button').element)

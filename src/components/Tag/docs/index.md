@@ -11,7 +11,7 @@ description: 标签用于展示状态或分类。
 ## 引入
 
 ```ts
-import { WdTag } from '@well-insight/ui'
+import { WiTag } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ import { WdTag } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@well-insight/ui'
+import { WiTag } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="Primary" />
-    <WdTag>Slot Label</WdTag>
-    <WdTag value="Rounded" rounded />
+    <WiTag value="Primary" />
+    <WiTag>Slot Label</WiTag>
+    <WiTag value="Rounded" rounded />
   </div>
 </template>
 ```
@@ -38,36 +38,36 @@ import { WdTag } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@well-insight/ui'
+import { WiTag } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="Primary" />
-    <WdTag value="Secondary" severity="secondary" />
-    <WdTag value="Success" severity="success" />
-    <WdTag value="Info" severity="info" />
-    <WdTag value="Warn" severity="warn" />
-    <WdTag value="Danger" severity="danger" />
-    <WdTag value="Contrast" severity="contrast" />
+    <WiTag value="Primary" />
+    <WiTag value="Secondary" severity="secondary" />
+    <WiTag value="Success" severity="success" />
+    <WiTag value="Info" severity="info" />
+    <WiTag value="Warn" severity="warn" />
+    <WiTag value="Danger" severity="danger" />
+    <WiTag value="Contrast" severity="contrast" />
   </div>
 </template>
 ```
 
 ## Icons
 
-`icon` 传入 `WdIcon` 的图标名称。
+`icon` 传入 `WiIcon` 的图标名称。
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@well-insight/ui'
+import { WiTag } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="New" icon="plus" severity="info" />
-    <WdTag value="Done" icon="check" severity="success" />
-    <WdTag value="Alert" icon="info" severity="warn" rounded />
+    <WiTag value="New" icon="plus" severity="info" />
+    <WiTag value="Done" icon="check" severity="success" />
+    <WiTag value="Alert" icon="info" severity="warn" rounded />
   </div>
 </template>
 ```
@@ -79,7 +79,7 @@ import { WdTag } from '@well-insight/ui'
 | `value` | `string` | — | 标签文案。存在默认插槽内容时以插槽为准。 |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
-| `icon` | `IconName` | — | `WdIcon` 图标名称。 |
+| `icon` | `IconName` | — | `WiIcon` 图标名称。 |
 
 ## Slots
 

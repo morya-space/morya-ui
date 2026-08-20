@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { WiAppendTo } from '../../shared/overlay'
 
 export type SpeedDialDirection = 'up' | 'down' | 'left' | 'right'
 
@@ -18,7 +18,7 @@ export interface SpeedDialProps {
   /** Teleport action list. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
 }
 
 export interface SpeedDialEmits {

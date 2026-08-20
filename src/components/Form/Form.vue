@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, provide, reactive } from 'vue'
 import {
-  WD_FORM_ERRORS_KEY,
-  WD_FORM_KEY,
-  type WdFormFieldRegistration,
+  WI_FORM_ERRORS_KEY,
+  WI_FORM_KEY,
+  type WiFormFieldRegistration,
 } from './context'
 import type { FormProps, FormValidateTrigger } from './types'
 
@@ -19,7 +19,7 @@ const emit = defineEmits<{
   (event: 'validate', payload: { valid: boolean; errors: Record<string, string> }): void
 }>()
 
-const fields = new Map<string, WdFormFieldRegistration>()
+const fields = new Map<string, WiFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
 
 const validateOn = computed<FormValidateTrigger[]>(() => {
@@ -61,7 +61,7 @@ function clearValidate(name?: string) {
   else Object.keys(internalErrors).forEach((key) => setError(key, undefined))
 }
 
-function registerField(field: WdFormFieldRegistration) {
+function registerField(field: WiFormFieldRegistration) {
   fields.set(field.name, field)
 }
 
@@ -90,8 +90,8 @@ const context = computed(() => ({
   notifyChange,
 }))
 
-provide(WD_FORM_KEY, context)
-provide(WD_FORM_ERRORS_KEY, internalErrors)
+provide(WI_FORM_KEY, context)
+provide(WI_FORM_ERRORS_KEY, internalErrors)
 
 async function onSubmit() {
   if (validateOn.value.includes('submit')) {
@@ -107,10 +107,10 @@ defineExpose({ validate, clearValidate, errors: internalErrors })
 
 <template>
   <form
-    class="wd-form"
+    class="wi-form"
     :class="[
-      `wd-form--label-${labelPosition}`,
-      { 'wd-form--disabled': disabled },
+      `wi-form--label-${labelPosition}`,
+      { 'wi-form--disabled': disabled },
     ]"
     @submit.prevent="onSubmit"
   >

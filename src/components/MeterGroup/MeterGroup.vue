@@ -21,25 +21,25 @@ const segments = computed(() =>
 </script>
 
 <template>
-  <div class="wd-metergroup">
-    <div class="wd-metergroup__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax">
+  <div class="wi-metergroup">
+    <div class="wi-metergroup__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax">
       <div
         v-for="(segment, index) in segments"
         :key="`${segment.label}-${index}`"
-        class="wd-metergroup__segment"
+        class="wi-metergroup__segment"
         :style="{ width: segment.width, background: segment.color }"
         :title="`${segment.label}: ${segment.value}`"
       />
     </div>
-    <ul class="wd-metergroup__legend">
-      <li v-for="(item, index) in value" :key="`${item.label}-${index}`" class="wd-metergroup__legend-item">
+    <ul class="wi-metergroup__legend">
+      <li v-for="(item, index) in value" :key="`${item.label}-${index}`" class="wi-metergroup__legend-item">
         <span
-          class="wd-metergroup__swatch"
-          :style="{ background: item.color ?? 'var(--wd-color-primary)' }"
+          class="wi-metergroup__swatch"
+          :style="{ background: item.color ?? 'var(--wi-color-primary)' }"
           aria-hidden="true"
         />
         <span>{{ item.label }}</span>
-        <span class="wd-metergroup__value">{{ item.value }}</span>
+        <span class="wi-metergroup__value">{{ item.value }}</span>
       </li>
     </ul>
   </div>

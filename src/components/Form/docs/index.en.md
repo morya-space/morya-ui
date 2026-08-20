@@ -6,14 +6,14 @@ description: Form layout and field validation feedback. Supports blur/change/sub
 
 # Form
 
-`WdForm` / `WdFormItem` handle layout and error display. Validation functions are provided by the app; `validateOn` controls when they run.
+`WiForm` / `WiFormItem` handle layout and error display. Validation functions are provided by the app; `validateOn` controls when they run.
 
 ## Basic + submit validation
 
 ```vue preview
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { WdForm, WdFormItem, WdInput, WdButton } from '@well-insight/ui'
+import { WiForm, WiFormItem, WiInput, WiButton } from '@well-insight/ui'
 
 const formRef = ref<{ validate: () => Promise<{ valid: boolean }> } | null>(null)
 const form = reactive({ name: '', email: '' })
@@ -24,24 +24,24 @@ function required(value: string, message: string) {
 </script>
 
 <template>
-  <WdForm
+  <WiForm
     ref="formRef"
     label-position="top"
     validate-on="submit"
     style="max-width: 22rem"
     @submit="({ valid }) => valid && undefined"
   >
-    <WdFormItem
+    <WiFormItem
       label="Name"
       name="name"
       required
       :validate="required(form.name, 'Enter a name')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <WiInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdFormItem
+    </WiFormItem>
+    <WiFormItem
       label="Email"
       name="email"
       required
@@ -49,11 +49,11 @@ function required(value: string, message: string) {
       :validate="() => (/.+@.+\..+/.test(form.email) ? undefined : 'Enter a valid email')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="form.email" type="email" fluid :invalid="invalid" />
+        <WiInput :id="id" v-model="form.email" type="email" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdButton native-type="submit" label="Submit" />
-  </WdForm>
+    </WiFormItem>
+    <WiButton native-type="submit" label="Submit" />
+  </WiForm>
 </template>
 ```
 
@@ -62,23 +62,23 @@ function required(value: string, message: string) {
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdForm, WdFormItem, WdInput } from '@well-insight/ui'
+import { WiForm, WiFormItem, WiInput } from '@well-insight/ui'
 
 const title = ref('')
 </script>
 
 <template>
-  <WdForm validate-on="blur" style="max-width: 22rem">
-    <WdFormItem
+  <WiForm validate-on="blur" style="max-width: 22rem">
+    <WiFormItem
       label="Title"
       name="title"
       :validate="() => (title.trim() ? undefined : 'Title is required')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="title" fluid :invalid="invalid" placeholder="Validates on blur" />
+        <WiInput :id="id" v-model="title" fluid :invalid="invalid" placeholder="Validates on blur" />
       </template>
-    </WdFormItem>
-  </WdForm>
+    </WiFormItem>
+  </WiForm>
 </template>
 ```
 

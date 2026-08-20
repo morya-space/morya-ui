@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import WdIcon from '../Icon/Icon.vue'
+import WiIcon from '../Icon/Icon.vue'
 import type { AvatarProps, AvatarSize } from './types'
 
 const props = withDefaults(defineProps<AvatarProps>(), {
@@ -16,11 +16,11 @@ const resolvedSize = computed((): AvatarSize => {
 })
 
 const avatarClass = computed(() => [
-  'wd-avatar',
-  `wd-avatar--${props.shape}`,
+  'wi-avatar',
+  `wi-avatar--${props.shape}`,
   {
-    'wd-avatar--large': resolvedSize.value === 'large',
-    'wd-avatar--xlarge': resolvedSize.value === 'xlarge',
+    'wi-avatar--large': resolvedSize.value === 'large',
+    'wi-avatar--xlarge': resolvedSize.value === 'xlarge',
   },
 ])
 
@@ -33,8 +33,8 @@ const displayMode = computed(() => {
 
 <template>
   <span :class="avatarClass" role="img" :aria-label="label || undefined">
-    <img v-if="displayMode === 'image'" class="wd-avatar__image" :src="image" :alt="label || ''" />
-    <WdIcon v-else-if="displayMode === 'icon'" class="wd-avatar__icon" :name="icon!" size="sm" />
-    <span v-else-if="label" class="wd-avatar__label">{{ label }}</span>
+    <img v-if="displayMode === 'image'" class="wi-avatar__image" :src="image" :alt="label || ''" />
+    <WiIcon v-else-if="displayMode === 'icon'" class="wi-avatar__icon" :name="icon!" size="sm" />
+    <span v-else-if="label" class="wi-avatar__label">{{ label }}</span>
   </span>
 </template>

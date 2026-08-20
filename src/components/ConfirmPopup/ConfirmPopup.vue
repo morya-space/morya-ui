@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import WdButton from '../Button/Button.vue'
+import WiButton from '../Button/Button.vue'
 import type { ConfirmPopupProps } from './types'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'reject'): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -117,23 +117,23 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-scale-fade">
+    <Transition name="wi-scale-fade">
       <div
         v-if="visible"
         ref="panel"
-        class="wd-confirmpopup"
-        :class="{ 'wd-confirmpopup--teleported': teleported }"
+        class="wi-confirmpopup"
+        :class="{ 'wi-confirmpopup--teleported': teleported }"
         role="alertdialog"
         aria-modal="true"
         tabindex="-1"
         :style="panelStyle"
       >
-        <div class="wd-confirmpopup__message">
+        <div class="wi-confirmpopup__message">
           <slot>{{ message }}</slot>
         </div>
-        <div class="wd-confirmpopup__footer">
-          <WdButton :label="rejectText" severity="secondary" size="small" @click="reject" />
-          <WdButton :label="acceptText" size="small" @click="accept" />
+        <div class="wi-confirmpopup__footer">
+          <WiButton :label="rejectText" severity="secondary" size="small" @click="reject" />
+          <WiButton :label="acceptText" size="small" @click="accept" />
         </div>
       </div>
     </Transition>

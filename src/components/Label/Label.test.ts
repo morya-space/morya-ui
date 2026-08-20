@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdLabel from './Label.vue'
+import WiLabel from './Label.vue'
 
-describe('WdLabel', () => {
+describe('WiLabel', () => {
   it('renders slot content and for attribute', () => {
-    const wrapper = mount(WdLabel, {
+    const wrapper = mount(WiLabel, {
       props: { htmlFor: 'email' },
       slots: { default: 'Email' },
     })
     expect(wrapper.text()).toBe('Email')
     expect(wrapper.attributes('for')).toBe('email')
-    expect(wrapper.classes()).toContain('wd-label')
+    expect(wrapper.classes()).toContain('wi-label')
   })
 
   it('accepts for prop alias', () => {
-    const wrapper = mount(WdLabel, { props: { for: 'name' }, slots: { default: 'Name' } })
+    const wrapper = mount(WiLabel, { props: { for: 'name' }, slots: { default: 'Name' } })
     expect(wrapper.attributes('for')).toBe('name')
   })
 })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveSizeClass } from '../../shared/types'
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
@@ -17,8 +17,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: CascadeSelectValue): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -113,46 +113,46 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="wd-cascadeselect"
+    class="wi-cascadeselect"
     :class="[
-      `wd-cascadeselect--${sizeClass}`,
-      { 'wd-cascadeselect--disabled': disabled, 'wd-cascadeselect--open': open },
+      `wi-cascadeselect--${sizeClass}`,
+      { 'wi-cascadeselect--disabled': disabled, 'wi-cascadeselect--open': open },
     ]"
   >
     <button
       ref="trigger"
       type="button"
-      class="wd-cascadeselect__trigger"
+      class="wi-cascadeselect__trigger"
       :disabled="disabled"
       :aria-expanded="open"
       aria-haspopup="listbox"
       @click="toggle"
     >
-      <span class="wd-cascadeselect__label">{{ displayLabel }}</span>
-      <span class="wd-cascadeselect__caret" aria-hidden="true">▾</span>
+      <span class="wi-cascadeselect__label">{{ displayLabel }}</span>
+      <span class="wi-cascadeselect__caret" aria-hidden="true">▾</span>
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <div
           v-if="open"
           ref="panel"
-          class="wd-cascadeselect__panel"
-          :class="{ 'wd-cascadeselect__panel--teleported': teleported }"
+          class="wi-cascadeselect__panel"
+          :class="{ 'wi-cascadeselect__panel--teleported': teleported }"
           :style="panelStyle"
           role="listbox"
         >
           <ul
             v-for="(column, columnIndex) in path"
             :key="columnIndex"
-            class="wd-cascadeselect__column"
+            class="wi-cascadeselect__column"
           >
             <li v-for="option in column" :key="String(option.value)">
               <button
                 type="button"
-                class="wd-cascadeselect__option"
+                class="wi-cascadeselect__option"
                 :class="{
-                  'wd-cascadeselect__option--selected': option.value === modelValue,
-                  'wd-cascadeselect__option--parent': Boolean(option.children?.length),
+                  'wi-cascadeselect__option--selected': option.value === modelValue,
+                  'wi-cascadeselect__option--parent': Boolean(option.children?.length),
                 }"
                 :disabled="option.disabled"
                 role="option"

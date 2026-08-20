@@ -11,7 +11,7 @@ Replaces the native browser scrollbar with a themeable, cross-browser scrolling 
 ## Import
 
 ```ts
-import { WdScrollbar } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -20,24 +20,24 @@ Use `height` to fix the viewport height. If omitted, it follows the parent heigh
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollbar } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdScrollbar height="240px" always  style="width: 200px">
+  <WiScrollbar height="240px" always  style="width: 200px">
     <p
       v-for="item in 20"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-        color:var(--wd-color-primary);
+        background:color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
+        color:var(--wi-color-primary);
       "
     >
       {{ item }}
     </p>
-  </WdScrollbar>
+  </WiScrollbar>
 </template>
 ```
 
@@ -48,7 +48,7 @@ The scrollbar appears only when content exceeds `max-height`.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdScrollbar } from '@well-insight/ui'
+import { WiButton, WiScrollbar } from '@well-insight/ui'
 
 const count = ref(3)
 </script>
@@ -56,23 +56,23 @@ const count = ref(3)
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem">
-      <WdButton label="Add" size="small" @click="count++" />
-      <WdButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
+      <WiButton label="Add" size="small" @click="count++" />
+      <WiButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
     </div>
-    <WdScrollbar max-height="220px" always style="width: 200px">
+    <WiScrollbar max-height="220px" always style="width: 200px">
       <p
         v-for="item in count"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wd-color-info) 12%, transparent);
-          color:var(--wd-color-info);
+          background:color-mix(in srgb, var(--wi-color-info) 12%, transparent);
+          color:var(--wi-color-info);
         "
       >
         Item {{ item }}
       </p>
-    </WdScrollbar>
+    </WiScrollbar>
   </div>
 </template>
 ```
@@ -83,11 +83,11 @@ Shows a horizontal scrollbar when content is wider than the container.
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollbar } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdScrollbar always>
+  <WiScrollbar always>
     <div style="display:flex;width:fit-content">
       <p
         v-for="item in 30"
@@ -95,14 +95,14 @@ import { WdScrollbar } from '@well-insight/ui'
         style="
           flex-shrink:0;display:flex;align-items:center;justify-content:center;
           width:96px;height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wd-color-danger) 12%, transparent);
-          color:var(--wd-color-danger);
+          background:color-mix(in srgb, var(--wi-color-danger) 12%, transparent);
+          color:var(--wi-color-danger);
         "
       >
         {{ item }}
       </p>
     </div>
-  </WdScrollbar>
+  </WiScrollbar>
 </template>
 ```
 
@@ -112,22 +112,22 @@ import { WdScrollbar } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollbar } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted)">always</p>
-      <WdScrollbar height="160px" always>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">always</p>
+      <WiScrollbar height="160px" always>
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">Line {{ n }}</p>
-      </WdScrollbar>
+      </WiScrollbar>
     </div>
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted)">native</p>
-      <WdScrollbar height="160px" native  style="width: 200px">
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">native</p>
+      <WiScrollbar height="160px" native  style="width: 200px">
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">Line {{ n }}</p>
-      </WdScrollbar>
+      </WiScrollbar>
     </div>
   </div>
 </template>
@@ -140,7 +140,7 @@ Control scrolling with instance methods `setScrollTop` / `setScrollLeft` / `scro
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdScrollbar } from '@well-insight/ui'
+import { WiButton, WiScrollbar } from '@well-insight/ui'
 import type { ScrollbarInstance } from '@well-insight/ui'
 
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -158,25 +158,25 @@ function onScroll(payload: { scrollTop: number }) {
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <WdButton label="Top" size="small" @click="jump(0)" />
-      <WdButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
-      <WdButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
-      <span style="color:var(--wd-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
+      <WiButton label="Top" size="small" @click="jump(0)" />
+      <WiButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
+      <WiButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
+      <span style="color:var(--wi-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
     </div>
-    <WdScrollbar ref="scrollbarRef" height="200px" always  style="width: 200px" @scroll="onScroll">
+    <WiScrollbar ref="scrollbarRef" height="200px" always  style="width: 200px" @scroll="onScroll">
       <p
         v-for="item in 24"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wd-color-success) 12%, transparent);
-          color:var(--wd-color-success);
+          background:color-mix(in srgb, var(--wi-color-success) 12%, transparent);
+          color:var(--wi-color-success);
         "
       >
         {{ item }}
       </p>
-    </WdScrollbar>
+    </WiScrollbar>
   </div>
 </template>
 ```
@@ -188,7 +188,7 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdScrollbar } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 import type { ScrollbarDirection } from '@well-insight/ui'
 
 const num = ref(20)
@@ -199,20 +199,20 @@ function loadMore(direction: ScrollbarDirection) {
 </script>
 
 <template>
-  <WdScrollbar height="220px"  style="width: 200px" always @end-reached="loadMore">
+  <WiScrollbar height="220px"  style="width: 200px" always @end-reached="loadMore">
     <p
       v-for="item in num"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-        color:var(--wd-color-primary);
+        background:color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
+        color:var(--wi-color-primary);
       "
     >
       {{ item }}
     </p>
-  </WdScrollbar>
+  </WiScrollbar>
 </template>
 ```
 

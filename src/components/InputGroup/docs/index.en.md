@@ -6,12 +6,12 @@ description: Combine an input with prefix and suffix addons into one control gro
 
 # InputGroup
 
-Combine an input with prefix and suffix addons. Use `WdInputGroupAddon` for addons, or add the `wd-inputgroup-addon` class manually.
+Combine an input with prefix and suffix addons. Use `WiInputGroupAddon` for addons, or add the `wi-inputgroup-addon` class manually.
 
 ## Import
 
 ```ts
-import { WdInputGroup, WdInputGroupAddon, WdInput } from '@well-insight/ui'
+import { WiInputGroup, WiInputGroupAddon, WiInput } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdInputGroup, WdInputGroupAddon, WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputGroup, WdInputGroupAddon, WdInput } from '@well-insight/ui'
+import { WiInputGroup, WiInputGroupAddon, WiInput } from '@well-insight/ui'
 
 const price = ref('')
 const url = ref('')
@@ -27,15 +27,15 @@ const url = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdInputGroup>
-      <WdInputGroupAddon>$</WdInputGroupAddon>
-      <WdInput v-model="price" placeholder="Price" fluid />
-      <WdInputGroupAddon>.00</WdInputGroupAddon>
-    </WdInputGroup>
-    <WdInputGroup>
-      <WdInputGroupAddon>https://</WdInputGroupAddon>
-      <WdInput v-model="url" placeholder="example.com" fluid />
-    </WdInputGroup>
+    <WiInputGroup>
+      <WiInputGroupAddon>$</WiInputGroupAddon>
+      <WiInput v-model="price" placeholder="Price" fluid />
+      <WiInputGroupAddon>.00</WiInputGroupAddon>
+    </WiInputGroup>
+    <WiInputGroup>
+      <WiInputGroupAddon>https://</WiInputGroupAddon>
+      <WiInput v-model="url" placeholder="example.com" fluid />
+    </WiInputGroup>
   </div>
 </template>
 ```
@@ -46,4 +46,4 @@ const url = ref('')
 | --- | --- |
 | `default` | Addons and input controls. |
 
-The addon component only provides a default slot; its root element class is `wd-inputgroup-addon`.
+The addon component only provides a default slot; its root element class is `wi-inputgroup-addon`.

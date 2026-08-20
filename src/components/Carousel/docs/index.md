@@ -11,26 +11,26 @@ description: 轮播展示一组内容项。
 ## 引入
 
 ```ts
-import { WdCarousel } from '@well-insight/ui'
+import { WiCarousel } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdCarousel } from '@well-insight/ui'
+import { WiCarousel } from '@well-insight/ui'
 
 const value = ['春', '夏', '秋', '冬']
 </script>
 
 <template>
-  <WdCarousel :value="value" :num-visible="1" circular>
+  <WiCarousel :value="value" :num-visible="1" circular>
     <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--wd-color-surface-muted, #f3f4f6);border-radius:var(--wd-radius-md)">
+      <div style="padding:2rem;text-align:center;background:var(--wi-color-surface-muted, #f3f4f6);border-radius:var(--wi-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WdCarousel>
+  </WiCarousel>
 </template>
 ```
 

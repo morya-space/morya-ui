@@ -11,7 +11,7 @@ description: 状态角标或圆点。
 ## 引入
 
 ```ts
-import { WdBadge } from '@well-insight/ui'
+import { WiBadge } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ import { WdBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge } from '@well-insight/ui'
+import { WiBadge } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdBadge :value="2" />
-    <WdBadge value="New" />
-    <WdBadge />
+    <WiBadge :value="2" />
+    <WiBadge value="New" />
+    <WiBadge />
   </div>
 </template>
 ```
@@ -38,18 +38,18 @@ import { WdBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge } from '@well-insight/ui'
+import { WiBadge } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdBadge :value="1" />
-    <WdBadge :value="2" severity="secondary" />
-    <WdBadge :value="3" severity="success" />
-    <WdBadge :value="4" severity="info" />
-    <WdBadge :value="5" severity="warn" />
-    <WdBadge :value="6" severity="danger" />
-    <WdBadge :value="7" severity="contrast" />
+    <WiBadge :value="1" />
+    <WiBadge :value="2" severity="secondary" />
+    <WiBadge :value="3" severity="success" />
+    <WiBadge :value="4" severity="info" />
+    <WiBadge :value="5" severity="warn" />
+    <WiBadge :value="6" severity="danger" />
+    <WiBadge :value="7" severity="contrast" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ import { WdBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge } from '@well-insight/ui'
+import { WiBadge } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdBadge :value="8" size="small" />
-    <WdBadge :value="9" />
-    <WdBadge :value="10" size="large" />
+    <WiBadge :value="8" size="small" />
+    <WiBadge :value="9" />
+    <WiBadge :value="10" size="large" />
   </div>
 </template>
 ```

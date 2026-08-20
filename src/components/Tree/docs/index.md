@@ -11,7 +11,7 @@ description: 树形结构。支持勾选半选、过滤、受控展开、懒加�
 ## 引入
 
 ```ts
-import { WdTree } from '@well-insight/ui'
+import { WiTree } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdTree } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTree } from '@well-insight/ui'
+import { WiTree } from '@well-insight/ui'
 
 const selected = ref<string | null>(null)
 const nodes = [
@@ -36,7 +36,7 @@ const nodes = [
 </script>
 
 <template>
-  <WdTree v-model="selected" :value="nodes" default-expand-all />
+  <WiTree v-model="selected" :value="nodes" default-expand-all />
 </template>
 ```
 
@@ -45,7 +45,7 @@ const nodes = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTree } from '@well-insight/ui'
+import { WiTree } from '@well-insight/ui'
 
 const checkedKeys = ref({})
 const nodes = [
@@ -61,7 +61,7 @@ const nodes = [
 </script>
 
 <template>
-  <WdTree
+  <WiTree
     v-model:checked-keys="checkedKeys"
     :value="nodes"
     show-checkbox
@@ -75,7 +75,7 @@ const nodes = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInput, WdTree } from '@well-insight/ui'
+import { WiInput, WiTree } from '@well-insight/ui'
 
 const query = ref('')
 const nodes = [
@@ -93,8 +93,8 @@ const nodes = [
 
 <template>
   <div style="display:grid;gap:0.75rem;max-width:20rem">
-    <WdInput v-model="query" placeholder="过滤节点" clearable fluid />
-    <WdTree :value="nodes" :filter="query" default-expand-all />
+    <WiInput v-model="query" placeholder="过滤节点" clearable fluid />
+    <WiTree :value="nodes" :filter="query" default-expand-all />
   </div>
 </template>
 ```

@@ -1,49 +1,49 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h, nextTick, ref } from 'vue'
-import WdForm from './Form.vue'
-import WdFormItem from './FormItem.vue'
+import WiForm from './Form.vue'
+import WiFormItem from './FormItem.vue'
 
-describe('WdForm / WdFormItem', () => {
+describe('WiForm / WiFormItem', () => {
   it('renders label, required mark, and error alert', () => {
-    const wrapper = mount(WdForm, {
+    const wrapper = mount(WiForm, {
       slots: {
         default: () =>
           h(
-            WdFormItem,
+            WiFormItem,
             { label: '名称', required: true, error: '必填项' },
             { default: () => h('input') },
           ),
       },
     })
 
-    expect(wrapper.get('.wd-form-item__label').text()).toContain('名称')
-    expect(wrapper.get('.wd-form-item__required').text()).toBe('*')
-    expect(wrapper.get('.wd-form-item__error').text()).toBe('必填项')
-    expect(wrapper.get('.wd-form-item').classes()).toContain('wd-form-item--invalid')
+    expect(wrapper.get('.wi-form-item__label').text()).toContain('名称')
+    expect(wrapper.get('.wi-form-item__required').text()).toBe('*')
+    expect(wrapper.get('.wi-form-item__error').text()).toBe('必填项')
+    expect(wrapper.get('.wi-form-item').classes()).toContain('wi-form-item--invalid')
   })
 
   it('inherits left label layout from Form', () => {
-    const wrapper = mount(WdForm, {
+    const wrapper = mount(WiForm, {
       props: { labelPosition: 'left', labelWidth: '6rem' },
       slots: {
         default: () =>
-          h(WdFormItem, { label: '邮箱' }, { default: () => h('input') }),
+          h(WiFormItem, { label: '邮箱' }, { default: () => h('input') }),
       },
     })
 
-    expect(wrapper.get('.wd-form').classes()).toContain('wd-form--label-left')
-    expect(wrapper.get('.wd-form-item').classes()).toContain('wd-form-item--label-left')
-    expect(wrapper.get('.wd-form-item__label').attributes('style')).toContain('6rem')
+    expect(wrapper.get('.wi-form').classes()).toContain('wi-form--label-left')
+    expect(wrapper.get('.wi-form-item').classes()).toContain('wi-form-item--label-left')
+    expect(wrapper.get('.wi-form-item__label').attributes('style')).toContain('6rem')
   })
 
   it('shows help when there is no error', () => {
-    const wrapper = mount(WdFormItem, {
+    const wrapper = mount(WiFormItem, {
       props: { label: '备注', help: '可选' },
       slots: { default: () => h('input') },
     })
-    expect(wrapper.get('.wd-form-item__help').text()).toBe('可选')
-    expect(wrapper.find('.wd-form-item__error').exists()).toBe(false)
+    expect(wrapper.get('.wi-form-item__help').text()).toBe('可选')
+    expect(wrapper.find('.wi-form-item__error').exists()).toBe(false)
   })
 
   it('validates on submit via field validate callbacks', async () => {
@@ -52,12 +52,12 @@ describe('WdForm / WdFormItem', () => {
       setup() {
         return () =>
           h(
-            WdForm,
+            WiForm,
             { validateOn: 'submit' },
             {
               default: () =>
                 h(
-                  WdFormItem,
+                  WiFormItem,
                   {
                     label: '名称',
                     name: 'name',
@@ -72,6 +72,6 @@ describe('WdForm / WdFormItem', () => {
     const wrapper = mount(Host)
     await wrapper.get('form').trigger('submit')
     await nextTick()
-    expect(wrapper.get('.wd-form-item__error').text()).toBe('必填')
+    expect(wrapper.get('.wi-form-item__error').text()).toBe('必填')
   })
 })

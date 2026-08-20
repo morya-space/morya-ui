@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import WdPopover from './Popover.vue'
+import WiPopover from './Popover.vue'
 
-describe('WdPopover', () => {
+describe('WiPopover', () => {
   it('shows content and emits lifecycle events', async () => {
-    const wrapper = mount(WdPopover, {
+    const wrapper = mount(WiPopover, {
       attachTo: document.body,
       props: { modelValue: true },
       slots: {
@@ -14,8 +14,8 @@ describe('WdPopover', () => {
       },
     })
     await nextTick()
-    expect(document.body.querySelector('.wd-popover__content')?.textContent).toContain('Popover body')
-    expect(document.body.querySelector('.wd-popover__content--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wi-popover__content')?.textContent).toContain('Popover body')
+    expect(document.body.querySelector('.wi-popover__content--teleported')).toBeTruthy()
     expect(wrapper.emitted('show')).toHaveLength(1)
     await wrapper.setProps({ modelValue: false })
     await nextTick()
@@ -24,7 +24,7 @@ describe('WdPopover', () => {
   })
 
   it('closes on Escape and outside click', async () => {
-    const wrapper = mount(WdPopover, {
+    const wrapper = mount(WiPopover, {
       attachTo: document.body,
       props: { modelValue: true },
       slots: {
@@ -37,7 +37,7 @@ describe('WdPopover', () => {
     expect(wrapper.emitted('update:modelValue')).toEqual([[false]])
     wrapper.unmount()
 
-    const outside = mount(WdPopover, {
+    const outside = mount(WiPopover, {
       attachTo: document.body,
       props: { modelValue: true },
       slots: {

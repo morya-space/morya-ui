@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WdMenu from './Menu.vue'
+import WiMenu from './Menu.vue'
 
-describe('WdMenu', () => {
+describe('WiMenu', () => {
   it('invokes command on item click', async () => {
     const command = vi.fn()
-    const wrapper = mount(WdMenu, {
+    const wrapper = mount(WiMenu, {
       props: {
         model: [
           { label: 'Open', command },
@@ -15,16 +15,16 @@ describe('WdMenu', () => {
         ],
       },
     })
-    const items = wrapper.findAll('.wd-menu__item')
+    const items = wrapper.findAll('.wi-menu__item')
     await items[0]!.trigger('click')
     expect(command).toHaveBeenCalledOnce()
     await items[1]!.trigger('click')
     expect(command).toHaveBeenCalledOnce()
-    expect(wrapper.find('.wd-menu__separator').exists()).toBe(true)
+    expect(wrapper.find('.wi-menu__separator').exists()).toBe(true)
   })
 
   it('hides popup until modelValue is true', async () => {
-    const wrapper = mount(WdMenu, {
+    const wrapper = mount(WiMenu, {
       props: {
         popup: true,
         modelValue: false,
@@ -32,13 +32,13 @@ describe('WdMenu', () => {
         teleport: false,
       },
     })
-    expect(wrapper.find('.wd-menu').exists()).toBe(false)
+    expect(wrapper.find('.wi-menu').exists()).toBe(false)
     await wrapper.setProps({ modelValue: true })
-    expect(wrapper.find('.wd-menu').exists()).toBe(true)
+    expect(wrapper.find('.wi-menu').exists()).toBe(true)
   })
 
   it('teleports popup menu to body by default', async () => {
-    const wrapper = mount(WdMenu, {
+    const wrapper = mount(WiMenu, {
       props: {
         popup: true,
         modelValue: true,
@@ -47,7 +47,7 @@ describe('WdMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.wd-menu--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wi-menu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 })

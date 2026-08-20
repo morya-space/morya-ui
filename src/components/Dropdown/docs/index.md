@@ -8,12 +8,12 @@ description: 动作菜单覆盖层（非表单选择器）。与 Select 不同�
 
 动作菜单（action menu overlay）。用于从触发器打开一组操作项。
 
-**与 Select 的区别：** `WdDropdown` 是菜单覆盖层；表单选项选择请使用 `WdSelect`（
+**与 Select 的区别：** `WiDropdown` 是菜单覆盖层；表单选项选择请使用 `WiSelect`（
 
 ## 引入
 
 ```ts
-import { WdDropdown, WdButton } from '@well-insight/ui'
+import { WiDropdown, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -21,7 +21,7 @@ import { WdDropdown, WdButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdDropdown } from '@well-insight/ui'
+import { WiButton, WiDropdown } from '@well-insight/ui'
 
 const open = ref(false)
 const items = [
@@ -37,11 +37,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <WdDropdown v-model="open" :items="items" @select="onSelect">
+  <WiDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <WdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <WiButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </WdDropdown>
+  </WiDropdown>
 </template>
 ```
 

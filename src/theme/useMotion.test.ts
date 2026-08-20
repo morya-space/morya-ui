@@ -6,7 +6,7 @@ import { useMotion } from './useMotion'
 describe('useMotion', () => {
   beforeEach(() => {
     localStorage.clear()
-    delete document.documentElement.dataset.wdMotion
+    delete document.documentElement.dataset.wiMotion
   })
 
   it('applies and persists a global motion preference', async () => {
@@ -18,7 +18,7 @@ describe('useMotion', () => {
     await nextTick()
 
     expect(vm.preference).toBe('none')
-    expect(document.documentElement.dataset.wdMotion).toBe('none')
+    expect(document.documentElement.dataset.wiMotion).toBe('none')
     expect(localStorage.getItem('well-insight-motion')).toBe('none')
   })
 })

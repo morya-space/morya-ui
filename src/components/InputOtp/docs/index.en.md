@@ -11,7 +11,7 @@ Split a string across multiple single-character inputs.
 ## Import
 
 ```ts
-import { WdInputOtp } from '@well-insight/ui'
+import { WiInputOtp } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdInputOtp } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputOtp } from '@well-insight/ui'
+import { WiInputOtp } from '@well-insight/ui'
 
 const code = ref('')
 </script>
 
 <template>
-  <WdInputOtp v-model="code" :length="4" integer-only />
+  <WiInputOtp v-model="code" :length="4" integer-only />
 </template>
 ```
 

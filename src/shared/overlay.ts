@@ -1,7 +1,7 @@
 /** Overlay mount target. Prefer `'body'`; use `'self'` to keep in place. */
-export type WdAppendTo = string | HTMLElement | 'self'
+export type WiAppendTo = string | HTMLElement | 'self'
 
-export interface WdOverlayMountProps {
+export interface WiOverlayMountProps {
   /**
    * Whether to Teleport the overlay. Defaults to `true`.
    * Prefer `appendTo` when you need a custom container.
@@ -12,13 +12,13 @@ export interface WdOverlayMountProps {
    * Pass `'self'` to render in place (same as `teleport: false`).
    * `false` is still accepted at runtime for compatibility.
    */
-  appendTo?: WdAppendTo | false
+  appendTo?: WiAppendTo | false
 }
 
 export function resolveOverlayTeleport(
-  options: WdOverlayMountProps = {},
+  options: WiOverlayMountProps = {},
   /** Global default from ConfigProvider / createWellInsight. */
-  globalAppendTo: WdAppendTo | false = 'body',
+  globalAppendTo: WiAppendTo | false = 'body',
 ): {
   disabled: boolean
   to: string | HTMLElement
@@ -32,8 +32,8 @@ export function resolveOverlayTeleport(
 }
 
 export function isOverlayTeleported(
-  options: WdOverlayMountProps = {},
-  globalAppendTo: WdAppendTo | false = 'body',
+  options: WiOverlayMountProps = {},
+  globalAppendTo: WiAppendTo | false = 'body',
 ): boolean {
   return !resolveOverlayTeleport(options, globalAppendTo).disabled
 }

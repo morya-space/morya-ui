@@ -11,7 +11,7 @@ Radio button.
 ## Import
 
 ```ts
-import { WdRadio } from '@well-insight/ui'
+import { WiRadio } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,16 +19,16 @@ import { WdRadio } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdRadio } from '@well-insight/ui'
+import { WiRadio } from '@well-insight/ui'
 
 const size = ref('md')
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WdRadio v-model="size" name="size" value="sm" label="Small" />
-    <WdRadio v-model="size" name="size" value="md" label="Medium" />
-    <WdRadio v-model="size" name="size" value="lg" label="Large" />
+    <WiRadio v-model="size" name="size" value="sm" label="Small" />
+    <WiRadio v-model="size" name="size" value="md" label="Medium" />
+    <WiRadio v-model="size" name="size" value="lg" label="Large" />
   </div>
 </template>
 ```
@@ -38,15 +38,15 @@ const size = ref('md')
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdRadio } from '@well-insight/ui'
+import { WiRadio } from '@well-insight/ui'
 
 const plan = ref('')
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WdRadio v-model="plan" name="plan" value="free" invalid label="Free" />
-    <WdRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
+    <WiRadio v-model="plan" name="plan" value="free" invalid label="Free" />
+    <WiRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ const plan = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdRadio } from '@well-insight/ui'
+import { WiRadio } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WdRadio model-value="a" value="a" disabled label="Selected" />
-    <WdRadio model-value="a" value="b" disabled label="Other" />
+    <WiRadio model-value="a" value="a" disabled label="Selected" />
+    <WiRadio model-value="a" value="b" disabled label="Other" />
   </div>
 </template>
 ```

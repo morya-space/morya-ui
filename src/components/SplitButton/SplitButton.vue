@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveSizeClass } from '../../shared/types'
 import type { SplitButtonItem, SplitButtonProps } from './types'
@@ -18,8 +18,8 @@ const emit = defineEmits<{
   (event: 'command', item: SplitButtonItem): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
@@ -29,13 +29,13 @@ const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 const rootClass = computed(() => [
-  'wd-splitbutton',
-  `wd-splitbutton--${sizeClass.value}`,
+  'wi-splitbutton',
+  `wi-splitbutton--${sizeClass.value}`,
   {
-    'wd-splitbutton--disabled': props.disabled,
-    'wd-splitbutton--outlined': props.outlined,
-    [`wd-splitbutton--${props.severity}`]: Boolean(props.severity),
-    'wd-splitbutton--open': open.value,
+    'wi-splitbutton--disabled': props.disabled,
+    'wi-splitbutton--outlined': props.outlined,
+    [`wi-splitbutton--${props.severity}`]: Boolean(props.severity),
+    'wi-splitbutton--open': open.value,
   },
 ])
 
@@ -103,16 +103,16 @@ onBeforeUnmount(() => {
   <div ref="root" :class="rootClass">
     <button
       type="button"
-      class="wd-splitbutton__main"
+      class="wi-splitbutton__main"
       :disabled="disabled"
       @click="onMainClick"
     >
-      <span v-if="icon" class="wd-splitbutton__icon" aria-hidden="true">{{ icon }}</span>
+      <span v-if="icon" class="wi-splitbutton__icon" aria-hidden="true">{{ icon }}</span>
       <span v-if="label">{{ label }}</span>
     </button>
     <button
       type="button"
-      class="wd-splitbutton__trigger"
+      class="wi-splitbutton__trigger"
       :aria-label="locale.moreActions"
       :aria-expanded="open"
       aria-haspopup="menu"
@@ -122,19 +122,19 @@ onBeforeUnmount(() => {
       ▾
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <ul
           v-if="open"
           ref="menu"
-          class="wd-splitbutton__menu"
-          :class="{ 'wd-splitbutton__menu--teleported': teleported }"
+          class="wi-splitbutton__menu"
+          :class="{ 'wi-splitbutton__menu--teleported': teleported }"
           :style="teleported ? menuStyle : undefined"
           role="menu"
         >
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="presentation">
             <button
               type="button"
-              class="wd-splitbutton__item"
+              class="wi-splitbutton__item"
               role="menuitem"
               :disabled="item.disabled"
               @click="activate(item)"

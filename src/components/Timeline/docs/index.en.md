@@ -11,14 +11,14 @@ Display event nodes in chronological order.
 ## Import
 
 ```ts
-import { WdTimeline } from '@well-insight/ui'
+import { WiTimeline } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdTimeline } from '@well-insight/ui'
+import { WiTimeline } from '@well-insight/ui'
 
 const events = [
   { status: 'Ordered', date: '15/10/2024', content: 'Order placed', icon: 'check', severity: 'success' },
@@ -28,7 +28,7 @@ const events = [
 </script>
 
 <template>
-  <WdTimeline :value="events" align="alternate" />
+  <WiTimeline :value="events" align="alternate" />
 </template>
 ```
 
@@ -36,7 +36,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdTimeline } from '@well-insight/ui'
+import { WiTimeline } from '@well-insight/ui'
 
 const events = [
   { status: 'Start', date: 'Monday', content: 'Kickoff', icon: 'check' },
@@ -46,7 +46,7 @@ const events = [
 </script>
 
 <template>
-  <WdTimeline :value="events" layout="horizontal" />
+  <WiTimeline :value="events" layout="horizontal" />
 </template>
 ```
 

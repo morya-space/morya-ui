@@ -11,20 +11,20 @@ SVG 环形加载指示器。
 ## 引入
 
 ```ts
-import { WdProgressSpinner } from '@well-insight/ui'
+import { WiProgressSpinner } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdProgressSpinner } from '@well-insight/ui'
+import { WiProgressSpinner } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WdProgressSpinner />
-    <WdProgressSpinner stroke-width="4" animation-duration="0.6s" />
+    <WiProgressSpinner />
+    <WiProgressSpinner stroke-width="4" animation-duration="0.6s" />
   </div>
 </template>
 ```

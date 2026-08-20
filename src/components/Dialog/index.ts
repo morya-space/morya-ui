@@ -1,2 +1,2 @@
-export { default as WdDialog } from './Dialog.vue'
+export { default as WiDialog } from './Dialog.vue'
 export type { DialogEmits, DialogPosition, DialogProps } from './types'

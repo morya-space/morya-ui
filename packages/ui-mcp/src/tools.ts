@@ -402,8 +402,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       const code = usage.code || ''
       const componentName =
         usage.component ||
-        code.match(/<(Wd[A-Z][A-Za-z0-9]*)\b/)?.[1] ||
-        code.match(/import\s*\{[^}]*\b(Wd[A-Z][A-Za-z0-9]*)\b/)?.[1]
+        code.match(/<(Wi[A-Z][A-Za-z0-9]*)\b/)?.[1] ||
+        code.match(/import\s*\{[^}]*\b(Wi[A-Z][A-Za-z0-9]*)\b/)?.[1]
 
       if (!componentName) {
         return { error: 'Could not determine component. Pass component explicitly.' }
@@ -433,7 +433,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         }
       }
 
-      const attrRe = /<(?:Wd[A-Z][A-Za-z0-9]*)\b([^>]*)>/g
+      const attrRe = /<(?:Wi[A-Z][A-Za-z0-9]*)\b([^>]*)>/g
       let tagMatch
       while ((tagMatch = attrRe.exec(code)) !== null) {
         const attrs = tagMatch[1] || ''

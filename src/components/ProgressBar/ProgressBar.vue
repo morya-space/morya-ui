@@ -13,9 +13,9 @@ const clampedValue = computed(() => Math.min(100, Math.max(0, props.value)))
 const isIndeterminate = computed(() => props.mode === 'indeterminate')
 
 const progressClass = computed(() => [
-  'wd-progressbar',
+  'wi-progressbar',
   {
-    'wd-progressbar--indeterminate': isIndeterminate.value,
+    'wi-progressbar--indeterminate': isIndeterminate.value,
   },
 ])
 
@@ -34,8 +34,8 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
     :aria-valuemax="isIndeterminate ? undefined : 100"
     :aria-valuenow="isIndeterminate ? undefined : clampedValue"
   >
-    <div class="wd-progressbar__value" :style="valueStyle">
-      <span v-if="showValue && !isIndeterminate" class="wd-progressbar__label">{{ labelText }}</span>
+    <div class="wi-progressbar__value" :style="valueStyle">
+      <span v-if="showValue && !isIndeterminate" class="wi-progressbar__label">{{ labelText }}</span>
     </div>
   </div>
 </template>

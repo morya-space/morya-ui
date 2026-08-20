@@ -1,4 +1,4 @@
-import type { WdInputVariant, WdSizeInput } from '../../shared/types'
+import type { WiInputVariant, WiSizeInput } from '../../shared/types'
 
 export interface InputProps {
   modelValue?: string
@@ -13,9 +13,9 @@ export interface InputProps {
   id?: string
   type?: 'text' | 'email' | 'password' | 'search' | 'url' | 'tel'
   /** Size aligned with InputText; also accepts legacy sm/md/lg. */
-  size?: WdSizeInput
+  size?: WiSizeInput
   /** Visual variant; default outlined. */
-  variant?: WdInputVariant
+  variant?: WiInputVariant
   /** Full-width input. */
   fluid?: boolean
   disabled?: boolean

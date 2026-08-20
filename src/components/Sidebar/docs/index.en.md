@@ -6,12 +6,12 @@ description: Collapsible navigation rail.
 
 # Sidebar
 
-Application navigation sidebar (not a Drawer overlay). Exported as `WdSidebar`.
+Application navigation sidebar (not a Drawer overlay). Exported as `WiSidebar`.
 
 ## Import
 
 ```ts
-import { WdSidebar } from '@well-insight/ui'
+import { WiSidebar } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdSidebar } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSidebar, WdButton } from '@well-insight/ui'
+import { WiSidebar, WiButton } from '@well-insight/ui'
 
 const collapsed = ref(false)
 const model = [
@@ -35,8 +35,8 @@ const model = [
 
 <template>
   <div style="display:flex;gap:1rem;align-items:flex-start">
-    <WdSidebar :model="model" :collapsed="collapsed" />
-    <WdButton :label="collapsed ? 'Expand' : 'Collapse'" size="small" @click="collapsed = !collapsed" />
+    <WiSidebar :model="model" :collapsed="collapsed" />
+    <WiButton :label="collapsed ? 'Expand' : 'Collapse'" size="small" @click="collapsed = !collapsed" />
   </div>
 </template>
 ```

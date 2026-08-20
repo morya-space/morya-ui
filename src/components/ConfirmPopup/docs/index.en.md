@@ -11,7 +11,7 @@ Lightweight confirmation overlay. Supports `target` or coordinate positioning.
 ## Import
 
 ```ts
-import { WdConfirmPopup } from '@well-insight/ui'
+import { WiConfirmPopup } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdConfirmPopup } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdConfirmPopup } from '@well-insight/ui'
+import { WiButton, WiConfirmPopup } from '@well-insight/ui'
 
 const open = ref(false)
 const target = ref<HTMLElement | null>(null)
@@ -31,8 +31,8 @@ function ask(event: MouseEvent) {
 </script>
 
 <template>
-  <WdButton label="Delete" severity="danger" @click="ask" />
-  <WdConfirmPopup v-model="open" :target="target" message="Delete this item?" />
+  <WiButton label="Delete" severity="danger" @click="ask" />
+  <WiConfirmPopup v-model="open" :target="target" message="Delete this item?" />
 </template>
 ```
 

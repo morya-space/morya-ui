@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdSelectButton from './SelectButton.vue'
+import WiSelectButton from './SelectButton.vue'
 
 const options = [
   { label: 'Left', value: 'left' },
@@ -8,20 +8,20 @@ const options = [
   { label: 'Right', value: 'right', disabled: true },
 ]
 
-describe('WdSelectButton', () => {
+describe('WiSelectButton', () => {
   it('emits single selection', async () => {
-    const wrapper = mount(WdSelectButton, { props: { options, modelValue: 'left' } })
-    const buttons = wrapper.findAll('.wd-selectbutton__button')
+    const wrapper = mount(WiSelectButton, { props: { options, modelValue: 'left' } })
+    const buttons = wrapper.findAll('.wi-selectbutton__button')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['center']])
-    expect(buttons[0]!.classes()).toContain('wd-selectbutton__button--active')
+    expect(buttons[0]!.classes()).toContain('wi-selectbutton__button--active')
   })
 
   it('supports multiple selection and ignores disabled options', async () => {
-    const wrapper = mount(WdSelectButton, {
+    const wrapper = mount(WiSelectButton, {
       props: { options, multiple: true, modelValue: ['left'] },
     })
-    const buttons = wrapper.findAll('.wd-selectbutton__button')
+    const buttons = wrapper.findAll('.wi-selectbutton__button')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['left', 'center']])
     await buttons[2]!.trigger('click')
@@ -29,11 +29,11 @@ describe('WdSelectButton', () => {
   })
 
   it('maps size and invalid classes', () => {
-    const wrapper = mount(WdSelectButton, {
+    const wrapper = mount(WiSelectButton, {
       props: { options, size: 'large', invalid: true },
     })
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(['wd-selectbutton--large', 'wd-selectbutton--invalid']),
+      expect.arrayContaining(['wi-selectbutton--large', 'wi-selectbutton--invalid']),
     )
   })
 })

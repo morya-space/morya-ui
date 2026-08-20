@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { WiAppendTo } from '../../shared/overlay'
 
 export type DialogPosition =
   | 'center'
@@ -32,7 +32,7 @@ export interface DialogProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
   /** Lock page scroll while open (default true when modal). */
   blockScroll?: boolean
 }

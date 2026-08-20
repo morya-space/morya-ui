@@ -11,7 +11,7 @@ description: 为输入框添加左/右侧图标的容器。
 ## 引入
 
 ```ts
-import { WdIconField, WdInput, WdIcon } from '@well-insight/ui'
+import { WiIconField, WiInput, WiIcon } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,21 +19,21 @@ import { WdIconField, WdInput, WdIcon } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdIconField, WdInput, WdIcon } from '@well-insight/ui'
+import { WiIconField, WiInput, WiIcon } from '@well-insight/ui'
 
 const value = ref('')
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdIconField>
-      <template #icon><WdIcon name="info" size="sm" /></template>
-      <WdInput v-model="value" placeholder="Search" fluid />
-    </WdIconField>
-    <WdIconField icon-position="right">
-      <template #icon><WdIcon name="check" size="sm" /></template>
-      <WdInput v-model="value" placeholder="Verified" fluid />
-    </WdIconField>
+    <WiIconField>
+      <template #icon><WiIcon name="info" size="sm" /></template>
+      <WiInput v-model="value" placeholder="Search" fluid />
+    </WiIconField>
+    <WiIconField icon-position="right">
+      <template #icon><WiIcon name="check" size="sm" /></template>
+      <WiInput v-model="value" placeholder="Verified" fluid />
+    </WiIconField>
   </div>
 </template>
 ```

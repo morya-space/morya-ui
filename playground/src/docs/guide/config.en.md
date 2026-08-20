@@ -1,7 +1,7 @@
 ---
 title: Configuration
 order: 5
-description: ConfigProvider, createWellInsight, and useWdConfig.
+description: ConfigProvider, createWellInsight, and useWiConfig.
 ---
 
 # Configuration
@@ -19,7 +19,7 @@ Well Insight provides app-level and page-level defaults for overlay mount, size,
 | `zIndex` | Overlay z-index base |
 | `locale` | Confirm, empty, loading, and placeholder copy. Pass built-in packs `zhCN` / `enUS` |
 
-Priority: **component props > `WdConfigProvider` > `createWellInsight` > built-in default (Chinese)**.
+Priority: **component props > `WiConfigProvider` > `createWellInsight` > built-in default (Chinese)**.
 
 ## Locale packs
 
@@ -43,7 +43,7 @@ createWellInsight({
 })
 ```
 
-The **中 / EN** switch in the docs header injects the same pack into `WdConfigProvider`, so live examples (empty states, confirm, dates, and so on) follow the selected language. Markdown pages load `*.en.md` when English is selected.
+The **中 / EN** switch in the docs header injects the same pack into `WiConfigProvider`, so live examples (empty states, confirm, dates, and so on) follow the selected language. Markdown pages load `*.en.md` when English is selected.
 
 ## Size
 
@@ -52,7 +52,7 @@ Controls without a local `size` inherit from ConfigProvider.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdInput, WdSelect } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -64,21 +64,21 @@ const options = [
 <template>
   <div style="display:grid;gap:1rem">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">Default size</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">Default size</p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <WdButton label="Button" />
-        <WdInput placeholder="Input" style="width:10rem" />
-        <WdSelect v-model="city" :options="options" style="width:10rem" />
+        <WiButton label="Button" />
+        <WiInput placeholder="Input" style="width:10rem" />
+        <WiSelect v-model="city" :options="options" style="width:10rem" />
       </div>
     </div>
-    <WdConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">Config size="small"</p>
+    <WiConfigProvider size="small">
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">Config size="small"</p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <WdButton label="Button" />
-        <WdInput placeholder="Input" style="width:10rem" />
-        <WdSelect v-model="city" :options="options" style="width:10rem" />
+        <WiButton label="Button" />
+        <WiInput placeholder="Input" style="width:10rem" />
+        <WiSelect v-model="city" :options="options" style="width:10rem" />
       </div>
-    </WdConfigProvider>
+    </WiConfigProvider>
   </div>
 </template>
 ```
@@ -88,7 +88,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdInput } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 </script>
@@ -96,7 +96,7 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <WdButton
+      <WiButton
         v-for="item in (['compact', 'comfortable', 'spacious'] as const)"
         :key="item"
         :label="item"
@@ -105,12 +105,12 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
         @click="density = item"
       />
     </div>
-    <WdConfigProvider :density="density" :global-density="false">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
-        <WdButton label="Save" />
-        <WdInput placeholder="Nickname" style="width:12rem" />
+    <WiConfigProvider :density="density" :global-density="false">
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+        <WiButton label="Save" />
+        <WiInput placeholder="Nickname" style="width:12rem" />
       </div>
-    </WdConfigProvider>
+    </WiConfigProvider>
   </div>
 </template>
 ```
@@ -119,25 +119,25 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 
 ```vue preview
 <script setup lang="ts">
-import { WdConfigProvider, WdInput, WdTextarea } from '@well-insight/ui'
+import { WiConfigProvider, WiInput, WiTextarea } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
-    <WdConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wd-color-text-muted)">outlined</p>
+    <WiConfigProvider input-variant="outlined">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">outlined</p>
       <div style="display:grid;gap:0.5rem">
-        <WdInput placeholder="Outlined input" />
-        <WdTextarea placeholder="Outlined textarea" :rows="2" />
+        <WiInput placeholder="Outlined input" />
+        <WiTextarea placeholder="Outlined textarea" :rows="2" />
       </div>
-    </WdConfigProvider>
-    <WdConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wd-color-text-muted)">filled</p>
+    </WiConfigProvider>
+    <WiConfigProvider input-variant="filled">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">filled</p>
       <div style="display:grid;gap:0.5rem">
-        <WdInput placeholder="Filled input" />
-        <WdTextarea placeholder="Filled textarea" :rows="2" />
+        <WiInput placeholder="Filled input" />
+        <WiTextarea placeholder="Filled textarea" :rows="2" />
       </div>
-    </WdConfigProvider>
+    </WiConfigProvider>
   </div>
 </template>
 ```
@@ -147,7 +147,7 @@ import { WdConfigProvider, WdInput, WdTextarea } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdSelect, WdButton, WdConfirmDialog } from '@well-insight/ui'
+import { WiConfigProvider, WiSelect, WiButton, WiConfirmDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const confirmOpen = ref(false)
@@ -158,19 +158,19 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider
+  <WiConfigProvider
     :locale="{ selectPlaceholder: 'Pick a city', accept: 'OK', reject: 'Not now' }"
   >
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdSelect v-model="city" :options="options" style="width:12rem" />
-      <WdButton label="Open confirm" @click="confirmOpen = true" />
-      <WdConfirmDialog
+      <WiSelect v-model="city" :options="options" style="width:12rem" />
+      <WiButton label="Open confirm" @click="confirmOpen = true" />
+      <WiConfirmDialog
         v-model="confirmOpen"
         header="Confirm"
         message="Button labels come from locale.accept / reject."
       />
     </div>
-  </WdConfigProvider>
+  </WiConfigProvider>
 </template>
 ```
 
@@ -179,18 +179,18 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdDialog } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiDialog } from '@well-insight/ui'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <WdConfigProvider append-to="body" :z-index="2200">
-    <WdButton label="Open dialog" @click="visible = true" />
-    <WdDialog v-model="visible" header="Mounted to body" width="24rem">
+  <WiConfigProvider append-to="body" :z-index="2200">
+    <WiButton label="Open dialog" @click="visible = true" />
+    <WiDialog v-model="visible" header="Mounted to body" width="24rem">
       <p style="margin:0">Overlays Teleport to body by default. The z-index base comes from ConfigProvider.</p>
-    </WdDialog>
-  </WdConfigProvider>
+    </WiDialog>
+  </WiConfigProvider>
 </template>
 ```
 
@@ -213,9 +213,9 @@ createApp(App).use(
 ## Reading config
 
 ```ts
-import { useWdConfig } from '@well-insight/ui'
+import { useWiConfig } from '@well-insight/ui'
 
-const config = useWdConfig()
+const config = useWiConfig()
 // config.value.appendTo / size / locale …
 ```
 

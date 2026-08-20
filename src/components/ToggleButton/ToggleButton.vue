@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
 import type { ToggleButtonProps } from './types'
 
@@ -15,15 +15,15 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWdConfig()
+const config = useWiConfig()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 
 const rootClass = computed(() => [
-  'wd-togglebutton',
-  `wd-togglebutton--${sizeClass.value}`,
+  'wi-togglebutton',
+  `wi-togglebutton--${sizeClass.value}`,
   {
-    'wd-togglebutton--checked': props.modelValue,
-    'wd-togglebutton--disabled': props.disabled,
+    'wi-togglebutton--checked': props.modelValue,
+    'wi-togglebutton--disabled': props.disabled,
   },
 ])
 
@@ -44,7 +44,7 @@ function toggle() {
     :aria-pressed="modelValue"
     @click="toggle"
   >
-    <span v-if="icon" class="wd-togglebutton__icon" aria-hidden="true">{{ icon }}</span>
-    <span class="wd-togglebutton__label">{{ label }}</span>
+    <span v-if="icon" class="wi-togglebutton__icon" aria-hidden="true">{{ icon }}</span>
+    <span class="wi-togglebutton__label">{{ label }}</span>
   </button>
 </template>

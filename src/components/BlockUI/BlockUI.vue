@@ -7,19 +7,19 @@ const props = withDefaults(defineProps<BlockUIProps>(), {
 })
 
 const rootClass = computed(() => [
-  'wd-blockui',
-  { 'wd-blockui--blocked': props.blocked },
+  'wi-blockui',
+  { 'wi-blockui--blocked': props.blocked },
 ])
 </script>
 
 <template>
   <div :class="rootClass">
-    <div class="wd-blockui__content" :aria-busy="blocked || undefined">
+    <div class="wi-blockui__content" :aria-busy="blocked || undefined">
       <slot />
     </div>
     <div
       v-if="blocked"
-      class="wd-blockui__overlay"
+      class="wi-blockui__overlay"
       role="presentation"
       aria-hidden="true"
     />

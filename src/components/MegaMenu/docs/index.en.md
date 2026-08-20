@@ -11,14 +11,14 @@ Top-level horizontal navigation; expanded children are shown in columns.
 ## Import
 
 ```ts
-import { WdMegaMenu } from '@well-insight/ui'
+import { WiMegaMenu } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdMegaMenu } from '@well-insight/ui'
+import { WiMegaMenu } from '@well-insight/ui'
 
 const model = [
   {
@@ -33,7 +33,7 @@ const model = [
 </script>
 
 <template>
-  <WdMegaMenu :model="model" />
+  <WiMegaMenu :model="model" />
 </template>
 ```
 

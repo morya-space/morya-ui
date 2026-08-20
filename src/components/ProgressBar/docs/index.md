@@ -11,21 +11,21 @@ description: 进度条用于展示确定或不确定进度。
 ## 引入
 
 ```ts
-import { WdProgressBar } from '@well-insight/ui'
+import { WiProgressBar } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdProgressBar } from '@well-insight/ui'
+import { WiProgressBar } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdProgressBar :value="35" />
-    <WdProgressBar :value="70" :show-value="false" />
-    <WdProgressBar mode="indeterminate" />
+    <WiProgressBar :value="35" />
+    <WiProgressBar :value="70" :show-value="false" />
+    <WiProgressBar mode="indeterminate" />
   </div>
 </template>
 ```

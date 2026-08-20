@@ -1,2 +1,2 @@
-export { default as WdInputTags } from './InputTags.vue'
+export { default as WiInputTags } from './InputTags.vue'
 export type { InputTagsEmits, InputTagsProps } from './types'

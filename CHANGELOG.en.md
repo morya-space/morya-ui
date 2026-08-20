@@ -38,7 +38,7 @@
 
 - Initial release: a standalone Vue 3 + TypeScript component library with theme / design-token APIs.
 - Ships a full component docs site with Markdown and live `vue preview` examples.
-- Light / dark themes, `useTheme` / `useDensity` / `useMotion`, plus `WdConfigProvider` / `createWellInsight` for global defaults.
+- Light / dark themes, `useTheme` / `useDensity` / `useMotion`, plus `WiConfigProvider` / `createWellInsight` for global defaults.
 - Build output is ESM + type declarations + `styles.css`. Local development can resolve source via `exports.development`.
 
 ### Coverage

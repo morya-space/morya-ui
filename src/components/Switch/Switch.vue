@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const resolvedInputId = computed(
-  () => props.inputId ?? props.id ?? `wd-switch-${Math.random().toString(36).slice(2, 8)}`,
+  () => props.inputId ?? props.id ?? `wi-switch-${Math.random().toString(36).slice(2, 8)}`,
 )
 
 function updateValue(event: Event) {
@@ -24,14 +24,14 @@ function updateValue(event: Event) {
 
 <template>
   <label
-    class="wd-switch"
-    :class="{ 'wd-switch--disabled': disabled, 'wd-switch--invalid': invalid }"
+    class="wi-switch"
+    :class="{ 'wi-switch--disabled': disabled, 'wi-switch--invalid': invalid }"
     :for="resolvedInputId"
   >
     <input
       v-bind="attrs"
       :id="resolvedInputId"
-      class="wd-switch__input"
+      class="wi-switch__input"
       type="checkbox"
       role="switch"
       :name="name"
@@ -43,7 +43,7 @@ function updateValue(event: Event) {
       :aria-checked="modelValue"
       @change="updateValue"
     />
-    <span class="wd-switch__track" aria-hidden="true"><span class="wd-switch__thumb" /></span>
-    <span v-if="label || $slots.default" class="wd-switch__label"><slot>{{ label }}</slot></span>
+    <span class="wi-switch__track" aria-hidden="true"><span class="wi-switch__thumb" /></span>
+    <span v-if="label || $slots.default" class="wi-switch__label"><slot>{{ label }}</slot></span>
   </label>
 </template>

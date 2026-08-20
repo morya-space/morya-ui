@@ -11,22 +11,22 @@ description: 芯片用于展示标签化信息，可带图标、图片与移除�
 ## 引入
 
 ```ts
-import { WdChip } from '@well-insight/ui'
+import { WiChip } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdChip } from '@well-insight/ui'
+import { WiChip } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdChip label="Basic" />
-    <WdChip label="With Icon" icon="check" />
-    <WdChip label="Removable" removable />
-    <WdChip label="Disabled" removable disabled />
+    <WiChip label="Basic" />
+    <WiChip label="With Icon" icon="check" />
+    <WiChip label="Removable" removable />
+    <WiChip label="Disabled" removable disabled />
   </div>
 </template>
 ```

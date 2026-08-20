@@ -11,26 +11,26 @@ description: 按可视窗口渲染长列表。
 ## 引入
 
 ```ts
-import { WdVirtualScroller } from '@well-insight/ui'
+import { WiVirtualScroller } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdVirtualScroller } from '@well-insight/ui'
+import { WiVirtualScroller } from '@well-insight/ui'
 
 const items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)
 </script>
 
 <template>
-  <WdVirtualScroller :items="items" :item-size="36" :height="220">
+  <WiVirtualScroller :items="items" :item-size="36" :height="220">
     <template #item="{ item }">
-      <div style="padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wd-color-border)">
+      <div style="padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)">
         {{ item }}
       </div>
     </template>
-  </WdVirtualScroller>
+  </WiVirtualScroller>
 </template>
 ```
 

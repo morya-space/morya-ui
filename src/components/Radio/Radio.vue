@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
   required: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: string | number | boolean): void }>()
-const inputId = computed(() => props.id ?? `wd-radio-${Math.random().toString(36).slice(2, 8)}`)
+const inputId = computed(() => props.id ?? `wi-radio-${Math.random().toString(36).slice(2, 8)}`)
 const isChecked = computed(() => props.modelValue === props.value)
 
 function updateValue(event: Event) {
@@ -21,14 +21,14 @@ function updateValue(event: Event) {
 
 <template>
   <label
-    class="wd-radio"
-    :class="{ 'wd-radio--disabled': disabled, 'wd-radio--invalid': invalid }"
+    class="wi-radio"
+    :class="{ 'wi-radio--disabled': disabled, 'wi-radio--invalid': invalid }"
     :for="inputId"
   >
     <input
       v-bind="attrs"
       :id="inputId"
-      class="wd-radio__input"
+      class="wi-radio__input"
       type="radio"
       :name="name"
       :value="String(value)"
@@ -38,7 +38,7 @@ function updateValue(event: Event) {
       :aria-invalid="invalid || undefined"
       @change="updateValue"
     />
-    <span class="wd-radio__control" aria-hidden="true" />
-    <span v-if="label || $slots.default" class="wd-radio__label"><slot>{{ label }}</slot></span>
+    <span class="wi-radio__control" aria-hidden="true" />
+    <span v-if="label || $slots.default" class="wi-radio__label"><slot>{{ label }}</slot></span>
   </label>
 </template>

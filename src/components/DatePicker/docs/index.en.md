@@ -11,7 +11,7 @@ Date picker with month navigation and a day grid.
 ## Import
 
 ```ts
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdDatePicker } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WdDatePicker v-model="value" label="Date" />
+  <WiDatePicker v-model="value" label="Date" />
 </template>
 ```
 
@@ -34,7 +34,7 @@ const value = ref('2024-06-15')
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 
 const a = ref('2024-06-15')
 const b = ref('2024-06-15')
@@ -43,9 +43,9 @@ const c = ref('2024-06-15')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end">
-    <WdDatePicker v-model="a" size="small" label="Small" />
-    <WdDatePicker v-model="b" label="Default" />
-    <WdDatePicker v-model="c" size="large" label="Large" />
+    <WiDatePicker v-model="a" size="small" label="Small" />
+    <WiDatePicker v-model="b" label="Default" />
+    <WiDatePicker v-model="c" size="large" label="Large" />
   </div>
 </template>
 ```
@@ -57,13 +57,13 @@ Dates outside the range are disabled in the calendar.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WdDatePicker
+  <WiDatePicker
     v-model="value"
     label="In range"
     min-date="2024-06-01"
@@ -77,13 +77,13 @@ const value = ref('2024-06-15')
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WdDatePicker v-model="value" label="Invalid" invalid />
+  <WiDatePicker v-model="value" label="Invalid" invalid />
 </template>
 ```
 
@@ -91,11 +91,11 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdDatePicker model-value="2024-06-15" label="Disabled" disabled />
+  <WiDatePicker model-value="2024-06-15" label="Disabled" disabled />
 </template>
 ```
 
@@ -104,13 +104,13 @@ import { WdDatePicker } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 
 const value = ref<string | null>(null)
 </script>
 
 <template>
-  <WdDatePicker v-model="value" label="Full width" fluid placeholder="Select date" />
+  <WiDatePicker v-model="value" label="Full width" fluid placeholder="Select date" />
 </template>
 ```
 
@@ -121,13 +121,13 @@ The panel Teleports to `body` by default. Use `append-to="self"` or `teleport={f
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdDatePicker } from '@well-insight/ui'
+import { WiDatePicker } from '@well-insight/ui'
 
 const value = ref<string | null>(null)
 </script>
 
 <template>
-  <WdDatePicker v-model="value" label="In-place panel" append-to="self" />
+  <WiDatePicker v-model="value" label="In-place panel" append-to="self" />
 </template>
 ```
 
@@ -141,7 +141,7 @@ const value = ref<string | null>(null)
 | `maxDate` | `string \| Date \| null` | — | Optional upper bound. |
 | `placeholder` | `string` | `Select date` | Placeholder. |
 | `fluid` | `boolean` | `false` | Stretch to full width. |
-| `size` | `WdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `invalid` | `boolean` | `false` | Invalid state. |
 | `teleport` | `boolean` | `true` | Panel Teleport; mounts to `body` by default. |

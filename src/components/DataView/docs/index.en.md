@@ -11,26 +11,26 @@ Render a collection in list / grid layout, with optional pagination.
 ## Import
 
 ```ts
-import { WdDataView } from '@well-insight/ui'
+import { WiDataView } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdDataView } from '@well-insight/ui'
+import { WiDataView } from '@well-insight/ui'
 
 const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 </script>
 
 <template>
-  <WdDataView :value="items" layout="grid" paginator :rows="4">
+  <WiDataView :value="items" layout="grid" paginator :rows="4">
     <template #grid="{ items: page }">
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
         <div v-for="item in page" :key="item">{{ item }}</div>
       </div>
     </template>
-  </WdDataView>
+  </WiDataView>
 </template>
 ```
 

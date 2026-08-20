@@ -11,7 +11,7 @@ Circular dial control with drag and keyboard adjustment.
 ## Import
 
 ```ts
-import { WdKnob } from '@well-insight/ui'
+import { WiKnob } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdKnob } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdKnob } from '@well-insight/ui'
+import { WiKnob } from '@well-insight/ui'
 
 const value = ref(60)
 </script>
 
 <template>
-  <WdKnob v-model="value" :size="120" value-template="{value}%" />
+  <WiKnob v-model="value" :size="120" value-template="{value}%" />
 </template>
 ```
 

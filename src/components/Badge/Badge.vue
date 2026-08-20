@@ -12,12 +12,12 @@ const sizeTone = computed(() => resolveSizeClass(props.size))
 const isDot = computed(() => props.value == null || props.value === '')
 
 const rootClass = computed(() => [
-  'wd-badge',
-  `wd-badge--${severityTone.value}`,
+  'wi-badge',
+  `wi-badge--${severityTone.value}`,
   {
-    'wd-badge--dot': isDot.value,
-    'wd-badge--small': sizeTone.value === 'small',
-    'wd-badge--large': sizeTone.value === 'large',
+    'wi-badge--dot': isDot.value,
+    'wi-badge--small': sizeTone.value === 'small',
+    'wi-badge--large': sizeTone.value === 'large',
   },
 ])
 </script>

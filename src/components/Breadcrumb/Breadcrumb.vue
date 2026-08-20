@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { BreadcrumbItem, BreadcrumbProps } from './types'
 
 const props = defineProps<BreadcrumbProps>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const items = computed(() => {
   const list: BreadcrumbItem[] = []
@@ -20,28 +20,28 @@ const items = computed(() => {
 </script>
 
 <template>
-  <nav class="wd-breadcrumb" :aria-label="locale.breadcrumb">
-    <ol class="wd-breadcrumb__list">
-      <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="wd-breadcrumb__item">
+  <nav class="wi-breadcrumb" :aria-label="locale.breadcrumb">
+    <ol class="wi-breadcrumb__list">
+      <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="wi-breadcrumb__item">
         <a
           v-if="item.to && !item.disabled"
-          class="wd-breadcrumb__link"
+          class="wi-breadcrumb__link"
           :href="item.to"
         >
           {{ item.label }}
         </a>
         <span
           v-else
-          class="wd-breadcrumb__link"
+          class="wi-breadcrumb__link"
           :class="{
-            'wd-breadcrumb__link--current': index === items.length - 1,
-            'wd-breadcrumb__link--disabled': item.disabled,
+            'wi-breadcrumb__link--current': index === items.length - 1,
+            'wi-breadcrumb__link--disabled': item.disabled,
           }"
           :aria-current="index === items.length - 1 ? 'page' : undefined"
         >
           {{ item.label }}
         </span>
-        <span v-if="index < items.length - 1" class="wd-breadcrumb__separator" aria-hidden="true">/</span>
+        <span v-if="index < items.length - 1" class="wi-breadcrumb__separator" aria-hidden="true">/</span>
       </li>
     </ol>
   </nav>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { PanelProps } from './types'
 
 const props = withDefaults(defineProps<PanelProps>(), {
@@ -12,7 +12,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const isCollapsed = computed(() => props.modelValue ?? props.collapsed ?? false)
 
@@ -25,15 +25,15 @@ function toggle() {
 </script>
 
 <template>
-  <section class="wd-panel" :class="{ 'wd-panel--collapsed': isCollapsed }">
-    <header v-if="$slots.header || header || toggleable" class="wd-panel__header">
-      <div class="wd-panel__title">
+  <section class="wi-panel" :class="{ 'wi-panel--collapsed': isCollapsed }">
+    <header v-if="$slots.header || header || toggleable" class="wi-panel__header">
+      <div class="wi-panel__title">
         <slot name="header">{{ header }}</slot>
       </div>
       <button
         v-if="toggleable"
         type="button"
-        class="wd-panel__toggler"
+        class="wi-panel__toggler"
         :aria-expanded="!isCollapsed"
         :aria-label="isCollapsed ? locale.expand : locale.collapse"
         @click="toggle"
@@ -41,7 +41,7 @@ function toggle() {
         <span aria-hidden="true">{{ isCollapsed ? '▸' : '▾' }}</span>
       </button>
     </header>
-    <div v-show="!isCollapsed" class="wd-panel__content">
+    <div v-show="!isCollapsed" class="wi-panel__content">
       <slot />
     </div>
   </section>

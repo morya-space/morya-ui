@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { WdScrollbar, WdTag } from '@well-insight/ui'
+import { WiScrollbar, WiTag } from '@well-insight/ui'
 import { loadChangelog } from '../docs/loadChangelog'
 import { useDocsI18n } from '../i18n'
 
@@ -35,13 +35,13 @@ function selectVersion(version: string) {
 <template>
   <div class="changelog-shell">
     <aside class="changelog-sidebar" :aria-label="t.changelogNav">
-      <WdScrollbar class="changelog-scroll">
+      <WiScrollbar class="changelog-scroll">
         <div class="changelog-sidebar__body">
           <p class="changelog-kicker">RELEASES</p>
           <h1 class="changelog-sidebar__title">{{ t.changelogTitle }}</h1>
           <p class="changelog-sidebar__meta">
             <span>{{ doc.packageName }}</span>
-            <WdTag :value="`v${doc.currentVersion}`" severity="info" />
+            <WiTag :value="`v${doc.currentVersion}`" severity="info" />
           </p>
           <nav class="changelog-nav" :aria-label="t.changelogHistory">
             <button
@@ -57,11 +57,11 @@ function selectVersion(version: string) {
             </button>
           </nav>
         </div>
-      </WdScrollbar>
+      </WiScrollbar>
     </aside>
 
     <main class="changelog-main">
-      <WdScrollbar class="changelog-scroll">
+      <WiScrollbar class="changelog-scroll">
         <div class="changelog-main__body">
           <template v-if="activeRelease">
             <header class="changelog-hero">
@@ -95,7 +95,7 @@ function selectVersion(version: string) {
             <p>{{ t.noReleasesHint }}</p>
           </section>
         </div>
-      </WdScrollbar>
+      </WiScrollbar>
     </main>
   </div>
 </template>
@@ -110,7 +110,7 @@ function selectVersion(version: string) {
 }
 
 .changelog-sidebar {
-  background: color-mix(in srgb, var(--wd-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--wi-color-surface) 62%, transparent);
   border-right: 1px solid var(--docs-edge);
   min-height: 0;
   backdrop-filter: blur(12px);
@@ -144,7 +144,7 @@ function selectVersion(version: string) {
 
 .changelog-sidebar__meta {
   align-items: center;
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   display: flex;
   flex-wrap: wrap;
   font-family: var(--docs-mono);
@@ -163,7 +163,7 @@ function selectVersion(version: string) {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0.7rem;
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   cursor: pointer;
   display: flex;
   font-size: 0.86rem;
@@ -172,24 +172,24 @@ function selectVersion(version: string) {
   padding: 0.55rem 0.7rem;
   text-align: left;
   transition:
-    color var(--wd-motion-fast) var(--wd-motion-ease),
-    background var(--wd-motion-fast) var(--wd-motion-ease),
-    border-color var(--wd-motion-fast) var(--wd-motion-ease);
+    color var(--wi-motion-fast) var(--wi-motion-ease),
+    background var(--wi-motion-fast) var(--wi-motion-ease),
+    border-color var(--wi-motion-fast) var(--wi-motion-ease);
 }
 
 .changelog-nav__item:hover,
 .changelog-nav__item.is-active {
-  background: color-mix(in srgb, var(--wd-color-primary) 10%, transparent);
-  color: var(--wd-color-primary);
+  background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+  color: var(--wi-color-primary);
 }
 
 .changelog-nav__item.is-active {
-  border-color: color-mix(in srgb, var(--wd-color-primary) 28%, transparent);
+  border-color: color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
   font-weight: 700;
 }
 
 .changelog-nav__badge {
-  color: var(--wd-color-primary);
+  color: var(--wi-color-primary);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   letter-spacing: 0.04em;
@@ -221,7 +221,7 @@ function selectVersion(version: string) {
 }
 
 .changelog-hero__hint {
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   font-size: 0.88rem;
   line-height: 1.55;
   margin: 0;
@@ -248,14 +248,14 @@ function selectVersion(version: string) {
 }
 
 .changelog-section li {
-  color: var(--wd-color-text);
+  color: var(--wi-color-text);
   font-size: 0.92rem;
   line-height: 1.6;
   opacity: 0.92;
 }
 
 .changelog-empty {
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
 }
 
 .changelog-empty code {

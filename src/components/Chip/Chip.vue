@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 import type { ChipProps } from './types'
 
 const props = withDefaults(defineProps<ChipProps>(), {
@@ -10,13 +10,13 @@ const props = withDefaults(defineProps<ChipProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'remove', value: MouseEvent): void }>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const chipClass = computed(() => [
-  'wd-chip',
+  'wi-chip',
   {
-    'wd-chip--disabled': props.disabled,
-    'wd-chip--removable': props.removable,
+    'wi-chip--disabled': props.disabled,
+    'wi-chip--removable': props.removable,
   },
 ])
 
@@ -28,13 +28,13 @@ function handleRemove(event: MouseEvent) {
 
 <template>
   <span :class="chipClass" :aria-disabled="disabled || undefined">
-    <img v-if="image" class="wd-chip__image" :src="image" alt="" />
-    <WdIcon v-else-if="icon" class="wd-chip__icon" :name="icon" size="sm" />
-    <span v-if="label" class="wd-chip__label">{{ label }}</span>
+    <img v-if="image" class="wi-chip__image" :src="image" alt="" />
+    <WiIcon v-else-if="icon" class="wi-chip__icon" :name="icon" size="sm" />
+    <span v-if="label" class="wi-chip__label">{{ label }}</span>
     <button
       v-if="removable"
       type="button"
-      class="wd-chip__remove"
+      class="wi-chip__remove"
       :disabled="disabled"
       :aria-label="locale.remove"
       @click="handleRemove"

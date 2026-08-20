@@ -11,28 +11,28 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 ## 引入
 
 ```ts
-import { WdCard, WdButton } from '@well-insight/ui'
+import { WiCard, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdCard } from '@well-insight/ui'
+import { WiButton, WiCard } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdCard title="Project overview" subtitle="Updated 2 hours ago">
-    <p style="margin:0;color:var(--wd-color-text-muted)">
+  <WiCard title="Project overview" subtitle="Updated 2 hours ago">
+    <p style="margin:0;color:var(--wi-color-text-muted)">
       Title and subtitle align in the header. Body content stays in the default slot.
     </p>
     <template #footer>
       <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-        <WdButton label="Dismiss" severity="secondary" text />
-        <WdButton label="Continue" />
+        <WiButton label="Dismiss" severity="secondary" text />
+        <WiButton label="Continue" />
       </div>
     </template>
-  </WdCard>
+  </WiCard>
 </template>
 ```
 
@@ -40,19 +40,19 @@ import { WdButton, WdCard } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdCard, WdTag } from '@well-insight/ui'
+import { WiCard, WiTag } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdCard>
+  <WiCard>
     <template #header>
       <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:1rem">
         <strong>Custom header</strong>
-        <WdTag value="Active" severity="success" />
+        <WiTag value="Active" severity="success" />
       </div>
     </template>
     Prefer the header slot when you need more than title/subtitle text.
-  </WdCard>
+  </WiCard>
 </template>
 ```
 

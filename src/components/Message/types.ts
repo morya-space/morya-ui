@@ -1,15 +1,15 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdRenderable } from '../../shared/content'
-import type { WdToastSeverity } from '../../shared/types'
+import type { WiAppendTo } from '../../shared/overlay'
+import type { WiRenderable } from '../../shared/content'
+import type { WiToastSeverity } from '../../shared/types'
 
-export type { WdRenderable }
+export type { WiRenderable }
 
 /** message severities; `warning` kept as legacy alias for `warn`. */
-export type MessageSeverity = WdToastSeverity | 'warning'
+export type MessageSeverity = WiToastSeverity | 'warning'
 
 export interface MessageItem {
   id: string | number
-  content: WdRenderable
+  content: WiRenderable
   severity?: MessageSeverity
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
@@ -19,20 +19,20 @@ export interface MessageItem {
 
 export type MessageOptions = Omit<MessageItem, 'id' | 'content'> & {
   id?: string | number
-  content: WdRenderable
+  content: WiRenderable
 }
 
 /** String / VNode / component / render factory, or a full options object. */
-export type MessageInput = WdRenderable | MessageOptions
+export type MessageInput = WiRenderable | MessageOptions
 
 export interface MessageProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
   /**
    * Internal: auto-mounted service host.
-   * Manual `<WdMessage />` claims the host and disables auto-mount.
+   * Manual `<WiMessage />` claims the host and disables auto-mount.
    */
   auto?: boolean
 }

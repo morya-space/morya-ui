@@ -11,7 +11,7 @@ description: 内容分隔线。
 ## 引入
 
 ```ts
-import { WdDivider } from '@well-insight/ui'
+import { WiDivider } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -20,13 +20,13 @@ import { WdDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@well-insight/ui'
+import { WiDivider } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
     <p style="margin:0">Above</p>
-    <WdDivider />
+    <WiDivider />
     <p style="margin:0">Below</p>
   </div>
 </template>
@@ -38,14 +38,14 @@ import { WdDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@well-insight/ui'
+import { WiDivider } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WdDivider type="solid" label="Solid" />
-    <WdDivider type="dashed" label="Dashed" />
-    <WdDivider type="dotted" label="Dotted" />
+    <WiDivider type="solid" label="Solid" />
+    <WiDivider type="dashed" label="Dashed" />
+    <WiDivider type="dotted" label="Dotted" />
   </div>
 </template>
 ```
@@ -56,14 +56,14 @@ import { WdDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@well-insight/ui'
+import { WiDivider } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WdDivider label="Left" align="left" />
-    <WdDivider label="Center" align="center" />
-    <WdDivider label="Right" align="right" />
+    <WiDivider label="Left" align="left" />
+    <WiDivider label="Center" align="center" />
+    <WiDivider label="Right" align="right" />
   </div>
 </template>
 ```
@@ -74,15 +74,15 @@ import { WdDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@well-insight/ui'
+import { WiDivider } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
     <span>Left</span>
-    <WdDivider layout="vertical" />
+    <WiDivider layout="vertical" />
     <span>Middle</span>
-    <WdDivider layout="vertical" type="dashed" />
+    <WiDivider layout="vertical" type="dashed" />
     <span>Right</span>
   </div>
 </template>

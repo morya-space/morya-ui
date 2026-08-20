@@ -1,9 +1,9 @@
 import { computed, ref, watch } from 'vue'
-import { enUS, zhCN, type WdLocaleMessages } from '@well-insight/ui'
+import { enUS, zhCN, type WiLocaleMessages } from '@well-insight/ui'
 
 export type DocsLang = 'zh-CN' | 'en-US'
 
-const STORAGE_KEY = 'wd-docs-lang'
+const STORAGE_KEY = 'wi-docs-lang'
 
 function readStoredLang(): DocsLang {
   if (typeof window === 'undefined') return 'zh-CN'
@@ -42,11 +42,11 @@ const messages = {
     globalConfig: '全局配置',
     allComponents: '全部组件',
     pillarSystemTitle: '语义化设计令牌',
-    pillarSystemBody: '颜色、圆角、间距与动效统一走 --wd-* 变量，主题切换不改组件结构。',
+    pillarSystemBody: '颜色、圆角、间距与动效统一走 --wi-* 变量，主题切换不改组件结构。',
     pillarCraftTitle: '文档即预览',
     pillarCraftBody: '每个组件自带 Markdown + 可交互示例，边看 API 边验证真实交互。',
     pillarControlTitle: '全局配置入口',
-    pillarControlBody: 'WdConfigProvider / createWellInsight 统一浮层挂载、尺寸、密度与文案。',
+    pillarControlBody: 'WiConfigProvider / createWellInsight 统一浮层挂载、尺寸、密度与文案。',
     docsNav: '文档导航',
     docsTitle: '文档',
     docsMissing: '未找到文档',
@@ -80,7 +80,7 @@ const messages = {
     noComponent: '没有找到组件',
     tokens: '设计令牌',
     tokenDesc: '组件共享同一套视觉语法。主题切换时，语义保持不变。',
-    tokenNote: '所有组件都使用 --wd-* 设计变量。',
+    tokenNote: '所有组件都使用 --wi-* 设计变量。',
     defaultDoc: '组件文档。',
     groupAria: '{title}组件',
     useAccent: '使用{label}主题色',
@@ -146,11 +146,11 @@ const messages = {
     globalConfig: 'Global config',
     allComponents: 'All components',
     pillarSystemTitle: 'Semantic design tokens',
-    pillarSystemBody: 'Color, radius, space, and motion all use --wd-* variables. Theme switches never rewrite component structure.',
+    pillarSystemBody: 'Color, radius, space, and motion all use --wi-* variables. Theme switches never rewrite component structure.',
     pillarCraftTitle: 'Docs as preview',
     pillarCraftBody: 'Each component ships Markdown plus interactive examples so you can read the API and verify the interaction together.',
     pillarControlTitle: 'Global configuration',
-    pillarControlBody: 'WdConfigProvider / createWellInsight unify overlay mount, size, density, and copy.',
+    pillarControlBody: 'WiConfigProvider / createWellInsight unify overlay mount, size, density, and copy.',
     docsNav: 'Documentation',
     docsTitle: 'Docs',
     docsMissing: 'Page not found',
@@ -184,7 +184,7 @@ const messages = {
     noComponent: 'No components found',
     tokens: 'Design tokens',
     tokenDesc: 'Components share one visual grammar. Semantics stay stable when the theme changes.',
-    tokenNote: 'Every component uses --wd-* design tokens.',
+    tokenNote: 'Every component uses --wi-* design tokens.',
     defaultDoc: 'Component docs.',
     groupAria: '{title} components',
     useAccent: 'Use {label} accent',
@@ -238,7 +238,7 @@ watch(
 
 export function useDocsI18n() {
   const t = computed(() => messages[lang.value])
-  const componentLocale = computed<WdLocaleMessages>(() => (lang.value === 'en-US' ? enUS : zhCN))
+  const componentLocale = computed<WiLocaleMessages>(() => (lang.value === 'en-US' ? enUS : zhCN))
 
   function setLang(next: DocsLang) {
     lang.value = next

@@ -11,7 +11,7 @@ description: 多行文本输入。
 ## 引入
 
 ```ts
-import { WdTextarea } from '@well-insight/ui'
+import { WiTextarea } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdTextarea } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTextarea } from '@well-insight/ui'
+import { WiTextarea } from '@well-insight/ui'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdTextarea v-model="value" label="Notes" placeholder="Write something…" />
+  <WiTextarea v-model="value" label="Notes" placeholder="Write something…" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdTextarea } from '@well-insight/ui'
+import { WiTextarea } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdTextarea size="small" label="Small" rows="3" />
-    <WdTextarea variant="filled" label="Filled" rows="3" />
-    <WdTextarea size="large" fluid label="Large Fluid" rows="3" />
+    <WiTextarea size="small" label="Small" rows="3" />
+    <WiTextarea variant="filled" label="Filled" rows="3" />
+    <WiTextarea size="large" fluid label="Large Fluid" rows="3" />
   </div>
 </template>
 ```
@@ -52,15 +52,15 @@ import { WdTextarea } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTextarea } from '@well-insight/ui'
+import { WiTextarea } from '@well-insight/ui'
 
 const value = ref('Line 1\nLine 2')
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdTextarea v-model="value" auto-resize label="Auto resize" />
-    <WdTextarea invalid label="Required" help-text="This field is required" model-value="" />
+    <WiTextarea v-model="value" auto-resize label="Auto resize" />
+    <WiTextarea invalid label="Required" help-text="This field is required" model-value="" />
   </div>
 </template>
 ```

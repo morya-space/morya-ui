@@ -11,7 +11,7 @@ description: 按钮用于触发即时动作。
 ## 引入
 
 ```ts
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ import { WdButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton>Submit</WdButton>
-    <WdButton label="Label Prop" />
-    <WdButton severity="secondary" label="Secondary" />
+    <WiButton>Submit</WiButton>
+    <WiButton label="Label Prop" />
+    <WiButton severity="secondary" label="Secondary" />
   </div>
 </template>
 ```
@@ -38,19 +38,19 @@ import { WdButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Primary" />
-    <WdButton label="Secondary" severity="secondary" />
-    <WdButton label="Success" severity="success" />
-    <WdButton label="Info" severity="info" />
-    <WdButton label="Warn" severity="warn" />
-    <WdButton label="Help" severity="help" />
-    <WdButton label="Danger" severity="danger" />
-    <WdButton label="Contrast" severity="contrast" />
+    <WiButton label="Primary" />
+    <WiButton label="Secondary" severity="secondary" />
+    <WiButton label="Success" severity="success" />
+    <WiButton label="Info" severity="info" />
+    <WiButton label="Warn" severity="warn" />
+    <WiButton label="Help" severity="help" />
+    <WiButton label="Danger" severity="danger" />
+    <WiButton label="Contrast" severity="contrast" />
   </div>
 </template>
 ```
@@ -61,25 +61,25 @@ import { WdButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Outlined" outlined />
-      <WdButton label="Success" severity="success" outlined />
-      <WdButton label="Danger" severity="danger" outlined />
+      <WiButton label="Outlined" outlined />
+      <WiButton label="Success" severity="success" outlined />
+      <WiButton label="Danger" severity="danger" outlined />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Raised" raised />
-      <WdButton label="Rounded" rounded />
-      <WdButton label="Plain Text" text plain />
+      <WiButton label="Raised" raised />
+      <WiButton label="Rounded" rounded />
+      <WiButton label="Plain Text" text plain />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Small" size="small" />
-      <WdButton label="Large" size="large" />
-      <WdButton label="Fluid" fluid />
+      <WiButton label="Small" size="small" />
+      <WiButton label="Large" size="large" />
+      <WiButton label="Fluid" fluid />
     </div>
   </div>
 </template>
@@ -91,15 +91,15 @@ import { WdButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Text" text />
-    <WdButton label="Text Danger" text severity="danger" />
-    <WdButton label="Link" link />
-    <WdButton label="Link Secondary" link severity="secondary" />
+    <WiButton label="Text" text />
+    <WiButton label="Text Danger" text severity="danger" />
+    <WiButton label="Link" link />
+    <WiButton label="Link Secondary" link severity="secondary" />
   </div>
 </template>
 ```
@@ -110,16 +110,16 @@ import { WdButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton icon="check" label="Save" />
-    <WdButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <WdButton icon="plus" icon-only rounded aria-label="Add" />
-    <WdButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <WdButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
+    <WiButton icon="check" label="Save" />
+    <WiButton icon="search" label="Search" icon-pos="right" severity="secondary" />
+    <WiButton icon="plus" icon-only rounded aria-label="Add" />
+    <WiButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
+    <WiButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
   </div>
 </template>
 ```
@@ -131,7 +131,7 @@ import { WdButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 
 const loading = ref(false)
 
@@ -145,8 +145,8 @@ function toggleLoading() {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <WdButton label="Always Loading" loading severity="secondary" />
+    <WiButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
+    <WiButton label="Always Loading" loading severity="secondary" />
   </div>
 </template>
 ```
@@ -155,14 +155,14 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Disabled" disabled />
-    <WdButton label="Disabled Outlined" outlined disabled />
-    <WdButton label="Disabled Text" text disabled />
+    <WiButton label="Disabled" disabled />
+    <WiButton label="Disabled Outlined" outlined disabled />
+    <WiButton label="Disabled Text" text disabled />
   </div>
 </template>
 ```

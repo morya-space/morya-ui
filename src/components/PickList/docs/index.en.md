@@ -11,7 +11,7 @@ Move items between the source and target lists.
 ## Import
 
 ```ts
-import { WdPickList } from '@well-insight/ui'
+import { WiPickList } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,14 +19,14 @@ import { WdPickList } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdPickList } from '@well-insight/ui'
+import { WiPickList } from '@well-insight/ui'
 
 const source = ref(['Apple', 'Banana', 'Cherry', 'Grape'])
 const target = ref(['Durian'])
 </script>
 
 <template>
-  <WdPickList
+  <WiPickList
     v-model:source="source"
     v-model:target="target"
     source-header="Available fruit"
@@ -40,7 +40,7 @@ const target = ref(['Durian'])
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdPickList } from '@well-insight/ui'
+import { WiPickList } from '@well-insight/ui'
 
 const source = ref([
   { id: 1, name: 'Design' },
@@ -50,11 +50,11 @@ const target = ref([{ id: 3, name: 'Testing' }])
 </script>
 
 <template>
-  <WdPickList v-model:source="source" v-model:target="target" data-key="id">
+  <WiPickList v-model:source="source" v-model:target="target" data-key="id">
     <template #item="{ item }">
       <strong>{{ item.name }}</strong>
     </template>
-  </WdPickList>
+  </WiPickList>
 </template>
 ```
 

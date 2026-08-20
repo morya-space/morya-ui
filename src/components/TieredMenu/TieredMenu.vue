@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { TieredMenuItem, TieredMenuProps } from './types'
 
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWdConfig()
+const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
 const openIndex = ref<number | null>(null)
 const teleportTarget = computed(() =>
@@ -68,20 +68,20 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
   <div
     v-if="!popup"
     ref="root"
-    class="wd-tieredmenu"
+    class="wi-tieredmenu"
     role="menu"
   >
     <div
       v-for="(item, index) in model"
       :key="`${item.label ?? 'sep'}-${index}`"
-      class="wd-tieredmenu__row"
+      class="wi-tieredmenu__row"
       @mouseenter="openSubmenu(index, item)"
     >
-      <div v-if="item.separator" class="wd-tieredmenu__separator" role="separator" />
+      <div v-if="item.separator" class="wi-tieredmenu__separator" role="separator" />
       <button
         v-else
         type="button"
-        class="wd-tieredmenu__item"
+        class="wi-tieredmenu__item"
         role="menuitem"
         :disabled="item.disabled"
         :aria-haspopup="item.items?.length ? 'menu' : undefined"
@@ -89,19 +89,19 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
         @click="item.items?.length ? openSubmenu(index, item) : activate(item)"
       >
         <span>{{ item.label }}</span>
-        <span v-if="item.items?.length" class="wd-tieredmenu__caret" aria-hidden="true">▸</span>
+        <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">▸</span>
       </button>
       <div
         v-if="item.items?.length && openIndex === index"
-        class="wd-tieredmenu__submenu"
+        class="wi-tieredmenu__submenu"
         role="menu"
       >
         <template v-for="(child, childIndex) in item.items" :key="`${child.label ?? 'sep'}-${childIndex}`">
-          <div v-if="child.separator" class="wd-tieredmenu__separator" role="separator" />
+          <div v-if="child.separator" class="wi-tieredmenu__separator" role="separator" />
           <button
             v-else
             type="button"
-            class="wd-tieredmenu__item"
+            class="wi-tieredmenu__item"
             role="menuitem"
             :disabled="child.disabled"
             @click="activateChild(child)"
@@ -113,25 +113,25 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
     </div>
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-scale-fade">
+    <Transition name="wi-scale-fade">
       <div
         v-if="modelValue"
         ref="root"
-        class="wd-tieredmenu wd-tieredmenu--popup"
-        :class="{ 'wd-tieredmenu--teleported': teleported }"
+        class="wi-tieredmenu wi-tieredmenu--popup"
+        :class="{ 'wi-tieredmenu--teleported': teleported }"
         role="menu"
       >
         <div
           v-for="(item, index) in model"
           :key="`${item.label ?? 'sep'}-${index}`"
-          class="wd-tieredmenu__row"
+          class="wi-tieredmenu__row"
           @mouseenter="openSubmenu(index, item)"
         >
-          <div v-if="item.separator" class="wd-tieredmenu__separator" role="separator" />
+          <div v-if="item.separator" class="wi-tieredmenu__separator" role="separator" />
           <button
             v-else
             type="button"
-            class="wd-tieredmenu__item"
+            class="wi-tieredmenu__item"
             role="menuitem"
             :disabled="item.disabled"
             :aria-haspopup="item.items?.length ? 'menu' : undefined"
@@ -139,19 +139,19 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
             @click="item.items?.length ? openSubmenu(index, item) : activate(item)"
           >
             <span>{{ item.label }}</span>
-            <span v-if="item.items?.length" class="wd-tieredmenu__caret" aria-hidden="true">▸</span>
+            <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">▸</span>
           </button>
           <div
             v-if="item.items?.length && openIndex === index"
-            class="wd-tieredmenu__submenu"
+            class="wi-tieredmenu__submenu"
             role="menu"
           >
             <template v-for="(child, childIndex) in item.items" :key="`${child.label ?? 'sep'}-${childIndex}`">
-              <div v-if="child.separator" class="wd-tieredmenu__separator" role="separator" />
+              <div v-if="child.separator" class="wi-tieredmenu__separator" role="separator" />
               <button
                 v-else
                 type="button"
-                class="wd-tieredmenu__item"
+                class="wi-tieredmenu__item"
                 role="menuitem"
                 :disabled="child.disabled"
                 @click="activateChild(child)"

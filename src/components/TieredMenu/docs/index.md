@@ -11,14 +11,14 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { WdTieredMenu } from '@well-insight/ui'
+import { WiTieredMenu } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdTieredMenu } from '@well-insight/ui'
+import { WiTieredMenu } from '@well-insight/ui'
 
 const model = [
   {
@@ -30,7 +30,7 @@ const model = [
 </script>
 
 <template>
-  <WdTieredMenu :model="model" />
+  <WiTieredMenu :model="model" />
 </template>
 ```
 

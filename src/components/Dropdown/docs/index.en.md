@@ -8,12 +8,12 @@ description: Action menu overlay (not a form select). Unlike Select, it is used 
 
 Action menu overlay. Opens a set of actions from a trigger.
 
-**Difference from Select:** `WdDropdown` is a menu overlay; for form option selection, use `WdSelect`.
+**Difference from Select:** `WiDropdown` is a menu overlay; for form option selection, use `WiSelect`.
 
 ## Import
 
 ```ts
-import { WdDropdown, WdButton } from '@well-insight/ui'
+import { WiDropdown, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -21,7 +21,7 @@ import { WdDropdown, WdButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdDropdown } from '@well-insight/ui'
+import { WiButton, WiDropdown } from '@well-insight/ui'
 
 const open = ref(false)
 const items = [
@@ -37,11 +37,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <WdDropdown v-model="open" :items="items" @select="onSelect">
+  <WiDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <WdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <WiButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </WdDropdown>
+  </WiDropdown>
 </template>
 ```
 

@@ -8,12 +8,12 @@ description: 表单选择器，支持 invalid、size、fluid、showClear、filte
 
 表单选择器，用于从选项列表中选择单个值。
 
-**与 Dropdown 的区别：** `WdSelect` 是表单控件；动作菜单请使用 `WdDropdown`。
+**与 Dropdown 的区别：** `WiSelect` 是表单控件；动作菜单请使用 `WiDropdown`。
 
 ## 引入
 
 ```ts
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -21,7 +21,7 @@ import { WdSelect } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | number | undefined>()
 const options = [
@@ -32,7 +32,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
+  <WiSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
 </template>
 ```
 
@@ -43,7 +43,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | number | undefined>('design')
 const options = [
@@ -53,7 +53,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelect v-model="value" label="Team" :options="options" show-clear />
+  <WiSelect v-model="value" label="Team" :options="options" show-clear />
 </template>
 ```
 
@@ -62,7 +62,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | undefined>()
 const options = [
@@ -72,7 +72,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelect
+  <WiSelect
     v-model="value"
     :options="options"
     placeholder="Required"
@@ -86,7 +86,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const options = [
   { label: 'Design', value: 'design' },
@@ -95,7 +95,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelect model-value="design" :options="options" disabled />
+  <WiSelect model-value="design" :options="options" disabled />
 </template>
 ```
 
@@ -104,7 +104,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | undefined>()
 const options = [
@@ -115,9 +115,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-start">
-    <WdSelect v-model="value" :options="options" size="small" placeholder="Small" />
-    <WdSelect v-model="value" :options="options" placeholder="Normal" />
-    <WdSelect v-model="value" :options="options" size="large" placeholder="Large" />
+    <WiSelect v-model="value" :options="options" size="small" placeholder="Small" />
+    <WiSelect v-model="value" :options="options" placeholder="Normal" />
+    <WiSelect v-model="value" :options="options" size="large" placeholder="Large" />
   </div>
 </template>
 ```
@@ -127,7 +127,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | undefined>()
 const options = [
@@ -137,7 +137,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
+  <WiSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
 </template>
 ```
 
@@ -148,7 +148,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | undefined>()
 const cities = [
@@ -160,8 +160,8 @@ const cities = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdSelect v-model="value" :options="[]" empty-message="暂无选项" placeholder="Empty list" />
-    <WdSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
+    <WiSelect v-model="value" :options="[]" empty-message="暂无选项" placeholder="Empty list" />
+    <WiSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
   </div>
 </template>
 ```
@@ -173,7 +173,7 @@ const cities = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelect } from '@well-insight/ui'
+import { WiSelect } from '@well-insight/ui'
 
 const value = ref<string | undefined>()
 const options = [
@@ -183,7 +183,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
+  <WiSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
 </template>
 ```
 

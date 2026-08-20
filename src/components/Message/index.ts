@@ -1,4 +1,4 @@
-export { default as WdMessage } from './Message.vue'
+export { default as WiMessage } from './Message.vue'
 export { message, useMessage } from './message'
 export type {
   MessageHandle,
@@ -7,5 +7,5 @@ export type {
   MessageOptions,
   MessageProps,
   MessageSeverity,
-  WdRenderable,
+  WiRenderable,
 } from './types'

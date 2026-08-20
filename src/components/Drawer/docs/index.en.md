@@ -11,7 +11,7 @@ Side drawer that slides in from the screen edge. Suited to navigation, filters, 
 ## Import
 
 ```ts
-import { WdDrawer, WdButton } from '@well-insight/ui'
+import { WiDrawer, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,17 +19,17 @@ import { WdDrawer, WdButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdDrawer } from '@well-insight/ui'
+import { WiButton, WiDrawer } from '@well-insight/ui'
 
 const open = ref(false)
 </script>
 
 <template>
   <div>
-    <WdButton label="Open Drawer" @click="open = true" />
-    <WdDrawer v-model="open" header="Navigation">
+    <WiButton label="Open Drawer" @click="open = true" />
+    <WiDrawer v-model="open" header="Navigation">
       <p style="margin:0">Drawer body content. Esc or mask click closes by default.</p>
-    </WdDrawer>
+    </WiDrawer>
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ Supports `left` / `right` / `top` / `bottom`.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdDrawer } from '@well-insight/ui'
+import { WiButton, WiDrawer } from '@well-insight/ui'
 
 const open = ref(false)
 const position = ref<'left' | 'right' | 'top' | 'bottom'>('right')
@@ -54,13 +54,13 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WdButton label="Left" size="small" @click="openAt('left')" />
-    <WdButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
-    <WdButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <WdButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
-    <WdDrawer v-model="open" :header="`Position: ${position}`" :position="position">
+    <WiButton label="Left" size="small" @click="openAt('left')" />
+    <WiButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
+    <WiButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
+    <WiButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
+    <WiDrawer v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">Use <code>dismissable</code> to control mask dismiss.</p>
-    </WdDrawer>
+    </WiDrawer>
   </div>
 </template>
 ```

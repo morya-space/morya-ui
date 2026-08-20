@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdFloatLabel from './FloatLabel.vue'
+import WiFloatLabel from './FloatLabel.vue'
 
-describe('WdFloatLabel', () => {
+describe('WiFloatLabel', () => {
   it('renders default slot and label prop', () => {
-    const wrapper = mount(WdFloatLabel, {
+    const wrapper = mount(WiFloatLabel, {
       props: { label: 'Email' },
       slots: { default: '<input placeholder=" " />' },
     })
-    expect(wrapper.classes()).toContain('wd-float-label')
+    expect(wrapper.classes()).toContain('wi-float-label')
     expect(wrapper.get('label').text()).toBe('Email')
     expect(wrapper.find('input').exists()).toBe(true)
   })
 
   it('supports label slot', () => {
-    const wrapper = mount(WdFloatLabel, {
+    const wrapper = mount(WiFloatLabel, {
       slots: {
         default: '<input placeholder=" " />',
         label: 'Name',

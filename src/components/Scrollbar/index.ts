@@ -1,4 +1,4 @@
-export { default as WdScrollbar } from './Scrollbar.vue'
+export { default as WiScrollbar } from './Scrollbar.vue'
 export type {
   ScrollbarAriaOrientation,
   ScrollbarDirection,

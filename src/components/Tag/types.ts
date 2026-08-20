@@ -1,7 +1,7 @@
-import type { WdTagSeverity } from '../../shared/types'
+import type { WiTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type TagSeverity = WdTagSeverity | 'warning'
+export type TagSeverity = WiTagSeverity | 'warning'
 
 export interface TagProps {
   /** Display text. Ignored when default slot has content. */
@@ -13,6 +13,6 @@ export interface TagProps {
   severity?: TagSeverity
   /** Fully rounded corners. */
   rounded?: boolean
-  /** Icon name from WdIcon. */
+  /** Icon name from WiIcon. */
   icon?: IconName
 }

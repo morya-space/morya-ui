@@ -1,4 +1,4 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { WiSizeInput } from '../../shared/types'
 
 export interface InputNumberProps {
   modelValue?: number | null
@@ -9,7 +9,7 @@ export interface InputNumberProps {
   disabled?: boolean
   invalid?: boolean
   fluid?: boolean
-  size?: WdSizeInput
+  size?: WiSizeInput
   showButtons?: boolean
   id?: string
 }

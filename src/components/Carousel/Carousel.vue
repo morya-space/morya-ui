@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { CarouselProps } from './types'
 
 const props = withDefaults(defineProps<CarouselProps>(), {
@@ -13,7 +13,7 @@ const emit = defineEmits<{
 }>()
 
 const page = ref(0)
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const maxPage = computed(() => Math.max(0, props.value.length - props.numVisible))
 
@@ -47,21 +47,21 @@ function next() {
 </script>
 
 <template>
-  <div class="wd-carousel">
+  <div class="wi-carousel">
     <button
       type="button"
-      class="wd-carousel__nav wd-carousel__nav--prev"
+      class="wi-carousel__nav wi-carousel__nav--prev"
       :aria-label="locale.prev"
       :disabled="!circular && page <= 0"
       @click="prev"
     >
       ‹
     </button>
-    <div class="wd-carousel__viewport">
+    <div class="wi-carousel__viewport">
       <div
         v-for="entry in visibleItems"
         :key="entry.index"
-        class="wd-carousel__item"
+        class="wi-carousel__item"
         :style="{ flex: `0 0 ${100 / numVisible}%` }"
       >
         <slot name="item" :item="entry.item" :index="entry.index">
@@ -71,7 +71,7 @@ function next() {
     </div>
     <button
       type="button"
-      class="wd-carousel__nav wd-carousel__nav--next"
+      class="wi-carousel__nav wi-carousel__nav--next"
       :aria-label="locale.next"
       :disabled="!circular && page >= maxPage"
       @click="next"

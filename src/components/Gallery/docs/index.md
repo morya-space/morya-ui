@@ -11,7 +11,7 @@ description: 主图 + 缩略图的图片画廊。
 ## 引入
 
 ```ts
-import { WdGallery } from '@well-insight/ui'
+import { WiGallery } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdGallery } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdGallery } from '@well-insight/ui'
+import { WiGallery } from '@well-insight/ui'
 
 const activeIndex = ref(0)
 const images = [
@@ -30,7 +30,7 @@ const images = [
 </script>
 
 <template>
-  <WdGallery v-model:active-index="activeIndex" :images="images" />
+  <WiGallery v-model:active-index="activeIndex" :images="images" />
 </template>
 ```
 

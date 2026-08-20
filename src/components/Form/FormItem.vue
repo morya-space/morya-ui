@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, onBeforeUnmount, useId, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { WD_FORM_ERRORS_KEY, WD_FORM_KEY } from './context'
+import { useWiLocale } from '../../locale'
+import { WI_FORM_ERRORS_KEY, WI_FORM_KEY } from './context'
 import type { FormItemProps } from './types'
 
 const props = withDefaults(defineProps<FormItemProps>(), {
@@ -9,9 +9,9 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   invalid: false,
 })
 
-const form = inject(WD_FORM_KEY, null)
-const formErrors = inject(WD_FORM_ERRORS_KEY, null)
-const locale = useWdLocale()
+const form = inject(WI_FORM_KEY, null)
+const formErrors = inject(WI_FORM_ERRORS_KEY, null)
+const locale = useWiLocale()
 const autoId = useId()
 
 const labelPosition = computed(() => props.labelPosition ?? form?.value.labelPosition ?? 'top')
@@ -25,16 +25,16 @@ const internalError = computed(() => {
 })
 const displayError = computed(() => props.error ?? internalError.value)
 const isInvalid = computed(() => props.invalid || Boolean(displayError.value))
-const controlId = computed(() => props.for ?? `wd-form-item-${autoId}`)
+const controlId = computed(() => props.for ?? `wi-form-item-${autoId}`)
 const messageId = computed(() => `${controlId.value}-message`)
 const requiredLabel = computed(() => locale.value.required)
 
 const rootClass = computed(() => [
-  'wd-form-item',
-  `wd-form-item--label-${labelPosition.value}`,
+  'wi-form-item',
+  `wi-form-item--label-${labelPosition.value}`,
   {
-    'wd-form-item--invalid': isInvalid.value,
-    'wd-form-item--required': props.required,
+    'wi-form-item--invalid': isInvalid.value,
+    'wi-form-item--required': props.required,
   },
 ])
 
@@ -74,15 +74,15 @@ function onChange() {
   <div :class="rootClass" @focusout="onFocusOut" @change="onChange">
     <label
       v-if="label"
-      class="wd-form-item__label"
+      class="wi-form-item__label"
       :for="controlId"
       :style="labelStyle"
     >
-      <span v-if="showRequireMark" class="wd-form-item__required" :aria-label="requiredLabel">*</span>
+      <span v-if="showRequireMark" class="wi-form-item__required" :aria-label="requiredLabel">*</span>
       {{ label }}
     </label>
-    <div class="wd-form-item__body">
-      <div class="wd-form-item__control">
+    <div class="wi-form-item__body">
+      <div class="wi-form-item__control">
         <slot
           :id="controlId"
           :invalid="isInvalid"
@@ -93,7 +93,7 @@ function onChange() {
       <p
         v-if="displayError"
         :id="messageId"
-        class="wd-form-item__error"
+        class="wi-form-item__error"
         role="alert"
       >
         {{ displayError }}
@@ -101,7 +101,7 @@ function onChange() {
       <p
         v-else-if="help"
         :id="messageId"
-        class="wd-form-item__help"
+        class="wi-form-item__help"
       >
         {{ help }}
       </p>

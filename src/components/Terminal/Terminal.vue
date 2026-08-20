@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { TerminalProps } from './types'
 
 withDefaults(defineProps<TerminalProps>(), {
@@ -12,7 +12,7 @@ const emit = defineEmits<{
   (event: 'command', value: string): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 const draft = ref('')
 const history = ref<string[]>([])
 const bodyRef = ref<HTMLElement | null>(null)
@@ -29,19 +29,19 @@ async function submit() {
 </script>
 
 <template>
-  <div class="wd-terminal" role="application" :aria-label="locale.terminal">
-    <div ref="bodyRef" class="wd-terminal__body">
-      <div v-if="welcomeMessage" class="wd-terminal__welcome">{{ welcomeMessage }}</div>
-      <div v-for="(line, index) in history" :key="`${line}-${index}`" class="wd-terminal__line">
-        <span class="wd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+  <div class="wi-terminal" role="application" :aria-label="locale.terminal">
+    <div ref="bodyRef" class="wi-terminal__body">
+      <div v-if="welcomeMessage" class="wi-terminal__welcome">{{ welcomeMessage }}</div>
+      <div v-for="(line, index) in history" :key="`${line}-${index}`" class="wi-terminal__line">
+        <span class="wi-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
         <span>{{ line }}</span>
       </div>
     </div>
-    <form class="wd-terminal__form" @submit.prevent="submit">
-      <span class="wd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+    <form class="wi-terminal__form" @submit.prevent="submit">
+      <span class="wi-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
       <input
         v-model="draft"
-        class="wd-terminal__input"
+        class="wi-terminal__input"
         type="text"
         :aria-label="locale.commandInput"
         autocomplete="off"

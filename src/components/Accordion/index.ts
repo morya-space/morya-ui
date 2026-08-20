@@ -1,2 +1,2 @@
-export { default as WdAccordion } from './Accordion.vue'
+export { default as WiAccordion } from './Accordion.vue'
 export type { AccordionEmits, AccordionProps, AccordionTab } from './types'

@@ -1,36 +1,36 @@
 import { computed, inject, provide, type App, type InjectionKey, type MaybeRefOrGetter, toValue } from 'vue'
 import { zhCN } from '../locale/zh-CN'
-import type { WdLocaleConfig } from '../locale/types'
+import type { WiLocaleConfig } from '../locale/types'
 import { applyDensity, type DensityPreference } from '../theme'
-import type { WdAppendTo } from './overlay'
-import { setWdOverlayAppContext } from './overlayHost'
-import type { WdInputVariant, WdSizeInput } from './types'
+import type { WiAppendTo } from './overlay'
+import { setWiOverlayAppContext } from './overlayHost'
+import type { WiInputVariant, WiSizeInput } from './types'
 
-export type WdDensity = DensityPreference
-export type { WdLocaleConfig }
+export type WiDensity = DensityPreference
+export type { WiLocaleConfig }
 
 /** Application-level default configuration. */
-export interface WdGlobalConfig {
+export interface WiGlobalConfig {
   /** Default Teleport target for overlays. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
   /** Default control size for form components that support `size`. */
-  size?: WdSizeInput
+  size?: WiSizeInput
   /** Default input surface style. */
-  inputVariant?: WdInputVariant
+  inputVariant?: WiInputVariant
   /** Starting z-index budget for overlays (modal / menu / tooltip layers). */
   zIndex?: number
   /**
-   * Global content density. Scales spacing + control heights via `data-wd-density`.
+   * Global content density. Scales spacing + control heights via `data-wi-density`.
    * Local ConfigProvider scopes to its subtree; plugin applies on `documentElement`.
    */
-  density?: WdDensity
+  density?: WiDensity
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
-  locale?: WdLocaleConfig
+  locale?: WiLocaleConfig
 }
 
-export const WD_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<WdGlobalConfig>> = Symbol('wdConfig')
+export const WI_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<WiGlobalConfig>> = Symbol('wiConfig')
 
-const defaultConfig: Required<Pick<WdGlobalConfig, 'appendTo' | 'zIndex' | 'density'>> & WdGlobalConfig = {
+const defaultConfig: Required<Pick<WiGlobalConfig, 'appendTo' | 'zIndex' | 'density'>> & WiGlobalConfig = {
   appendTo: 'body',
   zIndex: 1000,
   density: 'comfortable',
@@ -38,7 +38,7 @@ const defaultConfig: Required<Pick<WdGlobalConfig, 'appendTo' | 'zIndex' | 'dens
   locale: { ...zhCN },
 }
 
-export function getDefaultWdConfig(): WdGlobalConfig {
+export function getDefaultWiConfig(): WiGlobalConfig {
   return {
     appendTo: defaultConfig.appendTo,
     zIndex: defaultConfig.zIndex,
@@ -48,19 +48,19 @@ export function getDefaultWdConfig(): WdGlobalConfig {
   }
 }
 
-export function provideWdConfig(config: MaybeRefOrGetter<WdGlobalConfig>) {
-  provide(WD_CONFIG_KEY, config)
+export function provideWiConfig(config: MaybeRefOrGetter<WiGlobalConfig>) {
+  provide(WI_CONFIG_KEY, config)
 }
 
-export function useWdConfig() {
-  const injected = inject(WD_CONFIG_KEY, null)
-  return computed<WdGlobalConfig>(() => {
+export function useWiConfig() {
+  const injected = inject(WI_CONFIG_KEY, null)
+  return computed<WiGlobalConfig>(() => {
     const value = injected ? toValue(injected) : {}
     return {
-      ...getDefaultWdConfig(),
+      ...getDefaultWiConfig(),
       ...value,
       locale: {
-        ...getDefaultWdConfig().locale,
+        ...getDefaultWiConfig().locale,
         ...value.locale,
       },
     }
@@ -69,9 +69,9 @@ export function useWdConfig() {
 
 /** Resolve overlay mount target: local props > ConfigProvider > body. */
 export function resolveConfiguredAppendTo(
-  local: WdAppendTo | undefined,
-  configAppendTo: WdAppendTo | undefined,
-): WdAppendTo {
+  local: WiAppendTo | undefined,
+  configAppendTo: WiAppendTo | undefined,
+): WiAppendTo {
   if (local !== undefined) return local
   if (configAppendTo !== undefined) return configAppendTo
   return 'body'
@@ -88,16 +88,16 @@ export function resolveConfiguredAppendTo(
  * createApp(App).use(createWellInsight({ appendTo: 'body', density: 'compact' })).mount('#app')
  * ```
  */
-export function createWellInsight(options: WdGlobalConfig = {}) {
+export function createWellInsight(options: WiGlobalConfig = {}) {
   return {
     install(app: App) {
-      app.provide(WD_CONFIG_KEY, options)
+      app.provide(WI_CONFIG_KEY, options)
       app.config.globalProperties.$wd = options
-      setWdOverlayAppContext(app._context)
+      setWiOverlayAppContext(app._context)
       if (typeof document !== 'undefined') {
         if (options.density) applyDensity(options.density)
         if (options.zIndex != null) {
-          document.documentElement.style.setProperty('--wd-z-base', String(options.zIndex))
+          document.documentElement.style.setProperty('--wi-z-base', String(options.zIndex))
         }
       }
     },
@@ -106,6 +106,6 @@ export function createWellInsight(options: WdGlobalConfig = {}) {
 
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $wd?: WdGlobalConfig
+    $wd?: WiGlobalConfig
   }
 }

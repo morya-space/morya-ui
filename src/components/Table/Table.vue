@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { formatLocale, useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
-import WdCheckbox from '../Checkbox/Checkbox.vue'
-import WdPagination from '../Pagination/Pagination.vue'
-import WdProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
-import WdIcon from '../Icon/Icon.vue'
+import WiCheckbox from '../Checkbox/Checkbox.vue'
+import WiPagination from '../Pagination/Pagination.vue'
+import WiProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import WiIcon from '../Icon/Icon.vue'
 import { computeColumnLayout, computeFixedOffsets, TABLE_SELECTION_WIDTH } from './layout'
 import type {
   TableColumn,
@@ -34,8 +34,8 @@ const props = withDefaults(defineProps<TableProps>(), {
 })
 
 const emit = defineEmits<TableEmits>()
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 const resolvedEmptyText = computed(
   () => props.emptyText ?? locale.value.emptyMessage,
@@ -280,30 +280,30 @@ function onRowClick(row: Record<string, unknown>, index: number) {
 
 function fixedClass(column: TableColumn) {
   if (!column.fixed) return undefined
-  return `wd-table__cell--fixed-${column.fixed}`
+  return `wi-table__cell--fixed-${column.fixed}`
 }
 </script>
 
 <template>
   <div
-    class="wd-table-wrapper"
+    class="wi-table-wrapper"
     :class="[
       {
-        'wd-table-wrapper--loading': loading,
-        'wd-table-wrapper--bordered': bordered,
-        'wd-table-wrapper--striped': striped,
-        'wd-table-wrapper--row-hover': rowHover,
+        'wi-table-wrapper--loading': loading,
+        'wi-table-wrapper--bordered': bordered,
+        'wi-table-wrapper--striped': striped,
+        'wi-table-wrapper--row-hover': rowHover,
       },
     ]"
   >
     <div
       ref="scrollRef"
-      class="wd-table-scroll"
-      :class="{ 'wd-table-scroll--x': layout.scrollX }"
+      class="wi-table-scroll"
+      :class="{ 'wi-table-scroll--x': layout.scrollX }"
     >
       <table
-        class="wd-table"
-        :class="`wd-table--${sizeClass}`"
+        class="wi-table"
+        :class="`wi-table--${sizeClass}`"
         :style="tableStyle"
       >
         <colgroup>
@@ -317,11 +317,11 @@ function fixedClass(column: TableColumn) {
           <tr>
             <th
               v-if="selectionMode"
-              class="wd-table__selection wd-table__cell--fixed-left"
+              class="wi-table__selection wi-table__cell--fixed-left"
               scope="col"
               :style="selectionStyle()"
             >
-              <WdCheckbox
+              <WiCheckbox
                 v-if="selectionMode === 'multiple'"
                 :model-value="allPageSelected"
                 :aria-label="locale.selectAllPage"
@@ -333,9 +333,9 @@ function fixedClass(column: TableColumn) {
               :key="column.key"
               scope="col"
               :class="[
-                `wd-table__cell--${column.align ?? 'start'}`,
+                `wi-table__cell--${column.align ?? 'start'}`,
                 fixedClass(column),
-                { 'wd-table__th--sortable': column.sortable },
+                { 'wi-table__th--sortable': column.sortable },
               ]"
               :style="columnStyle(column)"
               :aria-sort="
@@ -350,31 +350,31 @@ function fixedClass(column: TableColumn) {
                     : undefined
               "
             >
-              <div class="wd-table__th-inner">
+              <div class="wi-table__th-inner">
                 <button
                   v-if="column.sortable"
                   type="button"
-                  class="wd-table__sort"
+                  class="wi-table__sort"
                   @click="toggleSort(column.key, true)"
                 >
                   <span>{{ column.label }}</span>
-                  <span class="wd-table__sort-icon" aria-hidden="true">{{ sortIndicator(column.key) }}</span>
+                  <span class="wi-table__sort-icon" aria-hidden="true">{{ sortIndicator(column.key) }}</span>
                 </button>
                 <span v-else>{{ column.label }}</span>
-                <div v-if="column.filterable" class="wd-table__filter">
+                <div v-if="column.filterable" class="wi-table__filter">
                   <button
                     type="button"
-                    class="wd-table__filter-btn"
+                    class="wi-table__filter-btn"
                     :aria-expanded="filterOpenKey === column.key"
                     :aria-label="formatLocale(locale.filterColumn, { label: column.label })"
                     @click.stop="filterOpenKey = filterOpenKey === column.key ? null : column.key"
                   >
-                    <WdIcon name="filter" size="sm" />
+                    <WiIcon name="filter" size="sm" />
                   </button>
-                  <div v-if="filterOpenKey === column.key" class="wd-table__filter-panel" @click.stop>
+                  <div v-if="filterOpenKey === column.key" class="wi-table__filter-panel" @click.stop>
                     <select
                       v-if="column.filters?.length"
-                      class="wd-table__filter-control"
+                      class="wi-table__filter-control"
                       :value="String(innerFilters[column.key] ?? '')"
                       @change="setFilter(column.key, ($event.target as HTMLSelectElement).value || null)"
                     >
@@ -389,7 +389,7 @@ function fixedClass(column: TableColumn) {
                     </select>
                     <input
                       v-else
-                      class="wd-table__filter-control"
+                      class="wi-table__filter-control"
                       type="search"
                       :value="String(innerFilters[column.key] ?? '')"
                       :placeholder="locale.filterOptions"
@@ -406,18 +406,18 @@ function fixedClass(column: TableColumn) {
             v-for="(row, index) in displayRows"
             :key="String(rowIdentity(row, index))"
             :class="{
-              'wd-table__row--selected': isSelected(row, index),
-              'wd-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
+              'wi-table__row--selected': isSelected(row, index),
+              'wi-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
             }"
             @click="onRowClick(row, index)"
           >
             <td
               v-if="selectionMode"
-              class="wd-table__selection wd-table__cell--fixed-left"
+              class="wi-table__selection wi-table__cell--fixed-left"
               :style="selectionStyle()"
               @click.stop
             >
-              <WdCheckbox
+              <WiCheckbox
                 :model-value="isSelected(row, index)"
                 :aria-label="formatLocale(locale.selectRow, { index: index + 1 })"
                 @update:model-value="toggleRowSelection(row, index)"
@@ -426,7 +426,7 @@ function fixedClass(column: TableColumn) {
             <td
               v-for="column in columns"
               :key="column.key"
-              :class="[`wd-table__cell--${column.align ?? 'start'}`, fixedClass(column)]"
+              :class="[`wi-table__cell--${column.align ?? 'start'}`, fixedClass(column)]"
               :style="columnStyle(column)"
             >
               <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
@@ -435,12 +435,12 @@ function fixedClass(column: TableColumn) {
             </td>
           </tr>
           <tr v-if="showEmpty">
-            <td class="wd-table__empty" :colspan="colSpan">
+            <td class="wi-table__empty" :colspan="colSpan">
               <slot name="empty">
-                <div class="wd-table__empty-content">
-                  <div class="wd-table__empty-glyph" aria-hidden="true">∅</div>
-                  <p class="wd-table__empty-title">{{ resolvedEmptyText }}</p>
-                  <p v-if="emptyDescription" class="wd-table__empty-desc">{{ emptyDescription }}</p>
+                <div class="wi-table__empty-content">
+                  <div class="wi-table__empty-glyph" aria-hidden="true">∅</div>
+                  <p class="wi-table__empty-title">{{ resolvedEmptyText }}</p>
+                  <p v-if="emptyDescription" class="wi-table__empty-desc">{{ emptyDescription }}</p>
                 </div>
               </slot>
             </td>
@@ -449,8 +449,8 @@ function fixedClass(column: TableColumn) {
       </table>
     </div>
 
-    <div v-if="paginator" class="wd-table__paginator">
-      <WdPagination
+    <div v-if="paginator" class="wi-table__paginator">
+      <WiPagination
         :model-value="innerPage"
         :total-records="pageCountRows"
         :rows="rowsPerPage"
@@ -460,13 +460,13 @@ function fixedClass(column: TableColumn) {
 
     <div
       v-if="loading"
-      class="wd-table__loading"
+      class="wi-table__loading"
       role="status"
       :aria-label="resolvedLoadingText"
     >
       <slot name="loading">
-        <WdProgressSpinner />
-        <span class="wd-table__loading-text">{{ resolvedLoadingText }}</span>
+        <WiProgressSpinner />
+        <span class="wi-table__loading-text">{{ resolvedLoadingText }}</span>
       </slot>
     </div>
   </div>

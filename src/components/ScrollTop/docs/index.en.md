@@ -11,20 +11,20 @@ Listens to window or parent scroll and jumps back to the top.
 ## Import
 
 ```ts
-import { WdScrollTop } from '@well-insight/ui'
+import { WiScrollTop } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollTop } from '@well-insight/ui'
+import { WiScrollTop } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="height: 8rem; overflow: auto; position: relative">
     <div style="height: 40rem">Scroll down…</div>
-    <WdScrollTop :threshold="80" target="parent" />
+    <WiScrollTop :threshold="80" target="parent" />
   </div>
 </template>
 ```

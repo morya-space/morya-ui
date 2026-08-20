@@ -9,10 +9,10 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
 })
 
 const rootClass = computed(() => [
-  'wd-skeleton',
+  'wi-skeleton',
   {
-    'wd-skeleton--circle': props.shape === 'circle',
-    'wd-skeleton--wave': props.animation === 'wave',
+    'wi-skeleton--circle': props.shape === 'circle',
+    'wi-skeleton--wave': props.animation === 'wave',
   },
 ])
 

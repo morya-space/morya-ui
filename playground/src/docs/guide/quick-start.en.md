@@ -35,15 +35,15 @@ createApp(App).mount('#app')
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdInput } from '@well-insight/ui'
+import { WiButton, WiInput } from '@well-insight/ui'
 
 const name = ref('')
 </script>
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WdInput v-model="name" label="Name" placeholder="Enter a name" />
-    <WdButton label="Submit" @click="() => undefined" />
+    <WiInput v-model="name" label="Name" placeholder="Enter a name" />
+    <WiButton label="Submit" @click="() => undefined" />
   </div>
 </template>
 ```

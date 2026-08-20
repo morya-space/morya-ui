@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { SliderProps } from './types'
 
 const props = withDefaults(defineProps<SliderProps>(), {
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
   disabled: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | number[]): void }>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const singleValue = computed(() => {
   if (Array.isArray(props.modelValue)) return props.modelValue[0] ?? props.min
@@ -27,10 +27,10 @@ const rangeValues = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-slider',
+  'wi-slider',
   {
-    'wd-slider--disabled': props.disabled,
-    'wd-slider--range': props.range,
+    'wi-slider--disabled': props.disabled,
+    'wi-slider--range': props.range,
   },
 ])
 
@@ -55,7 +55,7 @@ function emitRange(index: 0 | 1, event: Event) {
   <div :class="rootClass">
     <template v-if="range">
       <input
-        class="wd-slider__input wd-slider__input--start"
+        class="wi-slider__input wi-slider__input--start"
         type="range"
         :min="min"
         :max="max"
@@ -66,7 +66,7 @@ function emitRange(index: 0 | 1, event: Event) {
         @input="emitRange(0, $event)"
       />
       <input
-        class="wd-slider__input wd-slider__input--end"
+        class="wi-slider__input wi-slider__input--end"
         type="range"
         :min="min"
         :max="max"
@@ -79,7 +79,7 @@ function emitRange(index: 0 | 1, event: Event) {
     </template>
     <input
       v-else
-      class="wd-slider__input"
+      class="wi-slider__input"
       type="range"
       :min="min"
       :max="max"

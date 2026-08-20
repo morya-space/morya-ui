@@ -11,7 +11,7 @@ description: 悬浮快捷操作按钮组。
 ## 引入
 
 ```ts
-import { WdSpeedDial } from '@well-insight/ui'
+import { WiSpeedDial } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdSpeedDial } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSpeedDial } from '@well-insight/ui'
+import { WiSpeedDial } from '@well-insight/ui'
 
 const open = ref(false)
 const items = [
@@ -31,7 +31,7 @@ const items = [
 
 <template>
   <div style="min-height:8rem;display:flex;align-items:flex-end;justify-content:center">
-    <WdSpeedDial v-model="open" :model="items" direction="up" />
+    <WiSpeedDial v-model="open" :model="items" direction="up" />
   </div>
 </template>
 ```
