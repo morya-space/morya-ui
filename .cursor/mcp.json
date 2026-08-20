@@ -7,6 +7,10 @@
     "primevue": {
       "command": "npx",
       "args": ["-y", "@primevue/mcp"]
+    },
+    "well-insight-ui": {
+      "command": "node",
+      "args": ["packages/ui-mcp/bin/well-insight-ui-mcp.js"]
     }
   }
 }

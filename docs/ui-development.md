@@ -52,3 +52,13 @@ Before publishing, verify:
 2. `build`, `typecheck`, and `test` pass
 3. `files` includes `dist` and `CHANGELOG.md`
 4. peer dependency: `vue`
+
+## Optional: MCP package
+
+`@well-insight/ui-mcp` is an optional stdio server for clients that support [MCP](https://modelcontextprotocol.io/) (it does not replace installing `@well-insight/ui`). Public docs: docs site [MCP](/docs/mcp). Implementation: [packages/ui-mcp/README.md](../packages/ui-mcp/README.md).
+
+```bash
+pnpm mcp:build
+pnpm release:mcp -- --dry-run
+pnpm release:mcp
+```

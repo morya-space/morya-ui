@@ -2,11 +2,12 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-Vue 3 component library for Well Insight — themed UI primitives for forms, overlays, data display, and feedback.
+Open-source Vue 3 component library for Well Insight — themed UI primitives for forms, overlays, data display, and feedback.
 
 | | |
 | --- | --- |
 | **npm** | [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui) |
+| **Docs** | Local `pnpm dev` → http://localhost:5182 |
 | **Source** | [GitHub](https://github.com/well-insight/well-insight-ui) |
 | **Changelog** | [CHANGELOG.md](./CHANGELOG.md) · [English](./CHANGELOG.en.md) |
 
@@ -53,9 +54,11 @@ const name = ref('')
 
 Tree-shaking friendly: import only what you use from `@well-insight/ui`. Styles are separate — always import `@well-insight/ui/styles.css`.
 
-## App defaults (`createWellInsight`)
+For a fuller walkthrough, see the docs site [Quick start](./playground/src/docs/guide/quick-start.en.md).
 
-Optional Vue plugin for global defaults (overlay mount, size, density, locale, z-index):
+## App defaults
+
+Optional Vue plugin `createWellInsight` for global defaults (overlay mount, size, density, locale, z-index):
 
 ```ts
 import { createApp } from 'vue'
@@ -89,6 +92,8 @@ For subtree overrides, wrap with `<WdConfigProvider>`. Resolution order:
 
 **component props → `WdConfigProvider` → `createWellInsight` → built-in defaults**
 
+See the docs site [Configuration](./playground/src/docs/guide/config.en.md).
+
 ## Locale
 
 Built-in copy defaults to **Chinese**. Switch to English or override keys:
@@ -118,6 +123,8 @@ const { theme, isDark, setTheme, toggleTheme } = useTheme()
 
 `useTheme` persists the choice in `localStorage` and respects `prefers-color-scheme` when unset. Related APIs: `useDensity`, `useMotion`, `applyTheme`, `lightTokens`, `darkTokens`.
 
+See the docs site [Theme](./playground/src/docs/guide/theme.en.md).
+
 ## Feedback APIs
 
 Imperative feedback without mounting hosts yourself (hosts auto-mount when needed):
@@ -133,11 +140,11 @@ toast.add({ severity: 'info', summary: 'Notice', detail: 'Details here' })
 
 You can still render `<WdMessage />` / `<WdToast />` when you need a controlled host.
 
-## What you import
+## Exports
 
 | Import | Purpose |
 | --- | --- |
-| `@well-insight/ui` | Components (`WdButton`, `WdTable`, …), `createWellInsight`, `WdConfigProvider`, theme & locale helpers, `message` / `toast` |
+| `@well-insight/ui` | Components, `createWellInsight`, `WdConfigProvider`, theme & locale helpers, `message` / `toast` |
 | `@well-insight/ui/styles.css` | Required stylesheet (tokens + component styles) |
 
 TypeScript types are included via the package `exports`.
@@ -146,13 +153,20 @@ TypeScript types are included via the package `exports`.
 
 ```bash
 pnpm install
-pnpm dev          # docs playground → http://localhost:5182
-pnpm build        # library build → dist/
+pnpm dev          # docs site → http://localhost:5182
+pnpm build        # library → dist/
+pnpm build:docs   # static docs site
 pnpm test
 pnpm typecheck
 ```
 
-Maintainer notes (build, release, commits): [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md) · [UI development](./docs/ui-development.md) · [release scripts](./scripts/README.md).
+Maintainer docs: [Development guide](./docs/DEVELOPMENT.md) · [UI development](./docs/ui-development.md) · [Release scripts](./scripts/README.md)
+
+## Optional: MCP
+
+If you use an AI client that supports the [Model Context Protocol](https://modelcontextprotocol.io/), you can also install [`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp) so assistants look up this library’s real docs. **This does not replace** `pnpm add @well-insight/ui`.
+
+Details: docs site [MCP](./playground/src/docs/guide/mcp.en.md).
 
 ## License
 

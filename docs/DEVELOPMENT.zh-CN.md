@@ -11,6 +11,7 @@
 | `src/` | 组件库源码（组件、主题、locale、样式） |
 | `playground/` | 文档站（Vite + Markdown 预览） |
 | `scripts/` | 发版与 CHANGELOG 工具 |
+| `packages/ui-mcp/` | `@well-insight/ui-mcp` stdio MCP 服务 |
 | `docs/` | 维护者文档 |
 | `dist/` | 构建产物（勿手改） |
 
@@ -34,6 +35,9 @@ pnpm release:tag          # 打 v{version} 标签
 pnpm release:push         # 推送分支与 tag
 pnpm release:npm          # 仅 build + publish（需先改 version）
 pnpm release:git          # 仅补 tag / release 分支
+pnpm release:mcp          # 发布 @well-insight/ui-mcp（同步 UI 版本）
+pnpm mcp:build            # 构建 @well-insight/ui-mcp（文档目录 + stdio 服务）
+pnpm mcp:start            # 本地启动 MCP（stdio）
 ```
 
 ## 相关文档
@@ -43,4 +47,5 @@ pnpm release:git          # 仅补 tag / release 分支
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | 提交规范 |
 | [UI 开发](./ui-development.zh-CN.md) | 构建与发版 |
 | [scripts/README.md](../scripts/README.md) | 发版脚本说明 |
+| [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP 服务 |
 | [AGENTS.md](../AGENTS.md) | Agent / Skills 使用规则 |
