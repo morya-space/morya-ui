@@ -287,11 +287,16 @@ export type { WiGlobalConfig, WiLocaleConfig, WiDensity } from './components/Con
 export {
   createWellInsight,
   getDefaultWiConfig,
+  installWellInsight,
   provideWiConfig,
   resolveConfiguredAppendTo,
   useWiConfig,
+  WellInsight,
   WI_CONFIG_KEY,
 } from './shared/config'
+export type { WiInstallerOptions } from './shared/config'
+export { wiComponentNames, wiComponents } from './component-registry'
+export { WellInsight as default } from './shared/config'
 export { enUS, formatLocale, mergeLocale, useWiLocale, zhCN } from './locale'
 export type { WiLocaleMessages, WiLocaleName } from './locale'
 export type {

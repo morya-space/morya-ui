@@ -1,4 +1,15 @@
-import { computed, inject, provide, type App, type InjectionKey, type MaybeRefOrGetter, toValue } from 'vue'
+import {
+  computed,
+  inject,
+  provide,
+  type App,
+  type Component,
+  type InjectionKey,
+  type MaybeRefOrGetter,
+  type Plugin,
+  toValue,
+} from 'vue'
+import { wiComponents } from '../component-registry'
 import { zhCN } from '../locale/zh-CN'
 import type { WiLocaleConfig } from '../locale/types'
 import { applyDensity, type DensityPreference } from '../theme'
@@ -26,6 +37,22 @@ export interface WiGlobalConfig {
   density?: WiDensity
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
   locale?: WiLocaleConfig
+}
+
+/**
+ * Options for `app.use(WellInsight, options)` / `createWellInsight(options)`.
+ *
+ * By default every public component is registered globally.
+ * Pass `components: false` to only install config, or pass a list for partial registration.
+ */
+export interface WiInstallerOptions extends WiGlobalConfig {
+  /**
+   * Components to register globally.
+   * - omit / `undefined`: register all
+   * - `false` / `[]`: register none (config only)
+   * - `Component[]`: register the given components (matched by registry name)
+   */
+  components?: Component[] | false
 }
 
 export const WI_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<WiGlobalConfig>> = Symbol('wiConfig')
@@ -77,35 +104,79 @@ export function resolveConfiguredAppendTo(
   return 'body'
 }
 
+function resolveComponentsToRegister(components: WiInstallerOptions['components']): Array<[string, Component]> {
+  if (components === false) return []
+  if (Array.isArray(components)) {
+    if (components.length === 0) return []
+    const selected = new Set(components)
+    return Object.entries(wiComponents).filter(([, component]) => selected.has(component))
+  }
+  return Object.entries(wiComponents)
+}
+
+function applyInstallerConfig(app: App, options: WiInstallerOptions) {
+  const { components: _components, ...config } = options
+  app.provide(WI_CONFIG_KEY, config)
+  app.config.globalProperties.$wi = config
+  setWiOverlayAppContext(app._context)
+  if (typeof document !== 'undefined') {
+    if (config.density) applyDensity(config.density)
+    if (config.zIndex != null) {
+      document.documentElement.style.setProperty('--wi-z-base', String(config.zIndex))
+    }
+  }
+}
+
+function registerComponents(app: App, components: WiInstallerOptions['components']) {
+  for (const [name, component] of resolveComponentsToRegister(components)) {
+    app.component(name, component)
+  }
+}
+
+/** Shared install used by `createWellInsight` and the default plugin. */
+export function installWellInsight(app: App, options: WiInstallerOptions = {}) {
+  applyInstallerConfig(app, options)
+  registerComponents(app, options.components)
+}
+
 /**
- * Vue plugin entry for global defaults.
+ * Vue plugin entry: global defaults + full component registration.
  *
  * @example
  * ```ts
  * import { createApp } from 'vue'
  * import { createWellInsight } from '@well-insight/ui'
+ * import '@well-insight/ui/styles.css'
  *
- * createApp(App).use(createWellInsight({ appendTo: 'body', density: 'compact' })).mount('#app')
+ * createApp(App).use(createWellInsight({ size: 'small', density: 'compact' })).mount('#app')
+ * // templates can use <WiButton> without importing
+ * ```
+ *
+ * Config only (no global components):
+ * ```ts
+ * createWellInsight({ size: 'small', components: false })
  * ```
  */
-export function createWellInsight(options: WiGlobalConfig = {}) {
+export function createWellInsight(options: WiInstallerOptions = {}): Plugin {
   return {
     install(app: App) {
-      app.provide(WI_CONFIG_KEY, options)
-      app.config.globalProperties.$wd = options
-      setWiOverlayAppContext(app._context)
-      if (typeof document !== 'undefined') {
-        if (options.density) applyDensity(options.density)
-        if (options.zIndex != null) {
-          document.documentElement.style.setProperty('--wi-z-base', String(options.zIndex))
-        }
-      }
+      installWellInsight(app, options)
     },
   }
 }
 
+/**
+ * Default plugin:
+ * `app.use(WellInsight)` or `app.use(WellInsight, { size: 'small' })`.
+ */
+export const WellInsight: Plugin = {
+  install(app: App, options: WiInstallerOptions = {}) {
+    installWellInsight(app, options)
+  },
+}
+
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $wd?: WiGlobalConfig
+    $wi?: WiGlobalConfig
   }
 }

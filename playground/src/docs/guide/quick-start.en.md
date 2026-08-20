@@ -32,6 +32,21 @@ createApp(App).mount('#app')
 
 ## Use a component
 
+### Full registration
+
+```ts
+import { createApp } from 'vue'
+import WellInsight from '@well-insight/ui'
+import App from './App.vue'
+import '@well-insight/ui/styles.css'
+
+createApp(App).use(WellInsight).mount('#app')
+```
+
+Templates can use `<WiButton>`, `<WiInput>`, etc. without per-file imports.
+
+### On-demand import
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -50,6 +65,8 @@ const name = ref('')
 
 ## Optional: app-level defaults
 
+`createWellInsight` applies global defaults and registers all components by default:
+
 ```ts
 import { createApp } from 'vue'
 import { createWellInsight } from '@well-insight/ui'
@@ -66,6 +83,8 @@ createApp(App)
   )
   .mount('#app')
 ```
+
+Use `components: false` for config-only install.
 
 See [Configuration](/docs/config) for details.
 

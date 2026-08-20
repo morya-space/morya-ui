@@ -26,7 +26,24 @@ pnpm add @well-insight/ui
 
 ## 快速开始
 
-在应用入口引入样式，再按需引入组件：
+在应用入口引入样式。两种用法：
+
+### 全量注册
+
+```ts
+import { createApp } from 'vue'
+import WellInsight from '@well-insight/ui'
+import App from './App.vue'
+import '@well-insight/ui/styles.css'
+
+createApp(App).use(WellInsight).mount('#app')
+// 或带全局默认：
+// createApp(App).use(WellInsight, { size: 'small', density: 'compact' }).mount('#app')
+```
+
+之后模板里可直接写 `<WiButton>` / `<WiInput>`，无需再 import。
+
+### 按需引入
 
 ```ts
 import { createApp } from 'vue'
@@ -52,13 +69,13 @@ const name = ref('')
 </template>
 ```
 
-支持按需导入（Tree-shaking）。样式需单独引入 `@well-insight/ui/styles.css`。
+按需导入支持 Tree-shaking。样式需单独引入 `@well-insight/ui/styles.css`。
 
 更完整的上手说明见文档站 [快速上手](./playground/src/docs/guide/quick-start.md)。
 
 ## 应用级默认配置
 
-可选插件 `createWellInsight`，用于设置全局默认值（浮层挂载、尺寸、密度、语言、z-index）：
+`createWellInsight` / `WellInsight` 会设置全局默认值，并**默认注册全部组件**：
 
 ```ts
 import { createApp } from 'vue'
@@ -78,6 +95,8 @@ createApp(App)
   )
   .mount('#app')
 ```
+
+只要配置、不注册组件时传 `components: false`。
 
 | 选项 | 作用 |
 | --- | --- |
