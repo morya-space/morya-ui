@@ -18,9 +18,9 @@ Vue 3 component library for Well Insight — themed UI primitives for forms, ove
 ## Install
 
 ```bash
-pnpm add @well-insight/ui vue
-# npm i @well-insight/ui vue
-# yarn add @well-insight/ui vue
+pnpm add @well-insight/ui
+# npm i @well-insight/ui
+# yarn add @well-insight/ui
 ```
 
 ## Quick start

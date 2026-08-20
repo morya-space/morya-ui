@@ -18,9 +18,9 @@
 ## 安装
 
 ```bash
-pnpm add @well-insight/ui vue
-# npm i @well-insight/ui vue
-# yarn add @well-insight/ui vue
+pnpm add @well-insight/ui
+# npm i @well-insight/ui
+# yarn add @well-insight/ui
 ```
 
 ## 快速开始

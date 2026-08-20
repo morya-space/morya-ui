@@ -11,7 +11,7 @@ description: Install the package, import styles, and render the first component.
 **In an application (npm / pnpm / yarn):**
 
 ```bash
-pnpm add @well-insight/ui vue
+pnpm add @well-insight/ui
 ```
 
 Vue 3.5+ is required. Theme tokens, color-mode switching, and motion APIs are all included in `@well-insight/ui`.
