@@ -1,5 +1,15 @@
 # @well-insight/ui
 
+## 0.1.5
+
+### Features
+
+- enhance release process to include MCP build and version sync
+
+### Fixes
+
+- rename Wd to Wi in component library and documentation
+
 ## 0.1.4
 
 ### Changes
