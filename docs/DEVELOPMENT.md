@@ -11,6 +11,7 @@ Internal documentation for contributors. Public overview: [root README](../READM
 | `src/` | Library source (components, theme, locale, styles) |
 | `playground/` | Docs site (Vite + Markdown preview) |
 | `scripts/` | Release & CHANGELOG tooling |
+| `packages/ui-mcp/` | `@well-insight/ui-mcp` stdio MCP server |
 | `docs/` | Maintainer docs |
 | `dist/` | Build output (do not edit by hand) |
 
@@ -34,6 +35,9 @@ pnpm release:tag          # create v{version} tag
 pnpm release:push         # push branches & tag
 pnpm release:npm          # build + publish only (set version first)
 pnpm release:git          # create tag / release branch only
+pnpm release:mcp          # publish @well-insight/ui-mcp (sync UI version)
+pnpm mcp:build            # build @well-insight/ui-mcp (catalog + stdio server)
+pnpm mcp:start            # run MCP locally (stdio)
 ```
 
 ## Related docs
@@ -43,4 +47,5 @@ pnpm release:git          # create tag / release branch only
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits + husky / commitlint |
 | [UI development](./ui-development.md) | Build, publish, changelog |
 | [scripts/README.md](../scripts/README.md) | Interactive release tooling |
+| [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP server |
 | [AGENTS.md](../AGENTS.md) | Agent / Skills rules |

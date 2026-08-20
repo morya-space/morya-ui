@@ -58,7 +58,11 @@
     "release:tag": "node scripts/release.mjs tag",
     "release:push": "node scripts/release.mjs push",
     "release:npm": "pnpm run release:build && pnpm run release:publish",
-    "release:git": "node scripts/release-git.mjs --tag --branch"
+    "release:git": "node scripts/release-git.mjs --tag --branch",
+    "release:mcp": "node scripts/release-mcp.mjs",
+    "mcp:generate": "pnpm --filter @well-insight/ui-mcp generate",
+    "mcp:build": "pnpm --filter @well-insight/ui-mcp build",
+    "mcp:start": "pnpm --filter @well-insight/ui-mcp start"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

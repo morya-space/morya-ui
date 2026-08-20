@@ -45,3 +45,13 @@ pnpm release -- --no-push           # 本地发版，不 push
 ```
 
 发布前检查：`version` 与 CHANGELOG 一致；`build` / `typecheck` / `test` 通过；`files` 包含 `dist` 与 `CHANGELOG.md`；peer 为 `vue`。
+
+## 可选：MCP 包
+
+`@well-insight/ui-mcp` 为可选 stdio 服务，供支持 [MCP](https://modelcontextprotocol.io/) 的客户端检索文档（不替代安装 `@well-insight/ui`）。对外说明见文档站 [MCP](/docs/mcp)；实现见 [packages/ui-mcp/README.md](../packages/ui-mcp/README.md)。
+
+```bash
+pnpm mcp:build
+pnpm release:mcp -- --dry-run
+pnpm release:mcp
+```
