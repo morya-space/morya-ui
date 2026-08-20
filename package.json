@@ -29,13 +29,9 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "development": "./src/index.ts",
       "import": "./dist/index.js"
     },
-    "./styles.css": {
-      "development": "./src/styles/index.css",
-      "default": "./dist/styles.css"
-    },
+    "./styles.css": "./dist/styles.css",
     "./docs": "./src/docs/index.ts"
   },
   "types": "./dist/index.d.ts",
