@@ -102,6 +102,7 @@ const messages = {
       theme: '主题',
       config: '全局配置',
       guide: '指南',
+      mcp: 'MCP',
     } as Record<string, string>,
     categories: {
       GUIDE: '指南',
@@ -205,6 +206,7 @@ const messages = {
       theme: 'Theme',
       config: 'Configuration',
       guide: 'Guide',
+      mcp: 'MCP',
     } as Record<string, string>,
     categories: {
       GUIDE: 'Guide',

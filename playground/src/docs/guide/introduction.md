@@ -22,6 +22,7 @@ description: Well Insight 是什么、适合谁用。
 | 包 | 说明 |
 | --- | --- |
 | `@well-insight/ui` | 组件、样式、主题 API、文档站 |
+| `@well-insight/ui-mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |
 
 ## 消费方式
 
