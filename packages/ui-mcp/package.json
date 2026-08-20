@@ -1,0 +1,50 @@
+{
+  "name": "@well-insight/ui-mcp",
+  "version": "0.1.3",
+  "description": "MCP server for @well-insight/ui — component docs, examples, and usage guidance for AI coding agents.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/well-insight/well-insight-ui.git",
+    "directory": "packages/ui-mcp"
+  },
+  "homepage": "https://github.com/well-insight/well-insight-ui/tree/main/packages/ui-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/well-insight/well-insight-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "well-insight-ui-mcp": "./bin/well-insight-ui-mcp.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "data",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "generate": "node ./scripts/generate-catalog.mjs",
+    "build": "pnpm run generate && tsc -p tsconfig.json",
+    "start": "node ./dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "typescript": "^5.9.3"
+  }
+}
