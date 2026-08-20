@@ -101,16 +101,24 @@ pnpm release -- --major --ui-only --force
 | --- | --- |
 | `pnpm release:npm` | 仅 `build` + `publish`（需先改好 `package.json` 的 `version`） |
 | `pnpm release:git` | 仅补 `release/{version}` 分支与 `v{version}` 标签 |
-| `pnpm release:mcp` | 发布 `@well-insight/ui-mcp`（同步 UI 版本 → 构建 catalog → npm publish） |
+| `pnpm release:mcp` | 发布 `@well-insight/ui-mcp`（同步 UI 版本 → 构建 catalog → commit → npm publish） |
 
 ## MCP 发版
 
-`@well-insight/ui-mcp` 与 UI 包分开发布，版本默认与根目录 `@well-insight/ui` 对齐：
+`@well-insight/ui-mcp` 与 UI 包分开发布，版本默认与根目录 `@well-insight/ui` 对齐。流程为：同步版本 → 构建 catalog → **自动 commit** → npm publish。
 
 ```bash
-pnpm release:mcp -- --dry-run     # 预览
-pnpm release:mcp                  # 同步版本、构建、发布
-pnpm release:mcp -- --no-publish  # 只同步版本并构建，不 publish
+pnpm release:mcp -- --dry-run      # 预览
+pnpm release:mcp                   # 同步版本、构建、commit、发布
+pnpm release:mcp -- --no-publish   # 同步版本、构建、commit，不 publish
+pnpm release:mcp -- --no-commit    # 同步版本、构建、发布，不 commit
 ```
+
+自动 commit 会写入：
+
+- `packages/ui-mcp/package.json`
+- `packages/ui-mcp/data/catalog.json`
+
+提交信息格式：`release: @well-insight/ui-mcp v{version}`。
 
 建议在 `pnpm release`（或至少 UI 已 bump 并发布）之后执行，这样 catalog 里的 library version 与 npm 上的 UI 包一致。
