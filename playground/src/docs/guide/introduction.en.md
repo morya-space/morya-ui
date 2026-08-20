@@ -22,6 +22,7 @@ Source: [GitHub](https://github.com/well-insight/well-insight-ui)
 | Package | Role |
 | --- | --- |
 | `@well-insight/ui` | Components, styles, theme APIs, and the docs site |
+| `@well-insight/ui-mcp` | (Optional) MCP server for AI clients that support the protocol |
 
 ## Consumption
 
