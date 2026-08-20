@@ -25,17 +25,17 @@ pnpm build:docs
 pnpm typecheck
 pnpm test
 pnpm test:coverage
-pnpm release              # full pipeline (prepare → … → push)
-pnpm release:prepare      # write version & CHANGELOG
-pnpm release:commit       # commit release files
+pnpm release              # full pipeline (prepare → build → commit → … → push; includes MCP)
+pnpm release:prepare      # write version & CHANGELOG; sync MCP version
+pnpm release:build        # build UI + MCP
+pnpm release:commit       # commit UI / MCP release files
 pnpm release:branch       # create release/{version} branch
-pnpm release:build        # build
-pnpm release:publish      # npm publish
+pnpm release:publish      # publish UI + MCP
 pnpm release:tag          # create v{version} tag
 pnpm release:push         # push branches & tag
-pnpm release:npm          # build + publish only (set version first)
+pnpm release:npm          # build + publish only (UI + MCP; set version first)
 pnpm release:git          # create tag / release branch only
-pnpm release:mcp          # publish @well-insight/ui-mcp (sync UI version)
+pnpm release:mcp          # MCP-only publish (usually unnecessary; full release includes it)
 pnpm mcp:build            # build @well-insight/ui-mcp (catalog + stdio server)
 pnpm mcp:start            # run MCP locally (stdio)
 ```

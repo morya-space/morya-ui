@@ -32,23 +32,27 @@ pnpm release:npm
 
 ## 完整发版
 
-分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)：
+分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)。默认同时发布 `@well-insight/ui` 与 `@well-insight/ui-mcp`：
 
 ```bash
 pnpm release:prepare -- --dry-run   # 预览
-pnpm release:prepare                # 写版本与 CHANGELOG
+pnpm release:prepare                # 写版本与 CHANGELOG（含 MCP 版本同步）
+pnpm release:build                  # UI + MCP
 pnpm release:commit                 # 提交 release 文件
-# … branch / build / publish / tag / push
+# … branch / publish / tag / push
 
-pnpm release                        # 一键跑完全部步骤
+pnpm release                        # 一键跑完全部步骤（含 MCP）
 pnpm release -- --no-push           # 本地发版，不 push
+pnpm release -- --no-mcp            # 只发 UI
 ```
 
 发布前检查：`version` 与 CHANGELOG 一致；`build` / `typecheck` / `test` 通过；`files` 包含 `dist` 与 `CHANGELOG.md`；peer 为 `vue`。
 
-## 可选：MCP 包
+## MCP 包
 
 `@well-insight/ui-mcp` 为可选 stdio 服务，供支持 [MCP](https://modelcontextprotocol.io/) 的客户端检索文档（不替代安装 `@well-insight/ui`）。对外说明见文档站 [MCP](/docs/mcp)；实现见 [packages/ui-mcp/README.md](../packages/ui-mcp/README.md)。
+
+完整 UI 发版已包含 MCP。仅需单独重发 MCP 时：
 
 ```bash
 pnpm mcp:build
