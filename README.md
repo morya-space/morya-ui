@@ -26,7 +26,24 @@ pnpm add @well-insight/ui
 
 ## Quick start
 
-Import styles once at your app entry, then import components on demand:
+Import styles once at your app entry. Two ways to use components:
+
+### Full registration
+
+```ts
+import { createApp } from 'vue'
+import WellInsight from '@well-insight/ui'
+import App from './App.vue'
+import '@well-insight/ui/styles.css'
+
+createApp(App).use(WellInsight).mount('#app')
+// or with defaults:
+// createApp(App).use(WellInsight, { size: 'small', density: 'compact' }).mount('#app')
+```
+
+Templates can then use `<WiButton>` / `<WiInput>` without importing.
+
+### On-demand import
 
 ```ts
 import { createApp } from 'vue'
@@ -58,7 +75,7 @@ For a fuller walkthrough, see the docs site [Quick start](./playground/src/docs/
 
 ## App defaults
 
-Optional Vue plugin `createWellInsight` for global defaults (overlay mount, size, density, locale, z-index):
+`createWellInsight` / `WellInsight` set global defaults and **register all components by default**:
 
 ```ts
 import { createApp } from 'vue'
@@ -78,6 +95,8 @@ createApp(App)
   )
   .mount('#app')
 ```
+
+Pass `components: false` for config-only install (no global components).
 
 | Option | Role |
 | --- | --- |

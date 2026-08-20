@@ -32,6 +32,21 @@ createApp(App).mount('#app')
 
 ## 使用组件
 
+### 全量注册
+
+```ts
+import { createApp } from 'vue'
+import WellInsight from '@well-insight/ui'
+import App from './App.vue'
+import '@well-insight/ui/styles.css'
+
+createApp(App).use(WellInsight).mount('#app')
+```
+
+模板中可直接使用 `<WiButton>`、`<WiInput>` 等，无需逐个 import。
+
+### 按需引入
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -50,6 +65,8 @@ const name = ref('')
 
 ## 可选：应用级全局配置
 
+`createWellInsight` 会写入全局默认值，并默认注册全部组件：
+
 ```ts
 import { createApp } from 'vue'
 import { createWellInsight } from '@well-insight/ui'
@@ -66,6 +83,8 @@ createApp(App)
   )
   .mount('#app')
 ```
+
+仅配置、不注册组件时使用 `components: false`。
 
 更多说明见 [全局配置](/docs/config)。
 

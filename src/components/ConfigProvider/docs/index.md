@@ -102,10 +102,14 @@ const options = [
 
 ```ts
 import { createApp } from 'vue'
-import { createWellInsight, enUS } from '@well-insight/ui'
+import WellInsight, { createWellInsight, enUS } from '@well-insight/ui'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
+// 方式一：默认导出
+createApp(App).use(WellInsight, { locale: enUS }).mount('#app')
+
+// 方式二：工厂函数
 createApp(App)
   .use(
     createWellInsight({
@@ -118,6 +122,8 @@ createApp(App)
   )
   .mount('#app')
 ```
+
+默认会**全局注册全部组件**（模板可直接用 `<WiButton>`）。仅注入配置时传 `components: false`；也可传组件数组做部分注册。
 
 ## 读取配置
 

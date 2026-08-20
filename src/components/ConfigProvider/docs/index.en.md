@@ -102,10 +102,14 @@ const options = [
 
 ```ts
 import { createApp } from 'vue'
-import { createWellInsight, enUS } from '@well-insight/ui'
+import WellInsight, { createWellInsight, enUS } from '@well-insight/ui'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
+// Option A: default export
+createApp(App).use(WellInsight, { locale: enUS }).mount('#app')
+
+// Option B: factory
 createApp(App)
   .use(
     createWellInsight({
@@ -118,6 +122,8 @@ createApp(App)
   )
   .mount('#app')
 ```
+
+By default **all components are registered globally** (use `<WiButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
 
 ## Reading config
 
