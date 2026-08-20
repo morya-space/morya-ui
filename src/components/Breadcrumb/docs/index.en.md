@@ -11,14 +11,14 @@ Breadcrumb navigation. Items with `to` render as links; otherwise as text.
 ## Import
 
 ```ts
-import { WdBreadcrumb } from '@well-insight/ui'
+import { WiBreadcrumb } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdBreadcrumb } from '@well-insight/ui'
+import { WiBreadcrumb } from '@well-insight/ui'
 
 const items = [
   { label: 'Electronics', to: '/electronics' },
@@ -28,7 +28,7 @@ const items = [
 </script>
 
 <template>
-  <WdBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
+  <WiBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
 </template>
 ```
 

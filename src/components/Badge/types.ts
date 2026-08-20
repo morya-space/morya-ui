@@ -1,8 +1,8 @@
-import type { WdSizeInput, WdTagSeverity } from '../../shared/types'
+import type { WiSizeInput, WiTagSeverity } from '../../shared/types'
 
-export type BadgeSeverity = WdTagSeverity | 'warning'
+export type BadgeSeverity = WiTagSeverity | 'warning'
 
-export type BadgeSize = WdSizeInput
+export type BadgeSize = WiSizeInput
 
 export interface BadgeProps {
   /** Badge content. Omit for a status dot. */

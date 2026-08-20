@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { InputTagsProps } from './types'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
@@ -13,7 +13,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string[]): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 const draft = ref('')
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
 
@@ -52,16 +52,16 @@ function onBlur() {
 </script>
 
 <template>
-  <div class="wd-inputtags" :class="{ 'wd-inputtags--disabled': disabled }">
+  <div class="wi-inputtags" :class="{ 'wi-inputtags--disabled': disabled }">
     <span
       v-for="(tag, index) in modelValue"
       :key="`${tag}-${index}`"
-      class="wd-inputtags__chip"
+      class="wi-inputtags__chip"
     >
       {{ tag }}
       <button
         type="button"
-        class="wd-inputtags__remove"
+        class="wi-inputtags__remove"
         :disabled="disabled"
         :aria-label="locale.removeTag"
         @click="removeTag(index)"
@@ -71,7 +71,7 @@ function onBlur() {
     </span>
     <input
       v-model="draft"
-      class="wd-inputtags__input"
+      class="wi-inputtags__input"
       type="text"
       :placeholder="modelValue.length ? '' : addPlaceholder"
       :disabled="disabled"

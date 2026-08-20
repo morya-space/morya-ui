@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import type { InputColorProps } from './types'
 
 const props = withDefaults(defineProps<InputColorProps>(), {
@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<InputColorProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const hexValue = computed(() => {
   const raw = props.modelValue?.trim() || '#000000'
@@ -30,9 +30,9 @@ function onTextInput(event: Event) {
 </script>
 
 <template>
-  <div class="wd-inputcolor" :class="{ 'wd-inputcolor--disabled': disabled }">
+  <div class="wi-inputcolor" :class="{ 'wi-inputcolor--disabled': disabled }">
     <input
-      class="wd-inputcolor__swatch"
+      class="wi-inputcolor__swatch"
       type="color"
       :id="id"
       :value="hexValue"
@@ -41,7 +41,7 @@ function onTextInput(event: Event) {
       @input="onColorInput"
     />
     <input
-      class="wd-inputcolor__text"
+      class="wi-inputcolor__text"
       type="text"
       :value="modelValue"
       :disabled="disabled"

@@ -11,7 +11,7 @@ description: 步骤指示器，支持线性前进约束。
 ## 引入
 
 ```ts
-import { WdStepper } from '@well-insight/ui'
+import { WiStepper } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdStepper } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdStepper } from '@well-insight/ui'
+import { WiStepper } from '@well-insight/ui'
 
 const active = ref(0)
 const steps = [
@@ -30,7 +30,7 @@ const steps = [
 </script>
 
 <template>
-  <WdStepper v-model="active" :steps="steps" />
+  <WiStepper v-model="active" :steps="steps" />
 </template>
 ```
 

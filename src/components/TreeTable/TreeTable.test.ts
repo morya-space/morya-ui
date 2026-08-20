@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdTreeTable from './TreeTable.vue'
+import WiTreeTable from './TreeTable.vue'
 
 const columns = [
   { field: 'name', header: 'Name' },
@@ -15,12 +15,12 @@ const value = [
   },
 ]
 
-describe('WdTreeTable', () => {
+describe('WiTreeTable', () => {
   it('renders columns and expands children', async () => {
-    const wrapper = mount(WdTreeTable, { props: { columns, value } })
+    const wrapper = mount(WiTreeTable, { props: { columns, value } })
     expect(wrapper.text()).toContain('Applications')
     expect(wrapper.text()).not.toContain('Vue')
-    await wrapper.find('.wd-treetable__toggler').trigger('click')
+    await wrapper.find('.wi-treetable__toggler').trigger('click')
     expect(wrapper.text()).toContain('Vue')
     expect(wrapper.emitted('node-expand')?.length).toBe(1)
   })

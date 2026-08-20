@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdInplace from './Inplace.vue'
+import WiInplace from './Inplace.vue'
 
-describe('WdInplace', () => {
+describe('WiInplace', () => {
   it('switches from display to content on activate', async () => {
-    const wrapper = mount(WdInplace, {
+    const wrapper = mount(WiInplace, {
       props: { modelValue: false },
       slots: {
         display: '<span>Edit me</span>',
@@ -12,12 +12,12 @@ describe('WdInplace', () => {
       },
     })
     expect(wrapper.text()).toContain('Edit me')
-    await wrapper.find('.wd-inplace__display').trigger('click')
+    await wrapper.find('.wi-inplace__display').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[true]])
   })
 
   it('shows content when active', () => {
-    const wrapper = mount(WdInplace, {
+    const wrapper = mount(WiInplace, {
       props: { modelValue: true },
       slots: {
         display: 'Display',
@@ -25,6 +25,6 @@ describe('WdInplace', () => {
       },
     })
     expect(wrapper.find('.active-content').exists()).toBe(true)
-    expect(wrapper.find('.wd-inplace__display').exists()).toBe(false)
+    expect(wrapper.find('.wi-inplace__display').exists()).toBe(false)
   })
 })

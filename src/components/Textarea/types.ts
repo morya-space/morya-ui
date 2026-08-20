@@ -1,4 +1,4 @@
-import type { WdInputVariant, WdSizeInput } from '../../shared/types'
+import type { WiInputVariant, WiSizeInput } from '../../shared/types'
 
 export interface TextareaProps {
   modelValue?: string
@@ -16,9 +16,9 @@ export interface TextareaProps {
   /** Grow height to fit content . */
   autoResize?: boolean
   /** Size aligned with Textarea; also accepts legacy sm/md/lg. */
-  size?: WdSizeInput
+  size?: WiSizeInput
   /** Visual variant; default outlined. */
-  variant?: WdInputVariant
+  variant?: WiInputVariant
   /** Full-width textarea. */
   fluid?: boolean
   disabled?: boolean

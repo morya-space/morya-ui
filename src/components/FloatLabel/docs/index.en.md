@@ -11,7 +11,7 @@ Wraps an input. The label floats up on focus or when the field has content. Nest
 ## Import
 
 ```ts
-import { WdFloatLabel, WdInput } from '@well-insight/ui'
+import { WiFloatLabel, WiInput } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,15 +19,15 @@ import { WdFloatLabel, WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdFloatLabel, WdInput } from '@well-insight/ui'
+import { WiFloatLabel, WiInput } from '@well-insight/ui'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdFloatLabel label="Username">
-    <WdInput v-model="value" placeholder=" " />
-  </WdFloatLabel>
+  <WiFloatLabel label="Username">
+    <WiInput v-model="value" placeholder=" " />
+  </WiFloatLabel>
 </template>
 ```
 

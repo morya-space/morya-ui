@@ -14,7 +14,7 @@ description: Well Insight 是什么、适合谁用。
 
 - **可独立复用**：业务应用通过包入口引入组件与样式；发布产物为 ESM + 类型 + CSS。
 - **一致体验**：尺寸、语义色、浮层行为在组件间保持同一套约定。
-- **主题一体**：颜色、圆角、间距、动效走 `--wd-*` CSS 变量；`useTheme` / `useMotion` / `useDensity` 与组件同包导出。
+- **主题一体**：颜色、圆角、间距、动效走 `--wi-*` CSS 变量；`useTheme` / `useMotion` / `useDensity` 与组件同包导出。
 - **文档即预览**：每个组件目录下的 `docs/index.md`（中文）与 `docs/index.en.md`（英文）支持 Markdown + 可交互 `vue preview`。
 
 ## 包结构

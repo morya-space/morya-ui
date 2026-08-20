@@ -39,15 +39,15 @@ createApp(App).mount('#app')
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdInput } from '@well-insight/ui'
+import { WiButton, WiInput } from '@well-insight/ui'
 
 const name = ref('')
 </script>
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WdInput v-model="name" label="Name" placeholder="Enter a name" />
-    <WdButton label="Submit" />
+    <WiInput v-model="name" label="Name" placeholder="Enter a name" />
+    <WiButton label="Submit" />
   </div>
 </template>
 ```
@@ -88,9 +88,9 @@ createApp(App)
 | `zIndex` | Overlay z-index base |
 | `locale` | Built-in UI copy (`zhCN` default, or `enUS` / partial override) |
 
-For subtree overrides, wrap with `<WdConfigProvider>`. Resolution order:
+For subtree overrides, wrap with `<WiConfigProvider>`. Resolution order:
 
-**component props → `WdConfigProvider` → `createWellInsight` → built-in defaults**
+**component props → `WiConfigProvider` → `createWellInsight` → built-in defaults**
 
 See the docs site [Configuration](./playground/src/docs/guide/config.en.md).
 
@@ -138,13 +138,13 @@ message.error('Something went wrong')
 toast.add({ severity: 'info', summary: 'Notice', detail: 'Details here' })
 ```
 
-You can still render `<WdMessage />` / `<WdToast />` when you need a controlled host.
+You can still render `<WiMessage />` / `<WiToast />` when you need a controlled host.
 
 ## Exports
 
 | Import | Purpose |
 | --- | --- |
-| `@well-insight/ui` | Components, `createWellInsight`, `WdConfigProvider`, theme & locale helpers, `message` / `toast` |
+| `@well-insight/ui` | Components, `createWellInsight`, `WiConfigProvider`, theme & locale helpers, `message` / `toast` |
 | `@well-insight/ui/styles.css` | Required stylesheet (tokens + component styles) |
 
 TypeScript types are included via the package `exports`.

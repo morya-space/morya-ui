@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<DockProps>(), {
   position: 'bottom',
 })
 
-const rootClass = computed(() => ['wd-dock', `wd-dock--${props.position}`])
+const rootClass = computed(() => ['wi-dock', `wi-dock--${props.position}`])
 
 function activate(item: DockItem) {
   if (item.disabled) return
@@ -17,17 +17,17 @@ function activate(item: DockItem) {
 
 <template>
   <nav :class="rootClass" aria-label="Dock">
-    <ul class="wd-dock__list">
-      <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wd-dock__item">
+    <ul class="wi-dock__list">
+      <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wi-dock__item">
         <button
           type="button"
-          class="wd-dock__button"
+          class="wi-dock__button"
           :title="item.label"
           :aria-label="item.label"
           :disabled="item.disabled"
           @click="activate(item)"
         >
-          <span class="wd-dock__icon" aria-hidden="true">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+          <span class="wi-dock__icon" aria-hidden="true">{{ item.icon ?? item.label.slice(0, 1) }}</span>
         </button>
       </li>
     </ul>

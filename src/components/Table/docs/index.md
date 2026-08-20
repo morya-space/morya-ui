@@ -15,14 +15,14 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 引入
 
 ```ts
-import { WdTable, WdTag } from '@well-insight/ui'
+import { WiTable, WiTag } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdTable, WdTag } from '@well-insight/ui'
+import { WiTable, WiTag } from '@well-insight/ui'
 
 const columns = [
   { key: 'name', label: '项目', minWidth: 140, sortable: true },
@@ -44,14 +44,14 @@ const rows = [
 </script>
 
 <template>
-  <WdTable :columns="columns" :rows="rows" striped bordered>
+  <WiTable :columns="columns" :rows="rows" striped bordered>
     <template #cell-status="{ value }">
-      <WdTag
+      <WiTag
         :value="String(value)"
         :severity="value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'"
       />
     </template>
-  </WdTable>
+  </WiTable>
 </template>
 ```
 
@@ -60,7 +60,7 @@ const rows = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTable } from '@well-insight/ui'
+import { WiTable } from '@well-insight/ui'
 
 const columns = [
   { key: 'name', label: '姓名', minWidth: 120 },
@@ -85,7 +85,7 @@ const selection = ref([])
 </script>
 
 <template>
-  <WdTable
+  <WiTable
     v-model:selection="selection"
     :columns="columns"
     :rows="rows"
@@ -100,7 +100,7 @@ const selection = ref([])
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTable } from '@well-insight/ui'
+import { WiTable } from '@well-insight/ui'
 
 const columns = [
   { key: 'name', label: '姓名', filterable: true, sortable: true, minWidth: 120 },
@@ -137,7 +137,7 @@ const page = ref(1)
 </script>
 
 <template>
-  <WdTable
+  <WiTable
     v-model:page="page"
     :columns="columns"
     :rows="rows"
@@ -151,7 +151,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { WdTable } from '@well-insight/ui'
+import { WiTable } from '@well-insight/ui'
 
 const columns = [
   { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
@@ -173,7 +173,7 @@ const rows = [
 </script>
 
 <template>
-  <WdTable :columns="columns" :rows="rows" bordered />
+  <WiTable :columns="columns" :rows="rows" bordered />
 </template>
 ```
 
@@ -182,7 +182,7 @@ const rows = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdTable } from '@well-insight/ui'
+import { WiButton, WiTable } from '@well-insight/ui'
 
 const loading = ref(false)
 const columns = [
@@ -194,8 +194,8 @@ const columns = [
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WdButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
-    <WdTable
+    <WiButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
+    <WiTable
       :columns="columns"
       :rows="[]"
       :loading="loading"

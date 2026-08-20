@@ -1,1 +1,1 @@
-export type { WdDensity, WdGlobalConfig, WdLocaleConfig } from '../../shared/config'
+export type { WiDensity, WiGlobalConfig, WiLocaleConfig } from '../../shared/config'

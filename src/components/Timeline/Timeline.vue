@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
-import WdIcon from '../Icon/Icon.vue'
+import WiIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
 import type { IconName } from '../Icon/types'
 import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
@@ -12,9 +12,9 @@ const props = withDefaults(defineProps<TimelineProps>(), {
 })
 
 const rootClass = computed(() => [
-  'wd-timeline',
-  `wd-timeline--${props.layout}`,
-  `wd-timeline--${props.align}`,
+  'wi-timeline',
+  `wi-timeline--${props.layout}`,
+  `wi-timeline--${props.align}`,
 ])
 
 function side(index: number): 'left' | 'right' {
@@ -36,7 +36,7 @@ function markerStyle(event: TimelineEvent) {
 
 function markerClass(event: TimelineEvent) {
   const tone = markerTone(event.severity)
-  return tone ? `wd-timeline__marker--${tone}` : undefined
+  return tone ? `wi-timeline__marker--${tone}` : undefined
 }
 
 function iconName(event: TimelineEvent): IconName | undefined {
@@ -50,32 +50,32 @@ function iconName(event: TimelineEvent): IconName | undefined {
     <li
       v-for="(event, index) in value"
       :key="index"
-      class="wd-timeline__event"
-      :class="`wd-timeline__event--${side(index)}`"
+      class="wi-timeline__event"
+      :class="`wi-timeline__event--${side(index)}`"
     >
-      <div class="wd-timeline__opposite">
+      <div class="wi-timeline__opposite">
         <slot name="opposite" :item="event" :index="index">
           {{ event.date }}
         </slot>
       </div>
-      <div class="wd-timeline__separator">
+      <div class="wi-timeline__separator">
         <slot name="marker" :item="event" :index="index">
           <span
-            class="wd-timeline__marker"
+            class="wi-timeline__marker"
             :class="markerClass(event)"
             :style="markerStyle(event)"
           >
-            <WdIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
+            <WiIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
             <span v-else-if="event.icon" aria-hidden="true">{{ event.icon }}</span>
           </span>
         </slot>
         <slot name="connector" :item="event" :index="index">
-          <span class="wd-timeline__connector" />
+          <span class="wi-timeline__connector" />
         </slot>
       </div>
-      <div class="wd-timeline__content">
+      <div class="wi-timeline__content">
         <slot name="content" :item="event" :index="index">
-          <div v-if="event.status" class="wd-timeline__status">{{ event.status }}</div>
+          <div v-if="event.status" class="wi-timeline__status">{{ event.status }}</div>
           <div>{{ event.content }}</div>
         </slot>
       </div>

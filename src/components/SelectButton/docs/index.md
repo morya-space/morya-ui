@@ -11,7 +11,7 @@ description: 按钮组形式的单选或多选控件。
 ## 引入
 
 ```ts
-import { WdSelectButton } from '@well-insight/ui'
+import { WiSelectButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdSelectButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelectButton } from '@well-insight/ui'
+import { WiSelectButton } from '@well-insight/ui'
 
 const value = ref('center')
 const options = [
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelectButton v-model="value" :options="options" />
+  <WiSelectButton v-model="value" :options="options" />
 </template>
 ```
 
@@ -39,7 +39,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSelectButton } from '@well-insight/ui'
+import { WiSelectButton } from '@well-insight/ui'
 
 const value = ref(['left'])
 const options = [
@@ -50,7 +50,7 @@ const options = [
 </script>
 
 <template>
-  <WdSelectButton v-model="value" :options="options" multiple />
+  <WiSelectButton v-model="value" :options="options" multiple />
 </template>
 ```
 

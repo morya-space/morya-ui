@@ -1,2 +1,2 @@
-export { default as WdCarousel } from './Carousel.vue'
+export { default as WiCarousel } from './Carousel.vue'
 export type { CarouselEmits, CarouselProps } from './types'

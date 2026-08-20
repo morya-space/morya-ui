@@ -11,7 +11,7 @@ Toggle switch control.
 ## Import
 
 ```ts
-import { WdSwitch } from '@well-insight/ui'
+import { WiSwitch } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdSwitch } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSwitch } from '@well-insight/ui'
+import { WiSwitch } from '@well-insight/ui'
 
 const enabled = ref(false)
 </script>
 
 <template>
-  <WdSwitch v-model="enabled" label="Enable notifications" />
+  <WiSwitch v-model="enabled" label="Enable notifications" />
 </template>
 ```
 
@@ -36,15 +36,15 @@ const enabled = ref(false)
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSwitch } from '@well-insight/ui'
+import { WiSwitch } from '@well-insight/ui'
 
 const dark = ref(false)
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
-    <WdSwitch :model-value="false" invalid label="Must be enabled" />
+    <WiSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
+    <WiSwitch :model-value="false" invalid label="Must be enabled" />
   </div>
 </template>
 ```
@@ -53,13 +53,13 @@ const dark = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdSwitch } from '@well-insight/ui'
+import { WiSwitch } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdSwitch :model-value="true" disabled label="On disabled" />
-    <WdSwitch :model-value="false" disabled label="Off disabled" />
+    <WiSwitch :model-value="true" disabled label="On disabled" />
+    <WiSwitch :model-value="false" disabled label="Off disabled" />
   </div>
 </template>
 ```

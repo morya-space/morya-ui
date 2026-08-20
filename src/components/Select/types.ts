@@ -1,8 +1,8 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdSizeInput } from '../../shared/types'
+import type { WiAppendTo } from '../../shared/overlay'
+import type { WiSizeInput } from '../../shared/types'
 
 export type SelectValue = string | number
-export type SelectSize = WdSizeInput
+export type SelectSize = WiSizeInput
 
 export interface SelectOption {
   label: string
@@ -35,7 +35,7 @@ export interface SelectProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
   placement?: 'bottom-start' | 'bottom-end'
 }
 

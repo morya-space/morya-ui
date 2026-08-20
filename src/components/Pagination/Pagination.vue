@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
+import { formatLocale, useWiLocale } from '../../locale'
 import type { PaginationProps } from './types'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -13,7 +13,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
   (event: 'page', value: number): void
 }>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 const pageCount = computed(() => Math.max(1, Math.ceil(props.totalRecords / props.rows)))
 const currentPage = computed(() => Math.min(Math.max(1, props.modelValue), pageCount.value))
 /** Zero-based index of the first record on the current page . */
@@ -39,9 +39,9 @@ defineExpose({ first, pageCount })
 </script>
 
 <template>
-  <nav class="wd-pagination" :aria-label="locale.pagination">
-    <button type="button" class="wd-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">‹</button>
-    <button v-for="page in pages" :key="page" type="button" class="wd-pagination__button" :class="{ 'wd-pagination__button--active': page === currentPage }" :disabled="disabled" :aria-label="pageLabel(page)" :aria-current="page === currentPage ? 'page' : undefined" @click="setPage(page)">{{ page }}</button>
-    <button type="button" class="wd-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">›</button>
+  <nav class="wi-pagination" :aria-label="locale.pagination">
+    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">‹</button>
+    <button v-for="page in pages" :key="page" type="button" class="wi-pagination__button" :class="{ 'wi-pagination__button--active': page === currentPage }" :disabled="disabled" :aria-label="pageLabel(page)" :aria-current="page === currentPage ? 'page' : undefined" @click="setPage(page)">{{ page }}</button>
+    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">›</button>
   </nav>
 </template>

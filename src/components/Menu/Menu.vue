@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { MenuItem, MenuProps } from './types'
 
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWdConfig()
+const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
 const teleportTarget = computed(() =>
   resolveOverlayTeleport(props.popup ? props : { teleport: false }, config.value.appendTo),
@@ -51,15 +51,15 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
   <div
     v-if="!popup"
     ref="root"
-    class="wd-menu"
+    class="wi-menu"
     role="menu"
   >
     <template v-for="(item, index) in model" :key="`${item.label ?? 'sep'}-${index}`">
-      <div v-if="item.separator" class="wd-menu__separator" role="separator" />
+      <div v-if="item.separator" class="wi-menu__separator" role="separator" />
       <button
         v-else
         type="button"
-        class="wd-menu__item"
+        class="wi-menu__item"
         role="menuitem"
         :disabled="item.disabled"
         @click="activate(item)"
@@ -69,20 +69,20 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
     </template>
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-scale-fade">
+    <Transition name="wi-scale-fade">
       <div
         v-if="modelValue"
         ref="root"
-        class="wd-menu wd-menu--popup"
-        :class="{ 'wd-menu--teleported': teleported }"
+        class="wi-menu wi-menu--popup"
+        :class="{ 'wi-menu--teleported': teleported }"
         role="menu"
       >
         <template v-for="(item, index) in model" :key="`${item.label ?? 'sep'}-${index}`">
-          <div v-if="item.separator" class="wd-menu__separator" role="separator" />
+          <div v-if="item.separator" class="wi-menu__separator" role="separator" />
           <button
             v-else
             type="button"
-            class="wd-menu__item"
+            class="wi-menu__item"
             role="menuitem"
             :disabled="item.disabled"
             @click="activate(item)"

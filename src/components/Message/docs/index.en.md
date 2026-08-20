@@ -6,7 +6,7 @@ description: Top-center floating notice with an imperative API.
 
 # Message
 
-A lightweight notice that slides in from the top center — good for short action feedback. Prefer the `message` API; you can also mount `<WdMessage />` as a custom host.
+A lightweight notice that slides in from the top center — good for short action feedback. Prefer the `message` API; you can also mount `<WiMessage />` as a custom host.
 
 Vs [Toast](/components/Toast):
 
@@ -16,7 +16,7 @@ Vs [Toast](/components/Toast):
 ## Import
 
 ```ts
-import { message, useMessage, WdMessage } from '@well-insight/ui'
+import { message, useMessage, WiMessage } from '@well-insight/ui'
 ```
 
 ## API
@@ -25,16 +25,16 @@ The first call auto-mounts a floating host; no template component is required.
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, message } from '@well-insight/ui'
+import { WiButton, message } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WdButton label="Success" severity="success" @click="message.success('Saved')" />
-    <WdButton label="Info" severity="info" @click="message.info('A short tip')" />
-    <WdButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
-    <WdButton label="Error" severity="danger" @click="message.error('Request failed')" />
-    <WdButton
+    <WiButton label="Success" severity="success" @click="message.success('Saved')" />
+    <WiButton label="Info" severity="info" @click="message.info('A short tip')" />
+    <WiButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
+    <WiButton label="Error" severity="danger" @click="message.error('Request failed')" />
+    <WiButton
       label="Closable"
       @click="message.info({ content: 'Dismiss manually', closable: true, life: 0 })"
     />
@@ -49,13 +49,13 @@ import { WdButton, message } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { h } from 'vue'
-import { WdButton, WdIcon, message } from '@well-insight/ui'
+import { WiButton, WiIcon, message } from '@well-insight/ui'
 
 function showVNode() {
   message.info({
     content: () =>
       h('span', [
-        h(WdIcon, { name: 'check-circle', size: 'sm' }),
+        h(WiIcon, { name: 'check-circle', size: 'sm' }),
         ' Built with ',
         h('strong', 'h()'),
         ' render',
@@ -66,7 +66,7 @@ function showVNode() {
 </script>
 
 <template>
-  <WdButton label="VNode content" @click="showVNode" />
+  <WiButton label="VNode content" @click="showVNode" />
 </template>
 ```
 
@@ -100,12 +100,12 @@ Returns `{ id, close }`.
 For a custom `appendTo`, place this at the app root:
 
 ```vue
-<WdMessage append-to="body" />
+<WiMessage append-to="body" />
 ```
 
 When a manual host exists, the API will not mount a second one.
 
-## Props (`WdMessage`)
+## Props (`WiMessage`)
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |

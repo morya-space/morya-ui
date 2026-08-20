@@ -11,7 +11,7 @@ Drag to pick a number. In `range` mode there are two thumbs and the bound value 
 ## Import
 
 ```ts
-import { WdSlider } from '@well-insight/ui'
+import { WiSlider } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,15 +19,15 @@ import { WdSlider } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSlider } from '@well-insight/ui'
+import { WiSlider } from '@well-insight/ui'
 
 const value = ref(40)
 </script>
 
 <template>
   <div style="width:min(24rem,100%)">
-    <WdSlider v-model="value" />
-    <p style="margin:.5rem 0 0;color:var(--wd-color-text-muted)">{{ value }}</p>
+    <WiSlider v-model="value" />
+    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">{{ value }}</p>
   </div>
 </template>
 ```
@@ -37,15 +37,15 @@ const value = ref(40)
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdSlider } from '@well-insight/ui'
+import { WiSlider } from '@well-insight/ui'
 
 const value = ref([20, 70])
 </script>
 
 <template>
   <div style="width:min(24rem,100%)">
-    <WdSlider v-model="value" range />
-    <p style="margin:.5rem 0 0;color:var(--wd-color-text-muted)">{{ value.join(' – ') }}</p>
+    <WiSlider v-model="value" range />
+    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">{{ value.join(' – ') }}</p>
   </div>
 </template>
 ```

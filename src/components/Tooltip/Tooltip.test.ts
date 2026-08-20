@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WdTooltip from './Tooltip.vue'
+import WiTooltip from './Tooltip.vue'
 
-describe('WdTooltip', () => {
+describe('WiTooltip', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })
@@ -14,7 +14,7 @@ describe('WdTooltip', () => {
   })
 
   it('shows content for mouse and keyboard focus on body by default', async () => {
-    const wrapper = mount(WdTooltip, {
+    const wrapper = mount(WiTooltip, {
       props: { content: 'More information' },
       slots: { default: '<button>Info</button>' },
       attachTo: document.body,
@@ -22,7 +22,7 @@ describe('WdTooltip', () => {
     await wrapper.trigger('mouseenter')
     await nextTick()
     expect(document.body.querySelector('[role="tooltip"]')?.textContent).toBe('More information')
-    expect(document.body.querySelector('.wd-tooltip__content--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wi-tooltip__content--teleported')).toBeTruthy()
     await wrapper.trigger('mouseleave')
     await nextTick()
     expect(document.body.querySelector('[role="tooltip"]')).toBeNull()
@@ -30,7 +30,7 @@ describe('WdTooltip', () => {
   })
 
   it('respects showDelay before becoming visible', async () => {
-    const wrapper = mount(WdTooltip, {
+    const wrapper = mount(WiTooltip, {
       props: { content: 'Delayed', showDelay: 200 },
       slots: { default: '<button>Info</button>' },
       attachTo: document.body,
@@ -44,13 +44,13 @@ describe('WdTooltip', () => {
   })
 
   it('can render in place when teleport is disabled', async () => {
-    const wrapper = mount(WdTooltip, {
+    const wrapper = mount(WiTooltip, {
       props: { content: 'Inline', teleport: false },
       slots: { default: '<button>Info</button>' },
     })
     await wrapper.trigger('mouseenter')
     await nextTick()
     expect(wrapper.get('[role="tooltip"]').text()).toBe('Inline')
-    expect(wrapper.find('.wd-tooltip__content--teleported').exists()).toBe(false)
+    expect(wrapper.find('.wi-tooltip__content--teleported').exists()).toBe(false)
   })
 })

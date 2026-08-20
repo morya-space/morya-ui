@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
+import { formatLocale, useWiLocale } from '../../locale'
 import { plainTextOf } from '../../shared/content'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { WdRenderableView } from '../../shared/Renderable'
+import { WiRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import {
   closeToastItem,
@@ -19,8 +19,8 @@ const props = withDefaults(defineProps<ToastProps>(), {
   auto: false,
 })
 const emit = defineEmits<{ (event: 'close', message: ToastMessage): void }>()
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
 const list = computed(() => props.messages ?? toastState.messages)
@@ -37,7 +37,7 @@ onBeforeUnmount(() => {
 })
 
 function messageSeverityClass(severity?: ToastMessage['severity']) {
-  return `wd-toast__message--${normalizeSeverity(severity) ?? 'info'}`
+  return `wi-toast__message--${normalizeSeverity(severity) ?? 'info'}`
 }
 
 function closeLabel(message: ToastMessage) {
@@ -55,29 +55,29 @@ function onClose(message: ToastMessage) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
-      class="wd-toast"
-      :class="`wd-toast--${resolvedPosition}`"
+      class="wi-toast"
+      :class="`wi-toast--${resolvedPosition}`"
       aria-live="polite"
       aria-atomic="true"
     >
-      <TransitionGroup name="wd-slide-fade">
+      <TransitionGroup name="wi-slide-fade">
         <article
           v-for="message in list"
           :key="message.id"
-          class="wd-toast__message"
+          class="wi-toast__message"
           :class="messageSeverityClass(message.severity)"
           role="status"
         >
-          <div class="wd-toast__content">
-            <strong><WdRenderableView :value="message.summary" /></strong>
+          <div class="wi-toast__content">
+            <strong><WiRenderableView :value="message.summary" /></strong>
             <p v-if="message.detail != null && message.detail !== ''">
-              <WdRenderableView :value="message.detail" />
+              <WiRenderableView :value="message.detail" />
             </p>
           </div>
           <button
             v-if="message.closable !== false"
             type="button"
-            class="wd-toast__close"
+            class="wi-toast__close"
             :aria-label="closeLabel(message)"
             @click="onClose(message)"
           >

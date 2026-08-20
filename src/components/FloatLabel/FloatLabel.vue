@@ -5,7 +5,7 @@ defineProps<FloatLabelProps>()
 </script>
 
 <template>
-  <span class="wd-float-label">
+  <span class="wi-float-label">
     <slot />
     <label v-if="label || $slots.label">
       <slot name="label">{{ label }}</slot>

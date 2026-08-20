@@ -17,7 +17,7 @@ describe('message API', () => {
       severity: 'success',
     })
     await nextTick()
-    expect(document.body.querySelector('.wd-message-host')).toBeTruthy()
+    expect(document.body.querySelector('.wi-message-host')).toBeTruthy()
     expect(document.body.textContent).toContain('Saved')
   })
 
@@ -47,6 +47,6 @@ describe('message API', () => {
     const { h } = await import('vue')
     message.info({ content: () => h('strong', 'Rich node'), life: 0 })
     await nextTick()
-    expect(document.body.querySelector('.wd-message__content strong')?.textContent).toBe('Rich node')
+    expect(document.body.querySelector('.wi-message__content strong')?.textContent).toBe('Rich node')
   })
 })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, useAttrs, watch } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
 import type { TextareaProps } from './types'
 
@@ -19,9 +19,9 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   invalid: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: string): void }>()
-const config = useWdConfig()
+const config = useWiConfig()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
-const textareaId = computed(() => props.id ?? `wd-textarea-${Math.random().toString(36).slice(2, 8)}`)
+const textareaId = computed(() => props.id ?? `wi-textarea-${Math.random().toString(36).slice(2, 8)}`)
 const isInvalid = computed(() => props.invalid || props.error || Boolean(props.errorMessage))
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 const resolvedVariant = computed(() => props.variant ?? config.value.inputVariant ?? 'outlined')
@@ -30,14 +30,14 @@ const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
 
 const textareaClass = computed(() => [
-  'wd-textarea',
-  `wd-textarea--${sizeClass.value}`,
+  'wi-textarea',
+  `wi-textarea--${sizeClass.value}`,
   {
-    'wd-textarea--filled': resolvedVariant.value === 'filled',
-    'wd-textarea--fluid': props.fluid,
-    'wd-textarea--invalid': isInvalid.value,
-    'wd-textarea--error': isInvalid.value,
-    'wd-textarea--auto-resize': props.autoResize,
+    'wi-textarea--filled': resolvedVariant.value === 'filled',
+    'wi-textarea--fluid': props.fluid,
+    'wi-textarea--invalid': isInvalid.value,
+    'wi-textarea--error': isInvalid.value,
+    'wi-textarea--auto-resize': props.autoResize,
   },
 ])
 
@@ -66,8 +66,8 @@ watch(
 </script>
 
 <template>
-  <div class="wd-textarea-field" :class="{ 'wd-textarea-field--fluid': fluid }">
-    <label v-if="label" class="wd-textarea-field__label" :for="textareaId">{{ label }}</label>
+  <div class="wi-textarea-field" :class="{ 'wi-textarea-field--fluid': fluid }">
+    <label v-if="label" class="wi-textarea-field__label" :for="textareaId">{{ label }}</label>
     <textarea
       ref="textareaElement"
       v-bind="attrs"
@@ -85,8 +85,8 @@ watch(
     <span
       v-if="feedbackText"
       :id="`${textareaId}-help`"
-      class="wd-textarea-field__help"
-      :class="{ 'wd-textarea-field__help--error': feedbackIsError }"
+      class="wi-textarea-field__help"
+      :class="{ 'wi-textarea-field__help--error': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

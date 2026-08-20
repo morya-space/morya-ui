@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
 import type { InputNumberProps } from './types'
 
@@ -18,19 +18,19 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | null): void }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
-const inputId = computed(() => props.id ?? `wd-inputnumber-${Math.random().toString(36).slice(2, 8)}`)
+const config = useWiConfig()
+const locale = useWiLocale()
+const inputId = computed(() => props.id ?? `wi-inputnumber-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 
 const rootClass = computed(() => [
-  'wd-inputnumber',
-  `wd-inputnumber--${sizeClass.value}`,
+  'wi-inputnumber',
+  `wi-inputnumber--${sizeClass.value}`,
   {
-    'wd-inputnumber--fluid': props.fluid,
-    'wd-inputnumber--invalid': props.invalid,
-    'wd-inputnumber--disabled': props.disabled,
-    'wd-inputnumber--buttons': props.showButtons,
+    'wi-inputnumber--fluid': props.fluid,
+    'wi-inputnumber--invalid': props.invalid,
+    'wi-inputnumber--disabled': props.disabled,
+    'wi-inputnumber--buttons': props.showButtons,
   },
 ])
 
@@ -62,12 +62,12 @@ function stepBy(direction: 1 | -1) {
 </script>
 
 <template>
-  <div class="wd-inputnumber-field" :class="{ 'wd-inputnumber-field--fluid': fluid }">
-    <label v-if="label" class="wd-inputnumber-field__label" :for="inputId">{{ label }}</label>
+  <div class="wi-inputnumber-field" :class="{ 'wi-inputnumber-field--fluid': fluid }">
+    <label v-if="label" class="wi-inputnumber-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <button
         v-if="showButtons"
-        class="wd-inputnumber__button wd-inputnumber__button--decrement"
+        class="wi-inputnumber__button wi-inputnumber__button--decrement"
         type="button"
         :aria-label="locale.decrease"
         :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
@@ -78,7 +78,7 @@ function stepBy(direction: 1 | -1) {
       <input
         v-bind="attrs"
         :id="inputId"
-        class="wd-inputnumber__input"
+        class="wi-inputnumber__input"
         type="number"
         :value="modelValue ?? ''"
         :min="min"
@@ -90,7 +90,7 @@ function stepBy(direction: 1 | -1) {
       />
       <button
         v-if="showButtons"
-        class="wd-inputnumber__button wd-inputnumber__button--increment"
+        class="wi-inputnumber__button wi-inputnumber__button--increment"
         type="button"
         :aria-label="locale.increase"
         :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"

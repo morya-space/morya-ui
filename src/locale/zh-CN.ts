@@ -1,6 +1,6 @@
-import type { WdLocaleMessages } from './types'
+import type { WiLocaleMessages } from './types'
 
-export const zhCN: WdLocaleMessages = {
+export const zhCN: WiLocaleMessages = {
   name: 'zh-CN',
   accept: '确认',
   reject: '取消',

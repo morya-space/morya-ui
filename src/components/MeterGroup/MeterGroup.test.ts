@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdMeterGroup from './MeterGroup.vue'
+import WiMeterGroup from './MeterGroup.vue'
 
-describe('WdMeterGroup', () => {
+describe('WiMeterGroup', () => {
   it('renders segments and legend', () => {
-    const wrapper = mount(WdMeterGroup, {
+    const wrapper = mount(WiMeterGroup, {
       props: {
         value: [
           { label: 'Apps', value: 40, color: '#2563eb' },
@@ -13,8 +13,8 @@ describe('WdMeterGroup', () => {
         max: 100,
       },
     })
-    expect(wrapper.findAll('.wd-metergroup__segment')).toHaveLength(2)
+    expect(wrapper.findAll('.wi-metergroup__segment')).toHaveLength(2)
     expect(wrapper.text()).toContain('Apps')
-    expect(wrapper.find('.wd-metergroup__segment').attributes('style')).toContain('40%')
+    expect(wrapper.find('.wi-metergroup__segment').attributes('style')).toContain('40%')
   })
 })

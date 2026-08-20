@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 import type { OrderListProps } from './types'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: unknown[]): void
   (event: 'reorder', value: unknown[]): void
 }>()
-const locale = useWdLocale()
+const locale = useWiLocale()
 
 const selectedIndex = ref<number | null>(null)
 const dragFrom = ref<number | null>(null)
@@ -102,25 +102,25 @@ function resetDrag() {
 </script>
 
 <template>
-  <div class="wd-orderlist">
-    <div class="wd-orderlist__controls">
-      <button type="button" class="wd-orderlist__btn" :aria-label="locale.moveUp" @click="move(-1)">
-        <WdIcon name="chevron-up" size="sm" />
+  <div class="wi-orderlist">
+    <div class="wi-orderlist__controls">
+      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveUp" @click="move(-1)">
+        <WiIcon name="chevron-up" size="sm" />
       </button>
-      <button type="button" class="wd-orderlist__btn" :aria-label="locale.moveDown" @click="move(1)">
-        <WdIcon name="chevron-down" size="sm" />
+      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveDown" @click="move(1)">
+        <WiIcon name="chevron-down" size="sm" />
       </button>
     </div>
 
-    <ul class="wd-orderlist__list" :style="listStyle" role="listbox">
+    <ul class="wi-orderlist__list" :style="listStyle" role="listbox">
       <li
         v-for="(item, index) in modelValue"
         :key="itemKey(item, index)"
-        class="wd-orderlist__item"
+        class="wi-orderlist__item"
         :class="{
-          'wd-orderlist__item--selected': selectedIndex === index,
-          'wd-orderlist__ghost': dragdrop && dragFrom === index,
-          'wd-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
+          'wi-orderlist__item--selected': selectedIndex === index,
+          'wi-orderlist__ghost': dragdrop && dragFrom === index,
+          'wi-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
         }"
         role="option"
         :aria-selected="selectedIndex === index"
@@ -134,14 +134,14 @@ function resetDrag() {
         <button
           v-if="dragdrop"
           type="button"
-          class="wd-orderlist__handle"
+          class="wi-orderlist__handle"
           :aria-label="locale.dragToReorder"
           @click.stop
           @pointerdown="armHandle"
         >
-          <WdIcon name="grip" size="sm" />
+          <WiIcon name="grip" size="sm" />
         </button>
-        <span class="wd-orderlist__label">
+        <span class="wi-orderlist__label">
           <slot name="item" :item="item" :index="index">{{ item }}</slot>
         </span>
       </li>

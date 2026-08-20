@@ -3,7 +3,7 @@ import type { IconName } from '../Icon/types'
 export interface ChipProps {
   /** Chip text. */
   label?: string
-  /** Leading icon from WdIcon. */
+  /** Leading icon from WiIcon. */
   icon?: IconName
   /** Leading image URL. */
   image?: string

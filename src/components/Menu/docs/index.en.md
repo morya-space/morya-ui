@@ -11,14 +11,14 @@ Vertical menu rendered from a `model`.
 ## Import
 
 ```ts
-import { WdMenu } from '@well-insight/ui'
+import { WiMenu } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenu } from '@well-insight/ui'
+import { WiMenu } from '@well-insight/ui'
 
 const model = [
   { label: 'New', command: () => undefined },
@@ -29,7 +29,7 @@ const model = [
 </script>
 
 <template>
-  <WdMenu :model="model" />
+  <WiMenu :model="model" />
 </template>
 ```
 

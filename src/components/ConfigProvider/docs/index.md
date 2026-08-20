@@ -6,7 +6,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 # ConfigProvider
 
-通过 `WdConfigProvider` 或 `createWellInsight` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
+通过 `WiConfigProvider` 或 `createWellInsight` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
 
 ## 能力一览
 
@@ -24,7 +24,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdInput, WdSelect } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -34,14 +34,14 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider size="small">
+  <WiConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="继承 small" />
-      <WdInput placeholder="继承 small" style="width:10rem" />
-      <WdSelect v-model="city" :options="options" placeholder="继承 small" style="width:10rem" />
-      <WdButton label="覆盖为 large" size="large" />
+      <WiButton label="继承 small" />
+      <WiInput placeholder="继承 small" style="width:10rem" />
+      <WiSelect v-model="city" :options="options" placeholder="继承 small" style="width:10rem" />
+      <WiButton label="覆盖为 large" size="large" />
     </div>
-  </WdConfigProvider>
+  </WiConfigProvider>
 </template>
 ```
 
@@ -49,23 +49,23 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdConfigProvider, WdButton, WdInput } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WdConfigProvider density="compact">
+    <WiConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WdButton label="compact" />
-        <WdInput placeholder="compact" style="width:10rem" />
+        <WiButton label="compact" />
+        <WiInput placeholder="compact" style="width:10rem" />
       </div>
-    </WdConfigProvider>
-    <WdConfigProvider density="spacious">
+    </WiConfigProvider>
+    <WiConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WdButton label="spacious" />
-        <WdInput placeholder="spacious" style="width:10rem" />
+        <WiButton label="spacious" />
+        <WiInput placeholder="spacious" style="width:10rem" />
       </div>
-    </WdConfigProvider>
+    </WiConfigProvider>
   </div>
 </template>
 ```
@@ -75,7 +75,7 @@ import { WdConfigProvider, WdButton, WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfigProvider, WdButton, WdSelect, WdDialog } from '@well-insight/ui'
+import { WiConfigProvider, WiButton, WiSelect, WiDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const visible = ref(false)
@@ -86,15 +86,15 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider input-variant="filled" append-to="body">
+  <WiConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdSelect v-model="city" :options="options" placeholder="filled 输入" style="width:12rem" />
-      <WdButton label="打开对话框" @click="visible = true" />
+      <WiSelect v-model="city" :options="options" placeholder="filled 输入" style="width:12rem" />
+      <WiButton label="打开对话框" @click="visible = true" />
     </div>
-    <WdDialog v-model="visible" title="继承 appendTo" style="width: 24rem">
+    <WiDialog v-model="visible" title="继承 appendTo" style="width: 24rem">
       <p style="margin:0">浮层挂载目标由 ConfigProvider 提供。</p>
-    </WdDialog>
-  </WdConfigProvider>
+    </WiDialog>
+  </WiConfigProvider>
 </template>
 ```
 
@@ -122,12 +122,12 @@ createApp(App)
 ## 读取配置
 
 ```ts
-import { useWdConfig } from '@well-insight/ui'
+import { useWiConfig } from '@well-insight/ui'
 
-const config = useWdConfig()
+const config = useWiConfig()
 ```
 
-优先级：**组件 Props > `WdConfigProvider` > `createWellInsight()` > 内置默认值**。
+优先级：**组件 Props > `WiConfigProvider` > `createWellInsight()` > 内置默认值**。
 
 ## 主题与动效
 

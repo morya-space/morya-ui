@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs, type Component } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { formatLocale, useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
-import WdIcon from '../Icon/Icon.vue'
+import WiIcon from '../Icon/Icon.vue'
 import type { IconName } from '../Icon/types'
 import type { InputPasswordProps } from './types'
 
@@ -22,10 +22,10 @@ const props = withDefaults(defineProps<InputPasswordProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: string): void }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const unmasked = ref(false)
-const inputId = computed(() => props.id ?? `wd-password-${Math.random().toString(36).slice(2, 8)}`)
+const inputId = computed(() => props.id ?? `wi-password-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 
 const showIconName = computed(() => (typeof props.showIcon === 'string' ? (props.showIcon as IconName) : undefined))
@@ -58,13 +58,13 @@ const strengthLabel = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-password',
-  `wd-password--${sizeClass.value}`,
+  'wi-password',
+  `wi-password--${sizeClass.value}`,
   {
-    'wd-password--fluid': props.fluid,
-    'wd-password--invalid': props.invalid,
-    'wd-password--disabled': props.disabled,
-    'wd-password--toggle': props.toggleMask,
+    'wi-password--fluid': props.fluid,
+    'wi-password--invalid': props.invalid,
+    'wi-password--disabled': props.disabled,
+    'wi-password--toggle': props.toggleMask,
   },
 ])
 
@@ -75,13 +75,13 @@ function updateValue(event: Event) {
 </script>
 
 <template>
-  <div class="wd-password-field" :class="{ 'wd-password-field--fluid': fluid }">
-    <label v-if="label" class="wd-password-field__label" :for="inputId">{{ label }}</label>
+  <div class="wi-password-field" :class="{ 'wi-password-field--fluid': fluid }">
+    <label v-if="label" class="wi-password-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <input
         v-bind="attrs"
         :id="inputId"
-        class="wd-password__input"
+        class="wi-password__input"
         :type="unmasked ? 'text' : 'password'"
         :value="modelValue"
         :disabled="disabled"
@@ -91,7 +91,7 @@ function updateValue(event: Event) {
       />
       <button
         v-if="toggleMask"
-        class="wd-password__toggle"
+        class="wi-password__toggle"
         type="button"
         :aria-label="unmasked ? locale.hidePassword : locale.showPassword"
         :aria-pressed="unmasked"
@@ -99,19 +99,19 @@ function updateValue(event: Event) {
         @click="unmasked = !unmasked"
       >
         <slot v-if="unmasked" name="hideIcon" :unmasked="unmasked">
-          <WdIcon v-if="hideIconName" :name="hideIconName" size="sm" />
+          <WiIcon v-if="hideIconName" :name="hideIconName" size="sm" />
           <component :is="hideIconComponent" v-else-if="hideIconComponent" />
         </slot>
         <slot v-else name="showIcon" :unmasked="unmasked">
-          <WdIcon v-if="showIconName" :name="showIconName" size="sm" />
+          <WiIcon v-if="showIconName" :name="showIconName" size="sm" />
           <component :is="showIconComponent" v-else-if="showIconComponent" />
         </slot>
       </button>
     </div>
     <span
       v-if="feedback && strength !== 'empty'"
-      class="wd-password__feedback"
-      :class="`wd-password__feedback--${strength}`"
+      class="wi-password__feedback"
+      :class="`wi-password__feedback--${strength}`"
     >
       {{ formatLocale(locale.passwordStrength, { value: strengthLabel }) }}
     </span>

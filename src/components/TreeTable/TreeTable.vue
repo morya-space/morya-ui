@@ -25,8 +25,8 @@ function toggle(node: TreeTableNode) {
 </script>
 
 <template>
-  <div class="wd-treetable">
-    <table class="wd-treetable__table">
+  <div class="wi-treetable">
+    <table class="wi-treetable__table">
       <thead>
         <tr>
           <th v-for="column in columns" :key="column.field" scope="col">{{ column.header }}</th>

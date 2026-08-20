@@ -1,2 +1,2 @@
-export { default as WdScrollTop } from './ScrollTop.vue'
+export { default as WiScrollTop } from './ScrollTop.vue'
 export type { ScrollTopProps, ScrollTopTarget } from './types'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, toRef } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import type { DrawerProps } from './types'
@@ -21,8 +21,8 @@ const emit = defineEmits<{
   (event: 'hide'): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const drawerElement = ref<HTMLElement | null>(null)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 
@@ -46,35 +46,35 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-drawer">
+    <Transition name="wi-drawer">
       <div
         v-if="modelValue"
-        class="wd-drawer-backdrop"
-        :class="{ 'wd-drawer-backdrop--modal': modal }"
+        class="wi-drawer-backdrop"
+        :class="{ 'wi-drawer-backdrop--modal': modal }"
         @click.self="onOutsideClick"
       >
         <aside
           ref="drawerElement"
-          class="wd-drawer"
-          :class="`wd-drawer--${position}`"
+          class="wi-drawer"
+          :class="`wi-drawer--${position}`"
           role="dialog"
           :aria-modal="modal || undefined"
           :aria-label="header"
           tabindex="-1"
         >
-          <header v-if="$slots.header || header || showCloseIcon" class="wd-drawer__header">
+          <header v-if="$slots.header || header || showCloseIcon" class="wi-drawer__header">
             <slot name="header"><h2 v-if="header">{{ header }}</h2></slot>
             <button
               v-if="showCloseIcon"
               type="button"
-              class="wd-drawer__close"
+              class="wi-drawer__close"
               :aria-label="locale.close"
               @click="close"
             >
               ×
             </button>
           </header>
-          <div class="wd-drawer__body"><slot /></div>
+          <div class="wi-drawer__body"><slot /></div>
         </aside>
       </div>
     </Transition>

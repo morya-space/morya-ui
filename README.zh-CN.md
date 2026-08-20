@@ -39,15 +39,15 @@ createApp(App).mount('#app')
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdInput } from '@well-insight/ui'
+import { WiButton, WiInput } from '@well-insight/ui'
 
 const name = ref('')
 </script>
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WdInput v-model="name" label="姓名" placeholder="请输入姓名" />
-    <WdButton label="提交" />
+    <WiInput v-model="name" label="姓名" placeholder="请输入姓名" />
+    <WiButton label="提交" />
   </div>
 </template>
 ```
@@ -88,9 +88,9 @@ createApp(App)
 | `zIndex` | 浮层 z-index 基准 |
 | `locale` | 内置文案（默认 `zhCN`，或 `enUS` / 局部覆盖） |
 
-子树覆盖使用 `<WdConfigProvider>`。解析顺序：
+子树覆盖使用 `<WiConfigProvider>`。解析顺序：
 
-**组件 Props → `WdConfigProvider` → `createWellInsight` → 内置默认**
+**组件 Props → `WiConfigProvider` → `createWellInsight` → 内置默认**
 
 详见文档站 [全局配置](./playground/src/docs/guide/config.md)。
 
@@ -138,13 +138,13 @@ message.error('出错了')
 toast.add({ severity: 'info', summary: '提示', detail: '详情在此' })
 ```
 
-需要受控宿主时仍可渲染 `<WdMessage />` / `<WdToast />`。
+需要受控宿主时仍可渲染 `<WiMessage />` / `<WiToast />`。
 
 ## 导出
 
 | 导入 | 用途 |
 | --- | --- |
-| `@well-insight/ui` | 组件、`createWellInsight`、`WdConfigProvider`、主题与语言、`message` / `toast` |
+| `@well-insight/ui` | 组件、`createWellInsight`、`WiConfigProvider`、主题与语言、`message` / `toast` |
 | `@well-insight/ui/styles.css` | 必需样式（token + 组件样式） |
 
 TypeScript 类型已通过包 `exports` 提供。

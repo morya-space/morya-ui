@@ -1,2 +1,2 @@
-export { default as WdConfigProvider } from './ConfigProvider.vue'
-export type { WdGlobalConfig, WdLocaleConfig } from './types'
+export { default as WiConfigProvider } from './ConfigProvider.vue'
+export type { WiGlobalConfig, WiLocaleConfig } from './types'

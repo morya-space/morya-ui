@@ -11,23 +11,23 @@ description: 让子元素宽度撑满的布局包裹。
 ## 引入
 
 ```ts
-import { WdFluid } from '@well-insight/ui'
+import { WiFluid } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdFluid, WdInput, WdButton } from '@well-insight/ui'
+import { WiFluid, WiInput, WiButton } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdFluid>
+  <WiFluid>
     <div style="display:flex;flex-direction:column;gap:0.75rem">
-      <WdInput placeholder="流体宽度输入" />
-      <WdButton label="提交" />
+      <WiInput placeholder="流体宽度输入" />
+      <WiButton label="提交" />
     </div>
-  </WdFluid>
+  </WiFluid>
 </template>
 ```
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { SpeedDialItem, SpeedDialProps } from './types'
 
@@ -17,8 +17,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const speedDialLabel = computed(() => props.ariaLabel ?? locale.value.speedDial)
 const root = ref<HTMLElement | null>(null)
 const button = ref<HTMLElement | null>(null)
@@ -28,11 +28,11 @@ const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 const rootClass = computed(() => [
-  'wd-speeddial',
-  `wd-speeddial--${props.direction}`,
+  'wi-speeddial',
+  `wi-speeddial--${props.direction}`,
   {
-    'wd-speeddial--open': props.modelValue,
-    'wd-speeddial--disabled': props.disabled,
+    'wi-speeddial--open': props.modelValue,
+    'wi-speeddial--disabled': props.disabled,
   },
 ])
 
@@ -107,19 +107,19 @@ onBeforeUnmount(() => {
 <template>
   <div ref="root" :class="rootClass">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <ul
           v-if="modelValue"
           ref="list"
-          class="wd-speeddial__list"
-          :class="{ 'wd-speeddial__list--teleported': teleported }"
+          class="wi-speeddial__list"
+          :class="{ 'wi-speeddial__list--teleported': teleported }"
           :style="teleported ? listStyle : undefined"
           role="menu"
         >
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="none">
             <button
               type="button"
-              class="wd-speeddial__action"
+              class="wi-speeddial__action"
               role="menuitem"
               :title="item.label"
               :aria-label="item.label"
@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
               @click="activate(item)"
             >
               <span v-if="item.icon" aria-hidden="true">{{ item.icon }}</span>
-              <span class="wd-speeddial__action-label">{{ item.label }}</span>
+              <span class="wi-speeddial__action-label">{{ item.label }}</span>
             </button>
           </li>
         </ul>
@@ -136,7 +136,7 @@ onBeforeUnmount(() => {
     <button
       ref="button"
       type="button"
-      class="wd-speeddial__button"
+      class="wi-speeddial__button"
       :aria-label="speedDialLabel"
       :aria-expanded="modelValue"
       :disabled="disabled"

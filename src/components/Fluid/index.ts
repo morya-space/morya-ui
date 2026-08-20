@@ -1,2 +1,2 @@
-export { default as WdFluid } from './Fluid.vue'
+export { default as WiFluid } from './Fluid.vue'
 export type { FluidProps } from './types'

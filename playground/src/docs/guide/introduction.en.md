@@ -14,7 +14,7 @@ Source: [GitHub](https://github.com/well-insight/well-insight-ui)
 
 - **Reusable**: apps import components and styles from the package entry; the publish output is ESM + types + CSS.
 - **Consistent**: size, semantic color, and overlay behavior follow one set of conventions.
-- **Theme-first**: color, radius, space, and motion use `--wd-*` CSS variables; `useTheme` / `useMotion` / `useDensity` ship in the same package.
+- **Theme-first**: color, radius, space, and motion use `--wi-*` CSS variables; `useTheme` / `useMotion` / `useDensity` ship in the same package.
 - **Docs as preview**: each component’s `docs/index.md` (Chinese) and `docs/index.en.md` (English) support Markdown plus interactive `vue preview` blocks.
 
 ## Packages

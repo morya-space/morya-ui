@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { WiAppendTo } from '../../shared/overlay'
 
 export interface DropdownItem {
   /** 菜单项的稳定标识，同时用于 v-for 的 key。 */
@@ -24,7 +24,7 @@ export interface DropdownProps {
    */
   teleport?: boolean
   /** 挂载目标，默认 `'body'`；`'self'` / `false` 表示就地渲染。 */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
 }
 
 export interface DropdownEmits {

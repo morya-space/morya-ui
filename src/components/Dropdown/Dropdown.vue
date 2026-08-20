@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { DropdownItem, DropdownProps } from './types'
 
@@ -16,8 +16,8 @@ const emit = defineEmits<{
   (event: 'select', item: DropdownItem): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
@@ -143,10 +143,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="wd-dropdown">
+  <div ref="root" class="wi-dropdown">
     <span
       ref="trigger"
-      class="wd-dropdown__trigger"
+      class="wi-dropdown__trigger"
       role="button"
       tabindex="0"
       :aria-expanded="modelValue"
@@ -157,12 +157,12 @@ onBeforeUnmount(() => {
       <slot name="trigger">{{ locale.openMenu }}</slot>
     </span>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <div
           v-if="modelValue"
           ref="menu"
-          class="wd-dropdown__menu"
-          :class="[`wd-dropdown__menu--${placement}`, { 'wd-dropdown__menu--teleported': teleported }]"
+          class="wi-dropdown__menu"
+          :class="[`wi-dropdown__menu--${placement}`, { 'wi-dropdown__menu--teleported': teleported }]"
           :style="teleported ? menuStyle : undefined"
           role="menu"
           tabindex="-1"
@@ -172,8 +172,8 @@ onBeforeUnmount(() => {
             v-for="item in items"
             :key="item.value"
             type="button"
-            class="wd-dropdown__item"
-            :class="{ 'wd-dropdown__item--highlighted': enabledItems[highlightedIndex]?.value === item.value }"
+            class="wi-dropdown__item"
+            :class="{ 'wi-dropdown__item--highlighted': enabledItems[highlightedIndex]?.value === item.value }"
             role="menuitem"
             :disabled="item.disabled"
             @mouseenter="!item.disabled && (highlightedIndex = enabledItems.findIndex((enabledItem) => enabledItem.value === item.value))"

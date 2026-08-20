@@ -11,23 +11,23 @@ Fluid layout container that applies `width: 100%` to child controls.
 ## Import
 
 ```ts
-import { WdFluid } from '@well-insight/ui'
+import { WiFluid } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdFluid, WdInput, WdButton } from '@well-insight/ui'
+import { WiFluid, WiInput, WiButton } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdFluid>
+  <WiFluid>
     <div style="display:flex;flex-direction:column;gap:0.75rem">
-      <WdInput placeholder="Fluid-width input" />
-      <WdButton label="Submit" />
+      <WiInput placeholder="Fluid-width input" />
+      <WiButton label="Submit" />
     </div>
-  </WdFluid>
+  </WiFluid>
 </template>
 ```
 

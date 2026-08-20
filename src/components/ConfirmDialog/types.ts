@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { WiAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity } from '../Button/types'
 
 export interface ConfirmDialogProps {
@@ -11,7 +11,7 @@ export interface ConfirmDialogProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
 }
 
 export interface ConfirmDialogEmits {

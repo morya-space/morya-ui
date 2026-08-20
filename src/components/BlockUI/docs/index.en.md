@@ -11,7 +11,7 @@ Wraps content and shows a mask when `blocked` is true.
 ## Import
 
 ```ts
-import { WdBlockUI } from '@well-insight/ui'
+import { WiBlockUI } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,16 +19,16 @@ import { WdBlockUI } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdBlockUI, WdButton } from '@well-insight/ui'
+import { WiBlockUI, WiButton } from '@well-insight/ui'
 
 const blocked = ref(false)
 </script>
 
 <template>
-  <WdButton :label="blocked ? 'Unblock' : 'Block'" @click="blocked = !blocked" />
-  <WdBlockUI :blocked="blocked" style="margin-top: 1rem">
+  <WiButton :label="blocked ? 'Unblock' : 'Block'" @click="blocked = !blocked" />
+  <WiBlockUI :blocked="blocked" style="margin-top: 1rem">
     <p>Panel content</p>
-  </WdBlockUI>
+  </WiBlockUI>
 </template>
 ```
 

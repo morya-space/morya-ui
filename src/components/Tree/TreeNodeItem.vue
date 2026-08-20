@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdCheckbox from '../Checkbox/Checkbox.vue'
-import WdIcon from '../Icon/Icon.vue'
+import { useWiLocale } from '../../locale'
+import WiCheckbox from '../Checkbox/Checkbox.vue'
+import WiIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
 import type { IconName } from '../Icon/types'
-import { WD_TREE_KEY, WD_TREE_NODE_SLOT } from './context'
+import { WI_TREE_KEY, WI_TREE_NODE_SLOT } from './context'
 import type { TreeNode } from './types'
 import TreeNodeItem from './TreeNodeItem.vue'
 
 const props = defineProps<{ node: TreeNode }>()
-const tree = inject(WD_TREE_KEY)!
-const nodeSlot = inject(WD_TREE_NODE_SLOT, undefined)
-const locale = useWdLocale()
+const tree = inject(WI_TREE_KEY)!
+const nodeSlot = inject(WI_TREE_NODE_SLOT, undefined)
+const locale = useWiLocale()
 
 const expanded = computed(() => tree.isExpanded(props.node.key))
 const selected = computed(() => tree.isSelected(props.node.key))
@@ -39,18 +39,18 @@ const customContent = computed(() =>
 
 <template>
   <li
-    class="wd-tree__node"
+    class="wi-tree__node"
     role="treeitem"
     :aria-expanded="hasChildren ? expanded : undefined"
     :aria-disabled="disabled || undefined"
   >
     <div
-      class="wd-tree__row"
+      class="wi-tree__row"
       :class="{
-        'wd-tree__row--selected': selected,
-        'wd-tree__row--disabled': disabled,
-        'wd-tree__row--matched': matched,
-        'wd-tree__row--indeterminate': indeterminate,
+        'wi-tree__row--selected': selected,
+        'wi-tree__row--disabled': disabled,
+        'wi-tree__row--matched': matched,
+        'wi-tree__row--indeterminate': indeterminate,
       }"
       :draggable="tree.draggable && !disabled"
       @dragstart="tree.onDragStart(node, $event)"
@@ -60,33 +60,33 @@ const customContent = computed(() =>
       <button
         v-if="hasChildren"
         type="button"
-        class="wd-tree__toggler"
+        class="wi-tree__toggler"
         :aria-label="expanded ? locale.collapse : locale.expand"
         :disabled="disabled"
         @click="tree.toggleExpand(node)"
       >
-        <WdIcon v-if="loading" name="loader" size="sm" />
-        <WdIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
+        <WiIcon v-if="loading" name="loader" size="sm" />
+        <WiIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="wd-tree__toggler wd-tree__toggler--leaf" aria-hidden="true" />
+      <span v-else class="wi-tree__toggler wi-tree__toggler--leaf" aria-hidden="true" />
 
-      <WdCheckbox
+      <WiCheckbox
         v-if="tree.showCheckbox"
-        class="wd-tree__checkbox"
+        class="wi-tree__checkbox"
         :model-value="checked || indeterminate"
         :disabled="disabled"
         @update:model-value="tree.toggleCheck(node)"
         @click.stop
       />
 
-      <span v-if="iconName || node.icon" class="wd-tree__icon" aria-hidden="true">
-        <WdIcon v-if="iconName" :name="iconName" size="sm" />
+      <span v-if="iconName || node.icon" class="wi-tree__icon" aria-hidden="true">
+        <WiIcon v-if="iconName" :name="iconName" size="sm" />
         <template v-else>{{ node.icon }}</template>
       </span>
 
       <button
         type="button"
-        class="wd-tree__label"
+        class="wi-tree__label"
         :disabled="disabled"
         @click="tree.select(node)"
       >
@@ -97,7 +97,7 @@ const customContent = computed(() =>
       </button>
     </div>
 
-    <ul v-if="hasChildren && expanded" class="wd-tree__children" role="group">
+    <ul v-if="hasChildren && expanded" class="wi-tree__children" role="group">
       <TreeNodeItem v-for="child in visibleChildren" :key="child.key" :node="child" />
     </ul>
   </li>

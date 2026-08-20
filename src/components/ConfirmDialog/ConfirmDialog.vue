@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, toRef, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WdButton from '../Button/Button.vue'
+import WiButton from '../Button/Button.vue'
 import type { ConfirmDialogProps } from './types'
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
@@ -20,8 +20,8 @@ const emit = defineEmits<{
   (event: 'reject'): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const dialogElement = ref<HTMLElement | null>(null)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const title = computed(() => props.header ?? locale.value.confirm)
@@ -29,8 +29,8 @@ const acceptText = computed(() => props.acceptLabel ?? locale.value.accept)
 const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 const origin = ref(getLastPointer())
 const zoomStyle = computed(() => ({
-  '--wd-dialog-origin-x': `${origin.value.x}px`,
-  '--wd-dialog-origin-y': `${origin.value.y}px`,
+  '--wi-dialog-origin-x': `${origin.value.x}px`,
+  '--wi-dialog-origin-y': `${origin.value.y}px`,
 }))
 
 function close() {
@@ -64,33 +64,33 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-dialog">
+    <Transition name="wi-dialog">
       <div
         v-if="modelValue"
-        class="wd-dialog-backdrop wd-dialog-backdrop--center wd-dialog-backdrop--modal wd-confirmdialog-backdrop"
+        class="wi-dialog-backdrop wi-dialog-backdrop--center wi-dialog-backdrop--modal wi-confirmdialog-backdrop"
         :style="zoomStyle"
       >
-        <div class="wd-dialog-zoom" @click.self="reject">
+        <div class="wi-dialog-zoom" @click.self="reject">
         <section
           ref="dialogElement"
-          class="wd-dialog wd-confirmdialog"
+          class="wi-dialog wi-confirmdialog"
           role="alertdialog"
           aria-modal="true"
           :aria-label="title"
           tabindex="-1"
         >
-          <header class="wd-dialog__header wd-confirmdialog__header">
+          <header class="wi-dialog__header wi-confirmdialog__header">
             <slot name="header">
               <h2>{{ title }}</h2>
             </slot>
           </header>
-          <div class="wd-dialog__body wd-confirmdialog__message">
+          <div class="wi-dialog__body wi-confirmdialog__message">
             <slot>{{ message }}</slot>
           </div>
-          <footer class="wd-dialog__footer wd-confirmdialog__footer">
+          <footer class="wi-dialog__footer wi-confirmdialog__footer">
             <slot name="footer">
-              <WdButton :label="rejectText" severity="secondary" @click="reject" />
-              <WdButton :label="acceptText" :severity="acceptSeverity" @click="accept" />
+              <WiButton :label="rejectText" severity="secondary" @click="reject" />
+              <WiButton :label="acceptText" :severity="acceptSeverity" @click="accept" />
             </slot>
           </footer>
         </section>

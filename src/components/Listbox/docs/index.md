@@ -11,7 +11,7 @@ description: 列表形式的单选或多选控件，可筛选。
 ## 引入
 
 ```ts
-import { WdListbox } from '@well-insight/ui'
+import { WiListbox } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdListbox } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdListbox } from '@well-insight/ui'
+import { WiListbox } from '@well-insight/ui'
 
 const value = ref('a')
 const options = [
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <WdListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
+  <WiListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
 </template>
 ```
 

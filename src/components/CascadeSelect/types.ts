@@ -1,5 +1,5 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdSizeInput } from '../../shared/types'
+import type { WiAppendTo } from '../../shared/overlay'
+import type { WiSizeInput } from '../../shared/types'
 
 export interface CascadeSelectOption {
   label: string
@@ -15,11 +15,11 @@ export interface CascadeSelectProps {
   options: CascadeSelectOption[]
   placeholder?: string
   disabled?: boolean
-  size?: WdSizeInput
+  size?: WiSizeInput
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
 }
 
 export interface CascadeSelectEmits {

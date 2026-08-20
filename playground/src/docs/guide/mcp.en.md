@@ -149,11 +149,11 @@ The assistant should call tools first, then produce something like:
 
 ```vue
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdButton label="Delete" severity="danger" />
+  <WiButton label="Delete" severity="danger" />
 </template>
 ```
 

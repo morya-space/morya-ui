@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { MenubarItem, MenubarProps } from './types'
 
@@ -9,8 +9,8 @@ const props = withDefaults(defineProps<MenubarProps>(), {
   teleport: true,
 })
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const openIndex = ref<number | null>(null)
 const root = ref<HTMLElement | null>(null)
 const triggerEls = ref<(HTMLElement | null)[]>([])
@@ -53,7 +53,7 @@ function activateChild(item: MenubarItem) {
 function onDocumentClick(event: MouseEvent) {
   const target = event.target as Node
   if (root.value?.contains(target)) return
-  const openSubmenu = document.querySelector('.wd-menubar__submenu--teleported')
+  const openSubmenu = document.querySelector('.wi-menubar__submenu--teleported')
   if (openSubmenu?.contains(target)) return
   openIndex.value = null
 }
@@ -81,31 +81,31 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav ref="root" class="wd-menubar" :aria-label="locale.menubar">
+  <nav ref="root" class="wi-menubar" :aria-label="locale.menubar">
     <div
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
-      class="wd-menubar__item"
-      :class="{ 'wd-menubar__item--open': openIndex === index }"
+      class="wi-menubar__item"
+      :class="{ 'wi-menubar__item--open': openIndex === index }"
     >
       <button
         :ref="(el) => setTriggerRef(el, index)"
         type="button"
-        class="wd-menubar__trigger"
+        class="wi-menubar__trigger"
         :disabled="item.disabled"
         :aria-expanded="item.items?.length ? openIndex === index : undefined"
         :aria-haspopup="item.items?.length ? 'menu' : undefined"
         @click.stop="toggle(index, item)"
       >
         {{ item.label }}
-        <span v-if="item.items?.length" class="wd-menubar__caret" aria-hidden="true">▾</span>
+        <span v-if="item.items?.length" class="wi-menubar__caret" aria-hidden="true">▾</span>
       </button>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="wd-scale-fade">
+        <Transition name="wi-scale-fade">
           <div
             v-if="item.items?.length && openIndex === index"
-            class="wd-menubar__submenu"
-            :class="{ 'wd-menubar__submenu--teleported': teleported }"
+            class="wi-menubar__submenu"
+            :class="{ 'wi-menubar__submenu--teleported': teleported }"
             :style="teleported ? submenuStyle : undefined"
             role="menu"
           >
@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
               v-for="(child, childIndex) in item.items"
               :key="`${child.label}-${childIndex}`"
               type="button"
-              class="wd-menubar__subitem"
+              class="wi-menubar__subitem"
               role="menuitem"
               :disabled="child.disabled"
               @click.stop="activateChild(child)"

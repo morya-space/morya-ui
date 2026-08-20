@@ -4,7 +4,7 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
 import { listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { useDocsI18n } from '../i18n'
-import { WdScrollbar } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 
 const route = useRoute()
 const router = useRouter()
@@ -32,7 +32,7 @@ watch(
 <template>
   <div class="docs-shell">
     <aside class="docs-sidebar" :aria-label="t.docsNav">
-      <WdScrollbar class="docs-scroll">
+      <WiScrollbar class="docs-scroll">
         <div class="docs-sidebar__body">
           <p class="docs-kicker">DOCUMENTATION</p>
           <h1 class="docs-sidebar__title">{{ t.docsTitle }}</h1>
@@ -48,11 +48,11 @@ watch(
             </RouterLink>
           </nav>
         </div>
-      </WdScrollbar>
+      </WiScrollbar>
     </aside>
 
     <main class="docs-main">
-      <WdScrollbar class="docs-scroll">
+      <WiScrollbar class="docs-scroll">
         <div class="docs-main__body">
           <ComponentDocViewer v-if="activeDoc" :key="`${activeDoc.slug}-${lang}`" :doc="{ name: activeDoc.slug, frontmatter: activeDoc.frontmatter, component: activeDoc.component }" />
           <section v-else class="docs-missing">
@@ -60,7 +60,7 @@ watch(
             <RouterLink :to="{ name: 'docs', params: { slug: 'introduction' } }">{{ t.backIntro }}</RouterLink>
           </section>
         </div>
-      </WdScrollbar>
+      </WiScrollbar>
     </main>
   </div>
 </template>
@@ -75,7 +75,7 @@ watch(
 }
 
 .docs-sidebar {
-  background: color-mix(in srgb, var(--wd-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--wi-color-surface) 62%, transparent);
   border-right: 1px solid var(--docs-edge);
   min-height: 0;
   backdrop-filter: blur(12px);
@@ -115,25 +115,25 @@ watch(
 .docs-nav__item {
   border: 1px solid transparent;
   border-radius: 0.7rem;
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   font-size: 0.86rem;
   font-weight: 500;
   padding: 0.55rem 0.7rem;
   text-decoration: none;
   transition:
-    color var(--wd-motion-fast) var(--wd-motion-ease),
-    background var(--wd-motion-fast) var(--wd-motion-ease),
-    border-color var(--wd-motion-fast) var(--wd-motion-ease);
+    color var(--wi-motion-fast) var(--wi-motion-ease),
+    background var(--wi-motion-fast) var(--wi-motion-ease),
+    border-color var(--wi-motion-fast) var(--wi-motion-ease);
 }
 
 .docs-nav__item:hover,
 .docs-nav__item.is-active {
-  background: color-mix(in srgb, var(--wd-color-primary) 10%, transparent);
-  color: var(--wd-color-primary);
+  background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+  color: var(--wi-color-primary);
 }
 
 .docs-nav__item.is-active {
-  border-color: color-mix(in srgb, var(--wd-color-primary) 28%, transparent);
+  border-color: color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
   font-weight: 700;
 }
 
@@ -149,7 +149,7 @@ watch(
 }
 
 .docs-missing {
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
 }
 
 @media (max-width: 700px) {

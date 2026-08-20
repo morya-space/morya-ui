@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveSizeClass } from '../../shared/types'
 import type { SelectOption, SelectProps, SelectValue } from './types'
@@ -26,8 +26,8 @@ const emit = defineEmits<{
   (event: 'hide'): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLButtonElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
@@ -36,7 +36,7 @@ const open = ref(false)
 const filterQuery = ref('')
 const highlightedIndex = ref(-1)
 const menuStyle = ref<Record<string, string>>({})
-const selectId = computed(() => props.id ?? `wd-select-${Math.random().toString(36).slice(2, 8)}`)
+const selectId = computed(() => props.id ?? `wi-select-${Math.random().toString(36).slice(2, 8)}`)
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyOptions,
 )
@@ -184,20 +184,20 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="wd-select-field" :class="{ 'wd-select-field--fluid': fluid }">
-    <label v-if="label" class="wd-select-field__label" :for="selectId">{{ label }}</label>
-    <div class="wd-select__control" :class="{ 'wd-select__control--clearable': showClearButton }">
+  <div ref="root" class="wi-select-field" :class="{ 'wi-select-field--fluid': fluid }">
+    <label v-if="label" class="wi-select-field__label" :for="selectId">{{ label }}</label>
+    <div class="wi-select__control" :class="{ 'wi-select__control--clearable': showClearButton }">
       <button
         :id="selectId"
         ref="trigger"
-        class="wd-select"
+        class="wi-select"
         :class="[
-          `wd-select--${sizeClass}`,
+          `wi-select--${sizeClass}`,
           {
-            'wd-select--error': isInvalid,
-            'wd-select--open': open,
-            'wd-select--placeholder': !selectedOption,
-            'wd-select--fluid': fluid,
+            'wi-select--error': isInvalid,
+            'wi-select--open': open,
+            'wi-select--placeholder': !selectedOption,
+            'wi-select--fluid': fluid,
           },
         ]"
         type="button"
@@ -211,12 +211,12 @@ onBeforeUnmount(() => {
         @click="setOpen(!open)"
         @keydown="onTriggerKeydown"
       >
-        <span class="wd-select__value">{{ displayLabel }}</span>
-        <span class="wd-select__indicator" aria-hidden="true" />
+        <span class="wi-select__value">{{ displayLabel }}</span>
+        <span class="wi-select__indicator" aria-hidden="true" />
       </button>
       <button
         v-if="showClearButton"
-        class="wd-select__clear"
+        class="wi-select__clear"
         type="button"
         :aria-label="locale.clear"
         @click="clear"
@@ -225,13 +225,13 @@ onBeforeUnmount(() => {
       </button>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <div
           v-if="open"
           :id="`${selectId}-listbox`"
           ref="menu"
-          class="wd-select__menu"
-          :class="[`wd-select__menu--${placement}`, { 'wd-select__menu--teleported': teleported }]"
+          class="wi-select__menu"
+          :class="[`wi-select__menu--${placement}`, { 'wi-select__menu--teleported': teleported }]"
           :style="teleported ? menuStyle : undefined"
           role="listbox"
           tabindex="-1"
@@ -242,7 +242,7 @@ onBeforeUnmount(() => {
             v-if="filter"
             ref="filterInput"
             v-model="filterQuery"
-            class="wd-select__filter"
+            class="wi-select__filter"
             type="search"
             :placeholder="locale.searchPlaceholder"
             :aria-label="locale.filterOptions"
@@ -252,10 +252,10 @@ onBeforeUnmount(() => {
           <button
             v-for="option in filteredOptions"
             :key="String(option.value)"
-            class="wd-select__option"
+            class="wi-select__option"
             :class="{
-              'wd-select__option--selected': option.value === modelValue,
-              'wd-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value,
+              'wi-select__option--selected': option.value === modelValue,
+              'wi-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value,
             }"
             type="button"
             role="option"
@@ -265,9 +265,9 @@ onBeforeUnmount(() => {
             @click="selectOption(option)"
           >
             <span>{{ option.label }}</span>
-            <span v-if="option.value === modelValue" class="wd-select__check" aria-hidden="true">✓</span>
+            <span v-if="option.value === modelValue" class="wi-select__check" aria-hidden="true">✓</span>
           </button>
-          <div v-if="!filteredOptions.length" class="wd-select__empty" role="status">
+          <div v-if="!filteredOptions.length" class="wi-select__empty" role="status">
             {{ resolvedEmptyMessage }}
           </div>
         </div>
@@ -275,7 +275,7 @@ onBeforeUnmount(() => {
     </Teleport>
     <input
       v-if="required"
-      class="wd-select__required-input"
+      class="wi-select__required-input"
       tabindex="-1"
       aria-hidden="true"
       :required="!selectedOption"
@@ -284,8 +284,8 @@ onBeforeUnmount(() => {
     <span
       v-if="feedbackText"
       :id="`${selectId}-help`"
-      class="wd-select-field__help"
-      :class="{ 'wd-select-field__help--error': feedbackIsError }"
+      class="wi-select-field__help"
+      :class="{ 'wi-select-field__help--error': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

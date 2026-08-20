@@ -12,10 +12,10 @@ const emit = defineEmits<{
 }>()
 
 const rootClass = computed(() => [
-  'wd-inplace',
+  'wi-inplace',
   {
-    'wd-inplace--active': props.modelValue,
-    'wd-inplace--disabled': props.disabled,
+    'wi-inplace--active': props.modelValue,
+    'wi-inplace--disabled': props.disabled,
   },
 ])
 
@@ -36,7 +36,7 @@ defineExpose({ activate, deactivate })
   <div :class="rootClass">
     <div
       v-if="!modelValue"
-      class="wd-inplace__display"
+      class="wi-inplace__display"
       role="button"
       :tabindex="disabled ? -1 : 0"
       @click="activate"
@@ -45,7 +45,7 @@ defineExpose({ activate, deactivate })
     >
       <slot name="display" />
     </div>
-    <div v-else class="wd-inplace__content">
+    <div v-else class="wi-inplace__content">
       <slot name="content" :close="deactivate" />
     </div>
   </div>

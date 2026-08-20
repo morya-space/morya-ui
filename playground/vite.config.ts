@@ -33,7 +33,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     Markdown({
-      wrapperClasses: 'wd-markdown-doc',
+      wrapperClasses: 'wi-markdown-doc',
       markdownOptions: {
         highlight: highlightCode,
       },

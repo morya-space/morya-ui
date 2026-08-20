@@ -1,2 +1,2 @@
-export { default as WdTooltip } from './Tooltip.vue'
+export { default as WiTooltip } from './Tooltip.vue'
 export type { TooltipProps } from './types'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { PopoverProps } from './types'
 
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (event: 'hide'): void
 }>()
 
-const config = useWdConfig()
+const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
@@ -119,17 +119,17 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <span ref="root" class="wd-popover">
-    <span ref="trigger" class="wd-popover__trigger">
+  <span ref="root" class="wi-popover">
+    <span ref="trigger" class="wi-popover__trigger">
       <slot />
     </span>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-fade">
+      <Transition name="wi-fade">
         <div
           v-if="modelValue"
           ref="panel"
-          class="wd-popover__content"
-          :class="[`wd-popover__content--${placement}`, { 'wd-popover__content--teleported': teleported }]"
+          class="wi-popover__content"
+          :class="[`wi-popover__content--${placement}`, { 'wi-popover__content--teleported': teleported }]"
           :style="teleported ? panelStyle : undefined"
           role="dialog"
         >

@@ -24,20 +24,20 @@ function onKeydown(event: KeyboardEvent, index: number) {
   if (!target) return
   selectTab(target.value)
   requestAnimationFrame(() =>
-    document.getElementById(`wd-tab-${target.value}`)?.focus({ preventScroll: true }),
+    document.getElementById(`wi-tab-${target.value}`)?.focus({ preventScroll: true }),
   )
 }
 </script>
 
 <template>
-  <div class="wd-tabs">
-    <div class="wd-tabs__list" role="tablist" aria-label="Tabs">
+  <div class="wi-tabs">
+    <div class="wi-tabs__list" role="tablist" aria-label="Tabs">
       <button
         v-for="(tab, index) in tabs"
-        :id="`wd-tab-${tab.value}`"
+        :id="`wi-tab-${tab.value}`"
         :key="tab.value"
-        class="wd-tabs__tab"
-        :class="{ 'wd-tabs__tab--active': activeValue === tab.value }"
+        class="wi-tabs__tab"
+        :class="{ 'wi-tabs__tab--active': activeValue === tab.value }"
         type="button"
         role="tab"
         :aria-selected="activeValue === tab.value"
@@ -48,7 +48,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
         {{ tab.label }}
       </button>
     </div>
-    <div class="wd-tabs__panel" role="tabpanel">
+    <div class="wi-tabs__panel" role="tabpanel">
       <slot :active-value="activeValue" />
     </div>
   </div>

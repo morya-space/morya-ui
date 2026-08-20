@@ -11,7 +11,7 @@ Manage string tags as a chip list.
 ## Import
 
 ```ts
-import { WdInputTags } from '@well-insight/ui'
+import { WiInputTags } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdInputTags } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputTags } from '@well-insight/ui'
+import { WiInputTags } from '@well-insight/ui'
 
 const tags = ref(['vue', 'design'])
 </script>
 
 <template>
-  <WdInputTags v-model="tags" />
+  <WiInputTags v-model="tags" />
 </template>
 ```
 

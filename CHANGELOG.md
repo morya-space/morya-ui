@@ -38,7 +38,7 @@
 
 - 初版发布：可独立安装的 Vue 3 + TypeScript 组件库（含主题 / 设计令牌 API）。
 - 提供完整组件文档站，支持 Markdown 与 `vue preview` 实时示例。
-- 亮色 / 暗色主题、`useTheme` / `useDensity` / `useMotion`，以及 `WdConfigProvider` / `createWellInsight` 全局配置。
+- 亮色 / 暗色主题、`useTheme` / `useDensity` / `useMotion`，以及 `WiConfigProvider` / `createWellInsight` 全局配置。
 - 打包产物为 ESM + 类型声明 + `styles.css`；本地开发可通过 `exports.development` 直连源码。
 
 ### 覆盖范围

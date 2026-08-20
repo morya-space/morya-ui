@@ -11,7 +11,7 @@ description: 复选框。二进制 modelValue，支持 invalid。
 ## 引入
 
 ```ts
-import { WdCheckbox } from '@well-insight/ui'
+import { WiCheckbox } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdCheckbox } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdCheckbox } from '@well-insight/ui'
+import { WiCheckbox } from '@well-insight/ui'
 
 const accepted = ref(false)
 </script>
 
 <template>
-  <WdCheckbox v-model="accepted" label="Accept terms and conditions" />
+  <WiCheckbox v-model="accepted" label="Accept terms and conditions" />
 </template>
 ```
 
@@ -34,13 +34,13 @@ const accepted = ref(false)
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdCheckbox } from '@well-insight/ui'
+import { WiCheckbox } from '@well-insight/ui'
 
 const accepted = ref(false)
 </script>
 
 <template>
-  <WdCheckbox v-model="accepted" invalid label="You must accept to continue" />
+  <WiCheckbox v-model="accepted" invalid label="You must accept to continue" />
 </template>
 ```
 
@@ -48,13 +48,13 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdCheckbox } from '@well-insight/ui'
+import { WiCheckbox } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdCheckbox :model-value="true" disabled label="Checked disabled" />
-    <WdCheckbox :model-value="false" disabled label="Unchecked disabled" />
+    <WiCheckbox :model-value="true" disabled label="Checked disabled" />
+    <WiCheckbox :model-value="false" disabled label="Unchecked disabled" />
   </div>
 </template>
 ```

@@ -1,4 +1,4 @@
-export { default as WdTree } from './Tree.vue'
+export { default as WiTree } from './Tree.vue'
 export type {
   TreeEmits,
   TreeNode,

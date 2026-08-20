@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TreeTableColumn, TreeTableNode } from './types'
-import { useWdLocale } from '../../locale'
+import { useWiLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
 
 defineProps<{
@@ -14,31 +14,31 @@ defineEmits<{
   (event: 'toggle', node: TreeTableNode): void
 }>()
 
-const locale = useWdLocale()
+const locale = useWiLocale()
 </script>
 
 <template>
-  <tr class="wd-treetable__row">
+  <tr class="wi-treetable__row">
     <td
       v-for="(column, columnIndex) in columns"
       :key="column.field"
-      class="wd-treetable__cell"
+      class="wi-treetable__cell"
     >
       <div
         v-if="columnIndex === 0"
-        class="wd-treetable__tree-cell"
+        class="wi-treetable__tree-cell"
         :style="{ paddingLeft: `${depth * 1}rem` }"
       >
         <button
           v-if="node.children?.length"
           type="button"
-          class="wd-treetable__toggler"
+          class="wi-treetable__toggler"
           :aria-label="isExpanded(node.key) ? locale.collapse : locale.expand"
           @click="$emit('toggle', node)"
         >
           {{ isExpanded(node.key) ? '▾' : '▸' }}
         </button>
-        <span v-else class="wd-treetable__toggler-spacer" />
+        <span v-else class="wi-treetable__toggler-spacer" />
         <span>{{ node.data[column.field] }}</span>
       </div>
       <template v-else>{{ node.data[column.field] }}</template>

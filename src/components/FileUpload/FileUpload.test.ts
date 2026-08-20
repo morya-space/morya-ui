@@ -1,14 +1,14 @@
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
-import WdFileUpload from './FileUpload.vue'
+import WiFileUpload from './FileUpload.vue'
 
 function makeFile(name = 'hello.txt', type = 'text/plain', content = 'hello') {
   return new File([content], name, { type })
 }
 
 async function pick(wrapper: ReturnType<typeof mount>, files: File[]) {
-  const input = wrapper.find('.wd-fileupload__input')
+  const input = wrapper.find('.wi-fileupload__input')
   Object.defineProperty(input.element, 'files', {
     value: files,
     configurable: true,
@@ -18,9 +18,9 @@ async function pick(wrapper: ReturnType<typeof mount>, files: File[]) {
   await Promise.resolve()
 }
 
-describe('WdFileUpload', () => {
+describe('WiFileUpload', () => {
   it('emits select when files change', async () => {
-    const wrapper = mount(WdFileUpload, { props: { mode: 'advanced' } })
+    const wrapper = mount(WiFileUpload, { props: { mode: 'advanced' } })
     const file = makeFile()
     await pick(wrapper, [file])
     expect(wrapper.emitted('select')?.at(-1)?.[0]).toEqual([file])
@@ -28,24 +28,24 @@ describe('WdFileUpload', () => {
   })
 
   it('opens picker on choose click', async () => {
-    const wrapper = mount(WdFileUpload)
-    const input = wrapper.find('.wd-fileupload__input').element as HTMLInputElement
+    const wrapper = mount(WiFileUpload)
+    const input = wrapper.find('.wi-fileupload__input').element as HTMLInputElement
     const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
-    await wrapper.find('.wd-fileupload__choose').trigger('click')
+    await wrapper.find('.wi-fileupload__choose').trigger('click')
     expect(click).toHaveBeenCalled()
   })
 
   it('renders a drop zone when drag is enabled', async () => {
-    const wrapper = mount(WdFileUpload, { props: { drag: true } })
-    expect(wrapper.find('.wd-fileupload__dragger').exists()).toBe(true)
-    expect(wrapper.find('.wd-fileupload__choose').exists()).toBe(false)
+    const wrapper = mount(WiFileUpload, { props: { drag: true } })
+    expect(wrapper.find('.wi-fileupload__dragger').exists()).toBe(true)
+    expect(wrapper.find('.wi-fileupload__choose').exists()).toBe(false)
     expect(wrapper.text()).toContain('将文件拖到此处')
   })
 
   it('emits select when files are dropped', async () => {
-    const wrapper = mount(WdFileUpload, { props: { drag: true, multiple: true } })
+    const wrapper = mount(WiFileUpload, { props: { drag: true, multiple: true } })
     const file = makeFile()
-    await wrapper.find('.wd-fileupload__dragger').trigger('drop', {
+    await wrapper.find('.wi-fileupload__dragger').trigger('drop', {
       dataTransfer: { files: [file] },
     })
     await nextTick()
@@ -54,17 +54,17 @@ describe('WdFileUpload', () => {
   })
 
   it('highlights the drop zone while dragging over', async () => {
-    const wrapper = mount(WdFileUpload, { props: { drag: true } })
-    const zone = wrapper.find('.wd-fileupload__dragger')
+    const wrapper = mount(WiFileUpload, { props: { drag: true } })
+    const zone = wrapper.find('.wi-fileupload__dragger')
     await zone.trigger('dragover', { dataTransfer: { dropEffect: 'none' } })
-    expect(zone.classes()).toContain('wd-fileupload__dragger--over')
+    expect(zone.classes()).toContain('wi-fileupload__dragger--over')
     await zone.trigger('dragleave')
-    expect(zone.classes()).not.toContain('wd-fileupload__dragger--over')
+    expect(zone.classes()).not.toContain('wi-fileupload__dragger--over')
   })
 
   it('emits exceed when dropped files go past the limit', async () => {
-    const wrapper = mount(WdFileUpload, { props: { drag: true, multiple: true, limit: 1 } })
-    await wrapper.find('.wd-fileupload__dragger').trigger('drop', {
+    const wrapper = mount(WiFileUpload, { props: { drag: true, multiple: true, limit: 1 } })
+    await wrapper.find('.wi-fileupload__dragger').trigger('drop', {
       dataTransfer: { files: [makeFile('a.txt'), makeFile('b.txt')] },
     })
     expect(wrapper.emitted('exceed')?.[0]?.[0]).toHaveLength(2)
@@ -72,8 +72,8 @@ describe('WdFileUpload', () => {
   })
 
   it('emits exceed when appending files would pass the limit', async () => {
-    const wrapper = mount(WdFileUpload, { props: { drag: true, multiple: true, limit: 2 } })
-    const zone = wrapper.find('.wd-fileupload__dragger')
+    const wrapper = mount(WiFileUpload, { props: { drag: true, multiple: true, limit: 2 } })
+    const zone = wrapper.find('.wi-fileupload__dragger')
     await zone.trigger('drop', { dataTransfer: { files: [makeFile('a.txt')] } })
     await nextTick()
     expect(wrapper.emitted('select')).toHaveLength(1)
@@ -86,28 +86,28 @@ describe('WdFileUpload', () => {
   })
 
   it('removes a listed file', async () => {
-    const wrapper = mount(WdFileUpload, { props: { mode: 'advanced' } })
+    const wrapper = mount(WiFileUpload, { props: { mode: 'advanced' } })
     await pick(wrapper, [makeFile()])
-    expect(wrapper.find('.wd-fileupload__file').exists()).toBe(true)
+    expect(wrapper.find('.wi-fileupload__file').exists()).toBe(true)
 
     await wrapper.find('[aria-label="删除文件"]').trigger('click')
     await nextTick()
     expect(wrapper.emitted('remove')?.[0]?.[0]).toMatchObject({ name: 'hello.txt' })
-    expect(wrapper.find('.wd-fileupload__file').exists()).toBe(false)
+    expect(wrapper.find('.wi-fileupload__file').exists()).toBe(false)
   })
 
   it('skips files rejected by beforeUpload', async () => {
-    const wrapper = mount(WdFileUpload, {
+    const wrapper = mount(WiFileUpload, {
       props: { mode: 'advanced', beforeUpload: () => false },
     })
     await pick(wrapper, [makeFile()])
     expect(wrapper.emitted('select')).toBeUndefined()
-    expect(wrapper.find('.wd-fileupload__file').exists()).toBe(false)
+    expect(wrapper.find('.wi-fileupload__file').exists()).toBe(false)
   })
 
   it('uploads through httpRequest and emits success', async () => {
     const httpRequest = vi.fn(async () => ({ ok: true }))
-    const wrapper = mount(WdFileUpload, {
+    const wrapper = mount(WiFileUpload, {
       props: { mode: 'advanced', httpRequest },
     })
     await pick(wrapper, [makeFile()])
@@ -120,14 +120,14 @@ describe('WdFileUpload', () => {
 
   it('waits for submit when autoUpload is false', async () => {
     const httpRequest = vi.fn(async () => ({ ok: true }))
-    const wrapper = mount(WdFileUpload, {
+    const wrapper = mount(WiFileUpload, {
       props: { mode: 'advanced', autoUpload: false, httpRequest },
     })
     await pick(wrapper, [makeFile()])
     expect(httpRequest).not.toHaveBeenCalled()
     expect(wrapper.text()).toContain('上传')
 
-    await wrapper.find('.wd-fileupload__toolbar .wd-fileupload__choose').trigger('click')
+    await wrapper.find('.wi-fileupload__toolbar .wi-fileupload__choose').trigger('click')
     await vi.waitFor(() => {
       expect(wrapper.emitted('success')).toBeTruthy()
     })
@@ -135,21 +135,21 @@ describe('WdFileUpload', () => {
   })
 
   it('renders picture-card add tile and opens the picker', async () => {
-    const wrapper = mount(WdFileUpload, { props: { listType: 'picture-card' } })
-    expect(wrapper.find('.wd-fileupload__choose').exists()).toBe(false)
-    expect(wrapper.find('.wd-fileupload__card--add').exists()).toBe(true)
+    const wrapper = mount(WiFileUpload, { props: { listType: 'picture-card' } })
+    expect(wrapper.find('.wi-fileupload__choose').exists()).toBe(false)
+    expect(wrapper.find('.wi-fileupload__card--add').exists()).toBe(true)
 
-    const input = wrapper.find('.wd-fileupload__input').element as HTMLInputElement
+    const input = wrapper.find('.wi-fileupload__input').element as HTMLInputElement
     const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
-    await wrapper.find('.wd-fileupload__card--add').trigger('click')
+    await wrapper.find('.wi-fileupload__card--add').trigger('click')
     expect(click).toHaveBeenCalled()
   })
 
   it('keeps files rejected by accept out of the list', async () => {
-    const wrapper = mount(WdFileUpload, {
+    const wrapper = mount(WiFileUpload, {
       props: { drag: true, accept: 'image/*' },
     })
-    await wrapper.find('.wd-fileupload__dragger').trigger('drop', {
+    await wrapper.find('.wi-fileupload__dragger').trigger('drop', {
       dataTransfer: { files: [makeFile('notes.txt', 'text/plain')] },
     })
     await nextTick()

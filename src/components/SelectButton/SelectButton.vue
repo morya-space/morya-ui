@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWdConfig } from '../../shared/config'
+import { useWiConfig } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
 import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
 
@@ -13,15 +13,15 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: SelectButtonValue | SelectButtonValue[] | undefined): void
 }>()
 
-const config = useWdConfig()
+const config = useWiConfig()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 
 const rootClass = computed(() => [
-  'wd-selectbutton',
-  `wd-selectbutton--${sizeClass.value}`,
+  'wi-selectbutton',
+  `wi-selectbutton--${sizeClass.value}`,
   {
-    'wd-selectbutton--disabled': props.disabled,
-    'wd-selectbutton--invalid': props.invalid,
+    'wi-selectbutton--disabled': props.disabled,
+    'wi-selectbutton--invalid': props.invalid,
   },
 ])
 
@@ -53,8 +53,8 @@ function select(option: SelectButtonOption) {
       v-for="option in options"
       :key="String(option.value)"
       type="button"
-      class="wd-selectbutton__button"
-      :class="{ 'wd-selectbutton__button--active': isActive(option) }"
+      class="wi-selectbutton__button"
+      :class="{ 'wi-selectbutton__button--active': isActive(option) }"
       :disabled="disabled || option.disabled"
       :aria-pressed="isActive(option)"
       @click="select(option)"

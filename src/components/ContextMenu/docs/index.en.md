@@ -11,7 +11,7 @@ Context menu that opens at the pointer position.
 ## Import
 
 ```ts
-import { WdContextMenu } from '@well-insight/ui'
+import { WiContextMenu } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdContextMenu } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdContextMenu } from '@well-insight/ui'
+import { WiContextMenu } from '@well-insight/ui'
 
 const visible = ref(false)
 const position = ref({ x: 0, y: 0 })
@@ -39,12 +39,12 @@ function onContext(event: MouseEvent) {
 
 <template>
   <div
-    style="border: 1px dashed var(--wd-color-border); padding: 2rem; border-radius: var(--wd-radius-md)"
+    style="border: 1px dashed var(--wi-color-border); padding: 2rem; border-radius: var(--wi-radius-md)"
     @contextmenu.prevent="onContext"
   >
     Right-click here to open the menu
   </div>
-  <WdContextMenu
+  <WiContextMenu
     ref="menu"
     v-model="visible"
     v-model:position="position"

@@ -1,6 +1,6 @@
-import type { WdLocaleMessages } from './types'
+import type { WiLocaleMessages } from './types'
 
-export const enUS: WdLocaleMessages = {
+export const enUS: WiLocaleMessages = {
   name: 'en-US',
   accept: 'OK',
   reject: 'Cancel',

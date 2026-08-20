@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 import type { PickListProps } from './types'
 
 const props = withDefaults(defineProps<PickListProps>(), {
@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const selectedSource = ref<number[]>([])
 const selectedTarget = ref<number[]>([])
-const locale = useWdLocale()
+const locale = useWiLocale()
 const sourceTitle = computed(() => props.sourceHeader ?? locale.value.sourceHeader)
 const targetTitle = computed(() => props.targetHeader ?? locale.value.targetHeader)
 
@@ -68,15 +68,15 @@ function moveAllToSource() {
 </script>
 
 <template>
-  <div class="wd-picklist">
-    <div class="wd-picklist__listbox">
-      <div class="wd-picklist__header">{{ sourceTitle }}</div>
-      <ul class="wd-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
+  <div class="wi-picklist">
+    <div class="wi-picklist__listbox">
+      <div class="wi-picklist__header">{{ sourceTitle }}</div>
+      <ul class="wi-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in source"
           :key="itemKey(item, index)"
-          class="wd-picklist__item"
-          :class="{ 'wd-picklist__item--selected': selectedSource.includes(index) }"
+          class="wi-picklist__item"
+          :class="{ 'wi-picklist__item--selected': selectedSource.includes(index) }"
           role="option"
           :aria-selected="selectedSource.includes(index)"
           tabindex="0"
@@ -88,30 +88,30 @@ function moveAllToSource() {
         </li>
       </ul>
     </div>
-    <div class="wd-picklist__controls">
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveAllToTarget" @click="moveAllToTarget">
-        <WdIcon name="chevron-right" size="sm" />
-        <WdIcon name="chevron-right" size="sm" />
+    <div class="wi-picklist__controls">
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveAllToTarget" @click="moveAllToTarget">
+        <WiIcon name="chevron-right" size="sm" />
+        <WiIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveToTarget" @click="moveToTarget">
-        <WdIcon name="chevron-right" size="sm" />
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveToTarget" @click="moveToTarget">
+        <WiIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveToSource" @click="moveToSource">
-        <WdIcon name="chevron-left" size="sm" />
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveToSource" @click="moveToSource">
+        <WiIcon name="chevron-left" size="sm" />
       </button>
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveAllToSource" @click="moveAllToSource">
-        <WdIcon name="chevron-left" size="sm" />
-        <WdIcon name="chevron-left" size="sm" />
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveAllToSource" @click="moveAllToSource">
+        <WiIcon name="chevron-left" size="sm" />
+        <WiIcon name="chevron-left" size="sm" />
       </button>
     </div>
-    <div class="wd-picklist__listbox">
-      <div class="wd-picklist__header">{{ targetTitle }}</div>
-      <ul class="wd-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
+    <div class="wi-picklist__listbox">
+      <div class="wi-picklist__header">{{ targetTitle }}</div>
+      <ul class="wi-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in target"
           :key="itemKey(item, index)"
-          class="wd-picklist__item"
-          :class="{ 'wd-picklist__item--selected': selectedTarget.includes(index) }"
+          class="wi-picklist__item"
+          :class="{ 'wi-picklist__item--selected': selectedTarget.includes(index) }"
           role="option"
           :aria-selected="selectedTarget.includes(index)"
           tabindex="0"

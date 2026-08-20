@@ -50,7 +50,7 @@ useDocCodeCopy(bodyRef, docSource)
   margin: 0.35rem 0 0.45rem;
 }
 .component-doc-viewer__intro p {
-  color: var(--wd-color-text);
+  color: var(--wi-color-text);
   font-size: 0.86rem;
   line-height: 1.55;
   margin: 0;
@@ -60,72 +60,72 @@ useDocCodeCopy(bodyRef, docSource)
 </style>
 
 <style>
-.wd-markdown-doc {
-  color: var(--wd-color-text);
+.wi-markdown-doc {
+  color: var(--wi-color-text);
   font-size: 0.9rem;
   line-height: 1.7;
   width: 100%;
 }
-.wd-markdown-doc > h1:first-of-type {
+.wi-markdown-doc > h1:first-of-type {
   display: none;
 }
-.wd-markdown-doc h1,
-.wd-markdown-doc h2,
-.wd-markdown-doc h3 {
-  color: var(--wd-color-text);
+.wi-markdown-doc h1,
+.wi-markdown-doc h2,
+.wi-markdown-doc h3 {
+  color: var(--wi-color-text);
   font-family: var(--docs-display);
   font-weight: 700;
   letter-spacing: -0.03em;
   margin: 1.6rem 0 0.7rem;
 }
-.wd-markdown-doc h1 {
+.wi-markdown-doc h1 {
   font-size: 1.6rem;
 }
-.wd-markdown-doc h2 {
+.wi-markdown-doc h2 {
   font-size: 1.25rem;
 }
-.wd-markdown-doc h3 {
+.wi-markdown-doc h3 {
   font-size: 1.05rem;
 }
-.wd-markdown-doc p,
-.wd-markdown-doc ul,
-.wd-markdown-doc ol,
-.wd-markdown-doc li,
-.wd-markdown-doc blockquote {
-  color: var(--wd-color-text);
+.wi-markdown-doc p,
+.wi-markdown-doc ul,
+.wi-markdown-doc ol,
+.wi-markdown-doc li,
+.wi-markdown-doc blockquote {
+  color: var(--wi-color-text);
   margin: 0.55rem 0;
 }
-.wd-markdown-doc a {
-  color: var(--wd-color-primary);
+.wi-markdown-doc a {
+  color: var(--wi-color-primary);
 }
-.wd-markdown-doc code {
-  background: color-mix(in srgb, var(--wd-color-primary) 10%, var(--wd-color-surface));
-  border-radius: var(--wd-radius-sm);
-  color: var(--wd-color-text);
+.wi-markdown-doc code {
+  background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+  border-radius: var(--wi-radius-sm);
+  color: var(--wi-color-text);
   font-family: ui-monospace, monospace;
   font-size: 0.82em;
   padding: 0.12rem 0.35rem;
 }
-.wd-markdown-doc pre {
-  background: color-mix(in srgb, var(--wd-color-text) 7%, var(--wd-color-surface));
-  border: 1px solid var(--wd-color-border);
-  border-radius: var(--wd-radius-md);
+.wi-markdown-doc pre {
+  background: color-mix(in srgb, var(--wi-color-text) 7%, var(--wi-color-surface));
+  border: 1px solid var(--wi-color-border);
+  border-radius: var(--wi-radius-md);
   overflow-x: auto;
-  padding: var(--wd-space-4);
+  padding: var(--wi-space-4);
 }
-.wd-markdown-doc .wd-code-block {
+.wi-markdown-doc .wi-code-block {
   margin: 1rem 0 1.5rem;
   position: relative;
 }
-.wd-markdown-doc .wd-code-block > pre {
+.wi-markdown-doc .wi-code-block > pre {
   margin: 0;
   padding-right: 4.25rem;
 }
-.wd-markdown-doc .wd-code-block__copy {
-  background: color-mix(in srgb, var(--wd-color-surface) 88%, transparent);
-  border: 1px solid var(--wd-color-border);
-  border-radius: var(--wd-radius-sm);
-  color: var(--wd-color-text-muted);
+.wi-markdown-doc .wi-code-block__copy {
+  background: color-mix(in srgb, var(--wi-color-surface) 88%, transparent);
+  border: 1px solid var(--wi-color-border);
+  border-radius: var(--wi-radius-sm);
+  color: var(--wi-color-text-muted);
   cursor: pointer;
   font-family: var(--docs-body);
   font-size: 0.72rem;
@@ -136,37 +136,37 @@ useDocCodeCopy(bodyRef, docSource)
   top: 0.55rem;
   z-index: 1;
 }
-.wd-markdown-doc .wd-code-block__copy:hover {
-  border-color: color-mix(in srgb, var(--wd-color-primary) 40%, var(--wd-color-border));
-  color: var(--wd-color-primary);
+.wi-markdown-doc .wi-code-block__copy:hover {
+  border-color: color-mix(in srgb, var(--wi-color-primary) 40%, var(--wi-color-border));
+  color: var(--wi-color-primary);
 }
-.wd-markdown-doc .wd-code-block__copy[data-copied='true'] {
-  border-color: color-mix(in srgb, var(--wd-color-success, #16a34a) 45%, var(--wd-color-border));
-  color: var(--wd-color-success, #16a34a);
+.wi-markdown-doc .wi-code-block__copy[data-copied='true'] {
+  border-color: color-mix(in srgb, var(--wi-color-success, #16a34a) 45%, var(--wi-color-border));
+  color: var(--wi-color-success, #16a34a);
 }
-.wd-markdown-doc pre code {
+.wi-markdown-doc pre code {
   background: transparent;
   padding: 0;
 }
-.wd-markdown-doc table {
+.wi-markdown-doc table {
   border-collapse: collapse;
   font-size: 0.9rem;
   margin: 1rem 0 1.5rem;
   min-width: 100%;
   width: 100%;
 }
-.wd-markdown-doc th,
-.wd-markdown-doc td {
-  border-bottom: 1px solid var(--wd-color-border);
-  color: var(--wd-color-text);
+.wi-markdown-doc th,
+.wi-markdown-doc td {
+  border-bottom: 1px solid var(--wi-color-border);
+  color: var(--wi-color-text);
   line-height: 1.55;
   padding: 0.85rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
-.wd-markdown-doc thead th {
-  background: color-mix(in srgb, var(--wd-color-text) 6%, var(--wd-color-surface));
-  color: var(--wd-color-text);
+.wi-markdown-doc thead th {
+  background: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
+  color: var(--wi-color-text);
   font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   font-weight: 700;
@@ -174,32 +174,32 @@ useDocCodeCopy(bodyRef, docSource)
   opacity: 1;
   text-transform: uppercase;
 }
-.wd-markdown-doc tbody td {
-  color: var(--wd-color-text);
+.wi-markdown-doc tbody td {
+  color: var(--wi-color-text);
   opacity: 1;
 }
-.wd-markdown-doc tbody td code {
-  color: var(--wd-color-primary);
+.wi-markdown-doc tbody td code {
+  color: var(--wi-color-primary);
   font-weight: 600;
 }
 
 /* Shiki dual theme：跟随 documentElement[data-theme] */
-.wd-markdown-doc .shiki,
-.wd-markdown-doc .shiki span {
+.wi-markdown-doc .shiki,
+.wi-markdown-doc .shiki span {
   background-color: transparent !important;
   color: var(--shiki-light);
   font-style: var(--shiki-light-font-style);
   font-weight: var(--shiki-light-font-weight);
   text-decoration: var(--shiki-light-text-decoration);
 }
-html[data-theme='dark'] .wd-markdown-doc .shiki,
-html[data-theme='dark'] .wd-markdown-doc .shiki span {
+html[data-theme='dark'] .wi-markdown-doc .shiki,
+html[data-theme='dark'] .wi-markdown-doc .shiki span {
   color: var(--shiki-dark);
   font-style: var(--shiki-dark-font-style);
   font-weight: var(--shiki-dark-font-weight);
   text-decoration: var(--shiki-dark-text-decoration);
 }
-.wd-markdown-doc pre.shiki {
-  background: color-mix(in srgb, var(--wd-color-text) 7%, var(--wd-color-surface)) !important;
+.wi-markdown-doc pre.shiki {
+  background: color-mix(in srgb, var(--wi-color-text) 7%, var(--wi-color-surface)) !important;
 }
 </style>

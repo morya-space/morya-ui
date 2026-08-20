@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveSizeClass } from '../../shared/types'
 import type { TreeSelectNode, TreeSelectProps } from './types'
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string | null): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -105,34 +105,34 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="wd-treeselect"
+    class="wi-treeselect"
     :class="[
-      `wd-treeselect--${sizeClass}`,
-      { 'wd-treeselect--disabled': disabled, 'wd-treeselect--open': open },
+      `wi-treeselect--${sizeClass}`,
+      { 'wi-treeselect--disabled': disabled, 'wi-treeselect--open': open },
     ]"
   >
     <button
       ref="trigger"
       type="button"
-      class="wd-treeselect__trigger"
+      class="wi-treeselect__trigger"
       :disabled="disabled"
       :aria-expanded="open"
       aria-haspopup="tree"
       @click="toggle"
     >
-      <span class="wd-treeselect__label">{{ displayLabel }}</span>
-      <span class="wd-treeselect__caret" aria-hidden="true">▾</span>
+      <span class="wi-treeselect__label">{{ displayLabel }}</span>
+      <span class="wi-treeselect__caret" aria-hidden="true">▾</span>
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <div
           v-if="open"
           ref="panel"
-          class="wd-treeselect__panel"
-          :class="{ 'wd-treeselect__panel--teleported': teleported }"
+          class="wi-treeselect__panel"
+          :class="{ 'wi-treeselect__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
         >
-          <ul class="wd-treeselect__tree" role="tree">
+          <ul class="wi-treeselect__tree" role="tree">
             <TreeSelectNodeItem
               v-for="node in options"
               :key="node.key"

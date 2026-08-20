@@ -1,2 +1,2 @@
-export { default as WdSidebar } from './Sidebar.vue'
+export { default as WiSidebar } from './Sidebar.vue'
 export type { SidebarItem, SidebarProps } from './types'

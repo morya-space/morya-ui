@@ -11,7 +11,7 @@ description: 数字输入框，支持步进按钮、上下限与尺寸。
 ## 引入
 
 ```ts
-import { WdInputNumber } from '@well-insight/ui'
+import { WiInputNumber } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdInputNumber } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputNumber } from '@well-insight/ui'
+import { WiInputNumber } from '@well-insight/ui'
 
 const value = ref(1)
 </script>
 
 <template>
-  <WdInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
+  <WiInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
 </template>
 ```
 
@@ -34,13 +34,13 @@ const value = ref(1)
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputNumber } from '@well-insight/ui'
+import { WiInputNumber } from '@well-insight/ui'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WdInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
+  <WiInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
 </template>
 ```
 

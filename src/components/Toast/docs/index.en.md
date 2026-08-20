@@ -13,34 +13,34 @@ Vs [Message](/components/Message): Message is top-center short copy; Toast is co
 ## Import
 
 ```ts
-import { toast, useToast, WdToast } from '@well-insight/ui'
+import { toast, useToast, WiToast } from '@well-insight/ui'
 ```
 
 ## API
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, toast } from '@well-insight/ui'
+import { WiButton, toast } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton
+    <WiButton
       label="Success"
       severity="success"
       @click="toast.success({ summary: 'Saved', detail: 'Your changes are live.' })"
     />
-    <WdButton
+    <WiButton
       label="Info"
       severity="info"
       @click="toast.info({ summary: 'Tip', detail: 'You can continue.' })"
     />
-    <WdButton
+    <WiButton
       label="Warn"
       severity="warn"
       @click="toast.warn({ summary: 'Caution', detail: 'Please double-check.' })"
     />
-    <WdButton
+    <WiButton
       label="Error"
       severity="danger"
       @click="toast.error({ summary: 'Failed', detail: 'Try again later.' })"
@@ -56,7 +56,7 @@ import { WdButton, toast } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { h } from 'vue'
-import { WdButton, toast } from '@well-insight/ui'
+import { WiButton, toast } from '@well-insight/ui'
 
 function showRich() {
   toast.info({
@@ -68,7 +68,7 @@ function showRich() {
 </script>
 
 <template>
-  <WdButton label="Rich Toast" @click="showRich" />
+  <WiButton label="Rich Toast" @click="showRich" />
 </template>
 ```
 
@@ -79,7 +79,7 @@ You can still manage the list yourself with `messages` + `close`.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdToast, WdButton } from '@well-insight/ui'
+import { WiToast, WiButton } from '@well-insight/ui'
 import type { ToastMessage } from '@well-insight/ui'
 
 const messages = ref<ToastMessage[]>([])
@@ -99,10 +99,10 @@ function onClose(message: ToastMessage) {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <WdButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
+    <WiButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
+    <WiButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
   </div>
-  <WdToast :messages="messages" position="top-right" @close="onClose" />
+  <WiToast :messages="messages" position="top-right" @close="onClose" />
 </template>
 ```
 

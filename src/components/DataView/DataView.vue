@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import WdPagination from '../Pagination/Pagination.vue'
+import WiPagination from '../Pagination/Pagination.vue'
 import type { DataViewProps } from './types'
 
 const props = withDefaults(defineProps<DataViewProps>(), {
@@ -19,8 +19,8 @@ const pagedValue = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-dataview',
-  `wd-dataview--${props.layout}`,
+  'wi-dataview',
+  `wi-dataview--${props.layout}`,
 ])
 
 watch(
@@ -33,26 +33,26 @@ watch(
 
 <template>
   <div :class="rootClass">
-    <div class="wd-dataview__content">
+    <div class="wi-dataview__content">
       <slot v-if="layout === 'list'" name="list" :items="pagedValue">
-        <ul class="wd-dataview__list">
-          <li v-for="(item, index) in pagedValue" :key="index" class="wd-dataview__list-item">
+        <ul class="wi-dataview__list">
+          <li v-for="(item, index) in pagedValue" :key="index" class="wi-dataview__list-item">
             {{ item }}
           </li>
         </ul>
       </slot>
       <slot v-else name="grid" :items="pagedValue">
-        <div class="wd-dataview__grid">
-          <div v-for="(item, index) in pagedValue" :key="index" class="wd-dataview__grid-item">
+        <div class="wi-dataview__grid">
+          <div v-for="(item, index) in pagedValue" :key="index" class="wi-dataview__grid-item">
             {{ item }}
           </div>
         </div>
       </slot>
     </div>
-    <WdPagination
+    <WiPagination
       v-if="paginator"
       v-model="page"
-      class="wd-dataview__paginator"
+      class="wi-dataview__paginator"
       :total-records="value.length"
       :rows="rows"
     />

@@ -1,5 +1,5 @@
 /** Semantic severity (omit / primary = default brand). */
-export type WdSeverity =
+export type WiSeverity =
   | 'secondary'
   | 'success'
   | 'info'
@@ -8,17 +8,17 @@ export type WdSeverity =
   | 'danger'
   | 'contrast'
 
-export type WdTagSeverity = WdSeverity | 'primary'
+export type WiTagSeverity = WiSeverity | 'primary'
 
-export type WdToastSeverity = 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast'
+export type WiToastSeverity = 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast'
 
 /** Size tokens; legacy sm/md/lg remain accepted. */
-export type WdSize = 'small' | 'large'
-export type WdSizeInput = WdSize | 'sm' | 'md' | 'lg'
+export type WiSize = 'small' | 'large'
+export type WiSizeInput = WiSize | 'sm' | 'md' | 'lg'
 
-export type WdInputVariant = 'outlined' | 'filled'
+export type WiInputVariant = 'outlined' | 'filled'
 
-export function resolveSizeClass(size?: WdSizeInput): 'small' | 'normal' | 'large' {
+export function resolveSizeClass(size?: WiSizeInput): 'small' | 'normal' | 'large' {
   if (size === 'sm' || size === 'small') return 'small'
   if (size === 'lg' || size === 'large') return 'large'
   return 'normal'

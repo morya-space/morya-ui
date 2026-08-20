@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdCarousel from './Carousel.vue'
+import WiCarousel from './Carousel.vue'
 
-describe('WdCarousel', () => {
+describe('WiCarousel', () => {
   it('pages through items', async () => {
-    const wrapper = mount(WdCarousel, {
+    const wrapper = mount(WiCarousel, {
       props: { value: ['a', 'b', 'c'], numVisible: 1 },
       slots: {
         item: `<template #item="{ item }"><span class="slide">{{ item }}</span></template>`,
@@ -17,7 +17,7 @@ describe('WdCarousel', () => {
   })
 
   it('wraps when circular', async () => {
-    const wrapper = mount(WdCarousel, {
+    const wrapper = mount(WiCarousel, {
       props: { value: ['a', 'b'], numVisible: 1, circular: true },
     })
     await wrapper.find('[aria-label="上一页"]').trigger('click')

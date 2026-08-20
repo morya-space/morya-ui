@@ -11,7 +11,7 @@ description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 ## 引入
 
 ```ts
-import { WdConfirmDialog, WdButton } from '@well-insight/ui'
+import { WiConfirmDialog, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,14 +19,14 @@ import { WdConfirmDialog, WdButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdConfirmDialog, WdButton } from '@well-insight/ui'
+import { WiConfirmDialog, WiButton } from '@well-insight/ui'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <WdButton label="删除" severity="danger" @click="visible = true" />
-  <WdConfirmDialog
+  <WiButton label="删除" severity="danger" @click="visible = true" />
+  <WiConfirmDialog
     v-model="visible"
     header="删除确认"
     message="确定要删除该项吗？此操作不可撤销。"

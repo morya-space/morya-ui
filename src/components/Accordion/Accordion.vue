@@ -22,11 +22,11 @@ function isActive(value: string) {
 }
 
 function panelId(value: string) {
-  return `wd-accordion-panel-${value}`
+  return `wi-accordion-panel-${value}`
 }
 
 function headerId(value: string) {
-  return `wd-accordion-header-${value}`
+  return `wi-accordion-header-${value}`
 }
 
 function toggle(value: string, disabled?: boolean) {
@@ -44,13 +44,13 @@ function toggle(value: string, disabled?: boolean) {
 </script>
 
 <template>
-  <div class="wd-accordion">
-    <div v-for="tab in tabs" :key="tab.value" class="wd-accordion__tab">
+  <div class="wi-accordion">
+    <div v-for="tab in tabs" :key="tab.value" class="wi-accordion__tab">
       <button
         :id="headerId(tab.value)"
         type="button"
-        class="wd-accordion__header"
-        :class="{ 'wd-accordion__header--active': isActive(tab.value) }"
+        class="wi-accordion__header"
+        :class="{ 'wi-accordion__header--active': isActive(tab.value) }"
         :aria-expanded="isActive(tab.value)"
         :aria-controls="panelId(tab.value)"
         :disabled="tab.disabled"
@@ -61,7 +61,7 @@ function toggle(value: string, disabled?: boolean) {
       <div
         v-show="isActive(tab.value)"
         :id="panelId(tab.value)"
-        class="wd-accordion__content"
+        class="wi-accordion__content"
         role="region"
         :aria-labelledby="headerId(tab.value)"
       >

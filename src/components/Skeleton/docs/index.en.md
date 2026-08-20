@@ -11,7 +11,7 @@ Loading placeholder skeleton for visual feedback while content is not ready.
 ## Import
 
 ```ts
-import { WdSkeleton } from '@well-insight/ui'
+import { WiSkeleton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ Rectangle by default, `100%` wide, with a `wave` animation.
 
 ```vue preview
 <script setup lang="ts">
-import { WdSkeleton } from '@well-insight/ui'
+import { WiSkeleton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <WdSkeleton height="1.25rem" />
-    <WdSkeleton height="1.25rem" width="70%" />
-    <WdSkeleton height="6rem" border-radius="0.5rem" />
+    <WiSkeleton height="1.25rem" />
+    <WiSkeleton height="1.25rem" width="70%" />
+    <WiSkeleton height="6rem" border-radius="0.5rem" />
   </div>
 </template>
 ```
@@ -38,13 +38,13 @@ import { WdSkeleton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSkeleton } from '@well-insight/ui'
+import { WiSkeleton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WdSkeleton shape="circle" width="3rem" height="3rem" />
-    <WdSkeleton width="10rem" height="3rem" />
+    <WiSkeleton shape="circle" width="3rem" height="3rem" />
+    <WiSkeleton width="10rem" height="3rem" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ import { WdSkeleton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSkeleton } from '@well-insight/ui'
+import { WiSkeleton } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <WdSkeleton height="1.25rem" animation="wave" />
-    <WdSkeleton height="1.25rem" animation="none" />
+    <WiSkeleton height="1.25rem" animation="wave" />
+    <WiSkeleton height="1.25rem" animation="none" />
   </div>
 </template>
 ```

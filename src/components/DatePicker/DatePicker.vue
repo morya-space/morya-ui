@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { formatLocale, useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { formatLocale, useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveSizeClass } from '../../shared/types'
 import type { DatePickerProps, DatePickerValue } from './types'
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string | null): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -107,13 +107,13 @@ function buildCell(date: Date, inMonth: boolean) {
 }
 
 const rootClass = computed(() => [
-  'wd-datepicker',
-  `wd-datepicker--${sizeClass.value}`,
+  'wi-datepicker',
+  `wi-datepicker--${sizeClass.value}`,
   {
-    'wd-datepicker--fluid': props.fluid,
-    'wd-datepicker--disabled': props.disabled,
-    'wd-datepicker--invalid': props.invalid,
-    'wd-datepicker--open': open.value,
+    'wi-datepicker--fluid': props.fluid,
+    'wi-datepicker--disabled': props.disabled,
+    'wi-datepicker--invalid': props.invalid,
+    'wi-datepicker--open': open.value,
   },
 ])
 
@@ -216,10 +216,10 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="root" :class="rootClass">
-    <label v-if="label" class="wd-datepicker__label">{{ label }}</label>
-    <div ref="trigger" class="wd-datepicker__control">
+    <label v-if="label" class="wi-datepicker__label">{{ label }}</label>
+    <div ref="trigger" class="wi-datepicker__control">
       <input
-        class="wd-datepicker__input"
+        class="wi-datepicker__input"
         type="text"
         readonly
         :value="displayValue"
@@ -235,7 +235,7 @@ onBeforeUnmount(() => {
       <button
         v-if="displayValue"
         type="button"
-        class="wd-datepicker__clear"
+        class="wi-datepicker__clear"
         :aria-label="locale.clearDate"
         :disabled="disabled"
         @click="clear"
@@ -244,33 +244,33 @@ onBeforeUnmount(() => {
       </button>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <div
           v-if="open"
           ref="panel"
-          class="wd-datepicker__panel"
-          :class="{ 'wd-datepicker__panel--teleported': teleported }"
+          class="wi-datepicker__panel"
+          :class="{ 'wi-datepicker__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
           role="dialog"
           :aria-label="locale.datePicker"
         >
-          <div class="wd-datepicker__header">
-            <button type="button" class="wd-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">‹</button>
-            <span class="wd-datepicker__month">{{ monthLabel }}</span>
-            <button type="button" class="wd-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">›</button>
+          <div class="wi-datepicker__header">
+            <button type="button" class="wi-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">‹</button>
+            <span class="wi-datepicker__month">{{ monthLabel }}</span>
+            <button type="button" class="wi-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">›</button>
           </div>
-          <div class="wd-datepicker__weekdays">
+          <div class="wi-datepicker__weekdays">
             <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>
           </div>
-          <div class="wd-datepicker__grid">
+          <div class="wi-datepicker__grid">
             <button
               v-for="cell in calendarDays"
               :key="cell.date.toISOString()"
               type="button"
-              class="wd-datepicker__day"
+              class="wi-datepicker__day"
               :class="{
-                'wd-datepicker__day--other': !cell.inMonth,
-                'wd-datepicker__day--selected': cell.selected,
+                'wi-datepicker__day--other': !cell.inMonth,
+                'wi-datepicker__day--selected': cell.selected,
               }"
               :disabled="cell.disabled"
               @click="pick(cell.date, cell.disabled)"

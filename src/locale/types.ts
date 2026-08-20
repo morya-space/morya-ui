@@ -1,8 +1,8 @@
-export type WdLocaleName = 'zh-CN' | 'en-US'
+export type WiLocaleName = 'zh-CN' | 'en-US'
 
 /** Shared UI copy. Partial overrides merge onto the active language pack. */
-export interface WdLocaleConfig {
-  name?: WdLocaleName | (string & {})
+export interface WiLocaleConfig {
+  name?: WiLocaleName | (string & {})
   accept?: string
   reject?: string
   confirm?: string
@@ -95,8 +95,8 @@ export interface WdLocaleConfig {
   openMenu?: string
 }
 
-export type WdLocaleMessages = Required<
-  Omit<WdLocaleConfig, 'name' | 'weekdays' | 'monthNames'>
+export type WiLocaleMessages = Required<
+  Omit<WiLocaleConfig, 'name' | 'weekdays' | 'monthNames'>
 > & {
   name: string
   weekdays: string[]

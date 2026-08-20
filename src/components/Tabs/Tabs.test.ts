@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdTabs from './Tabs.vue'
+import WiTabs from './Tabs.vue'
 
 const tabs = [{ label: 'Design', value: 'design' }, { label: 'Data', value: 'data' }, { label: 'Disabled', value: 'disabled', disabled: true }]
 
-describe('WdTabs', () => {
+describe('WiTabs', () => {
   it('emits the selected tab value', async () => {
-    const wrapper = mount(WdTabs, { props: { tabs, modelValue: 'design' } })
+    const wrapper = mount(WiTabs, { props: { tabs, modelValue: 'design' } })
     const tab = wrapper.findAll('[role="tab"]')[1]
     expect(tab).toBeDefined()
     await tab!.trigger('click')
@@ -15,7 +15,7 @@ describe('WdTabs', () => {
   })
 
   it('supports arrow-key navigation across enabled tabs', async () => {
-    const wrapper = mount(WdTabs, { attachTo: document.body, props: { tabs, modelValue: 'design' } })
+    const wrapper = mount(WiTabs, { attachTo: document.body, props: { tabs, modelValue: 'design' } })
     await wrapper.get('[role="tab"]').trigger('keydown', { key: 'ArrowRight' })
     expect(wrapper.emitted('update:modelValue')).toEqual([['data']])
     wrapper.unmount()

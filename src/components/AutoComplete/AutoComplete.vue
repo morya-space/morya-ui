@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useWiLocale } from '../../locale'
+import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveSizeClass } from '../../shared/types'
-import WdIcon from '../Icon/Icon.vue'
+import WiIcon from '../Icon/Icon.vue'
 import type { AutoCompleteProps } from './types'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
@@ -21,8 +21,8 @@ const emit = defineEmits<{
   (event: 'complete', query: string): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useWiConfig()
+const locale = useWiLocale()
 const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -40,11 +40,11 @@ const filtered = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-autocomplete',
-  `wd-autocomplete--${sizeClass.value}`,
+  'wi-autocomplete',
+  `wi-autocomplete--${sizeClass.value}`,
   {
-    'wd-autocomplete--disabled': props.disabled,
-    'wd-autocomplete--open': open.value,
+    'wi-autocomplete--disabled': props.disabled,
+    'wi-autocomplete--open': open.value,
   },
 ])
 
@@ -151,9 +151,9 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="root" :class="rootClass">
-    <div ref="trigger" class="wd-autocomplete__control">
+    <div ref="trigger" class="wi-autocomplete__control">
       <input
-        class="wd-autocomplete__input"
+        class="wi-autocomplete__input"
         type="text"
         role="combobox"
         :value="modelValue"
@@ -168,30 +168,30 @@ onBeforeUnmount(() => {
       <button
         v-if="dropdown"
         type="button"
-        class="wd-autocomplete__dropdown"
+        class="wi-autocomplete__dropdown"
         :aria-label="locale.showSuggestions"
         :disabled="disabled"
         @click="toggleDropdown"
       >
-        <WdIcon name="chevron-down" size="sm" />
+        <WiIcon name="chevron-down" size="sm" />
       </button>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="wi-scale-fade">
         <ul
           v-if="open && filtered.length"
           ref="panel"
-          class="wd-autocomplete__panel"
-          :class="{ 'wd-autocomplete__panel--teleported': teleported }"
+          class="wi-autocomplete__panel"
+          :class="{ 'wi-autocomplete__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
           role="listbox"
         >
           <li
             v-for="(item, index) in filtered"
             :key="`${item}-${index}`"
-            class="wd-autocomplete__item"
+            class="wi-autocomplete__item"
             role="option"
-            :class="{ 'wd-autocomplete__item--active': index === highlight }"
+            :class="{ 'wi-autocomplete__item--active': index === highlight }"
             :aria-selected="index === highlight"
             @mousedown.prevent="select(item)"
           >

@@ -11,7 +11,7 @@ Pick local files. Supports click-to-choose, drag-and-drop, text / picture lists,
 ## Import
 
 ```ts
-import { WdFileUpload } from '@well-insight/ui'
+import { WiFileUpload } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdFileUpload } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdFileUpload } from '@well-insight/ui'
+import { WiFileUpload } from '@well-insight/ui'
 
 const names = ref<string[]>([])
 function onSelect(files: File[]) {
@@ -29,7 +29,7 @@ function onSelect(files: File[]) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdFileUpload mode="advanced" multiple @select="onSelect" />
+    <WiFileUpload mode="advanced" multiple @select="onSelect" />
     <div v-if="names.length">Selected: {{ names.join(', ') }}</div>
   </div>
 </template>
@@ -42,7 +42,7 @@ Set `drag` to show a dashed drop zone. Drop files or click the area to choose.
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdFileUpload } from '@well-insight/ui'
+import { WiFileUpload } from '@well-insight/ui'
 
 const names = ref<string[]>([])
 function onSelect(files: File[]) {
@@ -52,9 +52,9 @@ function onSelect(files: File[]) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
+    <WiFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
       <template #tip>Images or PDF. Multiple files can be dropped at once.</template>
-    </WdFileUpload>
+    </WiFileUpload>
     <div v-if="names.length">Selected: {{ names.join(', ') }}</div>
   </div>
 </template>
@@ -67,7 +67,7 @@ function onSelect(files: File[]) {
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdFileUpload, type FileUploadFile } from '@well-insight/ui'
+import { WiFileUpload, type FileUploadFile } from '@well-insight/ui'
 
 const preview = ref('')
 function onPreview(file: FileUploadFile) {
@@ -77,7 +77,7 @@ function onPreview(file: FileUploadFile) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
+    <WiFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
     <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem" />
   </div>
 </template>
@@ -89,11 +89,11 @@ A photo wall: the plus tile opens the picker; hover to preview or remove. Images
 
 ```vue preview
 <script setup lang="ts">
-import { WdFileUpload } from '@well-insight/ui'
+import { WiFileUpload } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
+  <WiFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
 </template>
 ```
 
@@ -104,7 +104,7 @@ With `httpRequest` (or `action`), files upload automatically. The demo mocks the
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdFileUpload, type FileUploadRequestOptions } from '@well-insight/ui'
+import { WiFileUpload, type FileUploadRequestOptions } from '@well-insight/ui'
 
 const last = ref('')
 
@@ -122,9 +122,9 @@ function onSuccess(_file: unknown, response: unknown) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
+    <WiFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
       <template #tip>Files upload immediately after selection, with progress.</template>
-    </WdFileUpload>
+    </WiFileUpload>
     <div v-if="last">Response: {{ last }}</div>
   </div>
 </template>
@@ -136,7 +136,7 @@ With `auto-upload="false"`, files join the list first; click Upload to send them
 
 ```vue preview
 <script setup lang="ts">
-import { WdFileUpload, type FileUploadFile } from '@well-insight/ui'
+import { WiFileUpload, type FileUploadFile } from '@well-insight/ui'
 
 async function mockUpload() {
   await new Promise((resolve) => setTimeout(resolve, 300))
@@ -150,7 +150,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 </script>
 
 <template>
-  <WdFileUpload
+  <WiFileUpload
     mode="advanced"
     multiple
     :auto-upload="false"
@@ -159,7 +159,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
     :http-request="mockUpload"
   >
     <template #tip>Each file must be under 2MB. Choose files, then click Upload.</template>
-  </WdFileUpload>
+  </WiFileUpload>
 </template>
 ```
 

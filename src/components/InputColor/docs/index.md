@@ -11,7 +11,7 @@ description: 颜色选择，支持色板与十六进制文本。
 ## 引入
 
 ```ts
-import { WdInputColor } from '@well-insight/ui'
+import { WiInputColor } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdInputColor } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputColor } from '@well-insight/ui'
+import { WiInputColor } from '@well-insight/ui'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <WdInputColor v-model="color" />
+  <WiInputColor v-model="color" />
 </template>
 ```
 

@@ -11,7 +11,7 @@ description: 简易命令提示符 UI。
 ## 引入
 
 ```ts
-import { WdTerminal } from '@well-insight/ui'
+import { WiTerminal } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,14 +19,14 @@ import { WdTerminal } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTerminal } from '@well-insight/ui'
+import { WiTerminal } from '@well-insight/ui'
 
 const last = ref('')
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WdTerminal welcome-message="Well Insight Terminal" @command="last = $event" />
+    <WiTerminal welcome-message="Well Insight Terminal" @command="last = $event" />
     <div v-if="last">最近命令：{{ last }}</div>
   </div>
 </template>

@@ -11,7 +11,7 @@ Single-line text input.
 ## Import
 
 ```ts
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInput v-model="value" label="Name" placeholder="Enter your name" />
+  <WiInput v-model="value" label="Name" placeholder="Enter your name" />
 </template>
 ```
 
@@ -35,11 +35,11 @@ Prefer `invalid`; `error` remains available as an alias.
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
+  <WiInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
 </template>
 ```
 
@@ -48,13 +48,13 @@ import { WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 
 const value = ref('Draft note')
 </script>
 
 <template>
-  <WdInput v-model="value" clearable label="Note" />
+  <WiInput v-model="value" clearable label="Note" />
 </template>
 ```
 
@@ -63,7 +63,7 @@ const value = ref('Draft note')
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 
 const amount = ref('128')
 const host = ref('docs')
@@ -71,13 +71,13 @@ const host = ref('docs')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdInput v-model="amount" label="Amount" fluid>
+    <WiInput v-model="amount" label="Amount" fluid>
       <template #prefix>¥</template>
       <template #suffix>.00</template>
-    </WdInput>
-    <WdInput v-model="host" label="Domain" fluid>
+    </WiInput>
+    <WiInput v-model="host" label="Domain" fluid>
       <template #suffix>.well.design</template>
-    </WdInput>
+    </WiInput>
   </div>
 </template>
 ```
@@ -87,13 +87,13 @@ const host = ref('docs')
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 
 const password = ref('')
 </script>
 
 <template>
-  <WdInput v-model="password" type="password" label="Password" placeholder="••••••••" />
+  <WiInput v-model="password" type="password" label="Password" placeholder="••••••••" />
 </template>
 ```
 
@@ -103,14 +103,14 @@ Supports `small` / `large`, and also `sm` / `md` / `lg`.
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdInput size="small" label="Small" placeholder="Small" />
-    <WdInput label="Normal" placeholder="Normal" />
-    <WdInput size="large" label="Large" placeholder="Large" />
+    <WiInput size="small" label="Small" placeholder="Small" />
+    <WiInput label="Normal" placeholder="Normal" />
+    <WiInput size="large" label="Large" placeholder="Large" />
   </div>
 </template>
 ```
@@ -122,13 +122,13 @@ import { WdInput } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 
 const bio = ref('Hello')
 </script>
 
 <template>
-  <WdInput v-model="bio" label="Bio" :maxlength="20" show-count />
+  <WiInput v-model="bio" label="Bio" :maxlength="20" show-count />
 </template>
 ```
 
@@ -136,14 +136,14 @@ const bio = ref('Hello')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
-    <WdInput variant="outlined" label="Outlined" placeholder="Outlined" />
-    <WdInput variant="filled" label="Filled" placeholder="Filled" />
-    <WdInput fluid label="Fluid" placeholder="Full width" />
+    <WiInput variant="outlined" label="Outlined" placeholder="Outlined" />
+    <WiInput variant="filled" label="Filled" placeholder="Filled" />
+    <WiInput fluid label="Fluid" placeholder="Full width" />
   </div>
 </template>
 ```
@@ -152,11 +152,11 @@ import { WdInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@well-insight/ui'
+import { WiInput } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdInput model-value="Read only value" label="Disabled" disabled />
+  <WiInput model-value="Read only value" label="Disabled" disabled />
 </template>
 ```
 

@@ -1,2 +1,2 @@
-export { default as WdDrawer } from './Drawer.vue'
+export { default as WiDrawer } from './Drawer.vue'
 export type { DrawerEmits, DrawerPosition, DrawerProps } from './types'

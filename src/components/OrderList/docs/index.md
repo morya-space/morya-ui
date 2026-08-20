@@ -11,7 +11,7 @@ description: 列表拖拽与上下按钮排序。
 ## 引入
 
 ```ts
-import { WdOrderList } from '@well-insight/ui'
+import { WiOrderList } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdOrderList } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdOrderList } from '@well-insight/ui'
+import { WiOrderList } from '@well-insight/ui'
 
 const items = ref(['设计', '开发', '测试', '发布'])
 </script>
 
 <template>
-  <WdOrderList v-model="items" />
+  <WiOrderList v-model="items" />
 </template>
 ```
 

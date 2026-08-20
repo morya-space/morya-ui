@@ -6,14 +6,14 @@ description: 表单布局与字段校验反馈。支持 blur/change/submit 时�
 
 # Form
 
-`WdForm` / `WdFormItem` 负责布局与错误展示。校验函数由业务传入，`validateOn` 控制触发时机。
+`WiForm` / `WiFormItem` 负责布局与错误展示。校验函数由业务传入，`validateOn` 控制触发时机。
 
 ## Basic + submit 校验
 
 ```vue preview
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { WdForm, WdFormItem, WdInput, WdButton } from '@well-insight/ui'
+import { WiForm, WiFormItem, WiInput, WiButton } from '@well-insight/ui'
 
 const formRef = ref<{ validate: () => Promise<{ valid: boolean }> } | null>(null)
 const form = reactive({ name: '', email: '' })
@@ -24,24 +24,24 @@ function required(value: string, message: string) {
 </script>
 
 <template>
-  <WdForm
+  <WiForm
     ref="formRef"
     label-position="top"
     validate-on="submit"
     style="max-width: 22rem"
     @submit="({ valid }) => valid && undefined"
   >
-    <WdFormItem
+    <WiFormItem
       label="名称"
       name="name"
       required
       :validate="required(form.name, '请输入名称')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <WiInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdFormItem
+    </WiFormItem>
+    <WiFormItem
       label="邮箱"
       name="email"
       required
@@ -49,11 +49,11 @@ function required(value: string, message: string) {
       :validate="() => (/.+@.+\..+/.test(form.email) ? undefined : '请输入有效邮箱')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="form.email" type="email" fluid :invalid="invalid" />
+        <WiInput :id="id" v-model="form.email" type="email" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdButton native-type="submit" label="提交" />
-  </WdForm>
+    </WiFormItem>
+    <WiButton native-type="submit" label="提交" />
+  </WiForm>
 </template>
 ```
 
@@ -62,23 +62,23 @@ function required(value: string, message: string) {
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdForm, WdFormItem, WdInput } from '@well-insight/ui'
+import { WiForm, WiFormItem, WiInput } from '@well-insight/ui'
 
 const title = ref('')
 </script>
 
 <template>
-  <WdForm validate-on="blur" style="max-width: 22rem">
-    <WdFormItem
+  <WiForm validate-on="blur" style="max-width: 22rem">
+    <WiFormItem
       label="标题"
       name="title"
       :validate="() => (title.trim() ? undefined : '标题不能为空')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="title" fluid :invalid="invalid" placeholder="失焦后校验" />
+        <WiInput :id="id" v-model="title" fluid :invalid="invalid" placeholder="失焦后校验" />
       </template>
-    </WdFormItem>
-  </WdForm>
+    </WiFormItem>
+  </WiForm>
 </template>
 ```
 

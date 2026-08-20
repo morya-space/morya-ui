@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
-import WdIcon from '../Icon/Icon.vue'
+import WiIcon from '../Icon/Icon.vue'
 import type { TagProps } from './types'
 
 const props = withDefaults(defineProps<TagProps>(), {
@@ -14,10 +14,10 @@ const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primar
 
 <template>
   <span
-    class="wd-tag"
-    :class="[`wd-tag--${severityTone}`, { 'wd-tag--rounded': rounded }]"
+    class="wi-tag"
+    :class="[`wi-tag--${severityTone}`, { 'wi-tag--rounded': rounded }]"
   >
-    <WdIcon v-if="icon" class="wd-tag__icon" :name="icon" size="sm" />
+    <WiIcon v-if="icon" class="wi-tag__icon" :name="icon" size="sm" />
     <slot>{{ value }}</slot>
   </span>
 </template>

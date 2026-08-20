@@ -1,2 +1,2 @@
-export { default as WdInputColor } from './InputColor.vue'
+export { default as WiInputColor } from './InputColor.vue'
 export type { InputColorEmits, InputColorProps } from './types'

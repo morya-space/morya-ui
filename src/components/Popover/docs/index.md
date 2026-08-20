@@ -11,7 +11,7 @@ description: 相对触发元素定位的浮层面板。支持 placement、Telepo
 ## 引入
 
 ```ts
-import { WdPopover, WdButton } from '@well-insight/ui'
+import { WiPopover, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,18 +19,18 @@ import { WdPopover, WdButton } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdPopover } from '@well-insight/ui'
+import { WiButton, WiPopover } from '@well-insight/ui'
 
 const open = ref(false)
 </script>
 
 <template>
-  <WdPopover v-model="open" placement="bottom">
-    <WdButton label="Toggle Popover" @click="open = !open" />
+  <WiPopover v-model="open" placement="bottom">
+    <WiButton label="Toggle Popover" @click="open = !open" />
     <template #content>
       <p style="margin:0">Click outside or press Esc to close.</p>
     </template>
-  </WdPopover>
+  </WiPopover>
 </template>
 ```
 
@@ -39,19 +39,19 @@ const open = ref(false)
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdPopover } from '@well-insight/ui'
+import { WiButton, WiPopover } from '@well-insight/ui'
 
 const open = ref(false)
 </script>
 
 <template>
   <div style="display:flex;justify-content:center;padding:2rem">
-    <WdPopover v-model="open" placement="bottom-start">
-      <WdButton label="bottom-start" severity="secondary" @click="open = !open" />
+    <WiPopover v-model="open" placement="bottom-start">
+      <WiButton label="bottom-start" severity="secondary" @click="open = !open" />
       <template #content>
         <p style="margin:0">Aligned to the start of the trigger.</p>
       </template>
-    </WdPopover>
+    </WiPopover>
   </div>
 </template>
 ```

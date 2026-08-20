@@ -1,18 +1,18 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdRenderable } from '../../shared/content'
-import type { WdToastSeverity } from '../../shared/types'
+import type { WiAppendTo } from '../../shared/overlay'
+import type { WiRenderable } from '../../shared/content'
+import type { WiToastSeverity } from '../../shared/types'
 
-export type { WdRenderable }
+export type { WiRenderable }
 
 /** toast severities; `warning` kept as legacy alias for `warn`. */
-export type ToastSeverity = WdToastSeverity | 'warning'
+export type ToastSeverity = WiToastSeverity | 'warning'
 
 export type ToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
 
 export interface ToastMessage {
   id: string | number
-  summary: WdRenderable
-  detail?: WdRenderable
+  summary: WiRenderable
+  detail?: WiRenderable
   severity?: ToastSeverity
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
@@ -21,12 +21,12 @@ export interface ToastMessage {
 
 export type ToastOptions = Omit<ToastMessage, 'id' | 'summary'> & {
   id?: string | number
-  summary: WdRenderable
+  summary: WiRenderable
   position?: ToastPosition
 }
 
 /** String / VNode / component / render factory, or a full options object. */
-export type ToastInput = WdRenderable | ToastOptions
+export type ToastInput = WiRenderable | ToastOptions
 
 export interface ToastProps {
   /**
@@ -38,7 +38,7 @@ export interface ToastProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: WiAppendTo
   /** Internal: auto-mounted service host. */
   auto?: boolean
 }

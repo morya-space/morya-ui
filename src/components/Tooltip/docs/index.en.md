@@ -11,24 +11,24 @@ Short hint for a trigger element, suited to icon buttons or truncated text.
 ## Import
 
 ```ts
-import { WdTooltip, WdButton } from '@well-insight/ui'
+import { WiTooltip, WiButton } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdTooltip } from '@well-insight/ui'
+import { WiButton, WiTooltip } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WdTooltip content="Save changes" placement="top">
-      <WdButton icon="check" icon-only aria-label="Save" />
-    </WdTooltip>
-    <WdTooltip content="Delete item" placement="bottom" :show-delay="200">
-      <WdButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
-    </WdTooltip>
+    <WiTooltip content="Save changes" placement="top">
+      <WiButton icon="check" icon-only aria-label="Save" />
+    </WiTooltip>
+    <WiTooltip content="Delete item" placement="bottom" :show-delay="200">
+      <WiButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
+    </WiTooltip>
   </div>
 </template>
 ```

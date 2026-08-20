@@ -11,7 +11,7 @@ description: 标签页切换。使用 modelValue 与 tabs 列表控制活动项�
 ## 引入
 
 ```ts
-import { WdTabs } from '@well-insight/ui'
+import { WiTabs } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdTabs } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdTabs } from '@well-insight/ui'
+import { WiTabs } from '@well-insight/ui'
 
 const active = ref('design')
 const tabs = [
@@ -30,11 +30,11 @@ const tabs = [
 </script>
 
 <template>
-  <WdTabs v-model="active" :tabs="tabs">
+  <WiTabs v-model="active" :tabs="tabs">
     <template #default="{ activeValue }">
       <p style="margin:0">Active panel: {{ activeValue }}</p>
     </template>
-  </WdTabs>
+  </WiTabs>
 </template>
 ```
 

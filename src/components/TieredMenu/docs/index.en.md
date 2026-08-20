@@ -11,14 +11,14 @@ Expand one level of submenu on hover or click.
 ## Import
 
 ```ts
-import { WdTieredMenu } from '@well-insight/ui'
+import { WiTieredMenu } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdTieredMenu } from '@well-insight/ui'
+import { WiTieredMenu } from '@well-insight/ui'
 
 const model = [
   {
@@ -30,7 +30,7 @@ const model = [
 </script>
 
 <template>
-  <WdTieredMenu :model="model" />
+  <WiTieredMenu :model="model" />
 </template>
 ```
 

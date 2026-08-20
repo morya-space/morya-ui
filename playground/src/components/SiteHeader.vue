@@ -114,7 +114,7 @@ const activeSection = computed(() => {
 <style scoped>
 .site-header {
   align-items: center;
-  background: color-mix(in srgb, var(--wd-color-surface) 72%, transparent);
+  background: color-mix(in srgb, var(--wi-color-surface) 72%, transparent);
   border-bottom: 1px solid var(--docs-edge);
   display: grid;
   flex: 0 0 auto;
@@ -131,7 +131,7 @@ const activeSection = computed(() => {
 
 .site-brand {
   align-items: center;
-  color: var(--wd-color-text);
+  color: var(--wi-color-text);
   display: inline-flex;
   gap: 0.75rem;
   text-decoration: none;
@@ -141,9 +141,9 @@ const activeSection = computed(() => {
 .site-brand__mark {
   align-items: center;
   background:
-    linear-gradient(140deg, var(--wd-color-primary), color-mix(in srgb, var(--wd-color-primary) 40%, #22d3ee));
+    linear-gradient(140deg, var(--wi-color-primary), color-mix(in srgb, var(--wi-color-primary) 40%, #22d3ee));
   border-radius: 0.55rem;
-  box-shadow: 0 0 0 1px color-mix(in srgb, #fff 18%, transparent), 0 10px 28px color-mix(in srgb, var(--wd-color-primary) 35%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, #fff 18%, transparent), 0 10px 28px color-mix(in srgb, var(--wi-color-primary) 35%, transparent);
   color: #fff;
   display: inline-flex;
   font-family: var(--docs-display);
@@ -168,7 +168,7 @@ const activeSection = computed(() => {
 }
 
 .site-brand__version {
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   font-weight: 500;
@@ -177,7 +177,7 @@ const activeSection = computed(() => {
 
 .site-nav {
   align-items: center;
-  background: color-mix(in srgb, var(--wd-color-surface) 55%, transparent);
+  background: color-mix(in srgb, var(--wi-color-surface) 55%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 999px;
   display: flex;
@@ -188,25 +188,25 @@ const activeSection = computed(() => {
 
 .site-nav__link {
   border-radius: 999px;
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   font-size: 0.84rem;
   font-weight: 600;
   padding: 0.42rem 0.95rem;
   text-decoration: none;
   transition:
-    color var(--wd-motion-fast) var(--wd-motion-ease),
-    background var(--wd-motion-fast) var(--wd-motion-ease),
-    box-shadow var(--wd-motion-fast) var(--wd-motion-ease);
+    color var(--wi-motion-fast) var(--wi-motion-ease),
+    background var(--wi-motion-fast) var(--wi-motion-ease),
+    box-shadow var(--wi-motion-fast) var(--wi-motion-ease);
 }
 
 .site-nav__link:hover {
-  color: var(--wd-color-text);
+  color: var(--wi-color-text);
 }
 
 .site-nav__link.is-active {
-  background: color-mix(in srgb, var(--wd-color-primary) 16%, var(--wd-color-surface));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--wd-color-primary) 30%, transparent);
-  color: var(--wd-color-primary);
+  background: color-mix(in srgb, var(--wi-color-primary) 16%, var(--wi-color-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--wi-color-primary) 30%, transparent);
+  color: var(--wi-color-primary);
 }
 
 .site-header__actions {
@@ -217,7 +217,7 @@ const activeSection = computed(() => {
 }
 
 .site-lang {
-  background: color-mix(in srgb, var(--wd-color-surface) 70%, transparent);
+  background: color-mix(in srgb, var(--wi-color-surface) 70%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 0.65rem;
   display: inline-flex;
@@ -229,7 +229,7 @@ const activeSection = computed(() => {
   background: transparent;
   border: 0;
   border-radius: 0.5rem;
-  color: var(--wd-color-text-muted);
+  color: var(--wi-color-text-muted);
   cursor: pointer;
   font-family: var(--docs-mono);
   font-size: 0.68rem;
@@ -240,35 +240,35 @@ const activeSection = computed(() => {
 }
 
 .site-lang__btn:hover {
-  color: var(--wd-color-text);
+  color: var(--wi-color-text);
 }
 
 .site-lang__btn.is-active {
-  background: color-mix(in srgb, var(--wd-color-primary) 16%, var(--wd-color-surface));
-  color: var(--wd-color-primary);
+  background: color-mix(in srgb, var(--wi-color-primary) 16%, var(--wi-color-surface));
+  color: var(--wi-color-primary);
 }
 
 .site-icon-btn {
   align-items: center;
-  background: color-mix(in srgb, var(--wd-color-surface) 70%, transparent);
+  background: color-mix(in srgb, var(--wi-color-surface) 70%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 0.65rem;
-  color: var(--wd-color-text);
+  color: var(--wi-color-text);
   cursor: pointer;
   display: inline-flex;
   height: 2.2rem;
   justify-content: center;
   text-decoration: none;
   transition:
-    border-color var(--wd-motion-fast) var(--wd-motion-ease),
-    color var(--wd-motion-fast) var(--wd-motion-ease),
-    transform var(--wd-motion-fast) var(--wd-motion-ease);
+    border-color var(--wi-motion-fast) var(--wi-motion-ease),
+    color var(--wi-motion-fast) var(--wi-motion-ease),
+    transform var(--wi-motion-fast) var(--wi-motion-ease);
   width: 2.2rem;
 }
 
 .site-icon-btn:hover {
-  border-color: color-mix(in srgb, var(--wd-color-primary) 45%, var(--wd-color-border));
-  color: var(--wd-color-primary);
+  border-color: color-mix(in srgb, var(--wi-color-primary) 45%, var(--wi-color-border));
+  color: var(--wi-color-primary);
   transform: translateY(-1px);
 }
 

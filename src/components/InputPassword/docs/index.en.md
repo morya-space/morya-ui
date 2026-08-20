@@ -11,7 +11,7 @@ Password input. Includes a show/hide toggle by default; optional password streng
 ## Import
 
 ```ts
-import { WdInputPassword } from '@well-insight/ui'
+import { WiInputPassword } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,13 +19,13 @@ import { WdInputPassword } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputPassword } from '@well-insight/ui'
+import { WiInputPassword } from '@well-insight/ui'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" />
+  <WiInputPassword v-model="value" label="Password" />
 </template>
 ```
 
@@ -34,13 +34,13 @@ const value = ref('')
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdInputPassword } from '@well-insight/ui'
+import { WiInputPassword } from '@well-insight/ui'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" feedback />
+  <WiInputPassword v-model="value" label="Password" feedback />
 </template>
 ```
 
@@ -51,7 +51,7 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdIcon, WdInputPassword } from '@well-insight/ui'
+import { WiIcon, WiInputPassword } from '@well-insight/ui'
 
 const byProp = ref('')
 const bySlot = ref('')
@@ -59,15 +59,15 @@ const bySlot = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;max-width:20rem">
-    <WdInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
-    <WdInputPassword v-model="bySlot" label="Via slots">
+    <WiInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
+    <WiInputPassword v-model="bySlot" label="Via slots">
       <template #showIcon>
-        <WdIcon name="search" size="sm" />
+        <WiIcon name="search" size="sm" />
       </template>
       <template #hideIcon>
-        <WdIcon name="close" size="sm" />
+        <WiIcon name="close" size="sm" />
       </template>
-    </WdInputPassword>
+    </WiInputPassword>
   </div>
 </template>
 ```

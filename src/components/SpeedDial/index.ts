@@ -1,4 +1,4 @@
-export { default as WdSpeedDial } from './SpeedDial.vue'
+export { default as WiSpeedDial } from './SpeedDial.vue'
 export type {
   SpeedDialDirection,
   SpeedDialEmits,

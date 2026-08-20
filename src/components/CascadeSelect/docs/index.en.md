@@ -11,7 +11,7 @@ Select a value step by step from nested options.
 ## Import
 
 ```ts
-import { WdCascadeSelect } from '@well-insight/ui'
+import { WiCascadeSelect } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -19,7 +19,7 @@ import { WdCascadeSelect } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdCascadeSelect } from '@well-insight/ui'
+import { WiCascadeSelect } from '@well-insight/ui'
 
 const value = ref<string | number | null>(null)
 const options = [
@@ -36,7 +36,7 @@ const options = [
 </script>
 
 <template>
-  <WdCascadeSelect v-model="value" :options="options" placeholder="Select a category" />
+  <WiCascadeSelect v-model="value" :options="options" placeholder="Select a category" />
 </template>
 ```
 
@@ -45,7 +45,7 @@ const options = [
 ```vue preview
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WdCascadeSelect } from '@well-insight/ui'
+import { WiCascadeSelect } from '@well-insight/ui'
 
 const a = ref(null)
 const b = ref(null)
@@ -58,9 +58,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WdCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <WdCascadeSelect v-model="b" :options="options" placeholder="Default" />
-    <WdCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <WiCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <WiCascadeSelect v-model="b" :options="options" placeholder="Default" />
+    <WiCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -72,7 +72,7 @@ const options = [
 | `modelValue` | `string \| number \| null` | `null` | Selected value. |
 | `options` | `CascadeSelectOption[]` | — | Nested options. |
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
-| `size` | `WdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |

@@ -149,11 +149,11 @@ npx -y @well-insight/ui-mcp
 
 ```vue
 <script setup lang="ts">
-import { WdButton } from '@well-insight/ui'
+import { WiButton } from '@well-insight/ui'
 </script>
 
 <template>
-  <WdButton label="删除" severity="danger" />
+  <WiButton label="删除" severity="danger" />
 </template>
 ```
 

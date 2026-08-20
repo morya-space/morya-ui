@@ -1,4 +1,4 @@
-export { default as WdToast } from './Toast.vue'
+export { default as WiToast } from './Toast.vue'
 export { toast, useToast } from './toast'
 export type {
   ToastEmits,
@@ -9,5 +9,5 @@ export type {
   ToastPosition,
   ToastProps,
   ToastSeverity,
-  WdRenderable,
+  WiRenderable,
 } from './types'

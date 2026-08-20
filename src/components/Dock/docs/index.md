@@ -11,14 +11,14 @@ description: macOS 风格图标坞。
 ## 引入
 
 ```ts
-import { WdDock } from '@well-insight/ui'
+import { WiDock } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdDock } from '@well-insight/ui'
+import { WiDock } from '@well-insight/ui'
 
 const model = [
   { label: '主页', icon: '⌂' },
@@ -28,7 +28,7 @@ const model = [
 </script>
 
 <template>
-  <WdDock :model="model" />
+  <WiDock :model="model" />
 </template>
 ```
 
