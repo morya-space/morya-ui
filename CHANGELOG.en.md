@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.4
+
+### Changes
+
+- Simplify package.json exports by removing development paths for styles and index files
+
 ## 0.1.3
 
 ### Features
