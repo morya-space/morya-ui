@@ -4,8 +4,10 @@ import { join } from 'node:path'
 import { formatChangelogBody, prepareUiRelease, readUiPackage, root } from './ui-changelog.mjs'
 
 export const PACKAGE_NAME = '@well-insight/ui'
-export const RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md']
-export const STEPS = ['prepare', 'commit', 'branch', 'build', 'publish', 'tag', 'push']
+export const UI_RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md']
+export const MCP_RELEASE_PATHS = ['packages/ui-mcp/package.json', 'packages/ui-mcp/data/catalog.json']
+/** Build before commit so MCP catalog is included in the release commit. */
+export const STEPS = ['prepare', 'build', 'commit', 'branch', 'publish', 'tag', 'push']
 
 export function run(command) {
   execSync(command, { cwd: root, stdio: 'inherit', shell: true })
@@ -37,6 +39,14 @@ function hasStagedChanges() {
   return Boolean(git(['diff', '--cached', '--name-only'], { allowFail: true }))
 }
 
+function releasePaths({ noMcp }) {
+  return noMcp ? UI_RELEASE_PATHS : [...UI_RELEASE_PATHS, ...MCP_RELEASE_PATHS]
+}
+
+async function loadMcp() {
+  return import('./release-mcp.mjs')
+}
+
 export function parseReleaseOptions(argv) {
   const args = [...argv]
   const knownSteps = new Set(STEPS)
@@ -52,6 +62,7 @@ export function parseReleaseOptions(argv) {
   }
 
   const noPush = flags.includes('--no-push')
+  const noMcp = flags.includes('--no-mcp')
   const dryRun = flags.includes('--dry-run')
   const force = flags.includes('--force')
   const bumpArg = flags.find((item) => item === '--major' || item === '--minor' || item === '--patch')
@@ -75,6 +86,7 @@ export function parseReleaseOptions(argv) {
     dryRun,
     force,
     noPush,
+    noMcp,
     commitMode,
   }
 }
@@ -168,38 +180,60 @@ export async function stepPrepare(options) {
 
   if (options.dryRun) {
     if (plan.resume) {
-      console.log('No CHANGELOG rewrite; would continue with commit / publish steps.')
+      console.log('No CHANGELOG rewrite; would continue with build / commit / publish steps.')
     } else if (!plan.firstRelease) {
       console.log(`\nCHANGELOG.md preview:\n\n## ${plan.version}\n\n${formatChangelogBody(plan.commits, 'zh-CN')}\n`)
     }
-  } else if (!plan.firstRelease && !plan.resume) {
-    console.log(`Updated version files for v${plan.version}`)
+    if (!options.noMcp) {
+      console.log(`Would also sync ${MCP_RELEASE_PATHS[0]} to v${plan.version}`)
+    }
+  } else {
+    if (!plan.firstRelease && !plan.resume) {
+      console.log(`Updated version files for v${plan.version}`)
+    }
+    if (!options.noMcp) {
+      const { syncMcpVersion } = await loadMcp()
+      syncMcpVersion(plan.version)
+    }
   }
 
   return plan
 }
 
-export function stepCommit() {
+export async function stepBuild(options = {}) {
+  console.log('[build] @well-insight/ui')
+  run('pnpm run build')
+  if (!options.noMcp) {
+    const { buildMcp } = await loadMcp()
+    buildMcp()
+  }
+}
+
+export function stepCommit(options = {}) {
   console.log('[commit] release files')
   ensureOnBranch()
 
   const version = readVersion()
+  const paths = releasePaths(options)
   const existing = git(['ls-files', '--others', '--modified', '--exclude-standard'], { allowFail: true })
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean)
   const unexpected = existing.filter(
-    (file) => !RELEASE_PATHS.some((path) => file === path || file.startsWith(`${path}/`)),
+    (file) => !paths.some((path) => file === path || file.startsWith(`${path}/`)),
   )
   if (unexpected.length) {
     console.warn('Uncommitted files outside the release bump (left unstaged):')
     for (const file of unexpected) console.warn(`  ${file}`)
   }
 
-  git(['add', '--', ...RELEASE_PATHS.filter((path) => existsSync(join(root, path)))], { allowFail: true })
+  git(['add', '--', ...paths.filter((path) => existsSync(join(root, path)))], { allowFail: true })
   if (hasStagedChanges()) {
-    git(['commit', '-m', `release: ${PACKAGE_NAME} v${version}`], { stdio: 'inherit' })
-    console.log(`Committed release: ${PACKAGE_NAME} v${version}`)
+    const message = options.noMcp
+      ? `release: ${PACKAGE_NAME} v${version}`
+      : `release: ${PACKAGE_NAME} / @well-insight/ui-mcp v${version}`
+    git(['commit', '-m', message], { stdio: 'inherit' })
+    console.log(`Committed ${message}`)
     return true
   }
 
@@ -212,14 +246,13 @@ export function stepBranch() {
   run('node scripts/release-git.mjs --branch')
 }
 
-export function stepBuild() {
-  console.log('[build]')
-  run('pnpm run build')
-}
-
-export function stepPublish() {
-  console.log('[publish] npm')
+export async function stepPublish(options = {}) {
+  console.log('[publish] @well-insight/ui')
   run('pnpm publish --access public --no-git-checks')
+  if (!options.noMcp) {
+    const { publishMcp } = await loadMcp()
+    publishMcp()
+  }
 }
 
 export function stepTag() {
@@ -260,18 +293,18 @@ export async function runReleaseSteps(selectedSteps, options) {
           return { plan, sourceBranch, selectedSteps }
         }
         break
+      case 'build':
+        await stepBuild(options)
+        break
       case 'commit':
-        stepCommit()
+        stepCommit(options)
         sourceBranch = currentBranch() || sourceBranch
         break
       case 'branch':
         stepBranch()
         break
-      case 'build':
-        stepBuild()
-        break
       case 'publish':
-        stepPublish()
+        await stepPublish(options)
         break
       case 'tag':
         stepTag()
@@ -304,8 +337,12 @@ export async function runReleaseSteps(selectedSteps, options) {
     }
   } else if (selectedSteps.length > 1 && selectedSteps.at(-1) === 'push') {
     const version = plan?.version || readVersion()
-    console.log(`Released ${PACKAGE_NAME} v${version}`)
+    const mcpNote = options.noMcp ? '' : ' (+ @well-insight/ui-mcp)'
+    console.log(`Released ${PACKAGE_NAME} v${version}${mcpNote}`)
   }
 
   return { plan, sourceBranch, selectedSteps }
 }
+
+/** @deprecated Use UI_RELEASE_PATHS / MCP_RELEASE_PATHS; kept for any external imports. */
+export const RELEASE_PATHS = [...UI_RELEASE_PATHS, ...MCP_RELEASE_PATHS]
