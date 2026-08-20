@@ -11,7 +11,7 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 **在应用项目中（npm / pnpm / yarn）：**
 
 ```bash
-pnpm add @well-insight/ui vue
+pnpm add @well-insight/ui
 ```
 
 需要 Vue 3.5+。主题 token、亮暗切换与动效 API 均包含在 `@well-insight/ui` 中。
