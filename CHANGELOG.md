@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.6
+
+### 新功能
+
+- enhance documentation and component registration for WellInsight
+
 ## 0.1.5
 
 ### 新功能
