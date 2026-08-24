@@ -1,5 +1,8 @@
 import './styles/index.css'
 
+// Evaluate the registry before the individual component re-exports.
+import './component-registry'
+
 export { default as WiButton } from './components/Button/Button.vue'
 export type {
   ButtonBadgeSeverity,
