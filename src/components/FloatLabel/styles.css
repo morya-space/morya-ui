@@ -1,0 +1,32 @@
+/* —— Form: FloatLabel —— */
+.wi-float-label {
+    display: block;
+    position: relative;
+}
+
+.wi-float-label > label {
+    color: var(--wi-color-text-muted);
+    left: var(--wi-space-3);
+    line-height: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+        top var(--wi-motion-fast) var(--wi-motion-ease),
+        transform var(--wi-motion-fast) var(--wi-motion-ease),
+        font-size var(--wi-motion-fast) var(--wi-motion-ease),
+        color var(--wi-motion-fast) var(--wi-motion-ease);
+    z-index: 1;
+}
+
+.wi-float-label:focus-within > label,
+.wi-float-label:has(input:not(:placeholder-shown)) > label,
+.wi-float-label:has(textarea:not(:placeholder-shown)) > label {
+    background: var(--wi-color-surface);
+    color: var(--wi-color-primary);
+    font-size: 0.7rem;
+    padding: 0 0.2rem;
+    top: 0;
+    transform: translateY(-50%);
+}

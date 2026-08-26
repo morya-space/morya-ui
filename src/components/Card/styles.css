@@ -1,0 +1,68 @@
+.wi-card {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-lg);
+    color: var(--wi-color-text);
+    overflow: hidden;
+}
+
+.wi-card__header,
+.wi-card__body,
+.wi-card__footer {
+    padding: var(--wi-space-4);
+}
+
+.wi-card__header,
+.wi-card__footer {
+    border-bottom: 1px solid var(--wi-color-border);
+}
+
+.wi-card__footer {
+    border-bottom: 0;
+    border-top: 1px solid var(--wi-color-border);
+}
+
+.wi-card__title {
+    font-size: var(--wi-font-size-lg);
+    margin: 0;
+}
+
+.wi-card__subtitle {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-md);
+    margin: var(--wi-space-1) 0 0;
+}
+
+.wi-card--borderless {
+    border-color: transparent;
+}
+
+.wi-card--hoverable {
+    transition: box-shadow var(--wi-motion-fast) var(--wi-motion-ease), border-color var(--wi-motion-fast) var(--wi-motion-ease);
+}
+
+.wi-card--hoverable:hover {
+    box-shadow: var(--wi-shadow-md);
+}
+
+.wi-card--small .wi-card__header,
+.wi-card--small .wi-card__body,
+.wi-card--small .wi-card__footer {
+    padding: var(--wi-space-3);
+}
+
+.wi-card--large .wi-card__header,
+.wi-card--large .wi-card__body,
+.wi-card--large .wi-card__footer {
+    padding: var(--wi-space-5);
+}
+
+.wi-card__cover {
+    display: block;
+    overflow: hidden;
+}
+
+.wi-card__cover img {
+    display: block;
+    width: 100%;
+}

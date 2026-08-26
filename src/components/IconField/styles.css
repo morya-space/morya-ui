@@ -1,0 +1,27 @@
+/* —— Form: IconField —— */
+.wi-icon-field {
+    align-items: center;
+    display: inline-flex;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.wi-icon-field__icon {
+    align-items: center;
+    color: var(--wi-color-text-muted);
+    display: inline-flex;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.wi-icon-field--left .wi-icon-field__icon {
+    left: var(--wi-space-3);
+}
+
+.wi-icon-field--right .wi-icon-field__icon {
+    right: var(--wi-space-3);
+}

@@ -1,0 +1,225 @@
+.wi-dialog button:focus {
+    outline: none;
+}
+
+.wi-dialog button:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-dialog-backdrop {
+    align-items: center;
+    background: transparent;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    padding: var(--wi-space-4);
+    position: fixed;
+    z-index: var(--wi-z-overlay);
+}
+
+.wi-dialog-zoom {
+    align-items: inherit;
+    display: flex;
+    inset: 0;
+    justify-content: inherit;
+    padding: inherit;
+    position: absolute;
+    transform-origin: var(--wi-dialog-origin-x, 50%) var(--wi-dialog-origin-y, 50%);
+}
+
+.wi-dialog-backdrop--modal {
+    background: var(--wi-overlay-scrim);
+}
+
+.wi-dialog-backdrop--top {
+    align-items: flex-start;
+}
+
+.wi-dialog-backdrop--bottom {
+    align-items: flex-end;
+}
+
+.wi-dialog-backdrop--left {
+    justify-content: flex-start;
+}
+
+.wi-dialog-backdrop--right {
+    justify-content: flex-end;
+}
+
+.wi-dialog-backdrop--topleft {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.wi-dialog-backdrop--topright {
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.wi-dialog-backdrop--bottomleft {
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.wi-dialog-backdrop--bottomright {
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.wi-dialog {
+    background: var(--wi-color-surface);
+    border-radius: var(--wi-radius-lg);
+    box-shadow: var(--wi-shadow-lg);
+    color: var(--wi-color-text);
+    display: flex;
+    flex-direction: column;
+    max-height: min(90vh, 100%);
+    max-width: 32rem;
+    width: min(100%, 32rem);
+}
+
+.wi-dialog-backdrop--maximized {
+    padding: 0;
+}
+
+.wi-dialog--maximized {
+    border-radius: 0;
+    height: 100%;
+    max-height: 100%;
+    max-width: none;
+    width: 100%;
+}
+
+.wi-dialog__header,
+.wi-dialog__footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--wi-space-4);
+}
+
+.wi-dialog__header {
+    border-bottom: 1px solid var(--wi-color-border);
+    flex: 0 0 auto;
+    gap: var(--wi-space-3);
+}
+
+.wi-dialog__header h2 {
+    font-size: var(--wi-font-size-lg);
+    margin: 0;
+}
+
+.wi-dialog__heading {
+    align-items: center;
+    display: flex;
+    gap: var(--wi-space-2);
+    min-width: 0;
+}
+
+.wi-dialog__type-icon {
+    color: var(--wi-color-info);
+    flex-shrink: 0;
+}
+
+.wi-dialog--success .wi-dialog__type-icon {
+    color: var(--wi-color-success);
+}
+
+.wi-dialog--warn .wi-dialog__type-icon,
+.wi-dialog--warning .wi-dialog__type-icon {
+    color: var(--wi-color-warn);
+}
+
+.wi-dialog--error .wi-dialog__type-icon {
+    color: var(--wi-color-danger);
+}
+
+.wi-dialog--info .wi-dialog__type-icon {
+    color: var(--wi-color-info);
+}
+
+.wi-dialog__actions {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--wi-space-1);
+    margin-left: auto;
+}
+
+.wi-dialog__action,
+.wi-dialog__header button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: var(--wi-font-size-lg);
+    height: var(--wi-control-affix-size);
+    justify-content: center;
+    line-height: 1;
+    width: var(--wi-control-affix-size);
+}
+
+.wi-dialog__action:focus-visible,
+.wi-dialog__header button:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-dialog__body {
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: var(--wi-space-4);
+}
+
+.wi-dialog__action:disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.wi-dialog__footer {
+    border-top: 1px solid var(--wi-color-border);
+    flex: 0 0 auto;
+}
+
+.wi-dialog__footer--preset {
+    gap: var(--wi-space-2);
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.wi-dialog-enter-active {
+    transition: opacity var(--wi-motion-enter) var(--wi-motion-ease);
+}
+
+.wi-dialog-leave-active {
+    transition: opacity var(--wi-motion-exit) var(--wi-motion-ease);
+}
+
+.wi-dialog-enter-active .wi-dialog-zoom,
+.wi-dialog-leave-active .wi-dialog-zoom {
+    transition:
+        opacity var(--wi-motion-enter) var(--wi-motion-ease),
+        transform var(--wi-motion-enter) var(--wi-motion-ease);
+}
+
+.wi-dialog-leave-active .wi-dialog-zoom {
+    transition:
+        opacity var(--wi-motion-exit) var(--wi-motion-ease),
+        transform var(--wi-motion-exit) var(--wi-motion-ease);
+}
+
+.wi-dialog-enter-from,
+.wi-dialog-leave-to {
+    opacity: 0;
+}
+
+.wi-dialog-enter-from .wi-dialog-zoom,
+.wi-dialog-leave-to .wi-dialog-zoom {
+    opacity: 0;
+    transform: scale(0.36);
+}

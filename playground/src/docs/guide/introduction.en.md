@@ -26,10 +26,11 @@ Source: [GitHub](https://github.com/well-insight/well-insight-ui)
 
 ## Consumption
 
-| Context | Behavior |
-| --- | --- |
-| Local development (Vite `development`) | `exports` points at source for HMR |
-| Installed / production build | Uses ESM, `.d.ts`, and `styles.css` from `dist` |
+| Context | Resolved entry | Notes |
+| --- | --- | --- |
+| **npm / pnpm install** | `dist/` | ESM, `.d.ts`, `styles.css`, and on-demand subpaths |
+| **Local link / monorepo** | Vite alias → `src/` in the consuming app | See [Development guide](../docs/DEVELOPMENT.md) |
+| **Production build** | `dist/` | Always uses build output |
 
 ## Next steps
 

@@ -1,0 +1,93 @@
+.wi-textarea {
+    font-size: var(--wi-control-font-medium);
+    line-height: 1.5;
+    min-height: 6rem;
+    padding: var(--wi-space-3) var(--wi-control-padding-x-medium);
+}
+
+.wi-textarea--filled {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 12%, var(--wi-color-surface));
+    border-color: transparent;
+}
+
+.wi-textarea--fluid {
+    width: 100%;
+}
+
+.wi-textarea--small,
+.wi-textarea--sm {
+    font-size: var(--wi-control-font-small);
+    min-height: 4.5rem;
+    padding: var(--wi-space-2) var(--wi-control-padding-x-small);
+}
+
+.wi-textarea--normal {
+    font-size: var(--wi-control-font-medium);
+    min-height: 6rem;
+}
+
+.wi-textarea--large,
+.wi-textarea--lg {
+    font-size: var(--wi-control-font-large);
+    min-height: 7.5rem;
+    padding: var(--wi-space-4) var(--wi-control-padding-x-large);
+}
+
+.wi-textarea--auto-resize {
+    overflow: hidden;
+}
+
+.wi-textarea-field__control {
+    position: relative;
+}
+
+.wi-textarea--clearable {
+    padding-right: var(--wi-control-affix-padding);
+}
+
+.wi-textarea__clear {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: flex;
+    font-size: var(--wi-font-size-lg);
+    height: var(--wi-control-affix-size);
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    right: var(--wi-space-1);
+    top: var(--wi-space-2);
+    width: var(--wi-control-affix-size);
+}
+
+.wi-textarea__clear:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-textarea__clear:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-textarea--invalid,
+.wi-textarea--error {
+    border-color: var(--wi-color-danger);
+}
+
+.wi-textarea:focus {
+    outline: none;
+}
+
+.wi-textarea:hover:not(:disabled):not(:focus) {
+    border-color: var(--wi-color-primary-hover);
+}
+
+.wi-textarea:focus-visible {
+    border-color: var(--wi-color-primary-hover);
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}

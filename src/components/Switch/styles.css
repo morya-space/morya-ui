@@ -1,0 +1,78 @@
+.wi-switch--invalid .wi-switch__track {
+    box-shadow: 0 0 0 1px var(--wi-color-danger);
+}
+
+.wi-switch__track {
+    align-items: center;
+    background: var(--wi-color-border);
+    border-radius: var(--wi-radius-full);
+    display: inline-flex;
+    flex: 0 0 auto;
+    height: 1.25rem;
+    padding: 0.125rem;
+    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 2.25rem;
+}
+
+.wi-switch__thumb {
+    background: var(--wi-color-surface);
+    border-radius: var(--wi-radius-full);
+    box-shadow: var(--wi-shadow-sm);
+    height: 1rem;
+    transform: translateX(0);
+    transition: transform var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 1rem;
+}
+
+.wi-switch__input:checked + .wi-switch__track {
+    background: var(--wi-color-primary);
+}
+
+.wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
+    transform: translateX(1rem);
+}
+
+.wi-switch--small .wi-switch__track {
+    height: 1rem;
+    width: 1.75rem;
+}
+
+.wi-switch--small .wi-switch__thumb {
+    height: 0.75rem;
+    width: 0.75rem;
+}
+
+.wi-switch--small .wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
+    transform: translateX(0.75rem);
+}
+
+.wi-switch--large .wi-switch__track {
+    height: 1.5rem;
+    width: 2.75rem;
+}
+
+.wi-switch--large .wi-switch__thumb {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.wi-switch--large .wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
+    transform: translateX(1.25rem);
+}
+
+.wi-switch__text {
+    color: var(--wi-color-on-emphasis);
+    font-size: 0.65rem;
+    padding: 0 0.35rem;
+    pointer-events: none;
+}
+
+.wi-switch__spinner {
+    animation: wi-progress-spinner-rotate 0.8s linear infinite;
+    border: 1.5px solid color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
+    border-radius: 50%;
+    border-top-color: var(--wi-color-primary);
+    display: block;
+    height: 0.55rem;
+    width: 0.55rem;
+}

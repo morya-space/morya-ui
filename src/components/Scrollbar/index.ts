@@ -1,3 +1,4 @@
+import './style'
 export { default as WiScrollbar } from './Scrollbar.vue'
 export type {
   ScrollbarAriaOrientation,

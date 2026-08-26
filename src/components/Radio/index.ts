@@ -1,3 +1,4 @@
+import './style'
 export { default as WiRadio } from './Radio.vue'
 export { default as WiRadioGroup } from './RadioGroup.vue'
 export type {

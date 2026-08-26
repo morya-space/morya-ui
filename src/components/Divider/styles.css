@@ -1,0 +1,79 @@
+.wi-divider {
+    align-items: center;
+    color: var(--wi-color-text-muted);
+    display: flex;
+    font-family: var(--wi-font-sans);
+    gap: var(--wi-space-3);
+    width: 100%;
+}
+
+.wi-divider__line {
+    background: var(--wi-color-border);
+    border: 0;
+    flex: 1 1 0;
+    height: 1px;
+    min-width: 0;
+}
+
+.wi-divider__label {
+    font-size: var(--wi-font-size-xs);
+    white-space: nowrap;
+}
+
+.wi-divider--dashed .wi-divider__line,
+.wi-divider--dotted .wi-divider__line {
+    background: transparent;
+    height: 0;
+}
+
+.wi-divider--dashed .wi-divider__line {
+    border-top: 1px dashed var(--wi-color-border);
+}
+
+.wi-divider--dotted .wi-divider__line {
+    border-top: 1px dotted var(--wi-color-border);
+}
+
+.wi-divider--align-left > .wi-divider__line:first-child {
+    flex: 0 0 1.25rem;
+}
+
+.wi-divider--align-right > .wi-divider__line:last-child {
+    flex: 0 0 1.25rem;
+}
+
+.wi-divider--vertical {
+    align-self: stretch;
+    display: inline-flex;
+    flex-direction: column;
+    height: auto;
+    vertical-align: middle;
+    width: auto;
+}
+
+.wi-divider--vertical .wi-divider__line {
+    height: auto;
+    min-height: 100%;
+    width: 1px;
+}
+
+.wi-divider--vertical.wi-divider--dashed .wi-divider__line,
+.wi-divider--vertical.wi-divider--dotted .wi-divider__line {
+    height: auto;
+    min-height: 1.25rem;
+    width: 0;
+}
+
+.wi-divider--vertical.wi-divider--dashed .wi-divider__line {
+    border-left: 1px dashed var(--wi-color-border);
+    border-top: 0;
+}
+
+.wi-divider--vertical.wi-divider--dotted .wi-divider__line {
+    border-left: 1px dotted var(--wi-color-border);
+    border-top: 0;
+}
+
+.wi-divider--vertical .wi-divider__label {
+    writing-mode: vertical-rl;
+}

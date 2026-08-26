@@ -1,0 +1,76 @@
+/* —— Form: SelectButton —— */
+.wi-selectbutton {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.wi-selectbutton__button {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    color: var(--wi-color-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--wi-control-font-medium);
+    font-weight: 600;
+    margin-left: -1px;
+    min-height: var(--wi-control-height-medium);
+    padding: 0 var(--wi-button-padding-x-medium);
+    position: relative;
+}
+
+.wi-selectbutton__button:first-child {
+    border-radius: var(--wi-radius-control) 0 0 var(--wi-radius-control);
+    margin-left: 0;
+}
+
+.wi-selectbutton__button:last-child {
+    border-radius: 0 var(--wi-radius-control) var(--wi-radius-control) 0;
+}
+
+.wi-selectbutton__button:only-child {
+    border-radius: var(--wi-radius-control);
+}
+
+.wi-selectbutton__button--active {
+    background: var(--wi-color-primary);
+    border-color: var(--wi-color-primary);
+    color: var(--wi-color-on-emphasis);
+    z-index: 1;
+}
+
+.wi-selectbutton__button:hover:not(:disabled):not(.wi-selectbutton__button--active) {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 12%, var(--wi-color-surface));
+}
+
+.wi-selectbutton__button:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-selectbutton--small .wi-selectbutton__button {
+    min-height: var(--wi-control-height-small);
+    font-size: var(--wi-control-font-small);
+    padding: 0 var(--wi-button-padding-x-small);
+}
+
+.wi-selectbutton--large .wi-selectbutton__button {
+    min-height: var(--wi-control-height-large);
+    font-size: var(--wi-control-font-large);
+    padding: 0 var(--wi-button-padding-x-large);
+}
+
+.wi-selectbutton--invalid .wi-selectbutton__button {
+    border-color: var(--wi-color-danger);
+}
+
+.wi-selectbutton--disabled {
+    opacity: var(--wi-opacity-disabled);
+    pointer-events: none;
+}
+
+.wi-selectbutton__button:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+    z-index: 2;
+}

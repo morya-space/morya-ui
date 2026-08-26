@@ -1,0 +1,76 @@
+.wi-avatar {
+    --wi-avatar-size: 2.5rem;
+    --wi-avatar-bg: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    --wi-avatar-fg: var(--wi-color-text);
+    align-items: center;
+    background: var(--wi-avatar-bg);
+    color: var(--wi-avatar-fg);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-family: var(--wi-font-sans);
+    font-size: var(--wi-font-size-md);
+    font-weight: 600;
+    height: var(--wi-avatar-size);
+    justify-content: center;
+    line-height: 1;
+    overflow: hidden;
+    user-select: none;
+    width: var(--wi-avatar-size);
+}
+
+.wi-avatar--circle {
+    border-radius: var(--wi-radius-full);
+}
+
+.wi-avatar--square {
+    border-radius: var(--wi-radius-md);
+}
+
+.wi-avatar--large {
+    --wi-avatar-size: 3.5rem;
+    font-size: var(--wi-font-size-lg);
+}
+
+.wi-avatar--xlarge {
+    --wi-avatar-size: 5rem;
+    font-size: 1.5rem;
+}
+
+.wi-avatar__image {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.wi-avatar__label {
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.wi-avatar__icon {
+    color: inherit;
+}
+
+.wi-avatar-group {
+    display: inline-flex;
+    align-items: center;
+}
+
+.wi-avatar-group .wi-avatar {
+    box-shadow: 0 0 0 2px var(--wi-color-surface);
+    margin-left: -0.5rem;
+}
+
+.wi-avatar-group .wi-avatar:first-child,
+.wi-avatar-group__overflow {
+    margin-left: 0;
+}
+
+.wi-avatar-group .wi-avatar:first-child {
+    margin-left: 0;
+}
+
+.wi-avatar-group__overflow {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 18%, var(--wi-color-surface));
+    font-size: var(--wi-font-size-sm);
+}

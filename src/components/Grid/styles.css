@@ -1,0 +1,9 @@
+/* —— Panel: Grid —— */
+.wi-grid {
+    box-sizing: border-box;
+}
+
+.wi-grid-item {
+    box-sizing: border-box;
+    min-width: 0;
+}

@@ -1,3 +1,5 @@
+import './style'
+
 export { default as WiIcon } from './Icon.vue'
 export {
   getIconDefinition,

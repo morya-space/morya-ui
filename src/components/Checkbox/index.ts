@@ -1,3 +1,4 @@
+import './style'
 export { default as WiCheckbox } from './Checkbox.vue'
 export { default as WiCheckboxGroup } from './CheckboxGroup.vue'
 export type {

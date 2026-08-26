@@ -1,0 +1,103 @@
+.wi-tag {
+    align-items: center;
+    background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-primary);
+    display: inline-flex;
+    font-family: var(--wi-font-sans);
+    font-size: var(--wi-font-size-xs);
+    font-weight: 600;
+    gap: var(--wi-space-1);
+    line-height: 1;
+    padding: var(--wi-space-2) var(--wi-space-3);
+}
+
+.wi-tag__icon {
+    flex-shrink: 0;
+}
+
+.wi-tag--rounded {
+    border-radius: var(--wi-radius-full);
+}
+
+.wi-tag--primary {
+    background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
+    color: var(--wi-color-primary);
+}
+
+.wi-tag--secondary {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    color: var(--wi-color-text);
+}
+
+.wi-tag--success {
+    background: color-mix(in srgb, var(--wi-color-success) 14%, transparent);
+    color: var(--wi-color-success);
+}
+
+.wi-tag--info {
+    background: color-mix(in srgb, var(--wi-color-info) 12%, transparent);
+    color: var(--wi-color-info);
+}
+
+.wi-tag--warn,
+.wi-tag--warning {
+    background: color-mix(in srgb, var(--wi-color-warn) 14%, transparent);
+    color: var(--wi-color-warn);
+}
+
+.wi-tag--danger {
+    background: color-mix(in srgb, var(--wi-color-danger) 12%, transparent);
+    color: var(--wi-color-danger);
+}
+
+.wi-tag--contrast {
+    background: var(--wi-color-contrast);
+    color: var(--wi-color-contrast-fg);
+}
+
+.wi-tag--help {
+    background: color-mix(in srgb, var(--wi-color-help) 14%, transparent);
+    color: var(--wi-color-help);
+}
+
+/* —— Batch 3: visual + long-tail —— */
+.wi-tag--small {
+    font-size: 0.65rem;
+    padding: 0.15rem var(--wi-space-2);
+}
+
+.wi-tag--large {
+    font-size: var(--wi-font-size-sm);
+    padding: var(--wi-space-2) var(--wi-space-4);
+}
+
+.wi-tag--bordered {
+    box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.wi-tag--custom {
+    background: color-mix(in srgb, var(--wi-tag-color) 14%, transparent);
+    color: var(--wi-tag-color);
+}
+
+.wi-tag--disabled {
+    opacity: var(--wi-opacity-disabled);
+    pointer-events: none;
+}
+
+.wi-tag__close {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    line-height: 1;
+    margin-left: 0.15rem;
+    padding: 0;
+}
+
+.wi-tag__close:focus-visible {
+    outline: none;
+    box-shadow: var(--wi-focus-shadow);
+}

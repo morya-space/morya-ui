@@ -1,0 +1,74 @@
+/* —— Menu: CommandMenu —— */
+.wi-commandmenu-backdrop {
+    align-items: flex-start;
+    background: var(--wi-overlay-scrim);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    padding-top: 12vh;
+    position: fixed;
+    z-index: var(--wi-z-popper);
+}
+
+.wi-commandmenu {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-lg);
+    box-shadow: var(--wi-shadow-md);
+    max-width: 32rem;
+    overflow: hidden;
+    width: min(32rem, calc(100vw - 2rem));
+}
+
+.wi-commandmenu__input {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--wi-color-border);
+    color: inherit;
+    font: inherit;
+    outline: none;
+    padding: var(--wi-space-3) var(--wi-space-4);
+    width: 100%;
+}
+
+.wi-commandmenu__list {
+    list-style: none;
+    margin: 0;
+    max-height: 18rem;
+    overflow: auto;
+    padding: var(--wi-space-2);
+}
+
+.wi-commandmenu__item {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    gap: var(--wi-space-2);
+    padding: var(--wi-space-2) var(--wi-space-3);
+    text-align: left;
+    width: 100%;
+}
+
+.wi-commandmenu__item--active,
+.wi-commandmenu__item:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
+}
+
+.wi-commandmenu__label {
+    flex: 1;
+}
+
+.wi-commandmenu__shortcut {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
+}
+
+.wi-commandmenu__empty {
+    color: var(--wi-color-text-muted);
+    padding: var(--wi-space-3);
+}

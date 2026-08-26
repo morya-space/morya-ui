@@ -1,3 +1,4 @@
+import './style'
 export { default as WiDatePicker } from './DatePicker.vue'
 export type {
   DatePickerDateValue,

@@ -1,0 +1,50 @@
+/* —— Menu: ContextMenu —— */
+.wi-contextmenu {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    box-shadow: var(--wi-shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: var(--wi-menu-min-width);
+    padding: var(--wi-space-1);
+    position: fixed;
+    z-index: var(--wi-z-popper);
+}
+
+.wi-contextmenu--teleported {
+    z-index: var(--wi-z-dropdown);
+}
+
+.wi-contextmenu__item {
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text);
+    cursor: pointer;
+    font: inherit;
+    padding: var(--wi-space-2) var(--wi-space-3);
+    text-align: start;
+    width: 100%;
+}
+
+.wi-contextmenu__item:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+}
+
+.wi-contextmenu__item:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-contextmenu__item:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-contextmenu__separator {
+    background: var(--wi-color-border);
+    height: 1px;
+    margin: var(--wi-space-1) 0;
+}

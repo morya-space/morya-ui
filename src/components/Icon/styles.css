@@ -1,0 +1,38 @@
+.wi-icon {
+    display: inline-flex;
+    height: 1rem;
+    width: 1rem;
+}
+
+.wi-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+.wi-icon--sm,
+.wi-icon--small {
+    height: 0.875rem;
+    width: 0.875rem;
+}
+
+.wi-icon--md,
+.wi-icon--normal {
+    height: 1rem;
+    width: 1rem;
+}
+
+.wi-icon--lg,
+.wi-icon--large {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.wi-icon--spin svg {
+    animation: wi-icon-spin 0.8s linear infinite;
+}
+
+@keyframes wi-icon-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

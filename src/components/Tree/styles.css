@@ -1,0 +1,98 @@
+/* —— Data: Tree —— */
+.wi-tree,
+.wi-tree__children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wi-tree {
+    color: var(--wi-color-text);
+    font-size: var(--wi-font-size-md);
+}
+
+.wi-tree__children {
+    border-left: 1px solid color-mix(in srgb, var(--wi-color-border) 80%, transparent);
+    margin-left: 0.7rem;
+    padding-left: var(--wi-space-3);
+}
+
+.wi-tree__row {
+    align-items: center;
+    border-radius: var(--wi-radius-sm);
+    display: flex;
+    gap: var(--wi-space-1);
+    min-height: var(--wi-control-height-small, 1.75rem);
+    padding-right: var(--wi-space-2);
+}
+
+.wi-tree__row:hover {
+    background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
+}
+
+.wi-tree__row--selected {
+    background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
+}
+
+.wi-tree__row--matched .wi-tree__label {
+    color: var(--wi-color-primary);
+    font-weight: 650;
+}
+
+.wi-tree__row--disabled {
+    opacity: var(--wi-opacity-disabled);
+    pointer-events: none;
+}
+
+.wi-tree__row--indeterminate .wi-tree__checkbox {
+    opacity: 0.85;
+}
+
+.wi-tree__toggler,
+.wi-tree__label {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--wi-color-text);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+}
+
+.wi-tree__toggler {
+    color: var(--wi-color-text-muted);
+    flex: 0 0 1.25rem;
+    justify-content: center;
+    line-height: 1;
+    padding: var(--wi-space-1);
+}
+
+.wi-tree__toggler:focus-visible,
+.wi-tree__label:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-tree__toggler--leaf {
+    visibility: hidden;
+}
+
+.wi-tree__checkbox {
+    flex-shrink: 0;
+}
+
+.wi-tree__label {
+    border-radius: var(--wi-radius-sm);
+    flex: 1;
+    padding: var(--wi-space-1) var(--wi-space-2);
+    text-align: start;
+}
+
+.wi-tree__label:hover {
+    color: var(--wi-color-primary);
+}
+
+.wi-tree__icon {
+    color: var(--wi-color-text-muted);
+    display: inline-flex;
+}

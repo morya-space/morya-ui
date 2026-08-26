@@ -1,0 +1,43 @@
+/* —— Form: InputOtp —— */
+.wi-inputotp {
+    display: inline-flex;
+    gap: var(--wi-space-2);
+}
+
+.wi-inputotp--disabled {
+    opacity: var(--wi-opacity-disabled);
+    pointer-events: none;
+}
+
+.wi-inputotp__input {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-control);
+    color: var(--wi-color-text);
+    font: inherit;
+    font-size: var(--wi-control-font-large);
+    height: var(--wi-control-height-large);
+    text-align: center;
+    width: var(--wi-control-height-large);
+}
+
+.wi-inputotp__input:focus-visible {
+    border-color: var(--wi-color-primary);
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-inputotp {
+    --wi-inputotp-gap: var(--wi-space-2);
+    gap: var(--wi-inputotp-gap);
+}
+
+.wi-inputotp--small .wi-inputotp__input {
+    height: var(--wi-control-height-small);
+    width: var(--wi-control-height-small);
+}
+
+.wi-inputotp--large .wi-inputotp__input {
+    height: var(--wi-control-height-large);
+    width: var(--wi-control-height-large);
+}

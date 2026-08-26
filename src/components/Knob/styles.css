@@ -1,0 +1,45 @@
+/* —— Form: Knob —— */
+.wi-knob {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    touch-action: none;
+    user-select: none;
+}
+
+.wi-knob--disabled {
+    opacity: var(--wi-opacity-disabled);
+    pointer-events: none;
+}
+
+.wi-knob__svg {
+    cursor: pointer;
+    display: block;
+}
+
+.wi-knob__track {
+    stroke: color-mix(in srgb, var(--wi-color-text-muted) 28%, var(--wi-color-surface));
+}
+
+.wi-knob__value {
+    stroke: var(--wi-color-primary);
+    stroke-linecap: round;
+    transition: stroke-dashoffset var(--wi-motion-fast) var(--wi-motion-ease);
+}
+
+.wi-knob__label {
+    color: var(--wi-color-text);
+    font-size: var(--wi-font-size-md);
+    font-weight: 600;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wi-knob:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}

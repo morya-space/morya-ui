@@ -1,0 +1,169 @@
+.wi-message-host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wi-space-2);
+    left: 50%;
+    max-width: min(28rem, calc(100vw - 2 * var(--wi-space-4)));
+    pointer-events: none;
+    position: fixed;
+    top: var(--wi-space-4);
+    transform: translateX(-50%);
+    width: max-content;
+    z-index: var(--wi-z-toast);
+}
+
+.wi-message-host--top-left {
+    left: var(--wi-space-4);
+    transform: none;
+}
+
+.wi-message-host--top-right {
+    left: auto;
+    right: var(--wi-space-4);
+    transform: none;
+}
+
+.wi-message-host--bottom,
+.wi-message-host--bottom-left,
+.wi-message-host--bottom-right {
+    bottom: var(--wi-space-4);
+    flex-direction: column-reverse;
+    top: auto;
+}
+
+.wi-message-host--bottom-left {
+    left: var(--wi-space-4);
+    transform: none;
+}
+
+.wi-message-host--bottom-right {
+    left: auto;
+    right: var(--wi-space-4);
+    transform: none;
+}
+
+.wi-message {
+    align-items: flex-start;
+    background: color-mix(in srgb, var(--wi-color-info) 10%, var(--wi-color-surface));
+    border: 1px solid color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
+    border-radius: var(--wi-radius-md);
+    box-shadow: var(--wi-shadow-md);
+    color: var(--wi-color-text);
+    display: flex;
+    font-family: var(--wi-font-sans);
+    font-size: var(--wi-font-size-md);
+    gap: var(--wi-space-3);
+    line-height: 1.45;
+    min-width: 16rem;
+    padding: var(--wi-space-3) var(--wi-space-4);
+    pointer-events: auto;
+}
+
+.wi-message__icon {
+    color: var(--wi-color-info);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.wi-message__content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.wi-message__close {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    font: inherit;
+    line-height: 1;
+    padding: 0;
+}
+
+.wi-message__close:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-message--success {
+    background: color-mix(in srgb, var(--wi-color-success) 10%, var(--wi-color-surface));
+    border-color: color-mix(in srgb, var(--wi-color-success) 28%, var(--wi-color-border));
+}
+
+.wi-message--success .wi-message__icon {
+    color: var(--wi-color-success);
+}
+
+.wi-message--info {
+    background: color-mix(in srgb, var(--wi-color-info) 10%, var(--wi-color-surface));
+    border-color: color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
+}
+
+.wi-message--info .wi-message__icon {
+    color: var(--wi-color-info);
+}
+
+.wi-message--warn,
+.wi-message--warning {
+    background: color-mix(in srgb, var(--wi-color-warn) 10%, var(--wi-color-surface));
+    border-color: color-mix(in srgb, var(--wi-color-warn) 28%, var(--wi-color-border));
+}
+
+.wi-message--warn .wi-message__icon,
+.wi-message--warning .wi-message__icon {
+    color: var(--wi-color-warn);
+}
+
+.wi-message--error {
+    background: color-mix(in srgb, var(--wi-color-danger) 10%, var(--wi-color-surface));
+    border-color: color-mix(in srgb, var(--wi-color-danger) 28%, var(--wi-color-border));
+}
+
+.wi-message--error .wi-message__icon {
+    color: var(--wi-color-danger);
+}
+
+.wi-message--secondary {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 10%, var(--wi-color-surface));
+    border-color: color-mix(in srgb, var(--wi-color-text-muted) 22%, var(--wi-color-border));
+}
+
+.wi-message--secondary .wi-message__icon {
+    color: var(--wi-color-text-muted);
+}
+
+.wi-message--contrast {
+    background: var(--wi-color-contrast);
+    border-color: var(--wi-color-contrast);
+    color: var(--wi-color-contrast-fg);
+}
+
+.wi-message--contrast .wi-message__icon,
+.wi-message--contrast .wi-message__close {
+    color: var(--wi-color-contrast-fg);
+}
+
+.wi-message-slide-enter-active {
+    transition:
+        opacity var(--wi-motion-enter) var(--wi-motion-ease),
+        transform var(--wi-motion-enter) var(--wi-motion-ease);
+}
+
+.wi-message-slide-leave-active {
+    transition:
+        opacity var(--wi-motion-exit) var(--wi-motion-ease),
+        transform var(--wi-motion-exit) var(--wi-motion-ease);
+}
+
+.wi-message-slide-enter-from,
+.wi-message-slide-leave-to {
+    opacity: 0;
+    transform: translateY(calc(var(--wi-motion-distance) * -1));
+}
+
+.wi-message-slide-move {
+    transition: transform var(--wi-motion-enter) var(--wi-motion-ease);
+}

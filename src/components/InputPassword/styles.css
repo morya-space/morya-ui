@@ -1,0 +1,178 @@
+/* —— Form: InputPassword —— */
+.wi-password-field {
+    display: grid;
+    gap: var(--wi-space-2);
+}
+
+.wi-password-field--fluid {
+    width: 100%;
+}
+
+.wi-password-field__label {
+    color: var(--wi-color-text);
+    font-size: var(--wi-font-size-md);
+    font-weight: 600;
+}
+
+.wi-password {
+    display: inline-flex;
+    max-width: 100%;
+    position: relative;
+}
+
+.wi-password--fluid {
+    display: flex;
+    width: 100%;
+}
+
+.wi-password__input {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-control);
+    color: var(--wi-color-text);
+    font: inherit;
+    font-size: var(--wi-control-font-medium);
+    min-height: var(--wi-control-height-medium);
+    padding: 0 var(--wi-control-padding-x-medium);
+    width: 100%;
+}
+
+.wi-password--toggle .wi-password__input {
+    padding-right: 2.25rem;
+}
+
+.wi-password--small .wi-password__input {
+    min-height: var(--wi-control-height-small);
+    font-size: var(--wi-control-font-small);
+    padding: 0 var(--wi-control-padding-x-small);
+}
+
+.wi-password--small.wi-password--toggle .wi-password__input {
+    padding-right: 2rem;
+}
+
+.wi-password--large .wi-password__input {
+    min-height: var(--wi-control-height-large);
+    font-size: var(--wi-control-font-large);
+    padding: 0 var(--wi-control-padding-x-large);
+}
+
+.wi-password--large.wi-password--toggle .wi-password__input {
+    padding-right: 2.5rem;
+}
+
+.wi-password--invalid .wi-password__input {
+    border-color: var(--wi-color-danger);
+}
+
+.wi-password--filled .wi-password__input {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 12%, var(--wi-color-surface));
+    border-color: transparent;
+}
+
+.wi-password--clearable .wi-password__input {
+    padding-right: 2.25rem;
+}
+
+.wi-password--toggle.wi-password--clearable .wi-password__input {
+    padding-right: 3.75rem;
+}
+
+.wi-password--small.wi-password--toggle.wi-password--clearable .wi-password__input {
+    padding-right: 3.25rem;
+}
+
+.wi-password--large.wi-password--toggle.wi-password--clearable .wi-password__input {
+    padding-right: 4rem;
+}
+
+.wi-password__clear {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: var(--wi-font-size-lg);
+    height: var(--wi-control-affix-size);
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    right: var(--wi-space-1);
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--wi-control-affix-size);
+}
+
+.wi-password--toggle .wi-password__clear {
+    right: 2.1rem;
+}
+
+.wi-password__clear:hover:not(:disabled) {
+    color: var(--wi-color-text);
+}
+
+.wi-password__clear:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-password__clear:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-password--disabled .wi-password__input {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-password__toggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    min-height: 1.75rem;
+    min-width: 1.75rem;
+    padding: 0.15rem;
+    position: absolute;
+    right: var(--wi-space-1);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.wi-password__toggle:hover:not(:disabled) {
+    color: var(--wi-color-text);
+}
+
+.wi-password__toggle:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-password__input:focus-visible,
+.wi-password__toggle:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-password__feedback {
+    font-size: var(--wi-font-size-xs);
+}
+
+.wi-password__feedback--weak {
+    color: var(--wi-color-danger);
+}
+
+.wi-password__feedback--medium {
+    color: var(--wi-color-warn);
+}
+
+.wi-password__feedback--strong {
+    color: var(--wi-color-success);
+}

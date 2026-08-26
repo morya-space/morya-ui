@@ -1,0 +1,20 @@
+/* —— Form: InputGroup —— */
+.wi-inputgroup {
+    align-items: stretch;
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    width: 100%;
+}
+
+.wi-inputgroup-addon {
+    align-items: center;
+    background: color-mix(in srgb, var(--wi-color-text-muted) 10%, var(--wi-color-surface));
+    border: 1px solid var(--wi-color-border);
+    color: var(--wi-color-text-muted);
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-size: var(--wi-control-font-medium);
+    padding: 0 var(--wi-control-padding-x-medium);
+    white-space: nowrap;
+}

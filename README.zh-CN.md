@@ -4,12 +4,14 @@
 
 面向 Well Insight 的开源 Vue 3 组件库：带主题的表单、浮层、数据展示与反馈等基础控件。
 
-| | |
-| --- | --- |
-| **npm** | [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui) |
-| **文档** | 本地 `pnpm dev` → http://localhost:5182 |
-| **源码** | [GitHub](https://github.com/well-insight/well-insight-ui) |
-| **更新日志** | [CHANGELOG.md](./CHANGELOG.md) · [English](./CHANGELOG.en.md) |
+
+|          |                                                                      |
+| -------- | -------------------------------------------------------------------- |
+| **npm**  | `[@well-insight/ui](https://www.npmjs.com/package/@well-insight/ui)` |
+| **文档**   | 本地 `pnpm dev` → [http://localhost:5182](http://localhost:5182)       |
+| **源码**   | [GitHub](https://github.com/well-insight/well-insight-ui)            |
+| **更新日志** | [CHANGELOG.md](./CHANGELOG.md) · [English](./CHANGELOG.en.md)        |
+
 
 ## 要求
 
@@ -26,7 +28,16 @@ pnpm add @well-insight/ui
 
 ## 快速开始
 
-在应用入口引入样式。两种用法：
+本库**同时支持全量与按需**，按项目选用（同一应用建议保持一致）。
+
+
+|     | 全量                            | 按需                             |
+| --- | ----------------------------- | ------------------------------ |
+| 样式  | `@well-insight/ui/styles.css` | 子路径自动带入                        |
+| 组件  | 插件注册或桶入口按名 import             | `@well-insight/ui/button` 等子路径 |
+
+
+
 
 ### 全量注册
 
@@ -37,39 +48,41 @@ import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
 createApp(App).use(WellInsight).mount('#app')
-// 或带全局默认：
-// createApp(App).use(WellInsight, { size: 'small', density: 'compact' }).mount('#app')
 ```
 
 之后模板里可直接写 `<WiButton>` / `<WiInput>`，无需再 import。
 
-### 按需引入
+### 全量样式 + 按名导入
 
-```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import '@well-insight/ui/styles.css'
-
-createApp(App).mount('#app')
-```
+JS 可 tree-shake，样式仍需全量 CSS：
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiInput } from '@well-insight/ui'
-
-const name = ref('')
 </script>
-
-<template>
-  <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WiInput v-model="name" label="姓名" placeholder="请输入姓名" />
-    <WiButton label="提交" />
-  </div>
-</template>
 ```
 
-按需导入支持 Tree-shaking。样式需单独引入 `@well-insight/ui/styles.css`。
+入口：`import '@well-insight/ui/styles.css'`
+
+### 按需子路径
+
+每个组件有 kebab-case 子路径，自动带上 JS、依赖与样式，无需全量 CSS：
+
+```ts
+import { WiButton } from '@well-insight/ui/button'
+import { WiInput } from '@well-insight/ui/input'
+```
+
+
+
+### 自动按需（Vite）
+
+```ts
+import Components from 'unplugin-vue-components/vite'
+import { WellInsightResolver } from '@well-insight/ui/resolver'
+
+Components({ resolvers: [WellInsightResolver()] })
+```
 
 更完整的上手说明见文档站 [快速上手](./playground/src/docs/guide/quick-start.md)。
 
@@ -98,18 +111,20 @@ createApp(App)
 
 只要配置、不注册组件时传 `components: false`。
 
-| 选项 | 作用 |
-| --- | --- |
-| `appendTo` | 浮层默认 Teleport 目标（默认 `'body'`） |
-| `size` | 控件默认尺寸 |
-| `density` | `compact` / `comfortable` / `spacious` |
-| `inputVariant` | `outlined` / `filled` |
-| `zIndex` | 浮层 z-index 基准 |
-| `locale` | 内置文案（默认 `zhCN`，或 `enUS` / 局部覆盖） |
+
+| 选项             | 作用                                     |
+| -------------- | -------------------------------------- |
+| `appendTo`     | 浮层默认 Teleport 目标（默认 `'body'`）          |
+| `size`         | 控件默认尺寸                                 |
+| `density`      | `compact` / `comfortable` / `spacious` |
+| `inputVariant` | `outlined` / `filled`                  |
+| `zIndex`       | 浮层 z-index 基准                          |
+| `locale`       | 内置文案（默认 `zhCN`，或 `enUS` / 局部覆盖）        |
+
 
 子树覆盖使用 `<WiConfigProvider>`。解析顺序：
 
-**组件 Props → `WiConfigProvider` → `createWellInsight` → 内置默认**
+**组件 Props →** `WiConfigProvider` **→** `createWellInsight` **→ 内置默认**
 
 详见文档站 [全局配置](./playground/src/docs/guide/config.md)。
 
@@ -129,6 +144,8 @@ createWellInsight({
   },
 })
 ```
+
+
 
 ## 主题
 
@@ -161,10 +178,15 @@ toast.add({ severity: 'info', summary: '提示', detail: '详情在此' })
 
 ## 导出
 
-| 导入 | 用途 |
-| --- | --- |
-| `@well-insight/ui` | 组件、`createWellInsight`、`WiConfigProvider`、主题与语言、`message` / `toast` |
-| `@well-insight/ui/styles.css` | 必需样式（token + 组件样式） |
+
+| 导入                              | 用途                                                                  |
+| ------------------------------- | ------------------------------------------------------------------- |
+| `@well-insight/ui`              | 组件、`createWellInsight`、`WiConfigProvider`、主题与语言、`message` / `toast` |
+| `@well-insight/ui/styles.css`   | 全量样式（token + 全部组件）                                                  |
+| `@well-insight/ui/button` 等     | 按需组件子路径（JS + 依赖 + 样式；共 88 个 kebab-case 入口）                          |
+| `@well-insight/ui/button/style` | 仅该组件（及依赖）样式 side-effect                                             |
+| `@well-insight/ui/resolver`     | `unplugin-vue-components` 解析器                                       |
+
 
 TypeScript 类型已通过包 `exports` 提供。
 
@@ -183,7 +205,7 @@ pnpm typecheck
 
 ## 可选：MCP
 
-若使用支持 [Model Context Protocol](https://modelcontextprotocol.io/) 的 AI 客户端，可额外接入 [`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp)，让助手按本库文档检索组件 API。**这不替代** `pnpm add @well-insight/ui`。
+若使用支持 [Model Context Protocol](https://modelcontextprotocol.io/) 的 AI 客户端，可额外接入 `[@well-insight/ui-mcp](https://www.npmjs.com/package/@well-insight/ui-mcp)`，让助手按本库文档检索组件 API。**这不替代** `pnpm add @well-insight/ui`。
 
 说明见文档站 [MCP](./playground/src/docs/guide/mcp.md)。
 

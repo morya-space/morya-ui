@@ -1,3 +1,4 @@
+import './style'
 export { default as WiMessage } from './Message.vue'
 export { message, useMessage } from './message'
 export type {

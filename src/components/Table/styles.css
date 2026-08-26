@@ -1,0 +1,296 @@
+.wi-table-wrapper {
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    position: relative;
+}
+
+.wi-table-scroll {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.wi-table-scroll--x .wi-table {
+    width: max-content;
+}
+
+.wi-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--wi-color-text);
+    font-family: var(--wi-font-sans);
+    font-size: var(--wi-font-size-md);
+    table-layout: fixed;
+    width: 100%;
+}
+
+.wi-table th,
+.wi-table td {
+    background: var(--wi-color-surface);
+    border-bottom: 1px solid var(--wi-color-border);
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: var(--wi-space-3) var(--wi-space-4);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wi-table-wrapper--bordered .wi-table th,
+.wi-table-wrapper--bordered .wi-table td {
+    border-right: 1px solid var(--wi-color-border);
+}
+
+.wi-table-wrapper--bordered .wi-table th:last-child,
+.wi-table-wrapper--bordered .wi-table td:last-child {
+    border-right: 0;
+}
+
+.wi-table-wrapper--striped .wi-table tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--wi-color-text) 3%, var(--wi-color-surface));
+}
+
+.wi-table-wrapper--row-hover .wi-table tbody tr:hover td {
+    background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
+}
+
+.wi-table__row--current td,
+.wi-table__row--selected td {
+    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+}
+
+.wi-table--small {
+    font-size: var(--wi-font-size-sm);
+}
+
+.wi-table--small th,
+.wi-table--small td {
+    padding: var(--wi-space-2) var(--wi-space-3);
+}
+
+.wi-table--large {
+    font-size: 1rem;
+}
+
+.wi-table--large th,
+.wi-table--large td {
+    padding: var(--wi-space-4) var(--wi-space-6);
+}
+
+.wi-table th {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 5%,
+        var(--wi-color-surface)
+    );
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.wi-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.wi-table__cell--start {
+    text-align: left;
+}
+
+.wi-table__cell--center {
+    text-align: center;
+}
+
+.wi-table__cell--end {
+    text-align: right;
+}
+
+.wi-table__selection {
+    text-align: center;
+    width: 3rem;
+}
+
+.wi-table__cell--fixed-left,
+.wi-table__cell--fixed-right {
+    position: sticky;
+    z-index: 1;
+}
+
+.wi-table th.wi-table__cell--fixed-left,
+.wi-table th.wi-table__cell--fixed-right {
+    z-index: 3;
+}
+
+.wi-table__cell--fixed-left {
+    box-shadow: var(--wi-shadow-sticky);
+}
+
+.wi-table__cell--fixed-right {
+    box-shadow: var(--wi-shadow-sticky-end);
+}
+
+.wi-table__expand {
+    text-align: center;
+}
+
+.wi-table__expand-btn {
+    background: transparent;
+    border: 0;
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    font: inherit;
+    line-height: 1;
+    padding: var(--wi-space-1);
+}
+
+.wi-table__expansion {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 6%, var(--wi-color-surface));
+    padding: var(--wi-space-3) var(--wi-space-4);
+}
+
+.wi-table__th-inner {
+    align-items: center;
+    display: flex;
+    gap: var(--wi-space-1);
+    justify-content: space-between;
+    position: relative;
+}
+
+.wi-table__filter {
+    position: relative;
+}
+
+.wi-table__filter-btn {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    padding: 0.15rem;
+}
+
+.wi-table__filter-btn:hover,
+.wi-table__filter-btn[aria-expanded='true'] {
+    color: var(--wi-color-primary);
+}
+
+.wi-table__filter-panel {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-sm);
+    box-shadow: var(--wi-shadow-md);
+    left: 0;
+    min-width: 9rem;
+    padding: var(--wi-space-2);
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    z-index: 5;
+}
+
+.wi-table__filter-control {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-control);
+    color: var(--wi-color-text);
+    font: inherit;
+    font-size: var(--wi-font-size-sm);
+    padding: 0.35rem 0.5rem;
+    width: 100%;
+}
+
+.wi-table__paginator {
+    border-top: 1px solid var(--wi-color-border);
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--wi-space-3) var(--wi-space-4);
+}
+
+.wi-table__empty {
+    color: var(--wi-color-text-muted);
+    padding: var(--wi-space-6);
+    text-align: center;
+}
+
+.wi-table__empty-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wi-space-2);
+    justify-content: center;
+    padding: var(--wi-space-2) 0;
+}
+
+.wi-table__empty-glyph {
+    color: color-mix(in srgb, var(--wi-color-text-muted) 70%, transparent);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.wi-table__empty-title {
+    color: var(--wi-color-text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.wi-table__empty-desc {
+    color: var(--wi-color-text-muted);
+    font-size: 0.8rem;
+    margin: 0;
+    max-width: 24rem;
+}
+
+.wi-table__th--sortable {
+    padding: 0;
+}
+
+.wi-table__sort {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: inherit;
+    gap: var(--wi-space-2);
+    justify-content: inherit;
+    padding: var(--wi-space-3) var(--wi-space-4);
+    text-align: inherit;
+}
+
+.wi-table--small .wi-table__sort {
+    padding: var(--wi-space-2) var(--wi-space-3);
+}
+
+.wi-table--large .wi-table__sort {
+    padding: var(--wi-space-4) var(--wi-space-6);
+}
+
+.wi-table__sort-icon {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
+}
+
+.wi-table-wrapper--loading {
+    min-height: 8rem;
+}
+
+.wi-table__loading {
+    align-items: center;
+    backdrop-filter: blur(1px);
+    background: color-mix(in srgb, var(--wi-color-surface) 72%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: var(--wi-space-3);
+    inset: 0;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+}
+
+.wi-table__loading-text {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-md);
+}

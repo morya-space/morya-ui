@@ -24,7 +24,96 @@
     "CHANGELOG.md"
   ],
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "**/*/style.js",
+    "**/accordion/index.js",
+    "**/auto-complete/index.js",
+    "**/avatar/index.js",
+    "**/badge/index.js",
+    "**/block-ui/index.js",
+    "**/breadcrumb/index.js",
+    "**/button/index.js",
+    "**/card/index.js",
+    "**/carousel/index.js",
+    "**/cascade-select/index.js",
+    "**/checkbox/index.js",
+    "**/chip/index.js",
+    "**/command-menu/index.js",
+    "**/config-provider/index.js",
+    "**/confirm-dialog/index.js",
+    "**/confirm-popup/index.js",
+    "**/context-menu/index.js",
+    "**/data-view/index.js",
+    "**/date-picker/index.js",
+    "**/dialog/index.js",
+    "**/divider/index.js",
+    "**/dock/index.js",
+    "**/drawer/index.js",
+    "**/dropdown/index.js",
+    "**/fieldset/index.js",
+    "**/file-upload/index.js",
+    "**/flex/index.js",
+    "**/float-label/index.js",
+    "**/fluid/index.js",
+    "**/form/index.js",
+    "**/gallery/index.js",
+    "**/grid/index.js",
+    "**/icon/index.js",
+    "**/icon-field/index.js",
+    "**/inplace/index.js",
+    "**/input/index.js",
+    "**/input-color/index.js",
+    "**/input-group/index.js",
+    "**/input-number/index.js",
+    "**/input-otp/index.js",
+    "**/input-password/index.js",
+    "**/input-tags/index.js",
+    "**/knob/index.js",
+    "**/label/index.js",
+    "**/layout/index.js",
+    "**/listbox/index.js",
+    "**/mega-menu/index.js",
+    "**/menu/index.js",
+    "**/menubar/index.js",
+    "**/message/index.js",
+    "**/meter-group/index.js",
+    "**/order-list/index.js",
+    "**/pagination/index.js",
+    "**/panel/index.js",
+    "**/pick-list/index.js",
+    "**/popover/index.js",
+    "**/progress-bar/index.js",
+    "**/progress-spinner/index.js",
+    "**/radio/index.js",
+    "**/rating/index.js",
+    "**/scroll-top/index.js",
+    "**/scrollbar/index.js",
+    "**/select/index.js",
+    "**/select-button/index.js",
+    "**/sidebar/index.js",
+    "**/skeleton/index.js",
+    "**/slider/index.js",
+    "**/space/index.js",
+    "**/speed-dial/index.js",
+    "**/split-button/index.js",
+    "**/splitter/index.js",
+    "**/stepper/index.js",
+    "**/switch/index.js",
+    "**/table/index.js",
+    "**/tabs/index.js",
+    "**/tag/index.js",
+    "**/terminal/index.js",
+    "**/textarea/index.js",
+    "**/tiered-menu/index.js",
+    "**/timeline/index.js",
+    "**/toast/index.js",
+    "**/toggle-button/index.js",
+    "**/toolbar/index.js",
+    "**/tooltip/index.js",
+    "**/tree/index.js",
+    "**/tree-select/index.js",
+    "**/tree-table/index.js",
+    "**/virtual-scroller/index.js"
   ],
   "exports": {
     ".": {
@@ -32,6 +121,538 @@
       "import": "./dist/index.js"
     },
     "./styles.css": "./dist/styles.css",
+    "./resolver": {
+      "types": "./dist/resolver.d.ts",
+      "import": "./dist/resolver.js"
+    },
+    "./accordion": {
+      "types": "./dist/components/Accordion/index.d.ts",
+      "import": "./dist/accordion/index.js"
+    },
+    "./accordion/style": "./dist/accordion/style.js",
+    "./accordion/style.css": "./dist/accordion/style.css",
+    "./auto-complete": {
+      "types": "./dist/components/AutoComplete/index.d.ts",
+      "import": "./dist/auto-complete/index.js"
+    },
+    "./auto-complete/style": "./dist/auto-complete/style.js",
+    "./auto-complete/style.css": "./dist/auto-complete/style.css",
+    "./avatar": {
+      "types": "./dist/components/Avatar/index.d.ts",
+      "import": "./dist/avatar/index.js"
+    },
+    "./avatar/style": "./dist/avatar/style.js",
+    "./avatar/style.css": "./dist/avatar/style.css",
+    "./badge": {
+      "types": "./dist/components/Badge/index.d.ts",
+      "import": "./dist/badge/index.js"
+    },
+    "./badge/style": "./dist/badge/style.js",
+    "./badge/style.css": "./dist/badge/style.css",
+    "./block-ui": {
+      "types": "./dist/components/BlockUI/index.d.ts",
+      "import": "./dist/block-ui/index.js"
+    },
+    "./block-ui/style": "./dist/block-ui/style.js",
+    "./block-ui/style.css": "./dist/block-ui/style.css",
+    "./breadcrumb": {
+      "types": "./dist/components/Breadcrumb/index.d.ts",
+      "import": "./dist/breadcrumb/index.js"
+    },
+    "./breadcrumb/style": "./dist/breadcrumb/style.js",
+    "./breadcrumb/style.css": "./dist/breadcrumb/style.css",
+    "./button": {
+      "types": "./dist/components/Button/index.d.ts",
+      "import": "./dist/button/index.js"
+    },
+    "./button/style": "./dist/button/style.js",
+    "./button/style.css": "./dist/button/style.css",
+    "./card": {
+      "types": "./dist/components/Card/index.d.ts",
+      "import": "./dist/card/index.js"
+    },
+    "./card/style": "./dist/card/style.js",
+    "./card/style.css": "./dist/card/style.css",
+    "./carousel": {
+      "types": "./dist/components/Carousel/index.d.ts",
+      "import": "./dist/carousel/index.js"
+    },
+    "./carousel/style": "./dist/carousel/style.js",
+    "./carousel/style.css": "./dist/carousel/style.css",
+    "./cascade-select": {
+      "types": "./dist/components/CascadeSelect/index.d.ts",
+      "import": "./dist/cascade-select/index.js"
+    },
+    "./cascade-select/style": "./dist/cascade-select/style.js",
+    "./cascade-select/style.css": "./dist/cascade-select/style.css",
+    "./checkbox": {
+      "types": "./dist/components/Checkbox/index.d.ts",
+      "import": "./dist/checkbox/index.js"
+    },
+    "./checkbox/style": "./dist/checkbox/style.js",
+    "./checkbox/style.css": "./dist/checkbox/style.css",
+    "./chip": {
+      "types": "./dist/components/Chip/index.d.ts",
+      "import": "./dist/chip/index.js"
+    },
+    "./chip/style": "./dist/chip/style.js",
+    "./chip/style.css": "./dist/chip/style.css",
+    "./command-menu": {
+      "types": "./dist/components/CommandMenu/index.d.ts",
+      "import": "./dist/command-menu/index.js"
+    },
+    "./command-menu/style": "./dist/command-menu/style.js",
+    "./command-menu/style.css": "./dist/command-menu/style.css",
+    "./config-provider": {
+      "types": "./dist/components/ConfigProvider/index.d.ts",
+      "import": "./dist/config-provider/index.js"
+    },
+    "./config-provider/style": "./dist/config-provider/style.js",
+    "./config-provider/style.css": "./dist/config-provider/style.css",
+    "./confirm-dialog": {
+      "types": "./dist/components/ConfirmDialog/index.d.ts",
+      "import": "./dist/confirm-dialog/index.js"
+    },
+    "./confirm-dialog/style": "./dist/confirm-dialog/style.js",
+    "./confirm-dialog/style.css": "./dist/confirm-dialog/style.css",
+    "./confirm-popup": {
+      "types": "./dist/components/ConfirmPopup/index.d.ts",
+      "import": "./dist/confirm-popup/index.js"
+    },
+    "./confirm-popup/style": "./dist/confirm-popup/style.js",
+    "./confirm-popup/style.css": "./dist/confirm-popup/style.css",
+    "./context-menu": {
+      "types": "./dist/components/ContextMenu/index.d.ts",
+      "import": "./dist/context-menu/index.js"
+    },
+    "./context-menu/style": "./dist/context-menu/style.js",
+    "./context-menu/style.css": "./dist/context-menu/style.css",
+    "./data-view": {
+      "types": "./dist/components/DataView/index.d.ts",
+      "import": "./dist/data-view/index.js"
+    },
+    "./data-view/style": "./dist/data-view/style.js",
+    "./data-view/style.css": "./dist/data-view/style.css",
+    "./date-picker": {
+      "types": "./dist/components/DatePicker/index.d.ts",
+      "import": "./dist/date-picker/index.js"
+    },
+    "./date-picker/style": "./dist/date-picker/style.js",
+    "./date-picker/style.css": "./dist/date-picker/style.css",
+    "./dialog": {
+      "types": "./dist/components/Dialog/index.d.ts",
+      "import": "./dist/dialog/index.js"
+    },
+    "./dialog/style": "./dist/dialog/style.js",
+    "./dialog/style.css": "./dist/dialog/style.css",
+    "./divider": {
+      "types": "./dist/components/Divider/index.d.ts",
+      "import": "./dist/divider/index.js"
+    },
+    "./divider/style": "./dist/divider/style.js",
+    "./divider/style.css": "./dist/divider/style.css",
+    "./dock": {
+      "types": "./dist/components/Dock/index.d.ts",
+      "import": "./dist/dock/index.js"
+    },
+    "./dock/style": "./dist/dock/style.js",
+    "./dock/style.css": "./dist/dock/style.css",
+    "./drawer": {
+      "types": "./dist/components/Drawer/index.d.ts",
+      "import": "./dist/drawer/index.js"
+    },
+    "./drawer/style": "./dist/drawer/style.js",
+    "./drawer/style.css": "./dist/drawer/style.css",
+    "./dropdown": {
+      "types": "./dist/components/Dropdown/index.d.ts",
+      "import": "./dist/dropdown/index.js"
+    },
+    "./dropdown/style": "./dist/dropdown/style.js",
+    "./dropdown/style.css": "./dist/dropdown/style.css",
+    "./fieldset": {
+      "types": "./dist/components/Fieldset/index.d.ts",
+      "import": "./dist/fieldset/index.js"
+    },
+    "./fieldset/style": "./dist/fieldset/style.js",
+    "./fieldset/style.css": "./dist/fieldset/style.css",
+    "./file-upload": {
+      "types": "./dist/components/FileUpload/index.d.ts",
+      "import": "./dist/file-upload/index.js"
+    },
+    "./file-upload/style": "./dist/file-upload/style.js",
+    "./file-upload/style.css": "./dist/file-upload/style.css",
+    "./flex": {
+      "types": "./dist/components/Flex/index.d.ts",
+      "import": "./dist/flex/index.js"
+    },
+    "./flex/style": "./dist/flex/style.js",
+    "./flex/style.css": "./dist/flex/style.css",
+    "./float-label": {
+      "types": "./dist/components/FloatLabel/index.d.ts",
+      "import": "./dist/float-label/index.js"
+    },
+    "./float-label/style": "./dist/float-label/style.js",
+    "./float-label/style.css": "./dist/float-label/style.css",
+    "./fluid": {
+      "types": "./dist/components/Fluid/index.d.ts",
+      "import": "./dist/fluid/index.js"
+    },
+    "./fluid/style": "./dist/fluid/style.js",
+    "./fluid/style.css": "./dist/fluid/style.css",
+    "./form": {
+      "types": "./dist/components/Form/index.d.ts",
+      "import": "./dist/form/index.js"
+    },
+    "./form/style": "./dist/form/style.js",
+    "./form/style.css": "./dist/form/style.css",
+    "./gallery": {
+      "types": "./dist/components/Gallery/index.d.ts",
+      "import": "./dist/gallery/index.js"
+    },
+    "./gallery/style": "./dist/gallery/style.js",
+    "./gallery/style.css": "./dist/gallery/style.css",
+    "./grid": {
+      "types": "./dist/components/Grid/index.d.ts",
+      "import": "./dist/grid/index.js"
+    },
+    "./grid/style": "./dist/grid/style.js",
+    "./grid/style.css": "./dist/grid/style.css",
+    "./icon": {
+      "types": "./dist/components/Icon/index.d.ts",
+      "import": "./dist/icon/index.js"
+    },
+    "./icon/style": "./dist/icon/style.js",
+    "./icon/style.css": "./dist/icon/style.css",
+    "./icon-field": {
+      "types": "./dist/components/IconField/index.d.ts",
+      "import": "./dist/icon-field/index.js"
+    },
+    "./icon-field/style": "./dist/icon-field/style.js",
+    "./icon-field/style.css": "./dist/icon-field/style.css",
+    "./inplace": {
+      "types": "./dist/components/Inplace/index.d.ts",
+      "import": "./dist/inplace/index.js"
+    },
+    "./inplace/style": "./dist/inplace/style.js",
+    "./inplace/style.css": "./dist/inplace/style.css",
+    "./input": {
+      "types": "./dist/components/Input/index.d.ts",
+      "import": "./dist/input/index.js"
+    },
+    "./input/style": "./dist/input/style.js",
+    "./input/style.css": "./dist/input/style.css",
+    "./input-color": {
+      "types": "./dist/components/InputColor/index.d.ts",
+      "import": "./dist/input-color/index.js"
+    },
+    "./input-color/style": "./dist/input-color/style.js",
+    "./input-color/style.css": "./dist/input-color/style.css",
+    "./input-group": {
+      "types": "./dist/components/InputGroup/index.d.ts",
+      "import": "./dist/input-group/index.js"
+    },
+    "./input-group/style": "./dist/input-group/style.js",
+    "./input-group/style.css": "./dist/input-group/style.css",
+    "./input-number": {
+      "types": "./dist/components/InputNumber/index.d.ts",
+      "import": "./dist/input-number/index.js"
+    },
+    "./input-number/style": "./dist/input-number/style.js",
+    "./input-number/style.css": "./dist/input-number/style.css",
+    "./input-otp": {
+      "types": "./dist/components/InputOtp/index.d.ts",
+      "import": "./dist/input-otp/index.js"
+    },
+    "./input-otp/style": "./dist/input-otp/style.js",
+    "./input-otp/style.css": "./dist/input-otp/style.css",
+    "./input-password": {
+      "types": "./dist/components/InputPassword/index.d.ts",
+      "import": "./dist/input-password/index.js"
+    },
+    "./input-password/style": "./dist/input-password/style.js",
+    "./input-password/style.css": "./dist/input-password/style.css",
+    "./input-tags": {
+      "types": "./dist/components/InputTags/index.d.ts",
+      "import": "./dist/input-tags/index.js"
+    },
+    "./input-tags/style": "./dist/input-tags/style.js",
+    "./input-tags/style.css": "./dist/input-tags/style.css",
+    "./knob": {
+      "types": "./dist/components/Knob/index.d.ts",
+      "import": "./dist/knob/index.js"
+    },
+    "./knob/style": "./dist/knob/style.js",
+    "./knob/style.css": "./dist/knob/style.css",
+    "./label": {
+      "types": "./dist/components/Label/index.d.ts",
+      "import": "./dist/label/index.js"
+    },
+    "./label/style": "./dist/label/style.js",
+    "./label/style.css": "./dist/label/style.css",
+    "./layout": {
+      "types": "./dist/components/Layout/index.d.ts",
+      "import": "./dist/layout/index.js"
+    },
+    "./layout/style": "./dist/layout/style.js",
+    "./layout/style.css": "./dist/layout/style.css",
+    "./listbox": {
+      "types": "./dist/components/Listbox/index.d.ts",
+      "import": "./dist/listbox/index.js"
+    },
+    "./listbox/style": "./dist/listbox/style.js",
+    "./listbox/style.css": "./dist/listbox/style.css",
+    "./mega-menu": {
+      "types": "./dist/components/MegaMenu/index.d.ts",
+      "import": "./dist/mega-menu/index.js"
+    },
+    "./mega-menu/style": "./dist/mega-menu/style.js",
+    "./mega-menu/style.css": "./dist/mega-menu/style.css",
+    "./menu": {
+      "types": "./dist/components/Menu/index.d.ts",
+      "import": "./dist/menu/index.js"
+    },
+    "./menu/style": "./dist/menu/style.js",
+    "./menu/style.css": "./dist/menu/style.css",
+    "./menubar": {
+      "types": "./dist/components/Menubar/index.d.ts",
+      "import": "./dist/menubar/index.js"
+    },
+    "./menubar/style": "./dist/menubar/style.js",
+    "./menubar/style.css": "./dist/menubar/style.css",
+    "./message": {
+      "types": "./dist/components/Message/index.d.ts",
+      "import": "./dist/message/index.js"
+    },
+    "./message/style": "./dist/message/style.js",
+    "./message/style.css": "./dist/message/style.css",
+    "./meter-group": {
+      "types": "./dist/components/MeterGroup/index.d.ts",
+      "import": "./dist/meter-group/index.js"
+    },
+    "./meter-group/style": "./dist/meter-group/style.js",
+    "./meter-group/style.css": "./dist/meter-group/style.css",
+    "./order-list": {
+      "types": "./dist/components/OrderList/index.d.ts",
+      "import": "./dist/order-list/index.js"
+    },
+    "./order-list/style": "./dist/order-list/style.js",
+    "./order-list/style.css": "./dist/order-list/style.css",
+    "./pagination": {
+      "types": "./dist/components/Pagination/index.d.ts",
+      "import": "./dist/pagination/index.js"
+    },
+    "./pagination/style": "./dist/pagination/style.js",
+    "./pagination/style.css": "./dist/pagination/style.css",
+    "./panel": {
+      "types": "./dist/components/Panel/index.d.ts",
+      "import": "./dist/panel/index.js"
+    },
+    "./panel/style": "./dist/panel/style.js",
+    "./panel/style.css": "./dist/panel/style.css",
+    "./pick-list": {
+      "types": "./dist/components/PickList/index.d.ts",
+      "import": "./dist/pick-list/index.js"
+    },
+    "./pick-list/style": "./dist/pick-list/style.js",
+    "./pick-list/style.css": "./dist/pick-list/style.css",
+    "./popover": {
+      "types": "./dist/components/Popover/index.d.ts",
+      "import": "./dist/popover/index.js"
+    },
+    "./popover/style": "./dist/popover/style.js",
+    "./popover/style.css": "./dist/popover/style.css",
+    "./progress-bar": {
+      "types": "./dist/components/ProgressBar/index.d.ts",
+      "import": "./dist/progress-bar/index.js"
+    },
+    "./progress-bar/style": "./dist/progress-bar/style.js",
+    "./progress-bar/style.css": "./dist/progress-bar/style.css",
+    "./progress-spinner": {
+      "types": "./dist/components/ProgressSpinner/index.d.ts",
+      "import": "./dist/progress-spinner/index.js"
+    },
+    "./progress-spinner/style": "./dist/progress-spinner/style.js",
+    "./progress-spinner/style.css": "./dist/progress-spinner/style.css",
+    "./radio": {
+      "types": "./dist/components/Radio/index.d.ts",
+      "import": "./dist/radio/index.js"
+    },
+    "./radio/style": "./dist/radio/style.js",
+    "./radio/style.css": "./dist/radio/style.css",
+    "./rating": {
+      "types": "./dist/components/Rating/index.d.ts",
+      "import": "./dist/rating/index.js"
+    },
+    "./rating/style": "./dist/rating/style.js",
+    "./rating/style.css": "./dist/rating/style.css",
+    "./scroll-top": {
+      "types": "./dist/components/ScrollTop/index.d.ts",
+      "import": "./dist/scroll-top/index.js"
+    },
+    "./scroll-top/style": "./dist/scroll-top/style.js",
+    "./scroll-top/style.css": "./dist/scroll-top/style.css",
+    "./scrollbar": {
+      "types": "./dist/components/Scrollbar/index.d.ts",
+      "import": "./dist/scrollbar/index.js"
+    },
+    "./scrollbar/style": "./dist/scrollbar/style.js",
+    "./scrollbar/style.css": "./dist/scrollbar/style.css",
+    "./select": {
+      "types": "./dist/components/Select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
+    "./select/style": "./dist/select/style.js",
+    "./select/style.css": "./dist/select/style.css",
+    "./select-button": {
+      "types": "./dist/components/SelectButton/index.d.ts",
+      "import": "./dist/select-button/index.js"
+    },
+    "./select-button/style": "./dist/select-button/style.js",
+    "./select-button/style.css": "./dist/select-button/style.css",
+    "./sidebar": {
+      "types": "./dist/components/Sidebar/index.d.ts",
+      "import": "./dist/sidebar/index.js"
+    },
+    "./sidebar/style": "./dist/sidebar/style.js",
+    "./sidebar/style.css": "./dist/sidebar/style.css",
+    "./skeleton": {
+      "types": "./dist/components/Skeleton/index.d.ts",
+      "import": "./dist/skeleton/index.js"
+    },
+    "./skeleton/style": "./dist/skeleton/style.js",
+    "./skeleton/style.css": "./dist/skeleton/style.css",
+    "./slider": {
+      "types": "./dist/components/Slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
+    "./slider/style": "./dist/slider/style.js",
+    "./slider/style.css": "./dist/slider/style.css",
+    "./space": {
+      "types": "./dist/components/Space/index.d.ts",
+      "import": "./dist/space/index.js"
+    },
+    "./space/style": "./dist/space/style.js",
+    "./space/style.css": "./dist/space/style.css",
+    "./speed-dial": {
+      "types": "./dist/components/SpeedDial/index.d.ts",
+      "import": "./dist/speed-dial/index.js"
+    },
+    "./speed-dial/style": "./dist/speed-dial/style.js",
+    "./speed-dial/style.css": "./dist/speed-dial/style.css",
+    "./split-button": {
+      "types": "./dist/components/SplitButton/index.d.ts",
+      "import": "./dist/split-button/index.js"
+    },
+    "./split-button/style": "./dist/split-button/style.js",
+    "./split-button/style.css": "./dist/split-button/style.css",
+    "./splitter": {
+      "types": "./dist/components/Splitter/index.d.ts",
+      "import": "./dist/splitter/index.js"
+    },
+    "./splitter/style": "./dist/splitter/style.js",
+    "./splitter/style.css": "./dist/splitter/style.css",
+    "./stepper": {
+      "types": "./dist/components/Stepper/index.d.ts",
+      "import": "./dist/stepper/index.js"
+    },
+    "./stepper/style": "./dist/stepper/style.js",
+    "./stepper/style.css": "./dist/stepper/style.css",
+    "./switch": {
+      "types": "./dist/components/Switch/index.d.ts",
+      "import": "./dist/switch/index.js"
+    },
+    "./switch/style": "./dist/switch/style.js",
+    "./switch/style.css": "./dist/switch/style.css",
+    "./table": {
+      "types": "./dist/components/Table/index.d.ts",
+      "import": "./dist/table/index.js"
+    },
+    "./table/style": "./dist/table/style.js",
+    "./table/style.css": "./dist/table/style.css",
+    "./tabs": {
+      "types": "./dist/components/Tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
+    },
+    "./tabs/style": "./dist/tabs/style.js",
+    "./tabs/style.css": "./dist/tabs/style.css",
+    "./tag": {
+      "types": "./dist/components/Tag/index.d.ts",
+      "import": "./dist/tag/index.js"
+    },
+    "./tag/style": "./dist/tag/style.js",
+    "./tag/style.css": "./dist/tag/style.css",
+    "./terminal": {
+      "types": "./dist/components/Terminal/index.d.ts",
+      "import": "./dist/terminal/index.js"
+    },
+    "./terminal/style": "./dist/terminal/style.js",
+    "./terminal/style.css": "./dist/terminal/style.css",
+    "./textarea": {
+      "types": "./dist/components/Textarea/index.d.ts",
+      "import": "./dist/textarea/index.js"
+    },
+    "./textarea/style": "./dist/textarea/style.js",
+    "./textarea/style.css": "./dist/textarea/style.css",
+    "./tiered-menu": {
+      "types": "./dist/components/TieredMenu/index.d.ts",
+      "import": "./dist/tiered-menu/index.js"
+    },
+    "./tiered-menu/style": "./dist/tiered-menu/style.js",
+    "./tiered-menu/style.css": "./dist/tiered-menu/style.css",
+    "./timeline": {
+      "types": "./dist/components/Timeline/index.d.ts",
+      "import": "./dist/timeline/index.js"
+    },
+    "./timeline/style": "./dist/timeline/style.js",
+    "./timeline/style.css": "./dist/timeline/style.css",
+    "./toast": {
+      "types": "./dist/components/Toast/index.d.ts",
+      "import": "./dist/toast/index.js"
+    },
+    "./toast/style": "./dist/toast/style.js",
+    "./toast/style.css": "./dist/toast/style.css",
+    "./toggle-button": {
+      "types": "./dist/components/ToggleButton/index.d.ts",
+      "import": "./dist/toggle-button/index.js"
+    },
+    "./toggle-button/style": "./dist/toggle-button/style.js",
+    "./toggle-button/style.css": "./dist/toggle-button/style.css",
+    "./toolbar": {
+      "types": "./dist/components/Toolbar/index.d.ts",
+      "import": "./dist/toolbar/index.js"
+    },
+    "./toolbar/style": "./dist/toolbar/style.js",
+    "./toolbar/style.css": "./dist/toolbar/style.css",
+    "./tooltip": {
+      "types": "./dist/components/Tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
+    },
+    "./tooltip/style": "./dist/tooltip/style.js",
+    "./tooltip/style.css": "./dist/tooltip/style.css",
+    "./tree": {
+      "types": "./dist/components/Tree/index.d.ts",
+      "import": "./dist/tree/index.js"
+    },
+    "./tree/style": "./dist/tree/style.js",
+    "./tree/style.css": "./dist/tree/style.css",
+    "./tree-select": {
+      "types": "./dist/components/TreeSelect/index.d.ts",
+      "import": "./dist/tree-select/index.js"
+    },
+    "./tree-select/style": "./dist/tree-select/style.js",
+    "./tree-select/style.css": "./dist/tree-select/style.css",
+    "./tree-table": {
+      "types": "./dist/components/TreeTable/index.d.ts",
+      "import": "./dist/tree-table/index.js"
+    },
+    "./tree-table/style": "./dist/tree-table/style.js",
+    "./tree-table/style.css": "./dist/tree-table/style.css",
+    "./virtual-scroller": {
+      "types": "./dist/components/VirtualScroller/index.d.ts",
+      "import": "./dist/virtual-scroller/index.js"
+    },
+    "./virtual-scroller/style": "./dist/virtual-scroller/style.js",
+    "./virtual-scroller/style.css": "./dist/virtual-scroller/style.css",
     "./docs": "./src/docs/index.ts"
   },
   "types": "./dist/index.d.ts",
@@ -41,7 +662,7 @@
     "dev": "vite --config playground/vite.config.ts",
     "build:docs": "vite build --config playground/vite.config.ts",
     "preview": "vite preview --config playground/vite.config.ts",
-    "build": "vite build",
+    "build": "node scripts/prepare-on-demand.mjs && node scripts/generate-exports.mjs && vite build && vite build --mode on-demand && node scripts/emit-style-entries.mjs",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

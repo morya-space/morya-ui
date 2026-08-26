@@ -10,7 +10,24 @@
 pnpm build
 ```
 
-产物在 `dist/`（`index.js`、`index.d.ts`、`styles.css`）。
+产物在 `dist/`（`index.js`、`index.d.ts`、`styles.css`、`resolver.js`，以及每个组件的 kebab-case 子路径如 `button/index.js`）。`@well-insight/ui/button` 会带上该组件及其依赖的 JS 与样式。
+
+构建流程（`pnpm build`）会自动执行：
+
+1. `scripts/prepare-on-demand.mjs` — 生成各组件 `style.ts` 并在 `index.ts` 注入样式 side-effect  
+2. `scripts/generate-exports.mjs` — 同步 `package.json` 的 `exports` / `sideEffects` 与 `src/resolver-map.ts`  
+3. `vite build` — 全量入口 + `resolver`  
+4. `vite build --mode on-demand` — 各组件独立 chunk  
+5. `scripts/emit-style-entries.mjs` — 输出 `dist/<slug>/style.js` 与 `style.css`
+
+组件样式写在 `src/components/<Name>/styles.css`，由 `src/styles/index.css` `@import` 聚合。主题 token 仍在 `src/theme/styles.css`。
+
+### 全量 vs 按需（构建层面）
+
+- **全量入口**（`src/index.ts` → `dist/index.js`）：直接从各 `.vue`  re-export，不经过组件 `index.ts`，避免把按需样式 side-effect 打进主包；配合 `@well-insight/ui/styles.css` 使用。
+- **按需入口**（`src/components/<Name>/index.ts` → `dist/<slug>/index.js`）：独立 chunk，自动 `import './style'`，带上 theme、base 与依赖组件 CSS。
+
+两种产物由同一次 `pnpm build` 生成，互不冲突。
 
 ## 文档站
 

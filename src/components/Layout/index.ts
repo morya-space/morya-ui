@@ -1,3 +1,4 @@
+import './style'
 export { default as WiLayout } from './Layout.vue'
 export { default as WiLayoutHeader } from './LayoutHeader.vue'
 export { default as WiLayoutContent } from './LayoutContent.vue'

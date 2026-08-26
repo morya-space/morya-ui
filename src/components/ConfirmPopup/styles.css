@@ -1,0 +1,37 @@
+/* —— Overlay: ConfirmPopup —— */
+.wi-confirmpopup {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    box-shadow: var(--wi-shadow-md);
+    max-width: min(20rem, calc(100vw - 2rem));
+    padding: var(--wi-space-3);
+    position: fixed;
+    z-index: var(--wi-z-popper);
+}
+
+.wi-confirmpopup--teleported {
+    z-index: var(--wi-z-dropdown);
+}
+
+.wi-confirmpopup__message {
+    color: var(--wi-color-text);
+    line-height: 1.5;
+    margin-bottom: var(--wi-space-3);
+}
+
+.wi-confirmpopup__footer {
+    display: flex;
+    gap: var(--wi-space-2);
+    justify-content: flex-end;
+}
+
+.wi-confirmpopup__message {
+    align-items: center;
+    display: flex;
+    gap: var(--wi-space-2);
+}
+
+.wi-confirmpopup__icon {
+    flex-shrink: 0;
+}

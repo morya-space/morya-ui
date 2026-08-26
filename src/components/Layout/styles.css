@@ -1,0 +1,349 @@
+/* —— Panel: Layout —— */
+.wi-layout {
+    background: var(--wi-color-surface);
+    box-sizing: border-box;
+    color: var(--wi-color-text);
+    flex: auto;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+    transition: background-color var(--wi-motion-normal) var(--wi-motion-ease),
+        color var(--wi-motion-normal) var(--wi-motion-ease);
+    width: 100%;
+    z-index: auto;
+}
+
+.wi-layout--embedded {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 6%, var(--wi-color-surface));
+}
+
+.wi-layout--absolute-positioned {
+    inset: 0;
+    position: absolute;
+}
+
+.wi-layout__scroll {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.wi-layout__scroll--has-sider {
+    /* direction set inline (matches naive hasSiderStyle) */
+    flex-wrap: nowrap;
+}
+
+.wi-layout__scrollbar {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+}
+
+.wi-layout__scrollbar .wi-layout__scroll {
+    /* view hosts flex children; scrolling is on the wrap */
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+}
+
+/* Nested layout / content grow to fill remaining space */
+.wi-layout__scroll > .wi-layout,
+.wi-layout__scroll > .wi-layout-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+}
+
+.wi-layout-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+}
+
+.wi-layout-content > .wi-layout__scroll,
+.wi-layout-content > .wi-layout__scrollbar {
+    flex: 1 1 auto;
+}
+
+.wi-layout-header,
+.wi-layout-footer {
+    background: var(--wi-color-surface);
+    box-sizing: border-box;
+    color: var(--wi-color-text);
+    flex: 0 0 auto;
+    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease),
+        color var(--wi-motion-fast) var(--wi-motion-ease),
+        border-color var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 100%;
+}
+
+.wi-layout-header--bordered {
+    border-bottom: 1px solid var(--wi-color-border);
+}
+
+.wi-layout-footer--bordered {
+    border-top: 1px solid var(--wi-color-border);
+}
+
+.wi-layout-header--inverted,
+.wi-layout-footer--inverted,
+.wi-layout-sider--inverted {
+    background: var(--wi-color-contrast);
+    color: var(--wi-color-contrast-fg);
+}
+
+.wi-layout-header--inverted.wi-layout-header--bordered {
+    border-bottom-color: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+}
+
+.wi-layout-footer--inverted.wi-layout-footer--bordered {
+    border-top-color: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+}
+
+.wi-layout-header--absolute-positioned,
+.wi-layout-footer--absolute-positioned,
+.wi-layout-sider--absolute-positioned {
+    position: absolute;
+    z-index: 1;
+}
+
+.wi-layout-header--absolute-positioned {
+    inset-inline: 0;
+    top: 0;
+}
+
+.wi-layout-footer--absolute-positioned {
+    bottom: 0;
+    inset-inline: 0;
+}
+
+.wi-layout-sider {
+    background: var(--wi-color-surface);
+    box-sizing: border-box;
+    color: var(--wi-color-text);
+    display: flex;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    /* Do not clip the collapse trigger (it sits half outside the sider edge).
+       Collapsed transform overflow is clipped by `.wi-layout { overflow: hidden }`. */
+    overflow: visible;
+    position: relative;
+    transition: color var(--wi-motion-normal) var(--wi-motion-ease),
+        border-color var(--wi-motion-normal) var(--wi-motion-ease),
+        max-width var(--wi-motion-normal) var(--wi-motion-ease),
+        background-color var(--wi-motion-normal) var(--wi-motion-ease);
+    z-index: 1;
+}
+
+.wi-layout-sider--right-placement {
+    justify-content: flex-start;
+}
+
+.wi-layout-sider__scroll {
+    box-sizing: border-box;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100%;
+    max-width: 100%;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity var(--wi-motion-normal) var(--wi-motion-ease);
+    width: 100%;
+}
+
+.wi-layout-sider__scrollbar {
+    box-sizing: border-box;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100%;
+    max-width: 100%;
+    min-width: 0;
+    opacity: 0;
+    transition: opacity var(--wi-motion-normal) var(--wi-motion-ease);
+    width: 100%;
+}
+
+.wi-layout-sider__scrollbar .wi-layout-sider__scroll {
+    height: auto;
+    max-width: none;
+    min-height: 100%;
+    opacity: 1;
+    overflow: visible;
+}
+
+.wi-layout-sider--show-content > .wi-layout-sider__scroll {
+    opacity: 1;
+    overflow: auto;
+}
+
+.wi-layout-sider--show-content > .wi-layout-sider__scrollbar {
+    opacity: 1;
+}
+
+.wi-layout-sider--collapse-width > .wi-layout-sider__scroll,
+.wi-layout-sider--collapse-width > .wi-layout-sider__scrollbar {
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.wi-layout-sider__border {
+    background: var(--wi-color-border);
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 1px;
+}
+
+.wi-layout-sider--left-placement > .wi-layout-sider__border,
+.wi-layout-sider--left > .wi-layout-sider__border {
+    right: 0;
+}
+
+.wi-layout-sider--right-placement > .wi-layout-sider__border,
+.wi-layout-sider--right > .wi-layout-sider__border {
+    left: 0;
+}
+
+.wi-layout-sider--inverted > .wi-layout-sider__border {
+    background: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+}
+
+.wi-layout-sider__trigger {
+    background: transparent;
+    border: 0;
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+}
+
+.wi-layout-sider__trigger:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-layout-sider__trigger--arrow-circle {
+    align-items: center;
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: 50%;
+    box-shadow: var(--wi-shadow-sm);
+    display: inline-flex;
+    font-size: 1rem;
+    height: 1.5rem;
+    justify-content: center;
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 1.5rem;
+}
+
+.wi-layout-sider--right-placement > .wi-layout-sider__trigger--arrow-circle {
+    left: 0;
+    right: auto;
+    transform: translate(-50%, -50%);
+}
+
+.wi-layout-sider__arrow {
+    display: inline-block;
+    line-height: 1;
+    transform: rotate(180deg);
+    transition: transform var(--wi-motion-normal) var(--wi-motion-ease);
+}
+
+.wi-layout-sider--collapsed > .wi-layout-sider__trigger--arrow-circle .wi-layout-sider__arrow {
+    transform: rotate(0deg);
+}
+
+.wi-layout-sider--right-placement > .wi-layout-sider__trigger--arrow-circle .wi-layout-sider__arrow {
+    transform: rotate(0deg);
+}
+
+.wi-layout-sider--right-placement.wi-layout-sider--collapsed
+    > .wi-layout-sider__trigger--arrow-circle
+    .wi-layout-sider__arrow {
+    transform: rotate(180deg);
+}
+
+.wi-layout-sider--inverted > .wi-layout-sider__trigger--arrow-circle {
+    background: var(--wi-color-contrast);
+    border-color: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+    color: var(--wi-color-contrast-fg);
+}
+
+.wi-layout-sider__trigger--bar {
+    height: 4.5rem;
+    right: -1.75rem;
+    top: calc(50% - 2.25rem);
+    width: 2rem;
+}
+
+.wi-layout-sider--right-placement > .wi-layout-sider__trigger--bar {
+    left: -1.75rem;
+    right: auto;
+    transform: rotate(180deg);
+}
+
+.wi-layout-sider__bar {
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.wi-layout-sider__bar-top,
+.wi-layout-sider__bar-bottom {
+    background: var(--wi-color-text-muted);
+    border-radius: 2px;
+    height: 2.375rem;
+    left: 0.875rem;
+    position: absolute;
+    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease),
+        transform var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 4px;
+}
+
+.wi-layout-sider__bar-top {
+    top: 0;
+}
+
+.wi-layout-sider__bar-bottom {
+    top: 2.125rem;
+}
+
+.wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-top {
+    transform: rotate(12deg) scale(1.15) translateY(-2px);
+}
+
+.wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-bottom {
+    transform: rotate(-12deg) scale(1.15) translateY(2px);
+}
+
+.wi-layout-sider--collapsed > .wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-top {
+    transform: rotate(-12deg) scale(1.15) translateY(-2px);
+}
+
+.wi-layout-sider--collapsed > .wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-bottom {
+    transform: rotate(12deg) scale(1.15) translateY(2px);
+}
+
+.wi-layout-sider--absolute-positioned {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
