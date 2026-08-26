@@ -20,4 +20,28 @@ describe('WiTabs', () => {
     expect(wrapper.emitted('update:modelValue')).toEqual([['data']])
     wrapper.unmount()
   })
+
+  it('closes a tab and adds a tab', async () => {
+    const wrapper = mount(WiTabs, {
+      props: {
+        tabs: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ],
+        modelValue: 'a',
+        closable: true,
+        addable: true,
+      },
+    })
+    await wrapper.get('.wi-tabs__close').trigger('click')
+    expect(wrapper.emitted('close')?.[0]).toEqual(['a'])
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['b'])
+    await wrapper.get('.wi-tabs__add').trigger('click')
+    expect(wrapper.emitted('add')).toHaveLength(1)
+  })
+
+  it('applies the card type class', () => {
+    const wrapper = mount(WiTabs, { props: { tabs, type: 'card', modelValue: 'design' } })
+    expect(wrapper.classes()).toContain('wi-tabs--card')
+  })
 })

@@ -29,4 +29,11 @@ describe('WiBreadcrumb', () => {
     expect(wrapper.find('a').exists()).toBe(false)
     expect(wrapper.get('.wi-breadcrumb__link').text()).toBe('Only')
   })
+
+  it('uses a custom separator', () => {
+    const wrapper = mount(WiBreadcrumb, {
+      props: { model: [{ label: 'A', to: '/a' }, { label: 'B' }], separator: '>' },
+    })
+    expect(wrapper.get('.wi-breadcrumb__separator').text()).toBe('>')
+  })
 })

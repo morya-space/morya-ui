@@ -12,7 +12,7 @@ export type ButtonSeverity =
   | 'contrast'
 
 /** Visual variant aligned with `variant`. */
-export type ButtonVariant = 'outlined' | 'text' | 'link'
+export type ButtonVariant = 'outlined' | 'text' | 'link' | 'ghost' | 'quaternary'
 
 export type ButtonSize = 'small' | 'large'
 
@@ -31,6 +31,8 @@ export interface ButtonProps {
   iconOnly?: boolean
   /** Semantic color. Omit for primary. */
   severity?: ButtonSeverity
+  /** Custom fill/text color. Overrides `severity` tones when set. */
+  color?: string
   /** Elevated shadow. */
   raised?: boolean
   /** Fully rounded corners. */
@@ -41,9 +43,13 @@ export interface ButtonProps {
   outlined?: boolean
   /** Link-styled button. */
   link?: boolean
+  /** Ghost (transparent fill, tinted hover). */
+  ghost?: boolean
+  /** Extra-quiet text button. */
+  quaternary?: boolean
   /** Muted/plain treatment for text or outlined. */
   plain?: boolean
-  /** Shortcut for outlined / text / link. */
+  /** Shortcut for outlined / text / link / ghost / quaternary. */
   variant?: ButtonVariant
   /** Size alternative to the default. Also accepts legacy `sm` / `md` / `lg`. */
   size?: ButtonSize | 'sm' | 'md' | 'lg'
@@ -70,4 +76,11 @@ export interface ButtonEmits {
 export interface ButtonInstance {
   focus: () => void
   ref: HTMLButtonElement | null
+}
+
+export interface ButtonGroupProps {
+  /** Stretch to full container width. */
+  fluid?: boolean
+  /** Accessible name for the group. */
+  ariaLabel?: string
 }

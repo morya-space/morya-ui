@@ -56,12 +56,36 @@ const open = ref(false)
 </template>
 ```
 
+## Hover
+
+`trigger` 默认 `manual`（仅 `v-model`）。设为 `hover` / `click` / `focus` 由组件自行开关。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiPopover } from '@well-insight/ui'
+
+const open = ref(false)
+</script>
+
+<template>
+  <WiPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
+    <WiButton label="Hover me" severity="secondary" />
+    <template #content>
+      <p style="margin:0">Opens on hover.</p>
+    </template>
+  </WiPopover>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'bottom-start' \| 'bottom-end'` | `'bottom'` | 相对触发元素的位置。 |
+| `trigger` | `'manual' \| 'click' \| 'hover' \| 'focus'` | `'manual'` | 打开方式。 |
+| `showDelay` / `hideDelay` | `number` | `0` / `200` | hover/focus 延迟（ms）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
 

@@ -101,4 +101,17 @@ describe('WiScrollbar', () => {
     expect(view.attributes('aria-label')).toBe('Scrollable panel')
     expect(view.attributes('aria-orientation')).toBe('vertical')
   })
+
+  it('shows thumbs when trigger is none', async () => {
+    const wrapper = mount(WiScrollbar, {
+      props: { height: 120, trigger: 'none' },
+      slots: {
+        default: Array.from({ length: 20 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    expect(wrapper.findAll('.wi-scrollbar__bar').length).toBe(2)
+    wrapper.unmount()
+  })
 })

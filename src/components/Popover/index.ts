@@ -1,2 +1,2 @@
 export { default as WiPopover } from './Popover.vue'
-export type { PopoverEmits, PopoverPlacement, PopoverProps } from './types'
+export type { PopoverEmits, PopoverPlacement, PopoverProps, PopoverTrigger } from './types'

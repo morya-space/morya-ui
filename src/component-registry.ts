@@ -2,14 +2,17 @@ import type { Component } from 'vue'
 import WiAccordion from './components/Accordion/Accordion.vue'
 import WiAutoComplete from './components/AutoComplete/AutoComplete.vue'
 import WiAvatar from './components/Avatar/Avatar.vue'
+import WiAvatarGroup from './components/Avatar/AvatarGroup.vue'
 import WiBadge from './components/Badge/Badge.vue'
 import WiBlockUI from './components/BlockUI/BlockUI.vue'
 import WiBreadcrumb from './components/Breadcrumb/Breadcrumb.vue'
 import WiButton from './components/Button/Button.vue'
+import WiButtonGroup from './components/Button/ButtonGroup.vue'
 import WiCard from './components/Card/Card.vue'
 import WiCarousel from './components/Carousel/Carousel.vue'
 import WiCascadeSelect from './components/CascadeSelect/CascadeSelect.vue'
 import WiCheckbox from './components/Checkbox/Checkbox.vue'
+import WiCheckboxGroup from './components/Checkbox/CheckboxGroup.vue'
 import WiChip from './components/Chip/Chip.vue'
 import WiCommandMenu from './components/CommandMenu/CommandMenu.vue'
 import WiConfigProvider from './components/ConfigProvider/ConfigProvider.vue'
@@ -66,6 +69,7 @@ import WiPopover from './components/Popover/Popover.vue'
 import WiProgressBar from './components/ProgressBar/ProgressBar.vue'
 import WiProgressSpinner from './components/ProgressSpinner/ProgressSpinner.vue'
 import WiRadio from './components/Radio/Radio.vue'
+import WiRadioGroup from './components/Radio/RadioGroup.vue'
 import WiRating from './components/Rating/Rating.vue'
 import WiScrollbar from './components/Scrollbar/Scrollbar.vue'
 import WiScrollTop from './components/ScrollTop/ScrollTop.vue'
@@ -101,14 +105,17 @@ export const wiComponents: Record<string, Component> = {
   WiAccordion,
   WiAutoComplete,
   WiAvatar,
+  WiAvatarGroup,
   WiBadge,
   WiBlockUI,
   WiBreadcrumb,
   WiButton,
+  WiButtonGroup,
   WiCard,
   WiCarousel,
   WiCascadeSelect,
   WiCheckbox,
+  WiCheckboxGroup,
   WiChip,
   WiCommandMenu,
   WiConfigProvider,
@@ -165,6 +172,7 @@ export const wiComponents: Record<string, Component> = {
   WiProgressBar,
   WiProgressSpinner,
   WiRadio,
+  WiRadioGroup,
   WiRating,
   WiScrollbar,
   WiScrollTop,

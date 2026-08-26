@@ -29,6 +29,26 @@ import { WiProgressSpinner } from '@well-insight/ui'
 </template>
 ```
 
+## Wrap
+
+When wrapping content, `show` toggles the overlay and `delay` waits before it appears.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiProgressSpinner } from '@well-insight/ui'
+
+const loading = ref(true)
+</script>
+
+<template>
+  <WiProgressSpinner :show="loading" description="Loading">
+    <p style="margin:0">Form content</p>
+  </WiProgressSpinner>
+  <WiButton label="Toggle" size="small" @click="loading = !loading" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -36,3 +56,7 @@ import { WiProgressSpinner } from '@well-insight/ui'
 | `strokeWidth` | `string` | `'2'` | SVG circle stroke width. |
 | `animationDuration` | `string` | `'1s'` | Rotation animation duration. |
 | `ariaLabel` | `string` | locale `loading` | Accessible name. |
+| `show` | `boolean` | `true` | Overlay visibility when wrapping content. |
+| `delay` | `number` | `0` | Delay before showing (ms). |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `description` | `string` | — | Caption under the spinner. |

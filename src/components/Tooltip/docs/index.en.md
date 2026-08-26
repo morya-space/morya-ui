@@ -26,7 +26,7 @@ import { WiButton, WiTooltip } from '@well-insight/ui'
     <WiTooltip content="Save changes" placement="top">
       <WiButton icon="check" icon-only aria-label="Save" />
     </WiTooltip>
-    <WiTooltip content="Delete item" placement="bottom" :show-delay="200">
+    <WiTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
       <WiButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
     </WiTooltip>
   </div>
@@ -41,6 +41,8 @@ import { WiButton, WiTooltip } from '@well-insight/ui'
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Position relative to the trigger. |
 | `disabled` | `boolean` | `false` | Disable the tooltip. |
 | `showDelay` | `number` | `0` | Delay before showing, in milliseconds. |
+| `hideDelay` | `number` | `0` | Delay before hiding, in milliseconds. |
+| `maxWidth` | `string \| number` | — | Max content width; a number is pixels. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 

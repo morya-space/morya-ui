@@ -12,4 +12,8 @@ export interface SkeletonProps {
   borderRadius?: string
   /** Loading animation. Defaults to `wave`. */
   animation?: SkeletonAnimation
+  /** Render as a text line (shorter height). */
+  text?: boolean
+  /** Repeat the placeholder this many times. */
+  repeat?: number
 }

@@ -50,6 +50,28 @@ const value = ref([20, 70])
 </template>
 ```
 
+## Marks & vertical
+
+`marks` can be a number array or a value-to-label map. `tooltip` shows the current value while dragging.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiSlider } from '@well-insight/ui'
+
+const value = ref(50)
+</script>
+
+<template>
+  <div style="display:flex;gap:2rem;align-items:stretch;height:10rem">
+    <div style="flex:1">
+      <WiSlider v-model="value" tooltip :marks="{ 0: '0', 50: 'Mid', 100: 'Max' }" />
+    </div>
+    <WiSlider v-model="value" vertical tooltip />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -59,6 +81,9 @@ const value = ref([20, 70])
 | `max` | `number` | `100` | Maximum. |
 | `step` | `number` | `1` | Step. |
 | `range` | `boolean` | `false` | Range mode. |
+| `marks` | `number[] \| Record<number, string>` | — | Tick marks; array of values, or a value-to-label map. |
+| `tooltip` | `boolean` | `false` | Show the current value while dragging. |
+| `vertical` | `boolean` | `false` | Vertical layout. |
 | `disabled` | `boolean` | `false` | Disabled. |
 
 ## Events

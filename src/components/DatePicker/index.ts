@@ -1,2 +1,10 @@
 export { default as WiDatePicker } from './DatePicker.vue'
-export type { DatePickerEmits, DatePickerProps, DatePickerValue } from './types'
+export type {
+  DatePickerDateValue,
+  DatePickerEmits,
+  DatePickerModel,
+  DatePickerProps,
+  DatePickerShortcut,
+  DatePickerType,
+  DatePickerValue,
+} from './types'

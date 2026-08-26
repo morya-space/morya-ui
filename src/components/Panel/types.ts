@@ -1,3 +1,7 @@
+import type { WiSizeInput } from '../../shared/types'
+
+export type PanelSize = WiSizeInput
+
 export interface PanelProps {
   header?: string
   toggleable?: boolean
@@ -5,6 +9,7 @@ export interface PanelProps {
   collapsed?: boolean
   /** Alias of `collapsed` for `v-model`. */
   modelValue?: boolean
+  size?: PanelSize
 }
 
 export interface PanelEmits {

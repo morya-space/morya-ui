@@ -97,4 +97,9 @@ export const enUS: WiLocaleMessages = {
   jumpToPage: 'Go to',
   pageClassifier: '',
   itemsPerPage: '/ page',
+  tabs: 'Tabs',
+  addTab: 'Add tab',
+  closeTab: 'Close tab',
+  dateRangePlaceholder: 'Select date range',
+  today: 'Today',
 }

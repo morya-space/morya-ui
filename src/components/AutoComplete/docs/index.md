@@ -52,12 +52,35 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 </template>
 ```
 
+## Options & loading
+
+`suggestions` 可传字符串或 `{ label, value }`。`loading` / `clearable` 控制加载与清空。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiAutoComplete } from '@well-insight/ui'
+
+const value = ref('')
+const suggestions = [
+  { label: 'Vue', value: 'vue' },
+  { label: 'Vite', value: 'vite' },
+]
+</script>
+
+<template>
+  <WiAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="选项对象…" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `modelValue` | `string` | `''` | 输入值。 |
-| `suggestions` | `string[]` | `[]` | 建议列表。 |
+| `suggestions` | `(string \| { label: string; value: string })[]` | `[]` | 建议列表。 |
+| `loading` | `boolean` | `false` | 加载中。 |
+| `clearable` | `boolean` | `false` | 显示清空按钮。 |
 | `dropdown` | `boolean` | `false` | 显示下拉按钮。 |
 | `placeholder` | `string` | — | 占位。 |
 | `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |

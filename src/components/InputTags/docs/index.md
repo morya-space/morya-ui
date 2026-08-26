@@ -29,6 +29,23 @@ const tags = ref(['vue', 'design'])
 </template>
 ```
 
+## Max & separator
+
+`max` 限制标签数量。`separator` 可按逗号等分隔一次添加多项。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputTags } from '@well-insight/ui'
+
+const tags = ref(['vue'])
+</script>
+
+<template>
+  <WiInputTags v-model="tags" :max="3" separator="," placeholder="逗号分隔，最多 3 个" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -37,6 +54,8 @@ const tags = ref(['vue', 'design'])
 | `placeholder` | `string` | `'输入后回车添加'` | 空列表时占位。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `addOnBlur` | `boolean` | `false` | 失焦时也添加。 |
+| `max` | `number` | — | 最多标签数。 |
+| `separator` | `string \| string[]` | — | 额外分隔符，例如 `,`。 |
 
 ## Events
 

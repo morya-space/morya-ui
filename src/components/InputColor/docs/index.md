@@ -29,11 +29,29 @@ const color = ref('#2563eb')
 </template>
 ```
 
+## Swatches
+
+`swatches` 提供快捷色板。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputColor } from '@well-insight/ui'
+
+const color = ref('#2563eb')
+</script>
+
+<template>
+  <WiInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `modelValue` | `string` | `'#000000'` | 十六进制颜色。 |
+| `swatches` | `string[]` | — | 快捷色板。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `id` | `string` | — | 色板 input id。 |
 

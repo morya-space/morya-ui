@@ -41,6 +41,23 @@ import { WiRating } from '@well-insight/ui'
 </template>
 ```
 
+## Half
+
+`allowHalf` 支持 0.5 步进。`allowClear` 是 `cancel` 的别名，传入时优先。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiRating } from '@well-insight/ui'
+
+const value = ref(2.5)
+</script>
+
+<template>
+  <WiRating v-model="value" allow-half />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -48,6 +65,8 @@ import { WiRating } from '@well-insight/ui'
 | `modelValue` | `number` | `0` | 当前评分。 |
 | `stars` | `number` | `5` | 星星数量。 |
 | `cancel` | `boolean` | `true` | 显示清除按钮。 |
+| `allowClear` | `boolean \| null` | `null` | `cancel` 的别名；传入时优先。 |
+| `allowHalf` | `boolean` | `false` | 允许半星。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 

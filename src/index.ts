@@ -4,9 +4,11 @@ import './styles/index.css'
 import './component-registry'
 
 export { default as WiButton } from './components/Button/Button.vue'
+export { default as WiButtonGroup } from './components/Button/ButtonGroup.vue'
 export type {
   ButtonBadgeSeverity,
   ButtonEmits,
+  ButtonGroupProps,
   ButtonIconPos,
   ButtonInstance,
   ButtonProps,
@@ -15,7 +17,7 @@ export type {
   ButtonVariant,
 } from './components/Button/types'
 export { default as WiCard } from './components/Card/Card.vue'
-export type { CardProps } from './components/Card/types'
+export type { CardProps, CardSize } from './components/Card/types'
 export { default as WiDialog } from './components/Dialog/Dialog.vue'
 export type { DialogCloseGuard, DialogClickGuard, DialogEmits, DialogPosition, DialogProps, DialogType } from './components/Dialog/types'
 export { default as WiDropdown } from './components/Dropdown/Dropdown.vue'
@@ -32,21 +34,37 @@ export type { IconProps, IconSize } from './components/Icon/types'
 export { default as WiInput } from './components/Input/Input.vue'
 export type { InputEmits, InputProps } from './components/Input/types'
 export { default as WiCheckbox } from './components/Checkbox/Checkbox.vue'
-export type { CheckboxEmits, CheckboxProps } from './components/Checkbox/types'
+export { default as WiCheckboxGroup } from './components/Checkbox/CheckboxGroup.vue'
+export type {
+  CheckboxEmits,
+  CheckboxGroupEmits,
+  CheckboxGroupProps,
+  CheckboxProps,
+  CheckboxSize,
+  CheckboxValue,
+} from './components/Checkbox/types'
 export { default as WiRadio } from './components/Radio/Radio.vue'
-export type { RadioEmits, RadioProps } from './components/Radio/types'
+export { default as WiRadioGroup } from './components/Radio/RadioGroup.vue'
+export type {
+  RadioEmits,
+  RadioGroupEmits,
+  RadioGroupProps,
+  RadioProps,
+  RadioSize,
+  RadioValue,
+} from './components/Radio/types'
 export { default as WiSwitch } from './components/Switch/Switch.vue'
-export type { SwitchEmits, SwitchProps } from './components/Switch/types'
+export type { SwitchEmits, SwitchProps, SwitchSize } from './components/Switch/types'
 export { default as WiTextarea } from './components/Textarea/Textarea.vue'
 export type { TextareaEmits, TextareaInstance, TextareaProps, WiTextareaAutosize } from './components/Textarea/types'
 export { default as WiSelect } from './components/Select/Select.vue'
 export type { SelectEmits, SelectModelValue, SelectOption, SelectProps, SelectSize, SelectValue } from './components/Select/types'
 export { default as WiTabs } from './components/Tabs/Tabs.vue'
-export type { TabItem, TabsEmits, TabsProps } from './components/Tabs/types'
+export type { TabItem, TabsEmits, TabsProps, TabsType } from './components/Tabs/types'
 export { default as WiDivider } from './components/Divider/Divider.vue'
 export type { DividerAlign, DividerLayout, DividerProps, DividerType } from './components/Divider/types'
 export { default as WiTag } from './components/Tag/Tag.vue'
-export type { TagProps, TagSeverity } from './components/Tag/types'
+export type { TagEmits, TagProps, TagSeverity, TagSize } from './components/Tag/types'
 export { default as WiTooltip } from './components/Tooltip/Tooltip.vue'
 export type { TooltipProps } from './components/Tooltip/types'
 export { default as WiToast } from './components/Toast/Toast.vue'
@@ -88,11 +106,11 @@ export type {
 export { default as WiDrawer } from './components/Drawer/Drawer.vue'
 export type { DrawerEmits, DrawerPosition, DrawerProps } from './components/Drawer/types'
 export { default as WiPopover } from './components/Popover/Popover.vue'
-export type { PopoverEmits, PopoverPlacement, PopoverProps } from './components/Popover/types'
+export type { PopoverEmits, PopoverPlacement, PopoverProps, PopoverTrigger } from './components/Popover/types'
 export { default as WiAccordion } from './components/Accordion/Accordion.vue'
 export type { AccordionEmits, AccordionProps, AccordionTab } from './components/Accordion/types'
 export { default as WiBadge } from './components/Badge/Badge.vue'
-export type { BadgeProps, BadgeSeverity, BadgeSize } from './components/Badge/types'
+export type { BadgeOffset, BadgeProps, BadgeSeverity, BadgeSize } from './components/Badge/types'
 export { default as WiMessage } from './components/Message/Message.vue'
 export { message, useMessage } from './components/Message/message'
 export type {
@@ -109,15 +127,16 @@ export type { WiRenderable } from './shared/content'
 export { default as WiSkeleton } from './components/Skeleton/Skeleton.vue'
 export type { SkeletonAnimation, SkeletonProps, SkeletonShape } from './components/Skeleton/types'
 export { default as WiAvatar } from './components/Avatar/Avatar.vue'
-export type { AvatarProps, AvatarShape, AvatarSize } from './components/Avatar/types'
+export { default as WiAvatarGroup } from './components/Avatar/AvatarGroup.vue'
+export type { AvatarEmits, AvatarGroupProps, AvatarProps, AvatarShape, AvatarSize } from './components/Avatar/types'
 export { default as WiChip } from './components/Chip/Chip.vue'
-export type { ChipEmits, ChipProps } from './components/Chip/types'
+export type { ChipEmits, ChipProps, ChipSeverity, ChipSize } from './components/Chip/types'
 export { default as WiProgressBar } from './components/ProgressBar/ProgressBar.vue'
-export type { ProgressBarMode, ProgressBarProps } from './components/ProgressBar/types'
+export type { ProgressBarMode, ProgressBarProps, ProgressBarStatus, ProgressBarType } from './components/ProgressBar/types'
 export { default as WiProgressSpinner } from './components/ProgressSpinner/ProgressSpinner.vue'
 export type { ProgressSpinnerProps } from './components/ProgressSpinner/types'
 export { default as WiInputNumber } from './components/InputNumber/InputNumber.vue'
-export type { InputNumberEmits, InputNumberProps } from './components/InputNumber/types'
+export type { InputNumberButtonPlacement, InputNumberEmits, InputNumberProps } from './components/InputNumber/types'
 export { default as WiInputPassword } from './components/InputPassword/InputPassword.vue'
 export type {
   InputPasswordEmits,
@@ -141,13 +160,13 @@ export type {
   SelectButtonValue,
 } from './components/SelectButton/types'
 export { default as WiSlider } from './components/Slider/Slider.vue'
-export type { SliderEmits, SliderProps } from './components/Slider/types'
+export type { SliderEmits, SliderMarks, SliderProps } from './components/Slider/types'
 export { default as WiRating } from './components/Rating/Rating.vue'
 export type { RatingEmits, RatingProps } from './components/Rating/types'
 export { default as WiBreadcrumb } from './components/Breadcrumb/Breadcrumb.vue'
 export type { BreadcrumbHome, BreadcrumbItem, BreadcrumbProps } from './components/Breadcrumb/types'
 export { default as WiPanel } from './components/Panel/Panel.vue'
-export type { PanelEmits, PanelProps } from './components/Panel/types'
+export type { PanelEmits, PanelProps, PanelSize } from './components/Panel/types'
 export { default as WiFieldset } from './components/Fieldset/Fieldset.vue'
 export type { FieldsetEmits, FieldsetProps } from './components/Fieldset/types'
 export { default as WiFlex } from './components/Flex/Flex.vue'
@@ -181,7 +200,7 @@ export { WI_LAYOUT_KEY } from './components/Layout/context'
 export { default as WiSplitter } from './components/Splitter/Splitter.vue'
 export type { SplitterEmits, SplitterLayout, SplitterProps, SplitterSize } from './components/Splitter/types'
 export { default as WiStepper } from './components/Stepper/Stepper.vue'
-export type { StepperEmits, StepperProps, StepperStep } from './components/Stepper/types'
+export type { StepperEmits, StepperOrientation, StepperProps, StepperStatus, StepperStep } from './components/Stepper/types'
 export { default as WiToolbar } from './components/Toolbar/Toolbar.vue'
 export type { ToolbarProps } from './components/Toolbar/types'
 export { default as WiMenu } from './components/Menu/Menu.vue'
@@ -202,7 +221,15 @@ export type { TieredMenuEmits, TieredMenuItem, TieredMenuProps } from './compone
 export { default as WiConfirmDialog } from './components/ConfirmDialog/ConfirmDialog.vue'
 export type { ConfirmDialogEmits, ConfirmDialogProps } from './components/ConfirmDialog/types'
 export { default as WiDatePicker } from './components/DatePicker/DatePicker.vue'
-export type { DatePickerEmits, DatePickerProps, DatePickerValue } from './components/DatePicker/types'
+export type {
+  DatePickerDateValue,
+  DatePickerEmits,
+  DatePickerModel,
+  DatePickerProps,
+  DatePickerShortcut,
+  DatePickerType,
+  DatePickerValue,
+} from './components/DatePicker/types'
 export { default as WiListbox } from './components/Listbox/Listbox.vue'
 export type { ListboxEmits, ListboxOption, ListboxProps, ListboxValue } from './components/Listbox/types'
 export { default as WiToggleButton } from './components/ToggleButton/ToggleButton.vue'
@@ -212,7 +239,12 @@ export type { InputOtpEmits, InputOtpProps } from './components/InputOtp/types'
 export { default as WiKnob } from './components/Knob/Knob.vue'
 export type { KnobEmits, KnobProps } from './components/Knob/types'
 export { default as WiAutoComplete } from './components/AutoComplete/AutoComplete.vue'
-export type { AutoCompleteEmits, AutoCompleteProps } from './components/AutoComplete/types'
+export type {
+  AutoCompleteEmits,
+  AutoCompleteOption,
+  AutoCompleteProps,
+  AutoCompleteSuggestion,
+} from './components/AutoComplete/types'
 export { default as WiSplitButton } from './components/SplitButton/SplitButton.vue'
 export type { SplitButtonEmits, SplitButtonItem, SplitButtonProps } from './components/SplitButton/types'
 export { default as WiTree } from './components/Tree/Tree.vue'
@@ -231,7 +263,7 @@ export type { TimelineAlign, TimelineEvent, TimelineLayout, TimelineProps, Timel
 export { default as WiDataView } from './components/DataView/DataView.vue'
 export type { DataViewLayout, DataViewProps } from './components/DataView/types'
 export { default as WiConfirmPopup } from './components/ConfirmPopup/ConfirmPopup.vue'
-export type { ConfirmPopupEmits, ConfirmPopupProps } from './components/ConfirmPopup/types'
+export type { ConfirmPopupEmits, ConfirmPopupPlacement, ConfirmPopupProps } from './components/ConfirmPopup/types'
 export { default as WiScrollTop } from './components/ScrollTop/ScrollTop.vue'
 export type { ScrollTopProps, ScrollTopTarget } from './components/ScrollTop/types'
 export { default as WiBlockUI } from './components/BlockUI/BlockUI.vue'

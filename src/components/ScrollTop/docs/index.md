@@ -24,7 +24,7 @@ import { WiScrollTop } from '@well-insight/ui'
 <template>
   <div style="height: 8rem; overflow: auto; position: relative">
     <div style="height: 40rem">向下滚动…</div>
-    <WiScrollTop :threshold="80" target="parent" />
+    <WiScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```
@@ -35,5 +35,7 @@ import { WiScrollTop } from '@well-insight/ui'
 | --- | --- | --- | --- |
 | `threshold` | `number` | `400` | 显示阈值（px）。 |
 | `target` | `'window' \| 'parent'` | `'window'` | 滚动目标。 |
+| `right` | `string \| number` | — | 距右边缘；数字为 px。 |
+| `bottom` | `string \| number` | — | 距底边缘；数字为 px。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |

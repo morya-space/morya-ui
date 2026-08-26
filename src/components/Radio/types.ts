@@ -1,9 +1,16 @@
+import type { ComputedRef, InjectionKey } from 'vue'
+import type { WiSizeInput } from '../../shared/types'
+
+export type RadioValue = string | number | boolean
+export type RadioSize = WiSizeInput
+
 export interface RadioProps {
-  modelValue?: string | number | boolean
-  value: string | number | boolean
+  modelValue?: RadioValue
+  value: RadioValue
   label?: string
   id?: string
   name?: string
+  size?: RadioSize
   /** Marks the control invalid. */
   invalid?: boolean
   disabled?: boolean
@@ -11,5 +18,28 @@ export interface RadioProps {
 }
 
 export interface RadioEmits {
-  (event: 'update:modelValue', value: string | number | boolean): void
+  (event: 'update:modelValue', value: RadioValue): void
 }
+
+export interface RadioGroupProps {
+  modelValue?: RadioValue
+  name?: string
+  size?: RadioSize
+  disabled?: boolean
+  invalid?: boolean
+}
+
+export interface RadioGroupEmits {
+  (event: 'update:modelValue', value: RadioValue): void
+}
+
+export interface WiRadioGroupContext {
+  modelValue: ComputedRef<RadioValue | undefined>
+  name: ComputedRef<string | undefined>
+  size: ComputedRef<RadioSize | undefined>
+  disabled: ComputedRef<boolean>
+  invalid: ComputedRef<boolean>
+  select: (value: RadioValue) => void
+}
+
+export const WI_RADIO_GROUP_KEY: InjectionKey<WiRadioGroupContext> = Symbol('wiRadioGroup')

@@ -19,12 +19,34 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'show'): void
   (event: 'hide'): void
+  (event: 'after-leave'): void
 }>()
 
 const config = useWiConfig()
 const locale = useWiLocale()
 const drawerElement = ref<HTMLElement | null>(null)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
+
+function toCssSize(value?: string | number) {
+  if (value == null) return undefined
+  return typeof value === 'number' ? `${value}px` : value
+}
+
+const paneStyle = computed(() => {
+  const style: Record<string, string> = {}
+  if (props.position === 'left' || props.position === 'right') {
+    const width = toCssSize(props.width)
+    if (width) style.width = width
+  }
+  if (props.position === 'top' || props.position === 'bottom') {
+    const height = toCssSize(props.height)
+    if (height) {
+      style.height = height
+      style.maxHeight = height
+    }
+  }
+  return style
+})
 
 function close() {
   emit('update:modelValue', false)
@@ -46,7 +68,7 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wi-drawer">
+    <Transition name="wi-drawer" @after-leave="emit('after-leave')">
       <div
         v-if="modelValue"
         class="wi-drawer-backdrop"
@@ -57,6 +79,7 @@ useModalOverlay({
           ref="drawerElement"
           class="wi-drawer"
           :class="`wi-drawer--${position}`"
+          :style="paneStyle"
           role="dialog"
           :aria-modal="modal || undefined"
           :aria-label="header"

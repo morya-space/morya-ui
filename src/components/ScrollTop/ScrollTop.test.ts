@@ -38,4 +38,18 @@ describe('WiScrollTop', () => {
     expect(wrapper.find('.wi-scrolltop').exists()).toBe(false)
     wrapper.unmount()
   })
+
+  it('applies right and bottom offsets', async () => {
+    Object.defineProperty(window, 'scrollY', { configurable: true, value: 500 })
+    const wrapper = mount(WiScrollTop, {
+      props: { threshold: 400, right: 24, bottom: 32 },
+      attachTo: document.body,
+    })
+    window.dispatchEvent(new Event('scroll'))
+    await nextTick()
+    const button = document.body.querySelector('.wi-scrolltop') as HTMLButtonElement
+    expect(button.style.right).toBe('24px')
+    expect(button.style.bottom).toBe('32px')
+    wrapper.unmount()
+  })
 })

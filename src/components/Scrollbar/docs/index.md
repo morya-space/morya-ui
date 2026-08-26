@@ -79,7 +79,9 @@ const count = ref(3)
 
 ## Horizontal
 
-内容宽度超出容器时显示横向滚动条。
+内容宽度超出容器时显示横向滚动条。`trigger="none"` 与 `always` 都会常显滑块；默认 `trigger="hover"` 在悬停时显示。
+
+`WiLayout` 在 `native-scrollbar={false}` 时会接入本组件。
 
 ```vue preview
 <script setup lang="ts">
@@ -230,6 +232,7 @@ function loadMore(direction: ScrollbarDirection) {
 | noresize | `boolean` | `false` | 不监听尺寸变化 |
 | tag | `string` | `div` | 内容区标签 |
 | always | `boolean` | `false` | 始终显示滑块 |
+| trigger | `'hover' \| 'none'` | `'hover'` | `none` 常显滑块；`always` 为 true 时仍常显 |
 | minSize | `number` | `20` | 滑块最小尺寸 |
 | id / role / ariaLabel / ariaOrientation | a11y | — | 内容区无障碍属性 |
 | tabindex | `number \| string` | — | wrap 的 tabindex |

@@ -28,4 +28,13 @@ describe('WiSwitch', () => {
     expect(wrapper.classes()).toContain('wi-switch--invalid')
     expect(wrapper.get('input').attributes('aria-invalid')).toBe('true')
   })
+
+  it('shows loading and checked text', () => {
+    const wrapper = mount(WiSwitch, {
+      props: { modelValue: true, loading: true, checkedText: 'On', uncheckedText: 'Off' },
+    })
+    expect(wrapper.classes()).toContain('wi-switch--loading')
+    expect(wrapper.get('.wi-switch__text').text()).toBe('On')
+    expect(wrapper.get('input').attributes('disabled')).toBeDefined()
+  })
 })

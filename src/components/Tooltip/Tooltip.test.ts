@@ -53,4 +53,20 @@ describe('WiTooltip', () => {
     expect(wrapper.get('[role="tooltip"]').text()).toBe('Inline')
     expect(wrapper.find('.wi-tooltip__content--teleported').exists()).toBe(false)
   })
+
+  it('respects hideDelay before hiding', async () => {
+    const wrapper = mount(WiTooltip, {
+      props: { content: 'Stay', hideDelay: 200, teleport: false },
+      slots: { default: '<button>Info</button>' },
+    })
+    await wrapper.trigger('mouseenter')
+    await nextTick()
+    expect(wrapper.find('[role="tooltip"]').exists()).toBe(true)
+    await wrapper.trigger('mouseleave')
+    expect(wrapper.find('[role="tooltip"]').exists()).toBe(true)
+    await vi.advanceTimersByTimeAsync(200)
+    await nextTick()
+    expect(wrapper.find('[role="tooltip"]').exists()).toBe(false)
+    wrapper.unmount()
+  })
 })

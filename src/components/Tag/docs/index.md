@@ -72,6 +72,21 @@ import { WiTag } from '@well-insight/ui'
 </template>
 ```
 
+## Closable
+
+```vue preview
+<script setup lang="ts">
+import { WiTag } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+    <WiTag value="Draft" closable bordered />
+    <WiTag value="Small" size="small" severity="success" closable />
+  </div>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -80,6 +95,17 @@ import { WiTag } from '@well-insight/ui'
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
 | `icon` | `IconName` | — | `WiIcon` 图标名称。 |
+| `closable` | `boolean` | `false` | 显示关闭按钮。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `bordered` | `boolean` | `false` | 描边。 |
+| `color` | `string` | — | 自定义颜色。 |
+| `disabled` | `boolean` | `false` | 禁用关闭。 |
+
+## Events
+
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `close` | `MouseEvent` | 点击关闭。 |
 
 ## Slots
 

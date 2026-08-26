@@ -67,6 +67,33 @@ const tabs = [
 </template>
 ```
 
+## Extra
+
+`#extra` 渲染在标题右侧；点击不会切换展开。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiAccordion, WiButton } from '@well-insight/ui'
+
+const active = ref('a')
+const tabs = [
+  { value: 'a', header: 'Section A' },
+]
+</script>
+
+<template>
+  <WiAccordion v-model="active" :tabs="tabs">
+    <template #extra="{ tab }">
+      <WiButton :label="tab.header" size="small" text />
+    </template>
+    <template #a>
+      <p style="margin:0">Content.</p>
+    </template>
+  </WiAccordion>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -86,3 +113,4 @@ const tabs = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `[tab.value]` | 对应面板内容，插槽名与 `tabs[].value` 一致。 |
+| `extra` | 标题右侧扩展，`{ tab }`；点击不会折叠。 |

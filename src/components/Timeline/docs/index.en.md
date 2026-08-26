@@ -50,6 +50,28 @@ const events = [
 </template>
 ```
 
+## Pending & item slot
+
+`pending` (`true` or a string) appends a trailing item. `#item` replaces the whole event.
+
+```vue preview
+<script setup lang="ts">
+import { WiTimeline } from '@well-insight/ui'
+
+const events = [
+  { status: 'Done', date: 'Mon', content: 'Shipped' },
+]
+</script>
+
+<template>
+  <WiTimeline :value="events" pending="Waiting">
+    <template #item="{ item }">
+      <span>{{ item.content || item.status }}</span>
+    </template>
+  </WiTimeline>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -57,6 +79,7 @@ const events = [
 | `value` | `TimelineEvent[]` | — | Events. |
 | `align` | `'left' \| 'right' \| 'alternate'` | `'left'` | Alignment for vertical layout. |
 | `layout` | `'vertical' \| 'horizontal'` | `'vertical'` | Direction. |
+| `pending` | `boolean \| string` | — | Append a trailing pending item; a string is used as the label. |
 
 `TimelineEvent`: `status` / `content` / `date` / `icon` (`IconName` or text) / `color` / `severity`.
 
@@ -64,6 +87,7 @@ const events = [
 
 | Slot | Description |
 | --- | --- |
+| `item` | Whole event, `{ item, index }`; falls back to opposite / marker / content. |
 | `content` | Main content, `{ item, index }`. |
 | `opposite` | Opposite-side content; shows `date` by default. |
 | `marker` | Custom node marker. |

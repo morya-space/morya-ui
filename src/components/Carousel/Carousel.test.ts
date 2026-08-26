@@ -23,4 +23,15 @@ describe('WiCarousel', () => {
     await wrapper.find('[aria-label="上一页"]').trigger('click')
     expect(wrapper.text()).toContain('b')
   })
+
+  it('hides arrows and shows indicators', async () => {
+    const wrapper = mount(WiCarousel, {
+      props: { value: ['a', 'b', 'c'], showArrows: false, showIndicators: true },
+    })
+    expect(wrapper.find('.wi-carousel__nav').exists()).toBe(false)
+    const dots = wrapper.findAll('.wi-carousel__indicator')
+    expect(dots.length).toBeGreaterThan(1)
+    await dots[1]!.trigger('click')
+    expect(wrapper.emitted('update:page')?.at(-1)).toEqual([1])
+  })
 })

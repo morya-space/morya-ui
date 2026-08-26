@@ -34,6 +34,28 @@ const value = ['春', '夏', '秋', '冬']
 </template>
 ```
 
+## Autoplay
+
+`autoplay` 按 `interval`（默认 3000ms）自动翻页。`show-arrows` / `show-indicators` 控制箭头与指示点。
+
+```vue preview
+<script setup lang="ts">
+import { WiCarousel } from '@well-insight/ui'
+
+const value = ['A', 'B', 'C']
+</script>
+
+<template>
+  <WiCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
+    <template #item="{ item }">
+      <div style="padding:1.5rem;text-align:center;background:var(--wi-color-surface-muted, #f3f4f6);border-radius:var(--wi-radius-md)">
+        {{ item }}
+      </div>
+    </template>
+  </WiCarousel>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -41,6 +63,10 @@ const value = ['春', '夏', '秋', '冬']
 | `value` | `unknown[]` | — | 内容列表。 |
 | `numVisible` | `number` | `1` | 同时可见项数。 |
 | `circular` | `boolean` | `false` | 循环翻页。 |
+| `autoplay` | `boolean` | `false` | 自动翻页。 |
+| `interval` | `number` | `3000` | 自动翻页间隔（毫秒）。 |
+| `showArrows` | `boolean` | `true` | 显示左右箭头。 |
+| `showIndicators` | `boolean` | `true` | 显示指示点。 |
 
 ## Slots
 

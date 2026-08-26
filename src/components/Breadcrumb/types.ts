@@ -12,4 +12,6 @@ export interface BreadcrumbHome {
 export interface BreadcrumbProps {
   model: BreadcrumbItem[]
   home?: BreadcrumbHome
+  /** Separator between items. Defaults to `/`. */
+  separator?: string
 }

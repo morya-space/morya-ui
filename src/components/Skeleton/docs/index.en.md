@@ -66,6 +66,20 @@ import { WiSkeleton } from '@well-insight/ui'
 </template>
 ```
 
+## Text & repeat
+
+`text` renders a text-line skeleton; `repeat` duplicates rows.
+
+```vue preview
+<script setup lang="ts">
+import { WiSkeleton } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiSkeleton text :repeat="3" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -75,3 +89,5 @@ import { WiSkeleton } from '@well-insight/ui'
 | `height` | `string` | — | Height (CSS value). |
 | `borderRadius` | `string` | — | Border-radius override. Forced to a full circle when the shape is circular. |
 | `animation` | `'wave' \| 'none'` | `'wave'` | Loading animation. |
+| `text` | `boolean` | `false` | Render as a text-line height. |
+| `repeat` | `number` | `1` | Number of repeated rows. |

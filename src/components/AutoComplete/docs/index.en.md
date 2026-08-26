@@ -52,12 +52,35 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 </template>
 ```
 
+## Options & loading
+
+`suggestions` can be strings or `{ label, value }` objects. `loading` / `clearable` control the spinner and clear button.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiAutoComplete } from '@well-insight/ui'
+
+const value = ref('')
+const suggestions = [
+  { label: 'Vue', value: 'vue' },
+  { label: 'Vite', value: 'vite' },
+]
+</script>
+
+<template>
+  <WiAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="Option objects…" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `modelValue` | `string` | `''` | Input value. |
-| `suggestions` | `string[]` | `[]` | Suggestion list. |
+| `suggestions` | `(string \| { label: string; value: string })[]` | `[]` | Suggestion list. |
+| `loading` | `boolean` | `false` | Loading state. |
+| `clearable` | `boolean` | `false` | Show a clear button. |
 | `dropdown` | `boolean` | `false` | Show dropdown button. |
 | `placeholder` | `string` | — | Placeholder. |
 | `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |

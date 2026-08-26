@@ -75,6 +75,8 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 | `dismissable` | `boolean` | `true` | Close when clicking the mask. |
 | `showCloseIcon` | `boolean` | `true` | Show the close button. |
 | `header` | `string` | — | Header text. |
+| `width` | `number \| string` | — | Width for left/right drawers (`number` = px). |
+| `height` | `number \| string` | — | Height for top/bottom drawers (`number` = px). |
 | `blockScroll` | `boolean` | `true` | Lock `body` scroll while open. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
@@ -86,6 +88,7 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 | `update:modelValue` | `boolean` | Visibility change. |
 | `show` | — | Emitted when opening. |
 | `hide` | — | Emitted after closing. |
+| `after-leave` | — | Emitted when the leave animation finishes. |
 
 ## Slots
 

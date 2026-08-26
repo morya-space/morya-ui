@@ -17,5 +17,7 @@ export interface DividerProps {
   type?: DividerType
   /** Label alignment for horizontal dividers with content. */
   align?: DividerAlign
+  /** Alias of `align`. */
+  titlePlacement?: DividerAlign
   label?: string
 }

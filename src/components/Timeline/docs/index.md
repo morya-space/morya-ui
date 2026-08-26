@@ -50,6 +50,28 @@ const events = [
 </template>
 ```
 
+## Pending & item slot
+
+`pending` 为 `true` 或文案时追加末尾待处理节点。`#item` 可整项自定义。
+
+```vue preview
+<script setup lang="ts">
+import { WiTimeline } from '@well-insight/ui'
+
+const events = [
+  { status: 'Done', date: '周一', content: 'Shipped' },
+]
+</script>
+
+<template>
+  <WiTimeline :value="events" pending="Waiting">
+    <template #item="{ item }">
+      <span>{{ item.content || item.status }}</span>
+    </template>
+  </WiTimeline>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -57,6 +79,7 @@ const events = [
 | `value` | `TimelineEvent[]` | — | 事件。 |
 | `align` | `'left' \| 'right' \| 'alternate'` | `'left'` | 垂直布局对齐。 |
 | `layout` | `'vertical' \| 'horizontal'` | `'vertical'` | 方向。 |
+| `pending` | `boolean \| string` | — | 追加末尾待处理项；字符串作为文案。 |
 
 `TimelineEvent`：`status` / `content` / `date` / `icon`（`IconName` 或文字）/ `color` / `severity`。
 
@@ -64,6 +87,7 @@ const events = [
 
 | 插槽 | 说明 |
 | --- | --- |
+| `item` | 整项自定义，`{ item, index }`；不传时使用 opposite / marker / content。 |
 | `content` | 主内容，`{ item, index }`。 |
 | `opposite` | 对侧内容，默认显示 `date`。 |
 | `marker` | 自定义节点圆点。 |

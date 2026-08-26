@@ -27,6 +27,21 @@ const collapsed = ref(false)
 <template>
   <WiPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">Collapsible panel content.</p>
+    <template #footer>Actions</template>
+  </WiPanel>
+</template>
+```
+
+## Size
+
+```vue preview
+<script setup lang="ts">
+import { WiPanel } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiPanel header="Small" size="small">
+    <p style="margin:0">A more compact panel.</p>
   </WiPanel>
 </template>
 ```
@@ -39,6 +54,7 @@ const collapsed = ref(false)
 | `toggleable` | `boolean` | `false` | Whether the panel can collapse. |
 | `collapsed` | `boolean` | `false` | Collapsed state. |
 | `modelValue` | `boolean` | — | `v-model` alias for `collapsed`. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 
 ## Events
 
@@ -53,3 +69,4 @@ const collapsed = ref(false)
 | --- | --- |
 | `default` | Panel content. |
 | `header` | Custom header. |
+| `footer` | Footer; hidden when collapsed. |

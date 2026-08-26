@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
 import type { SliderProps } from './types'
 
@@ -10,9 +10,12 @@ const props = withDefaults(defineProps<SliderProps>(), {
   step: 1,
   range: false,
   disabled: false,
+  tooltip: false,
+  vertical: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | number[]): void }>()
 const locale = useWiLocale()
+const hovering = ref(false)
 
 const singleValue = computed(() => {
   if (Array.isArray(props.modelValue)) return props.modelValue[0] ?? props.min
@@ -26,11 +29,34 @@ const rangeValues = computed(() => {
   return [props.min, props.max] as [number, number]
 })
 
+const markItems = computed(() => {
+  if (!props.marks) return []
+  const span = props.max - props.min || 1
+  if (Array.isArray(props.marks)) {
+    return props.marks.map((value) => ({
+      value,
+      label: String(value),
+      percent: ((value - props.min) / span) * 100,
+    }))
+  }
+  return Object.entries(props.marks).map(([raw, label]) => {
+    const value = Number(raw)
+    return { value, label, percent: ((value - props.min) / span) * 100 }
+  })
+})
+
+const tooltipText = computed(() => {
+  if (props.range) return `${rangeValues.value[0]} – ${rangeValues.value[1]}`
+  return String(singleValue.value)
+})
+
 const rootClass = computed(() => [
   'wi-slider',
   {
     'wi-slider--disabled': props.disabled,
     'wi-slider--range': props.range,
+    'wi-slider--vertical': props.vertical,
+    'wi-slider--tooltip': props.tooltip,
   },
 ])
 
@@ -52,7 +78,14 @@ function emitRange(index: 0 | 1, event: Event) {
 </script>
 
 <template>
-  <div :class="rootClass">
+  <div
+    :class="rootClass"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
+    @focusin="hovering = true"
+    @focusout="hovering = false"
+  >
+    <span v-if="tooltip && hovering" class="wi-slider__tooltip">{{ tooltipText }}</span>
     <template v-if="range">
       <input
         class="wi-slider__input wi-slider__input--start"
@@ -62,6 +95,7 @@ function emitRange(index: 0 | 1, event: Event) {
         :step="step"
         :value="rangeValues[0]"
         :disabled="disabled"
+        :orient="vertical ? 'vertical' : undefined"
         :aria-label="locale.rangeStart"
         @input="emitRange(0, $event)"
       />
@@ -73,6 +107,7 @@ function emitRange(index: 0 | 1, event: Event) {
         :step="step"
         :value="rangeValues[1]"
         :disabled="disabled"
+        :orient="vertical ? 'vertical' : undefined"
         :aria-label="locale.rangeEnd"
         @input="emitRange(1, $event)"
       />
@@ -86,7 +121,18 @@ function emitRange(index: 0 | 1, event: Event) {
       :step="step"
       :value="singleValue"
       :disabled="disabled"
+      :orient="vertical ? 'vertical' : undefined"
       @input="emitSingle"
     />
+    <div v-if="markItems.length" class="wi-slider__marks" aria-hidden="true">
+      <span
+        v-for="mark in markItems"
+        :key="mark.value"
+        class="wi-slider__mark"
+        :style="vertical ? { bottom: `${mark.percent}%` } : { left: `${mark.percent}%` }"
+      >
+        {{ mark.label }}
+      </span>
+    </div>
   </div>
 </template>

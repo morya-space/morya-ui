@@ -16,9 +16,14 @@ const emit = defineEmits<{
 const locale = useWiLocale()
 const draft = ref('')
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
+const separators = computed(() => {
+  if (!props.separator) return []
+  return Array.isArray(props.separator) ? props.separator : [props.separator]
+})
+const atMax = computed(() => props.max != null && props.modelValue.length >= props.max)
 
 function addTag(raw = draft.value) {
-  if (props.disabled) return
+  if (props.disabled || atMax.value) return
   const tag = raw.trim()
   if (!tag) return
   if (props.modelValue.includes(tag)) {
@@ -29,6 +34,21 @@ function addTag(raw = draft.value) {
   draft.value = ''
 }
 
+function addMany(raw: string) {
+  const parts = separators.value.length
+    ? raw.split(new RegExp(`[${separators.value.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('')}]`))
+    : [raw]
+  let next = [...props.modelValue]
+  for (const part of parts) {
+    const tag = part.trim()
+    if (!tag || next.includes(tag)) continue
+    if (props.max != null && next.length >= props.max) break
+    next.push(tag)
+  }
+  if (next.length !== props.modelValue.length) emit('update:modelValue', next)
+  draft.value = ''
+}
+
 function removeTag(index: number) {
   if (props.disabled) return
   const next = props.modelValue.filter((_, i) => i !== index)
@@ -36,6 +56,11 @@ function removeTag(index: number) {
 }
 
 function onKeydown(event: KeyboardEvent) {
+  if (separators.value.includes(event.key)) {
+    event.preventDefault()
+    addTag()
+    return
+  }
   if (event.key === 'Enter') {
     event.preventDefault()
     addTag()
@@ -44,6 +69,16 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Backspace' && !draft.value && props.modelValue.length) {
     removeTag(props.modelValue.length - 1)
   }
+}
+
+function onInput(event: Event) {
+  const value = (event.target as HTMLInputElement).value
+  const hit = separators.value.find((sep) => value.includes(sep))
+  if (hit) {
+    addMany(value)
+    return
+  }
+  draft.value = value
 }
 
 function onBlur() {
@@ -70,11 +105,12 @@ function onBlur() {
       </button>
     </span>
     <input
-      v-model="draft"
+      :value="draft"
       class="wi-inputtags__input"
       type="text"
       :placeholder="modelValue.length ? '' : addPlaceholder"
-      :disabled="disabled"
+      :disabled="disabled || atMax"
+      @input="onInput"
       @keydown="onKeydown"
       @blur="onBlur"
     />

@@ -22,4 +22,10 @@ describe('WiInputOtp', () => {
     const wrapper = mount(WiInputOtp, { props: { length: 6 } })
     expect(wrapper.findAll('.wi-inputotp__input')).toHaveLength(6)
   })
+
+  it('masks digits', () => {
+    const wrapper = mount(WiInputOtp, { props: { modelValue: '12', mask: true } })
+    expect(wrapper.findAll('.wi-inputotp__input')[0]!.attributes('type')).toBe('password')
+    expect(wrapper.classes()).toContain('wi-inputotp--mask')
+  })
 })

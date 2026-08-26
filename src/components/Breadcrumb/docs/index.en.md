@@ -32,9 +32,35 @@ const items = [
 </template>
 ```
 
+## Separator
+
+`separator` customizes the delimiter; `#separator` can replace it.
+
+```vue preview
+<script setup lang="ts">
+import { WiBreadcrumb } from '@well-insight/ui'
+
+const items = [
+  { label: 'Library', to: '/lib' },
+  { label: 'Docs' },
+]
+</script>
+
+<template>
+  <WiBreadcrumb :model="items" separator=">" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `model` | `{ label: string; to?: string; disabled?: boolean }[]` | — | Path items. |
 | `home` | `{ label?: string; to?: string }` | — | Home item; default label is `Home`. |
+| `separator` | `string` | `'/'` | Separator text. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `separator` | Custom separator. |

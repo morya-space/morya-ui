@@ -41,6 +41,23 @@ import { WiRating } from '@well-insight/ui'
 </template>
 ```
 
+## Half
+
+`allowHalf` enables 0.5 increments. `allowClear` is an alias of `cancel` and takes precedence when set.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiRating } from '@well-insight/ui'
+
+const value = ref(2.5)
+</script>
+
+<template>
+  <WiRating v-model="value" allow-half />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -48,6 +65,8 @@ import { WiRating } from '@well-insight/ui'
 | `modelValue` | `number` | `0` | Current rating. |
 | `stars` | `number` | `5` | Number of stars. |
 | `cancel` | `boolean` | `true` | Show the clear button. |
+| `allowClear` | `boolean \| null` | `null` | Alias of `cancel`; takes precedence when set. |
+| `allowHalf` | `boolean` | `false` | Allow half-star values. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `disabled` | `boolean` | `false` | Disabled. |
 

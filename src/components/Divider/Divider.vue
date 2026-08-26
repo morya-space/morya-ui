@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<DividerProps>(), {
 
 const slots = useSlots()
 const resolvedLayout = computed(() => props.layout ?? props.orientation ?? 'horizontal')
+const resolvedAlign = computed(() => props.titlePlacement ?? props.align)
 const hasLabel = computed(() => Boolean(props.label || slots.default))
 
 const rootClass = computed(() => [
@@ -16,8 +17,8 @@ const rootClass = computed(() => [
   `wi-divider--${resolvedLayout.value}`,
   `wi-divider--${props.type}`,
   {
-    [`wi-divider--align-${props.align}`]:
-      hasLabel.value && resolvedLayout.value === 'horizontal' && props.align !== 'center',
+    [`wi-divider--align-${resolvedAlign.value}`]:
+      hasLabel.value && resolvedLayout.value === 'horizontal' && resolvedAlign.value !== 'center',
   },
 ])
 </script>

@@ -64,6 +64,21 @@ import { WiSwitch } from '@well-insight/ui'
 </template>
 ```
 
+## Loading & text
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiSwitch } from '@well-insight/ui'
+
+const on = ref(true)
+</script>
+
+<template>
+  <WiSwitch v-model="on" checked-text="On" unchecked-text="Off" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -74,6 +89,10 @@ import { WiSwitch } from '@well-insight/ui'
 | `inputId` | `string` | — | Alias for `id`. |
 | `name` | `string` | — | Native name. |
 | `value` | `string` | — | Native value. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `loading` | `boolean` | `false` | Loading; blocks toggle. |
+| `checkedText` | `string` | — | Track text when on. |
+| `uncheckedText` | `string` | — | Track text when off. |
 | `invalid` | `boolean` | `false` | Invalid (validation failed) state. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Native required. |

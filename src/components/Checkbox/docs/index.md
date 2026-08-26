@@ -59,6 +59,27 @@ import { WiCheckbox } from '@well-insight/ui'
 </template>
 ```
 
+## Group
+
+`WiCheckboxGroup` 以数组为 `v-model`，子项用 `value` 标识。`indeterminate` 表示部分选中。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiCheckbox, WiCheckboxGroup } from '@well-insight/ui'
+
+const selected = ref(['vue'])
+</script>
+
+<template>
+  <WiCheckboxGroup v-model="selected">
+    <WiCheckbox value="vue" label="Vue" />
+    <WiCheckbox value="react" label="React" />
+    <WiCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
+  </WiCheckboxGroup>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -67,7 +88,9 @@ import { WiCheckbox } from '@well-insight/ui'
 | `label` | `string` | — | 标签文案；也可用默认插槽。 |
 | `id` | `string` | — | 原生 id。 |
 | `name` | `string` | — | 原生 name。 |
-| `value` | `string` | — | 原生 value。 |
+| `value` | `string \| number \| boolean` | — | 组内选项值。 |
+| `indeterminate` | `boolean` | `false` | 部分选中。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 原生 required。 |

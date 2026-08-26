@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<ScrollbarProps>(), {
   tag: 'div',
   minSize: 20,
   tabindex: undefined,
+  trigger: 'hover',
 })
 
 const emit = defineEmits<ScrollbarEmits>()
@@ -85,6 +86,7 @@ const wrapClassList = computed(() => [
 ])
 
 const viewClassList = computed(() => ['wi-scrollbar__view', props.viewClass])
+const alwaysVisible = computed(() => Boolean(props.always || props.trigger === 'none'))
 
 provide(
   scrollbarContextKey,
@@ -307,8 +309,8 @@ defineExpose({
     </div>
 
     <template v-if="!native">
-      <Thumb :move="moveX" :ratio="ratioX" :size="sizeWidth" :always="always" />
-      <Thumb vertical :move="moveY" :ratio="ratioY" :size="sizeHeight" :always="always" />
+      <Thumb :move="moveX" :ratio="ratioX" :size="sizeWidth" :always="alwaysVisible" />
+      <Thumb vertical :move="moveY" :ratio="ratioY" :size="sizeHeight" :always="alwaysVisible" />
     </template>
   </div>
 </template>

@@ -56,6 +56,23 @@ import { WiCard, WiTag } from '@well-insight/ui'
 </template>
 ```
 
+## Cover & Hover
+
+```vue preview
+<script setup lang="ts">
+import { WiCard } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiCard title="Cover card" hoverable size="small">
+    <template #cover>
+      <div style="height:6rem;background:color-mix(in srgb, var(--wi-color-primary) 18%, transparent)" />
+    </template>
+    Hover to lift. Set `bordered` to false for a borderless surface.
+  </WiCard>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -63,6 +80,9 @@ import { WiCard, WiTag } from '@well-insight/ui'
 | `title` | `string` | — | 标题。 |
 | `subtitle` | `string` | — | 副标题。 |
 | `ariaLabel` | `string` | — | 可访问名称；默认回退到 `title`。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 内边距尺寸。 |
+| `bordered` | `boolean` | `true` | 是否描边。 |
+| `hoverable` | `boolean` | `false` | 悬停抬起。 |
 
 ## Slots
 
@@ -71,3 +91,4 @@ import { WiCard, WiTag } from '@well-insight/ui'
 | `default` | 正文。 |
 | `header` | 自定义头部（优先于 `title` / `subtitle`）。 |
 | `footer` | 底部区域（推荐用插槽，无 footer prop）。 |
+| `cover` | 封面，渲染在头部上方。 |

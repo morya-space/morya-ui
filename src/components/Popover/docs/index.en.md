@@ -56,12 +56,36 @@ const open = ref(false)
 </template>
 ```
 
+## Hover
+
+`trigger` defaults to `manual` (`v-model` only). Use `hover` / `click` / `focus` to let the component open itself.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiPopover } from '@well-insight/ui'
+
+const open = ref(false)
+</script>
+
+<template>
+  <WiPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
+    <WiButton label="Hover me" severity="secondary" />
+    <template #content>
+      <p style="margin:0">Opens on hover.</p>
+    </template>
+  </WiPopover>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'bottom-start' \| 'bottom-end'` | `'bottom'` | Position relative to the trigger. |
+| `trigger` | `'manual' \| 'click' \| 'hover' \| 'focus'` | `'manual'` | How it opens. |
+| `showDelay` / `hideDelay` | `number` | `0` / `200` | Hover/focus delay in ms. |
 | `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
 

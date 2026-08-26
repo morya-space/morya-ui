@@ -1,2 +1,3 @@
 export { default as WiAvatar } from './Avatar.vue'
-export type { AvatarProps, AvatarShape, AvatarSize } from './types'
+export { default as WiAvatarGroup } from './AvatarGroup.vue'
+export type { AvatarEmits, AvatarGroupProps, AvatarProps, AvatarShape, AvatarSize } from './types'

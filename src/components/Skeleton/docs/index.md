@@ -66,6 +66,20 @@ import { WiSkeleton } from '@well-insight/ui'
 </template>
 ```
 
+## Text & repeat
+
+`text` 渲染为行高骨架；`repeat` 重复多行。
+
+```vue preview
+<script setup lang="ts">
+import { WiSkeleton } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiSkeleton text :repeat="3" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -75,3 +89,5 @@ import { WiSkeleton } from '@well-insight/ui'
 | `height` | `string` | — | 高度（CSS 值）。 |
 | `borderRadius` | `string` | — | 圆角覆盖。圆形时由样式强制为全圆。 |
 | `animation` | `'wave' \| 'none'` | `'wave'` | 加载动画。 |
+| `text` | `boolean` | `false` | 按文本行高度渲染。 |
+| `repeat` | `number` | `1` | 重复行数。 |

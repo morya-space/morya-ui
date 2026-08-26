@@ -12,6 +12,10 @@ export interface DrawerProps {
   dismissable?: boolean
   showCloseIcon?: boolean
   header?: string
+  /** Panel width for left/right. Number is pixels. */
+  width?: string | number
+  /** Panel height for top/bottom. Number is pixels. */
+  height?: string | number
   /** Lock `document.body` overflow while open. */
   blockScroll?: boolean
   /** Teleport overlay. Defaults to `true`. */
@@ -24,4 +28,5 @@ export interface DrawerEmits {
   (event: 'update:modelValue', value: boolean): void
   (event: 'show'): void
   (event: 'hide'): void
+  (event: 'after-leave'): void
 }

@@ -1,10 +1,20 @@
+import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { WiAppendTo } from '../../shared/overlay'
+import type { IconName } from '../Icon/types'
+
+export type ConfirmPopupPlacement = 'top' | 'bottom' | 'left' | 'right'
 
 export interface ConfirmPopupProps {
   modelValue?: boolean
   message?: string
   acceptLabel?: string
   rejectLabel?: string
+  /** Icon beside the message. */
+  icon?: IconName
+  /** Return `false` to keep the popup open and skip the `accept` emit. */
+  beforeAccept?: AsyncGuard
+  /** Placement relative to `target`. */
+  placement?: ConfirmPopupPlacement
   /** Anchor element for positioning. */
   target?: HTMLElement | null
   /** Fallback fixed position when `target` is absent. */

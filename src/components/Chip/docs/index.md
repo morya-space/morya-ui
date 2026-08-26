@@ -26,6 +26,7 @@ import { WiChip } from '@well-insight/ui'
     <WiChip label="Basic" />
     <WiChip label="With Icon" icon="check" />
     <WiChip label="Removable" removable />
+    <WiChip label="Success" severity="success" size="small" />
     <WiChip label="Disabled" removable disabled />
   </div>
 </template>
@@ -40,6 +41,8 @@ import { WiChip } from '@well-insight/ui'
 | `image` | `string` | — | 前置图片 URL（优先于 icon）。 |
 | `removable` | `boolean` | `false` | 显示 × 移除按钮。 |
 | `disabled` | `boolean` | `false` | 禁用交互。 |
+| `severity` | `WiTagSeverity \| 'warning'` | — | 语义色。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 
 ## Events
 

@@ -39,4 +39,22 @@ describe('WiAutoComplete', () => {
     expect(document.body.querySelector('.wi-autocomplete__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('selects option objects and can clear', async () => {
+    const wrapper = mount(WiAutoComplete, {
+      props: {
+        suggestions: [{ label: 'Apple', value: 'apple' }],
+        modelValue: 'ap',
+        clearable: true,
+        teleport: false,
+      },
+    })
+    await wrapper.find('.wi-autocomplete__input').trigger('focus')
+    await nextTick()
+    await wrapper.get('.wi-autocomplete__item').trigger('mousedown')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['apple'])
+    await wrapper.setProps({ modelValue: 'apple' })
+    await wrapper.get('.wi-autocomplete__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([''])
+  })
 })

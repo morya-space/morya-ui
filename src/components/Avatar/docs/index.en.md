@@ -32,6 +32,25 @@ import { WiAvatar } from '@well-insight/ui'
 </template>
 ```
 
+## Group
+
+`WiAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
+
+```vue preview
+<script setup lang="ts">
+import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiAvatarGroup :max="3">
+    <WiAvatar label="AL" />
+    <WiAvatar label="BK" />
+    <WiAvatar label="CN" />
+    <WiAvatar label="DY" />
+  </WiAvatarGroup>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -41,3 +60,11 @@ import { WiAvatar } from '@well-insight/ui'
 | `icon` | `IconName` | — | `WiIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |
+
+## Events
+
+| Event | Payload | Description |
+| --- | --- | --- |
+| `error` | `Event` | Image failed to load. |
+
+`WiAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.

@@ -27,4 +27,15 @@ describe('WiBadge', () => {
     const wrapper = mount(WiBadge, { props: { value: 1, size: 'sm' } })
     expect(wrapper.classes()).toContain('wi-badge--small')
   })
+
+  it('wraps content and caps value with max', () => {
+    const wrapper = mount(WiBadge, {
+      props: { value: 120, max: 99, processing: true },
+      slots: { default: '<button>Inbox</button>' },
+    })
+    expect(wrapper.classes()).toContain('wi-badge-wrap')
+    expect(wrapper.get('.wi-badge').text()).toBe('99+')
+    expect(wrapper.get('.wi-badge').classes()).toContain('wi-badge--processing')
+    expect(wrapper.get('button').text()).toBe('Inbox')
+  })
 })

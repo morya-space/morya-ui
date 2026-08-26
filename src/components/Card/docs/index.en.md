@@ -56,6 +56,23 @@ import { WiCard, WiTag } from '@well-insight/ui'
 </template>
 ```
 
+## Cover & Hover
+
+```vue preview
+<script setup lang="ts">
+import { WiCard } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiCard title="Cover card" hoverable size="small">
+    <template #cover>
+      <div style="height:6rem;background:color-mix(in srgb, var(--wi-color-primary) 18%, transparent)" />
+    </template>
+    Hover to lift. Set `bordered` to false for a borderless surface.
+  </WiCard>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -63,6 +80,9 @@ import { WiCard, WiTag } from '@well-insight/ui'
 | `title` | `string` | — | Title. |
 | `subtitle` | `string` | — | Subtitle. |
 | `ariaLabel` | `string` | — | Accessible name; falls back to `title` by default. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Padding size. |
+| `bordered` | `boolean` | `true` | Show a border. |
+| `hoverable` | `boolean` | `false` | Elevate on hover. |
 
 ## Slots
 
@@ -71,3 +91,4 @@ import { WiCard, WiTag } from '@well-insight/ui'
 | `default` | Body. |
 | `header` | Custom header (takes precedence over `title` / `subtitle`). |
 | `footer` | Footer area (use the slot; there is no footer prop). |
+| `cover` | Cover above the header. |
