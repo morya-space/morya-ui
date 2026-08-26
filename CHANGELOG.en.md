@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.8
+
+### Features
+
+- enhance package exports and sideEffects for improved component management
+
 ## 0.1.7
 
 ### Features

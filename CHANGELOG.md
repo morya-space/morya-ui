@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.8
+
+### 新功能
+
+- enhance package exports and sideEffects for improved component management
+
 ## 0.1.7
 
 ### 新功能
