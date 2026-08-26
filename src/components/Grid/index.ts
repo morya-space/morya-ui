@@ -1,3 +1,4 @@
+import './style'
 export { default as WiGrid } from './Grid.vue'
 export { default as WiGridItem } from './GridItem.vue'
 export { default as WiGi } from './GridItem.vue'

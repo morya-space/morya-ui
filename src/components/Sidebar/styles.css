@@ -1,0 +1,53 @@
+/* —— Menu: Sidebar —— */
+.wi-sidebar {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    min-width: var(--wi-menu-min-width-lg);
+    padding: var(--wi-space-2);
+    width: 14rem;
+}
+
+.wi-sidebar--collapsed {
+    min-width: 3.5rem;
+    width: 3.5rem;
+}
+
+.wi-sidebar__list,
+.wi-sidebar__children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wi-sidebar__children {
+    margin-left: var(--wi-space-4);
+}
+
+.wi-sidebar__link {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    gap: var(--wi-space-2);
+    padding: var(--wi-space-2);
+    text-align: left;
+    width: 100%;
+}
+
+.wi-sidebar__link:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+}
+
+.wi-sidebar__link--child {
+    font-size: var(--wi-font-size-md);
+}
+
+.wi-sidebar__icon {
+    flex: 0 0 1.25rem;
+    text-align: center;
+}

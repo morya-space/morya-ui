@@ -1,0 +1,45 @@
+/* —— Form: ToggleButton —— */
+.wi-togglebutton {
+    align-items: center;
+    background: color-mix(in srgb, var(--wi-color-text-muted) 14%, var(--wi-color-surface));
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-control);
+    color: var(--wi-color-text);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-size: var(--wi-control-font-medium);
+    font-weight: 600;
+    gap: var(--wi-space-2);
+    min-height: var(--wi-control-height-medium);
+    padding: 0 var(--wi-button-padding-x-medium);
+}
+
+.wi-togglebutton--small {
+    font-size: var(--wi-control-font-small);
+    min-height: var(--wi-control-height-small);
+    padding: 0 var(--wi-button-padding-x-small);
+}
+
+.wi-togglebutton--large {
+    font-size: var(--wi-control-font-large);
+    min-height: var(--wi-control-height-large);
+    padding: 0 var(--wi-button-padding-x-large);
+}
+
+.wi-togglebutton--checked {
+    background: var(--wi-color-primary);
+    border-color: var(--wi-color-primary);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-togglebutton:disabled,
+.wi-togglebutton--disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-togglebutton:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}

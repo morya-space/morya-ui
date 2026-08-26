@@ -1,0 +1,90 @@
+.wi-scrollbar {
+    --wi-scrollbar-bg: color-mix(in srgb, var(--wi-color-text) 28%, transparent);
+    --wi-scrollbar-hover-bg: color-mix(in srgb, var(--wi-color-text) 45%, transparent);
+    --wi-scrollbar-opacity: 0.5;
+    --wi-scrollbar-hover-opacity: 0.8;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.wi-scrollbar__wrap {
+    height: 100%;
+    overflow: auto;
+}
+
+.wi-scrollbar__wrap--hidden-default {
+    scrollbar-width: none;
+}
+
+.wi-scrollbar__wrap--hidden-default::-webkit-scrollbar {
+    display: none;
+}
+
+.wi-scrollbar__view {
+    box-sizing: border-box;
+}
+
+.wi-scrollbar__bar {
+    border-radius: var(--wi-radius-sm);
+    bottom: 2px;
+    position: absolute;
+    right: 2px;
+    z-index: 1;
+}
+
+.wi-scrollbar__bar--vertical {
+    top: 2px;
+    width: 6px;
+}
+
+.wi-scrollbar__bar--vertical > .wi-scrollbar__thumb {
+    width: 100%;
+}
+
+.wi-scrollbar__bar--horizontal {
+    height: 6px;
+    left: 2px;
+}
+
+.wi-scrollbar__bar--horizontal > .wi-scrollbar__thumb {
+    height: 100%;
+}
+
+.wi-scrollbar__bar:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+    outline-offset: 1px;
+}
+
+.wi-scrollbar__thumb {
+    background-color: var(--wi-scrollbar-bg);
+    border-radius: inherit;
+    cursor: pointer;
+    display: block;
+    height: 0;
+    opacity: var(--wi-scrollbar-opacity);
+    position: relative;
+    transition:
+        background-color var(--wi-motion-fast) var(--wi-motion-ease),
+        opacity var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 0;
+}
+
+.wi-scrollbar__thumb:hover {
+    background-color: var(--wi-scrollbar-hover-bg);
+    opacity: var(--wi-scrollbar-hover-opacity);
+}
+
+.wi-scrollbar-fade-enter-active {
+    transition: opacity 340ms var(--wi-motion-ease);
+}
+
+.wi-scrollbar-fade-leave-active {
+    transition: opacity 120ms var(--wi-motion-ease);
+}
+
+.wi-scrollbar-fade-enter-from,
+.wi-scrollbar-fade-leave-to {
+    opacity: 0;
+}

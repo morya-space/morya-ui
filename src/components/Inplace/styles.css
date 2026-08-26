@@ -1,0 +1,26 @@
+/* —— Misc: Inplace —— */
+.wi-inplace__display {
+    border-radius: var(--wi-radius-sm);
+    cursor: pointer;
+    display: inline-block;
+    padding: var(--wi-space-1) var(--wi-space-2);
+}
+
+.wi-inplace__display:hover {
+    background: color-mix(in srgb, var(--wi-color-primary) 8%, var(--wi-color-surface));
+}
+
+.wi-inplace__display:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-inplace--disabled .wi-inplace__display {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+    pointer-events: none;
+}
+
+.wi-inplace__content {
+    display: inline-block;
+}

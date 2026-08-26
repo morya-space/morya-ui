@@ -1,0 +1,33 @@
+/* —— Data: DataView —— */
+.wi-dataview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wi-space-3);
+}
+
+.wi-dataview__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wi-space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wi-dataview__list-item,
+.wi-dataview__grid-item {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    padding: var(--wi-space-3);
+}
+
+.wi-dataview__grid {
+    display: grid;
+    gap: var(--wi-space-3);
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+}
+
+.wi-dataview__paginator {
+    align-self: center;
+}

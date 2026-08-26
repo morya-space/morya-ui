@@ -10,7 +10,24 @@ Maintainer notes for `@well-insight/ui` (build, docs playground, publish). Exter
 pnpm build
 ```
 
-Output is under `dist/` (`index.js`, `index.d.ts`, `styles.css`).
+Output is under `dist/` (`index.js`, `index.d.ts`, `styles.css`, `resolver.js`, plus per-component kebab-case subpaths such as `button/index.js`). Subpath entries such as `@well-insight/ui/button` include JS, dependencies, and styles.
+
+The `pnpm build` pipeline runs:
+
+1. `scripts/prepare-on-demand.mjs` — generate per-component `style.ts` and inject style side-effects in `index.ts`
+2. `scripts/generate-exports.mjs` — sync `package.json` `exports` / `sideEffects` and `src/resolver-map.ts`
+3. `vite build` — full entry + `resolver`
+4. `vite build --mode on-demand` — per-component chunks
+5. `scripts/emit-style-entries.mjs` — emit `dist/<slug>/style.js` and `style.css`
+
+Component styles live in `src/components/<Name>/styles.css` and are aggregated by `src/styles/index.css`. Theme tokens stay in `src/theme/styles.css`.
+
+### Full vs on-demand (build)
+
+- **Full entry** (`src/index.ts` → `dist/index.js`): re-exports `.vue` files directly, not component `index.ts`, so on-demand style side-effects stay out of the main bundle; pair with `@well-insight/ui/styles.css`.
+- **On-demand entries** (`src/components/<Name>/index.ts` → `dist/<slug>/index.js`): separate chunks with `import './style'`, including theme, base, and dependency CSS.
+
+Both outputs are produced in one `pnpm build` and do not conflict.
 
 ## Docs site
 

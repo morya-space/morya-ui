@@ -1,0 +1,20 @@
+/* —— Misc: BlockUI —— */
+.wi-blockui {
+    position: relative;
+}
+
+.wi-blockui__content {
+    position: relative;
+}
+
+.wi-blockui--blocked .wi-blockui__content {
+    pointer-events: none;
+    user-select: none;
+}
+
+.wi-blockui__overlay {
+    background: color-mix(in srgb, var(--wi-color-surface) 45%, transparent);
+    inset: 0;
+    position: absolute;
+    z-index: 10;
+}

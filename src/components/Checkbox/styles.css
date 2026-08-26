@@ -1,0 +1,18 @@
+.wi-checkbox__control {
+    border-radius: var(--wi-radius-sm);
+}
+
+.wi-checkbox__control svg {
+    fill: none;
+    height: 0.875rem;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 0.875rem;
+}
+
+.wi-checkbox__input:indeterminate + .wi-checkbox__control {
+    background: var(--wi-color-primary);
+    border-color: var(--wi-color-primary);
+}

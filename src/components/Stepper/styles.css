@@ -1,0 +1,83 @@
+/* —— Panel: Stepper —— */
+.wi-stepper {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--wi-space-2);
+}
+
+.wi-stepper__step {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-md);
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    gap: var(--wi-space-2);
+    padding: var(--wi-space-2) var(--wi-space-3);
+}
+
+.wi-stepper__step--active {
+    color: var(--wi-color-primary);
+    font-weight: 600;
+}
+
+.wi-stepper__step--completed {
+    color: var(--wi-color-text);
+}
+
+.wi-stepper__step--disabled,
+.wi-stepper__step:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-stepper__step:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-stepper__marker {
+    align-items: center;
+    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    border-radius: var(--wi-radius-full);
+    display: inline-flex;
+    font-size: var(--wi-font-size-xs);
+    font-weight: 700;
+    height: 1.5rem;
+    justify-content: center;
+    width: 1.5rem;
+}
+
+.wi-stepper__step--active .wi-stepper__marker {
+    background: var(--wi-color-primary);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-stepper__content {
+    margin-top: var(--wi-space-4);
+}
+
+.wi-stepper--vertical {
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.wi-stepper__copy {
+    display: grid;
+    gap: 0.15rem;
+    text-align: start;
+}
+
+.wi-stepper__description {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
+    font-weight: 400;
+}
+
+.wi-stepper__step--error .wi-stepper__marker {
+    background: var(--wi-color-danger);
+    color: var(--wi-color-on-emphasis);
+}

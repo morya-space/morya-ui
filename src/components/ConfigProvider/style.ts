@@ -1,0 +1,6 @@
+import '../../theme/styles.css'
+import '../../styles/base.css'
+import '../Button/styles.css'
+import '../Input/styles.css'
+import '../Space/styles.css'
+import './styles.css'

@@ -1,0 +1,69 @@
+/* —— Panel: Splitter —— */
+.wi-splitter {
+    display: flex;
+    min-height: 6rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.wi-splitter--horizontal {
+    flex-direction: row;
+}
+
+.wi-splitter--vertical {
+    flex-direction: column;
+}
+
+.wi-splitter--dragging,
+.wi-splitter--dragging * {
+    user-select: none !important;
+}
+
+.wi-splitter__panel {
+    background: var(--wi-color-surface);
+    min-height: 0;
+    min-width: 0;
+    overflow: auto;
+}
+
+.wi-splitter__panel--fill {
+    flex: 1 1 0;
+}
+
+.wi-splitter__gutter {
+    background: var(--wi-color-border);
+    flex: 0 0 6px;
+    touch-action: none;
+    z-index: 1;
+}
+
+.wi-splitter--horizontal > .wi-splitter__gutter {
+    cursor: col-resize;
+    width: 6px;
+}
+
+.wi-splitter--vertical > .wi-splitter__gutter {
+    cursor: row-resize;
+    height: 6px;
+    width: 100%;
+}
+
+.wi-splitter__gutter:hover,
+.wi-splitter--dragging > .wi-splitter__gutter,
+.wi-splitter__gutter:focus-visible {
+    background: var(--wi-color-primary);
+}
+
+.wi-splitter__gutter:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-splitter--disabled {
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-splitter--disabled > .wi-splitter__gutter {
+    cursor: not-allowed;
+    pointer-events: none;
+}

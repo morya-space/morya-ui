@@ -1,0 +1,10 @@
+/* —— Panel: Space —— */
+.wi-space {
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.wi-space__item {
+    display: flex;
+    max-width: 100%;
+}

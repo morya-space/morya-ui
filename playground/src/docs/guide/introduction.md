@@ -26,10 +26,11 @@ description: Well Insight 是什么、适合谁用。
 
 ## 消费方式
 
-| 场景 | 行为 |
-| --- | --- |
-| 本地开发（Vite `development`） | `exports` 指向源码，热更新 |
-| 对外安装 / 生产构建 | 使用 `dist` 中的 ESM、`.d.ts` 与 `styles.css` |
+| 场景 | 解析入口 | 说明 |
+| --- | --- | --- |
+| **npm / pnpm 安装** | `dist/` | ESM、`.d.ts`、`styles.css` 与按需子路径 |
+| **本地 link / monorepo 联调** | 业务项目配置 Vite alias → `src/` | 参见 [开发指南](../docs/DEVELOPMENT.zh-CN.md) |
+| **生产构建** | `dist/` | 始终使用构建产物 |
 
 ## 下一步
 

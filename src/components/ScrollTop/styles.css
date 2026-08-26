@@ -1,0 +1,42 @@
+/* —— Misc: ScrollTop —— */
+.wi-scrolltop-anchor {
+    display: contents;
+}
+
+.wi-scrolltop {
+    align-items: center;
+    background: var(--wi-color-primary);
+    border: 0;
+    border-radius: var(--wi-radius-full, 999px);
+    bottom: var(--wi-space-6);
+    box-shadow: var(--wi-shadow-md);
+    color: var(--wi-color-on-emphasis);
+    cursor: pointer;
+    display: none;
+    font: inherit;
+    height: var(--wi-control-height-large);
+    justify-content: center;
+    position: fixed;
+    right: var(--wi-space-6);
+    width: var(--wi-control-height-large);
+    z-index: var(--wi-z-popper);
+}
+
+.wi-scrolltop--teleported {
+    z-index: var(--wi-z-dropdown);
+}
+
+.wi-scrolltop--visible {
+    display: inline-flex;
+}
+
+.wi-scrolltop--parent {
+    bottom: var(--wi-space-3);
+    position: absolute;
+    right: var(--wi-space-3);
+}
+
+.wi-scrolltop:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}

@@ -1,0 +1,30 @@
+/* —— Panel: Toolbar —— */
+.wi-toolbar {
+    align-items: center;
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--wi-space-3);
+    justify-content: space-between;
+    padding: var(--wi-space-2) var(--wi-space-3);
+}
+
+.wi-toolbar__start,
+.wi-toolbar__center,
+.wi-toolbar__end {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--wi-space-2);
+}
+
+.wi-toolbar__center {
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.wi-toolbar__end {
+    margin-inline-start: auto;
+}

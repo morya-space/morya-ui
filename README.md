@@ -26,7 +26,12 @@ pnpm add @well-insight/ui
 
 ## Quick start
 
-Import styles once at your app entry. Two ways to use components:
+Both **full** and **on-demand** imports are supported — pick one per app.
+
+| | Full | On-demand |
+| --- | --- | --- |
+| Styles | `@well-insight/ui/styles.css` | Bundled with subpath imports |
+| Components | Plugin or named imports from `@well-insight/ui` | `@well-insight/ui/button` etc. |
 
 ### Full registration
 
@@ -37,39 +42,39 @@ import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
 createApp(App).use(WellInsight).mount('#app')
-// or with defaults:
-// createApp(App).use(WellInsight, { size: 'small', density: 'compact' }).mount('#app')
 ```
 
-Templates can then use `<WiButton>` / `<WiInput>` without importing.
+Templates can use `<WiButton>` / `<WiInput>` without importing.
 
-### On-demand import
+### Named imports + full CSS
 
-```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import '@well-insight/ui/styles.css'
-
-createApp(App).mount('#app')
-```
+Tree-shakeable JS; still import full CSS at entry:
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiInput } from '@well-insight/ui'
-
-const name = ref('')
 </script>
-
-<template>
-  <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WiInput v-model="name" label="Name" placeholder="Enter a name" />
-    <WiButton label="Submit" />
-  </div>
-</template>
 ```
 
-Tree-shaking friendly: import only what you use from `@well-insight/ui`. Styles are separate — always import `@well-insight/ui/styles.css`.
+Entry: `import '@well-insight/ui/styles.css'`
+
+### On-demand subpaths
+
+Kebab-case subpaths bundle JS, dependencies, and styles — no full CSS import:
+
+```ts
+import { WiButton } from '@well-insight/ui/button'
+import { WiInput } from '@well-insight/ui/input'
+```
+
+### Auto on-demand (Vite)
+
+```ts
+import Components from 'unplugin-vue-components/vite'
+import { WellInsightResolver } from '@well-insight/ui/resolver'
+
+Components({ resolvers: [WellInsightResolver()] })
+```
 
 For a fuller walkthrough, see the docs site [Quick start](./playground/src/docs/guide/quick-start.en.md).
 
@@ -164,7 +169,10 @@ You can still render `<WiMessage />` / `<WiToast />` when you need a controlled 
 | Import | Purpose |
 | --- | --- |
 | `@well-insight/ui` | Components, `createWellInsight`, `WiConfigProvider`, theme & locale helpers, `message` / `toast` |
-| `@well-insight/ui/styles.css` | Required stylesheet (tokens + component styles) |
+| `@well-insight/ui/styles.css` | Full stylesheet (tokens + all components) |
+| `@well-insight/ui/button` etc. | On-demand subpath (JS + deps + styles; 88 kebab-case entries) |
+| `@well-insight/ui/button/style` | Styles only (side-effect) for that component |
+| `@well-insight/ui/resolver` | `unplugin-vue-components` resolver |
 
 TypeScript types are included via the package `exports`.
 

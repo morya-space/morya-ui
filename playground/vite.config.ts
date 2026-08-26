@@ -51,6 +51,46 @@ export default defineConfig({
   resolve: {
     alias: [
       {
+        find: '@well-insight/ui/button/style',
+        replacement: fileURLToPath(new URL('../src/components/Button/style.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/button',
+        replacement: fileURLToPath(new URL('../src/components/Button/index.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/input/style',
+        replacement: fileURLToPath(new URL('../src/components/Input/style.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/input',
+        replacement: fileURLToPath(new URL('../src/components/Input/index.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/select/style',
+        replacement: fileURLToPath(new URL('../src/components/Select/style.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/select',
+        replacement: fileURLToPath(new URL('../src/components/Select/index.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/dialog/style',
+        replacement: fileURLToPath(new URL('../src/components/Dialog/style.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/dialog',
+        replacement: fileURLToPath(new URL('../src/components/Dialog/index.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/icon/style',
+        replacement: fileURLToPath(new URL('../src/components/Icon/style.ts', import.meta.url)),
+      },
+      {
+        find: '@well-insight/ui/icon',
+        replacement: fileURLToPath(new URL('../src/components/Icon/index.ts', import.meta.url)),
+      },
+      {
         find: '@well-insight/ui/styles.css',
         replacement: fileURLToPath(new URL('../src/styles/index.css', import.meta.url)),
       },

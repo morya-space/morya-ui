@@ -1,3 +1,4 @@
+import './style'
 export { default as WiFileUpload } from './FileUpload.vue'
 export type {
   FileUploadEmits,

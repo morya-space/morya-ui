@@ -1,0 +1,117 @@
+/* —— Form: InputNumber —— */
+.wi-inputnumber-field {
+    display: grid;
+    gap: var(--wi-space-2);
+}
+
+.wi-inputnumber-field--fluid {
+    width: 100%;
+}
+
+.wi-inputnumber-field__label {
+    color: var(--wi-color-text);
+    font-size: var(--wi-font-size-md);
+    font-weight: 600;
+}
+
+.wi-inputnumber {
+    align-items: stretch;
+    display: inline-flex;
+    max-width: 100%;
+}
+
+.wi-inputnumber--fluid {
+    display: flex;
+    width: 100%;
+}
+
+.wi-inputnumber__input {
+    background: var(--wi-color-surface);
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-control);
+    color: var(--wi-color-text);
+    font: inherit;
+    font-size: var(--wi-control-font-medium);
+    min-height: var(--wi-control-height-medium);
+    min-width: 0;
+    padding: 0 var(--wi-control-padding-x-medium);
+    width: 8rem;
+}
+
+.wi-inputnumber--fluid .wi-inputnumber__input {
+    flex: 1 1 auto;
+    width: auto;
+}
+
+.wi-inputnumber--buttons .wi-inputnumber__input {
+    border-radius: 0;
+    text-align: center;
+}
+
+.wi-inputnumber--small .wi-inputnumber__input,
+.wi-inputnumber--small .wi-inputnumber__button {
+    min-height: var(--wi-control-height-small);
+    font-size: var(--wi-control-font-small);
+}
+
+.wi-inputnumber--large .wi-inputnumber__input,
+.wi-inputnumber--large .wi-inputnumber__button {
+    min-height: var(--wi-control-height-large);
+    font-size: var(--wi-control-font-large);
+}
+
+.wi-inputnumber--invalid .wi-inputnumber__input {
+    border-color: var(--wi-color-danger);
+}
+
+.wi-inputnumber__button {
+    align-items: center;
+    background: color-mix(in srgb, var(--wi-color-text-muted) 12%, var(--wi-color-surface));
+    border: 1px solid var(--wi-color-border);
+    color: var(--wi-color-text);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-size: var(--wi-control-font-medium);
+    justify-content: center;
+    min-height: var(--wi-control-height-medium);
+    min-width: var(--wi-control-height-medium);
+    padding: 0;
+}
+
+.wi-inputnumber__button--decrement {
+    border-radius: var(--wi-radius-control) 0 0 var(--wi-radius-control);
+    border-right: 0;
+}
+
+.wi-inputnumber__button--increment {
+    border-left: 0;
+    border-radius: 0 var(--wi-radius-control) var(--wi-radius-control) 0;
+}
+
+.wi-inputnumber__button:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 20%, var(--wi-color-surface));
+}
+
+.wi-inputnumber__button:disabled,
+.wi-inputnumber--disabled .wi-inputnumber__input {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-inputnumber__input:focus-visible,
+.wi-inputnumber__button:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+    z-index: 1;
+}
+
+.wi-inputnumber__stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.wi-inputnumber__stack .wi-inputnumber__button {
+    min-height: 0;
+    padding: 0 0.4rem;
+}

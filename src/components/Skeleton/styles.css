@@ -1,0 +1,42 @@
+.wi-skeleton {
+    --wi-skeleton-bg: color-mix(in srgb, var(--wi-color-text-muted) 14%, var(--wi-color-surface));
+    background: var(--wi-skeleton-bg);
+    border-radius: var(--wi-radius-sm);
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.wi-skeleton--circle {
+    border-radius: var(--wi-radius-full);
+}
+
+.wi-skeleton--wave::after {
+    animation: wi-skeleton-wave 1.4s linear infinite;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in srgb, var(--wi-color-surface) 55%, transparent),
+        transparent
+    );
+    content: "";
+    inset: 0;
+    position: absolute;
+    transform: translateX(-100%);
+}
+
+@keyframes wi-skeleton-wave {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.wi-skeleton-repeat {
+    display: grid;
+    gap: var(--wi-space-2);
+    width: 100%;
+}
+
+.wi-skeleton--text {
+    height: 0.85em;
+}

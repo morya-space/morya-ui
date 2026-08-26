@@ -1,3 +1,4 @@
+import './style'
 export { default as WiForm } from './Form.vue'
 export { default as WiFormItem } from './FormItem.vue'
 export type {

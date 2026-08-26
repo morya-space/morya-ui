@@ -1,0 +1,105 @@
+.wi-progressbar {
+    --wi-progressbar-height: 1.25rem;
+    --wi-progressbar-track: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    --wi-progressbar-fill: var(--wi-color-primary);
+    background: var(--wi-progressbar-track);
+    border-radius: var(--wi-radius-full);
+    display: block;
+    font-family: var(--wi-font-sans);
+    height: var(--wi-progressbar-height);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.wi-progressbar__value {
+    align-items: center;
+    background: var(--wi-progressbar-fill);
+    border-radius: inherit;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    min-width: 0;
+    overflow: hidden;
+    transition: width var(--wi-motion-fast) var(--wi-motion-ease);
+}
+
+.wi-progressbar__label {
+    color: var(--wi-color-on-emphasis);
+    font-size: var(--wi-font-size-xs);
+    font-weight: 600;
+    line-height: 1;
+    padding: 0 var(--wi-space-2);
+    white-space: nowrap;
+}
+
+.wi-progressbar--indeterminate .wi-progressbar__value {
+    animation: wi-progressbar-indeterminate 1.2s var(--wi-motion-ease) infinite;
+    width: 40%;
+}
+
+@keyframes wi-progressbar-indeterminate {
+    0% {
+        transform: translateX(-120%);
+    }
+    100% {
+        transform: translateX(320%);
+    }
+}
+
+.wi-progressbar--success {
+    --wi-progressbar-fill: var(--wi-color-success);
+}
+
+.wi-progressbar--info {
+    --wi-progressbar-fill: var(--wi-color-info);
+}
+
+.wi-progressbar--warn {
+    --wi-progressbar-fill: var(--wi-color-warn);
+}
+
+.wi-progressbar--danger {
+    --wi-progressbar-fill: var(--wi-color-danger);
+}
+
+.wi-progressbar--circle {
+    --wi-progressbar-size: 5.5rem;
+    background: transparent;
+    height: var(--wi-progressbar-size);
+    overflow: visible;
+    width: var(--wi-progressbar-size);
+}
+
+.wi-progressbar__circle {
+    display: block;
+    height: 100%;
+    transform: rotate(-90deg);
+    width: 100%;
+}
+
+.wi-progressbar__circle-track {
+    stroke: var(--wi-progressbar-track);
+    stroke-width: 8;
+}
+
+.wi-progressbar__circle-value {
+    stroke: var(--wi-progressbar-fill);
+    stroke-linecap: round;
+    stroke-width: 8;
+    transition: stroke-dashoffset var(--wi-motion-fast) var(--wi-motion-ease);
+}
+
+.wi-progressbar--indeterminate.wi-progressbar--circle .wi-progressbar__circle-value {
+    animation: wi-progress-spinner-rotate 1s linear infinite;
+    stroke-dasharray: 80 180;
+}
+
+.wi-progressbar__circle-label {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--wi-font-size-sm);
+    font-weight: 600;
+}

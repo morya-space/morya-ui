@@ -16,23 +16,26 @@ pnpm add @well-insight/ui
 
 Vue 3.5+ is required. Theme tokens, color-mode switching, and motion APIs are all included in `@well-insight/ui`.
 
-After cloning this repository, run `pnpm install`. Development resolves source via `exports.development` for HMR.
+After cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).
 
-## Import styles
+To debug from another app, use `link:` / `pnpm link` plus Vite aliases. A plain npm install always resolves `dist/`.
 
-Import the library stylesheet at the app entry:
+## Choose an import mode
 
-```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import '@well-insight/ui/styles.css'
+The library supports **full** and **on-demand** usage. Pick one per app (stay consistent within a project).
 
-createApp(App).mount('#app')
-```
+| | Full | On-demand |
+| --- | --- | --- |
+| Best for | Many components, fastest setup | Bundle size, few components |
+| Components | `app.use(WellInsight)` or named imports from `@well-insight/ui` | `@well-insight/ui/button` subpaths, or Vite auto-resolver |
+| Styles | Import `@well-insight/ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |
+| JS size | Full plugin bundles all components; named imports tree-shake | Only used components and their deps |
 
-## Use a component
+## Full usage
 
-### Full registration
+### 1. Plugin registration (recommended full mode)
+
+Import the **full stylesheet** and register all components once:
 
 ```ts
 import { createApp } from 'vue'
@@ -45,7 +48,17 @@ createApp(App).use(WellInsight).mount('#app')
 
 Templates can use `<WiButton>`, `<WiInput>`, etc. without per-file imports.
 
-### On-demand import
+### 2. Named imports + full CSS
+
+Skip the plugin; import components in SFCs. JS can tree-shake, but styles still need the full CSS file:
+
+```ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import '@well-insight/ui/styles.css'
+
+createApp(App).mount('#app')
+```
 
 ```vue
 <script setup lang="ts">
@@ -62,6 +75,42 @@ const name = ref('')
   </div>
 </template>
 ```
+
+## On-demand usage
+
+### 1. Subpath imports
+
+Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `@well-insight/ui/styles.css` required:
+
+```ts
+import { WiButton } from '@well-insight/ui/button'
+import { WiInput } from '@well-insight/ui/input'
+```
+
+Styles only:
+
+```ts
+import '@well-insight/ui/button/style'
+import '@well-insight/ui/button/style.css'
+```
+
+### 2. Auto on-demand (Vite)
+
+With `unplugin-vue-components`, add the resolver so templates can use `<WiButton>` without manual imports:
+
+```ts
+import Components from 'unplugin-vue-components/vite'
+import { WellInsightResolver } from '@well-insight/ui/resolver'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    Components({ resolvers: [WellInsightResolver()] }),
+  ],
+})
+```
+
+In on-demand mode, `createWellInsight({ components: false })` still applies global config without registering components.
 
 ## Optional: app-level defaults
 

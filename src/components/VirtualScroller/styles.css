@@ -1,0 +1,24 @@
+/* —— Data: VirtualScroller —— */
+.wi-virtualscroller {
+    border: 1px solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    overflow: auto;
+    position: relative;
+    width: 100%;
+}
+
+.wi-virtualscroller__spacer {
+    position: relative;
+    width: 100%;
+}
+
+.wi-virtualscroller__content {
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.wi-virtualscroller__item {
+    box-sizing: border-box;
+}

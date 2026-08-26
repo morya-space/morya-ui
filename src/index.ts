@@ -1,5 +1,3 @@
-import './styles/index.css'
-
 // Evaluate the registry before the individual component re-exports.
 import './component-registry'
 

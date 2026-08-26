@@ -1,0 +1,492 @@
+.wi-button {
+    --wi-button-bg: var(--wi-color-primary);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-primary);
+    --wi-button-hover-bg: var(--wi-color-primary-hover);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: var(--wi-color-primary-hover);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-primary) 82%, black);
+    align-items: center;
+    background: var(--wi-button-bg);
+    border: 1px solid var(--wi-button-border);
+    border-radius: var(--wi-radius-control);
+    color: var(--wi-button-fg);
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: row;
+    font-size: var(--wi-control-font-medium);
+    font-weight: 600;
+    gap: var(--wi-space-2);
+    justify-content: center;
+    line-height: 1;
+    min-height: var(--wi-control-height-medium);
+    padding: 0 var(--wi-button-padding-x-medium);
+    position: relative;
+    transition:
+        background-color var(--wi-motion-fast) var(--wi-motion-ease),
+        border-color var(--wi-motion-fast) var(--wi-motion-ease),
+        color var(--wi-motion-fast) var(--wi-motion-ease),
+        box-shadow var(--wi-motion-fast) var(--wi-motion-ease);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.wi-button:hover:not(:disabled) {
+    background: var(--wi-button-hover-bg);
+    border-color: var(--wi-button-hover-border);
+    color: var(--wi-button-hover-fg);
+}
+
+.wi-button:active:not(:disabled) {
+    background: var(--wi-button-active-bg);
+}
+
+/* Naive-style focus: soft glow, not outline-offset ring */
+.wi-button:focus {
+    outline: none;
+}
+
+.wi-button:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-button--primary {
+    --wi-button-bg: var(--wi-color-primary);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-primary);
+    --wi-button-hover-bg: var(--wi-color-primary-hover);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: var(--wi-color-primary-hover);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-primary) 82%, black);
+}
+
+.wi-button--secondary {
+    --wi-button-bg: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    --wi-button-fg: var(--wi-color-text);
+    --wi-button-border: transparent;
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 24%, var(--wi-color-surface));
+    --wi-button-hover-fg: var(--wi-color-text);
+    --wi-button-hover-border: transparent;
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-text-muted) 32%, var(--wi-color-surface));
+}
+
+.wi-button--success {
+    --wi-button-bg: var(--wi-color-success);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-success);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-success) 85%, black);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-success) 85%, black);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-success) 75%, black);
+}
+
+.wi-button--info {
+    --wi-button-bg: var(--wi-color-info);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-info);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-info) 85%, black);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-info) 85%, black);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-info) 75%, black);
+}
+
+.wi-button--warn {
+    --wi-button-bg: var(--wi-color-warn);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-warn);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-warn) 85%, black);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-warn) 85%, black);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-warn) 75%, black);
+}
+
+.wi-button--help {
+    --wi-button-bg: var(--wi-color-help);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-help);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-help) 85%, black);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-help) 85%, black);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-help) 75%, black);
+}
+
+.wi-button--danger {
+    --wi-button-bg: var(--wi-color-danger);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-color-danger);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-danger) 85%, black);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-danger) 85%, black);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-danger) 75%, black);
+}
+
+.wi-button--contrast {
+    --wi-button-bg: var(--wi-color-contrast);
+    --wi-button-fg: var(--wi-color-contrast-fg);
+    --wi-button-border: var(--wi-color-contrast);
+    --wi-button-hover-bg: var(--wi-color-contrast-hover);
+    --wi-button-hover-fg: var(--wi-color-contrast-fg);
+    --wi-button-hover-border: var(--wi-color-contrast-hover);
+    --wi-button-active-bg: var(--wi-color-contrast-active);
+}
+
+.wi-button--outlined {
+    --wi-button-bg: transparent;
+    --wi-button-fg: var(--wi-button-border);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-border) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-button-border);
+    --wi-button-hover-border: var(--wi-button-border);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-button-border) 16%, transparent);
+}
+
+.wi-button--secondary.wi-button--outlined {
+    --wi-button-border: var(--wi-color-border);
+    --wi-button-fg: var(--wi-color-text);
+    --wi-button-hover-fg: var(--wi-color-text);
+}
+
+.wi-button--text,
+.wi-button--link {
+    --wi-button-bg: transparent;
+    --wi-button-border: transparent;
+    --wi-button-fg: var(--wi-color-primary);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-primary);
+    --wi-button-hover-border: transparent;
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-primary) 16%, transparent);
+}
+
+.wi-button--secondary.wi-button--text,
+.wi-button--secondary.wi-button--link {
+    --wi-button-fg: var(--wi-color-text-muted);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 12%, transparent);
+    --wi-button-hover-fg: var(--wi-color-text);
+}
+
+.wi-button--success.wi-button--text,
+.wi-button--success.wi-button--link,
+.wi-button--success.wi-button--outlined {
+    --wi-button-fg: var(--wi-color-success);
+    --wi-button-border: var(--wi-color-success);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-success) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-success);
+    --wi-button-hover-border: var(--wi-color-success);
+}
+
+.wi-button--info.wi-button--text,
+.wi-button--info.wi-button--link,
+.wi-button--info.wi-button--outlined {
+    --wi-button-fg: var(--wi-color-info);
+    --wi-button-border: var(--wi-color-info);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-info) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-info);
+    --wi-button-hover-border: var(--wi-color-info);
+}
+
+.wi-button--warn.wi-button--text,
+.wi-button--warn.wi-button--link,
+.wi-button--warn.wi-button--outlined {
+    --wi-button-fg: var(--wi-color-warn);
+    --wi-button-border: var(--wi-color-warn);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-warn) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-warn);
+    --wi-button-hover-border: var(--wi-color-warn);
+}
+
+.wi-button--help.wi-button--text,
+.wi-button--help.wi-button--link,
+.wi-button--help.wi-button--outlined {
+    --wi-button-fg: var(--wi-color-help);
+    --wi-button-border: var(--wi-color-help);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-help) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-help);
+    --wi-button-hover-border: var(--wi-color-help);
+}
+
+.wi-button--danger.wi-button--text,
+.wi-button--danger.wi-button--link,
+.wi-button--danger.wi-button--outlined {
+    --wi-button-fg: var(--wi-color-danger);
+    --wi-button-border: var(--wi-color-danger);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-danger) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-danger);
+    --wi-button-hover-border: var(--wi-color-danger);
+}
+
+.wi-button--contrast.wi-button--text,
+.wi-button--contrast.wi-button--link,
+.wi-button--contrast.wi-button--outlined {
+    --wi-button-fg: var(--wi-color-contrast);
+    --wi-button-border: var(--wi-color-contrast);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-contrast) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-contrast);
+    --wi-button-hover-border: var(--wi-color-contrast);
+}
+
+.wi-button--plain.wi-button--text,
+.wi-button--plain.wi-button--outlined,
+.wi-button--plain.wi-button--link {
+    --wi-button-fg: var(--wi-color-text-muted);
+    --wi-button-border: var(--wi-color-border);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 12%, transparent);
+    --wi-button-hover-fg: var(--wi-color-text);
+    --wi-button-hover-border: var(--wi-color-border);
+}
+
+.wi-button--link {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+}
+
+.wi-button--link:hover:not(:disabled) {
+    text-decoration: underline;
+}
+
+.wi-button--ghost {
+    --wi-button-bg: transparent;
+    --wi-button-fg: var(--wi-button-border);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-border) 12%, transparent);
+    --wi-button-hover-fg: var(--wi-button-border);
+    --wi-button-hover-border: var(--wi-button-border);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-button-border) 18%, transparent);
+}
+
+.wi-button--secondary.wi-button--ghost {
+    --wi-button-border: var(--wi-color-border);
+    --wi-button-fg: var(--wi-color-text);
+    --wi-button-hover-fg: var(--wi-color-text);
+}
+
+.wi-button--success.wi-button--ghost {
+    --wi-button-fg: var(--wi-color-success);
+    --wi-button-border: var(--wi-color-success);
+}
+
+.wi-button--info.wi-button--ghost {
+    --wi-button-fg: var(--wi-color-info);
+    --wi-button-border: var(--wi-color-info);
+}
+
+.wi-button--warn.wi-button--ghost {
+    --wi-button-fg: var(--wi-color-warn);
+    --wi-button-border: var(--wi-color-warn);
+}
+
+.wi-button--help.wi-button--ghost {
+    --wi-button-fg: var(--wi-color-help);
+    --wi-button-border: var(--wi-color-help);
+}
+
+.wi-button--danger.wi-button--ghost {
+    --wi-button-fg: var(--wi-color-danger);
+    --wi-button-border: var(--wi-color-danger);
+}
+
+.wi-button--contrast.wi-button--ghost {
+    --wi-button-fg: var(--wi-color-contrast);
+    --wi-button-border: var(--wi-color-contrast);
+}
+
+.wi-button--quaternary {
+    --wi-button-bg: transparent;
+    --wi-button-border: transparent;
+    --wi-button-fg: var(--wi-color-text);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 10%, transparent);
+    --wi-button-hover-fg: var(--wi-color-text);
+    --wi-button-hover-border: transparent;
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-text-muted) 16%, transparent);
+}
+
+.wi-button--custom {
+    --wi-button-bg: var(--wi-button-color);
+    --wi-button-fg: var(--wi-color-on-emphasis);
+    --wi-button-border: var(--wi-button-color);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-color) 85%, black);
+    --wi-button-hover-fg: var(--wi-color-on-emphasis);
+    --wi-button-hover-border: color-mix(in srgb, var(--wi-button-color) 85%, black);
+    --wi-button-active-bg: color-mix(in srgb, var(--wi-button-color) 75%, black);
+}
+
+.wi-button--custom.wi-button--outlined,
+.wi-button--custom.wi-button--ghost,
+.wi-button--custom.wi-button--text,
+.wi-button--custom.wi-button--quaternary,
+.wi-button--custom.wi-button--link {
+    --wi-button-bg: transparent;
+    --wi-button-fg: var(--wi-button-color);
+    --wi-button-border: var(--wi-button-color);
+    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-color) 12%, transparent);
+    --wi-button-hover-fg: var(--wi-button-color);
+    --wi-button-hover-border: var(--wi-button-color);
+}
+
+.wi-button--custom.wi-button--text,
+.wi-button--custom.wi-button--quaternary,
+.wi-button--custom.wi-button--link {
+    --wi-button-border: transparent;
+    --wi-button-hover-border: transparent;
+}
+
+.wi-button-group {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.wi-button-group--fluid {
+    display: flex;
+    width: 100%;
+}
+
+.wi-button-group--fluid > .wi-button {
+    flex: 1;
+}
+
+.wi-button-group > .wi-button {
+    border-radius: 0;
+    margin: 0;
+}
+
+.wi-button-group > .wi-button + .wi-button {
+    margin-left: -1px;
+}
+
+.wi-button-group > .wi-button:first-child {
+    border-top-left-radius: var(--wi-radius-md);
+    border-bottom-left-radius: var(--wi-radius-md);
+}
+
+.wi-button-group > .wi-button:last-child {
+    border-top-right-radius: var(--wi-radius-md);
+    border-bottom-right-radius: var(--wi-radius-md);
+}
+
+.wi-button--raised {
+    box-shadow: 0 0.25rem 0.75rem color-mix(in srgb, var(--wi-color-text) 14%, transparent);
+}
+
+.wi-button--rounded {
+    border-radius: var(--wi-radius-full);
+}
+
+.wi-button--icon-only {
+    gap: 0;
+    min-width: var(--wi-control-height-medium);
+    padding: 0;
+    width: var(--wi-control-height-medium);
+}
+
+.wi-button--icon-only.wi-button--small {
+    min-width: var(--wi-control-height-small);
+    width: var(--wi-control-height-small);
+}
+
+.wi-button--icon-only.wi-button--large {
+    min-width: var(--wi-control-height-large);
+    width: var(--wi-control-height-large);
+}
+
+.wi-button--icon-right {
+    flex-direction: row-reverse;
+}
+
+.wi-button--icon-top {
+    flex-direction: column;
+    min-height: 3.25rem;
+    padding-block: var(--wi-space-2);
+}
+
+.wi-button--icon-bottom {
+    flex-direction: column-reverse;
+    min-height: 3.25rem;
+    padding-block: var(--wi-space-2);
+}
+
+.wi-button--fluid {
+    display: flex;
+    width: 100%;
+}
+
+.wi-button--small {
+    font-size: var(--wi-control-font-small);
+    min-height: var(--wi-control-height-small);
+    padding: 0 var(--wi-button-padding-x-small);
+}
+
+.wi-button--large {
+    font-size: var(--wi-control-font-large);
+    min-height: var(--wi-control-height-large);
+    padding: 0 var(--wi-button-padding-x-large);
+}
+
+.wi-button__icon,
+.wi-button__label {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.wi-button__icon {
+    flex: 0 0 auto;
+}
+
+.wi-button__badge {
+    align-items: center;
+    background: var(--wi-color-contrast);
+    border-radius: var(--wi-radius-full);
+    color: var(--wi-color-contrast-fg);
+    display: inline-flex;
+    font-size: 0.65rem;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1;
+    margin-inline-start: var(--wi-space-1);
+    min-width: 1.15rem;
+    padding: 0.2rem 0.35rem;
+}
+
+.wi-button__badge--secondary {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 25%, var(--wi-color-surface));
+    color: var(--wi-color-text);
+}
+
+.wi-button__badge--success {
+    background: var(--wi-color-success);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-button__badge--info {
+    background: var(--wi-color-info);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-button__badge--warn {
+    background: var(--wi-color-warn);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-button__badge--danger {
+    background: var(--wi-color-danger);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-button__badge--contrast {
+    background: var(--wi-color-contrast);
+    color: var(--wi-color-contrast-fg);
+}
+
+.wi-button__spinner {
+    animation: wi-button-spin 700ms linear infinite;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--wi-radius-full);
+    height: 0.875rem;
+    width: 0.875rem;
+}
+
+@keyframes wi-button-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,3 +1,4 @@
+import './style'
 export { default as WiTree } from './Tree.vue'
 export type {
   TreeCheckStrategy,

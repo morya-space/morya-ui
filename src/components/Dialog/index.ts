@@ -1,3 +1,5 @@
+import './style'
+
 export { default as WiDialog } from './Dialog.vue'
 export type {
   DialogClickGuard,

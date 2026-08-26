@@ -1,0 +1,69 @@
+/* —— Form / FormItem —— */
+.wi-form {
+    display: grid;
+    gap: var(--wi-space-4);
+}
+
+.wi-form--inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.wi-form--inline .wi-form-item {
+    flex: 0 1 auto;
+    min-width: 12rem;
+}
+
+.wi-form--disabled {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.wi-form-item {
+    display: grid;
+    gap: var(--wi-space-2);
+}
+
+.wi-form-item--label-left {
+    align-items: start;
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+.wi-form-item__label {
+    color: var(--wi-color-text);
+    font-size: var(--wi-font-size-md);
+    font-weight: 600;
+    line-height: var(--wi-control-height-medium);
+}
+
+.wi-form-item--label-top .wi-form-item__label {
+    line-height: 1.4;
+}
+
+.wi-form-item__required {
+    color: var(--wi-color-danger);
+    margin-right: 0.2rem;
+}
+
+.wi-form-item__body {
+    display: grid;
+    gap: var(--wi-space-1);
+    min-width: 0;
+}
+
+.wi-form-item__control {
+    min-width: 0;
+}
+
+.wi-form-item__help {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
+    margin: 0;
+}
+
+.wi-form-item__error {
+    color: var(--wi-color-danger);
+    font-size: var(--wi-font-size-xs);
+    margin: 0;
+}
