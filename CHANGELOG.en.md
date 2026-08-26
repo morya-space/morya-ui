@@ -1,5 +1,13 @@
 # @well-insight/ui
 
+## 0.1.7
+
+### Features
+
+- add extra slot and enhance components in Accordion and AutoComplete
+- enhance component defaults and improve configuration management
+- add component registry import to index for improved component management
+
 ## 0.1.6
 
 ### Features
