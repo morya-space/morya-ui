@@ -59,6 +59,7 @@
 .wi-fluid,
 .wi-terminal {
     font-family: var(--wi-font-sans);
+    box-sizing: border-box;
 }
 
 .wi-button:disabled,
