@@ -47,7 +47,7 @@ import { WiTextarea } from '@well-insight/ui'
 
 ## AutoResize & Invalid
 
-`autoResize` grows with content; `invalid` (or the alias `error`) marks a validation failure.
+`autosize` (alias `autoResize`) grows with content. Pass `{ minRows, maxRows }` to clamp. `invalid` (or the alias `error`) marks a validation failure.
 
 ```vue preview
 <script setup lang="ts">
@@ -55,13 +55,30 @@ import { ref } from 'vue'
 import { WiTextarea } from '@well-insight/ui'
 
 const value = ref('Line 1\nLine 2')
+const limited = ref('Clamped height')
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WiTextarea v-model="value" auto-resize label="Auto resize" />
+    <WiTextarea v-model="value" autosize label="Auto resize" />
+    <WiTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
     <WiTextarea invalid label="Required" help-text="This field is required" model-value="" />
   </div>
+</template>
+```
+
+## Clearable & count
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTextarea } from '@well-insight/ui'
+
+const value = ref('Draft notes')
+</script>
+
+<template>
+  <WiTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
 </template>
 ```
 
@@ -76,16 +93,21 @@ const value = ref('Line 1\nLine 2')
 | `error` | `boolean` | `false` | **Alias**; prefer `invalid`. |
 | `id` | `string` | — | Native id. |
 | `rows` | `number` | `4` | Visible rows. |
-| `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | CSS resize; forced to `none` when `autoResize` is on. |
-| `autoResize` | `boolean` | `false` | Auto-grow with content. |
+| `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | CSS resize; forced to `none` when autosize is on. |
+| `autosize` | `boolean \| { minRows?: number; maxRows?: number }` | `false` | Auto-grow with content; optional row clamp. |
+| `autoResize` | `boolean` | `false` | **Alias** for `autosize`. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | Visual variant. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `readonly` | `boolean` | `false` | Read-only. |
+| `clearable` | `boolean` | `false` | Show a clear button. |
+| `maxlength` | `number` | — | Native maxlength. |
+| `showCount` | `boolean` | `false` | Show character count. |
 
 ## Events
 
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `string` | Emitted when the value changes. |
+| `clear` | — | Emitted when the value is cleared. |

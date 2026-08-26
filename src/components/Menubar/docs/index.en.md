@@ -6,7 +6,7 @@ description: Horizontal menubar with one level of dropdowns.
 
 # Menubar
 
-Horizontal navigation menu. Child items appear in a single-level dropdown.
+Horizontal navigation menu. Child items appear in a single-level dropdown. `selectedKey` / `icon` cover highlight and icons. Responsive collapse is out of scope this batch.
 
 ## Import
 
@@ -18,19 +18,23 @@ import { WiMenubar } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { ref } from 'vue'
 import { WiMenubar } from '@well-insight/ui'
 
+const selectedKey = ref<string | null>(null)
 const model = [
   {
+    key: 'file',
     label: 'File',
-    items: [{ label: 'New' }, { label: 'Open' }],
+    icon: 'edit',
+    items: [{ key: 'new', label: 'New' }, { key: 'open', label: 'Open' }],
   },
-  { label: 'Edit' },
+  { key: 'edit', label: 'Edit', icon: 'home' },
 ]
 </script>
 
 <template>
-  <WiMenubar :model="model" />
+  <WiMenubar v-model:selected-key="selectedKey" :model="model" />
 </template>
 ```
 
@@ -38,6 +42,14 @@ const model = [
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `model` | `MenubarItem[]` | — | Menu items. May include one level of `items`. |
+| `model` | `MenubarItem[]` | — | Menu items. May include one level of `items`. Items may include `key` / `icon`. |
+| `selectedKey` | `string \| null` | — | Selected item (`item.key` or `item.label`). |
 | `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
+
+## Events
+
+| Event | Prop | Description |
+| --- | --- | --- |
+| `update:selectedKey` | `string \| null` | Selected item changed. |
+| `select` | `MenubarItem` | Emitted when a leaf is clicked. |

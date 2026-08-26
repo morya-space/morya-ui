@@ -1,4 +1,7 @@
 import type { WiInputVariant, WiSizeInput } from '../../shared/types'
+import type { WiTextareaAutosize } from '../../shared/componentDefaults'
+
+export type { WiTextareaAutosize }
 
 export interface TextareaProps {
   modelValue?: string
@@ -13,7 +16,12 @@ export interface TextareaProps {
   id?: string
   rows?: number
   resize?: 'none' | 'vertical' | 'horizontal' | 'both'
-  /** Grow height to fit content . */
+  /**
+   * Auto-grow height. Pass `{ minRows, maxRows }` to clamp.
+   * Boolean `true` is equivalent to unbounded grow.
+   */
+  autosize?: WiTextareaAutosize
+  /** @deprecated Prefer `autosize`. */
   autoResize?: boolean
   /** Size aligned with Textarea; also accepts legacy sm/md/lg. */
   size?: WiSizeInput
@@ -23,8 +31,16 @@ export interface TextareaProps {
   fluid?: boolean
   disabled?: boolean
   readonly?: boolean
+  clearable?: boolean
+  maxlength?: number
+  showCount?: boolean
 }
 
 export interface TextareaEmits {
   (event: 'update:modelValue', value: string): void
+  (event: 'clear'): void
+}
+
+export interface TextareaInstance {
+  focus: () => void
 }

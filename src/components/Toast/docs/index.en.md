@@ -8,7 +8,7 @@ description: Corner floating notifications with API and controlled lists.
 
 Corner notifications with a title and optional detail. Use the `toast` API, or keep rendering with a controlled `:messages` list.
 
-Vs [Message](/components/Message): Message is top-center short copy; Toast is corner notices.
+Vs [Message](/components/Message): Message is short single-line feedback; Toast is a corner notice with `summary` / `detail`. `max` applies to the service queue only.
 
 ## Import
 
@@ -113,8 +113,8 @@ function onClose(message: ToastMessage) {
 | `toast.success / info / warn / error` | Add by severity |
 | `toast.add(options)` | Add one |
 | `toast.remove(id)` / `toast.close(id)` | Remove |
-| `toast.clear()` / `toast.closeAll()` | Clear all |
-| `toast.setDefaults({ position })` | Default corner position |
+| `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | Clear all |
+| `toast.setDefaults({ position, max })` | Default corner and concurrency cap |
 
 A string argument is treated as `summary`. Default `life` is `3000`; use `0` to keep open.
 
@@ -124,6 +124,7 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 | --- | --- | --- | --- |
 | `messages` | `ToastMessage[]` | — | Controlled list; omit to bind the `toast` service queue |
 | `position` | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left'` | `'top-right'` | Container placement |
+| `max` | `number` | — | Max visible items; oldest is dropped (service queue only) |
 | `teleport` | `boolean` | `true` | Whether to Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target |
 

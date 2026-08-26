@@ -3,6 +3,7 @@ import { isToastOptionsObject } from '../../shared/content'
 import { mountOverlayHost } from '../../shared/overlayHost'
 import ToastHost from './Toast.vue'
 import {
+  applyToastMax,
   clearToastItems,
   closeToastItem,
   resetToastHostRegistry,
@@ -53,6 +54,7 @@ function toMessage(input: ToastInput, severity?: ToastSeverity): ToastMessage {
 
 function add(input: ToastInput, severity?: ToastSeverity): ToastHandle {
   ensureHost()
+  applyToastMax(toastState.max)
   const item = toMessage(input, severity)
   toastState.messages = [...toastState.messages, item]
   scheduleToastLife(item, closeToastItem)
@@ -73,8 +75,10 @@ export const toast = {
   clear: clearToastItems,
   close: closeToastItem,
   closeAll: clearToastItems,
-  setDefaults(options: { position?: ToastPosition }) {
+  destroyAll: clearToastItems,
+  setDefaults(options: { position?: ToastPosition; max?: number }) {
     if (options.position) toastState.position = options.position
+    if (options.max !== undefined) toastState.max = options.max
   },
 }
 

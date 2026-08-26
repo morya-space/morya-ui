@@ -1,12 +1,21 @@
 import type { WiAppendTo } from '../../shared/overlay'
 
+export type DropdownItemType = 'item' | 'group' | 'divider'
+export type DropdownTrigger = 'click' | 'hover'
+
 export interface DropdownItem {
-  /** 菜单项的稳定标识，同时用于 v-for 的 key。 */
-  value: string
+  /** 菜单项的稳定标识，同时用于 v-for 的 key。分组 / 分割线可省略。 */
+  value?: string
   /** 菜单项展示文本。需要自定义内容时可使用 item slot。 */
-  label: string
+  label?: string
   /** 禁用后不可聚焦、不可选择。 */
   disabled?: boolean
+  icon?: string
+  command?: () => void
+  type?: DropdownItemType
+  /** Alias of `type: 'divider'`. */
+  separator?: boolean
+  items?: DropdownItem[]
 }
 
 export interface DropdownProps {
@@ -18,6 +27,9 @@ export interface DropdownProps {
   placement?: 'bottom-start' | 'bottom-end'
   /** 选择菜单项后是否自动关闭菜单。 */
   closeOnSelect?: boolean
+  trigger?: DropdownTrigger
+  showDelay?: number
+  hideDelay?: number
   /**
    * 是否将菜单 Teleport 出去。默认 `true`。
    * 设为 `false` 时等价于 `appendTo: 'self'`。

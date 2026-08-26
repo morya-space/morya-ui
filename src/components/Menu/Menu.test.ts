@@ -50,4 +50,17 @@ describe('WiMenu', () => {
     expect(document.body.querySelector('.wi-menu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('nests items and marks selectedKey', async () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        model: [{ label: 'File', items: [{ key: 'save', label: 'Save' }] }],
+        selectedKey: 'save',
+      },
+    })
+    await wrapper.get('.wi-menu__item--parent').trigger('click')
+    expect(wrapper.get('.wi-menu__item--selected').text()).toContain('Save')
+    await wrapper.get('.wi-menu__item--selected').trigger('click')
+    expect(wrapper.emitted('update:selectedKey')?.at(-1)).toEqual(['save'])
+  })
 })

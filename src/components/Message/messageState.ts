@@ -1,9 +1,15 @@
 import { reactive, type Reactive } from 'vue'
 import type { OverlayHostHandle } from '../../shared/overlayHost'
-import type { MessageItem } from './types'
+import type { MessageItem, MessagePlacement } from './types'
 
-export const messageState: Reactive<{ items: MessageItem[] }> = reactive({
+export const messageState: Reactive<{
+  items: MessageItem[]
+  placement: MessagePlacement
+  max?: number
+}> = reactive({
   items: [],
+  placement: 'top',
+  max: undefined,
 })
 
 export let messageAutoHost: OverlayHostHandle | null = null
@@ -33,6 +39,8 @@ export function resetMessageHostRegistry() {
     messageAutoHost = null
   }
   messageManualHostCount = 0
+  messageState.placement = 'top'
+  messageState.max = undefined
 }
 
 export function clearMessageLife(id: string | number) {
@@ -64,4 +72,22 @@ export function closeMessageItem(id?: string | number) {
 export function closeAllMessageItems() {
   for (const id of [...lifeTimers.keys()]) clearMessageLife(id)
   messageState.items = []
+}
+
+export function applyMessageMax(max?: number) {
+  if (max == null || max <= 0) return
+  while (messageState.items.length >= max) {
+    const oldest = messageState.items[0]
+    if (!oldest) break
+    closeMessageItem(oldest.id)
+  }
+}
+
+export function trimMessagesToMax(max?: number) {
+  if (max == null || max <= 0) return
+  while (messageState.items.length > max) {
+    const oldest = messageState.items[0]
+    if (!oldest) break
+    closeMessageItem(oldest.id)
+  }
 }

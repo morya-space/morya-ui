@@ -8,7 +8,10 @@ import {
 import type { FormProps, FormValidateTrigger } from './types'
 
 const props = withDefaults(defineProps<FormProps>(), {
-  labelPosition: 'top',
+  labelPosition: undefined,
+  labelPlacement: undefined,
+  labelAlign: 'left',
+  inline: false,
   requireMark: true,
   disabled: false,
   validateOn: () => ['submit'] as FormValidateTrigger[],
@@ -26,16 +29,17 @@ const validateOn = computed<FormValidateTrigger[]>(() => {
   const value = props.validateOn
   return Array.isArray(value) ? value : [value]
 })
+const resolvedLabelPosition = computed(() => props.labelPosition ?? props.labelPlacement ?? 'top')
 
 function setError(name: string, message?: string) {
   if (message) internalErrors[name] = message
   else delete internalErrors[name]
 }
 
-async function runField(name: string): Promise<boolean> {
+async function runField(name: string, trigger: FormValidateTrigger | 'all' = 'all'): Promise<boolean> {
   const field = fields.get(name)
   if (!field) return true
-  const result = await field.validate()
+  const result = await field.validate(trigger)
   const message = typeof result === 'string' && result.trim() ? result.trim() : undefined
   setError(name, message)
   return !message
@@ -43,13 +47,13 @@ async function runField(name: string): Promise<boolean> {
 
 async function validate(name?: string) {
   if (name) {
-    const valid = await runField(name)
+    const valid = await runField(name, 'all')
     const errors = { ...internalErrors }
     emit('validate', { valid, errors })
     return { valid, errors }
   }
   const names = [...fields.keys()]
-  const results = await Promise.all(names.map((fieldName) => runField(fieldName)))
+  const results = await Promise.all(names.map((fieldName) => runField(fieldName, 'all')))
   const valid = results.every(Boolean)
   const errors = { ...internalErrors }
   emit('validate', { valid, errors })
@@ -71,15 +75,22 @@ function unregisterField(name: string) {
 }
 
 function notifyBlur(name: string) {
-  if (validateOn.value.includes('blur')) void runField(name)
+  void runField(name, 'blur')
 }
 
 function notifyChange(name: string) {
-  if (validateOn.value.includes('change')) void runField(name)
+  void runField(name, 'change')
+}
+
+function notifyInput(name: string) {
+  void runField(name, 'input')
 }
 
 const context = computed(() => ({
-  labelPosition: props.labelPosition,
+  model: props.model,
+  rules: props.rules,
+  labelPosition: resolvedLabelPosition.value,
+  labelAlign: props.labelAlign,
   labelWidth: props.labelWidth,
   requireMark: props.requireMark,
   disabled: props.disabled,
@@ -88,6 +99,7 @@ const context = computed(() => ({
   unregisterField,
   notifyBlur,
   notifyChange,
+  notifyInput,
 }))
 
 provide(WI_FORM_KEY, context)
@@ -109,8 +121,12 @@ defineExpose({ validate, clearValidate, errors: internalErrors })
   <form
     class="wi-form"
     :class="[
-      `wi-form--label-${labelPosition}`,
-      { 'wi-form--disabled': disabled },
+      `wi-form--label-${resolvedLabelPosition}`,
+      `wi-form--align-${labelAlign}`,
+      {
+        'wi-form--disabled': disabled,
+        'wi-form--inline': inline,
+      },
     ]"
     @submit.prevent="onSubmit"
   >

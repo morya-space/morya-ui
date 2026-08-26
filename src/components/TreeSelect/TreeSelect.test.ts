@@ -40,4 +40,15 @@ describe('WiTreeSelect', () => {
     expect(document.body.querySelector('.wi-treeselect__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('selects multiple keys and filters nodes', async () => {
+    const wrapper = mount(WiTreeSelect, {
+      props: { options, modelValue: [], multiple: true, filterable: true, teleport: false },
+    })
+    await wrapper.find('.wi-treeselect__trigger').trigger('click')
+    await wrapper.find('.wi-treeselect__filter').setValue('Resume')
+    await wrapper.find('.wi-treeselect__toggler').trigger('click')
+    await wrapper.findAll('.wi-treeselect__option').find((n) => n.text() === 'Resume')!.trigger('click')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['resume']])
+  })
 })

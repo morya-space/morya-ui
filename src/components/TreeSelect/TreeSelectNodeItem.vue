@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import type { TreeSelectNode } from './types'
 import { useWiLocale } from '../../locale'
+import WiCheckbox from '../Checkbox/Checkbox.vue'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 defineProps<{
   node: TreeSelectNode
   depth: number
-  selectedKey: string | null
+  selectedKeys: string[]
+  checkedKeys: Record<string, boolean>
   expanded: Record<string, boolean>
+  showCheckbox: boolean
 }>()
 
 defineEmits<{
   (event: 'toggle', key: string): void
   (event: 'select', node: TreeSelectNode): void
+  (event: 'check', node: TreeSelectNode): void
 }>()
 
 const locale = useWiLocale()
@@ -35,10 +39,18 @@ const locale = useWiLocale()
         {{ expanded[node.key] ? '▾' : '▸' }}
       </button>
       <span v-else class="wi-treeselect__toggler-spacer" />
+      <WiCheckbox
+        v-if="showCheckbox"
+        class="wi-treeselect__checkbox"
+        :model-value="Boolean(checkedKeys[node.key])"
+        :disabled="node.disabled"
+        @update:model-value="$emit('check', node)"
+        @click.stop
+      />
       <button
         type="button"
         class="wi-treeselect__option"
-        :class="{ 'wi-treeselect__option--selected': selectedKey === node.key }"
+        :class="{ 'wi-treeselect__option--selected': selectedKeys.includes(node.key) }"
         :disabled="node.disabled"
         @click="$emit('select', node)"
       >
@@ -51,10 +63,13 @@ const locale = useWiLocale()
         :key="child.key"
         :node="child"
         :depth="depth + 1"
-        :selected-key="selectedKey"
+        :selected-keys="selectedKeys"
+        :checked-keys="checkedKeys"
         :expanded="expanded"
+        :show-checkbox="showCheckbox"
         @toggle="$emit('toggle', $event)"
         @select="$emit('select', $event)"
+        @check="$emit('check', $event)"
       />
     </ul>
   </li>

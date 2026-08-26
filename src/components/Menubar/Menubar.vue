@@ -3,11 +3,20 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { isIconName } from '../Icon/icons'
+import WiIcon from '../Icon/Icon.vue'
+import type { IconName } from '../Icon/types'
 import type { MenubarItem, MenubarProps } from './types'
 
 const props = withDefaults(defineProps<MenubarProps>(), {
+  selectedKey: null,
   teleport: true,
 })
+
+const emit = defineEmits<{
+  (event: 'update:selectedKey', value: string | null): void
+  (event: 'select', item: MenubarItem): void
+}>()
 
 const config = useWiConfig()
 const locale = useWiLocale()
@@ -33,10 +42,29 @@ function updateSubmenuPosition() {
   }
 }
 
+function itemKey(item: MenubarItem) {
+  return item.key ?? item.label
+}
+
+function isSelected(item: MenubarItem) {
+  return Boolean(props.selectedKey && itemKey(item) === props.selectedKey)
+}
+
+function iconOf(item: MenubarItem): IconName | undefined {
+  return item.icon && isIconName(item.icon) ? item.icon : undefined
+}
+
+function pick(item: MenubarItem) {
+  if (item.disabled) return
+  item.command?.()
+  emit('update:selectedKey', itemKey(item))
+  emit('select', item)
+}
+
 function toggle(index: number, item: MenubarItem) {
   if (item.disabled) return
   if (!item.items?.length) {
-    item.command?.()
+    pick(item)
     openIndex.value = null
     return
   }
@@ -45,8 +73,7 @@ function toggle(index: number, item: MenubarItem) {
 }
 
 function activateChild(item: MenubarItem) {
-  if (item.disabled) return
-  item.command?.()
+  pick(item)
   openIndex.value = null
 }
 
@@ -86,17 +113,22 @@ onBeforeUnmount(() => {
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
       class="wi-menubar__item"
-      :class="{ 'wi-menubar__item--open': openIndex === index }"
+      :class="{ 'wi-menubar__item--open': openIndex === index, 'wi-menubar__item--selected': isSelected(item) }"
     >
       <button
         :ref="(el) => setTriggerRef(el, index)"
         type="button"
         class="wi-menubar__trigger"
+        :class="{ 'wi-menubar__trigger--selected': isSelected(item) }"
         :disabled="item.disabled"
         :aria-expanded="item.items?.length ? openIndex === index : undefined"
         :aria-haspopup="item.items?.length ? 'menu' : undefined"
         @click.stop="toggle(index, item)"
       >
+        <span v-if="iconOf(item) || item.icon" class="wi-menubar__icon" aria-hidden="true">
+          <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+          <template v-else>{{ item.icon }}</template>
+        </span>
         {{ item.label }}
         <span v-if="item.items?.length" class="wi-menubar__caret" aria-hidden="true">▾</span>
       </button>
@@ -114,10 +146,15 @@ onBeforeUnmount(() => {
               :key="`${child.label}-${childIndex}`"
               type="button"
               class="wi-menubar__subitem"
+              :class="{ 'wi-menubar__subitem--selected': isSelected(child) }"
               role="menuitem"
               :disabled="child.disabled"
               @click.stop="activateChild(child)"
             >
+              <span v-if="iconOf(child) || child.icon" class="wi-menubar__icon" aria-hidden="true">
+                <WiIcon v-if="iconOf(child)" :name="iconOf(child)!" size="sm" />
+                <template v-else>{{ child.icon }}</template>
+              </span>
               {{ child.label }}
             </button>
           </div>

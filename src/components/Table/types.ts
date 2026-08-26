@@ -1,3 +1,4 @@
+import type { WiRenderable } from '../../shared/content'
 import type { WiSizeInput } from '../../shared/types'
 
 export type TableSize = WiSizeInput
@@ -23,6 +24,8 @@ export interface TableColumn<Row extends Record<string, unknown> = Record<string
   filterable?: boolean
   /** Optional preset filter values; when omitted, free-text filter is used. */
   filters?: TableColumnFilterOption[]
+  /** Custom cell content. Named `cell-${key}` slot still wins. */
+  render?: (row: Row, column: TableColumn<Row>) => WiRenderable
 }
 
 export type TableFilters = Record<string, string | number | boolean | null | undefined>
@@ -57,6 +60,10 @@ export interface TableProps {
   rowsPerPage?: number
   /** 1-based page when paginator is on. */
   page?: number
+  /** Show an expand column. Slot `expansion` renders the extra row. */
+  expandable?: boolean
+  expandedRowKeys?: Array<string | number>
+  rowExpandable?: (row: Record<string, unknown>) => boolean
 }
 
 export interface TableEmits {
@@ -70,4 +77,6 @@ export interface TableEmits {
   (event: 'page', value: number): void
   (event: 'row-click', payload: { row: Record<string, unknown>; index: number }): void
   (event: 'current-change', row: Record<string, unknown> | null): void
+  (event: 'update:expandedRowKeys', value: Array<string | number>): void
+  (event: 'expand', payload: { row: Record<string, unknown>; expanded: boolean }): void
 }

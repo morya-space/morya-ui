@@ -94,4 +94,74 @@ describe('WiSelect', () => {
     await wrapper.get('[role="combobox"]').trigger('click')
     expect(wrapper.get('.wi-select__empty').text()).toBe('没有可选内容')
   })
+
+  it('selects multiple values and keeps the menu open', async () => {
+    const wrapper = mount(WiSelect, {
+      props: { options, multiple: true, modelValue: [], teleport: false },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    const items = wrapper.findAll('[role="option"]')
+    await items[0]!.trigger('click')
+    await wrapper.setProps({ modelValue: ['sm'] })
+    await items[1]!.trigger('click')
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([[['sm']], [['sm', 2]]])
+    expect(wrapper.find('[role="listbox"]').exists()).toBe(true)
+  })
+
+  it('renders removable tags and can collapse extras', async () => {
+    const wrapper = mount(WiSelect, {
+      props: {
+        options,
+        multiple: true,
+        modelValue: ['sm', 2],
+        maxTagCount: 1,
+        teleport: false,
+      },
+    })
+    expect(wrapper.get('.wi-select__tag-label').text()).toBe('Small')
+    expect(wrapper.get('.wi-select__tag--more').text()).toBe('+1')
+    await wrapper.get('.wi-select__tag-remove').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([[[2]]])
+  })
+
+  it('clears all selected values in multiple mode', async () => {
+    const wrapper = mount(WiSelect, {
+      props: { options, multiple: true, modelValue: ['sm', 2], showClear: true, teleport: false },
+    })
+    await wrapper.get('.wi-select__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([[[]]])
+  })
+
+  it('skips local filtering when remote and emits search', async () => {
+    const wrapper = mount(WiSelect, {
+      props: { options, filter: true, remote: true, teleport: false },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await wrapper.get('.wi-select__filter').setValue('zzz')
+    await nextTick()
+    expect(wrapper.findAll('[role="option"]')).toHaveLength(options.length)
+    expect(wrapper.emitted('search')?.at(-1)).toEqual(['zzz'])
+  })
+
+  it('shows loading copy and creates a tag option from the filter query', async () => {
+    const loading = mount(WiSelect, {
+      props: { options: [], loading: true, teleport: false },
+    })
+    await loading.get('[role="combobox"]').trigger('click')
+    expect(loading.get('.wi-select__empty').text()).toBe('加载中')
+    expect(loading.get('[role="combobox"]').attributes('aria-busy')).toBe('true')
+
+    const wrapper = mount(WiSelect, {
+      props: { options, filter: true, tag: true, teleport: false },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await wrapper.get('.wi-select__filter').setValue('Brand new')
+    await nextTick()
+    const create = wrapper.get('.wi-select__option--create')
+    expect(create.text()).toContain('Brand new')
+    await create.trigger('click')
+    expect(wrapper.emitted('create')?.[0]?.[0]).toEqual({ label: 'Brand new', value: 'Brand new' })
+    expect(wrapper.emitted('update:modelValue')).toEqual([['Brand new']])
+  })
 })

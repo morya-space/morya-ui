@@ -17,9 +17,9 @@ export type {
 export { default as WiCard } from './components/Card/Card.vue'
 export type { CardProps } from './components/Card/types'
 export { default as WiDialog } from './components/Dialog/Dialog.vue'
-export type { DialogEmits, DialogPosition, DialogProps } from './components/Dialog/types'
+export type { DialogCloseGuard, DialogClickGuard, DialogEmits, DialogPosition, DialogProps, DialogType } from './components/Dialog/types'
 export { default as WiDropdown } from './components/Dropdown/Dropdown.vue'
-export type { DropdownEmits, DropdownItem, DropdownProps } from './components/Dropdown/types'
+export type { DropdownEmits, DropdownItem, DropdownItemType, DropdownProps, DropdownTrigger } from './components/Dropdown/types'
 export { default as WiIcon } from './components/Icon/Icon.vue'
 export {
   getIconDefinition,
@@ -38,9 +38,9 @@ export type { RadioEmits, RadioProps } from './components/Radio/types'
 export { default as WiSwitch } from './components/Switch/Switch.vue'
 export type { SwitchEmits, SwitchProps } from './components/Switch/types'
 export { default as WiTextarea } from './components/Textarea/Textarea.vue'
-export type { TextareaEmits, TextareaProps } from './components/Textarea/types'
+export type { TextareaEmits, TextareaInstance, TextareaProps, WiTextareaAutosize } from './components/Textarea/types'
 export { default as WiSelect } from './components/Select/Select.vue'
-export type { SelectEmits, SelectOption, SelectProps, SelectSize, SelectValue } from './components/Select/types'
+export type { SelectEmits, SelectModelValue, SelectOption, SelectProps, SelectSize, SelectValue } from './components/Select/types'
 export { default as WiTabs } from './components/Tabs/Tabs.vue'
 export type { TabItem, TabsEmits, TabsProps } from './components/Tabs/types'
 export { default as WiDivider } from './components/Divider/Divider.vue'
@@ -97,9 +97,11 @@ export { default as WiMessage } from './components/Message/Message.vue'
 export { message, useMessage } from './components/Message/message'
 export type {
   MessageHandle,
+  MessageHostConfig,
   MessageInput,
   MessageItem,
   MessageOptions,
+  MessagePlacement,
   MessageProps,
   MessageSeverity,
 } from './components/Message/types'
@@ -122,6 +124,7 @@ export type {
   InputPasswordProps,
   InputPasswordSlots,
   PasswordStrength,
+  WiShowPasswordOn,
 } from './components/InputPassword/types'
 export { default as WiFloatLabel } from './components/FloatLabel/FloatLabel.vue'
 export type { FloatLabelProps } from './components/FloatLabel/types'
@@ -147,8 +150,36 @@ export { default as WiPanel } from './components/Panel/Panel.vue'
 export type { PanelEmits, PanelProps } from './components/Panel/types'
 export { default as WiFieldset } from './components/Fieldset/Fieldset.vue'
 export type { FieldsetEmits, FieldsetProps } from './components/Fieldset/types'
+export { default as WiFlex } from './components/Flex/Flex.vue'
+export type { FlexAlign, FlexJustify, FlexProps, FlexSize } from './components/Flex/types'
+export { default as WiSpace } from './components/Space/Space.vue'
+export type { SpaceAlign, SpaceJustify, SpaceProps, SpaceSize } from './components/Space/types'
+export { default as WiGrid } from './components/Grid/Grid.vue'
+export { default as WiGridItem } from './components/Grid/GridItem.vue'
+export { default as WiGi } from './components/Grid/GridItem.vue'
+export type { GridItemProps, GridProps, GridResponsive } from './components/Grid/types'
+export { WI_GRID_KEY } from './components/Grid/types'
+export { default as WiLayout } from './components/Layout/Layout.vue'
+export { default as WiLayoutHeader } from './components/Layout/LayoutHeader.vue'
+export { default as WiLayoutContent } from './components/Layout/LayoutContent.vue'
+export { default as WiLayoutFooter } from './components/Layout/LayoutFooter.vue'
+export { default as WiLayoutSider } from './components/Layout/LayoutSider.vue'
+export type {
+  LayoutCollapseMode,
+  LayoutContentProps,
+  LayoutExpose,
+  LayoutFooterProps,
+  LayoutHeaderProps,
+  LayoutPosition,
+  LayoutProps,
+  LayoutSiderEmits,
+  LayoutSiderPlacement,
+  LayoutSiderProps,
+  LayoutTrigger,
+} from './components/Layout/types'
+export { WI_LAYOUT_KEY } from './components/Layout/context'
 export { default as WiSplitter } from './components/Splitter/Splitter.vue'
-export type { SplitterLayout, SplitterProps } from './components/Splitter/types'
+export type { SplitterEmits, SplitterLayout, SplitterProps, SplitterSize } from './components/Splitter/types'
 export { default as WiStepper } from './components/Stepper/Stepper.vue'
 export type { StepperEmits, StepperProps, StepperStep } from './components/Stepper/types'
 export { default as WiToolbar } from './components/Toolbar/Toolbar.vue'
@@ -156,8 +187,9 @@ export type { ToolbarProps } from './components/Toolbar/types'
 export { default as WiMenu } from './components/Menu/Menu.vue'
 export type { MenuEmits, MenuItem, MenuProps } from './components/Menu/types'
 export { default as WiMenubar } from './components/Menubar/Menubar.vue'
-export type { MenubarItem, MenubarProps } from './components/Menubar/types'
+export type { MenubarEmits, MenubarItem, MenubarProps } from './components/Menubar/types'
 export { default as WiContextMenu } from './components/ContextMenu/ContextMenu.vue'
+export { useContextMenu } from './components/ContextMenu/useContextMenu'
 export type {
   ContextMenuEmits,
   ContextMenuInstance,
@@ -185,6 +217,7 @@ export { default as WiSplitButton } from './components/SplitButton/SplitButton.v
 export type { SplitButtonEmits, SplitButtonItem, SplitButtonProps } from './components/SplitButton/types'
 export { default as WiTree } from './components/Tree/Tree.vue'
 export type {
+  TreeCheckStrategy,
   TreeCheckedKeys,
   TreeEmits,
   TreeExpandedKeys,
@@ -213,7 +246,7 @@ export type {
   CascadeSelectValue,
 } from './components/CascadeSelect/types'
 export { default as WiTreeSelect } from './components/TreeSelect/TreeSelect.vue'
-export type { TreeSelectEmits, TreeSelectNode, TreeSelectProps } from './components/TreeSelect/types'
+export type { TreeSelectEmits, TreeSelectNode, TreeSelectProps, TreeSelectValue } from './components/TreeSelect/types'
 export { default as WiInputColor } from './components/InputColor/InputColor.vue'
 export type { InputColorEmits, InputColorProps } from './components/InputColor/types'
 export { default as WiInputTags } from './components/InputTags/InputTags.vue'
@@ -281,23 +314,43 @@ export type { TerminalEmits, TerminalProps } from './components/Terminal/types'
 
 export { default as WiForm } from './components/Form/Form.vue'
 export { default as WiFormItem } from './components/Form/FormItem.vue'
-export type { FormItemProps, FormLabelPosition, FormProps, FormValidateTrigger } from './components/Form/types'
+export type {
+  FormInstance,
+  FormItemProps,
+  FormItemRule,
+  FormLabelAlign,
+  FormLabelPosition,
+  FormModel,
+  FormProps,
+  FormRules,
+  FormValidateResult,
+  FormValidateTrigger,
+} from './components/Form/types'
 export { WI_FORM_ERRORS_KEY, WI_FORM_KEY } from './components/Form/context'
 export type { FormFieldValidator, WiFormContext, WiFormFieldRegistration } from './components/Form/context'
 
 export { default as WiConfigProvider } from './components/ConfigProvider/ConfigProvider.vue'
-export type { WiGlobalConfig, WiLocaleConfig, WiDensity } from './components/ConfigProvider/types'
+export type { WiGlobalConfig, WiLocaleConfig, WiDensity, WiComponentDefaults } from './components/ConfigProvider/types'
 export {
   createWellInsight,
   getDefaultWiConfig,
+  getComponentDefault,
+  getComponentDefaults,
   installWellInsight,
+  mergeComponentDefaults,
+  mergeWiConfig,
   provideWiConfig,
   resolveConfiguredAppendTo,
+  useComponentDefaults,
+  useConfiguredGapSize,
+  useConfiguredSize,
+  useConfiguredVariant,
   useWiConfig,
   WellInsight,
   WI_CONFIG_KEY,
 } from './shared/config'
 export type { WiInstallerOptions } from './shared/config'
+export type { WiComponentDefaultMap } from './shared/componentDefaults'
 export { wiComponentNames, wiComponents } from './component-registry'
 export { WellInsight as default } from './shared/config'
 export { enUS, formatLocale, mergeLocale, useWiLocale, zhCN } from './locale'

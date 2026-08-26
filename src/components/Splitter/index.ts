@@ -1,2 +1,2 @@
 export { default as WiSplitter } from './Splitter.vue'
-export type { SplitterLayout, SplitterProps } from './types'
+export type { SplitterEmits, SplitterLayout, SplitterProps, SplitterSize } from './types'

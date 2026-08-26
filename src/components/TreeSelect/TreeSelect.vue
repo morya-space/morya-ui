@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import { resolveSizeClass } from '../../shared/types'
-import type { TreeSelectNode, TreeSelectProps } from './types'
+import {
+  expandCheckedKeys,
+  findNode,
+  nodePathLabels,
+  projectCheckedKeys,
+  setCheckedCascade,
+  syncAncestors,
+} from '../Tree/checkStrategy'
+import type { TreeCheckedKeys } from '../Tree/types'
+import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
@@ -12,17 +20,27 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   placeholder: undefined,
   disabled: false,
   selectionMode: 'single',
+  multiple: false,
+  checkable: false,
+  checkStrictly: false,
+  checkStrategy: 'all',
+  clearable: false,
+  filterable: false,
+  showPath: false,
+  separator: ' / ',
   teleport: true,
 })
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: string | null): void
+  (event: 'update:modelValue', value: TreeSelectValue): void
+  (event: 'clear'): void
 }>()
 
 const config = useWiConfig()
 const locale = useWiLocale()
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
 const open = ref(false)
+const query = ref('')
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
@@ -30,20 +48,51 @@ const panelStyle = ref<Record<string, string>>({})
 const expanded = ref<Record<string, boolean>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
-
-const displayLabel = computed(() => findLabel(props.options, props.modelValue) ?? props.placeholder ?? locale.value.selectPlaceholder)
-
-function findLabel(nodes: TreeSelectNode[], key: string | null | undefined): string | null {
-  if (!key) return null
-  for (const node of nodes) {
-    if (node.key === key) return node.label
-    if (node.children?.length) {
-      const nested = findLabel(node.children, key)
-      if (nested) return nested
-    }
+const isMultiple = computed(() => props.multiple || props.selectionMode === 'multiple' || props.checkable)
+const selectedKeys = computed(() => {
+  if (Array.isArray(props.modelValue)) return props.modelValue
+  return typeof props.modelValue === 'string' && props.modelValue ? [props.modelValue] : []
+})
+const incomingChecked = computed<TreeCheckedKeys>(() => {
+  const keys: TreeCheckedKeys = {}
+  for (const key of selectedKeys.value) keys[key] = true
+  return keys
+})
+const checkedKeys = computed(() =>
+  expandCheckedKeys(props.options, incomingChecked.value, props.checkStrategy, props.checkStrictly),
+)
+const displayLabel = computed(() => {
+  const key = selectedKeys.value[0]
+  if (!key || isMultiple.value) return props.placeholder ?? locale.value.selectPlaceholder
+  if (props.showPath) {
+    const path = nodePathLabels(props.options, key)
+    return path.length ? path.join(props.separator) : key
   }
-  return null
-}
+  return findNode(props.options, key)?.label ?? props.placeholder ?? locale.value.selectPlaceholder
+})
+const selectedTags = computed(() =>
+  selectedKeys.value.map((key) => ({
+    key,
+    label: props.showPath ? nodePathLabels(props.options, key).join(props.separator) : (findNode(props.options, key)?.label ?? key),
+  })),
+)
+const visibleTags = computed(() => {
+  const max = props.maxTagCount
+  if (max == null || max < 0 || selectedTags.value.length <= max) return selectedTags.value
+  return selectedTags.value.slice(0, max)
+})
+const hiddenTagCount = computed(() => Math.max(0, selectedTags.value.length - visibleTags.value.length))
+const filteredOptions = computed(() => {
+  const q = query.value.trim().toLowerCase()
+  if (!q) return props.options
+  const match = (node: TreeSelectNode): TreeSelectNode | null => {
+    const self = node.label.toLowerCase().includes(q)
+    const children = (node.children ?? []).map(match).filter((item): item is TreeSelectNode => item != null)
+    if (self || children.length) return { ...node, children: children.length ? children : node.children }
+    return null
+  }
+  return props.options.map(match).filter((item): item is TreeSelectNode => item != null)
+})
 
 function updatePanelPosition() {
   if (!teleported.value || !trigger.value) return
@@ -65,10 +114,51 @@ function toggleExpand(key: string) {
   expanded.value = { ...expanded.value, [key]: !expanded.value[key] }
 }
 
+function emitKeys(keys: string[]) {
+  if (isMultiple.value) emit('update:modelValue', keys)
+  else emit('update:modelValue', keys[0] ?? null)
+}
+
 function select(node: TreeSelectNode) {
   if (node.disabled) return
-  emit('update:modelValue', node.key === props.modelValue ? null : node.key)
-  open.value = false
+  if (props.checkable) {
+    toggleCheck(node)
+    return
+  }
+  if (!isMultiple.value) {
+    emit('update:modelValue', node.key === props.modelValue ? null : node.key)
+    open.value = false
+    return
+  }
+  const next = selectedKeys.value.includes(node.key)
+    ? selectedKeys.value.filter((key) => key !== node.key)
+    : [...selectedKeys.value, node.key]
+  emitKeys(next)
+}
+
+function toggleCheck(node: TreeSelectNode) {
+  if (node.disabled) return
+  const next = { ...checkedKeys.value }
+  const value = !next[node.key]
+  if (props.checkStrictly) {
+    if (value) next[node.key] = true
+    else delete next[node.key]
+  } else {
+    setCheckedCascade(node, value, next)
+    syncAncestors(props.options, next)
+  }
+  const projected = projectCheckedKeys(props.options, next, props.checkStrategy, props.checkStrictly)
+  emitKeys(Object.keys(projected).filter((key) => projected[key]))
+}
+
+function removeTag(key: string) {
+  emitKeys(selectedKeys.value.filter((item) => item !== key))
+}
+
+function clear(event: MouseEvent) {
+  event.stopPropagation()
+  emit('update:modelValue', isMultiple.value ? [] : null)
+  emit('clear')
 }
 
 function onDocumentClick(event: MouseEvent) {
@@ -89,6 +179,7 @@ watch(open, (isOpen) => {
       window.addEventListener('scroll', onViewportChange, true)
     }
   } else {
+    query.value = ''
     document.removeEventListener('click', onDocumentClick)
     window.removeEventListener('resize', onViewportChange)
     window.removeEventListener('scroll', onViewportChange, true)
@@ -108,21 +199,55 @@ onBeforeUnmount(() => {
     class="wi-treeselect"
     :class="[
       `wi-treeselect--${sizeClass}`,
-      { 'wi-treeselect--disabled': disabled, 'wi-treeselect--open': open },
+      {
+        'wi-treeselect--disabled': disabled,
+        'wi-treeselect--open': open,
+        'wi-treeselect--multiple': isMultiple,
+      },
     ]"
   >
-    <button
+    <div
       ref="trigger"
-      type="button"
       class="wi-treeselect__trigger"
-      :disabled="disabled"
+      role="combobox"
+      tabindex="0"
+      :aria-disabled="disabled || undefined"
       :aria-expanded="open"
       aria-haspopup="tree"
       @click="toggle"
+      @keydown.enter.prevent="toggle"
     >
-      <span class="wi-treeselect__label">{{ displayLabel }}</span>
+      <div v-if="isMultiple && selectedTags.length" class="wi-treeselect__tags">
+        <span v-for="tag in visibleTags" :key="tag.key" class="wi-select__tag">
+          <span class="wi-select__tag-label">{{ tag.label }}</span>
+          <button
+            type="button"
+            class="wi-select__tag-remove"
+            :aria-label="locale.remove"
+            :disabled="disabled"
+            @click.stop="removeTag(tag.key)"
+          >
+            ×
+          </button>
+        </span>
+        <span v-if="hiddenTagCount" class="wi-select__tag wi-select__tag--more">
+          {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
+        </span>
+      </div>
+      <span v-else class="wi-treeselect__label" :class="{ 'wi-treeselect__label--placeholder': !selectedKeys.length }">
+        {{ displayLabel }}
+      </span>
+      <button
+        v-if="clearable && selectedKeys.length && !disabled"
+        type="button"
+        class="wi-treeselect__clear"
+        :aria-label="locale.clear"
+        @click="clear"
+      >
+        ×
+      </button>
       <span class="wi-treeselect__caret" aria-hidden="true">▾</span>
-    </button>
+    </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
         <div
@@ -132,16 +257,27 @@ onBeforeUnmount(() => {
           :class="{ 'wi-treeselect__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
         >
+          <input
+            v-if="filterable"
+            v-model="query"
+            class="wi-treeselect__filter"
+            type="search"
+            :placeholder="locale.searchPlaceholder"
+            @click.stop
+          >
           <ul class="wi-treeselect__tree" role="tree">
             <TreeSelectNodeItem
-              v-for="node in options"
+              v-for="node in filteredOptions"
               :key="node.key"
               :node="node"
               :depth="0"
-              :selected-key="modelValue"
+              :selected-keys="selectedKeys"
+              :checked-keys="checkedKeys"
               :expanded="expanded"
+              :show-checkbox="checkable"
               @toggle="toggleExpand"
               @select="select"
+              @check="toggleCheck"
             />
           </ul>
         </div>

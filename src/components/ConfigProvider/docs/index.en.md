@@ -18,6 +18,7 @@ Provide global defaults for the component tree via `WiConfigProvider` or `create
 | `inputVariant` | Default input style: `outlined` / `filled` |
 | `zIndex` | Base overlay z-index |
 | `locale` | Strings for confirm / empty / loading / placeholder, etc. Pass built-in packs `zhCN` / `enUS` |
+| `componentDefaults` | Per-component default props (e.g. `Input.size`, `Space.size`). Local props win |
 
 ## Size
 
@@ -41,6 +42,38 @@ const options = [
       <WiSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
       <WiButton label="Override to large" size="large" />
     </div>
+  </WiConfigProvider>
+</template>
+```
+
+## Component Defaults
+
+Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Wi*` aliases.
+
+Precedence: **component props > `componentDefaults[component]` > global `size` / `inputVariant` > built-in defaults**.
+
+`Space` / `Flex` `size` is gap and does **not** inherit the global control `size`.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiConfigProvider, WiButton, WiInput, WiSpace } from '@well-insight/ui'
+
+const note = ref('Clearable')
+</script>
+
+<template>
+  <WiConfigProvider
+    size="large"
+    :component-defaults="{
+      Input: { size: 'small', clearable: true },
+      Space: { size: 16 },
+    }"
+  >
+    <WiSpace>
+      <WiButton label="Still large" />
+      <WiInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
+    </WiSpace>
   </WiConfigProvider>
 </template>
 ```
@@ -118,6 +151,10 @@ createApp(App)
       density: 'comfortable',
       zIndex: 1100,
       locale: enUS,
+      componentDefaults: {
+        Space: { size: 'small' },
+        Input: { clearable: true },
+      },
     }),
   )
   .mount('#app')

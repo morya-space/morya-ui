@@ -6,12 +6,12 @@ description: 顶部居中浮层提示，支持 API 调用。
 
 # Message
 
-从窗口顶部正中滑入的轻量提示，适合简短操作反馈。推荐用 `message` API；也可挂载 `<WiMessage />` 作为自定义挂载点。
+从窗口顶部正中滑入的轻量提示（可通过 `placement` 改到六向位置），适合简短操作反馈。推荐用 `message` API；也可挂载 `<WiMessage />` 作为自定义挂载点。
 
 与 [Toast](/components/Toast) 的分工：
 
-- **Message**：顶部居中、单行文案。
-- **Toast**：四角通知，可带标题与详情。
+- **Message**：轻量单行反馈，默认顶部居中，无标题/详情。
+- **Toast**：四角通知，带 `summary` / `detail`。`max` 语义与 Message 相同（超出丢掉最旧一条）。
 
 ## 引入
 
@@ -80,7 +80,8 @@ function showVNode() {
 | `message.error(content \| options)` | 错误提示 |
 | `message.open(content \| options)` | 自定义打开 |
 | `message.close(id?)` | 关闭指定 / 全部 |
-| `message.closeAll()` | 关闭全部 |
+| `message.closeAll()` / `message.destroyAll()` | 关闭全部（`destroyAll` 对齐 Naive） |
+| `message.config({ placement, max })` | 宿主位置与并发上限 |
 
 返回值：`{ id, close }`。
 
@@ -111,3 +112,5 @@ function showVNode() {
 | --- | --- | --- | --- |
 | `teleport` | `boolean` | `true` | 是否 Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
+| `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | 宿主位置 |
+| `max` | `number` | — | 同时可见条数；超出丢掉最旧一条 |

@@ -2,7 +2,13 @@
 import { computed, inject, onBeforeUnmount, useId, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { WI_FORM_ERRORS_KEY, WI_FORM_KEY } from './context'
-import type { FormItemProps } from './types'
+import {
+  evaluateFormRule,
+  normalizeFormRules,
+  ruleMatchesTrigger,
+  toCssSize,
+} from './rules'
+import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   required: false,
@@ -15,9 +21,17 @@ const locale = useWiLocale()
 const autoId = useId()
 
 const labelPosition = computed(() => props.labelPosition ?? form?.value.labelPosition ?? 'top')
-const labelWidth = computed(() => props.labelWidth ?? form?.value.labelWidth)
-const showRequireMark = computed(() => Boolean(props.required && (form?.value.requireMark ?? true)))
+const labelAlign = computed(() => props.labelAlign ?? form?.value.labelAlign ?? 'left')
+const labelWidth = computed(() => toCssSize(props.labelWidth ?? form?.value.labelWidth))
 const fieldName = computed(() => props.name ?? props.for)
+const mergedRules = computed<FormItemRule[]>(() => {
+  const name = fieldName.value
+  const fromForm = name ? normalizeFormRules(form?.value.rules?.[name]) : []
+  return [...fromForm, ...normalizeFormRules(props.rules)]
+})
+const showRequireMark = computed(
+  () => Boolean((form?.value.requireMark ?? true) && (props.required || mergedRules.value.some((rule) => rule.required))),
+)
 const internalError = computed(() => {
   const name = fieldName.value
   if (!name || !formErrors) return undefined
@@ -28,27 +42,53 @@ const isInvalid = computed(() => props.invalid || Boolean(displayError.value))
 const controlId = computed(() => props.for ?? `wi-form-item-${autoId}`)
 const messageId = computed(() => `${controlId.value}-message`)
 const requiredLabel = computed(() => locale.value.required)
+const fieldValue = computed(() => {
+  const name = fieldName.value
+  if (!name) return undefined
+  return form?.value.model?.[name]
+})
 
 const rootClass = computed(() => [
   'wi-form-item',
   `wi-form-item--label-${labelPosition.value}`,
+  `wi-form-item--align-${labelAlign.value}`,
   {
     'wi-form-item--invalid': isInvalid.value,
-    'wi-form-item--required': props.required,
+    'wi-form-item--required': showRequireMark.value,
   },
 ])
 
-const labelStyle = computed(() =>
-  labelPosition.value === 'left' && labelWidth.value ? { width: labelWidth.value } : undefined,
-)
+const labelStyle = computed(() => {
+  const style: Record<string, string> = { textAlign: labelAlign.value }
+  if (labelPosition.value === 'left' && labelWidth.value) style.width = labelWidth.value
+  return style
+})
+
+async function validateField(trigger: FormValidateTrigger | 'all' = 'all') {
+  const value = fieldValue.value
+  const formTriggers = form?.value.validateOn ?? ['submit']
+  for (const rule of mergedRules.value) {
+    if (!ruleMatchesTrigger(rule, trigger, formTriggers)) continue
+    const message = await evaluateFormRule(rule, value, locale.value.required)
+    if (message) return message
+  }
+  if (props.validate && ruleMatchesTrigger({}, trigger, formTriggers)) {
+    const result = await props.validate(trigger)
+    if (typeof result === 'string' && result.trim()) return result.trim()
+    if (result === false) return locale.value.required
+  }
+  return undefined
+}
 
 watch(
-  () => [fieldName.value, props.validate] as const,
-  ([name, validate]) => {
-    if (!form?.value || !name || !validate) return
+  () => [fieldName.value, mergedRules.value, props.validate] as const,
+  ([name], previous) => {
+    const previousName = previous?.[0]
+    if (previousName && previousName !== name) form?.value.unregisterField(previousName)
+    if (!form?.value || !name) return
     form.value.registerField({
       name,
-      validate: async () => validate(),
+      validate: (trigger) => validateField(trigger ?? 'all'),
     })
   },
   { immediate: true },
@@ -68,10 +108,15 @@ function onChange() {
   const name = fieldName.value
   if (name) form?.value.notifyChange(name)
 }
+
+function onInput() {
+  const name = fieldName.value
+  if (name) form?.value.notifyInput(name)
+}
 </script>
 
 <template>
-  <div :class="rootClass" @focusout="onFocusOut" @change="onChange">
+  <div :class="rootClass" @focusout="onFocusOut" @change="onChange" @input="onInput">
     <label
       v-if="label"
       class="wi-form-item__label"

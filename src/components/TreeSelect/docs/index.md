@@ -1,12 +1,12 @@
 ---
 title: TreeSelect
 category: 02 / FORM
-description: 下拉面板中的树形单选。
+description: 下拉树选择。支持单选/多选、勾选级联、过滤、清空与路径展示。
 ---
 
 # TreeSelect
 
-在下拉中展示可展开树并单选节点。
+在下拉中展示可展开树。`multiple` / `checkable` 打开多选；`filterable`、`clearable`、`showPath` 对照 Naive `n-tree-select` 常用能力。
 
 ## 引入
 
@@ -39,6 +39,41 @@ const options = [
 </template>
 ```
 
+## Multiple / filter / path
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTreeSelect } from '@well-insight/ui'
+
+const value = ref<string[]>([])
+const options = [
+  {
+    key: 'docs',
+    label: '文档',
+    children: [
+      { key: 'resume', label: '简历' },
+      { key: 'home', label: '家居' },
+    ],
+  },
+]
+</script>
+
+<template>
+  <WiTreeSelect
+    v-model="value"
+    :options="options"
+    multiple
+    checkable
+    filterable
+    clearable
+    show-path
+    placeholder="选择节点"
+    style="min-width: 16rem"
+  />
+</template>
+```
+
 ## Size
 
 ```vue preview
@@ -66,11 +101,20 @@ const options = [{ key: 'docs', label: '文档' }]
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `options` | `TreeSelectNode[]` | — | 树节点。 |
-| `modelValue` | `string \| null` | `null` | 选中节点 key。 |
-| `placeholder` | `string` | `'请选择'` | 占位文案。 |
+| `modelValue` | `string \| string[] \| null` | `null` | 选中节点 key；多选为数组。 |
+| `placeholder` | `string` | locale | 占位文案。 |
 | `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
-| `selectionMode` | `'single'` | `'single'` | 选择模式。 |
+| `multiple` | `boolean` | `false` | 多选。 |
+| `checkable` | `boolean` | `false` | 显示勾选框（级联语义同 Tree）。 |
+| `checkStrictly` | `boolean` | `false` | 父子不关联。 |
+| `checkStrategy` | `'all' \| 'parent' \| 'child'` | `'all'` | 级联时绑定哪些 keys。 |
+| `clearable` | `boolean` | `false` | 显示清空。 |
+| `filterable` | `boolean` | `false` | 面板内过滤。 |
+| `showPath` | `boolean` | `false` | 展示祖先路径。 |
+| `separator` | `string` | `' / '` | 路径分隔符。 |
+| `maxTagCount` | `number` | — | 多选最多展示的 tag 数。 |
+| `selectionMode` | `'single' \| 'multiple'` | `'single'` | 兼容字段；请优先用 `multiple`。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
 
@@ -78,4 +122,5 @@ const options = [{ key: 'docs', label: '文档' }]
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
-| `update:modelValue` | `string \| null` | 选中变化。 |
+| `update:modelValue` | `string \| string[] \| null` | 选中变化。 |
+| `clear` | — | 点击清空。 |

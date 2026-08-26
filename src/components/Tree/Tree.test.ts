@@ -53,4 +53,21 @@ describe('WiTree', () => {
     expect(wrapper.text()).toContain('Work')
     expect(wrapper.text()).toContain('Documents')
   })
+
+  it('projects checked keys with checkStrategy child', async () => {
+    const wrapper = mount(WiTree, {
+      props: {
+        value,
+        showCheckbox: true,
+        checkedKeys: {},
+        defaultExpandAll: true,
+        checkStrategy: 'child',
+      },
+    })
+    await wrapper.find('.wi-checkbox__input').setValue(true)
+    const keys = wrapper.emitted('update:checkedKeys')?.at(-1)?.[0] as Record<string, boolean>
+    expect(keys['0']).toBeUndefined()
+    expect(keys['0-0']).toBe(true)
+    expect(keys['0-1']).toBe(true)
+  })
 })

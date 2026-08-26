@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
@@ -11,6 +11,7 @@ import {
   closeMessageItem,
   messageState,
   registerMessageManualHost,
+  trimMessagesToMax,
   unregisterMessageManualHost,
 } from './messageState'
 import type { MessageItem, MessageProps } from './types'
@@ -23,6 +24,7 @@ const props = withDefaults(defineProps<MessageProps>(), {
 const config = useWiConfig()
 const locale = useWiLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
+const resolvedPlacement = computed(() => props.placement ?? messageState.placement)
 
 onMounted(() => {
   if (!props.auto) registerMessageManualHost()
@@ -31,6 +33,18 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (!props.auto) unregisterMessageManualHost()
 })
+
+watch(
+  () => [props.placement, props.max] as const,
+  ([placement, max]) => {
+    if (placement) messageState.placement = placement
+    if (max !== undefined) {
+      messageState.max = max
+      trimMessagesToMax(max)
+    }
+  },
+  { immediate: true },
+)
 
 function iconName(severity?: MessageItem['severity']): IconName {
   switch (normalizeSeverity(severity) ?? 'info') {
@@ -56,7 +70,12 @@ function onClose(item: MessageItem) {
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <div class="wi-message-host" aria-live="polite" aria-atomic="false">
+    <div
+      class="wi-message-host"
+      :class="`wi-message-host--${resolvedPlacement}`"
+      aria-live="polite"
+      aria-atomic="false"
+    >
       <TransitionGroup name="wi-message-slide">
         <div
           v-for="item in messageState.items"

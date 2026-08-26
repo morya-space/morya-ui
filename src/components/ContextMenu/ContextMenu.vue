@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import ContextMenuNodes from './ContextMenuNodes.vue'
 import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
 
 const props = withDefaults(defineProps<ContextMenuProps>(), {
@@ -95,19 +96,7 @@ defineExpose({ show, hide })
         :style="menuStyle"
         @click.stop
       >
-        <template v-for="(item, index) in model" :key="`${item.label ?? 'sep'}-${index}`">
-          <div v-if="item.separator" class="wi-contextmenu__separator" role="separator" />
-          <button
-            v-else
-            type="button"
-            class="wi-contextmenu__item"
-            role="menuitem"
-            :disabled="item.disabled"
-            @click="activate(item)"
-          >
-            {{ item.label }}
-          </button>
-        </template>
+        <ContextMenuNodes :items="model" @activate="activate" />
       </div>
     </Transition>
   </Teleport>

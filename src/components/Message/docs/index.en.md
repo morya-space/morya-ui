@@ -6,12 +6,12 @@ description: Top-center floating notice with an imperative API.
 
 # Message
 
-A lightweight notice that slides in from the top center — good for short action feedback. Prefer the `message` API; you can also mount `<WiMessage />` as a custom host.
+A lightweight notice that slides in from the top center by default (`placement` can move it). Prefer the `message` API; you can also mount `<WiMessage />` as a custom host.
 
 Vs [Toast](/components/Toast):
 
-- **Message**: top-center, single-line copy.
-- **Toast**: corner notifications with a title and optional detail.
+- **Message**: short single-line feedback; no title/detail.
+- **Toast**: corner notifications with `summary` / `detail`. Both support `max` (oldest dropped).
 
 ## Import
 
@@ -80,7 +80,8 @@ function showVNode() {
 | `message.error(content \| options)` | Error |
 | `message.open(content \| options)` | Open with options |
 | `message.close(id?)` | Close one / all |
-| `message.closeAll()` | Close all |
+| `message.closeAll()` / `message.destroyAll()` | Close all (`destroyAll` matches Naive) |
+| `message.config({ placement, max })` | Host placement and concurrency cap |
 
 Returns `{ id, close }`.
 
@@ -111,3 +112,5 @@ When a manual host exists, the API will not mount a second one.
 | --- | --- | --- | --- |
 | `teleport` | `boolean` | `true` | Whether to Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target |
+| `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | Host placement |
+| `max` | `number` | — | Max visible items; oldest is dropped |

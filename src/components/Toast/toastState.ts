@@ -5,9 +5,11 @@ import type { ToastMessage, ToastPosition } from './types'
 export const toastState: Reactive<{
   messages: ToastMessage[]
   position: ToastPosition
+  max?: number
 }> = reactive({
   messages: [],
   position: 'top-right',
+  max: undefined,
 })
 
 export let toastAutoHost: OverlayHostHandle | null = null
@@ -37,6 +39,8 @@ export function resetToastHostRegistry() {
     toastAutoHost = null
   }
   toastManualHostCount = 0
+  toastState.position = 'top-right'
+  toastState.max = undefined
 }
 
 export function clearToastLife(id: string | number) {
@@ -68,4 +72,22 @@ export function closeToastItem(id?: string | number) {
 export function clearToastItems() {
   for (const id of [...lifeTimers.keys()]) clearToastLife(id)
   toastState.messages = []
+}
+
+export function applyToastMax(max?: number) {
+  if (max == null || max <= 0) return
+  while (toastState.messages.length >= max) {
+    const oldest = toastState.messages[0]
+    if (!oldest) break
+    closeToastItem(oldest.id)
+  }
+}
+
+export function trimToastsToMax(max?: number) {
+  if (max == null || max <= 0) return
+  while (toastState.messages.length > max) {
+    const oldest = toastState.messages[0]
+    if (!oldest) break
+    closeToastItem(oldest.id)
+  }
 }

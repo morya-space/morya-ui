@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWiConfig } from '../../shared/config'
-import { resolveSizeClass } from '../../shared/types'
+import { useConfiguredSize } from '../../shared/config'
 import type { ToggleButtonProps } from './types'
 
 const props = withDefaults(defineProps<ToggleButtonProps>(), {
@@ -15,8 +14,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWiConfig()
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('ToggleButton', () => props.size)
 
 const rootClass = computed(() => [
   'wi-togglebutton',

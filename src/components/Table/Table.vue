@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
-import { resolveSizeClass } from '../../shared/types'
+import { useConfiguredSize } from '../../shared/config'
 import WiCheckbox from '../Checkbox/Checkbox.vue'
 import WiPagination from '../Pagination/Pagination.vue'
 import WiProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
 import WiIcon from '../Icon/Icon.vue'
-import { computeColumnLayout, computeFixedOffsets, TABLE_SELECTION_WIDTH } from './layout'
+import { WiRenderableView } from '../../shared/Renderable'
+import { computeColumnLayout, computeFixedOffsets, TABLE_EXPAND_WIDTH, TABLE_SELECTION_WIDTH } from './layout'
 import type {
   TableColumn,
   TableEmits,
@@ -31,12 +31,12 @@ const props = withDefaults(defineProps<TableProps>(), {
   paginator: false,
   rowsPerPage: 10,
   page: 1,
+  expandable: false,
 })
 
 const emit = defineEmits<TableEmits>()
-const config = useWiConfig()
 const locale = useWiLocale()
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('Table', () => props.size)
 const resolvedEmptyText = computed(
   () => props.emptyText ?? locale.value.emptyMessage,
 )
@@ -48,6 +48,7 @@ const innerField = ref<string | undefined>(props.sortField)
 const innerOrder = ref<TableSortOrder>(normalizeOrder(props.sortOrder))
 const innerFilters = ref<TableFilters>({ ...props.filters })
 const innerPage = ref(props.page)
+const innerExpandedKeys = ref<Array<string | number>>([...(props.expandedRowKeys ?? [])])
 const currentRowKey = ref<string | number | null>(null)
 const filterOpenKey = ref<string | null>(null)
 
@@ -55,6 +56,12 @@ watch(() => props.sortField, (value) => { innerField.value = value })
 watch(() => props.sortOrder, (value) => { innerOrder.value = normalizeOrder(value) })
 watch(() => props.filters, (value) => { innerFilters.value = { ...value } }, { deep: true })
 watch(() => props.page, (value) => { innerPage.value = value })
+watch(
+  () => props.expandedRowKeys,
+  (value) => {
+    if (value) innerExpandedKeys.value = [...value]
+  },
+)
 
 function normalizeOrder(order: TableSortOrder | undefined): TableSortOrder {
   if (order === 1 || order === 'asc') return 'asc'
@@ -96,6 +103,7 @@ const layout = computed(() =>
   computeColumnLayout(props.columns, containerWidth.value || 0, {
     fit: props.fit,
     selection: Boolean(props.selectionMode),
+    expand: props.expandable,
   }),
 )
 
@@ -139,6 +147,15 @@ function selectionStyle() {
   }
 }
 
+function expandStyle() {
+  const left = fixedOffsets.value.left.__expand__
+  return {
+    width: `${TABLE_EXPAND_WIDTH}px`,
+    minWidth: `${TABLE_EXPAND_WIDTH}px`,
+    left: left != null ? `${left}px` : undefined,
+  }
+}
+
 const filteredRows = computed(() => {
   const entries = Object.entries(innerFilters.value).filter(([, value]) => value != null && value !== '')
   if (!entries.length) return props.rows
@@ -176,7 +193,9 @@ const displayRows = computed(() => {
 })
 
 const showEmpty = computed(() => !props.loading && displayRows.value.length === 0)
-const colSpan = computed(() => props.columns.length + (props.selectionMode ? 1 : 0))
+const colSpan = computed(
+  () => props.columns.length + (props.selectionMode ? 1 : 0) + (props.expandable ? 1 : 0),
+)
 
 const selectionList = computed(() => {
   if (!props.selectionMode) return [] as Record<string, unknown>[]
@@ -278,6 +297,26 @@ function onRowClick(row: Record<string, unknown>, index: number) {
   }
 }
 
+function canExpand(row: Record<string, unknown>) {
+  if (!props.expandable) return false
+  return props.rowExpandable ? props.rowExpandable(row) : true
+}
+
+function isRowExpanded(row: Record<string, unknown>, index: number) {
+  return innerExpandedKeys.value.includes(rowIdentity(row, index) as string | number)
+}
+
+function toggleExpand(row: Record<string, unknown>, index: number) {
+  if (!canExpand(row)) return
+  const key = rowIdentity(row, index) as string | number
+  const open = innerExpandedKeys.value.includes(key)
+  innerExpandedKeys.value = open
+    ? innerExpandedKeys.value.filter((item) => item !== key)
+    : [...innerExpandedKeys.value, key]
+  emit('update:expandedRowKeys', innerExpandedKeys.value)
+  emit('expand', { row, expanded: !open })
+}
+
 function fixedClass(column: TableColumn) {
   if (!column.fixed) return undefined
   return `wi-table__cell--fixed-${column.fixed}`
@@ -328,6 +367,12 @@ function fixedClass(column: TableColumn) {
                 @update:model-value="toggleAllPage"
               />
             </th>
+            <th
+              v-if="expandable"
+              class="wi-table__expand wi-table__cell--fixed-left"
+              scope="col"
+              :style="expandStyle()"
+            />
             <th
               v-for="column in columns"
               :key="column.key"
@@ -402,9 +447,8 @@ function fixedClass(column: TableColumn) {
           </tr>
         </thead>
         <tbody>
+          <template v-for="(row, index) in displayRows" :key="String(rowIdentity(row, index))">
           <tr
-            v-for="(row, index) in displayRows"
-            :key="String(rowIdentity(row, index))"
             :class="{
               'wi-table__row--selected': isSelected(row, index),
               'wi-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
@@ -424,16 +468,42 @@ function fixedClass(column: TableColumn) {
               />
             </td>
             <td
+              v-if="expandable"
+              class="wi-table__expand wi-table__cell--fixed-left"
+              :style="expandStyle()"
+              @click.stop
+            >
+              <button
+                v-if="canExpand(row)"
+                type="button"
+                class="wi-table__expand-btn"
+                :aria-expanded="isRowExpanded(row, index)"
+                :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
+                @click="toggleExpand(row, index)"
+              >
+                {{ isRowExpanded(row, index) ? '▾' : '▸' }}
+              </button>
+            </td>
+            <td
               v-for="column in columns"
               :key="column.key"
               :class="[`wi-table__cell--${column.align ?? 'start'}`, fixedClass(column)]"
               :style="columnStyle(column)"
             >
-              <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
-                {{ row[column.key] }}
+              <slot name="body-cell" :row="row" :column="column" :value="row[column.key]">
+                <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
+                  <WiRenderableView v-if="column.render" :value="column.render(row, column)" />
+                  <template v-else>{{ row[column.key] }}</template>
+                </slot>
               </slot>
             </td>
           </tr>
+          <tr v-if="expandable && isRowExpanded(row, index)">
+            <td class="wi-table__expansion" :colspan="colSpan">
+              <slot name="expansion" :row="row" />
+            </td>
+          </tr>
+          </template>
           <tr v-if="showEmpty">
             <td class="wi-table__empty" :colspan="colSpan">
               <slot name="empty">

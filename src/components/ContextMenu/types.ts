@@ -1,10 +1,13 @@
 import type { WiAppendTo } from '../../shared/overlay'
 
 export interface ContextMenuItem {
+  key?: string
   label?: string
+  icon?: string
   command?: () => void
   disabled?: boolean
   separator?: boolean
+  items?: ContextMenuItem[]
 }
 
 export interface ContextMenuPosition {

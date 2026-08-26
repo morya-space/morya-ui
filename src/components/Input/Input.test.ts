@@ -33,6 +33,11 @@ describe('WiInput', () => {
     )
   })
 
+  it('does not treat omitted fluid as true', () => {
+    const wrapper = mount(WiInput, { props: { modelValue: '' } })
+    expect(wrapper.classes()).not.toContain('wi-input-field--fluid')
+  })
+
   it('applies maxlength and shows character count', () => {
     const wrapper = mount(WiInput, {
       props: { modelValue: 'Hello', maxlength: 20, showCount: true, id: 'bio' },

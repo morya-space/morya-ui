@@ -8,6 +8,8 @@ description: Pagination. v-model is the page number. The instance exposes first 
 
 Pagination. `v-model` uses a **1-based page number**. The instance property `first` is the zero-based index of the first record on the page: `(page - 1) * rows`.
 
+Naive mapping: `pageSize` is an alias of `rows` (`pageSize` wins when both are set). `showSizePicker` / `showQuickJumper` / `simple` cover the common `n-pagination` subset.
+
 ## Import
 
 ```ts
@@ -34,6 +36,32 @@ const page = ref(1)
 </template>
 ```
 
+## Size picker / jumper / simple
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiPagination } from '@well-insight/ui'
+
+const page = ref(1)
+const pageSize = ref(10)
+</script>
+
+<template>
+  <div style="display:grid;gap:1rem">
+    <WiPagination
+      v-model="page"
+      v-model:page-size="pageSize"
+      :total-records="200"
+      show-size-picker
+      :page-sizes="[10, 20, 50]"
+      show-quick-jumper
+    />
+    <WiPagination v-model="page" :total-records="200" :page-size="pageSize" simple />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -41,7 +69,12 @@ const page = ref(1)
 | `modelValue` | `number` | `1` | Current page (1-based). |
 | `totalRecords` | `number` | — | Total number of records. |
 | `rows` | `number` | `10` | Rows per page. |
+| `pageSize` | `number` | — | Alias of `rows` (Naive `page-size`); `pageSize` wins when both are set. |
 | `pageLinkSize` | `number` | `5` | Number of page link buttons. |
+| `showSizePicker` | `boolean` | `false` | Show the page-size select. |
+| `pageSizes` | `number[]` | `[10, 20, 50, 100]` | Options for `showSizePicker`. |
+| `showQuickJumper` | `boolean` | `false` | Jump-to-page input. |
+| `simple` | `boolean` | `false` | Compact prev / current / next. |
 | `disabled` | `boolean` | `false` | Disabled. |
 
 ## Events
@@ -50,6 +83,7 @@ const page = ref(1)
 | --- | --- | --- |
 | `update:modelValue` | `number` | Emitted when the page changes. |
 | `page` | `number` | Emitted when the page changes (same value). |
+| `update:rows` / `update:pageSize` | `number` | Emitted when page size changes (same value). |
 
 ## Instance
 

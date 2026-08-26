@@ -62,6 +62,8 @@ export const enUS: WiLocaleMessages = {
   remove: 'Remove',
   removeTag: 'Remove tag',
   addTag: 'Press Enter to add',
+  createOption: 'Create "{value}"',
+  moreTags: '{count} more',
   filterOptions: 'Filter options',
   showSuggestions: 'Show suggestions',
   commandPalette: 'Command palette',
@@ -92,4 +94,7 @@ export const enUS: WiLocaleMessages = {
   otpDigit: 'Digit {index}',
   star: '{value} stars',
   openMenu: 'Open menu',
+  jumpToPage: 'Go to',
+  pageClassifier: '',
+  itemsPerPage: '/ page',
 }

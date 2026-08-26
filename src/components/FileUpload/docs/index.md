@@ -8,6 +8,19 @@ description: 选择、拖拽、列表、预览与上传。
 
 选择本地文件。支持点击选择、拖拽上传、文本 / 图片列表、卡片墙，以及通过 `action` 或 `httpRequest` 实际上传。`select` 仍会返回本次选中的 `File[]`，完整状态用 `v-model:file-list`。默认展示文件列表；提供上传地址或自定义请求后会自动上传。
 
+**与 Naive `n-upload` 命名对照：**
+
+| Naive | Wi |
+| --- | --- |
+| `action` | `action` |
+| `file-list` | `fileList`（`v-model:file-list`） |
+| `list-type` | `listType` |
+| `directory` | `directory`（`webkitdirectory`，浏览器支持文件夹选择） |
+| `custom-request` | `httpRequest` |
+| `name` | `name` |
+
+队列 UI 细控（如自定义队列按钮布局）本期不做。
+
 ## 引入
 
 ```ts
@@ -169,6 +182,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 | --- | --- | --- | --- |
 | `mode` | `'basic' \| 'advanced'` | `'basic'` | 视觉变体。文件列表由 `showFileList` 控制。 |
 | `multiple` | `boolean` | `false` | 多选。关闭时新选择会替换当前列表。 |
+| `directory` | `boolean` | `false` | 选择文件夹（`webkitdirectory`），同时开启多选。 |
 | `accept` | `string` | — | 接受的文件类型，拖入时同样过滤。 |
 | `drag` | `boolean` | `false` | 启用拖拽上传区域。 |
 | `limit` | `number` | — | 最多文件数；本次选择会使总数超出时触发 `exceed`，整批不加入。 |

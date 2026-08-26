@@ -48,4 +48,24 @@ describe('WiContextMenu', () => {
     expect(document.body.querySelector('.wi-contextmenu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('opens a nested submenu', async () => {
+    const command = vi.fn()
+    const wrapper = mount(WiContextMenu, {
+      props: {
+        model: [{ label: 'More', items: [{ label: 'Copy', command }] }],
+        modelValue: true,
+        position: { x: 0, y: 0 },
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    document.body.querySelector('.wi-contextmenu__item--parent')!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
+    await nextTick()
+    expect(document.body.querySelector('.wi-contextmenu__submenu')).toBeTruthy()
+    document.body.querySelector('.wi-contextmenu__submenu .wi-contextmenu__item')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(command).toHaveBeenCalledOnce()
+    wrapper.unmount()
+  })
 })

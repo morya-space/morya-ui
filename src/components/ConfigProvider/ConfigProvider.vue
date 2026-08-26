@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed, inject, toValue, watchEffect } from 'vue'
 import { applyDensity } from '../../theme'
-import { provideWiConfig, type WiGlobalConfig } from '../../shared/config'
+import {
+  mergeWiConfig,
+  provideWiConfig,
+  WI_CONFIG_KEY,
+  type WiGlobalConfig,
+} from '../../shared/config'
 
 const props = defineProps<{
   /** Global defaults for descendant Well Insight components. */
@@ -18,6 +23,8 @@ const props = defineProps<{
   density?: WiGlobalConfig['density']
   /** Shorthand: locale dictionary. */
   locale?: WiGlobalConfig['locale']
+  /** Shorthand: per-component default props. */
+  componentDefaults?: WiGlobalConfig['componentDefaults']
   /**
    * When true (default), also write density to `documentElement`
    * so the whole page picks up token changes. Set false to scope
@@ -26,7 +33,9 @@ const props = defineProps<{
   globalDensity?: boolean
 }>()
 
-const resolved = computed<WiGlobalConfig>(() => ({
+const parent = inject(WI_CONFIG_KEY, null)
+
+const local = computed<WiGlobalConfig>(() => ({
   ...(props.config ?? {}),
   ...(props.appendTo !== undefined ? { appendTo: props.appendTo } : {}),
   ...(props.size !== undefined ? { size: props.size } : {}),
@@ -34,7 +43,13 @@ const resolved = computed<WiGlobalConfig>(() => ({
   ...(props.zIndex !== undefined ? { zIndex: props.zIndex } : {}),
   ...(props.density !== undefined ? { density: props.density } : {}),
   ...(props.locale !== undefined ? { locale: props.locale } : {}),
+  ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
 }))
+
+const resolved = computed<WiGlobalConfig>(() => {
+  const parentValue = parent ? toValue(parent) : {}
+  return mergeWiConfig(parentValue, local.value)
+})
 
 provideWiConfig(resolved)
 

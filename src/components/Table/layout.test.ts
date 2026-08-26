@@ -43,4 +43,13 @@ describe('computeColumnLayout', () => {
     expect(result.columns[1]?.realWidth).toBe(500 - TABLE_SELECTION_WIDTH)
     expect(TABLE_DEFAULT_MIN_WIDTH).toBe(80)
   })
+
+  it('reserves an expand column after selection', () => {
+    const result = computeColumnLayout([{ key: 'name', label: 'Name', width: 100 }], 400, {
+      selection: true,
+      expand: true,
+      fit: false,
+    })
+    expect(result.columns.map((c) => c.key)).toEqual(['__selection__', '__expand__', 'name'])
+  })
 })

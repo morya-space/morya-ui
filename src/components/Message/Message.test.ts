@@ -43,6 +43,27 @@ describe('message API', () => {
     expect(messageState.items).toHaveLength(0)
   })
 
+  it('destroyAll is an alias of closeAll', () => {
+    message.info({ content: 'One', life: 0 })
+    message.destroyAll()
+    expect(messageState.items).toHaveLength(0)
+  })
+
+  it('drops the oldest message when max is reached', () => {
+    message.config({ max: 2 })
+    message.info({ content: 'One', life: 0 })
+    message.info({ content: 'Two', life: 0 })
+    message.info({ content: 'Three', life: 0 })
+    expect(messageState.items.map((item) => item.content)).toEqual(['Two', 'Three'])
+  })
+
+  it('applies host placement from config', async () => {
+    message.config({ placement: 'bottom-right' })
+    message.info({ content: 'Placed', life: 0 })
+    await nextTick()
+    expect(document.body.querySelector('.wi-message-host--bottom-right')).toBeTruthy()
+  })
+
   it('renders VNode content from h()', async () => {
     const { h } = await import('vue')
     message.info({ content: () => h('strong', 'Rich node'), life: 0 })

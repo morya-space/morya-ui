@@ -9,6 +9,12 @@ export interface ScrollbarScrollPayload {
   scrollLeft: number
 }
 
+export type ScrollbarClassValue =
+  | string
+  | string[]
+  | Record<string, boolean>
+  | Array<string | Record<string, boolean> | null | undefined | false>
+
 export interface ScrollbarProps {
   /** Viewport height. */
   height?: string | number
@@ -19,11 +25,11 @@ export interface ScrollbarProps {
   /** Style of the scroll wrap container. */
   wrapStyle?: StyleValue
   /** Class of the scroll wrap container. */
-  wrapClass?: string | string[] | Record<string, boolean>
+  wrapClass?: ScrollbarClassValue
   /** Style of the view (content) element. */
   viewStyle?: StyleValue
   /** Class of the view (content) element. */
-  viewClass?: string | string[] | Record<string, boolean>
+  viewClass?: ScrollbarClassValue
   /** Skip ResizeObserver updates when container size is static. */
   noresize?: boolean
   /** HTML tag for the view element. */

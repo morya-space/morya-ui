@@ -1,7 +1,7 @@
 ---
 title: Dialog
 category: 04 / OVERLAY
-description: Modal dialog.
+description: Modal dialog with preset footer actions, async close guards, and status type.
 ---
 
 # Dialog
@@ -135,6 +135,41 @@ const open = ref(false)
 </template>
 ```
 
+## Preset footer and async close
+
+`positiveText` / `negativeText` render confirm / cancel buttons (`footer` slot wins). Return `false` (including from a Promise) to keep the dialog open. Use [ConfirmDialog](/components/ConfirmDialog) for accept/reject flows; Dialog `type` is a header icon only.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiDialog } from '@well-insight/ui'
+
+const open = ref(false)
+
+async function save() {
+  await new Promise((resolve) => setTimeout(resolve, 400))
+}
+</script>
+
+<template>
+  <div>
+    <WiButton label="Save dialog" @click="open = true" />
+    <WiDialog
+      v-model="open"
+      header="Save changes"
+      type="info"
+      positive-text="Save"
+      negative-text="Cancel"
+      :on-positive-click="save"
+      :before-close="() => true"
+      width="28rem"
+    >
+      <p style="margin:0">The close button, Esc, and mask run <code>beforeClose</code>; Save runs <code>onPositiveClick</code>.</p>
+    </WiDialog>
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -153,6 +188,11 @@ const open = ref(false)
 | `width` | `string` | — | Dialog width (ignored when maximized). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` renders in place. |
+| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | Status icon in the header; `warning` is an alias of `warn` |
+| `positiveText` / `negativeText` | `string` | — | Preset footer buttons; ignored when the `footer` slot is used |
+| `positiveSeverity` | `ButtonSeverity` | — | Confirm button severity |
+| `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | Return `false` to keep the dialog open |
+| `beforeClose` | `() => unknown \| Promise<unknown>` | — | Runs before X / Esc / mask dismiss; return `false` to keep open |
 
 ## Events
 

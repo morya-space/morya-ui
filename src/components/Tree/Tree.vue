@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import { computed, provide, reactive, ref, useSlots, watch } from 'vue'
 import { WI_TREE_KEY, WI_TREE_NODE_SLOT } from './context'
+import {
+  buildChildMap,
+  expandCheckedKeys,
+  projectCheckedKeys,
+  setCheckedCascade,
+  syncAncestors,
+  walkTree,
+} from './checkStrategy'
 import type {
   TreeCheckedKeys,
+  TreeCheckStrategy,
   TreeExpandedKeys,
   TreeNode,
   TreeProps,
@@ -16,6 +25,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   showCheckbox: false,
   checkedKeys: () => ({}),
   checkStrictly: false,
+  checkStrategy: 'all' as TreeCheckStrategy,
   expandedKeys: undefined,
   defaultExpandAll: false,
   accordion: false,
@@ -42,6 +52,7 @@ const innerExpanded = ref<TreeExpandedKeys>({})
 const loadingKeys = reactive<Record<string, boolean>>({})
 const dragKey = ref<string | null>(null)
 const childMap = computed(() => buildChildMap(props.value))
+const checkStrategy = computed(() => props.checkStrategy ?? 'all')
 
 watch(
   () => [props.value, props.defaultExpandAll, props.expandedKeys] as const,
@@ -52,7 +63,7 @@ watch(
     }
     if (props.defaultExpandAll) {
       const next: TreeExpandedKeys = {}
-      walk(props.value, (node) => {
+      walkTree(props.value, (node) => {
         if (node.children?.length) next[node.key] = true
       })
       innerExpanded.value = next
@@ -75,22 +86,9 @@ const effectiveKeys = computed<TreeSelectionKeys>(() => {
   return props.selectionKeys ?? {}
 })
 
-const checked = computed(() => props.checkedKeys ?? {})
-
-function walk(nodes: TreeNode[], visit: (node: TreeNode) => void) {
-  for (const node of nodes) {
-    visit(node)
-    if (node.children?.length) walk(node.children, visit)
-  }
-}
-
-function buildChildMap(nodes: TreeNode[]) {
-  const map = new Map<string, TreeNode[]>()
-  walk(nodes, (node) => {
-    map.set(node.key, node.children ?? [])
-  })
-  return map
-}
+const checked = computed(() =>
+  expandCheckedKeys(props.value, props.checkedKeys ?? {}, checkStrategy.value, props.checkStrictly),
+)
 
 function defaultFilter(value: string, data: TreeNode) {
   return data.label.toLowerCase().includes(value.toLowerCase())
@@ -206,38 +204,6 @@ function select(node: TreeNode) {
   emit('update:selectionKeys', next)
 }
 
-function setCheckedCascade(node: TreeNode, value: boolean, map: TreeCheckedKeys) {
-  if (value) map[node.key] = true
-  else delete map[node.key]
-  for (const child of node.children ?? []) setCheckedCascade(child, value, map)
-}
-
-function syncAncestors(nodes: TreeNode[], map: TreeCheckedKeys) {
-  for (const node of nodes) {
-    if (node.children?.length) {
-      syncAncestors(node.children, map)
-      if (props.checkStrictly) continue
-      const children = node.children
-      const all = children.every((child) => map[child.key])
-      const none = children.every((child) => !map[child.key] && !isIndeterminateKey(child.key, map, childMap.value))
-      if (all) map[node.key] = true
-      else if (none) delete map[node.key]
-      else delete map[node.key]
-    }
-  }
-}
-
-function isIndeterminateKey(key: string, map: TreeCheckedKeys, childrenMap: Map<string, TreeNode[]>) {
-  const children = childrenMap.get(key) ?? []
-  if (!children.length) return false
-  let checkedCount = 0
-  for (const child of children) {
-    if (map[child.key]) checkedCount += 1
-    if (isIndeterminateKey(child.key, map, childrenMap)) return true
-  }
-  return checkedCount > 0 && checkedCount < children.length
-}
-
 function toggleCheck(node: TreeNode) {
   if (isDisabled(node)) return
   const next = { ...checked.value }
@@ -249,8 +215,9 @@ function toggleCheck(node: TreeNode) {
     setCheckedCascade(node, value, next)
     syncAncestors(props.value, next)
   }
-  emit('update:checkedKeys', next)
-  emit('check', { node, checkedKeys: next })
+  const projected = projectCheckedKeys(props.value, next, checkStrategy.value, props.checkStrictly)
+  emit('update:checkedKeys', projected)
+  emit('check', { node, checkedKeys: projected })
 }
 
 function onDragStart(node: TreeNode, event: DragEvent) {

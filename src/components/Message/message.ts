@@ -3,6 +3,7 @@ import { isMessageOptionsObject } from '../../shared/content'
 import { mountOverlayHost } from '../../shared/overlayHost'
 import MessageHost from './Message.vue'
 import {
+  applyMessageMax,
   closeAllMessageItems,
   closeMessageItem,
   messageAutoHost,
@@ -12,7 +13,7 @@ import {
   scheduleMessageLife,
   setMessageAutoHost,
 } from './messageState'
-import type { MessageHandle, MessageInput, MessageItem, MessageOptions, MessageSeverity } from './types'
+import type { MessageHandle, MessageHostConfig, MessageInput, MessageItem, MessageOptions, MessageSeverity } from './types'
 
 const DEFAULT_LIFE = 3000
 
@@ -45,6 +46,7 @@ function toItem(input: MessageInput, severity?: MessageSeverity): MessageItem {
 
 function open(input: MessageInput, severity?: MessageSeverity): MessageHandle {
   ensureHost()
+  applyMessageMax(messageState.max)
   const item = toItem(input, severity)
   messageState.items = [...messageState.items, item]
   scheduleMessageLife(item, closeMessageItem)
@@ -63,6 +65,11 @@ export const message = {
   error: (input: MessageInput) => open(input, 'error'),
   close: closeMessageItem,
   closeAll: closeAllMessageItems,
+  destroyAll: closeAllMessageItems,
+  config(options: MessageHostConfig) {
+    if (options.placement) messageState.placement = options.placement
+    if (options.max !== undefined) messageState.max = options.max
+  },
 }
 
 export function useMessage() {

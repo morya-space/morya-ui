@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
-import { resolveSizeClass } from '../../shared/types'
+import { useConfiguredSize } from '../../shared/config'
 import type { InputNumberProps } from './types'
 
 defineOptions({ inheritAttrs: false })
@@ -18,10 +17,9 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | null): void }>()
 
-const config = useWiConfig()
 const locale = useWiLocale()
 const inputId = computed(() => props.id ?? `wi-inputnumber-${Math.random().toString(36).slice(2, 8)}`)
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('InputNumber', () => props.size)
 
 const rootClass = computed(() => [
   'wi-inputnumber',

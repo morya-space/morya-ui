@@ -155,4 +155,11 @@ describe('WiFileUpload', () => {
     await nextTick()
     expect(wrapper.emitted('select')).toBeUndefined()
   })
+
+  it('sets directory attributes on the file input', () => {
+    const wrapper = mount(WiFileUpload, { props: { directory: true } })
+    const input = wrapper.find('.wi-fileupload__input').element as HTMLInputElement
+    expect(input.multiple).toBe(true)
+    expect(input.hasAttribute('webkitdirectory')).toBe(true)
+  })
 })

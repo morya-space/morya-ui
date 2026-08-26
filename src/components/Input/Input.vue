@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
-import { resolveSizeClass } from '../../shared/types'
+import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
 import type { InputProps } from './types'
 
 defineOptions({ inheritAttrs: false })
@@ -11,25 +10,28 @@ const slots = useSlots()
 const props = withDefaults(defineProps<InputProps>(), {
   modelValue: '',
   type: 'text',
-  fluid: false,
   disabled: false,
   readonly: false,
-  clearable: false,
-  showCount: false,
   error: false,
   invalid: false,
+  clearable: undefined,
+  showCount: undefined,
+  fluid: undefined,
 })
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
 }>()
-const config = useWiConfig()
+const defaults = useComponentDefaults('Input')
 const locale = useWiLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
 const inputId = computed(() => props.id ?? `wi-input-${Math.random().toString(36).slice(2, 8)}`)
 const isInvalid = computed(() => props.invalid || props.error || Boolean(props.errorMessage))
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
-const resolvedVariant = computed(() => props.variant ?? config.value.inputVariant ?? 'outlined')
+const sizeClass = useConfiguredSize('Input', () => props.size)
+const resolvedVariant = useConfiguredVariant('Input', () => props.variant)
+const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
+const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
+const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
 const charCount = computed(() => props.modelValue.length)
 const countText = computed(() =>
   props.maxlength != null ? `${charCount.value} / ${props.maxlength}` : String(charCount.value),
@@ -37,11 +39,11 @@ const countText = computed(() =>
 const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
 const hasPrefix = computed(() => Boolean(slots.prefix))
-const hasSuffix = computed(() => Boolean(slots.suffix) || (props.clearable && Boolean(props.modelValue)))
+const hasSuffix = computed(() => Boolean(slots.suffix) || (resolvedClearable.value && Boolean(props.modelValue)))
 const describedBy = computed(() => {
   const ids: string[] = []
   if (feedbackText.value) ids.push(`${inputId.value}-help`)
-  if (props.showCount) ids.push(`${inputId.value}-count`)
+  if (resolvedShowCount.value) ids.push(`${inputId.value}-count`)
   return ids.length ? ids.join(' ') : undefined
 })
 
@@ -50,7 +52,7 @@ const inputClass = computed(() => [
   `wi-input--${sizeClass.value}`,
   {
     'wi-input--filled': resolvedVariant.value === 'filled',
-    'wi-input--fluid': props.fluid,
+    'wi-input--fluid': resolvedFluid.value,
     'wi-input--invalid': isInvalid.value,
     'wi-input--error': isInvalid.value,
     'wi-input--has-prefix': hasPrefix.value,
@@ -76,15 +78,15 @@ defineExpose({ focus })
 </script>
 
 <template>
-  <div class="wi-input-field" :class="{ 'wi-input-field--fluid': fluid }">
+  <div class="wi-input-field" :class="{ 'wi-input-field--fluid': resolvedFluid }">
     <label v-if="label" class="wi-input-field__label" :for="inputId">{{ label }}</label>
     <div
       class="wi-input-field__control"
       :class="{
-        'wi-input-field__control--clearable': clearable && modelValue,
-        'wi-input-field__control--counted': showCount,
+        'wi-input-field__control--clearable': resolvedClearable && modelValue,
+        'wi-input-field__control--counted': resolvedShowCount,
         'wi-input-field__control--prefixed': hasPrefix,
-        'wi-input-field__control--suffixed': $slots.suffix || (clearable && modelValue),
+        'wi-input-field__control--suffixed': $slots.suffix || (resolvedClearable && modelValue),
       }"
     >
       <span v-if="$slots.prefix" class="wi-input__prefix">
@@ -108,7 +110,7 @@ defineExpose({ focus })
         <slot name="suffix" />
       </span>
       <button
-        v-if="clearable && modelValue"
+        v-if="resolvedClearable && modelValue"
         class="wi-input__clear"
         type="button"
         :aria-label="locale.clearInput"
@@ -118,7 +120,7 @@ defineExpose({ focus })
         ×
       </button>
     </div>
-    <div v-if="feedbackText || showCount" class="wi-input-field__meta">
+    <div v-if="feedbackText || resolvedShowCount" class="wi-input-field__meta">
       <span
         v-if="feedbackText"
         :id="`${inputId}-help`"
@@ -129,7 +131,7 @@ defineExpose({ focus })
         {{ feedbackText }}
       </span>
       <span
-        v-if="showCount"
+        v-if="resolvedShowCount"
         :id="`${inputId}-count`"
         class="wi-input-field__count"
         aria-live="polite"
