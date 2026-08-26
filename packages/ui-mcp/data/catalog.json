@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-26T08:12:53.435Z",
+  "generatedAt": "2026-08-26T08:46:51.569Z",
   "library": {
     "name": "@well-insight/ui",
-    "version": "0.1.8"
+    "version": "0.1.9"
   },
   "mcp": {
     "name": "@well-insight/ui-mcp",
-    "version": "0.1.8"
+    "version": "0.1.9"
   },
   "components": [
     {
