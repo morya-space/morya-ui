@@ -25,4 +25,13 @@ describe('WiSlider', () => {
     expect(wrapper.classes()).toContain('wi-slider--disabled')
     expect(wrapper.get('input').attributes('disabled')).toBeDefined()
   })
+
+  it('renders marks and vertical layout', () => {
+    const wrapper = mount(WiSlider, {
+      props: { modelValue: 20, marks: { 0: 'Low', 100: 'High' }, tooltip: true, vertical: true },
+    })
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wi-slider--vertical', 'wi-slider--tooltip']))
+    expect(wrapper.text()).toContain('Low')
+    expect(wrapper.text()).toContain('High')
+  })
 })

@@ -34,13 +34,37 @@ const steps = [
 </template>
 ```
 
+## Vertical
+
+`vertical` (or `orientation="vertical"`) stacks steps. Each step can include `description` / `status`.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiStepper } from '@well-insight/ui'
+
+const active = ref(1)
+const steps = [
+  { label: 'Basic info', description: 'Fill in details', status: 'finish' },
+  { label: 'Confirm', description: 'Review', status: 'process' },
+  { label: 'Done', description: 'Submit' },
+]
+</script>
+
+<template>
+  <WiStepper v-model="active" vertical :steps="steps" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `modelValue` | `number` | `0` | Current step index (0-based). |
-| `steps` | `{ label: string; disabled?: boolean }[]` | — | Step list. |
+| `steps` | `{ label: string; description?: string; disabled?: boolean; status?: 'wait' \| 'process' \| 'finish' \| 'error' }[]` | — | Step list. |
 | `linear` | `boolean` | `false` | Only the current and previous steps can be selected. |
+| `vertical` | `boolean` | `false` | Vertical layout. |
+| `orientation` | `'horizontal' \| 'vertical'` | — | Alias of `vertical`. |
 
 ## Events
 

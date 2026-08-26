@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
 import type { InputOtpProps } from './types'
 
 const props = withDefaults(defineProps<InputOtpProps>(), {
@@ -8,6 +9,7 @@ const props = withDefaults(defineProps<InputOtpProps>(), {
   length: 4,
   disabled: false,
   integerOnly: false,
+  mask: false,
 })
 
 const emit = defineEmits<{
@@ -16,6 +18,7 @@ const emit = defineEmits<{
 
 const locale = useWiLocale()
 const inputs = ref<(HTMLInputElement | null)[]>([])
+const sizeClass = useConfiguredSize('InputOtp', () => props.size)
 
 const chars = computed(() => {
   const value = props.modelValue ?? ''
@@ -24,8 +27,15 @@ const chars = computed(() => {
 
 const rootClass = computed(() => [
   'wi-inputotp',
-  { 'wi-inputotp--disabled': props.disabled },
+  `wi-inputotp--${sizeClass.value}`,
+  { 'wi-inputotp--disabled': props.disabled, 'wi-inputotp--mask': props.mask },
 ])
+
+const rootStyle = computed(() => {
+  if (props.gap == null) return undefined
+  const gap = typeof props.gap === 'number' ? `${props.gap}px` : props.gap
+  return { '--wi-inputotp-gap': gap }
+})
 
 function setInputRef(el: unknown, index: number) {
   inputs.value[index] = el instanceof HTMLInputElement ? el : null
@@ -98,13 +108,13 @@ watch(
 </script>
 
 <template>
-  <div :class="rootClass" role="group" @paste="onPaste">
+  <div :class="rootClass" :style="rootStyle" role="group" @paste="onPaste">
     <input
       v-for="(char, index) in chars"
       :key="index"
       :ref="(el) => setInputRef(el, index)"
       class="wi-inputotp__input"
-      type="text"
+      :type="mask ? 'password' : 'text'"
       inputmode="text"
       maxlength="1"
       autocomplete="one-time-code"

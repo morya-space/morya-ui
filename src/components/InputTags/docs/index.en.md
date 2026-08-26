@@ -29,6 +29,23 @@ const tags = ref(['vue', 'design'])
 </template>
 ```
 
+## Max & separator
+
+`max` caps the number of tags. `separator` splits pasted or typed values (for example `,`).
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputTags } from '@well-insight/ui'
+
+const tags = ref(['vue'])
+</script>
+
+<template>
+  <WiInputTags v-model="tags" :max="3" separator="," placeholder="Comma-separated, max 3" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -37,6 +54,8 @@ const tags = ref(['vue', 'design'])
 | `placeholder` | `string` | locale `addTag` | Placeholder when the list is empty. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `addOnBlur` | `boolean` | `false` | Also add on blur. |
+| `max` | `number` | — | Maximum number of tags. |
+| `separator` | `string \| string[]` | — | Extra separators, for example `,`. |
 
 ## Events
 

@@ -35,4 +35,14 @@ describe('WiAccordion', () => {
     await headers[2]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.length).toBe(1)
   })
+
+  it('renders header extra without toggling', async () => {
+    const wrapper = mount(WiAccordion, {
+      props: { tabs, modelValue: '' },
+      slots: { extra: '<button class="extra" type="button">More</button>' },
+    })
+    await wrapper.get('.extra').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect(wrapper.get('.wi-accordion__header-extra').text()).toBe('More')
+  })
 })

@@ -19,6 +19,11 @@ const visible = ref(false)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
+function toCssSize(value?: string | number) {
+  if (value == null) return undefined
+  return typeof value === 'number' ? `${value}px` : value
+}
+
 const rootClass = computed(() => [
   'wi-scrolltop',
   {
@@ -27,6 +32,15 @@ const rootClass = computed(() => [
     'wi-scrolltop--teleported': teleported.value,
   },
 ])
+
+const rootStyle = computed(() => {
+  const style: Record<string, string> = {}
+  const right = toCssSize(props.right)
+  const bottom = toCssSize(props.bottom)
+  if (right) style.right = right
+  if (bottom) style.bottom = bottom
+  return style
+})
 
 function getScrollParent(): HTMLElement | Window {
   if (props.target === 'window') return window
@@ -83,6 +97,7 @@ watch(
         ref="root"
         type="button"
         :class="rootClass"
+        :style="rootStyle"
         :aria-label="locale.backToTop"
         :hidden="!visible"
         @click="scrollToTop"

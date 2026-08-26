@@ -56,7 +56,10 @@ function toggle(value: string, disabled?: boolean) {
         :disabled="tab.disabled"
         @click="toggle(tab.value, tab.disabled)"
       >
-        {{ tab.header }}
+        <span class="wi-accordion__header-text">{{ tab.header }}</span>
+        <span v-if="$slots.extra" class="wi-accordion__header-extra" @click.stop>
+          <slot name="extra" :tab="tab" />
+        </span>
       </button>
       <div
         v-show="isActive(tab.value)"

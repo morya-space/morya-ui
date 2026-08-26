@@ -104,6 +104,43 @@ import { WiButton } from '@well-insight/ui'
 </template>
 ```
 
+## Ghost & Quaternary
+
+`ghost` 为透明底 + 描边色文字；`quaternary` 更克制，适合工具栏次要操作。也可通过 `variant` 指定。
+
+```vue preview
+<script setup lang="ts">
+import { WiButton } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+    <WiButton label="Ghost" ghost />
+    <WiButton label="Ghost Danger" ghost severity="danger" />
+    <WiButton label="Quaternary" quaternary />
+    <WiButton label="Custom" color="#e11d48" />
+  </div>
+</template>
+```
+
+## Button Group
+
+`WiButtonGroup` 将相邻按钮拼成一组。
+
+```vue preview
+<script setup lang="ts">
+import { WiButton, WiButtonGroup } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiButtonGroup aria-label="对齐">
+    <WiButton label="左" />
+    <WiButton label="中" severity="secondary" />
+    <WiButton label="右" severity="secondary" />
+  </WiButtonGroup>
+</template>
+```
+
 ## Icons & Badge
 
 支持 `icon`、`iconPos`、`iconOnly`，以及 `badge` 徽标。
@@ -176,10 +213,13 @@ import { WiButton } from '@well-insight/ui'
 | `iconPos` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | 图标相对标签的位置。 |
 | `iconOnly` | `boolean` | `false` | 强制方形纯图标按钮。 |
 | `severity` | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | — | 语义色。省略时为 primary。 |
-| `variant` | `'outlined' \| 'text' \| 'link'` | — | 样式变体快捷方式，等价于对应布尔 prop。 |
+| `variant` | `'outlined' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'` | — | 样式变体快捷方式，等价于对应布尔 prop。 |
 | `outlined` | `boolean` | `false` | 描边按钮。 |
 | `text` | `boolean` | `false` | 文字按钮。 |
 | `link` | `boolean` | `false` | 链接按钮。 |
+| `ghost` | `boolean` | `false` | 透明底按钮。 |
+| `quaternary` | `boolean` | `false` | 极轻量文字按钮。 |
+| `color` | `string` | — | 自定义颜色，覆盖 `severity`。 |
 | `raised` | `boolean` | `false` | 浮起阴影。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
 | `plain` | `boolean` | `false` | 弱化色，常与 `text` / `outlined` 组合。 |

@@ -50,6 +50,28 @@ const value = ref([20, 70])
 </template>
 ```
 
+## Marks & vertical
+
+`marks` 可以是数值数组，或「值 → 文案」映射。`tooltip` 在拖动时显示当前值。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiSlider } from '@well-insight/ui'
+
+const value = ref(50)
+</script>
+
+<template>
+  <div style="display:flex;gap:2rem;align-items:stretch;height:10rem">
+    <div style="flex:1">
+      <WiSlider v-model="value" tooltip :marks="{ 0: '0', 50: '半', 100: '满' }" />
+    </div>
+    <WiSlider v-model="value" vertical tooltip />
+  </div>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -59,6 +81,9 @@ const value = ref([20, 70])
 | `max` | `number` | `100` | 最大值。 |
 | `step` | `number` | `1` | 步进。 |
 | `range` | `boolean` | `false` | 区间模式。 |
+| `marks` | `number[] \| Record<number, string>` | — | 刻度；数组为值，对象为文案。 |
+| `tooltip` | `boolean` | `false` | 拖动时显示当前值。 |
+| `vertical` | `boolean` | `false` | 垂直方向。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 
 ## Events

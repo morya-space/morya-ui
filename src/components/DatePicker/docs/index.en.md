@@ -1,7 +1,7 @@
 ---
 title: DatePicker
 category: 02 / FORM
-description: Calendar overlay for picking a date. Values are ISO date strings by preference. Supports min/max, invalid, disabled, and fluid; the panel supports teleport / appendTo.
+description: Calendar overlay for a date or date range. Values are ISO date strings. Supports min/max, shortcuts, format, and clearable.
 ---
 
 # DatePicker
@@ -131,15 +131,55 @@ const value = ref<string | null>(null)
 </template>
 ```
 
+## Range
+
+With `type="daterange"`, click the start date then the end date. The value is `[start, end]` (ISO dates).
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiDatePicker } from '@well-insight/ui'
+
+const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
+</script>
+
+<template>
+  <WiDatePicker v-model="value" type="daterange" label="Date range" />
+</template>
+```
+
+## Shortcuts
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiDatePicker } from '@well-insight/ui'
+
+const value = ref<string | null>(null)
+const shortcuts = [
+  { label: 'Today', value: () => new Date() },
+  { label: 'June 1', value: '2024-06-01' },
+]
+</script>
+
+<template>
+  <WiDatePicker v-model="value" label="Shortcuts" :shortcuts="shortcuts" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `modelValue` | `string \| Date \| null` | `null` | Bound value, output as `YYYY-MM-DD`. |
+| `modelValue` | `string \| Date \| [string, string] \| null` | `null` | Single day emits `YYYY-MM-DD`; range emits `[start, end]`. |
+| `type` | `'date' \| 'daterange'` | `'date'` | Single day or range. |
 | `label` | `string` | — | Label. |
 | `minDate` | `string \| Date \| null` | — | Optional lower bound. |
 | `maxDate` | `string \| Date \| null` | — | Optional upper bound. |
-| `placeholder` | `string` | `Select date` | Placeholder. |
+| `placeholder` | `string` | locale | Placeholder. |
+| `format` | `string` | `'YYYY-MM-DD'` | Input display pattern; the emitted value stays ISO. |
+| `clearable` | `boolean` | `true` | Show a clear button. |
+| `shortcuts` | `DatePickerShortcut[]` | `[]` | Panel shortcuts. |
 | `fluid` | `boolean` | `false` | Stretch to full width. |
 | `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
@@ -151,4 +191,4 @@ const value = ref<string | null>(null)
 
 | Event | Prop | Description |
 | --- | --- | --- |
-| `update:modelValue` | `string \| null` | Value change. |
+| `update:modelValue` | `string \| [string, string] \| null` | Value change. |

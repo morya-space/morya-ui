@@ -1,24 +1,94 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { useWiLocale } from '../../locale'
+import { resolveSizeClass } from '../../shared/types'
 import type { ProgressSpinnerProps } from './types'
 
 const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
   strokeWidth: '2',
   animationDuration: '1s',
+  show: true,
+  delay: 0,
 })
 
+const slots = useSlots()
 const locale = useWiLocale()
 const label = computed(() => props.ariaLabel ?? locale.value.loading)
+const wrapping = computed(() => Boolean(slots.default))
+const sizeTone = computed(() => resolveSizeClass(props.size))
+const visible = ref(props.show && props.delay <= 0)
+let delayTimer: ReturnType<typeof setTimeout> | null = null
+
+function clearDelay() {
+  if (delayTimer !== null) {
+    clearTimeout(delayTimer)
+    delayTimer = null
+  }
+}
+
+watch(
+  () => [props.show, props.delay, wrapping.value] as const,
+  ([show, delay]) => {
+    clearDelay()
+    if (!show) {
+      visible.value = false
+      return
+    }
+    if (!delay) {
+      visible.value = true
+      return
+    }
+    visible.value = false
+    delayTimer = setTimeout(() => {
+      visible.value = true
+      delayTimer = null
+    }, delay)
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(clearDelay)
 
 const spinnerStyle = computed(() => ({
   animationDuration: props.animationDuration,
 }))
+
+const sizeClass = computed(() => ({
+  'wi-progress-spinner--small': sizeTone.value === 'small',
+  'wi-progress-spinner--large': sizeTone.value === 'large',
+}))
 </script>
 
 <template>
+  <div v-if="wrapping" class="wi-progress-spinner-wrap" :class="{ 'wi-progress-spinner-wrap--active': visible }">
+    <div class="wi-progress-spinner-wrap__content">
+      <slot />
+    </div>
+    <div v-if="visible" class="wi-progress-spinner-wrap__overlay">
+      <svg
+        class="wi-progress-spinner"
+        :class="sizeClass"
+        viewBox="0 0 50 50"
+        role="status"
+        :aria-label="label"
+        :style="spinnerStyle"
+      >
+        <circle
+          class="wi-progress-spinner__circle"
+          cx="25"
+          cy="25"
+          r="20"
+          fill="none"
+          :stroke-width="strokeWidth"
+        />
+      </svg>
+      <p v-if="description" class="wi-progress-spinner__description">{{ description }}</p>
+    </div>
+  </div>
   <svg
+    v-else
     class="wi-progress-spinner"
+    :class="sizeClass"
     viewBox="0 0 50 50"
     role="status"
     :aria-label="label"

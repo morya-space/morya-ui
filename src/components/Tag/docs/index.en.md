@@ -72,6 +72,21 @@ import { WiTag } from '@well-insight/ui'
 </template>
 ```
 
+## Closable
+
+```vue preview
+<script setup lang="ts">
+import { WiTag } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+    <WiTag value="Draft" closable bordered />
+    <WiTag value="Small" size="small" severity="success" closable />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -80,6 +95,17 @@ import { WiTag } from '@well-insight/ui'
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
 | `icon` | `IconName` | — | `WiIcon` icon name. |
+| `closable` | `boolean` | `false` | Show a close control. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `bordered` | `boolean` | `false` | Draw a border. |
+| `color` | `string` | — | Custom color. |
+| `disabled` | `boolean` | `false` | Disable the close control. |
+
+## Events
+
+| Event | Payload | Description |
+| --- | --- | --- |
+| `close` | `MouseEvent` | Fired when close is clicked. |
 
 ## Slots
 

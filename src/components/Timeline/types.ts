@@ -19,4 +19,6 @@ export interface TimelineProps {
   value: TimelineEvent[]
   align?: TimelineAlign
   layout?: TimelineLayout
+  /** Show a trailing pending item. */
+  pending?: boolean | string
 }

@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import WiButton from '../Button/Button.vue'
+import WiIcon from '../Icon/Icon.vue'
 import type { ConfirmPopupProps } from './types'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,
   target: null,
   position: null,
+  placement: 'bottom',
   teleport: true,
 })
 
@@ -23,19 +26,29 @@ const config = useWiConfig()
 const locale = useWiLocale()
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
+const pending = ref(false)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 function close() {
+  pending.value = false
   emit('update:modelValue', false)
 }
 
-function accept() {
-  emit('accept')
-  close()
+async function accept() {
+  if (pending.value) return
+  pending.value = true
+  try {
+    if (!(await allowAfterGuard(props.beforeAccept))) return
+    emit('accept')
+    close()
+  } finally {
+    if (pending.value) pending.value = false
+  }
 }
 
 function reject() {
+  if (pending.value) return
   emit('reject')
   close()
 }
@@ -43,10 +56,33 @@ function reject() {
 function updatePosition() {
   if (props.target) {
     const rect = props.target.getBoundingClientRect()
-    panelStyle.value = {
-      left: `${rect.left + rect.width / 2}px`,
-      top: `${rect.bottom + 8}px`,
-      transform: 'translateX(-50%)',
+    const gap = 8
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    if (props.placement === 'top') {
+      panelStyle.value = {
+        left: `${centerX}px`,
+        top: `${rect.top - gap}px`,
+        transform: 'translate(-50%, -100%)',
+      }
+    } else if (props.placement === 'left') {
+      panelStyle.value = {
+        left: `${rect.left - gap}px`,
+        top: `${centerY}px`,
+        transform: 'translate(-100%, -50%)',
+      }
+    } else if (props.placement === 'right') {
+      panelStyle.value = {
+        left: `${rect.right + gap}px`,
+        top: `${centerY}px`,
+        transform: 'translateY(-50%)',
+      }
+    } else {
+      panelStyle.value = {
+        left: `${centerX}px`,
+        top: `${rect.bottom + gap}px`,
+        transform: 'translateX(-50%)',
+      }
     }
     return
   }
@@ -84,7 +120,6 @@ watch(
       await nextTick()
       updatePosition()
       panel.value?.focus()
-      // Defer so the opening click does not immediately dismiss.
       window.setTimeout(() => document.addEventListener('click', onDocumentClick), 0)
     } else {
       document.removeEventListener('keydown', onKeydown)
@@ -97,7 +132,7 @@ watch(
 )
 
 watch(
-  () => [props.target, props.position] as const,
+  () => [props.target, props.position, props.placement] as const,
   () => {
     if (props.modelValue) updatePosition()
   },
@@ -129,11 +164,12 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
         :style="panelStyle"
       >
         <div class="wi-confirmpopup__message">
+          <WiIcon v-if="icon" class="wi-confirmpopup__icon" :name="icon" size="sm" />
           <slot>{{ message }}</slot>
         </div>
         <div class="wi-confirmpopup__footer">
           <WiButton :label="rejectText" severity="secondary" size="small" @click="reject" />
-          <WiButton :label="acceptText" size="small" @click="accept" />
+          <WiButton :label="acceptText" size="small" :loading="pending" @click="accept" />
         </div>
       </div>
     </Transition>

@@ -7,6 +7,9 @@ import type { PopoverProps } from './types'
 const props = withDefaults(defineProps<PopoverProps>(), {
   modelValue: false,
   placement: 'bottom',
+  trigger: 'manual',
+  showDelay: 0,
+  hideDelay: 200,
   teleport: true,
 })
 const emit = defineEmits<{
@@ -22,9 +25,82 @@ const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
+let showTimer: ReturnType<typeof setTimeout> | undefined
+let hideTimer: ReturnType<typeof setTimeout> | undefined
+
+function setOpen(open: boolean) {
+  emit('update:modelValue', open)
+}
 
 function close() {
-  emit('update:modelValue', false)
+  setOpen(false)
+}
+
+function clearHoverTimers() {
+  if (showTimer) clearTimeout(showTimer)
+  if (hideTimer) clearTimeout(hideTimer)
+  showTimer = undefined
+  hideTimer = undefined
+}
+
+function onTriggerClick() {
+  if (props.trigger !== 'click') return
+  setOpen(!props.modelValue)
+}
+
+function onTriggerEnter() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+  if (props.showDelay > 0) {
+    showTimer = setTimeout(() => setOpen(true), props.showDelay)
+    return
+  }
+  setOpen(true)
+}
+
+function onTriggerLeave() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+  if (props.hideDelay > 0) {
+    hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+    return
+  }
+  setOpen(false)
+}
+
+function onPanelEnter() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+}
+
+function onPanelLeave() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+  if (props.hideDelay > 0) {
+    hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+    return
+  }
+  setOpen(false)
+}
+
+function onTriggerFocus() {
+  if (props.trigger !== 'focus') return
+  clearHoverTimers()
+  if (props.showDelay > 0) {
+    showTimer = setTimeout(() => setOpen(true), props.showDelay)
+    return
+  }
+  setOpen(true)
+}
+
+function onTriggerBlur() {
+  if (props.trigger !== 'focus') return
+  clearHoverTimers()
+  if (props.hideDelay > 0) {
+    hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+    return
+  }
+  setOpen(false)
 }
 
 function updatePanelPosition() {
@@ -111,6 +187,7 @@ watch(
 )
 
 onBeforeUnmount(() => {
+  clearHoverTimers()
   document.removeEventListener('click', onDocumentClick)
   document.removeEventListener('keydown', onKeydown)
   window.removeEventListener('resize', onViewportChange)
@@ -119,8 +196,19 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <span ref="root" class="wi-popover">
-    <span ref="trigger" class="wi-popover__trigger">
+  <span
+    ref="root"
+    class="wi-popover"
+    @mouseenter="onTriggerEnter"
+    @mouseleave="onTriggerLeave"
+  >
+    <span
+      ref="trigger"
+      class="wi-popover__trigger"
+      @click="onTriggerClick"
+      @focusin="onTriggerFocus"
+      @focusout="onTriggerBlur"
+    >
       <slot />
     </span>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
@@ -132,6 +220,8 @@ onBeforeUnmount(() => {
           :class="[`wi-popover__content--${placement}`, { 'wi-popover__content--teleported': teleported }]"
           :style="teleported ? panelStyle : undefined"
           role="dialog"
+          @mouseenter="onPanelEnter"
+          @mouseleave="onPanelLeave"
         >
           <slot name="content" />
         </div>

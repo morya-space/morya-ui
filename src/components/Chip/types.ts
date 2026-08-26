@@ -1,4 +1,8 @@
+import type { WiSizeInput, WiTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
+
+export type ChipSeverity = WiTagSeverity | 'warning'
+export type ChipSize = WiSizeInput
 
 export interface ChipProps {
   /** Chip text. */
@@ -11,6 +15,10 @@ export interface ChipProps {
   removable?: boolean
   /** Disable interaction. */
   disabled?: boolean
+  /** Semantic color. */
+  severity?: ChipSeverity
+  /** Size. Also accepts legacy `sm` / `lg`. */
+  size?: ChipSize
 }
 
 export interface ChipEmits {

@@ -29,4 +29,11 @@ describe('WiProgressBar', () => {
     expect(wrapper.attributes('aria-valuenow')).toBeUndefined()
     expect(wrapper.find('.wi-progressbar__label').exists()).toBe(false)
   })
+
+  it('renders circle type and status tone', () => {
+    const wrapper = mount(WiProgressBar, { props: { value: 40, type: 'circle', status: 'success' } })
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wi-progressbar--circle', 'wi-progressbar--success']))
+    expect(wrapper.find('.wi-progressbar__circle').exists()).toBe(true)
+    expect(wrapper.get('.wi-progressbar__circle-label').text()).toBe('40%')
+  })
 })

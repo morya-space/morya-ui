@@ -53,4 +53,15 @@ describe('WiDrawer', () => {
     expect(wrapper.emitted('hide')).toHaveLength(1)
     wrapper.unmount()
   })
+
+  it('applies width for side drawers', async () => {
+    const wrapper = mount(WiDrawer, {
+      attachTo: document.body,
+      props: { modelValue: true, width: 320, position: 'right' },
+    })
+    await nextTick()
+    const pane = document.body.querySelector('.wi-drawer') as HTMLElement
+    expect(pane.style.width).toBe('320px')
+    wrapper.unmount()
+  })
 })

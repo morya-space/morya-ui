@@ -1,2 +1,2 @@
 export { default as WiCard } from './Card.vue'
-export type { CardProps } from './types'
+export type { CardProps, CardSize } from './types'

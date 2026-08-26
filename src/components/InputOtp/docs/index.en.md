@@ -29,6 +29,23 @@ const code = ref('')
 </template>
 ```
 
+## Mask & size
+
+`mask` renders password-style cells. `size` / `gap` control size and spacing.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputOtp } from '@well-insight/ui'
+
+const code = ref('')
+</script>
+
+<template>
+  <WiInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -36,6 +53,9 @@ const code = ref('')
 | `modelValue` | `string` | `''` | Concatenated value. |
 | `length` | `number` | `4` | Number of cells. |
 | `integerOnly` | `boolean` | `false` | Digits only. |
+| `mask` | `boolean` | `false` | Password mask. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `gap` | `string \| number` | — | Cell gap; a number is pixels. |
 | `disabled` | `boolean` | `false` | Disabled. |
 
 ## Events

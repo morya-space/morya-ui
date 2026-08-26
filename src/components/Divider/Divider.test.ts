@@ -30,4 +30,9 @@ describe('WiDivider', () => {
     expect(wrapper.classes()).toContain('wi-divider--dashed')
     expect(wrapper.classes()).toContain('wi-divider--align-left')
   })
+
+  it('uses titlePlacement as an alias of align', () => {
+    const wrapper = mount(WiDivider, { props: { label: 'Or', titlePlacement: 'right' } })
+    expect(wrapper.classes()).toContain('wi-divider--align-right')
+  })
 })

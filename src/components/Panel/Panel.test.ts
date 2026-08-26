@@ -25,4 +25,13 @@ describe('WiPanel', () => {
     await wrapper.setProps({ modelValue: true })
     expect(wrapper.get('.wi-panel__content').attributes('style')).toContain('display: none')
   })
+
+  it('renders footer and size', () => {
+    const wrapper = mount(WiPanel, {
+      props: { header: 'Box', size: 'small' },
+      slots: { default: 'Body', footer: 'Actions' },
+    })
+    expect(wrapper.classes()).toContain('wi-panel--small')
+    expect(wrapper.get('.wi-panel__footer').text()).toBe('Actions')
+  })
 })

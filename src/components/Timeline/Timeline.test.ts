@@ -26,4 +26,10 @@ describe('WiTimeline', () => {
     expect(wrapper.text()).toContain('C:Ordered')
     expect(wrapper.text()).toContain('O:15/10')
   })
+
+  it('appends a pending item', () => {
+    const wrapper = mount(WiTimeline, { props: { value, pending: 'Waiting' } })
+    expect(wrapper.findAll('.wi-timeline__event')).toHaveLength(3)
+    expect(wrapper.find('.wi-timeline__event--pending').text()).toContain('Waiting')
+  })
 })

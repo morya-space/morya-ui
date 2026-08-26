@@ -27,4 +27,19 @@ describe('WiStepper', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     expect(buttons[2]!.attributes('disabled')).toBeDefined()
   })
+
+  it('renders vertical layout with descriptions', () => {
+    const wrapper = mount(WiStepper, {
+      props: {
+        vertical: true,
+        steps: [
+          { label: 'One', description: 'Start' },
+          { label: 'Two', status: 'error' },
+        ],
+      },
+    })
+    expect(wrapper.get('.wi-stepper').classes()).toContain('wi-stepper--vertical')
+    expect(wrapper.get('.wi-stepper__description').text()).toBe('Start')
+    expect(wrapper.find('.wi-stepper__step--error').exists()).toBe(true)
+  })
 })

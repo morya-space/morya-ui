@@ -45,4 +45,16 @@ describe('WiConfirmPopup', () => {
     expect(document.body.querySelector('.wi-confirmpopup--teleported')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('keeps open when beforeAccept returns false', async () => {
+    const wrapper = mount(WiConfirmPopup, {
+      props: { modelValue: true, message: 'Sure?', acceptLabel: 'Yes', beforeAccept: () => false, teleport: false },
+    })
+    const accept = wrapper.findAll('.wi-button').find((btn) => btn.text().includes('Yes'))
+    await accept!.trigger('click')
+    await nextTick()
+    expect(wrapper.emitted('accept')).toBeUndefined()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect(wrapper.find('.wi-confirmpopup').exists()).toBe(true)
+  })
 })

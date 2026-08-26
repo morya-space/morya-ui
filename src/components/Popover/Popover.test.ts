@@ -51,4 +51,19 @@ describe('WiPopover', () => {
     expect(outside.emitted('update:modelValue')).toEqual([[false]])
     outside.unmount()
   })
+
+  it('opens on hover when trigger is hover', async () => {
+    const wrapper = mount(WiPopover, {
+      attachTo: document.body,
+      props: { modelValue: false, trigger: 'hover', showDelay: 0, hideDelay: 0, teleport: false },
+      slots: {
+        default: '<button type="button">Open</button>',
+        content: '<p>Hover body</p>',
+      },
+    })
+    await wrapper.trigger('mouseenter')
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([true])
+    wrapper.unmount()
+  })
 })

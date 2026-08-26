@@ -103,4 +103,12 @@ describe('WiButton', () => {
 
     wrapper.unmount()
   })
+
+  it('applies ghost, quaternary, and custom color', () => {
+    const ghost = mount(WiButton, { props: { label: 'Ghost', variant: 'ghost' } })
+    const color = mount(WiButton, { props: { label: 'Tint', color: '#e11d48' } })
+    expect(ghost.classes()).toContain('wi-button--ghost')
+    expect(color.classes()).toContain('wi-button--custom')
+    expect(color.attributes('style')).toContain('--wi-button-color: #e11d48')
+  })
 })

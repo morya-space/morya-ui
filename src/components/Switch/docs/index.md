@@ -64,6 +64,21 @@ import { WiSwitch } from '@well-insight/ui'
 </template>
 ```
 
+## Loading & text
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiSwitch } from '@well-insight/ui'
+
+const on = ref(true)
+</script>
+
+<template>
+  <WiSwitch v-model="on" checked-text="开" unchecked-text="关" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -74,6 +89,10 @@ import { WiSwitch } from '@well-insight/ui'
 | `inputId` | `string` | — | `id` 的别名。 |
 | `name` | `string` | — | 原生 name。 |
 | `value` | `string` | — | 原生 value。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `loading` | `boolean` | `false` | 加载中，阻止切换。 |
+| `checkedText` | `string` | — | 开启时轨道文案。 |
+| `uncheckedText` | `string` | — | 关闭时轨道文案。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 原生 required。 |

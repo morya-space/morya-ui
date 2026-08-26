@@ -1,2 +1,2 @@
 export { default as WiTimeline } from './Timeline.vue'
-export type { TimelineAlign, TimelineEvent, TimelineProps } from './types'
+export type { TimelineAlign, TimelineEvent, TimelineLayout, TimelineProps, TimelineSeverity } from './types'

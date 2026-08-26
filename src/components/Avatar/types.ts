@@ -16,3 +16,14 @@ export interface AvatarProps {
   /** Size. Also accepts legacy `sm` / `lg`. */
   size?: AvatarSize | 'sm' | 'lg'
 }
+
+export interface AvatarEmits {
+  (event: 'error', value: Event): void
+}
+
+export interface AvatarGroupProps {
+  /** Max avatars to show. Extra count is summarized as `+N`. */
+  max?: number
+  /** Size applied to overflow rest marker. */
+  size?: AvatarSize | 'sm' | 'lg'
+}

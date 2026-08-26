@@ -19,4 +19,19 @@ describe('WiProgressSpinner', () => {
     expect(wrapper.attributes('style')).toContain('animation-duration: 2s')
     expect(wrapper.attributes('aria-label')).toBe('Loading')
   })
+
+  it('wraps content and respects show', () => {
+    const hidden = mount(WiProgressSpinner, {
+      props: { show: false, description: 'Saving' },
+      slots: { default: '<p>Form</p>' },
+    })
+    expect(hidden.text()).toContain('Form')
+    expect(hidden.find('.wi-progress-spinner-wrap__overlay').exists()).toBe(false)
+
+    const shown = mount(WiProgressSpinner, {
+      props: { show: true, description: 'Saving' },
+      slots: { default: '<p>Form</p>' },
+    })
+    expect(shown.get('.wi-progress-spinner-wrap__overlay').text()).toContain('Saving')
+  })
 })

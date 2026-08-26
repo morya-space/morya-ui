@@ -44,6 +44,23 @@ const value = ref(3)
 </template>
 ```
 
+## Precision & placement
+
+`precision` 控制小数位。`button-placement="right"` 把增减按钮放到右侧。`clearable` 可清空。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputNumber } from '@well-insight/ui'
+
+const value = ref(1.25)
+</script>
+
+<template>
+  <WiInputNumber v-model="value" show-buttons button-placement="right" :precision="2" :step="0.25" clearable />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -53,7 +70,10 @@ const value = ref(3)
 | `min` | `number` | — | 最小值。 |
 | `max` | `number` | — | 最大值。 |
 | `step` | `number` | `1` | 步进。 |
+| `precision` | `number` | — | 小数位数。 |
 | `showButtons` | `boolean` | `false` | 显示增减按钮。 |
+| `buttonPlacement` | `'both' \| 'right'` | `'both'` | 按钮位置。 |
+| `clearable` | `boolean` | `false` | 显示清空。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |

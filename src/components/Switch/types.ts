@@ -1,3 +1,7 @@
+import type { WiSizeInput } from '../../shared/types'
+
+export type SwitchSize = WiSizeInput
+
 export interface SwitchProps {
   modelValue?: boolean
   label?: string
@@ -7,6 +11,13 @@ export interface SwitchProps {
   inputId?: string
   name?: string
   value?: string
+  size?: SwitchSize
+  /** Show a spinner and block toggles. */
+  loading?: boolean
+  /** Text shown when checked. */
+  checkedText?: string
+  /** Text shown when unchecked. */
+  uncheckedText?: string
   /** Marks the control invalid. */
   invalid?: boolean
   disabled?: boolean

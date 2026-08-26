@@ -30,4 +30,9 @@ describe('WiChip', () => {
     expect(wrapper.emitted('remove')).toBeUndefined()
     expect(wrapper.classes()).toContain('wi-chip--disabled')
   })
+
+  it('applies size and severity', () => {
+    const wrapper = mount(WiChip, { props: { label: 'Hot', size: 'small', severity: 'danger' } })
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wi-chip--small', 'wi-chip--danger']))
+  })
 })

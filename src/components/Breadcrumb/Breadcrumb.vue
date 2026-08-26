@@ -3,7 +3,9 @@ import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
 import type { BreadcrumbItem, BreadcrumbProps } from './types'
 
-const props = defineProps<BreadcrumbProps>()
+const props = withDefaults(defineProps<BreadcrumbProps>(), {
+  separator: '/',
+})
 const locale = useWiLocale()
 
 const items = computed(() => {
@@ -41,7 +43,9 @@ const items = computed(() => {
         >
           {{ item.label }}
         </span>
-        <span v-if="index < items.length - 1" class="wi-breadcrumb__separator" aria-hidden="true">/</span>
+        <span v-if="index < items.length - 1" class="wi-breadcrumb__separator" aria-hidden="true">
+          <slot name="separator">{{ separator }}</slot>
+        </span>
       </li>
     </ol>
   </nav>

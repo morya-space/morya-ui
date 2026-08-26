@@ -25,4 +25,10 @@ describe('WiSkeleton', () => {
     const wrapper = mount(WiSkeleton, { props: { borderRadius: '8px', height: '1rem' } })
     expect(wrapper.attributes('style')).toContain('border-radius: 8px')
   })
+
+  it('repeats text placeholders', () => {
+    const wrapper = mount(WiSkeleton, { props: { text: true, repeat: 3 } })
+    expect(wrapper.classes()).toContain('wi-skeleton-repeat')
+    expect(wrapper.findAll('.wi-skeleton--text')).toHaveLength(3)
+  })
 })

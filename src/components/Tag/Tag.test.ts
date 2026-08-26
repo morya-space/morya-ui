@@ -26,4 +26,11 @@ describe('WiTag', () => {
     const wrapper = mount(WiTag, { props: { value: 'Default' } })
     expect(wrapper.classes()).toContain('wi-tag--primary')
   })
+
+  it('emits close when closable', async () => {
+    const wrapper = mount(WiTag, { props: { value: 'Draft', closable: true, bordered: true, size: 'small' } })
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wi-tag--closable', 'wi-tag--bordered', 'wi-tag--small']))
+    await wrapper.get('.wi-tag__close').trigger('click')
+    expect(wrapper.emitted('close')).toHaveLength(1)
+  })
 })

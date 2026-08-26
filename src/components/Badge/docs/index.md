@@ -72,6 +72,27 @@ import { WiBadge } from '@well-insight/ui'
 </template>
 ```
 
+## Overlay
+
+默认插槽包裹子节点；`max` 超出时显示 `99+`，`processing` 显示脉冲。
+
+```vue preview
+<script setup lang="ts">
+import { WiBadge, WiButton } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
+    <WiBadge :value="120" :max="99">
+      <WiButton label="Inbox" severity="secondary" />
+    </WiBadge>
+    <WiBadge processing>
+      <WiButton label="Live" icon="check" />
+    </WiBadge>
+  </div>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -79,3 +100,12 @@ import { WiBadge } from '@well-insight/ui'
 | `value` | `string \| number` | — | 角标内容。省略时显示为圆点。 |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；`sm` / `lg` 为别名。 |
+| `max` | `number` | — | 数字上限，超出显示 `{max}+`。 |
+| `offset` | `[number, number]` | — | 包裹模式下的位移 `[x, y]`。 |
+| `processing` | `boolean` | `false` | 脉冲动画。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 被角标包裹的内容。 |

@@ -68,6 +68,20 @@ import { WiDivider } from '@well-insight/ui'
 </template>
 ```
 
+## Title placement
+
+`titlePlacement` is an alias of `align`.
+
+```vue preview
+<script setup lang="ts">
+import { WiDivider } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiDivider label="Or" title-placement="right" />
+</template>
+```
+
 ## Layout
 
 `layout` (or the compatible `orientation`) controls horizontal / vertical.
@@ -96,6 +110,7 @@ import { WiDivider } from '@well-insight/ui'
 | `orientation` | `'horizontal' \| 'vertical'` | — | **Compatibility alias**; takes effect only when `layout` is not passed. |
 | `type` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` | Line style. |
 | `align` | `'left' \| 'center' \| 'right'` | `'center'` | Label alignment for a horizontal divider with a label. |
+| `titlePlacement` | `'left' \| 'center' \| 'right'` | — | Alias of `align`; takes precedence when set. |
 | `label` | `string` | — | Center label text. The default slot takes precedence when present. |
 
 ## Slots

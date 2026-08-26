@@ -79,7 +79,9 @@ const count = ref(3)
 
 ## Horizontal
 
-Shows a horizontal scrollbar when content is wider than the container.
+A horizontal scrollbar appears when content is wider than the container. `trigger="none"` and `always` keep the thumb visible; the default `trigger="hover"` shows it on hover.
+
+`WiLayout` uses this component when `native-scrollbar={false}`.
 
 ```vue preview
 <script setup lang="ts">
@@ -230,6 +232,7 @@ function loadMore(direction: ScrollbarDirection) {
 | noresize | `boolean` | `false` | Do not listen for size changes |
 | tag | `string` | `div` | Content area tag |
 | always | `boolean` | `false` | Always show the thumb |
+| trigger | `'hover' \| 'none'` | `'hover'` | `none` keeps thumbs visible; `always` still wins |
 | minSize | `number` | `20` | Minimum thumb size |
 | id / role / ariaLabel / ariaOrientation | a11y | — | Accessible attributes for the content area |
 | tabindex | `number \| string` | — | tabindex on the wrap |

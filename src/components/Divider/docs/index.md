@@ -68,6 +68,20 @@ import { WiDivider } from '@well-insight/ui'
 </template>
 ```
 
+## Title placement
+
+`titlePlacement` 是 `align` 的别名。
+
+```vue preview
+<script setup lang="ts">
+import { WiDivider } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiDivider label="Or" title-placement="right" />
+</template>
+```
+
 ## Layout
 
 `layout`（或兼容的 `orientation`）控制水平 / 垂直。
@@ -96,6 +110,7 @@ import { WiDivider } from '@well-insight/ui'
 | `orientation` | `'horizontal' \| 'vertical'` | — | **兼容别名**；仅在未传 `layout` 时生效。 |
 | `type` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` | 线条样式。 |
 | `align` | `'left' \| 'center' \| 'right'` | `'center'` | 水平分隔带标签时的标签对齐。 |
+| `titlePlacement` | `'left' \| 'center' \| 'right'` | — | `align` 的别名；传入时优先。 |
 | `label` | `string` | — | 中间标签文案。存在默认插槽时以插槽为准。 |
 
 ## Slots

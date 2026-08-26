@@ -97,4 +97,9 @@ export const zhCN: WiLocaleMessages = {
   jumpToPage: '跳至',
   pageClassifier: '页',
   itemsPerPage: '条/页',
+  tabs: '标签页',
+  addTab: '新增标签',
+  closeTab: '关闭标签',
+  dateRangePlaceholder: '选择日期范围',
+  today: '今天',
 }

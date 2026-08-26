@@ -67,6 +67,33 @@ const tabs = [
 </template>
 ```
 
+## Extra
+
+`#extra` renders to the right of the header; clicks do not toggle the panel.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiAccordion, WiButton } from '@well-insight/ui'
+
+const active = ref('a')
+const tabs = [
+  { value: 'a', header: 'Section A' },
+]
+</script>
+
+<template>
+  <WiAccordion v-model="active" :tabs="tabs">
+    <template #extra="{ tab }">
+      <WiButton :label="tab.header" size="small" text />
+    </template>
+    <template #a>
+      <p style="margin:0">Content.</p>
+    </template>
+  </WiAccordion>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -86,3 +113,4 @@ const tabs = [
 | Slot | Description |
 | --- | --- |
 | `[tab.value]` | Panel content; slot name matches `tabs[].value`. |
+| `extra` | Header extra, `{ tab }`; clicks do not collapse. |

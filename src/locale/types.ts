@@ -98,6 +98,11 @@ export interface WiLocaleConfig {
   jumpToPage?: string
   pageClassifier?: string
   itemsPerPage?: string
+  tabs?: string
+  addTab?: string
+  closeTab?: string
+  dateRangePlaceholder?: string
+  today?: string
 }
 
 export type WiLocaleMessages = Required<

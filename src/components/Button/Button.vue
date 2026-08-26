@@ -13,6 +13,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   text: false,
   outlined: false,
   link: false,
+  ghost: false,
+  quaternary: false,
   plain: false,
   fluid: false,
   block: false,
@@ -33,6 +35,8 @@ const hasLabel = computed(() => hasDefaultContent.value || Boolean(props.label?.
 const isOutlined = computed(() => props.outlined || props.variant === 'outlined')
 const isText = computed(() => props.text || props.variant === 'text')
 const isLink = computed(() => props.link || props.variant === 'link')
+const isGhost = computed(() => props.ghost || props.variant === 'ghost')
+const isQuaternary = computed(() => props.quaternary || props.variant === 'quaternary')
 const isFluid = computed(() => props.fluid || props.block)
 
 const resolvedSize = useConfiguredSize('Button', () => props.size)
@@ -55,12 +59,19 @@ const buttonClass = computed(() => [
     'wi-button--text': isText.value,
     'wi-button--outlined': isOutlined.value,
     'wi-button--link': isLink.value,
+    'wi-button--ghost': isGhost.value,
+    'wi-button--quaternary': isQuaternary.value,
     'wi-button--plain': props.plain,
     'wi-button--fluid': isFluid.value,
     'wi-button--loading': props.loading,
     'wi-button--icon-only': isIconOnly.value,
+    'wi-button--custom': Boolean(props.color),
   },
 ])
+
+const buttonStyle = computed(() =>
+  props.color ? { '--wi-button-color': props.color } : undefined,
+)
 
 const badgeClass = computed(() => [
   'wi-button__badge',
@@ -97,6 +108,7 @@ defineExpose({ focus, ref: buttonElement })
   <button
     ref="buttonElement"
     :class="buttonClass"
+    :style="buttonStyle"
     :type="nativeType"
     :disabled="disabled || loading"
     :autofocus="autofocus || undefined"

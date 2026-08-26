@@ -15,4 +15,10 @@ describe('WiInputColor', () => {
     await wrapper.find('.wi-inputcolor__text').setValue('#ff0000')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['#ff0000'])
   })
+
+  it('picks a swatch', async () => {
+    const wrapper = mount(WiInputColor, { props: { modelValue: '#000000', swatches: ['#ff0000', '#00ff00'] } })
+    await wrapper.findAll('.wi-inputcolor__preset')[0]!.trigger('click')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['#ff0000'])
+  })
 })

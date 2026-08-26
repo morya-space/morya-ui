@@ -29,6 +29,26 @@ import { WiProgressSpinner } from '@well-insight/ui'
 </template>
 ```
 
+## Wrap
+
+包裹内容时用 `show` 控制遮罩，`delay` 延迟出现。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiProgressSpinner } from '@well-insight/ui'
+
+const loading = ref(true)
+</script>
+
+<template>
+  <WiProgressSpinner :show="loading" description="Loading">
+    <p style="margin:0">Form content</p>
+  </WiProgressSpinner>
+  <WiButton label="Toggle" size="small" @click="loading = !loading" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -36,3 +56,7 @@ import { WiProgressSpinner } from '@well-insight/ui'
 | `strokeWidth` | `string` | `'2'` | SVG circle 描边宽度。 |
 | `animationDuration` | `string` | `'1s'` | 旋转动画时长。 |
 | `ariaLabel` | `string` | `'加载中'` | 可访问名称。 |
+| `show` | `boolean` | `true` | 包裹内容时是否显示遮罩。 |
+| `delay` | `number` | `0` | 显示前延迟（ms）。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `description` | `string` | — | 遮罩下方说明。 |

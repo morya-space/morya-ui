@@ -4,7 +4,7 @@ import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import WiIcon from '../Icon/Icon.vue'
-import type { AutoCompleteProps } from './types'
+import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   modelValue: '',
@@ -12,6 +12,8 @@ const props = withDefaults(defineProps<AutoCompleteProps>(), {
   dropdown: false,
   disabled: false,
   placeholder: '',
+  loading: false,
+  clearable: false,
   teleport: true,
 })
 
@@ -32,11 +34,23 @@ const highlight = ref(-1)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
+function normalize(item: AutoCompleteSuggestion): AutoCompleteOption {
+  if (typeof item === 'string') return { label: item, value: item }
+  return item
+}
+
+const options = computed(() => props.suggestions.map(normalize))
+
 const filtered = computed(() => {
   const query = (props.modelValue ?? '').trim().toLowerCase()
-  if (!query) return props.suggestions
-  return props.suggestions.filter((item) => item.toLowerCase().includes(query))
+  if (!query) return options.value
+  return options.value.filter(
+    (item) =>
+      item.label.toLowerCase().includes(query) || item.value.toLowerCase().includes(query),
+  )
 })
+
+const showClear = computed(() => props.clearable && Boolean(props.modelValue) && !props.disabled)
 
 const rootClass = computed(() => [
   'wi-autocomplete',
@@ -44,6 +58,7 @@ const rootClass = computed(() => [
   {
     'wi-autocomplete--disabled': props.disabled,
     'wi-autocomplete--open': open.value,
+    'wi-autocomplete--loading': props.loading,
   },
 ])
 
@@ -71,10 +86,16 @@ function onInput(event: Event) {
   requestComplete(value)
 }
 
-function select(item: string) {
+function select(item: AutoCompleteOption) {
   if (props.disabled) return
-  emit('update:modelValue', item)
+  emit('update:modelValue', item.value)
   open.value = false
+}
+
+function clear() {
+  if (props.disabled) return
+  emit('update:modelValue', '')
+  requestComplete('')
 }
 
 function toggleDropdown() {
@@ -146,6 +167,8 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', onViewportChange)
   window.removeEventListener('scroll', onViewportChange, true)
 })
+
+const panelOpen = computed(() => open.value && (filtered.value.length > 0 || props.loading))
 </script>
 
 <template>
@@ -159,11 +182,22 @@ onBeforeUnmount(() => {
         :placeholder="placeholder"
         :disabled="disabled"
         :aria-expanded="open"
+        :aria-busy="loading || undefined"
         aria-autocomplete="list"
         @input="onInput"
         @keydown="onKeydown"
         @focus="requestComplete(modelValue ?? '')"
       />
+      <span v-if="loading" class="wi-autocomplete__spinner" aria-hidden="true" />
+      <button
+        v-else-if="showClear"
+        type="button"
+        class="wi-autocomplete__clear"
+        :aria-label="locale.clearInput"
+        @click="clear"
+      >
+        ×
+      </button>
       <button
         v-if="dropdown"
         type="button"
@@ -178,23 +212,24 @@ onBeforeUnmount(() => {
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
         <ul
-          v-if="open && filtered.length"
+          v-if="panelOpen"
           ref="panel"
           class="wi-autocomplete__panel"
           :class="{ 'wi-autocomplete__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
           role="listbox"
         >
+          <li v-if="loading && !filtered.length" class="wi-autocomplete__status">{{ locale.loading }}</li>
           <li
             v-for="(item, index) in filtered"
-            :key="`${item}-${index}`"
+            :key="`${item.value}-${index}`"
             class="wi-autocomplete__item"
             role="option"
             :class="{ 'wi-autocomplete__item--active': index === highlight }"
             :aria-selected="index === highlight"
             @mousedown.prevent="select(item)"
           >
-            {{ item }}
+            {{ item.label }}
           </li>
         </ul>
       </Transition>

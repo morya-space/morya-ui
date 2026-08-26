@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
+import { resolveSizeClass } from '../../shared/types'
 import type { PanelProps } from './types'
 
 const props = withDefaults(defineProps<PanelProps>(), {
@@ -13,8 +14,17 @@ const emit = defineEmits<{
 }>()
 
 const locale = useWiLocale()
-
+const sizeTone = computed(() => resolveSizeClass(props.size))
 const isCollapsed = computed(() => props.modelValue ?? props.collapsed ?? false)
+
+const rootClass = computed(() => [
+  'wi-panel',
+  {
+    'wi-panel--collapsed': isCollapsed.value,
+    'wi-panel--small': sizeTone.value === 'small',
+    'wi-panel--large': sizeTone.value === 'large',
+  },
+])
 
 function toggle() {
   if (!props.toggleable) return
@@ -25,7 +35,7 @@ function toggle() {
 </script>
 
 <template>
-  <section class="wi-panel" :class="{ 'wi-panel--collapsed': isCollapsed }">
+  <section :class="rootClass">
     <header v-if="$slots.header || header || toggleable" class="wi-panel__header">
       <div class="wi-panel__title">
         <slot name="header">{{ header }}</slot>
@@ -44,5 +54,8 @@ function toggle() {
     <div v-show="!isCollapsed" class="wi-panel__content">
       <slot />
     </div>
+    <footer v-if="$slots.footer && !isCollapsed" class="wi-panel__footer">
+      <slot name="footer" />
+    </footer>
   </section>
 </template>

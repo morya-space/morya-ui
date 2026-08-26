@@ -29,4 +29,13 @@ describe('WiInputNumber', () => {
       expect.arrayContaining(['wi-inputnumber--small', 'wi-inputnumber--fluid', 'wi-inputnumber--invalid']),
     )
   })
+
+  it('rounds to precision and can clear', async () => {
+    const wrapper = mount(WiInputNumber, { props: { modelValue: 1.234, precision: 1, step: 0.1, clearable: true } })
+    await wrapper.get('.wi-inputnumber__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
+    const stepped = mount(WiInputNumber, { props: { modelValue: 1.24, precision: 1, step: 0.1, showButtons: true } })
+    await stepped.get('.wi-inputnumber__button--increment').trigger('click')
+    expect(stepped.emitted('update:modelValue')?.at(-1)).toEqual([1.3])
+  })
 })

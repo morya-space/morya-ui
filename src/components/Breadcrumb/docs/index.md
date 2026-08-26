@@ -32,9 +32,35 @@ const items = [
 </template>
 ```
 
+## Separator
+
+`separator` 自定义分隔符；也可用 `#separator` 插槽。
+
+```vue preview
+<script setup lang="ts">
+import { WiBreadcrumb } from '@well-insight/ui'
+
+const items = [
+  { label: 'Library', to: '/lib' },
+  { label: 'Docs' },
+]
+</script>
+
+<template>
+  <WiBreadcrumb :model="items" separator=">" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `model` | `{ label: string; to?: string; disabled?: boolean }[]` | — | 路径项。 |
 | `home` | `{ label?: string; to?: string }` | — | 首页项；默认文案 `Home`。 |
+| `separator` | `string` | `'/'` | 分隔符。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `separator` | 自定义分隔符。 |

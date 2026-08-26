@@ -30,6 +30,21 @@ import { WiProgressBar } from '@well-insight/ui'
 </template>
 ```
 
+## Circle & status
+
+```vue preview
+<script setup lang="ts">
+import { WiProgressBar } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
+    <WiProgressBar :value="72" type="circle" status="success" />
+    <WiProgressBar :value="40" status="warn" />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -37,3 +52,6 @@ import { WiProgressBar } from '@well-insight/ui'
 | `value` | `number` | `0` | Progress 0–100 (determinate). |
 | `mode` | `'determinate' \| 'indeterminate'` | `'determinate'` | Determinate / indeterminate mode. |
 | `showValue` | `boolean` | `true` | Whether to show the percentage label. |
+| `type` | `'line' \| 'circle'` | `'line'` | Line or circle. |
+| `status` | `'success' \| 'info' \| 'warn' \| 'danger' \| 'error'` | — | Semantic fill. |
+| `color` | `string` | — | Custom fill color. |

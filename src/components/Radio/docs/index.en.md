@@ -66,6 +66,25 @@ import { WiRadio } from '@well-insight/ui'
 </template>
 ```
 
+## Group
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiRadio, WiRadioGroup } from '@well-insight/ui'
+
+const size = ref('md')
+</script>
+
+<template>
+  <WiRadioGroup v-model="size">
+    <WiRadio value="sm" label="Small" />
+    <WiRadio value="md" label="Medium" />
+    <WiRadio value="lg" label="Large" />
+  </WiRadioGroup>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -75,6 +94,7 @@ import { WiRadio } from '@well-insight/ui'
 | `label` | `string` | — | Label text. You can also use the default slot. |
 | `id` | `string` | — | Native id. |
 | `name` | `string` | — | Native name. Must match within a group. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `invalid` | `boolean` | `false` | Invalid state. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Native required. |

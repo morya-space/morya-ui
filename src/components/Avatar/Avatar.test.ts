@@ -34,4 +34,12 @@ describe('WiAvatar', () => {
     expect(xlarge.classes()).toContain('wi-avatar--xlarge')
     expect(lg.classes()).toContain('wi-avatar--large')
   })
+
+  it('falls back and emits error when the image fails', async () => {
+    const wrapper = mount(WiAvatar, { props: { image: 'https://example.com/missing.png', label: 'AB' } })
+    await wrapper.get('img').trigger('error')
+    expect(wrapper.emitted('error')).toHaveLength(1)
+    expect(wrapper.find('.wi-avatar__image').exists()).toBe(false)
+    expect(wrapper.get('.wi-avatar__label').text()).toBe('AB')
+  })
 })

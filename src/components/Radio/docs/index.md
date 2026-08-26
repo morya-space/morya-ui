@@ -66,6 +66,25 @@ import { WiRadio } from '@well-insight/ui'
 </template>
 ```
 
+## Group
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiRadio, WiRadioGroup } from '@well-insight/ui'
+
+const size = ref('md')
+</script>
+
+<template>
+  <WiRadioGroup v-model="size">
+    <WiRadio value="sm" label="Small" />
+    <WiRadio value="md" label="Medium" />
+    <WiRadio value="lg" label="Large" />
+  </WiRadioGroup>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -75,6 +94,7 @@ import { WiRadio } from '@well-insight/ui'
 | `label` | `string` | — | 标签文案；也可用默认插槽。 |
 | `id` | `string` | — | 原生 id。 |
 | `name` | `string` | — | 原生 name（同组需一致）。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 原生 required。 |

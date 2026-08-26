@@ -59,6 +59,27 @@ import { WiCheckbox } from '@well-insight/ui'
 </template>
 ```
 
+## Group
+
+`WiCheckboxGroup` uses an array `v-model`. Children identify themselves with `value`. `indeterminate` is a mixed visual.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiCheckbox, WiCheckboxGroup } from '@well-insight/ui'
+
+const selected = ref(['vue'])
+</script>
+
+<template>
+  <WiCheckboxGroup v-model="selected">
+    <WiCheckbox value="vue" label="Vue" />
+    <WiCheckbox value="react" label="React" />
+    <WiCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
+  </WiCheckboxGroup>
+</template>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -67,7 +88,9 @@ import { WiCheckbox } from '@well-insight/ui'
 | `label` | `string` | — | Label text; default slot also works. |
 | `id` | `string` | — | Native id. |
 | `name` | `string` | — | Native name. |
-| `value` | `string` | — | Native value. |
+| `value` | `string \| number \| boolean` | — | Option value inside a group. |
+| `indeterminate` | `boolean` | `false` | Mixed state. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `invalid` | `boolean` | `false` | Invalid validation state. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Native required. |

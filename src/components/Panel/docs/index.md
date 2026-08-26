@@ -27,6 +27,21 @@ const collapsed = ref(false)
 <template>
   <WiPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">可折叠面板内容。</p>
+    <template #footer>操作区</template>
+  </WiPanel>
+</template>
+```
+
+## Size
+
+```vue preview
+<script setup lang="ts">
+import { WiPanel } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiPanel header="Small" size="small">
+    <p style="margin:0">更紧凑的面板。</p>
   </WiPanel>
 </template>
 ```
@@ -39,6 +54,7 @@ const collapsed = ref(false)
 | `toggleable` | `boolean` | `false` | 是否可折叠。 |
 | `collapsed` | `boolean` | `false` | 折叠状态。 |
 | `modelValue` | `boolean` | — | `collapsed` 的 `v-model` 别名。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 
 ## Events
 
@@ -53,3 +69,4 @@ const collapsed = ref(false)
 | --- | --- |
 | `default` | 面板内容。 |
 | `header` | 自定义标题。 |
+| `footer` | 底部区域；折叠时隐藏。 |

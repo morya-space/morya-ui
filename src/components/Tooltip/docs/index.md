@@ -26,7 +26,7 @@ import { WiButton, WiTooltip } from '@well-insight/ui'
     <WiTooltip content="Save changes" placement="top">
       <WiButton icon="check" icon-only aria-label="Save" />
     </WiTooltip>
-    <WiTooltip content="Delete item" placement="bottom" :show-delay="200">
+    <WiTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
       <WiButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
     </WiTooltip>
   </div>
@@ -41,6 +41,8 @@ import { WiButton, WiTooltip } from '@well-insight/ui'
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | 相对触发元素的位置。 |
 | `disabled` | `boolean` | `false` | 禁用提示。 |
 | `showDelay` | `number` | `0` | 显示前延迟（毫秒）。 |
+| `hideDelay` | `number` | `0` | 隐藏前延迟（毫秒）。 |
+| `maxWidth` | `string \| number` | — | 提示最大宽度；数字为 px。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
 

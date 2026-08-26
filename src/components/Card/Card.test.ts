@@ -15,4 +15,15 @@ describe('WiCard', () => {
     expect(wrapper.get('.wi-card__header').text()).toBe('Custom header')
     expect(wrapper.get('.wi-card__footer').text()).toBe('Actions')
   })
+
+  it('supports cover, hoverable, and borderless', () => {
+    const wrapper = mount(WiCard, {
+      props: { hoverable: true, bordered: false, size: 'small' },
+      slots: { cover: '<img alt="cover" src="https://example.com/c.png">' },
+    })
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(['wi-card--hoverable', 'wi-card--borderless', 'wi-card--small']),
+    )
+    expect(wrapper.get('.wi-card__cover img').attributes('alt')).toBe('cover')
+  })
 })

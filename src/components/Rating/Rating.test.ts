@@ -28,4 +28,13 @@ describe('WiRating', () => {
     await disabled.findAll('.wi-rating__star')[2]!.trigger('click')
     expect(disabled.emitted('update:modelValue')).toBeUndefined()
   })
+
+  it('supports half stars and allowClear alias', async () => {
+    const wrapper = mount(WiRating, { props: { modelValue: 1, allowHalf: true, allowClear: false } })
+    expect(wrapper.find('.wi-rating__cancel').exists()).toBe(false)
+    const star = wrapper.findAll('.wi-rating__star')[1]!
+    await star.trigger('click', { clientX: 0 })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeTypeOf('number')
+    expect(wrapper.classes()).toContain('wi-rating--half')
+  })
 })

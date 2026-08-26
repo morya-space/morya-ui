@@ -36,6 +36,8 @@ export interface ScrollbarProps {
   tag?: string
   /** Always show scrollbar thumbs (otherwise hover / drag). */
   always?: boolean
+  /** `none` keeps thumbs visible; `hover` shows them on hover. `always` still wins. */
+  trigger?: 'hover' | 'none'
   /** Minimum thumb size in pixels. */
   minSize?: number
   /** Tabindex of the wrap container. */

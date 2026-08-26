@@ -104,6 +104,43 @@ import { WiButton } from '@well-insight/ui'
 </template>
 ```
 
+## Ghost & Quaternary
+
+`ghost` is a transparent fill with tinted text; `quaternary` is quieter for secondary toolbar actions. Both can be set via `variant`.
+
+```vue preview
+<script setup lang="ts">
+import { WiButton } from '@well-insight/ui'
+</script>
+
+<template>
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+    <WiButton label="Ghost" ghost />
+    <WiButton label="Ghost Danger" ghost severity="danger" />
+    <WiButton label="Quaternary" quaternary />
+    <WiButton label="Custom" color="#e11d48" />
+  </div>
+</template>
+```
+
+## Button Group
+
+`WiButtonGroup` joins adjacent buttons.
+
+```vue preview
+<script setup lang="ts">
+import { WiButton, WiButtonGroup } from '@well-insight/ui'
+</script>
+
+<template>
+  <WiButtonGroup aria-label="Align">
+    <WiButton label="Left" />
+    <WiButton label="Center" severity="secondary" />
+    <WiButton label="Right" severity="secondary" />
+  </WiButtonGroup>
+</template>
+```
+
 ## Icons & Badge
 
 Supports `icon`, `iconPos`, `iconOnly`, and a `badge`.
@@ -176,10 +213,13 @@ import { WiButton } from '@well-insight/ui'
 | `iconPos` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | Icon position relative to the label. |
 | `iconOnly` | `boolean` | `false` | Force a square icon-only button. |
 | `severity` | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | — | Semantic color. Defaults to primary when omitted. |
-| `variant` | `'outlined' \| 'text' \| 'link'` | — | Style variant shortcut, equivalent to the matching boolean prop. |
+| `variant` | `'outlined' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'` | — | Style variant shortcut, equivalent to the matching boolean prop. |
 | `outlined` | `boolean` | `false` | Outlined button. |
 | `text` | `boolean` | `false` | Text button. |
 | `link` | `boolean` | `false` | Link button. |
+| `ghost` | `boolean` | `false` | Transparent fill. |
+| `quaternary` | `boolean` | `false` | Extra-quiet text button. |
+| `color` | `string` | — | Custom color; overrides `severity`. |
 | `raised` | `boolean` | `false` | Raised shadow. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
 | `plain` | `boolean` | `false` | Muted color; often combined with `text` / `outlined`. |

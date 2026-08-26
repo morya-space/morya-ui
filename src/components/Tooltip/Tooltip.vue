@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',
   disabled: false,
   showDelay: 0,
+  hideDelay: 0,
   teleport: true,
 })
 
@@ -18,12 +19,22 @@ const tipStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 let showTimer: ReturnType<typeof setTimeout> | null = null
+let hideTimer: ReturnType<typeof setTimeout> | null = null
 
-function clearShowTimer() {
+function clearTimers() {
   if (showTimer !== null) {
     clearTimeout(showTimer)
     showTimer = null
   }
+  if (hideTimer !== null) {
+    clearTimeout(hideTimer)
+    hideTimer = null
+  }
+}
+
+function toCssSize(value?: string | number) {
+  if (value == null) return undefined
+  return typeof value === 'number' ? `${value}px` : value
 }
 
 function updateTipPosition() {
@@ -32,41 +43,47 @@ function updateTipPosition() {
   const gap = 8
   const centerX = rect.left + rect.width / 2
   const centerY = rect.top + rect.height / 2
+  const maxWidth = toCssSize(props.maxWidth)
 
   if (props.placement === 'top') {
     tipStyle.value = {
       left: `${centerX}px`,
       top: `${rect.top - gap}px`,
       transform: 'translate(-50%, -100%)',
+      ...(maxWidth ? { maxWidth } : {}),
     }
   } else if (props.placement === 'bottom') {
     tipStyle.value = {
       left: `${centerX}px`,
       top: `${rect.bottom + gap}px`,
       transform: 'translateX(-50%)',
+      ...(maxWidth ? { maxWidth } : {}),
     }
   } else if (props.placement === 'left') {
     tipStyle.value = {
       left: `${rect.left - gap}px`,
       top: `${centerY}px`,
       transform: 'translate(-100%, -50%)',
+      ...(maxWidth ? { maxWidth } : {}),
     }
   } else {
     tipStyle.value = {
       left: `${rect.right + gap}px`,
       top: `${centerY}px`,
       transform: 'translateY(-50%)',
+      ...(maxWidth ? { maxWidth } : {}),
     }
   }
 }
 
+function reveal() {
+  visible.value = true
+  void nextTick(updateTipPosition)
+}
+
 function show() {
   if (props.disabled) return
-  clearShowTimer()
-  const reveal = () => {
-    visible.value = true
-    void nextTick(updateTipPosition)
-  }
+  clearTimers()
   if (props.showDelay > 0) {
     showTimer = setTimeout(() => {
       reveal()
@@ -78,7 +95,14 @@ function show() {
 }
 
 function hide() {
-  clearShowTimer()
+  clearTimers()
+  if (props.hideDelay > 0) {
+    hideTimer = setTimeout(() => {
+      visible.value = false
+      hideTimer = null
+    }, props.hideDelay)
+    return
+  }
   visible.value = false
 }
 
@@ -97,9 +121,15 @@ watch(visible, (next) => {
 })
 
 onBeforeUnmount(() => {
-  clearShowTimer()
+  clearTimers()
   window.removeEventListener('resize', onViewportChange)
   window.removeEventListener('scroll', onViewportChange, true)
+})
+
+const contentStyle = computed(() => {
+  const maxWidth = toCssSize(props.maxWidth)
+  if (teleported.value) return tipStyle.value
+  return maxWidth ? { maxWidth } : undefined
 })
 </script>
 
@@ -119,7 +149,7 @@ onBeforeUnmount(() => {
           v-if="visible"
           class="wi-tooltip__content"
           :class="[`wi-tooltip__content--${placement}`, { 'wi-tooltip__content--teleported': teleported }]"
-          :style="teleported ? tipStyle : undefined"
+          :style="contentStyle"
           role="tooltip"
         >
           {{ content }}

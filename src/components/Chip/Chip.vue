@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
+import { normalizeSeverity, resolveSizeClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 import type { ChipProps } from './types'
 
@@ -11,12 +12,17 @@ const props = withDefaults(defineProps<ChipProps>(), {
 
 const emit = defineEmits<{ (event: 'remove', value: MouseEvent): void }>()
 const locale = useWiLocale()
+const severityTone = computed(() => (props.severity ? normalizeSeverity(props.severity) : undefined))
+const sizeTone = computed(() => resolveSizeClass(props.size))
 
 const chipClass = computed(() => [
   'wi-chip',
   {
     'wi-chip--disabled': props.disabled,
     'wi-chip--removable': props.removable,
+    [`wi-chip--${severityTone.value}`]: Boolean(severityTone.value),
+    'wi-chip--small': sizeTone.value === 'small',
+    'wi-chip--large': sizeTone.value === 'large',
   },
 ])
 
