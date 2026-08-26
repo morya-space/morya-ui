@@ -37,4 +37,11 @@ describe('WiMenubar', () => {
     expect(document.body.querySelector('.wi-menubar__submenu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('marks selectedKey on a leaf command', async () => {
+    const wrapper = mount(WiMenubar, {
+      props: { model: [{ label: 'Edit', command: vi.fn() }], selectedKey: 'Edit', teleport: false },
+    })
+    expect(wrapper.get('.wi-menubar__trigger--selected').text()).toContain('Edit')
+  })
 })

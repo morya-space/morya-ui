@@ -8,6 +8,8 @@ description: Tree structure. Supports check with indeterminate state, filter, co
 
 Hierarchical node tree with expand, check, filter, and drag-and-drop.
 
+**Naive differences:** the default slot `{ node, data }` customizes node content. `checkStrategy` is `'all' | 'parent' | 'child'` (ignored when `checkStrictly`). Cascade still drives the UI; `v-model:checked-keys` is projected by strategy. Virtual scroll is out of scope.
+
 ## Import
 
 ```ts
@@ -70,6 +72,44 @@ const nodes = [
 </template>
 ```
 
+## Check strategy
+
+With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-tree`).
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTree } from '@well-insight/ui'
+
+const checkedKeys = ref<Record<string, boolean>>({})
+const nodes = [
+  {
+    key: '0',
+    label: 'Documents',
+    children: [
+      { key: '0-0', label: 'Work' },
+      { key: '0-1', label: 'Home' },
+    ],
+  },
+]
+</script>
+
+<template>
+  <div style="display:grid;gap:0.5rem">
+    <WiTree
+      v-model:checked-keys="checkedKeys"
+      :value="nodes"
+      show-checkbox
+      check-strategy="child"
+      default-expand-all
+    />
+    <p style="margin:0;color:var(--wi-color-text-muted);font-size:0.875rem">
+      keys: {{ Object.keys(checkedKeys).join(', ') || '(none)' }}
+    </p>
+  </div>
+</template>
+```
+
 ## Filter
 
 ```vue preview
@@ -105,7 +145,7 @@ const nodes = [
 | --- | --- | --- | --- |
 | `value` | `TreeNode[]` | — | Node tree. |
 | `modelValue` / `selectionKeys` / `selectionMode` | — | — | Highlight selection. |
-| `showCheckbox` / `checkedKeys` / `checkStrictly` | — | — | Check and indeterminate state. |
+| `showCheckbox` / `checkedKeys` / `checkStrictly` / `checkStrategy` | — | `'all'` | `checkStrategy` defaults to `'all'`; `'parent'` / `'child'` only change which keys are bound. |
 | `expandedKeys` / `defaultExpandAll` / `accordion` | — | — | Expand control. |
 | `filter` / `filterNode` | — | — | Filter. |
 | `lazy` / `load` | — | — | Lazy-load child nodes. |

@@ -3,6 +3,8 @@ import type { WiSizeInput } from '../../shared/types'
 
 export type SelectValue = string | number
 export type SelectSize = WiSizeInput
+/** Single-select uses a scalar; multiple uses an array. */
+export type SelectModelValue = SelectValue | SelectValue[] | undefined
 
 export interface SelectOption {
   label: string
@@ -11,7 +13,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps {
-  modelValue?: SelectValue | undefined
+  modelValue?: SelectModelValue
   options: SelectOption[]
   label?: string
   helpText?: string
@@ -26,11 +28,27 @@ export interface SelectProps {
   required?: boolean
   size?: SelectSize
   fluid?: boolean
+  /** Allow selecting more than one value. `v-model` is then `SelectValue[]`. */
+  multiple?: boolean
+  /**
+   * Create an option from the current filter query (Enter). Requires `filter`.
+   * Created values use the query string as both label and value.
+   */
+  tag?: boolean
+  /**
+   * Skip local filtering and emit `search` as the query changes.
+   * Pair with `filter` so the user can type a query.
+   */
+  remote?: boolean
+  /** Show a loading state in the menu (async options). */
+  loading?: boolean
+  /** Collapse extra selected tags after this count. Ignored unless `multiple`. */
+  maxTagCount?: number
   /** Show clear button when a value is selected. */
   showClear?: boolean
-  /** Empty / no-match message. Falls back to ConfigProvider `locale.emptyMessage`, then `暂无选项`. */
+  /** Empty / no-match message. Falls back to ConfigProvider `locale.emptyOptions`. */
   emptyMessage?: string
-  /** Show a filter input when the menu is open (matches option labels). */
+  /** Show a filter input when the menu is open (matches option labels unless `remote`). */
   filter?: boolean
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
@@ -40,9 +58,11 @@ export interface SelectProps {
 }
 
 export interface SelectEmits {
-  (event: 'update:modelValue', value: SelectValue | undefined): void
-  (event: 'change', value: SelectValue | undefined): void
+  (event: 'update:modelValue', value: SelectModelValue): void
+  (event: 'change', value: SelectModelValue): void
   (event: 'clear'): void
   (event: 'show'): void
   (event: 'hide'): void
+  (event: 'search', query: string): void
+  (event: 'create', option: SelectOption): void
 }

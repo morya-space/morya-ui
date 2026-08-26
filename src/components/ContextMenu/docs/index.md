@@ -6,12 +6,12 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 
 # ContextMenu
 
-在指针位置弹出的上下文菜单。
+在指针位置弹出的上下文菜单。支持嵌套 `items`。也可用 `useContextMenu()` 绑定 `v-model` / `v-model:position`。
 
 ## 引入
 
 ```ts
-import { WiContextMenu } from '@well-insight/ui'
+import { WiContextMenu, useContextMenu } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -53,11 +53,35 @@ function onContext(event: MouseEvent) {
 </template>
 ```
 
+## Nested + useContextMenu
+
+```vue preview
+<script setup lang="ts">
+import { WiContextMenu, useContextMenu } from '@well-insight/ui'
+
+const menu = useContextMenu()
+const model = [
+  { label: '复制', command: () => undefined },
+  { label: '更多', items: [{ label: '深层' }] },
+]
+</script>
+
+<template>
+  <div
+    style="border: 1px dashed var(--wi-color-border); padding: 2rem; border-radius: var(--wi-radius-md)"
+    @contextmenu="menu.show"
+  >
+    右键此处（composable）
+  </div>
+  <WiContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `model` | `ContextMenuItem[]` | — | 菜单项。 |
+| `model` | `ContextMenuItem[]` | — | 菜单项，可嵌套 `items`；项可含 `key` / `icon`。 |
 | `modelValue` | `boolean` | `false` | 是否可见。 |
 | `position` | `{ x: number; y: number }` | — | 菜单坐标。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
@@ -76,3 +100,5 @@ function onContext(event: MouseEvent) {
 | --- | --- |
 | `show(event)` | 根据鼠标事件或坐标显示。 |
 | `hide()` | 隐藏菜单。 |
+
+`useContextMenu()` 返回 `{ visible, position, show, hide }`，便于命令式打开。

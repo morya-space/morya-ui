@@ -74,4 +74,137 @@ describe('WiForm / WiFormItem', () => {
     await nextTick()
     expect(wrapper.get('.wi-form-item__error').text()).toBe('必填')
   })
+
+  it('accepts labelPlacement as an alias of labelPosition', () => {
+    const wrapper = mount(WiForm, {
+      props: { labelPlacement: 'left', labelWidth: 80 },
+      slots: {
+        default: () => h(WiFormItem, { label: '邮箱' }, { default: () => h('input') }),
+      },
+    })
+    expect(wrapper.get('.wi-form').classes()).toContain('wi-form--label-left')
+    expect(wrapper.get('.wi-form-item__label').attributes('style')).toContain('80px')
+  })
+
+  it('applies inline layout and labelAlign', () => {
+    const wrapper = mount(WiForm, {
+      props: { inline: true, labelAlign: 'right' },
+      slots: {
+        default: () => h(WiFormItem, { label: '名称' }, { default: () => h('input') }),
+      },
+    })
+    expect(wrapper.get('.wi-form').classes()).toContain('wi-form--inline')
+    expect(wrapper.get('.wi-form').classes()).toContain('wi-form--align-right')
+    expect(wrapper.get('.wi-form-item__label').attributes('style')).toContain('text-align: right')
+  })
+
+  it('validates declarative rules from model and always resolves', async () => {
+    const Host = defineComponent({
+      setup() {
+        const model = ref({ name: '' })
+        return () =>
+          h(
+            WiForm,
+            {
+              model: model.value,
+              rules: { name: { required: true, message: '请输入名称' } },
+            },
+            {
+              default: () =>
+                h(WiFormItem, { label: '名称', name: 'name' }, { default: () => h('input') }),
+            },
+          )
+      },
+    })
+    const wrapper = mount(Host)
+    const form = wrapper.getComponent(WiForm)
+    const result = await form.vm.validate()
+    expect(result.valid).toBe(false)
+    expect(result.errors.name).toBe('请输入名称')
+    expect(wrapper.get('.wi-form-item__error').text()).toBe('请输入名称')
+    expect(wrapper.get('.wi-form-item__required').text()).toBe('*')
+  })
+
+  it('merges item rules after form rules and validates a single field', async () => {
+    const Host = defineComponent({
+      setup() {
+        return () =>
+          h(
+            WiForm,
+            {
+              model: { email: 'a' },
+              rules: { email: { required: true } },
+            },
+            {
+              default: () =>
+                h(
+                  WiFormItem,
+                  {
+                    label: '邮箱',
+                    name: 'email',
+                    rules: { pattern: /.+@.+\..+/, message: '邮箱格式不正确' },
+                  },
+                  { default: () => h('input') },
+                ),
+            },
+          )
+      },
+    })
+    const wrapper = mount(Host)
+    const result = await wrapper.getComponent(WiForm).vm.validate('email')
+    expect(result.valid).toBe(false)
+    expect(result.errors.email).toBe('邮箱格式不正确')
+  })
+
+  it('runs blur-only rules on focusout, not on input', async () => {
+    const Host = defineComponent({
+      setup() {
+        const model = ref({ title: '' })
+        return () =>
+          h(
+            WiForm,
+            {
+              model: model.value,
+              validateOn: 'submit',
+              rules: { title: { required: true, message: '标题不能为空', trigger: 'blur' } },
+            },
+            {
+              default: () =>
+                h(WiFormItem, { label: '标题', name: 'title' }, { default: () => h('input') }),
+            },
+          )
+      },
+    })
+    const wrapper = mount(Host)
+    await wrapper.get('.wi-form-item').trigger('input')
+    await nextTick()
+    expect(wrapper.find('.wi-form-item__error').exists()).toBe(false)
+
+    await wrapper.get('.wi-form-item').trigger('focusout')
+    await nextTick()
+    expect(wrapper.get('.wi-form-item__error').text()).toBe('标题不能为空')
+  })
+
+  it('clears a field error via clearValidate', async () => {
+    const Host = defineComponent({
+      setup() {
+        return () =>
+          h(
+            WiForm,
+            { model: { name: '' }, rules: { name: { required: true, message: '必填' } } },
+            {
+              default: () =>
+                h(WiFormItem, { label: '名称', name: 'name' }, { default: () => h('input') }),
+            },
+          )
+      },
+    })
+    const wrapper = mount(Host)
+    const form = wrapper.getComponent(WiForm)
+    await form.vm.validate()
+    expect(wrapper.get('.wi-form-item__error').exists()).toBe(true)
+    form.vm.clearValidate('name')
+    await nextTick()
+    expect(wrapper.find('.wi-form-item__error').exists()).toBe(false)
+  })
 })

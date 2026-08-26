@@ -4,6 +4,7 @@ import {
   provide,
   type App,
   type Component,
+  type ComputedRef,
   type InjectionKey,
   type MaybeRefOrGetter,
   type Plugin,
@@ -13,9 +14,19 @@ import { wiComponents } from '../component-registry'
 import { zhCN } from '../locale/zh-CN'
 import type { WiLocaleConfig } from '../locale/types'
 import { applyDensity, type DensityPreference } from '../theme'
+import {
+  getComponentDefault,
+  getComponentDefaults,
+  mergeComponentDefaults,
+  type WiComponentDefaults,
+} from './componentDefaults'
+import type { WiGapSize } from './gap'
 import type { WiAppendTo } from './overlay'
 import { setWiOverlayAppContext } from './overlayHost'
-import type { WiInputVariant, WiSizeInput } from './types'
+import { resolveSizeClass, type WiInputVariant, type WiSizeInput } from './types'
+
+export type { WiComponentDefaultMap, WiComponentDefaults, WiShowPasswordOn, WiTextareaAutosize } from './componentDefaults'
+export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } from './componentDefaults'
 
 export type WiDensity = DensityPreference
 export type { WiLocaleConfig }
@@ -37,6 +48,11 @@ export interface WiGlobalConfig {
   density?: WiDensity
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
   locale?: WiLocaleConfig
+  /**
+   * Per-component default props. Local component props win.
+   * Keys: unprefixed names (`Input`, `Space`) or `Wi*` aliases.
+   */
+  componentDefaults?: WiComponentDefaults
 }
 
 /**
@@ -79,6 +95,17 @@ export function provideWiConfig(config: MaybeRefOrGetter<WiGlobalConfig>) {
   provide(WI_CONFIG_KEY, config)
 }
 
+/** Merge nested / plugin config. Child keys win; `locale` and `componentDefaults` merge. */
+export function mergeWiConfig(parent: WiGlobalConfig, child: WiGlobalConfig): WiGlobalConfig {
+  return {
+    ...parent,
+    ...child,
+    locale:
+      parent.locale || child.locale ? { ...parent.locale, ...child.locale } : undefined,
+    componentDefaults: mergeComponentDefaults(parent.componentDefaults, child.componentDefaults),
+  }
+}
+
 export function useWiConfig() {
   const injected = inject(WI_CONFIG_KEY, null)
   return computed<WiGlobalConfig>(() => {
@@ -92,6 +119,55 @@ export function useWiConfig() {
       },
     }
   })
+}
+
+export function useComponentDefaults(name: string): ComputedRef<Record<string, unknown>> {
+  const config = useWiConfig()
+  return computed(() => getComponentDefaults(config.value.componentDefaults, name))
+}
+
+/** Control size: local prop > componentDefaults[name].size > global size > medium. */
+export function useConfiguredSize(
+  componentName: string,
+  localSize: MaybeRefOrGetter<WiSizeInput | undefined>,
+) {
+  const config = useWiConfig()
+  return computed(() =>
+    resolveSizeClass(
+      toValue(localSize)
+        ?? getComponentDefault<WiSizeInput>(config.value.componentDefaults, componentName, 'size')
+        ?? config.value.size,
+    ),
+  )
+}
+
+/** Input surface: local prop > componentDefaults[name].variant > global inputVariant > outlined. */
+export function useConfiguredVariant(
+  componentName: string,
+  localVariant: MaybeRefOrGetter<WiInputVariant | undefined>,
+) {
+  const config = useWiConfig()
+  return computed(
+    () =>
+      toValue(localVariant)
+      ?? getComponentDefault<WiInputVariant>(config.value.componentDefaults, componentName, 'variant')
+      ?? config.value.inputVariant
+      ?? 'outlined',
+  )
+}
+
+/** Space / Flex gap: local prop > componentDefaults[name].size > medium. Does not use global control size. */
+export function useConfiguredGapSize(
+  componentName: 'Space' | 'Flex',
+  localSize: MaybeRefOrGetter<WiGapSize | undefined>,
+) {
+  const config = useWiConfig()
+  return computed(
+    () =>
+      toValue(localSize)
+      ?? getComponentDefault<WiGapSize>(config.value.componentDefaults, componentName, 'size')
+      ?? 'medium',
+  )
 }
 
 /** Resolve overlay mount target: local props > ConfigProvider > body. */

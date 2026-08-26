@@ -73,4 +73,14 @@ describe('toast API', () => {
     expect(document.body.querySelector('.wi-toast__content strong')?.textContent).toBe('Title node')
     expect(document.body.querySelector('.wi-toast__content em')?.textContent).toBe('Detail node')
   })
+
+  it('drops the oldest toast when max is reached', () => {
+    toast.setDefaults({ max: 2 })
+    toast.info({ summary: 'One', life: 0 })
+    toast.info({ summary: 'Two', life: 0 })
+    toast.info({ summary: 'Three', life: 0 })
+    expect(toastState.messages.map((item) => item.summary)).toEqual(['Two', 'Three'])
+    toast.destroyAll()
+    expect(toastState.messages).toHaveLength(0)
+  })
 })

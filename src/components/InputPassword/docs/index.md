@@ -72,6 +72,38 @@ const bySlot = ref('')
 </template>
 ```
 
+## Hold to peek
+
+`showPasswordOn="mousedown"` 按住显示、松开隐藏（键盘 Space / Enter 同样按住预览）。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputPassword } from '@well-insight/ui'
+
+const value = ref('secret')
+</script>
+
+<template>
+  <WiInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
+</template>
+```
+
+## Clearable & count
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiInputPassword } from '@well-insight/ui'
+
+const value = ref('draft-pass')
+</script>
+
+<template>
+  <WiInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -80,18 +112,25 @@ const bySlot = ref('')
 | `label` | `string` | — | 标签文案。 |
 | `feedback` | `boolean` | `false` | 显示强度提示。 |
 | `toggleMask` | `boolean` | `true` | 显示切换明文按钮。 |
+| `showPasswordOn` | `'click' \| 'mousedown'` | `'click'` | 显示明文的方式；`mousedown` 为按住预览。 |
 | `showIcon` | `IconName \| Component` | `'eye'` | 密文态图标（点击显示）。 |
 | `hideIcon` | `IconName \| Component` | `'eye-off'` | 明文态图标（点击隐藏）。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `variant` | `'outlined' \| 'filled'` | `'outlined'` | 样式变体。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `readonly` | `boolean` | `false` | 只读。 |
+| `clearable` | `boolean` | `false` | 显示清除按钮。 |
+| `maxlength` | `number` | — | 原生 maxlength。 |
+| `showCount` | `boolean` | `false` | 显示字数统计。 |
 
 ## Events
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `string` | 值变化。 |
+| `clear` | — | 点击清除时触发。 |
 
 ## Slots
 

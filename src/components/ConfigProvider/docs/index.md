@@ -18,6 +18,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 | `inputVariant` | 输入框默认 `outlined` / `filled` |
 | `zIndex` | 浮层基础层级 |
 | `locale` | 确认 / 空态 / 加载 / 占位等文案。可传入内置语言包 `zhCN` / `enUS` |
+| `componentDefaults` | 按组件覆盖默认 props（如 `Input.size`、`Space.size`）。局部 Props 优先 |
 
 ## Size
 
@@ -41,6 +42,38 @@ const options = [
       <WiSelect v-model="city" :options="options" placeholder="继承 small" style="width:10rem" />
       <WiButton label="覆盖为 large" size="large" />
     </div>
+  </WiConfigProvider>
+</template>
+```
+
+## Component Defaults
+
+按组件名覆盖默认 props。键名用无前缀名称（`Input`、`Space`）或 `Wi*` 别名均可。
+
+优先级：**组件 Props > `componentDefaults[组件]` > 全局 `size` / `inputVariant` > 内置默认值**。
+
+`Space` / `Flex` 的 `size` 是间距，**不会**继承全局控件 `size`。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiConfigProvider, WiButton, WiInput, WiSpace } from '@well-insight/ui'
+
+const note = ref('可清除')
+</script>
+
+<template>
+  <WiConfigProvider
+    size="large"
+    :component-defaults="{
+      Input: { size: 'small', clearable: true },
+      Space: { size: 16 },
+    }"
+  >
+    <WiSpace>
+      <WiButton label="仍是 large" />
+      <WiInput v-model="note" placeholder="Input 默认 small + clearable" style="width:14rem" />
+    </WiSpace>
   </WiConfigProvider>
 </template>
 ```
@@ -118,6 +151,10 @@ createApp(App)
       density: 'comfortable',
       zIndex: 1100,
       locale: enUS,
+      componentDefaults: {
+        Space: { size: 'small' },
+        Input: { clearable: true },
+      },
     }),
   )
   .mount('#app')

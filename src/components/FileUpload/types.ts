@@ -40,6 +40,8 @@ export interface FileUploadProps {
   limit?: number
   /** Max file size in bytes. Oversized files are skipped. */
   maxSize?: number
+  /** Select a folder (`webkitdirectory`). Implies multiple files. */
+  directory?: boolean
   /** Show the file list. */
   showFileList?: boolean
   listType?: FileUploadListType

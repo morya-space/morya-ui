@@ -4,11 +4,15 @@ import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type { DropdownItem, DropdownProps } from './types'
+import DropdownNodes from './DropdownNodes.vue'
 
 const props = withDefaults(defineProps<DropdownProps>(), {
   modelValue: false,
   placement: 'bottom-start',
   closeOnSelect: true,
+  trigger: 'click',
+  showDelay: 0,
+  hideDelay: 200,
   teleport: true,
 })
 const emit = defineEmits<{
@@ -23,7 +27,20 @@ const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
 const menuStyle = ref<Record<string, string>>({})
 const highlightedIndex = ref(-1)
-const enabledItems = computed(() => props.items.filter((item) => !item.disabled))
+const enabledItems = computed(() =>
+  props.items.filter(
+    (item) =>
+      !item.disabled &&
+      !item.separator &&
+      item.type !== 'divider' &&
+      item.type !== 'group' &&
+      !item.items?.length &&
+      item.value != null,
+  ),
+)
+const highlightedValue = computed(() => enabledItems.value[highlightedIndex.value]?.value)
+let showTimer: ReturnType<typeof setTimeout> | undefined
+let hideTimer: ReturnType<typeof setTimeout> | undefined
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
@@ -62,10 +79,40 @@ function onViewportChange() {
 }
 
 function selectItem(item: DropdownItem) {
-  if (!item.disabled) {
-    emit('select', item)
-    if (props.closeOnSelect) setOpen(false)
-  }
+  if (item.disabled || item.separator || item.type === 'divider' || item.type === 'group') return
+  item.command?.()
+  emit('select', item)
+  if (props.closeOnSelect) setOpen(false)
+}
+
+function clearHoverTimers() {
+  if (showTimer) clearTimeout(showTimer)
+  if (hideTimer) clearTimeout(hideTimer)
+  showTimer = undefined
+  hideTimer = undefined
+}
+
+function onTriggerEnter() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+  showTimer = setTimeout(() => setOpen(true), props.showDelay)
+}
+
+function onTriggerLeave() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+  hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+}
+
+function onMenuEnter() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+}
+
+function onMenuLeave() {
+  if (props.trigger !== 'hover') return
+  clearHoverTimers()
+  hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -139,6 +186,7 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
   window.removeEventListener('resize', onViewportChange)
   window.removeEventListener('scroll', onViewportChange, true)
+  clearHoverTimers()
 })
 </script>
 
@@ -151,7 +199,9 @@ onBeforeUnmount(() => {
       tabindex="0"
       :aria-expanded="modelValue"
       aria-haspopup="menu"
-      @click="toggle"
+      @click="props.trigger === 'click' && toggle()"
+      @mouseenter="onTriggerEnter"
+      @mouseleave="onTriggerLeave"
       @keydown="onTriggerKeydown"
     >
       <slot name="trigger">{{ locale.openMenu }}</slot>
@@ -167,20 +217,19 @@ onBeforeUnmount(() => {
           role="menu"
           tabindex="-1"
           @keydown="onKeydown"
+          @mouseenter="onMenuEnter"
+          @mouseleave="onMenuLeave"
         >
-          <button
-            v-for="item in items"
-            :key="item.value"
-            type="button"
-            class="wi-dropdown__item"
-            :class="{ 'wi-dropdown__item--highlighted': enabledItems[highlightedIndex]?.value === item.value }"
-            role="menuitem"
-            :disabled="item.disabled"
-            @mouseenter="!item.disabled && (highlightedIndex = enabledItems.findIndex((enabledItem) => enabledItem.value === item.value))"
-            @click="selectItem(item)"
+          <DropdownNodes
+            :items="items"
+            :highlighted-value="highlightedValue"
+            @select="selectItem"
+            @highlight="(value) => (highlightedIndex = enabledItems.findIndex((item) => item.value === value))"
           >
-            <slot name="item" :item="item">{{ item.label }}</slot>
-          </button>
+            <template v-if="$slots.item" #item="{ item }">
+              <slot name="item" :item="item" />
+            </template>
+          </DropdownNodes>
         </div>
       </Transition>
     </Teleport>

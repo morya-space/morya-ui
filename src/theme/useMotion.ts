@@ -10,7 +10,7 @@ export function applyMotion(preference: MotionPreference, target: HTMLElement = 
 }
 
 export function getPreferredMotion(): MotionPreference {
-  if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return 'reduced'
+  if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return 'full'
   return 'full'
 }
 

@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import { resolveSizeClass } from '../../shared/types'
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
@@ -19,7 +18,7 @@ const emit = defineEmits<{
 
 const config = useWiConfig()
 const locale = useWiLocale()
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('CascadeSelect', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)

@@ -1,7 +1,7 @@
 ---
 title: Dialog
 category: 04 / OVERLAY
-description: 模态对话框。
+description: 模态对话框。支持预设页脚、异步关闭拦截、状态 type。
 ---
 
 # Dialog
@@ -135,6 +135,41 @@ const open = ref(false)
 </template>
 ```
 
+## 预设页脚与异步关闭
+
+`positiveText` / `negativeText` 生成确认 / 取消按钮（`footer` 插槽优先）。处理函数返回 `false`（含 Promise）则保持打开。确认型流程请用 [ConfirmDialog](/components/ConfirmDialog)；`type` 只负责 Dialog 标题图标。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiDialog } from '@well-insight/ui'
+
+const open = ref(false)
+
+async function save() {
+  await new Promise((resolve) => setTimeout(resolve, 400))
+}
+</script>
+
+<template>
+  <div>
+    <WiButton label="Save dialog" @click="open = true" />
+    <WiDialog
+      v-model="open"
+      header="保存更改"
+      type="info"
+      positive-text="保存"
+      negative-text="取消"
+      :on-positive-click="save"
+      :before-close="() => true"
+      width="28rem"
+    >
+      <p style="margin:0">关闭按钮、Esc、遮罩会走 <code>beforeClose</code>；保存走 <code>onPositiveClick</code>。</p>
+    </WiDialog>
+  </div>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -153,6 +188,11 @@ const open = ref(false)
 | `width` | `string` | — | 对话框宽度（最大化时忽略）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
+| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | 标题状态图标；`warning` 与 `warn` 同义 |
+| `positiveText` / `negativeText` | `string` | — | 预设页脚按钮；有 `footer` 插槽时忽略 |
+| `positiveSeverity` | `ButtonSeverity` | — | 确认按钮语义色 |
+| `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |
+| `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
 
 ## Events
 

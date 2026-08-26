@@ -1,2 +1,9 @@
 export { default as WiDialog } from './Dialog.vue'
-export type { DialogEmits, DialogPosition, DialogProps } from './types'
+export type {
+  DialogClickGuard,
+  DialogCloseGuard,
+  DialogEmits,
+  DialogPosition,
+  DialogProps,
+  DialogType,
+} from './types'

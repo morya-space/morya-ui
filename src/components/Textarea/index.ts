@@ -1,2 +1,2 @@
 export { default as WiTextarea } from './Textarea.vue'
-export type { TextareaEmits, TextareaProps } from './types'
+export type { TextareaEmits, TextareaInstance, TextareaProps, WiTextareaAutosize } from './types'

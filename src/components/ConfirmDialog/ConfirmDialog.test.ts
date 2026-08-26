@@ -52,4 +52,27 @@ describe('WiConfirmDialog', () => {
     expect(wrapper.find('.wi-confirmdialog').exists()).toBe(false)
     wrapper.unmount()
   })
+
+  it('shows a type icon and keeps open when beforeAccept returns false', async () => {
+    const wrapper = mount(WiConfirmDialog, {
+      props: {
+        modelValue: true,
+        message: 'Delete this?',
+        type: 'error',
+        beforeAccept: () => false,
+        acceptLabel: 'Yes',
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    expect(document.body.querySelector('.wi-dialog--error .wi-dialog__type-icon')).toBeTruthy()
+    const accept = Array.from(document.body.querySelectorAll('.wi-confirmdialog .wi-button')).find((btn) =>
+      btn.textContent?.includes('Yes'),
+    )
+    accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('accept')).toBeUndefined()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    wrapper.unmount()
+  })
 })

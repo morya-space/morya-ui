@@ -12,6 +12,8 @@ Data table. Column width rules:
 - Columns without `width` are flexible using `minWidth` (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally
 - Horizontal scrolling appears when the total minimum width exceeds the container
 
+**Aligned subset:** column `render`, slots `body-cell` / `expansion`, expandable rows. Virtual scroll, tree-table, and cell editing are out of scope.
+
 ## Import
 
 ```ts
@@ -177,6 +179,41 @@ const rows = [
 </template>
 ```
 
+## Expandable + column render
+
+Use column `render` for custom cells. `expandable` rows are rendered by the `expansion` slot. A named `cell-{key}` slot still wins over `render`.
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTable } from '@well-insight/ui'
+
+const expandedRowKeys = ref<Array<string | number>>([])
+const columns = [
+  { key: 'name', label: 'Name', render: (row: { name: string }) => `*${row.name}*` },
+  { key: 'role', label: 'Role' },
+]
+const rows = [
+  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },
+  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },
+]
+</script>
+
+<template>
+  <WiTable
+    v-model:expanded-row-keys="expandedRowKeys"
+    :columns="columns"
+    :rows="rows"
+    expandable
+    bordered
+  >
+    <template #expansion="{ row }">
+      {{ row.extra }}
+    </template>
+  </WiTable>
+</template>
+```
+
 ## Empty / Loading
 
 ```vue preview
@@ -210,7 +247,7 @@ const columns = [
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `columns` | `TableColumn[]` | — | Column definitions: `width` is fixed; `minWidth` is the flex lower bound (default 80). |
+| `columns` | `TableColumn[]` | — | Column definitions: `width` is fixed; `minWidth` is the flex lower bound (default 80); optional `render`. |
 | `fit` | `boolean` | `true` | Whether flexible columns share remaining width proportionally. |
 | `rows` | `Record[]` | — | Row data. |
 | `selectionMode` | `'single' \| 'multiple'` | — | Row selection. |
@@ -218,6 +255,9 @@ const columns = [
 | `filters` | `Record` | `{}` | `v-model:filters`. |
 | `paginator` | `boolean` | `false` | Built-in pagination. |
 | `rowsPerPage` / `page` | — | `10` / `1` | Pagination. |
+| `expandable` | `boolean` | `false` | Expand column; use slot `expansion` for the extra row. |
+| `expandedRowKeys` | `Array<string \| number>` | `[]` | `v-model:expanded-row-keys`. |
+| `rowExpandable` | `(row) => boolean` | — | Return `false` to disable expand on that row. |
 | `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | Appearance. |
 | `sortMode` | `'client' \| 'emit'` | `'client'` | Client-side sort or emit-only. |
 | `sortField` / `sortOrder` | — | — | Controlled sort. |
@@ -227,8 +267,8 @@ const columns = [
 
 | Slot | Description |
 | --- | --- |
-| `cell-{key}` / `empty` / `loading` | Same as above. |
+| `cell-{key}` / `body-cell` / `expansion` / `empty` / `loading` | `cell-{key}` wins over column `render`; `body-cell` scope `{ row, column, value }`; `expansion` scope `{ row }`. |
 
 | Event | Description |
 | --- | --- |
-| `sort` / `filter` / `page` / `row-click` / `current-change` | Interaction callbacks. |
+| `sort` / `filter` / `page` / `row-click` / `current-change` / `expand` | Interaction callbacks. |

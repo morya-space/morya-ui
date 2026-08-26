@@ -8,6 +8,19 @@ description: Select, drag, list, preview, and upload.
 
 Pick local files. Supports click-to-choose, drag-and-drop, text / picture lists, a picture-card wall, and real uploads via `action` or `httpRequest`. `select` still emits the chosen `File[]`; the full list is `v-model:file-list`. The file list is shown by default; files upload automatically when `action` or `httpRequest` is set.
 
+**Naive `n-upload` name map:**
+
+| Naive | Wi |
+| --- | --- |
+| `action` | `action` |
+| `file-list` | `fileList` (`v-model:file-list`) |
+| `list-type` | `listType` |
+| `directory` | `directory` (`webkitdirectory`; folder pick where the browser supports it) |
+| `custom-request` | `httpRequest` |
+| `name` | `name` |
+
+Queue UI extras are out of scope this batch.
+
 ## Import
 
 ```ts
@@ -169,6 +182,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 | --- | --- | --- | --- |
 | `mode` | `'basic' \| 'advanced'` | `'basic'` | Visual variant. Use `showFileList` to toggle the list. |
 | `multiple` | `boolean` | `false` | Multiple selection. When off, a new pick replaces the list. |
+| `directory` | `boolean` | `false` | Pick a folder (`webkitdirectory`); implies multiple. |
 | `accept` | `string` | — | Accepted types; also applied to dropped files. |
 | `drag` | `boolean` | `false` | Enable the drag-and-drop zone. |
 | `limit` | `number` | — | Max files. If this pick would exceed it, `exceed` fires and nothing is added. |

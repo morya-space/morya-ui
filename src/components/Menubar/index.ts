@@ -1,2 +1,2 @@
 export { default as WiMenubar } from './Menubar.vue'
-export type { MenubarItem, MenubarProps } from './types'
+export type { MenubarEmits, MenubarItem, MenubarProps } from './types'

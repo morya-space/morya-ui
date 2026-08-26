@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
   name: 'file',
   withCredentials: false,
   autoUpload: true,
+  directory: false,
 })
 
 const emit = defineEmits<{
@@ -329,9 +330,10 @@ defineExpose({
       ref="inputRef"
       class="wi-fileupload__input"
       type="file"
-      :multiple="multiple"
+      :multiple="multiple || directory"
       :accept="accept"
       :disabled="disabled"
+      :webkitdirectory="directory || undefined"
       @change="onChange"
     />
 

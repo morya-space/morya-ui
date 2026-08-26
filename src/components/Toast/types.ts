@@ -39,6 +39,8 @@ export interface ToastProps {
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
   appendTo?: WiAppendTo
+  /** Max visible toasts; oldest is dropped. Omit for unlimited. */
+  max?: number
   /** Internal: auto-mounted service host. */
   auto?: boolean
 }

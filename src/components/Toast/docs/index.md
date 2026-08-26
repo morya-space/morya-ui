@@ -8,7 +8,7 @@ description: 四角浮层通知，支持 API 与受控列表。
 
 带标题 / 详情的四角通知。可用 `toast` API，或继续用 `:messages` 受控渲染。
 
-与 [Message](/components/Message) 的分工：Message 顶部居中短文案；Toast 角落通知。
+与 [Message](/components/Message) 的分工：Message 是轻量单行反馈；Toast 是带 `summary` / `detail` 的角落通知。受控 `:messages` 时请自行限制条数，`max` 只作用于服务队列。
 
 ## 引入
 
@@ -113,8 +113,8 @@ function onClose(message: ToastMessage) {
 | `toast.success / info / warn / error` | 按语义添加 |
 | `toast.add(options)` | 添加一条 |
 | `toast.remove(id)` / `toast.close(id)` | 移除 |
-| `toast.clear()` / `toast.closeAll()` | 清空 |
-| `toast.setDefaults({ position })` | 默认角落位置 |
+| `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | 清空 |
+| `toast.setDefaults({ position, max })` | 默认角落位置与并发上限 |
 
 字符串入参视为 `summary`。默认 `life` 为 `3000`；`0` 表示不自动关闭。
 
@@ -124,6 +124,7 @@ function onClose(message: ToastMessage) {
 | --- | --- | --- | --- |
 | `messages` | `ToastMessage[]` | — | 受控列表；省略则绑定 `toast` 服务队列 |
 | `position` | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left'` | `'top-right'` | 容器定位 |
+| `max` | `number` | — | 同时可见条数；超出丢掉最旧一条（仅服务队列） |
 | `teleport` | `boolean` | `true` | 浮层 Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
 

@@ -2,6 +2,7 @@ import type { TableColumn } from './types'
 
 export const TABLE_DEFAULT_MIN_WIDTH = 80
 export const TABLE_SELECTION_WIDTH = 48
+export const TABLE_EXPAND_WIDTH = 40
 
 export interface LayoutColumn {
   key: string
@@ -11,6 +12,7 @@ export interface LayoutColumn {
   realWidth: number
   fixed?: 'left' | 'right'
   isSelection?: boolean
+  isExpand?: boolean
 }
 
 export function parseSize(value?: string | number): number | undefined {
@@ -24,7 +26,7 @@ export function parseSize(value?: string | number): number | undefined {
 export function computeColumnLayout(
   columns: TableColumn[],
   bodyWidth: number,
-  options: { fit?: boolean; selection?: boolean } = {},
+  options: { fit?: boolean; selection?: boolean; expand?: boolean } = {},
 ): { columns: LayoutColumn[]; bodyWidth: number; scrollX: boolean } {
   const fit = options.fit !== false
   const layoutColumns: LayoutColumn[] = []
@@ -36,6 +38,17 @@ export function computeColumnLayout(
       minWidth: TABLE_SELECTION_WIDTH,
       realWidth: TABLE_SELECTION_WIDTH,
       isSelection: true,
+      fixed: 'left',
+    })
+  }
+
+  if (options.expand) {
+    layoutColumns.push({
+      key: '__expand__',
+      width: TABLE_EXPAND_WIDTH,
+      minWidth: TABLE_EXPAND_WIDTH,
+      realWidth: TABLE_EXPAND_WIDTH,
+      isExpand: true,
       fixed: 'left',
     })
   }
@@ -52,7 +65,7 @@ export function computeColumnLayout(
     })
   }
 
-  const flexColumns = layoutColumns.filter((column) => column.width == null && !column.isSelection)
+  const flexColumns = layoutColumns.filter((column) => column.width == null && !column.isSelection && !column.isExpand)
   let bodyMinWidth = 0
 
   if (flexColumns.length > 0 && fit) {

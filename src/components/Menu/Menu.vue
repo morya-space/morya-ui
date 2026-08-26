@@ -2,16 +2,22 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import MenuNodes from './MenuNodes.vue'
 import type { MenuItem, MenuProps } from './types'
 
 const props = withDefaults(defineProps<MenuProps>(), {
   popup: false,
   modelValue: false,
+  selectedKey: null,
+  collapsed: false,
+  indent: 16,
   teleport: true,
 })
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
+  (event: 'update:selectedKey', value: string | null): void
+  (event: 'select', item: MenuItem): void
 }>()
 
 const config = useWiConfig()
@@ -24,6 +30,9 @@ const teleported = computed(() => props.popup && isOverlayTeleported(props, conf
 function activate(item: MenuItem) {
   if (item.disabled || item.separator) return
   item.command?.()
+  const key = item.key ?? item.label ?? null
+  emit('update:selectedKey', key)
+  emit('select', item)
   if (props.popup) emit('update:modelValue', false)
 }
 
@@ -47,26 +56,21 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
 </script>
 
 <template>
-  <!-- Inline menu stays in place -->
   <div
     v-if="!popup"
     ref="root"
     class="wi-menu"
+    :class="{ 'wi-menu--collapsed': collapsed }"
     role="menu"
   >
-    <template v-for="(item, index) in model" :key="`${item.label ?? 'sep'}-${index}`">
-      <div v-if="item.separator" class="wi-menu__separator" role="separator" />
-      <button
-        v-else
-        type="button"
-        class="wi-menu__item"
-        role="menuitem"
-        :disabled="item.disabled"
-        @click="activate(item)"
-      >
-        {{ item.label }}
-      </button>
-    </template>
+    <MenuNodes
+      :items="model"
+      :depth="0"
+      :indent="indent"
+      :collapsed="collapsed"
+      :selected-key="selectedKey"
+      @activate="activate"
+    />
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <Transition name="wi-scale-fade">
@@ -74,22 +78,17 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
         v-if="modelValue"
         ref="root"
         class="wi-menu wi-menu--popup"
-        :class="{ 'wi-menu--teleported': teleported }"
+        :class="{ 'wi-menu--teleported': teleported, 'wi-menu--collapsed': collapsed }"
         role="menu"
       >
-        <template v-for="(item, index) in model" :key="`${item.label ?? 'sep'}-${index}`">
-          <div v-if="item.separator" class="wi-menu__separator" role="separator" />
-          <button
-            v-else
-            type="button"
-            class="wi-menu__item"
-            role="menuitem"
-            :disabled="item.disabled"
-            @click="activate(item)"
-          >
-            {{ item.label }}
-          </button>
-        </template>
+        <MenuNodes
+          :items="model"
+          :depth="0"
+          :indent="indent"
+          :collapsed="collapsed"
+          :selected-key="selectedKey"
+          @activate="activate"
+        />
       </div>
     </Transition>
   </Teleport>

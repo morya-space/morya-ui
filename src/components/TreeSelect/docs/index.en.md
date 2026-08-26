@@ -1,12 +1,12 @@
 ---
 title: TreeSelect
 category: 02 / FORM
-description: Single-select tree in a dropdown panel.
+description: Tree select in a dropdown. Supports single/multiple, cascade checks, filter, clear, and path labels.
 ---
 
 # TreeSelect
 
-Show an expandable tree in a dropdown and select a single node.
+Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-select. `filterable`, `clearable`, and `showPath` cover the common `n-tree-select` subset.
 
 ## Import
 
@@ -39,6 +39,41 @@ const options = [
 </template>
 ```
 
+## Multiple / filter / path
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTreeSelect } from '@well-insight/ui'
+
+const value = ref<string[]>([])
+const options = [
+  {
+    key: 'docs',
+    label: 'Documents',
+    children: [
+      { key: 'resume', label: 'Resume' },
+      { key: 'home', label: 'Home' },
+    ],
+  },
+]
+</script>
+
+<template>
+  <WiTreeSelect
+    v-model="value"
+    :options="options"
+    multiple
+    checkable
+    filterable
+    clearable
+    show-path
+    placeholder="Select nodes"
+    style="min-width: 16rem"
+  />
+</template>
+```
+
 ## Size
 
 ```vue preview
@@ -66,11 +101,20 @@ const options = [{ key: 'docs', label: 'Documents' }]
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `options` | `TreeSelectNode[]` | — | Tree nodes. |
-| `modelValue` | `string \| null` | `null` | Selected node key. |
+| `modelValue` | `string \| string[] \| null` | `null` | Selected key(s); array when multiple. |
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
 | `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
-| `selectionMode` | `'single'` | `'single'` | Selection mode. |
+| `multiple` | `boolean` | `false` | Multiple selection. |
+| `checkable` | `boolean` | `false` | Show checkboxes (cascade like Tree). |
+| `checkStrictly` | `boolean` | `false` | Independent parent/child checks. |
+| `checkStrategy` | `'all' \| 'parent' \| 'child'` | `'all'` | Which keys to bind when cascading. |
+| `clearable` | `boolean` | `false` | Show a clear button. |
+| `filterable` | `boolean` | `false` | Filter inside the panel. |
+| `showPath` | `boolean` | `false` | Show ancestor labels. |
+| `separator` | `string` | `' / '` | Path separator. |
+| `maxTagCount` | `number` | — | Max visible tags when multiple. |
+| `selectionMode` | `'single' \| 'multiple'` | `'single'` | Compatibility; prefer `multiple`. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 
@@ -78,4 +122,5 @@ const options = [{ key: 'docs', label: 'Documents' }]
 
 | Event | Prop | Description |
 | --- | --- | --- |
-| `update:modelValue` | `string \| null` | Emitted when the selection changes. |
+| `update:modelValue` | `string \| string[] \| null` | Emitted when the selection changes. |
+| `clear` | — | Emitted when cleared. |

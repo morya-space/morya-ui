@@ -62,4 +62,24 @@ describe('WiInputPassword', () => {
     expect(wrapper.find('.wi-password__toggle').exists()).toBe(false)
     expect(wrapper.find('.wi-password--toggle').exists()).toBe(false)
   })
+
+  it('clears the value and can peek on mousedown', async () => {
+    const wrapper = mount(WiInputPassword, {
+      props: { modelValue: 'secret', clearable: true, showPasswordOn: 'mousedown', showCount: true, maxlength: 20 },
+    })
+    expect(wrapper.get('.wi-password-field__count').text()).toBe('6 / 20')
+    await wrapper.get('.wi-password__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([['']])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
+
+    const peek = mount(WiInputPassword, {
+      props: { modelValue: 'secret', showPasswordOn: 'mousedown' },
+    })
+    expect(peek.get('input').attributes('type')).toBe('password')
+    await peek.get('.wi-password__toggle').trigger('mousedown')
+    expect(peek.get('input').attributes('type')).toBe('text')
+    document.dispatchEvent(new MouseEvent('mouseup'))
+    await peek.vm.$nextTick()
+    expect(peek.get('input').attributes('type')).toBe('password')
+  })
 })

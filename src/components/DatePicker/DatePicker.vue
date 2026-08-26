@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import { resolveSizeClass } from '../../shared/types'
 import type { DatePickerProps, DatePickerValue } from './types'
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
@@ -21,7 +20,7 @@ const emit = defineEmits<{
 
 const config = useWiConfig()
 const locale = useWiLocale()
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('DatePicker', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)

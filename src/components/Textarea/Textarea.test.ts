@@ -36,4 +36,24 @@ describe('WiTextarea', () => {
     )
     expect((wrapper.get('textarea').element as HTMLTextAreaElement).style.resize).toBe('none')
   })
+
+  it('supports clearable, count, and autosize row clamp', async () => {
+    const wrapper = mount(WiTextarea, {
+      props: {
+        modelValue: 'Hello',
+        clearable: true,
+        showCount: true,
+        maxlength: 20,
+        autosize: { minRows: 3, maxRows: 6 },
+        id: 'notes',
+      },
+    })
+    expect(wrapper.get('textarea').attributes('rows')).toBe('3')
+    expect(wrapper.get('textarea').classes()).toContain('wi-textarea--auto-resize')
+    expect(wrapper.get('.wi-textarea-field__count').text()).toBe('5 / 20')
+    expect(wrapper.get('textarea').attributes('aria-describedby')).toContain('notes-count')
+    await wrapper.get('.wi-textarea__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([['']])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
+  })
 })

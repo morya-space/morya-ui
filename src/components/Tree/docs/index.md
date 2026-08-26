@@ -8,6 +8,8 @@ description: 树形结构。支持勾选半选、过滤、受控展开、懒加�
 
 层级节点树，支持展开、勾选、过滤与拖拽等常用能力。
 
+**与 Naive 的差异：** 默认插槽 `{ node, data }` 自定义节点内容。`checkStrategy` 为 `'all' | 'parent' | 'child'`（`checkStrictly` 时忽略）。内部仍按级联计算半选；`v-model:checked-keys` 按策略投影。虚拟滚动不做。
+
 ## 引入
 
 ```ts
@@ -70,6 +72,44 @@ const nodes = [
 </template>
 ```
 
+## Check strategy
+
+勾选父节点时，`check-strategy="child"` 只绑定叶子 key（对照 Naive `n-tree`）。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTree } from '@well-insight/ui'
+
+const checkedKeys = ref<Record<string, boolean>>({})
+const nodes = [
+  {
+    key: '0',
+    label: 'Documents',
+    children: [
+      { key: '0-0', label: 'Work' },
+      { key: '0-1', label: 'Home' },
+    ],
+  },
+]
+</script>
+
+<template>
+  <div style="display:grid;gap:0.5rem">
+    <WiTree
+      v-model:checked-keys="checkedKeys"
+      :value="nodes"
+      show-checkbox
+      check-strategy="child"
+      default-expand-all
+    />
+    <p style="margin:0;color:var(--wi-color-text-muted);font-size:0.875rem">
+      keys: {{ Object.keys(checkedKeys).join(', ') || '(none)' }}
+    </p>
+  </div>
+</template>
+```
+
 ## Filter
 
 ```vue preview
@@ -105,7 +145,7 @@ const nodes = [
 | --- | --- | --- | --- |
 | `value` | `TreeNode[]` | — | 节点树。 |
 | `modelValue` / `selectionKeys` / `selectionMode` | — | — | 高亮选择。 |
-| `showCheckbox` / `checkedKeys` / `checkStrictly` | — | — | 勾选与半选。 |
+| `showCheckbox` / `checkedKeys` / `checkStrictly` / `checkStrategy` | — | `'all'` | `checkStrategy` 默认 `'all'`；`'parent'` / `'child'` 只改变绑定的 keys。 |
 | `expandedKeys` / `defaultExpandAll` / `accordion` | — | — | 展开控制。 |
 | `filter` / `filterNode` | — | — | 过滤。 |
 | `lazy` / `load` | — | — | 懒加载子节点。 |

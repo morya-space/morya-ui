@@ -1,1 +1,6 @@
-export type { WiDensity, WiGlobalConfig, WiLocaleConfig } from '../../shared/config'
+export type {
+  WiComponentDefaults,
+  WiDensity,
+  WiGlobalConfig,
+  WiLocaleConfig,
+} from '../../shared/config'

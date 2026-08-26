@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { plainTextOf } from '../../shared/content'
 import { useWiConfig } from '../../shared/config'
@@ -10,6 +10,7 @@ import {
   closeToastItem,
   registerToastManualHost,
   toastState,
+  trimToastsToMax,
   unregisterToastManualHost,
 } from './toastState'
 import type { ToastMessage, ToastProps } from './types'
@@ -35,6 +36,16 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (isService.value && !props.auto) unregisterToastManualHost()
 })
+
+watch(
+  () => props.max,
+  (max) => {
+    if (!isService.value || max === undefined) return
+    toastState.max = max
+    trimToastsToMax(max)
+  },
+  { immediate: true },
+)
 
 function messageSeverityClass(severity?: ToastMessage['severity']) {
   return `wi-toast__message--${normalizeSeverity(severity) ?? 'info'}`

@@ -47,6 +47,10 @@ const visible = ref(false)
 | `acceptLabel` | `string` | `'确认'` | 确认按钮文案。 |
 | `rejectLabel` | `string` | `'取消'` | 取消按钮文案。 |
 | `acceptSeverity` | `ButtonSeverity` | — | 确认按钮语义色。 |
+| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | 正文状态图标；确认流程用本组件，Dialog `type` 只做标题图标。 |
+| `loading` | `boolean` | `false` | 确认按钮加载中。 |
+| `beforeAccept` | `() => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭、不触发 `accept`。 |
+| `beforeReject` | `() => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭、不触发 `reject`。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
 

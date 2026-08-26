@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { computed, ref, toRef, watch } from 'vue'
+import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import WiButton from '../Button/Button.vue'
+import WiIcon from '../Icon/Icon.vue'
+import type { IconName } from '../Icon/types'
 import type { ConfirmDialogProps } from './types'
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   modelValue: false,
   acceptSeverity: undefined,
+  loading: false,
   teleport: true,
 })
 
@@ -28,23 +32,59 @@ const title = computed(() => props.header ?? locale.value.confirm)
 const acceptText = computed(() => props.acceptLabel ?? locale.value.accept)
 const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 const origin = ref(getLastPointer())
+const pending = ref<'accept' | 'reject' | null>(null)
+const busy = computed(() => pending.value != null || props.loading)
+const resolvedType = computed(() => {
+  const type = props.type
+  if (type === 'warning' || type === 'warn') return 'warn'
+  return type
+})
+const typeIcon = computed<IconName | undefined>(() => {
+  switch (resolvedType.value) {
+    case 'success':
+      return 'check-circle'
+    case 'warn':
+      return 'warning'
+    case 'error':
+      return 'x-circle'
+    case 'info':
+      return 'info'
+    default:
+      return undefined
+  }
+})
 const zoomStyle = computed(() => ({
   '--wi-dialog-origin-x': `${origin.value.x}px`,
   '--wi-dialog-origin-y': `${origin.value.y}px`,
 }))
 
 function close() {
+  pending.value = null
   emit('update:modelValue', false)
 }
 
-function accept() {
-  emit('accept')
-  close()
+async function accept() {
+  if (pending.value) return
+  pending.value = 'accept'
+  try {
+    if (!(await allowAfterGuard(props.beforeAccept))) return
+    emit('accept')
+    close()
+  } finally {
+    if (pending.value === 'accept') pending.value = null
+  }
 }
 
-function reject() {
-  emit('reject')
-  close()
+async function reject() {
+  if (pending.value) return
+  pending.value = 'reject'
+  try {
+    if (!(await allowAfterGuard(props.beforeReject))) return
+    emit('reject')
+    close()
+  } finally {
+    if (pending.value === 'reject') pending.value = null
+  }
 }
 
 watch(
@@ -58,7 +98,9 @@ useModalOverlay({
   open: toRef(props, 'modelValue'),
   container: dialogElement,
   blockScroll: true,
-  onEscape: reject,
+  onEscape: () => {
+    void reject()
+  },
 })
 </script>
 
@@ -74,6 +116,7 @@ useModalOverlay({
         <section
           ref="dialogElement"
           class="wi-dialog wi-confirmdialog"
+          :class="{ [`wi-dialog--${resolvedType}`]: resolvedType }"
           role="alertdialog"
           aria-modal="true"
           :aria-label="title"
@@ -85,12 +128,29 @@ useModalOverlay({
             </slot>
           </header>
           <div class="wi-dialog__body wi-confirmdialog__message">
-            <slot>{{ message }}</slot>
+            <span v-if="typeIcon" class="wi-dialog__type-icon" aria-hidden="true">
+              <WiIcon :name="typeIcon" size="sm" />
+            </span>
+            <div class="wi-confirmdialog__copy">
+              <slot>{{ message }}</slot>
+            </div>
           </div>
           <footer class="wi-dialog__footer wi-confirmdialog__footer">
             <slot name="footer">
-              <WiButton :label="rejectText" severity="secondary" @click="reject" />
-              <WiButton :label="acceptText" :severity="acceptSeverity" @click="accept" />
+              <WiButton
+                :label="rejectText"
+                severity="secondary"
+                :disabled="busy"
+                :loading="pending === 'reject'"
+                @click="reject"
+              />
+              <WiButton
+                :label="acceptText"
+                :severity="acceptSeverity"
+                :disabled="busy && pending !== 'accept'"
+                :loading="loading || pending === 'accept'"
+                @click="accept"
+              />
             </slot>
           </footer>
         </section>

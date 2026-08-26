@@ -12,6 +12,8 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 - 未设 `width` 的列按 `minWidth`（默认 `80`）作为弹性列，在 `fit`（默认 `true`）时按比例分配剩余宽度
 - 总最小宽度超过容器时出现横向滚动
 
+**本批次对齐子集：** 列 `render`、插槽 `body-cell` / `expansion`、可展开行。不做虚拟滚动、树形表、单元格编辑。
+
 ## 引入
 
 ```ts
@@ -177,6 +179,41 @@ const rows = [
 </template>
 ```
 
+## Expandable + column render
+
+列 `render` 自定义单元格；`expandable` 展开行由插槽 `expansion` 渲染。`cell-{key}` 优先于 `render`。
+
+```vue preview
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiTable } from '@well-insight/ui'
+
+const expandedRowKeys = ref<Array<string | number>>([])
+const columns = [
+  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },
+  { key: 'role', label: '角色' },
+]
+const rows = [
+  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },
+  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },
+]
+</script>
+
+<template>
+  <WiTable
+    v-model:expanded-row-keys="expandedRowKeys"
+    :columns="columns"
+    :rows="rows"
+    expandable
+    bordered
+  >
+    <template #expansion="{ row }">
+      {{ row.extra }}
+    </template>
+  </WiTable>
+</template>
+```
+
 ## Empty / Loading
 
 ```vue preview
@@ -210,7 +247,7 @@ const columns = [
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `columns` | `TableColumn[]` | — | 列定义：`width` 固定；`minWidth` 弹性下限（默认 80）。 |
+| `columns` | `TableColumn[]` | — | 列定义：`width` 固定；`minWidth` 弹性下限（默认 80）；可设 `render`。 |
 | `fit` | `boolean` | `true` | 弹性列是否按比例分配剩余宽度。 |
 | `rows` | `Record[]` | — | 行数据。 |
 | `selectionMode` | `'single' \| 'multiple'` | — | 行选择。 |
@@ -218,6 +255,9 @@ const columns = [
 | `filters` | `Record` | `{}` | `v-model:filters`。 |
 | `paginator` | `boolean` | `false` | 内置分页。 |
 | `rowsPerPage` / `page` | — | `10` / `1` | 分页。 |
+| `expandable` | `boolean` | `false` | 展开列；用插槽 `expansion` 渲染详情行。 |
+| `expandedRowKeys` | `Array<string \| number>` | `[]` | `v-model:expanded-row-keys`。 |
+| `rowExpandable` | `(row) => boolean` | — | 返回 `false` 时该行不可展开。 |
 | `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | 外观。 |
 | `sortMode` | `'client' \| 'emit'` | `'client'` | 本地排序或仅抛事件。 |
 | `sortField` / `sortOrder` | — | — | 受控排序。 |
@@ -227,8 +267,8 @@ const columns = [
 
 | 插槽 | 说明 |
 | --- | --- |
-| `cell-{key}` / `empty` / `loading` | 同前。 |
+| `cell-{key}` / `body-cell` / `expansion` / `empty` / `loading` | `cell-{key}` 优先于列 `render`；`body-cell` 作用域 `{ row, column, value }`；`expansion` 作用域 `{ row }`。 |
 
 | 事件 | 说明 |
 | --- | --- |
-| `sort` / `filter` / `page` / `row-click` / `current-change` | 交互回调。 |
+| `sort` / `filter` / `page` / `row-click` / `current-change` / `expand` | 交互回调。 |

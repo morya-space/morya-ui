@@ -1,7 +1,15 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { FormLabelPosition, FormValidateTrigger } from './types'
+import type {
+  FormFieldValidator,
+  FormItemRule,
+  FormLabelAlign,
+  FormLabelPosition,
+  FormModel,
+  FormRules,
+  FormValidateTrigger,
+} from './types'
 
-export type FormFieldValidator = () => string | undefined | void | Promise<string | undefined | void>
+export type { FormFieldValidator }
 
 export interface WiFormFieldRegistration {
   name: string
@@ -9,8 +17,11 @@ export interface WiFormFieldRegistration {
 }
 
 export interface WiFormContext {
+  model?: FormModel
+  rules?: FormRules
   labelPosition: FormLabelPosition
-  labelWidth?: string
+  labelAlign: FormLabelAlign
+  labelWidth?: string | number
   requireMark: boolean
   disabled: boolean
   validateOn: FormValidateTrigger[]
@@ -18,7 +29,10 @@ export interface WiFormContext {
   unregisterField: (name: string) => void
   notifyBlur: (name: string) => void
   notifyChange: (name: string) => void
+  notifyInput: (name: string) => void
 }
 
 export const WI_FORM_KEY: InjectionKey<ComputedRef<WiFormContext>> = Symbol('wiForm')
 export const WI_FORM_ERRORS_KEY: InjectionKey<Record<string, string>> = Symbol('wiFormErrors')
+
+export type { FormItemRule }

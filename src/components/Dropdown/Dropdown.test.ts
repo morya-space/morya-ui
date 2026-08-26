@@ -59,4 +59,22 @@ describe('WiDropdown', () => {
     expect(wrapper.emitted('select')).toBeUndefined()
     wrapper.unmount()
   })
+
+  it('renders a group and nested submenu', async () => {
+    const wrapper = mount(WiDropdown, {
+      props: {
+        modelValue: true,
+        teleport: false,
+        items: [
+          { type: 'group', label: 'Edit', items: [{ value: 'cut', label: 'Cut' }] },
+          { value: 'more', label: 'More', items: [{ value: 'deep', label: 'Deep' }] },
+        ],
+      },
+    })
+    expect(wrapper.get('.wi-dropdown__group-label').text()).toBe('Edit')
+    await wrapper.get('.wi-dropdown__submenu-wrap').trigger('mouseenter')
+    expect(wrapper.get('.wi-dropdown__submenu').text()).toContain('Deep')
+    await wrapper.get('.wi-dropdown__submenu .wi-dropdown__item').trigger('click')
+    expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ value: 'deep' })
+  })
 })

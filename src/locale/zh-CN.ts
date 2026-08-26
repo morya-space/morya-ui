@@ -62,6 +62,8 @@ export const zhCN: WiLocaleMessages = {
   remove: '移除',
   removeTag: '移除标签',
   addTag: '输入后回车添加',
+  createOption: '创建 “{value}”',
+  moreTags: '还有 {count} 项',
   filterOptions: '筛选选项',
   showSuggestions: '显示建议',
   commandPalette: '命令面板',
@@ -92,4 +94,7 @@ export const zhCN: WiLocaleMessages = {
   otpDigit: '第 {index} 位',
   star: '{value} 星',
   openMenu: '打开菜单',
+  jumpToPage: '跳至',
+  pageClassifier: '页',
+  itemsPerPage: '条/页',
 }

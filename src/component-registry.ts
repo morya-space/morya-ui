@@ -26,10 +26,14 @@ import WiDropdown from './components/Dropdown/Dropdown.vue'
 import WiFieldset from './components/Fieldset/Fieldset.vue'
 import WiFileUpload from './components/FileUpload/FileUpload.vue'
 import WiFloatLabel from './components/FloatLabel/FloatLabel.vue'
+import WiFlex from './components/Flex/Flex.vue'
 import WiFluid from './components/Fluid/Fluid.vue'
 import WiForm from './components/Form/Form.vue'
 import WiFormItem from './components/Form/FormItem.vue'
 import WiGallery from './components/Gallery/Gallery.vue'
+import WiGi from './components/Grid/GridItem.vue'
+import WiGrid from './components/Grid/Grid.vue'
+import WiGridItem from './components/Grid/GridItem.vue'
 import WiIcon from './components/Icon/Icon.vue'
 import WiIconField from './components/IconField/IconField.vue'
 import WiInplace from './components/Inplace/Inplace.vue'
@@ -43,6 +47,11 @@ import WiInputPassword from './components/InputPassword/InputPassword.vue'
 import WiInputTags from './components/InputTags/InputTags.vue'
 import WiKnob from './components/Knob/Knob.vue'
 import WiLabel from './components/Label/Label.vue'
+import WiLayout from './components/Layout/Layout.vue'
+import WiLayoutContent from './components/Layout/LayoutContent.vue'
+import WiLayoutFooter from './components/Layout/LayoutFooter.vue'
+import WiLayoutHeader from './components/Layout/LayoutHeader.vue'
+import WiLayoutSider from './components/Layout/LayoutSider.vue'
 import WiListbox from './components/Listbox/Listbox.vue'
 import WiMegaMenu from './components/MegaMenu/MegaMenu.vue'
 import WiMenu from './components/Menu/Menu.vue'
@@ -65,6 +74,7 @@ import WiSelectButton from './components/SelectButton/SelectButton.vue'
 import WiSidebar from './components/Sidebar/Sidebar.vue'
 import WiSkeleton from './components/Skeleton/Skeleton.vue'
 import WiSlider from './components/Slider/Slider.vue'
+import WiSpace from './components/Space/Space.vue'
 import WiSpeedDial from './components/SpeedDial/SpeedDial.vue'
 import WiSplitButton from './components/SplitButton/SplitButton.vue'
 import WiSplitter from './components/Splitter/Splitter.vue'
@@ -114,11 +124,15 @@ export const wiComponents: Record<string, Component> = {
   WiDropdown,
   WiFieldset,
   WiFileUpload,
+  WiFlex,
   WiFloatLabel,
   WiFluid,
   WiForm,
   WiFormItem,
   WiGallery,
+  WiGi,
+  WiGrid,
+  WiGridItem,
   WiIcon,
   WiIconField,
   WiInplace,
@@ -132,6 +146,11 @@ export const wiComponents: Record<string, Component> = {
   WiInputTags,
   WiKnob,
   WiLabel,
+  WiLayout,
+  WiLayoutContent,
+  WiLayoutFooter,
+  WiLayoutHeader,
+  WiLayoutSider,
   WiListbox,
   WiMegaMenu,
   WiMenu,
@@ -154,6 +173,7 @@ export const wiComponents: Record<string, Component> = {
   WiSidebar,
   WiSkeleton,
   WiSlider,
+  WiSpace,
   WiSpeedDial,
   WiSplitButton,
   WiSplitter,

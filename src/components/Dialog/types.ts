@@ -1,4 +1,11 @@
+import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { WiAppendTo } from '../../shared/overlay'
+import type { ButtonSeverity } from '../Button/types'
+
+export type DialogType = 'info' | 'success' | 'warning' | 'error' | 'warn'
+
+export type DialogCloseGuard = AsyncGuard
+export type DialogClickGuard = AsyncGuard<[MouseEvent]>
 
 export type DialogPosition =
   | 'center'
@@ -35,6 +42,26 @@ export interface DialogProps {
   appendTo?: WiAppendTo
   /** Lock page scroll while open (default true when modal). */
   blockScroll?: boolean
+  /**
+   * Status icon in the header. Visual only — use ConfirmDialog for accept/reject flows.
+   * `warning` is an alias of `warn`.
+   */
+  type?: DialogType
+  /** Preset confirm button label. Ignored when the `footer` slot is used. */
+  positiveText?: string
+  /** Preset cancel button label. Ignored when the `footer` slot is used. */
+  negativeText?: string
+  /** Severity of the preset confirm button. */
+  positiveSeverity?: ButtonSeverity
+  /**
+   * Preset confirm handler. Return `false` (or a Promise of `false`) to keep the dialog open.
+   * Use `:on-positive-click` — do not combine with a `positiveClick` emit.
+   */
+  onPositiveClick?: DialogClickGuard
+  /** Preset cancel handler. Same `false` convention as `onPositiveClick`. */
+  onNegativeClick?: DialogClickGuard
+  /** Runs before X / Esc / mask dismiss. Return `false` to keep the dialog open. */
+  beforeClose?: DialogCloseGuard
 }
 
 export interface DialogEmits {

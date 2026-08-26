@@ -78,4 +78,75 @@ describe('WiDialog', () => {
     expect(backdrop?.style.getPropertyValue('--wi-dialog-origin-y')).toBe('48px')
     wrapper.unmount()
   })
+
+  it('renders a type icon and preset footer actions', async () => {
+    const wrapper = mount(WiDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, header: 'Save', type: 'info', positiveText: '保存', negativeText: '取消' },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.wi-dialog--info')).toBeTruthy()
+    expect(document.body.querySelector('.wi-dialog__type-icon')).toBeTruthy()
+    const labels = Array.from(document.body.querySelectorAll('.wi-dialog__footer--preset .wi-button')).map(
+      (btn) => btn.textContent?.trim(),
+    )
+    expect(labels).toEqual(expect.arrayContaining(['保存', '取消']))
+    wrapper.unmount()
+  })
+
+  it('keeps the dialog open when beforeClose returns false', async () => {
+    const wrapper = mount(WiDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, header: 'Stay', beforeClose: () => false },
+    })
+    await nextTick()
+    document.body.querySelector('.wi-dialog__action')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('close')).toBeUndefined()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    wrapper.unmount()
+  })
+
+  it('keeps the dialog open when onPositiveClick returns false', async () => {
+    const wrapper = mount(WiDialog, {
+      attachTo: document.body,
+      props: {
+        modelValue: true,
+        header: 'Save',
+        positiveText: '保存',
+        onPositiveClick: () => false,
+      },
+    })
+    await nextTick()
+    const save = Array.from(document.body.querySelectorAll('.wi-dialog__footer .wi-button')).find((btn) =>
+      btn.textContent?.includes('保存'),
+    )
+    save!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('close')).toBeUndefined()
+    wrapper.unmount()
+  })
+
+  it('closes after an async onPositiveClick resolves', async () => {
+    const wrapper = mount(WiDialog, {
+      attachTo: document.body,
+      props: {
+        modelValue: true,
+        header: 'Save',
+        positiveText: '保存',
+        onPositiveClick: async () => undefined,
+      },
+    })
+    await nextTick()
+    const save = Array.from(document.body.querySelectorAll('.wi-dialog__footer .wi-button')).find((btn) =>
+      btn.textContent?.includes('保存'),
+    )
+    save!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    await Promise.resolve()
+    await nextTick()
+    expect(wrapper.emitted('close')).toHaveLength(1)
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
+    wrapper.unmount()
+  })
 })

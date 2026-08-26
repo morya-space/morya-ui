@@ -7,6 +7,14 @@ export type { WiRenderable }
 /** message severities; `warning` kept as legacy alias for `warn`. */
 export type MessageSeverity = WiToastSeverity | 'warning'
 
+export type MessagePlacement =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+
 export interface MessageItem {
   id: string | number
   content: WiRenderable
@@ -30,6 +38,10 @@ export interface MessageProps {
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
   appendTo?: WiAppendTo
+  /** Host placement. Default `top` (Naive MessageProvider). */
+  placement?: MessagePlacement
+  /** Max visible messages; oldest is dropped. Omit for unlimited. */
+  max?: number
   /**
    * Internal: auto-mounted service host.
    * Manual `<WiMessage />` claims the host and disables auto-mount.
@@ -40,4 +52,9 @@ export interface MessageProps {
 export interface MessageHandle {
   id: string | number
   close: () => void
+}
+
+export interface MessageHostConfig {
+  placement?: MessagePlacement
+  max?: number
 }

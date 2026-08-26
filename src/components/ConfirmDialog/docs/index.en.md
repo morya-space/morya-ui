@@ -47,6 +47,10 @@ const visible = ref(false)
 | `acceptLabel` | `string` | locale `accept` | Accept button label. |
 | `rejectLabel` | `string` | locale `reject` | Reject button label. |
 | `acceptSeverity` | `ButtonSeverity` | — | Accept button semantic color. |
+| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | Status icon beside the message. |
+| `loading` | `boolean` | `false` | Loading state on the accept button. |
+| `beforeAccept` | `() => unknown \| Promise<unknown>` | — | Return `false` to keep open and skip `accept`. |
+| `beforeReject` | `() => unknown \| Promise<unknown>` | — | Return `false` to keep open and skip `reject`. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 

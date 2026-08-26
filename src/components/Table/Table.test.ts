@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
+import { h } from 'vue'
 import WiTable from './Table.vue'
 
 describe('WiTable', () => {
@@ -108,5 +109,23 @@ describe('WiTable', () => {
     expect(wrapper.findAll('tbody tr')).toHaveLength(2)
     await wrapper.find('[aria-label="下一页"]').trigger('click')
     expect(wrapper.emitted('update:page')?.at(-1)).toEqual([2])
+  })
+
+  it('renders a column render function and expands a row', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns: [{ key: 'name', label: 'Name', render: (row) => `*${row.name}*` }],
+        rows: [{ id: 1, name: 'Ada' }],
+        expandable: true,
+      },
+      slots: {
+        expansion: ({ row }: { row: Record<string, unknown> }) =>
+          h('p', { class: 'exp' }, `${String(row.name)} extra`),
+      },
+    })
+    expect(wrapper.text()).toContain('*Ada*')
+    await wrapper.get('.wi-table__expand-btn').trigger('click')
+    expect(wrapper.get('.wi-table__expansion').text()).toContain('Ada extra')
+    expect(wrapper.emitted('update:expandedRowKeys')?.at(-1)).toEqual([[1]])
   })
 })

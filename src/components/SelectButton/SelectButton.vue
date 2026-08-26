@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useWiConfig } from '../../shared/config'
-import { resolveSizeClass } from '../../shared/types'
+import { useConfiguredSize } from '../../shared/config'
 import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
 
 const props = withDefaults(defineProps<SelectButtonProps>(), {
@@ -13,8 +12,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: SelectButtonValue | SelectButtonValue[] | undefined): void
 }>()
 
-const config = useWiConfig()
-const sizeClass = computed(() => resolveSizeClass(props.size ?? config.value.size))
+const sizeClass = useConfiguredSize('SelectButton', () => props.size)
 
 const rootClass = computed(() => [
   'wi-selectbutton',

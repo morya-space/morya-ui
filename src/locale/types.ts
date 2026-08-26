@@ -63,6 +63,8 @@ export interface WiLocaleConfig {
   remove?: string
   removeTag?: string
   addTag?: string
+  createOption?: string
+  moreTags?: string
   filterOptions?: string
   showSuggestions?: string
   commandPalette?: string
@@ -93,6 +95,9 @@ export interface WiLocaleConfig {
   otpDigit?: string
   star?: string
   openMenu?: string
+  jumpToPage?: string
+  pageClassifier?: string
+  itemsPerPage?: string
 }
 
 export type WiLocaleMessages = Required<
