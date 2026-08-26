@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.9
+
+### Changes
+
+- clean up whitespace in base.css for consistency
+
 ## 0.1.8
 
 ### Features
