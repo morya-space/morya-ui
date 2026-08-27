@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { LayoutHeaderProps } from './types'
+import { computed } from 'vue'
 
 defineOptions({ name: 'WiLayoutHeader' })
 

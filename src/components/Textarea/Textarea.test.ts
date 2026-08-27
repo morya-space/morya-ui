@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiTextarea from './Textarea.vue'
 
-describe('WiTextarea', () => {
+describe('wiTextarea', () => {
   it('associates its label and emits model updates', async () => {
     const wrapper = mount(WiTextarea, { props: { id: 'notes', label: 'Notes' } })
 

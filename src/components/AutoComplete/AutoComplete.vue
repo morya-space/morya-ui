@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import WiIcon from '../Icon/Icon.vue'
-import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   modelValue: '',
@@ -187,7 +187,7 @@ const panelOpen = computed(() => open.value && (filtered.value.length > 0 || pro
         @input="onInput"
         @keydown="onKeydown"
         @focus="requestComplete(modelValue ?? '')"
-      />
+      >
       <span v-if="loading" class="wi-autocomplete__spinner" aria-hidden="true" />
       <button
         v-else-if="showClear"
@@ -219,7 +219,9 @@ const panelOpen = computed(() => open.value && (filtered.value.length > 0 || pro
           :style="teleported ? panelStyle : undefined"
           role="listbox"
         >
-          <li v-if="loading && !filtered.length" class="wi-autocomplete__status">{{ locale.loading }}</li>
+          <li v-if="loading && !filtered.length" class="wi-autocomplete__status">
+            {{ locale.loading }}
+          </li>
           <li
             v-for="(item, index) in filtered"
             :key="`${item.value}-${index}`"

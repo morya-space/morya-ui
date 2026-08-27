@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiBadge from './Badge.vue'
 
-describe('WiBadge', () => {
+describe('wiBadge', () => {
   it('renders value with severity and size classes', () => {
     const wrapper = mount(WiBadge, { props: { value: 3, severity: 'success', size: 'large' } })
     expect(wrapper.text()).toBe('3')

@@ -18,8 +18,8 @@ import { WiAccordion } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiAccordion } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref('design')
 const tabs = [
@@ -32,10 +32,14 @@ const tabs = [
 <template>
   <WiAccordion v-model="active" :tabs="tabs">
     <template #design>
-      <p style="margin:0">Design system tokens and layout rules.</p>
+      <p style="margin:0">
+        Design system tokens and layout rules.
+      </p>
     </template>
     <template #code>
-      <p style="margin:0">Implementation notes and API contracts.</p>
+      <p style="margin:0">
+        Implementation notes and API contracts.
+      </p>
     </template>
   </WiAccordion>
 </template>
@@ -45,8 +49,8 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiAccordion } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref<string[]>(['a'])
 const tabs = [
@@ -58,10 +62,14 @@ const tabs = [
 <template>
   <WiAccordion v-model="active" multiple :tabs="tabs">
     <template #a>
-      <p style="margin:0">First section content.</p>
+      <p style="margin:0">
+        First section content.
+      </p>
     </template>
     <template #b>
-      <p style="margin:0">Second section content.</p>
+      <p style="margin:0">
+        Second section content.
+      </p>
     </template>
   </WiAccordion>
 </template>
@@ -73,8 +81,8 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiAccordion, WiButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref('a')
 const tabs = [
@@ -88,7 +96,9 @@ const tabs = [
       <WiButton :label="tab.header" size="small" text />
     </template>
     <template #a>
-      <p style="margin:0">Content.</p>
+      <p style="margin:0">
+        Content.
+      </p>
     </template>
   </WiAccordion>
 </template>

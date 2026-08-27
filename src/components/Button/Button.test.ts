@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiButton from './Button.vue'
 
-describe('WiButton', () => {
+describe('wiButton', () => {
   it('renders slot label and emits click when enabled', async () => {
     const wrapper = mount(WiButton, { slots: { default: 'Save' } })
 

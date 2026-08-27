@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiCard from './Card.vue'
 
-describe('WiCard', () => {
+describe('wiCard', () => {
   it('renders built-in heading content and applies an accessible name', () => {
     const wrapper = mount(WiCard, { props: { title: 'Project details', subtitle: 'Updated today' }, slots: { default: 'Content' } })
     expect(wrapper.get('.wi-card__title').text()).toBe('Project details')

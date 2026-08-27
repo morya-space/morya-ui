@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiFloatLabel from './FloatLabel.vue'
 
-describe('WiFloatLabel', () => {
+describe('wiFloatLabel', () => {
   it('renders default slot and label prop', () => {
     const wrapper = mount(WiFloatLabel, {
       props: { label: 'Email' },

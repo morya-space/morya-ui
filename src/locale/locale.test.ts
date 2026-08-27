@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
+import { enUS, mergeLocale, zhCN } from '.'
 import WiConfigProvider from '../components/ConfigProvider/ConfigProvider.vue'
 import WiConfirmDialog from '../components/ConfirmDialog/ConfirmDialog.vue'
 import WiPagination from '../components/Pagination/Pagination.vue'
-import { enUS, mergeLocale, zhCN } from '.'
 
 describe('locale packs', () => {
   it('exposes matching keys for zh-CN and en-US', () => {

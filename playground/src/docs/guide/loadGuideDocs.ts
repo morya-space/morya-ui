@@ -20,7 +20,7 @@ export interface ResolvedGuideDoc {
   component: Component
 }
 
-type GuideModule = {
+interface GuideModule {
   default: Component
   frontmatter?: GuideDocFrontmatter
 }

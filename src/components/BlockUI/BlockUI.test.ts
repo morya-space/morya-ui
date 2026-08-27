@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiBlockUI from './BlockUI.vue'
 
-describe('WiBlockUI', () => {
+describe('wiBlockUI', () => {
   it('renders default slot without overlay when not blocked', () => {
     const wrapper = mount(WiBlockUI, { slots: { default: '<p>Content</p>' } })
     expect(wrapper.text()).toContain('Content')

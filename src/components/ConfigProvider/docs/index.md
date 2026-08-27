@@ -24,8 +24,8 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -56,8 +56,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput, WiSpace } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput, WiSpace } from '@well-insight/ui'
 
 const note = ref('可清除')
 </script>
@@ -82,7 +82,7 @@ const note = ref('可清除')
 
 ```vue preview
 <script setup lang="ts">
-import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
+import { WiButton, WiConfigProvider, WiInput } from '@well-insight/ui'
 </script>
 
 <template>
@@ -107,8 +107,8 @@ import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiDialog, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiSelect, WiDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const visible = ref(false)
@@ -125,7 +125,9 @@ const options = [
       <WiButton label="打开对话框" @click="visible = true" />
     </div>
     <WiDialog v-model="visible" title="继承 appendTo" style="width: 24rem">
-      <p style="margin:0">浮层挂载目标由 ConfigProvider 提供。</p>
+      <p style="margin:0">
+        浮层挂载目标由 ConfigProvider 提供。
+      </p>
     </WiDialog>
   </WiConfigProvider>
 </template>
@@ -134,8 +136,8 @@ const options = [
 ## 应用级插件
 
 ```ts
-import { createApp } from 'vue'
 import WellInsight, { createWellInsight, enUS } from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
@@ -177,7 +179,7 @@ const config = useWiConfig()
 主题与动效 API 由 `@well-insight/ui` 一并导出，可与 ConfigProvider 并用：
 
 ```ts
-import { useTheme, useMotion } from '@well-insight/ui'
+import { useMotion, useTheme } from '@well-insight/ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

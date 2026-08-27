@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiTag from './Tag.vue'
 
-describe('WiTag', () => {
+describe('wiTag', () => {
   it('renders its value with selected visual props', () => {
     const wrapper = mount(WiTag, { props: { value: 'Published', severity: 'success', rounded: true } })
     expect(wrapper.text()).toBe('Published')

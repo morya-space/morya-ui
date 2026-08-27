@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type {GridItemProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { parseResponsiveValue } from '../../shared/responsive'
-import { WI_GRID_ITEM_FLAG, WI_GRID_KEY, type GridItemProps } from './types'
+import {  WI_GRID_ITEM_FLAG, WI_GRID_KEY } from './types'
 
 defineOptions({
   name: 'WiGridItem',

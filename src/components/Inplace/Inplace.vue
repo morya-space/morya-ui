@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { InplaceProps } from './types'
+import { computed } from 'vue'
 
 const props = withDefaults(defineProps<InplaceProps>(), {
   modelValue: false,

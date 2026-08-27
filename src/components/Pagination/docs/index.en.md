@@ -20,8 +20,8 @@ import { WiPagination } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiPagination } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const page = ref(1)
 </script>
@@ -40,8 +40,8 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiPagination } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const page = ref(1)
 const pageSize = ref(10)

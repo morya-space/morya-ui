@@ -1,5 +1,6 @@
+import type {WiLocaleMessages} from '@well-insight/ui';
+import { enUS,  zhCN } from '@well-insight/ui'
 import { computed, ref, watch } from 'vue'
-import { enUS, zhCN, type WiLocaleMessages } from '@well-insight/ui'
 
 export type DocsLang = 'zh-CN' | 'en-US'
 

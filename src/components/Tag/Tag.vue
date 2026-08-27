@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { TagProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { normalizeSeverity } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
-import type { TagProps } from './types'
 
 const props = withDefaults(defineProps<TagProps>(), {
   severity: 'primary',

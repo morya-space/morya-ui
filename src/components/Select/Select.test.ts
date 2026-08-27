@@ -9,7 +9,7 @@ const options = [
   { label: 'Disabled', value: 'disabled', disabled: true },
 ]
 
-describe('WiSelect', () => {
+describe('wiSelect', () => {
   it('associates its label and emits a typed selected value', async () => {
     const wrapper = mount(WiSelect, { props: { id: 'size', label: 'Size', options } })
 

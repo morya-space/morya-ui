@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, type Component } from 'vue'
+import type {Component} from 'vue';
+import type { WiShowPasswordOn } from '../../shared/componentDefaults'
+import type { IconName } from '../Icon/types'
+import type { InputPasswordProps } from './types'
+import {  computed, onBeforeUnmount, ref, useAttrs } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import {
   useComponentDefaults,
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
-import type { WiShowPasswordOn } from '../../shared/componentDefaults'
 import WiIcon from '../Icon/Icon.vue'
-import type { IconName } from '../Icon/types'
-import type { InputPasswordProps } from './types'
 
 defineOptions({ inheritAttrs: false })
 
-const attrs = useAttrs()
 const props = withDefaults(defineProps<InputPasswordProps>(), {
   modelValue: '',
   disabled: false,
@@ -31,7 +31,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
 }>()
-
+const attrs = useAttrs()
 const defaults = useComponentDefaults('InputPassword')
 const locale = useWiLocale()
 const unmasked = ref(false)
@@ -62,7 +62,7 @@ const strength = computed(() => {
   if (value.length >= 8) score += 1
   if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score += 1
   if (/\d/.test(value)) score += 1
-  if (/[^A-Za-z0-9]/.test(value)) score += 1
+  if (/[^A-Z0-9]/i.test(value)) score += 1
   if (score <= 1) return 'weak'
   if (score <= 3) return 'medium'
   return 'strong'
@@ -171,9 +171,9 @@ onBeforeUnmount(clearPeekListeners)
     <label v-if="label" class="wi-password-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <input
-        ref="inputElement"
         v-bind="attrs"
         :id="inputId"
+        ref="inputElement"
         class="wi-password__input"
         :type="unmasked ? 'text' : 'password'"
         :value="modelValue"
@@ -184,7 +184,7 @@ onBeforeUnmount(clearPeekListeners)
         :aria-describedby="describedBy"
         autocomplete="current-password"
         @input="updateValue"
-      />
+      >
       <button
         v-if="showClear"
         class="wi-password__clear"

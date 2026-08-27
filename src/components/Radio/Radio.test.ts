@@ -4,7 +4,7 @@ import { h } from 'vue'
 import WiRadio from './Radio.vue'
 import WiRadioGroup from './RadioGroup.vue'
 
-describe('WiRadio', () => {
+describe('wiRadio', () => {
   it('associates its label and emits its value when selected', async () => {
     const wrapper = mount(WiRadio, { props: { id: 'small', label: 'Small', value: 'sm' } })
 

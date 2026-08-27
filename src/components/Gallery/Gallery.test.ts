@@ -8,7 +8,7 @@ const images = [
   'https://example.com/c.jpg',
 ]
 
-describe('WiGallery', () => {
+describe('wiGallery', () => {
   it('changes active image via thumb and nav', async () => {
     const wrapper = mount(WiGallery, { props: { images, activeIndex: 0 } })
     await wrapper.findAll('.wi-gallery__thumb')[2]!.trigger('click')

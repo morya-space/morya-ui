@@ -18,8 +18,8 @@ import { WiInputNumber } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputNumber } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(1)
 </script>
@@ -33,8 +33,8 @@ const value = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputNumber } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(3)
 </script>
@@ -50,8 +50,8 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputNumber } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(1.25)
 </script>

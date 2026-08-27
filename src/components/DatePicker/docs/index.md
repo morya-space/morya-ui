@@ -18,8 +18,8 @@ import { WiDatePicker } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
@@ -33,8 +33,8 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const a = ref('2024-06-15')
 const b = ref('2024-06-15')
@@ -56,8 +56,8 @@ const c = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
@@ -76,8 +76,8 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
@@ -103,8 +103,8 @@ import { WiDatePicker } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 </script>
@@ -120,8 +120,8 @@ const value = ref<string | null>(null)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 </script>
@@ -137,8 +137,8 @@ const value = ref<string | null>(null)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 </script>
@@ -152,8 +152,8 @@ const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiDatePicker } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 const shortcuts = [

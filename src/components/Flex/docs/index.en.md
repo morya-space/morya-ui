@@ -18,7 +18,7 @@ import { WiFlex } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiFlex, WiButton } from '@well-insight/ui'
+import { WiButton, WiFlex } from '@well-insight/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { WiFlex, WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiFlex, WiButton } from '@well-insight/ui'
+import { WiButton, WiFlex } from '@well-insight/ui'
 </script>
 
 <template>
@@ -50,7 +50,7 @@ import { WiFlex, WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiFlex, WiButton, WiTag } from '@well-insight/ui'
+import { WiButton, WiFlex, WiTag } from '@well-insight/ui'
 </script>
 
 <template>

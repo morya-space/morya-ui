@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { ScrollTopProps } from './types'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { ScrollTopProps } from './types'
 
 const props = withDefaults(defineProps<ScrollTopProps>(), {
   threshold: 400,

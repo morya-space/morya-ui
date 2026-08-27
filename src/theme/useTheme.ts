@@ -1,5 +1,5 @@
-import { computed, ref, watch } from 'vue'
 import type { ThemeName } from './index'
+import { computed, ref, watch } from 'vue'
 import { applyTheme, getPreferredTheme } from './index'
 
 const storageKey = 'well-insight-theme'

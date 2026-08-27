@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { AvatarProps, AvatarSize } from './types'
 import { computed, ref, watch } from 'vue'
 import WiIcon from '../Icon/Icon.vue'
-import type { AvatarProps, AvatarSize } from './types'
 
 const props = withDefaults(defineProps<AvatarProps>(), {
   shape: 'circle',
@@ -54,7 +54,7 @@ function onImageError(event: Event) {
       :src="image"
       :alt="label || ''"
       @error="onImageError"
-    />
+    >
     <WiIcon v-else-if="displayMode === 'icon'" class="wi-avatar__icon" :name="icon!" size="sm" />
     <span v-else-if="label" class="wi-avatar__label">{{ label }}</span>
   </span>

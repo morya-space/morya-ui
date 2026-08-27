@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { h, nextTick } from 'vue'
 import WiSplitter from './Splitter.vue'
 
-describe('WiSplitter', () => {
+describe('wiSplitter', () => {
   it('renders named panel slots', () => {
     const wrapper = mount(WiSplitter, {
       slots: {

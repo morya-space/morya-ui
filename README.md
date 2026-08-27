@@ -36,8 +36,8 @@ Both **full** and **on-demand** imports are supported — pick one per app.
 ### Full registration
 
 ```ts
-import { createApp } from 'vue'
 import WellInsight from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
@@ -70,8 +70,8 @@ import { WiInput } from '@well-insight/ui/input'
 ### Auto on-demand (Vite)
 
 ```ts
-import Components from 'unplugin-vue-components/vite'
 import { WellInsightResolver } from '@well-insight/ui/resolver'
+import Components from 'unplugin-vue-components/vite'
 
 Components({ resolvers: [WellInsightResolver()] })
 ```
@@ -83,8 +83,8 @@ For a fuller walkthrough, see the docs site [Quick start](./playground/src/docs/
 `createWellInsight` / `WellInsight` set global defaults and **register all components by default**:
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight, enUS } from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 

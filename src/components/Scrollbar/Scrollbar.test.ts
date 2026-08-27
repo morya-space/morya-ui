@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import WiScrollbar from './Scrollbar.vue'
 
-describe('WiScrollbar', () => {
+describe('wiScrollbar', () => {
   it('renders content and applies height to the wrap', () => {
     const wrapper = mount(WiScrollbar, {
       props: { height: 200, always: true },

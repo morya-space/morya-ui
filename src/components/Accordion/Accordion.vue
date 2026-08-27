@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { AccordionProps } from './types'
+import { computed } from 'vue'
 
 const props = withDefaults(defineProps<AccordionProps>(), {
   multiple: false,

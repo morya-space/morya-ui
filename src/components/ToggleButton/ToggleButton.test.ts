@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiToggleButton from './ToggleButton.vue'
 
-describe('WiToggleButton', () => {
+describe('wiToggleButton', () => {
   it('toggles modelValue and shows on/off labels', async () => {
     const wrapper = mount(WiToggleButton, {
       props: { modelValue: false, onLabel: 'Yes', offLabel: 'No' },

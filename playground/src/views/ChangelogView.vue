@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { WiScrollbar, WiTag } from '@well-insight/ui'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { WiScrollbar, WiTag } from '@well-insight/ui'
 import { loadChangelog } from '../docs/loadChangelog'
 import { useDocsI18n } from '../i18n'
 
@@ -37,8 +37,12 @@ function selectVersion(version: string) {
     <aside class="changelog-sidebar" :aria-label="t.changelogNav">
       <WiScrollbar class="changelog-scroll">
         <div class="changelog-sidebar__body">
-          <p class="changelog-kicker">RELEASES</p>
-          <h1 class="changelog-sidebar__title">{{ t.changelogTitle }}</h1>
+          <p class="changelog-kicker">
+            RELEASES
+          </p>
+          <h1 class="changelog-sidebar__title">
+            {{ t.changelogTitle }}
+          </h1>
           <p class="changelog-sidebar__meta">
             <span>{{ doc.packageName }}</span>
             <WiTag :value="`v${doc.currentVersion}`" severity="info" />
@@ -65,7 +69,9 @@ function selectVersion(version: string) {
         <div class="changelog-main__body">
           <template v-if="activeRelease">
             <header class="changelog-hero">
-              <p class="changelog-kicker">CHANGELOG</p>
+              <p class="changelog-kicker">
+                CHANGELOG
+              </p>
               <h2>v{{ activeRelease.version }}</h2>
               <p v-if="activeRelease.version === doc.currentVersion" class="changelog-hero__hint">
                 {{ t.currentHint }}

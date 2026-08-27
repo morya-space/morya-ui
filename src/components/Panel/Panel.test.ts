@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiPanel from './Panel.vue'
 
-describe('WiPanel', () => {
+describe('wiPanel', () => {
   it('renders header and content', () => {
     const wrapper = mount(WiPanel, {
       props: { header: 'Overview' },

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { InputColorProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { InputColorProps } from './types'
 
 const props = withDefaults(defineProps<InputColorProps>(), {
   modelValue: '#000000',
@@ -15,7 +15,7 @@ const locale = useWiLocale()
 
 const hexValue = computed(() => {
   const raw = props.modelValue?.trim() || '#000000'
-  return /^#[0-9a-fA-F]{6}$/.test(raw) ? raw : '#000000'
+  return /^#[0-9a-f]{6}$/i.test(raw) ? raw : '#000000'
 })
 
 function onColorInput(event: Event) {
@@ -38,14 +38,14 @@ function pickSwatch(color: string) {
   <div class="wi-inputcolor" :class="{ 'wi-inputcolor--disabled': disabled }">
     <div class="wi-inputcolor__row">
       <input
+        :id="id"
         class="wi-inputcolor__swatch"
         type="color"
-        :id="id"
         :value="hexValue"
         :disabled="disabled"
         :aria-label="locale.selectColor"
         @input="onColorInput"
-      />
+      >
       <input
         class="wi-inputcolor__text"
         type="text"
@@ -54,7 +54,7 @@ function pickSwatch(color: string) {
         placeholder="#000000"
         spellcheck="false"
         @input="onTextInput"
-      />
+      >
     </div>
     <div v-if="swatches?.length" class="wi-inputcolor__swatches">
       <button

@@ -13,7 +13,7 @@ const value = [
   },
 ]
 
-describe('WiTree', () => {
+describe('wiTree', () => {
   it('expands nodes and selects single key', async () => {
     const wrapper = mount(WiTree, { props: { value, modelValue: null } })
     await wrapper.find('.wi-tree__toggler').trigger('click')

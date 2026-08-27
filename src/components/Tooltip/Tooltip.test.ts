@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiTooltip from './Tooltip.vue'
 
-describe('WiTooltip', () => {
+describe('wiTooltip', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })

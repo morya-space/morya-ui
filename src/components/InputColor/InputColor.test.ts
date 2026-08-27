@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiInputColor from './InputColor.vue'
 
-describe('WiInputColor', () => {
+describe('wiInputColor', () => {
   it('emits hex from color input', async () => {
     const wrapper = mount(WiInputColor, { props: { modelValue: '#112233' } })
     const color = wrapper.find('.wi-inputcolor__swatch')

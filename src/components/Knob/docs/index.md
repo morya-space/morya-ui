@@ -18,8 +18,8 @@ import { WiKnob } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiKnob } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(60)
 </script>

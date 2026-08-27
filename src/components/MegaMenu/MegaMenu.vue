@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { MegaMenuItem, MegaMenuProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { MegaMenuItem, MegaMenuProps } from './types'
 
 const props = withDefaults(defineProps<MegaMenuProps>(), {
   model: () => [],

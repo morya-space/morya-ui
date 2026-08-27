@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiOrderList from './OrderList.vue'
 
-describe('WiOrderList', () => {
+describe('wiOrderList', () => {
   it('reorders selected item down', async () => {
     const wrapper = mount(WiOrderList, { props: { modelValue: ['a', 'b', 'c'] } })
     await wrapper.findAll('.wi-orderlist__item')[0]!.trigger('click')

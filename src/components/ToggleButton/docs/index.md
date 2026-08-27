@@ -18,8 +18,8 @@ import { WiToggleButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiToggleButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const on = ref(false)
 </script>
@@ -33,8 +33,8 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiToggleButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const a = ref(false)
 const b = ref(true)

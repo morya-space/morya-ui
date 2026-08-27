@@ -6,7 +6,7 @@ import WiInput from '../Input/Input.vue'
 import WiSpace from '../Space/Space.vue'
 import WiConfigProvider from './ConfigProvider.vue'
 
-describe('WiConfigProvider', () => {
+describe('wiConfigProvider', () => {
   it('provides merged global config to descendants', () => {
     const Probe = defineComponent({
       setup() {

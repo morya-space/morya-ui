@@ -20,8 +20,8 @@ import { WiTree } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTree } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const selected = ref<string | null>(null)
 const nodes = [
@@ -46,8 +46,8 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTree } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const checkedKeys = ref({})
 const nodes = [
@@ -78,8 +78,8 @@ With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTree } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const checkedKeys = ref<Record<string, boolean>>({})
 const nodes = [
@@ -114,8 +114,8 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInput, WiTree } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const query = ref('')
 const nodes = [

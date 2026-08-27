@@ -1,8 +1,8 @@
+import type { Plugin } from 'vite'
 import { readdirSync, statSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
-import type { Plugin } from 'vite'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 const root = (path: string) => fileURLToPath(new URL(path, import.meta.url))

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { FieldsetProps } from './types'
+import { computed } from 'vue'
 
 const props = withDefaults(defineProps<FieldsetProps>(), {
   toggleable: false,
@@ -30,10 +30,14 @@ function toggle() {
         @click="toggle"
       >
         <span aria-hidden="true">{{ isCollapsed ? '▸' : '▾' }}</span>
-        <slot name="legend">{{ legend }}</slot>
+        <slot name="legend">
+          {{ legend }}
+        </slot>
       </button>
       <template v-else>
-        <slot name="legend">{{ legend }}</slot>
+        <slot name="legend">
+          {{ legend }}
+        </slot>
       </template>
     </legend>
     <div v-show="!isCollapsed" class="wi-fieldset__content">

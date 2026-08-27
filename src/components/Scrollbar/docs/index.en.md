@@ -24,7 +24,7 @@ import { WiScrollbar } from '@well-insight/ui'
 </script>
 
 <template>
-  <WiScrollbar height="240px" always  style="width: 200px">
+  <WiScrollbar height="240px" always style="width: 200px">
     <p
       v-for="item in 20"
       :key="item"
@@ -47,8 +47,8 @@ The scrollbar appears only when content exceeds `max-height`.
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiScrollbar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const count = ref(3)
 </script>
@@ -120,15 +120,23 @@ import { WiScrollbar } from '@well-insight/ui'
 <template>
   <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">always</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">
+        always
+      </p>
       <WiScrollbar height="160px" always>
-        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">Line {{ n }}</p>
+        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
+          Line {{ n }}
+        </p>
       </WiScrollbar>
     </div>
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">native</p>
-      <WiScrollbar height="160px" native  style="width: 200px">
-        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">Line {{ n }}</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">
+        native
+      </p>
+      <WiScrollbar height="160px" native style="width: 200px">
+        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
+          Line {{ n }}
+        </p>
       </WiScrollbar>
     </div>
   </div>
@@ -141,9 +149,9 @@ Control scrolling with instance methods `setScrollTop` / `setScrollLeft` / `scro
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
-import { WiButton, WiScrollbar } from '@well-insight/ui'
 import type { ScrollbarInstance } from '@well-insight/ui'
+import { WiButton, WiScrollbar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
 const scrollTop = ref(0)
@@ -165,7 +173,7 @@ function onScroll(payload: { scrollTop: number }) {
       <WiButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
       <span style="color:var(--wi-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
     </div>
-    <WiScrollbar ref="scrollbarRef" height="200px" always  style="width: 200px" @scroll="onScroll">
+    <WiScrollbar ref="scrollbarRef" height="200px" always style="width: 200px" @scroll="onScroll">
       <p
         v-for="item in 24"
         :key="item"
@@ -189,9 +197,9 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
-import { WiScrollbar } from '@well-insight/ui'
 import type { ScrollbarDirection } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const num = ref(20)
 
@@ -201,7 +209,7 @@ function loadMore(direction: ScrollbarDirection) {
 </script>
 
 <template>
-  <WiScrollbar height="220px"  style="width: 200px" always @end-reached="loadMore">
+  <WiScrollbar height="220px" style="width: 200px" always @end-reached="loadMore">
     <p
       v-for="item in num"
       :key="item"

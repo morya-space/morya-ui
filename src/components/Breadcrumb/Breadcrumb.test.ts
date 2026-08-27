@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiBreadcrumb from './Breadcrumb.vue'
 
-describe('WiBreadcrumb', () => {
+describe('wiBreadcrumb', () => {
   it('renders home and model items with separators', () => {
     const wrapper = mount(WiBreadcrumb, {
       props: {

@@ -1,4 +1,5 @@
-import { createVNode, render, type AppContext, type Component } from 'vue'
+import type {AppContext, Component} from 'vue';
+import {   createVNode, render } from 'vue'
 
 let appContext: AppContext | undefined
 

@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiIcon from '../Icon/Icon.vue'
 import { ajaxUpload } from './ajax'
-import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
   mode: 'basic',
@@ -335,7 +335,7 @@ defineExpose({
       :disabled="disabled"
       :webkitdirectory="directory || undefined"
       @change="onChange"
-    />
+    >
 
     <div
       v-if="drag && showTrigger"
@@ -399,7 +399,7 @@ defineExpose({
               :src="file.url"
               :alt="file.name"
               @click="previewFile(file)"
-            />
+            >
             <span class="wi-fileupload__name">{{ file.name }}</span>
             <span v-if="file.size != null" class="wi-fileupload__size">{{ formatSize(file.size) }}</span>
             <span v-if="file.status === 'fail'" class="wi-fileupload__status">{{ file.error || locale.uploadFailed }}</span>
@@ -468,7 +468,7 @@ defineExpose({
             :src="file.url"
             :alt="file.name"
             @click="previewFile(file)"
-          />
+          >
           <span v-else class="wi-fileupload__card-name">{{ file.name }}</span>
           <div v-if="file.status === 'uploading'" class="wi-fileupload__card-progress">
             {{ Math.round(file.percentage ?? 0) }}%
@@ -519,7 +519,9 @@ defineExpose({
       <button v-if="showSubmit" type="button" class="wi-fileupload__choose" @click="submit">
         {{ locale.uploadFile }}
       </button>
-      <button type="button" class="wi-fileupload__clear" @click="clearFiles">{{ locale.clear }}</button>
+      <button type="button" class="wi-fileupload__clear" @click="clearFiles">
+        {{ locale.clear }}
+      </button>
     </div>
   </div>
 </template>

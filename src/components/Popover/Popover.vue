@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { PopoverProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { PopoverProps } from './types'
 
 const props = withDefaults(defineProps<PopoverProps>(), {
   modelValue: false,
@@ -52,7 +52,7 @@ function onTriggerEnter() {
   if (props.trigger !== 'hover') return
   clearHoverTimers()
   if (props.showDelay > 0) {
-    showTimer = setTimeout(() => setOpen(true), props.showDelay)
+    showTimer = setTimeout(setOpen, props.showDelay, true)
     return
   }
   setOpen(true)
@@ -62,7 +62,7 @@ function onTriggerLeave() {
   if (props.trigger !== 'hover') return
   clearHoverTimers()
   if (props.hideDelay > 0) {
-    hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+    hideTimer = setTimeout(setOpen, props.hideDelay, false)
     return
   }
   setOpen(false)
@@ -77,7 +77,7 @@ function onPanelLeave() {
   if (props.trigger !== 'hover') return
   clearHoverTimers()
   if (props.hideDelay > 0) {
-    hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+    hideTimer = setTimeout(setOpen, props.hideDelay, false)
     return
   }
   setOpen(false)
@@ -87,7 +87,7 @@ function onTriggerFocus() {
   if (props.trigger !== 'focus') return
   clearHoverTimers()
   if (props.showDelay > 0) {
-    showTimer = setTimeout(() => setOpen(true), props.showDelay)
+    showTimer = setTimeout(setOpen, props.showDelay, true)
     return
   }
   setOpen(true)
@@ -97,7 +97,7 @@ function onTriggerBlur() {
   if (props.trigger !== 'focus') return
   clearHoverTimers()
   if (props.hideDelay > 0) {
-    hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+    hideTimer = setTimeout(setOpen, props.hideDelay, false)
     return
   }
   setOpen(false)

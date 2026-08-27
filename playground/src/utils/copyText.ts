@@ -1,5 +1,5 @@
 export async function copyText(value: string): Promise<boolean> {
-  const text = value.replace(/\u00a0/g, ' ')
+  const text = value.replace(/\u00A0/g, ' ')
   if (!text) return false
 
   try {

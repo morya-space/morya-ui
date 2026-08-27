@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Comment, Fragment, Text, computed, onBeforeUnmount, ref, useSlots, watch, type VNode } from 'vue'
+import type {VNode} from 'vue';
+import type { SplitterProps, SplitterSize } from './types'
+import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useSlots,  watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import {
   clampPx,
@@ -8,7 +10,6 @@ import {
   pxToSize,
   sizeToFlexBasis,
 } from './size'
-import type { SplitterProps, SplitterSize } from './types'
 
 const props = withDefaults(defineProps<SplitterProps>(), {
   defaultSize: 50,

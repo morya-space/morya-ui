@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiDivider from './Divider.vue'
 
-describe('WiDivider', () => {
+describe('wiDivider', () => {
   it('renders an accessible labeled separator', () => {
     const wrapper = mount(WiDivider, { props: { label: 'Advanced settings' } })
     expect(wrapper.attributes('role')).toBe('separator')

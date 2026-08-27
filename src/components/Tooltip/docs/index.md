@@ -11,7 +11,7 @@ description: 悬停或聚焦时显示的短提示。支持 placement、disabled 
 ## 引入
 
 ```ts
-import { WiTooltip, WiButton } from '@well-insight/ui'
+import { WiButton, WiTooltip } from '@well-insight/ui'
 ```
 
 ## Basic

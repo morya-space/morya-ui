@@ -1,4 +1,5 @@
-import { Comment, Fragment, Text, type VNode } from 'vue'
+import type {VNode} from 'vue';
+import { Comment, Fragment, Text  } from 'vue'
 
 /** Flatten default-slot VNodes, skipping comments and empty text. */
 export function flattenVNodes(nodes: VNode[] | undefined | null): VNode[] {

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed, inject, ref, useTemplateRef, watch, type StyleValue } from 'vue'
+import type {StyleValue} from 'vue';
+import type { ScrollbarInstance } from '../Scrollbar/types'
+import type { LayoutExpose, LayoutSiderProps } from './types'
+import { computed, inject, ref,  useTemplateRef, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { toCssLength } from '../../shared/responsive'
 import WiScrollbar from '../Scrollbar/Scrollbar.vue'
-import type { ScrollbarInstance } from '../Scrollbar/types'
 import { WI_LAYOUT_KEY } from './context'
-import type { LayoutExpose, LayoutSiderProps } from './types'
 
 defineOptions({ name: 'WiLayoutSider' })
 

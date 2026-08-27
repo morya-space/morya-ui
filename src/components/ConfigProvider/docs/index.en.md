@@ -24,8 +24,8 @@ Provide global defaults for the component tree via `WiConfigProvider` or `create
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -56,8 +56,8 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput, WiSpace } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput, WiSpace } from '@well-insight/ui'
 
 const note = ref('Clearable')
 </script>
@@ -82,7 +82,7 @@ const note = ref('Clearable')
 
 ```vue preview
 <script setup lang="ts">
-import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
+import { WiButton, WiConfigProvider, WiInput } from '@well-insight/ui'
 </script>
 
 <template>
@@ -107,8 +107,8 @@ import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiDialog, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiSelect, WiDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const visible = ref(false)
@@ -125,7 +125,9 @@ const options = [
       <WiButton label="Open dialog" @click="visible = true" />
     </div>
     <WiDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
-      <p style="margin:0">Overlay mount target is provided by ConfigProvider.</p>
+      <p style="margin:0">
+        Overlay mount target is provided by ConfigProvider.
+      </p>
     </WiDialog>
   </WiConfigProvider>
 </template>
@@ -134,8 +136,8 @@ const options = [
 ## App-level plugin
 
 ```ts
-import { createApp } from 'vue'
 import WellInsight, { createWellInsight, enUS } from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
@@ -177,7 +179,7 @@ Precedence: **component props > `WiConfigProvider` > `createWellInsight()` > bui
 Theme and motion APIs are also exported from `@well-insight/ui` and can be used alongside ConfigProvider:
 
 ```ts
-import { useTheme, useMotion } from '@well-insight/ui'
+import { useMotion, useTheme } from '@well-insight/ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiPickList from './PickList.vue'
 
-describe('WiPickList', () => {
+describe('wiPickList', () => {
   it('moves selected source items to target', async () => {
     const wrapper = mount(WiPickList, {
       props: { source: ['a', 'b'], target: ['c'] },

@@ -4,7 +4,7 @@ import { defineComponent, h, nextTick, ref } from 'vue'
 import WiForm from './Form.vue'
 import WiFormItem from './FormItem.vue'
 
-describe('WiForm / WiFormItem', () => {
+describe('wiForm / WiFormItem', () => {
   it('renders label, required mark, and error alert', () => {
     const wrapper = mount(WiForm, {
       slots: {
@@ -142,7 +142,7 @@ describe('WiForm / WiFormItem', () => {
                   {
                     label: '邮箱',
                     name: 'email',
-                    rules: { pattern: /.+@.+\..+/, message: '邮箱格式不正确' },
+                    rules: { pattern: /.[^\n\r@\u2028\u2029]*@.+\..+/, message: '邮箱格式不正确' },
                   },
                   { default: () => h('input') },
                 ),

@@ -11,15 +11,15 @@ description: 将输入框与前后缀附加内容组合为同一控件组。
 ## 引入
 
 ```ts
-import { WiInputGroup, WiInputGroupAddon, WiInput } from '@well-insight/ui'
+import { WiInput, WiInputGroup, WiInputGroupAddon } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
+import { WiInput, WiInputGroup, WiInputGroupAddon } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiInputGroup, WiInputGroupAddon, WiInput } from '@well-insight/ui'
 
 const price = ref('')
 const url = ref('')

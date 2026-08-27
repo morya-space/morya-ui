@@ -18,8 +18,8 @@ import { WiOrderList } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiOrderList } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const items = ref(['设计', '开发', '测试', '发布'])
 </script>

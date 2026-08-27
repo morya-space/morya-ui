@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { WiScrollbar } from '@well-insight/ui'
 import { computed, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
 import { listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { useDocsI18n } from '../i18n'
-import { WiScrollbar } from '@well-insight/ui'
 
 const route = useRoute()
 const router = useRouter()
@@ -34,8 +34,12 @@ watch(
     <aside class="docs-sidebar" :aria-label="t.docsNav">
       <WiScrollbar class="docs-scroll">
         <div class="docs-sidebar__body">
-          <p class="docs-kicker">DOCUMENTATION</p>
-          <h1 class="docs-sidebar__title">{{ t.docsTitle }}</h1>
+          <p class="docs-kicker">
+            DOCUMENTATION
+          </p>
+          <h1 class="docs-sidebar__title">
+            {{ t.docsTitle }}
+          </h1>
           <nav class="docs-nav">
             <RouterLink
               v-for="item in guides"
@@ -57,7 +61,9 @@ watch(
           <ComponentDocViewer v-if="activeDoc" :key="`${activeDoc.slug}-${lang}`" :doc="{ name: activeDoc.slug, frontmatter: activeDoc.frontmatter, component: activeDoc.component }" />
           <section v-else class="docs-missing">
             <h2>{{ t.docsMissing }}</h2>
-            <RouterLink :to="{ name: 'docs', params: { slug: 'introduction' } }">{{ t.backIntro }}</RouterLink>
+            <RouterLink :to="{ name: 'docs', params: { slug: 'introduction' } }">
+              {{ t.backIntro }}
+            </RouterLink>
           </section>
         </div>
       </WiScrollbar>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue'
 import { WiIcon } from '@well-insight/ui'
+import { computed, onBeforeUnmount, ref } from 'vue'
 import { useDocsI18n } from '../i18n'
 import { copyText } from '../utils/copyText'
 

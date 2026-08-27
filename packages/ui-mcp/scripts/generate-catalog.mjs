@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -26,7 +26,7 @@ function parseFrontmatter(raw) {
   const body = raw.slice(end + 4).replace(/^\r?\n/, '')
   const data = {}
   for (const line of block.split(/\r?\n/)) {
-    const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/)
+    const match = line.match(/^([\w-]+):\s*(.*)$/)
     if (!match) continue
     data[match[1]] = match[2].trim().replace(/^['"]|['"]$/g, '')
   }
@@ -105,22 +105,22 @@ function mapApiRows(rows, kind) {
   return rows.map((row) => {
     if (kind === 'props') {
       return {
-        name: unwrapCodeName(row['参数'] || row['Prop'] || row['Name'] || ''),
-        type: unwrapCodeName(row['类型'] || row['Type'] || ''),
-        default: unwrapCodeName(row['默认值'] || row['Default'] || '') || undefined,
-        description: row['说明'] || row['Description'] || '',
+        name: unwrapCodeName(row['参数'] || row.Prop || row.Name || ''),
+        type: unwrapCodeName(row['类型'] || row.Type || ''),
+        default: unwrapCodeName(row['默认值'] || row.Default || '') || undefined,
+        description: row['说明'] || row.Description || '',
       }
     }
     if (kind === 'events') {
       return {
-        name: unwrapCodeName(row['事件名'] || row['Event'] || row['Name'] || ''),
-        payload: unwrapCodeName(row['参数'] || row['Payload'] || row['Args'] || '') || undefined,
-        description: row['说明'] || row['Description'] || '',
+        name: unwrapCodeName(row['事件名'] || row.Event || row.Name || ''),
+        payload: unwrapCodeName(row['参数'] || row.Payload || row.Args || '') || undefined,
+        description: row['说明'] || row.Description || '',
       }
     }
     return {
-      name: unwrapCodeName(row['插槽名'] || row['Slot'] || row['Name'] || ''),
-      description: row['说明'] || row['Description'] || '',
+      name: unwrapCodeName(row['插槽名'] || row.Slot || row.Name || ''),
+      description: row['说明'] || row.Description || '',
     }
   }).filter((item) => item.name)
 }

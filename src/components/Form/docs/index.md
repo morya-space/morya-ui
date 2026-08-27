@@ -18,17 +18,17 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 ## 引入
 
 ```ts
-import { WiForm, WiFormItem } from '@well-insight/ui'
 import type { FormInstance, FormRules } from '@well-insight/ui'
+import { WiForm, WiFormItem } from '@well-insight/ui'
 ```
 
 ## 声明式 rules
 
 ```vue preview
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { WiForm, WiFormItem, WiInput, WiButton } from '@well-insight/ui'
 import type { FormInstance, FormRules } from '@well-insight/ui'
+import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
 const model = reactive({ name: '', email: '' })
@@ -36,7 +36,7 @@ const rules: FormRules = {
   name: { required: true, message: '请输入名称', trigger: ['blur', 'input'] },
   email: [
     { required: true, message: '请输入邮箱', trigger: 'blur' },
-    { pattern: /.+@.+\..+/, message: '邮箱格式不正确', trigger: 'blur' },
+    { pattern: /.[^\n\r@\u2028\u2029]*@.+\..+/, message: '邮箱格式不正确', trigger: 'blur' },
   ],
 }
 
@@ -75,8 +75,8 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
 import { reactive } from 'vue'
-import { WiForm, WiFormItem, WiInput, WiButton } from '@well-insight/ui'
 
 const form = reactive({ name: '' })
 </script>
@@ -102,8 +102,8 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { reactive } from 'vue'
 import { WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>

@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 const root = 'src/components'
 const comps = readdirSync(root).filter((f) => statSync(join(root, f)).isDirectory()).sort()
-const re = /import\s+(?:type\s+)?\{?[^'"]*\}?\s*from\s+['"]\.\.\/([A-Z][a-zA-Z]+)\//g
+const re = /import\s[^'"]*from\s+['"]\.\.\/([A-Z][a-zA-Z]+)\//g
 
 const deps = {}
 for (const c of comps) {
@@ -19,5 +19,5 @@ for (const c of comps) {
 }
 
 for (const c of comps) {
-  console.log(c + ':' + (deps[c].length ? ' ' + deps[c].join(', ') : ''))
+  console.log(`${c  }:${  deps[c].length ? ` ${  deps[c].join(', ')}` : ''}`)
 }

@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { ConfirmPopupProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiLocale } from '../../locale'
+import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import WiButton from '../Button/Button.vue'
 import WiIcon from '../Icon/Icon.vue'
-import type { ConfirmPopupProps } from './types'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,

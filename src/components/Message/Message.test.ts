@@ -1,5 +1,5 @@
-import { nextTick } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import { message, messageState, resetMessageService } from './message'
 
 describe('message API', () => {

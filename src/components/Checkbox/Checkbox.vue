@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import type {CheckboxProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { WI_CHECKBOX_GROUP_KEY, type CheckboxProps } from './types'
+import {  WI_CHECKBOX_GROUP_KEY } from './types'
 
 defineOptions({ inheritAttrs: false })
 
-const attrs = useAttrs()
 const props = withDefaults(defineProps<CheckboxProps>(), {
   modelValue: false,
   indeterminate: false,
@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   required: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
+const attrs = useAttrs()
 const group = inject(WI_CHECKBOX_GROUP_KEY, null)
 const inputId = computed(() => props.id ?? `wi-checkbox-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = useConfiguredSize('Checkbox', () => props.size ?? group?.size.value)
@@ -63,7 +64,7 @@ function updateValue(event: Event) {
       :aria-invalid="isInvalid || undefined"
       :aria-checked="indeterminate ? 'mixed' : isChecked"
       @change="updateValue"
-    />
+    >
     <span class="wi-checkbox__control" aria-hidden="true">
       <svg viewBox="0 0 16 16" focusable="false">
         <path v-if="indeterminate" d="M4 8h8" />

@@ -1,5 +1,5 @@
-import readline from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
+import readline from 'node:readline/promises'
 
 export function isInteractive() {
   return Boolean(input.isTTY && output.isTTY)
@@ -67,7 +67,7 @@ export async function promptCommitSelection(commits) {
     }
     const n = Number(part)
     if (!Number.isInteger(n)) {
-      throw new Error(`Invalid selection: ${part}`)
+      throw new TypeError(`Invalid selection: ${part}`)
     }
     selected.add(n)
   }

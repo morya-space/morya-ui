@@ -18,17 +18,17 @@ Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and
 ## Import
 
 ```ts
-import { WiForm, WiFormItem } from '@well-insight/ui'
 import type { FormInstance, FormRules } from '@well-insight/ui'
+import { WiForm, WiFormItem } from '@well-insight/ui'
 ```
 
 ## Declarative rules
 
 ```vue preview
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { WiForm, WiFormItem, WiInput, WiButton } from '@well-insight/ui'
 import type { FormInstance, FormRules } from '@well-insight/ui'
+import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
 const model = reactive({ name: '', email: '' })
@@ -36,7 +36,7 @@ const rules: FormRules = {
   name: { required: true, message: 'Enter a name', trigger: ['blur', 'input'] },
   email: [
     { required: true, message: 'Enter an email', trigger: 'blur' },
-    { pattern: /.+@.+\..+/, message: 'Enter a valid email', trigger: 'blur' },
+    { pattern: /.[^\n\r@\u2028\u2029]*@.+\..+/, message: 'Enter a valid email', trigger: 'blur' },
   ],
 }
 
@@ -75,8 +75,8 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
 import { reactive } from 'vue'
-import { WiForm, WiFormItem, WiInput, WiButton } from '@well-insight/ui'
 
 const form = reactive({ name: '' })
 </script>
@@ -102,8 +102,8 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { reactive } from 'vue'
 import { WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>

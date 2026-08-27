@@ -226,7 +226,7 @@ export function prependChangelog(filePath, version, body) {
     console.log(`${filePath} already contains ${heading}, skip`)
     return false
   }
-  const prefixMatch = raw.match(/^(# [^\n]+\r?\n\r?\n)/)
+  const prefixMatch = raw.match(/^(# [^\n]+\n\r?\n)/)
   const block = `${heading}\n\n${body}\n\n`
   if (!prefixMatch?.[1]) {
     writeFileSync(filePath, `# ${PACKAGE_NAME}\n\n${block}${raw}`)

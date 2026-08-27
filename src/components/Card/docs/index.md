@@ -11,7 +11,7 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 ## 引入
 
 ```ts
-import { WiCard, WiButton } from '@well-insight/ui'
+import { WiButton, WiCard } from '@well-insight/ui'
 ```
 
 ## Basic

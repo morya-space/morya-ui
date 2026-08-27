@@ -4,7 +4,7 @@ import { nextTick } from 'vue'
 import { setLastPointer } from '../../shared/lastPointer'
 import WiDialog from './Dialog.vue'
 
-describe('WiDialog', () => {
+describe('wiDialog', () => {
   it('closes with Escape and emits lifecycle events', async () => {
     const wrapper = mount(WiDialog, { attachTo: document.body, props: { modelValue: true, title: 'Confirm' } })
     await nextTick()

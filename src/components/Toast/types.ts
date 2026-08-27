@@ -1,5 +1,5 @@
-import type { WiAppendTo } from '../../shared/overlay'
 import type { WiRenderable } from '../../shared/content'
+import type { WiAppendTo } from '../../shared/overlay'
 import type { WiToastSeverity } from '../../shared/types'
 
 export type { WiRenderable }

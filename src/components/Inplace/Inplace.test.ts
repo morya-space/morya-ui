@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiInplace from './Inplace.vue'
 
-describe('WiInplace', () => {
+describe('wiInplace', () => {
   it('switches from display to content on activate', async () => {
     const wrapper = mount(WiInplace, {
       props: { modelValue: false },

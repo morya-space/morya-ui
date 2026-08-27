@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { SpeedDialItem, SpeedDialProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { SpeedDialItem, SpeedDialProps } from './types'
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
   model: () => [],
@@ -142,7 +142,9 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       @click="toggle"
     >
-      <slot name="icon">+</slot>
+      <slot name="icon">
+        +
+      </slot>
     </button>
   </div>
 </template>

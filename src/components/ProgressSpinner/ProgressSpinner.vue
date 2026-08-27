@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { ProgressSpinnerProps } from './types'
 import { computed, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
-import type { ProgressSpinnerProps } from './types'
 
 const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
   strokeWidth: '2',
@@ -82,7 +82,9 @@ const sizeClass = computed(() => ({
           :stroke-width="strokeWidth"
         />
       </svg>
-      <p v-if="description" class="wi-progress-spinner__description">{{ description }}</p>
+      <p v-if="description" class="wi-progress-spinner__description">
+        {{ description }}
+      </p>
     </div>
   </div>
   <svg

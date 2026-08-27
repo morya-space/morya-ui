@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiAvatar from './Avatar.vue'
 
-describe('WiAvatar', () => {
+describe('wiAvatar', () => {
   it('renders label with default circle shape', () => {
     const wrapper = mount(WiAvatar, { props: { label: 'AB' } })
     expect(wrapper.find('.wi-avatar__label').text()).toBe('AB')

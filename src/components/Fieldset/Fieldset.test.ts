@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiFieldset from './Fieldset.vue'
 
-describe('WiFieldset', () => {
+describe('wiFieldset', () => {
   it('renders legend and content', () => {
     const wrapper = mount(WiFieldset, {
       props: { legend: 'Details' },

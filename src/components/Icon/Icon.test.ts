@@ -4,7 +4,7 @@ import { h } from 'vue'
 import WiIcon from './Icon.vue'
 import { iconNames, isIconName } from './icons'
 
-describe('WiIcon', () => {
+describe('wiIcon', () => {
   it('hides decorative icons and labels informative ones', () => {
     const decorative = mount(WiIcon, { props: { name: 'search' } })
     const informative = mount(WiIcon, { props: { name: 'trash', label: '删除项目' } })

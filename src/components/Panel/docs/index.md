@@ -18,16 +18,20 @@ import { WiPanel } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiPanel } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
   <WiPanel v-model="collapsed" header="Panel" toggleable>
-    <p style="margin:0">可折叠面板内容。</p>
-    <template #footer>操作区</template>
+    <p style="margin:0">
+      可折叠面板内容。
+    </p>
+    <template #footer>
+      操作区
+    </template>
   </WiPanel>
 </template>
 ```
@@ -41,7 +45,9 @@ import { WiPanel } from '@well-insight/ui'
 
 <template>
   <WiPanel header="Small" size="small">
-    <p style="margin:0">更紧凑的面板。</p>
+    <p style="margin:0">
+      更紧凑的面板。
+    </p>
   </WiPanel>
 </template>
 ```

@@ -1,6 +1,5 @@
 import './style'
 export { default as WiContextMenu } from './ContextMenu.vue'
-export { useContextMenu } from './useContextMenu'
 export type {
   ContextMenuEmits,
   ContextMenuInstance,
@@ -8,3 +7,4 @@ export type {
   ContextMenuPosition,
   ContextMenuProps,
 } from './types'
+export { useContextMenu } from './useContextMenu'

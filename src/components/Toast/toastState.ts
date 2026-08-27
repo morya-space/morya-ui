@@ -1,6 +1,7 @@
-import { reactive, type Reactive } from 'vue'
+import type {Reactive} from 'vue';
 import type { OverlayHostHandle } from '../../shared/overlayHost'
 import type { ToastMessage, ToastPosition } from './types'
+import { reactive  } from 'vue'
 
 export const toastState: Reactive<{
   messages: ToastMessage[]

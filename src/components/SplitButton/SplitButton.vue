@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { SplitButtonItem, SplitButtonProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { SplitButtonItem, SplitButtonProps } from './types'
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
   model: () => [],

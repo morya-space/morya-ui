@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { ToggleButtonProps } from './types'
 import { computed } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import type { ToggleButtonProps } from './types'
 
 const props = withDefaults(defineProps<ToggleButtonProps>(), {
   modelValue: false,

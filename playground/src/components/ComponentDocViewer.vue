@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import type { ResolvedComponentDoc } from '../docs/loadComponentDocs'
+import { computed, ref } from 'vue'
 import { useDocCodeCopy } from '../composables/useDocCodeCopy'
 
 const props = defineProps<{
@@ -17,7 +17,9 @@ useDocCodeCopy(bodyRef, docSource)
     <div class="component-doc-viewer__intro">
       <span v-if="doc.frontmatter.category" class="component-doc-viewer__label">{{ doc.frontmatter.category }}</span>
       <h2>{{ doc.frontmatter.title || doc.name }}</h2>
-      <p v-if="doc.frontmatter.description">{{ doc.frontmatter.description }}</p>
+      <p v-if="doc.frontmatter.description">
+        {{ doc.frontmatter.description }}
+      </p>
     </div>
     <div ref="bodyRef" class="component-doc-viewer__body">
       <component :is="doc.component" />

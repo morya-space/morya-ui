@@ -8,7 +8,7 @@ const steps = [
   { label: 'Pay', disabled: true },
 ]
 
-describe('WiStepper', () => {
+describe('wiStepper', () => {
   it('emits active step index on click', async () => {
     const wrapper = mount(WiStepper, {
       props: { steps, modelValue: 0 },

@@ -1,4 +1,4 @@
-import type { Catalog, ComponentRecord, GuideRecord, Locale } from './catalog.js'
+import type { ComponentRecord, GuideRecord, Locale } from './catalog.js'
 import {
   findComponent,
   findGuide,
@@ -433,13 +433,13 @@ export function createToolHandlers(catalog = loadCatalog()) {
         }
       }
 
-      const attrRe = /<(?:Wi[A-Z][A-Za-z0-9]*)\b([^>]*)>/g
+      const attrRe = /<Wi[A-Z][A-Za-z0-9]*\b([^>]*)>/g
       let tagMatch
       while ((tagMatch = attrRe.exec(code)) !== null) {
         const attrs = tagMatch[1] || ''
         const attrNames = [
           ...attrs.matchAll(/(?:^|\s)(?:v-bind:|:)([A-Za-z_][\w-]*)/g),
-          ...attrs.matchAll(/(?:^|\s)([A-Za-z_][\w-]*)\s*=/g),
+          ...attrs.matchAll(/(?:^|\s)([A-Z_][\w-]*)\s*=/gi),
           ...attrs.matchAll(/(?:^|\s)(v-model(?:\.[\w-]+)?)/g),
         ].map((match) => match[1])
 
@@ -460,7 +460,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
           }
         }
 
-        const eventNames = [...attrs.matchAll(/(?:^|\s)@([A-Za-z_][\w-]*)/g)].map((match) => match[1])
+        const eventNames = [...attrs.matchAll(/(?:^|\s)@([A-Z_][\w-]*)/gi)].map((match) => match[1])
         for (const eventName of eventNames) {
           if (knownEvents.size === 0) continue
           if (

@@ -11,14 +11,14 @@ description: 工具栏布局，分 start / center / end 区域。
 ## 引入
 
 ```ts
-import { WiToolbar, WiButton } from '@well-insight/ui'
+import { WiButton, WiToolbar } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiToolbar, WiButton } from '@well-insight/ui'
+import { WiButton, WiToolbar } from '@well-insight/ui'
 </script>
 
 <template>

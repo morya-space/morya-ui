@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import ContextMenuNodes from './ContextMenuNodes.vue'
-import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
 
 const props = withDefaults(defineProps<ContextMenuProps>(), {
   modelValue: false,

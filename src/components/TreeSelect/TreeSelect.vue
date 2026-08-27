@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { TreeCheckedKeys } from '../Tree/types'
+import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
@@ -11,8 +13,6 @@ import {
   setCheckedCascade,
   syncAncestors,
 } from '../Tree/checkStrategy'
-import type { TreeCheckedKeys } from '../Tree/types'
-import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {

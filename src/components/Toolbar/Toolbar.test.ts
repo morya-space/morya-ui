@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiToolbar from './Toolbar.vue'
 
-describe('WiToolbar', () => {
+describe('wiToolbar', () => {
   it('renders start, center, and end slots', () => {
     const wrapper = mount(WiToolbar, {
       slots: {

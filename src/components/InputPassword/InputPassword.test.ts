@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
 import WiInputPassword from './InputPassword.vue'
 
-describe('WiInputPassword', () => {
+describe('wiInputPassword', () => {
   it('emits model updates and toggles mask', async () => {
     const wrapper = mount(WiInputPassword, { props: { label: 'Password', id: 'pwd' } })
     expect(wrapper.get('label').attributes('for')).toBe('pwd')

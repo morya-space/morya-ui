@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { isIconName } from '../Icon/icons'
-import WiIcon from '../Icon/Icon.vue'
 import type { IconName } from '../Icon/types'
 import type { ContextMenuItem } from './types'
+import { ref } from 'vue'
+import WiIcon from '../Icon/Icon.vue'
+import { isIconName } from '../Icon/icons'
 import ContextMenuNodes from './ContextMenuNodes.vue'
 
 const props = defineProps<{ items: ContextMenuItem[] }>()

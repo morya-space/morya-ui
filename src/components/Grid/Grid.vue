@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type {VNode} from 'vue';
+import type {GridProps} from './types';
 import {
-  Comment,
   cloneVNode,
+  Comment,
   computed,
   onBeforeUnmount,
   onMounted,
@@ -9,12 +11,12 @@ import {
   ref,
   toRef,
   useSlots,
-  watch,
-  type VNode,
+  
+  watch
 } from 'vue'
 import { parseResponsiveValue } from '../../shared/responsive'
 import { flattenVNodes } from '../../shared/vnode'
-import { WI_GRID_ITEM_FLAG, WI_GRID_KEY, type GridProps } from './types'
+import {  WI_GRID_ITEM_FLAG, WI_GRID_KEY } from './types'
 
 defineOptions({ name: 'WiGrid', inheritAttrs: false })
 

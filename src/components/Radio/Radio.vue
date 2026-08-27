@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import type {RadioProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { WI_RADIO_GROUP_KEY, type RadioProps } from './types'
+import {  WI_RADIO_GROUP_KEY } from './types'
 
 defineOptions({ inheritAttrs: false })
 
-const attrs = useAttrs()
 const props = withDefaults(defineProps<RadioProps>(), {
   invalid: false,
   disabled: false,
   required: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: string | number | boolean): void }>()
+const attrs = useAttrs()
 const group = inject(WI_RADIO_GROUP_KEY, null)
 const inputId = computed(() => props.id ?? `wi-radio-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = useConfiguredSize('Radio', () => props.size ?? group?.size.value)
@@ -54,7 +55,7 @@ function updateValue(event: Event) {
       :required="required"
       :aria-invalid="isInvalid || undefined"
       @change="updateValue"
-    />
+    >
     <span class="wi-radio__control" aria-hidden="true" />
     <span v-if="label || $slots.default" class="wi-radio__label"><slot>{{ label }}</slot></span>
   </label>

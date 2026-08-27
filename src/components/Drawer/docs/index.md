@@ -11,15 +11,15 @@ description: 侧边抽屉面板。
 ## 引入
 
 ```ts
-import { WiDrawer, WiButton } from '@well-insight/ui'
+import { WiButton, WiDrawer } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDrawer } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -28,7 +28,9 @@ const open = ref(false)
   <div>
     <WiButton label="Open Drawer" @click="open = true" />
     <WiDrawer v-model="open" header="Navigation">
-      <p style="margin:0">Drawer body content. Esc or mask click closes by default.</p>
+      <p style="margin:0">
+        Drawer body content. Esc or mask click closes by default.
+      </p>
     </WiDrawer>
   </div>
 </template>
@@ -40,8 +42,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDrawer } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 const position = ref<'left' | 'right' | 'top' | 'bottom'>('right')
@@ -59,7 +61,9 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
     <WiButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
     <WiButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
     <WiDrawer v-model="open" :header="`Position: ${position}`" :position="position">
-      <p style="margin:0">Use <code>dismissable</code> to control mask dismiss.</p>
+      <p style="margin:0">
+        Use <code>dismissable</code> to control mask dismiss.
+      </p>
     </WiDrawer>
   </div>
 </template>

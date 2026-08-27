@@ -18,8 +18,8 @@ import { WiCommandMenu } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiCommandMenu } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const visible = ref(false)
 const model = [

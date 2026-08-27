@@ -11,15 +11,15 @@ description: 模态对话框。支持预设页脚、异步关闭拦截、状态 
 ## 引入
 
 ```ts
-import { WiDialog, WiButton } from '@well-insight/ui'
+import { WiButton, WiDialog } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDialog } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -28,7 +28,9 @@ const open = ref(false)
   <div>
     <WiButton label="Open Dialog" @click="open = true" />
     <WiDialog v-model="open" header="Confirm" width="28rem">
-      <p style="margin:0">Use <code>header</code> or <code>title</code> for the dialog title.</p>
+      <p style="margin:0">
+        Use <code>header</code> or <code>title</code> for the dialog title.
+      </p>
     </WiDialog>
   </div>
 </template>
@@ -40,8 +42,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDialog } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 const position = ref<'center' | 'top' | 'topright' | 'bottomleft'>('center')
@@ -59,7 +61,9 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
     <WiButton label="Top Right" size="small" @click="openAt('topright')" />
     <WiButton label="Bottom Left" size="small" severity="secondary" @click="openAt('bottomleft')" />
     <WiDialog v-model="open" :header="`Position: ${position}`" :position="position">
-      <p style="margin:0">Dialog can dock to edges and corners.</p>
+      <p style="margin:0">
+        Dialog can dock to edges and corners.
+      </p>
     </WiDialog>
   </div>
 </template>
@@ -69,8 +73,8 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDialog } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -79,7 +83,9 @@ const open = ref(false)
   <div>
     <WiButton label="With Footer" @click="open = true" />
     <WiDialog v-model="open" header="Save changes" width="28rem">
-      <p style="margin:0">Footer slot is for primary and secondary actions.</p>
+      <p style="margin:0">
+        Footer slot is for primary and secondary actions.
+      </p>
       <template #footer>
         <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
           <WiButton label="Cancel" severity="secondary" text @click="open = false" />
@@ -97,8 +103,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDialog } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -107,7 +113,9 @@ const open = ref(false)
   <div>
     <WiButton label="No Mask Dismiss" severity="secondary" @click="open = true" />
     <WiDialog v-model="open" header="Stay open" :dismissable-mask="false">
-      <p style="margin:0">Click the mask — the dialog stays open. Use the close button or Esc.</p>
+      <p style="margin:0">
+        Click the mask — the dialog stays open. Use the close button or Esc.
+      </p>
     </WiDialog>
   </div>
 </template>
@@ -119,8 +127,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDialog } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -129,7 +137,9 @@ const open = ref(false)
   <div>
     <WiButton label="Maximizable" @click="open = true" />
     <WiDialog v-model="open" header="Workspace" maximizable width="32rem">
-      <p style="margin:0">Toggle maximize to fill the viewport.</p>
+      <p style="margin:0">
+        Toggle maximize to fill the viewport.
+      </p>
     </WiDialog>
   </div>
 </template>
@@ -141,8 +151,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDialog } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 
@@ -164,7 +174,9 @@ async function save() {
       :before-close="() => true"
       width="28rem"
     >
-      <p style="margin:0">关闭按钮、Esc、遮罩会走 <code>beforeClose</code>；保存走 <code>onPositiveClick</code>。</p>
+      <p style="margin:0">
+        关闭按钮、Esc、遮罩会走 <code>beforeClose</code>；保存走 <code>onPositiveClick</code>。
+      </p>
     </WiDialog>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { TieredMenuItem, TieredMenuProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { TieredMenuItem, TieredMenuProps } from './types'
 
 const props = withDefaults(defineProps<TieredMenuProps>(), {
   popup: false,

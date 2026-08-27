@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiLabel from './Label.vue'
 
-describe('WiLabel', () => {
+describe('wiLabel', () => {
   it('renders slot content and for attribute', () => {
     const wrapper = mount(WiLabel, {
       props: { htmlFor: 'email' },

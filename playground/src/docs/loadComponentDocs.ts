@@ -24,7 +24,7 @@ export interface DocumentedComponentMeta {
   description?: string
 }
 
-type DocModule = {
+interface DocModule {
   default: Component
   frontmatter?: ComponentDocFrontmatter
 }

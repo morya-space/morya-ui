@@ -64,7 +64,7 @@ pkg.sideEffects = [
   }),
 ]
 
-writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
+writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)  }\n`)
 
 const mapLines = Object.entries(componentImportMap)
   .sort(([a], [b]) => a.localeCompare(b))

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiDrawer from './Drawer.vue'
 
-describe('WiDrawer', () => {
+describe('wiDrawer', () => {
   it('opens with show event and closes with Escape', async () => {
     const wrapper = mount(WiDrawer, {
       attachTo: document.body,

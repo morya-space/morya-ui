@@ -1,4 +1,5 @@
-import { nextTick, onBeforeUnmount, watch, type Ref } from 'vue'
+import type {Ref} from 'vue';
+import { nextTick, onBeforeUnmount,  watch } from 'vue'
 import { useDocsI18n } from '../i18n'
 import { copyText } from '../utils/copyText'
 
@@ -51,7 +52,7 @@ function mountCopyButton(
     if (!ok) return
     setLabel(true)
     window.clearTimeout(resetTimer)
-    resetTimer = window.setTimeout(() => setLabel(false), 1600)
+    resetTimer = window.setTimeout(setLabel, 1600, false)
   }
 
   button.addEventListener('click', onClick)

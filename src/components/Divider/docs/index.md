@@ -25,9 +25,13 @@ import { WiDivider } from '@well-insight/ui'
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <p style="margin:0">Above</p>
+    <p style="margin:0">
+      Above
+    </p>
     <WiDivider />
-    <p style="margin:0">Below</p>
+    <p style="margin:0">
+      Below
+    </p>
   </div>
 </template>
 ```

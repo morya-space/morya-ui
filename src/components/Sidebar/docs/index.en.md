@@ -18,8 +18,8 @@ import { WiSidebar } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiSidebar } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiSidebar, WiButton } from '@well-insight/ui'
 
 const collapsed = ref(false)
 const model = [

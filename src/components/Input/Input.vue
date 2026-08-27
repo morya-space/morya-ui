@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
-import type { InputProps } from './types'
 
 defineOptions({ inheritAttrs: false })
-const attrs = useAttrs()
-const slots = useSlots()
 const props = withDefaults(defineProps<InputProps>(), {
   modelValue: '',
   type: 'text',
@@ -22,6 +20,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
 }>()
+const attrs = useAttrs()
+const slots = useSlots()
 const defaults = useComponentDefaults('Input')
 const locale = useWiLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
@@ -93,9 +93,9 @@ defineExpose({ focus })
         <slot name="prefix" />
       </span>
       <input
-        ref="inputElement"
         v-bind="attrs"
         :id="inputId"
+        ref="inputElement"
         :class="inputClass"
         :type="type"
         :value="modelValue"
@@ -105,7 +105,7 @@ defineExpose({ focus })
         :aria-invalid="isInvalid || undefined"
         :aria-describedby="describedBy"
         @input="updateValue"
-      />
+      >
       <span v-if="$slots.suffix" class="wi-input__suffix">
         <slot name="suffix" />
       </span>

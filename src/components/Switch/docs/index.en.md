@@ -18,8 +18,8 @@ import { WiSwitch } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSwitch } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const enabled = ref(false)
 </script>
@@ -35,8 +35,8 @@ const enabled = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSwitch } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const dark = ref(false)
 </script>
@@ -68,8 +68,8 @@ import { WiSwitch } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSwitch } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const on = ref(true)
 </script>

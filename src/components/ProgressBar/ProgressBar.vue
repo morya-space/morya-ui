@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { ProgressBarProps } from './types'
 import { computed } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
-import type { ProgressBarProps } from './types'
 
 const props = withDefaults(defineProps<ProgressBarProps>(), {
   value: 0,

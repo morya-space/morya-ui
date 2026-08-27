@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { PickListProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiIcon from '../Icon/Icon.vue'
-import type { PickListProps } from './types'
 
 const props = withDefaults(defineProps<PickListProps>(), {
   source: () => [],
@@ -70,7 +70,9 @@ function moveAllToSource() {
 <template>
   <div class="wi-picklist">
     <div class="wi-picklist__listbox">
-      <div class="wi-picklist__header">{{ sourceTitle }}</div>
+      <div class="wi-picklist__header">
+        {{ sourceTitle }}
+      </div>
       <ul class="wi-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in source"
@@ -84,7 +86,9 @@ function moveAllToSource() {
           @keydown.enter.prevent="toggleSelection('source', index)"
           @keydown.space.prevent="toggleSelection('source', index)"
         >
-          <slot name="item" :item="item" :index="index">{{ item }}</slot>
+          <slot name="item" :item="item" :index="index">
+            {{ item }}
+          </slot>
         </li>
       </ul>
     </div>
@@ -105,7 +109,9 @@ function moveAllToSource() {
       </button>
     </div>
     <div class="wi-picklist__listbox">
-      <div class="wi-picklist__header">{{ targetTitle }}</div>
+      <div class="wi-picklist__header">
+        {{ targetTitle }}
+      </div>
       <ul class="wi-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in target"
@@ -119,7 +125,9 @@ function moveAllToSource() {
           @keydown.enter.prevent="toggleSelection('target', index)"
           @keydown.space.prevent="toggleSelection('target', index)"
         >
-          <slot name="item" :item="item" :index="index">{{ item }}</slot>
+          <slot name="item" :item="item" :index="index">
+            {{ item }}
+          </slot>
         </li>
       </ul>
     </div>

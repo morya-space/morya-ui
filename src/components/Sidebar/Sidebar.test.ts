@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import WiSidebar from './Sidebar.vue'
 
-describe('WiSidebar', () => {
+describe('wiSidebar', () => {
   it('renders menu labels and runs command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiSidebar, {

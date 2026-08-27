@@ -11,7 +11,7 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 ## 引入
 
 ```ts
-import { WiIcon, iconNames } from '@well-insight/ui'
+import { iconNames, WiIcon } from '@well-insight/ui'
 ```
 
 ## Basic
@@ -37,8 +37,9 @@ import { WiIcon } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import type {ToastMessage} from '@well-insight/ui';
+import { iconNames,  WiIcon, WiInput, WiToast } from '@well-insight/ui'
 import { computed, ref } from 'vue'
-import { WiIcon, WiInput, WiToast, iconNames, type ToastMessage } from '@well-insight/ui'
 
 const query = ref('')
 const copied = ref<string | null>(null)
@@ -163,8 +164,8 @@ function onToastClose(message: ToastMessage) {
 
 ```vue
 <script setup lang="ts">
+import { WiButton, WiIcon, WiIconField, WiInput } from '@well-insight/ui'
 import { User } from 'lucide-vue-next'
-import { WiIcon, WiButton, WiIconField, WiInput } from '@well-insight/ui'
 </script>
 
 <template>
@@ -174,7 +175,9 @@ import { WiIcon, WiButton, WiIconField, WiInput } from '@well-insight/ui'
 
   <WiIconField>
     <template #icon>
-      <WiIcon size="sm"><User :size="14" :stroke-width="1.8" /></WiIcon>
+      <WiIcon size="sm">
+        <User :size="14" :stroke-width="1.8" />
+      </WiIcon>
     </template>
     <WiInput placeholder="搜索用户" />
   </WiIconField>

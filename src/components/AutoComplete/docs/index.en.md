@@ -18,8 +18,8 @@ import { WiAutoComplete } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiAutoComplete } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('')
 const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
@@ -34,8 +34,8 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiAutoComplete } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const a = ref('')
 const b = ref('')
@@ -58,8 +58,8 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiAutoComplete } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('')
 const suggestions = [

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import WiDock from './Dock.vue'
 
-describe('WiDock', () => {
+describe('wiDock', () => {
   it('renders dock icons and runs command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiDock, {

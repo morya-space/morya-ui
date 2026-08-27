@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
+import type { MenubarItem, MenubarProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import { isIconName } from '../Icon/icons'
 import WiIcon from '../Icon/Icon.vue'
-import type { IconName } from '../Icon/types'
-import type { MenubarItem, MenubarProps } from './types'
+import { isIconName } from '../Icon/icons'
 
 const props = withDefaults(defineProps<MenubarProps>(), {
   selectedKey: null,

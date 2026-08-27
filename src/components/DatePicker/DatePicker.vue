@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { formatLocale, useWiLocale } from '../../locale'
-import { useConfiguredSize, useWiConfig } from '../../shared/config'
-import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import type {
   DatePickerDateValue,
   DatePickerModel,
@@ -10,6 +6,10 @@ import type {
   DatePickerShortcut,
   DatePickerValue,
 } from './types'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { formatLocale, useWiLocale } from '../../locale'
+import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
@@ -327,7 +327,7 @@ onBeforeUnmount(() => {
         @click="toggle"
         @keydown.enter.prevent="toggle"
         @keydown.space.prevent="toggle"
-      />
+      >
       <button
         v-if="clearable && displayValue"
         type="button"
@@ -366,9 +366,13 @@ onBeforeUnmount(() => {
           </div>
           <div class="wi-datepicker__calendar">
             <div class="wi-datepicker__header">
-              <button type="button" class="wi-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">‹</button>
+              <button type="button" class="wi-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
+                ‹
+              </button>
               <span class="wi-datepicker__month">{{ monthLabel }}</span>
-              <button type="button" class="wi-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">›</button>
+              <button type="button" class="wi-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
+                ›
+              </button>
             </div>
             <div class="wi-datepicker__weekdays">
               <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>

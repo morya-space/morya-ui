@@ -7,7 +7,7 @@ declare module '*.vue' {
 }
 
 declare module '*.md' {
-  import type { Component, DefineComponent } from 'vue'
+  import type { DefineComponent } from 'vue'
 
   const component: DefineComponent<Record<string, unknown>, Record<string, unknown>, unknown>
   export default component

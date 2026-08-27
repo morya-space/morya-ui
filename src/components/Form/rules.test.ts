@@ -6,7 +6,7 @@ import {
   toCssSize,
 } from './rules'
 
-describe('Form rules helpers', () => {
+describe('form rules helpers', () => {
   it('treats null, blank strings, and empty arrays as empty', () => {
     expect(isEmptyValue(null)).toBe(true)
     expect(isEmptyValue('  ')).toBe(true)

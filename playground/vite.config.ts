@@ -1,8 +1,8 @@
 import { fileURLToPath, URL } from 'node:url'
-import { createHighlighter } from 'shiki'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { createHighlighter } from 'shiki'
 import Markdown from 'unplugin-vue-markdown/vite'
+import { defineConfig } from 'vite'
 import MarkdownPreview from 'vite-plugin-markdown-preview'
 
 const highlighter = await createHighlighter({

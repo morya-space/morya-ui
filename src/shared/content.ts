@@ -1,4 +1,5 @@
-import { h, isVNode, type Component, type VNode, type VNodeChild } from 'vue'
+import type {Component, VNode, VNodeChild} from 'vue';
+import {  h, isVNode   } from 'vue'
 
 /**
  * Content accepted by Message / Toast APIs:

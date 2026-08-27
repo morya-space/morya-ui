@@ -1,5 +1,5 @@
-import type { WiInputVariant, WiSizeInput } from '../../shared/types'
 import type { WiTextareaAutosize } from '../../shared/componentDefaults'
+import type { WiInputVariant, WiSizeInput } from '../../shared/types'
 
 export type { WiTextareaAutosize }
 

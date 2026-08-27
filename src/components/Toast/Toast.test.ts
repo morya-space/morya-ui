@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import WiToast from './Toast.vue'
+import { nextTick } from 'vue'
 import { resetToastService, toast, toastState } from './toast'
+import WiToast from './Toast.vue'
 
-describe('WiToast', () => {
+describe('wiToast', () => {
   afterEach(() => {
     vi.useRealTimers()
     resetToastService()

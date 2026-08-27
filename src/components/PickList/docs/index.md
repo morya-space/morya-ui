@@ -18,8 +18,8 @@ import { WiPickList } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiPickList } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const source = ref(['苹果', '香蕉', '樱桃', '葡萄'])
 const target = ref(['榴莲'])
@@ -39,8 +39,8 @@ const target = ref(['榴莲'])
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiPickList } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const source = ref([
   { id: 1, name: '设计' },

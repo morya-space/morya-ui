@@ -41,7 +41,9 @@ const locale = useWiLocale()
         <span v-else class="wi-treetable__toggler-spacer" />
         <span>{{ node.data[column.field] }}</span>
       </div>
-      <template v-else>{{ node.data[column.field] }}</template>
+      <template v-else>
+        {{ node.data[column.field] }}
+      </template>
     </td>
   </tr>
   <template v-if="node.children?.length && isExpanded(node.key)">

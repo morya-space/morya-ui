@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiSpace from './Space.vue'
 
-describe('WiSpace', () => {
+describe('wiSpace', () => {
   it('wraps children by default', () => {
     const wrapper = mount(WiSpace, {
       slots: { default: '<span class="a">A</span><span class="b">B</span>' },

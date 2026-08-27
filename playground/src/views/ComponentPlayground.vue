@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import type {DocumentedComponentMeta} from '../docs/loadComponentDocs';
+
+import { useDensity, useMotion, useTheme, WiCard, WiIcon, WiScrollbar  } from '@well-insight/ui'
 import { computed, nextTick, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
 import {
+  
   listDocumentedComponents,
-  resolveComponentDoc,
-  type DocumentedComponentMeta,
+  resolveComponentDoc
 } from '../docs/loadComponentDocs'
-import { useDensity, useMotion, useTheme } from '@well-insight/ui'
-import { WiCard, WiIcon, WiScrollbar } from '@well-insight/ui'
 import { useDocsI18n } from '../i18n'
 
 const OVERVIEW = '全部组件'
@@ -152,7 +153,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value))
           <div class="sidebar-body">
             <label class="search-box">
               <WiIcon name="search" size="sm" />
-              <input v-model="search" type="search" :placeholder="t.filterComponents" :aria-label="t.filterComponents" />
+              <input v-model="search" type="search" :placeholder="t.filterComponents" :aria-label="t.filterComponents">
             </label>
 
             <section class="theme-panel">
@@ -167,12 +168,18 @@ const overviewGroups = computed(() => groupByCategory(documented.value))
                 <span class="theme-panel__chevron" aria-hidden="true">{{ themeOpen ? '▾' : '▸' }}</span>
               </button>
               <div v-show="themeOpen" class="theme-panel__body" aria-labelledby="appearance-title">
-                <h2 id="appearance-title" class="sr-only">{{ t.themeSettings }}</h2>
+                <h2 id="appearance-title" class="sr-only">
+                  {{ t.themeSettings }}
+                </h2>
                 <div class="setting-group">
                   <span class="setting-label">{{ t.themeMode }}</span>
                   <div class="segmented-control">
-                    <button type="button" :class="{ 'is-selected': !isDark }" @click="setTheme('light')">{{ t.light }}</button>
-                    <button type="button" :class="{ 'is-selected': isDark }" @click="setTheme('dark')">{{ t.dark }}</button>
+                    <button type="button" :class="{ 'is-selected': !isDark }" @click="setTheme('light')">
+                      {{ t.light }}
+                    </button>
+                    <button type="button" :class="{ 'is-selected': isDark }" @click="setTheme('dark')">
+                      {{ t.dark }}
+                    </button>
                   </div>
                 </div>
                 <div class="setting-group">
@@ -261,7 +268,9 @@ const overviewGroups = computed(() => groupByCategory(documented.value))
                 </RouterLink>
               </section>
 
-              <p v-if="navGroups.length === 0" class="empty-search">{{ t.noComponent }}</p>
+              <p v-if="navGroups.length === 0" class="empty-search">
+                {{ t.noComponent }}
+              </p>
             </nav>
           </div>
         </WiScrollbar>
@@ -273,28 +282,42 @@ const overviewGroups = computed(() => groupByCategory(documented.value))
             <template v-if="selectedComponent === OVERVIEW">
               <section class="hero">
                 <div>
-                  <p class="eyebrow">COMPONENTS / OVERVIEW</p>
+                  <p class="eyebrow">
+                    COMPONENTS / OVERVIEW
+                  </p>
                   <h1>{{ t.labTitle }}</h1>
-                  <p class="hero-copy">{{ t.labCopy }}</p>
-                  <div class="doc-meta"><span>Vue 3</span><span>TypeScript</span><span>Live Preview</span></div>
+                  <p class="hero-copy">
+                    {{ t.labCopy }}
+                  </p>
+                  <div class="doc-meta">
+                    <span>Vue 3</span><span>TypeScript</span><span>Live Preview</span>
+                  </div>
                 </div>
-                <div class="hero-glyph" aria-hidden="true"><span>W</span></div>
+                <div class="hero-glyph" aria-hidden="true">
+                  <span>W</span>
+                </div>
               </section>
 
               <template v-for="group in overviewGroups" :key="group.label">
                 <div class="section-heading">
                   <div>
-                    <p class="eyebrow">{{ String(group.order).padStart(2, '0') }} / {{ group.label }}</p>
+                    <p class="eyebrow">
+                      {{ String(group.order).padStart(2, '0') }} / {{ group.label }}
+                    </p>
                     <h2>{{ group.title }}</h2>
                   </div>
                   <span class="section-rule" />
                 </div>
                 <section class="demo-grid overview-section" :aria-label="interpolate(t.groupAria, { title: group.title })">
                   <WiCard v-for="item in group.items" :key="item.name" class="overview-card">
-                    <div class="overview-card__number">{{ group.label.slice(0, 2) }}</div>
+                    <div class="overview-card__number">
+                      {{ group.label.slice(0, 2) }}
+                    </div>
                     <h2>{{ item.name }}</h2>
                     <p>{{ item.description ?? t.defaultDoc }}</p>
-                    <RouterLink class="text-link" :to="componentRoute(item.name)">{{ t.viewDetails }} <span>→</span></RouterLink>
+                    <RouterLink class="text-link" :to="componentRoute(item.name)">
+                      {{ t.viewDetails }} <span>→</span>
+                    </RouterLink>
                   </WiCard>
                 </section>
               </template>
@@ -305,7 +328,9 @@ const overviewGroups = computed(() => groupByCategory(documented.value))
             <section v-else class="missing-doc">
               <h2>{{ selectedComponent }}</h2>
               <p>{{ t.missingDoc }}</p>
-              <RouterLink class="text-link" :to="{ name: 'components' }">{{ t.backAll }} <span>→</span></RouterLink>
+              <RouterLink class="text-link" :to="{ name: 'components' }">
+                {{ t.backAll }} <span>→</span>
+              </RouterLink>
             </section>
           </div>
         </WiScrollbar>
@@ -314,12 +339,34 @@ const overviewGroups = computed(() => groupByCategory(documented.value))
       <aside class="token-panel" :aria-label="t.tokens">
         <WiScrollbar class="column-scroll">
           <div class="token-panel-body">
-            <div class="token-heading"><span class="kicker">TOKENS</span><span class="token-index">/ 04</span></div>
-            <p class="token-description">{{ t.tokenDesc }}</p>
-            <div class="token-group"><h3>Color</h3><div class="swatch-row"><span class="swatch swatch--primary" /><span>primary</span><code>brand</code></div><div class="swatch-row"><span class="swatch swatch--surface" /><span>surface</span><code>canvas</code></div><div class="swatch-row"><span class="swatch swatch--border" /><span>border</span><code>line</code></div></div>
-            <div class="token-group"><h3>Radius</h3><div class="radius-row"><span class="radius-sample radius-sample--sm" /><span>sm</span><span class="radius-sample radius-sample--md" /><span>md</span><span class="radius-sample radius-sample--lg" /><span>lg</span></div></div>
-            <div class="token-group"><h3>Spacing</h3><div class="spacing-bars"><span style="--bar: 25%">1</span><span style="--bar: 50%">2</span><span style="--bar: 75%">3</span><span style="--bar: 100%">4</span></div></div>
-            <div class="token-note"><WiIcon name="info" size="sm" /><span>{{ t.tokenNote }}</span></div>
+            <div class="token-heading">
+              <span class="kicker">TOKENS</span><span class="token-index">/ 04</span>
+            </div>
+            <p class="token-description">
+              {{ t.tokenDesc }}
+            </p>
+            <div class="token-group">
+              <h3>Color</h3><div class="swatch-row">
+                <span class="swatch swatch--primary" /><span>primary</span><code>brand</code>
+              </div><div class="swatch-row">
+                <span class="swatch swatch--surface" /><span>surface</span><code>canvas</code>
+              </div><div class="swatch-row">
+                <span class="swatch swatch--border" /><span>border</span><code>line</code>
+              </div>
+            </div>
+            <div class="token-group">
+              <h3>Radius</h3><div class="radius-row">
+                <span class="radius-sample radius-sample--sm" /><span>sm</span><span class="radius-sample radius-sample--md" /><span>md</span><span class="radius-sample radius-sample--lg" /><span>lg</span>
+              </div>
+            </div>
+            <div class="token-group">
+              <h3>Spacing</h3><div class="spacing-bars">
+                <span style="--bar: 25%">1</span><span style="--bar: 50%">2</span><span style="--bar: 75%">3</span><span style="--bar: 100%">4</span>
+              </div>
+            </div>
+            <div class="token-note">
+              <WiIcon name="info" size="sm" /><span>{{ t.tokenNote }}</span>
+            </div>
           </div>
         </WiScrollbar>
       </aside>

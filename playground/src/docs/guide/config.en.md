@@ -26,8 +26,8 @@ Priority: **component props > `WiConfigProvider` > `createWellInsight` > built-i
 Built-in copy defaults to Chinese. Pass `enUS` to switch to English:
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight, enUS, zhCN } from '@well-insight/ui'
+import { createApp } from 'vue'
 
 createApp(App).use(createWellInsight({ locale: enUS })).mount('#app')
 ```
@@ -51,8 +51,8 @@ Controls without a local `size` inherit from ConfigProvider.
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -64,7 +64,9 @@ const options = [
 <template>
   <div style="display:grid;gap:1rem">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">Default size</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">
+        Default size
+      </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
         <WiButton label="Button" />
         <WiInput placeholder="Input" style="width:10rem" />
@@ -72,7 +74,9 @@ const options = [
       </div>
     </div>
     <WiConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">Config size="small"</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">
+        Config size="small"
+      </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
         <WiButton label="Button" />
         <WiInput placeholder="Input" style="width:10rem" />
@@ -87,8 +91,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 </script>
@@ -125,14 +129,18 @@ import { WiConfigProvider, WiInput, WiTextarea } from '@well-insight/ui'
 <template>
   <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
     <WiConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">outlined</p>
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">
+        outlined
+      </p>
       <div style="display:grid;gap:0.5rem">
         <WiInput placeholder="Outlined input" />
         <WiTextarea placeholder="Outlined textarea" :rows="2" />
       </div>
     </WiConfigProvider>
     <WiConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">filled</p>
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">
+        filled
+      </p>
       <div style="display:grid;gap:0.5rem">
         <WiInput placeholder="Filled input" />
         <WiTextarea placeholder="Filled textarea" :rows="2" />
@@ -146,8 +154,8 @@ import { WiConfigProvider, WiInput, WiTextarea } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiConfirmDialog, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiSelect, WiButton, WiConfirmDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const confirmOpen = ref(false)
@@ -178,8 +186,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiDialog } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiDialog } from '@well-insight/ui'
 
 const visible = ref(false)
 </script>
@@ -188,7 +196,9 @@ const visible = ref(false)
   <WiConfigProvider append-to="body" :z-index="2200">
     <WiButton label="Open dialog" @click="visible = true" />
     <WiDialog v-model="visible" header="Mounted to body" width="24rem">
-      <p style="margin:0">Overlays Teleport to body by default. The z-index base comes from ConfigProvider.</p>
+      <p style="margin:0">
+        Overlays Teleport to body by default. The z-index base comes from ConfigProvider.
+      </p>
     </WiDialog>
   </WiConfigProvider>
 </template>
@@ -197,8 +207,8 @@ const visible = ref(false)
 ## App-level: `createWellInsight`
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight } from '@well-insight/ui'
+import { createApp } from 'vue'
 
 createApp(App).use(
     createWellInsight({

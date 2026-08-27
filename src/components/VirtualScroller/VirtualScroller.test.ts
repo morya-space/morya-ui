@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiVirtualScroller from './VirtualScroller.vue'
 
-describe('WiVirtualScroller', () => {
+describe('wiVirtualScroller', () => {
   it('renders a window of items', () => {
     const items = Array.from({ length: 100 }, (_, i) => `Item ${i}`)
     const wrapper = mount(WiVirtualScroller, {

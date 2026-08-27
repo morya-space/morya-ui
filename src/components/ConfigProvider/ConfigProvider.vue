@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import type {WiGlobalConfig} from '../../shared/config';
 import { computed, inject, toValue, watchEffect } from 'vue'
-import { applyDensity } from '../../theme'
 import {
   mergeWiConfig,
   provideWiConfig,
-  WI_CONFIG_KEY,
-  type WiGlobalConfig,
+  WI_CONFIG_KEY
+  
 } from '../../shared/config'
+import { applyDensity } from '../../theme'
 
 const props = defineProps<{
   /** Global defaults for descendant Well Insight components. */

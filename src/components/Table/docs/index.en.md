@@ -61,8 +61,8 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const columns = [
   { key: 'name', label: 'Name', minWidth: 120 },
@@ -101,8 +101,8 @@ const selection = ref([])
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const columns = [
   { key: 'name', label: 'Name', filterable: true, sortable: true, minWidth: 120 },
@@ -185,8 +185,8 @@ Use column `render` for custom cells. `expandable` rows are rendered by the `exp
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const expandedRowKeys = ref<Array<string | number>>([])
 const columns = [
@@ -218,8 +218,8 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const loading = ref(false)
 const columns = [

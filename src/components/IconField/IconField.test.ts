@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiIconField from './IconField.vue'
 
-describe('WiIconField', () => {
+describe('wiIconField', () => {
   it('defaults to left icon position', () => {
     const wrapper = mount(WiIconField, {
       slots: {

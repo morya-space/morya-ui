@@ -18,8 +18,8 @@ import { WiInplace } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiInplace, WiInput } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiInplace, WiInput, WiButton } from '@well-insight/ui'
 
 const active = ref(false)
 const text = ref('点击编辑')
@@ -27,7 +27,9 @@ const text = ref('点击编辑')
 
 <template>
   <WiInplace v-model="active">
-    <template #display>{{ text }}</template>
+    <template #display>
+      {{ text }}
+    </template>
     <template #content="{ close }">
       <div style="display:flex;gap:8px">
         <WiInput v-model="text" />

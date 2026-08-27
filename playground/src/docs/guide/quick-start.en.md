@@ -38,8 +38,8 @@ The library supports **full** and **on-demand** usage. Pick one per app (stay co
 Import the **full stylesheet** and register all components once:
 
 ```ts
-import { createApp } from 'vue'
 import WellInsight from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
@@ -62,8 +62,8 @@ createApp(App).mount('#app')
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const name = ref('')
 </script>
@@ -99,8 +99,8 @@ import '@well-insight/ui/button/style.css'
 With `unplugin-vue-components`, add the resolver so templates can use `<WiButton>` without manual imports:
 
 ```ts
-import Components from 'unplugin-vue-components/vite'
 import { WellInsightResolver } from '@well-insight/ui/resolver'
+import Components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
   plugins: [
@@ -117,8 +117,8 @@ In on-demand mode, `createWellInsight({ components: false })` still applies glob
 `createWellInsight` applies global defaults and registers all components by default:
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight } from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 

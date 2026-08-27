@@ -1,5 +1,5 @@
-import type { IconName } from '../Icon/types'
 import type { WiToastSeverity } from '../../shared/types'
+import type { IconName } from '../Icon/types'
 
 export type TimelineAlign = 'left' | 'right' | 'alternate'
 export type TimelineLayout = 'vertical' | 'horizontal'

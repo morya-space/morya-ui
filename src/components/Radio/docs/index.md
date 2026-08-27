@@ -18,8 +18,8 @@ import { WiRadio } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiRadio } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const size = ref('md')
 </script>
@@ -37,8 +37,8 @@ const size = ref('md')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiRadio } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const plan = ref('')
 </script>
@@ -70,8 +70,8 @@ import { WiRadio } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiRadio, WiRadioGroup } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const size = ref('md')
 </script>

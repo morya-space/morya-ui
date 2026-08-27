@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
 import { describe, expect, it } from 'vitest'
+import { h } from 'vue'
 import WiDataView from './DataView.vue'
 
-describe('WiDataView', () => {
+describe('wiDataView', () => {
   it('renders list layout by default', () => {
     const wrapper = mount(WiDataView, { props: { value: ['A', 'B', 'C'] } })
     expect(wrapper.classes()).toContain('wi-dataview--list')

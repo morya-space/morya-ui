@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { isIconName } from '../Icon/icons'
-import WiIcon from '../Icon/Icon.vue'
 import type { IconName } from '../Icon/types'
 import type { MenuItem } from './types'
+import { computed, ref } from 'vue'
+import WiIcon from '../Icon/Icon.vue'
+import { isIconName } from '../Icon/icons'
 import MenuNodes from './MenuNodes.vue'
 
 const props = defineProps<{

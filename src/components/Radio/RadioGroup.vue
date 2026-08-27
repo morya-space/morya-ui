@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type {RadioGroupProps, RadioValue} from './types';
 import { computed, provide } from 'vue'
-import { WI_RADIO_GROUP_KEY, type RadioGroupProps, type RadioValue } from './types'
+import {   WI_RADIO_GROUP_KEY } from './types'
 
 const props = withDefaults(defineProps<RadioGroupProps>(), {
   disabled: false,

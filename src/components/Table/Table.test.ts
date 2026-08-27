@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
 import WiTable from './Table.vue'
 
-describe('WiTable', () => {
+describe('wiTable', () => {
   it('renders headers, row values, and a named cell slot', () => {
     const wrapper = mount(WiTable, {
       props: { columns: [{ key: 'name', label: 'Name' }, { key: 'status', label: 'Status' }], rows: [{ id: 1, name: 'Landing page', status: 'Draft' }] },

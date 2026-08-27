@@ -11,15 +11,15 @@ Place an icon to the left or right of an input control.
 ## Import
 
 ```ts
-import { WiIconField, WiInput, WiIcon } from '@well-insight/ui'
+import { WiIcon, WiIconField, WiInput } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
+import { WiIcon, WiIconField, WiInput } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiIconField, WiInput, WiIcon } from '@well-insight/ui'
 
 const value = ref('')
 </script>
@@ -27,11 +27,15 @@ const value = ref('')
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
     <WiIconField>
-      <template #icon><WiIcon name="info" size="sm" /></template>
+      <template #icon>
+        <WiIcon name="info" size="sm" />
+      </template>
       <WiInput v-model="value" placeholder="Search" fluid />
     </WiIconField>
     <WiIconField icon-position="right">
-      <template #icon><WiIcon name="check" size="sm" /></template>
+      <template #icon>
+        <WiIcon name="check" size="sm" />
+      </template>
       <WiInput v-model="value" placeholder="Verified" fluid />
     </WiIconField>
   </div>

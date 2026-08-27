@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { TabItem, TabsProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { TabItem, TabsProps } from './types'
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',

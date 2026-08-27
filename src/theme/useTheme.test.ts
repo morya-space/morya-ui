@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import { nextTick, defineComponent } from 'vue'
 import { mount } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { defineComponent, nextTick } from 'vue'
 import { useTheme } from './useTheme'
 
 describe('useTheme', () => {

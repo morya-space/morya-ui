@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Comment, Fragment, Text, computed, useSlots, type VNode, type VNodeChild } from 'vue'
+import type {VNode, VNodeChild} from 'vue';
 import type { AvatarGroupProps, AvatarSize } from './types'
+import { Comment, computed, Fragment, Text, useSlots   } from 'vue'
 
 const props = defineProps<AvatarGroupProps>()
 const slots = useSlots()

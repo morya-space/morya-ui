@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { OrderListProps } from './types'
 import { ref } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiIcon from '../Icon/Icon.vue'
-import type { OrderListProps } from './types'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
   modelValue: () => [],

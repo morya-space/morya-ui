@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue'
 import type { LabelProps } from './types'
+import { computed, useAttrs } from 'vue'
 
 defineOptions({ inheritAttrs: false })
 

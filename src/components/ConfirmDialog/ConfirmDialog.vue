@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
+import type { ConfirmDialogProps } from './types'
 import { computed, ref, toRef, watch } from 'vue'
-import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiLocale } from '../../locale'
+import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import WiButton from '../Button/Button.vue'
 import WiIcon from '../Icon/Icon.vue'
-import type { IconName } from '../Icon/types'
-import type { ConfirmDialogProps } from './types'
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   modelValue: false,
@@ -113,47 +113,47 @@ useModalOverlay({
         :style="zoomStyle"
       >
         <div class="wi-dialog-zoom" @click.self="reject">
-        <section
-          ref="dialogElement"
-          class="wi-dialog wi-confirmdialog"
-          :class="{ [`wi-dialog--${resolvedType}`]: resolvedType }"
-          role="alertdialog"
-          aria-modal="true"
-          :aria-label="title"
-          tabindex="-1"
-        >
-          <header class="wi-dialog__header wi-confirmdialog__header">
-            <slot name="header">
-              <h2>{{ title }}</h2>
-            </slot>
-          </header>
-          <div class="wi-dialog__body wi-confirmdialog__message">
-            <span v-if="typeIcon" class="wi-dialog__type-icon" aria-hidden="true">
-              <WiIcon :name="typeIcon" size="sm" />
-            </span>
-            <div class="wi-confirmdialog__copy">
-              <slot>{{ message }}</slot>
+          <section
+            ref="dialogElement"
+            class="wi-dialog wi-confirmdialog"
+            :class="{ [`wi-dialog--${resolvedType}`]: resolvedType }"
+            role="alertdialog"
+            aria-modal="true"
+            :aria-label="title"
+            tabindex="-1"
+          >
+            <header class="wi-dialog__header wi-confirmdialog__header">
+              <slot name="header">
+                <h2>{{ title }}</h2>
+              </slot>
+            </header>
+            <div class="wi-dialog__body wi-confirmdialog__message">
+              <span v-if="typeIcon" class="wi-dialog__type-icon" aria-hidden="true">
+                <WiIcon :name="typeIcon" size="sm" />
+              </span>
+              <div class="wi-confirmdialog__copy">
+                <slot>{{ message }}</slot>
+              </div>
             </div>
-          </div>
-          <footer class="wi-dialog__footer wi-confirmdialog__footer">
-            <slot name="footer">
-              <WiButton
-                :label="rejectText"
-                severity="secondary"
-                :disabled="busy"
-                :loading="pending === 'reject'"
-                @click="reject"
-              />
-              <WiButton
-                :label="acceptText"
-                :severity="acceptSeverity"
-                :disabled="busy && pending !== 'accept'"
-                :loading="loading || pending === 'accept'"
-                @click="accept"
-              />
-            </slot>
-          </footer>
-        </section>
+            <footer class="wi-dialog__footer wi-confirmdialog__footer">
+              <slot name="footer">
+                <WiButton
+                  :label="rejectText"
+                  severity="secondary"
+                  :disabled="busy"
+                  :loading="pending === 'reject'"
+                  @click="reject"
+                />
+                <WiButton
+                  :label="acceptText"
+                  :severity="acceptSeverity"
+                  :disabled="busy && pending !== 'accept'"
+                  :loading="loading || pending === 'accept'"
+                  @click="accept"
+                />
+              </slot>
+            </footer>
+          </section>
         </div>
       </div>
     </Transition>

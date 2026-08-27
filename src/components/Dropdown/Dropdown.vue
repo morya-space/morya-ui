@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { DropdownItem, DropdownProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { DropdownItem, DropdownProps } from './types'
 import DropdownNodes from './DropdownNodes.vue'
 
 const props = withDefaults(defineProps<DropdownProps>(), {
@@ -95,13 +95,13 @@ function clearHoverTimers() {
 function onTriggerEnter() {
   if (props.trigger !== 'hover') return
   clearHoverTimers()
-  showTimer = setTimeout(() => setOpen(true), props.showDelay)
+  showTimer = setTimeout(setOpen, props.showDelay, true)
 }
 
 function onTriggerLeave() {
   if (props.trigger !== 'hover') return
   clearHoverTimers()
-  hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+  hideTimer = setTimeout(setOpen, props.hideDelay, false)
 }
 
 function onMenuEnter() {
@@ -112,7 +112,7 @@ function onMenuEnter() {
 function onMenuLeave() {
   if (props.trigger !== 'hover') return
   clearHoverTimers()
-  hideTimer = setTimeout(() => setOpen(false), props.hideDelay)
+  hideTimer = setTimeout(setOpen, props.hideDelay, false)
 }
 
 function onKeydown(event: KeyboardEvent) {

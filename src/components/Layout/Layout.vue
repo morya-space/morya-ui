@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, provide, useTemplateRef, type CSSProperties, type StyleValue } from 'vue'
-import WiScrollbar from '../Scrollbar/Scrollbar.vue'
+import type {CSSProperties, StyleValue} from 'vue';
 import type { ScrollbarInstance } from '../Scrollbar/types'
-import { WI_LAYOUT_KEY } from './context'
 import type { LayoutExpose, LayoutProps } from './types'
+import { computed,  provide,  useTemplateRef } from 'vue'
+import WiScrollbar from '../Scrollbar/Scrollbar.vue'
+import { WI_LAYOUT_KEY } from './context'
 
 defineOptions({ name: 'WiLayout' })
 

@@ -1,15 +1,15 @@
+import type { DropdownItem } from './types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiDropdown from './Dropdown.vue'
-import type { DropdownItem } from './types'
 
 const items: DropdownItem[] = [
   { value: 'edit', label: '编辑' },
   { value: 'delete', label: '删除' },
 ]
 
-describe('WiDropdown', () => {
+describe('wiDropdown', () => {
   it('opens, selects an item, and closes (teleports to body by default)', async () => {
     const wrapper = mount(WiDropdown, { props: { items } })
 

@@ -18,8 +18,8 @@ import { WiMenubar } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiMenubar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const selectedKey = ref<string | null>(null)
 const model = [

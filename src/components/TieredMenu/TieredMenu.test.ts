@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiTieredMenu from './TieredMenu.vue'
 
-describe('WiTieredMenu', () => {
+describe('wiTieredMenu', () => {
   it('opens submenu on hover and runs nested command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiTieredMenu, {

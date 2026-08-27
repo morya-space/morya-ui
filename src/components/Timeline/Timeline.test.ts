@@ -7,7 +7,7 @@ const value = [
   { status: 'Shipped', content: 'On the way', date: '16/10', color: '#22c55e' },
 ]
 
-describe('WiTimeline', () => {
+describe('wiTimeline', () => {
   it('renders events and alternate alignment', () => {
     const wrapper = mount(WiTimeline, { props: { value, align: 'alternate' } })
     expect(wrapper.classes()).toContain('wi-timeline--alternate')

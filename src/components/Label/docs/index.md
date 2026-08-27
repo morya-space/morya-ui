@@ -18,12 +18,14 @@ import { WiLabel } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiLabel, WiInput } from '@well-insight/ui'
+import { WiInput, WiLabel } from '@well-insight/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WiLabel html-for="demo-email">邮箱</WiLabel>
+    <WiLabel html-for="demo-email">
+      邮箱
+    </WiLabel>
     <WiInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>

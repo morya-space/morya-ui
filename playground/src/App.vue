@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
 import { WiConfigProvider } from '@well-insight/ui'
+import { RouterView } from 'vue-router'
 import SiteHeader from './components/SiteHeader.vue'
 import { useDocsI18n } from './i18n'
 
@@ -10,15 +10,15 @@ const { componentLocale } = useDocsI18n()
 <template>
   <WiConfigProvider class="site-config" :locale="componentLocale" :global-density="false">
     <div class="site-shell">
-    <div class="site-atmosphere" aria-hidden="true">
-      <div class="site-atmosphere__glow site-atmosphere__glow--a" />
-      <div class="site-atmosphere__glow site-atmosphere__glow--b" />
-      <div class="site-atmosphere__grid" />
-    </div>
-    <SiteHeader />
-    <div class="site-shell__body">
-      <RouterView />
-    </div>
+      <div class="site-atmosphere" aria-hidden="true">
+        <div class="site-atmosphere__glow site-atmosphere__glow--a" />
+        <div class="site-atmosphere__glow site-atmosphere__glow--b" />
+        <div class="site-atmosphere__grid" />
+      </div>
+      <SiteHeader />
+      <div class="site-shell__body">
+        <RouterView />
+      </div>
     </div>
   </WiConfigProvider>
 </template>

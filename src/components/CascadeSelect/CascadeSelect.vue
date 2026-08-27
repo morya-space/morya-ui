@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
