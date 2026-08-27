@@ -1,5 +1,6 @@
 /* —— Panel: Layout —— */
 .wi-layout {
+    --wi-layout-height: 100%;
     background: var(--wi-color-surface);
     box-sizing: border-box;
     color: var(--wi-color-text);
@@ -8,14 +9,19 @@
     min-width: 0;
     overflow: hidden;
     position: relative;
-    transition: background-color var(--wi-motion-normal) var(--wi-motion-ease),
+    transition:
+        background-color var(--wi-motion-normal) var(--wi-motion-ease),
         color var(--wi-motion-normal) var(--wi-motion-ease);
     width: 100%;
     z-index: auto;
 }
 
 .wi-layout--embedded {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 6%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 6%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-layout--absolute-positioned {
@@ -66,6 +72,8 @@
 }
 
 .wi-layout-content {
+    --wi-layout-padding: 0;
+    --wi-layout-radius: 0;
     flex: 1 1 auto;
     min-height: 0;
     min-width: 0;
@@ -82,18 +90,31 @@
     box-sizing: border-box;
     color: var(--wi-color-text);
     flex: 0 0 auto;
-    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease),
+    transition:
+        background-color var(--wi-motion-fast) var(--wi-motion-ease),
         color var(--wi-motion-fast) var(--wi-motion-ease),
         border-color var(--wi-motion-fast) var(--wi-motion-ease);
     width: 100%;
 }
 
+.wi-layout-header {
+    --wi-layout-header-height: 56px;
+    --wi-layout-padding: 0;
+    --wi-layout-radius: 0;
+}
+
+.wi-layout-footer {
+    --wi-layout-footer-height: 48px;
+    --wi-layout-padding: 0;
+    --wi-layout-radius: 0;
+}
+
 .wi-layout-header--bordered {
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-layout-footer--bordered {
-    border-top: 1px solid var(--wi-color-border);
+    border-top: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-layout-header--inverted,
@@ -104,11 +125,19 @@
 }
 
 .wi-layout-header--inverted.wi-layout-header--bordered {
-    border-bottom-color: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+    border-bottom-color: color-mix(
+        in srgb,
+        var(--wi-color-contrast-fg) 18%,
+        transparent
+    );
 }
 
 .wi-layout-footer--inverted.wi-layout-footer--bordered {
-    border-top-color: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+    border-top-color: color-mix(
+        in srgb,
+        var(--wi-color-contrast-fg) 18%,
+        transparent
+    );
 }
 
 .wi-layout-header--absolute-positioned,
@@ -129,6 +158,11 @@
 }
 
 .wi-layout-sider {
+    --wi-layout-sider-width: 272px;
+    --wi-layout-sider-collapsed-width: 48px;
+    --wi-layout-padding: 0;
+    --wi-layout-radius: 0;
+    --wi-layout-trigger-size: 1.5rem;
     background: var(--wi-color-surface);
     box-sizing: border-box;
     color: var(--wi-color-text);
@@ -139,7 +173,8 @@
        Collapsed transform overflow is clipped by `.wi-layout { overflow: hidden }`. */
     overflow: visible;
     position: relative;
-    transition: color var(--wi-motion-normal) var(--wi-motion-ease),
+    transition:
+        color var(--wi-motion-normal) var(--wi-motion-ease),
         border-color var(--wi-motion-normal) var(--wi-motion-ease),
         max-width var(--wi-motion-normal) var(--wi-motion-ease),
         background-color var(--wi-motion-normal) var(--wi-motion-ease);
@@ -203,7 +238,7 @@
     position: absolute;
     top: 0;
     transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
-    width: 1px;
+    width: var(--wi-border-width);
 }
 
 .wi-layout-sider--left-placement > .wi-layout-sider__border,
@@ -217,7 +252,11 @@
 }
 
 .wi-layout-sider--inverted > .wi-layout-sider__border {
-    background: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+    background: color-mix(
+        in srgb,
+        var(--wi-color-contrast-fg) 18%,
+        transparent
+    );
 }
 
 .wi-layout-sider__trigger {
@@ -239,17 +278,17 @@
 .wi-layout-sider__trigger--arrow-circle {
     align-items: center;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: 50%;
     box-shadow: var(--wi-shadow-sm);
     display: inline-flex;
     font-size: 1rem;
-    height: 1.5rem;
+    height: var(--wi-layout-trigger-size);
     justify-content: center;
     right: 0;
     top: 50%;
     transform: translate(50%, -50%);
-    width: 1.5rem;
+    width: var(--wi-layout-trigger-size);
 }
 
 .wi-layout-sider--right-placement > .wi-layout-sider__trigger--arrow-circle {
@@ -265,11 +304,15 @@
     transition: transform var(--wi-motion-normal) var(--wi-motion-ease);
 }
 
-.wi-layout-sider--collapsed > .wi-layout-sider__trigger--arrow-circle .wi-layout-sider__arrow {
+.wi-layout-sider--collapsed
+    > .wi-layout-sider__trigger--arrow-circle
+    .wi-layout-sider__arrow {
     transform: rotate(0deg);
 }
 
-.wi-layout-sider--right-placement > .wi-layout-sider__trigger--arrow-circle .wi-layout-sider__arrow {
+.wi-layout-sider--right-placement
+    > .wi-layout-sider__trigger--arrow-circle
+    .wi-layout-sider__arrow {
     transform: rotate(0deg);
 }
 
@@ -281,7 +324,11 @@
 
 .wi-layout-sider--inverted > .wi-layout-sider__trigger--arrow-circle {
     background: var(--wi-color-contrast);
-    border-color: color-mix(in srgb, var(--wi-color-contrast-fg) 18%, transparent);
+    border-color: color-mix(
+        in srgb,
+        var(--wi-color-contrast-fg) 18%,
+        transparent
+    );
     color: var(--wi-color-contrast-fg);
 }
 
@@ -312,7 +359,8 @@
     height: 2.375rem;
     left: 0.875rem;
     position: absolute;
-    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease),
+    transition:
+        background-color var(--wi-motion-fast) var(--wi-motion-ease),
         transform var(--wi-motion-fast) var(--wi-motion-ease);
     width: 4px;
 }
@@ -333,11 +381,15 @@
     transform: rotate(-12deg) scale(1.15) translateY(2px);
 }
 
-.wi-layout-sider--collapsed > .wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-top {
+.wi-layout-sider--collapsed
+    > .wi-layout-sider__trigger--bar:hover
+    .wi-layout-sider__bar-top {
     transform: rotate(-12deg) scale(1.15) translateY(-2px);
 }
 
-.wi-layout-sider--collapsed > .wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-bottom {
+.wi-layout-sider--collapsed
+    > .wi-layout-sider__trigger--bar:hover
+    .wi-layout-sider__bar-bottom {
     transform: rotate(12deg) scale(1.15) translateY(2px);
 }
 

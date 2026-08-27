@@ -1,5 +1,6 @@
 /* —— Menu: Menu —— */
 .wi-menu {
+    --wi-menu-min-width: 10rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
@@ -34,7 +35,11 @@
 }
 
 .wi-menu__item:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-menu__item:disabled {

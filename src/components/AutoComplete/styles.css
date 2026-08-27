@@ -1,8 +1,11 @@
 /* —— Form: AutoComplete —— */
 .wi-autocomplete {
+    --wi-autocomplete-min-width: 14rem;
+    --wi-autocomplete-dropdown-max-height: 14rem;
+    --wi-autocomplete-spinner-size: 0.85rem;
     display: inline-block;
     position: relative;
-    min-width: 14rem;
+    min-width: var(--wi-autocomplete-min-width);
 }
 
 .wi-autocomplete--disabled {
@@ -13,7 +16,7 @@
 .wi-autocomplete__control {
     align-items: stretch;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     display: flex;
 }
@@ -87,13 +90,13 @@
 
 .wi-autocomplete__panel {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     left: 0;
     list-style: none;
     margin: var(--wi-space-1) 0 0;
-    max-height: 14rem;
+    max-height: var(--wi-autocomplete-dropdown-max-height);
     overflow: auto;
     padding: var(--wi-space-1);
     position: absolute;
@@ -116,16 +119,21 @@
 
 .wi-autocomplete__item--active,
 .wi-autocomplete__item:hover {
-    background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 12%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-autocomplete__spinner {
     animation: wi-progress-spinner-rotate 0.8s linear infinite;
-    border: 2px solid color-mix(in srgb, var(--wi-color-primary) 30%, transparent);
-    border-radius: 50%;
+    border: 2px solid
+        color-mix(in srgb, var(--wi-color-primary) 30%, transparent);
+    border-radius: var(--wi-radius-full);
     border-top-color: var(--wi-color-primary);
-    height: 0.85rem;
-    width: 0.85rem;
+    height: var(--wi-autocomplete-spinner-size);
+    width: var(--wi-autocomplete-spinner-size);
 }
 
 .wi-autocomplete__status {

@@ -25,7 +25,8 @@
     justify-content: inherit;
     padding: inherit;
     position: absolute;
-    transform-origin: var(--wi-dialog-origin-x, 50%) var(--wi-dialog-origin-y, 50%);
+    transform-origin: var(--wi-dialog-origin-x, 50%)
+        var(--wi-dialog-origin-y, 50%);
 }
 
 .wi-dialog-backdrop--modal {
@@ -69,15 +70,18 @@
 }
 
 .wi-dialog {
+    --wi-dialog-width: 32rem;
+    --wi-dialog-max-height: min(90vh, 100%);
+    --wi-dialog-radius: var(--wi-radius-lg);
     background: var(--wi-color-surface);
-    border-radius: var(--wi-radius-lg);
+    border-radius: var(--wi-dialog-radius);
     box-shadow: var(--wi-shadow-lg);
     color: var(--wi-color-text);
     display: flex;
     flex-direction: column;
-    max-height: min(90vh, 100%);
-    max-width: 32rem;
-    width: min(100%, 32rem);
+    max-height: var(--wi-dialog-max-height);
+    max-width: var(--wi-dialog-width);
+    width: min(100%, var(--wi-dialog-width));
 }
 
 .wi-dialog-backdrop--maximized {
@@ -85,7 +89,8 @@
 }
 
 .wi-dialog--maximized {
-    border-radius: 0;
+    --wi-dialog-radius: 0;
+    border-radius: var(--wi-dialog-radius);
     height: 100%;
     max-height: 100%;
     max-width: none;

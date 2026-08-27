@@ -1,5 +1,6 @@
 /* —— Panel: Stepper —— */
 .wi-stepper {
+    --wi-stepper-marker-size: 1.5rem;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -41,14 +42,18 @@
 
 .wi-stepper__marker {
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 16%,
+        var(--wi-color-surface)
+    );
     border-radius: var(--wi-radius-full);
     display: inline-flex;
     font-size: var(--wi-font-size-xs);
     font-weight: 700;
-    height: 1.5rem;
+    height: var(--wi-stepper-marker-size);
     justify-content: center;
-    width: 1.5rem;
+    width: var(--wi-stepper-marker-size);
 }
 
 .wi-stepper__step--active .wi-stepper__marker {

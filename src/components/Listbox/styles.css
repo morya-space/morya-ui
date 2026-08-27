@@ -1,5 +1,7 @@
 /* —— Form: Listbox —— */
 .wi-listbox {
+    --wi-menu-min-width-lg: 12rem;
+    --wi-listbox-list-max-height: 14rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
@@ -26,7 +28,7 @@
 .wi-listbox__list {
     list-style: none;
     margin: 0;
-    max-height: 14rem;
+    max-height: var(--wi-listbox-list-max-height);
     overflow: auto;
     padding: var(--wi-space-1);
 }
@@ -47,13 +49,21 @@
 }
 
 .wi-listbox__option--selected {
-    background: color-mix(in srgb, var(--wi-color-primary) 16%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 16%,
+        var(--wi-color-surface)
+    );
     color: var(--wi-color-primary);
     font-weight: 600;
 }
 
 .wi-listbox__option:hover:not(:disabled):not(.wi-listbox__option--selected) {
-    background: color-mix(in srgb, var(--wi-color-primary) 8%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 8%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-listbox__option:disabled {

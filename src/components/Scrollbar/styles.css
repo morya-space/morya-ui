@@ -1,6 +1,15 @@
 .wi-scrollbar {
-    --wi-scrollbar-bg: color-mix(in srgb, var(--wi-color-text) 28%, transparent);
-    --wi-scrollbar-hover-bg: color-mix(in srgb, var(--wi-color-text) 45%, transparent);
+    --wi-scrollbar-track-size: 6px;
+    --wi-scrollbar-bg: color-mix(
+        in srgb,
+        var(--wi-color-text) 28%,
+        transparent
+    );
+    --wi-scrollbar-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-text) 45%,
+        transparent
+    );
     --wi-scrollbar-opacity: 0.5;
     --wi-scrollbar-hover-opacity: 0.8;
     height: 100%;
@@ -35,7 +44,7 @@
 
 .wi-scrollbar__bar--vertical {
     top: 2px;
-    width: 6px;
+    width: var(--wi-scrollbar-track-size);
 }
 
 .wi-scrollbar__bar--vertical > .wi-scrollbar__thumb {
@@ -43,7 +52,7 @@
 }
 
 .wi-scrollbar__bar--horizontal {
-    height: 6px;
+    height: var(--wi-scrollbar-track-size);
     left: 2px;
 }
 

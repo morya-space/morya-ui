@@ -2,26 +2,34 @@
     box-shadow: 0 0 0 1px var(--wi-color-danger);
 }
 
+.wi-switch {
+    --wi-switch-track-height: 1.25rem;
+    --wi-switch-track-width: 2.25rem;
+    --wi-switch-thumb-size: 1rem;
+    --wi-switch-checked-offset: 1rem;
+    --wi-switch-spinner-size: 0.55rem;
+}
+
 .wi-switch__track {
     align-items: center;
     background: var(--wi-color-border);
     border-radius: var(--wi-radius-full);
     display: inline-flex;
     flex: 0 0 auto;
-    height: 1.25rem;
-    padding: 0.125rem;
+    height: var(--wi-switch-track-height);
+    padding: var(--wi-space-1);
     transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
-    width: 2.25rem;
+    width: var(--wi-switch-track-width);
 }
 
 .wi-switch__thumb {
     background: var(--wi-color-surface);
     border-radius: var(--wi-radius-full);
     box-shadow: var(--wi-shadow-sm);
-    height: 1rem;
+    height: var(--wi-switch-thumb-size);
     transform: translateX(0);
     transition: transform var(--wi-motion-fast) var(--wi-motion-ease);
-    width: 1rem;
+    width: var(--wi-switch-thumb-size);
 }
 
 .wi-switch__input:checked + .wi-switch__track {
@@ -29,35 +37,55 @@
 }
 
 .wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
-    transform: translateX(1rem);
+    transform: translateX(var(--wi-switch-checked-offset));
+}
+
+.wi-switch--small {
+    --wi-switch-track-height: 1rem;
+    --wi-switch-track-width: 1.75rem;
+    --wi-switch-thumb-size: 0.75rem;
+    --wi-switch-checked-offset: 0.75rem;
 }
 
 .wi-switch--small .wi-switch__track {
-    height: 1rem;
-    width: 1.75rem;
+    height: var(--wi-switch-track-height);
+    width: var(--wi-switch-track-width);
 }
 
 .wi-switch--small .wi-switch__thumb {
-    height: 0.75rem;
-    width: 0.75rem;
+    height: var(--wi-switch-thumb-size);
+    width: var(--wi-switch-thumb-size);
 }
 
-.wi-switch--small .wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
-    transform: translateX(0.75rem);
+.wi-switch--small
+    .wi-switch__input:checked
+    + .wi-switch__track
+    .wi-switch__thumb {
+    transform: translateX(var(--wi-switch-checked-offset));
+}
+
+.wi-switch--large {
+    --wi-switch-track-height: 1.5rem;
+    --wi-switch-track-width: 2.75rem;
+    --wi-switch-thumb-size: 1.2rem;
+    --wi-switch-checked-offset: 1.25rem;
 }
 
 .wi-switch--large .wi-switch__track {
-    height: 1.5rem;
-    width: 2.75rem;
+    height: var(--wi-switch-track-height);
+    width: var(--wi-switch-track-width);
 }
 
 .wi-switch--large .wi-switch__thumb {
-    height: 1.2rem;
-    width: 1.2rem;
+    height: var(--wi-switch-thumb-size);
+    width: var(--wi-switch-thumb-size);
 }
 
-.wi-switch--large .wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
-    transform: translateX(1.25rem);
+.wi-switch--large
+    .wi-switch__input:checked
+    + .wi-switch__track
+    .wi-switch__thumb {
+    transform: translateX(var(--wi-switch-checked-offset));
 }
 
 .wi-switch__text {
@@ -69,10 +97,11 @@
 
 .wi-switch__spinner {
     animation: wi-progress-spinner-rotate 0.8s linear infinite;
-    border: 1.5px solid color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
+    border: 1.5px solid
+        color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
     border-radius: 50%;
     border-top-color: var(--wi-color-primary);
     display: block;
-    height: 0.55rem;
-    width: 0.55rem;
+    height: var(--wi-switch-spinner-size);
+    width: var(--wi-switch-spinner-size);
 }

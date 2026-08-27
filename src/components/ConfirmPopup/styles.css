@@ -1,10 +1,11 @@
 /* —— Overlay: ConfirmPopup —— */
 .wi-confirmpopup {
+    --wi-confirmpopup-width: 20rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
-    max-width: min(20rem, calc(100vw - 2rem));
+    max-width: min(var(--wi-confirmpopup-width), calc(100vw - 2rem));
     padding: var(--wi-space-3);
     position: fixed;
     z-index: var(--wi-z-popper);

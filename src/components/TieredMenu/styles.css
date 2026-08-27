@@ -1,5 +1,7 @@
 /* —— Menu: TieredMenu —— */
 .wi-tieredmenu {
+    --wi-menu-min-width: 10rem;
+    --wi-menu-min-width-lg: 12rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
@@ -42,7 +44,11 @@
 }
 
 .wi-tieredmenu__item:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-tieredmenu__item:disabled {

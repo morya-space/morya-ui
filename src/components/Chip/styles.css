@@ -1,6 +1,12 @@
 .wi-chip {
+    --wi-chip-avatar-size: 1.25rem;
+    --wi-chip-remove-size: var(--wi-chip-avatar-size);
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-text-muted) 14%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 14%,
+        var(--wi-color-surface)
+    );
     border-radius: var(--wi-radius-full);
     color: var(--wi-color-text);
     display: inline-flex;
@@ -20,9 +26,9 @@
 .wi-chip__image {
     border-radius: var(--wi-radius-full);
     flex-shrink: 0;
-    height: 1.25rem;
+    height: var(--wi-chip-avatar-size);
     object-fit: cover;
-    width: 1.25rem;
+    width: var(--wi-chip-avatar-size);
 }
 
 .wi-chip__icon {
@@ -46,12 +52,12 @@
     flex-shrink: 0;
     font: inherit;
     font-size: 1rem;
-    height: 1.25rem;
+    height: var(--wi-chip-remove-size);
     justify-content: center;
     line-height: 1;
     margin-inline-end: calc(var(--wi-space-1) * -1);
     padding: 0;
-    width: 1.25rem;
+    width: var(--wi-chip-remove-size);
 }
 
 .wi-chip__remove:hover:not(:disabled) {

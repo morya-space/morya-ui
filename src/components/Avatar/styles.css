@@ -1,6 +1,15 @@
 .wi-avatar {
     --wi-avatar-size: 2.5rem;
-    --wi-avatar-bg: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    --wi-avatar-size-large: 3.5rem;
+    --wi-avatar-size-xlarge: 5rem;
+    --wi-avatar-font-size-xlarge: 1.5rem;
+    --wi-avatar-group-overlap: var(--wi-space-2);
+    --wi-avatar-group-ring-width: 2px;
+    --wi-avatar-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 16%,
+        var(--wi-color-surface)
+    );
     --wi-avatar-fg: var(--wi-color-text);
     align-items: center;
     background: var(--wi-avatar-bg);
@@ -27,13 +36,13 @@
 }
 
 .wi-avatar--large {
-    --wi-avatar-size: 3.5rem;
+    --wi-avatar-size: var(--wi-avatar-size-large);
     font-size: var(--wi-font-size-lg);
 }
 
 .wi-avatar--xlarge {
-    --wi-avatar-size: 5rem;
-    font-size: 1.5rem;
+    --wi-avatar-size: var(--wi-avatar-size-xlarge);
+    font-size: var(--wi-avatar-font-size-xlarge);
 }
 
 .wi-avatar__image {
@@ -57,8 +66,8 @@
 }
 
 .wi-avatar-group .wi-avatar {
-    box-shadow: 0 0 0 2px var(--wi-color-surface);
-    margin-left: -0.5rem;
+    box-shadow: 0 0 0 var(--wi-avatar-group-ring-width) var(--wi-color-surface);
+    margin-left: calc(var(--wi-avatar-group-overlap) * -1);
 }
 
 .wi-avatar-group .wi-avatar:first-child,
@@ -71,6 +80,10 @@
 }
 
 .wi-avatar-group__overflow {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 18%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 18%,
+        var(--wi-color-surface)
+    );
     font-size: var(--wi-font-size-sm);
 }

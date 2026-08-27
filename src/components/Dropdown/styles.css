@@ -1,4 +1,5 @@
 .wi-dropdown {
+    --wi-menu-min-width: 10rem;
     display: inline-block;
     position: relative;
 }

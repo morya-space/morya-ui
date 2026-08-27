@@ -1,5 +1,6 @@
 /* —— Menu: Menubar —— */
 .wi-menubar {
+    --wi-menu-min-width: 10rem;
     align-items: stretch;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
@@ -31,7 +32,11 @@
 
 .wi-menubar__trigger:hover:not(:disabled),
 .wi-menubar__item--open > .wi-menubar__trigger {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-menubar__trigger:disabled {
@@ -84,7 +89,11 @@
 }
 
 .wi-menubar__subitem:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-menubar__subitem:disabled {

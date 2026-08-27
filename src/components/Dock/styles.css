@@ -1,5 +1,6 @@
 /* —— Menu: Dock —— */
 .wi-dock {
+    --wi-dock-icon-size: 2.75rem;
     display: flex;
     justify-content: center;
 }
@@ -31,11 +32,15 @@
 
 .wi-dock__icon {
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-primary) 14%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 14%,
+        var(--wi-color-surface)
+    );
     border-radius: var(--wi-radius-md);
     display: inline-flex;
     font-size: 1.25rem;
-    height: 2.75rem;
+    height: var(--wi-dock-icon-size);
     justify-content: center;
-    width: 2.75rem;
+    width: var(--wi-dock-icon-size);
 }

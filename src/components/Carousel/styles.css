@@ -1,5 +1,6 @@
 /* —— Media: Carousel —— */
 .wi-carousel {
+    --wi-carousel-indicator-size: 0.45rem;
     align-items: center;
     display: flex;
     gap: var(--wi-space-2);
@@ -38,9 +39,9 @@
     border: 0;
     border-radius: var(--wi-radius-full);
     cursor: pointer;
-    height: 0.45rem;
+    height: var(--wi-carousel-indicator-size);
     padding: 0;
-    width: 0.45rem;
+    width: var(--wi-carousel-indicator-size);
 }
 
 .wi-carousel__indicator--active {

@@ -1,5 +1,10 @@
 /* —— File: FileUpload —— */
 .wi-fileupload {
+    --wi-fileupload-dropzone-min-height: 10rem;
+    --wi-fileupload-icon-size: 2.5rem;
+    --wi-fileupload-thumb-size: 2.5rem;
+    --wi-fileupload-card-size: 7.5rem;
+    --wi-fileupload-progress-height: 0.25rem;
     display: flex;
     flex-direction: column;
     gap: var(--wi-space-2);
@@ -36,7 +41,11 @@
 
 .wi-fileupload__dragger {
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-surface) 92%, var(--wi-color-primary) 8%);
+    background: color-mix(
+        in srgb,
+        var(--wi-color-surface) 92%,
+        var(--wi-color-primary) 8%
+    );
     border: 1px dashed var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     cursor: pointer;
@@ -44,7 +53,7 @@
     flex-direction: column;
     gap: var(--wi-space-2);
     justify-content: center;
-    min-height: 10rem;
+    min-height: var(--wi-fileupload-dropzone-min-height);
     padding: var(--wi-space-6) var(--wi-space-4);
     text-align: center;
     transition:
@@ -55,14 +64,18 @@
 
 .wi-fileupload__dragger:hover,
 .wi-fileupload__dragger--over {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
     border-color: var(--wi-color-primary);
 }
 
 .wi-fileupload__icon {
     color: var(--wi-color-primary);
-    height: 2.5rem;
-    width: 2.5rem;
+    height: var(--wi-fileupload-icon-size);
+    width: var(--wi-fileupload-icon-size);
 }
 
 .wi-fileupload__icon svg {
@@ -140,9 +153,9 @@
     border-radius: var(--wi-radius-sm);
     cursor: pointer;
     flex: 0 0 auto;
-    height: 2.5rem;
+    height: var(--wi-fileupload-thumb-size);
     object-fit: cover;
-    width: 2.5rem;
+    width: var(--wi-fileupload-thumb-size);
 }
 
 .wi-fileupload__actions {
@@ -183,7 +196,7 @@
 .wi-fileupload__progress {
     background: var(--wi-color-primary);
     border-radius: var(--wi-radius-full, 999px);
-    height: 0.25rem;
+    height: var(--wi-fileupload-progress-height);
     max-width: 100%;
 }
 
@@ -204,10 +217,10 @@
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-sizing: border-box;
-    height: 7.5rem;
+    height: var(--wi-fileupload-card-size);
     overflow: hidden;
     position: relative;
-    width: 7.5rem;
+    width: var(--wi-fileupload-card-size);
 }
 
 .wi-fileupload__card-image {
@@ -268,7 +281,11 @@
 
 .wi-fileupload__card--add {
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-surface) 92%, var(--wi-color-primary) 8%);
+    background: color-mix(
+        in srgb,
+        var(--wi-color-surface) 92%,
+        var(--wi-color-primary) 8%
+    );
     border-style: dashed;
     color: var(--wi-color-text-muted);
     cursor: pointer;

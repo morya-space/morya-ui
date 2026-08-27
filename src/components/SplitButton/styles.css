@@ -1,5 +1,8 @@
 /* —— Primitive: SplitButton —— */
 .wi-splitbutton {
+    --wi-button-padding-x-medium: calc(
+        var(--wi-control-padding-x-medium) + var(--wi-space-1)
+    );
     display: inline-flex;
     position: relative;
     vertical-align: middle;
@@ -28,7 +31,12 @@
 
 .wi-splitbutton__trigger {
     border-bottom-right-radius: var(--wi-radius-control);
-    border-left: 1px solid color-mix(in srgb, var(--wi-color-on-emphasis) 35%, var(--wi-color-primary));
+    border-left: 1px solid
+        color-mix(
+            in srgb,
+            var(--wi-color-on-emphasis) 35%,
+            var(--wi-color-primary)
+        );
     border-top-right-radius: var(--wi-radius-control);
     padding: 0 var(--wi-control-padding-x-medium);
 }
@@ -45,7 +53,11 @@
 
 .wi-splitbutton--secondary .wi-splitbutton__main,
 .wi-splitbutton--secondary .wi-splitbutton__trigger {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 16%,
+        var(--wi-color-surface)
+    );
     border-color: var(--wi-color-border);
     color: var(--wi-color-text);
 }
@@ -111,7 +123,11 @@
 }
 
 .wi-splitbutton__item:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-splitbutton__item:disabled {

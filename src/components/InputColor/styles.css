@@ -1,5 +1,7 @@
 /* —— Form: InputColor —— */
 .wi-inputcolor {
+    --wi-inputcolor-text-min-width: 7rem;
+    --wi-inputcolor-preset-size: 1.25rem;
     display: inline-flex;
     flex-direction: column;
     gap: var(--wi-space-2);
@@ -27,7 +29,7 @@
     font: inherit;
     font-size: var(--wi-control-font-medium);
     min-height: var(--wi-control-height-medium);
-    min-width: 7rem;
+    min-width: var(--wi-inputcolor-text-min-width);
     padding: 0 var(--wi-control-padding-x-medium);
 }
 
@@ -54,9 +56,9 @@
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-sm);
     cursor: pointer;
-    height: 1.25rem;
+    height: var(--wi-inputcolor-preset-size);
     padding: 0;
-    width: 1.25rem;
+    width: var(--wi-inputcolor-preset-size);
 }
 
 .wi-inputcolor__preset:focus-visible {
