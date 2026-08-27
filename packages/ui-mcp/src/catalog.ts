@@ -91,6 +91,27 @@ export interface Catalog {
   guides: GuideRecord[]
 }
 
+/** Common product-language names mapped to the library's canonical component ids. */
+export const componentAliases: Record<string, string> = {
+  datatable: 'Table',
+  'data-table': 'Table',
+  'data table': 'Table',
+  '数据表': 'Table',
+  '数据表格': 'Table',
+  '数据列表': 'Table',
+  tableview: 'Table',
+  formitem: 'Form',
+  'form-item': 'Form',
+  '表单项': 'Form',
+  confirm: 'ConfirmDialog',
+  'confirm-dialog': 'ConfirmDialog',
+  '确认框': 'ConfirmDialog',
+  '确认弹窗': 'ConfirmDialog',
+  pagination: 'Pagination',
+  pager: 'Pagination',
+  分页器: 'Pagination',
+}
+
 const here = dirname(fileURLToPath(import.meta.url))
 
 export function loadCatalog(): Catalog {
@@ -109,7 +130,9 @@ export function normalizeName(input: string): string {
 }
 
 export function findComponent(catalog: Catalog, name: string): ComponentRecord | undefined {
-  const key = normalizeName(name)
+  const rawKey = name.trim().toLowerCase()
+  const alias = componentAliases[rawKey] || componentAliases[normalizeName(name)]
+  const key = normalizeName(alias || name)
   return catalog.components.find((item) => {
     return (
       normalizeName(item.id) === key ||
