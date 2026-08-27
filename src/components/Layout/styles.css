@@ -32,6 +32,7 @@
 .wi-layout__scroll {
     box-sizing: border-box;
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     height: 100%;
     min-height: 0;
@@ -47,22 +48,6 @@
     flex-wrap: nowrap;
 }
 
-.wi-layout__scrollbar {
-    box-sizing: border-box;
-    flex: 1 1 auto;
-    height: 100%;
-    min-height: 0;
-    min-width: 0;
-    width: 100%;
-}
-
-.wi-layout__scrollbar .wi-layout__scroll {
-    /* view hosts flex children; scrolling is on the wrap */
-    height: auto;
-    min-height: 100%;
-    overflow: visible;
-}
-
 /* Nested layout / content grow to fill remaining space */
 .wi-layout__scroll > .wi-layout,
 .wi-layout__scroll > .wi-layout-content {
@@ -74,14 +59,16 @@
 .wi-layout-content {
     --wi-layout-padding: var(--wi-space-4);
     --wi-layout-radius: 0;
+    display: flex;
     flex: 1 1 auto;
+    flex-direction: column;
     min-height: 0;
     min-width: 0;
 }
 
-.wi-layout-content > .wi-layout__scroll,
-.wi-layout-content > .wi-layout__scrollbar {
+.wi-layout-content > .wi-layout__scroll {
     flex: 1 1 auto;
+    min-height: 0;
 }
 
 .wi-layout-header,
@@ -167,8 +154,10 @@
     box-sizing: border-box;
     color: var(--wi-color-text);
     display: flex;
+    flex-basis: var(--wi-layout-sider-width);
     flex-shrink: 0;
     justify-content: flex-end;
+    min-width: 0;
     /* Do not clip the collapse trigger (it sits half outside the sider edge).
        Collapsed transform overflow is clipped by `.wi-layout { overflow: hidden }`. */
     overflow: visible;
@@ -176,6 +165,7 @@
     transition:
         color var(--wi-motion-normal) var(--wi-motion-ease),
         border-color var(--wi-motion-normal) var(--wi-motion-ease),
+        width var(--wi-motion-normal) var(--wi-motion-ease),
         max-width var(--wi-motion-normal) var(--wi-motion-ease),
         background-color var(--wi-motion-normal) var(--wi-motion-ease);
     z-index: 1;
@@ -187,34 +177,21 @@
 
 .wi-layout-sider__scroll {
     box-sizing: border-box;
-    flex-grow: 1;
-    flex-shrink: 0;
+    flex: 1 1 auto;
     height: 100%;
     max-width: 100%;
-    opacity: 0;
-    overflow: hidden;
-    transition: opacity var(--wi-motion-normal) var(--wi-motion-ease);
-    width: 100%;
-}
-
-.wi-layout-sider__scrollbar {
-    box-sizing: border-box;
-    flex-grow: 1;
-    flex-shrink: 0;
-    height: 100%;
-    max-width: 100%;
+    min-height: 0;
     min-width: 0;
     opacity: 0;
+    overflow: hidden;
+    overflow-x: hidden;
     transition: opacity var(--wi-motion-normal) var(--wi-motion-ease);
     width: 100%;
 }
 
-.wi-layout-sider__scrollbar .wi-layout-sider__scroll {
-    height: auto;
-    max-width: none;
-    min-height: 100%;
-    opacity: 1;
-    overflow: visible;
+.wi-layout-sider--collapse-transform > .wi-layout-sider__scroll {
+    flex-shrink: 0;
+    min-width: var(--wi-layout-sider-width);
 }
 
 .wi-layout-sider--show-content > .wi-layout-sider__scroll {
@@ -222,12 +199,7 @@
     overflow: auto;
 }
 
-.wi-layout-sider--show-content > .wi-layout-sider__scrollbar {
-    opacity: 1;
-}
-
-.wi-layout-sider--collapse-width > .wi-layout-sider__scroll,
-.wi-layout-sider--collapse-width > .wi-layout-sider__scrollbar {
+.wi-layout-sider--collapse-width > .wi-layout-sider__scroll {
     flex-shrink: 1;
     min-width: 0;
 }
@@ -241,13 +213,11 @@
     width: var(--wi-border-width);
 }
 
-.wi-layout-sider--left-placement > .wi-layout-sider__border,
-.wi-layout-sider--left > .wi-layout-sider__border {
+.wi-layout-sider--left-placement > .wi-layout-sider__border {
     right: 0;
 }
 
-.wi-layout-sider--right-placement > .wi-layout-sider__border,
-.wi-layout-sider--right > .wi-layout-sider__border {
+.wi-layout-sider--right-placement > .wi-layout-sider__border {
     left: 0;
 }
 

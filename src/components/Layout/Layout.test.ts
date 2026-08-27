@@ -78,25 +78,35 @@ describe("wiLayout", () => {
     expect(wrapper.element.style.height).toBe("400px");
     expect(wrapper.element.style.width).toBe("80%");
     const header = wrapper.find<HTMLElement>(".wi-layout-header");
-    expect(header.element.style.minHeight).toBe("64px");
+    expect(header.element.style.height).toBe("64px");
     expect(header.element.style.padding).toBe("12px");
     expect(header.element.style.borderRadius).toBe("8px");
   });
 
-  it("uses default sider CSS dimensions and custom padding", () => {
-    const wrapper = mount(WiLayoutSider, { props: { padding: 16, radius: 4 } });
-    expect(wrapper.element.style.width).toBe("var(--wi-layout-sider-width)");
-    expect(wrapper.element.style.maxWidth).toBe("var(--wi-layout-sider-width)");
-    expect(wrapper.element.style.padding).toBe("16px");
+  it("uses the sider width only on the root element", () => {
+    const wrapper = mount(WiLayoutSider, {
+      props: { width: 240, collapsedWidth: 56, padding: 16, radius: 4 },
+    });
+    const content = wrapper.find<HTMLElement>(".wi-layout-sider__scroll");
+    expect(wrapper.element.style.width).toBe("240px");
+    expect(wrapper.element.style.maxWidth).toBe("240px");
+    expect(wrapper.element.style.getPropertyValue("--wi-layout-sider-width")).toBe(
+      "240px",
+    );
+    expect(wrapper.element.style.padding).toBe("");
     expect(wrapper.element.style.borderRadius).toBe("4px");
+    expect(content.element.style.padding).toBe("16px");
+    expect(content.element.style.width).toBe("");
+    expect(content.element.style.minWidth).toBe("");
   });
 
-  it("toggles sider collapsed state via max-width", async () => {
+  it("toggles sider collapsed state via max-width in transform mode", async () => {
     const wrapper = mount(WiLayoutSider, {
       props: {
         showTrigger: "arrow-circle",
         width: 200,
         collapsedWidth: 48,
+        padding: 16,
         collapsed: false,
         "onUpdate:collapsed": (value: boolean) => {
           void wrapper.setProps({ collapsed: value });
@@ -111,6 +121,29 @@ describe("wiLayout", () => {
     expect(wrapper.classes()).toContain("wi-layout-sider--collapsed");
     expect(wrapper.element.style.width).toBe("200px");
     expect(wrapper.element.style.maxWidth).toBe("48px");
+    expect(wrapper.find(".wi-layout-sider__scroll").element.style.padding).toBe(
+      "16px",
+    );
+  });
+
+  it("shrinks sider width in width collapse mode", async () => {
+    const wrapper = mount(WiLayoutSider, {
+      props: {
+        collapseMode: "width",
+        showTrigger: "arrow-circle",
+        width: 200,
+        collapsedWidth: 0,
+        padding: 16,
+        collapsed: false,
+        "onUpdate:collapsed": (value: boolean) => {
+          void wrapper.setProps({ collapsed: value });
+        },
+      },
+    });
+    await wrapper.get(".wi-layout-sider__trigger").trigger("click");
+    await nextTick();
+    expect(wrapper.element.style.width).toBe("0px");
+    expect(wrapper.element.style.maxWidth).toBe("0px");
   });
 
   it("supports sider-placement right", async () => {
@@ -128,18 +161,17 @@ describe("wiLayout", () => {
     );
   });
 
-  it("uses WiScrollbar when nativeScrollbar is false", () => {
+  it("always uses the native scroll container", () => {
     const wrapper = mount(WiLayout, {
-      props: { nativeScrollbar: false },
       slots: {
         default: () => [
           h(WiLayoutHeader, null, () => "Header"),
-          h(WiLayoutContent, { nativeScrollbar: false }, () => "Body"),
+          h(WiLayoutContent, null, () => "Body"),
         ],
       },
     });
-    expect(wrapper.classes()).toContain("wi-layout--custom-scrollbar");
-    expect(wrapper.find(".wi-layout__scrollbar").exists()).toBe(true);
-    expect(wrapper.find(".wi-scrollbar").exists()).toBe(true);
+    expect(wrapper.find(".wi-layout__scroll").exists()).toBe(true);
+    expect(wrapper.find(".wi-layout__scrollbar").exists()).toBe(false);
+    expect(wrapper.find(".wi-scrollbar").exists()).toBe(false);
   });
 });

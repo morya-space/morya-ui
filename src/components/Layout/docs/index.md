@@ -241,34 +241,6 @@ import {
 </template>
 ```
 
-## Custom Scrollbar
-
-默认 `nativeScrollbar` 使用浏览器原生滚动条。设为 `false` 时改用 `WiScrollbar`（可通过 `scrollbarProps` 透传）。
-
-```vue preview
-<script setup lang="ts">
-import { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'
-</script>
-
-<template>
-  <WiLayout
-    :native-scrollbar="false"
-    style="height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden"
-  >
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
-      Custom scrollbar
-    </WiLayoutHeader>
-    <WiLayoutContent embedded :native-scrollbar="false" content-style="padding:1rem">
-      <div style="display:grid;gap:0.5rem">
-        <div v-for="n in 16" :key="n">
-          行 {{ n }}
-        </div>
-      </div>
-    </WiLayoutContent>
-  </WiLayout>
-</template>
-```
-
 ## Absolute Shell
 
 根布局 `position="absolute"` 铺满父级（父级需 `position: relative` + 明确高度）。
@@ -310,8 +282,6 @@ import {
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | 侧栏位置。 |
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
-| `nativeScrollbar` | `boolean` | `true` | `false` 时用 `WiScrollbar`。 |
-| `scrollbarProps` | `object` | — | 透传给 `WiScrollbar`（仅非原生时）。 |
 | `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |
 
 ## LayoutSider Props
@@ -325,8 +295,6 @@ import {
 | `showTrigger` | `boolean \| 'bar' \| 'arrow-circle' \| 'arrow'` | `false` | 折叠触发器；`arrow` 等同 `arrow-circle`。 |
 | `collapseMode` | `'width' \| 'transform'` | `'transform'` | `transform` 裁切内容；`width` 随侧栏收缩。 |
 | `showCollapsedContent` | `boolean` | `true` | 折叠后是否仍显示侧栏内容。 |
-| `nativeScrollbar` | `boolean` | `true` | `false` 时用 `WiScrollbar`。 |
-| `scrollbarProps` | `object` | — | 透传给 `WiScrollbar`（仅非原生时）。 |
 | `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |
 | `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |
 | `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |
@@ -335,7 +303,7 @@ import {
 
 | 事件 | 说明 |
 | --- | --- |
-| `scroll` | 滚动容器滚动时触发（原生与自定义滚动条均会触发）。 |
+| `scroll` | 滚动容器滚动时触发。 |
 
 ## Expose
 

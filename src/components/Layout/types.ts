@@ -1,5 +1,4 @@
 import type { CSSProperties } from "vue";
-import type { ScrollbarProps } from "../Scrollbar/types";
 
 export type LayoutPosition = "static" | "absolute";
 export type LayoutSiderPlacement = "left" | "right";
@@ -20,13 +19,6 @@ export interface LayoutProps {
   hasSider?: boolean;
   /** Sider side when `hasSider`. */
   siderPlacement?: LayoutSiderPlacement;
-  /**
-   * Use the browser native scrollbar (default).
-   * Set `false` to wrap content with `WiScrollbar`.
-   */
-  nativeScrollbar?: boolean;
-  /** Extra props forwarded to `WiScrollbar` when `nativeScrollbar` is false. */
-  scrollbarProps?: Partial<ScrollbarProps>;
   /** Extra class on the scroll / content wrapper. */
   contentClass?: string;
   /** Extra style on the scroll / content wrapper. */
@@ -61,13 +53,6 @@ export interface LayoutContentProps {
   /** Soft background. */
   embedded?: boolean;
   position?: LayoutPosition;
-  /**
-   * Use the browser native scrollbar (default).
-   * Set `false` to wrap content with `WiScrollbar`.
-   */
-  nativeScrollbar?: boolean;
-  /** Extra props forwarded to `WiScrollbar` when `nativeScrollbar` is false. */
-  scrollbarProps?: Partial<ScrollbarProps>;
   contentClass?: string;
   contentStyle?: string | CSSProperties;
 }
@@ -98,13 +83,6 @@ export interface LayoutSiderProps {
   triggerStyle?: string | CSSProperties;
   collapsedTriggerClass?: string;
   collapsedTriggerStyle?: string | CSSProperties;
-  /**
-   * Use the browser native scrollbar (default).
-   * Set `false` to wrap content with `WiScrollbar`.
-   */
-  nativeScrollbar?: boolean;
-  /** Extra props forwarded to `WiScrollbar` when `nativeScrollbar` is false. */
-  scrollbarProps?: Partial<ScrollbarProps>;
   contentClass?: string;
   contentStyle?: string | CSSProperties;
 }
