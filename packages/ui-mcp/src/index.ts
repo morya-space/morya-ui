@@ -11,10 +11,10 @@ const server = new McpServer({
 
 server.tool(
   'list',
-  'List @well-insight/ui components, guides, examples, or categories.',
+  'List @well-insight/ui components, guides, examples, categories, or page patterns.',
   {
     kind: z
-      .enum(['components', 'guides', 'examples', 'categories'])
+      .enum(['components', 'guides', 'examples', 'categories', 'patterns', 'decisions'])
       .optional()
       .describe('What to list. Defaults to components.'),
     mode: z.string().optional().describe('Locale mode: zh / en. Defaults to zh.'),
@@ -29,7 +29,7 @@ server.tool(
   'Search components, guides, API text, and examples.',
   {
     query: z.string().min(1),
-    scope: z.enum(['all', 'components', 'guides', 'api', 'examples']).optional(),
+    scope: z.enum(['all', 'components', 'guides', 'api', 'examples', 'patterns', 'decisions']).optional(),
     mode: z.string().optional(),
     limit: z.number().int().min(1).max(50).optional(),
     offset: z.number().int().min(0).optional(),
@@ -104,6 +104,120 @@ server.tool(
       .optional(),
   },
   async (args) => handlers.validateUsage(args),
+)
+
+server.tool(
+  'list_patterns',
+  'List reusable page patterns for composing @well-insight/ui components.',
+  {
+    mode: z.string().optional(),
+    limit: z.number().int().min(1).max(200).optional(),
+    offset: z.number().int().min(0).optional(),
+  },
+  async (args) => handlers.listPatterns(args),
+)
+
+server.tool(
+  'get_pattern',
+  'Read the structure, component composition, layout, and interaction rules for a page pattern.',
+  {
+    pattern: z.string().min(1),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.getPattern(args),
+)
+
+server.tool(
+  'recommend_page',
+  'Recommend a page pattern and component composition from a product/page intent.',
+  {
+    intent: z.string().min(1),
+    pageType: z.string().optional(),
+    features: z.array(z.string()).max(20).optional(),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.recommendPage(args),
+)
+
+server.tool(
+  'generate_page',
+  'Generate a Vue 3 + TypeScript page scaffold from intent, pattern, and design rules without writing files.',
+  {
+    intent: z.string().min(1),
+    pageType: z.string().optional(),
+    pattern: z.string().optional(),
+    features: z.array(z.string()).max(20).optional(),
+    mode: z.string().optional(),
+    responsive: z.boolean().optional(),
+  },
+  async (args) => handlers.generatePage(args),
+)
+
+server.tool(
+  'create_page',
+  'Preview or safely write a generated page inside the current project. Writing requires confirm: true.',
+  {
+    path: z.string().min(1),
+    intent: z.string().min(1),
+    pageType: z.string().optional(),
+    pattern: z.string().optional(),
+    features: z.array(z.string()).max(20).optional(),
+    mode: z.string().optional(),
+    responsive: z.boolean().optional(),
+    confirm: z.boolean().optional(),
+  },
+  async (args) => handlers.createPage(args),
+)
+
+server.tool(
+  'get_design_rules',
+  'Return design-token, semantic-action, accessibility, and composition rules for generated pages.',
+  { mode: z.string().optional() },
+  async (args) => handlers.getDesignRules(args),
+)
+
+server.tool(
+  'list_decisions',
+  'List component selection decision guides for common UI choices.',
+  {
+    mode: z.string().optional(),
+    limit: z.number().int().min(1).max(200).optional(),
+    offset: z.number().int().min(0).optional(),
+  },
+  async (args) => handlers.listDecisions(args),
+)
+
+server.tool(
+  'get_decision',
+  'Read bilingual guidance for choosing between related components.',
+  {
+    decision: z.string().min(1),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.getDecision(args),
+)
+
+server.tool(
+  'recommend_component',
+  'Recommend a component choice from a UI selection question.',
+  {
+    query: z.string().min(1),
+    decision: z.string().optional(),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.recommendComponent(args),
+)
+
+server.tool(
+  'validate_page',
+  'Validate page-level component composition, interaction, accessibility, and design-token rules.',
+  {
+    pattern: z.string().optional(),
+    code: z.string().optional(),
+    components: z.array(z.string()).max(50).optional(),
+    intent: z.string().optional(),
+  },
+  async (args) => handlers.validatePage(args),
 )
 
 server.tool('version', 'Return MCP package, library version, and catalog status.', {}, async () =>
