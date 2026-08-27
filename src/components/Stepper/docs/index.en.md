@@ -18,8 +18,8 @@ import { WiStepper } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiStepper } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref(0)
 const steps = [
@@ -40,8 +40,8 @@ const steps = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiStepper } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref(1)
 const steps = [

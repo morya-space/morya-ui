@@ -25,7 +25,7 @@ The first call auto-mounts a floating host; no template component is required.
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, message } from '@well-insight/ui'
+import { message, WiButton } from '@well-insight/ui'
 </script>
 
 <template>
@@ -48,8 +48,8 @@ import { WiButton, message } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { message, WiButton, WiIcon } from '@well-insight/ui'
 import { h } from 'vue'
-import { WiButton, WiIcon, message } from '@well-insight/ui'
 
 function showVNode() {
   message.info({

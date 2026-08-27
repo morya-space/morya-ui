@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiButtonGroup from './ButtonGroup.vue'
 
-describe('WiButtonGroup', () => {
+describe('wiButtonGroup', () => {
   it('groups buttons and can stretch fluid', () => {
     const wrapper = mount(WiButtonGroup, {
       props: { fluid: true, ariaLabel: 'Align' },

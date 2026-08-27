@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import type { InputNumberProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import type { InputNumberProps } from './types'
 
 defineOptions({ inheritAttrs: false })
 
-const attrs = useAttrs()
 const props = withDefaults(defineProps<InputNumberProps>(), {
   modelValue: null,
   step: 1,
@@ -18,7 +17,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   clearable: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | null): void }>()
-
+const attrs = useAttrs()
 const locale = useWiLocale()
 const inputId = computed(() => props.id ?? `wi-inputnumber-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = useConfiguredSize('InputNumber', () => props.size)
@@ -100,7 +99,7 @@ function clear() {
         :disabled="disabled"
         :aria-invalid="invalid || undefined"
         @input="updateFromInput"
-      />
+      >
       <button
         v-if="showClear"
         type="button"

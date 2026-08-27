@@ -42,10 +42,14 @@ import { WiGrid, WiGridItem } from '@well-insight/ui'
 <template>
   <WiGrid :cols="6" :x-gap="12" :y-gap="12">
     <WiGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">span 2</div>
+      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+        span 2
+      </div>
     </WiGridItem>
     <WiGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">offset 1</div>
+      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+        offset 1
+      </div>
     </WiGridItem>
   </WiGrid>
 </template>
@@ -77,8 +81,8 @@ import { WiGrid, WiGridItem } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiGrid, WiGridItem } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiGrid, WiGridItem, WiButton } from '@well-insight/ui'
 
 const collapsed = ref(true)
 </script>

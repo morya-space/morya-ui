@@ -18,15 +18,17 @@ import { WiFieldset } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiFieldset } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
   <WiFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
-    <p style="margin:0">字段分组内容。</p>
+    <p style="margin:0">
+      字段分组内容。
+    </p>
   </WiFieldset>
 </template>
 ```

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { TerminalProps } from './types'
 import { nextTick, ref } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { TerminalProps } from './types'
 
 withDefaults(defineProps<TerminalProps>(), {
   welcomeMessage: 'Welcome to Well Insight Terminal',
@@ -31,7 +31,9 @@ async function submit() {
 <template>
   <div class="wi-terminal" role="application" :aria-label="locale.terminal">
     <div ref="bodyRef" class="wi-terminal__body">
-      <div v-if="welcomeMessage" class="wi-terminal__welcome">{{ welcomeMessage }}</div>
+      <div v-if="welcomeMessage" class="wi-terminal__welcome">
+        {{ welcomeMessage }}
+      </div>
       <div v-for="(line, index) in history" :key="`${line}-${index}`" class="wi-terminal__line">
         <span class="wi-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
         <span>{{ line }}</span>
@@ -46,7 +48,7 @@ async function submit() {
         :aria-label="locale.commandInput"
         autocomplete="off"
         spellcheck="false"
-      />
+      >
     </form>
   </div>
 </template>

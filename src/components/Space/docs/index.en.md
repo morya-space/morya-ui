@@ -18,7 +18,7 @@ import { WiSpace } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpace, WiButton } from '@well-insight/ui'
+import { WiButton, WiSpace } from '@well-insight/ui'
 </script>
 
 <template>
@@ -50,7 +50,7 @@ import { WiSpace, WiTag } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpace, WiButton } from '@well-insight/ui'
+import { WiButton, WiSpace } from '@well-insight/ui'
 </script>
 
 <template>

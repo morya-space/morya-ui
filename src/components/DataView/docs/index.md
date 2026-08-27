@@ -27,7 +27,9 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
   <WiDataView :value="items" layout="grid" paginator :rows="4">
     <template #grid="{ items: page }">
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
-        <div v-for="item in page" :key="item">{{ item }}</div>
+        <div v-for="item in page" :key="item">
+          {{ item }}
+        </div>
       </div>
     </template>
   </WiDataView>

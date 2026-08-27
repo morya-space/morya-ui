@@ -18,8 +18,8 @@ import { WiSpeedDial } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSpeedDial } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 const items = [

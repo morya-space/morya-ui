@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { DrawerProps } from './types'
 import { computed, ref, toRef } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import type { DrawerProps } from './types'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   modelValue: false,
@@ -86,7 +86,11 @@ useModalOverlay({
           tabindex="-1"
         >
           <header v-if="$slots.header || header || showCloseIcon" class="wi-drawer__header">
-            <slot name="header"><h2 v-if="header">{{ header }}</h2></slot>
+            <slot name="header">
+              <h2 v-if="header">
+                {{ header }}
+              </h2>
+            </slot>
             <button
               v-if="showCloseIcon"
               type="button"
@@ -97,7 +101,9 @@ useModalOverlay({
               ×
             </button>
           </header>
-          <div class="wi-drawer__body"><slot /></div>
+          <div class="wi-drawer__body">
+            <slot />
+          </div>
         </aside>
       </div>
     </Transition>

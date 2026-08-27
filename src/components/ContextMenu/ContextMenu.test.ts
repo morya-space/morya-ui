@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiContextMenu from './ContextMenu.vue'
 
-describe('WiContextMenu', () => {
+describe('wiContextMenu', () => {
   it('shows at event position via expose.show and runs command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiContextMenu, {

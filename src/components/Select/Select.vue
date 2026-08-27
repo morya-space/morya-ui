@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -395,7 +395,7 @@ onBeforeUnmount(() => {
             :aria-label="locale.filterOptions"
             @click.stop
             @keydown.stop="onMenuKeydown"
-          />
+          >
           <div v-if="resolvedLoading" class="wi-select__empty" role="status">
             {{ locale.loading }}
           </div>
@@ -431,7 +431,7 @@ onBeforeUnmount(() => {
       aria-hidden="true"
       :required="!hasValue"
       :value="resolvedMultiple ? selectedValues.join(',') : selectedValues[0]"
-    />
+    >
     <span
       v-if="feedbackText"
       :id="`${selectId}-help`"

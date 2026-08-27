@@ -20,7 +20,7 @@ import { toast, useToast, WiToast } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, toast } from '@well-insight/ui'
+import { toast, WiButton } from '@well-insight/ui'
 </script>
 
 <template>
@@ -55,8 +55,8 @@ import { WiButton, toast } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { toast, WiButton } from '@well-insight/ui'
 import { h } from 'vue'
-import { WiButton, toast } from '@well-insight/ui'
 
 function showRich() {
   toast.info({
@@ -78,9 +78,9 @@ You can still manage the list yourself with `messages` + `close`.
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
-import { WiToast, WiButton } from '@well-insight/ui'
 import type { ToastMessage } from '@well-insight/ui'
+import { WiButton, WiToast } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const messages = ref<ToastMessage[]>([])
 let seq = 0

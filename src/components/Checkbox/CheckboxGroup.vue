@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type {CheckboxGroupProps, CheckboxValue} from './types';
 import { computed, provide } from 'vue'
-import { WI_CHECKBOX_GROUP_KEY, type CheckboxGroupProps, type CheckboxValue } from './types'
+import {   WI_CHECKBOX_GROUP_KEY } from './types'
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   modelValue: () => [],

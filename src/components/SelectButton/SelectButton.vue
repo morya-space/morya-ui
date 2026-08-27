@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
 import { computed } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
 
 const props = withDefaults(defineProps<SelectButtonProps>(), {
   multiple: false,

@@ -1,36 +1,36 @@
 {
   "name": "@well-insight/ui-mcp",
+  "type": "module",
   "version": "0.1.9",
+  "packageManager": "pnpm@10.12.4",
   "description": "MCP server for @well-insight/ui — component docs, examples, and usage guidance for AI coding agents.",
   "license": "MIT",
-  "type": "module",
-  "packageManager": "pnpm@10.12.4",
-  "engines": {
-    "node": ">=20.19.0"
-  },
+  "homepage": "https://github.com/well-insight/well-insight-ui/tree/main/packages/ui-mcp#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/well-insight/well-insight-ui.git",
     "directory": "packages/ui-mcp"
   },
-  "homepage": "https://github.com/well-insight/well-insight-ui/tree/main/packages/ui-mcp#readme",
   "bugs": {
     "url": "https://github.com/well-insight/well-insight-ui/issues"
   },
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "bin": {
     "well-insight-ui-mcp": "./bin/well-insight-ui-mcp.js"
   },
   "files": [
+    "README.md",
     "bin",
-    "dist",
     "data",
-    "README.md"
+    "dist"
   ],
-  "exports": {
-    ".": "./dist/index.js"
+  "engines": {
+    "node": ">=20.19.0"
   },
   "scripts": {
     "generate": "node ./scripts/generate-catalog.mjs",

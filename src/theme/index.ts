@@ -5,11 +5,11 @@ export type ThemeName = 'light' | 'dark'
 export const themeNames: readonly ThemeName[] = ['light', 'dark']
 export { darkTokens, lightTokens }
 export type { ColorTokens, DesignTokens, MotionTokens, RadiusTokens, SpacingTokens } from './tokens'
-export { useTheme } from './useTheme'
-export { applyMotion, getPreferredMotion, useMotion } from './useMotion'
-export type { MotionPreference } from './useMotion'
 export { applyDensity, useDensity } from './useDensity'
 export type { DensityPreference } from './useDensity'
+export { applyMotion, getPreferredMotion, useMotion } from './useMotion'
+export type { MotionPreference } from './useMotion'
+export { useTheme } from './useTheme'
 
 export function getPreferredTheme(): ThemeName {
   if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches) {

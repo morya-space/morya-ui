@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiFlex from './Flex.vue'
 
-describe('WiFlex', () => {
+describe('wiFlex', () => {
   it('renders children with flex display', () => {
     const wrapper = mount(WiFlex, {
       slots: { default: '<span class="a">A</span><span class="b">B</span>' },

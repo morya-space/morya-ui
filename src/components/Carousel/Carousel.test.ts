@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiCarousel from './Carousel.vue'
 
-describe('WiCarousel', () => {
+describe('wiCarousel', () => {
   it('pages through items', async () => {
     const wrapper = mount(WiCarousel, {
       props: { value: ['a', 'b', 'c'], numVisible: 1 },

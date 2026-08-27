@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import WiFileUpload from './FileUpload.vue'
 
 function makeFile(name = 'hello.txt', type = 'text/plain', content = 'hello') {
@@ -18,7 +18,7 @@ async function pick(wrapper: ReturnType<typeof mount>, files: File[]) {
   await Promise.resolve()
 }
 
-describe('WiFileUpload', () => {
+describe('wiFileUpload', () => {
   it('emits select when files change', async () => {
     const wrapper = mount(WiFileUpload, { props: { mode: 'advanced' } })
     const file = makeFile()

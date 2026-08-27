@@ -47,8 +47,8 @@ import { WiScrollbar } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiScrollbar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const count = ref(3)
 </script>
@@ -120,15 +120,23 @@ import { WiScrollbar } from '@well-insight/ui'
 <template>
   <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">always</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">
+        always
+      </p>
       <WiScrollbar height="160px" always>
-        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">Line {{ n }}</p>
+        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
+          Line {{ n }}
+        </p>
       </WiScrollbar>
     </div>
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">native</p>
-      <WiScrollbar height="160px" native  style="width: 200px">
-        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">Line {{ n }}</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted)">
+        native
+      </p>
+      <WiScrollbar height="160px" native style="width: 200px">
+        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
+          Line {{ n }}
+        </p>
       </WiScrollbar>
     </div>
   </div>
@@ -141,9 +149,9 @@ import { WiScrollbar } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
-import { WiButton, WiScrollbar } from '@well-insight/ui'
 import type { ScrollbarInstance } from '@well-insight/ui'
+import { WiButton, WiScrollbar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
 const scrollTop = ref(0)
@@ -189,9 +197,9 @@ function onScroll(payload: { scrollTop: number }) {
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
-import { WiScrollbar } from '@well-insight/ui'
 import type { ScrollbarDirection } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const num = ref(20)
 
@@ -201,7 +209,7 @@ function loadMore(direction: ScrollbarDirection) {
 </script>
 
 <template>
-  <WiScrollbar height="220px" always @end-reached="loadMore" style="width: 200px">
+  <WiScrollbar height="220px" always style="width: 200px" @end-reached="loadMore">
     <p
       v-for="item in num"
       :key="item"

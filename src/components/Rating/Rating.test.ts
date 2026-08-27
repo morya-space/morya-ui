@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiRating from './Rating.vue'
 
-describe('WiRating', () => {
+describe('wiRating', () => {
   it('renders stars and emits selection', async () => {
     const wrapper = mount(WiRating, { props: { modelValue: 2, stars: 5 } })
     const stars = wrapper.findAll('.wi-rating__star')

@@ -1,14 +1,4 @@
 <script setup lang="ts">
-import { computed, provide, reactive, ref, useSlots, watch } from 'vue'
-import { WI_TREE_KEY, WI_TREE_NODE_SLOT } from './context'
-import {
-  buildChildMap,
-  expandCheckedKeys,
-  projectCheckedKeys,
-  setCheckedCascade,
-  syncAncestors,
-  walkTree,
-} from './checkStrategy'
 import type {
   TreeCheckedKeys,
   TreeCheckStrategy,
@@ -17,6 +7,16 @@ import type {
   TreeProps,
   TreeSelectionKeys,
 } from './types'
+import { computed, provide, reactive, ref, useSlots, watch } from 'vue'
+import {
+  buildChildMap,
+  expandCheckedKeys,
+  projectCheckedKeys,
+  setCheckedCascade,
+  syncAncestors,
+  walkTree,
+} from './checkStrategy'
+import { WI_TREE_KEY, WI_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
 const props = withDefaults(defineProps<TreeProps>(), {
   selectionMode: 'single',
@@ -34,9 +34,6 @@ const props = withDefaults(defineProps<TreeProps>(), {
   draggable: false,
 })
 
-const slots = useSlots()
-provide(WI_TREE_NODE_SLOT, slots.default)
-
 const emit = defineEmits<{
   (event: 'update:selectionKeys', value: TreeSelectionKeys): void
   (event: 'update:modelValue', value: string | null): void
@@ -47,6 +44,8 @@ const emit = defineEmits<{
   (event: 'check', payload: { node: TreeNode; checkedKeys: TreeCheckedKeys }): void
   (event: 'node-drop', payload: { dragKey: string; dropKey: string; position: 'before' | 'after' | 'inside' }): void
 }>()
+const slots = useSlots()
+provide(WI_TREE_NODE_SLOT, slots.default)
 
 const innerExpanded = ref<TreeExpandedKeys>({})
 const loadingKeys = reactive<Record<string, boolean>>({})

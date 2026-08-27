@@ -18,8 +18,8 @@ import { WiSlider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSlider } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(40)
 </script>
@@ -27,7 +27,9 @@ const value = ref(40)
 <template>
   <div style="width:min(24rem,100%)">
     <WiSlider v-model="value" />
-    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">{{ value }}</p>
+    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">
+      {{ value }}
+    </p>
   </div>
 </template>
 ```
@@ -36,8 +38,8 @@ const value = ref(40)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSlider } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref([20, 70])
 </script>
@@ -45,7 +47,9 @@ const value = ref([20, 70])
 <template>
   <div style="width:min(24rem,100%)">
     <WiSlider v-model="value" range />
-    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">{{ value.join(' – ') }}</p>
+    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">
+      {{ value.join(' – ') }}
+    </p>
   </div>
 </template>
 ```
@@ -56,8 +60,8 @@ const value = ref([20, 70])
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSlider } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(50)
 </script>

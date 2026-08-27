@@ -18,8 +18,8 @@ import { WiTerminal } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTerminal } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const last = ref('')
 </script>
@@ -27,7 +27,9 @@ const last = ref('')
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
     <WiTerminal welcome-message="Well Insight Terminal" @command="last = $event" />
-    <div v-if="last">最近命令：{{ last }}</div>
+    <div v-if="last">
+      最近命令：{{ last }}
+    </div>
   </div>
 </template>
 ```

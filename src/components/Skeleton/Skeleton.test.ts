@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiSkeleton from './Skeleton.vue'
 
-describe('WiSkeleton', () => {
+describe('wiSkeleton', () => {
   it('renders rectangle wave skeleton by default', () => {
     const wrapper = mount(WiSkeleton)
     expect(wrapper.classes()).toContain('wi-skeleton')

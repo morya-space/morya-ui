@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiDatePicker from './DatePicker.vue'
 
-describe('WiDatePicker', () => {
+describe('wiDatePicker', () => {
   it('opens calendar and emits ISO date', async () => {
     const wrapper = mount(WiDatePicker, { props: { modelValue: '2024-01-15' }, attachTo: document.body })
     await wrapper.find('.wi-datepicker__input').trigger('click')

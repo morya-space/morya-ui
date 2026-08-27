@@ -1,29 +1,33 @@
+import type {App, Component, ComputedRef, InjectionKey, MaybeRefOrGetter, Plugin} from 'vue';
+import type { WiLocaleConfig } from '../locale/types'
+import type {DensityPreference} from '../theme';
+import type {WiComponentDefaults} from './componentDefaults';
+import type { WiGapSize } from './gap'
+import type { WiAppendTo } from './overlay'
+import type {WiInputVariant, WiSizeInput} from './types';
 import {
+  
+  
   computed,
+  
   inject,
+  
+  
+  
   provide,
-  type App,
-  type Component,
-  type ComputedRef,
-  type InjectionKey,
-  type MaybeRefOrGetter,
-  type Plugin,
-  toValue,
+  toValue
 } from 'vue'
 import { wiComponents } from '../component-registry'
 import { zhCN } from '../locale/zh-CN'
-import type { WiLocaleConfig } from '../locale/types'
-import { applyDensity, type DensityPreference } from '../theme'
+import { applyDensity  } from '../theme'
 import {
   getComponentDefault,
   getComponentDefaults,
-  mergeComponentDefaults,
-  type WiComponentDefaults,
+  mergeComponentDefaults
+  
 } from './componentDefaults'
-import type { WiGapSize } from './gap'
-import type { WiAppendTo } from './overlay'
 import { setWiOverlayAppContext } from './overlayHost'
-import { resolveSizeClass, type WiInputVariant, type WiSizeInput } from './types'
+import { resolveSizeClass   } from './types'
 
 export type { WiComponentDefaultMap, WiComponentDefaults, WiShowPasswordOn, WiTextareaAutosize } from './componentDefaults'
 export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } from './componentDefaults'

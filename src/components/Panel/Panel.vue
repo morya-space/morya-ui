@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { PanelProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
-import type { PanelProps } from './types'
 
 const props = withDefaults(defineProps<PanelProps>(), {
   toggleable: false,
@@ -38,7 +38,9 @@ function toggle() {
   <section :class="rootClass">
     <header v-if="$slots.header || header || toggleable" class="wi-panel__header">
       <div class="wi-panel__title">
-        <slot name="header">{{ header }}</slot>
+        <slot name="header">
+          {{ header }}
+        </slot>
       </div>
       <button
         v-if="toggleable"

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiInput from './Input.vue'
 
-describe('WiInput', () => {
+describe('wiInput', () => {
   it('associates its label and emits model updates', async () => {
     const wrapper = mount(WiInput, { props: { label: 'Email', id: 'email' } })
     expect(wrapper.get('label').attributes('for')).toBe('email')

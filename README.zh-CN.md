@@ -42,8 +42,8 @@ pnpm add @well-insight/ui
 ### 全量注册
 
 ```ts
-import { createApp } from 'vue'
 import WellInsight from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
@@ -78,8 +78,8 @@ import { WiInput } from '@well-insight/ui/input'
 ### 自动按需（Vite）
 
 ```ts
-import Components from 'unplugin-vue-components/vite'
 import { WellInsightResolver } from '@well-insight/ui/resolver'
+import Components from 'unplugin-vue-components/vite'
 
 Components({ resolvers: [WellInsightResolver()] })
 ```
@@ -91,8 +91,8 @@ Components({ resolvers: [WellInsightResolver()] })
 `createWellInsight` / `WellInsight` 会设置全局默认值，并**默认注册全部组件**：
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight, enUS } from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 

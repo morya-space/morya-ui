@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync } from 'node:fs'
-import { resolve, join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { root } from './ui-changelog.mjs'
 import { git, run } from './release-steps.mjs'
+import { root } from './ui-changelog.mjs'
 
 export const MCP_NAME = '@well-insight/ui-mcp'
 export const MCP_PKG_PATH = join(root, 'packages/ui-mcp/package.json')

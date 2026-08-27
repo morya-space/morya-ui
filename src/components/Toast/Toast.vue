@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { ToastMessage, ToastProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
-import { plainTextOf } from '../../shared/content'
 import { useWiConfig } from '../../shared/config'
+import { plainTextOf } from '../../shared/content'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { WiRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
@@ -13,7 +14,6 @@ import {
   trimToastsToMax,
   unregisterToastManualHost,
 } from './toastState'
-import type { ToastMessage, ToastProps } from './types'
 
 const props = withDefaults(defineProps<ToastProps>(), {
   teleport: true,

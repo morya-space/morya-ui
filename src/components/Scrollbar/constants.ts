@@ -9,7 +9,7 @@ export interface ScrollbarContext {
 export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol('wiScrollbar')
 
 /** Internal shape used when providing refs via reactive(). */
-export type ScrollbarProvideSource = {
+export interface ScrollbarProvideSource {
   scrollbarElement: Ref<HTMLDivElement | undefined>
   wrapElement: Ref<HTMLDivElement | undefined>
   contentId: ComputedRef<string>

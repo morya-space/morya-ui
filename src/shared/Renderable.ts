@@ -1,5 +1,7 @@
-import { defineComponent, type PropType } from 'vue'
-import { renderWiContent, type WiRenderable } from './content'
+import type {PropType} from 'vue';
+import type {WiRenderable} from './content';
+import { defineComponent  } from 'vue'
+import { renderWiContent  } from './content'
 
 /** Renders string / VNode / component / `() => VNode` content. */
 export const WiRenderableView = defineComponent({

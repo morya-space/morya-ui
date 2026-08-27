@@ -15,15 +15,15 @@ Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), n
 ## Import
 
 ```ts
-import { WiDropdown, WiButton } from '@well-insight/ui'
+import { WiButton, WiDropdown } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDropdown } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 const items = [
@@ -51,8 +51,8 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiDropdown } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 const items = [

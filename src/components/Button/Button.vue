@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Comment, Fragment, Text, computed, ref, useSlots, type VNode, type VNodeChild } from 'vue'
-import { useConfiguredSize } from '../../shared/config'
-import WiIcon from '../Icon/Icon.vue'
+import type {VNode, VNodeChild} from 'vue';
 import type { IconName } from '../Icon/types'
 import type { ButtonProps } from './types'
+import { Comment, computed, Fragment, ref, Text, useSlots   } from 'vue'
+import { useConfiguredSize } from '../../shared/config'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   iconPos: 'left',
@@ -126,7 +127,7 @@ defineExpose({ focus, ref: buttonElement })
         <span class="wi-button__spinner" />
       </slot>
       <template v-else>
-        <slot name="icon" :class="'wi-button__icon-slot'">
+        <slot name="icon" class="wi-button__icon-slot">
           <WiIcon v-if="iconName" :name="iconName" size="sm" />
           <component :is="iconComponent" v-else-if="iconComponent" />
         </slot>

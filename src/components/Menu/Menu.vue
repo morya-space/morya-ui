@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { MenuItem, MenuProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import MenuNodes from './MenuNodes.vue'
-import type { MenuItem, MenuProps } from './types'
 
 const props = withDefaults(defineProps<MenuProps>(), {
   popup: false,

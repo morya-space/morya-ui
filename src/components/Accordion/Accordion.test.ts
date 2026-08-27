@@ -8,7 +8,7 @@ const tabs = [
   { value: 'off', header: 'Disabled', disabled: true },
 ]
 
-describe('WiAccordion', () => {
+describe('wiAccordion', () => {
   it('expands a single tab and collapses on second click', async () => {
     const wrapper = mount(WiAccordion, {
       props: { tabs, modelValue: '' },

@@ -13,9 +13,9 @@ Page-level layout shell. Set `has-sider` on the `WiLayout` that hosts a sider. G
 ```ts
 import {
   WiLayout,
-  WiLayoutHeader,
   WiLayoutContent,
   WiLayoutFooter,
+  WiLayoutHeader,
   WiLayoutSider,
 } from '@well-insight/ui'
 ```
@@ -26,16 +26,20 @@ Header / Content / Footer. Content fills the leftover height.
 
 ```vue preview
 <script setup lang="ts">
-import { WiLayout, WiLayoutHeader, WiLayoutContent, WiLayoutFooter } from '@well-insight/ui'
+import { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well-insight/ui'
 </script>
 
 <template>
   <WiLayout style="height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">Header</WiLayoutHeader>
+    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+      Header
+    </WiLayoutHeader>
     <WiLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content (fills remaining space)
     </WiLayoutContent>
-    <WiLayoutFooter bordered style="padding:0.75rem 1rem">Footer</WiLayoutFooter>
+    <WiLayoutFooter bordered style="padding:0.75rem 1rem">
+      Footer
+    </WiLayoutFooter>
   </WiLayout>
 </template>
 ```
@@ -46,13 +50,13 @@ Header + left sider + main. The inner `has-sider` layout consumes all height bel
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import {
   WiLayout,
-  WiLayoutHeader,
   WiLayoutContent,
+  WiLayoutHeader,
   WiLayoutSider,
 } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
@@ -91,15 +95,17 @@ const collapsed = ref(false)
 <script setup lang="ts">
 import {
   WiLayout,
-  WiLayoutHeader,
   WiLayoutContent,
+  WiLayoutHeader,
   WiLayoutSider,
 } from '@well-insight/ui'
 </script>
 
 <template>
   <WiLayout style="height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">Inspector</WiLayoutHeader>
+    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+      Inspector
+    </WiLayoutHeader>
     <WiLayout has-sider sider-placement="right">
       <WiLayoutSider bordered :width="140" content-style="padding:0.75rem">
         Props panel
@@ -118,16 +124,16 @@ Admin-style shell: header + sider + content + footer.
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import {
+  WiButton,
   WiLayout,
-  WiLayoutHeader,
   WiLayoutContent,
   WiLayoutFooter,
+  WiLayoutHeader,
   WiLayoutSider,
-  WiButton,
   WiTag,
 } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
@@ -185,12 +191,14 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiLayout, WiLayoutHeader, WiLayoutContent } from '@well-insight/ui'
+import { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'
 </script>
 
 <template>
   <WiLayout style="height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">Settings</WiLayoutHeader>
+    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+      Settings
+    </WiLayoutHeader>
     <WiLayoutContent embedded content-style="padding:1rem">
       Nested forms / lists go here.
     </WiLayoutContent>
@@ -206,22 +214,26 @@ Only the content pane scrolls; header and sider stay fixed.
 <script setup lang="ts">
 import {
   WiLayout,
-  WiLayoutHeader,
   WiLayoutContent,
+  WiLayoutHeader,
   WiLayoutSider,
 } from '@well-insight/ui'
 </script>
 
 <template>
   <WiLayout style="height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">Scroll demo</WiLayoutHeader>
+    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+      Scroll demo
+    </WiLayoutHeader>
     <WiLayout has-sider>
       <WiLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Fixed sider
       </WiLayoutSider>
       <WiLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
-          <div v-for="n in 20" :key="n">Row {{ n }} — scroll down</div>
+          <div v-for="n in 20" :key="n">
+            Row {{ n }} — scroll down
+          </div>
         </div>
       </WiLayoutContent>
     </WiLayout>
@@ -235,7 +247,7 @@ import {
 
 ```vue preview
 <script setup lang="ts">
-import { WiLayout, WiLayoutHeader, WiLayoutContent } from '@well-insight/ui'
+import { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'
 </script>
 
 <template>
@@ -243,10 +255,14 @@ import { WiLayout, WiLayoutHeader, WiLayoutContent } from '@well-insight/ui'
     :native-scrollbar="false"
     style="height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden"
   >
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">Custom scrollbar</WiLayoutHeader>
+    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+      Custom scrollbar
+    </WiLayoutHeader>
     <WiLayoutContent embedded :native-scrollbar="false" content-style="padding:1rem">
       <div style="display:grid;gap:0.5rem">
-        <div v-for="n in 16" :key="n">Row {{ n }}</div>
+        <div v-for="n in 16" :key="n">
+          Row {{ n }}
+        </div>
       </div>
     </WiLayoutContent>
   </WiLayout>
@@ -261,8 +277,8 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 <script setup lang="ts">
 import {
   WiLayout,
-  WiLayoutHeader,
   WiLayoutContent,
+  WiLayoutHeader,
   WiLayoutSider,
 } from '@well-insight/ui'
 </script>
@@ -270,9 +286,13 @@ import {
 <template>
   <div style="position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
     <WiLayout position="absolute" has-sider>
-      <WiLayoutSider bordered :width="120" content-style="padding:0.75rem">Nav</WiLayoutSider>
+      <WiLayoutSider bordered :width="120" content-style="padding:0.75rem">
+        Nav
+      </WiLayoutSider>
       <WiLayout>
-        <WiLayoutHeader bordered style="padding:0.75rem 1rem">Absolute layout</WiLayoutHeader>
+        <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+          Absolute layout
+        </WiLayoutHeader>
         <WiLayoutContent embedded content-style="padding:1rem">
           Fills the relative container
         </WiLayoutContent>

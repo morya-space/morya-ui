@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
+import type { DialogProps } from './types'
 import { computed, ref, toRef, useSlots, watch } from 'vue'
-import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiLocale } from '../../locale'
+import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { normalizeSeverity } from '../../shared/types'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import WiButton from '../Button/Button.vue'
 import WiIcon from '../Icon/Icon.vue'
-import type { IconName } from '../Icon/types'
-import type { DialogProps } from './types'
 
 const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
@@ -168,75 +167,81 @@ useModalOverlay({
         :style="backdropStyle"
       >
         <div class="wi-dialog-zoom" @click.self="onOutsideClick">
-        <section
-          ref="dialogElement"
-          class="wi-dialog"
-          :class="{
-            'wi-dialog--maximized': maximized,
-            [`wi-dialog--${resolvedType}`]: resolvedType,
-          }"
-          :style="width && !maximized ? { width } : undefined"
-          role="dialog"
-          :aria-modal="modal || undefined"
-          :aria-label="dialogTitle"
-          tabindex="-1"
-        >
-          <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="wi-dialog__header">
-            <div class="wi-dialog__heading">
-              <span v-if="typeIcon" class="wi-dialog__type-icon" aria-hidden="true">
-                <WiIcon :name="typeIcon" size="sm" />
-              </span>
-              <slot name="header"><h2 v-if="dialogTitle">{{ dialogTitle }}</h2></slot>
-            </div>
-            <div v-if="maximizable || closable" class="wi-dialog__actions">
-              <button
-                v-if="maximizable"
-                type="button"
-                class="wi-dialog__action"
-                :aria-label="maximized ? locale.restore : locale.maximize"
-                :disabled="busy"
-                @click="toggleMaximize"
-              >
-                {{ maximized ? '❐' : '▢' }}
-              </button>
-              <button
-                v-if="closable"
-                type="button"
-                class="wi-dialog__action"
-                :aria-label="locale.close"
-                :disabled="busy"
-                @click="dismiss"
-              >
-                ×
-              </button>
-            </div>
-          </header>
-          <div class="wi-dialog__body"><slot /></div>
-          <footer
-            v-if="showFooter"
-            class="wi-dialog__footer"
-            :class="{ 'wi-dialog__footer--preset': showPresetFooter }"
+          <section
+            ref="dialogElement"
+            class="wi-dialog"
+            :class="{
+              'wi-dialog--maximized': maximized,
+              [`wi-dialog--${resolvedType}`]: resolvedType,
+            }"
+            :style="width && !maximized ? { width } : undefined"
+            role="dialog"
+            :aria-modal="modal || undefined"
+            :aria-label="dialogTitle"
+            tabindex="-1"
           >
-            <slot name="footer">
-              <WiButton
-                v-if="negativeText"
-                :label="negativeText"
-                severity="secondary"
-                :disabled="busy"
-                :loading="pending === 'negative'"
-                @click="onNegative"
-              />
-              <WiButton
-                v-if="positiveText"
-                :label="positiveText"
-                :severity="positiveSeverity"
-                :disabled="busy && pending !== 'positive'"
-                :loading="pending === 'positive'"
-                @click="onPositive"
-              />
-            </slot>
-          </footer>
-        </section>
+            <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="wi-dialog__header">
+              <div class="wi-dialog__heading">
+                <span v-if="typeIcon" class="wi-dialog__type-icon" aria-hidden="true">
+                  <WiIcon :name="typeIcon" size="sm" />
+                </span>
+                <slot name="header">
+                  <h2 v-if="dialogTitle">
+                    {{ dialogTitle }}
+                  </h2>
+                </slot>
+              </div>
+              <div v-if="maximizable || closable" class="wi-dialog__actions">
+                <button
+                  v-if="maximizable"
+                  type="button"
+                  class="wi-dialog__action"
+                  :aria-label="maximized ? locale.restore : locale.maximize"
+                  :disabled="busy"
+                  @click="toggleMaximize"
+                >
+                  {{ maximized ? '❐' : '▢' }}
+                </button>
+                <button
+                  v-if="closable"
+                  type="button"
+                  class="wi-dialog__action"
+                  :aria-label="locale.close"
+                  :disabled="busy"
+                  @click="dismiss"
+                >
+                  ×
+                </button>
+              </div>
+            </header>
+            <div class="wi-dialog__body">
+              <slot />
+            </div>
+            <footer
+              v-if="showFooter"
+              class="wi-dialog__footer"
+              :class="{ 'wi-dialog__footer--preset': showPresetFooter }"
+            >
+              <slot name="footer">
+                <WiButton
+                  v-if="negativeText"
+                  :label="negativeText"
+                  severity="secondary"
+                  :disabled="busy"
+                  :loading="pending === 'negative'"
+                  @click="onNegative"
+                />
+                <WiButton
+                  v-if="positiveText"
+                  :label="positiveText"
+                  :severity="positiveSeverity"
+                  :disabled="busy && pending !== 'positive'"
+                  :loading="pending === 'positive'"
+                  @click="onPositive"
+                />
+              </slot>
+            </footer>
+          </section>
         </div>
       </div>
     </Transition>

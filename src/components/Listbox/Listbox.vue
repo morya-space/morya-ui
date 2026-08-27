@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { ListboxOption, ListboxProps, ListboxValue } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { ListboxOption, ListboxProps, ListboxValue } from './types'
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
@@ -62,7 +62,7 @@ function select(option: ListboxOption) {
       :placeholder="locale.filterOptions"
       :disabled="disabled"
       :aria-label="locale.filterOptions"
-    />
+    >
     <ul class="wi-listbox__list" role="listbox" :aria-multiselectable="multiple || undefined" :style="listStyle">
       <li v-for="option in filteredOptions" :key="String(option.value)" role="presentation">
         <button
@@ -77,7 +77,9 @@ function select(option: ListboxOption) {
           {{ option.label }}
         </button>
       </li>
-      <li v-if="!filteredOptions.length" class="wi-listbox__empty">{{ locale.emptyOptions }}</li>
+      <li v-if="!filteredOptions.length" class="wi-listbox__empty">
+        {{ locale.emptyOptions }}
+      </li>
     </ul>
   </div>
 </template>

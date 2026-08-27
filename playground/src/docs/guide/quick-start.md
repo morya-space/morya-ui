@@ -40,8 +40,8 @@ pnpm add @well-insight/ui
 在应用入口引入**全量样式**，并通过插件一次注册所有组件：
 
 ```ts
-import { createApp } from 'vue'
 import WellInsight from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 
@@ -64,8 +64,8 @@ createApp(App).mount('#app')
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const name = ref('')
 </script>
@@ -101,8 +101,8 @@ import '@well-insight/ui/button/style.css'
 安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<WiButton>`：
 
 ```ts
-import Components from 'unplugin-vue-components/vite'
 import { WellInsightResolver } from '@well-insight/ui/resolver'
+import Components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
   plugins: [
@@ -121,8 +121,8 @@ export default defineConfig({
 `createWellInsight` 会写入全局默认值，并默认注册全部组件：
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight } from '@well-insight/ui'
+import { createApp } from 'vue'
 import App from './App.vue'
 import '@well-insight/ui/styles.css'
 

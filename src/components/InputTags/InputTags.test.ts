@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiInputTags from './InputTags.vue'
 
-describe('WiInputTags', () => {
+describe('wiInputTags', () => {
   it('adds a tag on Enter', async () => {
     const wrapper = mount(WiInputTags, { props: { modelValue: [] } })
     const input = wrapper.find('.wi-inputtags__input')

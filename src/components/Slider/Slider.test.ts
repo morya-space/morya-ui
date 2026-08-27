@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiSlider from './Slider.vue'
 
-describe('WiSlider', () => {
+describe('wiSlider', () => {
   it('emits single value updates', async () => {
     const wrapper = mount(WiSlider, { props: { modelValue: 20, min: 0, max: 100 } })
     const input = wrapper.get('input')

@@ -18,8 +18,8 @@ import { WiRating } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiRating } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(3)
 </script>
@@ -47,8 +47,8 @@ import { WiRating } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiRating } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(2.5)
 </script>

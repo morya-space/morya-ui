@@ -23,7 +23,9 @@ import { WiScrollTop } from '@well-insight/ui'
 
 <template>
   <div style="height: 8rem; overflow: auto; position: relative">
-    <div style="height: 40rem">Scroll down…</div>
+    <div style="height: 40rem">
+      Scroll down…
+    </div>
     <WiScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>

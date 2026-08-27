@@ -15,7 +15,7 @@ const options = [
   { label: 'Books', value: 'books' },
 ]
 
-describe('WiCascadeSelect', () => {
+describe('wiCascadeSelect', () => {
   it('opens nested columns and selects a leaf', async () => {
     const wrapper = mount(WiCascadeSelect, {
       props: { options, modelValue: null, teleport: false },

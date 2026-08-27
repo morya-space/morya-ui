@@ -11,7 +11,7 @@ Short hint for a trigger element, suited to icon buttons or truncated text.
 ## Import
 
 ```ts
-import { WiTooltip, WiButton } from '@well-insight/ui'
+import { WiButton, WiTooltip } from '@well-insight/ui'
 ```
 
 ## Basic

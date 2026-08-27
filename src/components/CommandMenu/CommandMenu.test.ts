@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import WiCommandMenu from './CommandMenu.vue'
 
-describe('WiCommandMenu', () => {
+describe('wiCommandMenu', () => {
   it('filters and runs a command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiCommandMenu, {

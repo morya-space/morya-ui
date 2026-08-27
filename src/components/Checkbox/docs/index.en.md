@@ -18,8 +18,8 @@ import { WiCheckbox } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiCheckbox } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const accepted = ref(false)
 </script>
@@ -33,8 +33,8 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiCheckbox } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const accepted = ref(false)
 </script>
@@ -65,8 +65,8 @@ import { WiCheckbox } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiCheckbox, WiCheckboxGroup } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const selected = ref(['vue'])
 </script>

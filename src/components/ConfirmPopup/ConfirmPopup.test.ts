@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiConfirmPopup from './ConfirmPopup.vue'
 
-describe('WiConfirmPopup', () => {
+describe('wiConfirmPopup', () => {
   it('emits accept and closes', async () => {
     const wrapper = mount(WiConfirmPopup, {
       props: { modelValue: true, message: 'Delete?', acceptLabel: 'Yes', rejectLabel: 'No' },

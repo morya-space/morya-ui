@@ -11,7 +11,7 @@ Content container for grouping title, body, and actions. Footer is extended via 
 ## Import
 
 ```ts
-import { WiCard, WiButton } from '@well-insight/ui'
+import { WiButton, WiCard } from '@well-insight/ui'
 ```
 
 ## Basic

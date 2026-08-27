@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiPagination from './Pagination.vue'
 
-describe('WiPagination', () => {
+describe('wiPagination', () => {
   it('emits selected pages and marks the active page', async () => {
     const wrapper = mount(WiPagination, { props: { modelValue: 2, totalRecords: 40, rows: 10 } })
     expect(wrapper.get('[aria-current="page"]').text()).toBe('2')

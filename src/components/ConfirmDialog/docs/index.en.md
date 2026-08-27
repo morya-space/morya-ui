@@ -11,15 +11,15 @@ Modal dialog used when the user must explicitly confirm an action.
 ## Import
 
 ```ts
-import { WiConfirmDialog, WiButton } from '@well-insight/ui'
+import { WiButton, WiConfirmDialog } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfirmDialog } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfirmDialog, WiButton } from '@well-insight/ui'
 
 const visible = ref(false)
 </script>

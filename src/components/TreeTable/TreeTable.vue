@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { TreeTableNode, TreeTableProps } from './types'
+import { ref } from 'vue'
 import TreeTableRow from './TreeTableRow.vue'
 
 defineProps<TreeTableProps>()
@@ -29,7 +29,9 @@ function toggle(node: TreeTableNode) {
     <table class="wi-treetable__table">
       <thead>
         <tr>
-          <th v-for="column in columns" :key="column.field" scope="col">{{ column.header }}</th>
+          <th v-for="column in columns" :key="column.field" scope="col">
+            {{ column.header }}
+          </th>
         </tr>
       </thead>
       <tbody>

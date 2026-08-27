@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
 import { computed, inject, onBeforeUnmount, useId, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { WI_FORM_ERRORS_KEY, WI_FORM_KEY } from './context'
@@ -8,7 +9,6 @@ import {
   ruleMatchesTrigger,
   toCssSize,
 } from './rules'
-import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   required: false,

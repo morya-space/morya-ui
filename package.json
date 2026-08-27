@@ -1,28 +1,21 @@
 {
   "name": "@well-insight/ui",
+  "type": "module",
   "version": "0.1.9",
+  "packageManager": "pnpm@10.12.4",
   "description": "Vue 3 component library for Well Insight.",
   "license": "MIT",
-  "type": "module",
-  "packageManager": "pnpm@10.12.4",
-  "engines": {
-    "node": ">=20.19.0"
-  },
+  "homepage": "https://github.com/well-insight/well-insight-ui#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/well-insight/well-insight-ui.git"
   },
-  "homepage": "https://github.com/well-insight/well-insight-ui#readme",
   "bugs": {
     "url": "https://github.com/well-insight/well-insight-ui/issues"
   },
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist",
-    "CHANGELOG.md"
-  ],
   "sideEffects": [
     "**/*.css",
     "**/*/style.js",
@@ -655,8 +648,15 @@
     "./virtual-scroller/style.css": "./dist/virtual-scroller/style.css",
     "./docs": "./src/docs/index.ts"
   },
-  "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "prepare": "husky",
     "dev": "vite --config playground/vite.config.ts",
@@ -664,6 +664,8 @@
     "preview": "vite preview --config playground/vite.config.ts",
     "build": "node scripts/prepare-on-demand.mjs && node scripts/generate-exports.mjs && vite build && vite build --mode on-demand && node scripts/emit-style-entries.mjs",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "release": "node scripts/release.mjs",
@@ -685,11 +687,13 @@
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^9.3.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-v8": "^4.1.10",
     "@vue/test-utils": "^2.4.11",
+    "eslint": "^10.9.1",
     "happy-dom": "^20.11.2",
     "husky": "^9.1.7",
     "shiki": "^4.4.3",

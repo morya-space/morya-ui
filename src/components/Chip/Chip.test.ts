@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiChip from './Chip.vue'
 
-describe('WiChip', () => {
+describe('wiChip', () => {
   it('renders label and optional icon', () => {
     const wrapper = mount(WiChip, { props: { label: 'Vue', icon: 'check' } })
     expect(wrapper.find('.wi-chip__label').text()).toBe('Vue')

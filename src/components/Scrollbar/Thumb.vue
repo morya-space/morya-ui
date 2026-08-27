@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type {BarMapKey} from './util';
 import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { scrollbarContextKey } from './constants'
-import { BAR_MAP, renderThumbStyle, type BarMapKey } from './util'
+import { BAR_MAP,  renderThumbStyle } from './util'
 
 const props = defineProps<{
   vertical?: boolean

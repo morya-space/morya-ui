@@ -18,8 +18,8 @@ import { WiInputOtp } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputOtp } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const code = ref('')
 </script>
@@ -35,8 +35,8 @@ const code = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputOtp } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const code = ref('')
 </script>

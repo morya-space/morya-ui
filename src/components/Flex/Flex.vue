@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, type CSSProperties, useSlots } from 'vue'
+import type {CSSProperties} from 'vue';
+import type { FlexProps } from './types'
+import { computed,  useSlots } from 'vue'
 import { useConfiguredGapSize } from '../../shared/config'
 import {
   resolveAlign,
@@ -8,7 +10,6 @@ import {
   resolveJustify,
 } from '../../shared/gap'
 import { flattenVNodes } from '../../shared/vnode'
-import type { FlexProps } from './types'
 
 const props = withDefaults(defineProps<FlexProps>(), {
   justify: 'start',

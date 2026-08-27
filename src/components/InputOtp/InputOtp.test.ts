@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiInputOtp from './InputOtp.vue'
 
-describe('WiInputOtp', () => {
+describe('wiInputOtp', () => {
   it('emits joined value on input and advances focus', async () => {
     const wrapper = mount(WiInputOtp, { props: { modelValue: '', length: 4 }, attachTo: document.body })
     const inputs = wrapper.findAll('.wi-inputotp__input')

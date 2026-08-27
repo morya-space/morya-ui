@@ -8,7 +8,7 @@ const items = [
   { label: 'Export', disabled: true },
 ]
 
-describe('WiSplitButton', () => {
+describe('wiSplitButton', () => {
   it('emits click from main button', async () => {
     const wrapper = mount(WiSplitButton, { props: { label: 'Save' } })
     await wrapper.find('.wi-splitbutton__main').trigger('click')

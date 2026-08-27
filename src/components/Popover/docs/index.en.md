@@ -11,15 +11,15 @@ Overlay positioned relative to a trigger. Use it for filters, quick actions, or 
 ## Import
 
 ```ts
-import { WiPopover, WiButton } from '@well-insight/ui'
+import { WiButton, WiPopover } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiPopover } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -28,7 +28,9 @@ const open = ref(false)
   <WiPopover v-model="open" placement="bottom">
     <WiButton label="Toggle Popover" @click="open = !open" />
     <template #content>
-      <p style="margin:0">Click outside or press Esc to close.</p>
+      <p style="margin:0">
+        Click outside or press Esc to close.
+      </p>
     </template>
   </WiPopover>
 </template>
@@ -38,8 +40,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiPopover } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -49,7 +51,9 @@ const open = ref(false)
     <WiPopover v-model="open" placement="bottom-start">
       <WiButton label="bottom-start" severity="secondary" @click="open = !open" />
       <template #content>
-        <p style="margin:0">Aligned to the start of the trigger.</p>
+        <p style="margin:0">
+          Aligned to the start of the trigger.
+        </p>
       </template>
     </WiPopover>
   </div>
@@ -62,8 +66,8 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiPopover } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const open = ref(false)
 </script>
@@ -72,7 +76,9 @@ const open = ref(false)
   <WiPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
     <WiButton label="Hover me" severity="secondary" />
     <template #content>
-      <p style="margin:0">Opens on hover.</p>
+      <p style="margin:0">
+        Opens on hover.
+      </p>
     </template>
   </WiPopover>
 </template>

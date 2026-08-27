@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { PaginationProps } from './types'
 import { computed, ref } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
-import type { PaginationProps } from './types'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   modelValue: 1,
@@ -80,14 +80,20 @@ defineExpose({ first, pageCount })
     :class="{ 'wi-pagination--simple': simple }"
     :aria-label="locale.pagination"
   >
-    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">‹</button>
+    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">
+      ‹
+    </button>
     <template v-if="simple">
       <span class="wi-pagination__simple" aria-current="page">{{ currentPage }} / {{ pageCount }}</span>
     </template>
     <template v-else>
-      <button v-for="page in pages" :key="page" type="button" class="wi-pagination__button" :class="{ 'wi-pagination__button--active': page === currentPage }" :disabled="disabled" :aria-label="pageLabel(page)" :aria-current="page === currentPage ? 'page' : undefined" @click="setPage(page)">{{ page }}</button>
+      <button v-for="page in pages" :key="page" type="button" class="wi-pagination__button" :class="{ 'wi-pagination__button--active': page === currentPage }" :disabled="disabled" :aria-label="pageLabel(page)" :aria-current="page === currentPage ? 'page' : undefined" @click="setPage(page)">
+        {{ page }}
+      </button>
     </template>
-    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">›</button>
+    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">
+      ›
+    </button>
     <label v-if="showSizePicker && !simple" class="wi-pagination__sizer">
       <span class="wi-pagination__sizer-label">{{ locale.itemsPerPage }}</span>
       <select class="wi-pagination__select" :disabled="disabled" :value="resolvedRows" @change="onSizeChange">

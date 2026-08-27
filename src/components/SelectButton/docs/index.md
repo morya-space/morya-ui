@@ -18,8 +18,8 @@ import { WiSelectButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelectButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('center')
 const options = [
@@ -38,8 +38,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelectButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref(['left'])
 const options = [

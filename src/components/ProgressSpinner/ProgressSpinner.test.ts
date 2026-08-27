@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiProgressSpinner from './ProgressSpinner.vue'
 
-describe('WiProgressSpinner', () => {
+describe('wiProgressSpinner', () => {
   it('renders SVG circle with defaults', () => {
     const wrapper = mount(WiProgressSpinner)
     expect(wrapper.classes()).toContain('wi-progress-spinner')

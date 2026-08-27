@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { isIconName } from '../Icon/icons'
-import WiIcon from '../Icon/Icon.vue'
 import type { IconName } from '../Icon/types'
 import type { DropdownItem } from './types'
+import { ref } from 'vue'
+import WiIcon from '../Icon/Icon.vue'
+import { isIconName } from '../Icon/icons'
 import DropdownNodes from './DropdownNodes.vue'
 
 const props = defineProps<{
@@ -49,7 +49,9 @@ function onLeave() {
   <template v-for="(item, index) in items" :key="itemKey(item, index)">
     <div v-if="isDivider(item)" class="wi-dropdown__separator" role="separator" />
     <div v-else-if="isGroup(item)" class="wi-dropdown__group">
-      <div class="wi-dropdown__group-label">{{ item.label }}</div>
+      <div class="wi-dropdown__group-label">
+        {{ item.label }}
+      </div>
       <DropdownNodes
         v-if="item.items?.length"
         :items="item.items"
@@ -76,7 +78,9 @@ function onLeave() {
           <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
           <template v-else>{{ item.icon }}</template>
         </span>
-        <slot name="item" :item="item">{{ item.label }}</slot>
+        <slot name="item" :item="item">
+          {{ item.label }}
+        </slot>
         <span class="wi-dropdown__caret" aria-hidden="true">▸</span>
       </button>
       <div v-if="openValue === itemKey(item, index)" class="wi-dropdown__submenu" role="menu">
@@ -102,7 +106,9 @@ function onLeave() {
         <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
         <template v-else>{{ item.icon }}</template>
       </span>
-      <slot name="item" :item="item">{{ item.label }}</slot>
+      <slot name="item" :item="item">
+        {{ item.label }}
+      </slot>
     </button>
   </template>
 </template>

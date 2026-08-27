@@ -1,3 +1,11 @@
+import type {
+  ToastHandle,
+  ToastInput,
+  ToastMessage,
+  ToastOptions,
+  ToastPosition,
+  ToastSeverity,
+} from './types'
 import { defineComponent, h } from 'vue'
 import { isToastOptionsObject } from '../../shared/content'
 import { mountOverlayHost } from '../../shared/overlayHost'
@@ -13,14 +21,6 @@ import {
   toastManualHostCount,
   toastState,
 } from './toastState'
-import type {
-  ToastHandle,
-  ToastInput,
-  ToastMessage,
-  ToastOptions,
-  ToastPosition,
-  ToastSeverity,
-} from './types'
 
 const DEFAULT_LIFE = 3000
 
@@ -88,7 +88,7 @@ export function useToast() {
 
 export { toastState } from './toastState'
 
-/** @internal test helper */
+/** @internal */
 export function resetToastService() {
   clearToastItems()
   resetToastHostRegistry()

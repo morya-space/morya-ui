@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { BadgeProps } from './types'
 import { computed, useSlots } from 'vue'
 import { normalizeSeverity, resolveSizeClass } from '../../shared/types'
-import type { BadgeProps } from './types'
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   severity: 'primary',

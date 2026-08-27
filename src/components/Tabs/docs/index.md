@@ -18,8 +18,8 @@ import { WiTabs } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTabs } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref('design')
 const tabs = [
@@ -32,7 +32,9 @@ const tabs = [
 <template>
   <WiTabs v-model="active" :tabs="tabs">
     <template #default="{ activeValue }">
-      <p style="margin:0">Active panel: {{ activeValue }}</p>
+      <p style="margin:0">
+        Active panel: {{ activeValue }}
+      </p>
     </template>
   </WiTabs>
 </template>
@@ -42,8 +44,8 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiTabs } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const active = ref('a')
 const tabs = ref([
@@ -77,7 +79,9 @@ function onAdd() {
       <WiButton label="操作" size="small" severity="secondary" />
     </template>
     <template #default="{ activeValue }">
-      <p style="margin:0">{{ activeValue }}</p>
+      <p style="margin:0">
+        {{ activeValue }}
+      </p>
     </template>
   </WiTabs>
 </template>

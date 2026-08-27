@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { WiButton, WiScrollbar } from '@well-insight/ui'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { WiButton, WiScrollbar } from '@well-insight/ui'
 import { useDocsI18n } from '../i18n'
 
 const { t } = useDocsI18n()
@@ -29,9 +29,15 @@ const pillars = computed(() => [
   <WiScrollbar class="home-scroll">
     <div class="home-page">
       <section class="home-hero">
-        <p class="home-kicker">WELL INSIGHT · UI SYSTEM</p>
-        <h1 class="home-brand">Well Insight</h1>
-        <p class="home-headline">{{ t.headline }}</p>
+        <p class="home-kicker">
+          WELL INSIGHT · UI SYSTEM
+        </p>
+        <h1 class="home-brand">
+          Well Insight
+        </h1>
+        <p class="home-headline">
+          {{ t.headline }}
+        </p>
         <p class="home-lead">
           {{ t.lead }}
         </p>
@@ -68,9 +74,15 @@ const pillars = computed(() => [
           <p>{{ t.nextBody }}</p>
         </div>
         <div class="home-cta__links">
-          <RouterLink class="home-text-link" :to="{ name: 'docs', params: { slug: 'theme' } }">{{ t.themeMotion }}</RouterLink>
-          <RouterLink class="home-text-link" :to="{ name: 'docs', params: { slug: 'config' } }">{{ t.globalConfig }}</RouterLink>
-          <RouterLink class="home-text-link" :to="{ name: 'components' }">{{ t.allComponents }}</RouterLink>
+          <RouterLink class="home-text-link" :to="{ name: 'docs', params: { slug: 'theme' } }">
+            {{ t.themeMotion }}
+          </RouterLink>
+          <RouterLink class="home-text-link" :to="{ name: 'docs', params: { slug: 'config' } }">
+            {{ t.globalConfig }}
+          </RouterLink>
+          <RouterLink class="home-text-link" :to="{ name: 'components' }">
+            {{ t.allComponents }}
+          </RouterLink>
         </div>
       </section>
     </div>

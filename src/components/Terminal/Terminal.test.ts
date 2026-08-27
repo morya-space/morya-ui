@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiTerminal from './Terminal.vue'
 
-describe('WiTerminal', () => {
+describe('wiTerminal', () => {
   it('emits command on submit', async () => {
     const wrapper = mount(WiTerminal, {
       props: { welcomeMessage: 'Hello' },

@@ -18,8 +18,8 @@ import { WiInputTags } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputTags } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const tags = ref(['vue', 'design'])
 </script>
@@ -35,8 +35,8 @@ const tags = ref(['vue', 'design'])
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputTags } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const tags = ref(['vue'])
 </script>

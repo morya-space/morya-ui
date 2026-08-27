@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiSwitch from './Switch.vue'
 
-describe('WiSwitch', () => {
+describe('wiSwitch', () => {
   it('uses a native switch input and emits model updates', async () => {
     const wrapper = mount(WiSwitch, { props: { id: 'notifications', label: 'Notifications' } })
 

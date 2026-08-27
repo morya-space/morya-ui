@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { useTheme } from '@well-insight/ui'
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { useTheme } from '@well-insight/ui'
 import { getUiPackageMeta } from '../docs/loadChangelog'
 import { useDocsI18n } from '../i18n'
 

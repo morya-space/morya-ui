@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { WiTextareaAutosize } from '../../shared/componentDefaults'
+import type { TextareaProps } from './types'
 import { computed, nextTick, onMounted, ref, useAttrs, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import {
@@ -6,12 +8,9 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
-import type { WiTextareaAutosize } from '../../shared/componentDefaults'
-import type { TextareaProps } from './types'
 
 defineOptions({ inheritAttrs: false })
 
-const attrs = useAttrs()
 const props = withDefaults(defineProps<TextareaProps>(), {
   modelValue: '',
   resize: 'vertical',
@@ -29,7 +28,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
 }>()
-
+const attrs = useAttrs()
 const defaults = useComponentDefaults('Textarea')
 const locale = useWiLocale()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
@@ -155,9 +154,9 @@ onMounted(() => {
       :class="{ 'wi-textarea-field__control--clearable': showClear }"
     >
       <textarea
-        ref="textareaElement"
         v-bind="attrs"
         :id="textareaId"
+        ref="textareaElement"
         :class="textareaClass"
         :value="modelValue"
         :rows="resolvedRows"

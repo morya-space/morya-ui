@@ -7,7 +7,7 @@ import WiLayoutFooter from './LayoutFooter.vue'
 import WiLayoutHeader from './LayoutHeader.vue'
 import WiLayoutSider from './LayoutSider.vue'
 
-describe('WiLayout', () => {
+describe('wiLayout', () => {
   it('renders header content footer structure', () => {
     const wrapper = mount(WiLayout, {
       slots: {

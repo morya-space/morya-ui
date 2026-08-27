@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiMenubar from './Menubar.vue'
 
-describe('WiMenubar', () => {
+describe('wiMenubar', () => {
   it('opens one-level submenu and runs command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiMenubar, {

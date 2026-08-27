@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiMegaMenu from './MegaMenu.vue'
 
-describe('WiMegaMenu', () => {
+describe('wiMegaMenu', () => {
   it('opens column panel and runs child command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiMegaMenu, {

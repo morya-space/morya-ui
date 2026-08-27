@@ -1,5 +1,5 @@
-import { readdirSync, readFileSync, statSync, writeFileSync, existsSync } from 'node:fs'
-import { join, dirname } from 'node:path'
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -7,7 +7,7 @@ const compsDir = join(root, 'src/components')
 
 const comps = readdirSync(compsDir).filter((f) => statSync(join(compsDir, f)).isDirectory()).sort()
 
-const re = /import\s+(?:type\s+)?\{?[^'"]*\}?\s*from\s+['"]\.\.\/([A-Z][a-zA-Z]+)\//g
+const re = /import\s[^'"]*from\s+['"]\.\.\/([A-Z][a-zA-Z]+)\//g
 
 const deps = {}
 for (const c of comps) {
@@ -36,7 +36,7 @@ for (const c of comps) {
   if (existsSync(join(compsDir, c, 'styles.css'))) {
     lines.push("import './styles.css'")
   }
-  writeFileSync(join(compsDir, c, 'style.ts'), lines.join('\n') + '\n')
+  writeFileSync(join(compsDir, c, 'style.ts'), `${lines.join('\n')  }\n`)
 }
 
 // Prepend import './style' to index.ts if missing
@@ -44,8 +44,8 @@ for (const c of comps) {
   const indexPath = join(compsDir, c, 'index.ts')
   if (!existsSync(indexPath)) continue
   let code = readFileSync(indexPath, 'utf8')
-  if (/^import\s+['"]\.\/style['"]\s*\r?\n/.test(code)) continue
-  code = "import './style'\n" + code.replace(/^import\s+['"]\.\/style['"]\s*\r?\n/, '')
+  if (/^import\s+['"]\.\/style['"]\s*\n/.test(code)) continue
+  code = `import './style'\n${  code.replace(/^import\s+['"]\.\/style['"]\s*\n/, '')}`
   writeFileSync(indexPath, code)
 }
 

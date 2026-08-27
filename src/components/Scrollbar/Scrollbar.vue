@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import type {CSSProperties, StyleValue} from 'vue';
+import type { ScrollbarDirection, ScrollbarEmits, ScrollbarProps } from './types'
 import {
   computed,
+  
   nextTick,
   onActivated,
   onBeforeUnmount,
@@ -9,14 +12,12 @@ import {
   provide,
   reactive,
   ref,
-  watch,
-  type CSSProperties,
-  type StyleValue,
+  
+  watch
 } from 'vue'
 import { scrollbarContextKey } from './constants'
 import Thumb from './Thumb.vue'
-import type { ScrollbarDirection, ScrollbarEmits, ScrollbarProps } from './types'
-import { GAP, addUnit, isNumber, isObject } from './util'
+import { addUnit, GAP, isNumber, isObject } from './util'
 
 defineOptions({ name: 'WiScrollbar' })
 

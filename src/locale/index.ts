@@ -1,12 +1,11 @@
+import type { WiLocaleConfig, WiLocaleMessages } from './types'
 import { computed } from 'vue'
 import { useWiConfig } from '../shared/config'
-import { enUS } from './en-US'
-import type { WiLocaleConfig, WiLocaleMessages } from './types'
 import { zhCN } from './zh-CN'
 
 export { enUS } from './en-US'
-export { zhCN } from './zh-CN'
 export type { WiLocaleConfig, WiLocaleMessages, WiLocaleName } from './types'
+export { zhCN } from './zh-CN'
 
 export function formatLocale(template: string, vars: Record<string, string | number>) {
   return template.replace(/\{(\w+)\}/g, (_, key: string) => String(vars[key] ?? ''))

@@ -8,7 +8,7 @@ const options = [
   { label: 'Cherry', value: 'c', disabled: true },
 ]
 
-describe('WiListbox', () => {
+describe('wiListbox', () => {
   it('emits single selection', async () => {
     const wrapper = mount(WiListbox, { props: { options, modelValue: 'a' } })
     await wrapper.findAll('.wi-listbox__option')[1]!.trigger('click')

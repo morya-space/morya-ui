@@ -11,15 +11,15 @@ description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 ## 引入
 
 ```ts
-import { WiConfirmDialog, WiButton } from '@well-insight/ui'
+import { WiButton, WiConfirmDialog } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfirmDialog } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfirmDialog, WiButton } from '@well-insight/ui'
 
 const visible = ref(false)
 </script>

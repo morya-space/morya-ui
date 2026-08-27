@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { nextTick, computed, ref, toRef, watch } from 'vue'
+import type { CommandMenuItem, CommandMenuProps } from './types'
+import { computed, nextTick, ref, toRef, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import type { CommandMenuItem, CommandMenuProps } from './types'
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
   model: () => [],
@@ -105,7 +105,7 @@ watch(filtered, () => {
             type="search"
             :placeholder="searchPlaceholder"
             :aria-label="locale.searchCommands"
-          />
+          >
           <ul class="wi-commandmenu__list" role="listbox">
             <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
               <button
@@ -123,7 +123,9 @@ watch(filtered, () => {
                 <span v-if="item.shortcut" class="wi-commandmenu__shortcut">{{ item.shortcut }}</span>
               </button>
             </li>
-            <li v-if="!filtered.length" class="wi-commandmenu__empty">{{ locale.noMatch }}</li>
+            <li v-if="!filtered.length" class="wi-commandmenu__empty">
+              {{ locale.noMatch }}
+            </li>
           </ul>
         </div>
       </div>

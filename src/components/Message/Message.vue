@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
+import type { MessageItem, MessageProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
@@ -6,7 +8,6 @@ import { resolveOverlayTeleport } from '../../shared/overlay'
 import { WiRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
-import type { IconName } from '../Icon/types'
 import {
   closeMessageItem,
   messageState,
@@ -14,7 +15,6 @@ import {
   trimMessagesToMax,
   unregisterMessageManualHost,
 } from './messageState'
-import type { MessageItem, MessageProps } from './types'
 
 const props = withDefaults(defineProps<MessageProps>(), {
   teleport: true,

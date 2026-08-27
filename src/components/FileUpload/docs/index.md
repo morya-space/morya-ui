@@ -31,8 +31,8 @@ import { WiFileUpload } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiFileUpload } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const names = ref<string[]>([])
 function onSelect(files: File[]) {
@@ -43,7 +43,9 @@ function onSelect(files: File[]) {
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
     <WiFileUpload mode="advanced" multiple @select="onSelect" />
-    <div v-if="names.length">已选：{{ names.join(', ') }}</div>
+    <div v-if="names.length">
+      已选：{{ names.join(', ') }}
+    </div>
   </div>
 </template>
 ```
@@ -54,8 +56,8 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiFileUpload } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const names = ref<string[]>([])
 function onSelect(files: File[]) {
@@ -66,9 +68,13 @@ function onSelect(files: File[]) {
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
     <WiFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
-      <template #tip>支持图片或 PDF，可一次拖入多个文件。</template>
+      <template #tip>
+        支持图片或 PDF，可一次拖入多个文件。
+      </template>
     </WiFileUpload>
-    <div v-if="names.length">已选：{{ names.join(', ') }}</div>
+    <div v-if="names.length">
+      已选：{{ names.join(', ') }}
+    </div>
   </div>
 </template>
 ```
@@ -79,8 +85,9 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
+import type {FileUploadFile} from '@well-insight/ui';
+import {  WiFileUpload } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiFileUpload, type FileUploadFile } from '@well-insight/ui'
 
 const preview = ref('')
 function onPreview(file: FileUploadFile) {
@@ -91,7 +98,7 @@ function onPreview(file: FileUploadFile) {
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
     <WiFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
-    <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem" />
+    <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem">
   </div>
 </template>
 ```
@@ -116,8 +123,9 @@ import { WiFileUpload } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import type {FileUploadRequestOptions} from '@well-insight/ui';
+import {  WiFileUpload } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiFileUpload, type FileUploadRequestOptions } from '@well-insight/ui'
 
 const last = ref('')
 
@@ -136,9 +144,13 @@ function onSuccess(_file: unknown, response: unknown) {
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
     <WiFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
-      <template #tip>选择后立即模拟上传，并显示进度。</template>
+      <template #tip>
+        选择后立即模拟上传，并显示进度。
+      </template>
     </WiFileUpload>
-    <div v-if="last">响应：{{ last }}</div>
+    <div v-if="last">
+      响应：{{ last }}
+    </div>
   </div>
 </template>
 ```
@@ -149,7 +161,8 @@ function onSuccess(_file: unknown, response: unknown) {
 
 ```vue preview
 <script setup lang="ts">
-import { WiFileUpload, type FileUploadFile } from '@well-insight/ui'
+import type {FileUploadFile} from '@well-insight/ui';
+import {  WiFileUpload } from '@well-insight/ui'
 
 async function mockUpload() {
   await new Promise((resolve) => setTimeout(resolve, 300))
@@ -171,7 +184,9 @@ function beforeUpload(file: File, _item: FileUploadFile) {
     :before-upload="beforeUpload"
     :http-request="mockUpload"
   >
-    <template #tip>单文件不超过 2MB。选好后点击上传。</template>
+    <template #tip>
+      单文件不超过 2MB。选好后点击上传。
+    </template>
   </WiFileUpload>
 </template>
 ```

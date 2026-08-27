@@ -4,7 +4,7 @@ import { h } from 'vue'
 import WiCheckbox from './Checkbox.vue'
 import WiCheckboxGroup from './CheckboxGroup.vue'
 
-describe('WiCheckbox', () => {
+describe('wiCheckbox', () => {
   it('associates its label and emits model updates', async () => {
     const wrapper = mount(WiCheckbox, { props: { id: 'terms', label: 'Accept terms' } })
 

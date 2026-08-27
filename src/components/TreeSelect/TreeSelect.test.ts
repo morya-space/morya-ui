@@ -14,7 +14,7 @@ const options = [
   },
 ]
 
-describe('WiTreeSelect', () => {
+describe('wiTreeSelect', () => {
   it('selects a tree node from the dropdown', async () => {
     const wrapper = mount(WiTreeSelect, {
       props: { options, modelValue: null, teleport: false },

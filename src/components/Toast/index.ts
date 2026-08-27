@@ -1,6 +1,6 @@
 import './style'
-export { default as WiToast } from './Toast.vue'
 export { toast, useToast } from './toast'
+export { default as WiToast } from './Toast.vue'
 export type {
   ToastEmits,
   ToastHandle,

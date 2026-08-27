@@ -4,7 +4,7 @@ import WiTabs from './Tabs.vue'
 
 const tabs = [{ label: 'Design', value: 'design' }, { label: 'Data', value: 'data' }, { label: 'Disabled', value: 'disabled', disabled: true }]
 
-describe('WiTabs', () => {
+describe('wiTabs', () => {
   it('emits the selected tab value', async () => {
     const wrapper = mount(WiTabs, { props: { tabs, modelValue: 'design' } })
     const tab = wrapper.findAll('[role="tab"]')[1]

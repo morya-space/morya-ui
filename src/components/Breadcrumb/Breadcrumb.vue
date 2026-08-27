@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { BreadcrumbItem, BreadcrumbProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { BreadcrumbItem, BreadcrumbProps } from './types'
 
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: '/',

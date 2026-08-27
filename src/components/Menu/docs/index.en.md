@@ -37,8 +37,8 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiMenu } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const selectedKey = ref('home')
 const model = [

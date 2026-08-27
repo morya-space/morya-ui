@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { GalleryProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { GalleryProps } from './types'
 
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
@@ -40,7 +40,7 @@ function next() {
       >
         ‹
       </button>
-      <img v-if="current" class="wi-gallery__image" :src="current" alt="" />
+      <img v-if="current" class="wi-gallery__image" :src="current" alt="">
       <button
         type="button"
         class="wi-gallery__nav wi-gallery__nav--next"
@@ -61,7 +61,7 @@ function next() {
           :aria-selected="index === activeIndex"
           @click="select(index)"
         >
-          <img :src="src" alt="" />
+          <img :src="src" alt="">
         </button>
       </li>
     </ul>

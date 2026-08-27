@@ -11,15 +11,15 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 ## 引入
 
 ```ts
-import { WiContextMenu, useContextMenu } from '@well-insight/ui'
+import { useContextMenu, WiContextMenu } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiContextMenu } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const visible = ref(false)
 const position = ref({ x: 0, y: 0 })
@@ -57,7 +57,7 @@ function onContext(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { WiContextMenu, useContextMenu } from '@well-insight/ui'
+import { useContextMenu, WiContextMenu } from '@well-insight/ui'
 
 const menu = useContextMenu()
 const model = [

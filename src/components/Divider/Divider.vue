@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, useSlots } from 'vue'
 import type { DividerProps } from './types'
+import { computed, useSlots } from 'vue'
 
 const props = withDefaults(defineProps<DividerProps>(), {
   type: 'solid',

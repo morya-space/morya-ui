@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiConfirmDialog from './ConfirmDialog.vue'
 
-describe('WiConfirmDialog', () => {
+describe('wiConfirmDialog', () => {
   it('emits accept and closes', async () => {
     const wrapper = mount(WiConfirmDialog, {
       props: {

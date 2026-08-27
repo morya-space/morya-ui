@@ -20,8 +20,8 @@ import { WiSelect } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
 const options = [
@@ -42,8 +42,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | number | undefined>('design')
 const options = [
@@ -61,8 +61,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | undefined>()
 const options = [
@@ -103,8 +103,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | undefined>()
 const options = [
@@ -126,8 +126,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | undefined>()
 const options = [
@@ -147,8 +147,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<Array<string | number>>(['design'])
 const options = [
@@ -172,8 +172,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<Array<string | number>>([])
 const options = [
@@ -193,8 +193,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
 const loading = ref(false)
@@ -238,8 +238,8 @@ function onSearch(query: string) {
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | undefined>()
 const cities = [
@@ -263,8 +263,8 @@ const cities = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | undefined>()
 const options = [

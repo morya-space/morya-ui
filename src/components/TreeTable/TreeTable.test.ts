@@ -15,7 +15,7 @@ const value = [
   },
 ]
 
-describe('WiTreeTable', () => {
+describe('wiTreeTable', () => {
   it('renders columns and expands children', async () => {
     const wrapper = mount(WiTreeTable, { props: { columns, value } })
     expect(wrapper.text()).toContain('Applications')

@@ -18,8 +18,8 @@ import { WiCascadeSelect } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiCascadeSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref<string | number | null>(null)
 const options = [
@@ -44,8 +44,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiCascadeSelect } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const a = ref(null)
 const b = ref(null)

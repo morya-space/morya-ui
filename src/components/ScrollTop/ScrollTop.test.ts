@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiScrollTop from './ScrollTop.vue'
 
-describe('WiScrollTop', () => {
+describe('wiScrollTop', () => {
   it('becomes visible after threshold and scrolls window', async () => {
     const scrollTo = vi.fn()
     vi.stubGlobal('scrollTo', scrollTo)

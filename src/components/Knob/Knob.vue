@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue'
 import type { KnobProps } from './types'
+import { computed, onBeforeUnmount, ref } from 'vue'
 
 const props = withDefaults(defineProps<KnobProps>(), {
   modelValue: 0,
@@ -56,7 +56,7 @@ function valueFromPointer(clientX: number, clientY: number) {
   const cy = rect.top + rect.height / 2
   const angle = Math.atan2(clientY - cy, clientX - cx)
   // Map from -π..π with 0 at right → 0 at top, clockwise-ish for dial feel
-  let normalized = (angle + Math.PI / 2 + Math.PI * 2) % (Math.PI * 2)
+  const normalized = (angle + Math.PI / 2 + Math.PI * 2) % (Math.PI * 2)
   const next = props.min + (normalized / (Math.PI * 2)) * (props.max - props.min)
   emit('update:modelValue', snap(next))
 }

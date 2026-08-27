@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import type { VirtualScrollerProps } from './types'
+import { computed, ref } from 'vue'
 
 const props = withDefaults(defineProps<VirtualScrollerProps>(), {
   height: 240,

@@ -35,15 +35,17 @@ import { WiProgressSpinner } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiProgressSpinner } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const loading = ref(true)
 </script>
 
 <template>
   <WiProgressSpinner :show="loading" description="Loading">
-    <p style="margin:0">Form content</p>
+    <p style="margin:0">
+      Form content
+    </p>
   </WiProgressSpinner>
   <WiButton label="Toggle" size="small" @click="loading = !loading" />
 </template>

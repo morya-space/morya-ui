@@ -4,7 +4,7 @@ import { h } from 'vue'
 import WiGrid from './Grid.vue'
 import WiGridItem from './GridItem.vue'
 
-describe('WiGrid', () => {
+describe('wiGrid', () => {
   it('renders a css grid with items', () => {
     const wrapper = mount(WiGrid, {
       props: { cols: 12, xGap: 8, yGap: 8 },

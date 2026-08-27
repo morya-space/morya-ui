@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiInputNumber from './InputNumber.vue'
 
-describe('WiInputNumber', () => {
+describe('wiInputNumber', () => {
   it('associates label and emits numeric updates', async () => {
     const wrapper = mount(WiInputNumber, { props: { label: 'Qty', id: 'qty' } })
     expect(wrapper.get('label').attributes('for')).toBe('qty')

@@ -1,9 +1,9 @@
-import changelogRaw from '../../../CHANGELOG.md?raw'
-import changelogEnRaw from '../../../CHANGELOG.en.md?raw'
-import packageJson from '../../../package.json' with { type: 'json' }
 import type { DocsLang } from '../i18n'
+import changelogEnRaw from '../../../CHANGELOG.en.md?raw'
+import changelogRaw from '../../../CHANGELOG.md?raw'
+import packageJson from '../../../package.json' with { type: 'json' }
 
-type UiPackageJson = {
+interface UiPackageJson {
   name: string
   version: string
 }

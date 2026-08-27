@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import WiInputGroup from './InputGroup.vue'
 import WiInputGroupAddon from './InputGroupAddon.vue'
 
-describe('WiInputGroup', () => {
+describe('wiInputGroup', () => {
   it('renders addons and default slot content', () => {
     const wrapper = mount(WiInputGroup, {
       slots: {
@@ -19,7 +19,7 @@ describe('WiInputGroup', () => {
   })
 })
 
-describe('WiInputGroupAddon', () => {
+describe('wiInputGroupAddon', () => {
   it('applies addon class to slotted content', () => {
     const wrapper = mount(WiInputGroupAddon, { slots: { default: 'https://' } })
     expect(wrapper.classes()).toContain('wi-inputgroup-addon')

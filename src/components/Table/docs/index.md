@@ -61,8 +61,8 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const columns = [
   { key: 'name', label: '姓名', minWidth: 120 },
@@ -101,8 +101,8 @@ const selection = ref([])
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const columns = [
   { key: 'name', label: '姓名', filterable: true, sortable: true, minWidth: 120 },
@@ -185,8 +185,8 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const expandedRowKeys = ref<Array<string | number>>([])
 const columns = [
@@ -218,8 +218,8 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton, WiTable } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const loading = ref(false)
 const columns = [

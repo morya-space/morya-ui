@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type {WiFormFieldRegistration} from './context';
+import type { FormProps, FormValidateTrigger } from './types'
 import { computed, provide, reactive } from 'vue'
 import {
   WI_FORM_ERRORS_KEY,
-  WI_FORM_KEY,
-  type WiFormFieldRegistration,
+  WI_FORM_KEY
+  
 } from './context'
-import type { FormProps, FormValidateTrigger } from './types'
 
 const props = withDefaults(defineProps<FormProps>(), {
   labelPosition: undefined,

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiAutoComplete from './AutoComplete.vue'
 
-describe('WiAutoComplete', () => {
+describe('wiAutoComplete', () => {
   it('emits complete and update on input', async () => {
     const wrapper = mount(WiAutoComplete, {
       props: { modelValue: '', suggestions: ['Apple', 'Apricot', 'Banana'] },

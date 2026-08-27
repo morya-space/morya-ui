@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
+import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
 import { computed } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
-import type { IconName } from '../Icon/types'
-import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
 
 const props = withDefaults(defineProps<TimelineProps>(), {
   align: 'left',
@@ -95,7 +95,9 @@ function isPending(index: number) {
         </div>
         <div class="wi-timeline__content">
           <slot name="content" :item="event" :index="index">
-            <div v-if="event.status" class="wi-timeline__status">{{ event.status }}</div>
+            <div v-if="event.status" class="wi-timeline__status">
+              {{ event.status }}
+            </div>
             <div>{{ event.content }}</div>
           </slot>
         </div>

@@ -18,8 +18,8 @@ import { WiBlockUI } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiBlockUI, WiButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const blocked = ref(false)
 </script>

@@ -167,8 +167,8 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiButton } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const loading = ref(false)
 

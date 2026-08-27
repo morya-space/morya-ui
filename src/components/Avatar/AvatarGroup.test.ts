@@ -4,7 +4,7 @@ import { h } from 'vue'
 import WiAvatar from './Avatar.vue'
 import WiAvatarGroup from './AvatarGroup.vue'
 
-describe('WiAvatarGroup', () => {
+describe('wiAvatarGroup', () => {
   it('shows overflow rest when max is exceeded', () => {
     const wrapper = mount(WiAvatarGroup, {
       props: { max: 2 },

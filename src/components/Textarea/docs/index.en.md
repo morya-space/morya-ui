@@ -18,8 +18,8 @@ import { WiTextarea } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTextarea } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('')
 </script>
@@ -51,8 +51,8 @@ import { WiTextarea } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTextarea } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('Line 1\nLine 2')
 const limited = ref('Clamped height')
@@ -71,8 +71,8 @@ const limited = ref('Clamped height')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiTextarea } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('Draft notes')
 </script>

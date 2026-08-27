@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { InputOtpProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import type { InputOtpProps } from './types'
 
 const props = withDefaults(defineProps<InputOtpProps>(), {
   modelValue: '',
@@ -101,7 +101,7 @@ function onPaste(event: ClipboardEvent) {
 watch(
   () => props.length,
   () => {
-    inputs.value = Array.from({ length: props.length }, () => null)
+    inputs.value = Array.from({length: props.length}).fill(null)
   },
   { immediate: true },
 )
@@ -123,6 +123,6 @@ watch(
       :aria-label="formatLocale(locale.otpDigit, { index: index + 1 })"
       @input="onInput(index, $event)"
       @keydown="onKeydown(index, $event)"
-    />
+    >
   </div>
 </template>

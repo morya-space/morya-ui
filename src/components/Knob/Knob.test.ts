@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiKnob from './Knob.vue'
 
-describe('WiKnob', () => {
+describe('wiKnob', () => {
   it('renders value template and supports keyboard step', async () => {
     const wrapper = mount(WiKnob, {
       props: { modelValue: 40, min: 0, max: 100, step: 5, valueTemplate: '{value}%' },

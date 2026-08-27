@@ -26,8 +26,8 @@ Well Insight 提供应用级 / 页面级默认值，用于统一浮层挂载、�
 组件内置文案默认中文。切换英文时传入 `enUS`：
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight, enUS, zhCN } from '@well-insight/ui'
+import { createApp } from 'vue'
 
 createApp(App).use(createWellInsight({ locale: enUS })).mount('#app')
 ```
@@ -51,8 +51,8 @@ createWellInsight({
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput, WiSelect } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const options = [
@@ -64,7 +64,9 @@ const options = [
 <template>
   <div style="display:grid;gap:1rem">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">默认尺寸</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">
+        默认尺寸
+      </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
         <WiButton label="按钮" />
         <WiInput placeholder="输入" style="width:10rem" />
@@ -72,7 +74,9 @@ const options = [
       </div>
     </div>
     <WiConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">Config size="small"</p>
+      <p style="margin:0 0 0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">
+        Config size="small"
+      </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
         <WiButton label="按钮" />
         <WiInput placeholder="输入" style="width:10rem" />
@@ -87,8 +91,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiInput } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiInput } from '@well-insight/ui'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 </script>
@@ -125,14 +129,18 @@ import { WiConfigProvider, WiInput, WiTextarea } from '@well-insight/ui'
 <template>
   <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
     <WiConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">outlined</p>
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">
+        outlined
+      </p>
       <div style="display:grid;gap:0.5rem">
         <WiInput placeholder="Outlined input" />
         <WiTextarea placeholder="Outlined textarea" :rows="2" />
       </div>
     </WiConfigProvider>
     <WiConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">filled</p>
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wi-color-text-muted)">
+        filled
+      </p>
       <div style="display:grid;gap:0.5rem">
         <WiInput placeholder="Filled input" />
         <WiTextarea placeholder="Filled textarea" :rows="2" />
@@ -146,8 +154,8 @@ import { WiConfigProvider, WiInput, WiTextarea } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiConfirmDialog, WiSelect } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiSelect, WiButton, WiConfirmDialog } from '@well-insight/ui'
 
 const city = ref<string | undefined>()
 const confirmOpen = ref(false)
@@ -178,8 +186,8 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
+import { WiButton, WiConfigProvider, WiDialog } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiConfigProvider, WiButton, WiDialog } from '@well-insight/ui'
 
 const visible = ref(false)
 </script>
@@ -188,7 +196,9 @@ const visible = ref(false)
   <WiConfigProvider append-to="body" :z-index="2200">
     <WiButton label="打开对话框" @click="visible = true" />
     <WiDialog v-model="visible" header="挂载到 body" width="24rem">
-      <p style="margin:0">浮层默认 Teleport 到 body，zIndex 基准由 ConfigProvider 提供。</p>
+      <p style="margin:0">
+        浮层默认 Teleport 到 body，zIndex 基准由 ConfigProvider 提供。
+      </p>
     </WiDialog>
   </WiConfigProvider>
 </template>
@@ -197,8 +207,8 @@ const visible = ref(false)
 ## 应用级：`createWellInsight`
 
 ```ts
-import { createApp } from 'vue'
 import { createWellInsight } from '@well-insight/ui'
+import { createApp } from 'vue'
 
 createApp(App).use(
     createWellInsight({

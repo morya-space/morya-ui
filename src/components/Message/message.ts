@@ -1,3 +1,4 @@
+import type { MessageHandle, MessageHostConfig, MessageInput, MessageItem, MessageOptions, MessageSeverity } from './types'
 import { defineComponent, h } from 'vue'
 import { isMessageOptionsObject } from '../../shared/content'
 import { mountOverlayHost } from '../../shared/overlayHost'
@@ -13,7 +14,6 @@ import {
   scheduleMessageLife,
   setMessageAutoHost,
 } from './messageState'
-import type { MessageHandle, MessageHostConfig, MessageInput, MessageItem, MessageOptions, MessageSeverity } from './types'
 
 const DEFAULT_LIFE = 3000
 
@@ -78,7 +78,7 @@ export function useMessage() {
 
 export { messageState } from './messageState'
 
-/** @internal test helper */
+/** @internal */
 export function resetMessageService() {
   closeAllMessageItems()
   resetMessageHostRegistry()

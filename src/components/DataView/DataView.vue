@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { DataViewProps } from './types'
 import { computed, ref, watch } from 'vue'
 import WiPagination from '../Pagination/Pagination.vue'
-import type { DataViewProps } from './types'
 
 const props = withDefaults(defineProps<DataViewProps>(), {
   value: () => [],

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { InputTagsProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { InputTagsProps } from './types'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
   modelValue: () => [],
@@ -38,7 +38,7 @@ function addMany(raw: string) {
   const parts = separators.value.length
     ? raw.split(new RegExp(`[${separators.value.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('')}]`))
     : [raw]
-  let next = [...props.modelValue]
+  const next = [...props.modelValue]
   for (const part of parts) {
     const tag = part.trim()
     if (!tag || next.includes(tag)) continue
@@ -113,6 +113,6 @@ function onBlur() {
       @input="onInput"
       @keydown="onKeydown"
       @blur="onBlur"
-    />
+    >
   </div>
 </template>

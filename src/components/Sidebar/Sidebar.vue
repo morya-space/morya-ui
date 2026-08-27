@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { SidebarItem, SidebarProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { SidebarItem, SidebarProps } from './types'
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   model: () => [],

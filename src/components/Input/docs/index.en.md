@@ -18,8 +18,8 @@ import { WiInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('')
 </script>
@@ -47,8 +47,8 @@ import { WiInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('Draft note')
 </script>
@@ -62,8 +62,8 @@ const value = ref('Draft note')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const amount = ref('128')
 const host = ref('docs')
@@ -72,11 +72,17 @@ const host = ref('docs')
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
     <WiInput v-model="amount" label="Amount" fluid>
-      <template #prefix>¥</template>
-      <template #suffix>.00</template>
+      <template #prefix>
+        ¥
+      </template>
+      <template #suffix>
+        .00
+      </template>
     </WiInput>
     <WiInput v-model="host" label="Domain" fluid>
-      <template #suffix>.well.design</template>
+      <template #suffix>
+        .well.design
+      </template>
     </WiInput>
   </div>
 </template>
@@ -86,8 +92,8 @@ const host = ref('docs')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const password = ref('')
 </script>
@@ -121,8 +127,8 @@ import { WiInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInput } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const bio = ref('Hello')
 </script>

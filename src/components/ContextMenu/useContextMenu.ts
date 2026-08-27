@@ -1,5 +1,5 @@
-import { ref } from 'vue'
 import type { ContextMenuPosition } from './types'
+import { ref } from 'vue'
 
 /** Imperative helpers for `<WiContextMenu v-model / v-model:position>`. */
 export function useContextMenu() {

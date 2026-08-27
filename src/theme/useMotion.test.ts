@@ -1,6 +1,6 @@
+import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
 import { useMotion } from './useMotion'
 
 describe('useMotion', () => {

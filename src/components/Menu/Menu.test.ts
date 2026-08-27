@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiMenu from './Menu.vue'
 
-describe('WiMenu', () => {
+describe('wiMenu', () => {
   it('invokes command on item click', async () => {
     const command = vi.fn()
     const wrapper = mount(WiMenu, {

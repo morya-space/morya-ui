@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import WiPopover from './Popover.vue'
 
-describe('WiPopover', () => {
+describe('wiPopover', () => {
   it('shows content and emits lifecycle events', async () => {
     const wrapper = mount(WiPopover, {
       attachTo: document.body,

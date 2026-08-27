@@ -10,7 +10,7 @@ const componentFolders = readdirSync(join(src, 'components')).filter((name) =>
   statSync(join(src, 'components', name)).isDirectory(),
 ).sort()
 
-const re = /import\s+(?:type\s+)?\{?[^'"]*\}?\s*from\s+['"]\.\.\/([A-Z][a-zA-Z]+)\//g
+const re = /import\s[^'"]*from\s+['"]\.\.\/([A-Z][a-zA-Z]+)\//g
 
 const deps = {}
 for (const c of componentFolders) {

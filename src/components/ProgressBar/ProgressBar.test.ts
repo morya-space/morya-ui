@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiProgressBar from './ProgressBar.vue'
 
-describe('WiProgressBar', () => {
+describe('wiProgressBar', () => {
   it('renders determinate value and label by default', () => {
     const wrapper = mount(WiProgressBar, { props: { value: 42 } })
     expect(wrapper.attributes('role')).toBe('progressbar')

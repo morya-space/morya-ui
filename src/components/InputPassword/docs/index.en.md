@@ -18,8 +18,8 @@ import { WiInputPassword } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputPassword } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('')
 </script>
@@ -33,8 +33,8 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputPassword } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('')
 </script>
@@ -50,8 +50,8 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiIcon, WiInputPassword } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const byProp = ref('')
 const bySlot = ref('')
@@ -78,8 +78,8 @@ const bySlot = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputPassword } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('secret')
 </script>
@@ -93,8 +93,8 @@ const value = ref('secret')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputPassword } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const value = ref('draft-pass')
 </script>

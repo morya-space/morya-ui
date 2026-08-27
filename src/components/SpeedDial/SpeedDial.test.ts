@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import WiSpeedDial from './SpeedDial.vue'
 
-describe('WiSpeedDial', () => {
+describe('wiSpeedDial', () => {
   it('toggles open state', async () => {
     const wrapper = mount(WiSpeedDial, {
       props: { modelValue: false, model: [{ label: 'Edit', icon: '✎' }] },

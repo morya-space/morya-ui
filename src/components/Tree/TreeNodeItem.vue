@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
+import type { TreeNode } from './types'
 import { computed, inject } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiCheckbox from '../Checkbox/Checkbox.vue'
 import WiIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
-import type { IconName } from '../Icon/types'
 import { WI_TREE_KEY, WI_TREE_NODE_SLOT } from './context'
-import type { TreeNode } from './types'
 import TreeNodeItem from './TreeNodeItem.vue'
 
 const props = defineProps<{ node: TreeNode }>()
@@ -93,7 +93,9 @@ const customContent = computed(() =>
         <template v-if="customContent">
           <component :is="{ render: () => customContent }" />
         </template>
-        <template v-else>{{ node.label }}</template>
+        <template v-else>
+          {{ node.label }}
+        </template>
       </button>
     </div>
 

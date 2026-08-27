@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import type { SwitchProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import type { SwitchProps } from './types'
 
 defineOptions({ inheritAttrs: false })
 
-const attrs = useAttrs()
 const props = withDefaults(defineProps<SwitchProps>(), {
   modelValue: false,
   loading: false,
@@ -14,6 +13,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   required: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
+const attrs = useAttrs()
 const resolvedInputId = computed(
   () => props.inputId ?? props.id ?? `wi-switch-${Math.random().toString(36).slice(2, 8)}`,
 )
@@ -54,7 +54,7 @@ function updateValue(event: Event) {
       :aria-checked="modelValue"
       :aria-busy="loading || undefined"
       @change="updateValue"
-    />
+    >
     <span class="wi-switch__track" aria-hidden="true">
       <span v-if="stateText" class="wi-switch__text">{{ stateText }}</span>
       <span class="wi-switch__thumb">

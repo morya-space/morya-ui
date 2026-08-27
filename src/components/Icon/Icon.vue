@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { IconProps } from './types'
 import { computed, useSlots } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
 import { getIconDefinition, isIconName } from './icons'
-import type { IconProps } from './types'
 
 const props = withDefaults(defineProps<IconProps>(), { size: 'md' })
 const slots = useSlots()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { CarouselProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { CarouselProps } from './types'
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   numVisible: 1,

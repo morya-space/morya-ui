@@ -18,7 +18,7 @@ import { WiFluid } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiFluid, WiInput, WiButton } from '@well-insight/ui'
+import { WiButton, WiFluid, WiInput } from '@well-insight/ui'
 </script>
 
 <template>

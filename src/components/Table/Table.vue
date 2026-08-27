@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { formatLocale, useWiLocale } from '../../locale'
-import { useConfiguredSize } from '../../shared/config'
-import WiCheckbox from '../Checkbox/Checkbox.vue'
-import WiPagination from '../Pagination/Pagination.vue'
-import WiProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
-import WiIcon from '../Icon/Icon.vue'
-import { WiRenderableView } from '../../shared/Renderable'
-import { computeColumnLayout, computeFixedOffsets, TABLE_EXPAND_WIDTH, TABLE_SELECTION_WIDTH } from './layout'
 import type {
   TableColumn,
   TableEmits,
@@ -15,6 +6,15 @@ import type {
   TableProps,
   TableSortOrder,
 } from './types'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { formatLocale, useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
+import { WiRenderableView } from '../../shared/Renderable'
+import WiCheckbox from '../Checkbox/Checkbox.vue'
+import WiIcon from '../Icon/Icon.vue'
+import WiPagination from '../Pagination/Pagination.vue'
+import WiProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import { computeColumnLayout, computeFixedOffsets, TABLE_EXPAND_WIDTH, TABLE_SELECTION_WIDTH } from './layout'
 
 const props = withDefaults(defineProps<TableProps>(), {
   rowKey: 'id',
@@ -423,7 +423,9 @@ function fixedClass(column: TableColumn) {
                       :value="String(innerFilters[column.key] ?? '')"
                       @change="setFilter(column.key, ($event.target as HTMLSelectElement).value || null)"
                     >
-                      <option value="">{{ locale.filterAll }}</option>
+                      <option value="">
+                        {{ locale.filterAll }}
+                      </option>
                       <option
                         v-for="option in column.filters"
                         :key="String(option.value)"
@@ -448,69 +450,77 @@ function fixedClass(column: TableColumn) {
         </thead>
         <tbody>
           <template v-for="(row, index) in displayRows" :key="String(rowIdentity(row, index))">
-          <tr
-            :class="{
-              'wi-table__row--selected': isSelected(row, index),
-              'wi-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
-            }"
-            @click="onRowClick(row, index)"
-          >
-            <td
-              v-if="selectionMode"
-              class="wi-table__selection wi-table__cell--fixed-left"
-              :style="selectionStyle()"
-              @click.stop
+            <tr
+              :class="{
+                'wi-table__row--selected': isSelected(row, index),
+                'wi-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
+              }"
+              @click="onRowClick(row, index)"
             >
-              <WiCheckbox
-                :model-value="isSelected(row, index)"
-                :aria-label="formatLocale(locale.selectRow, { index: index + 1 })"
-                @update:model-value="toggleRowSelection(row, index)"
-              />
-            </td>
-            <td
-              v-if="expandable"
-              class="wi-table__expand wi-table__cell--fixed-left"
-              :style="expandStyle()"
-              @click.stop
-            >
-              <button
-                v-if="canExpand(row)"
-                type="button"
-                class="wi-table__expand-btn"
-                :aria-expanded="isRowExpanded(row, index)"
-                :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
-                @click="toggleExpand(row, index)"
+              <td
+                v-if="selectionMode"
+                class="wi-table__selection wi-table__cell--fixed-left"
+                :style="selectionStyle()"
+                @click.stop
               >
-                {{ isRowExpanded(row, index) ? '▾' : '▸' }}
-              </button>
-            </td>
-            <td
-              v-for="column in columns"
-              :key="column.key"
-              :class="[`wi-table__cell--${column.align ?? 'start'}`, fixedClass(column)]"
-              :style="columnStyle(column)"
-            >
-              <slot name="body-cell" :row="row" :column="column" :value="row[column.key]">
-                <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
-                  <WiRenderableView v-if="column.render" :value="column.render(row, column)" />
-                  <template v-else>{{ row[column.key] }}</template>
+                <WiCheckbox
+                  :model-value="isSelected(row, index)"
+                  :aria-label="formatLocale(locale.selectRow, { index: index + 1 })"
+                  @update:model-value="toggleRowSelection(row, index)"
+                />
+              </td>
+              <td
+                v-if="expandable"
+                class="wi-table__expand wi-table__cell--fixed-left"
+                :style="expandStyle()"
+                @click.stop
+              >
+                <button
+                  v-if="canExpand(row)"
+                  type="button"
+                  class="wi-table__expand-btn"
+                  :aria-expanded="isRowExpanded(row, index)"
+                  :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
+                  @click="toggleExpand(row, index)"
+                >
+                  {{ isRowExpanded(row, index) ? '▾' : '▸' }}
+                </button>
+              </td>
+              <td
+                v-for="column in columns"
+                :key="column.key"
+                :class="[`wi-table__cell--${column.align ?? 'start'}`, fixedClass(column)]"
+                :style="columnStyle(column)"
+              >
+                <slot name="body-cell" :row="row" :column="column" :value="row[column.key]">
+                  <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
+                    <WiRenderableView v-if="column.render" :value="column.render(row, column)" />
+                    <template v-else>
+                      {{ row[column.key] }}
+                    </template>
+                  </slot>
                 </slot>
-              </slot>
-            </td>
-          </tr>
-          <tr v-if="expandable && isRowExpanded(row, index)">
-            <td class="wi-table__expansion" :colspan="colSpan">
-              <slot name="expansion" :row="row" />
-            </td>
-          </tr>
+              </td>
+            </tr>
+            <tr v-if="expandable && isRowExpanded(row, index)">
+              <td class="wi-table__expansion" :colspan="colSpan">
+                <slot name="expansion" :row="row" />
+              </td>
+            </tr>
           </template>
           <tr v-if="showEmpty">
             <td class="wi-table__empty" :colspan="colSpan">
               <slot name="empty">
                 <div class="wi-table__empty-content">
-                  <div class="wi-table__empty-glyph" aria-hidden="true">∅</div>
-                  <p class="wi-table__empty-title">{{ resolvedEmptyText }}</p>
-                  <p v-if="emptyDescription" class="wi-table__empty-desc">{{ emptyDescription }}</p>
+                  <div class="wi-table__empty-glyph" aria-hidden="true">
+                    ∅
+                  </div>
+                  <p class="wi-table__empty-title">
+                    {{ resolvedEmptyText }}
+                  </p>
+                  <p v-if="emptyDescription" class="wi-table__empty-desc">
+                    {{ emptyDescription }}
+                  </p>
                 </div>
               </slot>
             </td>

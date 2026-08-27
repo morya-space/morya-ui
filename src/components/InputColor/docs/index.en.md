@@ -18,8 +18,8 @@ import { WiInputColor } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputColor } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
@@ -35,8 +35,8 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { ref } from 'vue'
 import { WiInputColor } from '@well-insight/ui'
+import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>

@@ -11,15 +11,15 @@ Combine an input with prefix and suffix addons. Use `WiInputGroupAddon` for addo
 ## Import
 
 ```ts
-import { WiInputGroup, WiInputGroupAddon, WiInput } from '@well-insight/ui'
+import { WiInput, WiInputGroup, WiInputGroupAddon } from '@well-insight/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
+import { WiInput, WiInputGroup, WiInputGroupAddon } from '@well-insight/ui'
 import { ref } from 'vue'
-import { WiInputGroup, WiInputGroupAddon, WiInput } from '@well-insight/ui'
 
 const price = ref('')
 const url = ref('')

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { TooltipProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import type { TooltipProps } from './types'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',

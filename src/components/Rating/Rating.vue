@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { RatingProps } from './types'
 import { computed } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
-import type { RatingProps } from './types'
 
 const props = withDefaults(defineProps<RatingProps>(), {
   modelValue: 0,

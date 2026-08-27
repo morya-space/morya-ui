@@ -21,7 +21,7 @@ export interface TreeContext {
   onDrop: (node: TreeNode, event: DragEvent) => void
 }
 
-export type TreeNodeSlotProps = { node: TreeNode; data: TreeNode }
+export interface TreeNodeSlotProps { node: TreeNode; data: TreeNode }
 
 export const WI_TREE_KEY: InjectionKey<TreeContext> = Symbol('wi-tree')
 export const WI_TREE_NODE_SLOT: InjectionKey<Slot<TreeNodeSlotProps> | undefined> = Symbol('wi-tree-node-slot')

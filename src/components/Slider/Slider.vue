@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { SliderProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
-import type { SliderProps } from './types'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   modelValue: 0,
@@ -98,7 +98,7 @@ function emitRange(index: 0 | 1, event: Event) {
         :orient="vertical ? 'vertical' : undefined"
         :aria-label="locale.rangeStart"
         @input="emitRange(0, $event)"
-      />
+      >
       <input
         class="wi-slider__input wi-slider__input--end"
         type="range"
@@ -110,7 +110,7 @@ function emitRange(index: 0 | 1, event: Event) {
         :orient="vertical ? 'vertical' : undefined"
         :aria-label="locale.rangeEnd"
         @input="emitRange(1, $event)"
-      />
+      >
     </template>
     <input
       v-else
@@ -123,7 +123,7 @@ function emitRange(index: 0 | 1, event: Event) {
       :disabled="disabled"
       :orient="vertical ? 'vertical' : undefined"
       @input="emitSingle"
-    />
+    >
     <div v-if="markItems.length" class="wi-slider__marks" aria-hidden="true">
       <span
         v-for="mark in markItems"

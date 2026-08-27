@@ -8,7 +8,7 @@ const options = [
   { label: 'Right', value: 'right', disabled: true },
 ]
 
-describe('WiSelectButton', () => {
+describe('wiSelectButton', () => {
   it('emits single selection', async () => {
     const wrapper = mount(WiSelectButton, { props: { options, modelValue: 'left' } })
     const buttons = wrapper.findAll('.wi-selectbutton__button')

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import WiMeterGroup from './MeterGroup.vue'
 
-describe('WiMeterGroup', () => {
+describe('wiMeterGroup', () => {
   it('renders segments and legend', () => {
     const wrapper = mount(WiMeterGroup, {
       props: {
