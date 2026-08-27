@@ -1,5 +1,14 @@
 # @well-insight/ui
 
+## 0.1.10
+
+### Fixes
+
+- Expose component-specific CSS variables and adjust layout defaults
+- Add Configurable Layout Sizing And CSS Tokens
+- Improve playground navigation styling
+- Standardize Project Linting And Module Exports
+
 ## 0.1.9
 
 ### Changes
