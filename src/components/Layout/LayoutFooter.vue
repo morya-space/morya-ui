@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LayoutFooterProps } from "./types";
 import { computed } from "vue";
-import { toCssLength } from "../../shared/responsive";
+import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 
 defineOptions({ name: "WiLayoutFooter" });
 
@@ -11,19 +11,11 @@ const props = withDefaults(defineProps<LayoutFooterProps>(), {
     position: "static",
 });
 
-const rootStyle = computed(() => ({
-    minHeight:
-        props.height == null
-            ? "var(--wi-layout-footer-height, 48px)"
-            : toCssLength(props.height),
-    padding:
-        props.padding == null
-            ? "var(--wi-layout-padding, var(--wi-space-4))"
-            : toCssLength(props.padding),
-    borderRadius:
-        props.radius == null
-            ? "var(--wi-layout-radius, 0)"
-            : toCssLength(props.radius),
+const rootStyle = useLayoutRegionStyle(() => ({
+    height: props.height,
+    heightFallback: "var(--wi-layout-footer-height, 48px)",
+    padding: props.padding,
+    radius: props.radius,
 }));
 
 const rootClass = computed(() => [
@@ -37,7 +29,7 @@ const rootClass = computed(() => [
 </script>
 
 <template>
-    <footer :class="rootClass" :style="rootStyle">
-        <slot />
-    </footer>
+  <footer :class="rootClass" :style="rootStyle">
+    <slot />
+  </footer>
 </template>

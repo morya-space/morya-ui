@@ -241,34 +241,6 @@ import {
 </template>
 ```
 
-## Custom Scrollbar
-
-`nativeScrollbar` defaults to the browser scrollbar. Set it to `false` to use `WiScrollbar` (pass-through via `scrollbarProps`).
-
-```vue preview
-<script setup lang="ts">
-import { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'
-</script>
-
-<template>
-  <WiLayout
-    :native-scrollbar="false"
-    style="height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden"
-  >
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
-      Custom scrollbar
-    </WiLayoutHeader>
-    <WiLayoutContent embedded :native-scrollbar="false" content-style="padding:1rem">
-      <div style="display:grid;gap:0.5rem">
-        <div v-for="n in 16" :key="n">
-          Row {{ n }}
-        </div>
-      </div>
-    </WiLayoutContent>
-  </WiLayout>
-</template>
-```
-
 ## Absolute Shell
 
 Root `position="absolute"` fills a relatively positioned parent with an explicit height.
@@ -310,8 +282,6 @@ import {
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | Sider side. |
 | `embedded` | `boolean` | `false` | Soft background for nested content. |
 | `position` | `'static' \| 'absolute'` | `'static'` | Positioning mode. |
-| `nativeScrollbar` | `boolean` | `true` | Use `WiScrollbar` when `false`. |
-| `scrollbarProps` | `object` | — | Forwarded to `WiScrollbar` (custom mode only). |
 | `contentClass` / `contentStyle` | — | — | Scroll container class / style. |
 
 ## LayoutSider Props
@@ -325,8 +295,6 @@ import {
 | `showTrigger` | `boolean \| 'bar' \| 'arrow-circle' \| 'arrow'` | `false` | Collapse trigger; `arrow` aliases `arrow-circle`. |
 | `collapseMode` | `'width' \| 'transform'` | `'transform'` | `transform` clips content; `width` shrinks with sider. |
 | `showCollapsedContent` | `boolean` | `true` | Keep sider content visible while collapsed. |
-| `nativeScrollbar` | `boolean` | `true` | Use `WiScrollbar` when `false`. |
-| `scrollbarProps` | `object` | — | Forwarded to `WiScrollbar` (custom mode only). |
 | `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |
 | `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |
 | `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |
@@ -335,7 +303,7 @@ import {
 
 | Event | Description |
 | --- | --- |
-| `scroll` | Fired when the scroll container scrolls (native or custom). |
+| `scroll` | Fired when the scroll container scrolls. |
 
 ## Expose
 
