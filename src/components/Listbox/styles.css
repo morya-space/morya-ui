@@ -1,13 +1,13 @@
 /* —— Form: Listbox —— */
 .wi-listbox {
-    --wi-menu-min-width-lg: 12rem;
+    --wi-listbox-min-width: 12rem;
     --wi-listbox-list-max-height: 14rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: inline-flex;
     flex-direction: column;
-    min-width: var(--wi-menu-min-width-lg);
+    min-width: var(--wi-listbox-min-width);
     overflow: hidden;
 }
 

@@ -1,12 +1,11 @@
 /* —— Menu: Sidebar —— */
 .wi-sidebar {
-    --wi-menu-min-width-lg: 12rem;
-    --wi-sidebar-width: var(--wi-menu-min-width-lg);
+    --wi-sidebar-width: 12rem;
     --wi-sidebar-collapsed-width: 3.5rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
-    min-width: var(--wi-menu-min-width-lg);
+    min-width: var(--wi-sidebar-width);
     padding: var(--wi-space-2);
     width: var(--wi-sidebar-width);
 }

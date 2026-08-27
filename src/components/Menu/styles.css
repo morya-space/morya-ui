@@ -1,12 +1,13 @@
 /* —— Menu: Menu —— */
 .wi-menu {
     --wi-menu-min-width: 10rem;
+    --wi-menu-item-gap: 0.125rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: var(--wi-menu-item-gap);
     min-width: var(--wi-menu-min-width);
     padding: var(--wi-space-1);
 }

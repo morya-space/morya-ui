@@ -72,7 +72,7 @@
 }
 
 .wi-layout-content {
-    --wi-layout-padding: 0;
+    --wi-layout-padding: var(--wi-space-4);
     --wi-layout-radius: 0;
     flex: 1 1 auto;
     min-height: 0;
@@ -99,13 +99,13 @@
 
 .wi-layout-header {
     --wi-layout-header-height: 56px;
-    --wi-layout-padding: 0;
+    --wi-layout-padding: var(--wi-space-4);
     --wi-layout-radius: 0;
 }
 
 .wi-layout-footer {
     --wi-layout-footer-height: 48px;
-    --wi-layout-padding: 0;
+    --wi-layout-padding: var(--wi-space-4);
     --wi-layout-radius: 0;
 }
 
@@ -160,7 +160,7 @@
 .wi-layout-sider {
     --wi-layout-sider-width: 272px;
     --wi-layout-sider-collapsed-width: 48px;
-    --wi-layout-padding: 0;
+    --wi-layout-padding: var(--wi-space-4);
     --wi-layout-radius: 0;
     --wi-layout-trigger-size: 1.5rem;
     background: var(--wi-color-surface);
