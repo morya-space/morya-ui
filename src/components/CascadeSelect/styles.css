@@ -1,5 +1,7 @@
 /* —— Form: CascadeSelect —— */
 .wi-cascadeselect {
+    --wi-menu-min-width-lg: 12rem;
+    --wi-cascadeselect-column-max-height: 16rem;
     display: inline-block;
     max-width: 100%;
     position: relative;
@@ -72,7 +74,7 @@
     flex: 1 1 0;
     list-style: none;
     margin: 0;
-    max-height: 16rem;
+    max-height: var(--wi-cascadeselect-column-max-height);
     min-width: 0;
     overflow: auto;
     padding: var(--wi-space-1);

@@ -15,6 +15,7 @@
 }
 
 .wi-password {
+    --wi-password-toggle-size: var(--wi-control-affix-size);
     display: inline-flex;
     max-width: 100%;
     position: relative;
@@ -38,7 +39,7 @@
 }
 
 .wi-password--toggle .wi-password__input {
-    padding-right: 2.25rem;
+    padding-right: var(--wi-control-affix-gap);
 }
 
 .wi-password--small .wi-password__input {
@@ -48,7 +49,7 @@
 }
 
 .wi-password--small.wi-password--toggle .wi-password__input {
-    padding-right: 2rem;
+    padding-right: var(--wi-control-affix-gap);
 }
 
 .wi-password--large .wi-password__input {
@@ -58,7 +59,7 @@
 }
 
 .wi-password--large.wi-password--toggle .wi-password__input {
-    padding-right: 2.5rem;
+    padding-right: var(--wi-control-affix-gap);
 }
 
 .wi-password--invalid .wi-password__input {
@@ -66,24 +67,36 @@
 }
 
 .wi-password--filled .wi-password__input {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 12%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 12%,
+        var(--wi-color-surface)
+    );
     border-color: transparent;
 }
 
 .wi-password--clearable .wi-password__input {
-    padding-right: 2.25rem;
+    padding-right: var(--wi-control-affix-gap);
 }
 
 .wi-password--toggle.wi-password--clearable .wi-password__input {
-    padding-right: 3.75rem;
+    padding-right: calc(
+        var(--wi-control-affix-padding) + var(--wi-control-affix-gap)
+    );
 }
 
-.wi-password--small.wi-password--toggle.wi-password--clearable .wi-password__input {
-    padding-right: 3.25rem;
+.wi-password--small.wi-password--toggle.wi-password--clearable
+    .wi-password__input {
+    padding-right: calc(
+        var(--wi-control-affix-padding) + var(--wi-control-affix-gap)
+    );
 }
 
-.wi-password--large.wi-password--toggle.wi-password--clearable .wi-password__input {
-    padding-right: 4rem;
+.wi-password--large.wi-password--toggle.wi-password--clearable
+    .wi-password__input {
+    padding-right: calc(
+        var(--wi-control-affix-padding) + var(--wi-control-affix-gap)
+    );
 }
 
 .wi-password__clear {
@@ -137,9 +150,9 @@
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
-    min-height: 1.75rem;
-    min-width: 1.75rem;
-    padding: 0.15rem;
+    min-height: var(--wi-password-toggle-size);
+    min-width: var(--wi-password-toggle-size);
+    padding: var(--wi-space-1);
     position: absolute;
     right: var(--wi-space-1);
     top: 50%;

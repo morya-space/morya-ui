@@ -16,12 +16,13 @@
     --wi-control-padding-x-small: 10px;
     --wi-control-padding-x-medium: 12px;
     --wi-control-padding-x-large: 14px;
-    --wi-button-padding-x-small: 10px;
-    --wi-button-padding-x-medium: 14px;
-    --wi-button-padding-x-large: 18px;
+
     --wi-radius-control: 3px;
-    --wi-focus-shadow: 0 0 0 2px color-mix(in srgb, var(--wi-color-primary) 20%, transparent);
-    --wi-focus-shadow-danger: 0 0 0 2px color-mix(in srgb, var(--wi-color-danger) 20%, transparent);
+    --wi-border-width: 1px;
+    --wi-focus-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--wi-color-primary) 20%, transparent);
+    --wi-focus-shadow-danger: 0 0 0 2px
+        color-mix(in srgb, var(--wi-color-danger) 20%, transparent);
     --wi-color-success: #159570;
     --wi-color-info: #2563eb;
     --wi-color-warning: #d97706;
@@ -39,10 +40,7 @@
     --wi-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
     --wi-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
     --wi-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
-    --wi-terminal-bg: #111827;
-    --wi-terminal-fg: #e5e7eb;
-    --wi-terminal-prompt: #34d399;
-    --wi-terminal-border: color-mix(in srgb, #fff 12%, transparent);
+
     /* Typography scale (component text, not control-height fonts) */
     --wi-font-size-xs: 0.75rem;
     --wi-font-size-sm: 0.8125rem;
@@ -56,8 +54,7 @@
     --wi-z-dropdown: calc(var(--wi-z-base) + 50);
     --wi-z-toast: calc(var(--wi-z-base) + 100);
     --wi-z-popper: 40;
-    --wi-menu-min-width: 10rem;
-    --wi-menu-min-width-lg: 12rem;
+
     --wi-control-affix-size: 2rem;
     --wi-control-affix-gap: 2.35rem;
     --wi-control-affix-padding: 2.5rem;
@@ -118,9 +115,6 @@
     --wi-control-padding-x-small: 8px;
     --wi-control-padding-x-medium: 10px;
     --wi-control-padding-x-large: 12px;
-    --wi-button-padding-x-small: 8px;
-    --wi-button-padding-x-medium: 12px;
-    --wi-button-padding-x-large: 16px;
 }
 
 [data-wi-density="spacious"] {
@@ -139,9 +133,32 @@
     --wi-control-padding-x-small: 12px;
     --wi-control-padding-x-medium: 14px;
     --wi-control-padding-x-large: 16px;
-    --wi-button-padding-x-small: 12px;
-    --wi-button-padding-x-medium: 16px;
-    --wi-button-padding-x-large: 20px;
+}
+
+[data-wi-density="compact"] .wi-layout-header {
+    --wi-layout-header-height: 48px;
+}
+
+[data-wi-density="compact"] .wi-layout-footer {
+    --wi-layout-footer-height: 40px;
+}
+
+[data-wi-density="compact"] .wi-layout-sider {
+    --wi-layout-sider-width: 240px;
+    --wi-layout-sider-collapsed-width: 44px;
+}
+
+[data-wi-density="spacious"] .wi-layout-header {
+    --wi-layout-header-height: 64px;
+}
+
+[data-wi-density="spacious"] .wi-layout-footer {
+    --wi-layout-footer-height: 56px;
+}
+
+[data-wi-density="spacious"] .wi-layout-sider {
+    --wi-layout-sider-width: 288px;
+    --wi-layout-sider-collapsed-width: 52px;
 }
 
 [data-theme="dark"] {
@@ -152,8 +169,10 @@
     --wi-color-text-muted: #94a3b8;
     --wi-color-border: #334155;
     --wi-color-focus-ring: #93c5fd;
-    --wi-focus-shadow: 0 0 0 2px color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
-    --wi-focus-shadow-danger: 0 0 0 2px color-mix(in srgb, var(--wi-color-danger) 28%, transparent);
+    --wi-focus-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
+    --wi-focus-shadow-danger: 0 0 0 2px
+        color-mix(in srgb, var(--wi-color-danger) 28%, transparent);
     --wi-color-success: #5eead4;
     --wi-color-info: #93c5fd;
     --wi-color-warning: #fbbf24;
@@ -170,10 +189,6 @@
     --wi-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
     --wi-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
     --wi-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
-    --wi-terminal-bg: #020617;
-    --wi-terminal-fg: #e2e8f0;
-    --wi-terminal-prompt: #5eead4;
-    --wi-terminal-border: color-mix(in srgb, #fff 14%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

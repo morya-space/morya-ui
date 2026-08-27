@@ -1,16 +1,19 @@
 /* —— Menu: Sidebar —— */
 .wi-sidebar {
+    --wi-menu-min-width-lg: 12rem;
+    --wi-sidebar-width: var(--wi-menu-min-width-lg);
+    --wi-sidebar-collapsed-width: 3.5rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     min-width: var(--wi-menu-min-width-lg);
     padding: var(--wi-space-2);
-    width: 14rem;
+    width: var(--wi-sidebar-width);
 }
 
 .wi-sidebar--collapsed {
-    min-width: 3.5rem;
-    width: 3.5rem;
+    min-width: var(--wi-sidebar-collapsed-width);
+    width: var(--wi-sidebar-collapsed-width);
 }
 
 .wi-sidebar__list,

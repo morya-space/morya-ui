@@ -1,11 +1,25 @@
 .wi-button {
+    --wi-button-padding-x-small: var(--wi-control-padding-x-small);
+    --wi-button-padding-x-medium: calc(
+        var(--wi-control-padding-x-medium) + var(--wi-space-1)
+    );
+    --wi-button-padding-x-large: calc(
+        var(--wi-control-padding-x-large) + var(--wi-space-1)
+    );
+    --wi-button-icon-stack-min-height: 3.25rem;
+    --wi-button-badge-min-width: 1.15rem;
+    --wi-button-spinner-size: 0.875rem;
     --wi-button-bg: var(--wi-color-primary);
     --wi-button-fg: var(--wi-color-on-emphasis);
     --wi-button-border: var(--wi-color-primary);
     --wi-button-hover-bg: var(--wi-color-primary-hover);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
     --wi-button-hover-border: var(--wi-color-primary-hover);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-primary) 82%, black);
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-primary) 82%,
+        black
+    );
     align-items: center;
     background: var(--wi-button-bg);
     border: 1px solid var(--wi-button-border);
@@ -58,27 +72,55 @@
     --wi-button-hover-bg: var(--wi-color-primary-hover);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
     --wi-button-hover-border: var(--wi-color-primary-hover);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-primary) 82%, black);
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-primary) 82%,
+        black
+    );
 }
 
 .wi-button--secondary {
-    --wi-button-bg: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    --wi-button-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 16%,
+        var(--wi-color-surface)
+    );
     --wi-button-fg: var(--wi-color-text);
     --wi-button-border: transparent;
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 24%, var(--wi-color-surface));
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 24%,
+        var(--wi-color-surface)
+    );
     --wi-button-hover-fg: var(--wi-color-text);
     --wi-button-hover-border: transparent;
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-text-muted) 32%, var(--wi-color-surface));
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 32%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-button--success {
     --wi-button-bg: var(--wi-color-success);
     --wi-button-fg: var(--wi-color-on-emphasis);
     --wi-button-border: var(--wi-color-success);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-success) 85%, black);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-success) 85%,
+        black
+    );
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
-    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-success) 85%, black);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-success) 75%, black);
+    --wi-button-hover-border: color-mix(
+        in srgb,
+        var(--wi-color-success) 85%,
+        black
+    );
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-success) 75%,
+        black
+    );
 }
 
 .wi-button--info {
@@ -87,7 +129,11 @@
     --wi-button-border: var(--wi-color-info);
     --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-info) 85%, black);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
-    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-info) 85%, black);
+    --wi-button-hover-border: color-mix(
+        in srgb,
+        var(--wi-color-info) 85%,
+        black
+    );
     --wi-button-active-bg: color-mix(in srgb, var(--wi-color-info) 75%, black);
 }
 
@@ -97,7 +143,11 @@
     --wi-button-border: var(--wi-color-warn);
     --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-warn) 85%, black);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
-    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-warn) 85%, black);
+    --wi-button-hover-border: color-mix(
+        in srgb,
+        var(--wi-color-warn) 85%,
+        black
+    );
     --wi-button-active-bg: color-mix(in srgb, var(--wi-color-warn) 75%, black);
 }
 
@@ -107,7 +157,11 @@
     --wi-button-border: var(--wi-color-help);
     --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-help) 85%, black);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
-    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-help) 85%, black);
+    --wi-button-hover-border: color-mix(
+        in srgb,
+        var(--wi-color-help) 85%,
+        black
+    );
     --wi-button-active-bg: color-mix(in srgb, var(--wi-color-help) 75%, black);
 }
 
@@ -117,8 +171,16 @@
     --wi-button-border: var(--wi-color-danger);
     --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-danger) 85%, black);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
-    --wi-button-hover-border: color-mix(in srgb, var(--wi-color-danger) 85%, black);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-danger) 75%, black);
+    --wi-button-hover-border: color-mix(
+        in srgb,
+        var(--wi-color-danger) 85%,
+        black
+    );
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-danger) 75%,
+        black
+    );
 }
 
 .wi-button--contrast {
@@ -134,10 +196,18 @@
 .wi-button--outlined {
     --wi-button-bg: transparent;
     --wi-button-fg: var(--wi-button-border);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-border) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-button-border) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-button-border);
     --wi-button-hover-border: var(--wi-button-border);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-button-border) 16%, transparent);
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-button-border) 16%,
+        transparent
+    );
 }
 
 .wi-button--secondary.wi-button--outlined {
@@ -151,16 +221,28 @@
     --wi-button-bg: transparent;
     --wi-button-border: transparent;
     --wi-button-fg: var(--wi-color-primary);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-primary);
     --wi-button-hover-border: transparent;
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-primary) 16%, transparent);
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-primary) 16%,
+        transparent
+    );
 }
 
 .wi-button--secondary.wi-button--text,
 .wi-button--secondary.wi-button--link {
     --wi-button-fg: var(--wi-color-text-muted);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 12%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 12%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-text);
 }
 
@@ -169,7 +251,11 @@
 .wi-button--success.wi-button--outlined {
     --wi-button-fg: var(--wi-color-success);
     --wi-button-border: var(--wi-color-success);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-success) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-success) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-success);
     --wi-button-hover-border: var(--wi-color-success);
 }
@@ -179,7 +265,11 @@
 .wi-button--info.wi-button--outlined {
     --wi-button-fg: var(--wi-color-info);
     --wi-button-border: var(--wi-color-info);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-info) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-info) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-info);
     --wi-button-hover-border: var(--wi-color-info);
 }
@@ -189,7 +279,11 @@
 .wi-button--warn.wi-button--outlined {
     --wi-button-fg: var(--wi-color-warn);
     --wi-button-border: var(--wi-color-warn);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-warn) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-warn) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-warn);
     --wi-button-hover-border: var(--wi-color-warn);
 }
@@ -199,7 +293,11 @@
 .wi-button--help.wi-button--outlined {
     --wi-button-fg: var(--wi-color-help);
     --wi-button-border: var(--wi-color-help);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-help) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-help) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-help);
     --wi-button-hover-border: var(--wi-color-help);
 }
@@ -209,7 +307,11 @@
 .wi-button--danger.wi-button--outlined {
     --wi-button-fg: var(--wi-color-danger);
     --wi-button-border: var(--wi-color-danger);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-danger) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-danger) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-danger);
     --wi-button-hover-border: var(--wi-color-danger);
 }
@@ -219,7 +321,11 @@
 .wi-button--contrast.wi-button--outlined {
     --wi-button-fg: var(--wi-color-contrast);
     --wi-button-border: var(--wi-color-contrast);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-contrast) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-contrast) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-contrast);
     --wi-button-hover-border: var(--wi-color-contrast);
 }
@@ -229,7 +335,11 @@
 .wi-button--plain.wi-button--link {
     --wi-button-fg: var(--wi-color-text-muted);
     --wi-button-border: var(--wi-color-border);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 12%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 12%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-text);
     --wi-button-hover-border: var(--wi-color-border);
 }
@@ -247,10 +357,18 @@
 .wi-button--ghost {
     --wi-button-bg: transparent;
     --wi-button-fg: var(--wi-button-border);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-border) 12%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-button-border) 12%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-button-border);
     --wi-button-hover-border: var(--wi-button-border);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-button-border) 18%, transparent);
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-button-border) 18%,
+        transparent
+    );
 }
 
 .wi-button--secondary.wi-button--ghost {
@@ -293,10 +411,18 @@
     --wi-button-bg: transparent;
     --wi-button-border: transparent;
     --wi-button-fg: var(--wi-color-text);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-color-text-muted) 10%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 10%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-color-text);
     --wi-button-hover-border: transparent;
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-color-text-muted) 16%, transparent);
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 16%,
+        transparent
+    );
 }
 
 .wi-button--custom {
@@ -305,8 +431,16 @@
     --wi-button-border: var(--wi-button-color);
     --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-color) 85%, black);
     --wi-button-hover-fg: var(--wi-color-on-emphasis);
-    --wi-button-hover-border: color-mix(in srgb, var(--wi-button-color) 85%, black);
-    --wi-button-active-bg: color-mix(in srgb, var(--wi-button-color) 75%, black);
+    --wi-button-hover-border: color-mix(
+        in srgb,
+        var(--wi-button-color) 85%,
+        black
+    );
+    --wi-button-active-bg: color-mix(
+        in srgb,
+        var(--wi-button-color) 75%,
+        black
+    );
 }
 
 .wi-button--custom.wi-button--outlined,
@@ -317,7 +451,11 @@
     --wi-button-bg: transparent;
     --wi-button-fg: var(--wi-button-color);
     --wi-button-border: var(--wi-button-color);
-    --wi-button-hover-bg: color-mix(in srgb, var(--wi-button-color) 12%, transparent);
+    --wi-button-hover-bg: color-mix(
+        in srgb,
+        var(--wi-button-color) 12%,
+        transparent
+    );
     --wi-button-hover-fg: var(--wi-button-color);
     --wi-button-hover-border: var(--wi-button-color);
 }
@@ -363,7 +501,8 @@
 }
 
 .wi-button--raised {
-    box-shadow: 0 0.25rem 0.75rem color-mix(in srgb, var(--wi-color-text) 14%, transparent);
+    box-shadow: 0 0.25rem 0.75rem
+        color-mix(in srgb, var(--wi-color-text) 14%, transparent);
 }
 
 .wi-button--rounded {
@@ -393,13 +532,13 @@
 
 .wi-button--icon-top {
     flex-direction: column;
-    min-height: 3.25rem;
+    min-height: var(--wi-button-icon-stack-min-height);
     padding-block: var(--wi-space-2);
 }
 
 .wi-button--icon-bottom {
     flex-direction: column-reverse;
-    min-height: 3.25rem;
+    min-height: var(--wi-button-icon-stack-min-height);
     padding-block: var(--wi-space-2);
 }
 
@@ -437,17 +576,21 @@
     border-radius: var(--wi-radius-full);
     color: var(--wi-color-contrast-fg);
     display: inline-flex;
-    font-size: 0.65rem;
+    font-size: var(--wi-font-size-xs);
     font-weight: 700;
     justify-content: center;
     line-height: 1;
     margin-inline-start: var(--wi-space-1);
-    min-width: 1.15rem;
-    padding: 0.2rem 0.35rem;
+    min-width: var(--wi-button-badge-min-width);
+    padding: var(--wi-space-1) var(--wi-space-2);
 }
 
 .wi-button__badge--secondary {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 25%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 25%,
+        var(--wi-color-surface)
+    );
     color: var(--wi-color-text);
 }
 
@@ -481,8 +624,8 @@
     border: 2px solid currentColor;
     border-right-color: transparent;
     border-radius: var(--wi-radius-full);
-    height: 0.875rem;
-    width: 0.875rem;
+    height: var(--wi-button-spinner-size);
+    width: var(--wi-button-spinner-size);
 }
 
 @keyframes wi-button-spin {

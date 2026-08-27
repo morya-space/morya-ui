@@ -1,6 +1,7 @@
 /* —— Overlay: ConfirmDialog —— */
 .wi-confirmdialog {
-    max-width: min(28rem, calc(100vw - 2rem));
+    --wi-confirmdialog-width: 28rem;
+    max-width: min(var(--wi-confirmdialog-width), calc(100vw - 2rem));
 }
 
 .wi-confirmdialog__footer {

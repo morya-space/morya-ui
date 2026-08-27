@@ -1,9 +1,13 @@
 .wi-message-host {
+    --wi-message-host-max-width: 28rem;
     display: flex;
     flex-direction: column;
     gap: var(--wi-space-2);
     left: 50%;
-    max-width: min(28rem, calc(100vw - 2 * var(--wi-space-4)));
+    max-width: min(
+        var(--wi-message-host-max-width),
+        calc(100vw - 2 * var(--wi-space-4))
+    );
     pointer-events: none;
     position: fixed;
     top: var(--wi-space-4);
@@ -43,9 +47,15 @@
 }
 
 .wi-message {
+    --wi-message-min-width: 16rem;
     align-items: flex-start;
-    background: color-mix(in srgb, var(--wi-color-info) 10%, var(--wi-color-surface));
-    border: 1px solid color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-info) 10%,
+        var(--wi-color-surface)
+    );
+    border: 1px solid
+        color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     color: var(--wi-color-text);
@@ -54,7 +64,7 @@
     font-size: var(--wi-font-size-md);
     gap: var(--wi-space-3);
     line-height: 1.45;
-    min-width: 16rem;
+    min-width: var(--wi-message-min-width);
     padding: var(--wi-space-3) var(--wi-space-4);
     pointer-events: auto;
 }
@@ -89,8 +99,16 @@
 }
 
 .wi-message--success {
-    background: color-mix(in srgb, var(--wi-color-success) 10%, var(--wi-color-surface));
-    border-color: color-mix(in srgb, var(--wi-color-success) 28%, var(--wi-color-border));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-success) 10%,
+        var(--wi-color-surface)
+    );
+    border-color: color-mix(
+        in srgb,
+        var(--wi-color-success) 28%,
+        var(--wi-color-border)
+    );
 }
 
 .wi-message--success .wi-message__icon {
@@ -98,8 +116,16 @@
 }
 
 .wi-message--info {
-    background: color-mix(in srgb, var(--wi-color-info) 10%, var(--wi-color-surface));
-    border-color: color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-info) 10%,
+        var(--wi-color-surface)
+    );
+    border-color: color-mix(
+        in srgb,
+        var(--wi-color-info) 28%,
+        var(--wi-color-border)
+    );
 }
 
 .wi-message--info .wi-message__icon {
@@ -108,8 +134,16 @@
 
 .wi-message--warn,
 .wi-message--warning {
-    background: color-mix(in srgb, var(--wi-color-warn) 10%, var(--wi-color-surface));
-    border-color: color-mix(in srgb, var(--wi-color-warn) 28%, var(--wi-color-border));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-warn) 10%,
+        var(--wi-color-surface)
+    );
+    border-color: color-mix(
+        in srgb,
+        var(--wi-color-warn) 28%,
+        var(--wi-color-border)
+    );
 }
 
 .wi-message--warn .wi-message__icon,
@@ -118,8 +152,16 @@
 }
 
 .wi-message--error {
-    background: color-mix(in srgb, var(--wi-color-danger) 10%, var(--wi-color-surface));
-    border-color: color-mix(in srgb, var(--wi-color-danger) 28%, var(--wi-color-border));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-danger) 10%,
+        var(--wi-color-surface)
+    );
+    border-color: color-mix(
+        in srgb,
+        var(--wi-color-danger) 28%,
+        var(--wi-color-border)
+    );
 }
 
 .wi-message--error .wi-message__icon {
@@ -127,8 +169,16 @@
 }
 
 .wi-message--secondary {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 10%, var(--wi-color-surface));
-    border-color: color-mix(in srgb, var(--wi-color-text-muted) 22%, var(--wi-color-border));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 10%,
+        var(--wi-color-surface)
+    );
+    border-color: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 22%,
+        var(--wi-color-border)
+    );
 }
 
 .wi-message--secondary .wi-message__icon {

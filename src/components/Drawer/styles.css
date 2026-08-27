@@ -51,6 +51,8 @@
 }
 
 .wi-drawer {
+    --wi-drawer-side-width: 20rem;
+    --wi-drawer-top-height: 40vh;
     background: var(--wi-color-surface);
     box-shadow: var(--wi-shadow-lg);
     color: var(--wi-color-text);
@@ -64,28 +66,28 @@
     bottom: 0;
     left: 0;
     top: 0;
-    width: min(20rem, 100vw);
+    width: min(var(--wi-drawer-side-width), 100vw);
 }
 
 .wi-drawer--right {
     bottom: 0;
     right: 0;
     top: 0;
-    width: min(20rem, 100vw);
+    width: min(var(--wi-drawer-side-width), 100vw);
 }
 
 .wi-drawer--top {
     left: 0;
     right: 0;
     top: 0;
-    max-height: min(40vh, 100%);
+    max-height: min(var(--wi-drawer-top-height), 100%);
 }
 
 .wi-drawer--bottom {
     bottom: 0;
     left: 0;
     right: 0;
-    max-height: min(40vh, 100%);
+    max-height: min(var(--wi-drawer-top-height), 100%);
 }
 
 .wi-drawer__header {

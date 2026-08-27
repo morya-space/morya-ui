@@ -1,5 +1,7 @@
 /* —— Menu: MegaMenu —— */
 .wi-megamenu {
+    --wi-megamenu-column-min-width: 8rem;
+    --wi-megamenu-panel-gap: var(--wi-space-4);
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
@@ -36,7 +38,7 @@
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     display: flex;
-    gap: var(--wi-space-4);
+    gap: var(--wi-megamenu-panel-gap);
     left: 0;
     margin-top: var(--wi-space-1);
     padding: var(--wi-space-3);
@@ -56,7 +58,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--wi-space-1);
-    min-width: 8rem;
+    min-width: var(--wi-megamenu-column-min-width);
 }
 
 .wi-megamenu__link {

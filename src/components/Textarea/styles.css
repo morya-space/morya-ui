@@ -1,12 +1,19 @@
 .wi-textarea {
+    --wi-textarea-min-height: 6rem;
+    --wi-textarea-min-height-small: 4.5rem;
+    --wi-textarea-min-height-large: 7.5rem;
     font-size: var(--wi-control-font-medium);
     line-height: 1.5;
-    min-height: 6rem;
+    min-height: var(--wi-textarea-min-height);
     padding: var(--wi-space-3) var(--wi-control-padding-x-medium);
 }
 
 .wi-textarea--filled {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 12%, var(--wi-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--wi-color-text-muted) 12%,
+        var(--wi-color-surface)
+    );
     border-color: transparent;
 }
 
@@ -17,19 +24,19 @@
 .wi-textarea--small,
 .wi-textarea--sm {
     font-size: var(--wi-control-font-small);
-    min-height: 4.5rem;
+    min-height: var(--wi-textarea-min-height-small);
     padding: var(--wi-space-2) var(--wi-control-padding-x-small);
 }
 
 .wi-textarea--normal {
     font-size: var(--wi-control-font-medium);
-    min-height: 6rem;
+    min-height: var(--wi-textarea-min-height);
 }
 
 .wi-textarea--large,
 .wi-textarea--lg {
     font-size: var(--wi-control-font-large);
-    min-height: 7.5rem;
+    min-height: var(--wi-textarea-min-height-large);
     padding: var(--wi-space-4) var(--wi-control-padding-x-large);
 }
 

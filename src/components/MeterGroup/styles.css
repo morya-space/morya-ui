@@ -1,5 +1,7 @@
 /* —— Misc: MeterGroup —— */
 .wi-metergroup {
+    --wi-metergroup-meter-height: 0.75rem;
+    --wi-metergroup-swatch-size: 0.75rem;
     display: flex;
     flex-direction: column;
     gap: var(--wi-space-3);
@@ -10,7 +12,7 @@
     background: color-mix(in srgb, var(--wi-color-border) 55%, transparent);
     border-radius: var(--wi-radius-full, 999px);
     display: flex;
-    height: 0.75rem;
+    height: var(--wi-metergroup-meter-height);
     overflow: hidden;
     width: 100%;
 }
@@ -38,8 +40,8 @@
 
 .wi-metergroup__swatch {
     border-radius: var(--wi-radius-sm);
-    height: 0.75rem;
-    width: 0.75rem;
+    height: var(--wi-metergroup-swatch-size);
+    width: var(--wi-metergroup-swatch-size);
 }
 
 .wi-metergroup__value {

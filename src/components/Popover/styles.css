@@ -1,4 +1,5 @@
 .wi-popover {
+    --wi-menu-min-width-lg: 12rem;
     display: inline-flex;
     position: relative;
 }

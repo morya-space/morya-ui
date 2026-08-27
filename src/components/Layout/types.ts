@@ -1,112 +1,130 @@
-import type { CSSProperties } from 'vue'
-import type { ScrollbarProps } from '../Scrollbar/types'
+import type { CSSProperties } from "vue";
+import type { ScrollbarProps } from "../Scrollbar/types";
 
-export type LayoutPosition = 'static' | 'absolute'
-export type LayoutSiderPlacement = 'left' | 'right'
-export type LayoutCollapseMode = 'width' | 'transform'
+export type LayoutPosition = "static" | "absolute";
+export type LayoutSiderPlacement = "left" | "right";
+export type LayoutCollapseMode = "width" | "transform";
 /** `true` / `'bar'` → bar trigger; `'arrow-circle'` / `'arrow'` → circle arrow. */
-export type LayoutTrigger = boolean | 'bar' | 'arrow' | 'arrow-circle'
+export type LayoutTrigger = boolean | "bar" | "arrow" | "arrow-circle";
 
 export interface LayoutProps {
+  /** Layout height. Defaults to `var(--wi-layout-height)`. */
+  height?: number | string;
+  /** Layout width. Defaults to `100%`. */
+  width?: number | string;
   /** Soft background for nested content areas. */
-  embedded?: boolean
+  embedded?: boolean;
   /** Position mode. */
-  position?: LayoutPosition
+  position?: LayoutPosition;
   /** Enable horizontal sider layout (row flex). */
-  hasSider?: boolean
+  hasSider?: boolean;
   /** Sider side when `hasSider`. */
-  siderPlacement?: LayoutSiderPlacement
+  siderPlacement?: LayoutSiderPlacement;
   /**
    * Use the browser native scrollbar (default).
    * Set `false` to wrap content with `WiScrollbar`.
    */
-  nativeScrollbar?: boolean
+  nativeScrollbar?: boolean;
   /** Extra props forwarded to `WiScrollbar` when `nativeScrollbar` is false. */
-  scrollbarProps?: Partial<ScrollbarProps>
+  scrollbarProps?: Partial<ScrollbarProps>;
   /** Extra class on the scroll / content wrapper. */
-  contentClass?: string
+  contentClass?: string;
   /** Extra style on the scroll / content wrapper. */
-  contentStyle?: string | CSSProperties
+  contentStyle?: string | CSSProperties;
 }
 
 export interface LayoutHeaderProps {
-  bordered?: boolean
-  inverted?: boolean
-  position?: LayoutPosition
+  /** Header height. Defaults to `var(--wi-layout-header-height)`. */
+  height?: number | string;
+  padding?: number | string;
+  radius?: number | string;
+  bordered?: boolean;
+  inverted?: boolean;
+  position?: LayoutPosition;
 }
 
 export interface LayoutFooterProps {
-  bordered?: boolean
-  inverted?: boolean
-  position?: LayoutPosition
+  /** Footer height. Defaults to `var(--wi-layout-footer-height)`. */
+  height?: number | string;
+  padding?: number | string;
+  radius?: number | string;
+  bordered?: boolean;
+  inverted?: boolean;
+  position?: LayoutPosition;
 }
 
 export interface LayoutContentProps {
+  /** Content height. Defaults to filling the parent layout. */
+  height?: number | string;
+  padding?: number | string;
+  radius?: number | string;
   /** Soft background. */
-  embedded?: boolean
-  position?: LayoutPosition
+  embedded?: boolean;
+  position?: LayoutPosition;
   /**
    * Use the browser native scrollbar (default).
    * Set `false` to wrap content with `WiScrollbar`.
    */
-  nativeScrollbar?: boolean
+  nativeScrollbar?: boolean;
   /** Extra props forwarded to `WiScrollbar` when `nativeScrollbar` is false. */
-  scrollbarProps?: Partial<ScrollbarProps>
-  contentClass?: string
-  contentStyle?: string | CSSProperties
+  scrollbarProps?: Partial<ScrollbarProps>;
+  contentClass?: string;
+  contentStyle?: string | CSSProperties;
 }
 
 export interface LayoutSiderProps {
-  bordered?: boolean
-  inverted?: boolean
-  position?: LayoutPosition
+  bordered?: boolean;
+  inverted?: boolean;
+  position?: LayoutPosition;
   /** Expanded width (always applied as `width`; collapse uses `max-width`). */
-  width?: number | string
+  width?: number | string;
   /** Collapsed max-width. */
-  collapsedWidth?: number
+  collapsedWidth?: number | string;
+  padding?: number | string;
+  radius?: number | string;
   /** Controlled collapsed state (`v-model:collapsed`). */
-  collapsed?: boolean
+  collapsed?: boolean;
   /** Uncontrolled initial collapsed state. */
-  defaultCollapsed?: boolean
+  defaultCollapsed?: boolean;
   /**
    * `transform` (default): keep content width, clip with max-width.
    * `width`: shrink content with the sider.
    */
-  collapseMode?: LayoutCollapseMode
+  collapseMode?: LayoutCollapseMode;
   /** Show sider content while collapsed. */
-  showCollapsedContent?: boolean
-  showTrigger?: LayoutTrigger
-  triggerClass?: string
-  triggerStyle?: string | CSSProperties
-  collapsedTriggerClass?: string
-  collapsedTriggerStyle?: string | CSSProperties
+  showCollapsedContent?: boolean;
+  showTrigger?: LayoutTrigger;
+  triggerClass?: string;
+  triggerStyle?: string | CSSProperties;
+  collapsedTriggerClass?: string;
+  collapsedTriggerStyle?: string | CSSProperties;
   /**
    * Use the browser native scrollbar (default).
    * Set `false` to wrap content with `WiScrollbar`.
    */
-  nativeScrollbar?: boolean
+  nativeScrollbar?: boolean;
   /** Extra props forwarded to `WiScrollbar` when `nativeScrollbar` is false. */
-  scrollbarProps?: Partial<ScrollbarProps>
-  contentClass?: string
-  contentStyle?: string | CSSProperties
+  scrollbarProps?: Partial<ScrollbarProps>;
+  contentClass?: string;
+  contentStyle?: string | CSSProperties;
 }
 
 export interface LayoutSiderEmits {
-  (event: 'update:collapsed', value: boolean): void
-  (event: 'collapse'): void
-  (event: 'expand'): void
-  (event: 'after-enter'): void
-  (event: 'after-leave'): void
-  (event: 'scroll', eventPayload: Event): void
+  (event: "update:collapsed", value: boolean): void;
+  (event: "collapse"): void;
+  (event: "expand"): void;
+  (event: "after-enter"): void;
+  (event: "after-leave"): void;
+  (event: "scroll", eventPayload: Event): void;
 }
 
 export interface LayoutScrollEmits {
-  (event: 'scroll', eventPayload: Event): void
+  (event: "scroll", eventPayload: Event): void;
 }
 
 export interface LayoutExpose {
   scrollTo: {
-    (options: ScrollToOptions): void
-    (x: number, y: number): void
-  }
+    (options: ScrollToOptions): void;
+    (x: number, y: number): void;
+  };
 }

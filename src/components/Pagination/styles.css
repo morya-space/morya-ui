@@ -1,4 +1,6 @@
 .wi-pagination {
+    --wi-pagination-simple-width: 3.5rem;
+    --wi-pagination-jumper-width: 3.5rem;
     align-items: center;
     display: flex;
     font-family: var(--wi-font-sans);
@@ -25,7 +27,7 @@
 .wi-pagination__button--active {
     background: var(--wi-color-primary);
     border-color: var(--wi-color-primary);
-    color: white;
+    color: var(--wi-color-on-emphasis);
 }
 
 .wi-pagination__button:disabled {
@@ -45,7 +47,7 @@
 .wi-pagination__simple {
     color: var(--wi-color-text);
     font-size: var(--wi-font-size-sm);
-    min-width: 3.5rem;
+    min-width: var(--wi-pagination-simple-width);
     text-align: center;
 }
 
@@ -72,5 +74,5 @@
 }
 
 .wi-pagination__input {
-    width: 3.5rem;
+    width: var(--wi-pagination-jumper-width);
 }
