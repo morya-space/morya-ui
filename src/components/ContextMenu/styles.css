@@ -1,14 +1,15 @@
 /* —— Menu: ContextMenu —— */
 .wi-contextmenu {
-    --wi-menu-min-width: 10rem;
+    --wi-contextmenu-min-width: 10rem;
+    --wi-contextmenu-item-gap: 0.125rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
-    min-width: var(--wi-menu-min-width);
+    gap: var(--wi-contextmenu-item-gap);
+    min-width: var(--wi-contextmenu-min-width);
     padding: var(--wi-space-1);
     position: fixed;
     z-index: var(--wi-z-popper);

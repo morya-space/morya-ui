@@ -3,6 +3,7 @@
     --wi-datepicker-input-affix-padding: var(--wi-control-affix-padding);
     --wi-datepicker-day-size: var(--wi-control-affix-size);
     --wi-datepicker-calendar-cell-size: 2rem;
+    --wi-datepicker-grid-gap: 0.125rem;
     --wi-datepicker-shortcuts-width: 6rem;
     display: inline-flex;
     flex-direction: column;
@@ -126,7 +127,7 @@
 .wi-datepicker__weekdays,
 .wi-datepicker__grid {
     display: grid;
-    gap: 0.125rem;
+    gap: var(--wi-datepicker-grid-gap);
     grid-template-columns: repeat(7, var(--wi-datepicker-calendar-cell-size));
 }
 

@@ -1,13 +1,14 @@
 /* —— Menu: Menubar —— */
 .wi-menubar {
-    --wi-menu-min-width: 10rem;
+    --wi-menubar-menu-min-width: 10rem;
+    --wi-menubar-item-gap: 0.125rem;
     align-items: stretch;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: flex;
     flex-wrap: wrap;
-    gap: 0.125rem;
+    gap: var(--wi-menubar-item-gap);
     padding: var(--wi-space-1);
 }
 
@@ -61,9 +62,9 @@
     box-shadow: var(--wi-shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: var(--wi-menubar-item-gap);
     left: 0;
-    min-width: var(--wi-menu-min-width);
+    min-width: var(--wi-menubar-menu-min-width);
     padding: var(--wi-space-1);
     position: absolute;
     top: calc(100% + 0.25rem);

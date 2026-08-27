@@ -54,6 +54,15 @@ describe("wiLayout", () => {
     expect(wrapper.find(".wi-layout__scroll").exists()).toBe(true);
   });
 
+  it("shows the header bottom border by default and supports disabling it", () => {
+    expect(mount(WiLayoutHeader).classes()).toContain(
+      "wi-layout-header--bordered",
+    );
+    expect(
+      mount(WiLayoutHeader, { props: { bordered: false } }).classes(),
+    ).not.toContain("wi-layout-header--bordered");
+  });
+
   it("applies layout dimension props", () => {
     const wrapper = mount(WiLayout, {
       props: { height: 400, width: "80%" },

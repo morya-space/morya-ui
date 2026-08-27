@@ -1,5 +1,5 @@
 .wi-popover {
-    --wi-menu-min-width-lg: 12rem;
+    --wi-popover-min-width: 12rem;
     display: inline-flex;
     position: relative;
 }
@@ -14,7 +14,7 @@
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     color: var(--wi-color-text);
-    min-width: var(--wi-menu-min-width-lg);
+    min-width: var(--wi-popover-min-width);
     padding: var(--wi-space-3);
     position: absolute;
     z-index: var(--wi-z-popper);

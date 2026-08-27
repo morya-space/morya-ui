@@ -1,14 +1,15 @@
 /* —— Menu: TieredMenu —— */
 .wi-tieredmenu {
-    --wi-menu-min-width: 10rem;
-    --wi-menu-min-width-lg: 12rem;
+    --wi-tieredmenu-submenu-min-width: 10rem;
+    --wi-tieredmenu-min-width: 12rem;
+    --wi-tieredmenu-item-gap: 0.125rem;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
-    min-width: var(--wi-menu-min-width-lg);
+    gap: var(--wi-tieredmenu-item-gap);
+    min-width: var(--wi-tieredmenu-min-width);
     padding: var(--wi-space-1);
     position: relative;
 }
@@ -73,9 +74,9 @@
     box-shadow: var(--wi-shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: var(--wi-tieredmenu-item-gap);
     left: calc(100% + 0.25rem);
-    min-width: var(--wi-menu-min-width);
+    min-width: var(--wi-tieredmenu-submenu-min-width);
     padding: var(--wi-space-1);
     position: absolute;
     top: 0;

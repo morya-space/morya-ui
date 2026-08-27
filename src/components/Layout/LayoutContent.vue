@@ -25,7 +25,7 @@ const rootStyle = computed(() => ({
     ...(props.height == null ? {} : { height: toCssLength(props.height) }),
     padding:
         props.padding == null
-            ? "var(--wi-layout-padding, 0)"
+            ? "var(--wi-layout-padding, var(--wi-space-4))"
             : toCssLength(props.padding),
     borderRadius:
         props.radius == null

@@ -4,6 +4,7 @@
     --wi-terminal-fg: #e5e7eb;
     --wi-terminal-prompt: #34d399;
     --wi-terminal-border: color-mix(in srgb, #fff 12%, transparent);
+    --wi-terminal-min-height: 12rem;
     background: var(--wi-terminal-bg);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
@@ -11,7 +12,7 @@
     display: flex;
     flex-direction: column;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    min-height: 12rem;
+    min-height: var(--wi-terminal-min-height);
     overflow: hidden;
 }
 

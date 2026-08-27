@@ -1,6 +1,6 @@
 /* —— Form: TreeSelect —— */
 .wi-treeselect {
-    --wi-menu-min-width-lg: 12rem;
+    --wi-treeselect-min-width: 12rem;
     --wi-treeselect-toggler-size: 1.25rem;
     display: inline-block;
     max-width: 100%;
@@ -20,7 +20,7 @@
     gap: var(--wi-space-2);
     justify-content: space-between;
     min-height: var(--wi-control-height-medium);
-    min-width: var(--wi-menu-min-width-lg);
+    min-width: var(--wi-treeselect-min-width);
     padding: 0 var(--wi-control-padding-x-medium);
 }
 

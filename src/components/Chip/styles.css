@@ -1,5 +1,6 @@
 .wi-chip {
     --wi-chip-avatar-size: 1.25rem;
+    --wi-chip-small-padding-y: 0.15rem;
     --wi-chip-remove-size: var(--wi-chip-avatar-size);
     align-items: center;
     background: color-mix(
@@ -75,7 +76,7 @@
 
 .wi-chip--small {
     font-size: var(--wi-font-size-xs);
-    padding: 0.15rem var(--wi-space-2);
+    padding: var(--wi-chip-small-padding-y) var(--wi-space-2);
 }
 
 .wi-chip--large {
