@@ -86,13 +86,13 @@
 
 .wi-layout-header {
     --wi-layout-header-height: 56px;
-    --wi-layout-padding: var(--wi-space-4);
+    --wi-layout-padding: 0 var(--wi-space-4);
     --wi-layout-radius: 0;
 }
 
 .wi-layout-footer {
     --wi-layout-footer-height: 48px;
-    --wi-layout-padding: var(--wi-space-4);
+    --wi-layout-padding: 0 var(--wi-space-4);
     --wi-layout-radius: 0;
 }
 
