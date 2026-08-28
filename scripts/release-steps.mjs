@@ -5,7 +5,11 @@ import { formatChangelogBody, prepareUiRelease, readUiPackage, root } from './ui
 
 export const PACKAGE_NAME = '@well-insight/ui'
 export const UI_RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md']
-export const MCP_RELEASE_PATHS = ['packages/ui-mcp/package.json', 'packages/ui-mcp/data/catalog.json']
+export const MCP_RELEASE_PATHS = [
+  'packages/ui-mcp/package.json',
+  'packages/ui-mcp/data/catalog.json',
+  'packages/ui-mcp/data/example-coverage.json',
+]
 /** Build before commit so MCP catalog is included in the release commit. */
 export const STEPS = ['prepare', 'build', 'commit', 'branch', 'publish', 'tag', 'push']
 

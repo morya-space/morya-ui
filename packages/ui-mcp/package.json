@@ -34,8 +34,13 @@
   },
   "scripts": {
     "generate": "node ./scripts/generate-catalog.mjs",
+    "check-catalog": "node ./scripts/generate-catalog.mjs --check",
+    "validate-catalog": "node ./scripts/validate-catalog.mjs",
+    "audit-example-coverage": "node ./scripts/audit-example-coverage.mjs",
+    "write-example-coverage": "node ./scripts/audit-example-coverage.mjs --write",
     "build": "pnpm run generate && tsc -p tsconfig.json",
     "start": "node ./dist/index.js",
+    "test": "vitest run --config ../../vitest.config.ts src/__tests__",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "pnpm run build"
   },

@@ -338,8 +338,8 @@ export const designRules = {
   ],
 } as const
 
-export function findPattern(name: string): PagePattern | undefined {
-  const key = name.trim().toLowerCase().replace(/[-_\s]/g, '')
+export function findPattern(input: string): PagePattern | undefined {
+  const key = input.trim().toLowerCase().replace(/[-_\s]/g, '')
   return pagePatterns.find((pattern) => pattern.id.replace(/[-_\s]/g, '') === key)
 }
 

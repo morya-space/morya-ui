@@ -22,6 +22,12 @@ export interface ApiSlot {
   description: string
 }
 
+export interface ApiMethod {
+  name: string
+  type?: string
+  description: string
+}
+
 export interface ExampleItem {
   id: string
   section: string
@@ -49,6 +55,7 @@ export interface ComponentRecord {
   props: ApiProp[]
   events: ApiEvent[]
   slots: ApiSlot[]
+  methods: ApiMethod[]
   examples: ExampleItem[]
   locales: Partial<
     Record<
@@ -161,12 +168,11 @@ export function toKebab(name: string): string {
 }
 
 export function textResult(payload: unknown) {
+  const text = typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2)
   return {
-    content: [
-      {
-        type: 'text' as const,
-        text: typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2),
-      },
-    ],
+    content: [{ type: 'text' as const, text }],
+    ...(payload !== null && typeof payload === 'object'
+      ? { structuredContent: payload as Record<string, unknown> }
+      : {}),
   }
 }

@@ -120,6 +120,19 @@ pnpm mcp:build
 
 Catalog sources: `src/components/*/docs` and `playground/src/docs/guide/*.md`.
 
+The catalog is generated at build time; the server does not watch source files while running. For a local checkout, regenerate after changing components or docs:
+
+```bash
+pnpm mcp:generate
+pnpm mcp:check-catalog
+pnpm mcp:validate-catalog
+pnpm mcp:audit-examples
+```
+
+`pnpm mcp:audit-examples` reports which documented Props, Events, Slots, and exposed instance methods are not demonstrated by source-backed examples. It is an audit report rather than a requirement that every boolean alias appear in one snippet; use it to plan focused examples by capability group.
+
+A published `@well-insight/ui-mcp` package serves the catalog bundled in that package. Its component API and examples are current as of the package release, not automatically the latest files in another local checkout. Keep `@well-insight/ui` and `@well-insight/ui-mcp` on compatible versions, and rebuild/release the MCP package whenever component props, events, slots, or examples change.
+
 ## Release
 
 From the repo root (version syncs from `@well-insight/ui`):

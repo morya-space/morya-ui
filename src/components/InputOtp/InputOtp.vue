@@ -101,7 +101,7 @@ function onPaste(event: ClipboardEvent) {
 watch(
   () => props.length,
   () => {
-    inputs.value = Array.from({length: props.length}).fill(null)
+    inputs.value = new Array<HTMLInputElement | null>(props.length).fill(null)
   },
   { immediate: true },
 )

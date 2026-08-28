@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-27T06:55:40.408Z",
+  "generatedAt": "2026-08-28T03:22:02.641Z",
   "library": {
     "name": "@well-insight/ui",
     "version": "0.1.10"
@@ -3408,7 +3408,13 @@
           "description": "提示文案。"
         },
         {
-          "name": "acceptLabel` / `rejectLabel",
+          "name": "acceptLabel",
+          "type": "string",
+          "default": "确认` / `取消",
+          "description": "按钮。"
+        },
+        {
+          "name": "rejectLabel",
           "type": "string",
           "default": "确认` / `取消",
           "description": "按钮。"
@@ -3463,7 +3469,12 @@
           "description": "显隐。"
         },
         {
-          "name": "accept` / `reject",
+          "name": "accept",
+          "payload": "—",
+          "description": "确认 / 取消。"
+        },
+        {
+          "name": "reject",
           "payload": "—",
           "description": "确认 / 取消。"
         }
@@ -4476,7 +4487,13 @@
           "description": "标题状态图标；`warning` 与 `warn` 同义"
         },
         {
-          "name": "positiveText` / `negativeText",
+          "name": "positiveText",
+          "type": "string",
+          "default": "—",
+          "description": "预设页脚按钮；有 `footer` 插槽时忽略"
+        },
+        {
+          "name": "negativeText",
           "type": "string",
           "default": "—",
           "description": "预设页脚按钮；有 `footer` 插槽时忽略"
@@ -4488,7 +4505,13 @@
           "description": "确认按钮语义色"
         },
         {
-          "name": "onPositiveClick` / `onNegativeClick",
+          "name": "onPositiveClick",
+          "type": "(e) => unknown | Promise<unknown>",
+          "default": "—",
+          "description": "返回 `false` 则不关闭"
+        },
+        {
+          "name": "onNegativeClick",
           "type": "(e) => unknown | Promise<unknown>",
           "default": "—",
           "description": "返回 `false` 则不关闭"
@@ -5481,7 +5504,13 @@
           "description": "打开方式。"
         },
         {
-          "name": "showDelay` / `hideDelay",
+          "name": "showDelay",
+          "type": "number",
+          "default": "0` / `200",
+          "description": "hover 延迟（ms）。"
+        },
+        {
+          "name": "hideDelay",
           "type": "number",
           "default": "0` / `200",
           "description": "hover 延迟（ms）。"
@@ -6096,6 +6125,15 @@
           "locale": "zh-CN"
         },
         {
+          "id": "instance-methods-1",
+          "section": "Instance methods",
+          "sectionId": "instance-methods",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst uploader = ref<{\n  openPicker: () => void\n  submit: () => void\n  abort: () => void\n  clear: () => void\n  clearFiles: () => void\n} | null>(null)\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload ref=\"uploader\" mode=\"advanced\" :auto-upload=\"false\" />\n    <div style=\"display:flex;flex-wrap:wrap;gap:0.5rem\">\n      <button type=\"button\" @click=\"uploader?.openPicker()\">选择文件</button>\n      <button type=\"button\" @click=\"uploader?.submit()\">提交队列</button>\n      <button type=\"button\" @click=\"uploader?.abort()\">取消上传</button>\n      <button type=\"button\" @click=\"uploader?.clear()\">清空</button>\n      <button type=\"button\" @click=\"uploader?.clearFiles()\">清空（别名）</button>\n    </div>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
           "id": "import-1",
           "section": "Import",
           "sectionId": "import",
@@ -6157,6 +6195,15 @@
           "preview": true,
           "code": "<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      Each file must be under 2MB. Choose files, then click Upload.\n    </template>\n  </WiFileUpload>\n</template>",
           "locale": "en-US"
+        },
+        {
+          "id": "instance-methods-1",
+          "section": "Instance methods",
+          "sectionId": "instance-methods",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst uploader = ref<{\n  openPicker: () => void\n  submit: () => void\n  abort: () => void\n  clear: () => void\n  clearFiles: () => void\n} | null>(null)\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload ref=\"uploader\" mode=\"advanced\" :auto-upload=\"false\" />\n    <div style=\"display:flex;flex-wrap:wrap;gap:0.5rem\">\n      <button type=\"button\" @click=\"uploader?.openPicker()\">Choose</button>\n      <button type=\"button\" @click=\"uploader?.submit()\">Submit queue</button>\n      <button type=\"button\" @click=\"uploader?.abort()\">Abort</button>\n      <button type=\"button\" @click=\"uploader?.clear()\">Clear</button>\n      <button type=\"button\" @click=\"uploader?.clearFiles()\">Clear alias</button>\n    </div>\n  </div>\n</template>",
+          "locale": "en-US"
         }
       ],
       "locales": {
@@ -6205,6 +6252,11 @@
               "body": "`auto-upload=\"false\"` 时先加入列表，再点「上传」。`before-upload` 可拦截不合格文件。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      单文件不超过 2MB。选好后点击上传。\n    </template>\n  </WiFileUpload>\n</template>\n```"
             },
             {
+              "id": "instance-methods",
+              "title": "Instance methods",
+              "body": "通过模板 ref 可以控制选择器、提交队列、取消上传和清空列表。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst uploader = ref<{\n  openPicker: () => void\n  submit: () => void\n  abort: () => void\n  clear: () => void\n  clearFiles: () => void\n} | null>(null)\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload ref=\"uploader\" mode=\"advanced\" :auto-upload=\"false\" />\n    <div style=\"display:flex;flex-wrap:wrap;gap:0.5rem\">\n      <button type=\"button\" @click=\"uploader?.openPicker()\">选择文件</button>\n      <button type=\"button\" @click=\"uploader?.submit()\">提交队列</button>\n      <button type=\"button\" @click=\"uploader?.abort()\">取消上传</button>\n      <button type=\"button\" @click=\"uploader?.clear()\">清空</button>\n      <button type=\"button\" @click=\"uploader?.clearFiles()\">清空（别名）</button>\n    </div>\n  </div>\n</template>\n```"
+            },
+            {
               "id": "props",
               "title": "Props",
               "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `mode` | `'basic' \\| 'advanced'` | `'basic'` | 视觉变体。文件列表由 `showFileList` 控制。 |\n| `multiple` | `boolean` | `false` | 多选。关闭时新选择会替换当前列表。 |\n| `directory` | `boolean` | `false` | 选择文件夹（`webkitdirectory`），同时开启多选。 |\n| `accept` | `string` | — | 接受的文件类型，拖入时同样过滤。 |\n| `drag` | `boolean` | `false` | 启用拖拽上传区域。 |\n| `limit` | `number` | — | 最多文件数；本次选择会使总数超出时触发 `exceed`，整批不加入。 |\n| `maxSize` | `number` | — | 单文件最大字节数，超出则跳过。 |\n| `disabled` | `boolean` | `false` | 禁用。 |\n| `chooseLabel` | `string` | `'选择文件'` | 按钮 / 拖放区无障碍名称。 |\n| `showFileList` | `boolean` | `true` | 是否显示列表。 |\n| `listType` | `'text' \\| 'picture' \\| 'picture-card'` | `'text'` | 列表样式。`picture-card` 用加号卡片作为触发器。 |\n| `fileList` | `FileUploadFile[]` | — | 文件列表，配合 `v-model:file-list`。 |\n| `action` | `string` | — | 上传地址。设置后默认自动上传。 |\n| `method` | `string` | `'post'` | 请求方法。 |\n| `name` | `string` | `'file'` | 表单字段名。 |\n| `headers` | `Record<string, string>` | — | 额外请求头。 |\n| `data` | `object \\| (() => object)` | — | 随文件一起提交的字段。 |\n| `withCredentials` | `boolean` | `false` | 跨域携带 cookie。 |\n| `autoUpload` | `boolean` | `true` | 是否选完即传。需要同时提供 `action` 或 `httpRequest`。 |\n| `httpRequest` | `(options) => void \\| Promise \\| XMLHttpRequest` | — | 自定义上传。返回 Promise 时以 resolve 值为成功响应。 |\n| `beforeUpload` | `(file, uploadFile) => boolean \\| Promise` | — | 上传前钩子，返回 `false` 则跳过该文件。 |\n| `beforeRemove` | `(uploadFile, fileList) => boolean \\| Promise` | — | 删除前钩子，返回 `false` 则取消删除。 |"
@@ -6225,7 +6277,7 @@
               "body": "| 方法 | 说明 |\n| --- | --- |\n| `openPicker()` | 打开系统文件选择框。 |\n| `submit()` | 上传列表中 `ready` / `fail` 的文件。 |\n| `abort(file?)` | 取消进行中的请求；不传则全部取消。 |\n| `clear()` / `clearFiles()` | 清空列表并中止上传。 |"
             }
           ],
-          "markdown": "---\ntitle: FileUpload\ncategory: 10 / FILE\ndescription: 选择、拖拽、列表、预览与上传。\n---\n\n# FileUpload\n\n选择本地文件。支持点击选择、拖拽上传、文本 / 图片列表、卡片墙，以及通过 `action` 或 `httpRequest` 实际上传。`select` 仍会返回本次选中的 `File[]`，完整状态用 `v-model:file-list`。默认展示文件列表；提供上传地址或自定义请求后会自动上传。\n\n**与 Naive `n-upload` 命名对照：**\n\n| Naive | Wi |\n| --- | --- |\n| `action` | `action` |\n| `file-list` | `fileList`（`v-model:file-list`） |\n| `list-type` | `listType` |\n| `directory` | `directory`（`webkitdirectory`，浏览器支持文件夹选择） |\n| `custom-request` | `httpRequest` |\n| `name` | `name` |\n\n队列 UI 细控（如自定义队列按钮布局）本期不做。\n\n## 引入\n\n```ts\nimport { WiFileUpload } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem\">\n    <WiFileUpload mode=\"advanced\" multiple @select=\"onSelect\" />\n    <div v-if=\"names.length\">\n      已选：{{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Drag to upload\n\n设置 `drag` 后出现虚线拖放区：可拖入文件，也可点击区域选择。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple accept=\"image/*,.pdf\" @select=\"onSelect\">\n      <template #tip>\n        支持图片或 PDF，可一次拖入多个文件。\n      </template>\n    </WiFileUpload>\n    <div v-if=\"names.length\">\n      已选：{{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Picture list\n\n`list-type=\"picture\"` 在列表中显示缩略图，可预览或删除。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst preview = ref('')\nfunction onPreview(file: FileUploadFile) {\n  preview.value = file.url ?? ''\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload multiple accept=\"image/*\" list-type=\"picture\" @preview=\"onPreview\" />\n    <img v-if=\"preview\" :src=\"preview\" alt=\"\" style=\"max-width:12rem;border-radius:0.5rem\">\n  </div>\n</template>\n```\n\n## Picture card\n\n照片墙：加号卡片选择文件，悬停可预览 / 删除。也可直接把图片拖到卡片区域。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiFileUpload multiple accept=\"image/*\" list-type=\"picture-card\" :limit=\"4\" />\n</template>\n```\n\n## Auto upload\n\n提供 `httpRequest`（或 `action`）后默认自动上传。下面用本地模拟请求，不依赖真实接口。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadRequestOptions} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst last = ref('')\n\nasync function mockUpload(options: FileUploadRequestOptions) {\n  options.onProgress(35)\n  await new Promise((resolve) => setTimeout(resolve, 400))\n  options.onProgress(100)\n  return { name: options.file.name }\n}\n\nfunction onSuccess(_file: unknown, response: unknown) {\n  last.value = JSON.stringify(response)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple :http-request=\"mockUpload\" @success=\"onSuccess\">\n      <template #tip>\n        选择后立即模拟上传，并显示进度。\n      </template>\n    </WiFileUpload>\n    <div v-if=\"last\">\n      响应：{{ last }}\n    </div>\n  </div>\n</template>\n```\n\n## Manual upload\n\n`auto-upload=\"false\"` 时先加入列表，再点「上传」。`before-upload` 可拦截不合格文件。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      单文件不超过 2MB。选好后点击上传。\n    </template>\n  </WiFileUpload>\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `mode` | `'basic' \\| 'advanced'` | `'basic'` | 视觉变体。文件列表由 `showFileList` 控制。 |\n| `multiple` | `boolean` | `false` | 多选。关闭时新选择会替换当前列表。 |\n| `directory` | `boolean` | `false` | 选择文件夹（`webkitdirectory`），同时开启多选。 |\n| `accept` | `string` | — | 接受的文件类型，拖入时同样过滤。 |\n| `drag` | `boolean` | `false` | 启用拖拽上传区域。 |\n| `limit` | `number` | — | 最多文件数；本次选择会使总数超出时触发 `exceed`，整批不加入。 |\n| `maxSize` | `number` | — | 单文件最大字节数，超出则跳过。 |\n| `disabled` | `boolean` | `false` | 禁用。 |\n| `chooseLabel` | `string` | `'选择文件'` | 按钮 / 拖放区无障碍名称。 |\n| `showFileList` | `boolean` | `true` | 是否显示列表。 |\n| `listType` | `'text' \\| 'picture' \\| 'picture-card'` | `'text'` | 列表样式。`picture-card` 用加号卡片作为触发器。 |\n| `fileList` | `FileUploadFile[]` | — | 文件列表，配合 `v-model:file-list`。 |\n| `action` | `string` | — | 上传地址。设置后默认自动上传。 |\n| `method` | `string` | `'post'` | 请求方法。 |\n| `name` | `string` | `'file'` | 表单字段名。 |\n| `headers` | `Record<string, string>` | — | 额外请求头。 |\n| `data` | `object \\| (() => object)` | — | 随文件一起提交的字段。 |\n| `withCredentials` | `boolean` | `false` | 跨域携带 cookie。 |\n| `autoUpload` | `boolean` | `true` | 是否选完即传。需要同时提供 `action` 或 `httpRequest`。 |\n| `httpRequest` | `(options) => void \\| Promise \\| XMLHttpRequest` | — | 自定义上传。返回 Promise 时以 resolve 值为成功响应。 |\n| `beforeUpload` | `(file, uploadFile) => boolean \\| Promise` | — | 上传前钩子，返回 `false` 则跳过该文件。 |\n| `beforeRemove` | `(uploadFile, fileList) => boolean \\| Promise` | — | 删除前钩子，返回 `false` 则取消删除。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `select` | `File[]` | 选择或拖入完成（已通过类型 / 大小 / `beforeUpload` 过滤）。 |\n| `exceed` | `File[]` | 超过 `limit`。 |\n| `update:fileList` | `FileUploadFile[]` | 列表变化。 |\n| `change` | `file, fileList` | 单个文件状态变化。 |\n| `remove` | `file` | 从列表移除。 |\n| `preview` | `file` | 点击预览。 |\n| `progress` | `file, percent` | 上传进度。 |\n| `success` | `file, response` | 上传成功。 |\n| `error` | `file, error` | 上传失败。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 自定义拖放区内容（仅 `drag`）。 |\n| `trigger` | 自定义选择按钮内容（非 `picture-card`）。 |\n| `tip` | 触发区下方的提示。 |\n| `file` | 自定义列表项，作用域 `{ file }`。 |\n\n## Methods\n\n| 方法 | 说明 |\n| --- | --- |\n| `openPicker()` | 打开系统文件选择框。 |\n| `submit()` | 上传列表中 `ready` / `fail` 的文件。 |\n| `abort(file?)` | 取消进行中的请求；不传则全部取消。 |\n| `clear()` / `clearFiles()` | 清空列表并中止上传。 |\n"
+          "markdown": "---\ntitle: FileUpload\ncategory: 10 / FILE\ndescription: 选择、拖拽、列表、预览与上传。\n---\n\n# FileUpload\n\n选择本地文件。支持点击选择、拖拽上传、文本 / 图片列表、卡片墙，以及通过 `action` 或 `httpRequest` 实际上传。`select` 仍会返回本次选中的 `File[]`，完整状态用 `v-model:file-list`。默认展示文件列表；提供上传地址或自定义请求后会自动上传。\n\n**与 Naive `n-upload` 命名对照：**\n\n| Naive | Wi |\n| --- | --- |\n| `action` | `action` |\n| `file-list` | `fileList`（`v-model:file-list`） |\n| `list-type` | `listType` |\n| `directory` | `directory`（`webkitdirectory`，浏览器支持文件夹选择） |\n| `custom-request` | `httpRequest` |\n| `name` | `name` |\n\n队列 UI 细控（如自定义队列按钮布局）本期不做。\n\n## 引入\n\n```ts\nimport { WiFileUpload } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem\">\n    <WiFileUpload mode=\"advanced\" multiple @select=\"onSelect\" />\n    <div v-if=\"names.length\">\n      已选：{{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Drag to upload\n\n设置 `drag` 后出现虚线拖放区：可拖入文件，也可点击区域选择。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple accept=\"image/*,.pdf\" @select=\"onSelect\">\n      <template #tip>\n        支持图片或 PDF，可一次拖入多个文件。\n      </template>\n    </WiFileUpload>\n    <div v-if=\"names.length\">\n      已选：{{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Picture list\n\n`list-type=\"picture\"` 在列表中显示缩略图，可预览或删除。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst preview = ref('')\nfunction onPreview(file: FileUploadFile) {\n  preview.value = file.url ?? ''\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload multiple accept=\"image/*\" list-type=\"picture\" @preview=\"onPreview\" />\n    <img v-if=\"preview\" :src=\"preview\" alt=\"\" style=\"max-width:12rem;border-radius:0.5rem\">\n  </div>\n</template>\n```\n\n## Picture card\n\n照片墙：加号卡片选择文件，悬停可预览 / 删除。也可直接把图片拖到卡片区域。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiFileUpload multiple accept=\"image/*\" list-type=\"picture-card\" :limit=\"4\" />\n</template>\n```\n\n## Auto upload\n\n提供 `httpRequest`（或 `action`）后默认自动上传。下面用本地模拟请求，不依赖真实接口。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadRequestOptions} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst last = ref('')\n\nasync function mockUpload(options: FileUploadRequestOptions) {\n  options.onProgress(35)\n  await new Promise((resolve) => setTimeout(resolve, 400))\n  options.onProgress(100)\n  return { name: options.file.name }\n}\n\nfunction onSuccess(_file: unknown, response: unknown) {\n  last.value = JSON.stringify(response)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple :http-request=\"mockUpload\" @success=\"onSuccess\">\n      <template #tip>\n        选择后立即模拟上传，并显示进度。\n      </template>\n    </WiFileUpload>\n    <div v-if=\"last\">\n      响应：{{ last }}\n    </div>\n  </div>\n</template>\n```\n\n## Manual upload\n\n`auto-upload=\"false\"` 时先加入列表，再点「上传」。`before-upload` 可拦截不合格文件。\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      单文件不超过 2MB。选好后点击上传。\n    </template>\n  </WiFileUpload>\n</template>\n```\n\n## Instance methods\n\n通过模板 ref 可以控制选择器、提交队列、取消上传和清空列表。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst uploader = ref<{\n  openPicker: () => void\n  submit: () => void\n  abort: () => void\n  clear: () => void\n  clearFiles: () => void\n} | null>(null)\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload ref=\"uploader\" mode=\"advanced\" :auto-upload=\"false\" />\n    <div style=\"display:flex;flex-wrap:wrap;gap:0.5rem\">\n      <button type=\"button\" @click=\"uploader?.openPicker()\">选择文件</button>\n      <button type=\"button\" @click=\"uploader?.submit()\">提交队列</button>\n      <button type=\"button\" @click=\"uploader?.abort()\">取消上传</button>\n      <button type=\"button\" @click=\"uploader?.clear()\">清空</button>\n      <button type=\"button\" @click=\"uploader?.clearFiles()\">清空（别名）</button>\n    </div>\n  </div>\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `mode` | `'basic' \\| 'advanced'` | `'basic'` | 视觉变体。文件列表由 `showFileList` 控制。 |\n| `multiple` | `boolean` | `false` | 多选。关闭时新选择会替换当前列表。 |\n| `directory` | `boolean` | `false` | 选择文件夹（`webkitdirectory`），同时开启多选。 |\n| `accept` | `string` | — | 接受的文件类型，拖入时同样过滤。 |\n| `drag` | `boolean` | `false` | 启用拖拽上传区域。 |\n| `limit` | `number` | — | 最多文件数；本次选择会使总数超出时触发 `exceed`，整批不加入。 |\n| `maxSize` | `number` | — | 单文件最大字节数，超出则跳过。 |\n| `disabled` | `boolean` | `false` | 禁用。 |\n| `chooseLabel` | `string` | `'选择文件'` | 按钮 / 拖放区无障碍名称。 |\n| `showFileList` | `boolean` | `true` | 是否显示列表。 |\n| `listType` | `'text' \\| 'picture' \\| 'picture-card'` | `'text'` | 列表样式。`picture-card` 用加号卡片作为触发器。 |\n| `fileList` | `FileUploadFile[]` | — | 文件列表，配合 `v-model:file-list`。 |\n| `action` | `string` | — | 上传地址。设置后默认自动上传。 |\n| `method` | `string` | `'post'` | 请求方法。 |\n| `name` | `string` | `'file'` | 表单字段名。 |\n| `headers` | `Record<string, string>` | — | 额外请求头。 |\n| `data` | `object \\| (() => object)` | — | 随文件一起提交的字段。 |\n| `withCredentials` | `boolean` | `false` | 跨域携带 cookie。 |\n| `autoUpload` | `boolean` | `true` | 是否选完即传。需要同时提供 `action` 或 `httpRequest`。 |\n| `httpRequest` | `(options) => void \\| Promise \\| XMLHttpRequest` | — | 自定义上传。返回 Promise 时以 resolve 值为成功响应。 |\n| `beforeUpload` | `(file, uploadFile) => boolean \\| Promise` | — | 上传前钩子，返回 `false` 则跳过该文件。 |\n| `beforeRemove` | `(uploadFile, fileList) => boolean \\| Promise` | — | 删除前钩子，返回 `false` 则取消删除。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `select` | `File[]` | 选择或拖入完成（已通过类型 / 大小 / `beforeUpload` 过滤）。 |\n| `exceed` | `File[]` | 超过 `limit`。 |\n| `update:fileList` | `FileUploadFile[]` | 列表变化。 |\n| `change` | `file, fileList` | 单个文件状态变化。 |\n| `remove` | `file` | 从列表移除。 |\n| `preview` | `file` | 点击预览。 |\n| `progress` | `file, percent` | 上传进度。 |\n| `success` | `file, response` | 上传成功。 |\n| `error` | `file, error` | 上传失败。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 自定义拖放区内容（仅 `drag`）。 |\n| `trigger` | 自定义选择按钮内容（非 `picture-card`）。 |\n| `tip` | 触发区下方的提示。 |\n| `file` | 自定义列表项，作用域 `{ file }`。 |\n\n## Methods\n\n| 方法 | 说明 |\n| --- | --- |\n| `openPicker()` | 打开系统文件选择框。 |\n| `submit()` | 上传列表中 `ready` / `fail` 的文件。 |\n| `abort(file?)` | 取消进行中的请求；不传则全部取消。 |\n| `clear()` / `clearFiles()` | 清空列表并中止上传。 |\n"
         },
         "en-US": {
           "title": "FileUpload",
@@ -6272,6 +6324,11 @@
               "body": "With `auto-upload=\"false\"`, files join the list first; click Upload to send them. `before-upload` can reject a file.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      Each file must be under 2MB. Choose files, then click Upload.\n    </template>\n  </WiFileUpload>\n</template>\n```"
             },
             {
+              "id": "instance-methods",
+              "title": "Instance methods",
+              "body": "Use a template ref to control the picker, upload queue, cancellation, and clearing.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst uploader = ref<{\n  openPicker: () => void\n  submit: () => void\n  abort: () => void\n  clear: () => void\n  clearFiles: () => void\n} | null>(null)\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload ref=\"uploader\" mode=\"advanced\" :auto-upload=\"false\" />\n    <div style=\"display:flex;flex-wrap:wrap;gap:0.5rem\">\n      <button type=\"button\" @click=\"uploader?.openPicker()\">Choose</button>\n      <button type=\"button\" @click=\"uploader?.submit()\">Submit queue</button>\n      <button type=\"button\" @click=\"uploader?.abort()\">Abort</button>\n      <button type=\"button\" @click=\"uploader?.clear()\">Clear</button>\n      <button type=\"button\" @click=\"uploader?.clearFiles()\">Clear alias</button>\n    </div>\n  </div>\n</template>\n```"
+            },
+            {
               "id": "props",
               "title": "Props",
               "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `mode` | `'basic' \\| 'advanced'` | `'basic'` | Visual variant. Use `showFileList` to toggle the list. |\n| `multiple` | `boolean` | `false` | Multiple selection. When off, a new pick replaces the list. |\n| `directory` | `boolean` | `false` | Pick a folder (`webkitdirectory`); implies multiple. |\n| `accept` | `string` | — | Accepted types; also applied to dropped files. |\n| `drag` | `boolean` | `false` | Enable the drag-and-drop zone. |\n| `limit` | `number` | — | Max files. If this pick would exceed it, `exceed` fires and nothing is added. |\n| `maxSize` | `number` | — | Max bytes per file; larger files are skipped. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `chooseLabel` | `string` | `'Choose file'` | Accessible name for the button / drop zone. |\n| `showFileList` | `boolean` | `true` | Show the list. |\n| `listType` | `'text' \\| 'picture' \\| 'picture-card'` | `'text'` | List layout. `picture-card` uses a plus tile as the trigger. |\n| `fileList` | `FileUploadFile[]` | — | Bound list (`v-model:file-list`). |\n| `action` | `string` | — | Upload URL. When set, files upload automatically by default. |\n| `method` | `string` | `'post'` | Request method. |\n| `name` | `string` | `'file'` | Form field name. |\n| `headers` | `Record<string, string>` | — | Extra headers. |\n| `data` | `object \\| (() => object)` | — | Extra fields sent with the file. |\n| `withCredentials` | `boolean` | `false` | Send cookies on cross-origin requests. |\n| `autoUpload` | `boolean` | `true` | Upload on select. Requires `action` or `httpRequest`. |\n| `httpRequest` | `(options) => void \\| Promise \\| XMLHttpRequest` | — | Custom uploader. A returned Promise is treated as the success response. |\n| `beforeUpload` | `(file, uploadFile) => boolean \\| Promise` | — | Return `false` to skip the file. |\n| `beforeRemove` | `(uploadFile, fileList) => boolean \\| Promise` | — | Return `false` to cancel removal. |"
@@ -6292,7 +6349,7 @@
               "body": "| Method | Description |\n| --- | --- |\n| `openPicker()` | Open the system file picker. |\n| `submit()` | Upload `ready` / `fail` files in the list. |\n| `abort(file?)` | Abort in-flight request(s); omit `file` to abort all. |\n| `clear()` / `clearFiles()` | Clear the list and abort uploads. |"
             }
           ],
-          "markdown": "---\ntitle: FileUpload\ncategory: 10 / FILE\ndescription: Select, drag, list, preview, and upload.\n---\n\n# FileUpload\n\nPick local files. Supports click-to-choose, drag-and-drop, text / picture lists, a picture-card wall, and real uploads via `action` or `httpRequest`. `select` still emits the chosen `File[]`; the full list is `v-model:file-list`. The file list is shown by default; files upload automatically when `action` or `httpRequest` is set.\n\n**Naive `n-upload` name map:**\n\n| Naive | Wi |\n| --- | --- |\n| `action` | `action` |\n| `file-list` | `fileList` (`v-model:file-list`) |\n| `list-type` | `listType` |\n| `directory` | `directory` (`webkitdirectory`; folder pick where the browser supports it) |\n| `custom-request` | `httpRequest` |\n| `name` | `name` |\n\nQueue UI extras are out of scope this batch.\n\n## Import\n\n```ts\nimport { WiFileUpload } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem\">\n    <WiFileUpload mode=\"advanced\" multiple @select=\"onSelect\" />\n    <div v-if=\"names.length\">\n      Selected: {{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Drag to upload\n\nSet `drag` to show a dashed drop zone. Drop files or click the area to choose.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple accept=\"image/*,.pdf\" @select=\"onSelect\">\n      <template #tip>\n        Images or PDF. Multiple files can be dropped at once.\n      </template>\n    </WiFileUpload>\n    <div v-if=\"names.length\">\n      Selected: {{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Picture list\n\n`list-type=\"picture\"` shows thumbnails in the list, with preview and remove.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst preview = ref('')\nfunction onPreview(file: FileUploadFile) {\n  preview.value = file.url ?? ''\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload multiple accept=\"image/*\" list-type=\"picture\" @preview=\"onPreview\" />\n    <img v-if=\"preview\" :src=\"preview\" alt=\"\" style=\"max-width:12rem;border-radius:0.5rem\">\n  </div>\n</template>\n```\n\n## Picture card\n\nA photo wall: the plus tile opens the picker; hover to preview or remove. Images can also be dropped onto the card area.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiFileUpload multiple accept=\"image/*\" list-type=\"picture-card\" :limit=\"4\" />\n</template>\n```\n\n## Auto upload\n\nWith `httpRequest` (or `action`), files upload automatically. The demo mocks the request locally.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadRequestOptions} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst last = ref('')\n\nasync function mockUpload(options: FileUploadRequestOptions) {\n  options.onProgress(35)\n  await new Promise((resolve) => setTimeout(resolve, 400))\n  options.onProgress(100)\n  return { name: options.file.name }\n}\n\nfunction onSuccess(_file: unknown, response: unknown) {\n  last.value = JSON.stringify(response)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple :http-request=\"mockUpload\" @success=\"onSuccess\">\n      <template #tip>\n        Files upload immediately after selection, with progress.\n      </template>\n    </WiFileUpload>\n    <div v-if=\"last\">\n      Response: {{ last }}\n    </div>\n  </div>\n</template>\n```\n\n## Manual upload\n\nWith `auto-upload=\"false\"`, files join the list first; click Upload to send them. `before-upload` can reject a file.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      Each file must be under 2MB. Choose files, then click Upload.\n    </template>\n  </WiFileUpload>\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `mode` | `'basic' \\| 'advanced'` | `'basic'` | Visual variant. Use `showFileList` to toggle the list. |\n| `multiple` | `boolean` | `false` | Multiple selection. When off, a new pick replaces the list. |\n| `directory` | `boolean` | `false` | Pick a folder (`webkitdirectory`); implies multiple. |\n| `accept` | `string` | — | Accepted types; also applied to dropped files. |\n| `drag` | `boolean` | `false` | Enable the drag-and-drop zone. |\n| `limit` | `number` | — | Max files. If this pick would exceed it, `exceed` fires and nothing is added. |\n| `maxSize` | `number` | — | Max bytes per file; larger files are skipped. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `chooseLabel` | `string` | `'Choose file'` | Accessible name for the button / drop zone. |\n| `showFileList` | `boolean` | `true` | Show the list. |\n| `listType` | `'text' \\| 'picture' \\| 'picture-card'` | `'text'` | List layout. `picture-card` uses a plus tile as the trigger. |\n| `fileList` | `FileUploadFile[]` | — | Bound list (`v-model:file-list`). |\n| `action` | `string` | — | Upload URL. When set, files upload automatically by default. |\n| `method` | `string` | `'post'` | Request method. |\n| `name` | `string` | `'file'` | Form field name. |\n| `headers` | `Record<string, string>` | — | Extra headers. |\n| `data` | `object \\| (() => object)` | — | Extra fields sent with the file. |\n| `withCredentials` | `boolean` | `false` | Send cookies on cross-origin requests. |\n| `autoUpload` | `boolean` | `true` | Upload on select. Requires `action` or `httpRequest`. |\n| `httpRequest` | `(options) => void \\| Promise \\| XMLHttpRequest` | — | Custom uploader. A returned Promise is treated as the success response. |\n| `beforeUpload` | `(file, uploadFile) => boolean \\| Promise` | — | Return `false` to skip the file. |\n| `beforeRemove` | `(uploadFile, fileList) => boolean \\| Promise` | — | Return `false` to cancel removal. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `select` | `File[]` | Selection or drop complete (after type / size / `beforeUpload` filters). |\n| `exceed` | `File[]` | More files than `limit`. |\n| `update:fileList` | `FileUploadFile[]` | List changed. |\n| `change` | `file, fileList` | A file's status changed. |\n| `remove` | `file` | Removed from the list. |\n| `preview` | `file` | Preview clicked. |\n| `progress` | `file, percent` | Upload progress. |\n| `success` | `file, response` | Upload succeeded. |\n| `error` | `file, error` | Upload failed. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Custom drop-zone content (`drag` only). |\n| `trigger` | Custom choose-button content (not `picture-card`). |\n| `tip` | Hint below the trigger. |\n| `file` | Custom list item; scope `{ file }`. |\n\n## Methods\n\n| Method | Description |\n| --- | --- |\n| `openPicker()` | Open the system file picker. |\n| `submit()` | Upload `ready` / `fail` files in the list. |\n| `abort(file?)` | Abort in-flight request(s); omit `file` to abort all. |\n| `clear()` / `clearFiles()` | Clear the list and abort uploads. |\n"
+          "markdown": "---\ntitle: FileUpload\ncategory: 10 / FILE\ndescription: Select, drag, list, preview, and upload.\n---\n\n# FileUpload\n\nPick local files. Supports click-to-choose, drag-and-drop, text / picture lists, a picture-card wall, and real uploads via `action` or `httpRequest`. `select` still emits the chosen `File[]`; the full list is `v-model:file-list`. The file list is shown by default; files upload automatically when `action` or `httpRequest` is set.\n\n**Naive `n-upload` name map:**\n\n| Naive | Wi |\n| --- | --- |\n| `action` | `action` |\n| `file-list` | `fileList` (`v-model:file-list`) |\n| `list-type` | `listType` |\n| `directory` | `directory` (`webkitdirectory`; folder pick where the browser supports it) |\n| `custom-request` | `httpRequest` |\n| `name` | `name` |\n\nQueue UI extras are out of scope this batch.\n\n## Import\n\n```ts\nimport { WiFileUpload } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem\">\n    <WiFileUpload mode=\"advanced\" multiple @select=\"onSelect\" />\n    <div v-if=\"names.length\">\n      Selected: {{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Drag to upload\n\nSet `drag` to show a dashed drop zone. Drop files or click the area to choose.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst names = ref<string[]>([])\nfunction onSelect(files: File[]) {\n  names.value = files.map((f) => f.name)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple accept=\"image/*,.pdf\" @select=\"onSelect\">\n      <template #tip>\n        Images or PDF. Multiple files can be dropped at once.\n      </template>\n    </WiFileUpload>\n    <div v-if=\"names.length\">\n      Selected: {{ names.join(', ') }}\n    </div>\n  </div>\n</template>\n```\n\n## Picture list\n\n`list-type=\"picture\"` shows thumbnails in the list, with preview and remove.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst preview = ref('')\nfunction onPreview(file: FileUploadFile) {\n  preview.value = file.url ?? ''\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload multiple accept=\"image/*\" list-type=\"picture\" @preview=\"onPreview\" />\n    <img v-if=\"preview\" :src=\"preview\" alt=\"\" style=\"max-width:12rem;border-radius:0.5rem\">\n  </div>\n</template>\n```\n\n## Picture card\n\nA photo wall: the plus tile opens the picker; hover to preview or remove. Images can also be dropped onto the card area.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiFileUpload multiple accept=\"image/*\" list-type=\"picture-card\" :limit=\"4\" />\n</template>\n```\n\n## Auto upload\n\nWith `httpRequest` (or `action`), files upload automatically. The demo mocks the request locally.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadRequestOptions} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst last = ref('')\n\nasync function mockUpload(options: FileUploadRequestOptions) {\n  options.onProgress(35)\n  await new Promise((resolve) => setTimeout(resolve, 400))\n  options.onProgress(100)\n  return { name: options.file.name }\n}\n\nfunction onSuccess(_file: unknown, response: unknown) {\n  last.value = JSON.stringify(response)\n}\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload drag multiple :http-request=\"mockUpload\" @success=\"onSuccess\">\n      <template #tip>\n        Files upload immediately after selection, with progress.\n      </template>\n    </WiFileUpload>\n    <div v-if=\"last\">\n      Response: {{ last }}\n    </div>\n  </div>\n</template>\n```\n\n## Manual upload\n\nWith `auto-upload=\"false\"`, files join the list first; click Upload to send them. `before-upload` can reject a file.\n\n```vue preview\n<script setup lang=\"ts\">\nimport type {FileUploadFile} from '@well-insight/ui';\nimport {  WiFileUpload } from '@well-insight/ui'\n\nasync function mockUpload() {\n  await new Promise((resolve) => setTimeout(resolve, 300))\n  return { ok: true }\n}\n\nfunction beforeUpload(file: File, _item: FileUploadFile) {\n  if (file.size > 2 * 1024 * 1024) return false\n  return true\n}\n</script>\n\n<template>\n  <WiFileUpload\n    mode=\"advanced\"\n    multiple\n    :auto-upload=\"false\"\n    :max-size=\"2 * 1024 * 1024\"\n    :before-upload=\"beforeUpload\"\n    :http-request=\"mockUpload\"\n  >\n    <template #tip>\n      Each file must be under 2MB. Choose files, then click Upload.\n    </template>\n  </WiFileUpload>\n</template>\n```\n\n## Instance methods\n\nUse a template ref to control the picker, upload queue, cancellation, and clearing.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiFileUpload } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst uploader = ref<{\n  openPicker: () => void\n  submit: () => void\n  abort: () => void\n  clear: () => void\n  clearFiles: () => void\n} | null>(null)\n</script>\n\n<template>\n  <div style=\"display:flex;flex-direction:column;gap:0.75rem;max-width:28rem\">\n    <WiFileUpload ref=\"uploader\" mode=\"advanced\" :auto-upload=\"false\" />\n    <div style=\"display:flex;flex-wrap:wrap;gap:0.5rem\">\n      <button type=\"button\" @click=\"uploader?.openPicker()\">Choose</button>\n      <button type=\"button\" @click=\"uploader?.submit()\">Submit queue</button>\n      <button type=\"button\" @click=\"uploader?.abort()\">Abort</button>\n      <button type=\"button\" @click=\"uploader?.clear()\">Clear</button>\n      <button type=\"button\" @click=\"uploader?.clearFiles()\">Clear alias</button>\n    </div>\n  </div>\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `mode` | `'basic' \\| 'advanced'` | `'basic'` | Visual variant. Use `showFileList` to toggle the list. |\n| `multiple` | `boolean` | `false` | Multiple selection. When off, a new pick replaces the list. |\n| `directory` | `boolean` | `false` | Pick a folder (`webkitdirectory`); implies multiple. |\n| `accept` | `string` | — | Accepted types; also applied to dropped files. |\n| `drag` | `boolean` | `false` | Enable the drag-and-drop zone. |\n| `limit` | `number` | — | Max files. If this pick would exceed it, `exceed` fires and nothing is added. |\n| `maxSize` | `number` | — | Max bytes per file; larger files are skipped. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `chooseLabel` | `string` | `'Choose file'` | Accessible name for the button / drop zone. |\n| `showFileList` | `boolean` | `true` | Show the list. |\n| `listType` | `'text' \\| 'picture' \\| 'picture-card'` | `'text'` | List layout. `picture-card` uses a plus tile as the trigger. |\n| `fileList` | `FileUploadFile[]` | — | Bound list (`v-model:file-list`). |\n| `action` | `string` | — | Upload URL. When set, files upload automatically by default. |\n| `method` | `string` | `'post'` | Request method. |\n| `name` | `string` | `'file'` | Form field name. |\n| `headers` | `Record<string, string>` | — | Extra headers. |\n| `data` | `object \\| (() => object)` | — | Extra fields sent with the file. |\n| `withCredentials` | `boolean` | `false` | Send cookies on cross-origin requests. |\n| `autoUpload` | `boolean` | `true` | Upload on select. Requires `action` or `httpRequest`. |\n| `httpRequest` | `(options) => void \\| Promise \\| XMLHttpRequest` | — | Custom uploader. A returned Promise is treated as the success response. |\n| `beforeUpload` | `(file, uploadFile) => boolean \\| Promise` | — | Return `false` to skip the file. |\n| `beforeRemove` | `(uploadFile, fileList) => boolean \\| Promise` | — | Return `false` to cancel removal. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `select` | `File[]` | Selection or drop complete (after type / size / `beforeUpload` filters). |\n| `exceed` | `File[]` | More files than `limit`. |\n| `update:fileList` | `FileUploadFile[]` | List changed. |\n| `change` | `file, fileList` | A file's status changed. |\n| `remove` | `file` | Removed from the list. |\n| `preview` | `file` | Preview clicked. |\n| `progress` | `file, percent` | Upload progress. |\n| `success` | `file, response` | Upload succeeded. |\n| `error` | `file, error` | Upload failed. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Custom drop-zone content (`drag` only). |\n| `trigger` | Custom choose-button content (not `picture-card`). |\n| `tip` | Hint below the trigger. |\n| `file` | Custom list item; scope `{ file }`. |\n\n## Methods\n\n| Method | Description |\n| --- | --- |\n| `openPicker()` | Open the system file picker. |\n| `submit()` | Upload `ready` / `fail` files in the list. |\n| `abort(file?)` | Abort in-flight request(s); omit `file` to abort all. |\n| `clear()` / `clearFiles()` | Clear the list and abort uploads. |\n"
         }
       }
     },
@@ -9503,7 +9560,19 @@
           "description": "当前值。"
         },
         {
-          "name": "min` / `max` / `step",
+          "name": "min",
+          "type": "number",
+          "default": "0` / `100` / `1",
+          "description": "范围与步进。"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": "0` / `100` / `1",
+          "description": "范围与步进。"
+        },
+        {
+          "name": "step",
           "type": "number",
           "default": "0` / `100` / `1",
           "description": "范围与步进。"
@@ -9845,15 +9914,6 @@
           "locale": "zh-CN"
         },
         {
-          "id": "custom-scrollbar-1",
-          "section": "Custom Scrollbar",
-          "sectionId": "custom-scrollbar",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout\n    :native-scrollbar=\"false\"\n    style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\"\n  >\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Custom scrollbar\n    </WiLayoutHeader>\n    <WiLayoutContent embedded :native-scrollbar=\"false\" content-style=\"padding:1rem\">\n      <div style=\"display:grid;gap:0.5rem\">\n        <div v-for=\"n in 16\" :key=\"n\">\n          行 {{ n }}\n        </div>\n      </div>\n    </WiLayoutContent>\n  </WiLayout>\n</template>",
-          "locale": "zh-CN"
-        },
-        {
           "id": "absolute-shell-1",
           "section": "Absolute Shell",
           "sectionId": "absolute-shell",
@@ -9926,15 +9986,6 @@
           "locale": "en-US"
         },
         {
-          "id": "custom-scrollbar-1",
-          "section": "Custom Scrollbar",
-          "sectionId": "custom-scrollbar",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout\n    :native-scrollbar=\"false\"\n    style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\"\n  >\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Custom scrollbar\n    </WiLayoutHeader>\n    <WiLayoutContent embedded :native-scrollbar=\"false\" content-style=\"padding:1rem\">\n      <div style=\"display:grid;gap:0.5rem\">\n        <div v-for=\"n in 16\" :key=\"n\">\n          Row {{ n }}\n        </div>\n      </div>\n    </WiLayoutContent>\n  </WiLayout>\n</template>",
-          "locale": "en-US"
-        },
-        {
           "id": "absolute-shell-1",
           "section": "Absolute Shell",
           "sectionId": "absolute-shell",
@@ -9990,11 +10041,6 @@
               "body": "内容超出时仅 Content 区域滚动，Header / Sider 保持固定。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Scroll demo\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        固定侧栏\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        <div style=\"display:grid;gap:0.5rem\">\n          <div v-for=\"n in 20\" :key=\"n\">\n            行 {{ n }} — 向下滚动\n          </div>\n        </div>\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```"
             },
             {
-              "id": "custom-scrollbar",
-              "title": "Custom Scrollbar",
-              "body": "默认 `nativeScrollbar` 使用浏览器原生滚动条。设为 `false` 时改用 `WiScrollbar`（可通过 `scrollbarProps` 透传）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout\n    :native-scrollbar=\"false\"\n    style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\"\n  >\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Custom scrollbar\n    </WiLayoutHeader>\n    <WiLayoutContent embedded :native-scrollbar=\"false\" content-style=\"padding:1rem\">\n      <div style=\"display:grid;gap:0.5rem\">\n        <div v-for=\"n in 16\" :key=\"n\">\n          行 {{ n }}\n        </div>\n      </div>\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```"
-            },
-            {
               "id": "absolute-shell",
               "title": "Absolute Shell",
               "body": "根布局 `position=\"absolute\"` 铺满父级（父级需 `position: relative` + 明确高度）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <div style=\"position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayout position=\"absolute\" has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Nav\n      </WiLayoutSider>\n      <WiLayout>\n        <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n          Absolute layout\n        </WiLayoutHeader>\n        <WiLayoutContent embedded content-style=\"padding:1rem\">\n          填满相对定位容器\n        </WiLayoutContent>\n      </WiLayout>\n    </WiLayout>\n  </div>\n</template>\n```"
@@ -10002,17 +10048,17 @@
             {
               "id": "layout-props",
               "title": "Layout Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | 横向容纳 `WiLayoutSider`。 |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | 侧栏位置。 |\n| `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |\n| `position` | `'static' \\| 'absolute'` | `'static'` | 定位模式。 |\n| `nativeScrollbar` | `boolean` | `true` | `false` 时用 `WiScrollbar`。 |\n| `scrollbarProps` | `object` | — | 透传给 `WiScrollbar`（仅非原生时）。 |\n| `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | 横向容纳 `WiLayoutSider`。 |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | 侧栏位置。 |\n| `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |\n| `position` | `'static' \\| 'absolute'` | `'static'` | 定位模式。 |\n| `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |"
             },
             {
               "id": "layoutsider-props",
               "title": "LayoutSider Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | 展开宽度（始终写在 `width` 上）。 |\n| `collapsedWidth` | `number` | `48` | 折叠时的 `max-width`。 |\n| `collapsed` | `boolean` | — | 折叠状态，支持 `v-model:collapsed`。 |\n| `defaultCollapsed` | `boolean` | `false` | 非受控初始折叠。 |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | 折叠触发器；`arrow` 等同 `arrow-circle`。 |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` 裁切内容；`width` 随侧栏收缩。 |\n| `showCollapsedContent` | `boolean` | `true` | 折叠后是否仍显示侧栏内容。 |\n| `nativeScrollbar` | `boolean` | `true` | `false` 时用 `WiScrollbar`。 |\n| `scrollbarProps` | `object` | — | 透传给 `WiScrollbar`（仅非原生时）。 |\n| `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |\n| `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | 展开宽度（始终写在 `width` 上）。 |\n| `collapsedWidth` | `number` | `48` | 折叠时的 `max-width`。 |\n| `collapsed` | `boolean` | — | 折叠状态，支持 `v-model:collapsed`。 |\n| `defaultCollapsed` | `boolean` | `false` | 非受控初始折叠。 |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | 折叠触发器；`arrow` 等同 `arrow-circle`。 |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` 裁切内容；`width` 随侧栏收缩。 |\n| `showCollapsedContent` | `boolean` | `true` | 折叠后是否仍显示侧栏内容。 |\n| `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |\n| `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| 事件 | 说明 |\n| --- | --- |\n| `scroll` | 滚动容器滚动时触发（原生与自定义滚动条均会触发）。 |"
+              "body": "| 事件 | 说明 |\n| --- | --- |\n| `scroll` | 滚动容器滚动时触发。 |"
             },
             {
               "id": "expose",
@@ -10025,7 +10071,7 @@
               "body": "| 组件 | 说明 |\n| --- | --- |\n| `WiLayout` | 根布局。 |\n| `WiLayoutHeader` | 顶栏。 |\n| `WiLayoutContent` | 主内容区（默认撑满剩余空间）。 |\n| `WiLayoutFooter` | 底栏。 |\n| `WiLayoutSider` | 侧栏。 |"
             }
           ],
-          "markdown": "---\ntitle: Layout\ncategory: 05 / PANEL\ndescription: 页面级布局骨架，含 Header / Sider / Content / Footer。\n---\n\n# Layout\n\n页面级布局容器。侧栏场景需在对应 `WiLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WiLayoutContent` 会自动撑满剩余空间。\n\n## 引入\n\n```ts\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n```\n\n## Basic\n\nHeader / Content / Footer。Content 会占满中间剩余高度。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Header\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem;display:flex;align-items:center;justify-content:center\">\n      Content（自动撑开）\n    </WiLayoutContent>\n    <WiLayoutFooter bordered style=\"padding:0.75rem 1rem\">\n      Footer\n    </WiLayoutFooter>\n  </WiLayout>\n</template>\n```\n\n## With Sider\n\n顶栏 + 左侧栏 + 主内容。内层 `has-sider` 的 Layout 会吃掉 Header 以下的全部高度。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between\">\n      <strong>App</strong>\n      <span style=\"color:var(--wi-color-text-muted);font-size:0.75rem\">{{ collapsed ? '已折叠' : '已展开' }}</span>\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        show-trigger=\"arrow-circle\"\n        :width=\"160\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.5rem\">\n          <div>概览</div>\n          <div>项目</div>\n          <div>设置</div>\n        </div>\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        主内容区会横向、纵向同时撑满。\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Right Sider\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Inspector\n    </WiLayoutHeader>\n    <WiLayout has-sider sider-placement=\"right\">\n      <WiLayoutSider bordered :width=\"140\" content-style=\"padding:0.75rem\">\n        属性面板\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        画布 / 主区域\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Full Shell\n\n完整后台骨架：顶栏 + 侧栏 + 内容 + 底栏。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiButton,\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n  WiTag,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:18rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader\n      bordered\n      inverted\n      style=\"padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem\"\n    >\n      <strong>Well Design</strong>\n      <WiTag value=\"Studio\" />\n      <span style=\"flex:1\" />\n      <WiButton size=\"small\" label=\"发布\" />\n    </WiLayoutHeader>\n\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        inverted\n        show-trigger=\"bar\"\n        :width=\"168\"\n        :collapsed-width=\"56\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.65rem;font-size:0.875rem\">\n          <div>仪表盘</div>\n          <div>数据源</div>\n          <div>组件</div>\n          <div>主题</div>\n        </div>\n      </WiLayoutSider>\n\n      <WiLayout>\n        <WiLayoutContent embedded content-style=\"padding:1rem;display:grid;gap:0.75rem;align-content:start\">\n          <strong>工作区</strong>\n          <p style=\"margin:0;color:var(--wi-color-text-muted);font-size:0.875rem\">\n            Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。\n          </p>\n        </WiLayoutContent>\n        <WiLayoutFooter bordered style=\"padding:0.5rem 1rem;color:var(--wi-color-text-muted);font-size:0.75rem\">\n          Ready · local\n        </WiLayoutFooter>\n      </WiLayout>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Embedded Content\n\n`embedded` 给内容区柔和背景，便于和顶栏/侧栏区分。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Settings\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem\">\n      嵌套表单 / 列表放在这里。\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```\n\n## Scrollable Content\n\n内容超出时仅 Content 区域滚动，Header / Sider 保持固定。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Scroll demo\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        固定侧栏\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        <div style=\"display:grid;gap:0.5rem\">\n          <div v-for=\"n in 20\" :key=\"n\">\n            行 {{ n }} — 向下滚动\n          </div>\n        </div>\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Custom Scrollbar\n\n默认 `nativeScrollbar` 使用浏览器原生滚动条。设为 `false` 时改用 `WiScrollbar`（可通过 `scrollbarProps` 透传）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout\n    :native-scrollbar=\"false\"\n    style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\"\n  >\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Custom scrollbar\n    </WiLayoutHeader>\n    <WiLayoutContent embedded :native-scrollbar=\"false\" content-style=\"padding:1rem\">\n      <div style=\"display:grid;gap:0.5rem\">\n        <div v-for=\"n in 16\" :key=\"n\">\n          行 {{ n }}\n        </div>\n      </div>\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```\n\n## Absolute Shell\n\n根布局 `position=\"absolute\"` 铺满父级（父级需 `position: relative` + 明确高度）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <div style=\"position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayout position=\"absolute\" has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Nav\n      </WiLayoutSider>\n      <WiLayout>\n        <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n          Absolute layout\n        </WiLayoutHeader>\n        <WiLayoutContent embedded content-style=\"padding:1rem\">\n          填满相对定位容器\n        </WiLayoutContent>\n      </WiLayout>\n    </WiLayout>\n  </div>\n</template>\n```\n\n## Layout Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | 横向容纳 `WiLayoutSider`。 |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | 侧栏位置。 |\n| `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |\n| `position` | `'static' \\| 'absolute'` | `'static'` | 定位模式。 |\n| `nativeScrollbar` | `boolean` | `true` | `false` 时用 `WiScrollbar`。 |\n| `scrollbarProps` | `object` | — | 透传给 `WiScrollbar`（仅非原生时）。 |\n| `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |\n\n## LayoutSider Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | 展开宽度（始终写在 `width` 上）。 |\n| `collapsedWidth` | `number` | `48` | 折叠时的 `max-width`。 |\n| `collapsed` | `boolean` | — | 折叠状态，支持 `v-model:collapsed`。 |\n| `defaultCollapsed` | `boolean` | `false` | 非受控初始折叠。 |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | 折叠触发器；`arrow` 等同 `arrow-circle`。 |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` 裁切内容；`width` 随侧栏收缩。 |\n| `showCollapsedContent` | `boolean` | `true` | 折叠后是否仍显示侧栏内容。 |\n| `nativeScrollbar` | `boolean` | `true` | `false` 时用 `WiScrollbar`。 |\n| `scrollbarProps` | `object` | — | 透传给 `WiScrollbar`（仅非原生时）。 |\n| `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |\n| `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |\n\n## Events\n\n| 事件 | 说明 |\n| --- | --- |\n| `scroll` | 滚动容器滚动时触发（原生与自定义滚动条均会触发）。 |\n\n## Expose\n\n`WiLayout` / `WiLayoutContent` / `WiLayoutSider` 均暴露 `scrollTo(...)`。\n\n## Components\n\n| 组件 | 说明 |\n| --- | --- |\n| `WiLayout` | 根布局。 |\n| `WiLayoutHeader` | 顶栏。 |\n| `WiLayoutContent` | 主内容区（默认撑满剩余空间）。 |\n| `WiLayoutFooter` | 底栏。 |\n| `WiLayoutSider` | 侧栏。 |\n"
+          "markdown": "---\ntitle: Layout\ncategory: 05 / PANEL\ndescription: 页面级布局骨架，含 Header / Sider / Content / Footer。\n---\n\n# Layout\n\n页面级布局容器。侧栏场景需在对应 `WiLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WiLayoutContent` 会自动撑满剩余空间。\n\n## 引入\n\n```ts\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n```\n\n## Basic\n\nHeader / Content / Footer。Content 会占满中间剩余高度。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Header\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem;display:flex;align-items:center;justify-content:center\">\n      Content（自动撑开）\n    </WiLayoutContent>\n    <WiLayoutFooter bordered style=\"padding:0.75rem 1rem\">\n      Footer\n    </WiLayoutFooter>\n  </WiLayout>\n</template>\n```\n\n## With Sider\n\n顶栏 + 左侧栏 + 主内容。内层 `has-sider` 的 Layout 会吃掉 Header 以下的全部高度。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between\">\n      <strong>App</strong>\n      <span style=\"color:var(--wi-color-text-muted);font-size:0.75rem\">{{ collapsed ? '已折叠' : '已展开' }}</span>\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        show-trigger=\"arrow-circle\"\n        :width=\"160\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.5rem\">\n          <div>概览</div>\n          <div>项目</div>\n          <div>设置</div>\n        </div>\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        主内容区会横向、纵向同时撑满。\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Right Sider\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Inspector\n    </WiLayoutHeader>\n    <WiLayout has-sider sider-placement=\"right\">\n      <WiLayoutSider bordered :width=\"140\" content-style=\"padding:0.75rem\">\n        属性面板\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        画布 / 主区域\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Full Shell\n\n完整后台骨架：顶栏 + 侧栏 + 内容 + 底栏。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiButton,\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n  WiTag,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:18rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader\n      bordered\n      inverted\n      style=\"padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem\"\n    >\n      <strong>Well Design</strong>\n      <WiTag value=\"Studio\" />\n      <span style=\"flex:1\" />\n      <WiButton size=\"small\" label=\"发布\" />\n    </WiLayoutHeader>\n\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        inverted\n        show-trigger=\"bar\"\n        :width=\"168\"\n        :collapsed-width=\"56\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.65rem;font-size:0.875rem\">\n          <div>仪表盘</div>\n          <div>数据源</div>\n          <div>组件</div>\n          <div>主题</div>\n        </div>\n      </WiLayoutSider>\n\n      <WiLayout>\n        <WiLayoutContent embedded content-style=\"padding:1rem;display:grid;gap:0.75rem;align-content:start\">\n          <strong>工作区</strong>\n          <p style=\"margin:0;color:var(--wi-color-text-muted);font-size:0.875rem\">\n            Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。\n          </p>\n        </WiLayoutContent>\n        <WiLayoutFooter bordered style=\"padding:0.5rem 1rem;color:var(--wi-color-text-muted);font-size:0.75rem\">\n          Ready · local\n        </WiLayoutFooter>\n      </WiLayout>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Embedded Content\n\n`embedded` 给内容区柔和背景，便于和顶栏/侧栏区分。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Settings\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem\">\n      嵌套表单 / 列表放在这里。\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```\n\n## Scrollable Content\n\n内容超出时仅 Content 区域滚动，Header / Sider 保持固定。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Scroll demo\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        固定侧栏\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        <div style=\"display:grid;gap:0.5rem\">\n          <div v-for=\"n in 20\" :key=\"n\">\n            行 {{ n }} — 向下滚动\n          </div>\n        </div>\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Absolute Shell\n\n根布局 `position=\"absolute\"` 铺满父级（父级需 `position: relative` + 明确高度）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <div style=\"position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayout position=\"absolute\" has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Nav\n      </WiLayoutSider>\n      <WiLayout>\n        <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n          Absolute layout\n        </WiLayoutHeader>\n        <WiLayoutContent embedded content-style=\"padding:1rem\">\n          填满相对定位容器\n        </WiLayoutContent>\n      </WiLayout>\n    </WiLayout>\n  </div>\n</template>\n```\n\n## Layout Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | 横向容纳 `WiLayoutSider`。 |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | 侧栏位置。 |\n| `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |\n| `position` | `'static' \\| 'absolute'` | `'static'` | 定位模式。 |\n| `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |\n\n## LayoutSider Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | 展开宽度（始终写在 `width` 上）。 |\n| `collapsedWidth` | `number` | `48` | 折叠时的 `max-width`。 |\n| `collapsed` | `boolean` | — | 折叠状态，支持 `v-model:collapsed`。 |\n| `defaultCollapsed` | `boolean` | `false` | 非受控初始折叠。 |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | 折叠触发器；`arrow` 等同 `arrow-circle`。 |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` 裁切内容；`width` 随侧栏收缩。 |\n| `showCollapsedContent` | `boolean` | `true` | 折叠后是否仍显示侧栏内容。 |\n| `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |\n| `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |\n\n## Events\n\n| 事件 | 说明 |\n| --- | --- |\n| `scroll` | 滚动容器滚动时触发。 |\n\n## Expose\n\n`WiLayout` / `WiLayoutContent` / `WiLayoutSider` 均暴露 `scrollTo(...)`。\n\n## Components\n\n| 组件 | 说明 |\n| --- | --- |\n| `WiLayout` | 根布局。 |\n| `WiLayoutHeader` | 顶栏。 |\n| `WiLayoutContent` | 主内容区（默认撑满剩余空间）。 |\n| `WiLayoutFooter` | 底栏。 |\n| `WiLayoutSider` | 侧栏。 |\n"
         },
         "en-US": {
           "title": "Layout",
@@ -10072,11 +10118,6 @@
               "body": "Only the content pane scrolls; header and sider stay fixed.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Scroll demo\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Fixed sider\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        <div style=\"display:grid;gap:0.5rem\">\n          <div v-for=\"n in 20\" :key=\"n\">\n            Row {{ n }} — scroll down\n          </div>\n        </div>\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```"
             },
             {
-              "id": "custom-scrollbar",
-              "title": "Custom Scrollbar",
-              "body": "`nativeScrollbar` defaults to the browser scrollbar. Set it to `false` to use `WiScrollbar` (pass-through via `scrollbarProps`).\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout\n    :native-scrollbar=\"false\"\n    style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\"\n  >\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Custom scrollbar\n    </WiLayoutHeader>\n    <WiLayoutContent embedded :native-scrollbar=\"false\" content-style=\"padding:1rem\">\n      <div style=\"display:grid;gap:0.5rem\">\n        <div v-for=\"n in 16\" :key=\"n\">\n          Row {{ n }}\n        </div>\n      </div>\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```"
-            },
-            {
               "id": "absolute-shell",
               "title": "Absolute Shell",
               "body": "Root `position=\"absolute\"` fills a relatively positioned parent with an explicit height.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <div style=\"position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayout position=\"absolute\" has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Nav\n      </WiLayoutSider>\n      <WiLayout>\n        <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n          Absolute layout\n        </WiLayoutHeader>\n        <WiLayoutContent embedded content-style=\"padding:1rem\">\n          Fills the relative container\n        </WiLayoutContent>\n      </WiLayout>\n    </WiLayout>\n  </div>\n</template>\n```"
@@ -10084,17 +10125,17 @@
             {
               "id": "layout-props",
               "title": "Layout Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | Horizontal layout for `WiLayoutSider`. |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | Sider side. |\n| `embedded` | `boolean` | `false` | Soft background for nested content. |\n| `position` | `'static' \\| 'absolute'` | `'static'` | Positioning mode. |\n| `nativeScrollbar` | `boolean` | `true` | Use `WiScrollbar` when `false`. |\n| `scrollbarProps` | `object` | — | Forwarded to `WiScrollbar` (custom mode only). |\n| `contentClass` / `contentStyle` | — | — | Scroll container class / style. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | Horizontal layout for `WiLayoutSider`. |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | Sider side. |\n| `embedded` | `boolean` | `false` | Soft background for nested content. |\n| `position` | `'static' \\| 'absolute'` | `'static'` | Positioning mode. |\n| `contentClass` / `contentStyle` | — | — | Scroll container class / style. |"
             },
             {
               "id": "layoutsider-props",
               "title": "LayoutSider Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | Expanded width (always set as `width`). |\n| `collapsedWidth` | `number` | `48` | Collapsed `max-width`. |\n| `collapsed` | `boolean` | — | Collapsed state (`v-model:collapsed`). |\n| `defaultCollapsed` | `boolean` | `false` | Uncontrolled initial collapsed state. |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | Collapse trigger; `arrow` aliases `arrow-circle`. |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` clips content; `width` shrinks with sider. |\n| `showCollapsedContent` | `boolean` | `true` | Keep sider content visible while collapsed. |\n| `nativeScrollbar` | `boolean` | `true` | Use `WiScrollbar` when `false`. |\n| `scrollbarProps` | `object` | — | Forwarded to `WiScrollbar` (custom mode only). |\n| `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |\n| `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | Expanded width (always set as `width`). |\n| `collapsedWidth` | `number` | `48` | Collapsed `max-width`. |\n| `collapsed` | `boolean` | — | Collapsed state (`v-model:collapsed`). |\n| `defaultCollapsed` | `boolean` | `false` | Uncontrolled initial collapsed state. |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | Collapse trigger; `arrow` aliases `arrow-circle`. |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` clips content; `width` shrinks with sider. |\n| `showCollapsedContent` | `boolean` | `true` | Keep sider content visible while collapsed. |\n| `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |\n| `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| Event | Description |\n| --- | --- |\n| `scroll` | Fired when the scroll container scrolls (native or custom). |"
+              "body": "| Event | Description |\n| --- | --- |\n| `scroll` | Fired when the scroll container scrolls. |"
             },
             {
               "id": "expose",
@@ -10107,7 +10148,7 @@
               "body": "| Component | Description |\n| --- | --- |\n| `WiLayout` | Root layout. |\n| `WiLayoutHeader` | Header bar. |\n| `WiLayoutContent` | Main content (fills leftover space by default). |\n| `WiLayoutFooter` | Footer bar. |\n| `WiLayoutSider` | Side panel. |"
             }
           ],
-          "markdown": "---\ntitle: Layout\ncategory: 05 / PANEL\ndescription: Page layout shell with Header / Sider / Content / Footer.\n---\n\n# Layout\n\nPage-level layout shell. Set `has-sider` on the `WiLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `WiLayoutContent` can fill the remaining space.\n\n## Import\n\n```ts\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n```\n\n## Basic\n\nHeader / Content / Footer. Content fills the leftover height.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Header\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem;display:flex;align-items:center;justify-content:center\">\n      Content (fills remaining space)\n    </WiLayoutContent>\n    <WiLayoutFooter bordered style=\"padding:0.75rem 1rem\">\n      Footer\n    </WiLayoutFooter>\n  </WiLayout>\n</template>\n```\n\n## With Sider\n\nHeader + left sider + main. The inner `has-sider` layout consumes all height below the header.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between\">\n      <strong>App</strong>\n      <span style=\"color:var(--wi-color-text-muted);font-size:0.75rem\">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        show-trigger=\"arrow-circle\"\n        :width=\"160\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.5rem\">\n          <div>Overview</div>\n          <div>Projects</div>\n          <div>Settings</div>\n        </div>\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        Main area stretches both horizontally and vertically.\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Right Sider\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Inspector\n    </WiLayoutHeader>\n    <WiLayout has-sider sider-placement=\"right\">\n      <WiLayoutSider bordered :width=\"140\" content-style=\"padding:0.75rem\">\n        Props panel\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        Canvas / main\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Full Shell\n\nAdmin-style shell: header + sider + content + footer.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiButton,\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n  WiTag,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:18rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader\n      bordered\n      inverted\n      style=\"padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem\"\n    >\n      <strong>Well Design</strong>\n      <WiTag value=\"Studio\" />\n      <span style=\"flex:1\" />\n      <WiButton size=\"small\" label=\"Publish\" />\n    </WiLayoutHeader>\n\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        inverted\n        show-trigger=\"bar\"\n        :width=\"168\"\n        :collapsed-width=\"56\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.65rem;font-size:0.875rem\">\n          <div>Dashboard</div>\n          <div>Datasources</div>\n          <div>Widgets</div>\n          <div>Theme</div>\n        </div>\n      </WiLayoutSider>\n\n      <WiLayout>\n        <WiLayoutContent embedded content-style=\"padding:1rem;display:grid;gap:0.75rem;align-content:start\">\n          <strong>Workspace</strong>\n          <p style=\"margin:0;color:var(--wi-color-text-muted);font-size:0.875rem\">\n            Content fills the space between Header and Footer; collapsing the sider keeps the height.\n          </p>\n        </WiLayoutContent>\n        <WiLayoutFooter bordered style=\"padding:0.5rem 1rem;color:var(--wi-color-text-muted);font-size:0.75rem\">\n          Ready · local\n        </WiLayoutFooter>\n      </WiLayout>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Embedded Content\n\n`embedded` softens the content background so it separates from header / sider.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Settings\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem\">\n      Nested forms / lists go here.\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```\n\n## Scrollable Content\n\nOnly the content pane scrolls; header and sider stay fixed.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Scroll demo\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Fixed sider\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        <div style=\"display:grid;gap:0.5rem\">\n          <div v-for=\"n in 20\" :key=\"n\">\n            Row {{ n }} — scroll down\n          </div>\n        </div>\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Custom Scrollbar\n\n`nativeScrollbar` defaults to the browser scrollbar. Set it to `false` to use `WiScrollbar` (pass-through via `scrollbarProps`).\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout\n    :native-scrollbar=\"false\"\n    style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\"\n  >\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Custom scrollbar\n    </WiLayoutHeader>\n    <WiLayoutContent embedded :native-scrollbar=\"false\" content-style=\"padding:1rem\">\n      <div style=\"display:grid;gap:0.5rem\">\n        <div v-for=\"n in 16\" :key=\"n\">\n          Row {{ n }}\n        </div>\n      </div>\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```\n\n## Absolute Shell\n\nRoot `position=\"absolute\"` fills a relatively positioned parent with an explicit height.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <div style=\"position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayout position=\"absolute\" has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Nav\n      </WiLayoutSider>\n      <WiLayout>\n        <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n          Absolute layout\n        </WiLayoutHeader>\n        <WiLayoutContent embedded content-style=\"padding:1rem\">\n          Fills the relative container\n        </WiLayoutContent>\n      </WiLayout>\n    </WiLayout>\n  </div>\n</template>\n```\n\n## Layout Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | Horizontal layout for `WiLayoutSider`. |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | Sider side. |\n| `embedded` | `boolean` | `false` | Soft background for nested content. |\n| `position` | `'static' \\| 'absolute'` | `'static'` | Positioning mode. |\n| `nativeScrollbar` | `boolean` | `true` | Use `WiScrollbar` when `false`. |\n| `scrollbarProps` | `object` | — | Forwarded to `WiScrollbar` (custom mode only). |\n| `contentClass` / `contentStyle` | — | — | Scroll container class / style. |\n\n## LayoutSider Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | Expanded width (always set as `width`). |\n| `collapsedWidth` | `number` | `48` | Collapsed `max-width`. |\n| `collapsed` | `boolean` | — | Collapsed state (`v-model:collapsed`). |\n| `defaultCollapsed` | `boolean` | `false` | Uncontrolled initial collapsed state. |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | Collapse trigger; `arrow` aliases `arrow-circle`. |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` clips content; `width` shrinks with sider. |\n| `showCollapsedContent` | `boolean` | `true` | Keep sider content visible while collapsed. |\n| `nativeScrollbar` | `boolean` | `true` | Use `WiScrollbar` when `false`. |\n| `scrollbarProps` | `object` | — | Forwarded to `WiScrollbar` (custom mode only). |\n| `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |\n| `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |\n\n## Events\n\n| Event | Description |\n| --- | --- |\n| `scroll` | Fired when the scroll container scrolls (native or custom). |\n\n## Expose\n\n`WiLayout` / `WiLayoutContent` / `WiLayoutSider` expose `scrollTo(...)`.\n\n## Components\n\n| Component | Description |\n| --- | --- |\n| `WiLayout` | Root layout. |\n| `WiLayoutHeader` | Header bar. |\n| `WiLayoutContent` | Main content (fills leftover space by default). |\n| `WiLayoutFooter` | Footer bar. |\n| `WiLayoutSider` | Side panel. |\n"
+          "markdown": "---\ntitle: Layout\ncategory: 05 / PANEL\ndescription: Page layout shell with Header / Sider / Content / Footer.\n---\n\n# Layout\n\nPage-level layout shell. Set `has-sider` on the `WiLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `WiLayoutContent` can fill the remaining space.\n\n## Import\n\n```ts\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n```\n\n## Basic\n\nHeader / Content / Footer. Content fills the leftover height.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Header\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem;display:flex;align-items:center;justify-content:center\">\n      Content (fills remaining space)\n    </WiLayoutContent>\n    <WiLayoutFooter bordered style=\"padding:0.75rem 1rem\">\n      Footer\n    </WiLayoutFooter>\n  </WiLayout>\n</template>\n```\n\n## With Sider\n\nHeader + left sider + main. The inner `has-sider` layout consumes all height below the header.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between\">\n      <strong>App</strong>\n      <span style=\"color:var(--wi-color-text-muted);font-size:0.75rem\">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        show-trigger=\"arrow-circle\"\n        :width=\"160\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.5rem\">\n          <div>Overview</div>\n          <div>Projects</div>\n          <div>Settings</div>\n        </div>\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        Main area stretches both horizontally and vertically.\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Right Sider\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Inspector\n    </WiLayoutHeader>\n    <WiLayout has-sider sider-placement=\"right\">\n      <WiLayoutSider bordered :width=\"140\" content-style=\"padding:0.75rem\">\n        Props panel\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        Canvas / main\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Full Shell\n\nAdmin-style shell: header + sider + content + footer.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiButton,\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutFooter,\n  WiLayoutHeader,\n  WiLayoutSider,\n  WiTag,\n} from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst collapsed = ref(false)\n</script>\n\n<template>\n  <WiLayout style=\"height:18rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader\n      bordered\n      inverted\n      style=\"padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem\"\n    >\n      <strong>Well Design</strong>\n      <WiTag value=\"Studio\" />\n      <span style=\"flex:1\" />\n      <WiButton size=\"small\" label=\"Publish\" />\n    </WiLayoutHeader>\n\n    <WiLayout has-sider>\n      <WiLayoutSider\n        v-model:collapsed=\"collapsed\"\n        bordered\n        inverted\n        show-trigger=\"bar\"\n        :width=\"168\"\n        :collapsed-width=\"56\"\n        content-style=\"padding:0.75rem\"\n      >\n        <div style=\"display:grid;gap:0.65rem;font-size:0.875rem\">\n          <div>Dashboard</div>\n          <div>Datasources</div>\n          <div>Widgets</div>\n          <div>Theme</div>\n        </div>\n      </WiLayoutSider>\n\n      <WiLayout>\n        <WiLayoutContent embedded content-style=\"padding:1rem;display:grid;gap:0.75rem;align-content:start\">\n          <strong>Workspace</strong>\n          <p style=\"margin:0;color:var(--wi-color-text-muted);font-size:0.875rem\">\n            Content fills the space between Header and Footer; collapsing the sider keeps the height.\n          </p>\n        </WiLayoutContent>\n        <WiLayoutFooter bordered style=\"padding:0.5rem 1rem;color:var(--wi-color-text-muted);font-size:0.75rem\">\n          Ready · local\n        </WiLayoutFooter>\n      </WiLayout>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Embedded Content\n\n`embedded` softens the content background so it separates from header / sider.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Settings\n    </WiLayoutHeader>\n    <WiLayoutContent embedded content-style=\"padding:1rem\">\n      Nested forms / lists go here.\n    </WiLayoutContent>\n  </WiLayout>\n</template>\n```\n\n## Scrollable Content\n\nOnly the content pane scrolls; header and sider stay fixed.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <WiLayout style=\"height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n      Scroll demo\n    </WiLayoutHeader>\n    <WiLayout has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Fixed sider\n      </WiLayoutSider>\n      <WiLayoutContent embedded content-style=\"padding:1rem\">\n        <div style=\"display:grid;gap:0.5rem\">\n          <div v-for=\"n in 20\" :key=\"n\">\n            Row {{ n }} — scroll down\n          </div>\n        </div>\n      </WiLayoutContent>\n    </WiLayout>\n  </WiLayout>\n</template>\n```\n\n## Absolute Shell\n\nRoot `position=\"absolute\"` fills a relatively positioned parent with an explicit height.\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  WiLayout,\n  WiLayoutContent,\n  WiLayoutHeader,\n  WiLayoutSider,\n} from '@well-insight/ui'\n</script>\n\n<template>\n  <div style=\"position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden\">\n    <WiLayout position=\"absolute\" has-sider>\n      <WiLayoutSider bordered :width=\"120\" content-style=\"padding:0.75rem\">\n        Nav\n      </WiLayoutSider>\n      <WiLayout>\n        <WiLayoutHeader bordered style=\"padding:0.75rem 1rem\">\n          Absolute layout\n        </WiLayoutHeader>\n        <WiLayoutContent embedded content-style=\"padding:1rem\">\n          Fills the relative container\n        </WiLayoutContent>\n      </WiLayout>\n    </WiLayout>\n  </div>\n</template>\n```\n\n## Layout Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `hasSider` | `boolean` | `false` | Horizontal layout for `WiLayoutSider`. |\n| `siderPlacement` | `'left' \\| 'right'` | `'left'` | Sider side. |\n| `embedded` | `boolean` | `false` | Soft background for nested content. |\n| `position` | `'static' \\| 'absolute'` | `'static'` | Positioning mode. |\n| `contentClass` / `contentStyle` | — | — | Scroll container class / style. |\n\n## LayoutSider Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `width` | `number \\| string` | `272` | Expanded width (always set as `width`). |\n| `collapsedWidth` | `number` | `48` | Collapsed `max-width`. |\n| `collapsed` | `boolean` | — | Collapsed state (`v-model:collapsed`). |\n| `defaultCollapsed` | `boolean` | `false` | Uncontrolled initial collapsed state. |\n| `showTrigger` | `boolean \\| 'bar' \\| 'arrow-circle' \\| 'arrow'` | `false` | Collapse trigger; `arrow` aliases `arrow-circle`. |\n| `collapseMode` | `'width' \\| 'transform'` | `'transform'` | `transform` clips content; `width` shrinks with sider. |\n| `showCollapsedContent` | `boolean` | `true` | Keep sider content visible while collapsed. |\n| `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |\n| `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |\n| `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |\n\n## Events\n\n| Event | Description |\n| --- | --- |\n| `scroll` | Fired when the scroll container scrolls. |\n\n## Expose\n\n`WiLayout` / `WiLayoutContent` / `WiLayoutSider` expose `scrollTo(...)`.\n\n## Components\n\n| Component | Description |\n| --- | --- |\n| `WiLayout` | Root layout. |\n| `WiLayoutHeader` | Header bar. |\n| `WiLayoutContent` | Main content (fills leftover space by default). |\n| `WiLayoutFooter` | Footer bar. |\n| `WiLayoutSider` | Side panel. |\n"
         }
       }
     },
@@ -11291,7 +11332,12 @@
           "description": "页码变化（同值）。"
         },
         {
-          "name": "update:rows` / `update:pageSize",
+          "name": "update:rows",
+          "payload": "number",
+          "description": "每页条数变化（同值）。"
+        },
+        {
+          "name": "update:pageSize",
           "payload": "number",
           "description": "每页条数变化（同值）。"
         }
@@ -11873,7 +11919,13 @@
           "description": "打开方式。"
         },
         {
-          "name": "showDelay` / `hideDelay",
+          "name": "showDelay",
+          "type": "number",
+          "default": "0` / `200",
+          "description": "hover/focus 延迟（ms）。"
+        },
+        {
+          "name": "hideDelay",
           "type": "number",
           "default": "0` / `200",
           "description": "hover/focus 延迟（ms）。"
@@ -14724,7 +14776,13 @@
           "description": "是否用容器包裹每个子节点。"
         },
         {
-          "name": "itemClass` / `itemStyle",
+          "name": "itemClass",
+          "type": "—",
+          "default": "—",
+          "description": "包裹层 class / style（`wrapItem` 为 true 时生效）。"
+        },
+        {
+          "name": "itemStyle",
           "type": "—",
           "default": "—",
           "description": "包裹层 class / style（`wrapItem` 为 true 时生效）。"
@@ -15104,7 +15162,19 @@
           "description": "菜单项。"
         },
         {
-          "name": "severity` / `outlined` / `size",
+          "name": "severity",
+          "type": "—",
+          "default": "—",
+          "description": "视觉变体。"
+        },
+        {
+          "name": "outlined",
+          "type": "—",
+          "default": "—",
+          "description": "视觉变体。"
+        },
+        {
+          "name": "size",
           "type": "—",
           "default": "—",
           "description": "视觉变体。"
@@ -15280,7 +15350,13 @@
           "description": "非受控初始尺寸。"
         },
         {
-          "name": "min` / `max",
+          "name": "min",
+          "type": "number | string",
+          "default": "随模式",
+          "description": "下限 / 上限（单位与 `size` 一致）。"
+        },
+        {
+          "name": "max",
           "type": "number | string",
           "default": "随模式",
           "description": "下限 / 上限（单位与 `size` 一致）。"
@@ -15298,13 +15374,25 @@
           "description": "分隔条厚度（px）。"
         },
         {
-          "name": "pane1Class` / `pane1Style",
+          "name": "pane1Class",
           "type": "—",
           "default": "—",
           "description": "主面板 class / style。"
         },
         {
-          "name": "pane2Class` / `pane2Style",
+          "name": "pane1Style",
+          "type": "—",
+          "default": "—",
+          "description": "主面板 class / style。"
+        },
+        {
+          "name": "pane2Class",
+          "type": "—",
+          "default": "—",
+          "description": "次面板 class / style。"
+        },
+        {
+          "name": "pane2Style",
           "type": "—",
           "default": "—",
           "description": "次面板 class / style。"
@@ -15322,18 +15410,36 @@
           "description": "便于单独监听。"
         },
         {
-          "name": "drag-start` / `drag-move` / `drag-end",
+          "name": "drag-start",
+          "payload": "Event",
+          "description": "拖拽生命周期。"
+        },
+        {
+          "name": "drag-move",
+          "payload": "Event",
+          "description": "拖拽生命周期。"
+        },
+        {
+          "name": "drag-end",
           "payload": "Event",
           "description": "拖拽生命周期。"
         }
       ],
       "slots": [
         {
-          "name": "panel1` / `1",
+          "name": "panel1",
           "description": "左侧 / 上方面板。"
         },
         {
-          "name": "panel2` / `2",
+          "name": "1",
+          "description": "左侧 / 上方面板。"
+        },
+        {
+          "name": "panel2",
+          "description": "右侧 / 下方面板。"
+        },
+        {
+          "name": "2",
           "description": "右侧 / 下方面板。"
         },
         {
@@ -16077,7 +16183,13 @@
           "description": "内置分页。"
         },
         {
-          "name": "rowsPerPage` / `page",
+          "name": "rowsPerPage",
+          "type": "—",
+          "default": "10` / `1",
+          "description": "分页。"
+        },
+        {
+          "name": "page",
           "type": "—",
           "default": "10` / `1",
           "description": "分页。"
@@ -16101,7 +16213,25 @@
           "description": "返回 `false` 时该行不可展开。"
         },
         {
-          "name": "striped` / `bordered` / `highlightCurrent` / `rowHover",
+          "name": "striped",
+          "type": "boolean",
+          "default": "—",
+          "description": "外观。"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "default": "—",
+          "description": "外观。"
+        },
+        {
+          "name": "highlightCurrent",
+          "type": "boolean",
+          "default": "—",
+          "description": "外观。"
+        },
+        {
+          "name": "rowHover",
           "type": "boolean",
           "default": "—",
           "description": "外观。"
@@ -16113,13 +16243,37 @@
           "description": "本地排序或仅抛事件。"
         },
         {
-          "name": "sortField` / `sortOrder",
+          "name": "sortField",
           "type": "—",
           "default": "—",
           "description": "受控排序。"
         },
         {
-          "name": "loading` / `emptyText` / `emptyDescription` / `size",
+          "name": "sortOrder",
+          "type": "—",
+          "default": "—",
+          "description": "受控排序。"
+        },
+        {
+          "name": "loading",
+          "type": "—",
+          "default": "—",
+          "description": "同前。"
+        },
+        {
+          "name": "emptyText",
+          "type": "—",
+          "default": "—",
+          "description": "同前。"
+        },
+        {
+          "name": "emptyDescription",
+          "type": "—",
+          "default": "—",
+          "description": "同前。"
+        },
+        {
+          "name": "size",
           "type": "—",
           "default": "—",
           "description": "同前。"
@@ -17935,13 +18089,25 @@
           "description": "是否开启。"
         },
         {
-          "name": "onLabel` / `offLabel",
+          "name": "onLabel",
           "type": "string",
           "default": "On` / `Off",
           "description": "文案。"
         },
         {
-          "name": "onIcon` / `offIcon",
+          "name": "offLabel",
+          "type": "string",
+          "default": "On` / `Off",
+          "description": "文案。"
+        },
+        {
+          "name": "onIcon",
+          "type": "string",
+          "default": "—",
+          "description": "可选图标字符。"
+        },
+        {
+          "name": "offIcon",
           "type": "string",
           "default": "—",
           "description": "可选图标字符。"
@@ -18405,31 +18571,85 @@
           "description": "节点树。"
         },
         {
-          "name": "modelValue` / `selectionKeys` / `selectionMode",
+          "name": "modelValue",
           "type": "—",
           "default": "—",
           "description": "高亮选择。"
         },
         {
-          "name": "showCheckbox` / `checkedKeys` / `checkStrictly` / `checkStrategy",
+          "name": "selectionKeys",
+          "type": "—",
+          "default": "—",
+          "description": "高亮选择。"
+        },
+        {
+          "name": "selectionMode",
+          "type": "—",
+          "default": "—",
+          "description": "高亮选择。"
+        },
+        {
+          "name": "showCheckbox",
           "type": "—",
           "default": "'all'",
           "description": "`checkStrategy` 默认 `'all'`；`'parent'` / `'child'` 只改变绑定的 keys。"
         },
         {
-          "name": "expandedKeys` / `defaultExpandAll` / `accordion",
+          "name": "checkedKeys",
+          "type": "—",
+          "default": "'all'",
+          "description": "`checkStrategy` 默认 `'all'`；`'parent'` / `'child'` 只改变绑定的 keys。"
+        },
+        {
+          "name": "checkStrictly",
+          "type": "—",
+          "default": "'all'",
+          "description": "`checkStrategy` 默认 `'all'`；`'parent'` / `'child'` 只改变绑定的 keys。"
+        },
+        {
+          "name": "checkStrategy",
+          "type": "—",
+          "default": "'all'",
+          "description": "`checkStrategy` 默认 `'all'`；`'parent'` / `'child'` 只改变绑定的 keys。"
+        },
+        {
+          "name": "expandedKeys",
           "type": "—",
           "default": "—",
           "description": "展开控制。"
         },
         {
-          "name": "filter` / `filterNode",
+          "name": "defaultExpandAll",
+          "type": "—",
+          "default": "—",
+          "description": "展开控制。"
+        },
+        {
+          "name": "accordion",
+          "type": "—",
+          "default": "—",
+          "description": "展开控制。"
+        },
+        {
+          "name": "filter",
           "type": "—",
           "default": "—",
           "description": "过滤。"
         },
         {
-          "name": "lazy` / `load",
+          "name": "filterNode",
+          "type": "—",
+          "default": "—",
+          "description": "过滤。"
+        },
+        {
+          "name": "lazy",
+          "type": "—",
+          "default": "—",
+          "description": "懒加载子节点。"
+        },
+        {
+          "name": "load",
           "type": "—",
           "default": "—",
           "description": "懒加载子节点。"

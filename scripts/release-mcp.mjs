@@ -6,7 +6,11 @@ import { root } from './ui-changelog.mjs'
 
 export const MCP_NAME = '@well-insight/ui-mcp'
 export const MCP_PKG_PATH = join(root, 'packages/ui-mcp/package.json')
-export const MCP_RELEASE_PATHS = ['packages/ui-mcp/package.json', 'packages/ui-mcp/data/catalog.json']
+export const MCP_RELEASE_PATHS = [
+  'packages/ui-mcp/package.json',
+  'packages/ui-mcp/data/catalog.json',
+  'packages/ui-mcp/data/example-coverage.json',
+]
 
 const UI_PKG_PATH = join(root, 'package.json')
 
@@ -47,6 +51,10 @@ export function syncMcpVersion(version = readUiVersion().version) {
 export function buildMcp() {
   console.log('[build] @well-insight/ui-mcp (catalog + compile)')
   run('pnpm --filter @well-insight/ui-mcp build')
+  console.log('[check] @well-insight/ui-mcp catalog')
+  run('pnpm mcp:validate-catalog')
+  console.log('[audit] @well-insight/ui-mcp example coverage')
+  run('pnpm mcp:audit-examples -- --write')
 }
 
 export function commitMcpRelease(version = readUiVersion().version) {

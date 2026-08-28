@@ -27,7 +27,7 @@ pnpm test
 pnpm test:coverage
 pnpm release              # full pipeline (prepare → build → commit → … → push; includes MCP)
 pnpm release:prepare      # write version & CHANGELOG; sync MCP version
-pnpm release:build        # build UI + MCP
+pnpm release:build        # build UI + MCP, validate catalog, and write API coverage report
 pnpm release:commit       # commit UI / MCP release files
 pnpm release:branch       # create release/{version} branch
 pnpm release:publish      # publish UI + MCP
@@ -37,6 +37,7 @@ pnpm release:npm          # build + publish only (UI + MCP; set version first)
 pnpm release:git          # create tag / release branch only
 pnpm release:mcp          # MCP-only publish (usually unnecessary; full release includes it)
 pnpm mcp:build            # build @well-insight/ui-mcp (catalog + stdio server)
+pnpm mcp:audit-examples   # audit Props / Events / Slots / Methods example coverage
 pnpm mcp:start            # run MCP locally (stdio)
 ```
 

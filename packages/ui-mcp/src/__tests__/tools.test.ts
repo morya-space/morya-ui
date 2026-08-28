@@ -1,0 +1,148 @@
+import { describe, expect, it } from 'vitest'
+import { createToolHandlers } from '../tools.js'
+
+function read<T>(result: { content: Array<{ text: string }> }): T {
+  return JSON.parse(result.content[0].text) as T
+}
+
+describe('@well-insight/ui-mcp handlers', () => {
+  const handlers = createToolHandlers()
+
+  it('returns complete pagination metadata for component lists', () => {
+    const result = read<{
+      total: number
+      count: number
+      offset: number
+      limit: number
+      has_more: boolean
+      next_offset?: number
+    }>(handlers.list({ kind: 'components', limit: 5, offset: 5 }))
+
+    expect(result.total).toBeGreaterThan(5)
+    expect(result.count).toBe(5)
+    expect(result.offset).toBe(5)
+    expect(result.limit).toBe(5)
+    expect(result.has_more).toBe(true)
+    expect(result.next_offset).toBe(10)
+  })
+
+  it('paginates categories instead of returning the complete collection', () => {
+    const result = read<{ items: unknown[]; count: number }>(
+      handlers.list({ kind: 'categories', limit: 1, offset: 1 }),
+    )
+
+    expect(result.items).toHaveLength(1)
+    expect(result.count).toBe(1)
+  })
+
+  it('resolves documented aliases when reading component API', () => {
+    const result = read<{ id: string; exportName: string }>(
+      handlers.getComponent({ component: '数据表格', includeApi: true }),
+    )
+
+    expect(result.id).toBe('Table')
+    expect(result.exportName).toBe('WiTable')
+  })
+
+  it('paginates component examples and reports API coverage', () => {
+    const first = read<{
+      examples: Array<{ id: string }>
+      exampleCount: number
+      examplesOffset: number
+      examplesLimit: number
+      hasMoreExamples: boolean
+      nextExamplesOffset?: number
+      apiCoverage: { props: { total: number }; events: { total: number }; slots: { total: number } }
+    }>(handlers.getComponent({ component: 'Table', detail: 'full', examplesLimit: 1 }))
+
+    expect(first.examples).toHaveLength(1)
+    expect(first.exampleCount).toBeGreaterThan(1)
+    expect(first.examplesOffset).toBe(0)
+    expect(first.examplesLimit).toBe(1)
+    expect(first.hasMoreExamples).toBe(true)
+    expect(first.nextExamplesOffset).toBe(1)
+    expect(first.apiCoverage.props.total).toBeGreaterThan(0)
+
+    const second = read<{ examples: Array<{ id: string }>; examplesOffset: number }>(
+      handlers.getComponent({ component: 'Table', detail: 'full', examplesLimit: 1, examplesOffset: 1 }),
+    )
+    expect(second.examplesOffset).toBe(1)
+    expect(second.examples[0]?.id).not.toBe(first.examples[0]?.id)
+  })
+
+  it('reports unknown props without rejecting valid props', () => {
+    const result = read<{ ok: boolean; issues: Array<{ type: string; message: string }> }>(
+      handlers.validateUsage({
+        component: 'Button',
+        code: '<WiButton label="Save" severity="danger" foo="bar" />',
+      }),
+    )
+
+    expect(result.ok).toBe(false)
+    expect(result.issues).toEqual([
+      expect.objectContaining({ type: 'unknown-prop' }),
+    ])
+    expect(result.issues[0].message).toContain('foo')
+  })
+
+  it('recommends a page pattern from product intent', () => {
+    const result = read<{ matchedPattern: string }>(
+      handlers.recommendPage({
+        intent: '油井管理列表',
+        pageType: 'list',
+        features: ['筛选', '分页'],
+      }),
+    )
+
+    expect(result.matchedPattern).toBe('admin-list')
+  })
+
+  it('does not write outside the current project', () => {
+    const result = read<{ error: string }>(
+      handlers.createPage({
+        path: '../outside.vue',
+        intent: '测试页面',
+        confirm: true,
+      }),
+    )
+
+    expect(result.error).toContain('inside the current project')
+  })
+
+  it('generates a dashboard-specific scaffold', () => {
+    const result = read<{ files: { component: string }; pattern: string }>(
+      handlers.generatePage({ intent: '生产监控仪表盘', pattern: 'dashboard' }),
+    )
+
+    expect(result.pattern).toBe('dashboard')
+    expect(result.files.component).toContain('WiProgressBar')
+    expect(result.files.component).toContain('WiSkeleton')
+  })
+
+  it('reports strict-mode warnings for opaque bindings', () => {
+    const result = read<{ warnings: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<WiTable v-bind="tableProps" />',
+        strict: true,
+      }),
+    )
+
+    expect(result.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type: 'dynamic-binding' }),
+      ]),
+    )
+  })
+
+  it('exposes catalog health in version metadata', () => {
+    const result = read<{
+      health: { ok: boolean; patternReferences: unknown[] }
+      counts: { patterns: number; decisions: number }
+    }>(handlers.version())
+
+    expect(result.health.ok).toBe(true)
+    expect(result.health.patternReferences).toEqual([])
+    expect(result.counts.patterns).toBeGreaterThan(0)
+    expect(result.counts.decisions).toBeGreaterThan(0)
+  })
+})

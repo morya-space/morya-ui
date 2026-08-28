@@ -26,7 +26,9 @@ function parseFrontmatter(raw) {
   const body = raw.slice(end + 4).replace(/^\r?\n/, '')
   const data = {}
   for (const line of block.split(/\r?\n/)) {
-    const match = line.match(/^([\w-]+):\s*(.*)$/)
+    // Frontmatter is line-oriented, so split at the first colon instead of using a backtracking regex.
+    const colon = line.indexOf(':')
+    const match = colon > 0 ? [line, line.slice(0, colon), line.slice(colon + 1).trimStart()] : null
     if (!match) continue
     data[match[1]] = match[2].trim().replace(/^['"]|['"]$/g, '')
   }
@@ -47,10 +49,10 @@ function splitSections(body) {
   let current = { title: '', id: 'overview', lines: [] }
 
   for (const line of lines) {
-    const heading = line.match(/^##\s+(.+)\s*$/)
+    const heading = line.startsWith('## ') ? line.slice(3).trim() : ''
     if (heading) {
       sections.push(current)
-      const title = heading[1].trim()
+      const title = heading
       current = { title, id: slugify(title) || `section-${sections.length}`, lines: [] }
       continue
     }
@@ -101,35 +103,43 @@ function unwrapCodeName(name = '') {
   return String(name).replace(/^`+|`+$/g, '').trim()
 }
 
+function splitApiNames(value) {
+  return unwrapCodeName(value)
+    .split(/\s*[`/|,]\s*/)
+    .map((name) => unwrapCodeName(name).trim())
+    .filter(Boolean)
+}
+
 function mapApiRows(rows, kind) {
-  return rows.map((row) => {
+  return rows.flatMap((row) => {
     if (kind === 'props') {
-      return {
-        name: unwrapCodeName(row['参数'] || row.Prop || row.Name || ''),
+      const names = splitApiNames(row['参数'] || row.Prop || row.Name || '')
+      return names.map((name) => ({
+        name,
         type: unwrapCodeName(row['类型'] || row.Type || ''),
         default: unwrapCodeName(row['默认值'] || row.Default || '') || undefined,
         description: row['说明'] || row.Description || '',
-      }
+      }))
     }
     if (kind === 'events') {
-      return {
-        name: unwrapCodeName(row['事件名'] || row.Event || row.Name || ''),
+      const names = splitApiNames(row['事件名'] || row.Event || row.Name || '')
+      return names.map((name) => ({
+        name,
         payload: unwrapCodeName(row['参数'] || row.Payload || row.Args || '') || undefined,
         description: row['说明'] || row.Description || '',
-      }
+      }))
     }
-    return {
-      name: unwrapCodeName(row['插槽名'] || row.Slot || row.Name || ''),
+    return splitApiNames(row['插槽名'] || row.Slot || row.Name || '').map((name) => ({
+      name,
       description: row['说明'] || row.Description || '',
-    }
-  }).filter((item) => item.name)
+    }))
+  })
 }
 
 function extractCodeBlocks(body) {
   const blocks = []
-  const re = /```([^\n`]*)\r?\n([\s\S]*?)```/g
-  let match
-  while ((match = re.exec(body)) !== null) {
+  const re = /```([^\n`]*)\n([\s\S]*?)```/g
+  for (const match of body.matchAll(re)) {
     const info = (match[1] || '').trim()
     const lang = info.split(/\s+/)[0] || 'text'
     const preview = /\bpreview\b/i.test(info)
@@ -200,6 +210,16 @@ function buildDocLocale(raw, exportName) {
     props: propsSection ? mapApiRows(parseMarkdownTable(propsSection.body), 'props') : [],
     events: eventsSection ? mapApiRows(parseMarkdownTable(eventsSection.body), 'events') : [],
     slots: slotsSection ? mapApiRows(parseMarkdownTable(slotsSection.body), 'slots') : [],
+    methods: (() => {
+      const methodsSection = sections.find((section) => /^(methods|instance|实例|方法)$/i.test(section.title))
+      return methodsSection
+        ? parseMarkdownTable(methodsSection.body).map((row) => ({
+            name: splitApiNames(row['方法'] || row.Method || row.Name || '')[0] || '',
+            type: unwrapCodeName(row['类型'] || row.Type || '') || undefined,
+            description: row['说明'] || row.Description || '',
+          })).filter((item) => item.name)
+        : []
+    })(),
     examples,
     sections: sections.map((section) => ({
       id: section.id,
@@ -330,8 +350,31 @@ const catalog = {
   guides: collectGuides(),
 }
 
-mkdirSync(outDir, { recursive: true })
-writeFileSync(outFile, `${JSON.stringify(catalog, null, 2)}\n`)
-console.error(
-  `Generated ${outFile} (${catalog.components.length} components, ${catalog.guides.length} guides)`,
-)
+function withoutTimestamp(value) {
+  const copy = { ...value }
+  delete copy.generatedAt
+  return copy
+}
+
+if (process.argv.includes('--check')) {
+  if (!existsSync(outFile)) {
+    console.error(`Catalog is missing: ${outFile}`)
+    process.exitCode = 1
+  } else {
+    const existing = readJson(outFile)
+    const expected = JSON.stringify(withoutTimestamp(catalog))
+    const actual = JSON.stringify(withoutTimestamp(existing))
+    if (expected !== actual) {
+      console.error('Catalog is stale. Run pnpm mcp:generate and commit the result.')
+      process.exitCode = 1
+    } else {
+      console.log(`Catalog is up to date (${catalog.components.length} components, ${catalog.guides.length} guides)`)
+    }
+  }
+} else {
+  mkdirSync(outDir, { recursive: true })
+  writeFileSync(outFile, `${JSON.stringify(catalog, null, 2)}\n`)
+  console.error(
+    `Generated ${outFile} (${catalog.components.length} components, ${catalog.guides.length} guides)`,
+  )
+}

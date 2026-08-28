@@ -1,0 +1,2683 @@
+{
+  "generatedAt": "2026-08-28T03:22:08.444Z",
+  "catalogGeneratedAt": "2026-08-28T03:22:02.641Z",
+  "components": [
+    {
+      "id": "Accordion",
+      "exportName": "WiAccordion",
+      "examples": 8,
+      "props": {
+        "total": 3,
+        "covered": 3,
+        "missing": []
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "AutoComplete",
+      "exportName": "WiAutoComplete",
+      "examples": 8,
+      "props": {
+        "total": 10,
+        "covered": 6,
+        "missing": [
+          "loading",
+          "disabled",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "complete"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Avatar",
+      "exportName": "WiAvatar",
+      "examples": 6,
+      "props": {
+        "total": 5,
+        "covered": 4,
+        "missing": [
+          "image"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "error"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Badge",
+      "exportName": "WiBadge",
+      "examples": 10,
+      "props": {
+        "total": 6,
+        "covered": 5,
+        "missing": [
+          "offset"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "BlockUI",
+      "exportName": "WiBlockUI",
+      "examples": 4,
+      "props": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Breadcrumb",
+      "exportName": "WiBreadcrumb",
+      "examples": 6,
+      "props": {
+        "total": 3,
+        "covered": 3,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "separator"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Button",
+      "exportName": "WiButton",
+      "examples": 20,
+      "props": {
+        "total": 25,
+        "covered": 21,
+        "missing": [
+          "variant",
+          "block",
+          "autofocus",
+          "nativeType"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "slots": {
+        "total": 3,
+        "covered": 1,
+        "missing": [
+          "icon",
+          "loadingicon"
+        ]
+      },
+      "methods": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "focus",
+          "ref"
+        ]
+      }
+    },
+    {
+      "id": "Card",
+      "exportName": "WiCard",
+      "examples": 8,
+      "props": {
+        "total": 6,
+        "covered": 4,
+        "missing": [
+          "ariaLabel",
+          "bordered"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 4,
+        "covered": 4,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Carousel",
+      "exportName": "WiCarousel",
+      "examples": 6,
+      "props": {
+        "total": 7,
+        "covered": 6,
+        "missing": [
+          "showIndicators"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:page"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "CascadeSelect",
+      "exportName": "WiCascadeSelect",
+      "examples": 6,
+      "props": {
+        "total": 7,
+        "covered": 4,
+        "missing": [
+          "disabled",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Checkbox",
+      "exportName": "WiCheckbox",
+      "examples": 10,
+      "props": {
+        "total": 10,
+        "covered": 6,
+        "missing": [
+          "id",
+          "name",
+          "size",
+          "required"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Chip",
+      "exportName": "WiChip",
+      "examples": 4,
+      "props": {
+        "total": 7,
+        "covered": 6,
+        "missing": [
+          "image"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "remove"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "CommandMenu",
+      "exportName": "WiCommandMenu",
+      "examples": 4,
+      "props": {
+        "total": 5,
+        "covered": 2,
+        "missing": [
+          "placeholder",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ConfigProvider",
+      "exportName": "WiConfigProvider",
+      "examples": 14,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ConfirmDialog",
+      "exportName": "WiConfirmDialog",
+      "examples": 4,
+      "props": {
+        "total": 12,
+        "covered": 6,
+        "missing": [
+          "type",
+          "loading",
+          "beforeAccept",
+          "beforeReject",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 3,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "accept",
+          "reject"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ConfirmPopup",
+      "exportName": "WiConfirmPopup",
+      "examples": 6,
+      "props": {
+        "total": 11,
+        "covered": 6,
+        "missing": [
+          "acceptLabel",
+          "rejectLabel",
+          "position",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 3,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "accept",
+          "reject"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ContextMenu",
+      "exportName": "WiContextMenu",
+      "examples": 6,
+      "props": {
+        "total": 5,
+        "covered": 3,
+        "missing": [
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "hide"
+        ]
+      }
+    },
+    {
+      "id": "DataView",
+      "exportName": "WiDataView",
+      "examples": 4,
+      "props": {
+        "total": 4,
+        "covered": 4,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "DatePicker",
+      "exportName": "WiDatePicker",
+      "examples": 20,
+      "props": {
+        "total": 15,
+        "covered": 12,
+        "missing": [
+          "format",
+          "clearable",
+          "teleport"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Dialog",
+      "exportName": "WiDialog",
+      "examples": 14,
+      "props": {
+        "total": 21,
+        "covered": 11,
+        "missing": [
+          "title",
+          "closeOnEsc",
+          "blockScroll",
+          "closeOnOutsideClick",
+          "closable",
+          "modal",
+          "teleport",
+          "appendTo",
+          "positiveSeverity",
+          "onNegativeClick"
+        ]
+      },
+      "events": {
+        "total": 6,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "close",
+          "show",
+          "hide",
+          "maximize",
+          "unmaximize"
+        ]
+      },
+      "slots": {
+        "total": 3,
+        "covered": 2,
+        "missing": [
+          "header"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Divider",
+      "exportName": "WiDivider",
+      "examples": 12,
+      "props": {
+        "total": 6,
+        "covered": 5,
+        "missing": [
+          "orientation"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "default"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Dock",
+      "exportName": "WiDock",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "position"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Drawer",
+      "exportName": "WiDrawer",
+      "examples": 6,
+      "props": {
+        "total": 11,
+        "covered": 3,
+        "missing": [
+          "modal",
+          "dismissable",
+          "showCloseIcon",
+          "width",
+          "height",
+          "blockScroll",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 4,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "show",
+          "hide",
+          "after-leave"
+        ]
+      },
+      "slots": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "header"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Dropdown",
+      "exportName": "WiDropdown",
+      "examples": 6,
+      "props": {
+        "total": 9,
+        "covered": 5,
+        "missing": [
+          "placement",
+          "closeOnSelect",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "item"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Fieldset",
+      "exportName": "WiFieldset",
+      "examples": 4,
+      "props": {
+        "total": 3,
+        "covered": 3,
+        "missing": []
+      },
+      "events": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "slots": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "legend"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "FileUpload",
+      "exportName": "WiFileUpload",
+      "examples": 16,
+      "props": {
+        "total": 22,
+        "covered": 10,
+        "missing": [
+          "directory",
+          "disabled",
+          "chooseLabel",
+          "showFileList",
+          "fileList",
+          "action",
+          "method",
+          "name",
+          "headers",
+          "data",
+          "withCredentials",
+          "beforeRemove"
+        ]
+      },
+      "events": {
+        "total": 9,
+        "covered": 3,
+        "missing": [
+          "exceed",
+          "update:fileList",
+          "change",
+          "remove",
+          "progress",
+          "error"
+        ]
+      },
+      "slots": {
+        "total": 4,
+        "covered": 2,
+        "missing": [
+          "trigger",
+          "file"
+        ]
+      },
+      "methods": {
+        "total": 5,
+        "covered": 5,
+        "missing": []
+      }
+    },
+    {
+      "id": "Flex",
+      "exportName": "WiFlex",
+      "examples": 8,
+      "props": {
+        "total": 7,
+        "covered": 4,
+        "missing": [
+          "inline",
+          "reverse",
+          "wrap"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "FloatLabel",
+      "exportName": "WiFloatLabel",
+      "examples": 4,
+      "props": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Fluid",
+      "exportName": "WiFluid",
+      "examples": 4,
+      "props": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "as"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Form",
+      "exportName": "WiForm",
+      "examples": 8,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 3,
+        "covered": 1,
+        "missing": [
+          "clearValidate",
+          "errors"
+        ]
+      }
+    },
+    {
+      "id": "Gallery",
+      "exportName": "WiGallery",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "events": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Grid",
+      "exportName": "WiGrid",
+      "examples": 10,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Icon",
+      "exportName": "WiIcon",
+      "examples": 8,
+      "props": {
+        "total": 3,
+        "covered": 3,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "IconField",
+      "exportName": "WiIconField",
+      "examples": 4,
+      "props": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Inplace",
+      "exportName": "WiInplace",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "activate",
+          "deactivate"
+        ]
+      }
+    },
+    {
+      "id": "Input",
+      "exportName": "WiInput",
+      "examples": 20,
+      "props": {
+        "total": 15,
+        "covered": 12,
+        "missing": [
+          "error",
+          "id",
+          "readonly"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "clear"
+        ]
+      },
+      "slots": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "methods": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "focus"
+        ]
+      }
+    },
+    {
+      "id": "InputColor",
+      "exportName": "WiInputColor",
+      "examples": 6,
+      "props": {
+        "total": 4,
+        "covered": 2,
+        "missing": [
+          "disabled",
+          "id"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "InputGroup",
+      "exportName": "WiInputGroup",
+      "examples": 4,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "InputNumber",
+      "exportName": "WiInputNumber",
+      "examples": 8,
+      "props": {
+        "total": 13,
+        "covered": 9,
+        "missing": [
+          "size",
+          "fluid",
+          "invalid",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "InputOtp",
+      "exportName": "WiInputOtp",
+      "examples": 6,
+      "props": {
+        "total": 7,
+        "covered": 6,
+        "missing": [
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "InputPassword",
+      "exportName": "WiInputPassword",
+      "examples": 12,
+      "props": {
+        "total": 16,
+        "covered": 10,
+        "missing": [
+          "toggleMask",
+          "variant",
+          "fluid",
+          "invalid",
+          "disabled",
+          "readonly"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "clear"
+        ]
+      },
+      "slots": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "InputTags",
+      "exportName": "WiInputTags",
+      "examples": 6,
+      "props": {
+        "total": 6,
+        "covered": 4,
+        "missing": [
+          "disabled",
+          "addOnBlur"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Knob",
+      "exportName": "WiKnob",
+      "examples": 4,
+      "props": {
+        "total": 7,
+        "covered": 3,
+        "missing": [
+          "min",
+          "max",
+          "step",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Label",
+      "exportName": "WiLabel",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "for"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Layout",
+      "exportName": "WiLayout",
+      "examples": 16,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Listbox",
+      "exportName": "WiListbox",
+      "examples": 4,
+      "props": {
+        "total": 6,
+        "covered": 4,
+        "missing": [
+          "multiple",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "MegaMenu",
+      "exportName": "WiMegaMenu",
+      "examples": 4,
+      "props": {
+        "total": 3,
+        "covered": 1,
+        "missing": [
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Menu",
+      "exportName": "WiMenu",
+      "examples": 6,
+      "props": {
+        "total": 8,
+        "covered": 4,
+        "missing": [
+          "popup",
+          "indent",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 3,
+        "covered": 1,
+        "missing": [
+          "update:modelValue",
+          "select"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Menubar",
+      "exportName": "WiMenubar",
+      "examples": 4,
+      "props": {
+        "total": 4,
+        "covered": 2,
+        "missing": [
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "select"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Message",
+      "exportName": "WiMessage",
+      "examples": 8,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "MeterGroup",
+      "exportName": "WiMeterGroup",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "OrderList",
+      "exportName": "WiOrderList",
+      "examples": 4,
+      "props": {
+        "total": 4,
+        "covered": 1,
+        "missing": [
+          "dataKey",
+          "listStyle",
+          "dragdrop"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "reorder"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Pagination",
+      "exportName": "WiPagination",
+      "examples": 6,
+      "props": {
+        "total": 10,
+        "covered": 9,
+        "missing": [
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 4,
+        "covered": 1,
+        "missing": [
+          "update:modelValue",
+          "page",
+          "update:rows"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "first",
+          "pageCount"
+        ]
+      }
+    },
+    {
+      "id": "Panel",
+      "exportName": "WiPanel",
+      "examples": 6,
+      "props": {
+        "total": 5,
+        "covered": 5,
+        "missing": []
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:collapsed",
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 3,
+        "covered": 2,
+        "missing": [
+          "header"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "PickList",
+      "exportName": "WiPickList",
+      "examples": 6,
+      "props": {
+        "total": 5,
+        "covered": 5,
+        "missing": []
+      },
+      "events": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Popover",
+      "exportName": "WiPopover",
+      "examples": 8,
+      "props": {
+        "total": 7,
+        "covered": 5,
+        "missing": [
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 3,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "show",
+          "hide"
+        ]
+      },
+      "slots": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ProgressBar",
+      "exportName": "WiProgressBar",
+      "examples": 6,
+      "props": {
+        "total": 6,
+        "covered": 5,
+        "missing": [
+          "color"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ProgressSpinner",
+      "exportName": "WiProgressSpinner",
+      "examples": 6,
+      "props": {
+        "total": 7,
+        "covered": 5,
+        "missing": [
+          "ariaLabel",
+          "delay"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Radio",
+      "exportName": "WiRadio",
+      "examples": 10,
+      "props": {
+        "total": 9,
+        "covered": 7,
+        "missing": [
+          "id",
+          "required"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Rating",
+      "exportName": "WiRating",
+      "examples": 8,
+      "props": {
+        "total": 7,
+        "covered": 4,
+        "missing": [
+          "stars",
+          "allowClear",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Scrollbar",
+      "exportName": "WiScrollbar",
+      "examples": 14,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 6,
+        "covered": 1,
+        "missing": [
+          "wrapRef",
+          "update",
+          "scrollTo",
+          "setScrollLeft",
+          "handleScroll"
+        ]
+      }
+    },
+    {
+      "id": "ScrollTop",
+      "exportName": "WiScrollTop",
+      "examples": 4,
+      "props": {
+        "total": 6,
+        "covered": 4,
+        "missing": [
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Select",
+      "exportName": "WiSelect",
+      "examples": 24,
+      "props": {
+        "total": 23,
+        "covered": 18,
+        "missing": [
+          "error",
+          "required",
+          "teleport",
+          "placement",
+          "id"
+        ]
+      },
+      "events": {
+        "total": 7,
+        "covered": 1,
+        "missing": [
+          "update:modelValue",
+          "change",
+          "clear",
+          "show",
+          "hide",
+          "create"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "SelectButton",
+      "exportName": "WiSelectButton",
+      "examples": 6,
+      "props": {
+        "total": 6,
+        "covered": 3,
+        "missing": [
+          "size",
+          "invalid",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Sidebar",
+      "exportName": "WiSidebar",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Skeleton",
+      "exportName": "WiSkeleton",
+      "examples": 10,
+      "props": {
+        "total": 7,
+        "covered": 7,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Slider",
+      "exportName": "WiSlider",
+      "examples": 8,
+      "props": {
+        "total": 9,
+        "covered": 5,
+        "missing": [
+          "min",
+          "max",
+          "step",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Space",
+      "exportName": "WiSpace",
+      "examples": 10,
+      "props": {
+        "total": 10,
+        "covered": 3,
+        "missing": [
+          "align",
+          "justify",
+          "inline",
+          "reverse",
+          "wrap",
+          "itemClass",
+          "itemStyle"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "SpeedDial",
+      "exportName": "WiSpeedDial",
+      "examples": 4,
+      "props": {
+        "total": 7,
+        "covered": 3,
+        "missing": [
+          "disabled",
+          "ariaLabel",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "SplitButton",
+      "exportName": "WiSplitButton",
+      "examples": 4,
+      "props": {
+        "total": 9,
+        "covered": 2,
+        "missing": [
+          "icon",
+          "severity",
+          "outlined",
+          "size",
+          "disabled",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "command"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Splitter",
+      "exportName": "WiSplitter",
+      "examples": 10,
+      "props": {
+        "total": 12,
+        "covered": 5,
+        "missing": [
+          "layout",
+          "defaultSize",
+          "resizeTriggerSize",
+          "pane1Class",
+          "pane1Style",
+          "pane2Class",
+          "pane2Style"
+        ]
+      },
+      "events": {
+        "total": 5,
+        "covered": 1,
+        "missing": [
+          "resize",
+          "drag-start",
+          "drag-move",
+          "drag-end"
+        ]
+      },
+      "slots": {
+        "total": 4,
+        "covered": 3,
+        "missing": [
+          "resize-trigger"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Stepper",
+      "exportName": "WiStepper",
+      "examples": 6,
+      "props": {
+        "total": 5,
+        "covered": 3,
+        "missing": [
+          "linear",
+          "orientation"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Switch",
+      "exportName": "WiSwitch",
+      "examples": 10,
+      "props": {
+        "total": 13,
+        "covered": 7,
+        "missing": [
+          "id",
+          "name",
+          "value",
+          "size",
+          "loading",
+          "required"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "default"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Table",
+      "exportName": "WiTable",
+      "examples": 14,
+      "props": {
+        "total": 23,
+        "covered": 15,
+        "missing": [
+          "fit",
+          "filters",
+          "rowExpandable",
+          "rowHover",
+          "sortMode",
+          "sortField",
+          "sortOrder",
+          "size"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Tabs",
+      "exportName": "WiTabs",
+      "examples": 6,
+      "props": {
+        "total": 5,
+        "covered": 5,
+        "missing": []
+      },
+      "events": {
+        "total": 4,
+        "covered": 2,
+        "missing": [
+          "update:modelValue",
+          "change"
+        ]
+      },
+      "slots": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Tag",
+      "exportName": "WiTag",
+      "examples": 10,
+      "props": {
+        "total": 9,
+        "covered": 7,
+        "missing": [
+          "color",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "close"
+        ]
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Terminal",
+      "exportName": "WiTerminal",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "prompt"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Textarea",
+      "exportName": "WiTextarea",
+      "examples": 10,
+      "props": {
+        "total": 18,
+        "covered": 12,
+        "missing": [
+          "error",
+          "id",
+          "resize",
+          "autoResize",
+          "disabled",
+          "readonly"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "clear"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "focus"
+        ]
+      }
+    },
+    {
+      "id": "TieredMenu",
+      "exportName": "WiTieredMenu",
+      "examples": 4,
+      "props": {
+        "total": 5,
+        "covered": 1,
+        "missing": [
+          "popup",
+          "modelValue",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Timeline",
+      "exportName": "WiTimeline",
+      "examples": 8,
+      "props": {
+        "total": 4,
+        "covered": 4,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Toast",
+      "exportName": "WiToast",
+      "examples": 8,
+      "props": {
+        "total": 11,
+        "covered": 3,
+        "missing": [
+          "max",
+          "teleport",
+          "appendTo",
+          "id",
+          "summary",
+          "detail",
+          "closable",
+          "life"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "ToggleButton",
+      "exportName": "WiToggleButton",
+      "examples": 6,
+      "props": {
+        "total": 7,
+        "covered": 4,
+        "missing": [
+          "onIcon",
+          "offIcon",
+          "disabled"
+        ]
+      },
+      "events": {
+        "total": 1,
+        "covered": 0,
+        "missing": [
+          "update:modelValue"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Toolbar",
+      "exportName": "WiToolbar",
+      "examples": 4,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 3,
+        "covered": 3,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Tooltip",
+      "exportName": "WiTooltip",
+      "examples": 4,
+      "props": {
+        "total": 8,
+        "covered": 5,
+        "missing": [
+          "disabled",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Tree",
+      "exportName": "WiTree",
+      "examples": 10,
+      "props": {
+        "total": 16,
+        "covered": 7,
+        "missing": [
+          "selectionKeys",
+          "selectionMode",
+          "checkStrictly",
+          "expandedKeys",
+          "accordion",
+          "filterNode",
+          "lazy",
+          "load",
+          "draggable"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "TreeSelect",
+      "exportName": "WiTreeSelect",
+      "examples": 8,
+      "props": {
+        "total": 17,
+        "covered": 9,
+        "missing": [
+          "disabled",
+          "checkStrictly",
+          "checkStrategy",
+          "separator",
+          "maxTagCount",
+          "selectionMode",
+          "teleport",
+          "appendTo"
+        ]
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "clear"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "TreeTable",
+      "exportName": "WiTreeTable",
+      "examples": 4,
+      "props": {
+        "total": 2,
+        "covered": 2,
+        "missing": []
+      },
+      "events": {
+        "total": 2,
+        "covered": 0,
+        "missing": [
+          "node-expand",
+          "node-collapse"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "VirtualScroller",
+      "exportName": "WiVirtualScroller",
+      "examples": 4,
+      "props": {
+        "total": 4,
+        "covered": 3,
+        "missing": [
+          "buffer"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    }
+  ],
+  "summary": {
+    "components": 88,
+    "componentsWithMissingCoverage": 71,
+    "totalExamples": 664
+  }
+}

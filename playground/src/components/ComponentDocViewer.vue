@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { ResolvedComponentDoc } from '../docs/loadComponentDocs'
-import { computed, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { useDocCodeCopy } from '../composables/useDocCodeCopy'
+import { useDocsI18n } from '../i18n'
 
 const props = defineProps<{
   doc: ResolvedComponentDoc
@@ -9,7 +10,28 @@ const props = defineProps<{
 
 const bodyRef = ref<HTMLElement | null>(null)
 const docSource = computed(() => props.doc)
+const { t } = useDocsI18n()
+const sections = ref<Array<{ id: string; label: string }>>([])
+const exampleCount = ref(0)
 useDocCodeCopy(bodyRef, docSource)
+
+function refreshNavigation() {
+  const body = bodyRef.value
+  if (!body) return
+  const headings = [...body.querySelectorAll<HTMLElement>('h2, h3')]
+  sections.value = headings.map((heading, index) => {
+    const id = `${props.doc.name.toLowerCase()}-section-${index + 1}`
+    heading.id = id
+    return { id, label: heading.textContent?.trim() || t.value.componentSection }
+  })
+  exampleCount.value = body.querySelectorAll('.code-preview').length
+}
+
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+onMounted(() => nextTick(refreshNavigation))
 </script>
 
 <template>
@@ -20,7 +42,16 @@ useDocCodeCopy(bodyRef, docSource)
       <p v-if="doc.frontmatter.description">
         {{ doc.frontmatter.description }}
       </p>
+      <div class="component-doc-viewer__stats" aria-live="polite">
+        <span>{{ t.examplesCount.replace('{count}', String(exampleCount)) }}</span>
+        <span v-if="sections.length">{{ t.sectionsCount.replace('{count}', String(sections.length)) }}</span>
+      </div>
     </div>
+    <nav v-if="sections.length" class="component-doc-viewer__toc" :aria-label="t.componentSection">
+      <button v-for="section in sections" :key="section.id" type="button" @click="scrollToSection(section.id)">
+        {{ section.label }}
+      </button>
+    </nav>
     <div ref="bodyRef" class="component-doc-viewer__body">
       <component :is="doc.component" />
     </div>
@@ -50,6 +81,34 @@ useDocCodeCopy(bodyRef, docSource)
   letter-spacing: -0.04em;
   line-height: 1.15;
   margin: 0.35rem 0 0.45rem;
+}
+.component-doc-viewer__stats {
+  color: var(--wi-color-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--docs-mono);
+  font-size: 0.68rem;
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+}
+.component-doc-viewer__toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0 1.25rem;
+}
+.component-doc-viewer__toc button {
+  background: color-mix(in srgb, var(--wi-color-primary) 7%, var(--wi-color-surface));
+  border: 1px solid var(--docs-edge);
+  border-radius: 999px;
+  color: var(--wi-color-text-muted);
+  cursor: pointer;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.6rem;
+}
+.component-doc-viewer__toc button:hover {
+  border-color: var(--wi-color-primary);
+  color: var(--wi-color-primary);
 }
 .component-doc-viewer__intro p {
   color: var(--wi-color-text);
