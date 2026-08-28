@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation name="well-insight-ui-mcp">
+  <description>Read-only evaluation tasks for component discovery, composition guidance, and page validation.</description>
+  <task id="component-api">
+    <prompt>Find the WiButton API and identify the prop used for a danger action. Include the documented default if available.</prompt>
+    <checks>Calls get_component for Button with includeApi and reports a documented prop.</checks>
+  </task>
+  <task id="chinese-alias">
+    <prompt>查找“数据表格”组件，并说明它对应的导出名称和分页相关用法。</prompt>
+    <checks>Resolves the alias to Table/WiTable and uses source-backed API or examples.</checks>
+  </task>
+  <task id="overlay-choice">
+    <prompt>Choose between Dialog, Drawer, Popover, and Tooltip for editing a record while keeping the list visible. Explain why.</prompt>
+    <checks>Calls recommend_component or get_decision for overlay-choice and selects Drawer.</checks>
+  </task>
+  <task id="data-display-choice">
+    <prompt>Choose between Table, DataView, and TreeTable for comparing stable columns across many records.</prompt>
+    <checks>Calls recommend_component or get_decision for data-display-choice and selects Table.</checks>
+  </task>
+  <task id="list-pattern">
+    <prompt>Recommend a page pattern for an oil-well management list with filters and pagination, then list its required components.</prompt>
+    <checks>Calls recommend_page and get_pattern; returns admin-list and its composition.</checks>
+  </task>
+  <task id="form-pattern">
+    <prompt>Recommend a form-page pattern for creating a resource and state the accessibility rules for its fields.</prompt>
+    <checks>Calls recommend_page/get_pattern and get_design_rules; mentions visible labels and FormItem.</checks>
+  </task>
+  <task id="dashboard-pattern">
+    <prompt>Generate a dashboard scaffold for production monitoring without writing a file. Identify loading and metric components.</prompt>
+    <checks>Calls generate_page with dashboard intent; output contains WiProgressBar and WiSkeleton.</checks>
+  </task>
+  <task id="design-tokens">
+    <prompt>What spacing, radius, typography, and motion tokens should a generated page use?</prompt>
+    <checks>Calls get_design_rules and reports the --wi-* token families.</checks>
+  </task>
+  <task id="accessibility">
+    <prompt>Review the design guidance for an icon-only action and a form field with an error.</prompt>
+    <checks>Calls get_design_rules; mentions aria-label/ariaLabel, visible label, and role=alert for errors.</checks>
+  </task>
+  <task id="page-validation">
+    <prompt>Validate a page containing WiTable with opaque v-bind and no pagination in strict mode. Explain every warning.</prompt>
+    <checks>Calls validate_page with strict=true and reports dynamic-binding and pagination warnings.</checks>
+  </task>
+</evaluation>

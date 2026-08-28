@@ -680,6 +680,9 @@
     "release:git": "node scripts/release-git.mjs --tag --branch",
     "release:mcp": "node scripts/release-mcp.mjs",
     "mcp:generate": "pnpm --filter @well-insight/ui-mcp generate",
+    "mcp:check-catalog": "pnpm --filter @well-insight/ui-mcp check-catalog",
+    "mcp:validate-catalog": "pnpm --filter @well-insight/ui-mcp validate-catalog",
+    "mcp:audit-examples": "pnpm --filter @well-insight/ui-mcp audit-example-coverage",
     "mcp:build": "pnpm --filter @well-insight/ui-mcp build",
     "mcp:start": "pnpm --filter @well-insight/ui-mcp start"
   },

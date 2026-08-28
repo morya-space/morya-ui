@@ -9,7 +9,39 @@ const server = new McpServer({
   version: handlers.catalog.mcp.version,
 })
 
-server.tool(
+type ToolHandler = (args: any) => Promise<any> | any
+
+function register(
+  name: string,
+  description: string,
+  inputSchema: Record<string, z.ZodTypeAny>,
+  handler: ToolHandler,
+  annotations: {
+    readOnlyHint: boolean
+    destructiveHint: boolean
+    idempotentHint: boolean
+    openWorldHint: boolean
+  } = {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: false,
+  },
+) {
+  return server.registerTool(
+    name,
+    {
+      title: description.split('.')[0],
+      description,
+      inputSchema,
+      outputSchema: z.record(z.string(), z.unknown()),
+      annotations,
+    },
+    handler,
+  )
+}
+
+register(
   'list',
   'List @well-insight/ui components, guides, examples, categories, or page patterns.',
   {
@@ -24,7 +56,7 @@ server.tool(
   async (args) => handlers.list(args),
 )
 
-server.tool(
+register(
   'search',
   'Search components, guides, API text, and examples.',
   {
@@ -37,7 +69,7 @@ server.tool(
   async (args) => handlers.search(args),
 )
 
-server.tool(
+register(
   'get_component',
   'Read component docs and metadata from the generated catalog.',
   {
@@ -47,12 +79,14 @@ server.tool(
     detail: z.enum(['compact', 'full']).optional(),
     includeApi: z.boolean().optional(),
     includeExamples: z.boolean().optional(),
+    examplesLimit: z.number().int().min(1).max(100).optional(),
+    examplesOffset: z.number().int().min(0).optional(),
     sections: z.array(z.string()).optional(),
   },
   async (args) => handlers.getComponent(args),
 )
 
-server.tool(
+register(
   'get_example',
   'Return one source-backed example for a component.',
   {
@@ -64,7 +98,7 @@ server.tool(
   async (args) => handlers.getExample(args),
 )
 
-server.tool(
+register(
   'get_guide',
   'Read a guide (introduction, quick-start, theme, config, …).',
   {
@@ -76,7 +110,7 @@ server.tool(
   async (args) => handlers.getGuide(args),
 )
 
-server.tool(
+register(
   'get_setup',
   'Return installation and setup guidance for consuming @well-insight/ui.',
   {
@@ -86,7 +120,7 @@ server.tool(
   async (args) => handlers.getSetup(args),
 )
 
-server.tool(
+register(
   'validate_usage',
   'Validate component usage snippets against documented props/events.',
   {
@@ -106,7 +140,7 @@ server.tool(
   async (args) => handlers.validateUsage(args),
 )
 
-server.tool(
+register(
   'list_patterns',
   'List reusable page patterns for composing @well-insight/ui components.',
   {
@@ -117,7 +151,7 @@ server.tool(
   async (args) => handlers.listPatterns(args),
 )
 
-server.tool(
+register(
   'get_pattern',
   'Read the structure, component composition, layout, and interaction rules for a page pattern.',
   {
@@ -127,7 +161,7 @@ server.tool(
   async (args) => handlers.getPattern(args),
 )
 
-server.tool(
+register(
   'recommend_page',
   'Recommend a page pattern and component composition from a product/page intent.',
   {
@@ -139,7 +173,7 @@ server.tool(
   async (args) => handlers.recommendPage(args),
 )
 
-server.tool(
+register(
   'generate_page',
   'Generate a Vue 3 + TypeScript page scaffold from intent, pattern, and design rules without writing files.',
   {
@@ -153,7 +187,7 @@ server.tool(
   async (args) => handlers.generatePage(args),
 )
 
-server.tool(
+register(
   'create_page',
   'Preview or safely write a generated page inside the current project. Writing requires confirm: true.',
   {
@@ -167,16 +201,22 @@ server.tool(
     confirm: z.boolean().optional(),
   },
   async (args) => handlers.createPage(args),
+  {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: false,
+  },
 )
 
-server.tool(
+register(
   'get_design_rules',
   'Return design-token, semantic-action, accessibility, and composition rules for generated pages.',
   { mode: z.string().optional() },
   async (args) => handlers.getDesignRules(args),
 )
 
-server.tool(
+register(
   'list_decisions',
   'List component selection decision guides for common UI choices.',
   {
@@ -187,7 +227,7 @@ server.tool(
   async (args) => handlers.listDecisions(args),
 )
 
-server.tool(
+register(
   'get_decision',
   'Read bilingual guidance for choosing between related components.',
   {
@@ -197,7 +237,7 @@ server.tool(
   async (args) => handlers.getDecision(args),
 )
 
-server.tool(
+register(
   'recommend_component',
   'Recommend a component choice from a UI selection question.',
   {
@@ -208,7 +248,7 @@ server.tool(
   async (args) => handlers.recommendComponent(args),
 )
 
-server.tool(
+register(
   'validate_page',
   'Validate page-level component composition, interaction, accessibility, and design-token rules.',
   {
@@ -216,11 +256,12 @@ server.tool(
     code: z.string().optional(),
     components: z.array(z.string()).max(50).optional(),
     intent: z.string().optional(),
+    strict: z.boolean().optional().describe('Enable additional static checks for dynamic bindings and incomplete snippets.'),
   },
   async (args) => handlers.validatePage(args),
 )
 
-server.tool('version', 'Return MCP package, library version, and catalog status.', {}, async () =>
+register('version', 'Return MCP package, library version, and catalog status.', {}, async () =>
   handlers.version(),
 )
 

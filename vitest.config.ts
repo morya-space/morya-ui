@@ -7,6 +7,7 @@ export default defineConfig({
     conditions: ['node'],
   },
   test: {
+    exclude: ['**/node_modules/**', '**/dist/**'],
     environment: 'happy-dom',
     clearMocks: true,
     restoreMocks: true,

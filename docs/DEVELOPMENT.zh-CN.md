@@ -27,7 +27,7 @@ pnpm test
 pnpm test:coverage
 pnpm release              # 一键发版（prepare → build → commit → … → push；含 MCP）
 pnpm release:prepare      # 写版本与 CHANGELOG，并同步 MCP 版本
-pnpm release:build        # 构建 UI + MCP
+pnpm release:build        # 构建 UI + MCP，并校验 catalog、生成 API 覆盖率报告
 pnpm release:commit       # 提交 UI / MCP release 文件
 pnpm release:branch       # 创建 release/{version} 分支
 pnpm release:publish      # 发布 UI + MCP
@@ -37,6 +37,7 @@ pnpm release:npm          # 仅 build + publish（UI + MCP；需先改 version�
 pnpm release:git          # 仅补 tag / release 分支
 pnpm release:mcp          # 单独发布 MCP（一般不必；完整发版已包含）
 pnpm mcp:build            # 构建 @well-insight/ui-mcp（文档目录 + stdio 服务）
+pnpm mcp:audit-examples   # 审计 Props / Events / Slots / Methods 示例覆盖率
 pnpm mcp:start            # 本地启动 MCP（stdio）
 ```
 

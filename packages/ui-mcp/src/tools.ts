@@ -27,11 +27,17 @@ function vueName(name: string): string {
 function generatedPageCode(patternId: string, intent: string, locale: Locale): { script: string; template: string; style: string } {
   const zh = locale === 'zh-CN'
   const isList = patternId === 'admin-list'
-  const isForm = patternId === 'form-page' || patternId === 'settings-page' || patternId === 'auth-page' || patternId === 'wizard-form'
+  const isDashboard = patternId === 'dashboard'
+  const isDetail = patternId === 'detail-page'
+  const isEmpty = patternId === 'empty-state'
+  const isWizard = patternId === 'wizard-form'
+  const isSettings = patternId === 'settings-page'
+  const isAuth = patternId === 'auth-page'
+  const isForm = patternId === 'form-page' || isSettings || isAuth || isWizard
   const title = intent || (zh ? '业务页面' : 'Business page')
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { WiButton, WiCard, WiInput, WiTag${isList ? ', WiPagination, WiTable' : ''}${isForm ? ', WiForm, WiFormItem, WiSelect' : ''} } from '@well-insight/ui'
+import { WiButton, WiCard, WiInput, WiTag${isList ? ', WiPagination, WiTable' : ''}${isForm ? ', WiForm, WiFormItem, WiSelect' : ''}${isDashboard ? ', WiProgressBar, WiSkeleton' : ''}${isDetail ? ', WiDivider' : ''}${isEmpty ? ', WiDataView' : ''}${isWizard ? ', WiStepper' : ''}${isSettings ? ', WiTabs' : ''} } from '@well-insight/ui'
 
 const loading = ref(false)
 const error = ref('')
@@ -39,6 +45,8 @@ ${isList ? `const keyword = ref('')
 const page = ref(1)
 const rows = ref<Record<string, unknown>[]>([])
 ` : ''}${isForm ? `const model = ref({ name: '' })
+` : ''}${isDashboard ? `const metrics = ref([{ label: '${zh ? '产量' : 'Production'}', value: 0 }])
+` : ''}${isWizard ? `const activeStep = ref(0)
 ` : ''}
 
 async function submit() {
@@ -68,15 +76,56 @@ ${isList ? `    <WiCard>
       <WiTable :value="rows" :loading="loading" />
       <WiPagination v-model="page" :total="0" />
       <p v-if="!loading && !rows.length" class="wi-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
-    </WiCard>` : isForm ? `    <WiCard>
-      <WiForm label-position="top" @submit.prevent="submit">
-        <WiFormItem label="${zh ? '名称' : 'Name'}" name="name">
-          <WiInput v-model="model.name" fluid />
-        </WiFormItem>
-        <div class="wi-generated-actions">
-          <WiButton label="${zh ? '取消' : 'Cancel'}" severity="secondary" text />
-          <WiButton native-type="submit" label="${zh ? '保存' : 'Save'}" :loading="loading" />
+    </WiCard>` : isDashboard ? `    <section class="wi-generated-grid">
+      <WiCard v-for="metric in metrics" :key="metric.label">
+        <span class="wi-generated-muted">{{ metric.label }}</span>
+        <strong class="wi-generated-metric">{{ metric.value }}</strong>
+        <WiProgressBar :value="metric.value" />
+      </WiCard>
+      <WiCard>
+        <WiSkeleton v-if="loading" height="8rem" />
+        <p v-else class="wi-generated-muted">${zh ? '趋势和告警区域，请接入真实数据。' : 'Connect trend and alert data here.'}</p>
+      </WiCard>
+    </section>` : isDetail ? `    <WiCard>
+      <div class="wi-generated-detail-head">
+        <div>
+          <h2>${zh ? '资源概览' : 'Resource overview'}</h2>
+          <WiTag value="${zh ? '正常' : 'Active'}" severity="success" />
         </div>
+        <WiButton label="${zh ? '编辑' : 'Edit'}" outlined />
+      </div>
+      <WiDivider />
+      <dl class="wi-generated-details">
+        <div><dt>${zh ? '名称' : 'Name'}</dt><dd>${zh ? '示例资源' : 'Example resource'}</dd></div>
+        <div><dt>${zh ? '更新时间' : 'Updated'}</dt><dd>—</dd></div>
+      </dl>
+    </WiCard>` : isEmpty ? `    <WiCard>
+      <WiDataView :value="[]">
+        <template #empty>
+          <div class="wi-generated-empty">
+            <strong>${zh ? '暂无内容' : 'Nothing here yet'}</strong>
+            <p class="wi-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
+            <WiButton label="${zh ? '创建' : 'Create'}" @click="submit" />
+          </div>
+        </template>
+      </WiDataView>
+    </WiCard>` : isWizard ? `    <WiCard>
+      <WiStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
+      <WiForm label-position="top" @submit.prevent="submit">
+        <WiFormItem label="${zh ? '名称' : 'Name'}" name="name"><WiInput v-model="model.name" fluid /></WiFormItem>
+        <WiButton native-type="submit" label="${zh ? '下一步' : 'Next'}" :loading="loading" />
+      </WiForm>
+    </WiCard>` : isSettings ? `    <WiCard>
+      <WiTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
+      <WiForm label-position="top" @submit.prevent="submit">
+        <WiFormItem label="${zh ? '显示名称' : 'Display name'}" name="name"><WiInput v-model="model.name" fluid /></WiFormItem>
+        <WiButton native-type="submit" label="${zh ? '保存设置' : 'Save settings'}" :loading="loading" />
+      </WiForm>
+    </WiCard>` : isAuth ? `    <WiCard>
+      <WiForm label-position="top" @submit.prevent="submit">
+        <WiFormItem label="${zh ? '邮箱' : 'Email'}" name="email"><WiInput type="email" label="${zh ? '邮箱' : 'Email'}" fluid /></WiFormItem>
+        <WiFormItem label="${zh ? '密码' : 'Password'}" name="password"><WiInput type="password" label="${zh ? '密码' : 'Password'}" fluid /></WiFormItem>
+        <WiButton native-type="submit" label="${zh ? '登录' : 'Sign in'}" :loading="loading" />
       </WiForm>
     </WiCard>` : `    <WiCard>
       <p class="wi-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
@@ -87,10 +136,16 @@ ${isList ? `    <WiCard>
 </template>`
   const style = `<style scoped>
 .wi-generated-page { display: grid; gap: var(--wi-space-4); max-width: 80rem; margin: 0 auto; padding: var(--wi-space-6); }
-.wi-generated-header, .wi-generated-toolbar, .wi-generated-actions { display: flex; gap: var(--wi-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.wi-generated-header, .wi-generated-toolbar, .wi-generated-actions, .wi-generated-detail-head { display: flex; gap: var(--wi-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.wi-generated-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--wi-space-4); }
+.wi-generated-metric { display: block; font-size: var(--wi-font-size-lg); margin: var(--wi-space-2) 0; }
+.wi-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wi-space-4); margin: 0; }
+.wi-generated-details dt { color: var(--wi-color-text-muted); font-size: var(--wi-font-size-sm); }
+.wi-generated-details dd { margin: var(--wi-space-1) 0 0; }
+.wi-generated-empty { display: grid; gap: var(--wi-space-2); justify-items: center; padding: var(--wi-space-8); text-align: center; }
 .wi-generated-muted { color: var(--wi-color-text-muted); }
 .wi-generated-error { color: var(--wi-color-danger); }
-@media (max-width: 48rem) { .wi-generated-page { padding: var(--wi-space-4); } .wi-generated-toolbar > * { width: 100%; } }
+@media (max-width: 48rem) { .wi-generated-page { padding: var(--wi-space-4); } .wi-generated-toolbar > *, .wi-generated-grid > * { width: 100%; } .wi-generated-grid, .wi-generated-details { grid-template-columns: 1fr; } }
 </style>`
   return { script, template, style }
 }
@@ -121,6 +176,43 @@ function componentSearchBlob(component: ComponentRecord): string {
     ...component.props.map((item) => `${item.name} ${item.description}`),
     ...component.examples.map((item) => `${item.section} ${item.code}`),
   ].join('\n')
+}
+
+function pagination(total: number, offset: number, limit: number) {
+  const nextOffset = offset + limit
+  return {
+    total,
+    count: Math.max(Math.min(limit, total - offset), 0),
+    offset,
+    limit,
+    has_more: nextOffset < total,
+    ...(nextOffset < total ? { next_offset: nextOffset } : {}),
+  }
+}
+
+function apiCoverage(component: ComponentRecord, examples: ComponentRecord['examples']) {
+  const source = examples.map((example) => example.code).join('\n')
+  const has = (name: string) => {
+    const kebab = toKebab(name)
+    return new RegExp(`(?:^|[\\s:@])(?:${name}|${kebab})(?:[\\s=/>]|$)`, 'i').test(source) ||
+      (name === 'modelValue' && /v-model(?:[:=]|\\s)/i.test(source))
+  }
+  const eventHas = (name: string) => source.includes(`@${name}`) || source.includes(`@${toKebab(name)}`)
+  const slotHas = (name: string) => source.includes(`#${name}`) ||
+    (name === 'default' && source.includes('<Wi') && source.includes('</Wi'))
+  const summary = (items: string[], predicate: (item: string) => boolean) => ({
+    total: items.length,
+    covered: items.filter(predicate).length,
+    missing: items.filter((item) => !predicate(item)),
+  })
+  return {
+    props: summary(component.props.map((item) => item.name), has),
+    events: summary(component.events.map((item) => item.name), eventHas),
+    slots: summary(component.slots.map((item) => item.name), slotHas),
+    methods: summary((component.methods || []).map((item) => item.name), (name) =>
+      new RegExp(`(?:\\.|ref\\?\\.)${name}\\s*\\(`).test(source) || source.includes(`\`${name}\``),
+    ),
+  }
 }
 
 function guideSearchBlob(guide: GuideRecord): string {
@@ -157,7 +249,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
           order: guide.order,
         }
       })
-      return textResult({ kind, total: catalog.guides.length, offset, limit, items })
+      return textResult({ kind, ...pagination(catalog.guides.length, offset, limit), items })
     }
 
     if (kind === 'patterns') return listPatterns(args)
@@ -169,10 +261,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
         const key = component.category || 'Uncategorized'
         counts.set(key, (counts.get(key) || 0) + 1)
       }
-      const items = [...counts.entries()]
+      const allItems = [...counts.entries()]
         .map(([category, count]) => ({ category, count }))
         .sort((a, b) => a.category.localeCompare(b.category))
-      return textResult({ kind, total: items.length, items })
+      const items = allItems.slice(offset, offset + limit)
+      return textResult({ kind, ...pagination(allItems.length, offset, limit), items })
     }
 
     if (kind === 'examples') {
@@ -187,9 +280,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       )
       return textResult({
         kind,
-        total: flat.length,
-        offset,
-        limit,
+        ...pagination(flat.length, offset, limit),
         items: flat.slice(offset, offset + limit),
       })
     }
@@ -203,7 +294,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
           ? component.descriptionEn || component.description
           : component.description || component.descriptionEn,
     }))
-    return textResult({ kind: 'components', total: catalog.components.length, offset, limit, items })
+    return textResult({ kind: 'components', ...pagination(catalog.components.length, offset, limit), items })
   }
 
   function search(args: {
@@ -306,9 +397,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
     return textResult({
       query,
       scope,
-      total: hits.length,
-      offset,
-      limit,
+      ...pagination(hits.length, offset, limit),
       items: hits.slice(offset, offset + limit),
     })
   }
@@ -320,6 +409,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
     detail?: 'compact' | 'full'
     includeApi?: boolean
     includeExamples?: boolean
+    examplesLimit?: number
+    examplesOffset?: number
     sections?: string[]
   }) {
     const names = [
@@ -351,6 +442,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
             selectedSections.includes(normalizeName(section.title))
         }) || []
 
+      const localeExamples = component.examples.filter((example) => example.locale === locale)
+      const examplesLimit = Math.min(Math.max(args.examplesLimit ?? 8, 1), 100)
+      const examplesOffset = Math.max(args.examplesOffset ?? 0, 0)
+      const examplePage = localeExamples.slice(examplesOffset, examplesOffset + examplesLimit)
+
       return {
         id: component.id,
         exportName: component.exportName,
@@ -362,14 +458,26 @@ export function createToolHandlers(catalog = loadCatalog()) {
               props: component.props,
               events: component.events,
               slots: component.slots,
+              methods: component.methods || [],
+              apiCoverage: apiCoverage(component, localeExamples),
             }
           : {}),
         ...(includeExamples
           ? {
-              examples: component.examples.filter((example) => example.locale === locale).slice(0, 8),
+              examples: examplePage,
+              exampleCount: localeExamples.length,
+              examplesOffset,
+              examplesLimit,
+              hasMoreExamples: examplesOffset + examplesLimit < localeExamples.length,
+              ...(examplesOffset + examplesLimit < localeExamples.length
+                ? { nextExamplesOffset: examplesOffset + examplesLimit }
+                : {}),
             }
           : {
-              exampleCount: component.examples.filter((example) => example.locale === locale).length,
+              exampleCount: localeExamples.length,
+              examplesOffset: 0,
+              examplesLimit,
+              hasMoreExamples: localeExamples.length > 0,
             }),
         sections:
           detail === 'full' || selectedSections.length
@@ -479,7 +587,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       keywords: pattern.keywords,
       components: pattern.components.map((item) => item.component),
     }))
-    return textResult({ kind: 'patterns', total: pagePatterns.length, offset, limit, items })
+    return textResult({ kind: 'patterns', ...pagination(pagePatterns.length, offset, limit), items })
   }
 
   function getPattern(args: { pattern: string; mode?: string }) {
@@ -645,7 +753,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       keywords: decision.keywords,
       options: decision.options.map((option) => option.component),
     }))
-    return textResult({ kind: 'decisions', total: componentDecisions.length, offset, limit, items })
+    return textResult({ kind: 'decisions', ...pagination(componentDecisions.length, offset, limit), items })
   }
 
   function getDecision(args: { decision: string; mode?: string }) {
@@ -698,6 +806,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
     code?: string
     components?: string[]
     intent?: string
+    strict?: boolean
   }) {
     const code = args.code || ''
     const detected = [
@@ -757,6 +866,17 @@ export function createToolHandlers(catalog = loadCatalog()) {
     }
     if (code && /<Wi(Input|Select|Textarea)\b/i.test(code) && !/(label=|aria-label|ariaLabel)/i.test(code)) {
       addWarning('form-label', 'Form controls should provide a visible label or an equivalent accessible name.')
+    }
+    if (args.strict) {
+      if (code && /v-bind\s*=\s*["'](?!\{)/i.test(code)) {
+        addWarning('dynamic-binding', 'Strict mode cannot verify an opaque v-bind object; validate its keys with the component API.')
+      }
+      if (code && /<Wi[A-Z]\w*\b[^>]*:\w+\s*=\s*["']\s*["']/i.test(code)) {
+        addWarning('empty-binding', 'Strict mode found an empty dynamic binding; provide a real value or remove the prop.')
+      }
+      if (!code && uniqueNames.length === 0) {
+        addWarning('missing-source', 'Strict mode needs page code or an explicit components list to validate composition.')
+      }
     }
 
     return textResult({
@@ -911,6 +1031,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
   }
 
   function version() {
+    const patternReferences = pagePatterns.flatMap((pattern) =>
+      pattern.components
+        .filter((item) => !findComponent(catalog, item.component))
+        .map((item) => ({ pattern: pattern.id, component: item.component })),
+    )
     return textResult({
       mcp: catalog.mcp,
       library: catalog.library,
@@ -919,6 +1044,16 @@ export function createToolHandlers(catalog = loadCatalog()) {
         components: catalog.components.length,
         guides: catalog.guides.length,
         examples: catalog.components.reduce((sum, item) => sum + item.examples.length, 0),
+        patterns: pagePatterns.length,
+        decisions: componentDecisions.length,
+      },
+      health: {
+        ok: patternReferences.length === 0,
+        patternReferences,
+        catalogGeneratedAt: catalog.generatedAt,
+        message: patternReferences.length === 0
+          ? 'Catalog and pattern references are consistent.'
+          : 'Some patterns reference components missing from the catalog.',
       },
       tools: [
         'list',

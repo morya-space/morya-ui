@@ -1,3 +1,4 @@
+// eslint-disable-next-line antfu/no-import-dist
 import { createToolHandlers } from '../dist/tools.js'
 
 const h = createToolHandlers()

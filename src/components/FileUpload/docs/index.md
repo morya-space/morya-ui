@@ -191,6 +191,38 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 </template>
 ```
 
+## Instance methods
+
+通过模板 ref 可以控制选择器、提交队列、取消上传和清空列表。
+
+```vue preview
+<script setup lang="ts">
+import { WiFileUpload } from '@well-insight/ui'
+import { ref } from 'vue'
+
+const uploader = ref<{
+  openPicker: () => void
+  submit: () => void
+  abort: () => void
+  clear: () => void
+  clearFiles: () => void
+} | null>(null)
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
+    <WiFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+      <button type="button" @click="uploader?.openPicker()">选择文件</button>
+      <button type="button" @click="uploader?.submit()">提交队列</button>
+      <button type="button" @click="uploader?.abort()">取消上传</button>
+      <button type="button" @click="uploader?.clear()">清空</button>
+      <button type="button" @click="uploader?.clearFiles()">清空（别名）</button>
+    </div>
+  </div>
+</template>
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
