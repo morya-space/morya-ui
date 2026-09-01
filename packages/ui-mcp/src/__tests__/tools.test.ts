@@ -85,6 +85,34 @@ describe('@well-insight/ui-mcp handlers', () => {
     expect(result.issues[0].message).toContain('foo')
   })
 
+  it('flags icon-only buttons that put icons in the default slot', () => {
+    const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
+      handlers.validateUsage({
+        component: 'Button',
+        code: '<WiButton icon-only aria-label="Add"><Plus /></WiButton>',
+      }),
+    )
+
+    expect(result.ok).toBe(false)
+    expect(result.issues).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type: 'icon-only-missing-icon' }),
+        expect.objectContaining({ type: 'icon-only-default-slot' }),
+      ]),
+    )
+  })
+
+  it('accepts icon-only buttons with icon prop', () => {
+    const result = read<{ ok: boolean }>(
+      handlers.validateUsage({
+        component: 'Button',
+        code: '<WiButton icon="plus" icon-only aria-label="Add" />',
+      }),
+    )
+
+    expect(result.ok).toBe(true)
+  })
+
   it('recommends a page pattern from product intent', () => {
     const result = read<{ matchedPattern: string }>(
       handlers.recommendPage({
@@ -133,7 +161,7 @@ describe('@well-insight/ui-mcp handlers', () => {
   it('exposes catalog health in version metadata', () => {
     const result = read<{
       health: { ok: boolean; patternReferences: unknown[] }
-      counts: { patterns: number; decisions: number }
+      counts: { patterns: number; decisions: number; resources: number }
       tools: string[]
     }>(handlers.version())
 
@@ -141,6 +169,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     expect(result.health.patternReferences).toEqual([])
     expect(result.counts.patterns).toBeGreaterThan(0)
     expect(result.counts.decisions).toBeGreaterThan(0)
+    expect(result.counts.resources).toBeGreaterThan(100)
     expect(result.tools).toHaveLength(13)
     expect(result.tools).not.toContain('create_page')
   })

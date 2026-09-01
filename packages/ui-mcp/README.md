@@ -34,6 +34,8 @@ node packages/ui-mcp/bin/well-insight-ui-mcp.js
 
 ## Tools
 
+MCP also exposes **resources** (component docs, API JSON, guides, catalog index) for clients that support `resources/list` and `resources/read`. Call `version` to see the current resource count.
+
 ### Core — component docs
 
 | Tool             | Purpose                                      |

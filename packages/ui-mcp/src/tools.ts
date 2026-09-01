@@ -10,6 +10,46 @@ import {
 } from './catalog.js'
 import { componentDecisions, findDecision, scoreDecision } from './decisions.js'
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
+import { countCatalogResources } from './resources.js'
+
+function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
+  const pairedTagRe = /<WiButton\b([^>]*)>([\s\S]*?)<\/WiButton>/gi
+  let match = pairedTagRe.exec(code)
+  while (match !== null) {
+    const attrs = match[1] || ''
+    const inner = (match[2] || '').replace(/<!--[\s\S]*?-->/g, '').trim()
+    const hasIconOnly = /\b(?:icon-only|iconOnly)\b/.test(attrs)
+    const hasIconProp = /\b(?::icon|icon=)/.test(attrs)
+    if (hasIconOnly && !hasIconProp) {
+      issues.push({
+        type: 'icon-only-missing-icon',
+        message: 'WiButton with icon-only must set icon (or :icon). Default slot content is not rendered when iconOnly is true.',
+      })
+    }
+    if (hasIconOnly && inner.length > 0) {
+      issues.push({
+        type: 'icon-only-default-slot',
+        message: 'WiButton with icon-only ignores default slot content. Pass the icon via icon / :icon instead.',
+      })
+    }
+    match = pairedTagRe.exec(code)
+  }
+
+  const selfClosingRe = /<WiButton\b([^>]*)\/>/gi
+  match = selfClosingRe.exec(code)
+  while (match !== null) {
+    const attrs = match[1] || ''
+    const hasIconOnly = /\b(?:icon-only|iconOnly)\b/.test(attrs)
+    const hasIconProp = /\b(?::icon|icon=)/.test(attrs)
+    if (hasIconOnly && !hasIconProp) {
+      issues.push({
+        type: 'icon-only-missing-icon',
+        message: 'WiButton with icon-only must set icon (or :icon).',
+      })
+    }
+    match = selfClosingRe.exec(code)
+  }
+}
 
 function pickLocale<T extends { locales: Partial<Record<Locale, unknown>> }>(
   record: T,
@@ -887,6 +927,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
         tagMatch = attrRe.exec(code)
       }
 
+      if (component.id === 'Button' && code) {
+        inspectButtonIconOnlyUsage(code, issues)
+      }
+
       return {
         component: component.id,
         exportName: component.exportName,
@@ -916,6 +960,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         examples: catalog.components.reduce((sum, item) => sum + item.examples.length, 0),
         patterns: pagePatterns.length,
         decisions: componentDecisions.length,
+        resources: countCatalogResources(catalog),
       },
       health: {
         ok: patternReferences.length === 0,
