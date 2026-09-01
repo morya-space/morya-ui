@@ -85,3 +85,9 @@ async function beforeAccept() {
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | Visibility. |
 | `accept` / `reject` | — | Accept / reject. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Popup body. |

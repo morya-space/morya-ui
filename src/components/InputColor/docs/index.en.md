@@ -60,3 +60,9 @@ const color = ref('#2563eb')
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `string` | Color changed. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `trigger` | Custom color trigger. |

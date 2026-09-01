@@ -47,3 +47,7 @@ const url = ref('')
 | `default` | 附加项与输入控件。 |
 
 Addon 组件仅提供默认插槽，根元素 class 为 `wi-inputgroup-addon`。
+
+## Events
+
+无自定义事件。

@@ -82,3 +82,7 @@ const model = [{ label: 'Copy' }, { label: 'Paste' }]
 | Event | Payload | Description |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | Popup visibility change. |
+
+## Slots
+
+No slots.

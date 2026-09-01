@@ -68,3 +68,9 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | `error` | `Event` | 图片加载失败。 |
 
 `WiAvatarGroup`：`max` 最多展示个数；`size` 作用于溢出标记。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 无 `src` 时的占位内容。 |

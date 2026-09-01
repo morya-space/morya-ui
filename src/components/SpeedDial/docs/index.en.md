@@ -53,3 +53,10 @@ const items = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | Emitted when the expanded state changes. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `button` | Custom main button. |
+| `item` | Action `{ item }`. |

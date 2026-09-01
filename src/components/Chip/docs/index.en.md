@@ -49,3 +49,10 @@ import { WiChip } from '@well-insight/ui'
 | Event | Prop | Description |
 | --- | --- | --- |
 | `remove` | `MouseEvent` | Fired when the remove button is clicked. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Label content. |
+| `icon` | Leading icon. |

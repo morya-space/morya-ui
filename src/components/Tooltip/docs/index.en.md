@@ -57,3 +57,7 @@ import { WiButton, WiTooltip } from '@well-insight/ui'
 - Tooltip content is exposed with `role="tooltip"` on hover/focus.
 - Triggers must be focusable; icon-only controls need `aria-label`.
 - Do not hide critical information in tooltips only—provide visible text or labels.
+
+## Events
+
+No custom events.

@@ -102,3 +102,9 @@ const model = [
 | `hide()` | 隐藏菜单。 |
 
 `useContextMenu()` 返回 `{ visible, position, show, hide }`，便于命令式打开。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 触发元素（非 popup 模式）。 |

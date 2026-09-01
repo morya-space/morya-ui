@@ -54,3 +54,7 @@ const value = ref('')
 | --- | --- |
 | `default` | 输入控件。 |
 | `icon` | 图标内容。 |
+
+## Events
+
+无自定义事件。

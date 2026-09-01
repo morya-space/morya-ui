@@ -91,3 +91,7 @@ const pageSize = ref(10)
 | --- | --- |
 | `first` | 当前页首条记录的零基索引：`(page - 1) * rows`。 |
 | `pageCount` | 总页数。 |
+
+## Slots
+
+无插槽。

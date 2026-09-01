@@ -184,3 +184,13 @@ import { useMotion, useTheme } from '@well-insight/ui'
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
 ```
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 子组件树。 |

@@ -65,3 +65,9 @@ const c = ref(false)
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | Emitted when the value changes. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Button content. |

@@ -97,3 +97,7 @@ import { WiCard } from '@well-insight/ui'
 
 - 有 `title` 时默认作为容器 `aria-label`；复杂头部请用 `#header` 并保证标题可读。
 - 底部操作按钮应使用语义清晰的 `label` 文本。
+
+## Events
+
+无自定义事件。

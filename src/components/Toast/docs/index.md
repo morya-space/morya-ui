@@ -144,3 +144,7 @@ function onClose(message: ToastMessage) {
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `close` | `ToastMessage` | 点击关闭；受控模式下由调用方移除 |
+
+## Slots
+
+无插槽；通过 `messages` prop 或 toast API 驱动。

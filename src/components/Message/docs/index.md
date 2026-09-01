@@ -118,3 +118,7 @@ function showVNode() {
 ## Events
 
 `<WiMessage />` 宿主本身无 Vue 事件；请通过 `message.*` API 的返回值 `{ id, close }` 管理生命周期。
+
+## Slots
+
+无插槽；通过 `message.*` API 注入内容。

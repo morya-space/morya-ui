@@ -36,3 +36,13 @@ import { WiButton, WiFluid, WiInput } from '@well-insight/ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `as` | `string` | `'div'` | 根元素标签。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 撑满宽度的子内容。 |

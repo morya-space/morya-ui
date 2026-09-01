@@ -92,3 +92,7 @@ const events = [
 | `opposite` | Opposite-side content; shows `date` by default. |
 | `marker` | Custom node marker. |
 | `connector` | Custom connector line. |
+
+## Events
+
+No custom events.

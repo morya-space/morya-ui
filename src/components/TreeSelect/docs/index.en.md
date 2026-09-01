@@ -124,3 +124,10 @@ const options = [{ key: 'docs', label: 'Documents' }]
 | --- | --- | --- |
 | `update:modelValue` | `string \| string[] \| null` | Emitted when the selection changes. |
 | `clear` | — | Emitted when cleared. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `value` | Trigger display. |
+| `option` | Tree node `{ node }`. |

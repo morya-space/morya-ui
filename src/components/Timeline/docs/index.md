@@ -92,3 +92,7 @@ const events = [
 | `opposite` | 对侧内容，默认显示 `date`。 |
 | `marker` | 自定义节点圆点。 |
 | `connector` | 自定义连接线。 |
+
+## Events
+
+无自定义事件。

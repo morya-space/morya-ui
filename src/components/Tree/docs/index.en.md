@@ -160,3 +160,11 @@ const nodes = [
 | Event | Description |
 | --- | --- |
 | `update:checkedKeys` / `update:expandedKeys` / `check` / `node-expand` / `node-collapse` / `node-drop` | Interaction callbacks. |
+
+## Events
+
+| Event | Payload | Description |
+| --- | --- | --- |
+| `node-select` | `TreeNode` | Node selected. |
+| `node-expand` | `TreeNode` | Node expanded. |
+| `node-collapse` | `TreeNode` | Node collapsed. |

@@ -36,3 +36,13 @@ import { WiButton, WiFluid, WiInput } from '@well-insight/ui'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `as` | `string` | `'div'` | Root element tag. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Full-width child content. |

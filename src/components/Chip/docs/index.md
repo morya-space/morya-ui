@@ -49,3 +49,10 @@ import { WiChip } from '@well-insight/ui'
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `remove` | `MouseEvent` | 点击移除按钮时触发。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 标签内容。 |
+| `icon` | 前置图标。 |

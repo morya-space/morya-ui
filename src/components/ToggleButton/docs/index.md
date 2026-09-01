@@ -65,3 +65,9 @@ const c = ref(false)
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | 值变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 按钮内容。 |

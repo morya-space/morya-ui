@@ -75,3 +75,11 @@ const model = [
 
 - 顶层项使用按钮/链接语义；展开面板请确保键盘可到达子项。
 - 复杂站点导航建议配合 Skip link 与当前页 `aria-current`。
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+无插槽。

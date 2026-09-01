@@ -256,3 +256,16 @@ function loadMore(direction: ScrollbarDirection) {
 ### Expose
 
 `wrapRef`、`update`、`scrollTo`、`setScrollTop`、`setScrollLeft`、`handleScroll`
+
+## Events
+
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `scroll` | `{ scrollTop, scrollLeft }` | 滚动位置变化。 |
+| `end-reached` | `'top' \| 'bottom' \| 'left' \| 'right'` | 滚动到边缘。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 可滚动内容。 |

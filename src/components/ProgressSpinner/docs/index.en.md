@@ -62,3 +62,11 @@ const loading = ref(true)
 | `delay` | `number` | `0` | Delay before showing (ms). |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `description` | `string` | — | Caption under the spinner. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+No slots.

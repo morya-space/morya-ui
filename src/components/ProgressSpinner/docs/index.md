@@ -62,3 +62,11 @@ const loading = ref(true)
 | `delay` | `number` | `0` | 显示前延迟（ms）。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `description` | `string` | — | 遮罩下方说明。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+无插槽。

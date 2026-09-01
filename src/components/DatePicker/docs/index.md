@@ -192,3 +192,9 @@ const shortcuts = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `string \| [string, string] \| null` | 值变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `trigger` | 自定义触发器 `{ value, open }`。 |

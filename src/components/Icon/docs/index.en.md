@@ -211,3 +211,7 @@ When the default slot is present, it is **rendered first** and `name` is ignored
 | --- | --- |
 | `iconNames` | Array of all system icon names. |
 | `iconRegistry` / `getIconDefinition` / `isIconName` | Registry and type guards. |
+
+## Events
+
+No custom events.

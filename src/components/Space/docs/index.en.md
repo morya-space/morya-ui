@@ -99,3 +99,13 @@ import { WiSpace, WiTag } from '@well-insight/ui'
 | `wrap` | `boolean` | `true` | Allow wrapping. |
 | `wrapItem` | `boolean` | `true` | Wrap each child in a container. |
 | `itemClass` / `itemStyle` | — | — | Wrapper class / style when `wrapItem` is true. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Spaced children. |

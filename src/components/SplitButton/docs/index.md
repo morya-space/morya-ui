@@ -49,3 +49,9 @@ const items = [
 | --- | --- | --- |
 | `click` | `MouseEvent` | 主按钮点击。 |
 | `command` | `item` | 菜单项激活。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 主按钮内容。 |

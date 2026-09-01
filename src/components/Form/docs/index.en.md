@@ -175,3 +175,9 @@ const model = reactive({ city: '', zip: '' })
 | `validate` | `{ valid, errors }` |
 | `validate(name?)` | **Always resolves** `{ valid, errors }`; never rejects on failure |
 | `clearValidate(name?)` | Clears internal errors |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Form items. |

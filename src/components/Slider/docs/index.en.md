@@ -95,3 +95,7 @@ const value = ref(50)
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `number \| number[]` | Emitted when the value changes. |
+
+## Slots
+
+No slots.

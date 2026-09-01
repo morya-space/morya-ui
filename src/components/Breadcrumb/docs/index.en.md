@@ -64,3 +64,7 @@ const items = [
 | Slot | Description |
 | --- | --- |
 | `separator` | Custom separator. |
+
+## Events
+
+No custom events.

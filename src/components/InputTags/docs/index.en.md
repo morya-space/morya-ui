@@ -62,3 +62,9 @@ const tags = ref(['vue'])
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `string[]` | Tags changed. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `tag` | Tag `{ tag, index }`. |

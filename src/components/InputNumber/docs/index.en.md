@@ -84,3 +84,10 @@ const value = ref(1.25)
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `number \| null` | Value changed. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `prefix` | Prefix. |
+| `suffix` | Suffix. |

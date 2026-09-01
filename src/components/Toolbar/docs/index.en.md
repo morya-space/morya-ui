@@ -43,3 +43,7 @@ import { WiButton, WiToolbar } from '@well-insight/ui'
 | `start` | Start (left) area. |
 | `center` | Center area. |
 | `end` | End (right) area. |
+
+## Events
+
+No custom events.

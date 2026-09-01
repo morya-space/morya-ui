@@ -77,3 +77,7 @@ When open:
 
 - Panel uses `role="dialog"` and `aria-modal="true"`.
 - Focus moves to the search field on open; label the trigger control.
+
+## Slots
+
+No slots.

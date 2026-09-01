@@ -63,3 +63,7 @@ const code = ref('')
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `string` | Value changed. |
+
+## Slots
+
+No slots.

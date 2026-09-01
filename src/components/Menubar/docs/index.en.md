@@ -53,3 +53,10 @@ const model = [
 | --- | --- | --- |
 | `update:selectedKey` | `string \| null` | Selected item changed. |
 | `select` | `MenubarItem` | Emitted when a leaf is clicked. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `start` | Start of menubar. |
+| `end` | End of menubar. |

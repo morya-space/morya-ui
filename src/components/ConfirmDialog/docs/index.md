@@ -61,3 +61,9 @@ const visible = ref(false)
 | `update:modelValue` | `boolean` | 可见性变化。 |
 | `accept` | — | 点击确认。 |
 | `reject` | — | 点击取消或关闭。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 对话框正文。 |

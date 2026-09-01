@@ -75,3 +75,9 @@ const value = ref(2.5)
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `number` | Emitted when the rating changes. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `icon` | Custom star `{ active }`. |

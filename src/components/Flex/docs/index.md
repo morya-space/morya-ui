@@ -72,3 +72,13 @@ import { WiButton, WiFlex, WiTag } from '@well-insight/ui'
 | `reverse` | `boolean` | `false` | 主轴反向。 |
 | `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 子项间距（`gap`）。 |
 | `wrap` | `boolean` | `true` | 是否换行（纵向时强制不换行）。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 布局子节点。 |

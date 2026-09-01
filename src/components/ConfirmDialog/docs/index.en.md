@@ -61,3 +61,9 @@ const visible = ref(false)
 | `update:modelValue` | `boolean` | Visibility change. |
 | `accept` | — | Accept clicked. |
 | `reject` | — | Reject clicked or dialog closed. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Dialog body. |

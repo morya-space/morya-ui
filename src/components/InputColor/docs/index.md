@@ -60,3 +60,9 @@ const color = ref('#2563eb')
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `string` | 颜色变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `trigger` | 自定义颜色触发器。 |

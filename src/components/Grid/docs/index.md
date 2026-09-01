@@ -136,3 +136,13 @@ const collapsed = ref(true)
 | 插槽名 | 参数 | 说明 |
 | --- | --- | --- |
 | `default` | `{ overflow }` | 内容；`overflow` 表示是否有被折叠隐藏的项。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 栅格子项。 |

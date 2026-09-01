@@ -54,3 +54,7 @@ const value = ref('')
 | --- | --- |
 | `default` | Input control. |
 | `icon` | Icon content. |
+
+## Events
+
+No custom events.

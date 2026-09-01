@@ -38,3 +38,13 @@ const value = [
 | --- | --- | --- | --- |
 | `value` | `MeterGroupItem[]` | — | 分段数据。 |
 | `max` | `number` | 分段之和 | 总量上限。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `label` | 自定义标签 `{ meter }`。 |

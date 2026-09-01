@@ -46,3 +46,7 @@ const last = ref('')
 | Event | Prop | Description |
 | --- | --- | --- |
 | `command` | `string` | Submitted command. |
+
+## Slots
+
+No slots.

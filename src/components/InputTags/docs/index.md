@@ -62,3 +62,9 @@ const tags = ref(['vue'])
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `string[]` | 标签变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `tag` | 标签 `{ tag, index }`。 |

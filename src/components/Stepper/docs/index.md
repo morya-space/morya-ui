@@ -71,3 +71,9 @@ const steps = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `number` | 步骤变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `icon` | 步骤图标 `{ step, index }`。 |

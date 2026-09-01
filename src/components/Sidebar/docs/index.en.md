@@ -47,3 +47,13 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `SidebarItem[]` | `[]` | Menu items. |
 | `collapsed` | `boolean` | `false` | Icon-only mode. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Sidebar content. |

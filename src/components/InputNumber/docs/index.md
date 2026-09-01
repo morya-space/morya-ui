@@ -84,3 +84,10 @@ const value = ref(1.25)
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `number \| null` | 值变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `prefix` | 前缀。 |
+| `suffix` | 后缀。 |

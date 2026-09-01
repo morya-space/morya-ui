@@ -46,3 +46,9 @@ const images = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:activeIndex` | `number` | 索引变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `item` | 媒体项 `{ item, index }`。 |

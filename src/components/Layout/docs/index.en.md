@@ -318,3 +318,9 @@ import {
 | `WiLayoutContent` | Main content (fills leftover space by default). |
 | `WiLayoutFooter` | Footer bar. |
 | `WiLayoutSider` | Side panel. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Layout regions. |

@@ -134,3 +134,13 @@ const collapsed = ref(true)
 | Slot | Props | Description |
 | --- | --- | --- |
 | `default` | `{ overflow }` | Content; `overflow` is true when items are hidden. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Grid children. |

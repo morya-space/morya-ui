@@ -54,3 +54,9 @@ const value = [
 | --- | --- | --- |
 | `node-expand` | `TreeTableNode` | 节点展开。 |
 | `node-collapse` | `TreeTableNode` | 节点折叠。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `expansion` | 展开行 `{ row }`。 |

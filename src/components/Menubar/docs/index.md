@@ -53,3 +53,10 @@ const model = [
 | --- | --- | --- |
 | `update:selectedKey` | `string \| null` | 选中项变化。 |
 | `select` | `MenubarItem` | 点击叶子项。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `start` | 菜单栏起始区域。 |
+| `end` | 菜单栏末尾区域。 |

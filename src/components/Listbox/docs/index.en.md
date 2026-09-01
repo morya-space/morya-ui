@@ -50,3 +50,9 @@ const options = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | same as `modelValue` | Value changed. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `option` | Option `{ option }`. |

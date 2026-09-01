@@ -97,3 +97,7 @@ import { WiCard } from '@well-insight/ui'
 
 - When `title` is set it becomes the container `aria-label`; use `#header` for complex headers with readable titles.
 - Footer actions should use descriptive button labels.
+
+## Events
+
+No custom events.

@@ -144,3 +144,7 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 | Event | Payload | Description |
 | --- | --- | --- |
 | `close` | `ToastMessage` | Close clicked; remove it yourself in controlled mode |
+
+## Slots
+
+No slots; driven by the `messages` prop or toast API.

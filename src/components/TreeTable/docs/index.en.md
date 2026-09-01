@@ -54,3 +54,9 @@ const value = [
 | --- | --- | --- |
 | `node-expand` | `TreeTableNode` | Emitted when a node expands. |
 | `node-collapse` | `TreeTableNode` | Emitted when a node collapses. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `expansion` | Expanded row `{ row }`. |
