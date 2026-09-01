@@ -2,6 +2,7 @@
 import type { TabItem, TabsProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',
@@ -95,7 +96,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
         :aria-label="locale.prev"
         @click="scrollTabs(-160)"
       >
-        ‹
+        <WiIcon name="chevron-left" size="sm" />
       </button>
       <div ref="scroller" class="wi-tabs__scroller">
         <div class="wi-tabs__list" role="tablist" :aria-label="locale.tabs">
@@ -126,7 +127,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
               :disabled="tab.disabled"
               @click.stop="closeTab(tab)"
             >
-              ×
+              <WiIcon name="close" size="sm" />
             </button>
           </div>
         </div>
@@ -138,7 +139,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
         :aria-label="locale.next"
         @click="scrollTabs(160)"
       >
-        ›
+        <WiIcon name="chevron-right" size="sm" />
       </button>
       <button
         v-if="addable"
@@ -147,7 +148,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
         :aria-label="locale.addTab"
         @click="emit('add')"
       >
-        +
+        <WiIcon name="plus" size="sm" />
       </button>
       <div v-if="$slots.extra" class="wi-tabs__extra">
         <slot name="extra" />

@@ -2,12 +2,22 @@
     --wi-select-tag-gap: 0.15rem;
     --wi-select-tag-padding: 0.1rem 0.2rem 0.1rem 0.4rem;
     --wi-select-tag-remove-size: 1.1rem;
+    --wi-select-suffix-inset: var(--wi-control-padding-x-medium);
+    --wi-select-end-padding: calc(
+        var(--wi-control-affix-size) + var(--wi-select-suffix-inset)
+    );
     position: relative;
     width: 100%;
 }
 
-.wi-select__control--clearable .wi-select {
-    padding-right: var(--wi-control-affix-gap);
+.wi-select__control:has(.wi-select--small),
+.wi-select__control:has(.wi-select--sm) {
+    --wi-select-suffix-inset: var(--wi-control-padding-x-small);
+}
+
+.wi-select__control:has(.wi-select--large),
+.wi-select__control:has(.wi-select--lg) {
+    --wi-select-suffix-inset: var(--wi-control-padding-x-large);
 }
 
 .wi-select {
@@ -15,9 +25,9 @@
     cursor: pointer;
     display: flex;
     font-size: var(--wi-control-font-medium);
-    justify-content: space-between;
     min-height: var(--wi-control-height-medium);
     padding: 0 var(--wi-control-padding-x-medium);
+    padding-right: var(--wi-select-end-padding);
     position: relative;
     text-align: left;
 }
@@ -26,7 +36,8 @@
 .wi-select--sm {
     font-size: var(--wi-control-font-small);
     min-height: var(--wi-control-height-small);
-    padding: 0 var(--wi-control-padding-x-small);
+    padding-left: var(--wi-control-padding-x-small);
+    padding-right: var(--wi-select-end-padding);
 }
 
 .wi-select--normal {
@@ -38,7 +49,8 @@
 .wi-select--lg {
     font-size: var(--wi-control-font-large);
     min-height: var(--wi-control-height-large);
-    padding: 0 var(--wi-control-padding-x-large);
+    padding-left: var(--wi-control-padding-x-large);
+    padding-right: var(--wi-select-end-padding);
 }
 
 .wi-select--multiple {
@@ -153,10 +165,23 @@
 }
 
 .wi-select__value {
+    flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.wi-select__suffix {
+    align-items: center;
+    display: block;
+    height: var(--wi-control-affix-size);
+    pointer-events: none;
+    position: absolute;
+    right: var(--wi-select-suffix-inset);
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--wi-control-affix-size);
 }
 
 .wi-select__clear {
@@ -167,16 +192,22 @@
     color: var(--wi-color-text-muted);
     cursor: pointer;
     display: flex;
-    font-size: var(--wi-font-size-lg);
-    height: var(--wi-control-affix-size);
-    justify-content: center;
+    height: 100%;
+    inset: 0;
+    justify-content: flex-end;
+    opacity: 0;
     padding: 0;
+    pointer-events: none;
     position: absolute;
-    right: var(--wi-control-affix-size);
-    top: 50%;
-    transform: translateY(-50%);
-    width: var(--wi-control-affix-size);
+    transition: opacity var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 100%;
     z-index: 1;
+}
+
+.wi-select__control--clearable:not(.wi-select__control--open):hover .wi-select__clear,
+.wi-select__control--clearable:not(.wi-select__control--open) .wi-select__clear:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .wi-select__clear:focus-visible {
@@ -185,19 +216,28 @@
 }
 
 .wi-select__indicator {
-    border-bottom: 1.5px solid currentColor;
-    border-right: 1.5px solid currentColor;
+    align-items: center;
     color: var(--wi-color-text-muted);
+    display: inline-flex;
     flex: 0 0 auto;
-    height: 0.48rem;
-    margin-left: var(--wi-space-3);
-    transform: rotate(45deg) translateY(-0.15rem);
-    transition: transform var(--wi-motion-fast) var(--wi-motion-ease);
-    width: 0.48rem;
+    justify-content: flex-end;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+        opacity var(--wi-motion-fast) var(--wi-motion-ease),
+        transform var(--wi-motion-fast) var(--wi-motion-ease);
 }
 
-.wi-select--open .wi-select__indicator {
-    transform: rotate(225deg) translateY(-0.1rem);
+.wi-select__control--clearable:not(.wi-select__control--open):hover .wi-select__indicator,
+.wi-select__control--clearable:not(.wi-select__control--open) .wi-select__clear:focus-visible ~ .wi-select__indicator {
+    opacity: 0;
+}
+
+.wi-select__indicator--open {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .wi-select__menu {
@@ -295,8 +335,7 @@
 
 .wi-select__check {
     color: var(--wi-color-primary);
-    font-size: 0.9rem;
-    font-weight: 700;
+    flex: 0 0 auto;
 }
 
 .wi-select__required-input {

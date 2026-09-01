@@ -193,7 +193,7 @@ onBeforeUnmount(clearPeekListeners)
         :disabled="disabled || readonly"
         @click="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
       <button
         v-if="toggleMask"

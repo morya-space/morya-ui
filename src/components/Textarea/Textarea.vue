@@ -8,6 +8,7 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -171,7 +172,7 @@ onMounted(() => {
         :disabled="disabled || readonly"
         @click="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
     </div>
     <div v-if="feedbackText || resolvedShowCount" class="wi-textarea-field__meta">

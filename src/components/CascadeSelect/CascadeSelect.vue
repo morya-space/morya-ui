@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
@@ -121,7 +122,9 @@ onBeforeUnmount(() => {
       @click="toggle"
     >
       <span class="wi-cascadeselect__label">{{ displayLabel }}</span>
-      <span class="wi-cascadeselect__caret" aria-hidden="true">▾</span>
+      <span class="wi-cascadeselect__caret" aria-hidden="true">
+        <WiIcon name="chevron-down" size="sm" />
+      </span>
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
@@ -152,7 +155,12 @@ onBeforeUnmount(() => {
                 @click="enterLevel(option, columnIndex)"
               >
                 <span>{{ option.label }}</span>
-                <span v-if="option.children?.length" aria-hidden="true">›</span>
+                <WiIcon
+                  v-if="option.children?.length"
+                  name="chevron-right"
+                  size="sm"
+                  aria-hidden="true"
+                />
               </button>
             </li>
           </ul>

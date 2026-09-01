@@ -55,7 +55,7 @@ function onClose(event: MouseEvent) {
       :aria-label="locale.close"
       @click="onClose"
     >
-      ×
+      <WiIcon name="close" size="sm" />
     </button>
   </span>
 </template>

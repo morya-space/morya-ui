@@ -61,6 +61,7 @@ describe('wiSelect', () => {
     const wrapper = mount(WiSelect, {
       props: { options, modelValue: 'sm', showClear: true, teleport: false },
     })
+    await wrapper.get('.wi-select__control').trigger('mouseenter')
     await wrapper.get('.wi-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
     expect(wrapper.emitted('clear')).toHaveLength(1)
@@ -129,6 +130,7 @@ describe('wiSelect', () => {
     const wrapper = mount(WiSelect, {
       props: { options, multiple: true, modelValue: ['sm', 2], showClear: true, teleport: false },
     })
+    await wrapper.get('.wi-select__control').trigger('mouseenter')
     await wrapper.get('.wi-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[[]]])
   })

@@ -45,7 +45,7 @@ function handleRemove(event: MouseEvent) {
       :aria-label="locale.remove"
       @click="handleRemove"
     >
-      ×
+      <WiIcon name="close" size="sm" />
     </button>
   </span>
 </template>

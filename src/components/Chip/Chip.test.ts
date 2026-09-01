@@ -21,7 +21,7 @@ describe('wiChip', () => {
     const wrapper = mount(WiChip, { props: { label: 'Tag', removable: true } })
     await wrapper.get('.wi-chip__remove').trigger('click')
     expect(wrapper.emitted('remove')).toHaveLength(1)
-    expect(wrapper.get('.wi-chip__remove').text()).toBe('×')
+    expect(wrapper.get('.wi-chip__remove .wi-icon').exists()).toBe(true)
   })
 
   it('does not emit remove while disabled', async () => {

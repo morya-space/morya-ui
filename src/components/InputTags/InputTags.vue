@@ -2,6 +2,7 @@
 import type { InputTagsProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
   modelValue: () => [],
@@ -101,7 +102,7 @@ function onBlur() {
         :aria-label="locale.removeTag"
         @click="removeTag(index)"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
     </span>
     <input

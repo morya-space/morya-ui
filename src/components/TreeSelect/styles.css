@@ -62,12 +62,21 @@
 }
 
 .wi-treeselect__clear {
+    align-items: center;
     background: transparent;
     border: 0;
     color: var(--wi-color-text-muted);
     cursor: pointer;
+    display: inline-flex;
     font: inherit;
+    justify-content: center;
     line-height: 1;
+}
+
+.wi-treeselect__caret {
+    color: var(--wi-color-text-muted);
+    display: inline-flex;
+    flex: 0 0 auto;
 }
 
 .wi-treeselect__filter {
