@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { IconName } from '../Icon/types'
 import type {
   TableColumn,
   TableEmits,
@@ -15,6 +14,7 @@ import WiCheckbox from '../Checkbox/Checkbox.vue'
 import WiIcon from '../Icon/Icon.vue'
 import WiPagination from '../Pagination/Pagination.vue'
 import WiProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import WiScrollbar from '../Scrollbar/Scrollbar.vue'
 import { computeColumnLayout, computeFixedOffsets, TABLE_EXPAND_WIDTH, TABLE_SELECTION_WIDTH } from './layout'
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -80,12 +80,16 @@ function rowIdentity(row: Record<string, unknown>, index: number) {
   return row[props.rowKey] ?? index
 }
 
-const scrollRef = ref<HTMLElement | null>(null)
+const scrollRef = ref<InstanceType<typeof WiScrollbar> | null>(null)
 const containerWidth = ref(0)
 let resizeObserver: ResizeObserver | null = null
 
+function scrollContainer() {
+  return scrollRef.value?.wrapRef ?? null
+}
+
 onMounted(() => {
-  const el = scrollRef.value
+  const el = scrollContainer()
   if (!el) return
   const measure = () => {
     containerWidth.value = el.clientWidth
@@ -266,11 +270,26 @@ function toggleSort(columnKey: string, sortable?: boolean) {
   emit('sort', { sortField: nextField, sortOrder: nextOrder })
 }
 
-function sortIndicator(columnKey: string): IconName {
-  if (innerField.value !== columnKey) return 'sort'
-  if (innerOrder.value === 'asc') return 'arrow-up'
-  if (innerOrder.value === 'desc') return 'arrow-down'
-  return 'sort'
+function headerCellClass(column: TableColumn) {
+  return [
+    'wi-table__cell',
+    `wi-table__cell--${column.align ?? 'start'}`,
+    fixedClass(column),
+    {
+      'wi-table__cell--sortable': column.sortable,
+      'wi-table__cell--sorted': column.sortable && innerField.value === column.key && !!innerOrder.value,
+      'wi-table__cell--ascending': innerField.value === column.key && innerOrder.value === 'asc',
+      'wi-table__cell--descending': innerField.value === column.key && innerOrder.value === 'desc',
+    },
+  ]
+}
+
+function bodyCellClass(column: TableColumn) {
+  return [
+    'wi-table__cell',
+    `wi-table__cell--${column.align ?? 'start'}`,
+    fixedClass(column),
+  ]
 }
 
 function setFilter(key: string, value: string | number | boolean | null) {
@@ -328,6 +347,7 @@ function fixedClass(column: TableColumn) {
   <div
     class="wi-table-wrapper"
     :class="[
+      `wi-table-wrapper--${sizeClass}`,
       {
         'wi-table-wrapper--loading': loading,
         'wi-table-wrapper--bordered': bordered,
@@ -336,10 +356,13 @@ function fixedClass(column: TableColumn) {
       },
     ]"
   >
-    <div
+    <WiScrollbar
       ref="scrollRef"
       class="wi-table-scroll"
       :class="{ 'wi-table-scroll--x': layout.scrollX }"
+      wrap-class="wi-table-scroll__wrap"
+      :native="false"
+      trigger="hover"
     >
       <table
         class="wi-table"
@@ -357,7 +380,7 @@ function fixedClass(column: TableColumn) {
           <tr>
             <th
               v-if="selectionMode"
-              class="wi-table__selection wi-table__cell--fixed-left"
+              class="wi-table__cell wi-table__selection wi-table__cell--fixed-left"
               scope="col"
               :style="selectionStyle()"
             >
@@ -370,7 +393,7 @@ function fixedClass(column: TableColumn) {
             </th>
             <th
               v-if="expandable"
-              class="wi-table__expand wi-table__cell--fixed-left"
+              class="wi-table__cell wi-table__expand wi-table__cell--fixed-left"
               scope="col"
               :style="expandStyle()"
             />
@@ -378,11 +401,7 @@ function fixedClass(column: TableColumn) {
               v-for="column in columns"
               :key="column.key"
               scope="col"
-              :class="[
-                `wi-table__cell--${column.align ?? 'start'}`,
-                fixedClass(column),
-                { 'wi-table__th--sortable': column.sortable },
-              ]"
+              :class="headerCellClass(column)"
               :style="columnStyle(column)"
               :aria-sort="
                 column.sortable && innerField === column.key
@@ -403,12 +422,13 @@ function fixedClass(column: TableColumn) {
                   class="wi-table__sort"
                   @click="toggleSort(column.key, true)"
                 >
-                  <span>{{ column.label }}</span>
-                  <span class="wi-table__sort-icon" aria-hidden="true">
-                    <WiIcon :name="sortIndicator(column.key)" size="sm" />
+                  <span class="wi-table__cell-inner">{{ column.label }}</span>
+                  <span class="wi-table__caret-wrapper" aria-hidden="true">
+                    <i class="wi-table__sort-caret wi-table__sort-caret--asc" />
+                    <i class="wi-table__sort-caret wi-table__sort-caret--desc" />
                   </span>
                 </button>
-                <span v-else>{{ column.label }}</span>
+                <span v-else class="wi-table__cell-inner">{{ column.label }}</span>
                 <div v-if="column.filterable" class="wi-table__filter">
                   <button
                     type="button"
@@ -457,65 +477,72 @@ function fixedClass(column: TableColumn) {
               :class="{
                 'wi-table__row--selected': isSelected(row, index),
                 'wi-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
+                'wi-table__row--striped': striped && index % 2 === 1,
               }"
               @click="onRowClick(row, index)"
             >
               <td
                 v-if="selectionMode"
-                class="wi-table__selection wi-table__cell--fixed-left"
+                class="wi-table__cell wi-table__selection wi-table__cell--fixed-left"
                 :style="selectionStyle()"
                 @click.stop
               >
-                <WiCheckbox
-                  :model-value="isSelected(row, index)"
-                  :aria-label="formatLocale(locale.selectRow, { index: index + 1 })"
-                  @update:model-value="toggleRowSelection(row, index)"
-                />
+                <div class="wi-table__cell-inner wi-table__cell-inner--center">
+                  <WiCheckbox
+                    :model-value="isSelected(row, index)"
+                    :aria-label="formatLocale(locale.selectRow, { index: index + 1 })"
+                    @update:model-value="toggleRowSelection(row, index)"
+                  />
+                </div>
               </td>
               <td
                 v-if="expandable"
-                class="wi-table__expand wi-table__cell--fixed-left"
+                class="wi-table__cell wi-table__expand wi-table__cell--fixed-left"
                 :style="expandStyle()"
                 @click.stop
               >
-                <button
-                  v-if="canExpand(row)"
-                  type="button"
-                  class="wi-table__expand-btn"
-                  :aria-expanded="isRowExpanded(row, index)"
-                  :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
-                  @click="toggleExpand(row, index)"
-                >
-                  <WiIcon
-                    :name="isRowExpanded(row, index) ? 'chevron-down' : 'chevron-right'"
-                    size="sm"
-                  />
-                </button>
+                <div class="wi-table__cell-inner wi-table__cell-inner--center">
+                  <button
+                    v-if="canExpand(row)"
+                    type="button"
+                    class="wi-table__expand-btn"
+                    :aria-expanded="isRowExpanded(row, index)"
+                    :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
+                    @click="toggleExpand(row, index)"
+                  >
+                    <WiIcon
+                      :name="isRowExpanded(row, index) ? 'chevron-down' : 'chevron-right'"
+                      size="sm"
+                    />
+                  </button>
+                </div>
               </td>
               <td
                 v-for="column in columns"
                 :key="column.key"
-                :class="[`wi-table__cell--${column.align ?? 'start'}`, fixedClass(column)]"
+                :class="bodyCellClass(column)"
                 :style="columnStyle(column)"
               >
-                <slot name="body-cell" :row="row" :column="column" :value="row[column.key]">
-                  <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
-                    <WiRenderableView v-if="column.render" :value="column.render(row, column)" />
-                    <template v-else>
-                      {{ row[column.key] }}
-                    </template>
+                <div class="wi-table__cell-inner">
+                  <slot name="body-cell" :row="row" :column="column" :value="row[column.key]">
+                    <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
+                      <WiRenderableView v-if="column.render" :value="column.render(row, column)" />
+                      <template v-else>
+                        {{ row[column.key] }}
+                      </template>
+                    </slot>
                   </slot>
-                </slot>
+                </div>
               </td>
             </tr>
-            <tr v-if="expandable && isRowExpanded(row, index)">
-              <td class="wi-table__expansion" :colspan="colSpan">
+            <tr v-if="expandable && isRowExpanded(row, index)" class="wi-table__row--expanded">
+              <td class="wi-table__cell wi-table__expansion" :colspan="colSpan">
                 <slot name="expansion" :row="row" />
               </td>
             </tr>
           </template>
           <tr v-if="showEmpty">
-            <td class="wi-table__empty" :colspan="colSpan">
+            <td class="wi-table__cell wi-table__empty" :colspan="colSpan">
               <slot name="empty">
                 <div class="wi-table__empty-content">
                   <div class="wi-table__empty-glyph" aria-hidden="true">
@@ -533,7 +560,7 @@ function fixedClass(column: TableColumn) {
           </tr>
         </tbody>
       </table>
-    </div>
+    </WiScrollbar>
 
     <div v-if="paginator" class="wi-table__paginator">
       <WiPagination
