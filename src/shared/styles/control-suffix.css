@@ -10,13 +10,15 @@
 
 .wi-select__control:has(.wi-select--small),
 .wi-select__control:has(.wi-select--sm),
-.wi-select__control:has(.wi-treeselect--small) {
+.wi-select__control:has(.wi-treeselect--small),
+.wi-select__control:has(.wi-cascadeselect--small) {
     --wi-control-suffix-inset: var(--wi-control-padding-x-small);
 }
 
 .wi-select__control:has(.wi-select--large),
 .wi-select__control:has(.wi-select--lg),
-.wi-select__control:has(.wi-treeselect--large) {
+.wi-select__control:has(.wi-treeselect--large),
+.wi-select__control:has(.wi-cascadeselect--large) {
     --wi-control-suffix-inset: var(--wi-control-padding-x-large);
 }
 

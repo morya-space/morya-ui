@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<AutoCompleteProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'complete', query: string): void
+  (event: 'clear'): void
 }>()
 
 const config = useWiConfig()
@@ -93,6 +94,7 @@ function select(item: AutoCompleteOption) {
 function clear() {
   if (props.disabled) return
   emit('update:modelValue', '')
+  emit('clear')
   requestComplete('')
 }
 

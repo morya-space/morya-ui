@@ -192,6 +192,7 @@ const shortcuts = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `string \| [string, string] \| null` | 值变化。 |
+| `clear` | — | 点击清除时触发。 |
 
 ## Slots
 

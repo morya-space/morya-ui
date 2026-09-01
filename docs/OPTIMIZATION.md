@@ -84,7 +84,7 @@
 - [x] 抽取 `shared/styles/form-tags.css`（Select/TreeSelect 标签 chip）
 - [x] 抽取 `shared/styles/control-suffix.css`（Select/TreeSelect hover 单槽 clear + chevron）
 - [x] TreeSelect suffix 对齐 Select（hover 切换 clear/chevron）
-- [ ] clearable API 统一（`showClear` 别名、`CascadeSelect` 补 clearable）
+- [x] clearable API 统一（Select `clearable` 别名、CascadeSelect 补 clearable + field props、`clear` 事件对齐）
 - [ ] TreeSelect / CascadeSelect / DatePicker 键盘与 ARIA 对标 Select
 
 ---
@@ -110,7 +110,7 @@
 | 2026-09-01 | 五 | 剩余浮层组件统一接入 `computeFloatingOverlayStyle` |
 | 2026-09-01 | 五 | 16 个子组件补充独立单元测试（437 tests） |
 | 2026-09-01 | 二 | docs 构建 codeSplitting + manifest；主入口 98→39KB |
-| 2026-09-01 | 六 | WiIcon 全局扫尾；shared form-tags/control-suffix；TreeSelect suffix 对齐 Select |
+| 2026-09-01 | 六 | clearable API 统一；CascadeSelect suffix/clearable；AutoComplete/DatePicker `clear` 事件 |
 
 ---
 

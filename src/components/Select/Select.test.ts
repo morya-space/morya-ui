@@ -67,6 +67,16 @@ describe('wiSelect', () => {
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
+  it('supports clearable as an alias for showClear', async () => {
+    const wrapper = mount(WiSelect, {
+      props: { options, modelValue: 'sm', clearable: true, teleport: false },
+    })
+    await wrapper.get('.wi-select__control').trigger('mouseenter')
+    await wrapper.get('.wi-select__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
+  })
+
   it('filters options by label and shows empty message', async () => {
     const wrapper = mount(WiSelect, {
       props: {

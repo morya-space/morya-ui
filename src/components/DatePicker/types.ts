@@ -40,4 +40,5 @@ export interface DatePickerProps {
 
 export interface DatePickerEmits {
   (event: 'update:modelValue', value: DatePickerModel): void
+  (event: 'clear'): void
 }

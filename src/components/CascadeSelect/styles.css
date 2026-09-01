@@ -7,6 +7,17 @@
     position: relative;
 }
 
+.wi-cascadeselect__control {
+    display: inline-block;
+    max-width: 100%;
+    min-width: var(--wi-cascadeselect-min-width);
+}
+
+.wi-select-field--fluid .wi-cascadeselect__control {
+    min-width: 0;
+    width: 100%;
+}
+
 .wi-cascadeselect__trigger {
     align-items: center;
     background: var(--wi-color-surface);
@@ -18,29 +29,33 @@
     display: inline-flex;
     font: inherit;
     font-size: var(--wi-control-font-medium);
-    gap: var(--wi-space-2);
-    justify-content: space-between;
     min-height: var(--wi-control-height-medium);
-    min-width: var(--wi-cascadeselect-min-width);
     padding: 0 var(--wi-control-padding-x-medium);
+    padding-right: var(--wi-control-end-padding);
     width: 100%;
 }
 
 .wi-cascadeselect--small .wi-cascadeselect__trigger {
     font-size: var(--wi-control-font-small);
     min-height: var(--wi-control-height-small);
-    padding: 0 var(--wi-control-padding-x-small);
+    padding-left: var(--wi-control-padding-x-small);
+    padding-right: var(--wi-control-end-padding);
 }
 
 .wi-cascadeselect--large .wi-cascadeselect__trigger {
     font-size: var(--wi-control-font-large);
     min-height: var(--wi-control-height-large);
-    padding: 0 var(--wi-control-padding-x-large);
+    padding-left: var(--wi-control-padding-x-large);
+    padding-right: var(--wi-control-end-padding);
 }
 
 .wi-cascadeselect__trigger:focus-visible {
     box-shadow: var(--wi-focus-shadow);
     outline: none;
+}
+
+.wi-cascadeselect__trigger--invalid {
+    border-color: var(--wi-color-danger);
 }
 
 .wi-cascadeselect--disabled .wi-cascadeselect__trigger {
@@ -52,22 +67,13 @@
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
+    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-align: left;
 }
 
-.wi-cascadeselect__caret {
-    align-items: center;
+.wi-cascadeselect__trigger--placeholder .wi-cascadeselect__label {
     color: var(--wi-color-text-muted);
-    display: inline-flex;
-    flex: 0 0 auto;
-    justify-content: center;
-    transition: transform var(--wi-motion-fast) var(--wi-motion-ease);
-}
-
-.wi-cascadeselect--open .wi-cascadeselect__caret {
-    transform: rotate(180deg);
 }
 
 .wi-cascadeselect__panel {

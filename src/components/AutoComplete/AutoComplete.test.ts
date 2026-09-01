@@ -56,5 +56,6 @@ describe('wiAutoComplete', () => {
     await wrapper.setProps({ modelValue: 'apple' })
     await wrapper.get('.wi-autocomplete__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([''])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 })

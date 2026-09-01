@@ -38,7 +38,7 @@ const options = [
 
 ## Clearable
 
-`showClear` 在已选值时显示清除按钮。
+`showClear`（或别名 `clearable`）在已选值时显示清除按钮。
 
 ```vue preview
 <script setup lang="ts">
@@ -298,6 +298,7 @@ const options = [
 | `loading` | `boolean` | `false` | 异步加载中。 |
 | `maxTagCount` | `number` | — | 多选时最多展示的标签数，其余折叠为 +N。 |
 | `showClear` | `boolean` | `false` | 有值时显示清除按钮。 |
+| `clearable` | `boolean` | `false` | `showClear` 的别名。 |
 | `emptyMessage` | `string` | — | 空选项文案；默认取 `locale.emptyOptions`。 |
 | `filter` | `boolean` | `false` | 打开菜单时显示筛选输入。 |
 | `teleport` | `boolean` | `true` | 菜单 Teleport；默认挂到 `body`。 |

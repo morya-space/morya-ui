@@ -192,6 +192,7 @@ const shortcuts = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `string \| [string, string] \| null` | Value change. |
+| `clear` | — | Fired when the clear button is clicked. |
 
 ## Slots
 

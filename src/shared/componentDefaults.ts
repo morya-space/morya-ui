@@ -38,7 +38,9 @@ export interface WiComponentDefaultMap {
   Select?: {
     size?: WiSizeInput
     fluid?: boolean
+    /** @deprecated Prefer `clearable`. */
     showClear?: boolean
+    clearable?: boolean
     filter?: boolean
     multiple?: boolean
     tag?: boolean
@@ -57,8 +59,8 @@ export interface WiComponentDefaultMap {
   DatePicker?: { size?: WiSizeInput }
   Table?: { size?: WiSizeInput }
   AutoComplete?: { size?: WiSizeInput }
-  CascadeSelect?: { size?: WiSizeInput }
-  TreeSelect?: { size?: WiSizeInput }
+  CascadeSelect?: { size?: WiSizeInput; fluid?: boolean; clearable?: boolean }
+  TreeSelect?: { size?: WiSizeInput; clearable?: boolean }
   SplitButton?: { size?: WiSizeInput }
   SelectButton?: { size?: WiSizeInput }
   ToggleButton?: { size?: WiSizeInput }
