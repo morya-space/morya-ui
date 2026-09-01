@@ -38,5 +38,6 @@ description: Well Insight 是什么、适合谁用。
 - [指南](/docs/guide)：目录约定与文档写法
 - [主题](/docs/theme)：亮暗色与动效
 - [全局配置](/docs/config)：`ConfigProvider` / `createWellInsight`
+- [API 迁移](/docs/migration)：已弃用 Props 对照
 - [MCP](/docs/mcp)：可选 AI 文档检索服务
 - [组件](/components)：浏览全部组件与 API
