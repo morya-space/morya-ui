@@ -1,4 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { listDocumentedComponentNames } from './docs/loadComponentDocs'
+
+const LEGACY_COMPONENT_NAMES = new Set(
+  listDocumentedComponentNames().map((name) => name.toLowerCase()),
+)
 
 const router = createRouter({
   history: createWebHistory(),
@@ -33,12 +38,20 @@ const router = createRouter({
       component: () => import('./views/ChangelogView.vue'),
     },
     {
-      // 兼容旧路径 /Button → /components/Button
+      // 兼容旧路径 /Button → /components/Button（仅已知组件名）
       path: '/:component',
-      redirect: (to) => ({
-        name: 'component-doc',
-        params: { component: String(to.params.component) },
-      }),
+      redirect: (to) => {
+        const name = String(to.params.component ?? '')
+        if (LEGACY_COMPONENT_NAMES.has(name.toLowerCase())) {
+          return { name: 'component-doc', params: { component: name } }
+        }
+        return { name: 'not-found' }
+      },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('./views/NotFoundView.vue'),
     },
   ],
   scrollBehavior(to) {

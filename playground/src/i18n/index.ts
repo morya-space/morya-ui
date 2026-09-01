@@ -100,6 +100,9 @@ const messages = {
     emptySection: '该版本暂无分类条目。',
     noReleases: '暂无版本记录',
     noReleasesHint: '请先运行 pnpm release 生成 CHANGELOG。',
+    notFoundTitle: '页面未找到',
+    notFoundBody: '你访问的地址不存在，或已被移动。',
+    notFoundHome: '返回首页',
     guideTitles: {
       introduction: '介绍',
       'quick-start': '快速开始',
@@ -207,6 +210,9 @@ const messages = {
     emptySection: 'No entries in this section.',
     noReleases: 'No releases yet',
     noReleasesHint: 'Run pnpm release to generate the changelog.',
+    notFoundTitle: 'Page not found',
+    notFoundBody: 'The page you requested does not exist or has moved.',
+    notFoundHome: 'Back to home',
     guideTitles: {
       introduction: 'Introduction',
       'quick-start': 'Quick start',
