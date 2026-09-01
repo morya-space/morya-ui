@@ -10,7 +10,7 @@ import {
 } from './catalog.js'
 import { componentDecisions, findDecision, scoreDecision } from './decisions.js'
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
-import { countCatalogResources } from './resources.js'
+import { countCatalogResourceTemplates, countCatalogResources } from './resources.js'
 
 function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
   const pairedTagRe = /<WiButton\b([^>]*)>([\s\S]*?)<\/WiButton>/gi
@@ -961,6 +961,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         patterns: pagePatterns.length,
         decisions: componentDecisions.length,
         resources: countCatalogResources(catalog),
+        resourceTemplates: countCatalogResourceTemplates(),
       },
       health: {
         ok: patternReferences.length === 0,

@@ -161,7 +161,7 @@ describe('@well-insight/ui-mcp handlers', () => {
   it('exposes catalog health in version metadata', () => {
     const result = read<{
       health: { ok: boolean; patternReferences: unknown[] }
-      counts: { patterns: number; decisions: number; resources: number }
+      counts: { patterns: number; decisions: number; resources: number; resourceTemplates: number }
       tools: string[]
     }>(handlers.version())
 
@@ -170,6 +170,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     expect(result.counts.patterns).toBeGreaterThan(0)
     expect(result.counts.decisions).toBeGreaterThan(0)
     expect(result.counts.resources).toBeGreaterThan(100)
+    expect(result.counts.resourceTemplates).toBe(3)
     expect(result.tools).toHaveLength(13)
     expect(result.tools).not.toContain('create_page')
   })

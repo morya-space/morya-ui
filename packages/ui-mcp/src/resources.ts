@@ -1,10 +1,38 @@
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import type { Catalog, Locale } from './catalog.js'
+import { ResourceTemplate, type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import type { Catalog, ComponentRecord, Locale } from './catalog.js'
 import { designRules } from './patterns.js'
 
 const DOC_LOCALES: Locale[] = ['zh-CN', 'en-US']
+const RESOURCE_TEMPLATE_COUNT = 3
 
-export function registerCatalogResources(server: McpServer, catalog: Catalog) {
+function filterCompletion(candidates: string[], value?: string): string[] {
+  const query = (value ?? '').trim().toLowerCase()
+  if (!query) return candidates
+  return candidates.filter((item) => item.toLowerCase().startsWith(query))
+}
+
+function findComponentById(catalog: Catalog, componentId: string): ComponentRecord | undefined {
+  return catalog.components.find((item) => item.id === componentId)
+}
+
+function findGuideById(catalog: Catalog, guideId: string) {
+  return catalog.guides.find((item) => item.id === guideId)
+}
+
+function componentApiPayload(component: ComponentRecord) {
+  return {
+    id: component.id,
+    exportName: component.exportName,
+    category: component.category,
+    import: component.import,
+    props: component.props,
+    events: component.events,
+    slots: component.slots,
+    methods: component.methods,
+  }
+}
+
+function registerStaticResources(server: McpServer, catalog: Catalog) {
   server.registerResource(
     'catalog-index',
     'wi://catalog/index.json',
@@ -64,81 +92,143 @@ export function registerCatalogResources(server: McpServer, catalog: Catalog) {
       ],
     }),
   )
+}
 
-  for (const component of catalog.components) {
-    for (const locale of DOC_LOCALES) {
-      const doc = component.locales[locale]
-      if (!doc?.markdown) continue
+function registerComponentDocTemplate(server: McpServer, catalog: Catalog) {
+  const componentIds = catalog.components.map((item) => item.id)
 
-      const resourceUri = `wi://components/${component.id}/docs/${locale}`
-      server.registerResource(
-        `component-${component.id}-docs-${locale}`,
-        resourceUri,
-        {
-          title: `${component.exportName} documentation (${locale})`,
-          description: doc.description || component.description,
-          mimeType: 'text/markdown',
-        },
-        async (uri) => ({
-          contents: [{ uri: uri.href, mimeType: 'text/markdown', text: doc.markdown }],
-        }),
-      )
-    }
-
-    const apiUri = `wi://components/${component.id}/api.json`
-    server.registerResource(
-      `component-${component.id}-api`,
-      apiUri,
-      {
-        title: `${component.exportName} API`,
-        description: `Props, events, and slots for ${component.exportName}.`,
-        mimeType: 'application/json',
+  server.registerResource(
+    'component-docs',
+    new ResourceTemplate('wi://components/{component}/docs/{locale}', {
+      list: async () => ({
+        resources: catalog.components.flatMap((component) =>
+          DOC_LOCALES.filter((locale) => component.locales[locale]?.markdown).map((locale) => {
+            const doc = component.locales[locale]!
+            return {
+              uri: `wi://components/${component.id}/docs/${locale}`,
+              name: `${component.id}-docs-${locale}`,
+              title: `${component.exportName} documentation (${locale})`,
+              description: doc.description || component.description,
+              mimeType: 'text/markdown',
+            }
+          }),
+        ),
+      }),
+      complete: {
+        component: async (value) => filterCompletion(componentIds, value),
+        locale: async (value) => filterCompletion([...DOC_LOCALES], value),
       },
-      async (uri) => ({
+    }),
+    {
+      title: 'Component documentation',
+      description: 'Markdown documentation for a @well-insight/ui component.',
+      mimeType: 'text/markdown',
+    },
+    async (uri, variables) => {
+      const component = findComponentById(catalog, String(variables.component))
+      const locale = String(variables.locale) as Locale
+      const doc = component?.locales[locale]
+      if (!component || !doc?.markdown) {
+        throw new Error(`Component documentation not found: ${uri.href}`)
+      }
+      return {
+        contents: [{ uri: uri.href, mimeType: 'text/markdown', text: doc.markdown }],
+      }
+    },
+  )
+}
+
+function registerComponentApiTemplate(server: McpServer, catalog: Catalog) {
+  const componentIds = catalog.components.map((item) => item.id)
+
+  server.registerResource(
+    'component-api',
+    new ResourceTemplate('wi://components/{component}/api.json', {
+      list: async () => ({
+        resources: catalog.components.map((component) => ({
+          uri: `wi://components/${component.id}/api.json`,
+          name: `${component.id}-api`,
+          title: `${component.exportName} API`,
+          description: `Props, events, and slots for ${component.exportName}.`,
+          mimeType: 'application/json',
+        })),
+      }),
+      complete: {
+        component: async (value) => filterCompletion(componentIds, value),
+      },
+    }),
+    {
+      title: 'Component API',
+      description: 'Props, events, slots, and methods for a @well-insight/ui component.',
+      mimeType: 'application/json',
+    },
+    async (uri, variables) => {
+      const component = findComponentById(catalog, String(variables.component))
+      if (!component) {
+        throw new Error(`Component API not found: ${uri.href}`)
+      }
+      return {
         contents: [
           {
             uri: uri.href,
             mimeType: 'application/json',
-            text: JSON.stringify(
-              {
-                id: component.id,
-                exportName: component.exportName,
-                category: component.category,
-                import: component.import,
-                props: component.props,
-                events: component.events,
-                slots: component.slots,
-                methods: component.methods,
-              },
-              null,
-              2,
-            ),
+            text: JSON.stringify(componentApiPayload(component), null, 2),
           },
         ],
+      }
+    },
+  )
+}
+
+function registerGuideDocTemplate(server: McpServer, catalog: Catalog) {
+  const guideIds = catalog.guides.map((item) => item.id)
+
+  server.registerResource(
+    'guide-docs',
+    new ResourceTemplate('wi://guides/{guide}/docs/{locale}', {
+      list: async () => ({
+        resources: catalog.guides.flatMap((guide) =>
+          DOC_LOCALES.filter((locale) => guide.locales[locale]?.markdown).map((locale) => {
+            const doc = guide.locales[locale]!
+            return {
+              uri: `wi://guides/${guide.id}/docs/${locale}`,
+              name: `${guide.id}-docs-${locale}`,
+              title: `${doc.title} (${locale})`,
+              description: doc.description,
+              mimeType: 'text/markdown',
+            }
+          }),
+        ),
       }),
-    )
-  }
+      complete: {
+        guide: async (value) => filterCompletion(guideIds, value),
+        locale: async (value) => filterCompletion([...DOC_LOCALES], value),
+      },
+    }),
+    {
+      title: 'Guide documentation',
+      description: 'Markdown guide docs for @well-insight/ui.',
+      mimeType: 'text/markdown',
+    },
+    async (uri, variables) => {
+      const guide = findGuideById(catalog, String(variables.guide))
+      const locale = String(variables.locale) as Locale
+      const doc = guide?.locales[locale]
+      if (!guide || !doc?.markdown) {
+        throw new Error(`Guide documentation not found: ${uri.href}`)
+      }
+      return {
+        contents: [{ uri: uri.href, mimeType: 'text/markdown', text: doc.markdown }],
+      }
+    },
+  )
+}
 
-  for (const guide of catalog.guides) {
-    for (const locale of DOC_LOCALES) {
-      const doc = guide.locales[locale]
-      if (!doc?.markdown) continue
-
-      const resourceUri = `wi://guides/${guide.id}/docs/${locale}`
-      server.registerResource(
-        `guide-${guide.id}-docs-${locale}`,
-        resourceUri,
-        {
-          title: `${doc.title} (${locale})`,
-          description: doc.description,
-          mimeType: 'text/markdown',
-        },
-        async (uri) => ({
-          contents: [{ uri: uri.href, mimeType: 'text/markdown', text: doc.markdown }],
-        }),
-      )
-    }
-  }
+export function registerCatalogResources(server: McpServer, catalog: Catalog) {
+  registerStaticResources(server, catalog)
+  registerComponentDocTemplate(server, catalog)
+  registerComponentApiTemplate(server, catalog)
+  registerGuideDocTemplate(server, catalog)
 }
 
 export function countCatalogResources(catalog: Catalog): number {
@@ -155,4 +245,8 @@ export function countCatalogResources(catalog: Catalog): number {
     }
   }
   return count
+}
+
+export function countCatalogResourceTemplates(): number {
+  return RESOURCE_TEMPLATE_COUNT
 }

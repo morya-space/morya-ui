@@ -41,6 +41,12 @@ const isFluid = computed(() => props.fluid)
 
 const resolvedSize = useConfiguredSize('Button', () => props.size)
 
+const iconSize = computed(() => {
+  if (resolvedSize.value === 'small') return 'sm'
+  if (resolvedSize.value === 'large') return 'lg'
+  return 'md'
+})
+
 const isIconOnly = computed(() => props.iconOnly || ((!hasLabel.value) && Boolean(props.icon || slots.icon || props.loading)))
 
 const severityTone = computed(() => props.severity ?? 'primary')
@@ -127,8 +133,8 @@ defineExpose({ focus, ref: buttonElement })
       </slot>
       <template v-else>
         <slot name="icon" class="wi-button__icon-slot">
-          <WiIcon v-if="iconName" :name="iconName" size="sm" />
-          <component :is="iconComponent" v-else-if="iconComponent" />
+          <WiIcon v-if="iconName" :name="iconName" :size="iconSize" />
+          <component :is="iconComponent" v-else-if="iconComponent" class="wi-button__icon-graphic" />
         </slot>
       </template>
     </span>

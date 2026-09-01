@@ -111,4 +111,23 @@ describe('wiButton', () => {
     expect(color.classes()).toContain('wi-button--custom')
     expect(color.attributes('style')).toContain('--wi-button-color: #e11d48')
   })
+
+  it('maps button size to icon sizing', () => {
+    const small = mount(WiButton, { props: { icon: 'edit', iconOnly: true, size: 'small', ariaLabel: 'Edit' } })
+    const large = mount(WiButton, { props: { icon: 'edit', iconOnly: true, size: 'large', ariaLabel: 'Edit' } })
+
+    expect(small.find('.wi-icon').classes()).toContain('wi-icon--small')
+    expect(large.find('.wi-icon').classes()).toContain('wi-icon--large')
+  })
+
+  it('tags custom icon components for button icon normalization', () => {
+    const LargeIcon = {
+      template: '<svg data-testid="custom-icon" />',
+    }
+    const wrapper = mount(WiButton, {
+      props: { icon: LargeIcon, iconOnly: true, ariaLabel: 'Custom' },
+    })
+
+    expect(wrapper.find('[data-testid="custom-icon"]').classes()).toContain('wi-button__icon-graphic')
+  })
 })
