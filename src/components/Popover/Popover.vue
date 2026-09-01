@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PopoverProps } from "./types";
-import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
+import type { PopoverProps } from './types'
+import { computed, nextTick, onBeforeUnmount, ref, useId, watch } from 'vue'
 import { useWiConfig } from "../../shared/config";
 import {
     isOverlayTeleported,
@@ -21,8 +21,9 @@ const emit = defineEmits<{
     (event: "hide"): void;
 }>();
 
-const config = useWiConfig();
-const root = ref<HTMLElement | null>(null);
+const config = useWiConfig()
+const panelId = useId()
+const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null);
 const panel = ref<HTMLElement | null>(null);
 const panelStyle = ref<Record<string, string>>({});
@@ -212,6 +213,9 @@ onBeforeUnmount(() => {
         <span
             ref="trigger"
             class="wi-popover__trigger"
+            aria-haspopup="dialog"
+            :aria-expanded="modelValue"
+            :aria-controls="panelId"
             @click="onTriggerClick"
             @focusin="onTriggerFocus"
             @focusout="onTriggerBlur"
@@ -223,6 +227,7 @@ onBeforeUnmount(() => {
                 <div
                     v-if="modelValue"
                     ref="panel"
+                    :id="panelId"
                     class="wi-popover__content"
                     :class="[
                         `wi-popover__content--${placement}`,

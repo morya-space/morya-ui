@@ -84,6 +84,7 @@ export const zhCN: WiLocaleMessages = {
   datePicker: '日期选择',
   rangeStart: '范围起点',
   rangeEnd: '范围终点',
+  sliderControl: '滑块',
   prev: '上一页',
   next: '下一页',
   noMatch: '无匹配项',

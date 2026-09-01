@@ -85,6 +85,7 @@ export interface WiLocaleConfig {
   datePicker?: string
   rangeStart?: string
   rangeEnd?: string
+  sliderControl?: string
   prev?: string
   next?: string
   noMatch?: string
