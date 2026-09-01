@@ -3,6 +3,7 @@ import type { TooltipProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',
@@ -32,48 +33,13 @@ function clearTimers() {
   }
 }
 
-function toCssSize(value?: string | number) {
-  if (value == null) return undefined
-  return typeof value === 'number' ? `${value}px` : value
-}
-
 function updateTipPosition() {
   if (!teleported.value || !root.value) return
-  const rect = root.value.getBoundingClientRect()
-  const gap = 8
-  const centerX = rect.left + rect.width / 2
-  const centerY = rect.top + rect.height / 2
-  const maxWidth = toCssSize(props.maxWidth)
-
-  if (props.placement === 'top') {
-    tipStyle.value = {
-      left: `${centerX}px`,
-      top: `${rect.top - gap}px`,
-      transform: 'translate(-50%, -100%)',
-      ...(maxWidth ? { maxWidth } : {}),
-    }
-  } else if (props.placement === 'bottom') {
-    tipStyle.value = {
-      left: `${centerX}px`,
-      top: `${rect.bottom + gap}px`,
-      transform: 'translateX(-50%)',
-      ...(maxWidth ? { maxWidth } : {}),
-    }
-  } else if (props.placement === 'left') {
-    tipStyle.value = {
-      left: `${rect.left - gap}px`,
-      top: `${centerY}px`,
-      transform: 'translate(-100%, -50%)',
-      ...(maxWidth ? { maxWidth } : {}),
-    }
-  } else {
-    tipStyle.value = {
-      left: `${rect.right + gap}px`,
-      top: `${centerY}px`,
-      transform: 'translateY(-50%)',
-      ...(maxWidth ? { maxWidth } : {}),
-    }
-  }
+  tipStyle.value = computeFloatingOverlayStyle(
+    root.value.getBoundingClientRect(),
+    props.placement,
+    { maxWidth: toCssSize(props.maxWidth) },
+  )
 }
 
 function reveal() {
