@@ -26,4 +26,5 @@ export interface AutoCompleteProps {
 export interface AutoCompleteEmits {
   (event: 'update:modelValue', value: string): void
   (event: 'complete', query: string): void
+  (event: 'clear'): void
 }

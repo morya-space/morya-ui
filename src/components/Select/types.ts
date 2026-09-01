@@ -42,8 +42,10 @@ export interface SelectProps {
   loading?: boolean
   /** Collapse extra selected tags after this count. Ignored unless `multiple`. */
   maxTagCount?: number
-  /** Show clear button when a value is selected. */
+  /** Show clear button when a value is selected. Alias: `clearable`. */
   showClear?: boolean
+  /** Alias for `showClear`. */
+  clearable?: boolean
   /** Empty / no-match message. Falls back to ConfigProvider `locale.emptyOptions`. */
   emptyMessage?: string
   /** Show a filter input when the menu is open (matches option labels unless `remote`). */

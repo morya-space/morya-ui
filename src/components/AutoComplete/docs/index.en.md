@@ -94,6 +94,7 @@ const suggestions = [
 | --- | --- | --- |
 | `update:modelValue` | `string` | Value change. |
 | `complete` | `query: string` | Request completion. |
+| `clear` | — | Fired when the clear button is clicked. |
 
 ## Slots
 

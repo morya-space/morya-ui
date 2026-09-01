@@ -71,9 +71,17 @@ const options = [
 | --- | --- | --- | --- |
 | `modelValue` | `string \| number \| null` | `null` | Selected value. |
 | `options` | `CascadeSelectOption[]` | — | Nested options. |
+| `label` | `string` | — | Field label. |
+| `helpText` | `string` | — | Help text. |
+| `invalid` | `boolean` | `false` | Invalid state. |
+| `errorMessage` | `string` | — | Error text; implies invalid when set. |
+| `id` | `string` | — | Control id. |
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
-| `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `required` | `boolean` | `false` | Form required hint. |
+| `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `fluid` | `boolean` | `false` | Full width. |
+| `clearable` | `boolean` | `false` | Show clear button when a value is selected (hover suffix slot). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 
@@ -82,6 +90,7 @@ const options = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `CascadeSelectValue` | Selection change. |
+| `clear` | — | Fired when the clear button is clicked. |
 
 ## Slots
 

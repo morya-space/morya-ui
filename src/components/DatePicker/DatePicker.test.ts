@@ -22,6 +22,7 @@ describe('wiDatePicker', () => {
     expect(wrapper.classes()).toContain('wi-datepicker--invalid')
     await wrapper.find('.wi-datepicker__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[null]])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
   it('teleports the panel to body by default', async () => {

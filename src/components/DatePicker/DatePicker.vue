@@ -27,6 +27,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 })
 const emit = defineEmits<{
   (event: 'update:modelValue', value: DatePickerModel): void
+  (event: 'clear'): void
 }>()
 
 const config = useWiConfig()
@@ -269,6 +270,7 @@ function applyShortcut(shortcut: DatePickerShortcut) {
 function clear() {
   if (props.disabled || !props.clearable) return
   emit('update:modelValue', null)
+  emit('clear')
 }
 
 function onDocumentClick(event: MouseEvent) {

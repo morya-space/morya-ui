@@ -38,7 +38,7 @@ const options = [
 
 ## Clearable
 
-`showClear` shows a clear button when a value is selected.
+`showClear` (alias: `clearable`) shows a clear button when a value is selected.
 
 ```vue preview
 <script setup lang="ts">
@@ -298,6 +298,7 @@ const options = [
 | `loading` | `boolean` | `false` | Async loading state. |
 | `maxTagCount` | `number` | — | Max visible tags in multiple mode; extras collapse to +N. |
 | `showClear` | `boolean` | `false` | Show a clear button when a value is selected. |
+| `clearable` | `boolean` | `false` | Alias for `showClear`. |
 | `emptyMessage` | `string` | — | Empty-options text. Defaults to ConfigProvider `locale.emptyOptions`. |
 | `filter` | `boolean` | `false` | Show a filter input when the menu is open. |
 | `teleport` | `boolean` | `true` | Menu Teleport. Mounts to `body` by default. |

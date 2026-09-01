@@ -71,9 +71,17 @@ const options = [
 | --- | --- | --- | --- |
 | `modelValue` | `string \| number \| null` | `null` | 选中值。 |
 | `options` | `CascadeSelectOption[]` | — | 嵌套选项。 |
+| `label` | `string` | — | 字段标签。 |
+| `helpText` | `string` | — | 帮助文案。 |
+| `invalid` | `boolean` | `false` | 无效状态。 |
+| `errorMessage` | `string` | — | 错误文案；设置时视为 invalid。 |
+| `id` | `string` | — | 控件 id。 |
 | `placeholder` | `string` | `'请选择'` | 占位文案。 |
-| `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `required` | `boolean` | `false` | 表单必填辅助。 |
+| `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `fluid` | `boolean` | `false` | 宽度撑满容器。 |
+| `clearable` | `boolean` | `false` | 有值时显示清除按钮（hover 单槽 suffix）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
 
@@ -82,6 +90,7 @@ const options = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `CascadeSelectValue` | 选中变化。 |
+| `clear` | — | 点击清除时触发。 |
 
 ## Slots
 

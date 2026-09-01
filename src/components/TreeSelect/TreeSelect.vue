@@ -231,7 +231,7 @@ onBeforeUnmount(() => {
             <button
               type="button"
               class="wi-select__tag-remove"
-              :aria-label="locale.remove"
+              :aria-label="locale.removeTag"
               :disabled="disabled"
               @click.stop="removeTag(tag.key)"
             >

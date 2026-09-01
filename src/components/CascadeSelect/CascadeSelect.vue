@@ -2,7 +2,7 @@
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
-import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiIcon from '../Icon/Icon.vue'
@@ -10,14 +10,20 @@ import WiIcon from '../Icon/Icon.vue'
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
   placeholder: undefined,
+  invalid: false,
   disabled: false,
+  required: false,
   teleport: true,
+  clearable: undefined,
+  fluid: undefined,
 })
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: CascadeSelectValue): void
+  (event: 'clear'): void
 }>()
 
+const defaults = useComponentDefaults('CascadeSelect')
 const config = useWiConfig()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('CascadeSelect', () => props.size)
@@ -27,12 +33,25 @@ const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const path = ref<CascadeSelectOption[][]>([])
+const fieldId = computed(() => props.id ?? `wi-cascadeselect-${Math.random().toString(36).slice(2, 8)}`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
+const resolvedClearable = computed(
+  () => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false,
+)
+const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
+const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
+const feedbackText = computed(() => props.errorMessage || props.helpText)
+const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
+const hasValue = computed(() => props.modelValue != null)
+const showClearButton = computed(() => resolvedClearable.value && hasValue.value && !props.disabled)
 
-const displayLabel = computed(() => findLabel(props.options, props.modelValue) ?? props.placeholder ?? locale.value.selectPlaceholder)
+const displayLabel = computed(
+  () => findLabel(props.options, props.modelValue) ?? props.placeholder ?? locale.value.selectPlaceholder,
+)
 
 function findLabel(options: CascadeSelectOption[], value: CascadeSelectValue): string | null {
+  if (value == null) return null
   for (const option of options) {
     if (option.value === value) return option.label
     if (option.children?.length) {
@@ -59,6 +78,15 @@ function toggle() {
     path.value = [props.options]
     void nextTick(() => updatePanelPosition())
   }
+}
+
+function clear(event: MouseEvent) {
+  event.stopPropagation()
+  event.preventDefault()
+  if (props.disabled || !hasValue.value) return
+  emit('update:modelValue', null)
+  emit('clear')
+  trigger.value?.focus({ preventScroll: true })
 }
 
 function enterLevel(option: CascadeSelectOption, columnIndex: number) {
@@ -106,26 +134,66 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="wi-cascadeselect"
+    class="wi-select-field wi-cascadeselect"
     :class="[
       `wi-cascadeselect--${sizeClass}`,
-      { 'wi-cascadeselect--disabled': disabled, 'wi-cascadeselect--open': open },
+      {
+        'wi-select-field--fluid': resolvedFluid,
+        'wi-cascadeselect--disabled': disabled,
+        'wi-cascadeselect--open': open,
+      },
     ]"
   >
-    <button
-      ref="trigger"
-      type="button"
-      class="wi-cascadeselect__trigger"
-      :disabled="disabled"
-      :aria-expanded="open"
-      aria-haspopup="listbox"
-      @click="toggle"
+    <label v-if="label" class="wi-select-field__label" :for="fieldId">{{ label }}</label>
+    <div
+      class="wi-cascadeselect__control wi-select__control"
+      :class="{
+        'wi-select__control--clearable': showClearButton,
+        'wi-select__control--open': open,
+      }"
     >
-      <span class="wi-cascadeselect__label">{{ displayLabel }}</span>
-      <span class="wi-cascadeselect__caret" aria-hidden="true">
-        <WiIcon name="chevron-down" size="sm" />
-      </span>
-    </button>
+      <button
+        :id="fieldId"
+        ref="trigger"
+        type="button"
+        class="wi-cascadeselect__trigger"
+        :class="{ 'wi-cascadeselect__trigger--invalid': isInvalid, 'wi-cascadeselect__trigger--placeholder': !hasValue }"
+        :disabled="disabled"
+        :aria-expanded="open"
+        :aria-invalid="isInvalid || undefined"
+        :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
+        aria-haspopup="listbox"
+        @click="toggle"
+      >
+        <span class="wi-cascadeselect__label">{{ displayLabel }}</span>
+      </button>
+      <div class="wi-select__suffix">
+        <button
+          v-if="showClearButton"
+          class="wi-select__clear"
+          type="button"
+          :aria-label="locale.clear"
+          @click="clear"
+        >
+          <WiIcon name="close" size="sm" />
+        </button>
+        <span
+          class="wi-select__indicator"
+          :class="{ 'wi-select__indicator--open': open }"
+          aria-hidden="true"
+        >
+          <WiIcon name="chevron-down" size="sm" />
+        </span>
+      </div>
+    </div>
+    <p
+      v-if="feedbackText"
+      :id="`${fieldId}-help`"
+      class="wi-select-field__help"
+      :class="{ 'wi-select-field__help--invalid': feedbackIsError }"
+    >
+      {{ feedbackText }}
+    </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
         <div

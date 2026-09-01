@@ -34,6 +34,16 @@ describe('wiCascadeSelect', () => {
     expect(wrapper.find('.wi-cascadeselect__label').text()).toBe('Laptop')
   })
 
+  it('clears value when clearable is enabled', async () => {
+    const wrapper = mount(WiCascadeSelect, {
+      props: { options, modelValue: 'laptop', clearable: true, teleport: false },
+    })
+    await wrapper.get('.wi-select__control').trigger('mouseenter')
+    await wrapper.get('.wi-select__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
+  })
+
   it('teleports the panel to body by default', async () => {
     const wrapper = mount(WiCascadeSelect, {
       props: { options, modelValue: null },

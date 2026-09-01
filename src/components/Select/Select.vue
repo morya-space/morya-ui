@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   loading: undefined,
   fluid: undefined,
   showClear: undefined,
+  clearable: undefined,
   filter: undefined,
 })
 const emit = defineEmits<{
@@ -56,7 +57,14 @@ const resolvedTag = computed(() => props.tag ?? (defaults.value.tag as boolean |
 const resolvedRemote = computed(() => props.remote ?? (defaults.value.remote as boolean | undefined) ?? false)
 const resolvedLoading = computed(() => props.loading ?? false)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
-const resolvedShowClear = computed(() => props.showClear ?? (defaults.value.showClear as boolean | undefined) ?? false)
+const resolvedShowClear = computed(
+  () =>
+    props.showClear
+    ?? props.clearable
+    ?? (defaults.value.showClear as boolean | undefined)
+    ?? (defaults.value.clearable as boolean | undefined)
+    ?? false,
+)
 const resolvedFilter = computed(() => props.filter ?? (defaults.value.filter as boolean | undefined) ?? false)
 const sizeClass = useConfiguredSize('Select', () => props.size)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
