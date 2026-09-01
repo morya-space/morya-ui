@@ -97,52 +97,51 @@ describe('@well-insight/ui-mcp handlers', () => {
     expect(result.matchedPattern).toBe('admin-list')
   })
 
-  it('does not write outside the current project', () => {
-    const result = read<{ error: string }>(
-      handlers.createPage({
-        path: '../outside.vue',
-        intent: '测试页面',
-        confirm: true,
+  it('returns a dashboard scaffold when includeScaffold is true', () => {
+    const result = read<{ matchedPattern: string; scaffold: { files: { component: string } } }>(
+      handlers.recommendPage({
+        intent: '生产监控仪表盘',
+        pageType: 'dashboard',
+        includeScaffold: true,
       }),
     )
 
-    expect(result.error).toContain('inside the current project')
+    expect(result.matchedPattern).toBe('dashboard')
+    expect(result.scaffold.files.component).toContain('WiProgressBar')
+    expect(result.scaffold.files.component).toContain('WiSkeleton')
   })
 
-  it('generates a dashboard-specific scaffold', () => {
-    const result = read<{ files: { component: string }; pattern: string }>(
-      handlers.generatePage({ intent: '生产监控仪表盘', pattern: 'dashboard' }),
+  it('lists component decision guides when query is omitted', () => {
+    const result = read<{ kind: string; items: Array<{ id: string }> }>(
+      handlers.recommendComponent({ limit: 5 }),
     )
 
-    expect(result.pattern).toBe('dashboard')
-    expect(result.files.component).toContain('WiProgressBar')
-    expect(result.files.component).toContain('WiSkeleton')
+    expect(result.kind).toBe('decisions')
+    expect(result.items.length).toBeGreaterThan(0)
+    expect(result.items[0]?.id).toBeTruthy()
   })
 
-  it('reports strict-mode warnings for opaque bindings', () => {
-    const result = read<{ warnings: Array<{ type: string }> }>(
-      handlers.validatePage({
-        code: '<WiTable v-bind="tableProps" />',
-        strict: true,
-      }),
+  it('reads a decision guide by id', () => {
+    const result = read<{ id: string; options: Array<{ component: string }> }>(
+      handlers.recommendComponent({ decision: 'overlay-choice' }),
     )
 
-    expect(result.warnings).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ type: 'dynamic-binding' }),
-      ]),
-    )
+    expect(result.id).toBe('overlay-choice')
+    expect(result.options.some((option) => option.component === 'Drawer')).toBe(true)
   })
 
   it('exposes catalog health in version metadata', () => {
     const result = read<{
       health: { ok: boolean; patternReferences: unknown[] }
       counts: { patterns: number; decisions: number }
+      tools: string[]
     }>(handlers.version())
 
     expect(result.health.ok).toBe(true)
     expect(result.health.patternReferences).toEqual([])
     expect(result.counts.patterns).toBeGreaterThan(0)
     expect(result.counts.decisions).toBeGreaterThan(0)
+    expect(result.tools).toHaveLength(13)
+    expect(result.tools).not.toContain('create_page')
   })
 })

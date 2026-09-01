@@ -11,11 +11,11 @@
   </task>
   <task id="overlay-choice">
     <prompt>Choose between Dialog, Drawer, Popover, and Tooltip for editing a record while keeping the list visible. Explain why.</prompt>
-    <checks>Calls recommend_component or get_decision for overlay-choice and selects Drawer.</checks>
+    <checks>Calls recommend_component or reads overlay-choice and selects Drawer.</checks>
   </task>
   <task id="data-display-choice">
     <prompt>Choose between Table, DataView, and TreeTable for comparing stable columns across many records.</prompt>
-    <checks>Calls recommend_component or get_decision for data-display-choice and selects Table.</checks>
+    <checks>Calls recommend_component or reads data-display-choice and selects Table.</checks>
   </task>
   <task id="list-pattern">
     <prompt>Recommend a page pattern for an oil-well management list with filters and pagination, then list its required components.</prompt>
@@ -25,9 +25,9 @@
     <prompt>Recommend a form-page pattern for creating a resource and state the accessibility rules for its fields.</prompt>
     <checks>Calls recommend_page/get_pattern and get_design_rules; mentions visible labels and FormItem.</checks>
   </task>
-  <task id="dashboard-pattern">
-    <prompt>Generate a dashboard scaffold for production monitoring without writing a file. Identify loading and metric components.</prompt>
-    <checks>Calls generate_page with dashboard intent; output contains WiProgressBar and WiSkeleton.</checks>
+  <task id="dashboard-scaffold">
+    <prompt>Recommend a dashboard pattern for production monitoring with includeScaffold enabled. Identify loading and metric components.</prompt>
+    <checks>Calls recommend_page with includeScaffold; output contains WiProgressBar and WiSkeleton.</checks>
   </task>
   <task id="design-tokens">
     <prompt>What spacing, radius, typography, and motion tokens should a generated page use?</prompt>
@@ -37,8 +37,8 @@
     <prompt>Review the design guidance for an icon-only action and a form field with an error.</prompt>
     <checks>Calls get_design_rules; mentions aria-label/ariaLabel, visible label, and role=alert for errors.</checks>
   </task>
-  <task id="page-validation">
-    <prompt>Validate a page containing WiTable with opaque v-bind and no pagination in strict mode. Explain every warning.</prompt>
-    <checks>Calls validate_page with strict=true and reports dynamic-binding and pagination warnings.</checks>
+  <task id="usage-validation">
+    <prompt>Validate a WiButton snippet that uses an unknown prop and explain the issue.</prompt>
+    <checks>Calls validate_usage and reports unknown-prop for the invalid attribute.</checks>
   </task>
 </evaluation>

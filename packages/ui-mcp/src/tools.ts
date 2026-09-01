@@ -1,6 +1,4 @@
 import type { ComponentRecord, GuideRecord, Locale } from './catalog.js'
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
-import { dirname, isAbsolute, relative, resolve, sep } from 'node:path'
 import {
   findComponent,
   findGuide,
@@ -229,7 +227,7 @@ function guideSearchBlob(guide: GuideRecord): string {
 
 export function createToolHandlers(catalog = loadCatalog()) {
   function list(args: {
-    kind?: 'components' | 'guides' | 'examples' | 'categories' | 'patterns' | 'decisions'
+    kind?: 'components' | 'guides' | 'examples' | 'categories' | 'patterns'
     mode?: string
     limit?: number
     offset?: number
@@ -253,7 +251,6 @@ export function createToolHandlers(catalog = loadCatalog()) {
     }
 
     if (kind === 'patterns') return listPatterns(args)
-    if (kind === 'decisions') return listDecisions(args)
 
     if (kind === 'categories') {
       const counts = new Map<string, number>()
@@ -613,7 +610,13 @@ export function createToolHandlers(catalog = loadCatalog()) {
     })
   }
 
-  function recommendPage(args: { intent: string; pageType?: string; features?: string[]; mode?: string }) {
+  function recommendPage(args: {
+    intent: string
+    pageType?: string
+    features?: string[]
+    mode?: string
+    includeScaffold?: boolean
+  }) {
     const query = [args.intent, args.pageType || '', ...(args.features || [])].join(' ')
     const ranked = pagePatterns
       .map((pattern) => ({ pattern, score: scorePattern(pattern, query) }))
@@ -626,7 +629,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       })
     }
     const locale = resolveLocale(args.mode)
-    return textResult({
+    const result: Record<string, unknown> = {
       intent: args.intent,
       pageType: args.pageType,
       matchedPattern: best.pattern.id,
@@ -639,79 +642,24 @@ export function createToolHandlers(catalog = loadCatalog()) {
       interactionRules: best.pattern.interactionRules,
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
-      nextStep: '读取 matchedPattern 的 get_pattern 结果后，再读取核心组件 API 和示例。',
-    })
-  }
-
-  function generatePage(args: {
-    intent: string
-    pageType?: string
-    pattern?: string
-    features?: string[]
-    mode?: string
-    responsive?: boolean
-  }) {
-    const locale = resolveLocale(args.mode)
-    const recommendation = pagePatterns
-      .map((pattern) => ({ pattern, score: scorePattern(pattern, [args.intent, args.pageType || '', ...(args.features || [])].join(' ')) }))
-      .sort((a, b) => b.score - a.score)[0]
-    const pattern = args.pattern ? findPattern(args.pattern) : recommendation?.pattern
-    if (!pattern) {
-      return textResult({ error: 'Unable to determine a page pattern.', availablePatterns: pagePatterns.map((item) => item.id) })
-    }
-    const code = generatedPageCode(pattern.id, args.intent, locale)
-    const componentSource = `${code.script  }\\n\\n${  code.template  }\\n\\n${  code.style}`
-    const validation = JSON.parse(validatePage({
-      pattern: pattern.id,
-      code: componentSource,
-      intent: args.intent,
-    }).content[0].text)
-    return textResult({
-      intent: args.intent,
-      pattern: pattern.id,
-      title: locale === 'en-US' ? pattern.titleEn : pattern.title,
-      locale,
-      responsive: args.responsive !== false,
-      components: pattern.components,
-      files: { component: componentSource },
-      vue: code,
-      validation: { page: validation },
-      warnings: [
-        locale === 'en-US'
-          ? 'Generated code is a scaffold: replace sample API state, data, and events with the application implementation.'
-          : '生成代码是脚手架：请将示例 API 状态、数据和事件替换为实际业务实现。',
-      ],
       nextStep: locale === 'en-US'
-        ? 'Review the validation report, then verify unfamiliar component props with get_component or get_example before shipping.'
-        : '请先查看 validation 报告，再用 get_component 或 get_example 核对不熟悉的组件属性后发布。',
-    })
-  }
-
-  function createPage(args: {
-    path: string
-    intent: string
-    pageType?: string
-    pattern?: string
-    features?: string[]
-    mode?: string
-    responsive?: boolean
-    confirm?: boolean
-  }) {
-    const projectRoot = resolve(process.cwd())
-    const target = resolve(projectRoot, args.path)
-    const targetRelative = relative(projectRoot, target)
-    if (isAbsolute(args.path) || targetRelative === '..' || targetRelative.startsWith(`..${sep}`) || isAbsolute(targetRelative)) {
-      return textResult({ error: 'Path must be relative and stay inside the current project.' })
+        ? 'Read matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file.'
+        : '用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true。',
     }
-    const existed = existsSync(target)
-    const generated = JSON.parse(generatePage(args).content[0].text) as { files?: { component?: string }; pattern?: string; title?: string; warnings?: string[]; validation?: unknown; error?: string }
-    if (generated.error || !generated.files?.component) return textResult(generated)
-    if (!args.confirm) {
-      return textResult({ path: args.path, exists: existed, written: false, requiresConfirmation: true, pattern: generated.pattern, title: generated.title, content: generated.files.component, warnings: generated.warnings, validation: generated.validation })
+    if (args.includeScaffold) {
+      const code = generatedPageCode(best.pattern.id, args.intent, locale)
+      const componentSource = `${code.script}\n\n${code.template}\n\n${code.style}`
+      result.scaffold = {
+        vue: code,
+        files: { component: componentSource },
+        warnings: [
+          locale === 'en-US'
+            ? 'Scaffold only: replace sample API state, data, and events with the application implementation.'
+            : '仅为脚手架：请将示例 API 状态、数据和事件替换为实际业务实现。',
+        ],
+      }
     }
-    mkdirSync(dirname(target), { recursive: true })
-    writeFileSync(target, generated.files.component, 'utf8')
-    return textResult({ path: args.path, written: true, overwritten: existed, pattern: generated.pattern, title: generated.title, warnings: generated.warnings, validation: generated.validation })
+    return textResult(result)
   }
 
   function getDesignRules(args: { mode?: string } = {}) {
@@ -742,51 +690,62 @@ export function createToolHandlers(catalog = loadCatalog()) {
     })
   }
 
-  function listDecisions(args: { mode?: string; limit?: number; offset?: number }) {
+  function recommendComponent(args: {
+    query?: string
+    decision?: string
+    mode?: string
+    limit?: number
+    offset?: number
+  }) {
     const locale = resolveLocale(args.mode)
-    const limit = Math.min(Math.max(args.limit ?? 50, 1), 200)
-    const offset = Math.max(args.offset ?? 0, 0)
-    const items = componentDecisions.slice(offset, offset + limit).map((decision) => ({
-      id: decision.id,
-      title: locale === 'en-US' ? decision.titleEn : decision.title,
-      question: locale === 'en-US' ? decision.questionEn : decision.question,
-      keywords: decision.keywords,
-      options: decision.options.map((option) => option.component),
-    }))
-    return textResult({ kind: 'decisions', ...pagination(componentDecisions.length, offset, limit), items })
-  }
 
-  function getDecision(args: { decision: string; mode?: string }) {
-    const decision = findDecision(args.decision)
-    if (!decision) {
+    if (!args.query && !args.decision) {
+      const limit = Math.min(Math.max(args.limit ?? 50, 1), 200)
+      const offset = Math.max(args.offset ?? 0, 0)
+      const items = componentDecisions.slice(offset, offset + limit).map((decision) => ({
+        id: decision.id,
+        title: locale === 'en-US' ? decision.titleEn : decision.title,
+        question: locale === 'en-US' ? decision.questionEn : decision.question,
+        keywords: decision.keywords,
+        options: decision.options.map((option) => option.component),
+      }))
+      return textResult({ kind: 'decisions', ...pagination(componentDecisions.length, offset, limit), items })
+    }
+
+    if (args.decision && !args.query) {
+      const decision = findDecision(args.decision)
+      if (!decision) {
+        return textResult({
+          error: `Decision not found: ${args.decision}`,
+          availableDecisions: componentDecisions.map((item) => item.id),
+        })
+      }
       return textResult({
-        error: `Decision not found: ${args.decision}`,
-        availableDecisions: componentDecisions.map((item) => item.id),
+        id: decision.id,
+        title: locale === 'en-US' ? decision.titleEn : decision.title,
+        question: locale === 'en-US' ? decision.questionEn : decision.question,
+        keywords: decision.keywords,
+        options: decision.options.map((option) => ({
+          component: option.component,
+          when: locale === 'en-US' ? option.whenEn : option.when,
+          avoidWhen: locale === 'en-US' ? option.avoidWhenEn : option.avoidWhen,
+        })),
       })
     }
-    const locale = resolveLocale(args.mode)
-    return textResult({
-      id: decision.id,
-      title: locale === 'en-US' ? decision.titleEn : decision.title,
-      question: locale === 'en-US' ? decision.questionEn : decision.question,
-      keywords: decision.keywords,
-      options: decision.options.map((option) => ({
-        component: option.component,
-        when: locale === 'en-US' ? option.whenEn : option.when,
-        avoidWhen: locale === 'en-US' ? option.avoidWhenEn : option.avoidWhen,
-      })),
-    })
-  }
 
-  function recommendComponent(args: { query: string; decision?: string; mode?: string }) {
+    if (!args.query) {
+      return textResult({
+        error: 'Provide query for a recommendation, or omit query/decision to list decision guides.',
+      })
+    }
+
     const ranked = componentDecisions
-      .map((decision) => ({ decision, score: scoreDecision(decision, args.query) }))
+      .map((decision) => ({ decision, score: scoreDecision(decision, args.query!) }))
       .sort((a, b) => b.score - a.score || a.decision.id.localeCompare(b.decision.id))
     const matched = args.decision ? findDecision(args.decision) : ranked[0]?.decision
     if (!matched || (!args.decision && (ranked[0]?.score || 0) === 0)) {
       return textResult({ error: `No component decision matched: ${args.query}`, suggestions: componentDecisions.map((item) => item.id) })
     }
-    const locale = resolveLocale(args.mode)
     return textResult({
       query: args.query,
       decision: matched.id,
@@ -797,98 +756,9 @@ export function createToolHandlers(catalog = loadCatalog()) {
         when: locale === 'en-US' ? option.whenEn : option.when,
         avoidWhen: locale === 'en-US' ? option.avoidWhenEn : option.avoidWhen,
       })),
-      nextStep: 'Use the selected component API and examples before implementing the page.',
-    })
-  }
-
-  function validatePage(args: {
-    pattern?: string
-    code?: string
-    components?: string[]
-    intent?: string
-    strict?: boolean
-  }) {
-    const code = args.code || ''
-    const detected = [
-      ...(code.match(/<Wi[A-Z][A-Za-z0-9]*/g) || []).map((name) => name.slice(1)),
-      ...(code.match(/import\s*\{([^}]+)\}/g) || []).flatMap((statement) =>
-        [...statement.matchAll(/\b(Wi[A-Z][A-Za-z0-9]*)\b/g)].map((match) => match[1]),
-      ),
-      ...(args.components || []),
-    ]
-    const uniqueNames = [...new Set(detected)]
-    const resolved = uniqueNames.map((name) => ({
-      query: name,
-      component: findComponent(catalog, name),
-    }))
-    const issues: Array<{ type: string; severity: 'error' | 'warning'; message: string }> = []
-    const warnings: Array<{ type: string; severity: 'warning'; message: string }> = []
-    const addWarning = (type: string, message: string) => warnings.push({ type, severity: 'warning', message })
-    const names = new Set(resolved.filter((item) => item.component).map((item) => item.component!.id.toLowerCase()))
-    const hasFormItem = uniqueNames.some((name) => /form[-_ ]?item|表单项/i.test(name))
-    const text = code.toLowerCase()
-    const pattern = args.pattern ? findPattern(args.pattern) : undefined
-
-    for (const item of resolved) {
-      if (!item.component) {
-        issues.push({ type: 'unknown-component', severity: 'error', message: `Component not found: ${item.query}. Use a canonical component name or a documented alias.` })
-      }
-    }
-
-    if (pattern) {
-      const required = pattern.components.filter((item) => item.required !== false)
-      for (const item of required) {
-        if (!names.has(item.component.toLowerCase())) {
-          addWarning('missing-pattern-component', `${item.component} is recommended for the ${pattern.id} pattern (${item.role}).`)
-        }
-      }
-    } else if (args.pattern) {
-      issues.push({ type: 'unknown-pattern', severity: 'error', message: `Pattern not found: ${args.pattern}.` })
-    }
-
-    if (/status|状态|active|pending|enabled|disabled/.test(text) && names.has('button') && !names.has('tag')) {
-      addWarning('status-component', 'Business status should use WiTag instead of Button severity.')
-    }
-    if (/(delete|remove|destroy|删除|移除|销毁)/.test(text) && /severity=["']danger["']|danger/.test(text) && !names.has('dialog') && !names.has('confirmdialog')) {
-      addWarning('destructive-confirmation', 'Destructive actions should be confirmed with WiDialog or WiConfirmDialog.')
-    }
-    if (names.has('table') && !names.has('pagination') && /(list|table|列表|表格|分页)/.test(text)) {
-      addWarning('pagination', 'A data list should usually provide WiPagination or an explicit load-more strategy.')
-    }
-    if (names.has('form') && !hasFormItem && !/<WiFormItem\b/i.test(code)) {
-      addWarning('form-structure', 'WiForm should normally be composed with WiFormItem for labels and validation state.')
-    }
-    if (/<WiButton[^>]*icon-only/i.test(code) && !/<WiButton[^>]*(aria-label|ariaLabel)/i.test(code)) {
-      addWarning('accessibility', 'Icon-only WiButton requires aria-label or ariaLabel.')
-    }
-    if (code && /#[0-9a-f]{3,8}|rgb\s*\(/i.test(code)) {
-      addWarning('design-token', 'Prefer --wi-* semantic tokens over hard-coded colors in page styles.')
-    }
-    if (code && /<Wi(Input|Select|Textarea)\b/i.test(code) && !/(label=|aria-label|ariaLabel)/i.test(code)) {
-      addWarning('form-label', 'Form controls should provide a visible label or an equivalent accessible name.')
-    }
-    if (args.strict) {
-      if (code && /v-bind\s*=\s*["'](?!\{)/i.test(code)) {
-        addWarning('dynamic-binding', 'Strict mode cannot verify an opaque v-bind object; validate its keys with the component API.')
-      }
-      if (code && /<Wi[A-Z]\w*\b[^>]*:\w+\s*=\s*["']\s*["']/i.test(code)) {
-        addWarning('empty-binding', 'Strict mode found an empty dynamic binding; provide a real value or remove the prop.')
-      }
-      if (!code && uniqueNames.length === 0) {
-        addWarning('missing-source', 'Strict mode needs page code or an explicit components list to validate composition.')
-      }
-    }
-
-    return textResult({
-      ok: issues.length === 0 && warnings.length === 0,
-      pattern: pattern?.id,
-      intent: args.intent,
-      components: resolved.map((item) => ({ query: item.query, resolved: item.component?.id || null, exportName: item.component?.exportName || null })),
-      issues,
-      warnings,
-      summary: issues.length === 0 && warnings.length === 0
-        ? 'Page composition matches the documented component and design rules.'
-        : `Found ${issues.length} error(s) and ${warnings.length} warning(s).`,
+      nextStep: locale === 'en-US'
+        ? 'Use get_component and get_example for the selected component before implementing.'
+        : '实现前请用 get_component 和 get_example 核对所选组件 API。',
     })
   }
 
@@ -1067,11 +937,6 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'get_pattern',
         'recommend_page',
         'get_design_rules',
-        'validate_page',
-        'generate_page',
-        'create_page',
-        'list_decisions',
-        'get_decision',
         'recommend_component',
         'version',
       ],
@@ -1091,12 +956,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
     getPattern,
     recommendPage,
     getDesignRules,
-    generatePage,
-    createPage,
-    listDecisions,
-    getDecision,
     recommendComponent,
-    validatePage,
     version,
   }
 }
