@@ -43,3 +43,9 @@ const value = ref('')
 | --- | --- |
 | `default` | 输入控件。 |
 | `label` | 自定义标签内容。 |
+
+## 无障碍
+
+- 挂载后会将 `<label for>` 关联到容器内第一个 `input` / `textarea` / `select`。
+- 子控件应设置 `id`，或使用库内会自动生成 id 的输入组件。
+- 配合 `placeholder=" "` 时，请确保屏幕阅读器仍能获知字段用途（标签文案或 `aria-label`）。

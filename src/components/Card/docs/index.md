@@ -92,3 +92,8 @@ import { WiCard } from '@well-insight/ui'
 | `header` | 自定义头部（优先于 `title` / `subtitle`）。 |
 | `footer` | 底部区域（推荐用插槽，无 footer prop）。 |
 | `cover` | 封面，渲染在头部上方。 |
+
+## 无障碍
+
+- 有 `title` 时默认作为容器 `aria-label`；复杂头部请用 `#header` 并保证标题可读。
+- 底部操作按钮应使用语义清晰的 `label` 文本。

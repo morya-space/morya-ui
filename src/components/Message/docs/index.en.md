@@ -114,3 +114,7 @@ When a manual host exists, the API will not mount a second one.
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target |
 | `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | Host placement |
 | `max` | `number` | — | Max visible items; oldest is dropped |
+
+## Events
+
+The `<WiMessage />` host emits no Vue events. Use the `{ id, close }` return value from `message.*` APIs to control lifetime.

@@ -109,3 +109,8 @@ import { WiBadge, WiButton } from '@well-insight/ui'
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 被角标包裹的内容。 |
+
+## 无障碍
+
+- 角标数字变化时，若状态重要，请同步更新附近可见文案或 `aria-live` 区域。
+- 包裹模式下，勿让角标成为唯一的状态提示。

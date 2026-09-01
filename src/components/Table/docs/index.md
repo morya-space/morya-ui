@@ -263,12 +263,27 @@ const columns = [
 | `sortField` / `sortOrder` | — | — | 受控排序。 |
 | `loading` / `emptyText` / `emptyDescription` / `size` | — | — | 同前。 |
 
-## Slots / Events
+## Slots
 
 | 插槽 | 说明 |
 | --- | --- |
-| `cell-{key}` / `body-cell` / `expansion` / `empty` / `loading` | `cell-{key}` 优先于列 `render`；`body-cell` 作用域 `{ row, column, value }`；`expansion` 作用域 `{ row }`。 |
+| `cell-{key}` | 列 `{key}` 的单元格；优先于列 `render`。 |
+| `body-cell` | 作用域 `{ row, column, value }`，自定义任意单元格。 |
+| `expansion` | 展开行内容，作用域 `{ row }`。 |
+| `empty` | 空数据占位。 |
+| `loading` | 加载中占位。 |
 
-| 事件 | 说明 |
-| --- | --- |
-| `sort` / `filter` / `page` / `row-click` / `current-change` / `expand` | 交互回调。 |
+## Events
+
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `sort` | `{ sortField?, sortOrder }` | 排序变化（`sortMode="emit"` 或受控排序）。 |
+| `filter` | `TableFilters` | 筛选变化。 |
+| `page` | `number` | 分页页码变化。 |
+| `row-click` | `{ row, index }` | 行点击。 |
+| `current-change` | `row \| null` | 当前高亮行变化。 |
+| `expand` | `{ row, expanded }` | 行展开/收起。 |
+| `update:selection` | `selection` | 选择项变化（配合 `v-model:selection`）。 |
+| `update:filters` | `TableFilters` | 筛选 v-model。 |
+| `update:page` | `number` | 页码 v-model。 |
+| `update:expanded-row-keys` | `Array<string \| number>` | 展开行 keys v-model。 |

@@ -86,6 +86,8 @@
 | 2026-09-01 | 四 | 扩充 CommandMenu / TieredMenu / MegaMenu / VirtualScroller 文档 |
 | 2026-09-01 | 四 | 新增指南页 `/docs/accessibility` |
 | 2026-09-01 | 四 | Select 增加 `wi-select--invalid` 修饰类（保留 `--error` 别名） |
+| 2026-09-01 | 四 | 中文组件文档 `## Basic` 统一为 `## 基础用法`（80 处） |
+| 2026-09-01 | 四 | 补充 Table/DataView Events；Tooltip 等 a11y 文档章节 |
 
 ---
 

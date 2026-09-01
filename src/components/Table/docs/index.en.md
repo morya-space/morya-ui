@@ -263,12 +263,27 @@ const columns = [
 | `sortField` / `sortOrder` | — | — | Controlled sort. |
 | `loading` / `emptyText` / `emptyDescription` / `size` | — | — | Same as above. |
 
-## Slots / Events
+## Slots
 
 | Slot | Description |
 | --- | --- |
-| `cell-{key}` / `body-cell` / `expansion` / `empty` / `loading` | `cell-{key}` wins over column `render`; `body-cell` scope `{ row, column, value }`; `expansion` scope `{ row }`. |
+| `cell-{key}` | Cell for column `{key}`; wins over column `render`. |
+| `body-cell` | Scope `{ row, column, value }` for any cell. |
+| `expansion` | Expanded row content, scope `{ row }`. |
+| `empty` | Empty state. |
+| `loading` | Loading state. |
 
-| Event | Description |
-| --- | --- |
-| `sort` / `filter` / `page` / `row-click` / `current-change` / `expand` | Interaction callbacks. |
+## Events
+
+| Event | Payload | Description |
+| --- | --- | --- |
+| `sort` | `{ sortField?, sortOrder }` | Sort change (`sortMode="emit"` or controlled sort). |
+| `filter` | `TableFilters` | Filter change. |
+| `page` | `number` | Page change. |
+| `row-click` | `{ row, index }` | Row clicked. |
+| `current-change` | `row \| null` | Highlighted row change. |
+| `expand` | `{ row, expanded }` | Row expand/collapse. |
+| `update:selection` | `selection` | Selection change with `v-model:selection`. |
+| `update:filters` | `TableFilters` | Filters v-model. |
+| `update:page` | `number` | Page v-model. |
+| `update:expanded-row-keys` | `Array<string \| number>` | Expanded row keys v-model. |

@@ -43,3 +43,9 @@ const value = ref('')
 | --- | --- |
 | `default` | Input control. |
 | `label` | Custom label content. |
+
+## Accessibility
+
+- After mount, sets `<label for>` on the first `input` / `textarea` / `select` in the container.
+- Child controls should have an `id`, or use library inputs that generate one.
+- With `placeholder=" "`, ensure the field purpose is still clear to assistive tech via the label or `aria-label`.
