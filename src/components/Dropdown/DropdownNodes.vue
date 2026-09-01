@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { IconName } from '../Icon/types'
 import type { DropdownItem } from './types'
 import { ref } from 'vue'
 import WiIcon from '../Icon/Icon.vue'
-import { isIconName } from '../Icon/icons'
+import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
 import DropdownNodes from './DropdownNodes.vue'
 
 const props = defineProps<{
@@ -27,11 +26,11 @@ function isGroup(item: DropdownItem) {
 }
 
 function itemKey(item: DropdownItem, index: number) {
-  return item.value ?? item.label ?? `dd-${index}`
+  return menuNodeKey(item, index, 'dd')
 }
 
-function iconOf(item: DropdownItem): IconName | undefined {
-  return item.icon && isIconName(item.icon) ? item.icon : undefined
+function iconOf(item: DropdownItem) {
+  return resolveMenuIcon(item.icon)
 }
 
 function onEnter(item: DropdownItem, index: number) {
