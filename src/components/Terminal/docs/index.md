@@ -46,3 +46,7 @@ const last = ref('')
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `command` | `string` | 提交的命令。 |
+
+## Slots
+
+无插槽。

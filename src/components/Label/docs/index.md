@@ -43,3 +43,7 @@ import { WiInput, WiLabel } from '@well-insight/ui'
 | 插槽 | 说明 |
 | --- | --- |
 | `default` | 标签文案。 |
+
+## Events
+
+无自定义事件。

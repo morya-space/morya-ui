@@ -47,3 +47,7 @@ const url = ref('')
 | `default` | Addons and input controls. |
 
 The addon component only provides a default slot; its root element class is `wi-inputgroup-addon`.
+
+## Events
+
+No custom events.

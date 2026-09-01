@@ -160,3 +160,11 @@ const nodes = [
 | 事件 | 说明 |
 | --- | --- |
 | `update:checkedKeys` / `update:expandedKeys` / `check` / `node-expand` / `node-collapse` / `node-drop` | 交互回调。 |
+
+## Events
+
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `node-select` | `TreeNode` | 节点选中。 |
+| `node-expand` | `TreeNode` | 节点展开。 |
+| `node-collapse` | `TreeNode` | 节点收起。 |

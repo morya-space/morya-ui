@@ -72,3 +72,13 @@ import { WiButton, WiFlex, WiTag } from '@well-insight/ui'
 | `reverse` | `boolean` | `false` | Reverse main axis. |
 | `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | Gap between items. |
 | `wrap` | `boolean` | `true` | Allow wrapping (forced off when vertical). |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Layout children. |

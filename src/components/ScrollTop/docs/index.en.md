@@ -41,3 +41,11 @@ import { WiScrollTop } from '@well-insight/ui'
 | `bottom` | `string \| number` | — | Distance from the bottom edge; a number is pixels. |
 | `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+No slots.

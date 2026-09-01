@@ -82,3 +82,10 @@ const options = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `CascadeSelectValue` | Selection change. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `value` | Trigger display. |
+| `option` | Option `{ option }`. |

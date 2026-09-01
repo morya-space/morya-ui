@@ -38,3 +38,13 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `DockItem[]` | `[]` | 图标项。 |
 | `position` | `'bottom' \| 'top'` | `'bottom'` | 视觉位置修饰。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 停靠项。 |

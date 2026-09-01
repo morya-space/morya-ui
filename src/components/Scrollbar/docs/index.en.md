@@ -256,3 +256,16 @@ function loadMore(direction: ScrollbarDirection) {
 ### Expose
 
 `wrapRef`, `update`, `scrollTo`, `setScrollTop`, `setScrollLeft`, `handleScroll`
+
+## Events
+
+| Event | Payload | Description |
+| --- | --- | --- |
+| `scroll` | `{ scrollTop, scrollLeft }` | Scroll position change. |
+| `end-reached` | `'top' \| 'bottom' \| 'left' \| 'right'` | Scroll boundary reached. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Scrollable content. |

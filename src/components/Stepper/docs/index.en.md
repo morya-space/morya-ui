@@ -71,3 +71,9 @@ const steps = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `number` | Emitted when the step changes. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `icon` | Step icon `{ step, index }`. |

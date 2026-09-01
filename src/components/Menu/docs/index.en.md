@@ -82,3 +82,9 @@ const model = [
 | `update:modelValue` | `boolean` | Popup visibility changed. |
 | `update:selectedKey` | `string \| null` | Selected item changed. |
 | `select` | `MenuItem` | Emitted when a leaf is clicked. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `item` | Menu item `{ item }`. |

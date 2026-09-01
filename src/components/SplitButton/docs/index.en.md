@@ -49,3 +49,9 @@ const items = [
 | --- | --- | --- |
 | `click` | `MouseEvent` | Primary button click. |
 | `command` | `item` | Menu item activated. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Main button content. |

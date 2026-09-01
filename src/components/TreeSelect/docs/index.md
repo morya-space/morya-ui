@@ -124,3 +124,10 @@ const options = [{ key: 'docs', label: '文档' }]
 | --- | --- | --- |
 | `update:modelValue` | `string \| string[] \| null` | 选中变化。 |
 | `clear` | — | 点击清空。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `value` | 触发器展示。 |
+| `option` | 树节点 `{ node }`。 |

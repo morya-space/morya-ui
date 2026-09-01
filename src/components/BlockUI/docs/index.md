@@ -37,3 +37,11 @@ const blocked = ref(false)
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `blocked` | `boolean` | `false` | 是否遮罩。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+无插槽。

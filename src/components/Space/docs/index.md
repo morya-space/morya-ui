@@ -99,3 +99,13 @@ import { WiSpace, WiTag } from '@well-insight/ui'
 | `wrap` | `boolean` | `true` | 是否换行。 |
 | `wrapItem` | `boolean` | `true` | 是否用容器包裹每个子节点。 |
 | `itemClass` / `itemStyle` | — | — | 包裹层 class / style（`wrapItem` 为 true 时生效）。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 间距子项。 |

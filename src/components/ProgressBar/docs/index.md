@@ -55,3 +55,11 @@ import { WiProgressBar } from '@well-insight/ui'
 | `type` | `'line' \| 'circle'` | `'line'` | 线形或环形。 |
 | `status` | `'success' \| 'info' \| 'warn' \| 'danger' \| 'error'` | — | 语义色。 |
 | `color` | `string` | — | 自定义填充色。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+无插槽。

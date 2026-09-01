@@ -63,3 +63,7 @@ const code = ref('')
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `string` | 值变化。 |
+
+## Slots
+
+无插槽。

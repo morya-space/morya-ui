@@ -38,3 +38,13 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `DockItem[]` | `[]` | Icon items. |
 | `position` | `'bottom' \| 'top'` | `'bottom'` | Visual position modifier. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Dock items. |

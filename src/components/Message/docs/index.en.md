@@ -118,3 +118,7 @@ When a manual host exists, the API will not mount a second one.
 ## Events
 
 The `<WiMessage />` host emits no Vue events. Use the `{ id, close }` return value from `message.*` APIs to control lifetime.
+
+## Slots
+
+No slots; content is injected through the `message.*` API.

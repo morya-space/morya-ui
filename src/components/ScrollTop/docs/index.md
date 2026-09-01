@@ -41,3 +41,11 @@ import { WiScrollTop } from '@well-insight/ui'
 | `bottom` | `string \| number` | — | 距底边缘；数字为 px。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+无插槽。

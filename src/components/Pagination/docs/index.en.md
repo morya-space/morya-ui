@@ -91,3 +91,7 @@ const pageSize = ref(10)
 | --- | --- |
 | `first` | Zero-based index of the first record on the current page: `(page - 1) * rows`. |
 | `pageCount` | Total number of pages. |
+
+## Slots
+
+No slots.

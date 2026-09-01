@@ -55,3 +55,11 @@ import { WiProgressBar } from '@well-insight/ui'
 | `type` | `'line' \| 'circle'` | `'line'` | Line or circle. |
 | `status` | `'success' \| 'info' \| 'warn' \| 'danger' \| 'error'` | — | Semantic fill. |
 | `color` | `string` | — | Custom fill color. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+No slots.

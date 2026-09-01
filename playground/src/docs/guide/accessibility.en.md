@@ -36,7 +36,7 @@ Input-family components (`Input`, `Textarea`, `Select`, …) share the same fiel
 Notes:
 
 - **`label`** wires to the control; `FloatLabel` also sets `for` on the label element.
-- **`invalid`** sets `aria-invalid` and error styling (see legacy `error` alias in [API migration](/docs/migration)).
+- **`invalid`** sets `aria-invalid` and error styling.
 - **`error-message`** is linked through `aria-describedby`.
 - Mark required fields with native `required` when supported **and** validation copy—not color alone.
 
@@ -107,6 +107,5 @@ See [OPTIMIZATION.md](https://github.com/well-insight/well-insight-ui/blob/main/
 
 ## See also
 
-- [API migration](/docs/migration): `invalid` props and CSS classes
 - [Theme](/docs/theme): motion preference and tokens
 - [Configuration](/docs/config): locale and defaults

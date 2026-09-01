@@ -82,3 +82,9 @@ const model = [
 | `update:modelValue` | `boolean` | popup 可见性变化。 |
 | `update:selectedKey` | `string \| null` | 选中项变化。 |
 | `select` | `MenuItem` | 点击叶子项。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `item` | 菜单项 `{ item }`。 |

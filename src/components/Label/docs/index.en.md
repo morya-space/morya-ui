@@ -43,3 +43,7 @@ import { WiInput, WiLabel } from '@well-insight/ui'
 | Slot | Description |
 | --- | --- |
 | `default` | Label text. |
+
+## Events
+
+No custom events.

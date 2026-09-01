@@ -114,3 +114,7 @@ import { WiBadge, WiButton } from '@well-insight/ui'
 
 - When badge counts matter, update nearby visible text or an `aria-live` region.
 - Do not rely on the badge alone as the only status indicator.
+
+## Events
+
+No custom events.

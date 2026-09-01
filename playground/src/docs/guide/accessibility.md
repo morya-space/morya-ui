@@ -36,7 +36,7 @@ Well Insight 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组�
 要点：
 
 - **`label`** 会关联到控件；配合 `FloatLabel` 时也会写入 `for`。
-- **`invalid`** 会设置 `aria-invalid` 与错误样式（见 [API 迁移](/docs/migration) 中 `error` 别名说明）。
+- **`invalid`** 会设置 `aria-invalid` 与错误样式。
 - **`error-message`** 会通过 `aria-describedby` 关联帮助/错误区域。
 - 必填请同时使用原生 `required`（若组件支持）或业务层校验提示，不要只用颜色表达。
 
@@ -107,6 +107,5 @@ setMotion('reduced') // 或 'none'
 
 ## 相关
 
-- [API 迁移](/docs/migration)：`invalid` 与样式类说明
 - [主题](/docs/theme)：动效偏好与令牌
 - [全局配置](/docs/config)：语言包与默认尺寸

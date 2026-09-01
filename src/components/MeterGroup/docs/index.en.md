@@ -38,3 +38,13 @@ const value = [
 | --- | --- | --- | --- |
 | `value` | `MeterGroupItem[]` | — | Segment data. |
 | `max` | `number` | Sum of segments | Maximum total. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `label` | Custom label `{ meter }`. |

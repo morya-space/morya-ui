@@ -318,3 +318,9 @@ import {
 | `WiLayoutContent` | 主内容区（默认撑满剩余空间）。 |
 | `WiLayoutFooter` | 底栏。 |
 | `WiLayoutSider` | 侧栏。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 布局区域。 |

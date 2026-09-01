@@ -94,3 +94,10 @@ const suggestions = [
 | --- | --- | --- |
 | `update:modelValue` | `string` | Value change. |
 | `complete` | `query: string` | Request completion. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `item` | Option row `{ option }`. |
+| `empty` | No matches. |

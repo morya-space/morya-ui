@@ -38,7 +38,6 @@ Source: [GitHub](https://github.com/well-insight/well-insight-ui)
 - [Guide](/docs/guide): folder conventions and how to write docs
 - [Theme](/docs/theme): light/dark and motion
 - [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`
-- [API migration](/docs/migration): deprecated prop mapping
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
 - [MCP](/docs/mcp): optional AI documentation server
 - [Components](/components): browse all components and APIs

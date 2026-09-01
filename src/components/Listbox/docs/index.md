@@ -50,3 +50,9 @@ const options = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | 同 `modelValue` | 值变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `option` | 选项 `{ option }`。 |

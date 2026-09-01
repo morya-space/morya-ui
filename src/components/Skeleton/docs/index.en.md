@@ -91,3 +91,11 @@ import { WiSkeleton } from '@well-insight/ui'
 | `animation` | `'wave' \| 'none'` | `'wave'` | Loading animation. |
 | `text` | `boolean` | `false` | Render as a text-line height. |
 | `repeat` | `number` | `1` | Number of repeated rows. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+No slots.

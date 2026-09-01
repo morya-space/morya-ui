@@ -77,3 +77,7 @@ const model = [
 
 - 面板为 `role="dialog"`、`aria-modal="true"`。
 - 打开后焦点落在搜索框；请为触发按钮提供可访问名称。
+
+## Slots
+
+无插槽。

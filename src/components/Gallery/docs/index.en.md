@@ -46,3 +46,9 @@ const images = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:activeIndex` | `number` | Index change. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `item` | Media item `{ item, index }`. |

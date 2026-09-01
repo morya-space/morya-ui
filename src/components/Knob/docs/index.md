@@ -44,3 +44,7 @@ const value = ref(60)
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `number` | 值变化。 |
+
+## Slots
+
+无插槽。

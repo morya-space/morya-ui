@@ -192,3 +192,9 @@ const shortcuts = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `string \| [string, string] \| null` | Value change. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `trigger` | Custom trigger `{ value, open }`. |

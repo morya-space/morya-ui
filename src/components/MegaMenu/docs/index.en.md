@@ -75,3 +75,11 @@ Top-level entries without `items` behave as plain links via `command`.
 
 - Top items expose button/link semantics; ensure submenu links are keyboard reachable.
 - Pair with skip links and `aria-current` on the active page when used as primary nav.
+
+## Events
+
+No custom events.
+
+## Slots
+
+No slots.

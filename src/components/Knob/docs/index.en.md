@@ -44,3 +44,7 @@ const value = ref(60)
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `number` | Value changed. |
+
+## Slots
+
+No slots.

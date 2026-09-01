@@ -95,3 +95,7 @@ const value = ref(50)
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `number \| number[]` | 值变化。 |
+
+## Slots
+
+无插槽。

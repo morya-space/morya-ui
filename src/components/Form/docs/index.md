@@ -175,3 +175,9 @@ const model = reactive({ city: '', zip: '' })
 | `validate` | `{ valid, errors }` |
 | `validate(name?)` | **始终 resolve** `{ valid, errors }`，不会因失败 reject |
 | `clearValidate(name?)` | 清除内部错误 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 表单项。 |

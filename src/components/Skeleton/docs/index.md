@@ -91,3 +91,11 @@ import { WiSkeleton } from '@well-insight/ui'
 | `animation` | `'wave' \| 'none'` | `'wave'` | 加载动画。 |
 | `text` | `boolean` | `false` | 按文本行高度渲染。 |
 | `repeat` | `number` | `1` | 重复行数。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+无插槽。

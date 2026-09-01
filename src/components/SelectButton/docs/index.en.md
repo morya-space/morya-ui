@@ -70,3 +70,7 @@ const options = [
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | Same as `modelValue` | Emitted when the value changes. |
+
+## Slots
+
+No slots.

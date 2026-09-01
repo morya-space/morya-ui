@@ -102,3 +102,9 @@ const model = [
 | `hide()` | Hide the menu. |
 
 `useContextMenu()` returns `{ visible, position, show, hide }` for imperative open.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Trigger element (inline mode). |

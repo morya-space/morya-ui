@@ -94,3 +94,10 @@ const suggestions = [
 | --- | --- | --- |
 | `update:modelValue` | `string` | 值变化。 |
 | `complete` | `query: string` | 请求补全。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `item` | 选项项 `{ option }`。 |
+| `empty` | 无匹配结果。 |

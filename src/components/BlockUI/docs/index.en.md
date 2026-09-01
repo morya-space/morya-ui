@@ -37,3 +37,11 @@ const blocked = ref(false)
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `blocked` | `boolean` | `false` | Whether the overlay is active. |
+
+## Events
+
+No custom events.
+
+## Slots
+
+No slots.

@@ -47,3 +47,13 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `SidebarItem[]` | `[]` | 菜单项。 |
 | `collapsed` | `boolean` | `false` | 仅显示图标。 |
+
+## Events
+
+无自定义事件。
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 侧栏内容。 |

@@ -61,3 +61,7 @@ const items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)
 
 - The scroll region uses native overflow. Keep a sensible tab order when rows contain controls.
 - Pair long lists with search or filtering instead of scroll-only discovery.
+
+## Events
+
+No custom events.

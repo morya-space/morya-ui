@@ -57,10 +57,10 @@
 
 ## 阶段四：组件 API 与文档质量
 
-- [x] deprecated prop 迁移说明（`error`→`invalid`、`block`→`fluid` 等）
-- [x] CSS 修饰类 `--error` 与 `invalid` prop 命名对齐（逐步）
+- [x] deprecated prop 迁移说明（已移除 `error`/`block`/`autoResize`/`orientation` 别名）
+- [x] CSS 修饰类统一为 `--invalid`（移除表单 `--error` 别名）
 - [x] 补薄文档：CommandMenu、TieredMenu、MegaMenu、VirtualScroller
-- [ ] 补 Events / Slots 缺失章节（按使用频率排序）
+- [x] 补 Events / Slots 缺失章节（按使用频率排序）
 - [x] 中文文档小节标题统一（如 `## 基础用法` 替代 `## Basic`）
 - [x] 新增无障碍指南页（playground `/docs/accessibility`）
 ---
@@ -88,6 +88,7 @@
 | 2026-09-01 | 四 | Select 增加 `wi-select--invalid` 修饰类（保留 `--error` 别名） |
 | 2026-09-01 | 四 | 中文组件文档 `## Basic` 统一为 `## 基础用法`（80 处） |
 | 2026-09-01 | 四 | 补充 Table/DataView Events；Tooltip 等 a11y 文档章节 |
+| 2026-09-01 | 四 | 移除 deprecated props；统一 invalid CSS；补全 Events/Slots |
 
 ---
 

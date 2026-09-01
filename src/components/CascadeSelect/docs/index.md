@@ -82,3 +82,10 @@ const options = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `CascadeSelectValue` | 选中变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `value` | 触发器展示内容。 |
+| `option` | 选项 `{ option }`。 |

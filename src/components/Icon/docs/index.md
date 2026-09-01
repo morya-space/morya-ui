@@ -211,3 +211,7 @@ import { User } from 'lucide-vue-next'
 | --- | --- |
 | `iconNames` | 全部系统图标名数组。 |
 | `iconRegistry` / `getIconDefinition` / `isIconName` | 注册表与类型守卫。 |
+
+## Events
+
+无自定义事件。

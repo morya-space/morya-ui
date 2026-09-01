@@ -85,3 +85,9 @@ async function beforeAccept() {
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | 显隐。 |
 | `accept` / `reject` | — | 确认 / 取消。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 弹出层正文。 |

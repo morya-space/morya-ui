@@ -68,3 +68,9 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | `error` | `Event` | Image failed to load. |
 
 `WiAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Fallback when `src` is omitted. |

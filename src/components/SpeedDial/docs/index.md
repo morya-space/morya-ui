@@ -53,3 +53,10 @@ const items = [
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | 展开态变化。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `button` | 自定义主按钮。 |
+| `item` | 动作项 `{ item }`。 |
