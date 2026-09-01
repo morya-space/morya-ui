@@ -29,7 +29,7 @@ Source: [GitHub](https://github.com/well-insight/well-insight-ui)
 | Context | Resolved entry | Notes |
 | --- | --- | --- |
 | **npm / pnpm install** | `dist/` | ESM, `.d.ts`, `styles.css`, and on-demand subpaths |
-| **Local link / monorepo** | Vite alias → `src/` in the consuming app | See [Development guide](../docs/DEVELOPMENT.md) |
+| **Local link / monorepo** | Vite alias → `src/` in the consuming app | See [Development guide](https://github.com/well-insight/well-insight-ui/blob/main/docs/DEVELOPMENT.md) |
 | **Production build** | `dist/` | Always uses build output |
 
 ## Next steps
@@ -38,4 +38,5 @@ Source: [GitHub](https://github.com/well-insight/well-insight-ui)
 - [Guide](/docs/guide): folder conventions and how to write docs
 - [Theme](/docs/theme): light/dark and motion
 - [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`
+- [MCP](/docs/mcp): optional AI documentation server
 - [Components](/components): browse all components and APIs

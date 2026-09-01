@@ -29,7 +29,7 @@ description: Well Insight 是什么、适合谁用。
 | 场景 | 解析入口 | 说明 |
 | --- | --- | --- |
 | **npm / pnpm 安装** | `dist/` | ESM、`.d.ts`、`styles.css` 与按需子路径 |
-| **本地 link / monorepo 联调** | 业务项目配置 Vite alias → `src/` | 参见 [开发指南](../docs/DEVELOPMENT.zh-CN.md) |
+| **本地 link / monorepo 联调** | 业务项目配置 Vite alias → `src/` | 参见仓库 [DEVELOPMENT.zh-CN.md](https://github.com/well-insight/well-insight-ui/blob/main/docs/DEVELOPMENT.zh-CN.md) |
 | **生产构建** | `dist/` | 始终使用构建产物 |
 
 ## 下一步
@@ -38,4 +38,5 @@ description: Well Insight 是什么、适合谁用。
 - [指南](/docs/guide)：目录约定与文档写法
 - [主题](/docs/theme)：亮暗色与动效
 - [全局配置](/docs/config)：`ConfigProvider` / `createWellInsight`
+- [MCP](/docs/mcp)：可选 AI 文档检索服务
 - [组件](/components)：浏览全部组件与 API
