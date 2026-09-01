@@ -12,7 +12,22 @@ function readStoredLang(): DocsLang {
   return stored === 'en-US' ? 'en-US' : 'zh-CN'
 }
 
-const lang = ref<DocsLang>(readStoredLang())
+function readLangFromQuery(): DocsLang | null {
+  if (typeof window === 'undefined') return null
+  const value = new URLSearchParams(window.location.search).get('lang')
+  if (value === 'en-US' || value === 'en') return 'en-US'
+  if (value === 'zh-CN' || value === 'zh') return 'zh-CN'
+  return null
+}
+
+function writeLangQuery(next: DocsLang) {
+  if (typeof window === 'undefined') return
+  const url = new URL(window.location.href)
+  url.searchParams.set('lang', next)
+  window.history.replaceState(window.history.state, '', url)
+}
+
+const lang = ref<DocsLang>(readLangFromQuery() ?? readStoredLang())
 
 const messages = {
   'zh-CN': {
@@ -245,6 +260,7 @@ watch(
     if (typeof window === 'undefined') return
     window.localStorage.setItem(STORAGE_KEY, value)
     document.documentElement.lang = value === 'en-US' ? 'en' : 'zh-CN'
+    writeLangQuery(value)
   },
   { immediate: true },
 )
