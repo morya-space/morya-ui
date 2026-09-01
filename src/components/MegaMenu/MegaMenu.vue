@@ -3,6 +3,7 @@ import type { MegaMenuItem, MegaMenuProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 
 const props = withDefaults(defineProps<MegaMenuProps>(), {
   model: () => [],
@@ -26,10 +27,7 @@ function updatePanelPosition() {
   const trigger = triggerEls.value[openIndex.value]
   if (!trigger) return
   const rect = trigger.getBoundingClientRect()
-  panelStyle.value = {
-    left: `${rect.left}px`,
-    top: `${rect.bottom + 4}px`,
-  }
+  panelStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', { gap: 4 })
 }
 
 function toggle(index: number, item: MegaMenuItem) {

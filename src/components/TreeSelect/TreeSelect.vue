@@ -5,6 +5,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import {
   expandCheckedKeys,
   findNode,
@@ -97,11 +98,9 @@ const filteredOptions = computed(() => {
 function updatePanelPosition() {
   if (!teleported.value || !trigger.value) return
   const rect = trigger.value.getBoundingClientRect()
-  panelStyle.value = {
-    left: `${rect.left}px`,
+  panelStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', {
     minWidth: `${rect.width}px`,
-    top: `${rect.bottom + 8}px`,
-  }
+  })
 }
 
 function toggle() {

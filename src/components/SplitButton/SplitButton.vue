@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
   model: () => [],
@@ -41,12 +42,10 @@ const rootClass = computed(() => [
 function updateMenuPosition() {
   if (!teleported.value || !root.value) return
   const rect = root.value.getBoundingClientRect()
-  menuStyle.value = {
-    left: 'auto',
+  menuStyle.value = computeFloatingOverlayStyle(rect, 'bottom-end', {
+    gap: 4,
     minWidth: `${rect.width}px`,
-    right: `${document.documentElement.clientWidth - rect.right}px`,
-    top: `${rect.bottom + 4}px`,
-  }
+  })
 }
 
 function onViewportChange() {
