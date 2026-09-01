@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.12
+
+### Changes
+
+- import Icon styles across multiple components
+
 ## 0.1.11
 
 ### Breaking Changes
