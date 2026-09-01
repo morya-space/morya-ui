@@ -6,6 +6,7 @@ import {
     isOverlayTeleported,
     resolveOverlayTeleport,
 } from "../../shared/overlay";
+import { computeFloatingOverlayStyle } from "../../shared/overlayPlacement";
 
 const props = withDefaults(defineProps<PopoverProps>(), {
     modelValue: false,
@@ -113,47 +114,10 @@ function onTriggerBlur() {
 
 function updatePanelPosition() {
     if (!teleported.value || !trigger.value) return;
-    const rect = trigger.value.getBoundingClientRect();
-    const gap = 8;
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    if (props.placement === "top") {
-        panelStyle.value = {
-            left: `${centerX}px`,
-            top: `${rect.top - gap}px`,
-            transform: "translate(-50%, -100%)",
-        };
-    } else if (props.placement === "bottom") {
-        panelStyle.value = {
-            left: `${centerX}px`,
-            top: `${rect.bottom + gap}px`,
-            transform: "translateX(-50%)",
-        };
-    } else if (props.placement === "left") {
-        panelStyle.value = {
-            left: `${rect.left - gap}px`,
-            top: `${centerY}px`,
-            transform: "translate(-100%, -50%)",
-        };
-    } else if (props.placement === "right") {
-        panelStyle.value = {
-            left: `${rect.right + gap}px`,
-            top: `${centerY}px`,
-            transform: "translateY(-50%)",
-        };
-    } else if (props.placement === "bottom-end") {
-        panelStyle.value = {
-            left: `${rect.right}px`,
-            top: `${rect.bottom + gap}px`,
-            transform: "translateX(-100%)",
-        };
-    } else {
-        panelStyle.value = {
-            left: `${rect.left}px`,
-            top: `${rect.bottom + gap}px`,
-        };
-    }
+    panelStyle.value = computeFloatingOverlayStyle(
+        trigger.value.getBoundingClientRect(),
+        props.placement,
+    );
 }
 
 function onDocumentClick(event: MouseEvent) {
