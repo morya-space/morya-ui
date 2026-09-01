@@ -222,7 +222,7 @@ watch(() => props.doc.name, () => nextTick(refreshNavigation))
   background: transparent;
   padding: 0;
 }
-.wi-markdown-doc table {
+.wi-markdown-doc > table {
   border-collapse: collapse;
   font-size: 0.9rem;
   margin: 1rem 0 1.5rem;

@@ -24,14 +24,14 @@ const stats = [
   { label: '系统健康', value: '99.9%', trend: '稳定', icon: 'heart' },
 ]
 
-const recentColumns = [
-  { key: 'id', label: '工单号', width: '6rem' },
-  { key: 'title', label: '标题' },
-  { key: 'priority', label: '优先级', width: '6rem' },
-  { key: 'status', label: '状态', width: '6rem' },
+const recentHeaders = [
+  { text: '工单号', value: 'id', width: 96 },
+  { text: '标题', value: 'title' },
+  { text: '优先级', value: 'priority', width: 96 },
+  { text: '状态', value: 'status', width: 96 },
 ]
 
-const recentRows = [
+const recentItems = [
   { id: '#1024', title: '登录异常反馈', priority: 'high', status: 'open' },
   { id: '#1023', title: '导出任务超时', priority: 'medium', status: 'progress' },
   { id: '#1022', title: '权限配置咨询', priority: 'low', status: 'done' },
@@ -86,12 +86,12 @@ function statusLabel(s: string) {
         </WiGridItem>
         <WiGridItem :span="1">
           <WiCard title="最近工单">
-            <WiTable :columns="recentColumns" :rows="recentRows" row-key="id" size="small">
-              <template #cell-priority="{ row }">
-                <WiTag :value="row.priority" :severity="prioritySeverity(row.priority)" />
+            <WiTable :headers="recentHeaders" :items="recentItems" size="small" hide-footer border-cell>
+              <template #item-priority="{ priority }">
+                <WiTag :value="priority" :severity="prioritySeverity(priority)" />
               </template>
-              <template #cell-status="{ row }">
-                <WiTag :value="statusLabel(row.status)" severity="info" />
+              <template #item-status="{ status }">
+                <WiTag :value="statusLabel(status)" severity="info" />
               </template>
             </WiTable>
           </WiCard>

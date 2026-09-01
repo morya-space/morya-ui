@@ -459,16 +459,22 @@ export type {
 } from "./components/Switch/types";
 export { default as WiTable } from "./components/Table/Table.vue";
 export type {
-  TableColumn,
-  TableColumnFilterOption,
+  TableBodyItemClassName,
+  TableBodyRowClassName,
+  TableClickEventType,
+  TableClickRowArgument,
   TableEmits,
-  TableFilters,
-  TableFixed,
+  TableFilterComparison,
+  TableFilterOption,
+  TableHeader,
+  TableHeaderItemClassName,
+  TableItem,
   TableProps,
-  TableSelectionMode,
+  TableServerOptions,
   TableSize,
-  TableSortMode,
-  TableSortOrder,
+  TableSortType,
+  TableTextDirection,
+  TableUpdateSortArgument,
 } from "./components/Table/types";
 export { default as WiTabs } from "./components/Tabs/Tabs.vue";
 export type {

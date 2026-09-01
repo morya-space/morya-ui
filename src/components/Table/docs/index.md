@@ -1,23 +1,18 @@
 ---
 title: Table
 category: 06 / DATA
-description: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。
+description: 数据表格。API 对齐 vue3-easy-data-table：headers/items、客户端/服务端分页排序、多选、展开行与内置页脚。
 ---
 
 # Table
 
-数据表格。列宽逻辑：
-
-- 设置了 `width` 的列固定宽度
-- 未设 `width` 的列按 `minWidth`（默认 `80`）作为弹性列，在 `fit`（默认 `true`）时按比例分配剩余宽度
-- 总最小宽度超过容器时出现横向滚动
-
-**本批次对齐子集：** 列 `render`、插槽 `body-cell` / `expansion`、可展开行。不做虚拟滚动、树形表、单元格编辑。
+`WiTable` 采用 **headers + items** 数据模型，内置筛选、排序、分页与多选逻辑（参考 [vue3-easy-data-table](https://github.com/HC200ok/vue3-easy-data-table)）。
 
 ## 引入
 
 ```ts
 import { WiTable, WiTag } from '@well-insight/ui'
+import type { TableHeader, TableItem } from '@well-insight/ui'
 ```
 
 ## 基础用法
@@ -26,264 +21,171 @@ import { WiTable, WiTag } from '@well-insight/ui'
 <script setup lang="ts">
 import { WiTable, WiTag } from '@well-insight/ui'
 
-const columns = [
-  { key: 'name', label: '项目', minWidth: 140, sortable: true },
-  { key: 'status', label: '状态', width: 120 },
-  { key: 'owner', label: '负责人', minWidth: 100 },
-  { key: 'team', label: '团队', minWidth: 120 },
-  { key: 'progress', label: '进度', width: 100, align: 'end' as const },
+const headers = [
+  { text: '项目', value: 'name', sortable: true },
+  { text: '状态', value: 'status', width: 120 },
+  { text: '负责人', value: 'owner' },
 ]
-const rows = [
-  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },
-  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },
-  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },
-  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },
-  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },
-  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },
-  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },
-  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },
+const items = [
+  { name: 'Landing Redesign', status: 'Published', owner: 'Ada' },
+  { name: 'Dashboard v2', status: 'Draft', owner: 'Lin' },
 ]
 </script>
 
 <template>
-  <WiTable :columns="columns" :rows="rows" striped bordered>
-    <template #cell-status="{ value }">
+  <WiTable :headers="headers" :items="items" alternating border-cell hide-footer />
+</template>
+```
+
+## 列插槽
+
+使用 `#item-{value}` 自定义单元格（作用域为整行 item）：
+
+```vue preview
+<script setup lang="ts">
+import { WiTable, WiTag } from '@well-insight/ui'
+
+const headers = [
+  { text: '项目', value: 'name' },
+  { text: '状态', value: 'status', width: 120 },
+]
+const items = [
+  { name: 'Landing', status: 'Published' },
+  { name: 'Dashboard', status: 'Draft' },
+]
+</script>
+
+<template>
+  <WiTable :headers="headers" :items="items" hide-footer border-cell>
+    <template #item-status="{ status }">
       <WiTag
-        :value="String(value)"
-        :severity="value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'"
+        :value="String(status)"
+        :severity="status === 'Published' ? 'success' : 'secondary'"
       />
     </template>
   </WiTable>
 </template>
 ```
 
-## Selection
+## 多选 / 单选
+
+多选使用 **`WiCheckbox`**（`selection-mode="multiple"` + `v-model:items-selected`）；单选使用 **`WiRadio`**（`selection-mode="single"` + `v-model:selected-item`）。仍兼容仅传 `items-selected` 数组的旧写法。
 
 ```vue preview
 <script setup lang="ts">
 import { WiTable } from '@well-insight/ui'
 import { ref } from 'vue'
 
-const columns = [
-  { key: 'name', label: '姓名', minWidth: 120 },
-  { key: 'role', label: '角色', minWidth: 120 },
-  { key: 'dept', label: '部门', minWidth: 120 },
-  { key: 'city', label: '城市', minWidth: 100 },
-  { key: 'level', label: '级别', width: 90 },
+const headers = [
+  { text: '姓名', value: 'name' },
+  { text: '角色', value: 'role' },
 ]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },
-  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },
-  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },
-  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },
-  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },
-  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },
-  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },
-  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },
-  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },
-  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },
+const items = [
+  { id: 1, name: 'Ada', role: 'Designer' },
+  { id: 2, name: 'Lin', role: 'Engineer' },
 ]
-const selection = ref([])
+const itemsSelected = ref<Record<string, unknown>[]>([])
 </script>
 
 <template>
   <WiTable
-    v-model:selection="selection"
-    :columns="columns"
-    :rows="rows"
+    v-model:items-selected="itemsSelected"
     selection-mode="multiple"
-    highlight-current
+    :headers="headers"
+    :items="items"
+    hide-footer
   />
 </template>
 ```
 
-## Filter + Pagination
+## 展开行
 
-```vue preview
-<script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
-import { ref } from 'vue'
-
-const columns = [
-  { key: 'name', label: '姓名', filterable: true, sortable: true, minWidth: 120 },
-  {
-    key: 'role',
-    label: '角色',
-    filterable: true,
-    minWidth: 120,
-    filters: [
-      { label: 'Engineer', value: 'Engineer' },
-      { label: 'Designer', value: 'Designer' },
-      { label: 'PM', value: 'PM' },
-      { label: 'QA', value: 'QA' },
-    ],
-  },
-  { key: 'dept', label: '部门', minWidth: 120, sortable: true },
-  { key: 'email', label: '邮箱', minWidth: 180 },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },
-  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },
-  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },
-  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },
-  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },
-  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },
-  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },
-  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },
-  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },
-  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },
-  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },
-  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },
-]
-const page = ref(1)
-</script>
-
-<template>
-  <WiTable
-    v-model:page="page"
-    :columns="columns"
-    :rows="rows"
-    paginator
-    :rows-per-page="5"
-  />
-</template>
-```
-
-## Fixed columns
+提供 `#expand` 插槽时自动出现展开列：
 
 ```vue preview
 <script setup lang="ts">
 import { WiTable } from '@well-insight/ui'
 
-const columns = [
-  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
-  { key: 'q1', label: 'Q1 营收', width: 140 },
-  { key: 'q2', label: 'Q2 营收', width: 140 },
-  { key: 'q3', label: 'Q3 营收', width: 140 },
-  { key: 'q4', label: 'Q4 营收', width: 140 },
-  { key: 'yoy', label: '同比', width: 100 },
-  { key: 'action', label: '操作', width: 100, fixed: 'right' as const },
+const headers = [
+  { text: '姓名', value: 'name' },
+  { text: '角色', value: 'role' },
 ]
-const rows = [
-  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', q4: '15.2万', yoy: '+18%', action: '编辑' },
-  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', q4: '12.0万', yoy: '+12%', action: '编辑' },
-  { id: 3, name: 'Kai', q1: '15.0万', q2: '14.6万', q3: '16.1万', q4: '17.3万', yoy: '+9%', action: '编辑' },
-  { id: 4, name: 'Mia', q1: '8.2万', q2: '8.9万', q3: '9.4万', q4: '10.1万', yoy: '+21%', action: '编辑' },
-  { id: 5, name: 'Neo', q1: '11.3万', q2: '11.0万', q3: '12.2万', q4: '13.5万', yoy: '+7%', action: '编辑' },
-  { id: 6, name: 'Zoe', q1: '10.5万', q2: '11.8万', q3: '12.4万', q4: '13.0万', yoy: '+15%', action: '编辑' },
+const items = [
+  { name: 'Ada', role: 'Designer', extra: 'Design system' },
 ]
 </script>
 
 <template>
-  <WiTable :columns="columns" :rows="rows" bordered />
-</template>
-```
-
-## Expandable + column render
-
-列 `render` 自定义单元格；`expandable` 展开行由插槽 `expansion` 渲染。`cell-{key}` 优先于 `render`。
-
-```vue preview
-<script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
-import { ref } from 'vue'
-
-const expandedRowKeys = ref<Array<string | number>>([])
-const columns = [
-  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },
-  { key: 'role', label: '角色' },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },
-  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },
-]
-</script>
-
-<template>
-  <WiTable
-    v-model:expanded-row-keys="expandedRowKeys"
-    :columns="columns"
-    :rows="rows"
-    expandable
-    bordered
-  >
-    <template #expansion="{ row }">
-      {{ row.extra }}
+  <WiTable :headers="headers" :items="items" hide-footer border-cell>
+    <template #expand="{ extra }">
+      {{ extra }}
     </template>
   </WiTable>
 </template>
 ```
 
-## Empty / Loading
+## 服务端模式
 
-```vue preview
-<script setup lang="ts">
-import { WiButton, WiTable } from '@well-insight/ui'
-import { ref } from 'vue'
+传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序。
 
-const loading = ref(false)
-const columns = [
-  { key: 'name', label: '姓名', minWidth: 120 },
-  { key: 'role', label: '角色', minWidth: 120 },
-  { key: 'dept', label: '部门', minWidth: 120 },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <WiButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
-    <WiTable
-      :columns="columns"
-      :rows="[]"
-      :loading="loading"
-      empty-text="还没有数据"
-      empty-description="创建第一条记录后会显示在这里"
-    />
-  </div>
-</template>
-```
-
-## Props
+| Element Plus | WiTable |
+| --- | --- |
+| `border` | `border`（外框 + 列分割线，等同 `borderCell`） |
+| `stripe` | `stripe` 或 `alternating` |
+| `size` | `size="sm" \| "md" \| "lg"` |
+| `highlight-current-row` | `highlightCurrentRow` + `v-model:current-row-key` |
+| `show-overflow-tooltip` | `showOverflowTooltip` |
+| `empty-text` | `emptyText` 或 `emptyMessage` |
+| `max-height` | `maxHeight` 或 `tableHeight` |
+| `#default` / column slot | `#item-{value}` |
+| `data` | `items` |
+| `columns` / `prop`+`label` | `headers` / `value`+`text` |
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `columns` | `TableColumn[]` | — | 列定义：`width` 固定；`minWidth` 弹性下限（默认 80）；可设 `render`。 |
-| `fit` | `boolean` | `true` | 弹性列是否按比例分配剩余宽度。 |
-| `rows` | `Record[]` | — | 行数据。 |
-| `selectionMode` | `'single' \| 'multiple'` | — | 行选择。 |
-| `selection` | — | — | `v-model:selection`。 |
-| `filters` | `Record` | `{}` | `v-model:filters`。 |
-| `paginator` | `boolean` | `false` | 内置分页。 |
-| `rowsPerPage` / `page` | — | `10` / `1` | 分页。 |
-| `expandable` | `boolean` | `false` | 展开列；用插槽 `expansion` 渲染详情行。 |
-| `expandedRowKeys` | `Array<string \| number>` | `[]` | `v-model:expanded-row-keys`。 |
-| `rowExpandable` | `(row) => boolean` | — | 返回 `false` 时该行不可展开。 |
-| `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | 外观。 |
-| `sortMode` | `'client' \| 'emit'` | `'client'` | 本地排序或仅抛事件。 |
-| `sortField` / `sortOrder` | — | — | 受控排序。 |
-| `loading` / `emptyText` / `emptyDescription` / `size` | — | — | 同前。 |
+| `headers` | `TableHeader[]` | — | 列定义：`text` / `value` / `sortable` / `fixed` / `width` |
+| `items` | `TableItem[]` | — | 行数据 |
+| `itemsSelected` | `TableItem[] \| null` | `null` | 多选；配合 `selectionMode="multiple"` |
+| `selectionMode` | `'multiple' \| 'single' \| null` | `null` | 选择列类型（`WiCheckbox` / `WiRadio`） |
+| `selectedItem` | `TableItem \| null` | `null` | 单选行（`v-model:selected-item`） |
+| `serverOptions` | `TableServerOptions \| null` | `null` | 服务端分页排序 |
+| `rowsPerPage` | `number` | `25` | 每页条数 |
+| `currentPage` | `number` | `1` | 当前页 |
+| `sortBy` / `sortType` | — | `''` / `'asc'` | 客户端排序 |
+| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选 |
+| `searchField` / `searchValue` | — | `''` | 搜索 |
+| `alternating` | `boolean` | `false` | 斑马纹（`stripe` 别名） |
+| `border` / `borderCell` | `boolean` | `false` | 边框网格 |
+| `highlightCurrentRow` | `boolean` | `false` | 高亮当前行 |
+| `showOverflowTooltip` | `boolean` | `false` | 溢出 Tooltip |
+| `fit` | `boolean` | `true` | 列宽撑满表格 |
+| `hideFooter` | `boolean` | `false` | 隐藏内置页脚 |
+| `buttonsPagination` | `boolean` | `false` | 页码按钮分页 |
+| `loading` / `emptyMessage` | — | — | 加载与空态 |
+| `size` | `'sm' \| 'md' \| 'lg'` | — | 表格密度 |
+| `rowKey` | `string` | `'id'` | 行唯一键字段 |
+| `ariaLabel` | `string` | — | 表格无障碍名称 |
+| `currentRowKey` | `string \| number \| null` | `null` | 当前行键（可 v-model） |
 
 ## Slots
 
 | 插槽 | 说明 |
 | --- | --- |
-| `cell-{key}` | 列 `{key}` 的单元格；优先于列 `render`。 |
-| `body-cell` | 作用域 `{ row, column, value }`，自定义任意单元格。 |
-| `expansion` | 展开行内容，作用域 `{ row }`。 |
-| `empty` | 空数据占位。 |
-| `loading` | 加载中占位。 |
+| `header-{value}` / `header` | 自定义表头 |
+| `item-{value}` / `item` | 自定义单元格 |
+| `expand` | 展开行内容 |
+| `empty-message` / `loading` / `pagination` | 空态、加载、分页 |
+| `body` / `body-prepend` / `body-append` | 完全自定义表体 |
 
 ## Events
 
-| 事件名 | 参数 | 说明 |
-| --- | --- | --- |
-| `sort` | `{ sortField?, sortOrder }` | 排序变化（`sortMode="emit"` 或受控排序）。 |
-| `filter` | `TableFilters` | 筛选变化。 |
-| `page` | `number` | 分页页码变化。 |
-| `row-click` | `{ row, index }` | 行点击。 |
-| `current-change` | `row \| null` | 当前高亮行变化。 |
-| `expand` | `{ row, expanded }` | 行展开/收起。 |
-| `update:selection` | `selection` | 选择项变化（配合 `v-model:selection`）。 |
-| `update:filters` | `TableFilters` | 筛选 v-model。 |
-| `update:page` | `number` | 页码 v-model。 |
-| `update:expanded-row-keys` | `Array<string \| number>` | 展开行 keys v-model。 |
+| 事件 | 说明 |
+| --- | --- |
+| `clickRow` | 行单击/双击 |
+| `updateSort` | 排序变化 |
+| `update:itemsSelected` | 多选 v-model |
+| `update:serverOptions` | 服务端选项 v-model |
+| `update:currentRowKey` | 当前行 v-model |
+| `currentChange` | 当前行变化（新行、旧行） |
+| `expandRow` | 展开行 |
+| `selectRow` / `deselectRow` / `selectAll` | 选择相关 |

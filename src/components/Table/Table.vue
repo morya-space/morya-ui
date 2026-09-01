@@ -1,586 +1,765 @@
 <script setup lang="ts">
-import type {
-  TableColumn,
-  TableEmits,
-  TableFilters,
-  TableProps,
-  TableSortOrder,
-} from './types'
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { formatLocale, useWiLocale } from '../../locale'
+import type { TableEmits, TableHeader, TableItem, TableProps } from './types'
+import type { HeaderForRender, TableEmitFn } from './hooks'
+import {
+  computed,
+  provide,
+  ref,
+  toRefs,
+  useSlots,
+  watch,
+} from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { WiRenderableView } from '../../shared/Renderable'
+import { useWiLocale } from '../../locale'
+import type { ScrollbarInstance } from '../Scrollbar/types'
+import TableLoadingLine from './TableLoadingLine.vue'
 import WiCheckbox from '../Checkbox/Checkbox.vue'
 import WiIcon from '../Icon/Icon.vue'
 import WiPagination from '../Pagination/Pagination.vue'
 import WiProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import WiRadio from '../Radio/Radio.vue'
 import WiScrollbar from '../Scrollbar/Scrollbar.vue'
-import { computeColumnLayout, computeFixedOffsets, TABLE_EXPAND_WIDTH, TABLE_SELECTION_WIDTH } from './layout'
+import WiTooltip from '../Tooltip/Tooltip.vue'
+import {
+  useClickRow,
+  useExpandableRow,
+  useFixedColumn,
+  useHeaders,
+  usePageItems,
+  usePagination,
+  useRows,
+  useServerOptions,
+  useTotalItems,
+} from './hooks'
+import { generateColumnContent, resolveRowKey } from './utils'
 
 const props = withDefaults(defineProps<TableProps>(), {
-  rowKey: 'id',
-  emptyText: undefined,
+  itemsSelected: null,
+  selectionMode: null,
+  selectedItem: null,
+  serverOptions: null,
+  serverItemsLength: 0,
+  sortBy: '',
+  sortType: 'asc',
+  multiSort: false,
+  mustSort: false,
+  filterOptions: null,
+  searchField: '',
+  searchValue: '',
+  rowsPerPage: 25,
+  rowsItems: () => [25, 50, 100],
+  currentPage: 1,
   loading: false,
-  loadingText: undefined,
-  sortMode: 'client',
+  emptyMessage: undefined,
+  alternating: false,
+  stripe: undefined,
+  borderCell: false,
+  border: false,
+  noHover: false,
+  highlightCurrentRow: false,
+  currentRowKey: null,
+  showOverflowTooltip: false,
   fit: true,
-  striped: false,
-  bordered: false,
-  highlightCurrent: false,
-  rowHover: true,
-  filters: () => ({}),
-  paginator: false,
-  rowsPerPage: 10,
-  page: 1,
-  expandable: false,
+  emptyText: undefined,
+  showHeader: undefined,
+  maxHeight: null,
+  fixedHeader: true,
+  tableHeight: null,
+  tableMinHeight: 180,
+  showIndex: false,
+  showIndexSymbol: '#',
+  indexColumnWidth: 60,
+  fixedCheckbox: false,
+  fixedExpand: false,
+  fixedIndex: false,
+  expandColumnWidth: 36,
+  checkboxColumnWidth: null,
+  hideFooter: false,
+  hideHeader: false,
+  hideRowsPerPage: false,
+  buttonsPagination: false,
+  clickRowToExpand: false,
+  clickEventType: 'single',
+  headerTextDirection: 'left',
+  bodyTextDirection: 'left',
+  headerItemClassName: '',
+  bodyRowClassName: '',
+  bodyExpandRowClassName: '',
+  bodyItemClassName: '',
+  tableClassName: '',
+  headerClassName: '',
+  rowsPerPageMessage: 'rows per page:',
+  rowsOfPageSeparatorMessage: 'of',
+  preventContextMenuRow: true,
+  tableNodeId: '',
+  rowKey: 'id',
+  ariaLabel: undefined,
+  size: undefined,
 })
 
 const emit = defineEmits<TableEmits>()
+const tableEmit: TableEmitFn = (event, ...args) => {
+  ;(emit as (event: string, ...args: unknown[]) => void)(event, ...args)
+}
+
 const locale = useWiLocale()
-const sizeClass = useConfiguredSize('Table', () => props.size)
-const resolvedEmptyText = computed(
-  () => props.emptyText ?? locale.value.emptyMessage,
-)
-const resolvedLoadingText = computed(
-  () => props.loadingText ?? locale.value.loading,
-)
+const {
+  tableNodeId,
+  clickEventType,
+  bodyTextDirection,
+  checkboxColumnWidth,
+  currentPage,
+  expandColumnWidth,
+  filterOptions,
+  fixedCheckbox,
+  fixedExpand,
+  fixedHeader,
+  fixedIndex,
+  headers,
+  headerTextDirection,
+  indexColumnWidth,
+  items,
+  itemsSelected,
+  selectionMode,
+  selectedItem,
+  loading,
+  mustSort,
+  multiSort,
+  rowsItems,
+  rowsPerPage,
+  searchField,
+  searchValue,
+  serverItemsLength,
+  serverOptions,
+  showIndex,
+  sortBy,
+  sortType,
+  tableHeight,
+  tableMinHeight,
+  rowsOfPageSeparatorMessage,
+  showIndexSymbol,
+  preventContextMenuRow,
+  headerItemClassName,
+  bodyRowClassName,
+  bodyExpandRowClassName,
+  bodyItemClassName,
+  tableClassName,
+  headerClassName,
+  rowsPerPageMessage,
+  hideFooter,
+  hideHeader,
+  hideRowsPerPage,
+  buttonsPagination,
+  clickRowToExpand,
+  alternating,
+  stripe,
+  borderCell,
+  border,
+  highlightCurrentRow,
+  currentRowKey,
+  showOverflowTooltip,
+  fit,
+  emptyText,
+  showHeader,
+  maxHeight,
+  noHover,
+  emptyMessage,
+  rowKey,
+  ariaLabel,
+  size,
+} = toRefs(props)
 
-const innerField = ref<string | undefined>(props.sortField)
-const innerOrder = ref<TableSortOrder>(normalizeOrder(props.sortOrder))
-const innerFilters = ref<TableFilters>({ ...props.filters })
-const innerPage = ref(props.page)
-const innerExpandedKeys = ref<Array<string | number>>([...(props.expandedRowKeys ?? [])])
-const currentRowKey = ref<string | number | null>(null)
-const filterOpenKey = ref<string | null>(null)
+const sizeTone = useConfiguredSize('Table', () => size.value)
+const sizeClass = computed(() => {
+  if (sizeTone.value === 'small') return 'wi-table--small'
+  if (sizeTone.value === 'large') return 'wi-table--large'
+  return undefined
+})
 
-watch(() => props.sortField, (value) => { innerField.value = value })
-watch(() => props.sortOrder, (value) => { innerOrder.value = normalizeOrder(value) })
-watch(() => props.filters, (value) => { innerFilters.value = { ...value } }, { deep: true })
-watch(() => props.page, (value) => { innerPage.value = value })
-watch(
-  () => props.expandedRowKeys,
-  (value) => {
-    if (value) innerExpandedKeys.value = [...value]
+const tableRootClass = computed(() => [
+  tableClassName.value,
+  sizeClass.value,
+  {
+    'wi-table--border': resolvedBorderCell.value,
+    'wi-table--striped': resolvedStriped.value,
+    'wi-table--enable-row-hover': !noHover.value,
   },
+])
+
+const useTableFixedLayout = computed(() => fixedHeaders.value.length > 0 || fit.value !== false)
+
+const resolvedEmptyMessage = computed(
+  () => emptyMessage.value ?? emptyText.value ?? locale.value.emptyMessage,
 )
 
-function normalizeOrder(order: TableSortOrder | undefined): TableSortOrder {
-  if (order === 1 || order === 'asc') return 'asc'
-  if (order === -1 || order === 'desc') return 'desc'
+const resolvedStriped = computed(() => stripe.value ?? alternating.value)
+const resolvedBorderCell = computed(() => border.value || borderCell.value)
+const showHeaderComputed = computed(() => showHeader.value ?? !hideHeader.value)
+const resolvedTableHeight = computed(() => maxHeight.value ?? tableHeight.value)
+
+const tableHeightPx = computed(() => (resolvedTableHeight.value ? `${resolvedTableHeight.value}px` : null))
+const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
+
+const slots = useSlots()
+const ifHasPaginationSlot = computed(() => !!slots.pagination)
+const ifHasLoadingSlot = computed(() => !!slots.loading)
+const ifHasExpandSlot = computed(() => !!slots.expand)
+const ifHasBodySlot = computed(() => !!slots.body)
+
+const dataTable = ref<HTMLElement>()
+const scrollbarRef = ref<ScrollbarInstance>()
+provide('dataTable', dataTable)
+
+const showShadow = ref(false)
+const internalCurrentRowKey = ref<string | number | null>(null)
+
+const activeCurrentRowKey = computed(
+  () => currentRowKey.value ?? internalCurrentRowKey.value,
+)
+
+function onScrollbarScroll(payload: { scrollTop: number; scrollLeft: number }) {
+  showShadow.value = payload.scrollLeft > 0
+}
+
+const selectionColumn = computed((): 'checkbox' | 'radio' | null => {
+  const mode = selectionMode.value ?? (itemsSelected.value !== null ? 'multiple' : null)
+  if (mode === 'multiple') return 'checkbox'
+  if (mode === 'single') return 'radio'
   return null
-}
-
-function orderToSign(order: TableSortOrder): number {
-  if (order === 'asc' || order === 1) return 1
-  if (order === 'desc' || order === -1) return -1
-  return 0
-}
-
-function rowIdentity(row: Record<string, unknown>, index: number) {
-  return row[props.rowKey] ?? index
-}
-
-const scrollRef = ref<InstanceType<typeof WiScrollbar> | null>(null)
-const containerWidth = ref(0)
-let resizeObserver: ResizeObserver | null = null
-
-function scrollContainer() {
-  return scrollRef.value?.wrapRef ?? null
-}
-
-onMounted(() => {
-  const el = scrollContainer()
-  if (!el) return
-  const measure = () => {
-    containerWidth.value = el.clientWidth
-  }
-  measure()
-  resizeObserver = new ResizeObserver(measure)
-  resizeObserver.observe(el)
 })
 
-onBeforeUnmount(() => {
-  resizeObserver?.disconnect()
-  resizeObserver = null
-})
+const isMultipleSelectable = computed(() => selectionColumn.value === 'checkbox')
+const isSingleSelectable = computed(() => selectionColumn.value === 'radio')
 
-const layout = computed(() =>
-  computeColumnLayout(props.columns, containerWidth.value || 0, {
-    fit: props.fit,
-    selection: Boolean(props.selectionMode),
-    expand: props.expandable,
-  }),
+const mainWrapClass = computed(() => [
+  'wi-table__main',
+  {
+    'wi-table__main--fixed-header': fixedHeader.value,
+    'wi-table__main--fixed-height': Boolean(resolvedTableHeight.value),
+    'wi-table__main--shadow': showShadow.value,
+    'wi-table__main--table-fixed': useTableFixedLayout.value,
+    'wi-table__main--border-cell': resolvedBorderCell.value,
+  },
+])
+
+const scrollbarWrapStyle = computed(() => ({
+  minHeight: tableMinHeightPx.value,
+}))
+const isServerSideMode = computed(() => serverOptions.value !== null)
+
+const {
+  serverOptionsComputed,
+  updateServerOptionsPage,
+  updateServerOptionsSort,
+  updateServerOptionsRowsPerPage,
+} = useServerOptions(serverOptions, multiSort, tableEmit)
+
+const {
+  clientSortOptions,
+  headerColumns,
+  headersForRender,
+  updateSortField,
+  isMultiSorting,
+  getMultiSortNumber,
+} = useHeaders(
+  showIndexSymbol,
+  checkboxColumnWidth,
+  expandColumnWidth,
+  fixedCheckbox,
+  fixedExpand,
+  fixedIndex,
+  headers,
+  ifHasExpandSlot,
+  indexColumnWidth,
+  selectionColumn,
+  isServerSideMode,
+  mustSort,
+  serverOptionsComputed,
+  showIndex,
+  sortBy,
+  sortType,
+  multiSort,
+  updateServerOptionsSort,
+  tableEmit,
 )
 
-const layoutByKey = computed(() => {
-  const map = new Map(layout.value.columns.map((column) => [column.key, column]))
-  return map
-})
+const { rowsItemsComputed, rowsPerPageRef, updateRowsPerPage } = useRows(
+  isServerSideMode,
+  rowsItems,
+  serverOptions,
+  rowsPerPage,
+)
 
-const fixedOffsets = computed(() => computeFixedOffsets(layout.value.columns))
+const {
+  totalItems,
+  selectItemsComputed,
+  totalItemsLength,
+  toggleSelectAll,
+  toggleSelectItem,
+} = useTotalItems(
+  clientSortOptions,
+  filterOptions,
+  isServerSideMode,
+  items,
+  itemsSelected,
+  searchField,
+  searchValue,
+  serverItemsLength,
+  multiSort,
+  tableEmit,
+)
 
-const tableStyle = computed(() => {
-  if (!layout.value.scrollX) return undefined
-  return { width: `${layout.value.bodyWidth}px`, minWidth: '100%' }
-})
-
-function columnStyle(column: TableColumn) {
-  const layoutColumn = layoutByKey.value.get(column.key)
-  const width = layoutColumn?.realWidth
-  const style: Record<string, string> = {}
-  if (width != null) {
-    style.width = `${width}px`
-    style.minWidth = `${width}px`
-  }
-  if (column.fixed === 'left') {
-    const left = fixedOffsets.value.left[column.key]
-    if (left != null) style.left = `${left}px`
-  }
-  if (column.fixed === 'right') {
-    const right = fixedOffsets.value.right[column.key]
-    if (right != null) style.right = `${right}px`
-  }
-  return Object.keys(style).length ? style : undefined
-}
-
-function selectionStyle() {
-  const left = fixedOffsets.value.left.__selection__
-  return {
-    width: `${TABLE_SELECTION_WIDTH}px`,
-    minWidth: `${TABLE_SELECTION_WIDTH}px`,
-    left: left != null ? `${left}px` : '0',
-  }
-}
-
-function expandStyle() {
-  const left = fixedOffsets.value.left.__expand__
-  return {
-    width: `${TABLE_EXPAND_WIDTH}px`,
-    minWidth: `${TABLE_EXPAND_WIDTH}px`,
-    left: left != null ? `${left}px` : undefined,
-  }
-}
-
-const filteredRows = computed(() => {
-  const entries = Object.entries(innerFilters.value).filter(([, value]) => value != null && value !== '')
-  if (!entries.length) return props.rows
-  return props.rows.filter((row) =>
-    entries.every(([key, value]) => {
-      const cell = row[key]
-      if (typeof value === 'string') return String(cell ?? '').toLowerCase().includes(value.toLowerCase())
-      return cell === value
-    }),
-  )
-})
-
-const sortedRows = computed(() => {
-  const field = innerField.value
-  const sign = orderToSign(innerOrder.value)
-  if (props.sortMode === 'emit' || !field || !sign) return filteredRows.value
-  return [...filteredRows.value].sort((a, b) => {
-    const left = a[field]
-    const right = b[field]
-    if (left == null && right == null) return 0
-    if (left == null) return -1 * sign
-    if (right == null) return 1 * sign
-    if (typeof left === 'number' && typeof right === 'number') return (left - right) * sign
-    return String(left).localeCompare(String(right), undefined, { numeric: true }) * sign
+const singleSelectedRowKey = computed(() => {
+  if (!selectedItem.value) return null
+  const index = totalItems.value.findIndex((row) => {
+    const clone = { ...row }
+    const selected = { ...selectedItem.value! }
+    return JSON.stringify(clone) === JSON.stringify(selected)
   })
+  return index >= 0 ? resolveRowKey(selectedItem.value, index, rowKey.value) : null
 })
 
-const pageCountRows = computed(() => sortedRows.value.length)
-
-const displayRows = computed(() => {
-  if (!props.paginator) return sortedRows.value
-  const size = props.rowsPerPage
-  const start = (innerPage.value - 1) * size
-  return sortedRows.value.slice(start, start + size)
-})
-
-const showEmpty = computed(() => !props.loading && displayRows.value.length === 0)
-const colSpan = computed(
-  () => props.columns.length + (props.selectionMode ? 1 : 0) + (props.expandable ? 1 : 0),
+const {
+  currentPaginationNumber,
+  maxPaginationNumber,
+  isLastPage,
+  isFirstPage,
+  nextPage,
+  prevPage,
+  updatePage,
+  updateCurrentPaginationNumber,
+} = usePagination(
+  currentPage,
+  isServerSideMode,
+  loading,
+  totalItemsLength,
+  rowsPerPageRef,
+  serverOptions,
+  updateServerOptionsPage,
 )
 
-const selectionList = computed(() => {
-  if (!props.selectionMode) return [] as Record<string, unknown>[]
-  if (props.selectionMode === 'multiple') {
-    return Array.isArray(props.selection) ? props.selection : []
-  }
-  return props.selection && !Array.isArray(props.selection) ? [props.selection] : []
+const {
+  currentPageFirstIndex,
+  currentPageLastIndex,
+  multipleSelectStatus,
+  pageItems,
+} = usePageItems(
+  currentPaginationNumber,
+  isMultipleSelectable,
+  isServerSideMode,
+  items,
+  rowsPerPageRef,
+  selectItemsComputed,
+  showIndex,
+  totalItems,
+  totalItemsLength,
+)
+
+const prevPageEndIndex = computed(() => {
+  if (currentPaginationNumber.value === 0) return 0
+  return (currentPaginationNumber.value - 1) * rowsPerPageRef.value
 })
 
-const allPageSelected = computed(() => {
-  if (props.selectionMode !== 'multiple' || !displayRows.value.length) return false
-  return displayRows.value.every((row, index) =>
-    selectionList.value.some((item) => rowIdentity(item, -1) === rowIdentity(row, index)),
-  )
-})
+const {
+  expandingItemIndexList,
+  updateExpandingItemIndexList,
+  clearExpandingItemIndexList,
+} = useExpandableRow(pageItems, prevPageEndIndex, tableEmit)
 
-function isSelected(row: Record<string, unknown>, index: number) {
-  const id = rowIdentity(row, index)
-  return selectionList.value.some((item) => rowIdentity(item, -1) === id)
+const { fixedHeaders, lastFixedColumn, fixedColumnsInfos } = useFixedColumn(headersForRender)
+const { clickRow } = useClickRow(clickEventType, isMultipleSelectable, showIndex, tableEmit)
+
+function contextMenuRow(item: TableItem, event: MouseEvent) {
+  if (preventContextMenuRow.value) event.preventDefault()
+  emit('contextmenuRow', item, event)
 }
 
-function toggleRowSelection(row: Record<string, unknown>, index: number) {
-  if (!props.selectionMode) return
-  if (props.selectionMode === 'single') {
-    const next = isSelected(row, index) ? null : row
-    emit('update:selection', next)
-    return
+function getColStyle(header: HeaderForRender) {
+  const width = header.width ?? (fixedHeaders.value.length ? 100 : null)
+  if (width && useTableFixedLayout.value) return `width: ${width}px; min-width: ${width}px;`
+  return undefined
+}
+
+function getFixedDistance(column: string, type: 'td' | 'th' = 'th') {
+  if (!fixedHeaders.value.length) return undefined
+  const columnInfo = fixedColumnsInfos.value.find((info) => info.value === column)
+  if (columnInfo) {
+    return `left: ${columnInfo.distance}px;z-index: ${type === 'th' ? 3 : 1};position: sticky;`
   }
-  const id = rowIdentity(row, index)
-  const exists = selectionList.value.some((item) => rowIdentity(item, -1) === id)
-  const next = exists
-    ? selectionList.value.filter((item) => rowIdentity(item, -1) !== id)
-    : [...selectionList.value, row]
-  emit('update:selection', next)
+  return undefined
 }
 
-function toggleAllPage() {
-  if (props.selectionMode !== 'multiple') return
-  if (allPageSelected.value) {
-    const pageIds = new Set(displayRows.value.map((row, index) => rowIdentity(row, index)))
-    emit(
-      'update:selection',
-      selectionList.value.filter((item) => !pageIds.has(rowIdentity(item, -1))),
-    )
-  } else {
-    const map = new Map(selectionList.value.map((item) => [rowIdentity(item, -1), item]))
-    displayRows.value.forEach((row, index) => map.set(rowIdentity(row, index), row))
-    emit('update:selection', [...map.values()])
-  }
-}
-
-function toggleSort(columnKey: string, sortable?: boolean) {
-  if (!sortable) return
-  let nextField: string | undefined = columnKey
-  let nextOrder: TableSortOrder = 'asc'
-  if (innerField.value === columnKey) {
-    if (innerOrder.value === 'asc') nextOrder = 'desc'
-    else if (innerOrder.value === 'desc') {
-      nextField = undefined
-      nextOrder = null
-    }
-  }
-  innerField.value = nextField
-  innerOrder.value = nextOrder
-  emit('update:sortField', nextField)
-  emit('update:sortOrder', nextOrder)
-  emit('sort', { sortField: nextField, sortOrder: nextOrder })
-}
-
-function headerCellClass(column: TableColumn) {
+function headerCellClass(header: HeaderForRender, index: number) {
+  const custom = typeof headerItemClassName.value === 'string'
+    ? headerItemClassName.value
+    : headerItemClassName.value(header as TableHeader, index + 1)
+  const isSelectionCell = header.text === 'checkbox' || header.value === 'radio'
   return [
-    'wi-table__cell',
-    `wi-table__cell--${column.align ?? 'start'}`,
-    fixedClass(column),
     {
-      'wi-table__cell--sortable': column.sortable,
-      'wi-table__cell--sorted': column.sortable && innerField.value === column.key && !!innerOrder.value,
-      'wi-table__cell--ascending': innerField.value === column.key && innerOrder.value === 'asc',
-      'wi-table__cell--descending': innerField.value === column.key && innerOrder.value === 'desc',
+      'wi-table__cell--selection': isSelectionCell,
+      'wi-table__header-cell--sortable': header.sortable,
+      'wi-table__header-cell--ascending': header.sortable && header.sortType === 'asc',
+      'wi-table__header-cell--descending': header.sortable && header.sortType === 'desc',
+      'wi-table__header-cell--shadow': header.value === lastFixedColumn.value,
     },
+    custom,
   ]
 }
 
-function bodyCellClass(column: TableColumn) {
+function headerInnerClass() {
   return [
-    'wi-table__cell',
-    `wi-table__cell--${column.align ?? 'start'}`,
-    fixedClass(column),
+    'wi-table__header-inner',
+    `wi-table__header-inner--${headerTextDirection.value}`,
   ]
 }
 
-function setFilter(key: string, value: string | number | boolean | null) {
-  const next = { ...innerFilters.value, [key]: value === '' ? undefined : value }
-  if (next[key] == null) delete next[key]
-  innerFilters.value = next
-  emit('update:filters', next)
-  emit('filter', next)
-  innerPage.value = 1
-  emit('update:page', 1)
-  emit('page', 1)
+function cellAlignClass(direction: string) {
+  if (direction === 'center') return 'wi-table__cell--center'
+  if (direction === 'right') return 'wi-table__cell--right'
+  return undefined
 }
 
-function onPage(page: number) {
-  innerPage.value = page
-  emit('update:page', page)
-  emit('page', page)
+function getAriaSort(header: HeaderForRender): 'ascending' | 'descending' | 'none' | undefined {
+  if (!header.sortable) return undefined
+  if (header.sortType === 'asc') return 'ascending'
+  if (header.sortType === 'desc') return 'descending'
+  return 'none'
 }
 
-function onRowClick(row: Record<string, unknown>, index: number) {
-  emit('row-click', { row, index })
-  if (props.highlightCurrent) {
-    currentRowKey.value = rowIdentity(row, index) as string | number
-    emit('current-change', row)
+function onSortHeaderClick(header: HeaderForRender) {
+  if (header.sortable && header.sortType) {
+    updateSortField(header.value, header.sortType)
   }
 }
 
-function canExpand(row: Record<string, unknown>) {
-  if (!props.expandable) return false
-  return props.rowExpandable ? props.rowExpandable(row) : true
+function onSortHeaderKeydown(header: HeaderForRender, event: KeyboardEvent) {
+  if (event.key !== 'Enter' && event.key !== ' ') return
+  event.preventDefault()
+  onSortHeaderClick(header)
 }
 
-function isRowExpanded(row: Record<string, unknown>, index: number) {
-  return innerExpandedKeys.value.includes(rowIdentity(row, index) as string | number)
+function getRowKey(item: TableItem, index: number) {
+  return resolveRowKey(item, prevPageEndIndex.value + index, rowKey.value)
 }
 
-function toggleExpand(row: Record<string, unknown>, index: number) {
-  if (!canExpand(row)) return
-  const key = rowIdentity(row, index) as string | number
-  const open = innerExpandedKeys.value.includes(key)
-  innerExpandedKeys.value = open
-    ? innerExpandedKeys.value.filter((item) => item !== key)
-    : [...innerExpandedKeys.value, key]
-  emit('update:expandedRowKeys', innerExpandedKeys.value)
-  emit('expand', { row, expanded: !open })
+function isRowSelected(item: TableItem, index: number) {
+  if (isMultipleSelectable.value) return Boolean((item as TableItem).checkbox)
+  if (isSingleSelectable.value) return singleSelectedRowKey.value === getRowKey(item, index)
+  return false
 }
 
-function fixedClass(column: TableColumn) {
-  if (!column.fixed) return undefined
-  return `wi-table__cell--fixed-${column.fixed}`
+function onSingleSelect(item: TableItem) {
+  const nextItem = { ...item }
+  delete nextItem.index
+  emit('update:selectedItem', nextItem)
+  emit('selectRow', nextItem)
 }
+
+function onPaginationRowsChange(rows: number) {
+  updateRowsPerPage(rows)
+}
+
+function isCurrentRow(item: TableItem, index: number) {
+  if (!highlightCurrentRow.value || activeCurrentRowKey.value == null) return false
+  return activeCurrentRowKey.value === getRowKey(item, index)
+}
+
+function setCurrentRow(item: TableItem, index: number) {
+  if (!highlightCurrentRow.value) return
+  const nextKey = getRowKey(item, index)
+  const oldKey = activeCurrentRowKey.value
+  if (oldKey === nextKey) return
+  const oldItem = oldKey == null
+    ? null
+    : pageItems.value.find((row, rowIndex) => getRowKey(row, rowIndex) === oldKey) ?? null
+  internalCurrentRowKey.value = nextKey
+  emit('update:currentRowKey', nextKey)
+  emit('currentChange', item, oldItem)
+}
+
+function onRowClick(item: TableItem, index: number, clickType: 'single' | 'double', event: Event) {
+  clickRow(item, clickType, event)
+  if (clickType === 'single') setCurrentRow(item, index)
+}
+
+watch(currentRowKey, (value) => {
+  if (value != null) internalCurrentRowKey.value = value
+})
+
+watch(loading, (newVal, oldVal) => {
+  if (serverOptionsComputed.value && newVal === false && oldVal === true) {
+    updateCurrentPaginationNumber(serverOptionsComputed.value.page)
+    clearExpandingItemIndexList()
+  }
+})
+
+watch(rowsPerPageRef, (value) => {
+  if (!isServerSideMode.value) updatePage(1)
+  else updateServerOptionsRowsPerPage(value)
+})
+
+watch([searchValue, filterOptions], () => {
+  if (!isServerSideMode.value) updatePage(1)
+})
+
+watch(
+  [currentPaginationNumber, clientSortOptions, searchField, searchValue, filterOptions],
+  () => clearExpandingItemIndexList(),
+  { deep: true },
+)
+
+watch(pageItems, (value) => emit('updatePageItems', value), { deep: true })
+watch(totalItems, (value) => emit('updateTotalItems', value), { deep: true })
+
+defineExpose({
+  currentPageFirstIndex,
+  currentPageLastIndex,
+  clientItemsLength: totalItemsLength,
+  maxPaginationNumber,
+  currentPaginationNumber,
+  isLastPage,
+  isFirstPage,
+  nextPage,
+  prevPage,
+  updatePage,
+  rowsPerPageOptions: rowsItemsComputed,
+  rowsPerPageActiveOption: rowsPerPageRef,
+  updateRowsPerPageActiveOption: updateRowsPerPage,
+})
 </script>
 
 <template>
   <div
-    class="wi-table-wrapper"
-    :class="[
-      `wi-table-wrapper--${sizeClass}`,
-      {
-        'wi-table-wrapper--loading': loading,
-        'wi-table-wrapper--bordered': bordered,
-        'wi-table-wrapper--striped': striped,
-        'wi-table-wrapper--row-hover': rowHover,
-      },
-    ]"
+    ref="dataTable"
+    class="wi-table"
+    :class="tableRootClass"
+    :aria-label="ariaLabel || undefined"
   >
     <WiScrollbar
-      ref="scrollRef"
-      class="wi-table-scroll"
-      :class="{ 'wi-table-scroll--x': layout.scrollX }"
-      wrap-class="wi-table-scroll__wrap"
-      :native="false"
-      trigger="hover"
+      ref="scrollbarRef"
+      class="wi-table__scrollbar"
+      :height="tableHeightPx || undefined"
+      :wrap-style="scrollbarWrapStyle"
+      :wrap-class="mainWrapClass"
+      noresize
+      @scroll="onScrollbarScroll"
     >
-      <table
-        class="wi-table"
-        :class="`wi-table--${sizeClass}`"
-        :style="tableStyle"
-      >
+      <div class="wi-table__surface" :aria-busy="loading || undefined">
+      <table :id="tableNodeId || undefined">
         <colgroup>
           <col
-            v-for="column in layout.columns"
-            :key="column.key"
-            :style="{ width: `${column.realWidth}px` }"
+            v-for="(header, index) in headersForRender"
+            :key="index"
+            :style="getColStyle(header)"
           >
         </colgroup>
-        <thead>
+        <slot v-if="slots['customize-headers']" name="customize-headers" />
+        <thead
+          v-else-if="headersForRender.length && showHeaderComputed"
+          class="wi-table__header"
+          :class="[headerClassName]"
+        >
           <tr>
             <th
-              v-if="selectionMode"
-              class="wi-table__cell wi-table__selection wi-table__cell--fixed-left"
-              scope="col"
-              :style="selectionStyle()"
+              v-for="(header, index) in headersForRender"
+              :key="index"
+              :class="headerCellClass(header, index)"
+              :style="getFixedDistance(header.value)"
+              :aria-sort="getAriaSort(header)"
+              :tabindex="header.sortable ? 0 : undefined"
+              @click.stop="onSortHeaderClick(header)"
+              @keydown="onSortHeaderKeydown(header, $event)"
             >
-              <WiCheckbox
-                v-if="selectionMode === 'multiple'"
-                :model-value="allPageSelected"
-                :aria-label="locale.selectAllPage"
-                @update:model-value="toggleAllPage"
-              />
-            </th>
-            <th
-              v-if="expandable"
-              class="wi-table__cell wi-table__expand wi-table__cell--fixed-left"
-              scope="col"
-              :style="expandStyle()"
-            />
-            <th
-              v-for="column in columns"
-              :key="column.key"
-              scope="col"
-              :class="headerCellClass(column)"
-              :style="columnStyle(column)"
-              :aria-sort="
-                column.sortable && innerField === column.key
-                  ? innerOrder === 'asc'
-                    ? 'ascending'
-                    : innerOrder === 'desc'
-                      ? 'descending'
-                      : 'none'
-                  : column.sortable
-                    ? 'none'
-                    : undefined
-              "
-            >
-              <div class="wi-table__th-inner">
-                <button
-                  v-if="column.sortable"
-                  type="button"
-                  class="wi-table__sort"
-                  @click="toggleSort(column.key, true)"
-                >
-                  <span class="wi-table__cell-inner">{{ column.label }}</span>
-                  <span class="wi-table__caret-wrapper" aria-hidden="true">
-                    <i class="wi-table__sort-caret wi-table__sort-caret--asc" />
-                    <i class="wi-table__sort-caret wi-table__sort-caret--desc" />
-                  </span>
-                </button>
-                <span v-else class="wi-table__cell-inner">{{ column.label }}</span>
-                <div v-if="column.filterable" class="wi-table__filter">
-                  <button
-                    type="button"
-                    class="wi-table__filter-btn"
-                    :aria-expanded="filterOpenKey === column.key"
-                    :aria-label="formatLocale(locale.filterColumn, { label: column.label })"
-                    @click.stop="filterOpenKey = filterOpenKey === column.key ? null : column.key"
-                  >
-                    <WiIcon name="filter" size="sm" />
-                  </button>
-                  <div v-if="filterOpenKey === column.key" class="wi-table__filter-panel" @click.stop>
-                    <select
-                      v-if="column.filters?.length"
-                      class="wi-table__filter-control"
-                      :value="String(innerFilters[column.key] ?? '')"
-                      @change="setFilter(column.key, ($event.target as HTMLSelectElement).value || null)"
-                    >
-                      <option value="">
-                        {{ locale.filterAll }}
-                      </option>
-                      <option
-                        v-for="option in column.filters"
-                        :key="String(option.value)"
-                        :value="String(option.value ?? '')"
-                      >
-                        {{ option.label }}
-                      </option>
-                    </select>
-                    <input
-                      v-else
-                      class="wi-table__filter-control"
-                      type="search"
-                      :value="String(innerFilters[column.key] ?? '')"
-                      :placeholder="locale.filterOptions"
-                      @input="setFilter(column.key, ($event.target as HTMLInputElement).value)"
-                    >
-                  </div>
-                </div>
+              <div
+                v-if="header.text === 'checkbox'"
+                class="wi-table__cell-inner wi-table__cell-inner--selection"
+              >
+                <WiCheckbox
+                  :key="multipleSelectStatus"
+                  :model-value="multipleSelectStatus === 'allSelected'"
+                  :indeterminate="multipleSelectStatus === 'partSelected'"
+                  :aria-label="locale.selectAllPage"
+                  @update:model-value="toggleSelectAll"
+                  @click.stop
+                />
               </div>
+              <div
+                v-else-if="header.value === 'radio'"
+                class="wi-table__cell-inner wi-table__cell-inner--selection"
+              />
+              <span v-else :class="headerInnerClass()">
+                <slot v-if="slots[`header-${header.value}`]" :name="`header-${header.value}`" v-bind="header" />
+                <slot v-else-if="slots[`header-${header.value.toLowerCase()}`]" :name="`header-${header.value.toLowerCase()}`" v-bind="header" />
+                <slot v-else-if="slots.header" name="header" v-bind="header" />
+                <span v-else class="wi-table__header-text" :title="header.text">{{ header.text }}</span>
+                <span v-if="header.sortable" class="wi-table__caret-wrapper">
+                  <i class="wi-table__sort-caret wi-table__sort-caret--ascending" />
+                  <i class="wi-table__sort-caret wi-table__sort-caret--descending" />
+                </span>
+                <span v-if="multiSort && isMultiSorting(header.value)" class="wi-table__multi-sort-number">
+                  {{ getMultiSortNumber(header.value) }}
+                </span>
+              </span>
             </th>
           </tr>
         </thead>
-        <tbody>
-          <template v-for="(row, index) in displayRows" :key="String(rowIdentity(row, index))">
+        <slot v-if="ifHasBodySlot" name="body" v-bind="pageItems" />
+        <tbody
+          v-else-if="headerColumns.length"
+          class="wi-table__body"
+        >
+          <slot
+            name="body-prepend"
+            v-bind="{
+              items: pageItems,
+              pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage },
+              headers: headersForRender,
+            }"
+          />
+          <template v-for="(item, index) in pageItems" :key="getRowKey(item, index)">
             <tr
-              :class="{
-                'wi-table__row--selected': isSelected(row, index),
-                'wi-table__row--current': highlightCurrent && currentRowKey === rowIdentity(row, index),
-                'wi-table__row--striped': striped && index % 2 === 1,
+              :class="[
+                {
+                  'wi-table__row--striped': resolvedStriped && (index + 1) % 2 === 0,
+                  'wi-table__row--selected': isRowSelected(item, index),
+                  'wi-table__row--current': isCurrentRow(item, index),
+                },
+                typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, index + 1),
+              ]"
+              @click="($event) => {
+                onRowClick(item, index, 'single', $event)
+                clickRowToExpand && updateExpandingItemIndexList(index + prevPageEndIndex, item, $event)
               }"
-              @click="onRowClick(row, index)"
+              @dblclick="($event) => onRowClick(item, index, 'double', $event)"
+              @contextmenu="($event) => contextMenuRow(item, $event)"
             >
               <td
-                v-if="selectionMode"
-                class="wi-table__cell wi-table__selection wi-table__cell--fixed-left"
-                :style="selectionStyle()"
-                @click.stop
+                v-for="(column, i) in headerColumns"
+                :key="i"
+                :style="getFixedDistance(column, 'td')"
+                :class="[
+                  {
+                    'wi-table__cell--shadow': column === lastFixedColumn,
+                    'wi-table__cell--expand': column === 'expand',
+                    'wi-table__cell--selection': column === 'checkbox' || column === 'radio',
+                  },
+                  cellAlignClass(bodyTextDirection),
+                  typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, index + 1),
+                ]"
+                @click="column === 'expand' ? updateExpandingItemIndexList(index + prevPageEndIndex, item, $event) : null"
               >
-                <div class="wi-table__cell-inner wi-table__cell-inner--center">
-                  <WiCheckbox
-                    :model-value="isSelected(row, index)"
-                    :aria-label="formatLocale(locale.selectRow, { index: index + 1 })"
-                    @update:model-value="toggleRowSelection(row, index)"
-                  />
-                </div>
-              </td>
-              <td
-                v-if="expandable"
-                class="wi-table__cell wi-table__expand wi-table__cell--fixed-left"
-                :style="expandStyle()"
-                @click.stop
-              >
-                <div class="wi-table__cell-inner wi-table__cell-inner--center">
-                  <button
-                    v-if="canExpand(row)"
-                    type="button"
-                    class="wi-table__expand-btn"
-                    :aria-expanded="isRowExpanded(row, index)"
-                    :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
-                    @click="toggleExpand(row, index)"
-                  >
-                    <WiIcon
-                      :name="isRowExpanded(row, index) ? 'chevron-down' : 'chevron-right'"
-                      size="sm"
+                <div
+                  class="wi-table__cell-inner"
+                  :class="{
+                    'wi-table__cell-inner--expand': column === 'expand',
+                    'wi-table__cell-inner--selection': column === 'checkbox' || column === 'radio',
+                  }"
+                >
+                  <slot v-if="slots[`item-${column}`]" :name="`item-${column}`" v-bind="item" />
+                  <slot v-else-if="slots[`item-${column.toLowerCase()}`]" :name="`item-${column.toLowerCase()}`" v-bind="item" />
+                  <template v-else-if="column === 'expand'">
+                    <button
+                      type="button"
+                      class="wi-table__expand-btn"
+                      :class="{ 'wi-table__expand-btn--expanded': expandingItemIndexList.includes(prevPageEndIndex + index) }"
+                      :aria-expanded="expandingItemIndexList.includes(prevPageEndIndex + index)"
+                      :aria-label="locale.expand"
+                      @click.stop="updateExpandingItemIndexList(index + prevPageEndIndex, item, $event)"
+                    >
+                      <WiIcon name="chevron-right" />
+                    </button>
+                  </template>
+                  <template v-else-if="column === 'checkbox'">
+                    <WiCheckbox
+                      :model-value="Boolean((item as TableItem).checkbox)"
+                      :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
+                      @update:model-value="toggleSelectItem(item)"
+                      @click.stop
                     />
-                  </button>
-                </div>
-              </td>
-              <td
-                v-for="column in columns"
-                :key="column.key"
-                :class="bodyCellClass(column)"
-                :style="columnStyle(column)"
-              >
-                <div class="wi-table__cell-inner">
-                  <slot name="body-cell" :row="row" :column="column" :value="row[column.key]">
-                    <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]">
-                      <WiRenderableView v-if="column.render" :value="column.render(row, column)" />
-                      <template v-else>
-                        {{ row[column.key] }}
-                      </template>
-                    </slot>
-                  </slot>
+                  </template>
+                  <template v-else-if="column === 'radio'">
+                    <WiRadio
+                      :model-value="singleSelectedRowKey ?? undefined"
+                      :value="getRowKey(item, index)"
+                      :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
+                      @update:model-value="onSingleSelect(item)"
+                      @click.stop
+                    />
+                  </template>
+                  <slot v-else-if="slots.item" name="item" v-bind="{ column, item }" />
+                  <WiTooltip
+                    v-else
+                    :content="generateColumnContent(column, item)"
+                    :disabled="!showOverflowTooltip"
+                  >
+                    <span class="wi-table__tooltip-trigger">
+                      <span class="wi-table__cell-text">{{ generateColumnContent(column, item) }}</span>
+                    </span>
+                  </WiTooltip>
                 </div>
               </td>
             </tr>
-            <tr v-if="expandable && isRowExpanded(row, index)" class="wi-table__row--expanded">
-              <td class="wi-table__cell wi-table__expansion" :colspan="colSpan">
-                <slot name="expansion" :row="row" />
+            <tr
+              v-if="ifHasExpandSlot && expandingItemIndexList.includes(index + prevPageEndIndex)"
+              :class="[
+                { 'wi-table__row--striped': resolvedStriped && (index + 1) % 2 === 0 },
+                typeof bodyExpandRowClassName === 'string' ? bodyExpandRowClassName : bodyExpandRowClassName(item, index + 1),
+              ]"
+            >
+              <td :colspan="headersForRender.length" class="wi-table__cell--expanded">
+                <TableLoadingLine v-if="(item as TableItem).expandLoading" class="expand-loading" />
+                <slot name="expand" v-bind="item" />
               </td>
             </tr>
           </template>
-          <tr v-if="showEmpty">
-            <td class="wi-table__cell wi-table__empty" :colspan="colSpan">
-              <slot name="empty">
-                <div class="wi-table__empty-content">
-                  <div class="wi-table__empty-glyph" aria-hidden="true">
-                    ∅
-                  </div>
-                  <p class="wi-table__empty-title">
-                    {{ resolvedEmptyText }}
-                  </p>
-                  <p v-if="emptyDescription" class="wi-table__empty-desc">
-                    {{ emptyDescription }}
-                  </p>
-                </div>
-              </slot>
-            </td>
-          </tr>
+          <slot
+            name="body-append"
+            v-bind="{
+              items: pageItems,
+              pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage, updatePage },
+              headers: headersForRender,
+            }"
+          />
         </tbody>
       </table>
+
+      <div v-if="loading" class="wi-table__loading">
+        <div class="wi-table__loading-mask" />
+        <div class="wi-table__loading-body">
+          <slot v-if="ifHasLoadingSlot" name="loading" />
+          <WiProgressSpinner v-else size="sm" />
+        </div>
+      </div>
+
+      <div v-if="!pageItems.length && !loading" class="wi-table__message" role="status">
+        <slot name="empty-message">
+          <p class="wi-table__empty-text">{{ resolvedEmptyMessage }}</p>
+        </slot>
+      </div>
+      </div>
     </WiScrollbar>
 
-    <div v-if="paginator" class="wi-table__paginator">
-      <WiPagination
-        :model-value="innerPage"
-        :total-records="pageCountRows"
-        :rows="rowsPerPage"
-        @update:model-value="onPage"
+    <div v-if="!hideFooter" class="wi-table__footer">
+      <div class="wi-table__items-index">
+        {{ `${currentPageFirstIndex}–${currentPageLastIndex}` }}
+        {{ rowsOfPageSeparatorMessage }} {{ totalItemsLength }}
+      </div>
+      <slot
+        v-if="ifHasPaginationSlot"
+        name="pagination"
+        v-bind="{ isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage }"
       />
-    </div>
-
-    <div
-      v-if="loading"
-      class="wi-table__loading"
-      role="status"
-      :aria-label="resolvedLoadingText"
-    >
-      <slot name="loading">
-        <WiProgressSpinner />
-        <span class="wi-table__loading-text">{{ resolvedLoadingText }}</span>
-      </slot>
+      <WiPagination
+        v-else
+        :model-value="currentPaginationNumber"
+        :total-records="totalItemsLength"
+        :rows="rowsPerPageRef"
+        :page-sizes="rowsItemsComputed"
+        :show-size-picker="!hideRowsPerPage"
+        :disabled="loading"
+        @update:model-value="updatePage"
+        @update:rows="onPaginationRowsChange"
+      />
     </div>
   </div>
 </template>
