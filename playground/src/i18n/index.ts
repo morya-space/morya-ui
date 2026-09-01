@@ -120,6 +120,7 @@ const messages = {
     notFoundHome: '返回首页',
     searchOpen: '搜索站点',
     searchPlaceholder: '搜索文档与组件…',
+    openNav: '打开导航',
     guideTitles: {
       introduction: '介绍',
       'quick-start': '快速开始',
@@ -232,6 +233,7 @@ const messages = {
     notFoundHome: 'Back to home',
     searchOpen: 'Search site',
     searchPlaceholder: 'Search docs and components…',
+    openNav: 'Open navigation',
     guideTitles: {
       introduction: 'Introduction',
       'quick-start': 'Quick start',
