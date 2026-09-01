@@ -10,6 +10,7 @@ export interface FloatingOverlayStyleOptions {
   gap?: number
   minWidth?: string
   maxWidth?: string
+  width?: string
   zIndex?: number
 }
 
@@ -31,6 +32,7 @@ export function computeFloatingOverlayStyle(
 
   if (options.minWidth) extra.minWidth = options.minWidth
   if (options.maxWidth) extra.maxWidth = options.maxWidth
+  if (options.width) extra.width = options.width
   if (options.zIndex != null) extra.zIndex = String(options.zIndex)
 
   switch (placement) {

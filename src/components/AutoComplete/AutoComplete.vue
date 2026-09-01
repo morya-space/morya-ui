@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
@@ -65,11 +66,8 @@ const rootClass = computed(() => [
 function updatePanelPosition() {
   if (!teleported.value || !trigger.value) return
   const rect = trigger.value.getBoundingClientRect()
-  panelStyle.value = {
-    left: `${rect.left}px`,
-    width: `${rect.width}px`,
-    top: `${rect.bottom + 8}px`,
-  }
+  const width = `${rect.width}px`
+  panelStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', { minWidth: width, width })
 }
 
 function requestComplete(query: string) {

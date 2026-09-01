@@ -63,6 +63,7 @@ describe('overlayPlacement', () => {
       computeFloatingOverlayStyle(anchor, 'bottom', {
         minWidth: '120px',
         maxWidth: '240px',
+        width: '100px',
         zIndex: 50,
         gap: 4,
       }),
@@ -72,6 +73,7 @@ describe('overlayPlacement', () => {
       transform: 'translateX(-50%)',
       minWidth: '120px',
       maxWidth: '240px',
+      width: '100px',
       zIndex: '50',
     })
   })

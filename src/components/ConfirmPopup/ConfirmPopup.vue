@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiButton from '../Button/Button.vue'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -56,34 +57,13 @@ function reject() {
 function updatePosition() {
   if (props.target) {
     const rect = props.target.getBoundingClientRect()
-    const gap = 8
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    if (props.placement === 'top') {
-      panelStyle.value = {
-        left: `${centerX}px`,
-        top: `${rect.top - gap}px`,
-        transform: 'translate(-50%, -100%)',
-      }
-    } else if (props.placement === 'left') {
-      panelStyle.value = {
-        left: `${rect.left - gap}px`,
-        top: `${centerY}px`,
-        transform: 'translate(-100%, -50%)',
-      }
-    } else if (props.placement === 'right') {
-      panelStyle.value = {
-        left: `${rect.right + gap}px`,
-        top: `${centerY}px`,
-        transform: 'translateY(-50%)',
-      }
-    } else {
-      panelStyle.value = {
-        left: `${centerX}px`,
-        top: `${rect.bottom + gap}px`,
-        transform: 'translateX(-50%)',
-      }
-    }
+    const placement =
+      props.placement === 'top' ||
+      props.placement === 'left' ||
+      props.placement === 'right'
+        ? props.placement
+        : 'bottom'
+    panelStyle.value = computeFloatingOverlayStyle(rect, placement)
     return
   }
   if (props.position) {

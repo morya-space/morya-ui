@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
@@ -46,16 +47,8 @@ function updatePanelPosition() {
   const rect = trigger.value.getBoundingClientRect()
   const width = `${rect.width}px`
   panelStyle.value = teleported.value
-    ? {
-        left: `${rect.left}px`,
-        minWidth: width,
-        top: `${rect.bottom + 8}px`,
-        width,
-      }
-    : {
-        minWidth: width,
-        width,
-      }
+    ? computeFloatingOverlayStyle(rect, 'bottom-start', { minWidth: width, width })
+    : { minWidth: width, width }
 }
 
 function toggle() {

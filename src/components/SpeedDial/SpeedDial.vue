@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
   model: () => [],
@@ -39,32 +40,15 @@ const rootClass = computed(() => [
 function updateListPosition() {
   if (!teleported.value || !button.value) return
   const rect = button.value.getBoundingClientRect()
-  const gap = 8
-  if (props.direction === 'up') {
-    listStyle.value = {
-      left: `${rect.left + rect.width / 2}px`,
-      top: `${rect.top - gap}px`,
-      transform: 'translate(-50%, -100%)',
-    }
-  } else if (props.direction === 'down') {
-    listStyle.value = {
-      left: `${rect.left + rect.width / 2}px`,
-      top: `${rect.bottom + gap}px`,
-      transform: 'translateX(-50%)',
-    }
-  } else if (props.direction === 'left') {
-    listStyle.value = {
-      left: `${rect.left - gap}px`,
-      top: `${rect.top + rect.height / 2}px`,
-      transform: 'translate(-100%, -50%)',
-    }
-  } else {
-    listStyle.value = {
-      left: `${rect.right + gap}px`,
-      top: `${rect.top + rect.height / 2}px`,
-      transform: 'translateY(-50%)',
-    }
-  }
+  const placement: FloatingOverlayPlacement =
+    props.direction === 'up'
+      ? 'top'
+      : props.direction === 'down'
+        ? 'bottom'
+        : props.direction === 'left'
+          ? 'left'
+          : 'right'
+  listStyle.value = computeFloatingOverlayStyle(rect, placement)
 }
 
 function toggle() {
