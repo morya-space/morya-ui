@@ -1,0 +1,16 @@
+---
+description: Well Insight 设计系统第一信源。生成或修改 UI 前必读 DESIGN.md 与 design-tokens。
+alwaysApply: true
+---
+
+# Well Insight 设计系统
+
+1. **先读** 项目根目录 `DESIGN.md`，再读 `docs/components.md`。
+2. **只用** `@well-insight/ui` 的 `Wi*` 组件；全局样式 `@well-insight/ui/styles.css`。
+3. **颜色/间距/圆角** 使用 `--wi-*` CSS 变量，禁止裸 hex/rgb（见 `scripts/check-raw-colors.mjs`）。
+4. **页面结构** 对齐 `docs/golden-pages/`（列表 / 表单 / 仪表盘），不要发明新布局范式。
+5. **表单选项** 用 `WiSelect` / `WiTreeSelect`；**动作菜单** 用 `WiDropdown`。
+6. 不确定 API 时查文档站或 MCP，**禁止臆造 prop**。
+7. 根节点用 `WiConfigProvider`；后台布局用 `WiLayout` 系列。
+
+Token 参考：`design-tokens/tokens.json`

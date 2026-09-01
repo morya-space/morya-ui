@@ -1,7 +1,7 @@
 {
   "name": "@well-insight/ui-mcp",
   "type": "module",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "packageManager": "pnpm@10.12.4",
   "description": "MCP server for @well-insight/ui — component docs, examples, and usage guidance for AI coding agents.",
   "license": "MIT",

@@ -1,0 +1,44 @@
+---
+description: 生成 Well Insight 业务页面（列表/表单/仪表盘）时的布局规范
+alwaysApply: false
+---
+
+# 页面布局（Agent Requested）
+
+生成完整页面时，先确定类型并 **复制黄金样例结构**：
+
+| 类型 | 模板 |
+| --- | --- |
+| 列表页 | `docs/golden-pages/list-page.vue` |
+| 表单页 | `docs/golden-pages/form-page.vue` |
+| 仪表盘 | `docs/golden-pages/dashboard-page.vue` |
+
+## 列表页区块顺序
+
+1. `WiLayout` + 可选 `WiLayoutSider`
+2. `WiBreadcrumb`
+3. 筛选区（`WiSpace` + Input/Select + 查询/重置）
+4. 工具栏（标题 + 主操作按钮）
+5. `WiTable`
+6. `WiPagination`（右对齐）
+
+## 表单页区块顺序
+
+1. `WiBreadcrumb`
+2. 标题 + 简短说明
+3. `WiForm`（`max-width: ~42rem`）
+4. 底栏：保存（primary）+ 取消（secondary）
+
+## 仪表盘区块顺序
+
+1. `WiBreadcrumb` + 页面标题
+2. KPI：`WiGrid` + `WiCard`（4 列或响应式）
+3. 主区两栏：图表占位 + 最近列表 `WiTable`
+
+## 样式
+
+- 页面背景：`var(--wi-color-surface)`
+- 区块间距：`var(--wi-space-4)` / `var(--wi-space-6)`
+- 筛选区背景：`color-mix(in srgb, var(--wi-color-border) 25%, transparent)`
+
+引用可运行示例：`src/examples/*PageExample.vue`
