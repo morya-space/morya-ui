@@ -98,6 +98,17 @@ function onPanelClick(event: MouseEvent) {
   overflow: hidden;
 }
 
+.mobile-sidebar-shell__panel > :deep(.wi-scrollbar),
+.mobile-sidebar-shell__scroll {
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+}
+
+.mobile-sidebar-shell__panel > :deep(.wi-scrollbar .wi-scrollbar__wrap) {
+  overscroll-behavior: contain;
+}
+
 .mobile-sidebar-shell__scroll {
   flex: 1;
   height: 100%;
