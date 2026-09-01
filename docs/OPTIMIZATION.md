@@ -59,7 +59,7 @@
 
 - [x] deprecated prop 迁移说明（`error`→`invalid`、`block`→`fluid` 等）
 - [ ] CSS 修饰类 `--error` 与 `invalid` prop 命名对齐（逐步）
-- [ ] 补薄文档：CommandMenu、TieredMenu、MegaMenu、VirtualScroller
+- [x] 补薄文档：CommandMenu、TieredMenu、MegaMenu、VirtualScroller
 - [ ] 补 Events / Slots 缺失章节（按使用频率排序）
 - [ ] 中文文档小节标题统一（如 `## 基础用法` 替代 `## Basic`）
 - [ ] 新增无障碍指南页（playground `/docs/accessibility`）
@@ -84,6 +84,7 @@
 | 2026-09-01 | 二 | 路由 lazy + 组件/指南文档按需加载 |
 | 2026-09-01 | 三 | 全局搜索；移动端 drawer；404/favicon/lang URL/hash 滚动 |
 | 2026-09-01 | 四 | 新增指南页 `/docs/migration`（deprecated props 对照） |
+| 2026-09-01 | 四 | 扩充 CommandMenu / TieredMenu / MegaMenu / VirtualScroller 文档 |
 
 ---
 

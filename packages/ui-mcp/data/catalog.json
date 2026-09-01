@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T01:50:56.527Z",
+  "generatedAt": "2026-09-01T01:51:41.789Z",
   "library": {
     "name": "@well-insight/ui",
     "version": "0.1.10"
@@ -2801,12 +2801,12 @@
           "name": "modelValue",
           "type": "boolean",
           "default": "false",
-          "description": "是否可见。"
+          "description": "是否可见（`v-model`）。"
         },
         {
           "name": "placeholder",
           "type": "string",
-          "default": "'搜索命令…'",
+          "default": "语言包 `searchCommands",
           "description": "搜索框占位。"
         },
         {
@@ -2837,16 +2837,16 @@
           "sectionId": "引入",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiCommandMenu } from '@well-insight/ui'",
+          "code": "import { WiCommandMenu, type CommandMenuItem } from '@well-insight/ui'",
           "locale": "zh-CN"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "基础用法-1",
+          "section": "基础用法",
+          "sectionId": "基础用法",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: '新建文件', icon: '+', shortcut: '⌘N' },\n  { label: '打开设置', icon: '⚙', shortcut: '⌘,' },\n  { label: '切换主题', icon: '◐' },\n]\n</script>\n\n<template>\n  <WiButton label=\"打开命令面板\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: '新建文件', icon: '+', shortcut: '⌘N', command: () => window.alert('新建') },\n  { label: '打开设置', icon: '⚙', shortcut: '⌘,', command: () => window.alert('设置') },\n  { label: '切换主题', icon: '◐', disabled: true },\n]\n</script>\n\n<template>\n  <WiButton label=\"打开命令面板\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" placeholder=\"搜索命令…\" />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -2855,16 +2855,16 @@
           "sectionId": "import",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiCommandMenu } from '@well-insight/ui'",
+          "code": "import { WiCommandMenu, type CommandMenuItem } from '@well-insight/ui'",
           "locale": "en-US"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "basic-usage-1",
+          "section": "Basic usage",
+          "sectionId": "basic-usage",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: 'New File', icon: '+', shortcut: '⌘N' },\n  { label: 'Open Settings', icon: '⚙', shortcut: '⌘,' },\n  { label: 'Toggle Theme', icon: '◐' },\n]\n</script>\n\n<template>\n  <WiButton label=\"Open Command Menu\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: 'New file', icon: '+', shortcut: '⌘N', command: () => window.alert('New') },\n  { label: 'Open settings', icon: '⚙', shortcut: '⌘,', command: () => window.alert('Settings') },\n  { label: 'Toggle theme', icon: '◐', disabled: true },\n]\n</script>\n\n<template>\n  <WiButton label=\"Open command menu\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" placeholder=\"Search commands…\" />\n</template>",
           "locale": "en-US"
         }
       ],
@@ -2876,30 +2876,45 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# CommandMenu\n\n命令面板：搜索并执行 model 中的命令。"
+              "body": "# CommandMenu\n\n命令面板：搜索并执行 `model` 中的命令。适合全局快捷键（如 Cmd/Ctrl+K）场景。"
             },
             {
               "id": "引入",
               "title": "引入",
-              "body": "```ts\nimport { WiCommandMenu } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiCommandMenu, type CommandMenuItem } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: '新建文件', icon: '+', shortcut: '⌘N' },\n  { label: '打开设置', icon: '⚙', shortcut: '⌘,' },\n  { label: '切换主题', icon: '◐' },\n]\n</script>\n\n<template>\n  <WiButton label=\"打开命令面板\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" />\n</template>\n```"
+              "id": "基础用法",
+              "title": "基础用法",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: '新建文件', icon: '+', shortcut: '⌘N', command: () => window.alert('新建') },\n  { label: '打开设置', icon: '⚙', shortcut: '⌘,', command: () => window.alert('设置') },\n  { label: '切换主题', icon: '◐', disabled: true },\n]\n</script>\n\n<template>\n  <WiButton label=\"打开命令面板\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" placeholder=\"搜索命令…\" />\n</template>\n```"
+            },
+            {
+              "id": "命令项结构",
+              "title": "命令项结构",
+              "body": "`CommandMenuItem` 字段：\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 展示文案，参与本地过滤。 |\n| `icon` | `string` | 可选前缀字符（非 WiIcon 名）。 |\n| `shortcut` | `string` | 可选快捷键展示。 |\n| `command` | `() => void` | 选中后执行；执行完自动关闭面板。 |\n| `disabled` | `boolean` | 禁用项不可激活。 |"
+            },
+            {
+              "id": "键盘",
+              "title": "键盘",
+              "body": "面板打开时：\n\n| 按键 | 行为 |\n| --- | --- |\n| `↑` / `↓` | 移动高亮项 |\n| `Enter` | 激活当前项 |\n| `Escape` | 关闭面板 |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | 命令列表。 |\n| `modelValue` | `boolean` | `false` | 是否可见。 |\n| `placeholder` | `string` | `'搜索命令…'` | 搜索框占位。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | 命令列表。 |\n| `modelValue` | `boolean` | `false` | 是否可见（`v-model`）。 |\n| `placeholder` | `string` | 语言包 `searchCommands` | 搜索框占位。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |"
             },
             {
               "id": "events",
               "title": "Events",
               "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | 可见性变化。 |"
+            },
+            {
+              "id": "无障碍",
+              "title": "无障碍",
+              "body": "- 面板为 `role=\"dialog\"`、`aria-modal=\"true\"`。\n- 打开后焦点落在搜索框；请为触发按钮提供可访问名称。"
             }
           ],
-          "markdown": "---\ntitle: CommandMenu\ncategory: 09 / MENU\ndescription: 可搜索的命令面板对话框。\n---\n\n# CommandMenu\n\n命令面板：搜索并执行 model 中的命令。\n\n## 引入\n\n```ts\nimport { WiCommandMenu } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: '新建文件', icon: '+', shortcut: '⌘N' },\n  { label: '打开设置', icon: '⚙', shortcut: '⌘,' },\n  { label: '切换主题', icon: '◐' },\n]\n</script>\n\n<template>\n  <WiButton label=\"打开命令面板\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" />\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | 命令列表。 |\n| `modelValue` | `boolean` | `false` | 是否可见。 |\n| `placeholder` | `string` | `'搜索命令…'` | 搜索框占位。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | 可见性变化。 |\n"
+          "markdown": "---\ntitle: CommandMenu\ncategory: 09 / MENU\ndescription: 可搜索的命令面板对话框。\n---\n\n# CommandMenu\n\n命令面板：搜索并执行 `model` 中的命令。适合全局快捷键（如 Cmd/Ctrl+K）场景。\n\n## 引入\n\n```ts\nimport { WiCommandMenu, type CommandMenuItem } from '@well-insight/ui'\n```\n\n## 基础用法\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: '新建文件', icon: '+', shortcut: '⌘N', command: () => window.alert('新建') },\n  { label: '打开设置', icon: '⚙', shortcut: '⌘,', command: () => window.alert('设置') },\n  { label: '切换主题', icon: '◐', disabled: true },\n]\n</script>\n\n<template>\n  <WiButton label=\"打开命令面板\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" placeholder=\"搜索命令…\" />\n</template>\n```\n\n## 命令项结构\n\n`CommandMenuItem` 字段：\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 展示文案，参与本地过滤。 |\n| `icon` | `string` | 可选前缀字符（非 WiIcon 名）。 |\n| `shortcut` | `string` | 可选快捷键展示。 |\n| `command` | `() => void` | 选中后执行；执行完自动关闭面板。 |\n| `disabled` | `boolean` | 禁用项不可激活。 |\n\n## 键盘\n\n面板打开时：\n\n| 按键 | 行为 |\n| --- | --- |\n| `↑` / `↓` | 移动高亮项 |\n| `Enter` | 激活当前项 |\n| `Escape` | 关闭面板 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | 命令列表。 |\n| `modelValue` | `boolean` | `false` | 是否可见（`v-model`）。 |\n| `placeholder` | `string` | 语言包 `searchCommands` | 搜索框占位。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | 可见性变化。 |\n\n## 无障碍\n\n- 面板为 `role=\"dialog\"`、`aria-modal=\"true\"`。\n- 打开后焦点落在搜索框；请为触发按钮提供可访问名称。\n"
         },
         "en-US": {
           "title": "CommandMenu",
@@ -2908,30 +2923,45 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# CommandMenu\n\nCommand palette: search and run commands from the model."
+              "body": "# CommandMenu\n\nSearchable command palette for running actions from `model`. Fits global shortcuts such as Cmd/Ctrl+K."
             },
             {
               "id": "import",
               "title": "Import",
-              "body": "```ts\nimport { WiCommandMenu } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiCommandMenu, type CommandMenuItem } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: 'New File', icon: '+', shortcut: '⌘N' },\n  { label: 'Open Settings', icon: '⚙', shortcut: '⌘,' },\n  { label: 'Toggle Theme', icon: '◐' },\n]\n</script>\n\n<template>\n  <WiButton label=\"Open Command Menu\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" />\n</template>\n```"
+              "id": "basic-usage",
+              "title": "Basic usage",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: 'New file', icon: '+', shortcut: '⌘N', command: () => window.alert('New') },\n  { label: 'Open settings', icon: '⚙', shortcut: '⌘,', command: () => window.alert('Settings') },\n  { label: 'Toggle theme', icon: '◐', disabled: true },\n]\n</script>\n\n<template>\n  <WiButton label=\"Open command menu\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" placeholder=\"Search commands…\" />\n</template>\n```"
+            },
+            {
+              "id": "command-item-shape",
+              "title": "Command item shape",
+              "body": "`CommandMenuItem` fields:\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Display text; included in local filtering. |\n| `icon` | `string` | Optional leading character (not a WiIcon name). |\n| `shortcut` | `string` | Optional shortcut hint. |\n| `command` | `() => void` | Runs on activate; closes the palette afterward. |\n| `disabled` | `boolean` | Disabled items cannot be activated. |"
+            },
+            {
+              "id": "keyboard",
+              "title": "Keyboard",
+              "body": "When open:\n\n| Key | Action |\n| --- | --- |\n| `↑` / `↓` | Move highlight |\n| `Enter` | Activate highlighted item |\n| `Escape` | Close palette |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | Command list. |\n| `modelValue` | `boolean` | `false` | Visibility. |\n| `placeholder` | `string` | locale `searchCommands` | Search input placeholder. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | Command list. |\n| `modelValue` | `boolean` | `false` | Visibility (`v-model`). |\n| `placeholder` | `string` | locale `searchCommands` | Search input placeholder. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Visibility change. |"
+              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Visibility change. |"
+            },
+            {
+              "id": "accessibility",
+              "title": "Accessibility",
+              "body": "- Panel uses `role=\"dialog\"` and `aria-modal=\"true\"`.\n- Focus moves to the search field on open; label the trigger control."
             }
           ],
-          "markdown": "---\ntitle: CommandMenu\ncategory: 09 / MENU\ndescription: Searchable command palette dialog.\n---\n\n# CommandMenu\n\nCommand palette: search and run commands from the model.\n\n## Import\n\n```ts\nimport { WiCommandMenu } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: 'New File', icon: '+', shortcut: '⌘N' },\n  { label: 'Open Settings', icon: '⚙', shortcut: '⌘,' },\n  { label: 'Toggle Theme', icon: '◐' },\n]\n</script>\n\n<template>\n  <WiButton label=\"Open Command Menu\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" />\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | Command list. |\n| `modelValue` | `boolean` | `false` | Visibility. |\n| `placeholder` | `string` | locale `searchCommands` | Search input placeholder. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Visibility change. |\n"
+          "markdown": "---\ntitle: CommandMenu\ncategory: 09 / MENU\ndescription: Searchable command palette dialog.\n---\n\n# CommandMenu\n\nSearchable command palette for running actions from `model`. Fits global shortcuts such as Cmd/Ctrl+K.\n\n## Import\n\n```ts\nimport { WiCommandMenu, type CommandMenuItem } from '@well-insight/ui'\n```\n\n## Basic usage\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiCommandMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst visible = ref(false)\nconst model = [\n  { label: 'New file', icon: '+', shortcut: '⌘N', command: () => window.alert('New') },\n  { label: 'Open settings', icon: '⚙', shortcut: '⌘,', command: () => window.alert('Settings') },\n  { label: 'Toggle theme', icon: '◐', disabled: true },\n]\n</script>\n\n<template>\n  <WiButton label=\"Open command menu\" @click=\"visible = true\" />\n  <WiCommandMenu v-model=\"visible\" :model=\"model\" placeholder=\"Search commands…\" />\n</template>\n```\n\n## Command item shape\n\n`CommandMenuItem` fields:\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Display text; included in local filtering. |\n| `icon` | `string` | Optional leading character (not a WiIcon name). |\n| `shortcut` | `string` | Optional shortcut hint. |\n| `command` | `() => void` | Runs on activate; closes the palette afterward. |\n| `disabled` | `boolean` | Disabled items cannot be activated. |\n\n## Keyboard\n\nWhen open:\n\n| Key | Action |\n| --- | --- |\n| `↑` / `↓` | Move highlight |\n| `Enter` | Activate highlighted item |\n| `Escape` | Close palette |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `CommandMenuItem[]` | `[]` | Command list. |\n| `modelValue` | `boolean` | `false` | Visibility (`v-model`). |\n| `placeholder` | `string` | locale `searchCommands` | Search input placeholder. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Visibility change. |\n\n## Accessibility\n\n- Panel uses `role=\"dialog\"` and `aria-modal=\"true\"`.\n- Focus moves to the search field on open; label the trigger control.\n"
         }
       }
     },
@@ -10317,26 +10347,26 @@
       "exportName": "WiMegaMenu",
       "category": "09 / MENU",
       "description": "水平菜单，子项按多列面板展示。",
-      "descriptionEn": "Horizontal menu with children shown in a multi-column panel.",
+      "descriptionEn": "Horizontal menu with multi-column mega panels.",
       "import": "import { WiMegaMenu } from '@well-insight/ui'",
       "props": [
         {
           "name": "model",
           "type": "MegaMenuItem[]",
           "default": "[]",
-          "description": "菜单项；`items` 为列数组。"
+          "description": "顶层菜单项。"
         },
         {
           "name": "teleport",
           "type": "boolean",
           "default": "true",
-          "description": "浮层 Teleport；默认挂到 `body`。"
+          "description": "面板 Teleport；默认 `body`。"
         },
         {
           "name": "appendTo",
           "type": "string | HTMLElement | 'self' | false",
           "default": "'body'",
-          "description": "挂载目标；`'self'` / `false` 就地渲染。"
+          "description": "挂载目标。"
         }
       ],
       "events": [],
@@ -10348,16 +10378,25 @@
           "sectionId": "引入",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiMegaMenu } from '@well-insight/ui'",
+          "code": "import { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'",
           "locale": "zh-CN"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "基础用法-1",
+          "section": "基础用法",
+          "sectionId": "基础用法",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '产品',\n    items: [\n      [{ label: '组件库' }, { label: '主题' }],\n      [{ label: '图标' }, { label: '模板' }],\n    ],\n  },\n  { label: '关于' },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '产品',\n    items: [\n      [{ label: '组件库', command: () => {} }, { label: '主题' }],\n      [{ label: '图标' }, { label: '模板' }],\n    ],\n  },\n  { label: '关于', command: () => window.alert('关于') },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "面板结构-1",
+          "section": "面板结构",
+          "sectionId": "面板结构",
+          "lang": "ts",
+          "preview": false,
+          "code": "{\n  label: '产品',\n  items: [\n    [ { label: '列 A · 项 1' }, { label: '列 A · 项 2' } ],\n    [ { label: '列 B · 项 1' } ],\n  ],\n}",
           "locale": "zh-CN"
         },
         {
@@ -10366,16 +10405,25 @@
           "sectionId": "import",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiMegaMenu } from '@well-insight/ui'",
+          "code": "import { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'",
           "locale": "en-US"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "basic-usage-1",
+          "section": "Basic usage",
+          "sectionId": "basic-usage",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'Products',\n    items: [\n      [{ label: 'Components' }, { label: 'Themes' }],\n      [{ label: 'Icons' }, { label: 'Templates' }],\n    ],\n  },\n  { label: 'About' },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'Products',\n    items: [\n      [{ label: 'Component library', command: () => {} }, { label: 'Themes' }],\n      [{ label: 'Icons' }, { label: 'Templates' }],\n    ],\n  },\n  { label: 'About', command: () => window.alert('About') },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "panel-shape-1",
+          "section": "Panel shape",
+          "sectionId": "panel-shape",
+          "lang": "ts",
+          "preview": false,
+          "code": "{\n  label: 'Products',\n  items: [\n    [ { label: 'Col A · item 1' }, { label: 'Col A · item 2' } ],\n    [ { label: 'Col B · item 1' } ],\n  ],\n}",
           "locale": "en-US"
         }
       ],
@@ -10387,52 +10435,82 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# MegaMenu\n\n顶层水平导航，展开后以分栏展示子链接。"
+              "body": "# MegaMenu\n\n顶层水平导航；展开后以**分栏面板**展示子链接，适合站点级导航。"
             },
             {
               "id": "引入",
               "title": "引入",
-              "body": "```ts\nimport { WiMegaMenu } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '产品',\n    items: [\n      [{ label: '组件库' }, { label: '主题' }],\n      [{ label: '图标' }, { label: '模板' }],\n    ],\n  },\n  { label: '关于' },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```"
+              "id": "基础用法",
+              "title": "基础用法",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '产品',\n    items: [\n      [{ label: '组件库', command: () => {} }, { label: '主题' }],\n      [{ label: '图标' }, { label: '模板' }],\n    ],\n  },\n  { label: '关于', command: () => window.alert('关于') },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```"
+            },
+            {
+              "id": "面板结构",
+              "title": "面板结构",
+              "body": "`items` 为**列数组**：外层每一项是一列，列内为同级链接。\n\n```ts\n{\n  label: '产品',\n  items: [\n    [ { label: '列 A · 项 1' }, { label: '列 A · 项 2' } ],\n    [ { label: '列 B · 项 1' } ],\n  ],\n}\n```\n\n无 `items` 的顶层项为普通链接，点击执行 `command`。"
+            },
+            {
+              "id": "菜单项字段",
+              "title": "菜单项字段",
+              "body": "| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 展示文案。 |\n| `icon` | `string` | 可选前缀字符。 |\n| `command` | `() => void` | 点击时执行。 |\n| `disabled` | `boolean` | 禁用项。 |\n| `items` | `MegaMenuItem[][]` | 分栏子面板。 |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | 菜单项；`items` 为列数组。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | 顶层菜单项。 |\n| `teleport` | `boolean` | `true` | 面板 Teleport；默认 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标。 |"
+            },
+            {
+              "id": "无障碍",
+              "title": "无障碍",
+              "body": "- 顶层项使用按钮/链接语义；展开面板请确保键盘可到达子项。\n- 复杂站点导航建议配合 Skip link 与当前页 `aria-current`。"
             }
           ],
-          "markdown": "---\ntitle: MegaMenu\ncategory: 09 / MENU\ndescription: 水平菜单，子项按多列面板展示。\n---\n\n# MegaMenu\n\n顶层水平导航，展开后以分栏展示子链接。\n\n## 引入\n\n```ts\nimport { WiMegaMenu } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '产品',\n    items: [\n      [{ label: '组件库' }, { label: '主题' }],\n      [{ label: '图标' }, { label: '模板' }],\n    ],\n  },\n  { label: '关于' },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | 菜单项；`items` 为列数组。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n"
+          "markdown": "---\ntitle: MegaMenu\ncategory: 09 / MENU\ndescription: 水平菜单，子项按多列面板展示。\n---\n\n# MegaMenu\n\n顶层水平导航；展开后以**分栏面板**展示子链接，适合站点级导航。\n\n## 引入\n\n```ts\nimport { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'\n```\n\n## 基础用法\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '产品',\n    items: [\n      [{ label: '组件库', command: () => {} }, { label: '主题' }],\n      [{ label: '图标' }, { label: '模板' }],\n    ],\n  },\n  { label: '关于', command: () => window.alert('关于') },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```\n\n## 面板结构\n\n`items` 为**列数组**：外层每一项是一列，列内为同级链接。\n\n```ts\n{\n  label: '产品',\n  items: [\n    [ { label: '列 A · 项 1' }, { label: '列 A · 项 2' } ],\n    [ { label: '列 B · 项 1' } ],\n  ],\n}\n```\n\n无 `items` 的顶层项为普通链接，点击执行 `command`。\n\n## 菜单项字段\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 展示文案。 |\n| `icon` | `string` | 可选前缀字符。 |\n| `command` | `() => void` | 点击时执行。 |\n| `disabled` | `boolean` | 禁用项。 |\n| `items` | `MegaMenuItem[][]` | 分栏子面板。 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | 顶层菜单项。 |\n| `teleport` | `boolean` | `true` | 面板 Teleport；默认 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标。 |\n\n## 无障碍\n\n- 顶层项使用按钮/链接语义；展开面板请确保键盘可到达子项。\n- 复杂站点导航建议配合 Skip link 与当前页 `aria-current`。\n"
         },
         "en-US": {
           "title": "MegaMenu",
-          "description": "Horizontal menu with children shown in a multi-column panel.",
+          "description": "Horizontal menu with multi-column mega panels.",
           "sections": [
             {
               "id": "overview",
               "title": "",
-              "body": "# MegaMenu\n\nTop-level horizontal navigation; expanded children are shown in columns."
+              "body": "# MegaMenu\n\nHorizontal top navigation. Sub-links render in a **multi-column panel**—suited to site-wide nav."
             },
             {
               "id": "import",
               "title": "Import",
-              "body": "```ts\nimport { WiMegaMenu } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'Products',\n    items: [\n      [{ label: 'Components' }, { label: 'Themes' }],\n      [{ label: 'Icons' }, { label: 'Templates' }],\n    ],\n  },\n  { label: 'About' },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```"
+              "id": "basic-usage",
+              "title": "Basic usage",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'Products',\n    items: [\n      [{ label: 'Component library', command: () => {} }, { label: 'Themes' }],\n      [{ label: 'Icons' }, { label: 'Templates' }],\n    ],\n  },\n  { label: 'About', command: () => window.alert('About') },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```"
+            },
+            {
+              "id": "panel-shape",
+              "title": "Panel shape",
+              "body": "`items` is an array of **columns**. Each column is a list of links at the same level.\n\n```ts\n{\n  label: 'Products',\n  items: [\n    [ { label: 'Col A · item 1' }, { label: 'Col A · item 2' } ],\n    [ { label: 'Col B · item 1' } ],\n  ],\n}\n```\n\nTop-level entries without `items` behave as plain links via `command`."
+            },
+            {
+              "id": "item-fields",
+              "title": "Item fields",
+              "body": "| Field | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Display text. |\n| `icon` | `string` | Optional leading character. |\n| `command` | `() => void` | Runs on activate. |\n| `disabled` | `boolean` | Disabled item. |\n| `items` | `MegaMenuItem[][]` | Column groups for the mega panel. |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | Menu items; `items` is an array of columns. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | Top-level items. |\n| `teleport` | `boolean` | `true` | Panel Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target. |"
+            },
+            {
+              "id": "accessibility",
+              "title": "Accessibility",
+              "body": "- Top items expose button/link semantics; ensure submenu links are keyboard reachable.\n- Pair with skip links and `aria-current` on the active page when used as primary nav."
             }
           ],
-          "markdown": "---\ntitle: MegaMenu\ncategory: 09 / MENU\ndescription: Horizontal menu with children shown in a multi-column panel.\n---\n\n# MegaMenu\n\nTop-level horizontal navigation; expanded children are shown in columns.\n\n## Import\n\n```ts\nimport { WiMegaMenu } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'Products',\n    items: [\n      [{ label: 'Components' }, { label: 'Themes' }],\n      [{ label: 'Icons' }, { label: 'Templates' }],\n    ],\n  },\n  { label: 'About' },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | Menu items; `items` is an array of columns. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n"
+          "markdown": "---\ntitle: MegaMenu\ncategory: 09 / MENU\ndescription: Horizontal menu with multi-column mega panels.\n---\n\n# MegaMenu\n\nHorizontal top navigation. Sub-links render in a **multi-column panel**—suited to site-wide nav.\n\n## Import\n\n```ts\nimport { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'\n```\n\n## Basic usage\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiMegaMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'Products',\n    items: [\n      [{ label: 'Component library', command: () => {} }, { label: 'Themes' }],\n      [{ label: 'Icons' }, { label: 'Templates' }],\n    ],\n  },\n  { label: 'About', command: () => window.alert('About') },\n]\n</script>\n\n<template>\n  <WiMegaMenu :model=\"model\" />\n</template>\n```\n\n## Panel shape\n\n`items` is an array of **columns**. Each column is a list of links at the same level.\n\n```ts\n{\n  label: 'Products',\n  items: [\n    [ { label: 'Col A · item 1' }, { label: 'Col A · item 2' } ],\n    [ { label: 'Col B · item 1' } ],\n  ],\n}\n```\n\nTop-level entries without `items` behave as plain links via `command`.\n\n## Item fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Display text. |\n| `icon` | `string` | Optional leading character. |\n| `command` | `() => void` | Runs on activate. |\n| `disabled` | `boolean` | Disabled item. |\n| `items` | `MegaMenuItem[][]` | Column groups for the mega panel. |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `MegaMenuItem[]` | `[]` | Top-level items. |\n| `teleport` | `boolean` | `true` | Panel Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target. |\n\n## Accessibility\n\n- Top items expose button/link semantics; ensure submenu links are keyboard reachable.\n- Pair with skip links and `aria-current` on the active page when used as primary nav.\n"
         }
       }
     },
@@ -17485,34 +17563,40 @@
           "name": "model",
           "type": "TieredMenuItem[]",
           "default": "—",
-          "description": "菜单项，可含一层 `items`。"
+          "description": "菜单项。"
         },
         {
           "name": "popup",
           "type": "boolean",
           "default": "false",
-          "description": "是否弹出模式。"
+          "description": "弹出模式。"
         },
         {
           "name": "modelValue",
           "type": "boolean",
           "default": "false",
-          "description": "popup 可见性。"
+          "description": "popup 可见性（`v-model`）。"
         },
         {
           "name": "teleport",
           "type": "boolean",
           "default": "true",
-          "description": "浮层 Teleport；默认挂到 `body`。"
+          "description": "popup 时 Teleport；默认 `body`。"
         },
         {
           "name": "appendTo",
           "type": "string | HTMLElement | 'self' | false",
           "default": "'body'",
-          "description": "挂载目标；`'self'` / `false` 就地渲染。"
+          "description": "挂载目标。"
         }
       ],
-      "events": [],
+      "events": [
+        {
+          "name": "update:modelValue",
+          "payload": "boolean",
+          "description": "popup 可见性变化。"
+        }
+      ],
       "slots": [],
       "examples": [
         {
@@ -17521,16 +17605,25 @@
           "sectionId": "引入",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiTieredMenu } from '@well-insight/ui'",
+          "code": "import { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'",
           "locale": "zh-CN"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "基础用法-1",
+          "section": "基础用法",
+          "sectionId": "基础用法",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '文件',\n    items: [{ label: '新建' }, { label: '导出' }],\n  },\n  { label: '帮助' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '文件',\n    items: [\n      { label: '新建', command: () => window.alert('新建') },\n      { label: '导出' },\n    ],\n  },\n  { separator: true },\n  { label: '帮助' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "弹出模式-1",
+          "section": "弹出模式",
+          "sectionId": "弹出模式",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiTieredMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst model = [{ label: '复制' }, { label: '粘贴' }]\n</script>\n\n<template>\n  <WiButton label=\"操作\" @click=\"open = true\" />\n  <WiTieredMenu v-model=\"open\" popup :model=\"model\" />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -17539,16 +17632,25 @@
           "sectionId": "import",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiTieredMenu } from '@well-insight/ui'",
+          "code": "import { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'",
           "locale": "en-US"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "basic-usage-1",
+          "section": "Basic usage",
+          "sectionId": "basic-usage",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'File',\n    items: [{ label: 'New' }, { label: 'Export' }],\n  },\n  { label: 'Help' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'File',\n    items: [\n      { label: 'New', command: () => window.alert('New') },\n      { label: 'Export' },\n    ],\n  },\n  { separator: true },\n  { label: 'Help' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "popup-mode-1",
+          "section": "Popup mode",
+          "sectionId": "popup-mode",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiTieredMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst model = [{ label: 'Copy' }, { label: 'Paste' }]\n</script>\n\n<template>\n  <WiButton label=\"Actions\" @click=\"open = true\" />\n  <WiTieredMenu v-model=\"open\" popup :model=\"model\" />\n</template>",
           "locale": "en-US"
         }
       ],
@@ -17560,25 +17662,40 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# TieredMenu\n\n支持悬停 / 点击展开一层子菜单。"
+              "body": "# TieredMenu\n\n垂直菜单，支持悬停或点击展开**一层**子菜单。`popup` 模式下可作为浮层弹出。"
             },
             {
               "id": "引入",
               "title": "引入",
-              "body": "```ts\nimport { WiTieredMenu } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '文件',\n    items: [{ label: '新建' }, { label: '导出' }],\n  },\n  { label: '帮助' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```"
+              "id": "基础用法",
+              "title": "基础用法",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '文件',\n    items: [\n      { label: '新建', command: () => window.alert('新建') },\n      { label: '导出' },\n    ],\n  },\n  { separator: true },\n  { label: '帮助' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```"
+            },
+            {
+              "id": "弹出模式",
+              "title": "弹出模式",
+              "body": "`popup` + `v-model` 控制浮层显隐，适合工具栏按钮触发：\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTieredMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst model = [{ label: '复制' }, { label: '粘贴' }]\n</script>\n\n<template>\n  <WiButton label=\"操作\" @click=\"open = true\" />\n  <WiTieredMenu v-model=\"open\" popup :model=\"model\" />\n</template>\n```"
+            },
+            {
+              "id": "菜单项结构",
+              "title": "菜单项结构",
+              "body": "| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 展示文案。 |\n| `command` | `() => void` | 点击叶子项时执行。 |\n| `disabled` | `boolean` | 禁用项。 |\n| `separator` | `boolean` | 渲染分隔线（忽略其他字段）。 |\n| `items` | `TieredMenuItem[]` | 一层子菜单。 |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | 菜单项，可含一层 `items`。 |\n| `popup` | `boolean` | `false` | 是否弹出模式。 |\n| `modelValue` | `boolean` | `false` | popup 可见性。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | 菜单项。 |\n| `popup` | `boolean` | `false` | 弹出模式。 |\n| `modelValue` | `boolean` | `false` | popup 可见性（`v-model`）。 |\n| `teleport` | `boolean` | `true` | popup 时 Teleport；默认 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标。 |"
+            },
+            {
+              "id": "events",
+              "title": "Events",
+              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | popup 可见性变化。 |"
             }
           ],
-          "markdown": "---\ntitle: TieredMenu\ncategory: 09 / MENU\ndescription: 带一层子菜单的垂直分层菜单。\n---\n\n# TieredMenu\n\n支持悬停 / 点击展开一层子菜单。\n\n## 引入\n\n```ts\nimport { WiTieredMenu } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '文件',\n    items: [{ label: '新建' }, { label: '导出' }],\n  },\n  { label: '帮助' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | 菜单项，可含一层 `items`。 |\n| `popup` | `boolean` | `false` | 是否弹出模式。 |\n| `modelValue` | `boolean` | `false` | popup 可见性。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n"
+          "markdown": "---\ntitle: TieredMenu\ncategory: 09 / MENU\ndescription: 带一层子菜单的垂直分层菜单。\n---\n\n# TieredMenu\n\n垂直菜单，支持悬停或点击展开**一层**子菜单。`popup` 模式下可作为浮层弹出。\n\n## 引入\n\n```ts\nimport { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'\n```\n\n## 基础用法\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: '文件',\n    items: [\n      { label: '新建', command: () => window.alert('新建') },\n      { label: '导出' },\n    ],\n  },\n  { separator: true },\n  { label: '帮助' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```\n\n## 弹出模式\n\n`popup` + `v-model` 控制浮层显隐，适合工具栏按钮触发：\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTieredMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst model = [{ label: '复制' }, { label: '粘贴' }]\n</script>\n\n<template>\n  <WiButton label=\"操作\" @click=\"open = true\" />\n  <WiTieredMenu v-model=\"open\" popup :model=\"model\" />\n</template>\n```\n\n## 菜单项结构\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 展示文案。 |\n| `command` | `() => void` | 点击叶子项时执行。 |\n| `disabled` | `boolean` | 禁用项。 |\n| `separator` | `boolean` | 渲染分隔线（忽略其他字段）。 |\n| `items` | `TieredMenuItem[]` | 一层子菜单。 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | 菜单项。 |\n| `popup` | `boolean` | `false` | 弹出模式。 |\n| `modelValue` | `boolean` | `false` | popup 可见性（`v-model`）。 |\n| `teleport` | `boolean` | `true` | popup 时 Teleport；默认 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | popup 可见性变化。 |\n"
         },
         "en-US": {
           "title": "TieredMenu",
@@ -17587,25 +17704,40 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# TieredMenu\n\nExpand one level of submenu on hover or click."
+              "body": "# TieredMenu\n\nVertical menu with **one** submenu level on hover or click. Use `popup` for overlay mode."
             },
             {
               "id": "import",
               "title": "Import",
-              "body": "```ts\nimport { WiTieredMenu } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'File',\n    items: [{ label: 'New' }, { label: 'Export' }],\n  },\n  { label: 'Help' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```"
+              "id": "basic-usage",
+              "title": "Basic usage",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'File',\n    items: [\n      { label: 'New', command: () => window.alert('New') },\n      { label: 'Export' },\n    ],\n  },\n  { separator: true },\n  { label: 'Help' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```"
+            },
+            {
+              "id": "popup-mode",
+              "title": "Popup mode",
+              "body": "Combine `popup` with `v-model` for toolbar triggers:\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTieredMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst model = [{ label: 'Copy' }, { label: 'Paste' }]\n</script>\n\n<template>\n  <WiButton label=\"Actions\" @click=\"open = true\" />\n  <WiTieredMenu v-model=\"open\" popup :model=\"model\" />\n</template>\n```"
+            },
+            {
+              "id": "item-shape",
+              "title": "Item shape",
+              "body": "| Field | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Display text. |\n| `command` | `() => void` | Runs when a leaf item is activated. |\n| `disabled` | `boolean` | Disabled item. |\n| `separator` | `boolean` | Renders a divider (ignores other fields). |\n| `items` | `TieredMenuItem[]` | One submenu level. |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | Menu items; may include one level of `items`. |\n| `popup` | `boolean` | `false` | Whether to use popup mode. |\n| `modelValue` | `boolean` | `false` | Popup visibility. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | Menu items. |\n| `popup` | `boolean` | `false` | Popup overlay mode. |\n| `modelValue` | `boolean` | `false` | Popup visibility (`v-model`). |\n| `teleport` | `boolean` | `true` | Teleport when `popup`; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target. |"
+            },
+            {
+              "id": "events",
+              "title": "Events",
+              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Popup visibility change. |"
             }
           ],
-          "markdown": "---\ntitle: TieredMenu\ncategory: 09 / MENU\ndescription: A vertical layered menu with one submenu level.\n---\n\n# TieredMenu\n\nExpand one level of submenu on hover or click.\n\n## Import\n\n```ts\nimport { WiTieredMenu } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'File',\n    items: [{ label: 'New' }, { label: 'Export' }],\n  },\n  { label: 'Help' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | Menu items; may include one level of `items`. |\n| `popup` | `boolean` | `false` | Whether to use popup mode. |\n| `modelValue` | `boolean` | `false` | Popup visibility. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n"
+          "markdown": "---\ntitle: TieredMenu\ncategory: 09 / MENU\ndescription: A vertical layered menu with one submenu level.\n---\n\n# TieredMenu\n\nVertical menu with **one** submenu level on hover or click. Use `popup` for overlay mode.\n\n## Import\n\n```ts\nimport { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'\n```\n\n## Basic usage\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTieredMenu } from '@well-insight/ui'\n\nconst model = [\n  {\n    label: 'File',\n    items: [\n      { label: 'New', command: () => window.alert('New') },\n      { label: 'Export' },\n    ],\n  },\n  { separator: true },\n  { label: 'Help' },\n]\n</script>\n\n<template>\n  <WiTieredMenu :model=\"model\" />\n</template>\n```\n\n## Popup mode\n\nCombine `popup` with `v-model` for toolbar triggers:\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTieredMenu } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst model = [{ label: 'Copy' }, { label: 'Paste' }]\n</script>\n\n<template>\n  <WiButton label=\"Actions\" @click=\"open = true\" />\n  <WiTieredMenu v-model=\"open\" popup :model=\"model\" />\n</template>\n```\n\n## Item shape\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Display text. |\n| `command` | `() => void` | Runs when a leaf item is activated. |\n| `disabled` | `boolean` | Disabled item. |\n| `separator` | `boolean` | Renders a divider (ignores other fields). |\n| `items` | `TieredMenuItem[]` | One submenu level. |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `model` | `TieredMenuItem[]` | — | Menu items. |\n| `popup` | `boolean` | `false` | Popup overlay mode. |\n| `modelValue` | `boolean` | `false` | Popup visibility (`v-model`). |\n| `teleport` | `boolean` | `true` | Teleport when `popup`; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Popup visibility change. |\n"
         }
       }
     },
@@ -19284,7 +19416,7 @@
       "exportName": "WiVirtualScroller",
       "category": "06 / DATA",
       "description": "按可视窗口渲染长列表。",
-      "descriptionEn": "Render long lists by the visible viewport.",
+      "descriptionEn": "Renders long lists within the visible viewport.",
       "import": "import { WiVirtualScroller } from '@well-insight/ui'",
       "props": [
         {
@@ -19309,7 +19441,7 @@
           "name": "buffer",
           "type": "number",
           "default": "3",
-          "description": "上下额外渲染行数。"
+          "description": "视口上下额外渲染行数。"
         }
       ],
       "events": [],
@@ -19325,12 +19457,12 @@
           "locale": "zh-CN"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "基础用法-1",
+          "section": "基础用法",
+          "sectionId": "基础用法",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }}\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item, index }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }} <span style=\"margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem\">#{{ index }}</span>\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -19343,12 +19475,12 @@
           "locale": "en-US"
         },
         {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
+          "id": "basic-usage-1",
+          "section": "Basic usage",
+          "sectionId": "basic-usage",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }}\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item, index }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }} <span style=\"margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem\">#{{ index }}</span>\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>",
           "locale": "en-US"
         }
       ],
@@ -19360,7 +19492,7 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# VirtualScroller\n\n根据滚动位置窗口化渲染列表项。"
+              "body": "# VirtualScroller\n\n根据滚动位置**窗口化**渲染列表项，适合成千上万条等行高数据。"
             },
             {
               "id": "引入",
@@ -19368,31 +19500,41 @@
               "body": "```ts\nimport { WiVirtualScroller } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }}\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```"
+              "id": "基础用法",
+              "title": "基础用法",
+              "body": "`itemSize` 为固定行高（px）；内容超出时请在 `#item` 插槽内自行截断。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item, index }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }} <span style=\"margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem\">#{{ index }}</span>\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```"
+            },
+            {
+              "id": "性能说明",
+              "title": "性能说明",
+              "body": "- 仅渲染视口内行 + `buffer` 缓冲行，滚动时复用 DOM。\n- 要求**统一行高**；动态高度列表请改用分页或普通列表。\n- 增大 `buffer` 可减少快速滚动时的空白，但会增加 DOM 数量。"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | 全部数据。 |\n| `itemSize` | `number` | — | 单项高度（px）。 |\n| `height` | `number \\| string` | `240` | 视口高度。 |\n| `buffer` | `number` | `3` | 上下额外渲染行数。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | 全部数据。 |\n| `itemSize` | `number` | — | 单项高度（px）。 |\n| `height` | `number \\| string` | `240` | 视口高度。 |\n| `buffer` | `number` | `3` | 视口上下额外渲染行数。 |"
             },
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| 插槽 | 说明 |\n| --- | --- |\n| `item` | `{ item, index }` 单项内容。 |"
+              "body": "| 插槽 | 作用域 | 说明 |\n| --- | --- | --- |\n| `item` | `{ item, index }` | 单行内容；容器高度由 `itemSize` 决定。 |"
+            },
+            {
+              "id": "无障碍",
+              "title": "无障碍",
+              "body": "- 滚动区域为原生 overflow；若行内有关交互控件，请保证键盘焦点顺序合理。\n- 长列表建议配合搜索或过滤，避免仅依赖滚动浏览。"
             }
           ],
-          "markdown": "---\ntitle: VirtualScroller\ncategory: 06 / DATA\ndescription: 按可视窗口渲染长列表。\n---\n\n# VirtualScroller\n\n根据滚动位置窗口化渲染列表项。\n\n## 引入\n\n```ts\nimport { WiVirtualScroller } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }}\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | 全部数据。 |\n| `itemSize` | `number` | — | 单项高度（px）。 |\n| `height` | `number \\| string` | `240` | 视口高度。 |\n| `buffer` | `number` | `3` | 上下额外渲染行数。 |\n\n## Slots\n\n| 插槽 | 说明 |\n| --- | --- |\n| `item` | `{ item, index }` 单项内容。 |\n"
+          "markdown": "---\ntitle: VirtualScroller\ncategory: 06 / DATA\ndescription: 按可视窗口渲染长列表。\n---\n\n# VirtualScroller\n\n根据滚动位置**窗口化**渲染列表项，适合成千上万条等行高数据。\n\n## 引入\n\n```ts\nimport { WiVirtualScroller } from '@well-insight/ui'\n```\n\n## 基础用法\n\n`itemSize` 为固定行高（px）；内容超出时请在 `#item` 插槽内自行截断。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item, index }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }} <span style=\"margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem\">#{{ index }}</span>\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```\n\n## 性能说明\n\n- 仅渲染视口内行 + `buffer` 缓冲行，滚动时复用 DOM。\n- 要求**统一行高**；动态高度列表请改用分页或普通列表。\n- 增大 `buffer` 可减少快速滚动时的空白，但会增加 DOM 数量。\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | 全部数据。 |\n| `itemSize` | `number` | — | 单项高度（px）。 |\n| `height` | `number \\| string` | `240` | 视口高度。 |\n| `buffer` | `number` | `3` | 视口上下额外渲染行数。 |\n\n## Slots\n\n| 插槽 | 作用域 | 说明 |\n| --- | --- | --- |\n| `item` | `{ item, index }` | 单行内容；容器高度由 `itemSize` 决定。 |\n\n## 无障碍\n\n- 滚动区域为原生 overflow；若行内有关交互控件，请保证键盘焦点顺序合理。\n- 长列表建议配合搜索或过滤，避免仅依赖滚动浏览。\n"
         },
         "en-US": {
           "title": "VirtualScroller",
-          "description": "Render long lists by the visible viewport.",
+          "description": "Renders long lists within the visible viewport.",
           "sections": [
             {
               "id": "overview",
               "title": "",
-              "body": "# VirtualScroller\n\nWindowed rendering of list items based on scroll position."
+              "body": "# VirtualScroller\n\nWindowed list rendering based on scroll position. Best for large, **equal-height** rows."
             },
             {
               "id": "import",
@@ -19400,22 +19542,32 @@
               "body": "```ts\nimport { WiVirtualScroller } from '@well-insight/ui'\n```"
             },
             {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }}\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```"
+              "id": "basic-usage",
+              "title": "Basic usage",
+              "body": "`itemSize` is a fixed row height in px. Truncate overflowing content inside `#item`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item, index }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }} <span style=\"margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem\">#{{ index }}</span>\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```"
+            },
+            {
+              "id": "performance-notes",
+              "title": "Performance notes",
+              "body": "- Only viewport rows plus `buffer` extras are mounted; DOM nodes are reused while scrolling.\n- Requires **uniform row height**—use pagination or a plain list for variable heights.\n- A larger `buffer` reduces flicker when scrolling fast at the cost of more DOM."
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | Full data set. |\n| `itemSize` | `number` | — | Item height in px. |\n| `height` | `number \\| string` | `240` | Viewport height. |\n| `buffer` | `number` | `3` | Extra rows rendered above and below the viewport. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | Full data set. |\n| `itemSize` | `number` | — | Row height in px. |\n| `height` | `number \\| string` | `240` | Viewport height. |\n| `buffer` | `number` | `3` | Extra rows rendered above/below the viewport. |"
             },
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| Slot | Description |\n| --- | --- |\n| `item` | `{ item, index }` item content. |"
+              "body": "| Slot | Scope | Description |\n| --- | --- | --- |\n| `item` | `{ item, index }` | Row content; container height follows `itemSize`. |"
+            },
+            {
+              "id": "accessibility",
+              "title": "Accessibility",
+              "body": "- The scroll region uses native overflow. Keep a sensible tab order when rows contain controls.\n- Pair long lists with search or filtering instead of scroll-only discovery."
             }
           ],
-          "markdown": "---\ntitle: VirtualScroller\ncategory: 06 / DATA\ndescription: Render long lists by the visible viewport.\n---\n\n# VirtualScroller\n\nWindowed rendering of list items based on scroll position.\n\n## Import\n\n```ts\nimport { WiVirtualScroller } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }}\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | Full data set. |\n| `itemSize` | `number` | — | Item height in px. |\n| `height` | `number \\| string` | `240` | Viewport height. |\n| `buffer` | `number` | `3` | Extra rows rendered above and below the viewport. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `item` | `{ item, index }` item content. |\n"
+          "markdown": "---\ntitle: VirtualScroller\ncategory: 06 / DATA\ndescription: Renders long lists within the visible viewport.\n---\n\n# VirtualScroller\n\nWindowed list rendering based on scroll position. Best for large, **equal-height** rows.\n\n## Import\n\n```ts\nimport { WiVirtualScroller } from '@well-insight/ui'\n```\n\n## Basic usage\n\n`itemSize` is a fixed row height in px. Truncate overflowing content inside `#item`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiVirtualScroller } from '@well-insight/ui'\n\nconst items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)\n</script>\n\n<template>\n  <WiVirtualScroller :items=\"items\" :item-size=\"36\" :height=\"220\">\n    <template #item=\"{ item, index }\">\n      <div style=\"padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)\">\n        {{ item }} <span style=\"margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem\">#{{ index }}</span>\n      </div>\n    </template>\n  </WiVirtualScroller>\n</template>\n```\n\n## Performance notes\n\n- Only viewport rows plus `buffer` extras are mounted; DOM nodes are reused while scrolling.\n- Requires **uniform row height**—use pagination or a plain list for variable heights.\n- A larger `buffer` reduces flicker when scrolling fast at the cost of more DOM.\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `items` | `unknown[]` | — | Full data set. |\n| `itemSize` | `number` | — | Row height in px. |\n| `height` | `number \\| string` | `240` | Viewport height. |\n| `buffer` | `number` | `3` | Extra rows rendered above/below the viewport. |\n\n## Slots\n\n| Slot | Scope | Description |\n| --- | --- | --- |\n| `item` | `{ item, index }` | Row content; container height follows `itemSize`. |\n\n## Accessibility\n\n- The scroll region uses native overflow. Keep a sensible tab order when rows contain controls.\n- Pair long lists with search or filtering instead of scroll-only discovery.\n"
         }
       }
     }
