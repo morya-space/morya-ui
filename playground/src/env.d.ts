@@ -23,3 +23,13 @@ declare module '*.json' {
   const value: Record<string, unknown>
   export default value
 }
+
+declare module 'virtual:component-docs-manifest' {
+  const manifest: Record<string, Record<'zh-CN' | 'en-US', Record<string, string>>>
+  export default manifest
+}
+
+declare module 'virtual:guide-docs-manifest' {
+  const manifest: Record<string, Record<'zh-CN' | 'en-US', Record<string, string>>>
+  export default manifest
+}

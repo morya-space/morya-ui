@@ -4,6 +4,12 @@ import { createHighlighter } from 'shiki'
 import Markdown from 'unplugin-vue-markdown/vite'
 import { defineConfig } from 'vite'
 import MarkdownPreview from 'vite-plugin-markdown-preview'
+import { docsChunkSplitting } from './vite/chunkSplitting.ts'
+import { docsManifestPlugin } from './vite/docsManifestPlugin.ts'
+
+const playgroundDir = fileURLToPath(new URL('.', import.meta.url))
+const repoRoot = fileURLToPath(new URL('..', import.meta.url))
+const guideDir = fileURLToPath(new URL('./src/docs/guide', import.meta.url))
 
 const highlighter = await createHighlighter({
   themes: ['github-light', 'github-dark'],
@@ -27,8 +33,9 @@ function highlightCode(code: string, lang: string) {
 }
 
 export default defineConfig({
-  root: fileURLToPath(new URL('.', import.meta.url)),
+  root: playgroundDir,
   plugins: [
+    docsManifestPlugin(repoRoot, guideDir),
     vue({
       include: [/\.vue$/, /\.md$/],
     }),
@@ -106,5 +113,12 @@ export default defineConfig({
   },
   server: {
     port: 5182,
+  },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rolldownOptions: {
+      output: docsChunkSplitting(),
+    },
   },
 })

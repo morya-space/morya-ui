@@ -2,7 +2,7 @@
 import { useTheme } from '@well-insight/ui'
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { getUiPackageMeta } from '../docs/loadChangelog'
+import { getUiPackageMeta } from '../docs/packageMeta'
 import SiteSearch from './SiteSearch.vue'
 import { useDocsI18n } from '../i18n'
 
