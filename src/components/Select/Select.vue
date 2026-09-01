@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -148,14 +149,14 @@ function emitValue(next: SelectModelValue) {
 function updateMenuPosition() {
   if (!teleported.value || !trigger.value) return
   const rect = trigger.value.getBoundingClientRect()
-  const zIndex = config.value.zIndex ?? 1000
-  menuStyle.value = {
-    left: props.placement === 'bottom-end' ? `${rect.right}px` : `${rect.left}px`,
-    minWidth: `${rect.width}px`,
-    top: `${rect.bottom + 8}px`,
-    zIndex: String(zIndex),
-    ...(props.placement === 'bottom-end' ? { transform: 'translateX(-100%)' } : {}),
-  }
+  menuStyle.value = computeFloatingOverlayStyle(
+    rect,
+    props.placement === 'bottom-end' ? 'bottom-end' : 'bottom-start',
+    {
+      minWidth: `${rect.width}px`,
+      zIndex: config.value.zIndex ?? 1000,
+    },
+  )
 }
 
 function setOpen(next: boolean) {
