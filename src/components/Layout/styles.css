@@ -82,6 +82,8 @@
         color var(--wi-motion-fast) var(--wi-motion-ease),
         border-color var(--wi-motion-fast) var(--wi-motion-ease);
     width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .wi-layout-header {
