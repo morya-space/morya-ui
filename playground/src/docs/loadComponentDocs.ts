@@ -29,8 +29,10 @@ interface DocModule {
   frontmatter?: ComponentDocFrontmatter
 }
 
-const zhDocModules = import.meta.glob<DocModule>('../../../src/components/*/docs/index.md', { eager: true })
-const enDocModules = import.meta.glob<DocModule>('../../../src/components/*/docs/index.en.md', { eager: true })
+type DocLoader = () => Promise<DocModule>
+
+const zhDocLoaders = import.meta.glob<DocModule>('../../../src/components/*/docs/index.md')
+const enDocLoaders = import.meta.glob<DocModule>('../../../src/components/*/docs/index.en.md')
 
 const zhRawDocModules = import.meta.glob<string>('../../../src/components/*/docs/index.md', {
   eager: true,
@@ -94,27 +96,36 @@ function resolveFrontmatter(
   } satisfies ComponentDocFrontmatter
 }
 
-function findDocEntry(name: string, lang: DocsLang = 'zh-CN') {
+function findDocLoader(name: string, lang: DocsLang = 'zh-CN'): { path: string; loader: DocLoader; raw: Record<string, string> } | null {
   const preferEn = lang === 'en-US'
-  const primaryModules = preferEn ? enDocModules : zhDocModules
+  const primaryLoaders = preferEn ? enDocLoaders : zhDocLoaders
   const primaryRaw = preferEn ? enRawDocModules : zhRawDocModules
-  const primary = Object.entries(primaryModules).find(([path]) => componentNameFromPath(path) === name)
+  const primary = Object.entries(primaryLoaders).find(([path]) => componentNameFromPath(path) === name)
   if (primary) {
-    return { path: primary[0], mod: primary[1], raw: primaryRaw }
+    return { path: primary[0], loader: primary[1], raw: primaryRaw }
   }
-  const fallback = Object.entries(zhDocModules).find(([path]) => componentNameFromPath(path) === name)
+  const fallback = Object.entries(zhDocLoaders).find(([path]) => componentNameFromPath(path) === name)
   if (!fallback) return null
-  return { path: fallback[0], mod: fallback[1], raw: zhRawDocModules }
+  return { path: fallback[0], loader: fallback[1], raw: zhRawDocModules }
+}
+
+function rawForComponent(name: string, lang: DocsLang): string | undefined {
+  const zhPath = Object.keys(zhRawDocModules).find((path) => componentNameFromPath(path) === name)
+  if (!zhPath) return undefined
+  if (lang === 'en-US') {
+    const enPath = zhPath.replace('/index.md', '/index.en.md')
+    return enRawDocModules[enPath] ?? zhRawDocModules[zhPath]
+  }
+  return zhRawDocModules[zhPath]
 }
 
 export function listDocumentedComponents(lang: DocsLang = 'zh-CN'): DocumentedComponentMeta[] {
   const items: DocumentedComponentMeta[] = []
-  for (const [path, mod] of Object.entries(zhDocModules)) {
+  for (const path of Object.keys(zhRawDocModules)) {
     const name = componentNameFromPath(path)
     if (!name) continue
-    const resolved = findDocEntry(name, lang)
-    if (!resolved) continue
-    const frontmatter = resolveFrontmatter(resolved.path, resolved.mod, name, resolved.raw)
+    const raw = rawForComponent(name, lang) ?? zhRawDocModules[path]
+    const frontmatter = parseFrontmatterFromRaw(raw)
     const parsed = parseCategory(frontmatter.category)
     items.push({
       name,
@@ -129,13 +140,14 @@ export function listDocumentedComponentNames(): string[] {
   return listDocumentedComponents().map((item) => item.name)
 }
 
-export function resolveComponentDoc(name: string, lang: DocsLang = 'zh-CN'): ResolvedComponentDoc | null {
-  const resolved = findDocEntry(name, lang)
+export async function resolveComponentDoc(name: string, lang: DocsLang = 'zh-CN'): Promise<ResolvedComponentDoc | null> {
+  const resolved = findDocLoader(name, lang)
   if (!resolved) return null
+  const mod = await resolved.loader()
 
   return {
     name,
-    frontmatter: resolveFrontmatter(resolved.path, resolved.mod, name, resolved.raw),
-    component: resolved.mod.default,
+    frontmatter: resolveFrontmatter(resolved.path, mod, name, resolved.raw),
+    component: mod.default,
   }
 }
