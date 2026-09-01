@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DocumentedComponentMeta } from "../docs/loadComponentDocs";
+import type { DocumentedComponentMeta, ResolvedComponentDoc } from "../docs/loadComponentDocs";
 
 import {
     useDensity,
@@ -190,15 +190,21 @@ const themeSummary = computed(() => {
     return `${mode} · ${accentLabel} · ${densityLabel}`;
 });
 
-watch(selectedComponent, async () => {
+const activePackageDoc = ref<ResolvedComponentDoc | null>(null);
+const docLoading = ref(false);
+
+watch([selectedComponent, lang], async () => {
     await nextTick();
     contentScroll.value?.setScrollTop(0);
-});
-
-const activePackageDoc = computed(() => {
-    if (selectedComponent.value === OVERVIEW) return null;
-    return resolveComponentDoc(selectedComponent.value, lang.value);
-});
+    if (selectedComponent.value === OVERVIEW) {
+        activePackageDoc.value = null;
+        docLoading.value = false;
+        return;
+    }
+    docLoading.value = true;
+    activePackageDoc.value = await resolveComponentDoc(selectedComponent.value, lang.value);
+    docLoading.value = false;
+}, { immediate: true });
 
 const filteredDocumented = computed(() => {
     const query = search.value.trim().toLowerCase();
@@ -515,6 +521,10 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                                 </section>
                             </template>
                         </template>
+
+                        <p v-if="docLoading" class="missing-doc">
+                            …
+                        </p>
 
                         <ComponentDocViewer
                             v-else-if="activePackageDoc"

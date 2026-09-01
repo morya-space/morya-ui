@@ -1,8 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ChangelogView from './views/ChangelogView.vue'
-import ComponentPlayground from './views/ComponentPlayground.vue'
-import DocsView from './views/DocsView.vue'
-import HomeView from './views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -10,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: () => import('./views/HomeView.vue'),
     },
     {
       path: '/docs',
@@ -19,22 +15,22 @@ const router = createRouter({
     {
       path: '/docs/:slug',
       name: 'docs',
-      component: DocsView,
+      component: () => import('./views/DocsView.vue'),
     },
     {
       path: '/components',
       name: 'components',
-      component: ComponentPlayground,
+      component: () => import('./views/ComponentPlayground.vue'),
     },
     {
       path: '/components/:component',
       name: 'component-doc',
-      component: ComponentPlayground,
+      component: () => import('./views/ComponentPlayground.vue'),
     },
     {
       path: '/changelog',
       name: 'changelog',
-      component: ChangelogView,
+      component: () => import('./views/ChangelogView.vue'),
     },
     {
       // 兼容旧路径 /Button → /components/Button
@@ -45,7 +41,10 @@ const router = createRouter({
       }),
     },
   ],
-  scrollBehavior() {
+  scrollBehavior(to) {
+    if (to.hash) {
+      return { el: to.hash, behavior: 'smooth' }
+    }
     return { top: 0 }
   },
 })

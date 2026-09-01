@@ -1,32 +1,36 @@
 <script setup lang="ts">
+import type { ResolvedGuideDoc } from '../docs/guide/loadGuideDocs'
 import { WiScrollbar } from '@well-insight/ui'
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
-import { listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
+import { guideDocExists, listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { useDocsI18n } from '../i18n'
 
 const route = useRoute()
 const router = useRouter()
 const { lang, t } = useDocsI18n()
 const guides = computed(() => listGuideDocs(lang.value))
+const activeDoc = ref<ResolvedGuideDoc | null>(null)
+const docLoading = ref(false)
 
 const activeSlug = computed(() => {
   const slug = route.params.slug
   return typeof slug === 'string' && slug ? slug : 'introduction'
 })
 
-const activeDoc = computed(() => resolveGuideDoc(activeSlug.value, lang.value))
-
-watch(
-  activeSlug,
-  (slug) => {
-    if (!resolveGuideDoc(slug, lang.value) && guides.value[0]) {
+watch([activeSlug, lang], async () => {
+  if (!guideDocExists(activeSlug.value, lang.value)) {
+    if (guides.value[0]) {
       void router.replace({ name: 'docs', params: { slug: guides.value[0].slug } })
     }
-  },
-  { immediate: true },
-)
+    activeDoc.value = null
+    return
+  }
+  docLoading.value = true
+  activeDoc.value = await resolveGuideDoc(activeSlug.value, lang.value)
+  docLoading.value = false
+}, { immediate: true })
 </script>
 
 <template>
@@ -58,7 +62,14 @@ watch(
     <main class="docs-main">
       <WiScrollbar class="docs-scroll">
         <div class="docs-main__body">
-          <ComponentDocViewer v-if="activeDoc" :key="`${activeDoc.slug}-${lang}`" :doc="{ name: activeDoc.slug, frontmatter: activeDoc.frontmatter, component: activeDoc.component }" />
+          <p v-if="docLoading" class="docs-loading" aria-live="polite">
+            …
+          </p>
+          <ComponentDocViewer
+            v-else-if="activeDoc"
+            :key="`${activeDoc.slug}-${lang}`"
+            :doc="{ name: activeDoc.slug, frontmatter: activeDoc.frontmatter, component: activeDoc.component }"
+          />
           <section v-else class="docs-missing">
             <h2>{{ t.docsMissing }}</h2>
             <RouterLink :to="{ name: 'docs', params: { slug: 'introduction' } }">
@@ -154,6 +165,7 @@ watch(
   padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem;
 }
 
+.docs-loading,
 .docs-missing {
   color: var(--wi-color-text-muted);
 }
