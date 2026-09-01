@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import DropdownNodes from './DropdownNodes.vue'
 
 const props = withDefaults(defineProps<DropdownProps>(), {
@@ -51,12 +52,11 @@ function initHighlight() {
 function updateMenuPosition() {
   if (!teleported.value || !trigger.value) return
   const rect = trigger.value.getBoundingClientRect()
-  menuStyle.value = {
-    left: props.placement === 'bottom-end' ? `${rect.right}px` : `${rect.left}px`,
-    minWidth: `${rect.width}px`,
-    top: `${rect.bottom + 8}px`,
-    ...(props.placement === 'bottom-end' ? { transform: 'translateX(-100%)' } : {}),
-  }
+  menuStyle.value = computeFloatingOverlayStyle(
+    rect,
+    props.placement === 'bottom-end' ? 'bottom-end' : 'bottom-start',
+    { minWidth: `${rect.width}px` },
+  )
 }
 
 function setOpen(open: boolean) {
