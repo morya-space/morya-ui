@@ -1,10 +1,18 @@
 /* —— Form: DatePicker —— */
-.wi-datepicker {
-    --wi-datepicker-input-affix-padding: var(--wi-control-affix-padding);
-    --wi-datepicker-day-size: var(--wi-control-affix-size);
-    --wi-datepicker-calendar-cell-size: 2rem;
+.wi-datepicker,
+.wi-datepicker__panel {
+    --wi-datepicker-calendar-cell-size: var(--wi-control-affix-size, 2rem);
+    --wi-datepicker-day-size: var(--wi-datepicker-calendar-cell-size);
     --wi-datepicker-grid-gap: 0.125rem;
+    --wi-datepicker-panel-min-width: calc(
+        7 * var(--wi-datepicker-calendar-cell-size) + 6 *
+            var(--wi-datepicker-grid-gap) + 2 * var(--wi-space-3)
+    );
     --wi-datepicker-shortcuts-width: 6rem;
+}
+
+.wi-datepicker {
+    --wi-datepicker-input-end-padding: calc(var(--wi-space-2) + 1.25rem);
     display: inline-flex;
     flex-direction: column;
     gap: var(--wi-space-2);
@@ -37,7 +45,7 @@
     font: inherit;
     font-size: var(--wi-control-font-medium);
     min-height: var(--wi-control-height-medium);
-    padding: 0 var(--wi-datepicker-input-affix-padding) 0
+    padding: 0 var(--wi-datepicker-input-end-padding) 0
         var(--wi-control-padding-x-medium);
     width: 100%;
 }
@@ -45,14 +53,14 @@
 .wi-datepicker--small .wi-datepicker__input {
     font-size: var(--wi-control-font-small);
     min-height: var(--wi-control-height-small);
-    padding: 0 var(--wi-datepicker-input-affix-padding) 0
+    padding: 0 var(--wi-datepicker-input-end-padding) 0
         var(--wi-control-padding-x-small);
 }
 
 .wi-datepicker--large .wi-datepicker__input {
     font-size: var(--wi-control-font-large);
     min-height: var(--wi-control-height-large);
-    padding: 0 var(--wi-datepicker-input-affix-padding) 0
+    padding: 0 var(--wi-datepicker-input-end-padding) 0
         var(--wi-control-padding-x-large);
 }
 
@@ -81,17 +89,24 @@
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     margin-top: var(--wi-space-1);
+    min-width: max(100%, var(--wi-datepicker-panel-min-width));
     padding: var(--wi-space-3);
     position: absolute;
     top: 100%;
+    width: max-content;
     z-index: var(--wi-z-popper);
 }
 
 .wi-datepicker__panel--teleported {
     margin-top: 0;
+    min-width: var(--wi-datepicker-panel-min-width);
     position: fixed;
     top: auto;
     z-index: var(--wi-z-dropdown);
+}
+
+.wi-datepicker__calendar {
+    flex: 0 0 auto;
 }
 
 .wi-datepicker__header {
@@ -128,7 +143,11 @@
 .wi-datepicker__grid {
     display: grid;
     gap: var(--wi-datepicker-grid-gap);
-    grid-template-columns: repeat(7, var(--wi-datepicker-calendar-cell-size));
+    grid-template-columns: repeat(
+        7,
+        var(--wi-datepicker-calendar-cell-size, var(--wi-control-affix-size, 2rem))
+    );
+    place-items: center;
 }
 
 .wi-datepicker__weekdays {
