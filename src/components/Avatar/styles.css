@@ -2,6 +2,7 @@
     --wi-avatar-size: 2.5rem;
     --wi-avatar-size-large: 3.5rem;
     --wi-avatar-size-xlarge: 5rem;
+    --wi-avatar-icon-size: 1rem;
     --wi-avatar-font-size-xlarge: 1.5rem;
     --wi-avatar-group-overlap: var(--wi-space-2);
     --wi-avatar-group-ring-width: 2px;
@@ -37,11 +38,13 @@
 
 .wi-avatar--large {
     --wi-avatar-size: var(--wi-avatar-size-large);
+    --wi-avatar-icon-size: 1.375rem;
     font-size: var(--wi-font-size-lg);
 }
 
 .wi-avatar--xlarge {
     --wi-avatar-size: var(--wi-avatar-size-xlarge);
+    --wi-avatar-icon-size: 2rem;
     font-size: var(--wi-avatar-font-size-xlarge);
 }
 
@@ -57,7 +60,18 @@
 }
 
 .wi-avatar__icon {
+    align-items: center;
     color: inherit;
+    display: inline-flex;
+    height: var(--wi-avatar-icon-size);
+    justify-content: center;
+    width: var(--wi-avatar-icon-size);
+}
+
+.wi-avatar__icon :is(.wi-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .wi-avatar-group {

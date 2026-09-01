@@ -36,6 +36,12 @@ describe('wiSplitButton', () => {
     expect(wrapper.find('[role="menu"]').exists()).toBe(true)
   })
 
+  it('renders registered icon names with WiIcon', () => {
+    const wrapper = mount(WiSplitButton, { props: { label: 'Save', icon: 'check', size: 'large' } })
+    expect(wrapper.find('.wi-splitbutton__icon .wi-icon').exists()).toBe(true)
+    expect(wrapper.find('.wi-splitbutton__icon .wi-icon').classes()).toContain('wi-icon--large')
+  })
+
   it('opens menu and emits command', async () => {
     const command = vi.fn()
     const wrapper = mount(WiSplitButton, {

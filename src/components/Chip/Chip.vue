@@ -2,7 +2,7 @@
 import type { ChipProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
-import { normalizeSeverity, resolveSizeClass } from '../../shared/types'
+import { normalizeSeverity, resolveIconSize, resolveSizeClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ChipProps>(), {
@@ -14,6 +14,7 @@ const emit = defineEmits<{ (event: 'remove', value: MouseEvent): void }>()
 const locale = useWiLocale()
 const severityTone = computed(() => (props.severity ? normalizeSeverity(props.severity) : undefined))
 const sizeTone = computed(() => resolveSizeClass(props.size))
+const iconSize = computed(() => resolveIconSize(props.size))
 
 const chipClass = computed(() => [
   'wi-chip',
@@ -35,7 +36,7 @@ function handleRemove(event: MouseEvent) {
 <template>
   <span :class="chipClass" :aria-disabled="disabled || undefined">
     <img v-if="image" class="wi-chip__image" :src="image" alt="">
-    <WiIcon v-else-if="icon" class="wi-chip__icon" :name="icon" size="sm" />
+    <WiIcon v-else-if="icon" class="wi-chip__icon" :name="icon" :size="iconSize" />
     <span v-if="label" class="wi-chip__label">{{ label }}</span>
     <button
       v-if="removable"
@@ -45,7 +46,7 @@ function handleRemove(event: MouseEvent) {
       :aria-label="locale.remove"
       @click="handleRemove"
     >
-      <WiIcon name="close" size="sm" />
+      <WiIcon name="close" :size="iconSize" />
     </button>
   </span>
 </template>

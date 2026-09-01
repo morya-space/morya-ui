@@ -25,6 +25,11 @@ const resolvedSize = computed((): AvatarSize => {
   return 'normal'
 })
 
+const iconSize = computed(() => {
+  if (resolvedSize.value === 'large' || resolvedSize.value === 'xlarge') return 'lg'
+  return 'md'
+})
+
 const avatarClass = computed(() => [
   'wi-avatar',
   `wi-avatar--${props.shape}`,
@@ -55,7 +60,9 @@ function onImageError(event: Event) {
       :alt="label || ''"
       @error="onImageError"
     >
-    <WiIcon v-else-if="displayMode === 'icon'" class="wi-avatar__icon" :name="icon!" size="sm" />
+    <span v-else-if="displayMode === 'icon'" class="wi-avatar__icon">
+      <WiIcon :name="icon!" :size="iconSize" />
+    </span>
     <span v-else-if="label" class="wi-avatar__label">{{ label }}</span>
   </span>
 </template>

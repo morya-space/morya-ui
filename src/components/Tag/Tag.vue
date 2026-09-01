@@ -3,7 +3,7 @@ import type { TagProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { normalizeSeverity } from '../../shared/types'
+import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TagProps>(), {
@@ -17,6 +17,7 @@ const props = withDefaults(defineProps<TagProps>(), {
 const emit = defineEmits<{ (event: 'close', value: MouseEvent): void }>()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('Tag', () => props.size)
+const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
 
 const rootClass = computed(() => [
@@ -45,7 +46,7 @@ function onClose(event: MouseEvent) {
 
 <template>
   <span :class="rootClass" :style="rootStyle">
-    <WiIcon v-if="icon" class="wi-tag__icon" :name="icon" size="sm" />
+    <WiIcon v-if="icon" class="wi-tag__icon" :name="icon" :size="iconSize" />
     <slot>{{ value }}</slot>
     <button
       v-if="closable"
@@ -55,7 +56,7 @@ function onClose(event: MouseEvent) {
       :aria-label="locale.close"
       @click="onClose"
     >
-      <WiIcon name="close" size="sm" />
+      <WiIcon name="close" :size="iconSize" />
     </button>
   </span>
 </template>

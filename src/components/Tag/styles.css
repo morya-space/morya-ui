@@ -1,4 +1,5 @@
 .wi-tag {
+    --wi-tag-icon-size: 1rem;
     align-items: center;
     background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
     border-radius: var(--wi-radius-sm);
@@ -62,12 +63,26 @@
 }
 
 /* —— Batch 3: visual + long-tail —— */
+.wi-tag__icon {
+    flex-shrink: 0;
+    height: var(--wi-tag-icon-size);
+    width: var(--wi-tag-icon-size);
+}
+
+.wi-tag__icon :is(.wi-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
 .wi-tag--small {
+    --wi-tag-icon-size: 0.875rem;
     font-size: 0.65rem;
     padding: 0.15rem var(--wi-space-2);
 }
 
 .wi-tag--large {
+    --wi-tag-icon-size: 1.25rem;
     font-size: var(--wi-font-size-sm);
     padding: var(--wi-space-2) var(--wi-space-4);
 }
@@ -87,14 +102,25 @@
 }
 
 .wi-tag__close {
+    align-items: center;
     background: transparent;
     border: 0;
     color: inherit;
     cursor: pointer;
+    display: inline-flex;
     font: inherit;
+    height: var(--wi-tag-icon-size);
+    justify-content: center;
     line-height: 1;
     margin-left: 0.15rem;
     padding: 0;
+    width: var(--wi-tag-icon-size);
+}
+
+.wi-tag__close :is(.wi-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .wi-tag__close:focus-visible {
