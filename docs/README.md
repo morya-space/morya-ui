@@ -8,6 +8,7 @@ Maintainer documentation for `@well-insight/ui`. Public overview lives in the ro
 | --- | --- |
 | [DEVELOPMENT.md](./DEVELOPMENT.md) | Layout and commands |
 | [ui-development.md](./ui-development.md) | Build & release |
+| [OPTIMIZATION.md](./OPTIMIZATION.md) | Component & docs site optimization roadmap |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits |
 
 External:
