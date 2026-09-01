@@ -2,6 +2,7 @@
 import type { PanelProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 import { resolveSizeClass } from '../../shared/types'
 
 const props = withDefaults(defineProps<PanelProps>(), {
@@ -50,7 +51,7 @@ function toggle() {
         :aria-label="isCollapsed ? locale.expand : locale.collapse"
         @click="toggle"
       >
-        <span aria-hidden="true">{{ isCollapsed ? '▸' : '▾' }}</span>
+        <WiIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
       </button>
     </header>
     <div v-show="!isCollapsed" class="wi-panel__content">

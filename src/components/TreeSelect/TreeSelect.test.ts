@@ -51,4 +51,14 @@ describe('wiTreeSelect', () => {
     await wrapper.findAll('.wi-treeselect__option').find((n) => n.text() === 'Resume')!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['resume']])
   })
+
+  it('clears value when clearable and hovered', async () => {
+    const wrapper = mount(WiTreeSelect, {
+      props: { options, modelValue: 'home', clearable: true, teleport: false },
+    })
+    await wrapper.find('.wi-select__control').trigger('mouseenter')
+    await wrapper.find('.wi-select__clear').trigger('click')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
+    expect(wrapper.emitted('clear')).toHaveLength(1)
+  })
 })

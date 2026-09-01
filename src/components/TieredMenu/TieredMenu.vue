@@ -3,6 +3,7 @@ import type { TieredMenuItem, TieredMenuProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TieredMenuProps>(), {
   popup: false,
@@ -89,7 +90,9 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
         @click="item.items?.length ? openSubmenu(index, item) : activate(item)"
       >
         <span>{{ item.label }}</span>
-        <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">▸</span>
+        <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">
+          <WiIcon name="chevron-right" size="sm" />
+        </span>
       </button>
       <div
         v-if="item.items?.length && openIndex === index"
@@ -139,7 +142,9 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
             @click="item.items?.length ? openSubmenu(index, item) : activate(item)"
           >
             <span>{{ item.label }}</span>
-            <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">▸</span>
+            <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">
+          <WiIcon name="chevron-right" size="sm" />
+        </span>
           </button>
           <div
             v-if="item.items?.length && openIndex === index"

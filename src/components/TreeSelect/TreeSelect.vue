@@ -84,6 +84,7 @@ const visibleTags = computed(() => {
   return selectedTags.value.slice(0, max)
 })
 const hiddenTagCount = computed(() => Math.max(0, selectedTags.value.length - visibleTags.value.length))
+const showClearButton = computed(() => props.clearable && selectedKeys.value.length > 0 && !props.disabled)
 const filteredOptions = computed(() => {
   const q = query.value.trim().toLowerCase()
   if (!q) return props.options
@@ -207,48 +208,62 @@ onBeforeUnmount(() => {
     ]"
   >
     <div
-      ref="trigger"
-      class="wi-treeselect__trigger"
-      role="combobox"
-      tabindex="0"
-      :aria-disabled="disabled || undefined"
-      :aria-expanded="open"
-      aria-haspopup="tree"
-      @click="toggle"
-      @keydown.enter.prevent="toggle"
+      class="wi-treeselect__control wi-select__control"
+      :class="{
+        'wi-select__control--clearable': showClearButton,
+        'wi-select__control--open': open,
+      }"
     >
-      <div v-if="isMultiple && selectedTags.length" class="wi-treeselect__tags">
-        <span v-for="tag in visibleTags" :key="tag.key" class="wi-select__tag">
-          <span class="wi-select__tag-label">{{ tag.label }}</span>
-          <button
-            type="button"
-            class="wi-select__tag-remove"
-            :aria-label="locale.remove"
-            :disabled="disabled"
-            @click.stop="removeTag(tag.key)"
-          >
-            <WiIcon name="close" size="sm" />
-          </button>
-        </span>
-        <span v-if="hiddenTagCount" class="wi-select__tag wi-select__tag--more">
-          {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
+      <div
+        ref="trigger"
+        class="wi-treeselect__trigger"
+        role="combobox"
+        tabindex="0"
+        :aria-disabled="disabled || undefined"
+        :aria-expanded="open"
+        aria-haspopup="tree"
+        @click="toggle"
+        @keydown.enter.prevent="toggle"
+      >
+        <div v-if="isMultiple && selectedTags.length" class="wi-treeselect__tags">
+          <span v-for="tag in visibleTags" :key="tag.key" class="wi-select__tag">
+            <span class="wi-select__tag-label">{{ tag.label }}</span>
+            <button
+              type="button"
+              class="wi-select__tag-remove"
+              :aria-label="locale.remove"
+              :disabled="disabled"
+              @click.stop="removeTag(tag.key)"
+            >
+              <WiIcon name="close" size="sm" />
+            </button>
+          </span>
+          <span v-if="hiddenTagCount" class="wi-select__tag wi-select__tag--more">
+            {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
+          </span>
+        </div>
+        <span v-else class="wi-treeselect__label" :class="{ 'wi-treeselect__label--placeholder': !selectedKeys.length }">
+          {{ displayLabel }}
         </span>
       </div>
-      <span v-else class="wi-treeselect__label" :class="{ 'wi-treeselect__label--placeholder': !selectedKeys.length }">
-        {{ displayLabel }}
-      </span>
-      <button
-        v-if="clearable && selectedKeys.length && !disabled"
-        type="button"
-        class="wi-treeselect__clear"
-        :aria-label="locale.clear"
-        @click="clear"
-      >
-        <WiIcon name="close" size="sm" />
-      </button>
-      <span class="wi-treeselect__caret" aria-hidden="true">
-        <WiIcon name="chevron-down" size="sm" />
-      </span>
+      <div class="wi-select__suffix">
+        <button
+          v-if="showClearButton"
+          class="wi-select__clear"
+          type="button"
+          :aria-label="locale.clear"
+          @click="clear"
+        >
+          <WiIcon name="close" size="sm" />
+        </button>
+        <span
+          class="wi-select__indicator"
+          :class="{ 'wi-select__indicator--open': open }"
+          aria-hidden="true"
+        >
+          <WiIcon name="chevron-down" size="sm" />
+        </span>
+      </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">

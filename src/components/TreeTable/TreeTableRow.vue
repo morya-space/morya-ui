@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TreeTableColumn, TreeTableNode } from './types'
 import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 import TreeTableRow from './TreeTableRow.vue'
 
 defineProps<{
@@ -36,7 +37,10 @@ const locale = useWiLocale()
           :aria-label="isExpanded(node.key) ? locale.collapse : locale.expand"
           @click="$emit('toggle', node)"
         >
-          {{ isExpanded(node.key) ? '▾' : '▸' }}
+          <WiIcon
+            :name="isExpanded(node.key) ? 'chevron-down' : 'chevron-right'"
+            size="sm"
+          />
         </button>
         <span v-else class="wi-treetable__toggler-spacer" />
         <span>{{ node.data[column.field] }}</span>

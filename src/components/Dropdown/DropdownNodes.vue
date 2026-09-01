@@ -80,7 +80,9 @@ function onLeave() {
         <slot name="item" :item="item">
           {{ item.label }}
         </slot>
-        <span class="wi-dropdown__caret" aria-hidden="true">▸</span>
+        <span class="wi-dropdown__caret" aria-hidden="true">
+          <WiIcon name="chevron-right" size="sm" />
+        </span>
       </button>
       <div v-if="openValue === itemKey(item, index)" class="wi-dropdown__submenu" role="menu">
         <DropdownNodes

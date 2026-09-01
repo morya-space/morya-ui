@@ -4,6 +4,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ScrollTopProps>(), {
   threshold: 400,
@@ -102,7 +103,9 @@ watch(
         :hidden="!visible"
         @click="scrollToTop"
       >
-        <slot>↑</slot>
+        <slot>
+          <WiIcon name="arrow-up" size="sm" />
+        </slot>
       </button>
     </Teleport>
   </span>

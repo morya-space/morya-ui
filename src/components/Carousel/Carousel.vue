@@ -2,6 +2,7 @@
 import type { CarouselProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   numVisible: 1,
@@ -89,7 +90,7 @@ onBeforeUnmount(stopAutoplay)
       :disabled="!circular && page <= 0"
       @click="prev"
     >
-      ‹
+      <WiIcon name="chevron-left" size="sm" />
     </button>
     <div class="wi-carousel__main">
       <div class="wi-carousel__viewport">
@@ -125,7 +126,7 @@ onBeforeUnmount(stopAutoplay)
       :disabled="!circular && page >= maxPage"
       @click="next"
     >
-      ›
+      <WiIcon name="chevron-right" size="sm" />
     </button>
   </div>
 </template>

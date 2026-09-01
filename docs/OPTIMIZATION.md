@@ -75,6 +75,20 @@
 
 ---
 
+## 阶段六：视觉一致性与共享样式
+
+目标：图标统一、picker suffix 模式一致、减少跨组件 CSS 耦合。
+
+- [x] WiIcon 扫尾（Menu/Dropdown/TieredMenu/Menubar/SplitButton/Table/Pagination/Carousel/Gallery/Panel/Fieldset/LayoutSider/SpeedDial/ScrollTop 等）
+- [x] 新增 `sort` / 复用 chevron 图标（Table 排序、TreeTable/TreeSelect 展开）
+- [x] 抽取 `shared/styles/form-tags.css`（Select/TreeSelect 标签 chip）
+- [x] 抽取 `shared/styles/control-suffix.css`（Select/TreeSelect hover 单槽 clear + chevron）
+- [x] TreeSelect suffix 对齐 Select（hover 切换 clear/chevron）
+- [ ] clearable API 统一（`showClear` 别名、`CascadeSelect` 补 clearable）
+- [ ] TreeSelect / CascadeSelect / DatePicker 键盘与 ARIA 对标 Select
+
+---
+
 ## 变更记录
 
 | 日期 | 阶段 | 说明 |
@@ -96,6 +110,7 @@
 | 2026-09-01 | 五 | 剩余浮层组件统一接入 `computeFloatingOverlayStyle` |
 | 2026-09-01 | 五 | 16 个子组件补充独立单元测试（437 tests） |
 | 2026-09-01 | 二 | docs 构建 codeSplitting + manifest；主入口 98→39KB |
+| 2026-09-01 | 六 | WiIcon 全局扫尾；shared form-tags/control-suffix；TreeSelect suffix 对齐 Select |
 
 ---
 

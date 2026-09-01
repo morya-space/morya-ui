@@ -2,6 +2,7 @@
 import type { GalleryProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
@@ -38,7 +39,7 @@ function next() {
         :disabled="activeIndex <= 0"
         @click="prev"
       >
-        ‹
+        <WiIcon name="chevron-left" size="sm" />
       </button>
       <img v-if="current" class="wi-gallery__image" :src="current" alt="">
       <button
@@ -48,7 +49,7 @@ function next() {
         :disabled="activeIndex >= images.length - 1"
         @click="next"
       >
-        ›
+        <WiIcon name="chevron-right" size="sm" />
       </button>
     </div>
     <ul class="wi-gallery__thumbs" role="listbox" :aria-label="locale.thumbnails">
