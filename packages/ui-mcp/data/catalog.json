@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T01:51:41.789Z",
+  "generatedAt": "2026-09-01T01:52:54.153Z",
   "library": {
     "name": "@well-insight/ui",
     "version": "0.1.10"
@@ -19584,7 +19584,7 @@
         "zh-CN": {
           "title": "介绍",
           "description": "Well Insight 是什么、适合谁用。",
-          "markdown": "---\ntitle: 介绍\norder: 1\ndescription: Well Insight 是什么、适合谁用。\n---\n\n# 介绍\n\n**Well Insight**（`@well-insight/ui`）是一套面向 Vue 3 的组件库，内置设计令牌、亮暗主题与动效偏好。\n\n源码仓库：[GitHub](https://github.com/well-insight/well-insight-ui)\n\n## 设计目标\n\n- **可独立复用**：业务应用通过包入口引入组件与样式；发布产物为 ESM + 类型 + CSS。\n- **一致体验**：尺寸、语义色、浮层行为在组件间保持同一套约定。\n- **主题一体**：颜色、圆角、间距、动效走 `--wi-*` CSS 变量；`useTheme` / `useMotion` / `useDensity` 与组件同包导出。\n- **文档即预览**：每个组件目录下的 `docs/index.md`（中文）与 `docs/index.en.md`（英文）支持 Markdown + 可交互 `vue preview`。\n\n## 包结构\n\n| 包 | 说明 |\n| --- | --- |\n| `@well-insight/ui` | 组件、样式、主题 API、文档站 |\n| `@well-insight/ui-mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |\n\n## 消费方式\n\n| 场景 | 解析入口 | 说明 |\n| --- | --- | --- |\n| **npm / pnpm 安装** | `dist/` | ESM、`.d.ts`、`styles.css` 与按需子路径 |\n| **本地 link / monorepo 联调** | 业务项目配置 Vite alias → `src/` | 参见仓库 [DEVELOPMENT.zh-CN.md](https://github.com/well-insight/well-insight-ui/blob/main/docs/DEVELOPMENT.zh-CN.md) |\n| **生产构建** | `dist/` | 始终使用构建产物 |\n\n## 下一步\n\n- [快速上手](/docs/quick-start)：安装与最小示例\n- [指南](/docs/guide)：目录约定与文档写法\n- [主题](/docs/theme)：亮暗色与动效\n- [全局配置](/docs/config)：`ConfigProvider` / `createWellInsight`\n- [API 迁移](/docs/migration)：已弃用 Props 对照\n- [MCP](/docs/mcp)：可选 AI 文档检索服务\n- [组件](/components)：浏览全部组件与 API\n",
+          "markdown": "---\ntitle: 介绍\norder: 1\ndescription: Well Insight 是什么、适合谁用。\n---\n\n# 介绍\n\n**Well Insight**（`@well-insight/ui`）是一套面向 Vue 3 的组件库，内置设计令牌、亮暗主题与动效偏好。\n\n源码仓库：[GitHub](https://github.com/well-insight/well-insight-ui)\n\n## 设计目标\n\n- **可独立复用**：业务应用通过包入口引入组件与样式；发布产物为 ESM + 类型 + CSS。\n- **一致体验**：尺寸、语义色、浮层行为在组件间保持同一套约定。\n- **主题一体**：颜色、圆角、间距、动效走 `--wi-*` CSS 变量；`useTheme` / `useMotion` / `useDensity` 与组件同包导出。\n- **文档即预览**：每个组件目录下的 `docs/index.md`（中文）与 `docs/index.en.md`（英文）支持 Markdown + 可交互 `vue preview`。\n\n## 包结构\n\n| 包 | 说明 |\n| --- | --- |\n| `@well-insight/ui` | 组件、样式、主题 API、文档站 |\n| `@well-insight/ui-mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |\n\n## 消费方式\n\n| 场景 | 解析入口 | 说明 |\n| --- | --- | --- |\n| **npm / pnpm 安装** | `dist/` | ESM、`.d.ts`、`styles.css` 与按需子路径 |\n| **本地 link / monorepo 联调** | 业务项目配置 Vite alias → `src/` | 参见仓库 [DEVELOPMENT.zh-CN.md](https://github.com/well-insight/well-insight-ui/blob/main/docs/DEVELOPMENT.zh-CN.md) |\n| **生产构建** | `dist/` | 始终使用构建产物 |\n\n## 下一步\n\n- [快速上手](/docs/quick-start)：安装与最小示例\n- [指南](/docs/guide)：目录约定与文档写法\n- [主题](/docs/theme)：亮暗色与动效\n- [全局配置](/docs/config)：`ConfigProvider` / `createWellInsight`\n- [API 迁移](/docs/migration)：已弃用 Props 对照\n- [无障碍](/docs/accessibility)：键盘、表单与浮层约定\n- [MCP](/docs/mcp)：可选 AI 文档检索服务\n- [组件](/components)：浏览全部组件与 API\n",
           "sections": [
             {
               "title": "",
@@ -19609,14 +19609,14 @@
             {
               "title": "下一步",
               "id": "下一步",
-              "body": "- [快速上手](/docs/quick-start)：安装与最小示例\n- [指南](/docs/guide)：目录约定与文档写法\n- [主题](/docs/theme)：亮暗色与动效\n- [全局配置](/docs/config)：`ConfigProvider` / `createWellInsight`\n- [API 迁移](/docs/migration)：已弃用 Props 对照\n- [MCP](/docs/mcp)：可选 AI 文档检索服务\n- [组件](/components)：浏览全部组件与 API"
+              "body": "- [快速上手](/docs/quick-start)：安装与最小示例\n- [指南](/docs/guide)：目录约定与文档写法\n- [主题](/docs/theme)：亮暗色与动效\n- [全局配置](/docs/config)：`ConfigProvider` / `createWellInsight`\n- [API 迁移](/docs/migration)：已弃用 Props 对照\n- [无障碍](/docs/accessibility)：键盘、表单与浮层约定\n- [MCP](/docs/mcp)：可选 AI 文档检索服务\n- [组件](/components)：浏览全部组件与 API"
             }
           ]
         },
         "en-US": {
           "title": "Introduction",
           "description": "What Well Insight is and who it is for.",
-          "markdown": "---\ntitle: Introduction\norder: 1\ndescription: What Well Insight is and who it is for.\n---\n\n# Introduction\n\n**Well Insight** (`@well-insight/ui`) is a Vue 3 component library with design tokens, light/dark themes, and motion preferences.\n\nSource: [GitHub](https://github.com/well-insight/well-insight-ui)\n\n## Goals\n\n- **Reusable**: apps import components and styles from the package entry; the publish output is ESM + types + CSS.\n- **Consistent**: size, semantic color, and overlay behavior follow one set of conventions.\n- **Theme-first**: color, radius, space, and motion use `--wi-*` CSS variables; `useTheme` / `useMotion` / `useDensity` ship in the same package.\n- **Docs as preview**: each component’s `docs/index.md` (Chinese) and `docs/index.en.md` (English) support Markdown plus interactive `vue preview` blocks.\n\n## Packages\n\n| Package | Role |\n| --- | --- |\n| `@well-insight/ui` | Components, styles, theme APIs, and the docs site |\n| `@well-insight/ui-mcp` | (Optional) MCP server for AI clients that support the protocol |\n\n## Consumption\n\n| Context | Resolved entry | Notes |\n| --- | --- | --- |\n| **npm / pnpm install** | `dist/` | ESM, `.d.ts`, `styles.css`, and on-demand subpaths |\n| **Local link / monorepo** | Vite alias → `src/` in the consuming app | See [Development guide](https://github.com/well-insight/well-insight-ui/blob/main/docs/DEVELOPMENT.md) |\n| **Production build** | `dist/` | Always uses build output |\n\n## Next steps\n\n- [Quick start](/docs/quick-start): install and a minimal example\n- [Guide](/docs/guide): folder conventions and how to write docs\n- [Theme](/docs/theme): light/dark and motion\n- [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`\n- [API migration](/docs/migration): deprecated prop mapping\n- [MCP](/docs/mcp): optional AI documentation server\n- [Components](/components): browse all components and APIs\n",
+          "markdown": "---\ntitle: Introduction\norder: 1\ndescription: What Well Insight is and who it is for.\n---\n\n# Introduction\n\n**Well Insight** (`@well-insight/ui`) is a Vue 3 component library with design tokens, light/dark themes, and motion preferences.\n\nSource: [GitHub](https://github.com/well-insight/well-insight-ui)\n\n## Goals\n\n- **Reusable**: apps import components and styles from the package entry; the publish output is ESM + types + CSS.\n- **Consistent**: size, semantic color, and overlay behavior follow one set of conventions.\n- **Theme-first**: color, radius, space, and motion use `--wi-*` CSS variables; `useTheme` / `useMotion` / `useDensity` ship in the same package.\n- **Docs as preview**: each component’s `docs/index.md` (Chinese) and `docs/index.en.md` (English) support Markdown plus interactive `vue preview` blocks.\n\n## Packages\n\n| Package | Role |\n| --- | --- |\n| `@well-insight/ui` | Components, styles, theme APIs, and the docs site |\n| `@well-insight/ui-mcp` | (Optional) MCP server for AI clients that support the protocol |\n\n## Consumption\n\n| Context | Resolved entry | Notes |\n| --- | --- | --- |\n| **npm / pnpm install** | `dist/` | ESM, `.d.ts`, `styles.css`, and on-demand subpaths |\n| **Local link / monorepo** | Vite alias → `src/` in the consuming app | See [Development guide](https://github.com/well-insight/well-insight-ui/blob/main/docs/DEVELOPMENT.md) |\n| **Production build** | `dist/` | Always uses build output |\n\n## Next steps\n\n- [Quick start](/docs/quick-start): install and a minimal example\n- [Guide](/docs/guide): folder conventions and how to write docs\n- [Theme](/docs/theme): light/dark and motion\n- [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`\n- [API migration](/docs/migration): deprecated prop mapping\n- [Accessibility](/docs/accessibility): forms, keyboard, overlays\n- [MCP](/docs/mcp): optional AI documentation server\n- [Components](/components): browse all components and APIs\n",
           "sections": [
             {
               "title": "",
@@ -19641,7 +19641,7 @@
             {
               "title": "Next steps",
               "id": "next-steps",
-              "body": "- [Quick start](/docs/quick-start): install and a minimal example\n- [Guide](/docs/guide): folder conventions and how to write docs\n- [Theme](/docs/theme): light/dark and motion\n- [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`\n- [API migration](/docs/migration): deprecated prop mapping\n- [MCP](/docs/mcp): optional AI documentation server\n- [Components](/components): browse all components and APIs"
+              "body": "- [Quick start](/docs/quick-start): install and a minimal example\n- [Guide](/docs/guide): folder conventions and how to write docs\n- [Theme](/docs/theme): light/dark and motion\n- [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`\n- [API migration](/docs/migration): deprecated prop mapping\n- [Accessibility](/docs/accessibility): forms, keyboard, overlays\n- [MCP](/docs/mcp): optional AI documentation server\n- [Components](/components): browse all components and APIs"
             }
           ]
         }
@@ -20226,6 +20226,130 @@
               "title": "See also",
               "id": "see-also",
               "body": "- [Configuration](/docs/config): size, density, locale\n- [Components](/components): up-to-date prop tables"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "accessibility",
+      "title": "无障碍",
+      "titleEn": "Accessibility",
+      "description": "使用 Well Insight 组件时的无障碍约定与检查清单。",
+      "descriptionEn": "Accessibility conventions when using Well Insight components.",
+      "order": 8,
+      "locales": {
+        "zh-CN": {
+          "title": "无障碍",
+          "description": "使用 Well Insight 组件时的无障碍约定与检查清单。",
+          "markdown": "---\ntitle: 无障碍\norder: 8\ndescription: 使用 Well Insight 组件时的无障碍约定与检查清单。\n---\n\n# 无障碍\n\nWell Insight 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件尽量自带标签关联、键盘路径与浮层焦点管理；业务侧仍需提供有意义的文案与结构。\n\n## 快速检查清单\n\n| 场景 | 建议 |\n| --- | --- |\n| 图标按钮 | 设置 `aria-label` 或可见文本，勿仅靠图标传达含义 |\n| 表单字段 | 使用 `label`；错误时用 `invalid` + `error-message` |\n| 装饰性图标 | 省略 `label`，组件会使用 `aria-hidden` |\n| 浮层 / 对话框 | 确认 Esc 可关闭；打开后焦点在面板内 |\n| 动效敏感用户 | 使用 `useMotion()` 设为 `reduced` 或 `none` |\n| 仅颜色区分状态 | 同时提供文案、图标或 `error-message` |\n\n## 表单与校验\n\n输入类组件（`Input`、`Textarea`、`Select` 等）共享字段模式：\n\n```vue\n<WiInput\n  id=\"email\"\n  v-model=\"email\"\n  label=\"邮箱\"\n  invalid\n  error-message=\"请输入有效邮箱\"\n/>\n```\n\n要点：\n\n- **`label`** 会关联到控件；配合 `FloatLabel` 时也会写入 `for`。\n- **`invalid`** 会设置 `aria-invalid` 与错误样式（见 [API 迁移](/docs/migration) 中 `error` 别名说明）。\n- **`error-message`** 会通过 `aria-describedby` 关联帮助/错误区域。\n- 必填请同时使用原生 `required`（若组件支持）或业务层校验提示，不要只用颜色表达。\n\n## 图标与按钮\n\n`WiIcon` 仅承载**系统图标**。无 `label` 时视为装饰并隐藏；信息性图标请传 `label`：\n\n```vue\n<WiIcon name=\"info\" label=\"更多信息\" />\n<WiButton icon=\"search\" aria-label=\"搜索\" icon-only />\n```\n\n带文字的按钮优先用默认插槽或 `label`，不必重复 `aria-label`。\n\n## 浮层与焦点\n\n以下组件默认 Teleport 到 `body`，并在打开时锁定滚动、支持 `Escape` 关闭：\n\n- `Dialog`、`Drawer`、`CommandMenu`\n- `Select`、`Popover`、`Tooltip`（按组件实现）\n\n弹出层触发器应设置：\n\n- `aria-expanded` / `aria-controls`（如 `Popover`）\n- 可见标签或 `aria-label`\n\n模态对话框打开后，焦点应落在可交互元素上；关闭后宜将焦点还原到触发器（业务层使用 `Dialog` 时可自行管理）。\n\n## 键盘交互\n\n| 组件 | 常用按键 |\n| --- | --- |\n| `CommandMenu` | `↑`/`↓` 选择，`Enter` 执行，`Esc` 关闭 |\n| `Select` | `Enter`/`Space` 打开，`↑`/`↓` 移动选项，`Esc` 关闭 |\n| `Tabs` | 方向键在 Tab 列表间移动（实现依组件） |\n| `Slider` | 方向键调整值；可通过 `aria-label` 命名 |\n\n具体行为以各组件文档为准；新增组件请在 `docs/` 中说明键盘表。\n\n## 动效与对比度\n\n```ts\nimport { useMotion } from '@well-insight/ui'\n\nconst { setMotion } = useMotion()\nsetMotion('reduced') // 或 'none'\n```\n\n`reduced` / `none` 会缩短或关闭 `--wi-motion-*` 过渡，减轻 vestibular 不适。\n\n颜色应通过 `--wi-color-*` 令牌消费，以保证亮/暗主题下对比度一致。自定义主题后请在真实内容上抽查正文与错误态可读性。\n\n## 组件库内已知实践\n\n近期实现/改进包括：\n\n- **FloatLabel**：`label[for]` 关联首个输入控件\n- **Popover**：触发器 `aria-expanded` / `aria-haspopup` / `aria-controls`\n- **Slider**：单 thumb 默认 `aria-label`（可通过 prop 覆盖）\n\n仍在持续改进的区域见 [优化路线图](https://github.com/well-insight/well-insight-ui/blob/main/docs/OPTIMIZATION.md) 阶段四、五。\n\n## 测试建议\n\n- 使用键盘完成主流程（Tab、Enter、Esc、方向键）。\n- 使用系统屏幕阅读器（NVDA / VoiceOver）抽查表单与对话框。\n- 在 `prefers-reduced-motion: reduce` 或 `useMotion('none')` 下确认界面仍可用。\n\n## 相关\n\n- [API 迁移](/docs/migration)：`invalid` 与样式类说明\n- [主题](/docs/theme)：动效偏好与令牌\n- [全局配置](/docs/config)：语言包与默认尺寸\n",
+          "sections": [
+            {
+              "title": "",
+              "id": "overview",
+              "body": "# 无障碍\n\nWell Insight 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件尽量自带标签关联、键盘路径与浮层焦点管理；业务侧仍需提供有意义的文案与结构。"
+            },
+            {
+              "title": "快速检查清单",
+              "id": "快速检查清单",
+              "body": "| 场景 | 建议 |\n| --- | --- |\n| 图标按钮 | 设置 `aria-label` 或可见文本，勿仅靠图标传达含义 |\n| 表单字段 | 使用 `label`；错误时用 `invalid` + `error-message` |\n| 装饰性图标 | 省略 `label`，组件会使用 `aria-hidden` |\n| 浮层 / 对话框 | 确认 Esc 可关闭；打开后焦点在面板内 |\n| 动效敏感用户 | 使用 `useMotion()` 设为 `reduced` 或 `none` |\n| 仅颜色区分状态 | 同时提供文案、图标或 `error-message` |"
+            },
+            {
+              "title": "表单与校验",
+              "id": "表单与校验",
+              "body": "输入类组件（`Input`、`Textarea`、`Select` 等）共享字段模式：\n\n```vue\n<WiInput\n  id=\"email\"\n  v-model=\"email\"\n  label=\"邮箱\"\n  invalid\n  error-message=\"请输入有效邮箱\"\n/>\n```\n\n要点：\n\n- **`label`** 会关联到控件；配合 `FloatLabel` 时也会写入 `for`。\n- **`invalid`** 会设置 `aria-invalid` 与错误样式（见 [API 迁移](/docs/migration) 中 `error` 别名说明）。\n- **`error-message`** 会通过 `aria-describedby` 关联帮助/错误区域。\n- 必填请同时使用原生 `required`（若组件支持）或业务层校验提示，不要只用颜色表达。"
+            },
+            {
+              "title": "图标与按钮",
+              "id": "图标与按钮",
+              "body": "`WiIcon` 仅承载**系统图标**。无 `label` 时视为装饰并隐藏；信息性图标请传 `label`：\n\n```vue\n<WiIcon name=\"info\" label=\"更多信息\" />\n<WiButton icon=\"search\" aria-label=\"搜索\" icon-only />\n```\n\n带文字的按钮优先用默认插槽或 `label`，不必重复 `aria-label`。"
+            },
+            {
+              "title": "浮层与焦点",
+              "id": "浮层与焦点",
+              "body": "以下组件默认 Teleport 到 `body`，并在打开时锁定滚动、支持 `Escape` 关闭：\n\n- `Dialog`、`Drawer`、`CommandMenu`\n- `Select`、`Popover`、`Tooltip`（按组件实现）\n\n弹出层触发器应设置：\n\n- `aria-expanded` / `aria-controls`（如 `Popover`）\n- 可见标签或 `aria-label`\n\n模态对话框打开后，焦点应落在可交互元素上；关闭后宜将焦点还原到触发器（业务层使用 `Dialog` 时可自行管理）。"
+            },
+            {
+              "title": "键盘交互",
+              "id": "键盘交互",
+              "body": "| 组件 | 常用按键 |\n| --- | --- |\n| `CommandMenu` | `↑`/`↓` 选择，`Enter` 执行，`Esc` 关闭 |\n| `Select` | `Enter`/`Space` 打开，`↑`/`↓` 移动选项，`Esc` 关闭 |\n| `Tabs` | 方向键在 Tab 列表间移动（实现依组件） |\n| `Slider` | 方向键调整值；可通过 `aria-label` 命名 |\n\n具体行为以各组件文档为准；新增组件请在 `docs/` 中说明键盘表。"
+            },
+            {
+              "title": "动效与对比度",
+              "id": "动效与对比度",
+              "body": "```ts\nimport { useMotion } from '@well-insight/ui'\n\nconst { setMotion } = useMotion()\nsetMotion('reduced') // 或 'none'\n```\n\n`reduced` / `none` 会缩短或关闭 `--wi-motion-*` 过渡，减轻 vestibular 不适。\n\n颜色应通过 `--wi-color-*` 令牌消费，以保证亮/暗主题下对比度一致。自定义主题后请在真实内容上抽查正文与错误态可读性。"
+            },
+            {
+              "title": "组件库内已知实践",
+              "id": "组件库内已知实践",
+              "body": "近期实现/改进包括：\n\n- **FloatLabel**：`label[for]` 关联首个输入控件\n- **Popover**：触发器 `aria-expanded` / `aria-haspopup` / `aria-controls`\n- **Slider**：单 thumb 默认 `aria-label`（可通过 prop 覆盖）\n\n仍在持续改进的区域见 [优化路线图](https://github.com/well-insight/well-insight-ui/blob/main/docs/OPTIMIZATION.md) 阶段四、五。"
+            },
+            {
+              "title": "测试建议",
+              "id": "测试建议",
+              "body": "- 使用键盘完成主流程（Tab、Enter、Esc、方向键）。\n- 使用系统屏幕阅读器（NVDA / VoiceOver）抽查表单与对话框。\n- 在 `prefers-reduced-motion: reduce` 或 `useMotion('none')` 下确认界面仍可用。"
+            },
+            {
+              "title": "相关",
+              "id": "相关",
+              "body": "- [API 迁移](/docs/migration)：`invalid` 与样式类说明\n- [主题](/docs/theme)：动效偏好与令牌\n- [全局配置](/docs/config)：语言包与默认尺寸"
+            }
+          ]
+        },
+        "en-US": {
+          "title": "Accessibility",
+          "description": "Accessibility conventions when using Well Insight components.",
+          "markdown": "---\ntitle: Accessibility\norder: 8\ndescription: Accessibility conventions when using Well Insight components.\n---\n\n# Accessibility\n\nWell Insight favors **semantic HTML first, ARIA when necessary**. Components handle labels, keyboard paths, and overlay focus where possible; apps still must supply meaningful copy and structure.\n\n## Quick checklist\n\n| Scenario | Guidance |\n| --- | --- |\n| Icon-only buttons | Set `aria-label` or visible text—do not rely on icon shape alone |\n| Form fields | Use `label`; on failure use `invalid` + `error-message` |\n| Decorative icons | Omit `label`; the icon is `aria-hidden` |\n| Overlays / dialogs | Ensure Escape closes; focus stays manageable while open |\n| Motion sensitivity | Use `useMotion()` with `reduced` or `none` |\n| Status by color only | Add text, icons, or `error-message` |\n\n## Forms and validation\n\nInput-family components (`Input`, `Textarea`, `Select`, …) share the same field pattern:\n\n```vue\n<WiInput\n  id=\"email\"\n  v-model=\"email\"\n  label=\"Email\"\n  invalid\n  error-message=\"Enter a valid email address\"\n/>\n```\n\nNotes:\n\n- **`label`** wires to the control; `FloatLabel` also sets `for` on the label element.\n- **`invalid`** sets `aria-invalid` and error styling (see legacy `error` alias in [API migration](/docs/migration)).\n- **`error-message`** is linked through `aria-describedby`.\n- Mark required fields with native `required` when supported **and** validation copy—not color alone.\n\n## Icons and buttons\n\n`WiIcon` covers **system icons** only. Without `label` the icon is decorative (`aria-hidden`); informative icons need `label`:\n\n```vue\n<WiIcon name=\"info\" label=\"More information\" />\n<WiButton icon=\"search\" aria-label=\"Search\" icon-only />\n```\n\nPrefer default slot / `label` text on buttons; avoid duplicating `aria-label` when visible text exists.\n\n## Overlays and focus\n\nThese default to Teleport on `body`, block scroll while open, and close on Escape where applicable:\n\n- `Dialog`, `Drawer`, `CommandMenu`\n- `Select`, `Popover`, `Tooltip` (per component)\n\nTriggers should expose:\n\n- `aria-expanded` / `aria-controls` (e.g. `Popover`)\n- Visible text or `aria-label`\n\nAfter closing a modal, return focus to the trigger when your UX requires it.\n\n## Keyboard\n\n| Component | Keys |\n| --- | --- |\n| `CommandMenu` | `↑`/`↓` move, `Enter` run, `Esc` close |\n| `Select` | `Enter`/`Space` open, `↑`/`↓` options, `Esc` close |\n| `Tabs` | Arrow keys between tabs (see component doc) |\n| `Slider` | Arrow keys adjust value; override naming with `aria-label` |\n\nDocument keyboard tables in component `docs/` when adding new widgets.\n\n## Motion and contrast\n\n```ts\nimport { useMotion } from '@well-insight/ui'\n\nconst { setMotion } = useMotion()\nsetMotion('reduced') // or 'none'\n```\n\n`reduced` / `none` shortens or disables `--wi-motion-*` transitions.\n\nConsume colors through `--wi-color-*` tokens for light/dark parity. After theming, spot-check body text and error states on real content.\n\n## In-library improvements\n\nRecent work includes:\n\n- **FloatLabel**: `label[for]` linked to the first input\n- **Popover**: trigger `aria-expanded` / `aria-haspopup` / `aria-controls`\n- **Slider**: default `aria-label` on a single thumb (overridable)\n\nSee [OPTIMIZATION.md](https://github.com/well-insight/well-insight-ui/blob/main/docs/OPTIMIZATION.md) phases IV–V for ongoing items.\n\n## Testing tips\n\n- Complete primary flows with keyboard only (Tab, Enter, Esc, arrows).\n- Spot-check forms and dialogs with NVDA or VoiceOver.\n- Verify usability under `prefers-reduced-motion: reduce` or `useMotion('none')`.\n\n## See also\n\n- [API migration](/docs/migration): `invalid` props and CSS classes\n- [Theme](/docs/theme): motion preference and tokens\n- [Configuration](/docs/config): locale and defaults\n",
+          "sections": [
+            {
+              "title": "",
+              "id": "overview",
+              "body": "# Accessibility\n\nWell Insight favors **semantic HTML first, ARIA when necessary**. Components handle labels, keyboard paths, and overlay focus where possible; apps still must supply meaningful copy and structure."
+            },
+            {
+              "title": "Quick checklist",
+              "id": "quick-checklist",
+              "body": "| Scenario | Guidance |\n| --- | --- |\n| Icon-only buttons | Set `aria-label` or visible text—do not rely on icon shape alone |\n| Form fields | Use `label`; on failure use `invalid` + `error-message` |\n| Decorative icons | Omit `label`; the icon is `aria-hidden` |\n| Overlays / dialogs | Ensure Escape closes; focus stays manageable while open |\n| Motion sensitivity | Use `useMotion()` with `reduced` or `none` |\n| Status by color only | Add text, icons, or `error-message` |"
+            },
+            {
+              "title": "Forms and validation",
+              "id": "forms-and-validation",
+              "body": "Input-family components (`Input`, `Textarea`, `Select`, …) share the same field pattern:\n\n```vue\n<WiInput\n  id=\"email\"\n  v-model=\"email\"\n  label=\"Email\"\n  invalid\n  error-message=\"Enter a valid email address\"\n/>\n```\n\nNotes:\n\n- **`label`** wires to the control; `FloatLabel` also sets `for` on the label element.\n- **`invalid`** sets `aria-invalid` and error styling (see legacy `error` alias in [API migration](/docs/migration)).\n- **`error-message`** is linked through `aria-describedby`.\n- Mark required fields with native `required` when supported **and** validation copy—not color alone."
+            },
+            {
+              "title": "Icons and buttons",
+              "id": "icons-and-buttons",
+              "body": "`WiIcon` covers **system icons** only. Without `label` the icon is decorative (`aria-hidden`); informative icons need `label`:\n\n```vue\n<WiIcon name=\"info\" label=\"More information\" />\n<WiButton icon=\"search\" aria-label=\"Search\" icon-only />\n```\n\nPrefer default slot / `label` text on buttons; avoid duplicating `aria-label` when visible text exists."
+            },
+            {
+              "title": "Overlays and focus",
+              "id": "overlays-and-focus",
+              "body": "These default to Teleport on `body`, block scroll while open, and close on Escape where applicable:\n\n- `Dialog`, `Drawer`, `CommandMenu`\n- `Select`, `Popover`, `Tooltip` (per component)\n\nTriggers should expose:\n\n- `aria-expanded` / `aria-controls` (e.g. `Popover`)\n- Visible text or `aria-label`\n\nAfter closing a modal, return focus to the trigger when your UX requires it."
+            },
+            {
+              "title": "Keyboard",
+              "id": "keyboard",
+              "body": "| Component | Keys |\n| --- | --- |\n| `CommandMenu` | `↑`/`↓` move, `Enter` run, `Esc` close |\n| `Select` | `Enter`/`Space` open, `↑`/`↓` options, `Esc` close |\n| `Tabs` | Arrow keys between tabs (see component doc) |\n| `Slider` | Arrow keys adjust value; override naming with `aria-label` |\n\nDocument keyboard tables in component `docs/` when adding new widgets."
+            },
+            {
+              "title": "Motion and contrast",
+              "id": "motion-and-contrast",
+              "body": "```ts\nimport { useMotion } from '@well-insight/ui'\n\nconst { setMotion } = useMotion()\nsetMotion('reduced') // or 'none'\n```\n\n`reduced` / `none` shortens or disables `--wi-motion-*` transitions.\n\nConsume colors through `--wi-color-*` tokens for light/dark parity. After theming, spot-check body text and error states on real content."
+            },
+            {
+              "title": "In-library improvements",
+              "id": "in-library-improvements",
+              "body": "Recent work includes:\n\n- **FloatLabel**: `label[for]` linked to the first input\n- **Popover**: trigger `aria-expanded` / `aria-haspopup` / `aria-controls`\n- **Slider**: default `aria-label` on a single thumb (overridable)\n\nSee [OPTIMIZATION.md](https://github.com/well-insight/well-insight-ui/blob/main/docs/OPTIMIZATION.md) phases IV–V for ongoing items."
+            },
+            {
+              "title": "Testing tips",
+              "id": "testing-tips",
+              "body": "- Complete primary flows with keyboard only (Tab, Enter, Esc, arrows).\n- Spot-check forms and dialogs with NVDA or VoiceOver.\n- Verify usability under `prefers-reduced-motion: reduce` or `useMotion('none')`."
+            },
+            {
+              "title": "See also",
+              "id": "see-also",
+              "body": "- [API migration](/docs/migration): `invalid` props and CSS classes\n- [Theme](/docs/theme): motion preference and tokens\n- [Configuration](/docs/config): locale and defaults"
             }
           ]
         }

@@ -62,8 +62,7 @@
 - [x] 补薄文档：CommandMenu、TieredMenu、MegaMenu、VirtualScroller
 - [ ] 补 Events / Slots 缺失章节（按使用频率排序）
 - [ ] 中文文档小节标题统一（如 `## 基础用法` 替代 `## Basic`）
-- [ ] 新增无障碍指南页（playground `/docs/accessibility`）
-
+- [x] 新增无障碍指南页（playground `/docs/accessibility`）
 ---
 
 ## 阶段五：架构与测试（中长期）

@@ -128,6 +128,7 @@ const messages = {
       config: '全局配置',
       guide: '指南',
       migration: 'API 迁移',
+      accessibility: '无障碍',
       mcp: 'MCP',
     } as Record<string, string>,
     categories: {
@@ -242,6 +243,7 @@ const messages = {
       config: 'Configuration',
       guide: 'Guide',
       migration: 'API migration',
+      accessibility: 'Accessibility',
       mcp: 'MCP',
     } as Record<string, string>,
     categories: {
