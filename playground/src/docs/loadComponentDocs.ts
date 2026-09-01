@@ -1,5 +1,6 @@
 import type { Component } from 'vue'
 import type { DocsLang } from '../i18n'
+import componentDocsManifest from 'virtual:component-docs-manifest'
 
 export interface ComponentDocFrontmatter {
   title?: string
@@ -34,38 +35,10 @@ type DocLoader = () => Promise<DocModule>
 const zhDocLoaders = import.meta.glob<DocModule>('../../../src/components/*/docs/index.md')
 const enDocLoaders = import.meta.glob<DocModule>('../../../src/components/*/docs/index.en.md')
 
-const zhRawDocModules = import.meta.glob<string>('../../../src/components/*/docs/index.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
-const enRawDocModules = import.meta.glob<string>('../../../src/components/*/docs/index.en.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
-
 function componentNameFromPath(path: string): string | null {
   const normalized = path.replace(/\\/g, '/')
   const match = normalized.match(/components\/([^/]+)\/docs\/index(?:\.en)?\.md$/)
   return match?.[1] ?? null
-}
-
-function parseFrontmatterFromRaw(raw: string): ComponentDocFrontmatter {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
-  if (!match?.[1]) return {}
-
-  const result: ComponentDocFrontmatter = {}
-  for (const line of match[1].split(/\r?\n/)) {
-    const sep = line.indexOf(':')
-    if (sep <= 0) continue
-    const key = line.slice(0, sep).trim()
-    const value = line.slice(sep + 1).trim()
-    if (key === 'title' || key === 'category' || key === 'description') {
-      result[key] = value
-    }
-  }
-  return result
 }
 
 function parseCategory(raw?: string): Pick<DocumentedComponentMeta, 'category' | 'categoryOrder' | 'categoryLabel'> {
@@ -81,51 +54,33 @@ function parseCategory(raw?: string): Pick<DocumentedComponentMeta, 'category' |
   }
 }
 
-function resolveFrontmatter(
-  path: string,
-  mod: { frontmatter?: ComponentDocFrontmatter },
-  name: string,
-  rawModules: Record<string, string>,
-) {
-  const fromModule = mod.frontmatter
-  const fromRaw = rawModules[path] ? parseFrontmatterFromRaw(rawModules[path]) : {}
+function manifestFrontmatter(name: string, lang: DocsLang): ComponentDocFrontmatter {
+  const entry = componentDocsManifest[name]
+  if (!entry) return { title: name }
+  const raw = entry[lang] ?? entry['zh-CN']
   return {
-    title: fromModule?.title ?? fromRaw.title ?? name,
-    category: fromModule?.category ?? fromRaw.category,
-    description: fromModule?.description ?? fromRaw.description,
-  } satisfies ComponentDocFrontmatter
+    title: raw.title ?? name,
+    category: raw.category,
+    description: raw.description,
+  }
 }
 
-function findDocLoader(name: string, lang: DocsLang = 'zh-CN'): { path: string; loader: DocLoader; raw: Record<string, string> } | null {
+function findDocLoader(name: string, lang: DocsLang = 'zh-CN'): { loader: DocLoader } | null {
   const preferEn = lang === 'en-US'
   const primaryLoaders = preferEn ? enDocLoaders : zhDocLoaders
-  const primaryRaw = preferEn ? enRawDocModules : zhRawDocModules
   const primary = Object.entries(primaryLoaders).find(([path]) => componentNameFromPath(path) === name)
   if (primary) {
-    return { path: primary[0], loader: primary[1], raw: primaryRaw }
+    return { loader: primary[1] }
   }
   const fallback = Object.entries(zhDocLoaders).find(([path]) => componentNameFromPath(path) === name)
   if (!fallback) return null
-  return { path: fallback[0], loader: fallback[1], raw: zhRawDocModules }
-}
-
-function rawForComponent(name: string, lang: DocsLang): string | undefined {
-  const zhPath = Object.keys(zhRawDocModules).find((path) => componentNameFromPath(path) === name)
-  if (!zhPath) return undefined
-  if (lang === 'en-US') {
-    const enPath = zhPath.replace('/index.md', '/index.en.md')
-    return enRawDocModules[enPath] ?? zhRawDocModules[zhPath]
-  }
-  return zhRawDocModules[zhPath]
+  return { loader: fallback[1] }
 }
 
 export function listDocumentedComponents(lang: DocsLang = 'zh-CN'): DocumentedComponentMeta[] {
   const items: DocumentedComponentMeta[] = []
-  for (const path of Object.keys(zhRawDocModules)) {
-    const name = componentNameFromPath(path)
-    if (!name) continue
-    const raw = rawForComponent(name, lang) ?? zhRawDocModules[path]
-    const frontmatter = parseFrontmatterFromRaw(raw)
+  for (const name of Object.keys(componentDocsManifest).sort()) {
+    const frontmatter = manifestFrontmatter(name, lang)
     const parsed = parseCategory(frontmatter.category)
     items.push({
       name,
@@ -144,10 +99,16 @@ export async function resolveComponentDoc(name: string, lang: DocsLang = 'zh-CN'
   const resolved = findDocLoader(name, lang)
   if (!resolved) return null
   const mod = await resolved.loader()
+  const fromModule = mod.frontmatter
+  const fromManifest = manifestFrontmatter(name, lang)
 
   return {
     name,
-    frontmatter: resolveFrontmatter(resolved.path, mod, name, resolved.raw),
+    frontmatter: {
+      title: fromModule?.title ?? fromManifest.title,
+      category: fromModule?.category ?? fromManifest.category,
+      description: fromModule?.description ?? fromManifest.description,
+    },
     component: mod.default,
   }
 }

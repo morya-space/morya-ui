@@ -13,7 +13,7 @@
 | 组件测试 | 88 顶层 + 16 子组件均有独立测试 | 部分交互组件仅 smoke test |
 | 无障碍 | 核心表单/浮层部分完善 | FloatLabel、Popover、Slider、Tooltip、Badge 等 |
 | 代码复用 | `shared/` overlay + menu 图标/key 工具 | Menu 节点树模板仍分组件维护 |
-| 文档站性能 | 功能完整 | 首包 ~6MB（eager 加载全部 markdown） |
+| 文档站性能 | 路由/文档按需加载；vendor 与 catalog 分 chunk | 个别组件 doc chunk 仍较大 |
 | 文档站 UX | 组件侧栏可筛选 | a11y 指南已加；Events/Slots 与标题统一待补 |
 
 ---
@@ -39,8 +39,8 @@
 - [x] 路由视图改为 dynamic `import()`
 - [x] 组件文档 loader 去掉 `eager: true`，按 slug 动态加载
 - [x] 指南 markdown 按需加载
-- [x] 构建验证：chunk 体积与 Vite warning（主入口 ~37KB；ComponentPlayground ~546KB 待继续拆分）
-- [ ] （可选）`manualChunks` 拆分 vendor / shiki
+- [x] 构建验证：chunk 体积与 Vite warning（主入口 ~39KB；catalog ~58KB）
+- [x] Rolldown `codeSplitting` 拆分 vendor-vue / docs-catalog；manifest 替代 eager raw
 
 ---
 
@@ -95,6 +95,7 @@
 | 2026-09-01 | 五 | 新增 `shared/menu`；Menu/Dropdown/ContextMenu Nodes 复用图标与 key |
 | 2026-09-01 | 五 | 剩余浮层组件统一接入 `computeFloatingOverlayStyle` |
 | 2026-09-01 | 五 | 16 个子组件补充独立单元测试（437 tests） |
+| 2026-09-01 | 二 | docs 构建 codeSplitting + manifest；主入口 98→39KB |
 
 ---
 

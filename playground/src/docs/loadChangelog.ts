@@ -1,14 +1,7 @@
 import type { DocsLang } from '../i18n'
 import changelogEnRaw from '../../../CHANGELOG.en.md?raw'
 import changelogRaw from '../../../CHANGELOG.md?raw'
-import packageJson from '../../../package.json' with { type: 'json' }
-
-interface UiPackageJson {
-  name: string
-  version: string
-}
-
-const uiPackage = packageJson as UiPackageJson
+import { getUiPackageMeta } from './packageMeta'
 
 export interface ChangelogSection {
   heading: string
@@ -62,11 +55,12 @@ function parseSections(body: string): ChangelogSection[] {
 }
 
 export function loadChangelog(lang: DocsLang = 'zh-CN'): ChangelogDocument {
+  const { name: packageNameFromJson, version: currentVersion } = getUiPackageMeta()
   const source = lang === 'en-US' ? changelogEnRaw : changelogRaw
   const text = source.replace(/^\uFEFF/, '')
   const lines = text.split(/\r?\n/)
 
-  let packageName = uiPackage.name
+  let packageName = packageNameFromJson
   const releases: ChangelogRelease[] = []
   let currentVersionHeading: string | null = null
   let bodyLines: string[] = []
@@ -102,14 +96,9 @@ export function loadChangelog(lang: DocsLang = 'zh-CN'): ChangelogDocument {
 
   return {
     packageName,
-    currentVersion: uiPackage.version,
+    currentVersion,
     releases,
   }
 }
 
-export function getUiPackageMeta() {
-  return {
-    name: uiPackage.name,
-    version: uiPackage.version,
-  }
-}
+export { getUiPackageMeta } from './packageMeta'
