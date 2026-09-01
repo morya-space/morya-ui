@@ -118,6 +118,8 @@ const messages = {
     notFoundTitle: '页面未找到',
     notFoundBody: '你访问的地址不存在，或已被移动。',
     notFoundHome: '返回首页',
+    searchOpen: '搜索站点',
+    searchPlaceholder: '搜索文档与组件…',
     guideTitles: {
       introduction: '介绍',
       'quick-start': '快速开始',
@@ -228,6 +230,8 @@ const messages = {
     notFoundTitle: 'Page not found',
     notFoundBody: 'The page you requested does not exist or has moved.',
     notFoundHome: 'Back to home',
+    searchOpen: 'Search site',
+    searchPlaceholder: 'Search docs and components…',
     guideTitles: {
       introduction: 'Introduction',
       'quick-start': 'Quick start',

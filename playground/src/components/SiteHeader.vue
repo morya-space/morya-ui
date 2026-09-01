@@ -3,6 +3,7 @@ import { useTheme } from '@well-insight/ui'
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { getUiPackageMeta } from '../docs/loadChangelog'
+import SiteSearch from './SiteSearch.vue'
 import { useDocsI18n } from '../i18n'
 
 const GITHUB_REPO = 'https://github.com/well-insight/well-insight-ui'
@@ -64,6 +65,7 @@ const activeSection = computed(() => {
     </nav>
 
     <div class="site-header__actions">
+      <SiteSearch />
       <div class="site-lang" role="group" :aria-label="t.langSwitch">
         <button
           class="site-lang__btn"
