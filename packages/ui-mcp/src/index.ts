@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod'
+import { registerCatalogResources } from './resources.js'
 import { createToolHandlers } from './tools.js'
 
 const handlers = createToolHandlers()
@@ -8,6 +9,8 @@ const server = new McpServer({
   name: handlers.catalog.mcp.name,
   version: handlers.catalog.mcp.version,
 })
+
+registerCatalogResources(server, handlers.catalog)
 
 type ToolHandler = (args: any) => Promise<any> | any
 
@@ -23,7 +26,6 @@ function register(
       title: description.split('.')[0],
       description,
       inputSchema,
-      outputSchema: z.record(z.string(), z.unknown()),
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
