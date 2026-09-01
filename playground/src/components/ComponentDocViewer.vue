@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ResolvedComponentDoc } from '../docs/loadComponentDocs'
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useDocCodeCopy } from '../composables/useDocCodeCopy'
 import { useDocsI18n } from '../i18n'
 
@@ -28,10 +28,23 @@ function refreshNavigation() {
 }
 
 function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const target = document.getElementById(id)
+  if (!target) return
+  const scrollContainer = target.closest('.wi-scrollbar__wrap') as HTMLElement | null
+  if (scrollContainer) {
+    const containerTop = scrollContainer.getBoundingClientRect().top
+    const targetTop = target.getBoundingClientRect().top
+    scrollContainer.scrollTo({
+      top: scrollContainer.scrollTop + (targetTop - containerTop) - 12,
+      behavior: 'smooth',
+    })
+    return
+  }
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 onMounted(() => nextTick(refreshNavigation))
+watch(() => props.doc.name, () => nextTick(refreshNavigation))
 </script>
 
 <template>
