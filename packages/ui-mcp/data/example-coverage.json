@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-28T03:22:08.444Z",
-  "catalogGeneratedAt": "2026-08-28T03:22:02.641Z",
+  "generatedAt": "2026-09-01T07:13:33.842Z",
+  "catalogGeneratedAt": "2026-09-01T07:13:31.244Z",
   "components": [
     {
       "id": "Accordion",
@@ -44,17 +44,21 @@
         ]
       },
       "events": {
-        "total": 2,
+        "total": 3,
         "covered": 0,
         "missing": [
           "update:modelValue",
-          "complete"
+          "complete",
+          "clear"
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "item",
+          "empty"
+        ]
       },
       "methods": {
         "total": 0,
@@ -81,8 +85,8 @@
         ]
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -175,11 +179,10 @@
       "exportName": "WiButton",
       "examples": 20,
       "props": {
-        "total": 25,
+        "total": 24,
         "covered": 21,
         "missing": [
           "variant",
-          "block",
           "autofocus",
           "nativeType"
         ]
@@ -268,25 +271,37 @@
       "exportName": "WiCascadeSelect",
       "examples": 6,
       "props": {
-        "total": 7,
+        "total": 15,
         "covered": 4,
         "missing": [
+          "label",
+          "helpText",
+          "invalid",
+          "errorMessage",
+          "id",
           "disabled",
+          "required",
+          "fluid",
+          "clearable",
           "teleport",
           "appendTo"
         ]
       },
       "events": {
-        "total": 1,
+        "total": 2,
         "covered": 0,
         "missing": [
-          "update:modelValue"
+          "update:modelValue",
+          "clear"
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "value",
+          "option"
+        ]
       },
       "methods": {
         "total": 0,
@@ -345,9 +360,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default",
+          "icon"
+        ]
       },
       "methods": {
         "total": 0,
@@ -361,9 +379,8 @@
       "examples": 4,
       "props": {
         "total": 5,
-        "covered": 2,
+        "covered": 3,
         "missing": [
-          "placeholder",
           "teleport",
           "appendTo"
         ]
@@ -401,8 +418,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -437,9 +454,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -472,9 +491,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -502,9 +523,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 2,
@@ -553,16 +576,19 @@
         ]
       },
       "events": {
-        "total": 1,
+        "total": 2,
         "covered": 0,
         "missing": [
-          "update:modelValue"
+          "update:modelValue",
+          "clear"
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "trigger"
+        ]
       },
       "methods": {
         "total": 0,
@@ -620,11 +646,9 @@
       "exportName": "WiDivider",
       "examples": 12,
       "props": {
-        "total": 6,
+        "total": 5,
         "covered": 5,
-        "missing": [
-          "orientation"
-        ]
+        "missing": []
       },
       "events": {
         "total": 0,
@@ -661,9 +685,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -840,8 +866,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -892,8 +918,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -917,8 +943,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -945,9 +971,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "item"
+        ]
       },
       "methods": {
         "total": 0,
@@ -970,8 +998,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1067,10 +1095,9 @@
       "exportName": "WiInput",
       "examples": 20,
       "props": {
-        "total": 15,
+        "total": 14,
         "covered": 12,
         "missing": [
-          "error",
           "id",
           "readonly"
         ]
@@ -1116,9 +1143,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "trigger"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1173,9 +1202,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "prefix",
+          "suffix"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1267,9 +1299,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "tag"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1351,8 +1385,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1381,9 +1415,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "option"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1394,7 +1430,7 @@
     {
       "id": "MegaMenu",
       "exportName": "WiMegaMenu",
-      "examples": 4,
+      "examples": 6,
       "props": {
         "total": 3,
         "covered": 1,
@@ -1442,9 +1478,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "item"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1472,9 +1510,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "start",
+          "end"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1522,9 +1563,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "label"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1791,9 +1834,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "icon"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1811,13 +1856,13 @@
         "missing": []
       },
       "events": {
-        "total": 0,
-        "covered": 0,
+        "total": 2,
+        "covered": 2,
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1868,8 +1913,8 @@
         "total": 23,
         "covered": 18,
         "missing": [
-          "error",
           "required",
+          "clearable",
           "teleport",
           "placement",
           "id"
@@ -1888,9 +1933,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "value",
+          "option"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1944,9 +1992,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2034,8 +2084,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -2066,9 +2116,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "button",
+          "item"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2101,9 +2154,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2171,9 +2226,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "icon"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2236,9 +2293,17 @@
         ]
       },
       "events": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 10,
+        "covered": 3,
+        "missing": [
+          "sort",
+          "filter",
+          "page",
+          "row-click",
+          "current-change",
+          "expand",
+          "update:filters"
+        ]
       },
       "slots": {
         "total": 0,
@@ -2341,13 +2406,11 @@
       "exportName": "WiTextarea",
       "examples": 10,
       "props": {
-        "total": 18,
+        "total": 16,
         "covered": 12,
         "missing": [
-          "error",
           "id",
           "resize",
-          "autoResize",
           "disabled",
           "readonly"
         ]
@@ -2376,21 +2439,21 @@
     {
       "id": "TieredMenu",
       "exportName": "WiTieredMenu",
-      "examples": 4,
+      "examples": 6,
       "props": {
         "total": 5,
-        "covered": 1,
+        "covered": 3,
         "missing": [
-          "popup",
-          "modelValue",
           "teleport",
           "appendTo"
         ]
       },
       "events": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "update:modelValue"
+        ]
       },
       "slots": {
         "total": 0,
@@ -2483,9 +2546,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2567,9 +2632,13 @@
         ]
       },
       "events": {
-        "total": 0,
+        "total": 3,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "node-select",
+          "node-expand",
+          "node-collapse"
+        ]
       },
       "slots": {
         "total": 0,
@@ -2609,9 +2678,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "value",
+          "option"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2637,9 +2709,11 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "expansion"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2677,7 +2751,7 @@
   ],
   "summary": {
     "components": 88,
-    "componentsWithMissingCoverage": 71,
-    "totalExamples": 664
+    "componentsWithMissingCoverage": 74,
+    "totalExamples": 668
   }
 }

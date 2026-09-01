@@ -1,5 +1,55 @@
 # @well-insight/ui
 
+## 0.1.11
+
+### Breaking Changes
+
+- drop deprecated prop and CSS aliases
+
+### Features
+
+- add mobile sidebar drawer for docs and components
+- add global site search with CommandMenu
+- persist language in URL query
+- add dedicated 404 page
+- add favicon and meta description
+- Harden MCP catalog tooling
+
+### Fixes
+
+- unify suffix icons and Select clearable hover behavior
+- restore DatePicker panel grid after teleport
+- add invalid modifier class alongside error alias
+- improve FloatLabel, Popover, and Slider
+- scroll doc TOC inside WiScrollbar
+- repair guide links and quick-start copy
+- Fix layout header and footer padding axis
+
+### Docs
+
+- complete Events/Slots sections and remove migration guide
+- add Events and a11y sections to high-traffic components
+- rename Basic sections to 基础用法 in Chinese component docs
+- add accessibility guide for playground
+- expand menu and virtual scroller component pages
+- add deprecated API migration guide
+
+### Changes
+
+- enhance MobileSidebarShell and DocsView layout with improved flex properties
+- unify clearable API across pickers (phase 6b)
+- phase 6a icon unification and shared picker suffix
+- split vendor chunks and replace eager markdown manifest
+- add unit tests for 16 sub-components
+- migrate remaining overlays to shared placement util
+- add shared menu icon and key utilities
+- replace hardcoded colors with design tokens
+- migrate Select and Dropdown to shared overlay placement
+- extract shared overlay placement utility
+- lazy-load routes and markdown docs
+- streamline MCP tools from 18 to 13
+- Simplify layout components by removing custom scrollbar support and enhancing layout styles
+
 ## 0.1.10
 
 ### Fixes

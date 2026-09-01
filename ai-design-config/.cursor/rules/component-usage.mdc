@@ -1,0 +1,37 @@
+---
+description: Well Insight 组件用法与选型（Vue 业务代码）
+globs: src/**/*.vue
+alwaysApply: false
+---
+
+# 组件用法
+
+## 引入
+
+```ts
+import { WiButton, WiInput } from '@well-insight/ui'
+// 按需：import WiButton from '@well-insight/ui/button'
+//        import '@well-insight/ui/button/style'
+```
+
+## 必选模式
+
+- 表单：`WiForm` + `WiFormItem` + 字段组件；提交用 `@submit` + `type="submit"`。
+- 表格：`WiTable` 的 `columns` + `data` + `row-key`；单元格用 `#cell-{key}` 插槽。
+- 浮层：详情/编辑 `WiDialog`；侧栏 `WiDrawer`；删除确认 `WiConfirmDialog`。
+- 反馈：操作结果 `WiToast` 或 `WiMessage`。
+
+## Props 约定
+
+- 尺寸：`size="small" | "large"`（默认 medium）。
+- 危险：`severity="danger"` 或 `invalid` + `errorMessage`。
+- 清除：优先 `clearable`（Select 亦支持 `showClear` 别名）。
+- 宽度：表单字段 `fluid`；页面级宽度用 layout CSS + `max-width`。
+
+## 禁止
+
+- 同一页面混用其他 UI 库。
+- 用 `WiDropdown` 代替 Select 做枚举选择。
+- 手写 table/modal 替代 `WiTable` / `WiDialog`。
+
+完整清单：`docs/components.md`
