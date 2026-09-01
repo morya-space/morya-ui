@@ -14,7 +14,7 @@
 | 无障碍 | 核心表单/浮层部分完善 | FloatLabel、Popover、Slider、Tooltip、Badge 等 |
 | 代码复用 | `shared/` 有 overlay teleport | Menu 节点树、Overlay 定位逻辑多处重复 |
 | 文档站性能 | 功能完整 | 首包 ~6MB（eager 加载全部 markdown） |
-| 文档站 UX | 组件侧栏可筛选 | 无全局搜索；移动端侧栏体验差；若干死链 |
+| 文档站 UX | 组件侧栏可筛选 | 全局搜索已加；移动端 drawer 已加；薄文档与 a11y 指南待补 |
 
 ---
 
@@ -46,12 +46,12 @@
 
 ## 阶段三：文档站 UX
 
-- [ ] 全局搜索（优先考虑复用 `WiCommandMenu`）
-- [ ] 移动端侧栏 drawer（`<700px`）
-- [ ] 路由 `scrollBehavior` 支持 hash
-- [ ] 独立 404 页；收窄 `/:component` 兼容重定向
-- [ ] URL 反映语言（`?lang=en-US` 或路径前缀）
-- [ ] `index.html` favicon + meta description
+- [x] 全局搜索（复用 `WiCommandMenu`，Cmd/Ctrl+K）
+- [x] 移动端侧栏 drawer（`<700px`，组件页 + 指南页）
+- [x] 路由 `scrollBehavior` 支持 hash
+- [x] 独立 404 页；收窄 `/:component` 兼容重定向
+- [x] URL 反映语言（`?lang=en-US`）
+- [x] `index.html` favicon + meta description
 
 ---
 
@@ -82,6 +82,7 @@
 | --- | --- | --- |
 | 2026-09-01 | 一 | 修复指南死链/重复；MCP 链接；TOC 滚动；FloatLabel/Popover/Slider a11y |
 | 2026-09-01 | 二 | 路由 lazy + 组件/指南文档按需加载 |
+| 2026-09-01 | 三 | 全局搜索；移动端 drawer；404/favicon/lang URL/hash 滚动 |
 
 ---
 
