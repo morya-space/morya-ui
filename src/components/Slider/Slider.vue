@@ -122,6 +122,7 @@ function emitRange(index: 0 | 1, event: Event) {
       :value="singleValue"
       :disabled="disabled"
       :orient="vertical ? 'vertical' : undefined"
+      :aria-label="ariaLabel ?? locale.sliderControl"
       @input="emitSingle"
     >
     <div v-if="markItems.length" class="wi-slider__marks" aria-hidden="true">

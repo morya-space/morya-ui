@@ -84,6 +84,7 @@ export const enUS: WiLocaleMessages = {
   datePicker: 'Date picker',
   rangeStart: 'Range start',
   rangeEnd: 'Range end',
+  sliderControl: 'Slider',
   prev: 'Previous',
   next: 'Next',
   noMatch: 'No matches',

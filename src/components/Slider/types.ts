@@ -13,6 +13,8 @@ export interface SliderProps {
   tooltip?: boolean
   /** Render vertically. */
   vertical?: boolean
+  /** Accessible name for single-thumb mode. */
+  ariaLabel?: string
 }
 
 export interface SliderEmits {
