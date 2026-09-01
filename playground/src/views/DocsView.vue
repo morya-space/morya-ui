@@ -85,6 +85,34 @@ watch([activeSlug, lang], async () => {
   </div>
 </template>
 
+<style>
+.docs-sidebar {
+  background: color-mix(in srgb, var(--wi-color-surface) 62%, transparent);
+  border-right: 1px solid var(--docs-edge);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.docs-scroll {
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+}
+
+.docs-sidebar__body {
+  padding: 1.5rem 1rem 2rem;
+}
+
+@media (max-width: 700px) {
+  .docs-sidebar:not([data-open]) {
+    border: 0;
+  }
+}
+</style>
+
 <style scoped>
 .docs-shell {
   display: grid;
@@ -92,22 +120,6 @@ watch([activeSlug, lang], async () => {
   grid-template-columns: 15.5rem minmax(0, 1fr);
   min-height: 0;
   overflow: hidden;
-}
-
-.docs-sidebar {
-  background: color-mix(in srgb, var(--wi-color-surface) 62%, transparent);
-  border-right: 1px solid var(--docs-edge);
-  min-height: 0;
-  backdrop-filter: blur(12px);
-}
-
-.docs-scroll {
-  height: 100%;
-  min-height: 0;
-}
-
-.docs-sidebar__body {
-  padding: 1.5rem 1rem 2rem;
 }
 
 .docs-kicker {
@@ -179,17 +191,12 @@ watch([activeSlug, lang], async () => {
     overflow: visible;
   }
 
-  .docs-sidebar,
   .docs-main {
     overflow: visible;
   }
 
   .docs-scroll {
     height: auto;
-  }
-
-  .docs-sidebar:not([data-open]) {
-    border: 0;
   }
 }
 </style>

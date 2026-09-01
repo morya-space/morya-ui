@@ -17,7 +17,8 @@ function componentNameFromPath(filePath: string): string | null {
 
 function guideSlugFromPath(filePath: string): { slug: string; lang: 'zh-CN' | 'en-US' } | null {
   const normalized = filePath.replace(/\\/g, '/')
-  const match = normalized.match(/\/([^/]+?)(?:\.(en))?\.md$/)
+  const fileName = normalized.split('/').pop() ?? normalized
+  const match = fileName.match(/^(.+?)(?:\.(en))?\.md$/)
   if (!match?.[1]) return null
   return {
     slug: match[1],
