@@ -14,7 +14,7 @@ description: 芯片式标签输入，回车添加、可移除。
 import { WiInputTags } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

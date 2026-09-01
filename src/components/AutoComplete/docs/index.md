@@ -14,7 +14,7 @@ description: 输入时给出建议列表，可本地过滤或由父级提供。
 import { WiAutoComplete } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

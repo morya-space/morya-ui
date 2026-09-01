@@ -14,7 +14,7 @@ description: 列表拖拽与上下按钮排序。
 import { WiOrderList } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

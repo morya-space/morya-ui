@@ -14,7 +14,7 @@ description: 侧边抽屉面板。
 import { WiButton, WiDrawer } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

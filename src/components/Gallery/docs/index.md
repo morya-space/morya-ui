@@ -14,7 +14,7 @@ description: 主图 + 缩略图的图片画廊。
 import { WiGallery } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

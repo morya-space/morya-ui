@@ -16,7 +16,7 @@ description: 分页器，v-model 为页码；实例暴露 first（零基首条�
 import { WiPagination } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

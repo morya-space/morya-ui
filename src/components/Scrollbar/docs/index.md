@@ -14,7 +14,7 @@ description: 可换肤自定义滚动条，提供一致的滚动体验。
 import { WiScrollbar } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 用 `height` 固定可视区域高度；不设时跟随父容器高度。
 

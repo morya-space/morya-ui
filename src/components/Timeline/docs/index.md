@@ -14,7 +14,7 @@ description: 垂直 / 水平时间轴，支持图标 marker 与自定义插槽�
 import { WiTimeline } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

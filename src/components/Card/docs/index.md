@@ -14,7 +14,7 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 import { WiButton, WiCard } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

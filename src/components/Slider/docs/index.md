@@ -14,7 +14,7 @@ description: 滑动条，支持单值与区间选择。
 import { WiSlider } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

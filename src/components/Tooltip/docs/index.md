@@ -14,7 +14,7 @@ description: 悬停或聚焦时显示的短提示。支持 placement、disabled 
 import { WiButton, WiTooltip } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

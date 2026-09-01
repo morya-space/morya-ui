@@ -14,7 +14,7 @@ description: 多段占比计量条。
 import { WiMeterGroup } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

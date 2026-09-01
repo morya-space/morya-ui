@@ -18,7 +18,7 @@ description: 动作菜单覆盖层（非表单选择器）。与 Select 不同�
 import { WiButton, WiDropdown } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

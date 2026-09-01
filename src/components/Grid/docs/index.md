@@ -14,7 +14,7 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 import { WiGrid, WiGridItem } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

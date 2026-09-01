@@ -14,7 +14,7 @@ description: 列表或网格布局展示数据，可分页。
 import { WiDataView } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

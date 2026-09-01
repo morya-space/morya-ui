@@ -14,7 +14,7 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 import { WiFlex } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 内容分隔线。
 import { WiDivider } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 默认水平实线分隔。
 

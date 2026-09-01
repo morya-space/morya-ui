@@ -14,7 +14,7 @@ description: 导航轨侧栏，可折叠。
 import { WiSidebar } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

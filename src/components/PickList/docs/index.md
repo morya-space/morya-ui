@@ -14,7 +14,7 @@ description: 双列表穿梭选择。
 import { WiPickList } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

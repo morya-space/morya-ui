@@ -14,7 +14,7 @@ description: 悬浮快捷操作按钮组。
 import { WiSpeedDial } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

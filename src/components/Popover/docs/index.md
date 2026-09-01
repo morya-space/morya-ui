@@ -14,7 +14,7 @@ description: 相对触发元素定位的浮层面板。支持 placement、Telepo
 import { WiButton, WiPopover } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -16,7 +16,7 @@ description: 表单选择器，支持多选标签、远程搜索、invalid、siz
 import { WiSelect } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

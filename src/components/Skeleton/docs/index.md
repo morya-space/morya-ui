@@ -14,7 +14,7 @@ description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 
 import { WiSkeleton } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 默认矩形、宽度 `100%`，带 `wave` 动画。
 

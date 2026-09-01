@@ -14,7 +14,7 @@ description: 颜色选择，支持色板与十六进制文本。
 import { WiInputColor } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

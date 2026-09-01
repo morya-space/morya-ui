@@ -14,7 +14,7 @@ description: 浮动标签容器，聚焦或有值时上浮。
 import { WiFloatLabel, WiInput } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

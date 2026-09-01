@@ -14,7 +14,7 @@ description: 多格单字符输入，适用于验证码。
 import { WiInputOtp } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

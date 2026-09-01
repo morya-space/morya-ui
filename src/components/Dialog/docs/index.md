@@ -14,7 +14,7 @@ description: 模态对话框。支持预设页脚、异步关闭拦截、状态 
 import { WiButton, WiDialog } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

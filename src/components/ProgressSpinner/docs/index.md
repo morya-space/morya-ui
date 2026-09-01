@@ -14,7 +14,7 @@ SVG 环形加载指示器。
 import { WiProgressSpinner } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 按钮用于触发即时动作。
 import { WiButton } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 通过默认插槽或 `label` 展示按钮文案。
 

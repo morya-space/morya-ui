@@ -14,7 +14,7 @@ description: 带可选折叠的内容面板。
 import { WiPanel } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

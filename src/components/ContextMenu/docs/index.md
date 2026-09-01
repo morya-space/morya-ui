@@ -14,7 +14,7 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 import { useContextMenu, WiContextMenu } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 多级联级选择，支持嵌套 options 与分栏面板。
 import { WiCascadeSelect } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">
