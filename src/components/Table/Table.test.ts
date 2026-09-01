@@ -3,129 +3,199 @@ import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
 import WiTable from './Table.vue'
 
-describe('wiTable', () => {
-  it('renders headers, row values, and a named cell slot', () => {
+const headers = [
+  { text: 'Name', value: 'name', sortable: true },
+  { text: 'Status', value: 'status' },
+]
+
+describe('WiTable', () => {
+  it('renders headers, item values, and item slot', () => {
     const wrapper = mount(WiTable, {
-      props: { columns: [{ key: 'name', label: 'Name' }, { key: 'status', label: 'Status' }], rows: [{ id: 1, name: 'Landing page', status: 'Draft' }] },
-      slots: { 'cell-status': '<strong>{{ value }}</strong>' },
+      props: {
+        headers,
+        items: [{ id: 1, name: 'Landing page', status: 'Draft' }],
+        hideFooter: true,
+      },
+      slots: { 'item-status': '<strong>{{ status }}</strong>' },
     })
-    expect(wrapper.get('th').text()).toBe('Name')
+    expect(wrapper.get('th').text()).toContain('Name')
     expect(wrapper.text()).toContain('Landing page')
     expect(wrapper.get('strong').text()).toBe('Draft')
   })
 
-  it('renders an empty state with the correct colspan', () => {
-    const wrapper = mount(WiTable, { props: { columns: [{ key: 'name', label: 'Name' }], rows: [], emptyText: 'Nothing here' } })
-    expect(wrapper.get('.wi-table__empty').attributes('colspan')).toBe('1')
-    expect(wrapper.text()).toContain('Nothing here')
+  it('shows empty message overlay when there are no items', () => {
+    const wrapper = mount(WiTable, {
+      props: { headers, items: [], emptyMessage: 'Nothing here', hideFooter: true },
+    })
+    expect(wrapper.get('.wi-table__empty-text').text()).toContain('Nothing here')
   })
 
-  it('applies density size classes', () => {
+  it('uses WiScrollbar for table body scrolling', () => {
     const wrapper = mount(WiTable, {
       props: {
-        columns: [{ key: 'name', label: 'Name' }],
-        rows: [{ id: 1, name: 'A' }],
+        headers,
+        items: [{ id: 1, name: 'A' }],
+        hideFooter: true,
+      },
+    })
+    expect(wrapper.find('.wi-table__scrollbar.wi-scrollbar').exists()).toBe(true)
+  })
+
+  it('applies density size class', () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        headers,
+        items: [{ id: 1, name: 'A' }],
         size: 'lg',
+        hideFooter: true,
       },
     })
-    expect(wrapper.get('table').classes()).toContain('wi-table--large')
-    expect(wrapper.classes()).toContain('wi-table-wrapper--large')
+    expect(wrapper.classes()).toContain('wi-table--large')
   })
 
-  it('shows loading overlay and hides empty while loading', () => {
+  it('applies stripe and border modifiers like Element Plus', () => {
     const wrapper = mount(WiTable, {
       props: {
-        columns: [{ key: 'name', label: 'Name' }],
-        rows: [],
+        headers,
+        items: [{ id: 1, name: 'A' }],
+        stripe: true,
+        border: true,
+        hideFooter: true,
+      },
+    })
+    expect(wrapper.classes()).toContain('wi-table--striped')
+    expect(wrapper.classes()).toContain('wi-table--border')
+  })
+
+  it('shows loading overlay', () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        headers,
+        items: [],
         loading: true,
-        loadingText: 'Fetching…',
+        hideFooter: true,
       },
     })
-    expect(wrapper.find('.wi-table__empty').exists()).toBe(false)
-    expect(wrapper.get('.wi-table__loading').attributes('aria-label')).toBe('Fetching…')
-    expect(wrapper.text()).toContain('Fetching…')
+    expect(wrapper.find('.wi-table__loading').exists()).toBe(true)
+    expect(wrapper.find('.wi-table__message').exists()).toBe(false)
   })
 
-  it('sorts rows when a sortable header is clicked', async () => {
+  it('sorts items when sortable header is clicked', async () => {
     const wrapper = mount(WiTable, {
       props: {
-        columns: [
-          { key: 'name', label: 'Name', sortable: true },
-          { key: 'age', label: 'Age', sortable: true },
+        headers,
+        items: [
+          { id: 1, name: 'Lin', status: 'a' },
+          { id: 2, name: 'Ada', status: 'b' },
         ],
-        rows: [
-          { id: 1, name: 'Lin', age: 30 },
-          { id: 2, name: 'Ada', age: 20 },
-        ],
+        hideFooter: true,
       },
     })
-    await wrapper.get('.wi-table__sort').trigger('click')
-    const cells = wrapper.findAll('tbody td').map((cell) => cell.text())
-    expect(cells[0]).toBe('Ada')
-    expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
+    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
+    const firstCell = wrapper.find('tbody td').text()
+    expect(firstCell).toBe('Ada')
+    expect(wrapper.emitted('updateSort')?.[0]?.[0]).toMatchObject({ sortBy: 'name', sortType: 'asc' })
   })
 
-  it('renders richer empty content', () => {
-    const wrapper = mount(WiTable, {
-      props: {
-        columns: [{ key: 'name', label: 'Name' }],
-        rows: [],
-        emptyText: '空空如也',
-        emptyDescription: '去创建第一条记录',
-      },
-    })
-    expect(wrapper.get('.wi-table__empty-title').text()).toBe('空空如也')
-    expect(wrapper.get('.wi-table__empty-desc').text()).toBe('去创建第一条记录')
-  })
-
-  it('emits selection updates in multiple mode', async () => {
-    const rows = [
+  it('emits items-selected updates in multi-select mode with WiCheckbox', async () => {
+    const items = [
       { id: 1, name: 'Ada' },
       { id: 2, name: 'Lin' },
     ]
     const wrapper = mount(WiTable, {
       props: {
-        columns: [{ key: 'name', label: 'Name' }],
-        rows,
+        headers: [{ text: 'Name', value: 'name' }],
+        items,
         selectionMode: 'multiple',
-        selection: [],
+        itemsSelected: [],
+        hideFooter: true,
       },
     })
     await wrapper.findAll('.wi-checkbox__input')[1]!.setValue(true)
-    expect(wrapper.emitted('update:selection')?.at(-1)?.[0]).toEqual([rows[0]])
+    expect(wrapper.emitted('update:itemsSelected')?.at(-1)?.[0]).toEqual([items[0]])
   })
 
-  it('paginates rows', async () => {
-    const rows = Array.from({ length: 5 }, (_, i) => ({ id: i + 1, name: `R${i + 1}` }))
+  it('emits selected-item in single-select mode with WiRadio', async () => {
+    const items = [
+      { id: 1, name: 'Ada' },
+      { id: 2, name: 'Lin' },
+    ]
     const wrapper = mount(WiTable, {
       props: {
-        columns: [{ key: 'name', label: 'Name' }],
-        rows,
-        paginator: true,
-        rowsPerPage: 2,
-        page: 1,
+        headers: [{ text: 'Name', value: 'name' }],
+        items,
+        selectionMode: 'single',
+        hideFooter: true,
       },
     })
-    expect(wrapper.findAll('tbody tr')).toHaveLength(2)
-    await wrapper.find('[aria-label="下一页"]').trigger('click')
-    expect(wrapper.emitted('update:page')?.at(-1)).toEqual([2])
+    await wrapper.findAll('.wi-radio__input')[0]!.setValue(true)
+    expect(wrapper.emitted('update:selectedItem')?.at(-1)?.[0]).toEqual(items[0])
   })
 
-  it('renders a column render function and expands a row', async () => {
+  it('paginates with WiPagination in footer mode', async () => {
+    const items = Array.from({ length: 5 }, (_, i) => ({ id: i + 1, name: `R${i + 1}` }))
     const wrapper = mount(WiTable, {
       props: {
-        columns: [{ key: 'name', label: 'Name', render: (row) => `*${row.name}*` }],
-        rows: [{ id: 1, name: 'Ada' }],
-        expandable: true,
+        headers: [{ text: 'Name', value: 'name' }],
+        items,
+        rowsPerPage: 2,
+        currentPage: 1,
+      },
+    })
+    expect(wrapper.find('.wi-pagination').exists()).toBe(true)
+    expect(wrapper.findAll('tbody tr')).toHaveLength(2)
+    const buttons = wrapper.findAll('.wi-pagination__button')
+    await buttons.at(-1)!.trigger('click')
+    expect(wrapper.text()).toContain('R3')
+  })
+
+  it('does not paginate when already on last page', async () => {
+    const items = Array.from({ length: 2 }, (_, i) => ({ id: i + 1, name: `R${i + 1}` }))
+    const wrapper = mount(WiTable, {
+      props: {
+        headers: [{ text: 'Name', value: 'name' }],
+        items,
+        rowsPerPage: 2,
+        currentPage: 1,
+      },
+    })
+    const nextButton = wrapper.findAll('.wi-pagination__button').at(-1)!
+    expect(nextButton.attributes('disabled')).toBeDefined()
+    await nextButton.trigger('click')
+    expect(wrapper.text()).toContain('R1')
+    expect(wrapper.text()).toContain('R2')
+  })
+
+  it('highlights current row when enabled', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        headers: [{ text: 'Name', value: 'name' }],
+        items: [
+          { id: 1, name: 'Ada' },
+          { id: 2, name: 'Lin' },
+        ],
+        highlightCurrentRow: true,
+        hideFooter: true,
+      },
+    })
+    await wrapper.findAll('tbody tr')[0]!.trigger('click')
+    expect(wrapper.emitted('update:currentRowKey')?.at(-1)?.[0]).toBe(1)
+    expect(wrapper.find('tbody tr.wi-table__row--current').exists()).toBe(true)
+  })
+
+  it('renders expand slot', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        headers: [{ text: 'Name', value: 'name' }],
+        items: [{ id: 1, name: 'Ada', extra: 'Design system' }],
+        hideFooter: true,
       },
       slots: {
-        expansion: ({ row }: { row: Record<string, unknown> }) =>
-          h('p', { class: 'exp' }, `${String(row.name)} extra`),
+        expand: ({ name }: { name: string }) => h('p', { class: 'exp' }, `${name} extra`),
       },
     })
-    expect(wrapper.text()).toContain('*Ada*')
     await wrapper.get('.wi-table__expand-btn').trigger('click')
-    expect(wrapper.get('.wi-table__expansion').text()).toContain('Ada extra')
-    expect(wrapper.emitted('update:expandedRowKeys')?.at(-1)).toEqual([[1]])
+    expect(wrapper.get('.wi-table__cell--expanded').text()).toContain('Ada extra')
+    expect(wrapper.emitted('expandRow')).toBeTruthy()
   })
 })

@@ -81,7 +81,7 @@
     --wi-color-fill-lighter: color-mix(in srgb, var(--wi-color-text) 3.5%, var(--wi-color-surface));
     --wi-table-border-color: var(--wi-color-border);
     --wi-table-header-bg: var(--wi-color-fill-light);
-    --wi-table-header-text: var(--wi-color-text-muted);
+    --wi-table-header-text: var(--wi-color-text);
     --wi-table-text: var(--wi-color-text);
     --wi-table-row-bg: var(--wi-color-surface);
     --wi-table-row-hover-bg: var(--wi-color-fill-light);
