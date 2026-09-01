@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { IconName } from '../Icon/types'
 import type { MenuItem } from './types'
 import { computed, ref } from 'vue'
 import WiIcon from '../Icon/Icon.vue'
-import { isIconName } from '../Icon/icons'
+import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
 import MenuNodes from './MenuNodes.vue'
 
 const props = defineProps<{
@@ -21,7 +20,7 @@ const emit = defineEmits<{
 const openKeys = ref<Record<string, boolean>>({})
 
 function itemKey(item: MenuItem, index: number) {
-  return item.key ?? item.label ?? `item-${props.depth}-${index}`
+  return menuNodeKey(item, index, `item-${props.depth}`)
 }
 
 function isSelected(item: MenuItem) {
@@ -35,8 +34,8 @@ function toggleSub(item: MenuItem, index: number) {
   openKeys.value = { ...openKeys.value, [key]: !openKeys.value[key] }
 }
 
-function iconOf(item: MenuItem): IconName | undefined {
-  return item.icon && isIconName(item.icon) ? item.icon : undefined
+function iconOf(item: MenuItem) {
+  return resolveMenuIcon(item.icon)
 }
 
 const pad = computed(() => (props.collapsed ? 0 : props.depth * props.indent))

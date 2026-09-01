@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { IconName } from '../Icon/types'
 import type { MenubarItem, MenubarProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { resolveMenuIcon } from '../../shared/menu'
 import WiIcon from '../Icon/Icon.vue'
-import { isIconName } from '../Icon/icons'
 
 const props = withDefaults(defineProps<MenubarProps>(), {
   selectedKey: null,
@@ -36,10 +36,7 @@ function updateSubmenuPosition() {
   const trigger = triggerEls.value[openIndex.value]
   if (!trigger) return
   const rect = trigger.getBoundingClientRect()
-  submenuStyle.value = {
-    left: `${rect.left}px`,
-    top: `${rect.bottom + 4}px`,
-  }
+  submenuStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', { gap: 4 })
 }
 
 function itemKey(item: MenubarItem) {
@@ -50,8 +47,8 @@ function isSelected(item: MenubarItem) {
   return Boolean(props.selectedKey && itemKey(item) === props.selectedKey)
 }
 
-function iconOf(item: MenubarItem): IconName | undefined {
-  return item.icon && isIconName(item.icon) ? item.icon : undefined
+function iconOf(item: MenubarItem) {
+  return resolveMenuIcon(item.icon)
 }
 
 function pick(item: MenubarItem) {

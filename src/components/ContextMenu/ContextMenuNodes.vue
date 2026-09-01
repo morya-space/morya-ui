@@ -1,22 +1,25 @@
 <script setup lang="ts">
-import type { IconName } from '../Icon/types'
 import type { ContextMenuItem } from './types'
 import { ref } from 'vue'
 import WiIcon from '../Icon/Icon.vue'
-import { isIconName } from '../Icon/icons'
+import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
 import ContextMenuNodes from './ContextMenuNodes.vue'
 
 const props = defineProps<{ items: ContextMenuItem[] }>()
 const emit = defineEmits<{ (event: 'activate', item: ContextMenuItem): void }>()
 const openIndex = ref<number | null>(null)
 
-function iconOf(item: ContextMenuItem): IconName | undefined {
-  return item.icon && isIconName(item.icon) ? item.icon : undefined
+function itemKey(item: ContextMenuItem, index: number) {
+  return menuNodeKey(item, index, 'cm')
+}
+
+function iconOf(item: ContextMenuItem) {
+  return resolveMenuIcon(item.icon)
 }
 </script>
 
 <template>
-  <template v-for="(item, index) in items" :key="item.key ?? item.label ?? index">
+  <template v-for="(item, index) in items" :key="itemKey(item, index)">
     <div v-if="item.separator" class="wi-contextmenu__separator" role="separator" />
     <div
       v-else-if="item.items?.length"
