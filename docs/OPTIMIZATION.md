@@ -94,6 +94,7 @@
 | 2026-09-01 | 五 | Terminal / FileUpload 硬编码色值改为 design tokens |
 | 2026-09-01 | 五 | 新增 `shared/menu`；Menu/Dropdown/ContextMenu Nodes 复用图标与 key |
 | 2026-09-01 | 五 | 剩余浮层组件统一接入 `computeFloatingOverlayStyle` |
+| 2026-09-01 | 五 | 16 个子组件补充独立单元测试（437 tests） |
 
 ---
 
