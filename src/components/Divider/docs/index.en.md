@@ -88,7 +88,7 @@ import { WiDivider } from '@well-insight/ui'
 
 ## Layout
 
-`layout` (or the compatible `orientation`) controls horizontal / vertical.
+`layout` controls horizontal / vertical orientation.
 
 ```vue preview
 <script setup lang="ts">
@@ -111,7 +111,6 @@ import { WiDivider } from '@well-insight/ui'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction. |
-| `orientation` | `'horizontal' \| 'vertical'` | — | **Compatibility alias**; takes effect only when `layout` is not passed. |
 | `type` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` | Line style. |
 | `align` | `'left' \| 'center' \| 'right'` | `'center'` | Label alignment for a horizontal divider with a label. |
 | `titlePlacement` | `'left' \| 'center' \| 'right'` | — | Alias of `align`; takes precedence when set. |
@@ -122,3 +121,7 @@ import { WiDivider } from '@well-insight/ui'
 | Slot | Description |
 | --- | --- |
 | `default` | Label content, takes precedence over `label`. |
+
+## Events
+
+No custom events.

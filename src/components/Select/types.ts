@@ -17,8 +17,6 @@ export interface SelectProps {
   options: SelectOption[]
   label?: string
   helpText?: string
-  /** @deprecated Prefer `invalid`. */
-  error?: boolean
   invalid?: boolean
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string

@@ -11,7 +11,6 @@ interface MenuOption extends SelectOption {
 
 const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: undefined,
-  error: false,
   invalid: false,
   disabled: false,
   required: false,
@@ -60,7 +59,7 @@ const resolvedFilter = computed(() => props.filter ?? (defaults.value.filter as 
 const sizeClass = useConfiguredSize('Select', () => props.size)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
-const isInvalid = computed(() => props.error || props.invalid || Boolean(props.errorMessage))
+const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
 
@@ -314,7 +313,6 @@ onBeforeUnmount(() => {
           `wi-select--${sizeClass}`,
           {
             'wi-select--invalid': isInvalid,
-            'wi-select--error': isInvalid,
             'wi-select--open': open,
             'wi-select--placeholder': !hasValue,
             'wi-select--fluid': resolvedFluid,
@@ -437,7 +435,7 @@ onBeforeUnmount(() => {
       v-if="feedbackText"
       :id="`${selectId}-help`"
       class="wi-select-field__help"
-      :class="{ 'wi-select-field__help--error': feedbackIsError }"
+      :class="{ 'wi-select-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

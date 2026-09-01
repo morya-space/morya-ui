@@ -31,7 +31,7 @@ const value = ref('')
 
 ## Invalid
 
-优先使用 `invalid`；`error` 仍可作为别名。
+`invalid` 表示校验失败；也可只传 `error-message`。
 
 ```vue preview
 <script setup lang="ts">
@@ -174,7 +174,6 @@ import { WiInput } from '@well-insight/ui'
 | `label` | `string` | — | 标签文案。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
-| `error` | `boolean` | `false` | **别名**，请优先使用 `invalid`。 |
 | `id` | `string` | — | 原生 id；未传时自动生成。 |
 | `type` | `'text' \| 'email' \| 'password' \| 'search' \| 'url' \| 'tel'` | `'text'` | 原生 type。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；默认中等。 |

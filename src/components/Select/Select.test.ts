@@ -35,7 +35,6 @@ describe('wiSelect', () => {
     expect(trigger.text()).toContain('Choose a size')
     expect(trigger.attributes('aria-invalid')).toBe('true')
     expect(trigger.classes()).toContain('wi-select--invalid')
-    expect(trigger.classes()).toContain('wi-select--error')
     await trigger.trigger('keydown', { key: 'ArrowDown' })
     await wrapper.get('[role="listbox"]').trigger('keydown', { key: 'ArrowDown' })
     await wrapper.get('[role="listbox"]').trigger('keydown', { key: 'Enter' })

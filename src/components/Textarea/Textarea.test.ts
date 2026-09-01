@@ -20,9 +20,9 @@ describe('wiTextarea', () => {
     expect(wrapper.get('textarea').classes()).toContain('wi-textarea--invalid')
   })
 
-  it('maps size, variant, fluid, and autoResize', async () => {
+  it('maps size, variant, fluid, and autosize', async () => {
     const wrapper = mount(WiTextarea, {
-      props: { size: 'sm', variant: 'filled', fluid: true, autoResize: true, modelValue: 'line' },
+      props: { size: 'sm', variant: 'filled', fluid: true, autosize: true, modelValue: 'line' },
     })
 
     expect(wrapper.classes()).toContain('wi-textarea-field--fluid')

@@ -277,8 +277,8 @@
     font-size: var(--wi-font-size-xs);
 }
 
-.wi-textarea-field__help--error,
-.wi-select-field__help--error {
+.wi-textarea-field__help--invalid,
+.wi-select-field__help--invalid {
     color: var(--wi-color-danger);
 }
 
@@ -297,9 +297,8 @@
 }
 
 .wi-textarea--invalid:focus-visible,
-.wi-textarea--error:focus-visible,
-.wi-select--error.wi-select--open,
-.wi-select--error:focus-visible {
+.wi-select--invalid.wi-select--open,
+.wi-select--invalid:focus-visible {
     border-color: var(--wi-color-danger);
     box-shadow: var(--wi-focus-shadow-danger);
 }

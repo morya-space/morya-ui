@@ -33,7 +33,6 @@ export interface WiComponentDefaultMap {
     clearable?: boolean
     showCount?: boolean
     rows?: number
-    autoResize?: boolean
     autosize?: WiTextareaAutosize
   }
   Select?: {

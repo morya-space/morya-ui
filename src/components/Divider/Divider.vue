@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<DividerProps>(), {
 })
 
 const slots = useSlots()
-const resolvedLayout = computed(() => props.layout ?? props.orientation ?? 'horizontal')
+const resolvedLayout = computed(() => props.layout ?? 'horizontal')
 const resolvedAlign = computed(() => props.titlePlacement ?? props.align)
 const hasLabel = computed(() => Boolean(props.label || slots.default))
 

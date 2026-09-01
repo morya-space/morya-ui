@@ -287,7 +287,6 @@ const options = [
 | `label` | `string` | — | 字段标签。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
-| `error` | `boolean` | `false` | **已弃用**，请使用 `invalid`。 |
 | `placeholder` | `string` | — | 占位文案。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 表单必填辅助。 |
@@ -317,3 +316,10 @@ const options = [
 | `hide` | — | 菜单关闭。 |
 | `search` | `string` | 筛选词变化（`filter` / `remote`）。 |
 | `create` | `SelectOption` | `tag` 模式下创建了新选项。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `value` | 自定义触发器展示（单选）。 |
+| `option` | 选项 `{ option }`。 |

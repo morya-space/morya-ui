@@ -10,11 +10,10 @@ describe('wiInput', () => {
     expect(wrapper.emitted('update:modelValue')).toEqual([['a@example.com']])
   })
 
-  it('supports invalid aliases, clearing, and exposed focus', async () => {
+  it('supports invalid state, clearing, and exposed focus', async () => {
     const wrapper = mount(WiInput, { props: { modelValue: 'Draft', invalid: true, clearable: true } })
     expect(wrapper.get('input').attributes('aria-invalid')).toBe('true')
     expect(wrapper.get('input').classes()).toContain('wi-input--invalid')
-    expect(wrapper.get('input').classes()).toContain('wi-input--error')
     await wrapper.get('.wi-input__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['']])
     expect(wrapper.emitted('clear')).toHaveLength(1)
@@ -22,14 +21,14 @@ describe('wiInput', () => {
 
   it('maps size, variant, and fluid props', () => {
     const small = mount(WiInput, { props: { size: 'small', variant: 'filled', fluid: true } })
-    const legacy = mount(WiInput, { props: { size: 'lg', error: true } })
+    const legacy = mount(WiInput, { props: { size: 'lg', invalid: true } })
 
     expect(small.get('input').classes()).toEqual(
       expect.arrayContaining(['wi-input--small', 'wi-input--filled', 'wi-input--fluid']),
     )
     expect(small.classes()).toContain('wi-input-field--fluid')
     expect(legacy.get('input').classes()).toEqual(
-      expect.arrayContaining(['wi-input--large', 'wi-input--invalid', 'wi-input--error']),
+      expect.arrayContaining(['wi-input--large', 'wi-input--invalid']),
     )
   })
 

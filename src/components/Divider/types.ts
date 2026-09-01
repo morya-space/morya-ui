@@ -8,11 +8,6 @@ export interface DividerProps {
    * @default 'horizontal'
    */
   layout?: DividerLayout
-  /**
-   * Legacy alias of `layout`. Used when `layout` is omitted.
-   * @deprecated Prefer `layout`.
-   */
-  orientation?: DividerLayout
   /** Border style of the divider line. */
   type?: DividerType
   /** Label alignment for horizontal dividers with content. */

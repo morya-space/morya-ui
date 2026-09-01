@@ -287,7 +287,6 @@ const options = [
 | `label` | `string` | — | Field label. |
 | `helpText` | `string` | — | Help text. |
 | `invalid` | `boolean` | `false` | Invalid state. |
-| `error` | `boolean` | `false` | **Deprecated.** Use `invalid`. |
 | `placeholder` | `string` | — | Placeholder text. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Form required hint. |
@@ -317,3 +316,10 @@ const options = [
 | `hide` | — | Emitted when the menu closes. |
 | `search` | `string` | Emitted as the filter query changes (`filter` / `remote`). |
 | `create` | `SelectOption` | Emitted when `tag` creates a new option. |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `value` | Custom single-select trigger display. |
+| `option` | Option `{ option }`. |

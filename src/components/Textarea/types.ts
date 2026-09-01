@@ -7,10 +7,8 @@ export interface TextareaProps {
   modelValue?: string
   label?: string
   helpText?: string
-  /** Prefer over `error`. Marks the field invalid. */
+  /** Marks the field invalid. */
   invalid?: boolean
-  /** @deprecated Prefer `invalid`. */
-  error?: boolean
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string
@@ -21,8 +19,6 @@ export interface TextareaProps {
    * Boolean `true` is equivalent to unbounded grow.
    */
   autosize?: WiTextareaAutosize
-  /** @deprecated Prefer `autosize`. */
-  autoResize?: boolean
   /** Size aligned with Textarea; also accepts legacy sm/md/lg. */
   size?: WiSizeInput
   /** Visual variant; default outlined. */

@@ -18,7 +18,6 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   quaternary: false,
   plain: false,
   fluid: false,
-  block: false,
   loading: false,
   disabled: false,
   autofocus: false,
@@ -38,7 +37,7 @@ const isText = computed(() => props.text || props.variant === 'text')
 const isLink = computed(() => props.link || props.variant === 'link')
 const isGhost = computed(() => props.ghost || props.variant === 'ghost')
 const isQuaternary = computed(() => props.quaternary || props.variant === 'quaternary')
-const isFluid = computed(() => props.fluid || props.block)
+const isFluid = computed(() => props.fluid)
 
 const resolvedSize = useConfiguredSize('Button', () => props.size)
 
