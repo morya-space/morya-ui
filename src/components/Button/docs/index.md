@@ -225,7 +225,6 @@ import { WiButton } from '@well-insight/ui'
 | `plain` | `boolean` | `false` | 弱化色，常与 `text` / `outlined` 组合。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。默认中等；兼容 `sm` / `lg`。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
-| `block` | `boolean` | `false` | **已弃用**，请使用 `fluid`。 |
 | `loading` | `boolean` | `false` | 加载中，禁用点击并显示 spinner。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `badge` | `string` | — | 徽标文本。 |

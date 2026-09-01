@@ -89,9 +89,9 @@ describe('wiButton', () => {
     expect(wrapper.find('.wi-button__badge--danger').text()).toBe('2')
   })
 
-  it('maps block to fluid and exposes focus/ref', () => {
+  it('supports fluid layout and exposes focus/ref', () => {
     const wrapper = mount(WiButton, {
-      props: { label: 'Focus', block: true },
+      props: { label: 'Focus', fluid: true },
       attachTo: document.body,
     })
     const instance = wrapper.vm as unknown as { focus: () => void; ref: HTMLButtonElement | null }

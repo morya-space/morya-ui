@@ -47,7 +47,7 @@ import { WiTextarea } from '@well-insight/ui'
 
 ## AutoResize & Invalid
 
-`autosize`（或别名 `autoResize`）会随内容增高；可传 `{ minRows, maxRows }` 限制范围。`invalid`（或别名 `error`）表示校验失败。
+`autosize` 会随内容增高；可传 `{ minRows, maxRows }` 限制范围。`invalid` 表示校验失败。
 
 ```vue preview
 <script setup lang="ts">
@@ -90,12 +90,10 @@ const value = ref('Draft notes')
 | `label` | `string` | — | 标签文案。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
-| `error` | `boolean` | `false` | **别名**，请优先使用 `invalid`。 |
 | `id` | `string` | — | 原生 id。 |
 | `rows` | `number` | `4` | 可见行数。 |
 | `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | CSS resize；autosize 时强制 `none`。 |
 | `autosize` | `boolean \| { minRows?: number; maxRows?: number }` | `false` | 按内容自动增高，可限制行数。 |
-| `autoResize` | `boolean` | `false` | **别名**，等价于 `autosize`。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | 样式变体。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
@@ -111,3 +109,7 @@ const value = ref('Draft notes')
 | --- | --- | --- |
 | `update:modelValue` | `string` | 值变化。 |
 | `clear` | — | 点击清除时触发。 |
+
+## Slots
+
+无插槽。

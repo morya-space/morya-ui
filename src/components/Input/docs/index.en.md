@@ -31,7 +31,7 @@ const value = ref('')
 
 ## Invalid
 
-Prefer `invalid`; `error` remains available as an alias.
+Use `invalid` for validation failure, or rely on `error-message` alone.
 
 ```vue preview
 <script setup lang="ts">
@@ -174,7 +174,6 @@ import { WiInput } from '@well-insight/ui'
 | `label` | `string` | — | Label text. |
 | `helpText` | `string` | — | Helper text. |
 | `invalid` | `boolean` | `false` | Validation failed state. |
-| `error` | `boolean` | `false` | **Alias**; prefer `invalid`. |
 | `id` | `string` | — | Native id; auto-generated when omitted. |
 | `type` | `'text' \| 'email' \| 'password' \| 'search' \| 'url' \| 'tel'` | `'text'` | Native type. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; medium by default. |

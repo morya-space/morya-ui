@@ -16,12 +16,10 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   resize: 'vertical',
   disabled: false,
   readonly: false,
-  error: false,
   invalid: false,
   clearable: undefined,
   showCount: undefined,
   fluid: undefined,
-  autoResize: undefined,
   autosize: undefined,
 })
 const emit = defineEmits<{
@@ -33,7 +31,7 @@ const defaults = useComponentDefaults('Textarea')
 const locale = useWiLocale()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
 const textareaId = computed(() => props.id ?? `wi-textarea-${Math.random().toString(36).slice(2, 8)}`)
-const isInvalid = computed(() => props.invalid || props.error || Boolean(props.errorMessage))
+const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Textarea', () => props.size)
 const resolvedVariant = useConfiguredVariant('Textarea', () => props.variant)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
@@ -42,10 +40,8 @@ const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.show
 
 const resolvedAutosize = computed<WiTextareaAutosize | false>(() => {
   if (props.autosize !== undefined && props.autosize !== false) return props.autosize
-  if (props.autoResize) return true
   const fromDefaults = defaults.value.autosize as WiTextareaAutosize | undefined
   if (fromDefaults !== undefined && fromDefaults !== false) return fromDefaults
-  if (defaults.value.autoResize) return true
   return false
 })
 
@@ -78,7 +74,6 @@ const textareaClass = computed(() => [
     'wi-textarea--filled': resolvedVariant.value === 'filled',
     'wi-textarea--fluid': resolvedFluid.value,
     'wi-textarea--invalid': isInvalid.value,
-    'wi-textarea--error': isInvalid.value,
     'wi-textarea--auto-resize': isAutosize.value,
     'wi-textarea--clearable': showClear.value,
   },
@@ -184,7 +179,7 @@ onMounted(() => {
         v-if="feedbackText"
         :id="`${textareaId}-help`"
         class="wi-textarea-field__help"
-        :class="{ 'wi-textarea-field__help--error': feedbackIsError }"
+        :class="{ 'wi-textarea-field__help--invalid': feedbackIsError }"
         :role="feedbackIsError ? 'alert' : undefined"
       >
         {{ feedbackText }}

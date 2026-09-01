@@ -12,8 +12,7 @@
     outline: none;
 }
 
-.wi-input--invalid:focus-visible,
-.wi-input--error:focus-visible {
+.wi-input--invalid:focus-visible {
     border-color: var(--wi-color-danger);
     box-shadow: var(--wi-focus-shadow-danger);
 }
@@ -38,7 +37,7 @@
     font-size: var(--wi-font-size-xs);
 }
 
-.wi-input-field__help--error {
+.wi-input-field__help--invalid {
     color: var(--wi-color-danger);
 }
 
@@ -135,8 +134,7 @@
     width: 100%;
 }
 
-.wi-input--invalid,
-.wi-input--error {
+.wi-input--invalid {
     border-color: var(--wi-color-danger);
 }
 

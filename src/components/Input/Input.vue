@@ -10,7 +10,6 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   disabled: false,
   readonly: false,
-  error: false,
   invalid: false,
   clearable: undefined,
   showCount: undefined,
@@ -26,7 +25,7 @@ const defaults = useComponentDefaults('Input')
 const locale = useWiLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
 const inputId = computed(() => props.id ?? `wi-input-${Math.random().toString(36).slice(2, 8)}`)
-const isInvalid = computed(() => props.invalid || props.error || Boolean(props.errorMessage))
+const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Input', () => props.size)
 const resolvedVariant = useConfiguredVariant('Input', () => props.variant)
 const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
@@ -54,7 +53,6 @@ const inputClass = computed(() => [
     'wi-input--filled': resolvedVariant.value === 'filled',
     'wi-input--fluid': resolvedFluid.value,
     'wi-input--invalid': isInvalid.value,
-    'wi-input--error': isInvalid.value,
     'wi-input--has-prefix': hasPrefix.value,
     'wi-input--has-suffix': hasSuffix.value,
   },
@@ -125,7 +123,7 @@ defineExpose({ focus })
         v-if="feedbackText"
         :id="`${inputId}-help`"
         class="wi-input-field__help"
-        :class="{ 'wi-input-field__help--error': feedbackIsError }"
+        :class="{ 'wi-input-field__help--invalid': feedbackIsError }"
         :role="feedbackIsError ? 'alert' : undefined"
       >
         {{ feedbackText }}

@@ -4,10 +4,8 @@ export interface InputProps {
   modelValue?: string
   label?: string
   helpText?: string
-  /** Prefer over `error`. Marks the field invalid. */
+  /** Marks the field invalid. */
   invalid?: boolean
-  /** @deprecated Prefer `invalid`. */
-  error?: boolean
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string

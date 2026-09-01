@@ -47,7 +47,7 @@ import { WiTextarea } from '@well-insight/ui'
 
 ## AutoResize & Invalid
 
-`autosize` (alias `autoResize`) grows with content. Pass `{ minRows, maxRows }` to clamp. `invalid` (or the alias `error`) marks a validation failure.
+`autosize` grows with content. Pass `{ minRows, maxRows }` to clamp. `invalid` marks a validation failure.
 
 ```vue preview
 <script setup lang="ts">
@@ -90,12 +90,10 @@ const value = ref('Draft notes')
 | `label` | `string` | — | Label text. |
 | `helpText` | `string` | — | Helper text. |
 | `invalid` | `boolean` | `false` | Invalid (validation failed) state. |
-| `error` | `boolean` | `false` | **Alias**; prefer `invalid`. |
 | `id` | `string` | — | Native id. |
 | `rows` | `number` | `4` | Visible rows. |
 | `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | CSS resize; forced to `none` when autosize is on. |
 | `autosize` | `boolean \| { minRows?: number; maxRows?: number }` | `false` | Auto-grow with content; optional row clamp. |
-| `autoResize` | `boolean` | `false` | **Alias** for `autosize`. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | Visual variant. |
 | `fluid` | `boolean` | `false` | Full width. |
@@ -111,3 +109,7 @@ const value = ref('Draft notes')
 | --- | --- | --- |
 | `update:modelValue` | `string` | Emitted when the value changes. |
 | `clear` | — | Emitted when the value is cleared. |
+
+## Slots
+
+No slots.

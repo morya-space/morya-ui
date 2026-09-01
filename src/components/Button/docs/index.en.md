@@ -225,7 +225,6 @@ import { WiButton } from '@well-insight/ui'
 | `plain` | `boolean` | `false` | Muted color; often combined with `text` / `outlined`. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. Medium by default; `sm` / `lg` aliases supported. |
 | `fluid` | `boolean` | `false` | Stretch to full container width. |
-| `block` | `boolean` | `false` | **Deprecated**; use `fluid`. |
 | `loading` | `boolean` | `false` | Loading state; disables clicks and shows a spinner. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `badge` | `string` | — | Badge text. |

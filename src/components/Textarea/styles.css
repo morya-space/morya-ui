@@ -80,8 +80,7 @@
     opacity: var(--wi-opacity-disabled);
 }
 
-.wi-textarea--invalid,
-.wi-textarea--error {
+.wi-textarea--invalid {
     border-color: var(--wi-color-danger);
 }
 

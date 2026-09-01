@@ -10,17 +10,17 @@ describe('wiDivider', () => {
     expect(wrapper.text()).toContain('Advanced settings')
   })
 
-  it('uses layout as preferred over orientation', () => {
+  it('uses layout for orientation', () => {
     const wrapper = mount(WiDivider, {
-      props: { layout: 'vertical', orientation: 'horizontal', label: 'Or' },
+      props: { layout: 'vertical', label: 'Or' },
     })
     expect(wrapper.classes()).toContain('wi-divider--vertical')
     expect(wrapper.attributes('aria-orientation')).toBe('vertical')
   })
 
-  it('falls back to orientation when layout is omitted', () => {
-    const wrapper = mount(WiDivider, { props: { orientation: 'vertical' } })
-    expect(wrapper.classes()).toContain('wi-divider--vertical')
+  it('defaults to horizontal layout', () => {
+    const wrapper = mount(WiDivider, { props: { label: 'Section' } })
+    expect(wrapper.classes()).toContain('wi-divider--horizontal')
   })
 
   it('applies type and horizontal align classes', () => {

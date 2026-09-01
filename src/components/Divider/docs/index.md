@@ -88,7 +88,7 @@ import { WiDivider } from '@well-insight/ui'
 
 ## Layout
 
-`layout`（或兼容的 `orientation`）控制水平 / 垂直。
+`layout` 控制水平 / 垂直。
 
 ```vue preview
 <script setup lang="ts">
@@ -111,7 +111,6 @@ import { WiDivider } from '@well-insight/ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | 布局方向。 |
-| `orientation` | `'horizontal' \| 'vertical'` | — | **兼容别名**；仅在未传 `layout` 时生效。 |
 | `type` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` | 线条样式。 |
 | `align` | `'left' \| 'center' \| 'right'` | `'center'` | 水平分隔带标签时的标签对齐。 |
 | `titlePlacement` | `'left' \| 'center' \| 'right'` | — | `align` 的别名；传入时优先。 |
@@ -122,3 +121,7 @@ import { WiDivider } from '@well-insight/ui'
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 标签内容，优先于 `label`。 |
+
+## Events
+
+无自定义事件。

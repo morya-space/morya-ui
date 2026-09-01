@@ -55,8 +55,6 @@ export interface ButtonProps {
   size?: ButtonSize | 'sm' | 'md' | 'lg'
   /** Full-width button. */
   fluid?: boolean
-  /** @deprecated Prefer `fluid`. */
-  block?: boolean
   loading?: boolean
   disabled?: boolean
   /** Optional badge value rendered after the label. */
