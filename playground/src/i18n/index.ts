@@ -127,6 +127,7 @@ const messages = {
       theme: '主题',
       config: '全局配置',
       guide: '指南',
+      migration: 'API 迁移',
       mcp: 'MCP',
     } as Record<string, string>,
     categories: {
@@ -240,6 +241,7 @@ const messages = {
       theme: 'Theme',
       config: 'Configuration',
       guide: 'Guide',
+      migration: 'API migration',
       mcp: 'MCP',
     } as Record<string, string>,
     categories: {
