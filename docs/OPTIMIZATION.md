@@ -10,7 +10,7 @@
 | 维度 | 现状 | 主要缺口 |
 | --- | --- | --- |
 | 组件文档 | 88 组件均有中英 `docs/` | Events / Slots / 无障碍章节覆盖不均 |
-| 组件测试 | 88 顶层组件均有测试 | 16 个子组件无独立测试；部分仅 smoke test |
+| 组件测试 | 88 顶层 + 16 子组件均有独立测试 | 部分交互组件仅 smoke test |
 | 无障碍 | 核心表单/浮层部分完善 | FloatLabel、Popover、Slider、Tooltip、Badge 等 |
 | 代码复用 | `shared/` overlay + menu 图标/key 工具 | Menu 节点树模板仍分组件维护 |
 | 文档站性能 | 功能完整 | 首包 ~6MB（eager 加载全部 markdown） |
@@ -70,7 +70,7 @@
 - [x] 抽取 `shared/menu/` 基础工具（`resolveMenuIcon`、`menuNodeKey`；Nodes 组件已接入）
 - [x] 抽取 overlay placement 工具（全量迁移 Select/Dropdown/Tooltip/Popover 等）
 - [x] 硬编码色值/token 清理（Terminal、FileUpload overlay）
-- [ ] 16 个子组件补测试（MenuNodes、FormItem、LayoutSider 等）
+- [x] 16 个子组件补测试（MenuNodes、FormItem、LayoutSider 等）
 - [ ] 交互组件 a11y / 键盘测试补强
 
 ---
