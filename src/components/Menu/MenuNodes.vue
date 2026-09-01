@@ -59,7 +59,9 @@ const pad = computed(() => (props.collapsed ? 0 : props.depth * props.indent))
           <template v-else>{{ item.icon }}</template>
         </span>
         <span v-if="!collapsed" class="wi-menu__label">{{ item.label }}</span>
-        <span v-if="!collapsed" class="wi-menu__caret" aria-hidden="true">{{ openKeys[itemKey(item, index)] ? '▾' : '▸' }}</span>
+        <span v-if="!collapsed" class="wi-menu__caret" aria-hidden="true">
+          <WiIcon :name="openKeys[itemKey(item, index)] ? 'chevron-down' : 'chevron-right'" size="sm" />
+        </span>
       </button>
       <div v-if="openKeys[itemKey(item, index)]" class="wi-menu__submenu" role="group">
         <MenuNodes

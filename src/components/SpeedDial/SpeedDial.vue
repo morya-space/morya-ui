@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
   model: () => [],
@@ -127,7 +128,7 @@ onBeforeUnmount(() => {
       @click="toggle"
     >
       <slot name="icon">
-        +
+        <WiIcon name="plus" size="sm" />
       </slot>
     </button>
   </div>

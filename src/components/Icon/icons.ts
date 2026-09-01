@@ -242,6 +242,12 @@ export const iconRegistry = {
       { tag: 'circle', cx: 10.5, cy: 11.5, r: 1, fill: 'currentColor' },
     ],
   },
+  sort: {
+    primitives: [
+      { tag: 'path', d: 'M8 3.5v4M5.5 7 8 3.5 10.5 7' },
+      { tag: 'path', d: 'M8 12.5v-4M5.5 9 8 12.5 10.5 9' },
+    ],
+  },
   maximize: {
     primitives: [{ tag: 'rect', x: 3.5, y: 3.5, width: 9, height: 9, rx: 0.75 }],
   },

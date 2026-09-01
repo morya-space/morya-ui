@@ -38,7 +38,9 @@ function iconOf(item: ContextMenuItem) {
           <template v-else>{{ item.icon }}</template>
         </span>
         {{ item.label }}
-        <span class="wi-contextmenu__caret" aria-hidden="true">▸</span>
+        <span class="wi-contextmenu__caret" aria-hidden="true">
+          <WiIcon name="chevron-right" size="sm" />
+        </span>
       </button>
       <div v-if="openIndex === index" class="wi-contextmenu__submenu" role="menu">
         <ContextMenuNodes :items="item.items" @activate="$emit('activate', $event)" />

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { IconName } from '../Icon/types'
 import type {
   TableColumn,
   TableEmits,
@@ -265,11 +266,11 @@ function toggleSort(columnKey: string, sortable?: boolean) {
   emit('sort', { sortField: nextField, sortOrder: nextOrder })
 }
 
-function sortIndicator(columnKey: string) {
-  if (innerField.value !== columnKey) return '↕'
-  if (innerOrder.value === 'asc') return '↑'
-  if (innerOrder.value === 'desc') return '↓'
-  return '↕'
+function sortIndicator(columnKey: string): IconName {
+  if (innerField.value !== columnKey) return 'sort'
+  if (innerOrder.value === 'asc') return 'arrow-up'
+  if (innerOrder.value === 'desc') return 'arrow-down'
+  return 'sort'
 }
 
 function setFilter(key: string, value: string | number | boolean | null) {
@@ -403,7 +404,9 @@ function fixedClass(column: TableColumn) {
                   @click="toggleSort(column.key, true)"
                 >
                   <span>{{ column.label }}</span>
-                  <span class="wi-table__sort-icon" aria-hidden="true">{{ sortIndicator(column.key) }}</span>
+                  <span class="wi-table__sort-icon" aria-hidden="true">
+                    <WiIcon :name="sortIndicator(column.key)" size="sm" />
+                  </span>
                 </button>
                 <span v-else>{{ column.label }}</span>
                 <div v-if="column.filterable" class="wi-table__filter">
@@ -483,7 +486,10 @@ function fixedClass(column: TableColumn) {
                   :aria-label="isRowExpanded(row, index) ? locale.collapse : locale.expand"
                   @click="toggleExpand(row, index)"
                 >
-                  {{ isRowExpanded(row, index) ? '▾' : '▸' }}
+                  <WiIcon
+                    :name="isRowExpanded(row, index) ? 'chevron-down' : 'chevron-right'"
+                    size="sm"
+                  />
                 </button>
               </td>
               <td

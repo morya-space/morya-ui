@@ -1,0 +1,89 @@
+/* Shared picker suffix slot: clear + dropdown indicator (Select, TreeSelect). */
+.wi-select__control {
+    --wi-control-suffix-inset: var(--wi-control-padding-x-medium);
+    --wi-control-end-padding: calc(
+        var(--wi-control-affix-size) + var(--wi-control-suffix-inset)
+    );
+    position: relative;
+    width: 100%;
+}
+
+.wi-select__control:has(.wi-select--small),
+.wi-select__control:has(.wi-select--sm),
+.wi-select__control:has(.wi-treeselect--small) {
+    --wi-control-suffix-inset: var(--wi-control-padding-x-small);
+}
+
+.wi-select__control:has(.wi-select--large),
+.wi-select__control:has(.wi-select--lg),
+.wi-select__control:has(.wi-treeselect--large) {
+    --wi-control-suffix-inset: var(--wi-control-padding-x-large);
+}
+
+.wi-select__suffix {
+    align-items: center;
+    display: block;
+    height: var(--wi-control-affix-size);
+    pointer-events: none;
+    position: absolute;
+    right: var(--wi-control-suffix-inset);
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--wi-control-affix-size);
+}
+
+.wi-select__clear {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text-muted);
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    inset: 0;
+    justify-content: flex-end;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 100%;
+    z-index: 1;
+}
+
+.wi-select__control--clearable:not(.wi-select__control--open):hover .wi-select__clear,
+.wi-select__control--clearable:not(.wi-select__control--open) .wi-select__clear:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.wi-select__clear:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-select__indicator {
+    align-items: center;
+    color: var(--wi-color-text-muted);
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+        opacity var(--wi-motion-fast) var(--wi-motion-ease),
+        transform var(--wi-motion-fast) var(--wi-motion-ease);
+}
+
+.wi-select__control--clearable:not(.wi-select__control--open):hover .wi-select__indicator,
+.wi-select__control--clearable:not(.wi-select__control--open) .wi-select__clear:focus-visible ~ .wi-select__indicator {
+    opacity: 0;
+}
+
+.wi-select__indicator--open {
+    transform: translateY(-50%) rotate(180deg);
+}

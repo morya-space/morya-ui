@@ -127,7 +127,9 @@ onBeforeUnmount(() => {
           <template v-else>{{ item.icon }}</template>
         </span>
         {{ item.label }}
-        <span v-if="item.items?.length" class="wi-menubar__caret" aria-hidden="true">▾</span>
+        <span v-if="item.items?.length" class="wi-menubar__caret" aria-hidden="true">
+          <WiIcon name="chevron-down" size="sm" />
+        </span>
       </button>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
         <Transition name="wi-scale-fade">

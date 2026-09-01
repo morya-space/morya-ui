@@ -2,6 +2,7 @@
 import type { PaginationProps } from './types'
 import { computed, ref } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   modelValue: 1,
@@ -81,7 +82,7 @@ defineExpose({ first, pageCount })
     :aria-label="locale.pagination"
   >
     <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">
-      ‹
+      <WiIcon name="chevron-left" size="sm" />
     </button>
     <template v-if="simple">
       <span class="wi-pagination__simple" aria-current="page">{{ currentPage }} / {{ pageCount }}</span>
@@ -92,7 +93,7 @@ defineExpose({ first, pageCount })
       </button>
     </template>
     <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">
-      ›
+      <WiIcon name="chevron-right" size="sm" />
     </button>
     <label v-if="showSizePicker && !simple" class="wi-pagination__sizer">
       <span class="wi-pagination__sizer-label">{{ locale.itemsPerPage }}</span>

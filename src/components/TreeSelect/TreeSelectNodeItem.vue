@@ -2,6 +2,7 @@
 import type { TreeSelectNode } from './types'
 import { useWiLocale } from '../../locale'
 import WiCheckbox from '../Checkbox/Checkbox.vue'
+import WiIcon from '../Icon/Icon.vue'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 defineProps<{
@@ -36,7 +37,7 @@ const locale = useWiLocale()
         :aria-label="expanded[node.key] ? locale.collapse : locale.expand"
         @click.stop="$emit('toggle', node.key)"
       >
-        {{ expanded[node.key] ? '▾' : '▸' }}
+        <WiIcon :name="expanded[node.key] ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
       <span v-else class="wi-treeselect__toggler-spacer" />
       <WiCheckbox

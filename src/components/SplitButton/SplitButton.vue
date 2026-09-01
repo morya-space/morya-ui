@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
   model: () => [],
@@ -117,7 +118,7 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       @click="toggleMenu"
     >
-      ▾
+      <WiIcon name="chevron-down" size="sm" />
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">

@@ -3,6 +3,7 @@ import type { CSSProperties, StyleValue } from "vue";
 import type { LayoutExpose, LayoutSiderProps } from "./types";
 import { computed, inject, useTemplateRef } from "vue";
 import { useWiLocale } from "../../locale";
+import WiIcon from "../Icon/Icon.vue";
 import { toCssLength } from "../../shared/responsive";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
@@ -161,7 +162,7 @@ defineExpose<LayoutExpose>({ scrollTo });
         class="wi-layout-sider__arrow"
         aria-hidden="true"
       >
-        ›
+        <WiIcon name="chevron-right" size="sm" />
       </span>
       <span v-else class="wi-layout-sider__bar" aria-hidden="true">
         <i class="wi-layout-sider__bar-top" />

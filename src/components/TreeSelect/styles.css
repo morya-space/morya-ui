@@ -7,33 +7,42 @@
     position: relative;
 }
 
+.wi-treeselect__control {
+    display: inline-block;
+    max-width: 100%;
+    min-width: var(--wi-treeselect-min-width);
+}
+
 .wi-treeselect__trigger {
     align-items: center;
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
+    box-sizing: border-box;
     color: var(--wi-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
     font-size: var(--wi-control-font-medium);
-    gap: var(--wi-space-2);
-    justify-content: space-between;
+    gap: var(--wi-space-1);
     min-height: var(--wi-control-height-medium);
-    min-width: var(--wi-treeselect-min-width);
     padding: 0 var(--wi-control-padding-x-medium);
+    padding-right: var(--wi-control-end-padding);
+    width: 100%;
 }
 
 .wi-treeselect--small .wi-treeselect__trigger {
     font-size: var(--wi-control-font-small);
     min-height: var(--wi-control-height-small);
-    padding: 0 var(--wi-control-padding-x-small);
+    padding-left: var(--wi-control-padding-x-small);
+    padding-right: var(--wi-control-end-padding);
 }
 
 .wi-treeselect--large .wi-treeselect__trigger {
     font-size: var(--wi-control-font-large);
     min-height: var(--wi-control-height-large);
-    padding: 0 var(--wi-control-padding-x-large);
+    padding-left: var(--wi-control-padding-x-large);
+    padding-right: var(--wi-control-end-padding);
 }
 
 .wi-treeselect__trigger:focus-visible {
@@ -61,22 +70,13 @@
     color: var(--wi-color-text-muted);
 }
 
-.wi-treeselect__clear {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    color: var(--wi-color-text-muted);
-    cursor: pointer;
-    display: inline-flex;
-    font: inherit;
-    justify-content: center;
-    line-height: 1;
-}
-
-.wi-treeselect__caret {
-    color: var(--wi-color-text-muted);
-    display: inline-flex;
-    flex: 0 0 auto;
+.wi-treeselect__label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
 }
 
 .wi-treeselect__filter {

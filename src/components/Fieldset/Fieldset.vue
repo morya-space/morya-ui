@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FieldsetProps } from './types'
 import { computed } from 'vue'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<FieldsetProps>(), {
   toggleable: false,
@@ -29,7 +30,7 @@ function toggle() {
         :aria-expanded="!isCollapsed"
         @click="toggle"
       >
-        <span aria-hidden="true">{{ isCollapsed ? '▸' : '▾' }}</span>
+        <WiIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
         <slot name="legend">
           {{ legend }}
         </slot>
