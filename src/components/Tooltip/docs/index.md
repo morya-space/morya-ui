@@ -51,3 +51,9 @@ import { WiButton, WiTooltip } from '@well-insight/ui'
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 触发元素。 |
+
+## 无障碍
+
+- 提示内容会通过 `role="tooltip"` 关联到触发元素（hover / focus 显示）。
+- 触发控件需可聚焦；纯图标按钮请设置 `aria-label`。
+- 重要信息不要只放在 Tooltip 中，应提供可见文案或 `aria-label`。

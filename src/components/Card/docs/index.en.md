@@ -92,3 +92,8 @@ import { WiCard } from '@well-insight/ui'
 | `header` | Custom header (takes precedence over `title` / `subtitle`). |
 | `footer` | Footer area (use the slot; there is no footer prop). |
 | `cover` | Cover above the header. |
+
+## Accessibility
+
+- When `title` is set it becomes the container `aria-label`; use `#header` for complex headers with readable titles.
+- Footer actions should use descriptive button labels.

@@ -51,3 +51,7 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | --- | --- |
 | `list` | 列表布局，`{ items }`。 |
 | `grid` | 网格布局，`{ items }`。 |
+
+## Events
+
+本组件无自定义事件；分页交互由内置 `WiPagination` 处理。

@@ -114,3 +114,7 @@ function showVNode() {
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
 | `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | 宿主位置 |
 | `max` | `number` | — | 同时可见条数；超出丢掉最旧一条 |
+
+## Events
+
+`<WiMessage />` 宿主本身无 Vue 事件；请通过 `message.*` API 的返回值 `{ id, close }` 管理生命周期。

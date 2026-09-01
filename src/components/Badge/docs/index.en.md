@@ -109,3 +109,8 @@ import { WiBadge, WiButton } from '@well-insight/ui'
 | Slot | Description |
 | --- | --- |
 | `default` | Content to overlay. |
+
+## Accessibility
+
+- When badge counts matter, update nearby visible text or an `aria-live` region.
+- Do not rely on the badge alone as the only status indicator.

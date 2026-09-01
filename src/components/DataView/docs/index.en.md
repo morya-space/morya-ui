@@ -51,3 +51,7 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | --- | --- |
 | `list` | List layout, `{ items }`. |
 | `grid` | Grid layout, `{ items }`. |
+
+## Events
+
+This component does not emit custom events; pagination is handled by the built-in `WiPagination`.
