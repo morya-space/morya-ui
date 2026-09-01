@@ -11,7 +11,7 @@ description: 组件目录约定、文档写法与浮层通用约定。
 推荐每个公开组件保持如下结构：
 
 ```text
-packages/ui/src/components/Button/
+src/components/Button/
 ├── Button.vue
 ├── types.ts
 ├── index.ts

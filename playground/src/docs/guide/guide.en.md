@@ -11,7 +11,7 @@ description: Component folder conventions, how to write docs, and shared overlay
 Keep each public component in this shape:
 
 ```text
-packages/ui/src/components/Button/
+src/components/Button/
 ├── Button.vue
 ├── types.ts
 ├── index.ts
