@@ -14,7 +14,7 @@
 | 无障碍 | 核心表单/浮层部分完善 | FloatLabel、Popover、Slider、Tooltip、Badge 等 |
 | 代码复用 | `shared/` 有 overlay teleport | Menu 节点树、Overlay 定位逻辑多处重复 |
 | 文档站性能 | 功能完整 | 首包 ~6MB（eager 加载全部 markdown） |
-| 文档站 UX | 组件侧栏可筛选 | 全局搜索已加；移动端 drawer 已加；薄文档与 a11y 指南待补 |
+| 文档站 UX | 组件侧栏可筛选 | a11y 指南已加；Events/Slots 与标题统一待补 |
 
 ---
 
@@ -58,7 +58,7 @@
 ## 阶段四：组件 API 与文档质量
 
 - [x] deprecated prop 迁移说明（`error`→`invalid`、`block`→`fluid` 等）
-- [ ] CSS 修饰类 `--error` 与 `invalid` prop 命名对齐（逐步）
+- [x] CSS 修饰类 `--error` 与 `invalid` prop 命名对齐（逐步）
 - [x] 补薄文档：CommandMenu、TieredMenu、MegaMenu、VirtualScroller
 - [ ] 补 Events / Slots 缺失章节（按使用频率排序）
 - [ ] 中文文档小节标题统一（如 `## 基础用法` 替代 `## Basic`）
@@ -84,6 +84,7 @@
 | 2026-09-01 | 三 | 全局搜索；移动端 drawer；404/favicon/lang URL/hash 滚动 |
 | 2026-09-01 | 四 | 新增指南页 `/docs/migration`（deprecated props 对照） |
 | 2026-09-01 | 四 | 扩充 CommandMenu / TieredMenu / MegaMenu / VirtualScroller 文档 |
+| 2026-09-01 | 四 | 新增指南页 `/docs/accessibility` |
 
 ---
 

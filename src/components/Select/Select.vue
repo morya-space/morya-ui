@@ -313,6 +313,7 @@ onBeforeUnmount(() => {
         :class="[
           `wi-select--${sizeClass}`,
           {
+            'wi-select--invalid': isInvalid,
             'wi-select--error': isInvalid,
             'wi-select--open': open,
             'wi-select--placeholder': !hasValue,

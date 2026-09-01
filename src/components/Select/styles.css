@@ -312,6 +312,7 @@
     width: 1px;
 }
 
+.wi-select--invalid,
 .wi-select--error {
     border-color: var(--wi-color-danger);
 }
