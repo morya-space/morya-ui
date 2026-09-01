@@ -194,7 +194,7 @@ const panelOpen = computed(() => open.value && (filtered.value.length > 0 || pro
         :aria-label="locale.clearInput"
         @click="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
       <button
         v-if="dropdown"

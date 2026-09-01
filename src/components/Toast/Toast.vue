@@ -14,6 +14,7 @@ import {
   trimToastsToMax,
   unregisterToastManualHost,
 } from './toastState'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
   teleport: true,
@@ -92,7 +93,7 @@ function onClose(message: ToastMessage) {
             :aria-label="closeLabel(message)"
             @click="onClose(message)"
           >
-            ×
+            <WiIcon name="close" size="sm" />
           </button>
         </article>
       </TransitionGroup>

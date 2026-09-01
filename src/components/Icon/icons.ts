@@ -242,6 +242,15 @@ export const iconRegistry = {
       { tag: 'circle', cx: 10.5, cy: 11.5, r: 1, fill: 'currentColor' },
     ],
   },
+  maximize: {
+    primitives: [{ tag: 'rect', x: 3.5, y: 3.5, width: 9, height: 9, rx: 0.75 }],
+  },
+  restore: {
+    primitives: [
+      { tag: 'rect', x: 3.5, y: 5.5, width: 7, height: 7, rx: 0.75 },
+      { tag: 'path', d: 'M5.5 3.5h5.5V9' },
+    ],
+  },
 } as const satisfies Record<string, IconDefinition>
 
 export type IconName = keyof typeof iconRegistry

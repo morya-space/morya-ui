@@ -60,6 +60,11 @@
     width: 0;
 }
 
+.wi-rating__star-on .wi-icon svg {
+    fill: currentColor;
+    stroke: none;
+}
+
 .wi-rating__star--on .wi-rating__star-on,
 .wi-rating__star--half .wi-rating__star-on {
     width: 100%;

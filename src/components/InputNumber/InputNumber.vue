@@ -3,6 +3,7 @@ import type { InputNumberProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -85,7 +86,7 @@ function clear() {
         :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
         @click="stepBy(-1)"
       >
-        −
+        <WiIcon name="minus" size="sm" />
       </button>
       <input
         v-bind="attrs"
@@ -107,7 +108,7 @@ function clear() {
         :aria-label="locale.clearInput"
         @click="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
       <div v-if="showButtons && buttonPlacement === 'right'" class="wi-inputnumber__stack">
         <button
@@ -117,7 +118,7 @@ function clear() {
           :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
           @click="stepBy(1)"
         >
-          +
+          <WiIcon name="plus" size="sm" />
         </button>
         <button
           class="wi-inputnumber__button wi-inputnumber__button--decrement"
@@ -126,7 +127,7 @@ function clear() {
           :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
           @click="stepBy(-1)"
         >
-          −
+          <WiIcon name="minus" size="sm" />
         </button>
       </div>
       <button
@@ -137,7 +138,7 @@ function clear() {
         :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
         @click="stepBy(1)"
       >
-        +
+        <WiIcon name="plus" size="sm" />
       </button>
     </div>
   </div>

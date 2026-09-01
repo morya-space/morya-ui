@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   modelValue: false,
@@ -98,7 +99,7 @@ useModalOverlay({
               :aria-label="locale.close"
               @click="close"
             >
-              ×
+              <WiIcon name="close" size="sm" />
             </button>
           </header>
           <div class="wi-drawer__body">

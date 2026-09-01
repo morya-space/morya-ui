@@ -2,6 +2,7 @@
 import type { RatingProps } from './types'
 import { computed } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<RatingProps>(), {
   modelValue: 0,
@@ -66,7 +67,7 @@ function clearRating() {
       :disabled="disabled || readonly"
       @click="clearRating"
     >
-      ×
+      <WiIcon name="close" size="sm" />
     </button>
     <button
       v-for="star in starList"
@@ -81,8 +82,12 @@ function clearRating() {
       :disabled="disabled || readonly"
       @click="onStarClick(star, $event)"
     >
-      <span class="wi-rating__star-off" aria-hidden="true">☆</span>
-      <span class="wi-rating__star-on" aria-hidden="true">★</span>
+      <span class="wi-rating__star-off" aria-hidden="true">
+        <WiIcon name="star" size="lg" />
+      </span>
+      <span class="wi-rating__star-on" aria-hidden="true">
+        <WiIcon name="star" size="lg" />
+      </span>
     </button>
   </div>
 </template>

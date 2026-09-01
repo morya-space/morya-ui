@@ -200,7 +200,7 @@ useModalOverlay({
                   :disabled="busy"
                   @click="toggleMaximize"
                 >
-                  {{ maximized ? '❐' : '▢' }}
+                  <WiIcon :name="maximized ? 'restore' : 'maximize'" size="sm" />
                 </button>
                 <button
                   v-if="closable"
@@ -210,7 +210,7 @@ useModalOverlay({
                   :disabled="busy"
                   @click="dismiss"
                 >
-                  ×
+                  <WiIcon name="close" size="sm" />
                 </button>
               </div>
             </header>

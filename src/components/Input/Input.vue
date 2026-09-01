@@ -3,6 +3,7 @@ import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
+import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<InputProps>(), {
@@ -115,7 +116,7 @@ defineExpose({ focus })
         :disabled="disabled || readonly"
         @click="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
     </div>
     <div v-if="feedbackText || resolvedShowCount" class="wi-input-field__meta">

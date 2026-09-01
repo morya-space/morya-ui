@@ -48,6 +48,28 @@
     opacity: var(--wi-opacity-disabled);
 }
 
+.wi-cascadeselect__label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.wi-cascadeselect__caret {
+    align-items: center;
+    color: var(--wi-color-text-muted);
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    transition: transform var(--wi-motion-fast) var(--wi-motion-ease);
+}
+
+.wi-cascadeselect--open .wi-cascadeselect__caret {
+    transform: rotate(180deg);
+}
+
 .wi-cascadeselect__panel {
     background: var(--wi-color-surface);
     border: 1px solid var(--wi-color-border);

@@ -11,6 +11,7 @@ import { formatLocale, useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
@@ -335,7 +336,7 @@ onBeforeUnmount(() => {
         :disabled="disabled"
         @click.stop="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
@@ -366,11 +367,11 @@ onBeforeUnmount(() => {
           <div class="wi-datepicker__calendar">
             <div class="wi-datepicker__header">
               <button type="button" class="wi-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
-                ‹
+                <WiIcon name="chevron-left" size="sm" />
               </button>
               <span class="wi-datepicker__month">{{ monthLabel }}</span>
               <button type="button" class="wi-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
-                ›
+                <WiIcon name="chevron-right" size="sm" />
               </button>
             </div>
             <div class="wi-datepicker__weekdays">

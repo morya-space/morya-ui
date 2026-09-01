@@ -15,6 +15,7 @@ import {
   syncAncestors,
 } from '../Tree/checkStrategy'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
   modelValue: null,
@@ -226,7 +227,7 @@ onBeforeUnmount(() => {
             :disabled="disabled"
             @click.stop="removeTag(tag.key)"
           >
-            ×
+            <WiIcon name="close" size="sm" />
           </button>
         </span>
         <span v-if="hiddenTagCount" class="wi-select__tag wi-select__tag--more">
@@ -243,9 +244,11 @@ onBeforeUnmount(() => {
         :aria-label="locale.clear"
         @click="clear"
       >
-        ×
+        <WiIcon name="close" size="sm" />
       </button>
-      <span class="wi-treeselect__caret" aria-hidden="true">▾</span>
+      <span class="wi-treeselect__caret" aria-hidden="true">
+        <WiIcon name="chevron-down" size="sm" />
+      </span>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">

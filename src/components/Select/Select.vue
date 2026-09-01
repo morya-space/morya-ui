@@ -5,6 +5,7 @@ import { formatLocale, useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import WiIcon from '../Icon/Icon.vue'
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -305,7 +306,13 @@ onBeforeUnmount(() => {
 <template>
   <div ref="root" class="wi-select-field" :class="{ 'wi-select-field--fluid': resolvedFluid }">
     <label v-if="label" class="wi-select-field__label" :for="selectId">{{ label }}</label>
-    <div class="wi-select__control" :class="{ 'wi-select__control--clearable': showClearButton }">
+    <div
+      class="wi-select__control"
+      :class="{
+        'wi-select__control--clearable': showClearButton,
+        'wi-select__control--open': open,
+      }"
+    >
       <div
         :id="selectId"
         ref="trigger"
@@ -345,7 +352,7 @@ onBeforeUnmount(() => {
               :disabled="disabled"
               @click="removeTag(option.value, $event)"
             >
-              ×
+              <WiIcon name="close" size="sm" />
             </button>
           </span>
           <span
@@ -358,17 +365,25 @@ onBeforeUnmount(() => {
         </div>
         <span v-else class="wi-select__value">{{ displayLabel }}</span>
         <span v-if="resolvedLoading" class="wi-select__spinner" aria-hidden="true" />
-        <span class="wi-select__indicator" aria-hidden="true" />
       </div>
-      <button
-        v-if="showClearButton"
-        class="wi-select__clear"
-        type="button"
-        :aria-label="locale.clear"
-        @click="clear"
-      >
-        ×
-      </button>
+      <div class="wi-select__suffix">
+        <button
+          v-if="showClearButton"
+          class="wi-select__clear"
+          type="button"
+          :aria-label="locale.clear"
+          @click="clear"
+        >
+          <WiIcon name="close" size="sm" />
+        </button>
+        <span
+          class="wi-select__indicator"
+          :class="{ 'wi-select__indicator--open': open }"
+          aria-hidden="true"
+        >
+          <WiIcon name="chevron-down" size="sm" />
+        </span>
+      </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
@@ -416,7 +431,12 @@ onBeforeUnmount(() => {
             @click="selectOption(option)"
           >
             <span>{{ option.created ? createLabel : option.label }}</span>
-            <span v-if="!option.created && isSelected(option.value)" class="wi-select__check" aria-hidden="true">✓</span>
+            <WiIcon
+              v-if="!option.created && isSelected(option.value)"
+              class="wi-select__check"
+              name="check"
+              size="sm"
+            />
           </button>
           <div v-if="!menuOptions.length && !resolvedLoading" class="wi-select__empty" role="status">
             {{ resolvedEmptyMessage }}
