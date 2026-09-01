@@ -4,6 +4,7 @@ import { WiScrollbar } from '@well-insight/ui'
 import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
+import MobileSidebarShell from '../components/MobileSidebarShell.vue'
 import { guideDocExists, listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { useDocsI18n } from '../i18n'
 
@@ -35,9 +36,13 @@ watch([activeSlug, lang], async () => {
 
 <template>
   <div class="docs-shell">
-    <aside class="docs-sidebar" :aria-label="t.docsNav">
-      <WiScrollbar class="docs-scroll">
-        <div class="docs-sidebar__body">
+    <MobileSidebarShell
+      class="docs-sidebar"
+      :title="t.docsTitle"
+      :toggle-label="t.openNav"
+      scroll-class="docs-scroll"
+      body-class="docs-sidebar__body"
+    >
           <p class="docs-kicker">
             DOCUMENTATION
           </p>
@@ -55,9 +60,7 @@ watch([activeSlug, lang], async () => {
               <span>{{ t.guideTitles[item.slug] ?? item.title }}</span>
             </RouterLink>
           </nav>
-        </div>
-      </WiScrollbar>
-    </aside>
+    </MobileSidebarShell>
 
     <main class="docs-main">
       <WiScrollbar class="docs-scroll">
@@ -185,10 +188,8 @@ watch([activeSlug, lang], async () => {
     height: auto;
   }
 
-  .docs-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+  .docs-sidebar:not([data-open]) {
+    border: 0;
   }
 }
 </style>

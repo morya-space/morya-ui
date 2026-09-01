@@ -12,6 +12,7 @@ import {
 import { computed, nextTick, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import ComponentDocViewer from "../components/ComponentDocViewer.vue";
+import MobileSidebarShell from "../components/MobileSidebarShell.vue";
 import {
     listDocumentedComponents,
     resolveComponentDoc,
@@ -229,9 +230,13 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 <template>
     <div class="components-shell">
         <div class="workspace">
-            <aside class="sidebar" :aria-label="t.componentNav">
-                <WiScrollbar class="column-scroll">
-                    <div class="sidebar-body">
+            <MobileSidebarShell
+                class="sidebar"
+                :title="t.componentNav"
+                :toggle-label="t.openNav"
+                scroll-class="column-scroll"
+                body-class="sidebar-body"
+            >
                         <label class="search-box">
                             <WiIcon name="search" size="sm" />
                             <input
@@ -440,9 +445,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                                 {{ t.noComponent }}
                             </p>
                         </nav>
-                    </div>
-                </WiScrollbar>
-            </aside>
+            </MobileSidebarShell>
 
             <main class="content">
                 <WiScrollbar ref="contentScroll" class="column-scroll">
@@ -1161,15 +1164,13 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     .sidebar,
     .content,
     .token-panel {
-        display: block;
         overflow: visible;
     }
     .column-scroll {
         height: auto;
     }
-    .sidebar {
-        border-bottom: 1px solid var(--wi-color-border);
-        border-right: 0;
+    .sidebar:not([data-open]) {
+        border: 0;
     }
     .sidebar-body {
         padding: 1.25rem;
