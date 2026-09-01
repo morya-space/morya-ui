@@ -12,7 +12,7 @@
 | 组件文档 | 88 组件均有中英 `docs/` | Events / Slots / 无障碍章节覆盖不均 |
 | 组件测试 | 88 顶层组件均有测试 | 16 个子组件无独立测试；部分仅 smoke test |
 | 无障碍 | 核心表单/浮层部分完善 | FloatLabel、Popover、Slider、Tooltip、Badge 等 |
-| 代码复用 | `shared/` 有 overlay teleport | Menu 节点树、Overlay 定位逻辑多处重复 |
+| 代码复用 | `shared/` overlay teleport + placement | Menu 节点树仍多处重复；Menubar 等 overlay 待迁移 |
 | 文档站性能 | 功能完整 | 首包 ~6MB（eager 加载全部 markdown） |
 | 文档站 UX | 组件侧栏可筛选 | a11y 指南已加；Events/Slots 与标题统一待补 |
 
@@ -68,8 +68,8 @@
 ## 阶段五：架构与测试（中长期）
 
 - [ ] 抽取 `shared/menu/` 复用 Menu 族节点渲染
-- [ ] 抽取 overlay placement 工具（Tooltip / Popover / Select 等）
-- [ ] 硬编码色值/token 清理（Terminal、FileUpload overlay 等）
+- [x] 抽取 overlay placement 工具（Tooltip / Popover / Select / Dropdown；Menubar 等待迁移）
+- [x] 硬编码色值/token 清理（Terminal、FileUpload overlay）
 - [ ] 16 个子组件补测试（MenuNodes、FormItem、LayoutSider 等）
 - [ ] 交互组件 a11y / 键盘测试补强
 
@@ -89,6 +89,9 @@
 | 2026-09-01 | 四 | 中文组件文档 `## Basic` 统一为 `## 基础用法`（80 处） |
 | 2026-09-01 | 四 | 补充 Table/DataView Events；Tooltip 等 a11y 文档章节 |
 | 2026-09-01 | 四 | 移除 deprecated props；统一 invalid CSS；补全 Events/Slots |
+| 2026-09-01 | 五 | 新增 `shared/overlayPlacement`；迁移 Tooltip / Popover |
+| 2026-09-01 | 五 | Select / Dropdown 接入 overlay placement |
+| 2026-09-01 | 五 | Terminal / FileUpload 硬编码色值改为 design tokens |
 
 ---
 
