@@ -34,7 +34,18 @@ node packages/ui-mcp/bin/well-insight-ui-mcp.js
 
 ## Tools
 
-MCP also exposes **resources** (component docs, API JSON, guides, catalog index) for clients that support `resources/list` and `resources/read`. Call `version` to see the current resource count.
+MCP also exposes **resources** and **resource templates** for clients that support `resources/list`, `resources/templates/list`, and `resources/read`. Call `version` to see the current resource and template counts.
+
+Static resources:
+
+- `wi://catalog/index.json`
+- `wi://design-rules.json`
+
+Resource templates:
+
+- `component-docs` → `wi://components/{component}/docs/{locale}`
+- `component-api` → `wi://components/{component}/api.json`
+- `guide-docs` → `wi://guides/{guide}/docs/{locale}`
 
 ### Core — component docs
 
