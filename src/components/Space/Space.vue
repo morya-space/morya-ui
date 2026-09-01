@@ -12,6 +12,7 @@ import {
 import { flattenVNodes } from '../../shared/vnode'
 
 const props = withDefaults(defineProps<SpaceProps>(), {
+  align: 'center',
   justify: 'start',
   inline: false,
   vertical: false,

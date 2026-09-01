@@ -29,7 +29,7 @@ describe('wiTable', () => {
       },
     })
     expect(wrapper.get('table').classes()).toContain('wi-table--large')
-    expect(wrapper.classes()).not.toContain('wi-table-wrapper--large')
+    expect(wrapper.classes()).toContain('wi-table-wrapper--large')
   })
 
   it('shows loading overlay and hides empty while loading', () => {

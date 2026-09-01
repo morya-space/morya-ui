@@ -75,6 +75,24 @@
     --wi-motion-enter: 180ms;
     --wi-motion-exit: 130ms;
     --wi-motion-distance: 0.5rem;
+
+    /* Table (Element Plus–aligned) */
+    --wi-color-fill-light: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
+    --wi-color-fill-lighter: color-mix(in srgb, var(--wi-color-text) 3.5%, var(--wi-color-surface));
+    --wi-table-border-color: var(--wi-color-border);
+    --wi-table-header-bg: var(--wi-color-fill-light);
+    --wi-table-header-text: var(--wi-color-text-muted);
+    --wi-table-text: var(--wi-color-text);
+    --wi-table-row-bg: var(--wi-color-surface);
+    --wi-table-row-hover-bg: var(--wi-color-fill-light);
+    --wi-table-row-striped-bg: var(--wi-color-fill-lighter);
+    --wi-table-row-current-bg: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
+    --wi-table-row-selected-bg: color-mix(in srgb, var(--wi-color-primary) 14%, var(--wi-color-surface));
+    --wi-table-expanded-bg: var(--wi-color-fill-lighter);
+    --wi-table-font-size: var(--wi-font-size-md);
+    --wi-table-row-height: 40px;
+    --wi-table-cell-line-height: 23px;
+    --wi-table-cell-padding-inline: 12px;
 }
 
 :root[data-wi-motion="reduced"] {
@@ -115,6 +133,10 @@
     --wi-control-padding-x-small: 8px;
     --wi-control-padding-x-medium: 10px;
     --wi-control-padding-x-large: 12px;
+    --wi-table-row-height: 36px;
+    --wi-table-cell-line-height: 20px;
+    --wi-table-cell-padding-inline: 10px;
+    --wi-table-font-size: var(--wi-font-size-sm);
 }
 
 [data-wi-density="spacious"] {
@@ -133,6 +155,10 @@
     --wi-control-padding-x-small: 12px;
     --wi-control-padding-x-medium: 14px;
     --wi-control-padding-x-large: 16px;
+    --wi-table-row-height: 48px;
+    --wi-table-cell-line-height: 26px;
+    --wi-table-cell-padding-inline: 16px;
+    --wi-table-font-size: 1rem;
 }
 
 [data-wi-density="compact"] .wi-layout-header {
@@ -189,6 +215,17 @@
     --wi-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
     --wi-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
     --wi-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
+
+    --wi-table-border-color: color-mix(in srgb, var(--wi-color-border) 88%, var(--wi-color-text));
+    --wi-color-fill-light: color-mix(in srgb, var(--wi-color-text) 10%, var(--wi-color-surface));
+    --wi-color-fill-lighter: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
+    --wi-table-header-bg: var(--wi-color-fill-light);
+    --wi-table-row-bg: var(--wi-color-surface);
+    --wi-table-row-hover-bg: color-mix(in srgb, var(--wi-color-text) 8%, var(--wi-color-surface));
+    --wi-table-row-striped-bg: var(--wi-color-fill-lighter);
+    --wi-table-row-current-bg: color-mix(in srgb, var(--wi-color-primary) 16%, var(--wi-color-surface));
+    --wi-table-row-selected-bg: color-mix(in srgb, var(--wi-color-primary) 20%, var(--wi-color-surface));
+    --wi-table-expanded-bg: var(--wi-color-fill-lighter);
 }
 
 @media (prefers-reduced-motion: reduce) {
