@@ -16,17 +16,6 @@ function register(
   description: string,
   inputSchema: Record<string, z.ZodTypeAny>,
   handler: ToolHandler,
-  annotations: {
-    readOnlyHint: boolean
-    destructiveHint: boolean
-    idempotentHint: boolean
-    openWorldHint: boolean
-  } = {
-    readOnlyHint: true,
-    destructiveHint: false,
-    idempotentHint: true,
-    openWorldHint: false,
-  },
 ) {
   return server.registerTool(
     name,
@@ -35,7 +24,12 @@ function register(
       description,
       inputSchema,
       outputSchema: z.record(z.string(), z.unknown()),
-      annotations,
+      annotations: {
+        readOnlyHint: true,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: false,
+      },
     },
     handler,
   )
@@ -46,7 +40,7 @@ register(
   'List @well-insight/ui components, guides, examples, categories, or page patterns.',
   {
     kind: z
-      .enum(['components', 'guides', 'examples', 'categories', 'patterns', 'decisions'])
+      .enum(['components', 'guides', 'examples', 'categories', 'patterns'])
       .optional()
       .describe('What to list. Defaults to components.'),
     mode: z.string().optional().describe('Locale mode: zh / en. Defaults to zh.'),
@@ -58,7 +52,7 @@ register(
 
 register(
   'search',
-  'Search components, guides, API text, and examples.',
+  'Search components, guides, API text, examples, page patterns, and component decision guides.',
   {
     query: z.string().min(1),
     scope: z.enum(['all', 'components', 'guides', 'api', 'examples', 'patterns', 'decisions']).optional(),
@@ -163,50 +157,15 @@ register(
 
 register(
   'recommend_page',
-  'Recommend a page pattern and component composition from a product/page intent.',
+  'Recommend a page pattern and component composition from product intent. Pass includeScaffold: true for starter Vue code.',
   {
     intent: z.string().min(1),
     pageType: z.string().optional(),
     features: z.array(z.string()).max(20).optional(),
     mode: z.string().optional(),
+    includeScaffold: z.boolean().optional(),
   },
   async (args) => handlers.recommendPage(args),
-)
-
-register(
-  'generate_page',
-  'Generate a Vue 3 + TypeScript page scaffold from intent, pattern, and design rules without writing files.',
-  {
-    intent: z.string().min(1),
-    pageType: z.string().optional(),
-    pattern: z.string().optional(),
-    features: z.array(z.string()).max(20).optional(),
-    mode: z.string().optional(),
-    responsive: z.boolean().optional(),
-  },
-  async (args) => handlers.generatePage(args),
-)
-
-register(
-  'create_page',
-  'Preview or safely write a generated page inside the current project. Writing requires confirm: true.',
-  {
-    path: z.string().min(1),
-    intent: z.string().min(1),
-    pageType: z.string().optional(),
-    pattern: z.string().optional(),
-    features: z.array(z.string()).max(20).optional(),
-    mode: z.string().optional(),
-    responsive: z.boolean().optional(),
-    confirm: z.boolean().optional(),
-  },
-  async (args) => handlers.createPage(args),
-  {
-    readOnlyHint: false,
-    destructiveHint: true,
-    idempotentHint: false,
-    openWorldHint: false,
-  },
 )
 
 register(
@@ -217,48 +176,16 @@ register(
 )
 
 register(
-  'list_decisions',
-  'List component selection decision guides for common UI choices.',
+  'recommend_component',
+  'List, read, or recommend component selection guides. Omit query/decision to list; pass decision only to read; pass query to recommend.',
   {
+    query: z.string().optional(),
+    decision: z.string().optional(),
     mode: z.string().optional(),
     limit: z.number().int().min(1).max(200).optional(),
     offset: z.number().int().min(0).optional(),
   },
-  async (args) => handlers.listDecisions(args),
-)
-
-register(
-  'get_decision',
-  'Read bilingual guidance for choosing between related components.',
-  {
-    decision: z.string().min(1),
-    mode: z.string().optional(),
-  },
-  async (args) => handlers.getDecision(args),
-)
-
-register(
-  'recommend_component',
-  'Recommend a component choice from a UI selection question.',
-  {
-    query: z.string().min(1),
-    decision: z.string().optional(),
-    mode: z.string().optional(),
-  },
   async (args) => handlers.recommendComponent(args),
-)
-
-register(
-  'validate_page',
-  'Validate page-level component composition, interaction, accessibility, and design-token rules.',
-  {
-    pattern: z.string().optional(),
-    code: z.string().optional(),
-    components: z.array(z.string()).max(50).optional(),
-    intent: z.string().optional(),
-    strict: z.boolean().optional().describe('Enable additional static checks for dynamic bindings and incomplete snippets.'),
-  },
-  async (args) => handlers.validatePage(args),
 )
 
 register('version', 'Return MCP package, library version, and catalog status.', {}, async () =>

@@ -122,18 +122,53 @@ npx -y @well-insight/ui-mcp
 
 ## 可用工具
 
+### 基础 — 查组件文档
+
 | 工具 | 作用 |
 | --- | --- |
-| `list` | 列出组件 / 指南 / 示例 / 分类 |
-| `search` | 搜索文档与示例 |
+| `list` | 列出组件 / 指南 / 示例 / 分类 / 页面模式 |
+| `search` | 搜索文档、示例、页面模式与组件选型指南 |
 | `get_component` | 读取组件说明与 API |
 | `get_example` | 获取源码示例 |
 | `get_guide` | 读取指南 |
 | `get_setup` | 安装与初始化说明 |
-| `validate_usage` | 对照文档粗检用法 |
+| `validate_usage` | 对照文档粗检 props / events 用法 |
 | `version` | 版本与目录状态 |
 
+### 高级 — 页面组合（可选）
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_patterns` | 列出可复用的页面组合模式 |
+| `get_pattern` | 读取模式的结构、布局与交互规则 |
+| `recommend_page` | 根据页面意图推荐模式；可附带 starter 脚手架 |
+| `get_design_rules` | 设计令牌与组合规则 |
+| `recommend_component` | 列出、阅读或推荐组件选型指南 |
+
 多数工具支持 `mode`：`zh`（默认）或 `en`。
+
+### 推荐工作流
+
+**查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`
+
+**规划整页：** `recommend_page` → `get_pattern` → `get_component` / `get_example` → `get_design_rules`；组件取舍不明时调用 `recommend_component`
+
+需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：
+
+```json
+{
+  "intent": "油井管理列表",
+  "pageType": "list",
+  "features": ["筛选", "新增", "分页"],
+  "includeScaffold": true
+}
+```
+
+`recommend_component` 用法：
+
+- 不传 `query` 和 `decision` → 列出全部选型指南
+- 只传 `decision`（如 `overlay-choice`）→ 阅读某一指南
+- 传 `query` → 根据问题推荐组件
 
 ## 对话示例
 

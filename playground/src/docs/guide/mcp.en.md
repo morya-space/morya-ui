@@ -122,18 +122,53 @@ Snippets for popular products. Key names may change across versions — check ea
 
 ## Tools
 
+### Core — component docs
+
 | Tool | Purpose |
 | --- | --- |
-| `list` | List components / guides / examples / categories |
-| `search` | Search docs and examples |
+| `list` | List components / guides / examples / categories / patterns |
+| `search` | Search docs, examples, patterns, and decision guides |
 | `get_component` | Read component docs and API |
 | `get_example` | Return a source example |
 | `get_guide` | Read a guide |
 | `get_setup` | Install and setup guidance |
-| `validate_usage` | Soft-check usage against docs |
+| `validate_usage` | Soft-check usage against documented props/events |
 | `version` | Version and catalog status |
 
+### Advanced — page composition (optional)
+
+| Tool | Purpose |
+| --- | --- |
+| `list_patterns` | List reusable page composition patterns |
+| `get_pattern` | Read a pattern's structure, layout, and rules |
+| `recommend_page` | Recommend a pattern from page intent; optional starter scaffold |
+| `get_design_rules` | Design-token and composition rules |
+| `recommend_component` | List, read, or recommend component selection guides |
+
 Most tools accept `mode`: `zh` (default) or `en`.
+
+### Recommended workflow
+
+**Look up a component:** `search` / `get_component` → `get_example` → `validate_usage`
+
+**Plan a page:** `recommend_page` → `get_pattern` → `get_component` / `get_example` → `get_design_rules`; use `recommend_component` when choosing between similar components
+
+Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
+
+```json
+{
+  "intent": "Oil well management list",
+  "pageType": "list",
+  "features": ["filters", "create", "pagination"],
+  "includeScaffold": true
+}
+```
+
+`recommend_component` modes:
+
+- omit `query` and `decision` → list decision guides
+- `decision` only (e.g. `overlay-choice`) → read one guide
+- `query` → recommend a component for a UI question
 
 ## Prompt examples
 
