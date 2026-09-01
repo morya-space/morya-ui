@@ -1,9 +1,9 @@
 /* —— Misc: Terminal —— */
 .wi-terminal {
-    --wi-terminal-bg: #111827;
-    --wi-terminal-fg: #e5e7eb;
-    --wi-terminal-prompt: #34d399;
-    --wi-terminal-border: color-mix(in srgb, #fff 12%, transparent);
+    --wi-terminal-bg: var(--wi-color-contrast);
+    --wi-terminal-fg: var(--wi-color-contrast-fg);
+    --wi-terminal-prompt: var(--wi-color-success);
+    --wi-terminal-border: color-mix(in srgb, var(--wi-color-on-emphasis) 12%, transparent);
     --wi-terminal-min-height: 12rem;
     background: var(--wi-terminal-bg);
     border: 1px solid var(--wi-color-border);
@@ -41,10 +41,10 @@
 }
 
 [data-theme="dark"] .wi-terminal {
-    --wi-terminal-bg: #020617;
-    --wi-terminal-fg: #e2e8f0;
-    --wi-terminal-prompt: #5eead4;
-    --wi-terminal-border: color-mix(in srgb, #fff 14%, transparent);
+    --wi-terminal-bg: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
+    --wi-terminal-fg: var(--wi-color-text);
+    --wi-terminal-prompt: var(--wi-color-success);
+    --wi-terminal-border: color-mix(in srgb, var(--wi-color-on-emphasis) 14%, transparent);
 }
 
 .wi-terminal__input {
