@@ -1,5 +1,11 @@
 # @well-insight/ui
 
+## 0.1.12
+
+### 变更
+
+- import Icon styles across multiple components
+
 ## 0.1.11
 
 ### 破坏性变更
