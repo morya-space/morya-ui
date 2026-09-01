@@ -1,5 +1,12 @@
 # @well-insight/ui
 
+## 0.1.13
+
+### Features
+
+- implement dynamic icon sizing across components
+- enhance resource management and documentation in MCP
+
 ## 0.1.12
 
 ### Changes
