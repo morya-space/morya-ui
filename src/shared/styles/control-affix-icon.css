@@ -1,0 +1,112 @@
+/* Normalize inline icons inside compact control affordances (clear, toggle, chevrons). */
+.wi-input__clear,
+.wi-password__clear,
+.wi-password__toggle,
+.wi-textarea__clear,
+.wi-select__clear,
+.wi-select__indicator,
+.wi-autocomplete__clear,
+.wi-autocomplete__dropdown,
+.wi-datepicker__clear,
+.wi-datepicker__nav,
+.wi-inputnumber__clear,
+.wi-inputnumber__button,
+.wi-inputtags__remove,
+.wi-treeselect__clear,
+.wi-treeselect__indicator,
+.wi-cascadeselect__clear,
+.wi-cascadeselect__indicator {
+    --wi-affix-icon-size: 1rem;
+}
+
+.wi-input-field__control:has(.wi-input--small) .wi-input__clear,
+.wi-password--small .wi-password__clear,
+.wi-password--small .wi-password__toggle,
+.wi-textarea-field__control:has(.wi-textarea--small) .wi-textarea__clear,
+.wi-select__control:has(.wi-select--small) .wi-select__clear,
+.wi-select__control:has(.wi-select--small) .wi-select__indicator,
+.wi-autocomplete--small .wi-autocomplete__clear,
+.wi-autocomplete--small .wi-autocomplete__dropdown,
+.wi-datepicker--small .wi-datepicker__clear,
+.wi-datepicker--small .wi-datepicker__nav,
+.wi-inputnumber--small .wi-inputnumber__clear,
+.wi-inputnumber--small .wi-inputnumber__button,
+.wi-select__control:has(.wi-treeselect--small) .wi-treeselect__clear,
+.wi-select__control:has(.wi-treeselect--small) .wi-treeselect__indicator,
+.wi-select__control:has(.wi-cascadeselect--small) .wi-cascadeselect__clear,
+.wi-select__control:has(.wi-cascadeselect--small) .wi-cascadeselect__indicator {
+    --wi-affix-icon-size: 0.875rem;
+}
+
+.wi-input-field__control:has(.wi-input--large) .wi-input__clear,
+.wi-password--large .wi-password__clear,
+.wi-password--large .wi-password__toggle,
+.wi-textarea-field__control:has(.wi-textarea--large) .wi-textarea__clear,
+.wi-select__control:has(.wi-select--large) .wi-select__clear,
+.wi-select__control:has(.wi-select--large) .wi-select__indicator,
+.wi-autocomplete--large .wi-autocomplete__clear,
+.wi-autocomplete--large .wi-autocomplete__dropdown,
+.wi-datepicker--large .wi-datepicker__clear,
+.wi-datepicker--large .wi-datepicker__nav,
+.wi-inputnumber--large .wi-inputnumber__clear,
+.wi-inputnumber--large .wi-inputnumber__button,
+.wi-select__control:has(.wi-treeselect--large) .wi-treeselect__clear,
+.wi-select__control:has(.wi-treeselect--large) .wi-treeselect__indicator,
+.wi-select__control:has(.wi-cascadeselect--large) .wi-cascadeselect__clear,
+.wi-select__control:has(.wi-cascadeselect--large) .wi-cascadeselect__indicator {
+    --wi-affix-icon-size: 1.125rem;
+}
+
+.wi-control-affix-icon,
+.wi-input__clear,
+.wi-password__clear,
+.wi-password__toggle,
+.wi-textarea__clear,
+.wi-select__clear,
+.wi-select__indicator,
+.wi-autocomplete__clear,
+.wi-autocomplete__dropdown,
+.wi-datepicker__clear,
+.wi-datepicker__nav,
+.wi-inputnumber__clear,
+.wi-inputnumber__button,
+.wi-inputtags__remove,
+.wi-treeselect__clear,
+.wi-treeselect__indicator,
+.wi-cascadeselect__clear,
+.wi-cascadeselect__indicator {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 0;
+}
+
+.wi-control-affix-icon {
+    flex-shrink: 0;
+    height: var(--wi-affix-icon-size, 1rem);
+    width: var(--wi-affix-icon-size, 1rem);
+}
+
+.wi-input__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-password__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-password__toggle :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-textarea__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-select__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-select__indicator :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-autocomplete__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-autocomplete__dropdown :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-datepicker__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-datepicker__nav :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-inputnumber__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-inputnumber__button :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-inputtags__remove :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-treeselect__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-treeselect__indicator :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-cascadeselect__clear :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-cascadeselect__indicator :is(.wi-icon, .wi-control-affix-icon__graphic, svg),
+.wi-control-affix-icon :is(.wi-icon, .wi-control-affix-icon__graphic, svg) {
+    display: block;
+    flex-shrink: 0;
+    height: var(--wi-affix-icon-size, 1rem);
+    width: var(--wi-affix-icon-size, 1rem);
+}

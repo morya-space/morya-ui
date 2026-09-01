@@ -2,6 +2,7 @@
 @import "./base.css";
 @import "../shared/styles/form-tags.css";
 @import "../shared/styles/control-suffix.css";
+@import "../shared/styles/control-affix-icon.css";
 
 @import "../components/Button/styles.css";
 @import "../components/Input/styles.css";

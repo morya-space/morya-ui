@@ -10,6 +10,7 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import { resolveIconSizeFromClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -38,6 +39,7 @@ const unmasked = ref(false)
 const inputElement = ref<HTMLInputElement | null>(null)
 const inputId = computed(() => props.id ?? `wi-password-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = useConfiguredSize('InputPassword', () => props.size)
+const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const resolvedVariant = useConfiguredVariant('InputPassword', () => props.variant)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
 const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
@@ -193,7 +195,7 @@ onBeforeUnmount(clearPeekListeners)
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <WiIcon name="close" size="sm" />
+        <WiIcon name="close" :size="iconSize" />
       </button>
       <button
         v-if="toggleMask"
@@ -207,12 +209,12 @@ onBeforeUnmount(clearPeekListeners)
         @keydown="onToggleKeydown"
       >
         <slot v-if="unmasked" name="hideIcon" :unmasked="unmasked">
-          <WiIcon v-if="hideIconName" :name="hideIconName" size="sm" />
-          <component :is="hideIconComponent" v-else-if="hideIconComponent" />
+          <WiIcon v-if="hideIconName" :name="hideIconName" :size="iconSize" />
+          <component :is="hideIconComponent" v-else-if="hideIconComponent" class="wi-control-affix-icon__graphic" />
         </slot>
         <slot v-else name="showIcon" :unmasked="unmasked">
-          <WiIcon v-if="showIconName" :name="showIconName" size="sm" />
-          <component :is="showIconComponent" v-else-if="showIconComponent" />
+          <WiIcon v-if="showIconName" :name="showIconName" :size="iconSize" />
+          <component :is="showIconComponent" v-else-if="showIconComponent" class="wi-control-affix-icon__graphic" />
         </slot>
       </button>
     </div>

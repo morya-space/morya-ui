@@ -3,6 +3,7 @@
     --wi-button-padding-x-medium: calc(
         var(--wi-control-padding-x-medium) + var(--wi-space-1)
     );
+    --wi-splitbutton-icon-size: 1rem;
     display: inline-flex;
     position: relative;
     vertical-align: middle;
@@ -70,14 +71,38 @@
 
 .wi-splitbutton--small .wi-splitbutton__main,
 .wi-splitbutton--small .wi-splitbutton__trigger {
+    --wi-splitbutton-icon-size: 0.875rem;
     min-height: var(--wi-control-height-small);
     font-size: var(--wi-control-font-small);
 }
 
 .wi-splitbutton--large .wi-splitbutton__main,
 .wi-splitbutton--large .wi-splitbutton__trigger {
+    --wi-splitbutton-icon-size: 1.125rem;
     min-height: var(--wi-control-height-large);
     font-size: var(--wi-control-font-large);
+}
+
+.wi-splitbutton__icon {
+    align-items: center;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: var(--wi-splitbutton-icon-size);
+    justify-content: center;
+    line-height: 0;
+    width: var(--wi-splitbutton-icon-size);
+}
+
+.wi-splitbutton__icon :is(.wi-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.wi-splitbutton__trigger :is(.wi-icon, svg) {
+    display: block;
+    height: var(--wi-splitbutton-icon-size);
+    width: var(--wi-splitbutton-icon-size);
 }
 
 .wi-splitbutton--disabled {

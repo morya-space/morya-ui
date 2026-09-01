@@ -4,6 +4,7 @@ import type { IconName } from '../Icon/types'
 import type { ButtonProps } from './types'
 import { Comment, computed, Fragment, ref, Text, useSlots   } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { resolveIconSizeFromClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -41,11 +42,7 @@ const isFluid = computed(() => props.fluid)
 
 const resolvedSize = useConfiguredSize('Button', () => props.size)
 
-const iconSize = computed(() => {
-  if (resolvedSize.value === 'small') return 'sm'
-  if (resolvedSize.value === 'large') return 'lg'
-  return 'md'
-})
+const iconSize = computed(() => resolveIconSizeFromClass(resolvedSize.value))
 
 const isIconOnly = computed(() => props.iconOnly || ((!hasLabel.value) && Boolean(props.icon || slots.icon || props.loading)))
 

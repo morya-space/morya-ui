@@ -1,5 +1,6 @@
 .wi-chip {
     --wi-chip-avatar-size: 1.25rem;
+    --wi-chip-icon-size: 1rem;
     --wi-chip-small-padding-y: 0.15rem;
     --wi-chip-remove-size: var(--wi-chip-avatar-size);
     align-items: center;
@@ -34,6 +35,14 @@
 
 .wi-chip__icon {
     flex-shrink: 0;
+    height: var(--wi-chip-icon-size);
+    width: var(--wi-chip-icon-size);
+}
+
+.wi-chip__icon :is(.wi-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .wi-chip__label {
@@ -75,11 +84,13 @@
 }
 
 .wi-chip--small {
+    --wi-chip-icon-size: 0.875rem;
     font-size: var(--wi-font-size-xs);
     padding: var(--wi-chip-small-padding-y) var(--wi-space-2);
 }
 
 .wi-chip--large {
+    --wi-chip-icon-size: 1.25rem;
     font-size: var(--wi-font-size-md);
     padding: var(--wi-space-2) var(--wi-space-4);
 }

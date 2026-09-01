@@ -5,6 +5,8 @@ import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { resolveIconSizeFromClass } from '../../shared/types'
+import { isIconName } from '../Icon/icons'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
@@ -26,6 +28,9 @@ const root = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
 const menuStyle = ref<Record<string, string>>({})
 const sizeClass = useConfiguredSize('SplitButton', () => props.size)
+const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
+const iconName = computed(() => (props.icon && isIconName(props.icon) ? props.icon : undefined))
+const iconGlyph = computed(() => (props.icon && !iconName.value ? props.icon : undefined))
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
@@ -106,7 +111,10 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       @click="onMainClick"
     >
-      <span v-if="icon" class="wi-splitbutton__icon" aria-hidden="true">{{ icon }}</span>
+      <span v-if="iconName || iconGlyph" class="wi-splitbutton__icon" aria-hidden="true">
+        <WiIcon v-if="iconName" :name="iconName" :size="iconSize" />
+        <template v-else>{{ iconGlyph }}</template>
+      </span>
       <span v-if="label">{{ label }}</span>
     </button>
     <button
@@ -118,7 +126,7 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       @click="toggleMenu"
     >
-      <WiIcon name="chevron-down" size="sm" />
+      <WiIcon name="chevron-down" :size="iconSize" />
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
