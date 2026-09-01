@@ -14,7 +14,7 @@ description: 在内容上叠加遮罩以阻止交互。
 import { WiBlockUI } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

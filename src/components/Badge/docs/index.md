@@ -14,7 +14,7 @@ description: 状态角标或圆点。
 import { WiBadge } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 传入 `value` 展示文案或数字；省略 `value` 时渲染为圆点。
 

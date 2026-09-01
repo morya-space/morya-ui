@@ -14,7 +14,7 @@ description: 可访问的表单标签。
 import { WiLabel } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

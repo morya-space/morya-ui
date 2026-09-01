@@ -14,7 +14,7 @@ description: 芯片用于展示标签化信息，可带图标、图片与移除�
 import { WiChip } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 双栏分割布局，支持水平 / 垂直与拖拽调整比例。
 import { WiSplitter } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

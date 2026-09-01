@@ -14,7 +14,7 @@ description: 轮播展示一组内容项。
 import { WiCarousel } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

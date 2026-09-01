@@ -14,7 +14,7 @@ description: 带图例的字段分组，可折叠。
 import { WiFieldset } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

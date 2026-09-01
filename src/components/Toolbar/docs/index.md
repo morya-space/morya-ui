@@ -14,7 +14,7 @@ description: 工具栏布局，分 start / center / end 区域。
 import { WiButton, WiToolbar } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

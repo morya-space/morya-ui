@@ -14,7 +14,7 @@ description: 进度条用于展示确定或不确定进度。
 import { WiProgressBar } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

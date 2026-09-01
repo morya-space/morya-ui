@@ -14,7 +14,7 @@ description: 滚动超过阈值后显示回到顶部按钮。
 import { WiScrollTop } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

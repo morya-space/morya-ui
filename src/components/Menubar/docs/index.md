@@ -14,7 +14,7 @@ description: 水平菜单栏，支持一级下拉。
 import { WiMenubar } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

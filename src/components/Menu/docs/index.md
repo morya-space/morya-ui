@@ -14,7 +14,7 @@ description: 垂直菜单列表，支持 popup 模式。
 import { WiMenu } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 星级评分控件，支持清除与只读。
 import { WiRating } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

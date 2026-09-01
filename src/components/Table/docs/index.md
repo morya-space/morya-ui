@@ -20,7 +20,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 import { WiTable, WiTag } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

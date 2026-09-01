@@ -14,7 +14,7 @@ description: 在子元素之间自动加入一致间距的布局容器。
 import { WiSpace } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 密码输入框，支持显示/隐藏与强度提示。
 import { WiInputPassword } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

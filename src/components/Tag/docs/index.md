@@ -14,7 +14,7 @@ description: 标签用于展示状态或分类。
 import { WiTag } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 通过 `value` 或默认插槽展示文案。
 

@@ -14,7 +14,7 @@ description: 展示当前页面在层级中的位置。
 import { WiBreadcrumb } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

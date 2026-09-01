@@ -14,7 +14,7 @@ description: 标签页切换。支持 line/card、关闭/新增、extra 与溢�
 import { WiTabs } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 主操作按钮附带下拉菜单项。
 import { WiSplitButton } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

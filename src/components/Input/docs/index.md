@@ -14,7 +14,7 @@ description: 文本输入框。
 import { WiInput } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

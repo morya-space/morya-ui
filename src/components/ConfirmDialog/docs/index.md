@@ -14,7 +14,7 @@ description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 import { WiButton, WiConfirmDialog } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

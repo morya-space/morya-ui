@@ -14,7 +14,7 @@ description: 点击展示区切换为可编辑内容。
 import { WiInplace } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

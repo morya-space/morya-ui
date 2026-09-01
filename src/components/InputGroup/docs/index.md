@@ -14,7 +14,7 @@ description: 将输入框与前后缀附加内容组合为同一控件组。
 import { WiInput, WiInputGroup, WiInputGroupAddon } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 头像用于展示用户或实体标识。支持图片、图标与�
 import { WiAvatar } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

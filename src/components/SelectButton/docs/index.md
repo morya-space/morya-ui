@@ -14,7 +14,7 @@ description: 按钮组形式的单选或多选控件。
 import { WiSelectButton } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 让子元素宽度撑满的布局包裹。
 import { WiFluid } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

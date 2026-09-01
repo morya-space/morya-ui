@@ -14,7 +14,7 @@ description: 数字输入框，支持步进按钮、上下限与尺寸。
 import { WiInputNumber } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

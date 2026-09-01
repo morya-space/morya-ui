@@ -14,7 +14,7 @@ description: SVG 圆形旋钮，用于选择数值。
 import { WiKnob } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

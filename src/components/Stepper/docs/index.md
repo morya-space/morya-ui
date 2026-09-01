@@ -14,7 +14,7 @@ description: 步骤指示器，支持线性前进约束。
 import { WiStepper } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -14,7 +14,7 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 import { iconNames, WiIcon } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

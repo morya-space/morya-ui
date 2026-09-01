@@ -14,7 +14,7 @@ description: 开关。
 import { WiSwitch } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

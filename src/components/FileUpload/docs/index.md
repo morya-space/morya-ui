@@ -27,7 +27,7 @@ description: 选择、拖拽、列表、预览与上传。
 import { WiFileUpload } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

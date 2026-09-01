@@ -14,7 +14,7 @@ description: 在开/关两种标签状态间切换的按钮。
 import { WiToggleButton } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

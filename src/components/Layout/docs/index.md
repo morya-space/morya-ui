@@ -20,7 +20,7 @@ import {
 } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 Header / Content / Footer。Content 会占满中间剩余高度。
 

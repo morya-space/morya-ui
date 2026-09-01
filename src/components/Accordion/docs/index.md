@@ -14,7 +14,7 @@ description: 可折叠面板组。支持单开 / 多开，tabs 配置 header 与
 import { WiAccordion } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

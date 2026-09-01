@@ -14,7 +14,7 @@ description: 下拉树选择。支持单选/多选、勾选级联、过滤、清
 import { WiTreeSelect } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

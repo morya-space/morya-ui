@@ -14,7 +14,7 @@ description: 日历弹层选择日期。单日或日期范围，值优先为 ISO
 import { WiDatePicker } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

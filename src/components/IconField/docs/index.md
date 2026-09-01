@@ -14,7 +14,7 @@ description: 为输入框添加左/右侧图标的容器。
 import { WiIcon, WiIconField, WiInput } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -16,7 +16,7 @@ description: 树形结构。支持勾选半选、过滤、受控展开、懒加�
 import { WiTree } from '@well-insight/ui'
 ```
 
-## Basic
+## 基础用法
 
 ```vue preview
 <script setup lang="ts">

@@ -61,7 +61,7 @@
 - [x] CSS 修饰类 `--error` 与 `invalid` prop 命名对齐（逐步）
 - [x] 补薄文档：CommandMenu、TieredMenu、MegaMenu、VirtualScroller
 - [ ] 补 Events / Slots 缺失章节（按使用频率排序）
-- [ ] 中文文档小节标题统一（如 `## 基础用法` 替代 `## Basic`）
+- [x] 中文文档小节标题统一（如 `## 基础用法` 替代 `## Basic`）
 - [x] 新增无障碍指南页（playground `/docs/accessibility`）
 ---
 
@@ -85,6 +85,7 @@
 | 2026-09-01 | 四 | 新增指南页 `/docs/migration`（deprecated props 对照） |
 | 2026-09-01 | 四 | 扩充 CommandMenu / TieredMenu / MegaMenu / VirtualScroller 文档 |
 | 2026-09-01 | 四 | 新增指南页 `/docs/accessibility` |
+| 2026-09-01 | 四 | Select 增加 `wi-select--invalid` 修饰类（保留 `--error` 别名） |
 
 ---
 
