@@ -111,7 +111,7 @@ ${isList ? `    <WiCard>
         <WiInput v-model="keyword" label="${zh ? '关键词' : 'Keyword'}" fluid />
         <WiButton label="${zh ? '查询' : 'Search'}" severity="secondary" outlined @click="page = 1" />
       </div>
-      <WiTable :headers="headers" :items="items" :loading="loading" hide-footer alternating />
+      <WiTable :columns="columns" :rows="rows" :loading="loading" :paginator="false" striped />
       <WiPagination v-model="page" :total="0" />
       <p v-if="!loading && !rows.length" class="wi-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
     </WiCard>` : isDashboard ? `    <section class="wi-generated-grid">

@@ -1,5 +1,5 @@
 /**
- * WiTable — Well Insight tokens + Element Plus el-table interaction patterns.
+ * WiTable — Well Insight design tokens and table interaction patterns.
  */
 
 .wi-table {
@@ -410,6 +410,13 @@
     margin: 0;
     color: var(--wi-color-text-muted);
     font-size: var(--wi-font-size-sm);
+    line-height: 1.5;
+}
+
+.wi-table__empty-description {
+    margin: var(--wi-space-1) 0 0;
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
     line-height: 1.5;
 }
 

@@ -8,21 +8,21 @@ export function useClickRow(
   showIndex: Ref<boolean>,
   emits: (event: EmitsEventName, ...args: unknown[]) => void,
 ) {
-  const clickRow = (item: TableItem, clickType: TableClickEventType, event: Event) => {
+  const clickRow = (
+    item: TableItem,
+    index: number,
+    clickType: TableClickEventType,
+    event: Event,
+  ) => {
     if (clickEventType.value !== clickType) return
-    const clickRowArgument = { ...item } as TableItem & {
-      isSelected?: boolean
-      indexInCurrentPage?: number
-    }
+    const row = { ...item } as TableItem
     if (isMultipleSelectable.value) {
-      clickRowArgument.isSelected = item.checkbox as boolean | undefined
-      delete clickRowArgument.checkbox
+      delete row.checkbox
     }
     if (showIndex.value) {
-      clickRowArgument.indexInCurrentPage = item.index as number | undefined
-      delete clickRowArgument.index
+      delete row.index
     }
-    emits('clickRow', clickRowArgument, event)
+    emits('row-click', { row, index }, event)
   }
 
   return { clickRow }
