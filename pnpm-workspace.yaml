@@ -7,3 +7,4 @@ trustPolicy: no-downgrade
 packages:
   - .
   - 'packages/*'
+  - 'apps/*'

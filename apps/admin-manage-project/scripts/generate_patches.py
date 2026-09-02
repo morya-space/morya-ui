@@ -1,0 +1,42 @@
+﻿# -*- coding: utf-8 -*-
+import json
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT = SCRIPT_DIR.parent / "src"
+
+# Ordered replacements: longer / more specific first per file
+PATCHES = {
+    "views/academic/StudentsView.vue": [
+        ("title=\"????\"", "title=\"学生管理\""),
+        ("{ label: '????' }, { label: '????' }]", "{ label: '教务业务' }, { label: '学生管理' }]"),
+        ("{ key: 'name', label: '??' }", "{ key: 'name', label: '姓名' }"),
+        ("{ key: 'studentNo', label: '??' }", "{ key: 'studentNo', label: '学号' }"),
+        ("{ key: 'grade', label: '??' }", "{ key: 'grade', label: '年级' }"),
+        ("{ key: 'className', label: '??' }", "{ key: 'className', label: '班级' }"),
+        ("{ key: 'status', label: '??' }", "{ key: 'status', label: '状态' }"),
+        ("{ key: 'enrolledAt', label: '????' }", "{ key: 'enrolledAt', label: '入学日期' }"),
+        ("{ key: 'actions', label: '??', width: 140 }", "{ key: 'actions', label: '操作', width: 140 }"),
+        ("placeholder=\"?? / ??\"", "placeholder=\"姓名 / 学号\""),
+        ("{ label: '??', value: '??' }, { label: '??', value: '??' }, { label: '??', value: '??' }]", "{ label: '高一', value: '高一' }, { label: '高二', value: '高二' }, { label: '高三', value: '高三' }]"),
+        ("placeholder=\"??\"", "placeholder=\"年级\""),
+        ("{ label: '??', value: 'active' }, { label: '??', value: 'leave' }, { label: '??', value: 'graduated' }]", "{ label: '在读', value: 'active' }, { label: '休学', value: 'leave' }, { label: '毕业', value: 'graduated' }]"),
+        (">??</WiButton>\n        <WiButton severity=\"secondary\">??</WiButton>", ">查询</WiButton>\n        <WiButton severity=\"secondary\">重置</WiButton>"),
+        ("students-page__columns-label\">????</span>", "students-page__columns-label\">显示列</span>"),
+        ("summary: '??? CSV ????' })", "summary: '演示：CSV 导出已触发' })"),
+        (">??\n      </WiButton>", ">导出\n      </WiButton>"),
+        (":value=\"value === 'active' ? '??' : value === 'leave' ? '??' : '??'\"", ":value=\"value === 'active' ? '在读' : value === 'leave' ? '休学' : '毕业'\""),
+        (">??</WiButton>\n        <WiButton size=\"small\" severity=\"danger\">??</WiButton>", ">编辑</WiButton>\n        <WiButton size=\"small\" severity=\"danger\">删除</WiButton>"),
+        ("label: '??', to: '/dashboard'", "label: '首页', to: '/dashboard'"),
+    ],
+}
+
+def main():
+    out = {}
+    for rel, pairs in PATCHES.items():
+        out[rel] = pairs
+    (SCRIPT_DIR / "patches.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("wrote patches.json", len(PATCHES), "files")
+
+if __name__ == "__main__":
+    main()

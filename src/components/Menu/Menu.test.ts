@@ -15,7 +15,7 @@ describe('wiMenu', () => {
         ],
       },
     })
-    const items = wrapper.findAll('.wi-menu__item')
+    const items = wrapper.findAll('.wi-menu__item-content')
     await items[0]!.trigger('click')
     expect(command).toHaveBeenCalledOnce()
     await items[1]!.trigger('click')
@@ -47,20 +47,109 @@ describe('wiMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.wi-menu--teleported')).toBeTruthy()
+    const menu = document.body.querySelector('.wi-menu--teleported') as HTMLElement | null
+    expect(menu).toBeTruthy()
+    expect(menu?.style.top).not.toBe('')
     wrapper.unmount()
   })
 
-  it('nests items and marks selectedKey', async () => {
+  it('positions popup menu relative to the default-slot trigger', async () => {
     const wrapper = mount(WiMenu, {
       props: {
-        model: [{ label: 'File', items: [{ key: 'save', label: 'Save' }] }],
+        popup: true,
+        modelValue: true,
+        model: [{ label: 'Copy' }],
+      },
+      slots: {
+        default: '<button class="menu-trigger" type="button">Open</button>',
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    expect(wrapper.find('.wi-menu-popup__anchor').exists()).toBe(true)
+    const menu = document.body.querySelector('.wi-menu--teleported') as HTMLElement | null
+    expect(menu).toBeTruthy()
+    expect(menu?.style.top).not.toBe('')
+    expect(menu?.style.left).not.toBe('')
+    wrapper.unmount()
+  })
+
+  it('nests items, expands submenu, and marks selectedKey', async () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        model: [{ key: 'file', label: 'File', items: [{ key: 'save', label: 'Save' }] }],
         selectedKey: 'save',
+        defaultExpandedKeys: ['file'],
       },
     })
-    await wrapper.get('.wi-menu__item--parent').trigger('click')
-    expect(wrapper.get('.wi-menu__item--selected').text()).toContain('Save')
-    await wrapper.get('.wi-menu__item--selected').trigger('click')
+    expect(wrapper.find('.wi-menu__submenu').exists()).toBe(true)
+    expect(wrapper.get('.wi-menu__item-content--selected').text()).toContain('Save')
+    await wrapper.get('.wi-menu__item-content--selected').trigger('click')
     expect(wrapper.emitted('update:selectedKey')?.at(-1)).toEqual(['save'])
+  })
+
+  it('auto-expands path when selectedKey changes', async () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        model: [{ key: 'file', label: 'File', items: [{ key: 'save', label: 'Save' }] }],
+        selectedKey: null,
+      },
+    })
+    expect(wrapper.find('.wi-menu__submenu').exists()).toBe(false)
+    await wrapper.setProps({ selectedKey: 'save' })
+    expect(wrapper.find('.wi-menu__submenu').exists()).toBe(true)
+  })
+
+  it('uses accordion to keep one top-level group open', async () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        accordion: true,
+        model: [
+          { key: 'a', label: 'A', items: [{ key: 'a1', label: 'A1' }] },
+          { key: 'b', label: 'B', items: [{ key: 'b1', label: 'B1' }] },
+        ],
+      },
+    })
+    const parents = wrapper.findAll('.wi-menu__item--submenu > .wi-menu__item-content')
+    await parents[0]!.trigger('click')
+    expect(wrapper.findAll('.wi-menu__submenu')).toHaveLength(1)
+    await parents[1]!.trigger('click')
+    expect(wrapper.findAll('.wi-menu__submenu')).toHaveLength(1)
+    expect(wrapper.text()).toContain('B1')
+  })
+
+  it('marks parent as child-active when nested item selected', async () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        model: [{ key: 'file', label: 'File', items: [{ key: 'save', label: 'Save' }] }],
+        selectedKey: 'save',
+        defaultExpandedKeys: ['file'],
+      },
+    })
+    expect(wrapper.find('.wi-menu__item--submenu .wi-menu__item-content--child-active').exists()).toBe(true)
+  })
+
+  it('renders embedded class for sidebar menus', () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        model: [{ label: 'Home' }],
+      },
+    })
+    expect(wrapper.find('.wi-menu--embedded').exists()).toBe(true)
+  })
+
+  it('opens horizontal submenu in flyout instead of inline expand', async () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        mode: 'horizontal',
+        model: [{ key: 'products', label: 'Products', items: [{ key: 'cloud', label: 'Cloud' }] }],
+      },
+    })
+    expect(wrapper.find('.wi-menu--horizontal').exists()).toBe(true)
+    expect(wrapper.find('.wi-menu__submenu').exists()).toBe(false)
+    await wrapper.get('.wi-menu__item-content').trigger('click')
+    await nextTick()
+    expect(document.body.querySelector('.wi-menu--flyout')).toBeTruthy()
+    wrapper.unmount()
   })
 })

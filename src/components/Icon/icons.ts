@@ -257,6 +257,34 @@ export const iconRegistry = {
       { tag: 'path', d: 'M5.5 3.5h5.5V9' },
     ],
   },
+  mail: {
+    primitives: [
+      { tag: 'rect', x: 2.5, y: 4.5, width: 11, height: 7.5, rx: 1 },
+      { tag: 'path', d: 'M2.5 5.75 8 9.25l5.5-3.5' },
+    ],
+  },
+  shield: {
+    primitives: [{ tag: 'path', d: 'M8 2.25 13.25 4.5V8c0 2.85-2.1 4.85-5.25 5.75C4.85 12.85 2.75 10.85 2.75 8V4.5L8 2.25Z' }],
+  },
+  book: {
+    primitives: [
+      { tag: 'path', d: 'M4 3.5h7a1 1 0 0 1 1 1v9.5H5a1 1 0 0 0-1 1V3.5Z' },
+      { tag: 'path', d: 'M5 3.5h7v9.5' },
+    ],
+  },
+  'chart-bar': {
+    primitives: [
+      { tag: 'path', d: 'M4 12V7M8 12V4M12 12V9' },
+      { tag: 'path', d: 'M3 12.5h10' },
+    ],
+  },
+  database: {
+    primitives: [
+      { tag: 'path', d: 'M3.5 5.25c0-1.35 2.015-2.25 4.5-2.25s4.5.9 4.5 2.25-2.015 2.25-4.5 2.25-4.5-.9-4.5-2.25Z' },
+      { tag: 'path', d: 'M3.5 8.25v2.75c0 1.35 2.015 2.25 4.5 2.25s4.5-.9 4.5-2.25V8.25' },
+      { tag: 'path', d: 'M3.5 8.25c0 1.35 2.015 2.25 4.5 2.25s4.5-.9 4.5-2.25' },
+    ],
+  },
 } as const satisfies Record<string, IconDefinition>
 
 export type IconName = keyof typeof iconRegistry

@@ -1,0 +1,24 @@
+1|    <header class="login-page__header">
+2|      <h1>??? � 还没有账号？</h1>
+3|      <p>???? admin / admin123 � MFA 123456</p>
+4|    </header>
+5|
+6|    <WiMessage v-if="error" severity="error" :closable="false">{{ error }}</WiMessage>
+7|
+8|    <template v-if="showMfa">
+9|      <WiForm @submit.prevent="onVerifyMfa">
+10|        <WiFormItem label="MFA 验证码" name="otp" required>
+11|          <WiInputOtp v-model="otp" :length="6" />
+12|        </WiFormItem>
+13|        <WiButton native-type="submit" fluid :loading="loading">完成验证</WiButton>
+14|      </WiForm>
+15|    </template>
+16|
+17|    <template v-else>
+18|      <WiTabs v-model="tab" :tabs="[{ label: '账号密码', value: 'password' }, { label: '邮箱验证码', value: 'otp' }]}" />
+19|      <WiForm @submit.prevent="onLogin">
+20|        <WiFormItem label="账号" name="account" required>
+21|          <WiInput v-model="account" placeholder="admin / teacher" fluid />
+22|        </WiFormItem>
+23|        <WiFormItem v-if="tab === 'password'" label="账号" name="password" required>
+24|          <WiInput v-model="password" type="password" fluid />

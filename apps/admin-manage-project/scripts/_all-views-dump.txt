@@ -1,0 +1,1703 @@
+﻿\n=====FILE:views/academic/BatchOpsView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  WiButton,
+  WiCard,
+  WiFileUpload,
+  WiLayoutContent,
+  WiProgressBar,
+  WiSpace,
+  WiTag,
+  useToast,
+} from '@well-insight/ui'
+
+const toast = useToast()
+const importing = ref(false)
+const progress = ref(0)
+
+async function simulateImport() {
+  importing.value = true
+  progress.value = 0
+  for (let i = 1; i <= 5; i++) {
+    await new Promise((r) => setTimeout(r, 300))
+    progress.value = i * 20
+  }
+  importing.value = false
+  toast.add({ severity: 'success', summary: '??????', detail: '?? 128 ???? 2 ?', life: 3500 })
+}
+</script>
+
+<template>
+  <WiLayoutContent class="batch-ops">
+    <h1 class="batch-ops__title">??????</h1>
+
+    <div class="batch-ops__grid">
+      <WiCard title="??????">
+        <p class="batch-ops__desc">?? Excel / CSV ??????????????</p>
+        <WiFileUpload mode="basic" accept=".xlsx,.csv" />
+        <WiProgressBar v-if="importing || progress" :value="progress" />
+        <WiButton :loading="importing" @click="simulateImport">????</WiButton>
+      </WiCard>
+
+      <WiCard title="????">
+        <p class="batch-ops__desc">??????????????????</p>
+        <WiSpace wrap>
+          <WiButton severity="secondary">???? CSV</WiButton>
+          <WiButton severity="secondary">???? Excel</WiButton>
+          <WiButton severity="secondary">?? PDF ??</WiButton>
+        </WiSpace>
+      </WiCard>
+
+      <WiCard title="??????">
+        <p class="batch-ops__desc">??????????????????</p>
+        <WiSpace wrap>
+          <WiTag value="?? 0 ?" severity="info" />
+          <WiButton>????</WiButton>
+          <WiButton severity="danger">????</WiButton>
+        </WiSpace>
+      </WiCard>
+    </div>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.batch-ops {
+  padding: var(--wi-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-4);
+}
+
+.batch-ops__title {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.batch-ops__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--wi-space-4);
+}
+
+.batch-ops__desc {
+  margin: 0 0 var(--wi-space-4);
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+</style>
+
+\n=====FILE:views/academic/ClassesView.vue=====
+<script setup lang="ts">
+import { WiButton, WiSpace } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { classGroups } from '@/mock'
+
+const columns = [
+  { key: 'name', label: '??' },
+  { key: 'grade', label: '??', width: 88 },
+  { key: 'headTeacher', label: '???' },
+  { key: 'students', label: '??', width: 72 },
+  { key: 'room', label: '??', width: 88 },
+  { key: 'actions', label: '??', width: 120 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="classGroups"
+  >
+    <template #cell-actions>
+      <WiSpace>
+        <WiButton size="small" severity="secondary">???</WiButton>
+        <WiButton size="small" severity="secondary">??</WiButton>
+      </WiSpace>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/academic/CoursesView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiInput, WiSelect, WiSpace, WiTag } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { courses } from '@/mock'
+
+const keyword = ref('')
+const category = ref<string | undefined>()
+const rows = ref(courses)
+
+const columns = [
+  { key: 'name', label: '????' },
+  { key: 'category', label: '??' },
+  { key: 'credits', label: '??', width: 72 },
+  { key: 'teacher', label: '????' },
+  { key: 'enrolled', label: '??/??', width: 112 },
+  { key: 'status', label: '??', width: 88 },
+  { key: 'actions', label: '??', width: 120 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="rows"
+  >
+    <template #filters>
+      <WiSpace wrap>
+        <WiInput v-model="keyword" placeholder="????" clearable style="width: 12rem" />
+        <WiSelect
+          v-model="category"
+          :options="[{ label: '??', value: '??' }, { label: '??', value: '??' }, { label: '??', value: '??' }]"
+          placeholder="??"
+          clearable
+          style="width: 8rem"
+        />
+        <WiButton>??</WiButton>
+      </WiSpace>
+    </template>
+
+    <template #cell-enrolled="{ row }">
+      {{ row.enrolled }} / {{ row.capacity }}
+    </template>
+
+    <template #cell-status="{ value }">
+      <WiTag
+        :value="value === 'open' ? '??' : value === 'full' ? '??' : '??'"
+        :severity="value === 'open' ? 'success' : value === 'full' ? 'warn' : 'secondary'"
+      />
+    </template>
+
+    <template #cell-actions>
+      <WiButton size="small" severity="secondary">??</WiButton>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/academic/EnrollmentFormView.vue=====
+<script setup lang="ts">
+import { computed, reactive, ref } from 'vue'
+import {
+  WiButton,
+  WiCard,
+  WiDatePicker,
+  WiFileUpload,
+  WiForm,
+  WiFormItem,
+  WiInput,
+  WiLayoutContent,
+  WiSelect,
+  WiSpace,
+  WiSwitch,
+  WiTextarea,
+  useToast,
+} from '@well-insight/ui'
+import { courses } from '@/mock'
+
+const toast = useToast()
+const submitting = ref(false)
+const draftSaved = ref(false)
+
+const model = reactive({
+  studentName: '',
+  studentNo: '',
+  courseId: undefined as string | undefined,
+  needMaterial: false,
+  materialNote: '',
+  reason: '',
+  applyDate: null as string | null,
+})
+
+const courseOptions = courses.map((item) => ({ label: `${item.name}?${item.teacher}?`, value: item.id }))
+
+const selectedCourse = computed(() => courses.find((item) => item.id === model.courseId))
+
+function onCourseChange() {
+  model.needMaterial = selectedCourse.value?.category === '??'
+}
+
+function saveDraft() {
+  localStorage.setItem('edu-enrollment-draft', JSON.stringify(model))
+  draftSaved.value = true
+  toast.add({ severity: 'info', summary: '?????', life: 2500 })
+}
+
+async function onSubmit() {
+  submitting.value = true
+  await new Promise((r) => setTimeout(r, 500))
+  submitting.value = false
+  localStorage.removeItem('edu-enrollment-draft')
+  toast.add({ severity: 'success', summary: '???????', detail: '???????', life: 3000 })
+}
+</script>
+
+<template>
+  <WiLayoutContent class="enrollment-form">
+    <header class="enrollment-form__intro">
+      <h1>??????</h1>
+      <p>?????????????????????????????</p>
+    </header>
+
+    <WiCard class="enrollment-form__card">
+      <WiForm @submit.prevent="onSubmit">
+        <WiFormItem label="????" name="studentName" required>
+          <WiInput v-model="model.studentName" fluid />
+        </WiFormItem>
+        <WiFormItem label="??" name="studentNo" required>
+          <WiInput v-model="model.studentNo" fluid />
+        </WiFormItem>
+        <WiFormItem label="????" name="courseId" required>
+          <WiSelect
+            v-model="model.courseId"
+            :options="courseOptions"
+            placeholder="?????"
+            fluid
+            @update:model-value="onCourseChange"
+          />
+        </WiFormItem>
+
+        <WiFormItem v-if="model.needMaterial" label="???????" name="material">
+          <WiFileUpload mode="basic" accept=".pdf,.jpg,.png" />
+          <WiTextarea v-model="model.materialNote" :rows="2" placeholder="????????" fluid />
+        </WiFormItem>
+
+        <WiFormItem label="????" name="applyDate">
+          <WiDatePicker v-model="model.applyDate" fluid />
+        </WiFormItem>
+
+        <WiFormItem label="????" name="reason">
+          <WiTextarea v-model="model.reason" :rows="4" fluid />
+        </WiFormItem>
+
+        <WiFormItem label="???????" name="notify">
+          <WiSwitch :model-value="true" />
+        </WiFormItem>
+
+        <footer class="enrollment-form__actions">
+          <WiSpace>
+            <WiButton native-type="submit" :loading="submitting">????</WiButton>
+            <WiButton severity="secondary" @click="saveDraft">????</WiButton>
+            <WiButton severity="secondary">??</WiButton>
+          </WiSpace>
+          <p v-if="draftSaved" class="enrollment-form__draft-hint">???????? localStorage</p>
+        </footer>
+      </WiForm>
+    </WiCard>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.enrollment-form {
+  padding: var(--wi-space-6);
+  max-width: 42rem;
+}
+
+.enrollment-form__intro h1 {
+  margin: 0 0 var(--wi-space-2);
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.enrollment-form__intro p {
+  margin: 0 0 var(--wi-space-4);
+  color: var(--wi-color-text-muted);
+}
+
+.enrollment-form__card {
+  padding: var(--wi-space-2);
+}
+
+.enrollment-form__actions {
+  margin-top: var(--wi-space-4);
+  padding-top: var(--wi-space-4);
+  border-top: 1px solid var(--wi-color-border);
+}
+
+.enrollment-form__draft-hint {
+  margin: var(--wi-space-2) 0 0;
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+</style>
+
+\n=====FILE:views/academic/TeachersView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiInput, WiSpace, WiTag } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { teachers } from '@/mock'
+
+const keyword = ref('')
+const rows = ref(teachers)
+
+const columns = [
+  { key: 'name', label: '??' },
+  { key: 'title', label: '??' },
+  { key: 'department', label: '???' },
+  { key: 'courses', label: '???', width: 88 },
+  { key: 'status', label: '??', width: 88 },
+  { key: 'actions', label: '??', width: 120 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="rows"
+  >
+    <template #filters>
+      <WiSpace wrap>
+        <WiInput v-model="keyword" placeholder="????" clearable style="width: 12rem" />
+        <WiButton>??</WiButton>
+      </WiSpace>
+    </template>
+
+    <template #cell-status="{ value }">
+      <WiTag :value="value === 'active' ? '??' : '??'" :severity="value === 'active' ? 'success' : 'secondary'" />
+    </template>
+
+    <template #cell-actions>
+      <WiButton size="small" severity="secondary">??</WiButton>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/academic/WorkflowView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  WiButton,
+  WiCard,
+  WiLayoutContent,
+  WiProgressBar,
+  WiStepper,
+  WiTable,
+  WiTag,
+  WiTimeline,
+} from '@well-insight/ui'
+import { workflowTasks } from '@/mock'
+
+const activeStep = ref(1)
+
+const steps = [
+  { label: '????', description: '?? / ????' },
+  { label: '?????', description: '??' },
+  { label: '????', description: '??' },
+  { label: '??', description: '??' },
+]
+
+const columns = [
+  { key: 'title', label: '??' },
+  { key: 'applicant', label: '???', width: 96 },
+  { key: 'step', label: '????', width: 112 },
+  { key: 'status', label: '??', width: 96 },
+  { key: 'updatedAt', label: '????', width: 140 },
+]
+
+const timeline = [
+  { content: '??????', date: '2026-09-02 09:00', severity: 'info' as const },
+  { content: '??????', date: '2026-09-02 10:15', severity: 'success' as const },
+  { content: '??????', date: '???', severity: 'warn' as const },
+]
+</script>
+
+<template>
+  <WiLayoutContent class="workflow-page">
+    <h1 class="workflow-page__title">????</h1>
+
+    <WiCard title="???????">
+      <WiStepper v-model="activeStep" :steps="steps" />
+      <WiProgressBar :value="((activeStep + 1) / steps.length) * 100" />
+    </WiCard>
+
+    <div class="workflow-page__split">
+      <WiCard title="????">
+        <WiTable :columns="columns" :rows="workflowTasks as unknown as Record<string, unknown>[]" striped bordered :paginator="false">
+          <template #cell-status="{ value }">
+            <WiTag
+              :value="value === 'pending' ? '???' : value === 'approved' ? '???' : '???'"
+              :severity="value === 'pending' ? 'warn' : value === 'approved' ? 'success' : 'danger'"
+            />
+          </template>
+        </WiTable>
+      </WiCard>
+
+      <WiCard title="??????????????">
+        <WiTimeline :value="timeline" />
+        <WiButton style="margin-top: var(--wi-space-4)">??</WiButton>
+      </WiCard>
+    </div>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.workflow-page {
+  padding: var(--wi-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-4);
+}
+
+.workflow-page__title {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.workflow-page__split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--wi-space-4);
+}
+
+@media (max-width: 56rem) {
+  .workflow-page__split {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+\n=====FILE:views/security/UsersView.vue=====
+<script setup lang="ts">
+import { WiButton, WiSpace, WiTag } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+
+const rows = [
+  { id: 'u1', name: '???', email: 'admin@educloud.cn', role: '?????', status: 'active', lastLogin: '2026-09-02 08:30' },
+  { id: 'u2', name: '???', email: 'li@educloud.cn', role: '????', status: 'active', lastLogin: '2026-09-01 17:20' },
+  { id: 'u3', name: '???', email: 'wang@educloud.cn', role: '???', status: 'inactive', lastLogin: '2026-08-28 09:10' },
+]
+
+const columns = [
+  { key: 'name', label: '??' },
+  { key: 'email', label: '??' },
+  { key: 'role', label: '??' },
+  { key: 'status', label: '??', width: 88 },
+  { key: 'lastLogin', label: '????', width: 140 },
+  { key: 'actions', label: '??', width: 120 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '?????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="rows"
+  >
+    <template #cell-status="{ value }">
+      <WiTag :value="value === 'active' ? '??' : '??'" :severity="value === 'active' ? 'success' : 'secondary'" />
+    </template>
+    <template #cell-actions>
+      <WiSpace>
+        <WiButton size="small" severity="secondary">??</WiButton>
+        <WiButton size="small" severity="danger">??</WiButton>
+      </WiSpace>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/security/RolesView.vue=====
+<script setup lang="ts">
+import { WiButton, WiTag } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { roles } from '@/mock'
+
+const columns = [
+  { key: 'name', label: '????' },
+  { key: 'code', label: '??' },
+  { key: 'users', label: '???', width: 88 },
+  { key: 'permissions', label: '????' },
+  { key: 'status', label: '??', width: 88 },
+  { key: 'actions', label: '??', width: 120 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '?????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="roles"
+  >
+    <template #cell-status="{ value }">
+      <WiTag :value="value === 'active' ? '??' : '??'" :severity="value === 'active' ? 'success' : 'secondary'" />
+    </template>
+    <template #cell-actions>
+      <WiButton size="small" severity="secondary">????</WiButton>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/security/PermissionsView.vue=====
+<script setup lang="ts">
+import { WiCard, WiLayoutContent, WiTable, WiTag } from '@well-insight/ui'
+import { permissions } from '@/mock'
+
+const columns = [
+  { key: 'name', label: '????' },
+  { key: 'code', label: '???' },
+  { key: 'type', label: '??', width: 88 },
+  { key: 'module', label: '??', width: 96 },
+]
+</script>
+
+<template>
+  <WiLayoutContent class="permissions-page">
+    <h1>?????RBAC?</h1>
+    <p class="permissions-page__desc">??????????/????????</p>
+    <WiCard>
+      <WiTable :columns="columns" :rows="permissions as unknown as Record<string, unknown>[]" striped bordered :paginator="false">
+        <template #cell-type="{ value }">
+          <WiTag
+            :value="value === 'menu' ? '??' : value === 'button' ? '??' : '??'"
+            :severity="value === 'menu' ? 'info' : value === 'button' ? 'warn' : 'secondary'"
+          />
+        </template>
+      </WiTable>
+    </WiCard>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.permissions-page {
+  padding: var(--wi-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-4);
+}
+
+.permissions-page h1 {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.permissions-page__desc {
+  margin: 0;
+  color: var(--wi-color-text-muted);
+}
+</style>
+
+\n=====FILE:views/security/DataScopeView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  WiButton,
+  WiCard,
+  WiForm,
+  WiFormItem,
+  WiLayoutContent,
+  WiRadio,
+  WiRadioGroup,
+  WiSelect,
+  WiSpace,
+} from '@well-insight/ui'
+
+const scope = ref('department')
+const department = ref('math')
+</script>
+
+<template>
+  <WiLayoutContent class="data-scope">
+    <h1>????</h1>
+    <p class="data-scope__desc">????????????????????????</p>
+
+    <WiCard title="??? 锟???????">
+      <WiForm label-position="top">
+        <WiFormItem label="????" name="scope">
+          <WiRadioGroup v-model="scope">
+            <WiSpace vertical>
+              <WiRadio value="self" label="?????" />
+              <WiRadio value="department" label="?????" />
+              <WiRadio value="all" label="????" />
+            </WiSpace>
+          </WiRadioGroup>
+        </WiFormItem>
+        <WiFormItem v-if="scope === 'department'" label="????" name="department">
+          <WiSelect
+            v-model="department"
+            :options="[
+              { label: '???', value: 'math' },
+              { label: '???', value: 'chinese' },
+              { label: '???', value: 'english' },
+            ]"
+            fluid
+          />
+        </WiFormItem>
+        <WiSpace>
+          <WiButton>????</WiButton>
+          <WiButton severity="secondary">????</WiButton>
+        </WiSpace>
+      </WiForm>
+    </WiCard>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.data-scope {
+  padding: var(--wi-space-6);
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-4);
+}
+
+.data-scope h1 {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.data-scope__desc {
+  margin: 0;
+  color: var(--wi-color-text-muted);
+}
+</style>
+
+\n=====FILE:views/security/AuditLogsView.vue=====
+<script setup lang="ts">
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { auditLogs } from '@/mock'
+
+const columns = [
+  { key: 'operator', label: '???' },
+  { key: 'action', label: '??', width: 88 },
+  { key: 'target', label: '??' },
+  { key: 'ip', label: 'IP', width: 120 },
+  { key: 'time', label: '??', width: 140 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '?????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="auditLogs"
+    :paginator="false"
+  />
+</template>
+
+\n=====FILE:views/system/MessageCenterView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiCard, WiLayoutContent, WiTable, WiTabs, WiTag } from '@well-insight/ui'
+import { messages } from '@/mock'
+
+const columns = [
+  { key: 'channel', label: '??', width: 88 },
+  { key: 'title', label: '??' },
+  { key: 'template', label: '??', width: 140 },
+  { key: 'sentAt', label: '????', width: 140 },
+  { key: 'status', label: '??', width: 88 },
+]
+
+const tab = ref('records')
+</script>
+
+<template>
+  <WiLayoutContent class="messages-page">
+    <h1>????</h1>
+    <WiTabs
+      v-model="tab"
+      :tabs="[
+        { label: '????', value: 'records' },
+        { label: '????', value: 'templates' },
+      ]"
+    />
+    <WiCard v-if="tab === 'records'">
+      <WiTable :columns="columns" :rows="messages as unknown as Record<string, unknown>[]" striped bordered paginator>
+        <template #cell-status="{ value }">
+          <WiTag
+            :value="value === 'success' ? '??' : value === 'failed' ? '??' : '???'"
+            :severity="value === 'success' ? 'success' : value === 'failed' ? 'danger' : 'warn'"
+          />
+        </template>
+      </WiTable>
+    </WiCard>
+    <WiCard v-else title="????">
+      <p class="messages-page__desc">?????????????????</p>
+      <WiButton>????</WiButton>
+    </WiCard>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.messages-page {
+  padding: var(--wi-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-4);
+}
+
+.messages-page h1 {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.messages-page__desc {
+  margin: 0 0 var(--wi-space-4);
+  color: var(--wi-color-text-muted);
+}
+</style>
+
+\n=====FILE:views/system/SchedulerView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiSpace, WiTag, useToast } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { schedulerJobs } from '@/mock'
+
+const toast = useToast()
+const rows = ref(schedulerJobs)
+
+const columns = [
+  { key: 'name', label: '????' },
+  { key: 'cron', label: 'Cron', width: 120 },
+  { key: 'lastRun', label: '????', width: 140 },
+  { key: 'nextRun', label: '????', width: 140 },
+  { key: 'status', label: '??', width: 96 },
+  { key: 'actions', label: '??', width: 160 },
+]
+
+function runNow(id: string) {
+  toast.add({ severity: 'success', summary: '???????', detail: id, life: 2500 })
+}
+
+function togglePause(row: { id: string; status: string }) {
+  row.status = row.status === 'paused' ? 'idle' : 'paused'
+}
+</script>
+
+<template>
+  <ListPageTemplate
+    title="??????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="rows"
+    :paginator="false"
+  >
+    <template #cell-status="{ value }">
+      <WiTag
+        :value="value === 'running' ? '???' : value === 'paused' ? '???' : '??'"
+        :severity="value === 'running' ? 'success' : value === 'paused' ? 'warn' : 'info'"
+      />
+    </template>
+    <template #cell-actions="{ row }">
+      <WiSpace>
+        <WiButton size="small" severity="secondary" @click="runNow(row.id)">????</WiButton>
+        <WiButton size="small" severity="secondary" @click="togglePause(row)">
+          {{ row.status === 'paused' ? '??' : '??' }}
+        </WiButton>
+      </WiSpace>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/system/DictionaryView.vue=====
+<script setup lang="ts">
+import { WiTag } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { dictionaries } from '@/mock'
+
+const columns = [
+  { key: 'type', label: '????', width: 140 },
+  { key: 'label', label: '???' },
+  { key: 'value', label: '?', width: 120 },
+  { key: 'sort', label: '??', width: 72 },
+  { key: 'status', label: '??', width: 88 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="dictionaries"
+    :paginator="false"
+  >
+    <template #cell-status="{ value }">
+      <WiTag :value="value === 'enabled' ? '??' : '??'" :severity="value === 'enabled' ? 'success' : 'secondary'" />
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/analytics/ReportsView.vue=====
+<script setup lang="ts">
+import { ref } from 'vue'
+import { WiButton, WiCard, WiGrid, WiGridItem, WiLayoutContent, WiSelect, WiSpace } from '@well-insight/ui'
+import { enrollmentTrend, gradeDistribution } from '@/mock'
+
+const dimension = ref('grade')
+const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
+</script>
+
+<template>
+  <WiLayoutContent class="reports-page">
+    <header class="reports-page__header">
+      <h1>????</h1>
+      <WiSpace>
+        <WiSelect
+          v-model="dimension"
+          :options="[
+            { label: '???', value: 'grade' },
+            { label: '???', value: 'department' },
+            { label: '???', value: 'month' },
+          ]"
+          style="width: 10rem"
+        />
+        <WiButton severity="secondary">?? Excel</WiButton>
+        <WiButton severity="secondary">?? PDF</WiButton>
+      </WiSpace>
+    </header>
+
+    <WiGrid :cols="2" :x-gap="16" :y-gap="16">
+      <WiGridItem :span="1">
+        <WiCard title="????">
+          <div class="reports-page__bars">
+            <div v-for="item in enrollmentTrend" :key="item.month" class="reports-page__bar-item">
+              <div class="reports-page__bar" :style="{ height: `${(item.count / maxTrend) * 100}%` }" />
+              <span>{{ item.month }}</span>
+            </div>
+          </div>
+        </WiCard>
+      </WiGridItem>
+      <WiGridItem :span="1">
+        <WiCard title="????">
+          <ul class="reports-page__list">
+            <li v-for="item in gradeDistribution" :key="item.grade">
+              <span>{{ item.grade }}</span>
+              <strong>{{ item.count }}</strong>
+            </li>
+          </ul>
+        </WiCard>
+      </WiGridItem>
+    </WiGrid>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.reports-page {
+  padding: var(--wi-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-4);
+}
+
+.reports-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wi-space-4);
+  flex-wrap: wrap;
+}
+
+.reports-page__header h1 {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.reports-page__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--wi-space-3);
+  min-height: 10rem;
+}
+
+.reports-page__bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wi-space-2);
+  height: 10rem;
+  justify-content: flex-end;
+  font-size: var(--wi-font-size-xs);
+  color: var(--wi-color-text-muted);
+}
+
+.reports-page__bar {
+  width: 100%;
+  max-width: 2.5rem;
+  border-radius: var(--wi-radius-sm) var(--wi-radius-sm) 0 0;
+  background: color-mix(in srgb, var(--wi-color-primary) 70%, transparent);
+}
+
+.reports-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--wi-space-3);
+}
+
+.reports-page__list li {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--wi-space-3);
+  border: 1px solid var(--wi-color-border);
+  border-radius: var(--wi-radius-md);
+}
+</style>
+
+\n=====FILE:views/analytics/ErrorMonitorView.vue=====
+<script setup lang="ts">
+import { WiTag } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { errorRecords } from '@/mock'
+
+const columns = [
+  { key: 'endpoint', label: '??' },
+  { key: 'code', label: '???', width: 88 },
+  { key: 'message', label: '????' },
+  { key: 'count', label: '??', width: 72 },
+  { key: 'lastSeen', label: '????', width: 140 },
+]
+</script>
+
+<template>
+  <ListPageTemplate
+    title="????"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '?????' }, { label: '????' }]"
+    :columns="columns"
+    :rows="errorRecords"
+    :paginator="false"
+  >
+    <template #cell-code="{ value }">
+      <WiTag :value="String(value)" :severity="Number(value) >= 500 ? 'danger' : 'warn'" />
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/extras/RecycleBinView.vue=====
+<script setup lang="ts">
+import { WiButton, WiSpace, useToast } from '@well-insight/ui'
+import ListPageTemplate from '@/components/ListPageTemplate.vue'
+import { recycleBin } from '@/mock'
+
+const toast = useToast()
+
+const columns = [
+  { key: 'name', label: '??' },
+  { key: 'module', label: '??', width: 112 },
+  { key: 'deletedBy', label: '???', width: 96 },
+  { key: 'deletedAt', label: '????', width: 112 },
+  { key: 'expireAt', label: '????', width: 112 },
+  { key: 'actions', label: '??', width: 120 },
+]
+
+function restore(name: string) {
+  toast.add({ severity: 'success', summary: '???', detail: name, life: 2500 })
+}
+</script>
+
+<template>
+  <ListPageTemplate
+    title="???"
+    :breadcrumbs="[{ label: '??', to: '/dashboard' }, { label: '????' }, { label: '???' }]"
+    :columns="columns"
+    :rows="recycleBin"
+    :paginator="false"
+  >
+    <template #cell-actions="{ row }">
+      <WiSpace>
+        <WiButton size="small" @click="restore(row.name)">??</WiButton>
+        <WiButton size="small" severity="danger">????</WiButton>
+      </WiSpace>
+    </template>
+  </ListPageTemplate>
+</template>
+
+\n=====FILE:views/auth/LoginView.vue=====
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import {
+  WiButton,
+  WiCard,
+  WiForm,
+  WiFormItem,
+  WiInput,
+  WiInputOtp,
+  WiMessage,
+  WiSpace,
+  WiTabs,
+  useToast,
+} from '@well-insight/ui'
+import { useAuth } from '@/composables/useAuth'
+
+const router = useRouter()
+const route = useRoute()
+const { login, verifyMfa, mfaVerified, user } = useAuth()
+const toast = useToast()
+
+const tab = ref('password')
+const account = ref('admin')
+const password = ref('admin123')
+const otp = ref('')
+const loading = ref(false)
+const error = ref('')
+
+const showMfa = computed(() => route.query.mfa === '1' || (user.value && !mfaVerified.value))
+
+async function onLogin() {
+  loading.value = true
+  error.value = ''
+  try {
+    await login({ account: account.value, password: password.value })
+    toast.add({ severity: 'success', summary: '????', detail: '????', life: 3000 })
+    router.push('/dashboard')
+  } catch (err) {
+    const message = err instanceof Error ? err.message : '????'
+    if (message === 'MFA_REQUIRED') {
+      router.replace('/login?mfa=1')
+      error.value = '??? MFA ???????123456?'
+    } else {
+      error.value = message
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+async function onVerifyMfa() {
+  loading.value = true
+  error.value = ''
+  try {
+    await verifyMfa(otp.value)
+    toast.add({ severity: 'success', summary: '????', life: 2500 })
+    router.push('/dashboard')
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : '????'
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
+<template>
+  <WiCard class="login-page">
+    <header class="login-page__header">
+      <h1>??? 锟???????</h1>
+      <p>???? admin / admin123 锟?MFA 123456</p>
+    </header>
+
+    <WiMessage v-if="error" severity="error" :closable="false">{{ error }}</WiMessage>
+
+    <template v-if="showMfa">
+      <WiForm @submit.prevent="onVerifyMfa">
+        <WiFormItem label="MFA ???" name="otp" required>
+          <WiInputOtp v-model="otp" :length="6" />
+        </WiFormItem>
+        <WiButton native-type="submit" fluid :loading="loading">?????</WiButton>
+      </WiForm>
+    </template>
+
+    <template v-else>
+      <WiTabs v-model="tab" :tabs="[{ label: '????', value: 'password' }, { label: '?????', value: 'otp' }]" />
+      <WiForm @submit.prevent="onLogin">
+        <WiFormItem label="??" name="account" required>
+          <WiInput v-model="account" placeholder="admin / teacher" fluid />
+        </WiFormItem>
+        <WiFormItem v-if="tab === 'password'" label="??" name="password" required>
+          <WiInput v-model="password" type="password" fluid />
+        </WiFormItem>
+        <WiFormItem v-else label="?????" name="emailOtp">
+          <WiSpace>
+            <WiInput placeholder="name@educloud.cn" fluid />
+            <WiButton severity="secondary">?????</WiButton>
+          </WiSpace>
+        </WiFormItem>
+        <WiButton native-type="submit" fluid :loading="loading">??</WiButton>
+      </WiForm>
+      <p class="login-page__footer">
+        ??????
+        <RouterLink to="/register">??</RouterLink>
+      </p>
+    </template>
+  </WiCard>
+</template>
+
+<style scoped>
+.login-page {
+  width: min(100%, 26rem);
+  padding: var(--wi-space-6);
+  box-shadow: var(--wi-shadow-md);
+}
+
+.login-page__header h1 {
+  margin: 0 0 var(--wi-space-2);
+  font-size: var(--wi-font-size-lg);
+}
+
+.login-page__header p {
+  margin: 0 0 var(--wi-space-4);
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+
+.login-page__footer {
+  margin: var(--wi-space-4) 0 0;
+  text-align: center;
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+
+.login-page__footer a {
+  color: var(--wi-color-primary);
+}
+</style>
+
+\n=====FILE:views/auth/RegisterView.vue=====
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import {
+  WiButton,
+  WiCard,
+  WiForm,
+  WiFormItem,
+  WiInput,
+  useToast,
+} from '@well-insight/ui'
+import { useAuth } from '@/composables/useAuth'
+
+const router = useRouter()
+const { register } = useAuth()
+const toast = useToast()
+const loading = ref(false)
+
+const model = reactive({
+  name: '',
+  email: '',
+  password: '',
+  confirm: '',
+})
+
+async function onSubmit() {
+  if (model.password !== model.confirm) {
+    toast.add({ severity: 'warn', summary: '???????', life: 3000 })
+    return
+  }
+  loading.value = true
+  try {
+    await register({ name: model.name, email: model.email, password: model.password })
+    toast.add({ severity: 'success', summary: '????', life: 2500 })
+    router.push('/dashboard')
+  } catch (err) {
+    toast.add({
+      severity: 'error',
+      summary: '????',
+      detail: err instanceof Error ? err.message : undefined,
+      life: 3500,
+    })
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
+<template>
+  <WiCard class="register-page">
+    <header class="register-page__header">
+      <h1>???????</h1>
+      <p>??????????? localStorage</p>
+    </header>
+    <WiForm @submit.prevent="onSubmit">
+      <WiFormItem label="??" name="name" required>
+        <WiInput v-model="model.name" fluid />
+      </WiFormItem>
+      <WiFormItem label="??" name="email" required>
+        <WiInput v-model="model.email" type="email" fluid />
+      </WiFormItem>
+      <WiFormItem label="??" name="password" required>
+        <WiInput v-model="model.password" type="password" fluid />
+      </WiFormItem>
+      <WiFormItem label="????" name="confirm" required>
+        <WiInput v-model="model.confirm" type="password" fluid />
+      </WiFormItem>
+      <WiButton native-type="submit" fluid :loading="loading">?????</WiButton>
+    </WiForm>
+    <p class="register-page__footer">
+      ?????
+      <RouterLink to="/login">????</RouterLink>
+    </p>
+  </WiCard>
+</template>
+
+<style scoped>
+.register-page {
+  width: min(100%, 26rem);
+  padding: var(--wi-space-6);
+  box-shadow: var(--wi-shadow-md);
+}
+
+.register-page__header h1 {
+  margin: 0 0 var(--wi-space-2);
+  font-size: var(--wi-font-size-lg);
+}
+
+.register-page__header p {
+  margin: 0 0 var(--wi-space-4);
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+
+.register-page__footer {
+  margin-top: var(--wi-space-4);
+  text-align: center;
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+
+.register-page__footer a {
+  color: var(--wi-color-primary);
+}
+</style>
+
+\n=====FILE:views/dashboard/DashboardView.vue=====
+<script setup lang="ts">
+import type { IconName } from '@well-insight/ui'
+import {
+  WiCard,
+  WiGrid,
+  WiGridItem,
+  WiIcon,
+  WiLayoutContent,
+  WiSpace,
+  WiTable,
+  WiTag,
+} from '@well-insight/ui'
+import {
+  courses,
+  dashboardStats,
+  enrollmentTrend,
+  gradeDistribution,
+  workflowTasks,
+} from '@/mock'
+
+const stats: Array<{ label: string; value: string; trend: string; icon: IconName }> = [
+  { label: '????', value: dashboardStats.students.toLocaleString(), trend: '+3.2%', icon: 'user' },
+  { label: '????', value: String(dashboardStats.teachers), trend: '+1', icon: 'user' },
+  { label: '????', value: String(dashboardStats.courses), trend: '+6', icon: 'star' },
+  { label: '?????', value: `${dashboardStats.enrollmentRate}%`, trend: '+2.1%', icon: 'sort' },
+]
+
+const recentColumns = [
+  { key: 'title', label: '??' },
+  { key: 'applicant', label: '???', width: 96 },
+  { key: 'status', label: '??', width: 96 },
+]
+
+const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
+</script>
+
+<template>
+  <WiLayoutContent class="dashboard">
+    <h1 class="dashboard__title">??? ? ????</h1>
+
+    <WiGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
+      <WiGridItem v-for="item in stats" :key="item.label" :span="1">
+        <WiCard class="dashboard__stat">
+          <WiSpace align="center" justify="space-between">
+            <div>
+              <p class="dashboard__stat-label">{{ item.label }}</p>
+              <p class="dashboard__stat-value">{{ item.value }}</p>
+              <p class="dashboard__stat-trend">{{ item.trend }}</p>
+            </div>
+            <WiIcon :name="item.icon" size="lg" class="dashboard__stat-icon" aria-hidden="true" />
+          </WiSpace>
+        </WiCard>
+      </WiGridItem>
+    </WiGrid>
+
+    <WiGrid :cols="2" :x-gap="16" :y-gap="16">
+      <WiGridItem :span="1">
+        <WiCard title="?????? 6 ???">
+          <div class="dashboard__bars" role="img" aria-label="???????">
+            <div v-for="item in enrollmentTrend" :key="item.month" class="dashboard__bar-item">
+              <div
+                class="dashboard__bar"
+                :style="{ height: `${(item.count / maxTrend) * 100}%` }"
+              />
+              <span>{{ item.month }}</span>
+            </div>
+          </div>
+        </WiCard>
+      </WiGridItem>
+      <WiGridItem :span="1">
+        <WiCard title="????">
+          <ul class="dashboard__grades">
+            <li v-for="item in gradeDistribution" :key="item.grade">
+              <span>{{ item.grade }}</span>
+              <strong>{{ item.count }}</strong>
+            </li>
+          </ul>
+        </WiCard>
+      </WiGridItem>
+    </WiGrid>
+
+    <WiGrid :cols="2" :x-gap="16" :y-gap="16">
+      <WiGridItem :span="1">
+        <WiCard title="????">
+          <WiTable :columns="recentColumns" :rows="workflowTasks as unknown as Record<string, unknown>[]" size="small" :paginator="false" bordered>
+            <template #cell-status="{ value }">
+              <WiTag
+                :value="value === 'pending' ? '???' : value === 'approved' ? '???' : '???'"
+                :severity="value === 'pending' ? 'warn' : value === 'approved' ? 'success' : 'danger'"
+              />
+            </template>
+          </WiTable>
+        </WiCard>
+      </WiGridItem>
+      <WiGridItem :span="1">
+        <WiCard title="????">
+          <WiTable
+            :columns="[{ key: 'name', label: '??' }, { key: 'enrolled', label: '??', width: 72 }]"
+            :rows="courses.slice(0, 4) as unknown as Record<string, unknown>[]"
+            size="small"
+            :paginator="false"
+            bordered
+          />
+        </WiCard>
+      </WiGridItem>
+    </WiGrid>
+  </WiLayoutContent>
+</template>
+
+<style scoped>
+.dashboard {
+  padding: var(--wi-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wi-space-6);
+}
+
+.dashboard__title {
+  margin: 0;
+  font-size: var(--wi-font-size-lg);
+  font-weight: 600;
+}
+
+.dashboard__stat {
+  box-shadow: var(--wi-shadow-sm);
+}
+
+.dashboard__stat-label {
+  margin: 0;
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-sm);
+}
+
+.dashboard__stat-value {
+  margin: var(--wi-space-1) 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.dashboard__stat-trend {
+  margin: 0;
+  color: var(--wi-color-primary);
+  font-size: var(--wi-font-size-sm);
+}
+
+.dashboard__stat-icon {
+  color: var(--wi-color-primary);
+  opacity: 0.85;
+}
+
+.dashboard__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--wi-space-3);
+  min-height: 10rem;
+  padding-top: var(--wi-space-2);
+}
+
+.dashboard__bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--wi-space-2);
+  height: 10rem;
+  justify-content: flex-end;
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-xs);
+}
+
+.dashboard__bar {
+  width: 100%;
+  max-width: 2.5rem;
+  border-radius: var(--wi-radius-sm) var(--wi-radius-sm) 0 0;
+  background: color-mix(in srgb, var(--wi-color-primary) 75%, transparent);
+}
+
+.dashboard__grades {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--wi-space-3);
+}
+
+.dashboard__grades li {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--wi-space-3);
+  border: 1px solid var(--wi-color-border);
+  border-radius: var(--wi-radius-md);
+}
+</style>
+
+\n=====FILE:layouts/AdminLayout.vue=====
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue'
+import { RouterView, useRoute, useRouter } from 'vue-router'
+import {
+  WiAvatar,
+  WiBreadcrumb,
+  WiButton,
+  WiDropdown,
+  WiIcon,
+  WiLayout,
+  WiLayoutHeader,
+  WiLayoutSider,
+  WiMenu,
+  WiSpace,
+  useTheme,
+} from '@well-insight/ui'
+import AppCommandMenu from '@/components/AppCommandMenu.vue'
+import { adminMenu, menuKeyFromPath, routeByMenuKey } from '@/config/navigation'
+import { useAuth } from '@/composables/useAuth'
+import { useLocale } from '@/composables/useLocale'
+
+const router = useRouter()
+const route = useRoute()
+const { user, logout } = useAuth()
+const { toggleLocale, t } = useLocale()
+const { isDark, toggleTheme } = useTheme()
+
+const collapsed = ref(false)
+const commandOpen = ref(false)
+const selectedKey = ref<string | null>(menuKeyFromPath(route.path))
+
+watch(() => route.path, (path) => {
+  selectedKey.value = menuKeyFromPath(path)
+})
+
+const breadcrumbs = computed(() => {
+  const segments = route.path.split('/').filter(Boolean)
+  const items = [{ label: t('??', 'Home'), to: '/dashboard' }]
+  const labels: Record<string, string> = {
+    dashboard: t('???', 'Dashboard'),
+    security: t('?????', 'Security'),
+    academic: t('????', 'Academic'),
+    system: t('????', 'System'),
+    analytics: t('?????', 'Analytics'),
+    extras: t('????', 'Extras'),
+    users: t('????', 'Users'),
+    roles: t('????', 'Roles'),
+    permissions: t('????', 'Permissions'),
+    'data-scope': t('????', 'Data Scope'),
+    'audit-logs': t('????', 'Audit Logs'),
+    students: t('????', 'Students'),
+    teachers: t('????', 'Teachers'),
+    courses: t('????', 'Courses'),
+    classes: t('????', 'Classes'),
+    'enrollment-form': t('????', 'Enrollment'),
+    'batch-ops': t('????', 'Batch Ops'),
+    workflow: t('????', 'Workflow'),
+    messages: t('????', 'Messages'),
+    scheduler: t('????', 'Scheduler'),
+    config: t('????', 'Config'),
+    dictionary: t('????', 'Dictionary'),
+    reports: t('????', 'Reports'),
+    'error-monitor': t('????', 'Errors'),
+    'recycle-bin': t('???', 'Recycle Bin'),
+  }
+  let acc = ''
+  for (const seg of segments) {
+    acc += `/${seg}`
+    items.push({ label: labels[seg] || seg, to: acc })
+  }
+  return items
+})
+
+const userMenu = [
+  { label: t('????', 'Profile'), command: () => router.push('/system/config') },
+  { label: t('????', 'Sign out'), command: logout },
+]
+
+function onMenuSelect(item: { key?: string }) {
+  if (!item.key) return
+  const path = routeByMenuKey[item.key]
+  if (path) router.push(path)
+}
+</script>
+
+<template>
+  <WiLayout has-sider class="admin-shell">
+    <WiLayoutSider v-model:collapsed="collapsed" show-trigger bordered class="admin-shell__sider">
+      <div class="admin-shell__brand">
+        <WiIcon name="home" size="lg" aria-hidden="true" />
+        <span v-if="!collapsed" class="admin-shell__brand-text">???</span>
+      </div>
+      <WiMenu
+        :model="adminMenu"
+        :selected-key="selectedKey"
+        :collapsed="collapsed"
+        @select="onMenuSelect"
+      />
+    </WiLayoutSider>
+
+    <WiLayout>
+      <WiLayoutHeader bordered class="admin-shell__header">
+        <WiBreadcrumb :model="breadcrumbs" />
+        <WiSpace align="center">
+          <WiButton
+            severity="secondary"
+            size="small"
+            :aria-label="t('????', 'Global search')"
+            @click="commandOpen = true"
+          >
+            <WiIcon name="search" aria-hidden="true" />
+            <span class="admin-shell__search-hint">Ctrl+K</span>
+          </WiButton>
+          <WiButton
+            severity="secondary"
+            size="small"
+            icon-only
+            :icon="isDark ? 'eye-off' : 'eye'"
+            :aria-label="t('????', 'Toggle theme')"
+            @click="toggleTheme"
+          />
+          <WiButton severity="secondary" size="small" @click="toggleLocale">
+            {{ t('EN', '??') }}
+          </WiButton>
+          <WiDropdown :items="userMenu" trigger="click">
+            <template #trigger>
+              <button type="button" class="admin-shell__user">
+                <WiAvatar :label="user?.name?.slice(0, 1) || 'U'" size="sm" />
+                <span>{{ user?.name }}</span>
+              </button>
+            </template>
+          </WiDropdown>
+        </WiSpace>
+      </WiLayoutHeader>
+
+      <RouterView />
+    </WiLayout>
+  </WiLayout>
+
+  <AppCommandMenu v-model="commandOpen" />
+</template>
+
+<style scoped>
+.admin-shell {
+  min-height: 100vh;
+  background: var(--wi-color-surface);
+}
+
+.admin-shell__sider {
+  background: var(--wi-color-surface);
+}
+
+.admin-shell__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--wi-space-2);
+  padding: var(--wi-space-4) var(--wi-space-4) var(--wi-space-3);
+  color: var(--wi-color-primary);
+  font-weight: 700;
+  font-size: var(--wi-font-size-md);
+}
+
+.admin-shell__brand-text {
+  white-space: nowrap;
+}
+
+.admin-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wi-space-4);
+  padding: 0 var(--wi-space-6);
+  min-height: var(--wi-layout-header-height);
+}
+
+.admin-shell__search-hint {
+  margin-left: var(--wi-space-1);
+  color: var(--wi-color-text-muted);
+  font-size: var(--wi-font-size-xs);
+}
+
+.admin-shell__user {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wi-space-2);
+  padding: var(--wi-space-1) var(--wi-space-2);
+  border: 1px solid var(--wi-color-border);
+  border-radius: var(--wi-radius-md);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.admin-shell__user:hover {
+  background: color-mix(in srgb, var(--wi-color-border) 30%, transparent);
+}
+</style>
+
+\n=====FILE:components/AppCommandMenu.vue=====
+<script setup lang="ts">
+import { computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { WiCommandMenu } from '@well-insight/ui'
+import { commandItems } from '@/config/navigation'
+
+const open = defineModel<boolean>({ default: false })
+const router = useRouter()
+
+const items = computed(() =>
+  commandItems.map((item) => ({
+    label: item.label,
+    icon: item.icon,
+    command: () => {
+      router.push(item.route)
+      open.value = false
+    },
+  })),
+)
+
+function onKeydown(event: KeyboardEvent) {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+    event.preventDefault()
+    open.value = true
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+</script>
+
+<template>
+  <WiCommandMenu
+    v-model="open"
+    :model="items"
+    placeholder="鎼滅储鑿滃崟銆佸鐢熴€佽绋嬧€?(Ctrl+K)"
+  />
+</template>
+

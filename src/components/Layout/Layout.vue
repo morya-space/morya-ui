@@ -32,10 +32,7 @@ const scrollEl = useTemplateRef<HTMLElement>("scrollEl");
 const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 
 const rootStyle = computed(() => ({
-    height:
-        props.height == null
-            ? "var(--wi-layout-height, 100%)"
-            : toCssLength(props.height),
+    ...(props.height != null ? { height: toCssLength(props.height) } : {}),
     width: props.width == null ? "100%" : toCssLength(props.width),
 }));
 

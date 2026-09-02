@@ -71,19 +71,35 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const isWizard = patternId === 'wizard-form'
   const isSettings = patternId === 'settings-page'
   const isAuth = patternId === 'auth-page'
-  const isForm = patternId === 'form-page' || isSettings || isAuth || isWizard
+  const isForm = patternId === 'form-page' || isSettings
+  const useLayoutShell = isList || isForm || isDashboard || isDetail || isSettings
   const title = intent || (zh ? '业务页面' : 'Business page')
+
+  const layoutImports = useLayoutShell
+    ? ', WiLayout, WiLayoutContent, WiLayoutHeader, WiLayoutSider, WiBreadcrumb'
+    : ''
+  const listImports = isList ? ', WiSelect, WiSpace, WiTable' : ''
+  const formImports = isForm || isAuth || isWizard ? ', WiForm, WiFormItem, WiSelect' : ''
+  const dashboardImports = isDashboard ? ', WiCard, WiGrid, WiGridItem, WiSkeleton, WiTable' : ''
+  const detailImports = isDetail ? ', WiDivider' : ''
+  const emptyImports = isEmpty ? ', WiDataView' : ''
+  const wizardImports = isWizard ? ', WiStepper' : ''
+  const settingsImports = isSettings ? ', WiTabs' : ''
+
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { WiButton, WiCard, WiInput, WiTag${isList ? ', WiPagination, WiTable' : ''}${isForm ? ', WiForm, WiFormItem, WiSelect' : ''}${isDashboard ? ', WiProgressBar, WiSkeleton' : ''}${isDetail ? ', WiDivider' : ''}${isEmpty ? ', WiDataView' : ''}${isWizard ? ', WiStepper' : ''}${isSettings ? ', WiTabs' : ''} } from '@well-insight/ui'
+import { WiButton, WiCard, WiConfigProvider, WiInput, WiTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from '@well-insight/ui'
 
 const loading = ref(false)
 const error = ref('')
 ${isList ? `const keyword = ref('')
-const page = ref(1)
 const rows = ref<Record<string, unknown>[]>([])
-` : ''}${isForm ? `const model = ref({ name: '' })
-` : ''}${isDashboard ? `const metrics = ref([{ label: '${zh ? '产量' : 'Production'}', value: 0 }])
+const columns = [{ key: 'name', label: '${zh ? '名称' : 'Name'}' }, { key: 'status', label: '${zh ? '状态' : 'Status'}' }]
+` : ''}${isForm || isAuth || isWizard ? `const model = ref({ name: '' })
+` : ''}${isDashboard ? `const metrics = ref([
+  { label: '${zh ? '总用户' : 'Users'}', value: '0' },
+  { label: '${zh ? '今日活跃' : 'Active today'}', value: '0' },
+])
 ` : ''}${isWizard ? `const activeStep = ref(0)
 ` : ''}
 
@@ -97,93 +113,182 @@ async function submit() {
   }
 }
 </script>`
-  const template = `<template>
+
+  const listContent = `          <section class="wi-generated-filters" aria-label="${zh ? '筛选' : 'Filters'}">
+            <WiSpace wrap>
+              <WiInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
+              <WiButton severity="primary">${zh ? '查询' : 'Search'}</WiButton>
+              <WiButton severity="secondary">${zh ? '重置' : 'Reset'}</WiButton>
+            </WiSpace>
+          </section>
+          <header class="wi-generated-toolbar">
+            <h1 class="wi-generated-title">${title}</h1>
+            <WiButton severity="primary">${zh ? '新建' : 'Create'}</WiButton>
+          </header>
+          <WiTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
+            <template #empty>
+              <p class="wi-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
+            </template>
+          </WiTable>`
+
+  const formContent = `          <header class="wi-generated-intro">
+            <h1 class="wi-generated-title">${title}</h1>
+            <p class="wi-generated-muted">${zh ? '填写表单并保存。' : 'Fill in the form and save.'}</p>
+          </header>
+          <WiForm class="wi-generated-form" @submit.prevent="submit">
+            <WiFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
+              <WiInput v-model="model.name" fluid />
+            </WiFormItem>
+            <footer class="wi-generated-actions">
+              <WiButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</WiButton>
+              <WiButton severity="secondary">${zh ? '取消' : 'Cancel'}</WiButton>
+            </footer>
+          </WiForm>`
+
+  const dashboardContent = `          <h1 class="wi-generated-title">${title}</h1>
+          <WiGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
+            <WiGridItem v-for="metric in metrics" :key="metric.label" :span="1">
+              <WiCard>
+                <p class="wi-generated-muted">{{ metric.label }}</p>
+                <strong class="wi-generated-metric">{{ metric.value }}</strong>
+              </WiCard>
+            </WiGridItem>
+          </WiGrid>
+          <WiCard :title="${zh ? '趋势概览' : 'Trend overview'}">
+            <WiSkeleton v-if="loading" height="8rem" />
+            <p v-else class="wi-generated-muted">${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}</p>
+          </WiCard>`
+
+  const detailContent = `          <header class="wi-generated-toolbar">
+            <div>
+              <h1 class="wi-generated-title">${title}</h1>
+              <WiTag value="${zh ? '正常' : 'Active'}" severity="success" />
+            </div>
+            <WiButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</WiButton>
+          </header>
+          <WiCard>
+            <WiDivider />
+            <dl class="wi-generated-details">
+              <div><dt>${zh ? '名称' : 'Name'}</dt><dd>${zh ? '示例资源' : 'Example resource'}</dd></div>
+              <div><dt>${zh ? '更新时间' : 'Updated'}</dt><dd>—</dd></div>
+            </dl>
+          </WiCard>`
+
+  const settingsContent = `          <h1 class="wi-generated-title">${title}</h1>
+          <WiTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
+          <WiForm class="wi-generated-form" @submit.prevent="submit">
+            <WiFormItem label="${zh ? '显示名称' : 'Display name'}" name="name">
+              <WiInput v-model="model.name" fluid />
+            </WiFormItem>
+            <WiButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存设置' : 'Save settings'}</WiButton>
+          </WiForm>`
+
+  let innerTemplate = ''
+  if (isList) {
+    innerTemplate = `<WiConfigProvider :locale="zhCN">
+  <WiLayout has-sider class="wi-generated-page">
+    <WiLayoutSider class="wi-generated-sider" />
+    <WiLayout>
+      <WiLayoutHeader class="wi-generated-header">
+        <WiBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+      </WiLayoutHeader>
+      <WiLayoutContent class="wi-generated-content">
+${listContent}
+      </WiLayoutContent>
+    </WiLayout>
+  </WiLayout>
+</WiConfigProvider>`
+  } else if (useLayoutShell) {
+    const content = isDashboard ? dashboardContent : isDetail ? detailContent : isSettings ? settingsContent : formContent
+    innerTemplate = `<WiConfigProvider :locale="zhCN">
+  <WiLayout class="wi-generated-page">
+    <WiLayoutHeader class="wi-generated-header">
+      <WiBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+    </WiLayoutHeader>
+    <WiLayoutContent class="wi-generated-content">
+${content}
+    </WiLayoutContent>
+  </WiLayout>
+</WiConfigProvider>`
+  } else if (isAuth) {
+    innerTemplate = `<WiConfigProvider :locale="zhCN">
+  <main class="wi-generated-page wi-generated-auth">
+    <WiCard>
+      <WiForm label-position="top" @submit.prevent="submit">
+        <WiFormItem label="${zh ? '邮箱' : 'Email'}" name="email">
+          <WiInput type="email" fluid />
+        </WiFormItem>
+        <WiFormItem label="${zh ? '密码' : 'Password'}" name="password">
+          <WiInput type="password" fluid />
+        </WiFormItem>
+        <WiButton native-type="submit" severity="primary" :loading="loading" fluid>${zh ? '登录' : 'Sign in'}</WiButton>
+      </WiForm>
+    </WiCard>
+  </main>
+</WiConfigProvider>`
+  } else if (isEmpty) {
+    innerTemplate = `<WiConfigProvider :locale="zhCN">
   <main class="wi-generated-page">
-    <header class="wi-generated-header">
-      <div>
-        <h1>${title}</h1>
-        <p class="wi-generated-muted">${zh ? '请根据业务接口替换示例数据和交互。' : 'Replace the sample data and interactions with your business API.'}</p>
-      </div>
-      <WiButton label="${isForm ? (zh ? '保存' : 'Save') : (zh ? '新增' : 'Create')}" :loading="loading" @click="submit" />
-    </header>
-${isList ? `    <WiCard>
-      <div class="wi-generated-toolbar">
-        <WiInput v-model="keyword" label="${zh ? '关键词' : 'Keyword'}" fluid />
-        <WiButton label="${zh ? '查询' : 'Search'}" severity="secondary" outlined @click="page = 1" />
-      </div>
-      <WiTable :columns="columns" :rows="rows" :loading="loading" :paginator="false" striped />
-      <WiPagination v-model="page" :total="0" />
-      <p v-if="!loading && !rows.length" class="wi-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
-    </WiCard>` : isDashboard ? `    <section class="wi-generated-grid">
-      <WiCard v-for="metric in metrics" :key="metric.label">
-        <span class="wi-generated-muted">{{ metric.label }}</span>
-        <strong class="wi-generated-metric">{{ metric.value }}</strong>
-        <WiProgressBar :value="metric.value" />
-      </WiCard>
-      <WiCard>
-        <WiSkeleton v-if="loading" height="8rem" />
-        <p v-else class="wi-generated-muted">${zh ? '趋势和告警区域，请接入真实数据。' : 'Connect trend and alert data here.'}</p>
-      </WiCard>
-    </section>` : isDetail ? `    <WiCard>
-      <div class="wi-generated-detail-head">
-        <div>
-          <h2>${zh ? '资源概览' : 'Resource overview'}</h2>
-          <WiTag value="${zh ? '正常' : 'Active'}" severity="success" />
-        </div>
-        <WiButton label="${zh ? '编辑' : 'Edit'}" outlined />
-      </div>
-      <WiDivider />
-      <dl class="wi-generated-details">
-        <div><dt>${zh ? '名称' : 'Name'}</dt><dd>${zh ? '示例资源' : 'Example resource'}</dd></div>
-        <div><dt>${zh ? '更新时间' : 'Updated'}</dt><dd>—</dd></div>
-      </dl>
-    </WiCard>` : isEmpty ? `    <WiCard>
+    <WiCard>
       <WiDataView :value="[]">
         <template #empty>
           <div class="wi-generated-empty">
             <strong>${zh ? '暂无内容' : 'Nothing here yet'}</strong>
             <p class="wi-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
-            <WiButton label="${zh ? '创建' : 'Create'}" @click="submit" />
+            <WiButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</WiButton>
           </div>
         </template>
       </WiDataView>
-    </WiCard>` : isWizard ? `    <WiCard>
+    </WiCard>
+  </main>
+</WiConfigProvider>`
+  } else if (isWizard) {
+    innerTemplate = `<WiConfigProvider :locale="zhCN">
+  <main class="wi-generated-page">
+    <WiCard>
       <WiStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
       <WiForm label-position="top" @submit.prevent="submit">
         <WiFormItem label="${zh ? '名称' : 'Name'}" name="name"><WiInput v-model="model.name" fluid /></WiFormItem>
-        <WiButton native-type="submit" label="${zh ? '下一步' : 'Next'}" :loading="loading" />
+        <WiButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</WiButton>
       </WiForm>
-    </WiCard>` : isSettings ? `    <WiCard>
-      <WiTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
-      <WiForm label-position="top" @submit.prevent="submit">
-        <WiFormItem label="${zh ? '显示名称' : 'Display name'}" name="name"><WiInput v-model="model.name" fluid /></WiFormItem>
-        <WiButton native-type="submit" label="${zh ? '保存设置' : 'Save settings'}" :loading="loading" />
-      </WiForm>
-    </WiCard>` : isAuth ? `    <WiCard>
-      <WiForm label-position="top" @submit.prevent="submit">
-        <WiFormItem label="${zh ? '邮箱' : 'Email'}" name="email"><WiInput type="email" label="${zh ? '邮箱' : 'Email'}" fluid /></WiFormItem>
-        <WiFormItem label="${zh ? '密码' : 'Password'}" name="password"><WiInput type="password" label="${zh ? '密码' : 'Password'}" fluid /></WiFormItem>
-        <WiButton native-type="submit" label="${zh ? '登录' : 'Sign in'}" :loading="loading" />
-      </WiForm>
-    </WiCard>` : `    <WiCard>
+    </WiCard>
+  </main>
+</WiConfigProvider>`
+  } else {
+    innerTemplate = `<WiConfigProvider :locale="zhCN">
+  <main class="wi-generated-page">
+    <WiCard>
       <p class="wi-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
       <WiTag value="${zh ? '示例' : 'Example'}" severity="info" />
-    </WiCard>`}
-    <p v-if="error" role="alert" class="wi-generated-error">{{ error }}</p>
+    </WiCard>
   </main>
+</WiConfigProvider>`
+  }
+
+  const template = `<template>
+  ${innerTemplate}
+  <p v-if="error" role="alert" class="wi-generated-error">${'{{ error }}'}</p>
 </template>`
+
   const style = `<style scoped>
-.wi-generated-page { display: grid; gap: var(--wi-space-4); max-width: 80rem; margin: 0 auto; padding: var(--wi-space-6); }
-.wi-generated-header, .wi-generated-toolbar, .wi-generated-actions, .wi-generated-detail-head { display: flex; gap: var(--wi-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.wi-generated-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--wi-space-4); }
+.wi-generated-page { min-height: 100vh; background: var(--wi-color-surface); }
+.wi-generated-sider { border-right: 1px solid var(--wi-color-border); }
+.wi-generated-header { padding: var(--wi-space-4) var(--wi-space-6); border-bottom: 1px solid var(--wi-color-border); }
+.wi-generated-content { padding: var(--wi-space-6); display: flex; flex-direction: column; gap: var(--wi-space-4); }
+.wi-generated-filters { padding: var(--wi-space-4); background: color-mix(in srgb, var(--wi-color-border) 25%, transparent); border-radius: var(--wi-radius-md); border: 1px solid var(--wi-color-border); }
+.wi-generated-toolbar, .wi-generated-actions { display: flex; gap: var(--wi-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.wi-generated-title { margin: 0; font-size: var(--wi-font-size-lg); font-weight: 600; color: var(--wi-color-text); }
+.wi-generated-intro { margin-bottom: var(--wi-space-2); }
+.wi-generated-form { padding: var(--wi-space-6); border: 1px solid var(--wi-color-border); border-radius: var(--wi-radius-md); box-shadow: var(--wi-shadow-sm); }
+.wi-generated-auth { display: grid; place-items: center; padding: var(--wi-space-8); max-width: 24rem; margin: 0 auto; }
 .wi-generated-metric { display: block; font-size: var(--wi-font-size-lg); margin: var(--wi-space-2) 0; }
 .wi-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wi-space-4); margin: 0; }
 .wi-generated-details dt { color: var(--wi-color-text-muted); font-size: var(--wi-font-size-sm); }
 .wi-generated-details dd { margin: var(--wi-space-1) 0 0; }
 .wi-generated-empty { display: grid; gap: var(--wi-space-2); justify-items: center; padding: var(--wi-space-8); text-align: center; }
-.wi-generated-muted { color: var(--wi-color-text-muted); }
-.wi-generated-error { color: var(--wi-color-danger); }
-@media (max-width: 48rem) { .wi-generated-page { padding: var(--wi-space-4); } .wi-generated-toolbar > *, .wi-generated-grid > * { width: 100%; } .wi-generated-grid, .wi-generated-details { grid-template-columns: 1fr; } }
+.wi-generated-muted { margin: 0; color: var(--wi-color-text-muted); }
+.wi-generated-error { color: var(--wi-color-danger); padding: 0 var(--wi-space-6); }
+@media (max-width: 48rem) { .wi-generated-content { padding: var(--wi-space-4); } .wi-generated-details { grid-template-columns: 1fr; } }
 </style>`
   return { script, template, style }
 }
@@ -675,6 +780,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       matchedPattern: best.pattern.id,
       title: locale === 'en-US' ? best.pattern.titleEn : best.pattern.title,
       confidence: best.score,
+      goldenPage: best.pattern.goldenPage,
       components: best.pattern.components,
       structure: best.pattern.structure,
       layout: best.pattern.layout,
@@ -683,8 +789,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
       nextStep: locale === 'en-US'
-        ? 'Read matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file.'
-        : '用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true。',
+        ? `Read goldenPage (${best.pattern.goldenPage || 'none'}) and matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file aligned with WiLayout shell.`
+        : `先阅读 goldenPage（${best.pattern.goldenPage || '无'}）并用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true（已对齐 WiLayout 骨架）。`,
     }
     if (args.includeScaffold) {
       const code = generatedPageCode(best.pattern.id, args.intent, locale)

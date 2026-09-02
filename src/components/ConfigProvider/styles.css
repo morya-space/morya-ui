@@ -1,1 +1,4 @@
-/* ConfigProvider is a logic wrapper; styles come from theme tokens and descendants. */
+/* ConfigProvider passes height to layout roots when the app shell is full-height. */
+.wi-config-provider {
+  height: 100%;
+}

@@ -684,7 +684,9 @@
     "mcp:validate-catalog": "pnpm --filter @well-insight/ui-mcp validate-catalog",
     "mcp:audit-examples": "pnpm --filter @well-insight/ui-mcp audit-example-coverage",
     "mcp:build": "pnpm --filter @well-insight/ui-mcp build",
-    "mcp:start": "pnpm --filter @well-insight/ui-mcp start"
+    "mcp:start": "pnpm --filter @well-insight/ui-mcp start",
+    "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src ai-design-config/docs/golden-pages ai-design-config/src/examples",
+    "dev:admin": "pnpm --filter @well-insight/admin-manage-project dev"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

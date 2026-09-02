@@ -14,8 +14,8 @@
 
 ```vue
 <script setup lang="ts">
-import { WiConfigProvider } from '@well-insight/ui'
-import { zhCN } from '@well-insight/ui/locale'
+import { WiConfigProvider, zhCN } from '@well-insight/ui'
+import '@well-insight/ui/styles.css'
 </script>
 
 <template>

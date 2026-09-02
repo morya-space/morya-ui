@@ -3,8 +3,8 @@ import type { CSSProperties, StyleValue } from "vue";
 import type { LayoutExpose, LayoutSiderProps } from "./types";
 import { computed, inject, useTemplateRef } from "vue";
 import { useWiLocale } from "../../locale";
+import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
 import WiIcon from "../Icon/Icon.vue";
-import { toCssLength } from "../../shared/responsive";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
 import { WI_LAYOUT_KEY } from "./context";
@@ -16,8 +16,6 @@ const props = withDefaults(defineProps<LayoutSiderProps>(), {
     bordered: false,
     inverted: false,
     position: "static",
-    width: "var(--wi-layout-sider-width)",
-    collapsedWidth: "var(--wi-layout-sider-collapsed-width)",
     defaultCollapsed: false,
     collapseMode: "transform",
     showCollapsedContent: true,
@@ -40,16 +38,22 @@ const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 const { mergedCollapsed, toggle } = useLayoutSiderCollapse(props, emit);
 
 const siderPlacement = computed(() => layout?.siderPlacement ?? "left");
-const expandedWidth = computed(
-    () => toCssLength(props.width) ?? "var(--wi-layout-sider-width)",
+
+/** Explicit prop values only — defaults live in `.wi-layout-sider` CSS. */
+const expandedWidth = computed(() => toCssLength(props.width));
+const collapsedWidth = computed(() => toCssLength(props.collapsedWidth));
+
+const effectiveExpandedWidth = computed(
+    () => expandedWidth.value ?? "var(--wi-layout-sider-width)",
 );
-const collapsedWidth = computed(
-    () =>
-        toCssLength(props.collapsedWidth) ??
-        "var(--wi-layout-sider-collapsed-width)",
+const effectiveCollapsedWidth = computed(
+    () => collapsedWidth.value ?? "var(--wi-layout-sider-collapsed-width)",
 );
+
 const layoutWidth = computed(() =>
-    mergedCollapsed.value ? collapsedWidth.value : expandedWidth.value,
+    mergedCollapsed.value
+        ? effectiveCollapsedWidth.value
+        : effectiveExpandedWidth.value,
 );
 
 const triggerKind = computed(() => resolveLayoutTrigger(props.showTrigger));
@@ -73,18 +77,36 @@ const rootClass = computed(() => [
 
 const rootStyle = computed(() => {
     const isWidthMode = props.collapseMode === "width";
-
-    return {
-        "--wi-layout-sider-width": expandedWidth.value,
-        "--wi-layout-sider-collapsed-width": collapsedWidth.value,
-        width: isWidthMode ? layoutWidth.value : expandedWidth.value,
-        maxWidth: layoutWidth.value,
+    const style: Record<string, string> = {
         minWidth: "0",
         borderRadius:
             props.radius == null
                 ? "var(--wi-layout-radius, 0)"
-                : toCssLength(props.radius),
+                : toCssLength(props.radius)!,
+        width: isWidthMode ? layoutWidth.value : effectiveExpandedWidth.value,
+        maxWidth: layoutWidth.value,
     };
+
+    if (
+        expandedWidth.value &&
+        !isSelfReferencingCssVar(
+            expandedWidth.value,
+            "--wi-layout-sider-width",
+        )
+    ) {
+        style["--wi-layout-sider-width"] = expandedWidth.value;
+    }
+    if (
+        collapsedWidth.value &&
+        !isSelfReferencingCssVar(
+            collapsedWidth.value,
+            "--wi-layout-sider-collapsed-width",
+        )
+    ) {
+        style["--wi-layout-sider-collapsed-width"] = collapsedWidth.value;
+    }
+
+    return style;
 });
 
 const siderPadding = computed(() =>

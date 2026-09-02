@@ -117,6 +117,11 @@ export const componentAliases: Record<string, string> = {
   pagination: 'Pagination',
   pager: 'Pagination',
   分页器: 'Pagination',
+  layoutheader: 'Layout',
+  layoutsider: 'Layout',
+  layoutcontent: 'Layout',
+  layoutfooter: 'Layout',
+  griditem: 'Grid',
 }
 
 const here = dirname(fileURLToPath(import.meta.url))

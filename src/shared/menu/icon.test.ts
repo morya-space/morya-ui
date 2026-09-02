@@ -9,5 +9,12 @@ describe('resolveMenuIcon', () => {
 
   it('returns registered icon names', () => {
     expect(resolveMenuIcon('check')).toBe('check')
+    expect(resolveMenuIcon('shield')).toBe('shield')
+  })
+
+  it('maps common external icon aliases', () => {
+    expect(resolveMenuIcon('layout-dashboard')).toBe('home')
+    expect(resolveMenuIcon('users-group')).toBe('user')
+    expect(resolveMenuIcon('report-analytics')).toBe('chart-bar')
   })
 })

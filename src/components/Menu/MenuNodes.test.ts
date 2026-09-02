@@ -1,36 +1,28 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import MenuNodes from './MenuNodes.vue'
+import WiMenu from './Menu.vue'
 
 describe('MenuNodes', () => {
   it('activates leaf items and toggles nested groups', async () => {
-    const wrapper = mount(MenuNodes, {
+    const wrapper = mount(WiMenu, {
       props: {
-        items: [
-          { label: 'File', items: [{ key: 'save', label: 'Save' }] },
-          { label: 'Quit' },
+        model: [
+          { key: 'file', label: 'File', items: [{ key: 'save', label: 'Save' }] },
+          { key: 'quit', label: 'Quit' },
         ],
-        depth: 0,
-        indent: 16,
-        collapsed: false,
-        selectedKey: null,
       },
     })
 
-    await wrapper.get('.wi-menu__item--parent').trigger('click')
+    await wrapper.get('.wi-menu__item--submenu .wi-menu__item-content').trigger('click')
     expect(wrapper.find('.wi-menu__submenu').exists()).toBe(true)
-    await wrapper.get('.wi-menu__submenu .wi-menu__item').trigger('click')
-    expect(wrapper.emitted('activate')?.[0]?.[0]).toMatchObject({ label: 'Save' })
+    await wrapper.get('.wi-menu__submenu .wi-menu__item-content').trigger('click')
+    expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ label: 'Save' })
   })
 
   it('renders separator rows', () => {
-    const wrapper = mount(MenuNodes, {
+    const wrapper = mount(WiMenu, {
       props: {
-        items: [{ separator: true }, { label: 'Item' }],
-        depth: 0,
-        indent: 16,
-        collapsed: false,
-        selectedKey: null,
+        model: [{ separator: true }, { label: 'Item' }],
       },
     })
     expect(wrapper.find('.wi-menu__separator').exists()).toBe(true)

@@ -171,7 +171,7 @@
 
 [data-wi-density="compact"] .wi-layout-sider {
     --wi-layout-sider-width: 240px;
-    --wi-layout-sider-collapsed-width: 44px;
+    --wi-layout-sider-collapsed-width: 52px;
 }
 
 [data-wi-density="spacious"] .wi-layout-header {
@@ -184,7 +184,7 @@
 
 [data-wi-density="spacious"] .wi-layout-sider {
     --wi-layout-sider-width: 288px;
-    --wi-layout-sider-collapsed-width: 52px;
+    --wi-layout-sider-collapsed-width: 72px;
 }
 
 [data-theme="dark"] {

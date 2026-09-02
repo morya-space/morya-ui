@@ -5,6 +5,10 @@ export type FloatingOverlayPlacement =
   | 'right'
   | 'bottom-start'
   | 'bottom-end'
+  | 'top-start'
+  | 'top-end'
+  | 'right-start'
+  | 'left-start'
 
 export interface FloatingOverlayStyleOptions {
   gap?: number
@@ -64,6 +68,19 @@ export function computeFloatingOverlayStyle(
         transform: 'translateY(-50%)',
         ...extra,
       }
+    case 'right-start':
+      return {
+        left: `${anchor.right + gap}px`,
+        top: `${anchor.top}px`,
+        ...extra,
+      }
+    case 'left-start':
+      return {
+        left: `${anchor.left - gap}px`,
+        top: `${anchor.top}px`,
+        transform: 'translateX(-100%)',
+        ...extra,
+      }
     case 'bottom-end':
       return {
         left: `${anchor.right}px`,
@@ -75,6 +92,20 @@ export function computeFloatingOverlayStyle(
       return {
         left: `${anchor.left}px`,
         top: `${anchor.bottom + gap}px`,
+        ...extra,
+      }
+    case 'top-start':
+      return {
+        left: `${anchor.left}px`,
+        top: `${anchor.top - gap}px`,
+        transform: 'translateY(-100%)',
+        ...extra,
+      }
+    case 'top-end':
+      return {
+        left: `${anchor.right}px`,
+        top: `${anchor.top - gap}px`,
+        transform: 'translate(-100%, -100%)',
         ...extra,
       }
     default:
