@@ -3,9 +3,12 @@ import type { IconName } from '../Icon/types'
 
 /** Color tone aligned with `severity`. Omit for primary. */
 export type ButtonSeverity =
+  | 'primary'
   | 'secondary'
   | 'success'
   | 'info'
+  | 'warning'
+  /** @deprecated Use `'warning'` instead. */
   | 'warn'
   | 'help'
   | 'danger'
@@ -14,11 +17,11 @@ export type ButtonSeverity =
 /** Visual variant aligned with `variant`. */
 export type ButtonVariant = 'outlined' | 'text' | 'link' | 'ghost' | 'quaternary'
 
-export type ButtonSize = 'small' | 'large'
+export type ButtonSize = 'small' | 'medium' | 'large'
 
 export type ButtonIconPos = 'left' | 'right' | 'top' | 'bottom'
 
-export type ButtonBadgeSeverity = Exclude<ButtonSeverity, 'help'> | null
+export type ButtonBadgeSeverity = Exclude<ButtonSeverity, 'primary' | 'help'> | null
 
 export interface ButtonProps {
   /** Button label text. Ignored when default slot has content. */

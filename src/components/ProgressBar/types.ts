@@ -1,6 +1,15 @@
 export type ProgressBarMode = 'determinate' | 'indeterminate'
 export type ProgressBarType = 'line' | 'circle'
-export type ProgressBarStatus = 'success' | 'info' | 'warn' | 'warning' | 'danger' | 'error'
+/** Canonical: success/info/warning/danger. `warn` / `error` are accepted as deprecated aliases. */
+export type ProgressBarStatus =
+  | 'success'
+  | 'info'
+  | 'warning'
+  /** @deprecated Use `'warning'` instead. */
+  | 'warn'
+  | 'danger'
+  /** @deprecated Use `'danger'` instead. */
+  | 'error'
 
 export interface ProgressBarProps {
   /** Progress percentage from 0 to 100. */

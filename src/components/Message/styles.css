@@ -151,7 +151,8 @@
     color: var(--wi-color-warn);
 }
 
-.wi-message--error {
+.wi-message--error,
+.wi-message--danger {
     background: color-mix(
         in srgb,
         var(--wi-color-danger) 10%,
@@ -164,7 +165,8 @@
     );
 }
 
-.wi-message--error .wi-message__icon {
+.wi-message--error .wi-message__icon,
+.wi-message--danger .wi-message__icon {
     color: var(--wi-color-danger);
 }
 

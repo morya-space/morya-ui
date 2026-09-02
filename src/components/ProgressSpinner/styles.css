@@ -17,12 +17,6 @@
     stroke-linecap: round;
 }
 
-@keyframes wi-progress-spinner-rotate {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 @keyframes wi-progress-spinner-dash {
     0% {
         stroke-dasharray: 1, 150;

@@ -4,7 +4,7 @@ import type { IconName } from '../Icon/types'
 import type { ButtonProps } from './types'
 import { Comment, computed, Fragment, ref, Text, useSlots   } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { resolveIconSizeFromClass } from '../../shared/types'
+import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -46,7 +46,7 @@ const iconSize = computed(() => resolveIconSizeFromClass(resolvedSize.value))
 
 const isIconOnly = computed(() => props.iconOnly || ((!hasLabel.value) && Boolean(props.icon || slots.icon || props.loading)))
 
-const severityTone = computed(() => props.severity ?? 'primary')
+const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
 
 const iconName = computed(() => (typeof props.icon === 'string' ? (props.icon as IconName) : undefined))
 const iconComponent = computed(() => (typeof props.icon === 'string' || !props.icon ? undefined : props.icon))
@@ -78,7 +78,7 @@ const buttonStyle = computed(() =>
 
 const badgeClass = computed(() => [
   'wi-button__badge',
-  props.badgeSeverity ? `wi-button__badge--${props.badgeSeverity}` : 'wi-button__badge--contrast',
+  props.badgeSeverity ? `wi-button__badge--${normalizeSeverity(props.badgeSeverity)}` : 'wi-button__badge--contrast',
 ])
 
 function hasRenderableContent(node: VNodeChild): boolean {
