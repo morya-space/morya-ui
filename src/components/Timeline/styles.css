@@ -70,7 +70,8 @@
     color: var(--wi-color-warn);
 }
 
-.wi-timeline__marker--error {
+.wi-timeline__marker--error,
+.wi-timeline__marker--danger {
     border-color: var(--wi-color-danger);
     color: var(--wi-color-danger);
 }

@@ -1,5 +1,10 @@
 /* Shared tokens consumption, type, focus, and mixed selectors. */
 
+:root {
+    /* Shared minimum width for menu-like panels (select/orderlist/picklist) */
+    --wi-menu-min-width: 12rem;
+}
+
 .wi-button,
 .wi-input,
 .wi-card,
@@ -172,6 +177,13 @@
 .wi-slide-fade-leave-to {
     opacity: 0;
     transform: translateY(calc(var(--wi-motion-distance) * -1));
+}
+
+/* Shared loading spinner rotation (ProgressSpinner, Switch, ProgressBar, AutoComplete) */
+@keyframes wi-progress-spinner-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .wi-checkbox,

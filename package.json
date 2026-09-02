@@ -686,6 +686,8 @@
     "mcp:build": "pnpm --filter @well-insight/ui-mcp build",
     "mcp:start": "pnpm --filter @well-insight/ui-mcp start",
     "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src ai-design-config/docs/golden-pages ai-design-config/src/examples",
+    "check:tokens": "node ai-design-config/scripts/check-undefined-tokens.mjs src",
+    "check:docs": "node ai-design-config/scripts/check-docs-drift.mjs --report audits/docs-drift-report.md --no-fail",
     "dev:admin": "pnpm --filter @well-insight/admin-manage-project dev"
   },
   "peerDependencies": {

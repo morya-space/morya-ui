@@ -15,8 +15,11 @@ const isIndeterminate = computed(() => props.mode === 'indeterminate')
 const isCircle = computed(() => props.type === 'circle')
 const statusTone = computed(() => {
   if (!props.status) return undefined
+  // `error` → `danger` stays local: shared normalizeSeverity must pass `error` through
+  // unchanged for Toast/Message/Timeline (their styles and the Message icon map key on
+  // `error`) until those consumers migrate (fix-plan T3.7).
   if (props.status === 'error') return 'danger'
-  return normalizeSeverity(props.status) ?? props.status
+  return normalizeSeverity(props.status)
 })
 
 const progressClass = computed(() => [

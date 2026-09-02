@@ -52,7 +52,7 @@ function iconName(severity?: MessageItem['severity']): IconName {
       return 'check-circle'
     case 'warn':
       return 'warning'
-    case 'error':
+    case 'danger':
       return 'x-circle'
     default:
       return 'info'
