@@ -83,6 +83,40 @@ describe("wiLayout", () => {
     expect(header.element.style.borderRadius).toBe("8px");
   });
 
+  it("uses CSS percentage height by default", () => {
+    const wrapper = mount(WiLayout);
+    expect(wrapper.element.style.height).toBe("");
+    expect(wrapper.classes()).toContain("wi-layout");
+  });
+
+  it("does not self-reference sider width tokens by default", () => {
+    const wrapper = mount(WiLayoutSider);
+    expect(wrapper.element.style.getPropertyValue("--wi-layout-sider-width")).toBe(
+      "",
+    );
+    expect(
+      wrapper.element.style.getPropertyValue("--wi-layout-sider-collapsed-width"),
+    ).toBe("");
+    expect(wrapper.element.style.width).toBe("var(--wi-layout-sider-width)");
+    expect(wrapper.element.style.maxWidth).toBe("var(--wi-layout-sider-width)");
+  });
+
+  it("does not write self-referencing var() props to sider width tokens", () => {
+    const wrapper = mount(WiLayoutSider, {
+      props: {
+        width: "var(--wi-layout-sider-width)",
+        collapsedWidth: "var(--wi-layout-sider-collapsed-width)",
+      },
+    });
+    expect(wrapper.element.style.getPropertyValue("--wi-layout-sider-width")).toBe(
+      "",
+    );
+    expect(
+      wrapper.element.style.getPropertyValue("--wi-layout-sider-collapsed-width"),
+    ).toBe("");
+    expect(wrapper.element.style.width).toBe("var(--wi-layout-sider-width)");
+  });
+
   it("uses the sider width only on the root element", () => {
     const wrapper = mount(WiLayoutSider, {
       props: { width: 240, collapsedWidth: 56, padding: 16, radius: 4 },

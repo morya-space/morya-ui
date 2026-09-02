@@ -1,9 +1,12 @@
 /* —— Panel: Layout —— */
 .wi-layout {
     --wi-layout-height: 100%;
+    height: var(--wi-layout-height, 100%);
     background: var(--wi-color-surface);
     box-sizing: border-box;
     color: var(--wi-color-text);
+    display: flex;
+    flex-direction: column;
     flex: auto;
     min-height: 0;
     min-width: 0;
@@ -45,7 +48,14 @@
 
 .wi-layout__scroll--has-sider {
     /* direction set inline (matches naive hasSiderStyle) */
+    align-items: stretch;
     flex-wrap: nowrap;
+}
+
+.wi-layout__scroll--has-sider > .wi-layout-sider,
+.wi-layout__scroll--has-sider > .wi-layout {
+    align-self: stretch;
+    min-height: 100%;
 }
 
 /* Nested layout / content grow to fill remaining space */
@@ -147,11 +157,12 @@
 }
 
 .wi-layout-sider {
-    --wi-layout-sider-width: 272px;
-    --wi-layout-sider-collapsed-width: 48px;
+    --wi-layout-sider-width: 200px;
+    --wi-layout-sider-collapsed-width: 64px;
     --wi-layout-padding: var(--wi-space-4);
     --wi-layout-radius: 0;
     --wi-layout-trigger-size: 1.5rem;
+    align-self: stretch;
     background: var(--wi-color-surface);
     box-sizing: border-box;
     color: var(--wi-color-text);

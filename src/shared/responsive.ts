@@ -58,3 +58,13 @@ export function toCssLength(value: string | number | undefined | null): string |
   if (/^\d+(\.\d+)?$/.test(raw)) return `${raw}px`
   return raw
 }
+
+/** True when `value` is `var(--token)` referencing the same custom property. */
+export function isSelfReferencingCssVar(
+  value: string | undefined | null,
+  token: `--${string}`,
+): boolean {
+  if (value == null || value === '') return false
+  const match = String(value).trim().match(/^var\(\s*(--[\w-]+)/)
+  return match?.[1] === token
+}

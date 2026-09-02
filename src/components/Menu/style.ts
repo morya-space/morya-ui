@@ -1,4 +1,5 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
 import '../Icon/styles.css'
+import '../Popover/styles.css'
 import './styles.css'

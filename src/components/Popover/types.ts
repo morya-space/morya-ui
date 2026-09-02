@@ -7,6 +7,8 @@ export type PopoverPlacement =
   | 'right'
   | 'bottom-start'
   | 'bottom-end'
+  | 'right-start'
+  | 'left-start'
 
 export type PopoverTrigger = 'manual' | 'click' | 'hover' | 'focus'
 

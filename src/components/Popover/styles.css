@@ -44,6 +44,18 @@
     transform: translateY(-50%);
 }
 
+.wi-popover__content--right-start {
+    left: calc(100% + var(--wi-space-2));
+    top: 0;
+    transform: none;
+}
+
+.wi-popover__content--left-start {
+    right: calc(100% + var(--wi-space-2));
+    top: 0;
+    transform: none;
+}
+
 .wi-popover__content--bottom-start {
     left: 0;
     top: calc(100% + var(--wi-space-2));

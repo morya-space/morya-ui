@@ -45,7 +45,7 @@ function markerTone(severity?: TimelineSeverity) {
 }
 
 function markerStyle(event: TimelineEvent) {
-  if (event.color) return { background: event.color, borderColor: event.color, color: '#fff' }
+  if (event.color) return { background: event.color, borderColor: event.color, color: 'var(--wi-color-contrast-fg)' }
   return undefined
 }
 

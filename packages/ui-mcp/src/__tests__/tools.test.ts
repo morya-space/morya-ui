@@ -135,7 +135,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     )
 
     expect(result.matchedPattern).toBe('dashboard')
-    expect(result.scaffold.files.component).toContain('WiProgressBar')
+    expect(result.scaffold.files.component).toContain('WiGrid')
     expect(result.scaffold.files.component).toContain('WiSkeleton')
   })
 
