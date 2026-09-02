@@ -66,7 +66,6 @@ export function useTotalItems(
   })
 
   watch(itemsFiltering, (newVal) => {
-    if (filterOptions.value) emits('updateFilter', newVal)
   }, { immediate: true, deep: true })
 
   function recursionMultiSort(
@@ -121,7 +120,7 @@ export function useTotalItems(
 
   const selectItemsComputed = computed({
     get: () => itemsSelected.value ?? [],
-    set: (value) => emits('update:itemsSelected', value),
+    set: (value) => emits('update:selection', value),
   })
 
   const toggleSelectAll = (isChecked: boolean) => {

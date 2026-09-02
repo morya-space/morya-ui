@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T09:23:17.785Z",
+  "generatedAt": "2026-09-02T03:21:35.743Z",
   "library": {
     "name": "@well-insight/ui",
     "version": "0.1.13"
@@ -17184,188 +17184,214 @@
       "exportName": "WiTable",
       "category": "06 / DATA",
       "description": "数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。",
-      "descriptionEn": "Data table. Supports sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.",
+      "descriptionEn": "Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.",
       "import": "import { WiTable } from '@well-insight/ui'",
       "props": [
         {
           "name": "columns",
-          "type": "TableColumn[]",
+          "type": "TableColumnDefinition[]",
           "default": "—",
-          "description": "列定义：`width` 固定；`minWidth` 弹性下限（默认 80）；可设 `render`。"
+          "description": "列定义。"
+        },
+        {
+          "name": "rows",
+          "type": "TableItem[]",
+          "default": "—",
+          "description": "行数据。"
         },
         {
           "name": "fit",
           "type": "boolean",
           "default": "true",
-          "description": "弹性列是否按比例分配剩余宽度。"
-        },
-        {
-          "name": "rows",
-          "type": "Record[]",
-          "default": "—",
-          "description": "行数据。"
+          "description": "弹性列是否撑满表格宽度。"
         },
         {
           "name": "selectionMode",
-          "type": "'single' | 'multiple'",
-          "default": "—",
-          "description": "行选择。"
+          "type": "'single' | 'multiple' | null",
+          "default": "null",
+          "description": "行选择模式。"
         },
         {
           "name": "selection",
-          "type": "—",
-          "default": "—",
-          "description": "`v-model:selection`。"
+          "type": "TableItem[] | null",
+          "default": "null",
+          "description": "多选绑定（`v-model:selection`）。"
         },
         {
-          "name": "filters",
-          "type": "Record",
-          "default": "{}",
-          "description": "`v-model:filters`。"
+          "name": "selectedItem",
+          "type": "TableItem | null",
+          "default": "null",
+          "description": "单选绑定（`v-model:selected-item`）。"
+        },
+        {
+          "name": "serverOptions",
+          "type": "TableServerOptions | null",
+          "default": "null",
+          "description": "服务端分页/排序选项。"
+        },
+        {
+          "name": "serverItemsLength",
+          "type": "number",
+          "default": "0",
+          "description": "服务端总条数。"
         },
         {
           "name": "paginator",
           "type": "boolean",
           "default": "false",
-          "description": "内置分页。"
-        },
-        {
-          "name": "rowsPerPage",
-          "type": "—",
-          "default": "10` / `1",
-          "description": "分页。"
+          "description": "显示内置分页页脚。"
         },
         {
           "name": "page",
-          "type": "—",
-          "default": "10` / `1",
-          "description": "分页。"
+          "type": "number",
+          "default": "1",
+          "description": "当前页（`v-model:page`）。"
+        },
+        {
+          "name": "rowsPerPage",
+          "type": "number",
+          "default": "25",
+          "description": "每页条数。"
         },
         {
           "name": "expandable",
           "type": "boolean",
           "default": "false",
-          "description": "展开列；用插槽 `expansion` 渲染详情行。"
-        },
-        {
-          "name": "expandedRowKeys",
-          "type": "Array<string | number>",
-          "default": "[]",
-          "description": "`v-model:expanded-row-keys`。"
-        },
-        {
-          "name": "rowExpandable",
-          "type": "(row) => boolean",
-          "default": "—",
-          "description": "返回 `false` 时该行不可展开。"
+          "description": "显示展开列（也可由 `#expansion` 插槽隐式启用）。"
         },
         {
           "name": "striped",
           "type": "boolean",
-          "default": "—",
-          "description": "外观。"
+          "default": "false",
+          "description": "斑马纹行。"
         },
         {
           "name": "bordered",
           "type": "boolean",
-          "default": "—",
-          "description": "外观。"
+          "default": "false",
+          "description": "单元格边框。"
         },
         {
           "name": "highlightCurrent",
           "type": "boolean",
-          "default": "—",
-          "description": "外观。"
+          "default": "false",
+          "description": "高亮当前行，配合 `v-model:current-row-key`。"
         },
         {
           "name": "rowHover",
           "type": "boolean",
-          "default": "—",
-          "description": "外观。"
-        },
-        {
-          "name": "sortMode",
-          "type": "'client' | 'emit'",
-          "default": "'client'",
-          "description": "本地排序或仅抛事件。"
+          "default": "true",
+          "description": "行 hover 高亮。"
         },
         {
           "name": "sortField",
           "type": "—",
           "default": "—",
-          "description": "受控排序。"
+          "description": "受控排序字段与方向。"
         },
         {
           "name": "sortOrder",
           "type": "—",
           "default": "—",
-          "description": "受控排序。"
+          "description": "受控排序字段与方向。"
+        },
+        {
+          "name": "sortMode",
+          "type": "'client' | 'emit'",
+          "default": "'client'",
+          "description": "客户端排序或仅抛出排序事件。"
+        },
+        {
+          "name": "searchField",
+          "type": "—",
+          "default": "—",
+          "description": "客户端搜索。"
+        },
+        {
+          "name": "searchValue",
+          "type": "—",
+          "default": "—",
+          "description": "客户端搜索。"
+        },
+        {
+          "name": "filterOptions",
+          "type": "TableFilterOption[]",
+          "default": "null",
+          "description": "结构化筛选条件。"
         },
         {
           "name": "loading",
-          "type": "—",
-          "default": "—",
-          "description": "同前。"
+          "type": "boolean",
+          "default": "false",
+          "description": "加载中。"
         },
         {
           "name": "emptyText",
-          "type": "—",
+          "type": "string",
           "default": "—",
-          "description": "同前。"
+          "description": "空数据文案。"
         },
         {
           "name": "emptyDescription",
-          "type": "—",
+          "type": "string",
           "default": "—",
-          "description": "同前。"
+          "description": "空数据补充说明。"
+        },
+        {
+          "name": "maxHeight",
+          "type": "number | null",
+          "default": "null",
+          "description": "表格最大高度，超出滚动。"
+        },
+        {
+          "name": "showOverflowTooltip",
+          "type": "boolean",
+          "default": "false",
+          "description": "全局单元格溢出 Tooltip。"
+        },
+        {
+          "name": "rowKey",
+          "type": "string",
+          "default": "'id'",
+          "description": "行唯一键字段。"
         },
         {
           "name": "size",
-          "type": "—",
+          "type": "'sm' | 'md' | 'lg'",
           "default": "—",
-          "description": "同前。"
+          "description": "表格密度。"
         }
       ],
       "events": [
         {
           "name": "sort",
-          "payload": "{ sortField?, sortOrder }",
-          "description": "排序变化（`sortMode=\"emit\"` 或受控排序）。"
-        },
-        {
-          "name": "filter",
-          "payload": "TableFilters",
-          "description": "筛选变化。"
+          "payload": "{ sortField?, sortOrder? }",
+          "description": "排序变化。"
         },
         {
           "name": "page",
           "payload": "number",
-          "description": "分页页码变化。"
+          "description": "页码变化。"
         },
         {
           "name": "row-click",
           "payload": "{ row, index }",
-          "description": "行点击。"
+          "description": "行单击。"
         },
         {
           "name": "current-change",
-          "payload": "row | null",
+          "payload": "row | null, oldRow | null",
           "description": "当前高亮行变化。"
         },
         {
           "name": "expand",
           "payload": "{ row, expanded }",
-          "description": "行展开/收起。"
+          "description": "行展开。"
         },
         {
           "name": "update:selection",
-          "payload": "selection",
-          "description": "选择项变化（配合 `v-model:selection`）。"
-        },
-        {
-          "name": "update:filters",
-          "payload": "TableFilters",
-          "description": "筛选 v-model。"
+          "payload": "TableItem[]",
+          "description": "多选 v-model。"
         },
         {
           "name": "update:page",
@@ -17373,9 +17399,14 @@
           "description": "页码 v-model。"
         },
         {
-          "name": "update:expanded-row-keys",
-          "payload": "Array<string | number>",
-          "description": "展开行 keys v-model。"
+          "name": "update:server-options",
+          "payload": "TableServerOptions",
+          "description": "服务端选项 v-model。"
+        },
+        {
+          "name": "update:current-row-key",
+          "payload": "string | number | null",
+          "description": "当前行键 v-model。"
         }
       ],
       "slots": [],
@@ -17386,7 +17417,7 @@
           "sectionId": "引入",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiTable, WiTag } from '@well-insight/ui'",
+          "code": "import { WiTable, WiTag } from '@well-insight/ui'\nimport type { TableColumnDefinition, TableItem } from '@well-insight/ui'",
           "locale": "zh-CN"
         },
         {
@@ -17395,52 +17426,61 @@
           "sectionId": "基础用法",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '项目', minWidth: 140, sortable: true },\n  { key: 'status', label: '状态', width: 120 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n  { key: 'team', label: '团队', minWidth: 120 },\n  { key: 'progress', label: '进度', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },\n  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },\n  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },\n  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },\n  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '项目', minWidth: 140, sortable: true },\n  { key: 'status', label: '状态', width: 120 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n  { key: 'team', label: '团队', minWidth: 120 },\n  { key: 'progress', label: '进度', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>",
           "locale": "zh-CN"
         },
         {
-          "id": "selection-1",
-          "section": "Selection",
-          "sectionId": "selection",
+          "id": "行选择-1",
+          "section": "行选择",
+          "sectionId": "行选择",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'dept', label: '部门', minWidth: 120 },\n  { key: 'city', label: '城市', minWidth: 100 },\n  { key: 'level', label: '级别', width: 90 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },\n  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },\n  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },\n  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },\n  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },\n]\nconst selection = ref([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n  />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n]\nconst selection = ref<Record<string, unknown>[]>([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n    :paginator=\"false\"\n  />\n</template>",
           "locale": "zh-CN"
         },
         {
-          "id": "filter-pagination-1",
-          "section": "Filter + Pagination",
-          "sectionId": "filter-pagination",
+          "id": "筛选与分页-1",
+          "section": "筛选与分页",
+          "sectionId": "筛选与分页",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', filterable: true, sortable: true, minWidth: 120 },\n  {\n    key: 'role',\n    label: '角色',\n    filterable: true,\n    minWidth: 120,\n    filters: [\n      { label: 'Engineer', value: 'Engineer' },\n      { label: 'Designer', value: 'Designer' },\n      { label: 'PM', value: 'PM' },\n      { label: 'QA', value: 'QA' },\n    ],\n  },\n  { key: 'dept', label: '部门', minWidth: 120, sortable: true },\n  { key: 'email', label: '邮箱', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },\n  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },\n  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },\n  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"5\"\n  />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', sortable: true, minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'email', label: '邮箱', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', email: 'neo@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"3\"\n  />\n</template>",
           "locale": "zh-CN"
         },
         {
-          "id": "fixed-columns-1",
-          "section": "Fixed columns",
-          "sectionId": "fixed-columns",
+          "id": "固定列-1",
+          "section": "固定列",
+          "sectionId": "固定列",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'q4', label: 'Q4 营收', width: 140 },\n  { key: 'yoy', label: '同比', width: 100 },\n  { key: 'action', label: '操作', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', q4: '15.2万', yoy: '+18%', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', q4: '12.0万', yoy: '+12%', action: '编辑' },\n  { id: 3, name: 'Kai', q1: '15.0万', q2: '14.6万', q3: '16.1万', q4: '17.3万', yoy: '+9%', action: '编辑' },\n  { id: 4, name: 'Mia', q1: '8.2万', q2: '8.9万', q3: '9.4万', q4: '10.1万', yoy: '+21%', action: '编辑' },\n  { id: 5, name: 'Neo', q1: '11.3万', q2: '11.0万', q3: '12.2万', q4: '13.5万', yoy: '+7%', action: '编辑' },\n  { id: 6, name: 'Zoe', q1: '10.5万', q2: '11.8万', q3: '12.4万', q4: '13.0万', yoy: '+15%', action: '编辑' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'action', label: '操作', width: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered :paginator=\"false\" />\n</template>",
           "locale": "zh-CN"
         },
         {
-          "id": "expandable-column-render-1",
-          "section": "Expandable + column render",
-          "sectionId": "expandable-column-render",
+          "id": "展开行与列渲染-1",
+          "section": "展开行与列渲染",
+          "sectionId": "展开行与列渲染",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst expandedRowKeys = ref<Array<string | number>>([])\nconst columns = [\n  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },\n]\n</script>\n\n<template>\n  <WiTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    expandable\n    bordered\n  >\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>",
           "locale": "zh-CN"
         },
         {
-          "id": "empty-loading-1",
-          "section": "Empty / Loading",
-          "sectionId": "empty-loading",
+          "id": "空态与加载-1",
+          "section": "空态与加载",
+          "sectionId": "空态与加载",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'dept', label: '部门', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"还没有数据\"\n      empty-description=\"创建第一条记录后会显示在这里\"\n    />\n  </div>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"还没有数据\"\n      empty-description=\"创建第一条记录后会显示在这里\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "服务端模式-1",
+          "section": "服务端模式",
+          "sectionId": "服务端模式",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '项目', sortable: true, minWidth: 140 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n]\nconst rows = ref([\n  { id: 1, name: 'Landing', owner: 'Ada' },\n  { id: 2, name: 'Dashboard', owner: 'Lin' },\n])\nconst serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })\nconst total = ref(42)\n</script>\n\n<template>\n  <WiTable\n    v-model:server-options=\"serverOptions\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :server-items-length=\"total\"\n    :loading=\"false\"\n  />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -17449,7 +17489,7 @@
           "sectionId": "import",
           "lang": "ts",
           "preview": false,
-          "code": "import { WiTable, WiTag } from '@well-insight/ui'",
+          "code": "import { WiTable, WiTag } from '@well-insight/ui'\nimport type { TableColumnDefinition, TableItem } from '@well-insight/ui'",
           "locale": "en-US"
         },
         {
@@ -17458,7 +17498,7 @@
           "sectionId": "basic",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Project', minWidth: 140, sortable: true },\n  { key: 'status', label: 'Status', width: 120 },\n  { key: 'owner', label: 'Owner', minWidth: 100 },\n  { key: 'team', label: 'Team', minWidth: 120 },\n  { key: 'progress', label: 'Progress', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },\n  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },\n  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },\n  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },\n  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Project', minWidth: 140, sortable: true },\n  { key: 'status', label: 'Status', width: 120 },\n  { key: 'owner', label: 'Owner', minWidth: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>",
           "locale": "en-US"
         },
         {
@@ -17467,43 +17507,34 @@
           "sectionId": "selection",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n  { key: 'dept', label: 'Department', minWidth: 120 },\n  { key: 'city', label: 'City', minWidth: 100 },\n  { key: 'level', label: 'Level', width: 90 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },\n  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },\n  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },\n  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },\n  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },\n]\nconst selection = ref([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n  />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n]\nconst selection = ref<Record<string, unknown>[]>([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n    :paginator=\"false\"\n  />\n</template>",
           "locale": "en-US"
         },
         {
-          "id": "filter-pagination-1",
-          "section": "Filter + Pagination",
-          "sectionId": "filter-pagination",
+          "id": "filter-and-pagination-1",
+          "section": "Filter and pagination",
+          "sectionId": "filter-and-pagination",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', filterable: true, sortable: true, minWidth: 120 },\n  {\n    key: 'role',\n    label: 'Role',\n    filterable: true,\n    minWidth: 120,\n    filters: [\n      { label: 'Engineer', value: 'Engineer' },\n      { label: 'Designer', value: 'Designer' },\n      { label: 'PM', value: 'PM' },\n      { label: 'QA', value: 'QA' },\n    ],\n  },\n  { key: 'dept', label: 'Department', minWidth: 120, sortable: true },\n  { key: 'email', label: 'Email', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },\n  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },\n  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },\n  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"5\"\n  />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', sortable: true, minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n  { id: 3, name: 'Kai', role: 'Engineer' },\n  { id: 4, name: 'Mia', role: 'Designer' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"2\"\n  />\n</template>",
           "locale": "en-US"
         },
         {
-          "id": "fixed-columns-1",
-          "section": "Fixed columns",
-          "sectionId": "fixed-columns",
+          "id": "expandable-rows-1",
+          "section": "Expandable rows",
+          "sectionId": "expandable-rows",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Name', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 Revenue', width: 140 },\n  { key: 'q2', label: 'Q2 Revenue', width: 140 },\n  { key: 'q3', label: 'Q3 Revenue', width: 140 },\n  { key: 'q4', label: 'Q4 Revenue', width: 140 },\n  { key: 'yoy', label: 'YoY', width: 100 },\n  { key: 'action', label: 'Action', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '124k', q2: '131k', q3: '140k', q4: '152k', yoy: '+18%', action: 'Edit' },\n  { id: 2, name: 'Lin', q1: '98k', q2: '102k', q3: '115k', q4: '120k', yoy: '+12%', action: 'Edit' },\n  { id: 3, name: 'Kai', q1: '150k', q2: '146k', q3: '161k', q4: '173k', yoy: '+9%', action: 'Edit' },\n  { id: 4, name: 'Mia', q1: '82k', q2: '89k', q3: '94k', q4: '101k', yoy: '+21%', action: 'Edit' },\n  { id: 5, name: 'Neo', q1: '113k', q2: '110k', q3: '122k', q4: '135k', yoy: '+7%', action: 'Edit' },\n  { id: 6, name: 'Zoe', q1: '105k', q2: '118k', q3: '124k', q4: '130k', yoy: '+15%', action: 'Edit' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Name' },\n  { key: 'role', label: 'Role' },\n]\nconst rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>",
           "locale": "en-US"
         },
         {
-          "id": "expandable-column-render-1",
-          "section": "Expandable + column render",
-          "sectionId": "expandable-column-render",
+          "id": "empty-and-loading-1",
+          "section": "Empty and loading",
+          "sectionId": "empty-and-loading",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst expandedRowKeys = ref<Array<string | number>>([])\nconst columns = [\n  { key: 'name', label: 'Name', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: 'Role' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },\n]\n</script>\n\n<template>\n  <WiTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    expandable\n    bordered\n  >\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>",
-          "locale": "en-US"
-        },
-        {
-          "id": "empty-loading-1",
-          "section": "Empty / Loading",
-          "sectionId": "empty-loading",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n  { key: 'dept', label: 'Department', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n    />\n  </div>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>",
           "locale": "en-US"
         }
       ],
@@ -17515,122 +17546,142 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# Table\n\n数据表格。列宽逻辑：\n\n- 设置了 `width` 的列固定宽度\n- 未设 `width` 的列按 `minWidth`（默认 `80`）作为弹性列，在 `fit`（默认 `true`）时按比例分配剩余宽度\n- 总最小宽度超过容器时出现横向滚动\n\n**本批次对齐子集：** 列 `render`、插槽 `body-cell` / `expansion`、可展开行。不做虚拟滚动、树形表、单元格编辑。"
+              "body": "# Table\n\n`WiTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。\n\n列宽规则：\n\n- 设置了 `width` 的列为固定宽度\n- 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列\n- 总最小宽度超出容器时出现横向滚动"
             },
             {
               "id": "引入",
               "title": "引入",
-              "body": "```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\nimport type { TableColumnDefinition, TableItem } from '@well-insight/ui'\n```"
             },
             {
               "id": "基础用法",
               "title": "基础用法",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '项目', minWidth: 140, sortable: true },\n  { key: 'status', label: '状态', width: 120 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n  { key: 'team', label: '团队', minWidth: 120 },\n  { key: 'progress', label: '进度', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },\n  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },\n  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },\n  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },\n  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```"
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '项目', minWidth: 140, sortable: true },\n  { key: 'status', label: '状态', width: 120 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n  { key: 'team', label: '团队', minWidth: 120 },\n  { key: 'progress', label: '进度', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```"
             },
             {
-              "id": "selection",
-              "title": "Selection",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'dept', label: '部门', minWidth: 120 },\n  { key: 'city', label: '城市', minWidth: 100 },\n  { key: 'level', label: '级别', width: 90 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },\n  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },\n  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },\n  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },\n  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },\n]\nconst selection = ref([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n  />\n</template>\n```"
+              "id": "行选择",
+              "title": "行选择",
+              "body": "多选配合 `selection-mode=\"multiple\"` 与 `v-model:selection`；单选使用 `selection-mode=\"single\"` 与 `v-model:selected-item`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n]\nconst selection = ref<Record<string, unknown>[]>([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n    :paginator=\"false\"\n  />\n</template>\n```"
             },
             {
-              "id": "filter-pagination",
-              "title": "Filter + Pagination",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', filterable: true, sortable: true, minWidth: 120 },\n  {\n    key: 'role',\n    label: '角色',\n    filterable: true,\n    minWidth: 120,\n    filters: [\n      { label: 'Engineer', value: 'Engineer' },\n      { label: 'Designer', value: 'Designer' },\n      { label: 'PM', value: 'PM' },\n      { label: 'QA', value: 'QA' },\n    ],\n  },\n  { key: 'dept', label: '部门', minWidth: 120, sortable: true },\n  { key: 'email', label: '邮箱', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },\n  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },\n  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },\n  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"5\"\n  />\n</template>\n```"
+              "id": "筛选与分页",
+              "title": "筛选与分页",
+              "body": "客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', sortable: true, minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'email', label: '邮箱', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', email: 'neo@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"3\"\n  />\n</template>\n```"
             },
             {
-              "id": "fixed-columns",
-              "title": "Fixed columns",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'q4', label: 'Q4 营收', width: 140 },\n  { key: 'yoy', label: '同比', width: 100 },\n  { key: 'action', label: '操作', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', q4: '15.2万', yoy: '+18%', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', q4: '12.0万', yoy: '+12%', action: '编辑' },\n  { id: 3, name: 'Kai', q1: '15.0万', q2: '14.6万', q3: '16.1万', q4: '17.3万', yoy: '+9%', action: '编辑' },\n  { id: 4, name: 'Mia', q1: '8.2万', q2: '8.9万', q3: '9.4万', q4: '10.1万', yoy: '+21%', action: '编辑' },\n  { id: 5, name: 'Neo', q1: '11.3万', q2: '11.0万', q3: '12.2万', q4: '13.5万', yoy: '+7%', action: '编辑' },\n  { id: 6, name: 'Zoe', q1: '10.5万', q2: '11.8万', q3: '12.4万', q4: '13.0万', yoy: '+15%', action: '编辑' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered />\n</template>\n```"
+              "id": "固定列",
+              "title": "固定列",
+              "body": "列定义中设置 `fixed: 'left'` 可冻结左侧列（当前批次支持左固定）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'action', label: '操作', width: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered :paginator=\"false\" />\n</template>\n```"
             },
             {
-              "id": "expandable-column-render",
-              "title": "Expandable + column render",
-              "body": "列 `render` 自定义单元格；`expandable` 展开行由插槽 `expansion` 渲染。`cell-{key}` 优先于 `render`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst expandedRowKeys = ref<Array<string | number>>([])\nconst columns = [\n  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },\n]\n</script>\n\n<template>\n  <WiTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    expandable\n    bordered\n  >\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```"
+              "id": "展开行与列渲染",
+              "title": "展开行与列渲染",
+              "body": "列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```"
             },
             {
-              "id": "empty-loading",
-              "title": "Empty / Loading",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'dept', label: '部门', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"还没有数据\"\n      empty-description=\"创建第一条记录后会显示在这里\"\n    />\n  </div>\n</template>\n```"
+              "id": "空态与加载",
+              "title": "空态与加载",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"还没有数据\"\n      empty-description=\"创建第一条记录后会显示在这里\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>\n```"
+            },
+            {
+              "id": "服务端模式",
+              "title": "服务端模式",
+              "body": "传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '项目', sortable: true, minWidth: 140 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n]\nconst rows = ref([\n  { id: 1, name: 'Landing', owner: 'Ada' },\n  { id: 2, name: 'Dashboard', owner: 'Lin' },\n])\nconst serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })\nconst total = ref(42)\n</script>\n\n<template>\n  <WiTable\n    v-model:server-options=\"serverOptions\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :server-items-length=\"total\"\n    :loading=\"false\"\n  />\n</template>\n```"
+            },
+            {
+              "id": "tablecolumndefinition",
+              "title": "TableColumnDefinition",
+              "body": "| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `key` | `string` | 列字段名（绑定行数据的键）。 |\n| `label` | `string` | 列头文案。 |\n| `width` | `number` | 固定列宽（px）。 |\n| `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |\n| `sortable` | `boolean` | 是否可排序。 |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | 固定列；当前实现左固定。 |\n| `align` | `'start' \\| 'center' \\| 'end'` | 单元格对齐。 |\n| `render` | `(row) => unknown` | 自定义单元格渲染。 |\n| `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumn[]` | — | 列定义：`width` 固定；`minWidth` 弹性下限（默认 80）；可设 `render`。 |\n| `fit` | `boolean` | `true` | 弹性列是否按比例分配剩余宽度。 |\n| `rows` | `Record[]` | — | 行数据。 |\n| `selectionMode` | `'single' \\| 'multiple'` | — | 行选择。 |\n| `selection` | — | — | `v-model:selection`。 |\n| `filters` | `Record` | `{}` | `v-model:filters`。 |\n| `paginator` | `boolean` | `false` | 内置分页。 |\n| `rowsPerPage` / `page` | — | `10` / `1` | 分页。 |\n| `expandable` | `boolean` | `false` | 展开列；用插槽 `expansion` 渲染详情行。 |\n| `expandedRowKeys` | `Array<string \\| number>` | `[]` | `v-model:expanded-row-keys`。 |\n| `rowExpandable` | `(row) => boolean` | — | 返回 `false` 时该行不可展开。 |\n| `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | 外观。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 本地排序或仅抛事件。 |\n| `sortField` / `sortOrder` | — | — | 受控排序。 |\n| `loading` / `emptyText` / `emptyDescription` / `size` | — | — | 同前。 |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | 列定义。 |\n| `rows` | `TableItem[]` | — | 行数据。 |\n| `fit` | `boolean` | `true` | 弹性列是否撑满表格宽度。 |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | 行选择模式。 |\n| `selection` | `TableItem[] \\| null` | `null` | 多选绑定（`v-model:selection`）。 |\n| `selectedItem` | `TableItem \\| null` | `null` | 单选绑定（`v-model:selected-item`）。 |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | 服务端分页/排序选项。 |\n| `serverItemsLength` | `number` | `0` | 服务端总条数。 |\n| `paginator` | `boolean` | `false` | 显示内置分页页脚。 |\n| `page` | `number` | `1` | 当前页（`v-model:page`）。 |\n| `rowsPerPage` | `number` | `25` | 每页条数。 |\n| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |\n| `striped` | `boolean` | `false` | 斑马纹行。 |\n| `bordered` | `boolean` | `false` | 单元格边框。 |\n| `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |\n| `rowHover` | `boolean` | `true` | 行 hover 高亮。 |\n| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |\n| `searchField` / `searchValue` | — | — | 客户端搜索。 |\n| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |\n| `loading` | `boolean` | `false` | 加载中。 |\n| `emptyText` | `string` | — | 空数据文案。 |\n| `emptyDescription` | `string` | — | 空数据补充说明。 |\n| `maxHeight` | `number \\| null` | `null` | 表格最大高度，超出滚动。 |\n| `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |\n| `rowKey` | `string` | `'id'` | 行唯一键字段。 |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | 表格密度。 |"
             },
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 的单元格；优先于列 `render`。 |\n| `body-cell` | 作用域 `{ row, column, value }`，自定义任意单元格。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 空数据占位。 |\n| `loading` | 加载中占位。 |"
+              "body": "| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`。 |\n| `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 自定义空态。 |\n| `loading` | 自定义加载态。 |\n| `pagination` | 自定义分页区域。 |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder }` | 排序变化（`sortMode=\"emit\"` 或受控排序）。 |\n| `filter` | `TableFilters` | 筛选变化。 |\n| `page` | `number` | 分页页码变化。 |\n| `row-click` | `{ row, index }` | 行点击。 |\n| `current-change` | `row \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开/收起。 |\n| `update:selection` | `selection` | 选择项变化（配合 `v-model:selection`）。 |\n| `update:filters` | `TableFilters` | 筛选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:expanded-row-keys` | `Array<string \\| number>` | 展开行 keys v-model。 |"
+              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |\n| `page` | `number` | 页码变化。 |\n| `row-click` | `{ row, index }` | 行单击。 |\n| `current-change` | `row \\| null, oldRow \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开。 |\n| `update:selection` | `TableItem[]` | 多选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |\n| `update:current-row-key` | `string \\| number \\| null` | 当前行键 v-model。 |"
+            },
+            {
+              "id": "实例方法",
+              "title": "实例方法",
+              "body": "通过 `ref` 可访问分页控制：`nextPage`、`prevPage`、`updatePage`、`currentPaginationNumber`、`maxPaginationNumber` 等。"
             }
           ],
-          "markdown": "---\ntitle: Table\ncategory: 06 / DATA\ndescription: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。\n---\n\n# Table\n\n数据表格。列宽逻辑：\n\n- 设置了 `width` 的列固定宽度\n- 未设 `width` 的列按 `minWidth`（默认 `80`）作为弹性列，在 `fit`（默认 `true`）时按比例分配剩余宽度\n- 总最小宽度超过容器时出现横向滚动\n\n**本批次对齐子集：** 列 `render`、插槽 `body-cell` / `expansion`、可展开行。不做虚拟滚动、树形表、单元格编辑。\n\n## 引入\n\n```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\n```\n\n## 基础用法\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '项目', minWidth: 140, sortable: true },\n  { key: 'status', label: '状态', width: 120 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n  { key: 'team', label: '团队', minWidth: 120 },\n  { key: 'progress', label: '进度', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },\n  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },\n  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },\n  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },\n  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```\n\n## Selection\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'dept', label: '部门', minWidth: 120 },\n  { key: 'city', label: '城市', minWidth: 100 },\n  { key: 'level', label: '级别', width: 90 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },\n  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },\n  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },\n  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },\n  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },\n]\nconst selection = ref([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n  />\n</template>\n```\n\n## Filter + Pagination\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', filterable: true, sortable: true, minWidth: 120 },\n  {\n    key: 'role',\n    label: '角色',\n    filterable: true,\n    minWidth: 120,\n    filters: [\n      { label: 'Engineer', value: 'Engineer' },\n      { label: 'Designer', value: 'Designer' },\n      { label: 'PM', value: 'PM' },\n      { label: 'QA', value: 'QA' },\n    ],\n  },\n  { key: 'dept', label: '部门', minWidth: 120, sortable: true },\n  { key: 'email', label: '邮箱', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },\n  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },\n  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },\n  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"5\"\n  />\n</template>\n```\n\n## Fixed columns\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'q4', label: 'Q4 营收', width: 140 },\n  { key: 'yoy', label: '同比', width: 100 },\n  { key: 'action', label: '操作', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', q4: '15.2万', yoy: '+18%', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', q4: '12.0万', yoy: '+12%', action: '编辑' },\n  { id: 3, name: 'Kai', q1: '15.0万', q2: '14.6万', q3: '16.1万', q4: '17.3万', yoy: '+9%', action: '编辑' },\n  { id: 4, name: 'Mia', q1: '8.2万', q2: '8.9万', q3: '9.4万', q4: '10.1万', yoy: '+21%', action: '编辑' },\n  { id: 5, name: 'Neo', q1: '11.3万', q2: '11.0万', q3: '12.2万', q4: '13.5万', yoy: '+7%', action: '编辑' },\n  { id: 6, name: 'Zoe', q1: '10.5万', q2: '11.8万', q3: '12.4万', q4: '13.0万', yoy: '+15%', action: '编辑' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered />\n</template>\n```\n\n## Expandable + column render\n\n列 `render` 自定义单元格；`expandable` 展开行由插槽 `expansion` 渲染。`cell-{key}` 优先于 `render`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst expandedRowKeys = ref<Array<string | number>>([])\nconst columns = [\n  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },\n]\n</script>\n\n<template>\n  <WiTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    expandable\n    bordered\n  >\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```\n\n## Empty / Loading\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'dept', label: '部门', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"还没有数据\"\n      empty-description=\"创建第一条记录后会显示在这里\"\n    />\n  </div>\n</template>\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumn[]` | — | 列定义：`width` 固定；`minWidth` 弹性下限（默认 80）；可设 `render`。 |\n| `fit` | `boolean` | `true` | 弹性列是否按比例分配剩余宽度。 |\n| `rows` | `Record[]` | — | 行数据。 |\n| `selectionMode` | `'single' \\| 'multiple'` | — | 行选择。 |\n| `selection` | — | — | `v-model:selection`。 |\n| `filters` | `Record` | `{}` | `v-model:filters`。 |\n| `paginator` | `boolean` | `false` | 内置分页。 |\n| `rowsPerPage` / `page` | — | `10` / `1` | 分页。 |\n| `expandable` | `boolean` | `false` | 展开列；用插槽 `expansion` 渲染详情行。 |\n| `expandedRowKeys` | `Array<string \\| number>` | `[]` | `v-model:expanded-row-keys`。 |\n| `rowExpandable` | `(row) => boolean` | — | 返回 `false` 时该行不可展开。 |\n| `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | 外观。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 本地排序或仅抛事件。 |\n| `sortField` / `sortOrder` | — | — | 受控排序。 |\n| `loading` / `emptyText` / `emptyDescription` / `size` | — | — | 同前。 |\n\n## Slots\n\n| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 的单元格；优先于列 `render`。 |\n| `body-cell` | 作用域 `{ row, column, value }`，自定义任意单元格。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 空数据占位。 |\n| `loading` | 加载中占位。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder }` | 排序变化（`sortMode=\"emit\"` 或受控排序）。 |\n| `filter` | `TableFilters` | 筛选变化。 |\n| `page` | `number` | 分页页码变化。 |\n| `row-click` | `{ row, index }` | 行点击。 |\n| `current-change` | `row \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开/收起。 |\n| `update:selection` | `selection` | 选择项变化（配合 `v-model:selection`）。 |\n| `update:filters` | `TableFilters` | 筛选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:expanded-row-keys` | `Array<string \\| number>` | 展开行 keys v-model。 |\n"
+          "markdown": "---\ntitle: Table\ncategory: 06 / DATA\ndescription: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。\n---\n\n# Table\n\n`WiTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。\n\n列宽规则：\n\n- 设置了 `width` 的列为固定宽度\n- 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列\n- 总最小宽度超出容器时出现横向滚动\n\n## 引入\n\n```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\nimport type { TableColumnDefinition, TableItem } from '@well-insight/ui'\n```\n\n## 基础用法\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '项目', minWidth: 140, sortable: true },\n  { key: 'status', label: '状态', width: 120 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n  { key: 'team', label: '团队', minWidth: 120 },\n  { key: 'progress', label: '进度', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```\n\n## 行选择\n\n多选配合 `selection-mode=\"multiple\"` 与 `v-model:selection`；单选使用 `selection-mode=\"single\"` 与 `v-model:selected-item`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n]\nconst selection = ref<Record<string, unknown>[]>([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n    :paginator=\"false\"\n  />\n</template>\n```\n\n## 筛选与分页\n\n客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '姓名', sortable: true, minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n  { key: 'email', label: '邮箱', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', email: 'neo@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"3\"\n  />\n</template>\n```\n\n## 固定列\n\n列定义中设置 `fixed: 'left'` 可冻结左侧列（当前批次支持左固定）。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'action', label: '操作', width: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered :paginator=\"false\" />\n</template>\n```\n\n## 展开行与列渲染\n\n列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```\n\n## 空态与加载\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: '姓名', minWidth: 120 },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"还没有数据\"\n      empty-description=\"创建第一条记录后会显示在这里\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>\n```\n\n## 服务端模式\n\n传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '项目', sortable: true, minWidth: 140 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n]\nconst rows = ref([\n  { id: 1, name: 'Landing', owner: 'Ada' },\n  { id: 2, name: 'Dashboard', owner: 'Lin' },\n])\nconst serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })\nconst total = ref(42)\n</script>\n\n<template>\n  <WiTable\n    v-model:server-options=\"serverOptions\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :server-items-length=\"total\"\n    :loading=\"false\"\n  />\n</template>\n```\n\n## TableColumnDefinition\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `key` | `string` | 列字段名（绑定行数据的键）。 |\n| `label` | `string` | 列头文案。 |\n| `width` | `number` | 固定列宽（px）。 |\n| `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |\n| `sortable` | `boolean` | 是否可排序。 |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | 固定列；当前实现左固定。 |\n| `align` | `'start' \\| 'center' \\| 'end'` | 单元格对齐。 |\n| `render` | `(row) => unknown` | 自定义单元格渲染。 |\n| `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | 列定义。 |\n| `rows` | `TableItem[]` | — | 行数据。 |\n| `fit` | `boolean` | `true` | 弹性列是否撑满表格宽度。 |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | 行选择模式。 |\n| `selection` | `TableItem[] \\| null` | `null` | 多选绑定（`v-model:selection`）。 |\n| `selectedItem` | `TableItem \\| null` | `null` | 单选绑定（`v-model:selected-item`）。 |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | 服务端分页/排序选项。 |\n| `serverItemsLength` | `number` | `0` | 服务端总条数。 |\n| `paginator` | `boolean` | `false` | 显示内置分页页脚。 |\n| `page` | `number` | `1` | 当前页（`v-model:page`）。 |\n| `rowsPerPage` | `number` | `25` | 每页条数。 |\n| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |\n| `striped` | `boolean` | `false` | 斑马纹行。 |\n| `bordered` | `boolean` | `false` | 单元格边框。 |\n| `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |\n| `rowHover` | `boolean` | `true` | 行 hover 高亮。 |\n| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |\n| `searchField` / `searchValue` | — | — | 客户端搜索。 |\n| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |\n| `loading` | `boolean` | `false` | 加载中。 |\n| `emptyText` | `string` | — | 空数据文案。 |\n| `emptyDescription` | `string` | — | 空数据补充说明。 |\n| `maxHeight` | `number \\| null` | `null` | 表格最大高度，超出滚动。 |\n| `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |\n| `rowKey` | `string` | `'id'` | 行唯一键字段。 |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | 表格密度。 |\n\n## Slots\n\n| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`。 |\n| `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 自定义空态。 |\n| `loading` | 自定义加载态。 |\n| `pagination` | 自定义分页区域。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |\n| `page` | `number` | 页码变化。 |\n| `row-click` | `{ row, index }` | 行单击。 |\n| `current-change` | `row \\| null, oldRow \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开。 |\n| `update:selection` | `TableItem[]` | 多选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |\n| `update:current-row-key` | `string \\| number \\| null` | 当前行键 v-model。 |\n\n## 实例方法\n\n通过 `ref` 可访问分页控制：`nextPage`、`prevPage`、`updatePage`、`currentPaginationNumber`、`maxPaginationNumber` 等。\n"
         },
         "en-US": {
           "title": "Table",
-          "description": "Data table. Supports sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.",
+          "description": "Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.",
           "sections": [
             {
               "id": "overview",
               "title": "",
-              "body": "# Table\n\nData table. Column width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible using `minWidth` (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n\n**Aligned subset:** column `render`, slots `body-cell` / `expansion`, expandable rows. Virtual scroll, tree-table, and cell editing are out of scope."
+              "body": "# Table\n\n`WiTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.\n\nColumn width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container"
             },
             {
               "id": "import",
               "title": "Import",
-              "body": "```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\n```"
+              "body": "```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\nimport type { TableColumnDefinition, TableItem } from '@well-insight/ui'\n```"
             },
             {
               "id": "basic",
               "title": "Basic",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Project', minWidth: 140, sortable: true },\n  { key: 'status', label: 'Status', width: 120 },\n  { key: 'owner', label: 'Owner', minWidth: 100 },\n  { key: 'team', label: 'Team', minWidth: 120 },\n  { key: 'progress', label: 'Progress', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },\n  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },\n  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },\n  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },\n  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```"
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Project', minWidth: 140, sortable: true },\n  { key: 'status', label: 'Status', width: 120 },\n  { key: 'owner', label: 'Owner', minWidth: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```"
             },
             {
               "id": "selection",
               "title": "Selection",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n  { key: 'dept', label: 'Department', minWidth: 120 },\n  { key: 'city', label: 'City', minWidth: 100 },\n  { key: 'level', label: 'Level', width: 90 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },\n  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },\n  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },\n  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },\n  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },\n]\nconst selection = ref([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n  />\n</template>\n```"
+              "body": "Use `selection-mode=\"multiple\"` with `v-model:selection`, or `selection-mode=\"single\"` with `v-model:selected-item`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n]\nconst selection = ref<Record<string, unknown>[]>([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n    :paginator=\"false\"\n  />\n</template>\n```"
             },
             {
-              "id": "filter-pagination",
-              "title": "Filter + Pagination",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', filterable: true, sortable: true, minWidth: 120 },\n  {\n    key: 'role',\n    label: 'Role',\n    filterable: true,\n    minWidth: 120,\n    filters: [\n      { label: 'Engineer', value: 'Engineer' },\n      { label: 'Designer', value: 'Designer' },\n      { label: 'PM', value: 'PM' },\n      { label: 'QA', value: 'QA' },\n    ],\n  },\n  { key: 'dept', label: 'Department', minWidth: 120, sortable: true },\n  { key: 'email', label: 'Email', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },\n  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },\n  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },\n  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"5\"\n  />\n</template>\n```"
+              "id": "filter-and-pagination",
+              "title": "Filter and pagination",
+              "body": "Use `search-value` / `filter-options` for client filtering. Enable `paginator` with `v-model:page` and `rows-per-page`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', sortable: true, minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n  { id: 3, name: 'Kai', role: 'Engineer' },\n  { id: 4, name: 'Mia', role: 'Designer' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"2\"\n  />\n</template>\n```"
             },
             {
-              "id": "fixed-columns",
-              "title": "Fixed columns",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Name', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 Revenue', width: 140 },\n  { key: 'q2', label: 'Q2 Revenue', width: 140 },\n  { key: 'q3', label: 'Q3 Revenue', width: 140 },\n  { key: 'q4', label: 'Q4 Revenue', width: 140 },\n  { key: 'yoy', label: 'YoY', width: 100 },\n  { key: 'action', label: 'Action', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '124k', q2: '131k', q3: '140k', q4: '152k', yoy: '+18%', action: 'Edit' },\n  { id: 2, name: 'Lin', q1: '98k', q2: '102k', q3: '115k', q4: '120k', yoy: '+12%', action: 'Edit' },\n  { id: 3, name: 'Kai', q1: '150k', q2: '146k', q3: '161k', q4: '173k', yoy: '+9%', action: 'Edit' },\n  { id: 4, name: 'Mia', q1: '82k', q2: '89k', q3: '94k', q4: '101k', yoy: '+21%', action: 'Edit' },\n  { id: 5, name: 'Neo', q1: '113k', q2: '110k', q3: '122k', q4: '135k', yoy: '+7%', action: 'Edit' },\n  { id: 6, name: 'Zoe', q1: '105k', q2: '118k', q3: '124k', q4: '130k', yoy: '+15%', action: 'Edit' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered />\n</template>\n```"
+              "id": "expandable-rows",
+              "title": "Expandable rows",
+              "body": "Set `expandable` and provide the `expansion` slot. Column `render` works for custom cells; a `cell-{key}` slot overrides `render`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Name' },\n  { key: 'role', label: 'Role' },\n]\nconst rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```"
             },
             {
-              "id": "expandable-column-render",
-              "title": "Expandable + column render",
-              "body": "Use column `render` for custom cells. `expandable` rows are rendered by the `expansion` slot. A named `cell-{key}` slot still wins over `render`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst expandedRowKeys = ref<Array<string | number>>([])\nconst columns = [\n  { key: 'name', label: 'Name', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: 'Role' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },\n]\n</script>\n\n<template>\n  <WiTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    expandable\n    bordered\n  >\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```"
+              "id": "empty-and-loading",
+              "title": "Empty and loading",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>\n```"
             },
             {
-              "id": "empty-loading",
-              "title": "Empty / Loading",
-              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n  { key: 'dept', label: 'Department', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n    />\n  </div>\n</template>\n```"
+              "id": "tablecolumndefinition",
+              "title": "TableColumnDefinition",
+              "body": "| Field | Type | Description |\n| --- | --- | --- |\n| `key` | `string` | Field name bound to row data. |\n| `label` | `string` | Column header text. |\n| `width` | `number` | Fixed width in px. |\n| `minWidth` | `number` | Flex column minimum width; default `80`. |\n| `sortable` | `boolean` | Enable sorting. |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | Freeze column (left freeze supported). |\n| `align` | `'start' \\| 'center' \\| 'end'` | Cell alignment. |\n| `render` | `(row) => unknown` | Custom cell renderer. |\n| `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumn[]` | — | Column definitions: `width` is fixed; `minWidth` is the flex lower bound (default 80); optional `render`. |\n| `fit` | `boolean` | `true` | Whether flexible columns share remaining width proportionally. |\n| `rows` | `Record[]` | — | Row data. |\n| `selectionMode` | `'single' \\| 'multiple'` | — | Row selection. |\n| `selection` | — | — | `v-model:selection`. |\n| `filters` | `Record` | `{}` | `v-model:filters`. |\n| `paginator` | `boolean` | `false` | Built-in pagination. |\n| `rowsPerPage` / `page` | — | `10` / `1` | Pagination. |\n| `expandable` | `boolean` | `false` | Expand column; use slot `expansion` for the extra row. |\n| `expandedRowKeys` | `Array<string \\| number>` | `[]` | `v-model:expanded-row-keys`. |\n| `rowExpandable` | `(row) => boolean` | — | Return `false` to disable expand on that row. |\n| `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | Appearance. |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | Client-side sort or emit-only. |\n| `sortField` / `sortOrder` | — | — | Controlled sort. |\n| `loading` / `emptyText` / `emptyDescription` / `size` | — | — | Same as above. |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | Column definitions. |\n| `rows` | `TableItem[]` | — | Row data. |\n| `fit` | `boolean` | `true` | Flexible columns fill remaining width. |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | Row selection mode. |\n| `selection` | `TableItem[] \\| null` | `null` | Multi-select (`v-model:selection`). |\n| `paginator` | `boolean` | `false` | Built-in pagination footer. |\n| `page` | `number` | `1` | Current page (`v-model:page`). |\n| `rowsPerPage` | `number` | `25` | Page size. |\n| `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |\n| `highlightCurrent` | `boolean` | `false` | Highlight current row. |\n| `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |\n| `maxHeight` | `number \\| null` | `null` | Scrollable body max height. |\n| `rowKey` | `string` | `'id'` | Stable row key field. |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | Table density. |"
             },
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; wins over column `render`. |\n| `body-cell` | Scope `{ row, column, value }` for any cell. |\n| `expansion` | Expanded row content, scope `{ row }`. |\n| `empty` | Empty state. |\n| `loading` | Loading state. |"
+              "body": "| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }`. |\n| `body-cell` | Any cell; scope `{ row, column, value }`. |\n| `expansion` | Expanded row; scope `{ row }`. |\n| `empty` / `loading` | Empty and loading placeholders. |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder }` | Sort change (`sortMode=\"emit\"` or controlled sort). |\n| `filter` | `TableFilters` | Filter change. |\n| `page` | `number` | Page change. |\n| `row-click` | `{ row, index }` | Row clicked. |\n| `current-change` | `row \\| null` | Highlighted row change. |\n| `expand` | `{ row, expanded }` | Row expand/collapse. |\n| `update:selection` | `selection` | Selection change with `v-model:selection`. |\n| `update:filters` | `TableFilters` | Filters v-model. |\n| `update:page` | `number` | Page v-model. |\n| `update:expanded-row-keys` | `Array<string \\| number>` | Expanded row keys v-model. |"
+              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | Sort changed. |\n| `page` | `number` | Page changed. |\n| `row-click` | `{ row, index }` | Row clicked. |\n| `current-change` | `row \\| null, oldRow \\| null` | Current row changed. |\n| `update:selection` | `TableItem[]` | Selection v-model. |\n| `update:page` | `number` | Page v-model. |"
+            },
+            {
+              "id": "instance",
+              "title": "Instance",
+              "body": "Exposed pagination helpers include `nextPage`, `prevPage`, `updatePage`, `currentPaginationNumber`, and `maxPaginationNumber`."
             }
           ],
-          "markdown": "---\ntitle: Table\ncategory: 06 / DATA\ndescription: Data table. Supports sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.\n---\n\n# Table\n\nData table. Column width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible using `minWidth` (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n\n**Aligned subset:** column `render`, slots `body-cell` / `expansion`, expandable rows. Virtual scroll, tree-table, and cell editing are out of scope.\n\n## Import\n\n```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Project', minWidth: 140, sortable: true },\n  { key: 'status', label: 'Status', width: 120 },\n  { key: 'owner', label: 'Owner', minWidth: 100 },\n  { key: 'team', label: 'Team', minWidth: 120 },\n  { key: 'progress', label: 'Progress', width: 100, align: 'end' as const },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },\n  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },\n  { id: 4, name: 'Billing Export', status: 'Published', owner: 'Mia', team: 'Platform', progress: '100%' },\n  { id: 5, name: 'Mobile Shell', status: 'Draft', owner: 'Neo', team: 'Mobile', progress: '35%' },\n  { id: 6, name: 'Search Index', status: 'Published', owner: 'Ada', team: 'Data', progress: '100%' },\n  { id: 7, name: 'Notification Hub', status: 'Review', owner: 'Lin', team: 'Backend', progress: '74%' },\n  { id: 8, name: 'Design Tokens', status: 'Draft', owner: 'Kai', team: 'Design', progress: '51%' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```\n\n## Selection\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n  { key: 'dept', label: 'Department', minWidth: 120 },\n  { key: 'city', label: 'City', minWidth: 100 },\n  { key: 'level', label: 'Level', width: 90 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', city: 'Shanghai', level: 'P6' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', city: 'Hangzhou', level: 'P5' },\n  { id: 3, name: 'Kai', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P7' },\n  { id: 4, name: 'Mia', role: 'Engineer', dept: 'Backend', city: 'Chengdu', level: 'P5' },\n  { id: 5, name: 'Neo', role: 'Designer', dept: 'Design', city: 'Shenzhen', level: 'P4' },\n  { id: 6, name: 'Zoe', role: 'Engineer', dept: 'Mobile', city: 'Shanghai', level: 'P6' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', city: 'Wuhan', level: 'P5' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', city: 'Guangzhou', level: 'P6' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', city: 'Beijing', level: 'P6' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', city: 'Hangzhou', level: 'P5' },\n]\nconst selection = ref([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n  />\n</template>\n```\n\n## Filter + Pagination\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', filterable: true, sortable: true, minWidth: 120 },\n  {\n    key: 'role',\n    label: 'Role',\n    filterable: true,\n    minWidth: 120,\n    filters: [\n      { label: 'Engineer', value: 'Engineer' },\n      { label: 'Designer', value: 'Designer' },\n      { label: 'PM', value: 'PM' },\n      { label: 'QA', value: 'QA' },\n    ],\n  },\n  { key: 'dept', label: 'Department', minWidth: 120, sortable: true },\n  { key: 'email', label: 'Email', minWidth: 180 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', dept: 'Design', email: 'ada@well.design' },\n  { id: 2, name: 'Lin', role: 'Engineer', dept: 'Frontend', email: 'lin@well.design' },\n  { id: 3, name: 'Kai', role: 'Engineer', dept: 'Backend', email: 'kai@well.design' },\n  { id: 4, name: 'Mia', role: 'Designer', dept: 'Design', email: 'mia@well.design' },\n  { id: 5, name: 'Neo', role: 'Engineer', dept: 'Mobile', email: 'neo@well.design' },\n  { id: 6, name: 'Zoe', role: 'PM', dept: 'Product', email: 'zoe@well.design' },\n  { id: 7, name: 'Rex', role: 'QA', dept: 'Quality', email: 'rex@well.design' },\n  { id: 8, name: 'Ivy', role: 'Engineer', dept: 'Platform', email: 'ivy@well.design' },\n  { id: 9, name: 'Jon', role: 'PM', dept: 'Product', email: 'jon@well.design' },\n  { id: 10, name: 'Amy', role: 'Designer', dept: 'Design', email: 'amy@well.design' },\n  { id: 11, name: 'Ben', role: 'Engineer', dept: 'Frontend', email: 'ben@well.design' },\n  { id: 12, name: 'Cara', role: 'QA', dept: 'Quality', email: 'cara@well.design' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"5\"\n  />\n</template>\n```\n\n## Fixed columns\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Name', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 Revenue', width: 140 },\n  { key: 'q2', label: 'Q2 Revenue', width: 140 },\n  { key: 'q3', label: 'Q3 Revenue', width: 140 },\n  { key: 'q4', label: 'Q4 Revenue', width: 140 },\n  { key: 'yoy', label: 'YoY', width: 100 },\n  { key: 'action', label: 'Action', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '124k', q2: '131k', q3: '140k', q4: '152k', yoy: '+18%', action: 'Edit' },\n  { id: 2, name: 'Lin', q1: '98k', q2: '102k', q3: '115k', q4: '120k', yoy: '+12%', action: 'Edit' },\n  { id: 3, name: 'Kai', q1: '150k', q2: '146k', q3: '161k', q4: '173k', yoy: '+9%', action: 'Edit' },\n  { id: 4, name: 'Mia', q1: '82k', q2: '89k', q3: '94k', q4: '101k', yoy: '+21%', action: 'Edit' },\n  { id: 5, name: 'Neo', q1: '113k', q2: '110k', q3: '122k', q4: '135k', yoy: '+7%', action: 'Edit' },\n  { id: 6, name: 'Zoe', q1: '105k', q2: '118k', q3: '124k', q4: '130k', yoy: '+15%', action: 'Edit' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" bordered />\n</template>\n```\n\n## Expandable + column render\n\nUse column `render` for custom cells. `expandable` rows are rendered by the `expansion` slot. A named `cell-{key}` slot still wins over `render`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst expandedRowKeys = ref<Array<string | number>>([])\nconst columns = [\n  { key: 'name', label: 'Name', render: (row: { name: string }) => `*${row.name}*` },\n  { key: 'role', label: 'Role' },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n  { id: 2, name: 'Lin', role: 'Engineer', extra: 'Frontend' },\n]\n</script>\n\n<template>\n  <WiTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    expandable\n    bordered\n  >\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```\n\n## Empty / Loading\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n  { key: 'dept', label: 'Department', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n    />\n  </div>\n</template>\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumn[]` | — | Column definitions: `width` is fixed; `minWidth` is the flex lower bound (default 80); optional `render`. |\n| `fit` | `boolean` | `true` | Whether flexible columns share remaining width proportionally. |\n| `rows` | `Record[]` | — | Row data. |\n| `selectionMode` | `'single' \\| 'multiple'` | — | Row selection. |\n| `selection` | — | — | `v-model:selection`. |\n| `filters` | `Record` | `{}` | `v-model:filters`. |\n| `paginator` | `boolean` | `false` | Built-in pagination. |\n| `rowsPerPage` / `page` | — | `10` / `1` | Pagination. |\n| `expandable` | `boolean` | `false` | Expand column; use slot `expansion` for the extra row. |\n| `expandedRowKeys` | `Array<string \\| number>` | `[]` | `v-model:expanded-row-keys`. |\n| `rowExpandable` | `(row) => boolean` | — | Return `false` to disable expand on that row. |\n| `striped` / `bordered` / `highlightCurrent` / `rowHover` | `boolean` | — | Appearance. |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | Client-side sort or emit-only. |\n| `sortField` / `sortOrder` | — | — | Controlled sort. |\n| `loading` / `emptyText` / `emptyDescription` / `size` | — | — | Same as above. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; wins over column `render`. |\n| `body-cell` | Scope `{ row, column, value }` for any cell. |\n| `expansion` | Expanded row content, scope `{ row }`. |\n| `empty` | Empty state. |\n| `loading` | Loading state. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder }` | Sort change (`sortMode=\"emit\"` or controlled sort). |\n| `filter` | `TableFilters` | Filter change. |\n| `page` | `number` | Page change. |\n| `row-click` | `{ row, index }` | Row clicked. |\n| `current-change` | `row \\| null` | Highlighted row change. |\n| `expand` | `{ row, expanded }` | Row expand/collapse. |\n| `update:selection` | `selection` | Selection change with `v-model:selection`. |\n| `update:filters` | `TableFilters` | Filters v-model. |\n| `update:page` | `number` | Page v-model. |\n| `update:expanded-row-keys` | `Array<string \\| number>` | Expanded row keys v-model. |\n"
+          "markdown": "---\ntitle: Table\ncategory: 06 / DATA\ndescription: Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.\n---\n\n# Table\n\n`WiTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.\n\nColumn width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n\n## Import\n\n```ts\nimport { WiTable, WiTag } from '@well-insight/ui'\nimport type { TableColumnDefinition, TableItem } from '@well-insight/ui'\n```\n\n## Basic\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable, WiTag } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Project', minWidth: 140, sortable: true },\n  { key: 'status', label: 'Status', width: 120 },\n  { key: 'owner', label: 'Owner', minWidth: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada' },\n  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin' },\n]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" striped bordered>\n    <template #cell-status=\"{ value }\">\n      <WiTag\n        :value=\"String(value)\"\n        :severity=\"value === 'Published' ? 'success' : 'secondary'\"\n      />\n    </template>\n  </WiTable>\n</template>\n```\n\n## Selection\n\nUse `selection-mode=\"multiple\"` with `v-model:selection`, or `selection-mode=\"single\"` with `v-model:selected-item`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n]\nconst selection = ref<Record<string, unknown>[]>([])\n</script>\n\n<template>\n  <WiTable\n    v-model:selection=\"selection\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    selection-mode=\"multiple\"\n    highlight-current\n    :paginator=\"false\"\n  />\n</template>\n```\n\n## Filter and pagination\n\nUse `search-value` / `filter-options` for client filtering. Enable `paginator` with `v-model:page` and `rows-per-page`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: 'Name', sortable: true, minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', role: 'Designer' },\n  { id: 2, name: 'Lin', role: 'Engineer' },\n  { id: 3, name: 'Kai', role: 'Engineer' },\n  { id: 4, name: 'Mia', role: 'Designer' },\n]\nconst page = ref(1)\n</script>\n\n<template>\n  <WiTable\n    v-model:page=\"page\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    paginator\n    :rows-per-page=\"2\"\n  />\n</template>\n```\n\n## Expandable rows\n\nSet `expandable` and provide the `expansion` slot. Column `render` works for custom cells; a `cell-{key}` slot overrides `render`.\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiTable } from '@well-insight/ui'\n\nconst columns = [\n  { key: 'name', label: 'Name' },\n  { key: 'role', label: 'Role' },\n]\nconst rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]\n</script>\n\n<template>\n  <WiTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ row.extra }}\n    </template>\n  </WiTable>\n</template>\n```\n\n## Empty and loading\n\n```vue preview\n<script setup lang=\"ts\">\nimport { WiButton, WiTable } from '@well-insight/ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div style=\"display:grid;gap:0.75rem\">\n    <WiButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <WiTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>\n```\n\n## TableColumnDefinition\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `key` | `string` | Field name bound to row data. |\n| `label` | `string` | Column header text. |\n| `width` | `number` | Fixed width in px. |\n| `minWidth` | `number` | Flex column minimum width; default `80`. |\n| `sortable` | `boolean` | Enable sorting. |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | Freeze column (left freeze supported). |\n| `align` | `'start' \\| 'center' \\| 'end'` | Cell alignment. |\n| `render` | `(row) => unknown` | Custom cell renderer. |\n| `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | Column definitions. |\n| `rows` | `TableItem[]` | — | Row data. |\n| `fit` | `boolean` | `true` | Flexible columns fill remaining width. |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | Row selection mode. |\n| `selection` | `TableItem[] \\| null` | `null` | Multi-select (`v-model:selection`). |\n| `paginator` | `boolean` | `false` | Built-in pagination footer. |\n| `page` | `number` | `1` | Current page (`v-model:page`). |\n| `rowsPerPage` | `number` | `25` | Page size. |\n| `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |\n| `highlightCurrent` | `boolean` | `false` | Highlight current row. |\n| `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |\n| `maxHeight` | `number \\| null` | `null` | Scrollable body max height. |\n| `rowKey` | `string` | `'id'` | Stable row key field. |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | Table density. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }`. |\n| `body-cell` | Any cell; scope `{ row, column, value }`. |\n| `expansion` | Expanded row; scope `{ row }`. |\n| `empty` / `loading` | Empty and loading placeholders. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | Sort changed. |\n| `page` | `number` | Page changed. |\n| `row-click` | `{ row, index }` | Row clicked. |\n| `current-change` | `row \\| null, oldRow \\| null` | Current row changed. |\n| `update:selection` | `TableItem[]` | Selection v-model. |\n| `update:page` | `number` | Page v-model. |\n\n## Instance\n\nExposed pagination helpers include `nextPage`, `prevPage`, `updatePage`, `currentPaginationNumber`, and `maxPaginationNumber`.\n"
         }
       }
     },

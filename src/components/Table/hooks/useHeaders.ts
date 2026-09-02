@@ -172,7 +172,7 @@ export function useHeaders(
       }
     }
 
-    emits('updateSort', { sortType: newSortType, sortBy: newSortBy })
+    emits('sort', { sortField: newSortBy, sortOrder: newSortType })
   }
 
   const isMultiSorting = (headerValue: string): boolean => {

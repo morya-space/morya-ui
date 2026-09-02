@@ -31,36 +31,44 @@ import {
   useServerOptions,
   useTotalItems,
 } from './hooks'
-import { generateColumnContent, resolveRowKey } from './utils'
+import {
+  normalizeAlign,
+  normalizeColumnList,
+  resolveSortField,
+  resolveSortOrder,
+} from './normalize'
+import { generateColumnContent, getItemValue, resolveRowKey } from './utils'
 
 const props = withDefaults(defineProps<TableProps>(), {
-  itemsSelected: null,
+  rows: () => [],
+  selection: null,
   selectionMode: null,
   selectedItem: null,
   serverOptions: null,
   serverItemsLength: 0,
-  sortBy: '',
-  sortType: 'asc',
+  sortField: '',
+  sortOrder: 'asc',
+  sortMode: 'client',
   multiSort: false,
   mustSort: false,
   filterOptions: null,
+  filters: null,
   searchField: '',
   searchValue: '',
   rowsPerPage: 25,
   rowsItems: () => [25, 50, 100],
-  currentPage: 1,
+  page: 1,
+  paginator: false,
   loading: false,
-  emptyMessage: undefined,
-  alternating: false,
-  stripe: undefined,
-  borderCell: false,
-  border: false,
-  noHover: false,
-  highlightCurrentRow: false,
+  emptyText: undefined,
+  emptyDescription: undefined,
+  striped: false,
+  bordered: false,
+  rowHover: true,
+  highlightCurrent: false,
   currentRowKey: null,
   showOverflowTooltip: false,
   fit: true,
-  emptyText: undefined,
   showHeader: undefined,
   maxHeight: null,
   fixedHeader: true,
@@ -74,10 +82,11 @@ const props = withDefaults(defineProps<TableProps>(), {
   fixedIndex: false,
   expandColumnWidth: 36,
   checkboxColumnWidth: null,
-  hideFooter: false,
   hideHeader: false,
   hideRowsPerPage: false,
   buttonsPagination: false,
+  expandable: false,
+  expandedRowKeys: undefined,
   clickRowToExpand: false,
   clickEventType: 'single',
   headerTextDirection: 'left',
@@ -108,18 +117,14 @@ const {
   clickEventType,
   bodyTextDirection,
   checkboxColumnWidth,
-  currentPage,
   expandColumnWidth,
   filterOptions,
   fixedCheckbox,
   fixedExpand,
   fixedHeader,
   fixedIndex,
-  headers,
   headerTextDirection,
   indexColumnWidth,
-  items,
-  itemsSelected,
   selectionMode,
   selectedItem,
   loading,
@@ -132,8 +137,6 @@ const {
   serverItemsLength,
   serverOptions,
   showIndex,
-  sortBy,
-  sortType,
   tableHeight,
   tableMinHeight,
   rowsOfPageSeparatorMessage,
@@ -146,28 +149,32 @@ const {
   tableClassName,
   headerClassName,
   rowsPerPageMessage,
-  hideFooter,
   hideHeader,
   hideRowsPerPage,
   buttonsPagination,
   clickRowToExpand,
-  alternating,
-  stripe,
-  borderCell,
-  border,
-  highlightCurrentRow,
-  currentRowKey,
-  showOverflowTooltip,
+  expandable,
+  emptyDescription,
   fit,
   emptyText,
   showHeader,
   maxHeight,
-  noHover,
-  emptyMessage,
+  paginator,
   rowKey,
   ariaLabel,
   size,
 } = toRefs(props)
+
+const headers = computed(() => normalizeColumnList(props.columns))
+const items = computed(() => props.rows)
+const itemsSelected = computed(() => props.selection ?? null)
+const sortBy = computed(() => resolveSortField(props.sortField))
+const sortType = computed(() => resolveSortOrder(props.sortOrder))
+const currentPage = computed(() => props.page ?? 1)
+const resolvedStriped = computed(() => props.striped)
+const resolvedBorderCell = computed(() => props.bordered)
+const resolvedHighlightCurrentRow = computed(() => props.highlightCurrent)
+const resolvedNoHover = computed(() => !props.rowHover)
 
 const sizeTone = useConfiguredSize('Table', () => size.value)
 const sizeClass = computed(() => {
@@ -182,18 +189,16 @@ const tableRootClass = computed(() => [
   {
     'wi-table--border': resolvedBorderCell.value,
     'wi-table--striped': resolvedStriped.value,
-    'wi-table--enable-row-hover': !noHover.value,
+    'wi-table--enable-row-hover': !resolvedNoHover.value,
   },
 ])
 
 const useTableFixedLayout = computed(() => fixedHeaders.value.length > 0 || fit.value !== false)
 
 const resolvedEmptyMessage = computed(
-  () => emptyMessage.value ?? emptyText.value ?? locale.value.emptyMessage,
+  () => emptyText.value ?? locale.value.emptyMessage,
 )
 
-const resolvedStriped = computed(() => stripe.value ?? alternating.value)
-const resolvedBorderCell = computed(() => border.value || borderCell.value)
 const showHeaderComputed = computed(() => showHeader.value ?? !hideHeader.value)
 const resolvedTableHeight = computed(() => maxHeight.value ?? tableHeight.value)
 
@@ -203,8 +208,25 @@ const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
 const slots = useSlots()
 const ifHasPaginationSlot = computed(() => !!slots.pagination)
 const ifHasLoadingSlot = computed(() => !!slots.loading)
-const ifHasExpandSlot = computed(() => !!slots.expand)
+const ifHasExpandSlot = computed(() => expandable.value || !!slots.expansion)
 const ifHasBodySlot = computed(() => !!slots.body)
+
+const columnRenderMap = computed(() => {
+  const map = new Map<string, (row: TableItem) => unknown>()
+  for (const header of headers.value) {
+    if (header.render) map.set(header.value, header.render)
+  }
+  return map
+})
+
+const columnAlignMap = computed(() => {
+  const map = new Map<string, 'start' | 'center' | 'end'>()
+  for (const header of headers.value) {
+    const align = normalizeAlign(header.align)
+    if (align) map.set(header.value, align)
+  }
+  return map
+})
 
 const dataTable = ref<HTMLElement>()
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -214,7 +236,7 @@ const showShadow = ref(false)
 const internalCurrentRowKey = ref<string | number | null>(null)
 
 const activeCurrentRowKey = computed(
-  () => currentRowKey.value ?? internalCurrentRowKey.value,
+  () => props.currentRowKey ?? internalCurrentRowKey.value,
 )
 
 function onScrollbarScroll(payload: { scrollTop: number; scrollLeft: number }) {
@@ -375,8 +397,11 @@ function contextMenuRow(item: TableItem, event: MouseEvent) {
 }
 
 function getColStyle(header: HeaderForRender) {
-  const width = header.width ?? (fixedHeaders.value.length ? 100 : null)
+  const source = headers.value.find((item) => item.value === header.value)
+  const width = header.width ?? source?.width ?? (fixedHeaders.value.length ? 100 : null)
   if (width && useTableFixedLayout.value) return `width: ${width}px; min-width: ${width}px;`
+  const minWidth = source?.minWidth
+  if (minWidth && useTableFixedLayout.value) return `min-width: ${minWidth}px;`
   return undefined
 }
 
@@ -415,8 +440,29 @@ function headerInnerClass() {
 
 function cellAlignClass(direction: string) {
   if (direction === 'center') return 'wi-table__cell--center'
-  if (direction === 'right') return 'wi-table__cell--right'
+  if (direction === 'right' || direction === 'end') return 'wi-table__cell--right'
   return undefined
+}
+
+function resolveCellAlign(column: string) {
+  const columnAlign = columnAlignMap.value.get(column)
+  if (columnAlign) return cellAlignClass(columnAlign)
+  return cellAlignClass(bodyTextDirection.value)
+}
+
+function cellSlotProps(column: string, item: TableItem) {
+  return {
+    row: item,
+    item,
+    column,
+    value: getItemValue(column, item),
+  }
+}
+
+function columnOverflowTooltip(column: string) {
+  if (props.showOverflowTooltip) return true
+  const header = headers.value.find((item) => item.value === column)
+  return Boolean(header?.showOverflowTooltip)
 }
 
 function getAriaSort(header: HeaderForRender): 'ascending' | 'descending' | 'none' | undefined {
@@ -460,12 +506,12 @@ function onPaginationRowsChange(rows: number) {
 }
 
 function isCurrentRow(item: TableItem, index: number) {
-  if (!highlightCurrentRow.value || activeCurrentRowKey.value == null) return false
+  if (!resolvedHighlightCurrentRow.value || activeCurrentRowKey.value == null) return false
   return activeCurrentRowKey.value === getRowKey(item, index)
 }
 
 function setCurrentRow(item: TableItem, index: number) {
-  if (!highlightCurrentRow.value) return
+  if (!resolvedHighlightCurrentRow.value) return
   const nextKey = getRowKey(item, index)
   const oldKey = activeCurrentRowKey.value
   if (oldKey === nextKey) return
@@ -474,15 +520,15 @@ function setCurrentRow(item: TableItem, index: number) {
     : pageItems.value.find((row, rowIndex) => getRowKey(row, rowIndex) === oldKey) ?? null
   internalCurrentRowKey.value = nextKey
   emit('update:currentRowKey', nextKey)
-  emit('currentChange', item, oldItem)
+  emit('current-change', item, oldItem)
 }
 
 function onRowClick(item: TableItem, index: number, clickType: 'single' | 'double', event: Event) {
-  clickRow(item, clickType, event)
+  clickRow(item, prevPageEndIndex.value + index, clickType, event)
   if (clickType === 'single') setCurrentRow(item, index)
 }
 
-watch(currentRowKey, (value) => {
+watch(() => props.currentRowKey, (value) => {
   if (value != null) internalCurrentRowKey.value = value
 })
 
@@ -510,6 +556,10 @@ watch(
 
 watch(pageItems, (value) => emit('updatePageItems', value), { deep: true })
 watch(totalItems, (value) => emit('updateTotalItems', value), { deep: true })
+watch(currentPaginationNumber, (value) => {
+  emit('update:page', value)
+  emit('page', value)
+})
 
 defineExpose({
   currentPageFirstIndex,
@@ -643,7 +693,7 @@ defineExpose({
                     'wi-table__cell--expand': column === 'expand',
                     'wi-table__cell--selection': column === 'checkbox' || column === 'radio',
                   },
-                  cellAlignClass(bodyTextDirection),
+                  resolveCellAlign(column),
                   typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, index + 1),
                 ]"
                 @click="column === 'expand' ? updateExpandingItemIndexList(index + prevPageEndIndex, item, $event) : null"
@@ -655,8 +705,16 @@ defineExpose({
                     'wi-table__cell-inner--selection': column === 'checkbox' || column === 'radio',
                   }"
                 >
-                  <slot v-if="slots[`item-${column}`]" :name="`item-${column}`" v-bind="item" />
-                  <slot v-else-if="slots[`item-${column.toLowerCase()}`]" :name="`item-${column.toLowerCase()}`" v-bind="item" />
+                  <slot
+                    v-if="slots[`cell-${column}`]"
+                    :name="`cell-${column}`"
+                    v-bind="cellSlotProps(column, item)"
+                  />
+                  <slot
+                    v-else-if="slots[`cell-${column.toLowerCase()}`]"
+                    :name="`cell-${column.toLowerCase()}`"
+                    v-bind="cellSlotProps(column, item)"
+                  />
                   <template v-else-if="column === 'expand'">
                     <button
                       type="button"
@@ -686,11 +744,18 @@ defineExpose({
                       @click.stop
                     />
                   </template>
-                  <slot v-else-if="slots.item" name="item" v-bind="{ column, item }" />
+                  <slot
+                    v-else-if="slots['body-cell']"
+                    name="body-cell"
+                    v-bind="{ column, item, row: item, value: getItemValue(column, item) }"
+                  />
+                  <template v-else-if="columnRenderMap.get(column)">
+                    <span class="wi-table__cell-text">{{ columnRenderMap.get(column)!(item) }}</span>
+                  </template>
                   <WiTooltip
                     v-else
                     :content="generateColumnContent(column, item)"
-                    :disabled="!showOverflowTooltip"
+                    :disabled="!columnOverflowTooltip(column)"
                   >
                     <span class="wi-table__tooltip-trigger">
                       <span class="wi-table__cell-text">{{ generateColumnContent(column, item) }}</span>
@@ -708,7 +773,7 @@ defineExpose({
             >
               <td :colspan="headersForRender.length" class="wi-table__cell--expanded">
                 <TableLoadingLine v-if="(item as TableItem).expandLoading" class="expand-loading" />
-                <slot name="expand" v-bind="item" />
+                <slot name="expansion" v-bind="{ row: item }" />
               </td>
             </tr>
           </template>
@@ -732,14 +797,16 @@ defineExpose({
       </div>
 
       <div v-if="!pageItems.length && !loading" class="wi-table__message" role="status">
-        <slot name="empty-message">
+        <slot v-if="slots.empty" name="empty" />
+        <slot v-else name="empty">
           <p class="wi-table__empty-text">{{ resolvedEmptyMessage }}</p>
+          <p v-if="emptyDescription" class="wi-table__empty-description">{{ emptyDescription }}</p>
         </slot>
       </div>
       </div>
     </WiScrollbar>
 
-    <div v-if="!hideFooter" class="wi-table__footer">
+    <div v-if="paginator" class="wi-table__footer">
       <div class="wi-table__items-index">
         {{ `${currentPageFirstIndex}–${currentPageLastIndex}` }}
         {{ rowsOfPageSeparatorMessage }} {{ totalItemsLength }}
