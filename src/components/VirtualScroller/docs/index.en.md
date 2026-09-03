@@ -1,6 +1,6 @@
 ---
 title: VirtualScroller
-category: 06 / DATA
+category: 03 / DATA
 description: Renders long lists within the visible viewport.
 ---
 

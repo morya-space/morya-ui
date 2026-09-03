@@ -1,6 +1,6 @@
 ---
 title: Table
-category: 06 / DATA
+category: 03 / DATA
 description: Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.
 ---
 

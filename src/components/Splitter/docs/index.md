@@ -1,6 +1,6 @@
 ---
 title: Splitter
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: 双栏分割布局，支持水平 / 垂直与拖拽调整比例。
 ---
 

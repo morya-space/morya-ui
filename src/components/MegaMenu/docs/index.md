@@ -1,6 +1,6 @@
 ---
 title: MegaMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 水平菜单，子项按多列面板展示。
 ---
 

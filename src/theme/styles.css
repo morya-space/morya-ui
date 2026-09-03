@@ -77,6 +77,28 @@
     --wi-motion-enter: 180ms;
     --wi-motion-exit: 130ms;
     --wi-motion-distance: 0.5rem;
+    --wi-motion-spin: 1s;
+    --wi-motion-spin-dash: 1.5s;
+    --wi-motion-spin-fast: 0.8s;
+    --wi-motion-spin-medium: 0.7s;
+    --wi-motion-skeleton: 1.4s;
+    --wi-motion-pulse: 1.2s;
+    --wi-motion-scrollbar-show: 340ms;
+    --wi-motion-scrollbar-hide: 120ms;
+    --wi-dataview-grid-min: 10rem;
+    --wi-tree-indent: 0.7rem;
+    --wi-tree-indent-padding: var(--wi-space-3);
+    --wi-layout-trigger-bar-height: 4.5rem;
+    --wi-layout-trigger-bar-offset: 1.75rem;
+    --wi-layout-trigger-bar-width: 2rem;
+    --wi-layout-trigger-bar-top: 2.25rem;
+    --wi-timeline-event-min-height: 4rem;
+    --wi-timeline-marker-size: 1.5rem;
+    --wi-tag-font-size-small: var(--wi-font-size-xs);
+    --wi-slider-tooltip-offset: 1.5rem;
+    --wi-slider-marks-inset: 0.9rem;
+    --wi-slider-marks-side: 0.5rem;
+    --wi-stepper-connector-color: var(--wi-color-border);
 
     /* Table (Element Plus–aligned) */
     --wi-color-fill-light: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
@@ -240,14 +262,4 @@
     --wi-table-row-current-bg: color-mix(in srgb, var(--wi-color-primary) 16%, var(--wi-color-surface));
     --wi-table-row-selected-bg: color-mix(in srgb, var(--wi-color-primary) 20%, var(--wi-color-surface));
     --wi-table-expanded-bg: var(--wi-color-fill-lighter);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    :root:not([data-wi-motion="full"]) {
-        --wi-motion-fast: 80ms;
-        --wi-motion-normal: 120ms;
-        --wi-motion-enter: 100ms;
-        --wi-motion-exit: 80ms;
-        --wi-motion-distance: 0;
-    }
 }

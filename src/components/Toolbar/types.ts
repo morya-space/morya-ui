@@ -1,2 +1,4 @@
-/** Toolbar is slot-only; kept for API symmetry. */
-export type ToolbarProps = Record<string, never>
+export interface ToolbarProps {
+  /** Accessible name when the toolbar has no visible title. */
+  ariaLabel?: string
+}

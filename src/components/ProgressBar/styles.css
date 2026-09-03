@@ -34,7 +34,7 @@
 }
 
 .wi-progressbar--indeterminate .wi-progressbar__value {
-    animation: wi-progressbar-indeterminate 1.2s var(--wi-motion-ease) infinite;
+    animation: wi-progressbar-indeterminate var(--wi-motion-pulse) var(--wi-motion-ease) infinite;
     width: 40%;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .wi-progressbar--indeterminate.wi-progressbar--circle .wi-progressbar__circle-value {
-    animation: wi-progress-spinner-rotate 1s linear infinite;
+    animation: wi-progress-spinner-rotate var(--wi-motion-spin) linear infinite;
     stroke-dasharray: 80 180;
 }
 

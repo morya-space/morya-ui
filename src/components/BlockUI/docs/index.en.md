@@ -1,6 +1,6 @@
 ---
 title: BlockUI
-category: 07 / MISC
+category: 05 / FEEDBACK
 description: Overlays content with a mask to block interaction.
 ---
 

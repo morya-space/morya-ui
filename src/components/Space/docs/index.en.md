@@ -1,6 +1,6 @@
 ---
 title: Space
-category: 05 / PANEL
+category: 01 / BASIC
 description: Layout helper that adds consistent gaps between children.
 ---
 

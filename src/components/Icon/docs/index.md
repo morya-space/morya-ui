@@ -1,6 +1,6 @@
 ---
 title: Icon
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: 系统线框图标注册表。业务图标用默认插槽接入 Lucide 等库。
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Chip
-category: 07 / MISC
+category: 01 / BASIC
 description: 芯片用于展示标签化信息，可带图标、图片与移除操作。
 ---
 

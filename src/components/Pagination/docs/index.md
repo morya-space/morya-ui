@@ -1,6 +1,6 @@
 ---
 title: Pagination
-category: 06 / DATA
+category: 03 / DATA
 description: 分页器，v-model 为页码；实例暴露 first（零基首条索引）。
 ---
 

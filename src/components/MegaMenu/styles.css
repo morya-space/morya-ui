@@ -3,7 +3,7 @@
     --wi-megamenu-column-min-width: 8rem;
     --wi-megamenu-panel-gap: var(--wi-space-4);
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: flex;
     gap: var(--wi-space-1);
@@ -34,7 +34,7 @@
 
 .wi-megamenu__panel {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     display: flex;
@@ -74,4 +74,16 @@
 
 .wi-megamenu__link:hover:not(:disabled) {
     background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+}
+
+.wi-megamenu__trigger:disabled,
+.wi-megamenu__link:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-megamenu__trigger:focus-visible,
+.wi-megamenu__link:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }

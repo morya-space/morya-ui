@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 悬停或聚焦时显示的短提示。支持 placement、disabled 与 showDelay。
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: ProgressBar
-category: 07 / MISC
+category: 03 / DATA
 description: Progress bar for determinate or indeterminate progress.
 ---
 

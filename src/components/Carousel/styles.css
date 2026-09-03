@@ -19,6 +19,9 @@
 .wi-carousel__item {
     box-sizing: border-box;
     min-width: 0;
+    transition:
+        opacity var(--wi-motion-normal) var(--wi-motion-ease),
+        transform var(--wi-motion-normal) var(--wi-motion-ease);
 }
 
 .wi-carousel__main {

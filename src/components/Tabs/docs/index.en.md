@@ -1,6 +1,6 @@
 ---
 title: Tabs
-category: 05 / PANEL
+category: 04 / NAVIGATION
 description: Tab switcher with line/card types, closable/addable tabs, extra slot, and overflow scrolling.
 ---
 

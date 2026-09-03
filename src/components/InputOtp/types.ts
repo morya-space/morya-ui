@@ -8,6 +8,7 @@ export interface InputOtpProps {
   integerOnly?: boolean
   /** Mask each digit. */
   mask?: boolean
+  label?: string
   size?: WiSizeInput
   /** Gap between cells. Number is pixels. */
   gap?: string | number

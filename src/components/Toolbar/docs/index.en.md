@@ -1,6 +1,6 @@
 ---
 title: Toolbar
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: Toolbar layout with start / center / end regions.
 ---
 

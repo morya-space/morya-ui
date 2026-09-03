@@ -1,6 +1,6 @@
 ---
 title: Gallery
-category: 11 / MEDIA
+category: 03 / DATA
 description: Image gallery with a main image and thumbnails.
 ---
 

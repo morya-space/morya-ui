@@ -1,6 +1,6 @@
 ---
 title: Menubar
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Horizontal menubar with one level of dropdowns.
 ---
 

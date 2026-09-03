@@ -1,6 +1,6 @@
 ---
 title: ProgressSpinner
-category: 07 / MISC
+category: 05 / FEEDBACK
 description: SVG circular loading indicator with configurable stroke width and animation duration.
 ---
 

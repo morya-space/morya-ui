@@ -1,6 +1,6 @@
 ---
 title: Toolbar
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: 工具栏布局，分 start / center / end 区域。
 ---
 

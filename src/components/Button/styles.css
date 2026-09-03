@@ -23,7 +23,7 @@
     );
     align-items: center;
     background: var(--wi-button-bg);
-    border: 1px solid var(--wi-button-border);
+    border: var(--wi-border-width) solid var(--wi-button-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-button-fg);
     cursor: pointer;
@@ -638,7 +638,7 @@
 }
 
 .wi-button__spinner {
-    animation: wi-button-spin 700ms linear infinite;
+    animation: wi-button-spin var(--wi-motion-spin-fast) linear infinite;
     border: 2px solid currentColor;
     border-right-color: transparent;
     border-radius: var(--wi-radius-full);

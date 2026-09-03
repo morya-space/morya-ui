@@ -1,6 +1,6 @@
 ---
 title: Flex
-category: 05 / PANEL
+category: 01 / BASIC
 description: Flexbox layout container for direction, alignment, and gap.
 ---
 

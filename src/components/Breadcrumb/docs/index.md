@@ -1,6 +1,6 @@
 ---
 title: Breadcrumb
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 展示当前页面在层级中的位置。
 ---
 

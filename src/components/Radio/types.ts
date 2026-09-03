@@ -24,6 +24,7 @@ export interface RadioEmits {
 export interface RadioGroupProps {
   modelValue?: RadioValue
   name?: string
+  label?: string
   size?: RadioSize
   disabled?: boolean
   invalid?: boolean

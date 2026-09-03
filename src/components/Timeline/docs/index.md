@@ -1,6 +1,6 @@
 ---
 title: Timeline
-category: 06 / DATA
+category: 03 / DATA
 description: 垂直 / 水平时间轴，支持图标 marker 与自定义插槽。
 ---
 

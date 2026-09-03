@@ -81,7 +81,15 @@ watch(keyboard.activeIndex, (index) => {
         <WiIcon name="chevron-left" size="sm" />
       </button>
       <figure class="wi-gallery__stage">
-        <img v-if="current" class="wi-gallery__image" :src="currentSrc" :alt="currentAlt">
+        <Transition name="wi-gallery-fade" mode="out-in">
+          <img
+            v-if="current"
+            :key="activeIndex"
+            class="wi-gallery__image"
+            :src="currentSrc"
+            :alt="currentAlt"
+          >
+        </Transition>
         <figcaption v-if="currentCaption" class="wi-gallery__caption">
           {{ currentCaption }}
         </figcaption>

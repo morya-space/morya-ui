@@ -1,6 +1,6 @@
 ---
 title: Panel
-category: 05 / PANEL
+category: 03 / DATA
 description: 带可选折叠的内容面板。
 ---
 

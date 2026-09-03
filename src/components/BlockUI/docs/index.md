@@ -1,6 +1,6 @@
 ---
 title: BlockUI
-category: 07 / MISC
+category: 05 / FEEDBACK
 description: 在内容上叠加遮罩以阻止交互。
 ---
 

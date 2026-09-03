@@ -45,6 +45,16 @@
     background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
 }
 
+.wi-sidebar__link:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-sidebar__link:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
 .wi-sidebar__link--child {
     font-size: var(--wi-font-size-md);
 }

@@ -42,7 +42,7 @@ const countText = computed(() =>
 const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
 const hasPrefix = computed(() => Boolean(slots.prefix))
-const hasSuffix = computed(() => Boolean(slots.suffix) || (resolvedClearable.value && Boolean(props.modelValue)))
+const hasSuffix = computed(() => Boolean(slots.suffix))
 const describedBy = computed(() => {
   const ids: string[] = []
   if (feedbackText.value) ids.push(`${inputId.value}-help`)
@@ -97,7 +97,7 @@ defineExpose({ focus, blur, select })
         'wi-input-field__control--clearable': resolvedClearable && modelValue,
         'wi-input-field__control--counted': resolvedShowCount,
         'wi-input-field__control--prefixed': hasPrefix,
-        'wi-input-field__control--suffixed': $slots.suffix || (resolvedClearable && modelValue),
+        'wi-input-field__control--suffixed': Boolean($slots.suffix),
       }"
     >
       <span v-if="$slots.prefix" class="wi-input__prefix">

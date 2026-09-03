@@ -1,6 +1,6 @@
 ---
 title: Label
-category: 02 / FORM
+category: 01 / BASIC
 description: Accessible form label.
 ---
 

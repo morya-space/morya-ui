@@ -60,6 +60,8 @@ export interface WiLocaleConfig {
   decrease?: string
   increase?: string
   selectColor?: string
+  colorHexValue?: string
+  otpGroup?: string
   clearInput?: string
   remove?: string
   removeTag?: string

@@ -1,6 +1,6 @@
 ---
 title: ProgressSpinner
-category: 07 / MISC
+category: 05 / FEEDBACK
 description: SVG 环形加载指示器，可配置描边宽度与动画时长。
 ---
 

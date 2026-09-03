@@ -316,14 +316,14 @@
 }
 
 .wi-layout-sider__trigger--bar {
-    height: 4.5rem;
-    right: -1.75rem;
-    top: calc(50% - 2.25rem);
-    width: 2rem;
+    height: var(--wi-layout-trigger-bar-height);
+    right: calc(-1 * var(--wi-layout-trigger-bar-offset));
+    top: calc(50% - var(--wi-layout-trigger-bar-top));
+    width: var(--wi-layout-trigger-bar-width);
 }
 
 .wi-layout-sider--right-placement > .wi-layout-sider__trigger--bar {
-    left: -1.75rem;
+    left: calc(-1 * var(--wi-layout-trigger-bar-offset));
     right: auto;
     transform: rotate(180deg);
 }

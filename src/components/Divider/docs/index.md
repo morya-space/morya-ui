@@ -1,6 +1,6 @@
 ---
 title: Divider
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: 内容分隔线。
 ---
 

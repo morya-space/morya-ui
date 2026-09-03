@@ -1,6 +1,6 @@
 ---
 title: Dock
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: macOS 风格图标坞。
 ---
 

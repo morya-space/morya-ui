@@ -1,6 +1,6 @@
 ---
 title: Dialog
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Modal dialog with preset footer actions, async close guards, and status type.
 ---
 

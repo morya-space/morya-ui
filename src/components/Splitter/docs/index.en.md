@@ -1,6 +1,6 @@
 ---
 title: Splitter
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: Two-pane resizable split layout (horizontal / vertical).
 ---
 

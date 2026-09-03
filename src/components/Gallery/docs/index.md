@@ -1,6 +1,6 @@
 ---
 title: Gallery
-category: 11 / MEDIA
+category: 03 / DATA
 description: 主图 + 缩略图的图片画廊。
 ---
 

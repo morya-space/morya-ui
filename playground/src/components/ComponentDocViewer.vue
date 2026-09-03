@@ -1,50 +1,40 @@
 <script setup lang="ts">
+import type { DocSection } from '../composables/useDocSections'
 import type { ResolvedComponentDoc } from '../docs/loadComponentDocs'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useDocCodeCopy } from '../composables/useDocCodeCopy'
+import { useDocSections } from '../composables/useDocSections'
 import { useDocsI18n } from '../i18n'
 
 const props = defineProps<{
   doc: ResolvedComponentDoc
 }>()
 
+const emit = defineEmits<{
+  (event: 'sections-change', sections: DocSection[]): void
+  (event: 'active-section-change', id: string): void
+}>()
+
 const bodyRef = ref<HTMLElement | null>(null)
 const docSource = computed(() => props.doc)
+const docKey = computed(() => props.doc.name)
 const { t } = useDocsI18n()
-const sections = ref<Array<{ id: string; label: string }>>([])
-const exampleCount = ref(0)
 useDocCodeCopy(bodyRef, docSource)
 
-function refreshNavigation() {
-  const body = bodyRef.value
-  if (!body) return
-  const headings = [...body.querySelectorAll<HTMLElement>('h2, h3')]
-  sections.value = headings.map((heading, index) => {
-    const id = `${props.doc.name.toLowerCase()}-section-${index + 1}`
-    heading.id = id
-    return { id, label: heading.textContent?.trim() || t.value.componentSection }
-  })
-  exampleCount.value = body.querySelectorAll('.code-preview').length
-}
+const {
+  sections,
+  activeSectionId,
+  exampleCount,
+  refreshNavigation,
+  scrollToSection,
+} = useDocSections(bodyRef, docKey)
 
-function scrollToSection(id: string) {
-  const target = document.getElementById(id)
-  if (!target) return
-  const scrollContainer = target.closest('.wi-scrollbar__wrap') as HTMLElement | null
-  if (scrollContainer) {
-    const containerTop = scrollContainer.getBoundingClientRect().top
-    const targetTop = target.getBoundingClientRect().top
-    scrollContainer.scrollTo({
-      top: scrollContainer.scrollTop + (targetTop - containerTop) - 12,
-      behavior: 'smooth',
-    })
-    return
-  }
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
+watch(sections, (value) => emit('sections-change', value), { deep: true, immediate: true })
+watch(activeSectionId, (value) => emit('active-section-change', value), { immediate: true })
 
-onMounted(() => nextTick(refreshNavigation))
-watch(() => props.doc.name, () => nextTick(refreshNavigation))
+onMounted(() => refreshNavigation())
+
+defineExpose({ scrollToSection })
 </script>
 
 <template>
@@ -60,8 +50,15 @@ watch(() => props.doc.name, () => nextTick(refreshNavigation))
         <span v-if="sections.length">{{ t.sectionsCount.replace('{count}', String(sections.length)) }}</span>
       </div>
     </div>
-    <nav v-if="sections.length" class="component-doc-viewer__toc" :aria-label="t.componentSection">
-      <button v-for="section in sections" :key="section.id" type="button" @click="scrollToSection(section.id)">
+    <nav v-if="sections.length" class="component-doc-viewer__toc component-doc-viewer__toc--inline" :aria-label="t.componentSection">
+      <button
+        v-for="section in sections"
+        :key="section.id"
+        type="button"
+        :class="{ 'component-doc-viewer__toc-button--active': section.id === activeSectionId }"
+        :aria-current="section.id === activeSectionId ? 'location' : undefined"
+        @click="scrollToSection(section.id)"
+      >
         {{ section.label }}
       </button>
     </nav>
@@ -110,6 +107,9 @@ watch(() => props.doc.name, () => nextTick(refreshNavigation))
   gap: 0.4rem;
   margin: 0.75rem 0 1.25rem;
 }
+.component-doc-viewer__toc--inline {
+  display: none;
+}
 .component-doc-viewer__toc button {
   background: color-mix(in srgb, var(--wi-color-primary) 7%, var(--wi-color-surface));
   border: 1px solid var(--docs-edge);
@@ -123,6 +123,13 @@ watch(() => props.doc.name, () => nextTick(refreshNavigation))
   border-color: var(--wi-color-primary);
   color: var(--wi-color-primary);
 }
+.component-doc-viewer__toc-button--active,
+.component-doc-viewer__toc button.component-doc-viewer__toc-button--active {
+  background: color-mix(in srgb, var(--wi-color-primary) 14%, var(--wi-color-surface));
+  border-color: color-mix(in srgb, var(--wi-color-primary) 45%, var(--wi-color-border));
+  color: var(--wi-color-primary);
+  font-weight: 600;
+}
 .component-doc-viewer__intro p {
   color: var(--wi-color-text);
   font-size: 0.86rem;
@@ -130,6 +137,12 @@ watch(() => props.doc.name, () => nextTick(refreshNavigation))
   margin: 0;
   max-width: 42rem;
   opacity: 0.82;
+}
+
+@media (max-width: 1100px) {
+  .component-doc-viewer__toc--inline {
+    display: flex;
+  }
 }
 </style>
 

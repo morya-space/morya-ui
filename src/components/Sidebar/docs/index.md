@@ -1,6 +1,6 @@
 ---
 title: Sidebar
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 导航轨侧栏，可折叠。
 ---
 

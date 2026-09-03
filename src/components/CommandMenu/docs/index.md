@@ -1,6 +1,6 @@
 ---
 title: CommandMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 可搜索的命令面板对话框。
 ---
 

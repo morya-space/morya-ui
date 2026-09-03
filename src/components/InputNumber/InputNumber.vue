@@ -156,32 +156,34 @@ defineExpose({ focus, blur, select })
       >
         <WiIcon name="minus" size="sm" />
       </button>
-      <input
-        v-bind="attrs"
-        :id="inputId"
-        ref="inputElement"
-        class="wi-inputnumber__input"
-        type="text"
-        inputmode="decimal"
-        :value="displayValue"
-        :disabled="disabled"
-        :readonly="readonly"
-        :aria-invalid="isInvalid || undefined"
-        :aria-describedby="feedbackText ? `${inputId}-help` : undefined"
-        @input="updateFromInput"
-        @focus="emit('focus', $event)"
-        @blur="onBlur"
-        @keydown="onInputKeydown"
-      >
-      <button
-        v-if="showClear"
-        type="button"
-        class="wi-inputnumber__clear"
-        :aria-label="locale.clearInput"
-        @click="clear"
-      >
-        <WiIcon name="close" size="sm" />
-      </button>
+      <div class="wi-inputnumber__input-wrap">
+        <input
+          v-bind="attrs"
+          :id="inputId"
+          ref="inputElement"
+          class="wi-inputnumber__input"
+          type="text"
+          inputmode="decimal"
+          :value="displayValue"
+          :disabled="disabled"
+          :readonly="readonly"
+          :aria-invalid="isInvalid || undefined"
+          :aria-describedby="feedbackText ? `${inputId}-help` : undefined"
+          @input="updateFromInput"
+          @focus="emit('focus', $event)"
+          @blur="onBlur"
+          @keydown="onInputKeydown"
+        >
+        <button
+          v-if="showClear"
+          type="button"
+          class="wi-inputnumber__clear"
+          :aria-label="locale.clearInput"
+          @click="clear"
+        >
+          <WiIcon name="close" size="sm" />
+        </button>
+      </div>
       <div v-if="showButtons && buttonPlacement === 'right'" class="wi-inputnumber__stack">
         <button
           class="wi-inputnumber__button wi-inputnumber__button--increment"

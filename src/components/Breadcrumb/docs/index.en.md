@@ -1,6 +1,6 @@
 ---
 title: Breadcrumb
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Shows the current page position in a hierarchy.
 ---
 

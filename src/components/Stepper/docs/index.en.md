@@ -1,6 +1,6 @@
 ---
 title: Stepper
-category: 05 / PANEL
+category: 04 / NAVIGATION
 description: Step indicator with optional linear-progress constraint.
 ---
 

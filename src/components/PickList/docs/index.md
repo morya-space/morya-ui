@@ -1,6 +1,6 @@
 ---
 title: PickList
-category: 06 / DATA
+category: 03 / DATA
 description: 双列表穿梭选择。
 ---
 

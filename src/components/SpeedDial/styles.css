@@ -91,7 +91,7 @@
 .wi-speeddial__action {
     align-items: center;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-full, 999px);
     box-shadow: var(--wi-shadow-sm);
     color: var(--wi-color-text);
@@ -106,4 +106,17 @@
 
 .wi-speeddial__action-label {
     font-size: var(--wi-font-size-sm);
+}
+
+.wi-speeddial__action:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
+}
+
+.wi-speeddial__action:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }

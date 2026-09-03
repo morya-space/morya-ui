@@ -1,6 +1,6 @@
 ---
 title: Grid
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列。
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Button
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: Button triggers an immediate action.
 ---
 

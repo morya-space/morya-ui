@@ -1,6 +1,6 @@
 ---
 title: OrderList
-category: 06 / DATA
+category: 03 / DATA
 description: Reorder a list with drag-and-drop and up/down buttons.
 ---
 

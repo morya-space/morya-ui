@@ -1,7 +1,7 @@
 .wi-progress-spinner {
     --wi-progress-spinner-size: 2.5rem;
     --wi-progress-spinner-color: var(--wi-color-primary);
-    animation: wi-progress-spinner-rotate 1s linear infinite;
+    animation: wi-progress-spinner-rotate var(--wi-motion-spin) linear infinite;
     color: var(--wi-progress-spinner-color);
     display: inline-block;
     height: var(--wi-progress-spinner-size);
@@ -10,7 +10,7 @@
 }
 
 .wi-progress-spinner__circle {
-    animation: wi-progress-spinner-dash 1.5s ease-in-out infinite;
+    animation: wi-progress-spinner-dash var(--wi-motion-spin-dash) ease-in-out infinite;
     stroke: currentColor;
     stroke-dasharray: 90, 150;
     stroke-dashoffset: 0;
@@ -45,7 +45,7 @@
 }
 
 .wi-progress-spinner-wrap--active .wi-progress-spinner-wrap__content {
-    opacity: 0.45;
+    opacity: var(--wi-opacity-disabled);
     pointer-events: none;
 }
 

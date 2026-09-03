@@ -1,6 +1,6 @@
 ---
 title: Fieldset
-category: 05 / PANEL
+category: 02 / FORM
 description: 带图例的字段分组，可折叠。
 ---
 

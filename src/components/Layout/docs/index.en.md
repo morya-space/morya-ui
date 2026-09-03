@@ -1,6 +1,6 @@
 ---
 title: Layout
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: Page layout shell with Header / Sider / Content / Footer.
 ---
 

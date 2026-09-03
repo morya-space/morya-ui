@@ -1,6 +1,6 @@
 ---
 title: FileUpload
-category: 10 / FILE
+category: 02 / FORM
 description: Select, drag, list, preview, and upload.
 ---
 

@@ -3,6 +3,15 @@ declare module '*.css' {
   export default stylesheet
 }
 
+interface ImportMetaEnv {
+  readonly DEV: boolean
+  readonly PROD: boolean
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
+
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
 

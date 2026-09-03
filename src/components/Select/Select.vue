@@ -381,14 +381,14 @@ onBeforeUnmount(() => {
           :aria-label="locale.clear"
           @click="clear"
         >
-          <WiIcon name="close" size="sm" />
+          <WiIcon name="close" class="wi-control-affix-icon" />
         </button>
         <span
           class="wi-select__indicator"
           :class="{ 'wi-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <WiIcon name="chevron-down" size="sm" />
+          <WiIcon name="chevron-down" class="wi-control-affix-icon" />
         </span>
       </div>
     </div>

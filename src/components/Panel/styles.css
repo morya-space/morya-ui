@@ -1,7 +1,7 @@
-/* —— Panel: Panel —— */
+/* —�?Panel: Panel —�?*/
 .wi-panel {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     overflow: hidden;
 }
@@ -41,8 +41,24 @@
     padding: var(--wi-space-4);
 }
 
+.wi-panel-collapse-enter-active,
+.wi-panel-collapse-leave-active {
+    overflow: hidden;
+    transition:
+        max-height var(--wi-motion-normal) var(--wi-motion-ease),
+        opacity var(--wi-motion-normal) var(--wi-motion-ease),
+        padding var(--wi-motion-normal) var(--wi-motion-ease);
+}
+
+.wi-panel-collapse-enter-from,
+.wi-panel-collapse-leave-to {
+    max-height: 0;
+    opacity: 0;
+    padding-block: 0;
+}
+
 .wi-panel__footer {
-    border-top: 1px solid var(--wi-color-border);
+    border-top: var(--wi-border-width) solid var(--wi-color-border);
     padding: var(--wi-space-4);
 }
 

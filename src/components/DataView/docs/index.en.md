@@ -1,6 +1,6 @@
 ---
 title: DataView
-category: 06 / DATA
+category: 03 / DATA
 description: Display data in a list or grid layout, with optional pagination.
 ---
 

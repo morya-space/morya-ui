@@ -1,8 +1,8 @@
-/* —— Panel: Toolbar —— */
+/* —�?Panel: Toolbar —�?*/
 .wi-toolbar {
     align-items: center;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: flex;
     flex-wrap: wrap;

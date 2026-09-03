@@ -33,9 +33,10 @@
 }
 
 .wi-dataview__grid {
+    --wi-dataview-grid-min: 10rem;
     display: grid;
     gap: var(--wi-space-3);
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--wi-dataview-grid-min), 1fr));
 }
 
 .wi-dataview__paginator {

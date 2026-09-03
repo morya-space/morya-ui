@@ -2,7 +2,7 @@
 .wi-confirmpopup {
     --wi-confirmpopup-width: 20rem;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     max-width: min(var(--wi-confirmpopup-width), calc(100vw - 2rem));
@@ -16,7 +16,10 @@
 }
 
 .wi-confirmpopup__message {
+    align-items: center;
     color: var(--wi-color-text);
+    display: flex;
+    gap: var(--wi-space-2);
     line-height: 1.5;
     margin-bottom: var(--wi-space-3);
 }
@@ -25,12 +28,6 @@
     display: flex;
     gap: var(--wi-space-2);
     justify-content: flex-end;
-}
-
-.wi-confirmpopup__message {
-    align-items: center;
-    display: flex;
-    gap: var(--wi-space-2);
 }
 
 .wi-confirmpopup__icon {

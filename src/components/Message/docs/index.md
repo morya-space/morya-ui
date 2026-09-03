@@ -1,6 +1,6 @@
 ---
 title: Message
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 顶部居中浮层提示，支持 API 调用。
 ---
 

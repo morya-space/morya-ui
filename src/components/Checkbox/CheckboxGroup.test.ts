@@ -4,7 +4,7 @@ import { h } from 'vue'
 import WiCheckbox from './Checkbox.vue'
 import WiCheckboxGroup from './CheckboxGroup.vue'
 
-describe('CheckboxGroup', () => {
+describe('checkboxGroup', () => {
   it('exposes group role and disabled modifier', () => {
     const wrapper = mount(WiCheckboxGroup, {
       props: { disabled: true, modelValue: [] },
@@ -12,6 +12,14 @@ describe('CheckboxGroup', () => {
     })
     expect(wrapper.attributes('role')).toBe('group')
     expect(wrapper.classes()).toContain('wi-checkbox-group--disabled')
+  })
+
+  it('supports group aria-label', () => {
+    const wrapper = mount(WiCheckboxGroup, {
+      props: { label: 'Permissions', modelValue: [] },
+      slots: { default: () => h(WiCheckbox, { value: 'a', label: 'A' }) },
+    })
+    expect(wrapper.attributes('aria-label')).toBe('Permissions')
   })
 
   it('toggles values through group context', async () => {

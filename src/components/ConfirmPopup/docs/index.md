@@ -1,6 +1,6 @@
 ---
 title: ConfirmPopup
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 锚定在目标旁的确认气泡。
 ---
 

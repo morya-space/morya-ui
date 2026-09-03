@@ -13,7 +13,7 @@
 .wi-splitbutton__trigger {
     align-items: center;
     background: var(--wi-color-primary);
-    border: 1px solid var(--wi-color-primary);
+    border: var(--wi-border-width) solid var(--wi-color-primary);
     color: var(--wi-color-on-emphasis);
     cursor: pointer;
     display: inline-flex;
@@ -32,7 +32,7 @@
 
 .wi-splitbutton__trigger {
     border-bottom-right-radius: var(--wi-radius-control);
-    border-left: 1px solid
+    border-left: var(--wi-border-width) solid
         color-mix(
             in srgb,
             var(--wi-color-on-emphasis) 35%,
@@ -40,6 +40,29 @@
         );
     border-top-right-radius: var(--wi-radius-control);
     padding: 0 var(--wi-control-padding-x-medium);
+}
+
+.wi-splitbutton__main:hover:not(:disabled),
+.wi-splitbutton__trigger:hover:not(:disabled) {
+    filter: brightness(1.06);
+}
+
+.wi-splitbutton--outlined .wi-splitbutton__main:hover:not(:disabled),
+.wi-splitbutton--outlined .wi-splitbutton__trigger:hover:not(:disabled),
+.wi-splitbutton--secondary .wi-splitbutton__main:hover:not(:disabled),
+.wi-splitbutton--secondary .wi-splitbutton__trigger:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
+    filter: none;
+}
+
+.wi-splitbutton__main:focus-visible,
+.wi-splitbutton__trigger:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }
 
 .wi-splitbutton--outlined .wi-splitbutton__main,
@@ -112,7 +135,7 @@
 
 .wi-splitbutton__menu {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     list-style: none;

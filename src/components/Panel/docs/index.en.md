@@ -1,6 +1,6 @@
 ---
 title: Panel
-category: 05 / PANEL
+category: 03 / DATA
 description: Content panel with optional collapse.
 ---
 

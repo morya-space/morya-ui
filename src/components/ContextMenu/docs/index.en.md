@@ -1,6 +1,6 @@
 ---
 title: ContextMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Right-click context menu with show(event) / hide().
 ---
 

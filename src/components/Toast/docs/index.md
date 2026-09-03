@@ -1,6 +1,6 @@
 ---
 title: Toast
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 四角浮层通知，支持 API 与受控列表。
 ---
 

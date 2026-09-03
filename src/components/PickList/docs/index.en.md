@@ -1,6 +1,6 @@
 ---
 title: PickList
-category: 06 / DATA
+category: 03 / DATA
 description: Dual-list picker for moving items between lists.
 ---
 

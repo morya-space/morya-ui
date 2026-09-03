@@ -59,6 +59,8 @@ export const enUS: WiLocaleMessages = {
   decrease: 'Decrease',
   increase: 'Increase',
   selectColor: 'Select color',
+  colorHexValue: 'Color hex value',
+  otpGroup: 'One-time password',
   clearInput: 'Clear input',
   remove: 'Remove',
   removeTag: 'Remove tag',

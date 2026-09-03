@@ -36,6 +36,7 @@ provide(WI_CHECKBOX_GROUP_KEY, {
   <div
     class="wi-checkbox-group"
     role="group"
+    :aria-label="label"
     :class="{ 'wi-checkbox-group--disabled': disabled, 'wi-checkbox-group--invalid': invalid }"
   >
     <slot />

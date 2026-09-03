@@ -1,6 +1,6 @@
 ---
 title: ConfirmDialog
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 ---
 

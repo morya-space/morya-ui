@@ -1,7 +1,6 @@
 /* —— Form / FormItem —— */
 .wi-form {
     --wi-form-inline-item-min-width: 12rem;
-    --wi-form-disabled-opacity: 0.65;
     display: grid;
     gap: var(--wi-space-4);
 }

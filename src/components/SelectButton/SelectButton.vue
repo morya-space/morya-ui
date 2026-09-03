@@ -70,14 +70,13 @@ function onKeydown(event: KeyboardEvent) {
 
 watch(keyboard.activeIndex, (index) => {
   if (index < 0) return
-  root.value
-    ?.querySelectorAll<HTMLElement>('.wi-selectbutton__button')
-    [index]?.focus({ preventScroll: true })
+  const buttons = root.value?.querySelectorAll<HTMLElement>('.wi-selectbutton__button')
+  buttons?.[index]?.focus({ preventScroll: true })
 })
 </script>
 
 <template>
-  <div ref="root" :class="rootClass" role="group" @keydown="onKeydown">
+  <div ref="root" :class="rootClass" role="group" :aria-label="label" @keydown="onKeydown">
     <button
       v-for="(option, index) in options"
       :key="String(option.value)"

@@ -77,7 +77,7 @@
 
 .wi-tag--small {
     --wi-tag-icon-size: 0.875rem;
-    font-size: 0.65rem;
+    font-size: var(--wi-tag-font-size-small);
     padding: 0.15rem var(--wi-space-2);
 }
 
@@ -121,6 +121,15 @@
     display: block;
     height: 100%;
     width: 100%;
+}
+
+.wi-tag__close:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
+    color: var(--wi-color-text);
 }
 
 .wi-tag__close:focus-visible {

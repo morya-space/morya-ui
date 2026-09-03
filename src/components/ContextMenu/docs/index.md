@@ -1,6 +1,6 @@
 ---
 title: ContextMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 右键上下文菜单，支持 show(event) / hide()。
 ---
 

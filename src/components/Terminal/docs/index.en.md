@@ -1,6 +1,6 @@
 ---
 title: Terminal
-category: 07 / MISC
+category: 03 / DATA
 description: Simple command-prompt UI.
 ---
 

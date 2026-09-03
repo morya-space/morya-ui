@@ -16,11 +16,11 @@ export interface ResolvedComponentDoc {
 
 export interface DocumentedComponentMeta {
   name: string
-  /** 原始 frontmatter，例如 `01 / PRIMITIVE` */
+  /** 原始 frontmatter，例如 `01 / BASIC` */
   category: string
   /** 分类排序号，缺省时靠后 */
   categoryOrder: number
-  /** 分类展示名，例如 `PRIMITIVE` */
+  /** 分类展示名，例如 `BASIC` */
   categoryLabel: string
   description?: string
 }

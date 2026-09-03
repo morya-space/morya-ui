@@ -1,6 +1,6 @@
 ---
 title: Card
-category: 05 / PANEL
+category: 03 / DATA
 description: 内容容器。通过 title / subtitle 或 header / footer 插槽组织结构。
 ---
 

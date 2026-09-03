@@ -1,5 +1,6 @@
 /* —— Panel: Splitter —— */
 .wi-splitter {
+    --wi-splitter-trigger-size: 6px;
     display: flex;
     min-height: 6rem;
     overflow: hidden;
@@ -32,19 +33,19 @@
 
 .wi-splitter__gutter {
     background: var(--wi-color-border);
-    flex: 0 0 6px;
+    flex: 0 0 var(--wi-splitter-trigger-size);
     touch-action: none;
-    z-index: 1;
+    z-index: var(--wi-z-popper);
 }
 
 .wi-splitter--horizontal > .wi-splitter__gutter {
     cursor: col-resize;
-    width: 6px;
+    width: var(--wi-splitter-trigger-size);
 }
 
 .wi-splitter--vertical > .wi-splitter__gutter {
     cursor: row-resize;
-    height: 6px;
+    height: var(--wi-splitter-trigger-size);
     width: 100%;
 }
 

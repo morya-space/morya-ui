@@ -16,8 +16,14 @@
     font: inherit;
     height: var(--wi-control-height-large);
     justify-content: center;
+    opacity: 0;
     position: fixed;
     right: var(--wi-space-6);
+    transform: translateY(var(--wi-motion-distance));
+    transition:
+        opacity var(--wi-motion-enter) var(--wi-motion-ease),
+        transform var(--wi-motion-enter) var(--wi-motion-ease),
+        background-color var(--wi-motion-fast) var(--wi-motion-ease);
     width: var(--wi-control-height-large);
     z-index: var(--wi-z-popper);
 }
@@ -28,6 +34,12 @@
 
 .wi-scrolltop--visible {
     display: inline-flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wi-scrolltop:hover:not(:disabled) {
+    background: var(--wi-color-primary-hover);
 }
 
 .wi-scrolltop--parent {

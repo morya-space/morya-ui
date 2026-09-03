@@ -1,6 +1,6 @@
 ---
 title: CommandMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Searchable command palette dialog.
 ---
 

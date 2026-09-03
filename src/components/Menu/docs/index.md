@@ -1,6 +1,6 @@
 ---
 title: Menu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 垂直/水平导航菜单，支持多级嵌套、受控选中、手风琴展开与折叠侧栏飞出层。
 ---
 

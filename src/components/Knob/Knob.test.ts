@@ -29,6 +29,20 @@ describe('wiKnob', () => {
     expect(slider.attributes('aria-valuenow')).toBe('40')
   })
 
+  it('clamps with ArrowDown at max boundary', async () => {
+    const wrapper = mount(WiKnob, { props: { modelValue: 90, min: 0, max: 90, step: 5 } })
+    await wrapper.trigger('keydown', { key: 'ArrowDown' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([85])
+    await wrapper.trigger('keydown', { key: 'ArrowUp' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([90])
+  })
+
+  it('steps down with ArrowDown', async () => {
+    const wrapper = mount(WiKnob, { props: { modelValue: 40, step: 10 } })
+    await wrapper.trigger('keydown', { key: 'ArrowDown' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([30])
+  })
+
   it('supports diameter prop over the deprecated size alias', () => {
     const wrapper = mount(WiKnob, { props: { modelValue: 0, diameter: 160 } })
     const svg = wrapper.get('svg')

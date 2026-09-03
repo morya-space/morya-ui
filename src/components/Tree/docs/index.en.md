@@ -1,6 +1,6 @@
 ---
 title: Tree
-category: 06 / DATA
+category: 03 / DATA
 description: Tree structure. Supports check with indeterminate state, filter, controlled expand, lazy load, and drag-and-drop.
 ---
 

@@ -71,20 +71,21 @@ function pickSwatch(color: string) {
           placeholder="#000000"
           spellcheck="false"
           :aria-invalid="isInvalid || undefined"
+          :aria-label="label ?? locale.colorHexValue"
           @input="onTextInput"
         >
-      </div>
-      <div v-if="swatches?.length" class="wi-inputcolor__swatches">
-        <button
-          v-for="color in swatches"
-          :key="color"
-          type="button"
-          class="wi-inputcolor__preset"
-          :style="{ background: color }"
-          :disabled="disabled"
-          :aria-label="color"
-          @click="pickSwatch(color)"
-        />
+        <div v-if="swatches?.length" class="wi-inputcolor__swatches">
+          <button
+            v-for="color in swatches"
+            :key="color"
+            type="button"
+            class="wi-inputcolor__preset"
+            :style="{ background: color }"
+            :disabled="disabled"
+            :aria-label="color"
+            @click="pickSwatch(color)"
+          />
+        </div>
       </div>
     </div>
   </div>

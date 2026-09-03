@@ -1,6 +1,6 @@
 ---
 title: Fieldset
-category: 05 / PANEL
+category: 02 / FORM
 description: Grouped fields with a legend, optionally collapsible.
 ---
 

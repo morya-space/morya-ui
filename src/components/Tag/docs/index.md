@@ -1,6 +1,6 @@
 ---
 title: Tag
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: 标签用于展示状态或分类。
 ---
 

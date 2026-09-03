@@ -12,9 +12,9 @@
 }
 
 .wi-tree__children {
-    border-left: 1px solid color-mix(in srgb, var(--wi-color-border) 80%, transparent);
-    margin-left: 0.7rem;
-    padding-left: var(--wi-space-3);
+    border-left: var(--wi-border-width) solid color-mix(in srgb, var(--wi-color-border) 80%, transparent);
+    margin-left: var(--wi-tree-indent);
+    padding-left: var(--wi-tree-indent-padding);
 }
 
 .wi-tree__row {

@@ -12,6 +12,8 @@ const totalMax = computed(() => {
   return sum > 0 ? sum : 1
 })
 
+const totalValue = computed(() => props.value.reduce((acc, item) => acc + item.value, 0))
+
 const segments = computed(() =>
   props.value.map((item) => ({
     ...item,
@@ -22,7 +24,7 @@ const segments = computed(() =>
 
 <template>
   <div class="wi-metergroup">
-    <div class="wi-metergroup__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax">
+    <div class="wi-metergroup__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax" :aria-valuenow="totalValue">
       <div
         v-for="(segment, index) in segments"
         :key="`${segment.label}-${index}`"

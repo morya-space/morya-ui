@@ -1,6 +1,6 @@
 ---
 title: MegaMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Horizontal menu with multi-column mega panels.
 ---
 

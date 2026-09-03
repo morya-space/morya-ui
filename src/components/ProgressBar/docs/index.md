@@ -1,6 +1,6 @@
 ---
 title: ProgressBar
-category: 07 / MISC
+category: 03 / DATA
 description: 进度条用于展示确定或不确定进度。
 ---
 

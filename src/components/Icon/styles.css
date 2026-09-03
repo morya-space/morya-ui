@@ -28,7 +28,7 @@
 }
 
 .wi-icon--spin svg {
-    animation: wi-icon-spin 0.8s linear infinite;
+    animation: wi-icon-spin var(--wi-motion-spin-fast) linear infinite;
 }
 
 @keyframes wi-icon-spin {

@@ -1,6 +1,6 @@
 ---
 title: Carousel
-category: 11 / MEDIA
+category: 03 / DATA
 description: 轮播展示一组内容项。
 ---
 

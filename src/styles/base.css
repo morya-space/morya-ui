@@ -97,8 +97,7 @@
     margin-left: auto;
 }
 
-.wi-dropdown__item--parent,
-.wi-contextmenu__item--parent {
+.wi-dropdown__item--parent {
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -108,21 +107,17 @@
 .wi-dropdown__icon,
 .wi-dropdown__caret,
 .wi-menu__icon,
-.wi-menubar__icon,
-.wi-contextmenu__icon,
-.wi-contextmenu__caret {
+.wi-menubar__icon {
     flex-shrink: 0;
 }
 
-.wi-dropdown__submenu-wrap,
-.wi-contextmenu__submenu-wrap {
+.wi-dropdown__submenu-wrap {
     position: relative;
 }
 
-.wi-dropdown__submenu,
-.wi-contextmenu__submenu {
+.wi-dropdown__submenu {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     left: 100%;
@@ -130,7 +125,7 @@
     padding: var(--wi-space-1);
     position: absolute;
     top: 0;
-    z-index: 1;
+    z-index: var(--wi-z-popper);
 }
 
 .wi-fade-enter-active,
@@ -245,6 +240,11 @@
 .wi-radio__input:checked + .wi-radio__control {
     background: var(--wi-color-primary);
     border-color: var(--wi-color-primary);
+}
+
+.wi-checkbox:not(.wi-checkbox--disabled):hover .wi-checkbox__control,
+.wi-radio:not(.wi-radio--disabled):hover .wi-radio__control {
+    border-color: color-mix(in srgb, var(--wi-color-primary) 45%, var(--wi-color-border));
 }
 
 .wi-checkbox__input:focus-visible + .wi-checkbox__control,
@@ -389,13 +389,6 @@
     overflow-x: hidden;
 }
 
-.wi-menu__item--selected,
-.wi-menubar__trigger--selected,
-.wi-menubar__subitem--selected {
-    background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
-    color: var(--wi-color-primary);
-}
-
 .wi-orderlist__btn,
 .wi-picklist__btn {
     align-items: center;
@@ -486,7 +479,7 @@
 .wi-carousel__nav:disabled,
 .wi-gallery__nav:disabled {
     cursor: not-allowed;
-    opacity: 0.4;
+    opacity: var(--wi-opacity-disabled);
 }
 
 /* Shared Naive-like hover/focus for remaining form triggers */
@@ -556,4 +549,24 @@
     cursor: pointer;
     font: inherit;
     line-height: 1;
+}
+
+[data-wi-motion="none"] *,
+[data-wi-motion="none"] *::before,
+[data-wi-motion="none"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+}
+
+[data-wi-motion="reduced"] .wi-progress-spinner,
+[data-wi-motion="reduced"] .wi-progress-spinner__svg,
+[data-wi-motion="reduced"] .wi-skeleton,
+[data-wi-motion="reduced"] .wi-badge--pulse,
+[data-wi-motion="reduced"] .wi-icon--spin,
+[data-wi-motion="reduced"] .wi-button--loading .wi-button__icon,
+[data-wi-motion="reduced"] .wi-select__loading-icon,
+[data-wi-motion="reduced"] .wi-switch__loading-icon {
+    animation-duration: calc(var(--wi-motion-spin) * 2) !important;
 }

@@ -1,6 +1,6 @@
 ---
 title: Sidebar
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Collapsible navigation rail.
 ---
 

@@ -1,25 +1,8 @@
 /* Shared picker suffix slot: clear + dropdown indicator (Select, TreeSelect). */
 .wi-select__control {
-    --wi-control-suffix-inset: var(--wi-control-padding-x-medium);
-    --wi-control-end-padding: calc(
-        var(--wi-control-affix-size) + var(--wi-control-suffix-inset)
-    );
+    --wi-control-end-padding: var(--wi-control-affix-padding);
     position: relative;
     width: 100%;
-}
-
-.wi-select__control:has(.wi-select--small),
-.wi-select__control:has(.wi-select--sm),
-.wi-select__control:has(.wi-treeselect--small),
-.wi-select__control:has(.wi-cascadeselect--small) {
-    --wi-control-suffix-inset: var(--wi-control-padding-x-small);
-}
-
-.wi-select__control:has(.wi-select--large),
-.wi-select__control:has(.wi-select--lg),
-.wi-select__control:has(.wi-treeselect--large),
-.wi-select__control:has(.wi-cascadeselect--large) {
-    --wi-control-suffix-inset: var(--wi-control-padding-x-large);
 }
 
 .wi-select__suffix {
@@ -28,7 +11,7 @@
     height: var(--wi-control-affix-size);
     pointer-events: none;
     position: absolute;
-    right: var(--wi-control-suffix-inset);
+    right: var(--wi-space-1);
     top: 50%;
     transform: translateY(-50%);
     width: var(--wi-control-affix-size);
@@ -44,7 +27,7 @@
     display: flex;
     height: 100%;
     inset: 0;
-    justify-content: flex-end;
+    justify-content: center;
     opacity: 0;
     padding: 0;
     pointer-events: none;
@@ -68,17 +51,16 @@
 .wi-select__indicator {
     align-items: center;
     color: var(--wi-color-text-muted);
-    display: inline-flex;
-    flex: 0 0 auto;
-    justify-content: flex-end;
+    display: flex;
+    height: 100%;
+    inset: 0;
+    justify-content: center;
     pointer-events: none;
     position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
     transition:
         opacity var(--wi-motion-fast) var(--wi-motion-ease),
         transform var(--wi-motion-fast) var(--wi-motion-ease);
+    width: 100%;
 }
 
 .wi-select__control--clearable:not(.wi-select__control--open):hover .wi-select__indicator,
@@ -87,5 +69,39 @@
 }
 
 .wi-select__indicator--open {
-    transform: translateY(-50%) rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.wi-select__suffix {
+    --wi-affix-icon-size: 1rem;
+}
+
+.wi-select__control:has(.wi-select--small) .wi-select__suffix,
+.wi-select__control:has(.wi-select--sm) .wi-select__suffix,
+.wi-select__control:has(.wi-treeselect--small) .wi-select__suffix,
+.wi-select__control:has(.wi-cascadeselect--small) .wi-select__suffix {
+    --wi-affix-icon-size: 0.875rem;
+}
+
+.wi-select__control:has(.wi-select--large) .wi-select__suffix,
+.wi-select__control:has(.wi-select--lg) .wi-select__suffix,
+.wi-select__control:has(.wi-treeselect--large) .wi-select__suffix,
+.wi-select__control:has(.wi-cascadeselect--large) .wi-select__suffix {
+    --wi-affix-icon-size: 1.125rem;
+}
+
+.wi-select__suffix .wi-select__clear .wi-icon,
+.wi-select__suffix .wi-select__indicator .wi-icon,
+.wi-select__suffix .wi-control-affix-icon {
+    flex-shrink: 0;
+    height: var(--wi-affix-icon-size);
+    width: var(--wi-affix-icon-size);
+}
+
+.wi-select__suffix .wi-select__clear .wi-icon svg,
+.wi-select__suffix .wi-select__indicator .wi-icon svg,
+.wi-select__suffix .wi-control-affix-icon svg {
+    display: block;
+    height: 100%;
+    width: 100%;
 }

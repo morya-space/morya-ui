@@ -1,6 +1,6 @@
 ---
 title: Drawer
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Side drawer panel.
 ---
 

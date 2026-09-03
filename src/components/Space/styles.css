@@ -5,6 +5,6 @@
 }
 
 .wi-space__item {
-    display: flex;
+    display: block;
     max-width: 100%;
 }

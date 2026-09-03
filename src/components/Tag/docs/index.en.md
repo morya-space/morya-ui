@@ -1,6 +1,6 @@
 ---
 title: Tag
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: Tag for status or category.
 ---
 

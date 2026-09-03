@@ -43,9 +43,11 @@ const defaultMin = computed((): SplitterSize => {
   return sizeMode.value === 'ratio' ? 0.1 : sizeMode.value === 'px' ? '40px' : 10
 })
 
-const defaultMax = computed((): SplitterSize => {
+const defaultMax = computed((): SplitterSize | undefined => {
   if (props.max !== undefined) return props.max
-  return sizeMode.value === 'ratio' ? 0.9 : sizeMode.value === 'px' ? '99999px' : 90
+  if (sizeMode.value === 'ratio') return 0.9
+  if (sizeMode.value === 'px') return undefined
+  return 90
 })
 
 const uncontrolled = ref<SplitterSize>(props.defaultSize)
@@ -107,11 +109,7 @@ const panel1Style = computed(() => ({
 
 const panel2Style = computed(() => normalizeStyle(props.pane2Style))
 
-const gutterStyle = computed(() =>
-  isVertical.value
-    ? { height: `${props.resizeTriggerSize}px`, width: '100%' }
-    : { width: `${props.resizeTriggerSize}px`, height: '100%' },
-)
+const gutterStyle = computed(() => ({}))
 
 function commitSize(next: SplitterSize) {
   if (next === mergedSize.value) return
@@ -124,7 +122,11 @@ function setFromPx(nextPx: number, container: number) {
   const mode = sizeMode.value
   if (container <= 0) return
   const minPx = parseToPx(defaultMin.value, container, detectSizeMode(defaultMin.value, mode))
-  const maxPx = parseToPx(defaultMax.value, container, detectSizeMode(defaultMax.value, mode))
+  const maxSource = defaultMax.value
+  const maxPx =
+    maxSource === undefined && mode === 'px'
+      ? container
+      : parseToPx(maxSource ?? (mode === 'ratio' ? 1 : 100), container, detectSizeMode(maxSource ?? 100, mode))
   const clamped = clampPx(nextPx, minPx, maxPx, container)
   commitSize(pxToSize(clamped, container, mode))
 }
@@ -217,6 +219,7 @@ const ariaMin = computed(() => {
 
 const ariaMax = computed(() => {
   const v = defaultMax.value
+  if (v === undefined) return undefined
   if (typeof v === 'string') return Math.round(Number.parseFloat(v))
   if (sizeMode.value === 'ratio') return Math.round(v * 100)
   return Math.round(v)
@@ -231,6 +234,7 @@ onBeforeUnmount(() => {
   <div
     ref="root"
     class="wi-splitter"
+    :style="{ '--wi-splitter-trigger-size': `${resizeTriggerSize}px` }"
     :class="[
       `wi-splitter--${resolvedLayout}`,
       {

@@ -29,6 +29,11 @@ a.wi-breadcrumb__link:hover {
     color: var(--wi-color-primary);
 }
 
+a.wi-breadcrumb__link:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
 .wi-breadcrumb__link--current {
     color: var(--wi-color-text);
     font-weight: 600;

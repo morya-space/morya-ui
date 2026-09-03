@@ -1,6 +1,6 @@
 ---
 title: TieredMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: A vertical layered menu with one submenu level.
 ---
 

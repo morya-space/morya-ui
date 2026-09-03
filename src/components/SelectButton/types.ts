@@ -14,6 +14,7 @@ export interface SelectButtonProps {
   multiple?: boolean
   disabled?: boolean
   invalid?: boolean
+  label?: string
   size?: WiSizeInput
 }
 

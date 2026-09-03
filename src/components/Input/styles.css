@@ -109,7 +109,7 @@
 
 .wi-input {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     font-size: var(--wi-control-font-medium);
@@ -162,10 +162,6 @@
     width: 100%;
 }
 
-.wi-input-field__control:has(.wi-input__clear) .wi-input {
-    padding-right: var(--wi-control-affix-padding);
-}
-
 .wi-input__clear {
     align-items: center;
     background: transparent;
@@ -183,6 +179,7 @@
     top: 50%;
     transform: translateY(-50%);
     width: var(--wi-control-affix-size);
+    z-index: 1;
 }
 
 .wi-input__clear:focus-visible {

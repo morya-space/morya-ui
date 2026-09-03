@@ -1,4 +1,4 @@
-/* —— Form: InputGroup —— */
+/* —�?Form: InputGroup —�?*/
 .wi-inputgroup {
     align-items: stretch;
     display: flex;
@@ -10,7 +10,7 @@
 .wi-inputgroup-addon {
     align-items: center;
     background: color-mix(in srgb, var(--wi-color-text-muted) 10%, var(--wi-color-surface));
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     color: var(--wi-color-text-muted);
     display: inline-flex;
     flex: 0 0 auto;

@@ -1,6 +1,6 @@
 ---
 title: ScrollTop
-category: 07 / MISC
+category: 04 / NAVIGATION
 description: 滚动超过阈值后显示回到顶部按钮。
 ---
 

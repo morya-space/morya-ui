@@ -1,6 +1,6 @@
 ---
 title: Menu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: Vertical/horizontal navigation menu with nested items, controlled selection, accordion, and collapsed flyout submenus.
 ---
 

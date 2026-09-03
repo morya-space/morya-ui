@@ -1,6 +1,6 @@
 ---
 title: Message
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Top-center floating notice with an imperative API.
 ---
 

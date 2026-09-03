@@ -1,6 +1,6 @@
 ---
 title: DataView
-category: 06 / DATA
+category: 03 / DATA
 description: 列表或网格布局展示数据，可分页。
 ---
 

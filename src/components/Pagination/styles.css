@@ -35,6 +35,14 @@
     opacity: var(--wi-opacity-disabled);
 }
 
+.wi-pagination__button:hover:not(:disabled):not(.wi-pagination__button--active) {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
+}
+
 .wi-pagination__button:focus-visible {
     box-shadow: var(--wi-focus-shadow);
     outline: none;
