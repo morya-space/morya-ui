@@ -75,4 +75,37 @@ describe('wiConfirmDialog', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     wrapper.unmount()
   })
+
+  it('ignores mask click when closeOnOutsideClick is false', async () => {
+    const wrapper = mount(WiConfirmDialog, {
+      props: { modelValue: true, message: 'Confirm?', closeOnOutsideClick: false },
+      attachTo: document.body,
+    })
+    await nextTick()
+    document.body.querySelector('.wi-dialog-zoom')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('reject')).toBeUndefined()
+    wrapper.unmount()
+  })
+})
+
+describe('useConfirm', () => {
+  it('resolves true on accept and false on reject', async () => {
+    const { useConfirm } = await import('./useConfirm')
+    const confirm = useConfirm()
+    const pending = confirm.require({ message: 'Proceed?', acceptLabel: 'Go', rejectLabel: 'Stop' })
+    await nextTick()
+    const buttons = Array.from(document.body.querySelectorAll('.wi-confirmdialog .wi-button'))
+    const accept = buttons.find((btn) => btn.textContent?.includes('Go'))
+    accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await expect(pending).resolves.toBe(true)
+
+    const pendingReject = confirm.require({ message: 'Again?', rejectLabel: 'No' })
+    await nextTick()
+    const reject = Array.from(document.body.querySelectorAll('.wi-confirmdialog .wi-button')).find((btn) =>
+      btn.textContent?.includes('No'),
+    )
+    reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await expect(pendingReject).resolves.toBe(false)
+  })
 })

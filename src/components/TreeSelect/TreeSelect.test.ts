@@ -133,4 +133,18 @@ describe('wiTreeSelect', () => {
     expect(home.attributes('aria-selected')).toBe('true')
     expect(home.attributes('aria-level')).toBe('2')
   })
+
+  it('renders field label and error feedback', () => {
+    const wrapper = mount(WiTreeSelect, {
+      props: {
+        options,
+        label: 'Folder',
+        errorMessage: 'Required',
+      },
+    })
+    expect(wrapper.get('.wi-select-field__label').text()).toBe('Folder')
+    expect(wrapper.get('.wi-select-field__help').text()).toBe('Required')
+    expect(wrapper.get('.wi-treeselect').classes()).toContain('wi-treeselect--invalid')
+    expect(wrapper.get('.wi-treeselect__trigger').attributes('aria-invalid')).toBe('true')
+  })
 })

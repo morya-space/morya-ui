@@ -233,12 +233,12 @@
     border: 1px solid var(--wi-color-border);
     display: inline-flex;
     flex: 0 0 auto;
-    height: 1.125rem;
+    height: var(--wi-checkbox-control-size, 1.125rem);
     justify-content: center;
     transition:
         background-color var(--wi-motion-fast) var(--wi-motion-ease),
         border-color var(--wi-motion-fast) var(--wi-motion-ease);
-    width: 1.125rem;
+    width: var(--wi-checkbox-control-size, 1.125rem);
 }
 
 .wi-checkbox__input:checked + .wi-checkbox__control,

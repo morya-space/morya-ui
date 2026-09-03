@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { MenuItem } from './types'
+import type { WiRouteLocationRaw } from '../../shared/optionalRouter'
 import { computed, inject } from 'vue'
 import WiIcon from '../Icon/Icon.vue'
 import WiPopover from '../Popover/Popover.vue'
 import { resolveMenuIcon } from '../../shared/menu'
+import { isExternalRoute, resolveOptionalRouterLink, resolveRouteHref } from '../../shared/optionalRouter'
 import { WI_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
 
@@ -21,6 +23,7 @@ if (!menu) {
 }
 
 const ctx = menu
+const RouterLink = resolveOptionalRouterLink()
 
 const collapsed = computed(() => ctx.collapsed.value && !props.flyout)
 const horizontal = computed(() => ctx.mode === 'horizontal')
@@ -38,8 +41,13 @@ function iconOf(item: MenuItem) {
   return resolveMenuIcon(item.icon)
 }
 
-function onLeafClick(item: MenuItem) {
+function onLeafClick(item: MenuItem, event: MouseEvent) {
+  if (item.disabled) {
+    event.preventDefault()
+    return
+  }
   ctx.activate(item)
+  if (!item.to) event.preventDefault()
 }
 
 function onParentClick(item: MenuItem, index: number) {
@@ -65,18 +73,31 @@ function contentClass(item: MenuItem, index: number) {
 }
 
 function itemTabindex(item: MenuItem, index: number) {
-  // Flyout panels keep natural tab order; roving tabindex applies to the main tree only.
   if (props.flyout) return 0
   return ctx.tabindexForKey(itemKey(item, index))
 }
 
 function paddingStyle(depth: number) {
   if (horizontal.value || props.flyout) return undefined
-  return { paddingLeft: `${ctx.paddingLeft(depth)}px` }
+  return ctx.paddingStyle(depth)
 }
 
 function arrowIcon(item: MenuItem, index: number) {
   return isSubmenuExpanded(item, index) ? 'chevron-down' : 'chevron-right'
+}
+
+function usesRouterLink(item: MenuItem) {
+  return Boolean(item.to && RouterLink && !isExternalRoute(item.to))
+}
+
+function leafHref(item: MenuItem) {
+  if (!item.to || usesRouterLink(item)) return undefined
+  return resolveRouteHref(item.to)
+}
+
+function leafLinkTo(item: MenuItem): WiRouteLocationRaw | undefined {
+  if (!usesRouterLink(item) || !item.to) return undefined
+  return item.to
 }
 </script>
 
@@ -178,7 +199,8 @@ function arrowIcon(item: MenuItem, index: number) {
       :class="{ 'wi-menu__item--horizontal': horizontal }"
       role="none"
     >
-      <div
+      <component
+        :is="usesRouterLink(item) ? RouterLink : leafHref(item) ? 'a' : 'div'"
         class="wi-menu__item-content"
         :class="contentClass(item, index)"
         :style="paddingStyle(depth)"
@@ -188,13 +210,15 @@ function arrowIcon(item: MenuItem, index: number) {
         :aria-disabled="item.disabled || undefined"
         :aria-current="ctx.isSelected(item, index, prefix) ? 'page' : undefined"
         :title="collapsed ? item.label : undefined"
-        @click="onLeafClick(item)"
+        :href="leafHref(item)"
+        :to="leafLinkTo(item)"
+        @click="onLeafClick(item, $event)"
       >
         <span v-if="iconOf(item)" class="wi-menu__icon" aria-hidden="true">
           <WiIcon :name="iconOf(item)!" size="sm" />
         </span>
         <span class="wi-menu__label">{{ item.label }}</span>
-      </div>
+      </component>
     </div>
   </template>
 </template>

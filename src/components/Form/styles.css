@@ -18,8 +18,28 @@
 }
 
 .wi-form--disabled {
-    opacity: var(--wi-form-disabled-opacity);
-    pointer-events: none;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-form__fieldset {
+    border: 0;
+    display: contents;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+}
+
+.wi-form--size-small .wi-form-item__label {
+    line-height: var(--wi-control-height-small);
+}
+
+.wi-form--size-normal .wi-form-item__label,
+.wi-form--size-medium .wi-form-item__label {
+    line-height: var(--wi-control-height-medium);
+}
+
+.wi-form--size-large .wi-form-item__label {
+    line-height: var(--wi-control-height-large);
 }
 
 .wi-form-item {

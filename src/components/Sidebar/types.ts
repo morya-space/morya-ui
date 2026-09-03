@@ -1,8 +1,7 @@
-export interface SidebarItem {
+import type { MenuNodeBase } from '../../shared/menu'
+
+export interface SidebarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
   label: string
-  icon?: string
-  command?: () => void
-  disabled?: boolean
   items?: SidebarItem[]
 }
 

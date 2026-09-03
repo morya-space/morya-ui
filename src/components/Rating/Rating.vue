@@ -2,6 +2,8 @@
 import type { RatingProps } from './types'
 import { computed } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<RatingProps>(), {
@@ -9,6 +11,7 @@ const props = withDefaults(defineProps<RatingProps>(), {
   stars: 5,
   disabled: false,
   readonly: false,
+  invalid: false,
   cancel: undefined,
   allowClear: null,
   allowHalf: false,
@@ -16,18 +19,23 @@ const props = withDefaults(defineProps<RatingProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number): void }>()
 const locale = useWiLocale()
+const sizeClass = useConfiguredSize('Rating', () => props.size)
+const fieldId = computed(() => `wi-rating-${Math.random().toString(36).slice(2, 8)}`)
+const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
 const canClear = computed(() => props.allowClear ?? props.cancel ?? true)
-const sliderLabel = computed(() => props.ariaLabel ?? locale.value.rating)
+const sliderLabel = computed(() => props.ariaLabel ?? props.label ?? locale.value.rating)
 const valueText = computed(() => formatLocale(locale.value.star, { value: props.modelValue ?? 0 }))
 const starList = computed(() => Array.from({ length: Math.max(1, props.stars) }, (_, index) => index + 1))
 
 const rootClass = computed(() => [
   'wi-rating',
+  `wi-rating--${sizeClass.value}`,
   {
     'wi-rating--disabled': props.disabled,
     'wi-rating--readonly': props.readonly,
     'wi-rating--half': props.allowHalf,
+    'wi-rating--invalid': isInvalid.value,
   },
 ])
 
@@ -77,19 +85,24 @@ function onSliderKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div
-    :class="rootClass"
-    role="slider"
-    :aria-valuenow="modelValue"
-    :aria-valuemin="0"
-    :aria-valuemax="stars"
-    :aria-valuetext="valueText"
-    :aria-label="sliderLabel"
-    :aria-disabled="disabled || undefined"
-    :aria-readonly="readonly || undefined"
-    :tabindex="disabled || readonly ? -1 : 0"
-    @keydown="onSliderKeydown"
-  >
+  <div class="wi-rating-field">
+    <label v-if="label" class="wi-rating-field__label" :id="`${fieldId}-label`">{{ label }}</label>
+    <div
+      :class="rootClass"
+      role="slider"
+      :aria-valuenow="modelValue"
+      :aria-valuemin="0"
+      :aria-valuemax="stars"
+      :aria-valuetext="valueText"
+      :aria-label="label ? undefined : sliderLabel"
+      :aria-labelledby="label ? `${fieldId}-label` : undefined"
+      :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
+      :aria-invalid="isInvalid || undefined"
+      :aria-disabled="disabled || undefined"
+      :aria-readonly="readonly || undefined"
+      :tabindex="disabled || readonly ? -1 : 0"
+      @keydown="onSliderKeydown"
+    >
     <button
       v-if="canClear"
       type="button"
@@ -123,5 +136,15 @@ function onSliderKeydown(event: KeyboardEvent) {
         <WiIcon name="star" size="lg" />
       </span>
     </button>
+    </div>
+    <span
+      v-if="feedbackText"
+      :id="`${fieldId}-help`"
+      class="wi-rating-field__help"
+      :class="{ 'wi-rating-field__help--invalid': feedbackIsError }"
+      :role="feedbackIsError ? 'alert' : undefined"
+    >
+      {{ feedbackText }}
+    </span>
   </div>
 </template>

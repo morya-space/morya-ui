@@ -19,6 +19,9 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: string): void
 }>()
 const attrs = useAttrs()
 const slots = useSlots()
@@ -73,7 +76,16 @@ function clear() {
 function focus() {
   inputElement.value?.focus()
 }
-defineExpose({ focus })
+
+function blur() {
+  inputElement.value?.blur()
+}
+
+function select() {
+  inputElement.value?.select()
+}
+
+defineExpose({ focus, blur, select })
 </script>
 
 <template>
@@ -104,6 +116,9 @@ defineExpose({ focus })
         :aria-invalid="isInvalid || undefined"
         :aria-describedby="describedBy"
         @input="updateValue"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @change="emit('change', ($event.target as HTMLInputElement).value)"
       >
       <span v-if="$slots.suffix" class="wi-input__suffix">
         <slot name="suffix" />

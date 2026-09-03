@@ -1,8 +1,15 @@
+import type { WiSizeInput } from '../../shared/types'
+
 export interface RatingProps {
   modelValue?: number
   stars?: number
   disabled?: boolean
   readonly?: boolean
+  label?: string
+  invalid?: boolean
+  helpText?: string
+  errorMessage?: string
+  size?: WiSizeInput
   /**
    * @deprecated Use `allowClear` instead. Kept as an alias; `allowClear`
    * takes precedence when both are set.

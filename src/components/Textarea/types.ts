@@ -35,8 +35,13 @@ export interface TextareaProps {
 export interface TextareaEmits {
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: string): void
 }
 
 export interface TextareaInstance {
   focus: () => void
+  blur: () => void
+  select: () => void
 }

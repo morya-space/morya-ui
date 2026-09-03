@@ -1,7 +1,9 @@
 .wi-avatar {
-    --wi-avatar-size: 2.5rem;
+    --wi-avatar-size-small: 2rem;
+    --wi-avatar-size-medium: 2.5rem;
     --wi-avatar-size-large: 3.5rem;
     --wi-avatar-size-xlarge: 5rem;
+    --wi-avatar-size: var(--wi-avatar-size-medium);
     --wi-avatar-icon-size: 1rem;
     --wi-avatar-font-size-xlarge: 1.5rem;
     --wi-avatar-group-overlap: var(--wi-space-2);
@@ -34,6 +36,18 @@
 
 .wi-avatar--square {
     border-radius: var(--wi-radius-md);
+}
+
+.wi-avatar--small {
+    --wi-avatar-size: var(--wi-avatar-size-small);
+    --wi-avatar-icon-size: 0.875rem;
+    font-size: var(--wi-font-size-sm);
+}
+
+.wi-avatar--medium {
+    --wi-avatar-size: var(--wi-avatar-size-medium);
+    --wi-avatar-icon-size: 1rem;
+    font-size: var(--wi-font-size-md);
 }
 
 .wi-avatar--large {
@@ -81,16 +95,12 @@
 
 .wi-avatar-group .wi-avatar {
     box-shadow: 0 0 0 var(--wi-avatar-group-ring-width) var(--wi-color-surface);
-    margin-left: calc(var(--wi-avatar-group-overlap) * -1);
+    margin-inline-start: calc(var(--wi-avatar-group-overlap) * -1);
 }
 
 .wi-avatar-group .wi-avatar:first-child,
 .wi-avatar-group__overflow {
-    margin-left: 0;
-}
-
-.wi-avatar-group .wi-avatar:first-child {
-    margin-left: 0;
+    margin-inline-start: 0;
 }
 
 .wi-avatar-group__overflow {

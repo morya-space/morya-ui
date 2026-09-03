@@ -1,3 +1,4 @@
+import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { WiAppendTo } from '../../shared/overlay'
 
 export type DrawerPosition = 'left' | 'right' | 'top' | 'bottom'
@@ -8,8 +9,14 @@ export interface DrawerProps {
   position?: DrawerPosition
   /** Show dimmed mask behind the panel. */
   modal?: boolean
-  /** Close when clicking the mask. */
+  /** Close when clicking the mask. Alias of `closeOnOutsideClick`. */
   dismissable?: boolean
+  /** Close when clicking the mask. Preferred over `dismissable`. */
+  closeOnOutsideClick?: boolean
+  /** Close when pressing Escape. */
+  closeOnEsc?: boolean
+  /** Return `false` to keep the drawer open. */
+  beforeClose?: AsyncGuard
   showCloseIcon?: boolean
   header?: string
   /** Panel width for left/right. Number is pixels. */
@@ -26,6 +33,7 @@ export interface DrawerProps {
 
 export interface DrawerEmits {
   (event: 'update:modelValue', value: boolean): void
+  (event: 'close'): void
   (event: 'show'): void
   (event: 'hide'): void
   (event: 'after-leave'): void

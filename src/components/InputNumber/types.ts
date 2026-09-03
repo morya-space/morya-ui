@@ -11,7 +11,11 @@ export interface InputNumberProps {
   /** Decimal places to round to. */
   precision?: number
   disabled?: boolean
+  readonly?: boolean
   invalid?: boolean
+  helpText?: string
+  /** Error copy under the field; implies invalid when set. */
+  errorMessage?: string
   fluid?: boolean
   size?: WiSizeInput
   showButtons?: boolean
@@ -23,4 +27,13 @@ export interface InputNumberProps {
 
 export interface InputNumberEmits {
   (event: 'update:modelValue', value: number | null): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: number | null): void
+}
+
+export interface InputNumberInstance {
+  focus: () => void
+  blur: () => void
+  select: () => void
 }

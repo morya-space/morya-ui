@@ -22,7 +22,7 @@ describe('wiSlider', () => {
 
   it('marks disabled state', () => {
     const wrapper = mount(WiSlider, { props: { disabled: true } })
-    expect(wrapper.classes()).toContain('wi-slider--disabled')
+    expect(wrapper.get('.wi-slider').classes()).toContain('wi-slider--disabled')
     expect(wrapper.get('input').attributes('disabled')).toBeDefined()
   })
 
@@ -30,7 +30,9 @@ describe('wiSlider', () => {
     const wrapper = mount(WiSlider, {
       props: { modelValue: 20, marks: { 0: 'Low', 100: 'High' }, tooltip: true, vertical: true },
     })
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wi-slider--vertical', 'wi-slider--tooltip']))
+    expect(wrapper.get('.wi-slider').classes()).toEqual(
+      expect.arrayContaining(['wi-slider--vertical', 'wi-slider--tooltip']),
+    )
     expect(wrapper.text()).toContain('Low')
     expect(wrapper.text()).toContain('High')
   })

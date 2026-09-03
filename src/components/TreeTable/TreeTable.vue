@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import type { TreeTableEmits, TreeTableNode, TreeTableProps } from './types'
 import { computed, ref } from 'vue'
+import { useWiLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
 
 const props = defineProps<TreeTableProps>()
 
 const emit = defineEmits<TreeTableEmits>()
 
+const locale = useWiLocale()
 const internalExpanded = ref<Record<string, boolean>>({})
 const expanded = computed(() => props.expandedKeys ?? internalExpanded.value)
+
+const resolvedEmptyMessage = computed(
+  () => props.emptyMessage ?? locale.value.emptyMessage,
+)
 
 function isExpanded(key: string) {
   return Boolean(expanded.value[key])
@@ -34,7 +40,7 @@ function toggle(node: TreeTableNode) {
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="value.length">
         <TreeTableRow
           v-for="node in value"
           :key="node.key"
@@ -46,5 +52,10 @@ function toggle(node: TreeTableNode) {
         />
       </tbody>
     </table>
+    <div v-if="!value.length" class="wi-treetable__message" role="status">
+      <slot name="empty">
+        <p class="wi-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
+      </slot>
+    </div>
   </div>
 </template>

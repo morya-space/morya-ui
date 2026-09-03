@@ -2,6 +2,8 @@
 import type { SidebarItem, SidebarProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
+import { resolveMenuIcon } from '../../shared/menu'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   model: () => [],
@@ -18,6 +20,10 @@ function activate(item: SidebarItem) {
   if (item.disabled) return
   item.command?.()
 }
+
+function iconOf(item: SidebarItem) {
+  return resolveMenuIcon(item.icon)
+}
 </script>
 
 <template>
@@ -31,7 +37,9 @@ function activate(item: SidebarItem) {
           :title="collapsed ? item.label : undefined"
           @click="activate(item)"
         >
-          <span v-if="item.icon" class="wi-sidebar__icon" aria-hidden="true">{{ item.icon }}</span>
+          <span v-if="iconOf(item)" class="wi-sidebar__icon" aria-hidden="true">
+            <WiIcon :name="iconOf(item)!" size="sm" />
+          </span>
           <span v-if="!collapsed" class="wi-sidebar__label">{{ item.label }}</span>
         </button>
         <ul v-if="!collapsed && item.items?.length" class="wi-sidebar__children">
@@ -42,7 +50,9 @@ function activate(item: SidebarItem) {
               :disabled="child.disabled"
               @click="activate(child)"
             >
-              <span v-if="child.icon" class="wi-sidebar__icon" aria-hidden="true">{{ child.icon }}</span>
+              <span v-if="iconOf(child)" class="wi-sidebar__icon" aria-hidden="true">
+                <WiIcon :name="iconOf(child)!" size="sm" />
+              </span>
               <span class="wi-sidebar__label">{{ child.label }}</span>
             </button>
           </li>

@@ -1,20 +1,37 @@
 <script setup lang="ts">
 import type { AccordionProps } from './types'
 import { computed } from 'vue'
+import { useControllable } from '../../shared/useControllable'
 
 const props = withDefaults(defineProps<AccordionProps>(), {
   multiple: false,
+  modelValue: undefined,
+  defaultValue: undefined,
 })
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string | string[]): void
 }>()
 
+function resolveDefaultValue(): string | string[] {
+  if (props.defaultValue !== undefined) return props.defaultValue
+  return props.multiple ? [] : ''
+}
+
+const { value: activeModel, setValue: setActiveModel } = useControllable(
+  {
+    controlled: () => props.modelValue,
+    defaultValue: resolveDefaultValue(),
+  },
+  (next) => emit('update:modelValue', next),
+)
+
 const activeKeys = computed(() => {
+  const value = activeModel.value
   if (props.multiple) {
-    return Array.isArray(props.modelValue) ? props.modelValue : props.modelValue ? [props.modelValue] : []
+    return Array.isArray(value) ? value : value ? [value] : []
   }
-  if (Array.isArray(props.modelValue)) return props.modelValue[0] ? [props.modelValue[0]] : []
-  return props.modelValue ? [props.modelValue] : []
+  if (Array.isArray(value)) return value[0] ? [value[0]] : []
+  return value ? [value] : []
 })
 
 function isActive(value: string) {
@@ -36,10 +53,10 @@ function toggle(value: string, disabled?: boolean) {
     const index = next.indexOf(value)
     if (index >= 0) next.splice(index, 1)
     else next.push(value)
-    emit('update:modelValue', next)
+    setActiveModel(next)
     return
   }
-  emit('update:modelValue', isActive(value) ? '' : value)
+  setActiveModel(isActive(value) ? '' : value)
 }
 </script>
 

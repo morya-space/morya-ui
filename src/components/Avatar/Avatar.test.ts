@@ -26,13 +26,17 @@ describe('wiAvatar', () => {
   })
 
   it('applies shape and size modifiers including aliases', () => {
-    const square = mount(WiAvatar, { props: { label: 'S', shape: 'square', size: 'large' } })
+    const small = mount(WiAvatar, { props: { label: 'S', shape: 'square', size: 'small' } })
+    const medium = mount(WiAvatar, { props: { label: 'M', size: 'medium' } })
     const xlarge = mount(WiAvatar, { props: { label: 'X', size: 'xlarge' } })
-    const lg = mount(WiAvatar, { props: { label: 'L', size: 'lg' } })
+    const legacy = mount(WiAvatar, { props: { label: 'L', size: 'lg' } })
+    const normal = mount(WiAvatar, { props: { label: 'N', size: 'normal' } })
 
-    expect(square.classes()).toEqual(expect.arrayContaining(['wi-avatar--square', 'wi-avatar--large']))
+    expect(small.classes()).toEqual(expect.arrayContaining(['wi-avatar--square', 'wi-avatar--small']))
+    expect(medium.classes()).toContain('wi-avatar--medium')
     expect(xlarge.classes()).toContain('wi-avatar--xlarge')
-    expect(lg.classes()).toContain('wi-avatar--large')
+    expect(legacy.classes()).toContain('wi-avatar--large')
+    expect(normal.classes()).toContain('wi-avatar--medium')
   })
 
   it('falls back and emits error when the image fails', async () => {

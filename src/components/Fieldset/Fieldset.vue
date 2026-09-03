@@ -1,22 +1,32 @@
 <script setup lang="ts">
 import type { FieldsetProps } from './types'
-import { computed } from 'vue'
+import { useId } from 'vue'
+import { useControllable } from '../../shared/useControllable'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<FieldsetProps>(), {
   toggleable: false,
-  collapsed: false,
+  defaultCollapsed: false,
+  collapsed: undefined,
 })
 
 const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
 }>()
 
-const isCollapsed = computed(() => props.collapsed)
+const contentId = useId()
+
+const { value: isCollapsed, setValue: setCollapsed } = useControllable(
+  {
+    controlled: () => props.collapsed,
+    defaultValue: props.defaultCollapsed,
+  },
+  (next) => emit('update:collapsed', next),
+)
 
 function toggle() {
   if (!props.toggleable) return
-  emit('update:collapsed', !isCollapsed.value)
+  setCollapsed(!isCollapsed.value)
 }
 </script>
 
@@ -28,6 +38,7 @@ function toggle() {
         type="button"
         class="wi-fieldset__toggler"
         :aria-expanded="!isCollapsed"
+        :aria-controls="contentId"
         @click="toggle"
       >
         <WiIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
@@ -41,7 +52,7 @@ function toggle() {
         </slot>
       </template>
     </legend>
-    <div v-show="!isCollapsed" class="wi-fieldset__content">
+    <div :id="contentId" v-show="!isCollapsed" class="wi-fieldset__content">
       <slot />
     </div>
   </fieldset>

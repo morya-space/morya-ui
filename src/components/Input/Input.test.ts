@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import WiInput from './Input.vue'
 
 describe('wiInput', () => {
@@ -55,5 +55,20 @@ describe('wiInput', () => {
     expect(wrapper.get('.wi-input__suffix').text()).toBe('.00')
     expect(wrapper.get('input').classes()).toContain('wi-input--has-prefix')
     expect(wrapper.get('input').classes()).toContain('wi-input--has-suffix')
+  })
+
+  it('emits focus, blur, and change and exposes focus/blur/select', async () => {
+    const wrapper = mount(WiInput, { props: { modelValue: 'hello' } })
+    const input = wrapper.get('input')
+    await input.trigger('focus')
+    await input.trigger('blur')
+    await input.setValue('world')
+    await input.trigger('change')
+    expect(wrapper.emitted('focus')).toHaveLength(1)
+    expect(wrapper.emitted('blur')).toHaveLength(1)
+    expect(wrapper.emitted('change')?.[0]).toEqual(['world'])
+    const selectSpy = vi.spyOn(input.element as HTMLInputElement, 'select')
+    wrapper.vm.select()
+    expect(selectSpy).toHaveBeenCalled()
   })
 })

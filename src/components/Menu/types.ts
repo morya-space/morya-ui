@@ -1,9 +1,12 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { WiRouteLocationRaw } from '../../shared/optionalRouter'
 
 export interface MenuItem {
   key?: string
   label?: string
   icon?: string
+  /** SPA route target when vue-router is available; falls back to anchor. */
+  to?: WiRouteLocationRaw
   command?: () => void
   disabled?: boolean
   separator?: boolean

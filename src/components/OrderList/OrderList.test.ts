@@ -76,4 +76,10 @@ describe('wiOrderList', () => {
     expect(document.activeElement).toBe(items()[0]!.element)
     wrapper.unmount()
   })
+
+  it('shows empty message when list is empty', () => {
+    const wrapper = mount(WiOrderList, { props: { modelValue: [] } })
+    expect(wrapper.find('.wi-orderlist__message').exists()).toBe(true)
+    expect(wrapper.find('.wi-orderlist__empty-text').text()).toBe('暂无数据')
+  })
 })

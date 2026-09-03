@@ -21,4 +21,13 @@ describe('wiPickList', () => {
     expect(wrapper.emitted('update:source')?.at(-1)).toEqual([[]])
     expect(wrapper.emitted('update:target')?.at(-1)).toEqual([['a', 'b']])
   })
+
+  it('shows empty message in empty lists', () => {
+    const wrapper = mount(WiPickList, {
+      props: { source: [], target: [] },
+    })
+    const emptyItems = wrapper.findAll('.wi-picklist__empty')
+    expect(emptyItems).toHaveLength(2)
+    expect(emptyItems[0]!.text()).toBe('暂无数据')
+  })
 })

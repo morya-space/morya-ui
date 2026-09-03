@@ -1,12 +1,7 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { MenuNodeBase } from '../../shared/menu'
 
-export interface ContextMenuItem {
-  key?: string
-  label?: string
-  icon?: string
-  command?: () => void
-  disabled?: boolean
-  separator?: boolean
+export interface ContextMenuItem extends MenuNodeBase {
   items?: ContextMenuItem[]
 }
 

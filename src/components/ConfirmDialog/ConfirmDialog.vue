@@ -15,6 +15,9 @@ const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   modelValue: false,
   acceptSeverity: undefined,
   loading: false,
+  closeOnEsc: true,
+  closeOnOutsideClick: true,
+  blockScroll: true,
   teleport: true,
 })
 
@@ -87,6 +90,10 @@ async function reject() {
   }
 }
 
+function onOutsideClick() {
+  if (props.closeOnOutsideClick) void reject()
+}
+
 watch(
   () => props.modelValue,
   (open) => {
@@ -97,7 +104,8 @@ watch(
 useModalOverlay({
   open: toRef(props, 'modelValue'),
   container: dialogElement,
-  blockScroll: true,
+  closeOnEsc: () => props.closeOnEsc,
+  blockScroll: () => props.blockScroll,
   onEscape: () => {
     void reject()
   },
@@ -112,7 +120,7 @@ useModalOverlay({
         class="wi-dialog-backdrop wi-dialog-backdrop--center wi-dialog-backdrop--modal wi-confirmdialog-backdrop"
         :style="zoomStyle"
       >
-        <div class="wi-dialog-zoom" @click.self="reject">
+        <div class="wi-dialog-zoom" @click.self="onOutsideClick">
           <section
             ref="dialogElement"
             class="wi-dialog wi-confirmdialog"

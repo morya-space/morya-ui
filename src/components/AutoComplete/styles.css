@@ -141,3 +141,7 @@
     list-style: none;
     padding: var(--wi-space-2) var(--wi-space-3);
 }
+
+.wi-autocomplete--invalid .wi-autocomplete__control {
+    border-color: var(--wi-color-danger);
+}

@@ -35,8 +35,12 @@ export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } fro
 export type WiDensity = DensityPreference
 export type { WiLocaleConfig }
 
+export type ThemePreference = 'light' | 'dark' | 'system'
+
 /** Application-level default configuration. */
 export interface WiGlobalConfig {
+  /** Color theme. `system` follows `prefers-color-scheme`. */
+  theme?: ThemePreference
   /** Default Teleport target for overlays. Defaults to `'body'`. */
   appendTo?: WiAppendTo
   /** Default control size for form components that support `size`. */

@@ -72,6 +72,7 @@ export const zhCN: WiLocaleMessages = {
   terminal: '终端',
   commandInput: '命令输入',
   breadcrumb: '面包屑',
+  home: '首页',
   sidebar: '侧边导航',
   menubar: '菜单栏',
   megaMenu: '大型菜单',

@@ -36,4 +36,26 @@ describe('wiBreadcrumb', () => {
     })
     expect(wrapper.get('.wi-breadcrumb__separator').text()).toBe('>')
   })
+
+  it('uses locale home label by default', () => {
+    const wrapper = mount(WiBreadcrumb, {
+      props: {
+        home: { to: '/' },
+        model: [{ label: 'Detail' }],
+      },
+    })
+    expect(wrapper.get('a[href="/"]').text()).toBe('首页')
+  })
+
+  it('supports item slot override', () => {
+    const wrapper = mount(WiBreadcrumb, {
+      props: { model: [{ label: 'A', to: '/a' }, { label: 'B' }] },
+      slots: {
+        item: ({ item, active }: { item: { label: string }; active: boolean }) =>
+          `[${item.label}${active ? '*' : ''}]`,
+      },
+    })
+    expect(wrapper.text()).toContain('[A]')
+    expect(wrapper.text()).toContain('[B*]')
+  })
 })

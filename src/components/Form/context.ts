@@ -1,4 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
+import type { WiSizeInput } from '../../shared/types'
 import type {
   FormFieldValidator,
   FormItemRule,
@@ -24,6 +25,7 @@ export interface WiFormContext {
   labelWidth?: string | number
   requireMark: boolean
   disabled: boolean
+  size?: WiSizeInput
   validateOn: FormValidateTrigger[]
   registerField: (field: WiFormFieldRegistration) => void
   unregisterField: (name: string) => void

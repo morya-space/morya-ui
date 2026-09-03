@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
+import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -18,6 +19,7 @@ const props = withDefaults(defineProps<SpeedDialProps>(), {
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
+  (event: 'item-click', item: SpeedDialItem): void
 }>()
 
 const config = useWiConfig()
@@ -138,7 +140,12 @@ function toggle() {
 function activate(item: SpeedDialItem) {
   if (props.disabled || item.disabled) return
   item.command?.()
+  emit('item-click', item)
   close(true)
+}
+
+function iconOf(item: SpeedDialItem) {
+  return resolveMenuIcon(item.icon)
 }
 
 function onViewportChange() {
@@ -220,7 +227,9 @@ onBeforeUnmount(() => {
               :tabindex="keyboard.tabindexFor(index)"
               @click="activate(item)"
             >
-              <span v-if="item.icon" aria-hidden="true">{{ item.icon }}</span>
+              <span v-if="iconOf(item)" aria-hidden="true">
+                <WiIcon :name="iconOf(item)!" size="sm" />
+              </span>
               <span class="wi-speeddial__action-label">{{ item.label }}</span>
             </button>
           </li>

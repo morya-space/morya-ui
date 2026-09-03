@@ -163,7 +163,6 @@ function updateMenuPosition() {
     props.placement === 'bottom-end' ? 'bottom-end' : 'bottom-start',
     {
       minWidth: `${rect.width}px`,
-      zIndex: config.value.zIndex ?? 1000,
     },
   )
 }

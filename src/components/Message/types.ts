@@ -28,12 +28,16 @@ export interface MessageItem {
 export type MessageOptions = Omit<MessageItem, 'id' | 'content'> & {
   id?: string | number
   content: WiRenderable
+  /** When true (default service setting), refresh life for duplicate content. */
+  dedupe?: boolean
 }
 
 /** String / VNode / component / render factory, or a full options object. */
 export type MessageInput = WiRenderable | MessageOptions
 
 export interface MessageProps {
+  /** Controlled message list. When omitted, binds to the shared service queue. */
+  messages?: MessageItem[]
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
@@ -57,4 +61,5 @@ export interface MessageHandle {
 export interface MessageHostConfig {
   placement?: MessagePlacement
   max?: number
+  dedupe?: boolean
 }

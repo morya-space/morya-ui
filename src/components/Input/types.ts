@@ -28,8 +28,13 @@ export interface InputProps {
 export interface InputEmits {
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: string): void
 }
 
 export interface InputInstance {
   focus: () => void
+  blur: () => void
+  select: () => void
 }

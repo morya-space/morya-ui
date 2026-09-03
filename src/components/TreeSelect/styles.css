@@ -156,3 +156,7 @@
 .wi-treeselect__node--active > .wi-treeselect__row .wi-treeselect__option:not(:disabled) {
     background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
 }
+
+.wi-treeselect--invalid .wi-treeselect__trigger {
+    border-color: var(--wi-color-danger);
+}

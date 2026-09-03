@@ -2,6 +2,7 @@
 import type { DrawerProps } from './types'
 import { computed, ref, toRef } from 'vue'
 import { useWiLocale } from '../../locale'
+import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
@@ -12,12 +13,14 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   position: 'left',
   modal: true,
   dismissable: true,
+  closeOnEsc: true,
   showCloseIcon: true,
   blockScroll: true,
   teleport: true,
 })
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
+  (event: 'close'): void
   (event: 'show'): void
   (event: 'hide'): void
   (event: 'after-leave'): void
@@ -26,7 +29,13 @@ const emit = defineEmits<{
 const config = useWiConfig()
 const locale = useWiLocale()
 const drawerElement = ref<HTMLElement | null>(null)
+const pendingClose = ref(false)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
+
+const isDismissableMask = computed(() => {
+  if (props.closeOnOutsideClick !== undefined) return props.closeOnOutsideClick
+  return props.dismissable
+})
 
 function toCssSize(value?: string | number) {
   if (value == null) return undefined
@@ -49,19 +58,38 @@ const paneStyle = computed(() => {
   return style
 })
 
-function close() {
+function finishClose() {
   emit('update:modelValue', false)
+  emit('close')
+}
+
+async function close() {
+  if (pendingClose.value) return
+  if (!props.beforeClose) {
+    finishClose()
+    return
+  }
+  pendingClose.value = true
+  try {
+    if (!(await allowAfterGuard(props.beforeClose))) return
+    finishClose()
+  } finally {
+    pendingClose.value = false
+  }
 }
 
 function onOutsideClick() {
-  if (props.dismissable) close()
+  if (isDismissableMask.value) void close()
 }
 
 useModalOverlay({
   open: toRef(props, 'modelValue'),
   container: drawerElement,
+  closeOnEsc: () => props.closeOnEsc,
   blockScroll: () => props.blockScroll && props.modal,
-  onEscape: close,
+  onEscape: () => {
+    void close()
+  },
   onOpen: () => emit('show'),
   onClose: () => emit('hide'),
 })

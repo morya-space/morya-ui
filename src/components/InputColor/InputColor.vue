@@ -2,21 +2,36 @@
 import type { InputColorProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 
 const props = withDefaults(defineProps<InputColorProps>(), {
   modelValue: '#000000',
   disabled: false,
+  invalid: false,
 })
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
 const locale = useWiLocale()
+const sizeClass = useConfiguredSize('InputColor', () => props.size)
+const fieldId = computed(() => props.id ?? `wi-inputcolor-${Math.random().toString(36).slice(2, 8)}`)
+const { isInvalid } = useFieldFeedback(props)
 
 const hexValue = computed(() => {
   const raw = props.modelValue?.trim() || '#000000'
   return /^#[0-9a-f]{6}$/i.test(raw) ? raw : '#000000'
 })
+
+const rootClass = computed(() => [
+  'wi-inputcolor',
+  `wi-inputcolor--${sizeClass.value}`,
+  {
+    'wi-inputcolor--disabled': props.disabled,
+    'wi-inputcolor--invalid': isInvalid.value,
+  },
+])
 
 function onColorInput(event: Event) {
   const target = event.target as HTMLInputElement
@@ -35,38 +50,42 @@ function pickSwatch(color: string) {
 </script>
 
 <template>
-  <div class="wi-inputcolor" :class="{ 'wi-inputcolor--disabled': disabled }">
-    <div class="wi-inputcolor__row">
-      <input
-        :id="id"
-        class="wi-inputcolor__swatch"
-        type="color"
-        :value="hexValue"
-        :disabled="disabled"
-        :aria-label="locale.selectColor"
-        @input="onColorInput"
-      >
-      <input
-        class="wi-inputcolor__text"
-        type="text"
-        :value="modelValue"
-        :disabled="disabled"
-        placeholder="#000000"
-        spellcheck="false"
-        @input="onTextInput"
-      >
-    </div>
-    <div v-if="swatches?.length" class="wi-inputcolor__swatches">
-      <button
-        v-for="color in swatches"
-        :key="color"
-        type="button"
-        class="wi-inputcolor__preset"
-        :style="{ background: color }"
-        :disabled="disabled"
-        :aria-label="color"
-        @click="pickSwatch(color)"
-      />
+  <div class="wi-inputcolor-field">
+    <label v-if="label" class="wi-inputcolor-field__label" :for="fieldId">{{ label }}</label>
+    <div :class="rootClass">
+      <div class="wi-inputcolor__row">
+        <input
+          class="wi-inputcolor__swatch"
+          type="color"
+          :value="hexValue"
+          :disabled="disabled"
+          :aria-label="locale.selectColor"
+          @input="onColorInput"
+        >
+        <input
+          :id="fieldId"
+          class="wi-inputcolor__text"
+          type="text"
+          :value="modelValue"
+          :disabled="disabled"
+          placeholder="#000000"
+          spellcheck="false"
+          :aria-invalid="isInvalid || undefined"
+          @input="onTextInput"
+        >
+      </div>
+      <div v-if="swatches?.length" class="wi-inputcolor__swatches">
+        <button
+          v-for="color in swatches"
+          :key="color"
+          type="button"
+          class="wi-inputcolor__preset"
+          :style="{ background: color }"
+          :disabled="disabled"
+          :aria-label="color"
+          @click="pickSwatch(color)"
+        />
+      </div>
     </div>
   </div>
 </template>

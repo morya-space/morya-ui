@@ -7,6 +7,7 @@ import {
   applyMessageMax,
   closeAllMessageItems,
   closeMessageItem,
+  findDuplicateMessage,
   messageAutoHost,
   messageManualHostCount,
   messageState,
@@ -48,6 +49,22 @@ function open(input: MessageInput, severity?: MessageSeverity): MessageHandle {
   ensureHost()
   applyMessageMax(messageState.max)
   const item = toItem(input, severity)
+  const dedupe =
+    (isMessageOptionsObject(input) ? input.dedupe : undefined) ??
+    messageState.dedupe ??
+    true
+  if (dedupe) {
+    const existing = findDuplicateMessage(item)
+    if (existing) {
+      if (item.life !== undefined) existing.life = item.life
+      if (item.severity !== undefined) existing.severity = item.severity
+      scheduleMessageLife(existing, closeMessageItem)
+      return {
+        id: existing.id,
+        close: () => closeMessageItem(existing.id),
+      }
+    }
+  }
   messageState.items = [...messageState.items, item]
   scheduleMessageLife(item, closeMessageItem)
   return {
@@ -69,6 +86,10 @@ export const message = {
   config(options: MessageHostConfig) {
     if (options.placement) messageState.placement = options.placement
     if (options.max !== undefined) messageState.max = options.max
+    if (options.dedupe !== undefined) messageState.dedupe = options.dedupe
+  },
+  setDefaults(options: MessageHostConfig) {
+    message.config(options)
   },
 }
 

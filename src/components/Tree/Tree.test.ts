@@ -56,6 +56,14 @@ describe('wiTree', () => {
     expect(wrapper.text()).toContain('Documents')
   })
 
+  it('shows empty message when filter yields no results', () => {
+    const wrapper = mount(WiTree, {
+      props: { value, filter: 'missing' },
+    })
+    expect(wrapper.find('.wi-tree__message').exists()).toBe(true)
+    expect(wrapper.find('.wi-tree__empty-text').text()).toBe('暂无数据')
+  })
+
   it('projects checked keys with checkStrategy child', async () => {
     const wrapper = mount(WiTree, {
       props: {

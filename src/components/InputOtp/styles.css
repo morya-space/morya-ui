@@ -36,3 +36,7 @@
     height: var(--wi-control-height-large);
     width: var(--wi-control-height-large);
 }
+
+.wi-inputotp--invalid .wi-inputotp__input {
+    border-color: var(--wi-color-danger);
+}

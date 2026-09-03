@@ -31,6 +31,9 @@ const props = withDefaults(defineProps<InputPasswordProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: string): void
 }>()
 const attrs = useAttrs()
 const defaults = useComponentDefaults('InputPassword')
@@ -166,6 +169,20 @@ function onToggleKeydown(event: KeyboardEvent) {
 }
 
 onBeforeUnmount(clearPeekListeners)
+
+function focus() {
+  inputElement.value?.focus()
+}
+
+function blur() {
+  inputElement.value?.blur()
+}
+
+function select() {
+  inputElement.value?.select()
+}
+
+defineExpose({ focus, blur, select })
 </script>
 
 <template>
@@ -186,6 +203,9 @@ onBeforeUnmount(clearPeekListeners)
         :aria-describedby="describedBy"
         autocomplete="current-password"
         @input="updateValue"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @change="emit('change', ($event.target as HTMLInputElement).value)"
       >
       <button
         v-if="showClear"

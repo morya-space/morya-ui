@@ -5,6 +5,16 @@
     gap: var(--wi-space-3);
 }
 
+.wi-dataview__content {
+    position: relative;
+}
+
+.wi-dataview__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .wi-dataview__list {
     display: flex;
     flex-direction: column;
@@ -30,4 +40,39 @@
 
 .wi-dataview__paginator {
     align-self: center;
+}
+
+.wi-dataview__loading {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wi-dataview__loading-mask {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--wi-color-surface) 72%, transparent);
+}
+
+.wi-dataview__loading-body {
+    position: relative;
+    z-index: 1;
+}
+
+.wi-dataview__message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(var(--wi-control-height-medium, 2.5rem) * 2);
+    padding: var(--wi-space-5);
+}
+
+.wi-dataview__empty-text {
+    margin: 0;
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-sm);
+    line-height: 1.5;
 }

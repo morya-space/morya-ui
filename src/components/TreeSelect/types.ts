@@ -16,6 +16,12 @@ export type TreeSelectValue = string | string[] | null
 export interface TreeSelectProps {
   options: TreeSelectNode[]
   modelValue?: TreeSelectValue
+  id?: string
+  label?: string
+  helpText?: string
+  invalid?: boolean
+  /** Error copy under the field; implies invalid when set. */
+  errorMessage?: string
   placeholder?: string
   disabled?: boolean
   size?: WiSizeInput

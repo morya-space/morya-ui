@@ -6,13 +6,18 @@ export interface ListboxOption {
   disabled?: boolean
 }
 
+import type { WiSizeInput } from '../../shared/types'
+
 export interface ListboxProps {
   modelValue?: ListboxValue | ListboxValue[]
   options: ListboxOption[]
   multiple?: boolean
   disabled?: boolean
+  invalid?: boolean
+  size?: WiSizeInput
   filter?: boolean
-  listStyle?: string
+  emptyMessage?: string
+  listStyle?: string | Record<string, string>
 }
 
 export interface ListboxEmits {

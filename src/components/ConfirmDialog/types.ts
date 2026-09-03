@@ -14,6 +14,12 @@ export interface ConfirmDialogProps {
   type?: DialogType
   /** Show a loading spinner on the accept button. */
   loading?: boolean
+  /** Close when pressing Escape. */
+  closeOnEsc?: boolean
+  /** Close when clicking the mask (same as reject). */
+  closeOnOutsideClick?: boolean
+  /** Lock page scroll while open. */
+  blockScroll?: boolean
   /** Return `false` to keep the dialog open and skip the `accept` emit. */
   beforeAccept?: AsyncGuard
   /** Return `false` to keep the dialog open and skip the `reject` emit. */

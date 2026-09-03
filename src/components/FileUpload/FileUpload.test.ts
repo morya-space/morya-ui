@@ -162,4 +162,28 @@ describe('wiFileUpload', () => {
     expect(input.multiple).toBe(true)
     expect(input.hasAttribute('webkitdirectory')).toBe(true)
   })
+
+  it('emits exceed-size for oversized files', async () => {
+    const wrapper = mount(WiFileUpload, { props: { maxSize: 4 } })
+    await pick(wrapper, [makeFile('big.txt', 'text/plain', 'toolarge')])
+    expect(wrapper.emitted('exceed-size')?.[0]?.[0]).toMatchObject({ name: 'big.txt' })
+    expect(wrapper.emitted('select')).toBeUndefined()
+  })
+
+  it('does not emit change on upload progress updates only', async () => {
+    let progressHandler: ((percent: number) => void) | undefined
+    const httpRequest = vi.fn(({ onProgress }: { onProgress: (percent: number) => void }) => {
+      progressHandler = onProgress
+    })
+    const wrapper = mount(WiFileUpload, {
+      props: { mode: 'advanced', httpRequest },
+    })
+    await pick(wrapper, [makeFile()])
+    const changesAfterSelect = wrapper.emitted('change')?.length ?? 0
+    expect(changesAfterSelect).toBeGreaterThan(0)
+    progressHandler?.(50)
+    progressHandler?.(75)
+    await nextTick()
+    expect(wrapper.emitted('change')?.length).toBe(changesAfterSelect)
+  })
 })

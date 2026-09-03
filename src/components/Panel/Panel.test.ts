@@ -23,7 +23,8 @@ describe('wiPanel', () => {
     expect(wrapper.emitted('update:modelValue')).toEqual([[true]])
     expect(wrapper.emitted('update:collapsed')).toEqual([[true]])
     await wrapper.setProps({ modelValue: true })
-    expect(wrapper.get('.wi-panel__content').attributes('style')).toContain('display: none')
+    expect(wrapper.classes()).toContain('wi-panel--collapsed')
+    expect(wrapper.get('.wi-panel__toggler').attributes('aria-expanded')).toBe('false')
   })
 
   it('renders footer and size', () => {
@@ -33,5 +34,17 @@ describe('wiPanel', () => {
     })
     expect(wrapper.classes()).toContain('wi-panel--small')
     expect(wrapper.get('.wi-panel__footer').text()).toBe('Actions')
+  })
+
+  it('toggles without v-model using defaultCollapsed', async () => {
+    const wrapper = mount(WiPanel, {
+      props: { header: 'Box', toggleable: true, defaultCollapsed: true },
+      slots: { default: 'Inner' },
+    })
+    expect(wrapper.classes()).toContain('wi-panel--collapsed')
+    expect(wrapper.get('.wi-panel__toggler').attributes('aria-expanded')).toBe('false')
+    await wrapper.get('.wi-panel__toggler').trigger('click')
+    expect(wrapper.get('.wi-panel__content').isVisible()).toBe(true)
+    expect(wrapper.emitted('update:collapsed')).toEqual([[false]])
   })
 })

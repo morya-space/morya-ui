@@ -1,11 +1,8 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { MenuNodeBase } from '../../shared/menu'
 
-export interface CommandMenuItem {
+export interface CommandMenuItem extends Omit<MenuNodeBase, 'label'> {
   label: string
-  icon?: string
-  shortcut?: string
-  command?: () => void
-  disabled?: boolean
 }
 
 export interface CommandMenuProps {

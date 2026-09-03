@@ -28,6 +28,13 @@
     margin-bottom: var(--wi-space-1);
 }
 
+.wi-terminal__response {
+    color: color-mix(in srgb, var(--wi-terminal-fg) 85%, transparent);
+    line-height: 1.5;
+    margin-bottom: var(--wi-space-2);
+    white-space: pre-wrap;
+}
+
 .wi-terminal__form {
     align-items: center;
     border-top: 1px solid var(--wi-terminal-border);

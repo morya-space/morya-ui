@@ -19,9 +19,57 @@
 }
 
 .wi-icon-field--left .wi-icon-field__icon {
-    left: var(--wi-space-3);
+    left: var(--wi-control-padding-x-medium);
 }
 
 .wi-icon-field--right .wi-icon-field__icon {
-    right: var(--wi-space-3);
+    right: var(--wi-control-padding-x-medium);
+}
+
+.wi-icon-field--left :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
+    padding-left: var(--wi-control-affix-padding);
+}
+
+.wi-icon-field--right :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
+    padding-right: var(--wi-control-affix-padding);
+}
+
+.wi-icon-field--left:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
+    .wi-icon-field__icon {
+    left: var(--wi-control-padding-x-small);
+}
+
+.wi-icon-field--right:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
+    .wi-icon-field__icon {
+    right: var(--wi-control-padding-x-small);
+}
+
+.wi-icon-field--left:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
+    .wi-icon-field__icon {
+    left: var(--wi-control-padding-x-large);
+}
+
+.wi-icon-field--right:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
+    .wi-icon-field__icon {
+    right: var(--wi-control-padding-x-large);
+}
+
+.wi-icon-field--left:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
+    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
+    padding-left: var(--wi-control-affix-gap);
+}
+
+.wi-icon-field--right:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
+    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
+    padding-right: var(--wi-control-affix-gap);
+}
+
+.wi-icon-field--left:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
+    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
+    padding-left: calc(var(--wi-control-affix-padding) + var(--wi-space-1));
+}
+
+.wi-icon-field--right:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
+    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
+    padding-right: calc(var(--wi-control-affix-padding) + var(--wi-space-1));
 }

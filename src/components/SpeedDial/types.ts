@@ -1,12 +1,10 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { MenuNodeBase } from '../../shared/menu'
 
 export type SpeedDialDirection = 'up' | 'down' | 'left' | 'right'
 
-export interface SpeedDialItem {
+export interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
   label: string
-  icon?: string
-  command?: () => void
-  disabled?: boolean
 }
 
 export interface SpeedDialProps {
@@ -23,4 +21,5 @@ export interface SpeedDialProps {
 
 export interface SpeedDialEmits {
   (event: 'update:modelValue', value: boolean): void
+  (event: 'item-click', item: SpeedDialItem): void
 }

@@ -52,6 +52,7 @@
     --wi-z-overlay: var(--wi-z-base);
     --wi-z-overlay-raised: calc(var(--wi-z-base) + 1);
     --wi-z-dropdown: calc(var(--wi-z-base) + 50);
+    --wi-z-tooltip: calc(var(--wi-z-base) + 60);
     --wi-z-toast: calc(var(--wi-z-base) + 100);
     --wi-z-popper: 40;
 
@@ -116,9 +117,15 @@
 :root,
 [data-wi-density="comfortable"] {
     --wi-density-scale: 1;
+    --wi-menu-item-height: calc(var(--wi-control-height-medium) + var(--wi-space-2));
+    --wi-checkbox-control-size: 1.125rem;
 }
 
 [data-wi-density="compact"] {
+    --wi-menu-item-height: calc(var(--wi-control-height-medium) + var(--wi-space-1));
+    --wi-control-affix-padding: 2.15rem;
+    --wi-control-affix-gap: 2rem;
+    --wi-checkbox-control-size: 1rem;
     --wi-space-1: 0.2rem;
     --wi-space-2: 0.4rem;
     --wi-space-3: 0.6rem;
@@ -142,6 +149,10 @@
 }
 
 [data-wi-density="spacious"] {
+    --wi-menu-item-height: calc(var(--wi-control-height-medium) + var(--wi-space-3));
+    --wi-control-affix-padding: 2.85rem;
+    --wi-control-affix-gap: 2.65rem;
+    --wi-checkbox-control-size: 1.25rem;
     --wi-space-1: 0.3rem;
     --wi-space-2: 0.6rem;
     --wi-space-3: 0.9rem;

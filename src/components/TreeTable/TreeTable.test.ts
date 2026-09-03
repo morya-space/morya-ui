@@ -50,4 +50,18 @@ describe('wiTreeTable', () => {
     await wrapper.find('.wi-treetable__toggler').trigger('click')
     expect(wrapper.emitted('update:expandedKeys')?.at(-1)).toEqual([{}])
   })
+
+  it('shows empty message when value is empty', () => {
+    const wrapper = mount(WiTreeTable, { props: { columns, value: [] } })
+    expect(wrapper.find('.wi-treetable__message').exists()).toBe(true)
+    expect(wrapper.find('.wi-treetable__empty-text').text()).toBe('暂无数据')
+  })
+
+  it('supports custom empty slot', () => {
+    const wrapper = mount(WiTreeTable, {
+      props: { columns, value: [] },
+      slots: { empty: '<p class="custom-empty">No rows</p>' },
+    })
+    expect(wrapper.find('.custom-empty').text()).toBe('No rows')
+  })
 })
