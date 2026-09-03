@@ -104,6 +104,17 @@ describe('wiCascadeSelect', () => {
     wrapper.unmount()
   })
 
+  it('renders invalid state with combobox semantics aligned to Select', () => {
+    const wrapper = mount(WiCascadeSelect, {
+      props: { options, invalid: true, errorMessage: 'Required', teleport: false },
+    })
+    const trigger = wrapper.get('.wi-cascadeselect__trigger')
+    expect(trigger.attributes('role')).toBe('combobox')
+    expect(trigger.attributes('aria-invalid')).toBe('true')
+    expect(trigger.classes()).toContain('wi-cascadeselect__trigger--invalid')
+    expect(wrapper.get('.wi-select-field__help').text()).toBe('Required')
+  })
+
   it('teleports the panel to body by default', async () => {
     const wrapper = mount(WiCascadeSelect, {
       props: { options, modelValue: null },

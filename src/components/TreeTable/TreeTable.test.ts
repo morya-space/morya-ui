@@ -64,4 +64,15 @@ describe('wiTreeTable', () => {
     })
     expect(wrapper.find('.custom-empty').text()).toBe('No rows')
   })
+
+  it('renders expansion slot content when expanded', async () => {
+    const wrapper = mount(WiTreeTable, {
+      props: { columns, value, expandedKeys: { '0': true } },
+      slots: {
+        expansion: '<p class="expansion-content">Extra details</p>',
+      },
+    })
+    expect(wrapper.find('.expansion-content').text()).toBe('Extra details')
+    expect(wrapper.find('.wi-treetable__expansion-cell').exists()).toBe(true)
+  })
 })

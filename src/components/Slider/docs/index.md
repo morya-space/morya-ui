@@ -89,6 +89,12 @@ const value = ref(50)
 | `tooltip` | `boolean` | `false` | 拖动时显示当前值。 |
 | `vertical` | `boolean` | `false` | 垂直方向。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `ariaLabel` | `string` | — | — |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
+| `size` | `WiSizeInput` | — | — |
 
 ## Events
 

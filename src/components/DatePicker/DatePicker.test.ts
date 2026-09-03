@@ -135,4 +135,21 @@ describe('wiDatePicker', () => {
     expect(document.activeElement).toBe(input.element)
     wrapper.unmount()
   })
+
+  it('exposes combobox semantics aligned with Select when open', async () => {
+    const wrapper = mount(WiDatePicker, {
+      props: { modelValue: '2024-01-15', invalid: true, errorMessage: 'Required' },
+      attachTo: document.body,
+    })
+    const input = wrapper.get('.wi-datepicker__input')
+    expect(input.attributes('role')).toBe('combobox')
+    expect(input.attributes('aria-invalid')).toBe('true')
+    expect(wrapper.get('.wi-datepicker__help').text()).toBe('Required')
+    await input.trigger('click')
+    await nextTick()
+    const panel = document.body.querySelector('.wi-datepicker__panel') as HTMLElement
+    expect(input.attributes('aria-controls')).toBe(panel.id)
+    expect(input.attributes('aria-expanded')).toBe('true')
+    wrapper.unmount()
+  })
 })

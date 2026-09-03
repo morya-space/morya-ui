@@ -46,6 +46,8 @@ const text = ref('点击编辑')
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | 是否处于编辑态。 |
 | `disabled` | `boolean` | `false` | 禁用切换。 |
+| `closeOnEsc` | `boolean` | — | — |
+| `dismissable` | `boolean` | — | — |
 
 ## Slots
 
@@ -59,3 +61,5 @@ const text = ref('点击编辑')
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | 激活态变化。 |
+| `close` | — | — |
+| `open` | — | — |

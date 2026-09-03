@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -37,6 +37,7 @@ const emit = defineEmits<{
   (event: 'create', option: SelectOption): void
 }>()
 
+const slots = useSlots()
 const defaults = useComponentDefaults('Select')
 const config = useWiConfig()
 const locale = useWiLocale()
@@ -370,7 +371,10 @@ onBeforeUnmount(() => {
             +{{ hiddenTagCount }}
           </span>
         </div>
-        <span v-else class="wi-select__value">{{ displayLabel }}</span>
+        <span v-else class="wi-select__value">
+          <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
+          <template v-else>{{ displayLabel }}</template>
+        </span>
         <span v-if="resolvedLoading" class="wi-select__spinner" aria-hidden="true" />
       </div>
       <div class="wi-select__suffix">
@@ -437,7 +441,9 @@ onBeforeUnmount(() => {
             @mouseenter="!option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === option.value && Boolean(item.created) === Boolean(option.created)))"
             @click="selectOption(option)"
           >
-            <span>{{ option.created ? createLabel : option.label }}</span>
+            <slot name="option" :option="option">
+              <span>{{ option.created ? createLabel : option.label }}</span>
+            </slot>
             <WiIcon
               v-if="!option.created && isSelected(option.value)"
               class="wi-select__check"

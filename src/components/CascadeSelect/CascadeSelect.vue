@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -24,6 +24,7 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
+const slots = useSlots()
 const defaults = useComponentDefaults('CascadeSelect')
 const config = useWiConfig()
 const locale = useWiLocale()
@@ -50,6 +51,20 @@ const showClearButton = computed(() => resolvedClearable.value && hasValue.value
 const displayLabel = computed(
   () => findLabel(props.options, props.modelValue) ?? props.placeholder ?? locale.value.selectPlaceholder,
 )
+
+function findOption(options: CascadeSelectOption[], value: CascadeSelectValue): CascadeSelectOption | undefined {
+  if (value == null) return undefined
+  for (const option of options) {
+    if (option.value === value) return option
+    if (option.children?.length) {
+      const nested = findOption(option.children, value)
+      if (nested) return nested
+    }
+  }
+  return undefined
+}
+
+const selectedOption = computed(() => findOption(props.options, props.modelValue))
 
 const activeColumn = ref(0)
 const panelId = computed(() => `${fieldId.value}-panel`)
@@ -269,6 +284,7 @@ onBeforeUnmount(() => {
         ref="trigger"
         type="button"
         class="wi-cascadeselect__trigger"
+        role="combobox"
         :class="{ 'wi-cascadeselect__trigger--invalid': isInvalid, 'wi-cascadeselect__trigger--placeholder': !hasValue }"
         :disabled="disabled"
         :aria-expanded="open"
@@ -279,7 +295,8 @@ onBeforeUnmount(() => {
         @click="toggle"
         @keydown="onTriggerKeydown"
       >
-        <span class="wi-cascadeselect__label">{{ displayLabel }}</span>
+        <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
+        <span v-else class="wi-cascadeselect__label">{{ displayLabel }}</span>
       </button>
       <div class="wi-select__suffix">
         <button
@@ -338,7 +355,9 @@ onBeforeUnmount(() => {
                 :aria-selected="option.value === modelValue"
                 @click="enterLevel(option, columnIndex)"
               >
-                <span>{{ option.label }}</span>
+                <slot name="option" :option="option">
+                  <span>{{ option.label }}</span>
+                </slot>
                 <WiIcon
                   v-if="option.children?.length"
                   name="chevron-right"

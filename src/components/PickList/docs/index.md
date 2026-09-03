@@ -67,6 +67,7 @@ const target = ref([{ id: 3, name: '测试' }])
 | `sourceHeader` | `string` | `'可选'` | 左侧标题。 |
 | `targetHeader` | `string` | `'已选'` | 右侧标题。 |
 | `dataKey` | `string` | — | 对象唯一键。 |
+| `emptyMessage` | `string` | — | — |
 
 ## Events
 
@@ -80,3 +81,4 @@ const target = ref([{ id: 3, name: '测试' }])
 | 插槽 | 参数 | 说明 |
 | --- | --- | --- |
 | `item` | `{ item, index }` | 自定义列表项内容。 |
+| `empty` | 自定义 `empty` 内容。 |

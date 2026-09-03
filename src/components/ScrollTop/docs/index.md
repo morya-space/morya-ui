@@ -48,4 +48,7 @@ import { WiScrollTop } from '@well-insight/ui'
 
 ## Slots
 
-无插槽。
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 默认内容。 |
+

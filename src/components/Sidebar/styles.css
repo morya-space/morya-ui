@@ -3,7 +3,7 @@
     --wi-sidebar-width: 12rem;
     --wi-sidebar-collapsed-width: 3.5rem;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     min-width: var(--wi-sidebar-width);
     padding: var(--wi-space-2);

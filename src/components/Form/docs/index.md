@@ -145,6 +145,8 @@ const model = reactive({ city: '', zip: '' })
 | `requireMark` | `boolean` | `true` | 必填星号（`required` 或 `rules.required`） |
 | `disabled` | `boolean` | `false` | 禁用态 |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |
+| `for` | `string` | — | — |
+| `size` | `WiSizeInput` | — | — |
 
 ## Props — FormItem
 

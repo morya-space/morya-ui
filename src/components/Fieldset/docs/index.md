@@ -40,6 +40,7 @@ const collapsed = ref(false)
 | `legend` | `string` | — | 图例文本。 |
 | `toggleable` | `boolean` | `false` | 是否可折叠。 |
 | `collapsed` | `boolean` | `false` | 是否折叠。 |
+| `defaultCollapsed` | `boolean` | — | — |
 
 ## Events
 

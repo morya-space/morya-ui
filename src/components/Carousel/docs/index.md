@@ -67,6 +67,7 @@ const value = ['A', 'B', 'C']
 | `interval` | `number` | `3000` | 自动翻页间隔（毫秒）。 |
 | `showArrows` | `boolean` | `true` | 显示左右箭头。 |
 | `showIndicators` | `boolean` | `true` | 显示指示点。 |
+| `page` | `number` | — | — |
 
 ## Slots
 

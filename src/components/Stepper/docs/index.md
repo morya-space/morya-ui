@@ -77,3 +77,4 @@ const steps = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `icon` | 步骤图标 `{ step, index }`。 |
+| `default` | 默认内容。 |

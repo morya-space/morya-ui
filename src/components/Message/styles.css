@@ -54,7 +54,7 @@
         var(--wi-color-info) 10%,
         var(--wi-color-surface)
     );
-    border: 1px solid
+    border: var(--wi-border-width) solid
         color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);

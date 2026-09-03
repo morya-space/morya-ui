@@ -1,6 +1,6 @@
 /* —— Data: VirtualScroller —— */
 .wi-virtualscroller {
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     overflow: auto;
     position: relative;

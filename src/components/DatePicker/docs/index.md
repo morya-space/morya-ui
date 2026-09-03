@@ -186,6 +186,9 @@ const shortcuts = [
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `teleport` | `boolean` | `true` | 面板 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `id` | `string` | — | — |
 
 ## Events
 
@@ -193,6 +196,9 @@ const shortcuts = [
 | --- | --- | --- |
 | `update:modelValue` | `string \| [string, string] \| null` | 值变化。 |
 | `clear` | — | 点击清除时触发。 |
+| `change` | — | — |
+| `hide` | — | — |
+| `show` | — | — |
 
 ## Slots
 

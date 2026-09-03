@@ -58,4 +58,21 @@ describe('wiAutoComplete', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([''])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
+
+  it('renders item and empty slots', async () => {
+    const wrapper = mount(WiAutoComplete, {
+      props: { suggestions: [{ label: 'Apple', value: 'apple' }], modelValue: '', teleport: false },
+      slots: {
+        item: `<template #default="{ option }"><span class="custom-item">{{ option.label }}!</span></template>`,
+        empty: `<template #default><span class="custom-empty">Nothing here</span></template>`,
+      },
+    })
+    await wrapper.find('.wi-autocomplete__input').trigger('focus')
+    await nextTick()
+    expect(wrapper.find('.custom-item').text()).toBe('Apple!')
+
+    await wrapper.setProps({ modelValue: 'nomatch' })
+    await nextTick()
+    expect(wrapper.find('.custom-empty').text()).toBe('Nothing here')
+  })
 })

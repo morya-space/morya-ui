@@ -47,6 +47,8 @@ const value = [
 | --- | --- | --- | --- |
 | `value` | `TreeTableNode[]` | — | 树形行数据。 |
 | `columns` | `TreeTableColumn[]` | — | 列定义。 |
+| `emptyMessage` | `string` | — | — |
+| `expandedKeys` | `Record<string, boolean>` | — | — |
 
 ## Events
 
@@ -54,9 +56,11 @@ const value = [
 | --- | --- | --- |
 | `node-expand` | `TreeTableNode` | 节点展开。 |
 | `node-collapse` | `TreeTableNode` | 节点折叠。 |
+| `update:expandedKeys` | — | — |
 
 ## Slots
 
 | 插槽名 | 说明 |
 | --- | --- |
 | `expansion` | 展开行 `{ row }`。 |
+| `empty` | 自定义 `empty` 内容。 |

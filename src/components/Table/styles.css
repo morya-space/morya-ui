@@ -29,7 +29,7 @@
 }
 
 .wi-table--border {
-    border: 1px solid var(--wi-table-border-color);
+    border: var(--wi-border-width) solid var(--wi-table-border-color);
     border-radius: var(--wi-radius-sm);
 }
 
@@ -107,7 +107,7 @@
 .wi-table__main--border-cell .wi-table__header th,
 .wi-table--border .wi-table__body td,
 .wi-table__main--border-cell .wi-table__body td {
-    border-right: 1px solid var(--wi-table-border-color);
+    border-right: var(--wi-border-width) solid var(--wi-table-border-color);
 }
 
 .wi-table--border .wi-table__header th:last-child,
@@ -133,7 +133,7 @@
     box-sizing: border-box;
     padding: var(--wi-table-cell-padding-block) 0;
     border: 0;
-    border-bottom: 1px solid var(--wi-table-border-color);
+    border-bottom: var(--wi-border-width) solid var(--wi-table-border-color);
     color: inherit;
     font-size: var(--wi-table-font-size);
     font-weight: 600;
@@ -254,7 +254,7 @@
     box-sizing: border-box;
     padding: var(--wi-table-cell-padding-block) 0;
     border: 0;
-    border-bottom: 1px solid var(--wi-table-border-color);
+    border-bottom: var(--wi-border-width) solid var(--wi-table-border-color);
     color: var(--wi-table-text);
     font-size: var(--wi-table-font-size);
     text-align: left;
@@ -433,7 +433,7 @@
     gap: var(--wi-space-2);
     min-height: var(--wi-table-row-height);
     padding: var(--wi-space-2) var(--wi-table-cell-padding-inline);
-    border-top: 1px solid var(--wi-table-border-color);
+    border-top: var(--wi-border-width) solid var(--wi-table-border-color);
     color: var(--wi-color-text-muted);
     font-size: var(--wi-font-size-sm);
     background: var(--wi-table-row-bg);

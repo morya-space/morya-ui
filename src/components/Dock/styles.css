@@ -25,7 +25,7 @@
 .wi-dock__list {
     align-items: flex-end;
     background: color-mix(in srgb, var(--wi-color-surface) 85%, transparent);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-lg);
     display: flex;
     gap: var(--wi-space-2);

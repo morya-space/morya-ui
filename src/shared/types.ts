@@ -59,7 +59,7 @@ export function resolveIconSizeFromClass(sizeClass: 'small' | 'normal' | 'large'
  * Normalize severity aliases onto the vocabulary used by component styles.
  * Only `warning` → `warn` is centralized here today: Toast/Message/Timeline styles and the
  * Message icon map still key on `error`, so `error` → `danger` stays per component
- * (see ProgressBar) until those consumers migrate (fix-plan T3.7).
+ * (see ProgressBar) until Toast/Message/Timeline migrate off the `error` alias.
  */
 export function normalizeSeverity<T extends string>(severity?: T | 'warning'): T | 'warn' | undefined {
   if (severity === 'warning') return 'warn'

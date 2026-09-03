@@ -305,6 +305,7 @@ const options = [
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | 菜单对齐。 |
 | `id` | `string` | — | 控件 id。 |
+| `errorMessage` | `string` | — | 校验错误文案；与 `invalid` 同时生效时优先展示。 |
 
 ## Events
 

@@ -148,7 +148,7 @@
     color: var(--wi-color-surface);
     font-size: var(--wi-font-size-xs);
     left: 50%;
-    padding: 0.15rem 0.4rem;
+    padding: var(--wi-slider-tooltip-padding-block) var(--wi-slider-tooltip-padding-inline);
     position: absolute;
     top: calc(-1 * var(--wi-slider-tooltip-offset));
     transform: translateX(-50%);

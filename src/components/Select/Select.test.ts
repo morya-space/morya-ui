@@ -176,4 +176,18 @@ describe('wiSelect', () => {
     expect(wrapper.emitted('create')?.[0]?.[0]).toEqual({ label: 'Brand new', value: 'Brand new' })
     expect(wrapper.emitted('update:modelValue')).toEqual([['Brand new']])
   })
+
+  it('renders value and option slots', async () => {
+    const wrapper = mount(WiSelect, {
+      props: { options, modelValue: 'sm', teleport: false },
+      slots: {
+        value: `<template #default="{ option }"><span class="custom-value">{{ option.label }}!</span></template>`,
+        option: `<template #default="{ option }"><span class="custom-option">{{ option.label }}?</span></template>`,
+      },
+    })
+
+    expect(wrapper.find('.custom-value').text()).toBe('Small!')
+    await wrapper.get('[role="combobox"]').trigger('click')
+    expect(wrapper.find('.custom-option').text()).toBe('Small?')
+  })
 })

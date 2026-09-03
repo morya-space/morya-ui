@@ -117,6 +117,11 @@ const options = [{ key: 'docs', label: '文档' }]
 | `selectionMode` | `'single' \| 'multiple'` | `'single'` | 兼容字段；请优先用 `multiple`。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `id` | `string` | — | — |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
 
 ## Events
 

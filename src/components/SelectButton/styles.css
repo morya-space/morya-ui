@@ -14,7 +14,7 @@
 
 .wi-selectbutton__button {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     color: var(--wi-color-text);
     cursor: pointer;
     font: inherit;

@@ -230,6 +230,27 @@ function loadMore(direction: ScrollbarDirection) {
 
 ### Props
 
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `always` | `boolean` | — | — |
+| `ariaLabel` | `string` | — | — |
+| `ariaOrientation` | `ScrollbarAriaOrientation` | — | — |
+| `distance` | `number` | — | — |
+| `height` | `string \| number` | — | — |
+| `id` | `string` | — | — |
+| `maxHeight` | `string \| number` | — | — |
+| `minSize` | `number` | — | — |
+| `native` | `boolean` | — | — |
+| `noresize` | `boolean` | — | — |
+| `role` | `string` | — | — |
+| `tabindex` | `number \| string` | — | — |
+| `tag` | `string` | — | — |
+| `trigger` | `'hover' \| 'none'` | — | — |
+| `viewClass` | `ScrollbarClassValue` | — | — |
+| `viewStyle` | `StyleValue` | — | — |
+| `wrapClass` | `ScrollbarClassValue` | — | — |
+| `wrapStyle` | `StyleValue` | — | — |
+
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | height | `string \| number` | — | 可视区域高度 |

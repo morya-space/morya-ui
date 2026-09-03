@@ -43,7 +43,7 @@
 .wi-toast__message {
     align-items: flex-start;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-left: 3px solid var(--wi-color-info);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);

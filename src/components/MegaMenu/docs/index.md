@@ -70,6 +70,7 @@ const model = [
 | `model` | `MegaMenuItem[]` | `[]` | 顶层菜单项。 |
 | `teleport` | `boolean` | `true` | 面板 Teleport；默认 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标。 |
+| `selectedKey` | `string \| null` | — | — |
 
 ## 无障碍
 
@@ -78,7 +79,10 @@ const model = [
 
 ## Events
 
-无自定义事件。
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `select` | — | — |
+| `update:selectedKey` | — | — |
 
 ## Slots
 

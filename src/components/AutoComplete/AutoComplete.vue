@@ -234,7 +234,7 @@ const panelOpen = computed(() => open.value)
             {{ locale.loading }}
           </li>
           <li v-else-if="!filtered.length" class="wi-autocomplete__status">
-            {{ resolvedEmptyMessage }}
+            <slot name="empty">{{ resolvedEmptyMessage }}</slot>
           </li>
           <li
             v-for="(item, index) in filtered"
@@ -245,7 +245,7 @@ const panelOpen = computed(() => open.value)
             :aria-selected="index === highlight"
             @mousedown.prevent="select(item)"
           >
-            {{ item.label }}
+            <slot name="item" :option="item">{{ item.label }}</slot>
           </li>
         </ul>
       </Transition>

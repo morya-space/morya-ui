@@ -278,6 +278,41 @@ const total = ref(42)
 | `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |
 | `rowKey` | `string` | `'id'` | 行唯一键字段。 |
 | `size` | `'sm' \| 'md' \| 'lg'` | — | 表格密度。 |
+| `ariaLabel` | `string` | — | — |
+| `bodyExpandRowClassName` | `TableBodyRowClassName` | — | — |
+| `bodyItemClassName` | `TableBodyItemClassName` | — | — |
+| `bodyRowClassName` | `TableBodyRowClassName` | — | — |
+| `bodyTextDirection` | `TableTextDirection` | — | — |
+| `checkboxColumnWidth` | `number \| null` | — | — |
+| `clickEventType` | `TableClickEventType` | — | — |
+| `clickRowToExpand` | `boolean` | — | — |
+| `currentRowKey` | `string \| number \| null` | — | — |
+| `expandColumnWidth` | `number` | — | — |
+| `expandedRowKeys` | `Array<string \| number>` | — | — |
+| `filters` | `Record<string, unknown> \| null` | — | — |
+| `fixedCheckbox` | `boolean` | — | — |
+| `fixedExpand` | `boolean` | — | — |
+| `fixedHeader` | `boolean` | — | — |
+| `fixedIndex` | `boolean` | — | — |
+| `headerClassName` | `string` | — | — |
+| `headerItemClassName` | `TableHeaderItemClassName` | — | — |
+| `headerTextDirection` | `TableTextDirection` | — | — |
+| `hideHeader` | `boolean` | — | — |
+| `hideRowsPerPage` | `boolean` | — | — |
+| `indexColumnWidth` | `number` | — | — |
+| `multiSort` | `boolean` | — | — |
+| `mustSort` | `boolean` | — | — |
+| `preventContextMenuRow` | `boolean` | — | — |
+| `rowsItems` | `number[]` | — | — |
+| `rowsOfPageSeparatorMessage` | `string` | — | — |
+| `rowsPerPageMessage` | `string` | — | — |
+| `showHeader` | `boolean` | — | — |
+| `showIndex` | `boolean` | — | — |
+| `showIndexSymbol` | `string` | — | — |
+| `tableClassName` | `string` | — | — |
+| `tableHeight` | `number \| null` | — | — |
+| `tableMinHeight` | `number` | — | — |
+| `tableNodeId` | `string` | — | — |
 
 ## Slots
 
@@ -289,6 +324,12 @@ const total = ref(42)
 | `empty` | 自定义空态。 |
 | `loading` | 自定义加载态。 |
 | `pagination` | 自定义分页区域。 |
+| `body` | 自定义 `body` 内容。 |
+| `body-append` | 自定义 `body-append` 内容。 |
+| `body-prepend` | 自定义 `body-prepend` 内容。 |
+| `customize-headers` | 自定义 `customize-headers` 内容。 |
+| `header` | 自定义 `header` 内容。 |
+| `header-*` | 动态插槽（前缀 `header-`）。 |
 
 ## Events
 
@@ -303,6 +344,16 @@ const total = ref(42)
 | `update:page` | `number` | 页码 v-model。 |
 | `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |
 | `update:current-row-key` | `string \| number \| null` | 当前行键 v-model。 |
+| `contextmenuRow` | — | — |
+| `deselectRow` | — | — |
+| `filter` | — | — |
+| `selectAll` | — | — |
+| `selectRow` | — | — |
+| `update:expandedRowKeys` | — | — |
+| `update:filters` | — | — |
+| `update:selectedItem` | — | — |
+| `updatePageItems` | — | — |
+| `updateTotalItems` | — | — |
 
 ## 实例方法
 

@@ -92,7 +92,7 @@
 
 .wi-drawer__header {
     align-items: center;
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     display: flex;
     justify-content: space-between;
     padding: var(--wi-space-4);

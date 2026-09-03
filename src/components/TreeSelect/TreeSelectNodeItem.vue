@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TreeSelectNode } from './types'
+import type { VNode } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiCheckbox from '../Checkbox/Checkbox.vue'
 import WiIcon from '../Icon/Icon.vue'
@@ -13,6 +14,7 @@ defineProps<{
   expanded: Record<string, boolean>
   showCheckbox: boolean
   activeKey: string | null
+  renderOption?: (node: TreeSelectNode) => VNode | VNode[] | string | undefined
 }>()
 
 defineEmits<{
@@ -64,7 +66,8 @@ const locale = useWiLocale()
         :tabindex="node.key === activeKey ? 0 : -1"
         @click="$emit('select', node)"
       >
-        {{ node.label }}
+        <component :is="() => renderOption?.(node)" v-if="renderOption" />
+        <template v-else>{{ node.label }}</template>
       </button>
     </div>
     <ul v-if="node.children?.length && expanded[node.key]" role="group">
@@ -78,10 +81,12 @@ const locale = useWiLocale()
         :expanded="expanded"
         :show-checkbox="showCheckbox"
         :active-key="activeKey"
+        :render-option="renderOption"
         @toggle="$emit('toggle', $event)"
         @select="$emit('select', $event)"
         @check="$emit('check', $event)"
-      />
+      >
+      </TreeSelectNodeItem>
     </ul>
   </li>
 </template>

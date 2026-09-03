@@ -87,6 +87,12 @@ const suggestions = [
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `emptyMessage` | `string` | — | — |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `id` | `string` | — | — |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
 
 ## Events
 

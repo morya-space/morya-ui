@@ -150,6 +150,7 @@ const nodes = [
 | `filter` / `filterNode` | — | — | 过滤。 |
 | `lazy` / `load` | — | — | 懒加载子节点。 |
 | `draggable` | `boolean` | `false` | 拖拽；落点通过 `node-drop` 由业务改树。 |
+| `emptyMessage` | `string` | — | 无数据时的提示文案。 |
 
 ## Slots / Events
 
@@ -168,3 +169,13 @@ const nodes = [
 | `node-select` | `TreeNode` | 节点选中。 |
 | `node-expand` | `TreeNode` | 节点展开。 |
 | `node-collapse` | `TreeNode` | 节点收起。 |
+| `node-load-error` | `{ node, error }` | 懒加载子节点失败。 |
+| `node-unselect` | `TreeNode` | 取消选中节点。 |
+| `update:modelValue` | `TreeNodeKey \| TreeNodeKey[]` | 选中键 v-model。 |
+| `update:selectionKeys` | `Record<string, boolean>` | 选中键集合 v-model。 |
+
+## Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| `empty` | 自定义 `empty` 内容。 |

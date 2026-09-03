@@ -37,8 +37,17 @@
 }
 
 .wi-inputnumber__input-wrap {
+    align-items: center;
+    display: flex;
     position: relative;
     width: var(--wi-inputnumber-width);
+}
+
+.wi-inputnumber__prefix,
+.wi-inputnumber__suffix {
+    color: var(--wi-color-text-muted);
+    flex: 0 0 auto;
+    padding-inline: var(--wi-space-2);
 }
 
 .wi-inputnumber--fluid .wi-inputnumber__input-wrap {
@@ -48,6 +57,8 @@
 }
 
 .wi-inputnumber__input-wrap .wi-inputnumber__input {
+    flex: 1 1 auto;
+    min-width: 0;
     width: 100%;
 }
 
@@ -72,7 +83,7 @@
 
 .wi-inputnumber__input {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     font: inherit;
@@ -110,7 +121,7 @@
         var(--wi-color-text-muted) 12%,
         var(--wi-color-surface)
     );
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     color: var(--wi-color-text);
     cursor: pointer;
     display: inline-flex;

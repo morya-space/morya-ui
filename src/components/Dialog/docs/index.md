@@ -205,6 +205,7 @@ async function save() {
 | `positiveSeverity` | `ButtonSeverity` | — | 确认按钮语义色 |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
+| `ariaLabel` | `string` | — | — |
 
 ## Events
 

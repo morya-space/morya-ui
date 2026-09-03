@@ -16,7 +16,7 @@
 .wi-treeselect__trigger {
     align-items: center;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     box-sizing: border-box;
     color: var(--wi-color-text);
@@ -81,7 +81,7 @@
 .wi-treeselect__filter {
     background: var(--wi-color-surface);
     border: 0;
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     box-sizing: border-box;
     color: var(--wi-color-text);
     font: inherit;
@@ -96,7 +96,7 @@
 
 .wi-treeselect__panel {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     left: 0;

@@ -44,6 +44,12 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | `layout` | `'list' \| 'grid'` | `'list'` | 布局。 |
 | `paginator` | `boolean` | `false` | 启用分页。 |
 | `rows` | `number` | `10` | 每页条数。 |
+| `disabled` | `boolean` | — | — |
+| `emptyMessage` | `string` | — | — |
+| `loading` | `boolean` | — | — |
+| `page` | `number` | — | — |
+| `pageSizes` | `number[]` | — | — |
+| `showSizePicker` | `boolean` | — | — |
 
 ## Slots
 
@@ -51,7 +57,14 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | --- | --- |
 | `list` | 列表布局，`{ items }`。 |
 | `grid` | 网格布局，`{ items }`。 |
+| `empty` | 自定义 `empty` 内容。 |
+| `header` | 自定义 `header` 内容。 |
+| `loading` | 自定义 `loading` 内容。 |
 
 ## Events
+
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `update:page` | — | — |
 
 本组件无自定义事件；分页交互由内置 `WiPagination` 处理。

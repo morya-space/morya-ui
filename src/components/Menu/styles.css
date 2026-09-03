@@ -22,7 +22,7 @@
     --wi-menu-arrow: var(--wi-color-text-muted);
 
     background: var(--wi-menu-color);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-sizing: border-box;
     color: var(--wi-menu-item-text);
@@ -51,7 +51,7 @@
     --wi-menu-flyout-radius: var(--wi-radius-md);
 
     background: var(--wi-color-surface);
-    border: 1px solid color-mix(in srgb, var(--wi-color-border) 88%, transparent);
+    border: var(--wi-border-width) solid color-mix(in srgb, var(--wi-color-border) 88%, transparent);
     border-radius: var(--wi-menu-flyout-radius);
     box-shadow: var(--wi-shadow-lg);
     box-sizing: border-box;
@@ -384,8 +384,8 @@
 .wi-menu-expand-enter-active,
 .wi-menu-expand-leave-active {
     transition:
-        max-height 0.2s ease,
-        opacity 0.2s ease;
+        max-height var(--wi-motion-normal) var(--wi-motion-ease),
+        opacity var(--wi-motion-normal) var(--wi-motion-ease);
 }
 
 .wi-menu-expand-enter-from,

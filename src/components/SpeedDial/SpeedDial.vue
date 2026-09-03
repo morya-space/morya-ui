@@ -227,30 +227,34 @@ onBeforeUnmount(() => {
               :tabindex="keyboard.tabindexFor(index)"
               @click="activate(item)"
             >
-              <span v-if="iconOf(item)" aria-hidden="true">
-                <WiIcon :name="iconOf(item)!" size="sm" />
-              </span>
-              <span class="wi-speeddial__action-label">{{ item.label }}</span>
+              <slot name="item" :item="item">
+                <span v-if="iconOf(item)" aria-hidden="true">
+                  <WiIcon :name="iconOf(item)!" size="sm" />
+                </span>
+                <span class="wi-speeddial__action-label">{{ item.label }}</span>
+              </slot>
             </button>
           </li>
         </ul>
       </Transition>
     </Teleport>
-    <button
-      ref="button"
-      type="button"
-      class="wi-speeddial__button"
-      :aria-label="speedDialLabel"
-      :aria-expanded="modelValue"
-      :aria-controls="modelValue ? listId : undefined"
-      aria-haspopup="menu"
-      :disabled="disabled"
-      @click="toggle"
-      @keydown="onButtonKeydown"
-    >
-      <slot name="icon">
-        <WiIcon name="plus" size="sm" />
-      </slot>
-    </button>
+    <slot name="button">
+      <button
+        ref="button"
+        type="button"
+        class="wi-speeddial__button"
+        :aria-label="speedDialLabel"
+        :aria-expanded="modelValue"
+        :aria-controls="modelValue ? listId : undefined"
+        aria-haspopup="menu"
+        :disabled="disabled"
+        @click="toggle"
+        @keydown="onButtonKeydown"
+      >
+        <slot name="icon">
+          <WiIcon name="plus" size="sm" />
+        </slot>
+      </button>
+    </slot>
   </div>
 </template>

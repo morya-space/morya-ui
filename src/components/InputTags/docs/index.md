@@ -56,6 +56,10 @@ const tags = ref(['vue'])
 | `addOnBlur` | `boolean` | `false` | 失焦时也添加。 |
 | `max` | `number` | — | 最多标签数。 |
 | `separator` | `string \| string[]` | — | 额外分隔符，例如 `,`。 |
+| `id` | `string` | — | — |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
+| `size` | `WiSizeInput` | — | — |
 
 ## Events
 

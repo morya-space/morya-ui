@@ -54,6 +54,9 @@ const color = ref('#2563eb')
 | `swatches` | `string[]` | — | 快捷色板。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `id` | `string` | — | 色板 input id。 |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
+| `size` | `WiSizeInput` | — | — |
 
 ## Events
 

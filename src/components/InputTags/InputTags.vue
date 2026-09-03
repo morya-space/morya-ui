@@ -109,7 +109,7 @@ function onBlur() {
         :key="`${tag}-${index}`"
         class="wi-inputtags__chip"
       >
-        {{ tag }}
+        <slot name="tag" :tag="tag" :index="index">{{ tag }}</slot>
         <button
           type="button"
           class="wi-inputtags__remove"

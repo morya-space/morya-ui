@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TreeCheckedKeys } from '../Tree/types'
 import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
@@ -41,6 +41,7 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
+const slots = useSlots()
 const config = useWiConfig()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
@@ -77,6 +78,13 @@ const displayLabel = computed(() => {
   }
   return findNode(props.options, key)?.label ?? props.placeholder ?? locale.value.selectPlaceholder
 })
+const selectedNode = computed(() => {
+  const key = selectedKeys.value[0]
+  return key && !isMultiple.value ? findNode(props.options, key) : undefined
+})
+const renderOption = computed(() =>
+  slots.option ? (node: TreeSelectNode) => slots.option?.({ option: node }) : undefined,
+)
 const selectedTags = computed(() =>
   selectedKeys.value.map((key) => ({
     key,
@@ -383,9 +391,14 @@ onBeforeUnmount(() => {
             {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
           </span>
         </div>
-        <span v-else class="wi-treeselect__label" :class="{ 'wi-treeselect__label--placeholder': !selectedKeys.length }">
+        <span
+          v-else-if="!(slots.value && selectedNode)"
+          class="wi-treeselect__label"
+          :class="{ 'wi-treeselect__label--placeholder': !selectedKeys.length }"
+        >
           {{ displayLabel }}
         </span>
+        <slot v-else name="value" :option="selectedNode" />
       </div>
       <div class="wi-select__suffix">
         <button
@@ -437,6 +450,7 @@ onBeforeUnmount(() => {
               :expanded="expanded"
               :show-checkbox="checkable"
               :active-key="activeKey"
+              :render-option="renderOption"
               @toggle="toggleExpand"
               @select="select"
               @check="toggleCheck"
