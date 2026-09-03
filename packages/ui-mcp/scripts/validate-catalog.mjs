@@ -39,13 +39,22 @@ const knownComponents = new Map(
   ]),
 )
 
+const patternComponentParents = {
+  FormItem: 'Form',
+  LayoutSider: 'Layout',
+  LayoutHeader: 'Layout',
+  LayoutContent: 'Layout',
+  GridItem: 'Grid',
+}
+
 const patternsSource = readFileSync(patternsPath, 'utf8')
 for (const match of patternsSource.matchAll(/component:\s*['"]([^'"]+)['"]/g)) {
   const name = match[1]
+  const parentId = patternComponentParents[name]
   const component =
     knownComponents.get(name) ||
     knownComponents.get(`Wi${name}`) ||
-    (name === 'FormItem' ? knownComponents.get('Form') : undefined)
+    (parentId ? knownComponents.get(parentId) : undefined)
   if (!component) error(`Pattern references unknown component: ${name}`)
 }
 
