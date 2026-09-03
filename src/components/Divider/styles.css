@@ -27,11 +27,11 @@
 }
 
 .wi-divider--dashed .wi-divider__line {
-    border-top: 1px dashed var(--wi-color-border);
+    border-top: var(--wi-border-width) dashed var(--wi-color-border);
 }
 
 .wi-divider--dotted .wi-divider__line {
-    border-top: 1px dotted var(--wi-color-border);
+    border-top: var(--wi-border-width) dotted var(--wi-color-border);
 }
 
 .wi-divider--align-left > .wi-divider__line:first-child {
@@ -65,12 +65,12 @@
 }
 
 .wi-divider--vertical.wi-divider--dashed .wi-divider__line {
-    border-left: 1px dashed var(--wi-color-border);
+    border-left: var(--wi-border-width) dashed var(--wi-color-border);
     border-top: 0;
 }
 
 .wi-divider--vertical.wi-divider--dotted .wi-divider__line {
-    border-left: 1px dotted var(--wi-color-border);
+    border-left: var(--wi-border-width) dotted var(--wi-color-border);
     border-top: 0;
 }
 

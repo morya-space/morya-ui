@@ -183,7 +183,7 @@
 
 .wi-dialog__action:disabled {
     cursor: default;
-    opacity: 0.5;
+    opacity: var(--wi-opacity-disabled);
 }
 
 .wi-dialog__footer {

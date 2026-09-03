@@ -1,6 +1,6 @@
 ---
 title: Menubar
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 水平菜单栏，支持一级下拉。
 ---
 

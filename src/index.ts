@@ -94,11 +94,11 @@ export type {
   WiLocaleConfig,
 } from "./components/ConfigProvider/types";
 export { default as WiConfirmDialog } from "./components/ConfirmDialog/ConfirmDialog.vue";
-export { useConfirm } from "./components/ConfirmDialog/useConfirm";
 export type {
   ConfirmDialogEmits,
   ConfirmDialogProps,
 } from "./components/ConfirmDialog/types";
+export { useConfirm } from "./components/ConfirmDialog/useConfirm";
 export type { ConfirmRequireOptions } from "./components/ConfirmDialog/useConfirm";
 export { default as WiConfirmPopup } from "./components/ConfirmPopup/ConfirmPopup.vue";
 export type {

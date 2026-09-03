@@ -59,6 +59,8 @@ export const zhCN: WiLocaleMessages = {
   decrease: '减少',
   increase: '增加',
   selectColor: '选择颜色',
+  colorHexValue: '颜色十六进制值',
+  otpGroup: '一次性验证码',
   clearInput: '清除输入内容',
   remove: '移除',
   removeTag: '移除标签',

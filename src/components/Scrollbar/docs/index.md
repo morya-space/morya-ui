@@ -1,6 +1,6 @@
 ---
 title: Scrollbar
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: 可换肤自定义滚动条，提供一致的滚动体验。
 ---
 

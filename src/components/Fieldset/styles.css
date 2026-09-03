@@ -1,7 +1,7 @@
-/* —— Panel: Fieldset —— */
+/* —�?Panel: Fieldset —�?*/
 .wi-fieldset {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     margin: 0;
     min-inline-size: 0;
@@ -34,4 +34,20 @@
 .wi-fieldset__content {
     color: var(--wi-color-text);
     padding-top: var(--wi-space-2);
+}
+
+.wi-fieldset-collapse-enter-active,
+.wi-fieldset-collapse-leave-active {
+    overflow: hidden;
+    transition:
+        max-height var(--wi-motion-normal) var(--wi-motion-ease),
+        opacity var(--wi-motion-normal) var(--wi-motion-ease),
+        padding var(--wi-motion-normal) var(--wi-motion-ease);
+}
+
+.wi-fieldset-collapse-enter-from,
+.wi-fieldset-collapse-leave-to {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
 }

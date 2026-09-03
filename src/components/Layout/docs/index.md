@@ -1,6 +1,6 @@
 ---
 title: Layout
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 ---
 

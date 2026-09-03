@@ -87,7 +87,7 @@ function emitRange(index: 0 | 1, event: Event) {
 
 <template>
   <div class="wi-slider-field">
-    <label v-if="label" class="wi-slider-field__label" :id="`${fieldId}-label`">{{ label }}</label>
+    <label v-if="label" :id="`${fieldId}-label`" class="wi-slider-field__label">{{ label }}</label>
     <div
       :class="rootClass"
       :aria-invalid="isInvalid || undefined"
@@ -97,57 +97,60 @@ function emitRange(index: 0 | 1, event: Event) {
       @focusin="hovering = true"
       @focusout="hovering = false"
     >
-    <span v-if="tooltip && hovering" class="wi-slider__tooltip">{{ tooltipText }}</span>
-    <template v-if="range">
+      <span v-if="tooltip && hovering" class="wi-slider__tooltip">{{ tooltipText }}</span>
+      <template v-if="range">
+        <input
+          class="wi-slider__input wi-slider__input--start"
+          type="range"
+          :min="min"
+          :max="max"
+          :step="step"
+          :value="rangeValues[0]"
+          :disabled="disabled"
+          :orient="vertical ? 'vertical' : undefined"
+          :aria-label="locale.rangeStart"
+          :aria-valuetext="String(rangeValues[0])"
+          @input="emitRange(0, $event)"
+        >
+        <input
+          class="wi-slider__input wi-slider__input--end"
+          type="range"
+          :min="min"
+          :max="max"
+          :step="step"
+          :value="rangeValues[1]"
+          :disabled="disabled"
+          :orient="vertical ? 'vertical' : undefined"
+          :aria-label="locale.rangeEnd"
+          :aria-valuetext="String(rangeValues[1])"
+          @input="emitRange(1, $event)"
+        >
+      </template>
       <input
-        class="wi-slider__input wi-slider__input--start"
+        v-else
+        class="wi-slider__input"
         type="range"
         :min="min"
         :max="max"
         :step="step"
-        :value="rangeValues[0]"
+        :value="singleValue"
         :disabled="disabled"
         :orient="vertical ? 'vertical' : undefined"
-        :aria-label="locale.rangeStart"
-        @input="emitRange(0, $event)"
-      >
-      <input
-        class="wi-slider__input wi-slider__input--end"
-        type="range"
-        :min="min"
-        :max="max"
-        :step="step"
-        :value="rangeValues[1]"
-        :disabled="disabled"
-        :orient="vertical ? 'vertical' : undefined"
-        :aria-label="locale.rangeEnd"
-        @input="emitRange(1, $event)"
-      >
-    </template>
-    <input
-      v-else
-      class="wi-slider__input"
-      type="range"
-      :min="min"
-      :max="max"
-      :step="step"
-      :value="singleValue"
-      :disabled="disabled"
-      :orient="vertical ? 'vertical' : undefined"
         :aria-label="ariaLabel ?? locale.sliderControl"
         :aria-labelledby="label ? `${fieldId}-label` : undefined"
+        :aria-valuetext="tooltipText"
         @input="emitSingle"
       >
-    <div v-if="markItems.length" class="wi-slider__marks" aria-hidden="true">
-      <span
-        v-for="mark in markItems"
-        :key="mark.value"
-        class="wi-slider__mark"
-        :style="vertical ? { bottom: `${mark.percent}%` } : { left: `${mark.percent}%` }"
-      >
-        {{ mark.label }}
-      </span>
-    </div>
+      <div v-if="markItems.length" class="wi-slider__marks" aria-hidden="true">
+        <span
+          v-for="mark in markItems"
+          :key="mark.value"
+          class="wi-slider__mark"
+          :style="vertical ? { bottom: `${mark.percent}%` } : { left: `${mark.percent}%` }"
+        >
+          {{ mark.label }}
+        </span>
+      </div>
     </div>
     <span
       v-if="feedbackText"

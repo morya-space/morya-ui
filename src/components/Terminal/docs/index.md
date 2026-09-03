@@ -1,6 +1,6 @@
 ---
 title: Terminal
-category: 07 / MISC
+category: 03 / DATA
 description: 简易命令提示符 UI。
 ---
 

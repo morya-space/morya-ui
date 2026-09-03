@@ -1,6 +1,6 @@
 ---
 title: Accordion
-category: 05 / PANEL
+category: 03 / DATA
 description: 可折叠面板组。支持单开 / 多开，tabs 配置 header 与 disabled。
 ---
 

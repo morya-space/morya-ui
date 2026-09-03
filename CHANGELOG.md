@@ -1,5 +1,49 @@
 # @well-insight/ui
 
+## 0.1.14（未发布）
+
+### 破坏性变更 / 弃用别名
+
+- **Severity**：正典值为 `success` / `info` / `warning` / `danger`；`warn`、`error` 仍接受但已标记 `@deprecated`（影响 Button、Tag、Message、Toast、ProgressBar、Badge、Chip、Timeline 等）。
+- **Knob**：`size` 弃用，请改用 `diameter`（别名仍可用）。
+- **Avatar**：正典尺寸词表为 `small` / `medium` / `large` / `xlarge`；`normal`、`sm`、`md`、`lg` 仍映射为别名。
+- **Panel**：`modelValue` / `v-model` 弃用，请改用 `collapsed` / `v-model:collapsed`（双轨同步 emit 保留至下一 major）。
+
+### 新功能
+
+- **`useConfirm`**：命令式确认对话框 API，自包入口导出。
+- **`useControllable`**：共享半受控/受控状态 composable，用于 Panel、Fieldset、Carousel、DataView 等。
+- **`ConfigProvider`**：`theme` 对象注入（密度、动效、`data-wi-*` 语义）。
+- **Toast / Message**：队列、去重与 severity 正典对齐。
+- **浮层**：`overlayPlacement` 支持 flip/clamp；Popover / Tooltip / BlockUI 行为补强。
+- **键盘导航**：`useMenuKeyboard` 统一 Menu、Menubar、MegaMenu、Listbox、SelectButton 等。
+- **Tree / TreeTable**：treegrid 语义与键盘；**Gallery / Carousel** 受控 page 与触摸/暂停。
+- **Form**：字段反馈基线、`useFieldFeedback`；Dialog / Drawer / ConfirmDialog prop 对齐。
+- **主题 token**：边框宽度、禁用透明度、动效（spin/skeleton/pulse/scrollbar）、减动效（`prefers-reduced-motion` 与 `data-wi-motion`）；新增 layout/tree/timeline/splitter 等布局 token。
+- **Grid**：`gap` 支持设计 token 解析（`resolveGapCSSValue`）。
+
+### 修复
+
+- Checkbox / Radio 暗色选中态；ToggleButton 水平 padding；Dock `position`；Stepper 状态样式；Chip severity。
+- PickList / OrderList 样式与按钮禁用；InputNumber 草稿态；Table 死代码与排序；TieredMenu popup 定位。
+- CascadeSelect / TreeSelect 键盘；SplitButton / SpeedDial 浮层；Rating / Knob slider 语义；DatePicker 日历键盘。
+- Inplace / ConfirmPopup 行为；DataView / Terminal 半受控；InputColor 模板损坏修复。
+
+### 无障碍
+
+- Divider 恒设 `role="separator"`；Tabs `aria-controls` / panel `aria-labelledby`；Toolbar `ariaLabel`；Slider `aria-valuetext`。
+- Switch 无 label 时 DEV 警告；MeterGroup `aria-valuenow`；InputPassword 强度 `role="meter"`。
+- ProgressSpinner 包裹模式 `inert` + `aria-busy`；CheckboxGroup / RadioGroup / SelectButton / InputOtp 组标签。
+- Card `headingLevel`；hover / focus-visible 补齐（SplitButton、SpeedDial、FileUpload、MegaMenu、Sidebar 等）。
+
+### 测试
+
+- 608 项用例全绿；Knob、Inplace、TreeTable、Carousel、MeterGroup、ProgressSpinner、Tabs、CheckboxGroup 等核心路径加固。
+
+### 文档
+
+- `check:docs` 报告模式：当前 **262** 条文档-实现漂移（`audits/docs-drift-report.md`），待后续批次清零；`check:tokens` / `check:colors` 已通过。
+
 ## 0.1.13
 
 ### 新功能

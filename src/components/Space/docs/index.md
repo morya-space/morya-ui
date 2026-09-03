@@ -1,6 +1,6 @@
 ---
 title: Space
-category: 05 / PANEL
+category: 01 / BASIC
 description: 在子元素之间自动加入一致间距的布局容器。
 ---
 

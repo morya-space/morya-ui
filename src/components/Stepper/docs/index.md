@@ -1,6 +1,6 @@
 ---
 title: Stepper
-category: 05 / PANEL
+category: 04 / NAVIGATION
 description: 步骤指示器，支持线性前进约束。
 ---
 

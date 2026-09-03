@@ -1,6 +1,6 @@
 ---
 title: Table
-category: 06 / DATA
+category: 03 / DATA
 description: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。
 ---
 

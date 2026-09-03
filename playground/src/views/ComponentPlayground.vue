@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DocSection } from "../composables/useDocSections";
 import type { DocumentedComponentMeta, ResolvedComponentDoc } from "../docs/loadComponentDocs";
 
 import {
@@ -12,6 +13,7 @@ import {
 import { computed, nextTick, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import ComponentDocViewer from "../components/ComponentDocViewer.vue";
+import DocSectionNav from "../components/DocSectionNav.vue";
 import MobileSidebarShell from "../components/MobileSidebarShell.vue";
 import {
     listDocumentedComponents,
@@ -193,12 +195,30 @@ const themeSummary = computed(() => {
 
 const activePackageDoc = ref<ResolvedComponentDoc | null>(null);
 const docLoading = ref(false);
+const docViewerRef = ref<InstanceType<typeof ComponentDocViewer> | null>(null);
+const docSections = ref<DocSection[]>([]);
+const activeDocSectionId = ref('');
+
+function onDocSectionsChange(sections: DocSection[]) {
+    docSections.value = sections;
+}
+
+function onActiveDocSectionChange(id: string) {
+    activeDocSectionId.value = id;
+}
+
+function scrollToDocSection(id: string) {
+    activeDocSectionId.value = id;
+    docViewerRef.value?.scrollToSection(id);
+}
 
 watch([selectedComponent, lang], async () => {
     await nextTick();
     contentScroll.value?.setScrollTop(0);
     if (selectedComponent.value === OVERVIEW) {
         activePackageDoc.value = null;
+        docSections.value = [];
+        activeDocSectionId.value = '';
         docLoading.value = false;
         return;
     }
@@ -531,8 +551,11 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 
                         <ComponentDocViewer
                             v-else-if="activePackageDoc"
+                            ref="docViewerRef"
                             :key="`${activePackageDoc.name}-${lang}`"
                             :doc="activePackageDoc"
+                            @sections-change="onDocSectionsChange"
+                            @active-section-change="onActiveDocSectionChange"
                         />
 
                         <section v-else class="missing-doc">
@@ -549,62 +572,73 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                 </WiScrollbar>
             </main>
 
-            <aside class="token-panel" :aria-label="t.tokens">
+            <aside
+                class="token-panel"
+                :aria-label="activePackageDoc ? t.componentSection : t.tokens"
+            >
                 <WiScrollbar class="column-scroll">
                     <div class="token-panel-body">
-                        <div class="token-heading">
-                            <span class="kicker">TOKENS</span
-                            ><span class="token-index">/ 04</span>
-                        </div>
-                        <p class="token-description">
-                            {{ t.tokenDesc }}
-                        </p>
-                        <div class="token-group">
-                            <h3>Color</h3>
-                            <div class="swatch-row">
-                                <span class="swatch swatch--primary" /><span
-                                    >primary</span
-                                ><code>brand</code>
+                        <DocSectionNav
+                            v-if="activePackageDoc"
+                            :sections="docSections"
+                            :active-id="activeDocSectionId"
+                            @select="scrollToDocSection"
+                        />
+                        <template v-else>
+                            <div class="token-heading">
+                                <span class="kicker">TOKENS</span
+                                ><span class="token-index">/ 04</span>
                             </div>
-                            <div class="swatch-row">
-                                <span class="swatch swatch--surface" /><span
-                                    >surface</span
-                                ><code>canvas</code>
+                            <p class="token-description">
+                                {{ t.tokenDesc }}
+                            </p>
+                            <div class="token-group">
+                                <h3>Color</h3>
+                                <div class="swatch-row">
+                                    <span class="swatch swatch--primary" /><span
+                                        >primary</span
+                                    ><code>brand</code>
+                                </div>
+                                <div class="swatch-row">
+                                    <span class="swatch swatch--surface" /><span
+                                        >surface</span
+                                    ><code>canvas</code>
+                                </div>
+                                <div class="swatch-row">
+                                    <span class="swatch swatch--border" /><span
+                                        >border</span
+                                    ><code>line</code>
+                                </div>
                             </div>
-                            <div class="swatch-row">
-                                <span class="swatch swatch--border" /><span
-                                    >border</span
-                                ><code>line</code>
+                            <div class="token-group">
+                                <h3>Radius</h3>
+                                <div class="radius-row">
+                                    <span
+                                        class="radius-sample radius-sample--sm"
+                                    /><span>sm</span
+                                    ><span
+                                        class="radius-sample radius-sample--md"
+                                    /><span>md</span
+                                    ><span
+                                        class="radius-sample radius-sample--lg"
+                                    /><span>lg</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="token-group">
-                            <h3>Radius</h3>
-                            <div class="radius-row">
-                                <span
-                                    class="radius-sample radius-sample--sm"
-                                /><span>sm</span
-                                ><span
-                                    class="radius-sample radius-sample--md"
-                                /><span>md</span
-                                ><span
-                                    class="radius-sample radius-sample--lg"
-                                /><span>lg</span>
+                            <div class="token-group">
+                                <h3>Spacing</h3>
+                                <div class="spacing-bars">
+                                    <span style="--bar: 25%">1</span
+                                    ><span style="--bar: 50%">2</span
+                                    ><span style="--bar: 75%">3</span
+                                    ><span style="--bar: 100%">4</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="token-group">
-                            <h3>Spacing</h3>
-                            <div class="spacing-bars">
-                                <span style="--bar: 25%">1</span
-                                ><span style="--bar: 50%">2</span
-                                ><span style="--bar: 75%">3</span
-                                ><span style="--bar: 100%">4</span>
+                            <div class="token-note">
+                                <WiIcon name="info" size="sm" /><span>{{
+                                    t.tokenNote
+                                }}</span>
                             </div>
-                        </div>
-                        <div class="token-note">
-                            <WiIcon name="info" size="sm" /><span>{{
-                                t.tokenNote
-                            }}</span>
-                        </div>
+                        </template>
                     </div>
                 </WiScrollbar>
             </aside>
@@ -672,6 +706,10 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .token-panel-body {
     padding: 2.5rem 1.25rem;
+}
+.token-panel-body :deep(.doc-section-nav) {
+    position: sticky;
+    top: 0;
 }
 .kicker,
 .eyebrow {

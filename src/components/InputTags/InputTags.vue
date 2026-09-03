@@ -128,6 +128,7 @@ function onBlur() {
         :placeholder="modelValue.length ? '' : addPlaceholder"
         :disabled="disabled || atMax"
         :aria-invalid="invalid || undefined"
+        :aria-label="label ?? addPlaceholder"
         @input="onInput"
         @keydown="onKeydown"
         @blur="onBlur"

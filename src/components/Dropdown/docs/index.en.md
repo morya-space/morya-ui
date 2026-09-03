@@ -1,6 +1,6 @@
 ---
 title: Dropdown
-category: 04 / OVERLAY
+category: 04 / NAVIGATION
 description: Action menu overlay (not a form select). Unlike Select, it is used to trigger actions such as edit and delete.
 ---
 

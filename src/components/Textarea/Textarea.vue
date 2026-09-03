@@ -79,7 +79,6 @@ const textareaClass = computed(() => [
     'wi-textarea--fluid': resolvedFluid.value,
     'wi-textarea--invalid': isInvalid.value,
     'wi-textarea--auto-resize': isAutosize.value,
-    'wi-textarea--clearable': showClear.value,
   },
 ])
 

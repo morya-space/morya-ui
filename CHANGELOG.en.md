@@ -1,5 +1,49 @@
 # @well-insight/ui
 
+## 0.1.14 (Unreleased)
+
+### Breaking Changes / Deprecated Aliases
+
+- **Severity**: canonical values are `success` / `info` / `warning` / `danger`; `warn` and `error` remain accepted but are `@deprecated` (Button, Tag, Message, Toast, ProgressBar, Badge, Chip, Timeline, etc.).
+- **Knob**: `size` is deprecated; use `diameter` instead (alias still works).
+- **Avatar**: canonical sizes are `small` / `medium` / `large` / `xlarge`; `normal`, `sm`, `md`, `lg` map as aliases.
+- **Panel**: `modelValue` / `v-model` is deprecated; use `collapsed` / `v-model:collapsed` (dual emit kept until next major).
+
+### Features
+
+- **`useConfirm`**: imperative confirm dialog API, exported from package entry.
+- **`useControllable`**: shared controlled/uncontrolled state composable (Panel, Fieldset, Carousel, DataView, etc.).
+- **`ConfigProvider`**: `theme` object injection (density, motion, `data-wi-*` semantics).
+- **Toast / Message**: queue, dedupe, and severity canonicalization.
+- **Overlays**: `overlayPlacement` flip/clamp; Popover / Tooltip / BlockUI behavior hardening.
+- **Keyboard**: `useMenuKeyboard` for Menu, Menubar, MegaMenu, Listbox, SelectButton, etc.
+- **Tree / TreeTable**: treegrid semantics and keyboard; **Gallery / Carousel** controlled page, touch, pause.
+- **Form**: field feedback baseline, `useFieldFeedback`; Dialog / Drawer / ConfirmDialog prop alignment.
+- **Theme tokens**: border width, disabled opacity, motion (spin/skeleton/pulse/scrollbar), reduced motion (`prefers-reduced-motion` and `data-wi-motion`); layout/tree/timeline/splitter tokens.
+- **Grid**: `gap` resolves design tokens via `resolveGapCSSValue`.
+
+### Fixes
+
+- Checkbox / Radio dark selected states; ToggleButton horizontal padding; Dock `position`; Stepper state styles; Chip severity.
+- PickList / OrderList styles and button disabled states; InputNumber draft state; Table dead code and sorting; TieredMenu popup placement.
+- CascadeSelect / TreeSelect keyboard; SplitButton / SpeedDial overlays; Rating / Knob slider semantics; DatePicker calendar keyboard.
+- Inplace / ConfirmPopup behavior; DataView / Terminal semi-controlled fixes; InputColor template corruption fix.
+
+### Accessibility
+
+- Divider always `role="separator"`; Tabs `aria-controls` / panel `aria-labelledby`; Toolbar `ariaLabel`; Slider `aria-valuetext`.
+- Switch DEV warning when label is missing; MeterGroup `aria-valuenow`; InputPassword strength `role="meter"`.
+- ProgressSpinner wrapper `inert` + `aria-busy`; group labels for CheckboxGroup / RadioGroup / SelectButton / InputOtp.
+- Card `headingLevel`; hover / focus-visible across SplitButton, SpeedDial, FileUpload, MegaMenu, Sidebar, etc.
+
+### Tests
+
+- 608 tests passing; Knob, Inplace, TreeTable, Carousel, MeterGroup, ProgressSpinner, Tabs, CheckboxGroup core paths hardened.
+
+### Documentation
+
+- `check:docs` report mode: **262** doc–implementation drift items (`audits/docs-drift-report.md`), pending batch cleanup; `check:tokens` and `check:colors` pass.
+
 ## 0.1.13
 
 ### Features

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PanelProps } from './types'
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import { useWiLocale } from '../../locale'
-import { useControllable } from '../../shared/useControllable'
 import { resolveSizeClass } from '../../shared/types'
+import { useControllable } from '../../shared/useControllable'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PanelProps>(), {
@@ -19,6 +19,7 @@ const emit = defineEmits<{
 }>()
 
 const locale = useWiLocale()
+const contentId = useId()
 const sizeTone = computed(() => resolveSizeClass(props.size))
 
 function resolveControlledCollapsed() {
@@ -66,15 +67,18 @@ function toggle() {
         type="button"
         class="wi-panel__toggler"
         :aria-expanded="!isCollapsed"
+        :aria-controls="contentId"
         :aria-label="isCollapsed ? locale.expand : locale.collapse"
         @click="toggle"
       >
         <WiIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
       </button>
     </header>
-    <div v-show="!isCollapsed" class="wi-panel__content">
-      <slot />
-    </div>
+    <Transition name="wi-panel-collapse">
+      <div v-show="!isCollapsed" :id="contentId" class="wi-panel__content">
+        <slot />
+      </div>
+    </Transition>
     <footer v-if="$slots.footer && !isCollapsed" class="wi-panel__footer">
       <slot name="footer" />
     </footer>

@@ -1,6 +1,6 @@
 ---
 title: Carousel
-category: 11 / MEDIA
+category: 03 / DATA
 description: Carousel for a set of content items.
 ---
 

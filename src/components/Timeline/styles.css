@@ -11,7 +11,7 @@
     display: grid;
     gap: var(--wi-space-3);
     grid-template-columns: 1fr auto 1fr;
-    min-height: 4rem;
+    min-height: var(--wi-timeline-event-min-height);
 }
 
 .wi-timeline__event--left .wi-timeline__content {
@@ -48,9 +48,9 @@
     color: var(--wi-color-primary);
     display: inline-flex;
     font-size: var(--wi-font-size-xs);
-    height: 1.5rem;
+    height: var(--wi-timeline-marker-size);
     justify-content: center;
-    width: 1.5rem;
+    width: var(--wi-timeline-marker-size);
     z-index: 1;
 }
 

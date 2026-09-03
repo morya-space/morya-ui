@@ -1,6 +1,6 @@
 ---
 title: Skeleton
-category: 07 / MISC
+category: 03 / DATA
 description: Loading placeholder skeleton. Supports rectangle/circle shapes, custom sizes, and a wave animation.
 ---
 

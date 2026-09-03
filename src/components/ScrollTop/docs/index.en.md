@@ -1,6 +1,6 @@
 ---
 title: ScrollTop
-category: 07 / MISC
+category: 04 / NAVIGATION
 description: Shows a back-to-top button after scrolling past a threshold.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Dropdown
-category: 04 / OVERLAY
+category: 04 / NAVIGATION
 description: 动作菜单覆盖层（非表单选择器）。与 Select 不同：用于触发编辑、删除等操作项。
 ---
 

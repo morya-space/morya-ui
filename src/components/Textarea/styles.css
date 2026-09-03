@@ -48,10 +48,6 @@
     position: relative;
 }
 
-.wi-textarea--clearable {
-    padding-right: var(--wi-control-affix-padding);
-}
-
 .wi-textarea__clear {
     align-items: center;
     background: transparent;
@@ -68,6 +64,7 @@
     right: var(--wi-space-1);
     top: var(--wi-space-2);
     width: var(--wi-control-affix-size);
+    z-index: 1;
 }
 
 .wi-textarea__clear:focus-visible {

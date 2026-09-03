@@ -20,7 +20,7 @@
 }
 
 .wi-tabs__list {
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     display: flex;
     gap: var(--wi-space-2);
     min-width: max-content;
@@ -58,7 +58,7 @@
 
 .wi-tabs--card .wi-tabs__tab {
     background: color-mix(in srgb, var(--wi-color-border) 35%, var(--wi-color-surface));
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-bottom: 0;
     border-radius: var(--wi-radius-sm) var(--wi-radius-sm) 0 0;
 }

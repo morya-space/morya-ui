@@ -1,6 +1,6 @@
 ---
 title: Inplace
-category: 07 / MISC
+category: 03 / DATA
 description: Click the display area to switch to editable content.
 ---
 

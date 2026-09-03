@@ -1,6 +1,6 @@
 ---
 title: MeterGroup
-category: 07 / MISC
+category: 03 / DATA
 description: 多段占比计量条。
 ---
 

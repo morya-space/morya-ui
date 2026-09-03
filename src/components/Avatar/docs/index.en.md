@@ -1,6 +1,6 @@
 ---
 title: Avatar
-category: 07 / MISC
+category: 03 / DATA
 description: Avatar displays a user or entity identity. Supports image, icon, and text fallback; shape and size are configurable.
 ---
 

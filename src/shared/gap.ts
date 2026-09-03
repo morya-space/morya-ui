@@ -18,6 +18,24 @@ export interface ResolvedGap {
   css: string
 }
 
+/** Resolve Space / Flex / Grid gap tokens to CSS lengths. */
+export function resolveGapCSSValue(
+  size: WiGapSize | string | number | undefined | null,
+): string {
+  if (size == null || size === '') return '0'
+  if (typeof size === 'string') {
+    const token = size.trim() as WiGapToken
+    if (token in TOKEN_GAP) return TOKEN_GAP[token]
+    if (/^\d+(\.\d+)?$/.test(size.trim())) return `${size.trim()}px`
+    return TOKEN_GAP.medium
+  }
+  if (typeof size === 'number') return `${size}px`
+  if (Array.isArray(size)) {
+    const gap = resolveGap(size)
+    return gap.css
+  }
+  return TOKEN_GAP.medium
+}
 /** Resolve Space / Flex size prop into CSS gap lengths. */
 export function resolveGap(size: WiGapSize = 'medium'): ResolvedGap {
   if (Array.isArray(size)) {

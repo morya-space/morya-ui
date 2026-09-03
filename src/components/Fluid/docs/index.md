@@ -1,6 +1,6 @@
 ---
 title: Fluid
-category: 07 / MISC
+category: 01 / BASIC
 description: 让子元素宽度撑满的布局包裹。
 ---
 

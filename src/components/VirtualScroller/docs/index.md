@@ -1,6 +1,6 @@
 ---
 title: VirtualScroller
-category: 06 / DATA
+category: 03 / DATA
 description: 按可视窗口渲染长列表。
 ---
 

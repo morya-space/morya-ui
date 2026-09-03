@@ -28,6 +28,7 @@ export interface CheckboxEmits {
 export interface CheckboxGroupProps {
   modelValue?: CheckboxValue[]
   name?: string
+  label?: string
   size?: CheckboxSize
   disabled?: boolean
   invalid?: boolean

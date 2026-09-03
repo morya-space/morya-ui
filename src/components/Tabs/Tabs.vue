@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TabItem, TabsProps } from './types'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -17,6 +17,7 @@ const emit = defineEmits<{
 }>()
 
 const locale = useWiLocale()
+const tabsUid = useId()
 const scroller = ref<HTMLElement | null>(null)
 const overflowed = ref(false)
 const activeValue = computed(() => props.modelValue ?? props.tabs.find((tab) => !tab.disabled)?.value)
@@ -62,8 +63,11 @@ function updateOverflow() {
   overflowed.value = Boolean(el && el.scrollWidth > el.clientWidth + 1)
 }
 
-function scrollTabs(delta: number) {
-  scroller.value?.scrollBy({ left: delta, behavior: 'smooth' })
+function scrollTabs(direction: number) {
+  const el = scroller.value
+  if (!el) return
+  const step = Math.round(el.clientWidth * 0.75) * Math.sign(direction)
+  el.scrollBy({ left: step, behavior: 'smooth' })
 }
 
 let resizeObserver: ResizeObserver | undefined
@@ -94,7 +98,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
         type="button"
         class="wi-tabs__scroll"
         :aria-label="locale.prev"
-        @click="scrollTabs(-160)"
+        @click="scrollTabs(-1)"
       >
         <WiIcon name="chevron-left" size="sm" />
       </button>
@@ -113,6 +117,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
               type="button"
               role="tab"
               :aria-selected="activeValue === tab.value"
+              :aria-controls="`${tabsUid}-panel-${tab.value}`"
               :disabled="tab.disabled"
               @click="selectTab(tab.value)"
               @keydown="onKeydown($event, index)"
@@ -137,7 +142,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
         type="button"
         class="wi-tabs__scroll"
         :aria-label="locale.next"
-        @click="scrollTabs(160)"
+        @click="scrollTabs(1)"
       >
         <WiIcon name="chevron-right" size="sm" />
       </button>
@@ -154,7 +159,13 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
         <slot name="extra" />
       </div>
     </div>
-    <div class="wi-tabs__panel" role="tabpanel">
+    <div
+      v-if="activeValue"
+      :id="`${tabsUid}-panel-${activeValue}`"
+      class="wi-tabs__panel"
+      role="tabpanel"
+      :aria-labelledby="`wi-tab-${activeValue}`"
+    >
       <slot :active-value="activeValue" />
     </div>
   </div>

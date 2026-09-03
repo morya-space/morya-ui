@@ -60,8 +60,8 @@ const sizeClass = computed(() => ({
 </script>
 
 <template>
-  <div v-if="wrapping" class="wi-progress-spinner-wrap" :class="{ 'wi-progress-spinner-wrap--active': visible }">
-    <div class="wi-progress-spinner-wrap__content">
+  <div v-if="wrapping" class="wi-progress-spinner-wrap" :class="{ 'wi-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
+    <div class="wi-progress-spinner-wrap__content" :inert="visible || undefined">
       <slot />
     </div>
     <div v-if="visible" class="wi-progress-spinner-wrap__overlay">

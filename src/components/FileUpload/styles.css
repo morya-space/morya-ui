@@ -1,4 +1,4 @@
-/* —— File: FileUpload —— */
+/* —�?File: FileUpload —�?*/
 .wi-fileupload {
     --wi-fileupload-dropzone-min-height: 10rem;
     --wi-fileupload-icon-size: 2.5rem;
@@ -28,8 +28,26 @@
 
 .wi-fileupload__clear {
     background: transparent;
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     color: var(--wi-color-text);
+}
+
+.wi-fileupload__choose:hover:not(:disabled) {
+    background: var(--wi-color-primary-hover);
+}
+
+.wi-fileupload__choose:focus-visible,
+.wi-fileupload__clear:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-fileupload__clear:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
 }
 
 .wi-fileupload--disabled .wi-fileupload__choose,
@@ -46,7 +64,7 @@
         var(--wi-color-surface) 92%,
         var(--wi-color-primary) 8%
     );
-    border: 1px dashed var(--wi-color-border);
+    border: var(--wi-border-width) dashed var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     cursor: pointer;
     display: flex;
@@ -101,7 +119,7 @@
 }
 
 .wi-fileupload__list {
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     list-style: none;
     margin: 0;
@@ -116,7 +134,7 @@
 }
 
 .wi-fileupload__file + .wi-fileupload__file {
-    border-top: 1px solid var(--wi-color-border);
+    border-top: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-fileupload__file-body {
@@ -214,7 +232,7 @@
 
 .wi-fileupload__card {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-sizing: border-box;
     height: var(--wi-fileupload-card-size);

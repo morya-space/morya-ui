@@ -1,14 +1,15 @@
 .wi-accordion {
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     overflow: hidden;
 }
 
 .wi-accordion__tab + .wi-accordion__tab {
-    border-top: 1px solid var(--wi-color-border);
+    border-top: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-accordion__header {
+    align-items: center;
     background: var(--wi-color-surface);
     border: 0;
     color: var(--wi-color-text);
@@ -16,6 +17,8 @@
     display: flex;
     font: inherit;
     font-weight: 600;
+    gap: var(--wi-space-2);
+    justify-content: space-between;
     padding: var(--wi-space-3) var(--wi-space-4);
     text-align: left;
     transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
@@ -45,14 +48,6 @@
     background: var(--wi-color-surface);
     color: var(--wi-color-text);
     padding: 0 var(--wi-space-4) var(--wi-space-4);
-}
-
-.wi-accordion__header {
-    align-items: center;
-    display: flex;
-    gap: var(--wi-space-2);
-    justify-content: space-between;
-    width: 100%;
 }
 
 .wi-accordion__header-extra {

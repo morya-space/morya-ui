@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: A short hint shown on hover or focus. Supports placement, disabled, and showDelay.
 ---
 

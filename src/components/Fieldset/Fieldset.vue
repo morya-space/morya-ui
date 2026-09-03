@@ -52,8 +52,10 @@ function toggle() {
         </slot>
       </template>
     </legend>
-    <div :id="contentId" v-show="!isCollapsed" class="wi-fieldset__content">
-      <slot />
-    </div>
+    <Transition name="wi-fieldset-collapse">
+      <div v-show="!isCollapsed" :id="contentId" class="wi-fieldset__content">
+        <slot />
+      </div>
+    </Transition>
   </fieldset>
 </template>

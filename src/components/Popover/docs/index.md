@@ -1,6 +1,6 @@
 ---
 title: Popover
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 相对触发元素定位的浮层面板。支持 placement、Teleport；点击外部或 Esc 关闭。
 ---
 

@@ -22,12 +22,20 @@ for (const c of comps) {
   deps[c] = [...set].sort()
 }
 
+const PICKER_SUFFIX_COMPONENTS = new Set(['Select', 'TreeSelect', 'CascadeSelect'])
+
 // Generate style.ts
 for (const c of comps) {
   const lines = [
     "import '../../theme/styles.css'",
     "import '../../styles/base.css'",
   ]
+  if (PICKER_SUFFIX_COMPONENTS.has(c)) {
+    lines.push(
+      "import '../../shared/styles/control-suffix.css'",
+      "import '../../shared/styles/control-affix-icon.css'",
+    )
+  }
   for (const dep of deps[c]) {
     if (existsSync(join(compsDir, dep, 'styles.css'))) {
       lines.push(`import '../${dep}/styles.css'`)

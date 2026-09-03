@@ -1,6 +1,6 @@
 ---
 title: Card
-category: 05 / PANEL
+category: 03 / DATA
 description: Content container. Structure content with title / subtitle or header / footer slots.
 ---
 

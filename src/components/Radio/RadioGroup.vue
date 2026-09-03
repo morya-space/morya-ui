@@ -30,6 +30,7 @@ provide(WI_RADIO_GROUP_KEY, {
   <div
     class="wi-radio-group"
     role="radiogroup"
+    :aria-label="label"
     :class="{ 'wi-radio-group--disabled': disabled, 'wi-radio-group--invalid': invalid }"
   >
     <slot />

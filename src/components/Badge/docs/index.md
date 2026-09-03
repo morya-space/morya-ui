@@ -1,6 +1,6 @@
 ---
 title: Badge
-category: 07 / MISC
+category: 01 / BASIC
 description: 状态角标或圆点。
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Skeleton
-category: 07 / MISC
+category: 03 / DATA
 description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 动画。
 ---
 

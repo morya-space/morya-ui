@@ -34,4 +34,13 @@ describe('wiProgressSpinner', () => {
     })
     expect(shown.get('.wi-progress-spinner-wrap__overlay').text()).toContain('Saving')
   })
+
+  it('marks wrapped content inert while loading overlay is visible', () => {
+    const wrapper = mount(WiProgressSpinner, {
+      props: { show: true },
+      slots: { default: '<button type="button">Save</button>' },
+    })
+    expect(wrapper.get('.wi-progress-spinner-wrap__content').attributes('inert')).toBeDefined()
+    expect(wrapper.get('.wi-progress-spinner-wrap').attributes('aria-busy')).toBe('true')
+  })
 })

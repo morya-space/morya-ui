@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import type { ToolbarProps } from './types'
+
+defineProps<ToolbarProps>()
 </script>
 
 <template>
-  <div class="wi-toolbar" role="toolbar">
+  <div class="wi-toolbar" role="toolbar" :aria-label="ariaLabel">
     <div v-if="$slots.start" class="wi-toolbar__start">
       <slot name="start" />
     </div>

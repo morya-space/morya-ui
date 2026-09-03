@@ -1,6 +1,6 @@
 .wi-card {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-lg);
     color: var(--wi-color-text);
     overflow: hidden;
@@ -14,12 +14,12 @@
 
 .wi-card__header,
 .wi-card__footer {
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-card__footer {
     border-bottom: 0;
-    border-top: 1px solid var(--wi-color-border);
+    border-top: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-card__title {

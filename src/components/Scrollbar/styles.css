@@ -86,11 +86,11 @@
 }
 
 .wi-scrollbar-fade-enter-active {
-    transition: opacity 340ms var(--wi-motion-ease);
+    transition: opacity var(--wi-motion-scrollbar-show) var(--wi-motion-ease);
 }
 
 .wi-scrollbar-fade-leave-active {
-    transition: opacity 120ms var(--wi-motion-ease);
+    transition: opacity var(--wi-motion-scrollbar-hide) var(--wi-motion-ease);
 }
 
 .wi-scrollbar-fade-enter-from,

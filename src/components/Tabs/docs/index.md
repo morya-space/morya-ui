@@ -1,6 +1,6 @@
 ---
 title: Tabs
-category: 05 / PANEL
+category: 04 / NAVIGATION
 description: 标签页切换。支持 line/card、关闭/新增、extra 与溢出滚动。
 ---
 

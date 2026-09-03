@@ -1,6 +1,6 @@
 ---
 title: SplitButton
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: A primary action button with extra dropdown items.
 ---
 

@@ -1,4 +1,4 @@
-/* —— Misc: Terminal —— */
+/* —�?Misc: Terminal —�?*/
 .wi-terminal {
     --wi-terminal-bg: var(--wi-color-contrast);
     --wi-terminal-fg: var(--wi-color-contrast-fg);
@@ -6,7 +6,7 @@
     --wi-terminal-border: color-mix(in srgb, var(--wi-color-on-emphasis) 12%, transparent);
     --wi-terminal-min-height: 12rem;
     background: var(--wi-terminal-bg);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     color: var(--wi-terminal-fg);
     display: flex;
@@ -37,7 +37,7 @@
 
 .wi-terminal__form {
     align-items: center;
-    border-top: 1px solid var(--wi-terminal-border);
+    border-top: var(--wi-border-width) solid var(--wi-terminal-border);
     display: flex;
     gap: var(--wi-space-2);
     padding: var(--wi-space-2) var(--wi-space-3);

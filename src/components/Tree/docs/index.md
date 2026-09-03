@@ -1,6 +1,6 @@
 ---
 title: Tree
-category: 06 / DATA
+category: 03 / DATA
 description: 树形结构。支持勾选半选、过滤、受控展开、懒加载与拖拽。
 ---
 

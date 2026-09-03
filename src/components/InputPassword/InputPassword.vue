@@ -73,6 +73,13 @@ const strength = computed(() => {
   return 'strong'
 })
 
+const strengthScore = computed(() => {
+  if (strength.value === 'empty') return 0
+  if (strength.value === 'weak') return 1
+  if (strength.value === 'medium') return 3
+  return 4
+})
+
 const strengthLabel = computed(() => {
   if (strength.value === 'weak') return locale.value.passwordWeak
   if (strength.value === 'medium') return locale.value.passwordMedium
@@ -101,7 +108,6 @@ const rootClass = computed(() => [
     'wi-password--invalid': props.invalid,
     'wi-password--disabled': props.disabled,
     'wi-password--toggle': props.toggleMask,
-    'wi-password--clearable': showClear.value,
   },
 ])
 
@@ -244,6 +250,11 @@ defineExpose({ focus, blur, select })
         :id="`${inputId}-feedback`"
         class="wi-password__feedback"
         :class="`wi-password__feedback--${strength}`"
+        role="meter"
+        :aria-valuemin="0"
+        :aria-valuemax="4"
+        :aria-valuenow="strengthScore"
+        :aria-valuetext="strengthLabel"
       >
         {{ formatLocale(locale.passwordStrength, { value: strengthLabel }) }}
       </span>

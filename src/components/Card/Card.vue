@@ -6,9 +6,11 @@ import { resolveSizeClass } from '../../shared/types'
 const props = withDefaults(defineProps<CardProps>(), {
   bordered: true,
   hoverable: false,
+  headingLevel: 2,
 })
 
 const sizeTone = computed(() => resolveSizeClass(props.size))
+const titleTag = computed(() => `h${props.headingLevel}` as const)
 
 const rootClass = computed(() => [
   'wi-card',
@@ -29,9 +31,9 @@ const rootClass = computed(() => [
     </div>
     <div v-if="$slots.header || title || subtitle" class="wi-card__header">
       <slot name="header">
-        <h2 v-if="title" class="wi-card__title">
+        <component :is="titleTag" v-if="title" class="wi-card__title">
           {{ title }}
-        </h2>
+        </component>
         <p v-if="subtitle" class="wi-card__subtitle">
           {{ subtitle }}
         </p>

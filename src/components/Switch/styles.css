@@ -96,7 +96,7 @@
 }
 
 .wi-switch__spinner {
-    animation: wi-progress-spinner-rotate 0.8s linear infinite;
+    animation: wi-progress-spinner-rotate var(--wi-motion-spin-fast) linear infinite;
     border: 1.5px solid
         color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
     border-radius: 50%;

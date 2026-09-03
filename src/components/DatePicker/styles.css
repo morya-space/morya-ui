@@ -204,7 +204,7 @@
 
 .wi-datepicker__day:disabled {
     cursor: not-allowed;
-    opacity: 0.4;
+    opacity: var(--wi-opacity-disabled);
 }
 
 .wi-datepicker__day:focus-visible {

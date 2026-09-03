@@ -1,6 +1,6 @@
 ---
 title: FileUpload
-category: 10 / FILE
+category: 02 / FORM
 description: 选择、拖拽、列表、预览与上传。
 ---
 

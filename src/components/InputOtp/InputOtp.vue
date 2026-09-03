@@ -113,7 +113,7 @@ watch(
 </script>
 
 <template>
-  <div :class="rootClass" :style="rootStyle" role="group" @paste="onPaste">
+  <div :class="rootClass" :style="rootStyle" role="group" :aria-label="label ?? locale.otpGroup" @paste="onPaste">
     <input
       v-for="(char, index) in chars"
       :key="index"

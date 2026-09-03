@@ -129,7 +129,7 @@
 }
 
 .wi-badge--processing {
-    animation: wi-badge-pulse 1.2s ease-in-out infinite;
+    animation: wi-badge-pulse var(--wi-motion-pulse) ease-in-out infinite;
 }
 
 @keyframes wi-badge-pulse {

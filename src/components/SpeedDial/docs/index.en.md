@@ -1,6 +1,6 @@
 ---
 title: SpeedDial
-category: 01 / PRIMITIVE
+category: 04 / NAVIGATION
 description: Floating shortcut action button group.
 ---
 

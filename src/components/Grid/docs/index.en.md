@@ -1,6 +1,6 @@
 ---
 title: Grid
-category: 05 / PANEL
+category: 06 / LAYOUT
 description: CSS Grid layout with GridItem span / offset control.
 ---
 

@@ -17,7 +17,7 @@
 }
 
 .wi-treetable__table th {
-    background: color-mix(in srgb, var(--wi-color-surface) 92%, var(--wi-color-border));
+    background: var(--wi-table-header-bg);
     font-size: var(--wi-font-size-sm);
     font-weight: 600;
 }

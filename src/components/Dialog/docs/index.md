@@ -1,6 +1,6 @@
 ---
 title: Dialog
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: 模态对话框。支持预设页脚、异步关闭拦截、状态 type。
 ---
 

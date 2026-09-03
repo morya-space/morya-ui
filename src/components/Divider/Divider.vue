@@ -26,7 +26,7 @@ const rootClass = computed(() => [
 <template>
   <div
     :class="rootClass"
-    :role="hasLabel ? 'separator' : undefined"
+    role="separator"
     :aria-orientation="resolvedLayout"
   >
     <span class="wi-divider__line" />

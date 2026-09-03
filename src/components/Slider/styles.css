@@ -1,4 +1,4 @@
-/* —— Form: Slider —— */
+/* ???Form: Slider ???*/
 .wi-slider-field {
     display: grid;
     gap: var(--wi-space-2);
@@ -25,6 +25,9 @@
     --wi-slider-thumb-size: 1rem;
     --wi-slider-vertical-height: 12rem;
     --wi-slider-vertical-width: 2.5rem;
+    --wi-slider-tooltip-offset: 1.5rem;
+    --wi-slider-marks-inset-block: 0.9rem;
+    --wi-slider-marks-inset-inline: 0.5rem;
     align-items: center;
     display: flex;
     min-height: var(--wi-slider-thumb-size);
@@ -87,7 +90,7 @@
     background: var(--wi-color-primary);
     border: 2px solid var(--wi-color-surface);
     border-radius: 50%;
-    box-shadow: 0 0 0 1px
+    box-shadow: 0 0 0 var(--wi-border-width)
         color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
     height: var(--wi-slider-thumb-size);
     margin-top: calc(
@@ -100,7 +103,7 @@
     background: var(--wi-color-primary);
     border: 2px solid var(--wi-color-surface);
     border-radius: 50%;
-    box-shadow: 0 0 0 1px
+    box-shadow: 0 0 0 var(--wi-border-width)
         color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
     height: var(--wi-slider-thumb-size);
     width: var(--wi-slider-thumb-size);
@@ -147,13 +150,13 @@
     left: 50%;
     padding: 0.15rem 0.4rem;
     position: absolute;
-    top: -1.5rem;
+    top: calc(-1 * var(--wi-slider-tooltip-offset));
     transform: translateX(-50%);
     white-space: nowrap;
 }
 
 .wi-slider__marks {
-    inset: 0.9rem 0.5rem auto;
+    inset: var(--wi-slider-marks-inset-block) var(--wi-slider-marks-inset-inline) auto;
     position: absolute;
 }
 

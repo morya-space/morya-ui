@@ -1,6 +1,6 @@
 ---
 title: TieredMenu
-category: 09 / MENU
+category: 04 / NAVIGATION
 description: 带一层子菜单的垂直分层菜单。
 ---
 

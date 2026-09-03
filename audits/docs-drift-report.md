@@ -2,7 +2,7 @@
 
 > 由 `ai-design-config/scripts/check-docs-drift.mjs` 生成（报告模式，exit code 恒 0）。
 > 重新生成：`node ai-design-config/scripts/check-docs-drift.mjs --md`
-> 基准日期：2026-09-02；扫描组件 88 个；漂移条目 141 条。
+> 基准日期：2026-09-03；扫描组件 88 个；漂移条目 262 条。
 
 ## 类别说明
 

@@ -32,11 +32,19 @@ function toSlug(folder) {
     .toLowerCase()
 }
 
+const PICKER_SUFFIX_COMPONENTS = new Set(['Select', 'TreeSelect', 'CascadeSelect'])
+
 const entries = componentFolders.map((folder) => {
   const slug = toSlug(folder)
   const sheets = [
     'theme/styles.css',
     'styles/base.css',
+    ...(PICKER_SUFFIX_COMPONENTS.has(folder)
+      ? [
+          'shared/styles/control-suffix.css',
+          'shared/styles/control-affix-icon.css',
+        ]
+      : []),
     ...deps[folder].flatMap((dep) => {
       const rel = `components/${dep}/styles.css`
       return existsSync(join(src, rel)) ? [rel] : []

@@ -1,6 +1,6 @@
 ---
 title: Avatar
-category: 07 / MISC
+category: 03 / DATA
 description: 头像用于展示用户或实体标识。支持图片、图标与文字回退，形状与尺寸可配置。
 ---
 

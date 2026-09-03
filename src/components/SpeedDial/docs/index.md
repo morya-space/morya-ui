@@ -1,6 +1,6 @@
 ---
 title: SpeedDial
-category: 01 / PRIMITIVE
+category: 04 / NAVIGATION
 description: 悬浮快捷操作按钮组。
 ---
 

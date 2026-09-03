@@ -59,7 +59,7 @@
     flex: 0 0 auto;
     height: 0.85rem;
     width: 0.85rem;
-    animation: wi-select-spin 0.7s linear infinite;
+    animation: wi-select-spin var(--wi-motion-spin-medium) linear infinite;
 }
 
 @keyframes wi-select-spin {

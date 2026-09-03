@@ -101,3 +101,14 @@
     cursor: not-allowed;
     opacity: var(--wi-opacity-disabled);
 }
+
+.wi-menubar__subitem:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-menubar__trigger--selected,
+.wi-menubar__subitem--selected {
+    background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
+    color: var(--wi-color-primary);
+}

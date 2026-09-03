@@ -1,4 +1,6 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../../shared/styles/control-suffix.css'
+import '../../shared/styles/control-affix-icon.css'
 import '../Icon/styles.css'
 import './styles.css'

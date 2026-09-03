@@ -19,6 +19,7 @@
     border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     display: flex;
+    position: relative;
 }
 
 .wi-autocomplete__control:hover:not(:focus-within) {
@@ -127,7 +128,7 @@
 }
 
 .wi-autocomplete__spinner {
-    animation: wi-progress-spinner-rotate 0.8s linear infinite;
+    animation: wi-progress-spinner-rotate var(--wi-motion-spin-fast) linear infinite;
     border: 2px solid
         color-mix(in srgb, var(--wi-color-primary) 30%, transparent);
     border-radius: var(--wi-radius-full);
@@ -144,4 +145,25 @@
 
 .wi-autocomplete--invalid .wi-autocomplete__control {
     border-color: var(--wi-color-danger);
+}
+
+.wi-autocomplete__clear,
+.wi-autocomplete__spinner {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    height: var(--wi-control-affix-size);
+    justify-content: center;
+    pointer-events: auto;
+    position: absolute;
+    right: var(--wi-space-1);
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--wi-control-affix-size);
+    z-index: 1;
+}
+
+.wi-autocomplete__control:has(.wi-autocomplete__dropdown) .wi-autocomplete__clear,
+.wi-autocomplete__control:has(.wi-autocomplete__dropdown) .wi-autocomplete__spinner {
+    right: var(--wi-control-affix-gap);
 }

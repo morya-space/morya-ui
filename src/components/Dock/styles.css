@@ -47,6 +47,11 @@
     transform: translateY(-0.25rem) scale(1.08);
 }
 
+.wi-dock__button:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
 .wi-dock__icon {
     align-items: center;
     background: color-mix(

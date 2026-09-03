@@ -1,6 +1,6 @@
 ---
 title: SplitButton
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: 主操作按钮附带下拉菜单项。
 ---
 

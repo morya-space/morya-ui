@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { SwitchProps } from './types'
-import { computed, useAttrs } from 'vue'
+import { computed, onMounted, useAttrs, useSlots } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 
 defineOptions({ inheritAttrs: false })
@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
+const slots = useSlots()
 const resolvedInputId = computed(
   () => props.inputId ?? props.id ?? `wi-switch-${Math.random().toString(36).slice(2, 8)}`,
 )
@@ -35,6 +36,12 @@ function updateValue(event: Event) {
   if (isDisabled.value) return
   emit('update:modelValue', (event.target as HTMLInputElement).checked)
 }
+
+onMounted(() => {
+  if (import.meta.env.DEV && !props.label && !slots.default) {
+    console.warn('[WiSwitch] Provide `label` prop or default slot for an accessible name.')
+  }
+})
 </script>
 
 <template>

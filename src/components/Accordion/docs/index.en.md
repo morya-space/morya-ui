@@ -1,6 +1,6 @@
 ---
 title: Accordion
-category: 05 / PANEL
+category: 03 / DATA
 description: Collapsible panel group. Supports single or multiple open panels; configure headers and disabled state via tabs.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Scrollbar
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: Themeable custom scrollbar for a consistent scrolling experience.
 ---
 

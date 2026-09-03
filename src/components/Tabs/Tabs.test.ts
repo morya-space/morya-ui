@@ -40,8 +40,12 @@ describe('wiTabs', () => {
     expect(wrapper.emitted('add')).toHaveLength(1)
   })
 
-  it('applies the card type class', () => {
-    const wrapper = mount(WiTabs, { props: { tabs, type: 'card', modelValue: 'design' } })
-    expect(wrapper.classes()).toContain('wi-tabs--card')
+  it('links tabs to panels with aria-controls and aria-labelledby', () => {
+    const wrapper = mount(WiTabs, { props: { tabs, modelValue: 'design' } })
+    const tab = wrapper.get('[role="tab"]')
+    const panel = wrapper.get('[role="tabpanel"]')
+    expect(tab.attributes('aria-controls')).toBeTruthy()
+    expect(panel.attributes('aria-labelledby')).toBe(`wi-tab-${tabs[0]!.value}`)
+    expect(panel.attributes('id')).toBe(tab.attributes('aria-controls'))
   })
 })

@@ -1,6 +1,6 @@
 ---
 title: Fluid
-category: 07 / MISC
+category: 01 / BASIC
 description: Layout wrapper that stretches children to full width.
 ---
 

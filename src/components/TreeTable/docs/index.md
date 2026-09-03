@@ -1,6 +1,6 @@
 ---
 title: TreeTable
-category: 06 / DATA
+category: 03 / DATA
 description: 可展开的树形表格。
 ---
 

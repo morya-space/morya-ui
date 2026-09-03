@@ -1,6 +1,6 @@
 ---
 title: Inplace
-category: 07 / MISC
+category: 03 / DATA
 description: 点击展示区切换为可编辑内容。
 ---
 

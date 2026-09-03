@@ -111,6 +111,16 @@
     font-size: 1.25rem;
 }
 
+.wi-drawer__close:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--wi-color-primary) 10%,
+        var(--wi-color-surface)
+    );
+    border-radius: var(--wi-radius-sm);
+    color: var(--wi-color-text);
+}
+
 .wi-drawer__close:focus-visible {
     box-shadow: var(--wi-focus-shadow);
     outline: none;

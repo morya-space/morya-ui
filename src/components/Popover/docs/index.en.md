@@ -1,6 +1,6 @@
 ---
 title: Popover
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Floating panel positioned relative to a trigger. Supports placement and Teleport. Closes on outside click or Esc.
 ---
 

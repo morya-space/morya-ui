@@ -1,6 +1,6 @@
 ---
 title: ConfirmPopup
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Confirmation popover anchored to a target.
 ---
 

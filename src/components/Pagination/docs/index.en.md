@@ -1,6 +1,6 @@
 ---
 title: Pagination
-category: 06 / DATA
+category: 03 / DATA
 description: Pagination. v-model is the page number. The instance exposes first (zero-based index of the first record).
 ---
 

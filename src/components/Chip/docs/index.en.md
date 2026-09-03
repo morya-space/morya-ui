@@ -1,6 +1,6 @@
 ---
 title: Chip
-category: 07 / MISC
+category: 01 / BASIC
 description: Chip displays tagged information, optionally with an icon, image, and remove action.
 ---
 

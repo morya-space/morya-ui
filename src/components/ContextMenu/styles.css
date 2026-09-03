@@ -68,3 +68,32 @@
     font-size: var(--wi-font-size-xs);
     margin-left: auto;
 }
+
+.wi-contextmenu__item--parent {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.wi-contextmenu__icon,
+.wi-contextmenu__caret {
+    flex-shrink: 0;
+}
+
+.wi-contextmenu__submenu-wrap {
+    position: relative;
+}
+
+.wi-contextmenu__submenu {
+    background: var(--wi-color-surface);
+    border: var(--wi-border-width) solid var(--wi-color-border);
+    border-radius: var(--wi-radius-md);
+    box-shadow: var(--wi-shadow-md);
+    left: 100%;
+    min-width: 10rem;
+    padding: var(--wi-space-1);
+    position: absolute;
+    top: 0;
+    z-index: var(--wi-z-popper);
+}

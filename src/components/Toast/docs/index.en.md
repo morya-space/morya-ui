@@ -1,6 +1,6 @@
 ---
 title: Toast
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Corner floating notifications with API and controlled lists.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Flex
-category: 05 / PANEL
+category: 01 / BASIC
 description: 基于 flex 的弹性布局容器，控制方向、对齐与间距。
 ---
 

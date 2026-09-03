@@ -14,6 +14,7 @@ import {
   
   watch
 } from 'vue'
+import { resolveGapCSSValue } from '../../shared/gap'
 import { parseResponsiveValue } from '../../shared/responsive'
 import { flattenVNodes } from '../../shared/vnode'
 import {  WI_GRID_ITEM_FLAG, WI_GRID_KEY } from './types'
@@ -36,12 +37,18 @@ const rootEl = ref<HTMLElement | null>(null)
 const queryWidth = ref<number | undefined>(undefined)
 const overflow = ref(false)
 
+const GAP_TOKENS = new Set(['small', 'medium', 'large'])
+
+function isGapToken(value: unknown): value is string {
+  return typeof value === 'string' && GAP_TOKENS.has(value.trim())
+}
+
 const needsQuery = computed(() => {
   if (props.itemResponsive) return true
   const numOnly = /^\d+(\.\d+)?$/
   if (!numOnly.test(String(props.cols))) return true
-  if (!numOnly.test(String(props.xGap))) return true
-  if (!numOnly.test(String(props.yGap))) return true
+  if (!numOnly.test(String(props.xGap)) && !isGapToken(props.xGap)) return true
+  if (!numOnly.test(String(props.yGap)) && !isGapToken(props.yGap)) return true
   return false
 })
 
@@ -106,16 +113,21 @@ const resolvedCols = computed(
   () => parseResponsiveValue(props.cols, queryWidth.value) ?? 24,
 )
 
-const resolvedXGapPx = computed(() => parseResponsiveValue(props.xGap, queryWidth.value) ?? 0)
-const resolvedYGapPx = computed(() => parseResponsiveValue(props.yGap, queryWidth.value) ?? 0)
-const xGapCss = computed(() => `${resolvedXGapPx.value}px`)
+function resolveGridGap(value: string | number | undefined, queryWidth: number | undefined): string {
+  if (isGapToken(value)) return resolveGapCSSValue(value.trim())
+  const px = parseResponsiveValue(value, queryWidth) ?? 0
+  return `${px}px`
+}
+
+const resolvedXGapCss = computed(() => resolveGridGap(props.xGap, queryWidth.value))
+const resolvedYGapCss = computed(() => resolveGridGap(props.yGap, queryWidth.value))
 
 const gridStyle = computed(() => ({
   display: 'grid',
   width: '100%',
   gridTemplateColumns: `repeat(${resolvedCols.value}, minmax(0, 1fr))`,
-  columnGap: `${resolvedXGapPx.value}px`,
-  rowGap: `${resolvedYGapPx.value}px`,
+  columnGap: resolvedXGapCss.value,
+  rowGap: resolvedYGapCss.value,
 }))
 
 function isGridItem(node: VNode): boolean {
@@ -219,7 +231,7 @@ const renderedChildren = computed(() => computeLayouts(flattenVNodes(slots.defau
 provide(WI_GRID_KEY, {
   overflow,
   itemStyle: toRef(props, 'itemStyle'),
-  xGap: xGapCss,
+  xGap: resolvedXGapCss,
   layoutShiftDisabled: toRef(props, 'layoutShiftDisabled'),
   assignLayout: (_uid, layout) => layout,
   register: () => undefined,

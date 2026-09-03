@@ -1,6 +1,6 @@
 ---
 title: Button
-category: 01 / PRIMITIVE
+category: 01 / BASIC
 description: 按钮用于触发即时动作。
 ---
 

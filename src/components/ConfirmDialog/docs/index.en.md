@@ -1,6 +1,6 @@
 ---
 title: ConfirmDialog
-category: 04 / OVERLAY
+category: 05 / FEEDBACK
 description: Confirm / cancel dialog that reuses Dialog overlay styling.
 ---
 

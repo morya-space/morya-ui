@@ -1,6 +1,6 @@
 ---
 title: Timeline
-category: 06 / DATA
+category: 03 / DATA
 description: Vertical or horizontal timeline with icon markers and custom slots.
 ---
 
