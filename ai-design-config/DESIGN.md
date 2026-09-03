@@ -65,8 +65,12 @@ import '@well-insight/ui/styles.css'
 | 确认删除 | `WiConfirmDialog` 或 `WiConfirmPopup` |
 | 详情 / 编辑弹窗 | `WiDialog` |
 | 侧滑筛选 / 详情 | `WiDrawer` |
-| 全局提示 | `WiToast` / `WiMessage` |
+| **操作结果（默认）** | **`message` API**（单行：已保存 / 已删除） |
+| 标题 + 详情 / 异步通知 | `toast` API（`summary` + `detail`） |
+| 表单区常驻错误 | `<WiMessage>` 或字段 `errorMessage` |
 | 字段说明 | `WiTooltip` |
+
+**选型细则见 [`docs/feedback-message-vs-toast.md`](docs/feedback-message-vs-toast.md)。AI 生成代码时：无 `detail` 的操作回执一律用 `message`，不要默认 Toast。**
 
 ## 7. 设计令牌（摘要）
 
@@ -99,6 +103,7 @@ import '@well-insight/ui/styles.css'
 3. 查 `docs/components.md` 选型。
 4. 不确定 API 时查文档站或 MCP，**不要臆造 prop 名**。
 5. 完成后运行 `pnpm check:colors`（若已配置）。
+6. 操作反馈见 `docs/feedback-message-vs-toast.md`：**默认 `message`，有 detail 才用 `toast`**。
 
 ## 10. 相关资源
 

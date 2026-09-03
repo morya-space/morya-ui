@@ -10,8 +10,13 @@ A lightweight notice that slides in from the top center by default (`placement` 
 
 Vs [Toast](/components/Toast):
 
-- **Message**: short single-line feedback; no title/detail.
-- **Toast**: corner notifications with `summary` / `detail`. Both support `max` (oldest dropped).
+- **Message (default)**: short single-line feedback; no title/detail. Use for most CRUD / save / delete confirmations.
+- **Toast**: corner notifications with `summary` / `detail`; use only when supplementary detail is needed.
+- **`<WiMessage>` component**: inline banner for persistent form/auth errors.
+
+> Selection guide: [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md).
+
+**Rule of thumb**: one short sentence → `message.success('Saved')`; title + detail → `toast.success({ summary, detail })`.
 
 ## Import
 

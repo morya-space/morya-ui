@@ -826,8 +826,16 @@ export function createToolHandlers(catalog = loadCatalog()) {
         cancel: { component: 'WiButton', props: ['severity="secondary"', 'text'] },
       },
       status: { component: 'WiTag', mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' } },
+      feedback: {
+        default: 'message',
+        message: { when: ['single-line action result', 'save/delete/create confirmations'] },
+        toast: { when: ['summary + detail', 'async or background notifications'] },
+        inlineMessage: { component: 'WiMessage', when: ['persistent form/auth errors'] },
+        doc: 'docs/feedback-message-vs-toast.md',
+      },
       global: [
         'Prefer library components and --wi-* tokens; do not maintain a second color system.',
+        'Default action feedback to message; do not use toast with summary-only text.',
         'Icon-only buttons must provide aria-label or ariaLabel.',
         'Form controls must have a visible label or an equivalent accessible name.',
         'Overlays teleport to body by default; only change appendTo for a clear layout constraint.',

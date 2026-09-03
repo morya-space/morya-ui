@@ -115,6 +115,19 @@ export interface RecycleItem {
   deletedBy: string
   deletedAt: string
   expireAt: string
+  /** Store key for restore, e.g. students */
+  sourceKey?: string
+  /** JSON payload of deleted record */
+  payload?: string
+}
+
+export interface UserRecord {
+  id: string
+  name: string
+  email: string
+  role: string
+  status: 'active' | 'inactive'
+  lastLogin: string
 }
 
 export interface ErrorRecord {
@@ -205,6 +218,12 @@ export const dictionaries: DictEntry[] = [
   { id: 'd2', type: 'student_status', label: '休学', value: 'leave', sort: 2, status: 'enabled' },
   { id: 'd3', type: 'course_category', label: '理科', value: 'science', sort: 1, status: 'enabled' },
   { id: 'd4', type: 'course_category', label: '文科', value: 'arts', sort: 2, status: 'enabled' },
+]
+
+export const users: UserRecord[] = [
+  { id: 'u1', name: '张管理员', email: 'admin@educloud.cn', role: '超级管理员', status: 'active', lastLogin: '2026-09-02 08:30' },
+  { id: 'u2', name: '李老师', email: 'li@educloud.cn', role: '教务主任', status: 'active', lastLogin: '2026-09-01 17:20' },
+  { id: 'u3', name: '王班主任', email: 'wang@educloud.cn', role: '班主任', status: 'inactive', lastLogin: '2026-08-28 09:10' },
 ]
 
 export const recycleBin: RecycleItem[] = [

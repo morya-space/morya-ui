@@ -92,11 +92,13 @@ export const pagePatterns: PagePattern[] = [
       '加载中禁用重复提交并显示 loading 状态',
       '空数据使用 WiTable #empty 插槽或 DataView 空态，不渲染空白表格',
       '行级危险操作必须有确认反馈',
+      'CRUD 成功/删除等单行回执使用 message API，不要默认 Toast',
     ],
     avoid: [
       '不要用 WiDialog 承载完整列表页',
       '不要用 WiButton 代替业务状态标签',
       '不要为每个筛选字段手写一套不一致的 label 和间距',
+      '不要用 toast.add({ summary }) 代替 message.success 表达单行操作结果',
     ],
   },
   {
@@ -220,7 +222,7 @@ export const pagePatterns: PagePattern[] = [
     structure: ['Page', '├── PageHeader', '├── Tabs (optional)', '│   └── Settings section', '│       └── Card + Form', '└── Save actions'],
     layout: { page: '设置内容使用稳定的 max-width，避免控件铺满视口', navigation: '设置域较多时使用 Tabs 或 Sidebar，较少时使用连续分组', form: 'label-position=top，相关字段使用 Card 或 Fieldset 分组', actions: '保存操作固定在表单末尾或明确的 sticky action bar' },
     styleRules: ['开关用于二元启用状态，不用 Select 模拟开关', '保存使用 primary，恢复默认值使用 secondary 或 text', '危险配置需要明确说明影响范围并使用 danger 语义', '使用 WiConfigProvider 统一 size、density 和 locale'],
-    interactionRules: ['显示未保存修改状态', '保存成功提供 Message 或 Toast 反馈', '保存失败保留输入并显示字段或页面级错误', '切换 Tab 不应意外丢失未保存输入'],
+    interactionRules: ['显示未保存修改状态', '保存成功使用 message.success 单行反馈；仅有 summary+detail 时用 toast', '保存失败保留输入并显示字段或页面级错误', '切换 Tab 不应意外丢失未保存输入'],
     avoid: ['不要把所有设置塞进一个超长表单', '不要用 placeholder 代替配置项 label', '不要隐藏影响范围较大的配置说明'],
   },
   {
@@ -353,8 +355,27 @@ export const designRules = {
     component: 'WiTag',
     mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' },
   },
+  feedback: {
+    default: 'message',
+    message: {
+      api: 'message.success | info | warn | error',
+      when: ['单行操作回执（已保存/已删除/已创建）', '轻量警告或错误', '复制成功等一句话反馈'],
+      avoid: ['不要写 summary/detail 结构'],
+    },
+    toast: {
+      api: 'toast.success | info | warn | error({ summary, detail? })',
+      when: ['同时需要标题与补充说明', '后台任务/批量结果含统计', '异步通知感、角落堆叠'],
+      avoid: ['仅有单行文案时不要使用 Toast'],
+    },
+    inlineMessage: {
+      component: 'WiMessage',
+      when: ['登录/表单区常驻错误', '页面级错误需与表单同区展示'],
+    },
+    doc: 'docs/feedback-message-vs-toast.md',
+  },
   global: [
     '优先使用组件库组件和 --wi-* Token，不重复维护第二套色板',
+    '操作反馈默认 message；无 detail 禁止用 toast.add({ summary only })',
     '图标按钮必须提供 aria-label 或 ariaLabel',
     '表单字段必须有可见 label 或等价的可访问名称',
     '浮层默认 Teleport 到 body；只有有明确布局约束时才改 appendTo',

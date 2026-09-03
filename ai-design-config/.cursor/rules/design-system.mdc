@@ -12,5 +12,6 @@ alwaysApply: true
 5. **表单选项** 用 `WiSelect` / `WiTreeSelect`；**动作菜单** 用 `WiDropdown`。
 6. 不确定 API 时查文档站或 MCP，**禁止臆造 prop**。
 7. 根节点用 `WiConfigProvider`；后台布局用 `WiLayout` 系列。
+8. **操作反馈默认 `message` API**；仅 `summary + detail` 或异步通知用 `toast`；表单常驻错误用 `<WiMessage>`。见 `docs/feedback-message-vs-toast.md`。
 
 Token 参考：`design-tokens/tokens.json`

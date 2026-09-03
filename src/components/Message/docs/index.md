@@ -10,8 +10,13 @@ description: 顶部居中浮层提示，支持 API 调用。
 
 与 [Toast](/components/Toast) 的分工：
 
-- **Message**：轻量单行反馈，默认顶部居中，无标题/详情。
-- **Toast**：四角通知，带 `summary` / `detail`。`max` 语义与 Message 相同（超出丢掉最旧一条）。
+- **Message（默认）**：轻量单行反馈，默认顶部居中，无标题/详情。**大多数 CRUD / 保存 / 删除回执应使用此项。**
+- **Toast**：四角通知，带 `summary` / `detail`；仅在有补充说明或异步通知感时使用。
+- **`<WiMessage>` 组件**：页面内嵌条，用于表单区常驻错误（见下方「内嵌 Message」）。
+
+> AI / 业务代码选型细则见 [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md)。
+
+**快速判断**：只有一句话 → `message.success('已保存')`；有标题 + 详情 → `toast.success({ summary, detail })`。
 
 ## 引入
 

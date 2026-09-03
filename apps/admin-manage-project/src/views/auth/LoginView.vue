@@ -11,14 +11,14 @@ import {
   WiMessage,
   WiSpace,
   WiTabs,
-  useToast,
 } from '@well-insight/ui'
+import { useActionFeedback } from '@/composables/useActionFeedback'
 import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
 const route = useRoute()
 const { login, verifyMfa, mfaVerified, user } = useAuth()
-const toast = useToast()
+const feedback = useActionFeedback()
 
 const tab = ref('password')
 const account = ref('admin')
@@ -44,15 +44,15 @@ async function onLogin() {
   error.value = ''
   try {
     await login({ account: account.value, password: password.value })
-    toast.add({ severity: 'success', summary: '登录成功', detail: '欢迎回来', life: 3000 })
+    feedback.notify('登录成功', '欢迎回来')
     router.push('/dashboard')
   } catch (err) {
-    const message = err instanceof Error ? err.message : '登录失败'
-    if (message === 'MFA_REQUIRED') {
+    const msg = err instanceof Error ? err.message : '登录失败'
+    if (msg === 'MFA_REQUIRED') {
       router.replace('/login?mfa=1')
       error.value = '需要 MFA 验证，演示验证码 123456'
     } else {
-      error.value = message
+      error.value = msg
     }
   } finally {
     loading.value = false
@@ -69,7 +69,7 @@ async function onVerifyMfa() {
   error.value = ''
   try {
     await verifyMfa(otp.value)
-    toast.add({ severity: 'success', summary: '验证成功', life: 2500 })
+    feedback.ok('验证成功')
     router.push('/dashboard')
   } catch (err) {
     error.value = err instanceof Error ? err.message : '验证失败'

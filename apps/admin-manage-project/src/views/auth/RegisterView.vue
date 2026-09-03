@@ -7,13 +7,13 @@ import {
   WiForm,
   WiFormItem,
   WiInput,
-  useToast,
 } from '@well-insight/ui'
+import { useActionFeedback } from '@/composables/useActionFeedback'
 import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
 const { register } = useAuth()
-const toast = useToast()
+const feedback = useActionFeedback()
 const loading = ref(false)
 
 const model = reactive({
@@ -30,21 +30,20 @@ async function onSubmitForm(payload: { valid: boolean }) {
 
 async function onSubmit() {
   if (model.password !== model.confirm) {
-    toast.add({ severity: 'warn', summary: '两次密码不一致', life: 3000 })
+    feedback.warn('两次密码不一致')
     return
   }
   loading.value = true
   try {
     await register({ name: model.name, email: model.email, password: model.password })
-    toast.add({ severity: 'success', summary: '注册成功', life: 2500 })
+    feedback.ok('注册成功')
     router.push('/dashboard')
   } catch (err) {
-    toast.add({
-      severity: 'error',
-      summary: '注册失败',
-      detail: err instanceof Error ? err.message : undefined,
-      life: 3500,
-    })
+    feedback.notify(
+      '注册失败',
+      err instanceof Error ? err.message : undefined,
+      'error',
+    )
   } finally {
     loading.value = false
   }

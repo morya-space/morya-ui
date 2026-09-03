@@ -1,22 +1,26 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import ListPageTemplate from '@/components/ListPageTemplate.vue'
-import { auditLogs } from '@/mock'
+import { useLocale } from '@/composables/useLocale'
+import { stores } from '@/mock/store'
 
-const columns = [
-  { key: 'operator', label: '操作人' },
-  { key: 'action', label: '动作', width: 88 },
-  { key: 'target', label: '对象' },
+const { t } = useLocale()
+
+const columns = computed(() => [
+  { key: 'operator', label: t('操作人', 'Operator') },
+  { key: 'action', label: t('动作', 'Action'), width: 88 },
+  { key: 'target', label: t('对象', 'Target') },
   { key: 'ip', label: 'IP', width: 120 },
-  { key: 'time', label: '时间', width: 140 },
-]
+  { key: 'time', label: t('时间', 'Time'), width: 140 },
+])
 </script>
 
 <template>
   <ListPageTemplate
-    title="审计日志"
-    table-label="审计日志列表"
+    :title="t('操作日志', 'Audit logs')"
+    :table-label="t('审计日志列表', 'Audit log list')"
     :columns="columns"
-    :rows="auditLogs"
+    :rows="stores.auditLogs.items.value"
     :paginator="false"
     :show-create="false"
   />
