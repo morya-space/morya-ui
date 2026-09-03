@@ -78,12 +78,19 @@ const value = ref(1.25)
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `id` | `string` | — | — |
+| `readonly` | `boolean` | — | — |
 
 ## Events
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `number \| null` | 值变化。 |
+| `blur` | — | — |
+| `change` | — | — |
+| `focus` | — | — |
 
 ## Slots
 

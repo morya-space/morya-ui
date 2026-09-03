@@ -111,6 +111,7 @@ const tabs = [
 | `modelValue` | `string \| string[]` | — | 当前展开的 tab key；多开时为数组。 |
 | `multiple` | `boolean` | `false` | 允许多个面板同时展开。 |
 | `tabs` | `{ value: string; header: string; disabled?: boolean }[]` | — | 面板列表。 |
+| `defaultValue` | `string \| string[]` | — | — |
 
 ## Events
 

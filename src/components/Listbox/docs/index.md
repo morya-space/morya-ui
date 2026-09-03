@@ -44,6 +44,9 @@ const options = [
 | `filter` | `boolean` | `false` | 显示筛选框。 |
 | `listStyle` | `string` | — | 列表内联样式。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `emptyMessage` | `string` | — | — |
+| `invalid` | `boolean` | — | — |
+| `size` | `WiSizeInput` | — | — |
 
 ## Events
 

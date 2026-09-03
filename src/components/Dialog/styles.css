@@ -106,7 +106,7 @@
 }
 
 .wi-dialog__header {
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     flex: 0 0 auto;
     gap: var(--wi-space-3);
 }
@@ -187,7 +187,7 @@
 }
 
 .wi-dialog__footer {
-    border-top: 1px solid var(--wi-color-border);
+    border-top: var(--wi-border-width) solid var(--wi-color-border);
     flex: 0 0 auto;
 }
 

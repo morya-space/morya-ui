@@ -37,12 +37,14 @@ const items = ref(['设计', '开发', '测试', '发布'])
 | `dataKey` | `string` | — | 对象项的唯一键。 |
 | `listStyle` | `string \| object` | — | 列表样式。 |
 | `dragdrop` | `boolean` | `true` | 是否启用拖拽。 |
+| `emptyMessage` | `string` | — | — |
 
 ## Slots
 
 | 插槽 | 说明 |
 | --- | --- |
 | `item` | `{ item, index }` 自定义项。 |
+| `empty` | 自定义 `empty` 内容。 |
 
 ## Events
 

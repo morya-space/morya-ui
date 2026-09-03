@@ -131,6 +131,7 @@ function onClose(message: ToastMessage) {
 | `max` | `number` | — | 同时可见条数；超出丢掉最旧一条（仅服务队列） |
 | `teleport` | `boolean` | `true` | 浮层 Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
+| `auto` | `boolean` | — | — |
 
 ### ToastMessage
 

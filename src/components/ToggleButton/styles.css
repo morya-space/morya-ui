@@ -9,7 +9,7 @@
     );
     align-items: center;
     background: color-mix(in srgb, var(--wi-color-text-muted) 14%, var(--wi-color-surface));
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     cursor: pointer;

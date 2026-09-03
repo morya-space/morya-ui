@@ -69,6 +69,12 @@ const value = ref(2.5)
 | `allowHalf` | `boolean` | `false` | 允许半星。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `ariaLabel` | `string` | — | — |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
+| `size` | `WiSizeInput` | — | — |
 
 ## Events
 

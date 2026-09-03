@@ -16,7 +16,7 @@
 
 .wi-picklist__header {
     background: color-mix(in srgb, var(--wi-color-text) 4%, var(--wi-color-surface));
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-bottom: 0;
     border-radius: var(--wi-radius-md) var(--wi-radius-md) 0 0;
     font-size: var(--wi-font-size-sm);

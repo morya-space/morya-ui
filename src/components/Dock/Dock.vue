@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DockItem, DockProps } from './types'
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 import { resolveMenuIcon } from '../../shared/menu'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<DockProps>(), {
   position: 'bottom',
 })
 
+const slots = useSlots()
 const rootClass = computed(() => ['wi-dock', `wi-dock--${props.position}`])
 
 function activate(item: DockItem) {
@@ -24,7 +25,9 @@ function iconOf(item: DockItem) {
 <template>
   <nav :class="rootClass" aria-label="Dock">
     <ul class="wi-dock__list">
-      <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wi-dock__item">
+      <slot v-if="slots.default" />
+      <template v-else>
+        <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wi-dock__item">
         <button
           type="button"
           class="wi-dock__button"
@@ -39,6 +42,7 @@ function iconOf(item: DockItem) {
           </span>
         </button>
       </li>
+      </template>
     </ul>
   </nav>
 </template>

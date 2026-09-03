@@ -53,6 +53,9 @@ const visible = ref(false)
 | `beforeReject` | `() => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭、不触发 `reject`。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `blockScroll` | `boolean` | — | — |
+| `closeOnEsc` | `boolean` | — | — |
+| `closeOnOutsideClick` | `boolean` | — | — |
 
 ## Events
 
@@ -67,3 +70,5 @@ const visible = ref(false)
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 对话框正文。 |
+| `footer` | 自定义 `footer` 内容。 |
+| `header` | 自定义 `header` 内容。 |

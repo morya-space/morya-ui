@@ -53,40 +53,42 @@ function pickSwatch(color: string) {
   <div class="wi-inputcolor-field">
     <label v-if="label" class="wi-inputcolor-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
-      <div class="wi-inputcolor__row">
-        <input
-          class="wi-inputcolor__swatch"
-          type="color"
-          :value="hexValue"
-          :disabled="disabled"
-          :aria-label="locale.selectColor"
-          @input="onColorInput"
-        >
-        <input
-          :id="fieldId"
-          class="wi-inputcolor__text"
-          type="text"
-          :value="modelValue"
-          :disabled="disabled"
-          placeholder="#000000"
-          spellcheck="false"
-          :aria-invalid="isInvalid || undefined"
-          :aria-label="label ?? locale.colorHexValue"
-          @input="onTextInput"
-        >
-        <div v-if="swatches?.length" class="wi-inputcolor__swatches">
-          <button
-            v-for="color in swatches"
-            :key="color"
-            type="button"
-            class="wi-inputcolor__preset"
-            :style="{ background: color }"
+      <slot name="trigger">
+        <div class="wi-inputcolor__row">
+          <input
+            class="wi-inputcolor__swatch"
+            type="color"
+            :value="hexValue"
             :disabled="disabled"
-            :aria-label="color"
-            @click="pickSwatch(color)"
-          />
+            :aria-label="locale.selectColor"
+            @input="onColorInput"
+          >
+          <input
+            :id="fieldId"
+            class="wi-inputcolor__text"
+            type="text"
+            :value="modelValue"
+            :disabled="disabled"
+            placeholder="#000000"
+            spellcheck="false"
+            :aria-invalid="isInvalid || undefined"
+            :aria-label="label ?? locale.colorHexValue"
+            @input="onTextInput"
+          >
+          <div v-if="swatches?.length" class="wi-inputcolor__swatches">
+            <button
+              v-for="color in swatches"
+              :key="color"
+              type="button"
+              class="wi-inputcolor__preset"
+              :style="{ background: color }"
+              :disabled="disabled"
+              :aria-label="color"
+              @click="pickSwatch(color)"
+            />
+          </div>
         </div>
-      </div>
+      </slot>
     </div>
   </div>
 </template>

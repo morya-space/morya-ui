@@ -17,7 +17,7 @@ const statusTone = computed(() => {
   if (!props.status) return undefined
   // `error` → `danger` stays local: shared normalizeSeverity must pass `error` through
   // unchanged for Toast/Message/Timeline (their styles and the Message icon map key on
-  // `error`) until those consumers migrate (fix-plan T3.7).
+  // `error`) until Toast/Message/Timeline migrate off the `error` alias.
   if (props.status === 'error') return 'danger'
   return normalizeSeverity(props.status)
 })

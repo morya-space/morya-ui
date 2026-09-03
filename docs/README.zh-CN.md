@@ -8,7 +8,6 @@
 | --- | --- |
 | [DEVELOPMENT.zh-CN.md](./DEVELOPMENT.zh-CN.md) | 仓库结构与常用命令 |
 | [ui-development.zh-CN.md](./ui-development.zh-CN.md) | 构建与发版 |
-| [OPTIMIZATION.md](./OPTIMIZATION.md) | 组件与文档站优化路线图 |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | 提交规范 |
 
 对外：

@@ -3,7 +3,7 @@
     --wi-listbox-min-width: 12rem;
     --wi-listbox-list-max-height: 14rem;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: inline-flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
 .wi-listbox__filter {
     background: var(--wi-color-surface);
     border: 0;
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     color: var(--wi-color-text);
     font: inherit;
     padding: var(--wi-space-2) var(--wi-space-3);
@@ -64,6 +64,11 @@
         var(--wi-color-primary) 8%,
         var(--wi-color-surface)
     );
+}
+
+.wi-listbox__option:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }
 
 .wi-listbox__option:disabled {

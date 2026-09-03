@@ -129,12 +129,19 @@ function onSliderKeydown(event: KeyboardEvent) {
       aria-hidden="true"
       @click="onStarClick(star, $event)"
     >
-      <span class="wi-rating__star-off" aria-hidden="true">
-        <WiIcon name="star" size="lg" />
-      </span>
-      <span class="wi-rating__star-on" aria-hidden="true">
-        <WiIcon name="star" size="lg" />
-      </span>
+      <slot
+        name="icon"
+        :star="star"
+        :filled="starFill(star) === 1"
+        :half="starFill(star) === 0.5"
+      >
+        <span class="wi-rating__star-off" aria-hidden="true">
+          <WiIcon name="star" size="lg" />
+        </span>
+        <span class="wi-rating__star-on" aria-hidden="true">
+          <WiIcon name="star" size="lg" />
+        </span>
+      </slot>
     </button>
     </div>
     <span

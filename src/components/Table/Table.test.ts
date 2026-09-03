@@ -314,4 +314,24 @@ describe('WiTable', () => {
     expect(wrapper.text()).toContain('Ada')
     expect(wrapper.emitted('filter')).toBeTruthy()
   })
+
+  it('emits update:filters when setFilters is called', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns,
+        rows: [
+          { id: 1, name: 'Ada', status: 'Draft' },
+          { id: 2, name: 'Lin', status: 'Live' },
+        ],
+        paginator: false,
+      },
+    })
+    ;(wrapper.vm as { setFilters: (value: Record<string, unknown> | null) => void }).setFilters({
+      status: 'Live',
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted('update:filters')?.at(-1)).toEqual([{ status: 'Live' }])
+    expect(wrapper.emitted('filter')?.at(-1)).toEqual([{ status: 'Live' }])
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1)
+  })
 })

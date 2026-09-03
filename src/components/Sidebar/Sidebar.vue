@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { SidebarItem, SidebarProps } from './types'
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 import { useWiLocale } from '../../locale'
 import { resolveMenuIcon } from '../../shared/menu'
 import WiIcon from '../Icon/Icon.vue'
@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<SidebarProps>(), {
 })
 const locale = useWiLocale()
 
+const slots = useSlots()
 const rootClass = computed(() => [
   'wi-sidebar',
   { 'wi-sidebar--collapsed': props.collapsed },
@@ -28,7 +29,8 @@ function iconOf(item: SidebarItem) {
 
 <template>
   <nav :class="rootClass" :aria-label="locale.sidebar">
-    <ul class="wi-sidebar__list">
+    <slot v-if="slots.default" />
+    <ul v-else class="wi-sidebar__list">
       <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wi-sidebar__item">
         <button
           type="button"

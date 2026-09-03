@@ -36,6 +36,12 @@ import { WiButton, WiToolbar } from '@well-insight/ui'
 </template>
 ```
 
+## Props
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `ariaLabel` | `string` | — | — |
+
 ## Slots
 
 | 插槽名 | 说明 |

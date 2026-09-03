@@ -48,6 +48,8 @@ function toggle() {
     <span v-if="resolvedIcon" class="wi-togglebutton__icon" aria-hidden="true">
       <WiIcon :name="resolvedIcon" size="sm" />
     </span>
-    <span class="wi-togglebutton__label">{{ label }}</span>
+    <slot>
+      <span class="wi-togglebutton__label">{{ label }}</span>
+    </slot>
   </button>
 </template>

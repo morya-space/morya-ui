@@ -103,7 +103,7 @@
 .wi-select__menu {
     --wi-select-menu-max-height: min(18rem, 45vh);
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     display: grid;
@@ -121,7 +121,7 @@
 .wi-select__filter {
     background: var(--wi-color-surface);
     border: 0;
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-sm);
     color: var(--wi-color-text);
     font: inherit;

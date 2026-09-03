@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { TreeTableEmits, TreeTableNode, TreeTableProps } from './types'
-import { computed, ref } from 'vue'
+import { computed, ref, useSlots } from 'vue'
 import { useWiLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
 
 const props = defineProps<TreeTableProps>()
 
 const emit = defineEmits<TreeTableEmits>()
+const slots = useSlots()
 
 const locale = useWiLocale()
 const internalExpanded = ref<Record<string, boolean>>({})
@@ -14,6 +15,9 @@ const expanded = computed(() => props.expandedKeys ?? internalExpanded.value)
 
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyMessage,
+)
+const renderExpansion = computed(() =>
+  slots.expansion ? (row: TreeTableNode) => slots.expansion?.({ row }) : undefined,
 )
 
 function isExpanded(key: string) {
@@ -48,6 +52,7 @@ function toggle(node: TreeTableNode) {
           :columns="columns"
           :depth="0"
           :is-expanded="isExpanded"
+          :render-expansion="renderExpansion"
           @toggle="toggle"
         />
       </tbody>

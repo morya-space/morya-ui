@@ -9,7 +9,7 @@
 
 .wi-pagination__button {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     cursor: pointer;
@@ -72,7 +72,7 @@
 .wi-pagination__select,
 .wi-pagination__input {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     font: inherit;

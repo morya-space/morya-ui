@@ -35,9 +35,13 @@ function handleRemove(event: MouseEvent) {
 
 <template>
   <span :class="chipClass" :aria-disabled="disabled || undefined">
-    <img v-if="image" class="wi-chip__image" :src="image" alt="">
-    <WiIcon v-else-if="icon" class="wi-chip__icon" :name="icon" :size="iconSize" />
-    <span v-if="label" class="wi-chip__label">{{ label }}</span>
+    <slot name="icon">
+      <img v-if="image" class="wi-chip__image" :src="image" alt="">
+      <WiIcon v-else-if="icon" class="wi-chip__icon" :name="icon" :size="iconSize" />
+    </slot>
+    <slot>
+      <span v-if="label" class="wi-chip__label">{{ label }}</span>
+    </slot>
     <button
       v-if="removable"
       type="button"

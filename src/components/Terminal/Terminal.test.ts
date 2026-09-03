@@ -40,6 +40,16 @@ describe('wiTerminal', () => {
     expect(wrapper.emitted('update:lines')?.at(-1)).toEqual([['ls']])
   })
 
+  it('emits update:responses via appendResponse', async () => {
+    const wrapper = mount(WiTerminal)
+    await wrapper.find('.wi-terminal__input').setValue('help')
+    await wrapper.find('.wi-terminal__form').trigger('submit')
+    ;(wrapper.vm as { appendResponse: (text: string) => void }).appendResponse('Available commands')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted('update:responses')?.at(-1)).toEqual([['Available commands']])
+    expect(wrapper.find('.wi-terminal__response').text()).toBe('Available commands')
+  })
+
   it('navigates command history with arrow keys', async () => {
     const wrapper = mount(WiTerminal, {
       props: { lines: ['first', 'second'] },

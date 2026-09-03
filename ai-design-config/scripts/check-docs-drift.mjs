@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 文档-实现对账脚本（修复手册 T0.6，报告模式）。
+ * 文档-实现对账脚本。
  *
  * 对每个 src/components/<Name>/ 比对三方数据：
  *   文档  docs/index.md —— Props/Events/Slots 表格 + 示例代码中的 #slot / v-slot 写法
@@ -17,9 +17,10 @@
  * 用法：
  *   node ai-design-config/scripts/check-docs-drift.mjs                     打印控制台报告
  *   node ai-design-config/scripts/check-docs-drift.mjs --component Select  只查一个组件
- *   node ai-design-config/scripts/check-docs-drift.mjs --json              输出 JSON
- *   node ai-design-config/scripts/check-docs-drift.mjs --md [path]         生成 Markdown 报告
- *       （path 缺省为 audits/docs-drift-report.md）
+ *   node ai-design-config/scripts/check-docs-drift.mjs --json              输出 JSON（请用脚本内 writeFileSync，勿用 shell 重定向）
+ *   node ai-design-config/scripts/check-docs-drift.mjs --md [path]         生成 Markdown 报告（可选 path，默认不写文件）
+ *   node ai-design-config/scripts/check-docs-drift.mjs --patch             按实现补齐 docs/index.md（impl-only）
+ *   node ai-design-config/scripts/check-docs-drift.mjs --patch --dry-run   预览补丁，不写文件
  *
  * 报告模式：无论是否存在漂移，exit code 恒为 0。
  */
@@ -29,14 +30,15 @@ import { fileURLToPath } from 'node:url'
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 const COMPONENTS_DIR = path.join(REPO_ROOT, 'src', 'components')
-const DEFAULT_MD_PATH = path.join(REPO_ROOT, 'audits', 'docs-drift-report.md')
 
 // ---------- CLI ----------
-const opts = { component: null, json: false, md: null }
+const opts = { component: null, json: false, md: null, patch: false, dryRun: false }
 const argv = process.argv.slice(2)
 for (let i = 0; i < argv.length; i += 1) {
   const arg = argv[i]
-  if (arg === '--json') opts.json = true
+  if (arg === '--patch') opts.patch = true
+  else if (arg === '--dry-run') opts.dryRun = true
+  else if (arg === '--json') opts.json = true
   else if (arg === '--component' || arg === '-c') {
     i += 1
     opts.component = argv[i]
@@ -47,7 +49,9 @@ for (let i = 0; i < argv.length; i += 1) {
       i += 1
       opts.md = next
     } else {
-      opts.md = DEFAULT_MD_PATH
+      console.error('check-docs-drift: --md requires an output path, e.g. --md docs/drift-report.md')
+      process.exitCode = 1
+      process.exit(1)
     }
   } else if (arg.startsWith('--md=')) opts.md = arg.slice('--md='.length)
 }
@@ -327,6 +331,10 @@ function isSeparatorRow(line) {
 
 function splitRow(line) {
   return line.split(/(?<!\\)\|/).slice(1, -1).map((c) => c.trim())
+}
+
+function tableColumnCount(headerLine) {
+  return splitRow(headerLine).length
 }
 
 /**
@@ -744,8 +752,11 @@ function analyzeComponent(dir) {
   const searchText = collectFiles(dir, (f) => (f.endsWith('.vue') || f.endsWith('.ts')) && !f.endsWith('types.ts'))
     .map((f) => readFileSync(f, 'utf8'))
     .join('\n')
+  const usesFieldFeedback = /useFieldFeedback\s*\(\s*props\s*\)/.test(searchText)
+  const fieldFeedbackProps = new Set(['invalid', 'errorMessage', 'helpText'])
   for (const [n, meta] of implProps) {
     if (meta.internal || !meta.loc.startsWith('types.ts')) continue
+    if (usesFieldFeedback && fieldFeedbackProps.has(n)) continue
     if (!new RegExp(`\\b${escapeRegExp(n)}\\b`).test(searchText)) {
       add('declared-unused', 'prop', n,
         docPropsNorm.has(normKey(n)) ? `docs/index.md:${docPropsNorm.get(normKey(n)).line}` : null,
@@ -763,7 +774,194 @@ function analyzeComponent(dir) {
     }
   }
 
+  result.implMeta = {
+    props: [...implProps.entries()].map(([name, meta]) => ({ name, type: meta.type ?? '', loc: meta.loc })),
+    events: [...implEvents.entries()].map(([name, loc]) => ({ name, loc })),
+    slots: [...implSlots.entries()].map(([name, loc]) => ({ name, loc })),
+    sectionsFound: doc.sectionsFound,
+  }
   return result
+}
+
+// ---------- 文档补丁（impl-only） ----------
+function escDocCell(text) {
+  return String(text ?? '').replace(/\|/g, '\\|').trim() || '—'
+}
+
+function formatDocType(type) {
+  if (!type) return '—'
+  const withoutDefault = type.replace(/=\s*[^;]+;?\s*$/, '').trim()
+  const compact = withoutDefault.replace(/\s+/g, ' ').trim()
+  if (compact.length > 96) return `${compact.slice(0, 93)}...`
+  return compact
+}
+
+function formatDocDefault(type) {
+  if (!type) return '—'
+  const m = type.match(/=\s*([^;]+)/)
+  return m ? escDocCell(m[1]) : '—'
+}
+
+function slotDocDescription(name) {
+  if (name === 'default') return '默认内容。'
+  if (name.endsWith('*')) return `动态插槽（前缀 \`${name.slice(0, -1)}\`）。`
+  return `自定义 \`${name}\` 内容。`
+}
+
+function sectionHeadingRe(sectionKind) {
+  if (sectionKind === 'props') {
+    return /^#{2,4}\s+(?!.*\b(events|emits|slots)\b).*props/i
+  }
+  if (sectionKind === 'events') {
+    return /^#{2,4}\s+(?!.*\bslots\b).*\b(events|emits)\b/i
+  }
+  return /^#{2,4}\s+(?!.*\b(events|emits)\b).*\bslots\b/i
+}
+
+function sectionInsertBeforeRe(sectionKind) {
+  if (sectionKind === 'props') return /^#{2,4}\s+.*(events|emits|slots)/i
+  if (sectionKind === 'events') return /^#{2,4}\s+.*slots/i
+  return null
+}
+
+function sectionBlock(sectionKind, rows) {
+  const headings = { props: '## Props', events: '## Events', slots: '## Slots' }
+  const headers = {
+    props: ['| 参数 | 类型 | 默认值 | 说明 |', '| --- | --- | --- | --- |'],
+    events: ['| 事件名 | 参数 | 说明 |', '| --- | --- | --- |'],
+    slots: ['| 插槽名 | 说明 |', '| --- | --- |'],
+  }
+  return ['', headings[sectionKind], '', ...headers[sectionKind], ...rows, '']
+}
+
+function isTableRow(line) {
+  return /^\s*\|/.test(line)
+}
+
+function isTableSeparator(line) {
+  const cells = line.split(/(?<!\\)\|/).map((c) => c.trim()).filter(Boolean)
+  return cells.length > 0 && cells.every((c) => /^:?-{2,}:?$/.test(c))
+}
+
+function findSectionStart(lines, sectionKind) {
+  return lines.findIndex((line) => sectionHeadingRe(sectionKind).test(line))
+}
+
+function findSectionInsertAt(lines, sectionKind) {
+  const beforeRe = sectionInsertBeforeRe(sectionKind)
+  if (beforeRe) {
+    const idx = lines.findIndex((line) => beforeRe.test(line))
+    if (idx !== -1) return idx
+  }
+  return lines.length
+}
+
+function appendRowsToSection(lines, sectionStart, sectionKind, rows) {
+  let i = sectionStart + 1
+  while (i < lines.length && !/^#{2,4}\s+/.test(lines[i])) {
+    const trimmed = lines[i].trim()
+    if (/^无/.test(trimmed) || /^none\b/i.test(trimmed)) {
+      lines.splice(i, 1, ...sectionBlock(sectionKind, rows).slice(3))
+      return rows.length
+    }
+    i += 1
+  }
+
+  let tableHeader = -1
+  for (let j = sectionStart + 1; j < lines.length; j += 1) {
+    if (/^#{2,4}\s+/.test(lines[j])) break
+    if (isTableRow(lines[j]) && /参数|事件|插槽/.test(lines[j])) {
+      tableHeader = j
+      break
+    }
+  }
+
+  if (tableHeader === -1) {
+    lines.splice(sectionStart + 1, 0, '', ...sectionBlock(sectionKind, rows).slice(3))
+    return rows.length
+  }
+
+  const cols = tableColumnCount(lines[tableHeader])
+  const normalizedRows =
+    sectionKind === 'events' && cols === 2
+      ? rows.map((row) => {
+          const name = row.match(/`([^`]+)`/)?.[1]
+          return name ? `| \`${name}\` | — |` : row
+        })
+      : rows
+
+  let insertAt = tableHeader + 1
+  if (isTableSeparator(lines[insertAt])) insertAt += 1
+  while (insertAt < lines.length && isTableRow(lines[insertAt]) && !isTableSeparator(lines[insertAt])) {
+    insertAt += 1
+  }
+  lines.splice(insertAt, 0, ...normalizedRows)
+  return normalizedRows.length
+}
+
+function patchDocsContent(content, result) {
+  const implOnly = result.items.filter((item) => item.kind === 'impl-only')
+  if (!implOnly.length) return { content, changed: false, added: 0 }
+
+  const metaByName = {
+    prop: new Map(result.implMeta.props.map((entry) => [entry.name, entry])),
+    event: new Map(result.implMeta.events.map((entry) => [entry.name, entry])),
+    slot: new Map(result.implMeta.slots.map((entry) => [entry.name, entry])),
+  }
+
+  const propRows = [...new Set(implOnly.filter((item) => item.category === 'prop').map((item) => item.name))]
+    .sort()
+    .map((name) => {
+      const meta = metaByName.prop.get(name)
+      return `| \`${name}\` | \`${escDocCell(formatDocType(meta?.type))}\` | ${formatDocDefault(meta?.type)} | — |`
+    })
+  const eventRows = [...new Set(implOnly.filter((item) => item.category === 'event').map((item) => item.name))]
+    .sort()
+    .map((name) => `| \`${name}\` | — | — |`)
+  const slotRows = [...new Set(implOnly.filter((item) => item.category === 'slot').map((item) => item.name))]
+    .sort()
+    .map((name) => `| \`${name}\` | ${slotDocDescription(name)} |`)
+
+  const lines = content.split(/\r?\n/)
+  let added = 0
+
+  for (const [sectionKind, rows] of [
+    ['props', propRows],
+    ['events', eventRows],
+    ['slots', slotRows],
+  ]) {
+    if (!rows.length) continue
+    const sectionStart = findSectionStart(lines, sectionKind)
+    if (sectionStart === -1) {
+      const insertAt = findSectionInsertAt(lines, sectionKind)
+      lines.splice(insertAt, 0, ...sectionBlock(sectionKind, rows))
+      added += rows.length
+      continue
+    }
+    added += appendRowsToSection(lines, sectionStart, sectionKind, rows)
+  }
+
+  const next = lines.join('\n').replace(/\n{3,}/g, '\n\n')
+  return { content: next.endsWith('\n') ? next : `${next}\n`, changed: added > 0, added }
+}
+
+function applyDocsPatches(results) {
+  let files = 0
+  let rows = 0
+  for (const result of results) {
+    const implOnly = result.items.filter((item) => item.kind === 'impl-only')
+    if (!implOnly.length) continue
+    const docsPath = path.join(COMPONENTS_DIR, result.component, 'docs', 'index.md')
+    if (!existsSync(docsPath)) continue
+    const original = readFileSync(docsPath, 'utf8')
+    const patched = patchDocsContent(original, result)
+    if (!patched.changed) continue
+    if (!opts.dryRun) writeFileSync(docsPath, patched.content, 'utf8')
+    files += 1
+    rows += patched.added
+    console.log(`${opts.dryRun ? '[dry-run] ' : ''}${result.component}: +${patched.added} row(s)`)
+  }
+  console.log(`\n${opts.dryRun ? 'Would patch' : 'Patched'} ${files} docs/index.md file(s), ${rows} table row(s) added.`)
 }
 
 // ---------- 输出 ----------
@@ -895,7 +1093,9 @@ function buildMarkdown(results) {
 
 const results = run()
 
-if (opts.json) {
+if (opts.patch) {
+  applyDocsPatches(results)
+} else if (opts.json) {
   console.log(JSON.stringify(results, null, 2))
 } else {
   printConsole(results)

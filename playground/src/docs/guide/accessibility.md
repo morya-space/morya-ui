@@ -96,8 +96,7 @@ setMotion('reduced') // 或 'none'
 - **FloatLabel**：`label[for]` 关联首个输入控件
 - **Popover**：触发器 `aria-expanded` / `aria-haspopup` / `aria-controls`
 - **Slider**：单 thumb 默认 `aria-label`（可通过 prop 覆盖）
-
-仍在持续改进的区域见 [优化路线图](https://github.com/well-insight/well-insight-ui/blob/main/docs/OPTIMIZATION.md) 阶段四、五。
+- **Select / CascadeSelect / TreeSelect / DatePicker**：`combobox` 语义、键盘导航与字段反馈（`invalid` / `error-message` / `help-text`）
 
 ## 测试建议
 

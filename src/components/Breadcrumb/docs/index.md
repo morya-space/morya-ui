@@ -64,6 +64,7 @@ const items = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `separator` | 自定义分隔符。 |
+| `item` | 自定义 `item` 内容。 |
 
 ## Events
 

@@ -33,9 +33,9 @@
     color: var(--wi-color-text-muted);
     cursor: pointer;
     font: inherit;
-    font-size: 1.25rem;
+    font-size: var(--wi-rating-star-size-medium);
     line-height: 1;
-    padding: 0.15rem;
+    padding: var(--wi-rating-star-padding);
 }
 
 .wi-rating__star--on {
@@ -98,16 +98,16 @@
 
 .wi-rating--small .wi-rating__star,
 .wi-rating--small .wi-rating__cancel {
-    font-size: 1rem;
+    font-size: var(--wi-rating-star-size-small);
 }
 
 .wi-rating--large .wi-rating__star,
 .wi-rating--large .wi-rating__cancel {
-    font-size: 1.5rem;
+    font-size: var(--wi-rating-star-size-large);
 }
 
 .wi-rating--invalid .wi-rating__star,
 .wi-rating--invalid .wi-rating__cancel {
-    outline: 1px solid var(--wi-color-danger);
+    outline: var(--wi-border-width) solid var(--wi-color-danger);
     outline-offset: 2px;
 }

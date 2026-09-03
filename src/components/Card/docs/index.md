@@ -83,6 +83,7 @@ import { WiCard } from '@well-insight/ui'
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 内边距尺寸。 |
 | `bordered` | `boolean` | `true` | 是否描边。 |
 | `hoverable` | `boolean` | `false` | 悬停抬起。 |
+| `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | — | — |
 
 ## Slots
 

@@ -35,12 +35,13 @@ const segments = computed(() =>
     </div>
     <ul class="wi-metergroup__legend">
       <li v-for="(item, index) in value" :key="`${item.label}-${index}`" class="wi-metergroup__legend-item">
-        <span
-          class="wi-metergroup__swatch"
+        <span class="wi-metergroup__swatch"
           :style="{ background: item.color ?? 'var(--wi-color-primary)' }"
           aria-hidden="true"
         />
-        <span>{{ item.label }}</span>
+        <slot name="label" :item="item" :index="index">
+          <span>{{ item.label }}</span>
+        </slot>
         <span class="wi-metergroup__value">{{ item.value }}</span>
       </li>
     </ul>

@@ -157,6 +157,9 @@ defineExpose({ focus, blur, select })
         <WiIcon name="minus" size="sm" />
       </button>
       <div class="wi-inputnumber__input-wrap">
+        <span v-if="$slots.prefix" class="wi-inputnumber__prefix">
+          <slot name="prefix" />
+        </span>
         <input
           v-bind="attrs"
           :id="inputId"
@@ -174,6 +177,9 @@ defineExpose({ focus, blur, select })
           @blur="onBlur"
           @keydown="onInputKeydown"
         >
+        <span v-if="$slots.suffix" class="wi-inputnumber__suffix">
+          <slot name="suffix" />
+        </span>
         <button
           v-if="showClear"
           type="button"

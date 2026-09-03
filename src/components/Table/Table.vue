@@ -10,6 +10,7 @@ import {
   watch,
 } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useControllable } from '../../shared/useControllable'
 import { useWiLocale } from '../../locale'
 import type { ScrollbarInstance } from '../Scrollbar/types'
 import TableLoadingLine from './TableLoadingLine.vue'
@@ -110,6 +111,19 @@ const tableEmit: TableEmitFn = (event, ...args) => {
   ;(emit as (event: string, ...args: unknown[]) => void)(event, ...args)
 }
 
+const { value: activeFilters, setValue: setActiveFilters } = useControllable<
+  Record<string, unknown> | null
+>(
+  {
+    controlled: () => props.filters ?? undefined,
+    defaultValue: null,
+  },
+  (next) => {
+    emit('filter', next)
+    emit('update:filters', next)
+  },
+)
+
 const locale = useWiLocale()
 const {
   tableNodeId,
@@ -119,7 +133,6 @@ const {
   expandColumnWidth,
   expandedRowKeys,
   filterOptions,
-  filters,
   fixedCheckbox,
   fixedExpand,
   fixedHeader,
@@ -334,7 +347,7 @@ const {
 } = useTotalItems(
   effectiveClientSortOptions,
   filterOptions,
-  filters,
+  activeFilters,
   isServerSideMode,
   items,
   itemsSelected,
@@ -587,6 +600,7 @@ defineExpose({
   rowsPerPageOptions: rowsItemsComputed,
   rowsPerPageActiveOption: rowsPerPageRef,
   updateRowsPerPageActiveOption: updateRowsPerPage,
+  setFilters: setActiveFilters,
 })
 </script>
 

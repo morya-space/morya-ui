@@ -263,6 +263,8 @@ const uploader = ref<{
 | `progress` | `file, percent` | 上传进度。 |
 | `success` | `file, response` | 上传成功。 |
 | `error` | `file, error` | 上传失败。 |
+| `abort` | — | — |
+| `exceed-size` | — | — |
 
 ## Slots
 

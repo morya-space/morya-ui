@@ -4,7 +4,7 @@
     --wi-menubar-item-gap: 0.125rem;
     align-items: stretch;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     display: flex;
     flex-wrap: wrap;
@@ -57,7 +57,7 @@
 
 .wi-menubar__submenu {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     display: flex;

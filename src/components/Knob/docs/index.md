@@ -38,6 +38,9 @@ const value = ref(60)
 | `size` | `number` | `100` | 直径像素。 |
 | `valueTemplate` | `string` | `{value}` | 展示模板。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `ariaLabel` | `string` | — | — |
+| `ariaLabelledby` | `string` | — | — |
+| `diameter` | `number` | — | — |
 
 ## Events
 

@@ -122,7 +122,9 @@ watch(keyboard.activeIndex, (index) => {
           @click="select(index)"
           @focus="keyboard.setActive(index)"
         >
-          <img :src="imageSrc(image)" :alt="imageAlt(image)">
+          <slot name="item" :item="image" :index="index">
+            <img :src="imageSrc(image)" :alt="imageAlt(image)">
+          </slot>
         </button>
       </li>
     </ul>

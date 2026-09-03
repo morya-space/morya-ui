@@ -40,12 +40,16 @@ const last = ref('')
 | --- | --- | --- | --- |
 | `welcomeMessage` | `string` | `'Welcome to Well Insight Terminal'` | 顶部欢迎语。 |
 | `prompt` | `string` | `'>'` | 提示符。 |
+| `lines` | `string[]` | — | — |
+| `responses` | `string[]` | — | — |
 
 ## Events
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `command` | `string` | 提交的命令。 |
+| `update:lines` | — | — |
+| `update:responses` | — | — |
 
 ## Slots
 

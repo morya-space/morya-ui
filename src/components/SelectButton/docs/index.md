@@ -64,6 +64,7 @@ const options = [
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用整组。 |
+| `label` | `string` | — | — |
 
 ## Events
 

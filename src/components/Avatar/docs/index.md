@@ -60,6 +60,7 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | `icon` | `IconName` | — | `WiIcon` 图标名称。 |
 | `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |
+| `max` | `number` | — | `WiAvatarGroup`：最多展示个数，超出显示 +N。 |
 
 ## Events
 

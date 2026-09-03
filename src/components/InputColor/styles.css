@@ -24,7 +24,7 @@
 
 .wi-inputcolor__swatch {
     background: transparent;
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     cursor: pointer;
     height: var(--wi-control-height-medium);
@@ -34,7 +34,7 @@
 
 .wi-inputcolor__text {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     font: inherit;
@@ -64,7 +64,7 @@
 }
 
 .wi-inputcolor__preset {
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-sm);
     cursor: pointer;
     height: var(--wi-inputcolor-preset-size);

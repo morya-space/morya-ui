@@ -11,7 +11,7 @@
 
 .wi-treetable__table th,
 .wi-treetable__cell {
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     padding: var(--wi-space-2) var(--wi-space-3);
     text-align: left;
 }
@@ -46,6 +46,11 @@
     justify-content: center;
     min-height: calc(var(--wi-control-height-medium, 2.5rem) * 2);
     padding: var(--wi-space-5);
+}
+
+.wi-treetable__expansion-cell {
+    background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
+    padding: var(--wi-space-3);
 }
 
 .wi-treetable__empty-text {

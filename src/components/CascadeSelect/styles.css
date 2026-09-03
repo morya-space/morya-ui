@@ -21,7 +21,7 @@
 .wi-cascadeselect__trigger {
     align-items: center;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     box-sizing: border-box;
     color: var(--wi-color-text);
@@ -78,7 +78,7 @@
 
 .wi-cascadeselect__panel {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     box-sizing: border-box;
@@ -109,7 +109,7 @@
 }
 
 .wi-cascadeselect__column + .wi-cascadeselect__column {
-    border-left: 1px solid var(--wi-color-border);
+    border-left: var(--wi-border-width) solid var(--wi-color-border);
 }
 
 .wi-cascadeselect__option {

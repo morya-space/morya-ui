@@ -283,6 +283,9 @@ import {
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
 | `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |
+| `height` | `number \| string` | — | — |
+| `padding` | `number \| string` | — | — |
+| `radius` | `number \| string` | — | — |
 
 ## LayoutSider Props
 
@@ -304,6 +307,11 @@ import {
 | 事件 | 说明 |
 | --- | --- |
 | `scroll` | 滚动容器滚动时触发。 |
+| `after-enter` | 侧栏展开动画结束。 |
+| `after-leave` | 侧栏收起动画结束。 |
+| `collapse` | 侧栏开始收起。 |
+| `expand` | 侧栏开始展开。 |
+| `update:collapsed` | 折叠状态 v-model。 |
 
 ## Expose
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TreeTableColumn, TreeTableNode } from './types'
+import type { VNode } from 'vue'
 import { useWiLocale } from '../../locale'
 import WiIcon from '../Icon/Icon.vue'
 import TreeTableRow from './TreeTableRow.vue'
@@ -9,6 +10,7 @@ defineProps<{
   columns: TreeTableColumn[]
   depth: number
   isExpanded: (key: string) => boolean
+  renderExpansion?: (row: TreeTableNode) => VNode | VNode[] | string | undefined
 }>()
 
 defineEmits<{
@@ -54,6 +56,11 @@ const locale = useWiLocale()
       </template>
     </td>
   </tr>
+  <tr v-if="renderExpansion && isExpanded(node.key)" class="wi-treetable__expansion-row">
+    <td :colspan="columns.length" class="wi-treetable__expansion-cell">
+      <component :is="() => renderExpansion!(node)" />
+    </td>
+  </tr>
   <template v-if="node.children?.length && isExpanded(node.key)">
     <TreeTableRow
       v-for="child in node.children"
@@ -62,6 +69,7 @@ const locale = useWiLocale()
       :columns="columns"
       :depth="depth + 1"
       :is-expanded="isExpanded"
+      :render-expansion="renderExpansion"
       @toggle="$emit('toggle', $event)"
     />
   </template>

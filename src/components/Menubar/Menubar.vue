@@ -228,6 +228,9 @@ onBeforeUnmount(() => {
 
 <template>
   <nav ref="root" class="wi-menubar" :aria-label="locale.menubar" @keydown="onTopKeydown">
+    <div v-if="$slots.start" class="wi-menubar__start">
+      <slot name="start" />
+    </div>
     <div
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
@@ -283,6 +286,9 @@ onBeforeUnmount(() => {
           </div>
         </Transition>
       </Teleport>
+    </div>
+    <div v-if="$slots.end" class="wi-menubar__end">
+      <slot name="end" />
     </div>
   </nav>
 </template>

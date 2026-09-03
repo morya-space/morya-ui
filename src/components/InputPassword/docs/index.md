@@ -124,6 +124,7 @@ const value = ref('draft-pass')
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
+| `id` | `string` | — | — |
 
 ## Events
 
@@ -131,6 +132,9 @@ const value = ref('draft-pass')
 | --- | --- | --- |
 | `update:modelValue` | `string` | 值变化。 |
 | `clear` | — | 点击清除时触发。 |
+| `blur` | — | — |
+| `change` | — | — |
+| `focus` | — | — |
 
 ## Slots
 

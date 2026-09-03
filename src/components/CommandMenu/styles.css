@@ -14,7 +14,7 @@
     --wi-commandmenu-width: 32rem;
     --wi-commandmenu-list-max-height: 18rem;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-lg);
     box-shadow: var(--wi-shadow-md);
     max-width: var(--wi-commandmenu-width);
@@ -25,7 +25,7 @@
 .wi-commandmenu__input {
     background: transparent;
     border: 0;
-    border-bottom: 1px solid var(--wi-color-border);
+    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
     color: inherit;
     font: inherit;
     outline: none;

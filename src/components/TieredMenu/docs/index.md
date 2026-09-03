@@ -76,6 +76,7 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 | `modelValue` | `boolean` | `false` | popup 可见性（`v-model`）。 |
 | `teleport` | `boolean` | `true` | popup 时 Teleport；默认 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标。 |
+| `placement` | `FloatingOverlayPlacement` | — | — |
 
 ## Events
 

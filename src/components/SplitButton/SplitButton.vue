@@ -174,11 +174,13 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       @click="onMainClick"
     >
-      <span v-if="iconName || iconGlyph" class="wi-splitbutton__icon" aria-hidden="true">
-        <WiIcon v-if="iconName" :name="iconName" :size="iconSize" />
-        <template v-else>{{ iconGlyph }}</template>
-      </span>
-      <span v-if="label">{{ label }}</span>
+      <slot>
+        <span v-if="iconName || iconGlyph" class="wi-splitbutton__icon" aria-hidden="true">
+          <WiIcon v-if="iconName" :name="iconName" :size="iconSize" />
+          <template v-else>{{ iconGlyph }}</template>
+        </span>
+        <span v-if="label">{{ label }}</span>
+      </slot>
     </button>
     <button
       ref="trigger"

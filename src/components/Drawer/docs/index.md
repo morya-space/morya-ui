@@ -84,6 +84,9 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 | `blockScroll` | `boolean` | `true` | 打开时锁定 `body` 滚动。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `beforeClose` | `AsyncGuard` | — | — |
+| `closeOnEsc` | `boolean` | — | — |
+| `closeOnOutsideClick` | `boolean` | — | — |
 
 ## Events
 
@@ -93,6 +96,7 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 | `show` | — | 打开时触发。 |
 | `hide` | — | 关闭后触发。 |
 | `after-leave` | — | 离场动画结束。 |
+| `close` | — | — |
 
 ## Slots
 

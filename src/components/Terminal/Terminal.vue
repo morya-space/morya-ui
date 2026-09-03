@@ -13,17 +13,26 @@ const emit = defineEmits<TerminalEmits>()
 const locale = useWiLocale()
 const draft = ref('')
 const innerLines = ref<string[]>([])
+const innerResponses = ref<string[]>([])
 const bodyRef = ref<HTMLElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
 const historyPointer = ref(-1)
 
 const displayLines = computed(() => props.lines ?? innerLines.value)
-const displayResponses = computed(() => props.responses ?? [])
+const displayResponses = computed(() => props.responses ?? innerResponses.value)
 
 function appendLine(command: string) {
   const next = [...displayLines.value, command]
   innerLines.value = next
   emit('update:lines', next)
+}
+
+function appendResponse(text: string) {
+  const next = [...displayResponses.value]
+  const index = Math.max(0, displayLines.value.length - 1)
+  next[index] = text
+  innerResponses.value = next
+  emit('update:responses', next)
 }
 
 async function submit() {
@@ -59,6 +68,8 @@ function onInputKeydown(event: KeyboardEvent) {
     }
   }
 }
+
+defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
 </script>
 
 <template>

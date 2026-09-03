@@ -17,7 +17,7 @@
     --wi-inputtags-chip-padding-x: var(--wi-space-2);
     align-items: center;
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     display: flex;
     flex-wrap: wrap;

@@ -185,6 +185,21 @@ const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
 ```
 
+## Props
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `config` | `Partial<WiGlobalConfig>` | — | 一次性传入完整配置（与下列 shorthand 等价）。 |
+| `appendTo` | `string \| HTMLElement` | `'body'` | 浮层默认 Teleport 目标。 |
+| `size` | `WiSizeInput` | — | 表单控件默认尺寸。 |
+| `inputVariant` | `'outlined' \| 'filled'` | — | 输入框默认视觉变体。 |
+| `zIndex` | `number` | — | 浮层基础 z-index。 |
+| `density` | `'compact' \| 'comfortable' \| 'spacious'` | — | 全局内容密度。 |
+| `theme` | `'light' \| 'dark' \| 'system'` | — | 主题；`system` 跟随系统偏好。 |
+| `locale` | `WiLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
+| `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props。 |
+| `globalDensity` | `boolean` | `true` | 是否将 density / theme 写入 `documentElement`。 |
+
 ## Events
 
 无自定义事件。

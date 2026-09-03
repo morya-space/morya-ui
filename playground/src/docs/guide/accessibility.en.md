@@ -96,8 +96,7 @@ Recent work includes:
 - **FloatLabel**: `label[for]` linked to the first input
 - **Popover**: trigger `aria-expanded` / `aria-haspopup` / `aria-controls`
 - **Slider**: default `aria-label` on a single thumb (overridable)
-
-See [OPTIMIZATION.md](https://github.com/well-insight/well-insight-ui/blob/main/docs/OPTIMIZATION.md) phases IV–V for ongoing items.
+- **Select / CascadeSelect / TreeSelect / DatePicker**: combobox semantics, keyboard navigation, and field feedback (`invalid` / `error-message` / `help-text`)
 
 ## Testing tips
 

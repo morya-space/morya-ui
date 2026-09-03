@@ -48,7 +48,7 @@
 
 .wi-datepicker__input {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     cursor: pointer;
@@ -98,7 +98,7 @@
 
 .wi-datepicker__panel {
     background: var(--wi-color-surface);
-    border: 1px solid var(--wi-color-border);
+    border: var(--wi-border-width) solid var(--wi-color-border);
     border-radius: var(--wi-radius-md);
     box-shadow: var(--wi-shadow-md);
     margin-top: var(--wi-space-1);

@@ -57,6 +57,8 @@ const code = ref('')
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `gap` | `string \| number` | — | 格子间距；数字为 px。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `invalid` | `boolean` | — | — |
+| `label` | `string` | — | — |
 
 ## Events
 

@@ -29,6 +29,11 @@ const menuStyle = computed(() => {
   }
 })
 
+function onContextMenu(event: MouseEvent) {
+  if (!props.model.length) return
+  show(event)
+}
+
 function hide() {
   emit('update:modelValue', false)
 }
@@ -85,6 +90,9 @@ defineExpose({ show, hide })
 </script>
 
 <template>
+  <div class="wi-contextmenu-anchor" @contextmenu="onContextMenu">
+    <slot />
+  </div>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <Transition name="wi-scale-fade">
       <div

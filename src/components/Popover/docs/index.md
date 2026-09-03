@@ -94,6 +94,7 @@ const open = ref(false)
 | `showDelay` / `hideDelay` | `number` | `0` / `200` | hover/focus 延迟（ms）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `disabled` | `boolean` | — | — |
 
 ## Events
 

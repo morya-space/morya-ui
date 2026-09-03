@@ -61,6 +61,7 @@ import { WiPanel } from '@well-insight/ui'
 | `collapsed` | `boolean` | `false` | 折叠状态。 |
 | `modelValue` | `boolean` | — | `collapsed` 的 `v-model` 别名。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `defaultCollapsed` | `boolean` | — | — |
 
 ## Events
 

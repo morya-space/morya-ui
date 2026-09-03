@@ -78,6 +78,7 @@ async function beforeAccept() {
 | `position` | `{ top, left } \| null` | — | 无锚点时的坐标。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `acceptSeverity` | `ButtonSeverity` | — | — |
 
 ## Events
 

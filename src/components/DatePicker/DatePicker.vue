@@ -45,6 +45,7 @@ const activeDate = ref(startOfDay(new Date()))
 const rangeDraft = ref<Date | null>(null)
 const hoverDate = ref<Date | null>(null)
 const fieldId = computed(() => props.id ?? `wi-datepicker-${Math.random().toString(36).slice(2, 8)}`)
+const panelId = computed(() => `${fieldId.value}-panel`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 const isRange = computed(() => props.type === 'daterange')
@@ -395,33 +396,37 @@ onBeforeUnmount(() => {
   <div ref="root" :class="rootClass">
     <label v-if="label" class="wi-datepicker__label" :for="fieldId">{{ label }}</label>
     <div ref="triggerEl" class="wi-datepicker__control">
-      <input
-        :id="fieldId"
-        ref="inputEl"
-        class="wi-datepicker__input"
-        type="text"
-        readonly
-        :value="displayValue"
-        :placeholder="placeholderText"
-        :disabled="disabled"
-        :aria-invalid="isInvalid || undefined"
-        :aria-expanded="open"
-        :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
-        aria-haspopup="dialog"
-        @click="toggle"
-        @keydown.enter.prevent="toggle"
-        @keydown.space.prevent="toggle"
-      >
-      <button
-        v-if="clearable && displayValue"
-        type="button"
-        class="wi-datepicker__clear"
-        :aria-label="locale.clearDate"
-        :disabled="disabled"
-        @click.stop="clear"
-      >
-        <WiIcon name="close" size="sm" />
-      </button>
+      <slot name="trigger" :value="displayValue" :open="open">
+        <input
+          :id="fieldId"
+          ref="inputEl"
+          class="wi-datepicker__input"
+          type="text"
+          role="combobox"
+          readonly
+          :value="displayValue"
+          :placeholder="placeholderText"
+          :disabled="disabled"
+          :aria-invalid="isInvalid || undefined"
+          :aria-expanded="open"
+          :aria-controls="open ? panelId : undefined"
+          :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
+          aria-haspopup="dialog"
+          @click="toggle"
+          @keydown.enter.prevent="toggle"
+          @keydown.space.prevent="toggle"
+        >
+        <button
+          v-if="clearable && displayValue"
+          type="button"
+          class="wi-datepicker__clear"
+          :aria-label="locale.clearDate"
+          :disabled="disabled"
+          @click.stop="clear"
+        >
+          <WiIcon name="close" size="sm" />
+        </button>
+      </slot>
     </div>
     <p
       v-if="feedbackText"
@@ -442,6 +447,7 @@ onBeforeUnmount(() => {
             'wi-datepicker__panel--with-shortcuts': shortcuts.length,
           }"
           :style="teleported ? panelStyle : undefined"
+          :id="panelId"
           role="dialog"
           :aria-label="locale.datePicker"
         >
