@@ -15,15 +15,17 @@ import {
   useTheme,
 } from '@well-insight/ui'
 import AppCommandMenu from '@/components/AppCommandMenu.vue'
-import { adminMenu, buildBreadcrumbs, menuKeyFromPath, routeByMenuKey } from '@/config/navigation'
+import { buildAdminMenu, buildBreadcrumbs, menuKeyFromPath, routeByMenuKey } from '@/config/navigation'
 import { useAuth } from '@/composables/useAuth'
 import { useLocale } from '@/composables/useLocale'
+import { useMockOperator } from '@/composables/useMockOperator'
 
 const router = useRouter()
 const route = useRoute()
 const { user, logout } = useAuth()
-const { toggleLocale, t } = useLocale()
+const { toggleLocale, toggleDensity, isCompact, t } = useLocale()
 const { isDark, toggleTheme } = useTheme()
+useMockOperator()
 
 const collapsed = ref(false)
 const commandOpen = ref(false)
@@ -34,6 +36,7 @@ watch(() => route.path, (path) => {
 })
 
 const breadcrumbs = computed(() => buildBreadcrumbs(route.path, t))
+const adminMenu = computed(() => buildAdminMenu(t))
 
 const userMenu = [
   { label: t('个人中心', 'Profile'), command: () => router.push('/system/config') },
@@ -75,6 +78,14 @@ function onMenuSelect(item: { key?: string }) {
           :aria-label="t('切换主题', 'Toggle theme')"
           @click="toggleTheme"
         />
+        <WiButton
+          severity="secondary"
+          size="small"
+          :aria-label="t('切换密度', 'Toggle density')"
+          @click="toggleDensity"
+        >
+          {{ t(isCompact ? '标准' : '紧凑', isCompact ? 'Comfortable' : 'Compact') }}
+        </WiButton>
         <WiButton severity="secondary" size="small" @click="toggleLocale">
           {{ t('EN', '中') }}
         </WiButton>

@@ -64,13 +64,16 @@
 
 ## 反馈
 
-| 组件 | 用途 |
-| --- | --- |
-| `WiMessage` | 行内消息 |
-| `WiToast` | 全局 toast |
-| `WiProgressBar` / `WiProgressSpinner` | 加载进度 |
-| `WiSkeleton` | 骨架屏 |
-| `WiBlockUI` | 遮罩阻塞 |
+| API / 组件 | 用途 | 优先级 |
+| --- | --- | --- |
+| `message` | **默认**：单行操作回执（已保存 / 已删除） | ★ 首选 |
+| `toast` | 仅当需要 `summary` + `detail` 或异步通知 | 次要 |
+| `<WiMessage>` | 表单/认证区**常驻**错误条 | 内嵌场景 |
+| `WiProgressBar` / `WiProgressSpinner` | 加载进度 | |
+| `WiSkeleton` | 骨架屏 | |
+| `WiBlockUI` | 遮罩阻塞 | |
+
+选型细则：[`feedback-message-vs-toast.md`](./feedback-message-vs-toast.md)
 
 ## 浮层
 

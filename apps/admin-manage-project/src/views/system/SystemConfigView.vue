@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { WiButton, WiInput, WiLayoutContent, WiTable, useToast } from '@well-insight/ui'
+import { WiButton, WiInput, WiLayoutContent, WiTable } from '@well-insight/ui'
+import { useActionFeedback } from '@/composables/useActionFeedback'
 import { systemParams, type SystemParam } from '@/mock'
 
 type SystemParamRow = SystemParam & Record<string, unknown>
 
-const toast = useToast()
+const feedback = useActionFeedback()
 const rows = ref<SystemParamRow[]>(systemParams.map((item) => ({ ...item })))
 
 const columns = [
@@ -17,7 +18,7 @@ const columns = [
 ]
 
 function save(row: SystemParamRow) {
-  toast.add({ severity: 'success', summary: '参数已更新', detail: row.key, life: 2500 })
+  feedback.notify('参数已更新', row.key)
 }
 </script>
 

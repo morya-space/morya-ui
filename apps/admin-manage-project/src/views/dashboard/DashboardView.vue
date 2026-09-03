@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { IconName } from '@well-insight/ui'
 import {
   WiCard,
@@ -10,6 +11,7 @@ import {
   WiTable,
   WiTag,
 } from '@well-insight/ui'
+import { useLocale } from '@/composables/useLocale'
 import {
   courses,
   dashboardStats,
@@ -18,25 +20,59 @@ import {
   workflowTasks,
 } from '@/mock'
 
-const stats: Array<{ label: string; value: string; trend: string; icon: IconName }> = [
-  { label: '在校学生', value: dashboardStats.students.toLocaleString(), trend: '+3.2%', icon: 'user' },
-  { label: '在职教师', value: String(dashboardStats.teachers), trend: '+1', icon: 'user' },
-  { label: '开设课程', value: String(dashboardStats.courses), trend: '+6', icon: 'star' },
-  { label: '选课完成率', value: `${dashboardStats.enrollmentRate}%`, trend: '+2.1%', icon: 'sort' },
-]
+const { t } = useLocale()
 
-const recentColumns = [
-  { key: 'title', label: '标题' },
-  { key: 'applicant', label: '申请人', width: 96 },
-  { key: 'status', label: '状态', width: 96 },
-]
+const stats = computed<Array<{ label: string; value: string; trend: string; icon: IconName }>>(() => [
+  {
+    label: t('在校学生', 'Enrolled students'),
+    value: dashboardStats.students.toLocaleString(),
+    trend: '+3.2%',
+    icon: 'user',
+  },
+  {
+    label: t('在职教师', 'Teachers'),
+    value: String(dashboardStats.teachers),
+    trend: '+1',
+    icon: 'user',
+  },
+  {
+    label: t('开设课程', 'Courses'),
+    value: String(dashboardStats.courses),
+    trend: '+6',
+    icon: 'star',
+  },
+  {
+    label: t('选课完成率', 'Enrollment rate'),
+    value: `${dashboardStats.enrollmentRate}%`,
+    trend: '+2.1%',
+    icon: 'sort',
+  },
+])
+
+const recentColumns = computed(() => [
+  { key: 'title', label: t('标题', 'Title') },
+  { key: 'applicant', label: t('申请人', 'Applicant'), width: 96 },
+  { key: 'status', label: t('状态', 'Status'), width: 96 },
+])
 
 const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
+
+function statusLabel(value: unknown) {
+  if (value === 'pending') return t('待审批', 'Pending')
+  if (value === 'approved') return t('已通过', 'Approved')
+  return t('已驳回', 'Rejected')
+}
+
+function statusSeverity(value: unknown) {
+  if (value === 'pending') return 'warn'
+  if (value === 'approved') return 'success'
+  return 'danger'
+}
 </script>
 
 <template>
   <WiLayoutContent content-class="dashboard">
-    <h1 class="dashboard__title">仪表盘</h1>
+    <h1 class="dashboard__title">{{ t('仪表盘', 'Dashboard') }}</h1>
 
     <WiGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
       <WiGridItem v-for="item in stats" :key="item.label" :span="1">
@@ -53,13 +89,13 @@ const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
       </WiGridItem>
     </WiGrid>
 
-    <WiGrid :cols="2" :x-gap="16" :y-gap="16">
+    <WiGrid :cols="2" :x-gap="16" :y-gap="16" class="dashboard__main">
       <WiGridItem :span="1">
-        <WiCard title="近 6 个月选课趋势">
-          <div class="dashboard__bars" role="img" aria-label="选课趋势柱状图">
-            <div v-for="item in enrollmentTrend" :key="item.month" class="dashboard__bar-item">
+        <WiCard :title="t('近 6 个月选课趋势', 'Enrollment trend (6 months)')">
+          <div class="admin-bar-chart" role="img" :aria-label="t('选课趋势柱状图', 'Enrollment bar chart')">
+            <div v-for="item in enrollmentTrend" :key="item.month" class="admin-bar-chart__item">
               <div
-                class="dashboard__bar"
+                class="admin-bar-chart__bar"
                 :style="{ height: `${(item.count / maxTrend) * 100}%` }"
               />
               <span>{{ item.month }}</span>
@@ -68,8 +104,8 @@ const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
         </WiCard>
       </WiGridItem>
       <WiGridItem :span="1">
-        <WiCard title="年级人数分布">
-          <ul class="dashboard__grades">
+        <WiCard :title="t('年级人数分布', 'Students by grade')">
+          <ul class="admin-stat-list">
             <li v-for="item in gradeDistribution" :key="item.grade">
               <span>{{ item.grade }}</span>
               <strong>{{ item.count }}</strong>
@@ -81,33 +117,33 @@ const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
 
     <WiGrid :cols="2" :x-gap="16" :y-gap="16">
       <WiGridItem :span="1">
-        <WiCard title="待办审批">
+        <WiCard :title="t('待办审批', 'Pending approvals')">
           <WiTable
             :columns="recentColumns"
             :rows="workflowTasks as unknown as Record<string, unknown>[]"
             size="small"
             :paginator="false"
             bordered
-            aria-label="待办审批列表"
+            :aria-label="t('待办审批列表', 'Pending approval list')"
           >
             <template #cell-status="{ value }">
-              <WiTag
-                :value="value === 'pending' ? '待审批' : value === 'approved' ? '已通过' : '已驳回'"
-                :severity="value === 'pending' ? 'warn' : value === 'approved' ? 'success' : 'danger'"
-              />
+              <WiTag :value="statusLabel(value)" :severity="statusSeverity(value)" />
             </template>
           </WiTable>
         </WiCard>
       </WiGridItem>
       <WiGridItem :span="1">
-        <WiCard title="热门课程">
+        <WiCard :title="t('热门课程', 'Popular courses')">
           <WiTable
-            :columns="[{ key: 'name', label: '课程' }, { key: 'enrolled', label: '人数', width: 72 }]"
+            :columns="[
+              { key: 'name', label: t('课程', 'Course') },
+              { key: 'enrolled', label: t('人数', 'Count'), width: 72 },
+            ]"
             :rows="courses.slice(0, 4) as unknown as Record<string, unknown>[]"
             size="small"
             :paginator="false"
             bordered
-            aria-label="热门课程列表"
+            :aria-label="t('热门课程列表', 'Popular courses list')"
           />
         </WiCard>
       </WiGridItem>
@@ -127,6 +163,7 @@ const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
   margin: 0;
   font-size: var(--wi-font-size-lg);
   font-weight: 600;
+  color: var(--wi-color-text);
 }
 
 .dashboard__stat {
@@ -142,7 +179,7 @@ const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
 .dashboard__stat-value {
   margin: var(--wi-space-1) 0;
   color: var(--wi-color-text);
-  font-size: var(--wi-font-size-lg);
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -157,46 +194,7 @@ const maxTrend = Math.max(...enrollmentTrend.map((item) => item.count))
   opacity: 0.85;
 }
 
-.dashboard__bars {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--wi-space-3);
-  min-height: 10rem;
-  padding-top: var(--wi-space-2);
-}
-
-.dashboard__bar-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--wi-space-2);
-  height: 10rem;
-  justify-content: flex-end;
-  color: var(--wi-color-text-muted);
-  font-size: var(--wi-font-size-xs);
-}
-
-.dashboard__bar {
-  width: 100%;
-  max-width: 2.5rem;
-  border-radius: var(--wi-radius-sm) var(--wi-radius-sm) 0 0;
-  background: color-mix(in srgb, var(--wi-color-primary) 75%, transparent);
-}
-
-.dashboard__grades {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--wi-space-3);
-}
-
-.dashboard__grades li {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--wi-space-3);
-  border: 1px solid var(--wi-color-border);
-  border-radius: var(--wi-radius-md);
+.dashboard__main {
+  margin-top: var(--wi-space-2);
 }
 </style>

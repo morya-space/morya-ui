@@ -58,67 +58,73 @@ export function buildBreadcrumbs(
   return items
 }
 
-export const adminMenu: MenuItem[] = [
-  {
-    key: 'dashboard',
-    label: pathSegmentLabels.dashboard[0],
-    icon: 'home',
-  },
-  {
-    key: 'security',
-    label: pathSegmentLabels.security[0],
-    icon: 'shield',
-    items: [
-      { key: 'users', label: pathSegmentLabels.users[0], icon: 'user' },
-      { key: 'roles', label: pathSegmentLabels.roles[0], icon: 'shield' },
-      { key: 'permissions', label: pathSegmentLabels.permissions[0], icon: 'lock' },
-      { key: 'data-scope', label: pathSegmentLabels['data-scope'][0], icon: 'database' },
-      { key: 'audit-logs', label: pathSegmentLabels['audit-logs'][0], icon: 'clock' },
-    ],
-  },
-  {
-    key: 'academic',
-    label: pathSegmentLabels.academic[0],
-    icon: 'book',
-    items: [
-      { key: 'students', label: pathSegmentLabels.students[0], icon: 'user' },
-      { key: 'teachers', label: pathSegmentLabels.teachers[0], icon: 'user' },
-      { key: 'courses', label: pathSegmentLabels.courses[0], icon: 'book' },
-      { key: 'classes', label: pathSegmentLabels.classes[0], icon: 'home' },
-      { key: 'enrollment-form', label: pathSegmentLabels['enrollment-form'][0], icon: 'edit' },
-      { key: 'batch-ops', label: pathSegmentLabels['batch-ops'][0], icon: 'grip' },
-      { key: 'workflow', label: pathSegmentLabels.workflow[0], icon: 'link' },
-    ],
-  },
-  {
-    key: 'system',
-    label: pathSegmentLabels.system[0],
-    icon: 'settings',
-    items: [
-      { key: 'messages', label: pathSegmentLabels.messages[0], icon: 'mail' },
-      { key: 'scheduler', label: pathSegmentLabels.scheduler[0], icon: 'clock' },
-      { key: 'config', label: pathSegmentLabels.config[0], icon: 'settings' },
-      { key: 'dictionary', label: pathSegmentLabels.dictionary[0], icon: 'menu' },
-    ],
-  },
-  {
-    key: 'analytics',
-    label: pathSegmentLabels.analytics[0],
-    icon: 'chart-bar',
-    items: [
-      { key: 'reports', label: pathSegmentLabels.reports[0], icon: 'chart-bar' },
-      { key: 'error-monitor', label: pathSegmentLabels['error-monitor'][0], icon: 'warning' },
-    ],
-  },
-  {
-    key: 'extras',
-    label: pathSegmentLabels.extras[0],
-    icon: 'star',
-    items: [
-      { key: 'recycle-bin', label: pathSegmentLabels['recycle-bin'][0], icon: 'trash' },
-    ],
-  },
-]
+function label(segment: string, t: (zh: string, en: string) => string) {
+  return segmentLabel(segment, t)
+}
+
+export function buildAdminMenu(t: (zh: string, en: string) => string): MenuItem[] {
+  return [
+    {
+      key: 'dashboard',
+      label: label('dashboard', t),
+      icon: 'home',
+    },
+    {
+      key: 'security',
+      label: label('security', t),
+      icon: 'shield',
+      items: [
+        { key: 'users', label: label('users', t), icon: 'user' },
+        { key: 'roles', label: label('roles', t), icon: 'shield' },
+        { key: 'permissions', label: label('permissions', t), icon: 'lock' },
+        { key: 'data-scope', label: label('data-scope', t), icon: 'database' },
+        { key: 'audit-logs', label: label('audit-logs', t), icon: 'clock' },
+      ],
+    },
+    {
+      key: 'academic',
+      label: label('academic', t),
+      icon: 'book',
+      items: [
+        { key: 'students', label: label('students', t), icon: 'user' },
+        { key: 'teachers', label: label('teachers', t), icon: 'user' },
+        { key: 'courses', label: label('courses', t), icon: 'book' },
+        { key: 'classes', label: label('classes', t), icon: 'home' },
+        { key: 'enrollment-form', label: label('enrollment-form', t), icon: 'edit' },
+        { key: 'batch-ops', label: label('batch-ops', t), icon: 'grip' },
+        { key: 'workflow', label: label('workflow', t), icon: 'link' },
+      ],
+    },
+    {
+      key: 'system',
+      label: label('system', t),
+      icon: 'settings',
+      items: [
+        { key: 'messages', label: label('messages', t), icon: 'mail' },
+        { key: 'scheduler', label: label('scheduler', t), icon: 'clock' },
+        { key: 'config', label: label('config', t), icon: 'settings' },
+        { key: 'dictionary', label: label('dictionary', t), icon: 'menu' },
+      ],
+    },
+    {
+      key: 'analytics',
+      label: label('analytics', t),
+      icon: 'chart-bar',
+      items: [
+        { key: 'reports', label: label('reports', t), icon: 'chart-bar' },
+        { key: 'error-monitor', label: label('error-monitor', t), icon: 'warning' },
+      ],
+    },
+    {
+      key: 'extras',
+      label: label('extras', t),
+      icon: 'star',
+      items: [
+        { key: 'recycle-bin', label: label('recycle-bin', t), icon: 'trash' },
+      ],
+    },
+  ]
+}
 
 export const routeByMenuKey: Record<string, string> = {
   dashboard: '/dashboard',
@@ -143,16 +149,42 @@ export const routeByMenuKey: Record<string, string> = {
   'recycle-bin': '/extras/recycle-bin',
 }
 
-export const commandItems = [
-  { label: '仪表盘', route: '/dashboard', icon: 'home', keywords: 'dashboard 首页' },
-  { label: '学生管理', route: '/academic/students', icon: 'user', keywords: 'student 学生' },
-  { label: '课程管理', route: '/academic/courses', icon: 'book', keywords: 'course 课程' },
-  { label: '审批流程', route: '/academic/workflow', icon: 'link', keywords: 'workflow 审批' },
-  { label: '消息中心', route: '/system/messages', icon: 'mail', keywords: 'message 消息' },
-  { label: '回收站', route: '/extras/recycle-bin', icon: 'trash', keywords: 'recycle 回收' },
+export interface CommandItemDef {
+  segment: string
+  route: string
+  icon: string
+  keywordsZh: string
+  keywordsEn: string
+}
+
+export const commandItemDefs: CommandItemDef[] = [
+  { segment: 'dashboard', route: '/dashboard', icon: 'home', keywordsZh: 'dashboard 首页', keywordsEn: 'dashboard home' },
+  { segment: 'students', route: '/academic/students', icon: 'user', keywordsZh: 'student 学生', keywordsEn: 'student students' },
+  { segment: 'courses', route: '/academic/courses', icon: 'book', keywordsZh: 'course 课程', keywordsEn: 'course courses' },
+  { segment: 'workflow', route: '/academic/workflow', icon: 'link', keywordsZh: 'workflow 审批', keywordsEn: 'workflow approval' },
+  { segment: 'messages', route: '/system/messages', icon: 'mail', keywordsZh: 'message 消息', keywordsEn: 'message inbox' },
+  { segment: 'recycle-bin', route: '/extras/recycle-bin', icon: 'trash', keywordsZh: 'recycle 回收', keywordsEn: 'recycle bin trash' },
 ]
+
+export function buildCommandItems(t: (zh: string, en: string) => string) {
+  return commandItemDefs.map((item) => ({
+    label: label(item.segment, t),
+    route: item.route,
+    icon: item.icon,
+    keywords: t(item.keywordsZh, item.keywordsEn),
+  }))
+}
 
 export function menuKeyFromPath(path: string): string | null {
   const entry = Object.entries(routeByMenuKey).find(([, route]) => route === path)
   return entry?.[0] ?? null
+}
+
+export function pageTitleFromPath(
+  path: string,
+  t: (zh: string, en: string) => string,
+): string {
+  const segments = path.split('/').filter(Boolean)
+  const last = segments.at(-1)
+  return last ? label(last, t) : label('dashboard', t)
 }

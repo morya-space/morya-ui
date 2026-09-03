@@ -19,7 +19,11 @@ import { WiButton, WiInput } from '@well-insight/ui'
 - 表单：`WiForm` + `WiFormItem` + 字段组件；提交用 `@submit` + `type="submit"`。
 - 表格：`WiTable` 的 `columns` + `data` + `row-key`；单元格用 `#cell-{key}` 插槽。
 - 浮层：详情/编辑 `WiDialog`；侧栏 `WiDrawer`；删除确认 `WiConfirmDialog`。
-- 反馈：操作结果 `WiToast` 或 `WiMessage`。
+- 反馈（**默认 Message**）：
+  - 单行操作结果 → `message.success/info/warn/error('…')`
+  - 有标题 + 详情 / 异步通知 → `toast.*({ summary, detail })`
+  - 表单区常驻错误 → `<WiMessage>` 或字段 `errorMessage`
+  - 详见 `docs/feedback-message-vs-toast.md`
 
 ## Props 约定
 

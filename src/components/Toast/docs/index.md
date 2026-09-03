@@ -8,7 +8,11 @@ description: 四角浮层通知，支持 API 与受控列表。
 
 带标题 / 详情的四角通知。可用 `toast` API，或继续用 `:messages` 受控渲染。
 
-与 [Message](/components/Message) 的分工：Message 是轻量单行反馈；Toast 是带 `summary` / `detail` 的角落通知。受控 `:messages` 时请自行限制条数，`max` 只作用于服务队列。
+与 [Message](/components/Message) 的分工：Message 是**默认**的轻量单行反馈；Toast 仅在需要 `summary` / `detail` 或角落通知时使用。受控 `:messages` 时请自行限制条数，`max` 只作用于服务队列。
+
+> AI / 业务代码选型细则见 [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md)。
+
+**不要**用 `toast.add({ summary: '已保存' })` 代替 `message.success('已保存')`。
 
 ## 引入
 

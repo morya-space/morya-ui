@@ -9,10 +9,10 @@ import {
   WiProgressBar,
   WiSpace,
   WiTag,
-  useToast,
 } from '@well-insight/ui'
+import { useActionFeedback } from '@/composables/useActionFeedback'
 
-const toast = useToast()
+const feedback = useActionFeedback()
 const importing = ref(false)
 const progress = ref(0)
 const deleteOpen = ref(false)
@@ -25,12 +25,12 @@ async function simulateImport() {
     progress.value = i * 20
   }
   importing.value = false
-  toast.add({ severity: 'success', summary: '导入完成', detail: '成功 128 条，失败 2 条', life: 3500 })
+  feedback.notify('导入完成', '成功 128 条，失败 2 条')
 }
 
 function confirmDelete() {
   deleteOpen.value = false
-  toast.add({ severity: 'success', summary: '批量删除完成', detail: '已选 0 条记录未变更', life: 3000 })
+  feedback.notify('批量删除完成', '已选 0 条记录未变更')
 }
 </script>
 
