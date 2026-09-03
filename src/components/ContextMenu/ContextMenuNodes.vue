@@ -33,11 +33,11 @@ function iconOf(item: ContextMenuItem) {
         role="menuitem"
         :disabled="item.disabled"
       >
-        <span v-if="iconOf(item) || item.icon" class="wi-contextmenu__icon" aria-hidden="true">
-          <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
-          <template v-else>{{ item.icon }}</template>
+        <span v-if="iconOf(item)" class="wi-contextmenu__icon" aria-hidden="true">
+          <WiIcon :name="iconOf(item)!" size="sm" />
         </span>
-        {{ item.label }}
+        <span class="wi-contextmenu__label">{{ item.label }}</span>
+        <span v-if="item.shortcut" class="wi-contextmenu__shortcut">{{ item.shortcut }}</span>
         <span class="wi-contextmenu__caret" aria-hidden="true">
           <WiIcon name="chevron-right" size="sm" />
         </span>
@@ -54,11 +54,11 @@ function iconOf(item: ContextMenuItem) {
       :disabled="item.disabled"
       @click="$emit('activate', item)"
     >
-      <span v-if="iconOf(item) || item.icon" class="wi-contextmenu__icon" aria-hidden="true">
-        <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
-        <template v-else>{{ item.icon }}</template>
+      <span v-if="iconOf(item)" class="wi-contextmenu__icon" aria-hidden="true">
+        <WiIcon :name="iconOf(item)!" size="sm" />
       </span>
-      {{ item.label }}
+      <span class="wi-contextmenu__label">{{ item.label }}</span>
+      <span v-if="item.shortcut" class="wi-contextmenu__shortcut">{{ item.shortcut }}</span>
     </button>
   </template>
 </template>

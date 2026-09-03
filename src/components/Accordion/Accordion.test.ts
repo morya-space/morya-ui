@@ -45,4 +45,15 @@ describe('wiAccordion', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     expect(wrapper.get('.wi-accordion__header-extra').text()).toBe('More')
   })
+
+  it('expands without v-model using defaultValue', async () => {
+    const wrapper = mount(WiAccordion, {
+      props: { tabs, defaultValue: 'one' },
+      slots: { one: '<p>Panel one</p>', two: '<p>Panel two</p>' },
+    })
+    expect(wrapper.get('#wi-accordion-panel-one').isVisible()).toBe(true)
+    await wrapper.findAll('.wi-accordion__header')[0]!.trigger('click')
+    expect(wrapper.findAll('.wi-accordion__header')[0]!.attributes('aria-expanded')).toBe('false')
+    expect(wrapper.emitted('update:modelValue')).toEqual([['']])
+  })
 })

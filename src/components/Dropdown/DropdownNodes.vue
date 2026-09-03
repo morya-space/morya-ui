@@ -73,9 +73,8 @@ function onLeave() {
         :disabled="item.disabled"
         :aria-haspopup="true"
       >
-        <span v-if="iconOf(item) || item.icon" class="wi-dropdown__icon" aria-hidden="true">
-          <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
-          <template v-else>{{ item.icon }}</template>
+        <span v-if="iconOf(item)" class="wi-dropdown__icon" aria-hidden="true">
+          <WiIcon :name="iconOf(item)!" size="sm" />
         </span>
         <slot name="item" :item="item">
           {{ item.label }}
@@ -103,9 +102,8 @@ function onLeave() {
       @mouseenter="!item.disabled && $emit('highlight', item.value)"
       @click="$emit('select', item)"
     >
-      <span v-if="iconOf(item) || item.icon" class="wi-dropdown__icon" aria-hidden="true">
-        <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
-        <template v-else>{{ item.icon }}</template>
+      <span v-if="iconOf(item)" class="wi-dropdown__icon" aria-hidden="true">
+        <WiIcon :name="iconOf(item)!" size="sm" />
       </span>
       <slot name="item" :item="item">
         {{ item.label }}

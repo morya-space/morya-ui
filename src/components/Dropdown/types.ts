@@ -1,20 +1,11 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { MenuNodeBase } from '../../shared/menu'
 
 export type DropdownItemType = 'item' | 'group' | 'divider'
 export type DropdownTrigger = 'click' | 'hover'
 
-export interface DropdownItem {
-  /** 菜单项的稳定标识，同时用于 v-for 的 key。分组 / 分割线可省略。 */
-  value?: string
-  /** 菜单项展示文本。需要自定义内容时可使用 item slot。 */
-  label?: string
-  /** 禁用后不可聚焦、不可选择。 */
-  disabled?: boolean
-  icon?: string
-  command?: () => void
+export interface DropdownItem extends MenuNodeBase {
   type?: DropdownItemType
-  /** Alias of `type: 'divider'`. */
-  separator?: boolean
   items?: DropdownItem[]
 }
 

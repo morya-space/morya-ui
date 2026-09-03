@@ -6,5 +6,7 @@ export interface MenuNodeBase {
   icon?: string
   disabled?: boolean
   separator?: boolean
+  shortcut?: string
+  command?: () => void
   items?: MenuNodeBase[]
 }

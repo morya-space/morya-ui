@@ -28,6 +28,18 @@
     left: 0;
 }
 
+.wi-toast--top {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.wi-toast--bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .wi-toast__message {
     align-items: flex-start;
     background: var(--wi-color-surface);

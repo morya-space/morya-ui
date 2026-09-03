@@ -2,11 +2,14 @@
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
 import { computed, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
   disabled: false,
+  invalid: false,
   filter: false,
 })
 
@@ -16,6 +19,10 @@ const emit = defineEmits<{
 
 const filterQuery = ref('')
 const locale = useWiLocale()
+const sizeClass = useConfiguredSize('Listbox', () => props.size)
+const { isInvalid } = useFieldFeedback(props)
+const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
+const resolvedListStyle = computed(() => props.listStyle)
 
 const filteredOptions = computed(() => {
   const query = filterQuery.value.trim().toLowerCase()
@@ -25,9 +32,11 @@ const filteredOptions = computed(() => {
 
 const rootClass = computed(() => [
   'wi-listbox',
+  `wi-listbox--${sizeClass.value}`,
   {
     'wi-listbox--disabled': props.disabled,
     'wi-listbox--multiple': props.multiple,
+    'wi-listbox--invalid': isInvalid.value,
   },
 ])
 
@@ -118,7 +127,8 @@ watch(keyboard.activeIndex, () => {
       role="listbox"
       :aria-label="locale.selectOption"
       :aria-multiselectable="multiple || undefined"
-      :style="listStyle"
+      :style="resolvedListStyle"
+      :aria-invalid="isInvalid || undefined"
       @keydown="onListKeydown"
     >
       <li v-for="(option, index) in filteredOptions" :key="String(option.value)" role="presentation">
@@ -137,7 +147,7 @@ watch(keyboard.activeIndex, () => {
         </button>
       </li>
       <li v-if="!filteredOptions.length" class="wi-listbox__empty">
-        {{ locale.emptyOptions }}
+        {{ resolvedEmptyMessage }}
       </li>
     </ul>
   </div>

@@ -32,6 +32,8 @@ export interface TreeProps {
   lazy?: boolean
   load?: (node: TreeNode) => Promise<TreeNode[]> | TreeNode[]
   draggable?: boolean
+  /** Empty state message when filter yields no results; defaults to locale `emptyMessage`. */
+  emptyMessage?: string
 }
 
 export interface TreeEmits {

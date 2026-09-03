@@ -76,3 +76,17 @@
     padding: var(--wi-space-3);
     text-align: center;
 }
+
+.wi-listbox--small .wi-listbox__option {
+    font-size: var(--wi-control-font-small);
+    padding: var(--wi-space-1) var(--wi-space-2);
+}
+
+.wi-listbox--large .wi-listbox__option {
+    font-size: var(--wi-control-font-large);
+    padding: var(--wi-space-2) var(--wi-space-3);
+}
+
+.wi-listbox--invalid {
+    border-color: var(--wi-color-danger);
+}

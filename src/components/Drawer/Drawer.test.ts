@@ -64,4 +64,30 @@ describe('wiDrawer', () => {
     expect(pane.style.width).toBe('320px')
     wrapper.unmount()
   })
+
+  it('respects closeOnEsc=false and emits close', async () => {
+    const wrapper = mount(WiDrawer, {
+      attachTo: document.body,
+      props: { modelValue: true, closeOnEsc: false },
+    })
+    await nextTick()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    document.body.querySelector('.wi-drawer__close')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('close')).toEqual([[]])
+    wrapper.unmount()
+  })
+
+  it('keeps open when beforeClose returns false', async () => {
+    const wrapper = mount(WiDrawer, {
+      attachTo: document.body,
+      props: { modelValue: true, beforeClose: () => false },
+    })
+    await nextTick()
+    document.body.querySelector('.wi-drawer__close')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    wrapper.unmount()
+  })
 })

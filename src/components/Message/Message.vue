@@ -11,7 +11,9 @@ import WiIcon from '../Icon/Icon.vue'
 import {
   closeMessageItem,
   messageState,
+  pauseMessageLife,
   registerMessageManualHost,
+  resumeMessageLife,
   trimMessagesToMax,
   unregisterMessageManualHost,
 } from './messageState'
@@ -24,19 +26,24 @@ const props = withDefaults(defineProps<MessageProps>(), {
 const config = useWiConfig()
 const locale = useWiLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
-const resolvedPlacement = computed(() => props.placement ?? messageState.placement)
+const isService = computed(() => props.messages === undefined)
+const list = computed(() => props.messages ?? messageState.items)
+const resolvedPlacement = computed(
+  () => props.placement ?? (isService.value ? messageState.placement : 'top'),
+)
 
 onMounted(() => {
-  if (!props.auto) registerMessageManualHost()
+  if (isService.value && !props.auto) registerMessageManualHost()
 })
 
 onBeforeUnmount(() => {
-  if (!props.auto) unregisterMessageManualHost()
+  if (isService.value && !props.auto) unregisterMessageManualHost()
 })
 
 watch(
   () => [props.placement, props.max] as const,
   ([placement, max]) => {
+    if (!isService.value) return
     if (placement) messageState.placement = placement
     if (max !== undefined) {
       messageState.max = max
@@ -64,7 +71,15 @@ function severityClass(severity?: MessageItem['severity']) {
 }
 
 function onClose(item: MessageItem) {
-  closeMessageItem(item.id)
+  if (isService.value) closeMessageItem(item.id)
+}
+
+function onMouseEnter(item: MessageItem) {
+  if (isService.value) pauseMessageLife(item.id)
+}
+
+function onMouseLeave(item: MessageItem) {
+  if (isService.value) resumeMessageLife(item.id, closeMessageItem)
 }
 </script>
 
@@ -78,11 +93,13 @@ function onClose(item: MessageItem) {
     >
       <TransitionGroup name="wi-message-slide">
         <div
-          v-for="item in messageState.items"
+          v-for="item in list"
           :key="item.id"
           class="wi-message"
           :class="severityClass(item.severity)"
           role="status"
+          @mouseenter="onMouseEnter(item)"
+          @mouseleave="onMouseLeave(item)"
         >
           <span v-if="item.icon !== false" class="wi-message__icon" aria-hidden="true">
             <WiIcon :name="iconName(item.severity)" size="sm" />

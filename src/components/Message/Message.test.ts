@@ -70,4 +70,37 @@ describe('message API', () => {
     await nextTick()
     expect(document.body.querySelector('.wi-message__content strong')?.textContent).toBe('Rich node')
   })
+
+  it('dedupes by content and refreshes life', async () => {
+    vi.useFakeTimers()
+    const first = message.info({ content: 'Sync', life: 1000 })
+    message.info({ content: 'Sync', life: 2000 })
+    expect(messageState.items).toHaveLength(1)
+    expect(messageState.items[0]?.id).toBe(first.id)
+    await vi.advanceTimersByTimeAsync(1500)
+    expect(messageState.items).toHaveLength(1)
+    await vi.advanceTimersByTimeAsync(600)
+    expect(messageState.items).toHaveLength(0)
+  })
+
+  it('pauses auto-close while hovered', async () => {
+    vi.useFakeTimers()
+    message.info({ content: 'Hover me', life: 1000 })
+    await nextTick()
+    const node = document.body.querySelector('.wi-message')
+    expect(node).toBeTruthy()
+    node!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
+    await vi.advanceTimersByTimeAsync(1500)
+    expect(messageState.items).toHaveLength(1)
+    node!.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }))
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(messageState.items).toHaveLength(0)
+  })
+
+  it('setDefaults is an alias of config', () => {
+    message.setDefaults({ placement: 'bottom', max: 5, dedupe: false })
+    expect(messageState.placement).toBe('bottom')
+    expect(messageState.max).toBe(5)
+    expect(messageState.dedupe).toBe(false)
+  })
 })

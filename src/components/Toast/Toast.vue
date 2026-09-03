@@ -9,7 +9,9 @@ import { WiRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import {
   closeToastItem,
+  pauseToastLife,
   registerToastManualHost,
+  resumeToastLife,
   toastState,
   trimToastsToMax,
   unregisterToastManualHost,
@@ -62,6 +64,14 @@ function onClose(message: ToastMessage) {
   if (isService.value) closeToastItem(message.id)
   emit('close', message)
 }
+
+function onMouseEnter(message: ToastMessage) {
+  if (isService.value) pauseToastLife(message.id)
+}
+
+function onMouseLeave(message: ToastMessage) {
+  if (isService.value) resumeToastLife(message.id, closeToastItem)
+}
 </script>
 
 <template>
@@ -79,6 +89,8 @@ function onClose(message: ToastMessage) {
           class="wi-toast__message"
           :class="messageSeverityClass(message.severity)"
           role="status"
+          @mouseenter="onMouseEnter(message)"
+          @mouseleave="onMouseLeave(message)"
         >
           <div class="wi-toast__content">
             <strong><WiRenderableView :value="message.summary" /></strong>

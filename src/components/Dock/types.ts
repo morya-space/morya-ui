@@ -1,8 +1,7 @@
-export interface DockItem {
+import type { MenuNodeBase } from '../../shared/menu'
+
+export interface DockItem extends Omit<MenuNodeBase, 'label'> {
   label: string
-  icon?: string
-  command?: () => void
-  disabled?: boolean
 }
 
 export interface DockProps {

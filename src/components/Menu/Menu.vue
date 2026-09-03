@@ -90,7 +90,6 @@ function updatePopupPosition() {
     props.placement,
     {
       minWidth: '10rem',
-      zIndex: config.value.zIndex ?? 1000,
     },
   )
 }
@@ -181,12 +180,23 @@ function isChildActive(item: MenuItem, index: number, prefix: string) {
 }
 
 function paddingLeft(depth: number) {
-  if (props.mode === 'horizontal') return props.rootIndent
+  if (props.mode === 'horizontal') return undefined
   if (props.collapsed) {
     const iconSize = 20
     return Math.max(0, props.collapsedWidth / 2 - iconSize / 2)
   }
-  return props.rootIndent + depth * props.indent
+  return undefined
+}
+
+function paddingStyle(depth: number) {
+  if (props.mode === 'horizontal') {
+    return { paddingInlineStart: `${props.rootIndent}px` }
+  }
+  if (props.collapsed) {
+    const px = paddingLeft(depth)
+    return px != null ? { paddingInlineStart: `${px}px` } : undefined
+  }
+  return { paddingInlineStart: `calc(var(--wi-menu-root-indent) + ${depth} * var(--wi-menu-indent))` }
 }
 
 function activate(item: MenuItem) {
@@ -336,7 +346,7 @@ provide(WI_MENU_KEY, {
   resolveKey,
   isSelected,
   isChildActive,
-  paddingLeft,
+  paddingStyle,
   activeKey,
   tabindexForKey,
 })
@@ -386,6 +396,15 @@ const menuClass = computed(() => [
     'wi-menu--inverted': props.inverted,
   },
 ])
+
+const menuStyle = computed(() => ({
+  '--wi-menu-indent': `${props.indent / 16}rem`,
+  '--wi-menu-root-indent': `${props.rootIndent / 16}rem`,
+}))
+
+const popupPanelStyle = computed(() =>
+  teleported.value ? { ...menuStyle.value, ...popupStyle.value } : menuStyle.value,
+)
 </script>
 
 <template>
@@ -393,6 +412,7 @@ const menuClass = computed(() => [
     v-if="!popup"
     ref="root"
     :class="menuClass"
+    :style="menuStyle"
     role="menu"
     @keydown="onMenuKeydown"
   >
@@ -408,7 +428,7 @@ const menuClass = computed(() => [
           v-if="modelValue"
           ref="root"
           :class="menuClass"
-          :style="teleported ? popupStyle : undefined"
+          :style="teleported ? popupPanelStyle : menuStyle"
           role="menu"
           @keydown="onMenuKeydown"
         >
@@ -422,9 +442,9 @@ const menuClass = computed(() => [
       <div
         v-if="modelValue"
         ref="root"
-        :class="menuClass"
-        :style="teleported ? popupStyle : undefined"
-        role="menu"
+          :class="menuClass"
+          :style="teleported ? { ...menuStyle, ...popupStyle } : menuStyle"
+          role="menu"
         @keydown="onMenuKeydown"
       >
         <MenuNodes :items="model" :depth="0" prefix="item" />

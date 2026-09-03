@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { OrderListProps } from './types'
-import { nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WiIcon from '../Icon/Icon.vue'
@@ -16,6 +16,10 @@ const emit = defineEmits<{
   (event: 'reorder', value: unknown[]): void
 }>()
 const locale = useWiLocale()
+
+const resolvedEmptyMessage = computed(
+  () => props.emptyMessage ?? locale.value.emptyMessage,
+)
 
 const selectedIndex = ref<number | null>(null)
 const dragFrom = ref<number | null>(null)
@@ -149,6 +153,7 @@ function resetDrag() {
     </div>
 
     <ul
+      v-if="modelValue.length"
       ref="list"
       class="wi-orderlist__list"
       :style="listStyle"
@@ -192,5 +197,10 @@ function resetDrag() {
         </span>
       </li>
     </ul>
+    <div v-else class="wi-orderlist__message" role="status">
+      <slot name="empty">
+        <p class="wi-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
+      </slot>
+    </div>
   </div>
 </template>

@@ -207,4 +207,31 @@ describe('wiForm / WiFormItem', () => {
     await nextTick()
     expect(wrapper.find('.wi-form-item__error').exists()).toBe(false)
   })
+
+  it('resets model values to the initial snapshot', async () => {
+    const model = { name: 'Alice', email: 'a@example.com' }
+    const wrapper = mount(WiForm, {
+      props: { model },
+      slots: {
+        default: () => h(WiFormItem, { label: '名称', name: 'name' }, { default: () => h('input') }),
+      },
+    })
+    const form = wrapper.getComponent(WiForm)
+    model.name = 'Bob'
+    model.email = 'b@example.com'
+    form.vm.reset()
+    await nextTick()
+    expect(model.name).toBe('Alice')
+    expect(model.email).toBe('a@example.com')
+  })
+
+  it('applies disabled fieldset suppression and size class', () => {
+    const wrapper = mount(WiForm, {
+      props: { disabled: true, size: 'small' },
+      slots: { default: () => h('input') },
+    })
+    expect(wrapper.get('form').attributes('aria-disabled')).toBe('true')
+    expect(wrapper.get('fieldset').attributes('disabled')).toBeDefined()
+    expect(wrapper.get('.wi-form').classes()).toContain('wi-form--size-small')
+  })
 })

@@ -36,6 +36,15 @@ export interface InputPasswordProps {
 export interface InputPasswordEmits {
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: string): void
+}
+
+export interface InputPasswordInstance {
+  focus: () => void
+  blur: () => void
+  select: () => void
 }
 
 export interface InputPasswordSlots {

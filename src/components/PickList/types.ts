@@ -4,6 +4,8 @@ export interface PickListProps {
   dataKey?: string
   sourceHeader?: string
   targetHeader?: string
+  /** Empty state message; defaults to locale `emptyMessage`. */
+  emptyMessage?: string
 }
 
 export interface PickListEmits {

@@ -3,6 +3,7 @@ import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } fr
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiIcon from '../Icon/Icon.vue'
@@ -12,6 +13,7 @@ const props = withDefaults(defineProps<AutoCompleteProps>(), {
   suggestions: () => [],
   dropdown: false,
   disabled: false,
+  invalid: false,
   placeholder: '',
   loading: false,
   clearable: false,
@@ -27,6 +29,9 @@ const emit = defineEmits<{
 const config = useWiConfig()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
+const fieldId = computed(() => props.id ?? `wi-autocomplete-${Math.random().toString(36).slice(2, 8)}`)
+const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
+const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
@@ -61,6 +66,7 @@ const rootClass = computed(() => [
     'wi-autocomplete--disabled': props.disabled,
     'wi-autocomplete--open': open.value,
     'wi-autocomplete--loading': props.loading,
+    'wi-autocomplete--invalid': isInvalid.value,
   },
 ])
 
@@ -168,26 +174,31 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', onViewportChange, true)
 })
 
-const panelOpen = computed(() => open.value && (filtered.value.length > 0 || props.loading))
+const panelOpen = computed(() => open.value)
 </script>
 
 <template>
-  <div ref="root" :class="rootClass">
-    <div ref="trigger" class="wi-autocomplete__control">
-      <input
-        class="wi-autocomplete__input"
-        type="text"
-        role="combobox"
-        :value="modelValue"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :aria-expanded="open"
-        :aria-busy="loading || undefined"
-        aria-autocomplete="list"
-        @input="onInput"
-        @keydown="onKeydown"
-        @focus="requestComplete(modelValue ?? '')"
-      >
+  <div ref="root" class="wi-select-field">
+    <label v-if="label" class="wi-select-field__label" :for="fieldId">{{ label }}</label>
+    <div :class="rootClass">
+      <div ref="trigger" class="wi-autocomplete__control">
+        <input
+          :id="fieldId"
+          class="wi-autocomplete__input"
+          type="text"
+          role="combobox"
+          :value="modelValue"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          :aria-expanded="open"
+          :aria-busy="loading || undefined"
+          :aria-invalid="isInvalid || undefined"
+          :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
+          aria-autocomplete="list"
+          @input="onInput"
+          @keydown="onKeydown"
+          @focus="requestComplete(modelValue ?? '')"
+        >
       <span v-if="loading" class="wi-autocomplete__spinner" aria-hidden="true" />
       <button
         v-else-if="showClear"
@@ -222,6 +233,9 @@ const panelOpen = computed(() => open.value && (filtered.value.length > 0 || pro
           <li v-if="loading && !filtered.length" class="wi-autocomplete__status">
             {{ locale.loading }}
           </li>
+          <li v-else-if="!filtered.length" class="wi-autocomplete__status">
+            {{ resolvedEmptyMessage }}
+          </li>
           <li
             v-for="(item, index) in filtered"
             :key="`${item.value}-${index}`"
@@ -236,5 +250,15 @@ const panelOpen = computed(() => open.value && (filtered.value.length > 0 || pro
         </ul>
       </Transition>
     </Teleport>
+    </div>
+    <span
+      v-if="feedbackText"
+      :id="`${fieldId}-help`"
+      class="wi-select-field__help"
+      :class="{ 'wi-select-field__help--invalid': feedbackIsError }"
+      :role="feedbackIsError ? 'alert' : undefined"
+    >
+      {{ feedbackText }}
+    </span>
   </div>
 </template>

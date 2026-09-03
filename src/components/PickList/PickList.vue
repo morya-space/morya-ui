@@ -19,6 +19,9 @@ const selectedTarget = ref<Array<string | number>>([])
 const locale = useWiLocale()
 const sourceTitle = computed(() => props.sourceHeader ?? locale.value.sourceHeader)
 const targetTitle = computed(() => props.targetHeader ?? locale.value.targetHeader)
+const resolvedEmptyMessage = computed(
+  () => props.emptyMessage ?? locale.value.emptyMessage,
+)
 
 function itemKey(item: unknown, index: number) {
   if (props.dataKey && item && typeof item === 'object' && props.dataKey in item) {
@@ -96,6 +99,11 @@ function moveAllToSource() {
             {{ item }}
           </slot>
         </li>
+        <li v-if="!source.length" class="wi-picklist__empty" role="status">
+          <slot name="empty">
+            {{ resolvedEmptyMessage }}
+          </slot>
+        </li>
       </ul>
     </div>
     <div class="wi-picklist__controls">
@@ -133,6 +141,11 @@ function moveAllToSource() {
         >
           <slot name="item" :item="item" :index="index">
             {{ item }}
+          </slot>
+        </li>
+        <li v-if="!target.length" class="wi-picklist__empty" role="status">
+          <slot name="empty">
+            {{ resolvedEmptyMessage }}
           </slot>
         </li>
       </ul>

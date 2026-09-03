@@ -7,6 +7,8 @@ export interface AccordionTab {
 export interface AccordionProps {
   /** Active tab key(s). Use with `v-model`. */
   modelValue?: string | string[]
+  /** Uncontrolled initial active key(s) when `modelValue` is omitted. */
+  defaultValue?: string | string[]
   /** Allow multiple panels open. */
   multiple?: boolean
   tabs: AccordionTab[]

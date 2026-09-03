@@ -11,6 +11,13 @@ export type AutoCompleteSuggestion = string | AutoCompleteOption
 export interface AutoCompleteProps {
   modelValue?: string
   suggestions?: AutoCompleteSuggestion[]
+  id?: string
+  label?: string
+  helpText?: string
+  invalid?: boolean
+  /** Error copy under the field; implies invalid when set. */
+  errorMessage?: string
+  emptyMessage?: string
   dropdown?: boolean
   disabled?: boolean
   placeholder?: string

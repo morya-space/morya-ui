@@ -2,11 +2,13 @@
 import type { InputTagsProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
   modelValue: () => [],
   disabled: false,
+  invalid: false,
   addOnBlur: false,
 })
 
@@ -16,12 +18,23 @@ const emit = defineEmits<{
 
 const locale = useWiLocale()
 const draft = ref('')
+const sizeClass = useConfiguredSize('InputTags', () => props.size)
+const fieldId = computed(() => props.id ?? `wi-inputtags-${Math.random().toString(36).slice(2, 8)}`)
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
 const separators = computed(() => {
   if (!props.separator) return []
   return Array.isArray(props.separator) ? props.separator : [props.separator]
 })
 const atMax = computed(() => props.max != null && props.modelValue.length >= props.max)
+
+const rootClass = computed(() => [
+  'wi-inputtags',
+  `wi-inputtags--${sizeClass.value}`,
+  {
+    'wi-inputtags--disabled': props.disabled,
+    'wi-inputtags--invalid': props.invalid,
+  },
+])
 
 function addTag(raw = draft.value) {
   if (props.disabled || atMax.value) return
@@ -88,32 +101,37 @@ function onBlur() {
 </script>
 
 <template>
-  <div class="wi-inputtags" :class="{ 'wi-inputtags--disabled': disabled }">
-    <span
-      v-for="(tag, index) in modelValue"
-      :key="`${tag}-${index}`"
-      class="wi-inputtags__chip"
-    >
-      {{ tag }}
-      <button
-        type="button"
-        class="wi-inputtags__remove"
-        :disabled="disabled"
-        :aria-label="locale.removeTag"
-        @click="removeTag(index)"
+  <div class="wi-inputtags-field">
+    <label v-if="label" class="wi-inputtags-field__label" :for="fieldId">{{ label }}</label>
+    <div :class="rootClass">
+      <span
+        v-for="(tag, index) in modelValue"
+        :key="`${tag}-${index}`"
+        class="wi-inputtags__chip"
       >
-        <WiIcon name="close" size="sm" />
-      </button>
-    </span>
-    <input
-      :value="draft"
-      class="wi-inputtags__input"
-      type="text"
-      :placeholder="modelValue.length ? '' : addPlaceholder"
-      :disabled="disabled || atMax"
-      @input="onInput"
-      @keydown="onKeydown"
-      @blur="onBlur"
-    >
+        {{ tag }}
+        <button
+          type="button"
+          class="wi-inputtags__remove"
+          :disabled="disabled"
+          :aria-label="locale.removeTag"
+          @click="removeTag(index)"
+        >
+          <WiIcon name="close" size="sm" />
+        </button>
+      </span>
+      <input
+        :id="fieldId"
+        :value="draft"
+        class="wi-inputtags__input"
+        type="text"
+        :placeholder="modelValue.length ? '' : addPlaceholder"
+        :disabled="disabled || atMax"
+        :aria-invalid="invalid || undefined"
+        @input="onInput"
+        @keydown="onKeydown"
+        @blur="onBlur"
+      >
+    </div>
   </div>
 </template>

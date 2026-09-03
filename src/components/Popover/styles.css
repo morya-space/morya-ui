@@ -73,7 +73,7 @@
     right: auto;
     top: auto;
     transform: none;
-    z-index: var(--wi-z-toast);
+    z-index: var(--wi-z-tooltip);
 }
 
 .wi-popover-enter-active,

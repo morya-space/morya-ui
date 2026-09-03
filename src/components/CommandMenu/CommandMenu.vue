@@ -4,7 +4,9 @@ import { computed, nextTick, ref, toRef, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
+import { resolveMenuIcon } from '../../shared/menu'
 import { useModalOverlay } from '../../shared/useModalOverlay'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
   model: () => [],
@@ -39,6 +41,10 @@ function activate(item: CommandMenuItem) {
   if (item.disabled) return
   item.command?.()
   close()
+}
+
+function iconOf(item: CommandMenuItem) {
+  return resolveMenuIcon(item.icon)
 }
 
 function onPanelKeydown(event: KeyboardEvent) {
@@ -118,7 +124,9 @@ watch(filtered, () => {
                 @click="activate(item)"
                 @mouseenter="activeIndex = index"
               >
-                <span v-if="item.icon" class="wi-commandmenu__icon" aria-hidden="true">{{ item.icon }}</span>
+                <span v-if="iconOf(item)" class="wi-commandmenu__icon" aria-hidden="true">
+                  <WiIcon :name="iconOf(item)!" size="sm" />
+                </span>
                 <span class="wi-commandmenu__label">{{ item.label }}</span>
                 <span v-if="item.shortcut" class="wi-commandmenu__shortcut">{{ item.shortcut }}</span>
               </button>

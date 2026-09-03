@@ -83,4 +83,37 @@ describe('toast API', () => {
     toast.destroyAll()
     expect(toastState.messages).toHaveLength(0)
   })
+
+  it('dedupes by summary+detail and refreshes life', async () => {
+    vi.useFakeTimers()
+    const first = toast.info({ summary: 'Sync', detail: 'Pending', life: 1000 })
+    toast.info({ summary: 'Sync', detail: 'Pending', life: 2000 })
+    expect(toastState.messages).toHaveLength(1)
+    expect(toastState.messages[0]?.id).toBe(first.id)
+    await vi.advanceTimersByTimeAsync(1500)
+    expect(toastState.messages).toHaveLength(1)
+    await vi.advanceTimersByTimeAsync(600)
+    expect(toastState.messages).toHaveLength(0)
+  })
+
+  it('pauses auto-close while hovered', async () => {
+    vi.useFakeTimers()
+    toast.info({ summary: 'Hover me', life: 1000 })
+    await nextTick()
+    const node = document.body.querySelector('.wi-toast__message')
+    expect(node).toBeTruthy()
+    node!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
+    await vi.advanceTimersByTimeAsync(1500)
+    expect(toastState.messages).toHaveLength(1)
+    node!.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }))
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(toastState.messages).toHaveLength(0)
+  })
+
+  it('supports top center position class', async () => {
+    toast.setDefaults({ position: 'top' })
+    toast.info({ summary: 'Centered', life: 0 })
+    await nextTick()
+    expect(document.body.querySelector('.wi-toast--top')).toBeTruthy()
+  })
 })

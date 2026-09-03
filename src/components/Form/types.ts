@@ -1,3 +1,5 @@
+import type { WiSizeInput } from '../../shared/types'
+
 export type FormLabelPosition = 'top' | 'left'
 export type FormLabelAlign = 'left' | 'center' | 'right'
 export type FormValidateTrigger = 'submit' | 'blur' | 'change' | 'input'
@@ -36,6 +38,8 @@ export interface FormValidateResult {
 export interface FormInstance {
   validate: (name?: string) => Promise<FormValidateResult>
   clearValidate: (name?: string) => void
+  reset: () => void
+  resetFields: (names?: string | string[]) => void
   errors: Record<string, string>
 }
 
@@ -58,6 +62,8 @@ export interface FormProps {
   requireMark?: boolean
   /** Disable all nested fields (informational; FormItem forwards via CSS). */
   disabled?: boolean
+  /** Default control size for nested fields. */
+  size?: WiSizeInput
   /**
    * When to run field validation.
    * Also the default `trigger` for rules that omit one.

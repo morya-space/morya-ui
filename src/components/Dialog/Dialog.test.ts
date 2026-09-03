@@ -149,4 +149,31 @@ describe('wiDialog', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
     wrapper.unmount()
   })
+
+  it('uses ariaLabel prop and exposes close/maximize helpers', async () => {
+    const wrapper = mount(WiDialog, {
+      attachTo: document.body,
+      props: {
+        modelValue: true,
+        ariaLabel: 'Custom dialog label',
+        maximizable: true,
+      },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.wi-dialog')?.getAttribute('aria-label')).toBe(
+      'Custom dialog label',
+    )
+    await (wrapper.vm as { close: () => void }).close()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
+    await wrapper.setProps({ modelValue: true })
+    await nextTick()
+    await (wrapper.vm as { maximize: () => void }).maximize()
+    await nextTick()
+    expect(document.body.querySelector('.wi-dialog--maximized')).toBeTruthy()
+    await (wrapper.vm as { unmaximize: () => void }).unmaximize()
+    await nextTick()
+    expect(document.body.querySelector('.wi-dialog--maximized')).toBeFalsy()
+    wrapper.unmount()
+  })
 })

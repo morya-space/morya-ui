@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type {WiFormFieldRegistration} from './context';
+import type { WiFormFieldRegistration } from './context'
 import type { FormProps, FormValidateTrigger } from './types'
-import { computed, provide, reactive } from 'vue'
+import { computed, provide, reactive, ref, toRaw, watch } from 'vue'
+import { resolveSizeClass } from '../../shared/types'
 import {
+  WI_FORM_KEY,
   WI_FORM_ERRORS_KEY,
-  WI_FORM_KEY
-  
 } from './context'
 
 const props = withDefaults(defineProps<FormProps>(), {
@@ -25,12 +25,28 @@ const emit = defineEmits<{
 
 const fields = new Map<string, WiFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
+const initialSnapshot = ref<Record<string, unknown> | undefined>(undefined)
+
+function cloneModel(model: Record<string, unknown>) {
+  return JSON.parse(JSON.stringify(toRaw(model))) as Record<string, unknown>
+}
+
+watch(
+  () => props.model,
+  (model) => {
+    if (model && initialSnapshot.value == null) {
+      initialSnapshot.value = cloneModel(model)
+    }
+  },
+  { immediate: true, deep: true },
+)
 
 const validateOn = computed<FormValidateTrigger[]>(() => {
   const value = props.validateOn
   return Array.isArray(value) ? value : [value]
 })
 const resolvedLabelPosition = computed(() => props.labelPosition ?? props.labelPlacement ?? 'top')
+const sizeClass = computed(() => (props.size ? resolveSizeClass(props.size) : undefined))
 
 function setError(name: string, message?: string) {
   if (message) internalErrors[name] = message
@@ -66,6 +82,34 @@ function clearValidate(name?: string) {
   else Object.keys(internalErrors).forEach((key) => setError(key, undefined))
 }
 
+function resetModel(snapshot?: Record<string, unknown>) {
+  if (!props.model || !snapshot) return
+  for (const key of Object.keys(props.model)) {
+    if (key in snapshot) props.model[key] = cloneModel({ [key]: snapshot[key] })[key]
+    else delete props.model[key]
+  }
+  for (const key of Object.keys(snapshot)) {
+    if (!(key in props.model)) props.model[key] = cloneModel({ [key]: snapshot[key] })[key]
+  }
+}
+
+function reset() {
+  resetModel(initialSnapshot.value)
+  clearValidate()
+}
+
+function resetFields(names?: string | string[]) {
+  const snapshot = initialSnapshot.value
+  if (!props.model || !snapshot) return
+  const list = names == null ? Object.keys(snapshot) : Array.isArray(names) ? names : [names]
+  for (const name of list) {
+    if (name in snapshot) props.model[name] = cloneModel({ [name]: snapshot[name] })[name]
+  }
+  if (names == null) clearValidate()
+  else if (Array.isArray(names)) names.forEach((name) => clearValidate(name))
+  else clearValidate(names)
+}
+
 function registerField(field: WiFormFieldRegistration) {
   fields.set(field.name, field)
 }
@@ -95,6 +139,7 @@ const context = computed(() => ({
   labelWidth: props.labelWidth,
   requireMark: props.requireMark,
   disabled: props.disabled,
+  size: props.size,
   validateOn: validateOn.value,
   registerField,
   unregisterField,
@@ -115,7 +160,7 @@ async function onSubmit() {
   emit('submit', { valid: true })
 }
 
-defineExpose({ validate, clearValidate, errors: internalErrors })
+defineExpose({ validate, clearValidate, reset, resetFields, errors: internalErrors })
 </script>
 
 <template>
@@ -124,13 +169,17 @@ defineExpose({ validate, clearValidate, errors: internalErrors })
     :class="[
       `wi-form--label-${resolvedLabelPosition}`,
       `wi-form--align-${labelAlign}`,
+      sizeClass ? `wi-form--size-${sizeClass}` : undefined,
       {
         'wi-form--disabled': disabled,
         'wi-form--inline': inline,
       },
     ]"
+    :aria-disabled="disabled || undefined"
     @submit.prevent="onSubmit"
   >
-    <slot />
+    <fieldset class="wi-form__fieldset" :disabled="disabled">
+      <slot />
+    </fieldset>
   </form>
 </template>

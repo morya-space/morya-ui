@@ -4,6 +4,7 @@ import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   modelValue: null,
   placeholder: undefined,
   disabled: false,
+  invalid: false,
   selectionMode: 'single',
   multiple: false,
   checkable: false,
@@ -42,6 +44,8 @@ const emit = defineEmits<{
 const config = useWiConfig()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
+const fieldId = computed(() => props.id ?? `wi-treeselect-${Math.random().toString(36).slice(2, 8)}`)
+const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const open = ref(false)
 const query = ref('')
 const root = ref<HTMLElement | null>(null)
@@ -326,18 +330,20 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div
-    ref="root"
-    class="wi-treeselect"
-    :class="[
-      `wi-treeselect--${sizeClass}`,
-      {
-        'wi-treeselect--disabled': disabled,
-        'wi-treeselect--open': open,
-        'wi-treeselect--multiple': isMultiple,
-      },
-    ]"
-  >
+  <div ref="root" class="wi-select-field">
+    <label v-if="label" class="wi-select-field__label" :for="fieldId">{{ label }}</label>
+    <div
+      class="wi-treeselect"
+      :class="[
+        `wi-treeselect--${sizeClass}`,
+        {
+          'wi-treeselect--disabled': disabled,
+          'wi-treeselect--open': open,
+          'wi-treeselect--multiple': isMultiple,
+          'wi-treeselect--invalid': isInvalid,
+        },
+      ]"
+    >
     <div
       class="wi-treeselect__control wi-select__control"
       :class="{
@@ -346,6 +352,7 @@ onBeforeUnmount(() => {
       }"
     >
       <div
+        :id="fieldId"
         ref="trigger"
         class="wi-treeselect__trigger"
         role="combobox"
@@ -353,6 +360,8 @@ onBeforeUnmount(() => {
         :aria-disabled="disabled || undefined"
         :aria-expanded="open"
         :aria-controls="open ? panelId : undefined"
+        :aria-invalid="isInvalid || undefined"
+        :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
         aria-haspopup="tree"
         @click="toggle"
         @keydown="onTriggerKeydown"
@@ -436,5 +445,15 @@ onBeforeUnmount(() => {
         </div>
       </Transition>
     </Teleport>
+    </div>
+    <span
+      v-if="feedbackText"
+      :id="`${fieldId}-help`"
+      class="wi-select-field__help"
+      :class="{ 'wi-select-field__help--invalid': feedbackIsError }"
+      :role="feedbackIsError ? 'alert' : undefined"
+    >
+      {{ feedbackText }}
+    </span>
   </div>
 </template>

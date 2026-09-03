@@ -1,12 +1,8 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { MenuNodeBase } from '../../shared/menu'
 
-export interface MegaMenuItem {
+export interface MegaMenuItem extends Omit<MenuNodeBase, 'label' | 'items'> {
   label: string
-  /** Unique key used by `selectedKey`; falls back to `label`. */
-  key?: string
-  icon?: string
-  command?: () => void
-  disabled?: boolean
   /** Column groups for mega panel; each entry is a column of items. */
   items?: MegaMenuItem[][]
 }

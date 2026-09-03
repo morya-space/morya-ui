@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<InputOtpProps>(), {
   modelValue: '',
   length: 4,
   disabled: false,
+  invalid: false,
   integerOnly: false,
   mask: false,
 })
@@ -28,7 +29,11 @@ const chars = computed(() => {
 const rootClass = computed(() => [
   'wi-inputotp',
   `wi-inputotp--${sizeClass.value}`,
-  { 'wi-inputotp--disabled': props.disabled, 'wi-inputotp--mask': props.mask },
+  {
+    'wi-inputotp--disabled': props.disabled,
+    'wi-inputotp--mask': props.mask,
+    'wi-inputotp--invalid': props.invalid,
+  },
 ])
 
 const rootStyle = computed(() => {
@@ -120,6 +125,7 @@ watch(
       autocomplete="one-time-code"
       :value="char"
       :disabled="disabled"
+      :aria-invalid="invalid || undefined"
       :aria-label="formatLocale(locale.otpDigit, { index: index + 1 })"
       @input="onInput(index, $event)"
       @keydown="onKeydown(index, $event)"

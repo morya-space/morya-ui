@@ -1,4 +1,25 @@
 /* —— Form: Slider —— */
+.wi-slider-field {
+    display: grid;
+    gap: var(--wi-space-2);
+    width: 100%;
+}
+
+.wi-slider-field__label {
+    color: var(--wi-color-text);
+    font-size: var(--wi-font-size-md);
+    font-weight: 600;
+}
+
+.wi-slider-field__help {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-xs);
+}
+
+.wi-slider-field__help--invalid {
+    color: var(--wi-color-danger);
+}
+
 .wi-slider {
     --wi-slider-track-height: 0.35rem;
     --wi-slider-thumb-size: 1rem;
@@ -149,4 +170,16 @@
 
 .wi-slider--vertical .wi-slider__mark {
     transform: translateY(50%);
+}
+
+.wi-slider--small {
+    --wi-slider-thumb-size: 0.85rem;
+}
+
+.wi-slider--large {
+    --wi-slider-thumb-size: 1.15rem;
+}
+
+.wi-slider--invalid .wi-slider__input {
+    accent-color: var(--wi-color-danger);
 }

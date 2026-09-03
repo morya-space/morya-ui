@@ -1,3 +1,5 @@
+import type { WiSizeInput } from '../../shared/types'
+
 export type SliderMarks = number[] | Record<number, string>
 
 export interface SliderProps {
@@ -7,6 +9,12 @@ export interface SliderProps {
   step?: number
   range?: boolean
   disabled?: boolean
+  label?: string
+  invalid?: boolean
+  helpText?: string
+  /** Error copy under the field; implies invalid when set. */
+  errorMessage?: string
+  size?: WiSizeInput
   /** Tick marks. Array of values, or a value-to-label map. */
   marks?: SliderMarks
   /** Show the current value while interacting. */

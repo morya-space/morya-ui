@@ -2,7 +2,7 @@ import type { IconName } from '../Icon/types'
 
 export type AvatarShape = 'circle' | 'square'
 
-export type AvatarSize = 'normal' | 'large' | 'xlarge'
+export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge'
 
 export interface AvatarProps {
   /** Initials or fallback text when image/icon are absent. */
@@ -13,8 +13,8 @@ export interface AvatarProps {
   icon?: IconName
   /** Shape of the avatar. */
   shape?: AvatarShape
-  /** Size. Also accepts legacy `sm` / `lg`. */
-  size?: AvatarSize | 'sm' | 'lg'
+  /** Size. Also accepts legacy `normal` / `sm` / `md` / `lg`. */
+  size?: AvatarSize | 'normal' | 'sm' | 'md' | 'lg'
 }
 
 export interface AvatarEmits {
@@ -25,5 +25,5 @@ export interface AvatarGroupProps {
   /** Max avatars to show. Extra count is summarized as `+N`. */
   max?: number
   /** Size applied to overflow rest marker. */
-  size?: AvatarSize | 'sm' | 'lg'
+  size?: AvatarSize | 'normal' | 'sm' | 'md' | 'lg'
 }

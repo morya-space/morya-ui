@@ -5,7 +5,9 @@ import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<MegaMenuProps>(), {
   model: () => [],
@@ -45,6 +47,10 @@ function itemKey(item: MegaMenuItem) {
 
 function isSelected(item: MegaMenuItem) {
   return Boolean(props.selectedKey && itemKey(item) === props.selectedKey)
+}
+
+function iconOf(item: MegaMenuItem) {
+  return resolveMenuIcon(item.icon)
 }
 
 function pick(item: MegaMenuItem) {
@@ -249,7 +255,9 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="item.icon" aria-hidden="true">{{ item.icon }}</span>
+        <span v-if="iconOf(item)" class="wi-megamenu__icon" aria-hidden="true">
+          <WiIcon :name="iconOf(item)!" size="sm" />
+        </span>
         {{ item.label }}
       </button>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">

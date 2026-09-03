@@ -72,6 +72,7 @@ export const enUS: WiLocaleMessages = {
   terminal: 'Terminal',
   commandInput: 'Command input',
   breadcrumb: 'Breadcrumb',
+  home: 'Home',
   sidebar: 'Sidebar',
   menubar: 'Menubar',
   megaMenu: 'Mega menu',

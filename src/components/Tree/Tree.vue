@@ -8,6 +8,7 @@ import type {
   TreeSelectionKeys,
 } from './types'
 import { computed, nextTick, provide, reactive, ref, useSlots, watch } from 'vue'
+import { useWiLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   buildChildMap,
@@ -49,7 +50,12 @@ const emit = defineEmits<{
   (event: 'node-drop', payload: { dragKey: string; dropKey: string; position: 'before' | 'after' | 'inside' }): void
 }>()
 const slots = useSlots()
+const locale = useWiLocale()
 provide(WI_TREE_NODE_SLOT, slots.default)
+
+const resolvedEmptyMessage = computed(
+  () => props.emptyMessage ?? locale.value.emptyMessage,
+)
 
 const innerExpanded = ref<TreeExpandedKeys>({})
 const loadingKeys = reactive<Record<string, boolean>>({})
@@ -113,6 +119,10 @@ const visibleRoots = computed(() => {
   if (!props.filter?.trim()) return props.value
   return props.value.filter((node) => nodeMatches(node))
 })
+
+const isFilterEmpty = computed(
+  () => Boolean(props.filter?.trim()) && visibleRoots.value.length === 0,
+)
 
 function isExpanded(key: string) {
   if (props.filter?.trim()) {
@@ -400,7 +410,15 @@ provide(WI_TREE_KEY, {
 </script>
 
 <template>
-  <ul ref="root" class="wi-tree" role="tree" @keydown="onTreeKeydown">
-    <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" :depth="1" />
-  </ul>
+  <div class="wi-tree-root">
+    <ul v-if="visibleRoots.length" ref="root" class="wi-tree" role="tree" @keydown="onTreeKeydown">
+      <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" :depth="1" />
+    </ul>
+    <div v-else-if="isFilterEmpty" class="wi-tree__message" role="status">
+      <slot name="empty">
+        <p class="wi-tree__empty-text">{{ resolvedEmptyMessage }}</p>
+      </slot>
+    </div>
+    <ul v-else ref="root" class="wi-tree" role="tree" @keydown="onTreeKeydown" />
+  </div>
 </template>

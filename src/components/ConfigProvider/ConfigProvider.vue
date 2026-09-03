@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type {WiGlobalConfig} from '../../shared/config';
-import { computed, inject, toValue, watchEffect } from 'vue'
+import type { WiGlobalConfig } from '../../shared/config'
+import { applyTheme, getPreferredTheme } from '../../theme'
+import { computed, inject, onBeforeUnmount, toValue, watch } from 'vue'
 import {
   mergeWiConfig,
   provideWiConfig,
-  WI_CONFIG_KEY
-  
+  WI_CONFIG_KEY,
 } from '../../shared/config'
 import { applyDensity } from '../../theme'
 
@@ -22,14 +22,16 @@ const props = defineProps<{
   zIndex?: WiGlobalConfig['zIndex']
   /** Shorthand: content density. */
   density?: WiGlobalConfig['density']
+  /** Shorthand: color theme (`light` / `dark` / `system`). */
+  theme?: WiGlobalConfig['theme']
   /** Shorthand: locale dictionary. */
   locale?: WiGlobalConfig['locale']
   /** Shorthand: per-component default props. */
   componentDefaults?: WiGlobalConfig['componentDefaults']
   /**
-   * When true (default), also write density to `documentElement`
+   * When true (default), also write density / theme to `documentElement`
    * so the whole page picks up token changes. Set false to scope
-   * density CSS vars to this wrapper only.
+   * side effects to this wrapper only.
    */
   globalDensity?: boolean
 }>()
@@ -43,6 +45,7 @@ const local = computed<WiGlobalConfig>(() => ({
   ...(props.inputVariant !== undefined ? { inputVariant: props.inputVariant } : {}),
   ...(props.zIndex !== undefined ? { zIndex: props.zIndex } : {}),
   ...(props.density !== undefined ? { density: props.density } : {}),
+  ...(props.theme !== undefined ? { theme: props.theme } : {}),
   ...(props.locale !== undefined ? { locale: props.locale } : {}),
   ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
 }))
@@ -63,12 +66,59 @@ const layerStyle = computed(() => {
   return { '--wi-z-base': String(base) } as Record<string, string>
 })
 
-watchEffect(() => {
+let previousDensity: string | undefined
+let previousZBase: string | undefined
+let previousTheme: string | undefined
+let systemMedia: MediaQueryList | null = null
+
+function onSystemThemeChange() {
+  if (resolved.value.theme === 'system') applyTheme(getPreferredTheme())
+}
+
+function syncGlobalSideEffects() {
   if (!applyGlobal.value || typeof document === 'undefined') return
-  if (resolved.value.density) applyDensity(resolved.value.density)
-  if (resolved.value.zIndex != null) {
-    document.documentElement.style.setProperty('--wi-z-base', String(resolved.value.zIndex))
+  const { density, zIndex, theme } = resolved.value
+  if (density) {
+    previousDensity = document.documentElement.dataset.wiDensity
+    applyDensity(density)
   }
+  if (zIndex != null) {
+    previousZBase = document.documentElement.style.getPropertyValue('--wi-z-base')
+    document.documentElement.style.setProperty('--wi-z-base', String(zIndex))
+  }
+  if (theme !== undefined) {
+    previousTheme = document.documentElement.dataset.theme
+    applyTheme(theme === 'system' ? getPreferredTheme() : theme)
+  }
+  if (theme === 'system' && typeof window !== 'undefined') {
+    systemMedia?.removeEventListener('change', onSystemThemeChange)
+    systemMedia = window.matchMedia('(prefers-color-scheme: dark)')
+    systemMedia.addEventListener('change', onSystemThemeChange)
+  }
+}
+
+watch(
+  () => [applyGlobal.value, resolved.value.density, resolved.value.zIndex, resolved.value.theme] as const,
+  syncGlobalSideEffects,
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  if (!applyGlobal.value || typeof document === 'undefined') return
+  if (previousDensity !== undefined) {
+    if (previousDensity) document.documentElement.dataset.wiDensity = previousDensity
+    else delete document.documentElement.dataset.wiDensity
+  }
+  if (previousZBase !== undefined) {
+    if (previousZBase) document.documentElement.style.setProperty('--wi-z-base', previousZBase)
+    else document.documentElement.style.removeProperty('--wi-z-base')
+  }
+  if (previousTheme !== undefined) {
+    if (previousTheme) document.documentElement.dataset.theme = previousTheme
+    else delete document.documentElement.dataset.theme
+  }
+  systemMedia?.removeEventListener('change', onSystemThemeChange)
+  systemMedia = null
 })
 </script>
 
@@ -77,11 +127,3 @@ watchEffect(() => {
     <slot />
   </div>
 </template>
-
-<style scoped>
-.wi-config-provider {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-</style>

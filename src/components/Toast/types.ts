@@ -7,7 +7,13 @@ export type { WiRenderable }
 /** toast severities; `warning` kept as legacy alias for `warn`. */
 export type ToastSeverity = WiToastSeverity | 'warning'
 
-export type ToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
+export type ToastPosition =
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left'
+  | 'top'
+  | 'bottom'
 
 export interface ToastMessage {
   id: string | number
@@ -23,6 +29,8 @@ export type ToastOptions = Omit<ToastMessage, 'id' | 'summary'> & {
   id?: string | number
   summary: WiRenderable
   position?: ToastPosition
+  /** When true (default service setting), refresh life for duplicate summary+detail. */
+  dedupe?: boolean
 }
 
 /** String / VNode / component / render factory, or a full options object. */

@@ -1,6 +1,7 @@
 /* —— Menu —— */
 .wi-menu {
-    --wi-menu-item-height: 2.625rem;
+    --wi-menu-indent: var(--wi-space-3);
+    --wi-menu-root-indent: var(--wi-space-4);
     --wi-menu-item-radius: var(--wi-radius-md);
     --wi-menu-color: transparent;
     --wi-menu-item-color-hover: color-mix(

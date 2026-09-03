@@ -1,7 +1,8 @@
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import { createWellInsight, useWiConfig } from '../../shared/config'
+import { applyTheme } from '../../theme'
 import WiInput from '../Input/Input.vue'
 import WiSpace from '../Space/Space.vue'
 import WiConfigProvider from './ConfigProvider.vue'
@@ -147,5 +148,46 @@ describe('wiConfigProvider', () => {
     })
     expect(wrapper.get('.wi-input').classes()).toContain('wi-input--small')
     expect(wrapper.get('.wi-config-provider').attributes('data-wi-density')).toBe('compact')
+  })
+
+  it('applyTheme writes data-theme on documentElement', () => {
+    applyTheme('dark')
+    expect(document.documentElement.dataset.theme).toBe('dark')
+    applyTheme('light')
+  })
+
+  it('applies theme to documentElement and restores on unmount', async () => {
+    document.documentElement.dataset.theme = 'light'
+    const Probe = defineComponent({
+      setup() {
+        const config = useWiConfig()
+        return () => h('span', { 'data-theme': String(config.value.theme) })
+      },
+    })
+    const wrapper = mount(WiConfigProvider, {
+      props: { theme: 'dark', zIndex: 2400, globalDensity: true },
+      attachTo: document.body,
+      slots: { default: () => h(Probe) },
+    })
+    await nextTick()
+    await flushPromises()
+    expect(wrapper.get('span').attributes('data-theme')).toBe('dark')
+    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(document.documentElement.style.getPropertyValue('--wi-z-base')).toBe('2400')
+    wrapper.unmount()
+    expect(document.documentElement.dataset.theme).toBe('light')
+  })
+
+  it('cleans up z-index base on unmount', async () => {
+    document.documentElement.style.setProperty('--wi-z-base', '1000')
+    const wrapper = mount(WiConfigProvider, {
+      props: { zIndex: 2400, globalDensity: true },
+      slots: { default: () => h('span', 'x') },
+    })
+    await nextTick()
+    await flushPromises()
+    expect(document.documentElement.style.getPropertyValue('--wi-z-base')).toBe('2400')
+    wrapper.unmount()
+    expect(document.documentElement.style.getPropertyValue('--wi-z-base')).toBe('1000')
   })
 })

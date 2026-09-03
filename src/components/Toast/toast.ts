@@ -14,6 +14,7 @@ import {
   applyToastMax,
   clearToastItems,
   closeToastItem,
+  findDuplicateToast,
   resetToastHostRegistry,
   scheduleToastLife,
   setToastAutoHost,
@@ -56,6 +57,22 @@ function add(input: ToastInput, severity?: ToastSeverity): ToastHandle {
   ensureHost()
   applyToastMax(toastState.max)
   const item = toMessage(input, severity)
+  const dedupe =
+    (isToastOptionsObject(input) ? input.dedupe : undefined) ??
+    toastState.dedupe ??
+    true
+  if (dedupe) {
+    const existing = findDuplicateToast(item)
+    if (existing) {
+      if (item.life !== undefined) existing.life = item.life
+      if (item.severity !== undefined) existing.severity = item.severity
+      scheduleToastLife(existing, closeToastItem)
+      return {
+        id: existing.id,
+        close: () => closeToastItem(existing.id),
+      }
+    }
+  }
   toastState.messages = [...toastState.messages, item]
   scheduleToastLife(item, closeToastItem)
   return {
@@ -76,9 +93,10 @@ export const toast = {
   close: closeToastItem,
   closeAll: clearToastItems,
   destroyAll: clearToastItems,
-  setDefaults(options: { position?: ToastPosition; max?: number }) {
+  setDefaults(options: { position?: ToastPosition; max?: number; dedupe?: boolean }) {
     if (options.position) toastState.position = options.position
     if (options.max !== undefined) toastState.max = options.max
+    if (options.dedupe !== undefined) toastState.dedupe = options.dedupe
   },
 }
 

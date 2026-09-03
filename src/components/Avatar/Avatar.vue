@@ -5,7 +5,7 @@ import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<AvatarProps>(), {
   shape: 'circle',
-  size: 'normal',
+  size: 'medium',
 })
 
 const emit = defineEmits<{ (event: 'error', value: Event): void }>()
@@ -18,25 +18,27 @@ watch(
   },
 )
 
-const resolvedSize = computed((): AvatarSize => {
-  if (props.size === 'sm') return 'normal'
-  if (props.size === 'lg' || props.size === 'large') return 'large'
-  if (props.size === 'xlarge') return 'xlarge'
-  return 'normal'
-})
+function resolveAvatarSize(size: AvatarProps['size']): AvatarSize {
+  if (size === 'sm' || size === 'small') return 'small'
+  if (size === 'normal' || size === 'md' || size === 'medium') return 'medium'
+  if (size === 'lg' || size === 'large') return 'large'
+  if (size === 'xlarge') return 'xlarge'
+  return 'medium'
+}
+
+const resolvedSize = computed(() => resolveAvatarSize(props.size))
 
 const iconSize = computed(() => {
-  if (resolvedSize.value === 'large' || resolvedSize.value === 'xlarge') return 'lg'
+  if (resolvedSize.value === 'xlarge') return 'lg'
+  if (resolvedSize.value === 'large') return 'lg'
+  if (resolvedSize.value === 'small') return 'sm'
   return 'md'
 })
 
 const avatarClass = computed(() => [
   'wi-avatar',
   `wi-avatar--${props.shape}`,
-  {
-    'wi-avatar--large': resolvedSize.value === 'large',
-    'wi-avatar--xlarge': resolvedSize.value === 'xlarge',
-  },
+  `wi-avatar--${resolvedSize.value}`,
 ])
 
 const displayMode = computed(() => {

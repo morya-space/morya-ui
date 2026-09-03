@@ -2,11 +2,15 @@
 import type { PanelProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
-import WiIcon from '../Icon/Icon.vue'
+import { useControllable } from '../../shared/useControllable'
 import { resolveSizeClass } from '../../shared/types'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PanelProps>(), {
   toggleable: false,
+  defaultCollapsed: false,
+  collapsed: undefined,
+  modelValue: undefined,
 })
 
 const emit = defineEmits<{
@@ -16,7 +20,23 @@ const emit = defineEmits<{
 
 const locale = useWiLocale()
 const sizeTone = computed(() => resolveSizeClass(props.size))
-const isCollapsed = computed(() => props.modelValue ?? props.collapsed ?? false)
+
+function resolveControlledCollapsed() {
+  if (props.collapsed !== undefined) return props.collapsed
+  if (props.modelValue !== undefined) return props.modelValue
+  return undefined
+}
+
+const { value: isCollapsed, setValue: setCollapsed } = useControllable(
+  {
+    controlled: resolveControlledCollapsed,
+    defaultValue: props.defaultCollapsed,
+  },
+  (next) => {
+    emit('update:collapsed', next)
+    emit('update:modelValue', next)
+  },
+)
 
 const rootClass = computed(() => [
   'wi-panel',
@@ -29,9 +49,7 @@ const rootClass = computed(() => [
 
 function toggle() {
   if (!props.toggleable) return
-  const next = !isCollapsed.value
-  emit('update:collapsed', next)
-  emit('update:modelValue', next)
+  setCollapsed(!isCollapsed.value)
 }
 </script>
 

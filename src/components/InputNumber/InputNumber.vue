@@ -3,6 +3,7 @@ import type { InputNumberProps } from './types'
 import { computed, ref, useAttrs, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -11,17 +12,25 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   modelValue: null,
   step: 1,
   disabled: false,
+  readonly: false,
   invalid: false,
   fluid: false,
   showButtons: false,
   buttonPlacement: 'both',
   clearable: false,
 })
-const emit = defineEmits<{ (event: 'update:modelValue', value: number | null): void }>()
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: number | null): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: number | null): void
+}>()
 const attrs = useAttrs()
 const locale = useWiLocale()
+const inputElement = ref<HTMLInputElement | null>(null)
 const inputId = computed(() => props.id ?? `wi-inputnumber-${Math.random().toString(36).slice(2, 8)}`)
 const sizeClass = useConfiguredSize('InputNumber', () => props.size)
+const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const showClear = computed(() => props.clearable && props.modelValue != null && !props.disabled)
 
 const rootClass = computed(() => [
@@ -29,7 +38,7 @@ const rootClass = computed(() => [
   `wi-inputnumber--${sizeClass.value}`,
   {
     'wi-inputnumber--fluid': props.fluid,
-    'wi-inputnumber--invalid': props.invalid,
+    'wi-inputnumber--invalid': isInvalid.value,
     'wi-inputnumber--disabled': props.disabled,
     'wi-inputnumber--buttons': props.showButtons,
     'wi-inputnumber--buttons-right': props.showButtons && props.buttonPlacement === 'right',
@@ -111,6 +120,26 @@ function clear() {
   draft.value = null
   emit('update:modelValue', null)
 }
+
+function focus() {
+  inputElement.value?.focus()
+}
+
+function blur() {
+  inputElement.value?.blur()
+}
+
+function select() {
+  inputElement.value?.select()
+}
+
+function onBlur(event: FocusEvent) {
+  commitDraft()
+  emit('blur', event)
+  emit('change', props.modelValue)
+}
+
+defineExpose({ focus, blur, select })
 </script>
 
 <template>
@@ -130,14 +159,18 @@ function clear() {
       <input
         v-bind="attrs"
         :id="inputId"
+        ref="inputElement"
         class="wi-inputnumber__input"
         type="text"
         inputmode="decimal"
         :value="displayValue"
         :disabled="disabled"
-        :aria-invalid="invalid || undefined"
+        :readonly="readonly"
+        :aria-invalid="isInvalid || undefined"
+        :aria-describedby="feedbackText ? `${inputId}-help` : undefined"
         @input="updateFromInput"
-        @blur="commitDraft"
+        @focus="emit('focus', $event)"
+        @blur="onBlur"
         @keydown="onInputKeydown"
       >
       <button
@@ -180,5 +213,14 @@ function clear() {
         <WiIcon name="plus" size="sm" />
       </button>
     </div>
+    <span
+      v-if="feedbackText"
+      :id="`${inputId}-help`"
+      class="wi-inputnumber-field__help"
+      :class="{ 'wi-inputnumber-field__help--invalid': feedbackIsError }"
+      :role="feedbackIsError ? 'alert' : undefined"
+    >
+      {{ feedbackText }}
+    </span>
   </div>
 </template>

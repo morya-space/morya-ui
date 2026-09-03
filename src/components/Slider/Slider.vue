@@ -2,6 +2,8 @@
 import type { SliderProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
+import { useConfiguredSize } from '../../shared/config'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   modelValue: 0,
@@ -10,12 +12,16 @@ const props = withDefaults(defineProps<SliderProps>(), {
   step: 1,
   range: false,
   disabled: false,
+  invalid: false,
   tooltip: false,
   vertical: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | number[]): void }>()
 const locale = useWiLocale()
 const hovering = ref(false)
+const sizeClass = useConfiguredSize('Slider', () => props.size)
+const fieldId = computed(() => `wi-slider-${Math.random().toString(36).slice(2, 8)}`)
+const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
 const singleValue = computed(() => {
   if (Array.isArray(props.modelValue)) return props.modelValue[0] ?? props.min
@@ -52,11 +58,13 @@ const tooltipText = computed(() => {
 
 const rootClass = computed(() => [
   'wi-slider',
+  `wi-slider--${sizeClass.value}`,
   {
     'wi-slider--disabled': props.disabled,
     'wi-slider--range': props.range,
     'wi-slider--vertical': props.vertical,
     'wi-slider--tooltip': props.tooltip,
+    'wi-slider--invalid': isInvalid.value,
   },
 ])
 
@@ -78,13 +86,17 @@ function emitRange(index: 0 | 1, event: Event) {
 </script>
 
 <template>
-  <div
-    :class="rootClass"
-    @mouseenter="hovering = true"
-    @mouseleave="hovering = false"
-    @focusin="hovering = true"
-    @focusout="hovering = false"
-  >
+  <div class="wi-slider-field">
+    <label v-if="label" class="wi-slider-field__label" :id="`${fieldId}-label`">{{ label }}</label>
+    <div
+      :class="rootClass"
+      :aria-invalid="isInvalid || undefined"
+      :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
+      @mouseenter="hovering = true"
+      @mouseleave="hovering = false"
+      @focusin="hovering = true"
+      @focusout="hovering = false"
+    >
     <span v-if="tooltip && hovering" class="wi-slider__tooltip">{{ tooltipText }}</span>
     <template v-if="range">
       <input
@@ -122,9 +134,10 @@ function emitRange(index: 0 | 1, event: Event) {
       :value="singleValue"
       :disabled="disabled"
       :orient="vertical ? 'vertical' : undefined"
-      :aria-label="ariaLabel ?? locale.sliderControl"
-      @input="emitSingle"
-    >
+        :aria-label="ariaLabel ?? locale.sliderControl"
+        :aria-labelledby="label ? `${fieldId}-label` : undefined"
+        @input="emitSingle"
+      >
     <div v-if="markItems.length" class="wi-slider__marks" aria-hidden="true">
       <span
         v-for="mark in markItems"
@@ -135,5 +148,15 @@ function emitRange(index: 0 | 1, event: Event) {
         {{ mark.label }}
       </span>
     </div>
+    </div>
+    <span
+      v-if="feedbackText"
+      :id="`${fieldId}-help`"
+      class="wi-slider-field__help"
+      :class="{ 'wi-slider-field__help--invalid': feedbackIsError }"
+      :role="feedbackIsError ? 'alert' : undefined"
+    >
+      {{ feedbackText }}
+    </span>
   </div>
 </template>

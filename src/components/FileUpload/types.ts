@@ -66,6 +66,7 @@ export interface FileUploadProps {
 export interface FileUploadEmits {
   (event: 'select', files: File[]): void
   (event: 'exceed', files: File[]): void
+  (event: 'exceed-size', file: File): void
   (event: 'update:fileList', files: FileUploadFile[]): void
   (event: 'change', file: FileUploadFile, fileList: FileUploadFile[]): void
   (event: 'remove', file: FileUploadFile): void
@@ -73,6 +74,7 @@ export interface FileUploadEmits {
   (event: 'progress', file: FileUploadFile, percent: number): void
   (event: 'success', file: FileUploadFile, response: unknown): void
   (event: 'error', file: FileUploadFile, error: Error): void
+  (event: 'abort', file?: FileUploadFile): void
 }
 
 export interface FileUploadSlots {

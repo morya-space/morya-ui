@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
 const emit = defineEmits<{
   (event: 'select', files: File[]): void
   (event: 'exceed', files: File[]): void
+  (event: 'exceed-size', file: File): void
   (event: 'update:fileList', files: FileUploadFile[]): void
   (event: 'change', file: FileUploadFile, fileList: FileUploadFile[]): void
   (event: 'remove', file: FileUploadFile): void
@@ -29,6 +30,7 @@ const emit = defineEmits<{
   (event: 'progress', file: FileUploadFile, percent: number): void
   (event: 'success', file: FileUploadFile, response: unknown): void
   (event: 'error', file: FileUploadFile, error: Error): void
+  (event: 'abort', file?: FileUploadFile): void
 }>()
 
 let uidSeed = 0
@@ -82,10 +84,13 @@ function nextUid() {
   return `wi-upload-${Date.now()}-${uidSeed}`
 }
 
-function commit(next: FileUploadFile[], changed?: FileUploadFile) {
+function commit(next: FileUploadFile[]) {
   items.value = next
   emit('update:fileList', next)
-  if (changed) emit('change', changed, next)
+}
+
+function emitChange(file: FileUploadFile, fileList: FileUploadFile[]) {
+  emit('change', file, fileList)
 }
 
 function matchesAccept(file: File) {
@@ -130,11 +135,15 @@ function revokeUrl(file: FileUploadFile) {
 
 async function applyFiles(incoming: File[]) {
   if (props.disabled) return
-  const accepted = incoming.filter((file) => {
-    if (!matchesAccept(file)) return false
-    if (props.maxSize != null && file.size > props.maxSize) return false
-    return true
-  })
+  const accepted: File[] = []
+  for (const file of incoming) {
+    if (!matchesAccept(file)) continue
+    if (props.maxSize != null && file.size > props.maxSize) {
+      emit('exceed-size', file)
+      continue
+    }
+    accepted.push(file)
+  }
   const selected = props.multiple ? accepted : accepted.slice(0, 1)
   if (!selected.length) return
 
@@ -164,7 +173,7 @@ async function applyFiles(incoming: File[]) {
   commit(next)
   emit('select', created.map((item) => item.raw!).filter(Boolean))
   for (const item of created) {
-    emit('change', item, next)
+    emitChange(item, next)
     if (shouldAutoUpload.value) void uploadOne(item)
   }
 }
@@ -209,9 +218,13 @@ function onDropzoneKeydown(event: KeyboardEvent) {
 }
 
 function patchItem(uid: string, patch: Partial<FileUploadFile>) {
+  const previous = items.value.find((item) => item.uid === uid)
   const next = items.value.map((item) => (item.uid === uid ? { ...item, ...patch } : item))
   const changed = next.find((item) => item.uid === uid)
-  commit(next, changed)
+  commit(next)
+  if (changed && previous && patch.status != null && patch.status !== previous.status) {
+    emitChange(changed, next)
+  }
 }
 
 function requestOptions(item: FileUploadFile, file: File): FileUploadRequestOptions {
@@ -283,6 +296,7 @@ function abort(file?: FileUploadFile) {
     requests.get(uid)?.abort()
     requests.delete(uid)
   }
+  emit('abort', file)
 }
 
 async function removeFile(file: FileUploadFile) {
@@ -293,10 +307,8 @@ async function removeFile(file: FileUploadFile) {
   }
   abort(file)
   revokeUrl(file)
-  commit(
-    items.value.filter((item) => item.uid !== file.uid),
-    file,
-  )
+  const next = items.value.filter((item) => item.uid !== file.uid)
+  commit(next)
   emit('remove', file)
 }
 

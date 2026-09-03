@@ -4,6 +4,8 @@ export interface OrderListProps {
   listStyle?: string | Record<string, string>
   /** Enable drag-and-drop reorder. Defaults to true. */
   dragdrop?: boolean
+  /** Empty state message; defaults to locale `emptyMessage`. */
+  emptyMessage?: string
 }
 
 export interface OrderListEmits {

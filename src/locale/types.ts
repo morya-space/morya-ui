@@ -73,6 +73,7 @@ export interface WiLocaleConfig {
   terminal?: string
   commandInput?: string
   breadcrumb?: string
+  home?: string
   sidebar?: string
   menubar?: string
   megaMenu?: string

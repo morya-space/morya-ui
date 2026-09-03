@@ -26,6 +26,9 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'clear'): void
+  (event: 'focus', value: FocusEvent): void
+  (event: 'blur', value: FocusEvent): void
+  (event: 'change', value: string): void
 }>()
 const attrs = useAttrs()
 const defaults = useComponentDefaults('Textarea')
@@ -126,7 +129,16 @@ function clear() {
 function focus() {
   textareaElement.value?.focus()
 }
-defineExpose({ focus })
+
+function blur() {
+  textareaElement.value?.blur()
+}
+
+function select() {
+  textareaElement.value?.select()
+}
+
+defineExpose({ focus, blur, select })
 
 watch(
   () => [props.modelValue, resolvedAutosize.value] as const,
@@ -163,6 +175,9 @@ onMounted(() => {
         :aria-describedby="describedBy"
         :style="{ resize: resizeStyle }"
         @input="updateValue"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @change="emit('change', ($event.target as HTMLTextAreaElement).value)"
       />
       <button
         v-if="showClear"

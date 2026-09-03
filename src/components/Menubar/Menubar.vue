@@ -246,9 +246,8 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="iconOf(item) || item.icon" class="wi-menubar__icon" aria-hidden="true">
-          <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
-          <template v-else>{{ item.icon }}</template>
+        <span v-if="iconOf(item)" class="wi-menubar__icon" aria-hidden="true">
+          <WiIcon :name="iconOf(item)!" size="sm" />
         </span>
         {{ item.label }}
         <span v-if="item.items?.length" class="wi-menubar__caret" aria-hidden="true">
@@ -276,9 +275,8 @@ onBeforeUnmount(() => {
               :tabindex="subKeyboard.tabindexFor(childIndex)"
               @click.stop="activateChild(child)"
             >
-              <span v-if="iconOf(child) || child.icon" class="wi-menubar__icon" aria-hidden="true">
-                <WiIcon v-if="iconOf(child)" :name="iconOf(child)!" size="sm" />
-                <template v-else>{{ child.icon }}</template>
+              <span v-if="iconOf(child)" class="wi-menubar__icon" aria-hidden="true">
+                <WiIcon :name="iconOf(child)!" size="sm" />
               </span>
               {{ child.label }}
             </button>

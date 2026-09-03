@@ -4,6 +4,7 @@ export interface InputOtpProps {
   modelValue?: string
   length?: number
   disabled?: boolean
+  invalid?: boolean
   integerOnly?: boolean
   /** Mask each digit. */
   mask?: boolean

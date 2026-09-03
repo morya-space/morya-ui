@@ -35,7 +35,7 @@ describe('wiRating', () => {
     const star = wrapper.findAll('.wi-rating__star')[1]!
     await star.trigger('click', { clientX: 0 })
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeTypeOf('number')
-    expect(wrapper.classes()).toContain('wi-rating--half')
+    expect(wrapper.get('.wi-rating').classes()).toContain('wi-rating--half')
   })
 
   it('exposes slider semantics with label and value text', () => {

@@ -62,6 +62,8 @@ export interface DialogProps {
   onNegativeClick?: DialogClickGuard
   /** Runs before X / Esc / mask dismiss. Return `false` to keep the dialog open. */
   beforeClose?: DialogCloseGuard
+  /** Accessible name when no visible title is provided. */
+  ariaLabel?: string
 }
 
 export interface DialogEmits {

@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import type {VNode, VNodeChild} from 'vue';
+import type { VNode, VNodeChild } from 'vue'
 import type { AvatarGroupProps, AvatarSize } from './types'
-import { Comment, computed, Fragment, Text, useSlots   } from 'vue'
+import { Comment, computed, Fragment, Text, useSlots } from 'vue'
 
 const props = defineProps<AvatarGroupProps>()
 const slots = useSlots()
 
-const resolvedSize = computed((): AvatarSize => {
-  if (props.size === 'sm') return 'normal'
-  if (props.size === 'lg' || props.size === 'large') return 'large'
-  if (props.size === 'xlarge') return 'xlarge'
-  return 'normal'
-})
+function resolveAvatarSize(size: AvatarGroupProps['size']): AvatarSize {
+  if (size === 'sm' || size === 'small') return 'small'
+  if (size === 'normal' || size === 'md' || size === 'medium') return 'medium'
+  if (size === 'lg' || size === 'large') return 'large'
+  if (size === 'xlarge') return 'xlarge'
+  return 'medium'
+}
+
+const resolvedSize = computed(() => resolveAvatarSize(props.size))
 
 function flatten(nodes: VNodeChild[] | undefined): VNode[] {
   if (!nodes) return []
@@ -44,10 +47,7 @@ const overflow = computed(() => Math.max(0, children.value.length - visible.valu
 
 const groupClass = computed(() => [
   'wi-avatar-group',
-  {
-    'wi-avatar-group--large': resolvedSize.value === 'large',
-    'wi-avatar-group--xlarge': resolvedSize.value === 'xlarge',
-  },
+  `wi-avatar-group--${resolvedSize.value}`,
 ])
 </script>
 
@@ -57,10 +57,7 @@ const groupClass = computed(() => [
     <span
       v-if="overflow > 0"
       class="wi-avatar wi-avatar--circle wi-avatar-group__overflow"
-      :class="{
-        'wi-avatar--large': resolvedSize === 'large',
-        'wi-avatar--xlarge': resolvedSize === 'xlarge',
-      }"
+      :class="`wi-avatar--${resolvedSize}`"
     >
       +{{ overflow }}
     </span>

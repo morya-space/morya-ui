@@ -47,5 +47,5 @@
     right: auto;
     top: auto;
     white-space: normal;
-    z-index: var(--wi-z-toast);
+    z-index: var(--wi-z-tooltip);
 }

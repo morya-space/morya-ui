@@ -14,6 +14,8 @@ export interface TreeTableProps {
   columns: TreeTableColumn[]
   /** Controlled expanded keys map (`v-model:expandedKeys`). Uncontrolled when omitted. */
   expandedKeys?: Record<string, boolean>
+  /** Empty state message; defaults to locale `emptyMessage`. */
+  emptyMessage?: string
 }
 
 export interface TreeTableEmits {

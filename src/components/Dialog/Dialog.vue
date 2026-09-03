@@ -63,8 +63,8 @@ const showPresetFooter = computed(
 )
 const showFooter = computed(() => Boolean(slots.footer || showPresetFooter.value))
 const busy = computed(() => pending.value != null)
+const dialogAriaLabel = computed(() => props.ariaLabel ?? dialogTitle.value)
 const backdropStyle = computed(() => ({
-  zIndex: String(config.value.zIndex ?? 1000),
   '--wi-dialog-origin-x': `${origin.value.x}px`,
   '--wi-dialog-origin-y': `${origin.value.y}px`,
 }))
@@ -149,6 +149,16 @@ useModalOverlay({
     emit('hide')
   },
 })
+
+defineExpose({
+  close: dismiss,
+  maximize: () => {
+    if (!maximized.value) toggleMaximize()
+  },
+  unmaximize: () => {
+    if (maximized.value) toggleMaximize()
+  },
+})
 </script>
 
 <template>
@@ -177,7 +187,7 @@ useModalOverlay({
             :style="width && !maximized ? { width } : undefined"
             role="dialog"
             :aria-modal="modal || undefined"
-            :aria-label="dialogTitle"
+            :aria-label="dialogAriaLabel"
             tabindex="-1"
           >
             <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="wi-dialog__header">

@@ -105,3 +105,18 @@
     color: var(--wi-color-text-muted);
     display: inline-flex;
 }
+
+.wi-tree__message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(var(--wi-control-height-medium, 2.5rem) * 2);
+    padding: var(--wi-space-3);
+}
+
+.wi-tree__empty-text {
+    margin: 0;
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-sm);
+    line-height: 1.5;
+}

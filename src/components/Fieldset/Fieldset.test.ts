@@ -20,6 +20,19 @@ describe('wiFieldset', () => {
     await wrapper.get('.wi-fieldset__toggler').trigger('click')
     expect(wrapper.emitted('update:collapsed')).toEqual([[true]])
     await wrapper.setProps({ collapsed: true })
-    expect(wrapper.get('.wi-fieldset__content').attributes('style')).toContain('display: none')
+    expect(wrapper.classes()).toContain('wi-fieldset--collapsed')
+    expect(wrapper.get('.wi-fieldset__toggler').attributes('aria-expanded')).toBe('false')
+  })
+
+  it('toggles without v-model using defaultCollapsed', async () => {
+    const wrapper = mount(WiFieldset, {
+      props: { legend: 'Box', toggleable: true, defaultCollapsed: true },
+      slots: { default: 'Inner' },
+    })
+    expect(wrapper.classes()).toContain('wi-fieldset--collapsed')
+    expect(wrapper.get('.wi-fieldset__toggler').attributes('aria-controls')).toBeTruthy()
+    await wrapper.get('.wi-fieldset__toggler').trigger('click')
+    expect(wrapper.get('.wi-fieldset__content').isVisible()).toBe(true)
+    expect(wrapper.emitted('update:collapsed')).toEqual([[false]])
   })
 })

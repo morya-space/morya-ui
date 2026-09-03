@@ -46,3 +46,12 @@
     border-color: var(--wi-color-primary);
     color: var(--wi-color-primary);
 }
+
+.wi-picklist__empty {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-sm);
+    line-height: 1.5;
+    list-style: none;
+    padding: var(--wi-space-3);
+    text-align: center;
+}
