@@ -1,5 +1,28 @@
 # @well-insight/ui
 
+## 0.1.14
+
+### 新功能
+
+- enhance admin management project with new components and feedback system
+- enhance ConfirmDialog and Accordion components
+- add design-system guardrails and shared primitives
+- add admin management project with initial setup and configuration
+- enhance Table component with scrollbar and styling improvements
+- implement dynamic icon sizing across components
+- enhance resource management and documentation in MCP
+
+### 修复
+
+- fix api with component
+
+### 变更
+
+- update check-docs-drift script and package.json
+- update CHANGELOG for version 0.1.14
+- update Table component to use columns and rows structure
+- update Table component structure and improve functionality
+
 ## 0.1.14（未发布）
 
 ### 破坏性变更 / 弃用别名

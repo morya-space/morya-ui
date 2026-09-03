@@ -1,15 +1,17 @@
 {
-  "generatedAt": "2026-09-01T09:23:20.622Z",
-  "catalogGeneratedAt": "2026-09-01T09:23:17.785Z",
+  "generatedAt": "2026-09-03T13:56:12.460Z",
+  "catalogGeneratedAt": "2026-09-03T13:56:08.251Z",
   "components": [
     {
       "id": "Accordion",
       "exportName": "WiAccordion",
       "examples": 8,
       "props": {
-        "total": 3,
+        "total": 4,
         "covered": 3,
-        "missing": []
+        "missing": [
+          "defaultValue"
+        ]
       },
       "events": {
         "total": 1,
@@ -34,13 +36,19 @@
       "exportName": "WiAutoComplete",
       "examples": 8,
       "props": {
-        "total": 10,
+        "total": 16,
         "covered": 6,
         "missing": [
           "loading",
           "disabled",
           "teleport",
-          "appendTo"
+          "appendTo",
+          "emptyMessage",
+          "errorMessage",
+          "helpText",
+          "id",
+          "invalid",
+          "label"
         ]
       },
       "events": {
@@ -71,8 +79,8 @@
       "exportName": "WiAvatar",
       "examples": 6,
       "props": {
-        "total": 5,
-        "covered": 4,
+        "total": 6,
+        "covered": 5,
         "missing": [
           "image"
         ]
@@ -137,8 +145,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -162,10 +170,11 @@
         "missing": []
       },
       "slots": {
-        "total": 1,
+        "total": 2,
         "covered": 0,
         "missing": [
-          "separator"
+          "separator",
+          "item"
         ]
       },
       "methods": {
@@ -214,11 +223,12 @@
       "exportName": "WiCard",
       "examples": 8,
       "props": {
-        "total": 6,
+        "total": 7,
         "covered": 4,
         "missing": [
           "ariaLabel",
-          "bordered"
+          "bordered",
+          "headingLevel"
         ]
       },
       "events": {
@@ -242,10 +252,11 @@
       "exportName": "WiCarousel",
       "examples": 6,
       "props": {
-        "total": 7,
+        "total": 8,
         "covered": 6,
         "missing": [
-          "showIndicators"
+          "showIndicators",
+          "page"
         ]
       },
       "events": {
@@ -408,9 +419,14 @@
       "exportName": "WiConfigProvider",
       "examples": 14,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 10,
+        "covered": 6,
+        "missing": [
+          "zIndex",
+          "theme",
+          "locale",
+          "globalDensity"
+        ]
       },
       "events": {
         "total": 0,
@@ -433,7 +449,7 @@
       "exportName": "WiConfirmDialog",
       "examples": 4,
       "props": {
-        "total": 12,
+        "total": 15,
         "covered": 6,
         "missing": [
           "type",
@@ -441,7 +457,10 @@
           "beforeAccept",
           "beforeReject",
           "teleport",
-          "appendTo"
+          "appendTo",
+          "blockScroll",
+          "closeOnEsc",
+          "closeOnOutsideClick"
         ]
       },
       "events": {
@@ -454,10 +473,12 @@
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 3,
         "covered": 0,
         "missing": [
-          "default"
+          "default",
+          "footer",
+          "header"
         ]
       },
       "methods": {
@@ -471,14 +492,15 @@
       "exportName": "WiConfirmPopup",
       "examples": 6,
       "props": {
-        "total": 11,
+        "total": 12,
         "covered": 6,
         "missing": [
           "acceptLabel",
           "rejectLabel",
           "position",
           "teleport",
-          "appendTo"
+          "appendTo",
+          "acceptSeverity"
         ]
       },
       "events": {
@@ -542,14 +564,22 @@
       "exportName": "WiDataView",
       "examples": 4,
       "props": {
-        "total": 4,
-        "covered": 4,
-        "missing": []
+        "total": 10,
+        "covered": 5,
+        "missing": [
+          "disabled",
+          "emptyMessage",
+          "loading",
+          "pageSizes",
+          "showSizePicker"
+        ]
       },
       "events": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "update:page"
+        ]
       },
       "slots": {
         "total": 0,
@@ -567,20 +597,26 @@
       "exportName": "WiDatePicker",
       "examples": 20,
       "props": {
-        "total": 15,
+        "total": 18,
         "covered": 12,
         "missing": [
           "format",
           "clearable",
-          "teleport"
+          "teleport",
+          "errorMessage",
+          "helpText",
+          "id"
         ]
       },
       "events": {
-        "total": 2,
+        "total": 5,
         "covered": 0,
         "missing": [
           "update:modelValue",
-          "clear"
+          "clear",
+          "change",
+          "hide",
+          "show"
         ]
       },
       "slots": {
@@ -601,7 +637,7 @@
       "exportName": "WiDialog",
       "examples": 14,
       "props": {
-        "total": 21,
+        "total": 22,
         "covered": 11,
         "missing": [
           "title",
@@ -613,7 +649,8 @@
           "teleport",
           "appendTo",
           "positiveSeverity",
-          "onNegativeClick"
+          "onNegativeClick",
+          "ariaLabel"
         ]
       },
       "events": {
@@ -636,9 +673,13 @@
         ]
       },
       "methods": {
-        "total": 0,
+        "total": 3,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "close",
+          "maximize",
+          "unmaximize"
+        ]
       }
     },
     {
@@ -702,7 +743,7 @@
       "exportName": "WiDrawer",
       "examples": 6,
       "props": {
-        "total": 11,
+        "total": 14,
         "covered": 3,
         "missing": [
           "modal",
@@ -712,17 +753,21 @@
           "height",
           "blockScroll",
           "teleport",
-          "appendTo"
+          "appendTo",
+          "beforeClose",
+          "closeOnEsc",
+          "closeOnOutsideClick"
         ]
       },
       "events": {
-        "total": 4,
+        "total": 5,
         "covered": 0,
         "missing": [
           "update:modelValue",
           "show",
           "hide",
-          "after-leave"
+          "after-leave",
+          "close"
         ]
       },
       "slots": {
@@ -777,9 +822,11 @@
       "exportName": "WiFieldset",
       "examples": 4,
       "props": {
-        "total": 3,
+        "total": 4,
         "covered": 3,
-        "missing": []
+        "missing": [
+          "defaultCollapsed"
+        ]
       },
       "events": {
         "total": 1,
@@ -822,7 +869,7 @@
         ]
       },
       "events": {
-        "total": 9,
+        "total": 11,
         "covered": 3,
         "missing": [
           "exceed",
@@ -830,7 +877,9 @@
           "change",
           "remove",
           "progress",
-          "error"
+          "error",
+          "abort",
+          "exceed-size"
         ]
       },
       "slots": {
@@ -948,10 +997,12 @@
         "missing": []
       },
       "methods": {
-        "total": 3,
+        "total": 5,
         "covered": 1,
         "missing": [
           "clearValidate",
+          "reset",
+          "resetFields",
           "errors"
         ]
       }
@@ -1063,17 +1114,21 @@
       "exportName": "WiInplace",
       "examples": 4,
       "props": {
-        "total": 2,
+        "total": 4,
         "covered": 1,
         "missing": [
-          "disabled"
+          "disabled",
+          "closeOnEsc",
+          "dismissable"
         ]
       },
       "events": {
-        "total": 1,
+        "total": 3,
         "covered": 0,
         "missing": [
-          "update:modelValue"
+          "update:modelValue",
+          "close",
+          "open"
         ]
       },
       "slots": {
@@ -1095,19 +1150,23 @@
       "exportName": "WiInput",
       "examples": 20,
       "props": {
-        "total": 14,
+        "total": 15,
         "covered": 12,
         "missing": [
           "id",
-          "readonly"
+          "readonly",
+          "errorMessage"
         ]
       },
       "events": {
-        "total": 2,
+        "total": 5,
         "covered": 0,
         "missing": [
           "update:modelValue",
-          "clear"
+          "clear",
+          "blur",
+          "change",
+          "focus"
         ]
       },
       "slots": {
@@ -1116,10 +1175,12 @@
         "missing": []
       },
       "methods": {
-        "total": 1,
+        "total": 3,
         "covered": 0,
         "missing": [
-          "focus"
+          "focus",
+          "blur",
+          "select"
         ]
       }
     },
@@ -1128,11 +1189,14 @@
       "exportName": "WiInputColor",
       "examples": 6,
       "props": {
-        "total": 4,
+        "total": 7,
         "covered": 2,
         "missing": [
           "disabled",
-          "id"
+          "id",
+          "invalid",
+          "label",
+          "size"
         ]
       },
       "events": {
@@ -1185,20 +1249,27 @@
       "exportName": "WiInputNumber",
       "examples": 8,
       "props": {
-        "total": 13,
+        "total": 17,
         "covered": 9,
         "missing": [
           "size",
           "fluid",
           "invalid",
-          "disabled"
+          "disabled",
+          "errorMessage",
+          "helpText",
+          "id",
+          "readonly"
         ]
       },
       "events": {
-        "total": 1,
+        "total": 4,
         "covered": 0,
         "missing": [
-          "update:modelValue"
+          "update:modelValue",
+          "blur",
+          "change",
+          "focus"
         ]
       },
       "slots": {
@@ -1210,9 +1281,13 @@
         ]
       },
       "methods": {
-        "total": 0,
+        "total": 3,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "focus",
+          "blur",
+          "select"
+        ]
       }
     },
     {
@@ -1220,10 +1295,12 @@
       "exportName": "WiInputOtp",
       "examples": 6,
       "props": {
-        "total": 7,
+        "total": 9,
         "covered": 6,
         "missing": [
-          "disabled"
+          "disabled",
+          "invalid",
+          "label"
         ]
       },
       "events": {
@@ -1249,7 +1326,7 @@
       "exportName": "WiInputPassword",
       "examples": 12,
       "props": {
-        "total": 16,
+        "total": 17,
         "covered": 10,
         "missing": [
           "toggleMask",
@@ -1257,15 +1334,19 @@
           "fluid",
           "invalid",
           "disabled",
-          "readonly"
+          "readonly",
+          "id"
         ]
       },
       "events": {
-        "total": 2,
+        "total": 5,
         "covered": 0,
         "missing": [
           "update:modelValue",
-          "clear"
+          "clear",
+          "blur",
+          "change",
+          "focus"
         ]
       },
       "slots": {
@@ -1274,9 +1355,13 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 3,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "focus",
+          "blur",
+          "select"
+        ]
       }
     },
     {
@@ -1284,11 +1369,15 @@
       "exportName": "WiInputTags",
       "examples": 6,
       "props": {
-        "total": 6,
+        "total": 10,
         "covered": 4,
         "missing": [
           "disabled",
-          "addOnBlur"
+          "addOnBlur",
+          "id",
+          "invalid",
+          "label",
+          "size"
         ]
       },
       "events": {
@@ -1316,13 +1405,16 @@
       "exportName": "WiKnob",
       "examples": 4,
       "props": {
-        "total": 7,
+        "total": 10,
         "covered": 3,
         "missing": [
           "min",
           "max",
           "step",
-          "disabled"
+          "disabled",
+          "ariaLabel",
+          "ariaLabelledby",
+          "diameter"
         ]
       },
       "events": {
@@ -1400,11 +1492,14 @@
       "exportName": "WiListbox",
       "examples": 4,
       "props": {
-        "total": 6,
+        "total": 9,
         "covered": 4,
         "missing": [
           "multiple",
-          "disabled"
+          "disabled",
+          "emptyMessage",
+          "invalid",
+          "size"
         ]
       },
       "events": {
@@ -1432,17 +1527,21 @@
       "exportName": "WiMegaMenu",
       "examples": 6,
       "props": {
-        "total": 3,
+        "total": 4,
         "covered": 1,
         "missing": [
           "teleport",
-          "appendTo"
+          "appendTo",
+          "selectedKey"
         ]
       },
       "events": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "select",
+          "update:selectedKey"
+        ]
       },
       "slots": {
         "total": 0,
@@ -1458,31 +1557,33 @@
     {
       "id": "Menu",
       "exportName": "WiMenu",
-      "examples": 6,
+      "examples": 18,
       "props": {
-        "total": 8,
-        "covered": 4,
+        "total": 18,
+        "covered": 10,
         "missing": [
-          "popup",
+          "placement",
           "indent",
+          "rootIndent",
+          "defaultExpandedKeys",
+          "expandedKeys",
+          "defaultExpandAll",
           "teleport",
           "appendTo"
         ]
       },
       "events": {
-        "total": 3,
-        "covered": 1,
+        "total": 4,
+        "covered": 2,
         "missing": [
           "update:modelValue",
-          "select"
+          "update:expandedKeys"
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 0,
         "covered": 0,
-        "missing": [
-          "item"
-        ]
+        "missing": []
       },
       "methods": {
         "total": 0,
@@ -1580,12 +1681,13 @@
       "exportName": "WiOrderList",
       "examples": 4,
       "props": {
-        "total": 4,
+        "total": 5,
         "covered": 1,
         "missing": [
           "dataKey",
           "listStyle",
-          "dragdrop"
+          "dragdrop",
+          "emptyMessage"
         ]
       },
       "events": {
@@ -1646,9 +1748,11 @@
       "exportName": "WiPanel",
       "examples": 6,
       "props": {
-        "total": 5,
+        "total": 6,
         "covered": 5,
-        "missing": []
+        "missing": [
+          "defaultCollapsed"
+        ]
       },
       "events": {
         "total": 2,
@@ -1676,9 +1780,11 @@
       "exportName": "WiPickList",
       "examples": 6,
       "props": {
-        "total": 5,
+        "total": 6,
         "covered": 5,
-        "missing": []
+        "missing": [
+          "emptyMessage"
+        ]
       },
       "events": {
         "total": 2,
@@ -1701,11 +1807,12 @@
       "exportName": "WiPopover",
       "examples": 8,
       "props": {
-        "total": 7,
+        "total": 8,
         "covered": 5,
         "missing": [
           "teleport",
-          "appendTo"
+          "appendTo",
+          "disabled"
         ]
       },
       "events": {
@@ -1723,9 +1830,13 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 3,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "show",
+          "hide",
+          "toggle"
+        ]
       }
     },
     {
@@ -1773,8 +1884,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1818,12 +1929,18 @@
       "exportName": "WiRating",
       "examples": 8,
       "props": {
-        "total": 7,
+        "total": 13,
         "covered": 4,
         "missing": [
           "stars",
           "allowClear",
-          "disabled"
+          "disabled",
+          "ariaLabel",
+          "errorMessage",
+          "helpText",
+          "invalid",
+          "label",
+          "size"
         ]
       },
       "events": {
@@ -1895,9 +2012,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "default"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1910,14 +2029,15 @@
       "exportName": "WiSelect",
       "examples": 24,
       "props": {
-        "total": 23,
+        "total": 24,
         "covered": 18,
         "missing": [
           "required",
           "clearable",
           "teleport",
           "placement",
-          "id"
+          "id",
+          "errorMessage"
         ]
       },
       "events": {
@@ -1951,12 +2071,13 @@
       "exportName": "WiSelectButton",
       "examples": 6,
       "props": {
-        "total": 6,
+        "total": 7,
         "covered": 3,
         "missing": [
           "size",
           "invalid",
-          "disabled"
+          "disabled",
+          "label"
         ]
       },
       "events": {
@@ -2034,13 +2155,19 @@
       "exportName": "WiSlider",
       "examples": 8,
       "props": {
-        "total": 9,
+        "total": 15,
         "covered": 5,
         "missing": [
           "min",
           "max",
           "step",
-          "disabled"
+          "disabled",
+          "ariaLabel",
+          "errorMessage",
+          "helpText",
+          "invalid",
+          "label",
+          "size"
         ]
       },
       "events": {
@@ -2109,18 +2236,20 @@
         ]
       },
       "events": {
-        "total": 1,
-        "covered": 0,
-        "missing": [
-          "update:modelValue"
-        ]
-      },
-      "slots": {
         "total": 2,
         "covered": 0,
         "missing": [
+          "update:modelValue",
+          "item-click"
+        ]
+      },
+      "slots": {
+        "total": 3,
+        "covered": 0,
+        "missing": [
           "button",
-          "item"
+          "item",
+          "icon"
         ]
       },
       "methods": {
@@ -2226,10 +2355,11 @@
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 2,
         "covered": 0,
         "missing": [
-          "icon"
+          "icon",
+          "default"
         ]
       },
       "methods": {
@@ -2279,30 +2409,79 @@
       "exportName": "WiTable",
       "examples": 14,
       "props": {
-        "total": 23,
-        "covered": 15,
+        "total": 64,
+        "covered": 16,
         "missing": [
           "fit",
-          "filters",
-          "rowExpandable",
+          "selectedItem",
           "rowHover",
-          "sortMode",
           "sortField",
           "sortOrder",
-          "size"
+          "sortMode",
+          "searchField",
+          "searchValue",
+          "filterOptions",
+          "maxHeight",
+          "showOverflowTooltip",
+          "rowKey",
+          "size",
+          "ariaLabel",
+          "bodyExpandRowClassName",
+          "bodyItemClassName",
+          "bodyRowClassName",
+          "bodyTextDirection",
+          "checkboxColumnWidth",
+          "clickEventType",
+          "clickRowToExpand",
+          "currentRowKey",
+          "expandColumnWidth",
+          "expandedRowKeys",
+          "filters",
+          "fixedCheckbox",
+          "fixedExpand",
+          "fixedHeader",
+          "fixedIndex",
+          "headerClassName",
+          "headerItemClassName",
+          "headerTextDirection",
+          "hideHeader",
+          "hideRowsPerPage",
+          "indexColumnWidth",
+          "multiSort",
+          "mustSort",
+          "preventContextMenuRow",
+          "rowsItems",
+          "rowsOfPageSeparatorMessage",
+          "rowsPerPageMessage",
+          "showHeader",
+          "showIndex",
+          "showIndexSymbol",
+          "tableClassName",
+          "tableHeight",
+          "tableMinHeight",
+          "tableNodeId"
         ]
       },
       "events": {
-        "total": 10,
+        "total": 19,
         "covered": 3,
         "missing": [
           "sort",
-          "filter",
           "page",
           "row-click",
           "current-change",
           "expand",
-          "update:filters"
+          "update:current-row-key",
+          "contextmenuRow",
+          "deselectRow",
+          "filter",
+          "selectAll",
+          "selectRow",
+          "update:expandedRowKeys",
+          "update:filters",
+          "update:selectedItem",
+          "updatePageItems",
+          "updateTotalItems"
         ]
       },
       "slots": {
@@ -2311,9 +2490,24 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 14,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "currentPageFirstIndex",
+          "currentPageLastIndex",
+          "clientItemsLength",
+          "maxPaginationNumber",
+          "currentPaginationNumber",
+          "isLastPage",
+          "isFirstPage",
+          "nextPage",
+          "prevPage",
+          "updatePage",
+          "rowsPerPageOptions",
+          "rowsPerPageActiveOption",
+          "updateRowsPerPageActiveOption",
+          "setFilters"
+        ]
       }
     },
     {
@@ -2379,16 +2573,21 @@
       "exportName": "WiTerminal",
       "examples": 4,
       "props": {
-        "total": 2,
+        "total": 4,
         "covered": 1,
         "missing": [
-          "prompt"
+          "prompt",
+          "lines",
+          "responses"
         ]
       },
       "events": {
-        "total": 1,
+        "total": 3,
         "covered": 1,
-        "missing": []
+        "missing": [
+          "update:lines",
+          "update:responses"
+        ]
       },
       "slots": {
         "total": 0,
@@ -2396,9 +2595,12 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "appendResponse",
+          "focus"
+        ]
       }
     },
     {
@@ -2406,21 +2608,25 @@
       "exportName": "WiTextarea",
       "examples": 10,
       "props": {
-        "total": 16,
+        "total": 17,
         "covered": 12,
         "missing": [
           "id",
           "resize",
           "disabled",
-          "readonly"
+          "readonly",
+          "errorMessage"
         ]
       },
       "events": {
-        "total": 2,
+        "total": 5,
         "covered": 0,
         "missing": [
           "update:modelValue",
-          "clear"
+          "clear",
+          "blur",
+          "change",
+          "focus"
         ]
       },
       "slots": {
@@ -2429,10 +2635,12 @@
         "missing": []
       },
       "methods": {
-        "total": 1,
+        "total": 3,
         "covered": 0,
         "missing": [
-          "focus"
+          "focus",
+          "blur",
+          "select"
         ]
       }
     },
@@ -2441,11 +2649,12 @@
       "exportName": "WiTieredMenu",
       "examples": 6,
       "props": {
-        "total": 5,
+        "total": 6,
         "covered": 3,
         "missing": [
           "teleport",
-          "appendTo"
+          "appendTo",
+          "placement"
         ]
       },
       "events": {
@@ -2496,12 +2705,13 @@
       "exportName": "WiToast",
       "examples": 8,
       "props": {
-        "total": 11,
+        "total": 12,
         "covered": 3,
         "missing": [
           "max",
           "teleport",
           "appendTo",
+          "auto",
           "id",
           "summary",
           "detail",
@@ -2563,9 +2773,11 @@
       "exportName": "WiToolbar",
       "examples": 4,
       "props": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "ariaLabel"
+        ]
       },
       "events": {
         "total": 0,
@@ -2617,7 +2829,7 @@
       "exportName": "WiTree",
       "examples": 10,
       "props": {
-        "total": 16,
+        "total": 17,
         "covered": 7,
         "missing": [
           "selectionKeys",
@@ -2628,22 +2840,29 @@
           "filterNode",
           "lazy",
           "load",
-          "draggable"
+          "draggable",
+          "emptyMessage"
         ]
       },
       "events": {
-        "total": 3,
+        "total": 7,
         "covered": 0,
         "missing": [
           "node-select",
           "node-expand",
-          "node-collapse"
+          "node-collapse",
+          "node-load-error",
+          "node-unselect",
+          "update:modelValue",
+          "update:selectionKeys"
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "empty"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2656,7 +2875,7 @@
       "exportName": "WiTreeSelect",
       "examples": 8,
       "props": {
-        "total": 17,
+        "total": 22,
         "covered": 9,
         "missing": [
           "disabled",
@@ -2666,7 +2885,12 @@
           "maxTagCount",
           "selectionMode",
           "teleport",
-          "appendTo"
+          "appendTo",
+          "errorMessage",
+          "helpText",
+          "id",
+          "invalid",
+          "label"
         ]
       },
       "events": {
@@ -2696,23 +2920,28 @@
       "exportName": "WiTreeTable",
       "examples": 4,
       "props": {
-        "total": 2,
+        "total": 4,
         "covered": 2,
-        "missing": []
+        "missing": [
+          "emptyMessage",
+          "expandedKeys"
+        ]
       },
       "events": {
-        "total": 2,
+        "total": 3,
         "covered": 0,
         "missing": [
           "node-expand",
-          "node-collapse"
+          "node-collapse",
+          "update:expandedKeys"
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 2,
         "covered": 0,
         "missing": [
-          "expansion"
+          "expansion",
+          "empty"
         ]
       },
       "methods": {
@@ -2751,7 +2980,7 @@
   ],
   "summary": {
     "components": 88,
-    "componentsWithMissingCoverage": 74,
-    "totalExamples": 668
+    "componentsWithMissingCoverage": 78,
+    "totalExamples": 680
   }
 }

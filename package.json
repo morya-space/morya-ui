@@ -1,7 +1,7 @@
 {
   "name": "@well-insight/ui",
   "type": "module",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "packageManager": "pnpm@10.12.4",
   "description": "Vue 3 component library for Well Insight.",
   "license": "MIT",
