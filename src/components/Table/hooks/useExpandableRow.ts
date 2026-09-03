@@ -1,41 +1,40 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { EmitsEventName } from './internal'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { resolveRowKey } from '../utils'
 
 export function useExpandableRow(
-  items: Ref<TableItem[]>,
+  expandedRowKeys: Ref<Array<string | number> | undefined>,
+  rowKey: Ref<string>,
   prevPageEndIndex: ComputedRef<number>,
   emits: (event: EmitsEventName, ...args: unknown[]) => void,
 ) {
-  const expandingItemIndexList = ref<number[]>([])
+  const internalExpandedKeys = ref<Array<string | number>>([])
+  const expandedKeys = computed(() => expandedRowKeys.value ?? internalExpandedKeys.value)
 
-  const updateExpandingItemIndexList = (
-    expandingItemIndex: number,
-    expandingItem: TableItem,
-    event: Event,
-  ) => {
+  const keyOf = (item: TableItem, pageIndex: number) =>
+    resolveRowKey(item, prevPageEndIndex.value + pageIndex, rowKey.value)
+
+  const isRowExpanded = (item: TableItem, pageIndex: number) =>
+    expandedKeys.value.includes(keyOf(item, pageIndex))
+
+  const toggleExpandRow = (item: TableItem, pageIndex: number, event: Event) => {
     event.stopPropagation()
-    const index = expandingItemIndexList.value.indexOf(expandingItemIndex)
-    if (index !== -1) {
-      expandingItemIndexList.value.splice(index, 1)
-      emits('expand', { row: expandingItem, expanded: false })
-    } else {
-      const currentPageExpandIndex = items.value.findIndex(
-        (item) => JSON.stringify(item) === JSON.stringify(expandingItem),
-      )
-      emits('expand', { row: expandingItem, expanded: true })
-      expandingItemIndexList.value.push(prevPageEndIndex.value + currentPageExpandIndex)
-    }
-  }
-
-  const clearExpandingItemIndexList = () => {
-    expandingItemIndexList.value = []
+    const key = keyOf(item, pageIndex)
+    const index = expandedKeys.value.indexOf(key)
+    const expanded = index === -1
+    const next = expanded
+      ? [...expandedKeys.value, key]
+      : expandedKeys.value.filter((existing) => existing !== key)
+    internalExpandedKeys.value = next
+    emits('update:expandedRowKeys', next)
+    emits('expand', { row: item, expanded })
   }
 
   return {
-    expandingItemIndexList,
-    updateExpandingItemIndexList,
-    clearExpandingItemIndexList,
+    expandedKeys,
+    isRowExpanded,
+    toggleExpandRow,
   }
 }

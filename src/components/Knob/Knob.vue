@@ -7,9 +7,12 @@ const props = withDefaults(defineProps<KnobProps>(), {
   min: 0,
   max: 100,
   step: 1,
+  diameter: undefined,
   size: 100,
   disabled: false,
   valueTemplate: '{value}',
+  ariaLabel: undefined,
+  ariaLabelledby: undefined,
 })
 
 const emit = defineEmits<{
@@ -30,7 +33,8 @@ const ratio = computed(() => {
   return (clamped.value - props.min) / span
 })
 
-const radius = computed(() => props.size / 2 - 8)
+const diameter = computed(() => props.diameter ?? props.size)
+const radius = computed(() => diameter.value / 2 - 8)
 const circumference = computed(() => 2 * Math.PI * radius.value)
 const dashOffset = computed(() => circumference.value * (1 - ratio.value))
 
@@ -114,6 +118,9 @@ onBeforeUnmount(() => {
     :aria-valuemin="min"
     :aria-valuemax="max"
     :aria-valuenow="clamped"
+    :aria-valuetext="displayValue"
+    :aria-label="ariaLabel"
+    :aria-labelledby="ariaLabelledby"
     :aria-disabled="disabled || undefined"
     :tabindex="disabled ? -1 : 0"
     @keydown="onKeydown"
@@ -121,29 +128,29 @@ onBeforeUnmount(() => {
     <svg
       ref="svgRef"
       class="wi-knob__svg"
-      :width="size"
-      :height="size"
-      :viewBox="`0 0 ${size} ${size}`"
+      :width="diameter"
+      :height="diameter"
+      :viewBox="`0 0 ${diameter} ${diameter}`"
       @pointerdown="onPointerDown"
     >
       <circle
         class="wi-knob__track"
-        :cx="size / 2"
-        :cy="size / 2"
+        :cx="diameter / 2"
+        :cy="diameter / 2"
         :r="radius"
         fill="none"
         stroke-width="8"
       />
       <circle
         class="wi-knob__value"
-        :cx="size / 2"
-        :cy="size / 2"
+        :cx="diameter / 2"
+        :cy="diameter / 2"
         :r="radius"
         fill="none"
         stroke-width="8"
         :stroke-dasharray="circumference"
         :stroke-dashoffset="dashOffset"
-        :transform="`rotate(-90 ${size / 2} ${size / 2})`"
+        :transform="`rotate(-90 ${diameter / 2} ${diameter / 2})`"
       />
     </svg>
     <span class="wi-knob__label">{{ displayValue }}</span>

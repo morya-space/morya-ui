@@ -15,14 +15,26 @@
     gap: var(--wi-space-2);
 }
 
+.wi-gallery__stage {
+    flex: 1;
+    margin: 0;
+    min-width: 0;
+}
+
 .wi-gallery__image {
     border-radius: var(--wi-radius-md);
     display: block;
-    flex: 1;
     max-height: var(--wi-gallery-image-max-height);
     min-width: 0;
     object-fit: cover;
     width: 100%;
+}
+
+.wi-gallery__caption {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-sm);
+    margin: var(--wi-space-1) 0 0;
+    text-align: center;
 }
 
 .wi-gallery__thumbs {
@@ -44,6 +56,11 @@
 
 .wi-gallery__thumb--active {
     border-color: var(--wi-color-primary);
+}
+
+.wi-gallery__thumb:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }
 
 .wi-gallery__thumb img {

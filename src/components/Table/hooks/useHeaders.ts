@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
-import type { TableHeader, TableItem, TableServerOptions, TableSortType } from '../types'
+import type { TableHeader, TableSortMode, TableSortType } from '../types'
 import type { ClientSortOptions, EmitsEventName, HeaderForRender, ServerOptionsComputed } from './internal'
 import { computed, ref } from 'vue'
 
@@ -24,12 +24,18 @@ export function useHeaders(
   sortBy: Ref<string | string[]>,
   sortType: Ref<TableSortType | TableSortType[]>,
   multiSort: Ref<boolean>,
+  sortMode: Ref<TableSortMode>,
   updateServerOptionsSort: (newSortBy: string, newSortType: TableSortType | null) => void,
   emits: (event: EmitsEventName, ...args: unknown[]) => void,
 ) {
   const hasFixedColumnsFromUser = computed(() => headers.value.some((header) => header.fixed))
-  const fixedHeadersFromUser = computed(() =>
-    hasFixedColumnsFromUser.value ? headers.value.filter((header) => header.fixed) : [],
+  const leftFixedHeadersFromUser = computed(() =>
+    hasFixedColumnsFromUser.value
+      ? headers.value.filter((header) => header.fixed && header.fixed !== 'right')
+      : [],
+  )
+  const rightFixedHeadersFromUser = computed(() =>
+    hasFixedColumnsFromUser.value ? headers.value.filter((header) => header.fixed === 'right') : [],
   )
   const unFixedHeaders = computed(() => headers.value.filter((header) => !header.fixed))
 
@@ -52,14 +58,32 @@ export function useHeaders(
     return null
   }
 
-  const clientSortOptions = ref<ClientSortOptions | null>(
+  const internalClientSortOptions = ref<ClientSortOptions | null>(
     generateClientSortOptions(sortBy.value, sortType.value),
   )
 
-  const headersForRender = computed((): HeaderForRender[] => {
-    const fixedHeaders = [...fixedHeadersFromUser.value, ...unFixedHeaders.value] as HeaderForRender[]
+  /**
+   * In `emit` sort mode the parent owns sorting: indicators derive from the
+   * controlled `sortField`/`sortOrder` props and internal state is never mutated.
+   */
+  const clientSortOptions = computed<ClientSortOptions | null>({
+    get: () =>
+      sortMode.value === 'emit'
+        ? generateClientSortOptions(sortBy.value, sortType.value)
+        : internalClientSortOptions.value,
+    set: (value) => {
+      internalClientSortOptions.value = value
+    },
+  })
 
-    const headersSorting = fixedHeaders.map((header) => {
+  const headersForRender = computed((): HeaderForRender[] => {
+    const orderedHeaders = [
+      ...leftFixedHeadersFromUser.value,
+      ...unFixedHeaders.value,
+      ...rightFixedHeadersFromUser.value,
+    ] as HeaderForRender[]
+
+    const headersSorting = orderedHeaders.map((header) => {
       const headerSorting: HeaderForRender = { ...header }
       if (headerSorting.sortable) headerSorting.sortType = 'none'
 
@@ -146,29 +170,31 @@ export function useHeaders(
       updateServerOptionsSort(newSortBy, newSortType)
     }
 
-    if (
-      clientSortOptions.value
-      && Array.isArray(clientSortOptions.value.sortBy)
-      && Array.isArray(clientSortOptions.value.sortDesc)
-    ) {
-      const index = clientSortOptions.value.sortBy.indexOf(newSortBy)
-      if (index === -1) {
-        if (newSortType !== null) {
-          clientSortOptions.value.sortBy.push(newSortBy)
-          clientSortOptions.value.sortDesc.push(newSortType === 'desc')
+    if (sortMode.value !== 'emit') {
+      if (
+        internalClientSortOptions.value
+        && Array.isArray(internalClientSortOptions.value.sortBy)
+        && Array.isArray(internalClientSortOptions.value.sortDesc)
+      ) {
+        const index = internalClientSortOptions.value.sortBy.indexOf(newSortBy)
+        if (index === -1) {
+          if (newSortType !== null) {
+            internalClientSortOptions.value.sortBy.push(newSortBy)
+            internalClientSortOptions.value.sortDesc.push(newSortType === 'desc')
+          }
+        } else if (newSortType === null) {
+          internalClientSortOptions.value.sortDesc.splice(index, 1)
+          internalClientSortOptions.value.sortBy.splice(index, 1)
+        } else {
+          internalClientSortOptions.value.sortDesc[index] = newSortType === 'desc'
         }
       } else if (newSortType === null) {
-        clientSortOptions.value.sortDesc.splice(index, 1)
-        clientSortOptions.value.sortBy.splice(index, 1)
+        internalClientSortOptions.value = null
       } else {
-        clientSortOptions.value.sortDesc[index] = newSortType === 'desc'
-      }
-    } else if (newSortType === null) {
-      clientSortOptions.value = null
-    } else {
-      clientSortOptions.value = {
-        sortBy: newSortBy,
-        sortDesc: newSortType === 'desc',
+        internalClientSortOptions.value = {
+          sortBy: newSortBy,
+          sortDesc: newSortType === 'desc',
+        }
       }
     }
 

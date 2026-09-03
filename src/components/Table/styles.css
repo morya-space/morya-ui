@@ -89,6 +89,11 @@
     box-shadow: inset 6px 0 5px -3px color-mix(in srgb, var(--wi-color-text) 18%, transparent);
 }
 
+.wi-table__main--shadow-end .wi-table__header-cell--shadow-end,
+.wi-table__main--shadow-end .wi-table__cell--shadow-end {
+    box-shadow: var(--wi-shadow-sticky-end);
+}
+
 .wi-table--enable-row-hover .wi-table__body tr:hover > td {
     background: var(--wi-table-row-hover-bg);
 }

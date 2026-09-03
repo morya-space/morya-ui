@@ -30,6 +30,16 @@
     font-weight: 600;
 }
 
+.wi-datepicker__help {
+    color: var(--wi-color-text-muted);
+    font-size: var(--wi-font-size-sm);
+    margin: 0;
+}
+
+.wi-datepicker__help--invalid {
+    color: var(--wi-color-danger);
+}
+
 .wi-datepicker__control {
     align-items: center;
     display: flex;
@@ -195,6 +205,11 @@
 .wi-datepicker__day:disabled {
     cursor: not-allowed;
     opacity: 0.4;
+}
+
+.wi-datepicker__day:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }
 
 .wi-datepicker__panel--with-shortcuts {

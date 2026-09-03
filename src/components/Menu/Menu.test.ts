@@ -152,4 +152,63 @@ describe('wiMenu', () => {
     expect(document.body.querySelector('.wi-menu--flyout')).toBeTruthy()
     wrapper.unmount()
   })
+
+  it('supports vertical keyboard navigation with roving tabindex', async () => {
+    const wrapper = mount(WiMenu, {
+      attachTo: document.body,
+      props: {
+        model: [
+          { key: 'file', label: 'File', items: [{ key: 'save', label: 'Save' }] },
+          { key: 'exit', label: 'Exit' },
+        ],
+      },
+    })
+    const root = wrapper.get('.wi-menu')
+    const contentByText = (text: string) =>
+      wrapper.findAll('.wi-menu__item-content').find((node) => node.text().includes(text))!
+
+    expect(contentByText('File').attributes('tabindex')).toBe('0')
+    expect(contentByText('Exit').attributes('tabindex')).toBe('-1')
+    expect(contentByText('File').attributes('aria-haspopup')).toBe('menu')
+
+    await root.trigger('keydown', { key: 'ArrowDown' })
+    expect(document.activeElement).toBe(contentByText('File').element)
+
+    await root.trigger('keydown', { key: 'ArrowRight' })
+    await nextTick()
+    expect(wrapper.find('.wi-menu__submenu').exists()).toBe(true)
+
+    await root.trigger('keydown', { key: 'ArrowRight' })
+    expect(document.activeElement).toBe(contentByText('Save').element)
+    expect(contentByText('Save').attributes('tabindex')).toBe('0')
+
+    await root.trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:selectedKey')?.at(-1)).toEqual(['save'])
+    wrapper.unmount()
+  })
+
+  it('marks the selected leaf with aria-current', () => {
+    const wrapper = mount(WiMenu, {
+      props: {
+        model: [{ key: 'file', label: 'File', items: [{ key: 'save', label: 'Save' }] }],
+        selectedKey: 'save',
+        defaultExpandedKeys: ['file'],
+      },
+    })
+    const save = wrapper.get('.wi-menu__item-content--selected')
+    expect(save.attributes('aria-current')).toBe('page')
+  })
+
+  it('closes popup on Escape and returns focus to the trigger', async () => {
+    const wrapper = mount(WiMenu, {
+      attachTo: document.body,
+      props: { popup: true, modelValue: true, model: [{ label: 'A' }], teleport: false },
+      slots: { default: '<button class="menu-trigger" type="button">Open</button>' },
+    })
+    await nextTick()
+    await wrapper.get('.wi-menu').trigger('keydown', { key: 'Escape' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
+    expect(document.activeElement).toBe(wrapper.get('.menu-trigger').element)
+    wrapper.unmount()
+  })
 })

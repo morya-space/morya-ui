@@ -50,4 +50,30 @@ describe('wiOrderList', () => {
     await from.trigger('dragstart', { dataTransfer })
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
   })
+
+  it('moves selection with arrow keys and reorders with Ctrl+Arrow', async () => {
+    const wrapper = mount(WiOrderList, {
+      props: { modelValue: ['a', 'b', 'c'], 'onUpdate:modelValue': (value: unknown[]) => wrapper.setProps({ modelValue: value }) },
+      attachTo: document.body,
+    })
+    const items = () => wrapper.findAll('.wi-orderlist__item')
+    expect(items()[0]!.attributes('tabindex')).toBe('0')
+    expect(items()[1]!.attributes('tabindex')).toBe('-1')
+
+    const list = wrapper.get('.wi-orderlist__list')
+    items()[0]!.element.focus()
+    await list.trigger('keydown', { key: 'ArrowDown' })
+    expect(document.activeElement).toBe(items()[1]!.element)
+    expect(items()[1]!.attributes('aria-selected')).toBe('true')
+
+    await list.trigger('keydown', { key: 'ArrowDown', ctrlKey: true })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['a', 'c', 'b']])
+    await list.trigger('keydown', { key: 'ArrowDown', ctrlKey: true })
+    // already at the end: no-op
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(1)
+
+    await list.trigger('keydown', { key: 'Home' })
+    expect(document.activeElement).toBe(items()[0]!.element)
+    wrapper.unmount()
+  })
 })

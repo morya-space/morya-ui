@@ -14,14 +14,16 @@ const rootClass = computed(() => [
 
 <template>
   <div :class="rootClass">
-    <div class="wi-blockui__content" :aria-busy="blocked || undefined">
+    <div class="wi-blockui__content" :aria-busy="blocked || undefined" :inert="blocked">
       <slot />
     </div>
-    <div
-      v-if="blocked"
-      class="wi-blockui__overlay"
-      role="presentation"
-      aria-hidden="true"
-    />
+    <Transition name="wi-blockui">
+      <div
+        v-if="blocked"
+        class="wi-blockui__overlay"
+        role="presentation"
+        aria-hidden="true"
+      />
+    </Transition>
   </div>
 </template>

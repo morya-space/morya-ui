@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 
 const props = withDefaults(defineProps<SelectButtonProps>(), {
   multiple: false,
@@ -43,18 +44,49 @@ function select(option: SelectButtonOption) {
   }
   emit('update:modelValue', option.value)
 }
+
+const root = ref<HTMLElement | null>(null)
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => props.options.length,
+  isItemDisabled: (index) => Boolean(props.options[index]?.disabled),
+  orientation: 'both',
+  enabled: () => !props.disabled,
+  onActivate: (index) => {
+    const option = props.options[index]
+    if (option) select(option)
+  },
+})
+
+function buttonTabindex(index: number): 0 | -1 {
+  if (keyboard.activeIndex.value >= 0) return keyboard.tabindexFor(index)
+  const firstEnabled = props.options.findIndex((option) => !option.disabled)
+  return index === firstEnabled ? 0 : -1
+}
+
+function onKeydown(event: KeyboardEvent) {
+  keyboard.onKeydown(event)
+}
+
+watch(keyboard.activeIndex, (index) => {
+  if (index < 0) return
+  root.value
+    ?.querySelectorAll<HTMLElement>('.wi-selectbutton__button')
+    [index]?.focus({ preventScroll: true })
+})
 </script>
 
 <template>
-  <div :class="rootClass" role="group">
+  <div ref="root" :class="rootClass" role="group" @keydown="onKeydown">
     <button
-      v-for="option in options"
+      v-for="(option, index) in options"
       :key="String(option.value)"
       type="button"
       class="wi-selectbutton__button"
       :class="{ 'wi-selectbutton__button--active': isActive(option) }"
       :disabled="disabled || option.disabled"
       :aria-pressed="isActive(option)"
+      :tabindex="buttonTabindex(index)"
       @click="select(option)"
     >
       {{ option.label }}

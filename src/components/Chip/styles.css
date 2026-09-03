@@ -100,6 +100,11 @@
     color: var(--wi-color-primary);
 }
 
+.wi-chip--secondary {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
+    color: var(--wi-color-text);
+}
+
 .wi-chip--success {
     background: color-mix(in srgb, var(--wi-color-success) 14%, transparent);
     color: var(--wi-color-success);
@@ -118,4 +123,14 @@
 .wi-chip--danger {
     background: color-mix(in srgb, var(--wi-color-danger) 14%, transparent);
     color: var(--wi-color-danger);
+}
+
+.wi-chip--help {
+    background: color-mix(in srgb, var(--wi-color-help) 14%, transparent);
+    color: var(--wi-color-help);
+}
+
+.wi-chip--contrast {
+    background: var(--wi-color-contrast);
+    color: var(--wi-color-contrast-fg);
 }

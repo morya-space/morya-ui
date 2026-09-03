@@ -19,7 +19,11 @@ const locale = useWiLocale()
 </script>
 
 <template>
-  <tr class="wi-treetable__row">
+  <tr
+    class="wi-treetable__row"
+    :aria-expanded="node.children?.length ? isExpanded(node.key) : undefined"
+    :aria-level="depth + 1"
+  >
     <td
       v-for="(column, columnIndex) in columns"
       :key="column.field"

@@ -86,3 +86,27 @@
     background: var(--wi-color-danger);
     color: var(--wi-color-on-emphasis);
 }
+
+.wi-stepper__step--finish .wi-stepper__marker {
+    background: color-mix(in srgb, var(--wi-color-primary) 14%, var(--wi-color-surface));
+    color: var(--wi-color-primary);
+    box-shadow: inset 0 0 0 var(--wi-border-width) var(--wi-color-primary);
+}
+
+.wi-stepper__step--process .wi-stepper__marker {
+    background: var(--wi-color-primary);
+    color: var(--wi-color-on-emphasis);
+}
+
+.wi-stepper__step--wait {
+    color: var(--wi-color-text-muted);
+}
+
+.wi-stepper__step--finish {
+    color: var(--wi-color-text);
+}
+
+.wi-stepper__step--process {
+    color: var(--wi-color-primary);
+    font-weight: 600;
+}

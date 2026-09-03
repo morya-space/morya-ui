@@ -3,12 +3,17 @@ export interface RatingProps {
   stars?: number
   disabled?: boolean
   readonly?: boolean
-  /** Show a clear control. Defaults to `true`. */
+  /**
+   * @deprecated Use `allowClear` instead. Kept as an alias; `allowClear`
+   * takes precedence when both are set.
+   */
   cancel?: boolean
-  /** Alias of `cancel`. When set, takes precedence. `null` means follow `cancel`. */
+  /** Show a clear control. Defaults to `true`. */
   allowClear?: boolean | null
   /** Allow 0.5 increments. */
   allowHalf?: boolean
+  /** Accessible label for the slider root. Falls back to the locale string. */
+  ariaLabel?: string
 }
 
 export interface RatingEmits {

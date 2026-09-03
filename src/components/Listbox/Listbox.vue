@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
@@ -50,6 +51,53 @@ function select(option: ListboxOption) {
   }
   emit('update:modelValue', option.value)
 }
+
+const list = ref<HTMLElement | null>(null)
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => filteredOptions.value.length,
+  isItemDisabled: (index) => Boolean(filteredOptions.value[index]?.disabled),
+  enabled: () => !props.disabled,
+  onActivate: (index) => {
+    const option = filteredOptions.value[index]
+    if (option) select(option)
+  },
+})
+
+function optionTabindex(index: number): 0 | -1 {
+  if (keyboard.activeIndex.value >= 0) return keyboard.tabindexFor(index)
+  const selectedIndex = filteredOptions.value.findIndex(
+    (option) => !option.disabled && isSelected(option.value),
+  )
+  const fallback =
+    selectedIndex >= 0 ? selectedIndex : filteredOptions.value.findIndex((option) => !option.disabled)
+  return index === fallback ? 0 : -1
+}
+
+function focusActiveOption() {
+  const index = keyboard.activeIndex.value
+  if (index < 0) return
+  list.value
+    ?.querySelectorAll<HTMLElement>('.wi-listbox__option')
+    [index]?.focus({ preventScroll: true })
+}
+
+function onListKeydown(event: KeyboardEvent) {
+  keyboard.onKeydown(event)
+}
+
+function onFilterKeydown(event: KeyboardEvent) {
+  if (['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter'].includes(event.key)) {
+    keyboard.onKeydown(event)
+    focusActiveOption()
+  }
+}
+
+watch(keyboard.activeIndex, () => {
+  // Follow the highlight only when focus is already inside the list, so
+  // typing in the filter input never steals focus.
+  if (list.value?.contains(document.activeElement)) focusActiveOption()
+})
 </script>
 
 <template>
@@ -62,9 +110,18 @@ function select(option: ListboxOption) {
       :placeholder="locale.filterOptions"
       :disabled="disabled"
       :aria-label="locale.filterOptions"
+      @keydown="onFilterKeydown"
     >
-    <ul class="wi-listbox__list" role="listbox" :aria-multiselectable="multiple || undefined" :style="listStyle">
-      <li v-for="option in filteredOptions" :key="String(option.value)" role="presentation">
+    <ul
+      ref="list"
+      class="wi-listbox__list"
+      role="listbox"
+      :aria-label="locale.selectOption"
+      :aria-multiselectable="multiple || undefined"
+      :style="listStyle"
+      @keydown="onListKeydown"
+    >
+      <li v-for="(option, index) in filteredOptions" :key="String(option.value)" role="presentation">
         <button
           type="button"
           class="wi-listbox__option"
@@ -72,7 +129,9 @@ function select(option: ListboxOption) {
           :class="{ 'wi-listbox__option--selected': isSelected(option.value) }"
           :aria-selected="isSelected(option.value)"
           :disabled="disabled || option.disabled"
+          :tabindex="optionTabindex(index)"
           @click="select(option)"
+          @focus="keyboard.setActive(index)"
         >
           {{ option.label }}
         </button>

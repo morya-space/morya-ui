@@ -43,7 +43,7 @@ export interface TableColumn {
   width?: number
   minWidth: number
   sortable?: boolean
-  fixed?: boolean
+  fixed?: boolean | 'left' | 'right'
   align?: 'start' | 'center' | 'end'
   render?: (row: TableItem) => unknown
   showOverflowTooltip?: boolean
@@ -111,7 +111,6 @@ export interface TableProps {
   checkboxColumnWidth?: number | null
   hideHeader?: boolean
   hideRowsPerPage?: boolean
-  buttonsPagination?: boolean
   expandable?: boolean
   expandedRowKeys?: Array<string | number>
   clickRowToExpand?: boolean
@@ -160,7 +159,7 @@ export interface TableHeader {
   text: string
   value: string
   sortable?: boolean
-  fixed?: boolean
+  fixed?: boolean | 'left' | 'right'
   width?: number
   minWidth?: number
   align?: 'start' | 'center' | 'end'

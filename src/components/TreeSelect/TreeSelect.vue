@@ -6,6 +6,7 @@ import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   expandCheckedKeys,
   findNode,
@@ -97,6 +98,50 @@ const filteredOptions = computed(() => {
   return props.options.map(match).filter((item): item is TreeSelectNode => item != null)
 })
 
+interface FlatTreeNode {
+  node: TreeSelectNode
+  parentKey: string | null
+}
+
+const flatNodes = computed<FlatTreeNode[]>(() => {
+  const list: FlatTreeNode[] = []
+  const walk = (nodes: TreeSelectNode[], parentKey: string | null) => {
+    for (const node of nodes) {
+      list.push({ node, parentKey })
+      if (node.children?.length && expanded.value[node.key]) walk(node.children, node.key)
+    }
+  }
+  walk(filteredOptions.value, null)
+  return list
+})
+
+const panelId = `wi-treeselect-panel-${Math.random().toString(36).slice(2, 8)}`
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => flatNodes.value.length,
+  isItemDisabled: (index) => Boolean(flatNodes.value[index]?.node.disabled),
+  enabled: open,
+  onActivate: (index) => {
+    const flat = flatNodes.value[index]
+    if (flat) select(flat.node)
+  },
+  onEscape: () => {
+    open.value = false
+  },
+  returnFocusTo: trigger,
+})
+
+const activeKey = computed(() => flatNodes.value[keyboard.activeIndex.value]?.node.key ?? null)
+
+function focusActiveNode() {
+  const index = keyboard.activeIndex.value
+  if (index < 0) return
+  const options = panel.value?.querySelectorAll<HTMLElement>('.wi-treeselect__option')
+  const option = options?.[index]
+  if (option && document.activeElement !== option) option.focus({ preventScroll: true })
+  option?.scrollIntoView({ block: 'nearest' })
+}
+
 function updatePanelPosition() {
   if (!teleported.value || !trigger.value) return
   const rect = trigger.value.getBoundingClientRect()
@@ -105,11 +150,86 @@ function updatePanelPosition() {
   })
 }
 
+function openPanel() {
+  open.value = true
+  void nextTick(() => {
+    updatePanelPosition()
+    const selectedIndex = flatNodes.value.findIndex((flat) => selectedKeys.value.includes(flat.node.key))
+    if (selectedIndex >= 0) keyboard.setActive(selectedIndex)
+    else keyboard.moveFirst()
+    if (props.filterable) panel.value?.querySelector<HTMLElement>('.wi-treeselect__filter')?.focus()
+    else focusActiveNode()
+  })
+}
+
 function toggle() {
   if (props.disabled) return
-  open.value = !open.value
-  if (open.value) void nextTick(() => updatePanelPosition())
+  if (open.value) {
+    open.value = false
+    return
+  }
+  openPanel()
 }
+
+function onTreeKeydown(event: KeyboardEvent) {
+  if (!open.value) return
+  const flat = flatNodes.value
+  const current = flat[keyboard.activeIndex.value]
+  if (event.key === 'ArrowRight') {
+    event.preventDefault()
+    if (!current) return
+    if (current.node.children?.length) {
+      if (!expanded.value[current.node.key]) {
+        toggleExpand(current.node.key)
+      } else {
+        const childIndex = flat.findIndex((item) => item.parentKey === current.node.key)
+        if (childIndex >= 0) keyboard.setActive(childIndex)
+      }
+    }
+    return
+  }
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault()
+    if (!current) return
+    if (current.node.children?.length && expanded.value[current.node.key]) {
+      toggleExpand(current.node.key)
+    } else if (current.parentKey != null) {
+      const parentIndex = flat.findIndex((item) => item.node.key === current.parentKey)
+      if (parentIndex >= 0) keyboard.setActive(parentIndex)
+    }
+    return
+  }
+  keyboard.onKeydown(event)
+}
+
+function onTriggerKeydown(event: KeyboardEvent) {
+  if (props.disabled) return
+  if (!open.value) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      openPanel()
+    } else if (event.key === 'Enter') {
+      event.preventDefault()
+      toggle()
+    }
+    return
+  }
+  onTreeKeydown(event)
+}
+
+function onFilterKeydown(event: KeyboardEvent) {
+  if (['ArrowUp', 'ArrowDown', 'Enter', 'Escape'].includes(event.key)) onTreeKeydown(event)
+}
+
+watch(keyboard.activeIndex, () => {
+  if (open.value && !props.filterable) focusActiveNode()
+  else if (open.value) {
+    const index = keyboard.activeIndex.value
+    panel.value
+      ?.querySelectorAll<HTMLElement>('.wi-treeselect__option')
+      [index]?.scrollIntoView({ block: 'nearest' })
+  }
+})
 
 function toggleExpand(key: string) {
   expanded.value = { ...expanded.value, [key]: !expanded.value[key] }
@@ -129,6 +249,7 @@ function select(node: TreeSelectNode) {
   if (!isMultiple.value) {
     emit('update:modelValue', node.key === props.modelValue ? null : node.key)
     open.value = false
+    trigger.value?.focus({ preventScroll: true })
     return
   }
   const next = selectedKeys.value.includes(node.key)
@@ -168,6 +289,12 @@ function onDocumentClick(event: MouseEvent) {
   open.value = false
 }
 
+function onDocumentFocusIn(event: FocusEvent) {
+  const target = event.target as Node
+  if (root.value?.contains(target) || panel.value?.contains(target)) return
+  open.value = false
+}
+
 function onViewportChange() {
   if (open.value) updatePanelPosition()
 }
@@ -175,13 +302,16 @@ function onViewportChange() {
 watch(open, (isOpen) => {
   if (isOpen) {
     document.addEventListener('click', onDocumentClick)
+    document.addEventListener('focusin', onDocumentFocusIn)
     if (teleported.value) {
       window.addEventListener('resize', onViewportChange)
       window.addEventListener('scroll', onViewportChange, true)
     }
   } else {
     query.value = ''
+    keyboard.reset()
     document.removeEventListener('click', onDocumentClick)
+    document.removeEventListener('focusin', onDocumentFocusIn)
     window.removeEventListener('resize', onViewportChange)
     window.removeEventListener('scroll', onViewportChange, true)
   }
@@ -189,6 +319,7 @@ watch(open, (isOpen) => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
+  document.removeEventListener('focusin', onDocumentFocusIn)
   window.removeEventListener('resize', onViewportChange)
   window.removeEventListener('scroll', onViewportChange, true)
 })
@@ -218,12 +349,13 @@ onBeforeUnmount(() => {
         ref="trigger"
         class="wi-treeselect__trigger"
         role="combobox"
-        tabindex="0"
+        :tabindex="disabled ? -1 : 0"
         :aria-disabled="disabled || undefined"
         :aria-expanded="open"
+        :aria-controls="open ? panelId : undefined"
         aria-haspopup="tree"
         @click="toggle"
-        @keydown.enter.prevent="toggle"
+        @keydown="onTriggerKeydown"
       >
         <div v-if="isMultiple && selectedTags.length" class="wi-treeselect__tags">
           <span v-for="tag in visibleTags" :key="tag.key" class="wi-select__tag">
@@ -269,10 +401,12 @@ onBeforeUnmount(() => {
       <Transition name="wi-scale-fade">
         <div
           v-if="open"
+          :id="panelId"
           ref="panel"
           class="wi-treeselect__panel"
           :class="{ 'wi-treeselect__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
+          @keydown="onTreeKeydown"
         >
           <input
             v-if="filterable"
@@ -281,6 +415,7 @@ onBeforeUnmount(() => {
             type="search"
             :placeholder="locale.searchPlaceholder"
             @click.stop
+            @keydown="onFilterKeydown"
           >
           <ul class="wi-treeselect__tree" role="tree">
             <TreeSelectNodeItem
@@ -292,6 +427,7 @@ onBeforeUnmount(() => {
               :checked-keys="checkedKeys"
               :expanded="expanded"
               :show-checkbox="checkable"
+              :active-key="activeKey"
               @toggle="toggleExpand"
               @select="select"
               @check="toggleCheck"

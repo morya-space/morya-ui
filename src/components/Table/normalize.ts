@@ -11,8 +11,10 @@ export function normalizeAlign(
   return 'center'
 }
 
-export function normalizeFixed(fixed?: boolean | 'left' | 'right'): boolean {
-  return fixed === true || fixed === 'left'
+export function normalizeFixed(fixed?: boolean | 'left' | 'right'): 'left' | 'right' | undefined {
+  if (fixed === true || fixed === 'left') return 'left'
+  if (fixed === 'right') return 'right'
+  return undefined
 }
 
 export function normalizeColumnDefinition(column: TableColumnDefinition): TableHeader {

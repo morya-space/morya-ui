@@ -1,3 +1,4 @@
+import './style'
 export { default as WiTable } from './Table.vue'
 export type {
   TableBodyItemClassName,

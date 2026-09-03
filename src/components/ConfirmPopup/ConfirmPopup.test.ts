@@ -57,4 +57,45 @@ describe('wiConfirmPopup', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     expect(wrapper.find('.wi-confirmpopup').exists()).toBe(true)
   })
+
+  it('uses non-modal semantics without aria-modal', async () => {
+    const wrapper = mount(WiConfirmPopup, {
+      props: { modelValue: true, message: 'Hi' },
+      attachTo: document.body,
+    })
+    await nextTick()
+    const panel = document.body.querySelector('.wi-confirmpopup')
+    expect(panel?.getAttribute('role')).toBe('alertdialog')
+    expect(panel?.getAttribute('aria-modal')).toBeNull()
+    wrapper.unmount()
+  })
+
+  it('restores focus to the target after closing', async () => {
+    const target = document.createElement('button')
+    document.body.appendChild(target)
+    target.focus()
+    const wrapper = mount(WiConfirmPopup, {
+      props: { modelValue: true, message: 'Sure?', target },
+      attachTo: document.body,
+    })
+    await nextTick()
+    expect(document.activeElement?.classList.contains('wi-confirmpopup')).toBe(true)
+    await wrapper.setProps({ modelValue: false })
+    await nextTick()
+    expect(document.activeElement).toBe(target)
+    wrapper.unmount()
+    target.remove()
+  })
+
+  it('applies acceptSeverity to the accept button', async () => {
+    const wrapper = mount(WiConfirmPopup, {
+      props: { modelValue: true, message: 'Delete?', acceptLabel: 'Yes', acceptSeverity: 'danger' },
+      attachTo: document.body,
+    })
+    await nextTick()
+    const buttons = Array.from(document.body.querySelectorAll('.wi-confirmpopup .wi-button'))
+    const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
+    expect(accept?.classList.contains('wi-button--danger')).toBe(true)
+    wrapper.unmount()
+  })
 })

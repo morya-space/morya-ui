@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TooltipProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useId, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 
 const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
+const tipId = useId()
 const visible = ref(false)
 const tipStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -103,6 +104,7 @@ const contentStyle = computed(() => {
   <span
     ref="root"
     class="wi-tooltip"
+    :aria-describedby="visible ? tipId : undefined"
     @mouseenter="show"
     @mouseleave="hide"
     @focusin="show"
@@ -113,6 +115,7 @@ const contentStyle = computed(() => {
       <Transition name="wi-fade">
         <span
           v-if="visible"
+          :id="tipId"
           class="wi-tooltip__content"
           :class="[`wi-tooltip__content--${placement}`, { 'wi-tooltip__content--teleported': teleported }]"
           :style="contentStyle"

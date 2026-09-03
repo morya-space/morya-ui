@@ -21,6 +21,8 @@ export interface DatePickerProps {
   modelValue?: DatePickerValue
   type?: DatePickerType
   label?: string
+  /** Input id. Auto-generated when omitted; the label's `for` points to it. */
+  id?: string
   disabled?: boolean
   invalid?: boolean
   fluid?: boolean
@@ -28,6 +30,10 @@ export interface DatePickerProps {
   minDate?: DatePickerDateValue | null
   maxDate?: DatePickerDateValue | null
   placeholder?: string
+  /** Error message shown below the field; also marks the input invalid. */
+  errorMessage?: string
+  /** Help text shown below the field. */
+  helpText?: string
   /** Display pattern using `YYYY` / `MM` / `DD`. Output remains ISO (`YYYY-MM-DD`). */
   format?: string
   clearable?: boolean
@@ -41,4 +47,10 @@ export interface DatePickerProps {
 export interface DatePickerEmits {
   (event: 'update:modelValue', value: DatePickerModel): void
   (event: 'clear'): void
+  /** Panel opened. */
+  (event: 'show'): void
+  /** Panel closed. */
+  (event: 'hide'): void
+  /** Selection committed (same payload as `update:modelValue`, excluding `null` clears). */
+  (event: 'change', value: DatePickerModel): void
 }

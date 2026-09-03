@@ -15,6 +15,8 @@ export type PopoverTrigger = 'manual' | 'click' | 'hover' | 'focus'
 export interface PopoverProps {
   /** Visibility. Use with `v-model`. */
   modelValue?: boolean
+  /** Disable trigger interactions and force the popover closed. */
+  disabled?: boolean
   placement?: PopoverPlacement
   /** How the popover opens. `manual` is v-model only. */
   trigger?: PopoverTrigger

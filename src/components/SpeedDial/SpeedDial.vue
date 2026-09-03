@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
@@ -26,6 +27,7 @@ const root = ref<HTMLElement | null>(null)
 const button = ref<HTMLElement | null>(null)
 const list = ref<HTMLElement | null>(null)
 const listStyle = ref<Record<string, string>>({})
+const listId = `wi-speeddial-list-${Math.random().toString(36).slice(2, 8)}`
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
@@ -52,6 +54,82 @@ function updateListPosition() {
   listStyle.value = computeFloatingOverlayStyle(rect, placement)
 }
 
+const keyboard = useMenuKeyboard({
+  itemCount: () => props.model.length,
+  isItemDisabled: (index) => Boolean(props.model[index]?.disabled),
+  enabled: () => props.modelValue,
+})
+
+function close(restoreFocus = false) {
+  emit('update:modelValue', false)
+  if (restoreFocus) button.value?.focus({ preventScroll: true })
+}
+
+function focusActiveAction() {
+  const index = keyboard.activeIndex.value
+  if (index < 0) return
+  list.value?.querySelectorAll<HTMLElement>('.wi-speeddial__action')[index]?.focus({ preventScroll: true })
+}
+
+function arrowDelta(key: string): number | null {
+  const vertical = props.direction === 'up' || props.direction === 'down'
+  // For `up`/`left` the list grows away from the button, so moving "outward"
+  // (visually up/left) means advancing to the next item.
+  if (vertical) {
+    if (key === 'ArrowUp') return props.direction === 'up' ? 1 : -1
+    if (key === 'ArrowDown') return props.direction === 'up' ? -1 : 1
+    return null
+  }
+  if (key === 'ArrowLeft') return props.direction === 'left' ? 1 : -1
+  if (key === 'ArrowRight') return props.direction === 'left' ? -1 : 1
+  return null
+}
+
+function onListKeydown(event: KeyboardEvent) {
+  if (!props.modelValue) return
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    close(true)
+    return
+  }
+  const delta = arrowDelta(event.key)
+  if (delta !== null) {
+    event.preventDefault()
+    keyboard.move(delta)
+    return
+  }
+  if (event.key === 'Home') {
+    event.preventDefault()
+    keyboard.moveFirst()
+    return
+  }
+  if (event.key === 'End') {
+    event.preventDefault()
+    keyboard.moveLast()
+    return
+  }
+  if (event.key === 'Enter' || event.key === ' ') {
+    const index = keyboard.activeIndex.value
+    const item = props.model[index]
+    if (item && !item.disabled) {
+      event.preventDefault()
+      activate(item)
+    }
+  }
+}
+
+function onButtonKeydown(event: KeyboardEvent) {
+  if (props.disabled) return
+  if (!props.modelValue) {
+    if (event.key.startsWith('Arrow')) {
+      event.preventDefault()
+      emit('update:modelValue', true)
+    }
+    return
+  }
+  onListKeydown(event)
+}
+
 function toggle() {
   if (props.disabled) return
   emit('update:modelValue', !props.modelValue)
@@ -60,30 +138,58 @@ function toggle() {
 function activate(item: SpeedDialItem) {
   if (props.disabled || item.disabled) return
   item.command?.()
-  emit('update:modelValue', false)
+  close(true)
 }
 
 function onViewportChange() {
   if (props.modelValue) updateListPosition()
 }
 
+function onDocumentClick(event: MouseEvent) {
+  const target = event.target as Node
+  if (root.value?.contains(target) || list.value?.contains(target)) return
+  close()
+}
+
+function onDocumentFocusIn(event: FocusEvent) {
+  const target = event.target as Node
+  if (root.value?.contains(target) || list.value?.contains(target)) return
+  close()
+}
+
+watch(keyboard.activeIndex, () => {
+  if (props.modelValue) focusActiveAction()
+})
+
 watch(
   () => props.modelValue,
   (open) => {
     if (open) {
-      void nextTick(() => updateListPosition())
+      void nextTick(() => {
+        updateListPosition()
+        keyboard.moveFirst()
+        focusActiveAction()
+      })
+      document.addEventListener('click', onDocumentClick)
+      document.addEventListener('focusin', onDocumentFocusIn)
       if (teleported.value) {
         window.addEventListener('resize', onViewportChange)
         window.addEventListener('scroll', onViewportChange, true)
       }
     } else {
+      keyboard.reset()
+      document.removeEventListener('click', onDocumentClick)
+      document.removeEventListener('focusin', onDocumentFocusIn)
       window.removeEventListener('resize', onViewportChange)
       window.removeEventListener('scroll', onViewportChange, true)
     }
   },
+  { immediate: true },
 )
 
 onBeforeUnmount(() => {
+  document.removeEventListener('click', onDocumentClick)
+  document.removeEventListener('focusin', onDocumentFocusIn)
   window.removeEventListener('resize', onViewportChange)
   window.removeEventListener('scroll', onViewportChange, true)
 })
@@ -95,11 +201,13 @@ onBeforeUnmount(() => {
       <Transition name="wi-scale-fade">
         <ul
           v-if="modelValue"
+          :id="listId"
           ref="list"
           class="wi-speeddial__list"
           :class="{ 'wi-speeddial__list--teleported': teleported }"
           :style="teleported ? listStyle : undefined"
           role="menu"
+          @keydown="onListKeydown"
         >
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="none">
             <button
@@ -109,6 +217,7 @@ onBeforeUnmount(() => {
               :title="item.label"
               :aria-label="item.label"
               :disabled="item.disabled"
+              :tabindex="keyboard.tabindexFor(index)"
               @click="activate(item)"
             >
               <span v-if="item.icon" aria-hidden="true">{{ item.icon }}</span>
@@ -124,8 +233,11 @@ onBeforeUnmount(() => {
       class="wi-speeddial__button"
       :aria-label="speedDialLabel"
       :aria-expanded="modelValue"
+      :aria-controls="modelValue ? listId : undefined"
+      aria-haspopup="menu"
       :disabled="disabled"
       @click="toggle"
+      @keydown="onButtonKeydown"
     >
       <slot name="icon">
         <WiIcon name="plus" size="sm" />

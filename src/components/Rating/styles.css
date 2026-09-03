@@ -27,8 +27,10 @@
     color: var(--wi-color-primary);
 }
 
+.wi-rating:focus-visible,
 .wi-rating__star:focus-visible,
 .wi-rating__cancel:focus-visible {
+    border-radius: var(--wi-radius-sm);
     box-shadow: var(--wi-focus-shadow);
     outline: none;
 }

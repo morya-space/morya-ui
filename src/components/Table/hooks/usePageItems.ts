@@ -2,6 +2,7 @@ import type { ComputedRef, Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { MultipleSelectStatus } from './internal'
 import { computed } from 'vue'
+import { sameTableItem } from '../utils'
 
 export function usePageItems(
   currentPaginationNumber: Ref<number>,
@@ -13,6 +14,7 @@ export function usePageItems(
   showIndex: Ref<boolean>,
   totalItems: ComputedRef<TableItem[]>,
   totalItemsLength: ComputedRef<number>,
+  rowKey: Ref<string>,
 ) {
   const currentPageFirstIndex = computed(
     () => (currentPaginationNumber.value - 1) * rowsPerPageRef.value + 1,
@@ -42,13 +44,13 @@ export function usePageItems(
     if (selectItemsComputed.value.length === 0) return 'noneSelected'
 
     const isNoneSelected = selectItemsComputed.value.every((itemSelected) =>
-      totalItems.value.every((item) => JSON.stringify(itemSelected) !== JSON.stringify(item)),
+      totalItems.value.every((item) => !sameTableItem(itemSelected, item, rowKey.value)),
     )
     if (isNoneSelected) return 'noneSelected'
 
     if (selectItemsComputed.value.length === totalItems.value.length) {
       const isAllSelected = selectItemsComputed.value.every((itemSelected) =>
-        totalItems.value.some((item) => JSON.stringify(itemSelected) === JSON.stringify(item)),
+        totalItems.value.some((item) => sameTableItem(itemSelected, item, rowKey.value)),
       )
       return isAllSelected ? 'allSelected' : 'partSelected'
     }
@@ -65,11 +67,11 @@ export function usePageItems(
       return itemsWithIndex.value.map((item) => ({ checkbox: false, ...item }))
     }
     return itemsWithIndex.value.map((item) => {
-      const isSelected = selectItemsComputed.value.some((selectItem) => {
-        const clone = { ...item }
-        delete clone.index
-        return JSON.stringify(selectItem) === JSON.stringify(clone)
-      })
+      const clone = { ...item }
+      delete clone.index
+      const isSelected = selectItemsComputed.value.some((selectItem) =>
+        sameTableItem(selectItem, clone as TableItem, rowKey.value),
+      )
       return { checkbox: isSelected, ...item }
     })
   })

@@ -38,4 +38,45 @@ describe('wiInputNumber', () => {
     await stepped.get('.wi-inputnumber__button--increment').trigger('click')
     expect(stepped.emitted('update:modelValue')?.at(-1)).toEqual([1.3])
   })
+
+  it('keeps draft while typing negative numbers and decimals', async () => {
+    const wrapper = mount(WiInputNumber, { props: { modelValue: 3 } })
+    const input = wrapper.get('input')
+    const el = input.element as HTMLInputElement
+
+    el.value = '-'
+    await input.trigger('input')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect((input.element as HTMLInputElement).value).toBe('-')
+
+    el.value = '-5'
+    await input.trigger('input')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([-5])
+
+    el.value = '1.'
+    await input.trigger('input')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([-5])
+
+    el.value = '1.5'
+    await input.trigger('input')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([1.5])
+  })
+
+  it('clamps draft on blur without disturbing typing', async () => {
+    const wrapper = mount(WiInputNumber, { props: { min: 0, max: 10 } })
+    const input = wrapper.get('input')
+    await input.setValue('-4')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([-4])
+    await input.trigger('blur')
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([0])
+    expect((input.element as HTMLInputElement).value).toBe('0')
+  })
+
+  it('commits draft on Enter', async () => {
+    const wrapper = mount(WiInputNumber, { props: { precision: 1 } })
+    const input = wrapper.get('input')
+    await input.setValue('1.26')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([1.3])
+  })
 })

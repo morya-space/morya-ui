@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { InputNumberProps } from './types'
-import { computed, useAttrs } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import WiIcon from '../Icon/Icon.vue'
@@ -57,19 +57,58 @@ function parseInput(raw: string): number | null {
   return clamp(parsed)
 }
 
+/** Local string draft while typing; null when the display follows modelValue. */
+const draft = ref<string | null>(null)
+const displayValue = computed(() =>
+  draft.value ?? (props.modelValue == null ? '' : String(props.modelValue)),
+)
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (draft.value == null) return
+    const echoed = value == null ? draft.value.trim() === '' : Number(draft.value) === value
+    if (!echoed) draft.value = null
+  },
+)
+
 function updateFromInput(event: Event) {
   if (props.disabled) return
-  emit('update:modelValue', parseInput((event.target as HTMLInputElement).value))
+  const raw = (event.target as HTMLInputElement).value
+  draft.value = raw
+  const trimmed = raw.trim()
+  if (trimmed === '') {
+    emit('update:modelValue', null)
+    return
+  }
+  const parsed = Number(trimmed)
+  // Trailing '.', 'e', '+', '-' are intermediate states ("1.", "1e-", "-") — keep drafting.
+  if (Number.isNaN(parsed) || /[.e+-]$/i.test(trimmed)) return
+  emit('update:modelValue', applyPrecision(parsed))
+}
+
+/** Parse + clamp + emit the draft; keep the formatted text so uncontrolled usage is stable. */
+function commitDraft() {
+  if (props.disabled || draft.value == null) return
+  const committed = parseInput(draft.value)
+  emit('update:modelValue', committed)
+  draft.value = committed == null ? '' : String(committed)
+}
+
+function onInputKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter') commitDraft()
 }
 
 function stepBy(direction: 1 | -1) {
   if (props.disabled) return
   const base = props.modelValue ?? props.min ?? 0
+  draft.value = null
   emit('update:modelValue', clamp(base + direction * props.step))
 }
 
 function clear() {
   if (props.disabled) return
+  draft.value = null
   emit('update:modelValue', null)
 }
 </script>
@@ -92,14 +131,14 @@ function clear() {
         v-bind="attrs"
         :id="inputId"
         class="wi-inputnumber__input"
-        type="number"
-        :value="modelValue ?? ''"
-        :min="min"
-        :max="max"
-        :step="step"
+        type="text"
+        inputmode="decimal"
+        :value="displayValue"
         :disabled="disabled"
         :aria-invalid="invalid || undefined"
         @input="updateFromInput"
+        @blur="commitDraft"
+        @keydown="onInputKeydown"
       >
       <button
         v-if="showClear"

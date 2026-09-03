@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { OrderListProps } from './types'
-import { ref } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
@@ -29,9 +30,42 @@ function itemKey(item: unknown, index: number) {
   return String(index)
 }
 
+const list = ref<HTMLElement | null>(null)
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => props.modelValue.length,
+})
+
 function select(index: number) {
   selectedIndex.value = index
+  keyboard.setActive(index)
 }
+
+function itemTabindex(index: number): 0 | -1 {
+  if (keyboard.activeIndex.value >= 0) return keyboard.tabindexFor(index)
+  return index === (selectedIndex.value ?? 0) ? 0 : -1
+}
+
+function focusItem(index: number) {
+  list.value
+    ?.querySelectorAll<HTMLElement>('.wi-orderlist__item')
+    [index]?.focus({ preventScroll: true })
+}
+
+function onListKeydown(event: KeyboardEvent) {
+  if ((event.ctrlKey || event.metaKey) && (event.key === 'ArrowUp' || event.key === 'ArrowDown')) {
+    event.preventDefault()
+    move(event.key === 'ArrowUp' ? -1 : 1)
+    return
+  }
+  keyboard.onKeydown(event)
+}
+
+watch(keyboard.activeIndex, (index) => {
+  if (index < 0) return
+  selectedIndex.value = index
+  focusItem(index)
+})
 
 function commitOrder(next: unknown[]) {
   emit('update:modelValue', next)
@@ -47,7 +81,9 @@ function move(delta: number) {
   const [item] = next.splice(from, 1)
   next.splice(to, 0, item)
   selectedIndex.value = to
+  keyboard.setActive(to)
   commitOrder(next)
+  void nextTick(() => focusItem(to))
 }
 
 function armHandle() {
@@ -104,15 +140,22 @@ function resetDrag() {
 <template>
   <div class="wi-orderlist">
     <div class="wi-orderlist__controls">
-      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveUp" @click="move(-1)">
+      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
         <WiIcon name="chevron-up" size="sm" />
       </button>
-      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveDown" @click="move(1)">
+      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
         <WiIcon name="chevron-down" size="sm" />
       </button>
     </div>
 
-    <ul class="wi-orderlist__list" :style="listStyle" role="listbox">
+    <ul
+      ref="list"
+      class="wi-orderlist__list"
+      :style="listStyle"
+      role="listbox"
+      :aria-label="locale.selectOption"
+      @keydown="onListKeydown"
+    >
       <li
         v-for="(item, index) in modelValue"
         :key="itemKey(item, index)"
@@ -125,7 +168,9 @@ function resetDrag() {
         role="option"
         :aria-selected="selectedIndex === index"
         :draggable="dragdrop"
+        :tabindex="itemTabindex(index)"
         @click="select(index)"
+        @focus="select(index)"
         @dragstart="onDragStart(index, $event)"
         @dragover="onDragOver(index, $event)"
         @drop="onDrop(index, $event)"
@@ -136,6 +181,7 @@ function resetDrag() {
           type="button"
           class="wi-orderlist__handle"
           :aria-label="locale.dragToReorder"
+          tabindex="-1"
           @click.stop
           @pointerdown="armHandle"
         >

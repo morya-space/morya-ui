@@ -44,6 +44,66 @@ describe('wiCascadeSelect', () => {
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
+  it('opens with ArrowDown and supports full keyboard selection', async () => {
+    const wrapper = mount(WiCascadeSelect, {
+      props: { options, modelValue: null, teleport: false },
+      attachTo: document.body,
+    })
+    const triggerEl = wrapper.get('.wi-cascadeselect__trigger')
+    await triggerEl.trigger('keydown', { key: 'ArrowDown' })
+    await nextTick()
+    const panel = wrapper.get('.wi-cascadeselect__panel')
+    expect(triggerEl.attributes('aria-controls')).toBe(panel.attributes('id'))
+    expect(document.activeElement).toBe(wrapper.findAll('.wi-cascadeselect__option')[0]!.element)
+
+    await panel.trigger('keydown', { key: 'ArrowRight' })
+    await nextTick()
+    expect(wrapper.findAll('.wi-cascadeselect__column')).toHaveLength(2)
+    const columns = wrapper.findAll('.wi-cascadeselect__column')
+    expect(document.activeElement).toBe(
+      (columns[1]!.element as HTMLElement).querySelector('.wi-cascadeselect__option'),
+    )
+
+    await panel.trigger('keydown', { key: 'ArrowDown' })
+    await panel.trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['laptop'])
+    await nextTick()
+    expect(wrapper.find('.wi-cascadeselect__panel').exists()).toBe(false)
+    expect(document.activeElement).toBe(triggerEl.element)
+    wrapper.unmount()
+  })
+
+  it('restores the selected path when reopening', async () => {
+    const wrapper = mount(WiCascadeSelect, {
+      props: { options, modelValue: 'laptop', teleport: false },
+      attachTo: document.body,
+    })
+    await wrapper.get('.wi-cascadeselect__trigger').trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('.wi-cascadeselect__column')).toHaveLength(2)
+    const laptop = wrapper
+      .findAll('.wi-cascadeselect__option')
+      .find((node) => node.text().includes('Laptop'))
+    expect(document.activeElement).toBe(laptop!.element)
+    expect(laptop!.classes()).toContain('wi-cascadeselect__option--selected')
+    wrapper.unmount()
+  })
+
+  it('closes on Escape and returns focus to the trigger', async () => {
+    const wrapper = mount(WiCascadeSelect, {
+      props: { options, modelValue: null, teleport: false },
+      attachTo: document.body,
+    })
+    const triggerEl = wrapper.get('.wi-cascadeselect__trigger')
+    await triggerEl.trigger('click')
+    await nextTick()
+    await wrapper.get('.wi-cascadeselect__panel').trigger('keydown', { key: 'Escape' })
+    await nextTick()
+    expect(wrapper.find('.wi-cascadeselect__panel').exists()).toBe(false)
+    expect(document.activeElement).toBe(triggerEl.element)
+    wrapper.unmount()
+  })
+
   it('teleports the panel to body by default', async () => {
     const wrapper = mount(WiCascadeSelect, {
       props: { options, modelValue: null },

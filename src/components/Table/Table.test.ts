@@ -200,4 +200,118 @@ describe('WiTable', () => {
     })
     expect(wrapper.text()).toContain('*Ada*')
   })
+
+  it('sorts numeric columns numerically', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns: [{ key: 'score', label: 'Score', sortable: true }],
+        rows: [
+          { id: 1, score: 100 },
+          { id: 2, score: 9 },
+          { id: 3, score: 25 },
+        ],
+        paginator: false,
+      },
+    })
+    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
+    const cells = wrapper.findAll('tbody td .wi-table__cell-text')
+    expect(cells.map((cell) => cell.text())).toEqual(['9', '25', '100'])
+  })
+
+  it('treats search input as plain text, not regex', () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns: [{ key: 'name', label: 'Name' }],
+        rows: [
+          { id: 1, name: 'foo[bar' },
+          { id: 2, name: 'baz' },
+        ],
+        searchValue: '[',
+        paginator: false,
+      },
+    })
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1)
+    expect(wrapper.text()).toContain('foo[bar')
+  })
+
+  it('supports v-model:expandedRowKeys and keeps expansion across sorting', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        'columns': [
+          { key: 'name', label: 'Name', sortable: true },
+        ],
+        'rows': [
+          { id: 1, name: 'Lin', extra: 'x' },
+          { id: 2, name: 'Ada', extra: 'y' },
+        ],
+        'expandable': true,
+        'expandedRowKeys': [],
+        'onUpdate:expandedRowKeys': (keys: Array<string | number>) =>
+          wrapper.setProps({ expandedRowKeys: keys }),
+        'paginator': false,
+      },
+      slots: {
+        expansion: ({ row }: { row: { extra: string } }) => h('p', { class: 'exp' }, row.extra),
+      },
+    })
+    const expandButtons = wrapper.findAll('.wi-table__expand-btn')
+    await expandButtons[0]!.trigger('click')
+    expect(wrapper.emitted('update:expandedRowKeys')?.at(-1)).toEqual([[1]])
+    expect(wrapper.find('.wi-table__cell--expanded').exists()).toBe(true)
+
+    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
+    expect(wrapper.find('.wi-table__cell--expanded').exists()).toBe(true)
+  })
+
+  it('renders right-fixed columns with right offsets', () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns: [
+          { key: 'name', label: 'Name' },
+          { key: 'ops', label: 'Ops', fixed: 'right', width: 120 },
+        ],
+        rows: [{ id: 1, name: 'Ada', ops: 'x' }],
+        paginator: false,
+      },
+    })
+    const opsHeader = wrapper.findAll('th').at(-1)!
+    expect(opsHeader.attributes('style')).toContain('right: 0px')
+    expect(opsHeader.classes()).toContain('wi-table__header-cell--shadow-end')
+  })
+
+  it('sortMode emit only emits without client sorting', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns,
+        sortMode: 'emit' as const,
+        rows: [
+          { id: 1, name: 'Lin', status: 'a' },
+          { id: 2, name: 'Ada', status: 'b' },
+        ],
+        paginator: false,
+      },
+    })
+    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
+    expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
+    expect(wrapper.find('tbody td').text()).toBe('Lin')
+  })
+
+  it('filters rows via controlled filters prop', async () => {
+    const wrapper = mount(WiTable, {
+      props: {
+        columns,
+        rows: [
+          { id: 1, name: 'Ada', status: 'Draft' },
+          { id: 2, name: 'Lin', status: 'Live' },
+        ],
+        filters: { status: 'Live' },
+        paginator: false,
+      },
+    })
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1)
+    expect(wrapper.text()).toContain('Lin')
+    await wrapper.setProps({ filters: { status: 'Draft' } })
+    expect(wrapper.text()).toContain('Ada')
+    expect(wrapper.emitted('filter')).toBeTruthy()
+  })
 })

@@ -1,4 +1,5 @@
 import type { WiAppendTo } from '../../shared/overlay'
+import type { FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 
 export interface TieredMenuItem {
   label?: string
@@ -12,6 +13,8 @@ export interface TieredMenuProps {
   model: TieredMenuItem[]
   popup?: boolean
   modelValue?: boolean
+  /** Popup placement relative to the anchor. Defaults to `'bottom-start'`. */
+  placement?: FloatingOverlayPlacement
   /** Teleport overlay when `popup`. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */

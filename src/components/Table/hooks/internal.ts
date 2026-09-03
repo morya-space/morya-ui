@@ -12,7 +12,7 @@ export type HeaderForRender = {
   value: string
   sortable?: boolean
   sortType?: TableSortType | 'none'
-  fixed?: boolean
+  fixed?: boolean | 'left' | 'right'
   width?: number
 }
 
@@ -32,6 +32,7 @@ export type EmitsEventName =
   | 'sort'
   | 'update:selection'
   | 'update:serverOptions'
+  | 'update:expandedRowKeys'
   | 'filter'
   | 'updatePageItems'
   | 'updateTotalItems'

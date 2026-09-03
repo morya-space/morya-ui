@@ -56,6 +56,7 @@ export interface WiLocaleConfig {
   moreActions?: string
   backToTop?: string
   clearRating?: string
+  rating?: string
   decrease?: string
   increase?: string
   selectColor?: string
@@ -74,6 +75,7 @@ export interface WiLocaleConfig {
   breadcrumb?: string
   sidebar?: string
   menubar?: string
+  megaMenu?: string
   selectOption?: string
   maximize?: string
   restore?: string
@@ -88,6 +90,7 @@ export interface WiLocaleConfig {
   sliderControl?: string
   prev?: string
   next?: string
+  carouselPage?: string
   noMatch?: string
   filterAll?: string
   filterColumn?: string

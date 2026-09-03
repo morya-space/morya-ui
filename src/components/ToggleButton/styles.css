@@ -1,5 +1,12 @@
 /* —— Form: ToggleButton —— */
 .wi-togglebutton {
+    --wi-button-padding-x-small: var(--wi-control-padding-x-small);
+    --wi-button-padding-x-medium: calc(
+        var(--wi-control-padding-x-medium) + var(--wi-space-1)
+    );
+    --wi-button-padding-x-large: calc(
+        var(--wi-control-padding-x-large) + var(--wi-space-1)
+    );
     align-items: center;
     background: color-mix(in srgb, var(--wi-color-text-muted) 14%, var(--wi-color-surface));
     border: 1px solid var(--wi-color-border);

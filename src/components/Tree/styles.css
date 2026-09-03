@@ -26,8 +26,17 @@
     padding-right: var(--wi-space-2);
 }
 
-.wi-tree__row:hover {
+.wi-tree__row:hover,
+.wi-tree__node:focus-visible > .wi-tree__row {
     background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
+}
+
+.wi-tree__node:focus-visible {
+    outline: none;
+}
+
+.wi-tree__node:focus-visible > .wi-tree__row {
+    box-shadow: var(--wi-focus-shadow);
 }
 
 .wi-tree__row--selected {

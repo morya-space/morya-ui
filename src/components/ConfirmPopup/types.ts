@@ -1,5 +1,6 @@
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { WiAppendTo } from '../../shared/overlay'
+import type { ButtonSeverity } from '../Button/types'
 import type { IconName } from '../Icon/types'
 
 export type ConfirmPopupPlacement = 'top' | 'bottom' | 'left' | 'right'
@@ -9,6 +10,8 @@ export interface ConfirmPopupProps {
   message?: string
   acceptLabel?: string
   rejectLabel?: string
+  /** Severity of the accept button, e.g. `'danger'` for destructive confirmations. */
+  acceptSeverity?: ButtonSeverity
   /** Icon beside the message. */
   icon?: IconName
   /** Return `false` to keep the popup open and skip the `accept` emit. */

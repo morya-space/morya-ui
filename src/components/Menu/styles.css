@@ -289,7 +289,8 @@
 }
 
 .wi-menu__item-content:hover:not(.wi-menu__item-content--disabled)::before,
-.wi-menu__item-content:focus-visible:not(.wi-menu__item-content--disabled)::before {
+.wi-menu__item-content:focus-visible:not(.wi-menu__item-content--disabled)::before,
+.wi-menu__item-content--active:not(.wi-menu__item-content--disabled)::before {
     background: var(--wi-menu-item-color-hover);
 }
 

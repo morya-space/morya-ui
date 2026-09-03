@@ -14,8 +14,8 @@ const emit = defineEmits<{
   (event: 'update:target', value: unknown[]): void
 }>()
 
-const selectedSource = ref<number[]>([])
-const selectedTarget = ref<number[]>([])
+const selectedSource = ref<Array<string | number>>([])
+const selectedTarget = ref<Array<string | number>>([])
 const locale = useWiLocale()
 const sourceTitle = computed(() => props.sourceHeader ?? locale.value.sourceHeader)
 const targetTitle = computed(() => props.targetHeader ?? locale.value.targetHeader)
@@ -27,17 +27,23 @@ function itemKey(item: unknown, index: number) {
   return index
 }
 
-function toggleSelection(list: 'source' | 'target', index: number) {
+function isSelected(list: 'source' | 'target', item: unknown, index: number) {
   const selected = list === 'source' ? selectedSource : selectedTarget
-  const pos = selected.value.indexOf(index)
-  if (pos >= 0) selected.value = selected.value.filter((i) => i !== index)
-  else selected.value = [...selected.value, index].sort((a, b) => a - b)
+  return selected.value.includes(itemKey(item, index))
+}
+
+function toggleSelection(list: 'source' | 'target', item: unknown, index: number) {
+  const selected = list === 'source' ? selectedSource : selectedTarget
+  const key = itemKey(item, index)
+  const pos = selected.value.indexOf(key)
+  if (pos >= 0) selected.value = selected.value.filter((k) => k !== key)
+  else selected.value = [...selected.value, key]
 }
 
 function moveToTarget() {
   if (!selectedSource.value.length) return
-  const moving = selectedSource.value.map((i) => props.source[i])
-  const nextSource = props.source.filter((_, i) => !selectedSource.value.includes(i))
+  const moving = props.source.filter((item, i) => isSelected('source', item, i))
+  const nextSource = props.source.filter((item, i) => !isSelected('source', item, i))
   emit('update:source', nextSource)
   emit('update:target', [...props.target, ...moving])
   selectedSource.value = []
@@ -45,8 +51,8 @@ function moveToTarget() {
 
 function moveToSource() {
   if (!selectedTarget.value.length) return
-  const moving = selectedTarget.value.map((i) => props.target[i])
-  const nextTarget = props.target.filter((_, i) => !selectedTarget.value.includes(i))
+  const moving = props.target.filter((item, i) => isSelected('target', item, i))
+  const nextTarget = props.target.filter((item, i) => !isSelected('target', item, i))
   emit('update:target', nextTarget)
   emit('update:source', [...props.source, ...moving])
   selectedTarget.value = []
@@ -78,13 +84,13 @@ function moveAllToSource() {
           v-for="(item, index) in source"
           :key="itemKey(item, index)"
           class="wi-picklist__item"
-          :class="{ 'wi-picklist__item--selected': selectedSource.includes(index) }"
+          :class="{ 'wi-picklist__item--selected': isSelected('source', item, index) }"
           role="option"
-          :aria-selected="selectedSource.includes(index)"
+          :aria-selected="isSelected('source', item, index)"
           tabindex="0"
-          @click="toggleSelection('source', index)"
-          @keydown.enter.prevent="toggleSelection('source', index)"
-          @keydown.space.prevent="toggleSelection('source', index)"
+          @click="toggleSelection('source', item, index)"
+          @keydown.enter.prevent="toggleSelection('source', item, index)"
+          @keydown.space.prevent="toggleSelection('source', item, index)"
         >
           <slot name="item" :item="item" :index="index">
             {{ item }}
@@ -93,17 +99,17 @@ function moveAllToSource() {
       </ul>
     </div>
     <div class="wi-picklist__controls">
-      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveAllToTarget" @click="moveAllToTarget">
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
         <WiIcon name="chevron-right" size="sm" />
         <WiIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveToTarget" @click="moveToTarget">
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
         <WiIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveToSource" @click="moveToSource">
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
         <WiIcon name="chevron-left" size="sm" />
       </button>
-      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveAllToSource" @click="moveAllToSource">
+      <button type="button" class="wi-picklist__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
         <WiIcon name="chevron-left" size="sm" />
         <WiIcon name="chevron-left" size="sm" />
       </button>
@@ -117,13 +123,13 @@ function moveAllToSource() {
           v-for="(item, index) in target"
           :key="itemKey(item, index)"
           class="wi-picklist__item"
-          :class="{ 'wi-picklist__item--selected': selectedTarget.includes(index) }"
+          :class="{ 'wi-picklist__item--selected': isSelected('target', item, index) }"
           role="option"
-          :aria-selected="selectedTarget.includes(index)"
+          :aria-selected="isSelected('target', item, index)"
           tabindex="0"
-          @click="toggleSelection('target', index)"
-          @keydown.enter.prevent="toggleSelection('target', index)"
-          @keydown.space.prevent="toggleSelection('target', index)"
+          @click="toggleSelection('target', item, index)"
+          @keydown.enter.prevent="toggleSelection('target', item, index)"
+          @keydown.space.prevent="toggleSelection('target', item, index)"
         >
           <slot name="item" :item="item" :index="index">
             {{ item }}
