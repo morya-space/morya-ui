@@ -36,4 +36,26 @@ describe('wiSelectButton', () => {
       expect.arrayContaining(['wi-selectbutton--large', 'wi-selectbutton--invalid']),
     )
   })
+
+  it('supports group roving tabindex and arrow keys', async () => {
+    const wrapper = mount(WiSelectButton, {
+      props: { options, modelValue: 'left' },
+      attachTo: document.body,
+    })
+    const buttons = () => wrapper.findAll('.wi-selectbutton__button')
+    expect(buttons()[0]!.attributes('tabindex')).toBe('0')
+    expect(buttons()[1]!.attributes('tabindex')).toBe('-1')
+
+    const group = wrapper.get('.wi-selectbutton')
+    await group.trigger('keydown', { key: 'ArrowRight' })
+    expect(document.activeElement).toBe(buttons()[0]!.element)
+
+    // skips disabled Right and wraps back to Left
+    await group.trigger('keydown', { key: 'ArrowRight' })
+    expect(document.activeElement).toBe(buttons()[1]!.element)
+
+    await group.trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['center'])
+    wrapper.unmount()
+  })
 })

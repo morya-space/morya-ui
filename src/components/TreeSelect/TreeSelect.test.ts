@@ -61,4 +61,76 @@ describe('wiTreeSelect', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
+
+  it('supports treeview keyboard navigation and selection', async () => {
+    const wrapper = mount(WiTreeSelect, {
+      props: { options, modelValue: null, teleport: false },
+      attachTo: document.body,
+    })
+    const triggerEl = wrapper.get('.wi-treeselect__trigger')
+    await triggerEl.trigger('keydown', { key: 'ArrowDown' })
+    await nextTick()
+    const panel = wrapper.get('.wi-treeselect__panel')
+    expect(triggerEl.attributes('aria-controls')).toBe(panel.attributes('id'))
+
+    const docsOption = () =>
+      wrapper.findAll('.wi-treeselect__option').find((n) => n.text() === 'Documents')!
+    expect(document.activeElement).toBe(docsOption().element)
+
+    await panel.trigger('keydown', { key: 'ArrowRight' })
+    await nextTick()
+    expect(wrapper.find('.wi-treeselect__node').attributes('aria-expanded')).toBe('true')
+
+    await panel.trigger('keydown', { key: 'ArrowRight' })
+    await nextTick()
+    const resume = wrapper.findAll('.wi-treeselect__option').find((n) => n.text() === 'Resume')!
+    expect(document.activeElement).toBe(resume.element)
+    expect(resume.attributes('tabindex')).toBe('0')
+    expect(docsOption().attributes('tabindex')).toBe('-1')
+
+    await panel.trigger('keydown', { key: 'ArrowLeft' })
+    await nextTick()
+    expect(document.activeElement).toBe(docsOption().element)
+
+    await panel.trigger('keydown', { key: 'ArrowRight' })
+    await panel.trigger('keydown', { key: 'ArrowRight' })
+    await panel.trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['resume'])
+    await nextTick()
+    expect(wrapper.find('.wi-treeselect__panel').exists()).toBe(false)
+    expect(document.activeElement).toBe(triggerEl.element)
+    wrapper.unmount()
+  })
+
+  it('closes on Escape from the panel and restores trigger focus', async () => {
+    const wrapper = mount(WiTreeSelect, {
+      props: { options, modelValue: null, teleport: false },
+      attachTo: document.body,
+    })
+    const triggerEl = wrapper.get('.wi-treeselect__trigger')
+    await triggerEl.trigger('click')
+    await nextTick()
+    await wrapper.get('.wi-treeselect__panel').trigger('keydown', { key: 'Escape' })
+    await nextTick()
+    expect(wrapper.find('.wi-treeselect__panel').exists()).toBe(false)
+    expect(document.activeElement).toBe(triggerEl.element)
+    wrapper.unmount()
+  })
+
+  it('exposes treeitem aria state', async () => {
+    const wrapper = mount(WiTreeSelect, {
+      props: { options, modelValue: 'home', teleport: false },
+    })
+    await wrapper.find('.wi-treeselect__trigger').trigger('click')
+    await wrapper.find('.wi-treeselect__toggler').trigger('click')
+    const items = wrapper.findAll('.wi-treeselect__node')
+    expect(items[0]!.attributes('aria-level')).toBe('1')
+    const home = items.find(
+      (n) =>
+        (n.element as HTMLElement).querySelector(':scope > .wi-treeselect__row .wi-treeselect__option')
+          ?.textContent === 'Home',
+    )!
+    expect(home.attributes('aria-selected')).toBe('true')
+    expect(home.attributes('aria-level')).toBe('2')
+  })
 })

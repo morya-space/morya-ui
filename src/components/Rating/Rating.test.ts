@@ -37,4 +37,40 @@ describe('wiRating', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeTypeOf('number')
     expect(wrapper.classes()).toContain('wi-rating--half')
   })
+
+  it('exposes slider semantics with label and value text', () => {
+    const wrapper = mount(WiRating, { props: { modelValue: 3, stars: 5 } })
+    const slider = wrapper.get('[role="slider"]')
+    expect(slider.attributes('tabindex')).toBe('0')
+    expect(slider.attributes('aria-label')).toBe('评分')
+    expect(slider.attributes('aria-valuenow')).toBe('3')
+    expect(slider.attributes('aria-valuetext')).toBe('3 星')
+    expect(slider.attributes('aria-valuemax')).toBe('5')
+  })
+
+  it('supports arrow/Home/End keyboard control with shift half-step', async () => {
+    const wrapper = mount(WiRating, {
+      props: {
+        modelValue: 2,
+        stars: 5,
+        allowHalf: true,
+        'onUpdate:modelValue': (value: number) => wrapper.setProps({ modelValue: value }),
+      },
+    })
+    const slider = wrapper.get('[role="slider"]')
+    await slider.trigger('keydown', { key: 'ArrowRight' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([3])
+    await slider.trigger('keydown', { key: 'ArrowLeft', shiftKey: true })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([2.5])
+    await slider.trigger('keydown', { key: 'End' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([5])
+    await slider.trigger('keydown', { key: 'Home' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([0])
+  })
+
+  it('does not respond to keys when readonly', async () => {
+    const wrapper = mount(WiRating, { props: { modelValue: 2, readonly: true } })
+    await wrapper.get('[role="slider"]').trigger('keydown', { key: 'ArrowRight' })
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+  })
 })

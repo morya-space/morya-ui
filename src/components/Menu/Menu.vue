@@ -12,6 +12,7 @@ import {
 import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { WI_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
 
@@ -194,9 +195,129 @@ function activate(item: MenuItem) {
   const key = item.key ?? item.label ?? null
   emit('update:selectedKey', key)
   emit('select', item)
-  if (props.popup) emit('update:modelValue', false)
+  if (props.popup) {
+    emit('update:modelValue', false)
+    focusTrigger()
+  }
   if (props.mode === 'horizontal') closeAllFlyouts()
 }
+
+function focusTrigger() {
+  const target = triggerEl.value?.querySelector<HTMLElement>('button, [tabindex]') ?? triggerEl.value
+  target?.focus({ preventScroll: true })
+}
+
+interface FlatMenuEntry {
+  item: MenuItem
+  key: string
+  parentKey: string | null
+  hasChildren: boolean
+}
+
+/** Visible entries in DOM order; flyout (collapsed/horizontal) children are excluded. */
+const flatEntries = computed<FlatMenuEntry[]>(() => {
+  const flyout = props.collapsed || props.mode === 'horizontal'
+  const list: FlatMenuEntry[] = []
+  const walk = (items: MenuItem[], prefix: string, parentKey: string | null) => {
+    items.forEach((item, index) => {
+      if (item.separator) return
+      const key = resolveMenuItemKey(item, index, prefix)
+      const hasChildren = Boolean(item.items?.length)
+      list.push({ item, key, parentKey, hasChildren })
+      if (hasChildren && !flyout && isExpanded(key)) walk(item.items!, `${prefix}-${index}`, key)
+    })
+  }
+  walk(props.model, 'item', null)
+  return list
+})
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => flatEntries.value.length,
+  isItemDisabled: (index) => Boolean(flatEntries.value[index]?.item.disabled),
+  orientation: () => (props.mode === 'horizontal' ? 'horizontal' : 'vertical'),
+  onActivate: (index) => {
+    const entry = flatEntries.value[index]
+    if (!entry) return
+    if (entry.hasChildren) {
+      if (props.collapsed || props.mode === 'horizontal') {
+        const next = !flyoutOpen[entry.key]
+        closeAllFlyouts()
+        setFlyoutOpen(entry.key, next)
+      } else {
+        toggleExpand(entry.key)
+      }
+      return
+    }
+    activate(entry.item)
+  },
+  onEscape: () => {
+    if (props.popup) emit('update:modelValue', false)
+    else closeAllFlyouts()
+  },
+  returnFocusTo: () => (props.popup ? (triggerEl.value?.querySelector('button, [tabindex]') ?? triggerEl.value) : null),
+})
+
+const activeKey = computed(() => flatEntries.value[keyboard.activeIndex.value]?.key ?? null)
+
+function tabindexForKey(key: string): 0 | -1 {
+  const current = activeKey.value
+  if (current != null) return key === current ? 0 : -1
+  const firstEnabled = flatEntries.value.find((entry) => !entry.item.disabled)
+  return firstEnabled?.key === key ? 0 : -1
+}
+
+function focusEntryByKey(key: string | null) {
+  if (key == null || !root.value) return
+  const nodes = root.value.querySelectorAll<HTMLElement>('[data-wi-menu-key]')
+  for (const node of nodes) {
+    if (node.dataset.wiMenuKey === key) {
+      node.focus({ preventScroll: true })
+      return
+    }
+  }
+}
+
+function onMenuKeydown(event: KeyboardEvent) {
+  const entry = flatEntries.value[keyboard.activeIndex.value]
+  if (props.mode !== 'horizontal') {
+    if (event.key === 'ArrowRight') {
+      event.preventDefault()
+      if (!entry) return
+      if (entry.hasChildren && !props.collapsed) {
+        if (!isExpanded(entry.key)) {
+          toggleExpand(entry.key)
+        } else {
+          const childIndex = flatEntries.value.findIndex((item) => item.parentKey === entry.key)
+          if (childIndex >= 0) keyboard.setActive(childIndex)
+        }
+      }
+      return
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault()
+      if (!entry) return
+      if (entry.hasChildren && !props.collapsed && isExpanded(entry.key)) {
+        toggleExpand(entry.key)
+      } else if (entry.parentKey != null) {
+        const parentIndex = flatEntries.value.findIndex((item) => item.key === entry.parentKey)
+        if (parentIndex >= 0) keyboard.setActive(parentIndex)
+      }
+      return
+    }
+  } else if (event.key === 'ArrowDown') {
+    event.preventDefault()
+    if (entry?.hasChildren) {
+      closeAllFlyouts()
+      setFlyoutOpen(entry.key, true)
+    }
+    return
+  }
+  keyboard.onKeydown(event)
+}
+
+watch(keyboard.activeIndex, () => {
+  void nextTick(() => focusEntryByKey(activeKey.value))
+})
 
 provide(WI_MENU_KEY, {
   collapsed: computed(() => props.collapsed),
@@ -216,6 +337,8 @@ provide(WI_MENU_KEY, {
   isSelected,
   isChildActive,
   paddingLeft,
+  activeKey,
+  tabindexForKey,
 })
 
 function onOutsideClick(event: MouseEvent) {
@@ -271,6 +394,7 @@ const menuClass = computed(() => [
     ref="root"
     :class="menuClass"
     role="menu"
+    @keydown="onMenuKeydown"
   >
     <MenuNodes :items="model" :depth="0" prefix="item" />
   </div>
@@ -286,6 +410,7 @@ const menuClass = computed(() => [
           :class="menuClass"
           :style="teleported ? popupStyle : undefined"
           role="menu"
+          @keydown="onMenuKeydown"
         >
           <MenuNodes :items="model" :depth="0" prefix="item" />
         </div>
@@ -300,6 +425,7 @@ const menuClass = computed(() => [
         :class="menuClass"
         :style="teleported ? popupStyle : undefined"
         role="menu"
+        @keydown="onMenuKeydown"
       >
         <MenuNodes :items="model" :depth="0" prefix="item" />
       </div>

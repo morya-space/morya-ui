@@ -68,7 +68,7 @@ function updateValue(event: Event) {
     <span class="wi-checkbox__control" aria-hidden="true">
       <svg viewBox="0 0 16 16" focusable="false">
         <path v-if="indeterminate" d="M4 8h8" />
-        <path v-else d="m3.5 8.5 3 3 6-7" />
+        <path v-else-if="isChecked" d="m3.5 8.5 3 3 6-7" />
       </svg>
     </span>
     <span v-if="label || $slots.default" class="wi-checkbox__label"><slot>{{ label }}</slot></span>

@@ -56,4 +56,48 @@ describe('wiSplitButton', () => {
     expect(command).toHaveBeenCalled()
     expect(wrapper.emitted('command')?.[0]?.[0]).toMatchObject({ label: 'Save As' })
   })
+
+  it('supports keyboard navigation, skipping disabled items', async () => {
+    const commandC = vi.fn()
+    const wrapper = mount(WiSplitButton, {
+      attachTo: document.body,
+      props: {
+        label: 'Save',
+        teleport: false,
+        model: [{ label: 'A' }, { label: 'B', disabled: true }, { label: 'C', command: commandC }],
+      },
+    })
+    const triggerEl = wrapper.get('.wi-splitbutton__trigger')
+    await triggerEl.trigger('keydown', { key: 'ArrowDown' })
+    await nextTick()
+    const menu = wrapper.get('.wi-splitbutton__menu')
+    expect(triggerEl.attributes('aria-controls')).toBe(menu.attributes('id'))
+    const itemEls = () => wrapper.findAll('.wi-splitbutton__item')
+    expect(document.activeElement).toBe(itemEls()[0]!.element)
+
+    await menu.trigger('keydown', { key: 'ArrowDown' })
+    expect(document.activeElement).toBe(itemEls()[2]!.element)
+
+    await menu.trigger('keydown', { key: 'Enter' })
+    expect(commandC).toHaveBeenCalled()
+    await nextTick()
+    expect(wrapper.find('.wi-splitbutton__menu').exists()).toBe(false)
+    expect(document.activeElement).toBe(triggerEl.element)
+    wrapper.unmount()
+  })
+
+  it('closes on Escape and returns focus to the trigger', async () => {
+    const wrapper = mount(WiSplitButton, {
+      attachTo: document.body,
+      props: { label: 'Save', teleport: false, model: items },
+    })
+    const triggerEl = wrapper.get('.wi-splitbutton__trigger')
+    await triggerEl.trigger('click')
+    await nextTick()
+    await wrapper.get('.wi-splitbutton__menu').trigger('keydown', { key: 'Escape' })
+    await nextTick()
+    expect(wrapper.find('.wi-splitbutton__menu').exists()).toBe(false)
+    expect(document.activeElement).toBe(triggerEl.element)
+    wrapper.unmount()
+  })
 })

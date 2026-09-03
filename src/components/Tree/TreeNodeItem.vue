@@ -9,7 +9,9 @@ import { isIconName } from '../Icon/icons'
 import { WI_TREE_KEY, WI_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
 
-const props = defineProps<{ node: TreeNode }>()
+const props = withDefaults(defineProps<{ node: TreeNode; depth?: number }>(), {
+  depth: 1,
+})
 const tree = inject(WI_TREE_KEY)!
 const nodeSlot = inject(WI_TREE_NODE_SLOT, undefined)
 const locale = useWiLocale()
@@ -21,16 +23,14 @@ const indeterminate = computed(() => tree.isIndeterminate(props.node.key))
 const disabled = computed(() => tree.isDisabled(props.node))
 const matched = computed(() => tree.isMatch(props.node))
 const loading = computed(() => Boolean(tree.loadingKeys[props.node.key]))
-const hasChildren = computed(
-  () => Boolean(props.node.children?.length) || (tree.lazy && !props.node.isLeaf),
-)
+const hasChildren = computed(() => tree.hasChildren(props.node))
 
 const iconName = computed<IconName | undefined>(() => {
   if (props.node.icon && isIconName(props.node.icon)) return props.node.icon
   return undefined
 })
 
-const visibleChildren = computed(() => props.node.children ?? [])
+const visibleChildren = computed(() => props.node.children ?? tree.loadedChildren[props.node.key] ?? [])
 
 const customContent = computed(() =>
   nodeSlot?.({ node: props.node, data: props.node }),
@@ -40,9 +40,16 @@ const customContent = computed(() =>
 <template>
   <li
     class="wi-tree__node"
+    :class="{ 'wi-tree__node--active': tree.activeKey.value === node.key }"
     role="treeitem"
     :aria-expanded="hasChildren ? expanded : undefined"
     :aria-disabled="disabled || undefined"
+    :aria-level="depth"
+    :aria-selected="selected"
+    :aria-checked="tree.showCheckbox ? checked : undefined"
+    :tabindex="tree.tabindexForKey(node.key)"
+    :data-wi-tree-key="node.key"
+    @focus="tree.setActiveKey(node.key)"
   >
     <div
       class="wi-tree__row"
@@ -56,11 +63,13 @@ const customContent = computed(() =>
       @dragstart="tree.onDragStart(node, $event)"
       @dragover="tree.onDragOver(node, $event)"
       @drop="tree.onDrop(node, $event)"
+      @dragend="tree.onDragEnd()"
     >
       <button
         v-if="hasChildren"
         type="button"
         class="wi-tree__toggler"
+        tabindex="-1"
         :aria-label="expanded ? locale.collapse : locale.expand"
         :disabled="disabled"
         @click="tree.toggleExpand(node)"
@@ -73,6 +82,7 @@ const customContent = computed(() =>
       <WiCheckbox
         v-if="tree.showCheckbox"
         class="wi-tree__checkbox"
+        tabindex="-1"
         :model-value="checked || indeterminate"
         :disabled="disabled"
         @update:model-value="tree.toggleCheck(node)"
@@ -87,6 +97,7 @@ const customContent = computed(() =>
       <button
         type="button"
         class="wi-tree__label"
+        tabindex="-1"
         :disabled="disabled"
         @click="tree.select(node)"
       >
@@ -100,7 +111,7 @@ const customContent = computed(() =>
     </div>
 
     <ul v-if="hasChildren && expanded" class="wi-tree__children" role="group">
-      <TreeNodeItem v-for="child in visibleChildren" :key="child.key" :node="child" />
+      <TreeNodeItem v-for="child in visibleChildren" :key="child.key" :node="child" :depth="depth + 1" />
     </ul>
   </li>
 </template>

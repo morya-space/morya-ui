@@ -30,9 +30,19 @@
 }
 
 .wi-picklist__controls {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: var(--wi-space-1);
     justify-content: center;
-    padding-top: 1.75rem;
+}
+
+.wi-picklist__btn:disabled {
+    cursor: not-allowed;
+    opacity: var(--wi-opacity-disabled);
+}
+
+.wi-picklist__btn:hover:not(:disabled) {
+    border-color: var(--wi-color-primary);
+    color: var(--wi-color-primary);
 }

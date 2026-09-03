@@ -37,7 +37,7 @@ import {
   resolveSortField,
   resolveSortOrder,
 } from './normalize'
-import { generateColumnContent, getItemValue, resolveRowKey } from './utils'
+import { generateColumnContent, getItemValue, resolveRowKey, sameTableItem } from './utils'
 
 const props = withDefaults(defineProps<TableProps>(), {
   rows: () => [],
@@ -84,7 +84,6 @@ const props = withDefaults(defineProps<TableProps>(), {
   checkboxColumnWidth: null,
   hideHeader: false,
   hideRowsPerPage: false,
-  buttonsPagination: false,
   expandable: false,
   expandedRowKeys: undefined,
   clickRowToExpand: false,
@@ -118,7 +117,9 @@ const {
   bodyTextDirection,
   checkboxColumnWidth,
   expandColumnWidth,
+  expandedRowKeys,
   filterOptions,
+  filters,
   fixedCheckbox,
   fixedExpand,
   fixedHeader,
@@ -137,6 +138,7 @@ const {
   serverItemsLength,
   serverOptions,
   showIndex,
+  sortMode,
   tableHeight,
   tableMinHeight,
   rowsOfPageSeparatorMessage,
@@ -151,7 +153,6 @@ const {
   rowsPerPageMessage,
   hideHeader,
   hideRowsPerPage,
-  buttonsPagination,
   clickRowToExpand,
   expandable,
   emptyDescription,
@@ -233,6 +234,7 @@ const scrollbarRef = ref<ScrollbarInstance>()
 provide('dataTable', dataTable)
 
 const showShadow = ref(false)
+const showShadowEnd = ref(false)
 const internalCurrentRowKey = ref<string | number | null>(null)
 
 const activeCurrentRowKey = computed(
@@ -241,6 +243,10 @@ const activeCurrentRowKey = computed(
 
 function onScrollbarScroll(payload: { scrollTop: number; scrollLeft: number }) {
   showShadow.value = payload.scrollLeft > 0
+  const wrap = scrollbarRef.value?.wrapRef
+  showShadowEnd.value = wrap
+    ? wrap.scrollWidth - wrap.clientWidth - wrap.scrollLeft > 1
+    : false
 }
 
 const selectionColumn = computed((): 'checkbox' | 'radio' | null => {
@@ -259,6 +265,7 @@ const mainWrapClass = computed(() => [
     'wi-table__main--fixed-header': fixedHeader.value,
     'wi-table__main--fixed-height': Boolean(resolvedTableHeight.value),
     'wi-table__main--shadow': showShadow.value,
+    'wi-table__main--shadow-end': showShadowEnd.value,
     'wi-table__main--table-fixed': useTableFixedLayout.value,
     'wi-table__main--border-cell': resolvedBorderCell.value,
   },
@@ -301,8 +308,14 @@ const {
   sortBy,
   sortType,
   multiSort,
+  sortMode,
   updateServerOptionsSort,
   tableEmit,
+)
+
+/** In `emit` sort mode the parent owns sorting — skip client-side sorting entirely. */
+const effectiveClientSortOptions = computed(() =>
+  sortMode.value === 'emit' ? null : clientSortOptions.value,
 )
 
 const { rowsItemsComputed, rowsPerPageRef, updateRowsPerPage } = useRows(
@@ -319,8 +332,9 @@ const {
   toggleSelectAll,
   toggleSelectItem,
 } = useTotalItems(
-  clientSortOptions,
+  effectiveClientSortOptions,
   filterOptions,
+  filters,
   isServerSideMode,
   items,
   itemsSelected,
@@ -328,16 +342,15 @@ const {
   searchValue,
   serverItemsLength,
   multiSort,
+  rowKey,
   tableEmit,
 )
 
 const singleSelectedRowKey = computed(() => {
   if (!selectedItem.value) return null
-  const index = totalItems.value.findIndex((row) => {
-    const clone = { ...row }
-    const selected = { ...selectedItem.value! }
-    return JSON.stringify(clone) === JSON.stringify(selected)
-  })
+  const index = totalItems.value.findIndex((row) =>
+    sameTableItem(row, selectedItem.value!, rowKey.value),
+  )
   return index >= 0 ? resolveRowKey(selectedItem.value, index, rowKey.value) : null
 })
 
@@ -375,6 +388,7 @@ const {
   showIndex,
   totalItems,
   totalItemsLength,
+  rowKey,
 )
 
 const prevPageEndIndex = computed(() => {
@@ -383,12 +397,11 @@ const prevPageEndIndex = computed(() => {
 })
 
 const {
-  expandingItemIndexList,
-  updateExpandingItemIndexList,
-  clearExpandingItemIndexList,
-} = useExpandableRow(pageItems, prevPageEndIndex, tableEmit)
+  isRowExpanded,
+  toggleExpandRow,
+} = useExpandableRow(expandedRowKeys, rowKey, prevPageEndIndex, tableEmit)
 
-const { fixedHeaders, lastFixedColumn, fixedColumnsInfos } = useFixedColumn(headersForRender)
+const { fixedHeaders, lastFixedColumn, firstRightFixedColumn, fixedColumnsInfos } = useFixedColumn(headersForRender)
 const { clickRow } = useClickRow(clickEventType, isMultipleSelectable, showIndex, tableEmit)
 
 function contextMenuRow(item: TableItem, event: MouseEvent) {
@@ -409,7 +422,8 @@ function getFixedDistance(column: string, type: 'td' | 'th' = 'th') {
   if (!fixedHeaders.value.length) return undefined
   const columnInfo = fixedColumnsInfos.value.find((info) => info.value === column)
   if (columnInfo) {
-    return `left: ${columnInfo.distance}px;z-index: ${type === 'th' ? 3 : 1};position: sticky;`
+    const side = columnInfo.fixed === 'right' ? 'right' : 'left'
+    return `${side}: ${columnInfo.distance}px;z-index: ${type === 'th' ? 3 : 1};position: sticky;`
   }
   return undefined
 }
@@ -426,6 +440,7 @@ function headerCellClass(header: HeaderForRender, index: number) {
       'wi-table__header-cell--ascending': header.sortable && header.sortType === 'asc',
       'wi-table__header-cell--descending': header.sortable && header.sortType === 'desc',
       'wi-table__header-cell--shadow': header.value === lastFixedColumn.value,
+      'wi-table__header-cell--shadow-end': header.value === firstRightFixedColumn.value,
     },
     custom,
   ]
@@ -535,7 +550,6 @@ watch(() => props.currentRowKey, (value) => {
 watch(loading, (newVal, oldVal) => {
   if (serverOptionsComputed.value && newVal === false && oldVal === true) {
     updateCurrentPaginationNumber(serverOptionsComputed.value.page)
-    clearExpandingItemIndexList()
   }
 })
 
@@ -548,11 +562,9 @@ watch([searchValue, filterOptions], () => {
   if (!isServerSideMode.value) updatePage(1)
 })
 
-watch(
-  [currentPaginationNumber, clientSortOptions, searchField, searchValue, filterOptions],
-  () => clearExpandingItemIndexList(),
-  { deep: true },
-)
+watch(() => props.filters, (value) => {
+  emit('filter', value ?? null)
+}, { deep: true })
 
 watch(pageItems, (value) => emit('updatePageItems', value), { deep: true })
 watch(totalItems, (value) => emit('updateTotalItems', value), { deep: true })
@@ -678,7 +690,7 @@ defineExpose({
               ]"
               @click="($event) => {
                 onRowClick(item, index, 'single', $event)
-                clickRowToExpand && updateExpandingItemIndexList(index + prevPageEndIndex, item, $event)
+                clickRowToExpand && toggleExpandRow(item, index, $event)
               }"
               @dblclick="($event) => onRowClick(item, index, 'double', $event)"
               @contextmenu="($event) => contextMenuRow(item, $event)"
@@ -690,13 +702,14 @@ defineExpose({
                 :class="[
                   {
                     'wi-table__cell--shadow': column === lastFixedColumn,
+                    'wi-table__cell--shadow-end': column === firstRightFixedColumn,
                     'wi-table__cell--expand': column === 'expand',
                     'wi-table__cell--selection': column === 'checkbox' || column === 'radio',
                   },
                   resolveCellAlign(column),
                   typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, index + 1),
                 ]"
-                @click="column === 'expand' ? updateExpandingItemIndexList(index + prevPageEndIndex, item, $event) : null"
+                @click="column === 'expand' ? toggleExpandRow(item, index, $event) : null"
               >
                 <div
                   class="wi-table__cell-inner"
@@ -719,10 +732,10 @@ defineExpose({
                     <button
                       type="button"
                       class="wi-table__expand-btn"
-                      :class="{ 'wi-table__expand-btn--expanded': expandingItemIndexList.includes(prevPageEndIndex + index) }"
-                      :aria-expanded="expandingItemIndexList.includes(prevPageEndIndex + index)"
+                      :class="{ 'wi-table__expand-btn--expanded': isRowExpanded(item, index) }"
+                      :aria-expanded="isRowExpanded(item, index)"
                       :aria-label="locale.expand"
-                      @click.stop="updateExpandingItemIndexList(index + prevPageEndIndex, item, $event)"
+                      @click.stop="toggleExpandRow(item, index, $event)"
                     >
                       <WiIcon name="chevron-right" />
                     </button>
@@ -765,7 +778,7 @@ defineExpose({
               </td>
             </tr>
             <tr
-              v-if="ifHasExpandSlot && expandingItemIndexList.includes(index + prevPageEndIndex)"
+              v-if="ifHasExpandSlot && isRowExpanded(item, index)"
               :class="[
                 { 'wi-table__row--striped': resolvedStriped && (index + 1) % 2 === 0 },
                 typeof bodyExpandRowClassName === 'string' ? bodyExpandRowClassName : bodyExpandRowClassName(item, index + 1),

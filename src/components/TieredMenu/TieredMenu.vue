@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import type { TieredMenuItem, TieredMenuProps } from './types'
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiConfig } from '../../shared/config'
+import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TieredMenuProps>(), {
   popup: false,
   modelValue: false,
+  placement: 'bottom-start',
   teleport: true,
 })
 
@@ -18,10 +21,34 @@ const emit = defineEmits<{
 const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
 const openIndex = ref<number | null>(null)
+const popupStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() =>
   resolveOverlayTeleport(props.popup ? props : { teleport: false }, config.value.appendTo),
 )
 const teleported = computed(() => props.popup && isOverlayTeleported(props, config.value.appendTo))
+
+function resolvePopupAnchor(): DOMRect {
+  const { x, y } = getLastPointer()
+  return {
+    left: x,
+    top: y,
+    right: x,
+    bottom: y,
+    width: 0,
+    height: 0,
+  } as DOMRect
+}
+
+function updatePopupPosition() {
+  if (!props.popup || !props.modelValue || !teleported.value) return
+  popupStyle.value = computeFloatingOverlayStyle(resolvePopupAnchor(), props.placement, {
+    minWidth: '12rem',
+  })
+}
+
+function onViewportChange() {
+  if (props.modelValue) updatePopupPosition()
+}
 
 function activate(item: TieredMenuItem) {
   if (item.disabled || item.separator) return
@@ -62,7 +89,29 @@ watch(
   { immediate: true },
 )
 
-onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
+watch(
+  () => props.modelValue,
+  (open) => {
+    if (!props.popup) return
+    if (open) {
+      void nextTick(updatePopupPosition)
+      if (teleported.value) {
+        window.addEventListener('resize', onViewportChange)
+        window.addEventListener('scroll', onViewportChange, true)
+      }
+    } else {
+      window.removeEventListener('resize', onViewportChange)
+      window.removeEventListener('scroll', onViewportChange, true)
+    }
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', onOutsideClick)
+  window.removeEventListener('resize', onViewportChange)
+  window.removeEventListener('scroll', onViewportChange, true)
+})
 </script>
 
 <template>
@@ -122,6 +171,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
         ref="root"
         class="wi-tieredmenu wi-tieredmenu--popup"
         :class="{ 'wi-tieredmenu--teleported': teleported }"
+        :style="teleported ? popupStyle : undefined"
         role="menu"
       >
         <div
@@ -143,8 +193,8 @@ onBeforeUnmount(() => document.removeEventListener('click', onOutsideClick))
           >
             <span>{{ item.label }}</span>
             <span v-if="item.items?.length" class="wi-tieredmenu__caret" aria-hidden="true">
-          <WiIcon name="chevron-right" size="sm" />
-        </span>
+              <WiIcon name="chevron-right" size="sm" />
+            </span>
           </button>
           <div
             v-if="item.items?.length && openIndex === index"

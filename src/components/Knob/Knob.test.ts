@@ -18,4 +18,21 @@ describe('wiKnob', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     expect(wrapper.classes()).toContain('wi-knob--disabled')
   })
+
+  it('exposes aria label and value text', () => {
+    const wrapper = mount(WiKnob, {
+      props: { modelValue: 40, valueTemplate: '{value}%', ariaLabel: '音量' },
+    })
+    const slider = wrapper.get('[role="slider"]')
+    expect(slider.attributes('aria-label')).toBe('音量')
+    expect(slider.attributes('aria-valuetext')).toBe('40%')
+    expect(slider.attributes('aria-valuenow')).toBe('40')
+  })
+
+  it('supports diameter prop over the deprecated size alias', () => {
+    const wrapper = mount(WiKnob, { props: { modelValue: 0, diameter: 160 } })
+    const svg = wrapper.get('svg')
+    expect(svg.attributes('width')).toBe('160')
+    expect(svg.attributes('viewBox')).toBe('0 0 160 160')
+  })
 })

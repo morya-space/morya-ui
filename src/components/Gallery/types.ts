@@ -1,5 +1,12 @@
+export interface GalleryImage {
+  src: string
+  alt?: string
+  caption?: string
+}
+
 export interface GalleryProps {
-  images: string[]
+  /** Plain urls or `{ src, alt, caption }` objects. */
+  images: Array<string | GalleryImage>
   activeIndex?: number
 }
 

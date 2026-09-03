@@ -31,4 +31,33 @@ describe('wiListbox', () => {
     await wrapper.findAll('.wi-listbox__option')[2]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
   })
+
+  it('supports roving tabindex and keyboard selection', async () => {
+    const wrapper = mount(WiListbox, {
+      props: { options, modelValue: 'a' },
+      attachTo: document.body,
+    })
+    const options_ = () => wrapper.findAll('.wi-listbox__option')
+    // selected option is the single tab stop
+    expect(options_()[0]!.attributes('tabindex')).toBe('0')
+    expect(options_()[1]!.attributes('tabindex')).toBe('-1')
+
+    const list = wrapper.get('.wi-listbox__list')
+    expect(list.attributes('aria-label')).toBeTruthy()
+
+    // tab into the list: focus lands on the selected option
+    options_()[0]!.element.focus()
+    await options_()[0]!.trigger('keydown', { key: 'ArrowDown' })
+    expect(document.activeElement).toBe(options_()[1]!.element)
+    expect(options_()[1]!.attributes('tabindex')).toBe('0')
+
+    await list.trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['b'])
+
+    await list.trigger('keydown', { key: 'End' })
+    expect(document.activeElement).toBe(options_()[1]!.element)
+    await list.trigger('keydown', { key: 'Home' })
+    expect(document.activeElement).toBe(options_()[0]!.element)
+    wrapper.unmount()
+  })
 })

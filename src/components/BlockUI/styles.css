@@ -1,5 +1,6 @@
 /* —— Misc: BlockUI —— */
 .wi-blockui {
+    --wi-blockui-z-index: 10;
     position: relative;
 }
 
@@ -16,5 +17,18 @@
     background: color-mix(in srgb, var(--wi-color-surface) 45%, transparent);
     inset: 0;
     position: absolute;
-    z-index: 10;
+    z-index: var(--wi-blockui-z-index);
+}
+
+.wi-blockui-enter-active {
+    transition: opacity var(--wi-motion-enter) var(--wi-motion-ease);
+}
+
+.wi-blockui-leave-active {
+    transition: opacity var(--wi-motion-exit) var(--wi-motion-ease);
+}
+
+.wi-blockui-enter-from,
+.wi-blockui-leave-to {
+    opacity: 0;
 }

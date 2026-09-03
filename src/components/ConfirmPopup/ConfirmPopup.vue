@@ -106,6 +106,9 @@ watch(
       document.removeEventListener('click', onDocumentClick)
       window.removeEventListener('resize', updatePosition)
       window.removeEventListener('scroll', updatePosition, true)
+      if (panel.value?.contains(document.activeElement)) {
+        props.target?.focus({ preventScroll: true })
+      }
     }
   },
   { immediate: true },
@@ -139,7 +142,6 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
         class="wi-confirmpopup"
         :class="{ 'wi-confirmpopup--teleported': teleported }"
         role="alertdialog"
-        aria-modal="true"
         tabindex="-1"
         :style="panelStyle"
       >
@@ -149,7 +151,13 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
         </div>
         <div class="wi-confirmpopup__footer">
           <WiButton :label="rejectText" severity="secondary" size="small" @click="reject" />
-          <WiButton :label="acceptText" size="small" :loading="pending" @click="accept" />
+          <WiButton
+            :label="acceptText"
+            size="small"
+            :severity="acceptSeverity"
+            :loading="pending"
+            @click="accept"
+          />
         </div>
       </div>
     </Transition>

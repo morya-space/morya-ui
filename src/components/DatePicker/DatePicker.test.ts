@@ -67,4 +67,72 @@ describe('wiDatePicker', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['2024-02-01'])
     wrapper.unmount()
   })
+
+  it('associates label with input via for/id', () => {
+    const wrapper = mount(WiDatePicker, { props: { label: '开始日期', modelValue: null } })
+    const label = wrapper.get('.wi-datepicker__label')
+    const input = wrapper.get('.wi-datepicker__input')
+    expect(label.attributes('for')).toBe(input.attributes('id'))
+  })
+
+  it('renders error/help feedback and wires aria-describedby', () => {
+    const wrapper = mount(WiDatePicker, {
+      props: { modelValue: null, errorMessage: '日期无效' },
+    })
+    const help = wrapper.get('.wi-datepicker__help')
+    expect(help.text()).toBe('日期无效')
+    expect(help.classes()).toContain('wi-datepicker__help--invalid')
+    expect(wrapper.get('.wi-datepicker__input').attributes('aria-describedby')).toBe(help.attributes('id'))
+  })
+
+  it('supports full keyboard date selection in the grid', async () => {
+    const wrapper = mount(WiDatePicker, {
+      props: { modelValue: '2024-01-15' },
+      attachTo: document.body,
+    })
+    const input = wrapper.get('.wi-datepicker__input')
+    await input.trigger('click')
+    await nextTick()
+    await nextTick()
+
+    expect(wrapper.emitted('show')).toHaveLength(1)
+    const grid = document.body.querySelector('.wi-datepicker__grid') as HTMLElement
+    expect(grid.getAttribute('role')).toBe('grid')
+    const day15 = document.body.querySelector('[data-wi-date="2024-01-15"]') as HTMLButtonElement
+    expect(day15.getAttribute('role')).toBe('gridcell')
+    expect(day15.getAttribute('aria-selected')).toBe('true')
+    expect(day15.tabIndex).toBe(0)
+    expect(document.activeElement).toBe(day15)
+
+    grid.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }))
+    await nextTick()
+    const day16 = document.body.querySelector('[data-wi-date="2024-01-16"]') as HTMLButtonElement
+    expect(document.activeElement).toBe(day16)
+    expect(day16.tabIndex).toBe(0)
+    expect(day15.tabIndex).toBe(-1)
+
+    grid.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['2024-01-16'])
+    expect(wrapper.emitted('change')?.at(-1)).toEqual(['2024-01-16'])
+    expect(document.body.querySelector('.wi-datepicker__panel')).toBeNull()
+    expect(document.activeElement).toBe(input.element)
+    expect(wrapper.emitted('hide')).toHaveLength(1)
+    wrapper.unmount()
+  })
+
+  it('closes on Escape and returns focus to the input', async () => {
+    const wrapper = mount(WiDatePicker, {
+      props: { modelValue: '2024-01-15' },
+      attachTo: document.body,
+    })
+    const input = wrapper.get('.wi-datepicker__input')
+    await input.trigger('click')
+    await nextTick()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await nextTick()
+    expect(document.body.querySelector('.wi-datepicker__panel')).toBeNull()
+    expect(document.activeElement).toBe(input.element)
+    wrapper.unmount()
+  })
 })

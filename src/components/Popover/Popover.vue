@@ -10,6 +10,7 @@ import { computeFloatingOverlayStyle } from "../../shared/overlayPlacement";
 
 const props = withDefaults(defineProps<PopoverProps>(), {
     modelValue: false,
+    disabled: false,
     placement: "bottom",
     trigger: "manual",
     showDelay: 0,
@@ -38,12 +39,27 @@ let showTimer: ReturnType<typeof setTimeout> | undefined;
 let hideTimer: ReturnType<typeof setTimeout> | undefined;
 
 function setOpen(open: boolean) {
+    if (open && props.disabled) return;
     emit("update:modelValue", open);
+}
+
+function show() {
+    setOpen(true);
+}
+
+function hide() {
+    setOpen(false);
+}
+
+function toggle() {
+    setOpen(!props.modelValue);
 }
 
 function close() {
     setOpen(false);
 }
+
+defineExpose({ show, hide, toggle });
 
 function clearHoverTimers() {
     if (showTimer) clearTimeout(showTimer);
@@ -53,12 +69,12 @@ function clearHoverTimers() {
 }
 
 function onTriggerClick() {
-    if (props.trigger !== "click") return;
+    if (props.disabled || props.trigger !== "click") return;
     setOpen(!props.modelValue);
 }
 
 function onTriggerEnter() {
-    if (props.trigger !== "hover") return;
+    if (props.disabled || props.trigger !== "hover") return;
     clearHoverTimers();
     if (props.showDelay > 0) {
         showTimer = setTimeout(setOpen, props.showDelay, true);
@@ -93,7 +109,7 @@ function onPanelLeave() {
 }
 
 function onTriggerFocus() {
-    if (props.trigger !== "focus") return;
+    if (props.disabled || props.trigger !== "focus") return;
     clearHoverTimers();
     if (props.showDelay > 0) {
         showTimer = setTimeout(setOpen, props.showDelay, true);

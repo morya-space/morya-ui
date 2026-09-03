@@ -6,6 +6,7 @@ import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<MenubarProps>(), {
@@ -60,6 +61,7 @@ function pick(item: MenubarItem) {
 
 function toggle(index: number, item: MenubarItem) {
   if (item.disabled) return
+  topKeyboard.setActive(index)
   if (!item.items?.length) {
     pick(item)
     openIndex.value = null
@@ -69,17 +71,137 @@ function toggle(index: number, item: MenubarItem) {
   if (openIndex.value != null) void nextTick(() => updateSubmenuPosition())
 }
 
+const openItems = computed<MenubarItem[]>(() =>
+  openIndex.value != null ? (props.model[openIndex.value]?.items ?? []) : [],
+)
+
+const topKeyboard = useMenuKeyboard({
+  itemCount: () => props.model.length,
+  isItemDisabled: (index) => Boolean(props.model[index]?.disabled),
+  orientation: 'horizontal',
+  initialActiveIndex: 0,
+  onActivate: (index) => {
+    const item = props.model[index]
+    if (item) toggle(index, item)
+  },
+})
+
+const subKeyboard = useMenuKeyboard({
+  itemCount: () => openItems.value.length,
+  isItemDisabled: (index) => Boolean(openItems.value[index]?.disabled),
+  enabled: () => openIndex.value != null,
+  onActivate: (index) => {
+    const item = openItems.value[index]
+    if (item) activateChild(item)
+  },
+})
+
+function focusTop(index: number) {
+  triggerEls.value[index]?.focus({ preventScroll: true })
+}
+
+function openSubmenuEl(): HTMLElement | null {
+  const local = root.value?.querySelector<HTMLElement>('.wi-menubar__submenu')
+  if (local) return local
+  return document.querySelector<HTMLElement>('.wi-menubar__submenu--teleported')
+}
+
+function focusActiveSubitem() {
+  const index = subKeyboard.activeIndex.value
+  if (index < 0) return
+  openSubmenuEl()
+    ?.querySelectorAll<HTMLElement>('.wi-menubar__subitem')
+    [index]?.focus({ preventScroll: true })
+}
+
+function closeSubmenu(restoreFocus = false) {
+  const index = openIndex.value
+  openIndex.value = null
+  subKeyboard.reset()
+  if (restoreFocus && index != null) focusTop(index)
+}
+
+function openSubmenu(index: number, focusFirst = false) {
+  openIndex.value = index
+  topKeyboard.setActive(index)
+  void nextTick(() => {
+    updateSubmenuPosition()
+    if (focusFirst) {
+      subKeyboard.moveFirst()
+      focusActiveSubitem()
+    }
+  })
+}
+
+function moveTopLevel(delta: 1 | -1) {
+  topKeyboard.move(delta)
+  const index = topKeyboard.activeIndex.value
+  const item = props.model[index]
+  if (openIndex.value != null) {
+    if (item?.items?.length) openSubmenu(index, true)
+    else closeSubmenu()
+  }
+  focusTop(index)
+}
+
+function onTopKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    if (openIndex.value != null) {
+      event.preventDefault()
+      closeSubmenu(true)
+    }
+    return
+  }
+  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    event.preventDefault()
+    const index = topKeyboard.activeIndex.value
+    const item = props.model[index]
+    if (item?.items?.length && !item.disabled) openSubmenu(index, true)
+    return
+  }
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    event.preventDefault()
+    moveTopLevel(event.key === 'ArrowRight' ? 1 : -1)
+    return
+  }
+  topKeyboard.onKeydown(event)
+}
+
+function onSubmenuKeydown(event: KeyboardEvent) {
+  // Keep the event from bubbling to the top-level nav handler.
+  event.stopPropagation()
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    closeSubmenu(true)
+    return
+  }
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    event.preventDefault()
+    moveTopLevel(event.key === 'ArrowRight' ? 1 : -1)
+    return
+  }
+  subKeyboard.onKeydown(event)
+}
+
 function activateChild(item: MenubarItem) {
   pick(item)
-  openIndex.value = null
+  closeSubmenu(true)
 }
+
+watch(topKeyboard.activeIndex, (index) => {
+  if (index >= 0 && openIndex.value == null) focusTop(index)
+})
+
+watch(subKeyboard.activeIndex, () => {
+  if (openIndex.value != null) focusActiveSubitem()
+})
 
 function onDocumentClick(event: MouseEvent) {
   const target = event.target as Node
   if (root.value?.contains(target)) return
   const openSubmenu = document.querySelector('.wi-menubar__submenu--teleported')
   if (openSubmenu?.contains(target)) return
-  openIndex.value = null
+  closeSubmenu()
 }
 
 function onViewportChange() {
@@ -105,7 +227,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav ref="root" class="wi-menubar" :aria-label="locale.menubar">
+  <nav ref="root" class="wi-menubar" :aria-label="locale.menubar" @keydown="onTopKeydown">
     <div
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
@@ -118,9 +240,11 @@ onBeforeUnmount(() => {
         class="wi-menubar__trigger"
         :class="{ 'wi-menubar__trigger--selected': isSelected(item) }"
         :disabled="item.disabled"
+        :tabindex="topKeyboard.tabindexFor(index)"
         :aria-expanded="item.items?.length ? openIndex === index : undefined"
         :aria-haspopup="item.items?.length ? 'menu' : undefined"
         @click.stop="toggle(index, item)"
+        @focus="topKeyboard.setActive(index)"
       >
         <span v-if="iconOf(item) || item.icon" class="wi-menubar__icon" aria-hidden="true">
           <WiIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
@@ -139,6 +263,7 @@ onBeforeUnmount(() => {
             :class="{ 'wi-menubar__submenu--teleported': teleported }"
             :style="teleported ? submenuStyle : undefined"
             role="menu"
+            @keydown="onSubmenuKeydown"
           >
             <button
               v-for="(child, childIndex) in item.items"
@@ -148,6 +273,7 @@ onBeforeUnmount(() => {
               :class="{ 'wi-menubar__subitem--selected': isSelected(child) }"
               role="menuitem"
               :disabled="child.disabled"
+              :tabindex="subKeyboard.tabindexFor(childIndex)"
               @click.stop="activateChild(child)"
             >
               <span v-if="iconOf(child) || child.icon" class="wi-menubar__icon" aria-hidden="true">

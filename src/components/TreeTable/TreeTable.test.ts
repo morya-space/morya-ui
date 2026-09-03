@@ -24,4 +24,30 @@ describe('wiTreeTable', () => {
     expect(wrapper.text()).toContain('Vue')
     expect(wrapper.emitted('node-expand')?.length).toBe(1)
   })
+
+  it('exposes treegrid semantics with aria-level and aria-expanded', async () => {
+    const wrapper = mount(WiTreeTable, { props: { columns, value } })
+    expect(wrapper.find('table').attributes('role')).toBe('treegrid')
+    const rootRow = wrapper.find('.wi-treetable__row')
+    expect(rootRow.attributes('aria-level')).toBe('1')
+    expect(rootRow.attributes('aria-expanded')).toBe('false')
+    await wrapper.find('.wi-treetable__toggler').trigger('click')
+    const rows = wrapper.findAll('.wi-treetable__row')
+    expect(rows[0]!.attributes('aria-expanded')).toBe('true')
+    expect(rows[1]!.attributes('aria-level')).toBe('2')
+    expect(rows[1]!.attributes('aria-expanded')).toBeUndefined()
+  })
+
+  it('supports controlled expandedKeys', async () => {
+    const wrapper = mount(WiTreeTable, {
+      props: {
+        columns,
+        value,
+        expandedKeys: { '0': true },
+      },
+    })
+    expect(wrapper.text()).toContain('Vue')
+    await wrapper.find('.wi-treetable__toggler').trigger('click')
+    expect(wrapper.emitted('update:expandedKeys')?.at(-1)).toEqual([{}])
+  })
 })

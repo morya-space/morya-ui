@@ -30,3 +30,16 @@ export function resolveRowKey(
   if (typeof value === 'string' || typeof value === 'number') return value
   return index
 }
+
+/**
+ * Row identity comparison. Prefers `rowKey` values; falls back to deep JSON
+ * comparison when either row lacks a usable key.
+ */
+export function sameTableItem(a: TableItem, b: TableItem, rowKey = 'id'): boolean {
+  const aKey = a[rowKey]
+  const bKey = b[rowKey]
+  const aUsable = typeof aKey === 'string' || typeof aKey === 'number'
+  const bUsable = typeof bKey === 'string' || typeof bKey === 'number'
+  if (aUsable && bUsable) return aKey === bKey
+  return JSON.stringify(a) === JSON.stringify(b)
+}

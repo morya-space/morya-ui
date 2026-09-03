@@ -17,7 +17,8 @@ const emit = defineEmits<{
   (event: 'update:page', value: number): void
 }>()
 
-const page = ref(0)
+const innerPage = ref(0)
+const page = computed(() => props.page ?? innerPage.value)
 const locale = useWiLocale()
 let timer: ReturnType<typeof setInterval> | null = null
 
@@ -25,7 +26,7 @@ const maxPage = computed(() => Math.max(0, props.value.length - props.numVisible
 const pages = computed(() => Array.from({ length: maxPage.value + 1 }, (_, index) => index))
 
 const visibleItems = computed(() => {
-  const start = page.value
+  const start = Math.min(page.value, maxPage.value)
   return props.value.slice(start, start + props.numVisible).map((item, offset) => ({
     item,
     index: start + offset,
@@ -40,9 +41,13 @@ function go(next: number) {
   } else {
     target = Math.min(maxPage.value, Math.max(0, next))
   }
-  page.value = target
+  innerPage.value = target
   emit('update:page', target)
 }
+
+watch(maxPage, (limit) => {
+  if (innerPage.value > limit) innerPage.value = limit
+})
 
 function prev() {
   go(page.value - 1)
@@ -50,6 +55,43 @@ function prev() {
 
 function next() {
   go(page.value + 1)
+}
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault()
+    prev()
+  } else if (event.key === 'ArrowRight') {
+    event.preventDefault()
+    next()
+  }
+}
+
+const SWIPE_THRESHOLD = 40
+let pointerStartX: number | null = null
+
+function onPointerDown(event: PointerEvent) {
+  if (!event.isPrimary || event.pointerType === 'mouse') return
+  pointerStartX = event.clientX
+}
+
+function onPointerUp(event: PointerEvent) {
+  if (pointerStartX === null || !event.isPrimary) return
+  const delta = event.clientX - pointerStartX
+  pointerStartX = null
+  if (Math.abs(delta) < SWIPE_THRESHOLD) return
+  if (delta > 0) prev()
+  else next()
+}
+
+function onPointerCancel() {
+  pointerStartX = null
+}
+
+function indicatorLabel(index: number) {
+  return locale.value.carouselPage
+    .replace('{index}', String(index + 1))
+    .replace('{total}', String(pages.value.length))
 }
 
 function stopAutoplay() {
@@ -81,7 +123,14 @@ onBeforeUnmount(stopAutoplay)
 </script>
 
 <template>
-  <div class="wi-carousel">
+  <div
+    class="wi-carousel"
+    @keydown="onKeydown"
+    @mouseenter="stopAutoplay"
+    @mouseleave="startAutoplay"
+    @focusin="stopAutoplay"
+    @focusout="startAutoplay"
+  >
     <button
       v-if="showArrows"
       type="button"
@@ -93,7 +142,12 @@ onBeforeUnmount(stopAutoplay)
       <WiIcon name="chevron-left" size="sm" />
     </button>
     <div class="wi-carousel__main">
-      <div class="wi-carousel__viewport">
+      <div
+        class="wi-carousel__viewport"
+        @pointerdown="onPointerDown"
+        @pointerup="onPointerUp"
+        @pointercancel="onPointerCancel"
+      >
         <div
           v-for="entry in visibleItems"
           :key="entry.index"
@@ -112,7 +166,7 @@ onBeforeUnmount(stopAutoplay)
           type="button"
           class="wi-carousel__indicator"
           :class="{ 'wi-carousel__indicator--active': index === page }"
-          :aria-label="String(index + 1)"
+          :aria-label="indicatorLabel(index)"
           :aria-current="index === page ? 'true' : undefined"
           @click="go(index)"
         />

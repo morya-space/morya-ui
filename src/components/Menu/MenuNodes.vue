@@ -60,7 +60,14 @@ function contentClass(item: MenuItem, index: number) {
     'wi-menu__item-content--disabled': Boolean(item.disabled),
     'wi-menu__item-content--collapsed': collapsed.value,
     'wi-menu__item-content--no-icon': !icon,
+    'wi-menu__item-content--active': ctx.activeKey.value === itemKey(item, index),
   }
+}
+
+function itemTabindex(item: MenuItem, index: number) {
+  // Flyout panels keep natural tab order; roving tabindex applies to the main tree only.
+  if (props.flyout) return 0
+  return ctx.tabindexForKey(itemKey(item, index))
 }
 
 function paddingStyle(depth: number) {
@@ -99,7 +106,10 @@ function arrowIcon(item: MenuItem, index: number) {
             :class="contentClass(item, index)"
             :style="paddingStyle(depth)"
             role="menuitem"
+            :tabindex="itemTabindex(item, index)"
+            :data-wi-menu-key="flyout ? undefined : itemKey(item, index)"
             :aria-label="item.label"
+            aria-haspopup="menu"
             :aria-expanded="horizontal ? Boolean(ctx.flyoutOpen[itemKey(item, index)]) : undefined"
             :title="collapsed ? item.label : undefined"
           >
@@ -130,6 +140,9 @@ function arrowIcon(item: MenuItem, index: number) {
           :class="contentClass(item, index)"
           :style="paddingStyle(depth)"
           role="menuitem"
+          :tabindex="itemTabindex(item, index)"
+          :data-wi-menu-key="flyout ? undefined : itemKey(item, index)"
+          aria-haspopup="menu"
           :aria-expanded="isSubmenuExpanded(item, index)"
           :aria-disabled="item.disabled || undefined"
           @click="onParentClick(item, index)"
@@ -170,7 +183,10 @@ function arrowIcon(item: MenuItem, index: number) {
         :class="contentClass(item, index)"
         :style="paddingStyle(depth)"
         role="menuitem"
+        :tabindex="itemTabindex(item, index)"
+        :data-wi-menu-key="flyout ? undefined : itemKey(item, index)"
         :aria-disabled="item.disabled || undefined"
+        :aria-current="ctx.isSelected(item, index, prefix) ? 'page' : undefined"
         :title="collapsed ? item.label : undefined"
         @click="onLeafClick(item)"
       >

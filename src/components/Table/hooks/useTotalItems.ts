@@ -1,12 +1,35 @@
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { TableFilterOption, TableItem } from '../types'
 import type { ClientSortOptions, EmitsEventName } from './internal'
 import { computed, watch } from 'vue'
-import { getItemValue } from '../utils'
+import { getItemValue, sameTableItem } from '../utils'
+
+/** Compare two cell values; numeric when both sides are numbers, lexical otherwise. */
+function compareTableValues(left: unknown, right: unknown, sortDesc: boolean): number {
+  if (typeof left === 'number' && typeof right === 'number') {
+    if (left < right) return sortDesc ? 1 : -1
+    if (left > right) return sortDesc ? -1 : 1
+    return 0
+  }
+  const leftText = String(left ?? '')
+  const rightText = String(right ?? '')
+  if (leftText < rightText) return sortDesc ? 1 : -1
+  if (leftText > rightText) return sortDesc ? -1 : 1
+  return 0
+}
+
+function matchesFilterCriteria(itemValue: unknown, criteria: unknown): boolean {
+  if (typeof criteria === 'function') {
+    return (criteria as (value: unknown) => boolean)(itemValue)
+  }
+  if (Array.isArray(criteria)) return criteria.includes(itemValue)
+  return itemValue === criteria || String(itemValue ?? '') === String(criteria)
+}
 
 export function useTotalItems(
   clientSortOptions: Ref<ClientSortOptions | null>,
   filterOptions: Ref<TableFilterOption[] | null>,
+  filters: Ref<Record<string, unknown> | null>,
   isServerSideMode: ComputedRef<boolean>,
   items: Ref<TableItem[]>,
   itemsSelected: Ref<TableItem[] | null>,
@@ -14,6 +37,7 @@ export function useTotalItems(
   searchValue: Ref<string>,
   serverItemsLength: Ref<number>,
   multiSort: Ref<boolean>,
+  rowKey: Ref<string>,
   emits: (event: EmitsEventName, ...args: unknown[]) => void,
 ) {
   const generateSearchingTarget = (item: TableItem): string => {
@@ -28,14 +52,24 @@ export function useTotalItems(
 
   const itemsSearching = computed(() => {
     if (!isServerSideMode.value && searchValue.value !== '') {
-      const regex = new RegExp(searchValue.value, 'i')
-      return items.value.filter((item) => regex.test(generateSearchingTarget(item)))
+      const needle = searchValue.value.toLowerCase()
+      return items.value.filter((item) =>
+        generateSearchingTarget(item).toLowerCase().includes(needle),
+      )
     }
     return items.value
   })
 
   const itemsFiltering = computed(() => {
     let itemsFiltered = [...itemsSearching.value]
+    if (filters.value) {
+      for (const [field, criteria] of Object.entries(filters.value)) {
+        if (criteria == null || criteria === '') continue
+        itemsFiltered = itemsFiltered.filter((item) =>
+          matchesFilterCriteria(getItemValue(field, item), criteria),
+        )
+      }
+    }
     if (filterOptions.value) {
       for (const option of filterOptions.value) {
         itemsFiltered = itemsFiltered.filter((item) => {
@@ -85,13 +119,7 @@ export function useTotalItems(
           return 0
         }
       }
-      const left = getItemValue(sortByKey, a)
-      const right = getItemValue(sortByKey, b)
-      const leftText = String(left ?? '')
-      const rightText = String(right ?? '')
-      if (leftText < rightText) return sortDesc ? 1 : -1
-      if (leftText > rightText) return sortDesc ? -1 : 1
-      return 0
+      return compareTableValues(getItemValue(sortByKey, a), getItemValue(sortByKey, b), sortDesc)
     })
     return sorted
   }
@@ -105,13 +133,9 @@ export function useTotalItems(
       if (sortBy.length === 0) return itemsFilteringSorted
       return recursionMultiSort(sortBy, sortDesc, itemsFilteringSorted, sortBy.length - 1)
     }
-    return itemsFilteringSorted.sort((a, b) => {
-      const left = String(getItemValue(sortBy as string, a) ?? '')
-      const right = String(getItemValue(sortBy as string, b) ?? '')
-      if (left < right) return sortDesc ? 1 : -1
-      if (left > right) return sortDesc ? -1 : 1
-      return 0
-    })
+    return itemsFilteringSorted.sort((a, b) =>
+      compareTableValues(getItemValue(sortBy as string, a), getItemValue(sortBy as string, b), sortDesc as boolean),
+    )
   })
 
   const totalItemsLength = computed(() =>
@@ -138,7 +162,7 @@ export function useTotalItems(
       emits('selectRow', nextItem)
     } else {
       selectItemsComputed.value = selectItemsComputed.value.filter(
-        (selected) => JSON.stringify(selected) !== JSON.stringify(nextItem),
+        (selected) => !sameTableItem(selected, nextItem, rowKey.value),
       )
       emits('deselectRow', nextItem)
     }

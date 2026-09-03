@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {
   DatePickerDateValue,
-  DatePickerModel,
+  DatePickerEmits,
   DatePickerProps,
   DatePickerShortcut,
   DatePickerValue,
@@ -16,19 +16,19 @@ import WiIcon from '../Icon/Icon.vue'
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
   type: 'date',
+  id: undefined,
   disabled: false,
   invalid: false,
   fluid: false,
   placeholder: undefined,
+  errorMessage: undefined,
+  helpText: undefined,
   format: 'YYYY-MM-DD',
   clearable: true,
   shortcuts: () => [],
   teleport: true,
 })
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: DatePickerModel): void
-  (event: 'clear'): void
-}>()
+const emit = defineEmits<DatePickerEmits>()
 
 const config = useWiConfig()
 const locale = useWiLocale()
@@ -36,15 +36,23 @@ const sizeClass = useConfiguredSize('DatePicker', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
 const triggerEl = ref<HTMLElement | null>(null)
+const inputEl = ref<HTMLInputElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const viewYear = ref(new Date().getFullYear())
 const viewMonth = ref(new Date().getMonth())
+const activeDate = ref(startOfDay(new Date()))
 const rangeDraft = ref<Date | null>(null)
 const hoverDate = ref<Date | null>(null)
+const fieldId = computed(() => props.id ?? `wi-datepicker-${Math.random().toString(36).slice(2, 8)}`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 const isRange = computed(() => props.type === 'daterange')
+const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
+const feedbackText = computed(() => props.errorMessage || props.helpText)
+const feedbackIsError = computed(
+  () => Boolean(props.errorMessage) || (props.invalid && Boolean(props.helpText)),
+)
 
 function toDate(value: DatePickerDateValue | null | undefined): Date | null {
   if (value == null || value === '') return null
@@ -197,12 +205,13 @@ function updatePanelPosition() {
 }
 
 function setOpen(next: boolean) {
-  if (props.disabled) return
+  if (props.disabled || next === open.value) return
   open.value = next
   if (next) {
     rangeDraft.value = null
     hoverDate.value = null
     syncViewFromValue()
+    activeDate.value = startOfDay(selectedRange.value.start ?? new Date())
     void nextTick(() => updatePanelPosition())
   }
 }
@@ -231,9 +240,12 @@ function nextMonth() {
 
 function pick(date: Date, disabled: boolean) {
   if (disabled || props.disabled) return
+  activeDate.value = startOfDay(date)
   if (!isRange.value) {
     emit('update:modelValue', toIso(date))
+    emit('change', toIso(date))
     open.value = false
+    inputEl.value?.focus({ preventScroll: true })
     return
   }
   if (!rangeDraft.value) {
@@ -244,10 +256,13 @@ function pick(date: Date, disabled: boolean) {
   const start = rangeDraft.value
   const end = date
   const [from, to] = start.getTime() <= end.getTime() ? [start, end] : [end, start]
-  emit('update:modelValue', [toIso(from), toIso(to)])
+  const payload: [string, string] = [toIso(from), toIso(to)]
+  emit('update:modelValue', payload)
+  emit('change', payload)
   rangeDraft.value = null
   hoverDate.value = null
   open.value = false
+  inputEl.value?.focus({ preventScroll: true })
 }
 
 function applyShortcut(shortcut: DatePickerShortcut) {
@@ -258,11 +273,15 @@ function applyShortcut(shortcut: DatePickerShortcut) {
     const end = toDate(raw[1])
     if (!start || !end) return
     const [from, to] = start.getTime() <= end.getTime() ? [start, end] : [end, start]
-    emit('update:modelValue', isRange.value ? [toIso(from), toIso(to)] : toIso(from))
+    const payload = isRange.value ? [toIso(from), toIso(to)] as [string, string] : toIso(from)
+    emit('update:modelValue', payload)
+    emit('change', payload)
   } else {
     const date = toDate(raw)
     if (!date) return
-    emit('update:modelValue', isRange.value ? [toIso(date), toIso(date)] : toIso(date))
+    const payload = isRange.value ? [toIso(date), toIso(date)] as [string, string] : toIso(date)
+    emit('update:modelValue', payload)
+    emit('change', payload)
   }
   open.value = false
 }
@@ -280,7 +299,64 @@ function onDocumentClick(event: MouseEvent) {
 }
 
 function onKeydown(event: KeyboardEvent) {
-  if (event.key === 'Escape') open.value = false
+  if (event.key === 'Escape') {
+    open.value = false
+    inputEl.value?.focus({ preventScroll: true })
+  }
+}
+
+function addDays(date: Date, days: number): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days)
+}
+
+function isActiveDay(date: Date): boolean {
+  return startOfDay(date).getTime() === activeDate.value.getTime()
+}
+
+function focusActiveDay() {
+  panel.value
+    ?.querySelector<HTMLElement>(`[data-wi-date="${toIso(activeDate.value)}"]`)
+    ?.focus({ preventScroll: true })
+}
+
+function setActiveDate(date: Date) {
+  const next = startOfDay(date)
+  activeDate.value = next
+  if (next.getFullYear() !== viewYear.value || next.getMonth() !== viewMonth.value) {
+    viewYear.value = next.getFullYear()
+    viewMonth.value = next.getMonth()
+  }
+  void nextTick(focusActiveDay)
+}
+
+function onGridKeydown(event: KeyboardEvent) {
+  const key = event.key
+  // Space is left to the native button behaviour (click on keyup); Enter is
+  // intercepted here so we can suppress the duplicate click activation.
+  if (key === 'Enter') {
+    event.preventDefault()
+    const cell = calendarDays.value.find((item) => item.date.getTime() === activeDate.value.getTime())
+    if (cell) pick(cell.date, cell.disabled)
+    return
+  }
+  if (key === 'Home' || key === 'End') {
+    event.preventDefault()
+    const weekday = activeDate.value.getDay()
+    setActiveDate(addDays(activeDate.value, key === 'Home' ? -weekday : 6 - weekday))
+    return
+  }
+  if (key === 'PageUp' || key === 'PageDown') {
+    event.preventDefault()
+    const next = new Date(activeDate.value)
+    next.setMonth(next.getMonth() + (key === 'PageUp' ? -1 : 1))
+    setActiveDate(next)
+    return
+  }
+  const delta =
+    key === 'ArrowLeft' ? -1 : key === 'ArrowRight' ? 1 : key === 'ArrowUp' ? -7 : key === 'ArrowDown' ? 7 : 0
+  if (delta === 0) return
+  event.preventDefault()
+  setActiveDate(addDays(activeDate.value, delta))
 }
 
 function onViewportChange() {
@@ -289,6 +365,7 @@ function onViewportChange() {
 
 watch(open, async (isOpen) => {
   if (isOpen) {
+    emit('show')
     document.addEventListener('click', onDocumentClick)
     document.addEventListener('keydown', onKeydown)
     if (teleported.value) {
@@ -296,7 +373,9 @@ watch(open, async (isOpen) => {
       window.addEventListener('scroll', onViewportChange, true)
     }
     await nextTick()
+    focusActiveDay()
   } else {
+    emit('hide')
     document.removeEventListener('click', onDocumentClick)
     document.removeEventListener('keydown', onKeydown)
     window.removeEventListener('resize', onViewportChange)
@@ -314,17 +393,20 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="root" :class="rootClass">
-    <label v-if="label" class="wi-datepicker__label">{{ label }}</label>
+    <label v-if="label" class="wi-datepicker__label" :for="fieldId">{{ label }}</label>
     <div ref="triggerEl" class="wi-datepicker__control">
       <input
+        :id="fieldId"
+        ref="inputEl"
         class="wi-datepicker__input"
         type="text"
         readonly
         :value="displayValue"
         :placeholder="placeholderText"
         :disabled="disabled"
-        :aria-invalid="invalid || undefined"
+        :aria-invalid="isInvalid || undefined"
         :aria-expanded="open"
+        :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
         aria-haspopup="dialog"
         @click="toggle"
         @keydown.enter.prevent="toggle"
@@ -341,6 +423,14 @@ onBeforeUnmount(() => {
         <WiIcon name="close" size="sm" />
       </button>
     </div>
+    <p
+      v-if="feedbackText"
+      :id="`${fieldId}-help`"
+      class="wi-datepicker__help"
+      :class="{ 'wi-datepicker__help--invalid': feedbackIsError }"
+    >
+      {{ feedbackText }}
+    </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wi-scale-fade">
         <div
@@ -376,10 +466,15 @@ onBeforeUnmount(() => {
                 <WiIcon name="chevron-right" size="sm" />
               </button>
             </div>
-            <div class="wi-datepicker__weekdays">
+            <div class="wi-datepicker__weekdays" aria-hidden="true">
               <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>
             </div>
-            <div class="wi-datepicker__grid">
+            <div
+              class="wi-datepicker__grid"
+              role="grid"
+              :aria-label="monthLabel"
+              @keydown="onGridKeydown"
+            >
               <button
                 v-for="cell in calendarDays"
                 :key="cell.date.toISOString()"
@@ -392,6 +487,10 @@ onBeforeUnmount(() => {
                   'wi-datepicker__day--range-start': cell.rangeStart,
                   'wi-datepicker__day--range-end': cell.rangeEnd,
                 }"
+                role="gridcell"
+                :aria-selected="cell.selected"
+                :data-wi-date="toIso(cell.date)"
+                :tabindex="isActiveDay(cell.date) && !cell.disabled ? 0 : -1"
                 :disabled="cell.disabled"
                 @click="pick(cell.date, cell.disabled)"
                 @mouseenter="isRange && rangeDraft && (hoverDate = cell.date)"

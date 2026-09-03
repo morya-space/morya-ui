@@ -19,6 +19,10 @@ export interface MenuContext {
   isSelected: (item: MenuItem, index: number, prefix: string) => boolean
   isChildActive: (item: MenuItem, index: number, prefix: string) => boolean
   paddingLeft: (depth: number) => number
+  /** Key of the keyboard-highlighted entry, `null` when none. */
+  activeKey: Ref<string | null>
+  /** Roving tabindex for an item-content element: `0` for the active entry, `-1` otherwise. */
+  tabindexForKey: (key: string) => 0 | -1
 }
 
 export const WI_MENU_KEY: InjectionKey<MenuContext> = Symbol('wiMenu')

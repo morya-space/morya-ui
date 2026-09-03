@@ -5,6 +5,7 @@ import { useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
@@ -50,6 +51,20 @@ const displayLabel = computed(
   () => findLabel(props.options, props.modelValue) ?? props.placeholder ?? locale.value.selectPlaceholder,
 )
 
+const activeColumn = ref(0)
+const panelId = computed(() => `${fieldId.value}-panel`)
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => path.value[activeColumn.value]?.length ?? 0,
+  isItemDisabled: (index) => Boolean(path.value[activeColumn.value]?.[index]?.disabled),
+  enabled: open,
+  onActivate: (index) => activateOption(index),
+  onEscape: () => {
+    open.value = false
+  },
+  returnFocusTo: trigger,
+})
+
 function findLabel(options: CascadeSelectOption[], value: CascadeSelectValue): string | null {
   if (value == null) return null
   for (const option of options) {
@@ -71,14 +86,110 @@ function updatePanelPosition() {
     : { minWidth: width, width }
 }
 
+function buildPathToValue(
+  options: CascadeSelectOption[],
+  value: CascadeSelectValue,
+): CascadeSelectOption[][] | null {
+  for (const option of options) {
+    if (option.value === value) return [options]
+    if (option.children?.length) {
+      const nested = buildPathToValue(option.children, value)
+      if (nested) return [options, ...nested]
+    }
+  }
+  return null
+}
+
+function focusActiveOption() {
+  const index = keyboard.activeIndex.value
+  if (index < 0) return
+  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.wi-cascadeselect__column')[activeColumn.value]
+  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.wi-cascadeselect__option')[index]
+  optionEl?.focus({ preventScroll: true })
+}
+
+function openPanel() {
+  open.value = true
+  const resolved = props.modelValue != null ? buildPathToValue(props.options, props.modelValue) : null
+  path.value = resolved ?? [props.options]
+  activeColumn.value = path.value.length - 1
+  const column = path.value[activeColumn.value] ?? []
+  const selectedIndex = column.findIndex((option) => option.value === props.modelValue)
+  keyboard.setActive(selectedIndex)
+  if (selectedIndex < 0) keyboard.moveFirst()
+  void nextTick(() => {
+    updatePanelPosition()
+    focusActiveOption()
+  })
+}
+
 function toggle() {
   if (props.disabled) return
-  open.value = !open.value
   if (open.value) {
-    path.value = [props.options]
-    void nextTick(() => updatePanelPosition())
+    open.value = false
+    return
   }
+  openPanel()
 }
+
+function enterChildren(option: CascadeSelectOption, columnIndex: number) {
+  enterLevel(option, columnIndex)
+  activeColumn.value = columnIndex + 1
+  void nextTick(() => {
+    keyboard.moveFirst()
+    focusActiveOption()
+  })
+}
+
+function activateOption(index: number) {
+  const option = path.value[activeColumn.value]?.[index]
+  if (!option || option.disabled) return
+  if (option.children?.length) {
+    enterChildren(option, activeColumn.value)
+    return
+  }
+  enterLevel(option, activeColumn.value)
+}
+
+function onPanelKeydown(event: KeyboardEvent) {
+  if (!open.value) return
+  if (event.key === 'ArrowRight') {
+    event.preventDefault()
+    const option = path.value[activeColumn.value]?.[keyboard.activeIndex.value]
+    if (option?.children?.length && !option.disabled) enterChildren(option, activeColumn.value)
+    return
+  }
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault()
+    if (activeColumn.value > 0) {
+      const childColumn = path.value[activeColumn.value]
+      activeColumn.value -= 1
+      const parentIndex = (path.value[activeColumn.value] ?? []).findIndex(
+        (option) => option.children === childColumn,
+      )
+      keyboard.setActive(parentIndex >= 0 ? parentIndex : 0)
+      focusActiveOption()
+    }
+    return
+  }
+  keyboard.onKeydown(event)
+}
+
+function onTriggerKeydown(event: KeyboardEvent) {
+  if (props.disabled) return
+  if (!open.value) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      openPanel()
+    }
+    return
+  }
+  onPanelKeydown(event)
+}
+
+watch([keyboard.activeIndex, activeColumn], () => {
+  if (open.value) focusActiveOption()
+})
 
 function clear(event: MouseEvent) {
   event.stopPropagation()
@@ -98,6 +209,7 @@ function enterLevel(option: CascadeSelectOption, columnIndex: number) {
   }
   emit('update:modelValue', option.value)
   open.value = false
+  trigger.value?.focus({ preventScroll: true })
 }
 
 function onDocumentClick(event: MouseEvent) {
@@ -160,10 +272,12 @@ onBeforeUnmount(() => {
         :class="{ 'wi-cascadeselect__trigger--invalid': isInvalid, 'wi-cascadeselect__trigger--placeholder': !hasValue }"
         :disabled="disabled"
         :aria-expanded="open"
+        :aria-controls="open ? panelId : undefined"
         :aria-invalid="isInvalid || undefined"
         :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
         aria-haspopup="listbox"
         @click="toggle"
+        @keydown="onTriggerKeydown"
       >
         <span class="wi-cascadeselect__label">{{ displayLabel }}</span>
       </button>
@@ -198,11 +312,13 @@ onBeforeUnmount(() => {
       <Transition name="wi-scale-fade">
         <div
           v-if="open"
+          :id="panelId"
           ref="panel"
           class="wi-cascadeselect__panel"
           :class="{ 'wi-cascadeselect__panel--teleported': teleported }"
           :style="panelStyle"
           role="listbox"
+          @keydown="onPanelKeydown"
         >
           <ul
             v-for="(column, columnIndex) in path"

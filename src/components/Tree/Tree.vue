@@ -7,7 +7,8 @@ import type {
   TreeProps,
   TreeSelectionKeys,
 } from './types'
-import { computed, provide, reactive, ref, useSlots, watch } from 'vue'
+import { computed, nextTick, provide, reactive, ref, useSlots, watch } from 'vue'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   buildChildMap,
   expandCheckedKeys,
@@ -41,6 +42,9 @@ const emit = defineEmits<{
   (event: 'update:expandedKeys', value: TreeExpandedKeys): void
   (event: 'node-expand', node: TreeNode): void
   (event: 'node-collapse', node: TreeNode): void
+  (event: 'node-select', node: TreeNode): void
+  (event: 'node-unselect', node: TreeNode): void
+  (event: 'node-load-error', payload: { node: TreeNode; error: unknown }): void
   (event: 'check', payload: { node: TreeNode; checkedKeys: TreeCheckedKeys }): void
   (event: 'node-drop', payload: { dragKey: string; dropKey: string; position: 'before' | 'after' | 'inside' }): void
 }>()
@@ -49,7 +53,11 @@ provide(WI_TREE_NODE_SLOT, slots.default)
 
 const innerExpanded = ref<TreeExpandedKeys>({})
 const loadingKeys = reactive<Record<string, boolean>>({})
+const loadedChildren = reactive<Record<string, TreeNode[]>>({})
+const loadedKeys = reactive<Record<string, boolean>>({})
+const loadFailedKeys = reactive<Record<string, boolean>>({})
 const dragKey = ref<string | null>(null)
+const root = ref<HTMLElement | null>(null)
 const childMap = computed(() => buildChildMap(props.value))
 const checkStrategy = computed(() => props.checkStrategy ?? 'all')
 
@@ -151,8 +159,17 @@ function isDisabled(node: TreeNode) {
 
 function isLeaf(node: TreeNode) {
   if (node.isLeaf) return true
-  if (props.lazy) return !node.children?.length && !loadingKeys[node.key]
-  return !node.children?.length
+  if (props.lazy) return !node.children?.length && !loadedChildren[node.key]?.length && !loadingKeys[node.key]
+  return !node.children?.length && !loadedChildren[node.key]?.length
+}
+
+function hasChildren(node: TreeNode) {
+  if (node.children?.length || loadedChildren[node.key]?.length) return true
+  return props.lazy && !node.isLeaf && !loadedKeys[node.key]
+}
+
+function childrenOf(node: TreeNode) {
+  return node.children ?? loadedChildren[node.key] ?? []
 }
 
 function isMatch(node: TreeNode) {
@@ -175,11 +192,16 @@ async function toggleExpand(node: TreeNode) {
     }
     next[node.key] = true
     emit('node-expand', node)
-    if (props.lazy && props.load && !node.children?.length && !node.isLeaf) {
+    if (props.lazy && props.load && !node.children?.length && !loadedKeys[node.key] && !node.isLeaf) {
       loadingKeys[node.key] = true
+      delete loadFailedKeys[node.key]
       try {
-        const children = await props.load(node)
-        node.children = children
+        loadedChildren[node.key] = await props.load(node)
+        loadedKeys[node.key] = true
+      } catch (error) {
+        loadFailedKeys[node.key] = true
+        delete next[node.key]
+        emit('node-load-error', { node, error })
       } finally {
         loadingKeys[node.key] = false
       }
@@ -195,11 +217,18 @@ function select(node: TreeNode) {
     const next = isSelected(node.key) ? null : node.key
     emit('update:modelValue', next)
     emit('update:selectionKeys', next ? { [next]: true } : {})
+    if (next) emit('node-select', node)
+    else emit('node-unselect', node)
     return
   }
   const next = { ...effectiveKeys.value }
-  if (next[node.key]) delete next[node.key]
-  else next[node.key] = true
+  if (next[node.key]) {
+    delete next[node.key]
+    emit('node-unselect', node)
+  } else {
+    next[node.key] = true
+    emit('node-select', node)
+  }
   emit('update:selectionKeys', next)
 }
 
@@ -247,6 +276,94 @@ function onDrop(node: TreeNode, event: DragEvent) {
   dragKey.value = null
 }
 
+function onDragEnd() {
+  dragKey.value = null
+}
+
+interface FlatTreeEntry {
+  node: TreeNode
+  parentKey: string | null
+}
+
+const flatEntries = computed<FlatTreeEntry[]>(() => {
+  const list: FlatTreeEntry[] = []
+  const walk = (nodes: TreeNode[], parentKey: string | null) => {
+    for (const node of nodes) {
+      list.push({ node, parentKey })
+      if (isExpanded(node.key)) walk(childrenOf(node), node.key)
+    }
+  }
+  walk(visibleRoots.value, null)
+  return list
+})
+
+const keyboard = useMenuKeyboard({
+  itemCount: () => flatEntries.value.length,
+  isItemDisabled: (index) => Boolean(flatEntries.value[index]?.node.disabled),
+  onActivate: (index, event) => {
+    const entry = flatEntries.value[index]
+    if (!entry) return
+    if (event.key === ' ' && props.showCheckbox) toggleCheck(entry.node)
+    else select(entry.node)
+  },
+})
+
+const activeKey = computed<string | null>(() => flatEntries.value[keyboard.activeIndex.value]?.node.key ?? null)
+
+function tabindexForKey(key: string): 0 | -1 {
+  if (activeKey.value === key) return 0
+  if (keyboard.activeIndex.value < 0) {
+    const firstEnabled = flatEntries.value.findIndex((entry) => !entry.node.disabled)
+    if (firstEnabled >= 0 && flatEntries.value[firstEnabled]!.node.key === key) return 0
+  }
+  return -1
+}
+
+function setActiveKey(key: string) {
+  const index = flatEntries.value.findIndex((entry) => entry.node.key === key)
+  if (index >= 0) keyboard.setActive(index)
+}
+
+watch(keyboard.activeIndex, () => {
+  void nextTick(() => {
+    const key = activeKey.value
+    if (key == null || !root.value) return
+    const items = root.value.querySelectorAll<HTMLElement>('[data-wi-tree-key]')
+    for (const item of items) {
+      if (item.dataset.wiTreeKey === key) {
+        item.focus({ preventScroll: true })
+        break
+      }
+    }
+  })
+})
+
+function onTreeKeydown(event: KeyboardEvent) {
+  const index = keyboard.activeIndex.value
+  const entry = flatEntries.value[index]
+  if (event.key === 'ArrowRight') {
+    event.preventDefault()
+    if (!entry) return
+    if (hasChildren(entry.node)) {
+      if (!isExpanded(entry.node.key)) void toggleExpand(entry.node)
+      else keyboard.setActive(index + 1)
+    }
+    return
+  }
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault()
+    if (!entry) return
+    if (hasChildren(entry.node) && isExpanded(entry.node.key)) {
+      void toggleExpand(entry.node)
+    } else if (entry.parentKey != null) {
+      const parentIndex = flatEntries.value.findIndex((candidate) => candidate.node.key === entry.parentKey)
+      if (parentIndex >= 0) keyboard.setActive(parentIndex)
+    }
+    return
+  }
+  keyboard.onKeydown(event)
+}
+
 provide(WI_TREE_KEY, {
   isExpanded,
   isSelected,
@@ -254,6 +371,7 @@ provide(WI_TREE_KEY, {
   isIndeterminate,
   isDisabled,
   isLeaf,
+  hasChildren,
   isMatch,
   get showCheckbox() {
     return props.showCheckbox
@@ -265,17 +383,24 @@ provide(WI_TREE_KEY, {
     return props.lazy
   },
   loadingKeys,
+  loadedChildren,
+  loadedKeys,
+  loadFailedKeys,
+  activeKey,
+  tabindexForKey,
+  setActiveKey,
   toggleExpand,
   select,
   toggleCheck,
   onDragStart,
   onDragOver,
   onDrop,
+  onDragEnd,
 })
 </script>
 
 <template>
-  <ul class="wi-tree" role="tree">
-    <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" />
+  <ul ref="root" class="wi-tree" role="tree" @keydown="onTreeKeydown">
+    <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" :depth="1" />
   </ul>
 </template>

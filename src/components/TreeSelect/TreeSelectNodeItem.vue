@@ -12,6 +12,7 @@ defineProps<{
   checkedKeys: Record<string, boolean>
   expanded: Record<string, boolean>
   showCheckbox: boolean
+  activeKey: string | null
 }>()
 
 defineEmits<{
@@ -26,14 +27,20 @@ const locale = useWiLocale()
 <template>
   <li
     class="wi-treeselect__node"
+    :class="{ 'wi-treeselect__node--active': node.key === activeKey }"
     role="treeitem"
     :aria-expanded="node.children?.length ? Boolean(expanded[node.key]) : undefined"
+    :aria-level="depth + 1"
+    :aria-disabled="node.disabled || undefined"
+    :aria-selected="showCheckbox ? undefined : selectedKeys.includes(node.key)"
+    :aria-checked="showCheckbox ? Boolean(checkedKeys[node.key]) : undefined"
   >
     <div class="wi-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
       <button
         v-if="node.children?.length"
         type="button"
         class="wi-treeselect__toggler"
+        tabindex="-1"
         :aria-label="expanded[node.key] ? locale.collapse : locale.expand"
         @click.stop="$emit('toggle', node.key)"
       >
@@ -43,6 +50,7 @@ const locale = useWiLocale()
       <WiCheckbox
         v-if="showCheckbox"
         class="wi-treeselect__checkbox"
+        tabindex="-1"
         :model-value="Boolean(checkedKeys[node.key])"
         :disabled="node.disabled"
         @update:model-value="$emit('check', node)"
@@ -53,6 +61,7 @@ const locale = useWiLocale()
         class="wi-treeselect__option"
         :class="{ 'wi-treeselect__option--selected': selectedKeys.includes(node.key) }"
         :disabled="node.disabled"
+        :tabindex="node.key === activeKey ? 0 : -1"
         @click="$emit('select', node)"
       >
         {{ node.label }}
@@ -68,6 +77,7 @@ const locale = useWiLocale()
         :checked-keys="checkedKeys"
         :expanded="expanded"
         :show-checkbox="showCheckbox"
+        :active-key="activeKey"
         @toggle="$emit('toggle', $event)"
         @select="$emit('select', $event)"
         @check="$emit('check', $event)"

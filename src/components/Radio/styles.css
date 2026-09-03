@@ -3,7 +3,7 @@
 }
 
 .wi-radio__input:checked + .wi-radio__control::after {
-    background: white;
+    background: var(--wi-color-on-emphasis);
     border-radius: var(--wi-radius-full);
     content: "";
     height: 0.375rem;

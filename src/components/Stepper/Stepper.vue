@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { StepperProps, StepperStatus } from './types'
 import { computed } from 'vue'
+import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps>(), {
   modelValue: 0,
@@ -57,7 +58,11 @@ const rootClass = computed(() => [
       :disabled="!canSelect(index, step.disabled)"
       @click="select(index, step.disabled)"
     >
-      <span class="wi-stepper__marker" aria-hidden="true">{{ index + 1 }}</span>
+      <span class="wi-stepper__marker" aria-hidden="true">
+        <WiIcon v-if="stepStatus(index, step.status) === 'finish'" name="check" />
+        <WiIcon v-else-if="stepStatus(index, step.status) === 'error'" name="warning" />
+        <template v-else>{{ index + 1 }}</template>
+      </span>
       <span class="wi-stepper__copy">
         <span class="wi-stepper__label">{{ step.label }}</span>
         <span v-if="step.description" class="wi-stepper__description">{{ step.description }}</span>

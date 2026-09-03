@@ -6,6 +6,7 @@ import { useConfiguredSize, useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveIconSizeFromClass } from '../../shared/types'
+import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { isIconName } from '../Icon/icons'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -25,8 +26,10 @@ const config = useWiConfig()
 const locale = useWiLocale()
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
+const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
 const menuStyle = ref<Record<string, string>>({})
+const menuId = `wi-splitbutton-menu-${Math.random().toString(36).slice(2, 8)}`
 const sizeClass = useConfiguredSize('SplitButton', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const iconName = computed(() => (props.icon && isIconName(props.icon) ? props.icon : undefined))
@@ -58,14 +61,59 @@ function onViewportChange() {
   if (open.value) updateMenuPosition()
 }
 
+const keyboard = useMenuKeyboard({
+  itemCount: () => props.model.length,
+  isItemDisabled: (index) => Boolean(props.model[index]?.disabled),
+  enabled: open,
+  onActivate: (index) => {
+    const item = props.model[index]
+    if (item) activate(item)
+  },
+  onEscape: () => {
+    open.value = false
+  },
+  returnFocusTo: trigger,
+})
+
+function focusActiveItem() {
+  const index = keyboard.activeIndex.value
+  if (index < 0) return
+  menu.value?.querySelectorAll<HTMLElement>('.wi-splitbutton__item')[index]?.focus({ preventScroll: true })
+}
+
 function onMainClick(event: MouseEvent) {
   if (props.disabled) return
   emit('click', event)
 }
 
+function openMenu() {
+  open.value = true
+  void nextTick(() => {
+    updateMenuPosition()
+    keyboard.moveFirst()
+    focusActiveItem()
+  })
+}
+
 function toggleMenu() {
   if (props.disabled) return
-  open.value = !open.value
+  if (open.value) {
+    open.value = false
+    return
+  }
+  openMenu()
+}
+
+function onTriggerKeydown(event: KeyboardEvent) {
+  if (props.disabled) return
+  if (!open.value) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      openMenu()
+    }
+    return
+  }
+  keyboard.onKeydown(event)
 }
 
 function activate(item: SplitButtonItem) {
@@ -73,6 +121,7 @@ function activate(item: SplitButtonItem) {
   item.command?.()
   emit('command', item)
   open.value = false
+  trigger.value?.focus({ preventScroll: true })
 }
 
 function onDocumentClick(event: MouseEvent) {
@@ -81,16 +130,29 @@ function onDocumentClick(event: MouseEvent) {
   open.value = false
 }
 
+function onDocumentFocusIn(event: FocusEvent) {
+  const target = event.target as Node
+  if (root.value?.contains(target) || menu.value?.contains(target)) return
+  open.value = false
+}
+
+watch(keyboard.activeIndex, () => {
+  if (open.value) focusActiveItem()
+})
+
 watch(open, (isOpen) => {
   if (isOpen) {
     document.addEventListener('click', onDocumentClick)
+    document.addEventListener('focusin', onDocumentFocusIn)
     void nextTick(() => updateMenuPosition())
     if (teleported.value) {
       window.addEventListener('resize', onViewportChange)
       window.addEventListener('scroll', onViewportChange, true)
     }
   } else {
+    keyboard.reset()
     document.removeEventListener('click', onDocumentClick)
+    document.removeEventListener('focusin', onDocumentFocusIn)
     window.removeEventListener('resize', onViewportChange)
     window.removeEventListener('scroll', onViewportChange, true)
   }
@@ -98,6 +160,7 @@ watch(open, (isOpen) => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
+  document.removeEventListener('focusin', onDocumentFocusIn)
   window.removeEventListener('resize', onViewportChange)
   window.removeEventListener('scroll', onViewportChange, true)
 })
@@ -118,13 +181,16 @@ onBeforeUnmount(() => {
       <span v-if="label">{{ label }}</span>
     </button>
     <button
+      ref="trigger"
       type="button"
       class="wi-splitbutton__trigger"
       :aria-label="locale.moreActions"
       :aria-expanded="open"
+      :aria-controls="open ? menuId : undefined"
       aria-haspopup="menu"
       :disabled="disabled"
       @click="toggleMenu"
+      @keydown="onTriggerKeydown"
     >
       <WiIcon name="chevron-down" :size="iconSize" />
     </button>
@@ -132,11 +198,13 @@ onBeforeUnmount(() => {
       <Transition name="wi-scale-fade">
         <ul
           v-if="open"
+          :id="menuId"
           ref="menu"
           class="wi-splitbutton__menu"
           :class="{ 'wi-splitbutton__menu--teleported': teleported }"
           :style="teleported ? menuStyle : undefined"
           role="menu"
+          @keydown="keyboard.onKeydown"
         >
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="presentation">
             <button
@@ -144,6 +212,7 @@ onBeforeUnmount(() => {
               class="wi-splitbutton__item"
               role="menuitem"
               :disabled="item.disabled"
+              :tabindex="keyboard.tabindexFor(index)"
               @click="activate(item)"
             >
               {{ item.label }}

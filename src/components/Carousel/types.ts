@@ -1,5 +1,7 @@
 export interface CarouselProps {
   value: unknown[]
+  /** Controlled active page. Use with `v-model:page`; omit for uncontrolled. */
+  page?: number
   numVisible?: number
   circular?: boolean
   autoplay?: boolean

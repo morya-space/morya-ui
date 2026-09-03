@@ -1,8 +1,25 @@
 /* —— Menu: Dock —— */
 .wi-dock {
     --wi-dock-icon-size: 2.75rem;
+    --wi-dock-edge-offset: var(--wi-space-4);
     display: flex;
     justify-content: center;
+}
+
+.wi-dock--top,
+.wi-dock--bottom {
+    left: 50%;
+    position: fixed;
+    transform: translateX(-50%);
+    z-index: var(--wi-z-overlay);
+}
+
+.wi-dock--top {
+    top: var(--wi-dock-edge-offset);
+}
+
+.wi-dock--bottom {
+    bottom: var(--wi-dock-edge-offset);
 }
 
 .wi-dock__list {

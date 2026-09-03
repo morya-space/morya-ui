@@ -15,16 +15,10 @@
     border-radius: var(--wi-radius-control);
     color: var(--wi-color-text);
     font: inherit;
-    font-size: var(--wi-control-font-large);
-    height: var(--wi-control-height-large);
+    font-size: var(--wi-control-font-medium);
+    height: var(--wi-control-height-medium);
     text-align: center;
-    width: var(--wi-control-height-large);
-}
-
-.wi-inputotp__input:focus-visible {
-    border-color: var(--wi-color-primary);
-    box-shadow: var(--wi-focus-shadow);
-    outline: none;
+    width: var(--wi-control-height-medium);
 }
 
 .wi-inputotp {
@@ -38,6 +32,7 @@
 }
 
 .wi-inputotp--large .wi-inputotp__input {
+    font-size: var(--wi-control-font-large);
     height: var(--wi-control-height-large);
     width: var(--wi-control-height-large);
 }

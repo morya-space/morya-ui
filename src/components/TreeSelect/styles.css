@@ -53,7 +53,6 @@
 .wi-treeselect--multiple .wi-treeselect__trigger {
     align-items: center;
     height: auto;
-    min-height: var(--wi-control-height-medium);
     padding-top: var(--wi-space-1);
     padding-bottom: var(--wi-space-1);
 }
@@ -80,9 +79,11 @@
 }
 
 .wi-treeselect__filter {
+    background: var(--wi-color-surface);
     border: 0;
     border-bottom: 1px solid var(--wi-color-border);
     box-sizing: border-box;
+    color: var(--wi-color-text);
     font: inherit;
     padding: var(--wi-space-2) var(--wi-space-3);
     width: 100%;
@@ -151,6 +152,7 @@
 }
 
 .wi-treeselect__option--selected,
-.wi-treeselect__option:hover:not(:disabled) {
+.wi-treeselect__option:hover:not(:disabled),
+.wi-treeselect__node--active > .wi-treeselect__row .wi-treeselect__option:not(:disabled) {
     background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
 }

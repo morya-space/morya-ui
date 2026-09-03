@@ -13,6 +13,7 @@
     gap: var(--wi-space-2);
     min-width: 0;
     overflow: hidden;
+    touch-action: pan-y;
 }
 
 .wi-carousel__item {
@@ -41,9 +42,35 @@
     cursor: pointer;
     height: var(--wi-carousel-indicator-size);
     padding: 0;
+    position: relative;
     width: var(--wi-carousel-indicator-size);
 }
 
-.wi-carousel__indicator--active {
+.wi-carousel__indicator::after {
+    content: '';
+    inset: -0.45rem;
+    position: absolute;
+}
+
+.wi-carousel__indicator:hover {
+    background: color-mix(in srgb, var(--wi-color-text-muted) 70%, transparent);
+}
+
+.wi-carousel__indicator:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
+}
+
+.wi-carousel__indicator--active,
+.wi-carousel__indicator--active:hover {
     background: var(--wi-color-primary);
+}
+
+.wi-carousel__nav:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wi-color-primary) 8%, transparent);
+}
+
+.wi-carousel__nav:focus-visible {
+    box-shadow: var(--wi-focus-shadow);
+    outline: none;
 }
