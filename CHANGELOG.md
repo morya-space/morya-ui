@@ -1,204 +1,64 @@
 # @wex-design/ui
 
-## 0.0.1
+## 0.1.1
 
-`@wex-design/ui` 的首个公开版本，以当前代码为基准。
+`@wex-design/ui` 的初始公开版本，以当前组件库能力为基准。
 
-### 破坏性变更 / 弃用别名
+### 组件（88 个）
 
-- **品牌与包名**：npm 包改为 `@wex-design/ui`（以及 `@wex-design/ui-mcp`、`@wex-design/nuxt`）；组件前缀 `Wi*` → `Wd*`；CSS 变量 / 类名 `--wi-*` / `.wi-*` → `--wd-*` / `.wd-*`；插件入口 `WellInsight` / `createWellInsight` / `WellInsightResolver` 改为 `WexDesign` / `createWexDesign` / `WexDesignResolver`。
+- **基础**：Button、ButtonGroup、Icon、Avatar、AvatarGroup、Badge、Chip、Tag、Divider、Skeleton、ProgressBar、ProgressSpinner、BlockUI、ScrollTop
+- **表单**：Input、Textarea、InputNumber、InputPassword、InputOtp、InputTags、InputColor、InputGroup、InputGroupAddon、IconField、FloatLabel、Label、Checkbox、CheckboxGroup、Radio、RadioGroup、Switch、Select、SelectButton、ToggleButton、Slider、Knob、Rating、DatePicker、AutoComplete、CascadeSelect、TreeSelect、FileUpload、Form、FormItem
+- **浮层与对话框**：Dialog、Drawer、Popover、Tooltip、ConfirmDialog、ConfirmPopup、ContextMenu、Dropdown、SplitButton、SpeedDial
+- **数据展示**：Table、Tree、TreeTable、TreeSelect、DataView、VirtualScroller、Timeline、MeterGroup、Terminal、Gallery、Carousel、Inplace
+- **导航与菜单**：Menu、Menubar、MegaMenu、TieredMenu、Breadcrumb、Tabs、Stepper、Pagination、CommandMenu、Dock、Sidebar
+- **布局**：Layout（Header / Sider / Content / Footer）、Grid、Flex、Space、Fluid、Panel、Card、Fieldset、Accordion、Splitter、Toolbar、Listbox、PickList、OrderList、Scrollbar
 
-- **Severity**：正典值为 `success` / `info` / `warning` / `danger`；`warn`、`error` 仍接受但已标记 `@deprecated`（影响 Button、Tag、Message、Toast、ProgressBar、Badge、Chip、Timeline 等）。
-- **Knob**：`size` 弃用，请改用 `diameter`（别名仍可用）。
-- **Avatar**：正典尺寸词表为 `small` / `medium` / `large` / `xlarge`；`normal`、`sm`、`md`、`lg` 仍映射为别名。
-- **Panel**：`modelValue` / `v-model` 弃用，请改用 `collapsed` / `v-model:collapsed`（双轨同步 emit 保留至下一 major）。
+### 主题与设计令牌
 
-### 新功能
+- 亮/暗色主题（`useTheme`、`applyTheme`、`getPreferredTheme`）
+- 密度与动效偏好（`useDensity`、`useMotion`，支持 `prefers-reduced-motion` 与 `data-wd-motion`）
+- 基于 `--wd-*` CSS 变量的设计令牌体系（颜色、间距、圆角、阴影、边框、布局、树形、时间线、分割面板等）
+- 子树级覆盖：`WdConfigProvider` 注入主题、密度、动效与组件默认项
 
-- **`useConfirm`**：命令式确认对话框 API，自包入口导出。
-- **`useControllable`**：共享半受控/受控状态 composable，用于 Panel、Fieldset、Carousel、DataView 等。
-- **`ConfigProvider`**：`theme` 对象注入（密度、动效、`data-wd-*` 语义）。
-- **Toast / Message**：队列、去重与 severity 正典对齐。
-- **浮层**：`overlayPlacement` 支持 flip/clamp；Popover / Tooltip / BlockUI 行为补强。
-- **键盘导航**：`useMenuKeyboard` 统一 Menu、Menubar、MegaMenu、Listbox、SelectButton 等。
-- **Tree / TreeTable**：treegrid 语义与键盘；**Gallery / Carousel** 受控 page 与触摸/暂停。
-- **Form**：字段反馈基线、`useFieldFeedback`；Dialog / Drawer / ConfirmDialog prop 对齐。
-- **主题 token**：边框宽度、禁用透明度、动效（spin/skeleton/pulse/scrollbar）、减动效（`prefers-reduced-motion` 与 `data-wd-motion`）；新增 layout/tree/timeline/splitter 等布局 token。
-- **Grid**：`gap` 支持设计 token 解析（`resolveGapCSSValue`）。
-- **ConfirmDialog / Accordion** 组件增强；**Table** 滚动条与样式改进；组件动态图标尺寸。
+### 全局配置与工具 API
 
-### 修复
+- 插件入口：`WexDesign` 全量注册、`createWexDesign` 按需/默认配置
+- 按需构建：`WexDesignResolver`（配合 `unplugin-vue-components`）
+- ESM 子路径导出（`@wex-design/ui/button` 等），tree-shaking 友好
+- 命令式 API：`useConfirm`、`useToast` / `toast`、`useMessage` / `message`、`useContextMenu`
+- 共享 composable：`useControllable`、`useFieldFeedback`、`useMenuKeyboard`、`useModalOverlay`、`useWdId`
+- 国际化：`zhCN`、`enUS`、`mergeLocale`、`useWdLocale`、`formatLocale`
 
-- Checkbox / Radio 暗色选中态；ToggleButton 水平 padding；Dock `position`；Stepper 状态样式；Chip severity。
-- PickList / OrderList 样式与按钮禁用；InputNumber 草稿态；Table 排序与结构；TieredMenu popup 定位。
-- CascadeSelect / TreeSelect 键盘；SplitButton / SpeedDial 浮层；Rating / Knob slider 语义；DatePicker 日历键盘。
-- Inplace / ConfirmPopup 行为；DataView / Terminal 半受控；InputColor 模板损坏修复。
+### 打包与类型
+
+- 产物：ESM + 类型声明 + 聚合样式 `styles.css`
+- 完整 TypeScript 类型（Props、Emits、Slots、Locale）
+- `sideEffects` 与细粒度 exports，支持按组件引入样式
+
+### 文档站
+
+- 交互式文档站（Markdown + `vue preview` 实时示例）
+- 组件目录、指南（快速上手、主题、配置、SSR、无障碍）
+- 亮/暗主题切换、中英文切换、全局搜索（CommandMenu）
+- 部署至 GitHub Pages：https://wex-design.github.io/wex-design-ui/
+
+### 生态包
+
+- **`@wex-design/nuxt`**：Nuxt 3 模块（样式注入、transpile、客户端 overlay 上下文）
+- **`@wex-design/ui-mcp`**：MCP 服务，供 AI 客户端检索组件文档、示例与用法建议
+
+### SSR 与框架集成
+
+- 兼容 Nuxt 3、Astro + Vue、Vite SSR 等场景
+- 浮层统一挂载与 placement（flip / clamp）策略
 
 ### 无障碍
 
-- Divider 恒设 `role="separator"`；Tabs `aria-controls` / panel `aria-labelledby`；Toolbar `ariaLabel`；Slider `aria-valuetext`。
-- Switch 无 label 时 DEV 警告；MeterGroup `aria-valuenow`；InputPassword 强度 `role="meter"`。
-- ProgressSpinner 包裹模式 `inert` + `aria-busy`；CheckboxGroup / RadioGroup / SelectButton / InputOtp 组标签。
-- Card `headingLevel`；hover / focus-visible 补齐（SplitButton、SpeedDial、FileUpload、MegaMenu、Sidebar 等）。
+- 表单控件、Tabs、Slider、Switch、MeterGroup、ProgressSpinner 等核心路径的 ARIA 与键盘支持
+- 菜单类组件统一键盘导航（`useMenuKeyboard`）
+- Tree / TreeTable treegrid 语义
 
-### 测试
+### 质量
 
-- 608 项用例全绿；Knob、Inplace、TreeTable、Carousel、MeterGroup、ProgressSpinner、Tabs、CheckboxGroup 等核心路径加固。
-
-### 文档
-
-- 文档站部署至 GitHub Pages；开源品牌与 README 重写。
-- MCP catalog 校验与示例覆盖率增强；`check:tokens` / `check:colors` 已通过。
-
-## 0.1.13
-
-### 新功能
-
-- implement dynamic icon sizing across components
-- enhance resource management and documentation in MCP
-
-## 0.1.12
-
-### 变更
-
-- import Icon styles across multiple components
-
-## 0.1.11
-
-### 破坏性变更
-
-- drop deprecated prop and CSS aliases
-
-### 新功能
-
-- add mobile sidebar drawer for docs and components
-- add global site search with CommandMenu
-- persist language in URL query
-- add dedicated 404 page
-- add favicon and meta description
-- Harden MCP catalog tooling
-
-### 修复
-
-- unify suffix icons and Select clearable hover behavior
-- restore DatePicker panel grid after teleport
-- add invalid modifier class alongside error alias
-- improve FloatLabel, Popover, and Slider
-- scroll doc TOC inside WdScrollbar
-- repair guide links and quick-start copy
-- Fix layout header and footer padding axis
-
-### 文档
-
-- complete Events/Slots sections and remove migration guide
-- add Events and a11y sections to high-traffic components
-- rename Basic sections to 基础用法 in Chinese component docs
-- add accessibility guide for playground
-- expand menu and virtual scroller component pages
-- add deprecated API migration guide
-
-### 变更
-
-- enhance MobileSidebarShell and DocsView layout with improved flex properties
-- unify clearable API across pickers (phase 6b)
-- phase 6a icon unification and shared picker suffix
-- split vendor chunks and replace eager markdown manifest
-- add unit tests for 16 sub-components
-- migrate remaining overlays to shared placement util
-- add shared menu icon and key utilities
-- replace hardcoded colors with design tokens
-- migrate Select and Dropdown to shared overlay placement
-- extract shared overlay placement utility
-- lazy-load routes and markdown docs
-- streamline MCP tools from 18 to 13
-- Simplify layout components by removing custom scrollbar support and enhancing layout styles
-
-## 0.1.10
-
-### 修复
-
-- Expose component-specific CSS variables and adjust layout defaults
-- Add Configurable Layout Sizing And CSS Tokens
-- Improve playground navigation styling
-- Standardize Project Linting And Module Exports
-
-## 0.1.9
-
-### 变更
-
-- clean up whitespace in base.css for consistency
-
-## 0.1.8
-
-### 新功能
-
-- enhance package exports and sideEffects for improved component management
-
-## 0.1.7
-
-### 新功能
-
-- add extra slot and enhance components in Accordion and AutoComplete
-- enhance component defaults and improve configuration management
-- add component registry import to index for improved component management
-
-## 0.1.6
-
-### 新功能
-
-- enhance documentation and component registration for WexDesign
-
-## 0.1.5
-
-### 新功能
-
-- enhance release process to include MCP build and version sync
-
-### 修复
-
-- rename Wd to Wi in component library and documentation
-
-## 0.1.4
-
-### 变更
-
-- Simplify package.json exports by removing development paths for styles and index files
-
-## 0.1.3
-
-### 新功能
-
-- bootstrap standalone @wex-design/ui component library
-
-### 变更
-
-- restructure release process and update documentation
-
-## 0.1.2
-
-### 新功能
-
-- 增强文件上传组件，添加多语言支持和样式优化
-- 文件上传组件优化
-- 侧边抽屉动效样式优化
-- 弹窗样式动效优化
-
-## 0.1.1
-
-### 新功能
-
-- 更新发版流程，添加 UI 组件的发布命令和文档说明
-- 添加 commitlint 配置和 husky 钩子，优化发版流程和提交规范文档
-
-## 0.1.0
-
-### Minor Changes
-
-- 初版发布：可独立安装的 Vue 3 + TypeScript 组件库（含主题 / 设计令牌 API）。
-- 提供完整组件文档站，支持 Markdown 与 `vue preview` 实时示例。
-- 亮色 / 暗色主题、`useTheme` / `useDensity` / `useMotion`，以及 `WdConfigProvider` / `createWexDesign` 全局配置。
-- 打包产物为 ESM + 类型声明 + `styles.css`；本地开发可通过 `exports.development` 直连源码。
-
-### 覆盖范围
-
-基础与表单、浮层、数据展示、导航与反馈等组件（Button、Input、Select、Dialog、Table、Tree、Toast 等），详见文档站「组件」页。
+- 600+ 单元测试用例
+- `check:tokens` / `check:colors` 设计令牌校验
