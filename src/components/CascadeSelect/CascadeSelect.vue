@@ -3,6 +3,7 @@ import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
@@ -35,7 +36,8 @@ const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const path = ref<CascadeSelectOption[][]>([])
-const fieldId = computed(() => props.id ?? `wi-cascadeselect-${Math.random().toString(36).slice(2, 8)}`)
+const autoFieldId = useWiId('wi-cascadeselect')
+const fieldId = computed(() => props.id ?? autoFieldId)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 const resolvedClearable = computed(

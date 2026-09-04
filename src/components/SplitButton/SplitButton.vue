@@ -3,6 +3,7 @@ import type { SplitButtonItem, SplitButtonProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveIconSizeFromClass } from '../../shared/types'
@@ -29,7 +30,7 @@ const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
 const menuStyle = ref<Record<string, string>>({})
-const menuId = `wi-splitbutton-menu-${Math.random().toString(36).slice(2, 8)}`
+const menuId = useWiId('wi-splitbutton-menu')
 const sizeClass = useConfiguredSize('SplitButton', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const iconName = computed(() => (props.icon && isIconName(props.icon) ? props.icon : undefined))

@@ -2,6 +2,7 @@
 import type { SwitchProps } from './types'
 import { computed, onMounted, useAttrs, useSlots } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 
 defineOptions({ inheritAttrs: false })
 
@@ -15,8 +16,9 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
 const slots = useSlots()
+const autoInputId = useWiId('wi-switch')
 const resolvedInputId = computed(
-  () => props.inputId ?? props.id ?? `wi-switch-${Math.random().toString(36).slice(2, 8)}`,
+  () => props.inputId ?? props.id ?? autoInputId,
 )
 const sizeClass = useConfiguredSize('Switch', () => props.size)
 const isDisabled = computed(() => props.disabled || props.loading)

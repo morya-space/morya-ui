@@ -18,7 +18,8 @@ export interface OverlayHostHandle {
 }
 
 /** Mount a teleport host under `document.body` with the shared app context. */
-export function mountOverlayHost(component: Component, className: string): OverlayHostHandle {
+export function mountOverlayHost(component: Component, className: string): OverlayHostHandle | null {
+  if (typeof document === 'undefined') return null
   const container = document.createElement('div')
   container.className = className
   document.body.appendChild(container)

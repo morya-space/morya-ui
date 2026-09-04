@@ -9,6 +9,7 @@ import type {
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiIcon from '../Icon/Icon.vue'
@@ -44,7 +45,8 @@ const viewMonth = ref(new Date().getMonth())
 const activeDate = ref(startOfDay(new Date()))
 const rangeDraft = ref<Date | null>(null)
 const hoverDate = ref<Date | null>(null)
-const fieldId = computed(() => props.id ?? `wi-datepicker-${Math.random().toString(36).slice(2, 8)}`)
+const autoFieldId = useWiId('wi-datepicker')
+const fieldId = computed(() => props.id ?? autoFieldId)
 const panelId = computed(() => `${fieldId.value}-panel`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))

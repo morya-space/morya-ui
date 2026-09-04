@@ -3,6 +3,7 @@ import type { InputTagsProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import WiIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
@@ -19,7 +20,8 @@ const emit = defineEmits<{
 const locale = useWiLocale()
 const draft = ref('')
 const sizeClass = useConfiguredSize('InputTags', () => props.size)
-const fieldId = computed(() => props.id ?? `wi-inputtags-${Math.random().toString(36).slice(2, 8)}`)
+const autoFieldId = useWiId('wi-inputtags')
+const fieldId = computed(() => props.id ?? autoFieldId)
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
 const separators = computed(() => {
   if (!props.separator) return []

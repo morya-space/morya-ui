@@ -5,8 +5,10 @@ export type DensityPreference = 'compact' | 'comfortable' | 'spacious'
 const storageKey = 'well-insight-density'
 const densityPreferences: readonly DensityPreference[] = ['compact', 'comfortable', 'spacious']
 
-export function applyDensity(preference: DensityPreference, target: HTMLElement = document.documentElement) {
-  target.dataset.wiDensity = preference
+export function applyDensity(preference: DensityPreference, target?: HTMLElement) {
+  const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
+  if (!el) return
+  el.dataset.wiDensity = preference
 }
 
 export function useDensity() {

@@ -3,6 +3,7 @@ import type { InputColorProps } from './types'
 import { computed } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 
 const props = withDefaults(defineProps<InputColorProps>(), {
@@ -16,7 +17,8 @@ const emit = defineEmits<{
 }>()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('InputColor', () => props.size)
-const fieldId = computed(() => props.id ?? `wi-inputcolor-${Math.random().toString(36).slice(2, 8)}`)
+const autoFieldId = useWiId('wi-inputcolor')
+const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid } = useFieldFeedback(props)
 
 const hexValue = computed(() => {

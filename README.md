@@ -62,6 +62,10 @@ Use full registration, named imports, on-demand subpaths, or `WellInsightResolve
 
 Every component includes Markdown docs with interactive `vue preview` blocks. Browse them online or run the docs site locally.
 
+### SSR & meta-frameworks
+
+Works with **Nuxt 3**, **Astro + Vue**, **Vite SSR**, and similar setups. Includes the [`@well-insight/nuxt`](./packages/nuxt) module — see the [SSR guide](https://well-insight.github.io/well-insight-ui/docs/ssr).
+
 ## Documentation
 
 **https://well-insight.github.io/well-insight-ui/**
@@ -71,6 +75,7 @@ Every component includes Markdown docs with interactive `vue preview` blocks. Br
 | Quick start | [Guide](https://well-insight.github.io/well-insight-ui/docs/quick-start) |
 | Theme | [Theme](https://well-insight.github.io/well-insight-ui/docs/theme) |
 | Configuration | [Config](https://well-insight.github.io/well-insight-ui/docs/config) |
+| SSR | [Nuxt / Astro / Vite SSR](https://well-insight.github.io/well-insight-ui/docs/ssr) |
 | Components | [Catalog](https://well-insight.github.io/well-insight-ui/components) |
 | Changelog | [Releases](https://well-insight.github.io/well-insight-ui/changelog) |
 
@@ -119,6 +124,7 @@ See the [Quick start guide](https://well-insight.github.io/well-insight-ui/docs/
 | Package | Description |
 | --- | --- |
 | [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui) | Components, styles, theme & locale helpers |
+| [`@well-insight/nuxt`](./packages/nuxt) | Nuxt 3 module (styles, transpile, overlay context) |
 | [`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp) | Optional MCP server for AI-assisted doc lookup |
 
 ## Contributing

@@ -2,6 +2,7 @@
 import type {CheckboxProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import {  WI_CHECKBOX_GROUP_KEY } from './types'
 
 defineOptions({ inheritAttrs: false })
@@ -16,7 +17,8 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
 const group = inject(WI_CHECKBOX_GROUP_KEY, null)
-const inputId = computed(() => props.id ?? `wi-checkbox-${Math.random().toString(36).slice(2, 8)}`)
+const autoInputId = useWiId('wi-checkbox')
+const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('Checkbox', () => props.size ?? group?.size.value)
 const isDisabled = computed(() => props.disabled || Boolean(group?.disabled.value))
 const isInvalid = computed(() => props.invalid || Boolean(group?.invalid.value))

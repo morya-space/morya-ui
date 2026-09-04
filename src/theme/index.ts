@@ -30,7 +30,9 @@ export function getPreferredTheme(): ThemeName {
 
 export function applyTheme(
   theme: ThemeName,
-  target: HTMLElement = document.documentElement,
+  target?: HTMLElement,
 ) {
-  target.dataset.theme = theme;
+  const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
+  if (!el) return
+  el.dataset.theme = theme
 }

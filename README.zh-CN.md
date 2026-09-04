@@ -62,6 +62,10 @@
 
 每个组件自带 Markdown 文档与可交互 `vue preview` 示例，可在线浏览或本地启动文档站。
 
+### SSR 与元框架
+
+兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`@well-insight/nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://well-insight.github.io/well-insight-ui/docs/ssr)。
+
 ## 文档
 
 **https://well-insight.github.io/well-insight-ui/**
@@ -71,6 +75,7 @@
 | 快速上手 | [指南](https://well-insight.github.io/well-insight-ui/docs/quick-start) |
 | 主题 | [主题](https://well-insight.github.io/well-insight-ui/docs/theme) |
 | 全局配置 | [配置](https://well-insight.github.io/well-insight-ui/docs/config) |
+| SSR | [Nuxt / Astro / Vite SSR](https://well-insight.github.io/well-insight-ui/docs/ssr) |
 | 组件 | [目录](https://well-insight.github.io/well-insight-ui/components) |
 | 更新日志 | [版本](https://well-insight.github.io/well-insight-ui/changelog) |
 
@@ -119,6 +124,7 @@ createApp(App).use(createWellInsight({ locale: zhCN })).mount('#app')
 | 包 | 说明 |
 | --- | --- |
 | [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui) | 组件、样式、主题与语言工具 |
+| [`@well-insight/nuxt`](./packages/nuxt) | Nuxt 3 模块（样式、transpile、overlay 上下文） |
 | [`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp) | 可选 MCP 服务，供 AI 客户端检索文档 |
 
 ## 参与贡献

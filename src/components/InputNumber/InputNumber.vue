@@ -3,6 +3,7 @@ import type { InputNumberProps } from './types'
 import { computed, ref, useAttrs, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -28,7 +29,8 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const locale = useWiLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const inputId = computed(() => props.id ?? `wi-inputnumber-${Math.random().toString(36).slice(2, 8)}`)
+const autoInputId = useWiId('wi-inputnumber')
+const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputNumber', () => props.size)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const showClear = computed(() => props.clearable && props.modelValue != null && !props.disabled)

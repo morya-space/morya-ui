@@ -3,6 +3,7 @@ import type { SliderProps } from './types'
 import { computed, ref } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 
 const props = withDefaults(defineProps<SliderProps>(), {
@@ -20,7 +21,7 @@ const emit = defineEmits<{ (event: 'update:modelValue', value: number | number[]
 const locale = useWiLocale()
 const hovering = ref(false)
 const sizeClass = useConfiguredSize('Slider', () => props.size)
-const fieldId = computed(() => `wi-slider-${Math.random().toString(36).slice(2, 8)}`)
+const fieldId = useWiId('wi-slider')
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
 const singleValue = computed(() => {

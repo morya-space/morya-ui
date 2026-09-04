@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {RadioGroupProps, RadioValue} from './types';
 import { computed, provide } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import {   WI_RADIO_GROUP_KEY } from './types'
 
 const props = withDefaults(defineProps<RadioGroupProps>(), {
@@ -9,7 +10,7 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'update:modelValue', value: RadioValue): void }>()
-const fallbackName = `wi-radio-group-${Math.random().toString(36).slice(2, 8)}`
+const fallbackName = useWiId('wi-radio-group')
 
 function select(value: RadioValue) {
   if (props.disabled) return

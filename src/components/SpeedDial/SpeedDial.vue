@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { useWiId } from '../../shared/useWiId'
 import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
@@ -29,7 +30,7 @@ const root = ref<HTMLElement | null>(null)
 const button = ref<HTMLElement | null>(null)
 const list = ref<HTMLElement | null>(null)
 const listStyle = ref<Record<string, string>>({})
-const listId = `wi-speeddial-list-${Math.random().toString(36).slice(2, 8)}`
+const listId = useWiId('wi-speeddial-list')
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
