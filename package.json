@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.1.14",
   "packageManager": "pnpm@10.12.4",
-  "description": "Vue 3 component library for Well Insight.",
+  "description": "Open-source Vue 3 component library with design tokens, themes, and interactive docs.",
   "license": "MIT",
-  "homepage": "https://github.com/well-insight/well-insight-ui#readme",
+  "homepage": "https://well-insight.github.io/well-insight-ui/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/well-insight/well-insight-ui.git"

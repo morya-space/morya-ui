@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" role="img" aria-label="Well Insight UI">
+  <defs>
+    <linearGradient id="wi-bg" x1="24" y1="8" x2="104" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="wi-mark" x1="36" y1="36" x2="92" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".98"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".82"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#wi-bg)"/>
+  <path
+    fill="url(#wi-mark)"
+    d="M28 88 40.5 42h10.2l5.8 24.6L62.3 42h10l5.9 24.6L84 42h10.2L106 88h-11.4L83.6 56.8 77.8 88h-9.9l-5.8-31.2L56.3 88H44.9L39.4 56.8 28 88Z"
+  />
+</svg>

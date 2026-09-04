@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64" fill="none" role="img" aria-label="Well Insight UI">
+  <defs>
+    <linearGradient id="wi-bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="wi-mark" x1="14" y1="18" x2="50" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".98"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".82"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#wi-bg)"/>
+  <path
+    fill="url(#wi-mark)"
+    d="M12 44 17.5 24h5.1l2.9 12.3L28.4 24h5l2.9 12.3L39.2 24h5.1L50 44h-5.7L41.8 28.4 38.9 44h-4.9l-2.9-15.6L28.1 44h-5.7L19.7 28.4 12 44Z"
+  />
+  <text
+    x="76"
+    y="41"
+    fill="#0f172a"
+    font-family="Inter, ui-sans-serif, system-ui, sans-serif"
+    font-size="26"
+    font-weight="700"
+    letter-spacing="-0.04em"
+  >Well Insight</text>
+  <text
+    x="76"
+    y="58"
+    fill="#64748b"
+    font-family="IBM Plex Mono, ui-monospace, monospace"
+    font-size="11"
+    font-weight="600"
+    letter-spacing="0.18em"
+  >UI LIBRARY</text>
+</svg>
