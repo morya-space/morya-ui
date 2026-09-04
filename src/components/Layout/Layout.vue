@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from "vue";
 import type { LayoutExpose, LayoutProps } from "./types";
-import { computed, provide, useTemplateRef } from "vue";
+import { computed, provide, ref } from "vue";
 import { toCssLength } from "../../shared/responsive";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { WI_LAYOUT_KEY } from "./context";
@@ -28,7 +28,7 @@ provide(WI_LAYOUT_KEY, {
     },
 });
 
-const scrollEl = useTemplateRef<HTMLElement>("scrollEl");
+const scrollEl = ref<HTMLElement | null>(null);
 const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 
 const rootStyle = computed(() => ({

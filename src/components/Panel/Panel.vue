@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PanelProps } from './types'
-import { computed, useId } from 'vue'
+import { computed } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import { useWiLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
 import { useControllable } from '../../shared/useControllable'
@@ -19,7 +20,7 @@ const emit = defineEmits<{
 }>()
 
 const locale = useWiLocale()
-const contentId = useId()
+const contentId = useWiId()
 const sizeTone = computed(() => resolveSizeClass(props.size))
 
 function resolveControlledCollapsed() {

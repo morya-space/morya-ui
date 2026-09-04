@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TooltipProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, useId, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import { useWiConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
@@ -15,7 +16,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 
 const config = useWiConfig()
 const root = ref<HTMLElement | null>(null)
-const tipId = useId()
+const tipId = useWiId()
 const visible = ref(false)
 const tipStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))

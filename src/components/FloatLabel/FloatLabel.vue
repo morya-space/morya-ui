@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { FloatLabelProps } from './types'
-import { onMounted, ref, useId } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 
 const props = defineProps<FloatLabelProps>()
 
 const root = ref<HTMLElement | null>(null)
-const inputId = useId()
+const inputId = useWiId()
 const labelFor = ref<string | undefined>(undefined)
 
 onMounted(() => {

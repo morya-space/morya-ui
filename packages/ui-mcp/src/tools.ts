@@ -937,7 +937,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       library: catalog.library,
       environment: args.environment || 'vue3-vite',
       install: 'pnpm add @well-insight/ui',
-      peer: 'vue@^3.5.0',
+      peer: 'vue@^3.3.0',
       styles: "import '@well-insight/ui/styles.css'",
       guides: {
         introduction: pickMarkdown(intro),

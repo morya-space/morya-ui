@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TabItem, TabsProps } from './types'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import { useWiLocale } from '../../locale'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -17,7 +18,7 @@ const emit = defineEmits<{
 }>()
 
 const locale = useWiLocale()
-const tabsUid = useId()
+const tabsUid = useWiId()
 const scroller = ref<HTMLElement | null>(null)
 const overflowed = ref(false)
 const activeValue = computed(() => props.modelValue ?? props.tabs.find((tab) => !tab.disabled)?.value)
