@@ -6,6 +6,7 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
 import MobileSidebarShell from '../components/MobileSidebarShell.vue'
 import { guideDocExists, listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
+import { SITE_LOGO_URL } from '../config/site'
 import { useDocsI18n } from '../i18n'
 
 const route = useRoute()
@@ -43,6 +44,16 @@ watch([activeSlug, lang], async () => {
       scroll-class="docs-scroll"
       body-class="docs-sidebar__body"
     >
+          <RouterLink class="docs-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
+            <img
+              class="docs-brand__logo"
+              :src="SITE_LOGO_URL"
+              width="24"
+              height="24"
+              alt=""
+            />
+            <span>Well Insight UI</span>
+          </RouterLink>
           <p class="docs-kicker">
             DOCUMENTATION
           </p>
@@ -128,7 +139,24 @@ watch([activeSlug, lang], async () => {
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.14em;
-  margin: 0 0 0.55rem;
+  margin: 0.85rem 0 0.55rem;
+}
+
+.docs-brand {
+  align-items: center;
+  color: var(--wi-color-text);
+  display: inline-flex;
+  font-family: var(--docs-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.docs-brand__logo {
+  border-radius: 0.4rem;
+  display: block;
 }
 
 .docs-sidebar__title {

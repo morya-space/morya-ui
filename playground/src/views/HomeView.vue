@@ -1,40 +1,64 @@
 <script setup lang="ts">
 import { WiButton, WiScrollbar } from '@well-insight/ui'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import {
+  SITE_GITHUB_URL,
+  SITE_INSTALL_CMD,
+  SITE_LOGO_URL,
+  SITE_NAME,
+  SITE_NPM_URL,
+} from '../config/site'
+import { copyText } from '../utils/copyText'
+import SiteFooter from '../components/SiteFooter.vue'
 import { useDocsI18n } from '../i18n'
 
 const { t } = useDocsI18n()
+const copied = ref(false)
 
 const pillars = computed(() => [
   {
-    label: 'System',
-    title: t.value.pillarSystemTitle,
-    body: t.value.pillarSystemBody,
+    label: t.value.pillarCompleteLabel,
+    title: t.value.pillarCompleteTitle,
+    body: t.value.pillarCompleteBody,
   },
   {
-    label: 'Craft',
-    title: t.value.pillarCraftTitle,
-    body: t.value.pillarCraftBody,
+    label: t.value.pillarThemeLabel,
+    title: t.value.pillarThemeTitle,
+    body: t.value.pillarThemeBody,
   },
   {
-    label: 'Control',
-    title: t.value.pillarControlTitle,
-    body: t.value.pillarControlBody,
+    label: t.value.pillarTypeScriptLabel,
+    title: t.value.pillarTypeScriptTitle,
+    body: t.value.pillarTypeScriptBody,
+  },
+  {
+    label: t.value.pillarDocsLabel,
+    title: t.value.pillarDocsTitle,
+    body: t.value.pillarDocsBody,
   },
 ])
+
+async function copyInstall() {
+  const ok = await copyText(SITE_INSTALL_CMD)
+  if (!ok) return
+  copied.value = true
+  window.setTimeout(() => {
+    copied.value = false
+  }, 1600)
+}
 </script>
 
 <template>
   <WiScrollbar class="home-scroll">
     <div class="home-page">
       <section class="home-hero">
-        <img class="home-logo" :src="`${import.meta.env.BASE_URL}logo.svg`" width="88" height="88" alt="" />
+        <img class="home-logo" :src="SITE_LOGO_URL" width="96" height="96" alt="" />
         <p class="home-kicker">
-          OPEN SOURCE · VUE 3 · DESIGN TOKENS
+          {{ t.homeKicker }}
         </p>
         <h1 class="home-brand">
-          Well Insight UI
+          {{ SITE_NAME }}
         </h1>
         <p class="home-headline">
           {{ t.headline }}
@@ -49,9 +73,9 @@ const pillars = computed(() => [
           <RouterLink :to="{ name: 'components' }">
             <WiButton :label="t.browse" outlined />
           </RouterLink>
-          <RouterLink :to="{ name: 'changelog' }">
-            <WiButton :label="t.changelog" text />
-          </RouterLink>
+          <a :href="SITE_GITHUB_URL" target="_blank" rel="noopener noreferrer">
+            <WiButton :label="t.viewGithub" outlined />
+          </a>
         </div>
         <div class="home-meta" :aria-label="t.techTags">
           <span>Vue 3.5</span>
@@ -59,6 +83,22 @@ const pillars = computed(() => [
           <span>TypeScript</span>
           <span>MIT</span>
         </div>
+      </section>
+
+      <section class="home-install" :aria-label="t.installTitle">
+        <div class="home-install__head">
+          <h2>{{ t.installTitle }}</h2>
+          <p>{{ t.installHint }}</p>
+        </div>
+        <div class="home-install__cmd">
+          <code>{{ SITE_INSTALL_CMD }}</code>
+          <button class="home-install__copy" type="button" @click="copyInstall">
+            {{ copied ? t.copied : t.copy }}
+          </button>
+        </div>
+        <a class="home-install__npm" :href="SITE_NPM_URL" target="_blank" rel="noopener noreferrer">
+          {{ t.viewNpm }}
+        </a>
       </section>
 
       <section class="home-pillars" :aria-label="t.capabilities">
@@ -84,8 +124,13 @@ const pillars = computed(() => [
           <RouterLink class="home-text-link" :to="{ name: 'components' }">
             {{ t.allComponents }}
           </RouterLink>
+          <RouterLink class="home-text-link" :to="{ name: 'changelog' }">
+            {{ t.changelog }}
+          </RouterLink>
         </div>
       </section>
+
+      <SiteFooter />
     </div>
   </WiScrollbar>
 </template>
@@ -100,7 +145,7 @@ const pillars = computed(() => [
 .home-page {
   margin: 0 auto;
   max-width: 68rem;
-  padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.25rem, 4vw, 3rem) 4.5rem;
+  padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.25rem, 4vw, 3rem) 3rem;
   width: 100%;
 }
 
@@ -113,9 +158,9 @@ const pillars = computed(() => [
 .home-logo {
   animation: home-rise 0.7s var(--wi-motion-ease) both;
   display: block;
-  height: clamp(4.5rem, 12vw, 5.5rem);
+  height: clamp(4.5rem, 12vw, 6rem);
   margin: 0 0 1.25rem;
-  width: clamp(4.5rem, 12vw, 5.5rem);
+  width: clamp(4.5rem, 12vw, 6rem);
 }
 
 .home-kicker {
@@ -137,7 +182,7 @@ const pillars = computed(() => [
   background-clip: text;
   color: transparent;
   font-family: var(--docs-display);
-  font-size: clamp(3.2rem, 9vw, 6.4rem);
+  font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.92;
@@ -190,11 +235,77 @@ const pillars = computed(() => [
   padding: 0.35rem 0.7rem;
 }
 
+.home-install {
+  animation: home-rise 0.75s var(--wi-motion-ease) both;
+  background: color-mix(in srgb, var(--wi-color-surface) 72%, transparent);
+  border: 1px solid var(--docs-edge);
+  border-radius: 1.1rem;
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  padding: 1.35rem 1.25rem 1.2rem;
+}
+
+.home-install__head h2 {
+  font-family: var(--docs-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.35rem;
+}
+
+.home-install__head p {
+  color: var(--wi-color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+}
+
+.home-install__cmd {
+  align-items: center;
+  background: color-mix(in srgb, var(--wi-color-text) 4%, var(--wi-color-surface));
+  border: 1px solid var(--docs-edge);
+  border-radius: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 0.75rem 0.85rem;
+}
+
+.home-install__cmd code {
+  color: var(--wi-color-text);
+  font-family: var(--docs-mono);
+  font-size: 0.84rem;
+}
+
+.home-install__copy {
+  background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
+  border: 1px solid color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
+  border-radius: 0.55rem;
+  color: var(--wi-color-primary);
+  cursor: pointer;
+  font-family: var(--docs-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+}
+
+.home-install__npm {
+  color: var(--wi-color-primary);
+  display: inline-block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-top: 0.85rem;
+  text-decoration: none;
+}
+
+.home-install__npm:hover {
+  text-decoration: underline;
+}
+
 .home-pillars {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: clamp(3rem, 8vw, 5rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(2rem, 5vw, 3rem);
 }
 
 .home-pillar {
@@ -208,11 +319,15 @@ const pillars = computed(() => [
 }
 
 .home-pillar:nth-child(2) {
-  animation-delay: 0.08s;
+  animation-delay: 0.06s;
 }
 
 .home-pillar:nth-child(3) {
-  animation-delay: 0.16s;
+  animation-delay: 0.12s;
+}
+
+.home-pillar:nth-child(4) {
+  animation-delay: 0.18s;
 }
 
 .home-pillar::before {
@@ -236,7 +351,7 @@ const pillars = computed(() => [
 
 .home-pillar h2 {
   font-family: var(--docs-display);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   margin: 0.7rem 0 0.55rem;
@@ -256,8 +371,9 @@ const pillars = computed(() => [
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: space-between;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
   padding-top: 2rem;
+  padding-bottom: 0.5rem;
 }
 
 .home-cta h2 {
@@ -304,6 +420,7 @@ const pillars = computed(() => [
 
 @media (prefers-reduced-motion: reduce) {
   .home-hero,
+  .home-install,
   .home-pillar {
     animation: none;
   }

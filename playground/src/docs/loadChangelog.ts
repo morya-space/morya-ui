@@ -21,8 +21,39 @@ export interface ChangelogDocument {
   releases: ChangelogRelease[]
 }
 
+const NOISE_ITEM =
+  /^(update CHANGELOG|update check-docs-drift|enhance admin management|add admin management)/i
+
+function normalizeVersion(version: string) {
+  return version
+    .replace(/^v/i, '')
+    .replace(/（未发布）/g, '')
+    .replace(/\(Unreleased\)/gi, '')
+    .trim()
+}
+
 function stripItemPrefix(line: string) {
   return line.replace(/^[-*+]\s+/, '').replace(/^\d+\.\s+/, '').trim()
+}
+
+function isNoiseItem(item: string) {
+  return NOISE_ITEM.test(item.trim())
+}
+
+function mergeSections(a: ChangelogSection[], b: ChangelogSection[]): ChangelogSection[] {
+  const map = new Map<string, Set<string>>()
+
+  for (const section of [...a, ...b]) {
+    const bucket = map.get(section.heading) ?? new Set<string>()
+    for (const item of section.items) {
+      if (!isNoiseItem(item)) bucket.add(item)
+    }
+    map.set(section.heading, bucket)
+  }
+
+  return [...map.entries()]
+    .map(([heading, items]) => ({ heading, items: [...items] }))
+    .filter((section) => section.items.length > 0)
 }
 
 function parseSections(body: string): ChangelogSection[] {
@@ -40,10 +71,10 @@ function parseSections(body: string): ChangelogSection[] {
 
     if (!current) continue
     if (/^[-*+]\s+/.test(line.trim()) || /^\d+\.\s+/.test(line.trim())) {
-      current.items.push(stripItemPrefix(line.trim()))
+      const item = stripItemPrefix(line.trim())
+      if (!isNoiseItem(item)) current.items.push(item)
     } else if (line.trim() && current.items.length === 0) {
-      // Paragraph under a section (e.g. coverage blurb) → keep as a soft item
-      current.items.push(line.trim())
+      if (!isNoiseItem(line.trim())) current.items.push(line.trim())
     } else if (line.trim() && current.items.length > 0 && !line.startsWith('#')) {
       const lastIndex = current.items.length - 1
       const last = current.items[lastIndex]
@@ -51,7 +82,31 @@ function parseSections(body: string): ChangelogSection[] {
     }
   }
 
-  return sections.filter((section) => section.items.length > 0 || section.heading)
+  return sections.filter((section) => section.items.length > 0)
+}
+
+function upsertRelease(releases: ChangelogRelease[], release: ChangelogRelease) {
+  const version = normalizeVersion(release.version)
+  const normalized = { ...release, version }
+  const index = releases.findIndex((item) => normalizeVersion(item.version) === version)
+
+  if (index === -1) {
+    releases.push(normalized)
+    return
+  }
+
+  const existing = releases[index]!
+  const mergedSections = mergeSections(existing.sections, normalized.sections)
+  const body = mergedSections.length > normalized.sections.length
+    || normalized.body.length > existing.body.length
+    ? normalized.body || existing.body
+    : existing.body || normalized.body
+
+  releases[index] = {
+    version,
+    body,
+    sections: mergedSections.length > 0 ? mergedSections : parseSections(body),
+  }
 }
 
 export function loadChangelog(lang: DocsLang = 'zh-CN'): ChangelogDocument {
@@ -68,7 +123,7 @@ export function loadChangelog(lang: DocsLang = 'zh-CN'): ChangelogDocument {
   const flush = () => {
     if (!currentVersionHeading) return
     const body = bodyLines.join('\n').trim()
-    releases.push({
+    upsertRelease(releases, {
       version: currentVersionHeading,
       body,
       sections: parseSections(body),
@@ -86,7 +141,7 @@ export function loadChangelog(lang: DocsLang = 'zh-CN'): ChangelogDocument {
     const h2 = line.match(/^##\s+(.+)$/)
     if (h2?.[1]) {
       flush()
-      currentVersionHeading = h2[1].trim().replace(/^v/i, '')
+      currentVersionHeading = h2[1].trim()
       continue
     }
 

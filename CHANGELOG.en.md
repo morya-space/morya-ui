@@ -2,29 +2,6 @@
 
 ## 0.1.14
 
-### Features
-
-- enhance admin management project with new components and feedback system
-- enhance ConfirmDialog and Accordion components
-- add design-system guardrails and shared primitives
-- add admin management project with initial setup and configuration
-- enhance Table component with scrollbar and styling improvements
-- implement dynamic icon sizing across components
-- enhance resource management and documentation in MCP
-
-### Fixes
-
-- fix api with component
-
-### Changes
-
-- update check-docs-drift script and package.json
-- update CHANGELOG for version 0.1.14
-- update Table component to use columns and rows structure
-- update Table component structure and improve functionality
-
-## 0.1.14 (Unreleased)
-
 ### Breaking Changes / Deprecated Aliases
 
 - **Severity**: canonical values are `success` / `info` / `warning` / `danger`; `warn` and `error` remain accepted but are `@deprecated` (Button, Tag, Message, Toast, ProgressBar, Badge, Chip, Timeline, etc.).
@@ -44,11 +21,12 @@
 - **Form**: field feedback baseline, `useFieldFeedback`; Dialog / Drawer / ConfirmDialog prop alignment.
 - **Theme tokens**: border width, disabled opacity, motion (spin/skeleton/pulse/scrollbar), reduced motion (`prefers-reduced-motion` and `data-wi-motion`); layout/tree/timeline/splitter tokens.
 - **Grid**: `gap` resolves design tokens via `resolveGapCSSValue`.
+- **ConfirmDialog / Accordion** enhancements; **Table** scrollbar and styling; dynamic icon sizing across components.
 
 ### Fixes
 
 - Checkbox / Radio dark selected states; ToggleButton horizontal padding; Dock `position`; Stepper state styles; Chip severity.
-- PickList / OrderList styles and button disabled states; InputNumber draft state; Table dead code and sorting; TieredMenu popup placement.
+- PickList / OrderList styles and button disabled states; InputNumber draft state; Table sorting and structure; TieredMenu popup placement.
 - CascadeSelect / TreeSelect keyboard; SplitButton / SpeedDial overlays; Rating / Knob slider semantics; DatePicker calendar keyboard.
 - Inplace / ConfirmPopup behavior; DataView / Terminal semi-controlled fixes; InputColor template corruption fix.
 
@@ -65,7 +43,8 @@
 
 ### Documentation
 
-- `check:docs` report mode: **262** doc–implementation drift items (`audits/docs-drift-report.md`), pending batch cleanup; `check:tokens` and `check:colors` pass.
+- Docs site deployed to GitHub Pages; open-source branding and README refresh.
+- MCP catalog validation and example coverage; `check:tokens` and `check:colors` pass.
 
 ## 0.1.13
 
