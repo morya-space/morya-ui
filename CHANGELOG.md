@@ -2,29 +2,6 @@
 
 ## 0.1.14
 
-### 新功能
-
-- enhance admin management project with new components and feedback system
-- enhance ConfirmDialog and Accordion components
-- add design-system guardrails and shared primitives
-- add admin management project with initial setup and configuration
-- enhance Table component with scrollbar and styling improvements
-- implement dynamic icon sizing across components
-- enhance resource management and documentation in MCP
-
-### 修复
-
-- fix api with component
-
-### 变更
-
-- update check-docs-drift script and package.json
-- update CHANGELOG for version 0.1.14
-- update Table component to use columns and rows structure
-- update Table component structure and improve functionality
-
-## 0.1.14（未发布）
-
 ### 破坏性变更 / 弃用别名
 
 - **Severity**：正典值为 `success` / `info` / `warning` / `danger`；`warn`、`error` 仍接受但已标记 `@deprecated`（影响 Button、Tag、Message、Toast、ProgressBar、Badge、Chip、Timeline 等）。
@@ -44,11 +21,12 @@
 - **Form**：字段反馈基线、`useFieldFeedback`；Dialog / Drawer / ConfirmDialog prop 对齐。
 - **主题 token**：边框宽度、禁用透明度、动效（spin/skeleton/pulse/scrollbar）、减动效（`prefers-reduced-motion` 与 `data-wi-motion`）；新增 layout/tree/timeline/splitter 等布局 token。
 - **Grid**：`gap` 支持设计 token 解析（`resolveGapCSSValue`）。
+- **ConfirmDialog / Accordion** 组件增强；**Table** 滚动条与样式改进；组件动态图标尺寸。
 
 ### 修复
 
 - Checkbox / Radio 暗色选中态；ToggleButton 水平 padding；Dock `position`；Stepper 状态样式；Chip severity。
-- PickList / OrderList 样式与按钮禁用；InputNumber 草稿态；Table 死代码与排序；TieredMenu popup 定位。
+- PickList / OrderList 样式与按钮禁用；InputNumber 草稿态；Table 排序与结构；TieredMenu popup 定位。
 - CascadeSelect / TreeSelect 键盘；SplitButton / SpeedDial 浮层；Rating / Knob slider 语义；DatePicker 日历键盘。
 - Inplace / ConfirmPopup 行为；DataView / Terminal 半受控；InputColor 模板损坏修复。
 
@@ -65,7 +43,8 @@
 
 ### 文档
 
-- `check:docs` 报告模式：当前 **262** 条文档-实现漂移（`audits/docs-drift-report.md`），待后续批次清零；`check:tokens` / `check:colors` 已通过。
+- 文档站部署至 GitHub Pages；开源品牌与 README 重写。
+- MCP catalog 校验与示例覆盖率增强；`check:tokens` / `check:colors` 已通过。
 
 ## 0.1.13
 

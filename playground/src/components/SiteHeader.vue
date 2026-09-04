@@ -2,11 +2,16 @@
 import { useTheme } from '@well-insight/ui'
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import {
+  SITE_GITHUB_URL,
+  SITE_LOGO_URL,
+  SITE_NAME,
+  SITE_NPM_URL,
+} from '../config/site'
 import { getUiPackageMeta } from '../docs/packageMeta'
 import SiteSearch from './SiteSearch.vue'
 import { useDocsI18n } from '../i18n'
 
-const GITHUB_REPO = 'https://github.com/well-insight/well-insight-ui'
 const uiMeta = getUiPackageMeta()
 
 const route = useRoute()
@@ -26,10 +31,10 @@ const activeSection = computed(() => {
 <template>
   <header class="site-header">
     <RouterLink class="site-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-      <img class="site-brand__logo" :src="`${import.meta.env.BASE_URL}logo.svg`" width="32" height="32" alt="" />
+      <img class="site-brand__logo" :src="SITE_LOGO_URL" width="32" height="32" alt="" />
       <span class="site-brand__text">
-        <span class="site-brand__name">Well Insight</span>
-        <span class="site-brand__version">UI · v{{ uiMeta.version }}</span>
+        <span class="site-brand__name">{{ SITE_NAME }}</span>
+        <span class="site-brand__version">v{{ uiMeta.version }}</span>
       </span>
     </RouterLink>
 
@@ -97,7 +102,21 @@ const activeSection = computed(() => {
       </button>
       <a
         class="site-icon-btn"
-        :href="GITHUB_REPO"
+        :href="SITE_NPM_URL"
+        target="_blank"
+        rel="noopener noreferrer"
+        :aria-label="t.openNpm"
+        :title="t.npmPackage"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
+          <path
+            d="M1.753 8.005 0 8v14h24V8h-1.752l-1.49 4.265-1.444-4.265H6.686l-1.444 4.265L3.753 8.005ZM16.5 11a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm4.5 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+          />
+        </svg>
+      </a>
+      <a
+        class="site-icon-btn"
+        :href="SITE_GITHUB_URL"
         target="_blank"
         rel="noopener noreferrer"
         :aria-label="t.openGithub"
@@ -157,7 +176,7 @@ const activeSection = computed(() => {
 
 .site-brand__name {
   font-family: var(--docs-display);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: -0.03em;
 }

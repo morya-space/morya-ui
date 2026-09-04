@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WiScrollbar, WiTag } from '@well-insight/ui'
+import { WiScrollbar } from '@well-insight/ui'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loadChangelog } from '../docs/loadChangelog'
@@ -45,7 +45,6 @@ function selectVersion(version: string) {
           </h1>
           <p class="changelog-sidebar__meta">
             <span>{{ doc.packageName }}</span>
-            <WiTag :value="`v${doc.currentVersion}`" severity="info" />
           </p>
           <nav class="changelog-nav" :aria-label="t.changelogHistory">
             <button
@@ -69,13 +68,7 @@ function selectVersion(version: string) {
         <div class="changelog-main__body">
           <template v-if="activeRelease">
             <header class="changelog-hero">
-              <p class="changelog-kicker">
-                CHANGELOG
-              </p>
               <h2>v{{ activeRelease.version }}</h2>
-              <p v-if="activeRelease.version === doc.currentVersion" class="changelog-hero__hint">
-                {{ t.currentHint }}
-              </p>
             </header>
 
             <section
@@ -213,25 +206,15 @@ function selectVersion(version: string) {
 }
 
 .changelog-hero {
-  border-bottom: 1px solid var(--docs-edge);
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.15rem;
+  margin-bottom: 1.25rem;
 }
 
 .changelog-hero h2 {
   font-family: var(--docs-display);
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-size: clamp(1.45rem, 2.8vw, 1.85rem);
   font-weight: 750;
   letter-spacing: -0.04em;
-  margin: 0.2rem 0 0.55rem;
-}
-
-.changelog-hero__hint {
-  color: var(--wi-color-text-muted);
-  font-size: 0.88rem;
-  line-height: 1.55;
   margin: 0;
-  max-width: 36rem;
 }
 
 .changelog-section {

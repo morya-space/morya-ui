@@ -6,6 +6,8 @@ description: Install the package, import styles, and render the first component.
 
 # Quick start
 
+> Live docs: [well-insight.github.io/well-insight-ui](https://well-insight.github.io/well-insight-ui/) · Source: [GitHub](https://github.com/well-insight/well-insight-ui) · npm: [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui)
+
 ## Install
 
 **In an application (npm / pnpm / yarn):**

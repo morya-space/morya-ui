@@ -6,6 +6,8 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 
 # 快速上手
 
+> 在线文档：[well-insight.github.io/well-insight-ui](https://well-insight.github.io/well-insight-ui/) · 源码：[GitHub](https://github.com/well-insight/well-insight-ui) · npm：[`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui)
+
 ## 安装
 
 **在应用项目中（npm / pnpm / yarn）：**

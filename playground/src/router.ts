@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { SITE_NAME } from './config/site'
 import { listDocumentedComponentNames } from './docs/loadComponentDocs'
 
 const LEGACY_COMPONENT_NAMES = new Set(
@@ -60,6 +61,30 @@ const router = createRouter({
     }
     return { top: 0 }
   },
+})
+
+router.afterEach((to) => {
+  if (typeof document === 'undefined') return
+
+  const suffix = ` · ${SITE_NAME}`
+  if (to.name === 'home') {
+    document.title = SITE_NAME
+    return
+  }
+  if (to.name === 'docs') {
+    document.title = `Docs${suffix}`
+    return
+  }
+  if (to.name === 'components' || to.name === 'component-doc') {
+    const component = typeof to.params.component === 'string' ? to.params.component : ''
+    document.title = component ? `${component}${suffix}` : `Components${suffix}`
+    return
+  }
+  if (to.name === 'changelog') {
+    document.title = `Changelog${suffix}`
+    return
+  }
+  document.title = SITE_NAME
 })
 
 export default router
