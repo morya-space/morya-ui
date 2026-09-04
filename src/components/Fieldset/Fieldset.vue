@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FieldsetProps } from './types'
-import { useId } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import { useControllable } from '../../shared/useControllable'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
 }>()
 
-const contentId = useId()
+const contentId = useWiId()
 
 const { value: isCollapsed, setValue: setCollapsed } = useControllable(
   {

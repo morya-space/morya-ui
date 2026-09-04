@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 import type { LayoutContentProps, LayoutExpose } from "./types";
-import { computed, useTemplateRef } from "vue";
+import { computed, ref } from "vue";
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 
@@ -16,7 +16,7 @@ const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
 
-const scrollEl = useTemplateRef<HTMLElement>("scrollEl");
+const scrollEl = ref<HTMLElement | null>(null);
 const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 
 const rootStyle = useLayoutRegionStyle(() => ({

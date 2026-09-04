@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from "vue";
 import type { LayoutExpose, LayoutSiderProps } from "./types";
-import { computed, inject, useTemplateRef } from "vue";
+import { computed, inject, ref } from "vue";
 import { useWiLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
 import WiIcon from "../Icon/Icon.vue";
@@ -33,7 +33,7 @@ const emit = defineEmits<{
 
 const locale = useWiLocale();
 const layout = inject(WI_LAYOUT_KEY, null);
-const scrollEl = useTemplateRef<HTMLElement>("scrollEl");
+const scrollEl = ref<HTMLElement | null>(null);
 const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 const { mergedCollapsed, toggle } = useLayoutSiderCollapse(props, emit);
 

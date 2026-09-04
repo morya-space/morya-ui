@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
-import { computed, inject, onBeforeUnmount, useId, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, watch } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import { useWiLocale } from '../../locale'
 import { WI_FORM_ERRORS_KEY, WI_FORM_KEY } from './context'
 import {
@@ -18,7 +19,7 @@ const props = withDefaults(defineProps<FormItemProps>(), {
 const form = inject(WI_FORM_KEY, null)
 const formErrors = inject(WI_FORM_ERRORS_KEY, null)
 const locale = useWiLocale()
-const autoId = useId()
+const autoId = useWiId()
 
 const labelPosition = computed(() => props.labelPosition ?? form?.value.labelPosition ?? 'top')
 const labelAlign = computed(() => props.labelAlign ?? form?.value.labelAlign ?? 'left')

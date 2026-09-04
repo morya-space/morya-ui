@@ -16,7 +16,7 @@ description: Install the package, import styles, and render the first component.
 pnpm add @well-insight/ui
 ```
 
-Vue 3.5+ is required. Theme tokens, color-mode switching, and motion APIs are all included in `@well-insight/ui`.
+Vue 3.3+ is required (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `@well-insight/ui`.
 
 After cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).
 

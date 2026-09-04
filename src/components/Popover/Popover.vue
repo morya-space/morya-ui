@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PopoverProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, useId, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useWiId } from '../../shared/useWiId'
 import { useWiConfig } from "../../shared/config";
 import {
     isOverlayTeleported,
@@ -24,7 +25,7 @@ const emit = defineEmits<{
 }>();
 
 const config = useWiConfig()
-const panelId = useId()
+const panelId = useWiId()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null);
 const panel = ref<HTMLElement | null>(null);
