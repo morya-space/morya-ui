@@ -1,7 +1,7 @@
 {
   "name": "@wex-design/nuxt",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Nuxt 3 module for @wex-design/ui — styles, transpile, and client overlay context.",
   "license": "MIT",
   "homepage": "https://github.com/wex-design/wex-design-ui/tree/main/packages/nuxt#readme",

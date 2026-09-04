@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-04T08:56:58.900Z",
+  "generatedAt": "2026-09-04T09:01:19.290Z",
   "library": {
     "name": "@wex-design/ui",
-    "version": "0.0.1"
+    "version": "0.1.1"
   },
   "mcp": {
     "name": "@wex-design/ui-mcp",
-    "version": "0.0.1"
+    "version": "0.1.1"
   },
   "components": [
     {
