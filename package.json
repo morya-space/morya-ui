@@ -685,12 +685,9 @@
     "mcp:audit-examples": "pnpm --filter @well-insight/ui-mcp audit-example-coverage",
     "mcp:build": "pnpm --filter @well-insight/ui-mcp build",
     "mcp:start": "pnpm --filter @well-insight/ui-mcp start",
-    "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src apps/admin-manage-project/src ai-design-config/docs/golden-pages ai-design-config/src/examples",
+    "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src ai-design-config/docs/golden-pages ai-design-config/src/examples",
     "check:tokens": "node ai-design-config/scripts/check-undefined-tokens.mjs src",
-    "check:docs": "node ai-design-config/scripts/check-docs-drift.mjs",
-    "dev:admin": "pnpm --filter @well-insight/admin-manage-project dev",
-    "build:admin": "pnpm --filter @well-insight/admin-manage-project build",
-    "typecheck:admin": "pnpm --filter @well-insight/admin-manage-project typecheck"
+    "check:docs": "node ai-design-config/scripts/check-docs-drift.mjs"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
