@@ -10,6 +10,7 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { resolveIconSizeFromClass } from '../../shared/types'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -40,7 +41,8 @@ const defaults = useComponentDefaults('InputPassword')
 const locale = useWiLocale()
 const unmasked = ref(false)
 const inputElement = ref<HTMLInputElement | null>(null)
-const inputId = computed(() => props.id ?? `wi-password-${Math.random().toString(36).slice(2, 8)}`)
+const autoInputId = useWiId('wi-password')
+const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputPassword', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const resolvedVariant = useConfiguredVariant('InputPassword', () => props.variant)

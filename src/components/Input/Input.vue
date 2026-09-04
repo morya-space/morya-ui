@@ -3,6 +3,7 @@ import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -28,7 +29,8 @@ const slots = useSlots()
 const defaults = useComponentDefaults('Input')
 const locale = useWiLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const inputId = computed(() => props.id ?? `wi-input-${Math.random().toString(36).slice(2, 8)}`)
+const autoInputId = useWiId('wi-input')
+const inputId = computed(() => props.id ?? autoInputId)
 const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Input', () => props.size)
 const resolvedVariant = useConfiguredVariant('Input', () => props.variant)

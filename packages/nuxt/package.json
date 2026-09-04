@@ -1,0 +1,43 @@
+{
+  "name": "@well-insight/nuxt",
+  "type": "module",
+  "version": "0.1.14",
+  "description": "Nuxt 3 module for @well-insight/ui — styles, transpile, and client overlay context.",
+  "license": "MIT",
+  "homepage": "https://github.com/well-insight/well-insight-ui/tree/main/packages/nuxt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/well-insight/well-insight-ui.git",
+    "directory": "packages/nuxt"
+  },
+  "bugs": {
+    "url": "https://github.com/well-insight/well-insight-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/module.d.ts",
+      "import": "./dist/module.mjs"
+    }
+  },
+  "main": "./dist/module.mjs",
+  "types": "./dist/module.d.ts",
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node ./scripts/copy-runtime.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.16.0"
+  },
+  "peerDependencies": {
+    "@well-insight/ui": "^0.1.14",
+    "nuxt": "^3.10.0"
+  }
+}

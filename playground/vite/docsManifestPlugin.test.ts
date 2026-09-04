@@ -23,6 +23,7 @@ describe('docsManifestPlugin', () => {
       'introduction',
       'mcp',
       'quick-start',
+      'ssr',
       'theme',
     ])
     expect(manifest.introduction['zh-CN'].title).toBe('介绍')

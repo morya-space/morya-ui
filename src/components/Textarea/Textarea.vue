@@ -8,6 +8,7 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import WiIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -34,7 +35,8 @@ const attrs = useAttrs()
 const defaults = useComponentDefaults('Textarea')
 const locale = useWiLocale()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
-const textareaId = computed(() => props.id ?? `wi-textarea-${Math.random().toString(36).slice(2, 8)}`)
+const autoTextareaId = useWiId('wi-textarea')
+const textareaId = computed(() => props.id ?? autoTextareaId)
 const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Textarea', () => props.size)
 const resolvedVariant = useConfiguredVariant('Textarea', () => props.variant)

@@ -3,6 +3,7 @@ import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from '.
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WiIcon from '../Icon/Icon.vue'
@@ -50,7 +51,8 @@ const filterQuery = ref('')
 const highlightedIndex = ref(-1)
 const menuStyle = ref<Record<string, string>>({})
 const createdOptions = ref<SelectOption[]>([])
-const selectId = computed(() => props.id ?? `wi-select-${Math.random().toString(36).slice(2, 8)}`)
+const autoSelectId = useWiId('wi-select')
+const selectId = computed(() => props.id ?? autoSelectId)
 
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
 const resolvedMultiple = computed(() => props.multiple ?? (defaults.value.multiple as boolean | undefined) ?? false)

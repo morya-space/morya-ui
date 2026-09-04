@@ -3,6 +3,7 @@ import type { RatingProps } from './types'
 import { computed } from 'vue'
 import { formatLocale, useWiLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import WiIcon from '../Icon/Icon.vue'
 
@@ -20,7 +21,7 @@ const props = withDefaults(defineProps<RatingProps>(), {
 const emit = defineEmits<{ (event: 'update:modelValue', value: number): void }>()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('Rating', () => props.size)
-const fieldId = computed(() => `wi-rating-${Math.random().toString(36).slice(2, 8)}`)
+const fieldId = useWiId('wi-rating')
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
 const canClear = computed(() => props.allowClear ?? props.cancel ?? true)

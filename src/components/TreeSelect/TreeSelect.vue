@@ -4,6 +4,7 @@ import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
@@ -45,7 +46,8 @@ const slots = useSlots()
 const config = useWiConfig()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
-const fieldId = computed(() => props.id ?? `wi-treeselect-${Math.random().toString(36).slice(2, 8)}`)
+const autoFieldId = useWiId('wi-treeselect')
+const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const open = ref(false)
 const query = ref('')
@@ -127,7 +129,7 @@ const flatNodes = computed<FlatTreeNode[]>(() => {
   return list
 })
 
-const panelId = `wi-treeselect-panel-${Math.random().toString(36).slice(2, 8)}`
+const panelId = useWiId('wi-treeselect-panel')
 
 const keyboard = useMenuKeyboard({
   itemCount: () => flatNodes.value.length,

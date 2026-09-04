@@ -3,6 +3,7 @@ import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } fr
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useWiLocale } from '../../locale'
 import { useConfiguredSize, useWiConfig } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
@@ -29,7 +30,8 @@ const emit = defineEmits<{
 const config = useWiConfig()
 const locale = useWiLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
-const fieldId = computed(() => props.id ?? `wi-autocomplete-${Math.random().toString(36).slice(2, 8)}`)
+const autoFieldId = useWiId('wi-autocomplete')
+const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
 const open = ref(false)

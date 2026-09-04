@@ -41,7 +41,7 @@ description: What Well Insight UI is, who it is for, and how to get started.
 pnpm add @well-insight/ui
 ```
 
-Requires Vue 3.3+ (3.5+ recommended). See [Quick start](/docs/quick-start).
+Requires Vue 3.3+ (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](/docs/ssr). See [Quick start](/docs/quick-start).
 
 ## Next steps
 

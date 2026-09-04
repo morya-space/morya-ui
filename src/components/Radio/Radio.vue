@@ -2,6 +2,7 @@
 import type {RadioProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useWiId } from '../../shared/useWiId'
 import {  WI_RADIO_GROUP_KEY } from './types'
 
 defineOptions({ inheritAttrs: false })
@@ -14,7 +15,8 @@ const props = withDefaults(defineProps<RadioProps>(), {
 const emit = defineEmits<{ (event: 'update:modelValue', value: string | number | boolean): void }>()
 const attrs = useAttrs()
 const group = inject(WI_RADIO_GROUP_KEY, null)
-const inputId = computed(() => props.id ?? `wi-radio-${Math.random().toString(36).slice(2, 8)}`)
+const autoInputId = useWiId('wi-radio')
+const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('Radio', () => props.size ?? group?.size.value)
 const isDisabled = computed(() => props.disabled || Boolean(group?.disabled.value))
 const isInvalid = computed(() => props.invalid || Boolean(group?.invalid.value))

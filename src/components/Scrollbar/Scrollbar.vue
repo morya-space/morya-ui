@@ -16,6 +16,7 @@ import {
   watch
 } from 'vue'
 import { scrollbarContextKey } from './constants'
+import { useWiId } from '../../shared/useWiId'
 import Thumb from './Thumb.vue'
 import { addUnit, GAP, isNumber, isObject } from './util'
 
@@ -48,7 +49,7 @@ const sizeHeight = ref('')
 const ratioX = ref(1)
 const ratioY = ref(1)
 
-const fallbackViewId = `wi-scrollbar-view-${Math.random().toString(36).slice(2, 9)}`
+const fallbackViewId = useWiId('wi-scrollbar-view')
 const contentId = computed(() => props.id ?? fallbackViewId)
 
 let wrapScrollTop = 0
