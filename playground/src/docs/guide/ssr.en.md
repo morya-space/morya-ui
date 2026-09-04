@@ -6,7 +6,7 @@ description: Use Well Insight UI with Nuxt, Astro, Vite SSR, and other server-re
 
 # SSR & meta-frameworks
 
-Well Insight UI targets **Vue 3.3+** SSR: the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
+Well Insight UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
 
 All setups below are supported; choose **full SSR** or **client islands** based on your app.
 

@@ -18,7 +18,7 @@
   <a href="https://www.npmjs.com/package/@well-insight/ui"><img src="https://img.shields.io/npm/v/@well-insight/ui?style=flat-square" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/@well-insight/ui"><img src="https://img.shields.io/npm/dm/@well-insight/ui?style=flat-square" alt="npm downloads" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/github/license/well-insight/well-insight-ui?style=flat-square" alt="license" /></a>
-  <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/Vue-3.3+-42b883?style=flat-square&logo=vue.js&logoColor=white" alt="Vue 3.3+" /></a>
+  <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/Vue-3-42b883?style=flat-square&logo=vue.js&logoColor=white" alt="Vue 3" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
 </p>
 
@@ -81,7 +81,7 @@
 
 ## 安装
 
-需要 **Vue ^3.3**（推荐 3.5+），以及能解析包 `exports` 的构建工具（Vite、webpack 5+ 等）。
+需要 **Vue 3**（推荐 3.5 及以上），以及能解析包 `exports` 的构建工具（Vite、webpack 5+ 等）。
 
 ```bash
 pnpm add @well-insight/ui
