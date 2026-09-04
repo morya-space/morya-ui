@@ -26,7 +26,7 @@ const activeSection = computed(() => {
 <template>
   <header class="site-header">
     <RouterLink class="site-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-      <span class="site-brand__mark" aria-hidden="true">W</span>
+      <img class="site-brand__logo" :src="`${import.meta.env.BASE_URL}logo.svg`" width="32" height="32" alt="" />
       <span class="site-brand__text">
         <span class="site-brand__name">Well Insight</span>
         <span class="site-brand__version">UI · v{{ uiMeta.version }}</span>
@@ -140,19 +140,12 @@ const activeSection = computed(() => {
   width: max-content;
 }
 
-.site-brand__mark {
-  align-items: center;
-  background:
-    linear-gradient(140deg, var(--wi-color-primary), color-mix(in srgb, var(--wi-color-primary) 40%, #22d3ee));
+.site-brand__logo {
   border-radius: 0.55rem;
-  box-shadow: 0 0 0 1px color-mix(in srgb, #fff 18%, transparent), 0 10px 28px color-mix(in srgb, var(--wi-color-primary) 35%, transparent);
-  color: #fff;
-  display: inline-flex;
-  font-family: var(--docs-display);
-  font-size: 1.05rem;
-  font-weight: 700;
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
+  display: block;
+  flex: 0 0 auto;
   height: 2rem;
-  justify-content: center;
   width: 2rem;
 }
 

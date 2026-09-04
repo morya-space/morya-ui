@@ -2,13 +2,14 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-Maintainer documentation for `@well-insight/ui`. Public overview lives in the root README.
+Maintainer documentation for the open-source `@well-insight/ui` project. Public overview: [README](../README.md) · [文档站](https://well-insight.github.io/well-insight-ui/)
 
 | Document | Description |
 | --- | --- |
 | [DEVELOPMENT.md](./DEVELOPMENT.md) | Layout and commands |
 | [ui-development.md](./ui-development.md) | Build & release |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits |
+| [CONTRIBUTING.md](../CONTRIBUTING.md) | Contributing guide |
 
 External:
 

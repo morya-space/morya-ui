@@ -29,11 +29,12 @@ const pillars = computed(() => [
   <WiScrollbar class="home-scroll">
     <div class="home-page">
       <section class="home-hero">
+        <img class="home-logo" :src="`${import.meta.env.BASE_URL}logo.svg`" width="88" height="88" alt="" />
         <p class="home-kicker">
-          WELL INSIGHT · UI SYSTEM
+          OPEN SOURCE · VUE 3 · DESIGN TOKENS
         </p>
         <h1 class="home-brand">
-          Well Insight
+          Well Insight UI
         </h1>
         <p class="home-headline">
           {{ t.headline }}
@@ -53,10 +54,10 @@ const pillars = computed(() => [
           </RouterLink>
         </div>
         <div class="home-meta" :aria-label="t.techTags">
-          <span>Vue 3</span>
+          <span>Vue 3.5</span>
+          <span>88 Components</span>
           <span>TypeScript</span>
-          <span>Design Tokens</span>
-          <span>ESM</span>
+          <span>MIT</span>
         </div>
       </section>
 
@@ -107,6 +108,14 @@ const pillars = computed(() => [
   animation: home-rise 0.7s var(--wi-motion-ease) both;
   max-width: 46rem;
   position: relative;
+}
+
+.home-logo {
+  animation: home-rise 0.7s var(--wi-motion-ease) both;
+  display: block;
+  height: clamp(4.5rem, 12vw, 5.5rem);
+  margin: 0 0 1.25rem;
+  width: clamp(4.5rem, 12vw, 5.5rem);
 }
 
 .home-kicker {

@@ -1,24 +1,82 @@
-# @well-insight/ui
+<p align="center">
+  <a href="https://well-insight.github.io/well-insight-ui/">
+    <img src="./assets/logo.svg" alt="Well Insight UI" width="96" height="96" />
+  </a>
+</p>
 
-[English](./README.md) · [中文](./README.zh-CN.md)
+<h1 align="center">Well Insight UI</h1>
 
-面向 Well Insight 的开源 Vue 3 组件库：带主题的表单、浮层、数据展示与反馈等基础控件。
+<p align="center">
+  带设计令牌、亮暗主题与交互式文档的 Vue 3 组件库。
+</p>
 
+<p align="center">
+  <a href="./README.md">English</a> | 中文
+</p>
 
-|          |                                                                      |
-| -------- | -------------------------------------------------------------------- |
-| **npm**  | `[@well-insight/ui](https://www.npmjs.com/package/@well-insight/ui)` |
-| **文档**   | 本地 `pnpm dev` → [http://localhost:5182](http://localhost:5182)       |
-| **源码**   | [GitHub](https://github.com/well-insight/well-insight-ui)            |
-| **更新日志** | [CHANGELOG.md](./CHANGELOG.md) · [English](./CHANGELOG.en.md)        |
+<p align="center">
+  <a href="https://www.npmjs.com/package/@well-insight/ui"><img src="https://img.shields.io/npm/v/@well-insight/ui?style=flat-square" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@well-insight/ui"><img src="https://img.shields.io/npm/dm/@well-insight/ui?style=flat-square" alt="npm downloads" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/well-insight/well-insight-ui?style=flat-square" alt="license" /></a>
+  <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/Vue-3.5-42b883?style=flat-square&logo=vue.js&logoColor=white" alt="Vue 3.5" /></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+</p>
 
+<p align="center">
+  <a href="https://well-insight.github.io/well-insight-ui/"><b>文档站</b></a>
+  ·
+  <a href="https://well-insight.github.io/well-insight-ui/components">组件</a>
+  ·
+  <a href="https://github.com/well-insight/well-insight-ui/issues">Issues</a>
+  ·
+  <a href="./CHANGELOG.md">更新日志</a>
+</p>
 
-## 要求
+---
 
-- Vue `^3.5`
-- 能解析包 `exports` 的构建工具（Vite、webpack 5+ 等）
+## 介绍
+
+**Well Insight UI**（`@well-insight/ui`）是一套开源的 Vue 3 组件库，提供 **88 个组件**、基于令牌的主题系统、内置国际化，以及带实时预览的文档站。
+
+无论你是做管理后台、SaaS 产品还是内部工具，都可以直接使用统一的表单、浮层、数据展示与反馈能力。
+
+## 特性
+
+### 组件齐全
+
+覆盖基础、表单、导航、数据展示、布局与反馈等 88 个组件，均支持 ESM 按需引入与 tree-shaking。
+
+### 主题开箱即用
+
+亮/暗色模式基于 `--wi-*` CSS 变量；通过 `useTheme` 切换主题，用 `useDensity` / `useMotion` 调整密度与动效，子树可用 `WiConfigProvider` 覆盖。
+
+### TypeScript 优先
+
+基于 Vue 3 Composition API 与 TypeScript 编写，Props、Emits 与 locale 均有完整类型。
+
+### 多种接入方式
+
+支持全量注册、按名导入、按需子路径，以及配合 `unplugin-vue-components` 的 `WellInsightResolver`——同一应用内建议保持一致。
+
+### 文档即预览
+
+每个组件自带 Markdown 文档与可交互 `vue preview` 示例，可在线浏览或本地启动文档站。
+
+## 文档
+
+**https://well-insight.github.io/well-insight-ui/**
+
+| 章节 | 链接 |
+| --- | --- |
+| 快速上手 | [指南](https://well-insight.github.io/well-insight-ui/docs/quick-start) |
+| 主题 | [主题](https://well-insight.github.io/well-insight-ui/docs/theme) |
+| 全局配置 | [配置](https://well-insight.github.io/well-insight-ui/docs/config) |
+| 组件 | [目录](https://well-insight.github.io/well-insight-ui/components) |
+| 更新日志 | [版本](https://well-insight.github.io/well-insight-ui/changelog) |
 
 ## 安装
+
+需要 **Vue ^3.5**，以及能解析包 `exports` 的构建工具（Vite、webpack 5+ 等）。
 
 ```bash
 pnpm add @well-insight/ui
@@ -28,18 +86,7 @@ pnpm add @well-insight/ui
 
 ## 快速开始
 
-本库**同时支持全量与按需**，按项目选用（同一应用建议保持一致）。
-
-
-|     | 全量                            | 按需                             |
-| --- | ----------------------------- | ------------------------------ |
-| 样式  | `@well-insight/ui/styles.css` | 子路径自动带入                        |
-| 组件  | 插件注册或桶入口按名 import             | `@well-insight/ui/button` 等子路径 |
-
-
-
-
-### 全量注册
+全量注册并引入样式：
 
 ```ts
 import WellInsight from '@well-insight/ui'
@@ -50,165 +97,47 @@ import '@well-insight/ui/styles.css'
 createApp(App).use(WellInsight).mount('#app')
 ```
 
-之后模板里可直接写 `<WiButton>` / `<WiInput>`，无需再 import。
-
-### 全量样式 + 按名导入
-
-JS 可 tree-shake，样式仍需全量 CSS：
-
-```vue
-<script setup lang="ts">
-import { WiButton, WiInput } from '@well-insight/ui'
-</script>
-```
-
-入口：`import '@well-insight/ui/styles.css'`
-
-### 按需子路径
-
-每个组件有 kebab-case 子路径，自动带上 JS、依赖与样式，无需全量 CSS：
+按需引入（样式自动带入）：
 
 ```ts
 import { WiButton } from '@well-insight/ui/button'
 import { WiInput } from '@well-insight/ui/input'
 ```
 
-
-
-### 自动按需（Vite）
+应用级默认配置（语言、尺寸、浮层挂载点等）：
 
 ```ts
-import { WellInsightResolver } from '@well-insight/ui/resolver'
-import Components from 'unplugin-vue-components/vite'
+import { createWellInsight, zhCN } from '@well-insight/ui'
 
-Components({ resolvers: [WellInsightResolver()] })
+createApp(App).use(createWellInsight({ locale: zhCN })).mount('#app')
 ```
 
-更完整的上手说明见文档站 [快速上手](./playground/src/docs/guide/quick-start.md)。
+完整接入方式、Vite 解析器与主题 API 见 [快速上手](https://well-insight.github.io/well-insight-ui/docs/quick-start)。
 
-## 应用级默认配置
+## 生态
 
-`createWellInsight` / `WellInsight` 会设置全局默认值，并**默认注册全部组件**：
+| 包 | 说明 |
+| --- | --- |
+| [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui) | 组件、样式、主题与语言工具 |
+| [`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp) | 可选 MCP 服务，供 AI 客户端检索文档 |
 
-```ts
-import { createWellInsight, enUS } from '@well-insight/ui'
-import { createApp } from 'vue'
-import App from './App.vue'
-import '@well-insight/ui/styles.css'
+## 参与贡献
 
-createApp(App)
-  .use(
-    createWellInsight({
-      appendTo: 'body',
-      size: 'small',
-      density: 'comfortable',
-      zIndex: 1100,
-      locale: enUS,
-    }),
-  )
-  .mount('#app')
-```
+欢迎提交 Issue 与 Pull Request。请先阅读 [CONTRIBUTING.zh-CN.md](./CONTRIBUTING.zh-CN.md)。
 
-只要配置、不注册组件时传 `components: false`。
-
-
-| 选项             | 作用                                     |
-| -------------- | -------------------------------------- |
-| `appendTo`     | 浮层默认 Teleport 目标（默认 `'body'`）          |
-| `size`         | 控件默认尺寸                                 |
-| `density`      | `compact` / `comfortable` / `spacious` |
-| `inputVariant` | `outlined` / `filled`                  |
-| `zIndex`       | 浮层 z-index 基准                          |
-| `locale`       | 内置文案（默认 `zhCN`，或 `enUS` / 局部覆盖）        |
-
-
-子树覆盖使用 `<WiConfigProvider>`。解析顺序：
-
-**组件 Props →** `WiConfigProvider` **→** `createWellInsight` **→ 内置默认**
-
-详见文档站 [全局配置](./playground/src/docs/guide/config.md)。
-
-## 语言
-
-内置文案默认为**中文**。可切换英文或覆盖部分 key：
-
-```ts
-import { createWellInsight, enUS, zhCN } from '@well-insight/ui'
-
-createWellInsight({ locale: enUS })
-
-createWellInsight({
-  locale: {
-    ...zhCN,
-    accept: '确定',
-  },
-})
-```
-
-
-
-## 主题
-
-亮色 / 暗色 token 与辅助 API 同包导出：
-
-```ts
-import { useTheme } from '@well-insight/ui'
-
-const { theme, isDark, setTheme, toggleTheme } = useTheme()
-```
-
-`useTheme` 会把选择写入 `localStorage`；未设置时尊重 `prefers-color-scheme`。相关 API：`useDensity`、`useMotion`、`applyTheme`、`lightTokens`、`darkTokens`。
-
-详见文档站 [主题](./playground/src/docs/guide/theme.md)。
-
-## 反馈 API
-
-命令式反馈，无需自行挂载宿主（需要时会自动挂载）：
-
-```ts
-import { message, toast } from '@well-insight/ui'
-
-message.success('已保存')
-message.error('出错了')
-
-toast.add({ severity: 'info', summary: '提示', detail: '详情在此' })
-```
-
-需要受控宿主时仍可渲染 `<WiMessage />` / `<WiToast />`。
-
-## 导出
-
-
-| 导入                              | 用途                                                                  |
-| ------------------------------- | ------------------------------------------------------------------- |
-| `@well-insight/ui`              | 组件、`createWellInsight`、`WiConfigProvider`、主题与语言、`message` / `toast` |
-| `@well-insight/ui/styles.css`   | 全量样式（token + 全部组件）                                                  |
-| `@well-insight/ui/button` 等     | 按需组件子路径（JS + 依赖 + 样式；共 88 个 kebab-case 入口）                          |
-| `@well-insight/ui/button/style` | 仅该组件（及依赖）样式 side-effect                                             |
-| `@well-insight/ui/resolver`     | `unplugin-vue-components` 解析器                                       |
-
-
-TypeScript 类型已通过包 `exports` 提供。
+维护者文档：[开发指南](./docs/DEVELOPMENT.zh-CN.md) · [发版脚本](./scripts/README.md)
 
 ## 本地开发
 
 ```bash
 pnpm install
-pnpm dev          # 文档站 → http://localhost:5182
-pnpm build        # 组件库 → dist/
-pnpm build:docs   # 静态文档站
+pnpm dev              # 文档站 → http://localhost:5182
+pnpm build            # 组件库 → dist/
+pnpm build:docs:pages # GitHub Pages 构建
 pnpm test
 pnpm typecheck
 ```
 
-维护者文档：[开发指南](./docs/DEVELOPMENT.zh-CN.md) · [UI 开发](./docs/ui-development.zh-CN.md) · [发版脚本](./scripts/README.md)
-
-## 可选：MCP
-
-若使用支持 [Model Context Protocol](https://modelcontextprotocol.io/) 的 AI 客户端，可额外接入 `[@well-insight/ui-mcp](https://www.npmjs.com/package/@well-insight/ui-mcp)`，让助手按本库文档检索组件 API。**这不替代** `pnpm add @well-insight/ui`。
-
-说明见文档站 [MCP](./playground/src/docs/guide/mcp.md)。
-
 ## 许可证
 
-MIT
+[MIT](./LICENSE) © Well Insight contributors
