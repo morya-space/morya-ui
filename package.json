@@ -661,6 +661,7 @@
     "prepare": "husky",
     "dev": "vite --config playground/vite.config.ts",
     "build:docs": "vite build --config playground/vite.config.ts",
+    "build:docs:pages": "node scripts/build-docs-pages.mjs",
     "preview": "vite preview --config playground/vite.config.ts",
     "build": "node scripts/prepare-on-demand.mjs && node scripts/generate-exports.mjs && vite build && vite build --mode on-demand && node scripts/emit-style-entries.mjs",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",

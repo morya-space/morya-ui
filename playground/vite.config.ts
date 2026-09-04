@@ -33,6 +33,7 @@ function highlightCode(code: string, lang: string) {
 }
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES === 'true' ? '/well-insight-ui/' : '/',
   root: playgroundDir,
   plugins: [
     docsManifestPlugin(repoRoot, guideDir),
