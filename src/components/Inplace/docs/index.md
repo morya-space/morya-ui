@@ -11,14 +11,14 @@ description: 点击展示区切换为可编辑内容。
 ## 引入
 
 ```ts
-import { WiInplace } from '@well-insight/ui'
+import { WdInplace } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiInplace, WiInput } from '@well-insight/ui'
+import { WdButton, WdInplace, WdInput } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const active = ref(false)
@@ -26,17 +26,17 @@ const text = ref('点击编辑')
 </script>
 
 <template>
-  <WiInplace v-model="active">
+  <WdInplace v-model="active">
     <template #display>
       {{ text }}
     </template>
     <template #content="{ close }">
       <div style="display:flex;gap:8px">
-        <WiInput v-model="text" />
-        <WiButton label="完成" size="small" @click="close" />
+        <WdInput v-model="text" />
+        <WdButton label="完成" size="small" @click="close" />
       </div>
     </template>
-  </WiInplace>
+  </WdInplace>
 </template>
 ```
 

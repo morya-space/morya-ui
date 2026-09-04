@@ -6,7 +6,7 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 
 # Form
 
-`WiForm` / `WiFormItem` 负责布局、必填标记与错误展示。校验有两条路，可同时使用：
+`WdForm` / `WdFormItem` 负责布局、必填标记与错误展示。校验有两条路，可同时使用：
 
 1. **声明式 `rules`（推荐）**：按字段名配置 `required` / `min` / `max` / `pattern` / `validator`。
 2. **回调 `validate`**：FormItem 上传入函数，返回错误文案。仍可用于复杂跨字段逻辑。
@@ -18,16 +18,16 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 ## 引入
 
 ```ts
-import type { FormInstance, FormRules } from '@well-insight/ui'
-import { WiForm, WiFormItem } from '@well-insight/ui'
+import type { FormInstance, FormRules } from '@wex-design/ui'
+import { WdForm, WdFormItem } from '@wex-design/ui'
 ```
 
 ## 声明式 rules
 
 ```vue preview
 <script setup lang="ts">
-import type { FormInstance, FormRules } from '@well-insight/ui'
-import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import type { FormInstance, FormRules } from '@wex-design/ui'
+import { WdButton, WdForm, WdFormItem, WdInput } from '@wex-design/ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -47,7 +47,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <WiForm
+  <WdForm
     ref="formRef"
     :model="model"
     :rules="rules"
@@ -56,18 +56,18 @@ async function onSubmit() {
     style="max-width: 22rem"
     @submit="onSubmit"
   >
-    <WiFormItem label="名称" name="name">
+    <WdFormItem label="名称" name="name">
       <template #default="{ id, invalid }">
-        <WiInput :id="id" v-model="model.name" fluid :invalid="invalid" />
+        <WdInput :id="id" v-model="model.name" fluid :invalid="invalid" />
       </template>
-    </WiFormItem>
-    <WiFormItem label="邮箱" name="email" help="用于接收通知">
+    </WdFormItem>
+    <WdFormItem label="邮箱" name="email" help="用于接收通知">
       <template #default="{ id, invalid }">
-        <WiInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
+        <WdInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
-    </WiFormItem>
-    <WiButton native-type="submit" label="提交" />
-  </WiForm>
+    </WdFormItem>
+    <WdButton native-type="submit" label="提交" />
+  </WdForm>
 </template>
 ```
 
@@ -75,26 +75,26 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { WdButton, WdForm, WdFormItem, WdInput } from '@wex-design/ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
 </script>
 
 <template>
-  <WiForm validate-on="submit" style="max-width: 22rem">
-    <WiFormItem
+  <WdForm validate-on="submit" style="max-width: 22rem">
+    <WdFormItem
       label="名称"
       name="name"
       required
       :validate="() => (form.name.trim() ? undefined : '请输入名称')"
     >
       <template #default="{ id, invalid }">
-        <WiInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <WdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </WiFormItem>
-    <WiButton native-type="submit" label="提交" />
-  </WiForm>
+    </WdFormItem>
+    <WdButton native-type="submit" label="提交" />
+  </WdForm>
 </template>
 ```
 
@@ -102,14 +102,14 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { WdForm, WdFormItem, WdInput } from '@wex-design/ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>
 
 <template>
-  <WiForm
+  <WdForm
     :model="model"
     inline
     label-placement="left"
@@ -117,17 +117,17 @@ const model = reactive({ city: '', zip: '' })
     :label-width="72"
     :rules="{ city: { required: true, message: '必填' } }"
   >
-    <WiFormItem label="城市" name="city">
+    <WdFormItem label="城市" name="city">
       <template #default="{ id }">
-        <WiInput :id="id" v-model="model.city" />
+        <WdInput :id="id" v-model="model.city" />
       </template>
-    </WiFormItem>
-    <WiFormItem label="邮编" name="zip">
+    </WdFormItem>
+    <WdFormItem label="邮编" name="zip">
       <template #default="{ id }">
-        <WiInput :id="id" v-model="model.zip" />
+        <WdInput :id="id" v-model="model.zip" />
       </template>
-    </WiFormItem>
-  </WiForm>
+    </WdFormItem>
+  </WdForm>
 </template>
 ```
 
@@ -146,7 +146,7 @@ const model = reactive({ city: '', zip: '' })
 | `disabled` | `boolean` | `false` | 禁用态 |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |
 | `for` | `string` | — | — |
-| `size` | `WiSizeInput` | — | — |
+| `size` | `WdSizeInput` | — | — |
 
 ## Props — FormItem
 

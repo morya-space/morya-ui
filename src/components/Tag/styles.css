@@ -1,107 +1,107 @@
-.wi-tag {
-    --wi-tag-icon-size: 1rem;
+.wd-tag {
+    --wd-tag-icon-size: 1rem;
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
-    border-radius: var(--wi-radius-sm);
-    color: var(--wi-color-primary);
+    background: color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
+    border-radius: var(--wd-radius-sm);
+    color: var(--wd-color-primary);
     display: inline-flex;
-    font-family: var(--wi-font-sans);
-    font-size: var(--wi-font-size-xs);
+    font-family: var(--wd-font-sans);
+    font-size: var(--wd-font-size-xs);
     font-weight: 600;
-    gap: var(--wi-space-1);
+    gap: var(--wd-space-1);
     line-height: 1;
-    padding: var(--wi-space-2) var(--wi-space-3);
+    padding: var(--wd-space-2) var(--wd-space-3);
 }
 
-.wi-tag__icon {
+.wd-tag__icon {
     flex-shrink: 0;
 }
 
-.wi-tag--rounded {
-    border-radius: var(--wi-radius-full);
+.wd-tag--rounded {
+    border-radius: var(--wd-radius-full);
 }
 
-.wi-tag--primary {
-    background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
-    color: var(--wi-color-primary);
+.wd-tag--primary {
+    background: color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
+    color: var(--wd-color-primary);
 }
 
-.wi-tag--secondary {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
-    color: var(--wi-color-text);
+.wd-tag--secondary {
+    background: color-mix(in srgb, var(--wd-color-text-muted) 16%, var(--wd-color-surface));
+    color: var(--wd-color-text);
 }
 
-.wi-tag--success {
-    background: color-mix(in srgb, var(--wi-color-success) 14%, transparent);
-    color: var(--wi-color-success);
+.wd-tag--success {
+    background: color-mix(in srgb, var(--wd-color-success) 14%, transparent);
+    color: var(--wd-color-success);
 }
 
-.wi-tag--info {
-    background: color-mix(in srgb, var(--wi-color-info) 12%, transparent);
-    color: var(--wi-color-info);
+.wd-tag--info {
+    background: color-mix(in srgb, var(--wd-color-info) 12%, transparent);
+    color: var(--wd-color-info);
 }
 
-.wi-tag--warn,
-.wi-tag--warning {
-    background: color-mix(in srgb, var(--wi-color-warn) 14%, transparent);
-    color: var(--wi-color-warn);
+.wd-tag--warn,
+.wd-tag--warning {
+    background: color-mix(in srgb, var(--wd-color-warn) 14%, transparent);
+    color: var(--wd-color-warn);
 }
 
-.wi-tag--danger {
-    background: color-mix(in srgb, var(--wi-color-danger) 12%, transparent);
-    color: var(--wi-color-danger);
+.wd-tag--danger {
+    background: color-mix(in srgb, var(--wd-color-danger) 12%, transparent);
+    color: var(--wd-color-danger);
 }
 
-.wi-tag--contrast {
-    background: var(--wi-color-contrast);
-    color: var(--wi-color-contrast-fg);
+.wd-tag--contrast {
+    background: var(--wd-color-contrast);
+    color: var(--wd-color-contrast-fg);
 }
 
-.wi-tag--help {
-    background: color-mix(in srgb, var(--wi-color-help) 14%, transparent);
-    color: var(--wi-color-help);
+.wd-tag--help {
+    background: color-mix(in srgb, var(--wd-color-help) 14%, transparent);
+    color: var(--wd-color-help);
 }
 
 /* —— Batch 3: visual + long-tail —— */
-.wi-tag__icon {
+.wd-tag__icon {
     flex-shrink: 0;
-    height: var(--wi-tag-icon-size);
-    width: var(--wi-tag-icon-size);
+    height: var(--wd-tag-icon-size);
+    width: var(--wd-tag-icon-size);
 }
 
-.wi-tag__icon :is(.wi-icon, svg) {
+.wd-tag__icon :is(.wd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wi-tag--small {
-    --wi-tag-icon-size: 0.875rem;
-    font-size: var(--wi-tag-font-size-small);
-    padding: 0.15rem var(--wi-space-2);
+.wd-tag--small {
+    --wd-tag-icon-size: 0.875rem;
+    font-size: var(--wd-tag-font-size-small);
+    padding: 0.15rem var(--wd-space-2);
 }
 
-.wi-tag--large {
-    --wi-tag-icon-size: 1.25rem;
-    font-size: var(--wi-font-size-sm);
-    padding: var(--wi-space-2) var(--wi-space-4);
+.wd-tag--large {
+    --wd-tag-icon-size: 1.25rem;
+    font-size: var(--wd-font-size-sm);
+    padding: var(--wd-space-2) var(--wd-space-4);
 }
 
-.wi-tag--bordered {
+.wd-tag--bordered {
     box-shadow: inset 0 0 0 1px currentColor;
 }
 
-.wi-tag--custom {
-    background: color-mix(in srgb, var(--wi-tag-color) 14%, transparent);
-    color: var(--wi-tag-color);
+.wd-tag--custom {
+    background: color-mix(in srgb, var(--wd-tag-color) 14%, transparent);
+    color: var(--wd-tag-color);
 }
 
-.wi-tag--disabled {
-    opacity: var(--wi-opacity-disabled);
+.wd-tag--disabled {
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }
 
-.wi-tag__close {
+.wd-tag__close {
     align-items: center;
     background: transparent;
     border: 0;
@@ -109,30 +109,30 @@
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    height: var(--wi-tag-icon-size);
+    height: var(--wd-tag-icon-size);
     justify-content: center;
     line-height: 1;
     margin-left: 0.15rem;
     padding: 0;
-    width: var(--wi-tag-icon-size);
+    width: var(--wd-tag-icon-size);
 }
 
-.wi-tag__close :is(.wi-icon, svg) {
+.wd-tag__close :is(.wd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wi-tag__close:hover:not(:disabled) {
+.wd-tag__close:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--wi-color-primary) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-primary) 10%,
+        var(--wd-color-surface)
     );
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
 }
 
-.wi-tag__close:focus-visible {
+.wd-tag__close:focus-visible {
     outline: none;
-    box-shadow: var(--wi-focus-shadow);
+    box-shadow: var(--wd-focus-shadow);
 }

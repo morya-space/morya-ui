@@ -1,150 +1,150 @@
-/* —�?File: FileUpload —�?*/
-.wi-fileupload {
-    --wi-fileupload-dropzone-min-height: 10rem;
-    --wi-fileupload-icon-size: 2.5rem;
-    --wi-fileupload-thumb-size: 2.5rem;
-    --wi-fileupload-card-size: 7.5rem;
-    --wi-fileupload-progress-height: 0.25rem;
+/* —�?File: FileUpload —�?*/
+.wd-fileupload {
+    --wd-fileupload-dropzone-min-height: 10rem;
+    --wd-fileupload-icon-size: 2.5rem;
+    --wd-fileupload-thumb-size: 2.5rem;
+    --wd-fileupload-card-size: 7.5rem;
+    --wd-fileupload-progress-height: 0.25rem;
     display: flex;
     flex-direction: column;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
 }
 
-.wi-fileupload__input {
+.wd-fileupload__input {
     display: none;
 }
 
-.wi-fileupload__choose,
-.wi-fileupload__clear {
+.wd-fileupload__choose,
+.wd-fileupload__clear {
     align-self: flex-start;
-    background: var(--wi-color-primary);
+    background: var(--wd-color-primary);
     border: 0;
-    border-radius: var(--wi-radius-md);
-    color: var(--wi-color-on-emphasis);
+    border-radius: var(--wd-radius-md);
+    color: var(--wd-color-on-emphasis);
     cursor: pointer;
     font: inherit;
-    padding: var(--wi-space-2) var(--wi-space-3);
+    padding: var(--wd-space-2) var(--wd-space-3);
 }
 
-.wi-fileupload__clear {
+.wd-fileupload__clear {
     background: transparent;
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    color: var(--wi-color-text);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    color: var(--wd-color-text);
 }
 
-.wi-fileupload__choose:hover:not(:disabled) {
-    background: var(--wi-color-primary-hover);
+.wd-fileupload__choose:hover:not(:disabled) {
+    background: var(--wd-color-primary-hover);
 }
 
-.wi-fileupload__choose:focus-visible,
-.wi-fileupload__clear:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-fileupload__choose:focus-visible,
+.wd-fileupload__clear:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-fileupload__clear:hover:not(:disabled) {
+.wd-fileupload__clear:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--wi-color-primary) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-primary) 10%,
+        var(--wd-color-surface)
     );
 }
 
-.wi-fileupload--disabled .wi-fileupload__choose,
-.wi-fileupload--disabled .wi-fileupload__dragger {
+.wd-fileupload--disabled .wd-fileupload__choose,
+.wd-fileupload--disabled .wd-fileupload__dragger {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }
 
-.wi-fileupload__dragger {
+.wd-fileupload__dragger {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wi-color-surface) 92%,
-        var(--wi-color-primary) 8%
+        var(--wd-color-surface) 92%,
+        var(--wd-color-primary) 8%
     );
-    border: var(--wi-border-width) dashed var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
+    border: var(--wd-border-width) dashed var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     justify-content: center;
-    min-height: var(--wi-fileupload-dropzone-min-height);
-    padding: var(--wi-space-6) var(--wi-space-4);
+    min-height: var(--wd-fileupload-dropzone-min-height);
+    padding: var(--wd-space-6) var(--wd-space-4);
     text-align: center;
     transition:
-        background-color var(--wi-motion-fast) var(--wi-motion-ease),
-        border-color var(--wi-motion-fast) var(--wi-motion-ease);
+        background-color var(--wd-motion-fast) var(--wd-motion-ease),
+        border-color var(--wd-motion-fast) var(--wd-motion-ease);
     width: 100%;
 }
 
-.wi-fileupload__dragger:hover,
-.wi-fileupload__dragger--over {
+.wd-fileupload__dragger:hover,
+.wd-fileupload__dragger--over {
     background: color-mix(
         in srgb,
-        var(--wi-color-primary) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-primary) 10%,
+        var(--wd-color-surface)
     );
-    border-color: var(--wi-color-primary);
+    border-color: var(--wd-color-primary);
 }
 
-.wi-fileupload__icon {
-    color: var(--wi-color-primary);
-    height: var(--wi-fileupload-icon-size);
-    width: var(--wi-fileupload-icon-size);
+.wd-fileupload__icon {
+    color: var(--wd-color-primary);
+    height: var(--wd-fileupload-icon-size);
+    width: var(--wd-fileupload-icon-size);
 }
 
-.wi-fileupload__icon svg {
+.wd-fileupload__icon svg {
     height: 100%;
     width: 100%;
 }
 
-.wi-fileupload__text {
-    color: var(--wi-color-text);
-    font-size: var(--wi-font-size-md);
+.wd-fileupload__text {
+    color: var(--wd-color-text);
+    font-size: var(--wd-font-size-md);
     margin: 0;
 }
 
-.wi-fileupload__text em {
-    color: var(--wi-color-primary);
+.wd-fileupload__text em {
+    color: var(--wd-color-primary);
     font-style: normal;
     font-weight: 600;
 }
 
-.wi-fileupload__tip {
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-sm);
+.wd-fileupload__tip {
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-sm);
 }
 
-.wi-fileupload__list {
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
+.wd-fileupload__list {
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
     list-style: none;
     margin: 0;
-    padding: var(--wi-space-2);
+    padding: var(--wd-space-2);
 }
 
-.wi-fileupload__file {
+.wd-fileupload__file {
     display: flex;
     flex-direction: column;
-    gap: var(--wi-space-1);
-    padding: var(--wi-space-2) 0;
+    gap: var(--wd-space-1);
+    padding: var(--wd-space-2) 0;
 }
 
-.wi-fileupload__file + .wi-fileupload__file {
-    border-top: var(--wi-border-width) solid var(--wi-color-border);
+.wd-fileupload__file + .wd-fileupload__file {
+    border-top: var(--wd-border-width) solid var(--wd-color-border);
 }
 
-.wi-fileupload__file-body {
+.wd-fileupload__file-body {
     align-items: center;
     display: flex;
-    gap: var(--wi-space-3);
+    gap: var(--wd-space-3);
     min-width: 0;
 }
 
-.wi-fileupload__name {
+.wd-fileupload__name {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
@@ -152,96 +152,96 @@
     white-space: nowrap;
 }
 
-.wi-fileupload__file--fail .wi-fileupload__name,
-.wi-fileupload__status {
-    color: var(--wi-color-danger);
+.wd-fileupload__file--fail .wd-fileupload__name,
+.wd-fileupload__status {
+    color: var(--wd-color-danger);
 }
 
-.wi-fileupload__size,
-.wi-fileupload__status {
+.wd-fileupload__size,
+.wd-fileupload__status {
     flex: 0 0 auto;
-    font-size: var(--wi-font-size-sm);
+    font-size: var(--wd-font-size-sm);
 }
 
-.wi-fileupload__size {
-    color: var(--wi-color-text-muted);
+.wd-fileupload__size {
+    color: var(--wd-color-text-muted);
 }
 
-.wi-fileupload__thumb {
-    border-radius: var(--wi-radius-sm);
+.wd-fileupload__thumb {
+    border-radius: var(--wd-radius-sm);
     cursor: pointer;
     flex: 0 0 auto;
-    height: var(--wi-fileupload-thumb-size);
+    height: var(--wd-fileupload-thumb-size);
     object-fit: cover;
-    width: var(--wi-fileupload-thumb-size);
+    width: var(--wd-fileupload-thumb-size);
 }
 
-.wi-fileupload__actions {
+.wd-fileupload__actions {
     display: inline-flex;
     flex: 0 0 auto;
-    gap: var(--wi-space-1);
+    gap: var(--wd-space-1);
     margin-left: auto;
 }
 
-.wi-fileupload__action {
+.wd-fileupload__action {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-sm);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-sm);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    height: var(--wi-control-affix-size);
+    height: var(--wd-control-affix-size);
     justify-content: center;
     padding: 0;
-    width: var(--wi-control-affix-size);
+    width: var(--wd-control-affix-size);
 }
 
-.wi-fileupload__action:hover {
-    color: var(--wi-color-primary);
+.wd-fileupload__action:hover {
+    color: var(--wd-color-primary);
 }
 
-.wi-fileupload__action:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-fileupload__action:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-fileupload__action:disabled {
+.wd-fileupload__action:disabled {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-fileupload__progress {
-    background: var(--wi-color-primary);
-    border-radius: var(--wi-radius-full, 999px);
-    height: var(--wi-fileupload-progress-height);
+.wd-fileupload__progress {
+    background: var(--wd-color-primary);
+    border-radius: var(--wd-radius-full, 999px);
+    height: var(--wd-fileupload-progress-height);
     max-width: 100%;
 }
 
-.wi-fileupload__toolbar {
+.wd-fileupload__toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
 }
 
-.wi-fileupload__cards {
+.wd-fileupload__cards {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wi-space-3);
+    gap: var(--wd-space-3);
 }
 
-.wi-fileupload__card {
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
+.wd-fileupload__card {
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
     box-sizing: border-box;
-    height: var(--wi-fileupload-card-size);
+    height: var(--wd-fileupload-card-size);
     overflow: hidden;
     position: relative;
-    width: var(--wi-fileupload-card-size);
+    width: var(--wd-fileupload-card-size);
 }
 
-.wi-fileupload__card-image {
+.wd-fileupload__card-image {
     cursor: pointer;
     display: block;
     height: 100%;
@@ -249,21 +249,21 @@
     width: 100%;
 }
 
-.wi-fileupload__card-name {
+.wd-fileupload__card-name {
     align-items: center;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     display: flex;
-    font-size: var(--wi-font-size-sm);
+    font-size: var(--wd-font-size-sm);
     height: 100%;
     justify-content: center;
     overflow: hidden;
-    padding: var(--wi-space-2);
+    padding: var(--wd-space-2);
     text-align: center;
     word-break: break-all;
 }
 
-.wi-fileupload__card-mask,
-.wi-fileupload__card-progress {
+.wd-fileupload__card-mask,
+.wd-fileupload__card-progress {
     align-items: center;
     display: flex;
     inset: 0;
@@ -271,41 +271,41 @@
     position: absolute;
 }
 
-.wi-fileupload__card-mask {
-    background: color-mix(in srgb, var(--wi-color-text) 48%, transparent);
-    gap: var(--wi-space-1);
+.wd-fileupload__card-mask {
+    background: color-mix(in srgb, var(--wd-color-text) 48%, transparent);
+    gap: var(--wd-space-1);
     opacity: 0;
-    transition: opacity var(--wi-motion-fast) var(--wi-motion-ease);
+    transition: opacity var(--wd-motion-fast) var(--wd-motion-ease);
 }
 
-.wi-fileupload__card:hover .wi-fileupload__card-mask,
-.wi-fileupload__card:focus-within .wi-fileupload__card-mask {
+.wd-fileupload__card:hover .wd-fileupload__card-mask,
+.wd-fileupload__card:focus-within .wd-fileupload__card-mask {
     opacity: 1;
 }
 
-.wi-fileupload__card-mask .wi-fileupload__action {
-    color: var(--wi-color-on-emphasis);
+.wd-fileupload__card-mask .wd-fileupload__action {
+    color: var(--wd-color-on-emphasis);
 }
 
-.wi-fileupload__card-mask .wi-fileupload__action:hover {
-    color: var(--wi-color-primary);
+.wd-fileupload__card-mask .wd-fileupload__action:hover {
+    color: var(--wd-color-primary);
 }
 
-.wi-fileupload__card-progress {
-    background: color-mix(in srgb, var(--wi-color-surface) 78%, transparent);
-    color: var(--wi-color-text);
-    font-size: var(--wi-font-size-sm);
+.wd-fileupload__card-progress {
+    background: color-mix(in srgb, var(--wd-color-surface) 78%, transparent);
+    color: var(--wd-color-text);
+    font-size: var(--wd-font-size-sm);
 }
 
-.wi-fileupload__card--add {
+.wd-fileupload__card--add {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wi-color-surface) 92%,
-        var(--wi-color-primary) 8%
+        var(--wd-color-surface) 92%,
+        var(--wd-color-primary) 8%
     );
     border-style: dashed;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: flex;
     font: inherit;
@@ -313,23 +313,23 @@
     padding: 0;
 }
 
-.wi-fileupload__card--add:hover,
-.wi-fileupload__cards--over .wi-fileupload__card--add {
-    border-color: var(--wi-color-primary);
-    color: var(--wi-color-primary);
+.wd-fileupload__card--add:hover,
+.wd-fileupload__cards--over .wd-fileupload__card--add {
+    border-color: var(--wd-color-primary);
+    color: var(--wd-color-primary);
 }
 
-.wi-fileupload__card--add:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-fileupload__card--add:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-fileupload__card--fail {
-    border-color: var(--wi-color-danger);
+.wd-fileupload__card--fail {
+    border-color: var(--wd-color-danger);
 }
 
-.wi-fileupload--disabled .wi-fileupload__card--add {
+.wd-fileupload--disabled .wd-fileupload__card--add {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }

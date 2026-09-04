@@ -28,7 +28,7 @@ const DEFAULT_LIFE = 3000
 let seed = 0
 
 const AutoToastHost = defineComponent({
-  name: 'WiToastAutoHost',
+  name: 'WdToastAutoHost',
   setup() {
     return () => h(ToastHost, { auto: true })
   },
@@ -37,14 +37,14 @@ const AutoToastHost = defineComponent({
 function ensureHost() {
   if (typeof document === 'undefined') return
   if (toastManualHostCount > 0 || toastAutoHost) return
-  setToastAutoHost(mountOverlayHost(AutoToastHost, 'wi-toast-host-root'))
+  setToastAutoHost(mountOverlayHost(AutoToastHost, 'wd-toast-host-root'))
 }
 
 function toMessage(input: ToastInput, severity?: ToastSeverity): ToastMessage {
   const options: ToastOptions = isToastOptionsObject(input) ? input : { summary: input }
   if (options.position) toastState.position = options.position
   return {
-    id: options.id ?? `wi-toast-${Date.now()}-${++seed}`,
+    id: options.id ?? `wd-toast-${Date.now()}-${++seed}`,
     summary: options.summary,
     detail: options.detail,
     severity: severity ?? options.severity ?? 'info',

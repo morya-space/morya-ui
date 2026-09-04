@@ -11,21 +11,21 @@ Click stars to rate. A clear button is shown by default.
 ## Import
 
 ```ts
-import { WiRating } from '@well-insight/ui'
+import { WdRating } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiRating } from '@well-insight/ui'
+import { WdRating } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WiRating v-model="value" />
+  <WdRating v-model="value" />
 </template>
 ```
 
@@ -33,11 +33,11 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { WiRating } from '@well-insight/ui'
+import { WdRating } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiRating :model-value="4" readonly :cancel="false" />
+  <WdRating :model-value="4" readonly :cancel="false" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { WiRating } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiRating } from '@well-insight/ui'
+import { WdRating } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)
 </script>
 
 <template>
-  <WiRating v-model="value" allow-half />
+  <WdRating v-model="value" allow-half />
 </template>
 ```
 

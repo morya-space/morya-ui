@@ -2,9 +2,9 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
 import { enUS, mergeLocale, zhCN } from '.'
-import WiConfigProvider from '../components/ConfigProvider/ConfigProvider.vue'
-import WiConfirmDialog from '../components/ConfirmDialog/ConfirmDialog.vue'
-import WiPagination from '../components/Pagination/Pagination.vue'
+import WdConfigProvider from '../components/ConfigProvider/ConfigProvider.vue'
+import WdConfirmDialog from '../components/ConfirmDialog/ConfirmDialog.vue'
+import WdPagination from '../components/Pagination/Pagination.vue'
 
 describe('locale packs', () => {
   it('exposes matching keys for zh-CN and en-US', () => {
@@ -25,10 +25,10 @@ describe('locale packs', () => {
   })
 
   it('switches ConfirmDialog copy through ConfigProvider locale', () => {
-    const wrapper = mount(WiConfigProvider, {
+    const wrapper = mount(WdConfigProvider, {
       props: { locale: enUS, globalDensity: false },
       slots: {
-        default: () => h(WiConfirmDialog, { modelValue: true, teleport: false }),
+        default: () => h(WdConfirmDialog, { modelValue: true, teleport: false }),
       },
     })
     expect(wrapper.text()).toContain('OK')
@@ -36,10 +36,10 @@ describe('locale packs', () => {
   })
 
   it('switches Pagination accessible names through ConfigProvider locale', () => {
-    const wrapper = mount(WiConfigProvider, {
+    const wrapper = mount(WdConfigProvider, {
       props: { locale: enUS, globalDensity: false },
       slots: {
-        default: () => h(WiPagination, { totalRecords: 40, rows: 10, modelValue: 1 }),
+        default: () => h(WdPagination, { totalRecords: 40, rows: 10, modelValue: 1 }),
       },
     })
     expect(wrapper.get('[aria-label="Next page"]').attributes('aria-label')).toBe('Next page')

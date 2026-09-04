@@ -1,23 +1,23 @@
-.wi-progress-spinner {
-    --wi-progress-spinner-size: 2.5rem;
-    --wi-progress-spinner-color: var(--wi-color-primary);
-    animation: wi-progress-spinner-rotate var(--wi-motion-spin) linear infinite;
-    color: var(--wi-progress-spinner-color);
+.wd-progress-spinner {
+    --wd-progress-spinner-size: 2.5rem;
+    --wd-progress-spinner-color: var(--wd-color-primary);
+    animation: wd-progress-spinner-rotate var(--wd-motion-spin) linear infinite;
+    color: var(--wd-progress-spinner-color);
     display: inline-block;
-    height: var(--wi-progress-spinner-size);
+    height: var(--wd-progress-spinner-size);
     vertical-align: middle;
-    width: var(--wi-progress-spinner-size);
+    width: var(--wd-progress-spinner-size);
 }
 
-.wi-progress-spinner__circle {
-    animation: wi-progress-spinner-dash var(--wi-motion-spin-dash) ease-in-out infinite;
+.wd-progress-spinner__circle {
+    animation: wd-progress-spinner-dash var(--wd-motion-spin-dash) ease-in-out infinite;
     stroke: currentColor;
     stroke-dasharray: 90, 150;
     stroke-dashoffset: 0;
     stroke-linecap: round;
 }
 
-@keyframes wi-progress-spinner-dash {
+@keyframes wd-progress-spinner-dash {
     0% {
         stroke-dasharray: 1, 150;
         stroke-dashoffset: 0;
@@ -32,35 +32,35 @@
     }
 }
 
-.wi-progress-spinner--small {
-    --wi-progress-spinner-size: 1.5rem;
+.wd-progress-spinner--small {
+    --wd-progress-spinner-size: 1.5rem;
 }
 
-.wi-progress-spinner--large {
-    --wi-progress-spinner-size: 3.5rem;
+.wd-progress-spinner--large {
+    --wd-progress-spinner-size: 3.5rem;
 }
 
-.wi-progress-spinner-wrap {
+.wd-progress-spinner-wrap {
     position: relative;
 }
 
-.wi-progress-spinner-wrap--active .wi-progress-spinner-wrap__content {
-    opacity: var(--wi-opacity-disabled);
+.wd-progress-spinner-wrap--active .wd-progress-spinner-wrap__content {
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }
 
-.wi-progress-spinner-wrap__overlay {
+.wd-progress-spinner-wrap__overlay {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     inset: 0;
     justify-content: center;
     position: absolute;
 }
 
-.wi-progress-spinner__description {
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-sm);
+.wd-progress-spinner__description {
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-sm);
     margin: 0;
 }

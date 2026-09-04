@@ -11,7 +11,7 @@ Button triggers an immediate action.
 ## Import
 
 ```ts
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ Show button text via the default slot or the `label` prop.
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton>Submit</WiButton>
-    <WiButton label="Label Prop" />
-    <WiButton severity="secondary" label="Secondary" />
+    <WdButton>Submit</WdButton>
+    <WdButton label="Label Prop" />
+    <WdButton severity="secondary" label="Secondary" />
   </div>
 </template>
 ```
@@ -38,19 +38,19 @@ Use `severity` for semantic color; defaults to primary when omitted.
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton label="Primary" />
-    <WiButton label="Secondary" severity="secondary" />
-    <WiButton label="Success" severity="success" />
-    <WiButton label="Info" severity="info" />
-    <WiButton label="Warn" severity="warn" />
-    <WiButton label="Help" severity="help" />
-    <WiButton label="Danger" severity="danger" />
-    <WiButton label="Contrast" severity="contrast" />
+    <WdButton label="Primary" />
+    <WdButton label="Secondary" severity="secondary" />
+    <WdButton label="Success" severity="success" />
+    <WdButton label="Info" severity="info" />
+    <WdButton label="Warn" severity="warn" />
+    <WdButton label="Help" severity="help" />
+    <WdButton label="Danger" severity="danger" />
+    <WdButton label="Contrast" severity="contrast" />
   </div>
 </template>
 ```
@@ -61,25 +61,25 @@ import { WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WiButton label="Outlined" outlined />
-      <WiButton label="Success" severity="success" outlined />
-      <WiButton label="Danger" severity="danger" outlined />
+      <WdButton label="Outlined" outlined />
+      <WdButton label="Success" severity="success" outlined />
+      <WdButton label="Danger" severity="danger" outlined />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WiButton label="Raised" raised />
-      <WiButton label="Rounded" rounded />
-      <WiButton label="Plain Text" text plain />
+      <WdButton label="Raised" raised />
+      <WdButton label="Rounded" rounded />
+      <WdButton label="Plain Text" text plain />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WiButton label="Small" size="small" />
-      <WiButton label="Large" size="large" />
-      <WiButton label="Fluid" fluid />
+      <WdButton label="Small" size="small" />
+      <WdButton label="Large" size="large" />
+      <WdButton label="Fluid" fluid />
     </div>
   </div>
 </template>
@@ -91,15 +91,15 @@ import { WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton label="Text" text />
-    <WiButton label="Text Danger" text severity="danger" />
-    <WiButton label="Link" link />
-    <WiButton label="Link Secondary" link severity="secondary" />
+    <WdButton label="Text" text />
+    <WdButton label="Text Danger" text severity="danger" />
+    <WdButton label="Link" link />
+    <WdButton label="Link Secondary" link severity="secondary" />
   </div>
 </template>
 ```
@@ -110,34 +110,34 @@ import { WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton label="Ghost" ghost />
-    <WiButton label="Ghost Danger" ghost severity="danger" />
-    <WiButton label="Quaternary" quaternary />
-    <WiButton label="Custom" color="#e11d48" />
+    <WdButton label="Ghost" ghost />
+    <WdButton label="Ghost Danger" ghost severity="danger" />
+    <WdButton label="Quaternary" quaternary />
+    <WdButton label="Custom" color="#e11d48" />
   </div>
 </template>
 ```
 
 ## Button Group
 
-`WiButtonGroup` joins adjacent buttons.
+`WdButtonGroup` joins adjacent buttons.
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiButtonGroup } from '@well-insight/ui'
+import { WdButton, WdButtonGroup } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiButtonGroup aria-label="Align">
-    <WiButton label="Left" />
-    <WiButton label="Center" severity="secondary" />
-    <WiButton label="Right" severity="secondary" />
-  </WiButtonGroup>
+  <WdButtonGroup aria-label="Align">
+    <WdButton label="Left" />
+    <WdButton label="Center" severity="secondary" />
+    <WdButton label="Right" severity="secondary" />
+  </WdButtonGroup>
 </template>
 ```
 
@@ -147,16 +147,16 @@ Supports `icon`, `iconPos`, `iconOnly`, and a `badge`.
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton icon="check" label="Save" />
-    <WiButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <WiButton icon="plus" icon-only rounded aria-label="Add" />
-    <WiButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <WiButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
+    <WdButton icon="check" label="Save" />
+    <WdButton icon="search" label="Search" icon-pos="right" severity="secondary" />
+    <WdButton icon="plus" icon-only rounded aria-label="Add" />
+    <WdButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
+    <WdButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
   </div>
 </template>
 ```
@@ -167,7 +167,7 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -182,8 +182,8 @@ function toggleLoading() {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <WiButton label="Always Loading" loading severity="secondary" />
+    <WdButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
+    <WdButton label="Always Loading" loading severity="secondary" />
   </div>
 </template>
 ```
@@ -192,14 +192,14 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton label="Disabled" disabled />
-    <WiButton label="Disabled Outlined" outlined disabled />
-    <WiButton label="Disabled Text" text disabled />
+    <WdButton label="Disabled" disabled />
+    <WdButton label="Disabled Outlined" outlined disabled />
+    <WdButton label="Disabled Text" text disabled />
   </div>
 </template>
 ```

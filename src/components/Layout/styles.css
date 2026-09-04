@@ -1,10 +1,10 @@
 /* —— Panel: Layout —— */
-.wi-layout {
-    --wi-layout-height: 100%;
-    height: var(--wi-layout-height, 100%);
-    background: var(--wi-color-surface);
+.wd-layout {
+    --wd-layout-height: 100%;
+    height: var(--wd-layout-height, 100%);
+    background: var(--wd-color-surface);
     box-sizing: border-box;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     display: flex;
     flex-direction: column;
     flex: auto;
@@ -13,26 +13,26 @@
     overflow: hidden;
     position: relative;
     transition:
-        background-color var(--wi-motion-normal) var(--wi-motion-ease),
-        color var(--wi-motion-normal) var(--wi-motion-ease);
+        background-color var(--wd-motion-normal) var(--wd-motion-ease),
+        color var(--wd-motion-normal) var(--wd-motion-ease);
     width: 100%;
     z-index: auto;
 }
 
-.wi-layout--embedded {
+.wd-layout--embedded {
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 6%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 6%,
+        var(--wd-color-surface)
     );
 }
 
-.wi-layout--absolute-positioned {
+.wd-layout--absolute-positioned {
     inset: 0;
     position: absolute;
 }
 
-.wi-layout__scroll {
+.wd-layout__scroll {
     box-sizing: border-box;
     display: flex;
     flex: 1 1 auto;
@@ -46,29 +46,29 @@
     width: 100%;
 }
 
-.wi-layout__scroll--has-sider {
+.wd-layout__scroll--has-sider {
     /* direction set inline (matches naive hasSiderStyle) */
     align-items: stretch;
     flex-wrap: nowrap;
 }
 
-.wi-layout__scroll--has-sider > .wi-layout-sider,
-.wi-layout__scroll--has-sider > .wi-layout {
+.wd-layout__scroll--has-sider > .wd-layout-sider,
+.wd-layout__scroll--has-sider > .wd-layout {
     align-self: stretch;
     min-height: 100%;
 }
 
 /* Nested layout / content grow to fill remaining space */
-.wi-layout__scroll > .wi-layout,
-.wi-layout__scroll > .wi-layout-content {
+.wd-layout__scroll > .wd-layout,
+.wd-layout__scroll > .wd-layout-content {
     flex: 1 1 auto;
     min-height: 0;
     min-width: 0;
 }
 
-.wi-layout-content {
-    --wi-layout-padding: var(--wi-space-4);
-    --wi-layout-radius: 0;
+.wd-layout-content {
+    --wd-layout-padding: var(--wd-space-4);
+    --wd-layout-radius: 0;
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
@@ -76,119 +76,119 @@
     min-width: 0;
 }
 
-.wi-layout-content > .wi-layout__scroll {
+.wd-layout-content > .wd-layout__scroll {
     flex: 1 1 auto;
     min-height: 0;
 }
 
-.wi-layout-header,
-.wi-layout-footer {
-    background: var(--wi-color-surface);
+.wd-layout-header,
+.wd-layout-footer {
+    background: var(--wd-color-surface);
     box-sizing: border-box;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     flex: 0 0 auto;
     transition:
-        background-color var(--wi-motion-fast) var(--wi-motion-ease),
-        color var(--wi-motion-fast) var(--wi-motion-ease),
-        border-color var(--wi-motion-fast) var(--wi-motion-ease);
+        background-color var(--wd-motion-fast) var(--wd-motion-ease),
+        color var(--wd-motion-fast) var(--wd-motion-ease),
+        border-color var(--wd-motion-fast) var(--wd-motion-ease);
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.wi-layout-header {
-    --wi-layout-header-height: 56px;
-    --wi-layout-padding: 0 var(--wi-space-4);
-    --wi-layout-radius: 0;
+.wd-layout-header {
+    --wd-layout-header-height: 56px;
+    --wd-layout-padding: 0 var(--wd-space-4);
+    --wd-layout-radius: 0;
 }
 
-.wi-layout-footer {
-    --wi-layout-footer-height: 48px;
-    --wi-layout-padding: 0 var(--wi-space-4);
-    --wi-layout-radius: 0;
+.wd-layout-footer {
+    --wd-layout-footer-height: 48px;
+    --wd-layout-padding: 0 var(--wd-space-4);
+    --wd-layout-radius: 0;
 }
 
-.wi-layout-header--bordered {
-    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
+.wd-layout-header--bordered {
+    border-bottom: var(--wd-border-width) solid var(--wd-color-border);
 }
 
-.wi-layout-footer--bordered {
-    border-top: var(--wi-border-width) solid var(--wi-color-border);
+.wd-layout-footer--bordered {
+    border-top: var(--wd-border-width) solid var(--wd-color-border);
 }
 
-.wi-layout-header--inverted,
-.wi-layout-footer--inverted,
-.wi-layout-sider--inverted {
-    background: var(--wi-color-contrast);
-    color: var(--wi-color-contrast-fg);
+.wd-layout-header--inverted,
+.wd-layout-footer--inverted,
+.wd-layout-sider--inverted {
+    background: var(--wd-color-contrast);
+    color: var(--wd-color-contrast-fg);
 }
 
-.wi-layout-header--inverted.wi-layout-header--bordered {
+.wd-layout-header--inverted.wd-layout-header--bordered {
     border-bottom-color: color-mix(
         in srgb,
-        var(--wi-color-contrast-fg) 18%,
+        var(--wd-color-contrast-fg) 18%,
         transparent
     );
 }
 
-.wi-layout-footer--inverted.wi-layout-footer--bordered {
+.wd-layout-footer--inverted.wd-layout-footer--bordered {
     border-top-color: color-mix(
         in srgb,
-        var(--wi-color-contrast-fg) 18%,
+        var(--wd-color-contrast-fg) 18%,
         transparent
     );
 }
 
-.wi-layout-header--absolute-positioned,
-.wi-layout-footer--absolute-positioned,
-.wi-layout-sider--absolute-positioned {
+.wd-layout-header--absolute-positioned,
+.wd-layout-footer--absolute-positioned,
+.wd-layout-sider--absolute-positioned {
     position: absolute;
     z-index: 1;
 }
 
-.wi-layout-header--absolute-positioned {
+.wd-layout-header--absolute-positioned {
     inset-inline: 0;
     top: 0;
 }
 
-.wi-layout-footer--absolute-positioned {
+.wd-layout-footer--absolute-positioned {
     bottom: 0;
     inset-inline: 0;
 }
 
-.wi-layout-sider {
-    --wi-layout-sider-width: 200px;
-    --wi-layout-sider-collapsed-width: 64px;
-    --wi-layout-padding: var(--wi-space-4);
-    --wi-layout-radius: 0;
-    --wi-layout-trigger-size: 1.5rem;
+.wd-layout-sider {
+    --wd-layout-sider-width: 200px;
+    --wd-layout-sider-collapsed-width: 64px;
+    --wd-layout-padding: var(--wd-space-4);
+    --wd-layout-radius: 0;
+    --wd-layout-trigger-size: 1.5rem;
     align-self: stretch;
-    background: var(--wi-color-surface);
+    background: var(--wd-color-surface);
     box-sizing: border-box;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     display: flex;
-    flex-basis: var(--wi-layout-sider-width);
+    flex-basis: var(--wd-layout-sider-width);
     flex-shrink: 0;
     justify-content: flex-end;
     min-width: 0;
     /* Do not clip the collapse trigger (it sits half outside the sider edge).
-       Collapsed transform overflow is clipped by `.wi-layout { overflow: hidden }`. */
+       Collapsed transform overflow is clipped by `.wd-layout { overflow: hidden }`. */
     overflow: visible;
     position: relative;
     transition:
-        color var(--wi-motion-normal) var(--wi-motion-ease),
-        border-color var(--wi-motion-normal) var(--wi-motion-ease),
-        width var(--wi-motion-normal) var(--wi-motion-ease),
-        max-width var(--wi-motion-normal) var(--wi-motion-ease),
-        background-color var(--wi-motion-normal) var(--wi-motion-ease);
+        color var(--wd-motion-normal) var(--wd-motion-ease),
+        border-color var(--wd-motion-normal) var(--wd-motion-ease),
+        width var(--wd-motion-normal) var(--wd-motion-ease),
+        max-width var(--wd-motion-normal) var(--wd-motion-ease),
+        background-color var(--wd-motion-normal) var(--wd-motion-ease);
     z-index: 1;
 }
 
-.wi-layout-sider--right-placement {
+.wd-layout-sider--right-placement {
     justify-content: flex-start;
 }
 
-.wi-layout-sider__scroll {
+.wd-layout-sider__scroll {
     box-sizing: border-box;
     flex: 1 1 auto;
     height: 100%;
@@ -198,54 +198,54 @@
     opacity: 0;
     overflow: hidden;
     overflow-x: hidden;
-    transition: opacity var(--wi-motion-normal) var(--wi-motion-ease);
+    transition: opacity var(--wd-motion-normal) var(--wd-motion-ease);
     width: 100%;
 }
 
-.wi-layout-sider--collapse-transform > .wi-layout-sider__scroll {
+.wd-layout-sider--collapse-transform > .wd-layout-sider__scroll {
     flex-shrink: 0;
-    min-width: var(--wi-layout-sider-width);
+    min-width: var(--wd-layout-sider-width);
 }
 
-.wi-layout-sider--show-content > .wi-layout-sider__scroll {
+.wd-layout-sider--show-content > .wd-layout-sider__scroll {
     opacity: 1;
     overflow: auto;
 }
 
-.wi-layout-sider--collapse-width > .wi-layout-sider__scroll {
+.wd-layout-sider--collapse-width > .wd-layout-sider__scroll {
     flex-shrink: 1;
     min-width: 0;
 }
 
-.wi-layout-sider__border {
-    background: var(--wi-color-border);
+.wd-layout-sider__border {
+    background: var(--wd-color-border);
     bottom: 0;
     position: absolute;
     top: 0;
-    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
-    width: var(--wi-border-width);
+    transition: background-color var(--wd-motion-fast) var(--wd-motion-ease);
+    width: var(--wd-border-width);
 }
 
-.wi-layout-sider--left-placement > .wi-layout-sider__border {
+.wd-layout-sider--left-placement > .wd-layout-sider__border {
     right: 0;
 }
 
-.wi-layout-sider--right-placement > .wi-layout-sider__border {
+.wd-layout-sider--right-placement > .wd-layout-sider__border {
     left: 0;
 }
 
-.wi-layout-sider--inverted > .wi-layout-sider__border {
+.wd-layout-sider--inverted > .wd-layout-sider__border {
     background: color-mix(
         in srgb,
-        var(--wi-color-contrast-fg) 18%,
+        var(--wd-color-contrast-fg) 18%,
         transparent
     );
 }
 
-.wi-layout-sider__trigger {
+.wd-layout-sider__trigger {
     background: transparent;
     border: 0;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     font: inherit;
     padding: 0;
@@ -253,130 +253,130 @@
     z-index: 2;
 }
 
-.wi-layout-sider__trigger:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-layout-sider__trigger:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-layout-sider__trigger--arrow-circle {
+.wd-layout-sider__trigger--arrow-circle {
     align-items: center;
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
     border-radius: 50%;
-    box-shadow: var(--wi-shadow-sm);
+    box-shadow: var(--wd-shadow-sm);
     display: inline-flex;
     font-size: 1rem;
-    height: var(--wi-layout-trigger-size);
+    height: var(--wd-layout-trigger-size);
     justify-content: center;
     right: 0;
     top: 50%;
     transform: translate(50%, -50%);
-    width: var(--wi-layout-trigger-size);
+    width: var(--wd-layout-trigger-size);
 }
 
-.wi-layout-sider--right-placement > .wi-layout-sider__trigger--arrow-circle {
+.wd-layout-sider--right-placement > .wd-layout-sider__trigger--arrow-circle {
     left: 0;
     right: auto;
     transform: translate(-50%, -50%);
 }
 
-.wi-layout-sider__arrow {
+.wd-layout-sider__arrow {
     display: inline-block;
     line-height: 1;
     transform: rotate(180deg);
-    transition: transform var(--wi-motion-normal) var(--wi-motion-ease);
+    transition: transform var(--wd-motion-normal) var(--wd-motion-ease);
 }
 
-.wi-layout-sider--collapsed
-    > .wi-layout-sider__trigger--arrow-circle
-    .wi-layout-sider__arrow {
+.wd-layout-sider--collapsed
+    > .wd-layout-sider__trigger--arrow-circle
+    .wd-layout-sider__arrow {
     transform: rotate(0deg);
 }
 
-.wi-layout-sider--right-placement
-    > .wi-layout-sider__trigger--arrow-circle
-    .wi-layout-sider__arrow {
+.wd-layout-sider--right-placement
+    > .wd-layout-sider__trigger--arrow-circle
+    .wd-layout-sider__arrow {
     transform: rotate(0deg);
 }
 
-.wi-layout-sider--right-placement.wi-layout-sider--collapsed
-    > .wi-layout-sider__trigger--arrow-circle
-    .wi-layout-sider__arrow {
+.wd-layout-sider--right-placement.wd-layout-sider--collapsed
+    > .wd-layout-sider__trigger--arrow-circle
+    .wd-layout-sider__arrow {
     transform: rotate(180deg);
 }
 
-.wi-layout-sider--inverted > .wi-layout-sider__trigger--arrow-circle {
-    background: var(--wi-color-contrast);
+.wd-layout-sider--inverted > .wd-layout-sider__trigger--arrow-circle {
+    background: var(--wd-color-contrast);
     border-color: color-mix(
         in srgb,
-        var(--wi-color-contrast-fg) 18%,
+        var(--wd-color-contrast-fg) 18%,
         transparent
     );
-    color: var(--wi-color-contrast-fg);
+    color: var(--wd-color-contrast-fg);
 }
 
-.wi-layout-sider__trigger--bar {
-    height: var(--wi-layout-trigger-bar-height);
-    right: calc(-1 * var(--wi-layout-trigger-bar-offset));
-    top: calc(50% - var(--wi-layout-trigger-bar-top));
-    width: var(--wi-layout-trigger-bar-width);
+.wd-layout-sider__trigger--bar {
+    height: var(--wd-layout-trigger-bar-height);
+    right: calc(-1 * var(--wd-layout-trigger-bar-offset));
+    top: calc(50% - var(--wd-layout-trigger-bar-top));
+    width: var(--wd-layout-trigger-bar-width);
 }
 
-.wi-layout-sider--right-placement > .wi-layout-sider__trigger--bar {
-    left: calc(-1 * var(--wi-layout-trigger-bar-offset));
+.wd-layout-sider--right-placement > .wd-layout-sider__trigger--bar {
+    left: calc(-1 * var(--wd-layout-trigger-bar-offset));
     right: auto;
     transform: rotate(180deg);
 }
 
-.wi-layout-sider__bar {
+.wd-layout-sider__bar {
     display: block;
     height: 100%;
     position: relative;
     width: 100%;
 }
 
-.wi-layout-sider__bar-top,
-.wi-layout-sider__bar-bottom {
-    background: var(--wi-color-text-muted);
+.wd-layout-sider__bar-top,
+.wd-layout-sider__bar-bottom {
+    background: var(--wd-color-text-muted);
     border-radius: 2px;
     height: 2.375rem;
     left: 0.875rem;
     position: absolute;
     transition:
-        background-color var(--wi-motion-fast) var(--wi-motion-ease),
-        transform var(--wi-motion-fast) var(--wi-motion-ease);
+        background-color var(--wd-motion-fast) var(--wd-motion-ease),
+        transform var(--wd-motion-fast) var(--wd-motion-ease);
     width: 4px;
 }
 
-.wi-layout-sider__bar-top {
+.wd-layout-sider__bar-top {
     top: 0;
 }
 
-.wi-layout-sider__bar-bottom {
+.wd-layout-sider__bar-bottom {
     top: 2.125rem;
 }
 
-.wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-top {
+.wd-layout-sider__trigger--bar:hover .wd-layout-sider__bar-top {
     transform: rotate(12deg) scale(1.15) translateY(-2px);
 }
 
-.wi-layout-sider__trigger--bar:hover .wi-layout-sider__bar-bottom {
+.wd-layout-sider__trigger--bar:hover .wd-layout-sider__bar-bottom {
     transform: rotate(-12deg) scale(1.15) translateY(2px);
 }
 
-.wi-layout-sider--collapsed
-    > .wi-layout-sider__trigger--bar:hover
-    .wi-layout-sider__bar-top {
+.wd-layout-sider--collapsed
+    > .wd-layout-sider__trigger--bar:hover
+    .wd-layout-sider__bar-top {
     transform: rotate(-12deg) scale(1.15) translateY(-2px);
 }
 
-.wi-layout-sider--collapsed
-    > .wi-layout-sider__trigger--bar:hover
-    .wi-layout-sider__bar-bottom {
+.wd-layout-sider--collapsed
+    > .wd-layout-sider__trigger--bar:hover
+    .wd-layout-sider__bar-bottom {
     transform: rotate(12deg) scale(1.15) translateY(2px);
 }
 
-.wi-layout-sider--absolute-positioned {
+.wd-layout-sider--absolute-positioned {
     bottom: 0;
     left: 0;
     position: absolute;

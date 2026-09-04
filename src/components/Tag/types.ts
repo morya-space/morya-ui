@@ -1,8 +1,8 @@
-import type { WiSizeInput, WiTagSeverity } from '../../shared/types'
+import type { WdSizeInput, WdTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type TagSeverity = WiTagSeverity | 'warning'
-export type TagSize = WiSizeInput
+export type TagSeverity = WdTagSeverity | 'warning'
+export type TagSize = WdSizeInput
 
 export interface TagProps {
   /** Display text. Ignored when default slot has content. */
@@ -14,7 +14,7 @@ export interface TagProps {
   severity?: TagSeverity
   /** Fully rounded corners. */
   rounded?: boolean
-  /** Icon name from WiIcon. */
+  /** Icon name from WdIcon. */
   icon?: IconName
   /** Show a close control. */
   closable?: boolean

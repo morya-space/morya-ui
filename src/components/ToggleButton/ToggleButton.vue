@@ -3,7 +3,7 @@ import type { ToggleButtonProps } from './types'
 import { computed } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { resolveMenuIcon } from '../../shared/menu'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ToggleButtonProps>(), {
   modelValue: false,
@@ -19,11 +19,11 @@ const emit = defineEmits<{
 const sizeClass = useConfiguredSize('ToggleButton', () => props.size)
 
 const rootClass = computed(() => [
-  'wi-togglebutton',
-  `wi-togglebutton--${sizeClass.value}`,
+  'wd-togglebutton',
+  `wd-togglebutton--${sizeClass.value}`,
   {
-    'wi-togglebutton--checked': props.modelValue,
-    'wi-togglebutton--disabled': props.disabled,
+    'wd-togglebutton--checked': props.modelValue,
+    'wd-togglebutton--disabled': props.disabled,
   },
 ])
 
@@ -45,11 +45,11 @@ function toggle() {
     :aria-pressed="modelValue"
     @click="toggle"
   >
-    <span v-if="resolvedIcon" class="wi-togglebutton__icon" aria-hidden="true">
-      <WiIcon :name="resolvedIcon" size="sm" />
+    <span v-if="resolvedIcon" class="wd-togglebutton__icon" aria-hidden="true">
+      <WdIcon :name="resolvedIcon" size="sm" />
     </span>
     <slot>
-      <span class="wi-togglebutton__label">{{ label }}</span>
+      <span class="wd-togglebutton__label">{{ label }}</span>
     </slot>
   </button>
 </template>

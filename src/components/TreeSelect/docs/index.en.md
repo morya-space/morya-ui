@@ -11,14 +11,14 @@ Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-sel
 ## Import
 
 ```ts
-import { WiTreeSelect } from '@well-insight/ui'
+import { WdTreeSelect } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiTreeSelect } from '@well-insight/ui'
+import { WdTreeSelect } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -35,7 +35,7 @@ const options = [
 </script>
 
 <template>
-  <WiTreeSelect v-model="value" :options="options" />
+  <WdTreeSelect v-model="value" :options="options" />
 </template>
 ```
 
@@ -43,7 +43,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiTreeSelect } from '@well-insight/ui'
+import { WdTreeSelect } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref<string[]>([])
@@ -60,7 +60,7 @@ const options = [
 </script>
 
 <template>
-  <WiTreeSelect
+  <WdTreeSelect
     v-model="value"
     :options="options"
     multiple
@@ -78,7 +78,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiTreeSelect } from '@well-insight/ui'
+import { WdTreeSelect } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const a = ref(null)
@@ -89,9 +89,9 @@ const options = [{ key: 'docs', label: 'Documents' }]
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WiTreeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <WiTreeSelect v-model="b" :options="options" placeholder="Default" />
-    <WiTreeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <WdTreeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <WdTreeSelect v-model="b" :options="options" placeholder="Default" />
+    <WdTreeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -103,7 +103,7 @@ const options = [{ key: 'docs', label: 'Documents' }]
 | `options` | `TreeSelectNode[]` | — | Tree nodes. |
 | `modelValue` | `string \| string[] \| null` | `null` | Selected key(s); array when multiple. |
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
-| `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `multiple` | `boolean` | `false` | Multiple selection. |
 | `checkable` | `boolean` | `false` | Show checkboxes (cascade like Tree). |

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build the docs site for GitHub Pages (subpath /well-insight-ui/) and add SPA 404 fallback.
+ * Build the docs site for GitHub Pages (subpath /wex-design-ui/) and add SPA 404 fallback.
  */
 import { copyFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'

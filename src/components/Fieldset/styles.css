@@ -1,20 +1,20 @@
-/* —�?Panel: Fieldset —�?*/
-.wi-fieldset {
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
+/* —�?Panel: Fieldset —�?*/
+.wd-fieldset {
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
     margin: 0;
     min-inline-size: 0;
-    padding: var(--wi-space-3) var(--wi-space-4) var(--wi-space-4);
+    padding: var(--wd-space-3) var(--wd-space-4) var(--wd-space-4);
 }
 
-.wi-fieldset__legend {
-    color: var(--wi-color-text);
+.wd-fieldset__legend {
+    color: var(--wd-color-text);
     font-weight: 600;
-    padding: 0 var(--wi-space-1);
+    padding: 0 var(--wd-space-1);
 }
 
-.wi-fieldset__toggler {
+.wd-fieldset__toggler {
     align-items: center;
     background: transparent;
     border: 0;
@@ -22,31 +22,31 @@
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     padding: 0;
 }
 
-.wi-fieldset__toggler:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-fieldset__toggler:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-fieldset__content {
-    color: var(--wi-color-text);
-    padding-top: var(--wi-space-2);
+.wd-fieldset__content {
+    color: var(--wd-color-text);
+    padding-top: var(--wd-space-2);
 }
 
-.wi-fieldset-collapse-enter-active,
-.wi-fieldset-collapse-leave-active {
+.wd-fieldset-collapse-enter-active,
+.wd-fieldset-collapse-leave-active {
     overflow: hidden;
     transition:
-        max-height var(--wi-motion-normal) var(--wi-motion-ease),
-        opacity var(--wi-motion-normal) var(--wi-motion-ease),
-        padding var(--wi-motion-normal) var(--wi-motion-ease);
+        max-height var(--wd-motion-normal) var(--wd-motion-ease),
+        opacity var(--wd-motion-normal) var(--wd-motion-ease),
+        padding var(--wd-motion-normal) var(--wd-motion-ease);
 }
 
-.wi-fieldset-collapse-enter-from,
-.wi-fieldset-collapse-leave-to {
+.wd-fieldset-collapse-enter-from,
+.wd-fieldset-collapse-leave-to {
     max-height: 0;
     opacity: 0;
     padding-top: 0;

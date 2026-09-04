@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { h, provide, ref } from 'vue'
-import { WI_TREE_KEY } from './context'
+import { WD_TREE_KEY } from './context'
 import type { TreeContext } from './context'
 import type { TreeNode } from './types'
 import TreeNodeItem from './TreeNodeItem.vue'
@@ -42,7 +42,7 @@ function createContext(overrides: Partial<TreeContext> = {}): TreeContext {
 function mountNode(overrides: Partial<Parameters<typeof mount>[1]> = {}) {
   const Host = {
     setup() {
-      provide(WI_TREE_KEY, createContext())
+      provide(WD_TREE_KEY, createContext())
       return () => h(TreeNodeItem, { node })
     },
   }
@@ -52,20 +52,20 @@ function mountNode(overrides: Partial<Parameters<typeof mount>[1]> = {}) {
 describe('TreeNodeItem', () => {
   it('renders expanded node with children', () => {
     const wrapper = mountNode()
-    expect(wrapper.get('.wi-tree__label').text()).toBe('Docs')
-    expect(wrapper.find('.wi-tree__node .wi-tree__node').exists()).toBe(true)
+    expect(wrapper.get('.wd-tree__label').text()).toBe('Docs')
+    expect(wrapper.find('.wd-tree__node .wd-tree__node').exists()).toBe(true)
   })
 
   it('calls tree select on label click', async () => {
     const select = vi.fn()
     const Host = {
       setup() {
-        provide(WI_TREE_KEY, createContext({ select }))
+        provide(WD_TREE_KEY, createContext({ select }))
         return () => h(TreeNodeItem, { node })
       },
     }
     const wrapper = mount(Host)
-    await wrapper.get('.wi-tree__label').trigger('click')
+    await wrapper.get('.wd-tree__label').trigger('click')
     expect(select).toHaveBeenCalledWith(node)
   })
 })

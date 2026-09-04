@@ -1,60 +1,60 @@
-/* —�?Misc: Terminal —�?*/
-.wi-terminal {
-    --wi-terminal-bg: var(--wi-color-contrast);
-    --wi-terminal-fg: var(--wi-color-contrast-fg);
-    --wi-terminal-prompt: var(--wi-color-success);
-    --wi-terminal-border: color-mix(in srgb, var(--wi-color-on-emphasis) 12%, transparent);
-    --wi-terminal-min-height: 12rem;
-    background: var(--wi-terminal-bg);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
-    color: var(--wi-terminal-fg);
+/* —�?Misc: Terminal —�?*/
+.wd-terminal {
+    --wd-terminal-bg: var(--wd-color-contrast);
+    --wd-terminal-fg: var(--wd-color-contrast-fg);
+    --wd-terminal-prompt: var(--wd-color-success);
+    --wd-terminal-border: color-mix(in srgb, var(--wd-color-on-emphasis) 12%, transparent);
+    --wd-terminal-min-height: 12rem;
+    background: var(--wd-terminal-bg);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
+    color: var(--wd-terminal-fg);
     display: flex;
     flex-direction: column;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    min-height: var(--wi-terminal-min-height);
+    min-height: var(--wd-terminal-min-height);
     overflow: hidden;
 }
 
-.wi-terminal__body {
+.wd-terminal__body {
     flex: 1;
     overflow: auto;
-    padding: var(--wi-space-3);
+    padding: var(--wd-space-3);
 }
 
-.wi-terminal__welcome,
-.wi-terminal__line {
+.wd-terminal__welcome,
+.wd-terminal__line {
     line-height: 1.5;
-    margin-bottom: var(--wi-space-1);
+    margin-bottom: var(--wd-space-1);
 }
 
-.wi-terminal__response {
-    color: color-mix(in srgb, var(--wi-terminal-fg) 85%, transparent);
+.wd-terminal__response {
+    color: color-mix(in srgb, var(--wd-terminal-fg) 85%, transparent);
     line-height: 1.5;
-    margin-bottom: var(--wi-space-2);
+    margin-bottom: var(--wd-space-2);
     white-space: pre-wrap;
 }
 
-.wi-terminal__form {
+.wd-terminal__form {
     align-items: center;
-    border-top: var(--wi-border-width) solid var(--wi-terminal-border);
+    border-top: var(--wd-border-width) solid var(--wd-terminal-border);
     display: flex;
-    gap: var(--wi-space-2);
-    padding: var(--wi-space-2) var(--wi-space-3);
+    gap: var(--wd-space-2);
+    padding: var(--wd-space-2) var(--wd-space-3);
 }
 
-.wi-terminal__prompt {
-    color: var(--wi-terminal-prompt);
+.wd-terminal__prompt {
+    color: var(--wd-terminal-prompt);
 }
 
-[data-theme="dark"] .wi-terminal {
-    --wi-terminal-bg: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
-    --wi-terminal-fg: var(--wi-color-text);
-    --wi-terminal-prompt: var(--wi-color-success);
-    --wi-terminal-border: color-mix(in srgb, var(--wi-color-on-emphasis) 14%, transparent);
+[data-theme="dark"] .wd-terminal {
+    --wd-terminal-bg: color-mix(in srgb, var(--wd-color-text) 6%, var(--wd-color-surface));
+    --wd-terminal-fg: var(--wd-color-text);
+    --wd-terminal-prompt: var(--wd-color-success);
+    --wd-terminal-border: color-mix(in srgb, var(--wd-color-on-emphasis) 14%, transparent);
 }
 
-.wi-terminal__input {
+.wd-terminal__input {
     background: transparent;
     border: 0;
     color: inherit;

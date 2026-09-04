@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PanelProps } from './types'
 import { computed } from 'vue'
-import { useWiId } from '../../shared/useWiId'
-import { useWiLocale } from '../../locale'
+import { useWdId } from '../../shared/useWdId'
+import { useWdLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
 import { useControllable } from '../../shared/useControllable'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PanelProps>(), {
   toggleable: false,
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const locale = useWiLocale()
-const contentId = useWiId()
+const locale = useWdLocale()
+const contentId = useWdId()
 const sizeTone = computed(() => resolveSizeClass(props.size))
 
 function resolveControlledCollapsed() {
@@ -41,11 +41,11 @@ const { value: isCollapsed, setValue: setCollapsed } = useControllable(
 )
 
 const rootClass = computed(() => [
-  'wi-panel',
+  'wd-panel',
   {
-    'wi-panel--collapsed': isCollapsed.value,
-    'wi-panel--small': sizeTone.value === 'small',
-    'wi-panel--large': sizeTone.value === 'large',
+    'wd-panel--collapsed': isCollapsed.value,
+    'wd-panel--small': sizeTone.value === 'small',
+    'wd-panel--large': sizeTone.value === 'large',
   },
 ])
 
@@ -57,8 +57,8 @@ function toggle() {
 
 <template>
   <section :class="rootClass">
-    <header v-if="$slots.header || header || toggleable" class="wi-panel__header">
-      <div class="wi-panel__title">
+    <header v-if="$slots.header || header || toggleable" class="wd-panel__header">
+      <div class="wd-panel__title">
         <slot name="header">
           {{ header }}
         </slot>
@@ -66,21 +66,21 @@ function toggle() {
       <button
         v-if="toggleable"
         type="button"
-        class="wi-panel__toggler"
+        class="wd-panel__toggler"
         :aria-expanded="!isCollapsed"
         :aria-controls="contentId"
         :aria-label="isCollapsed ? locale.expand : locale.collapse"
         @click="toggle"
       >
-        <WiIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
+        <WdIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
       </button>
     </header>
-    <Transition name="wi-panel-collapse">
-      <div v-show="!isCollapsed" :id="contentId" class="wi-panel__content">
+    <Transition name="wd-panel-collapse">
+      <div v-show="!isCollapsed" :id="contentId" class="wd-panel__content">
         <slot />
       </div>
     </Transition>
-    <footer v-if="$slots.footer && !isCollapsed" class="wi-panel__footer">
+    <footer v-if="$slots.footer && !isCollapsed" class="wd-panel__footer">
       <slot name="footer" />
     </footer>
   </section>

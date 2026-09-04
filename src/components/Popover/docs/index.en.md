@@ -11,28 +11,28 @@ Overlay positioned relative to a trigger. Use it for filters, quick actions, or 
 ## Import
 
 ```ts
-import { WiButton, WiPopover } from '@well-insight/ui'
+import { WdButton, WdPopover } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiPopover } from '@well-insight/ui'
+import { WdButton, WdPopover } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
 </script>
 
 <template>
-  <WiPopover v-model="open" placement="bottom">
-    <WiButton label="Toggle Popover" @click="open = !open" />
+  <WdPopover v-model="open" placement="bottom">
+    <WdButton label="Toggle Popover" @click="open = !open" />
     <template #content>
       <p style="margin:0">
         Click outside or press Esc to close.
       </p>
     </template>
-  </WiPopover>
+  </WdPopover>
 </template>
 ```
 
@@ -40,7 +40,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiPopover } from '@well-insight/ui'
+import { WdButton, WdPopover } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -48,14 +48,14 @@ const open = ref(false)
 
 <template>
   <div style="display:flex;justify-content:center;padding:2rem">
-    <WiPopover v-model="open" placement="bottom-start">
-      <WiButton label="bottom-start" severity="secondary" @click="open = !open" />
+    <WdPopover v-model="open" placement="bottom-start">
+      <WdButton label="bottom-start" severity="secondary" @click="open = !open" />
       <template #content>
         <p style="margin:0">
           Aligned to the start of the trigger.
         </p>
       </template>
-    </WiPopover>
+    </WdPopover>
   </div>
 </template>
 ```
@@ -66,21 +66,21 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiPopover } from '@well-insight/ui'
+import { WdButton, WdPopover } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
 </script>
 
 <template>
-  <WiPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
-    <WiButton label="Hover me" severity="secondary" />
+  <WdPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
+    <WdButton label="Hover me" severity="secondary" />
     <template #content>
       <p style="margin:0">
         Opens on hover.
       </p>
     </template>
-  </WiPopover>
+  </WdPopover>
 </template>
 ```
 

@@ -1,13 +1,13 @@
-import type { WiSizeInput, WiTagSeverity } from '../../shared/types'
+import type { WdSizeInput, WdTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type ChipSeverity = WiTagSeverity | 'warning'
-export type ChipSize = WiSizeInput
+export type ChipSeverity = WdTagSeverity | 'warning'
+export type ChipSize = WdSizeInput
 
 export interface ChipProps {
   /** Chip text. */
   label?: string
-  /** Leading icon from WiIcon. */
+  /** Leading icon from WdIcon. */
   icon?: IconName
   /** Leading image URL. */
   image?: string

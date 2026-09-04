@@ -1,10 +1,10 @@
-.wi-radio__control {
-    border-radius: var(--wi-radius-full);
+.wd-radio__control {
+    border-radius: var(--wd-radius-full);
 }
 
-.wi-radio__input:checked + .wi-radio__control::after {
-    background: var(--wi-color-on-emphasis);
-    border-radius: var(--wi-radius-full);
+.wd-radio__input:checked + .wd-radio__control::after {
+    background: var(--wd-color-on-emphasis);
+    border-radius: var(--wd-radius-full);
     content: "";
     height: 0.375rem;
     width: 0.375rem;

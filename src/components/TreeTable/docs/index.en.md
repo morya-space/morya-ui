@@ -11,14 +11,14 @@ Display tree data with children using column configuration.
 ## Import
 
 ```ts
-import { WiTreeTable } from '@well-insight/ui'
+import { WdTreeTable } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiTreeTable } from '@well-insight/ui'
+import { WdTreeTable } from '@wex-design/ui'
 
 const columns = [
   { field: 'name', header: 'Name' },
@@ -37,7 +37,7 @@ const value = [
 </script>
 
 <template>
-  <WiTreeTable :value="value" :columns="columns" />
+  <WdTreeTable :value="value" :columns="columns" />
 </template>
 ```
 

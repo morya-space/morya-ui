@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WiCheckbox from './Checkbox.vue'
-import WiCheckboxGroup from './CheckboxGroup.vue'
+import WdCheckbox from './Checkbox.vue'
+import WdCheckboxGroup from './CheckboxGroup.vue'
 
-describe('wiCheckbox', () => {
+describe('wdCheckbox', () => {
   it('associates its label and emits model updates', async () => {
-    const wrapper = mount(WiCheckbox, { props: { id: 'terms', label: 'Accept terms' } })
+    const wrapper = mount(WdCheckbox, { props: { id: 'terms', label: 'Accept terms' } })
 
     expect(wrapper.get('label').attributes('for')).toBe('terms')
     await wrapper.get('input').setValue(true)
@@ -15,7 +15,7 @@ describe('wiCheckbox', () => {
   })
 
   it('does not emit updates while disabled', async () => {
-    const wrapper = mount(WiCheckbox, { props: { disabled: true } })
+    const wrapper = mount(WdCheckbox, { props: { disabled: true } })
 
     await wrapper.get('input').trigger('change')
 
@@ -24,26 +24,26 @@ describe('wiCheckbox', () => {
   })
 
   it('marks invalid state for binary checkboxes', () => {
-    const wrapper = mount(WiCheckbox, { props: { invalid: true, modelValue: false } })
+    const wrapper = mount(WdCheckbox, { props: { invalid: true, modelValue: false } })
 
-    expect(wrapper.classes()).toContain('wi-checkbox--invalid')
+    expect(wrapper.classes()).toContain('wd-checkbox--invalid')
     expect(wrapper.get('input').attributes('aria-invalid')).toBe('true')
     expect((wrapper.get('input').element as HTMLInputElement).checked).toBe(false)
   })
 
   it('sets mixed state when indeterminate', () => {
-    const wrapper = mount(WiCheckbox, { props: { indeterminate: true, label: 'All' } })
+    const wrapper = mount(WdCheckbox, { props: { indeterminate: true, label: 'All' } })
     expect((wrapper.get('input').element as HTMLInputElement).indeterminate).toBe(true)
     expect(wrapper.get('input').attributes('aria-checked')).toBe('mixed')
   })
 
   it('toggles values inside a group', async () => {
-    const wrapper = mount(WiCheckboxGroup, {
+    const wrapper = mount(WdCheckboxGroup, {
       props: { modelValue: ['a'] },
       slots: {
         default: () => [
-          h(WiCheckbox, { value: 'a', label: 'A' }),
-          h(WiCheckbox, { value: 'b', label: 'B' }),
+          h(WdCheckbox, { value: 'a', label: 'A' }),
+          h(WdCheckbox, { value: 'b', label: 'B' }),
         ],
       },
     })

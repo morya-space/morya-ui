@@ -11,18 +11,18 @@ description: 双栏分割布局，支持水平 / 垂直与拖拽调整比例。
 ## 引入
 
 ```ts
-import { WiSplitter } from '@well-insight/ui'
+import { WdSplitter } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiSplitter } from '@well-insight/ui'
+import { WdSplitter } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSplitter style="min-height: 8rem; border: 1px solid var(--wi-color-border); border-radius: var(--wi-radius-md); overflow: hidden">
+  <WdSplitter style="min-height: 8rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding: 0.75rem">
         Panel A — 拖中间分隔条
@@ -33,7 +33,7 @@ import { WiSplitter } from '@well-insight/ui'
         Panel B
       </div>
     </template>
-  </WiSplitter>
+  </WdSplitter>
 </template>
 ```
 
@@ -43,11 +43,11 @@ import { WiSplitter } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSplitter } from '@well-insight/ui'
+import { WdSplitter } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--wi-color-border); border-radius: var(--wi-radius-md); overflow: hidden">
+  <WdSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding: 0.75rem">
         Top
@@ -58,7 +58,7 @@ import { WiSplitter } from '@well-insight/ui'
         Bottom
       </div>
     </template>
-  </WiSplitter>
+  </WdSplitter>
 </template>
 ```
 
@@ -70,7 +70,7 @@ import { WiSplitter } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSplitter } from '@well-insight/ui'
+import { WdSplitter } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const percent = ref(40)
@@ -79,9 +79,9 @@ const ratio = ref(0.3)
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WiSplitter
+    <WdSplitter
       v-model:size="percent"
-      style="min-height: 7rem; border: 1px solid var(--wi-color-border); border-radius: var(--wi-radius-md); overflow: hidden"
+      style="min-height: 7rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden"
     >
       <template #panel1>
         <div style="padding:0.75rem">
@@ -93,12 +93,12 @@ const ratio = ref(0.3)
           rest
         </div>
       </template>
-    </WiSplitter>
-    <WiSplitter
+    </WdSplitter>
+    <WdSplitter
       v-model:size="ratio"
       :min="0.15"
       :max="0.85"
-      style="min-height: 7rem; border: 1px solid var(--wi-color-border); border-radius: var(--wi-radius-md); overflow: hidden"
+      style="min-height: 7rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden"
     >
       <template #panel1>
         <div style="padding:0.75rem">
@@ -110,7 +110,7 @@ const ratio = ref(0.3)
           rest
         </div>
       </template>
-    </WiSplitter>
+    </WdSplitter>
   </div>
 </template>
 ```
@@ -119,11 +119,11 @@ const ratio = ref(0.3)
 
 ```vue preview
 <script setup lang="ts">
-import { WiSplitter } from '@well-insight/ui'
+import { WdSplitter } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--wi-color-border); border-radius: var(--wi-radius-md); overflow: hidden">
+  <WdSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding:0.75rem">
         不可拖拽
@@ -134,7 +134,7 @@ import { WiSplitter } from '@well-insight/ui'
         B
       </div>
     </template>
-  </WiSplitter>
+  </WdSplitter>
 </template>
 ```
 

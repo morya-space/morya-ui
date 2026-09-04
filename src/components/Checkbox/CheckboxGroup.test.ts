@@ -1,34 +1,34 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WiCheckbox from './Checkbox.vue'
-import WiCheckboxGroup from './CheckboxGroup.vue'
+import WdCheckbox from './Checkbox.vue'
+import WdCheckboxGroup from './CheckboxGroup.vue'
 
 describe('checkboxGroup', () => {
   it('exposes group role and disabled modifier', () => {
-    const wrapper = mount(WiCheckboxGroup, {
+    const wrapper = mount(WdCheckboxGroup, {
       props: { disabled: true, modelValue: [] },
-      slots: { default: () => h(WiCheckbox, { value: 'a', label: 'A' }) },
+      slots: { default: () => h(WdCheckbox, { value: 'a', label: 'A' }) },
     })
     expect(wrapper.attributes('role')).toBe('group')
-    expect(wrapper.classes()).toContain('wi-checkbox-group--disabled')
+    expect(wrapper.classes()).toContain('wd-checkbox-group--disabled')
   })
 
   it('supports group aria-label', () => {
-    const wrapper = mount(WiCheckboxGroup, {
+    const wrapper = mount(WdCheckboxGroup, {
       props: { label: 'Permissions', modelValue: [] },
-      slots: { default: () => h(WiCheckbox, { value: 'a', label: 'A' }) },
+      slots: { default: () => h(WdCheckbox, { value: 'a', label: 'A' }) },
     })
     expect(wrapper.attributes('aria-label')).toBe('Permissions')
   })
 
   it('toggles values through group context', async () => {
-    const wrapper = mount(WiCheckboxGroup, {
+    const wrapper = mount(WdCheckboxGroup, {
       props: { modelValue: ['a'] },
       slots: {
         default: () => [
-          h(WiCheckbox, { value: 'a', label: 'A' }),
-          h(WiCheckbox, { value: 'b', label: 'B' }),
+          h(WdCheckbox, { value: 'a', label: 'A' }),
+          h(WdCheckbox, { value: 'b', label: 'B' }),
         ],
       },
     })

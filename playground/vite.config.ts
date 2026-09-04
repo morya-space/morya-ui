@@ -33,7 +33,7 @@ function highlightCode(code: string, lang: string) {
 }
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/well-insight-ui/' : '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/wex-design-ui/' : '/',
   root: playgroundDir,
   plugins: [
     docsManifestPlugin(repoRoot, guideDir),
@@ -41,7 +41,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     Markdown({
-      wrapperClasses: 'wi-markdown-doc',
+      wrapperClasses: 'wd-markdown-doc',
       markdownOptions: {
         highlight: highlightCode,
       },
@@ -59,51 +59,51 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@well-insight/ui/button/style',
+        find: '@wex-design/ui/button/style',
         replacement: fileURLToPath(new URL('../src/components/Button/style.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/button',
+        find: '@wex-design/ui/button',
         replacement: fileURLToPath(new URL('../src/components/Button/index.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/input/style',
+        find: '@wex-design/ui/input/style',
         replacement: fileURLToPath(new URL('../src/components/Input/style.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/input',
+        find: '@wex-design/ui/input',
         replacement: fileURLToPath(new URL('../src/components/Input/index.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/select/style',
+        find: '@wex-design/ui/select/style',
         replacement: fileURLToPath(new URL('../src/components/Select/style.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/select',
+        find: '@wex-design/ui/select',
         replacement: fileURLToPath(new URL('../src/components/Select/index.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/dialog/style',
+        find: '@wex-design/ui/dialog/style',
         replacement: fileURLToPath(new URL('../src/components/Dialog/style.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/dialog',
+        find: '@wex-design/ui/dialog',
         replacement: fileURLToPath(new URL('../src/components/Dialog/index.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/icon/style',
+        find: '@wex-design/ui/icon/style',
         replacement: fileURLToPath(new URL('../src/components/Icon/style.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/icon',
+        find: '@wex-design/ui/icon',
         replacement: fileURLToPath(new URL('../src/components/Icon/index.ts', import.meta.url)),
       },
       {
-        find: '@well-insight/ui/styles.css',
+        find: '@wex-design/ui/styles.css',
         replacement: fileURLToPath(new URL('../src/styles/index.css', import.meta.url)),
       },
       {
-        find: '@well-insight/ui',
+        find: '@wex-design/ui',
         replacement: fileURLToPath(new URL('../src', import.meta.url)),
       },
       {

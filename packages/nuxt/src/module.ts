@@ -1,16 +1,16 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
 
-export interface WellInsightNuxtOptions {
-  /** Import `@well-insight/ui/styles.css`. Default `true`. */
+export interface WexDesignNuxtOptions {
+  /** Import `@wex-design/ui/styles.css`. Default `true`. */
   css?: boolean
-  /** Add `@well-insight/ui` to `build.transpile`. Default `true`. */
+  /** Add `@wex-design/ui` to `build.transpile`. Default `true`. */
   transpile?: boolean
 }
 
-export default defineNuxtModule<WellInsightNuxtOptions>({
+export default defineNuxtModule<WexDesignNuxtOptions>({
   meta: {
-    name: '@well-insight/nuxt',
-    configKey: 'wellInsight',
+    name: '@wex-design/nuxt',
+    configKey: 'wexDesign',
     compatibility: {
       nuxt: '>=3.10.0',
     },
@@ -23,11 +23,11 @@ export default defineNuxtModule<WellInsightNuxtOptions>({
     const resolver = createResolver(import.meta.url)
 
     if (options.transpile) {
-      nuxt.options.build.transpile.push('@well-insight/ui')
+      nuxt.options.build.transpile.push('@wex-design/ui')
     }
 
     if (options.css) {
-      nuxt.options.css.push('@well-insight/ui/styles.css')
+      nuxt.options.css.push('@wex-design/ui/styles.css')
     }
 
     addPlugin({

@@ -6,7 +6,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 
 # Table
 
-`WiTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。
+`WdTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。
 
 列宽规则：
 
@@ -17,15 +17,15 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 引入
 
 ```ts
-import { WiTable, WiTag } from '@well-insight/ui'
-import type { TableColumnDefinition, TableItem } from '@well-insight/ui'
+import { WdTable, WdTag } from '@wex-design/ui'
+import type { TableColumnDefinition, TableItem } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiTable, WiTag } from '@well-insight/ui'
+import { WdTable, WdTag } from '@wex-design/ui'
 
 const columns = [
   { key: 'name', label: '项目', minWidth: 140, sortable: true },
@@ -42,14 +42,14 @@ const rows = [
 </script>
 
 <template>
-  <WiTable :columns="columns" :rows="rows" striped bordered>
+  <WdTable :columns="columns" :rows="rows" striped bordered>
     <template #cell-status="{ value }">
-      <WiTag
+      <WdTag
         :value="String(value)"
         :severity="value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'"
       />
     </template>
-  </WiTable>
+  </WdTable>
 </template>
 ```
 
@@ -59,7 +59,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
+import { WdTable } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -74,7 +74,7 @@ const selection = ref<Record<string, unknown>[]>([])
 </script>
 
 <template>
-  <WiTable
+  <WdTable
     v-model:selection="selection"
     :columns="columns"
     :rows="rows"
@@ -91,7 +91,7 @@ const selection = ref<Record<string, unknown>[]>([])
 
 ```vue preview
 <script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
+import { WdTable } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -110,7 +110,7 @@ const page = ref(1)
 </script>
 
 <template>
-  <WiTable
+  <WdTable
     v-model:page="page"
     :columns="columns"
     :rows="rows"
@@ -126,7 +126,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
+import { WdTable } from '@wex-design/ui'
 
 const columns = [
   { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
@@ -142,7 +142,7 @@ const rows = [
 </script>
 
 <template>
-  <WiTable :columns="columns" :rows="rows" bordered :paginator="false" />
+  <WdTable :columns="columns" :rows="rows" bordered :paginator="false" />
 </template>
 ```
 
@@ -152,7 +152,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
+import { WdTable } from '@wex-design/ui'
 
 const columns = [
   { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },
@@ -164,11 +164,11 @@ const rows = [
 </script>
 
 <template>
-  <WiTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
+  <WdTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
     <template #expansion="{ row }">
       {{ row.extra }}
     </template>
-  </WiTable>
+  </WdTable>
 </template>
 ```
 
@@ -176,7 +176,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiTable } from '@well-insight/ui'
+import { WdButton, WdTable } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -188,8 +188,8 @@ const columns = [
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WiButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
-    <WiTable
+    <WdButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
+    <WdTable
       :columns="columns"
       :rows="[]"
       :loading="loading"
@@ -207,7 +207,7 @@ const columns = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiTable } from '@well-insight/ui'
+import { WdTable } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -223,7 +223,7 @@ const total = ref(42)
 </script>
 
 <template>
-  <WiTable
+  <WdTable
     v-model:server-options="serverOptions"
     :columns="columns"
     :rows="rows"

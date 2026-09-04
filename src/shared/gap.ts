@@ -1,12 +1,12 @@
 import type { CSSProperties } from 'vue'
 
-export type WiGapToken = 'small' | 'medium' | 'large'
-export type WiGapSize = WiGapToken | number | [number, number]
+export type WdGapToken = 'small' | 'medium' | 'large'
+export type WdGapSize = WdGapToken | number | [number, number]
 
-const TOKEN_GAP: Record<WiGapToken, string> = {
-  small: 'var(--wi-space-2)',
-  medium: 'var(--wi-space-3)',
-  large: 'var(--wi-space-4)',
+const TOKEN_GAP: Record<WdGapToken, string> = {
+  small: 'var(--wd-space-2)',
+  medium: 'var(--wd-space-3)',
+  large: 'var(--wd-space-4)',
 }
 
 export interface ResolvedGap {
@@ -20,11 +20,11 @@ export interface ResolvedGap {
 
 /** Resolve Space / Flex / Grid gap tokens to CSS lengths. */
 export function resolveGapCSSValue(
-  size: WiGapSize | string | number | undefined | null,
+  size: WdGapSize | string | number | undefined | null,
 ): string {
   if (size == null || size === '') return '0'
   if (typeof size === 'string') {
-    const token = size.trim() as WiGapToken
+    const token = size.trim() as WdGapToken
     if (token in TOKEN_GAP) return TOKEN_GAP[token]
     if (/^\d+(\.\d+)?$/.test(size.trim())) return `${size.trim()}px`
     return TOKEN_GAP.medium
@@ -37,7 +37,7 @@ export function resolveGapCSSValue(
   return TOKEN_GAP.medium
 }
 /** Resolve Space / Flex size prop into CSS gap lengths. */
-export function resolveGap(size: WiGapSize = 'medium'): ResolvedGap {
+export function resolveGap(size: WdGapSize = 'medium'): ResolvedGap {
   if (Array.isArray(size)) {
     const col = `${size[0]}px`
     const row = `${size[1]}px`
@@ -51,8 +51,8 @@ export function resolveGap(size: WiGapSize = 'medium'): ResolvedGap {
   return { row: value, col: value, css: value }
 }
 
-export type WiFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch'
-export type WiFlexJustify =
+export type WdFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch'
+export type WdFlexJustify =
   | 'start'
   | 'end'
   | 'center'
@@ -60,7 +60,7 @@ export type WiFlexJustify =
   | 'space-between'
   | 'space-evenly'
 
-export function resolveAlign(align?: WiFlexAlign): CSSProperties['alignItems'] {
+export function resolveAlign(align?: WdFlexAlign): CSSProperties['alignItems'] {
   if (!align) return undefined
   if (align === 'start') return 'flex-start'
   if (align === 'end') return 'flex-end'
@@ -68,7 +68,7 @@ export function resolveAlign(align?: WiFlexAlign): CSSProperties['alignItems'] {
 }
 
 export function resolveJustify(
-  justify: WiFlexJustify = 'start',
+  justify: WdFlexJustify = 'start',
 ): NonNullable<CSSProperties['justifyContent']> {
   if (justify === 'start') return 'flex-start'
   if (justify === 'end') return 'flex-end'

@@ -1,4 +1,4 @@
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
 export type SelectButtonValue = string | number | boolean
 
@@ -15,7 +15,7 @@ export interface SelectButtonProps {
   disabled?: boolean
   invalid?: boolean
   label?: string
-  size?: WiSizeInput
+  size?: WdSizeInput
 }
 
 export interface SelectButtonEmits {

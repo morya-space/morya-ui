@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WiToggleButton from './ToggleButton.vue'
+import WdToggleButton from './ToggleButton.vue'
 
-describe('wiToggleButton', () => {
+describe('wdToggleButton', () => {
   it('toggles modelValue and shows on/off labels', async () => {
-    const wrapper = mount(WiToggleButton, {
+    const wrapper = mount(WdToggleButton, {
       props: { modelValue: false, onLabel: 'Yes', offLabel: 'No' },
     })
     expect(wrapper.text()).toContain('No')
@@ -13,14 +13,14 @@ describe('wiToggleButton', () => {
   })
 
   it('does not emit when disabled', async () => {
-    const wrapper = mount(WiToggleButton, { props: { modelValue: true, disabled: true } })
+    const wrapper = mount(WdToggleButton, { props: { modelValue: true, disabled: true } })
     await wrapper.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-    expect(wrapper.classes()).toContain('wi-togglebutton--disabled')
+    expect(wrapper.classes()).toContain('wd-togglebutton--disabled')
   })
 
   it('applies size classes', () => {
-    expect(mount(WiToggleButton, { props: { size: 'small' } }).classes()).toContain('wi-togglebutton--small')
-    expect(mount(WiToggleButton, { props: { size: 'lg' } }).classes()).toContain('wi-togglebutton--large')
+    expect(mount(WdToggleButton, { props: { size: 'small' } }).classes()).toContain('wd-togglebutton--small')
+    expect(mount(WdToggleButton, { props: { size: 'lg' } }).classes()).toContain('wd-togglebutton--large')
   })
 })

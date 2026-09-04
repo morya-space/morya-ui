@@ -7,20 +7,20 @@ const props = withDefaults(defineProps<BlockUIProps>(), {
 })
 
 const rootClass = computed(() => [
-  'wi-blockui',
-  { 'wi-blockui--blocked': props.blocked },
+  'wd-blockui',
+  { 'wd-blockui--blocked': props.blocked },
 ])
 </script>
 
 <template>
   <div :class="rootClass">
-    <div class="wi-blockui__content" :aria-busy="blocked || undefined" :inert="blocked">
+    <div class="wd-blockui__content" :aria-busy="blocked || undefined" :inert="blocked">
       <slot />
     </div>
-    <Transition name="wi-blockui">
+    <Transition name="wd-blockui">
       <div
         v-if="blocked"
-        class="wi-blockui__overlay"
+        class="wd-blockui__overlay"
         role="presentation"
         aria-hidden="true"
       />

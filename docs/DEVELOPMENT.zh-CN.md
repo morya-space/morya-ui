@@ -11,7 +11,7 @@
 | `src/` | 组件库源码（组件、主题、locale、样式） |
 | `playground/` | 文档站（Vite + Markdown 预览） |
 | `scripts/` | 发版与 CHANGELOG 工具 |
-| `packages/ui-mcp/` | `@well-insight/ui-mcp` stdio MCP 服务 |
+| `packages/ui-mcp/` | `@wex-design/ui-mcp` stdio MCP 服务 |
 | `docs/` | 维护者文档 |
 | `dist/` | 构建产物（勿手改） |
 
@@ -36,7 +36,7 @@ pnpm release:push         # 推送分支与 tag
 pnpm release:npm          # 仅 build + publish（UI + MCP；需先改 version）
 pnpm release:git          # 仅补 tag / release 分支
 pnpm release:mcp          # 单独发布 MCP（一般不必；完整发版已包含）
-pnpm mcp:build            # 构建 @well-insight/ui-mcp（文档目录 + stdio 服务）
+pnpm mcp:build            # 构建 @wex-design/ui-mcp（文档目录 + stdio 服务）
 pnpm mcp:audit-examples   # 审计 Props / Events / Slots / Methods 示例覆盖率
 pnpm mcp:start            # 本地启动 MCP（stdio）
 ```

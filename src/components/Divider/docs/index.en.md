@@ -11,7 +11,7 @@ Content divider, optionally with a label.
 ## Import
 
 ```ts
-import { WiDivider } from '@well-insight/ui'
+import { WdDivider } from '@wex-design/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Default horizontal solid divider.
 
 ```vue preview
 <script setup lang="ts">
-import { WiDivider } from '@well-insight/ui'
+import { WdDivider } from '@wex-design/ui'
 </script>
 
 <template>
@@ -28,7 +28,7 @@ import { WiDivider } from '@well-insight/ui'
     <p style="margin:0">
       Above
     </p>
-    <WiDivider />
+    <WdDivider />
     <p style="margin:0">
       Below
     </p>
@@ -42,14 +42,14 @@ import { WiDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiDivider } from '@well-insight/ui'
+import { WdDivider } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WiDivider type="solid" label="Solid" />
-    <WiDivider type="dashed" label="Dashed" />
-    <WiDivider type="dotted" label="Dotted" />
+    <WdDivider type="solid" label="Solid" />
+    <WdDivider type="dashed" label="Dashed" />
+    <WdDivider type="dotted" label="Dotted" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ When the divider is horizontal and has a label, use `align` to control the label
 
 ```vue preview
 <script setup lang="ts">
-import { WiDivider } from '@well-insight/ui'
+import { WdDivider } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WiDivider label="Left" align="left" />
-    <WiDivider label="Center" align="center" />
-    <WiDivider label="Right" align="right" />
+    <WdDivider label="Left" align="left" />
+    <WdDivider label="Center" align="center" />
+    <WdDivider label="Right" align="right" />
   </div>
 </template>
 ```
@@ -78,11 +78,11 @@ import { WiDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiDivider } from '@well-insight/ui'
+import { WdDivider } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiDivider label="Or" title-placement="right" />
+  <WdDivider label="Or" title-placement="right" />
 </template>
 ```
 
@@ -92,15 +92,15 @@ import { WiDivider } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiDivider } from '@well-insight/ui'
+import { WdDivider } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
     <span>Left</span>
-    <WiDivider layout="vertical" />
+    <WdDivider layout="vertical" />
     <span>Middle</span>
-    <WiDivider layout="vertical" type="dashed" />
+    <WdDivider layout="vertical" type="dashed" />
     <span>Right</span>
   </div>
 </template>

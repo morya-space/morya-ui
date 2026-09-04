@@ -1,7 +1,7 @@
-import type { WiTextareaAutosize } from '../../shared/componentDefaults'
-import type { WiInputVariant, WiSizeInput } from '../../shared/types'
+import type { WdTextareaAutosize } from '../../shared/componentDefaults'
+import type { WdInputVariant, WdSizeInput } from '../../shared/types'
 
-export type { WiTextareaAutosize }
+export type { WdTextareaAutosize }
 
 export interface TextareaProps {
   modelValue?: string
@@ -18,11 +18,11 @@ export interface TextareaProps {
    * Auto-grow height. Pass `{ minRows, maxRows }` to clamp.
    * Boolean `true` is equivalent to unbounded grow.
    */
-  autosize?: WiTextareaAutosize
+  autosize?: WdTextareaAutosize
   /** Size aligned with Textarea; also accepts legacy sm/md/lg. */
-  size?: WiSizeInput
+  size?: WdSizeInput
   /** Visual variant; default outlined. */
-  variant?: WiInputVariant
+  variant?: WdInputVariant
   /** Full-width textarea. */
   fluid?: boolean
   disabled?: boolean

@@ -1,8 +1,12 @@
-# @well-insight/ui
+# @wex-design/ui
 
-## 0.1.14
+## 0.0.1
+
+`@wex-design/ui` 的首个公开版本，以当前代码为基准。
 
 ### 破坏性变更 / 弃用别名
+
+- **品牌与包名**：npm 包改为 `@wex-design/ui`（以及 `@wex-design/ui-mcp`、`@wex-design/nuxt`）；组件前缀 `Wi*` → `Wd*`；CSS 变量 / 类名 `--wi-*` / `.wi-*` → `--wd-*` / `.wd-*`；插件入口 `WellInsight` / `createWellInsight` / `WellInsightResolver` 改为 `WexDesign` / `createWexDesign` / `WexDesignResolver`。
 
 - **Severity**：正典值为 `success` / `info` / `warning` / `danger`；`warn`、`error` 仍接受但已标记 `@deprecated`（影响 Button、Tag、Message、Toast、ProgressBar、Badge、Chip、Timeline 等）。
 - **Knob**：`size` 弃用，请改用 `diameter`（别名仍可用）。
@@ -13,13 +17,13 @@
 
 - **`useConfirm`**：命令式确认对话框 API，自包入口导出。
 - **`useControllable`**：共享半受控/受控状态 composable，用于 Panel、Fieldset、Carousel、DataView 等。
-- **`ConfigProvider`**：`theme` 对象注入（密度、动效、`data-wi-*` 语义）。
+- **`ConfigProvider`**：`theme` 对象注入（密度、动效、`data-wd-*` 语义）。
 - **Toast / Message**：队列、去重与 severity 正典对齐。
 - **浮层**：`overlayPlacement` 支持 flip/clamp；Popover / Tooltip / BlockUI 行为补强。
 - **键盘导航**：`useMenuKeyboard` 统一 Menu、Menubar、MegaMenu、Listbox、SelectButton 等。
 - **Tree / TreeTable**：treegrid 语义与键盘；**Gallery / Carousel** 受控 page 与触摸/暂停。
 - **Form**：字段反馈基线、`useFieldFeedback`；Dialog / Drawer / ConfirmDialog prop 对齐。
-- **主题 token**：边框宽度、禁用透明度、动效（spin/skeleton/pulse/scrollbar）、减动效（`prefers-reduced-motion` 与 `data-wi-motion`）；新增 layout/tree/timeline/splitter 等布局 token。
+- **主题 token**：边框宽度、禁用透明度、动效（spin/skeleton/pulse/scrollbar）、减动效（`prefers-reduced-motion` 与 `data-wd-motion`）；新增 layout/tree/timeline/splitter 等布局 token。
 - **Grid**：`gap` 支持设计 token 解析（`resolveGapCSSValue`）。
 - **ConfirmDialog / Accordion** 组件增强；**Table** 滚动条与样式改进；组件动态图标尺寸。
 
@@ -80,7 +84,7 @@
 - restore DatePicker panel grid after teleport
 - add invalid modifier class alongside error alias
 - improve FloatLabel, Popover, and Slider
-- scroll doc TOC inside WiScrollbar
+- scroll doc TOC inside WdScrollbar
 - repair guide links and quick-start copy
 - Fix layout header and footer padding axis
 
@@ -142,7 +146,7 @@
 
 ### 新功能
 
-- enhance documentation and component registration for WellInsight
+- enhance documentation and component registration for WexDesign
 
 ## 0.1.5
 
@@ -164,7 +168,7 @@
 
 ### 新功能
 
-- bootstrap standalone @well-insight/ui component library
+- bootstrap standalone @wex-design/ui component library
 
 ### 变更
 
@@ -192,7 +196,7 @@
 
 - 初版发布：可独立安装的 Vue 3 + TypeScript 组件库（含主题 / 设计令牌 API）。
 - 提供完整组件文档站，支持 Markdown 与 `vue preview` 实时示例。
-- 亮色 / 暗色主题、`useTheme` / `useDensity` / `useMotion`，以及 `WiConfigProvider` / `createWellInsight` 全局配置。
+- 亮色 / 暗色主题、`useTheme` / `useDensity` / `useMotion`，以及 `WdConfigProvider` / `createWexDesign` 全局配置。
 - 打包产物为 ESM + 类型声明 + `styles.css`；本地开发可通过 `exports.development` 直连源码。
 
 ### 覆盖范围

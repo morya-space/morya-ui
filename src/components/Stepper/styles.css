@@ -1,121 +1,121 @@
 /* —— Panel: Stepper —— */
-.wi-stepper {
-    --wi-stepper-marker-size: 1.5rem;
+.wd-stepper {
+    --wd-stepper-marker-size: 1.5rem;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     position: relative;
 }
 
-.wi-stepper__step:not(:last-child)::after {
-    background: var(--wi-stepper-connector-color);
+.wd-stepper__step:not(:last-child)::after {
+    background: var(--wd-stepper-connector-color);
     content: '';
-    height: var(--wi-border-width);
-    margin-inline: var(--wi-space-1);
+    height: var(--wd-border-width);
+    margin-inline: var(--wd-space-1);
     width: 1.25rem;
 }
 
-.wi-stepper__step {
+.wd-stepper__step {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-md);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-md);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    gap: var(--wi-space-2);
-    padding: var(--wi-space-2) var(--wi-space-3);
+    gap: var(--wd-space-2);
+    padding: var(--wd-space-2) var(--wd-space-3);
 }
 
-.wi-stepper__step--active {
-    color: var(--wi-color-primary);
+.wd-stepper__step--active {
+    color: var(--wd-color-primary);
     font-weight: 600;
 }
 
-.wi-stepper__step--completed {
-    color: var(--wi-color-text);
+.wd-stepper__step--completed {
+    color: var(--wd-color-text);
 }
 
-.wi-stepper__step--disabled,
-.wi-stepper__step:disabled {
+.wd-stepper__step--disabled,
+.wd-stepper__step:disabled {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-stepper__step:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-stepper__step:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-stepper__marker {
+.wd-stepper__marker {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 16%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 16%,
+        var(--wd-color-surface)
     );
-    border-radius: var(--wi-radius-full);
+    border-radius: var(--wd-radius-full);
     display: inline-flex;
-    font-size: var(--wi-font-size-xs);
+    font-size: var(--wd-font-size-xs);
     font-weight: 700;
-    height: var(--wi-stepper-marker-size);
+    height: var(--wd-stepper-marker-size);
     justify-content: center;
-    width: var(--wi-stepper-marker-size);
+    width: var(--wd-stepper-marker-size);
 }
 
-.wi-stepper__step--active .wi-stepper__marker {
-    background: var(--wi-color-primary);
-    color: var(--wi-color-on-emphasis);
+.wd-stepper__step--active .wd-stepper__marker {
+    background: var(--wd-color-primary);
+    color: var(--wd-color-on-emphasis);
 }
 
-.wi-stepper__content {
-    margin-top: var(--wi-space-4);
+.wd-stepper__content {
+    margin-top: var(--wd-space-4);
 }
 
-.wi-stepper--vertical {
+.wd-stepper--vertical {
     align-items: stretch;
     flex-direction: column;
 }
 
-.wi-stepper__copy {
+.wd-stepper__copy {
     display: grid;
     gap: 0.15rem;
     text-align: start;
 }
 
-.wi-stepper__description {
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-xs);
+.wd-stepper__description {
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-xs);
     font-weight: 400;
 }
 
-.wi-stepper__step--error .wi-stepper__marker {
-    background: var(--wi-color-danger);
-    color: var(--wi-color-on-emphasis);
+.wd-stepper__step--error .wd-stepper__marker {
+    background: var(--wd-color-danger);
+    color: var(--wd-color-on-emphasis);
 }
 
-.wi-stepper__step--finish .wi-stepper__marker {
-    background: color-mix(in srgb, var(--wi-color-primary) 14%, var(--wi-color-surface));
-    color: var(--wi-color-primary);
-    box-shadow: inset 0 0 0 var(--wi-border-width) var(--wi-color-primary);
+.wd-stepper__step--finish .wd-stepper__marker {
+    background: color-mix(in srgb, var(--wd-color-primary) 14%, var(--wd-color-surface));
+    color: var(--wd-color-primary);
+    box-shadow: inset 0 0 0 var(--wd-border-width) var(--wd-color-primary);
 }
 
-.wi-stepper__step--process .wi-stepper__marker {
-    background: var(--wi-color-primary);
-    color: var(--wi-color-on-emphasis);
+.wd-stepper__step--process .wd-stepper__marker {
+    background: var(--wd-color-primary);
+    color: var(--wd-color-on-emphasis);
 }
 
-.wi-stepper__step--wait {
-    color: var(--wi-color-text-muted);
+.wd-stepper__step--wait {
+    color: var(--wd-color-text-muted);
 }
 
-.wi-stepper__step--finish {
-    color: var(--wi-color-text);
+.wd-stepper__step--finish {
+    color: var(--wd-color-text);
 }
 
-.wi-stepper__step--process {
-    color: var(--wi-color-primary);
+.wd-stepper__step--process {
+    color: var(--wd-color-primary);
     font-weight: 600;
 }

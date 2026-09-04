@@ -1,10 +1,10 @@
 import './style'
-export { WI_LAYOUT_KEY } from './context'
-export { default as WiLayout } from './Layout.vue'
-export { default as WiLayoutContent } from './LayoutContent.vue'
-export { default as WiLayoutFooter } from './LayoutFooter.vue'
-export { default as WiLayoutHeader } from './LayoutHeader.vue'
-export { default as WiLayoutSider } from './LayoutSider.vue'
+export { WD_LAYOUT_KEY } from './context'
+export { default as WdLayout } from './Layout.vue'
+export { default as WdLayoutContent } from './LayoutContent.vue'
+export { default as WdLayoutFooter } from './LayoutFooter.vue'
+export { default as WdLayoutHeader } from './LayoutHeader.vue'
+export { default as WdLayoutSider } from './LayoutSider.vue'
 export type {
   LayoutCollapseMode,
   LayoutContentProps,

@@ -11,14 +11,14 @@ description: 水平菜单栏，支持一级下拉。
 ## 引入
 
 ```ts
-import { WiMenubar } from '@well-insight/ui'
+import { WdMenubar } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiMenubar } from '@well-insight/ui'
+import { WdMenubar } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref<string | null>(null)
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <WiMenubar v-model:selected-key="selectedKey" :model="model" />
+  <WdMenubar v-model:selected-key="selectedKey" :model="model" />
 </template>
 ```
 

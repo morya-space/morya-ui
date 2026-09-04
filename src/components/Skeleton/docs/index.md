@@ -11,7 +11,7 @@ description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 
 ## 引入
 
 ```ts
-import { WiSkeleton } from '@well-insight/ui'
+import { WdSkeleton } from '@wex-design/ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WiSkeleton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSkeleton } from '@well-insight/ui'
+import { WdSkeleton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <WiSkeleton height="1.25rem" />
-    <WiSkeleton height="1.25rem" width="70%" />
-    <WiSkeleton height="6rem" border-radius="0.5rem" />
+    <WdSkeleton height="1.25rem" />
+    <WdSkeleton height="1.25rem" width="70%" />
+    <WdSkeleton height="6rem" border-radius="0.5rem" />
   </div>
 </template>
 ```
@@ -38,13 +38,13 @@ import { WiSkeleton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSkeleton } from '@well-insight/ui'
+import { WdSkeleton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WiSkeleton shape="circle" width="3rem" height="3rem" />
-    <WiSkeleton width="10rem" height="3rem" />
+    <WdSkeleton shape="circle" width="3rem" height="3rem" />
+    <WdSkeleton width="10rem" height="3rem" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ import { WiSkeleton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSkeleton } from '@well-insight/ui'
+import { WdSkeleton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <WiSkeleton height="1.25rem" animation="wave" />
-    <WiSkeleton height="1.25rem" animation="none" />
+    <WdSkeleton height="1.25rem" animation="wave" />
+    <WdSkeleton height="1.25rem" animation="none" />
   </div>
 </template>
 ```
@@ -72,11 +72,11 @@ import { WiSkeleton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSkeleton } from '@well-insight/ui'
+import { WdSkeleton } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSkeleton text :repeat="3" />
+  <WdSkeleton text :repeat="3" />
 </template>
 ```
 

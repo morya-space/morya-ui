@@ -6,13 +6,13 @@ description: Top-center floating notice with an imperative API.
 
 # Message
 
-A lightweight notice that slides in from the top center by default (`placement` can move it). Prefer the `message` API; you can also mount `<WiMessage />` as a custom host.
+A lightweight notice that slides in from the top center by default (`placement` can move it). Prefer the `message` API; you can also mount `<WdMessage />` as a custom host.
 
 Vs [Toast](/components/Toast):
 
 - **Message (default)**: short single-line feedback; no title/detail. Use for most CRUD / save / delete confirmations.
 - **Toast**: corner notifications with `summary` / `detail`; use only when supplementary detail is needed.
-- **`<WiMessage>` component**: inline banner for persistent form/auth errors.
+- **`<WdMessage>` component**: inline banner for persistent form/auth errors.
 
 > Selection guide: [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md).
 
@@ -21,7 +21,7 @@ Vs [Toast](/components/Toast):
 ## Import
 
 ```ts
-import { message, useMessage, WiMessage } from '@well-insight/ui'
+import { message, useMessage, WdMessage } from '@wex-design/ui'
 ```
 
 ## API
@@ -30,16 +30,16 @@ The first call auto-mounts a floating host; no template component is required.
 
 ```vue preview
 <script setup lang="ts">
-import { message, WiButton } from '@well-insight/ui'
+import { message, WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WiButton label="Success" severity="success" @click="message.success('Saved')" />
-    <WiButton label="Info" severity="info" @click="message.info('A short tip')" />
-    <WiButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
-    <WiButton label="Error" severity="danger" @click="message.error('Request failed')" />
-    <WiButton
+    <WdButton label="Success" severity="success" @click="message.success('Saved')" />
+    <WdButton label="Info" severity="info" @click="message.info('A short tip')" />
+    <WdButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
+    <WdButton label="Error" severity="danger" @click="message.error('Request failed')" />
+    <WdButton
       label="Closable"
       @click="message.info({ content: 'Dismiss manually', closable: true, life: 0 })"
     />
@@ -53,14 +53,14 @@ import { message, WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, WiButton, WiIcon } from '@well-insight/ui'
+import { message, WdButton, WdIcon } from '@wex-design/ui'
 import { h } from 'vue'
 
 function showVNode() {
   message.info({
     content: () =>
       h('span', [
-        h(WiIcon, { name: 'check-circle', size: 'sm' }),
+        h(WdIcon, { name: 'check-circle', size: 'sm' }),
         ' Built with ',
         h('strong', 'h()'),
         ' render',
@@ -71,7 +71,7 @@ function showVNode() {
 </script>
 
 <template>
-  <WiButton label="VNode content" @click="showVNode" />
+  <WdButton label="VNode content" @click="showVNode" />
 </template>
 ```
 
@@ -106,12 +106,12 @@ Returns `{ id, close }`.
 For a custom `appendTo`, place this at the app root:
 
 ```vue
-<WiMessage append-to="body" />
+<WdMessage append-to="body" />
 ```
 
 When a manual host exists, the API will not mount a second one.
 
-## Props (`WiMessage`)
+## Props (`WdMessage`)
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -122,7 +122,7 @@ When a manual host exists, the API will not mount a second one.
 
 ## Events
 
-The `<WiMessage />` host emits no Vue events. Use the `{ id, close }` return value from `message.*` APIs to control lifetime.
+The `<WdMessage />` host emits no Vue events. Use the `{ id, close }` return value from `message.*` APIs to control lifetime.
 
 ## Slots
 

@@ -1,3 +1,3 @@
 import './style'
-export { default as WiPagination } from './Pagination.vue'
+export { default as WdPagination } from './Pagination.vue'
 export type { PaginationEmits, PaginationInstance, PaginationProps } from './types'

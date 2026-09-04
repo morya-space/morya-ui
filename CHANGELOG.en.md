@@ -1,8 +1,12 @@
-# @well-insight/ui
+# @wex-design/ui
 
-## 0.1.14
+## 0.0.1
+
+First public release of `@wex-design/ui`, using the current codebase as the baseline.
 
 ### Breaking Changes / Deprecated Aliases
+
+- **Brand and package**: npm packages are now `@wex-design/ui` (plus `@wex-design/ui-mcp` and `@wex-design/nuxt`); component prefix `Wi*` → `Wd*`; CSS variables / classes `--wi-*` / `.wi-*` → `--wd-*` / `.wd-*`; plugin entry `WellInsight` / `createWellInsight` / `WellInsightResolver` is now `WexDesign` / `createWexDesign` / `WexDesignResolver`.
 
 - **Severity**: canonical values are `success` / `info` / `warning` / `danger`; `warn` and `error` remain accepted but are `@deprecated` (Button, Tag, Message, Toast, ProgressBar, Badge, Chip, Timeline, etc.).
 - **Knob**: `size` is deprecated; use `diameter` instead (alias still works).
@@ -13,13 +17,13 @@
 
 - **`useConfirm`**: imperative confirm dialog API, exported from package entry.
 - **`useControllable`**: shared controlled/uncontrolled state composable (Panel, Fieldset, Carousel, DataView, etc.).
-- **`ConfigProvider`**: `theme` object injection (density, motion, `data-wi-*` semantics).
+- **`ConfigProvider`**: `theme` object injection (density, motion, `data-wd-*` semantics).
 - **Toast / Message**: queue, dedupe, and severity canonicalization.
 - **Overlays**: `overlayPlacement` flip/clamp; Popover / Tooltip / BlockUI behavior hardening.
 - **Keyboard**: `useMenuKeyboard` for Menu, Menubar, MegaMenu, Listbox, SelectButton, etc.
 - **Tree / TreeTable**: treegrid semantics and keyboard; **Gallery / Carousel** controlled page, touch, pause.
 - **Form**: field feedback baseline, `useFieldFeedback`; Dialog / Drawer / ConfirmDialog prop alignment.
-- **Theme tokens**: border width, disabled opacity, motion (spin/skeleton/pulse/scrollbar), reduced motion (`prefers-reduced-motion` and `data-wi-motion`); layout/tree/timeline/splitter tokens.
+- **Theme tokens**: border width, disabled opacity, motion (spin/skeleton/pulse/scrollbar), reduced motion (`prefers-reduced-motion` and `data-wd-motion`); layout/tree/timeline/splitter tokens.
 - **Grid**: `gap` resolves design tokens via `resolveGapCSSValue`.
 - **ConfirmDialog / Accordion** enhancements; **Table** scrollbar and styling; dynamic icon sizing across components.
 
@@ -80,7 +84,7 @@
 - restore DatePicker panel grid after teleport
 - add invalid modifier class alongside error alias
 - improve FloatLabel, Popover, and Slider
-- scroll doc TOC inside WiScrollbar
+- scroll doc TOC inside WdScrollbar
 - repair guide links and quick-start copy
 - Fix layout header and footer padding axis
 
@@ -142,7 +146,7 @@
 
 ### Features
 
-- enhance documentation and component registration for WellInsight
+- enhance documentation and component registration for WexDesign
 
 ## 0.1.5
 
@@ -164,7 +168,7 @@
 
 ### Features
 
-- bootstrap standalone @well-insight/ui component library
+- bootstrap standalone @wex-design/ui component library
 
 ### Changes
 
@@ -192,7 +196,7 @@
 
 - Initial release: a standalone Vue 3 + TypeScript component library with theme / design-token APIs.
 - Ships a full component docs site with Markdown and live `vue preview` examples.
-- Light / dark themes, `useTheme` / `useDensity` / `useMotion`, plus `WiConfigProvider` / `createWellInsight` for global defaults.
+- Light / dark themes, `useTheme` / `useDensity` / `useMotion`, plus `WdConfigProvider` / `createWexDesign` for global defaults.
 - Build output is ESM + type declarations + `styles.css`. Local development can resolve source via `exports.development`.
 
 ### Coverage

@@ -11,14 +11,14 @@ Present options as a list with single selection, multiple selection, and filteri
 ## Import
 
 ```ts
-import { WiListbox } from '@well-insight/ui'
+import { WdListbox } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiListbox } from '@well-insight/ui'
+import { WdListbox } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('a')
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <WiListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
+  <WdListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
 </template>
 ```
 

@@ -6,39 +6,39 @@ description: System outline icon registry. Use the default slot for business ico
 
 # Icon
 
-`WiIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `@well-insight/ui`.
+`WdIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `@wex-design/ui`.
 
 ## Import
 
 ```ts
-import { iconNames, WiIcon } from '@well-insight/ui'
+import { iconNames, WdIcon } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiIcon } from '@well-insight/ui'
+import { WdIcon } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WiIcon name="search" />
-    <WiIcon name="check-circle" size="small" />
-    <WiIcon name="warning" size="large" />
-    <WiIcon name="loader" size="sm" label="Loading" />
+    <WdIcon name="search" />
+    <WdIcon name="check-circle" size="small" />
+    <WdIcon name="warning" size="large" />
+    <WdIcon name="loader" size="sm" label="Loading" />
   </div>
 </template>
 ```
 
 ## All system icons
 
-Click an icon to copy its name (for example `search`). Usage: `<WiIcon name="search" />`.
+Click an icon to copy its name (for example `search`). Usage: `<WdIcon name="search" />`.
 
 ```vue preview
 <script setup lang="ts">
-import type {ToastMessage} from '@well-insight/ui';
-import { iconNames,  WiIcon, WiInput, WiToast } from '@well-insight/ui'
+import type {ToastMessage} from '@wex-design/ui';
+import { iconNames,  WdIcon, WdInput, WdToast } from '@wex-design/ui'
 import { computed, ref } from 'vue'
 
 const query = ref('')
@@ -57,10 +57,10 @@ function itemStyle(name: string) {
   const active = copied.value === name
   return [
     'align-items:center',
-    'background:var(--wi-color-surface)',
-    `border:1px solid ${active ? 'var(--wi-color-primary)' : 'var(--wi-color-border)'}`,
-    'border-radius:var(--wi-radius-control, 3px)',
-    `color:${active ? 'var(--wi-color-primary)' : 'var(--wi-color-text)'}`,
+    'background:var(--wd-color-surface)',
+    `border:1px solid ${active ? 'var(--wd-color-primary)' : 'var(--wd-color-border)'}`,
+    'border-radius:var(--wd-radius-control, 3px)',
+    `color:${active ? 'var(--wd-color-primary)' : 'var(--wd-color-text)'}`,
     'cursor:pointer',
     'display:flex',
     'flex-direction:column',
@@ -113,7 +113,7 @@ function onToastClose(message: ToastMessage) {
 
 <template>
   <div style="width:100%">
-    <WiInput
+    <WdInput
       v-model="query"
       clearable
       fluid
@@ -121,13 +121,13 @@ function onToastClose(message: ToastMessage) {
       style="max-width: 20rem; margin-bottom: 1rem"
     >
       <template #prefix>
-        <WiIcon name="search" size="sm" />
+        <WdIcon name="search" size="sm" />
       </template>
-    </WiInput>
+    </WdInput>
 
     <p
       v-if="!filtered.length"
-      style="color: var(--wi-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
+      style="color: var(--wd-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
     >
       No matching icons
     </p>
@@ -144,7 +144,7 @@ function onToastClose(message: ToastMessage) {
         :title="`Click to copy ${name}`"
         @click="copyName(name)"
       >
-        <WiIcon :name="name" size="large" />
+        <WdIcon :name="name" size="large" />
         <span
           style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.72rem;line-height:1.3;max-width:100%;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap"
         >
@@ -153,7 +153,7 @@ function onToastClose(message: ToastMessage) {
       </button>
     </div>
 
-    <WiToast :messages="messages" position="top-right" @close="onToastClose" />
+    <WdToast :messages="messages" position="top-right" @close="onToastClose" />
   </div>
 </template>
 ```
@@ -164,26 +164,26 @@ When system icons are not enough, do not pile SVGs into the component library. M
 
 ```vue
 <script setup lang="ts">
-import { WiButton, WiIcon, WiIconField, WiInput } from '@well-insight/ui'
+import { WdButton, WdIcon, WdIconField, WdInput } from '@wex-design/ui'
 import { User } from 'lucide-vue-next'
 </script>
 
 <template>
-  <WiIcon label="User" size="md">
+  <WdIcon label="User" size="md">
     <User :size="16" :stroke-width="1.8" />
-  </WiIcon>
+  </WdIcon>
 
-  <WiIconField>
+  <WdIconField>
     <template #icon>
-      <WiIcon size="sm">
+      <WdIcon size="sm">
         <User :size="14" :stroke-width="1.8" />
-      </WiIcon>
+      </WdIcon>
     </template>
-    <WiInput placeholder="Search users" />
-  </WiIconField>
+    <WdInput placeholder="Search users" />
+  </WdIconField>
 
-  <!-- Button can also take a component directly without wrapping WiIcon -->
-  <WiButton :icon="User" label="Profile" />
+  <!-- Button can also take a component directly without wrapping WdIcon -->
+  <WdButton :icon="User" label="Profile" />
 </template>
 ```
 

@@ -5,7 +5,7 @@ function read<T>(result: { content: Array<{ text: string }> }): T {
   return JSON.parse(result.content[0].text) as T
 }
 
-describe('@well-insight/ui-mcp handlers', () => {
+describe('@wex-design/ui-mcp handlers', () => {
   const handlers = createToolHandlers()
 
   it('returns complete pagination metadata for component lists', () => {
@@ -41,7 +41,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     )
 
     expect(result.id).toBe('Table')
-    expect(result.exportName).toBe('WiTable')
+    expect(result.exportName).toBe('WdTable')
   })
 
   it('paginates component examples and reports API coverage', () => {
@@ -74,7 +74,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string; message: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WiButton label="Save" severity="danger" foo="bar" />',
+        code: '<WdButton label="Save" severity="danger" foo="bar" />',
       }),
     )
 
@@ -89,7 +89,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WiButton icon-only aria-label="Add"><Plus /></WiButton>',
+        code: '<WdButton icon-only aria-label="Add"><Plus /></WdButton>',
       }),
     )
 
@@ -106,7 +106,7 @@ describe('@well-insight/ui-mcp handlers', () => {
     const result = read<{ ok: boolean }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WiButton icon="plus" icon-only aria-label="Add" />',
+        code: '<WdButton icon="plus" icon-only aria-label="Add" />',
       }),
     )
 
@@ -135,8 +135,8 @@ describe('@well-insight/ui-mcp handlers', () => {
     )
 
     expect(result.matchedPattern).toBe('dashboard')
-    expect(result.scaffold.files.component).toContain('WiGrid')
-    expect(result.scaffold.files.component).toContain('WiSkeleton')
+    expect(result.scaffold.files.component).toContain('WdGrid')
+    expect(result.scaffold.files.component).toContain('WdSkeleton')
   })
 
   it('lists component decision guides when query is omitted', () => {

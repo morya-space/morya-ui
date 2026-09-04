@@ -1,5 +1,5 @@
 import './style'
-export { default as WiTree } from './Tree.vue'
+export { default as WdTree } from './Tree.vue'
 export type {
   TreeCheckedKeys,
   TreeCheckStrategy,

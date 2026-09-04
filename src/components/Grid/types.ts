@@ -42,7 +42,7 @@ export interface GridItemLayout {
   show: boolean
 }
 
-export interface WiGridContext {
+export interface WdGridContext {
   overflow: Ref<boolean>
   itemStyle: Ref<string | CSSProperties | undefined>
   xGap: Ref<string>
@@ -52,5 +52,5 @@ export interface WiGridContext {
   unregister: (uid: number) => void
 }
 
-export const WI_GRID_KEY: InjectionKey<WiGridContext> = Symbol('wiGrid')
-export const WI_GRID_ITEM_FLAG = '__WI_GRID_ITEM__' as const
+export const WD_GRID_KEY: InjectionKey<WdGridContext> = Symbol('wdGrid')
+export const WD_GRID_ITEM_FLAG = '__WI_GRID_ITEM__' as const

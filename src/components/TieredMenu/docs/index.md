@@ -11,14 +11,14 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { WiTieredMenu, type TieredMenuItem } from '@well-insight/ui'
+import { WdTieredMenu, type TieredMenuItem } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiTieredMenu } from '@well-insight/ui'
+import { WdTieredMenu } from '@wex-design/ui'
 
 const model = [
   {
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <WiTieredMenu :model="model" />
+  <WdTieredMenu :model="model" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiTieredMenu } from '@well-insight/ui'
+import { WdButton, WdTieredMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -52,8 +52,8 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 </script>
 
 <template>
-  <WiButton label="操作" @click="open = true" />
-  <WiTieredMenu v-model="open" popup :model="model" />
+  <WdButton label="操作" @click="open = true" />
+  <WdTieredMenu v-model="open" popup :model="model" />
 </template>
 ```
 

@@ -6,16 +6,16 @@ description: Optional MCP server for AI clients that support the Model Context P
 
 # MCP
 
-[`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
+[`@wex-design/ui-mcp`](https://www.npmjs.com/package/@wex-design/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
 
 You do **not** need MCP to use the component library. Apps still only depend on:
 
 ```bash
-pnpm add @well-insight/ui
+pnpm add @wex-design/ui
 ```
 
 ```ts
-import '@well-insight/ui/styles.css'
+import '@wex-design/ui/styles.css'
 ```
 
 ## How to connect
@@ -23,7 +23,7 @@ import '@well-insight/ui/styles.css'
 MCP clients start the package over stdio:
 
 ```bash
-npx -y @well-insight/ui-mcp
+npx -y @wex-design/ui-mcp
 ```
 
 Generic shape:
@@ -31,7 +31,7 @@ Generic shape:
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@well-insight/ui-mcp"]
+  "args": ["-y", "@wex-design/ui-mcp"]
 }
 ```
 
@@ -46,9 +46,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "well-insight-ui": {
+    "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@well-insight/ui-mcp"]
+      "args": ["-y", "@wex-design/ui-mcp"]
     }
   }
 }
@@ -59,9 +59,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "well-insight-ui": {
+    "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@well-insight/ui-mcp"]
+      "args": ["-y", "@wex-design/ui-mcp"]
     }
   }
 }
@@ -72,9 +72,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "well-insight-ui": {
+    "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@well-insight/ui-mcp"]
+      "args": ["-y", "@wex-design/ui-mcp"]
     }
   }
 }
@@ -85,9 +85,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "well-insight-ui": {
+    "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@well-insight/ui-mcp"]
+      "args": ["-y", "@wex-design/ui-mcp"]
     }
   }
 }
@@ -98,9 +98,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "context_servers": {
-    "well-insight-ui": {
+    "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@well-insight/ui-mcp"]
+      "args": ["-y", "@wex-design/ui-mcp"]
     }
   }
 }
@@ -112,9 +112,9 @@ Snippets for popular products. Key names may change across versions — check ea
 {
   "mcpServers": [
     {
-      "name": "well-insight-ui",
+      "name": "wex-design-ui",
       "command": "npx",
-      "args": ["-y", "@well-insight/ui-mcp"]
+      "args": ["-y", "@wex-design/ui-mcp"]
     }
   ]
 }
@@ -174,7 +174,7 @@ Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
 
 After connecting, you can ask the assistant to use this server, for example:
 
-> Use the well-insight-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
+> Use the wex-design-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
 
 > Search for date-related components, pick one suitable for forms, and write a minimal usage from the docs.
 
@@ -184,19 +184,19 @@ The assistant should call tools first, then produce something like:
 
 ```vue
 <script setup lang="ts">
-import { WiButton } from '@well-insight/ui'
+import { WdButton } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiButton label="Delete" severity="danger" />
+  <WdButton label="Delete" severity="danger" />
 </template>
 ```
 
 ## Relation to this site
 
-The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@well-insight/ui-mcp`; clients using `npx -y` pick up the new release.
+The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@wex-design/ui-mcp`; clients using `npx -y` pick up the new release.
 
-Implementation notes live in [packages/ui-mcp/README.md](https://github.com/well-insight/well-insight-ui/tree/main/packages/ui-mcp).
+Implementation notes live in [packages/ui-mcp/README.md](https://github.com/wex-design/wex-design-ui/tree/main/packages/ui-mcp).
 
 ## Next steps
 

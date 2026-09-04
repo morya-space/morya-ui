@@ -2,7 +2,7 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-Maintainer documentation for the open-source `@well-insight/ui` project. Public overview: [README](../README.md) · [文档站](https://well-insight.github.io/well-insight-ui/)
+Maintainer documentation for the open-source `@wex-design/ui` project. Public overview: [README](../README.md) · [文档站](https://wex-design.github.io/wex-design-ui/)
 
 | Document | Description |
 | --- | --- |

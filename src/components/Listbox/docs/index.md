@@ -11,14 +11,14 @@ description: 列表形式的单选或多选控件，可筛选。
 ## 引入
 
 ```ts
-import { WiListbox } from '@well-insight/ui'
+import { WdListbox } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiListbox } from '@well-insight/ui'
+import { WdListbox } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('a')
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <WiListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
+  <WdListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
 </template>
 ```
 
@@ -46,7 +46,7 @@ const options = [
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `emptyMessage` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
-| `size` | `WiSizeInput` | — | — |
+| `size` | `WdSizeInput` | — | — |
 
 ## Events
 

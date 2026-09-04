@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { flushPromises } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import WiTree from './Tree.vue'
+import WdTree from './Tree.vue'
 
 const value = [
   {
@@ -15,25 +15,25 @@ const value = [
   },
 ]
 
-describe('wiTree', () => {
+describe('wdTree', () => {
   it('expands nodes and selects single key', async () => {
-    const wrapper = mount(WiTree, { props: { value, modelValue: null } })
-    await wrapper.find('.wi-tree__toggler').trigger('click')
-    expect(wrapper.findAll('.wi-tree__label').length).toBeGreaterThan(1)
-    await wrapper.findAll('.wi-tree__label')[1]!.trigger('click')
+    const wrapper = mount(WdTree, { props: { value, modelValue: null } })
+    await wrapper.find('.wd-tree__toggler').trigger('click')
+    expect(wrapper.findAll('.wd-tree__label').length).toBeGreaterThan(1)
+    await wrapper.findAll('.wd-tree__label')[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['0-0'])
   })
 
   it('supports multiple selectionKeys', async () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: { value, selectionMode: 'multiple', selectionKeys: {} },
     })
-    await wrapper.find('.wi-tree__label').trigger('click')
+    await wrapper.find('.wd-tree__label').trigger('click')
     expect(wrapper.emitted('update:selectionKeys')?.at(-1)).toEqual([{ '0': true }])
   })
 
   it('checks nodes with cascade', async () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: {
         value,
         showCheckbox: true,
@@ -41,7 +41,7 @@ describe('wiTree', () => {
         defaultExpandAll: true,
       },
     })
-    await wrapper.find('.wi-checkbox__input').setValue(true)
+    await wrapper.find('.wd-checkbox__input').setValue(true)
     const keys = wrapper.emitted('update:checkedKeys')?.at(-1)?.[0] as Record<string, boolean>
     expect(keys['0']).toBe(true)
     expect(keys['0-0']).toBe(true)
@@ -49,7 +49,7 @@ describe('wiTree', () => {
   })
 
   it('filters nodes by label', () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: { value, filter: 'Work', defaultExpandAll: true },
     })
     expect(wrapper.text()).toContain('Work')
@@ -57,15 +57,15 @@ describe('wiTree', () => {
   })
 
   it('shows empty message when filter yields no results', () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: { value, filter: 'missing' },
     })
-    expect(wrapper.find('.wi-tree__message').exists()).toBe(true)
-    expect(wrapper.find('.wi-tree__empty-text').text()).toBe('暂无数据')
+    expect(wrapper.find('.wd-tree__message').exists()).toBe(true)
+    expect(wrapper.find('.wd-tree__empty-text').text()).toBe('暂无数据')
   })
 
   it('projects checked keys with checkStrategy child', async () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: {
         value,
         showCheckbox: true,
@@ -74,7 +74,7 @@ describe('wiTree', () => {
         checkStrategy: 'child',
       },
     })
-    await wrapper.find('.wi-checkbox__input').setValue(true)
+    await wrapper.find('.wd-checkbox__input').setValue(true)
     const keys = wrapper.emitted('update:checkedKeys')?.at(-1)?.[0] as Record<string, boolean>
     expect(keys['0']).toBeUndefined()
     expect(keys['0-0']).toBe(true)
@@ -82,24 +82,24 @@ describe('wiTree', () => {
   })
 
   it('emits node-select and node-unselect on single selection', async () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: {
         value,
         modelValue: null,
         'onUpdate:modelValue': (next: string | null) => wrapper.setProps({ modelValue: next }),
       },
     })
-    await wrapper.find('.wi-tree__label').trigger('click')
+    await wrapper.find('.wd-tree__label').trigger('click')
     expect(wrapper.emitted('node-select')?.at(-1)?.[0]).toMatchObject({ key: '0' })
-    await wrapper.find('.wi-tree__label').trigger('click')
+    await wrapper.find('.wd-tree__label').trigger('click')
     expect(wrapper.emitted('node-unselect')?.at(-1)?.[0]).toMatchObject({ key: '0' })
   })
 
   it('loads lazy children without mutating props', async () => {
     const nodes = [{ key: '0', label: 'Lazy' }]
     const load = vi.fn(async () => [{ key: '0-0', label: 'Loaded child' }])
-    const wrapper = mount(WiTree, { props: { value: nodes, lazy: true, load } })
-    await wrapper.find('.wi-tree__toggler').trigger('click')
+    const wrapper = mount(WdTree, { props: { value: nodes, lazy: true, load } })
+    await wrapper.find('.wd-tree__toggler').trigger('click')
     await flushPromises()
     expect(load).toHaveBeenCalledTimes(1)
     expect(nodes[0]!.children).toBeUndefined()
@@ -111,15 +111,15 @@ describe('wiTree', () => {
     const load = vi.fn(async (): Promise<never[]> => {
       throw new Error('boom')
     })
-    const wrapper = mount(WiTree, { props: { value: nodes, lazy: true, load } })
-    await wrapper.find('.wi-tree__toggler').trigger('click')
+    const wrapper = mount(WdTree, { props: { value: nodes, lazy: true, load } })
+    await wrapper.find('.wd-tree__toggler').trigger('click')
     await flushPromises()
     expect(wrapper.emitted('node-load-error')?.length).toBe(1)
     expect(wrapper.find('[role="treeitem"]').attributes('aria-expanded')).toBe('false')
   })
 
   it('exposes aria-level and aria-selected on treeitems', async () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       props: { value, modelValue: '0-0', defaultExpandAll: true },
     })
     const items = wrapper.findAll('[role="treeitem"]')
@@ -130,7 +130,7 @@ describe('wiTree', () => {
   })
 
   it('supports tree keyboard navigation with roving tabindex', async () => {
-    const wrapper = mount(WiTree, {
+    const wrapper = mount(WdTree, {
       attachTo: document.body,
       props: {
         value,
@@ -138,7 +138,7 @@ describe('wiTree', () => {
         'onUpdate:modelValue': (next: string | null) => wrapper.setProps({ modelValue: next }),
       },
     })
-    const tree = wrapper.find('ul.wi-tree')
+    const tree = wrapper.find('ul.wd-tree')
     const items = () => wrapper.findAll('[role="treeitem"]')
 
     expect(items().length).toBe(1)

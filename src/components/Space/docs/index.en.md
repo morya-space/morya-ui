@@ -11,22 +11,22 @@ Adds consistent spacing between children. Prefer [`Flex`](/components/Flex/) for
 ## Import
 
 ```ts
-import { WiSpace } from '@well-insight/ui'
+import { WdSpace } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiSpace } from '@well-insight/ui'
+import { WdButton, WdSpace } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSpace>
-    <WiButton label="Save" size="small" />
-    <WiButton label="Cancel" size="small" severity="secondary" />
-    <WiButton label="Reset" size="small" severity="secondary" />
-  </WiSpace>
+  <WdSpace>
+    <WdButton label="Save" size="small" />
+    <WdButton label="Cancel" size="small" severity="secondary" />
+    <WdButton label="Reset" size="small" severity="secondary" />
+  </WdSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WiButton, WiSpace } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpace, WiTag } from '@well-insight/ui'
+import { WdSpace, WdTag } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSpace vertical>
-    <WiTag value="Alpha" />
-    <WiTag value="Bravo" />
-    <WiTag value="Charlie" />
-  </WiSpace>
+  <WdSpace vertical>
+    <WdTag value="Alpha" />
+    <WdTag value="Bravo" />
+    <WdTag value="Charlie" />
+  </WdSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { WiSpace, WiTag } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiSpace } from '@well-insight/ui'
+import { WdButton, WdSpace } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WiSpace size="small">
-      <WiButton label="S" size="small" />
-      <WiButton label="S" size="small" severity="secondary" />
-    </WiSpace>
-    <WiSpace :size="20">
-      <WiButton label="20px" size="small" />
-      <WiButton label="20px" size="small" severity="secondary" />
-    </WiSpace>
+    <WdSpace size="small">
+      <WdButton label="S" size="small" />
+      <WdButton label="S" size="small" severity="secondary" />
+    </WdSpace>
+    <WdSpace :size="20">
+      <WdButton label="20px" size="small" />
+      <WdButton label="20px" size="small" severity="secondary" />
+    </WdSpace>
   </div>
 </template>
 ```
 
-When `size` is omitted it defaults to `medium`. Override the global gap with `WiConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
+When `size` is omitted it defaults to `medium`. Override the global gap with `WdConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ Set `wrapItem=false` to skip the per-child wrapper (useful when children manage 
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpace, WiTag } from '@well-insight/ui'
+import { WdSpace, WdTag } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSpace :wrap-item="false" :size="8">
-    <WiTag value="Direct" />
-    <WiTag value="Children" />
-  </WiSpace>
+  <WdSpace :wrap-item="false" :size="8">
+    <WdTag value="Direct" />
+    <WdTag value="Children" />
+  </WdSpace>
 </template>
 ```
 

@@ -1,90 +1,90 @@
-.wi-message-host {
-    --wi-message-host-max-width: 28rem;
+.wd-message-host {
+    --wd-message-host-max-width: 28rem;
     display: flex;
     flex-direction: column;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     left: 50%;
     max-width: min(
-        var(--wi-message-host-max-width),
-        calc(100vw - 2 * var(--wi-space-4))
+        var(--wd-message-host-max-width),
+        calc(100vw - 2 * var(--wd-space-4))
     );
     pointer-events: none;
     position: fixed;
-    top: var(--wi-space-4);
+    top: var(--wd-space-4);
     transform: translateX(-50%);
     width: max-content;
-    z-index: var(--wi-z-toast);
+    z-index: var(--wd-z-toast);
 }
 
-.wi-message-host--top-left {
-    left: var(--wi-space-4);
+.wd-message-host--top-left {
+    left: var(--wd-space-4);
     transform: none;
 }
 
-.wi-message-host--top-right {
+.wd-message-host--top-right {
     left: auto;
-    right: var(--wi-space-4);
+    right: var(--wd-space-4);
     transform: none;
 }
 
-.wi-message-host--bottom,
-.wi-message-host--bottom-left,
-.wi-message-host--bottom-right {
-    bottom: var(--wi-space-4);
+.wd-message-host--bottom,
+.wd-message-host--bottom-left,
+.wd-message-host--bottom-right {
+    bottom: var(--wd-space-4);
     flex-direction: column-reverse;
     top: auto;
 }
 
-.wi-message-host--bottom-left {
-    left: var(--wi-space-4);
+.wd-message-host--bottom-left {
+    left: var(--wd-space-4);
     transform: none;
 }
 
-.wi-message-host--bottom-right {
+.wd-message-host--bottom-right {
     left: auto;
-    right: var(--wi-space-4);
+    right: var(--wd-space-4);
     transform: none;
 }
 
-.wi-message {
-    --wi-message-min-width: 16rem;
+.wd-message {
+    --wd-message-min-width: 16rem;
     align-items: flex-start;
     background: color-mix(
         in srgb,
-        var(--wi-color-info) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-info) 10%,
+        var(--wd-color-surface)
     );
-    border: var(--wi-border-width) solid
-        color-mix(in srgb, var(--wi-color-info) 28%, var(--wi-color-border));
-    border-radius: var(--wi-radius-md);
-    box-shadow: var(--wi-shadow-md);
-    color: var(--wi-color-text);
+    border: var(--wd-border-width) solid
+        color-mix(in srgb, var(--wd-color-info) 28%, var(--wd-color-border));
+    border-radius: var(--wd-radius-md);
+    box-shadow: var(--wd-shadow-md);
+    color: var(--wd-color-text);
     display: flex;
-    font-family: var(--wi-font-sans);
-    font-size: var(--wi-font-size-md);
-    gap: var(--wi-space-3);
+    font-family: var(--wd-font-sans);
+    font-size: var(--wd-font-size-md);
+    gap: var(--wd-space-3);
     line-height: 1.45;
-    min-width: var(--wi-message-min-width);
-    padding: var(--wi-space-3) var(--wi-space-4);
+    min-width: var(--wd-message-min-width);
+    padding: var(--wd-space-3) var(--wd-space-4);
     pointer-events: auto;
 }
 
-.wi-message__icon {
-    color: var(--wi-color-info);
+.wd-message__icon {
+    color: var(--wd-color-info);
     flex-shrink: 0;
     margin-top: 0.1rem;
 }
 
-.wi-message__content {
+.wd-message__content {
     flex: 1 1 auto;
     min-width: 0;
 }
 
-.wi-message__close {
+.wd-message__close {
     align-items: center;
     background: transparent;
     border: 0;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
@@ -93,129 +93,129 @@
     padding: 0;
 }
 
-.wi-message__close:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-message__close:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-message--success {
+.wd-message--success {
     background: color-mix(
         in srgb,
-        var(--wi-color-success) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-success) 10%,
+        var(--wd-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--wi-color-success) 28%,
-        var(--wi-color-border)
+        var(--wd-color-success) 28%,
+        var(--wd-color-border)
     );
 }
 
-.wi-message--success .wi-message__icon {
-    color: var(--wi-color-success);
+.wd-message--success .wd-message__icon {
+    color: var(--wd-color-success);
 }
 
-.wi-message--info {
+.wd-message--info {
     background: color-mix(
         in srgb,
-        var(--wi-color-info) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-info) 10%,
+        var(--wd-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--wi-color-info) 28%,
-        var(--wi-color-border)
+        var(--wd-color-info) 28%,
+        var(--wd-color-border)
     );
 }
 
-.wi-message--info .wi-message__icon {
-    color: var(--wi-color-info);
+.wd-message--info .wd-message__icon {
+    color: var(--wd-color-info);
 }
 
-.wi-message--warn,
-.wi-message--warning {
+.wd-message--warn,
+.wd-message--warning {
     background: color-mix(
         in srgb,
-        var(--wi-color-warn) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-warn) 10%,
+        var(--wd-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--wi-color-warn) 28%,
-        var(--wi-color-border)
+        var(--wd-color-warn) 28%,
+        var(--wd-color-border)
     );
 }
 
-.wi-message--warn .wi-message__icon,
-.wi-message--warning .wi-message__icon {
-    color: var(--wi-color-warn);
+.wd-message--warn .wd-message__icon,
+.wd-message--warning .wd-message__icon {
+    color: var(--wd-color-warn);
 }
 
-.wi-message--error,
-.wi-message--danger {
+.wd-message--error,
+.wd-message--danger {
     background: color-mix(
         in srgb,
-        var(--wi-color-danger) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-danger) 10%,
+        var(--wd-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--wi-color-danger) 28%,
-        var(--wi-color-border)
+        var(--wd-color-danger) 28%,
+        var(--wd-color-border)
     );
 }
 
-.wi-message--error .wi-message__icon,
-.wi-message--danger .wi-message__icon {
-    color: var(--wi-color-danger);
+.wd-message--error .wd-message__icon,
+.wd-message--danger .wd-message__icon {
+    color: var(--wd-color-danger);
 }
 
-.wi-message--secondary {
+.wd-message--secondary {
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 10%,
+        var(--wd-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 22%,
-        var(--wi-color-border)
+        var(--wd-color-text-muted) 22%,
+        var(--wd-color-border)
     );
 }
 
-.wi-message--secondary .wi-message__icon {
-    color: var(--wi-color-text-muted);
+.wd-message--secondary .wd-message__icon {
+    color: var(--wd-color-text-muted);
 }
 
-.wi-message--contrast {
-    background: var(--wi-color-contrast);
-    border-color: var(--wi-color-contrast);
-    color: var(--wi-color-contrast-fg);
+.wd-message--contrast {
+    background: var(--wd-color-contrast);
+    border-color: var(--wd-color-contrast);
+    color: var(--wd-color-contrast-fg);
 }
 
-.wi-message--contrast .wi-message__icon,
-.wi-message--contrast .wi-message__close {
-    color: var(--wi-color-contrast-fg);
+.wd-message--contrast .wd-message__icon,
+.wd-message--contrast .wd-message__close {
+    color: var(--wd-color-contrast-fg);
 }
 
-.wi-message-slide-enter-active {
+.wd-message-slide-enter-active {
     transition:
-        opacity var(--wi-motion-enter) var(--wi-motion-ease),
-        transform var(--wi-motion-enter) var(--wi-motion-ease);
+        opacity var(--wd-motion-enter) var(--wd-motion-ease),
+        transform var(--wd-motion-enter) var(--wd-motion-ease);
 }
 
-.wi-message-slide-leave-active {
+.wd-message-slide-leave-active {
     transition:
-        opacity var(--wi-motion-exit) var(--wi-motion-ease),
-        transform var(--wi-motion-exit) var(--wi-motion-ease);
+        opacity var(--wd-motion-exit) var(--wd-motion-ease),
+        transform var(--wd-motion-exit) var(--wd-motion-ease);
 }
 
-.wi-message-slide-enter-from,
-.wi-message-slide-leave-to {
+.wd-message-slide-enter-from,
+.wd-message-slide-leave-to {
     opacity: 0;
-    transform: translateY(calc(var(--wi-motion-distance) * -1));
+    transform: translateY(calc(var(--wd-motion-distance) * -1));
 }
 
-.wi-message-slide-move {
-    transition: transform var(--wi-motion-enter) var(--wi-motion-ease);
+.wd-message-slide-move {
+    transition: transform var(--wd-motion-enter) var(--wd-motion-ease);
 }

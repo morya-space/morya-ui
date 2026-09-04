@@ -11,25 +11,25 @@ Group a form or related content with a legend.
 ## Import
 
 ```ts
-import { WiFieldset } from '@well-insight/ui'
+import { WdFieldset } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiFieldset } from '@well-insight/ui'
+import { WdFieldset } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WiFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
+  <WdFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
     <p style="margin:0">
       Field group content.
     </p>
-  </WiFieldset>
+  </WdFieldset>
 </template>
 ```
 

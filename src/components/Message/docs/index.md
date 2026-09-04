@@ -6,13 +6,13 @@ description: 顶部居中浮层提示，支持 API 调用。
 
 # Message
 
-从窗口顶部正中滑入的轻量提示（可通过 `placement` 改到六向位置），适合简短操作反馈。推荐用 `message` API；也可挂载 `<WiMessage />` 作为自定义挂载点。
+从窗口顶部正中滑入的轻量提示（可通过 `placement` 改到六向位置），适合简短操作反馈。推荐用 `message` API；也可挂载 `<WdMessage />` 作为自定义挂载点。
 
 与 [Toast](/components/Toast) 的分工：
 
 - **Message（默认）**：轻量单行反馈，默认顶部居中，无标题/详情。**大多数 CRUD / 保存 / 删除回执应使用此项。**
 - **Toast**：四角通知，带 `summary` / `detail`；仅在有补充说明或异步通知感时使用。
-- **`<WiMessage>` 组件**：页面内嵌条，用于表单区常驻错误（见下方「内嵌 Message」）。
+- **`<WdMessage>` 组件**：页面内嵌条，用于表单区常驻错误（见下方「内嵌 Message」）。
 
 > AI / 业务代码选型细则见 [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md)。
 
@@ -21,7 +21,7 @@ description: 顶部居中浮层提示，支持 API 调用。
 ## 引入
 
 ```ts
-import { message, useMessage, WiMessage } from '@well-insight/ui'
+import { message, useMessage, WdMessage } from '@wex-design/ui'
 ```
 
 ## API
@@ -30,16 +30,16 @@ import { message, useMessage, WiMessage } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, WiButton } from '@well-insight/ui'
+import { message, WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WiButton label="Success" severity="success" @click="message.success('保存成功')" />
-    <WiButton label="Info" severity="info" @click="message.info('这是一条提示')" />
-    <WiButton label="Warn" severity="warn" @click="message.warn('请核对后再提交')" />
-    <WiButton label="Error" severity="danger" @click="message.error('请求失败，请重试')" />
-    <WiButton
+    <WdButton label="Success" severity="success" @click="message.success('保存成功')" />
+    <WdButton label="Info" severity="info" @click="message.info('这是一条提示')" />
+    <WdButton label="Warn" severity="warn" @click="message.warn('请核对后再提交')" />
+    <WdButton label="Error" severity="danger" @click="message.error('请求失败，请重试')" />
+    <WdButton
       label="Closable"
       @click="message.info({ content: '可手动关闭', closable: true, life: 0 })"
     />
@@ -53,14 +53,14 @@ import { message, WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, WiButton, WiIcon } from '@well-insight/ui'
+import { message, WdButton, WdIcon } from '@wex-design/ui'
 import { h } from 'vue'
 
 function showVNode() {
   message.info({
     content: () =>
       h('span', [
-        h(WiIcon, { name: 'check-circle', size: 'sm' }),
+        h(WdIcon, { name: 'check-circle', size: 'sm' }),
         ' 已用 ',
         h('strong', 'h()'),
         ' 渲染',
@@ -71,7 +71,7 @@ function showVNode() {
 </script>
 
 <template>
-  <WiButton label="VNode 内容" @click="showVNode" />
+  <WdButton label="VNode 内容" @click="showVNode" />
 </template>
 ```
 
@@ -106,12 +106,12 @@ function showVNode() {
 需要自定义 `appendTo` 时，可在应用根部放置：
 
 ```vue
-<WiMessage append-to="body" />
+<WdMessage append-to="body" />
 ```
 
 存在手动宿主时，API 不会再自动挂载第二份。
 
-## Props（`WiMessage`）
+## Props（`WdMessage`）
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -124,7 +124,7 @@ function showVNode() {
 
 ## Events
 
-`<WiMessage />` 宿主本身无 Vue 事件；请通过 `message.*` API 的返回值 `{ id, close }` 管理生命周期。
+`<WdMessage />` 宿主本身无 Vue 事件；请通过 `message.*` API 的返回值 `{ id, close }` 管理生命周期。
 
 ## Slots
 

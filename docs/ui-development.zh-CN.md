@@ -2,7 +2,7 @@
 
 [English](./ui-development.md) · [中文](./ui-development.zh-CN.md)
 
-`@well-insight/ui` 维护者说明（构建、文档站、发版）。外部引用方请看 [根 README（中文）](../README.zh-CN.md)；贡献环境见 [DEVELOPMENT.zh-CN.md](./DEVELOPMENT.zh-CN.md)。
+`@wex-design/ui` 维护者说明（构建、文档站、发版）。外部引用方请看 [根 README（中文）](../README.zh-CN.md)；贡献环境见 [DEVELOPMENT.zh-CN.md](./DEVELOPMENT.zh-CN.md)。
 
 ## 构建
 
@@ -10,7 +10,7 @@
 pnpm build
 ```
 
-产物在 `dist/`（`index.js`、`index.d.ts`、`styles.css`、`resolver.js`，以及每个组件的 kebab-case 子路径如 `button/index.js`）。`@well-insight/ui/button` 会带上该组件及其依赖的 JS 与样式。
+产物在 `dist/`（`index.js`、`index.d.ts`、`styles.css`、`resolver.js`，以及每个组件的 kebab-case 子路径如 `button/index.js`）。`@wex-design/ui/button` 会带上该组件及其依赖的 JS 与样式。
 
 构建流程（`pnpm build`）会自动执行：
 
@@ -24,7 +24,7 @@ pnpm build
 
 ### 全量 vs 按需（构建层面）
 
-- **全量入口**（`src/index.ts` → `dist/index.js`）：直接从各 `.vue`  re-export，不经过组件 `index.ts`，避免把按需样式 side-effect 打进主包；配合 `@well-insight/ui/styles.css` 使用。
+- **全量入口**（`src/index.ts` → `dist/index.js`）：直接从各 `.vue`  re-export，不经过组件 `index.ts`，避免把按需样式 side-effect 打进主包；配合 `@wex-design/ui/styles.css` 使用。
 - **按需入口**（`src/components/<Name>/index.ts` → `dist/<slug>/index.js`）：独立 chunk，自动 `import './style'`，带上 theme、base 与依赖组件 CSS。
 
 两种产物由同一次 `pnpm build` 生成，互不冲突。
@@ -49,7 +49,7 @@ pnpm release:npm
 
 ## 完整发版
 
-分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)。默认同时发布 `@well-insight/ui` 与 `@well-insight/ui-mcp`：
+分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)。默认同时发布 `@wex-design/ui` 与 `@wex-design/ui-mcp`：
 
 ```bash
 pnpm release:prepare -- --dry-run   # 预览
@@ -67,7 +67,7 @@ pnpm release -- --no-mcp            # 只发 UI
 
 ## MCP 包
 
-`@well-insight/ui-mcp` 为可选 stdio 服务，供支持 [MCP](https://modelcontextprotocol.io/) 的客户端检索文档（不替代安装 `@well-insight/ui`）。对外说明见文档站 [MCP](/docs/mcp)；实现见 [packages/ui-mcp/README.md](../packages/ui-mcp/README.md)。
+`@wex-design/ui-mcp` 为可选 stdio 服务，供支持 [MCP](https://modelcontextprotocol.io/) 的客户端检索文档（不替代安装 `@wex-design/ui`）。对外说明见文档站 [MCP](/docs/mcp)；实现见 [packages/ui-mcp/README.md](../packages/ui-mcp/README.md)。
 
 完整 UI 发版已包含 MCP。仅需单独重发 MCP 时：
 

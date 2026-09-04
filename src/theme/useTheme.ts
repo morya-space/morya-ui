@@ -2,7 +2,7 @@ import type { ThemeName } from './index'
 import { computed, ref, watch } from 'vue'
 import { applyTheme, getPreferredTheme } from './index'
 
-const storageKey = 'well-insight-theme'
+const storageKey = 'wex-design-theme'
 
 export function useTheme() {
   const theme = ref<ThemeName>(getInitialTheme())

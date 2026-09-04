@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
 import { computed, ref, useSlots, watch } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
@@ -18,7 +18,7 @@ const emit = defineEmits<{
 }>()
 
 const filterQuery = ref('')
-const locale = useWiLocale()
+const locale = useWdLocale()
 const sizeClass = useConfiguredSize('Listbox', () => props.size)
 const { isInvalid } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -31,12 +31,12 @@ const filteredOptions = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wi-listbox',
-  `wi-listbox--${sizeClass.value}`,
+  'wd-listbox',
+  `wd-listbox--${sizeClass.value}`,
   {
-    'wi-listbox--disabled': props.disabled,
-    'wi-listbox--multiple': props.multiple,
-    'wi-listbox--invalid': isInvalid.value,
+    'wd-listbox--disabled': props.disabled,
+    'wd-listbox--multiple': props.multiple,
+    'wd-listbox--invalid': isInvalid.value,
   },
 ])
 
@@ -87,7 +87,7 @@ function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
   list.value
-    ?.querySelectorAll<HTMLElement>('.wi-listbox__option')
+    ?.querySelectorAll<HTMLElement>('.wd-listbox__option')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -114,7 +114,7 @@ watch(keyboard.activeIndex, () => {
     <input
       v-if="filter"
       v-model="filterQuery"
-      class="wi-listbox__filter"
+      class="wd-listbox__filter"
       type="search"
       :placeholder="locale.filterOptions"
       :disabled="disabled"
@@ -123,7 +123,7 @@ watch(keyboard.activeIndex, () => {
     >
     <ul
       ref="list"
-      class="wi-listbox__list"
+      class="wd-listbox__list"
       role="listbox"
       :aria-label="locale.selectOption"
       :aria-multiselectable="multiple || undefined"
@@ -134,9 +134,9 @@ watch(keyboard.activeIndex, () => {
       <li v-for="(option, index) in filteredOptions" :key="String(option.value)" role="presentation">
         <button
           type="button"
-          class="wi-listbox__option"
+          class="wd-listbox__option"
           role="option"
-          :class="{ 'wi-listbox__option--selected': isSelected(option.value) }"
+          :class="{ 'wd-listbox__option--selected': isSelected(option.value) }"
           :aria-selected="isSelected(option.value)"
           :disabled="disabled || option.disabled"
           :tabindex="optionTabindex(index)"
@@ -146,7 +146,7 @@ watch(keyboard.activeIndex, () => {
           <slot name="option" :option="option">{{ option.label }}</slot>
         </button>
       </li>
-      <li v-if="!filteredOptions.length" class="wi-listbox__empty">
+      <li v-if="!filteredOptions.length" class="wd-listbox__empty">
         {{ resolvedEmptyMessage }}
       </li>
     </ul>

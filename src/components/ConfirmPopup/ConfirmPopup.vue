@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { ConfirmPopupProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useWiConfig } from '../../shared/config'
+import { useWdConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WiButton from '../Button/Button.vue'
-import WiIcon from '../Icon/Icon.vue'
+import WdButton from '../Button/Button.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,
@@ -23,8 +23,8 @@ const emit = defineEmits<{
   (event: 'reject'): void
 }>()
 
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const pending = ref(false)
@@ -135,23 +135,23 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wi-scale-fade">
+    <Transition name="wd-scale-fade">
       <div
         v-if="visible"
         ref="panel"
-        class="wi-confirmpopup"
-        :class="{ 'wi-confirmpopup--teleported': teleported }"
+        class="wd-confirmpopup"
+        :class="{ 'wd-confirmpopup--teleported': teleported }"
         role="alertdialog"
         tabindex="-1"
         :style="panelStyle"
       >
-        <div class="wi-confirmpopup__message">
-          <WiIcon v-if="icon" class="wi-confirmpopup__icon" :name="icon" size="sm" />
+        <div class="wd-confirmpopup__message">
+          <WdIcon v-if="icon" class="wd-confirmpopup__icon" :name="icon" size="sm" />
           <slot>{{ message }}</slot>
         </div>
-        <div class="wi-confirmpopup__footer">
-          <WiButton :label="rejectText" severity="secondary" size="small" @click="reject" />
-          <WiButton
+        <div class="wd-confirmpopup__footer">
+          <WdButton :label="rejectText" severity="secondary" size="small" @click="reject" />
+          <WdButton
             :label="acceptText"
             size="small"
             :severity="acceptSeverity"

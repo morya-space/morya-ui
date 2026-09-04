@@ -1,12 +1,12 @@
 ---
 title: Accessibility
 order: 8
-description: Accessibility conventions when using Well Insight components.
+description: Accessibility conventions when using Wex Design components.
 ---
 
 # Accessibility
 
-Well Insight favors **semantic HTML first, ARIA when necessary**. Components handle labels, keyboard paths, and overlay focus where possible; apps still must supply meaningful copy and structure.
+Wex Design favors **semantic HTML first, ARIA when necessary**. Components handle labels, keyboard paths, and overlay focus where possible; apps still must supply meaningful copy and structure.
 
 ## Quick checklist
 
@@ -24,7 +24,7 @@ Well Insight favors **semantic HTML first, ARIA when necessary**. Components han
 Input-family components (`Input`, `Textarea`, `Select`, …) share the same field pattern:
 
 ```vue
-<WiInput
+<WdInput
   id="email"
   v-model="email"
   label="Email"
@@ -42,11 +42,11 @@ Notes:
 
 ## Icons and buttons
 
-`WiIcon` covers **system icons** only. Without `label` the icon is decorative (`aria-hidden`); informative icons need `label`:
+`WdIcon` covers **system icons** only. Without `label` the icon is decorative (`aria-hidden`); informative icons need `label`:
 
 ```vue
-<WiIcon name="info" label="More information" />
-<WiButton icon="search" aria-label="Search" icon-only />
+<WdIcon name="info" label="More information" />
+<WdButton icon="search" aria-label="Search" icon-only />
 ```
 
 Prefer default slot / `label` text on buttons; avoid duplicating `aria-label` when visible text exists.
@@ -79,15 +79,15 @@ Document keyboard tables in component `docs/` when adding new widgets.
 ## Motion and contrast
 
 ```ts
-import { useMotion } from '@well-insight/ui'
+import { useMotion } from '@wex-design/ui'
 
 const { setMotion } = useMotion()
 setMotion('reduced') // or 'none'
 ```
 
-`reduced` / `none` shortens or disables `--wi-motion-*` transitions.
+`reduced` / `none` shortens or disables `--wd-motion-*` transitions.
 
-Consume colors through `--wi-color-*` tokens for light/dark parity. After theming, spot-check body text and error states on real content.
+Consume colors through `--wd-color-*` tokens for light/dark parity. After theming, spot-check body text and error states on real content.
 
 ## In-library improvements
 

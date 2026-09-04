@@ -11,21 +11,21 @@ description: 芯片式标签输入，回车添加、可移除。
 ## 引入
 
 ```ts
-import { WiInputTags } from '@well-insight/ui'
+import { WdInputTags } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiInputTags } from '@well-insight/ui'
+import { WdInputTags } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue', 'design'])
 </script>
 
 <template>
-  <WiInputTags v-model="tags" />
+  <WdInputTags v-model="tags" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const tags = ref(['vue', 'design'])
 
 ```vue preview
 <script setup lang="ts">
-import { WiInputTags } from '@well-insight/ui'
+import { WdInputTags } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue'])
 </script>
 
 <template>
-  <WiInputTags v-model="tags" :max="3" separator="," placeholder="逗号分隔，最多 3 个" />
+  <WdInputTags v-model="tags" :max="3" separator="," placeholder="逗号分隔，最多 3 个" />
 </template>
 ```
 
@@ -59,7 +59,7 @@ const tags = ref(['vue'])
 | `id` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `WiSizeInput` | — | — |
+| `size` | `WdSizeInput` | — | — |
 
 ## Events
 

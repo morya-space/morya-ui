@@ -23,25 +23,25 @@ const displayValue = computed(() => {
 })
 
 const badgeClass = computed(() => [
-  'wi-badge',
-  `wi-badge--${severityTone.value}`,
+  'wd-badge',
+  `wd-badge--${severityTone.value}`,
   {
-    'wi-badge--dot': isDot.value,
-    'wi-badge--small': sizeTone.value === 'small',
-    'wi-badge--large': sizeTone.value === 'large',
-    'wi-badge--processing': props.processing,
+    'wd-badge--dot': isDot.value,
+    'wd-badge--small': sizeTone.value === 'small',
+    'wd-badge--large': sizeTone.value === 'large',
+    'wd-badge--processing': props.processing,
   },
 ])
 
 const badgeStyle = computed(() => {
   if (!hasContent.value || !props.offset) return undefined
   const [x, y] = props.offset
-  return { '--wi-badge-offset-x': `${x}px`, '--wi-badge-offset-y': `${y}px` }
+  return { '--wd-badge-offset-x': `${x}px`, '--wd-badge-offset-y': `${y}px` }
 })
 </script>
 
 <template>
-  <span v-if="hasContent" class="wi-badge-wrap">
+  <span v-if="hasContent" class="wd-badge-wrap">
     <slot />
     <span :class="badgeClass" :style="badgeStyle">
       <template v-if="!isDot">{{ displayValue }}</template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { CarouselProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWiLocale } from '../../locale'
-import WiIcon from '../Icon/Icon.vue'
+import { useWdLocale } from '../../locale'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   numVisible: 1,
@@ -19,7 +19,7 @@ const emit = defineEmits<{
 
 const innerPage = ref(0)
 const page = computed(() => props.page ?? innerPage.value)
-const locale = useWiLocale()
+const locale = useWdLocale()
 let timer: ReturnType<typeof setInterval> | null = null
 
 const maxPage = computed(() => Math.max(0, props.value.length - props.numVisible))
@@ -124,7 +124,7 @@ onBeforeUnmount(stopAutoplay)
 
 <template>
   <div
-    class="wi-carousel"
+    class="wd-carousel"
     @keydown="onKeydown"
     @mouseenter="stopAutoplay"
     @mouseleave="startAutoplay"
@@ -134,16 +134,16 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="wi-carousel__nav wi-carousel__nav--prev"
+      class="wd-carousel__nav wd-carousel__nav--prev"
       :aria-label="locale.prev"
       :disabled="!circular && page <= 0"
       @click="prev"
     >
-      <WiIcon name="chevron-left" size="sm" />
+      <WdIcon name="chevron-left" size="sm" />
     </button>
-    <div class="wi-carousel__main">
+    <div class="wd-carousel__main">
       <div
-        class="wi-carousel__viewport"
+        class="wd-carousel__viewport"
         @pointerdown="onPointerDown"
         @pointerup="onPointerUp"
         @pointercancel="onPointerCancel"
@@ -151,7 +151,7 @@ onBeforeUnmount(stopAutoplay)
         <div
           v-for="entry in visibleItems"
           :key="entry.index"
-          class="wi-carousel__item"
+          class="wd-carousel__item"
           :style="{ flex: `0 0 ${100 / numVisible}%` }"
         >
           <slot name="item" :item="entry.item" :index="entry.index">
@@ -159,13 +159,13 @@ onBeforeUnmount(stopAutoplay)
           </slot>
         </div>
       </div>
-      <div v-if="showIndicators && pages.length > 1" class="wi-carousel__indicators">
+      <div v-if="showIndicators && pages.length > 1" class="wd-carousel__indicators">
         <button
           v-for="index in pages"
           :key="index"
           type="button"
-          class="wi-carousel__indicator"
-          :class="{ 'wi-carousel__indicator--active': index === page }"
+          class="wd-carousel__indicator"
+          :class="{ 'wd-carousel__indicator--active': index === page }"
           :aria-label="indicatorLabel(index)"
           :aria-current="index === page ? 'true' : undefined"
           @click="go(index)"
@@ -175,12 +175,12 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="wi-carousel__nav wi-carousel__nav--next"
+      class="wd-carousel__nav wd-carousel__nav--next"
       :aria-label="locale.next"
       :disabled="!circular && page >= maxPage"
       @click="next"
     >
-      <WiIcon name="chevron-right" size="sm" />
+      <WdIcon name="chevron-right" size="sm" />
     </button>
   </div>
 </template>

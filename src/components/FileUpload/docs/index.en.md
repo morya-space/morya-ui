@@ -24,14 +24,14 @@ Queue UI extras are out of scope this batch.
 ## Import
 
 ```ts
-import { WiFileUpload } from '@well-insight/ui'
+import { WdFileUpload } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiFileUpload } from '@well-insight/ui'
+import { WdFileUpload } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -42,7 +42,7 @@ function onSelect(files: File[]) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WiFileUpload mode="advanced" multiple @select="onSelect" />
+    <WdFileUpload mode="advanced" multiple @select="onSelect" />
     <div v-if="names.length">
       Selected: {{ names.join(', ') }}
     </div>
@@ -56,7 +56,7 @@ Set `drag` to show a dashed drop zone. Drop files or click the area to choose.
 
 ```vue preview
 <script setup lang="ts">
-import { WiFileUpload } from '@well-insight/ui'
+import { WdFileUpload } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -67,11 +67,11 @@ function onSelect(files: File[]) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WiFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
+    <WdFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
       <template #tip>
         Images or PDF. Multiple files can be dropped at once.
       </template>
-    </WiFileUpload>
+    </WdFileUpload>
     <div v-if="names.length">
       Selected: {{ names.join(', ') }}
     </div>
@@ -85,8 +85,8 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@well-insight/ui';
-import {  WiFileUpload } from '@well-insight/ui'
+import type {FileUploadFile} from '@wex-design/ui';
+import {  WdFileUpload } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const preview = ref('')
@@ -97,7 +97,7 @@ function onPreview(file: FileUploadFile) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WiFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
+    <WdFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
     <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem">
   </div>
 </template>
@@ -109,11 +109,11 @@ A photo wall: the plus tile opens the picker; hover to preview or remove. Images
 
 ```vue preview
 <script setup lang="ts">
-import { WiFileUpload } from '@well-insight/ui'
+import { WdFileUpload } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
+  <WdFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
 </template>
 ```
 
@@ -123,8 +123,8 @@ With `httpRequest` (or `action`), files upload automatically. The demo mocks the
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadRequestOptions} from '@well-insight/ui';
-import {  WiFileUpload } from '@well-insight/ui'
+import type {FileUploadRequestOptions} from '@wex-design/ui';
+import {  WdFileUpload } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -143,11 +143,11 @@ function onSuccess(_file: unknown, response: unknown) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WiFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
+    <WdFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
       <template #tip>
         Files upload immediately after selection, with progress.
       </template>
-    </WiFileUpload>
+    </WdFileUpload>
     <div v-if="last">
       Response: {{ last }}
     </div>
@@ -161,8 +161,8 @@ With `auto-upload="false"`, files join the list first; click Upload to send them
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@well-insight/ui';
-import {  WiFileUpload } from '@well-insight/ui'
+import type {FileUploadFile} from '@wex-design/ui';
+import {  WdFileUpload } from '@wex-design/ui'
 
 async function mockUpload() {
   await new Promise((resolve) => setTimeout(resolve, 300))
@@ -176,7 +176,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 </script>
 
 <template>
-  <WiFileUpload
+  <WdFileUpload
     mode="advanced"
     multiple
     :auto-upload="false"
@@ -187,7 +187,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
     <template #tip>
       Each file must be under 2MB. Choose files, then click Upload.
     </template>
-  </WiFileUpload>
+  </WdFileUpload>
 </template>
 ```
 
@@ -197,7 +197,7 @@ Use a template ref to control the picker, upload queue, cancellation, and cleari
 
 ```vue preview
 <script setup lang="ts">
-import { WiFileUpload } from '@well-insight/ui'
+import { WdFileUpload } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const uploader = ref<{
@@ -211,7 +211,7 @@ const uploader = ref<{
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WiFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
+    <WdFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
       <button type="button" @click="uploader?.openPicker()">Choose</button>
       <button type="button" @click="uploader?.submit()">Submit queue</button>

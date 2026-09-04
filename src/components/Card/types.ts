@@ -1,6 +1,6 @@
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
-export type CardSize = WiSizeInput
+export type CardSize = WdSizeInput
 
 export interface CardProps {
   title?: string

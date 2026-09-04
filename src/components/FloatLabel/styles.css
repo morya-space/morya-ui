@@ -1,30 +1,30 @@
 /* —— Form: FloatLabel —— */
-.wi-float-label {
+.wd-float-label {
     display: block;
     position: relative;
 }
 
-.wi-float-label > label {
-    color: var(--wi-color-text-muted);
-    left: var(--wi-space-3);
+.wd-float-label > label {
+    color: var(--wd-color-text-muted);
+    left: var(--wd-space-3);
     line-height: 1;
     pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transition:
-        top var(--wi-motion-fast) var(--wi-motion-ease),
-        transform var(--wi-motion-fast) var(--wi-motion-ease),
-        font-size var(--wi-motion-fast) var(--wi-motion-ease),
-        color var(--wi-motion-fast) var(--wi-motion-ease);
+        top var(--wd-motion-fast) var(--wd-motion-ease),
+        transform var(--wd-motion-fast) var(--wd-motion-ease),
+        font-size var(--wd-motion-fast) var(--wd-motion-ease),
+        color var(--wd-motion-fast) var(--wd-motion-ease);
     z-index: 1;
 }
 
-.wi-float-label:focus-within > label,
-.wi-float-label:has(input:not(:placeholder-shown)) > label,
-.wi-float-label:has(textarea:not(:placeholder-shown)) > label {
-    background: var(--wi-color-surface);
-    color: var(--wi-color-primary);
+.wd-float-label:focus-within > label,
+.wd-float-label:has(input:not(:placeholder-shown)) > label,
+.wd-float-label:has(textarea:not(:placeholder-shown)) > label {
+    background: var(--wd-color-surface);
+    color: var(--wd-color-primary);
     font-size: 0.7rem;
     padding: 0 0.2rem;
     top: 0;

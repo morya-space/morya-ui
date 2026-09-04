@@ -1,8 +1,8 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
 export type CheckboxValue = string | number | boolean
-export type CheckboxSize = WiSizeInput
+export type CheckboxSize = WdSizeInput
 
 export interface CheckboxProps {
   /** Binary checked state when used outside a group. */
@@ -10,7 +10,7 @@ export interface CheckboxProps {
   label?: string
   id?: string
   name?: string
-  /** Option value. Required when used inside `WiCheckboxGroup`. */
+  /** Option value. Required when used inside `WdCheckboxGroup`. */
   value?: CheckboxValue
   /** Mixed state. Visual only; does not change `modelValue`. */
   indeterminate?: boolean
@@ -38,7 +38,7 @@ export interface CheckboxGroupEmits {
   (event: 'update:modelValue', value: CheckboxValue[]): void
 }
 
-export interface WiCheckboxGroupContext {
+export interface WdCheckboxGroupContext {
   modelValue: ComputedRef<CheckboxValue[]>
   name: ComputedRef<string | undefined>
   size: ComputedRef<CheckboxSize | undefined>
@@ -47,4 +47,4 @@ export interface WiCheckboxGroupContext {
   toggle: (value: CheckboxValue, checked: boolean) => void
 }
 
-export const WI_CHECKBOX_GROUP_KEY: InjectionKey<WiCheckboxGroupContext> = Symbol('wiCheckboxGroup')
+export const WD_CHECKBOX_GROUP_KEY: InjectionKey<WdCheckboxGroupContext> = Symbol('wdCheckboxGroup')

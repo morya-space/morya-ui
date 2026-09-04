@@ -2,12 +2,12 @@
 import type { IconName } from '../Icon/types'
 import type { MessageItem, MessageProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
-import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { useWdLocale } from '../../locale'
+import { useWdConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { WiRenderableView } from '../../shared/Renderable'
+import { WdRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 import {
   closeMessageItem,
   messageState,
@@ -23,8 +23,8 @@ const props = withDefaults(defineProps<MessageProps>(), {
   auto: false,
 })
 
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
 const list = computed(() => props.messages ?? messageState.items)
@@ -67,7 +67,7 @@ function iconName(severity?: MessageItem['severity']): IconName {
 }
 
 function severityClass(severity?: MessageItem['severity']) {
-  return `wi-message--${normalizeSeverity(severity) ?? 'info'}`
+  return `wd-message--${normalizeSeverity(severity) ?? 'info'}`
 }
 
 function onClose(item: MessageItem) {
@@ -86,35 +86,35 @@ function onMouseLeave(item: MessageItem) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
-      class="wi-message-host"
-      :class="`wi-message-host--${resolvedPlacement}`"
+      class="wd-message-host"
+      :class="`wd-message-host--${resolvedPlacement}`"
       aria-live="polite"
       aria-atomic="false"
     >
-      <TransitionGroup name="wi-message-slide">
+      <TransitionGroup name="wd-message-slide">
         <div
           v-for="item in list"
           :key="item.id"
-          class="wi-message"
+          class="wd-message"
           :class="severityClass(item.severity)"
           role="status"
           @mouseenter="onMouseEnter(item)"
           @mouseleave="onMouseLeave(item)"
         >
-          <span v-if="item.icon !== false" class="wi-message__icon" aria-hidden="true">
-            <WiIcon :name="iconName(item.severity)" size="sm" />
+          <span v-if="item.icon !== false" class="wd-message__icon" aria-hidden="true">
+            <WdIcon :name="iconName(item.severity)" size="sm" />
           </span>
-          <div class="wi-message__content">
-            <WiRenderableView :value="item.content" />
+          <div class="wd-message__content">
+            <WdRenderableView :value="item.content" />
           </div>
           <button
             v-if="item.closable"
             type="button"
-            class="wi-message__close"
+            class="wd-message__close"
             :aria-label="locale.close"
             @click="onClose(item)"
           >
-            <WiIcon name="close" size="sm" />
+            <WdIcon name="close" size="sm" />
           </button>
         </div>
       </TransitionGroup>

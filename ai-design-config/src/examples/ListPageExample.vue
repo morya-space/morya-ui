@@ -4,21 +4,21 @@
  * @see DESIGN.md §3
  */
 import {
-  WiBreadcrumb,
-  WiButton,
-  WiConfigProvider,
-  WiInput,
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutHeader,
-  WiLayoutSider,
-  WiMenu,
-  WiSelect,
-  WiSpace,
-  WiTable,
-  WiTag,
+  WdBreadcrumb,
+  WdButton,
+  WdConfigProvider,
+  WdInput,
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutHeader,
+  WdLayoutSider,
+  WdMenu,
+  WdSelect,
+  WdSpace,
+  WdTable,
+  WdTag,
   zhCN,
-} from '@well-insight/ui'
+} from '@wex-design/ui'
 import { ref } from 'vue'
 
 const keyword = ref('')
@@ -47,42 +47,42 @@ const rows = [
 </script>
 
 <template>
-  <WiConfigProvider :locale="zhCN">
-    <WiLayout has-sider class="page-list">
-      <WiLayoutSider class="page-list__sider">
-        <WiMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
-      </WiLayoutSider>
+  <WdConfigProvider :locale="zhCN">
+    <WdLayout has-sider class="page-list">
+      <WdLayoutSider class="page-list__sider">
+        <WdMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
+      </WdLayoutSider>
 
-      <WiLayout>
-        <WiLayoutHeader class="page-list__header">
-          <WiBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
-        </WiLayoutHeader>
+      <WdLayout>
+        <WdLayoutHeader class="page-list__header">
+          <WdBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
+        </WdLayoutHeader>
 
-        <WiLayoutContent class="page-list__content">
+        <WdLayoutContent class="page-list__content">
           <!-- 筛选区 -->
           <section class="page-list__filters" aria-label="筛选">
-            <WiSpace wrap>
-              <WiInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
-              <WiSelect
+            <WdSpace wrap>
+              <WdInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
+              <WdSelect
                 v-model="status"
                 :options="statusOptions"
                 placeholder="状态"
                 clearable
                 style="width: 10rem"
               />
-              <WiButton severity="primary">查询</WiButton>
-              <WiButton severity="secondary">重置</WiButton>
-            </WiSpace>
+              <WdButton severity="primary">查询</WdButton>
+              <WdButton severity="secondary">重置</WdButton>
+            </WdSpace>
           </section>
 
           <!-- 工具栏 -->
           <header class="page-list__toolbar">
             <h1 class="page-list__title">用户管理</h1>
-            <WiButton severity="primary">新建用户</WiButton>
+            <WdButton severity="primary">新建用户</WdButton>
           </header>
 
           <!-- 表格 -->
-          <WiTable
+          <WdTable
             :columns="columns"
             :rows="rows"
             :rows-per-page="3"
@@ -93,72 +93,72 @@ const rows = [
             aria-label="用户列表"
           >
             <template #cell-status="{ value }">
-              <WiTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
+              <WdTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
             </template>
             <template #cell-actions>
-              <WiSpace>
-                <WiButton severity="secondary" size="small">编辑</WiButton>
-                <WiButton severity="danger" size="small">删除</WiButton>
-              </WiSpace>
+              <WdSpace>
+                <WdButton severity="secondary" size="small">编辑</WdButton>
+                <WdButton severity="danger" size="small">删除</WdButton>
+              </WdSpace>
             </template>
             <template #empty>
               <p class="page-list__empty">暂无用户数据</p>
             </template>
-          </WiTable>
-        </WiLayoutContent>
-      </WiLayout>
-    </WiLayout>
-  </WiConfigProvider>
+          </WdTable>
+        </WdLayoutContent>
+      </WdLayout>
+    </WdLayout>
+  </WdConfigProvider>
 </template>
 
 <style scoped>
 .page-list {
   min-height: 100vh;
-  background: var(--wi-color-surface);
+  background: var(--wd-color-surface);
 }
 
 .page-list__sider {
-  border-right: 1px solid var(--wi-color-border);
+  border-right: 1px solid var(--wd-color-border);
 }
 
 .page-list__header {
-  padding: var(--wi-space-4) var(--wi-space-6);
-  border-bottom: 1px solid var(--wi-color-border);
-  background: var(--wi-color-surface);
+  padding: var(--wd-space-4) var(--wd-space-6);
+  border-bottom: 1px solid var(--wd-color-border);
+  background: var(--wd-color-surface);
 }
 
 .page-list__content {
-  padding: var(--wi-space-6);
+  padding: var(--wd-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--wi-space-4);
+  gap: var(--wd-space-4);
 }
 
 .page-list__filters {
-  padding: var(--wi-space-4);
-  background: color-mix(in srgb, var(--wi-color-border) 25%, transparent);
-  border-radius: var(--wi-radius-md);
-  border: 1px solid var(--wi-color-border);
+  padding: var(--wd-space-4);
+  background: color-mix(in srgb, var(--wd-color-border) 25%, transparent);
+  border-radius: var(--wd-radius-md);
+  border: 1px solid var(--wd-color-border);
 }
 
 .page-list__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--wi-space-4);
+  gap: var(--wd-space-4);
 }
 
 .page-list__title {
   margin: 0;
-  font-size: var(--wi-font-size-lg);
+  font-size: var(--wd-font-size-lg);
   font-weight: 600;
-  color: var(--wi-color-text);
+  color: var(--wd-color-text);
 }
 
 .page-list__empty {
   margin: 0;
-  padding: var(--wi-space-8);
+  padding: var(--wd-space-8);
   text-align: center;
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
 }
 </style>

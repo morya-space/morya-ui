@@ -6,29 +6,29 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 
 # Grid
 
-24 列栅格布局（可用 `cols` 调整）。子项请使用 `WiGridItem`（别名 `WiGi`）。
+24 列栅格布局（可用 `cols` 调整）。子项请使用 `WdGridItem`（别名 `WdGi`）。
 
 ## 引入
 
 ```ts
-import { WiGrid, WiGridItem } from '@well-insight/ui'
+import { WdGrid, WdGridItem } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiGrid, WiGridItem } from '@well-insight/ui'
+import { WdGrid, WdGridItem } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiGrid :cols="4" :x-gap="12" :y-gap="12">
-    <WiGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+  <WdGrid :cols="4" :x-gap="12" :y-gap="12">
+    <WdGridItem v-for="n in 4" :key="n" :span="1">
+      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
         {{ n }}
       </div>
-    </WiGridItem>
-  </WiGrid>
+    </WdGridItem>
+  </WdGrid>
 </template>
 ```
 
@@ -36,44 +36,44 @@ import { WiGrid, WiGridItem } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiGrid, WiGridItem } from '@well-insight/ui'
+import { WdGrid, WdGridItem } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiGrid :cols="6" :x-gap="12" :y-gap="12">
-    <WiGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+  <WdGrid :cols="6" :x-gap="12" :y-gap="12">
+    <WdGridItem :span="2">
+      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
         span 2
       </div>
-    </WiGridItem>
-    <WiGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+    </WdGridItem>
+    <WdGridItem :span="2" :offset="1">
+      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
         offset 1
       </div>
-    </WiGridItem>
-  </WiGrid>
+    </WdGridItem>
+  </WdGrid>
 </template>
 ```
 
 ## Responsive
 
-`cols` / `xGap` / `yGap` 与 `WiGridItem` 的 `span` / `offset` 均支持响应式字符串，例如 `1 s:2 m:3`（断点：`xs` `s` `m` `l` `xl` `2xl`）。
+`cols` / `xGap` / `yGap` 与 `WdGridItem` 的 `span` / `offset` 均支持响应式字符串，例如 `1 s:2 m:3`（断点：`xs` `s` `m` `l` `xl` `2xl`）。
 
 当 `cols` / 间距是普通数字、但 item 仍要用响应式 `span` 时，请打开 `itemResponsive`。
 
 ```vue preview
 <script setup lang="ts">
-import { WiGrid, WiGridItem } from '@well-insight/ui'
+import { WdGrid, WdGridItem } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <WiGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+  <WdGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
+    <WdGridItem v-for="n in 4" :key="n" span="1 m:2">
+      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
         {{ n }}
       </div>
-    </WiGridItem>
-  </WiGrid>
+    </WdGridItem>
+  </WdGrid>
 </template>
 ```
 
@@ -81,7 +81,7 @@ import { WiGrid, WiGridItem } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiGrid, WiGridItem } from '@well-insight/ui'
+import { WdButton, WdGrid, WdGridItem } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)
@@ -89,23 +89,23 @@ const collapsed = ref(true)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WiButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
-    <WiGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <WiGridItem v-for="n in 6" :key="n" :span="1">
+    <WdButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
+    <WdGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
+      <WdGridItem v-for="n in 6" :key="n" :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md)">
+          <div style="padding:0.5rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
             {{ n }}{{ overflow && n > 4 ? '' : '' }}
           </div>
         </template>
-      </WiGridItem>
-      <WiGridItem suffix :span="1">
+      </WdGridItem>
+      <WdGridItem suffix :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--wi-color-text-muted);font-size:0.75rem">
+          <div style="padding:0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">
             {{ overflow ? '还有更多…' : '全部' }}
           </div>
         </template>
-      </WiGridItem>
-    </WiGrid>
+      </WdGridItem>
+    </WdGrid>
   </div>
 </template>
 ```

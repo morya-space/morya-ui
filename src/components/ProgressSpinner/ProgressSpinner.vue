@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ProgressSpinnerProps } from './types'
 import { computed, onBeforeUnmount, ref, useSlots, watch } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
 
 const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
 })
 
 const slots = useSlots()
-const locale = useWiLocale()
+const locale = useWdLocale()
 const label = computed(() => props.ariaLabel ?? locale.value.loading)
 const wrapping = computed(() => Boolean(slots.default))
 const sizeTone = computed(() => resolveSizeClass(props.size))
@@ -54,19 +54,19 @@ const spinnerStyle = computed(() => ({
 }))
 
 const sizeClass = computed(() => ({
-  'wi-progress-spinner--small': sizeTone.value === 'small',
-  'wi-progress-spinner--large': sizeTone.value === 'large',
+  'wd-progress-spinner--small': sizeTone.value === 'small',
+  'wd-progress-spinner--large': sizeTone.value === 'large',
 }))
 </script>
 
 <template>
-  <div v-if="wrapping" class="wi-progress-spinner-wrap" :class="{ 'wi-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
-    <div class="wi-progress-spinner-wrap__content" :inert="visible || undefined">
+  <div v-if="wrapping" class="wd-progress-spinner-wrap" :class="{ 'wd-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
+    <div class="wd-progress-spinner-wrap__content" :inert="visible || undefined">
       <slot />
     </div>
-    <div v-if="visible" class="wi-progress-spinner-wrap__overlay">
+    <div v-if="visible" class="wd-progress-spinner-wrap__overlay">
       <svg
-        class="wi-progress-spinner"
+        class="wd-progress-spinner"
         :class="sizeClass"
         viewBox="0 0 50 50"
         role="status"
@@ -74,7 +74,7 @@ const sizeClass = computed(() => ({
         :style="spinnerStyle"
       >
         <circle
-          class="wi-progress-spinner__circle"
+          class="wd-progress-spinner__circle"
           cx="25"
           cy="25"
           r="20"
@@ -82,14 +82,14 @@ const sizeClass = computed(() => ({
           :stroke-width="strokeWidth"
         />
       </svg>
-      <p v-if="description" class="wi-progress-spinner__description">
+      <p v-if="description" class="wd-progress-spinner__description">
         {{ description }}
       </p>
     </div>
   </div>
   <svg
     v-else
-    class="wi-progress-spinner"
+    class="wd-progress-spinner"
     :class="sizeClass"
     viewBox="0 0 50 50"
     role="status"
@@ -97,7 +97,7 @@ const sizeClass = computed(() => ({
     :style="spinnerStyle"
   >
     <circle
-      class="wi-progress-spinner__circle"
+      class="wd-progress-spinner__circle"
       cx="25"
       cy="25"
       r="20"

@@ -11,14 +11,14 @@ The left primary button emits `click`; items in the right-side menu emit `comman
 ## Import
 
 ```ts
-import { WiSplitButton } from '@well-insight/ui'
+import { WdSplitButton } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiSplitButton } from '@well-insight/ui'
+import { WdSplitButton } from '@wex-design/ui'
 
 const items = [
   { label: 'Save as', command: () => console.log('save as') },
@@ -27,7 +27,7 @@ const items = [
 </script>
 
 <template>
-  <WiSplitButton label="Save" :model="items" @click="() => console.log('save')" />
+  <WdSplitButton label="Save" :model="items" @click="() => console.log('save')" />
 </template>
 ```
 

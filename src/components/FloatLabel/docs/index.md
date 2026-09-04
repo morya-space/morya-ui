@@ -11,23 +11,23 @@ description: 浮动标签容器，聚焦或有值时上浮。
 ## 引入
 
 ```ts
-import { WiFloatLabel, WiInput } from '@well-insight/ui'
+import { WdFloatLabel, WdInput } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiFloatLabel, WiInput } from '@well-insight/ui'
+import { WdFloatLabel, WdInput } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WiFloatLabel label="Username">
-    <WiInput v-model="value" placeholder=" " />
-  </WiFloatLabel>
+  <WdFloatLabel label="Username">
+    <WdInput v-model="value" placeholder=" " />
+  </WdFloatLabel>
 </template>
 ```
 

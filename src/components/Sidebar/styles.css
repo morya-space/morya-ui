@@ -1,65 +1,65 @@
 /* —— Menu: Sidebar —— */
-.wi-sidebar {
-    --wi-sidebar-width: 12rem;
-    --wi-sidebar-collapsed-width: 3.5rem;
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
-    min-width: var(--wi-sidebar-width);
-    padding: var(--wi-space-2);
-    width: var(--wi-sidebar-width);
+.wd-sidebar {
+    --wd-sidebar-width: 12rem;
+    --wd-sidebar-collapsed-width: 3.5rem;
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
+    min-width: var(--wd-sidebar-width);
+    padding: var(--wd-space-2);
+    width: var(--wd-sidebar-width);
 }
 
-.wi-sidebar--collapsed {
-    min-width: var(--wi-sidebar-collapsed-width);
-    width: var(--wi-sidebar-collapsed-width);
+.wd-sidebar--collapsed {
+    min-width: var(--wd-sidebar-collapsed-width);
+    width: var(--wd-sidebar-collapsed-width);
 }
 
-.wi-sidebar__list,
-.wi-sidebar__children {
+.wd-sidebar__list,
+.wd-sidebar__children {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wi-sidebar__children {
-    margin-left: var(--wi-space-4);
+.wd-sidebar__children {
+    margin-left: var(--wd-space-4);
 }
 
-.wi-sidebar__link {
+.wd-sidebar__link {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-sm);
+    border-radius: var(--wd-radius-sm);
     color: inherit;
     cursor: pointer;
     display: flex;
     font: inherit;
-    gap: var(--wi-space-2);
-    padding: var(--wi-space-2);
+    gap: var(--wd-space-2);
+    padding: var(--wd-space-2);
     text-align: left;
     width: 100%;
 }
 
-.wi-sidebar__link:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
+.wd-sidebar__link:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wd-color-primary) 10%, transparent);
 }
 
-.wi-sidebar__link:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-sidebar__link:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-sidebar__link:disabled {
+.wd-sidebar__link:disabled {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-sidebar__link--child {
-    font-size: var(--wi-font-size-md);
+.wd-sidebar__link--child {
+    font-size: var(--wd-font-size-md);
 }
 
-.wi-sidebar__icon {
+.wd-sidebar__icon {
     flex: 0 0 1.25rem;
     text-align: center;
 }

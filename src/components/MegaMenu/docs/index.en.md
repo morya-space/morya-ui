@@ -11,14 +11,14 @@ Horizontal top navigation. Sub-links render in a **multi-column panel**—suited
 ## Import
 
 ```ts
-import { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'
+import { WdMegaMenu, type MegaMenuItem } from '@wex-design/ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { WiMegaMenu } from '@well-insight/ui'
+import { WdMegaMenu } from '@wex-design/ui'
 
 const model = [
   {
@@ -33,7 +33,7 @@ const model = [
 </script>
 
 <template>
-  <WiMegaMenu :model="model" />
+  <WdMegaMenu :model="model" />
 </template>
 ```
 

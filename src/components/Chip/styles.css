@@ -1,136 +1,136 @@
-.wi-chip {
-    --wi-chip-avatar-size: 1.25rem;
-    --wi-chip-icon-size: 1rem;
-    --wi-chip-small-padding-y: 0.15rem;
-    --wi-chip-remove-size: var(--wi-chip-avatar-size);
+.wd-chip {
+    --wd-chip-avatar-size: 1.25rem;
+    --wd-chip-icon-size: 1rem;
+    --wd-chip-small-padding-y: 0.15rem;
+    --wd-chip-remove-size: var(--wd-chip-avatar-size);
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 14%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 14%,
+        var(--wd-color-surface)
     );
-    border-radius: var(--wi-radius-full);
-    color: var(--wi-color-text);
+    border-radius: var(--wd-radius-full);
+    color: var(--wd-color-text);
     display: inline-flex;
-    font-family: var(--wi-font-sans);
-    font-size: var(--wi-font-size-md);
-    gap: var(--wi-space-2);
+    font-family: var(--wd-font-sans);
+    font-size: var(--wd-font-size-md);
+    gap: var(--wd-space-2);
     line-height: 1;
     max-width: 100%;
-    padding: var(--wi-space-2) var(--wi-space-3);
+    padding: var(--wd-space-2) var(--wd-space-3);
 }
 
-.wi-chip--disabled {
-    opacity: var(--wi-opacity-disabled);
+.wd-chip--disabled {
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }
 
-.wi-chip__image {
-    border-radius: var(--wi-radius-full);
+.wd-chip__image {
+    border-radius: var(--wd-radius-full);
     flex-shrink: 0;
-    height: var(--wi-chip-avatar-size);
+    height: var(--wd-chip-avatar-size);
     object-fit: cover;
-    width: var(--wi-chip-avatar-size);
+    width: var(--wd-chip-avatar-size);
 }
 
-.wi-chip__icon {
+.wd-chip__icon {
     flex-shrink: 0;
-    height: var(--wi-chip-icon-size);
-    width: var(--wi-chip-icon-size);
+    height: var(--wd-chip-icon-size);
+    width: var(--wd-chip-icon-size);
 }
 
-.wi-chip__icon :is(.wi-icon, svg) {
+.wd-chip__icon :is(.wd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wi-chip__label {
+.wd-chip__label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.wi-chip__remove {
+.wd-chip__remove {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-full);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-full);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
     font-size: 1rem;
-    height: var(--wi-chip-remove-size);
+    height: var(--wd-chip-remove-size);
     justify-content: center;
     line-height: 1;
-    margin-inline-end: calc(var(--wi-space-1) * -1);
+    margin-inline-end: calc(var(--wd-space-1) * -1);
     padding: 0;
-    width: var(--wi-chip-remove-size);
+    width: var(--wd-chip-remove-size);
 }
 
-.wi-chip__remove:hover:not(:disabled) {
-    color: var(--wi-color-text);
+.wd-chip__remove:hover:not(:disabled) {
+    color: var(--wd-color-text);
 }
 
-.wi-chip__remove:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-chip__remove:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-chip__remove:disabled {
+.wd-chip__remove:disabled {
     cursor: not-allowed;
 }
 
-.wi-chip--small {
-    --wi-chip-icon-size: 0.875rem;
-    font-size: var(--wi-font-size-xs);
-    padding: var(--wi-chip-small-padding-y) var(--wi-space-2);
+.wd-chip--small {
+    --wd-chip-icon-size: 0.875rem;
+    font-size: var(--wd-font-size-xs);
+    padding: var(--wd-chip-small-padding-y) var(--wd-space-2);
 }
 
-.wi-chip--large {
-    --wi-chip-icon-size: 1.25rem;
-    font-size: var(--wi-font-size-md);
-    padding: var(--wi-space-2) var(--wi-space-4);
+.wd-chip--large {
+    --wd-chip-icon-size: 1.25rem;
+    font-size: var(--wd-font-size-md);
+    padding: var(--wd-space-2) var(--wd-space-4);
 }
 
-.wi-chip--primary {
-    background: color-mix(in srgb, var(--wi-color-primary) 12%, transparent);
-    color: var(--wi-color-primary);
+.wd-chip--primary {
+    background: color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
+    color: var(--wd-color-primary);
 }
 
-.wi-chip--secondary {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 16%, var(--wi-color-surface));
-    color: var(--wi-color-text);
+.wd-chip--secondary {
+    background: color-mix(in srgb, var(--wd-color-text-muted) 16%, var(--wd-color-surface));
+    color: var(--wd-color-text);
 }
 
-.wi-chip--success {
-    background: color-mix(in srgb, var(--wi-color-success) 14%, transparent);
-    color: var(--wi-color-success);
+.wd-chip--success {
+    background: color-mix(in srgb, var(--wd-color-success) 14%, transparent);
+    color: var(--wd-color-success);
 }
 
-.wi-chip--info {
-    background: color-mix(in srgb, var(--wi-color-info) 12%, transparent);
-    color: var(--wi-color-info);
+.wd-chip--info {
+    background: color-mix(in srgb, var(--wd-color-info) 12%, transparent);
+    color: var(--wd-color-info);
 }
 
-.wi-chip--warn {
-    background: color-mix(in srgb, var(--wi-color-warn) 14%, transparent);
-    color: var(--wi-color-warn);
+.wd-chip--warn {
+    background: color-mix(in srgb, var(--wd-color-warn) 14%, transparent);
+    color: var(--wd-color-warn);
 }
 
-.wi-chip--danger {
-    background: color-mix(in srgb, var(--wi-color-danger) 14%, transparent);
-    color: var(--wi-color-danger);
+.wd-chip--danger {
+    background: color-mix(in srgb, var(--wd-color-danger) 14%, transparent);
+    color: var(--wd-color-danger);
 }
 
-.wi-chip--help {
-    background: color-mix(in srgb, var(--wi-color-help) 14%, transparent);
-    color: var(--wi-color-help);
+.wd-chip--help {
+    background: color-mix(in srgb, var(--wd-color-help) 14%, transparent);
+    color: var(--wd-color-help);
 }
 
-.wi-chip--contrast {
-    background: var(--wi-color-contrast);
-    color: var(--wi-color-contrast-fg);
+.wd-chip--contrast {
+    background: var(--wd-color-contrast);
+    color: var(--wd-color-contrast-fg);
 }

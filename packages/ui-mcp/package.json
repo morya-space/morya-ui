@@ -1,18 +1,18 @@
 {
-  "name": "@well-insight/ui-mcp",
+  "name": "@wex-design/ui-mcp",
   "type": "module",
-  "version": "0.1.14",
+  "version": "0.0.1",
   "packageManager": "pnpm@10.12.4",
-  "description": "MCP server for @well-insight/ui — component docs, examples, and usage guidance for AI coding agents.",
+  "description": "MCP server for @wex-design/ui — component docs, examples, and usage guidance for AI coding agents.",
   "license": "MIT",
-  "homepage": "https://github.com/well-insight/well-insight-ui/tree/main/packages/ui-mcp#readme",
+  "homepage": "https://github.com/wex-design/wex-design-ui/tree/main/packages/ui-mcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/well-insight/well-insight-ui.git",
+    "url": "git+https://github.com/wex-design/wex-design-ui.git",
     "directory": "packages/ui-mcp"
   },
   "bugs": {
-    "url": "https://github.com/well-insight/well-insight-ui/issues"
+    "url": "https://github.com/wex-design/wex-design-ui/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -21,7 +21,7 @@
     ".": "./dist/index.js"
   },
   "bin": {
-    "well-insight-ui-mcp": "./bin/well-insight-ui-mcp.js"
+    "wex-design-ui-mcp": "./bin/wex-design-ui-mcp.js"
   },
   "files": [
     "README.md",

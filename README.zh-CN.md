@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="https://well-insight.github.io/well-insight-ui/">
-    <img src="./assets/logo.svg" alt="Well Insight UI" width="96" height="96" />
+  <a href="https://wex-design.github.io/wex-design-ui/">
+    <img src="./assets/logo.svg" alt="Wex Design UI" width="96" height="96" />
   </a>
 </p>
 
-<h1 align="center">Well Insight UI</h1>
+<h1 align="center">Wex Design UI</h1>
 
 <p align="center">
   带设计令牌、亮暗主题与交互式文档的 Vue 3 组件库。
@@ -15,19 +15,19 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@well-insight/ui"><img src="https://img.shields.io/npm/v/@well-insight/ui?style=flat-square" alt="npm version" /></a>
-  <a href="https://www.npmjs.com/package/@well-insight/ui"><img src="https://img.shields.io/npm/dm/@well-insight/ui?style=flat-square" alt="npm downloads" /></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/github/license/well-insight/well-insight-ui?style=flat-square" alt="license" /></a>
+  <a href="https://www.npmjs.com/package/@wex-design/ui"><img src="https://img.shields.io/npm/v/@wex-design/ui?style=flat-square" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@wex-design/ui"><img src="https://img.shields.io/npm/dm/@wex-design/ui?style=flat-square" alt="npm downloads" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/wex-design/wex-design-ui?style=flat-square" alt="license" /></a>
   <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/Vue-3-42b883?style=flat-square&logo=vue.js&logoColor=white" alt="Vue 3" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
 </p>
 
 <p align="center">
-  <a href="https://well-insight.github.io/well-insight-ui/"><b>文档站</b></a>
+  <a href="https://wex-design.github.io/wex-design-ui/"><b>文档站</b></a>
   ·
-  <a href="https://well-insight.github.io/well-insight-ui/components">组件</a>
+  <a href="https://wex-design.github.io/wex-design-ui/components">组件</a>
   ·
-  <a href="https://github.com/well-insight/well-insight-ui/issues">Issues</a>
+  <a href="https://github.com/wex-design/wex-design-ui/issues">Issues</a>
   ·
   <a href="./CHANGELOG.md">更新日志</a>
 </p>
@@ -36,7 +36,7 @@
 
 ## 介绍
 
-**Well Insight UI**（`@well-insight/ui`）是一套开源的 Vue 3 组件库，提供 **88 个组件**、基于令牌的主题系统、内置国际化，以及带实时预览的文档站。
+**Wex Design UI**（`@wex-design/ui`）是一套开源的 Vue 3 组件库，提供 **88 个组件**、基于令牌的主题系统、内置国际化，以及带实时预览的文档站。
 
 无论你是做管理后台、SaaS 产品还是内部工具，都可以直接使用统一的表单、浮层、数据展示与反馈能力。
 
@@ -48,7 +48,7 @@
 
 ### 主题开箱即用
 
-亮/暗色模式基于 `--wi-*` CSS 变量；通过 `useTheme` 切换主题，用 `useDensity` / `useMotion` 调整密度与动效，子树可用 `WiConfigProvider` 覆盖。
+亮/暗色模式基于 `--wd-*` CSS 变量；通过 `useTheme` 切换主题，用 `useDensity` / `useMotion` 调整密度与动效，子树可用 `WdConfigProvider` 覆盖。
 
 ### TypeScript 优先
 
@@ -56,7 +56,7 @@
 
 ### 多种接入方式
 
-支持全量注册、按名导入、按需子路径，以及配合 `unplugin-vue-components` 的 `WellInsightResolver`——同一应用内建议保持一致。
+支持全量注册、按名导入、按需子路径，以及配合 `unplugin-vue-components` 的 `WexDesignResolver`——同一应用内建议保持一致。
 
 ### 文档即预览
 
@@ -64,29 +64,29 @@
 
 ### SSR 与元框架
 
-兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`@well-insight/nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://well-insight.github.io/well-insight-ui/docs/ssr)。
+兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`@wex-design/nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://wex-design.github.io/wex-design-ui/docs/ssr)。
 
 ## 文档
 
-**https://well-insight.github.io/well-insight-ui/**
+**https://wex-design.github.io/wex-design-ui/**
 
 | 章节 | 链接 |
 | --- | --- |
-| 快速上手 | [指南](https://well-insight.github.io/well-insight-ui/docs/quick-start) |
-| 主题 | [主题](https://well-insight.github.io/well-insight-ui/docs/theme) |
-| 全局配置 | [配置](https://well-insight.github.io/well-insight-ui/docs/config) |
-| SSR | [Nuxt / Astro / Vite SSR](https://well-insight.github.io/well-insight-ui/docs/ssr) |
-| 组件 | [目录](https://well-insight.github.io/well-insight-ui/components) |
-| 更新日志 | [版本](https://well-insight.github.io/well-insight-ui/changelog) |
+| 快速上手 | [指南](https://wex-design.github.io/wex-design-ui/docs/quick-start) |
+| 主题 | [主题](https://wex-design.github.io/wex-design-ui/docs/theme) |
+| 全局配置 | [配置](https://wex-design.github.io/wex-design-ui/docs/config) |
+| SSR | [Nuxt / Astro / Vite SSR](https://wex-design.github.io/wex-design-ui/docs/ssr) |
+| 组件 | [目录](https://wex-design.github.io/wex-design-ui/components) |
+| 更新日志 | [版本](https://wex-design.github.io/wex-design-ui/changelog) |
 
 ## 安装
 
 需要 **Vue 3**（推荐 3.5 及以上），以及能解析包 `exports` 的构建工具（Vite、webpack 5+ 等）。
 
 ```bash
-pnpm add @well-insight/ui
-# npm i @well-insight/ui
-# yarn add @well-insight/ui
+pnpm add @wex-design/ui
+# npm i @wex-design/ui
+# yarn add @wex-design/ui
 ```
 
 ## 快速开始
@@ -94,38 +94,38 @@ pnpm add @well-insight/ui
 全量注册并引入样式：
 
 ```ts
-import WellInsight from '@well-insight/ui'
+import WexDesign from '@wex-design/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@well-insight/ui/styles.css'
+import '@wex-design/ui/styles.css'
 
-createApp(App).use(WellInsight).mount('#app')
+createApp(App).use(WexDesign).mount('#app')
 ```
 
 按需引入（样式自动带入）：
 
 ```ts
-import { WiButton } from '@well-insight/ui/button'
-import { WiInput } from '@well-insight/ui/input'
+import { WdButton } from '@wex-design/ui/button'
+import { WdInput } from '@wex-design/ui/input'
 ```
 
 应用级默认配置（语言、尺寸、浮层挂载点等）：
 
 ```ts
-import { createWellInsight, zhCN } from '@well-insight/ui'
+import { createWexDesign, zhCN } from '@wex-design/ui'
 
-createApp(App).use(createWellInsight({ locale: zhCN })).mount('#app')
+createApp(App).use(createWexDesign({ locale: zhCN })).mount('#app')
 ```
 
-完整接入方式、Vite 解析器与主题 API 见 [快速上手](https://well-insight.github.io/well-insight-ui/docs/quick-start)。
+完整接入方式、Vite 解析器与主题 API 见 [快速上手](https://wex-design.github.io/wex-design-ui/docs/quick-start)。
 
 ## 生态
 
 | 包 | 说明 |
 | --- | --- |
-| [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui) | 组件、样式、主题与语言工具 |
-| [`@well-insight/nuxt`](./packages/nuxt) | Nuxt 3 模块（样式、transpile、overlay 上下文） |
-| [`@well-insight/ui-mcp`](https://www.npmjs.com/package/@well-insight/ui-mcp) | 可选 MCP 服务，供 AI 客户端检索文档 |
+| [`@wex-design/ui`](https://www.npmjs.com/package/@wex-design/ui) | 组件、样式、主题与语言工具 |
+| [`@wex-design/nuxt`](./packages/nuxt) | Nuxt 3 模块（样式、transpile、overlay 上下文） |
+| [`@wex-design/ui-mcp`](https://www.npmjs.com/package/@wex-design/ui-mcp) | 可选 MCP 服务，供 AI 客户端检索文档 |
 
 ## 参与贡献
 
@@ -146,4 +146,4 @@ pnpm typecheck
 
 ## 许可证
 
-[MIT](./LICENSE) © Well Insight contributors
+[MIT](./LICENSE) © Wex Design contributors

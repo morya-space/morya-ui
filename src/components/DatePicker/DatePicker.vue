@@ -7,12 +7,12 @@ import type {
   DatePickerValue,
 } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { formatLocale, useWiLocale } from '../../locale'
-import { useConfiguredSize, useWiConfig } from '../../shared/config'
-import { useWiId } from '../../shared/useWiId'
+import { formatLocale, useWdLocale } from '../../locale'
+import { useConfiguredSize, useWdConfig } from '../../shared/config'
+import { useWdId } from '../../shared/useWdId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
@@ -31,8 +31,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 })
 const emit = defineEmits<DatePickerEmits>()
 
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const sizeClass = useConfiguredSize('DatePicker', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -45,7 +45,7 @@ const viewMonth = ref(new Date().getMonth())
 const activeDate = ref(startOfDay(new Date()))
 const rangeDraft = ref<Date | null>(null)
 const hoverDate = ref<Date | null>(null)
-const autoFieldId = useWiId('wi-datepicker')
+const autoFieldId = useWdId('wd-datepicker')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const panelId = computed(() => `${fieldId.value}-panel`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -182,14 +182,14 @@ function buildCell(date: Date, inMonth: boolean) {
 }
 
 const rootClass = computed(() => [
-  'wi-datepicker',
-  `wi-datepicker--${sizeClass.value}`,
+  'wd-datepicker',
+  `wd-datepicker--${sizeClass.value}`,
   {
-    'wi-datepicker--fluid': props.fluid,
-    'wi-datepicker--disabled': props.disabled,
-    'wi-datepicker--invalid': props.invalid,
-    'wi-datepicker--open': open.value,
-    'wi-datepicker--range': isRange.value,
+    'wd-datepicker--fluid': props.fluid,
+    'wd-datepicker--disabled': props.disabled,
+    'wd-datepicker--invalid': props.invalid,
+    'wd-datepicker--open': open.value,
+    'wd-datepicker--range': isRange.value,
   },
 ])
 
@@ -318,7 +318,7 @@ function isActiveDay(date: Date): boolean {
 
 function focusActiveDay() {
   panel.value
-    ?.querySelector<HTMLElement>(`[data-wi-date="${toIso(activeDate.value)}"]`)
+    ?.querySelector<HTMLElement>(`[data-wd-date="${toIso(activeDate.value)}"]`)
     ?.focus({ preventScroll: true })
 }
 
@@ -396,13 +396,13 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="root" :class="rootClass">
-    <label v-if="label" class="wi-datepicker__label" :for="fieldId">{{ label }}</label>
-    <div ref="triggerEl" class="wi-datepicker__control">
+    <label v-if="label" class="wd-datepicker__label" :for="fieldId">{{ label }}</label>
+    <div ref="triggerEl" class="wd-datepicker__control">
       <slot name="trigger" :value="displayValue" :open="open">
         <input
           :id="fieldId"
           ref="inputEl"
-          class="wi-datepicker__input"
+          class="wd-datepicker__input"
           type="text"
           role="combobox"
           readonly
@@ -421,64 +421,64 @@ onBeforeUnmount(() => {
         <button
           v-if="clearable && displayValue"
           type="button"
-          class="wi-datepicker__clear"
+          class="wd-datepicker__clear"
           :aria-label="locale.clearDate"
           :disabled="disabled"
           @click.stop="clear"
         >
-          <WiIcon name="close" size="sm" />
+          <WdIcon name="close" size="sm" />
         </button>
       </slot>
     </div>
     <p
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="wi-datepicker__help"
-      :class="{ 'wi-datepicker__help--invalid': feedbackIsError }"
+      class="wd-datepicker__help"
+      :class="{ 'wd-datepicker__help--invalid': feedbackIsError }"
     >
       {{ feedbackText }}
     </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wi-scale-fade">
+      <Transition name="wd-scale-fade">
         <div
           v-if="open"
           ref="panel"
-          class="wi-datepicker__panel"
+          class="wd-datepicker__panel"
           :class="{
-            'wi-datepicker__panel--teleported': teleported,
-            'wi-datepicker__panel--with-shortcuts': shortcuts.length,
+            'wd-datepicker__panel--teleported': teleported,
+            'wd-datepicker__panel--with-shortcuts': shortcuts.length,
           }"
           :style="teleported ? panelStyle : undefined"
           :id="panelId"
           role="dialog"
           :aria-label="locale.datePicker"
         >
-          <div v-if="shortcuts.length" class="wi-datepicker__shortcuts">
+          <div v-if="shortcuts.length" class="wd-datepicker__shortcuts">
             <button
               v-for="shortcut in shortcuts"
               :key="shortcut.label"
               type="button"
-              class="wi-datepicker__shortcut"
+              class="wd-datepicker__shortcut"
               @click="applyShortcut(shortcut)"
             >
               {{ shortcut.label }}
             </button>
           </div>
-          <div class="wi-datepicker__calendar">
-            <div class="wi-datepicker__header">
-              <button type="button" class="wi-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
-                <WiIcon name="chevron-left" size="sm" />
+          <div class="wd-datepicker__calendar">
+            <div class="wd-datepicker__header">
+              <button type="button" class="wd-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
+                <WdIcon name="chevron-left" size="sm" />
               </button>
-              <span class="wi-datepicker__month">{{ monthLabel }}</span>
-              <button type="button" class="wi-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
-                <WiIcon name="chevron-right" size="sm" />
+              <span class="wd-datepicker__month">{{ monthLabel }}</span>
+              <button type="button" class="wd-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
+                <WdIcon name="chevron-right" size="sm" />
               </button>
             </div>
-            <div class="wi-datepicker__weekdays" aria-hidden="true">
+            <div class="wd-datepicker__weekdays" aria-hidden="true">
               <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>
             </div>
             <div
-              class="wi-datepicker__grid"
+              class="wd-datepicker__grid"
               role="grid"
               :aria-label="monthLabel"
               @keydown="onGridKeydown"
@@ -487,17 +487,17 @@ onBeforeUnmount(() => {
                 v-for="cell in calendarDays"
                 :key="cell.date.toISOString()"
                 type="button"
-                class="wi-datepicker__day"
+                class="wd-datepicker__day"
                 :class="{
-                  'wi-datepicker__day--other': !cell.inMonth,
-                  'wi-datepicker__day--selected': cell.selected,
-                  'wi-datepicker__day--in-range': cell.inRange,
-                  'wi-datepicker__day--range-start': cell.rangeStart,
-                  'wi-datepicker__day--range-end': cell.rangeEnd,
+                  'wd-datepicker__day--other': !cell.inMonth,
+                  'wd-datepicker__day--selected': cell.selected,
+                  'wd-datepicker__day--in-range': cell.inRange,
+                  'wd-datepicker__day--range-start': cell.rangeStart,
+                  'wd-datepicker__day--range-end': cell.rangeEnd,
                 }"
                 role="gridcell"
                 :aria-selected="cell.selected"
-                :data-wi-date="toIso(cell.date)"
+                :data-wd-date="toIso(cell.date)"
                 :tabindex="isActiveDay(cell.date) && !cell.disabled ? 0 : -1"
                 :disabled="cell.disabled"
                 @click="pick(cell.date, cell.disabled)"

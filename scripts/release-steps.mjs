@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { formatChangelogBody, prepareUiRelease, readUiPackage, root } from './ui-changelog.mjs'
 
-export const PACKAGE_NAME = '@well-insight/ui'
+export const PACKAGE_NAME = '@wex-design/ui'
 export const UI_RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md']
 export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/package.json',
@@ -205,7 +205,7 @@ export async function stepPrepare(options) {
 }
 
 export async function stepBuild(options = {}) {
-  console.log('[build] @well-insight/ui')
+  console.log('[build] @wex-design/ui')
   run('pnpm run build')
   if (!options.noMcp) {
     const { buildMcp } = await loadMcp()
@@ -235,7 +235,7 @@ export function stepCommit(options = {}) {
   if (hasStagedChanges()) {
     const message = options.noMcp
       ? `release: ${PACKAGE_NAME} v${version}`
-      : `release: ${PACKAGE_NAME} / @well-insight/ui-mcp v${version}`
+      : `release: ${PACKAGE_NAME} / @wex-design/ui-mcp v${version}`
     git(['commit', '-m', message], { stdio: 'inherit' })
     console.log(`Committed ${message}`)
     return true
@@ -251,7 +251,7 @@ export function stepBranch() {
 }
 
 export async function stepPublish(options = {}) {
-  console.log('[publish] @well-insight/ui')
+  console.log('[publish] @wex-design/ui')
   run('pnpm publish --access public --no-git-checks')
   if (!options.noMcp) {
     const { publishMcp } = await loadMcp()
@@ -341,7 +341,7 @@ export async function runReleaseSteps(selectedSteps, options) {
     }
   } else if (selectedSteps.length > 1 && selectedSteps.at(-1) === 'push') {
     const version = plan?.version || readVersion()
-    const mcpNote = options.noMcp ? '' : ' (+ @well-insight/ui-mcp)'
+    const mcpNote = options.noMcp ? '' : ' (+ @wex-design/ui-mcp)'
     console.log(`Released ${PACKAGE_NAME} v${version}${mcpNote}`)
   }
 

@@ -6,19 +6,19 @@ description: 导航轨侧栏，可折叠。
 
 # Sidebar
 
-应用导航侧栏（非 Drawer 浮层）。导出为 `WiSidebar`。
+应用导航侧栏（非 Drawer 浮层）。导出为 `WdSidebar`。
 
 ## 引入
 
 ```ts
-import { WiSidebar } from '@well-insight/ui'
+import { WdSidebar } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiSidebar } from '@well-insight/ui'
+import { WdButton, WdSidebar } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -35,8 +35,8 @@ const model = [
 
 <template>
   <div style="display:flex;gap:1rem;align-items:flex-start">
-    <WiSidebar :model="model" :collapsed="collapsed" />
-    <WiButton :label="collapsed ? '展开' : '折叠'" size="small" @click="collapsed = !collapsed" />
+    <WdSidebar :model="model" :collapsed="collapsed" />
+    <WdButton :label="collapsed ? '展开' : '折叠'" size="small" @click="collapsed = !collapsed" />
   </div>
 </template>
 ```

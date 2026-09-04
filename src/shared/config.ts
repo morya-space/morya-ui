@@ -1,10 +1,10 @@
 import type {App, Component, ComputedRef, InjectionKey, MaybeRefOrGetter, Plugin} from 'vue';
-import type { WiLocaleConfig } from '../locale/types'
+import type { WdLocaleConfig } from '../locale/types'
 import type {DensityPreference} from '../theme';
-import type {WiComponentDefaults} from './componentDefaults';
-import type { WiGapSize } from './gap'
-import type { WiAppendTo } from './overlay'
-import type {WiInputVariant, WiSizeInput} from './types';
+import type {WdComponentDefaults} from './componentDefaults';
+import type { WdGapSize } from './gap'
+import type { WdAppendTo } from './overlay'
+import type {WdInputVariant, WdSizeInput} from './types';
 import {
   
   
@@ -17,7 +17,7 @@ import {
   provide,
   toValue
 } from 'vue'
-import { wiComponents } from '../component-registry'
+import { wdComponents } from '../component-registry'
 import { zhCN } from '../locale/zh-CN'
 import { applyDensity  } from '../theme'
 import {
@@ -26,50 +26,50 @@ import {
   mergeComponentDefaults
   
 } from './componentDefaults'
-import { setWiOverlayAppContext } from './overlayHost'
+import { setWdOverlayAppContext } from './overlayHost'
 import { resolveSizeClass   } from './types'
 
-export type { WiComponentDefaultMap, WiComponentDefaults, WiShowPasswordOn, WiTextareaAutosize } from './componentDefaults'
+export type { WdComponentDefaultMap, WdComponentDefaults, WdShowPasswordOn, WdTextareaAutosize } from './componentDefaults'
 export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } from './componentDefaults'
 
-export type WiDensity = DensityPreference
-export type { WiLocaleConfig }
+export type WdDensity = DensityPreference
+export type { WdLocaleConfig }
 
 export type ThemePreference = 'light' | 'dark' | 'system'
 
 /** Application-level default configuration. */
-export interface WiGlobalConfig {
+export interface WdGlobalConfig {
   /** Color theme. `system` follows `prefers-color-scheme`. */
   theme?: ThemePreference
   /** Default Teleport target for overlays. Defaults to `'body'`. */
-  appendTo?: WiAppendTo
+  appendTo?: WdAppendTo
   /** Default control size for form components that support `size`. */
-  size?: WiSizeInput
+  size?: WdSizeInput
   /** Default input surface style. */
-  inputVariant?: WiInputVariant
+  inputVariant?: WdInputVariant
   /** Starting z-index budget for overlays (modal / menu / tooltip layers). */
   zIndex?: number
   /**
-   * Global content density. Scales spacing + control heights via `data-wi-density`.
+   * Global content density. Scales spacing + control heights via `data-wd-density`.
    * Local ConfigProvider scopes to its subtree; plugin applies on `documentElement`.
    */
-  density?: WiDensity
+  density?: WdDensity
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
-  locale?: WiLocaleConfig
+  locale?: WdLocaleConfig
   /**
    * Per-component default props. Local component props win.
-   * Keys: unprefixed names (`Input`, `Space`) or `Wi*` aliases.
+   * Keys: unprefixed names (`Input`, `Space`) or `Wd*` aliases.
    */
-  componentDefaults?: WiComponentDefaults
+  componentDefaults?: WdComponentDefaults
 }
 
 /**
- * Options for `app.use(WellInsight, options)` / `createWellInsight(options)`.
+ * Options for `app.use(WexDesign, options)` / `createWexDesign(options)`.
  *
  * By default every public component is registered globally.
  * Pass `components: false` to only install config, or pass a list for partial registration.
  */
-export interface WiInstallerOptions extends WiGlobalConfig {
+export interface WdInstallerOptions extends WdGlobalConfig {
   /**
    * Components to register globally.
    * - omit / `undefined`: register all
@@ -79,9 +79,9 @@ export interface WiInstallerOptions extends WiGlobalConfig {
   components?: Component[] | false
 }
 
-export const WI_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<WiGlobalConfig>> = Symbol('wiConfig')
+export const WD_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<WdGlobalConfig>> = Symbol('wdConfig')
 
-const defaultConfig: Required<Pick<WiGlobalConfig, 'appendTo' | 'zIndex' | 'density'>> & WiGlobalConfig = {
+const defaultConfig: Required<Pick<WdGlobalConfig, 'appendTo' | 'zIndex' | 'density'>> & WdGlobalConfig = {
   appendTo: 'body',
   zIndex: 1000,
   density: 'comfortable',
@@ -89,7 +89,7 @@ const defaultConfig: Required<Pick<WiGlobalConfig, 'appendTo' | 'zIndex' | 'dens
   locale: { ...zhCN },
 }
 
-export function getDefaultWiConfig(): WiGlobalConfig {
+export function getDefaultWdConfig(): WdGlobalConfig {
   return {
     appendTo: defaultConfig.appendTo,
     zIndex: defaultConfig.zIndex,
@@ -99,12 +99,12 @@ export function getDefaultWiConfig(): WiGlobalConfig {
   }
 }
 
-export function provideWiConfig(config: MaybeRefOrGetter<WiGlobalConfig>) {
-  provide(WI_CONFIG_KEY, config)
+export function provideWdConfig(config: MaybeRefOrGetter<WdGlobalConfig>) {
+  provide(WD_CONFIG_KEY, config)
 }
 
 /** Merge nested / plugin config. Child keys win; `locale` and `componentDefaults` merge. */
-export function mergeWiConfig(parent: WiGlobalConfig, child: WiGlobalConfig): WiGlobalConfig {
+export function mergeWdConfig(parent: WdGlobalConfig, child: WdGlobalConfig): WdGlobalConfig {
   return {
     ...parent,
     ...child,
@@ -114,15 +114,15 @@ export function mergeWiConfig(parent: WiGlobalConfig, child: WiGlobalConfig): Wi
   }
 }
 
-export function useWiConfig() {
-  const injected = inject(WI_CONFIG_KEY, null)
-  return computed<WiGlobalConfig>(() => {
+export function useWdConfig() {
+  const injected = inject(WD_CONFIG_KEY, null)
+  return computed<WdGlobalConfig>(() => {
     const value = injected ? toValue(injected) : {}
     return {
-      ...getDefaultWiConfig(),
+      ...getDefaultWdConfig(),
       ...value,
       locale: {
-        ...getDefaultWiConfig().locale,
+        ...getDefaultWdConfig().locale,
         ...value.locale,
       },
     }
@@ -130,20 +130,20 @@ export function useWiConfig() {
 }
 
 export function useComponentDefaults(name: string): ComputedRef<Record<string, unknown>> {
-  const config = useWiConfig()
+  const config = useWdConfig()
   return computed(() => getComponentDefaults(config.value.componentDefaults, name))
 }
 
 /** Control size: local prop > componentDefaults[name].size > global size > medium. */
 export function useConfiguredSize(
   componentName: string,
-  localSize: MaybeRefOrGetter<WiSizeInput | undefined>,
+  localSize: MaybeRefOrGetter<WdSizeInput | undefined>,
 ) {
-  const config = useWiConfig()
+  const config = useWdConfig()
   return computed(() =>
     resolveSizeClass(
       toValue(localSize)
-        ?? getComponentDefault<WiSizeInput>(config.value.componentDefaults, componentName, 'size')
+        ?? getComponentDefault<WdSizeInput>(config.value.componentDefaults, componentName, 'size')
         ?? config.value.size,
     ),
   )
@@ -152,13 +152,13 @@ export function useConfiguredSize(
 /** Input surface: local prop > componentDefaults[name].variant > global inputVariant > outlined. */
 export function useConfiguredVariant(
   componentName: string,
-  localVariant: MaybeRefOrGetter<WiInputVariant | undefined>,
+  localVariant: MaybeRefOrGetter<WdInputVariant | undefined>,
 ) {
-  const config = useWiConfig()
+  const config = useWdConfig()
   return computed(
     () =>
       toValue(localVariant)
-      ?? getComponentDefault<WiInputVariant>(config.value.componentDefaults, componentName, 'variant')
+      ?? getComponentDefault<WdInputVariant>(config.value.componentDefaults, componentName, 'variant')
       ?? config.value.inputVariant
       ?? 'outlined',
   )
@@ -167,58 +167,58 @@ export function useConfiguredVariant(
 /** Space / Flex gap: local prop > componentDefaults[name].size > medium. Does not use global control size. */
 export function useConfiguredGapSize(
   componentName: 'Space' | 'Flex',
-  localSize: MaybeRefOrGetter<WiGapSize | undefined>,
+  localSize: MaybeRefOrGetter<WdGapSize | undefined>,
 ) {
-  const config = useWiConfig()
+  const config = useWdConfig()
   return computed(
     () =>
       toValue(localSize)
-      ?? getComponentDefault<WiGapSize>(config.value.componentDefaults, componentName, 'size')
+      ?? getComponentDefault<WdGapSize>(config.value.componentDefaults, componentName, 'size')
       ?? 'medium',
   )
 }
 
 /** Resolve overlay mount target: local props > ConfigProvider > body. */
 export function resolveConfiguredAppendTo(
-  local: WiAppendTo | undefined,
-  configAppendTo: WiAppendTo | undefined,
-): WiAppendTo {
+  local: WdAppendTo | undefined,
+  configAppendTo: WdAppendTo | undefined,
+): WdAppendTo {
   if (local !== undefined) return local
   if (configAppendTo !== undefined) return configAppendTo
   return 'body'
 }
 
-function resolveComponentsToRegister(components: WiInstallerOptions['components']): Array<[string, Component]> {
+function resolveComponentsToRegister(components: WdInstallerOptions['components']): Array<[string, Component]> {
   if (components === false) return []
   if (Array.isArray(components)) {
     if (components.length === 0) return []
     const selected = new Set(components)
-    return Object.entries(wiComponents).filter(([, component]) => selected.has(component))
+    return Object.entries(wdComponents).filter(([, component]) => selected.has(component))
   }
-  return Object.entries(wiComponents)
+  return Object.entries(wdComponents)
 }
 
-function applyInstallerConfig(app: App, options: WiInstallerOptions) {
+function applyInstallerConfig(app: App, options: WdInstallerOptions) {
   const { components: _components, ...config } = options
-  app.provide(WI_CONFIG_KEY, config)
-  app.config.globalProperties.$wi = config
-  setWiOverlayAppContext(app._context)
+  app.provide(WD_CONFIG_KEY, config)
+  app.config.globalProperties.$wd = config
+  setWdOverlayAppContext(app._context)
   if (typeof document !== 'undefined') {
     if (config.density) applyDensity(config.density)
     if (config.zIndex != null) {
-      document.documentElement.style.setProperty('--wi-z-base', String(config.zIndex))
+      document.documentElement.style.setProperty('--wd-z-base', String(config.zIndex))
     }
   }
 }
 
-function registerComponents(app: App, components: WiInstallerOptions['components']) {
+function registerComponents(app: App, components: WdInstallerOptions['components']) {
   for (const [name, component] of resolveComponentsToRegister(components)) {
     app.component(name, component)
   }
 }
 
-/** Shared install used by `createWellInsight` and the default plugin. */
-export function installWellInsight(app: App, options: WiInstallerOptions = {}) {
+/** Shared install used by `createWexDesign` and the default plugin. */
+export function installWexDesign(app: App, options: WdInstallerOptions = {}) {
   applyInstallerConfig(app, options)
   registerComponents(app, options.components)
 }
@@ -229,38 +229,38 @@ export function installWellInsight(app: App, options: WiInstallerOptions = {}) {
  * @example
  * ```ts
  * import { createApp } from 'vue'
- * import { createWellInsight } from '@well-insight/ui'
- * import '@well-insight/ui/styles.css'
+ * import { createWexDesign } from '@wex-design/ui'
+ * import '@wex-design/ui/styles.css'
  *
- * createApp(App).use(createWellInsight({ size: 'small', density: 'compact' })).mount('#app')
- * // templates can use <WiButton> without importing
+ * createApp(App).use(createWexDesign({ size: 'small', density: 'compact' })).mount('#app')
+ * // templates can use <WdButton> without importing
  * ```
  *
  * Config only (no global components):
  * ```ts
- * createWellInsight({ size: 'small', components: false })
+ * createWexDesign({ size: 'small', components: false })
  * ```
  */
-export function createWellInsight(options: WiInstallerOptions = {}): Plugin {
+export function createWexDesign(options: WdInstallerOptions = {}): Plugin {
   return {
     install(app: App) {
-      installWellInsight(app, options)
+      installWexDesign(app, options)
     },
   }
 }
 
 /**
  * Default plugin:
- * `app.use(WellInsight)` or `app.use(WellInsight, { size: 'small' })`.
+ * `app.use(WexDesign)` or `app.use(WexDesign, { size: 'small' })`.
  */
-export const WellInsight: Plugin = {
-  install(app: App, options: WiInstallerOptions = {}) {
-    installWellInsight(app, options)
+export const WexDesign: Plugin = {
+  install(app: App, options: WdInstallerOptions = {}) {
+    installWexDesign(app, options)
   },
 }
 
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $wi?: WiGlobalConfig
+    $wd?: WdGlobalConfig
   }
 }

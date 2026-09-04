@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { OrderListProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
   modelValue: () => [],
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: unknown[]): void
   (event: 'reorder', value: unknown[]): void
 }>()
-const locale = useWiLocale()
+const locale = useWdLocale()
 
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyMessage,
@@ -52,7 +52,7 @@ function itemTabindex(index: number): 0 | -1 {
 
 function focusItem(index: number) {
   list.value
-    ?.querySelectorAll<HTMLElement>('.wi-orderlist__item')
+    ?.querySelectorAll<HTMLElement>('.wd-orderlist__item')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -142,20 +142,20 @@ function resetDrag() {
 </script>
 
 <template>
-  <div class="wi-orderlist">
-    <div class="wi-orderlist__controls">
-      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
-        <WiIcon name="chevron-up" size="sm" />
+  <div class="wd-orderlist">
+    <div class="wd-orderlist__controls">
+      <button type="button" class="wd-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
+        <WdIcon name="chevron-up" size="sm" />
       </button>
-      <button type="button" class="wi-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
-        <WiIcon name="chevron-down" size="sm" />
+      <button type="button" class="wd-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
+        <WdIcon name="chevron-down" size="sm" />
       </button>
     </div>
 
     <ul
       v-if="modelValue.length"
       ref="list"
-      class="wi-orderlist__list"
+      class="wd-orderlist__list"
       :style="listStyle"
       role="listbox"
       :aria-label="locale.selectOption"
@@ -164,11 +164,11 @@ function resetDrag() {
       <li
         v-for="(item, index) in modelValue"
         :key="itemKey(item, index)"
-        class="wi-orderlist__item"
+        class="wd-orderlist__item"
         :class="{
-          'wi-orderlist__item--selected': selectedIndex === index,
-          'wi-orderlist__ghost': dragdrop && dragFrom === index,
-          'wi-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
+          'wd-orderlist__item--selected': selectedIndex === index,
+          'wd-orderlist__ghost': dragdrop && dragFrom === index,
+          'wd-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
         }"
         role="option"
         :aria-selected="selectedIndex === index"
@@ -184,22 +184,22 @@ function resetDrag() {
         <button
           v-if="dragdrop"
           type="button"
-          class="wi-orderlist__handle"
+          class="wd-orderlist__handle"
           :aria-label="locale.dragToReorder"
           tabindex="-1"
           @click.stop
           @pointerdown="armHandle"
         >
-          <WiIcon name="grip" size="sm" />
+          <WdIcon name="grip" size="sm" />
         </button>
-        <span class="wi-orderlist__label">
+        <span class="wd-orderlist__label">
           <slot name="item" :item="item" :index="index">{{ item }}</slot>
         </span>
       </li>
     </ul>
-    <div v-else class="wi-orderlist__message" role="status">
+    <div v-else class="wd-orderlist__message" role="status">
       <slot name="empty">
-        <p class="wi-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="wd-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
   </div>

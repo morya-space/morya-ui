@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { git, run } from './release-steps.mjs'
 import { root } from './ui-changelog.mjs'
 
-export const MCP_NAME = '@well-insight/ui-mcp'
+export const MCP_NAME = '@wex-design/ui-mcp'
 export const MCP_PKG_PATH = join(root, 'packages/ui-mcp/package.json')
 export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/package.json',
@@ -35,7 +35,7 @@ export function readUiVersion() {
   return { uiPkg, version }
 }
 
-/** Align @well-insight/ui-mcp version with @well-insight/ui. */
+/** Align @wex-design/ui-mcp version with @wex-design/ui. */
 export function syncMcpVersion(version = readUiVersion().version) {
   const mcpPkg = readJson(MCP_PKG_PATH)
   if (mcpPkg.version === version) {
@@ -49,11 +49,11 @@ export function syncMcpVersion(version = readUiVersion().version) {
 }
 
 export function buildMcp() {
-  console.log('[build] @well-insight/ui-mcp (catalog + compile)')
-  run('pnpm --filter @well-insight/ui-mcp build')
-  console.log('[check] @well-insight/ui-mcp catalog')
+  console.log('[build] @wex-design/ui-mcp (catalog + compile)')
+  run('pnpm --filter @wex-design/ui-mcp build')
+  console.log('[check] @wex-design/ui-mcp catalog')
   run('pnpm mcp:validate-catalog')
-  console.log('[audit] @well-insight/ui-mcp example coverage')
+  console.log('[audit] @wex-design/ui-mcp example coverage')
   run('pnpm mcp:audit-examples -- --write')
 }
 
@@ -70,8 +70,8 @@ export function commitMcpRelease(version = readUiVersion().version) {
 }
 
 export function publishMcp() {
-  console.log('[publish] @well-insight/ui-mcp')
-  run('pnpm --filter @well-insight/ui-mcp publish --access public --no-git-checks')
+  console.log('[publish] @wex-design/ui-mcp')
+  run('pnpm --filter @wex-design/ui-mcp publish --access public --no-git-checks')
 }
 
 /**

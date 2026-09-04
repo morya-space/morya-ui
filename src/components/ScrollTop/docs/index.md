@@ -11,14 +11,14 @@ description: 滚动超过阈值后显示回到顶部按钮。
 ## 引入
 
 ```ts
-import { WiScrollTop } from '@well-insight/ui'
+import { WdScrollTop } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiScrollTop } from '@well-insight/ui'
+import { WdScrollTop } from '@wex-design/ui'
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import { WiScrollTop } from '@well-insight/ui'
     <div style="height: 40rem">
       向下滚动…
     </div>
-    <WiScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    <WdScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```

@@ -11,7 +11,7 @@ Windowed list rendering based on scroll position. Best for large, **equal-height
 ## Import
 
 ```ts
-import { WiVirtualScroller } from '@well-insight/ui'
+import { WdVirtualScroller } from '@wex-design/ui'
 ```
 
 ## Basic usage
@@ -20,19 +20,19 @@ import { WiVirtualScroller } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiVirtualScroller } from '@well-insight/ui'
+import { WdVirtualScroller } from '@wex-design/ui'
 
 const items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)
 </script>
 
 <template>
-  <WiVirtualScroller :items="items" :item-size="36" :height="220">
+  <WdVirtualScroller :items="items" :item-size="36" :height="220">
     <template #item="{ item, index }">
-      <div style="padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wi-color-border)">
-        {{ item }} <span style="margin-left:auto;color:var(--wi-color-text-muted);font-size:0.75rem">#{{ index }}</span>
+      <div style="padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wd-color-border)">
+        {{ item }} <span style="margin-left:auto;color:var(--wd-color-text-muted);font-size:0.75rem">#{{ index }}</span>
       </div>
     </template>
-  </WiVirtualScroller>
+  </WdVirtualScroller>
 </template>
 ```
 

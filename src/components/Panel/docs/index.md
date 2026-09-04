@@ -11,28 +11,28 @@ description: 带可选折叠的内容面板。
 ## 引入
 
 ```ts
-import { WiPanel } from '@well-insight/ui'
+import { WdPanel } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiPanel } from '@well-insight/ui'
+import { WdPanel } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WiPanel v-model="collapsed" header="Panel" toggleable>
+  <WdPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       可折叠面板内容。
     </p>
     <template #footer>
       操作区
     </template>
-  </WiPanel>
+  </WdPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiPanel } from '@well-insight/ui'
+import { WdPanel } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiPanel header="Small" size="small">
+  <WdPanel header="Small" size="small">
     <p style="margin:0">
       更紧凑的面板。
     </p>
-  </WiPanel>
+  </WdPanel>
 </template>
 ```
 

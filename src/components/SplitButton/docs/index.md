@@ -11,14 +11,14 @@ description: 主操作按钮附带下拉菜单项。
 ## 引入
 
 ```ts
-import { WiSplitButton } from '@well-insight/ui'
+import { WdSplitButton } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiSplitButton } from '@well-insight/ui'
+import { WdSplitButton } from '@wex-design/ui'
 
 const items = [
   { label: '另存为', command: () => console.log('save as') },
@@ -27,7 +27,7 @@ const items = [
 </script>
 
 <template>
-  <WiSplitButton label="保存" :model="items" @click="() => console.log('save')" />
+  <WdSplitButton label="保存" :model="items" @click="() => console.log('save')" />
 </template>
 ```
 

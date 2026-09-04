@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WiIcon, WiScrollbar } from '@well-insight/ui'
+import { WdIcon, WdScrollbar } from '@wex-design/ui'
 import { onUnmounted, ref, useAttrs, watch } from 'vue'
 
 defineOptions({ inheritAttrs: false })
@@ -47,11 +47,11 @@ function onPanelClick(event: MouseEvent) {
       :aria-label="toggleLabel"
       @click="toggle"
     >
-      <WiIcon name="menu" size="sm" />
+      <WdIcon name="menu" size="sm" />
       <span>{{ title }}</span>
     </button>
 
-    <Transition name="wi-fade">
+    <Transition name="wd-fade">
       <button
         v-if="open"
         type="button"
@@ -66,14 +66,14 @@ function onPanelClick(event: MouseEvent) {
       :aria-label="title"
       :data-open="open ? 'true' : undefined"
     >
-      <WiScrollbar :class="scrollClass ?? 'mobile-sidebar-shell__scroll'">
+      <WdScrollbar :class="scrollClass ?? 'mobile-sidebar-shell__scroll'">
         <div
           :class="bodyClass"
           @click="onPanelClick"
         >
           <slot />
         </div>
-      </WiScrollbar>
+      </WdScrollbar>
     </aside>
   </div>
 </template>
@@ -98,14 +98,14 @@ function onPanelClick(event: MouseEvent) {
   overflow: hidden;
 }
 
-.mobile-sidebar-shell__panel > :deep(.wi-scrollbar),
+.mobile-sidebar-shell__panel > :deep(.wd-scrollbar),
 .mobile-sidebar-shell__scroll {
   flex: 1;
   height: 100%;
   min-height: 0;
 }
 
-.mobile-sidebar-shell__panel > :deep(.wi-scrollbar .wi-scrollbar__wrap) {
+.mobile-sidebar-shell__panel > :deep(.wd-scrollbar .wd-scrollbar__wrap) {
   overscroll-behavior: contain;
 }
 
@@ -115,7 +115,7 @@ function onPanelClick(event: MouseEvent) {
   min-height: 0;
 }
 
-.mobile-sidebar-shell__scroll :deep(.wi-scrollbar__wrap) {
+.mobile-sidebar-shell__scroll :deep(.wd-scrollbar__wrap) {
   overscroll-behavior: contain;
 }
 
@@ -126,10 +126,10 @@ function onPanelClick(event: MouseEvent) {
 
   .mobile-sidebar-shell__toggle {
     align-items: center;
-    background: color-mix(in srgb, var(--wi-color-surface) 88%, transparent);
+    background: color-mix(in srgb, var(--wd-color-surface) 88%, transparent);
     border: 1px solid var(--docs-edge);
     border-radius: 0.75rem;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     cursor: pointer;
     display: inline-flex;
     font-size: 0.86rem;
@@ -151,7 +151,7 @@ function onPanelClick(event: MouseEvent) {
   }
 
   .mobile-sidebar-shell__panel {
-    background: color-mix(in srgb, var(--wi-color-surface) 96%, transparent);
+    background: color-mix(in srgb, var(--wd-color-surface) 96%, transparent);
     border-right: 1px solid var(--docs-edge);
     bottom: 0;
     box-shadow: 0 0 40px color-mix(in srgb, #000 18%, transparent);
@@ -160,7 +160,7 @@ function onPanelClick(event: MouseEvent) {
     position: fixed;
     top: 0;
     transform: translateX(-105%);
-    transition: transform var(--wi-motion-normal) var(--wi-motion-ease);
+    transition: transform var(--wd-motion-normal) var(--wd-motion-ease);
     width: min(18rem, 88vw);
     z-index: 290;
     backdrop-filter: blur(16px);

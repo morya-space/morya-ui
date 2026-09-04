@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { FloatLabelProps } from './types'
 import { onMounted, ref } from 'vue'
-import { useWiId } from '../../shared/useWiId'
+import { useWdId } from '../../shared/useWdId'
 
 const props = defineProps<FloatLabelProps>()
 
 const root = ref<HTMLElement | null>(null)
-const inputId = useWiId()
+const inputId = useWdId()
 const labelFor = ref<string | undefined>(undefined)
 
 onMounted(() => {
@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <span ref="root" class="wi-float-label">
+  <span ref="root" class="wd-float-label">
     <slot />
     <label v-if="props.label || $slots.label" :for="labelFor">
       <slot name="label">{{ props.label }}</slot>

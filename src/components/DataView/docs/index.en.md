@@ -11,20 +11,20 @@ Render a collection in list / grid layout, with optional pagination.
 ## Import
 
 ```ts
-import { WiDataView } from '@well-insight/ui'
+import { WdDataView } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiDataView } from '@well-insight/ui'
+import { WdDataView } from '@wex-design/ui'
 
 const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 </script>
 
 <template>
-  <WiDataView :value="items" layout="grid" paginator :rows="4">
+  <WdDataView :value="items" layout="grid" paginator :rows="4">
     <template #grid="{ items: page }">
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
         <div v-for="item in page" :key="item">
@@ -32,7 +32,7 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
         </div>
       </div>
     </template>
-  </WiDataView>
+  </WdDataView>
 </template>
 ```
 
@@ -54,4 +54,4 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 
 ## Events
 
-This component does not emit custom events; pagination is handled by the built-in `WiPagination`.
+This component does not emit custom events; pagination is handled by the built-in `WdPagination`.

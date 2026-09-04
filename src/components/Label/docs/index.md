@@ -11,22 +11,22 @@ description: 可访问的表单标签。
 ## 引入
 
 ```ts
-import { WiLabel } from '@well-insight/ui'
+import { WdLabel } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiInput, WiLabel } from '@well-insight/ui'
+import { WdInput, WdLabel } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WiLabel html-for="demo-email">
+    <WdLabel html-for="demo-email">
       邮箱
-    </WiLabel>
-    <WiInput id="demo-email" placeholder="you@example.com" />
+    </WdLabel>
+    <WdInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>
 ```

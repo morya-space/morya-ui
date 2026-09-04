@@ -11,14 +11,14 @@ description: 简易命令提示符 UI。
 ## 引入
 
 ```ts
-import { WiTerminal } from '@well-insight/ui'
+import { WdTerminal } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiTerminal } from '@well-insight/ui'
+import { WdTerminal } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -26,7 +26,7 @@ const last = ref('')
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WiTerminal welcome-message="Well Insight Terminal" @command="last = $event" />
+    <WdTerminal welcome-message="Wex Design Terminal" @command="last = $event" />
     <div v-if="last">
       最近命令：{{ last }}
     </div>
@@ -38,7 +38,7 @@ const last = ref('')
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `welcomeMessage` | `string` | `'Welcome to Well Insight Terminal'` | 顶部欢迎语。 |
+| `welcomeMessage` | `string` | `'Welcome to Wex Design Terminal'` | 顶部欢迎语。 |
 | `prompt` | `string` | `'>'` | 提示符。 |
 | `lines` | `string[]` | — | — |
 | `responses` | `string[]` | — | — |

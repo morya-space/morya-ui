@@ -1,4 +1,4 @@
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
 export interface InputTagsProps {
   modelValue?: string[]
@@ -7,7 +7,7 @@ export interface InputTagsProps {
   placeholder?: string
   disabled?: boolean
   invalid?: boolean
-  size?: WiSizeInput
+  size?: WdSizeInput
   addOnBlur?: boolean
   /** Max number of tags. */
   max?: number

@@ -2,13 +2,13 @@ import { computed, ref, watch } from 'vue'
 
 export type MotionPreference = 'full' | 'reduced' | 'none'
 
-const storageKey = 'well-insight-motion'
+const storageKey = 'wex-design-motion'
 const motionPreferences: readonly MotionPreference[] = ['full', 'reduced', 'none']
 
 export function applyMotion(preference: MotionPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.wiMotion = preference
+  el.dataset.wdMotion = preference
 }
 
 export function getPreferredMotion(): MotionPreference {

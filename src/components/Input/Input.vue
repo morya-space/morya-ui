@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
-import { useWiId } from '../../shared/useWiId'
-import WiIcon from '../Icon/Icon.vue'
+import { useWdId } from '../../shared/useWdId'
+import WdIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<InputProps>(), {
@@ -27,9 +27,9 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const slots = useSlots()
 const defaults = useComponentDefaults('Input')
-const locale = useWiLocale()
+const locale = useWdLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useWiId('wi-input')
+const autoInputId = useWdId('wd-input')
 const inputId = computed(() => props.id ?? autoInputId)
 const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Input', () => props.size)
@@ -53,14 +53,14 @@ const describedBy = computed(() => {
 })
 
 const inputClass = computed(() => [
-  'wi-input',
-  `wi-input--${sizeClass.value}`,
+  'wd-input',
+  `wd-input--${sizeClass.value}`,
   {
-    'wi-input--filled': resolvedVariant.value === 'filled',
-    'wi-input--fluid': resolvedFluid.value,
-    'wi-input--invalid': isInvalid.value,
-    'wi-input--has-prefix': hasPrefix.value,
-    'wi-input--has-suffix': hasSuffix.value,
+    'wd-input--filled': resolvedVariant.value === 'filled',
+    'wd-input--fluid': resolvedFluid.value,
+    'wd-input--invalid': isInvalid.value,
+    'wd-input--has-prefix': hasPrefix.value,
+    'wd-input--has-suffix': hasSuffix.value,
   },
 ])
 
@@ -91,18 +91,18 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="wi-input-field" :class="{ 'wi-input-field--fluid': resolvedFluid }">
-    <label v-if="label" class="wi-input-field__label" :for="inputId">{{ label }}</label>
+  <div class="wd-input-field" :class="{ 'wd-input-field--fluid': resolvedFluid }">
+    <label v-if="label" class="wd-input-field__label" :for="inputId">{{ label }}</label>
     <div
-      class="wi-input-field__control"
+      class="wd-input-field__control"
       :class="{
-        'wi-input-field__control--clearable': resolvedClearable && modelValue,
-        'wi-input-field__control--counted': resolvedShowCount,
-        'wi-input-field__control--prefixed': hasPrefix,
-        'wi-input-field__control--suffixed': Boolean($slots.suffix),
+        'wd-input-field__control--clearable': resolvedClearable && modelValue,
+        'wd-input-field__control--counted': resolvedShowCount,
+        'wd-input-field__control--prefixed': hasPrefix,
+        'wd-input-field__control--suffixed': Boolean($slots.suffix),
       }"
     >
-      <span v-if="$slots.prefix" class="wi-input__prefix">
+      <span v-if="$slots.prefix" class="wd-input__prefix">
         <slot name="prefix" />
       </span>
       <input
@@ -122,26 +122,26 @@ defineExpose({ focus, blur, select })
         @blur="emit('blur', $event)"
         @change="emit('change', ($event.target as HTMLInputElement).value)"
       >
-      <span v-if="$slots.suffix" class="wi-input__suffix">
+      <span v-if="$slots.suffix" class="wd-input__suffix">
         <slot name="suffix" />
       </span>
       <button
         v-if="resolvedClearable && modelValue"
-        class="wi-input__clear"
+        class="wd-input__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <WiIcon name="close" size="sm" />
+        <WdIcon name="close" size="sm" />
       </button>
     </div>
-    <div v-if="feedbackText || resolvedShowCount" class="wi-input-field__meta">
+    <div v-if="feedbackText || resolvedShowCount" class="wd-input-field__meta">
       <span
         v-if="feedbackText"
         :id="`${inputId}-help`"
-        class="wi-input-field__help"
-        :class="{ 'wi-input-field__help--invalid': feedbackIsError }"
+        class="wd-input-field__help"
+        :class="{ 'wd-input-field__help--invalid': feedbackIsError }"
         :role="feedbackIsError ? 'alert' : undefined"
       >
         {{ feedbackText }}
@@ -149,7 +149,7 @@ defineExpose({ focus, blur, select })
       <span
         v-if="resolvedShowCount"
         :id="`${inputId}-count`"
-        class="wi-input-field__count"
+        class="wd-input-field__count"
         aria-live="polite"
       >
         {{ countText }}

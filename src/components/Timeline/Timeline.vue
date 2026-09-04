@@ -3,7 +3,7 @@ import type { IconName } from '../Icon/types'
 import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
 import { computed } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
 
 const props = withDefaults(defineProps<TimelineProps>(), {
@@ -26,10 +26,10 @@ const events = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wi-timeline',
-  `wi-timeline--${props.layout}`,
-  `wi-timeline--${props.align}`,
-  { 'wi-timeline--pending': pendingLabel.value != null },
+  'wd-timeline',
+  `wd-timeline--${props.layout}`,
+  `wd-timeline--${props.align}`,
+  { 'wd-timeline--pending': pendingLabel.value != null },
 ])
 
 function side(index: number): 'left' | 'right' {
@@ -45,13 +45,13 @@ function markerTone(severity?: TimelineSeverity) {
 }
 
 function markerStyle(event: TimelineEvent) {
-  if (event.color) return { background: event.color, borderColor: event.color, color: 'var(--wi-color-contrast-fg)' }
+  if (event.color) return { background: event.color, borderColor: event.color, color: 'var(--wd-color-contrast-fg)' }
   return undefined
 }
 
 function markerClass(event: TimelineEvent) {
   const tone = markerTone(event.severity)
-  return tone ? `wi-timeline__marker--${tone}` : undefined
+  return tone ? `wd-timeline__marker--${tone}` : undefined
 }
 
 function iconName(event: TimelineEvent): IconName | undefined {
@@ -69,33 +69,33 @@ function isPending(index: number) {
     <li
       v-for="(event, index) in events"
       :key="index"
-      class="wi-timeline__event"
-      :class="[`wi-timeline__event--${side(index)}`, { 'wi-timeline__event--pending': isPending(index) }]"
+      class="wd-timeline__event"
+      :class="[`wd-timeline__event--${side(index)}`, { 'wd-timeline__event--pending': isPending(index) }]"
     >
       <slot name="item" :item="event" :index="index">
-        <div class="wi-timeline__opposite">
+        <div class="wd-timeline__opposite">
           <slot name="opposite" :item="event" :index="index">
             {{ event.date }}
           </slot>
         </div>
-        <div class="wi-timeline__separator">
+        <div class="wd-timeline__separator">
           <slot name="marker" :item="event" :index="index">
             <span
-              class="wi-timeline__marker"
+              class="wd-timeline__marker"
               :class="markerClass(event)"
               :style="markerStyle(event)"
             >
-              <WiIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
+              <WdIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
               <span v-else-if="event.icon" aria-hidden="true">{{ event.icon }}</span>
             </span>
           </slot>
           <slot name="connector" :item="event" :index="index">
-            <span class="wi-timeline__connector" />
+            <span class="wd-timeline__connector" />
           </slot>
         </div>
-        <div class="wi-timeline__content">
+        <div class="wd-timeline__content">
           <slot name="content" :item="event" :index="index">
-            <div v-if="event.status" class="wi-timeline__status">
+            <div v-if="event.status" class="wd-timeline__status">
               {{ event.status }}
             </div>
             <div>{{ event.content }}</div>

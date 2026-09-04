@@ -7,17 +7,17 @@ export interface ComponentResolver {
   ) => { name: string; from: string; sideEffects?: string[] } | undefined | null | void
 }
 
-export interface WellInsightResolverOptions {
-  /** Component name prefix. Default: `Wi`. */
+export interface WexDesignResolverOptions {
+  /** Component name prefix. Default: `Wd`. */
   prefix?: string
 }
 
 /**
- * Resolver for `unplugin-vue-components` that maps `Wi*` components to
- * on-demand subpath imports such as `@well-insight/ui/button`.
+ * Resolver for `unplugin-vue-components` that maps `Wd*` components to
+ * on-demand subpath imports such as `@wex-design/ui/button`.
  */
-export function WellInsightResolver(options: WellInsightResolverOptions = {}): ComponentResolver {
-  const prefix = options.prefix ?? 'Wi'
+export function WexDesignResolver(options: WexDesignResolverOptions = {}): ComponentResolver {
+  const prefix = options.prefix ?? 'Wd'
 
   return {
     type: 'component',
@@ -27,7 +27,7 @@ export function WellInsightResolver(options: WellInsightResolverOptions = {}): C
       if (!slug) return
       return {
         name,
-        from: `@well-insight/ui/${slug}`,
+        from: `@wex-design/ui/${slug}`,
       }
     },
   }

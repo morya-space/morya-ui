@@ -2,7 +2,7 @@
 import type { SwitchProps } from './types'
 import { computed, onMounted, useAttrs, useSlots } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { useWiId } from '../../shared/useWiId'
+import { useWdId } from '../../shared/useWdId'
 
 defineOptions({ inheritAttrs: false })
 
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
 const slots = useSlots()
-const autoInputId = useWiId('wi-switch')
+const autoInputId = useWdId('wd-switch')
 const resolvedInputId = computed(
   () => props.inputId ?? props.id ?? autoInputId,
 )
@@ -25,12 +25,12 @@ const isDisabled = computed(() => props.disabled || props.loading)
 const stateText = computed(() => (props.modelValue ? props.checkedText : props.uncheckedText))
 
 const rootClass = computed(() => [
-  'wi-switch',
-  `wi-switch--${sizeClass.value}`,
+  'wd-switch',
+  `wd-switch--${sizeClass.value}`,
   {
-    'wi-switch--disabled': isDisabled.value,
-    'wi-switch--invalid': props.invalid,
-    'wi-switch--loading': props.loading,
+    'wd-switch--disabled': isDisabled.value,
+    'wd-switch--invalid': props.invalid,
+    'wd-switch--loading': props.loading,
   },
 ])
 
@@ -41,7 +41,7 @@ function updateValue(event: Event) {
 
 onMounted(() => {
   if (import.meta.env.DEV && !props.label && !slots.default) {
-    console.warn('[WiSwitch] Provide `label` prop or default slot for an accessible name.')
+    console.warn('[WdSwitch] Provide `label` prop or default slot for an accessible name.')
   }
 })
 </script>
@@ -51,7 +51,7 @@ onMounted(() => {
     <input
       v-bind="attrs"
       :id="resolvedInputId"
-      class="wi-switch__input"
+      class="wd-switch__input"
       type="checkbox"
       role="switch"
       :name="name"
@@ -64,12 +64,12 @@ onMounted(() => {
       :aria-busy="loading || undefined"
       @change="updateValue"
     >
-    <span class="wi-switch__track" aria-hidden="true">
-      <span v-if="stateText" class="wi-switch__text">{{ stateText }}</span>
-      <span class="wi-switch__thumb">
-        <span v-if="loading" class="wi-switch__spinner" />
+    <span class="wd-switch__track" aria-hidden="true">
+      <span v-if="stateText" class="wd-switch__text">{{ stateText }}</span>
+      <span class="wd-switch__thumb">
+        <span v-if="loading" class="wd-switch__spinner" />
       </span>
     </span>
-    <span v-if="label || $slots.default" class="wi-switch__label"><slot>{{ label }}</slot></span>
+    <span v-if="label || $slots.default" class="wd-switch__label"><slot>{{ label }}</slot></span>
   </label>
 </template>

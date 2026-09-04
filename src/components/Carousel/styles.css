@@ -1,79 +1,79 @@
 /* —— Media: Carousel —— */
-.wi-carousel {
-    --wi-carousel-indicator-size: 0.45rem;
+.wd-carousel {
+    --wd-carousel-indicator-size: 0.45rem;
     align-items: center;
     display: flex;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     width: 100%;
 }
 
-.wi-carousel__viewport {
+.wd-carousel__viewport {
     display: flex;
     flex: 1;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     min-width: 0;
     overflow: hidden;
     touch-action: pan-y;
 }
 
-.wi-carousel__item {
+.wd-carousel__item {
     box-sizing: border-box;
     min-width: 0;
     transition:
-        opacity var(--wi-motion-normal) var(--wi-motion-ease),
-        transform var(--wi-motion-normal) var(--wi-motion-ease);
+        opacity var(--wd-motion-normal) var(--wd-motion-ease),
+        transform var(--wd-motion-normal) var(--wd-motion-ease);
 }
 
-.wi-carousel__main {
+.wd-carousel__main {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     min-width: 0;
 }
 
-.wi-carousel__indicators {
+.wd-carousel__indicators {
     display: flex;
-    gap: var(--wi-space-1);
+    gap: var(--wd-space-1);
     justify-content: center;
 }
 
-.wi-carousel__indicator {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 40%, transparent);
+.wd-carousel__indicator {
+    background: color-mix(in srgb, var(--wd-color-text-muted) 40%, transparent);
     border: 0;
-    border-radius: var(--wi-radius-full);
+    border-radius: var(--wd-radius-full);
     cursor: pointer;
-    height: var(--wi-carousel-indicator-size);
+    height: var(--wd-carousel-indicator-size);
     padding: 0;
     position: relative;
-    width: var(--wi-carousel-indicator-size);
+    width: var(--wd-carousel-indicator-size);
 }
 
-.wi-carousel__indicator::after {
+.wd-carousel__indicator::after {
     content: '';
     inset: -0.45rem;
     position: absolute;
 }
 
-.wi-carousel__indicator:hover {
-    background: color-mix(in srgb, var(--wi-color-text-muted) 70%, transparent);
+.wd-carousel__indicator:hover {
+    background: color-mix(in srgb, var(--wd-color-text-muted) 70%, transparent);
 }
 
-.wi-carousel__indicator:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-carousel__indicator:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-carousel__indicator--active,
-.wi-carousel__indicator--active:hover {
-    background: var(--wi-color-primary);
+.wd-carousel__indicator--active,
+.wd-carousel__indicator--active:hover {
+    background: var(--wd-color-primary);
 }
 
-.wi-carousel__nav:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 8%, transparent);
+.wd-carousel__nav:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wd-color-primary) 8%, transparent);
 }
 
-.wi-carousel__nav:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-carousel__nav:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }

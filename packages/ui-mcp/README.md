@@ -1,11 +1,11 @@
-# @well-insight/ui-mcp
+# @wex-design/ui-mcp
 
-Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui).
+Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@wex-design/ui`](https://www.npmjs.com/package/@wex-design/ui).
 
 It indexes component docs, guides, examples, and reusable page patterns so **any MCP-capable AI client** can look up the real API before writing code. It does **not** replace installing the UI library:
 
 ```bash
-pnpm add @well-insight/ui
+pnpm add @wex-design/ui
 ```
 
 Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
@@ -13,7 +13,7 @@ Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
 ## Run
 
 ```bash
-npx -y @well-insight/ui-mcp
+npx -y @wex-design/ui-mcp
 ```
 
 Typical client config (field names vary by client):
@@ -21,15 +21,15 @@ Typical client config (field names vary by client):
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@well-insight/ui-mcp"]
+  "args": ["-y", "@wex-design/ui-mcp"]
 }
 ```
 
 Local checkout:
 
 ```bash
-pnpm --filter @well-insight/ui-mcp build
-node packages/ui-mcp/bin/well-insight-ui-mcp.js
+pnpm --filter @wex-design/ui-mcp build
+node packages/ui-mcp/bin/wex-design-ui-mcp.js
 ```
 
 ## Tools
@@ -127,7 +127,7 @@ pnpm mcp:audit-examples
 
 ## Release
 
-From the repo root (version syncs from `@well-insight/ui`):
+From the repo root (version syncs from `@wex-design/ui`):
 
 ```bash
 pnpm release:mcp -- --dry-run

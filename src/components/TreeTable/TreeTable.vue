@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TreeTableEmits, TreeTableNode, TreeTableProps } from './types'
 import { computed, ref, useSlots } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
 
 const props = defineProps<TreeTableProps>()
@@ -9,7 +9,7 @@ const props = defineProps<TreeTableProps>()
 const emit = defineEmits<TreeTableEmits>()
 const slots = useSlots()
 
-const locale = useWiLocale()
+const locale = useWdLocale()
 const internalExpanded = ref<Record<string, boolean>>({})
 const expanded = computed(() => props.expandedKeys ?? internalExpanded.value)
 
@@ -35,8 +35,8 @@ function toggle(node: TreeTableNode) {
 </script>
 
 <template>
-  <div class="wi-treetable">
-    <table class="wi-treetable__table" role="treegrid">
+  <div class="wd-treetable">
+    <table class="wd-treetable__table" role="treegrid">
       <thead>
         <tr>
           <th v-for="column in columns" :key="column.field" scope="col">
@@ -57,9 +57,9 @@ function toggle(node: TreeTableNode) {
         />
       </tbody>
     </table>
-    <div v-if="!value.length" class="wi-treetable__message" role="status">
+    <div v-if="!value.length" class="wd-treetable__message" role="status">
       <slot name="empty">
-        <p class="wi-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="wd-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
   </div>

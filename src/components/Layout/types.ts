@@ -7,7 +7,7 @@ export type LayoutCollapseMode = "width" | "transform";
 export type LayoutTrigger = boolean | "bar" | "arrow" | "arrow-circle";
 
 export interface LayoutProps {
-  /** Layout height. Defaults to `var(--wi-layout-height)`. */
+  /** Layout height. Defaults to `var(--wd-layout-height)`. */
   height?: number | string;
   /** Layout width. Defaults to `100%`. */
   width?: number | string;
@@ -26,7 +26,7 @@ export interface LayoutProps {
 }
 
 export interface LayoutHeaderProps {
-  /** Header height. Defaults to `var(--wi-layout-header-height)`. */
+  /** Header height. Defaults to `var(--wd-layout-header-height)`. */
   height?: number | string;
   padding?: number | string;
   radius?: number | string;
@@ -36,7 +36,7 @@ export interface LayoutHeaderProps {
 }
 
 export interface LayoutFooterProps {
-  /** Footer height. Defaults to `var(--wi-layout-footer-height)`. */
+  /** Footer height. Defaults to `var(--wd-layout-footer-height)`. */
   height?: number | string;
   padding?: number | string;
   radius?: number | string;

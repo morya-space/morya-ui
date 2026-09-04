@@ -1,82 +1,82 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WiInputPassword from './InputPassword.vue'
+import WdInputPassword from './InputPassword.vue'
 
-describe('wiInputPassword', () => {
+describe('wdInputPassword', () => {
   it('emits model updates and toggles mask', async () => {
-    const wrapper = mount(WiInputPassword, { props: { label: 'Password', id: 'pwd' } })
+    const wrapper = mount(WdInputPassword, { props: { label: 'Password', id: 'pwd' } })
     expect(wrapper.get('label').attributes('for')).toBe('pwd')
     expect(wrapper.get('input').attributes('type')).toBe('password')
     await wrapper.get('input').setValue('secret')
     expect(wrapper.emitted('update:modelValue')).toEqual([['secret']])
-    await wrapper.get('.wi-password__toggle').trigger('click')
+    await wrapper.get('.wd-password__toggle').trigger('click')
     expect(wrapper.get('input').attributes('type')).toBe('text')
   })
 
   it('renders an icon toggle instead of text by default', () => {
-    const wrapper = mount(WiInputPassword)
-    const toggle = wrapper.get('.wi-password__toggle')
+    const wrapper = mount(WdInputPassword)
+    const toggle = wrapper.get('.wd-password__toggle')
     expect(toggle.text()).toBe('')
-    expect(toggle.find('.wi-icon').exists()).toBe(true)
+    expect(toggle.find('.wd-icon').exists()).toBe(true)
     expect(toggle.attributes('aria-label')).toBe('显示密码')
   })
 
   it('swaps to the hide icon after revealing the value', async () => {
-    const wrapper = mount(WiInputPassword)
-    await wrapper.get('.wi-password__toggle').trigger('click')
-    expect(wrapper.get('.wi-password__toggle').attributes('aria-label')).toBe('隐藏密码')
-    expect(wrapper.get('.wi-password__toggle').attributes('aria-pressed')).toBe('true')
+    const wrapper = mount(WdInputPassword)
+    await wrapper.get('.wd-password__toggle').trigger('click')
+    expect(wrapper.get('.wd-password__toggle').attributes('aria-label')).toBe('隐藏密码')
+    expect(wrapper.get('.wd-password__toggle').attributes('aria-pressed')).toBe('true')
   })
 
   it('replaces icons via showIcon / hideIcon props', async () => {
-    const wrapper = mount(WiInputPassword, { props: { showIcon: 'lock', hideIcon: 'unlock' } })
-    expect(wrapper.get('.wi-password__toggle .wi-icon').exists()).toBe(true)
-    await wrapper.get('.wi-password__toggle').trigger('click')
-    expect(wrapper.get('.wi-password__toggle .wi-icon').exists()).toBe(true)
+    const wrapper = mount(WdInputPassword, { props: { showIcon: 'lock', hideIcon: 'unlock' } })
+    expect(wrapper.get('.wd-password__toggle .wd-icon').exists()).toBe(true)
+    await wrapper.get('.wd-password__toggle').trigger('click')
+    expect(wrapper.get('.wd-password__toggle .wd-icon').exists()).toBe(true)
   })
 
   it('replaces icons via showIcon / hideIcon slots', async () => {
-    const wrapper = mount(WiInputPassword, {
+    const wrapper = mount(WdInputPassword, {
       slots: {
         showIcon: () => h('span', { class: 'custom-show' }, 'show'),
         hideIcon: () => h('span', { class: 'custom-hide' }, 'hide'),
       },
     })
     expect(wrapper.find('.custom-show').exists()).toBe(true)
-    expect(wrapper.find('.wi-icon').exists()).toBe(false)
-    await wrapper.get('.wi-password__toggle').trigger('click')
+    expect(wrapper.find('.wd-icon').exists()).toBe(false)
+    await wrapper.get('.wd-password__toggle').trigger('click')
     expect(wrapper.find('.custom-hide').exists()).toBe(true)
     expect(wrapper.find('.custom-show').exists()).toBe(false)
   })
 
   it('shows strength feedback when enabled', async () => {
-    const wrapper = mount(WiInputPassword, {
+    const wrapper = mount(WdInputPassword, {
       props: { modelValue: 'Ab1!', feedback: true },
     })
-    expect(wrapper.get('.wi-password__feedback').text()).toContain('强度')
+    expect(wrapper.get('.wd-password__feedback').text()).toContain('强度')
   })
 
   it('hides toggle when toggleMask is false', () => {
-    const wrapper = mount(WiInputPassword, { props: { toggleMask: false } })
-    expect(wrapper.find('.wi-password__toggle').exists()).toBe(false)
-    expect(wrapper.find('.wi-password--toggle').exists()).toBe(false)
+    const wrapper = mount(WdInputPassword, { props: { toggleMask: false } })
+    expect(wrapper.find('.wd-password__toggle').exists()).toBe(false)
+    expect(wrapper.find('.wd-password--toggle').exists()).toBe(false)
   })
 
   it('clears the value and can peek on mousedown', async () => {
-    const wrapper = mount(WiInputPassword, {
+    const wrapper = mount(WdInputPassword, {
       props: { modelValue: 'secret', clearable: true, showPasswordOn: 'mousedown', showCount: true, maxlength: 20 },
     })
-    expect(wrapper.get('.wi-password-field__count').text()).toBe('6 / 20')
-    await wrapper.get('.wi-password__clear').trigger('click')
+    expect(wrapper.get('.wd-password-field__count').text()).toBe('6 / 20')
+    await wrapper.get('.wd-password__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['']])
     expect(wrapper.emitted('clear')).toHaveLength(1)
 
-    const peek = mount(WiInputPassword, {
+    const peek = mount(WdInputPassword, {
       props: { modelValue: 'secret', showPasswordOn: 'mousedown' },
     })
     expect(peek.get('input').attributes('type')).toBe('password')
-    await peek.get('.wi-password__toggle').trigger('mousedown')
+    await peek.get('.wd-password__toggle').trigger('mousedown')
     expect(peek.get('input').attributes('type')).toBe('text')
     document.dispatchEvent(new MouseEvent('mouseup'))
     await peek.vm.$nextTick()

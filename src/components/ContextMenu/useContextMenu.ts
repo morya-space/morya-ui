@@ -1,7 +1,7 @@
 import type { ContextMenuPosition } from './types'
 import { ref } from 'vue'
 
-/** Imperative helpers for `<WiContextMenu v-model / v-model:position>`. */
+/** Imperative helpers for `<WdContextMenu v-model / v-model:position>`. */
 export function useContextMenu() {
   const visible = ref(false)
   const position = ref<ContextMenuPosition>({ x: 0, y: 0 })

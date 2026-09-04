@@ -5,7 +5,7 @@ defineProps<InputGroupProps>()
 </script>
 
 <template>
-  <div class="wi-inputgroup">
+  <div class="wd-inputgroup">
     <slot />
   </div>
 </template>

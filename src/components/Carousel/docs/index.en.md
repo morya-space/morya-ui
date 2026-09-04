@@ -11,26 +11,26 @@ Slides content in a window of `numVisible` items.
 ## Import
 
 ```ts
-import { WiCarousel } from '@well-insight/ui'
+import { WdCarousel } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiCarousel } from '@well-insight/ui'
+import { WdCarousel } from '@wex-design/ui'
 
 const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 </script>
 
 <template>
-  <WiCarousel :value="value" :num-visible="1" circular>
+  <WdCarousel :value="value" :num-visible="1" circular>
     <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--wi-color-surface-muted, #f3f4f6);border-radius:var(--wi-radius-md)">
+      <div style="padding:2rem;text-align:center;background:var(--wd-color-surface-muted, #f3f4f6);border-radius:var(--wd-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WiCarousel>
+  </WdCarousel>
 </template>
 ```
 
@@ -40,19 +40,19 @@ const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 
 ```vue preview
 <script setup lang="ts">
-import { WiCarousel } from '@well-insight/ui'
+import { WdCarousel } from '@wex-design/ui'
 
 const value = ['A', 'B', 'C']
 </script>
 
 <template>
-  <WiCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
+  <WdCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
     <template #item="{ item }">
-      <div style="padding:1.5rem;text-align:center;background:var(--wi-color-surface-muted, #f3f4f6);border-radius:var(--wi-radius-md)">
+      <div style="padding:1.5rem;text-align:center;background:var(--wd-color-surface-muted, #f3f4f6);border-radius:var(--wd-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WiCarousel>
+  </WdCarousel>
 </template>
 ```
 

@@ -11,14 +11,14 @@ description: 展示当前页面在层级中的位置。
 ## 引入
 
 ```ts
-import { WiBreadcrumb } from '@well-insight/ui'
+import { WdBreadcrumb } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiBreadcrumb } from '@well-insight/ui'
+import { WdBreadcrumb } from '@wex-design/ui'
 
 const items = [
   { label: 'Electronics', to: '/electronics' },
@@ -28,7 +28,7 @@ const items = [
 </script>
 
 <template>
-  <WiBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
+  <WdBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
 </template>
 ```
 
@@ -38,7 +38,7 @@ const items = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiBreadcrumb } from '@well-insight/ui'
+import { WdBreadcrumb } from '@wex-design/ui'
 
 const items = [
   { label: 'Library', to: '/lib' },
@@ -47,7 +47,7 @@ const items = [
 </script>
 
 <template>
-  <WiBreadcrumb :model="items" separator=">" />
+  <WdBreadcrumb :model="items" separator=">" />
 </template>
 ```
 

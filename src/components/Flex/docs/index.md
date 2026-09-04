@@ -11,22 +11,22 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 ## 引入
 
 ```ts
-import { WiFlex } from '@well-insight/ui'
+import { WdFlex } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiFlex } from '@well-insight/ui'
+import { WdButton, WdFlex } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFlex>
-    <WiButton label="一" size="small" />
-    <WiButton label="二" size="small" severity="secondary" />
-    <WiButton label="三" size="small" severity="secondary" />
-  </WiFlex>
+  <WdFlex>
+    <WdButton label="一" size="small" />
+    <WdButton label="二" size="small" severity="secondary" />
+    <WdButton label="三" size="small" severity="secondary" />
+  </WdFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WiButton, WiFlex } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiFlex } from '@well-insight/ui'
+import { WdButton, WdFlex } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFlex vertical>
-    <WiButton label="上" size="small" />
-    <WiButton label="中" size="small" severity="secondary" />
-    <WiButton label="下" size="small" severity="secondary" />
-  </WiFlex>
+  <WdFlex vertical>
+    <WdButton label="上" size="small" />
+    <WdButton label="中" size="small" severity="secondary" />
+    <WdButton label="下" size="small" severity="secondary" />
+  </WdFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { WiButton, WiFlex } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiFlex, WiTag } from '@well-insight/ui'
+import { WdButton, WdFlex, WdTag } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <WiTag value="标签" />
-    <WiButton label="操作" size="small" />
-  </WiFlex>
+  <WdFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <WdTag value="标签" />
+    <WdButton label="操作" size="small" />
+  </WdFlex>
 </template>
 ```
 

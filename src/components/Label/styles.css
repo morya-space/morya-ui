@@ -1,8 +1,8 @@
 /* —— Form: Label —— */
-.wi-label {
-    color: var(--wi-color-text);
+.wd-label {
+    color: var(--wd-color-text);
     display: inline-block;
-    font-size: var(--wi-font-size-md);
+    font-size: var(--wd-font-size-md);
     font-weight: 600;
     line-height: 1.4;
 }

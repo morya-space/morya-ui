@@ -1,107 +1,107 @@
-.wi-switch--invalid .wi-switch__track {
-    box-shadow: 0 0 0 1px var(--wi-color-danger);
+.wd-switch--invalid .wd-switch__track {
+    box-shadow: 0 0 0 1px var(--wd-color-danger);
 }
 
-.wi-switch {
-    --wi-switch-track-height: 1.25rem;
-    --wi-switch-track-width: 2.25rem;
-    --wi-switch-thumb-size: 1rem;
-    --wi-switch-checked-offset: 1rem;
-    --wi-switch-spinner-size: 0.55rem;
+.wd-switch {
+    --wd-switch-track-height: 1.25rem;
+    --wd-switch-track-width: 2.25rem;
+    --wd-switch-thumb-size: 1rem;
+    --wd-switch-checked-offset: 1rem;
+    --wd-switch-spinner-size: 0.55rem;
 }
 
-.wi-switch__track {
+.wd-switch__track {
     align-items: center;
-    background: var(--wi-color-border);
-    border-radius: var(--wi-radius-full);
+    background: var(--wd-color-border);
+    border-radius: var(--wd-radius-full);
     display: inline-flex;
     flex: 0 0 auto;
-    height: var(--wi-switch-track-height);
-    padding: var(--wi-space-1);
-    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
-    width: var(--wi-switch-track-width);
+    height: var(--wd-switch-track-height);
+    padding: var(--wd-space-1);
+    transition: background-color var(--wd-motion-fast) var(--wd-motion-ease);
+    width: var(--wd-switch-track-width);
 }
 
-.wi-switch__thumb {
-    background: var(--wi-color-surface);
-    border-radius: var(--wi-radius-full);
-    box-shadow: var(--wi-shadow-sm);
-    height: var(--wi-switch-thumb-size);
+.wd-switch__thumb {
+    background: var(--wd-color-surface);
+    border-radius: var(--wd-radius-full);
+    box-shadow: var(--wd-shadow-sm);
+    height: var(--wd-switch-thumb-size);
     transform: translateX(0);
-    transition: transform var(--wi-motion-fast) var(--wi-motion-ease);
-    width: var(--wi-switch-thumb-size);
+    transition: transform var(--wd-motion-fast) var(--wd-motion-ease);
+    width: var(--wd-switch-thumb-size);
 }
 
-.wi-switch__input:checked + .wi-switch__track {
-    background: var(--wi-color-primary);
+.wd-switch__input:checked + .wd-switch__track {
+    background: var(--wd-color-primary);
 }
 
-.wi-switch__input:checked + .wi-switch__track .wi-switch__thumb {
-    transform: translateX(var(--wi-switch-checked-offset));
+.wd-switch__input:checked + .wd-switch__track .wd-switch__thumb {
+    transform: translateX(var(--wd-switch-checked-offset));
 }
 
-.wi-switch--small {
-    --wi-switch-track-height: 1rem;
-    --wi-switch-track-width: 1.75rem;
-    --wi-switch-thumb-size: 0.75rem;
-    --wi-switch-checked-offset: 0.75rem;
+.wd-switch--small {
+    --wd-switch-track-height: 1rem;
+    --wd-switch-track-width: 1.75rem;
+    --wd-switch-thumb-size: 0.75rem;
+    --wd-switch-checked-offset: 0.75rem;
 }
 
-.wi-switch--small .wi-switch__track {
-    height: var(--wi-switch-track-height);
-    width: var(--wi-switch-track-width);
+.wd-switch--small .wd-switch__track {
+    height: var(--wd-switch-track-height);
+    width: var(--wd-switch-track-width);
 }
 
-.wi-switch--small .wi-switch__thumb {
-    height: var(--wi-switch-thumb-size);
-    width: var(--wi-switch-thumb-size);
+.wd-switch--small .wd-switch__thumb {
+    height: var(--wd-switch-thumb-size);
+    width: var(--wd-switch-thumb-size);
 }
 
-.wi-switch--small
-    .wi-switch__input:checked
-    + .wi-switch__track
-    .wi-switch__thumb {
-    transform: translateX(var(--wi-switch-checked-offset));
+.wd-switch--small
+    .wd-switch__input:checked
+    + .wd-switch__track
+    .wd-switch__thumb {
+    transform: translateX(var(--wd-switch-checked-offset));
 }
 
-.wi-switch--large {
-    --wi-switch-track-height: 1.5rem;
-    --wi-switch-track-width: 2.75rem;
-    --wi-switch-thumb-size: 1.2rem;
-    --wi-switch-checked-offset: 1.25rem;
+.wd-switch--large {
+    --wd-switch-track-height: 1.5rem;
+    --wd-switch-track-width: 2.75rem;
+    --wd-switch-thumb-size: 1.2rem;
+    --wd-switch-checked-offset: 1.25rem;
 }
 
-.wi-switch--large .wi-switch__track {
-    height: var(--wi-switch-track-height);
-    width: var(--wi-switch-track-width);
+.wd-switch--large .wd-switch__track {
+    height: var(--wd-switch-track-height);
+    width: var(--wd-switch-track-width);
 }
 
-.wi-switch--large .wi-switch__thumb {
-    height: var(--wi-switch-thumb-size);
-    width: var(--wi-switch-thumb-size);
+.wd-switch--large .wd-switch__thumb {
+    height: var(--wd-switch-thumb-size);
+    width: var(--wd-switch-thumb-size);
 }
 
-.wi-switch--large
-    .wi-switch__input:checked
-    + .wi-switch__track
-    .wi-switch__thumb {
-    transform: translateX(var(--wi-switch-checked-offset));
+.wd-switch--large
+    .wd-switch__input:checked
+    + .wd-switch__track
+    .wd-switch__thumb {
+    transform: translateX(var(--wd-switch-checked-offset));
 }
 
-.wi-switch__text {
-    color: var(--wi-color-on-emphasis);
+.wd-switch__text {
+    color: var(--wd-color-on-emphasis);
     font-size: 0.65rem;
     padding: 0 0.35rem;
     pointer-events: none;
 }
 
-.wi-switch__spinner {
-    animation: wi-progress-spinner-rotate var(--wi-motion-spin-fast) linear infinite;
+.wd-switch__spinner {
+    animation: wd-progress-spinner-rotate var(--wd-motion-spin-fast) linear infinite;
     border: 1.5px solid
-        color-mix(in srgb, var(--wi-color-primary) 40%, transparent);
+        color-mix(in srgb, var(--wd-color-primary) 40%, transparent);
     border-radius: 50%;
-    border-top-color: var(--wi-color-primary);
+    border-top-color: var(--wd-color-primary);
     display: block;
-    height: var(--wi-switch-spinner-size);
-    width: var(--wi-switch-spinner-size);
+    height: var(--wd-switch-spinner-size);
+    width: var(--wd-switch-spinner-size);
 }

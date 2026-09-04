@@ -1,175 +1,175 @@
 /* —— Form: InputNumber —— */
-.wi-inputnumber-field {
+.wd-inputnumber-field {
     display: grid;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
 }
 
-.wi-inputnumber-field--fluid {
+.wd-inputnumber-field--fluid {
     width: 100%;
 }
 
-.wi-inputnumber-field__label {
-    color: var(--wi-color-text);
-    font-size: var(--wi-font-size-md);
+.wd-inputnumber-field__label {
+    color: var(--wd-color-text);
+    font-size: var(--wd-font-size-md);
     font-weight: 600;
 }
 
-.wi-inputnumber-field__help {
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-xs);
+.wd-inputnumber-field__help {
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-xs);
 }
 
-.wi-inputnumber-field__help--invalid {
-    color: var(--wi-color-danger);
+.wd-inputnumber-field__help--invalid {
+    color: var(--wd-color-danger);
 }
 
-.wi-inputnumber {
-    --wi-inputnumber-width: 8rem;
-    --wi-inputnumber-stack-button-padding-x: var(--wi-space-2);
+.wd-inputnumber {
+    --wd-inputnumber-width: 8rem;
+    --wd-inputnumber-stack-button-padding-x: var(--wd-space-2);
     align-items: stretch;
     display: inline-flex;
     max-width: 100%;
 }
 
-.wi-inputnumber--fluid {
+.wd-inputnumber--fluid {
     display: flex;
     width: 100%;
 }
 
-.wi-inputnumber__input-wrap {
+.wd-inputnumber__input-wrap {
     align-items: center;
     display: flex;
     position: relative;
-    width: var(--wi-inputnumber-width);
+    width: var(--wd-inputnumber-width);
 }
 
-.wi-inputnumber__prefix,
-.wi-inputnumber__suffix {
-    color: var(--wi-color-text-muted);
+.wd-inputnumber__prefix,
+.wd-inputnumber__suffix {
+    color: var(--wd-color-text-muted);
     flex: 0 0 auto;
-    padding-inline: var(--wi-space-2);
+    padding-inline: var(--wd-space-2);
 }
 
-.wi-inputnumber--fluid .wi-inputnumber__input-wrap {
+.wd-inputnumber--fluid .wd-inputnumber__input-wrap {
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
 }
 
-.wi-inputnumber__input-wrap .wi-inputnumber__input {
+.wd-inputnumber__input-wrap .wd-inputnumber__input {
     flex: 1 1 auto;
     min-width: 0;
     width: 100%;
 }
 
-.wi-inputnumber__input-wrap .wi-inputnumber__clear {
+.wd-inputnumber__input-wrap .wd-inputnumber__clear {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-sm);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-sm);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: flex;
-    height: var(--wi-control-affix-size);
+    height: var(--wd-control-affix-size);
     justify-content: center;
     padding: 0;
     position: absolute;
-    right: var(--wi-space-1);
+    right: var(--wd-space-1);
     top: 50%;
     transform: translateY(-50%);
-    width: var(--wi-control-affix-size);
+    width: var(--wd-control-affix-size);
     z-index: 1;
 }
 
-.wi-inputnumber__input {
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-control);
-    color: var(--wi-color-text);
+.wd-inputnumber__input {
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-control);
+    color: var(--wd-color-text);
     font: inherit;
-    font-size: var(--wi-control-font-medium);
-    min-height: var(--wi-control-height-medium);
+    font-size: var(--wd-control-font-medium);
+    min-height: var(--wd-control-height-medium);
     min-width: 0;
-    padding: 0 var(--wi-control-padding-x-medium);
+    padding: 0 var(--wd-control-padding-x-medium);
 }
 
-.wi-inputnumber--buttons .wi-inputnumber__input {
+.wd-inputnumber--buttons .wd-inputnumber__input {
     border-radius: 0;
     text-align: center;
 }
 
-.wi-inputnumber--small .wi-inputnumber__input,
-.wi-inputnumber--small .wi-inputnumber__button {
-    min-height: var(--wi-control-height-small);
-    font-size: var(--wi-control-font-small);
+.wd-inputnumber--small .wd-inputnumber__input,
+.wd-inputnumber--small .wd-inputnumber__button {
+    min-height: var(--wd-control-height-small);
+    font-size: var(--wd-control-font-small);
 }
 
-.wi-inputnumber--large .wi-inputnumber__input,
-.wi-inputnumber--large .wi-inputnumber__button {
-    min-height: var(--wi-control-height-large);
-    font-size: var(--wi-control-font-large);
+.wd-inputnumber--large .wd-inputnumber__input,
+.wd-inputnumber--large .wd-inputnumber__button {
+    min-height: var(--wd-control-height-large);
+    font-size: var(--wd-control-font-large);
 }
 
-.wi-inputnumber--invalid .wi-inputnumber__input {
-    border-color: var(--wi-color-danger);
+.wd-inputnumber--invalid .wd-inputnumber__input {
+    border-color: var(--wd-color-danger);
 }
 
-.wi-inputnumber__button {
+.wd-inputnumber__button {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 12%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 12%,
+        var(--wd-color-surface)
     );
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    color: var(--wi-color-text);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    color: var(--wd-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--wi-control-font-medium);
+    font-size: var(--wd-control-font-medium);
     justify-content: center;
-    min-height: var(--wi-control-height-medium);
-    min-width: var(--wi-control-height-medium);
+    min-height: var(--wd-control-height-medium);
+    min-width: var(--wd-control-height-medium);
     padding: 0;
 }
 
-.wi-inputnumber__button--decrement {
-    border-radius: var(--wi-radius-control) 0 0 var(--wi-radius-control);
+.wd-inputnumber__button--decrement {
+    border-radius: var(--wd-radius-control) 0 0 var(--wd-radius-control);
     border-right: 0;
 }
 
-.wi-inputnumber__button--increment {
+.wd-inputnumber__button--increment {
     border-left: 0;
-    border-radius: 0 var(--wi-radius-control) var(--wi-radius-control) 0;
+    border-radius: 0 var(--wd-radius-control) var(--wd-radius-control) 0;
 }
 
-.wi-inputnumber__button:hover:not(:disabled) {
+.wd-inputnumber__button:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 20%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 20%,
+        var(--wd-color-surface)
     );
 }
 
-.wi-inputnumber__button:disabled,
-.wi-inputnumber--disabled .wi-inputnumber__input {
+.wd-inputnumber__button:disabled,
+.wd-inputnumber--disabled .wd-inputnumber__input {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-inputnumber__input:focus-visible,
-.wi-inputnumber__button:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-inputnumber__input:focus-visible,
+.wd-inputnumber__button:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
     z-index: 1;
 }
 
-.wi-inputnumber__stack {
+.wd-inputnumber__stack {
     display: flex;
     flex-direction: column;
 }
 
-.wi-inputnumber__stack .wi-inputnumber__button {
+.wd-inputnumber__stack .wd-inputnumber__button {
     min-height: 0;
-    padding: 0 var(--wi-inputnumber-stack-button-padding-x);
+    padding: 0 var(--wd-inputnumber-stack-button-padding-x);
 }

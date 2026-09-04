@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { TerminalEmits, TerminalProps } from './types'
 import { computed, nextTick, ref } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 
 const props = withDefaults(defineProps<TerminalProps>(), {
-  welcomeMessage: 'Welcome to Well Insight Terminal',
+  welcomeMessage: 'Welcome to Wex Design Terminal',
   prompt: '>',
 })
 
 const emit = defineEmits<TerminalEmits>()
 
-const locale = useWiLocale()
+const locale = useWdLocale()
 const draft = ref('')
 const innerLines = ref<string[]>([])
 const innerResponses = ref<string[]>([])
@@ -73,27 +73,27 @@ defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
 </script>
 
 <template>
-  <div class="wi-terminal">
-    <div ref="bodyRef" class="wi-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
-      <div v-if="welcomeMessage" class="wi-terminal__welcome">
+  <div class="wd-terminal">
+    <div ref="bodyRef" class="wd-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
+      <div v-if="welcomeMessage" class="wd-terminal__welcome">
         {{ welcomeMessage }}
       </div>
       <template v-for="(line, index) in displayLines" :key="`${line}-${index}`">
-        <div class="wi-terminal__line">
-          <span class="wi-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+        <div class="wd-terminal__line">
+          <span class="wd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
           <span>{{ line }}</span>
         </div>
-        <div v-if="displayResponses[index]" class="wi-terminal__response">
+        <div v-if="displayResponses[index]" class="wd-terminal__response">
           {{ displayResponses[index] }}
         </div>
       </template>
     </div>
-    <form class="wi-terminal__form" @submit.prevent="submit">
-      <span class="wi-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+    <form class="wd-terminal__form" @submit.prevent="submit">
+      <span class="wd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
       <input
         ref="inputRef"
         v-model="draft"
-        class="wi-terminal__input"
+        class="wd-terminal__input"
         type="text"
         :aria-label="locale.commandInput"
         autocomplete="off"

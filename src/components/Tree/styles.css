@@ -1,122 +1,122 @@
 /* —— Data: Tree —— */
-.wi-tree,
-.wi-tree__children {
+.wd-tree,
+.wd-tree__children {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wi-tree {
-    color: var(--wi-color-text);
-    font-size: var(--wi-font-size-md);
+.wd-tree {
+    color: var(--wd-color-text);
+    font-size: var(--wd-font-size-md);
 }
 
-.wi-tree__children {
-    border-left: var(--wi-border-width) solid color-mix(in srgb, var(--wi-color-border) 80%, transparent);
-    margin-left: var(--wi-tree-indent);
-    padding-left: var(--wi-tree-indent-padding);
+.wd-tree__children {
+    border-left: var(--wd-border-width) solid color-mix(in srgb, var(--wd-color-border) 80%, transparent);
+    margin-left: var(--wd-tree-indent);
+    padding-left: var(--wd-tree-indent-padding);
 }
 
-.wi-tree__row {
+.wd-tree__row {
     align-items: center;
-    border-radius: var(--wi-radius-sm);
+    border-radius: var(--wd-radius-sm);
     display: flex;
-    gap: var(--wi-space-1);
-    min-height: var(--wi-control-height-small, 1.75rem);
-    padding-right: var(--wi-space-2);
+    gap: var(--wd-space-1);
+    min-height: var(--wd-control-height-small, 1.75rem);
+    padding-right: var(--wd-space-2);
 }
 
-.wi-tree__row:hover,
-.wi-tree__node:focus-visible > .wi-tree__row {
-    background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
+.wd-tree__row:hover,
+.wd-tree__node:focus-visible > .wd-tree__row {
+    background: color-mix(in srgb, var(--wd-color-primary) 6%, var(--wd-color-surface));
 }
 
-.wi-tree__node:focus-visible {
+.wd-tree__node:focus-visible {
     outline: none;
 }
 
-.wi-tree__node:focus-visible > .wi-tree__row {
-    box-shadow: var(--wi-focus-shadow);
+.wd-tree__node:focus-visible > .wd-tree__row {
+    box-shadow: var(--wd-focus-shadow);
 }
 
-.wi-tree__row--selected {
-    background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
+.wd-tree__row--selected {
+    background: color-mix(in srgb, var(--wd-color-primary) 12%, var(--wd-color-surface));
 }
 
-.wi-tree__row--matched .wi-tree__label {
-    color: var(--wi-color-primary);
+.wd-tree__row--matched .wd-tree__label {
+    color: var(--wd-color-primary);
     font-weight: 650;
 }
 
-.wi-tree__row--disabled {
-    opacity: var(--wi-opacity-disabled);
+.wd-tree__row--disabled {
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }
 
-.wi-tree__row--indeterminate .wi-tree__checkbox {
+.wd-tree__row--indeterminate .wd-tree__checkbox {
     opacity: 0.85;
 }
 
-.wi-tree__toggler,
-.wi-tree__label {
+.wd-tree__toggler,
+.wd-tree__label {
     align-items: center;
     background: transparent;
     border: 0;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
 }
 
-.wi-tree__toggler {
-    color: var(--wi-color-text-muted);
+.wd-tree__toggler {
+    color: var(--wd-color-text-muted);
     flex: 0 0 1.25rem;
     justify-content: center;
     line-height: 1;
-    padding: var(--wi-space-1);
+    padding: var(--wd-space-1);
 }
 
-.wi-tree__toggler:focus-visible,
-.wi-tree__label:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-tree__toggler:focus-visible,
+.wd-tree__label:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-tree__toggler--leaf {
+.wd-tree__toggler--leaf {
     visibility: hidden;
 }
 
-.wi-tree__checkbox {
+.wd-tree__checkbox {
     flex-shrink: 0;
 }
 
-.wi-tree__label {
-    border-radius: var(--wi-radius-sm);
+.wd-tree__label {
+    border-radius: var(--wd-radius-sm);
     flex: 1;
-    padding: var(--wi-space-1) var(--wi-space-2);
+    padding: var(--wd-space-1) var(--wd-space-2);
     text-align: start;
 }
 
-.wi-tree__label:hover {
-    color: var(--wi-color-primary);
+.wd-tree__label:hover {
+    color: var(--wd-color-primary);
 }
 
-.wi-tree__icon {
-    color: var(--wi-color-text-muted);
+.wd-tree__icon {
+    color: var(--wd-color-text-muted);
     display: inline-flex;
 }
 
-.wi-tree__message {
+.wd-tree__message {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--wi-control-height-medium, 2.5rem) * 2);
-    padding: var(--wi-space-3);
+    min-height: calc(var(--wd-control-height-medium, 2.5rem) * 2);
+    padding: var(--wd-space-3);
 }
 
-.wi-tree__empty-text {
+.wd-tree__empty-text {
     margin: 0;
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-sm);
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-sm);
     line-height: 1.5;
 }

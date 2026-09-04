@@ -1,4 +1,4 @@
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
 export interface InputColorProps {
   modelValue?: string
@@ -6,7 +6,7 @@ export interface InputColorProps {
   id?: string
   label?: string
   invalid?: boolean
-  size?: WiSizeInput
+  size?: WdSizeInput
   /** Preset hex colors shown under the input. */
   swatches?: string[]
 }

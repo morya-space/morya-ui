@@ -1,5 +1,5 @@
 /* ConfigProvider passes height to layout roots when the app shell is full-height. */
-.wi-config-provider {
+.wd-config-provider {
   position: relative;
   width: 100%;
   height: 100%;

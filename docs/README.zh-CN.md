@@ -2,7 +2,7 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-开源项目 `@well-insight/ui` 的维护者文档。对外说明见根目录 [README](../README.zh-CN.md) · [文档站](https://well-insight.github.io/well-insight-ui/)
+开源项目 `@wex-design/ui` 的维护者文档。对外说明见根目录 [README](../README.zh-CN.md) · [文档站](https://wex-design.github.io/wex-design-ui/)
 
 | 文档 | 说明 |
 | --- | --- |
