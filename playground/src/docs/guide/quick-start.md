@@ -16,7 +16,7 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 pnpm add @well-insight/ui
 ```
 
-需要 Vue 3.3 及以上（推荐 3.5+）。主题 token、亮暗切换与动效 API 均包含在 `@well-insight/ui` 中。
+需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `@well-insight/ui` 中。
 
 克隆本仓库后执行 `pnpm install`。文档站通过 Vite alias 直连 `src/` 源码（见 `playground/vite.config.ts`）。
 

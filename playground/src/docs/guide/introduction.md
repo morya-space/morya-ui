@@ -41,7 +41,7 @@ description: Well Insight UI 是什么、适合谁用、如何开始。
 pnpm add @well-insight/ui
 ```
 
-需要 Vue 3.3 及以上（推荐 3.5+）。支持 [Nuxt / Astro / Vite SSR 等](/docs/ssr)。详见 [快速上手](/docs/quick-start)。
+需要 Vue 3（推荐 3.5 及以上）。支持 [Nuxt / Astro / Vite SSR 等](/docs/ssr)。详见 [快速上手](/docs/quick-start)。
 
 ## 下一步
 

@@ -6,7 +6,7 @@ description: 在 Nuxt、Astro、Vite SSR 等环境中使用 Well Insight UI。
 
 # SSR 与服务端框架
 
-Well Insight UI 面向 **Vue 3.3+** 的 SSR 场景做了兼容：服务端不会访问 `document` / `window`，组件实例 id 在服务端与客户端保持一致，命令式 API（`toast` / `message` / `confirm`）在服务端自动跳过。
+Well Insight UI 面向 **Vue 3** 的 SSR 场景做了兼容（推荐 3.5 及以上）：服务端不会访问 `document` / `window`，组件实例 id 在服务端与客户端保持一致，命令式 API（`toast` / `message` / `confirm`）在服务端自动跳过。
 
 以下框架均可接入；按场景选择 **全量 SSR** 或 **客户端 Islands**。
 
