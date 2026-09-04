@@ -2,13 +2,13 @@ import { ref, watch } from 'vue'
 
 export type DensityPreference = 'compact' | 'comfortable' | 'spacious'
 
-const storageKey = 'well-insight-density'
+const storageKey = 'wex-design-density'
 const densityPreferences: readonly DensityPreference[] = ['compact', 'comfortable', 'spacious']
 
 export function applyDensity(preference: DensityPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.wiDensity = preference
+  el.dataset.wdDensity = preference
 }
 
 export function useDensity() {

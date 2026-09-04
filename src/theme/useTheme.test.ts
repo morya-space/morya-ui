@@ -16,6 +16,6 @@ describe('useTheme', () => {
 
     expect(vm.theme).toBe('dark')
     expect(document.documentElement.dataset.theme).toBe('dark')
-    expect(localStorage.getItem('well-insight-theme')).toBe('dark')
+    expect(localStorage.getItem('wex-design-theme')).toBe('dark')
   })
 })

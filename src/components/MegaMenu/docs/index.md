@@ -11,14 +11,14 @@ description: 水平菜单，子项按多列面板展示。
 ## 引入
 
 ```ts
-import { WiMegaMenu, type MegaMenuItem } from '@well-insight/ui'
+import { WdMegaMenu, type MegaMenuItem } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiMegaMenu } from '@well-insight/ui'
+import { WdMegaMenu } from '@wex-design/ui'
 
 const model = [
   {
@@ -33,7 +33,7 @@ const model = [
 </script>
 
 <template>
-  <WiMegaMenu :model="model" />
+  <WdMegaMenu :model="model" />
 </template>
 ```
 

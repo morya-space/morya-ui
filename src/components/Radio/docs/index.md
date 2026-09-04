@@ -11,14 +11,14 @@ description: 单选框。支持 invalid。
 ## 引入
 
 ```ts
-import { WiRadio } from '@well-insight/ui'
+import { WdRadio } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiRadio } from '@well-insight/ui'
+import { WdRadio } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const size = ref('md')
@@ -26,9 +26,9 @@ const size = ref('md')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WiRadio v-model="size" name="size" value="sm" label="Small" />
-    <WiRadio v-model="size" name="size" value="md" label="Medium" />
-    <WiRadio v-model="size" name="size" value="lg" label="Large" />
+    <WdRadio v-model="size" name="size" value="sm" label="Small" />
+    <WdRadio v-model="size" name="size" value="md" label="Medium" />
+    <WdRadio v-model="size" name="size" value="lg" label="Large" />
   </div>
 </template>
 ```
@@ -37,7 +37,7 @@ const size = ref('md')
 
 ```vue preview
 <script setup lang="ts">
-import { WiRadio } from '@well-insight/ui'
+import { WdRadio } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const plan = ref('')
@@ -45,8 +45,8 @@ const plan = ref('')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WiRadio v-model="plan" name="plan" value="free" invalid label="Free" />
-    <WiRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
+    <WdRadio v-model="plan" name="plan" value="free" invalid label="Free" />
+    <WdRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ const plan = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WiRadio } from '@well-insight/ui'
+import { WdRadio } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WiRadio model-value="a" value="a" disabled label="Selected" />
-    <WiRadio model-value="a" value="b" disabled label="Other" />
+    <WdRadio model-value="a" value="a" disabled label="Selected" />
+    <WdRadio model-value="a" value="b" disabled label="Other" />
   </div>
 </template>
 ```
@@ -70,18 +70,18 @@ import { WiRadio } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiRadio, WiRadioGroup } from '@well-insight/ui'
+import { WdRadio, WdRadioGroup } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const size = ref('md')
 </script>
 
 <template>
-  <WiRadioGroup v-model="size">
-    <WiRadio value="sm" label="Small" />
-    <WiRadio value="md" label="Medium" />
-    <WiRadio value="lg" label="Large" />
-  </WiRadioGroup>
+  <WdRadioGroup v-model="size">
+    <WdRadio value="sm" label="Small" />
+    <WdRadio value="md" label="Medium" />
+    <WdRadio value="lg" label="Large" />
+  </WdRadioGroup>
 </template>
 ```
 

@@ -1,17 +1,17 @@
 {
-  "name": "@well-insight/ui",
+  "name": "@wex-design/ui",
   "type": "module",
-  "version": "0.1.14",
+  "version": "0.0.1",
   "packageManager": "pnpm@10.12.4",
   "description": "Open-source Vue 3 component library with design tokens, themes, and interactive docs.",
   "license": "MIT",
-  "homepage": "https://well-insight.github.io/well-insight-ui/",
+  "homepage": "https://wex-design.github.io/wex-design-ui/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/well-insight/well-insight-ui.git"
+    "url": "git+https://github.com/wex-design/wex-design-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/well-insight/well-insight-ui/issues"
+    "url": "https://github.com/wex-design/wex-design-ui/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -680,12 +680,12 @@
     "release:npm": "pnpm run release:build && pnpm run release:publish",
     "release:git": "node scripts/release-git.mjs --tag --branch",
     "release:mcp": "node scripts/release-mcp.mjs",
-    "mcp:generate": "pnpm --filter @well-insight/ui-mcp generate",
-    "mcp:check-catalog": "pnpm --filter @well-insight/ui-mcp check-catalog",
-    "mcp:validate-catalog": "pnpm --filter @well-insight/ui-mcp validate-catalog",
-    "mcp:audit-examples": "pnpm --filter @well-insight/ui-mcp audit-example-coverage",
-    "mcp:build": "pnpm --filter @well-insight/ui-mcp build",
-    "mcp:start": "pnpm --filter @well-insight/ui-mcp start",
+    "mcp:generate": "pnpm --filter @wex-design/ui-mcp generate",
+    "mcp:check-catalog": "pnpm --filter @wex-design/ui-mcp check-catalog",
+    "mcp:validate-catalog": "pnpm --filter @wex-design/ui-mcp validate-catalog",
+    "mcp:audit-examples": "pnpm --filter @wex-design/ui-mcp audit-example-coverage",
+    "mcp:build": "pnpm --filter @wex-design/ui-mcp build",
+    "mcp:start": "pnpm --filter @wex-design/ui-mcp start",
     "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src ai-design-config/docs/golden-pages ai-design-config/src/examples",
     "check:tokens": "node ai-design-config/scripts/check-undefined-tokens.mjs src",
     "check:docs": "node ai-design-config/scripts/check-docs-drift.mjs"

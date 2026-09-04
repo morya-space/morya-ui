@@ -11,14 +11,14 @@ A main button that expands a set of directional shortcut actions.
 ## Import
 
 ```ts
-import { WiSpeedDial } from '@well-insight/ui'
+import { WdSpeedDial } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpeedDial } from '@well-insight/ui'
+import { WdSpeedDial } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,7 +31,7 @@ const items = [
 
 <template>
   <div style="min-height:8rem;display:flex;align-items:flex-end;justify-content:center">
-    <WiSpeedDial v-model="open" :model="items" direction="up" />
+    <WdSpeedDial v-model="open" :model="items" direction="up" />
   </div>
 </template>
 ```

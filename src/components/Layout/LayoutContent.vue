@@ -5,7 +5,7 @@ import { computed, ref } from "vue";
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 
-defineOptions({ name: "WiLayoutContent" });
+defineOptions({ name: "WdLayoutContent" });
 
 const props = withDefaults(defineProps<LayoutContentProps>(), {
     embedded: false,
@@ -26,15 +26,15 @@ const rootStyle = useLayoutRegionStyle(() => ({
 }));
 
 const rootClass = computed(() => [
-    "wi-layout",
-    "wi-layout-content",
-    `wi-layout--${props.position}-positioned`,
+    "wd-layout",
+    "wd-layout-content",
+    `wd-layout--${props.position}-positioned`,
     {
-        "wi-layout--embedded": props.embedded,
+        "wd-layout--embedded": props.embedded,
     },
 ]);
 
-const scrollClass = computed(() => ["wi-layout__scroll", props.contentClass]);
+const scrollClass = computed(() => ["wd-layout__scroll", props.contentClass]);
 const scrollStyle = computed((): StyleValue => props.contentStyle);
 
 defineExpose<LayoutExpose>({ scrollTo });

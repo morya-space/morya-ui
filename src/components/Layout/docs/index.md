@@ -6,18 +6,18 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 
 # Layout
 
-页面级布局容器。侧栏场景需在对应 `WiLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WiLayoutContent` 会自动撑满剩余空间。
+页面级布局容器。侧栏场景需在对应 `WdLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WdLayoutContent` 会自动撑满剩余空间。
 
 ## 引入
 
 ```ts
 import {
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutFooter,
-  WiLayoutHeader,
-  WiLayoutSider,
-} from '@well-insight/ui'
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutFooter,
+  WdLayoutHeader,
+  WdLayoutSider,
+} from '@wex-design/ui'
 ```
 
 ## 基础用法
@@ -26,21 +26,21 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ```vue preview
 <script setup lang="ts">
-import { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well-insight/ui'
+import { WdLayout, WdLayoutContent, WdLayoutFooter, WdLayoutHeader } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiLayout style="height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WdLayout style="height:16rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </WiLayoutHeader>
-    <WiLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </WdLayoutHeader>
+    <WdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content（自动撑开）
-    </WiLayoutContent>
-    <WiLayoutFooter bordered style="padding:0.75rem 1rem">
+    </WdLayoutContent>
+    <WdLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </WiLayoutFooter>
-  </WiLayout>
+    </WdLayoutFooter>
+  </WdLayout>
 </template>
 ```
 
@@ -51,24 +51,24 @@ import { WiLayout, WiLayoutContent, WiLayoutFooter, WiLayoutHeader } from '@well
 ```vue preview
 <script setup lang="ts">
 import {
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutHeader,
-  WiLayoutSider,
-} from '@well-insight/ui'
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutHeader,
+  WdLayoutSider,
+} from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WiLayout style="height:16rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <WdLayout style="height:16rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--wi-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
-    </WiLayoutHeader>
-    <WiLayout has-sider>
-      <WiLayoutSider
+      <span style="color:var(--wd-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
+    </WdLayoutHeader>
+    <WdLayout has-sider>
+      <WdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>项目</div>
           <div>设置</div>
         </div>
-      </WiLayoutSider>
-      <WiLayoutContent embedded content-style="padding:1rem">
+      </WdLayoutSider>
+      <WdLayoutContent embedded content-style="padding:1rem">
         主内容区会横向、纵向同时撑满。
-      </WiLayoutContent>
-    </WiLayout>
-  </WiLayout>
+      </WdLayoutContent>
+    </WdLayout>
+  </WdLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutHeader,
-  WiLayoutSider,
-} from '@well-insight/ui'
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutHeader,
+  WdLayoutSider,
+} from '@wex-design/ui'
 </script>
 
 <template>
-  <WiLayout style="height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WdLayout style="height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </WiLayoutHeader>
-    <WiLayout has-sider sider-placement="right">
-      <WiLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </WdLayoutHeader>
+    <WdLayout has-sider sider-placement="right">
+      <WdLayoutSider bordered :width="140" content-style="padding:0.75rem">
         属性面板
-      </WiLayoutSider>
-      <WiLayoutContent embedded content-style="padding:1rem">
+      </WdLayoutSider>
+      <WdLayoutContent embedded content-style="padding:1rem">
         画布 / 主区域
-      </WiLayoutContent>
-    </WiLayout>
-  </WiLayout>
+      </WdLayoutContent>
+    </WdLayout>
+  </WdLayout>
 </template>
 ```
 
@@ -125,34 +125,34 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  WiButton,
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutFooter,
-  WiLayoutHeader,
-  WiLayoutSider,
-  WiTag,
-} from '@well-insight/ui'
+  WdButton,
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutFooter,
+  WdLayoutHeader,
+  WdLayoutSider,
+  WdTag,
+} from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WiLayout style="height:18rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader
+  <WdLayout style="height:18rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
       <strong>Well Design</strong>
-      <WiTag value="Studio" />
+      <WdTag value="Studio" />
       <span style="flex:1" />
-      <WiButton size="small" label="发布" />
-    </WiLayoutHeader>
+      <WdButton size="small" label="发布" />
+    </WdLayoutHeader>
 
-    <WiLayout has-sider>
-      <WiLayoutSider
+    <WdLayout has-sider>
+      <WdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>组件</div>
           <div>主题</div>
         </div>
-      </WiLayoutSider>
+      </WdLayoutSider>
 
-      <WiLayout>
-        <WiLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <WdLayout>
+        <WdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>工作区</strong>
-          <p style="margin:0;color:var(--wi-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--wd-color-text-muted);font-size:0.875rem">
             Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。
           </p>
-        </WiLayoutContent>
-        <WiLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wi-color-text-muted);font-size:0.75rem">
+        </WdLayoutContent>
+        <WdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wd-color-text-muted);font-size:0.75rem">
           Ready · local
-        </WiLayoutFooter>
-      </WiLayout>
-    </WiLayout>
-  </WiLayout>
+        </WdLayoutFooter>
+      </WdLayout>
+    </WdLayout>
+  </WdLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'
+import { WdLayout, WdLayoutContent, WdLayoutHeader } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiLayout style="height:12rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WdLayout style="height:12rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </WiLayoutHeader>
-    <WiLayoutContent embedded content-style="padding:1rem">
+    </WdLayoutHeader>
+    <WdLayoutContent embedded content-style="padding:1rem">
       嵌套表单 / 列表放在这里。
-    </WiLayoutContent>
-  </WiLayout>
+    </WdLayoutContent>
+  </WdLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ import { WiLayout, WiLayoutContent, WiLayoutHeader } from '@well-insight/ui'
 ```vue preview
 <script setup lang="ts">
 import {
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutHeader,
-  WiLayoutSider,
-} from '@well-insight/ui'
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutHeader,
+  WdLayoutSider,
+} from '@wex-design/ui'
 </script>
 
 <template>
-  <WiLayout style="height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WdLayout style="height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </WiLayoutHeader>
-    <WiLayout has-sider>
-      <WiLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </WdLayoutHeader>
+    <WdLayout has-sider>
+      <WdLayoutSider bordered :width="120" content-style="padding:0.75rem">
         固定侧栏
-      </WiLayoutSider>
-      <WiLayoutContent embedded content-style="padding:1rem">
+      </WdLayoutSider>
+      <WdLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             行 {{ n }} — 向下滚动
           </div>
         </div>
-      </WiLayoutContent>
-    </WiLayout>
-  </WiLayout>
+      </WdLayoutContent>
+    </WdLayout>
+  </WdLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutHeader,
-  WiLayoutSider,
-} from '@well-insight/ui'
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutHeader,
+  WdLayoutSider,
+} from '@wex-design/ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--wi-color-border);border-radius:var(--wi-radius-md);overflow:hidden">
-    <WiLayout position="absolute" has-sider>
-      <WiLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
+    <WdLayout position="absolute" has-sider>
+      <WdLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </WiLayoutSider>
-      <WiLayout>
-        <WiLayoutHeader bordered style="padding:0.75rem 1rem">
+      </WdLayoutSider>
+      <WdLayout>
+        <WdLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </WiLayoutHeader>
-        <WiLayoutContent embedded content-style="padding:1rem">
+        </WdLayoutHeader>
+        <WdLayoutContent embedded content-style="padding:1rem">
           填满相对定位容器
-        </WiLayoutContent>
-      </WiLayout>
-    </WiLayout>
+        </WdLayoutContent>
+      </WdLayout>
+    </WdLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | 横向容纳 `WiLayoutSider`。 |
+| `hasSider` | `boolean` | `false` | 横向容纳 `WdLayoutSider`。 |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | 侧栏位置。 |
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
@@ -315,17 +315,17 @@ import {
 
 ## Expose
 
-`WiLayout` / `WiLayoutContent` / `WiLayoutSider` 均暴露 `scrollTo(...)`。
+`WdLayout` / `WdLayoutContent` / `WdLayoutSider` 均暴露 `scrollTo(...)`。
 
 ## Components
 
 | 组件 | 说明 |
 | --- | --- |
-| `WiLayout` | 根布局。 |
-| `WiLayoutHeader` | 顶栏。 |
-| `WiLayoutContent` | 主内容区（默认撑满剩余空间）。 |
-| `WiLayoutFooter` | 底栏。 |
-| `WiLayoutSider` | 侧栏。 |
+| `WdLayout` | 根布局。 |
+| `WdLayoutHeader` | 顶栏。 |
+| `WdLayoutContent` | 主内容区（默认撑满剩余空间）。 |
+| `WdLayoutFooter` | 底栏。 |
+| `WdLayoutSider` | 侧栏。 |
 
 ## Slots
 

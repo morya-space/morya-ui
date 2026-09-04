@@ -16,11 +16,11 @@ import {
   watch
 } from 'vue'
 import { scrollbarContextKey } from './constants'
-import { useWiId } from '../../shared/useWiId'
+import { useWdId } from '../../shared/useWdId'
 import Thumb from './Thumb.vue'
 import { addUnit, GAP, isNumber, isObject } from './util'
 
-defineOptions({ name: 'WiScrollbar' })
+defineOptions({ name: 'WdScrollbar' })
 
 const props = withDefaults(defineProps<ScrollbarProps>(), {
   distance: 0,
@@ -49,7 +49,7 @@ const sizeHeight = ref('')
 const ratioX = ref(1)
 const ratioY = ref(1)
 
-const fallbackViewId = useWiId('wi-scrollbar-view')
+const fallbackViewId = useWdId('wd-scrollbar-view')
 const contentId = computed(() => props.id ?? fallbackViewId)
 
 let wrapScrollTop = 0
@@ -82,12 +82,12 @@ const resolvedWrapStyle = computed<StyleValue>(() => {
 })
 
 const wrapClassList = computed(() => [
-  'wi-scrollbar__wrap',
+  'wd-scrollbar__wrap',
   props.wrapClass,
-  { 'wi-scrollbar__wrap--hidden-default': !props.native },
+  { 'wd-scrollbar__wrap--hidden-default': !props.native },
 ])
 
-const viewClassList = computed(() => ['wi-scrollbar__view', props.viewClass])
+const viewClassList = computed(() => ['wd-scrollbar__view', props.viewClass])
 const alwaysVisible = computed(() => Boolean(props.always || props.trigger === 'none'))
 
 provide(
@@ -288,7 +288,7 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="scrollbarRef" class="wi-scrollbar">
+  <div ref="scrollbarRef" class="wd-scrollbar">
     <div
       ref="wrapRef"
       :class="wrapClassList"

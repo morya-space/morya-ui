@@ -11,14 +11,14 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 ## 引入
 
 ```ts
-import { useContextMenu, WiContextMenu } from '@well-insight/ui'
+import { useContextMenu, WdContextMenu } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiContextMenu } from '@well-insight/ui'
+import { WdContextMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -39,12 +39,12 @@ function onContext(event: MouseEvent) {
 
 <template>
   <div
-    style="border: 1px dashed var(--wi-color-border); padding: 2rem; border-radius: var(--wi-radius-md)"
+    style="border: 1px dashed var(--wd-color-border); padding: 2rem; border-radius: var(--wd-radius-md)"
     @contextmenu.prevent="onContext"
   >
     右键此处打开菜单
   </div>
-  <WiContextMenu
+  <WdContextMenu
     ref="menu"
     v-model="visible"
     v-model:position="position"
@@ -57,7 +57,7 @@ function onContext(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, WiContextMenu } from '@well-insight/ui'
+import { useContextMenu, WdContextMenu } from '@wex-design/ui'
 
 const menu = useContextMenu()
 const model = [
@@ -68,12 +68,12 @@ const model = [
 
 <template>
   <div
-    style="border: 1px dashed var(--wi-color-border); padding: 2rem; border-radius: var(--wi-radius-md)"
+    style="border: 1px dashed var(--wd-color-border); padding: 2rem; border-radius: var(--wd-radius-md)"
     @contextmenu="menu.show"
   >
     右键此处（composable）
   </div>
-  <WiContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
+  <WdContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
 </template>
 ```
 

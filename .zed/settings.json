@@ -10,9 +10,9 @@
       "command": "npx",
       "args": ["-y", "@primevue/mcp"]
     },
-    "well-insight-ui": {
+    "wex-design-ui": {
       "command": "node",
-      "args": ["packages/ui-mcp/bin/well-insight-ui-mcp.js"]
+      "args": ["packages/ui-mcp/bin/wex-design-ui-mcp.js"]
     }
   },
   "format_on_save": "on"

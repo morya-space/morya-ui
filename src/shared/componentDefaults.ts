@@ -1,42 +1,42 @@
-import type { WiGapSize } from './gap'
-import type { WiInputVariant, WiSizeInput } from './types'
+import type { WdGapSize } from './gap'
+import type { WdInputVariant, WdSizeInput } from './types'
 
-export type WiShowPasswordOn = 'click' | 'mousedown'
+export type WdShowPasswordOn = 'click' | 'mousedown'
 
-export type WiTextareaAutosize = boolean | { minRows?: number; maxRows?: number }
+export type WdTextareaAutosize = boolean | { minRows?: number; maxRows?: number }
 
 /**
- * Per-component default props, keyed by unprefixed name (`Input`) or `Wi*` alias.
+ * Per-component default props, keyed by unprefixed name (`Input`) or `Wd*` alias.
  * Only props that a component actually reads from config are listed; extra keys are ignored.
  */
-export interface WiComponentDefaultMap {
+export interface WdComponentDefaultMap {
   Input?: {
-    size?: WiSizeInput
-    variant?: WiInputVariant
+    size?: WdSizeInput
+    variant?: WdInputVariant
     fluid?: boolean
     clearable?: boolean
     showCount?: boolean
   }
   InputPassword?: {
-    size?: WiSizeInput
-    variant?: WiInputVariant
+    size?: WdSizeInput
+    variant?: WdInputVariant
     fluid?: boolean
     clearable?: boolean
     showCount?: boolean
     toggleMask?: boolean
-    showPasswordOn?: WiShowPasswordOn
+    showPasswordOn?: WdShowPasswordOn
   }
   Textarea?: {
-    size?: WiSizeInput
-    variant?: WiInputVariant
+    size?: WdSizeInput
+    variant?: WdInputVariant
     fluid?: boolean
     clearable?: boolean
     showCount?: boolean
     rows?: number
-    autosize?: WiTextareaAutosize
+    autosize?: WdTextareaAutosize
   }
   Select?: {
-    size?: WiSizeInput
+    size?: WdSizeInput
     fluid?: boolean
     /** @deprecated Prefer `clearable`. */
     showClear?: boolean
@@ -47,26 +47,26 @@ export interface WiComponentDefaultMap {
     remote?: boolean
   }
   Button?: {
-    size?: WiSizeInput
+    size?: WdSizeInput
   }
   Space?: {
-    size?: WiGapSize
+    size?: WdGapSize
   }
   Flex?: {
-    size?: WiGapSize
+    size?: WdGapSize
   }
-  InputNumber?: { size?: WiSizeInput }
-  DatePicker?: { size?: WiSizeInput }
-  Table?: { size?: WiSizeInput }
-  AutoComplete?: { size?: WiSizeInput }
-  CascadeSelect?: { size?: WiSizeInput; fluid?: boolean; clearable?: boolean }
-  TreeSelect?: { size?: WiSizeInput; clearable?: boolean }
-  SplitButton?: { size?: WiSizeInput }
-  SelectButton?: { size?: WiSizeInput }
-  ToggleButton?: { size?: WiSizeInput }
+  InputNumber?: { size?: WdSizeInput }
+  DatePicker?: { size?: WdSizeInput }
+  Table?: { size?: WdSizeInput }
+  AutoComplete?: { size?: WdSizeInput }
+  CascadeSelect?: { size?: WdSizeInput; fluid?: boolean; clearable?: boolean }
+  TreeSelect?: { size?: WdSizeInput; clearable?: boolean }
+  SplitButton?: { size?: WdSizeInput }
+  SelectButton?: { size?: WdSizeInput }
+  ToggleButton?: { size?: WdSizeInput }
 }
 
-export type WiComponentDefaults = WiComponentDefaultMap & {
+export type WdComponentDefaults = WdComponentDefaultMap & {
   [name: string]: Record<string, unknown> | undefined
 }
 
@@ -75,17 +75,17 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
 }
 
 export function normalizeComponentDefaultName(name: string): string {
-  return name.startsWith('Wi') ? name.slice(2) : name
+  return name.startsWith('Wd') ? name.slice(2) : name
 }
 
 export function getComponentDefaults(
-  defaults: WiComponentDefaults | undefined,
+  defaults: WdComponentDefaults | undefined,
   name: string,
 ): Record<string, unknown> {
   if (!defaults) return {}
   const base = normalizeComponentDefaultName(name)
   const fromBase = defaults[base]
-  const fromPrefixed = defaults[`Wi${base}`]
+  const fromPrefixed = defaults[`Wd${base}`]
   return {
     ...(isPlainObject(fromBase) ? fromBase : {}),
     ...(isPlainObject(fromPrefixed) ? fromPrefixed : {}),
@@ -93,7 +93,7 @@ export function getComponentDefaults(
 }
 
 export function getComponentDefault<T>(
-  defaults: WiComponentDefaults | undefined,
+  defaults: WdComponentDefaults | undefined,
   name: string,
   key: string,
 ): T | undefined {
@@ -102,9 +102,9 @@ export function getComponentDefault<T>(
 
 /** Deep-merge per component; child props win. */
 export function mergeComponentDefaults(
-  parent?: WiComponentDefaults,
-  child?: WiComponentDefaults,
-): WiComponentDefaults | undefined {
+  parent?: WdComponentDefaults,
+  child?: WdComponentDefaults,
+): WdComponentDefaults | undefined {
   if (!parent && !child) return undefined
   if (!parent) return child
   if (!child) return parent
@@ -119,5 +119,5 @@ export function mergeComponentDefaults(
       result[key] = childValue ?? parentValue
     }
   }
-  return result as WiComponentDefaults
+  return result as WdComponentDefaults
 }

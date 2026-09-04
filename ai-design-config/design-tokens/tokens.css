@@ -1,55 +1,55 @@
 /**
- * Well Insight design tokens (compiled view for AI / static tooling).
- * Runtime source of truth: @well-insight/ui/styles.css
- * Do not hand-edit hex values in business code — use --wi-* variables.
+ * Wex Design design tokens (compiled view for AI / static tooling).
+ * Runtime source of truth: @wex-design/ui/styles.css
+ * Do not hand-edit hex values in business code — use --wd-* variables.
  */
 :root {
-    --wi-color-primary: #2563eb;
-    --wi-color-primary-hover: #1d4ed8;
-    --wi-color-surface: #ffffff;
-    --wi-color-text: #0f172a;
-    --wi-color-text-muted: #64748b;
-    --wi-color-border: #e2e8f0;
-    --wi-color-focus-ring: #2563eb;
-    --wi-color-success: #159570;
-    --wi-color-info: #2563eb;
-    --wi-color-warning: #d97706;
-    --wi-color-help: #9333ea;
-    --wi-color-danger: #dc2626;
-    --wi-color-contrast: #0f172a;
-    --wi-color-contrast-fg: #ffffff;
-    --wi-overlay-scrim: rgb(15 23 42 / 0.55);
+    --wd-color-primary: #2563eb;
+    --wd-color-primary-hover: #1d4ed8;
+    --wd-color-surface: #ffffff;
+    --wd-color-text: #0f172a;
+    --wd-color-text-muted: #64748b;
+    --wd-color-border: #e2e8f0;
+    --wd-color-focus-ring: #2563eb;
+    --wd-color-success: #159570;
+    --wd-color-info: #2563eb;
+    --wd-color-warning: #d97706;
+    --wd-color-help: #9333ea;
+    --wd-color-danger: #dc2626;
+    --wd-color-contrast: #0f172a;
+    --wd-color-contrast-fg: #ffffff;
+    --wd-overlay-scrim: rgb(15 23 42 / 0.55);
 
-    --wi-control-height-small: 28px;
-    --wi-control-height-medium: 34px;
-    --wi-control-height-large: 40px;
-    --wi-radius-control: 3px;
-    --wi-space-1: 0.25rem;
-    --wi-space-2: 0.5rem;
-    --wi-space-3: 0.75rem;
-    --wi-space-4: 1rem;
-    --wi-space-6: 1.5rem;
-    --wi-space-8: 2rem;
-    --wi-radius-sm: 0.25rem;
-    --wi-radius-md: 0.5rem;
-    --wi-radius-lg: 0.75rem;
-    --wi-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
-    --wi-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
-    --wi-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
-    --wi-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-    --wi-motion-fast: 150ms;
-    --wi-motion-normal: 250ms;
-    --wi-motion-ease: cubic-bezier(0.2, 0, 0, 1);
-    --wi-z-base: 1000;
+    --wd-control-height-small: 28px;
+    --wd-control-height-medium: 34px;
+    --wd-control-height-large: 40px;
+    --wd-radius-control: 3px;
+    --wd-space-1: 0.25rem;
+    --wd-space-2: 0.5rem;
+    --wd-space-3: 0.75rem;
+    --wd-space-4: 1rem;
+    --wd-space-6: 1.5rem;
+    --wd-space-8: 2rem;
+    --wd-radius-sm: 0.25rem;
+    --wd-radius-md: 0.5rem;
+    --wd-radius-lg: 0.75rem;
+    --wd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
+    --wd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
+    --wd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --wd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --wd-motion-fast: 150ms;
+    --wd-motion-normal: 250ms;
+    --wd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --wd-z-base: 1000;
 }
 
 [data-theme="dark"] {
-    --wi-color-primary: #60a5fa;
-    --wi-color-primary-hover: #93c5fd;
-    --wi-color-surface: #0f172a;
-    --wi-color-text: #f8fafc;
-    --wi-color-text-muted: #94a3b8;
-    --wi-color-border: #334155;
-    --wi-color-danger: #fca5a5;
-    --wi-overlay-scrim: rgb(2 6 23 / 0.72);
+    --wd-color-primary: #60a5fa;
+    --wd-color-primary-hover: #93c5fd;
+    --wd-color-surface: #0f172a;
+    --wd-color-text: #f8fafc;
+    --wd-color-text-muted: #94a3b8;
+    --wd-color-border: #334155;
+    --wd-color-danger: #fca5a5;
+    --wd-overlay-scrim: rgb(2 6 23 / 0.72);
 }

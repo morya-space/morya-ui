@@ -11,23 +11,23 @@ Chip displays short tagged information, with optional icon/image and a remove bu
 ## Import
 
 ```ts
-import { WiChip } from '@well-insight/ui'
+import { WdChip } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiChip } from '@well-insight/ui'
+import { WdChip } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiChip label="Basic" />
-    <WiChip label="With Icon" icon="check" />
-    <WiChip label="Removable" removable />
-    <WiChip label="Success" severity="success" size="small" />
-    <WiChip label="Disabled" removable disabled />
+    <WdChip label="Basic" />
+    <WdChip label="With Icon" icon="check" />
+    <WdChip label="Removable" removable />
+    <WdChip label="Success" severity="success" size="small" />
+    <WdChip label="Disabled" removable disabled />
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ import { WiChip } from '@well-insight/ui'
 | `image` | `string` | — | Leading image URL (takes precedence over icon). |
 | `removable` | `boolean` | `false` | Show × remove button. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
-| `severity` | `WiTagSeverity \| 'warning'` | — | Semantic color. |
+| `severity` | `WdTagSeverity \| 'warning'` | — | Semantic color. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 
 ## Events

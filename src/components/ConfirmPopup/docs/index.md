@@ -11,14 +11,14 @@ description: 锚定在目标旁的确认气泡。
 ## 引入
 
 ```ts
-import { WiConfirmPopup } from '@well-insight/ui'
+import { WdConfirmPopup } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfirmPopup } from '@well-insight/ui'
+import { WdButton, WdConfirmPopup } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,8 +31,8 @@ function ask(event: MouseEvent) {
 </script>
 
 <template>
-  <WiButton label="删除" severity="danger" @click="ask" />
-  <WiConfirmPopup v-model="open" :target="target" message="确认删除？" icon="info" placement="top" />
+  <WdButton label="删除" severity="danger" @click="ask" />
+  <WdConfirmPopup v-model="open" :target="target" message="确认删除？" icon="info" placement="top" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ function ask(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfirmPopup } from '@well-insight/ui'
+import { WdButton, WdConfirmPopup } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -59,8 +59,8 @@ async function beforeAccept() {
 </script>
 
 <template>
-  <WiButton label="带拦截" @click="ask" />
-  <WiConfirmPopup v-model="open" :target="target" message="继续？" :before-accept="beforeAccept" />
+  <WdButton label="带拦截" @click="ask" />
+  <WdConfirmPopup v-model="open" :target="target" message="继续？" :before-accept="beforeAccept" />
 </template>
 ```
 

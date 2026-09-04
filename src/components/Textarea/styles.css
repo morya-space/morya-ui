@@ -1,96 +1,96 @@
-.wi-textarea {
-    --wi-textarea-min-height: 6rem;
-    --wi-textarea-min-height-small: 4.5rem;
-    --wi-textarea-min-height-large: 7.5rem;
-    font-size: var(--wi-control-font-medium);
+.wd-textarea {
+    --wd-textarea-min-height: 6rem;
+    --wd-textarea-min-height-small: 4.5rem;
+    --wd-textarea-min-height-large: 7.5rem;
+    font-size: var(--wd-control-font-medium);
     line-height: 1.5;
-    min-height: var(--wi-textarea-min-height);
-    padding: var(--wi-space-3) var(--wi-control-padding-x-medium);
+    min-height: var(--wd-textarea-min-height);
+    padding: var(--wd-space-3) var(--wd-control-padding-x-medium);
 }
 
-.wi-textarea--filled {
+.wd-textarea--filled {
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 12%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 12%,
+        var(--wd-color-surface)
     );
     border-color: transparent;
 }
 
-.wi-textarea--fluid {
+.wd-textarea--fluid {
     width: 100%;
 }
 
-.wi-textarea--small,
-.wi-textarea--sm {
-    font-size: var(--wi-control-font-small);
-    min-height: var(--wi-textarea-min-height-small);
-    padding: var(--wi-space-2) var(--wi-control-padding-x-small);
+.wd-textarea--small,
+.wd-textarea--sm {
+    font-size: var(--wd-control-font-small);
+    min-height: var(--wd-textarea-min-height-small);
+    padding: var(--wd-space-2) var(--wd-control-padding-x-small);
 }
 
-.wi-textarea--normal {
-    font-size: var(--wi-control-font-medium);
-    min-height: var(--wi-textarea-min-height);
+.wd-textarea--normal {
+    font-size: var(--wd-control-font-medium);
+    min-height: var(--wd-textarea-min-height);
 }
 
-.wi-textarea--large,
-.wi-textarea--lg {
-    font-size: var(--wi-control-font-large);
-    min-height: var(--wi-textarea-min-height-large);
-    padding: var(--wi-space-4) var(--wi-control-padding-x-large);
+.wd-textarea--large,
+.wd-textarea--lg {
+    font-size: var(--wd-control-font-large);
+    min-height: var(--wd-textarea-min-height-large);
+    padding: var(--wd-space-4) var(--wd-control-padding-x-large);
 }
 
-.wi-textarea--auto-resize {
+.wd-textarea--auto-resize {
     overflow: hidden;
 }
 
-.wi-textarea-field__control {
+.wd-textarea-field__control {
     position: relative;
 }
 
-.wi-textarea__clear {
+.wd-textarea__clear {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-sm);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-sm);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: flex;
-    font-size: var(--wi-font-size-lg);
-    height: var(--wi-control-affix-size);
+    font-size: var(--wd-font-size-lg);
+    height: var(--wd-control-affix-size);
     justify-content: center;
     padding: 0;
     position: absolute;
-    right: var(--wi-space-1);
-    top: var(--wi-space-2);
-    width: var(--wi-control-affix-size);
+    right: var(--wd-space-1);
+    top: var(--wd-space-2);
+    width: var(--wd-control-affix-size);
     z-index: 1;
 }
 
-.wi-textarea__clear:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-textarea__clear:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-textarea__clear:disabled {
+.wd-textarea__clear:disabled {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-textarea--invalid {
-    border-color: var(--wi-color-danger);
+.wd-textarea--invalid {
+    border-color: var(--wd-color-danger);
 }
 
-.wi-textarea:focus {
+.wd-textarea:focus {
     outline: none;
 }
 
-.wi-textarea:hover:not(:disabled):not(:focus) {
-    border-color: var(--wi-color-primary-hover);
+.wd-textarea:hover:not(:disabled):not(:focus) {
+    border-color: var(--wd-color-primary-hover);
 }
 
-.wi-textarea:focus-visible {
-    border-color: var(--wi-color-primary-hover);
-    box-shadow: var(--wi-focus-shadow);
+.wd-textarea:focus-visible {
+    border-color: var(--wd-color-primary-hover);
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }

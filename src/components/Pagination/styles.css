@@ -1,86 +1,86 @@
-.wi-pagination {
-    --wi-pagination-simple-width: 3.5rem;
-    --wi-pagination-jumper-width: 3.5rem;
+.wd-pagination {
+    --wd-pagination-simple-width: 3.5rem;
+    --wd-pagination-jumper-width: 3.5rem;
     align-items: center;
     display: flex;
-    font-family: var(--wi-font-sans);
-    gap: var(--wi-space-1);
+    font-family: var(--wd-font-sans);
+    gap: var(--wd-space-1);
 }
 
-.wi-pagination__button {
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-control);
-    color: var(--wi-color-text);
+.wd-pagination__button {
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-control);
+    color: var(--wd-color-text);
     cursor: pointer;
     font: inherit;
-    font-size: var(--wi-control-font-small);
-    min-height: var(--wi-control-height-small);
-    min-width: var(--wi-control-height-small);
-    padding: 0 var(--wi-control-padding-x-small);
+    font-size: var(--wd-control-font-small);
+    min-height: var(--wd-control-height-small);
+    min-width: var(--wd-control-height-small);
+    padding: 0 var(--wd-control-padding-x-small);
     transition:
-        background-color var(--wi-motion-fast) var(--wi-motion-ease),
-        border-color var(--wi-motion-fast) var(--wi-motion-ease),
-        box-shadow var(--wi-motion-fast) var(--wi-motion-ease);
+        background-color var(--wd-motion-fast) var(--wd-motion-ease),
+        border-color var(--wd-motion-fast) var(--wd-motion-ease),
+        box-shadow var(--wd-motion-fast) var(--wd-motion-ease);
 }
 
-.wi-pagination__button--active {
-    background: var(--wi-color-primary);
-    border-color: var(--wi-color-primary);
-    color: var(--wi-color-on-emphasis);
+.wd-pagination__button--active {
+    background: var(--wd-color-primary);
+    border-color: var(--wd-color-primary);
+    color: var(--wd-color-on-emphasis);
 }
 
-.wi-pagination__button:disabled {
+.wd-pagination__button:disabled {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-pagination__button:hover:not(:disabled):not(.wi-pagination__button--active) {
+.wd-pagination__button:hover:not(:disabled):not(.wd-pagination__button--active) {
     background: color-mix(
         in srgb,
-        var(--wi-color-primary) 10%,
-        var(--wi-color-surface)
+        var(--wd-color-primary) 10%,
+        var(--wd-color-surface)
     );
 }
 
-.wi-pagination__button:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-pagination__button:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-pagination--simple {
-    gap: var(--wi-space-2);
+.wd-pagination--simple {
+    gap: var(--wd-space-2);
 }
 
-.wi-pagination__simple {
-    color: var(--wi-color-text);
-    font-size: var(--wi-font-size-sm);
-    min-width: var(--wi-pagination-simple-width);
+.wd-pagination__simple {
+    color: var(--wd-color-text);
+    font-size: var(--wd-font-size-sm);
+    min-width: var(--wd-pagination-simple-width);
     text-align: center;
 }
 
-.wi-pagination__sizer,
-.wi-pagination__jumper {
+.wd-pagination__sizer,
+.wd-pagination__jumper {
     align-items: center;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     display: inline-flex;
-    font-size: var(--wi-font-size-sm);
-    gap: var(--wi-space-1);
-    margin-left: var(--wi-space-2);
+    font-size: var(--wd-font-size-sm);
+    gap: var(--wd-space-1);
+    margin-left: var(--wd-space-2);
 }
 
-.wi-pagination__select,
-.wi-pagination__input {
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-control);
-    color: var(--wi-color-text);
+.wd-pagination__select,
+.wd-pagination__input {
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-control);
+    color: var(--wd-color-text);
     font: inherit;
-    font-size: var(--wi-font-size-sm);
-    height: var(--wi-control-height-small);
-    padding: 0 var(--wi-space-2);
+    font-size: var(--wd-font-size-sm);
+    height: var(--wd-control-height-small);
+    padding: 0 var(--wd-space-2);
 }
 
-.wi-pagination__input {
-    width: var(--wi-pagination-jumper-width);
+.wd-pagination__input {
+    width: var(--wd-pagination-jumper-width);
 }

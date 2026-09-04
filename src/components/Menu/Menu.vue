@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MenuItem, MenuProps } from './types'
 import { computed, nextTick, onBeforeUnmount, provide, reactive, ref, useSlots, watch } from 'vue'
-import { useWiConfig } from '../../shared/config'
+import { useWdConfig } from '../../shared/config'
 import {
   collectExpandableKeys,
   collectTopLevelKeys,
@@ -13,7 +13,7 @@ import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import { WI_MENU_KEY } from './context'
+import { WD_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
 
 const props = withDefaults(defineProps<MenuProps>(), {
@@ -42,7 +42,7 @@ const emit = defineEmits<{
 }>()
 
 const slots = useSlots()
-const config = useWiConfig()
+const config = useWdConfig()
 const root = ref<HTMLElement | null>(null)
 const triggerEl = ref<HTMLElement | null>(null)
 const popupStyle = ref<Record<string, string>>({})
@@ -196,7 +196,7 @@ function paddingStyle(depth: number) {
     const px = paddingLeft(depth)
     return px != null ? { paddingInlineStart: `${px}px` } : undefined
   }
-  return { paddingInlineStart: `calc(var(--wi-menu-root-indent) + ${depth} * var(--wi-menu-indent))` }
+  return { paddingInlineStart: `calc(var(--wd-menu-root-indent) + ${depth} * var(--wd-menu-indent))` }
 }
 
 function activate(item: MenuItem) {
@@ -278,9 +278,9 @@ function tabindexForKey(key: string): 0 | -1 {
 
 function focusEntryByKey(key: string | null) {
   if (key == null || !root.value) return
-  const nodes = root.value.querySelectorAll<HTMLElement>('[data-wi-menu-key]')
+  const nodes = root.value.querySelectorAll<HTMLElement>('[data-wd-menu-key]')
   for (const node of nodes) {
-    if (node.dataset.wiMenuKey === key) {
+    if (node.dataset.wdMenuKey === key) {
       node.focus({ preventScroll: true })
       return
     }
@@ -329,7 +329,7 @@ watch(keyboard.activeIndex, () => {
   void nextTick(() => focusEntryByKey(activeKey.value))
 })
 
-provide(WI_MENU_KEY, {
+provide(WD_MENU_KEY, {
   collapsed: computed(() => props.collapsed),
   selectedKey: selectedKeyRef,
   expandedKeys: expandedKeysRef,
@@ -386,20 +386,20 @@ onBeforeUnmount(() => {
 })
 
 const menuClass = computed(() => [
-  'wi-menu',
+  'wd-menu',
   {
-    'wi-menu--popup': props.popup,
-    'wi-menu--teleported': teleported.value,
-    'wi-menu--collapsed': props.collapsed,
-    'wi-menu--embedded': embedded.value,
-    'wi-menu--horizontal': props.mode === 'horizontal',
-    'wi-menu--inverted': props.inverted,
+    'wd-menu--popup': props.popup,
+    'wd-menu--teleported': teleported.value,
+    'wd-menu--collapsed': props.collapsed,
+    'wd-menu--embedded': embedded.value,
+    'wd-menu--horizontal': props.mode === 'horizontal',
+    'wd-menu--inverted': props.inverted,
   },
 ])
 
 const menuStyle = computed(() => ({
-  '--wi-menu-indent': `${props.indent / 16}rem`,
-  '--wi-menu-root-indent': `${props.rootIndent / 16}rem`,
+  '--wd-menu-indent': `${props.indent / 16}rem`,
+  '--wd-menu-root-indent': `${props.rootIndent / 16}rem`,
 }))
 
 const popupPanelStyle = computed(() =>
@@ -418,12 +418,12 @@ const popupPanelStyle = computed(() =>
   >
     <MenuNodes :items="model" :depth="0" prefix="item" />
   </div>
-  <div v-else-if="hasTriggerSlot" class="wi-menu-popup">
-    <div ref="triggerEl" class="wi-menu-popup__anchor">
+  <div v-else-if="hasTriggerSlot" class="wd-menu-popup">
+    <div ref="triggerEl" class="wd-menu-popup__anchor">
       <slot />
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wi-scale-fade">
+      <Transition name="wd-scale-fade">
         <div
           v-if="modelValue"
           ref="root"
@@ -438,7 +438,7 @@ const popupPanelStyle = computed(() =>
     </Teleport>
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wi-scale-fade">
+    <Transition name="wd-scale-fade">
       <div
         v-if="modelValue"
         ref="root"

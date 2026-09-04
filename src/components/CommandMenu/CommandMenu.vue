@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { CommandMenuItem, CommandMenuProps } from './types'
 import { computed, nextTick, ref, toRef, watch } from 'vue'
-import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { useWdLocale } from '../../locale'
+import { useWdConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
   model: () => [],
@@ -18,8 +18,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const searchPlaceholder = computed(() => props.placeholder ?? locale.value.searchCommands)
 const query = ref('')
 const panelRef = ref<HTMLElement | null>(null)
@@ -93,11 +93,11 @@ watch(filtered, () => {
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wi-fade">
-      <div v-if="modelValue" class="wi-commandmenu-backdrop" @click.self="close">
+    <Transition name="wd-fade">
+      <div v-if="modelValue" class="wd-commandmenu-backdrop" @click.self="close">
         <div
           ref="panelRef"
-          class="wi-commandmenu"
+          class="wd-commandmenu"
           role="dialog"
           aria-modal="true"
           :aria-label="locale.commandPalette"
@@ -107,31 +107,31 @@ watch(filtered, () => {
           <input
             ref="inputRef"
             v-model="query"
-            class="wi-commandmenu__input"
+            class="wd-commandmenu__input"
             type="search"
             :placeholder="searchPlaceholder"
             :aria-label="locale.searchCommands"
           >
-          <ul class="wi-commandmenu__list" role="listbox">
+          <ul class="wd-commandmenu__list" role="listbox">
             <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
               <button
                 type="button"
-                class="wi-commandmenu__item"
+                class="wd-commandmenu__item"
                 role="option"
-                :class="{ 'wi-commandmenu__item--active': index === activeIndex }"
+                :class="{ 'wd-commandmenu__item--active': index === activeIndex }"
                 :aria-selected="index === activeIndex"
                 :disabled="item.disabled"
                 @click="activate(item)"
                 @mouseenter="activeIndex = index"
               >
-                <span v-if="iconOf(item)" class="wi-commandmenu__icon" aria-hidden="true">
-                  <WiIcon :name="iconOf(item)!" size="sm" />
+                <span v-if="iconOf(item)" class="wd-commandmenu__icon" aria-hidden="true">
+                  <WdIcon :name="iconOf(item)!" size="sm" />
                 </span>
-                <span class="wi-commandmenu__label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="wi-commandmenu__shortcut">{{ item.shortcut }}</span>
+                <span class="wd-commandmenu__label">{{ item.label }}</span>
+                <span v-if="item.shortcut" class="wd-commandmenu__shortcut">{{ item.shortcut }}</span>
               </button>
             </li>
-            <li v-if="!filtered.length" class="wi-commandmenu__empty">
+            <li v-if="!filtered.length" class="wd-commandmenu__empty">
               {{ locale.noMatch }}
             </li>
           </ul>

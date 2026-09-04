@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { TreeSelectNode } from './types'
 import type { VNode } from 'vue'
-import { useWiLocale } from '../../locale'
-import WiCheckbox from '../Checkbox/Checkbox.vue'
-import WiIcon from '../Icon/Icon.vue'
+import { useWdLocale } from '../../locale'
+import WdCheckbox from '../Checkbox/Checkbox.vue'
+import WdIcon from '../Icon/Icon.vue'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 defineProps<{
@@ -23,13 +23,13 @@ defineEmits<{
   (event: 'check', node: TreeSelectNode): void
 }>()
 
-const locale = useWiLocale()
+const locale = useWdLocale()
 </script>
 
 <template>
   <li
-    class="wi-treeselect__node"
-    :class="{ 'wi-treeselect__node--active': node.key === activeKey }"
+    class="wd-treeselect__node"
+    :class="{ 'wd-treeselect__node--active': node.key === activeKey }"
     role="treeitem"
     :aria-expanded="node.children?.length ? Boolean(expanded[node.key]) : undefined"
     :aria-level="depth + 1"
@@ -37,21 +37,21 @@ const locale = useWiLocale()
     :aria-selected="showCheckbox ? undefined : selectedKeys.includes(node.key)"
     :aria-checked="showCheckbox ? Boolean(checkedKeys[node.key]) : undefined"
   >
-    <div class="wi-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
+    <div class="wd-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
       <button
         v-if="node.children?.length"
         type="button"
-        class="wi-treeselect__toggler"
+        class="wd-treeselect__toggler"
         tabindex="-1"
         :aria-label="expanded[node.key] ? locale.collapse : locale.expand"
         @click.stop="$emit('toggle', node.key)"
       >
-        <WiIcon :name="expanded[node.key] ? 'chevron-down' : 'chevron-right'" size="sm" />
+        <WdIcon :name="expanded[node.key] ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="wi-treeselect__toggler-spacer" />
-      <WiCheckbox
+      <span v-else class="wd-treeselect__toggler-spacer" />
+      <WdCheckbox
         v-if="showCheckbox"
-        class="wi-treeselect__checkbox"
+        class="wd-treeselect__checkbox"
         tabindex="-1"
         :model-value="Boolean(checkedKeys[node.key])"
         :disabled="node.disabled"
@@ -60,8 +60,8 @@ const locale = useWiLocale()
       />
       <button
         type="button"
-        class="wi-treeselect__option"
-        :class="{ 'wi-treeselect__option--selected': selectedKeys.includes(node.key) }"
+        class="wd-treeselect__option"
+        :class="{ 'wd-treeselect__option--selected': selectedKeys.includes(node.key) }"
         :disabled="node.disabled"
         :tabindex="node.key === activeKey ? 0 : -1"
         @click="$emit('select', node)"

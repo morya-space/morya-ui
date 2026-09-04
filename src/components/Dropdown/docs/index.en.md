@@ -8,21 +8,21 @@ description: Action menu overlay (not a form select). Unlike Select, it is used 
 
 Action menu overlay. Opens a set of actions from a trigger.
 
-**Difference from Select:** `WiDropdown` is a menu overlay; for form option selection, use `WiSelect`.
+**Difference from Select:** `WdDropdown` is a menu overlay; for form option selection, use `WdSelect`.
 
 Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), nested `items`, and `trigger: 'hover'` with `showDelay` / `hideDelay`. Keyboard highlight still covers top-level leaves only.
 
 ## Import
 
 ```ts
-import { WiButton, WiDropdown } from '@well-insight/ui'
+import { WdButton, WdDropdown } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiDropdown } from '@well-insight/ui'
+import { WdButton, WdDropdown } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -39,11 +39,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <WiDropdown v-model="open" :items="items" @select="onSelect">
+  <WdDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <WiButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <WdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </WiDropdown>
+  </WdDropdown>
 </template>
 ```
 
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiDropdown } from '@well-insight/ui'
+import { WdButton, WdDropdown } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -63,11 +63,11 @@ const items = [
 </script>
 
 <template>
-  <WiDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
+  <WdDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
     <template #trigger>
-      <WiButton label="Hover to open" severity="secondary" />
+      <WdButton label="Hover to open" severity="secondary" />
     </template>
-  </WiDropdown>
+  </WdDropdown>
 </template>
 ```
 

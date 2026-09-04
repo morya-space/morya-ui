@@ -11,22 +11,22 @@ Modal dialog used when the user must explicitly confirm an action.
 ## Import
 
 ```ts
-import { WiButton, WiConfirmDialog } from '@well-insight/ui'
+import { WdButton, WdConfirmDialog } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfirmDialog } from '@well-insight/ui'
+import { WdButton, WdConfirmDialog } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <WiButton label="Delete" severity="danger" @click="visible = true" />
-  <WiConfirmDialog
+  <WdButton label="Delete" severity="danger" @click="visible = true" />
+  <WdConfirmDialog
     v-model="visible"
     header="Confirm delete"
     message="Are you sure you want to delete this item? This action cannot be undone."

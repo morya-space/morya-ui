@@ -1,89 +1,89 @@
 /* —— Form: SelectButton —— */
-.wi-selectbutton {
-    --wi-button-padding-x-small: var(--wi-control-padding-x-small);
-    --wi-button-padding-x-medium: calc(
-        var(--wi-control-padding-x-medium) + var(--wi-space-1)
+.wd-selectbutton {
+    --wd-button-padding-x-small: var(--wd-control-padding-x-small);
+    --wd-button-padding-x-medium: calc(
+        var(--wd-control-padding-x-medium) + var(--wd-space-1)
     );
-    --wi-button-padding-x-large: calc(
-        var(--wi-control-padding-x-large) + var(--wi-space-1)
+    --wd-button-padding-x-large: calc(
+        var(--wd-control-padding-x-large) + var(--wd-space-1)
     );
     display: inline-flex;
     flex-wrap: wrap;
     gap: 0;
 }
 
-.wi-selectbutton__button {
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    color: var(--wi-color-text);
+.wd-selectbutton__button {
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    color: var(--wd-color-text);
     cursor: pointer;
     font: inherit;
-    font-size: var(--wi-control-font-medium);
+    font-size: var(--wd-control-font-medium);
     font-weight: 600;
     margin-left: -1px;
-    min-height: var(--wi-control-height-medium);
-    padding: 0 var(--wi-button-padding-x-medium);
+    min-height: var(--wd-control-height-medium);
+    padding: 0 var(--wd-button-padding-x-medium);
     position: relative;
 }
 
-.wi-selectbutton__button:first-child {
-    border-radius: var(--wi-radius-control) 0 0 var(--wi-radius-control);
+.wd-selectbutton__button:first-child {
+    border-radius: var(--wd-radius-control) 0 0 var(--wd-radius-control);
     margin-left: 0;
 }
 
-.wi-selectbutton__button:last-child {
-    border-radius: 0 var(--wi-radius-control) var(--wi-radius-control) 0;
+.wd-selectbutton__button:last-child {
+    border-radius: 0 var(--wd-radius-control) var(--wd-radius-control) 0;
 }
 
-.wi-selectbutton__button:only-child {
-    border-radius: var(--wi-radius-control);
+.wd-selectbutton__button:only-child {
+    border-radius: var(--wd-radius-control);
 }
 
-.wi-selectbutton__button--active {
-    background: var(--wi-color-primary);
-    border-color: var(--wi-color-primary);
-    color: var(--wi-color-on-emphasis);
+.wd-selectbutton__button--active {
+    background: var(--wd-color-primary);
+    border-color: var(--wd-color-primary);
+    color: var(--wd-color-on-emphasis);
     z-index: 1;
 }
 
-.wi-selectbutton__button:hover:not(:disabled):not(
-        .wi-selectbutton__button--active
+.wd-selectbutton__button:hover:not(:disabled):not(
+        .wd-selectbutton__button--active
     ) {
     background: color-mix(
         in srgb,
-        var(--wi-color-text-muted) 12%,
-        var(--wi-color-surface)
+        var(--wd-color-text-muted) 12%,
+        var(--wd-color-surface)
     );
 }
 
-.wi-selectbutton__button:disabled {
+.wd-selectbutton__button:disabled {
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-selectbutton--small .wi-selectbutton__button {
-    min-height: var(--wi-control-height-small);
-    font-size: var(--wi-control-font-small);
-    padding: 0 var(--wi-button-padding-x-small);
+.wd-selectbutton--small .wd-selectbutton__button {
+    min-height: var(--wd-control-height-small);
+    font-size: var(--wd-control-font-small);
+    padding: 0 var(--wd-button-padding-x-small);
 }
 
-.wi-selectbutton--large .wi-selectbutton__button {
-    min-height: var(--wi-control-height-large);
-    font-size: var(--wi-control-font-large);
-    padding: 0 var(--wi-button-padding-x-large);
+.wd-selectbutton--large .wd-selectbutton__button {
+    min-height: var(--wd-control-height-large);
+    font-size: var(--wd-control-font-large);
+    padding: 0 var(--wd-button-padding-x-large);
 }
 
-.wi-selectbutton--invalid .wi-selectbutton__button {
-    border-color: var(--wi-color-danger);
+.wd-selectbutton--invalid .wd-selectbutton__button {
+    border-color: var(--wd-color-danger);
 }
 
-.wi-selectbutton--disabled {
-    opacity: var(--wi-opacity-disabled);
+.wd-selectbutton--disabled {
+    opacity: var(--wd-opacity-disabled);
     pointer-events: none;
 }
 
-.wi-selectbutton__button:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-selectbutton__button:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
     z-index: 2;
 }

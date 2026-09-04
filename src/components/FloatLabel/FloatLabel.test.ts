@@ -1,21 +1,21 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import WiFloatLabel from './FloatLabel.vue'
+import WdFloatLabel from './FloatLabel.vue'
 
-describe('wiFloatLabel', () => {
+describe('wdFloatLabel', () => {
   it('renders default slot and label prop', () => {
-    const wrapper = mount(WiFloatLabel, {
+    const wrapper = mount(WdFloatLabel, {
       props: { label: 'Email' },
       slots: { default: '<input placeholder=" " />' },
     })
-    expect(wrapper.classes()).toContain('wi-float-label')
+    expect(wrapper.classes()).toContain('wd-float-label')
     expect(wrapper.get('label').text()).toBe('Email')
     expect(wrapper.find('input').exists()).toBe(true)
   })
 
   it('supports label slot', () => {
-    const wrapper = mount(WiFloatLabel, {
+    const wrapper = mount(WdFloatLabel, {
       slots: {
         default: '<input placeholder=" " />',
         label: 'Name',
@@ -25,7 +25,7 @@ describe('wiFloatLabel', () => {
   })
 
   it('associates label with the slotted control', async () => {
-    const wrapper = mount(WiFloatLabel, {
+    const wrapper = mount(WdFloatLabel, {
       props: { label: 'Email' },
       slots: { default: '<input placeholder=" " />' },
       attachTo: document.body,

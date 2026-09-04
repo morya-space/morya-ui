@@ -1,3 +1,3 @@
 import './style'
-export { default as WiLabel } from './Label.vue'
+export { default as WdLabel } from './Label.vue'
 export type { LabelProps } from './types'

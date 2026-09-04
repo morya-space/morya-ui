@@ -11,22 +11,22 @@ Flexbox layout container. Prefer CSS `gap` for spacing between children.
 ## Import
 
 ```ts
-import { WiFlex } from '@well-insight/ui'
+import { WdFlex } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiFlex } from '@well-insight/ui'
+import { WdButton, WdFlex } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFlex>
-    <WiButton label="One" size="small" />
-    <WiButton label="Two" size="small" severity="secondary" />
-    <WiButton label="Three" size="small" severity="secondary" />
-  </WiFlex>
+  <WdFlex>
+    <WdButton label="One" size="small" />
+    <WdButton label="Two" size="small" severity="secondary" />
+    <WdButton label="Three" size="small" severity="secondary" />
+  </WdFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WiButton, WiFlex } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiFlex } from '@well-insight/ui'
+import { WdButton, WdFlex } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFlex vertical>
-    <WiButton label="Top" size="small" />
-    <WiButton label="Middle" size="small" severity="secondary" />
-    <WiButton label="Bottom" size="small" severity="secondary" />
-  </WiFlex>
+  <WdFlex vertical>
+    <WdButton label="Top" size="small" />
+    <WdButton label="Middle" size="small" severity="secondary" />
+    <WdButton label="Bottom" size="small" severity="secondary" />
+  </WdFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { WiButton, WiFlex } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiFlex, WiTag } from '@well-insight/ui'
+import { WdButton, WdFlex, WdTag } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <WiTag value="Tag" />
-    <WiButton label="Action" size="small" />
-  </WiFlex>
+  <WdFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <WdTag value="Tag" />
+    <WdButton label="Action" size="small" />
+  </WdFlex>
 </template>
 ```
 

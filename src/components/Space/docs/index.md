@@ -11,22 +11,22 @@ description: 在子元素之间自动加入一致间距的布局容器。
 ## 引入
 
 ```ts
-import { WiSpace } from '@well-insight/ui'
+import { WdSpace } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiSpace } from '@well-insight/ui'
+import { WdButton, WdSpace } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSpace>
-    <WiButton label="保存" size="small" />
-    <WiButton label="取消" size="small" severity="secondary" />
-    <WiButton label="重置" size="small" severity="secondary" />
-  </WiSpace>
+  <WdSpace>
+    <WdButton label="保存" size="small" />
+    <WdButton label="取消" size="small" severity="secondary" />
+    <WdButton label="重置" size="small" severity="secondary" />
+  </WdSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WiButton, WiSpace } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpace, WiTag } from '@well-insight/ui'
+import { WdSpace, WdTag } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSpace vertical>
-    <WiTag value="Alpha" />
-    <WiTag value="Bravo" />
-    <WiTag value="Charlie" />
-  </WiSpace>
+  <WdSpace vertical>
+    <WdTag value="Alpha" />
+    <WdTag value="Bravo" />
+    <WdTag value="Charlie" />
+  </WdSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { WiSpace, WiTag } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiSpace } from '@well-insight/ui'
+import { WdButton, WdSpace } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WiSpace size="small">
-      <WiButton label="S" size="small" />
-      <WiButton label="S" size="small" severity="secondary" />
-    </WiSpace>
-    <WiSpace :size="20">
-      <WiButton label="20px" size="small" />
-      <WiButton label="20px" size="small" severity="secondary" />
-    </WiSpace>
+    <WdSpace size="small">
+      <WdButton label="S" size="small" />
+      <WdButton label="S" size="small" severity="secondary" />
+    </WdSpace>
+    <WdSpace :size="20">
+      <WdButton label="20px" size="small" />
+      <WdButton label="20px" size="small" severity="secondary" />
+    </WdSpace>
   </div>
 </template>
 ```
 
-未传 `size` 时默认 `medium`。可用 `WiConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
+未传 `size` 时默认 `medium`。可用 `WdConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ import { WiButton, WiSpace } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSpace, WiTag } from '@well-insight/ui'
+import { WdSpace, WdTag } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiSpace :wrap-item="false" :size="8">
-    <WiTag value="Direct" />
-    <WiTag value="Children" />
-  </WiSpace>
+  <WdSpace :wrap-item="false" :size="8">
+    <WdTag value="Direct" />
+    <WdTag value="Children" />
+  </WdSpace>
 </template>
 ```
 

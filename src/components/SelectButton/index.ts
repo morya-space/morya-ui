@@ -1,5 +1,5 @@
 import './style'
-export { default as WiSelectButton } from './SelectButton.vue'
+export { default as WdSelectButton } from './SelectButton.vue'
 export type {
   SelectButtonEmits,
   SelectButtonOption,

@@ -1,35 +1,35 @@
 /* —— Overlay: ConfirmPopup —— */
-.wi-confirmpopup {
-    --wi-confirmpopup-width: 20rem;
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
-    box-shadow: var(--wi-shadow-md);
-    max-width: min(var(--wi-confirmpopup-width), calc(100vw - 2rem));
-    padding: var(--wi-space-3);
+.wd-confirmpopup {
+    --wd-confirmpopup-width: 20rem;
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
+    box-shadow: var(--wd-shadow-md);
+    max-width: min(var(--wd-confirmpopup-width), calc(100vw - 2rem));
+    padding: var(--wd-space-3);
     position: fixed;
-    z-index: var(--wi-z-popper);
+    z-index: var(--wd-z-popper);
 }
 
-.wi-confirmpopup--teleported {
-    z-index: var(--wi-z-dropdown);
+.wd-confirmpopup--teleported {
+    z-index: var(--wd-z-dropdown);
 }
 
-.wi-confirmpopup__message {
+.wd-confirmpopup__message {
     align-items: center;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     display: flex;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     line-height: 1.5;
-    margin-bottom: var(--wi-space-3);
+    margin-bottom: var(--wd-space-3);
 }
 
-.wi-confirmpopup__footer {
+.wd-confirmpopup__footer {
     display: flex;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     justify-content: flex-end;
 }
 
-.wi-confirmpopup__icon {
+.wd-confirmpopup__icon {
     flex-shrink: 0;
 }

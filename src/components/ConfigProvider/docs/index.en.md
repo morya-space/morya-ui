@@ -6,7 +6,7 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 # ConfigProvider
 
-Provide global defaults for the component tree via `WiConfigProvider` or `createWellInsight`. Local props take precedence over global config.
+Provide global defaults for the component tree via `WdConfigProvider` or `createWexDesign`. Local props take precedence over global config.
 
 ## Capabilities
 
@@ -24,7 +24,7 @@ Provide global defaults for the component tree via `WiConfigProvider` or `create
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfigProvider, WiInput, WiSelect } from '@well-insight/ui'
+import { WdButton, WdConfigProvider, WdInput, WdSelect } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -35,20 +35,20 @@ const options = [
 </script>
 
 <template>
-  <WiConfigProvider size="small">
+  <WdConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WiButton label="Inherit small" />
-      <WiInput placeholder="Inherit small" style="width:10rem" />
-      <WiSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
-      <WiButton label="Override to large" size="large" />
+      <WdButton label="Inherit small" />
+      <WdInput placeholder="Inherit small" style="width:10rem" />
+      <WdSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
+      <WdButton label="Override to large" size="large" />
     </div>
-  </WiConfigProvider>
+  </WdConfigProvider>
 </template>
 ```
 
 ## Component Defaults
 
-Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Wi*` aliases.
+Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Wd*` aliases.
 
 Precedence: **component props > `componentDefaults[component]` > global `size` / `inputVariant` > built-in defaults**.
 
@@ -56,25 +56,25 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfigProvider, WiInput, WiSpace } from '@well-insight/ui'
+import { WdButton, WdConfigProvider, WdInput, WdSpace } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const note = ref('Clearable')
 </script>
 
 <template>
-  <WiConfigProvider
+  <WdConfigProvider
     size="large"
     :component-defaults="{
       Input: { size: 'small', clearable: true },
       Space: { size: 16 },
     }"
   >
-    <WiSpace>
-      <WiButton label="Still large" />
-      <WiInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
-    </WiSpace>
-  </WiConfigProvider>
+    <WdSpace>
+      <WdButton label="Still large" />
+      <WdInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
+    </WdSpace>
+  </WdConfigProvider>
 </template>
 ```
 
@@ -82,23 +82,23 @@ const note = ref('Clearable')
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfigProvider, WiInput } from '@well-insight/ui'
+import { WdButton, WdConfigProvider, WdInput } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WiConfigProvider density="compact">
+    <WdConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WiButton label="compact" />
-        <WiInput placeholder="compact" style="width:10rem" />
+        <WdButton label="compact" />
+        <WdInput placeholder="compact" style="width:10rem" />
       </div>
-    </WiConfigProvider>
-    <WiConfigProvider density="spacious">
+    </WdConfigProvider>
+    <WdConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WiButton label="spacious" />
-        <WiInput placeholder="spacious" style="width:10rem" />
+        <WdButton label="spacious" />
+        <WdInput placeholder="spacious" style="width:10rem" />
       </div>
-    </WiConfigProvider>
+    </WdConfigProvider>
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ import { WiButton, WiConfigProvider, WiInput } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiConfigProvider, WiDialog, WiSelect } from '@well-insight/ui'
+import { WdButton, WdConfigProvider, WdDialog, WdSelect } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -119,35 +119,35 @@ const options = [
 </script>
 
 <template>
-  <WiConfigProvider input-variant="filled" append-to="body">
+  <WdConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WiSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
-      <WiButton label="Open dialog" @click="visible = true" />
+      <WdSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
+      <WdButton label="Open dialog" @click="visible = true" />
     </div>
-    <WiDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
+    <WdDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
       <p style="margin:0">
         Overlay mount target is provided by ConfigProvider.
       </p>
-    </WiDialog>
-  </WiConfigProvider>
+    </WdDialog>
+  </WdConfigProvider>
 </template>
 ```
 
 ## App-level plugin
 
 ```ts
-import WellInsight, { createWellInsight, enUS } from '@well-insight/ui'
+import WexDesign, { createWexDesign, enUS } from '@wex-design/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@well-insight/ui/styles.css'
+import '@wex-design/ui/styles.css'
 
 // Option A: default export
-createApp(App).use(WellInsight, { locale: enUS }).mount('#app')
+createApp(App).use(WexDesign, { locale: enUS }).mount('#app')
 
 // Option B: factory
 createApp(App)
   .use(
-    createWellInsight({
+    createWexDesign({
       appendTo: 'body',
       size: 'small',
       density: 'comfortable',
@@ -162,24 +162,24 @@ createApp(App)
   .mount('#app')
 ```
 
-By default **all components are registered globally** (use `<WiButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
+By default **all components are registered globally** (use `<WdButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
 
 ## Reading config
 
 ```ts
-import { useWiConfig } from '@well-insight/ui'
+import { useWdConfig } from '@wex-design/ui'
 
-const config = useWiConfig()
+const config = useWdConfig()
 ```
 
-Precedence: **component props > `WiConfigProvider` > `createWellInsight()` > built-in defaults**.
+Precedence: **component props > `WdConfigProvider` > `createWexDesign()` > built-in defaults**.
 
 ## Theme and motion
 
-Theme and motion APIs are also exported from `@well-insight/ui` and can be used alongside ConfigProvider:
+Theme and motion APIs are also exported from `@wex-design/ui` and can be used alongside ConfigProvider:
 
 ```ts
-import { useMotion, useTheme } from '@well-insight/ui'
+import { useMotion, useTheme } from '@wex-design/ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

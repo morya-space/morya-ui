@@ -4,7 +4,7 @@
   "components": [
     {
       "id": "Accordion",
-      "exportName": "WiAccordion",
+      "exportName": "WdAccordion",
       "examples": 8,
       "props": {
         "total": 4,
@@ -33,7 +33,7 @@
     },
     {
       "id": "AutoComplete",
-      "exportName": "WiAutoComplete",
+      "exportName": "WdAutoComplete",
       "examples": 8,
       "props": {
         "total": 16,
@@ -76,7 +76,7 @@
     },
     {
       "id": "Avatar",
-      "exportName": "WiAvatar",
+      "exportName": "WdAvatar",
       "examples": 6,
       "props": {
         "total": 6,
@@ -105,7 +105,7 @@
     },
     {
       "id": "Badge",
-      "exportName": "WiBadge",
+      "exportName": "WdBadge",
       "examples": 10,
       "props": {
         "total": 6,
@@ -132,7 +132,7 @@
     },
     {
       "id": "BlockUI",
-      "exportName": "WiBlockUI",
+      "exportName": "WdBlockUI",
       "examples": 4,
       "props": {
         "total": 1,
@@ -157,7 +157,7 @@
     },
     {
       "id": "Breadcrumb",
-      "exportName": "WiBreadcrumb",
+      "exportName": "WdBreadcrumb",
       "examples": 6,
       "props": {
         "total": 3,
@@ -185,7 +185,7 @@
     },
     {
       "id": "Button",
-      "exportName": "WiButton",
+      "exportName": "WdButton",
       "examples": 20,
       "props": {
         "total": 24,
@@ -220,7 +220,7 @@
     },
     {
       "id": "Card",
-      "exportName": "WiCard",
+      "exportName": "WdCard",
       "examples": 8,
       "props": {
         "total": 7,
@@ -249,7 +249,7 @@
     },
     {
       "id": "Carousel",
-      "exportName": "WiCarousel",
+      "exportName": "WdCarousel",
       "examples": 6,
       "props": {
         "total": 8,
@@ -279,7 +279,7 @@
     },
     {
       "id": "CascadeSelect",
-      "exportName": "WiCascadeSelect",
+      "exportName": "WdCascadeSelect",
       "examples": 6,
       "props": {
         "total": 15,
@@ -322,7 +322,7 @@
     },
     {
       "id": "Checkbox",
-      "exportName": "WiCheckbox",
+      "exportName": "WdCheckbox",
       "examples": 10,
       "props": {
         "total": 10,
@@ -354,7 +354,7 @@
     },
     {
       "id": "Chip",
-      "exportName": "WiChip",
+      "exportName": "WdChip",
       "examples": 4,
       "props": {
         "total": 7,
@@ -386,7 +386,7 @@
     },
     {
       "id": "CommandMenu",
-      "exportName": "WiCommandMenu",
+      "exportName": "WdCommandMenu",
       "examples": 4,
       "props": {
         "total": 5,
@@ -416,7 +416,7 @@
     },
     {
       "id": "ConfigProvider",
-      "exportName": "WiConfigProvider",
+      "exportName": "WdConfigProvider",
       "examples": 14,
       "props": {
         "total": 10,
@@ -446,7 +446,7 @@
     },
     {
       "id": "ConfirmDialog",
-      "exportName": "WiConfirmDialog",
+      "exportName": "WdConfirmDialog",
       "examples": 4,
       "props": {
         "total": 15,
@@ -489,7 +489,7 @@
     },
     {
       "id": "ConfirmPopup",
-      "exportName": "WiConfirmPopup",
+      "exportName": "WdConfirmPopup",
       "examples": 6,
       "props": {
         "total": 12,
@@ -527,7 +527,7 @@
     },
     {
       "id": "ContextMenu",
-      "exportName": "WiContextMenu",
+      "exportName": "WdContextMenu",
       "examples": 6,
       "props": {
         "total": 5,
@@ -561,7 +561,7 @@
     },
     {
       "id": "DataView",
-      "exportName": "WiDataView",
+      "exportName": "WdDataView",
       "examples": 4,
       "props": {
         "total": 10,
@@ -594,7 +594,7 @@
     },
     {
       "id": "DatePicker",
-      "exportName": "WiDatePicker",
+      "exportName": "WdDatePicker",
       "examples": 20,
       "props": {
         "total": 18,
@@ -634,7 +634,7 @@
     },
     {
       "id": "Dialog",
-      "exportName": "WiDialog",
+      "exportName": "WdDialog",
       "examples": 14,
       "props": {
         "total": 22,
@@ -684,7 +684,7 @@
     },
     {
       "id": "Divider",
-      "exportName": "WiDivider",
+      "exportName": "WdDivider",
       "examples": 12,
       "props": {
         "total": 5,
@@ -711,7 +711,7 @@
     },
     {
       "id": "Dock",
-      "exportName": "WiDock",
+      "exportName": "WdDock",
       "examples": 4,
       "props": {
         "total": 2,
@@ -740,7 +740,7 @@
     },
     {
       "id": "Drawer",
-      "exportName": "WiDrawer",
+      "exportName": "WdDrawer",
       "examples": 6,
       "props": {
         "total": 14,
@@ -785,7 +785,7 @@
     },
     {
       "id": "Dropdown",
-      "exportName": "WiDropdown",
+      "exportName": "WdDropdown",
       "examples": 6,
       "props": {
         "total": 9,
@@ -819,7 +819,7 @@
     },
     {
       "id": "Fieldset",
-      "exportName": "WiFieldset",
+      "exportName": "WdFieldset",
       "examples": 4,
       "props": {
         "total": 4,
@@ -848,7 +848,7 @@
     },
     {
       "id": "FileUpload",
-      "exportName": "WiFileUpload",
+      "exportName": "WdFileUpload",
       "examples": 16,
       "props": {
         "total": 22,
@@ -898,7 +898,7 @@
     },
     {
       "id": "Flex",
-      "exportName": "WiFlex",
+      "exportName": "WdFlex",
       "examples": 8,
       "props": {
         "total": 7,
@@ -927,7 +927,7 @@
     },
     {
       "id": "FloatLabel",
-      "exportName": "WiFloatLabel",
+      "exportName": "WdFloatLabel",
       "examples": 4,
       "props": {
         "total": 1,
@@ -952,7 +952,7 @@
     },
     {
       "id": "Fluid",
-      "exportName": "WiFluid",
+      "exportName": "WdFluid",
       "examples": 4,
       "props": {
         "total": 1,
@@ -979,7 +979,7 @@
     },
     {
       "id": "Form",
-      "exportName": "WiForm",
+      "exportName": "WdForm",
       "examples": 8,
       "props": {
         "total": 0,
@@ -1009,7 +1009,7 @@
     },
     {
       "id": "Gallery",
-      "exportName": "WiGallery",
+      "exportName": "WdGallery",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1036,7 +1036,7 @@
     },
     {
       "id": "Grid",
-      "exportName": "WiGrid",
+      "exportName": "WdGrid",
       "examples": 10,
       "props": {
         "total": 0,
@@ -1061,7 +1061,7 @@
     },
     {
       "id": "Icon",
-      "exportName": "WiIcon",
+      "exportName": "WdIcon",
       "examples": 8,
       "props": {
         "total": 3,
@@ -1086,7 +1086,7 @@
     },
     {
       "id": "IconField",
-      "exportName": "WiIconField",
+      "exportName": "WdIconField",
       "examples": 4,
       "props": {
         "total": 1,
@@ -1111,7 +1111,7 @@
     },
     {
       "id": "Inplace",
-      "exportName": "WiInplace",
+      "exportName": "WdInplace",
       "examples": 4,
       "props": {
         "total": 4,
@@ -1147,7 +1147,7 @@
     },
     {
       "id": "Input",
-      "exportName": "WiInput",
+      "exportName": "WdInput",
       "examples": 20,
       "props": {
         "total": 15,
@@ -1186,7 +1186,7 @@
     },
     {
       "id": "InputColor",
-      "exportName": "WiInputColor",
+      "exportName": "WdInputColor",
       "examples": 6,
       "props": {
         "total": 7,
@@ -1221,7 +1221,7 @@
     },
     {
       "id": "InputGroup",
-      "exportName": "WiInputGroup",
+      "exportName": "WdInputGroup",
       "examples": 4,
       "props": {
         "total": 0,
@@ -1246,7 +1246,7 @@
     },
     {
       "id": "InputNumber",
-      "exportName": "WiInputNumber",
+      "exportName": "WdInputNumber",
       "examples": 8,
       "props": {
         "total": 17,
@@ -1292,7 +1292,7 @@
     },
     {
       "id": "InputOtp",
-      "exportName": "WiInputOtp",
+      "exportName": "WdInputOtp",
       "examples": 6,
       "props": {
         "total": 9,
@@ -1323,7 +1323,7 @@
     },
     {
       "id": "InputPassword",
-      "exportName": "WiInputPassword",
+      "exportName": "WdInputPassword",
       "examples": 12,
       "props": {
         "total": 17,
@@ -1366,7 +1366,7 @@
     },
     {
       "id": "InputTags",
-      "exportName": "WiInputTags",
+      "exportName": "WdInputTags",
       "examples": 6,
       "props": {
         "total": 10,
@@ -1402,7 +1402,7 @@
     },
     {
       "id": "Knob",
-      "exportName": "WiKnob",
+      "exportName": "WdKnob",
       "examples": 4,
       "props": {
         "total": 10,
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "Label",
-      "exportName": "WiLabel",
+      "exportName": "WdLabel",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1464,7 +1464,7 @@
     },
     {
       "id": "Layout",
-      "exportName": "WiLayout",
+      "exportName": "WdLayout",
       "examples": 16,
       "props": {
         "total": 0,
@@ -1489,7 +1489,7 @@
     },
     {
       "id": "Listbox",
-      "exportName": "WiListbox",
+      "exportName": "WdListbox",
       "examples": 4,
       "props": {
         "total": 9,
@@ -1524,7 +1524,7 @@
     },
     {
       "id": "MegaMenu",
-      "exportName": "WiMegaMenu",
+      "exportName": "WdMegaMenu",
       "examples": 6,
       "props": {
         "total": 4,
@@ -1556,7 +1556,7 @@
     },
     {
       "id": "Menu",
-      "exportName": "WiMenu",
+      "exportName": "WdMenu",
       "examples": 18,
       "props": {
         "total": 18,
@@ -1593,7 +1593,7 @@
     },
     {
       "id": "Menubar",
-      "exportName": "WiMenubar",
+      "exportName": "WdMenubar",
       "examples": 4,
       "props": {
         "total": 4,
@@ -1626,7 +1626,7 @@
     },
     {
       "id": "Message",
-      "exportName": "WiMessage",
+      "exportName": "WdMessage",
       "examples": 8,
       "props": {
         "total": 0,
@@ -1651,7 +1651,7 @@
     },
     {
       "id": "MeterGroup",
-      "exportName": "WiMeterGroup",
+      "exportName": "WdMeterGroup",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1678,7 +1678,7 @@
     },
     {
       "id": "OrderList",
-      "exportName": "WiOrderList",
+      "exportName": "WdOrderList",
       "examples": 4,
       "props": {
         "total": 5,
@@ -1711,7 +1711,7 @@
     },
     {
       "id": "Pagination",
-      "exportName": "WiPagination",
+      "exportName": "WdPagination",
       "examples": 6,
       "props": {
         "total": 10,
@@ -1745,7 +1745,7 @@
     },
     {
       "id": "Panel",
-      "exportName": "WiPanel",
+      "exportName": "WdPanel",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1777,7 +1777,7 @@
     },
     {
       "id": "PickList",
-      "exportName": "WiPickList",
+      "exportName": "WdPickList",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1804,7 +1804,7 @@
     },
     {
       "id": "Popover",
-      "exportName": "WiPopover",
+      "exportName": "WdPopover",
       "examples": 8,
       "props": {
         "total": 8,
@@ -1841,7 +1841,7 @@
     },
     {
       "id": "ProgressBar",
-      "exportName": "WiProgressBar",
+      "exportName": "WdProgressBar",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1868,7 +1868,7 @@
     },
     {
       "id": "ProgressSpinner",
-      "exportName": "WiProgressSpinner",
+      "exportName": "WdProgressSpinner",
       "examples": 6,
       "props": {
         "total": 7,
@@ -1896,7 +1896,7 @@
     },
     {
       "id": "Radio",
-      "exportName": "WiRadio",
+      "exportName": "WdRadio",
       "examples": 10,
       "props": {
         "total": 9,
@@ -1926,7 +1926,7 @@
     },
     {
       "id": "Rating",
-      "exportName": "WiRating",
+      "exportName": "WdRating",
       "examples": 8,
       "props": {
         "total": 13,
@@ -1965,7 +1965,7 @@
     },
     {
       "id": "Scrollbar",
-      "exportName": "WiScrollbar",
+      "exportName": "WdScrollbar",
       "examples": 14,
       "props": {
         "total": 0,
@@ -1996,7 +1996,7 @@
     },
     {
       "id": "ScrollTop",
-      "exportName": "WiScrollTop",
+      "exportName": "WdScrollTop",
       "examples": 4,
       "props": {
         "total": 6,
@@ -2026,7 +2026,7 @@
     },
     {
       "id": "Select",
-      "exportName": "WiSelect",
+      "exportName": "WdSelect",
       "examples": 24,
       "props": {
         "total": 24,
@@ -2068,7 +2068,7 @@
     },
     {
       "id": "SelectButton",
-      "exportName": "WiSelectButton",
+      "exportName": "WdSelectButton",
       "examples": 6,
       "props": {
         "total": 7,
@@ -2100,7 +2100,7 @@
     },
     {
       "id": "Sidebar",
-      "exportName": "WiSidebar",
+      "exportName": "WdSidebar",
       "examples": 4,
       "props": {
         "total": 2,
@@ -2127,7 +2127,7 @@
     },
     {
       "id": "Skeleton",
-      "exportName": "WiSkeleton",
+      "exportName": "WdSkeleton",
       "examples": 10,
       "props": {
         "total": 7,
@@ -2152,7 +2152,7 @@
     },
     {
       "id": "Slider",
-      "exportName": "WiSlider",
+      "exportName": "WdSlider",
       "examples": 8,
       "props": {
         "total": 15,
@@ -2190,7 +2190,7 @@
     },
     {
       "id": "Space",
-      "exportName": "WiSpace",
+      "exportName": "WdSpace",
       "examples": 10,
       "props": {
         "total": 10,
@@ -2223,7 +2223,7 @@
     },
     {
       "id": "SpeedDial",
-      "exportName": "WiSpeedDial",
+      "exportName": "WdSpeedDial",
       "examples": 4,
       "props": {
         "total": 7,
@@ -2260,7 +2260,7 @@
     },
     {
       "id": "SplitButton",
-      "exportName": "WiSplitButton",
+      "exportName": "WdSplitButton",
       "examples": 4,
       "props": {
         "total": 9,
@@ -2297,7 +2297,7 @@
     },
     {
       "id": "Splitter",
-      "exportName": "WiSplitter",
+      "exportName": "WdSplitter",
       "examples": 10,
       "props": {
         "total": 12,
@@ -2337,7 +2337,7 @@
     },
     {
       "id": "Stepper",
-      "exportName": "WiStepper",
+      "exportName": "WdStepper",
       "examples": 6,
       "props": {
         "total": 5,
@@ -2370,7 +2370,7 @@
     },
     {
       "id": "Switch",
-      "exportName": "WiSwitch",
+      "exportName": "WdSwitch",
       "examples": 10,
       "props": {
         "total": 13,
@@ -2406,7 +2406,7 @@
     },
     {
       "id": "Table",
-      "exportName": "WiTable",
+      "exportName": "WdTable",
       "examples": 14,
       "props": {
         "total": 64,
@@ -2512,7 +2512,7 @@
     },
     {
       "id": "Tabs",
-      "exportName": "WiTabs",
+      "exportName": "WdTabs",
       "examples": 6,
       "props": {
         "total": 5,
@@ -2540,7 +2540,7 @@
     },
     {
       "id": "Tag",
-      "exportName": "WiTag",
+      "exportName": "WdTag",
       "examples": 10,
       "props": {
         "total": 9,
@@ -2570,7 +2570,7 @@
     },
     {
       "id": "Terminal",
-      "exportName": "WiTerminal",
+      "exportName": "WdTerminal",
       "examples": 4,
       "props": {
         "total": 4,
@@ -2605,7 +2605,7 @@
     },
     {
       "id": "Textarea",
-      "exportName": "WiTextarea",
+      "exportName": "WdTextarea",
       "examples": 10,
       "props": {
         "total": 17,
@@ -2646,7 +2646,7 @@
     },
     {
       "id": "TieredMenu",
-      "exportName": "WiTieredMenu",
+      "exportName": "WdTieredMenu",
       "examples": 6,
       "props": {
         "total": 6,
@@ -2677,7 +2677,7 @@
     },
     {
       "id": "Timeline",
-      "exportName": "WiTimeline",
+      "exportName": "WdTimeline",
       "examples": 8,
       "props": {
         "total": 4,
@@ -2702,7 +2702,7 @@
     },
     {
       "id": "Toast",
-      "exportName": "WiToast",
+      "exportName": "WdToast",
       "examples": 8,
       "props": {
         "total": 12,
@@ -2737,7 +2737,7 @@
     },
     {
       "id": "ToggleButton",
-      "exportName": "WiToggleButton",
+      "exportName": "WdToggleButton",
       "examples": 6,
       "props": {
         "total": 7,
@@ -2770,7 +2770,7 @@
     },
     {
       "id": "Toolbar",
-      "exportName": "WiToolbar",
+      "exportName": "WdToolbar",
       "examples": 4,
       "props": {
         "total": 1,
@@ -2797,7 +2797,7 @@
     },
     {
       "id": "Tooltip",
-      "exportName": "WiTooltip",
+      "exportName": "WdTooltip",
       "examples": 4,
       "props": {
         "total": 8,
@@ -2826,7 +2826,7 @@
     },
     {
       "id": "Tree",
-      "exportName": "WiTree",
+      "exportName": "WdTree",
       "examples": 10,
       "props": {
         "total": 17,
@@ -2872,7 +2872,7 @@
     },
     {
       "id": "TreeSelect",
-      "exportName": "WiTreeSelect",
+      "exportName": "WdTreeSelect",
       "examples": 8,
       "props": {
         "total": 22,
@@ -2917,7 +2917,7 @@
     },
     {
       "id": "TreeTable",
-      "exportName": "WiTreeTable",
+      "exportName": "WdTreeTable",
       "examples": 4,
       "props": {
         "total": 4,
@@ -2952,7 +2952,7 @@
     },
     {
       "id": "VirtualScroller",
-      "exportName": "WiVirtualScroller",
+      "exportName": "WdVirtualScroller",
       "examples": 4,
       "props": {
         "total": 4,

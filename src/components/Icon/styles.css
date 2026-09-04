@@ -1,37 +1,37 @@
-.wi-icon {
+.wd-icon {
     display: inline-flex;
     height: 1rem;
     width: 1rem;
 }
 
-.wi-icon svg {
+.wd-icon svg {
     height: 100%;
     width: 100%;
 }
 
-.wi-icon--sm,
-.wi-icon--small {
+.wd-icon--sm,
+.wd-icon--small {
     height: 0.875rem;
     width: 0.875rem;
 }
 
-.wi-icon--md,
-.wi-icon--normal {
+.wd-icon--md,
+.wd-icon--normal {
     height: 1rem;
     width: 1rem;
 }
 
-.wi-icon--lg,
-.wi-icon--large {
+.wd-icon--lg,
+.wd-icon--large {
     height: 1.25rem;
     width: 1.25rem;
 }
 
-.wi-icon--spin svg {
-    animation: wi-icon-spin var(--wi-motion-spin-fast) linear infinite;
+.wd-icon--spin svg {
+    animation: wd-icon-spin var(--wd-motion-spin-fast) linear infinite;
 }
 
-@keyframes wi-icon-spin {
+@keyframes wd-icon-spin {
     to {
         transform: rotate(360deg);
     }

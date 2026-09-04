@@ -1,18 +1,18 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WiProgressSpinner from './ProgressSpinner.vue'
+import WdProgressSpinner from './ProgressSpinner.vue'
 
-describe('wiProgressSpinner', () => {
+describe('wdProgressSpinner', () => {
   it('renders SVG circle with defaults', () => {
-    const wrapper = mount(WiProgressSpinner)
-    expect(wrapper.classes()).toContain('wi-progress-spinner')
-    expect(wrapper.find('.wi-progress-spinner__circle').exists()).toBe(true)
+    const wrapper = mount(WdProgressSpinner)
+    expect(wrapper.classes()).toContain('wd-progress-spinner')
+    expect(wrapper.find('.wd-progress-spinner__circle').exists()).toBe(true)
     expect(wrapper.attributes('aria-label')).toBe('加载中')
     expect(wrapper.find('circle').attributes('stroke-width')).toBe('2')
   })
 
   it('applies strokeWidth and animationDuration', () => {
-    const wrapper = mount(WiProgressSpinner, {
+    const wrapper = mount(WdProgressSpinner, {
       props: { strokeWidth: '4', animationDuration: '2s', ariaLabel: 'Loading' },
     })
     expect(wrapper.find('circle').attributes('stroke-width')).toBe('4')
@@ -21,26 +21,26 @@ describe('wiProgressSpinner', () => {
   })
 
   it('wraps content and respects show', () => {
-    const hidden = mount(WiProgressSpinner, {
+    const hidden = mount(WdProgressSpinner, {
       props: { show: false, description: 'Saving' },
       slots: { default: '<p>Form</p>' },
     })
     expect(hidden.text()).toContain('Form')
-    expect(hidden.find('.wi-progress-spinner-wrap__overlay').exists()).toBe(false)
+    expect(hidden.find('.wd-progress-spinner-wrap__overlay').exists()).toBe(false)
 
-    const shown = mount(WiProgressSpinner, {
+    const shown = mount(WdProgressSpinner, {
       props: { show: true, description: 'Saving' },
       slots: { default: '<p>Form</p>' },
     })
-    expect(shown.get('.wi-progress-spinner-wrap__overlay').text()).toContain('Saving')
+    expect(shown.get('.wd-progress-spinner-wrap__overlay').text()).toContain('Saving')
   })
 
   it('marks wrapped content inert while loading overlay is visible', () => {
-    const wrapper = mount(WiProgressSpinner, {
+    const wrapper = mount(WdProgressSpinner, {
       props: { show: true },
       slots: { default: '<button type="button">Save</button>' },
     })
-    expect(wrapper.get('.wi-progress-spinner-wrap__content').attributes('inert')).toBeDefined()
-    expect(wrapper.get('.wi-progress-spinner-wrap').attributes('aria-busy')).toBe('true')
+    expect(wrapper.get('.wd-progress-spinner-wrap__content').attributes('inert')).toBeDefined()
+    expect(wrapper.get('.wd-progress-spinner-wrap').attributes('aria-busy')).toBe('true')
   })
 })

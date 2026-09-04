@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "paths": {
-      "@well-insight/ui": ["../src"],
+      "@wex-design/ui": ["../src"],
       "@/*": ["./src/*"]
     },
     "types": ["vite/client"]

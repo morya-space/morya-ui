@@ -1,4 +1,4 @@
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
 export type FormLabelPosition = 'top' | 'left'
 export type FormLabelAlign = 'left' | 'center' | 'right'
@@ -63,7 +63,7 @@ export interface FormProps {
   /** Disable all nested fields (informational; FormItem forwards via CSS). */
   disabled?: boolean
   /** Default control size for nested fields. */
-  size?: WiSizeInput
+  size?: WdSizeInput
   /**
    * When to run field validation.
    * Also the default `trigger` for rules that omit one.

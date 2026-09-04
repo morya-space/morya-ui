@@ -11,21 +11,21 @@ description: 在开/关两种标签状态间切换的按钮。
 ## 引入
 
 ```ts
-import { WiToggleButton } from '@well-insight/ui'
+import { WdToggleButton } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiToggleButton } from '@well-insight/ui'
+import { WdToggleButton } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const on = ref(false)
 </script>
 
 <template>
-  <WiToggleButton v-model="on" on-label="开启" off-label="关闭" />
+  <WdToggleButton v-model="on" on-label="开启" off-label="关闭" />
 </template>
 ```
 
@@ -33,7 +33,7 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiToggleButton } from '@well-insight/ui'
+import { WdToggleButton } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const a = ref(false)
@@ -43,9 +43,9 @@ const c = ref(false)
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiToggleButton v-model="a" size="small" on-label="小" off-label="小" />
-    <WiToggleButton v-model="b" on-label="默认" off-label="默认" />
-    <WiToggleButton v-model="c" size="large" on-label="大" off-label="大" />
+    <WdToggleButton v-model="a" size="small" on-label="小" off-label="小" />
+    <WdToggleButton v-model="b" on-label="默认" off-label="默认" />
+    <WdToggleButton v-model="c" size="large" on-label="大" off-label="大" />
   </div>
 </template>
 ```
@@ -57,7 +57,7 @@ const c = ref(false)
 | `modelValue` | `boolean` | `false` | 是否开启。 |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | 文案。 |
 | `onIcon` / `offIcon` | `string` | — | 可选图标字符。 |
-| `size` | `WiSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `WdSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 
 ## Events

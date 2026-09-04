@@ -11,14 +11,14 @@ Drag to pick a number. In `range` mode there are two thumbs and the bound value 
 ## Import
 
 ```ts
-import { WiSlider } from '@well-insight/ui'
+import { WdSlider } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiSlider } from '@well-insight/ui'
+import { WdSlider } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref(40)
@@ -26,8 +26,8 @@ const value = ref(40)
 
 <template>
   <div style="width:min(24rem,100%)">
-    <WiSlider v-model="value" />
-    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">
+    <WdSlider v-model="value" />
+    <p style="margin:.5rem 0 0;color:var(--wd-color-text-muted)">
       {{ value }}
     </p>
   </div>
@@ -38,7 +38,7 @@ const value = ref(40)
 
 ```vue preview
 <script setup lang="ts">
-import { WiSlider } from '@well-insight/ui'
+import { WdSlider } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref([20, 70])
@@ -46,8 +46,8 @@ const value = ref([20, 70])
 
 <template>
   <div style="width:min(24rem,100%)">
-    <WiSlider v-model="value" range />
-    <p style="margin:.5rem 0 0;color:var(--wi-color-text-muted)">
+    <WdSlider v-model="value" range />
+    <p style="margin:.5rem 0 0;color:var(--wd-color-text-muted)">
       {{ value.join(' – ') }}
     </p>
   </div>
@@ -60,7 +60,7 @@ const value = ref([20, 70])
 
 ```vue preview
 <script setup lang="ts">
-import { WiSlider } from '@well-insight/ui'
+import { WdSlider } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref(50)
@@ -69,9 +69,9 @@ const value = ref(50)
 <template>
   <div style="display:flex;gap:2rem;align-items:stretch;height:10rem">
     <div style="flex:1">
-      <WiSlider v-model="value" tooltip :marks="{ 0: '0', 50: 'Mid', 100: 'Max' }" />
+      <WdSlider v-model="value" tooltip :marks="{ 0: '0', 50: 'Mid', 100: 'Max' }" />
     </div>
-    <WiSlider v-model="value" vertical tooltip />
+    <WdSlider v-model="value" vertical tooltip />
   </div>
 </template>
 ```

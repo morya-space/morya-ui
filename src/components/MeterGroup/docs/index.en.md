@@ -11,14 +11,14 @@ Displays multiple `{ label, value, color }` segments as a proportion of the tota
 ## Import
 
 ```ts
-import { WiMeterGroup } from '@well-insight/ui'
+import { WdMeterGroup } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiMeterGroup } from '@well-insight/ui'
+import { WdMeterGroup } from '@wex-design/ui'
 
 const value = [
   { label: 'Apps', value: 45, color: '#2563eb' },
@@ -28,7 +28,7 @@ const value = [
 </script>
 
 <template>
-  <WiMeterGroup :value="value" :max="100" />
+  <WdMeterGroup :value="value" :max="100" />
 </template>
 ```
 

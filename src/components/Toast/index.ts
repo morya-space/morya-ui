@@ -1,6 +1,6 @@
 import './style'
 export { toast, useToast } from './toast'
-export { default as WiToast } from './Toast.vue'
+export { default as WdToast } from './Toast.vue'
 export type {
   ToastEmits,
   ToastHandle,
@@ -10,5 +10,5 @@ export type {
   ToastPosition,
   ToastProps,
   ToastSeverity,
-  WiRenderable,
+  WdRenderable,
 } from './types'

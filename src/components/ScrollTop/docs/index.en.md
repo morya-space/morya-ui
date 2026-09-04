@@ -11,14 +11,14 @@ Listens to window or parent scroll and jumps back to the top.
 ## Import
 
 ```ts
-import { WiScrollTop } from '@well-insight/ui'
+import { WdScrollTop } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiScrollTop } from '@well-insight/ui'
+import { WdScrollTop } from '@wex-design/ui'
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import { WiScrollTop } from '@well-insight/ui'
     <div style="height: 40rem">
       Scroll down…
     </div>
-    <WiScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    <WdScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```

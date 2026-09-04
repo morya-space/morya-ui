@@ -4,14 +4,14 @@ import { fileURLToPath } from 'node:url'
 import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WiTooltip from './Tooltip.vue'
+import WdTooltip from './Tooltip.vue'
 
 const tooltipStyles = readFileSync(
   join(dirname(fileURLToPath(import.meta.url)), 'styles.css'),
   'utf8',
 )
 
-describe('wiTooltip', () => {
+describe('wdTooltip', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })
@@ -22,7 +22,7 @@ describe('wiTooltip', () => {
   })
 
   it('shows content for mouse and keyboard focus on body by default', async () => {
-    const wrapper = mount(WiTooltip, {
+    const wrapper = mount(WdTooltip, {
       props: { content: 'More information' },
       slots: { default: '<button>Info</button>' },
       attachTo: document.body,
@@ -30,7 +30,7 @@ describe('wiTooltip', () => {
     await wrapper.trigger('mouseenter')
     await nextTick()
     expect(document.body.querySelector('[role="tooltip"]')?.textContent).toBe('More information')
-    expect(document.body.querySelector('.wi-tooltip__content--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wd-tooltip__content--teleported')).toBeTruthy()
     await wrapper.trigger('mouseleave')
     await nextTick()
     expect(document.body.querySelector('[role="tooltip"]')).toBeNull()
@@ -38,7 +38,7 @@ describe('wiTooltip', () => {
   })
 
   it('respects showDelay before becoming visible', async () => {
-    const wrapper = mount(WiTooltip, {
+    const wrapper = mount(WdTooltip, {
       props: { content: 'Delayed', showDelay: 200 },
       slots: { default: '<button>Info</button>' },
       attachTo: document.body,
@@ -52,18 +52,18 @@ describe('wiTooltip', () => {
   })
 
   it('can render in place when teleport is disabled', async () => {
-    const wrapper = mount(WiTooltip, {
+    const wrapper = mount(WdTooltip, {
       props: { content: 'Inline', teleport: false },
       slots: { default: '<button>Info</button>' },
     })
     await wrapper.trigger('mouseenter')
     await nextTick()
     expect(wrapper.get('[role="tooltip"]').text()).toBe('Inline')
-    expect(wrapper.find('.wi-tooltip__content--teleported').exists()).toBe(false)
+    expect(wrapper.find('.wd-tooltip__content--teleported').exists()).toBe(false)
   })
 
   it('respects hideDelay before hiding', async () => {
-    const wrapper = mount(WiTooltip, {
+    const wrapper = mount(WdTooltip, {
       props: { content: 'Stay', hideDelay: 200, teleport: false },
       slots: { default: '<button>Info</button>' },
     })
@@ -79,7 +79,7 @@ describe('wiTooltip', () => {
   })
 
   it('links the trigger with aria-describedby while visible', async () => {
-    const wrapper = mount(WiTooltip, {
+    const wrapper = mount(WdTooltip, {
       props: { content: 'Details', teleport: false },
       slots: { default: '<button>Info</button>' },
     })
@@ -95,6 +95,6 @@ describe('wiTooltip', () => {
   })
 
   it('uses normal white-space in teleported mode styles', () => {
-    expect(tooltipStyles).toMatch(/\.wi-tooltip__content--teleported[\s\S]*white-space:\s*normal/)
+    expect(tooltipStyles).toMatch(/\.wd-tooltip__content--teleported[\s\S]*white-space:\s*normal/)
   })
 })

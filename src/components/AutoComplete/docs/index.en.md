@@ -11,14 +11,14 @@ Input suggestions and completion; the `complete` event makes async loading from 
 ## Import
 
 ```ts
-import { WiAutoComplete } from '@well-insight/ui'
+import { WdAutoComplete } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiAutoComplete } from '@well-insight/ui'
+import { WdAutoComplete } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -26,7 +26,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 </script>
 
 <template>
-  <WiAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="Search…" />
+  <WdAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="Search…" />
 </template>
 ```
 
@@ -34,7 +34,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 
 ```vue preview
 <script setup lang="ts">
-import { WiAutoComplete } from '@well-insight/ui'
+import { WdAutoComplete } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const a = ref('')
@@ -45,9 +45,9 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WiAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
-    <WiAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
-    <WiAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
+    <WdAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
+    <WdAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
+    <WdAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
   </div>
 </template>
 ```
@@ -58,7 +58,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 ```vue preview
 <script setup lang="ts">
-import { WiAutoComplete } from '@well-insight/ui'
+import { WdAutoComplete } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -69,7 +69,7 @@ const suggestions = [
 </script>
 
 <template>
-  <WiAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="Option objects…" />
+  <WdAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="Option objects…" />
 </template>
 ```
 
@@ -83,7 +83,7 @@ const suggestions = [
 | `clearable` | `boolean` | `false` | Show a clear button. |
 | `dropdown` | `boolean` | `false` | Show dropdown button. |
 | `placeholder` | `string` | — | Placeholder. |
-| `size` | `WiSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |

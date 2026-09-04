@@ -16,11 +16,11 @@ const emit = defineEmits<{
 const sizeClass = useConfiguredSize('SelectButton', () => props.size)
 
 const rootClass = computed(() => [
-  'wi-selectbutton',
-  `wi-selectbutton--${sizeClass.value}`,
+  'wd-selectbutton',
+  `wd-selectbutton--${sizeClass.value}`,
   {
-    'wi-selectbutton--disabled': props.disabled,
-    'wi-selectbutton--invalid': props.invalid,
+    'wd-selectbutton--disabled': props.disabled,
+    'wd-selectbutton--invalid': props.invalid,
   },
 ])
 
@@ -70,7 +70,7 @@ function onKeydown(event: KeyboardEvent) {
 
 watch(keyboard.activeIndex, (index) => {
   if (index < 0) return
-  const buttons = root.value?.querySelectorAll<HTMLElement>('.wi-selectbutton__button')
+  const buttons = root.value?.querySelectorAll<HTMLElement>('.wd-selectbutton__button')
   buttons?.[index]?.focus({ preventScroll: true })
 })
 </script>
@@ -81,8 +81,8 @@ watch(keyboard.activeIndex, (index) => {
       v-for="(option, index) in options"
       :key="String(option.value)"
       type="button"
-      class="wi-selectbutton__button"
-      :class="{ 'wi-selectbutton__button--active': isActive(option) }"
+      class="wd-selectbutton__button"
+      :class="{ 'wd-selectbutton__button--active': isActive(option) }"
       :disabled="disabled || option.disabled"
       :aria-pressed="isActive(option)"
       :tabindex="buttonTabindex(index)"

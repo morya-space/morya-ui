@@ -1,16 +1,16 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WiTable from './Table.vue'
+import WdTable from './Table.vue'
 
 const columns = [
   { key: 'name', label: 'Name', sortable: true },
   { key: 'status', label: 'Status' },
 ]
 
-describe('WiTable', () => {
+describe('WdTable', () => {
   it('renders columns, row values, and cell slot', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [{ id: 1, name: 'Landing page', status: 'Draft' }],
@@ -24,7 +24,7 @@ describe('WiTable', () => {
   })
 
   it('shows empty message overlay when there are no rows', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [],
@@ -32,22 +32,22 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.get('.wi-table__empty-text').text()).toContain('Nothing here')
+    expect(wrapper.get('.wd-table__empty-text').text()).toContain('Nothing here')
   })
 
-  it('uses WiScrollbar for table body scrolling', () => {
-    const wrapper = mount(WiTable, {
+  it('uses WdScrollbar for table body scrolling', () => {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [{ id: 1, name: 'A' }],
         paginator: false,
       },
     })
-    expect(wrapper.find('.wi-table__scrollbar.wi-scrollbar').exists()).toBe(true)
+    expect(wrapper.find('.wd-table__scrollbar.wd-scrollbar').exists()).toBe(true)
   })
 
   it('applies density size class', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [{ id: 1, name: 'A' }],
@@ -55,11 +55,11 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.classes()).toContain('wi-table--large')
+    expect(wrapper.classes()).toContain('wd-table--large')
   })
 
   it('applies striped and bordered modifiers', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [{ id: 1, name: 'A' }],
@@ -68,12 +68,12 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.classes()).toContain('wi-table--striped')
-    expect(wrapper.classes()).toContain('wi-table--border')
+    expect(wrapper.classes()).toContain('wd-table--striped')
+    expect(wrapper.classes()).toContain('wd-table--border')
   })
 
   it('shows loading overlay', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [],
@@ -81,12 +81,12 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.find('.wi-table__loading').exists()).toBe(true)
-    expect(wrapper.find('.wi-table__message').exists()).toBe(false)
+    expect(wrapper.find('.wd-table__loading').exists()).toBe(true)
+    expect(wrapper.find('.wd-table__message').exists()).toBe(false)
   })
 
   it('sorts rows when sortable header is clicked', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [
@@ -96,7 +96,7 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
+    await wrapper.get('th.wd-table__header-cell--sortable').trigger('click')
     const firstCell = wrapper.find('tbody td').text()
     expect(firstCell).toBe('Ada')
     expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
@@ -107,7 +107,7 @@ describe('WiTable', () => {
       { id: 1, name: 'Ada' },
       { id: 2, name: 'Lin' },
     ]
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows,
@@ -116,7 +116,7 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    await wrapper.findAll('.wi-checkbox__input')[1]!.setValue(true)
+    await wrapper.findAll('.wd-checkbox__input')[1]!.setValue(true)
     expect(wrapper.emitted('update:selection')?.at(-1)?.[0]).toEqual([rows[0]])
   })
 
@@ -125,7 +125,7 @@ describe('WiTable', () => {
       { id: 1, name: 'Ada' },
       { id: 2, name: 'Lin' },
     ]
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows,
@@ -133,13 +133,13 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    await wrapper.findAll('.wi-radio__input')[0]!.setValue(true)
+    await wrapper.findAll('.wd-radio__input')[0]!.setValue(true)
     expect(wrapper.emitted('update:selectedItem')?.at(-1)?.[0]).toEqual(rows[0])
   })
 
-  it('paginates with WiPagination in footer mode', async () => {
+  it('paginates with WdPagination in footer mode', async () => {
     const rows = Array.from({ length: 5 }, (_, i) => ({ id: i + 1, name: `R${i + 1}` }))
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows,
@@ -148,15 +148,15 @@ describe('WiTable', () => {
         paginator: true,
       },
     })
-    expect(wrapper.find('.wi-pagination').exists()).toBe(true)
+    expect(wrapper.find('.wd-pagination').exists()).toBe(true)
     expect(wrapper.findAll('tbody tr')).toHaveLength(2)
-    const buttons = wrapper.findAll('.wi-pagination__button')
+    const buttons = wrapper.findAll('.wd-pagination__button')
     await buttons.at(-1)!.trigger('click')
     expect(wrapper.text()).toContain('R3')
   })
 
   it('highlights current row when enabled', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [
@@ -169,11 +169,11 @@ describe('WiTable', () => {
     })
     await wrapper.findAll('tbody tr')[0]!.trigger('click')
     expect(wrapper.emitted('update:currentRowKey')?.at(-1)?.[0]).toBe(1)
-    expect(wrapper.find('tbody tr.wi-table__row--current').exists()).toBe(true)
+    expect(wrapper.find('tbody tr.wd-table__row--current').exists()).toBe(true)
   })
 
   it('renders expansion slot', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [{ id: 1, name: 'Ada', extra: 'Design system' }],
@@ -185,13 +185,13 @@ describe('WiTable', () => {
           h('p', { class: 'exp' }, `${row.name} ${row.extra}`),
       },
     })
-    await wrapper.get('.wi-table__expand-btn').trigger('click')
-    expect(wrapper.get('.wi-table__cell--expanded').text()).toContain('Ada Design system')
+    await wrapper.get('.wd-table__expand-btn').trigger('click')
+    expect(wrapper.get('.wd-table__cell--expanded').text()).toContain('Ada Design system')
     expect(wrapper.emitted('expand')).toBeTruthy()
   })
 
   it('renders column render output', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name', render: (row: { name: string }) => `*${row.name}*` }],
         rows: [{ id: 1, name: 'Ada' }],
@@ -202,7 +202,7 @@ describe('WiTable', () => {
   })
 
   it('sorts numeric columns numerically', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'score', label: 'Score', sortable: true }],
         rows: [
@@ -213,13 +213,13 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
-    const cells = wrapper.findAll('tbody td .wi-table__cell-text')
+    await wrapper.get('th.wd-table__header-cell--sortable').trigger('click')
+    const cells = wrapper.findAll('tbody td .wd-table__cell-text')
     expect(cells.map((cell) => cell.text())).toEqual(['9', '25', '100'])
   })
 
   it('treats search input as plain text, not regex', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [
@@ -235,7 +235,7 @@ describe('WiTable', () => {
   })
 
   it('supports v-model:expandedRowKeys and keeps expansion across sorting', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         'columns': [
           { key: 'name', label: 'Name', sortable: true },
@@ -254,17 +254,17 @@ describe('WiTable', () => {
         expansion: ({ row }: { row: { extra: string } }) => h('p', { class: 'exp' }, row.extra),
       },
     })
-    const expandButtons = wrapper.findAll('.wi-table__expand-btn')
+    const expandButtons = wrapper.findAll('.wd-table__expand-btn')
     await expandButtons[0]!.trigger('click')
     expect(wrapper.emitted('update:expandedRowKeys')?.at(-1)).toEqual([[1]])
-    expect(wrapper.find('.wi-table__cell--expanded').exists()).toBe(true)
+    expect(wrapper.find('.wd-table__cell--expanded').exists()).toBe(true)
 
-    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
-    expect(wrapper.find('.wi-table__cell--expanded').exists()).toBe(true)
+    await wrapper.get('th.wd-table__header-cell--sortable').trigger('click')
+    expect(wrapper.find('.wd-table__cell--expanded').exists()).toBe(true)
   })
 
   it('renders right-fixed columns with right offsets', () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns: [
           { key: 'name', label: 'Name' },
@@ -276,11 +276,11 @@ describe('WiTable', () => {
     })
     const opsHeader = wrapper.findAll('th').at(-1)!
     expect(opsHeader.attributes('style')).toContain('right: 0px')
-    expect(opsHeader.classes()).toContain('wi-table__header-cell--shadow-end')
+    expect(opsHeader.classes()).toContain('wd-table__header-cell--shadow-end')
   })
 
   it('sortMode emit only emits without client sorting', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         sortMode: 'emit' as const,
@@ -291,13 +291,13 @@ describe('WiTable', () => {
         paginator: false,
       },
     })
-    await wrapper.get('th.wi-table__header-cell--sortable').trigger('click')
+    await wrapper.get('th.wd-table__header-cell--sortable').trigger('click')
     expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
     expect(wrapper.find('tbody td').text()).toBe('Lin')
   })
 
   it('filters rows via controlled filters prop', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [
@@ -316,7 +316,7 @@ describe('WiTable', () => {
   })
 
   it('emits update:filters when setFilters is called', async () => {
-    const wrapper = mount(WiTable, {
+    const wrapper = mount(WdTable, {
       props: {
         columns,
         rows: [

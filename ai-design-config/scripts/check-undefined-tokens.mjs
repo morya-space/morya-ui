@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Scan CSS files for var(--wi-*) references that are never defined.
+ * Scan CSS files for var(--wd-*) references that are never defined.
  * Definitions are collected from the same scan roots (theme/styles.css,
  * styles/base.css, component styles.css); a token defined in any scanned
  * file counts as defined, so component-local tokens are not reported.
  * Tokens assigned at runtime via inline-style bindings in .vue/.ts files
- * (e.g. { '--wi-button-color': props.color }) also count as defined.
+ * (e.g. { '--wd-button-color': props.color }) also count as defined.
  * Usage: node scripts/check-undefined-tokens.mjs [dir...]
  * Exit 1 if violations found.
  */
@@ -18,9 +18,9 @@ const CSS_EXT = new Set(['.css'])
 const RUNTIME_EXT = new Set(['.vue', '.ts', '.tsx'])
 
 const COMMENT = /\/\*[\s\S]*?\*\//g
-const REFERENCE = /var\(\s*(--wi-[\w-]+)/g
-const DEFINITION = /(?<![\w-])(--wi-[\w-]+)\s*:/g
-const RUNTIME_PROVIDED = /['"](--wi-[\w-]+)['"]\s*:/g
+const REFERENCE = /var\(\s*(--wd-[\w-]+)/g
+const DEFINITION = /(?<![\w-])(--wd-[\w-]+)\s*:/g
+const RUNTIME_PROVIDED = /['"](--wd-[\w-]+)['"]\s*:/g
 
 const defined = new Set()
 const files = []
@@ -83,7 +83,7 @@ for (const { file, text } of contents) {
 }
 
 if (violations.length) {
-  console.error(`Found ${violations.length} reference(s) to undefined --wi-* token(s):\n`)
+  console.error(`Found ${violations.length} reference(s) to undefined --wd-* token(s):\n`)
   for (const v of violations) {
     console.error(`  ${v.file}:${v.line}  ${v.name}`)
     console.error(`    ${v.text}\n`)
@@ -91,4 +91,4 @@ if (violations.length) {
   process.exit(1)
 }
 
-console.log(`No undefined --wi-* token references found (${defined.size} tokens defined).`)
+console.log(`No undefined --wd-* token references found (${defined.size} tokens defined).`)

@@ -11,25 +11,25 @@ description: 带图例的字段分组，可折叠。
 ## 引入
 
 ```ts
-import { WiFieldset } from '@well-insight/ui'
+import { WdFieldset } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiFieldset } from '@well-insight/ui'
+import { WdFieldset } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WiFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
+  <WdFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
     <p style="margin:0">
       字段分组内容。
     </p>
-  </WiFieldset>
+  </WdFieldset>
 </template>
 ```
 

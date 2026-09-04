@@ -46,8 +46,8 @@ const visible = computed(() => {
 const overflow = computed(() => Math.max(0, children.value.length - visible.value.length))
 
 const groupClass = computed(() => [
-  'wi-avatar-group',
-  `wi-avatar-group--${resolvedSize.value}`,
+  'wd-avatar-group',
+  `wd-avatar-group--${resolvedSize.value}`,
 ])
 </script>
 
@@ -56,8 +56,8 @@ const groupClass = computed(() => [
     <component :is="child" v-for="(child, index) in visible" :key="index" />
     <span
       v-if="overflow > 0"
-      class="wi-avatar wi-avatar--circle wi-avatar-group__overflow"
-      :class="`wi-avatar--${resolvedSize}`"
+      class="wd-avatar wd-avatar--circle wd-avatar-group__overflow"
+      :class="`wd-avatar--${resolvedSize}`"
     >
       +{{ overflow }}
     </span>

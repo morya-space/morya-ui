@@ -1,55 +1,55 @@
-.wi-accordion {
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
+.wd-accordion {
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
     overflow: hidden;
 }
 
-.wi-accordion__tab + .wi-accordion__tab {
-    border-top: var(--wi-border-width) solid var(--wi-color-border);
+.wd-accordion__tab + .wd-accordion__tab {
+    border-top: var(--wd-border-width) solid var(--wd-color-border);
 }
 
-.wi-accordion__header {
+.wd-accordion__header {
     align-items: center;
-    background: var(--wi-color-surface);
+    background: var(--wd-color-surface);
     border: 0;
-    color: var(--wi-color-text);
+    color: var(--wd-color-text);
     cursor: pointer;
     display: flex;
     font: inherit;
     font-weight: 600;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     justify-content: space-between;
-    padding: var(--wi-space-3) var(--wi-space-4);
+    padding: var(--wd-space-3) var(--wd-space-4);
     text-align: left;
-    transition: background-color var(--wi-motion-fast) var(--wi-motion-ease);
+    transition: background-color var(--wd-motion-fast) var(--wd-motion-ease);
     width: 100%;
 }
 
-.wi-accordion__header:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
+.wd-accordion__header:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wd-color-primary) 6%, var(--wd-color-surface));
 }
 
-.wi-accordion__header--active {
-    color: var(--wi-color-primary);
+.wd-accordion__header--active {
+    color: var(--wd-color-primary);
 }
 
-.wi-accordion__header:disabled {
-    color: var(--wi-color-text-muted);
+.wd-accordion__header:disabled {
+    color: var(--wd-color-text-muted);
     cursor: not-allowed;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-accordion__header:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-accordion__header:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-accordion__content {
-    background: var(--wi-color-surface);
-    color: var(--wi-color-text);
-    padding: 0 var(--wi-space-4) var(--wi-space-4);
+.wd-accordion__content {
+    background: var(--wd-color-surface);
+    color: var(--wd-color-text);
+    padding: 0 var(--wd-space-4) var(--wd-space-4);
 }
 
-.wi-accordion__header-extra {
+.wd-accordion__header-extra {
     display: inline-flex;
 }

@@ -16,7 +16,7 @@ const RGB = /\brgb\s*\(/g
 const HSL = /\bhsl\s*\(/g
 
 /** Allow transparent, currentColor, inherit in CSS values */
-const ALLOW_LINE = /var\s*\(\s*--wi-|color-mix\s*\(|transparent|currentColor|inherit|none/
+const ALLOW_LINE = /var\s*\(\s*--wd-|color-mix\s*\(|transparent|currentColor|inherit|none/
 
 /** Skip demo IDs like '#1024' or 'WO-1024' in script/template strings */
 const DEMO_ID = /['"]#?[A-Z0-9-]{2,}['"]/
@@ -63,7 +63,7 @@ for (const root of roots) {
 }
 
 if (violations.length) {
-  console.error(`Found ${violations.length} raw color literal(s). Use --wi-* tokens instead:\n`)
+  console.error(`Found ${violations.length} raw color literal(s). Use --wd-* tokens instead:\n`)
   for (const v of violations) {
     console.error(`  ${v.file}:${v.line}`)
     console.error(`    ${v.text}\n`)

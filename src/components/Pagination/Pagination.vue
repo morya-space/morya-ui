@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PaginationProps } from './types'
 import { computed, ref } from 'vue'
-import { formatLocale, useWiLocale } from '../../locale'
-import WiIcon from '../Icon/Icon.vue'
+import { formatLocale, useWdLocale } from '../../locale'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   modelValue: 1,
@@ -20,7 +20,7 @@ const emit = defineEmits<{
   (event: 'update:rows', value: number): void
   (event: 'update:pageSize', value: number): void
 }>()
-const locale = useWiLocale()
+const locale = useWdLocale()
 const jumpDraft = ref('')
 const resolvedRows = computed(() => Math.max(1, props.pageSize ?? props.rows))
 const pageCount = computed(() => Math.max(1, Math.ceil(props.totalRecords / resolvedRows.value)))
@@ -77,34 +77,34 @@ defineExpose({ first, pageCount })
 
 <template>
   <nav
-    class="wi-pagination"
-    :class="{ 'wi-pagination--simple': simple }"
+    class="wd-pagination"
+    :class="{ 'wd-pagination--simple': simple }"
     :aria-label="locale.pagination"
   >
-    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">
-      <WiIcon name="chevron-left" size="sm" />
+    <button type="button" class="wd-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">
+      <WdIcon name="chevron-left" size="sm" />
     </button>
     <template v-if="simple">
-      <span class="wi-pagination__simple" aria-current="page">{{ currentPage }} / {{ pageCount }}</span>
+      <span class="wd-pagination__simple" aria-current="page">{{ currentPage }} / {{ pageCount }}</span>
     </template>
     <template v-else>
-      <button v-for="page in pages" :key="page" type="button" class="wi-pagination__button" :class="{ 'wi-pagination__button--active': page === currentPage }" :disabled="disabled" :aria-label="pageLabel(page)" :aria-current="page === currentPage ? 'page' : undefined" @click="setPage(page)">
+      <button v-for="page in pages" :key="page" type="button" class="wd-pagination__button" :class="{ 'wd-pagination__button--active': page === currentPage }" :disabled="disabled" :aria-label="pageLabel(page)" :aria-current="page === currentPage ? 'page' : undefined" @click="setPage(page)">
         {{ page }}
       </button>
     </template>
-    <button type="button" class="wi-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">
-      <WiIcon name="chevron-right" size="sm" />
+    <button type="button" class="wd-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">
+      <WdIcon name="chevron-right" size="sm" />
     </button>
-    <label v-if="showSizePicker && !simple" class="wi-pagination__sizer">
-      <span class="wi-pagination__sizer-label">{{ locale.itemsPerPage }}</span>
-      <select class="wi-pagination__select" :disabled="disabled" :value="resolvedRows" @change="onSizeChange">
+    <label v-if="showSizePicker && !simple" class="wd-pagination__sizer">
+      <span class="wd-pagination__sizer-label">{{ locale.itemsPerPage }}</span>
+      <select class="wd-pagination__select" :disabled="disabled" :value="resolvedRows" @change="onSizeChange">
         <option v-for="size in sizeOptions" :key="size" :value="size">{{ size }}</option>
       </select>
     </label>
-    <label v-if="showQuickJumper && !simple" class="wi-pagination__jumper">
+    <label v-if="showQuickJumper && !simple" class="wd-pagination__jumper">
       <span>{{ locale.jumpToPage }}</span>
       <input
-        class="wi-pagination__input"
+        class="wd-pagination__input"
         type="number"
         min="1"
         :max="pageCount"

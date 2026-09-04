@@ -1,38 +1,38 @@
 /* —— Data: TreeTable —— */
-.wi-treetable {
+.wd-treetable {
     overflow: auto;
     width: 100%;
 }
 
-.wi-treetable__table {
+.wd-treetable__table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.wi-treetable__table th,
-.wi-treetable__cell {
-    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
-    padding: var(--wi-space-2) var(--wi-space-3);
+.wd-treetable__table th,
+.wd-treetable__cell {
+    border-bottom: var(--wd-border-width) solid var(--wd-color-border);
+    padding: var(--wd-space-2) var(--wd-space-3);
     text-align: left;
 }
 
-.wi-treetable__table th {
-    background: var(--wi-table-header-bg);
-    font-size: var(--wi-font-size-sm);
+.wd-treetable__table th {
+    background: var(--wd-table-header-bg);
+    font-size: var(--wd-font-size-sm);
     font-weight: 600;
 }
 
-.wi-treetable__tree-cell {
+.wd-treetable__tree-cell {
     align-items: center;
     display: flex;
-    gap: var(--wi-space-1);
+    gap: var(--wd-space-1);
 }
 
-.wi-treetable__toggler,
-.wi-treetable__toggler-spacer {
+.wd-treetable__toggler,
+.wd-treetable__toggler-spacer {
     background: transparent;
     border: 0;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     flex: 0 0 1.25rem;
     font: inherit;
     height: 1.25rem;
@@ -40,22 +40,22 @@
     width: 1.25rem;
 }
 
-.wi-treetable__message {
+.wd-treetable__message {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--wi-control-height-medium, 2.5rem) * 2);
-    padding: var(--wi-space-5);
+    min-height: calc(var(--wd-control-height-medium, 2.5rem) * 2);
+    padding: var(--wd-space-5);
 }
 
-.wi-treetable__expansion-cell {
-    background: color-mix(in srgb, var(--wi-color-primary) 6%, var(--wi-color-surface));
-    padding: var(--wi-space-3);
+.wd-treetable__expansion-cell {
+    background: color-mix(in srgb, var(--wd-color-primary) 6%, var(--wd-color-surface));
+    padding: var(--wd-space-3);
 }
 
-.wi-treetable__empty-text {
+.wd-treetable__empty-text {
     margin: 0;
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-sm);
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-sm);
     line-height: 1.5;
 }

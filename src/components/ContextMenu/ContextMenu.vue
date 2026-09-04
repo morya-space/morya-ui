@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWiConfig } from '../../shared/config'
+import { useWdConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import ContextMenuNodes from './ContextMenuNodes.vue'
 
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (event: 'update:position', value: ContextMenuPosition): void
 }>()
 
-const config = useWiConfig()
+const config = useWdConfig()
 const root = ref<HTMLElement | null>(null)
 const localPosition = ref<ContextMenuPosition>({ x: 0, y: 0 })
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -90,16 +90,16 @@ defineExpose({ show, hide })
 </script>
 
 <template>
-  <div class="wi-contextmenu-anchor" @contextmenu="onContextMenu">
+  <div class="wd-contextmenu-anchor" @contextmenu="onContextMenu">
     <slot />
   </div>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wi-scale-fade">
+    <Transition name="wd-scale-fade">
       <div
         v-if="modelValue"
         ref="root"
-        class="wi-contextmenu"
-        :class="{ 'wi-contextmenu--teleported': teleported }"
+        class="wd-contextmenu"
+        :class="{ 'wd-contextmenu--teleported': teleported }"
         role="menu"
         :style="menuStyle"
         @click.stop

@@ -1,3 +1,3 @@
 import './style'
-export { default as WiProgressSpinner } from './ProgressSpinner.vue'
+export { default as WdProgressSpinner } from './ProgressSpinner.vue'
 export type { ProgressSpinnerProps } from './types'

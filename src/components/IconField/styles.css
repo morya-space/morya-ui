@@ -1,5 +1,5 @@
 /* —— Form: IconField —— */
-.wi-icon-field {
+.wd-icon-field {
     align-items: center;
     display: inline-flex;
     max-width: 100%;
@@ -7,9 +7,9 @@
     width: 100%;
 }
 
-.wi-icon-field__icon {
+.wd-icon-field__icon {
     align-items: center;
-    color: var(--wi-color-text-muted);
+    color: var(--wd-color-text-muted);
     display: inline-flex;
     pointer-events: none;
     position: absolute;
@@ -18,58 +18,58 @@
     z-index: 1;
 }
 
-.wi-icon-field--left .wi-icon-field__icon {
-    left: var(--wi-control-padding-x-medium);
+.wd-icon-field--left .wd-icon-field__icon {
+    left: var(--wd-control-padding-x-medium);
 }
 
-.wi-icon-field--right .wi-icon-field__icon {
-    right: var(--wi-control-padding-x-medium);
+.wd-icon-field--right .wd-icon-field__icon {
+    right: var(--wd-control-padding-x-medium);
 }
 
-.wi-icon-field--left :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
-    padding-left: var(--wi-control-affix-padding);
+.wd-icon-field--left :is(.wd-input, .wd-textarea, .wd-password__input, .wd-inputnumber__input) {
+    padding-left: var(--wd-control-affix-padding);
 }
 
-.wi-icon-field--right :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
-    padding-right: var(--wi-control-affix-padding);
+.wd-icon-field--right :is(.wd-input, .wd-textarea, .wd-password__input, .wd-inputnumber__input) {
+    padding-right: var(--wd-control-affix-padding);
 }
 
-.wi-icon-field--left:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
-    .wi-icon-field__icon {
-    left: var(--wi-control-padding-x-small);
+.wd-icon-field--left:has(.wd-input--small, .wd-textarea--small, .wd-password--small, .wd-inputnumber--small)
+    .wd-icon-field__icon {
+    left: var(--wd-control-padding-x-small);
 }
 
-.wi-icon-field--right:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
-    .wi-icon-field__icon {
-    right: var(--wi-control-padding-x-small);
+.wd-icon-field--right:has(.wd-input--small, .wd-textarea--small, .wd-password--small, .wd-inputnumber--small)
+    .wd-icon-field__icon {
+    right: var(--wd-control-padding-x-small);
 }
 
-.wi-icon-field--left:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
-    .wi-icon-field__icon {
-    left: var(--wi-control-padding-x-large);
+.wd-icon-field--left:has(.wd-input--large, .wd-textarea--large, .wd-password--large, .wd-inputnumber--large)
+    .wd-icon-field__icon {
+    left: var(--wd-control-padding-x-large);
 }
 
-.wi-icon-field--right:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
-    .wi-icon-field__icon {
-    right: var(--wi-control-padding-x-large);
+.wd-icon-field--right:has(.wd-input--large, .wd-textarea--large, .wd-password--large, .wd-inputnumber--large)
+    .wd-icon-field__icon {
+    right: var(--wd-control-padding-x-large);
 }
 
-.wi-icon-field--left:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
-    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
-    padding-left: var(--wi-control-affix-gap);
+.wd-icon-field--left:has(.wd-input--small, .wd-textarea--small, .wd-password--small, .wd-inputnumber--small)
+    :is(.wd-input, .wd-textarea, .wd-password__input, .wd-inputnumber__input) {
+    padding-left: var(--wd-control-affix-gap);
 }
 
-.wi-icon-field--right:has(.wi-input--small, .wi-textarea--small, .wi-password--small, .wi-inputnumber--small)
-    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
-    padding-right: var(--wi-control-affix-gap);
+.wd-icon-field--right:has(.wd-input--small, .wd-textarea--small, .wd-password--small, .wd-inputnumber--small)
+    :is(.wd-input, .wd-textarea, .wd-password__input, .wd-inputnumber__input) {
+    padding-right: var(--wd-control-affix-gap);
 }
 
-.wi-icon-field--left:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
-    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
-    padding-left: calc(var(--wi-control-affix-padding) + var(--wi-space-1));
+.wd-icon-field--left:has(.wd-input--large, .wd-textarea--large, .wd-password--large, .wd-inputnumber--large)
+    :is(.wd-input, .wd-textarea, .wd-password__input, .wd-inputnumber__input) {
+    padding-left: calc(var(--wd-control-affix-padding) + var(--wd-space-1));
 }
 
-.wi-icon-field--right:has(.wi-input--large, .wi-textarea--large, .wi-password--large, .wi-inputnumber--large)
-    :is(.wi-input, .wi-textarea, .wi-password__input, .wi-inputnumber__input) {
-    padding-right: calc(var(--wi-control-affix-padding) + var(--wi-space-1));
+.wd-icon-field--right:has(.wd-input--large, .wd-textarea--large, .wd-password--large, .wd-inputnumber--large)
+    :is(.wd-input, .wd-textarea, .wd-password__input, .wd-inputnumber__input) {
+    padding-right: calc(var(--wd-control-affix-padding) + var(--wd-space-1));
 }

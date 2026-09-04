@@ -11,20 +11,20 @@ SVG 环形加载指示器。
 ## 引入
 
 ```ts
-import { WiProgressSpinner } from '@well-insight/ui'
+import { WdProgressSpinner } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiProgressSpinner } from '@well-insight/ui'
+import { WdProgressSpinner } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WiProgressSpinner />
-    <WiProgressSpinner stroke-width="4" animation-duration="0.6s" />
+    <WdProgressSpinner />
+    <WdProgressSpinner stroke-width="4" animation-duration="0.6s" />
   </div>
 </template>
 ```
@@ -35,19 +35,19 @@ import { WiProgressSpinner } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiProgressSpinner } from '@well-insight/ui'
+import { WdButton, WdProgressSpinner } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const loading = ref(true)
 </script>
 
 <template>
-  <WiProgressSpinner :show="loading" description="Loading">
+  <WdProgressSpinner :show="loading" description="Loading">
     <p style="margin:0">
       Form content
     </p>
-  </WiProgressSpinner>
-  <WiButton label="Toggle" size="small" @click="loading = !loading" />
+  </WdProgressSpinner>
+  <WdButton label="Toggle" size="small" @click="loading = !loading" />
 </template>
 ```
 

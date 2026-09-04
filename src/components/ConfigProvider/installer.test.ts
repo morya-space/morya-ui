@@ -1,38 +1,38 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
-import { wiComponents } from '../../component-registry'
-import { createWellInsight, WellInsight } from '../../shared/config'
-import WiButton from '../Button/Button.vue'
+import { wdComponents } from '../../component-registry'
+import { createWexDesign, WexDesign } from '../../shared/config'
+import WdButton from '../Button/Button.vue'
 
-describe('createWellInsight / WellInsight installer', () => {
+describe('createWexDesign / WexDesign installer', () => {
   it('registers all components globally by default', () => {
     const Host = defineComponent({
-      template: '<WiButton label="Go" />',
+      template: '<WdButton label="Go" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWellInsight()],
+        plugins: [createWexDesign()],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Go')
-    expect(Object.keys(wiComponents).length).toBeGreaterThan(50)
+    expect(Object.keys(wdComponents).length).toBeGreaterThan(50)
   })
 
-  it('accepts options via app.use(WellInsight, options)', () => {
+  it('accepts options via app.use(WexDesign, options)', () => {
     const Host = defineComponent({
-      template: '<WiButton label="Sized" />',
+      template: '<WdButton label="Sized" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [[WellInsight, { size: 'small' }]],
+        plugins: [[WexDesign, { size: 'small' }]],
       },
     })
 
-    expect(wrapper.get('.wi-button').classes()).toContain('wi-button--small')
+    expect(wrapper.get('.wd-button').classes()).toContain('wd-button--small')
   })
 
   it('skips component registration when components is false', () => {
@@ -44,26 +44,26 @@ describe('createWellInsight / WellInsight installer', () => {
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWellInsight({ components: false, size: 'large' })],
+        plugins: [createWexDesign({ components: false, size: 'large' })],
       },
     })
 
-    expect(wrapper.vm.$.appContext.components.WiButton).toBeUndefined()
-    expect(wrapper.vm.$.appContext.config.globalProperties.$wi?.size).toBe('large')
+    expect(wrapper.vm.$.appContext.components.WdButton).toBeUndefined()
+    expect(wrapper.vm.$.appContext.config.globalProperties.$wd?.size).toBe('large')
   })
 
   it('registers a partial component list', () => {
     const Host = defineComponent({
-      template: '<WiButton label="Only" />',
+      template: '<WdButton label="Only" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWellInsight({ components: [WiButton] })],
+        plugins: [createWexDesign({ components: [WdButton] })],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Only')
-    expect(wrapper.vm.$.appContext.components.WiInput).toBeUndefined()
+    expect(wrapper.vm.$.appContext.components.WdInput).toBeUndefined()
   })
 })

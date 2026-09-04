@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WiScrollbar } from '@well-insight/ui'
+import { WdScrollbar } from '@wex-design/ui'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loadChangelog } from '../docs/loadChangelog'
@@ -35,7 +35,7 @@ function selectVersion(version: string) {
 <template>
   <div class="changelog-shell">
     <aside class="changelog-sidebar" :aria-label="t.changelogNav">
-      <WiScrollbar class="changelog-scroll">
+      <WdScrollbar class="changelog-scroll">
         <div class="changelog-sidebar__body">
           <p class="changelog-kicker">
             RELEASES
@@ -60,11 +60,11 @@ function selectVersion(version: string) {
             </button>
           </nav>
         </div>
-      </WiScrollbar>
+      </WdScrollbar>
     </aside>
 
     <main class="changelog-main">
-      <WiScrollbar class="changelog-scroll">
+      <WdScrollbar class="changelog-scroll">
         <div class="changelog-main__body">
           <template v-if="activeRelease">
             <header class="changelog-hero">
@@ -94,7 +94,7 @@ function selectVersion(version: string) {
             <p>{{ t.noReleasesHint }}</p>
           </section>
         </div>
-      </WiScrollbar>
+      </WdScrollbar>
     </main>
   </div>
 </template>
@@ -109,7 +109,7 @@ function selectVersion(version: string) {
 }
 
 .changelog-sidebar {
-  background: color-mix(in srgb, var(--wi-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--wd-color-surface) 62%, transparent);
   border-right: 1px solid var(--docs-edge);
   min-height: 0;
   backdrop-filter: blur(12px);
@@ -143,7 +143,7 @@ function selectVersion(version: string) {
 
 .changelog-sidebar__meta {
   align-items: center;
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
   display: flex;
   flex-wrap: wrap;
   font-family: var(--docs-mono);
@@ -162,7 +162,7 @@ function selectVersion(version: string) {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0.7rem;
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
   cursor: pointer;
   display: flex;
   font-size: 0.86rem;
@@ -171,24 +171,24 @@ function selectVersion(version: string) {
   padding: 0.55rem 0.7rem;
   text-align: left;
   transition:
-    color var(--wi-motion-fast) var(--wi-motion-ease),
-    background var(--wi-motion-fast) var(--wi-motion-ease),
-    border-color var(--wi-motion-fast) var(--wi-motion-ease);
+    color var(--wd-motion-fast) var(--wd-motion-ease),
+    background var(--wd-motion-fast) var(--wd-motion-ease),
+    border-color var(--wd-motion-fast) var(--wd-motion-ease);
 }
 
 .changelog-nav__item:hover,
 .changelog-nav__item.is-active {
-  background: color-mix(in srgb, var(--wi-color-primary) 10%, transparent);
-  color: var(--wi-color-primary);
+  background: color-mix(in srgb, var(--wd-color-primary) 10%, transparent);
+  color: var(--wd-color-primary);
 }
 
 .changelog-nav__item.is-active {
-  border-color: color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
+  border-color: color-mix(in srgb, var(--wd-color-primary) 28%, transparent);
   font-weight: 700;
 }
 
 .changelog-nav__badge {
-  color: var(--wi-color-primary);
+  color: var(--wd-color-primary);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   letter-spacing: 0.04em;
@@ -237,14 +237,14 @@ function selectVersion(version: string) {
 }
 
 .changelog-section li {
-  color: var(--wi-color-text);
+  color: var(--wd-color-text);
   font-size: 0.92rem;
   line-height: 1.6;
   opacity: 0.92;
 }
 
 .changelog-empty {
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
 }
 
 .changelog-empty code {

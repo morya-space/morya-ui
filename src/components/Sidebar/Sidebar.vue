@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import type { SidebarItem, SidebarProps } from './types'
 import { computed, useSlots } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { resolveMenuIcon } from '../../shared/menu'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   model: () => [],
   collapsed: false,
 })
-const locale = useWiLocale()
+const locale = useWdLocale()
 
 const slots = useSlots()
 const rootClass = computed(() => [
-  'wi-sidebar',
-  { 'wi-sidebar--collapsed': props.collapsed },
+  'wd-sidebar',
+  { 'wd-sidebar--collapsed': props.collapsed },
 ])
 
 function activate(item: SidebarItem) {
@@ -30,32 +30,32 @@ function iconOf(item: SidebarItem) {
 <template>
   <nav :class="rootClass" :aria-label="locale.sidebar">
     <slot v-if="slots.default" />
-    <ul v-else class="wi-sidebar__list">
-      <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wi-sidebar__item">
+    <ul v-else class="wd-sidebar__list">
+      <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wd-sidebar__item">
         <button
           type="button"
-          class="wi-sidebar__link"
+          class="wd-sidebar__link"
           :disabled="item.disabled"
           :title="collapsed ? item.label : undefined"
           @click="activate(item)"
         >
-          <span v-if="iconOf(item)" class="wi-sidebar__icon" aria-hidden="true">
-            <WiIcon :name="iconOf(item)!" size="sm" />
+          <span v-if="iconOf(item)" class="wd-sidebar__icon" aria-hidden="true">
+            <WdIcon :name="iconOf(item)!" size="sm" />
           </span>
-          <span v-if="!collapsed" class="wi-sidebar__label">{{ item.label }}</span>
+          <span v-if="!collapsed" class="wd-sidebar__label">{{ item.label }}</span>
         </button>
-        <ul v-if="!collapsed && item.items?.length" class="wi-sidebar__children">
+        <ul v-if="!collapsed && item.items?.length" class="wd-sidebar__children">
           <li v-for="(child, childIndex) in item.items" :key="`${child.label}-${childIndex}`">
             <button
               type="button"
-              class="wi-sidebar__link wi-sidebar__link--child"
+              class="wd-sidebar__link wd-sidebar__link--child"
               :disabled="child.disabled"
               @click="activate(child)"
             >
-              <span v-if="iconOf(child)" class="wi-sidebar__icon" aria-hidden="true">
-                <WiIcon :name="iconOf(child)!" size="sm" />
+              <span v-if="iconOf(child)" class="wd-sidebar__icon" aria-hidden="true">
+                <WdIcon :name="iconOf(child)!" size="sm" />
               </span>
-              <span class="wi-sidebar__label">{{ child.label }}</span>
+              <span class="wd-sidebar__label">{{ child.label }}</span>
             </button>
           </li>
         </ul>

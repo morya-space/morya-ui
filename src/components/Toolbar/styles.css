@@ -1,30 +1,30 @@
-/* —�?Panel: Toolbar —�?*/
-.wi-toolbar {
+/* —�?Panel: Toolbar —�?*/
+.wd-toolbar {
     align-items: center;
-    background: var(--wi-color-surface);
-    border: var(--wi-border-width) solid var(--wi-color-border);
-    border-radius: var(--wi-radius-md);
+    background: var(--wd-color-surface);
+    border: var(--wd-border-width) solid var(--wd-color-border);
+    border-radius: var(--wd-radius-md);
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wi-space-3);
+    gap: var(--wd-space-3);
     justify-content: space-between;
-    padding: var(--wi-space-2) var(--wi-space-3);
+    padding: var(--wd-space-2) var(--wd-space-3);
 }
 
-.wi-toolbar__start,
-.wi-toolbar__center,
-.wi-toolbar__end {
+.wd-toolbar__start,
+.wd-toolbar__center,
+.wd-toolbar__end {
     align-items: center;
     display: inline-flex;
     flex-wrap: wrap;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
 }
 
-.wi-toolbar__center {
+.wd-toolbar__center {
     flex: 1 1 auto;
     justify-content: center;
 }
 
-.wi-toolbar__end {
+.wd-toolbar__end {
     margin-inline-start: auto;
 }

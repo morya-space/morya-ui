@@ -11,14 +11,14 @@ Shows a welcome message and command history; submitting emits `command`.
 ## Import
 
 ```ts
-import { WiTerminal } from '@well-insight/ui'
+import { WdTerminal } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiTerminal } from '@well-insight/ui'
+import { WdTerminal } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -26,7 +26,7 @@ const last = ref('')
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WiTerminal welcome-message="Well Insight Terminal" @command="last = $event" />
+    <WdTerminal welcome-message="Wex Design Terminal" @command="last = $event" />
     <div v-if="last">
       Last command: {{ last }}
     </div>
@@ -38,7 +38,7 @@ const last = ref('')
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `welcomeMessage` | `string` | `'Welcome to Well Insight Terminal'` | Welcome message at the top. |
+| `welcomeMessage` | `string` | `'Welcome to Wex Design Terminal'` | Welcome message at the top. |
 | `prompt` | `string` | `'>'` | Prompt. |
 
 ## Events

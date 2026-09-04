@@ -1,17 +1,17 @@
 {
-  "name": "@well-insight/nuxt",
+  "name": "@wex-design/nuxt",
   "type": "module",
-  "version": "0.1.14",
-  "description": "Nuxt 3 module for @well-insight/ui — styles, transpile, and client overlay context.",
+  "version": "0.0.1",
+  "description": "Nuxt 3 module for @wex-design/ui — styles, transpile, and client overlay context.",
   "license": "MIT",
-  "homepage": "https://github.com/well-insight/well-insight-ui/tree/main/packages/nuxt#readme",
+  "homepage": "https://github.com/wex-design/wex-design-ui/tree/main/packages/nuxt#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/well-insight/well-insight-ui.git",
+    "url": "git+https://github.com/wex-design/wex-design-ui.git",
     "directory": "packages/nuxt"
   },
   "bugs": {
-    "url": "https://github.com/well-insight/well-insight-ui/issues"
+    "url": "https://github.com/wex-design/wex-design-ui/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "@nuxt/kit": "^3.16.0"
   },
   "peerDependencies": {
-    "@well-insight/ui": "^0.1.14",
+    "@wex-design/ui": "workspace:^",
     "nuxt": "^3.10.0"
   }
 }

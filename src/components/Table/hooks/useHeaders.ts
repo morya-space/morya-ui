@@ -3,7 +3,7 @@ import type { TableHeader, TableSortMode, TableSortType } from '../types'
 import type { ClientSortOptions, EmitsEventName, HeaderForRender, ServerOptionsComputed } from './internal'
 import { computed, ref } from 'vue'
 
-/** 选择列默认宽度（容纳标准 WiCheckbox / WiRadio + focus ring） */
+/** 选择列默认宽度（容纳标准 WdCheckbox / WdRadio + focus ring） */
 export const DEFAULT_SELECTION_COLUMN_WIDTH = 48
 
 export function useHeaders(

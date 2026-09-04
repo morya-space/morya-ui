@@ -1,46 +1,46 @@
-# @well-insight/nuxt
+# @wex-design/nuxt
 
-Nuxt 3 module for [@well-insight/ui](https://www.npmjs.com/package/@well-insight/ui).
+Nuxt 3 module for [@wex-design/ui](https://www.npmjs.com/package/@wex-design/ui).
 
 ## Features
 
-- Imports `@well-insight/ui/styles.css`
-- Transpiles `@well-insight/ui` for SSR
-- Client plugin: `createWellInsight({ components: false })` for toast/message overlay context
+- Imports `@wex-design/ui/styles.css`
+- Transpiles `@wex-design/ui` for SSR
+- Client plugin: `createWexDesign({ components: false })` for toast/message overlay context
 
-Component auto-import remains via `WellInsightResolver` + `unplugin-vue-components` (see [SSR guide](https://well-insight.github.io/well-insight-ui/docs/ssr)).
+Component auto-import remains via `WexDesignResolver` + `unplugin-vue-components` (see [SSR guide](https://wex-design.github.io/wex-design-ui/docs/ssr)).
 
 ## Setup
 
 ```bash
-pnpm add @well-insight/ui @well-insight/nuxt
+pnpm add @wex-design/ui @wex-design/nuxt
 pnpm add -D unplugin-vue-components
 ```
 
 ```ts
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { WellInsightResolver } from '@well-insight/ui/resolver'
+import { WexDesignResolver } from '@wex-design/ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@well-insight/nuxt'],
-  wellInsight: {
+  modules: ['@wex-design/nuxt'],
+  wexDesign: {
     css: true,
     transpile: true,
   },
   vite: {
     plugins: [
       Components({
-        resolvers: [WellInsightResolver()],
+        resolvers: [WexDesignResolver()],
       }),
     ],
   },
 })
 ```
 
-Wrap your app with `WiConfigProvider` in `app.vue` for theme and global defaults.
+Wrap your app with `WdConfigProvider` in `app.vue` for theme and global defaults.
 
-## Options (`wellInsight`)
+## Options (`wexDesign`)
 
 | Option | Default | Description |
 | --- | --- | --- |

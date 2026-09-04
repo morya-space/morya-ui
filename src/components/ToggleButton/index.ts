@@ -1,3 +1,3 @@
 import './style'
-export { default as WiToggleButton } from './ToggleButton.vue'
+export { default as WdToggleButton } from './ToggleButton.vue'
 export type { ToggleButtonEmits, ToggleButtonProps } from './types'

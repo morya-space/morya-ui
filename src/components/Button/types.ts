@@ -26,7 +26,7 @@ export type ButtonBadgeSeverity = Exclude<ButtonSeverity, 'primary' | 'help'> | 
 export interface ButtonProps {
   /** Button label text. Ignored when default slot has content. */
   label?: string
-  /** Leading/trailing icon from WiIcon, or a Vue component. */
+  /** Leading/trailing icon from WdIcon, or a Vue component. */
   icon?: IconName | Component
   /** Icon position relative to the label. */
   iconPos?: ButtonIconPos

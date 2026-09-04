@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type {RadioGroupProps, RadioValue} from './types';
 import { computed, provide } from 'vue'
-import { useWiId } from '../../shared/useWiId'
-import {   WI_RADIO_GROUP_KEY } from './types'
+import { useWdId } from '../../shared/useWdId'
+import {   WD_RADIO_GROUP_KEY } from './types'
 
 const props = withDefaults(defineProps<RadioGroupProps>(), {
   disabled: false,
@@ -10,14 +10,14 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'update:modelValue', value: RadioValue): void }>()
-const fallbackName = useWiId('wi-radio-group')
+const fallbackName = useWdId('wd-radio-group')
 
 function select(value: RadioValue) {
   if (props.disabled) return
   emit('update:modelValue', value)
 }
 
-provide(WI_RADIO_GROUP_KEY, {
+provide(WD_RADIO_GROUP_KEY, {
   modelValue: computed(() => props.modelValue),
   name: computed(() => props.name ?? fallbackName),
   size: computed(() => props.size),
@@ -29,10 +29,10 @@ provide(WI_RADIO_GROUP_KEY, {
 
 <template>
   <div
-    class="wi-radio-group"
+    class="wd-radio-group"
     role="radiogroup"
     :aria-label="label"
-    :class="{ 'wi-radio-group--disabled': disabled, 'wi-radio-group--invalid': invalid }"
+    :class="{ 'wd-radio-group--disabled': disabled, 'wd-radio-group--invalid': invalid }"
   >
     <slot />
   </div>

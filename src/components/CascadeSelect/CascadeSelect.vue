@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
-import { useWiLocale } from '../../locale'
-import { useComponentDefaults, useConfiguredSize, useWiConfig } from '../../shared/config'
-import { useWiId } from '../../shared/useWiId'
+import { useWdLocale } from '../../locale'
+import { useComponentDefaults, useConfiguredSize, useWdConfig } from '../../shared/config'
+import { useWdId } from '../../shared/useWdId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
@@ -27,8 +27,8 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 const defaults = useComponentDefaults('CascadeSelect')
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const sizeClass = useConfiguredSize('CascadeSelect', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -36,7 +36,7 @@ const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const path = ref<CascadeSelectOption[][]>([])
-const autoFieldId = useWiId('wi-cascadeselect')
+const autoFieldId = useWdId('wd-cascadeselect')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
@@ -120,8 +120,8 @@ function buildPathToValue(
 function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.wi-cascadeselect__column')[activeColumn.value]
-  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.wi-cascadeselect__option')[index]
+  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.wd-cascadeselect__column')[activeColumn.value]
+  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.wd-cascadeselect__option')[index]
   optionEl?.focus({ preventScroll: true })
 }
 
@@ -263,31 +263,31 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="wi-select-field wi-cascadeselect"
+    class="wd-select-field wd-cascadeselect"
     :class="[
-      `wi-cascadeselect--${sizeClass}`,
+      `wd-cascadeselect--${sizeClass}`,
       {
-        'wi-select-field--fluid': resolvedFluid,
-        'wi-cascadeselect--disabled': disabled,
-        'wi-cascadeselect--open': open,
+        'wd-select-field--fluid': resolvedFluid,
+        'wd-cascadeselect--disabled': disabled,
+        'wd-cascadeselect--open': open,
       },
     ]"
   >
-    <label v-if="label" class="wi-select-field__label" :for="fieldId">{{ label }}</label>
+    <label v-if="label" class="wd-select-field__label" :for="fieldId">{{ label }}</label>
     <div
-      class="wi-cascadeselect__control wi-select__control"
+      class="wd-cascadeselect__control wd-select__control"
       :class="{
-        'wi-select__control--clearable': showClearButton,
-        'wi-select__control--open': open,
+        'wd-select__control--clearable': showClearButton,
+        'wd-select__control--open': open,
       }"
     >
       <button
         :id="fieldId"
         ref="trigger"
         type="button"
-        class="wi-cascadeselect__trigger"
+        class="wd-cascadeselect__trigger"
         role="combobox"
-        :class="{ 'wi-cascadeselect__trigger--invalid': isInvalid, 'wi-cascadeselect__trigger--placeholder': !hasValue }"
+        :class="{ 'wd-cascadeselect__trigger--invalid': isInvalid, 'wd-cascadeselect__trigger--placeholder': !hasValue }"
         :disabled="disabled"
         :aria-expanded="open"
         :aria-controls="open ? panelId : undefined"
@@ -298,43 +298,43 @@ onBeforeUnmount(() => {
         @keydown="onTriggerKeydown"
       >
         <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
-        <span v-else class="wi-cascadeselect__label">{{ displayLabel }}</span>
+        <span v-else class="wd-cascadeselect__label">{{ displayLabel }}</span>
       </button>
-      <div class="wi-select__suffix">
+      <div class="wd-select__suffix">
         <button
           v-if="showClearButton"
-          class="wi-select__clear"
+          class="wd-select__clear"
           type="button"
           :aria-label="locale.clear"
           @click="clear"
         >
-          <WiIcon name="close" class="wi-control-affix-icon" />
+          <WdIcon name="close" class="wd-control-affix-icon" />
         </button>
         <span
-          class="wi-select__indicator"
-          :class="{ 'wi-select__indicator--open': open }"
+          class="wd-select__indicator"
+          :class="{ 'wd-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <WiIcon name="chevron-down" class="wi-control-affix-icon" />
+          <WdIcon name="chevron-down" class="wd-control-affix-icon" />
         </span>
       </div>
     </div>
     <p
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="wi-select-field__help"
-      :class="{ 'wi-select-field__help--invalid': feedbackIsError }"
+      class="wd-select-field__help"
+      :class="{ 'wd-select-field__help--invalid': feedbackIsError }"
     >
       {{ feedbackText }}
     </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wi-scale-fade">
+      <Transition name="wd-scale-fade">
         <div
           v-if="open"
           :id="panelId"
           ref="panel"
-          class="wi-cascadeselect__panel"
-          :class="{ 'wi-cascadeselect__panel--teleported': teleported }"
+          class="wd-cascadeselect__panel"
+          :class="{ 'wd-cascadeselect__panel--teleported': teleported }"
           :style="panelStyle"
           role="listbox"
           @keydown="onPanelKeydown"
@@ -342,15 +342,15 @@ onBeforeUnmount(() => {
           <ul
             v-for="(column, columnIndex) in path"
             :key="columnIndex"
-            class="wi-cascadeselect__column"
+            class="wd-cascadeselect__column"
           >
             <li v-for="option in column" :key="String(option.value)">
               <button
                 type="button"
-                class="wi-cascadeselect__option"
+                class="wd-cascadeselect__option"
                 :class="{
-                  'wi-cascadeselect__option--selected': option.value === modelValue,
-                  'wi-cascadeselect__option--parent': Boolean(option.children?.length),
+                  'wd-cascadeselect__option--selected': option.value === modelValue,
+                  'wd-cascadeselect__option--parent': Boolean(option.children?.length),
                 }"
                 :disabled="option.disabled"
                 role="option"
@@ -360,7 +360,7 @@ onBeforeUnmount(() => {
                 <slot name="option" :option="option">
                   <span>{{ option.label }}</span>
                 </slot>
-                <WiIcon
+                <WdIcon
                   v-if="option.children?.length"
                   name="chevron-right"
                   size="sm"

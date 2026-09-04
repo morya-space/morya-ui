@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {CheckboxGroupProps, CheckboxValue} from './types';
 import { computed, provide } from 'vue'
-import {   WI_CHECKBOX_GROUP_KEY } from './types'
+import {   WD_CHECKBOX_GROUP_KEY } from './types'
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   modelValue: () => [],
@@ -22,7 +22,7 @@ function toggle(value: CheckboxValue, checked: boolean) {
   emit('update:modelValue', current.filter((item) => item !== value))
 }
 
-provide(WI_CHECKBOX_GROUP_KEY, {
+provide(WD_CHECKBOX_GROUP_KEY, {
   modelValue: computed(() => props.modelValue ?? []),
   name: computed(() => props.name),
   size: computed(() => props.size),
@@ -34,10 +34,10 @@ provide(WI_CHECKBOX_GROUP_KEY, {
 
 <template>
   <div
-    class="wi-checkbox-group"
+    class="wd-checkbox-group"
     role="group"
     :aria-label="label"
-    :class="{ 'wi-checkbox-group--disabled': disabled, 'wi-checkbox-group--invalid': invalid }"
+    :class="{ 'wd-checkbox-group--disabled': disabled, 'wd-checkbox-group--invalid': invalid }"
   >
     <slot />
   </div>

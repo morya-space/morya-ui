@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { MegaMenuItem, MegaMenuProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { useWdLocale } from '../../locale'
+import { useWdConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<MegaMenuProps>(), {
   model: () => [],
@@ -20,8 +20,8 @@ const emit = defineEmits<{
   (event: 'select', item: MegaMenuItem): void
 }>()
 
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const openIndex = ref<number | null>(null)
 const root = ref<HTMLElement | null>(null)
 const triggerEls = ref<(HTMLElement | null)[]>([])
@@ -102,16 +102,16 @@ function focusTop(index: number) {
 }
 
 function openPanelEl(): HTMLElement | null {
-  const local = root.value?.querySelector<HTMLElement>('.wi-megamenu__panel')
+  const local = root.value?.querySelector<HTMLElement>('.wd-megamenu__panel')
   if (local) return local
-  return document.querySelector<HTMLElement>('.wi-megamenu__panel--teleported')
+  return document.querySelector<HTMLElement>('.wd-megamenu__panel--teleported')
 }
 
 function focusActiveLink() {
   const index = panelKeyboard.activeIndex.value
   if (index < 0) return
   openPanelEl()
-    ?.querySelectorAll<HTMLElement>('.wi-megamenu__link')
+    ?.querySelectorAll<HTMLElement>('.wd-megamenu__link')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -208,7 +208,7 @@ watch(panelKeyboard.activeIndex, () => {
 function onDocumentClick(event: MouseEvent) {
   const target = event.target as Node
   if (root.value?.contains(target)) return
-  const panel = document.querySelector('.wi-megamenu__panel--teleported')
+  const panel = document.querySelector('.wd-megamenu__panel--teleported')
   if (panel?.contains(target)) return
   closePanel()
 }
@@ -236,18 +236,18 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav ref="root" class="wi-megamenu" :aria-label="locale.megaMenu" @keydown="onTopKeydown">
+  <nav ref="root" class="wd-megamenu" :aria-label="locale.megaMenu" @keydown="onTopKeydown">
     <div
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
-      class="wi-megamenu__item"
-      :class="{ 'wi-megamenu__item--open': openIndex === index }"
+      class="wd-megamenu__item"
+      :class="{ 'wd-megamenu__item--open': openIndex === index }"
     >
       <button
         :ref="(el) => setTriggerRef(el, index)"
         type="button"
-        class="wi-megamenu__trigger"
-        :class="{ 'wi-megamenu__trigger--selected': isSelected(item) }"
+        class="wd-megamenu__trigger"
+        :class="{ 'wd-megamenu__trigger--selected': isSelected(item) }"
         :disabled="item.disabled"
         :tabindex="topKeyboard.tabindexFor(index)"
         :aria-expanded="item.items?.length ? openIndex === index : undefined"
@@ -255,17 +255,17 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="iconOf(item)" class="wi-megamenu__icon" aria-hidden="true">
-          <WiIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="iconOf(item)" class="wd-megamenu__icon" aria-hidden="true">
+          <WdIcon :name="iconOf(item)!" size="sm" />
         </span>
         {{ item.label }}
       </button>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="wi-scale-fade">
+        <Transition name="wd-scale-fade">
           <div
             v-if="item.items?.length && openIndex === index"
-            class="wi-megamenu__panel"
-            :class="{ 'wi-megamenu__panel--teleported': teleported }"
+            class="wd-megamenu__panel"
+            :class="{ 'wd-megamenu__panel--teleported': teleported }"
             :style="teleported ? panelStyle : undefined"
             role="menu"
             @keydown="onPanelKeydown"
@@ -273,14 +273,14 @@ onBeforeUnmount(() => {
             <div
               v-for="(column, columnIndex) in item.items"
               :key="columnIndex"
-              class="wi-megamenu__column"
+              class="wd-megamenu__column"
             >
               <button
                 v-for="(child, childIndex) in column"
                 :key="`${child.label}-${childIndex}`"
                 type="button"
-                class="wi-megamenu__link"
-                :class="{ 'wi-megamenu__link--selected': isSelected(child) }"
+                class="wd-megamenu__link"
+                :class="{ 'wd-megamenu__link--selected': isSelected(child) }"
                 role="menuitem"
                 :disabled="child.disabled"
                 :tabindex="panelLinkTabindex(columnIndex, childIndex)"

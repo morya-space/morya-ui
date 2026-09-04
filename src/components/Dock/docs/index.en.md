@@ -11,14 +11,14 @@ Shortcut entries shown as an icon list.
 ## Import
 
 ```ts
-import { WiDock } from '@well-insight/ui'
+import { WdDock } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiDock } from '@well-insight/ui'
+import { WdDock } from '@wex-design/ui'
 
 const model = [
   { label: 'Home', icon: '⌂' },
@@ -28,7 +28,7 @@ const model = [
 </script>
 
 <template>
-  <WiDock :model="model" />
+  <WdDock :model="model" />
 </template>
 ```
 

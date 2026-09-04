@@ -63,7 +63,7 @@ const { t } = useDocsI18n()
 }
 
 .doc-section-nav__count {
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   letter-spacing: 0.04em;
@@ -82,29 +82,29 @@ const { t } = useDocsI18n()
   background: transparent;
   border: 0;
   border-left: 2px solid transparent;
-  border-radius: 0 var(--wi-radius-sm) var(--wi-radius-sm) 0;
-  color: var(--wi-color-text-muted);
+  border-radius: 0 var(--wd-radius-sm) var(--wd-radius-sm) 0;
+  color: var(--wd-color-text-muted);
   cursor: pointer;
   font-size: 0.78rem;
   line-height: 1.45;
   padding: 0.35rem 0 0.35rem 0.55rem;
   text-align: left;
   transition:
-    background-color var(--wi-motion-fast) var(--wi-motion-ease),
-    border-color var(--wi-motion-fast) var(--wi-motion-ease),
-    color var(--wi-motion-fast) var(--wi-motion-ease);
+    background-color var(--wd-motion-fast) var(--wd-motion-ease),
+    border-color var(--wd-motion-fast) var(--wd-motion-ease),
+    color var(--wd-motion-fast) var(--wd-motion-ease);
   width: 100%;
 }
 
 .doc-section-nav__item button:hover {
-  border-left-color: var(--wi-color-primary);
-  color: var(--wi-color-primary);
+  border-left-color: var(--wd-color-primary);
+  color: var(--wd-color-primary);
 }
 
 .doc-section-nav__item--active button {
-  background: color-mix(in srgb, var(--wi-color-primary) 12%, var(--wi-color-surface));
-  border-left-color: var(--wi-color-primary);
-  color: var(--wi-color-primary);
+  background: color-mix(in srgb, var(--wd-color-primary) 12%, var(--wd-color-surface));
+  border-left-color: var(--wd-color-primary);
+  color: var(--wd-color-primary);
   font-weight: 600;
 }
 
@@ -114,7 +114,7 @@ const { t } = useDocsI18n()
 }
 
 .doc-section-nav__empty {
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
   font-size: 0.75rem;
   line-height: 1.5;
   margin: 0;

@@ -17,34 +17,34 @@ Do **not** use `toast.add({ summary: 'Saved' })` when `message.success('Saved')`
 ## Import
 
 ```ts
-import { toast, useToast, WiToast } from '@well-insight/ui'
+import { toast, useToast, WdToast } from '@wex-design/ui'
 ```
 
 ## API
 
 ```vue preview
 <script setup lang="ts">
-import { toast, WiButton } from '@well-insight/ui'
+import { toast, WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton
+    <WdButton
       label="Success"
       severity="success"
       @click="toast.success({ summary: 'Saved', detail: 'Your changes are live.' })"
     />
-    <WiButton
+    <WdButton
       label="Info"
       severity="info"
       @click="toast.info({ summary: 'Tip', detail: 'You can continue.' })"
     />
-    <WiButton
+    <WdButton
       label="Warn"
       severity="warn"
       @click="toast.warn({ summary: 'Caution', detail: 'Please double-check.' })"
     />
-    <WiButton
+    <WdButton
       label="Error"
       severity="danger"
       @click="toast.error({ summary: 'Failed', detail: 'Try again later.' })"
@@ -59,7 +59,7 @@ import { toast, WiButton } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { toast, WiButton } from '@well-insight/ui'
+import { toast, WdButton } from '@wex-design/ui'
 import { h } from 'vue'
 
 function showRich() {
@@ -72,7 +72,7 @@ function showRich() {
 </script>
 
 <template>
-  <WiButton label="Rich Toast" @click="showRich" />
+  <WdButton label="Rich Toast" @click="showRich" />
 </template>
 ```
 
@@ -82,8 +82,8 @@ You can still manage the list yourself with `messages` + `close`.
 
 ```vue preview
 <script setup lang="ts">
-import type { ToastMessage } from '@well-insight/ui'
-import { WiButton, WiToast } from '@well-insight/ui'
+import type { ToastMessage } from '@wex-design/ui'
+import { WdButton, WdToast } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const messages = ref<ToastMessage[]>([])
@@ -103,10 +103,10 @@ function onClose(message: ToastMessage) {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <WiButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
+    <WdButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
+    <WdButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
   </div>
-  <WiToast :messages="messages" position="top-right" @close="onClose" />
+  <WdToast :messages="messages" position="top-right" @close="onClose" />
 </template>
 ```
 

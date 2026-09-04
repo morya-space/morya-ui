@@ -1,12 +1,12 @@
-import type { WiAppendTo } from '../../shared/overlay'
-import type { WiRouteLocationRaw } from '../../shared/optionalRouter'
+import type { WdAppendTo } from '../../shared/overlay'
+import type { WdRouteLocationRaw } from '../../shared/optionalRouter'
 
 export interface MenuItem {
   key?: string
   label?: string
   icon?: string
   /** SPA route target when vue-router is available; falls back to anchor. */
-  to?: WiRouteLocationRaw
+  to?: WdRouteLocationRaw
   command?: () => void
   disabled?: boolean
   separator?: boolean
@@ -56,7 +56,7 @@ export interface MenuProps {
   /** Teleport overlay when `popup`. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WiAppendTo
+  appendTo?: WdAppendTo
 }
 
 export interface MenuEmits {

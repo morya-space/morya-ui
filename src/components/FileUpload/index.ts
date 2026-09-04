@@ -1,5 +1,5 @@
 import './style'
-export { default as WiFileUpload } from './FileUpload.vue'
+export { default as WdFileUpload } from './FileUpload.vue'
 export type {
   FileUploadEmits,
   FileUploadExpose,

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ToastMessage, ToastProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
-import { formatLocale, useWiLocale } from '../../locale'
-import { useWiConfig } from '../../shared/config'
+import { formatLocale, useWdLocale } from '../../locale'
+import { useWdConfig } from '../../shared/config'
 import { plainTextOf } from '../../shared/content'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { WiRenderableView } from '../../shared/Renderable'
+import { WdRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import {
   closeToastItem,
@@ -16,15 +16,15 @@ import {
   trimToastsToMax,
   unregisterToastManualHost,
 } from './toastState'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
   teleport: true,
   auto: false,
 })
 const emit = defineEmits<{ (event: 'close', message: ToastMessage): void }>()
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
 const list = computed(() => props.messages ?? toastState.messages)
@@ -51,7 +51,7 @@ watch(
 )
 
 function messageSeverityClass(severity?: ToastMessage['severity']) {
-  return `wi-toast__message--${normalizeSeverity(severity) ?? 'info'}`
+  return `wd-toast__message--${normalizeSeverity(severity) ?? 'info'}`
 }
 
 function closeLabel(message: ToastMessage) {
@@ -77,35 +77,35 @@ function onMouseLeave(message: ToastMessage) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
-      class="wi-toast"
-      :class="`wi-toast--${resolvedPosition}`"
+      class="wd-toast"
+      :class="`wd-toast--${resolvedPosition}`"
       aria-live="polite"
       aria-atomic="true"
     >
-      <TransitionGroup name="wi-slide-fade">
+      <TransitionGroup name="wd-slide-fade">
         <article
           v-for="message in list"
           :key="message.id"
-          class="wi-toast__message"
+          class="wd-toast__message"
           :class="messageSeverityClass(message.severity)"
           role="status"
           @mouseenter="onMouseEnter(message)"
           @mouseleave="onMouseLeave(message)"
         >
-          <div class="wi-toast__content">
-            <strong><WiRenderableView :value="message.summary" /></strong>
+          <div class="wd-toast__content">
+            <strong><WdRenderableView :value="message.summary" /></strong>
             <p v-if="message.detail != null && message.detail !== ''">
-              <WiRenderableView :value="message.detail" />
+              <WdRenderableView :value="message.detail" />
             </p>
           </div>
           <button
             v-if="message.closable !== false"
             type="button"
-            class="wi-toast__close"
+            class="wd-toast__close"
             :aria-label="closeLabel(message)"
             @click="onClose(message)"
           >
-            <WiIcon name="close" size="sm" />
+            <WdIcon name="close" size="sm" />
           </button>
         </article>
       </TransitionGroup>

@@ -13,14 +13,14 @@ Hierarchical node tree with expand, check, filter, and drag-and-drop.
 ## Import
 
 ```ts
-import { WiTree } from '@well-insight/ui'
+import { WdTree } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiTree } from '@well-insight/ui'
+import { WdTree } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selected = ref<string | null>(null)
@@ -38,7 +38,7 @@ const nodes = [
 </script>
 
 <template>
-  <WiTree v-model="selected" :value="nodes" default-expand-all />
+  <WdTree v-model="selected" :value="nodes" default-expand-all />
 </template>
 ```
 
@@ -46,7 +46,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiTree } from '@well-insight/ui'
+import { WdTree } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref({})
@@ -63,7 +63,7 @@ const nodes = [
 </script>
 
 <template>
-  <WiTree
+  <WdTree
     v-model:checked-keys="checkedKeys"
     :value="nodes"
     show-checkbox
@@ -78,7 +78,7 @@ With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-
 
 ```vue preview
 <script setup lang="ts">
-import { WiTree } from '@well-insight/ui'
+import { WdTree } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref<Record<string, boolean>>({})
@@ -96,14 +96,14 @@ const nodes = [
 
 <template>
   <div style="display:grid;gap:0.5rem">
-    <WiTree
+    <WdTree
       v-model:checked-keys="checkedKeys"
       :value="nodes"
       show-checkbox
       check-strategy="child"
       default-expand-all
     />
-    <p style="margin:0;color:var(--wi-color-text-muted);font-size:0.875rem">
+    <p style="margin:0;color:var(--wd-color-text-muted);font-size:0.875rem">
       keys: {{ Object.keys(checkedKeys).join(', ') || '(none)' }}
     </p>
   </div>
@@ -114,7 +114,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiInput, WiTree } from '@well-insight/ui'
+import { WdInput, WdTree } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const query = ref('')
@@ -133,8 +133,8 @@ const nodes = [
 
 <template>
   <div style="display:grid;gap:0.75rem;max-width:20rem">
-    <WiInput v-model="query" placeholder="Filter nodes" clearable fluid />
-    <WiTree :value="nodes" :filter="query" default-expand-all />
+    <WdInput v-model="query" placeholder="Filter nodes" clearable fluid />
+    <WdTree :value="nodes" :filter="query" default-expand-all />
   </div>
 </template>
 ```

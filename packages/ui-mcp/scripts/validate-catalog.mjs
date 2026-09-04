@@ -53,7 +53,7 @@ for (const match of patternsSource.matchAll(/component:\s*['"]([^'"]+)['"]/g)) {
   const parentId = patternComponentParents[name]
   const component =
     knownComponents.get(name) ||
-    knownComponents.get(`Wi${name}`) ||
+    knownComponents.get(`Wd${name}`) ||
     (parentId ? knownComponents.get(parentId) : undefined)
   if (!component) error(`Pattern references unknown component: ${name}`)
 }
@@ -86,7 +86,7 @@ function examplePropNames(code) {
   const props = []
   let start = 0
   while (start < code.length) {
-    const open = code.indexOf('<Wi', start)
+    const open = code.indexOf('<Wd', start)
     if (open === -1) break
     const nameMatch = code.slice(open + 3).match(/^[A-Z][A-Za-z0-9]*/)
     if (!nameMatch) {
@@ -110,7 +110,7 @@ function examplePropNames(code) {
     for (const attr of attrs.matchAll(/(?:^|\s)([-:\\w@#]+)(?:\s*=|\s|$)/g)) {
       const name = attr[1]
       if (name.startsWith(':') || name.startsWith('@') || name.startsWith('#') || name.startsWith('v-')) continue
-      props.push({ component: `Wi${nameMatch[0]}`, name })
+      props.push({ component: `Wd${nameMatch[0]}`, name })
     }
     start = end + 1
   }

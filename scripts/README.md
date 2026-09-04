@@ -1,8 +1,8 @@
 # UI 发版
 
-`@well-insight/ui` 的版本与 CHANGELOG 在发版时由你交互确认；日常按 [提交规范](../docs/COMMIT_CONVENTION.md) 提交即可。更完整的维护说明见 [UI 开发](../docs/ui-development.zh-CN.md)（[English](../docs/ui-development.md)）与 [开发指南](../docs/DEVELOPMENT.zh-CN.md)（[English](../docs/DEVELOPMENT.md)）。
+`@wex-design/ui` 的版本与 CHANGELOG 在发版时由你交互确认；日常按 [提交规范](../docs/COMMIT_CONVENTION.md) 提交即可。更完整的维护说明见 [UI 开发](../docs/ui-development.zh-CN.md)（[English](../docs/ui-development.md)）与 [开发指南](../docs/DEVELOPMENT.zh-CN.md)（[English](../docs/DEVELOPMENT.md)）。
 
-默认情况下，一次 `pnpm release` 会同时发布 `@well-insight/ui` 与 `@well-insight/ui-mcp`（版本对齐）。
+默认情况下，一次 `pnpm release` 会同时发布 `@wex-design/ui` 与 `@wex-design/ui-mcp`（版本对齐）。
 
 ## 日常改动
 
@@ -29,7 +29,7 @@ docs: 补充快速开始说明
 | 2 | `pnpm release:build` | 构建 UI `dist/` + MCP catalog / 编译 |
 | 3 | `pnpm release:commit` | 提交 UI 与 MCP 的 release 文件 |
 | 4 | `pnpm release:branch` | 从当前提交创建 `release/{version}` 分支（不切换） |
-| 5 | `pnpm release:publish` | 发布 `@well-insight/ui` 与 `@well-insight/ui-mcp` |
+| 5 | `pnpm release:publish` | 发布 `@wex-design/ui` 与 `@wex-design/ui-mcp` |
 | 6 | `pnpm release:tag` | 打 `v{version}` 标签 |
 | 7 | `pnpm release:push` | 推送当前分支、发版分支与 tag |
 
@@ -112,7 +112,7 @@ pnpm release -- --patch --no-mcp
 | --- | --- |
 | `pnpm release:npm` | `build` + `publish`（UI + MCP；需先改好根 `package.json` 的 `version`） |
 | `pnpm release:git` | 仅补 `release/{version}` 分支与 `v{version}` 标签 |
-| `pnpm release:mcp` | 单独发布 `@well-insight/ui-mcp`（同步 UI 版本 → 构建 → commit → publish） |
+| `pnpm release:mcp` | 单独发布 `@wex-design/ui-mcp`（同步 UI 版本 → 构建 → commit → publish） |
 
 发版提交会包含：
 
@@ -120,7 +120,7 @@ pnpm release -- --patch --no-mcp
 - `packages/ui-mcp/package.json`
 - `packages/ui-mcp/data/catalog.json`
 
-提交信息格式：`release: @well-insight/ui / @well-insight/ui-mcp v{version}`（`--no-mcp` 时仅 UI）。
+提交信息格式：`release: @wex-design/ui / @wex-design/ui-mcp v{version}`（`--no-mcp` 时仅 UI）。
 
 ## 单独发 MCP
 

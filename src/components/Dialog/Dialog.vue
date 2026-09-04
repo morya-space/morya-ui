@@ -2,14 +2,14 @@
 import type { IconName } from '../Icon/types'
 import type { DialogProps } from './types'
 import { computed, ref, toRef, useSlots, watch } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useWiConfig } from '../../shared/config'
+import { useWdConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WiButton from '../Button/Button.vue'
-import WiIcon from '../Icon/Icon.vue'
+import WdButton from '../Button/Button.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
@@ -30,8 +30,8 @@ const emit = defineEmits<{
   (event: 'unmaximize'): void
 }>()
 const slots = useSlots()
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const dialogElement = ref<HTMLElement | null>(null)
 const maximized = ref(false)
 const origin = ref(getLastPointer())
@@ -65,8 +65,8 @@ const showFooter = computed(() => Boolean(slots.footer || showPresetFooter.value
 const busy = computed(() => pending.value != null)
 const dialogAriaLabel = computed(() => props.ariaLabel ?? dialogTitle.value)
 const backdropStyle = computed(() => ({
-  '--wi-dialog-origin-x': `${origin.value.x}px`,
-  '--wi-dialog-origin-y': `${origin.value.y}px`,
+  '--wd-dialog-origin-x': `${origin.value.x}px`,
+  '--wd-dialog-origin-y': `${origin.value.y}px`,
 }))
 const isDismissableMask = computed(() => {
   if (props.dismissableMask !== undefined) return props.dismissableMask
@@ -163,26 +163,26 @@ defineExpose({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wi-dialog">
+    <Transition name="wd-dialog">
       <div
         v-if="modelValue"
-        class="wi-dialog-backdrop"
+        class="wd-dialog-backdrop"
         :class="[
-          `wi-dialog-backdrop--${position}`,
+          `wd-dialog-backdrop--${position}`,
           {
-            'wi-dialog-backdrop--modal': modal,
-            'wi-dialog-backdrop--maximized': maximized,
+            'wd-dialog-backdrop--modal': modal,
+            'wd-dialog-backdrop--maximized': maximized,
           },
         ]"
         :style="backdropStyle"
       >
-        <div class="wi-dialog-zoom" @click.self="onOutsideClick">
+        <div class="wd-dialog-zoom" @click.self="onOutsideClick">
           <section
             ref="dialogElement"
-            class="wi-dialog"
+            class="wd-dialog"
             :class="{
-              'wi-dialog--maximized': maximized,
-              [`wi-dialog--${resolvedType}`]: resolvedType,
+              'wd-dialog--maximized': maximized,
+              [`wd-dialog--${resolvedType}`]: resolvedType,
             }"
             :style="width && !maximized ? { width } : undefined"
             role="dialog"
@@ -190,10 +190,10 @@ defineExpose({
             :aria-label="dialogAriaLabel"
             tabindex="-1"
           >
-            <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="wi-dialog__header">
-              <div class="wi-dialog__heading">
-                <span v-if="typeIcon" class="wi-dialog__type-icon" aria-hidden="true">
-                  <WiIcon :name="typeIcon" size="sm" />
+            <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="wd-dialog__header">
+              <div class="wd-dialog__heading">
+                <span v-if="typeIcon" class="wd-dialog__type-icon" aria-hidden="true">
+                  <WdIcon :name="typeIcon" size="sm" />
                 </span>
                 <slot name="header">
                   <h2 v-if="dialogTitle">
@@ -201,39 +201,39 @@ defineExpose({
                   </h2>
                 </slot>
               </div>
-              <div v-if="maximizable || closable" class="wi-dialog__actions">
+              <div v-if="maximizable || closable" class="wd-dialog__actions">
                 <button
                   v-if="maximizable"
                   type="button"
-                  class="wi-dialog__action"
+                  class="wd-dialog__action"
                   :aria-label="maximized ? locale.restore : locale.maximize"
                   :disabled="busy"
                   @click="toggleMaximize"
                 >
-                  <WiIcon :name="maximized ? 'restore' : 'maximize'" size="sm" />
+                  <WdIcon :name="maximized ? 'restore' : 'maximize'" size="sm" />
                 </button>
                 <button
                   v-if="closable"
                   type="button"
-                  class="wi-dialog__action"
+                  class="wd-dialog__action"
                   :aria-label="locale.close"
                   :disabled="busy"
                   @click="dismiss"
                 >
-                  <WiIcon name="close" size="sm" />
+                  <WdIcon name="close" size="sm" />
                 </button>
               </div>
             </header>
-            <div class="wi-dialog__body">
+            <div class="wd-dialog__body">
               <slot />
             </div>
             <footer
               v-if="showFooter"
-              class="wi-dialog__footer"
-              :class="{ 'wi-dialog__footer--preset': showPresetFooter }"
+              class="wd-dialog__footer"
+              :class="{ 'wd-dialog__footer--preset': showPresetFooter }"
             >
               <slot name="footer">
-                <WiButton
+                <WdButton
                   v-if="negativeText"
                   :label="negativeText"
                   severity="secondary"
@@ -241,7 +241,7 @@ defineExpose({
                   :loading="pending === 'negative'"
                   @click="onNegative"
                 />
-                <WiButton
+                <WdButton
                   v-if="positiveText"
                   :label="positiveText"
                   :severity="positiveSeverity"

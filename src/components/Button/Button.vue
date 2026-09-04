@@ -5,7 +5,7 @@ import type { ButtonProps } from './types'
 import { Comment, computed, Fragment, ref, Text, useSlots   } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   iconPos: 'left',
@@ -52,33 +52,33 @@ const iconName = computed(() => (typeof props.icon === 'string' ? (props.icon as
 const iconComponent = computed(() => (typeof props.icon === 'string' || !props.icon ? undefined : props.icon))
 
 const buttonClass = computed(() => [
-  'wi-button',
-  `wi-button--${severityTone.value}`,
-  `wi-button--${resolvedSize.value}`,
-  `wi-button--icon-${props.iconPos}`,
+  'wd-button',
+  `wd-button--${severityTone.value}`,
+  `wd-button--${resolvedSize.value}`,
+  `wd-button--icon-${props.iconPos}`,
   {
-    'wi-button--raised': props.raised,
-    'wi-button--rounded': props.rounded,
-    'wi-button--text': isText.value,
-    'wi-button--outlined': isOutlined.value,
-    'wi-button--link': isLink.value,
-    'wi-button--ghost': isGhost.value,
-    'wi-button--quaternary': isQuaternary.value,
-    'wi-button--plain': props.plain,
-    'wi-button--fluid': isFluid.value,
-    'wi-button--loading': props.loading,
-    'wi-button--icon-only': isIconOnly.value,
-    'wi-button--custom': Boolean(props.color),
+    'wd-button--raised': props.raised,
+    'wd-button--rounded': props.rounded,
+    'wd-button--text': isText.value,
+    'wd-button--outlined': isOutlined.value,
+    'wd-button--link': isLink.value,
+    'wd-button--ghost': isGhost.value,
+    'wd-button--quaternary': isQuaternary.value,
+    'wd-button--plain': props.plain,
+    'wd-button--fluid': isFluid.value,
+    'wd-button--loading': props.loading,
+    'wd-button--icon-only': isIconOnly.value,
+    'wd-button--custom': Boolean(props.color),
   },
 ])
 
 const buttonStyle = computed(() =>
-  props.color ? { '--wi-button-color': props.color } : undefined,
+  props.color ? { '--wd-button-color': props.color } : undefined,
 )
 
 const badgeClass = computed(() => [
-  'wi-button__badge',
-  props.badgeSeverity ? `wi-button__badge--${normalizeSeverity(props.badgeSeverity)}` : 'wi-button__badge--contrast',
+  'wd-button__badge',
+  props.badgeSeverity ? `wd-button__badge--${normalizeSeverity(props.badgeSeverity)}` : 'wd-button__badge--contrast',
 ])
 
 function hasRenderableContent(node: VNodeChild): boolean {
@@ -121,22 +121,22 @@ defineExpose({ focus, ref: buttonElement })
   >
     <span
       v-if="loading || icon || $slots.icon"
-      class="wi-button__icon"
-      :class="{ 'wi-button__icon--loading': loading }"
+      class="wd-button__icon"
+      :class="{ 'wd-button__icon--loading': loading }"
       aria-hidden="true"
     >
       <slot v-if="loading" name="loadingicon">
-        <span class="wi-button__spinner" />
+        <span class="wd-button__spinner" />
       </slot>
       <template v-else>
-        <slot name="icon" class="wi-button__icon-slot">
-          <WiIcon v-if="iconName" :name="iconName" :size="iconSize" />
-          <component :is="iconComponent" v-else-if="iconComponent" class="wi-button__icon-graphic" />
+        <slot name="icon" class="wd-button__icon-slot">
+          <WdIcon v-if="iconName" :name="iconName" :size="iconSize" />
+          <component :is="iconComponent" v-else-if="iconComponent" class="wd-button__icon-graphic" />
         </slot>
       </template>
     </span>
 
-    <span v-if="hasLabel && !iconOnly" class="wi-button__label">
+    <span v-if="hasLabel && !iconOnly" class="wd-button__label">
       <slot>{{ label }}</slot>
     </span>
 

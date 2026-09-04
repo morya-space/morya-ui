@@ -11,14 +11,14 @@ Navigation menu rendered from a `model`. Typical uses: admin sidebar, top naviga
 - Nested `items` with controlled `selectedKey`
 - Auto-expand ancestor path when selection changes; optional `accordion`
 - `collapsed` icon rail with right-side flyout submenus (Popover)
-- Non-popup menus default to `embedded` (borderless, full-width in `WiLayoutSider`)
+- Non-popup menus default to `embedded` (borderless, full-width in `WdLayoutSider`)
 
 > One-level hover submenus: [TieredMenu](/components/TieredMenu). Top bar: [Menubar](/components/Menubar). Action lists: [Dropdown](/components/Dropdown).
 
 ## Import
 
 ```ts
-import { WiMenu, type MenuItem } from '@well-insight/ui'
+import { WdMenu, type MenuItem } from '@wex-design/ui'
 ```
 
 ## Selection
@@ -27,7 +27,7 @@ Give leaf items stable `key` values; sync with routing via `v-model:selected-key
 
 ```vue preview
 <script setup lang="ts">
-import { WiMenu } from '@well-insight/ui'
+import { WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -42,14 +42,14 @@ const model = [
   <div
     style="
       width: 15rem;
-      padding: var(--wi-space-3);
-      background: var(--wi-color-surface);
-      border: 1px solid var(--wi-color-border);
-      border-radius: var(--wi-radius-lg);
-      box-shadow: var(--wi-shadow-sm);
+      padding: var(--wd-space-3);
+      background: var(--wd-color-surface);
+      border: 1px solid var(--wd-color-border);
+      border-radius: var(--wd-radius-lg);
+      box-shadow: var(--wd-shadow-sm);
     "
   >
-    <WiMenu
+    <WdMenu
       v-model:selected-key="selectedKey"
       :model="model"
       embedded
@@ -67,7 +67,7 @@ Click a group to expand/collapse. When a child is selected, the parent shows `ch
 
 ```vue preview
 <script setup lang="ts">
-import { WiMenu } from '@well-insight/ui'
+import { WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('reports')
@@ -89,14 +89,14 @@ const model = [
   <div
     style="
       width: 16rem;
-      padding: var(--wi-space-3);
-      background: var(--wi-color-surface);
-      border: 1px solid var(--wi-color-border);
-      border-radius: var(--wi-radius-lg);
-      box-shadow: var(--wi-shadow-sm);
+      padding: var(--wd-space-3);
+      background: var(--wd-color-surface);
+      border: 1px solid var(--wd-color-border);
+      border-radius: var(--wd-radius-lg);
+      box-shadow: var(--wd-shadow-sm);
     "
   >
-    <WiMenu v-model:selected-key="selectedKey" :model="model" embedded />
+    <WdMenu v-model:selected-key="selectedKey" :model="model" embedded />
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiMenu } from '@well-insight/ui'
+import { WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('a1')
@@ -121,25 +121,25 @@ const model = [
   <div
     style="
       width: 14rem;
-      padding: var(--wi-space-3);
-      background: var(--wi-color-surface);
-      border: 1px solid var(--wi-color-border);
-      border-radius: var(--wi-radius-lg);
-      box-shadow: var(--wi-shadow-sm);
+      padding: var(--wd-space-3);
+      background: var(--wd-color-surface);
+      border: 1px solid var(--wd-color-border);
+      border-radius: var(--wd-radius-lg);
+      box-shadow: var(--wd-shadow-sm);
     "
   >
-    <WiMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
+    <WdMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
   </div>
 </template>
 ```
 
 ## Collapsed & flyout
 
-`collapsed` hides labels and keeps icons. Hover/focus on a group opens a right flyout (`.wi-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
+`collapsed` hides labels and keeps icons. Hover/focus on a group opens a right flyout (`.wd-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
 
 ```vue preview
 <script setup lang="ts">
-import { WiMenu } from '@well-insight/ui'
+import { WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -158,50 +158,50 @@ const model = [
 </script>
 
 <template>
-  <div style="display: flex; gap: var(--wi-space-4); align-items: stretch">
+  <div style="display: flex; gap: var(--wd-space-4); align-items: stretch">
     <div
       style="
         flex: 1;
         min-width: 0;
-        padding: var(--wi-space-3);
-        background: var(--wi-color-surface);
-        border: 1px solid var(--wi-color-border);
-        border-radius: var(--wi-radius-lg);
-        box-shadow: var(--wi-shadow-sm);
+        padding: var(--wd-space-3);
+        background: var(--wd-color-surface);
+        border: 1px solid var(--wd-color-border);
+        border-radius: var(--wd-radius-lg);
+        box-shadow: var(--wd-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--wi-space-3);
-          font-size: var(--wi-font-size-xs);
-          color: var(--wi-color-text-muted);
+          margin: 0 0 var(--wd-space-3);
+          font-size: var(--wd-font-size-xs);
+          color: var(--wd-color-text-muted);
         "
       >
         Expanded
       </p>
-      <WiMenu v-model:selected-key="selectedKey" :model="model" embedded />
+      <WdMenu v-model:selected-key="selectedKey" :model="model" embedded />
     </div>
     <div
       style="
         width: 4.5rem;
-        padding: var(--wi-space-3) var(--wi-space-2);
-        background: var(--wi-color-surface);
-        border: 1px solid var(--wi-color-border);
-        border-radius: var(--wi-radius-lg);
-        box-shadow: var(--wi-shadow-sm);
+        padding: var(--wd-space-3) var(--wd-space-2);
+        background: var(--wd-color-surface);
+        border: 1px solid var(--wd-color-border);
+        border-radius: var(--wd-radius-lg);
+        box-shadow: var(--wd-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--wi-space-3);
-          font-size: var(--wi-font-size-xs);
-          color: var(--wi-color-text-muted);
+          margin: 0 0 var(--wd-space-3);
+          font-size: var(--wd-font-size-xs);
+          color: var(--wd-color-text-muted);
           text-align: center;
         "
       >
         Collapsed
       </p>
-      <WiMenu
+      <WdMenu
         v-model:selected-key="selectedKey"
         :model="model"
         collapsed
@@ -215,17 +215,17 @@ const model = [
 
 ## Embed in Layout sider
 
-Recommended shell: **global Header + inner `has-sider` Layout**. Bind menu `collapsed` to `WiLayoutSider`.
+Recommended shell: **global Header + inner `has-sider` Layout**. Bind menu `collapsed` to `WdLayoutSider`.
 
 ```vue preview
 <script setup lang="ts">
 import {
-  WiLayout,
-  WiLayoutContent,
-  WiLayoutHeader,
-  WiLayoutSider,
-  WiMenu,
-} from '@well-insight/ui'
+  WdLayout,
+  WdLayoutContent,
+  WdLayoutHeader,
+  WdLayoutSider,
+  WdMenu,
+} from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -245,49 +245,49 @@ const model = [
 </script>
 
 <template>
-  <WiLayout
+  <WdLayout
     style="
       height: 14rem;
-      border: 1px solid var(--wi-color-border);
-      border-radius: var(--wi-radius-lg);
-      box-shadow: var(--wi-shadow-sm);
+      border: 1px solid var(--wd-color-border);
+      border-radius: var(--wd-radius-lg);
+      box-shadow: var(--wd-shadow-sm);
       overflow: hidden;
     "
   >
-    <WiLayoutHeader
+    <WdLayoutHeader
       bordered
       style="
-        padding: 0 var(--wi-space-4);
+        padding: 0 var(--wd-space-4);
         display: flex;
         align-items: center;
-        min-height: var(--wi-layout-header-height);
+        min-height: var(--wd-layout-header-height);
       "
     >
-      <strong style="color: var(--wi-color-primary); font-size: var(--wi-font-size-md)">Well Insight</strong>
-    </WiLayoutHeader>
-    <WiLayout has-sider>
-      <WiLayoutSider
+      <strong style="color: var(--wd-color-primary); font-size: var(--wd-font-size-md)">Wex Design</strong>
+    </WdLayoutHeader>
+    <WdLayout has-sider>
+      <WdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
         collapse-mode="width"
         :collapsed-width="64"
       >
-        <WiMenu
+        <WdMenu
           v-model:selected-key="selectedKey"
           :model="model"
           :collapsed="collapsed"
           :collapsed-width="64"
           accordion
         />
-      </WiLayoutSider>
-      <WiLayoutContent embedded content-style="padding: var(--wi-space-4)">
-        <p style="margin: 0; color: var(--wi-color-text-muted); font-size: var(--wi-font-size-sm)">
-          Selected: <strong style="color: var(--wi-color-text)">{{ selectedKey }}</strong>
+      </WdLayoutSider>
+      <WdLayoutContent embedded content-style="padding: var(--wd-space-4)">
+        <p style="margin: 0; color: var(--wd-color-text-muted); font-size: var(--wd-font-size-sm)">
+          Selected: <strong style="color: var(--wd-color-text)">{{ selectedKey }}</strong>
         </p>
-      </WiLayoutContent>
-    </WiLayout>
-  </WiLayout>
+      </WdLayoutContent>
+    </WdLayout>
+  </WdLayout>
 </template>
 ```
 
@@ -297,7 +297,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiMenu } from '@well-insight/ui'
+import { WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -319,25 +319,25 @@ const model = [
 <template>
   <div
     style="
-      padding: 0 var(--wi-space-2);
-      background: var(--wi-color-surface);
-      border: 1px solid var(--wi-color-border);
-      border-radius: var(--wi-radius-lg);
-      box-shadow: var(--wi-shadow-sm);
+      padding: 0 var(--wd-space-2);
+      background: var(--wd-color-surface);
+      border: 1px solid var(--wd-color-border);
+      border-radius: var(--wd-radius-lg);
+      box-shadow: var(--wd-shadow-sm);
     "
   >
-    <WiMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
+    <WdMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
   </div>
 </template>
 ```
 
 ## Inverted (dark sider)
 
-Use `inverted` with `WiLayoutSider`'s `inverted` on dark backgrounds.
+Use `inverted` with `WdLayoutSider`'s `inverted` on dark backgrounds.
 
 ```vue preview
 <script setup lang="ts">
-import { WiLayout, WiLayoutSider, WiMenu } from '@well-insight/ui'
+import { WdLayout, WdLayoutSider, WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -348,19 +348,19 @@ const model = [
 </script>
 
 <template>
-  <WiLayout
+  <WdLayout
     has-sider
     style="
       height: 10rem;
-      border-radius: var(--wi-radius-lg);
-      box-shadow: var(--wi-shadow-sm);
+      border-radius: var(--wd-radius-lg);
+      box-shadow: var(--wd-shadow-sm);
       overflow: hidden;
     "
   >
-    <WiLayoutSider inverted bordered style="width: 12rem">
-      <WiMenu v-model:selected-key="selectedKey" :model="model" inverted />
-    </WiLayoutSider>
-  </WiLayout>
+    <WdLayoutSider inverted bordered style="width: 12rem">
+      <WdMenu v-model:selected-key="selectedKey" :model="model" inverted />
+    </WdLayoutSider>
+  </WdLayout>
 </template>
 ```
 
@@ -370,7 +370,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiMenu } from '@well-insight/ui'
+import { WdButton, WdMenu } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -382,9 +382,9 @@ const model = [
 </script>
 
 <template>
-  <WiMenu v-model="open" popup :model="model">
-    <WiButton label="More" @click="open = !open" />
-  </WiMenu>
+  <WdMenu v-model="open" popup :model="model">
+    <WdButton label="More" @click="open = !open" />
+  </WdMenu>
 </template>
 ```
 

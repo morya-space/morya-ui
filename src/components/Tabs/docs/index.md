@@ -11,14 +11,14 @@ description: 标签页切换。支持 line/card、关闭/新增、extra 与溢�
 ## 引入
 
 ```ts
-import { WiTabs } from '@well-insight/ui'
+import { WdTabs } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiTabs } from '@well-insight/ui'
+import { WdTabs } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -30,13 +30,13 @@ const tabs = [
 </script>
 
 <template>
-  <WiTabs v-model="active" :tabs="tabs">
+  <WdTabs v-model="active" :tabs="tabs">
     <template #default="{ activeValue }">
       <p style="margin:0">
         Active panel: {{ activeValue }}
       </p>
     </template>
-  </WiTabs>
+  </WdTabs>
 </template>
 ```
 
@@ -44,7 +44,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiTabs } from '@well-insight/ui'
+import { WdButton, WdTabs } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const active = ref('a')
@@ -66,7 +66,7 @@ function onAdd() {
 </script>
 
 <template>
-  <WiTabs
+  <WdTabs
     v-model="active"
     type="card"
     closable
@@ -76,14 +76,14 @@ function onAdd() {
     @add="onAdd"
   >
     <template #extra>
-      <WiButton label="操作" size="small" severity="secondary" />
+      <WdButton label="操作" size="small" severity="secondary" />
     </template>
     <template #default="{ activeValue }">
       <p style="margin:0">
         {{ activeValue }}
       </p>
     </template>
-  </WiTabs>
+  </WdTabs>
 </template>
 ```
 

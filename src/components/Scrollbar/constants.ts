@@ -6,7 +6,7 @@ export interface ScrollbarContext {
   contentId: string
 }
 
-export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol('wiScrollbar')
+export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol('wdScrollbar')
 
 /** Internal shape used when providing refs via reactive(). */
 export interface ScrollbarProvideSource {

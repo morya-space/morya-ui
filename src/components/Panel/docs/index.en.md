@@ -11,28 +11,28 @@ Panel for grouping content. Collapse can be enabled.
 ## Import
 
 ```ts
-import { WiPanel } from '@well-insight/ui'
+import { WdPanel } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiPanel } from '@well-insight/ui'
+import { WdPanel } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WiPanel v-model="collapsed" header="Panel" toggleable>
+  <WdPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       Collapsible panel content.
     </p>
     <template #footer>
       Actions
     </template>
-  </WiPanel>
+  </WdPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiPanel } from '@well-insight/ui'
+import { WdPanel } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiPanel header="Small" size="small">
+  <WdPanel header="Small" size="small">
     <p style="margin:0">
       A more compact panel.
     </p>
-  </WiPanel>
+  </WdPanel>
 </template>
 ```
 

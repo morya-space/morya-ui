@@ -13,14 +13,14 @@ description: 分页器，v-model 为页码；实例暴露 first（零基首条�
 ## 引入
 
 ```ts
-import { WiPagination } from '@well-insight/ui'
+import { WdPagination } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiPagination } from '@well-insight/ui'
+import { WdPagination } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
@@ -28,8 +28,8 @@ const page = ref(1)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WiPagination v-model="page" :total-records="95" :rows="10" :page-link-size="5" />
-    <p style="margin:0;color:var(--wi-color-text-muted);font-size:0.875rem">
+    <WdPagination v-model="page" :total-records="95" :rows="10" :page-link-size="5" />
+    <p style="margin:0;color:var(--wd-color-text-muted);font-size:0.875rem">
       Page {{ page }} · first ≈ {{ (page - 1) * 10 }}
     </p>
   </div>
@@ -40,7 +40,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { WiPagination } from '@well-insight/ui'
+import { WdPagination } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
@@ -49,7 +49,7 @@ const pageSize = ref(10)
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WiPagination
+    <WdPagination
       v-model="page"
       v-model:page-size="pageSize"
       :total-records="200"
@@ -57,7 +57,7 @@ const pageSize = ref(10)
       :page-sizes="[10, 20, 50]"
       show-quick-jumper
     />
-    <WiPagination v-model="page" :total-records="200" :page-size="pageSize" simple />
+    <WdPagination v-model="page" :total-records="200" :page-size="pageSize" simple />
   </div>
 </template>
 ```

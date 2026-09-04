@@ -6,7 +6,7 @@ description: Form layout and field validation. Declarative rules, label alignmen
 
 # Form
 
-`WiForm` / `WiFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
+`WdForm` / `WdFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
 
 1. **Declarative `rules` (preferred):** `required` / `min` / `max` / `pattern` / `validator` keyed by field name.
 2. **`validate` callback:** return an error string from FormItem. Still useful for cross-field logic.
@@ -18,16 +18,16 @@ Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and
 ## Import
 
 ```ts
-import type { FormInstance, FormRules } from '@well-insight/ui'
-import { WiForm, WiFormItem } from '@well-insight/ui'
+import type { FormInstance, FormRules } from '@wex-design/ui'
+import { WdForm, WdFormItem } from '@wex-design/ui'
 ```
 
 ## Declarative rules
 
 ```vue preview
 <script setup lang="ts">
-import type { FormInstance, FormRules } from '@well-insight/ui'
-import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import type { FormInstance, FormRules } from '@wex-design/ui'
+import { WdButton, WdForm, WdFormItem, WdInput } from '@wex-design/ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -47,7 +47,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <WiForm
+  <WdForm
     ref="formRef"
     :model="model"
     :rules="rules"
@@ -56,18 +56,18 @@ async function onSubmit() {
     style="max-width: 22rem"
     @submit="onSubmit"
   >
-    <WiFormItem label="Name" name="name">
+    <WdFormItem label="Name" name="name">
       <template #default="{ id, invalid }">
-        <WiInput :id="id" v-model="model.name" fluid :invalid="invalid" />
+        <WdInput :id="id" v-model="model.name" fluid :invalid="invalid" />
       </template>
-    </WiFormItem>
-    <WiFormItem label="Email" name="email" help="Used for notifications">
+    </WdFormItem>
+    <WdFormItem label="Email" name="email" help="Used for notifications">
       <template #default="{ id, invalid }">
-        <WiInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
+        <WdInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
-    </WiFormItem>
-    <WiButton native-type="submit" label="Submit" />
-  </WiForm>
+    </WdFormItem>
+    <WdButton native-type="submit" label="Submit" />
+  </WdForm>
 </template>
 ```
 
@@ -75,26 +75,26 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { WiButton, WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { WdButton, WdForm, WdFormItem, WdInput } from '@wex-design/ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
 </script>
 
 <template>
-  <WiForm validate-on="submit" style="max-width: 22rem">
-    <WiFormItem
+  <WdForm validate-on="submit" style="max-width: 22rem">
+    <WdFormItem
       label="Name"
       name="name"
       required
       :validate="() => (form.name.trim() ? undefined : 'Enter a name')"
     >
       <template #default="{ id, invalid }">
-        <WiInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <WdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </WiFormItem>
-    <WiButton native-type="submit" label="Submit" />
-  </WiForm>
+    </WdFormItem>
+    <WdButton native-type="submit" label="Submit" />
+  </WdForm>
 </template>
 ```
 
@@ -102,14 +102,14 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { WiForm, WiFormItem, WiInput } from '@well-insight/ui'
+import { WdForm, WdFormItem, WdInput } from '@wex-design/ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>
 
 <template>
-  <WiForm
+  <WdForm
     :model="model"
     inline
     label-placement="left"
@@ -117,17 +117,17 @@ const model = reactive({ city: '', zip: '' })
     :label-width="72"
     :rules="{ city: { required: true, message: 'Required' } }"
   >
-    <WiFormItem label="City" name="city">
+    <WdFormItem label="City" name="city">
       <template #default="{ id }">
-        <WiInput :id="id" v-model="model.city" />
+        <WdInput :id="id" v-model="model.city" />
       </template>
-    </WiFormItem>
-    <WiFormItem label="ZIP" name="zip">
+    </WdFormItem>
+    <WdFormItem label="ZIP" name="zip">
       <template #default="{ id }">
-        <WiInput :id="id" v-model="model.zip" />
+        <WdInput :id="id" v-model="model.zip" />
       </template>
-    </WiFormItem>
-  </WiForm>
+    </WdFormItem>
+  </WdForm>
 </template>
 ```
 

@@ -1,80 +1,80 @@
 /* —— Form: Rating —— */
-.wi-rating-field {
+.wd-rating-field {
     display: grid;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
 }
 
-.wi-rating-field__label {
-    color: var(--wi-color-text);
-    font-size: var(--wi-font-size-md);
+.wd-rating-field__label {
+    color: var(--wd-color-text);
+    font-size: var(--wd-font-size-md);
     font-weight: 600;
 }
 
-.wi-rating-field__help {
-    color: var(--wi-color-text-muted);
-    font-size: var(--wi-font-size-xs);
+.wd-rating-field__help {
+    color: var(--wd-color-text-muted);
+    font-size: var(--wd-font-size-xs);
 }
 
-.wi-rating-field__help--invalid {
-    color: var(--wi-color-danger);
+.wd-rating-field__help--invalid {
+    color: var(--wd-color-danger);
 }
 
-.wi-rating {
+.wd-rating {
     align-items: center;
     display: inline-flex;
-    gap: var(--wi-space-1);
+    gap: var(--wd-space-1);
 }
 
-.wi-rating__star,
-.wi-rating__cancel {
+.wd-rating__star,
+.wd-rating__cancel {
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-sm);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-sm);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     font: inherit;
-    font-size: var(--wi-rating-star-size-medium);
+    font-size: var(--wd-rating-star-size-medium);
     line-height: 1;
-    padding: var(--wi-rating-star-padding);
+    padding: var(--wd-rating-star-padding);
 }
 
-.wi-rating__star--on {
-    color: var(--wi-color-warn);
+.wd-rating__star--on {
+    color: var(--wd-color-warn);
 }
 
-.wi-rating__star:hover:not(:disabled),
-.wi-rating__cancel:hover:not(:disabled) {
-    color: var(--wi-color-primary);
+.wd-rating__star:hover:not(:disabled),
+.wd-rating__cancel:hover:not(:disabled) {
+    color: var(--wd-color-primary);
 }
 
-.wi-rating:focus-visible,
-.wi-rating__star:focus-visible,
-.wi-rating__cancel:focus-visible {
-    border-radius: var(--wi-radius-sm);
-    box-shadow: var(--wi-focus-shadow);
+.wd-rating:focus-visible,
+.wd-rating__star:focus-visible,
+.wd-rating__cancel:focus-visible {
+    border-radius: var(--wd-radius-sm);
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-rating--disabled,
-.wi-rating--readonly {
+.wd-rating--disabled,
+.wd-rating--readonly {
     pointer-events: none;
 }
 
-.wi-rating--disabled {
-    opacity: var(--wi-opacity-disabled);
+.wd-rating--disabled {
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-rating__star {
+.wd-rating__star {
     position: relative;
 }
 
-.wi-rating__star-off,
-.wi-rating__star-on {
+.wd-rating__star-off,
+.wd-rating__star-on {
     display: block;
 }
 
-.wi-rating__star-on {
-    color: var(--wi-color-warn);
+.wd-rating__star-on {
+    color: var(--wd-color-warn);
     left: 0;
     overflow: hidden;
     position: absolute;
@@ -82,32 +82,32 @@
     width: 0;
 }
 
-.wi-rating__star-on .wi-icon svg {
+.wd-rating__star-on .wd-icon svg {
     fill: currentColor;
     stroke: none;
 }
 
-.wi-rating__star--on .wi-rating__star-on,
-.wi-rating__star--half .wi-rating__star-on {
+.wd-rating__star--on .wd-rating__star-on,
+.wd-rating__star--half .wd-rating__star-on {
     width: 100%;
 }
 
-.wi-rating__star--half .wi-rating__star-on {
+.wd-rating__star--half .wd-rating__star-on {
     width: 50%;
 }
 
-.wi-rating--small .wi-rating__star,
-.wi-rating--small .wi-rating__cancel {
-    font-size: var(--wi-rating-star-size-small);
+.wd-rating--small .wd-rating__star,
+.wd-rating--small .wd-rating__cancel {
+    font-size: var(--wd-rating-star-size-small);
 }
 
-.wi-rating--large .wi-rating__star,
-.wi-rating--large .wi-rating__cancel {
-    font-size: var(--wi-rating-star-size-large);
+.wd-rating--large .wd-rating__star,
+.wd-rating--large .wd-rating__cancel {
+    font-size: var(--wd-rating-star-size-large);
 }
 
-.wi-rating--invalid .wi-rating__star,
-.wi-rating--invalid .wi-rating__cancel {
-    outline: var(--wi-border-width) solid var(--wi-color-danger);
+.wd-rating--invalid .wd-rating__star,
+.wd-rating--invalid .wd-rating__cancel {
+    outline: var(--wd-border-width) solid var(--wd-color-danger);
     outline-offset: 2px;
 }

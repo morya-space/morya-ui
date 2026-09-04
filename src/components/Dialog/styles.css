@@ -1,230 +1,230 @@
-.wi-dialog button:focus {
+.wd-dialog button:focus {
     outline: none;
 }
 
-.wi-dialog button:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-dialog button:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-dialog-backdrop {
+.wd-dialog-backdrop {
     align-items: center;
     background: transparent;
     display: flex;
     inset: 0;
     justify-content: center;
-    padding: var(--wi-space-4);
+    padding: var(--wd-space-4);
     position: fixed;
-    z-index: var(--wi-z-overlay);
+    z-index: var(--wd-z-overlay);
 }
 
-.wi-dialog-zoom {
+.wd-dialog-zoom {
     align-items: inherit;
     display: flex;
     inset: 0;
     justify-content: inherit;
     padding: inherit;
     position: absolute;
-    transform-origin: var(--wi-dialog-origin-x, 50%)
-        var(--wi-dialog-origin-y, 50%);
+    transform-origin: var(--wd-dialog-origin-x, 50%)
+        var(--wd-dialog-origin-y, 50%);
 }
 
-.wi-dialog-backdrop--modal {
-    background: var(--wi-overlay-scrim);
+.wd-dialog-backdrop--modal {
+    background: var(--wd-overlay-scrim);
 }
 
-.wi-dialog-backdrop--top {
+.wd-dialog-backdrop--top {
     align-items: flex-start;
 }
 
-.wi-dialog-backdrop--bottom {
+.wd-dialog-backdrop--bottom {
     align-items: flex-end;
 }
 
-.wi-dialog-backdrop--left {
+.wd-dialog-backdrop--left {
     justify-content: flex-start;
 }
 
-.wi-dialog-backdrop--right {
+.wd-dialog-backdrop--right {
     justify-content: flex-end;
 }
 
-.wi-dialog-backdrop--topleft {
+.wd-dialog-backdrop--topleft {
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.wi-dialog-backdrop--topright {
+.wd-dialog-backdrop--topright {
     align-items: flex-start;
     justify-content: flex-end;
 }
 
-.wi-dialog-backdrop--bottomleft {
+.wd-dialog-backdrop--bottomleft {
     align-items: flex-end;
     justify-content: flex-start;
 }
 
-.wi-dialog-backdrop--bottomright {
+.wd-dialog-backdrop--bottomright {
     align-items: flex-end;
     justify-content: flex-end;
 }
 
-.wi-dialog {
-    --wi-dialog-width: 32rem;
-    --wi-dialog-max-height: min(90vh, 100%);
-    --wi-dialog-radius: var(--wi-radius-lg);
-    background: var(--wi-color-surface);
-    border-radius: var(--wi-dialog-radius);
-    box-shadow: var(--wi-shadow-lg);
-    color: var(--wi-color-text);
+.wd-dialog {
+    --wd-dialog-width: 32rem;
+    --wd-dialog-max-height: min(90vh, 100%);
+    --wd-dialog-radius: var(--wd-radius-lg);
+    background: var(--wd-color-surface);
+    border-radius: var(--wd-dialog-radius);
+    box-shadow: var(--wd-shadow-lg);
+    color: var(--wd-color-text);
     display: flex;
     flex-direction: column;
-    max-height: var(--wi-dialog-max-height);
-    max-width: var(--wi-dialog-width);
-    width: min(100%, var(--wi-dialog-width));
+    max-height: var(--wd-dialog-max-height);
+    max-width: var(--wd-dialog-width);
+    width: min(100%, var(--wd-dialog-width));
 }
 
-.wi-dialog-backdrop--maximized {
+.wd-dialog-backdrop--maximized {
     padding: 0;
 }
 
-.wi-dialog--maximized {
-    --wi-dialog-radius: 0;
-    border-radius: var(--wi-dialog-radius);
+.wd-dialog--maximized {
+    --wd-dialog-radius: 0;
+    border-radius: var(--wd-dialog-radius);
     height: 100%;
     max-height: 100%;
     max-width: none;
     width: 100%;
 }
 
-.wi-dialog__header,
-.wi-dialog__footer {
+.wd-dialog__header,
+.wd-dialog__footer {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: var(--wi-space-4);
+    padding: var(--wd-space-4);
 }
 
-.wi-dialog__header {
-    border-bottom: var(--wi-border-width) solid var(--wi-color-border);
+.wd-dialog__header {
+    border-bottom: var(--wd-border-width) solid var(--wd-color-border);
     flex: 0 0 auto;
-    gap: var(--wi-space-3);
+    gap: var(--wd-space-3);
 }
 
-.wi-dialog__header h2 {
-    font-size: var(--wi-font-size-lg);
+.wd-dialog__header h2 {
+    font-size: var(--wd-font-size-lg);
     margin: 0;
 }
 
-.wi-dialog__heading {
+.wd-dialog__heading {
     align-items: center;
     display: flex;
-    gap: var(--wi-space-2);
+    gap: var(--wd-space-2);
     min-width: 0;
 }
 
-.wi-dialog__type-icon {
-    color: var(--wi-color-info);
+.wd-dialog__type-icon {
+    color: var(--wd-color-info);
     flex-shrink: 0;
 }
 
-.wi-dialog--success .wi-dialog__type-icon {
-    color: var(--wi-color-success);
+.wd-dialog--success .wd-dialog__type-icon {
+    color: var(--wd-color-success);
 }
 
-.wi-dialog--warn .wi-dialog__type-icon,
-.wi-dialog--warning .wi-dialog__type-icon {
-    color: var(--wi-color-warn);
+.wd-dialog--warn .wd-dialog__type-icon,
+.wd-dialog--warning .wd-dialog__type-icon {
+    color: var(--wd-color-warn);
 }
 
-.wi-dialog--error .wi-dialog__type-icon {
-    color: var(--wi-color-danger);
+.wd-dialog--error .wd-dialog__type-icon {
+    color: var(--wd-color-danger);
 }
 
-.wi-dialog--info .wi-dialog__type-icon {
-    color: var(--wi-color-info);
+.wd-dialog--info .wd-dialog__type-icon {
+    color: var(--wd-color-info);
 }
 
-.wi-dialog__actions {
+.wd-dialog__actions {
     align-items: center;
     display: flex;
     flex: 0 0 auto;
-    gap: var(--wi-space-1);
+    gap: var(--wd-space-1);
     margin-left: auto;
 }
 
-.wi-dialog__action,
-.wi-dialog__header button {
+.wd-dialog__action,
+.wd-dialog__header button {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wi-radius-sm);
-    color: var(--wi-color-text-muted);
+    border-radius: var(--wd-radius-sm);
+    color: var(--wd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    font-size: var(--wi-font-size-lg);
-    height: var(--wi-control-affix-size);
+    font-size: var(--wd-font-size-lg);
+    height: var(--wd-control-affix-size);
     justify-content: center;
     line-height: 1;
-    width: var(--wi-control-affix-size);
+    width: var(--wd-control-affix-size);
 }
 
-.wi-dialog__action:focus-visible,
-.wi-dialog__header button:focus-visible {
-    box-shadow: var(--wi-focus-shadow);
+.wd-dialog__action:focus-visible,
+.wd-dialog__header button:focus-visible {
+    box-shadow: var(--wd-focus-shadow);
     outline: none;
 }
 
-.wi-dialog__body {
+.wd-dialog__body {
     flex: 1 1 auto;
     overflow: auto;
-    padding: var(--wi-space-4);
+    padding: var(--wd-space-4);
 }
 
-.wi-dialog__action:disabled {
+.wd-dialog__action:disabled {
     cursor: default;
-    opacity: var(--wi-opacity-disabled);
+    opacity: var(--wd-opacity-disabled);
 }
 
-.wi-dialog__footer {
-    border-top: var(--wi-border-width) solid var(--wi-color-border);
+.wd-dialog__footer {
+    border-top: var(--wd-border-width) solid var(--wd-color-border);
     flex: 0 0 auto;
 }
 
-.wi-dialog__footer--preset {
-    gap: var(--wi-space-2);
+.wd-dialog__footer--preset {
+    gap: var(--wd-space-2);
     justify-content: flex-end;
     width: 100%;
 }
 
-.wi-dialog-enter-active {
-    transition: opacity var(--wi-motion-enter) var(--wi-motion-ease);
+.wd-dialog-enter-active {
+    transition: opacity var(--wd-motion-enter) var(--wd-motion-ease);
 }
 
-.wi-dialog-leave-active {
-    transition: opacity var(--wi-motion-exit) var(--wi-motion-ease);
+.wd-dialog-leave-active {
+    transition: opacity var(--wd-motion-exit) var(--wd-motion-ease);
 }
 
-.wi-dialog-enter-active .wi-dialog-zoom,
-.wi-dialog-leave-active .wi-dialog-zoom {
+.wd-dialog-enter-active .wd-dialog-zoom,
+.wd-dialog-leave-active .wd-dialog-zoom {
     transition:
-        opacity var(--wi-motion-enter) var(--wi-motion-ease),
-        transform var(--wi-motion-enter) var(--wi-motion-ease);
+        opacity var(--wd-motion-enter) var(--wd-motion-ease),
+        transform var(--wd-motion-enter) var(--wd-motion-ease);
 }
 
-.wi-dialog-leave-active .wi-dialog-zoom {
+.wd-dialog-leave-active .wd-dialog-zoom {
     transition:
-        opacity var(--wi-motion-exit) var(--wi-motion-ease),
-        transform var(--wi-motion-exit) var(--wi-motion-ease);
+        opacity var(--wd-motion-exit) var(--wd-motion-ease),
+        transform var(--wd-motion-exit) var(--wd-motion-ease);
 }
 
-.wi-dialog-enter-from,
-.wi-dialog-leave-to {
+.wd-dialog-enter-from,
+.wd-dialog-leave-to {
     opacity: 0;
 }
 
-.wi-dialog-enter-from .wi-dialog-zoom,
-.wi-dialog-leave-to .wi-dialog-zoom {
+.wd-dialog-enter-from .wd-dialog-zoom,
+.wd-dialog-leave-to .wd-dialog-zoom {
     opacity: 0;
     transform: scale(0.36);
 }

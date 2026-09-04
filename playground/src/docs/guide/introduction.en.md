@@ -1,25 +1,25 @@
 ---
 title: Introduction
 order: 1
-description: What Well Insight UI is, who it is for, and how to get started.
+description: What Wex Design UI is, who it is for, and how to get started.
 ---
 
 # Introduction
 
-**Well Insight UI** (`@well-insight/ui`) is an **open-source** Vue 3 component library with design tokens, light/dark themes, i18n, and interactive documentation.
+**Wex Design UI** (`@wex-design/ui`) is an **open-source** Vue 3 component library with design tokens, light/dark themes, i18n, and interactive documentation.
 
-- **Docs**: [well-insight.github.io/well-insight-ui](https://well-insight.github.io/well-insight-ui/)
-- **Source**: [GitHub](https://github.com/well-insight/well-insight-ui)
-- **npm**: [`@well-insight/ui`](https://www.npmjs.com/package/@well-insight/ui)
+- **Docs**: [wex-design.github.io/wex-design-ui](https://wex-design.github.io/wex-design-ui/)
+- **Source**: [GitHub](https://github.com/wex-design/wex-design-ui)
+- **npm**: [`@wex-design/ui`](https://www.npmjs.com/package/@wex-design/ui)
 
-## Why Well Insight UI
+## Why Wex Design UI
 
 | | |
 | --- | --- |
 | **88 components** | Basics, forms, navigation, data display, layout, and feedback |
-| **Theme system** | `--wi-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
+| **Theme system** | `--wd-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
 | **TypeScript** | Built with Composition API; fully typed props, emits, and locale |
-| **On-demand** | ESM subpaths + `WellInsightResolver` with tree-shaking |
+| **On-demand** | ESM subpaths + `WexDesignResolver` with tree-shaking |
 | **Docs as preview** | Markdown + interactive `vue preview` for every component |
 
 ## Use cases
@@ -32,13 +32,13 @@ description: What Well Insight UI is, who it is for, and how to get started.
 
 | Package | Role |
 | --- | --- |
-| `@well-insight/ui` | Components, styles, theme APIs, docs site source |
-| `@well-insight/ui-mcp` | (Optional) MCP server for AI clients that support the protocol |
+| `@wex-design/ui` | Components, styles, theme APIs, docs site source |
+| `@wex-design/ui-mcp` | (Optional) MCP server for AI clients that support the protocol |
 
 ## Install
 
 ```bash
-pnpm add @well-insight/ui
+pnpm add @wex-design/ui
 ```
 
 Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](/docs/ssr). See [Quick start](/docs/quick-start).
@@ -47,7 +47,7 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 
 - [Quick start](/docs/quick-start): install and a minimal example
 - [Theme](/docs/theme): light/dark and motion
-- [Configuration](/docs/config): `ConfigProvider` / `createWellInsight`
+- [Configuration](/docs/config): `ConfigProvider` / `createWexDesign`
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
 - [Components](/components): browse all components and APIs
-- [Contributing](https://github.com/well-insight/well-insight-ui/blob/main/CONTRIBUTING.md)
+- [Contributing](https://github.com/wex-design/wex-design-ui/blob/main/CONTRIBUTING.md)

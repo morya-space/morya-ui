@@ -1,271 +1,271 @@
 :root {
-    --wi-color-primary: #2563eb;
-    --wi-color-primary-hover: #1d4ed8;
-    --wi-color-surface: #ffffff;
-    --wi-color-text: #0f172a;
-    --wi-color-text-muted: #64748b;
-    --wi-color-border: #e2e8f0;
-    --wi-color-focus-ring: #2563eb;
+    --wd-color-primary: #2563eb;
+    --wd-color-primary-hover: #1d4ed8;
+    --wd-color-surface: #ffffff;
+    --wd-color-text: #0f172a;
+    --wd-color-text-muted: #64748b;
+    --wd-color-border: #e2e8f0;
+    --wd-color-focus-ring: #2563eb;
     /* Naive-inspired control sizing (tiny omitted; medium = default) */
-    --wi-control-height-small: 28px;
-    --wi-control-height-medium: 34px;
-    --wi-control-height-large: 40px;
-    --wi-control-font-small: 14px;
-    --wi-control-font-medium: 14px;
-    --wi-control-font-large: 15px;
-    --wi-control-padding-x-small: 10px;
-    --wi-control-padding-x-medium: 12px;
-    --wi-control-padding-x-large: 14px;
+    --wd-control-height-small: 28px;
+    --wd-control-height-medium: 34px;
+    --wd-control-height-large: 40px;
+    --wd-control-font-small: 14px;
+    --wd-control-font-medium: 14px;
+    --wd-control-font-large: 15px;
+    --wd-control-padding-x-small: 10px;
+    --wd-control-padding-x-medium: 12px;
+    --wd-control-padding-x-large: 14px;
 
-    --wi-radius-control: 3px;
-    --wi-border-width: 1px;
-    --wi-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--wi-color-primary) 20%, transparent);
-    --wi-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--wi-color-danger) 20%, transparent);
-    --wi-color-success: #159570;
-    --wi-color-info: #2563eb;
-    --wi-color-warning: #d97706;
-    --wi-color-warn: var(--wi-color-warning);
-    --wi-color-help: #9333ea;
-    --wi-color-danger: #dc2626;
-    --wi-color-contrast: #0f172a;
-    --wi-color-contrast-fg: #ffffff;
-    --wi-color-contrast-hover: #1e293b;
-    --wi-color-contrast-active: #020617;
-    --wi-color-on-emphasis: #ffffff;
-    --wi-overlay-scrim: rgb(15 23 42 / 0.55);
-    --wi-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
-    --wi-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
-    --wi-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
-    --wi-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
-    --wi-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --wd-radius-control: 3px;
+    --wd-border-width: 1px;
+    --wd-focus-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--wd-color-primary) 20%, transparent);
+    --wd-focus-shadow-danger: 0 0 0 2px
+        color-mix(in srgb, var(--wd-color-danger) 20%, transparent);
+    --wd-color-success: #159570;
+    --wd-color-info: #2563eb;
+    --wd-color-warning: #d97706;
+    --wd-color-warn: var(--wd-color-warning);
+    --wd-color-help: #9333ea;
+    --wd-color-danger: #dc2626;
+    --wd-color-contrast: #0f172a;
+    --wd-color-contrast-fg: #ffffff;
+    --wd-color-contrast-hover: #1e293b;
+    --wd-color-contrast-active: #020617;
+    --wd-color-on-emphasis: #ffffff;
+    --wd-overlay-scrim: rgb(15 23 42 / 0.55);
+    --wd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
+    --wd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
+    --wd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --wd-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --wd-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
 
     /* Typography scale (component text, not control-height fonts) */
-    --wi-font-size-xs: 0.75rem;
-    --wi-font-size-sm: 0.8125rem;
-    --wi-font-size-md: 0.875rem;
-    --wi-font-size-lg: 1.125rem;
-    --wi-opacity-disabled: 0.55;
-    /* Layering: override --wi-z-base via ConfigProvider / createWellInsight */
-    --wi-z-base: 1000;
-    --wi-z-overlay: var(--wi-z-base);
-    --wi-z-overlay-raised: calc(var(--wi-z-base) + 1);
-    --wi-z-dropdown: calc(var(--wi-z-base) + 50);
-    --wi-z-tooltip: calc(var(--wi-z-base) + 60);
-    --wi-z-toast: calc(var(--wi-z-base) + 100);
-    --wi-z-popper: 40;
+    --wd-font-size-xs: 0.75rem;
+    --wd-font-size-sm: 0.8125rem;
+    --wd-font-size-md: 0.875rem;
+    --wd-font-size-lg: 1.125rem;
+    --wd-opacity-disabled: 0.55;
+    /* Layering: override --wd-z-base via ConfigProvider / createWexDesign */
+    --wd-z-base: 1000;
+    --wd-z-overlay: var(--wd-z-base);
+    --wd-z-overlay-raised: calc(var(--wd-z-base) + 1);
+    --wd-z-dropdown: calc(var(--wd-z-base) + 50);
+    --wd-z-tooltip: calc(var(--wd-z-base) + 60);
+    --wd-z-toast: calc(var(--wd-z-base) + 100);
+    --wd-z-popper: 40;
 
-    --wi-control-affix-size: 2rem;
-    --wi-control-affix-gap: 2.35rem;
-    --wi-control-affix-padding: 2.5rem;
-    --wi-space-1: 0.25rem;
-    --wi-space-2: 0.5rem;
-    --wi-space-3: 0.75rem;
-    --wi-space-4: 1rem;
-    --wi-space-5: 1.25rem;
-    --wi-space-6: 1.5rem;
-    --wi-space-8: 2rem;
-    --wi-radius-sm: 0.25rem;
-    --wi-radius-md: 0.5rem;
-    --wi-radius-lg: 0.75rem;
-    --wi-radius-full: 9999px;
-    --wi-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-    --wi-motion-fast: 150ms;
-    --wi-motion-normal: 250ms;
-    --wi-motion-ease: cubic-bezier(0.2, 0, 0, 1);
-    --wi-motion-enter: 180ms;
-    --wi-motion-exit: 130ms;
-    --wi-motion-distance: 0.5rem;
-    --wi-motion-spin: 1s;
-    --wi-motion-spin-dash: 1.5s;
-    --wi-motion-spin-fast: 0.8s;
-    --wi-motion-spin-medium: 0.7s;
-    --wi-motion-skeleton: 1.4s;
-    --wi-motion-pulse: 1.2s;
-    --wi-motion-scrollbar-show: 340ms;
-    --wi-motion-scrollbar-hide: 120ms;
-    --wi-dataview-grid-min: 10rem;
-    --wi-tree-indent: 0.7rem;
-    --wi-tree-indent-padding: var(--wi-space-3);
-    --wi-layout-trigger-bar-height: 4.5rem;
-    --wi-layout-trigger-bar-offset: 1.75rem;
-    --wi-layout-trigger-bar-width: 2rem;
-    --wi-layout-trigger-bar-top: 2.25rem;
-    --wi-timeline-event-min-height: 4rem;
-    --wi-timeline-marker-size: 1.5rem;
-    --wi-tag-font-size-small: var(--wi-font-size-xs);
-    --wi-slider-tooltip-offset: 1.5rem;
-    --wi-slider-tooltip-padding-block: 0.15rem;
-    --wi-slider-tooltip-padding-inline: 0.4rem;
-    --wi-rating-star-size-small: 1rem;
-    --wi-rating-star-size-medium: 1.25rem;
-    --wi-rating-star-size-large: 1.5rem;
-    --wi-rating-star-padding: 0.15rem;
-    --wi-slider-marks-inset: 0.9rem;
-    --wi-slider-marks-side: 0.5rem;
-    --wi-stepper-connector-color: var(--wi-color-border);
+    --wd-control-affix-size: 2rem;
+    --wd-control-affix-gap: 2.35rem;
+    --wd-control-affix-padding: 2.5rem;
+    --wd-space-1: 0.25rem;
+    --wd-space-2: 0.5rem;
+    --wd-space-3: 0.75rem;
+    --wd-space-4: 1rem;
+    --wd-space-5: 1.25rem;
+    --wd-space-6: 1.5rem;
+    --wd-space-8: 2rem;
+    --wd-radius-sm: 0.25rem;
+    --wd-radius-md: 0.5rem;
+    --wd-radius-lg: 0.75rem;
+    --wd-radius-full: 9999px;
+    --wd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --wd-motion-fast: 150ms;
+    --wd-motion-normal: 250ms;
+    --wd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --wd-motion-enter: 180ms;
+    --wd-motion-exit: 130ms;
+    --wd-motion-distance: 0.5rem;
+    --wd-motion-spin: 1s;
+    --wd-motion-spin-dash: 1.5s;
+    --wd-motion-spin-fast: 0.8s;
+    --wd-motion-spin-medium: 0.7s;
+    --wd-motion-skeleton: 1.4s;
+    --wd-motion-pulse: 1.2s;
+    --wd-motion-scrollbar-show: 340ms;
+    --wd-motion-scrollbar-hide: 120ms;
+    --wd-dataview-grid-min: 10rem;
+    --wd-tree-indent: 0.7rem;
+    --wd-tree-indent-padding: var(--wd-space-3);
+    --wd-layout-trigger-bar-height: 4.5rem;
+    --wd-layout-trigger-bar-offset: 1.75rem;
+    --wd-layout-trigger-bar-width: 2rem;
+    --wd-layout-trigger-bar-top: 2.25rem;
+    --wd-timeline-event-min-height: 4rem;
+    --wd-timeline-marker-size: 1.5rem;
+    --wd-tag-font-size-small: var(--wd-font-size-xs);
+    --wd-slider-tooltip-offset: 1.5rem;
+    --wd-slider-tooltip-padding-block: 0.15rem;
+    --wd-slider-tooltip-padding-inline: 0.4rem;
+    --wd-rating-star-size-small: 1rem;
+    --wd-rating-star-size-medium: 1.25rem;
+    --wd-rating-star-size-large: 1.5rem;
+    --wd-rating-star-padding: 0.15rem;
+    --wd-slider-marks-inset: 0.9rem;
+    --wd-slider-marks-side: 0.5rem;
+    --wd-stepper-connector-color: var(--wd-color-border);
 
     /* Table (Element Plus–aligned) */
-    --wi-color-fill-light: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
-    --wi-color-fill-lighter: color-mix(in srgb, var(--wi-color-text) 3.5%, var(--wi-color-surface));
-    --wi-table-border-color: var(--wi-color-border);
-    --wi-table-header-bg: var(--wi-color-fill-light);
-    --wi-table-header-text: var(--wi-color-text);
-    --wi-table-text: var(--wi-color-text);
-    --wi-table-row-bg: var(--wi-color-surface);
-    --wi-table-row-hover-bg: var(--wi-color-fill-light);
-    --wi-table-row-striped-bg: var(--wi-color-fill-lighter);
-    --wi-table-row-current-bg: color-mix(in srgb, var(--wi-color-primary) 10%, var(--wi-color-surface));
-    --wi-table-row-selected-bg: color-mix(in srgb, var(--wi-color-primary) 14%, var(--wi-color-surface));
-    --wi-table-expanded-bg: var(--wi-color-fill-lighter);
-    --wi-table-font-size: var(--wi-font-size-md);
-    --wi-table-row-height: 40px;
-    --wi-table-cell-line-height: 23px;
-    --wi-table-cell-padding-inline: 12px;
+    --wd-color-fill-light: color-mix(in srgb, var(--wd-color-text) 6%, var(--wd-color-surface));
+    --wd-color-fill-lighter: color-mix(in srgb, var(--wd-color-text) 3.5%, var(--wd-color-surface));
+    --wd-table-border-color: var(--wd-color-border);
+    --wd-table-header-bg: var(--wd-color-fill-light);
+    --wd-table-header-text: var(--wd-color-text);
+    --wd-table-text: var(--wd-color-text);
+    --wd-table-row-bg: var(--wd-color-surface);
+    --wd-table-row-hover-bg: var(--wd-color-fill-light);
+    --wd-table-row-striped-bg: var(--wd-color-fill-lighter);
+    --wd-table-row-current-bg: color-mix(in srgb, var(--wd-color-primary) 10%, var(--wd-color-surface));
+    --wd-table-row-selected-bg: color-mix(in srgb, var(--wd-color-primary) 14%, var(--wd-color-surface));
+    --wd-table-expanded-bg: var(--wd-color-fill-lighter);
+    --wd-table-font-size: var(--wd-font-size-md);
+    --wd-table-row-height: 40px;
+    --wd-table-cell-line-height: 23px;
+    --wd-table-cell-padding-inline: 12px;
 }
 
-:root[data-wi-motion="reduced"] {
-    --wi-motion-fast: 80ms;
-    --wi-motion-normal: 120ms;
-    --wi-motion-enter: 100ms;
-    --wi-motion-exit: 80ms;
-    --wi-motion-distance: 0;
+:root[data-wd-motion="reduced"] {
+    --wd-motion-fast: 80ms;
+    --wd-motion-normal: 120ms;
+    --wd-motion-enter: 100ms;
+    --wd-motion-exit: 80ms;
+    --wd-motion-distance: 0;
 }
 
-:root[data-wi-motion="none"] {
-    --wi-motion-fast: 0ms;
-    --wi-motion-normal: 0ms;
-    --wi-motion-enter: 0ms;
-    --wi-motion-exit: 0ms;
-    --wi-motion-distance: 0;
+:root[data-wd-motion="none"] {
+    --wd-motion-fast: 0ms;
+    --wd-motion-normal: 0ms;
+    --wd-motion-enter: 0ms;
+    --wd-motion-exit: 0ms;
+    --wd-motion-distance: 0;
 }
 
 /* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */
 :root,
-[data-wi-density="comfortable"] {
-    --wi-density-scale: 1;
-    --wi-menu-item-height: calc(var(--wi-control-height-medium) + var(--wi-space-2));
-    --wi-checkbox-control-size: 1.125rem;
+[data-wd-density="comfortable"] {
+    --wd-density-scale: 1;
+    --wd-menu-item-height: calc(var(--wd-control-height-medium) + var(--wd-space-2));
+    --wd-checkbox-control-size: 1.125rem;
 }
 
-[data-wi-density="compact"] {
-    --wi-menu-item-height: calc(var(--wi-control-height-medium) + var(--wi-space-1));
-    --wi-control-affix-padding: 2.15rem;
-    --wi-control-affix-gap: 2rem;
-    --wi-checkbox-control-size: 1rem;
-    --wi-space-1: 0.2rem;
-    --wi-space-2: 0.4rem;
-    --wi-space-3: 0.6rem;
-    --wi-space-4: 0.85rem;
-    --wi-space-5: 1.05rem;
-    --wi-space-6: 1.25rem;
-    --wi-space-8: 1.7rem;
-    --wi-control-height-small: 24px;
-    --wi-control-height-medium: 28px;
-    --wi-control-height-large: 34px;
-    --wi-control-font-small: 13px;
-    --wi-control-font-medium: 13px;
-    --wi-control-font-large: 14px;
-    --wi-control-padding-x-small: 8px;
-    --wi-control-padding-x-medium: 10px;
-    --wi-control-padding-x-large: 12px;
-    --wi-table-row-height: 36px;
-    --wi-table-cell-line-height: 20px;
-    --wi-table-cell-padding-inline: 10px;
-    --wi-table-font-size: var(--wi-font-size-sm);
+[data-wd-density="compact"] {
+    --wd-menu-item-height: calc(var(--wd-control-height-medium) + var(--wd-space-1));
+    --wd-control-affix-padding: 2.15rem;
+    --wd-control-affix-gap: 2rem;
+    --wd-checkbox-control-size: 1rem;
+    --wd-space-1: 0.2rem;
+    --wd-space-2: 0.4rem;
+    --wd-space-3: 0.6rem;
+    --wd-space-4: 0.85rem;
+    --wd-space-5: 1.05rem;
+    --wd-space-6: 1.25rem;
+    --wd-space-8: 1.7rem;
+    --wd-control-height-small: 24px;
+    --wd-control-height-medium: 28px;
+    --wd-control-height-large: 34px;
+    --wd-control-font-small: 13px;
+    --wd-control-font-medium: 13px;
+    --wd-control-font-large: 14px;
+    --wd-control-padding-x-small: 8px;
+    --wd-control-padding-x-medium: 10px;
+    --wd-control-padding-x-large: 12px;
+    --wd-table-row-height: 36px;
+    --wd-table-cell-line-height: 20px;
+    --wd-table-cell-padding-inline: 10px;
+    --wd-table-font-size: var(--wd-font-size-sm);
 }
 
-[data-wi-density="spacious"] {
-    --wi-menu-item-height: calc(var(--wi-control-height-medium) + var(--wi-space-3));
-    --wi-control-affix-padding: 2.85rem;
-    --wi-control-affix-gap: 2.65rem;
-    --wi-checkbox-control-size: 1.25rem;
-    --wi-space-1: 0.3rem;
-    --wi-space-2: 0.6rem;
-    --wi-space-3: 0.9rem;
-    --wi-space-4: 1.15rem;
-    --wi-space-5: 1.45rem;
-    --wi-space-6: 1.75rem;
-    --wi-space-8: 2.35rem;
-    --wi-control-height-small: 32px;
-    --wi-control-height-medium: 40px;
-    --wi-control-height-large: 46px;
-    --wi-control-font-small: 14px;
-    --wi-control-font-medium: 15px;
-    --wi-control-font-large: 16px;
-    --wi-control-padding-x-small: 12px;
-    --wi-control-padding-x-medium: 14px;
-    --wi-control-padding-x-large: 16px;
-    --wi-table-row-height: 48px;
-    --wi-table-cell-line-height: 26px;
-    --wi-table-cell-padding-inline: 16px;
-    --wi-table-font-size: 1rem;
+[data-wd-density="spacious"] {
+    --wd-menu-item-height: calc(var(--wd-control-height-medium) + var(--wd-space-3));
+    --wd-control-affix-padding: 2.85rem;
+    --wd-control-affix-gap: 2.65rem;
+    --wd-checkbox-control-size: 1.25rem;
+    --wd-space-1: 0.3rem;
+    --wd-space-2: 0.6rem;
+    --wd-space-3: 0.9rem;
+    --wd-space-4: 1.15rem;
+    --wd-space-5: 1.45rem;
+    --wd-space-6: 1.75rem;
+    --wd-space-8: 2.35rem;
+    --wd-control-height-small: 32px;
+    --wd-control-height-medium: 40px;
+    --wd-control-height-large: 46px;
+    --wd-control-font-small: 14px;
+    --wd-control-font-medium: 15px;
+    --wd-control-font-large: 16px;
+    --wd-control-padding-x-small: 12px;
+    --wd-control-padding-x-medium: 14px;
+    --wd-control-padding-x-large: 16px;
+    --wd-table-row-height: 48px;
+    --wd-table-cell-line-height: 26px;
+    --wd-table-cell-padding-inline: 16px;
+    --wd-table-font-size: 1rem;
 }
 
-[data-wi-density="compact"] .wi-layout-header {
-    --wi-layout-header-height: 48px;
+[data-wd-density="compact"] .wd-layout-header {
+    --wd-layout-header-height: 48px;
 }
 
-[data-wi-density="compact"] .wi-layout-footer {
-    --wi-layout-footer-height: 40px;
+[data-wd-density="compact"] .wd-layout-footer {
+    --wd-layout-footer-height: 40px;
 }
 
-[data-wi-density="compact"] .wi-layout-sider {
-    --wi-layout-sider-width: 240px;
-    --wi-layout-sider-collapsed-width: 52px;
+[data-wd-density="compact"] .wd-layout-sider {
+    --wd-layout-sider-width: 240px;
+    --wd-layout-sider-collapsed-width: 52px;
 }
 
-[data-wi-density="spacious"] .wi-layout-header {
-    --wi-layout-header-height: 64px;
+[data-wd-density="spacious"] .wd-layout-header {
+    --wd-layout-header-height: 64px;
 }
 
-[data-wi-density="spacious"] .wi-layout-footer {
-    --wi-layout-footer-height: 56px;
+[data-wd-density="spacious"] .wd-layout-footer {
+    --wd-layout-footer-height: 56px;
 }
 
-[data-wi-density="spacious"] .wi-layout-sider {
-    --wi-layout-sider-width: 288px;
-    --wi-layout-sider-collapsed-width: 72px;
+[data-wd-density="spacious"] .wd-layout-sider {
+    --wd-layout-sider-width: 288px;
+    --wd-layout-sider-collapsed-width: 72px;
 }
 
 [data-theme="dark"] {
-    --wi-color-primary: #60a5fa;
-    --wi-color-primary-hover: #93c5fd;
-    --wi-color-surface: #0f172a;
-    --wi-color-text: #f8fafc;
-    --wi-color-text-muted: #94a3b8;
-    --wi-color-border: #334155;
-    --wi-color-focus-ring: #93c5fd;
-    --wi-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--wi-color-primary) 28%, transparent);
-    --wi-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--wi-color-danger) 28%, transparent);
-    --wi-color-success: #5eead4;
-    --wi-color-info: #93c5fd;
-    --wi-color-warning: #fbbf24;
-    --wi-color-warn: var(--wi-color-warning);
-    --wi-color-help: #c084fc;
-    --wi-color-danger: #fca5a5;
-    --wi-color-contrast: #f8fafc;
-    --wi-color-contrast-fg: #0f172a;
-    --wi-color-contrast-hover: #e2e8f0;
-    --wi-color-contrast-active: #cbd5e1;
-    --wi-overlay-scrim: rgb(2 6 23 / 0.72);
-    --wi-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
-    --wi-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
-    --wi-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
-    --wi-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
-    --wi-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --wd-color-primary: #60a5fa;
+    --wd-color-primary-hover: #93c5fd;
+    --wd-color-surface: #0f172a;
+    --wd-color-text: #f8fafc;
+    --wd-color-text-muted: #94a3b8;
+    --wd-color-border: #334155;
+    --wd-color-focus-ring: #93c5fd;
+    --wd-focus-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--wd-color-primary) 28%, transparent);
+    --wd-focus-shadow-danger: 0 0 0 2px
+        color-mix(in srgb, var(--wd-color-danger) 28%, transparent);
+    --wd-color-success: #5eead4;
+    --wd-color-info: #93c5fd;
+    --wd-color-warning: #fbbf24;
+    --wd-color-warn: var(--wd-color-warning);
+    --wd-color-help: #c084fc;
+    --wd-color-danger: #fca5a5;
+    --wd-color-contrast: #f8fafc;
+    --wd-color-contrast-fg: #0f172a;
+    --wd-color-contrast-hover: #e2e8f0;
+    --wd-color-contrast-active: #cbd5e1;
+    --wd-overlay-scrim: rgb(2 6 23 / 0.72);
+    --wd-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+    --wd-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
+    --wd-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
+    --wd-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --wd-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
 
-    --wi-table-border-color: color-mix(in srgb, var(--wi-color-border) 88%, var(--wi-color-text));
-    --wi-color-fill-light: color-mix(in srgb, var(--wi-color-text) 10%, var(--wi-color-surface));
-    --wi-color-fill-lighter: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
-    --wi-table-header-bg: var(--wi-color-fill-light);
-    --wi-table-row-bg: var(--wi-color-surface);
-    --wi-table-row-hover-bg: color-mix(in srgb, var(--wi-color-text) 8%, var(--wi-color-surface));
-    --wi-table-row-striped-bg: var(--wi-color-fill-lighter);
-    --wi-table-row-current-bg: color-mix(in srgb, var(--wi-color-primary) 16%, var(--wi-color-surface));
-    --wi-table-row-selected-bg: color-mix(in srgb, var(--wi-color-primary) 20%, var(--wi-color-surface));
-    --wi-table-expanded-bg: var(--wi-color-fill-lighter);
+    --wd-table-border-color: color-mix(in srgb, var(--wd-color-border) 88%, var(--wd-color-text));
+    --wd-color-fill-light: color-mix(in srgb, var(--wd-color-text) 10%, var(--wd-color-surface));
+    --wd-color-fill-lighter: color-mix(in srgb, var(--wd-color-text) 6%, var(--wd-color-surface));
+    --wd-table-header-bg: var(--wd-color-fill-light);
+    --wd-table-row-bg: var(--wd-color-surface);
+    --wd-table-row-hover-bg: color-mix(in srgb, var(--wd-color-text) 8%, var(--wd-color-surface));
+    --wd-table-row-striped-bg: var(--wd-color-fill-lighter);
+    --wd-table-row-current-bg: color-mix(in srgb, var(--wd-color-primary) 16%, var(--wd-color-surface));
+    --wd-table-row-selected-bg: color-mix(in srgb, var(--wd-color-primary) 20%, var(--wd-color-surface));
+    --wd-table-expanded-bg: var(--wd-color-fill-lighter);
 }

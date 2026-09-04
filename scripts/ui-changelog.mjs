@@ -8,7 +8,7 @@ export const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const uiPackagePath = join(root, 'package.json')
 const changelogZhPath = join(root, 'CHANGELOG.md')
 const changelogEnPath = join(root, 'CHANGELOG.en.md')
-const PACKAGE_NAME = '@well-insight/ui'
+const PACKAGE_NAME = '@wex-design/ui'
 
 /** Paths that count as “library” for default CHANGELOG selection. */
 const LIB_PATHS = [

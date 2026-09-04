@@ -11,7 +11,7 @@ description: 状态角标或圆点。
 ## 引入
 
 ```ts
-import { WiBadge } from '@well-insight/ui'
+import { WdBadge } from '@wex-design/ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WiBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiBadge } from '@well-insight/ui'
+import { WdBadge } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiBadge :value="2" />
-    <WiBadge value="New" />
-    <WiBadge />
+    <WdBadge :value="2" />
+    <WdBadge value="New" />
+    <WdBadge />
   </div>
 </template>
 ```
@@ -38,18 +38,18 @@ import { WiBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiBadge } from '@well-insight/ui'
+import { WdBadge } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiBadge :value="1" />
-    <WiBadge :value="2" severity="secondary" />
-    <WiBadge :value="3" severity="success" />
-    <WiBadge :value="4" severity="info" />
-    <WiBadge :value="5" severity="warn" />
-    <WiBadge :value="6" severity="danger" />
-    <WiBadge :value="7" severity="contrast" />
+    <WdBadge :value="1" />
+    <WdBadge :value="2" severity="secondary" />
+    <WdBadge :value="3" severity="success" />
+    <WdBadge :value="4" severity="info" />
+    <WdBadge :value="5" severity="warn" />
+    <WdBadge :value="6" severity="danger" />
+    <WdBadge :value="7" severity="contrast" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ import { WiBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiBadge } from '@well-insight/ui'
+import { WdBadge } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiBadge :value="8" size="small" />
-    <WiBadge :value="9" />
-    <WiBadge :value="10" size="large" />
+    <WdBadge :value="8" size="small" />
+    <WdBadge :value="9" />
+    <WdBadge :value="10" size="large" />
   </div>
 </template>
 ```
@@ -78,17 +78,17 @@ import { WiBadge } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiBadge, WiButton } from '@well-insight/ui'
+import { WdBadge, WdButton } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WiBadge :value="120" :max="99">
-      <WiButton label="Inbox" severity="secondary" />
-    </WiBadge>
-    <WiBadge processing>
-      <WiButton label="Live" icon="check" />
-    </WiBadge>
+    <WdBadge :value="120" :max="99">
+      <WdButton label="Inbox" severity="secondary" />
+    </WdBadge>
+    <WdBadge processing>
+      <WdButton label="Live" icon="check" />
+    </WdBadge>
   </div>
 </template>
 ```

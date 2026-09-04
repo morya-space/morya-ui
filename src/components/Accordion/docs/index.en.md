@@ -11,14 +11,14 @@ Collapsible panels for organizing grouped content in limited space.
 ## Import
 
 ```ts
-import { WiAccordion } from '@well-insight/ui'
+import { WdAccordion } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiAccordion } from '@well-insight/ui'
+import { WdAccordion } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -30,7 +30,7 @@ const tabs = [
 </script>
 
 <template>
-  <WiAccordion v-model="active" :tabs="tabs">
+  <WdAccordion v-model="active" :tabs="tabs">
     <template #design>
       <p style="margin:0">
         Design system tokens and layout rules.
@@ -41,7 +41,7 @@ const tabs = [
         Implementation notes and API contracts.
       </p>
     </template>
-  </WiAccordion>
+  </WdAccordion>
 </template>
 ```
 
@@ -49,7 +49,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiAccordion } from '@well-insight/ui'
+import { WdAccordion } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const active = ref<string[]>(['a'])
@@ -60,7 +60,7 @@ const tabs = [
 </script>
 
 <template>
-  <WiAccordion v-model="active" multiple :tabs="tabs">
+  <WdAccordion v-model="active" multiple :tabs="tabs">
     <template #a>
       <p style="margin:0">
         First section content.
@@ -71,7 +71,7 @@ const tabs = [
         Second section content.
       </p>
     </template>
-  </WiAccordion>
+  </WdAccordion>
 </template>
 ```
 
@@ -81,7 +81,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WiAccordion, WiButton } from '@well-insight/ui'
+import { WdAccordion, WdButton } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const active = ref('a')
@@ -91,16 +91,16 @@ const tabs = [
 </script>
 
 <template>
-  <WiAccordion v-model="active" :tabs="tabs">
+  <WdAccordion v-model="active" :tabs="tabs">
     <template #extra="{ tab }">
-      <WiButton :label="tab.header" size="small" text />
+      <WdButton :label="tab.header" size="small" text />
     </template>
     <template #a>
       <p style="margin:0">
         Content.
       </p>
     </template>
-  </WiAccordion>
+  </WdAccordion>
 </template>
 ```
 

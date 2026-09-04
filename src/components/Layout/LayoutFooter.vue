@@ -3,7 +3,7 @@ import type { LayoutFooterProps } from "./types";
 import { computed } from "vue";
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 
-defineOptions({ name: "WiLayoutFooter" });
+defineOptions({ name: "WdLayoutFooter" });
 
 const props = withDefaults(defineProps<LayoutFooterProps>(), {
     bordered: false,
@@ -13,17 +13,17 @@ const props = withDefaults(defineProps<LayoutFooterProps>(), {
 
 const rootStyle = useLayoutRegionStyle(() => ({
     height: props.height,
-    heightFallback: "var(--wi-layout-footer-height, 48px)",
+    heightFallback: "var(--wd-layout-footer-height, 48px)",
     padding: props.padding,
     radius: props.radius,
 }));
 
 const rootClass = computed(() => [
-    "wi-layout-footer",
-    `wi-layout-footer--${props.position}-positioned`,
+    "wd-layout-footer",
+    `wd-layout-footer--${props.position}-positioned`,
     {
-        "wi-layout-footer--bordered": props.bordered,
-        "wi-layout-footer--inverted": props.inverted,
+        "wd-layout-footer--bordered": props.bordered,
+        "wd-layout-footer--inverted": props.inverted,
     },
 ]);
 </script>

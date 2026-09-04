@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import WiSelect from './Select.vue'
+import WdSelect from './Select.vue'
 
 const options = [
   { label: 'Small', value: 'sm' },
@@ -9,9 +9,9 @@ const options = [
   { label: 'Disabled', value: 'disabled', disabled: true },
 ]
 
-describe('wiSelect', () => {
+describe('wdSelect', () => {
   it('associates its label and emits a typed selected value', async () => {
-    const wrapper = mount(WiSelect, { props: { id: 'size', label: 'Size', options } })
+    const wrapper = mount(WdSelect, { props: { id: 'size', label: 'Size', options } })
 
     expect(wrapper.get('label').attributes('for')).toBe('size')
     await wrapper.get('[role="combobox"]').trigger('click')
@@ -27,14 +27,14 @@ describe('wiSelect', () => {
   })
 
   it('renders placeholder and invalid state, then supports keyboard selection', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, placeholder: 'Choose a size', invalid: true, teleport: false },
     })
     const trigger = wrapper.get('[role="combobox"]')
 
     expect(trigger.text()).toContain('Choose a size')
     expect(trigger.attributes('aria-invalid')).toBe('true')
-    expect(trigger.classes()).toContain('wi-select--invalid')
+    expect(trigger.classes()).toContain('wd-select--invalid')
     await trigger.trigger('keydown', { key: 'ArrowDown' })
     await wrapper.get('[role="listbox"]').trigger('keydown', { key: 'ArrowDown' })
     await wrapper.get('[role="listbox"]').trigger('keydown', { key: 'Enter' })
@@ -43,42 +43,42 @@ describe('wiSelect', () => {
   })
 
   it('supports size and fluid props', () => {
-    const wrapper = mount(WiSelect, { props: { options, size: 'small', fluid: true } })
-    expect(wrapper.classes()).toContain('wi-select-field--fluid')
-    expect(wrapper.get('[role="combobox"]').classes()).toContain('wi-select--small')
+    const wrapper = mount(WdSelect, { props: { options, size: 'small', fluid: true } })
+    expect(wrapper.classes()).toContain('wd-select-field--fluid')
+    expect(wrapper.get('[role="combobox"]').classes()).toContain('wd-select--small')
   })
 
   it('teleports the styled menu to body by default', async () => {
-    const wrapper = mount(WiSelect, { props: { options, modelValue: 'sm' }, attachTo: document.body })
+    const wrapper = mount(WdSelect, { props: { options, modelValue: 'sm' }, attachTo: document.body })
     await wrapper.get('[role="combobox"]').trigger('click')
     await nextTick()
 
-    expect(document.body.querySelector('.wi-select__menu--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wd-select__menu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
   it('clears the value when showClear is enabled', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, modelValue: 'sm', showClear: true, teleport: false },
     })
-    await wrapper.get('.wi-select__control').trigger('mouseenter')
-    await wrapper.get('.wi-select__clear').trigger('click')
+    await wrapper.get('.wd-select__control').trigger('mouseenter')
+    await wrapper.get('.wd-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
   it('supports clearable as an alias for showClear', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, modelValue: 'sm', clearable: true, teleport: false },
     })
-    await wrapper.get('.wi-select__control').trigger('mouseenter')
-    await wrapper.get('.wi-select__clear').trigger('click')
+    await wrapper.get('.wd-select__control').trigger('mouseenter')
+    await wrapper.get('.wd-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
   it('filters options by label and shows empty message', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: {
         options,
         filter: true,
@@ -87,27 +87,27 @@ describe('wiSelect', () => {
       },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
-    await wrapper.get('.wi-select__filter').setValue('zzz')
+    await wrapper.get('.wd-select__filter').setValue('zzz')
     await nextTick()
     expect(wrapper.findAll('[role="option"]')).toHaveLength(0)
-    expect(wrapper.get('.wi-select__empty').text()).toBe('暂无选项')
+    expect(wrapper.get('.wd-select__empty').text()).toBe('暂无选项')
 
-    await wrapper.get('.wi-select__filter').setValue('lar')
+    await wrapper.get('.wd-select__filter').setValue('lar')
     await nextTick()
     expect(wrapper.findAll('[role="option"]')).toHaveLength(1)
     expect(wrapper.get('[role="option"]').text()).toContain('Large')
   })
 
   it('shows empty message when options are empty', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options: [], emptyMessage: '没有可选内容', teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
-    expect(wrapper.get('.wi-select__empty').text()).toBe('没有可选内容')
+    expect(wrapper.get('.wd-select__empty').text()).toBe('没有可选内容')
   })
 
   it('selects multiple values and keeps the menu open', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, multiple: true, modelValue: [], teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
@@ -121,7 +121,7 @@ describe('wiSelect', () => {
   })
 
   it('renders removable tags and can collapse extras', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: {
         options,
         multiple: true,
@@ -130,47 +130,47 @@ describe('wiSelect', () => {
         teleport: false,
       },
     })
-    expect(wrapper.get('.wi-select__tag-label').text()).toBe('Small')
-    expect(wrapper.get('.wi-select__tag--more').text()).toBe('+1')
-    await wrapper.get('.wi-select__tag-remove').trigger('click')
+    expect(wrapper.get('.wd-select__tag-label').text()).toBe('Small')
+    expect(wrapper.get('.wd-select__tag--more').text()).toBe('+1')
+    await wrapper.get('.wd-select__tag-remove').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[[2]]])
   })
 
   it('clears all selected values in multiple mode', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, multiple: true, modelValue: ['sm', 2], showClear: true, teleport: false },
     })
-    await wrapper.get('.wi-select__control').trigger('mouseenter')
-    await wrapper.get('.wi-select__clear').trigger('click')
+    await wrapper.get('.wd-select__control').trigger('mouseenter')
+    await wrapper.get('.wd-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[[]]])
   })
 
   it('skips local filtering when remote and emits search', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, filter: true, remote: true, teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
-    await wrapper.get('.wi-select__filter').setValue('zzz')
+    await wrapper.get('.wd-select__filter').setValue('zzz')
     await nextTick()
     expect(wrapper.findAll('[role="option"]')).toHaveLength(options.length)
     expect(wrapper.emitted('search')?.at(-1)).toEqual(['zzz'])
   })
 
   it('shows loading copy and creates a tag option from the filter query', async () => {
-    const loading = mount(WiSelect, {
+    const loading = mount(WdSelect, {
       props: { options: [], loading: true, teleport: false },
     })
     await loading.get('[role="combobox"]').trigger('click')
-    expect(loading.get('.wi-select__empty').text()).toBe('加载中')
+    expect(loading.get('.wd-select__empty').text()).toBe('加载中')
     expect(loading.get('[role="combobox"]').attributes('aria-busy')).toBe('true')
 
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, filter: true, tag: true, teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
-    await wrapper.get('.wi-select__filter').setValue('Brand new')
+    await wrapper.get('.wd-select__filter').setValue('Brand new')
     await nextTick()
-    const create = wrapper.get('.wi-select__option--create')
+    const create = wrapper.get('.wd-select__option--create')
     expect(create.text()).toContain('Brand new')
     await create.trigger('click')
     expect(wrapper.emitted('create')?.[0]?.[0]).toEqual({ label: 'Brand new', value: 'Brand new' })
@@ -178,7 +178,7 @@ describe('wiSelect', () => {
   })
 
   it('renders value and option slots', async () => {
-    const wrapper = mount(WiSelect, {
+    const wrapper = mount(WdSelect, {
       props: { options, modelValue: 'sm', teleport: false },
       slots: {
         value: `<template #default="{ option }"><span class="custom-value">{{ option.label }}!</span></template>`,

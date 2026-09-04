@@ -1,9 +1,9 @@
 import type { InjectionKey } from 'vue'
 import type { LayoutSiderPlacement } from './types'
 
-export interface WiLayoutContext {
+export interface WdLayoutContext {
   hasSider: boolean
   siderPlacement: LayoutSiderPlacement
 }
 
-export const WI_LAYOUT_KEY: InjectionKey<WiLayoutContext> = Symbol('wiLayout')
+export const WD_LAYOUT_KEY: InjectionKey<WdLayoutContext> = Symbol('wdLayout')

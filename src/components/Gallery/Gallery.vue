@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { GalleryImage, GalleryProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<GalleryProps>(), {
 const emit = defineEmits<{
   (event: 'update:activeIndex', value: number): void
 }>()
-const locale = useWiLocale()
+const locale = useWdLocale()
 
 function imageSrc(image: string | GalleryImage) {
   return typeof image === 'string' ? image : image.src
@@ -62,51 +62,51 @@ watch(keyboard.activeIndex, (index) => {
   void nextTick(() => {
     const list = thumbs.value
     if (!list || !list.contains(document.activeElement)) return
-    const items = list.querySelectorAll<HTMLElement>('.wi-gallery__thumb')
+    const items = list.querySelectorAll<HTMLElement>('.wd-gallery__thumb')
     items[index]?.focus({ preventScroll: true })
   })
 })
 </script>
 
 <template>
-  <div class="wi-gallery">
-    <div class="wi-gallery__main">
+  <div class="wd-gallery">
+    <div class="wd-gallery__main">
       <button
         type="button"
-        class="wi-gallery__nav wi-gallery__nav--prev"
+        class="wd-gallery__nav wd-gallery__nav--prev"
         :aria-label="locale.prevImage"
         :disabled="activeIndex <= 0"
         @click="prev"
       >
-        <WiIcon name="chevron-left" size="sm" />
+        <WdIcon name="chevron-left" size="sm" />
       </button>
-      <figure class="wi-gallery__stage">
-        <Transition name="wi-gallery-fade" mode="out-in">
+      <figure class="wd-gallery__stage">
+        <Transition name="wd-gallery-fade" mode="out-in">
           <img
             v-if="current"
             :key="activeIndex"
-            class="wi-gallery__image"
+            class="wd-gallery__image"
             :src="currentSrc"
             :alt="currentAlt"
           >
         </Transition>
-        <figcaption v-if="currentCaption" class="wi-gallery__caption">
+        <figcaption v-if="currentCaption" class="wd-gallery__caption">
           {{ currentCaption }}
         </figcaption>
       </figure>
       <button
         type="button"
-        class="wi-gallery__nav wi-gallery__nav--next"
+        class="wd-gallery__nav wd-gallery__nav--next"
         :aria-label="locale.nextImage"
         :disabled="activeIndex >= images.length - 1"
         @click="next"
       >
-        <WiIcon name="chevron-right" size="sm" />
+        <WdIcon name="chevron-right" size="sm" />
       </button>
     </div>
     <ul
       ref="thumbs"
-      class="wi-gallery__thumbs"
+      class="wd-gallery__thumbs"
       role="listbox"
       :aria-label="locale.thumbnails"
       @keydown="keyboard.onKeydown"
@@ -114,8 +114,8 @@ watch(keyboard.activeIndex, (index) => {
       <li v-for="(image, index) in images" :key="`${imageSrc(image)}-${index}`">
         <button
           type="button"
-          class="wi-gallery__thumb"
-          :class="{ 'wi-gallery__thumb--active': index === activeIndex }"
+          class="wd-gallery__thumb"
+          :class="{ 'wd-gallery__thumb--active': index === activeIndex }"
           role="option"
           :aria-selected="index === activeIndex"
           :tabindex="thumbTabindex(index)"

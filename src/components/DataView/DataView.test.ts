@@ -1,25 +1,25 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WiDataView from './DataView.vue'
+import WdDataView from './DataView.vue'
 
-describe('wiDataView', () => {
+describe('wdDataView', () => {
   it('renders list layout by default', () => {
-    const wrapper = mount(WiDataView, { props: { value: ['A', 'B', 'C'] } })
-    expect(wrapper.classes()).toContain('wi-dataview--list')
-    expect(wrapper.findAll('.wi-dataview__list-item')).toHaveLength(3)
+    const wrapper = mount(WdDataView, { props: { value: ['A', 'B', 'C'] } })
+    expect(wrapper.classes()).toContain('wd-dataview--list')
+    expect(wrapper.findAll('.wd-dataview__list-item')).toHaveLength(3)
   })
 
   it('paginates items when enabled', async () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: { value: Array.from({ length: 12 }, (_, i) => `Item ${i}`), paginator: true, rows: 5 },
     })
-    expect(wrapper.findAll('.wi-dataview__list-item')).toHaveLength(5)
-    expect(wrapper.find('.wi-dataview__paginator').exists()).toBe(true)
+    expect(wrapper.findAll('.wd-dataview__list-item')).toHaveLength(5)
+    expect(wrapper.find('.wd-dataview__paginator').exists()).toBe(true)
   })
 
   it('uses grid slot', () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: { value: [1, 2], layout: 'grid' },
       slots: {
         grid: ({ items }: { items: unknown[] }) =>
@@ -30,13 +30,13 @@ describe('wiDataView', () => {
   })
 
   it('shows default empty message', () => {
-    const wrapper = mount(WiDataView, { props: { value: [] } })
-    expect(wrapper.find('.wi-dataview__message').exists()).toBe(true)
-    expect(wrapper.find('.wi-dataview__empty-text').text()).toBe('暂无数据')
+    const wrapper = mount(WdDataView, { props: { value: [] } })
+    expect(wrapper.find('.wd-dataview__message').exists()).toBe(true)
+    expect(wrapper.find('.wd-dataview__empty-text').text()).toBe('暂无数据')
   })
 
   it('supports custom empty slot', () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: { value: [] },
       slots: { empty: '<p class="custom-empty">Nothing here</p>' },
     })
@@ -44,14 +44,14 @@ describe('wiDataView', () => {
   })
 
   it('shows loading overlay', () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: { value: ['a'], loading: true },
     })
-    expect(wrapper.find('.wi-dataview__loading').exists()).toBe(true)
+    expect(wrapper.find('.wd-dataview__loading').exists()).toBe(true)
   })
 
   it('supports controlled page via v-model:page', async () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: {
         'value': Array.from({ length: 12 }, (_, i) => `Item ${i}`),
         'paginator': true,
@@ -60,12 +60,12 @@ describe('wiDataView', () => {
         'onUpdate:page': (page: number) => wrapper.setProps({ page }),
       },
     })
-    expect(wrapper.findAll('.wi-dataview__list-item')).toHaveLength(5)
-    expect(wrapper.find('.wi-dataview__list-item').text()).toBe('Item 5')
+    expect(wrapper.findAll('.wd-dataview__list-item')).toHaveLength(5)
+    expect(wrapper.find('.wd-dataview__list-item').text()).toBe('Item 5')
   })
 
   it('does not reset page when data is appended', async () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: {
         'value': Array.from({ length: 12 }, (_, i) => `Item ${i}`),
         'paginator': true,
@@ -81,10 +81,10 @@ describe('wiDataView', () => {
   })
 
   it('renders header slot', () => {
-    const wrapper = mount(WiDataView, {
+    const wrapper = mount(WdDataView, {
       props: { value: ['a'] },
       slots: { header: '<div class="header-toolbar">Toolbar</div>' },
     })
-    expect(wrapper.find('.wi-dataview__header .header-toolbar').text()).toBe('Toolbar')
+    expect(wrapper.find('.wd-dataview__header .header-toolbar').text()).toBe('Toolbar')
   })
 })

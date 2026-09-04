@@ -17,7 +17,7 @@ describe('message API', () => {
       severity: 'success',
     })
     await nextTick()
-    expect(document.body.querySelector('.wi-message-host')).toBeTruthy()
+    expect(document.body.querySelector('.wd-message-host')).toBeTruthy()
     expect(document.body.textContent).toContain('Saved')
   })
 
@@ -61,14 +61,14 @@ describe('message API', () => {
     message.config({ placement: 'bottom-right' })
     message.info({ content: 'Placed', life: 0 })
     await nextTick()
-    expect(document.body.querySelector('.wi-message-host--bottom-right')).toBeTruthy()
+    expect(document.body.querySelector('.wd-message-host--bottom-right')).toBeTruthy()
   })
 
   it('renders VNode content from h()', async () => {
     const { h } = await import('vue')
     message.info({ content: () => h('strong', 'Rich node'), life: 0 })
     await nextTick()
-    expect(document.body.querySelector('.wi-message__content strong')?.textContent).toBe('Rich node')
+    expect(document.body.querySelector('.wd-message__content strong')?.textContent).toBe('Rich node')
   })
 
   it('dedupes by content and refreshes life', async () => {
@@ -87,7 +87,7 @@ describe('message API', () => {
     vi.useFakeTimers()
     message.info({ content: 'Hover me', life: 1000 })
     await nextTick()
-    const node = document.body.querySelector('.wi-message')
+    const node = document.body.querySelector('.wd-message')
     expect(node).toBeTruthy()
     node!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
     await vi.advanceTimersByTimeAsync(1500)

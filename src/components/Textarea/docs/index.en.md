@@ -11,21 +11,21 @@ Multi-line text input.
 ## Import
 
 ```ts
-import { WiTextarea } from '@well-insight/ui'
+import { WdTextarea } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiTextarea } from '@well-insight/ui'
+import { WdTextarea } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WiTextarea v-model="value" label="Notes" placeholder="Write something…" />
+  <WdTextarea v-model="value" label="Notes" placeholder="Write something…" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WiTextarea } from '@well-insight/ui'
+import { WdTextarea } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WiTextarea size="small" label="Small" rows="3" />
-    <WiTextarea variant="filled" label="Filled" rows="3" />
-    <WiTextarea size="large" fluid label="Large Fluid" rows="3" />
+    <WdTextarea size="small" label="Small" rows="3" />
+    <WdTextarea variant="filled" label="Filled" rows="3" />
+    <WdTextarea size="large" fluid label="Large Fluid" rows="3" />
   </div>
 </template>
 ```
@@ -51,7 +51,7 @@ import { WiTextarea } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiTextarea } from '@well-insight/ui'
+import { WdTextarea } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('Line 1\nLine 2')
@@ -60,9 +60,9 @@ const limited = ref('Clamped height')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WiTextarea v-model="value" autosize label="Auto resize" />
-    <WiTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
-    <WiTextarea invalid label="Required" help-text="This field is required" model-value="" />
+    <WdTextarea v-model="value" autosize label="Auto resize" />
+    <WdTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
+    <WdTextarea invalid label="Required" help-text="This field is required" model-value="" />
   </div>
 </template>
 ```
@@ -71,14 +71,14 @@ const limited = ref('Clamped height')
 
 ```vue preview
 <script setup lang="ts">
-import { WiTextarea } from '@well-insight/ui'
+import { WdTextarea } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const value = ref('Draft notes')
 </script>
 
 <template>
-  <WiTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
+  <WdTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
 </template>
 ```
 

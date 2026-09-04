@@ -37,7 +37,7 @@ function registerStaticResources(server: McpServer, catalog: Catalog) {
     'catalog-index',
     'wi://catalog/index.json',
     {
-      title: 'Well Insight UI catalog index',
+      title: 'Wex Design UI catalog index',
       description: 'Index of all components and guides in the MCP catalog.',
       mimeType: 'application/json',
     },
@@ -78,7 +78,7 @@ function registerStaticResources(server: McpServer, catalog: Catalog) {
     'design-rules',
     'wi://design-rules.json',
     {
-      title: 'Well Insight design rules',
+      title: 'Wex Design design rules',
       description: 'Design tokens, semantic actions, accessibility, and composition rules.',
       mimeType: 'application/json',
     },
@@ -121,7 +121,7 @@ function registerComponentDocTemplate(server: McpServer, catalog: Catalog) {
     }),
     {
       title: 'Component documentation',
-      description: 'Markdown documentation for a @well-insight/ui component.',
+      description: 'Markdown documentation for a @wex-design/ui component.',
       mimeType: 'text/markdown',
     },
     async (uri, variables) => {
@@ -159,7 +159,7 @@ function registerComponentApiTemplate(server: McpServer, catalog: Catalog) {
     }),
     {
       title: 'Component API',
-      description: 'Props, events, slots, and methods for a @well-insight/ui component.',
+      description: 'Props, events, slots, and methods for a @wex-design/ui component.',
       mimeType: 'application/json',
     },
     async (uri, variables) => {
@@ -207,7 +207,7 @@ function registerGuideDocTemplate(server: McpServer, catalog: Catalog) {
     }),
     {
       title: 'Guide documentation',
-      description: 'Markdown guide docs for @well-insight/ui.',
+      description: 'Markdown guide docs for @wex-design/ui.',
       mimeType: 'text/markdown',
     },
     async (uri, variables) => {

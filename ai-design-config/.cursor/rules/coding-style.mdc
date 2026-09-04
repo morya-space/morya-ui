@@ -1,5 +1,5 @@
 ---
-description: Vue 3 + TypeScript 业务代码风格（Well Insight 项目）
+description: Vue 3 + TypeScript 业务代码风格（Wex Design 项目）
 globs: "**/*.{ts,vue}"
 alwaysApply: false
 ---
@@ -9,9 +9,9 @@ alwaysApply: false
 ## Vue
 
 - 使用 `<script setup lang="ts">`。
-- 组件名 PascalCase；模板中用 `Wi*` 前缀组件。
+- 组件名 PascalCase；模板中用 `Wd*` 前缀组件。
 - `v-model` 与组件库 emit 对齐（如 `v-model:page`）。
-- 页面级样式 `scoped`；仅使用 `--wi-*` 与设计令牌。
+- 页面级样式 `scoped`；仅使用 `--wd-*` 与设计令牌。
 
 ## TypeScript
 

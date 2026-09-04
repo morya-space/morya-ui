@@ -1,6 +1,6 @@
-import type { WiSizeInput } from '../../shared/types'
+import type { WdSizeInput } from '../../shared/types'
 
-export type SwitchSize = WiSizeInput
+export type SwitchSize = WdSizeInput
 
 export interface SwitchProps {
   modelValue?: boolean

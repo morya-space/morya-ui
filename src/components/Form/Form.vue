@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { WiFormFieldRegistration } from './context'
+import type { WdFormFieldRegistration } from './context'
 import type { FormProps, FormValidateTrigger } from './types'
 import { computed, provide, reactive, ref, toRaw, watch } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
 import {
-  WI_FORM_KEY,
-  WI_FORM_ERRORS_KEY,
+  WD_FORM_KEY,
+  WD_FORM_ERRORS_KEY,
 } from './context'
 
 const props = withDefaults(defineProps<FormProps>(), {
@@ -23,7 +23,7 @@ const emit = defineEmits<{
   (event: 'validate', payload: { valid: boolean; errors: Record<string, string> }): void
 }>()
 
-const fields = new Map<string, WiFormFieldRegistration>()
+const fields = new Map<string, WdFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
 const initialSnapshot = ref<Record<string, unknown> | undefined>(undefined)
 
@@ -110,7 +110,7 @@ function resetFields(names?: string | string[]) {
   else clearValidate(names)
 }
 
-function registerField(field: WiFormFieldRegistration) {
+function registerField(field: WdFormFieldRegistration) {
   fields.set(field.name, field)
 }
 
@@ -148,8 +148,8 @@ const context = computed(() => ({
   notifyInput,
 }))
 
-provide(WI_FORM_KEY, context)
-provide(WI_FORM_ERRORS_KEY, internalErrors)
+provide(WD_FORM_KEY, context)
+provide(WD_FORM_ERRORS_KEY, internalErrors)
 
 async function onSubmit() {
   if (validateOn.value.includes('submit')) {
@@ -165,20 +165,20 @@ defineExpose({ validate, clearValidate, reset, resetFields, errors: internalErro
 
 <template>
   <form
-    class="wi-form"
+    class="wd-form"
     :class="[
-      `wi-form--label-${resolvedLabelPosition}`,
-      `wi-form--align-${labelAlign}`,
-      sizeClass ? `wi-form--size-${sizeClass}` : undefined,
+      `wd-form--label-${resolvedLabelPosition}`,
+      `wd-form--align-${labelAlign}`,
+      sizeClass ? `wd-form--size-${sizeClass}` : undefined,
       {
-        'wi-form--disabled': disabled,
-        'wi-form--inline': inline,
+        'wd-form--disabled': disabled,
+        'wd-form--inline': inline,
       },
     ]"
     :aria-disabled="disabled || undefined"
     @submit.prevent="onSubmit"
   >
-    <fieldset class="wi-form__fieldset" :disabled="disabled">
+    <fieldset class="wd-form__fieldset" :disabled="disabled">
       <slot />
     </fieldset>
   </form>

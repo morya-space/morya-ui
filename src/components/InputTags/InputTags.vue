@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { InputTagsProps } from './types'
 import { computed, ref } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useWiId } from '../../shared/useWiId'
-import WiIcon from '../Icon/Icon.vue'
+import { useWdId } from '../../shared/useWdId'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
   modelValue: () => [],
@@ -17,10 +17,10 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string[]): void
 }>()
 
-const locale = useWiLocale()
+const locale = useWdLocale()
 const draft = ref('')
 const sizeClass = useConfiguredSize('InputTags', () => props.size)
-const autoFieldId = useWiId('wi-inputtags')
+const autoFieldId = useWdId('wd-inputtags')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
 const separators = computed(() => {
@@ -30,11 +30,11 @@ const separators = computed(() => {
 const atMax = computed(() => props.max != null && props.modelValue.length >= props.max)
 
 const rootClass = computed(() => [
-  'wi-inputtags',
-  `wi-inputtags--${sizeClass.value}`,
+  'wd-inputtags',
+  `wd-inputtags--${sizeClass.value}`,
   {
-    'wi-inputtags--disabled': props.disabled,
-    'wi-inputtags--invalid': props.invalid,
+    'wd-inputtags--disabled': props.disabled,
+    'wd-inputtags--invalid': props.invalid,
   },
 ])
 
@@ -103,29 +103,29 @@ function onBlur() {
 </script>
 
 <template>
-  <div class="wi-inputtags-field">
-    <label v-if="label" class="wi-inputtags-field__label" :for="fieldId">{{ label }}</label>
+  <div class="wd-inputtags-field">
+    <label v-if="label" class="wd-inputtags-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <span
         v-for="(tag, index) in modelValue"
         :key="`${tag}-${index}`"
-        class="wi-inputtags__chip"
+        class="wd-inputtags__chip"
       >
         <slot name="tag" :tag="tag" :index="index">{{ tag }}</slot>
         <button
           type="button"
-          class="wi-inputtags__remove"
+          class="wd-inputtags__remove"
           :disabled="disabled"
           :aria-label="locale.removeTag"
           @click="removeTag(index)"
         >
-          <WiIcon name="close" size="sm" />
+          <WdIcon name="close" size="sm" />
         </button>
       </span>
       <input
         :id="fieldId"
         :value="draft"
-        class="wi-inputtags__input"
+        class="wd-inputtags__input"
         type="text"
         :placeholder="modelValue.length ? '' : addPlaceholder"
         :disabled="disabled || atMax"

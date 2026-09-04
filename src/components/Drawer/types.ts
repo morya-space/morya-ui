@@ -1,5 +1,5 @@
 import type { AsyncGuard } from '../../shared/asyncGuard'
-import type { WiAppendTo } from '../../shared/overlay'
+import type { WdAppendTo } from '../../shared/overlay'
 
 export type DrawerPosition = 'left' | 'right' | 'top' | 'bottom'
 
@@ -28,7 +28,7 @@ export interface DrawerProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WiAppendTo
+  appendTo?: WdAppendTo
 }
 
 export interface DrawerEmits {

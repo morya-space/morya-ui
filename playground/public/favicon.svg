@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <defs>
-    <linearGradient id="wi-bg" x1="6" y1="2" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+    <linearGradient id="wd-bg" x1="6" y1="2" x2="26" y2="30" gradientUnits="userSpaceOnUse">
       <stop stop-color="#3b82f6"/>
       <stop offset="1" stop-color="#1d4ed8"/>
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="7" fill="url(#wi-bg)"/>
+  <rect width="32" height="32" rx="7" fill="url(#wd-bg)"/>
   <path
     fill="#fff"
     d="M7 22 10.1 10.5h2.6l1.5 6.1L15.6 10.5h2.5l1.5 6.1L21.1 10.5h2.6L26.5 22h-2.9L21.9 14.2 20.4 22h-2.5l-1.5-7.8L14.9 22h-2.9L10.4 14.2 7 22Z"

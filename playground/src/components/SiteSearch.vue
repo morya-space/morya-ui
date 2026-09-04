@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WiCommandMenu, WiIcon } from '@well-insight/ui'
+import { WdCommandMenu, WdIcon } from '@wex-design/ui'
 import { onMounted, onUnmounted } from 'vue'
 import { useSiteSearchPalette } from '../composables/useSiteSearch'
 import { useDocsI18n } from '../i18n'
@@ -25,11 +25,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     :aria-label="t.searchOpen"
     @click="open"
   >
-    <WiIcon name="search" size="sm" />
+    <WdIcon name="search" size="sm" />
     <span class="site-search-trigger__label">{{ t.searchOpen }}</span>
     <kbd class="site-search-trigger__kbd" aria-hidden="true">⌘K</kbd>
   </button>
-  <WiCommandMenu
+  <WdCommandMenu
     v-model="visible"
     :model="items"
     :placeholder="t.searchPlaceholder"
@@ -39,22 +39,22 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 <style scoped>
 .site-search-trigger {
   align-items: center;
-  background: color-mix(in srgb, var(--wi-color-surface) 88%, transparent);
+  background: color-mix(in srgb, var(--wd-color-surface) 88%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 999px;
-  color: var(--wi-color-text-muted);
+  color: var(--wd-color-text-muted);
   cursor: pointer;
   display: inline-flex;
   gap: 0.4rem;
   padding: 0.35rem 0.65rem;
   transition:
-    border-color var(--wi-motion-fast) var(--wi-motion-ease),
-    color var(--wi-motion-fast) var(--wi-motion-ease);
+    border-color var(--wd-motion-fast) var(--wd-motion-ease),
+    color var(--wd-motion-fast) var(--wd-motion-ease);
 }
 
 .site-search-trigger:hover {
-  border-color: color-mix(in srgb, var(--wi-color-primary) 35%, var(--docs-edge));
-  color: var(--wi-color-text);
+  border-color: color-mix(in srgb, var(--wd-color-primary) 35%, var(--docs-edge));
+  color: var(--wd-color-text);
 }
 
 .site-search-trigger__label {
@@ -62,7 +62,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 .site-search-trigger__kbd {
-  background: color-mix(in srgb, var(--wi-color-text) 6%, var(--wi-color-surface));
+  background: color-mix(in srgb, var(--wd-color-text) 6%, var(--wd-color-surface));
   border: 1px solid var(--docs-edge);
   border-radius: 0.35rem;
   font-family: var(--docs-mono);

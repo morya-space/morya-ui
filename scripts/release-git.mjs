@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const PACKAGE_NAME = '@well-insight/ui'
+const PACKAGE_NAME = '@wex-design/ui'
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'))
 const version = String(pkg.version ?? '').trim()
 

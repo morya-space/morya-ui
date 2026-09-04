@@ -11,21 +11,21 @@ description: 开关。
 ## 引入
 
 ```ts
-import { WiSwitch } from '@well-insight/ui'
+import { WdSwitch } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiSwitch } from '@well-insight/ui'
+import { WdSwitch } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const enabled = ref(false)
 </script>
 
 <template>
-  <WiSwitch v-model="enabled" label="Enable notifications" />
+  <WdSwitch v-model="enabled" label="Enable notifications" />
 </template>
 ```
 
@@ -35,7 +35,7 @@ const enabled = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiSwitch } from '@well-insight/ui'
+import { WdSwitch } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const dark = ref(false)
@@ -43,8 +43,8 @@ const dark = ref(false)
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WiSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
-    <WiSwitch :model-value="false" invalid label="Must be enabled" />
+    <WdSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
+    <WdSwitch :model-value="false" invalid label="Must be enabled" />
   </div>
 </template>
 ```
@@ -53,13 +53,13 @@ const dark = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WiSwitch } from '@well-insight/ui'
+import { WdSwitch } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WiSwitch :model-value="true" disabled label="On disabled" />
-    <WiSwitch :model-value="false" disabled label="Off disabled" />
+    <WdSwitch :model-value="true" disabled label="On disabled" />
+    <WdSwitch :model-value="false" disabled label="Off disabled" />
   </div>
 </template>
 ```
@@ -68,14 +68,14 @@ import { WiSwitch } from '@well-insight/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WiSwitch } from '@well-insight/ui'
+import { WdSwitch } from '@wex-design/ui'
 import { ref } from 'vue'
 
 const on = ref(true)
 </script>
 
 <template>
-  <WiSwitch v-model="on" checked-text="开" unchecked-text="关" />
+  <WdSwitch v-model="on" checked-text="开" unchecked-text="关" />
 </template>
 ```
 

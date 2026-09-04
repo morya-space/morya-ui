@@ -1,5 +1,5 @@
 import './style'
-export { default as WiTable } from './Table.vue'
+export { default as WdTable } from './Table.vue'
 export type {
   TableBodyItemClassName,
   TableBodyRowClassName,

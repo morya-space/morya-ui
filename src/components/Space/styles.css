@@ -1,10 +1,10 @@
 /* —— Panel: Space —— */
-.wi-space {
+.wd-space {
     box-sizing: border-box;
     min-width: 0;
 }
 
-.wi-space__item {
+.wd-space__item {
     display: block;
     max-width: 100%;
 }

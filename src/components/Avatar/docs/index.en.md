@@ -11,43 +11,43 @@ Avatar displays a user or entity identity. Display priority: `image` > `icon` > 
 ## Import
 
 ```ts
-import { WiAvatar } from '@well-insight/ui'
+import { WdAvatar } from '@wex-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WiAvatar } from '@well-insight/ui'
+import { WdAvatar } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiAvatar label="AB" />
-    <WiAvatar icon="check" />
-    <WiAvatar label="SQ" shape="square" />
-    <WiAvatar label="LG" size="large" />
-    <WiAvatar label="XL" size="xlarge" />
+    <WdAvatar label="AB" />
+    <WdAvatar icon="check" />
+    <WdAvatar label="SQ" shape="square" />
+    <WdAvatar label="LG" size="large" />
+    <WdAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WiAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
+`WdAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
 
 ```vue preview
 <script setup lang="ts">
-import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
+import { WdAvatar, WdAvatarGroup } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiAvatarGroup :max="3">
-    <WiAvatar label="AL" />
-    <WiAvatar label="BK" />
-    <WiAvatar label="CN" />
-    <WiAvatar label="DY" />
-  </WiAvatarGroup>
+  <WdAvatarGroup :max="3">
+    <WdAvatar label="AL" />
+    <WdAvatar label="BK" />
+    <WdAvatar label="CN" />
+    <WdAvatar label="DY" />
+  </WdAvatarGroup>
 </template>
 ```
 
@@ -57,7 +57,7 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | Text fallback when there is no image or icon. |
 | `image` | `string` | — | Image URL; highest priority. |
-| `icon` | `IconName` | — | `WiIcon` icon name. |
+| `icon` | `IconName` | — | `WdIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |
 
@@ -67,7 +67,7 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | --- | --- | --- |
 | `error` | `Event` | Image failed to load. |
 
-`WiAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
+`WdAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
 
 ## Slots
 

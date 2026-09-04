@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWiLocale } from '../../locale'
-import { useConfiguredSize, useWiConfig } from '../../shared/config'
-import { useWiId } from '../../shared/useWiId'
+import { useWdLocale } from '../../locale'
+import { useConfiguredSize, useWdConfig } from '../../shared/config'
+import { useWdId } from '../../shared/useWdId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   modelValue: '',
@@ -27,10 +27,10 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
-const config = useWiConfig()
-const locale = useWiLocale()
+const config = useWdConfig()
+const locale = useWdLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
-const autoFieldId = useWiId('wi-autocomplete')
+const autoFieldId = useWdId('wd-autocomplete')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -62,13 +62,13 @@ const filtered = computed(() => {
 const showClear = computed(() => props.clearable && Boolean(props.modelValue) && !props.disabled)
 
 const rootClass = computed(() => [
-  'wi-autocomplete',
-  `wi-autocomplete--${sizeClass.value}`,
+  'wd-autocomplete',
+  `wd-autocomplete--${sizeClass.value}`,
   {
-    'wi-autocomplete--disabled': props.disabled,
-    'wi-autocomplete--open': open.value,
-    'wi-autocomplete--loading': props.loading,
-    'wi-autocomplete--invalid': isInvalid.value,
+    'wd-autocomplete--disabled': props.disabled,
+    'wd-autocomplete--open': open.value,
+    'wd-autocomplete--loading': props.loading,
+    'wd-autocomplete--invalid': isInvalid.value,
   },
 ])
 
@@ -180,13 +180,13 @@ const panelOpen = computed(() => open.value)
 </script>
 
 <template>
-  <div ref="root" class="wi-select-field">
-    <label v-if="label" class="wi-select-field__label" :for="fieldId">{{ label }}</label>
+  <div ref="root" class="wd-select-field">
+    <label v-if="label" class="wd-select-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
-      <div ref="trigger" class="wi-autocomplete__control">
+      <div ref="trigger" class="wd-autocomplete__control">
         <input
           :id="fieldId"
-          class="wi-autocomplete__input"
+          class="wd-autocomplete__input"
           type="text"
           role="combobox"
           :value="modelValue"
@@ -201,49 +201,49 @@ const panelOpen = computed(() => open.value)
           @keydown="onKeydown"
           @focus="requestComplete(modelValue ?? '')"
         >
-      <span v-if="loading" class="wi-autocomplete__spinner" aria-hidden="true" />
+      <span v-if="loading" class="wd-autocomplete__spinner" aria-hidden="true" />
       <button
         v-else-if="showClear"
         type="button"
-        class="wi-autocomplete__clear"
+        class="wd-autocomplete__clear"
         :aria-label="locale.clearInput"
         @click="clear"
       >
-        <WiIcon name="close" size="sm" />
+        <WdIcon name="close" size="sm" />
       </button>
       <button
         v-if="dropdown"
         type="button"
-        class="wi-autocomplete__dropdown"
+        class="wd-autocomplete__dropdown"
         :aria-label="locale.showSuggestions"
         :disabled="disabled"
         @click="toggleDropdown"
       >
-        <WiIcon name="chevron-down" size="sm" />
+        <WdIcon name="chevron-down" size="sm" />
       </button>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wi-scale-fade">
+      <Transition name="wd-scale-fade">
         <ul
           v-if="panelOpen"
           ref="panel"
-          class="wi-autocomplete__panel"
-          :class="{ 'wi-autocomplete__panel--teleported': teleported }"
+          class="wd-autocomplete__panel"
+          :class="{ 'wd-autocomplete__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
           role="listbox"
         >
-          <li v-if="loading && !filtered.length" class="wi-autocomplete__status">
+          <li v-if="loading && !filtered.length" class="wd-autocomplete__status">
             {{ locale.loading }}
           </li>
-          <li v-else-if="!filtered.length" class="wi-autocomplete__status">
+          <li v-else-if="!filtered.length" class="wd-autocomplete__status">
             <slot name="empty">{{ resolvedEmptyMessage }}</slot>
           </li>
           <li
             v-for="(item, index) in filtered"
             :key="`${item.value}-${index}`"
-            class="wi-autocomplete__item"
+            class="wd-autocomplete__item"
             role="option"
-            :class="{ 'wi-autocomplete__item--active': index === highlight }"
+            :class="{ 'wd-autocomplete__item--active': index === highlight }"
             :aria-selected="index === highlight"
             @mousedown.prevent="select(item)"
           >
@@ -256,8 +256,8 @@ const panelOpen = computed(() => open.value)
     <span
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="wi-select-field__help"
-      :class="{ 'wi-select-field__help--invalid': feedbackIsError }"
+      class="wd-select-field__help"
+      :class="{ 'wd-select-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

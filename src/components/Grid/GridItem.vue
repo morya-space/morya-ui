@@ -2,12 +2,12 @@
 import type {GridItemProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { parseResponsiveValue } from '../../shared/responsive'
-import {  WI_GRID_ITEM_FLAG, WI_GRID_KEY } from './types'
+import {  WD_GRID_ITEM_FLAG, WD_GRID_KEY } from './types'
 
 defineOptions({
-  name: 'WiGridItem',
+  name: 'WdGridItem',
   inheritAttrs: false,
-  [WI_GRID_ITEM_FLAG]: true,
+  [WD_GRID_ITEM_FLAG]: true,
 } as Record<string, unknown>)
 
 const props = withDefaults(defineProps<GridItemProps>(), {
@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<GridItemProps>(), {
 })
 
 const attrs = useAttrs()
-const grid = inject(WI_GRID_KEY, null)
+const grid = inject(WD_GRID_KEY, null)
 
 const privateSpan = computed(() => {
   const fromAttrs = attrs.privateSpan as number | undefined
@@ -59,7 +59,7 @@ const overflow = computed(() => grid?.overflow.value ?? false)
 </script>
 
 <template>
-  <div class="wi-grid-item" :class="attrs.class as string | undefined" :style="itemStyle">
+  <div class="wd-grid-item" :class="attrs.class as string | undefined" :style="itemStyle">
     <slot :overflow="overflow" />
   </div>
 </template>

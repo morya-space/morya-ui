@@ -1,4 +1,4 @@
-import type { WiAppendTo } from '../../shared/overlay'
+import type { WdAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity, ButtonSize } from '../Button/types'
 
 export interface SplitButtonItem {
@@ -21,7 +21,7 @@ export interface SplitButtonProps {
    */
   teleport?: boolean
   /** 挂载目标，默认 `'body'`；`'self'` / `false` 表示就地渲染。 */
-  appendTo?: WiAppendTo
+  appendTo?: WdAppendTo
 }
 
 export interface SplitButtonEmits {

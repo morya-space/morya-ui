@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ChipProps } from './types'
 import { computed } from 'vue'
-import { useWiLocale } from '../../locale'
+import { useWdLocale } from '../../locale'
 import { normalizeSeverity, resolveIconSize, resolveSizeClass } from '../../shared/types'
-import WiIcon from '../Icon/Icon.vue'
+import WdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ChipProps>(), {
   removable: false,
@@ -11,19 +11,19 @@ const props = withDefaults(defineProps<ChipProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'remove', value: MouseEvent): void }>()
-const locale = useWiLocale()
+const locale = useWdLocale()
 const severityTone = computed(() => (props.severity ? normalizeSeverity(props.severity) : undefined))
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const iconSize = computed(() => resolveIconSize(props.size))
 
 const chipClass = computed(() => [
-  'wi-chip',
+  'wd-chip',
   {
-    'wi-chip--disabled': props.disabled,
-    'wi-chip--removable': props.removable,
-    [`wi-chip--${severityTone.value}`]: Boolean(severityTone.value),
-    'wi-chip--small': sizeTone.value === 'small',
-    'wi-chip--large': sizeTone.value === 'large',
+    'wd-chip--disabled': props.disabled,
+    'wd-chip--removable': props.removable,
+    [`wd-chip--${severityTone.value}`]: Boolean(severityTone.value),
+    'wd-chip--small': sizeTone.value === 'small',
+    'wd-chip--large': sizeTone.value === 'large',
   },
 ])
 
@@ -36,21 +36,21 @@ function handleRemove(event: MouseEvent) {
 <template>
   <span :class="chipClass" :aria-disabled="disabled || undefined">
     <slot name="icon">
-      <img v-if="image" class="wi-chip__image" :src="image" alt="">
-      <WiIcon v-else-if="icon" class="wi-chip__icon" :name="icon" :size="iconSize" />
+      <img v-if="image" class="wd-chip__image" :src="image" alt="">
+      <WdIcon v-else-if="icon" class="wd-chip__icon" :name="icon" :size="iconSize" />
     </slot>
     <slot>
-      <span v-if="label" class="wi-chip__label">{{ label }}</span>
+      <span v-if="label" class="wd-chip__label">{{ label }}</span>
     </slot>
     <button
       v-if="removable"
       type="button"
-      class="wi-chip__remove"
+      class="wd-chip__remove"
       :disabled="disabled"
       :aria-label="locale.remove"
       @click="handleRemove"
     >
-      <WiIcon name="close" :size="iconSize" />
+      <WdIcon name="close" :size="iconSize" />
     </button>
   </span>
 </template>

@@ -11,43 +11,43 @@ description: 头像用于展示用户或实体标识。支持图片、图标与�
 ## 引入
 
 ```ts
-import { WiAvatar } from '@well-insight/ui'
+import { WdAvatar } from '@wex-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WiAvatar } from '@well-insight/ui'
+import { WdAvatar } from '@wex-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WiAvatar label="AB" />
-    <WiAvatar icon="check" />
-    <WiAvatar label="SQ" shape="square" />
-    <WiAvatar label="LG" size="large" />
-    <WiAvatar label="XL" size="xlarge" />
+    <WdAvatar label="AB" />
+    <WdAvatar icon="check" />
+    <WdAvatar label="SQ" shape="square" />
+    <WdAvatar label="LG" size="large" />
+    <WdAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WiAvatarGroup` 可叠放头像，`max` 超出时显示 `+N`。图片加载失败会回退到 `icon` / `label` 并触发 `error`。
+`WdAvatarGroup` 可叠放头像，`max` 超出时显示 `+N`。图片加载失败会回退到 `icon` / `label` 并触发 `error`。
 
 ```vue preview
 <script setup lang="ts">
-import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
+import { WdAvatar, WdAvatarGroup } from '@wex-design/ui'
 </script>
 
 <template>
-  <WiAvatarGroup :max="3">
-    <WiAvatar label="AL" />
-    <WiAvatar label="BK" />
-    <WiAvatar label="CN" />
-    <WiAvatar label="DY" />
-  </WiAvatarGroup>
+  <WdAvatarGroup :max="3">
+    <WdAvatar label="AL" />
+    <WdAvatar label="BK" />
+    <WdAvatar label="CN" />
+    <WdAvatar label="DY" />
+  </WdAvatarGroup>
 </template>
 ```
 
@@ -57,10 +57,10 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | 无图片/图标时的文字回退。 |
 | `image` | `string` | — | 图片 URL，优先级最高。 |
-| `icon` | `IconName` | — | `WiIcon` 图标名称。 |
+| `icon` | `IconName` | — | `WdIcon` 图标名称。 |
 | `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |
-| `max` | `number` | — | `WiAvatarGroup`：最多展示个数，超出显示 +N。 |
+| `max` | `number` | — | `WdAvatarGroup`：最多展示个数，超出显示 +N。 |
 
 ## Events
 
@@ -68,7 +68,7 @@ import { WiAvatar, WiAvatarGroup } from '@well-insight/ui'
 | --- | --- | --- |
 | `error` | `Event` | 图片加载失败。 |
 
-`WiAvatarGroup`：`max` 最多展示个数；`size` 作用于溢出标记。
+`WdAvatarGroup`：`max` 最多展示个数；`size` 作用于溢出标记。
 
 ## Slots
 

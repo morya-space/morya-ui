@@ -1,11 +1,11 @@
-import type { WiRenderable } from '../../shared/content'
-import type { WiAppendTo } from '../../shared/overlay'
-import type { WiToastSeverity } from '../../shared/types'
+import type { WdRenderable } from '../../shared/content'
+import type { WdAppendTo } from '../../shared/overlay'
+import type { WdToastSeverity } from '../../shared/types'
 
-export type { WiRenderable }
+export type { WdRenderable }
 
 /** message severities; `warning` kept as legacy alias for `warn`. */
-export type MessageSeverity = WiToastSeverity | 'warning'
+export type MessageSeverity = WdToastSeverity | 'warning'
 
 export type MessagePlacement =
   | 'top'
@@ -17,7 +17,7 @@ export type MessagePlacement =
 
 export interface MessageItem {
   id: string | number
-  content: WiRenderable
+  content: WdRenderable
   severity?: MessageSeverity
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
@@ -27,13 +27,13 @@ export interface MessageItem {
 
 export type MessageOptions = Omit<MessageItem, 'id' | 'content'> & {
   id?: string | number
-  content: WiRenderable
+  content: WdRenderable
   /** When true (default service setting), refresh life for duplicate content. */
   dedupe?: boolean
 }
 
 /** String / VNode / component / render factory, or a full options object. */
-export type MessageInput = WiRenderable | MessageOptions
+export type MessageInput = WdRenderable | MessageOptions
 
 export interface MessageProps {
   /** Controlled message list. When omitted, binds to the shared service queue. */
@@ -41,14 +41,14 @@ export interface MessageProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WiAppendTo
+  appendTo?: WdAppendTo
   /** Host placement. Default `top` (Naive MessageProvider). */
   placement?: MessagePlacement
   /** Max visible messages; oldest is dropped. Omit for unlimited. */
   max?: number
   /**
    * Internal: auto-mounted service host.
-   * Manual `<WiMessage />` claims the host and disables auto-mount.
+   * Manual `<WdMessage />` claims the host and disables auto-mount.
    */
   auto?: boolean
 }
