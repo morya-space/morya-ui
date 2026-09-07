@@ -1,5 +1,17 @@
 # @roost-design/ui
 
+## 0.1.3
+
+### 修复
+
+- 修复文档站 logo SVG 渐变引用（`#rd-bg` / `#rd-mark`），恢复正确显示
+- 修复向后兼容模块引用路径（`wd-exports` / `wd-compat.css`）
+
+### 文档
+
+- 统一指南、README、MCP 配置示例中的 Roost Design 品牌与链接
+- MCP bin 重命名为 `roost-design-ui-mcp.js`
+
 ## 0.1.1
 
 `@roost-design/ui` 的初始公开版本（Roost Design UI），以当前组件库能力为基准。
