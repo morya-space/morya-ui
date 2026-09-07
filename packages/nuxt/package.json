@@ -1,7 +1,7 @@
 {
   "name": "@roost-design/nuxt",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Nuxt 3 module for @roost-design/ui — styles, transpile, and client overlay context.",
   "license": "MIT",
   "homepage": "https://github.com/roost-design/roost-design-ui/tree/main/packages/nuxt#readme",
@@ -37,7 +37,7 @@
     "@nuxt/kit": "^3.16.0"
   },
   "peerDependencies": {
-    "@roost-design/ui": "workspace:^",
+    "@roost-design/ui": "^0.1.3",
     "nuxt": "^3.10.0"
   }
 }

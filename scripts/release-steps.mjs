@@ -10,6 +10,7 @@ export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/data/catalog.json',
   'packages/ui-mcp/data/example-coverage.json',
 ]
+export const NUXT_RELEASE_PATHS = ['packages/nuxt/package.json']
 /** Build before commit so MCP catalog is included in the release commit. */
 export const STEPS = ['prepare', 'build', 'commit', 'branch', 'publish', 'tag', 'push']
 
@@ -44,11 +45,17 @@ function hasStagedChanges() {
 }
 
 function releasePaths({ noMcp }) {
-  return noMcp ? UI_RELEASE_PATHS : [...UI_RELEASE_PATHS, ...MCP_RELEASE_PATHS]
+  return noMcp
+    ? UI_RELEASE_PATHS
+    : [...UI_RELEASE_PATHS, ...MCP_RELEASE_PATHS, ...NUXT_RELEASE_PATHS]
 }
 
 async function loadMcp() {
   return import('./release-mcp.mjs')
+}
+
+async function loadNuxt() {
+  return import('./release-nuxt.mjs')
 }
 
 export function parseReleaseOptions(argv) {
@@ -189,7 +196,7 @@ export async function stepPrepare(options) {
       console.log(`\nCHANGELOG.md preview:\n\n## ${plan.version}\n\n${formatChangelogBody(plan.commits, 'zh-CN')}\n`)
     }
     if (!options.noMcp) {
-      console.log(`Would also sync ${MCP_RELEASE_PATHS[0]} to v${plan.version}`)
+      console.log(`Would also sync ${MCP_RELEASE_PATHS[0]} and ${NUXT_RELEASE_PATHS[0]} to v${plan.version}`)
     }
   } else {
     if (!plan.firstRelease && !plan.resume) {
@@ -198,6 +205,8 @@ export async function stepPrepare(options) {
     if (!options.noMcp) {
       const { syncMcpVersion } = await loadMcp()
       syncMcpVersion(plan.version)
+      const { syncNuxtVersion } = await loadNuxt()
+      syncNuxtVersion(plan.version)
     }
   }
 
@@ -210,6 +219,8 @@ export async function stepBuild(options = {}) {
   if (!options.noMcp) {
     const { buildMcp } = await loadMcp()
     buildMcp()
+    const { buildNuxt } = await loadNuxt()
+    buildNuxt()
   }
 }
 
@@ -235,7 +246,7 @@ export function stepCommit(options = {}) {
   if (hasStagedChanges()) {
     const message = options.noMcp
       ? `release: ${PACKAGE_NAME} v${version}`
-      : `release: ${PACKAGE_NAME} / @roost-design/ui-mcp v${version}`
+      : `release: ${PACKAGE_NAME} / @roost-design/ui-mcp / @roost-design/nuxt v${version}`
     git(['commit', '-m', message], { stdio: 'inherit' })
     console.log(`Committed ${message}`)
     return true
@@ -256,6 +267,8 @@ export async function stepPublish(options = {}) {
   if (!options.noMcp) {
     const { publishMcp } = await loadMcp()
     publishMcp()
+    const { publishNuxt } = await loadNuxt()
+    publishNuxt()
   }
 }
 
@@ -341,7 +354,7 @@ export async function runReleaseSteps(selectedSteps, options) {
     }
   } else if (selectedSteps.length > 1 && selectedSteps.at(-1) === 'push') {
     const version = plan?.version || readVersion()
-    const mcpNote = options.noMcp ? '' : ' (+ @roost-design/ui-mcp)'
+    const mcpNote = options.noMcp ? '' : ' (+ @roost-design/ui-mcp, @roost-design/nuxt)'
     console.log(`Released ${PACKAGE_NAME} v${version}${mcpNote}`)
   }
 
