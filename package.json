@@ -680,6 +680,7 @@
     "release:npm": "pnpm run release:build && pnpm run release:publish",
     "release:git": "node scripts/release-git.mjs --tag --branch",
     "release:mcp": "node scripts/release-mcp.mjs",
+    "release:nuxt": "node scripts/release-nuxt.mjs",
     "mcp:generate": "pnpm --filter @roost-design/ui-mcp generate",
     "mcp:check-catalog": "pnpm --filter @roost-design/ui-mcp check-catalog",
     "mcp:validate-catalog": "pnpm --filter @roost-design/ui-mcp validate-catalog",
