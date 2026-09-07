@@ -1,5 +1,17 @@
 # @roost-design/ui
 
+## 0.1.3
+
+### Fixes
+
+- Fix docs site logo SVG gradient refs (`#rd-bg` / `#rd-mark`) so the mark renders correctly
+- Restore backward-compat import paths (`wd-exports` / `wd-compat.css`)
+
+### Docs
+
+- Align guide, README, and MCP config examples with Roost Design branding and URLs
+- Rename MCP bin to `roost-design-ui-mcp.js`
+
 ## 0.1.1
 
 Initial public release of `@roost-design/ui` (Roost Design UI), using the current component library as the baseline.
