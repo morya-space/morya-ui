@@ -1,7 +1,7 @@
 // Evaluate the registry before the individual component re-exports.
 import "./component-registry";
 
-export * from "./compat/rd-exports";
+export * from "./compat/wd-exports";
 export { rdComponentNames, rdComponents } from "./component-registry";
 /** @deprecated Use `rdComponentNames` */
 export { rdComponentNames as wdComponentNames } from "./component-registry";
