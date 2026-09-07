@@ -1,6 +1,7 @@
 // Evaluate the registry before the individual component re-exports.
 import "./component-registry";
 
+export * from "./compat/rd-exports";
 export { rdComponentNames, rdComponents } from "./component-registry";
 /** @deprecated Use `rdComponentNames` */
 export { rdComponentNames as wdComponentNames } from "./component-registry";
@@ -501,10 +502,10 @@ export { default as RdTerminal } from "./components/Terminal/Terminal.vue";
 export type { TerminalEmits, TerminalProps } from "./components/Terminal/types";
 export { default as RdTextarea } from "./components/Textarea/Textarea.vue";
 export type {
+  RdTextareaAutosize,
   TextareaEmits,
   TextareaInstance,
   TextareaProps,
-  RdTextareaAutosize,
 } from "./components/Textarea/types";
 export { default as RdTieredMenu } from "./components/TieredMenu/TieredMenu.vue";
 export type {
@@ -541,8 +542,8 @@ export { default as RdToolbar } from "./components/Toolbar/Toolbar.vue";
 export type { ToolbarProps } from "./components/Toolbar/types";
 export { default as RdTooltip } from "./components/Tooltip/Tooltip.vue";
 export type { TooltipProps } from "./components/Tooltip/types";
-export { default as RdTree } from "./components/Tree/Tree.vue";
 
+export { default as RdTree } from "./components/Tree/Tree.vue";
 export type {
   TreeCheckedKeys,
   TreeCheckStrategy,
@@ -561,13 +562,13 @@ export type {
   TreeSelectValue,
 } from "./components/TreeSelect/types";
 export { default as RdTreeTable } from "./components/TreeTable/TreeTable.vue";
+
 export type {
   TreeTableColumn,
   TreeTableEmits,
   TreeTableNode,
   TreeTableProps,
 } from "./components/TreeTable/types";
-
 export type {
   VirtualScrollerItemSlotProps,
   VirtualScrollerProps,
@@ -587,16 +588,16 @@ export {
   mergeComponentDefaults,
   mergeRdConfig,
   provideRdConfig,
+  RD_CONFIG_KEY,
   resolveConfiguredAppendTo,
+  RoostDesign,
   useComponentDefaults,
   useConfiguredGapSize,
   useConfiguredSize,
   useConfiguredVariant,
   useRdConfig,
   useWdConfig,
-  RoostDesign,
   WexDesign,
-  RD_CONFIG_KEY,
 } from "./shared/config";
 export type { RdInstallerOptions } from "./shared/config";
 export { RoostDesign as default } from "./shared/config";
@@ -613,8 +614,8 @@ export type {
 } from "./shared/types";
 export { normalizeSeverity, resolveSizeClass } from "./shared/types";
 export { useModalOverlay } from "./shared/useModalOverlay";
-export type { UseModalOverlayOptions } from "./shared/useModalOverlay";
 
+export type { UseModalOverlayOptions } from "./shared/useModalOverlay";
 export {
   applyDensity,
   applyMotion,
@@ -628,6 +629,7 @@ export {
   useMotion,
   useTheme,
 } from "./theme";
+
 export type {
   ColorTokens,
   DensityPreference,
@@ -639,5 +641,3 @@ export type {
   SpacingTokens,
   ThemeName,
 } from "./theme";
-
-export * from "./compat/wd-exports";
