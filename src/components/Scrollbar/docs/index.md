@@ -11,7 +11,7 @@ description: 可换肤自定义滚动条，提供一致的滚动体验。
 ## 引入
 
 ```ts
-import { WdScrollbar } from '@wex-design/ui'
+import { RdScrollbar } from '@roost-design/ui'
 ```
 
 ## 基础用法
@@ -20,24 +20,24 @@ import { WdScrollbar } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollbar } from '@wex-design/ui'
+import { RdScrollbar } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdScrollbar height="240px" always style="width: 200px">
+  <RdScrollbar height="240px" always style="width: 200px">
     <p
       v-for="item in 20"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-        color:var(--wd-color-primary);
+        background:color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
+        color:var(--rd-color-primary);
       "
     >
       {{ item }}
     </p>
-  </WdScrollbar>
+  </RdScrollbar>
 </template>
 ```
 
@@ -47,7 +47,7 @@ import { WdScrollbar } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdScrollbar } from '@wex-design/ui'
+import { RdButton, RdScrollbar } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const count = ref(3)
@@ -56,23 +56,23 @@ const count = ref(3)
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem">
-      <WdButton label="Add" size="small" @click="count++" />
-      <WdButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
+      <RdButton label="Add" size="small" @click="count++" />
+      <RdButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
     </div>
-    <WdScrollbar max-height="220px" always style="width: 200px">
+    <RdScrollbar max-height="220px" always style="width: 200px">
       <p
         v-for="item in count"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wd-color-info) 12%, transparent);
-          color:var(--wd-color-info);
+          background:color-mix(in srgb, var(--rd-color-info) 12%, transparent);
+          color:var(--rd-color-info);
         "
       >
         Item {{ item }}
       </p>
-    </WdScrollbar>
+    </RdScrollbar>
   </div>
 </template>
 ```
@@ -81,15 +81,15 @@ const count = ref(3)
 
 内容宽度超出容器时显示横向滚动条。`trigger="none"` 与 `always` 都会常显滑块；默认 `trigger="hover"` 在悬停时显示。
 
-`WdLayout` 在 `native-scrollbar={false}` 时会接入本组件。
+`RdLayout` 在 `native-scrollbar={false}` 时会接入本组件。
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollbar } from '@wex-design/ui'
+import { RdScrollbar } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdScrollbar always>
+  <RdScrollbar always>
     <div style="display:flex;width:fit-content">
       <p
         v-for="item in 30"
@@ -97,14 +97,14 @@ import { WdScrollbar } from '@wex-design/ui'
         style="
           flex-shrink:0;display:flex;align-items:center;justify-content:center;
           width:96px;height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wd-color-danger) 12%, transparent);
-          color:var(--wd-color-danger);
+          background:color-mix(in srgb, var(--rd-color-danger) 12%, transparent);
+          color:var(--rd-color-danger);
         "
       >
         {{ item }}
       </p>
     </div>
-  </WdScrollbar>
+  </RdScrollbar>
 </template>
 ```
 
@@ -114,30 +114,30 @@ import { WdScrollbar } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollbar } from '@wex-design/ui'
+import { RdScrollbar } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted)">
+      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted)">
         always
       </p>
-      <WdScrollbar height="160px" always>
+      <RdScrollbar height="160px" always>
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
           Line {{ n }}
         </p>
-      </WdScrollbar>
+      </RdScrollbar>
     </div>
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted)">
+      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted)">
         native
       </p>
-      <WdScrollbar height="160px" native style="width: 200px">
+      <RdScrollbar height="160px" native style="width: 200px">
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
           Line {{ n }}
         </p>
-      </WdScrollbar>
+      </RdScrollbar>
     </div>
   </div>
 </template>
@@ -149,8 +149,8 @@ import { WdScrollbar } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarInstance } from '@wex-design/ui'
-import { WdButton, WdScrollbar } from '@wex-design/ui'
+import type { ScrollbarInstance } from '@roost-design/ui'
+import { RdButton, RdScrollbar } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -168,25 +168,25 @@ function onScroll(payload: { scrollTop: number }) {
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <WdButton label="Top" size="small" @click="jump(0)" />
-      <WdButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
-      <WdButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
-      <span style="color:var(--wd-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
+      <RdButton label="Top" size="small" @click="jump(0)" />
+      <RdButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
+      <RdButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
+      <span style="color:var(--rd-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
     </div>
-    <WdScrollbar ref="scrollbarRef" height="200px" style="width: 200px" always @scroll="onScroll">
+    <RdScrollbar ref="scrollbarRef" height="200px" style="width: 200px" always @scroll="onScroll">
       <p
         v-for="item in 24"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wd-color-success) 12%, transparent);
-          color:var(--wd-color-success);
+          background:color-mix(in srgb, var(--rd-color-success) 12%, transparent);
+          color:var(--rd-color-success);
         "
       >
         {{ item }}
       </p>
-    </WdScrollbar>
+    </RdScrollbar>
   </div>
 </template>
 ```
@@ -197,8 +197,8 @@ function onScroll(payload: { scrollTop: number }) {
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarDirection } from '@wex-design/ui'
-import { WdScrollbar } from '@wex-design/ui'
+import type { ScrollbarDirection } from '@roost-design/ui'
+import { RdScrollbar } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const num = ref(20)
@@ -209,20 +209,20 @@ function loadMore(direction: ScrollbarDirection) {
 </script>
 
 <template>
-  <WdScrollbar height="220px" always style="width: 200px" @end-reached="loadMore">
+  <RdScrollbar height="220px" always style="width: 200px" @end-reached="loadMore">
     <p
       v-for="item in num"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-        color:var(--wd-color-primary);
+        background:color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
+        color:var(--rd-color-primary);
       "
     >
       {{ item }}
     </p>
-  </WdScrollbar>
+  </RdScrollbar>
 </template>
 ```
 

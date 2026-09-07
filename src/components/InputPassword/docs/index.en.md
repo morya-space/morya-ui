@@ -11,21 +11,21 @@ Password input. Includes a show/hide toggle by default; optional password streng
 ## Import
 
 ```ts
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" />
+  <RdInputPassword v-model="value" label="Password" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" feedback />
+  <RdInputPassword v-model="value" label="Password" feedback />
 </template>
 ```
 
@@ -50,7 +50,7 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 
 ```vue preview
 <script setup lang="ts">
-import { WdIcon, WdInputPassword } from '@wex-design/ui'
+import { RdIcon, RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const byProp = ref('')
@@ -59,15 +59,15 @@ const bySlot = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;max-width:20rem">
-    <WdInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
-    <WdInputPassword v-model="bySlot" label="Via slots">
+    <RdInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
+    <RdInputPassword v-model="bySlot" label="Via slots">
       <template #showIcon>
-        <WdIcon name="search" size="sm" />
+        <RdIcon name="search" size="sm" />
       </template>
       <template #hideIcon>
-        <WdIcon name="close" size="sm" />
+        <RdIcon name="close" size="sm" />
       </template>
-    </WdInputPassword>
+    </RdInputPassword>
   </div>
 </template>
 ```
@@ -78,14 +78,14 @@ const bySlot = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('secret')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
+  <RdInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
 </template>
 ```
 
@@ -93,14 +93,14 @@ const value = ref('secret')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('draft-pass')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
+  <RdInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
 </template>
 ```
 

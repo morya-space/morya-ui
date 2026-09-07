@@ -11,14 +11,14 @@ description: 为输入框添加左/右侧图标的容器。
 ## 引入
 
 ```ts
-import { WdIcon, WdIconField, WdInput } from '@wex-design/ui'
+import { RdIcon, RdIconField, RdInput } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdIcon, WdIconField, WdInput } from '@wex-design/ui'
+import { RdIcon, RdIconField, RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -26,18 +26,18 @@ const value = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdIconField>
+    <RdIconField>
       <template #icon>
-        <WdIcon name="info" size="sm" />
+        <RdIcon name="info" size="sm" />
       </template>
-      <WdInput v-model="value" placeholder="Search" fluid />
-    </WdIconField>
-    <WdIconField icon-position="right">
+      <RdInput v-model="value" placeholder="Search" fluid />
+    </RdIconField>
+    <RdIconField icon-position="right">
       <template #icon>
-        <WdIcon name="check" size="sm" />
+        <RdIcon name="check" size="sm" />
       </template>
-      <WdInput v-model="value" placeholder="Verified" fluid />
-    </WdIconField>
+      <RdInput v-model="value" placeholder="Verified" fluid />
+    </RdIconField>
   </div>
 </template>
 ```

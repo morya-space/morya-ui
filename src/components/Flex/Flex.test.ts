@@ -1,19 +1,19 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdFlex from './Flex.vue'
+import RdFlex from './Flex.vue'
 
-describe('wdFlex', () => {
+describe('rdFlex', () => {
   it('renders children with flex display', () => {
-    const wrapper = mount(WdFlex, {
+    const wrapper = mount(RdFlex, {
       slots: { default: '<span class="a">A</span><span class="b">B</span>' },
     })
-    expect(wrapper.classes()).toContain('wd-flex')
+    expect(wrapper.classes()).toContain('rd-flex')
     expect(wrapper.element.style.display).toBe('flex')
     expect(wrapper.findAll('.a, .b')).toHaveLength(2)
   })
 
   it('supports vertical and reverse', () => {
-    const wrapper = mount(WdFlex, {
+    const wrapper = mount(RdFlex, {
       props: { vertical: true, reverse: true, justify: 'center', align: 'end' },
       slots: { default: '<span>A</span>' },
     })
@@ -23,7 +23,7 @@ describe('wdFlex', () => {
   })
 
   it('uses numeric gap', () => {
-    const wrapper = mount(WdFlex, {
+    const wrapper = mount(RdFlex, {
       props: { size: 12 },
       slots: { default: '<span>A</span>' },
     })

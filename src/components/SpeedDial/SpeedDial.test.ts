@@ -1,33 +1,33 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WdSpeedDial from './SpeedDial.vue'
+import RdSpeedDial from './SpeedDial.vue'
 
-describe('wdSpeedDial', () => {
+describe('rdSpeedDial', () => {
   it('toggles open state', async () => {
-    const wrapper = mount(WdSpeedDial, {
+    const wrapper = mount(RdSpeedDial, {
       props: { modelValue: false, model: [{ label: 'Edit', icon: '✎' }] },
     })
-    await wrapper.find('.wd-speeddial__button').trigger('click')
+    await wrapper.find('.rd-speeddial__button').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([true])
   })
 
   it('runs item command when open', async () => {
     const command = vi.fn()
-    const wrapper = mount(WdSpeedDial, {
+    const wrapper = mount(RdSpeedDial, {
       props: {
         modelValue: true,
         model: [{ label: 'Edit', command }],
         teleport: false,
       },
     })
-    await wrapper.find('.wd-speeddial__action').trigger('click')
+    await wrapper.find('.rd-speeddial__action').trigger('click')
     expect(command).toHaveBeenCalled()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
   })
 
   it('teleports action list to body by default', async () => {
-    const wrapper = mount(WdSpeedDial, {
+    const wrapper = mount(RdSpeedDial, {
       props: {
         modelValue: true,
         model: [{ label: 'Edit' }],
@@ -35,12 +35,12 @@ describe('wdSpeedDial', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.wd-speeddial__list--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.rd-speeddial__list--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
   it('navigates actions with direction-aware arrows and closes on Escape', async () => {
-    const wrapper = mount(WdSpeedDial, {
+    const wrapper = mount(RdSpeedDial, {
       attachTo: document.body,
       props: {
         modelValue: false,
@@ -50,13 +50,13 @@ describe('wdSpeedDial', () => {
         'onUpdate:modelValue': (value: boolean) => wrapper.setProps({ modelValue: value }),
       },
     })
-    const buttonEl = wrapper.get('.wd-speeddial__button')
+    const buttonEl = wrapper.get('.rd-speeddial__button')
     await buttonEl.trigger('keydown', { key: 'ArrowUp' })
     await nextTick()
     await nextTick()
-    const list = wrapper.get('.wd-speeddial__list')
+    const list = wrapper.get('.rd-speeddial__list')
     expect(buttonEl.attributes('aria-controls')).toBe(list.attributes('id'))
-    const actions = () => wrapper.findAll('.wd-speeddial__action')
+    const actions = () => wrapper.findAll('.rd-speeddial__action')
     expect(document.activeElement).toBe(actions()[0]!.element)
 
     // direction="up": ArrowUp moves outward, i.e. to the next action
@@ -73,7 +73,7 @@ describe('wdSpeedDial', () => {
   })
 
   it('closes when clicking outside', async () => {
-    const wrapper = mount(WdSpeedDial, {
+    const wrapper = mount(RdSpeedDial, {
       attachTo: document.body,
       props: {
         modelValue: true,

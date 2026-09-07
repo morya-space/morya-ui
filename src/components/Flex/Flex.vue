@@ -38,7 +38,7 @@ const rootStyle = computed((): CSSProperties | undefined => {
 </script>
 
 <template>
-  <div v-if="children.length" class="wd-flex" role="none" :style="rootStyle">
+  <div v-if="children.length" class="rd-flex" role="none" :style="rootStyle">
     <component :is="child" v-for="(child, index) in children" :key="index" />
   </div>
 </template>

@@ -1,136 +1,136 @@
-.wd-chip {
-    --wd-chip-avatar-size: 1.25rem;
-    --wd-chip-icon-size: 1rem;
-    --wd-chip-small-padding-y: 0.15rem;
-    --wd-chip-remove-size: var(--wd-chip-avatar-size);
+.rd-chip {
+    --rd-chip-avatar-size: 1.25rem;
+    --rd-chip-icon-size: 1rem;
+    --rd-chip-small-padding-y: 0.15rem;
+    --rd-chip-remove-size: var(--rd-chip-avatar-size);
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wd-color-text-muted) 14%,
-        var(--wd-color-surface)
+        var(--rd-color-text-muted) 14%,
+        var(--rd-color-surface)
     );
-    border-radius: var(--wd-radius-full);
-    color: var(--wd-color-text);
+    border-radius: var(--rd-radius-full);
+    color: var(--rd-color-text);
     display: inline-flex;
-    font-family: var(--wd-font-sans);
-    font-size: var(--wd-font-size-md);
-    gap: var(--wd-space-2);
+    font-family: var(--rd-font-sans);
+    font-size: var(--rd-font-size-md);
+    gap: var(--rd-space-2);
     line-height: 1;
     max-width: 100%;
-    padding: var(--wd-space-2) var(--wd-space-3);
+    padding: var(--rd-space-2) var(--rd-space-3);
 }
 
-.wd-chip--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-chip--disabled {
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-chip__image {
-    border-radius: var(--wd-radius-full);
+.rd-chip__image {
+    border-radius: var(--rd-radius-full);
     flex-shrink: 0;
-    height: var(--wd-chip-avatar-size);
+    height: var(--rd-chip-avatar-size);
     object-fit: cover;
-    width: var(--wd-chip-avatar-size);
+    width: var(--rd-chip-avatar-size);
 }
 
-.wd-chip__icon {
+.rd-chip__icon {
     flex-shrink: 0;
-    height: var(--wd-chip-icon-size);
-    width: var(--wd-chip-icon-size);
+    height: var(--rd-chip-icon-size);
+    width: var(--rd-chip-icon-size);
 }
 
-.wd-chip__icon :is(.wd-icon, svg) {
+.rd-chip__icon :is(.rd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wd-chip__label {
+.rd-chip__label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.wd-chip__remove {
+.rd-chip__remove {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wd-radius-full);
-    color: var(--wd-color-text-muted);
+    border-radius: var(--rd-radius-full);
+    color: var(--rd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
     font-size: 1rem;
-    height: var(--wd-chip-remove-size);
+    height: var(--rd-chip-remove-size);
     justify-content: center;
     line-height: 1;
-    margin-inline-end: calc(var(--wd-space-1) * -1);
+    margin-inline-end: calc(var(--rd-space-1) * -1);
     padding: 0;
-    width: var(--wd-chip-remove-size);
+    width: var(--rd-chip-remove-size);
 }
 
-.wd-chip__remove:hover:not(:disabled) {
-    color: var(--wd-color-text);
+.rd-chip__remove:hover:not(:disabled) {
+    color: var(--rd-color-text);
 }
 
-.wd-chip__remove:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-chip__remove:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-chip__remove:disabled {
+.rd-chip__remove:disabled {
     cursor: not-allowed;
 }
 
-.wd-chip--small {
-    --wd-chip-icon-size: 0.875rem;
-    font-size: var(--wd-font-size-xs);
-    padding: var(--wd-chip-small-padding-y) var(--wd-space-2);
+.rd-chip--small {
+    --rd-chip-icon-size: 0.875rem;
+    font-size: var(--rd-font-size-xs);
+    padding: var(--rd-chip-small-padding-y) var(--rd-space-2);
 }
 
-.wd-chip--large {
-    --wd-chip-icon-size: 1.25rem;
-    font-size: var(--wd-font-size-md);
-    padding: var(--wd-space-2) var(--wd-space-4);
+.rd-chip--large {
+    --rd-chip-icon-size: 1.25rem;
+    font-size: var(--rd-font-size-md);
+    padding: var(--rd-space-2) var(--rd-space-4);
 }
 
-.wd-chip--primary {
-    background: color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-    color: var(--wd-color-primary);
+.rd-chip--primary {
+    background: color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
+    color: var(--rd-color-primary);
 }
 
-.wd-chip--secondary {
-    background: color-mix(in srgb, var(--wd-color-text-muted) 16%, var(--wd-color-surface));
-    color: var(--wd-color-text);
+.rd-chip--secondary {
+    background: color-mix(in srgb, var(--rd-color-text-muted) 16%, var(--rd-color-surface));
+    color: var(--rd-color-text);
 }
 
-.wd-chip--success {
-    background: color-mix(in srgb, var(--wd-color-success) 14%, transparent);
-    color: var(--wd-color-success);
+.rd-chip--success {
+    background: color-mix(in srgb, var(--rd-color-success) 14%, transparent);
+    color: var(--rd-color-success);
 }
 
-.wd-chip--info {
-    background: color-mix(in srgb, var(--wd-color-info) 12%, transparent);
-    color: var(--wd-color-info);
+.rd-chip--info {
+    background: color-mix(in srgb, var(--rd-color-info) 12%, transparent);
+    color: var(--rd-color-info);
 }
 
-.wd-chip--warn {
-    background: color-mix(in srgb, var(--wd-color-warn) 14%, transparent);
-    color: var(--wd-color-warn);
+.rd-chip--warn {
+    background: color-mix(in srgb, var(--rd-color-warn) 14%, transparent);
+    color: var(--rd-color-warn);
 }
 
-.wd-chip--danger {
-    background: color-mix(in srgb, var(--wd-color-danger) 14%, transparent);
-    color: var(--wd-color-danger);
+.rd-chip--danger {
+    background: color-mix(in srgb, var(--rd-color-danger) 14%, transparent);
+    color: var(--rd-color-danger);
 }
 
-.wd-chip--help {
-    background: color-mix(in srgb, var(--wd-color-help) 14%, transparent);
-    color: var(--wd-color-help);
+.rd-chip--help {
+    background: color-mix(in srgb, var(--rd-color-help) 14%, transparent);
+    color: var(--rd-color-help);
 }
 
-.wd-chip--contrast {
-    background: var(--wd-color-contrast);
-    color: var(--wd-color-contrast-fg);
+.rd-chip--contrast {
+    background: var(--rd-color-contrast);
+    color: var(--rd-color-contrast-fg);
 }

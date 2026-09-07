@@ -11,21 +11,21 @@ Edit hex colors with the native color picker and a text field.
 ## Import
 
 ```ts
-import { WdInputColor } from '@wex-design/ui'
+import { RdInputColor } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputColor } from '@wex-design/ui'
+import { RdInputColor } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <WdInputColor v-model="color" />
+  <RdInputColor v-model="color" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputColor } from '@wex-design/ui'
+import { RdInputColor } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <WdInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
+  <RdInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
 </template>
 ```
 

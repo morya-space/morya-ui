@@ -1,11 +1,11 @@
-import type { WdRenderable } from '../../shared/content'
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdToastSeverity } from '../../shared/types'
+import type { RdRenderable } from '../../shared/content'
+import type { RdAppendTo } from '../../shared/overlay'
+import type { RdToastSeverity } from '../../shared/types'
 
-export type { WdRenderable }
+export type { RdRenderable }
 
 /** toast severities; `warning` kept as legacy alias for `warn`. */
-export type ToastSeverity = WdToastSeverity | 'warning'
+export type ToastSeverity = RdToastSeverity | 'warning'
 
 export type ToastPosition =
   | 'top-right'
@@ -17,8 +17,8 @@ export type ToastPosition =
 
 export interface ToastMessage {
   id: string | number
-  summary: WdRenderable
-  detail?: WdRenderable
+  summary: RdRenderable
+  detail?: RdRenderable
   severity?: ToastSeverity
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
@@ -27,14 +27,14 @@ export interface ToastMessage {
 
 export type ToastOptions = Omit<ToastMessage, 'id' | 'summary'> & {
   id?: string | number
-  summary: WdRenderable
+  summary: RdRenderable
   position?: ToastPosition
   /** When true (default service setting), refresh life for duplicate summary+detail. */
   dedupe?: boolean
 }
 
 /** String / VNode / component / render factory, or a full options object. */
-export type ToastInput = WdRenderable | ToastOptions
+export type ToastInput = RdRenderable | ToastOptions
 
 export interface ToastProps {
   /**
@@ -46,7 +46,7 @@ export interface ToastProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: RdAppendTo
   /** Max visible toasts; oldest is dropped. Omit for unlimited. */
   max?: number
   /** Internal: auto-mounted service host. */

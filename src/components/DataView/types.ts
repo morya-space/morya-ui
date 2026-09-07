@@ -13,9 +13,9 @@ export interface DataViewProps {
   emptyMessage?: string
   /** Disable built-in pagination controls. */
   disabled?: boolean
-  /** Pass through to `WdPagination` (`show-size-picker`). */
+  /** Pass through to `RdPagination` (`show-size-picker`). */
   showSizePicker?: boolean
-  /** Pass through to `WdPagination` (`page-sizes`). */
+  /** Pass through to `RdPagination` (`page-sizes`). */
   pageSizes?: number[]
 }
 

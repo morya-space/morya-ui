@@ -1,169 +1,169 @@
 /* —— Form: AutoComplete —— */
-.wd-autocomplete {
-    --wd-autocomplete-min-width: 14rem;
-    --wd-autocomplete-dropdown-max-height: 14rem;
-    --wd-autocomplete-spinner-size: 0.85rem;
+.rd-autocomplete {
+    --rd-autocomplete-min-width: 14rem;
+    --rd-autocomplete-dropdown-max-height: 14rem;
+    --rd-autocomplete-spinner-size: 0.85rem;
     display: inline-block;
     position: relative;
-    min-width: var(--wd-autocomplete-min-width);
+    min-width: var(--rd-autocomplete-min-width);
 }
 
-.wd-autocomplete--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-autocomplete--disabled {
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-autocomplete__control {
+.rd-autocomplete__control {
     align-items: stretch;
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-control);
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-control);
     display: flex;
     position: relative;
 }
 
-.wd-autocomplete__control:hover:not(:focus-within) {
-    border-color: var(--wd-color-primary-hover);
+.rd-autocomplete__control:hover:not(:focus-within) {
+    border-color: var(--rd-color-primary-hover);
 }
 
-.wd-autocomplete__control:focus-within {
-    border-color: var(--wd-color-primary);
-    box-shadow: var(--wd-focus-shadow);
+.rd-autocomplete__control:focus-within {
+    border-color: var(--rd-color-primary);
+    box-shadow: var(--rd-focus-shadow);
 }
 
-.wd-autocomplete__input {
+.rd-autocomplete__input {
     background: transparent;
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    color: var(--wd-color-text);
+    color: var(--rd-color-text);
     flex: 1;
     font: inherit;
-    font-size: var(--wd-control-font-medium);
-    min-height: var(--wd-control-height-medium);
+    font-size: var(--rd-control-font-medium);
+    min-height: var(--rd-control-height-medium);
     min-width: 0;
     outline: none;
-    padding: 0 var(--wd-control-padding-x-medium);
+    padding: 0 var(--rd-control-padding-x-medium);
     width: 100%;
 }
 
-.wd-autocomplete--small .wd-autocomplete__input {
-    font-size: var(--wd-control-font-small);
-    min-height: var(--wd-control-height-small);
-    padding: 0 var(--wd-control-padding-x-small);
+.rd-autocomplete--small .rd-autocomplete__input {
+    font-size: var(--rd-control-font-small);
+    min-height: var(--rd-control-height-small);
+    padding: 0 var(--rd-control-padding-x-small);
 }
 
-.wd-autocomplete--large .wd-autocomplete__input {
-    font-size: var(--wd-control-font-large);
-    min-height: var(--wd-control-height-large);
-    padding: 0 var(--wd-control-padding-x-large);
+.rd-autocomplete--large .rd-autocomplete__input {
+    font-size: var(--rd-control-font-large);
+    min-height: var(--rd-control-height-large);
+    padding: 0 var(--rd-control-padding-x-large);
 }
 
-.wd-autocomplete__input:focus,
-.wd-autocomplete__input:focus-visible {
+.rd-autocomplete__input:focus,
+.rd-autocomplete__input:focus-visible {
     box-shadow: none;
     outline: none;
     outline-offset: 0;
 }
 
-.wd-autocomplete__dropdown {
+.rd-autocomplete__dropdown {
     align-items: center;
     background: transparent;
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    color: var(--wd-color-text);
+    color: var(--rd-color-text);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
     justify-content: center;
-    min-height: var(--wd-control-height-medium);
+    min-height: var(--rd-control-height-medium);
     outline: none;
-    padding: 0 var(--wd-control-padding-x-medium);
+    padding: 0 var(--rd-control-padding-x-medium);
 }
 
-.wd-autocomplete__dropdown:focus,
-.wd-autocomplete__dropdown:focus-visible {
+.rd-autocomplete__dropdown:focus,
+.rd-autocomplete__dropdown:focus-visible {
     box-shadow: none;
     outline: none;
     outline-offset: 0;
 }
 
-.wd-autocomplete__panel {
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-md);
-    box-shadow: var(--wd-shadow-md);
+.rd-autocomplete__panel {
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-md);
+    box-shadow: var(--rd-shadow-md);
     left: 0;
     list-style: none;
-    margin: var(--wd-space-1) 0 0;
-    max-height: var(--wd-autocomplete-dropdown-max-height);
+    margin: var(--rd-space-1) 0 0;
+    max-height: var(--rd-autocomplete-dropdown-max-height);
     overflow: auto;
-    padding: var(--wd-space-1);
+    padding: var(--rd-space-1);
     position: absolute;
     right: 0;
-    z-index: var(--wd-z-popper);
+    z-index: var(--rd-z-popper);
 }
 
-.wd-autocomplete__panel--teleported {
+.rd-autocomplete__panel--teleported {
     margin: 0;
     position: fixed;
     right: auto;
-    z-index: var(--wd-z-dropdown);
+    z-index: var(--rd-z-dropdown);
 }
 
-.wd-autocomplete__item {
-    border-radius: var(--wd-radius-sm);
+.rd-autocomplete__item {
+    border-radius: var(--rd-radius-sm);
     cursor: pointer;
-    padding: var(--wd-space-2) var(--wd-space-3);
+    padding: var(--rd-space-2) var(--rd-space-3);
 }
 
-.wd-autocomplete__item--active,
-.wd-autocomplete__item:hover {
+.rd-autocomplete__item--active,
+.rd-autocomplete__item:hover {
     background: color-mix(
         in srgb,
-        var(--wd-color-primary) 12%,
-        var(--wd-color-surface)
+        var(--rd-color-primary) 12%,
+        var(--rd-color-surface)
     );
 }
 
-.wd-autocomplete__spinner {
-    animation: wd-progress-spinner-rotate var(--wd-motion-spin-fast) linear infinite;
+.rd-autocomplete__spinner {
+    animation: rd-progress-spinner-rotate var(--rd-motion-spin-fast) linear infinite;
     border: 2px solid
-        color-mix(in srgb, var(--wd-color-primary) 30%, transparent);
-    border-radius: var(--wd-radius-full);
-    border-top-color: var(--wd-color-primary);
-    height: var(--wd-autocomplete-spinner-size);
-    width: var(--wd-autocomplete-spinner-size);
+        color-mix(in srgb, var(--rd-color-primary) 30%, transparent);
+    border-radius: var(--rd-radius-full);
+    border-top-color: var(--rd-color-primary);
+    height: var(--rd-autocomplete-spinner-size);
+    width: var(--rd-autocomplete-spinner-size);
 }
 
-.wd-autocomplete__status {
-    color: var(--wd-color-text-muted);
+.rd-autocomplete__status {
+    color: var(--rd-color-text-muted);
     list-style: none;
-    padding: var(--wd-space-2) var(--wd-space-3);
+    padding: var(--rd-space-2) var(--rd-space-3);
 }
 
-.wd-autocomplete--invalid .wd-autocomplete__control {
-    border-color: var(--wd-color-danger);
+.rd-autocomplete--invalid .rd-autocomplete__control {
+    border-color: var(--rd-color-danger);
 }
 
-.wd-autocomplete__clear,
-.wd-autocomplete__spinner {
+.rd-autocomplete__clear,
+.rd-autocomplete__spinner {
     align-items: center;
     display: flex;
     flex-shrink: 0;
-    height: var(--wd-control-affix-size);
+    height: var(--rd-control-affix-size);
     justify-content: center;
     pointer-events: auto;
     position: absolute;
-    right: var(--wd-space-1);
+    right: var(--rd-space-1);
     top: 50%;
     transform: translateY(-50%);
-    width: var(--wd-control-affix-size);
+    width: var(--rd-control-affix-size);
     z-index: 1;
 }
 
-.wd-autocomplete__control:has(.wd-autocomplete__dropdown) .wd-autocomplete__clear,
-.wd-autocomplete__control:has(.wd-autocomplete__dropdown) .wd-autocomplete__spinner {
-    right: var(--wd-control-affix-gap);
+.rd-autocomplete__control:has(.rd-autocomplete__dropdown) .rd-autocomplete__clear,
+.rd-autocomplete__control:has(.rd-autocomplete__dropdown) .rd-autocomplete__spinner {
+    right: var(--rd-control-affix-gap);
 }

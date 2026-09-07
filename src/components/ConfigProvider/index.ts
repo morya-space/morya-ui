@@ -1,3 +1,3 @@
 import './style'
-export { default as WdConfigProvider } from './ConfigProvider.vue'
-export type { WdComponentDefaults, WdGlobalConfig, WdLocaleConfig } from './types'
+export { default as RdConfigProvider } from './ConfigProvider.vue'
+export type { RdComponentDefaults, RdGlobalConfig, RdLocaleConfig } from './types'

@@ -11,21 +11,21 @@ description: SVG 圆形旋钮，用于选择数值。
 ## 引入
 
 ```ts
-import { WdKnob } from '@wex-design/ui'
+import { RdKnob } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdKnob } from '@wex-design/ui'
+import { RdKnob } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(60)
 </script>
 
 <template>
-  <WdKnob v-model="value" :size="120" value-template="{value}%" />
+  <RdKnob v-model="value" :size="120" value-template="{value}%" />
 </template>
 ```
 

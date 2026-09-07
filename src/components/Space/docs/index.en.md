@@ -11,22 +11,22 @@ Adds consistent spacing between children. Prefer [`Flex`](/components/Flex/) for
 ## Import
 
 ```ts
-import { WdSpace } from '@wex-design/ui'
+import { RdSpace } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdSpace } from '@wex-design/ui'
+import { RdButton, RdSpace } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSpace>
-    <WdButton label="Save" size="small" />
-    <WdButton label="Cancel" size="small" severity="secondary" />
-    <WdButton label="Reset" size="small" severity="secondary" />
-  </WdSpace>
+  <RdSpace>
+    <RdButton label="Save" size="small" />
+    <RdButton label="Cancel" size="small" severity="secondary" />
+    <RdButton label="Reset" size="small" severity="secondary" />
+  </RdSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WdButton, WdSpace } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSpace, WdTag } from '@wex-design/ui'
+import { RdSpace, RdTag } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSpace vertical>
-    <WdTag value="Alpha" />
-    <WdTag value="Bravo" />
-    <WdTag value="Charlie" />
-  </WdSpace>
+  <RdSpace vertical>
+    <RdTag value="Alpha" />
+    <RdTag value="Bravo" />
+    <RdTag value="Charlie" />
+  </RdSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { WdSpace, WdTag } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdSpace } from '@wex-design/ui'
+import { RdButton, RdSpace } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WdSpace size="small">
-      <WdButton label="S" size="small" />
-      <WdButton label="S" size="small" severity="secondary" />
-    </WdSpace>
-    <WdSpace :size="20">
-      <WdButton label="20px" size="small" />
-      <WdButton label="20px" size="small" severity="secondary" />
-    </WdSpace>
+    <RdSpace size="small">
+      <RdButton label="S" size="small" />
+      <RdButton label="S" size="small" severity="secondary" />
+    </RdSpace>
+    <RdSpace :size="20">
+      <RdButton label="20px" size="small" />
+      <RdButton label="20px" size="small" severity="secondary" />
+    </RdSpace>
   </div>
 </template>
 ```
 
-When `size` is omitted it defaults to `medium`. Override the global gap with `WdConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
+When `size` is omitted it defaults to `medium`. Override the global gap with `RdConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ Set `wrapItem=false` to skip the per-child wrapper (useful when children manage 
 
 ```vue preview
 <script setup lang="ts">
-import { WdSpace, WdTag } from '@wex-design/ui'
+import { RdSpace, RdTag } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSpace :wrap-item="false" :size="8">
-    <WdTag value="Direct" />
-    <WdTag value="Children" />
-  </WdSpace>
+  <RdSpace :wrap-item="false" :size="8">
+    <RdTag value="Direct" />
+    <RdTag value="Children" />
+  </RdSpace>
 </template>
 ```
 

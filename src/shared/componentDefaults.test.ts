@@ -4,13 +4,13 @@ import {
   getComponentDefaults,
   mergeComponentDefaults,
 } from './componentDefaults'
-import { mergeWdConfig } from './config'
+import { mergeRdConfig } from './config'
 
 describe('componentDefaults', () => {
   it('reads unprefixed keys and Wi aliases', () => {
-    expect(getComponentDefault({ Input: { size: 'small' } }, 'WdInput', 'size')).toBe('small')
-    expect(getComponentDefaults({ WdSpace: { size: 12 } }, 'Space')).toEqual({ size: 12 })
-    expect(getComponentDefaults({ Input: { size: 'small' }, WdInput: { clearable: true } }, 'Input')).toEqual({
+    expect(getComponentDefault({ Input: { size: 'small' } }, 'RdInput', 'size')).toBe('small')
+    expect(getComponentDefaults({ RdSpace: { size: 12 } }, 'Space')).toEqual({ size: 12 })
+    expect(getComponentDefaults({ Input: { size: 'small' }, RdInput: { clearable: true } }, 'Input')).toEqual({
       size: 'small',
       clearable: true,
     })
@@ -29,9 +29,9 @@ describe('componentDefaults', () => {
   })
 })
 
-describe('mergeWdConfig', () => {
+describe('mergeRdConfig', () => {
   it('inherits parent keys and merges locale / componentDefaults', () => {
-    const merged = mergeWdConfig(
+    const merged = mergeRdConfig(
       {
         size: 'small',
         appendTo: 'body',

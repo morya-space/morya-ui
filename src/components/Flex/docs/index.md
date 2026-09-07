@@ -11,22 +11,22 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 ## 引入
 
 ```ts
-import { WdFlex } from '@wex-design/ui'
+import { RdFlex } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdFlex } from '@wex-design/ui'
+import { RdButton, RdFlex } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdFlex>
-    <WdButton label="一" size="small" />
-    <WdButton label="二" size="small" severity="secondary" />
-    <WdButton label="三" size="small" severity="secondary" />
-  </WdFlex>
+  <RdFlex>
+    <RdButton label="一" size="small" />
+    <RdButton label="二" size="small" severity="secondary" />
+    <RdButton label="三" size="small" severity="secondary" />
+  </RdFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WdButton, WdFlex } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdFlex } from '@wex-design/ui'
+import { RdButton, RdFlex } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdFlex vertical>
-    <WdButton label="上" size="small" />
-    <WdButton label="中" size="small" severity="secondary" />
-    <WdButton label="下" size="small" severity="secondary" />
-  </WdFlex>
+  <RdFlex vertical>
+    <RdButton label="上" size="small" />
+    <RdButton label="中" size="small" severity="secondary" />
+    <RdButton label="下" size="small" severity="secondary" />
+  </RdFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { WdButton, WdFlex } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdFlex, WdTag } from '@wex-design/ui'
+import { RdButton, RdFlex, RdTag } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <WdTag value="标签" />
-    <WdButton label="操作" size="small" />
-  </WdFlex>
+  <RdFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <RdTag value="标签" />
+    <RdButton label="操作" size="small" />
+  </RdFlex>
 </template>
 ```
 

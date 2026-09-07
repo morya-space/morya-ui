@@ -1,138 +1,138 @@
-.wd-badge {
-    --wd-badge-size: 1.25rem;
-    --wd-badge-font-size: var(--wd-font-size-xs);
-    --wd-badge-padding-y: var(--wd-space-1);
-    --wd-badge-padding-x: var(--wd-space-2);
+.rd-badge {
+    --rd-badge-size: 1.25rem;
+    --rd-badge-font-size: var(--rd-font-size-xs);
+    --rd-badge-padding-y: var(--rd-space-1);
+    --rd-badge-padding-x: var(--rd-space-2);
 
-    --wd-badge-size-small: 1rem;
-    --wd-badge-size-large: 1.5rem;
-    --wd-badge-dot-size: 0.5rem;
-    --wd-badge-dot-size-small: 0.375rem;
-    --wd-badge-dot-size-large: 0.625rem;
+    --rd-badge-size-small: 1rem;
+    --rd-badge-size-large: 1.5rem;
+    --rd-badge-dot-size: 0.5rem;
+    --rd-badge-dot-size-small: 0.375rem;
+    --rd-badge-dot-size-large: 0.625rem;
     align-items: center;
-    background: var(--wd-color-primary);
-    border-radius: var(--wd-radius-full);
-    color: var(--wd-color-on-emphasis);
+    background: var(--rd-color-primary);
+    border-radius: var(--rd-radius-full);
+    color: var(--rd-color-on-emphasis);
     display: inline-flex;
-    font-family: var(--wd-font-sans);
-    font-size: var(--wd-badge-font-size);
+    font-family: var(--rd-font-sans);
+    font-size: var(--rd-badge-font-size);
     font-weight: 700;
     justify-content: center;
     line-height: 1;
-    min-height: var(--wd-badge-size);
-    min-width: var(--wd-badge-size);
-    padding: var(--wd-badge-padding-y) var(--wd-badge-padding-x);
+    min-height: var(--rd-badge-size);
+    min-width: var(--rd-badge-size);
+    padding: var(--rd-badge-padding-y) var(--rd-badge-padding-x);
     vertical-align: middle;
 }
 
-.wd-badge--dot {
-    height: var(--wd-badge-dot-size);
-    min-height: var(--wd-badge-dot-size);
-    min-width: var(--wd-badge-dot-size);
+.rd-badge--dot {
+    height: var(--rd-badge-dot-size);
+    min-height: var(--rd-badge-dot-size);
+    min-width: var(--rd-badge-dot-size);
     padding: 0;
-    width: var(--wd-badge-dot-size);
+    width: var(--rd-badge-dot-size);
 }
 
-.wd-badge--small {
-    --wd-badge-size: var(--wd-badge-size-small);
-    --wd-badge-font-size: var(--wd-font-size-xs);
-    min-height: var(--wd-badge-size);
-    min-width: var(--wd-badge-size);
-    padding: var(--wd-space-1) var(--wd-space-2);
+.rd-badge--small {
+    --rd-badge-size: var(--rd-badge-size-small);
+    --rd-badge-font-size: var(--rd-font-size-xs);
+    min-height: var(--rd-badge-size);
+    min-width: var(--rd-badge-size);
+    padding: var(--rd-space-1) var(--rd-space-2);
 }
 
-.wd-badge--small.wd-badge--dot {
-    --wd-badge-dot-size: var(--wd-badge-dot-size-small);
-    height: var(--wd-badge-dot-size);
-    min-height: var(--wd-badge-dot-size);
-    min-width: var(--wd-badge-dot-size);
-    width: var(--wd-badge-dot-size);
+.rd-badge--small.rd-badge--dot {
+    --rd-badge-dot-size: var(--rd-badge-dot-size-small);
+    height: var(--rd-badge-dot-size);
+    min-height: var(--rd-badge-dot-size);
+    min-width: var(--rd-badge-dot-size);
+    width: var(--rd-badge-dot-size);
 }
 
-.wd-badge--large {
-    --wd-badge-size: var(--wd-badge-size-large);
-    --wd-badge-font-size: var(--wd-font-size-sm);
-    min-height: var(--wd-badge-size);
-    min-width: var(--wd-badge-size);
-    padding: var(--wd-space-1) var(--wd-space-2);
+.rd-badge--large {
+    --rd-badge-size: var(--rd-badge-size-large);
+    --rd-badge-font-size: var(--rd-font-size-sm);
+    min-height: var(--rd-badge-size);
+    min-width: var(--rd-badge-size);
+    padding: var(--rd-space-1) var(--rd-space-2);
 }
 
-.wd-badge--large.wd-badge--dot {
-    --wd-badge-dot-size: var(--wd-badge-dot-size-large);
-    height: var(--wd-badge-dot-size);
-    min-height: var(--wd-badge-dot-size);
-    min-width: var(--wd-badge-dot-size);
-    width: var(--wd-badge-dot-size);
+.rd-badge--large.rd-badge--dot {
+    --rd-badge-dot-size: var(--rd-badge-dot-size-large);
+    height: var(--rd-badge-dot-size);
+    min-height: var(--rd-badge-dot-size);
+    min-width: var(--rd-badge-dot-size);
+    width: var(--rd-badge-dot-size);
 }
 
-.wd-badge--primary {
-    background: var(--wd-color-primary);
-    color: var(--wd-color-on-emphasis);
+.rd-badge--primary {
+    background: var(--rd-color-primary);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-badge--secondary {
+.rd-badge--secondary {
     background: color-mix(
         in srgb,
-        var(--wd-color-text-muted) 25%,
-        var(--wd-color-surface)
+        var(--rd-color-text-muted) 25%,
+        var(--rd-color-surface)
     );
-    color: var(--wd-color-text);
+    color: var(--rd-color-text);
 }
 
-.wd-badge--success {
-    background: var(--wd-color-success);
-    color: var(--wd-color-on-emphasis);
+.rd-badge--success {
+    background: var(--rd-color-success);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-badge--info {
-    background: var(--wd-color-info);
-    color: var(--wd-color-on-emphasis);
+.rd-badge--info {
+    background: var(--rd-color-info);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-badge--warn,
-.wd-badge--warning {
-    background: var(--wd-color-warn);
-    color: var(--wd-color-on-emphasis);
+.rd-badge--warn,
+.rd-badge--warning {
+    background: var(--rd-color-warn);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-badge--danger {
-    background: var(--wd-color-danger);
-    color: var(--wd-color-on-emphasis);
+.rd-badge--danger {
+    background: var(--rd-color-danger);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-badge--contrast {
-    background: var(--wd-color-contrast);
-    color: var(--wd-color-contrast-fg);
+.rd-badge--contrast {
+    background: var(--rd-color-contrast);
+    color: var(--rd-color-contrast-fg);
 }
 
-.wd-badge--help {
-    background: var(--wd-color-help);
-    color: var(--wd-color-on-emphasis);
+.rd-badge--help {
+    background: var(--rd-color-help);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-badge-wrap {
+.rd-badge-wrap {
     display: inline-flex;
     position: relative;
     vertical-align: middle;
 }
 
-.wd-badge-wrap > .wd-badge {
-    --wd-badge-offset-x: 0px;
-    --wd-badge-offset-y: 0px;
+.rd-badge-wrap > .rd-badge {
+    --rd-badge-offset-x: 0px;
+    --rd-badge-offset-y: 0px;
     position: absolute;
     right: 0;
     top: 0;
     transform: translate(
-        calc(50% + var(--wd-badge-offset-x)),
-        calc(-50% + var(--wd-badge-offset-y))
+        calc(50% + var(--rd-badge-offset-x)),
+        calc(-50% + var(--rd-badge-offset-y))
     );
 }
 
-.wd-badge--processing {
-    animation: wd-badge-pulse var(--wd-motion-pulse) ease-in-out infinite;
+.rd-badge--processing {
+    animation: rd-badge-pulse var(--rd-motion-pulse) ease-in-out infinite;
 }
 
-@keyframes wd-badge-pulse {
+@keyframes rd-badge-pulse {
     0%,
     100% {
         box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);

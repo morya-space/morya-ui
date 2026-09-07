@@ -11,21 +11,21 @@ description: 颜色选择，支持色板与十六进制文本。
 ## 引入
 
 ```ts
-import { WdInputColor } from '@wex-design/ui'
+import { RdInputColor } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputColor } from '@wex-design/ui'
+import { RdInputColor } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <WdInputColor v-model="color" />
+  <RdInputColor v-model="color" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputColor } from '@wex-design/ui'
+import { RdInputColor } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <WdInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
+  <RdInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
 </template>
 ```
 
@@ -56,7 +56,7 @@ const color = ref('#2563eb')
 | `id` | `string` | — | 色板 input id。 |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `WdSizeInput` | — | — |
+| `size` | `RdSizeInput` | — | — |
 
 ## Events
 

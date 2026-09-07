@@ -1,5 +1,5 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdSizeInput } from '../../shared/types'
+import type { RdAppendTo } from '../../shared/overlay'
+import type { RdSizeInput } from '../../shared/types'
 
 export interface AutoCompleteOption {
   label: string
@@ -21,13 +21,13 @@ export interface AutoCompleteProps {
   dropdown?: boolean
   disabled?: boolean
   placeholder?: string
-  size?: WdSizeInput
+  size?: RdSizeInput
   loading?: boolean
   clearable?: boolean
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: RdAppendTo
 }
 
 export interface AutoCompleteEmits {

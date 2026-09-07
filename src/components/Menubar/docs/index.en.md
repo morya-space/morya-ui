@@ -11,14 +11,14 @@ Horizontal navigation menu. Child items appear in a single-level dropdown. `sele
 ## Import
 
 ```ts
-import { WdMenubar } from '@wex-design/ui'
+import { RdMenubar } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenubar } from '@wex-design/ui'
+import { RdMenubar } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref<string | null>(null)
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <WdMenubar v-model:selected-key="selectedKey" :model="model" />
+  <RdMenubar v-model:selected-key="selectedKey" :model="model" />
 </template>
 ```
 

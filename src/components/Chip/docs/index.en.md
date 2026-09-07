@@ -11,23 +11,23 @@ Chip displays short tagged information, with optional icon/image and a remove bu
 ## Import
 
 ```ts
-import { WdChip } from '@wex-design/ui'
+import { RdChip } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdChip } from '@wex-design/ui'
+import { RdChip } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdChip label="Basic" />
-    <WdChip label="With Icon" icon="check" />
-    <WdChip label="Removable" removable />
-    <WdChip label="Success" severity="success" size="small" />
-    <WdChip label="Disabled" removable disabled />
+    <RdChip label="Basic" />
+    <RdChip label="With Icon" icon="check" />
+    <RdChip label="Removable" removable />
+    <RdChip label="Success" severity="success" size="small" />
+    <RdChip label="Disabled" removable disabled />
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ import { WdChip } from '@wex-design/ui'
 | `image` | `string` | — | Leading image URL (takes precedence over icon). |
 | `removable` | `boolean` | `false` | Show × remove button. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
-| `severity` | `WdTagSeverity \| 'warning'` | — | Semantic color. |
+| `severity` | `RdTagSeverity \| 'warning'` | — | Semantic color. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 
 ## Events

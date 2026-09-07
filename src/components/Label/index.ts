@@ -1,3 +1,3 @@
 import './style'
-export { default as WdLabel } from './Label.vue'
+export { default as RdLabel } from './Label.vue'
 export type { LabelProps } from './types'

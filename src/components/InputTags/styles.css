@@ -1,64 +1,64 @@
 /* —— Form: InputTags —— */
-.wd-inputtags-field {
+.rd-inputtags-field {
     display: grid;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     width: 100%;
 }
 
-.wd-inputtags-field__label {
-    color: var(--wd-color-text);
-    font-size: var(--wd-font-size-md);
+.rd-inputtags-field__label {
+    color: var(--rd-color-text);
+    font-size: var(--rd-font-size-md);
     font-weight: 600;
 }
 
-.wd-inputtags {
-    --wd-inputtags-input-min-width: 6rem;
-    --wd-inputtags-chip-padding-y: var(--wd-space-1);
-    --wd-inputtags-chip-padding-x: var(--wd-space-2);
+.rd-inputtags {
+    --rd-inputtags-input-min-width: 6rem;
+    --rd-inputtags-chip-padding-y: var(--rd-space-1);
+    --rd-inputtags-chip-padding-x: var(--rd-space-2);
     align-items: center;
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-control);
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-control);
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wd-space-1);
-    min-height: var(--wd-control-height-medium);
-    padding: var(--wd-space-1) var(--wd-space-2);
+    gap: var(--rd-space-1);
+    min-height: var(--rd-control-height-medium);
+    padding: var(--rd-space-1) var(--rd-space-2);
     width: 100%;
 }
 
-.wd-inputtags--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-inputtags--disabled {
+    opacity: var(--rd-opacity-disabled);
 }
 
-.wd-inputtags--small {
-    min-height: var(--wd-control-height-small);
+.rd-inputtags--small {
+    min-height: var(--rd-control-height-small);
 }
 
-.wd-inputtags--large {
-    min-height: var(--wd-control-height-large);
+.rd-inputtags--large {
+    min-height: var(--rd-control-height-large);
 }
 
-.wd-inputtags--invalid {
-    border-color: var(--wd-color-danger);
+.rd-inputtags--invalid {
+    border-color: var(--rd-color-danger);
 }
 
-.wd-inputtags__chip {
+.rd-inputtags__chip {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wd-color-primary) 12%,
-        var(--wd-color-surface)
+        var(--rd-color-primary) 12%,
+        var(--rd-color-surface)
     );
-    border-radius: var(--wd-radius-full, 999px);
+    border-radius: var(--rd-radius-full, 999px);
     display: inline-flex;
-    font-size: var(--wd-font-size-md);
-    gap: var(--wd-space-1);
-    padding: var(--wd-inputtags-chip-padding-y)
-        var(--wd-inputtags-chip-padding-x);
+    font-size: var(--rd-font-size-md);
+    gap: var(--rd-space-1);
+    padding: var(--rd-inputtags-chip-padding-y)
+        var(--rd-inputtags-chip-padding-x);
 }
 
-.wd-inputtags__remove {
+.rd-inputtags__remove {
     background: transparent;
     border: 0;
     color: inherit;
@@ -68,19 +68,19 @@
     padding: 0;
 }
 
-.wd-inputtags__input {
+.rd-inputtags__input {
     background: transparent;
     border: 0;
     color: inherit;
     flex: 1;
     font: inherit;
-    min-width: var(--wd-inputtags-input-min-width);
+    min-width: var(--rd-inputtags-input-min-width);
     outline: none;
-    padding: var(--wd-space-1);
+    padding: var(--rd-space-1);
 }
 
-.wd-inputtags__input:focus,
-.wd-inputtags__input:focus-visible {
+.rd-inputtags__input:focus,
+.rd-inputtags__input:focus-visible {
     box-shadow: none;
     outline: none;
 }

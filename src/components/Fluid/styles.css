@@ -1,6 +1,6 @@
 /* —— Misc: Fluid —— */
-.wd-fluid,
-.wd-fluid > * {
+.rd-fluid,
+.rd-fluid > * {
     box-sizing: border-box;
     max-width: 100%;
 }

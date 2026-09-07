@@ -11,14 +11,14 @@ description: 主图 + 缩略图的图片画廊。
 ## 引入
 
 ```ts
-import { WdGallery } from '@wex-design/ui'
+import { RdGallery } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdGallery } from '@wex-design/ui'
+import { RdGallery } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)
@@ -30,7 +30,7 @@ const images = [
 </script>
 
 <template>
-  <WdGallery v-model:active-index="activeIndex" :images="images" />
+  <RdGallery v-model:active-index="activeIndex" :images="images" />
 </template>
 ```
 

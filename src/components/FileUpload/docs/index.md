@@ -24,14 +24,14 @@ description: 选择、拖拽、列表、预览与上传。
 ## 引入
 
 ```ts
-import { WdFileUpload } from '@wex-design/ui'
+import { RdFileUpload } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdFileUpload } from '@wex-design/ui'
+import { RdFileUpload } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -42,7 +42,7 @@ function onSelect(files: File[]) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdFileUpload mode="advanced" multiple @select="onSelect" />
+    <RdFileUpload mode="advanced" multiple @select="onSelect" />
     <div v-if="names.length">
       已选：{{ names.join(', ') }}
     </div>
@@ -56,7 +56,7 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import { WdFileUpload } from '@wex-design/ui'
+import { RdFileUpload } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -67,11 +67,11 @@ function onSelect(files: File[]) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
+    <RdFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
       <template #tip>
         支持图片或 PDF，可一次拖入多个文件。
       </template>
-    </WdFileUpload>
+    </RdFileUpload>
     <div v-if="names.length">
       已选：{{ names.join(', ') }}
     </div>
@@ -85,8 +85,8 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@wex-design/ui';
-import {  WdFileUpload } from '@wex-design/ui'
+import type {FileUploadFile} from '@roost-design/ui';
+import {  RdFileUpload } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const preview = ref('')
@@ -97,7 +97,7 @@ function onPreview(file: FileUploadFile) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
+    <RdFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
     <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem">
   </div>
 </template>
@@ -109,11 +109,11 @@ function onPreview(file: FileUploadFile) {
 
 ```vue preview
 <script setup lang="ts">
-import { WdFileUpload } from '@wex-design/ui'
+import { RdFileUpload } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
+  <RdFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
 </template>
 ```
 
@@ -123,8 +123,8 @@ import { WdFileUpload } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadRequestOptions} from '@wex-design/ui';
-import {  WdFileUpload } from '@wex-design/ui'
+import type {FileUploadRequestOptions} from '@roost-design/ui';
+import {  RdFileUpload } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -143,11 +143,11 @@ function onSuccess(_file: unknown, response: unknown) {
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
+    <RdFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
       <template #tip>
         选择后立即模拟上传，并显示进度。
       </template>
-    </WdFileUpload>
+    </RdFileUpload>
     <div v-if="last">
       响应：{{ last }}
     </div>
@@ -161,8 +161,8 @@ function onSuccess(_file: unknown, response: unknown) {
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@wex-design/ui';
-import {  WdFileUpload } from '@wex-design/ui'
+import type {FileUploadFile} from '@roost-design/ui';
+import {  RdFileUpload } from '@roost-design/ui'
 
 async function mockUpload() {
   await new Promise((resolve) => setTimeout(resolve, 300))
@@ -176,7 +176,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 </script>
 
 <template>
-  <WdFileUpload
+  <RdFileUpload
     mode="advanced"
     multiple
     :auto-upload="false"
@@ -187,7 +187,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
     <template #tip>
       单文件不超过 2MB。选好后点击上传。
     </template>
-  </WdFileUpload>
+  </RdFileUpload>
 </template>
 ```
 
@@ -197,7 +197,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 
 ```vue preview
 <script setup lang="ts">
-import { WdFileUpload } from '@wex-design/ui'
+import { RdFileUpload } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const uploader = ref<{
@@ -211,7 +211,7 @@ const uploader = ref<{
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <WdFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
+    <RdFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
       <button type="button" @click="uploader?.openPicker()">选择文件</button>
       <button type="button" @click="uploader?.submit()">提交队列</button>

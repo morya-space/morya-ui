@@ -1,4 +1,4 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 
 export interface RatingProps {
   modelValue?: number
@@ -9,7 +9,7 @@ export interface RatingProps {
   invalid?: boolean
   helpText?: string
   errorMessage?: string
-  size?: WdSizeInput
+  size?: RdSizeInput
   /**
    * @deprecated Use `allowClear` instead. Kept as an alias; `allowClear`
    * takes precedence when both are set.

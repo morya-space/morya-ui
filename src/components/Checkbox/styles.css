@@ -1,18 +1,18 @@
-.wd-checkbox__control {
-    border-radius: var(--wd-radius-sm);
+.rd-checkbox__control {
+    border-radius: var(--rd-radius-sm);
 }
 
-.wd-checkbox__control svg {
+.rd-checkbox__control svg {
     fill: none;
     height: 0.875rem;
-    stroke: var(--wd-color-on-emphasis);
+    stroke: var(--rd-color-on-emphasis);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2;
     width: 0.875rem;
 }
 
-.wd-checkbox__input:indeterminate + .wd-checkbox__control {
-    background: var(--wd-color-primary);
-    border-color: var(--wd-color-primary);
+.rd-checkbox__input:indeterminate + .rd-checkbox__control {
+    background: var(--rd-color-primary);
+    border-color: var(--rd-color-primary);
 }

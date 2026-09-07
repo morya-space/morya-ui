@@ -11,21 +11,21 @@ description: 开关。
 ## 引入
 
 ```ts
-import { WdSwitch } from '@wex-design/ui'
+import { RdSwitch } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdSwitch } from '@wex-design/ui'
+import { RdSwitch } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const enabled = ref(false)
 </script>
 
 <template>
-  <WdSwitch v-model="enabled" label="Enable notifications" />
+  <RdSwitch v-model="enabled" label="Enable notifications" />
 </template>
 ```
 
@@ -35,7 +35,7 @@ const enabled = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdSwitch } from '@wex-design/ui'
+import { RdSwitch } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const dark = ref(false)
@@ -43,8 +43,8 @@ const dark = ref(false)
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
-    <WdSwitch :model-value="false" invalid label="Must be enabled" />
+    <RdSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
+    <RdSwitch :model-value="false" invalid label="Must be enabled" />
   </div>
 </template>
 ```
@@ -53,13 +53,13 @@ const dark = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdSwitch } from '@wex-design/ui'
+import { RdSwitch } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdSwitch :model-value="true" disabled label="On disabled" />
-    <WdSwitch :model-value="false" disabled label="Off disabled" />
+    <RdSwitch :model-value="true" disabled label="On disabled" />
+    <RdSwitch :model-value="false" disabled label="Off disabled" />
   </div>
 </template>
 ```
@@ -68,14 +68,14 @@ import { WdSwitch } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSwitch } from '@wex-design/ui'
+import { RdSwitch } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const on = ref(true)
 </script>
 
 <template>
-  <WdSwitch v-model="on" checked-text="开" unchecked-text="关" />
+  <RdSwitch v-model="on" checked-text="开" unchecked-text="关" />
 </template>
 ```
 

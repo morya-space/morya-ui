@@ -1,12 +1,12 @@
 ---
 title: 无障碍
 order: 8
-description: 使用 Wex Design 组件时的无障碍约定与检查清单。
+description: 使用 Roost Design 组件时的无障碍约定与检查清单。
 ---
 
 # 无障碍
 
-Wex Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件尽量自带标签关联、键盘路径与浮层焦点管理；业务侧仍需提供有意义的文案与结构。
+Roost Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件尽量自带标签关联、键盘路径与浮层焦点管理；业务侧仍需提供有意义的文案与结构。
 
 ## 快速检查清单
 
@@ -24,7 +24,7 @@ Wex Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件
 输入类组件（`Input`、`Textarea`、`Select` 等）共享字段模式：
 
 ```vue
-<WdInput
+<RdInput
   id="email"
   v-model="email"
   label="邮箱"
@@ -42,11 +42,11 @@ Wex Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件
 
 ## 图标与按钮
 
-`WdIcon` 仅承载**系统图标**。无 `label` 时视为装饰并隐藏；信息性图标请传 `label`：
+`RdIcon` 仅承载**系统图标**。无 `label` 时视为装饰并隐藏；信息性图标请传 `label`：
 
 ```vue
-<WdIcon name="info" label="更多信息" />
-<WdButton icon="search" aria-label="搜索" icon-only />
+<RdIcon name="info" label="更多信息" />
+<RdButton icon="search" aria-label="搜索" icon-only />
 ```
 
 带文字的按钮优先用默认插槽或 `label`，不必重复 `aria-label`。
@@ -79,15 +79,15 @@ Wex Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件
 ## 动效与对比度
 
 ```ts
-import { useMotion } from '@wex-design/ui'
+import { useMotion } from '@roost-design/ui'
 
 const { setMotion } = useMotion()
 setMotion('reduced') // 或 'none'
 ```
 
-`reduced` / `none` 会缩短或关闭 `--wd-motion-*` 过渡，减轻 vestibular 不适。
+`reduced` / `none` 会缩短或关闭 `--rd-motion-*` 过渡，减轻 vestibular 不适。
 
-颜色应通过 `--wd-color-*` 令牌消费，以保证亮/暗主题下对比度一致。自定义主题后请在真实内容上抽查正文与错误态可读性。
+颜色应通过 `--rd-color-*` 令牌消费，以保证亮/暗主题下对比度一致。自定义主题后请在真实内容上抽查正文与错误态可读性。
 
 ## 组件库内已知实践
 

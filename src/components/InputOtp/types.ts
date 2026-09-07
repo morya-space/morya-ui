@@ -1,4 +1,4 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 
 export interface InputOtpProps {
   modelValue?: string
@@ -9,7 +9,7 @@ export interface InputOtpProps {
   /** Mask each digit. */
   mask?: boolean
   label?: string
-  size?: WdSizeInput
+  size?: RdSizeInput
   /** Gap between cells. Number is pixels. */
   gap?: string | number
 }

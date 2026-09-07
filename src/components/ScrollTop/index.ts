@@ -1,3 +1,3 @@
 import './style'
-export { default as WdScrollTop } from './ScrollTop.vue'
+export { default as RdScrollTop } from './ScrollTop.vue'
 export type { ScrollTopProps, ScrollTopTarget } from './types'

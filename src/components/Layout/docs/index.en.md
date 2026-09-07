@@ -6,18 +6,18 @@ description: Page layout shell with Header / Sider / Content / Footer.
 
 # Layout
 
-Page-level layout shell. Set `has-sider` on the `WdLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `WdLayoutContent` can fill the remaining space.
+Page-level layout shell. Set `has-sider` on the `RdLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `RdLayoutContent` can fill the remaining space.
 
 ## Import
 
 ```ts
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutFooter,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutFooter,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 ```
 
 ## Basic
@@ -26,21 +26,21 @@ Header / Content / Footer. Content fills the leftover height.
 
 ```vue preview
 <script setup lang="ts">
-import { WdLayout, WdLayoutContent, WdLayoutFooter, WdLayoutHeader } from '@wex-design/ui'
+import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:16rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </WdLayoutHeader>
-    <WdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </RdLayoutHeader>
+    <RdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content (fills remaining space)
-    </WdLayoutContent>
-    <WdLayoutFooter bordered style="padding:0.75rem 1rem">
+    </RdLayoutContent>
+    <RdLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </WdLayoutFooter>
-  </WdLayout>
+    </RdLayoutFooter>
+  </RdLayout>
 </template>
 ```
 
@@ -51,24 +51,24 @@ Header + left sider + main. The inner `has-sider` layout consumes all height bel
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdLayout style="height:16rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--wd-color-text-muted);font-size:0.75rem">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>
-    </WdLayoutHeader>
-    <WdLayout has-sider>
-      <WdLayoutSider
+      <span style="color:var(--rd-color-text-muted);font-size:0.75rem">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>
+    </RdLayoutHeader>
+    <RdLayout has-sider>
+      <RdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>Projects</div>
           <div>Settings</div>
         </div>
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding:1rem">
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding:1rem">
         Main area stretches both horizontally and vertically.
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </WdLayoutHeader>
-    <WdLayout has-sider sider-placement="right">
-      <WdLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </RdLayoutHeader>
+    <RdLayout has-sider sider-placement="right">
+      <RdLayoutSider bordered :width="140" content-style="padding:0.75rem">
         Props panel
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding:1rem">
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding:1rem">
         Canvas / main
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -125,34 +125,34 @@ Admin-style shell: header + sider + content + footer.
 ```vue preview
 <script setup lang="ts">
 import {
-  WdButton,
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutFooter,
-  WdLayoutHeader,
-  WdLayoutSider,
-  WdTag,
-} from '@wex-design/ui'
+  RdButton,
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutFooter,
+  RdLayoutHeader,
+  RdLayoutSider,
+  RdTag,
+} from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdLayout style="height:18rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader
+  <RdLayout style="height:18rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
-      <strong>Well Design</strong>
-      <WdTag value="Studio" />
+      <strong>Roost Design</strong>
+      <RdTag value="Studio" />
       <span style="flex:1" />
-      <WdButton size="small" label="Publish" />
-    </WdLayoutHeader>
+      <RdButton size="small" label="Publish" />
+    </RdLayoutHeader>
 
-    <WdLayout has-sider>
-      <WdLayoutSider
+    <RdLayout has-sider>
+      <RdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>Widgets</div>
           <div>Theme</div>
         </div>
-      </WdLayoutSider>
+      </RdLayoutSider>
 
-      <WdLayout>
-        <WdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <RdLayout>
+        <RdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>Workspace</strong>
-          <p style="margin:0;color:var(--wd-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--rd-color-text-muted);font-size:0.875rem">
             Content fills the space between Header and Footer; collapsing the sider keeps the height.
           </p>
-        </WdLayoutContent>
-        <WdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+        </RdLayoutContent>
+        <RdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--rd-color-text-muted);font-size:0.75rem">
           Ready · local
-        </WdLayoutFooter>
-      </WdLayout>
-    </WdLayout>
-  </WdLayout>
+        </RdLayoutFooter>
+      </RdLayout>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdLayout, WdLayoutContent, WdLayoutHeader } from '@wex-design/ui'
+import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:12rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:12rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </WdLayoutHeader>
-    <WdLayoutContent embedded content-style="padding:1rem">
+    </RdLayoutHeader>
+    <RdLayoutContent embedded content-style="padding:1rem">
       Nested forms / lists go here.
-    </WdLayoutContent>
-  </WdLayout>
+    </RdLayoutContent>
+  </RdLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ Only the content pane scrolls; header and sider stay fixed.
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </WdLayoutHeader>
-    <WdLayout has-sider>
-      <WdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </RdLayoutHeader>
+    <RdLayout has-sider>
+      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Fixed sider
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding:1rem">
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             Row {{ n }} — scroll down
           </div>
         </div>
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayout position="absolute" has-sider>
-      <WdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayout position="absolute" has-sider>
+      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </WdLayoutSider>
-      <WdLayout>
-        <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+      </RdLayoutSider>
+      <RdLayout>
+        <RdLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </WdLayoutHeader>
-        <WdLayoutContent embedded content-style="padding:1rem">
+        </RdLayoutHeader>
+        <RdLayoutContent embedded content-style="padding:1rem">
           Fills the relative container
-        </WdLayoutContent>
-      </WdLayout>
-    </WdLayout>
+        </RdLayoutContent>
+      </RdLayout>
+    </RdLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | Horizontal layout for `WdLayoutSider`. |
+| `hasSider` | `boolean` | `false` | Horizontal layout for `RdLayoutSider`. |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | Sider side. |
 | `embedded` | `boolean` | `false` | Soft background for nested content. |
 | `position` | `'static' \| 'absolute'` | `'static'` | Positioning mode. |
@@ -307,17 +307,17 @@ import {
 
 ## Expose
 
-`WdLayout` / `WdLayoutContent` / `WdLayoutSider` expose `scrollTo(...)`.
+`RdLayout` / `RdLayoutContent` / `RdLayoutSider` expose `scrollTo(...)`.
 
 ## Components
 
 | Component | Description |
 | --- | --- |
-| `WdLayout` | Root layout. |
-| `WdLayoutHeader` | Header bar. |
-| `WdLayoutContent` | Main content (fills leftover space by default). |
-| `WdLayoutFooter` | Footer bar. |
-| `WdLayoutSider` | Side panel. |
+| `RdLayout` | Root layout. |
+| `RdLayoutHeader` | Header bar. |
+| `RdLayoutContent` | Main content (fills leftover space by default). |
+| `RdLayoutFooter` | Footer bar. |
+| `RdLayoutSider` | Side panel. |
 
 ## Slots
 

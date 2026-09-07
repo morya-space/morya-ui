@@ -11,21 +11,21 @@ description: 文本输入框。
 ## 引入
 
 ```ts
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInput v-model="value" label="Name" placeholder="Enter your name" />
+  <RdInput v-model="value" label="Name" placeholder="Enter your name" />
 </template>
 ```
 
@@ -35,11 +35,11 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
+  <RdInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { WdInput } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('Draft note')
 </script>
 
 <template>
-  <WdInput v-model="value" clearable label="Note" />
+  <RdInput v-model="value" clearable label="Note" />
 </template>
 ```
 
@@ -62,7 +62,7 @@ const value = ref('Draft note')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const amount = ref('128')
@@ -71,19 +71,19 @@ const host = ref('docs')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdInput v-model="amount" label="金额" fluid>
+    <RdInput v-model="amount" label="金额" fluid>
       <template #prefix>
         ¥
       </template>
       <template #suffix>
         .00
       </template>
-    </WdInput>
-    <WdInput v-model="host" label="域名" fluid>
+    </RdInput>
+    <RdInput v-model="host" label="域名" fluid>
       <template #suffix>
         .well.design
       </template>
-    </WdInput>
+    </RdInput>
   </div>
 </template>
 ```
@@ -92,14 +92,14 @@ const host = ref('docs')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const password = ref('')
 </script>
 
 <template>
-  <WdInput v-model="password" type="password" label="Password" placeholder="••••••••" />
+  <RdInput v-model="password" type="password" label="Password" placeholder="••••••••" />
 </template>
 ```
 
@@ -109,14 +109,14 @@ const password = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WdInput size="small" label="Small" placeholder="Small" />
-    <WdInput label="Normal" placeholder="Normal" />
-    <WdInput size="large" label="Large" placeholder="Large" />
+    <RdInput size="small" label="Small" placeholder="Small" />
+    <RdInput label="Normal" placeholder="Normal" />
+    <RdInput size="large" label="Large" placeholder="Large" />
   </div>
 </template>
 ```
@@ -127,14 +127,14 @@ import { WdInput } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const bio = ref('Hello')
 </script>
 
 <template>
-  <WdInput v-model="bio" label="Bio" :maxlength="20" show-count />
+  <RdInput v-model="bio" label="Bio" :maxlength="20" show-count />
 </template>
 ```
 
@@ -142,14 +142,14 @@ const bio = ref('Hello')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
-    <WdInput variant="outlined" label="Outlined" placeholder="Outlined" />
-    <WdInput variant="filled" label="Filled" placeholder="Filled" />
-    <WdInput fluid label="Fluid" placeholder="Full width" />
+    <RdInput variant="outlined" label="Outlined" placeholder="Outlined" />
+    <RdInput variant="filled" label="Filled" placeholder="Filled" />
+    <RdInput fluid label="Fluid" placeholder="Full width" />
   </div>
 </template>
 ```
@@ -158,11 +158,11 @@ import { WdInput } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput } from '@wex-design/ui'
+import { RdInput } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdInput model-value="Read only value" label="Disabled" disabled />
+  <RdInput model-value="Read only value" label="Disabled" disabled />
 </template>
 ```
 

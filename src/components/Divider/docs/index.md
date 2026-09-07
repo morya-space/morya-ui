@@ -11,7 +11,7 @@ description: 内容分隔线。
 ## 引入
 
 ```ts
-import { WdDivider } from '@wex-design/ui'
+import { RdDivider } from '@roost-design/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { WdDivider } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@wex-design/ui'
+import { RdDivider } from '@roost-design/ui'
 </script>
 
 <template>
@@ -28,7 +28,7 @@ import { WdDivider } from '@wex-design/ui'
     <p style="margin:0">
       Above
     </p>
-    <WdDivider />
+    <RdDivider />
     <p style="margin:0">
       Below
     </p>
@@ -42,14 +42,14 @@ import { WdDivider } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@wex-design/ui'
+import { RdDivider } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WdDivider type="solid" label="Solid" />
-    <WdDivider type="dashed" label="Dashed" />
-    <WdDivider type="dotted" label="Dotted" />
+    <RdDivider type="solid" label="Solid" />
+    <RdDivider type="dashed" label="Dashed" />
+    <RdDivider type="dotted" label="Dotted" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ import { WdDivider } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@wex-design/ui'
+import { RdDivider } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WdDivider label="Left" align="left" />
-    <WdDivider label="Center" align="center" />
-    <WdDivider label="Right" align="right" />
+    <RdDivider label="Left" align="left" />
+    <RdDivider label="Center" align="center" />
+    <RdDivider label="Right" align="right" />
   </div>
 </template>
 ```
@@ -78,11 +78,11 @@ import { WdDivider } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@wex-design/ui'
+import { RdDivider } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdDivider label="Or" title-placement="right" />
+  <RdDivider label="Or" title-placement="right" />
 </template>
 ```
 
@@ -92,15 +92,15 @@ import { WdDivider } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdDivider } from '@wex-design/ui'
+import { RdDivider } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
     <span>Left</span>
-    <WdDivider layout="vertical" />
+    <RdDivider layout="vertical" />
     <span>Middle</span>
-    <WdDivider layout="vertical" type="dashed" />
+    <RdDivider layout="vertical" type="dashed" />
     <span>Right</span>
   </div>
 </template>

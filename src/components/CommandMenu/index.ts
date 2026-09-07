@@ -1,3 +1,3 @@
 import './style'
-export { default as WdCommandMenu } from './CommandMenu.vue'
+export { default as RdCommandMenu } from './CommandMenu.vue'
 export type { CommandMenuEmits, CommandMenuItem, CommandMenuProps } from './types'

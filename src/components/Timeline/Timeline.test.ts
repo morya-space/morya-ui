@@ -1,22 +1,22 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdTimeline from './Timeline.vue'
+import RdTimeline from './Timeline.vue'
 
 const value = [
   { status: 'Ordered', content: 'Order placed', date: '15/10', icon: '1' },
   { status: 'Shipped', content: 'On the way', date: '16/10', color: '#22c55e' },
 ]
 
-describe('wdTimeline', () => {
+describe('rdTimeline', () => {
   it('renders events and alternate alignment', () => {
-    const wrapper = mount(WdTimeline, { props: { value, align: 'alternate' } })
-    expect(wrapper.classes()).toContain('wd-timeline--alternate')
-    expect(wrapper.findAll('.wd-timeline__event')).toHaveLength(2)
+    const wrapper = mount(RdTimeline, { props: { value, align: 'alternate' } })
+    expect(wrapper.classes()).toContain('rd-timeline--alternate')
+    expect(wrapper.findAll('.rd-timeline__event')).toHaveLength(2)
     expect(wrapper.text()).toContain('Order placed')
   })
 
   it('uses content and opposite slots', () => {
-    const wrapper = mount(WdTimeline, {
+    const wrapper = mount(RdTimeline, {
       props: { value },
       slots: {
         content: ({ item }: { item: { status?: string } }) => `C:${item.status}`,
@@ -28,8 +28,8 @@ describe('wdTimeline', () => {
   })
 
   it('appends a pending item', () => {
-    const wrapper = mount(WdTimeline, { props: { value, pending: 'Waiting' } })
-    expect(wrapper.findAll('.wd-timeline__event')).toHaveLength(3)
-    expect(wrapper.find('.wd-timeline__event--pending').text()).toContain('Waiting')
+    const wrapper = mount(RdTimeline, { props: { value, pending: 'Waiting' } })
+    expect(wrapper.findAll('.rd-timeline__event')).toHaveLength(3)
+    expect(wrapper.find('.rd-timeline__event--pending').text()).toContain('Waiting')
   })
 })

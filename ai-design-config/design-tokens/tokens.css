@@ -1,55 +1,55 @@
 /**
- * Wex Design design tokens (compiled view for AI / static tooling).
- * Runtime source of truth: @wex-design/ui/styles.css
- * Do not hand-edit hex values in business code — use --wd-* variables.
+ * Roost Design design tokens (compiled view for AI / static tooling).
+ * Runtime source of truth: @roost-design/ui/styles.css
+ * Do not hand-edit hex values in business code — use --rd-* variables.
  */
 :root {
-    --wd-color-primary: #2563eb;
-    --wd-color-primary-hover: #1d4ed8;
-    --wd-color-surface: #ffffff;
-    --wd-color-text: #0f172a;
-    --wd-color-text-muted: #64748b;
-    --wd-color-border: #e2e8f0;
-    --wd-color-focus-ring: #2563eb;
-    --wd-color-success: #159570;
-    --wd-color-info: #2563eb;
-    --wd-color-warning: #d97706;
-    --wd-color-help: #9333ea;
-    --wd-color-danger: #dc2626;
-    --wd-color-contrast: #0f172a;
-    --wd-color-contrast-fg: #ffffff;
-    --wd-overlay-scrim: rgb(15 23 42 / 0.55);
+    --rd-color-primary: #2563eb;
+    --rd-color-primary-hover: #1d4ed8;
+    --rd-color-surface: #ffffff;
+    --rd-color-text: #0f172a;
+    --rd-color-text-muted: #64748b;
+    --rd-color-border: #e2e8f0;
+    --rd-color-focus-ring: #2563eb;
+    --rd-color-success: #159570;
+    --rd-color-info: #2563eb;
+    --rd-color-warning: #d97706;
+    --rd-color-help: #9333ea;
+    --rd-color-danger: #dc2626;
+    --rd-color-contrast: #0f172a;
+    --rd-color-contrast-fg: #ffffff;
+    --rd-overlay-scrim: rgb(15 23 42 / 0.55);
 
-    --wd-control-height-small: 28px;
-    --wd-control-height-medium: 34px;
-    --wd-control-height-large: 40px;
-    --wd-radius-control: 3px;
-    --wd-space-1: 0.25rem;
-    --wd-space-2: 0.5rem;
-    --wd-space-3: 0.75rem;
-    --wd-space-4: 1rem;
-    --wd-space-6: 1.5rem;
-    --wd-space-8: 2rem;
-    --wd-radius-sm: 0.25rem;
-    --wd-radius-md: 0.5rem;
-    --wd-radius-lg: 0.75rem;
-    --wd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
-    --wd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
-    --wd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
-    --wd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-    --wd-motion-fast: 150ms;
-    --wd-motion-normal: 250ms;
-    --wd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
-    --wd-z-base: 1000;
+    --rd-control-height-small: 28px;
+    --rd-control-height-medium: 34px;
+    --rd-control-height-large: 40px;
+    --rd-radius-control: 3px;
+    --rd-space-1: 0.25rem;
+    --rd-space-2: 0.5rem;
+    --rd-space-3: 0.75rem;
+    --rd-space-4: 1rem;
+    --rd-space-6: 1.5rem;
+    --rd-space-8: 2rem;
+    --rd-radius-sm: 0.25rem;
+    --rd-radius-md: 0.5rem;
+    --rd-radius-lg: 0.75rem;
+    --rd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
+    --rd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
+    --rd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --rd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --rd-motion-fast: 150ms;
+    --rd-motion-normal: 250ms;
+    --rd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --rd-z-base: 1000;
 }
 
 [data-theme="dark"] {
-    --wd-color-primary: #60a5fa;
-    --wd-color-primary-hover: #93c5fd;
-    --wd-color-surface: #0f172a;
-    --wd-color-text: #f8fafc;
-    --wd-color-text-muted: #94a3b8;
-    --wd-color-border: #334155;
-    --wd-color-danger: #fca5a5;
-    --wd-overlay-scrim: rgb(2 6 23 / 0.72);
+    --rd-color-primary: #60a5fa;
+    --rd-color-primary-hover: #93c5fd;
+    --rd-color-surface: #0f172a;
+    --rd-color-text: #f8fafc;
+    --rd-color-text-muted: #94a3b8;
+    --rd-color-border: #334155;
+    --rd-color-danger: #fca5a5;
+    --rd-overlay-scrim: rgb(2 6 23 / 0.72);
 }

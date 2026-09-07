@@ -11,14 +11,14 @@ description: 步骤指示器，支持线性前进约束。
 ## 引入
 
 ```ts
-import { WdStepper } from '@wex-design/ui'
+import { RdStepper } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdStepper } from '@wex-design/ui'
+import { RdStepper } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref(0)
@@ -30,7 +30,7 @@ const steps = [
 </script>
 
 <template>
-  <WdStepper v-model="active" :steps="steps" />
+  <RdStepper v-model="active" :steps="steps" />
 </template>
 ```
 
@@ -40,7 +40,7 @@ const steps = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdStepper } from '@wex-design/ui'
+import { RdStepper } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref(1)
@@ -52,7 +52,7 @@ const steps = [
 </script>
 
 <template>
-  <WdStepper v-model="active" vertical :steps="steps" />
+  <RdStepper v-model="active" vertical :steps="steps" />
 </template>
 ```
 

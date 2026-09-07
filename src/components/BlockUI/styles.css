@@ -1,34 +1,34 @@
 /* —— Misc: BlockUI —— */
-.wd-blockui {
-    --wd-blockui-z-index: 10;
+.rd-blockui {
+    --rd-blockui-z-index: 10;
     position: relative;
 }
 
-.wd-blockui__content {
+.rd-blockui__content {
     position: relative;
 }
 
-.wd-blockui--blocked .wd-blockui__content {
+.rd-blockui--blocked .rd-blockui__content {
     pointer-events: none;
     user-select: none;
 }
 
-.wd-blockui__overlay {
-    background: color-mix(in srgb, var(--wd-color-surface) 45%, transparent);
+.rd-blockui__overlay {
+    background: color-mix(in srgb, var(--rd-color-surface) 45%, transparent);
     inset: 0;
     position: absolute;
-    z-index: var(--wd-blockui-z-index);
+    z-index: var(--rd-blockui-z-index);
 }
 
-.wd-blockui-enter-active {
-    transition: opacity var(--wd-motion-enter) var(--wd-motion-ease);
+.rd-blockui-enter-active {
+    transition: opacity var(--rd-motion-enter) var(--rd-motion-ease);
 }
 
-.wd-blockui-leave-active {
-    transition: opacity var(--wd-motion-exit) var(--wd-motion-ease);
+.rd-blockui-leave-active {
+    transition: opacity var(--rd-motion-exit) var(--rd-motion-ease);
 }
 
-.wd-blockui-enter-from,
-.wd-blockui-leave-to {
+.rd-blockui-enter-from,
+.rd-blockui-leave-to {
     opacity: 0;
 }

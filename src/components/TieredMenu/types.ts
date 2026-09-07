@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { RdAppendTo } from '../../shared/overlay'
 import type { FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 
 export interface TieredMenuItem {
@@ -18,7 +18,7 @@ export interface TieredMenuProps {
   /** Teleport overlay when `popup`. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: RdAppendTo
 }
 
 export interface TieredMenuEmits {

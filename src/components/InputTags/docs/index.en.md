@@ -11,21 +11,21 @@ Manage string tags as a chip list.
 ## Import
 
 ```ts
-import { WdInputTags } from '@wex-design/ui'
+import { RdInputTags } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputTags } from '@wex-design/ui'
+import { RdInputTags } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue', 'design'])
 </script>
 
 <template>
-  <WdInputTags v-model="tags" />
+  <RdInputTags v-model="tags" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const tags = ref(['vue', 'design'])
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputTags } from '@wex-design/ui'
+import { RdInputTags } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue'])
 </script>
 
 <template>
-  <WdInputTags v-model="tags" :max="3" separator="," placeholder="Comma-separated, max 3" />
+  <RdInputTags v-model="tags" :max="3" separator="," placeholder="Comma-separated, max 3" />
 </template>
 ```
 

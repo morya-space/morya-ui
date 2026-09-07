@@ -1,8 +1,8 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 
 export type RadioValue = string | number | boolean
-export type RadioSize = WdSizeInput
+export type RadioSize = RdSizeInput
 
 export interface RadioProps {
   modelValue?: RadioValue
@@ -34,7 +34,7 @@ export interface RadioGroupEmits {
   (event: 'update:modelValue', value: RadioValue): void
 }
 
-export interface WdRadioGroupContext {
+export interface RdRadioGroupContext {
   modelValue: ComputedRef<RadioValue | undefined>
   name: ComputedRef<string | undefined>
   size: ComputedRef<RadioSize | undefined>
@@ -43,4 +43,4 @@ export interface WdRadioGroupContext {
   select: (value: RadioValue) => void
 }
 
-export const WD_RADIO_GROUP_KEY: InjectionKey<WdRadioGroupContext> = Symbol('wdRadioGroup')
+export const RD_RADIO_GROUP_KEY: InjectionKey<RdRadioGroupContext> = Symbol('rdRadioGroup')

@@ -14,7 +14,7 @@ const props = defineProps<{
 
 const scrollbarContext = inject(scrollbarContextKey)
 if (!scrollbarContext) {
-  throw new Error('[WdScrollbar] Thumb must be used inside WdScrollbar')
+  throw new Error('[RdScrollbar] Thumb must be used inside RdScrollbar')
 }
 const scrollbar = scrollbarContext
 
@@ -224,12 +224,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <transition name="wd-scrollbar-fade">
+  <transition name="rd-scrollbar-fade">
     <div
       v-show="size && show"
       ref="trackRef"
-      class="wd-scrollbar__bar"
-      :class="vertical ? 'wd-scrollbar__bar--vertical' : 'wd-scrollbar__bar--horizontal'"
+      class="rd-scrollbar__bar"
+      :class="vertical ? 'rd-scrollbar__bar--vertical' : 'rd-scrollbar__bar--horizontal'"
       role="scrollbar"
       :aria-orientation="vertical ? 'vertical' : 'horizontal'"
       :aria-controls="scrollbar.contentId"
@@ -239,7 +239,7 @@ onBeforeUnmount(() => {
     >
       <div
         ref="thumbRef"
-        class="wd-scrollbar__thumb"
+        class="rd-scrollbar__thumb"
         :style="thumbStyle"
         @mousedown="onThumbMouseDown"
       />

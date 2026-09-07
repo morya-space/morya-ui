@@ -1,7 +1,7 @@
 import type { ConfirmDialogProps } from './types'
 import { createVNode, ref, render } from 'vue'
-import { getWdOverlayAppContext } from '../../shared/overlayHost'
-import WdConfirmDialog from './ConfirmDialog.vue'
+import { getRdOverlayAppContext } from '../../shared/overlayHost'
+import RdConfirmDialog from './ConfirmDialog.vue'
 
 export type ConfirmRequireOptions = Pick<
   ConfirmDialogProps,
@@ -28,7 +28,7 @@ export function useConfirm() {
         resolve(result)
       }
 
-      const vnode = createVNode(WdConfirmDialog, {
+      const vnode = createVNode(RdConfirmDialog, {
         ...options,
         modelValue: true,
         'onUpdate:modelValue': (open: boolean) => {
@@ -37,7 +37,7 @@ export function useConfirm() {
         onAccept: () => finish(true),
         onReject: () => finish(false),
       })
-      const ctx = getWdOverlayAppContext()
+      const ctx = getRdOverlayAppContext()
       if (ctx) vnode.appContext = ctx
       render(vnode, container)
     })

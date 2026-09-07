@@ -1,53 +1,53 @@
 /* Shared multi-select tag chips (Select, TreeSelect, InputTags). */
-.wd-select__tag {
+.rd-select__tag {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wd-color-text-muted) 14%,
-        var(--wd-color-surface)
+        var(--rd-color-text-muted) 14%,
+        var(--rd-color-surface)
     );
-    border-radius: var(--wd-radius-sm);
-    color: var(--wd-color-text);
+    border-radius: var(--rd-radius-sm);
+    color: var(--rd-color-text);
     display: inline-flex;
-    font-size: var(--wd-font-size-xs);
-    gap: var(--wd-space-1);
+    font-size: var(--rd-font-size-xs);
+    gap: var(--rd-space-1);
     line-height: 1.2;
     max-width: 100%;
-    padding: var(--wd-space-1) var(--wd-space-2) var(--wd-space-1) var(--wd-space-2);
+    padding: var(--rd-space-1) var(--rd-space-2) var(--rd-space-1) var(--rd-space-2);
 }
 
-.wd-select__tag-label {
+.rd-select__tag-label {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.wd-select__tag-remove {
+.rd-select__tag-remove {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wd-radius-sm);
-    color: var(--wd-color-text-muted);
+    border-radius: var(--rd-radius-sm);
+    color: var(--rd-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    height: var(--wd-control-affix-size);
+    height: var(--rd-control-affix-size);
     justify-content: center;
     line-height: 1;
     padding: 0;
-    width: var(--wd-control-affix-size);
+    width: var(--rd-control-affix-size);
 }
 
-.wd-select__tag-remove:hover:not(:disabled) {
-    color: var(--wd-color-text);
+.rd-select__tag-remove:hover:not(:disabled) {
+    color: var(--rd-color-text);
 }
 
-.wd-select__tag-remove:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-select__tag-remove:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-select__tag--more {
-    color: var(--wd-color-text-muted);
-    padding-right: var(--wd-space-2);
+.rd-select__tag--more {
+    color: var(--rd-color-text-muted);
+    padding-right: var(--rd-space-2);
 }

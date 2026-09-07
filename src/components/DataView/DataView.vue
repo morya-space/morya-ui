@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { DataViewEmits, DataViewProps } from './types'
 import { computed, ref, useSlots, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdPagination from '../Pagination/Pagination.vue'
-import WdProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import { useRdLocale } from '../../locale'
+import RdPagination from '../Pagination/Pagination.vue'
+import RdProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
 
 const props = withDefaults(defineProps<DataViewProps>(), {
   value: () => [],
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<DataViewProps>(), {
 
 const emit = defineEmits<DataViewEmits>()
 
-const locale = useWdLocale()
+const locale = useRdLocale()
 const slots = useSlots()
 const innerPage = ref(1)
 
@@ -43,8 +43,8 @@ const resolvedEmptyMessage = computed(
 )
 
 const rootClass = computed(() => [
-  'wd-dataview',
-  `wd-dataview--${props.layout}`,
+  'rd-dataview',
+  `rd-dataview--${props.layout}`,
 ])
 
 watch(
@@ -66,43 +66,43 @@ watch(
 
 <template>
   <div :class="rootClass">
-    <div v-if="slots.header" class="wd-dataview__header">
+    <div v-if="slots.header" class="rd-dataview__header">
       <slot name="header" />
     </div>
-    <div class="wd-dataview__content">
+    <div class="rd-dataview__content">
       <slot v-if="layout === 'list'" name="list" :items="pagedValue">
-        <ul v-if="pagedValue.length" class="wd-dataview__list">
-          <li v-for="(item, index) in pagedValue" :key="index" class="wd-dataview__list-item">
+        <ul v-if="pagedValue.length" class="rd-dataview__list">
+          <li v-for="(item, index) in pagedValue" :key="index" class="rd-dataview__list-item">
             {{ item }}
           </li>
         </ul>
       </slot>
       <slot v-else name="grid" :items="pagedValue">
-        <div v-if="pagedValue.length" class="wd-dataview__grid">
-          <div v-for="(item, index) in pagedValue" :key="index" class="wd-dataview__grid-item">
+        <div v-if="pagedValue.length" class="rd-dataview__grid">
+          <div v-for="(item, index) in pagedValue" :key="index" class="rd-dataview__grid-item">
             {{ item }}
           </div>
         </div>
       </slot>
 
-      <div v-if="loading" class="wd-dataview__loading">
-        <div class="wd-dataview__loading-mask" />
-        <div class="wd-dataview__loading-body">
+      <div v-if="loading" class="rd-dataview__loading">
+        <div class="rd-dataview__loading-mask" />
+        <div class="rd-dataview__loading-body">
           <slot v-if="slots.loading" name="loading" />
-          <WdProgressSpinner v-else size="sm" />
+          <RdProgressSpinner v-else size="sm" />
         </div>
       </div>
 
-      <div v-if="isEmpty && !loading" class="wd-dataview__message" role="status">
+      <div v-if="isEmpty && !loading" class="rd-dataview__message" role="status">
         <slot name="empty">
-          <p class="wd-dataview__empty-text">{{ resolvedEmptyMessage }}</p>
+          <p class="rd-dataview__empty-text">{{ resolvedEmptyMessage }}</p>
         </slot>
       </div>
     </div>
-    <WdPagination
+    <RdPagination
       v-if="paginator"
       v-model="page"
-      class="wd-dataview__paginator"
+      class="rd-dataview__paginator"
       :total-records="value.length"
       :rows="rows"
       :disabled="disabled"

@@ -1,7 +1,7 @@
 import './style'
 
-export { default as WdButton } from './Button.vue'
-export { default as WdButtonGroup } from './ButtonGroup.vue'
+export { default as RdButton } from './Button.vue'
+export { default as RdButtonGroup } from './ButtonGroup.vue'
 export type {
   ButtonBadgeSeverity,
   ButtonEmits,

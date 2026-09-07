@@ -1,3 +1,3 @@
 import './style'
-export { default as WdBlockUI } from './BlockUI.vue'
+export { default as RdBlockUI } from './BlockUI.vue'
 export type { BlockUIProps } from './types'

@@ -1,22 +1,22 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h, nextTick } from 'vue'
-import { createWexDesign, useWdConfig } from '../../shared/config'
+import { createRoostDesign, useRdConfig } from '../../shared/config'
 import { applyTheme } from '../../theme'
-import WdInput from '../Input/Input.vue'
-import WdSpace from '../Space/Space.vue'
-import WdConfigProvider from './ConfigProvider.vue'
+import RdInput from '../Input/Input.vue'
+import RdSpace from '../Space/Space.vue'
+import RdConfigProvider from './ConfigProvider.vue'
 
-describe('wdConfigProvider', () => {
+describe('rdConfigProvider', () => {
   it('provides merged global config to descendants', () => {
     const Probe = defineComponent({
       setup() {
-        const config = useWdConfig()
+        const config = useRdConfig()
         return () => h('span', { 'data-append': String(config.value.appendTo) }, config.value.locale?.accept)
       },
     })
 
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: {
         appendTo: 'body',
         locale: { accept: 'OK' },
@@ -29,40 +29,40 @@ describe('wdConfigProvider', () => {
   })
 
   it('applies global size and inputVariant to Input', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: {
         size: 'small',
         inputVariant: 'filled',
       },
       slots: {
-        default: () => h(WdInput, { modelValue: 'hi', 'onUpdate:modelValue': () => undefined }),
+        default: () => h(RdInput, { modelValue: 'hi', 'onUpdate:modelValue': () => undefined }),
       },
     })
 
-    const input = wrapper.get('.wd-input')
-    expect(input.classes()).toContain('wd-input--small')
-    expect(input.classes()).toContain('wd-input--filled')
+    const input = wrapper.get('.rd-input')
+    expect(input.classes()).toContain('rd-input--small')
+    expect(input.classes()).toContain('rd-input--filled')
   })
 
   it('exposes density on the provider root', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: { density: 'compact', globalDensity: false },
       slots: { default: () => h('span', 'x') },
     })
-    expect(wrapper.get('.wd-config-provider').attributes('data-wd-density')).toBe('compact')
+    expect(wrapper.get('.rd-config-provider').attributes('data-rd-density')).toBe('compact')
   })
 
   it('writes overlay z-index base as a CSS variable', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: { zIndex: 2200, globalDensity: false },
       slots: { default: () => h('span', 'x') },
     })
-    const style = wrapper.get('.wd-config-provider').attributes('style') ?? ''
-    expect(style).toContain('--wd-z-base: 2200')
+    const style = wrapper.get('.rd-config-provider').attributes('style') ?? ''
+    expect(style).toContain('--rd-z-base: 2200')
   })
 
   it('applies per-component defaults without changing global size for other components', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: {
         size: 'large',
         componentDefaults: {
@@ -70,33 +70,33 @@ describe('wdConfigProvider', () => {
         },
       },
       slots: {
-        default: () => h(WdInput, { modelValue: 'draft', 'onUpdate:modelValue': () => undefined }),
+        default: () => h(RdInput, { modelValue: 'draft', 'onUpdate:modelValue': () => undefined }),
       },
     })
 
-    const input = wrapper.get('.wd-input')
-    expect(input.classes()).toContain('wd-input--small')
-    expect(input.classes()).toContain('wd-input--filled')
-    expect(wrapper.get('.wd-input__clear').exists()).toBe(true)
+    const input = wrapper.get('.rd-input')
+    expect(input.classes()).toContain('rd-input--small')
+    expect(input.classes()).toContain('rd-input--filled')
+    expect(wrapper.get('.rd-input__clear').exists()).toBe(true)
   })
 
   it('lets local props override componentDefaults', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: {
         componentDefaults: { Input: { size: 'small' } },
       },
       slots: {
         default: () =>
-          h(WdInput, { modelValue: '', size: 'large', 'onUpdate:modelValue': () => undefined }),
+          h(RdInput, { modelValue: '', size: 'large', 'onUpdate:modelValue': () => undefined }),
       },
     })
-    expect(wrapper.get('.wd-input').classes()).toContain('wd-input--large')
+    expect(wrapper.get('.rd-input').classes()).toContain('rd-input--large')
   })
 
   it('inherits parent config in nested providers', () => {
     const Probe = defineComponent({
       setup() {
-        const config = useWdConfig()
+        const config = useRdConfig()
         return () =>
           h('span', {
             'data-append': String(config.value.appendTo),
@@ -106,12 +106,12 @@ describe('wdConfigProvider', () => {
       },
     })
 
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: { appendTo: 'body', size: 'small' },
       slots: {
         default: () =>
           h(
-            WdConfigProvider,
+            RdConfigProvider,
             { density: 'compact', globalDensity: false },
             { default: () => h(Probe) },
           ),
@@ -125,29 +125,29 @@ describe('wdConfigProvider', () => {
   })
 
   it('applies Space gap from componentDefaults', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: {
         componentDefaults: { Space: { size: 24 } },
       },
       slots: {
-        default: () => h(WdSpace, null, { default: () => [h('span', 'A'), h('span', 'B')] }),
+        default: () => h(RdSpace, null, { default: () => [h('span', 'A'), h('span', 'B')] }),
       },
     })
-    expect(wrapper.get('.wd-space').element.style.gap).toBe('24px')
+    expect(wrapper.get('.rd-space').element.style.gap).toBe('24px')
   })
 
   it('inherits plugin defaults when the provider only sets a subset', () => {
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: { density: 'compact', globalDensity: false },
       global: {
-        plugins: [createWexDesign({ size: 'small', components: false })],
+        plugins: [createRoostDesign({ size: 'small', components: false })],
       },
       slots: {
-        default: () => h(WdInput, { modelValue: '', 'onUpdate:modelValue': () => undefined }),
+        default: () => h(RdInput, { modelValue: '', 'onUpdate:modelValue': () => undefined }),
       },
     })
-    expect(wrapper.get('.wd-input').classes()).toContain('wd-input--small')
-    expect(wrapper.get('.wd-config-provider').attributes('data-wd-density')).toBe('compact')
+    expect(wrapper.get('.rd-input').classes()).toContain('rd-input--small')
+    expect(wrapper.get('.rd-config-provider').attributes('data-rd-density')).toBe('compact')
   })
 
   it('applyTheme writes data-theme on documentElement', () => {
@@ -160,11 +160,11 @@ describe('wdConfigProvider', () => {
     document.documentElement.dataset.theme = 'light'
     const Probe = defineComponent({
       setup() {
-        const config = useWdConfig()
+        const config = useRdConfig()
         return () => h('span', { 'data-theme': String(config.value.theme) })
       },
     })
-    const wrapper = mount(WdConfigProvider, {
+    const wrapper = mount(RdConfigProvider, {
       props: { theme: 'dark', zIndex: 2400, globalDensity: true },
       attachTo: document.body,
       slots: { default: () => h(Probe) },
@@ -173,21 +173,21 @@ describe('wdConfigProvider', () => {
     await flushPromises()
     expect(wrapper.get('span').attributes('data-theme')).toBe('dark')
     expect(document.documentElement.dataset.theme).toBe('dark')
-    expect(document.documentElement.style.getPropertyValue('--wd-z-base')).toBe('2400')
+    expect(document.documentElement.style.getPropertyValue('--rd-z-base')).toBe('2400')
     wrapper.unmount()
     expect(document.documentElement.dataset.theme).toBe('light')
   })
 
   it('cleans up z-index base on unmount', async () => {
-    document.documentElement.style.setProperty('--wd-z-base', '1000')
-    const wrapper = mount(WdConfigProvider, {
+    document.documentElement.style.setProperty('--rd-z-base', '1000')
+    const wrapper = mount(RdConfigProvider, {
       props: { zIndex: 2400, globalDensity: true },
       slots: { default: () => h('span', 'x') },
     })
     await nextTick()
     await flushPromises()
-    expect(document.documentElement.style.getPropertyValue('--wd-z-base')).toBe('2400')
+    expect(document.documentElement.style.getPropertyValue('--rd-z-base')).toBe('2400')
     wrapper.unmount()
-    expect(document.documentElement.style.getPropertyValue('--wd-z-base')).toBe('1000')
+    expect(document.documentElement.style.getPropertyValue('--rd-z-base')).toBe('1000')
   })
 })

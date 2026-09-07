@@ -1,4 +1,4 @@
-import type { WdAppendTo } from '../../shared/overlay'
+import type { RdAppendTo } from '../../shared/overlay'
 
 export type PopoverPlacement =
   | 'top'
@@ -27,7 +27,7 @@ export interface PopoverProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: RdAppendTo
 }
 
 export interface PopoverEmits {

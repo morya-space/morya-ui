@@ -1,5 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 import type {
   FormFieldValidator,
   FormItemRule,
@@ -12,12 +12,12 @@ import type {
 
 export type { FormFieldValidator }
 
-export interface WdFormFieldRegistration {
+export interface RdFormFieldRegistration {
   name: string
   validate: FormFieldValidator
 }
 
-export interface WdFormContext {
+export interface RdFormContext {
   model?: FormModel
   rules?: FormRules
   labelPosition: FormLabelPosition
@@ -25,16 +25,16 @@ export interface WdFormContext {
   labelWidth?: string | number
   requireMark: boolean
   disabled: boolean
-  size?: WdSizeInput
+  size?: RdSizeInput
   validateOn: FormValidateTrigger[]
-  registerField: (field: WdFormFieldRegistration) => void
+  registerField: (field: RdFormFieldRegistration) => void
   unregisterField: (name: string) => void
   notifyBlur: (name: string) => void
   notifyChange: (name: string) => void
   notifyInput: (name: string) => void
 }
 
-export const WD_FORM_KEY: InjectionKey<ComputedRef<WdFormContext>> = Symbol('wdForm')
-export const WD_FORM_ERRORS_KEY: InjectionKey<Record<string, string>> = Symbol('wdFormErrors')
+export const RD_FORM_KEY: InjectionKey<ComputedRef<RdFormContext>> = Symbol('rdForm')
+export const RD_FORM_ERRORS_KEY: InjectionKey<Record<string, string>> = Symbol('rdFormErrors')
 
 export type { FormItemRule }

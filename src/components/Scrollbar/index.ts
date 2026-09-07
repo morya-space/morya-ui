@@ -1,5 +1,5 @@
 import './style'
-export { default as WdScrollbar } from './Scrollbar.vue'
+export { default as RdScrollbar } from './Scrollbar.vue'
 export type {
   ScrollbarAriaOrientation,
   ScrollbarDirection,

@@ -1,21 +1,21 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdButtonGroup from './ButtonGroup.vue'
+import RdButtonGroup from './ButtonGroup.vue'
 
-describe('wdButtonGroup', () => {
+describe('rdButtonGroup', () => {
   it('groups buttons and can stretch fluid', () => {
-    const wrapper = mount(WdButtonGroup, {
+    const wrapper = mount(RdButtonGroup, {
       props: { fluid: true, ariaLabel: 'Align' },
       slots: {
         default: [
-          '<button class="wd-button">Left</button>',
-          '<button class="wd-button">Right</button>',
+          '<button class="rd-button">Left</button>',
+          '<button class="rd-button">Right</button>',
         ],
       },
     })
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wd-button-group', 'wd-button-group--fluid']))
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['rd-button-group', 'rd-button-group--fluid']))
     expect(wrapper.attributes('role')).toBe('group')
     expect(wrapper.attributes('aria-label')).toBe('Align')
-    expect(wrapper.findAll('.wd-button')).toHaveLength(2)
+    expect(wrapper.findAll('.rd-button')).toHaveLength(2)
   })
 })

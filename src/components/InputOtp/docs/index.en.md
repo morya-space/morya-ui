@@ -11,21 +11,21 @@ Split a string across multiple single-character inputs.
 ## Import
 
 ```ts
-import { WdInputOtp } from '@wex-design/ui'
+import { RdInputOtp } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputOtp } from '@wex-design/ui'
+import { RdInputOtp } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const code = ref('')
 </script>
 
 <template>
-  <WdInputOtp v-model="code" :length="4" integer-only />
+  <RdInputOtp v-model="code" :length="4" integer-only />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const code = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputOtp } from '@wex-design/ui'
+import { RdInputOtp } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const code = ref('')
 </script>
 
 <template>
-  <WdInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
+  <RdInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
 </template>
 ```
 

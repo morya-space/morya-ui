@@ -6,19 +6,19 @@ description: Combine an input with prefix and suffix addons into one control gro
 
 # InputGroup
 
-Combine an input with prefix and suffix addons. Use `WdInputGroupAddon` for addons, or add the `wd-inputgroup-addon` class manually.
+Combine an input with prefix and suffix addons. Use `RdInputGroupAddon` for addons, or add the `rd-inputgroup-addon` class manually.
 
 ## Import
 
 ```ts
-import { WdInput, WdInputGroup, WdInputGroupAddon } from '@wex-design/ui'
+import { RdInput, RdInputGroup, RdInputGroupAddon } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput, WdInputGroup, WdInputGroupAddon } from '@wex-design/ui'
+import { RdInput, RdInputGroup, RdInputGroupAddon } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const price = ref('')
@@ -27,15 +27,15 @@ const url = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdInputGroup>
-      <WdInputGroupAddon>$</WdInputGroupAddon>
-      <WdInput v-model="price" placeholder="Price" fluid />
-      <WdInputGroupAddon>.00</WdInputGroupAddon>
-    </WdInputGroup>
-    <WdInputGroup>
-      <WdInputGroupAddon>https://</WdInputGroupAddon>
-      <WdInput v-model="url" placeholder="example.com" fluid />
-    </WdInputGroup>
+    <RdInputGroup>
+      <RdInputGroupAddon>$</RdInputGroupAddon>
+      <RdInput v-model="price" placeholder="Price" fluid />
+      <RdInputGroupAddon>.00</RdInputGroupAddon>
+    </RdInputGroup>
+    <RdInputGroup>
+      <RdInputGroupAddon>https://</RdInputGroupAddon>
+      <RdInput v-model="url" placeholder="example.com" fluid />
+    </RdInputGroup>
   </div>
 </template>
 ```
@@ -46,7 +46,7 @@ const url = ref('')
 | --- | --- |
 | `default` | Addons and input controls. |
 
-The addon component only provides a default slot; its root element class is `wd-inputgroup-addon`.
+The addon component only provides a default slot; its root element class is `rd-inputgroup-addon`.
 
 ## Events
 

@@ -1,8 +1,8 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 import type { IconName } from './icons'
 
 export type { IconName } from './icons'
-export type IconSize = WdSizeInput
+export type IconSize = RdSizeInput
 
 export interface IconProps {
   /** Built-in system icon. Omit when using the default slot for custom SVG / Lucide. */

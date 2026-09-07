@@ -11,14 +11,14 @@ Select a value step by step from nested options.
 ## Import
 
 ```ts
-import { WdCascadeSelect } from '@wex-design/ui'
+import { RdCascadeSelect } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdCascadeSelect } from '@wex-design/ui'
+import { RdCascadeSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | null>(null)
@@ -36,7 +36,7 @@ const options = [
 </script>
 
 <template>
-  <WdCascadeSelect v-model="value" :options="options" placeholder="Select a category" />
+  <RdCascadeSelect v-model="value" :options="options" placeholder="Select a category" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdCascadeSelect } from '@wex-design/ui'
+import { RdCascadeSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const a = ref(null)
@@ -58,9 +58,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WdCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <WdCascadeSelect v-model="b" :options="options" placeholder="Default" />
-    <WdCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <RdCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <RdCascadeSelect v-model="b" :options="options" placeholder="Default" />
+    <RdCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -79,7 +79,7 @@ const options = [
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Form required hint. |
-| `size` | `WdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `RdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `clearable` | `boolean` | `false` | Show clear button when a value is selected (hover suffix slot). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |

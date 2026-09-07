@@ -6,29 +6,29 @@ description: CSS Grid layout with GridItem span / offset control.
 
 # Grid
 
-24-column grid layout (override with `cols`). Use `WdGridItem` (alias `WdGi`) as children.
+24-column grid layout (override with `cols`). Use `RdGridItem` (alias `RdGi`) as children.
 
 ## Import
 
 ```ts
-import { WdGrid, WdGridItem } from '@wex-design/ui'
+import { RdGrid, RdGridItem } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdGrid, WdGridItem } from '@wex-design/ui'
+import { RdGrid, RdGridItem } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdGrid :cols="4" :x-gap="12" :y-gap="12">
-    <WdGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
+  <RdGrid :cols="4" :x-gap="12" :y-gap="12">
+    <RdGridItem v-for="n in 4" :key="n" :span="1">
+      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
         {{ n }}
       </div>
-    </WdGridItem>
-  </WdGrid>
+    </RdGridItem>
+  </RdGrid>
 </template>
 ```
 
@@ -36,22 +36,22 @@ import { WdGrid, WdGridItem } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdGrid, WdGridItem } from '@wex-design/ui'
+import { RdGrid, RdGridItem } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdGrid :cols="6" :x-gap="12" :y-gap="12">
-    <WdGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
+  <RdGrid :cols="6" :x-gap="12" :y-gap="12">
+    <RdGridItem :span="2">
+      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
         span 2
       </div>
-    </WdGridItem>
-    <WdGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
+    </RdGridItem>
+    <RdGridItem :span="2" :offset="1">
+      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
         offset 1
       </div>
-    </WdGridItem>
-  </WdGrid>
+    </RdGridItem>
+  </RdGrid>
 </template>
 ```
 
@@ -63,17 +63,17 @@ When `cols` / gaps are plain numbers but items still need responsive `span`, ena
 
 ```vue preview
 <script setup lang="ts">
-import { WdGrid, WdGridItem } from '@wex-design/ui'
+import { RdGrid, RdGridItem } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <WdGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
+  <RdGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
+    <RdGridItem v-for="n in 4" :key="n" span="1 m:2">
+      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
         {{ n }}
       </div>
-    </WdGridItem>
-  </WdGrid>
+    </RdGridItem>
+  </RdGrid>
 </template>
 ```
 
@@ -81,7 +81,7 @@ import { WdGrid, WdGridItem } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdGrid, WdGridItem } from '@wex-design/ui'
+import { RdButton, RdGrid, RdGridItem } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)
@@ -89,21 +89,21 @@ const collapsed = ref(true)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WdButton size="small" :label="collapsed ? 'Expand' : 'Collapse'" @click="collapsed = !collapsed" />
-    <WdGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <WdGridItem v-for="n in 6" :key="n" :span="1">
-        <div style="padding:0.5rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
+    <RdButton size="small" :label="collapsed ? 'Expand' : 'Collapse'" @click="collapsed = !collapsed" />
+    <RdGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
+      <RdGridItem v-for="n in 6" :key="n" :span="1">
+        <div style="padding:0.5rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
           {{ n }}
         </div>
-      </WdGridItem>
-      <WdGridItem suffix :span="1">
+      </RdGridItem>
+      <RdGridItem suffix :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+          <div style="padding:0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
             {{ overflow ? 'More…' : 'All' }}
           </div>
         </template>
-      </WdGridItem>
-    </WdGrid>
+      </RdGridItem>
+    </RdGrid>
   </div>
 </template>
 ```

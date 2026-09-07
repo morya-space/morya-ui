@@ -11,21 +11,21 @@ description: 星级评分控件，支持清除与只读。
 ## 引入
 
 ```ts
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WdRating v-model="value" />
+  <RdRating v-model="value" />
 </template>
 ```
 
@@ -33,11 +33,11 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdRating :model-value="4" readonly :cancel="false" />
+  <RdRating :model-value="4" readonly :cancel="false" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { WdRating } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)
 </script>
 
 <template>
-  <WdRating v-model="value" allow-half />
+  <RdRating v-model="value" allow-half />
 </template>
 ```
 
@@ -74,7 +74,7 @@ const value = ref(2.5)
 | `helpText` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `WdSizeInput` | — | — |
+| `size` | `RdSizeInput` | — | — |
 
 ## Events
 

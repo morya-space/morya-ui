@@ -23,17 +23,17 @@ const statusTone = computed(() => {
 })
 
 const progressClass = computed(() => [
-  'wd-progressbar',
+  'rd-progressbar',
   {
-    'wd-progressbar--indeterminate': isIndeterminate.value,
-    'wd-progressbar--circle': isCircle.value,
-    [`wd-progressbar--${statusTone.value}`]: Boolean(statusTone.value),
-    'wd-progressbar--custom': Boolean(props.color),
+    'rd-progressbar--indeterminate': isIndeterminate.value,
+    'rd-progressbar--circle': isCircle.value,
+    [`rd-progressbar--${statusTone.value}`]: Boolean(statusTone.value),
+    'rd-progressbar--custom': Boolean(props.color),
   },
 ])
 
 const progressStyle = computed(() =>
-  props.color ? { '--wd-progressbar-fill': props.color } : undefined,
+  props.color ? { '--rd-progressbar-fill': props.color } : undefined,
 )
 
 const valueStyle = computed(() =>
@@ -59,10 +59,10 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
     :aria-valuemax="isIndeterminate ? undefined : 100"
     :aria-valuenow="isIndeterminate ? undefined : clampedValue"
   >
-    <svg v-if="isCircle" class="wd-progressbar__circle" viewBox="0 0 100 100" aria-hidden="true">
-      <circle class="wd-progressbar__circle-track" cx="50" cy="50" r="42" fill="none" />
+    <svg v-if="isCircle" class="rd-progressbar__circle" viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="rd-progressbar__circle-track" cx="50" cy="50" r="42" fill="none" />
       <circle
-        class="wd-progressbar__circle-value"
+        class="rd-progressbar__circle-value"
         cx="50"
         cy="50"
         r="42"
@@ -71,9 +71,9 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
         :stroke-dashoffset="isIndeterminate ? undefined : circleDash.offset"
       />
     </svg>
-    <div v-else class="wd-progressbar__value" :style="valueStyle">
-      <span v-if="showValue && !isIndeterminate" class="wd-progressbar__label">{{ labelText }}</span>
+    <div v-else class="rd-progressbar__value" :style="valueStyle">
+      <span v-if="showValue && !isIndeterminate" class="rd-progressbar__label">{{ labelText }}</span>
     </div>
-    <span v-if="isCircle && showValue && !isIndeterminate" class="wd-progressbar__circle-label">{{ labelText }}</span>
+    <span v-if="isCircle && showValue && !isIndeterminate" class="rd-progressbar__circle-label">{{ labelText }}</span>
   </div>
 </template>

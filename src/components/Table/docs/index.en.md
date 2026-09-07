@@ -6,7 +6,7 @@ description: Data table with sorting, filtering, selection, pagination, frozen c
 
 # Table
 
-`WdTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.
+`RdTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.
 
 Column width rules:
 
@@ -17,15 +17,15 @@ Column width rules:
 ## Import
 
 ```ts
-import { WdTable, WdTag } from '@wex-design/ui'
-import type { TableColumnDefinition, TableItem } from '@wex-design/ui'
+import { RdTable, RdTag } from '@roost-design/ui'
+import type { TableColumnDefinition, TableItem } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdTable, WdTag } from '@wex-design/ui'
+import { RdTable, RdTag } from '@roost-design/ui'
 
 const columns = [
   { key: 'name', label: 'Project', minWidth: 140, sortable: true },
@@ -39,14 +39,14 @@ const rows = [
 </script>
 
 <template>
-  <WdTable :columns="columns" :rows="rows" striped bordered>
+  <RdTable :columns="columns" :rows="rows" striped bordered>
     <template #cell-status="{ value }">
-      <WdTag
+      <RdTag
         :value="String(value)"
         :severity="value === 'Published' ? 'success' : 'secondary'"
       />
     </template>
-  </WdTable>
+  </RdTable>
 </template>
 ```
 
@@ -56,7 +56,7 @@ Use `selection-mode="multiple"` with `v-model:selection`, or `selection-mode="si
 
 ```vue preview
 <script setup lang="ts">
-import { WdTable } from '@wex-design/ui'
+import { RdTable } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -71,7 +71,7 @@ const selection = ref<Record<string, unknown>[]>([])
 </script>
 
 <template>
-  <WdTable
+  <RdTable
     v-model:selection="selection"
     :columns="columns"
     :rows="rows"
@@ -88,7 +88,7 @@ Use `search-value` / `filter-options` for client filtering. Enable `paginator` w
 
 ```vue preview
 <script setup lang="ts">
-import { WdTable } from '@wex-design/ui'
+import { RdTable } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -105,7 +105,7 @@ const page = ref(1)
 </script>
 
 <template>
-  <WdTable
+  <RdTable
     v-model:page="page"
     :columns="columns"
     :rows="rows"
@@ -121,7 +121,7 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 
 ```vue preview
 <script setup lang="ts">
-import { WdTable } from '@wex-design/ui'
+import { RdTable } from '@roost-design/ui'
 
 const columns = [
   { key: 'name', label: 'Name' },
@@ -131,11 +131,11 @@ const rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]
 </script>
 
 <template>
-  <WdTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
+  <RdTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
     <template #expansion="{ row }">
       {{ row.extra }}
     </template>
-  </WdTable>
+  </RdTable>
 </template>
 ```
 
@@ -143,7 +143,7 @@ const rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdTable } from '@wex-design/ui'
+import { RdButton, RdTable } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -155,8 +155,8 @@ const columns = [
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WdButton :label="loading ? 'Stop loading' : 'Start loading'" @click="loading = !loading" />
-    <WdTable
+    <RdButton :label="loading ? 'Stop loading' : 'Start loading'" @click="loading = !loading" />
+    <RdTable
       :columns="columns"
       :rows="[]"
       :loading="loading"

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { InputNumberProps } from './types'
 import { computed, ref, useAttrs, watch } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useWdId } from '../../shared/useWdId'
+import { useRdId } from '../../shared/useRdId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
-import WdIcon from '../Icon/Icon.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -27,23 +27,23 @@ const emit = defineEmits<{
   (event: 'change', value: number | null): void
 }>()
 const attrs = useAttrs()
-const locale = useWdLocale()
+const locale = useRdLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useWdId('wd-inputnumber')
+const autoInputId = useRdId('rd-inputnumber')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputNumber', () => props.size)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const showClear = computed(() => props.clearable && props.modelValue != null && !props.disabled)
 
 const rootClass = computed(() => [
-  'wd-inputnumber',
-  `wd-inputnumber--${sizeClass.value}`,
+  'rd-inputnumber',
+  `rd-inputnumber--${sizeClass.value}`,
   {
-    'wd-inputnumber--fluid': props.fluid,
-    'wd-inputnumber--invalid': isInvalid.value,
-    'wd-inputnumber--disabled': props.disabled,
-    'wd-inputnumber--buttons': props.showButtons,
-    'wd-inputnumber--buttons-right': props.showButtons && props.buttonPlacement === 'right',
+    'rd-inputnumber--fluid': props.fluid,
+    'rd-inputnumber--invalid': isInvalid.value,
+    'rd-inputnumber--disabled': props.disabled,
+    'rd-inputnumber--buttons': props.showButtons,
+    'rd-inputnumber--buttons-right': props.showButtons && props.buttonPlacement === 'right',
   },
 ])
 
@@ -145,28 +145,28 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="wd-inputnumber-field" :class="{ 'wd-inputnumber-field--fluid': fluid }">
-    <label v-if="label" class="wd-inputnumber-field__label" :for="inputId">{{ label }}</label>
+  <div class="rd-inputnumber-field" :class="{ 'rd-inputnumber-field--fluid': fluid }">
+    <label v-if="label" class="rd-inputnumber-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <button
         v-if="showButtons && buttonPlacement === 'both'"
-        class="wd-inputnumber__button wd-inputnumber__button--decrement"
+        class="rd-inputnumber__button rd-inputnumber__button--decrement"
         type="button"
         :aria-label="locale.decrease"
         :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
         @click="stepBy(-1)"
       >
-        <WdIcon name="minus" size="sm" />
+        <RdIcon name="minus" size="sm" />
       </button>
-      <div class="wd-inputnumber__input-wrap">
-        <span v-if="$slots.prefix" class="wd-inputnumber__prefix">
+      <div class="rd-inputnumber__input-wrap">
+        <span v-if="$slots.prefix" class="rd-inputnumber__prefix">
           <slot name="prefix" />
         </span>
         <input
           v-bind="attrs"
           :id="inputId"
           ref="inputElement"
-          class="wd-inputnumber__input"
+          class="rd-inputnumber__input"
           type="text"
           inputmode="decimal"
           :value="displayValue"
@@ -179,55 +179,55 @@ defineExpose({ focus, blur, select })
           @blur="onBlur"
           @keydown="onInputKeydown"
         >
-        <span v-if="$slots.suffix" class="wd-inputnumber__suffix">
+        <span v-if="$slots.suffix" class="rd-inputnumber__suffix">
           <slot name="suffix" />
         </span>
         <button
           v-if="showClear"
           type="button"
-          class="wd-inputnumber__clear"
+          class="rd-inputnumber__clear"
           :aria-label="locale.clearInput"
           @click="clear"
         >
-          <WdIcon name="close" size="sm" />
+          <RdIcon name="close" size="sm" />
         </button>
       </div>
-      <div v-if="showButtons && buttonPlacement === 'right'" class="wd-inputnumber__stack">
+      <div v-if="showButtons && buttonPlacement === 'right'" class="rd-inputnumber__stack">
         <button
-          class="wd-inputnumber__button wd-inputnumber__button--increment"
+          class="rd-inputnumber__button rd-inputnumber__button--increment"
           type="button"
           :aria-label="locale.increase"
           :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
           @click="stepBy(1)"
         >
-          <WdIcon name="plus" size="sm" />
+          <RdIcon name="plus" size="sm" />
         </button>
         <button
-          class="wd-inputnumber__button wd-inputnumber__button--decrement"
+          class="rd-inputnumber__button rd-inputnumber__button--decrement"
           type="button"
           :aria-label="locale.decrease"
           :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
           @click="stepBy(-1)"
         >
-          <WdIcon name="minus" size="sm" />
+          <RdIcon name="minus" size="sm" />
         </button>
       </div>
       <button
         v-else-if="showButtons"
-        class="wd-inputnumber__button wd-inputnumber__button--increment"
+        class="rd-inputnumber__button rd-inputnumber__button--increment"
         type="button"
         :aria-label="locale.increase"
         :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
         @click="stepBy(1)"
       >
-        <WdIcon name="plus" size="sm" />
+        <RdIcon name="plus" size="sm" />
       </button>
     </div>
     <span
       v-if="feedbackText"
       :id="`${inputId}-help`"
-      class="wd-inputnumber-field__help"
-      :class="{ 'wd-inputnumber-field__help--invalid': feedbackIsError }"
+      class="rd-inputnumber-field__help"
+      :class="{ 'rd-inputnumber-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

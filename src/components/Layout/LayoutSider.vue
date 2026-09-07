@@ -2,15 +2,15 @@
 import type { CSSProperties, StyleValue } from "vue";
 import type { LayoutExpose, LayoutSiderProps } from "./types";
 import { computed, inject, ref } from "vue";
-import { useWdLocale } from "../../locale";
+import { useRdLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
-import WdIcon from "../Icon/Icon.vue";
+import RdIcon from "../Icon/Icon.vue";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
-import { WD_LAYOUT_KEY } from "./context";
+import { RD_LAYOUT_KEY } from "./context";
 import { resolveLayoutTrigger } from "./utils";
 
-defineOptions({ name: "WdLayoutSider" });
+defineOptions({ name: "RdLayoutSider" });
 
 const props = withDefaults(defineProps<LayoutSiderProps>(), {
     bordered: false,
@@ -31,23 +31,23 @@ const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
 
-const locale = useWdLocale();
-const layout = inject(WD_LAYOUT_KEY, null);
+const locale = useRdLocale();
+const layout = inject(RD_LAYOUT_KEY, null);
 const scrollEl = ref<HTMLElement | null>(null);
 const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 const { mergedCollapsed, toggle } = useLayoutSiderCollapse(props, emit);
 
 const siderPlacement = computed(() => layout?.siderPlacement ?? "left");
 
-/** Explicit prop values only — defaults live in `.wd-layout-sider` CSS. */
+/** Explicit prop values only — defaults live in `.rd-layout-sider` CSS. */
 const expandedWidth = computed(() => toCssLength(props.width));
 const collapsedWidth = computed(() => toCssLength(props.collapsedWidth));
 
 const effectiveExpandedWidth = computed(
-    () => expandedWidth.value ?? "var(--wd-layout-sider-width)",
+    () => expandedWidth.value ?? "var(--rd-layout-sider-width)",
 );
 const effectiveCollapsedWidth = computed(
-    () => collapsedWidth.value ?? "var(--wd-layout-sider-collapsed-width)",
+    () => collapsedWidth.value ?? "var(--rd-layout-sider-collapsed-width)",
 );
 
 const layoutWidth = computed(() =>
@@ -63,15 +63,15 @@ const showContent = computed(
 );
 
 const rootClass = computed(() => [
-    "wd-layout-sider",
-    `wd-layout-sider--${props.position}-positioned`,
-    `wd-layout-sider--${siderPlacement.value}-placement`,
-    `wd-layout-sider--collapse-${props.collapseMode}`,
+    "rd-layout-sider",
+    `rd-layout-sider--${props.position}-positioned`,
+    `rd-layout-sider--${siderPlacement.value}-placement`,
+    `rd-layout-sider--collapse-${props.collapseMode}`,
     {
-        "wd-layout-sider--bordered": props.bordered,
-        "wd-layout-sider--inverted": props.inverted,
-        "wd-layout-sider--collapsed": mergedCollapsed.value,
-        "wd-layout-sider--show-content": showContent.value,
+        "rd-layout-sider--bordered": props.bordered,
+        "rd-layout-sider--inverted": props.inverted,
+        "rd-layout-sider--collapsed": mergedCollapsed.value,
+        "rd-layout-sider--show-content": showContent.value,
     },
 ]);
 
@@ -81,7 +81,7 @@ const rootStyle = computed(() => {
         minWidth: "0",
         borderRadius:
             props.radius == null
-                ? "var(--wd-layout-radius, 0)"
+                ? "var(--rd-layout-radius, 0)"
                 : toCssLength(props.radius)!,
         width: isWidthMode ? layoutWidth.value : effectiveExpandedWidth.value,
         maxWidth: layoutWidth.value,
@@ -91,19 +91,19 @@ const rootStyle = computed(() => {
         expandedWidth.value &&
         !isSelfReferencingCssVar(
             expandedWidth.value,
-            "--wd-layout-sider-width",
+            "--rd-layout-sider-width",
         )
     ) {
-        style["--wd-layout-sider-width"] = expandedWidth.value;
+        style["--rd-layout-sider-width"] = expandedWidth.value;
     }
     if (
         collapsedWidth.value &&
         !isSelfReferencingCssVar(
             collapsedWidth.value,
-            "--wd-layout-sider-collapsed-width",
+            "--rd-layout-sider-collapsed-width",
         )
     ) {
-        style["--wd-layout-sider-collapsed-width"] = collapsedWidth.value;
+        style["--rd-layout-sider-collapsed-width"] = collapsedWidth.value;
     }
 
     return style;
@@ -111,7 +111,7 @@ const rootStyle = computed(() => {
 
 const siderPadding = computed(() =>
     props.padding == null
-        ? "var(--wd-layout-padding, var(--wd-space-4))"
+        ? "var(--rd-layout-padding, var(--rd-space-4))"
         : toCssLength(props.padding),
 );
 
@@ -126,7 +126,7 @@ const scrollStyle = computed((): StyleValue => {
 });
 
 const scrollClass = computed(() => [
-    "wd-layout-sider__scroll",
+    "rd-layout-sider__scroll",
     props.contentClass,
 ]);
 
@@ -165,12 +165,12 @@ defineExpose<LayoutExpose>({ scrollTo });
     <button
       v-if="triggerKind"
       type="button"
-      class="wd-layout-sider__trigger"
+      class="rd-layout-sider__trigger"
       :class="[
         triggerClass,
         {
-          'wd-layout-sider__trigger--bar': triggerKind === 'bar',
-          'wd-layout-sider__trigger--arrow-circle':
+          'rd-layout-sider__trigger--bar': triggerKind === 'bar',
+          'rd-layout-sider__trigger--arrow-circle':
             triggerKind === 'arrow-circle',
         },
       ]"
@@ -181,20 +181,20 @@ defineExpose<LayoutExpose>({ scrollTo });
     >
       <span
         v-if="triggerKind === 'arrow-circle'"
-        class="wd-layout-sider__arrow"
+        class="rd-layout-sider__arrow"
         aria-hidden="true"
       >
-        <WdIcon name="chevron-right" size="sm" />
+        <RdIcon name="chevron-right" size="sm" />
       </span>
-      <span v-else class="wd-layout-sider__bar" aria-hidden="true">
-        <i class="wd-layout-sider__bar-top" />
-        <i class="wd-layout-sider__bar-bottom" />
+      <span v-else class="rd-layout-sider__bar" aria-hidden="true">
+        <i class="rd-layout-sider__bar-top" />
+        <i class="rd-layout-sider__bar-bottom" />
       </span>
     </button>
 
     <div
       v-if="bordered"
-      class="wd-layout-sider__border"
+      class="rd-layout-sider__border"
       aria-hidden="true"
     />
   </aside>

@@ -11,14 +11,14 @@ description: 多段占比计量条。
 ## 引入
 
 ```ts
-import { WdMeterGroup } from '@wex-design/ui'
+import { RdMeterGroup } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdMeterGroup } from '@wex-design/ui'
+import { RdMeterGroup } from '@roost-design/ui'
 
 const value = [
   { label: '应用', value: 45, color: '#2563eb' },
@@ -28,7 +28,7 @@ const value = [
 </script>
 
 <template>
-  <WdMeterGroup :value="value" :max="100" />
+  <RdMeterGroup :value="value" :max="100" />
 </template>
 ```
 

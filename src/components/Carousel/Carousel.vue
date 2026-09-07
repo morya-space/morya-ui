@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { CarouselProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useRdLocale } from '../../locale'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   numVisible: 1,
@@ -19,7 +19,7 @@ const emit = defineEmits<{
 
 const innerPage = ref(0)
 const page = computed(() => props.page ?? innerPage.value)
-const locale = useWdLocale()
+const locale = useRdLocale()
 let timer: ReturnType<typeof setInterval> | null = null
 
 const maxPage = computed(() => Math.max(0, props.value.length - props.numVisible))
@@ -124,7 +124,7 @@ onBeforeUnmount(stopAutoplay)
 
 <template>
   <div
-    class="wd-carousel"
+    class="rd-carousel"
     @keydown="onKeydown"
     @mouseenter="stopAutoplay"
     @mouseleave="startAutoplay"
@@ -134,16 +134,16 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="wd-carousel__nav wd-carousel__nav--prev"
+      class="rd-carousel__nav rd-carousel__nav--prev"
       :aria-label="locale.prev"
       :disabled="!circular && page <= 0"
       @click="prev"
     >
-      <WdIcon name="chevron-left" size="sm" />
+      <RdIcon name="chevron-left" size="sm" />
     </button>
-    <div class="wd-carousel__main">
+    <div class="rd-carousel__main">
       <div
-        class="wd-carousel__viewport"
+        class="rd-carousel__viewport"
         @pointerdown="onPointerDown"
         @pointerup="onPointerUp"
         @pointercancel="onPointerCancel"
@@ -151,7 +151,7 @@ onBeforeUnmount(stopAutoplay)
         <div
           v-for="entry in visibleItems"
           :key="entry.index"
-          class="wd-carousel__item"
+          class="rd-carousel__item"
           :style="{ flex: `0 0 ${100 / numVisible}%` }"
         >
           <slot name="item" :item="entry.item" :index="entry.index">
@@ -159,13 +159,13 @@ onBeforeUnmount(stopAutoplay)
           </slot>
         </div>
       </div>
-      <div v-if="showIndicators && pages.length > 1" class="wd-carousel__indicators">
+      <div v-if="showIndicators && pages.length > 1" class="rd-carousel__indicators">
         <button
           v-for="index in pages"
           :key="index"
           type="button"
-          class="wd-carousel__indicator"
-          :class="{ 'wd-carousel__indicator--active': index === page }"
+          class="rd-carousel__indicator"
+          :class="{ 'rd-carousel__indicator--active': index === page }"
           :aria-label="indicatorLabel(index)"
           :aria-current="index === page ? 'true' : undefined"
           @click="go(index)"
@@ -175,12 +175,12 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="wd-carousel__nav wd-carousel__nav--next"
+      class="rd-carousel__nav rd-carousel__nav--next"
       :aria-label="locale.next"
       :disabled="!circular && page >= maxPage"
       @click="next"
     >
-      <WdIcon name="chevron-right" size="sm" />
+      <RdIcon name="chevron-right" size="sm" />
     </button>
   </div>
 </template>

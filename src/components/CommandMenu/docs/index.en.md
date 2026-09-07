@@ -11,14 +11,14 @@ Searchable command palette for running actions from `model`. Fits global shortcu
 ## Import
 
 ```ts
-import { WdCommandMenu, type CommandMenuItem } from '@wex-design/ui'
+import { RdCommandMenu, type CommandMenuItem } from '@roost-design/ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdCommandMenu } from '@wex-design/ui'
+import { RdButton, RdCommandMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -30,8 +30,8 @@ const model = [
 </script>
 
 <template>
-  <WdButton label="Open command menu" @click="visible = true" />
-  <WdCommandMenu v-model="visible" :model="model" placeholder="Search commands…" />
+  <RdButton label="Open command menu" @click="visible = true" />
+  <RdCommandMenu v-model="visible" :model="model" placeholder="Search commands…" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ const model = [
 | Field | Type | Description |
 | --- | --- | --- |
 | `label` | `string` | Display text; included in local filtering. |
-| `icon` | `string` | Optional leading character (not a WdIcon name). |
+| `icon` | `string` | Optional leading character (not a RdIcon name). |
 | `shortcut` | `string` | Optional shortcut hint. |
 | `command` | `() => void` | Runs on activate; closes the palette afterward. |
 | `disabled` | `boolean` | Disabled items cannot be activated. |

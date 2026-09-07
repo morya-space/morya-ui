@@ -11,21 +11,21 @@ description: 密码输入框，支持显示/隐藏与强度提示。
 ## 引入
 
 ```ts
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" />
+  <RdInputPassword v-model="value" label="Password" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" feedback />
+  <RdInputPassword v-model="value" label="Password" feedback />
 </template>
 ```
 
@@ -50,7 +50,7 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdIcon, WdInputPassword } from '@wex-design/ui'
+import { RdIcon, RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const byProp = ref('')
@@ -59,15 +59,15 @@ const bySlot = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;max-width:20rem">
-    <WdInputPassword v-model="byProp" label="属性替换" show-icon="unlock" hide-icon="lock" />
-    <WdInputPassword v-model="bySlot" label="插槽替换">
+    <RdInputPassword v-model="byProp" label="属性替换" show-icon="unlock" hide-icon="lock" />
+    <RdInputPassword v-model="bySlot" label="插槽替换">
       <template #showIcon>
-        <WdIcon name="search" size="sm" />
+        <RdIcon name="search" size="sm" />
       </template>
       <template #hideIcon>
-        <WdIcon name="close" size="sm" />
+        <RdIcon name="close" size="sm" />
       </template>
-    </WdInputPassword>
+    </RdInputPassword>
   </div>
 </template>
 ```
@@ -78,14 +78,14 @@ const bySlot = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('secret')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
+  <RdInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
 </template>
 ```
 
@@ -93,14 +93,14 @@ const value = ref('secret')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputPassword } from '@wex-design/ui'
+import { RdInputPassword } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('draft-pass')
 </script>
 
 <template>
-  <WdInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
+  <RdInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
 </template>
 ```
 

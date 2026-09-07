@@ -1,38 +1,38 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
-import { wdComponents } from '../../component-registry'
-import { createWexDesign, WexDesign } from '../../shared/config'
-import WdButton from '../Button/Button.vue'
+import { rdComponents } from '../../component-registry'
+import { createRoostDesign, RoostDesign } from '../../shared/config'
+import RdButton from '../Button/Button.vue'
 
-describe('createWexDesign / WexDesign installer', () => {
+describe('createRoostDesign / RoostDesign installer', () => {
   it('registers all components globally by default', () => {
     const Host = defineComponent({
-      template: '<WdButton label="Go" />',
+      template: '<RdButton label="Go" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWexDesign()],
+        plugins: [createRoostDesign()],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Go')
-    expect(Object.keys(wdComponents).length).toBeGreaterThan(50)
+    expect(Object.keys(rdComponents).length).toBeGreaterThan(50)
   })
 
-  it('accepts options via app.use(WexDesign, options)', () => {
+  it('accepts options via app.use(RoostDesign, options)', () => {
     const Host = defineComponent({
-      template: '<WdButton label="Sized" />',
+      template: '<RdButton label="Sized" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [[WexDesign, { size: 'small' }]],
+        plugins: [[RoostDesign, { size: 'small' }]],
       },
     })
 
-    expect(wrapper.get('.wd-button').classes()).toContain('wd-button--small')
+    expect(wrapper.get('.rd-button').classes()).toContain('rd-button--small')
   })
 
   it('skips component registration when components is false', () => {
@@ -44,26 +44,26 @@ describe('createWexDesign / WexDesign installer', () => {
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWexDesign({ components: false, size: 'large' })],
+        plugins: [createRoostDesign({ components: false, size: 'large' })],
       },
     })
 
-    expect(wrapper.vm.$.appContext.components.WdButton).toBeUndefined()
-    expect(wrapper.vm.$.appContext.config.globalProperties.$wd?.size).toBe('large')
+    expect(wrapper.vm.$.appContext.components.RdButton).toBeUndefined()
+    expect(wrapper.vm.$.appContext.config.globalProperties.$rd?.size).toBe('large')
   })
 
   it('registers a partial component list', () => {
     const Host = defineComponent({
-      template: '<WdButton label="Only" />',
+      template: '<RdButton label="Only" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWexDesign({ components: [WdButton] })],
+        plugins: [createRoostDesign({ components: [RdButton] })],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Only')
-    expect(wrapper.vm.$.appContext.components.WdInput).toBeUndefined()
+    expect(wrapper.vm.$.appContext.components.RdInput).toBeUndefined()
   })
 })

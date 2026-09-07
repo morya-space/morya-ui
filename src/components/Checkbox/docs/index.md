@@ -11,21 +11,21 @@ description: 复选框。二进制 modelValue，支持 invalid。
 ## 引入
 
 ```ts
-import { WdCheckbox } from '@wex-design/ui'
+import { RdCheckbox } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdCheckbox } from '@wex-design/ui'
+import { RdCheckbox } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const accepted = ref(false)
 </script>
 
 <template>
-  <WdCheckbox v-model="accepted" label="Accept terms and conditions" />
+  <RdCheckbox v-model="accepted" label="Accept terms and conditions" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdCheckbox } from '@wex-design/ui'
+import { RdCheckbox } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const accepted = ref(false)
 </script>
 
 <template>
-  <WdCheckbox v-model="accepted" invalid label="You must accept to continue" />
+  <RdCheckbox v-model="accepted" invalid label="You must accept to continue" />
 </template>
 ```
 
@@ -48,35 +48,35 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdCheckbox } from '@wex-design/ui'
+import { RdCheckbox } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WdCheckbox :model-value="true" disabled label="Checked disabled" />
-    <WdCheckbox :model-value="false" disabled label="Unchecked disabled" />
+    <RdCheckbox :model-value="true" disabled label="Checked disabled" />
+    <RdCheckbox :model-value="false" disabled label="Unchecked disabled" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WdCheckboxGroup` 以数组为 `v-model`，子项用 `value` 标识。`indeterminate` 表示部分选中。
+`RdCheckboxGroup` 以数组为 `v-model`，子项用 `value` 标识。`indeterminate` 表示部分选中。
 
 ```vue preview
 <script setup lang="ts">
-import { WdCheckbox, WdCheckboxGroup } from '@wex-design/ui'
+import { RdCheckbox, RdCheckboxGroup } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selected = ref(['vue'])
 </script>
 
 <template>
-  <WdCheckboxGroup v-model="selected">
-    <WdCheckbox value="vue" label="Vue" />
-    <WdCheckbox value="react" label="React" />
-    <WdCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
-  </WdCheckboxGroup>
+  <RdCheckboxGroup v-model="selected">
+    <RdCheckbox value="vue" label="Vue" />
+    <RdCheckbox value="react" label="React" />
+    <RdCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
+  </RdCheckboxGroup>
 </template>
 ```
 

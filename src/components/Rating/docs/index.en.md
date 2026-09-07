@@ -11,21 +11,21 @@ Click stars to rate. A clear button is shown by default.
 ## Import
 
 ```ts
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WdRating v-model="value" />
+  <RdRating v-model="value" />
 </template>
 ```
 
@@ -33,11 +33,11 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdRating :model-value="4" readonly :cancel="false" />
+  <RdRating :model-value="4" readonly :cancel="false" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { WdRating } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdRating } from '@wex-design/ui'
+import { RdRating } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)
 </script>
 
 <template>
-  <WdRating v-model="value" allow-half />
+  <RdRating v-model="value" allow-half />
 </template>
 ```
 

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { BreadcrumbItem, BreadcrumbProps } from './types'
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: '/',
 })
-const locale = useWdLocale()
+const locale = useRdLocale()
 
 const items = computed(() => {
   const list: BreadcrumbItem[] = []
@@ -22,9 +22,9 @@ const items = computed(() => {
 </script>
 
 <template>
-  <nav class="wd-breadcrumb" :aria-label="locale.breadcrumb">
-    <ol class="wd-breadcrumb__list">
-      <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="wd-breadcrumb__item">
+  <nav class="rd-breadcrumb" :aria-label="locale.breadcrumb">
+    <ol class="rd-breadcrumb__list">
+      <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="rd-breadcrumb__item">
         <slot
           name="item"
           :item="item"
@@ -33,24 +33,24 @@ const items = computed(() => {
         >
           <a
             v-if="item.to && !item.disabled"
-            class="wd-breadcrumb__link"
+            class="rd-breadcrumb__link"
             :href="item.to"
           >
             {{ item.label }}
           </a>
           <span
             v-else
-            class="wd-breadcrumb__link"
+            class="rd-breadcrumb__link"
             :class="{
-              'wd-breadcrumb__link--current': index === items.length - 1,
-              'wd-breadcrumb__link--disabled': item.disabled,
+              'rd-breadcrumb__link--current': index === items.length - 1,
+              'rd-breadcrumb__link--disabled': item.disabled,
             }"
             :aria-current="index === items.length - 1 ? 'page' : undefined"
           >
             {{ item.label }}
           </span>
         </slot>
-        <span v-if="index < items.length - 1" class="wd-breadcrumb__separator" aria-hidden="true">
+        <span v-if="index < items.length - 1" class="rd-breadcrumb__separator" aria-hidden="true">
           <slot name="separator">{{ separator }}</slot>
         </span>
       </li>

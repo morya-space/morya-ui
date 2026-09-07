@@ -11,14 +11,14 @@ Move items between the source and target lists.
 ## Import
 
 ```ts
-import { WdPickList } from '@wex-design/ui'
+import { RdPickList } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdPickList } from '@wex-design/ui'
+import { RdPickList } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const source = ref(['Apple', 'Banana', 'Cherry', 'Grape'])
@@ -26,7 +26,7 @@ const target = ref(['Durian'])
 </script>
 
 <template>
-  <WdPickList
+  <RdPickList
     v-model:source="source"
     v-model:target="target"
     source-header="Available fruit"
@@ -39,7 +39,7 @@ const target = ref(['Durian'])
 
 ```vue preview
 <script setup lang="ts">
-import { WdPickList } from '@wex-design/ui'
+import { RdPickList } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const source = ref([
@@ -50,11 +50,11 @@ const target = ref([{ id: 3, name: 'Testing' }])
 </script>
 
 <template>
-  <WdPickList v-model:source="source" v-model:target="target" data-key="id">
+  <RdPickList v-model:source="source" v-model:target="target" data-key="id">
     <template #item="{ item }">
       <strong>{{ item.name }}</strong>
     </template>
-  </WdPickList>
+  </RdPickList>
 </template>
 ```
 

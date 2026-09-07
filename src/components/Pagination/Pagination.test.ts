@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdPagination from './Pagination.vue'
+import RdPagination from './Pagination.vue'
 
-describe('wdPagination', () => {
+describe('rdPagination', () => {
   it('emits selected pages and marks the active page', async () => {
-    const wrapper = mount(WdPagination, { props: { modelValue: 2, totalRecords: 40, rows: 10 } })
+    const wrapper = mount(RdPagination, { props: { modelValue: 2, totalRecords: 40, rows: 10 } })
     expect(wrapper.get('[aria-current="page"]').text()).toBe('2')
     await wrapper.get('[aria-label="下一页"]').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
@@ -12,20 +12,20 @@ describe('wdPagination', () => {
   })
 
   it('exposes first as a zero-based record index', () => {
-    const wrapper = mount(WdPagination, { props: { modelValue: 3, totalRecords: 100, rows: 10 } })
+    const wrapper = mount(RdPagination, { props: { modelValue: 3, totalRecords: 100, rows: 10 } })
     expect(wrapper.vm.first).toBe(20)
     expect(wrapper.vm.pageCount).toBe(10)
   })
 
   it('disables boundaries and does not emit when disabled', async () => {
-    const wrapper = mount(WdPagination, { props: { totalRecords: 10, rows: 10, disabled: true } })
+    const wrapper = mount(RdPagination, { props: { totalRecords: 10, rows: 10, disabled: true } })
     expect(wrapper.get('[aria-label="上一页"]').attributes('disabled')).toBeDefined()
     await wrapper.get('[aria-label="下一页"]').trigger('click')
     expect(wrapper.emitted('page')).toBeUndefined()
   })
 
   it('shows a size picker and jumper, and simple mode', async () => {
-    const wrapper = mount(WdPagination, {
+    const wrapper = mount(RdPagination, {
       props: {
         modelValue: 2,
         totalRecords: 100,
@@ -35,18 +35,18 @@ describe('wdPagination', () => {
         showQuickJumper: true,
       },
     })
-    expect(wrapper.get('.wd-pagination__select').element).toBeTruthy()
-    await wrapper.get('.wd-pagination__select').setValue('20')
+    expect(wrapper.get('.rd-pagination__select').element).toBeTruthy()
+    await wrapper.get('.rd-pagination__select').setValue('20')
     expect(wrapper.emitted('update:pageSize')?.at(-1)).toEqual([20])
     expect(wrapper.emitted('update:rows')?.at(-1)).toEqual([20])
 
-    const jumper = wrapper.get('.wd-pagination__input')
+    const jumper = wrapper.get('.rd-pagination__input')
     await jumper.setValue('4')
     await jumper.trigger('keydown', { key: 'Enter' })
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([4])
 
-    const simple = mount(WdPagination, { props: { modelValue: 2, totalRecords: 40, rows: 10, simple: true } })
-    expect(simple.get('.wd-pagination__simple').text()).toBe('2 / 4')
-    expect(simple.find('.wd-pagination__select').exists()).toBe(false)
+    const simple = mount(RdPagination, { props: { modelValue: 2, totalRecords: 40, rows: 10, simple: true } })
+    expect(simple.get('.rd-pagination__simple').text()).toBe('2 / 4')
+    expect(simple.find('.rd-pagination__select').exists()).toBe(false)
   })
 })

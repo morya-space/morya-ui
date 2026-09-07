@@ -11,21 +11,21 @@ A boolean toggle button with configurable on/off labels and icons.
 ## Import
 
 ```ts
-import { WdToggleButton } from '@wex-design/ui'
+import { RdToggleButton } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdToggleButton } from '@wex-design/ui'
+import { RdToggleButton } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const on = ref(false)
 </script>
 
 <template>
-  <WdToggleButton v-model="on" on-label="On" off-label="Off" />
+  <RdToggleButton v-model="on" on-label="On" off-label="Off" />
 </template>
 ```
 
@@ -33,7 +33,7 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdToggleButton } from '@wex-design/ui'
+import { RdToggleButton } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const a = ref(false)
@@ -43,9 +43,9 @@ const c = ref(false)
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
-    <WdToggleButton v-model="b" on-label="Default" off-label="Default" />
-    <WdToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
+    <RdToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
+    <RdToggleButton v-model="b" on-label="Default" off-label="Default" />
+    <RdToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
   </div>
 </template>
 ```
@@ -57,7 +57,7 @@ const c = ref(false)
 | `modelValue` | `boolean` | `false` | Whether it is on. |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | Labels. |
 | `onIcon` / `offIcon` | `string` | — | Optional icon characters. |
-| `size` | `WdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `RdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 
 ## Events

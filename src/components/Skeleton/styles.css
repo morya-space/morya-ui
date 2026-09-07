@@ -1,22 +1,22 @@
-.wd-skeleton {
-    --wd-skeleton-bg: color-mix(in srgb, var(--wd-color-text-muted) 14%, var(--wd-color-surface));
-    background: var(--wd-skeleton-bg);
-    border-radius: var(--wd-radius-sm);
+.rd-skeleton {
+    --rd-skeleton-bg: color-mix(in srgb, var(--rd-color-text-muted) 14%, var(--rd-color-surface));
+    background: var(--rd-skeleton-bg);
+    border-radius: var(--rd-radius-sm);
     display: block;
     overflow: hidden;
     position: relative;
 }
 
-.wd-skeleton--circle {
-    border-radius: var(--wd-radius-full);
+.rd-skeleton--circle {
+    border-radius: var(--rd-radius-full);
 }
 
-.wd-skeleton--wave::after {
-    animation: wd-skeleton-wave var(--wd-motion-skeleton) linear infinite;
+.rd-skeleton--wave::after {
+    animation: rd-skeleton-wave var(--rd-motion-skeleton) linear infinite;
     background: linear-gradient(
         90deg,
         transparent,
-        color-mix(in srgb, var(--wd-color-surface) 55%, transparent),
+        color-mix(in srgb, var(--rd-color-surface) 55%, transparent),
         transparent
     );
     content: "";
@@ -25,18 +25,18 @@
     transform: translateX(-100%);
 }
 
-@keyframes wd-skeleton-wave {
+@keyframes rd-skeleton-wave {
     100% {
         transform: translateX(100%);
     }
 }
 
-.wd-skeleton-repeat {
+.rd-skeleton-repeat {
     display: grid;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     width: 100%;
 }
 
-.wd-skeleton--text {
+.rd-skeleton--text {
     height: 0.85em;
 }

@@ -1,110 +1,110 @@
 /* Normalize inline icons inside compact control affordances (clear, toggle, chevrons). */
-.wd-input__clear,
-.wd-password__clear,
-.wd-password__toggle,
-.wd-textarea__clear,
-.wd-select__clear,
-.wd-select__indicator,
-.wd-autocomplete__clear,
-.wd-autocomplete__dropdown,
-.wd-datepicker__clear,
-.wd-datepicker__nav,
-.wd-inputnumber__clear,
-.wd-inputnumber__button,
-.wd-inputtags__remove,
-.wd-treeselect__clear,
-.wd-treeselect__indicator,
-.wd-cascadeselect__clear,
-.wd-cascadeselect__indicator {
-    --wd-affix-icon-size: 1rem;
+.rd-input__clear,
+.rd-password__clear,
+.rd-password__toggle,
+.rd-textarea__clear,
+.rd-select__clear,
+.rd-select__indicator,
+.rd-autocomplete__clear,
+.rd-autocomplete__dropdown,
+.rd-datepicker__clear,
+.rd-datepicker__nav,
+.rd-inputnumber__clear,
+.rd-inputnumber__button,
+.rd-inputtags__remove,
+.rd-treeselect__clear,
+.rd-treeselect__indicator,
+.rd-cascadeselect__clear,
+.rd-cascadeselect__indicator {
+    --rd-affix-icon-size: 1rem;
 }
 
-.wd-input-field__control:has(.wd-input--small) .wd-input__clear,
-.wd-password--small .wd-password__clear,
-.wd-password--small .wd-password__toggle,
-.wd-textarea-field__control:has(.wd-textarea--small) .wd-textarea__clear,
-.wd-select__control:has(.wd-select--small) .wd-select__clear,
-.wd-select__control:has(.wd-select--small) .wd-select__indicator,
-.wd-autocomplete--small .wd-autocomplete__clear,
-.wd-autocomplete--small .wd-autocomplete__dropdown,
-.wd-datepicker--small .wd-datepicker__clear,
-.wd-datepicker--small .wd-datepicker__nav,
-.wd-inputnumber--small .wd-inputnumber__clear,
-.wd-inputnumber--small .wd-inputnumber__button,
-.wd-select__control:has(.wd-treeselect--small) .wd-treeselect__clear,
-.wd-select__control:has(.wd-treeselect--small) .wd-treeselect__indicator,
-.wd-select__control:has(.wd-cascadeselect--small) .wd-cascadeselect__clear,
-.wd-select__control:has(.wd-cascadeselect--small) .wd-cascadeselect__indicator {
-    --wd-affix-icon-size: 0.875rem;
+.rd-input-field__control:has(.rd-input--small) .rd-input__clear,
+.rd-password--small .rd-password__clear,
+.rd-password--small .rd-password__toggle,
+.rd-textarea-field__control:has(.rd-textarea--small) .rd-textarea__clear,
+.rd-select__control:has(.rd-select--small) .rd-select__clear,
+.rd-select__control:has(.rd-select--small) .rd-select__indicator,
+.rd-autocomplete--small .rd-autocomplete__clear,
+.rd-autocomplete--small .rd-autocomplete__dropdown,
+.rd-datepicker--small .rd-datepicker__clear,
+.rd-datepicker--small .rd-datepicker__nav,
+.rd-inputnumber--small .rd-inputnumber__clear,
+.rd-inputnumber--small .rd-inputnumber__button,
+.rd-select__control:has(.rd-treeselect--small) .rd-treeselect__clear,
+.rd-select__control:has(.rd-treeselect--small) .rd-treeselect__indicator,
+.rd-select__control:has(.rd-cascadeselect--small) .rd-cascadeselect__clear,
+.rd-select__control:has(.rd-cascadeselect--small) .rd-cascadeselect__indicator {
+    --rd-affix-icon-size: 0.875rem;
 }
 
-.wd-input-field__control:has(.wd-input--large) .wd-input__clear,
-.wd-password--large .wd-password__clear,
-.wd-password--large .wd-password__toggle,
-.wd-textarea-field__control:has(.wd-textarea--large) .wd-textarea__clear,
-.wd-select__control:has(.wd-select--large) .wd-select__clear,
-.wd-select__control:has(.wd-select--large) .wd-select__indicator,
-.wd-autocomplete--large .wd-autocomplete__clear,
-.wd-autocomplete--large .wd-autocomplete__dropdown,
-.wd-datepicker--large .wd-datepicker__clear,
-.wd-datepicker--large .wd-datepicker__nav,
-.wd-inputnumber--large .wd-inputnumber__clear,
-.wd-inputnumber--large .wd-inputnumber__button,
-.wd-select__control:has(.wd-treeselect--large) .wd-treeselect__clear,
-.wd-select__control:has(.wd-treeselect--large) .wd-treeselect__indicator,
-.wd-select__control:has(.wd-cascadeselect--large) .wd-cascadeselect__clear,
-.wd-select__control:has(.wd-cascadeselect--large) .wd-cascadeselect__indicator {
-    --wd-affix-icon-size: 1.125rem;
+.rd-input-field__control:has(.rd-input--large) .rd-input__clear,
+.rd-password--large .rd-password__clear,
+.rd-password--large .rd-password__toggle,
+.rd-textarea-field__control:has(.rd-textarea--large) .rd-textarea__clear,
+.rd-select__control:has(.rd-select--large) .rd-select__clear,
+.rd-select__control:has(.rd-select--large) .rd-select__indicator,
+.rd-autocomplete--large .rd-autocomplete__clear,
+.rd-autocomplete--large .rd-autocomplete__dropdown,
+.rd-datepicker--large .rd-datepicker__clear,
+.rd-datepicker--large .rd-datepicker__nav,
+.rd-inputnumber--large .rd-inputnumber__clear,
+.rd-inputnumber--large .rd-inputnumber__button,
+.rd-select__control:has(.rd-treeselect--large) .rd-treeselect__clear,
+.rd-select__control:has(.rd-treeselect--large) .rd-treeselect__indicator,
+.rd-select__control:has(.rd-cascadeselect--large) .rd-cascadeselect__clear,
+.rd-select__control:has(.rd-cascadeselect--large) .rd-cascadeselect__indicator {
+    --rd-affix-icon-size: 1.125rem;
 }
 
-.wd-control-affix-icon,
-.wd-input__clear,
-.wd-password__clear,
-.wd-password__toggle,
-.wd-textarea__clear,
-.wd-autocomplete__clear,
-.wd-autocomplete__dropdown,
-.wd-datepicker__clear,
-.wd-datepicker__nav,
-.wd-inputnumber__clear,
-.wd-inputnumber__button,
-.wd-inputtags__remove,
-.wd-treeselect__clear,
-.wd-treeselect__indicator,
-.wd-cascadeselect__clear,
-.wd-cascadeselect__indicator {
+.rd-control-affix-icon,
+.rd-input__clear,
+.rd-password__clear,
+.rd-password__toggle,
+.rd-textarea__clear,
+.rd-autocomplete__clear,
+.rd-autocomplete__dropdown,
+.rd-datepicker__clear,
+.rd-datepicker__nav,
+.rd-inputnumber__clear,
+.rd-inputnumber__button,
+.rd-inputtags__remove,
+.rd-treeselect__clear,
+.rd-treeselect__indicator,
+.rd-cascadeselect__clear,
+.rd-cascadeselect__indicator {
     align-items: center;
     display: inline-flex;
     justify-content: center;
     line-height: 0;
 }
 
-.wd-control-affix-icon {
+.rd-control-affix-icon {
     flex-shrink: 0;
-    height: var(--wd-affix-icon-size, 1rem);
-    width: var(--wd-affix-icon-size, 1rem);
+    height: var(--rd-affix-icon-size, 1rem);
+    width: var(--rd-affix-icon-size, 1rem);
 }
 
-.wd-input__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-password__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-password__toggle :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-textarea__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-select__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-select__indicator :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-autocomplete__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-autocomplete__dropdown :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-datepicker__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-datepicker__nav :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-inputnumber__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-inputnumber__button :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-inputtags__remove :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-treeselect__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-treeselect__indicator :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-cascadeselect__clear :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-cascadeselect__indicator :is(.wd-icon, .wd-control-affix-icon__graphic, svg),
-.wd-control-affix-icon :is(.wd-icon, .wd-control-affix-icon__graphic, svg) {
+.rd-input__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-password__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-password__toggle :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-textarea__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-select__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-select__indicator :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-autocomplete__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-autocomplete__dropdown :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-datepicker__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-datepicker__nav :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-inputnumber__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-inputnumber__button :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-inputtags__remove :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-treeselect__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-treeselect__indicator :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-cascadeselect__clear :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-cascadeselect__indicator :is(.rd-icon, .rd-control-affix-icon__graphic, svg),
+.rd-control-affix-icon :is(.rd-icon, .rd-control-affix-icon__graphic, svg) {
     display: block;
     flex-shrink: 0;
-    height: var(--wd-affix-icon-size, 1rem);
-    width: var(--wd-affix-icon-size, 1rem);
+    height: var(--rd-affix-icon-size, 1rem);
+    width: var(--rd-affix-icon-size, 1rem);
 }

@@ -6,17 +6,17 @@ description: Install the package, import styles, and render the first component.
 
 # Quick start
 
-> Live docs: [wex-design.github.io/wex-design-ui](https://wex-design.github.io/wex-design-ui/) · Source: [GitHub](https://github.com/wex-design/wex-design-ui) · npm: [`@wex-design/ui`](https://www.npmjs.com/package/@wex-design/ui)
+> Live docs: [wex-design.github.io/wex-design-ui](https://roost-design.github.io/roost-design-ui/) · Source: [GitHub](https://github.com/roost-design/roost-design-ui) · npm: [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
 
 ## Install
 
 **In an application (npm / pnpm / yarn):**
 
 ```bash
-pnpm add @wex-design/ui
+pnpm add @roost-design/ui
 ```
 
-Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `@wex-design/ui`.
+Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `@roost-design/ui`.
 
 After cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).
 
@@ -29,8 +29,8 @@ The library supports **full** and **on-demand** usage. Pick one per app (stay co
 | | Full | On-demand |
 | --- | --- | --- |
 | Best for | Many components, fastest setup | Bundle size, few components |
-| Components | `app.use(WexDesign)` or named imports from `@wex-design/ui` | `@wex-design/ui/button` subpaths, or Vite auto-resolver |
-| Styles | Import `@wex-design/ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |
+| Components | `app.use(RoostDesign)` or named imports from `@roost-design/ui` | `@roost-design/ui/button` subpaths, or Vite auto-resolver |
+| Styles | Import `@roost-design/ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |
 | JS size | Full plugin bundles all components; named imports tree-shake | Only used components and their deps |
 
 ## Full usage
@@ -40,15 +40,15 @@ The library supports **full** and **on-demand** usage. Pick one per app (stay co
 Import the **full stylesheet** and register all components once:
 
 ```ts
-import WexDesign from '@wex-design/ui'
+import RoostDesign from '@roost-design/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 
-createApp(App).use(WexDesign).mount('#app')
+createApp(App).use(RoostDesign).mount('#app')
 ```
 
-Templates can use `<WdButton>`, `<WdInput>`, etc. without per-file imports.
+Templates can use `<RdButton>`, `<RdInput>`, etc. without per-file imports.
 
 ### 2. Named imports + full CSS
 
@@ -57,14 +57,14 @@ Skip the plugin; import components in SFCs. JS can tree-shake, but styles still 
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 
 createApp(App).mount('#app')
 ```
 
 ```vue
 <script setup lang="ts">
-import { WdButton, WdInput } from '@wex-design/ui'
+import { RdButton, RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const name = ref('')
@@ -72,8 +72,8 @@ const name = ref('')
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WdInput v-model="name" label="Name" placeholder="Enter a name" />
-    <WdButton label="Submit" @click="() => undefined" />
+    <RdInput v-model="name" label="Name" placeholder="Enter a name" />
+    <RdButton label="Submit" @click="() => undefined" />
   </div>
 </template>
 ```
@@ -82,51 +82,51 @@ const name = ref('')
 
 ### 1. Subpath imports
 
-Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `@wex-design/ui/styles.css` required:
+Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `@roost-design/ui/styles.css` required:
 
 ```ts
-import { WdButton } from '@wex-design/ui/button'
-import { WdInput } from '@wex-design/ui/input'
+import { RdButton } from '@roost-design/ui/button'
+import { RdInput } from '@roost-design/ui/input'
 ```
 
 Styles only:
 
 ```ts
-import '@wex-design/ui/button/style'
-import '@wex-design/ui/button/style.css'
+import '@roost-design/ui/button/style'
+import '@roost-design/ui/button/style.css'
 ```
 
 ### 2. Auto on-demand (Vite)
 
-With `unplugin-vue-components`, add the resolver so templates can use `<WdButton>` without manual imports:
+With `unplugin-vue-components`, add the resolver so templates can use `<RdButton>` without manual imports:
 
 ```ts
-import { WexDesignResolver } from '@wex-design/ui/resolver'
+import { RoostDesignResolver } from '@roost-design/ui/resolver'
 import Components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
   plugins: [
     vue(),
-    Components({ resolvers: [WexDesignResolver()] }),
+    Components({ resolvers: [RoostDesignResolver()] }),
   ],
 })
 ```
 
-In on-demand mode, `createWexDesign({ components: false })` still applies global config without registering components.
+In on-demand mode, `createRoostDesign({ components: false })` still applies global config without registering components.
 
 ## Optional: app-level defaults
 
-`createWexDesign` applies global defaults and registers all components by default:
+`createRoostDesign` applies global defaults and registers all components by default:
 
 ```ts
-import { createWexDesign } from '@wex-design/ui'
+import { createRoostDesign } from '@roost-design/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 
 createApp(App)
   .use(
-    createWexDesign({
+    createRoostDesign({
       appendTo: 'body',
       size: 'small',
       zIndex: 1100,
@@ -144,7 +144,7 @@ See [Configuration](/docs/config) for details.
 Color-mode helpers come from the same package:
 
 ```ts
-import { useTheme } from '@wex-design/ui'
+import { useTheme } from '@roost-design/ui'
 
 const { toggleTheme } = useTheme()
 ```
@@ -154,9 +154,9 @@ See [Theme](/docs/theme).
 ## Run this docs site
 
 ```bash
-pnpm --filter @wex-design/ui dev
+pnpm --filter @roost-design/ui dev
 # http://localhost:5182
 
 # Build the static docs site
-pnpm --filter @wex-design/ui build:docs
+pnpm --filter @roost-design/ui build:docs
 ```

@@ -1,11 +1,11 @@
-# @wex-design/ui-mcp
+# @roost-design/ui-mcp
 
-Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@wex-design/ui`](https://www.npmjs.com/package/@wex-design/ui).
+Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui).
 
 It indexes component docs, guides, examples, and reusable page patterns so **any MCP-capable AI client** can look up the real API before writing code. It does **not** replace installing the UI library:
 
 ```bash
-pnpm add @wex-design/ui
+pnpm add @roost-design/ui
 ```
 
 Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
@@ -13,7 +13,7 @@ Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
 ## Run
 
 ```bash
-npx -y @wex-design/ui-mcp
+npx -y @roost-design/ui-mcp
 ```
 
 Typical client config (field names vary by client):
@@ -21,15 +21,15 @@ Typical client config (field names vary by client):
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@wex-design/ui-mcp"]
+  "args": ["-y", "@roost-design/ui-mcp"]
 }
 ```
 
 Local checkout:
 
 ```bash
-pnpm --filter @wex-design/ui-mcp build
-node packages/ui-mcp/bin/wex-design-ui-mcp.js
+pnpm --filter @roost-design/ui-mcp build
+node packages/ui-mcp/bin/roost-design-ui-mcp.js
 ```
 
 ## Tools
@@ -127,7 +127,7 @@ pnpm mcp:audit-examples
 
 ## Release
 
-From the repo root (version syncs from `@wex-design/ui`):
+From the repo root (version syncs from `@roost-design/ui`):
 
 ```bash
 pnpm release:mcp -- --dry-run

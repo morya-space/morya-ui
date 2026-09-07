@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
 import { computed, inject, onBeforeUnmount, watch } from 'vue'
-import { useWdId } from '../../shared/useWdId'
-import { useWdLocale } from '../../locale'
-import { WD_FORM_ERRORS_KEY, WD_FORM_KEY } from './context'
+import { useRdId } from '../../shared/useRdId'
+import { useRdLocale } from '../../locale'
+import { RD_FORM_ERRORS_KEY, RD_FORM_KEY } from './context'
 import {
   evaluateFormRule,
   normalizeFormRules,
@@ -16,10 +16,10 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   invalid: false,
 })
 
-const form = inject(WD_FORM_KEY, null)
-const formErrors = inject(WD_FORM_ERRORS_KEY, null)
-const locale = useWdLocale()
-const autoId = useWdId()
+const form = inject(RD_FORM_KEY, null)
+const formErrors = inject(RD_FORM_ERRORS_KEY, null)
+const locale = useRdLocale()
+const autoId = useRdId()
 
 const labelPosition = computed(() => props.labelPosition ?? form?.value.labelPosition ?? 'top')
 const labelAlign = computed(() => props.labelAlign ?? form?.value.labelAlign ?? 'left')
@@ -40,7 +40,7 @@ const internalError = computed(() => {
 })
 const displayError = computed(() => props.error ?? internalError.value)
 const isInvalid = computed(() => props.invalid || Boolean(displayError.value))
-const controlId = computed(() => props.for ?? `wd-form-item-${autoId}`)
+const controlId = computed(() => props.for ?? `rd-form-item-${autoId}`)
 const messageId = computed(() => `${controlId.value}-message`)
 const requiredLabel = computed(() => locale.value.required)
 const fieldValue = computed(() => {
@@ -50,12 +50,12 @@ const fieldValue = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-form-item',
-  `wd-form-item--label-${labelPosition.value}`,
-  `wd-form-item--align-${labelAlign.value}`,
+  'rd-form-item',
+  `rd-form-item--label-${labelPosition.value}`,
+  `rd-form-item--align-${labelAlign.value}`,
   {
-    'wd-form-item--invalid': isInvalid.value,
-    'wd-form-item--required': showRequireMark.value,
+    'rd-form-item--invalid': isInvalid.value,
+    'rd-form-item--required': showRequireMark.value,
   },
 ])
 
@@ -120,15 +120,15 @@ function onInput() {
   <div :class="rootClass" @focusout="onFocusOut" @change="onChange" @input="onInput">
     <label
       v-if="label"
-      class="wd-form-item__label"
+      class="rd-form-item__label"
       :for="controlId"
       :style="labelStyle"
     >
-      <span v-if="showRequireMark" class="wd-form-item__required" :aria-label="requiredLabel">*</span>
+      <span v-if="showRequireMark" class="rd-form-item__required" :aria-label="requiredLabel">*</span>
       {{ label }}
     </label>
-    <div class="wd-form-item__body">
-      <div class="wd-form-item__control">
+    <div class="rd-form-item__body">
+      <div class="rd-form-item__control">
         <slot
           :id="controlId"
           :invalid="isInvalid"
@@ -139,7 +139,7 @@ function onInput() {
       <p
         v-if="displayError"
         :id="messageId"
-        class="wd-form-item__error"
+        class="rd-form-item__error"
         role="alert"
       >
         {{ displayError }}
@@ -147,7 +147,7 @@ function onInput() {
       <p
         v-else-if="help"
         :id="messageId"
-        class="wd-form-item__help"
+        class="rd-form-item__help"
       >
         {{ help }}
       </p>

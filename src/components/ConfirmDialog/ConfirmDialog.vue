@@ -2,14 +2,14 @@
 import type { IconName } from '../Icon/types'
 import type { ConfirmDialogProps } from './types'
 import { computed, ref, toRef, watch } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useWdConfig } from '../../shared/config'
+import { useRdConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WdButton from '../Button/Button.vue'
-import WdIcon from '../Icon/Icon.vue'
+import RdButton from '../Button/Button.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   modelValue: false,
@@ -27,8 +27,8 @@ const emit = defineEmits<{
   (event: 'reject'): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useRdConfig()
+const locale = useRdLocale()
 const dialogElement = ref<HTMLElement | null>(null)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const title = computed(() => props.header ?? locale.value.confirm)
@@ -57,8 +57,8 @@ const typeIcon = computed<IconName | undefined>(() => {
   }
 })
 const zoomStyle = computed(() => ({
-  '--wd-dialog-origin-x': `${origin.value.x}px`,
-  '--wd-dialog-origin-y': `${origin.value.y}px`,
+  '--rd-dialog-origin-x': `${origin.value.x}px`,
+  '--rd-dialog-origin-y': `${origin.value.y}px`,
 }))
 
 function close() {
@@ -114,45 +114,45 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-dialog">
+    <Transition name="rd-dialog">
       <div
         v-if="modelValue"
-        class="wd-dialog-backdrop wd-dialog-backdrop--center wd-dialog-backdrop--modal wd-confirmdialog-backdrop"
+        class="rd-dialog-backdrop rd-dialog-backdrop--center rd-dialog-backdrop--modal rd-confirmdialog-backdrop"
         :style="zoomStyle"
       >
-        <div class="wd-dialog-zoom" @click.self="onOutsideClick">
+        <div class="rd-dialog-zoom" @click.self="onOutsideClick">
           <section
             ref="dialogElement"
-            class="wd-dialog wd-confirmdialog"
-            :class="{ [`wd-dialog--${resolvedType}`]: resolvedType }"
+            class="rd-dialog rd-confirmdialog"
+            :class="{ [`rd-dialog--${resolvedType}`]: resolvedType }"
             role="alertdialog"
             aria-modal="true"
             :aria-label="title"
             tabindex="-1"
           >
-            <header class="wd-dialog__header wd-confirmdialog__header">
+            <header class="rd-dialog__header rd-confirmdialog__header">
               <slot name="header">
                 <h2>{{ title }}</h2>
               </slot>
             </header>
-            <div class="wd-dialog__body wd-confirmdialog__message">
-              <span v-if="typeIcon" class="wd-dialog__type-icon" aria-hidden="true">
-                <WdIcon :name="typeIcon" size="sm" />
+            <div class="rd-dialog__body rd-confirmdialog__message">
+              <span v-if="typeIcon" class="rd-dialog__type-icon" aria-hidden="true">
+                <RdIcon :name="typeIcon" size="sm" />
               </span>
-              <div class="wd-confirmdialog__copy">
+              <div class="rd-confirmdialog__copy">
                 <slot>{{ message }}</slot>
               </div>
             </div>
-            <footer class="wd-dialog__footer wd-confirmdialog__footer">
+            <footer class="rd-dialog__footer rd-confirmdialog__footer">
               <slot name="footer">
-                <WdButton
+                <RdButton
                   :label="rejectText"
                   severity="secondary"
                   :disabled="busy"
                   :loading="pending === 'reject'"
                   @click="reject"
                 />
-                <WdButton
+                <RdButton
                   :label="acceptText"
                   :severity="acceptSeverity"
                   :disabled="busy && pending !== 'accept'"

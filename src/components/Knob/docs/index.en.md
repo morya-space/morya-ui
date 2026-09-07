@@ -11,21 +11,21 @@ Circular dial control with drag and keyboard adjustment.
 ## Import
 
 ```ts
-import { WdKnob } from '@wex-design/ui'
+import { RdKnob } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdKnob } from '@wex-design/ui'
+import { RdKnob } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(60)
 </script>
 
 <template>
-  <WdKnob v-model="value" :size="120" value-template="{value}%" />
+  <RdKnob v-model="value" :size="120" value-template="{value}%" />
 </template>
 ```
 

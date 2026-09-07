@@ -6,7 +6,7 @@ description: Form layout and field validation. Declarative rules, label alignmen
 
 # Form
 
-`WdForm` / `WdFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
+`RdForm` / `RdFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
 
 1. **Declarative `rules` (preferred):** `required` / `min` / `max` / `pattern` / `validator` keyed by field name.
 2. **`validate` callback:** return an error string from FormItem. Still useful for cross-field logic.
@@ -18,16 +18,16 @@ Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and
 ## Import
 
 ```ts
-import type { FormInstance, FormRules } from '@wex-design/ui'
-import { WdForm, WdFormItem } from '@wex-design/ui'
+import type { FormInstance, FormRules } from '@roost-design/ui'
+import { RdForm, RdFormItem } from '@roost-design/ui'
 ```
 
 ## Declarative rules
 
 ```vue preview
 <script setup lang="ts">
-import type { FormInstance, FormRules } from '@wex-design/ui'
-import { WdButton, WdForm, WdFormItem, WdInput } from '@wex-design/ui'
+import type { FormInstance, FormRules } from '@roost-design/ui'
+import { RdButton, RdForm, RdFormItem, RdInput } from '@roost-design/ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -47,7 +47,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <WdForm
+  <RdForm
     ref="formRef"
     :model="model"
     :rules="rules"
@@ -56,18 +56,18 @@ async function onSubmit() {
     style="max-width: 22rem"
     @submit="onSubmit"
   >
-    <WdFormItem label="Name" name="name">
+    <RdFormItem label="Name" name="name">
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="model.name" fluid :invalid="invalid" />
+        <RdInput :id="id" v-model="model.name" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdFormItem label="Email" name="email" help="Used for notifications">
+    </RdFormItem>
+    <RdFormItem label="Email" name="email" help="Used for notifications">
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
+        <RdInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdButton native-type="submit" label="Submit" />
-  </WdForm>
+    </RdFormItem>
+    <RdButton native-type="submit" label="Submit" />
+  </RdForm>
 </template>
 ```
 
@@ -75,26 +75,26 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdForm, WdFormItem, WdInput } from '@wex-design/ui'
+import { RdButton, RdForm, RdFormItem, RdInput } from '@roost-design/ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
 </script>
 
 <template>
-  <WdForm validate-on="submit" style="max-width: 22rem">
-    <WdFormItem
+  <RdForm validate-on="submit" style="max-width: 22rem">
+    <RdFormItem
       label="Name"
       name="name"
       required
       :validate="() => (form.name.trim() ? undefined : 'Enter a name')"
     >
       <template #default="{ id, invalid }">
-        <WdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <RdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </WdFormItem>
-    <WdButton native-type="submit" label="Submit" />
-  </WdForm>
+    </RdFormItem>
+    <RdButton native-type="submit" label="Submit" />
+  </RdForm>
 </template>
 ```
 
@@ -102,14 +102,14 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { WdForm, WdFormItem, WdInput } from '@wex-design/ui'
+import { RdForm, RdFormItem, RdInput } from '@roost-design/ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>
 
 <template>
-  <WdForm
+  <RdForm
     :model="model"
     inline
     label-placement="left"
@@ -117,17 +117,17 @@ const model = reactive({ city: '', zip: '' })
     :label-width="72"
     :rules="{ city: { required: true, message: 'Required' } }"
   >
-    <WdFormItem label="City" name="city">
+    <RdFormItem label="City" name="city">
       <template #default="{ id }">
-        <WdInput :id="id" v-model="model.city" />
+        <RdInput :id="id" v-model="model.city" />
       </template>
-    </WdFormItem>
-    <WdFormItem label="ZIP" name="zip">
+    </RdFormItem>
+    <RdFormItem label="ZIP" name="zip">
       <template #default="{ id }">
-        <WdInput :id="id" v-model="model.zip" />
+        <RdInput :id="id" v-model="model.zip" />
       </template>
-    </WdFormItem>
-  </WdForm>
+    </RdFormItem>
+  </RdForm>
 </template>
 ```
 

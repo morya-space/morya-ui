@@ -6,16 +6,16 @@ description: Optional MCP server for AI clients that support the Model Context P
 
 # MCP
 
-[`@wex-design/ui-mcp`](https://www.npmjs.com/package/@wex-design/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
+[`@roost-design/ui-mcp`](https://www.npmjs.com/package/@roost-design/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
 
 You do **not** need MCP to use the component library. Apps still only depend on:
 
 ```bash
-pnpm add @wex-design/ui
+pnpm add @roost-design/ui
 ```
 
 ```ts
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 ```
 
 ## How to connect
@@ -23,7 +23,7 @@ import '@wex-design/ui/styles.css'
 MCP clients start the package over stdio:
 
 ```bash
-npx -y @wex-design/ui-mcp
+npx -y @roost-design/ui-mcp
 ```
 
 Generic shape:
@@ -31,7 +31,7 @@ Generic shape:
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@wex-design/ui-mcp"]
+  "args": ["-y", "@roost-design/ui-mcp"]
 }
 ```
 
@@ -48,7 +48,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -61,7 +61,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -74,7 +74,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -87,7 +87,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -100,7 +100,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "context_servers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -112,9 +112,9 @@ Snippets for popular products. Key names may change across versions — check ea
 {
   "mcpServers": [
     {
-      "name": "wex-design-ui",
+      "name": "roost-design-ui",
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   ]
 }
@@ -184,19 +184,19 @@ The assistant should call tools first, then produce something like:
 
 ```vue
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdButton label="Delete" severity="danger" />
+  <RdButton label="Delete" severity="danger" />
 </template>
 ```
 
 ## Relation to this site
 
-The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@wex-design/ui-mcp`; clients using `npx -y` pick up the new release.
+The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@roost-design/ui-mcp`; clients using `npx -y` pick up the new release.
 
-Implementation notes live in [packages/ui-mcp/README.md](https://github.com/wex-design/wex-design-ui/tree/main/packages/ui-mcp).
+Implementation notes live in [packages/ui-mcp/README.md](https://github.com/roost-design/roost-design-ui/tree/main/packages/ui-mcp).
 
 ## Next steps
 

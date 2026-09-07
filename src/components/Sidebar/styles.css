@@ -1,65 +1,65 @@
 /* —— Menu: Sidebar —— */
-.wd-sidebar {
-    --wd-sidebar-width: 12rem;
-    --wd-sidebar-collapsed-width: 3.5rem;
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-md);
-    min-width: var(--wd-sidebar-width);
-    padding: var(--wd-space-2);
-    width: var(--wd-sidebar-width);
+.rd-sidebar {
+    --rd-sidebar-width: 12rem;
+    --rd-sidebar-collapsed-width: 3.5rem;
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-md);
+    min-width: var(--rd-sidebar-width);
+    padding: var(--rd-space-2);
+    width: var(--rd-sidebar-width);
 }
 
-.wd-sidebar--collapsed {
-    min-width: var(--wd-sidebar-collapsed-width);
-    width: var(--wd-sidebar-collapsed-width);
+.rd-sidebar--collapsed {
+    min-width: var(--rd-sidebar-collapsed-width);
+    width: var(--rd-sidebar-collapsed-width);
 }
 
-.wd-sidebar__list,
-.wd-sidebar__children {
+.rd-sidebar__list,
+.rd-sidebar__children {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wd-sidebar__children {
-    margin-left: var(--wd-space-4);
+.rd-sidebar__children {
+    margin-left: var(--rd-space-4);
 }
 
-.wd-sidebar__link {
+.rd-sidebar__link {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wd-radius-sm);
+    border-radius: var(--rd-radius-sm);
     color: inherit;
     cursor: pointer;
     display: flex;
     font: inherit;
-    gap: var(--wd-space-2);
-    padding: var(--wd-space-2);
+    gap: var(--rd-space-2);
+    padding: var(--rd-space-2);
     text-align: left;
     width: 100%;
 }
 
-.wd-sidebar__link:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wd-color-primary) 10%, transparent);
+.rd-sidebar__link:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--rd-color-primary) 10%, transparent);
 }
 
-.wd-sidebar__link:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-sidebar__link:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-sidebar__link:disabled {
+.rd-sidebar__link:disabled {
     cursor: not-allowed;
-    opacity: var(--wd-opacity-disabled);
+    opacity: var(--rd-opacity-disabled);
 }
 
-.wd-sidebar__link--child {
-    font-size: var(--wd-font-size-md);
+.rd-sidebar__link--child {
+    font-size: var(--rd-font-size-md);
 }
 
-.wd-sidebar__icon {
+.rd-sidebar__icon {
     flex: 0 0 1.25rem;
     text-align: center;
 }

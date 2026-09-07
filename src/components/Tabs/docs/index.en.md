@@ -11,14 +11,14 @@ Tabs switch content panels within the same view.
 ## Import
 
 ```ts
-import { WdTabs } from '@wex-design/ui'
+import { RdTabs } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdTabs } from '@wex-design/ui'
+import { RdTabs } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -30,13 +30,13 @@ const tabs = [
 </script>
 
 <template>
-  <WdTabs v-model="active" :tabs="tabs">
+  <RdTabs v-model="active" :tabs="tabs">
     <template #default="{ activeValue }">
       <p style="margin:0">
         Active panel: {{ activeValue }}
       </p>
     </template>
-  </WdTabs>
+  </RdTabs>
 </template>
 ```
 
@@ -44,7 +44,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdTabs } from '@wex-design/ui'
+import { RdButton, RdTabs } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref('a')
@@ -66,7 +66,7 @@ function onAdd() {
 </script>
 
 <template>
-  <WdTabs
+  <RdTabs
     v-model="active"
     type="card"
     closable
@@ -76,14 +76,14 @@ function onAdd() {
     @add="onAdd"
   >
     <template #extra>
-      <WdButton label="Action" size="small" severity="secondary" />
+      <RdButton label="Action" size="small" severity="secondary" />
     </template>
     <template #default="{ activeValue }">
       <p style="margin:0">
         {{ activeValue }}
       </p>
     </template>
-  </WdTabs>
+  </RdTabs>
 </template>
 ```
 

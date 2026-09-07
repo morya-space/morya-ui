@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { FieldsetProps } from './types'
-import { useWdId } from '../../shared/useWdId'
+import { useRdId } from '../../shared/useRdId'
 import { useControllable } from '../../shared/useControllable'
-import WdIcon from '../Icon/Icon.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<FieldsetProps>(), {
   toggleable: false,
@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
 }>()
 
-const contentId = useWdId()
+const contentId = useRdId()
 
 const { value: isCollapsed, setValue: setCollapsed } = useControllable(
   {
@@ -31,17 +31,17 @@ function toggle() {
 </script>
 
 <template>
-  <fieldset class="wd-fieldset" :class="{ 'wd-fieldset--collapsed': isCollapsed }">
-    <legend v-if="$slots.legend || legend || toggleable" class="wd-fieldset__legend">
+  <fieldset class="rd-fieldset" :class="{ 'rd-fieldset--collapsed': isCollapsed }">
+    <legend v-if="$slots.legend || legend || toggleable" class="rd-fieldset__legend">
       <button
         v-if="toggleable"
         type="button"
-        class="wd-fieldset__toggler"
+        class="rd-fieldset__toggler"
         :aria-expanded="!isCollapsed"
         :aria-controls="contentId"
         @click="toggle"
       >
-        <WdIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
+        <RdIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
         <slot name="legend">
           {{ legend }}
         </slot>
@@ -52,8 +52,8 @@ function toggle() {
         </slot>
       </template>
     </legend>
-    <Transition name="wd-fieldset-collapse">
-      <div v-show="!isCollapsed" :id="contentId" class="wd-fieldset__content">
+    <Transition name="rd-fieldset-collapse">
+      <div v-show="!isCollapsed" :id="contentId" class="rd-fieldset__content">
         <slot />
       </div>
     </Transition>

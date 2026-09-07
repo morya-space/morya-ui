@@ -1,3 +1,3 @@
 import './style'
-export { default as WdTooltip } from './Tooltip.vue'
+export { default as RdTooltip } from './Tooltip.vue'
 export type { TooltipProps } from './types'

@@ -1,9 +1,9 @@
 import type { Component } from 'vue'
-import type { WdShowPasswordOn } from '../../shared/componentDefaults'
-import type { WdInputVariant, WdSizeInput } from '../../shared/types'
+import type { RdShowPasswordOn } from '../../shared/componentDefaults'
+import type { RdInputVariant, RdSizeInput } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type { WdShowPasswordOn }
+export type { RdShowPasswordOn }
 
 export interface InputPasswordProps {
   modelValue?: string
@@ -12,8 +12,8 @@ export interface InputPasswordProps {
   readonly?: boolean
   invalid?: boolean
   fluid?: boolean
-  size?: WdSizeInput
-  variant?: WdInputVariant
+  size?: RdSizeInput
+  variant?: RdInputVariant
   /** Show password strength hint. */
   feedback?: boolean
   /** Show toggle mask button. */
@@ -22,13 +22,13 @@ export interface InputPasswordProps {
    * When to reveal the password.
    * `click` toggles; `mousedown` is hold-to-peek (mouse or Space/Enter).
    */
-  showPasswordOn?: WdShowPasswordOn
+  showPasswordOn?: RdShowPasswordOn
   clearable?: boolean
   maxlength?: number
   showCount?: boolean
-  /** Icon when the value is masked (click to reveal). Built-in `WdIcon` name or a Vue component. */
+  /** Icon when the value is masked (click to reveal). Built-in `RdIcon` name or a Vue component. */
   showIcon?: IconName | Component
-  /** Icon when the value is visible (click to hide). Built-in `WdIcon` name or a Vue component. */
+  /** Icon when the value is visible (click to hide). Built-in `RdIcon` name or a Vue component. */
   hideIcon?: IconName | Component
   id?: string
 }

@@ -8,21 +8,21 @@ description: 动作菜单覆盖层（非表单选择器）。与 Select 不同�
 
 动作菜单（action menu overlay）。用于从触发器打开一组操作项。
 
-**与 Select 的区别：** `WdDropdown` 是菜单覆盖层；表单选项选择请使用 `WdSelect`。
+**与 Select 的区别：** `RdDropdown` 是菜单覆盖层；表单选项选择请使用 `RdSelect`。
 
 支持分组（`type: 'group'`）、分割线（`separator` / `type: 'divider'`）、嵌套 `items`，以及 `trigger: 'hover'` + `showDelay` / `hideDelay`。键盘高亮仍只覆盖顶层叶子项。
 
 ## 引入
 
 ```ts
-import { WdButton, WdDropdown } from '@wex-design/ui'
+import { RdButton, RdDropdown } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdDropdown } from '@wex-design/ui'
+import { RdButton, RdDropdown } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -39,11 +39,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <WdDropdown v-model="open" :items="items" @select="onSelect">
+  <RdDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <WdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <RdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </WdDropdown>
+  </RdDropdown>
 </template>
 ```
 
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdDropdown } from '@wex-design/ui'
+import { RdButton, RdDropdown } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -63,11 +63,11 @@ const items = [
 </script>
 
 <template>
-  <WdDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
+  <RdDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
     <template #trigger>
-      <WdButton label="悬停打开" severity="secondary" />
+      <RdButton label="悬停打开" severity="secondary" />
     </template>
-  </WdDropdown>
+  </RdDropdown>
 </template>
 ```
 

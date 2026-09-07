@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DropdownItem, DropdownProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useRdLocale } from '../../locale'
+import { useRdConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import DropdownNodes from './DropdownNodes.vue'
@@ -21,8 +21,8 @@ const emit = defineEmits<{
   (event: 'select', item: DropdownItem): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useRdConfig()
+const locale = useRdLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
@@ -191,10 +191,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="wd-dropdown">
+  <div ref="root" class="rd-dropdown">
     <span
       ref="trigger"
-      class="wd-dropdown__trigger"
+      class="rd-dropdown__trigger"
       role="button"
       tabindex="0"
       :aria-expanded="modelValue"
@@ -207,12 +207,12 @@ onBeforeUnmount(() => {
       <slot name="trigger">{{ locale.openMenu }}</slot>
     </span>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="rd-scale-fade">
         <div
           v-if="modelValue"
           ref="menu"
-          class="wd-dropdown__menu"
-          :class="[`wd-dropdown__menu--${placement}`, { 'wd-dropdown__menu--teleported': teleported }]"
+          class="rd-dropdown__menu"
+          :class="[`rd-dropdown__menu--${placement}`, { 'rd-dropdown__menu--teleported': teleported }]"
           :style="teleported ? menuStyle : undefined"
           role="menu"
           tabindex="-1"

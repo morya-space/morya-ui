@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { ScrollTopProps } from './types'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useWdConfig } from '../../shared/config'
+import { useRdLocale } from '../../locale'
+import { useRdConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import WdIcon from '../Icon/Icon.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ScrollTopProps>(), {
   threshold: 400,
@@ -12,8 +12,8 @@ const props = withDefaults(defineProps<ScrollTopProps>(), {
   teleport: true,
 })
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useRdConfig()
+const locale = useRdLocale()
 const anchor = ref<HTMLElement | null>(null)
 const root = ref<HTMLElement | null>(null)
 const visible = ref(false)
@@ -26,11 +26,11 @@ function toCssSize(value?: string | number) {
 }
 
 const rootClass = computed(() => [
-  'wd-scrolltop',
+  'rd-scrolltop',
   {
-    'wd-scrolltop--visible': visible.value,
-    'wd-scrolltop--parent': props.target === 'parent',
-    'wd-scrolltop--teleported': teleported.value,
+    'rd-scrolltop--visible': visible.value,
+    'rd-scrolltop--parent': props.target === 'parent',
+    'rd-scrolltop--teleported': teleported.value,
   },
 ])
 
@@ -92,7 +92,7 @@ watch(
 </script>
 
 <template>
-  <span ref="anchor" class="wd-scrolltop-anchor" aria-hidden="true">
+  <span ref="anchor" class="rd-scrolltop-anchor" aria-hidden="true">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <button
         ref="root"
@@ -104,7 +104,7 @@ watch(
         @click="scrollToTop"
       >
         <slot>
-          <WdIcon name="arrow-up" size="sm" />
+          <RdIcon name="arrow-up" size="sm" />
         </slot>
       </button>
     </Teleport>

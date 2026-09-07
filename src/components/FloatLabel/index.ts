@@ -1,3 +1,3 @@
 import './style'
-export { default as WdFloatLabel } from './FloatLabel.vue'
+export { default as RdFloatLabel } from './FloatLabel.vue'
 export type { FloatLabelProps } from './types'

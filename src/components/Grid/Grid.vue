@@ -17,9 +17,9 @@ import {
 import { resolveGapCSSValue } from '../../shared/gap'
 import { parseResponsiveValue } from '../../shared/responsive'
 import { flattenVNodes } from '../../shared/vnode'
-import {  WD_GRID_ITEM_FLAG, WD_GRID_KEY } from './types'
+import {  RD_GRID_ITEM_FLAG, RD_GRID_KEY } from './types'
 
-defineOptions({ name: 'WdGrid', inheritAttrs: false })
+defineOptions({ name: 'RdGrid', inheritAttrs: false })
 
 const props = withDefaults(defineProps<GridProps>(), {
   layoutShiftDisabled: false,
@@ -134,9 +134,9 @@ function isGridItem(node: VNode): boolean {
   const type = node.type as Record<string, unknown> | string
   if (typeof type === 'string' || type == null) return false
   return Boolean(
-    type[WD_GRID_ITEM_FLAG] ||
-      type.name === 'WdGridItem' ||
-      type.name === 'WdGi' ||
+    type[RD_GRID_ITEM_FLAG] ||
+      type.name === 'RdGridItem' ||
+      type.name === 'RdGi' ||
       type.__name === 'GridItem',
   )
 }
@@ -228,7 +228,7 @@ function computeLayouts(nodes: VNode[]): VNode[] {
 
 const renderedChildren = computed(() => computeLayouts(flattenVNodes(slots.default?.())))
 
-provide(WD_GRID_KEY, {
+provide(RD_GRID_KEY, {
   overflow,
   itemStyle: toRef(props, 'itemStyle'),
   xGap: resolvedXGapCss,
@@ -240,7 +240,7 @@ provide(WD_GRID_KEY, {
 </script>
 
 <template>
-  <div ref="rootEl" class="wd-grid" :style="gridStyle" v-bind="$attrs">
+  <div ref="rootEl" class="rd-grid" :style="gridStyle" v-bind="$attrs">
     <template v-if="layoutShiftDisabled">
       <slot />
     </template>

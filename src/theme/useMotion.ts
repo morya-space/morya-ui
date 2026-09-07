@@ -8,7 +8,7 @@ const motionPreferences: readonly MotionPreference[] = ['full', 'reduced', 'none
 export function applyMotion(preference: MotionPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.wdMotion = preference
+  el.dataset.rdMotion = preference
 }
 
 export function getPreferredMotion(): MotionPreference {

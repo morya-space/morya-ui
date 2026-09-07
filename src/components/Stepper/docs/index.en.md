@@ -11,14 +11,14 @@ Shows progress through a multi-step flow and lets users switch steps.
 ## Import
 
 ```ts
-import { WdStepper } from '@wex-design/ui'
+import { RdStepper } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdStepper } from '@wex-design/ui'
+import { RdStepper } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref(0)
@@ -30,7 +30,7 @@ const steps = [
 </script>
 
 <template>
-  <WdStepper v-model="active" :steps="steps" />
+  <RdStepper v-model="active" :steps="steps" />
 </template>
 ```
 
@@ -40,7 +40,7 @@ const steps = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdStepper } from '@wex-design/ui'
+import { RdStepper } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref(1)
@@ -52,7 +52,7 @@ const steps = [
 </script>
 
 <template>
-  <WdStepper v-model="active" vertical :steps="steps" />
+  <RdStepper v-model="active" vertical :steps="steps" />
 </template>
 ```
 

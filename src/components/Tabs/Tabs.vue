@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { TabItem, TabsProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWdId } from '../../shared/useWdId'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useRdId } from '../../shared/useRdId'
+import { useRdLocale } from '../../locale'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',
@@ -17,8 +17,8 @@ const emit = defineEmits<{
   (event: 'add'): void
 }>()
 
-const locale = useWdLocale()
-const tabsUid = useWdId()
+const locale = useRdLocale()
+const tabsUid = useRdId()
 const scroller = ref<HTMLElement | null>(null)
 const overflowed = ref(false)
 const activeValue = computed(() => props.modelValue ?? props.tabs.find((tab) => !tab.disabled)?.value)
@@ -55,7 +55,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
   if (!target) return
   selectTab(target.value)
   requestAnimationFrame(() =>
-    document.getElementById(`wd-tab-${target.value}`)?.focus({ preventScroll: true }),
+    document.getElementById(`rd-tab-${target.value}`)?.focus({ preventScroll: true }),
   )
 }
 
@@ -92,29 +92,29 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 
 <template>
-  <div class="wd-tabs" :class="`wd-tabs--${type}`">
-    <div class="wd-tabs__bar">
+  <div class="rd-tabs" :class="`rd-tabs--${type}`">
+    <div class="rd-tabs__bar">
       <button
         v-if="overflowed"
         type="button"
-        class="wd-tabs__scroll"
+        class="rd-tabs__scroll"
         :aria-label="locale.prev"
         @click="scrollTabs(-1)"
       >
-        <WdIcon name="chevron-left" size="sm" />
+        <RdIcon name="chevron-left" size="sm" />
       </button>
-      <div ref="scroller" class="wd-tabs__scroller">
-        <div class="wd-tabs__list" role="tablist" :aria-label="locale.tabs">
+      <div ref="scroller" class="rd-tabs__scroller">
+        <div class="rd-tabs__list" role="tablist" :aria-label="locale.tabs">
           <div
             v-for="(tab, index) in tabs"
             :key="tab.value"
-            class="wd-tabs__item"
-            :class="{ 'wd-tabs__item--active': activeValue === tab.value }"
+            class="rd-tabs__item"
+            :class="{ 'rd-tabs__item--active': activeValue === tab.value }"
           >
             <button
-              :id="`wd-tab-${tab.value}`"
-              class="wd-tabs__tab"
-              :class="{ 'wd-tabs__tab--active': activeValue === tab.value }"
+              :id="`rd-tab-${tab.value}`"
+              class="rd-tabs__tab"
+              :class="{ 'rd-tabs__tab--active': activeValue === tab.value }"
               type="button"
               role="tab"
               :aria-selected="activeValue === tab.value"
@@ -128,12 +128,12 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
             <button
               v-if="isClosable(tab)"
               type="button"
-              class="wd-tabs__close"
+              class="rd-tabs__close"
               :aria-label="locale.closeTab"
               :disabled="tab.disabled"
               @click.stop="closeTab(tab)"
             >
-              <WdIcon name="close" size="sm" />
+              <RdIcon name="close" size="sm" />
             </button>
           </div>
         </div>
@@ -141,31 +141,31 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
       <button
         v-if="overflowed"
         type="button"
-        class="wd-tabs__scroll"
+        class="rd-tabs__scroll"
         :aria-label="locale.next"
         @click="scrollTabs(1)"
       >
-        <WdIcon name="chevron-right" size="sm" />
+        <RdIcon name="chevron-right" size="sm" />
       </button>
       <button
         v-if="addable"
         type="button"
-        class="wd-tabs__add"
+        class="rd-tabs__add"
         :aria-label="locale.addTab"
         @click="emit('add')"
       >
-        <WdIcon name="plus" size="sm" />
+        <RdIcon name="plus" size="sm" />
       </button>
-      <div v-if="$slots.extra" class="wd-tabs__extra">
+      <div v-if="$slots.extra" class="rd-tabs__extra">
         <slot name="extra" />
       </div>
     </div>
     <div
       v-if="activeValue"
       :id="`${tabsUid}-panel-${activeValue}`"
-      class="wd-tabs__panel"
+      class="rd-tabs__panel"
       role="tabpanel"
-      :aria-labelledby="`wd-tab-${activeValue}`"
+      :aria-labelledby="`rd-tab-${activeValue}`"
     >
       <slot :active-value="activeValue" />
     </div>

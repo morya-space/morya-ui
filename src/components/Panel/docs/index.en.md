@@ -11,28 +11,28 @@ Panel for grouping content. Collapse can be enabled.
 ## Import
 
 ```ts
-import { WdPanel } from '@wex-design/ui'
+import { RdPanel } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdPanel } from '@wex-design/ui'
+import { RdPanel } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdPanel v-model="collapsed" header="Panel" toggleable>
+  <RdPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       Collapsible panel content.
     </p>
     <template #footer>
       Actions
     </template>
-  </WdPanel>
+  </RdPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdPanel } from '@wex-design/ui'
+import { RdPanel } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdPanel header="Small" size="small">
+  <RdPanel header="Small" size="small">
     <p style="margin:0">
       A more compact panel.
     </p>
-  </WdPanel>
+  </RdPanel>
 </template>
 ```
 

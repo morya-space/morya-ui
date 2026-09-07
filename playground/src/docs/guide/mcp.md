@@ -6,16 +6,16 @@ description: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客�
 
 # MCP
 
-[`@wex-design/ui-mcp`](https://www.npmjs.com/package/@wex-design/ui-mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
+[`@roost-design/ui-mcp`](https://www.npmjs.com/package/@roost-design/ui-mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
 
 日常使用组件库 **不需要** 安装或配置 MCP。应用里仍然只依赖：
 
 ```bash
-pnpm add @wex-design/ui
+pnpm add @roost-design/ui
 ```
 
 ```ts
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 ```
 
 ## 接入方式
@@ -23,7 +23,7 @@ import '@wex-design/ui/styles.css'
 MCP 客户端通过 stdio 启动本包即可：
 
 ```bash
-npx -y @wex-design/ui-mcp
+npx -y @roost-design/ui-mcp
 ```
 
 通用写法：
@@ -31,7 +31,7 @@ npx -y @wex-design/ui-mcp
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@wex-design/ui-mcp"]
+  "args": ["-y", "@roost-design/ui-mcp"]
 }
 ```
 
@@ -48,7 +48,7 @@ npx -y @wex-design/ui-mcp
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -61,7 +61,7 @@ npx -y @wex-design/ui-mcp
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -74,7 +74,7 @@ npx -y @wex-design/ui-mcp
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -87,7 +87,7 @@ npx -y @wex-design/ui-mcp
   "mcpServers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -100,7 +100,7 @@ npx -y @wex-design/ui-mcp
   "context_servers": {
     "wex-design-ui": {
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   }
 }
@@ -112,9 +112,9 @@ npx -y @wex-design/ui-mcp
 {
   "mcpServers": [
     {
-      "name": "wex-design-ui",
+      "name": "roost-design-ui",
       "command": "npx",
-      "args": ["-y", "@wex-design/ui-mcp"]
+      "args": ["-y", "@roost-design/ui-mcp"]
     }
   ]
 }
@@ -184,19 +184,19 @@ npx -y @wex-design/ui-mcp
 
 ```vue
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdButton label="删除" severity="danger" />
+  <RdButton label="删除" severity="danger" />
 </template>
 ```
 
 ## 与文档站的关系
 
-目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@wex-design/ui-mcp`，客户端通过 `npx -y` 即可拿到新版本。
+目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@roost-design/ui-mcp`，客户端通过 `npx -y` 即可拿到新版本。
 
-更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/wex-design/wex-design-ui/tree/main/packages/ui-mcp)。
+更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/roost-design/roost-design-ui/tree/main/packages/ui-mcp)。
 
 ## 下一步
 

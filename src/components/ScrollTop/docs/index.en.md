@@ -11,14 +11,14 @@ Listens to window or parent scroll and jumps back to the top.
 ## Import
 
 ```ts
-import { WdScrollTop } from '@wex-design/ui'
+import { RdScrollTop } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdScrollTop } from '@wex-design/ui'
+import { RdScrollTop } from '@roost-design/ui'
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import { WdScrollTop } from '@wex-design/ui'
     <div style="height: 40rem">
       Scroll down…
     </div>
-    <WdScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    <RdScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```

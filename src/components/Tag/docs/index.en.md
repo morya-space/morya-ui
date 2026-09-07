@@ -11,7 +11,7 @@ Tags display status or category.
 ## Import
 
 ```ts
-import { WdTag } from '@wex-design/ui'
+import { RdTag } from '@roost-design/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ Show text via `value` or the default slot.
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@wex-design/ui'
+import { RdTag } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="Primary" />
-    <WdTag>Slot Label</WdTag>
-    <WdTag value="Rounded" rounded />
+    <RdTag value="Primary" />
+    <RdTag>Slot Label</RdTag>
+    <RdTag value="Rounded" rounded />
   </div>
 </template>
 ```
@@ -38,36 +38,36 @@ Use `severity` for semantic color; defaults to primary when omitted. The legacy 
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@wex-design/ui'
+import { RdTag } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="Primary" />
-    <WdTag value="Secondary" severity="secondary" />
-    <WdTag value="Success" severity="success" />
-    <WdTag value="Info" severity="info" />
-    <WdTag value="Warn" severity="warn" />
-    <WdTag value="Danger" severity="danger" />
-    <WdTag value="Contrast" severity="contrast" />
+    <RdTag value="Primary" />
+    <RdTag value="Secondary" severity="secondary" />
+    <RdTag value="Success" severity="success" />
+    <RdTag value="Info" severity="info" />
+    <RdTag value="Warn" severity="warn" />
+    <RdTag value="Danger" severity="danger" />
+    <RdTag value="Contrast" severity="contrast" />
   </div>
 </template>
 ```
 
 ## Icons
 
-Pass a `WdIcon` icon name to `icon`.
+Pass a `RdIcon` icon name to `icon`.
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@wex-design/ui'
+import { RdTag } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="New" icon="plus" severity="info" />
-    <WdTag value="Done" icon="check" severity="success" />
-    <WdTag value="Alert" icon="info" severity="warn" rounded />
+    <RdTag value="New" icon="plus" severity="info" />
+    <RdTag value="Done" icon="check" severity="success" />
+    <RdTag value="Alert" icon="info" severity="warn" rounded />
   </div>
 </template>
 ```
@@ -76,13 +76,13 @@ import { WdTag } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdTag } from '@wex-design/ui'
+import { RdTag } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdTag value="Draft" closable bordered />
-    <WdTag value="Small" size="small" severity="success" closable />
+    <RdTag value="Draft" closable bordered />
+    <RdTag value="Small" size="small" severity="success" closable />
   </div>
 </template>
 ```
@@ -94,7 +94,7 @@ import { WdTag } from '@wex-design/ui'
 | `value` | `string` | — | Tag text. The default slot takes precedence when present. |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
-| `icon` | `IconName` | — | `WdIcon` icon name. |
+| `icon` | `IconName` | — | `RdIcon` icon name. |
 | `closable` | `boolean` | `false` | Show a close control. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `bordered` | `boolean` | `false` | Draw a border. |

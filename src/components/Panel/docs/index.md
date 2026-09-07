@@ -11,28 +11,28 @@ description: 带可选折叠的内容面板。
 ## 引入
 
 ```ts
-import { WdPanel } from '@wex-design/ui'
+import { RdPanel } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdPanel } from '@wex-design/ui'
+import { RdPanel } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdPanel v-model="collapsed" header="Panel" toggleable>
+  <RdPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       可折叠面板内容。
     </p>
     <template #footer>
       操作区
     </template>
-  </WdPanel>
+  </RdPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdPanel } from '@wex-design/ui'
+import { RdPanel } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdPanel header="Small" size="small">
+  <RdPanel header="Small" size="small">
     <p style="margin:0">
       更紧凑的面板。
     </p>
-  </WdPanel>
+  </RdPanel>
 </template>
 ```
 

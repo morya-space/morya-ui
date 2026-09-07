@@ -1,49 +1,49 @@
 /* —— Data: DataView —— */
-.wd-dataview {
+.rd-dataview {
     display: flex;
     flex-direction: column;
-    gap: var(--wd-space-3);
+    gap: var(--rd-space-3);
 }
 
-.wd-dataview__content {
+.rd-dataview__content {
     position: relative;
 }
 
-.wd-dataview__header {
+.rd-dataview__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.wd-dataview__list {
+.rd-dataview__list {
     display: flex;
     flex-direction: column;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wd-dataview__list-item,
-.wd-dataview__grid-item {
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-md);
-    padding: var(--wd-space-3);
+.rd-dataview__list-item,
+.rd-dataview__grid-item {
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-md);
+    padding: var(--rd-space-3);
 }
 
-.wd-dataview__grid {
-    --wd-dataview-grid-min: 10rem;
+.rd-dataview__grid {
+    --rd-dataview-grid-min: 10rem;
     display: grid;
-    gap: var(--wd-space-3);
-    grid-template-columns: repeat(auto-fill, minmax(var(--wd-dataview-grid-min), 1fr));
+    gap: var(--rd-space-3);
+    grid-template-columns: repeat(auto-fill, minmax(var(--rd-dataview-grid-min), 1fr));
 }
 
-.wd-dataview__paginator {
+.rd-dataview__paginator {
     align-self: center;
 }
 
-.wd-dataview__loading {
+.rd-dataview__loading {
     position: absolute;
     inset: 0;
     z-index: 4;
@@ -52,28 +52,28 @@
     justify-content: center;
 }
 
-.wd-dataview__loading-mask {
+.rd-dataview__loading-mask {
     position: absolute;
     inset: 0;
-    background: color-mix(in srgb, var(--wd-color-surface) 72%, transparent);
+    background: color-mix(in srgb, var(--rd-color-surface) 72%, transparent);
 }
 
-.wd-dataview__loading-body {
+.rd-dataview__loading-body {
     position: relative;
     z-index: 1;
 }
 
-.wd-dataview__message {
+.rd-dataview__message {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--wd-control-height-medium, 2.5rem) * 2);
-    padding: var(--wd-space-5);
+    min-height: calc(var(--rd-control-height-medium, 2.5rem) * 2);
+    padding: var(--rd-space-5);
 }
 
-.wd-dataview__empty-text {
+.rd-dataview__empty-text {
     margin: 0;
-    color: var(--wd-color-text-muted);
-    font-size: var(--wd-font-size-sm);
+    color: var(--rd-color-text-muted);
+    font-size: var(--rd-font-size-sm);
     line-height: 1.5;
 }

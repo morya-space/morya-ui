@@ -1,107 +1,107 @@
-.wd-tag {
-    --wd-tag-icon-size: 1rem;
+.rd-tag {
+    --rd-tag-icon-size: 1rem;
     align-items: center;
-    background: color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-    border-radius: var(--wd-radius-sm);
-    color: var(--wd-color-primary);
+    background: color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
+    border-radius: var(--rd-radius-sm);
+    color: var(--rd-color-primary);
     display: inline-flex;
-    font-family: var(--wd-font-sans);
-    font-size: var(--wd-font-size-xs);
+    font-family: var(--rd-font-sans);
+    font-size: var(--rd-font-size-xs);
     font-weight: 600;
-    gap: var(--wd-space-1);
+    gap: var(--rd-space-1);
     line-height: 1;
-    padding: var(--wd-space-2) var(--wd-space-3);
+    padding: var(--rd-space-2) var(--rd-space-3);
 }
 
-.wd-tag__icon {
+.rd-tag__icon {
     flex-shrink: 0;
 }
 
-.wd-tag--rounded {
-    border-radius: var(--wd-radius-full);
+.rd-tag--rounded {
+    border-radius: var(--rd-radius-full);
 }
 
-.wd-tag--primary {
-    background: color-mix(in srgb, var(--wd-color-primary) 12%, transparent);
-    color: var(--wd-color-primary);
+.rd-tag--primary {
+    background: color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
+    color: var(--rd-color-primary);
 }
 
-.wd-tag--secondary {
-    background: color-mix(in srgb, var(--wd-color-text-muted) 16%, var(--wd-color-surface));
-    color: var(--wd-color-text);
+.rd-tag--secondary {
+    background: color-mix(in srgb, var(--rd-color-text-muted) 16%, var(--rd-color-surface));
+    color: var(--rd-color-text);
 }
 
-.wd-tag--success {
-    background: color-mix(in srgb, var(--wd-color-success) 14%, transparent);
-    color: var(--wd-color-success);
+.rd-tag--success {
+    background: color-mix(in srgb, var(--rd-color-success) 14%, transparent);
+    color: var(--rd-color-success);
 }
 
-.wd-tag--info {
-    background: color-mix(in srgb, var(--wd-color-info) 12%, transparent);
-    color: var(--wd-color-info);
+.rd-tag--info {
+    background: color-mix(in srgb, var(--rd-color-info) 12%, transparent);
+    color: var(--rd-color-info);
 }
 
-.wd-tag--warn,
-.wd-tag--warning {
-    background: color-mix(in srgb, var(--wd-color-warn) 14%, transparent);
-    color: var(--wd-color-warn);
+.rd-tag--warn,
+.rd-tag--warning {
+    background: color-mix(in srgb, var(--rd-color-warn) 14%, transparent);
+    color: var(--rd-color-warn);
 }
 
-.wd-tag--danger {
-    background: color-mix(in srgb, var(--wd-color-danger) 12%, transparent);
-    color: var(--wd-color-danger);
+.rd-tag--danger {
+    background: color-mix(in srgb, var(--rd-color-danger) 12%, transparent);
+    color: var(--rd-color-danger);
 }
 
-.wd-tag--contrast {
-    background: var(--wd-color-contrast);
-    color: var(--wd-color-contrast-fg);
+.rd-tag--contrast {
+    background: var(--rd-color-contrast);
+    color: var(--rd-color-contrast-fg);
 }
 
-.wd-tag--help {
-    background: color-mix(in srgb, var(--wd-color-help) 14%, transparent);
-    color: var(--wd-color-help);
+.rd-tag--help {
+    background: color-mix(in srgb, var(--rd-color-help) 14%, transparent);
+    color: var(--rd-color-help);
 }
 
 /* —— Batch 3: visual + long-tail —— */
-.wd-tag__icon {
+.rd-tag__icon {
     flex-shrink: 0;
-    height: var(--wd-tag-icon-size);
-    width: var(--wd-tag-icon-size);
+    height: var(--rd-tag-icon-size);
+    width: var(--rd-tag-icon-size);
 }
 
-.wd-tag__icon :is(.wd-icon, svg) {
+.rd-tag__icon :is(.rd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wd-tag--small {
-    --wd-tag-icon-size: 0.875rem;
-    font-size: var(--wd-tag-font-size-small);
-    padding: 0.15rem var(--wd-space-2);
+.rd-tag--small {
+    --rd-tag-icon-size: 0.875rem;
+    font-size: var(--rd-tag-font-size-small);
+    padding: 0.15rem var(--rd-space-2);
 }
 
-.wd-tag--large {
-    --wd-tag-icon-size: 1.25rem;
-    font-size: var(--wd-font-size-sm);
-    padding: var(--wd-space-2) var(--wd-space-4);
+.rd-tag--large {
+    --rd-tag-icon-size: 1.25rem;
+    font-size: var(--rd-font-size-sm);
+    padding: var(--rd-space-2) var(--rd-space-4);
 }
 
-.wd-tag--bordered {
+.rd-tag--bordered {
     box-shadow: inset 0 0 0 1px currentColor;
 }
 
-.wd-tag--custom {
-    background: color-mix(in srgb, var(--wd-tag-color) 14%, transparent);
-    color: var(--wd-tag-color);
+.rd-tag--custom {
+    background: color-mix(in srgb, var(--rd-tag-color) 14%, transparent);
+    color: var(--rd-tag-color);
 }
 
-.wd-tag--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-tag--disabled {
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-tag__close {
+.rd-tag__close {
     align-items: center;
     background: transparent;
     border: 0;
@@ -109,30 +109,30 @@
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    height: var(--wd-tag-icon-size);
+    height: var(--rd-tag-icon-size);
     justify-content: center;
     line-height: 1;
     margin-left: 0.15rem;
     padding: 0;
-    width: var(--wd-tag-icon-size);
+    width: var(--rd-tag-icon-size);
 }
 
-.wd-tag__close :is(.wd-icon, svg) {
+.rd-tag__close :is(.rd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wd-tag__close:hover:not(:disabled) {
+.rd-tag__close:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--wd-color-primary) 10%,
-        var(--wd-color-surface)
+        var(--rd-color-primary) 10%,
+        var(--rd-color-surface)
     );
-    color: var(--wd-color-text);
+    color: var(--rd-color-text);
 }
 
-.wd-tag__close:focus-visible {
+.rd-tag__close:focus-visible {
     outline: none;
-    box-shadow: var(--wd-focus-shadow);
+    box-shadow: var(--rd-focus-shadow);
 }

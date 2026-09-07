@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { WdTextareaAutosize } from '../../shared/componentDefaults'
+import type { RdTextareaAutosize } from '../../shared/componentDefaults'
 import type { TextareaProps } from './types'
 import { computed, nextTick, onMounted, ref, useAttrs, watch } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import {
   useComponentDefaults,
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
-import { useWdId } from '../../shared/useWdId'
-import WdIcon from '../Icon/Icon.vue'
+import { useRdId } from '../../shared/useRdId'
+import RdIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -33,9 +33,9 @@ const emit = defineEmits<{
 }>()
 const attrs = useAttrs()
 const defaults = useComponentDefaults('Textarea')
-const locale = useWdLocale()
+const locale = useRdLocale()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
-const autoTextareaId = useWdId('wd-textarea')
+const autoTextareaId = useRdId('rd-textarea')
 const textareaId = computed(() => props.id ?? autoTextareaId)
 const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Textarea', () => props.size)
@@ -44,9 +44,9 @@ const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boo
 const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
 
-const resolvedAutosize = computed<WdTextareaAutosize | false>(() => {
+const resolvedAutosize = computed<RdTextareaAutosize | false>(() => {
   if (props.autosize !== undefined && props.autosize !== false) return props.autosize
-  const fromDefaults = defaults.value.autosize as WdTextareaAutosize | undefined
+  const fromDefaults = defaults.value.autosize as RdTextareaAutosize | undefined
   if (fromDefaults !== undefined && fromDefaults !== false) return fromDefaults
   return false
 })
@@ -74,13 +74,13 @@ const describedBy = computed(() => {
 })
 
 const textareaClass = computed(() => [
-  'wd-textarea',
-  `wd-textarea--${sizeClass.value}`,
+  'rd-textarea',
+  `rd-textarea--${sizeClass.value}`,
   {
-    'wd-textarea--filled': resolvedVariant.value === 'filled',
-    'wd-textarea--fluid': resolvedFluid.value,
-    'wd-textarea--invalid': isInvalid.value,
-    'wd-textarea--auto-resize': isAutosize.value,
+    'rd-textarea--filled': resolvedVariant.value === 'filled',
+    'rd-textarea--fluid': resolvedFluid.value,
+    'rd-textarea--invalid': isInvalid.value,
+    'rd-textarea--auto-resize': isAutosize.value,
   },
 ])
 
@@ -156,11 +156,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="wd-textarea-field" :class="{ 'wd-textarea-field--fluid': resolvedFluid }">
-    <label v-if="label" class="wd-textarea-field__label" :for="textareaId">{{ label }}</label>
+  <div class="rd-textarea-field" :class="{ 'rd-textarea-field--fluid': resolvedFluid }">
+    <label v-if="label" class="rd-textarea-field__label" :for="textareaId">{{ label }}</label>
     <div
-      class="wd-textarea-field__control"
-      :class="{ 'wd-textarea-field__control--clearable': showClear }"
+      class="rd-textarea-field__control"
+      :class="{ 'rd-textarea-field__control--clearable': showClear }"
     >
       <textarea
         v-bind="attrs"
@@ -182,21 +182,21 @@ onMounted(() => {
       />
       <button
         v-if="showClear"
-        class="wd-textarea__clear"
+        class="rd-textarea__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <WdIcon name="close" size="sm" />
+        <RdIcon name="close" size="sm" />
       </button>
     </div>
-    <div v-if="feedbackText || resolvedShowCount" class="wd-textarea-field__meta">
+    <div v-if="feedbackText || resolvedShowCount" class="rd-textarea-field__meta">
       <span
         v-if="feedbackText"
         :id="`${textareaId}-help`"
-        class="wd-textarea-field__help"
-        :class="{ 'wd-textarea-field__help--invalid': feedbackIsError }"
+        class="rd-textarea-field__help"
+        :class="{ 'rd-textarea-field__help--invalid': feedbackIsError }"
         :role="feedbackIsError ? 'alert' : undefined"
       >
         {{ feedbackText }}
@@ -204,7 +204,7 @@ onMounted(() => {
       <span
         v-if="resolvedShowCount"
         :id="`${textareaId}-count`"
-        class="wd-textarea-field__count"
+        class="rd-textarea-field__count"
         aria-live="polite"
       >
         {{ countText }}

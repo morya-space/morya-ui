@@ -11,7 +11,7 @@ description: 状态角标或圆点。
 ## 引入
 
 ```ts
-import { WdBadge } from '@wex-design/ui'
+import { RdBadge } from '@roost-design/ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WdBadge } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge } from '@wex-design/ui'
+import { RdBadge } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdBadge :value="2" />
-    <WdBadge value="New" />
-    <WdBadge />
+    <RdBadge :value="2" />
+    <RdBadge value="New" />
+    <RdBadge />
   </div>
 </template>
 ```
@@ -38,18 +38,18 @@ import { WdBadge } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge } from '@wex-design/ui'
+import { RdBadge } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdBadge :value="1" />
-    <WdBadge :value="2" severity="secondary" />
-    <WdBadge :value="3" severity="success" />
-    <WdBadge :value="4" severity="info" />
-    <WdBadge :value="5" severity="warn" />
-    <WdBadge :value="6" severity="danger" />
-    <WdBadge :value="7" severity="contrast" />
+    <RdBadge :value="1" />
+    <RdBadge :value="2" severity="secondary" />
+    <RdBadge :value="3" severity="success" />
+    <RdBadge :value="4" severity="info" />
+    <RdBadge :value="5" severity="warn" />
+    <RdBadge :value="6" severity="danger" />
+    <RdBadge :value="7" severity="contrast" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ import { WdBadge } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge } from '@wex-design/ui'
+import { RdBadge } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdBadge :value="8" size="small" />
-    <WdBadge :value="9" />
-    <WdBadge :value="10" size="large" />
+    <RdBadge :value="8" size="small" />
+    <RdBadge :value="9" />
+    <RdBadge :value="10" size="large" />
   </div>
 </template>
 ```
@@ -78,17 +78,17 @@ import { WdBadge } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdBadge, WdButton } from '@wex-design/ui'
+import { RdBadge, RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WdBadge :value="120" :max="99">
-      <WdButton label="Inbox" severity="secondary" />
-    </WdBadge>
-    <WdBadge processing>
-      <WdButton label="Live" icon="check" />
-    </WdBadge>
+    <RdBadge :value="120" :max="99">
+      <RdButton label="Inbox" severity="secondary" />
+    </RdBadge>
+    <RdBadge processing>
+      <RdButton label="Live" icon="check" />
+    </RdBadge>
   </div>
 </template>
 ```

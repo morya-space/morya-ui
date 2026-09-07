@@ -11,14 +11,14 @@ description: 可搜索的命令面板对话框。
 ## 引入
 
 ```ts
-import { WdCommandMenu, type CommandMenuItem } from '@wex-design/ui'
+import { RdCommandMenu, type CommandMenuItem } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdCommandMenu } from '@wex-design/ui'
+import { RdButton, RdCommandMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -30,8 +30,8 @@ const model = [
 </script>
 
 <template>
-  <WdButton label="打开命令面板" @click="visible = true" />
-  <WdCommandMenu v-model="visible" :model="model" placeholder="搜索命令…" />
+  <RdButton label="打开命令面板" @click="visible = true" />
+  <RdCommandMenu v-model="visible" :model="model" placeholder="搜索命令…" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ const model = [
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | `label` | `string` | 展示文案，参与本地过滤。 |
-| `icon` | `string` | 可选前缀字符（非 WdIcon 名）。 |
+| `icon` | `string` | 可选前缀字符（非 RdIcon 名）。 |
 | `shortcut` | `string` | 可选快捷键展示。 |
 | `command` | `() => void` | 选中后执行；执行完自动关闭面板。 |
 | `disabled` | `boolean` | 禁用项不可激活。 |

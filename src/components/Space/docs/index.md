@@ -11,22 +11,22 @@ description: 在子元素之间自动加入一致间距的布局容器。
 ## 引入
 
 ```ts
-import { WdSpace } from '@wex-design/ui'
+import { RdSpace } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdSpace } from '@wex-design/ui'
+import { RdButton, RdSpace } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSpace>
-    <WdButton label="保存" size="small" />
-    <WdButton label="取消" size="small" severity="secondary" />
-    <WdButton label="重置" size="small" severity="secondary" />
-  </WdSpace>
+  <RdSpace>
+    <RdButton label="保存" size="small" />
+    <RdButton label="取消" size="small" severity="secondary" />
+    <RdButton label="重置" size="small" severity="secondary" />
+  </RdSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WdButton, WdSpace } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSpace, WdTag } from '@wex-design/ui'
+import { RdSpace, RdTag } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSpace vertical>
-    <WdTag value="Alpha" />
-    <WdTag value="Bravo" />
-    <WdTag value="Charlie" />
-  </WdSpace>
+  <RdSpace vertical>
+    <RdTag value="Alpha" />
+    <RdTag value="Bravo" />
+    <RdTag value="Charlie" />
+  </RdSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { WdSpace, WdTag } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdSpace } from '@wex-design/ui'
+import { RdButton, RdSpace } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WdSpace size="small">
-      <WdButton label="S" size="small" />
-      <WdButton label="S" size="small" severity="secondary" />
-    </WdSpace>
-    <WdSpace :size="20">
-      <WdButton label="20px" size="small" />
-      <WdButton label="20px" size="small" severity="secondary" />
-    </WdSpace>
+    <RdSpace size="small">
+      <RdButton label="S" size="small" />
+      <RdButton label="S" size="small" severity="secondary" />
+    </RdSpace>
+    <RdSpace :size="20">
+      <RdButton label="20px" size="small" />
+      <RdButton label="20px" size="small" severity="secondary" />
+    </RdSpace>
   </div>
 </template>
 ```
 
-未传 `size` 时默认 `medium`。可用 `WdConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
+未传 `size` 时默认 `medium`。可用 `RdConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ import { WdButton, WdSpace } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSpace, WdTag } from '@wex-design/ui'
+import { RdSpace, RdTag } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSpace :wrap-item="false" :size="8">
-    <WdTag value="Direct" />
-    <WdTag value="Children" />
-  </WdSpace>
+  <RdSpace :wrap-item="false" :size="8">
+    <RdTag value="Direct" />
+    <RdTag value="Children" />
+  </RdSpace>
 </template>
 ```
 

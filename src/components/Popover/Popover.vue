@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PopoverProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdId } from '../../shared/useWdId'
-import { useWdConfig } from "../../shared/config";
+import { useRdId } from '../../shared/useRdId'
+import { useRdConfig } from "../../shared/config";
 import {
     isOverlayTeleported,
     resolveOverlayTeleport,
@@ -24,8 +24,8 @@ const emit = defineEmits<{
     (event: "hide"): void;
 }>();
 
-const config = useWdConfig()
-const panelId = useWdId()
+const config = useRdConfig()
+const panelId = useRdId()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null);
 const panel = ref<HTMLElement | null>(null);
@@ -187,13 +187,13 @@ onBeforeUnmount(() => {
 <template>
     <span
         ref="root"
-        class="wd-popover"
+        class="rd-popover"
         @mouseenter="onTriggerEnter"
         @mouseleave="onTriggerLeave"
     >
         <span
             ref="trigger"
-            class="wd-popover__trigger"
+            class="rd-popover__trigger"
             aria-haspopup="dialog"
             :aria-expanded="modelValue"
             :aria-controls="panelId"
@@ -204,15 +204,15 @@ onBeforeUnmount(() => {
             <slot />
         </span>
         <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-            <Transition name="wd-popover">
+            <Transition name="rd-popover">
                 <div
                     v-if="modelValue"
                     ref="panel"
                     :id="panelId"
-                    class="wd-popover__content"
+                    class="rd-popover__content"
                     :class="[
-                        `wd-popover__content--${placement}`,
-                        { 'wd-popover__content--teleported': teleported },
+                        `rd-popover__content--${placement}`,
+                        { 'rd-popover__content--teleported': teleported },
                     ]"
                     :style="teleported ? panelStyle : undefined"
                     role="dialog"

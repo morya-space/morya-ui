@@ -1,6 +1,6 @@
 export type {
-  WdComponentDefaults,
-  WdDensity,
-  WdGlobalConfig,
-  WdLocaleConfig,
+  RdComponentDefaults,
+  RdDensity,
+  RdGlobalConfig,
+  RdLocaleConfig,
 } from '../../shared/config'

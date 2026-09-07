@@ -11,24 +11,24 @@ description: 悬停或聚焦时显示的短提示。支持 placement、disabled 
 ## 引入
 
 ```ts
-import { WdButton, WdTooltip } from '@wex-design/ui'
+import { RdButton, RdTooltip } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdTooltip } from '@wex-design/ui'
+import { RdButton, RdTooltip } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WdTooltip content="Save changes" placement="top">
-      <WdButton icon="check" icon-only aria-label="Save" />
-    </WdTooltip>
-    <WdTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
-      <WdButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
-    </WdTooltip>
+    <RdTooltip content="Save changes" placement="top">
+      <RdButton icon="check" icon-only aria-label="Save" />
+    </RdTooltip>
+    <RdTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
+      <RdButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
+    </RdTooltip>
   </div>
 </template>
 ```
