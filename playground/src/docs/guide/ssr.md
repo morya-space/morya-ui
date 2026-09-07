@@ -71,7 +71,7 @@ const theme = ref<'light' | 'dark'>('light')
 </script>
 ```
 
-按需导入时无需 `app.use(RoostDesign)`；若需全量注册，可在 `plugins/wex-design.client.ts` 中 `nuxtApp.vueApp.use(RoostDesign)`。
+按需导入时无需 `app.use(RoostDesign)`；若需全量注册，可在 `plugins/roost-design.client.ts` 中 `nuxtApp.vueApp.use(RoostDesign)`。
 
 ### 仅客户端组件
 

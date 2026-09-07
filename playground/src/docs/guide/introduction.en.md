@@ -8,7 +8,7 @@ description: What Roost Design UI is, who it is for, and how to get started.
 
 **Roost Design UI** (`@roost-design/ui`) is an **open-source** Vue 3 component library with design tokens, light/dark themes, i18n, and interactive documentation.
 
-- **Docs**: [wex-design.github.io/wex-design-ui](https://roost-design.github.io/roost-design-ui/)
+- **Docs**: [roost-design.github.io/roost-design-ui](https://roost-design.github.io/roost-design-ui/)
 - **Source**: [GitHub](https://github.com/roost-design/roost-design-ui)
 - **npm**: [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
 

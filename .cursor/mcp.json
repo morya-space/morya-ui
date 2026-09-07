@@ -8,7 +8,7 @@
       "command": "npx",
       "args": ["-y", "@primevue/mcp"]
     },
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "node",
       "args": ["packages/ui-mcp/bin/roost-design-ui-mcp.js"]
     }

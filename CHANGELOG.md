@@ -1,30 +1,8 @@
 # @roost-design/ui
 
-## 0.1.15
-
-### 新功能
-
-- rebrand to @wex-design/ui and reset release baseline to 0.0.1
-- add SSR support for Nuxt, Astro, and Vite
-
-### 文档
-
-- describe Vue 3 support with 3.5+ recommendation
-- polish docs site home, changelog, and branding
-- rebrand as open-source library with logo and README
-
-### 变更
-
-- update catalog generation timestamp and adjust component exports
-- rebrand library from @wex-design/ui to @roost-design/ui
-- reset release baseline to 0.1.1 with fresh changelog
-- update Vue peer dependency and documentation references
-- deploy docs site to GitHub Pages
-- remove admin-manage-project from monorepo
-
 ## 0.1.1
 
-`@roost-design/ui` 的初始公开版本，以当前组件库能力为基准。
+`@roost-design/ui` 的初始公开版本（Roost Design UI），以当前组件库能力为基准。
 
 ### 组件（88 个）
 
@@ -38,9 +16,10 @@
 ### 主题与设计令牌
 
 - 亮/暗色主题（`useTheme`、`applyTheme`、`getPreferredTheme`）
-- 密度与动效偏好（`useDensity`、`useMotion`，支持 `prefers-reduced-motion` 与 `data-wd-motion`）
+- 密度与动效偏好（`useDensity`、`useMotion`，支持 `prefers-reduced-motion` 与 `data-rd-motion`）
 - 基于 `--rd-*` CSS 变量的设计令牌体系（颜色、间距、圆角、阴影、边框、布局、树形、时间线、分割面板等）
 - 子树级覆盖：`RdConfigProvider` 注入主题、密度、动效与组件默认项
+- 向后兼容：保留 `Wd*` 组件别名与 `--wd-*` token 别名（见 `wd-compat.css` / `wd-exports`）
 
 ### 全局配置与工具 API
 
@@ -60,7 +39,7 @@
 ### 文档站
 
 - 交互式文档站（Markdown + `vue preview` 实时示例）
-- 组件目录、指南（快速上手、主题、配置、SSR、无障碍）
+- 组件目录、指南（快速上手、主题、配置、SSR、无障碍、MCP）
 - 亮/暗主题切换、中英文切换、全局搜索（CommandMenu）
 - 部署至 GitHub Pages：https://roost-design.github.io/roost-design-ui/
 
@@ -71,7 +50,7 @@
 
 ### SSR 与框架集成
 
-- 兼容 Nuxt 3、Astro + Vue、Vite SSR 等场景
+- 兼容 Nuxt 3、Astro + Vue、Vite SSR 等场景（推荐 Vue 3.5+）
 - 浮层统一挂载与 placement（flip / clamp）策略
 
 ### 无障碍

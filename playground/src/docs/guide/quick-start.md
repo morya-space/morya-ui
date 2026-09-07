@@ -6,7 +6,7 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 
 # 快速上手
 
-> 在线文档：[wex-design.github.io/wex-design-ui](https://roost-design.github.io/roost-design-ui/) · 源码：[GitHub](https://github.com/roost-design/roost-design-ui) · npm：[`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
+> 在线文档：[roost-design.github.io/roost-design-ui](https://roost-design.github.io/roost-design-ui/) · 源码：[GitHub](https://github.com/roost-design/roost-design-ui) · npm：[`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
 
 ## 安装
 

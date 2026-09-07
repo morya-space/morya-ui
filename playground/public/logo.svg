@@ -9,9 +9,9 @@
       <stop offset="1" stop-color="#fff" stop-opacity=".82"/>
     </linearGradient>
   </defs>
-  <rect width="128" height="128" rx="28" fill="url(#wd-bg)"/>
+  <rect width="128" height="128" rx="28" fill="url(#rd-bg)"/>
   <path
-    fill="url(#wd-mark)"
+    fill="url(#rd-mark)"
     d="M28 88 40.5 42h10.2l5.8 24.6L62.3 42h10l5.9 24.6L84 42h10.2L106 88h-11.4L83.6 56.8 77.8 88h-9.9l-5.8-31.2L56.3 88H44.9L39.4 56.8 28 88Z"
   />
 </svg>

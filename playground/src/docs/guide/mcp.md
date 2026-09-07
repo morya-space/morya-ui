@@ -46,7 +46,7 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -59,7 +59,7 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -72,7 +72,7 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -85,7 +85,7 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -98,7 +98,7 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "context_servers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -174,7 +174,7 @@ npx -y @roost-design/ui-mcp
 
 接入后，可直接让助手调用本服务，例如：
 
-> 用 wex-design-ui 的 MCP 查一下 Dialog 的 props，并给一个带确认 / 取消按钮的示例。
+> 用 roost-design-ui 的 MCP 查一下 Dialog 的 props，并给一个带确认 / 取消按钮的示例。
 
 > 搜索和「日期」相关的组件，选一个适合表单的，按文档写出最小用法。
 

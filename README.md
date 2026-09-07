@@ -17,7 +17,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/@roost-design/ui"><img src="https://img.shields.io/npm/v/@roost-design/ui?style=flat-square" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/@roost-design/ui"><img src="https://img.shields.io/npm/dm/@roost-design/ui?style=flat-square" alt="npm downloads" /></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/github/license/wex-design/wex-design-ui?style=flat-square" alt="license" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/roost-design/roost-design-ui?style=flat-square" alt="license" /></a>
   <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/Vue-3-42b883?style=flat-square&logo=vue.js&logoColor=white" alt="Vue 3" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
 </p>

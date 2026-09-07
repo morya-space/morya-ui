@@ -46,7 +46,7 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -59,7 +59,7 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -72,7 +72,7 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -85,7 +85,7 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -98,7 +98,7 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "context_servers": {
-    "wex-design-ui": {
+    "roost-design-ui": {
       "command": "npx",
       "args": ["-y", "@roost-design/ui-mcp"]
     }
@@ -174,7 +174,7 @@ Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
 
 After connecting, you can ask the assistant to use this server, for example:
 
-> Use the wex-design-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
+> Use the roost-design-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
 
 > Search for date-related components, pick one suitable for forms, and write a minimal usage from the docs.
 
