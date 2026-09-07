@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WdScrollbar from './Scrollbar.vue'
+import RdScrollbar from './Scrollbar.vue'
 
-describe('wdScrollbar', () => {
+describe('rdScrollbar', () => {
   it('renders content and applies height to the wrap', () => {
-    const wrapper = mount(WdScrollbar, {
+    const wrapper = mount(RdScrollbar, {
       props: { height: 200, always: true },
       slots: {
         default: '<p class="item">One</p><p class="item">Two</p>',
@@ -13,13 +13,13 @@ describe('wdScrollbar', () => {
       attachTo: document.body,
     })
 
-    expect(wrapper.get('.wd-scrollbar__view').text()).toContain('One')
-    expect(wrapper.get('.wd-scrollbar__wrap').attributes('style')).toContain('height: 200px')
+    expect(wrapper.get('.rd-scrollbar__view').text()).toContain('One')
+    expect(wrapper.get('.rd-scrollbar__wrap').attributes('style')).toContain('height: 200px')
     wrapper.unmount()
   })
 
   it('hides the native scrollbar by default and exposes custom bars when always', async () => {
-    const wrapper = mount(WdScrollbar, {
+    const wrapper = mount(RdScrollbar, {
       props: { height: 120, always: true },
       slots: {
         default: Array.from({ length: 20 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
@@ -28,26 +28,26 @@ describe('wdScrollbar', () => {
     })
 
     await nextTick()
-    expect(wrapper.get('.wd-scrollbar__wrap').classes()).toContain('wd-scrollbar__wrap--hidden-default')
-    expect(wrapper.findAll('.wd-scrollbar__bar').length).toBe(2)
+    expect(wrapper.get('.rd-scrollbar__wrap').classes()).toContain('rd-scrollbar__wrap--hidden-default')
+    expect(wrapper.findAll('.rd-scrollbar__bar').length).toBe(2)
     wrapper.unmount()
   })
 
   it('uses native scrollbar when native is true', () => {
-    const wrapper = mount(WdScrollbar, {
+    const wrapper = mount(RdScrollbar, {
       props: { height: 120, native: true },
       slots: { default: '<p>Native</p>' },
     })
 
-    expect(wrapper.find('.wd-scrollbar__bar').exists()).toBe(false)
-    expect(wrapper.get('.wd-scrollbar__wrap').classes()).not.toContain(
-      'wd-scrollbar__wrap--hidden-default',
+    expect(wrapper.find('.rd-scrollbar__bar').exists()).toBe(false)
+    expect(wrapper.get('.rd-scrollbar__wrap').classes()).not.toContain(
+      'rd-scrollbar__wrap--hidden-default',
     )
   })
 
   it('emits scroll and supports setScrollTop / setScrollLeft', async () => {
     const onScroll = vi.fn()
-    const wrapper = mount(WdScrollbar, {
+    const wrapper = mount(RdScrollbar, {
       props: { height: 100, always: true, onScroll },
       slots: {
         default: Array.from({ length: 30 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
@@ -55,7 +55,7 @@ describe('wdScrollbar', () => {
       attachTo: document.body,
     })
 
-    const wrap = wrapper.get('.wd-scrollbar__wrap').element as HTMLDivElement
+    const wrap = wrapper.get('.rd-scrollbar__wrap').element as HTMLDivElement
     Object.defineProperty(wrap, 'scrollHeight', { configurable: true, value: 1200 })
     Object.defineProperty(wrap, 'clientHeight', { configurable: true, value: 100 })
     Object.defineProperty(wrap, 'scrollWidth', { configurable: true, value: 800 })
@@ -83,7 +83,7 @@ describe('wdScrollbar', () => {
   })
 
   it('applies max-height and view accessibility attributes', () => {
-    const wrapper = mount(WdScrollbar, {
+    const wrapper = mount(RdScrollbar, {
       props: {
         maxHeight: '240px',
         id: 'panel-view',
@@ -94,8 +94,8 @@ describe('wdScrollbar', () => {
       slots: { default: '<p>Content</p>' },
     })
 
-    expect(wrapper.get('.wd-scrollbar__wrap').attributes('style')).toContain('max-height: 240px')
-    const view = wrapper.get('.wd-scrollbar__view')
+    expect(wrapper.get('.rd-scrollbar__wrap').attributes('style')).toContain('max-height: 240px')
+    const view = wrapper.get('.rd-scrollbar__view')
     expect(view.attributes('id')).toBe('panel-view')
     expect(view.attributes('role')).toBe('region')
     expect(view.attributes('aria-label')).toBe('Scrollable panel')
@@ -103,7 +103,7 @@ describe('wdScrollbar', () => {
   })
 
   it('shows thumbs when trigger is none', async () => {
-    const wrapper = mount(WdScrollbar, {
+    const wrapper = mount(RdScrollbar, {
       props: { height: 120, trigger: 'none' },
       slots: {
         default: Array.from({ length: 20 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
@@ -111,7 +111,7 @@ describe('wdScrollbar', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(wrapper.findAll('.wd-scrollbar__bar').length).toBe(2)
+    expect(wrapper.findAll('.rd-scrollbar__bar').length).toBe(2)
     wrapper.unmount()
   })
 })

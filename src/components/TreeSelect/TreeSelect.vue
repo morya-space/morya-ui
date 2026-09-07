@@ -2,9 +2,9 @@
 import type { TreeCheckedKeys } from '../Tree/types'
 import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import { useConfiguredSize, useWdConfig } from '../../shared/config'
-import { useWdId } from '../../shared/useWdId'
+import { useRdLocale } from '../../locale'
+import { useConfiguredSize, useRdConfig } from '../../shared/config'
+import { useRdId } from '../../shared/useRdId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
@@ -18,7 +18,7 @@ import {
   syncAncestors,
 } from '../Tree/checkStrategy'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
-import WdIcon from '../Icon/Icon.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
   modelValue: null,
@@ -43,10 +43,10 @@ const emit = defineEmits<{
 }>()
 
 const slots = useSlots()
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useRdConfig()
+const locale = useRdLocale()
 const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
-const autoFieldId = useWdId('wd-treeselect')
+const autoFieldId = useRdId('rd-treeselect')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const open = ref(false)
@@ -129,7 +129,7 @@ const flatNodes = computed<FlatTreeNode[]>(() => {
   return list
 })
 
-const panelId = useWdId('wd-treeselect-panel')
+const panelId = useRdId('rd-treeselect-panel')
 
 const keyboard = useMenuKeyboard({
   itemCount: () => flatNodes.value.length,
@@ -150,7 +150,7 @@ const activeKey = computed(() => flatNodes.value[keyboard.activeIndex.value]?.no
 function focusActiveNode() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  const options = panel.value?.querySelectorAll<HTMLElement>('.wd-treeselect__option')
+  const options = panel.value?.querySelectorAll<HTMLElement>('.rd-treeselect__option')
   const option = options?.[index]
   if (option && document.activeElement !== option) option.focus({ preventScroll: true })
   option?.scrollIntoView({ block: 'nearest' })
@@ -171,7 +171,7 @@ function openPanel() {
     const selectedIndex = flatNodes.value.findIndex((flat) => selectedKeys.value.includes(flat.node.key))
     if (selectedIndex >= 0) keyboard.setActive(selectedIndex)
     else keyboard.moveFirst()
-    if (props.filterable) panel.value?.querySelector<HTMLElement>('.wd-treeselect__filter')?.focus()
+    if (props.filterable) panel.value?.querySelector<HTMLElement>('.rd-treeselect__filter')?.focus()
     else focusActiveNode()
   })
 }
@@ -240,7 +240,7 @@ watch(keyboard.activeIndex, () => {
   else if (open.value) {
     const index = keyboard.activeIndex.value
     panel.value
-      ?.querySelectorAll<HTMLElement>('.wd-treeselect__option')
+      ?.querySelectorAll<HTMLElement>('.rd-treeselect__option')
       [index]?.scrollIntoView({ block: 'nearest' })
   }
 })
@@ -340,31 +340,31 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="wd-select-field">
-    <label v-if="label" class="wd-select-field__label" :for="fieldId">{{ label }}</label>
+  <div ref="root" class="rd-select-field">
+    <label v-if="label" class="rd-select-field__label" :for="fieldId">{{ label }}</label>
     <div
-      class="wd-treeselect"
+      class="rd-treeselect"
       :class="[
-        `wd-treeselect--${sizeClass}`,
+        `rd-treeselect--${sizeClass}`,
         {
-          'wd-treeselect--disabled': disabled,
-          'wd-treeselect--open': open,
-          'wd-treeselect--multiple': isMultiple,
-          'wd-treeselect--invalid': isInvalid,
+          'rd-treeselect--disabled': disabled,
+          'rd-treeselect--open': open,
+          'rd-treeselect--multiple': isMultiple,
+          'rd-treeselect--invalid': isInvalid,
         },
       ]"
     >
     <div
-      class="wd-treeselect__control wd-select__control"
+      class="rd-treeselect__control rd-select__control"
       :class="{
-        'wd-select__control--clearable': showClearButton,
-        'wd-select__control--open': open,
+        'rd-select__control--clearable': showClearButton,
+        'rd-select__control--open': open,
       }"
     >
       <div
         :id="fieldId"
         ref="trigger"
-        class="wd-treeselect__trigger"
+        class="rd-treeselect__trigger"
         role="combobox"
         :tabindex="disabled ? -1 : 0"
         :aria-disabled="disabled || undefined"
@@ -376,72 +376,72 @@ onBeforeUnmount(() => {
         @click="toggle"
         @keydown="onTriggerKeydown"
       >
-        <div v-if="isMultiple && selectedTags.length" class="wd-treeselect__tags">
-          <span v-for="tag in visibleTags" :key="tag.key" class="wd-select__tag">
-            <span class="wd-select__tag-label">{{ tag.label }}</span>
+        <div v-if="isMultiple && selectedTags.length" class="rd-treeselect__tags">
+          <span v-for="tag in visibleTags" :key="tag.key" class="rd-select__tag">
+            <span class="rd-select__tag-label">{{ tag.label }}</span>
             <button
               type="button"
-              class="wd-select__tag-remove"
+              class="rd-select__tag-remove"
               :aria-label="locale.removeTag"
               :disabled="disabled"
               @click.stop="removeTag(tag.key)"
             >
-              <WdIcon name="close" size="sm" />
+              <RdIcon name="close" size="sm" />
             </button>
           </span>
-          <span v-if="hiddenTagCount" class="wd-select__tag wd-select__tag--more">
+          <span v-if="hiddenTagCount" class="rd-select__tag rd-select__tag--more">
             {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
           </span>
         </div>
         <span
           v-else-if="!(slots.value && selectedNode)"
-          class="wd-treeselect__label"
-          :class="{ 'wd-treeselect__label--placeholder': !selectedKeys.length }"
+          class="rd-treeselect__label"
+          :class="{ 'rd-treeselect__label--placeholder': !selectedKeys.length }"
         >
           {{ displayLabel }}
         </span>
         <slot v-else name="value" :option="selectedNode" />
       </div>
-      <div class="wd-select__suffix">
+      <div class="rd-select__suffix">
         <button
           v-if="showClearButton"
-          class="wd-select__clear"
+          class="rd-select__clear"
           type="button"
           :aria-label="locale.clear"
           @click="clear"
         >
-          <WdIcon name="close" class="wd-control-affix-icon" />
+          <RdIcon name="close" class="rd-control-affix-icon" />
         </button>
         <span
-          class="wd-select__indicator"
-          :class="{ 'wd-select__indicator--open': open }"
+          class="rd-select__indicator"
+          :class="{ 'rd-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <WdIcon name="chevron-down" class="wd-control-affix-icon" />
+          <RdIcon name="chevron-down" class="rd-control-affix-icon" />
         </span>
       </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-scale-fade">
+      <Transition name="rd-scale-fade">
         <div
           v-if="open"
           :id="panelId"
           ref="panel"
-          class="wd-treeselect__panel"
-          :class="{ 'wd-treeselect__panel--teleported': teleported }"
+          class="rd-treeselect__panel"
+          :class="{ 'rd-treeselect__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
           @keydown="onTreeKeydown"
         >
           <input
             v-if="filterable"
             v-model="query"
-            class="wd-treeselect__filter"
+            class="rd-treeselect__filter"
             type="search"
             :placeholder="locale.searchPlaceholder"
             @click.stop
             @keydown="onFilterKeydown"
           >
-          <ul class="wd-treeselect__tree" role="tree">
+          <ul class="rd-treeselect__tree" role="tree">
             <TreeSelectNodeItem
               v-for="node in filteredOptions"
               :key="node.key"
@@ -465,8 +465,8 @@ onBeforeUnmount(() => {
     <span
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="wd-select-field__help"
-      :class="{ 'wd-select-field__help--invalid': feedbackIsError }"
+      class="rd-select-field__help"
+      :class="{ 'rd-select-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

@@ -1,3 +1,3 @@
 import './style'
-export { default as WdDropdown } from './Dropdown.vue'
+export { default as RdDropdown } from './Dropdown.vue'
 export type { DropdownEmits, DropdownItem, DropdownProps } from './types'

@@ -1,12 +1,12 @@
 ---
 title: 全局配置
 order: 5
-description: ConfigProvider、createWexDesign 与 useWdConfig。
+description: ConfigProvider、createRoostDesign 与 useRdConfig。
 ---
 
 # 全局配置
 
-Wex Design 提供应用级 / 页面级默认值，用于统一浮层挂载、尺寸、密度与文案。
+Roost Design 提供应用级 / 页面级默认值，用于统一浮层挂载、尺寸、密度与文案。
 
 ## 能力一览
 
@@ -19,23 +19,23 @@ Wex Design 提供应用级 / 页面级默认值，用于统一浮层挂载、尺
 | `zIndex` | 浮层基准层级 |
 | `locale` | 确认、空态、加载、占位等文案。可传入内置语言包 `zhCN` / `enUS` |
 
-优先级：**组件 Props > `WdConfigProvider` > `createWexDesign` > 内置默认（中文）**。
+优先级：**组件 Props > `RdConfigProvider` > `createRoostDesign` > 内置默认（中文）**。
 
 ## 语言包
 
 组件内置文案默认中文。切换英文时传入 `enUS`：
 
 ```ts
-import { createWexDesign, enUS, zhCN } from '@wex-design/ui'
+import { createRoostDesign, enUS, zhCN } from '@roost-design/ui'
 import { createApp } from 'vue'
 
-createApp(App).use(createWexDesign({ locale: enUS })).mount('#app')
+createApp(App).use(createRoostDesign({ locale: enUS })).mount('#app')
 ```
 
 也可以只覆盖部分文案：
 
 ```ts
-createWexDesign({
+createRoostDesign({
   locale: {
     ...zhCN,
     accept: '确定',
@@ -43,7 +43,7 @@ createWexDesign({
 })
 ```
 
-文档站右上角的「中 / EN」会把同一套语言包注入 `WdConfigProvider`，因此示例里的空态、确认、日期等文案会跟着切换。指南与组件 Markdown 在英文下会加载对应的 `*.en.md`。
+文档站右上角的「中 / EN」会把同一套语言包注入 `RdConfigProvider`，因此示例里的空态、确认、日期等文案会跟着切换。指南与组件 Markdown 在英文下会加载对应的 `*.en.md`。
 
 ## Size
 
@@ -51,7 +51,7 @@ createWexDesign({
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput, WdSelect } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -64,25 +64,25 @@ const options = [
 <template>
   <div style="display:grid;gap:1rem">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
         默认尺寸
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <WdButton label="按钮" />
-        <WdInput placeholder="输入" style="width:10rem" />
-        <WdSelect v-model="city" :options="options" style="width:10rem" />
+        <RdButton label="按钮" />
+        <RdInput placeholder="输入" style="width:10rem" />
+        <RdSelect v-model="city" :options="options" style="width:10rem" />
       </div>
     </div>
-    <WdConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+    <RdConfigProvider size="small">
+      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
         Config size="small"
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <WdButton label="按钮" />
-        <WdInput placeholder="输入" style="width:10rem" />
-        <WdSelect v-model="city" :options="options" style="width:10rem" />
+        <RdButton label="按钮" />
+        <RdInput placeholder="输入" style="width:10rem" />
+        <RdSelect v-model="city" :options="options" style="width:10rem" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -91,7 +91,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
@@ -100,7 +100,7 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <WdButton
+      <RdButton
         v-for="item in (['compact', 'comfortable', 'spacious'] as const)"
         :key="item"
         :label="item"
@@ -109,12 +109,12 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
         @click="density = item"
       />
     </div>
-    <WdConfigProvider :density="density" :global-density="false">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
-        <WdButton label="保存" />
-        <WdInput placeholder="昵称" style="width:12rem" />
+    <RdConfigProvider :density="density" :global-density="false">
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+        <RdButton label="保存" />
+        <RdInput placeholder="昵称" style="width:12rem" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -123,29 +123,29 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 
 ```vue preview
 <script setup lang="ts">
-import { WdConfigProvider, WdInput, WdTextarea } from '@wex-design/ui'
+import { RdConfigProvider, RdInput, RdTextarea } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
-    <WdConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wd-color-text-muted)">
+    <RdConfigProvider input-variant="outlined">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--rd-color-text-muted)">
         outlined
       </p>
       <div style="display:grid;gap:0.5rem">
-        <WdInput placeholder="Outlined input" />
-        <WdTextarea placeholder="Outlined textarea" :rows="2" />
+        <RdInput placeholder="Outlined input" />
+        <RdTextarea placeholder="Outlined textarea" :rows="2" />
       </div>
-    </WdConfigProvider>
-    <WdConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wd-color-text-muted)">
+    </RdConfigProvider>
+    <RdConfigProvider input-variant="filled">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--rd-color-text-muted)">
         filled
       </p>
       <div style="display:grid;gap:0.5rem">
-        <WdInput placeholder="Filled input" />
-        <WdTextarea placeholder="Filled textarea" :rows="2" />
+        <RdInput placeholder="Filled input" />
+        <RdTextarea placeholder="Filled textarea" :rows="2" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -154,7 +154,7 @@ import { WdConfigProvider, WdInput, WdTextarea } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdConfirmDialog, WdSelect } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -166,19 +166,19 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider
+  <RdConfigProvider
     :locale="{ selectPlaceholder: '挑一个城市', accept: '好的', reject: '再想想' }"
   >
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdSelect v-model="city" :options="options" style="width:12rem" />
-      <WdButton label="打开确认框" @click="confirmOpen = true" />
-      <WdConfirmDialog
+      <RdSelect v-model="city" :options="options" style="width:12rem" />
+      <RdButton label="打开确认框" @click="confirmOpen = true" />
+      <RdConfirmDialog
         v-model="confirmOpen"
         header="确认操作"
         message="文案来自 locale.accept / reject。"
       />
     </div>
-  </WdConfigProvider>
+  </RdConfigProvider>
 </template>
 ```
 
@@ -186,32 +186,32 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdDialog } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdDialog } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <WdConfigProvider append-to="body" :z-index="2200">
-    <WdButton label="打开对话框" @click="visible = true" />
-    <WdDialog v-model="visible" header="挂载到 body" width="24rem">
+  <RdConfigProvider append-to="body" :z-index="2200">
+    <RdButton label="打开对话框" @click="visible = true" />
+    <RdDialog v-model="visible" header="挂载到 body" width="24rem">
       <p style="margin:0">
         浮层默认 Teleport 到 body，zIndex 基准由 ConfigProvider 提供。
       </p>
-    </WdDialog>
-  </WdConfigProvider>
+    </RdDialog>
+  </RdConfigProvider>
 </template>
 ```
 
-## 应用级：`createWexDesign`
+## 应用级：`createRoostDesign`
 
 ```ts
-import { createWexDesign } from '@wex-design/ui'
+import { createRoostDesign } from '@roost-design/ui'
 import { createApp } from 'vue'
 
 createApp(App).use(
-    createWexDesign({
+    createRoostDesign({
       appendTo: 'body',
       size: 'small',
       zIndex: 2000,
@@ -223,9 +223,9 @@ createApp(App).use(
 ## 读取配置
 
 ```ts
-import { useWdConfig } from '@wex-design/ui'
+import { useRdConfig } from '@roost-design/ui'
 
-const config = useWdConfig()
+const config = useRdConfig()
 // config.value.appendTo / size / locale …
 ```
 

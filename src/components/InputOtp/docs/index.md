@@ -11,21 +11,21 @@ description: 多格单字符输入，适用于验证码。
 ## 引入
 
 ```ts
-import { WdInputOtp } from '@wex-design/ui'
+import { RdInputOtp } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputOtp } from '@wex-design/ui'
+import { RdInputOtp } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const code = ref('')
 </script>
 
 <template>
-  <WdInputOtp v-model="code" :length="4" integer-only />
+  <RdInputOtp v-model="code" :length="4" integer-only />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const code = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputOtp } from '@wex-design/ui'
+import { RdInputOtp } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const code = ref('')
 </script>
 
 <template>
-  <WdInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
+  <RdInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
 </template>
 ```
 

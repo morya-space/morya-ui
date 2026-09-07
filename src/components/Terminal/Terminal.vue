@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { TerminalEmits, TerminalProps } from './types'
 import { computed, nextTick, ref } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 
 const props = withDefaults(defineProps<TerminalProps>(), {
-  welcomeMessage: 'Welcome to Wex Design Terminal',
+  welcomeMessage: 'Welcome to Roost Design Terminal',
   prompt: '>',
 })
 
 const emit = defineEmits<TerminalEmits>()
 
-const locale = useWdLocale()
+const locale = useRdLocale()
 const draft = ref('')
 const innerLines = ref<string[]>([])
 const innerResponses = ref<string[]>([])
@@ -73,27 +73,27 @@ defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
 </script>
 
 <template>
-  <div class="wd-terminal">
-    <div ref="bodyRef" class="wd-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
-      <div v-if="welcomeMessage" class="wd-terminal__welcome">
+  <div class="rd-terminal">
+    <div ref="bodyRef" class="rd-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
+      <div v-if="welcomeMessage" class="rd-terminal__welcome">
         {{ welcomeMessage }}
       </div>
       <template v-for="(line, index) in displayLines" :key="`${line}-${index}`">
-        <div class="wd-terminal__line">
-          <span class="wd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+        <div class="rd-terminal__line">
+          <span class="rd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
           <span>{{ line }}</span>
         </div>
-        <div v-if="displayResponses[index]" class="wd-terminal__response">
+        <div v-if="displayResponses[index]" class="rd-terminal__response">
           {{ displayResponses[index] }}
         </div>
       </template>
     </div>
-    <form class="wd-terminal__form" @submit.prevent="submit">
-      <span class="wd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+    <form class="rd-terminal__form" @submit.prevent="submit">
+      <span class="rd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
       <input
         ref="inputRef"
         v-model="draft"
-        class="wd-terminal__input"
+        class="rd-terminal__input"
         type="text"
         :aria-label="locale.commandInput"
         autocomplete="off"

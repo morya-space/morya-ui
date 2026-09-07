@@ -13,7 +13,7 @@ import { designRules, findPattern, pagePatterns, scorePattern } from './patterns
 import { countCatalogResourceTemplates, countCatalogResources } from './resources.js'
 
 function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
-  const pairedTagRe = /<WdButton\b([^>]*)>([\s\S]*?)<\/WdButton>/gi
+  const pairedTagRe = /<RdButton\b([^>]*)>([\s\S]*?)<\/RdButton>/gi
   let match = pairedTagRe.exec(code)
   while (match !== null) {
     const attrs = match[1] || ''
@@ -23,19 +23,19 @@ function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; 
     if (hasIconOnly && !hasIconProp) {
       issues.push({
         type: 'icon-only-missing-icon',
-        message: 'WdButton with icon-only must set icon (or :icon). Default slot content is not rendered when iconOnly is true.',
+        message: 'RdButton with icon-only must set icon (or :icon). Default slot content is not rendered when iconOnly is true.',
       })
     }
     if (hasIconOnly && inner.length > 0) {
       issues.push({
         type: 'icon-only-default-slot',
-        message: 'WdButton with icon-only ignores default slot content. Pass the icon via icon / :icon instead.',
+        message: 'RdButton with icon-only ignores default slot content. Pass the icon via icon / :icon instead.',
       })
     }
     match = pairedTagRe.exec(code)
   }
 
-  const selfClosingRe = /<WdButton\b([^>]*)\/>/gi
+  const selfClosingRe = /<RdButton\b([^>]*)\/>/gi
   match = selfClosingRe.exec(code)
   while (match !== null) {
     const attrs = match[1] || ''
@@ -44,7 +44,7 @@ function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; 
     if (hasIconOnly && !hasIconProp) {
       issues.push({
         type: 'icon-only-missing-icon',
-        message: 'WdButton with icon-only must set icon (or :icon).',
+        message: 'RdButton with icon-only must set icon (or :icon).',
       })
     }
     match = selfClosingRe.exec(code)
@@ -59,7 +59,7 @@ function pickLocale<T extends { locales: Partial<Record<Locale, unknown>> }>(
 }
 
 function vueName(name: string): string {
-  return `Wd${name}`
+  return `Rd${name}`
 }
 
 function generatedPageCode(patternId: string, intent: string, locale: Locale): { script: string; template: string; style: string } {
@@ -76,19 +76,19 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const title = intent || (zh ? '业务页面' : 'Business page')
 
   const layoutImports = useLayoutShell
-    ? ', WdLayout, WdLayoutContent, WdLayoutHeader, WdLayoutSider, WdBreadcrumb'
+    ? ', RdLayout, RdLayoutContent, RdLayoutHeader, RdLayoutSider, RdBreadcrumb'
     : ''
-  const listImports = isList ? ', WdSelect, WdSpace, WdTable' : ''
-  const formImports = isForm || isAuth || isWizard ? ', WdForm, WdFormItem, WdSelect' : ''
-  const dashboardImports = isDashboard ? ', WdCard, WdGrid, WdGridItem, WdSkeleton, WdTable' : ''
-  const detailImports = isDetail ? ', WdDivider' : ''
-  const emptyImports = isEmpty ? ', WdDataView' : ''
-  const wizardImports = isWizard ? ', WdStepper' : ''
-  const settingsImports = isSettings ? ', WdTabs' : ''
+  const listImports = isList ? ', RdSelect, RdSpace, RdTable' : ''
+  const formImports = isForm || isAuth || isWizard ? ', RdForm, RdFormItem, RdSelect' : ''
+  const dashboardImports = isDashboard ? ', RdCard, RdGrid, RdGridItem, RdSkeleton, RdTable' : ''
+  const detailImports = isDetail ? ', RdDivider' : ''
+  const emptyImports = isEmpty ? ', RdDataView' : ''
+  const wizardImports = isWizard ? ', RdStepper' : ''
+  const settingsImports = isSettings ? ', RdTabs' : ''
 
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { WdButton, WdCard, WdConfigProvider, WdInput, WdTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from '@wex-design/ui'
+import { RdButton, RdCard, RdConfigProvider, RdInput, RdTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from '@roost-design/ui'
 
 const loading = ref(false)
 const error = ref('')
@@ -114,181 +114,181 @@ async function submit() {
 }
 </script>`
 
-  const listContent = `          <section class="wd-generated-filters" aria-label="${zh ? '筛选' : 'Filters'}">
-            <WdSpace wrap>
-              <WdInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
-              <WdButton severity="primary">${zh ? '查询' : 'Search'}</WdButton>
-              <WdButton severity="secondary">${zh ? '重置' : 'Reset'}</WdButton>
-            </WdSpace>
+  const listContent = `          <section class="rd-generated-filters" aria-label="${zh ? '筛选' : 'Filters'}">
+            <RdSpace wrap>
+              <RdInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
+              <RdButton severity="primary">${zh ? '查询' : 'Search'}</RdButton>
+              <RdButton severity="secondary">${zh ? '重置' : 'Reset'}</RdButton>
+            </RdSpace>
           </section>
-          <header class="wd-generated-toolbar">
-            <h1 class="wd-generated-title">${title}</h1>
-            <WdButton severity="primary">${zh ? '新建' : 'Create'}</WdButton>
+          <header class="rd-generated-toolbar">
+            <h1 class="rd-generated-title">${title}</h1>
+            <RdButton severity="primary">${zh ? '新建' : 'Create'}</RdButton>
           </header>
-          <WdTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
+          <RdTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
             <template #empty>
-              <p class="wd-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
+              <p class="rd-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
             </template>
-          </WdTable>`
+          </RdTable>`
 
-  const formContent = `          <header class="wd-generated-intro">
-            <h1 class="wd-generated-title">${title}</h1>
-            <p class="wd-generated-muted">${zh ? '填写表单并保存。' : 'Fill in the form and save.'}</p>
+  const formContent = `          <header class="rd-generated-intro">
+            <h1 class="rd-generated-title">${title}</h1>
+            <p class="rd-generated-muted">${zh ? '填写表单并保存。' : 'Fill in the form and save.'}</p>
           </header>
-          <WdForm class="wd-generated-form" @submit.prevent="submit">
-            <WdFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
-              <WdInput v-model="model.name" fluid />
-            </WdFormItem>
-            <footer class="wd-generated-actions">
-              <WdButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</WdButton>
-              <WdButton severity="secondary">${zh ? '取消' : 'Cancel'}</WdButton>
+          <RdForm class="rd-generated-form" @submit.prevent="submit">
+            <RdFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
+              <RdInput v-model="model.name" fluid />
+            </RdFormItem>
+            <footer class="rd-generated-actions">
+              <RdButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</RdButton>
+              <RdButton severity="secondary">${zh ? '取消' : 'Cancel'}</RdButton>
             </footer>
-          </WdForm>`
+          </RdForm>`
 
-  const dashboardContent = `          <h1 class="wd-generated-title">${title}</h1>
-          <WdGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
-            <WdGridItem v-for="metric in metrics" :key="metric.label" :span="1">
-              <WdCard>
-                <p class="wd-generated-muted">{{ metric.label }}</p>
-                <strong class="wd-generated-metric">{{ metric.value }}</strong>
-              </WdCard>
-            </WdGridItem>
-          </WdGrid>
-          <WdCard :title="${zh ? '趋势概览' : 'Trend overview'}">
-            <WdSkeleton v-if="loading" height="8rem" />
-            <p v-else class="wd-generated-muted">${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}</p>
-          </WdCard>`
+  const dashboardContent = `          <h1 class="rd-generated-title">${title}</h1>
+          <RdGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
+            <RdGridItem v-for="metric in metrics" :key="metric.label" :span="1">
+              <RdCard>
+                <p class="rd-generated-muted">{{ metric.label }}</p>
+                <strong class="rd-generated-metric">{{ metric.value }}</strong>
+              </RdCard>
+            </RdGridItem>
+          </RdGrid>
+          <RdCard :title="${zh ? '趋势概览' : 'Trend overview'}">
+            <RdSkeleton v-if="loading" height="8rem" />
+            <p v-else class="rd-generated-muted">${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}</p>
+          </RdCard>`
 
-  const detailContent = `          <header class="wd-generated-toolbar">
+  const detailContent = `          <header class="rd-generated-toolbar">
             <div>
-              <h1 class="wd-generated-title">${title}</h1>
-              <WdTag value="${zh ? '正常' : 'Active'}" severity="success" />
+              <h1 class="rd-generated-title">${title}</h1>
+              <RdTag value="${zh ? '正常' : 'Active'}" severity="success" />
             </div>
-            <WdButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</WdButton>
+            <RdButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</RdButton>
           </header>
-          <WdCard>
-            <WdDivider />
-            <dl class="wd-generated-details">
+          <RdCard>
+            <RdDivider />
+            <dl class="rd-generated-details">
               <div><dt>${zh ? '名称' : 'Name'}</dt><dd>${zh ? '示例资源' : 'Example resource'}</dd></div>
               <div><dt>${zh ? '更新时间' : 'Updated'}</dt><dd>—</dd></div>
             </dl>
-          </WdCard>`
+          </RdCard>`
 
-  const settingsContent = `          <h1 class="wd-generated-title">${title}</h1>
-          <WdTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
-          <WdForm class="wd-generated-form" @submit.prevent="submit">
-            <WdFormItem label="${zh ? '显示名称' : 'Display name'}" name="name">
-              <WdInput v-model="model.name" fluid />
-            </WdFormItem>
-            <WdButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存设置' : 'Save settings'}</WdButton>
-          </WdForm>`
+  const settingsContent = `          <h1 class="rd-generated-title">${title}</h1>
+          <RdTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
+          <RdForm class="rd-generated-form" @submit.prevent="submit">
+            <RdFormItem label="${zh ? '显示名称' : 'Display name'}" name="name">
+              <RdInput v-model="model.name" fluid />
+            </RdFormItem>
+            <RdButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存设置' : 'Save settings'}</RdButton>
+          </RdForm>`
 
   let innerTemplate = ''
   if (isList) {
-    innerTemplate = `<WdConfigProvider :locale="zhCN">
-  <WdLayout has-sider class="wd-generated-page">
-    <WdLayoutSider class="wd-generated-sider" />
-    <WdLayout>
-      <WdLayoutHeader class="wd-generated-header">
-        <WdBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
-      </WdLayoutHeader>
-      <WdLayoutContent class="wd-generated-content">
+    innerTemplate = `<RdConfigProvider :locale="zhCN">
+  <RdLayout has-sider class="rd-generated-page">
+    <RdLayoutSider class="rd-generated-sider" />
+    <RdLayout>
+      <RdLayoutHeader class="rd-generated-header">
+        <RdBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+      </RdLayoutHeader>
+      <RdLayoutContent class="rd-generated-content">
 ${listContent}
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
-</WdConfigProvider>`
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
+</RdConfigProvider>`
   } else if (useLayoutShell) {
     const content = isDashboard ? dashboardContent : isDetail ? detailContent : isSettings ? settingsContent : formContent
-    innerTemplate = `<WdConfigProvider :locale="zhCN">
-  <WdLayout class="wd-generated-page">
-    <WdLayoutHeader class="wd-generated-header">
-      <WdBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
-    </WdLayoutHeader>
-    <WdLayoutContent class="wd-generated-content">
+    innerTemplate = `<RdConfigProvider :locale="zhCN">
+  <RdLayout class="rd-generated-page">
+    <RdLayoutHeader class="rd-generated-header">
+      <RdBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+    </RdLayoutHeader>
+    <RdLayoutContent class="rd-generated-content">
 ${content}
-    </WdLayoutContent>
-  </WdLayout>
-</WdConfigProvider>`
+    </RdLayoutContent>
+  </RdLayout>
+</RdConfigProvider>`
   } else if (isAuth) {
-    innerTemplate = `<WdConfigProvider :locale="zhCN">
-  <main class="wd-generated-page wd-generated-auth">
-    <WdCard>
-      <WdForm label-position="top" @submit.prevent="submit">
-        <WdFormItem label="${zh ? '邮箱' : 'Email'}" name="email">
-          <WdInput type="email" fluid />
-        </WdFormItem>
-        <WdFormItem label="${zh ? '密码' : 'Password'}" name="password">
-          <WdInput type="password" fluid />
-        </WdFormItem>
-        <WdButton native-type="submit" severity="primary" :loading="loading" fluid>${zh ? '登录' : 'Sign in'}</WdButton>
-      </WdForm>
-    </WdCard>
+    innerTemplate = `<RdConfigProvider :locale="zhCN">
+  <main class="rd-generated-page rd-generated-auth">
+    <RdCard>
+      <RdForm label-position="top" @submit.prevent="submit">
+        <RdFormItem label="${zh ? '邮箱' : 'Email'}" name="email">
+          <RdInput type="email" fluid />
+        </RdFormItem>
+        <RdFormItem label="${zh ? '密码' : 'Password'}" name="password">
+          <RdInput type="password" fluid />
+        </RdFormItem>
+        <RdButton native-type="submit" severity="primary" :loading="loading" fluid>${zh ? '登录' : 'Sign in'}</RdButton>
+      </RdForm>
+    </RdCard>
   </main>
-</WdConfigProvider>`
+</RdConfigProvider>`
   } else if (isEmpty) {
-    innerTemplate = `<WdConfigProvider :locale="zhCN">
-  <main class="wd-generated-page">
-    <WdCard>
-      <WdDataView :value="[]">
+    innerTemplate = `<RdConfigProvider :locale="zhCN">
+  <main class="rd-generated-page">
+    <RdCard>
+      <RdDataView :value="[]">
         <template #empty>
-          <div class="wd-generated-empty">
+          <div class="rd-generated-empty">
             <strong>${zh ? '暂无内容' : 'Nothing here yet'}</strong>
-            <p class="wd-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
-            <WdButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</WdButton>
+            <p class="rd-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
+            <RdButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</RdButton>
           </div>
         </template>
-      </WdDataView>
-    </WdCard>
+      </RdDataView>
+    </RdCard>
   </main>
-</WdConfigProvider>`
+</RdConfigProvider>`
   } else if (isWizard) {
-    innerTemplate = `<WdConfigProvider :locale="zhCN">
-  <main class="wd-generated-page">
-    <WdCard>
-      <WdStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
-      <WdForm label-position="top" @submit.prevent="submit">
-        <WdFormItem label="${zh ? '名称' : 'Name'}" name="name"><WdInput v-model="model.name" fluid /></WdFormItem>
-        <WdButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</WdButton>
-      </WdForm>
-    </WdCard>
+    innerTemplate = `<RdConfigProvider :locale="zhCN">
+  <main class="rd-generated-page">
+    <RdCard>
+      <RdStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
+      <RdForm label-position="top" @submit.prevent="submit">
+        <RdFormItem label="${zh ? '名称' : 'Name'}" name="name"><RdInput v-model="model.name" fluid /></RdFormItem>
+        <RdButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</RdButton>
+      </RdForm>
+    </RdCard>
   </main>
-</WdConfigProvider>`
+</RdConfigProvider>`
   } else {
-    innerTemplate = `<WdConfigProvider :locale="zhCN">
-  <main class="wd-generated-page">
-    <WdCard>
-      <p class="wd-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
-      <WdTag value="${zh ? '示例' : 'Example'}" severity="info" />
-    </WdCard>
+    innerTemplate = `<RdConfigProvider :locale="zhCN">
+  <main class="rd-generated-page">
+    <RdCard>
+      <p class="rd-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
+      <RdTag value="${zh ? '示例' : 'Example'}" severity="info" />
+    </RdCard>
   </main>
-</WdConfigProvider>`
+</RdConfigProvider>`
   }
 
   const template = `<template>
   ${innerTemplate}
-  <p v-if="error" role="alert" class="wd-generated-error">${'{{ error }}'}</p>
+  <p v-if="error" role="alert" class="rd-generated-error">${'{{ error }}'}</p>
 </template>`
 
   const style = `<style scoped>
-.wd-generated-page { min-height: 100vh; background: var(--wd-color-surface); }
-.wd-generated-sider { border-right: 1px solid var(--wd-color-border); }
-.wd-generated-header { padding: var(--wd-space-4) var(--wd-space-6); border-bottom: 1px solid var(--wd-color-border); }
-.wd-generated-content { padding: var(--wd-space-6); display: flex; flex-direction: column; gap: var(--wd-space-4); }
-.wd-generated-filters { padding: var(--wd-space-4); background: color-mix(in srgb, var(--wd-color-border) 25%, transparent); border-radius: var(--wd-radius-md); border: 1px solid var(--wd-color-border); }
-.wd-generated-toolbar, .wd-generated-actions { display: flex; gap: var(--wd-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.wd-generated-title { margin: 0; font-size: var(--wd-font-size-lg); font-weight: 600; color: var(--wd-color-text); }
-.wd-generated-intro { margin-bottom: var(--wd-space-2); }
-.wd-generated-form { padding: var(--wd-space-6); border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); box-shadow: var(--wd-shadow-sm); }
-.wd-generated-auth { display: grid; place-items: center; padding: var(--wd-space-8); max-width: 24rem; margin: 0 auto; }
-.wd-generated-metric { display: block; font-size: var(--wd-font-size-lg); margin: var(--wd-space-2) 0; }
-.wd-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wd-space-4); margin: 0; }
-.wd-generated-details dt { color: var(--wd-color-text-muted); font-size: var(--wd-font-size-sm); }
-.wd-generated-details dd { margin: var(--wd-space-1) 0 0; }
-.wd-generated-empty { display: grid; gap: var(--wd-space-2); justify-items: center; padding: var(--wd-space-8); text-align: center; }
-.wd-generated-muted { margin: 0; color: var(--wd-color-text-muted); }
-.wd-generated-error { color: var(--wd-color-danger); padding: 0 var(--wd-space-6); }
-@media (max-width: 48rem) { .wd-generated-content { padding: var(--wd-space-4); } .wd-generated-details { grid-template-columns: 1fr; } }
+.rd-generated-page { min-height: 100vh; background: var(--rd-color-surface); }
+.rd-generated-sider { border-right: 1px solid var(--rd-color-border); }
+.rd-generated-header { padding: var(--rd-space-4) var(--rd-space-6); border-bottom: 1px solid var(--rd-color-border); }
+.rd-generated-content { padding: var(--rd-space-6); display: flex; flex-direction: column; gap: var(--rd-space-4); }
+.rd-generated-filters { padding: var(--rd-space-4); background: color-mix(in srgb, var(--rd-color-border) 25%, transparent); border-radius: var(--rd-radius-md); border: 1px solid var(--rd-color-border); }
+.rd-generated-toolbar, .rd-generated-actions { display: flex; gap: var(--rd-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.rd-generated-title { margin: 0; font-size: var(--rd-font-size-lg); font-weight: 600; color: var(--rd-color-text); }
+.rd-generated-intro { margin-bottom: var(--rd-space-2); }
+.rd-generated-form { padding: var(--rd-space-6); border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); box-shadow: var(--rd-shadow-sm); }
+.rd-generated-auth { display: grid; place-items: center; padding: var(--rd-space-8); max-width: 24rem; margin: 0 auto; }
+.rd-generated-metric { display: block; font-size: var(--rd-font-size-lg); margin: var(--rd-space-2) 0; }
+.rd-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rd-space-4); margin: 0; }
+.rd-generated-details dt { color: var(--rd-color-text-muted); font-size: var(--rd-font-size-sm); }
+.rd-generated-details dd { margin: var(--rd-space-1) 0 0; }
+.rd-generated-empty { display: grid; gap: var(--rd-space-2); justify-items: center; padding: var(--rd-space-8); text-align: center; }
+.rd-generated-muted { margin: 0; color: var(--rd-color-text-muted); }
+.rd-generated-error { color: var(--rd-color-danger); padding: 0 var(--rd-space-6); }
+@media (max-width: 48rem) { .rd-generated-content { padding: var(--rd-space-4); } .rd-generated-details { grid-template-columns: 1fr; } }
 </style>`
   return { script, template, style }
 }
@@ -342,7 +342,7 @@ function apiCoverage(component: ComponentRecord, examples: ComponentRecord['exam
   }
   const eventHas = (name: string) => source.includes(`@${name}`) || source.includes(`@${toKebab(name)}`)
   const slotHas = (name: string) => source.includes(`#${name}`) ||
-    (name === 'default' && source.includes('<Wd') && source.includes('</Wd'))
+    (name === 'default' && source.includes('<Rd') && source.includes('</Rd'))
   const summary = (items: string[], predicate: (item: string) => boolean) => ({
     total: items.length,
     covered: items.filter(predicate).length,
@@ -789,8 +789,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
       nextStep: locale === 'en-US'
-        ? `Read goldenPage (${best.pattern.goldenPage || 'none'}) and matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file aligned with WdLayout shell.`
-        : `先阅读 goldenPage（${best.pattern.goldenPage || '无'}）并用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true（已对齐 WdLayout 骨架）。`,
+        ? `Read goldenPage (${best.pattern.goldenPage || 'none'}) and matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file aligned with RdLayout shell.`
+        : `先阅读 goldenPage（${best.pattern.goldenPage || '无'}）并用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true（已对齐 RdLayout 骨架）。`,
     }
     if (args.includeScaffold) {
       const code = generatedPageCode(best.pattern.id, args.intent, locale)
@@ -813,28 +813,28 @@ export function createToolHandlers(catalog = loadCatalog()) {
     if (locale === 'zh-CN') return textResult(designRules)
     return textResult({
       tokens: {
-        colors: ['--wd-color-primary', '--wd-color-surface', '--wd-color-text', '--wd-color-border'],
-        spacing: '--wd-space-*',
-        radius: '--wd-radius-sm/md/lg',
-        typography: '--wd-font-size-xs/sm/md/lg',
-        motion: '--wd-motion-fast/normal',
+        colors: ['--rd-color-primary', '--rd-color-surface', '--rd-color-text', '--rd-color-border'],
+        spacing: '--rd-space-*',
+        radius: '--rd-radius-sm/md/lg',
+        typography: '--rd-font-size-xs/sm/md/lg',
+        motion: '--rd-motion-fast/normal',
       },
       actions: {
-        primary: { component: 'WdButton', props: ['omit severity or use primary'] },
-        secondary: { component: 'WdButton', props: ['severity="secondary"', 'outlined or text'] },
-        destructive: { component: 'WdButton', props: ['severity="danger"'], requiresConfirmation: true },
-        cancel: { component: 'WdButton', props: ['severity="secondary"', 'text'] },
+        primary: { component: 'RdButton', props: ['omit severity or use primary'] },
+        secondary: { component: 'RdButton', props: ['severity="secondary"', 'outlined or text'] },
+        destructive: { component: 'RdButton', props: ['severity="danger"'], requiresConfirmation: true },
+        cancel: { component: 'RdButton', props: ['severity="secondary"', 'text'] },
       },
-      status: { component: 'WdTag', mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' } },
+      status: { component: 'RdTag', mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' } },
       feedback: {
         default: 'message',
         message: { when: ['single-line action result', 'save/delete/create confirmations'] },
         toast: { when: ['summary + detail', 'async or background notifications'] },
-        inlineMessage: { component: 'WdMessage', when: ['persistent form/auth errors'] },
+        inlineMessage: { component: 'RdMessage', when: ['persistent form/auth errors'] },
         doc: 'docs/feedback-message-vs-toast.md',
       },
       global: [
-        'Prefer library components and --wd-* tokens; do not maintain a second color system.',
+        'Prefer library components and --rd-* tokens; do not maintain a second color system.',
         'Default action feedback to message; do not use toast with summary-only text.',
         'Icon-only buttons must provide aria-label or ariaLabel.',
         'Form controls must have a visible label or an equivalent accessible name.',
@@ -936,9 +936,9 @@ export function createToolHandlers(catalog = loadCatalog()) {
     return textResult({
       library: catalog.library,
       environment: args.environment || 'vue3-vite',
-      install: 'pnpm add @wex-design/ui',
+      install: 'pnpm add @roost-design/ui',
       peer: 'vue@^3.3.0',
-      styles: "import '@wex-design/ui/styles.css'",
+      styles: "import '@roost-design/ui/styles.css'",
       guides: {
         introduction: pickMarkdown(intro),
         quickStart: pickMarkdown(quickStart),
@@ -963,8 +963,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       const code = usage.code || ''
       const componentName =
         usage.component ||
-        code.match(/<(Wd[A-Z][A-Za-z0-9]*)\b/)?.[1] ||
-        code.match(/import\s*\{[^}]*\b(Wd[A-Z][A-Za-z0-9]*)\b/)?.[1]
+        code.match(/<(Rd[A-Z][A-Za-z0-9]*)\b/)?.[1] ||
+        code.match(/import\s*\{[^}]*\b(Rd[A-Z][A-Za-z0-9]*)\b/)?.[1]
 
       if (!componentName) {
         return { error: 'Could not determine component. Pass component explicitly.' }
@@ -985,16 +985,16 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
       const issues: Array<{ type: string; message: string }> = []
 
-      if (code && !code.includes('@wex-design/ui') && /import\s+/.test(code)) {
-        if (!/from\s+['"]@wex-design\/ui['"]/.test(code)) {
+      if (code && !code.includes('@roost-design/ui') && /import\s+/.test(code)) {
+        if (!/from\s+['"]@roost-design\/ui['"]/.test(code)) {
           issues.push({
             type: 'import',
-            message: `Import should come from '@wex-design/ui' (expected ${component.exportName}).`,
+            message: `Import should come from '@roost-design/ui' (expected ${component.exportName}).`,
           })
         }
       }
 
-      const attrRe = /<Wd[A-Z][A-Za-z0-9]*\b([^>]*)>/g
+      const attrRe = /<Rd[A-Z][A-Za-z0-9]*\b([^>]*)>/g
       let tagMatch = attrRe.exec(code)
       while (tagMatch !== null) {
         const attrs = tagMatch[1] || ''

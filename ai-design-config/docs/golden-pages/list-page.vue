@@ -4,21 +4,21 @@
  * @see DESIGN.md §3
  */
 import {
-  WdBreadcrumb,
-  WdButton,
-  WdConfigProvider,
-  WdInput,
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-  WdMenu,
-  WdSelect,
-  WdSpace,
-  WdTable,
-  WdTag,
+  RdBreadcrumb,
+  RdButton,
+  RdConfigProvider,
+  RdInput,
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+  RdMenu,
+  RdSelect,
+  RdSpace,
+  RdTable,
+  RdTag,
   zhCN,
-} from '@wex-design/ui'
+} from '@roost-design/ui'
 import { ref } from 'vue'
 
 const keyword = ref('')
@@ -47,42 +47,42 @@ const rows = [
 </script>
 
 <template>
-  <WdConfigProvider :locale="zhCN">
-    <WdLayout has-sider class="page-list">
-      <WdLayoutSider class="page-list__sider">
-        <WdMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
-      </WdLayoutSider>
+  <RdConfigProvider :locale="zhCN">
+    <RdLayout has-sider class="page-list">
+      <RdLayoutSider class="page-list__sider">
+        <RdMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
+      </RdLayoutSider>
 
-      <WdLayout>
-        <WdLayoutHeader class="page-list__header">
-          <WdBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
-        </WdLayoutHeader>
+      <RdLayout>
+        <RdLayoutHeader class="page-list__header">
+          <RdBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
+        </RdLayoutHeader>
 
-        <WdLayoutContent class="page-list__content">
+        <RdLayoutContent class="page-list__content">
           <!-- 筛选区 -->
           <section class="page-list__filters" aria-label="筛选">
-            <WdSpace wrap>
-              <WdInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
-              <WdSelect
+            <RdSpace wrap>
+              <RdInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
+              <RdSelect
                 v-model="status"
                 :options="statusOptions"
                 placeholder="状态"
                 clearable
                 style="width: 10rem"
               />
-              <WdButton severity="primary">查询</WdButton>
-              <WdButton severity="secondary">重置</WdButton>
-            </WdSpace>
+              <RdButton severity="primary">查询</RdButton>
+              <RdButton severity="secondary">重置</RdButton>
+            </RdSpace>
           </section>
 
           <!-- 工具栏 -->
           <header class="page-list__toolbar">
             <h1 class="page-list__title">用户管理</h1>
-            <WdButton severity="primary">新建用户</WdButton>
+            <RdButton severity="primary">新建用户</RdButton>
           </header>
 
           <!-- 表格 -->
-          <WdTable
+          <RdTable
             :columns="columns"
             :rows="rows"
             :rows-per-page="3"
@@ -93,72 +93,72 @@ const rows = [
             aria-label="用户列表"
           >
             <template #cell-status="{ value }">
-              <WdTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
+              <RdTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
             </template>
             <template #cell-actions>
-              <WdSpace>
-                <WdButton severity="secondary" size="small">编辑</WdButton>
-                <WdButton severity="danger" size="small">删除</WdButton>
-              </WdSpace>
+              <RdSpace>
+                <RdButton severity="secondary" size="small">编辑</RdButton>
+                <RdButton severity="danger" size="small">删除</RdButton>
+              </RdSpace>
             </template>
             <template #empty>
               <p class="page-list__empty">暂无用户数据</p>
             </template>
-          </WdTable>
-        </WdLayoutContent>
-      </WdLayout>
-    </WdLayout>
-  </WdConfigProvider>
+          </RdTable>
+        </RdLayoutContent>
+      </RdLayout>
+    </RdLayout>
+  </RdConfigProvider>
 </template>
 
 <style scoped>
 .page-list {
   min-height: 100vh;
-  background: var(--wd-color-surface);
+  background: var(--rd-color-surface);
 }
 
 .page-list__sider {
-  border-right: 1px solid var(--wd-color-border);
+  border-right: 1px solid var(--rd-color-border);
 }
 
 .page-list__header {
-  padding: var(--wd-space-4) var(--wd-space-6);
-  border-bottom: 1px solid var(--wd-color-border);
-  background: var(--wd-color-surface);
+  padding: var(--rd-space-4) var(--rd-space-6);
+  border-bottom: 1px solid var(--rd-color-border);
+  background: var(--rd-color-surface);
 }
 
 .page-list__content {
-  padding: var(--wd-space-6);
+  padding: var(--rd-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--wd-space-4);
+  gap: var(--rd-space-4);
 }
 
 .page-list__filters {
-  padding: var(--wd-space-4);
-  background: color-mix(in srgb, var(--wd-color-border) 25%, transparent);
-  border-radius: var(--wd-radius-md);
-  border: 1px solid var(--wd-color-border);
+  padding: var(--rd-space-4);
+  background: color-mix(in srgb, var(--rd-color-border) 25%, transparent);
+  border-radius: var(--rd-radius-md);
+  border: 1px solid var(--rd-color-border);
 }
 
 .page-list__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--wd-space-4);
+  gap: var(--rd-space-4);
 }
 
 .page-list__title {
   margin: 0;
-  font-size: var(--wd-font-size-lg);
+  font-size: var(--rd-font-size-lg);
   font-weight: 600;
-  color: var(--wd-color-text);
+  color: var(--rd-color-text);
 }
 
 .page-list__empty {
   margin: 0;
-  padding: var(--wd-space-8);
+  padding: var(--rd-space-8);
   text-align: center;
-  color: var(--wd-color-text-muted);
+  color: var(--rd-color-text-muted);
 }
 </style>

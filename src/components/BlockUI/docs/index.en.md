@@ -11,24 +11,24 @@ Wraps content and shows a mask when `blocked` is true.
 ## Import
 
 ```ts
-import { WdBlockUI } from '@wex-design/ui'
+import { RdBlockUI } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdBlockUI, WdButton } from '@wex-design/ui'
+import { RdBlockUI, RdButton } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const blocked = ref(false)
 </script>
 
 <template>
-  <WdButton :label="blocked ? 'Unblock' : 'Block'" @click="blocked = !blocked" />
-  <WdBlockUI :blocked="blocked" style="margin-top: 1rem">
+  <RdButton :label="blocked ? 'Unblock' : 'Block'" @click="blocked = !blocked" />
+  <RdBlockUI :blocked="blocked" style="margin-top: 1rem">
     <p>Panel content</p>
-  </WdBlockUI>
+  </RdBlockUI>
 </template>
 ```
 

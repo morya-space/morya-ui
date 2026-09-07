@@ -11,21 +11,21 @@ description: 多行文本输入。
 ## 引入
 
 ```ts
-import { WdTextarea } from '@wex-design/ui'
+import { RdTextarea } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdTextarea } from '@wex-design/ui'
+import { RdTextarea } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WdTextarea v-model="value" label="Notes" placeholder="Write something…" />
+  <RdTextarea v-model="value" label="Notes" placeholder="Write something…" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdTextarea } from '@wex-design/ui'
+import { RdTextarea } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdTextarea size="small" label="Small" rows="3" />
-    <WdTextarea variant="filled" label="Filled" rows="3" />
-    <WdTextarea size="large" fluid label="Large Fluid" rows="3" />
+    <RdTextarea size="small" label="Small" rows="3" />
+    <RdTextarea variant="filled" label="Filled" rows="3" />
+    <RdTextarea size="large" fluid label="Large Fluid" rows="3" />
   </div>
 </template>
 ```
@@ -51,7 +51,7 @@ import { WdTextarea } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdTextarea } from '@wex-design/ui'
+import { RdTextarea } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('Line 1\nLine 2')
@@ -60,9 +60,9 @@ const limited = ref('Clamped height')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdTextarea v-model="value" autosize label="Auto resize" />
-    <WdTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
-    <WdTextarea invalid label="Required" help-text="This field is required" model-value="" />
+    <RdTextarea v-model="value" autosize label="Auto resize" />
+    <RdTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
+    <RdTextarea invalid label="Required" help-text="This field is required" model-value="" />
   </div>
 </template>
 ```
@@ -71,14 +71,14 @@ const limited = ref('Clamped height')
 
 ```vue preview
 <script setup lang="ts">
-import { WdTextarea } from '@wex-design/ui'
+import { RdTextarea } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref('Draft notes')
 </script>
 
 <template>
-  <WdTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
+  <RdTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
 </template>
 ```
 

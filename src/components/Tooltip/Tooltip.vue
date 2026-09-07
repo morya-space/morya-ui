@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { TooltipProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdId } from '../../shared/useWdId'
-import { useWdConfig } from '../../shared/config'
+import { useRdId } from '../../shared/useRdId'
+import { useRdConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
 
@@ -14,9 +14,9 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   teleport: true,
 })
 
-const config = useWdConfig()
+const config = useRdConfig()
 const root = ref<HTMLElement | null>(null)
-const tipId = useWdId()
+const tipId = useRdId()
 const visible = ref(false)
 const tipStyle = ref<Record<string, string>>({})
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -104,7 +104,7 @@ const contentStyle = computed(() => {
 <template>
   <span
     ref="root"
-    class="wd-tooltip"
+    class="rd-tooltip"
     :aria-describedby="visible ? tipId : undefined"
     @mouseenter="show"
     @mouseleave="hide"
@@ -113,12 +113,12 @@ const contentStyle = computed(() => {
   >
     <slot />
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wd-fade">
+      <Transition name="rd-fade">
         <span
           v-if="visible"
           :id="tipId"
-          class="wd-tooltip__content"
-          :class="[`wd-tooltip__content--${placement}`, { 'wd-tooltip__content--teleported': teleported }]"
+          class="rd-tooltip__content"
+          :class="[`rd-tooltip__content--${placement}`, { 'rd-tooltip__content--teleported': teleported }]"
           :style="contentStyle"
           role="tooltip"
         >

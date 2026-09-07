@@ -1,22 +1,22 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WdFormItem from './FormItem.vue'
+import RdFormItem from './FormItem.vue'
 
 describe('FormItem', () => {
   it('renders label, help, and invalid state standalone', () => {
-    const wrapper = mount(WdFormItem, {
+    const wrapper = mount(RdFormItem, {
       props: { label: '名称', help: '可选', invalid: true, error: '格式错误' },
       slots: { default: () => h('input', { id: 'name' }) },
     })
-    expect(wrapper.get('.wd-form-item__label').text()).toContain('名称')
-    expect(wrapper.find('.wd-form-item__help').exists()).toBe(false)
-    expect(wrapper.get('.wd-form-item__error').text()).toBe('格式错误')
-    expect(wrapper.classes()).toContain('wd-form-item--invalid')
+    expect(wrapper.get('.rd-form-item__label').text()).toContain('名称')
+    expect(wrapper.find('.rd-form-item__help').exists()).toBe(false)
+    expect(wrapper.get('.rd-form-item__error').text()).toBe('格式错误')
+    expect(wrapper.classes()).toContain('rd-form-item--invalid')
   })
 
   it('passes slot props for control wiring', () => {
-    const wrapper = mount(WdFormItem, {
+    const wrapper = mount(RdFormItem, {
       props: { label: '邮箱', for: 'email-input' },
       slots: {
         default: (props: { id: string; invalid: boolean }) =>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { StepperProps, StepperStatus } from './types'
 import { computed } from 'vue'
-import WdIcon from '../Icon/Icon.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps>(), {
   modelValue: 0,
@@ -35,8 +35,8 @@ function stepStatus(index: number, explicit?: StepperStatus): StepperStatus {
 }
 
 const rootClass = computed(() => [
-  'wd-stepper',
-  { 'wd-stepper--vertical': isVertical.value },
+  'rd-stepper',
+  { 'rd-stepper--vertical': isVertical.value },
 ])
 </script>
 
@@ -46,37 +46,37 @@ const rootClass = computed(() => [
       v-for="(step, index) in steps"
       :key="`${step.label}-${index}`"
       type="button"
-      class="wd-stepper__step"
+      class="rd-stepper__step"
       :class="{
-        'wd-stepper__step--active': index === activeIndex,
-        'wd-stepper__step--completed': index < activeIndex,
-        'wd-stepper__step--disabled': !canSelect(index, step.disabled),
-        [`wd-stepper__step--${stepStatus(index, step.status)}`]: true,
+        'rd-stepper__step--active': index === activeIndex,
+        'rd-stepper__step--completed': index < activeIndex,
+        'rd-stepper__step--disabled': !canSelect(index, step.disabled),
+        [`rd-stepper__step--${stepStatus(index, step.status)}`]: true,
       }"
       role="tab"
       :aria-selected="index === activeIndex"
       :disabled="!canSelect(index, step.disabled)"
       @click="select(index, step.disabled)"
     >
-      <span class="wd-stepper__marker" aria-hidden="true">
+      <span class="rd-stepper__marker" aria-hidden="true">
         <slot
           name="icon"
           :step="step"
           :index="index"
           :status="stepStatus(index, step.status)"
         >
-          <WdIcon v-if="stepStatus(index, step.status) === 'finish'" name="check" />
-          <WdIcon v-else-if="stepStatus(index, step.status) === 'error'" name="warning" />
+          <RdIcon v-if="stepStatus(index, step.status) === 'finish'" name="check" />
+          <RdIcon v-else-if="stepStatus(index, step.status) === 'error'" name="warning" />
           <template v-else>{{ index + 1 }}</template>
         </slot>
       </span>
-      <span class="wd-stepper__copy">
-        <span class="wd-stepper__label">{{ step.label }}</span>
-        <span v-if="step.description" class="wd-stepper__description">{{ step.description }}</span>
+      <span class="rd-stepper__copy">
+        <span class="rd-stepper__label">{{ step.label }}</span>
+        <span v-if="step.description" class="rd-stepper__description">{{ step.description }}</span>
       </span>
     </button>
   </div>
-  <div v-if="$slots.default" class="wd-stepper__content">
+  <div v-if="$slots.default" class="rd-stepper__content">
     <slot :active-index="activeIndex" />
   </div>
 </template>

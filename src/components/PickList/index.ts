@@ -1,3 +1,3 @@
 import './style'
-export { default as WdPickList } from './PickList.vue'
+export { default as RdPickList } from './PickList.vue'
 export type { PickListEmits, PickListProps } from './types'

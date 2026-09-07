@@ -5,7 +5,7 @@ function read<T>(result: { content: Array<{ text: string }> }): T {
   return JSON.parse(result.content[0].text) as T
 }
 
-describe('@wex-design/ui-mcp handlers', () => {
+describe('@roost-design/ui-mcp handlers', () => {
   const handlers = createToolHandlers()
 
   it('returns complete pagination metadata for component lists', () => {
@@ -41,7 +41,7 @@ describe('@wex-design/ui-mcp handlers', () => {
     )
 
     expect(result.id).toBe('Table')
-    expect(result.exportName).toBe('WdTable')
+    expect(result.exportName).toBe('RdTable')
   })
 
   it('paginates component examples and reports API coverage', () => {
@@ -74,7 +74,7 @@ describe('@wex-design/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string; message: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WdButton label="Save" severity="danger" foo="bar" />',
+        code: '<RdButton label="Save" severity="danger" foo="bar" />',
       }),
     )
 
@@ -89,7 +89,7 @@ describe('@wex-design/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WdButton icon-only aria-label="Add"><Plus /></WdButton>',
+        code: '<RdButton icon-only aria-label="Add"><Plus /></RdButton>',
       }),
     )
 
@@ -106,7 +106,7 @@ describe('@wex-design/ui-mcp handlers', () => {
     const result = read<{ ok: boolean }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WdButton icon="plus" icon-only aria-label="Add" />',
+        code: '<RdButton icon="plus" icon-only aria-label="Add" />',
       }),
     )
 
@@ -135,8 +135,8 @@ describe('@wex-design/ui-mcp handlers', () => {
     )
 
     expect(result.matchedPattern).toBe('dashboard')
-    expect(result.scaffold.files.component).toContain('WdGrid')
-    expect(result.scaffold.files.component).toContain('WdSkeleton')
+    expect(result.scaffold.files.component).toContain('RdGrid')
+    expect(result.scaffold.files.component).toContain('RdSkeleton')
   })
 
   it('lists component decision guides when query is omitted', () => {

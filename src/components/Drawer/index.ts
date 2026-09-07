@@ -1,3 +1,3 @@
 import './style'
-export { default as WdDrawer } from './Drawer.vue'
+export { default as RdDrawer } from './Drawer.vue'
 export type { DrawerEmits, DrawerPosition, DrawerProps } from './types'

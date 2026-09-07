@@ -1,4 +1,4 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 
 export interface InputColorProps {
   modelValue?: string
@@ -6,7 +6,7 @@ export interface InputColorProps {
   id?: string
   label?: string
   invalid?: boolean
-  size?: WdSizeInput
+  size?: RdSizeInput
   /** Preset hex colors shown under the input. */
   swatches?: string[]
 }

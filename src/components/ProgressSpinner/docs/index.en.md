@@ -11,20 +11,20 @@ SVG circular loading indicator.
 ## Import
 
 ```ts
-import { WdProgressSpinner } from '@wex-design/ui'
+import { RdProgressSpinner } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdProgressSpinner } from '@wex-design/ui'
+import { RdProgressSpinner } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WdProgressSpinner />
-    <WdProgressSpinner stroke-width="4" animation-duration="0.6s" />
+    <RdProgressSpinner />
+    <RdProgressSpinner stroke-width="4" animation-duration="0.6s" />
   </div>
 </template>
 ```
@@ -35,19 +35,19 @@ When wrapping content, `show` toggles the overlay and `delay` waits before it ap
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdProgressSpinner } from '@wex-design/ui'
+import { RdButton, RdProgressSpinner } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const loading = ref(true)
 </script>
 
 <template>
-  <WdProgressSpinner :show="loading" description="Loading">
+  <RdProgressSpinner :show="loading" description="Loading">
     <p style="margin:0">
       Form content
     </p>
-  </WdProgressSpinner>
-  <WdButton label="Toggle" size="small" @click="loading = !loading" />
+  </RdProgressSpinner>
+  <RdButton label="Toggle" size="small" @click="loading = !loading" />
 </template>
 ```
 

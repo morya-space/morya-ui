@@ -11,16 +11,16 @@ import {
 } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { useControllable } from '../../shared/useControllable'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import type { ScrollbarInstance } from '../Scrollbar/types'
 import TableLoadingLine from './TableLoadingLine.vue'
-import WdCheckbox from '../Checkbox/Checkbox.vue'
-import WdIcon from '../Icon/Icon.vue'
-import WdPagination from '../Pagination/Pagination.vue'
-import WdProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
-import WdRadio from '../Radio/Radio.vue'
-import WdScrollbar from '../Scrollbar/Scrollbar.vue'
-import WdTooltip from '../Tooltip/Tooltip.vue'
+import RdCheckbox from '../Checkbox/Checkbox.vue'
+import RdIcon from '../Icon/Icon.vue'
+import RdPagination from '../Pagination/Pagination.vue'
+import RdProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import RdRadio from '../Radio/Radio.vue'
+import RdScrollbar from '../Scrollbar/Scrollbar.vue'
+import RdTooltip from '../Tooltip/Tooltip.vue'
 import {
   useClickRow,
   useExpandableRow,
@@ -124,7 +124,7 @@ const { value: activeFilters, setValue: setActiveFilters } = useControllable<
   },
 )
 
-const locale = useWdLocale()
+const locale = useRdLocale()
 const {
   tableNodeId,
   clickEventType,
@@ -192,8 +192,8 @@ const resolvedNoHover = computed(() => !props.rowHover)
 
 const sizeTone = useConfiguredSize('Table', () => size.value)
 const sizeClass = computed(() => {
-  if (sizeTone.value === 'small') return 'wd-table--small'
-  if (sizeTone.value === 'large') return 'wd-table--large'
+  if (sizeTone.value === 'small') return 'rd-table--small'
+  if (sizeTone.value === 'large') return 'rd-table--large'
   return undefined
 })
 
@@ -201,9 +201,9 @@ const tableRootClass = computed(() => [
   tableClassName.value,
   sizeClass.value,
   {
-    'wd-table--border': resolvedBorderCell.value,
-    'wd-table--striped': resolvedStriped.value,
-    'wd-table--enable-row-hover': !resolvedNoHover.value,
+    'rd-table--border': resolvedBorderCell.value,
+    'rd-table--striped': resolvedStriped.value,
+    'rd-table--enable-row-hover': !resolvedNoHover.value,
   },
 ])
 
@@ -273,14 +273,14 @@ const isMultipleSelectable = computed(() => selectionColumn.value === 'checkbox'
 const isSingleSelectable = computed(() => selectionColumn.value === 'radio')
 
 const mainWrapClass = computed(() => [
-  'wd-table__main',
+  'rd-table__main',
   {
-    'wd-table__main--fixed-header': fixedHeader.value,
-    'wd-table__main--fixed-height': Boolean(resolvedTableHeight.value),
-    'wd-table__main--shadow': showShadow.value,
-    'wd-table__main--shadow-end': showShadowEnd.value,
-    'wd-table__main--table-fixed': useTableFixedLayout.value,
-    'wd-table__main--border-cell': resolvedBorderCell.value,
+    'rd-table__main--fixed-header': fixedHeader.value,
+    'rd-table__main--fixed-height': Boolean(resolvedTableHeight.value),
+    'rd-table__main--shadow': showShadow.value,
+    'rd-table__main--shadow-end': showShadowEnd.value,
+    'rd-table__main--table-fixed': useTableFixedLayout.value,
+    'rd-table__main--border-cell': resolvedBorderCell.value,
   },
 ])
 
@@ -448,12 +448,12 @@ function headerCellClass(header: HeaderForRender, index: number) {
   const isSelectionCell = header.text === 'checkbox' || header.value === 'radio'
   return [
     {
-      'wd-table__cell--selection': isSelectionCell,
-      'wd-table__header-cell--sortable': header.sortable,
-      'wd-table__header-cell--ascending': header.sortable && header.sortType === 'asc',
-      'wd-table__header-cell--descending': header.sortable && header.sortType === 'desc',
-      'wd-table__header-cell--shadow': header.value === lastFixedColumn.value,
-      'wd-table__header-cell--shadow-end': header.value === firstRightFixedColumn.value,
+      'rd-table__cell--selection': isSelectionCell,
+      'rd-table__header-cell--sortable': header.sortable,
+      'rd-table__header-cell--ascending': header.sortable && header.sortType === 'asc',
+      'rd-table__header-cell--descending': header.sortable && header.sortType === 'desc',
+      'rd-table__header-cell--shadow': header.value === lastFixedColumn.value,
+      'rd-table__header-cell--shadow-end': header.value === firstRightFixedColumn.value,
     },
     custom,
   ]
@@ -461,14 +461,14 @@ function headerCellClass(header: HeaderForRender, index: number) {
 
 function headerInnerClass() {
   return [
-    'wd-table__header-inner',
-    `wd-table__header-inner--${headerTextDirection.value}`,
+    'rd-table__header-inner',
+    `rd-table__header-inner--${headerTextDirection.value}`,
   ]
 }
 
 function cellAlignClass(direction: string) {
-  if (direction === 'center') return 'wd-table__cell--center'
-  if (direction === 'right' || direction === 'end') return 'wd-table__cell--right'
+  if (direction === 'center') return 'rd-table__cell--center'
+  if (direction === 'right' || direction === 'end') return 'rd-table__cell--right'
   return undefined
 }
 
@@ -607,20 +607,20 @@ defineExpose({
 <template>
   <div
     ref="dataTable"
-    class="wd-table"
+    class="rd-table"
     :class="tableRootClass"
     :aria-label="ariaLabel || undefined"
   >
-    <WdScrollbar
+    <RdScrollbar
       ref="scrollbarRef"
-      class="wd-table__scrollbar"
+      class="rd-table__scrollbar"
       :height="tableHeightPx || undefined"
       :wrap-style="scrollbarWrapStyle"
       :wrap-class="mainWrapClass"
       noresize
       @scroll="onScrollbarScroll"
     >
-      <div class="wd-table__surface" :aria-busy="loading || undefined">
+      <div class="rd-table__surface" :aria-busy="loading || undefined">
       <table :id="tableNodeId || undefined">
         <colgroup>
           <col
@@ -632,7 +632,7 @@ defineExpose({
         <slot v-if="slots['customize-headers']" name="customize-headers" />
         <thead
           v-else-if="headersForRender.length && showHeaderComputed"
-          class="wd-table__header"
+          class="rd-table__header"
           :class="[headerClassName]"
         >
           <tr>
@@ -648,9 +648,9 @@ defineExpose({
             >
               <div
                 v-if="header.text === 'checkbox'"
-                class="wd-table__cell-inner wd-table__cell-inner--selection"
+                class="rd-table__cell-inner rd-table__cell-inner--selection"
               >
-                <WdCheckbox
+                <RdCheckbox
                   :key="multipleSelectStatus"
                   :model-value="multipleSelectStatus === 'allSelected'"
                   :indeterminate="multipleSelectStatus === 'partSelected'"
@@ -661,18 +661,18 @@ defineExpose({
               </div>
               <div
                 v-else-if="header.value === 'radio'"
-                class="wd-table__cell-inner wd-table__cell-inner--selection"
+                class="rd-table__cell-inner rd-table__cell-inner--selection"
               />
               <span v-else :class="headerInnerClass()">
                 <slot v-if="slots[`header-${header.value}`]" :name="`header-${header.value}`" v-bind="header" />
                 <slot v-else-if="slots[`header-${header.value.toLowerCase()}`]" :name="`header-${header.value.toLowerCase()}`" v-bind="header" />
                 <slot v-else-if="slots.header" name="header" v-bind="header" />
-                <span v-else class="wd-table__header-text" :title="header.text">{{ header.text }}</span>
-                <span v-if="header.sortable" class="wd-table__caret-wrapper">
-                  <i class="wd-table__sort-caret wd-table__sort-caret--ascending" />
-                  <i class="wd-table__sort-caret wd-table__sort-caret--descending" />
+                <span v-else class="rd-table__header-text" :title="header.text">{{ header.text }}</span>
+                <span v-if="header.sortable" class="rd-table__caret-wrapper">
+                  <i class="rd-table__sort-caret rd-table__sort-caret--ascending" />
+                  <i class="rd-table__sort-caret rd-table__sort-caret--descending" />
                 </span>
-                <span v-if="multiSort && isMultiSorting(header.value)" class="wd-table__multi-sort-number">
+                <span v-if="multiSort && isMultiSorting(header.value)" class="rd-table__multi-sort-number">
                   {{ getMultiSortNumber(header.value) }}
                 </span>
               </span>
@@ -682,7 +682,7 @@ defineExpose({
         <slot v-if="ifHasBodySlot" name="body" v-bind="pageItems" />
         <tbody
           v-else-if="headerColumns.length"
-          class="wd-table__body"
+          class="rd-table__body"
         >
           <slot
             name="body-prepend"
@@ -696,9 +696,9 @@ defineExpose({
             <tr
               :class="[
                 {
-                  'wd-table__row--striped': resolvedStriped && (index + 1) % 2 === 0,
-                  'wd-table__row--selected': isRowSelected(item, index),
-                  'wd-table__row--current': isCurrentRow(item, index),
+                  'rd-table__row--striped': resolvedStriped && (index + 1) % 2 === 0,
+                  'rd-table__row--selected': isRowSelected(item, index),
+                  'rd-table__row--current': isCurrentRow(item, index),
                 },
                 typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, index + 1),
               ]"
@@ -715,10 +715,10 @@ defineExpose({
                 :style="getFixedDistance(column, 'td')"
                 :class="[
                   {
-                    'wd-table__cell--shadow': column === lastFixedColumn,
-                    'wd-table__cell--shadow-end': column === firstRightFixedColumn,
-                    'wd-table__cell--expand': column === 'expand',
-                    'wd-table__cell--selection': column === 'checkbox' || column === 'radio',
+                    'rd-table__cell--shadow': column === lastFixedColumn,
+                    'rd-table__cell--shadow-end': column === firstRightFixedColumn,
+                    'rd-table__cell--expand': column === 'expand',
+                    'rd-table__cell--selection': column === 'checkbox' || column === 'radio',
                   },
                   resolveCellAlign(column),
                   typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, index + 1),
@@ -726,10 +726,10 @@ defineExpose({
                 @click="column === 'expand' ? toggleExpandRow(item, index, $event) : null"
               >
                 <div
-                  class="wd-table__cell-inner"
+                  class="rd-table__cell-inner"
                   :class="{
-                    'wd-table__cell-inner--expand': column === 'expand',
-                    'wd-table__cell-inner--selection': column === 'checkbox' || column === 'radio',
+                    'rd-table__cell-inner--expand': column === 'expand',
+                    'rd-table__cell-inner--selection': column === 'checkbox' || column === 'radio',
                   }"
                 >
                   <slot
@@ -745,17 +745,17 @@ defineExpose({
                   <template v-else-if="column === 'expand'">
                     <button
                       type="button"
-                      class="wd-table__expand-btn"
-                      :class="{ 'wd-table__expand-btn--expanded': isRowExpanded(item, index) }"
+                      class="rd-table__expand-btn"
+                      :class="{ 'rd-table__expand-btn--expanded': isRowExpanded(item, index) }"
                       :aria-expanded="isRowExpanded(item, index)"
                       :aria-label="locale.expand"
                       @click.stop="toggleExpandRow(item, index, $event)"
                     >
-                      <WdIcon name="chevron-right" />
+                      <RdIcon name="chevron-right" />
                     </button>
                   </template>
                   <template v-else-if="column === 'checkbox'">
-                    <WdCheckbox
+                    <RdCheckbox
                       :model-value="Boolean((item as TableItem).checkbox)"
                       :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
                       @update:model-value="toggleSelectItem(item)"
@@ -763,7 +763,7 @@ defineExpose({
                     />
                   </template>
                   <template v-else-if="column === 'radio'">
-                    <WdRadio
+                    <RdRadio
                       :model-value="singleSelectedRowKey ?? undefined"
                       :value="getRowKey(item, index)"
                       :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
@@ -777,28 +777,28 @@ defineExpose({
                     v-bind="{ column, item, row: item, value: getItemValue(column, item) }"
                   />
                   <template v-else-if="columnRenderMap.get(column)">
-                    <span class="wd-table__cell-text">{{ columnRenderMap.get(column)!(item) }}</span>
+                    <span class="rd-table__cell-text">{{ columnRenderMap.get(column)!(item) }}</span>
                   </template>
-                  <WdTooltip
+                  <RdTooltip
                     v-else
                     :content="generateColumnContent(column, item)"
                     :disabled="!columnOverflowTooltip(column)"
                   >
-                    <span class="wd-table__tooltip-trigger">
-                      <span class="wd-table__cell-text">{{ generateColumnContent(column, item) }}</span>
+                    <span class="rd-table__tooltip-trigger">
+                      <span class="rd-table__cell-text">{{ generateColumnContent(column, item) }}</span>
                     </span>
-                  </WdTooltip>
+                  </RdTooltip>
                 </div>
               </td>
             </tr>
             <tr
               v-if="ifHasExpandSlot && isRowExpanded(item, index)"
               :class="[
-                { 'wd-table__row--striped': resolvedStriped && (index + 1) % 2 === 0 },
+                { 'rd-table__row--striped': resolvedStriped && (index + 1) % 2 === 0 },
                 typeof bodyExpandRowClassName === 'string' ? bodyExpandRowClassName : bodyExpandRowClassName(item, index + 1),
               ]"
             >
-              <td :colspan="headersForRender.length" class="wd-table__cell--expanded">
+              <td :colspan="headersForRender.length" class="rd-table__cell--expanded">
                 <TableLoadingLine v-if="(item as TableItem).expandLoading" class="expand-loading" />
                 <slot name="expansion" v-bind="{ row: item }" />
               </td>
@@ -815,26 +815,26 @@ defineExpose({
         </tbody>
       </table>
 
-      <div v-if="loading" class="wd-table__loading">
-        <div class="wd-table__loading-mask" />
-        <div class="wd-table__loading-body">
+      <div v-if="loading" class="rd-table__loading">
+        <div class="rd-table__loading-mask" />
+        <div class="rd-table__loading-body">
           <slot v-if="ifHasLoadingSlot" name="loading" />
-          <WdProgressSpinner v-else size="sm" />
+          <RdProgressSpinner v-else size="sm" />
         </div>
       </div>
 
-      <div v-if="!pageItems.length && !loading" class="wd-table__message" role="status">
+      <div v-if="!pageItems.length && !loading" class="rd-table__message" role="status">
         <slot v-if="slots.empty" name="empty" />
         <slot v-else name="empty">
-          <p class="wd-table__empty-text">{{ resolvedEmptyMessage }}</p>
-          <p v-if="emptyDescription" class="wd-table__empty-description">{{ emptyDescription }}</p>
+          <p class="rd-table__empty-text">{{ resolvedEmptyMessage }}</p>
+          <p v-if="emptyDescription" class="rd-table__empty-description">{{ emptyDescription }}</p>
         </slot>
       </div>
       </div>
-    </WdScrollbar>
+    </RdScrollbar>
 
-    <div v-if="paginator" class="wd-table__footer">
-      <div class="wd-table__items-index">
+    <div v-if="paginator" class="rd-table__footer">
+      <div class="rd-table__items-index">
         {{ `${currentPageFirstIndex}–${currentPageLastIndex}` }}
         {{ rowsOfPageSeparatorMessage }} {{ totalItemsLength }}
       </div>
@@ -843,7 +843,7 @@ defineExpose({
         name="pagination"
         v-bind="{ isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage }"
       />
-      <WdPagination
+      <RdPagination
         v-else
         :model-value="currentPaginationNumber"
         :total-records="totalItemsLength"

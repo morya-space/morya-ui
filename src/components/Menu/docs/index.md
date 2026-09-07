@@ -11,14 +11,14 @@ description: 垂直/水平导航菜单，支持多级嵌套、受控选中、手
 - 多级嵌套 `items` 与受控 `selectedKey`
 - 展开路径自动跟随选中项；`accordion` 手风琴
 - `collapsed` 图标模式 + 右侧飞出子菜单（Popover）
-- 非 popup 时默认 `embedded`，无边框铺满 `WdLayoutSider`
+- 非 popup 时默认 `embedded`，无边框铺满 `RdLayoutSider`
 
 > 单层悬停子菜单见 [TieredMenu](/components/TieredMenu)；顶栏菜单见 [Menubar](/components/Menubar)；操作列表见 [Dropdown](/components/Dropdown)。
 
 ## 引入
 
 ```ts
-import { WdMenu, type MenuItem } from '@wex-design/ui'
+import { RdMenu, type MenuItem } from '@roost-design/ui'
 ```
 
 ## 导航选中
@@ -27,7 +27,7 @@ import { WdMenu, type MenuItem } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenu } from '@wex-design/ui'
+import { RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -42,14 +42,14 @@ const model = [
   <div
     style="
       width: 15rem;
-      padding: var(--wd-space-3);
-      background: var(--wd-color-surface);
-      border: 1px solid var(--wd-color-border);
-      border-radius: var(--wd-radius-lg);
-      box-shadow: var(--wd-shadow-sm);
+      padding: var(--rd-space-3);
+      background: var(--rd-color-surface);
+      border: 1px solid var(--rd-color-border);
+      border-radius: var(--rd-radius-lg);
+      box-shadow: var(--rd-shadow-sm);
     "
   >
-    <WdMenu
+    <RdMenu
       v-model:selected-key="selectedKey"
       :model="model"
       embedded
@@ -67,7 +67,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenu } from '@wex-design/ui'
+import { RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('reports')
@@ -89,14 +89,14 @@ const model = [
   <div
     style="
       width: 16rem;
-      padding: var(--wd-space-3);
-      background: var(--wd-color-surface);
-      border: 1px solid var(--wd-color-border);
-      border-radius: var(--wd-radius-lg);
-      box-shadow: var(--wd-shadow-sm);
+      padding: var(--rd-space-3);
+      background: var(--rd-color-surface);
+      border: 1px solid var(--rd-color-border);
+      border-radius: var(--rd-radius-lg);
+      box-shadow: var(--rd-shadow-sm);
     "
   >
-    <WdMenu v-model:selected-key="selectedKey" :model="model" embedded />
+    <RdMenu v-model:selected-key="selectedKey" :model="model" embedded />
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenu } from '@wex-design/ui'
+import { RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('a1')
@@ -121,25 +121,25 @@ const model = [
   <div
     style="
       width: 14rem;
-      padding: var(--wd-space-3);
-      background: var(--wd-color-surface);
-      border: 1px solid var(--wd-color-border);
-      border-radius: var(--wd-radius-lg);
-      box-shadow: var(--wd-shadow-sm);
+      padding: var(--rd-space-3);
+      background: var(--rd-color-surface);
+      border: 1px solid var(--rd-color-border);
+      border-radius: var(--rd-radius-lg);
+      box-shadow: var(--rd-shadow-sm);
     "
   >
-    <WdMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
+    <RdMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
   </div>
 </template>
 ```
 
 ## 折叠与飞出层
 
-`collapsed` 隐藏文案，仅保留图标；悬停/聚焦带子项的节点时，在右侧弹出飞出层（`.wd-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
+`collapsed` 隐藏文案，仅保留图标；悬停/聚焦带子项的节点时，在右侧弹出飞出层（`.rd-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenu } from '@wex-design/ui'
+import { RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -158,50 +158,50 @@ const model = [
 </script>
 
 <template>
-  <div style="display: flex; gap: var(--wd-space-4); align-items: stretch">
+  <div style="display: flex; gap: var(--rd-space-4); align-items: stretch">
     <div
       style="
         flex: 1;
         min-width: 0;
-        padding: var(--wd-space-3);
-        background: var(--wd-color-surface);
-        border: 1px solid var(--wd-color-border);
-        border-radius: var(--wd-radius-lg);
-        box-shadow: var(--wd-shadow-sm);
+        padding: var(--rd-space-3);
+        background: var(--rd-color-surface);
+        border: 1px solid var(--rd-color-border);
+        border-radius: var(--rd-radius-lg);
+        box-shadow: var(--rd-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--wd-space-3);
-          font-size: var(--wd-font-size-xs);
-          color: var(--wd-color-text-muted);
+          margin: 0 0 var(--rd-space-3);
+          font-size: var(--rd-font-size-xs);
+          color: var(--rd-color-text-muted);
         "
       >
         展开
       </p>
-      <WdMenu v-model:selected-key="selectedKey" :model="model" embedded />
+      <RdMenu v-model:selected-key="selectedKey" :model="model" embedded />
     </div>
     <div
       style="
         width: 4.5rem;
-        padding: var(--wd-space-3) var(--wd-space-2);
-        background: var(--wd-color-surface);
-        border: 1px solid var(--wd-color-border);
-        border-radius: var(--wd-radius-lg);
-        box-shadow: var(--wd-shadow-sm);
+        padding: var(--rd-space-3) var(--rd-space-2);
+        background: var(--rd-color-surface);
+        border: 1px solid var(--rd-color-border);
+        border-radius: var(--rd-radius-lg);
+        box-shadow: var(--rd-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--wd-space-3);
-          font-size: var(--wd-font-size-xs);
-          color: var(--wd-color-text-muted);
+          margin: 0 0 var(--rd-space-3);
+          font-size: var(--rd-font-size-xs);
+          color: var(--rd-color-text-muted);
           text-align: center;
         "
       >
         折叠
       </p>
-      <WdMenu
+      <RdMenu
         v-model:selected-key="selectedKey"
         :model="model"
         collapsed
@@ -215,17 +215,17 @@ const model = [
 
 ## 嵌入 Layout 侧栏
 
-推荐结构：**全局 Header + 下方 `has-sider` Layout**。菜单放在 `WdLayoutSider` 内，与 `v-model:collapsed` 联动。
+推荐结构：**全局 Header + 下方 `has-sider` Layout**。菜单放在 `RdLayoutSider` 内，与 `v-model:collapsed` 联动。
 
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-  WdMenu,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+  RdMenu,
+} from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -245,48 +245,48 @@ const model = [
 </script>
 
 <template>
-  <WdLayout
+  <RdLayout
     style="
       height: 14rem;
-      border: 1px solid var(--wd-color-border);
-      border-radius: var(--wd-radius-lg);
-      box-shadow: var(--wd-shadow-sm);
+      border: 1px solid var(--rd-color-border);
+      border-radius: var(--rd-radius-lg);
+      box-shadow: var(--rd-shadow-sm);
       overflow: hidden;
     "
   >
-    <WdLayoutHeader
+    <RdLayoutHeader
       bordered
       style="
-        padding: 0 var(--wd-space-4);
+        padding: 0 var(--rd-space-4);
         display: flex;
         align-items: center;
-        min-height: var(--wd-layout-header-height);
+        min-height: var(--rd-layout-header-height);
       "
     >
-      <strong style="color: var(--wd-color-primary); font-size: var(--wd-font-size-md)">头部菜单</strong>
-    </WdLayoutHeader>
-    <WdLayout has-sider>
-      <WdLayoutSider
+      <strong style="color: var(--rd-color-primary); font-size: var(--rd-font-size-md)">头部菜单</strong>
+    </RdLayoutHeader>
+    <RdLayout has-sider>
+      <RdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
         collapse-mode="width"
         :collapsed-width="120"
       >
-        <WdMenu
+        <RdMenu
           v-model:selected-key="selectedKey"
           :model="model"
           :collapsed="collapsed"
           :collapsed-width="64"
         />
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding: var(--wd-space-4)">
-        <p style="margin: 0; color: var(--wd-color-text-muted); font-size: var(--wd-font-size-sm)">
-          当前选中：<strong style="color: var(--wd-color-text)">{{ selectedKey }}</strong>
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding: var(--rd-space-4)">
+        <p style="margin: 0; color: var(--rd-color-text-muted); font-size: var(--rd-font-size-sm)">
+          当前选中：<strong style="color: var(--rd-color-text)">{{ selectedKey }}</strong>
         </p>
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -296,7 +296,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdMenu } from '@wex-design/ui'
+import { RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -318,25 +318,25 @@ const model = [
 <template>
   <div
     style="
-      padding: 0 var(--wd-space-2);
-      background: var(--wd-color-surface);
-      border: 1px solid var(--wd-color-border);
-      border-radius: var(--wd-radius-lg);
-      box-shadow: var(--wd-shadow-sm);
+      padding: 0 var(--rd-space-2);
+      background: var(--rd-color-surface);
+      border: 1px solid var(--rd-color-border);
+      border-radius: var(--rd-radius-lg);
+      box-shadow: var(--rd-shadow-sm);
     "
   >
-    <WdMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
+    <RdMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
   </div>
 </template>
 ```
 
 ## 反色（深色侧栏）
 
-`inverted` 配合 `WdLayoutSider` 的 `inverted`，用于深色背景侧栏。
+`inverted` 配合 `RdLayoutSider` 的 `inverted`，用于深色背景侧栏。
 
 ```vue preview
 <script setup lang="ts">
-import { WdLayout, WdLayoutSider, WdMenu } from '@wex-design/ui'
+import { RdLayout, RdLayoutSider, RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -347,19 +347,19 @@ const model = [
 </script>
 
 <template>
-  <WdLayout
+  <RdLayout
     has-sider
     style="
       height: 10rem;
-      border-radius: var(--wd-radius-lg);
-      box-shadow: var(--wd-shadow-sm);
+      border-radius: var(--rd-radius-lg);
+      box-shadow: var(--rd-shadow-sm);
       overflow: hidden;
     "
   >
-    <WdLayoutSider inverted bordered style="width: 12rem">
-      <WdMenu v-model:selected-key="selectedKey" :model="model" inverted />
-    </WdLayoutSider>
-  </WdLayout>
+    <RdLayoutSider inverted bordered style="width: 12rem">
+      <RdMenu v-model:selected-key="selectedKey" :model="model" inverted />
+    </RdLayoutSider>
+  </RdLayout>
 </template>
 ```
 
@@ -369,7 +369,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdMenu } from '@wex-design/ui'
+import { RdButton, RdMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -381,9 +381,9 @@ const model = [
 </script>
 
 <template>
-  <WdMenu v-model="open" popup :model="model">
-    <WdButton label="更多操作" @click="open = !open" />
-  </WdMenu>
+  <RdMenu v-model="open" popup :model="model">
+    <RdButton label="更多操作" @click="open = !open" />
+  </RdMenu>
 </template>
 ```
 

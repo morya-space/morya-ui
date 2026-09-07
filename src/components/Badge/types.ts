@@ -1,8 +1,8 @@
-import type { WdSizeInput, WdTagSeverity } from '../../shared/types'
+import type { RdSizeInput, RdTagSeverity } from '../../shared/types'
 
-export type BadgeSeverity = WdTagSeverity | 'warning'
+export type BadgeSeverity = RdTagSeverity | 'warning'
 
-export type BadgeSize = WdSizeInput
+export type BadgeSize = RdSizeInput
 
 export type BadgeOffset = [number, number]
 

@@ -1,3 +1,3 @@
 import './style'
-export { default as WdMenubar } from './Menubar.vue'
+export { default as RdMenubar } from './Menubar.vue'
 export type { MenubarEmits, MenubarItem, MenubarProps } from './types'

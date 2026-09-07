@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import WdGallery from './Gallery.vue'
+import RdGallery from './Gallery.vue'
 
 const images = [
   'https://example.com/a.jpg',
@@ -9,10 +9,10 @@ const images = [
   'https://example.com/c.jpg',
 ]
 
-describe('wdGallery', () => {
+describe('rdGallery', () => {
   it('changes active image via thumb and nav', async () => {
-    const wrapper = mount(WdGallery, { props: { images, activeIndex: 0 } })
-    await wrapper.findAll('.wd-gallery__thumb')[2]!.trigger('click')
+    const wrapper = mount(RdGallery, { props: { images, activeIndex: 0 } })
+    await wrapper.findAll('.rd-gallery__thumb')[2]!.trigger('click')
     expect(wrapper.emitted('update:activeIndex')?.at(-1)).toEqual([2])
     await wrapper.setProps({ activeIndex: 2 })
     await wrapper.find('[aria-label="上一张"]').trigger('click')
@@ -20,28 +20,28 @@ describe('wdGallery', () => {
   })
 
   it('renders object images with alt and caption', () => {
-    const wrapper = mount(WdGallery, {
+    const wrapper = mount(RdGallery, {
       props: {
         images: [{ src: 'https://example.com/a.jpg', alt: 'A photo', caption: 'First' }],
         activeIndex: 0,
       },
     })
-    expect(wrapper.find('.wd-gallery__image').attributes('alt')).toBe('A photo')
-    expect(wrapper.find('.wd-gallery__caption').text()).toBe('First')
-    expect(wrapper.find('.wd-gallery__thumb img').attributes('alt')).toBe('A photo')
+    expect(wrapper.find('.rd-gallery__image').attributes('alt')).toBe('A photo')
+    expect(wrapper.find('.rd-gallery__caption').text()).toBe('First')
+    expect(wrapper.find('.rd-gallery__thumb img').attributes('alt')).toBe('A photo')
   })
 
   it('supports arrow-key navigation across thumbs with roving tabindex', async () => {
-    const wrapper = mount(WdGallery, {
+    const wrapper = mount(RdGallery, {
       attachTo: document.body,
       props: { images, activeIndex: 0 },
     })
-    const thumbs = () => wrapper.findAll('.wd-gallery__thumb')
+    const thumbs = () => wrapper.findAll('.rd-gallery__thumb')
     expect(thumbs()[0]!.attributes('tabindex')).toBe('0')
     expect(thumbs()[1]!.attributes('tabindex')).toBe('-1')
 
     ;(thumbs()[0]!.element as HTMLElement).focus()
-    await wrapper.find('.wd-gallery__thumbs').trigger('keydown', { key: 'ArrowRight' })
+    await wrapper.find('.rd-gallery__thumbs').trigger('keydown', { key: 'ArrowRight' })
     await nextTick()
     expect(wrapper.emitted('update:activeIndex')?.at(-1)).toEqual([1])
     expect(thumbs()[1]!.attributes('tabindex')).toBe('0')

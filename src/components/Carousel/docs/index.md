@@ -11,26 +11,26 @@ description: 轮播展示一组内容项。
 ## 引入
 
 ```ts
-import { WdCarousel } from '@wex-design/ui'
+import { RdCarousel } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdCarousel } from '@wex-design/ui'
+import { RdCarousel } from '@roost-design/ui'
 
 const value = ['春', '夏', '秋', '冬']
 </script>
 
 <template>
-  <WdCarousel :value="value" :num-visible="1" circular>
+  <RdCarousel :value="value" :num-visible="1" circular>
     <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--wd-color-surface-muted, #f3f4f6);border-radius:var(--wd-radius-md)">
+      <div style="padding:2rem;text-align:center;background:var(--rd-color-surface-muted, #f3f4f6);border-radius:var(--rd-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WdCarousel>
+  </RdCarousel>
 </template>
 ```
 
@@ -40,19 +40,19 @@ const value = ['春', '夏', '秋', '冬']
 
 ```vue preview
 <script setup lang="ts">
-import { WdCarousel } from '@wex-design/ui'
+import { RdCarousel } from '@roost-design/ui'
 
 const value = ['A', 'B', 'C']
 </script>
 
 <template>
-  <WdCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
+  <RdCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
     <template #item="{ item }">
-      <div style="padding:1.5rem;text-align:center;background:var(--wd-color-surface-muted, #f3f4f6);border-radius:var(--wd-radius-md)">
+      <div style="padding:1.5rem;text-align:center;background:var(--rd-color-surface-muted, #f3f4f6);border-radius:var(--rd-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WdCarousel>
+  </RdCarousel>
 </template>
 ```
 

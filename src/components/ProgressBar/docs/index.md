@@ -11,21 +11,21 @@ description: 进度条用于展示确定或不确定进度。
 ## 引入
 
 ```ts
-import { WdProgressBar } from '@wex-design/ui'
+import { RdProgressBar } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdProgressBar } from '@wex-design/ui'
+import { RdProgressBar } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdProgressBar :value="35" />
-    <WdProgressBar :value="70" :show-value="false" />
-    <WdProgressBar mode="indeterminate" />
+    <RdProgressBar :value="35" />
+    <RdProgressBar :value="70" :show-value="false" />
+    <RdProgressBar mode="indeterminate" />
   </div>
 </template>
 ```
@@ -34,13 +34,13 @@ import { WdProgressBar } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdProgressBar } from '@wex-design/ui'
+import { RdProgressBar } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WdProgressBar :value="72" type="circle" status="success" />
-    <WdProgressBar :value="40" status="warn" />
+    <RdProgressBar :value="72" type="circle" status="success" />
+    <RdProgressBar :value="40" status="warn" />
   </div>
 </template>
 ```

@@ -11,18 +11,18 @@ Split content into two panes with a draggable gutter. Covers common Naive `n-spl
 ## Import
 
 ```ts
-import { WdSplitter } from '@wex-design/ui'
+import { RdSplitter } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdSplitter } from '@wex-design/ui'
+import { RdSplitter } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSplitter style="min-height: 8rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden">
+  <RdSplitter style="min-height: 8rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding: 0.75rem">
         Panel A — drag the gutter
@@ -33,7 +33,7 @@ import { WdSplitter } from '@wex-design/ui'
         Panel B
       </div>
     </template>
-  </WdSplitter>
+  </RdSplitter>
 </template>
 ```
 
@@ -43,11 +43,11 @@ import { WdSplitter } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSplitter } from '@wex-design/ui'
+import { RdSplitter } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden">
+  <RdSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding: 0.75rem">
         Top
@@ -58,7 +58,7 @@ import { WdSplitter } from '@wex-design/ui'
         Bottom
       </div>
     </template>
-  </WdSplitter>
+  </RdSplitter>
 </template>
 ```
 
@@ -70,7 +70,7 @@ import { WdSplitter } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdSplitter } from '@wex-design/ui'
+import { RdSplitter } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const percent = ref(40)
@@ -79,9 +79,9 @@ const ratio = ref(0.3)
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WdSplitter
+    <RdSplitter
       v-model:size="percent"
-      style="min-height: 7rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden"
+      style="min-height: 7rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden"
     >
       <template #panel1>
         <div style="padding:0.75rem">
@@ -93,12 +93,12 @@ const ratio = ref(0.3)
           rest
         </div>
       </template>
-    </WdSplitter>
-    <WdSplitter
+    </RdSplitter>
+    <RdSplitter
       v-model:size="ratio"
       :min="0.15"
       :max="0.85"
-      style="min-height: 7rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden"
+      style="min-height: 7rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden"
     >
       <template #panel1>
         <div style="padding:0.75rem">
@@ -110,7 +110,7 @@ const ratio = ref(0.3)
           rest
         </div>
       </template>
-    </WdSplitter>
+    </RdSplitter>
   </div>
 </template>
 ```
@@ -119,11 +119,11 @@ const ratio = ref(0.3)
 
 ```vue preview
 <script setup lang="ts">
-import { WdSplitter } from '@wex-design/ui'
+import { RdSplitter } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--wd-color-border); border-radius: var(--wd-radius-md); overflow: hidden">
+  <RdSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding:0.75rem">
         Not draggable
@@ -134,7 +134,7 @@ import { WdSplitter } from '@wex-design/ui'
         B
       </div>
     </template>
-  </WdSplitter>
+  </RdSplitter>
 </template>
 ```
 

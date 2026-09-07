@@ -1,26 +1,26 @@
 /* —— Misc: Inplace —— */
-.wd-inplace__display {
-    border-radius: var(--wd-radius-sm);
+.rd-inplace__display {
+    border-radius: var(--rd-radius-sm);
     cursor: pointer;
     display: inline-block;
-    padding: var(--wd-space-1) var(--wd-space-2);
+    padding: var(--rd-space-1) var(--rd-space-2);
 }
 
-.wd-inplace__display:hover {
-    background: color-mix(in srgb, var(--wd-color-primary) 8%, var(--wd-color-surface));
+.rd-inplace__display:hover {
+    background: color-mix(in srgb, var(--rd-color-primary) 8%, var(--rd-color-surface));
 }
 
-.wd-inplace__display:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-inplace__display:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-inplace--disabled .wd-inplace__display {
+.rd-inplace--disabled .rd-inplace__display {
     cursor: not-allowed;
-    opacity: var(--wd-opacity-disabled);
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-inplace__content {
+.rd-inplace__content {
     display: inline-block;
 }

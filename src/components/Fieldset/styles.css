@@ -1,20 +1,20 @@
 /* —�?Panel: Fieldset —�?*/
-.wd-fieldset {
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-md);
+.rd-fieldset {
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-md);
     margin: 0;
     min-inline-size: 0;
-    padding: var(--wd-space-3) var(--wd-space-4) var(--wd-space-4);
+    padding: var(--rd-space-3) var(--rd-space-4) var(--rd-space-4);
 }
 
-.wd-fieldset__legend {
-    color: var(--wd-color-text);
+.rd-fieldset__legend {
+    color: var(--rd-color-text);
     font-weight: 600;
-    padding: 0 var(--wd-space-1);
+    padding: 0 var(--rd-space-1);
 }
 
-.wd-fieldset__toggler {
+.rd-fieldset__toggler {
     align-items: center;
     background: transparent;
     border: 0;
@@ -22,31 +22,31 @@
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     padding: 0;
 }
 
-.wd-fieldset__toggler:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-fieldset__toggler:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-fieldset__content {
-    color: var(--wd-color-text);
-    padding-top: var(--wd-space-2);
+.rd-fieldset__content {
+    color: var(--rd-color-text);
+    padding-top: var(--rd-space-2);
 }
 
-.wd-fieldset-collapse-enter-active,
-.wd-fieldset-collapse-leave-active {
+.rd-fieldset-collapse-enter-active,
+.rd-fieldset-collapse-leave-active {
     overflow: hidden;
     transition:
-        max-height var(--wd-motion-normal) var(--wd-motion-ease),
-        opacity var(--wd-motion-normal) var(--wd-motion-ease),
-        padding var(--wd-motion-normal) var(--wd-motion-ease);
+        max-height var(--rd-motion-normal) var(--rd-motion-ease),
+        opacity var(--rd-motion-normal) var(--rd-motion-ease),
+        padding var(--rd-motion-normal) var(--rd-motion-ease);
 }
 
-.wd-fieldset-collapse-enter-from,
-.wd-fieldset-collapse-leave-to {
+.rd-fieldset-collapse-enter-from,
+.rd-fieldset-collapse-leave-to {
     max-height: 0;
     opacity: 0;
     padding-top: 0;

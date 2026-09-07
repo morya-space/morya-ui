@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useRdLocale } from '../../locale'
+import RdIcon from '../Icon/Icon.vue'
 import { ajaxUpload } from './ajax'
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
@@ -38,7 +38,7 @@ const inputRef = ref<HTMLInputElement | null>(null)
 const items = ref<FileUploadFile[]>([])
 const dragOver = ref(false)
 const requests = new Map<string, XMLHttpRequest>()
-const locale = useWdLocale()
+const locale = useRdLocale()
 const chooseText = computed(() => props.chooseLabel ?? locale.value.chooseFile)
 const isPictureCard = computed(() => props.listType === 'picture-card')
 const isPicture = computed(() => props.listType === 'picture' || isPictureCard.value)
@@ -56,12 +56,12 @@ const showSubmit = computed(
 const showToolbar = computed(() => items.value.length > 0 && props.showFileList)
 
 const rootClass = computed(() => [
-  'wd-fileupload',
-  `wd-fileupload--${props.mode}`,
-  `wd-fileupload--${props.listType}`,
+  'rd-fileupload',
+  `rd-fileupload--${props.mode}`,
+  `rd-fileupload--${props.listType}`,
   {
-    'wd-fileupload--disabled': props.disabled,
-    'wd-fileupload--drag': props.drag,
+    'rd-fileupload--disabled': props.disabled,
+    'rd-fileupload--drag': props.drag,
   },
 ])
 
@@ -81,7 +81,7 @@ watch(
 
 function nextUid() {
   uidSeed += 1
-  return `wd-upload-${Date.now()}-${uidSeed}`
+  return `rd-upload-${Date.now()}-${uidSeed}`
 }
 
 function commit(next: FileUploadFile[]) {
@@ -340,7 +340,7 @@ defineExpose({
   <div :class="rootClass">
     <input
       ref="inputRef"
-      class="wd-fileupload__input"
+      class="rd-fileupload__input"
       type="file"
       :multiple="multiple || directory"
       :accept="accept"
@@ -351,8 +351,8 @@ defineExpose({
 
     <div
       v-if="drag && showTrigger"
-      class="wd-fileupload__dragger"
-      :class="{ 'wd-fileupload__dragger--over': dragOver }"
+      class="rd-fileupload__dragger"
+      :class="{ 'rd-fileupload__dragger--over': dragOver }"
       role="button"
       tabindex="0"
       :aria-disabled="disabled || undefined"
@@ -365,8 +365,8 @@ defineExpose({
       @drop="onDrop"
     >
       <slot>
-        <WdIcon class="wd-fileupload__icon" name="upload" />
-        <p class="wd-fileupload__text">
+        <RdIcon class="rd-fileupload__icon" name="upload" />
+        <p class="rd-fileupload__text">
           {{ locale.dropFileHere }}
           <em>{{ locale.clickToUpload }}</em>
         </p>
@@ -376,7 +376,7 @@ defineExpose({
     <button
       v-else-if="showTrigger && $slots.trigger"
       type="button"
-      class="wd-fileupload__choose wd-fileupload__choose--slot"
+      class="rd-fileupload__choose rd-fileupload__choose--slot"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
@@ -385,69 +385,69 @@ defineExpose({
     <button
       v-else-if="showTrigger"
       type="button"
-      class="wd-fileupload__choose"
+      class="rd-fileupload__choose"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
       {{ chooseText }}
     </button>
 
-    <div v-if="$slots.tip" class="wd-fileupload__tip">
+    <div v-if="$slots.tip" class="rd-fileupload__tip">
       <slot name="tip" />
     </div>
 
-    <ul v-if="showList && !isPictureCard" class="wd-fileupload__list">
+    <ul v-if="showList && !isPictureCard" class="rd-fileupload__list">
       <li
         v-for="file in items"
         :key="file.uid"
-        class="wd-fileupload__file"
-        :class="[`wd-fileupload__file--${file.status}`, { 'wd-fileupload__file--picture': isPicture }]"
+        class="rd-fileupload__file"
+        :class="[`rd-fileupload__file--${file.status}`, { 'rd-fileupload__file--picture': isPicture }]"
       >
         <slot name="file" :file="file">
-          <div class="wd-fileupload__file-body">
+          <div class="rd-fileupload__file-body">
             <img
               v-if="isPicture && file.url && isImageFile(file)"
-              class="wd-fileupload__thumb"
+              class="rd-fileupload__thumb"
               :src="file.url"
               :alt="file.name"
               @click="previewFile(file)"
             >
-            <span class="wd-fileupload__name">{{ file.name }}</span>
-            <span v-if="file.size != null" class="wd-fileupload__size">{{ formatSize(file.size) }}</span>
-            <span v-if="file.status === 'fail'" class="wd-fileupload__status">{{ file.error || locale.uploadFailed }}</span>
-            <span class="wd-fileupload__actions">
+            <span class="rd-fileupload__name">{{ file.name }}</span>
+            <span v-if="file.size != null" class="rd-fileupload__size">{{ formatSize(file.size) }}</span>
+            <span v-if="file.status === 'fail'" class="rd-fileupload__status">{{ file.error || locale.uploadFailed }}</span>
+            <span class="rd-fileupload__actions">
               <button
                 v-if="file.url && isImageFile(file)"
                 type="button"
-                class="wd-fileupload__action"
+                class="rd-fileupload__action"
                 :aria-label="locale.previewFile"
                 @click="previewFile(file)"
               >
-                <WdIcon name="eye" size="sm" />
+                <RdIcon name="eye" size="sm" />
               </button>
               <button
                 v-if="file.status === 'fail'"
                 type="button"
-                class="wd-fileupload__action"
+                class="rd-fileupload__action"
                 :aria-label="locale.retryUpload"
                 @click="uploadOne(file)"
               >
-                <WdIcon name="refresh" size="sm" />
+                <RdIcon name="refresh" size="sm" />
               </button>
               <button
                 type="button"
-                class="wd-fileupload__action"
+                class="rd-fileupload__action"
                 :aria-label="locale.removeFile"
                 :disabled="disabled"
                 @click="removeFile(file)"
               >
-                <WdIcon name="trash" size="sm" />
+                <RdIcon name="trash" size="sm" />
               </button>
             </span>
           </div>
           <div
             v-if="file.status === 'uploading'"
-            class="wd-fileupload__progress"
+            class="rd-fileupload__progress"
             role="progressbar"
             :aria-valuemin="0"
             :aria-valuemax="100"
@@ -460,8 +460,8 @@ defineExpose({
 
     <div
       v-if="isPictureCard"
-      class="wd-fileupload__cards"
-      :class="{ 'wd-fileupload__cards--over': dragOver }"
+      class="rd-fileupload__cards"
+      :class="{ 'rd-fileupload__cards--over': dragOver }"
       @dragenter="onDragOver"
       @dragover="onDragOver"
       @dragleave="onDragLeave"
@@ -470,48 +470,48 @@ defineExpose({
       <div
         v-for="file in showFileList ? items : []"
         :key="file.uid"
-        class="wd-fileupload__card"
-        :class="`wd-fileupload__card--${file.status}`"
+        class="rd-fileupload__card"
+        :class="`rd-fileupload__card--${file.status}`"
       >
         <slot name="file" :file="file">
           <img
             v-if="file.url && isImageFile(file)"
-            class="wd-fileupload__card-image"
+            class="rd-fileupload__card-image"
             :src="file.url"
             :alt="file.name"
             @click="previewFile(file)"
           >
-          <span v-else class="wd-fileupload__card-name">{{ file.name }}</span>
-          <div v-if="file.status === 'uploading'" class="wd-fileupload__card-progress">
+          <span v-else class="rd-fileupload__card-name">{{ file.name }}</span>
+          <div v-if="file.status === 'uploading'" class="rd-fileupload__card-progress">
             {{ Math.round(file.percentage ?? 0) }}%
           </div>
-          <div v-else class="wd-fileupload__card-mask">
+          <div v-else class="rd-fileupload__card-mask">
             <button
               v-if="file.url && isImageFile(file)"
               type="button"
-              class="wd-fileupload__action"
+              class="rd-fileupload__action"
               :aria-label="locale.previewFile"
               @click="previewFile(file)"
             >
-              <WdIcon name="eye" size="sm" />
+              <RdIcon name="eye" size="sm" />
             </button>
             <button
               v-if="file.status === 'fail'"
               type="button"
-              class="wd-fileupload__action"
+              class="rd-fileupload__action"
               :aria-label="locale.retryUpload"
               @click="uploadOne(file)"
             >
-              <WdIcon name="refresh" size="sm" />
+              <RdIcon name="refresh" size="sm" />
             </button>
             <button
               type="button"
-              class="wd-fileupload__action"
+              class="rd-fileupload__action"
               :aria-label="locale.removeFile"
               :disabled="disabled"
               @click="removeFile(file)"
             >
-              <WdIcon name="trash" size="sm" />
+              <RdIcon name="trash" size="sm" />
             </button>
           </div>
         </slot>
@@ -519,19 +519,19 @@ defineExpose({
       <button
         v-if="canAdd"
         type="button"
-        class="wd-fileupload__card wd-fileupload__card--add"
+        class="rd-fileupload__card rd-fileupload__card--add"
         :aria-label="locale.addFile"
         @click="openPicker"
       >
-        <WdIcon name="plus" />
+        <RdIcon name="plus" />
       </button>
     </div>
 
-    <div v-if="showToolbar" class="wd-fileupload__toolbar">
-      <button v-if="showSubmit" type="button" class="wd-fileupload__choose" @click="submit">
+    <div v-if="showToolbar" class="rd-fileupload__toolbar">
+      <button v-if="showSubmit" type="button" class="rd-fileupload__choose" @click="submit">
         {{ locale.uploadFile }}
       </button>
-      <button type="button" class="wd-fileupload__clear" @click="clearFiles">
+      <button type="button" class="rd-fileupload__clear" @click="clearFiles">
         {{ locale.clear }}
       </button>
     </div>

@@ -1,5 +1,5 @@
 import './style'
-export { default as WdFileUpload } from './FileUpload.vue'
+export { default as RdFileUpload } from './FileUpload.vue'
 export type {
   FileUploadEmits,
   FileUploadExpose,

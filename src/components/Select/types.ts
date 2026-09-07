@@ -1,8 +1,8 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdSizeInput } from '../../shared/types'
+import type { RdAppendTo } from '../../shared/overlay'
+import type { RdSizeInput } from '../../shared/types'
 
 export type SelectValue = string | number
-export type SelectSize = WdSizeInput
+export type SelectSize = RdSizeInput
 /** Single-select uses a scalar; multiple uses an array. */
 export type SelectModelValue = SelectValue | SelectValue[] | undefined
 
@@ -53,7 +53,7 @@ export interface SelectProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WdAppendTo
+  appendTo?: RdAppendTo
   placement?: 'bottom-start' | 'bottom-end'
 }
 

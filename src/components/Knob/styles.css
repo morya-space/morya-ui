@@ -1,5 +1,5 @@
 /* —— Form: Knob —— */
-.wd-knob {
+.rd-knob {
     align-items: center;
     display: inline-flex;
     justify-content: center;
@@ -8,29 +8,29 @@
     user-select: none;
 }
 
-.wd-knob--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-knob--disabled {
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-knob__svg {
+.rd-knob__svg {
     cursor: pointer;
     display: block;
 }
 
-.wd-knob__track {
-    stroke: color-mix(in srgb, var(--wd-color-text-muted) 28%, var(--wd-color-surface));
+.rd-knob__track {
+    stroke: color-mix(in srgb, var(--rd-color-text-muted) 28%, var(--rd-color-surface));
 }
 
-.wd-knob__value {
-    stroke: var(--wd-color-primary);
+.rd-knob__value {
+    stroke: var(--rd-color-primary);
     stroke-linecap: round;
-    transition: stroke-dashoffset var(--wd-motion-fast) var(--wd-motion-ease);
+    transition: stroke-dashoffset var(--rd-motion-fast) var(--rd-motion-ease);
 }
 
-.wd-knob__label {
-    color: var(--wd-color-text);
-    font-size: var(--wd-font-size-md);
+.rd-knob__label {
+    color: var(--rd-color-text);
+    font-size: var(--rd-font-size-md);
     font-weight: 600;
     left: 50%;
     pointer-events: none;
@@ -39,7 +39,7 @@
     transform: translate(-50%, -50%);
 }
 
-.wd-knob:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-knob:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }

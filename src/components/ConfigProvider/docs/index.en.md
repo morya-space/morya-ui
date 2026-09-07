@@ -6,7 +6,7 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 # ConfigProvider
 
-Provide global defaults for the component tree via `WdConfigProvider` or `createWexDesign`. Local props take precedence over global config.
+Provide global defaults for the component tree via `RdConfigProvider` or `createRoostDesign`. Local props take precedence over global config.
 
 ## Capabilities
 
@@ -24,7 +24,7 @@ Provide global defaults for the component tree via `WdConfigProvider` or `create
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput, WdSelect } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -35,20 +35,20 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider size="small">
+  <RdConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Inherit small" />
-      <WdInput placeholder="Inherit small" style="width:10rem" />
-      <WdSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
-      <WdButton label="Override to large" size="large" />
+      <RdButton label="Inherit small" />
+      <RdInput placeholder="Inherit small" style="width:10rem" />
+      <RdSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
+      <RdButton label="Override to large" size="large" />
     </div>
-  </WdConfigProvider>
+  </RdConfigProvider>
 </template>
 ```
 
 ## Component Defaults
 
-Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Wd*` aliases.
+Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Rd*` aliases.
 
 Precedence: **component props > `componentDefaults[component]` > global `size` / `inputVariant` > built-in defaults**.
 
@@ -56,25 +56,25 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput, WdSpace } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const note = ref('Clearable')
 </script>
 
 <template>
-  <WdConfigProvider
+  <RdConfigProvider
     size="large"
     :component-defaults="{
       Input: { size: 'small', clearable: true },
       Space: { size: 16 },
     }"
   >
-    <WdSpace>
-      <WdButton label="Still large" />
-      <WdInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
-    </WdSpace>
-  </WdConfigProvider>
+    <RdSpace>
+      <RdButton label="Still large" />
+      <RdInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
+    </RdSpace>
+  </RdConfigProvider>
 </template>
 ```
 
@@ -82,23 +82,23 @@ const note = ref('Clearable')
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WdConfigProvider density="compact">
+    <RdConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WdButton label="compact" />
-        <WdInput placeholder="compact" style="width:10rem" />
+        <RdButton label="compact" />
+        <RdInput placeholder="compact" style="width:10rem" />
       </div>
-    </WdConfigProvider>
-    <WdConfigProvider density="spacious">
+    </RdConfigProvider>
+    <RdConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WdButton label="spacious" />
-        <WdInput placeholder="spacious" style="width:10rem" />
+        <RdButton label="spacious" />
+        <RdInput placeholder="spacious" style="width:10rem" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ import { WdButton, WdConfigProvider, WdInput } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdDialog, WdSelect } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -119,35 +119,35 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider input-variant="filled" append-to="body">
+  <RdConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
-      <WdButton label="Open dialog" @click="visible = true" />
+      <RdSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
+      <RdButton label="Open dialog" @click="visible = true" />
     </div>
-    <WdDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
+    <RdDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
       <p style="margin:0">
         Overlay mount target is provided by ConfigProvider.
       </p>
-    </WdDialog>
-  </WdConfigProvider>
+    </RdDialog>
+  </RdConfigProvider>
 </template>
 ```
 
 ## App-level plugin
 
 ```ts
-import WexDesign, { createWexDesign, enUS } from '@wex-design/ui'
+import RoostDesign, { createRoostDesign, enUS } from '@roost-design/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 
 // Option A: default export
-createApp(App).use(WexDesign, { locale: enUS }).mount('#app')
+createApp(App).use(RoostDesign, { locale: enUS }).mount('#app')
 
 // Option B: factory
 createApp(App)
   .use(
-    createWexDesign({
+    createRoostDesign({
       appendTo: 'body',
       size: 'small',
       density: 'comfortable',
@@ -162,24 +162,24 @@ createApp(App)
   .mount('#app')
 ```
 
-By default **all components are registered globally** (use `<WdButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
+By default **all components are registered globally** (use `<RdButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
 
 ## Reading config
 
 ```ts
-import { useWdConfig } from '@wex-design/ui'
+import { useRdConfig } from '@roost-design/ui'
 
-const config = useWdConfig()
+const config = useRdConfig()
 ```
 
-Precedence: **component props > `WdConfigProvider` > `createWexDesign()` > built-in defaults**.
+Precedence: **component props > `RdConfigProvider` > `createRoostDesign()` > built-in defaults**.
 
 ## Theme and motion
 
-Theme and motion APIs are also exported from `@wex-design/ui` and can be used alongside ConfigProvider:
+Theme and motion APIs are also exported from `@roost-design/ui` and can be used alongside ConfigProvider:
 
 ```ts
-import { useMotion, useTheme } from '@wex-design/ui'
+import { useMotion, useTheme } from '@roost-design/ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

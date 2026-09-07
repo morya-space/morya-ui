@@ -1,12 +1,12 @@
 ---
 title: SSR & meta-frameworks
 order: 7
-description: Use Wex Design UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
+description: Use Roost Design UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
 ---
 
 # SSR & meta-frameworks
 
-Wex Design UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
+Roost Design UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
 
 All setups below are supported; choose **full SSR** or **client islands** based on your app.
 
@@ -14,20 +14,20 @@ All setups below are supported; choose **full SSR** or **client islands** based 
 
 | Topic | Recommendation |
 | --- | --- |
-| Styles | Import `@wex-design/ui/styles.css` in app entry or framework config |
-| Theme | Prefer root **`WdConfigProvider`** for `theme` / `density` instead of calling `useTheme()` alone during SSR |
+| Styles | Import `@roost-design/ui/styles.css` in app entry or framework config |
+| Theme | Prefer root **`RdConfigProvider`** for `theme` / `density` instead of calling `useTheme()` alone during SSR |
 | Imperative APIs | `toast()`, `message()`, `confirm()` run in the browser only; SSR calls are safe no-ops |
-| On-demand | Use `@wex-design/ui/resolver` with `unplugin-vue-components` |
+| On-demand | Use `@roost-design/ui/resolver` with `unplugin-vue-components` |
 | Overlays | Dialog / Select / Tooltip use Vue `Teleport`; SSR renders placeholders, interaction hydrates on the client |
 
 ## Nuxt 3
 
-Use the **`@wex-design/nuxt`** module (`packages/nuxt` in this repo).
+Use the **`@roost-design/nuxt`** module (`packages/nuxt` in this repo).
 
 ### Install
 
 ```bash
-pnpm add @wex-design/ui @wex-design/nuxt
+pnpm add @roost-design/ui @roost-design/nuxt
 pnpm add -D unplugin-vue-components
 ```
 
@@ -36,14 +36,14 @@ pnpm add -D unplugin-vue-components
 ```ts
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { WexDesignResolver } from '@wex-design/ui/resolver'
+import { RoostDesignResolver } from '@roost-design/ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@wex-design/nuxt'],
+  modules: ['@roost-design/nuxt'],
   vite: {
     plugins: [
       Components({
-        resolvers: [WexDesignResolver()],
+        resolvers: [RoostDesignResolver()],
       }),
     ],
   },
@@ -52,8 +52,8 @@ export default defineNuxtConfig({
 
 The module by default:
 
-- Adds `@wex-design/ui/styles.css`
-- Transpiles `@wex-design/ui` for SSR
+- Adds `@roost-design/ui/styles.css`
+- Transpiles `@roost-design/ui` for SSR
 - Registers overlay app context on the client (for `toast` / `message`)
 
 ### Root layout
@@ -61,9 +61,9 @@ The module by default:
 ```vue
 <!-- app.vue -->
 <template>
-  <WdConfigProvider :theme="theme" density="comfortable">
+  <RdConfigProvider :theme="theme" density="comfortable">
     <NuxtPage />
-  </WdConfigProvider>
+  </RdConfigProvider>
 </template>
 
 <script setup lang="ts">
@@ -71,7 +71,7 @@ const theme = ref<'light' | 'dark'>('light')
 </script>
 ```
 
-With on-demand imports you do not need `app.use(WexDesign)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(WexDesign)`.
+With on-demand imports you do not need `app.use(RoostDesign)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(RoostDesign)`.
 
 ### Client-only islands
 
@@ -84,7 +84,7 @@ Best for **static sites + Vue islands** (admin shells embedded in marketing page
 ### Install
 
 ```bash
-pnpm add @wex-design/ui
+pnpm add @roost-design/ui
 npx astro add vue
 ```
 
@@ -99,14 +99,14 @@ import AdminShell from '../components/AdminShell.vue'
 
 ```vue
 <script setup lang="ts">
-import { WdButton, WdConfigProvider } from '@wex-design/ui'
-import '@wex-design/ui/styles.css'
+import { RdButton, RdConfigProvider } from '@roost-design/ui'
+import '@roost-design/ui/styles.css'
 </script>
 
 <template>
-  <WdConfigProvider theme="light">
-    <WdButton label="Hello" />
-  </WdConfigProvider>
+  <RdConfigProvider theme="light">
+    <RdButton label="Hello" />
+  </RdConfigProvider>
 </template>
 ```
 
@@ -117,7 +117,7 @@ Use `client:load` or `client:only` for interactive admin UIs; `client:visible` f
 ```ts
 import { createSSRApp } from 'vue'
 import App from './App.vue'
-import '@wex-design/ui/styles.css'
+import '@roost-design/ui/styles.css'
 
 export function createApp() {
   return { app: createSSRApp(App) }
@@ -127,27 +127,27 @@ export function createApp() {
 Client entry:
 
 ```ts
-import { createWexDesign } from '@wex-design/ui'
+import { createRoostDesign } from '@roost-design/ui'
 
-app.use(createWexDesign({ components: false })).mount('#app')
+app.use(createRoostDesign({ components: false })).mount('#app')
 ```
 
-Add `@wex-design/ui` to `ssr.noExternal` so `.vue` and CSS side effects resolve correctly.
+Add `@roost-design/ui` to `ssr.noExternal` so `.vue` and CSS side effects resolve correctly.
 
 ## Other Vue SSR stacks
 
 | Stack | Notes |
 | --- | --- |
-| **Quasar SSR** | Add `@wex-design/ui` to `build.transpileDependencies`; import styles in entry |
+| **Quasar SSR** | Add `@roost-design/ui` to `build.transpileDependencies`; import styles in entry |
 | **vike / vite-plugin-ssr** | Same as Vite SSR |
-| **Inertia + Vue SSR** | Wrap with `WdConfigProvider`; call imperative APIs after mount |
+| **Inertia + Vue SSR** | Wrap with `RdConfigProvider`; call imperative APIs after mount |
 
 ## Limitations
 
 - **Vue 2 is not supported** (Vue 3 SSR only).
 - **IE** is out of scope.
-- Theme `localStorage` persistence is client-only; sync theme via `WdConfigProvider` or cookies to avoid flash.
-- Full SSR E2E coverage is evolving; please [open an issue](https://github.com/wex-design/wex-design-ui/issues) with a minimal repro if you see hydration warnings.
+- Theme `localStorage` persistence is client-only; sync theme via `RdConfigProvider` or cookies to avoid flash.
+- Full SSR E2E coverage is evolving; please [open an issue](https://github.com/roost-design/roost-design-ui/issues) with a minimal repro if you see hydration warnings.
 
 ## Next
 

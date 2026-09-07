@@ -1,3 +1,3 @@
 import './style'
-export { default as WdRating } from './Rating.vue'
+export { default as RdRating } from './Rating.vue'
 export type { RatingEmits, RatingProps } from './types'

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { DrawerProps } from './types'
 import { computed, ref, toRef } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useWdConfig } from '../../shared/config'
+import { useRdConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WdIcon from '../Icon/Icon.vue'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   modelValue: false,
@@ -26,8 +26,8 @@ const emit = defineEmits<{
   (event: 'after-leave'): void
 }>()
 
-const config = useWdConfig()
-const locale = useWdLocale()
+const config = useRdConfig()
+const locale = useRdLocale()
 const drawerElement = ref<HTMLElement | null>(null)
 const pendingClose = ref(false)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -97,24 +97,24 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wd-drawer" @after-leave="emit('after-leave')">
+    <Transition name="rd-drawer" @after-leave="emit('after-leave')">
       <div
         v-if="modelValue"
-        class="wd-drawer-backdrop"
-        :class="{ 'wd-drawer-backdrop--modal': modal }"
+        class="rd-drawer-backdrop"
+        :class="{ 'rd-drawer-backdrop--modal': modal }"
         @click.self="onOutsideClick"
       >
         <aside
           ref="drawerElement"
-          class="wd-drawer"
-          :class="`wd-drawer--${position}`"
+          class="rd-drawer"
+          :class="`rd-drawer--${position}`"
           :style="paneStyle"
           role="dialog"
           :aria-modal="modal || undefined"
           :aria-label="header"
           tabindex="-1"
         >
-          <header v-if="$slots.header || header || showCloseIcon" class="wd-drawer__header">
+          <header v-if="$slots.header || header || showCloseIcon" class="rd-drawer__header">
             <slot name="header">
               <h2 v-if="header">
                 {{ header }}
@@ -123,14 +123,14 @@ useModalOverlay({
             <button
               v-if="showCloseIcon"
               type="button"
-              class="wd-drawer__close"
+              class="rd-drawer__close"
               :aria-label="locale.close"
               @click="close"
             >
-              <WdIcon name="close" size="sm" />
+              <RdIcon name="close" size="sm" />
             </button>
           </header>
-          <div class="wd-drawer__body">
+          <div class="rd-drawer__body">
             <slot />
           </div>
         </aside>

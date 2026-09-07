@@ -1,9 +1,9 @@
-import type { WdToastSeverity } from '../../shared/types'
+import type { RdToastSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
 export type TimelineAlign = 'left' | 'right' | 'alternate'
 export type TimelineLayout = 'vertical' | 'horizontal'
-export type TimelineSeverity = WdToastSeverity | 'warning' | 'help'
+export type TimelineSeverity = RdToastSeverity | 'warning' | 'help'
 
 export interface TimelineEvent {
   status?: string

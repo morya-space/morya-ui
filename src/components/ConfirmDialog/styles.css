@@ -1,24 +1,24 @@
 /* —— Overlay: ConfirmDialog —— */
-.wd-confirmdialog {
-    --wd-confirmdialog-width: 28rem;
-    max-width: min(var(--wd-confirmdialog-width), calc(100vw - 2rem));
+.rd-confirmdialog {
+    --rd-confirmdialog-width: 28rem;
+    max-width: min(var(--rd-confirmdialog-width), calc(100vw - 2rem));
 }
 
-.wd-confirmdialog__footer {
+.rd-confirmdialog__footer {
     display: flex;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     justify-content: flex-end;
 }
 
-.wd-confirmdialog__message {
+.rd-confirmdialog__message {
     align-items: flex-start;
-    color: var(--wd-color-text);
+    color: var(--rd-color-text);
     display: flex;
-    gap: var(--wd-space-3);
+    gap: var(--rd-space-3);
     line-height: 1.5;
 }
 
-.wd-confirmdialog__copy {
+.rd-confirmdialog__copy {
     flex: 1 1 auto;
     min-width: 0;
 }

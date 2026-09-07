@@ -6,19 +6,19 @@ description: 将输入框与前后缀附加内容组合为同一控件组。
 
 # InputGroup
 
-组合输入与前后缀。附加内容使用 `WdInputGroupAddon`，或手动添加 `wd-inputgroup-addon` class。
+组合输入与前后缀。附加内容使用 `RdInputGroupAddon`，或手动添加 `rd-inputgroup-addon` class。
 
 ## 引入
 
 ```ts
-import { WdInput, WdInputGroup, WdInputGroupAddon } from '@wex-design/ui'
+import { RdInput, RdInputGroup, RdInputGroupAddon } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput, WdInputGroup, WdInputGroupAddon } from '@wex-design/ui'
+import { RdInput, RdInputGroup, RdInputGroupAddon } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const price = ref('')
@@ -27,15 +27,15 @@ const url = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WdInputGroup>
-      <WdInputGroupAddon>$</WdInputGroupAddon>
-      <WdInput v-model="price" placeholder="Price" fluid />
-      <WdInputGroupAddon>.00</WdInputGroupAddon>
-    </WdInputGroup>
-    <WdInputGroup>
-      <WdInputGroupAddon>https://</WdInputGroupAddon>
-      <WdInput v-model="url" placeholder="example.com" fluid />
-    </WdInputGroup>
+    <RdInputGroup>
+      <RdInputGroupAddon>$</RdInputGroupAddon>
+      <RdInput v-model="price" placeholder="Price" fluid />
+      <RdInputGroupAddon>.00</RdInputGroupAddon>
+    </RdInputGroup>
+    <RdInputGroup>
+      <RdInputGroupAddon>https://</RdInputGroupAddon>
+      <RdInput v-model="url" placeholder="example.com" fluid />
+    </RdInputGroup>
   </div>
 </template>
 ```
@@ -46,7 +46,7 @@ const url = ref('')
 | --- | --- |
 | `default` | 附加项与输入控件。 |
 
-Addon 组件仅提供默认插槽，根元素 class 为 `wd-inputgroup-addon`。
+Addon 组件仅提供默认插槽，根元素 class 为 `rd-inputgroup-addon`。
 
 ## Events
 

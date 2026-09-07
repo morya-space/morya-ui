@@ -11,28 +11,28 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 ## 引入
 
 ```ts
-import { WdButton, WdCard } from '@wex-design/ui'
+import { RdButton, RdCard } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdCard } from '@wex-design/ui'
+import { RdButton, RdCard } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdCard title="Project overview" subtitle="Updated 2 hours ago">
-    <p style="margin:0;color:var(--wd-color-text-muted)">
+  <RdCard title="Project overview" subtitle="Updated 2 hours ago">
+    <p style="margin:0;color:var(--rd-color-text-muted)">
       Title and subtitle align in the header. Body content stays in the default slot.
     </p>
     <template #footer>
       <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-        <WdButton label="Dismiss" severity="secondary" text />
-        <WdButton label="Continue" />
+        <RdButton label="Dismiss" severity="secondary" text />
+        <RdButton label="Continue" />
       </div>
     </template>
-  </WdCard>
+  </RdCard>
 </template>
 ```
 
@@ -40,19 +40,19 @@ import { WdButton, WdCard } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdCard, WdTag } from '@wex-design/ui'
+import { RdCard, RdTag } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdCard>
+  <RdCard>
     <template #header>
       <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:1rem">
         <strong>Custom header</strong>
-        <WdTag value="Active" severity="success" />
+        <RdTag value="Active" severity="success" />
       </div>
     </template>
     Prefer the header slot when you need more than title/subtitle text.
-  </WdCard>
+  </RdCard>
 </template>
 ```
 
@@ -60,16 +60,16 @@ import { WdCard, WdTag } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdCard } from '@wex-design/ui'
+import { RdCard } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdCard title="Cover card" hoverable size="small">
+  <RdCard title="Cover card" hoverable size="small">
     <template #cover>
-      <div style="height:6rem;background:color-mix(in srgb, var(--wd-color-primary) 18%, transparent)" />
+      <div style="height:6rem;background:color-mix(in srgb, var(--rd-color-primary) 18%, transparent)" />
     </template>
     Hover to lift. Set `bordered` to false for a borderless surface.
-  </WdCard>
+  </RdCard>
 </template>
 ```
 

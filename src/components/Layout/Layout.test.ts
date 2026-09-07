@@ -1,75 +1,75 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import { h, nextTick } from "vue";
-import WdLayout from "./Layout.vue";
-import WdLayoutContent from "./LayoutContent.vue";
-import WdLayoutFooter from "./LayoutFooter.vue";
-import WdLayoutHeader from "./LayoutHeader.vue";
-import WdLayoutSider from "./LayoutSider.vue";
+import RdLayout from "./Layout.vue";
+import RdLayoutContent from "./LayoutContent.vue";
+import RdLayoutFooter from "./LayoutFooter.vue";
+import RdLayoutHeader from "./LayoutHeader.vue";
+import RdLayoutSider from "./LayoutSider.vue";
 
-describe("wdLayout", () => {
+describe("rdLayout", () => {
   it("renders header content footer structure", () => {
-    const wrapper = mount(WdLayout, {
+    const wrapper = mount(RdLayout, {
       slots: {
         default: () => [
-          h(WdLayoutHeader, null, () => "Header"),
-          h(WdLayoutContent, null, () => "Body"),
-          h(WdLayoutFooter, null, () => "Footer"),
+          h(RdLayoutHeader, null, () => "Header"),
+          h(RdLayoutContent, null, () => "Body"),
+          h(RdLayoutFooter, null, () => "Footer"),
         ],
       },
     });
-    expect(wrapper.find(".wd-layout-header").text()).toBe("Header");
-    expect(wrapper.find(".wd-layout-content").text()).toBe("Body");
-    expect(wrapper.find(".wd-layout-footer").text()).toBe("Footer");
+    expect(wrapper.find(".rd-layout-header").text()).toBe("Header");
+    expect(wrapper.find(".rd-layout-content").text()).toBe("Body");
+    expect(wrapper.find(".rd-layout-footer").text()).toBe("Footer");
   });
 
   it("enables has-sider row layout", () => {
-    const wrapper = mount(WdLayout, {
+    const wrapper = mount(RdLayout, {
       props: { hasSider: true },
       slots: {
         default: () => [
-          h(WdLayoutSider, null, () => "Sider"),
-          h(WdLayoutContent, null, () => "Main"),
+          h(RdLayoutSider, null, () => "Sider"),
+          h(RdLayoutContent, null, () => "Main"),
         ],
       },
     });
-    expect(wrapper.classes()).toContain("wd-layout--has-sider");
-    expect(wrapper.find(".wd-layout__scroll--has-sider").exists()).toBe(true);
-    expect(wrapper.find(".wd-layout-sider").classes()).toContain(
-      "wd-layout-sider--left-placement",
+    expect(wrapper.classes()).toContain("rd-layout--has-sider");
+    expect(wrapper.find(".rd-layout__scroll--has-sider").exists()).toBe(true);
+    expect(wrapper.find(".rd-layout-sider").classes()).toContain(
+      "rd-layout-sider--left-placement",
     );
   });
 
   it("keeps scroll container at full height", () => {
-    const wrapper = mount(WdLayout, {
+    const wrapper = mount(RdLayout, {
       attrs: { style: "height: 200px" },
       slots: {
         default: () => [
-          h(WdLayoutHeader, null, () => "Header"),
-          h(WdLayoutContent, null, () => "Body"),
+          h(RdLayoutHeader, null, () => "Header"),
+          h(RdLayoutContent, null, () => "Body"),
         ],
       },
     });
-    expect(wrapper.classes()).toContain("wd-layout--static-positioned");
-    expect(wrapper.find(".wd-layout__scroll").exists()).toBe(true);
+    expect(wrapper.classes()).toContain("rd-layout--static-positioned");
+    expect(wrapper.find(".rd-layout__scroll").exists()).toBe(true);
   });
 
   it("shows the header bottom border by default and supports disabling it", () => {
-    expect(mount(WdLayoutHeader).classes()).toContain(
-      "wd-layout-header--bordered",
+    expect(mount(RdLayoutHeader).classes()).toContain(
+      "rd-layout-header--bordered",
     );
     expect(
-      mount(WdLayoutHeader, { props: { bordered: false } }).classes(),
-    ).not.toContain("wd-layout-header--bordered");
+      mount(RdLayoutHeader, { props: { bordered: false } }).classes(),
+    ).not.toContain("rd-layout-header--bordered");
   });
 
   it("applies layout dimension props", () => {
-    const wrapper = mount(WdLayout, {
+    const wrapper = mount(RdLayout, {
       props: { height: 400, width: "80%" },
       slots: {
         default: () =>
           h(
-            WdLayoutHeader,
+            RdLayoutHeader,
             { height: 64, padding: 12, radius: 8 },
             () => "Header",
           ),
@@ -77,54 +77,54 @@ describe("wdLayout", () => {
     });
     expect(wrapper.element.style.height).toBe("400px");
     expect(wrapper.element.style.width).toBe("80%");
-    const header = wrapper.find<HTMLElement>(".wd-layout-header");
+    const header = wrapper.find<HTMLElement>(".rd-layout-header");
     expect(header.element.style.height).toBe("64px");
     expect(header.element.style.padding).toBe("12px");
     expect(header.element.style.borderRadius).toBe("8px");
   });
 
   it("uses CSS percentage height by default", () => {
-    const wrapper = mount(WdLayout);
+    const wrapper = mount(RdLayout);
     expect(wrapper.element.style.height).toBe("");
-    expect(wrapper.classes()).toContain("wd-layout");
+    expect(wrapper.classes()).toContain("rd-layout");
   });
 
   it("does not self-reference sider width tokens by default", () => {
-    const wrapper = mount(WdLayoutSider);
-    expect(wrapper.element.style.getPropertyValue("--wd-layout-sider-width")).toBe(
+    const wrapper = mount(RdLayoutSider);
+    expect(wrapper.element.style.getPropertyValue("--rd-layout-sider-width")).toBe(
       "",
     );
     expect(
-      wrapper.element.style.getPropertyValue("--wd-layout-sider-collapsed-width"),
+      wrapper.element.style.getPropertyValue("--rd-layout-sider-collapsed-width"),
     ).toBe("");
-    expect(wrapper.element.style.width).toBe("var(--wd-layout-sider-width)");
-    expect(wrapper.element.style.maxWidth).toBe("var(--wd-layout-sider-width)");
+    expect(wrapper.element.style.width).toBe("var(--rd-layout-sider-width)");
+    expect(wrapper.element.style.maxWidth).toBe("var(--rd-layout-sider-width)");
   });
 
   it("does not write self-referencing var() props to sider width tokens", () => {
-    const wrapper = mount(WdLayoutSider, {
+    const wrapper = mount(RdLayoutSider, {
       props: {
-        width: "var(--wd-layout-sider-width)",
-        collapsedWidth: "var(--wd-layout-sider-collapsed-width)",
+        width: "var(--rd-layout-sider-width)",
+        collapsedWidth: "var(--rd-layout-sider-collapsed-width)",
       },
     });
-    expect(wrapper.element.style.getPropertyValue("--wd-layout-sider-width")).toBe(
+    expect(wrapper.element.style.getPropertyValue("--rd-layout-sider-width")).toBe(
       "",
     );
     expect(
-      wrapper.element.style.getPropertyValue("--wd-layout-sider-collapsed-width"),
+      wrapper.element.style.getPropertyValue("--rd-layout-sider-collapsed-width"),
     ).toBe("");
-    expect(wrapper.element.style.width).toBe("var(--wd-layout-sider-width)");
+    expect(wrapper.element.style.width).toBe("var(--rd-layout-sider-width)");
   });
 
   it("uses the sider width only on the root element", () => {
-    const wrapper = mount(WdLayoutSider, {
+    const wrapper = mount(RdLayoutSider, {
       props: { width: 240, collapsedWidth: 56, padding: 16, radius: 4 },
     });
-    const content = wrapper.find<HTMLElement>(".wd-layout-sider__scroll");
+    const content = wrapper.find<HTMLElement>(".rd-layout-sider__scroll");
     expect(wrapper.element.style.width).toBe("240px");
     expect(wrapper.element.style.maxWidth).toBe("240px");
-    expect(wrapper.element.style.getPropertyValue("--wd-layout-sider-width")).toBe(
+    expect(wrapper.element.style.getPropertyValue("--rd-layout-sider-width")).toBe(
       "240px",
     );
     expect(wrapper.element.style.padding).toBe("");
@@ -135,7 +135,7 @@ describe("wdLayout", () => {
   });
 
   it("toggles sider collapsed state via max-width in transform mode", async () => {
-    const wrapper = mount(WdLayoutSider, {
+    const wrapper = mount(RdLayoutSider, {
       props: {
         showTrigger: "arrow-circle",
         width: 200,
@@ -149,19 +149,19 @@ describe("wdLayout", () => {
     });
     expect(wrapper.element.style.width).toBe("200px");
     expect(wrapper.element.style.maxWidth).toBe("200px");
-    await wrapper.get(".wd-layout-sider__trigger").trigger("click");
+    await wrapper.get(".rd-layout-sider__trigger").trigger("click");
     await nextTick();
     expect(wrapper.emitted("update:collapsed")?.[0]).toEqual([true]);
-    expect(wrapper.classes()).toContain("wd-layout-sider--collapsed");
+    expect(wrapper.classes()).toContain("rd-layout-sider--collapsed");
     expect(wrapper.element.style.width).toBe("200px");
     expect(wrapper.element.style.maxWidth).toBe("48px");
-    expect(wrapper.find(".wd-layout-sider__scroll").element.style.padding).toBe(
+    expect(wrapper.find(".rd-layout-sider__scroll").element.style.padding).toBe(
       "16px",
     );
   });
 
   it("shrinks sider width in width collapse mode", async () => {
-    const wrapper = mount(WdLayoutSider, {
+    const wrapper = mount(RdLayoutSider, {
       props: {
         collapseMode: "width",
         showTrigger: "arrow-circle",
@@ -174,38 +174,38 @@ describe("wdLayout", () => {
         },
       },
     });
-    await wrapper.get(".wd-layout-sider__trigger").trigger("click");
+    await wrapper.get(".rd-layout-sider__trigger").trigger("click");
     await nextTick();
     expect(wrapper.element.style.width).toBe("0px");
     expect(wrapper.element.style.maxWidth).toBe("0px");
   });
 
   it("supports sider-placement right", async () => {
-    const wrapper = mount(WdLayout, {
+    const wrapper = mount(RdLayout, {
       props: { hasSider: true, siderPlacement: "right" },
       slots: {
         default: () => [
-          h(WdLayoutSider, null, () => "Sider"),
-          h(WdLayoutContent, null, () => "Main"),
+          h(RdLayoutSider, null, () => "Sider"),
+          h(RdLayoutContent, null, () => "Main"),
         ],
       },
     });
-    expect(wrapper.find(".wd-layout-sider").classes()).toContain(
-      "wd-layout-sider--right-placement",
+    expect(wrapper.find(".rd-layout-sider").classes()).toContain(
+      "rd-layout-sider--right-placement",
     );
   });
 
   it("always uses the native scroll container", () => {
-    const wrapper = mount(WdLayout, {
+    const wrapper = mount(RdLayout, {
       slots: {
         default: () => [
-          h(WdLayoutHeader, null, () => "Header"),
-          h(WdLayoutContent, null, () => "Body"),
+          h(RdLayoutHeader, null, () => "Header"),
+          h(RdLayoutContent, null, () => "Body"),
         ],
       },
     });
-    expect(wrapper.find(".wd-layout__scroll").exists()).toBe(true);
-    expect(wrapper.find(".wd-layout__scrollbar").exists()).toBe(false);
-    expect(wrapper.find(".wd-scrollbar").exists()).toBe(false);
+    expect(wrapper.find(".rd-layout__scroll").exists()).toBe(true);
+    expect(wrapper.find(".rd-layout__scrollbar").exists()).toBe(false);
+    expect(wrapper.find(".rd-scrollbar").exists()).toBe(false);
   });
 });

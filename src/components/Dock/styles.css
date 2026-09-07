@@ -1,68 +1,68 @@
 /* —— Menu: Dock —— */
-.wd-dock {
-    --wd-dock-icon-size: 2.75rem;
-    --wd-dock-edge-offset: var(--wd-space-4);
+.rd-dock {
+    --rd-dock-icon-size: 2.75rem;
+    --rd-dock-edge-offset: var(--rd-space-4);
     display: flex;
     justify-content: center;
 }
 
-.wd-dock--top,
-.wd-dock--bottom {
+.rd-dock--top,
+.rd-dock--bottom {
     left: 50%;
     position: fixed;
     transform: translateX(-50%);
-    z-index: var(--wd-z-overlay);
+    z-index: var(--rd-z-overlay);
 }
 
-.wd-dock--top {
-    top: var(--wd-dock-edge-offset);
+.rd-dock--top {
+    top: var(--rd-dock-edge-offset);
 }
 
-.wd-dock--bottom {
-    bottom: var(--wd-dock-edge-offset);
+.rd-dock--bottom {
+    bottom: var(--rd-dock-edge-offset);
 }
 
-.wd-dock__list {
+.rd-dock__list {
     align-items: flex-end;
-    background: color-mix(in srgb, var(--wd-color-surface) 85%, transparent);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-lg);
+    background: color-mix(in srgb, var(--rd-color-surface) 85%, transparent);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-lg);
     display: flex;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     list-style: none;
     margin: 0;
-    padding: var(--wd-space-2) var(--wd-space-3);
+    padding: var(--rd-space-2) var(--rd-space-3);
 }
 
-.wd-dock__button {
+.rd-dock__button {
     background: transparent;
     border: 0;
-    border-radius: var(--wd-radius-md);
+    border-radius: var(--rd-radius-md);
     cursor: pointer;
-    padding: var(--wd-space-1);
-    transition: transform var(--wd-motion-fast, 150ms) ease;
+    padding: var(--rd-space-1);
+    transition: transform var(--rd-motion-fast, 150ms) ease;
 }
 
-.wd-dock__button:hover:not(:disabled) {
+.rd-dock__button:hover:not(:disabled) {
     transform: translateY(-0.25rem) scale(1.08);
 }
 
-.wd-dock__button:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-dock__button:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-dock__icon {
+.rd-dock__icon {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wd-color-primary) 14%,
-        var(--wd-color-surface)
+        var(--rd-color-primary) 14%,
+        var(--rd-color-surface)
     );
-    border-radius: var(--wd-radius-md);
+    border-radius: var(--rd-radius-md);
     display: inline-flex;
     font-size: 1.25rem;
-    height: var(--wd-dock-icon-size);
+    height: var(--rd-dock-icon-size);
     justify-content: center;
-    width: var(--wd-dock-icon-size);
+    width: var(--rd-dock-icon-size);
 }

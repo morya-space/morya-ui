@@ -1,4 +1,4 @@
-import type { CommandMenuItem } from '@wex-design/ui'
+import type { CommandMenuItem } from '@roost-design/ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { listDocumentedComponents } from '../docs/loadComponentDocs'

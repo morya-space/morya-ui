@@ -6,19 +6,19 @@ description: Collapsible navigation rail.
 
 # Sidebar
 
-Application navigation sidebar (not a Drawer overlay). Exported as `WdSidebar`.
+Application navigation sidebar (not a Drawer overlay). Exported as `RdSidebar`.
 
 ## Import
 
 ```ts
-import { WdSidebar } from '@wex-design/ui'
+import { RdSidebar } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdSidebar } from '@wex-design/ui'
+import { RdButton, RdSidebar } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -35,8 +35,8 @@ const model = [
 
 <template>
   <div style="display:flex;gap:1rem;align-items:flex-start">
-    <WdSidebar :model="model" :collapsed="collapsed" />
-    <WdButton :label="collapsed ? 'Expand' : 'Collapse'" size="small" @click="collapsed = !collapsed" />
+    <RdSidebar :model="model" :collapsed="collapsed" />
+    <RdButton :label="collapsed ? 'Expand' : 'Collapse'" size="small" @click="collapsed = !collapsed" />
   </div>
 </template>
 ```

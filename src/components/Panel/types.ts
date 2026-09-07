@@ -1,6 +1,6 @@
-import type { WdSizeInput } from '../../shared/types'
+import type { RdSizeInput } from '../../shared/types'
 
-export type PanelSize = WdSizeInput
+export type PanelSize = RdSizeInput
 
 export interface PanelProps {
   header?: string

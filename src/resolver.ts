@@ -7,17 +7,17 @@ export interface ComponentResolver {
   ) => { name: string; from: string; sideEffects?: string[] } | undefined | null | void
 }
 
-export interface WexDesignResolverOptions {
-  /** Component name prefix. Default: `Wd`. */
+export interface RoostDesignResolverOptions {
+  /** Component name prefix. Default: `Rd`. */
   prefix?: string
 }
 
 /**
- * Resolver for `unplugin-vue-components` that maps `Wd*` components to
- * on-demand subpath imports such as `@wex-design/ui/button`.
+ * Resolver for `unplugin-vue-components` that maps `Rd*` components to
+ * on-demand subpath imports such as `@roost-design/ui/button`.
  */
-export function WexDesignResolver(options: WexDesignResolverOptions = {}): ComponentResolver {
-  const prefix = options.prefix ?? 'Wd'
+export function RoostDesignResolver(options: RoostDesignResolverOptions = {}): ComponentResolver {
+  const prefix = options.prefix ?? 'Rd'
 
   return {
     type: 'component',
@@ -27,10 +27,15 @@ export function WexDesignResolver(options: WexDesignResolverOptions = {}): Compo
       if (!slug) return
       return {
         name,
-        from: `@wex-design/ui/${slug}`,
+        from: `@roost-design/ui/${slug}`,
       }
     },
   }
 }
 
 export { componentImportMap }
+
+/** @deprecated Use `RoostDesignResolver` */
+export const WexDesignResolver = RoostDesignResolver
+/** @deprecated Use `RoostDesignResolverOptions` */
+export type WexDesignResolverOptions = RoostDesignResolverOptions

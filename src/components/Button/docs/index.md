@@ -11,7 +11,7 @@ description: 按钮用于触发即时动作。
 ## 引入
 
 ```ts
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WdButton } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton>Submit</WdButton>
-    <WdButton label="Label Prop" />
-    <WdButton severity="secondary" label="Secondary" />
+    <RdButton>Submit</RdButton>
+    <RdButton label="Label Prop" />
+    <RdButton severity="secondary" label="Secondary" />
   </div>
 </template>
 ```
@@ -38,19 +38,19 @@ import { WdButton } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Primary" />
-    <WdButton label="Secondary" severity="secondary" />
-    <WdButton label="Success" severity="success" />
-    <WdButton label="Info" severity="info" />
-    <WdButton label="Warn" severity="warn" />
-    <WdButton label="Help" severity="help" />
-    <WdButton label="Danger" severity="danger" />
-    <WdButton label="Contrast" severity="contrast" />
+    <RdButton label="Primary" />
+    <RdButton label="Secondary" severity="secondary" />
+    <RdButton label="Success" severity="success" />
+    <RdButton label="Info" severity="info" />
+    <RdButton label="Warn" severity="warn" />
+    <RdButton label="Help" severity="help" />
+    <RdButton label="Danger" severity="danger" />
+    <RdButton label="Contrast" severity="contrast" />
   </div>
 </template>
 ```
@@ -61,25 +61,25 @@ import { WdButton } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Outlined" outlined />
-      <WdButton label="Success" severity="success" outlined />
-      <WdButton label="Danger" severity="danger" outlined />
+      <RdButton label="Outlined" outlined />
+      <RdButton label="Success" severity="success" outlined />
+      <RdButton label="Danger" severity="danger" outlined />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Raised" raised />
-      <WdButton label="Rounded" rounded />
-      <WdButton label="Plain Text" text plain />
+      <RdButton label="Raised" raised />
+      <RdButton label="Rounded" rounded />
+      <RdButton label="Plain Text" text plain />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdButton label="Small" size="small" />
-      <WdButton label="Large" size="large" />
-      <WdButton label="Fluid" fluid />
+      <RdButton label="Small" size="small" />
+      <RdButton label="Large" size="large" />
+      <RdButton label="Fluid" fluid />
     </div>
   </div>
 </template>
@@ -91,15 +91,15 @@ import { WdButton } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Text" text />
-    <WdButton label="Text Danger" text severity="danger" />
-    <WdButton label="Link" link />
-    <WdButton label="Link Secondary" link severity="secondary" />
+    <RdButton label="Text" text />
+    <RdButton label="Text Danger" text severity="danger" />
+    <RdButton label="Link" link />
+    <RdButton label="Link Secondary" link severity="secondary" />
   </div>
 </template>
 ```
@@ -110,34 +110,34 @@ import { WdButton } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Ghost" ghost />
-    <WdButton label="Ghost Danger" ghost severity="danger" />
-    <WdButton label="Quaternary" quaternary />
-    <WdButton label="Custom" color="#e11d48" />
+    <RdButton label="Ghost" ghost />
+    <RdButton label="Ghost Danger" ghost severity="danger" />
+    <RdButton label="Quaternary" quaternary />
+    <RdButton label="Custom" color="#e11d48" />
   </div>
 </template>
 ```
 
 ## Button Group
 
-`WdButtonGroup` 将相邻按钮拼成一组。
+`RdButtonGroup` 将相邻按钮拼成一组。
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdButtonGroup } from '@wex-design/ui'
+import { RdButton, RdButtonGroup } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdButtonGroup aria-label="对齐">
-    <WdButton label="左" />
-    <WdButton label="中" severity="secondary" />
-    <WdButton label="右" severity="secondary" />
-  </WdButtonGroup>
+  <RdButtonGroup aria-label="对齐">
+    <RdButton label="左" />
+    <RdButton label="中" severity="secondary" />
+    <RdButton label="右" severity="secondary" />
+  </RdButtonGroup>
 </template>
 ```
 
@@ -147,16 +147,16 @@ import { WdButton, WdButtonGroup } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton icon="check" label="Save" />
-    <WdButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <WdButton icon="plus" icon-only rounded aria-label="Add" />
-    <WdButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <WdButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
+    <RdButton icon="check" label="Save" />
+    <RdButton icon="search" label="Search" icon-pos="right" severity="secondary" />
+    <RdButton icon="plus" icon-only rounded aria-label="Add" />
+    <RdButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
+    <RdButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
   </div>
 </template>
 ```
@@ -167,7 +167,7 @@ import { WdButton } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -182,8 +182,8 @@ function toggleLoading() {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <WdButton label="Always Loading" loading severity="secondary" />
+    <RdButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
+    <RdButton label="Always Loading" loading severity="secondary" />
   </div>
 </template>
 ```
@@ -192,14 +192,14 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton } from '@wex-design/ui'
+import { RdButton } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdButton label="Disabled" disabled />
-    <WdButton label="Disabled Outlined" outlined disabled />
-    <WdButton label="Disabled Text" text disabled />
+    <RdButton label="Disabled" disabled />
+    <RdButton label="Disabled Outlined" outlined disabled />
+    <RdButton label="Disabled Text" text disabled />
   </div>
 </template>
 ```

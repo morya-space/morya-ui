@@ -1,5 +1,5 @@
 ---
-description: 生成 Wex Design 业务页面（列表/表单/仪表盘）时的布局规范
+description: 生成 Roost Design 业务页面（列表/表单/仪表盘）时的布局规范
 alwaysApply: false
 ---
 
@@ -15,30 +15,30 @@ alwaysApply: false
 
 ## 列表页区块顺序
 
-1. `WdLayout` + 可选 `WdLayoutSider`
-2. `WdBreadcrumb`
-3. 筛选区（`WdSpace` + Input/Select + 查询/重置）
+1. `RdLayout` + 可选 `RdLayoutSider`
+2. `RdBreadcrumb`
+3. 筛选区（`RdSpace` + Input/Select + 查询/重置）
 4. 工具栏（标题 + 主操作按钮）
-5. `WdTable`
-6. `WdPagination`（右对齐）
+5. `RdTable`
+6. `RdPagination`（右对齐）
 
 ## 表单页区块顺序
 
-1. `WdBreadcrumb`
+1. `RdBreadcrumb`
 2. 标题 + 简短说明
-3. `WdForm`（`max-width: ~42rem`）
+3. `RdForm`（`max-width: ~42rem`）
 4. 底栏：保存（primary）+ 取消（secondary）
 
 ## 仪表盘区块顺序
 
-1. `WdBreadcrumb` + 页面标题
-2. KPI：`WdGrid` + `WdCard`（4 列或响应式）
-3. 主区两栏：图表占位 + 最近列表 `WdTable`
+1. `RdBreadcrumb` + 页面标题
+2. KPI：`RdGrid` + `RdCard`（4 列或响应式）
+3. 主区两栏：图表占位 + 最近列表 `RdTable`
 
 ## 样式
 
-- 页面背景：`var(--wd-color-surface)`
-- 区块间距：`var(--wd-space-4)` / `var(--wd-space-6)`
-- 筛选区背景：`color-mix(in srgb, var(--wd-color-border) 25%, transparent)`
+- 页面背景：`var(--rd-color-surface)`
+- 区块间距：`var(--rd-space-4)` / `var(--rd-space-6)`
+- 筛选区背景：`color-mix(in srgb, var(--rd-color-border) 25%, transparent)`
 
 引用可运行示例：`src/examples/*PageExample.vue`

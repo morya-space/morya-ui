@@ -71,7 +71,7 @@ importers:
       '@nuxt/kit':
         specifier: ^3.16.0
         version: 3.21.11(magicast@0.5.4)
-      '@wex-design/ui':
+      '@roost-design/ui':
         specifier: workspace:^
         version: link:../..
       nuxt:

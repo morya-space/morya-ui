@@ -11,14 +11,14 @@ Toggle between display and content views.
 ## Import
 
 ```ts
-import { WdInplace } from '@wex-design/ui'
+import { RdInplace } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdInplace, WdInput } from '@wex-design/ui'
+import { RdButton, RdInplace, RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref(false)
@@ -26,17 +26,17 @@ const text = ref('Click to edit')
 </script>
 
 <template>
-  <WdInplace v-model="active">
+  <RdInplace v-model="active">
     <template #display>
       {{ text }}
     </template>
     <template #content="{ close }">
       <div style="display:flex;gap:8px">
-        <WdInput v-model="text" />
-        <WdButton label="Done" size="small" @click="close" />
+        <RdInput v-model="text" />
+        <RdButton label="Done" size="small" @click="close" />
       </div>
     </template>
-  </WdInplace>
+  </RdInplace>
 </template>
 ```
 

@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WdMegaMenu from './MegaMenu.vue'
+import RdMegaMenu from './MegaMenu.vue'
 
-describe('wdMegaMenu', () => {
+describe('rdMegaMenu', () => {
   it('opens column panel and runs child command', async () => {
     const command = vi.fn()
-    const wrapper = mount(WdMegaMenu, {
+    const wrapper = mount(RdMegaMenu, {
       props: {
         model: [
           {
@@ -17,15 +17,15 @@ describe('wdMegaMenu', () => {
         teleport: false,
       },
     })
-    await wrapper.find('.wd-megamenu__trigger').trigger('click')
-    expect(wrapper.find('.wd-megamenu__panel').exists()).toBe(true)
-    expect(wrapper.findAll('.wd-megamenu__column')).toHaveLength(2)
-    await wrapper.findAll('.wd-megamenu__link')[0]!.trigger('click')
+    await wrapper.find('.rd-megamenu__trigger').trigger('click')
+    expect(wrapper.find('.rd-megamenu__panel').exists()).toBe(true)
+    expect(wrapper.findAll('.rd-megamenu__column')).toHaveLength(2)
+    await wrapper.findAll('.rd-megamenu__link')[0]!.trigger('click')
     expect(command).toHaveBeenCalled()
   })
 
   it('teleports panel to body by default', async () => {
-    const wrapper = mount(WdMegaMenu, {
+    const wrapper = mount(RdMegaMenu, {
       props: {
         model: [
           {
@@ -36,14 +36,14 @@ describe('wdMegaMenu', () => {
       },
       attachTo: document.body,
     })
-    await wrapper.find('.wd-megamenu__trigger').trigger('click')
+    await wrapper.find('.rd-megamenu__trigger').trigger('click')
     await nextTick()
-    expect(document.body.querySelector('.wd-megamenu__panel--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.rd-megamenu__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
   it('emits select and tracks selectedKey', async () => {
-    const wrapper = mount(WdMegaMenu, {
+    const wrapper = mount(RdMegaMenu, {
       props: {
         teleport: false,
         model: [
@@ -51,20 +51,20 @@ describe('wdMegaMenu', () => {
         ],
       },
     })
-    expect(wrapper.get('.wd-megamenu').attributes('aria-label')).toBe('大型菜单')
-    expect(wrapper.get('.wd-megamenu__trigger').attributes('aria-haspopup')).toBe('menu')
-    await wrapper.get('.wd-megamenu__trigger').trigger('click')
-    await wrapper.get('.wd-megamenu__link').trigger('click')
+    expect(wrapper.get('.rd-megamenu').attributes('aria-label')).toBe('大型菜单')
+    expect(wrapper.get('.rd-megamenu__trigger').attributes('aria-haspopup')).toBe('menu')
+    await wrapper.get('.rd-megamenu__trigger').trigger('click')
+    await wrapper.get('.rd-megamenu__link').trigger('click')
     expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ key: 'cloud' })
     expect(wrapper.emitted('update:selectedKey')?.at(-1)).toEqual(['cloud'])
     await wrapper.setProps({ selectedKey: 'cloud' })
-    await wrapper.get('.wd-megamenu__trigger').trigger('click')
-    expect(wrapper.get('.wd-megamenu__link').classes()).toContain('wd-megamenu__link--selected')
+    await wrapper.get('.rd-megamenu__trigger').trigger('click')
+    expect(wrapper.get('.rd-megamenu__link').classes()).toContain('rd-megamenu__link--selected')
   })
 
   it('supports keyboard navigation across panel columns and Escape', async () => {
     const iot = vi.fn()
-    const wrapper = mount(WdMegaMenu, {
+    const wrapper = mount(RdMegaMenu, {
       attachTo: document.body,
       props: {
         teleport: false,
@@ -80,15 +80,15 @@ describe('wdMegaMenu', () => {
         ],
       },
     })
-    const nav = wrapper.get('.wd-megamenu')
-    const triggers = () => wrapper.findAll('.wd-megamenu__trigger')
+    const nav = wrapper.get('.rd-megamenu')
+    const triggers = () => wrapper.findAll('.rd-megamenu__trigger')
     expect(triggers()[0]!.attributes('tabindex')).toBe('0')
     expect(triggers()[1]!.attributes('tabindex')).toBe('-1')
 
     await nav.trigger('keydown', { key: 'ArrowDown' })
     await nextTick()
-    const panel = () => wrapper.get('.wd-megamenu__panel')
-    const links = () => wrapper.findAll('.wd-megamenu__link')
+    const panel = () => wrapper.get('.rd-megamenu__panel')
+    const links = () => wrapper.findAll('.rd-megamenu__link')
     expect(document.activeElement).toBe(links()[0]!.element)
 
     // flat order: Cloud, Edge (disabled), IoT — ArrowDown skips Edge
@@ -98,14 +98,14 @@ describe('wdMegaMenu', () => {
     await panel().trigger('keydown', { key: 'Enter' })
     expect(iot).toHaveBeenCalledOnce()
     await nextTick()
-    expect(wrapper.find('.wd-megamenu__panel').exists()).toBe(false)
+    expect(wrapper.find('.rd-megamenu__panel').exists()).toBe(false)
     expect(document.activeElement).toBe(triggers()[0]!.element)
 
     await nav.trigger('keydown', { key: 'ArrowDown' })
     await nextTick()
     await panel().trigger('keydown', { key: 'Escape' })
     await nextTick()
-    expect(wrapper.find('.wd-megamenu__panel').exists()).toBe(false)
+    expect(wrapper.find('.rd-megamenu__panel').exists()).toBe(false)
     expect(document.activeElement).toBe(triggers()[0]!.element)
     wrapper.unmount()
   })

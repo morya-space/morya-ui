@@ -11,14 +11,14 @@ description: 可展开的树形表格。
 ## 引入
 
 ```ts
-import { WdTreeTable } from '@wex-design/ui'
+import { RdTreeTable } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdTreeTable } from '@wex-design/ui'
+import { RdTreeTable } from '@roost-design/ui'
 
 const columns = [
   { field: 'name', header: '名称' },
@@ -37,7 +37,7 @@ const value = [
 </script>
 
 <template>
-  <WdTreeTable :value="value" :columns="columns" />
+  <RdTreeTable :value="value" :columns="columns" />
 </template>
 ```
 

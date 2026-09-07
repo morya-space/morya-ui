@@ -13,11 +13,11 @@ const resolvedAlign = computed(() => props.titlePlacement ?? props.align)
 const hasLabel = computed(() => Boolean(props.label || slots.default))
 
 const rootClass = computed(() => [
-  'wd-divider',
-  `wd-divider--${resolvedLayout.value}`,
-  `wd-divider--${props.type}`,
+  'rd-divider',
+  `rd-divider--${resolvedLayout.value}`,
+  `rd-divider--${props.type}`,
   {
-    [`wd-divider--align-${resolvedAlign.value}`]:
+    [`rd-divider--align-${resolvedAlign.value}`]:
       hasLabel.value && resolvedLayout.value === 'horizontal' && resolvedAlign.value !== 'center',
   },
 ])
@@ -29,8 +29,8 @@ const rootClass = computed(() => [
     role="separator"
     :aria-orientation="resolvedLayout"
   >
-    <span class="wd-divider__line" />
-    <span v-if="hasLabel" class="wd-divider__label"><slot>{{ label }}</slot></span>
-    <span v-if="hasLabel" class="wd-divider__line" />
+    <span class="rd-divider__line" />
+    <span v-if="hasLabel" class="rd-divider__label"><slot>{{ label }}</slot></span>
+    <span v-if="hasLabel" class="rd-divider__line" />
   </div>
 </template>

@@ -1,3 +1,3 @@
 import './style'
-export { default as WdTextarea } from './Textarea.vue'
-export type { TextareaEmits, TextareaInstance, TextareaProps, WdTextareaAutosize } from './types'
+export { default as RdTextarea } from './Textarea.vue'
+export type { TextareaEmits, TextareaInstance, TextareaProps, RdTextareaAutosize } from './types'

@@ -1,18 +1,18 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdLayoutContent from './LayoutContent.vue'
+import RdLayoutContent from './LayoutContent.vue'
 
 describe('LayoutContent', () => {
   it('renders main content region', () => {
-    const wrapper = mount(WdLayoutContent, {
+    const wrapper = mount(RdLayoutContent, {
       slots: { default: 'Page body' },
     })
-    expect(wrapper.classes()).toContain('wd-layout-content')
+    expect(wrapper.classes()).toContain('rd-layout-content')
     expect(wrapper.text()).toBe('Page body')
   })
 
   it('applies padding and radius styles', () => {
-    const wrapper = mount(WdLayoutContent, {
+    const wrapper = mount(RdLayoutContent, {
       props: { padding: 24, radius: 6 },
     })
     expect(wrapper.element.style.padding).toBe('24px')

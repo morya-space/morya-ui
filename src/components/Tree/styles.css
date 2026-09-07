@@ -1,122 +1,122 @@
 /* —— Data: Tree —— */
-.wd-tree,
-.wd-tree__children {
+.rd-tree,
+.rd-tree__children {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wd-tree {
-    color: var(--wd-color-text);
-    font-size: var(--wd-font-size-md);
+.rd-tree {
+    color: var(--rd-color-text);
+    font-size: var(--rd-font-size-md);
 }
 
-.wd-tree__children {
-    border-left: var(--wd-border-width) solid color-mix(in srgb, var(--wd-color-border) 80%, transparent);
-    margin-left: var(--wd-tree-indent);
-    padding-left: var(--wd-tree-indent-padding);
+.rd-tree__children {
+    border-left: var(--rd-border-width) solid color-mix(in srgb, var(--rd-color-border) 80%, transparent);
+    margin-left: var(--rd-tree-indent);
+    padding-left: var(--rd-tree-indent-padding);
 }
 
-.wd-tree__row {
+.rd-tree__row {
     align-items: center;
-    border-radius: var(--wd-radius-sm);
+    border-radius: var(--rd-radius-sm);
     display: flex;
-    gap: var(--wd-space-1);
-    min-height: var(--wd-control-height-small, 1.75rem);
-    padding-right: var(--wd-space-2);
+    gap: var(--rd-space-1);
+    min-height: var(--rd-control-height-small, 1.75rem);
+    padding-right: var(--rd-space-2);
 }
 
-.wd-tree__row:hover,
-.wd-tree__node:focus-visible > .wd-tree__row {
-    background: color-mix(in srgb, var(--wd-color-primary) 6%, var(--wd-color-surface));
+.rd-tree__row:hover,
+.rd-tree__node:focus-visible > .rd-tree__row {
+    background: color-mix(in srgb, var(--rd-color-primary) 6%, var(--rd-color-surface));
 }
 
-.wd-tree__node:focus-visible {
+.rd-tree__node:focus-visible {
     outline: none;
 }
 
-.wd-tree__node:focus-visible > .wd-tree__row {
-    box-shadow: var(--wd-focus-shadow);
+.rd-tree__node:focus-visible > .rd-tree__row {
+    box-shadow: var(--rd-focus-shadow);
 }
 
-.wd-tree__row--selected {
-    background: color-mix(in srgb, var(--wd-color-primary) 12%, var(--wd-color-surface));
+.rd-tree__row--selected {
+    background: color-mix(in srgb, var(--rd-color-primary) 12%, var(--rd-color-surface));
 }
 
-.wd-tree__row--matched .wd-tree__label {
-    color: var(--wd-color-primary);
+.rd-tree__row--matched .rd-tree__label {
+    color: var(--rd-color-primary);
     font-weight: 650;
 }
 
-.wd-tree__row--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-tree__row--disabled {
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-tree__row--indeterminate .wd-tree__checkbox {
+.rd-tree__row--indeterminate .rd-tree__checkbox {
     opacity: 0.85;
 }
 
-.wd-tree__toggler,
-.wd-tree__label {
+.rd-tree__toggler,
+.rd-tree__label {
     align-items: center;
     background: transparent;
     border: 0;
-    color: var(--wd-color-text);
+    color: var(--rd-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
 }
 
-.wd-tree__toggler {
-    color: var(--wd-color-text-muted);
+.rd-tree__toggler {
+    color: var(--rd-color-text-muted);
     flex: 0 0 1.25rem;
     justify-content: center;
     line-height: 1;
-    padding: var(--wd-space-1);
+    padding: var(--rd-space-1);
 }
 
-.wd-tree__toggler:focus-visible,
-.wd-tree__label:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-tree__toggler:focus-visible,
+.rd-tree__label:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-tree__toggler--leaf {
+.rd-tree__toggler--leaf {
     visibility: hidden;
 }
 
-.wd-tree__checkbox {
+.rd-tree__checkbox {
     flex-shrink: 0;
 }
 
-.wd-tree__label {
-    border-radius: var(--wd-radius-sm);
+.rd-tree__label {
+    border-radius: var(--rd-radius-sm);
     flex: 1;
-    padding: var(--wd-space-1) var(--wd-space-2);
+    padding: var(--rd-space-1) var(--rd-space-2);
     text-align: start;
 }
 
-.wd-tree__label:hover {
-    color: var(--wd-color-primary);
+.rd-tree__label:hover {
+    color: var(--rd-color-primary);
 }
 
-.wd-tree__icon {
-    color: var(--wd-color-text-muted);
+.rd-tree__icon {
+    color: var(--rd-color-text-muted);
     display: inline-flex;
 }
 
-.wd-tree__message {
+.rd-tree__message {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--wd-control-height-medium, 2.5rem) * 2);
-    padding: var(--wd-space-3);
+    min-height: calc(var(--rd-control-height-medium, 2.5rem) * 2);
+    padding: var(--rd-space-3);
 }
 
-.wd-tree__empty-text {
+.rd-tree__empty-text {
     margin: 0;
-    color: var(--wd-color-text-muted);
-    font-size: var(--wd-font-size-sm);
+    color: var(--rd-color-text-muted);
+    font-size: var(--rd-font-size-sm);
     line-height: 1.5;
 }

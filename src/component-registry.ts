@@ -1,207 +1,207 @@
 import type { Component } from 'vue'
-import WdAccordion from './components/Accordion/Accordion.vue'
-import WdAutoComplete from './components/AutoComplete/AutoComplete.vue'
-import WdAvatar from './components/Avatar/Avatar.vue'
-import WdAvatarGroup from './components/Avatar/AvatarGroup.vue'
-import WdBadge from './components/Badge/Badge.vue'
-import WdBlockUI from './components/BlockUI/BlockUI.vue'
-import WdBreadcrumb from './components/Breadcrumb/Breadcrumb.vue'
-import WdButton from './components/Button/Button.vue'
-import WdButtonGroup from './components/Button/ButtonGroup.vue'
-import WdCard from './components/Card/Card.vue'
-import WdCarousel from './components/Carousel/Carousel.vue'
-import WdCascadeSelect from './components/CascadeSelect/CascadeSelect.vue'
-import WdCheckbox from './components/Checkbox/Checkbox.vue'
-import WdCheckboxGroup from './components/Checkbox/CheckboxGroup.vue'
-import WdChip from './components/Chip/Chip.vue'
-import WdCommandMenu from './components/CommandMenu/CommandMenu.vue'
-import WdConfigProvider from './components/ConfigProvider/ConfigProvider.vue'
-import WdConfirmDialog from './components/ConfirmDialog/ConfirmDialog.vue'
-import WdConfirmPopup from './components/ConfirmPopup/ConfirmPopup.vue'
-import WdContextMenu from './components/ContextMenu/ContextMenu.vue'
-import WdDataView from './components/DataView/DataView.vue'
-import WdDatePicker from './components/DatePicker/DatePicker.vue'
-import WdDialog from './components/Dialog/Dialog.vue'
-import WdDivider from './components/Divider/Divider.vue'
-import WdDock from './components/Dock/Dock.vue'
-import WdDrawer from './components/Drawer/Drawer.vue'
-import WdDropdown from './components/Dropdown/Dropdown.vue'
-import WdFieldset from './components/Fieldset/Fieldset.vue'
-import WdFileUpload from './components/FileUpload/FileUpload.vue'
-import WdFlex from './components/Flex/Flex.vue'
-import WdFloatLabel from './components/FloatLabel/FloatLabel.vue'
-import WdFluid from './components/Fluid/Fluid.vue'
-import WdForm from './components/Form/Form.vue'
-import WdFormItem from './components/Form/FormItem.vue'
-import WdGallery from './components/Gallery/Gallery.vue'
-import WdGrid from './components/Grid/Grid.vue'
-import WdGi from './components/Grid/GridItem.vue'
-import WdGridItem from './components/Grid/GridItem.vue'
-import WdIcon from './components/Icon/Icon.vue'
-import WdIconField from './components/IconField/IconField.vue'
-import WdInplace from './components/Inplace/Inplace.vue'
-import WdInput from './components/Input/Input.vue'
-import WdInputColor from './components/InputColor/InputColor.vue'
-import WdInputGroup from './components/InputGroup/InputGroup.vue'
-import WdInputGroupAddon from './components/InputGroup/InputGroupAddon.vue'
-import WdInputNumber from './components/InputNumber/InputNumber.vue'
-import WdInputOtp from './components/InputOtp/InputOtp.vue'
-import WdInputPassword from './components/InputPassword/InputPassword.vue'
-import WdInputTags from './components/InputTags/InputTags.vue'
-import WdKnob from './components/Knob/Knob.vue'
-import WdLabel from './components/Label/Label.vue'
-import WdLayout from './components/Layout/Layout.vue'
-import WdLayoutContent from './components/Layout/LayoutContent.vue'
-import WdLayoutFooter from './components/Layout/LayoutFooter.vue'
-import WdLayoutHeader from './components/Layout/LayoutHeader.vue'
-import WdLayoutSider from './components/Layout/LayoutSider.vue'
-import WdListbox from './components/Listbox/Listbox.vue'
-import WdMegaMenu from './components/MegaMenu/MegaMenu.vue'
-import WdMenu from './components/Menu/Menu.vue'
-import WdMenubar from './components/Menubar/Menubar.vue'
-import WdMessage from './components/Message/Message.vue'
-import WdMeterGroup from './components/MeterGroup/MeterGroup.vue'
-import WdOrderList from './components/OrderList/OrderList.vue'
-import WdPagination from './components/Pagination/Pagination.vue'
-import WdPanel from './components/Panel/Panel.vue'
-import WdPickList from './components/PickList/PickList.vue'
-import WdPopover from './components/Popover/Popover.vue'
-import WdProgressBar from './components/ProgressBar/ProgressBar.vue'
-import WdProgressSpinner from './components/ProgressSpinner/ProgressSpinner.vue'
-import WdRadio from './components/Radio/Radio.vue'
-import WdRadioGroup from './components/Radio/RadioGroup.vue'
-import WdRating from './components/Rating/Rating.vue'
-import WdScrollbar from './components/Scrollbar/Scrollbar.vue'
-import WdScrollTop from './components/ScrollTop/ScrollTop.vue'
-import WdSelect from './components/Select/Select.vue'
-import WdSelectButton from './components/SelectButton/SelectButton.vue'
-import WdSidebar from './components/Sidebar/Sidebar.vue'
-import WdSkeleton from './components/Skeleton/Skeleton.vue'
-import WdSlider from './components/Slider/Slider.vue'
-import WdSpace from './components/Space/Space.vue'
-import WdSpeedDial from './components/SpeedDial/SpeedDial.vue'
-import WdSplitButton from './components/SplitButton/SplitButton.vue'
-import WdSplitter from './components/Splitter/Splitter.vue'
-import WdStepper from './components/Stepper/Stepper.vue'
-import WdSwitch from './components/Switch/Switch.vue'
-import WdTable from './components/Table/Table.vue'
-import WdTabs from './components/Tabs/Tabs.vue'
-import WdTag from './components/Tag/Tag.vue'
-import WdTerminal from './components/Terminal/Terminal.vue'
-import WdTextarea from './components/Textarea/Textarea.vue'
-import WdTieredMenu from './components/TieredMenu/TieredMenu.vue'
-import WdTimeline from './components/Timeline/Timeline.vue'
-import WdToast from './components/Toast/Toast.vue'
-import WdToggleButton from './components/ToggleButton/ToggleButton.vue'
-import WdToolbar from './components/Toolbar/Toolbar.vue'
-import WdTooltip from './components/Tooltip/Tooltip.vue'
-import WdTree from './components/Tree/Tree.vue'
-import WdTreeSelect from './components/TreeSelect/TreeSelect.vue'
-import WdTreeTable from './components/TreeTable/TreeTable.vue'
-import WdVirtualScroller from './components/VirtualScroller/VirtualScroller.vue'
+import RdAccordion from './components/Accordion/Accordion.vue'
+import RdAutoComplete from './components/AutoComplete/AutoComplete.vue'
+import RdAvatar from './components/Avatar/Avatar.vue'
+import RdAvatarGroup from './components/Avatar/AvatarGroup.vue'
+import RdBadge from './components/Badge/Badge.vue'
+import RdBlockUI from './components/BlockUI/BlockUI.vue'
+import RdBreadcrumb from './components/Breadcrumb/Breadcrumb.vue'
+import RdButton from './components/Button/Button.vue'
+import RdButtonGroup from './components/Button/ButtonGroup.vue'
+import RdCard from './components/Card/Card.vue'
+import RdCarousel from './components/Carousel/Carousel.vue'
+import RdCascadeSelect from './components/CascadeSelect/CascadeSelect.vue'
+import RdCheckbox from './components/Checkbox/Checkbox.vue'
+import RdCheckboxGroup from './components/Checkbox/CheckboxGroup.vue'
+import RdChip from './components/Chip/Chip.vue'
+import RdCommandMenu from './components/CommandMenu/CommandMenu.vue'
+import RdConfigProvider from './components/ConfigProvider/ConfigProvider.vue'
+import RdConfirmDialog from './components/ConfirmDialog/ConfirmDialog.vue'
+import RdConfirmPopup from './components/ConfirmPopup/ConfirmPopup.vue'
+import RdContextMenu from './components/ContextMenu/ContextMenu.vue'
+import RdDataView from './components/DataView/DataView.vue'
+import RdDatePicker from './components/DatePicker/DatePicker.vue'
+import RdDialog from './components/Dialog/Dialog.vue'
+import RdDivider from './components/Divider/Divider.vue'
+import RdDock from './components/Dock/Dock.vue'
+import RdDrawer from './components/Drawer/Drawer.vue'
+import RdDropdown from './components/Dropdown/Dropdown.vue'
+import RdFieldset from './components/Fieldset/Fieldset.vue'
+import RdFileUpload from './components/FileUpload/FileUpload.vue'
+import RdFlex from './components/Flex/Flex.vue'
+import RdFloatLabel from './components/FloatLabel/FloatLabel.vue'
+import RdFluid from './components/Fluid/Fluid.vue'
+import RdForm from './components/Form/Form.vue'
+import RdFormItem from './components/Form/FormItem.vue'
+import RdGallery from './components/Gallery/Gallery.vue'
+import RdGrid from './components/Grid/Grid.vue'
+import RdGi from './components/Grid/GridItem.vue'
+import RdGridItem from './components/Grid/GridItem.vue'
+import RdIcon from './components/Icon/Icon.vue'
+import RdIconField from './components/IconField/IconField.vue'
+import RdInplace from './components/Inplace/Inplace.vue'
+import RdInput from './components/Input/Input.vue'
+import RdInputColor from './components/InputColor/InputColor.vue'
+import RdInputGroup from './components/InputGroup/InputGroup.vue'
+import RdInputGroupAddon from './components/InputGroup/InputGroupAddon.vue'
+import RdInputNumber from './components/InputNumber/InputNumber.vue'
+import RdInputOtp from './components/InputOtp/InputOtp.vue'
+import RdInputPassword from './components/InputPassword/InputPassword.vue'
+import RdInputTags from './components/InputTags/InputTags.vue'
+import RdKnob from './components/Knob/Knob.vue'
+import RdLabel from './components/Label/Label.vue'
+import RdLayout from './components/Layout/Layout.vue'
+import RdLayoutContent from './components/Layout/LayoutContent.vue'
+import RdLayoutFooter from './components/Layout/LayoutFooter.vue'
+import RdLayoutHeader from './components/Layout/LayoutHeader.vue'
+import RdLayoutSider from './components/Layout/LayoutSider.vue'
+import RdListbox from './components/Listbox/Listbox.vue'
+import RdMegaMenu from './components/MegaMenu/MegaMenu.vue'
+import RdMenu from './components/Menu/Menu.vue'
+import RdMenubar from './components/Menubar/Menubar.vue'
+import RdMessage from './components/Message/Message.vue'
+import RdMeterGroup from './components/MeterGroup/MeterGroup.vue'
+import RdOrderList from './components/OrderList/OrderList.vue'
+import RdPagination from './components/Pagination/Pagination.vue'
+import RdPanel from './components/Panel/Panel.vue'
+import RdPickList from './components/PickList/PickList.vue'
+import RdPopover from './components/Popover/Popover.vue'
+import RdProgressBar from './components/ProgressBar/ProgressBar.vue'
+import RdProgressSpinner from './components/ProgressSpinner/ProgressSpinner.vue'
+import RdRadio from './components/Radio/Radio.vue'
+import RdRadioGroup from './components/Radio/RadioGroup.vue'
+import RdRating from './components/Rating/Rating.vue'
+import RdScrollbar from './components/Scrollbar/Scrollbar.vue'
+import RdScrollTop from './components/ScrollTop/ScrollTop.vue'
+import RdSelect from './components/Select/Select.vue'
+import RdSelectButton from './components/SelectButton/SelectButton.vue'
+import RdSidebar from './components/Sidebar/Sidebar.vue'
+import RdSkeleton from './components/Skeleton/Skeleton.vue'
+import RdSlider from './components/Slider/Slider.vue'
+import RdSpace from './components/Space/Space.vue'
+import RdSpeedDial from './components/SpeedDial/SpeedDial.vue'
+import RdSplitButton from './components/SplitButton/SplitButton.vue'
+import RdSplitter from './components/Splitter/Splitter.vue'
+import RdStepper from './components/Stepper/Stepper.vue'
+import RdSwitch from './components/Switch/Switch.vue'
+import RdTable from './components/Table/Table.vue'
+import RdTabs from './components/Tabs/Tabs.vue'
+import RdTag from './components/Tag/Tag.vue'
+import RdTerminal from './components/Terminal/Terminal.vue'
+import RdTextarea from './components/Textarea/Textarea.vue'
+import RdTieredMenu from './components/TieredMenu/TieredMenu.vue'
+import RdTimeline from './components/Timeline/Timeline.vue'
+import RdToast from './components/Toast/Toast.vue'
+import RdToggleButton from './components/ToggleButton/ToggleButton.vue'
+import RdToolbar from './components/Toolbar/Toolbar.vue'
+import RdTooltip from './components/Tooltip/Tooltip.vue'
+import RdTree from './components/Tree/Tree.vue'
+import RdTreeSelect from './components/TreeSelect/TreeSelect.vue'
+import RdTreeTable from './components/TreeTable/TreeTable.vue'
+import RdVirtualScroller from './components/VirtualScroller/VirtualScroller.vue'
 
 /** Public components available for global registration (`app.use`). */
-export const wdComponents: Record<string, Component> = {
-  WdAccordion,
-  WdAutoComplete,
-  WdAvatar,
-  WdAvatarGroup,
-  WdBadge,
-  WdBlockUI,
-  WdBreadcrumb,
-  WdButton,
-  WdButtonGroup,
-  WdCard,
-  WdCarousel,
-  WdCascadeSelect,
-  WdCheckbox,
-  WdCheckboxGroup,
-  WdChip,
-  WdCommandMenu,
-  WdConfigProvider,
-  WdConfirmDialog,
-  WdConfirmPopup,
-  WdContextMenu,
-  WdDataView,
-  WdDatePicker,
-  WdDialog,
-  WdDivider,
-  WdDock,
-  WdDrawer,
-  WdDropdown,
-  WdFieldset,
-  WdFileUpload,
-  WdFlex,
-  WdFloatLabel,
-  WdFluid,
-  WdForm,
-  WdFormItem,
-  WdGallery,
-  WdGi,
-  WdGrid,
-  WdGridItem,
-  WdIcon,
-  WdIconField,
-  WdInplace,
-  WdInput,
-  WdInputColor,
-  WdInputGroup,
-  WdInputGroupAddon,
-  WdInputNumber,
-  WdInputOtp,
-  WdInputPassword,
-  WdInputTags,
-  WdKnob,
-  WdLabel,
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutFooter,
-  WdLayoutHeader,
-  WdLayoutSider,
-  WdListbox,
-  WdMegaMenu,
-  WdMenu,
-  WdMenubar,
-  WdMessage,
-  WdMeterGroup,
-  WdOrderList,
-  WdPagination,
-  WdPanel,
-  WdPickList,
-  WdPopover,
-  WdProgressBar,
-  WdProgressSpinner,
-  WdRadio,
-  WdRadioGroup,
-  WdRating,
-  WdScrollbar,
-  WdScrollTop,
-  WdSelect,
-  WdSelectButton,
-  WdSidebar,
-  WdSkeleton,
-  WdSlider,
-  WdSpace,
-  WdSpeedDial,
-  WdSplitButton,
-  WdSplitter,
-  WdStepper,
-  WdSwitch,
-  WdTable,
-  WdTabs,
-  WdTag,
-  WdTerminal,
-  WdTextarea,
-  WdTieredMenu,
-  WdTimeline,
-  WdToast,
-  WdToggleButton,
-  WdToolbar,
-  WdTooltip,
-  WdTree,
-  WdTreeSelect,
-  WdTreeTable,
-  WdVirtualScroller,
+export const rdComponents: Record<string, Component> = {
+  RdAccordion,
+  RdAutoComplete,
+  RdAvatar,
+  RdAvatarGroup,
+  RdBadge,
+  RdBlockUI,
+  RdBreadcrumb,
+  RdButton,
+  RdButtonGroup,
+  RdCard,
+  RdCarousel,
+  RdCascadeSelect,
+  RdCheckbox,
+  RdCheckboxGroup,
+  RdChip,
+  RdCommandMenu,
+  RdConfigProvider,
+  RdConfirmDialog,
+  RdConfirmPopup,
+  RdContextMenu,
+  RdDataView,
+  RdDatePicker,
+  RdDialog,
+  RdDivider,
+  RdDock,
+  RdDrawer,
+  RdDropdown,
+  RdFieldset,
+  RdFileUpload,
+  RdFlex,
+  RdFloatLabel,
+  RdFluid,
+  RdForm,
+  RdFormItem,
+  RdGallery,
+  RdGi,
+  RdGrid,
+  RdGridItem,
+  RdIcon,
+  RdIconField,
+  RdInplace,
+  RdInput,
+  RdInputColor,
+  RdInputGroup,
+  RdInputGroupAddon,
+  RdInputNumber,
+  RdInputOtp,
+  RdInputPassword,
+  RdInputTags,
+  RdKnob,
+  RdLabel,
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutFooter,
+  RdLayoutHeader,
+  RdLayoutSider,
+  RdListbox,
+  RdMegaMenu,
+  RdMenu,
+  RdMenubar,
+  RdMessage,
+  RdMeterGroup,
+  RdOrderList,
+  RdPagination,
+  RdPanel,
+  RdPickList,
+  RdPopover,
+  RdProgressBar,
+  RdProgressSpinner,
+  RdRadio,
+  RdRadioGroup,
+  RdRating,
+  RdScrollbar,
+  RdScrollTop,
+  RdSelect,
+  RdSelectButton,
+  RdSidebar,
+  RdSkeleton,
+  RdSlider,
+  RdSpace,
+  RdSpeedDial,
+  RdSplitButton,
+  RdSplitter,
+  RdStepper,
+  RdSwitch,
+  RdTable,
+  RdTabs,
+  RdTag,
+  RdTerminal,
+  RdTextarea,
+  RdTieredMenu,
+  RdTimeline,
+  RdToast,
+  RdToggleButton,
+  RdToolbar,
+  RdTooltip,
+  RdTree,
+  RdTreeSelect,
+  RdTreeTable,
+  RdVirtualScroller,
 }
 
-export const wdComponentNames = Object.keys(wdComponents)
+export const rdComponentNames = Object.keys(rdComponents)

@@ -11,14 +11,14 @@ Context menu that opens at the pointer position. Nested `items` are supported. `
 ## Import
 
 ```ts
-import { useContextMenu, WdContextMenu } from '@wex-design/ui'
+import { useContextMenu, RdContextMenu } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdContextMenu } from '@wex-design/ui'
+import { RdContextMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -39,12 +39,12 @@ function onContext(event: MouseEvent) {
 
 <template>
   <div
-    style="border: 1px dashed var(--wd-color-border); padding: 2rem; border-radius: var(--wd-radius-md)"
+    style="border: 1px dashed var(--rd-color-border); padding: 2rem; border-radius: var(--rd-radius-md)"
     @contextmenu.prevent="onContext"
   >
     Right-click here to open the menu
   </div>
-  <WdContextMenu
+  <RdContextMenu
     ref="menu"
     v-model="visible"
     v-model:position="position"
@@ -57,7 +57,7 @@ function onContext(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, WdContextMenu } from '@wex-design/ui'
+import { useContextMenu, RdContextMenu } from '@roost-design/ui'
 
 const menu = useContextMenu()
 const model = [
@@ -68,12 +68,12 @@ const model = [
 
 <template>
   <div
-    style="border: 1px dashed var(--wd-color-border); padding: 2rem; border-radius: var(--wd-radius-md)"
+    style="border: 1px dashed var(--rd-color-border); padding: 2rem; border-radius: var(--rd-radius-md)"
     @contextmenu="menu.show"
   >
     Right-click here (composable)
   </div>
-  <WdContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
+  <RdContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
 </template>
 ```
 

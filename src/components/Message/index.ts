@@ -1,6 +1,6 @@
 import './style'
 export { message, useMessage } from './message'
-export { default as WdMessage } from './Message.vue'
+export { default as RdMessage } from './Message.vue'
 export type {
   MessageHandle,
   MessageHostConfig,
@@ -10,5 +10,5 @@ export type {
   MessagePlacement,
   MessageProps,
   MessageSeverity,
-  WdRenderable,
+  RdRenderable,
 } from './types'

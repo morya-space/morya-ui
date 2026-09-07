@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WdStepper from './Stepper.vue'
+import RdStepper from './Stepper.vue'
 
 const steps = [
   { label: 'Cart' },
@@ -8,28 +8,28 @@ const steps = [
   { label: 'Pay', disabled: true },
 ]
 
-describe('wdStepper', () => {
+describe('rdStepper', () => {
   it('emits active step index on click', async () => {
-    const wrapper = mount(WdStepper, {
+    const wrapper = mount(RdStepper, {
       props: { steps, modelValue: 0 },
     })
-    const buttons = wrapper.findAll('.wd-stepper__step')
+    const buttons = wrapper.findAll('.rd-stepper__step')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
   })
 
   it('blocks future steps when linear and respects disabled', async () => {
-    const wrapper = mount(WdStepper, {
+    const wrapper = mount(RdStepper, {
       props: { steps, modelValue: 0, linear: true },
     })
-    const buttons = wrapper.findAll('.wd-stepper__step')
+    const buttons = wrapper.findAll('.rd-stepper__step')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     expect(buttons[2]!.attributes('disabled')).toBeDefined()
   })
 
   it('renders vertical layout with descriptions', () => {
-    const wrapper = mount(WdStepper, {
+    const wrapper = mount(RdStepper, {
       props: {
         vertical: true,
         steps: [
@@ -38,8 +38,8 @@ describe('wdStepper', () => {
         ],
       },
     })
-    expect(wrapper.get('.wd-stepper').classes()).toContain('wd-stepper--vertical')
-    expect(wrapper.get('.wd-stepper__description').text()).toBe('Start')
-    expect(wrapper.find('.wd-stepper__step--error').exists()).toBe(true)
+    expect(wrapper.get('.rd-stepper').classes()).toContain('rd-stepper--vertical')
+    expect(wrapper.get('.rd-stepper__description').text()).toBe('Start')
+    expect(wrapper.find('.rd-stepper__step--error').exists()).toBe(true)
   })
 })

@@ -1,5 +1,5 @@
 import './style'
-export { default as WdContextMenu } from './ContextMenu.vue'
+export { default as RdContextMenu } from './ContextMenu.vue'
 export type {
   ContextMenuEmits,
   ContextMenuInstance,

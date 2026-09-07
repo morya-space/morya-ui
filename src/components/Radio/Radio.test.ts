@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WdRadio from './Radio.vue'
-import WdRadioGroup from './RadioGroup.vue'
+import RdRadio from './Radio.vue'
+import RdRadioGroup from './RadioGroup.vue'
 
-describe('wdRadio', () => {
+describe('rdRadio', () => {
   it('associates its label and emits its value when selected', async () => {
-    const wrapper = mount(WdRadio, { props: { id: 'small', label: 'Small', value: 'sm' } })
+    const wrapper = mount(RdRadio, { props: { id: 'small', label: 'Small', value: 'sm' } })
 
     expect(wrapper.get('label').attributes('for')).toBe('small')
     await wrapper.get('input').setValue(true)
@@ -15,26 +15,26 @@ describe('wdRadio', () => {
   })
 
   it('reflects the controlled model value and disabled state', () => {
-    const wrapper = mount(WdRadio, { props: { modelValue: 'sm', value: 'sm', disabled: true } })
+    const wrapper = mount(RdRadio, { props: { modelValue: 'sm', value: 'sm', disabled: true } })
 
     expect((wrapper.get('input').element as HTMLInputElement).checked).toBe(true)
     expect(wrapper.get('input').attributes('disabled')).toBeDefined()
   })
 
   it('marks invalid state', () => {
-    const wrapper = mount(WdRadio, { props: { value: 'a', invalid: true } })
+    const wrapper = mount(RdRadio, { props: { value: 'a', invalid: true } })
 
-    expect(wrapper.classes()).toContain('wd-radio--invalid')
+    expect(wrapper.classes()).toContain('rd-radio--invalid')
     expect(wrapper.get('input').attributes('aria-invalid')).toBe('true')
   })
 
   it('selects a value inside a group', async () => {
-    const wrapper = mount(WdRadioGroup, {
+    const wrapper = mount(RdRadioGroup, {
       props: { modelValue: 'a' },
       slots: {
         default: () => [
-          h(WdRadio, { value: 'a', label: 'A' }),
-          h(WdRadio, { value: 'b', label: 'B' }),
+          h(RdRadio, { value: 'a', label: 'A' }),
+          h(RdRadio, { value: 'b', label: 'B' }),
         ],
       },
     })

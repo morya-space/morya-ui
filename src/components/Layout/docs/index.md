@@ -6,18 +6,18 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 
 # Layout
 
-页面级布局容器。侧栏场景需在对应 `WdLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WdLayoutContent` 会自动撑满剩余空间。
+页面级布局容器。侧栏场景需在对应 `RdLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`RdLayoutContent` 会自动撑满剩余空间。
 
 ## 引入
 
 ```ts
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutFooter,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutFooter,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 ```
 
 ## 基础用法
@@ -26,21 +26,21 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ```vue preview
 <script setup lang="ts">
-import { WdLayout, WdLayoutContent, WdLayoutFooter, WdLayoutHeader } from '@wex-design/ui'
+import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:16rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </WdLayoutHeader>
-    <WdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </RdLayoutHeader>
+    <RdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content（自动撑开）
-    </WdLayoutContent>
-    <WdLayoutFooter bordered style="padding:0.75rem 1rem">
+    </RdLayoutContent>
+    <RdLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </WdLayoutFooter>
-  </WdLayout>
+    </RdLayoutFooter>
+  </RdLayout>
 </template>
 ```
 
@@ -51,24 +51,24 @@ import { WdLayout, WdLayoutContent, WdLayoutFooter, WdLayoutHeader } from '@wex-
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdLayout style="height:16rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--wd-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
-    </WdLayoutHeader>
-    <WdLayout has-sider>
-      <WdLayoutSider
+      <span style="color:var(--rd-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
+    </RdLayoutHeader>
+    <RdLayout has-sider>
+      <RdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>项目</div>
           <div>设置</div>
         </div>
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding:1rem">
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding:1rem">
         主内容区会横向、纵向同时撑满。
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </WdLayoutHeader>
-    <WdLayout has-sider sider-placement="right">
-      <WdLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </RdLayoutHeader>
+    <RdLayout has-sider sider-placement="right">
+      <RdLayoutSider bordered :width="140" content-style="padding:0.75rem">
         属性面板
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding:1rem">
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding:1rem">
         画布 / 主区域
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -125,34 +125,34 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  WdButton,
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutFooter,
-  WdLayoutHeader,
-  WdLayoutSider,
-  WdTag,
-} from '@wex-design/ui'
+  RdButton,
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutFooter,
+  RdLayoutHeader,
+  RdLayoutSider,
+  RdTag,
+} from '@roost-design/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WdLayout style="height:18rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader
+  <RdLayout style="height:18rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
-      <strong>Well Design</strong>
-      <WdTag value="Studio" />
+      <strong>Roost Design</strong>
+      <RdTag value="Studio" />
       <span style="flex:1" />
-      <WdButton size="small" label="发布" />
-    </WdLayoutHeader>
+      <RdButton size="small" label="发布" />
+    </RdLayoutHeader>
 
-    <WdLayout has-sider>
-      <WdLayoutSider
+    <RdLayout has-sider>
+      <RdLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>组件</div>
           <div>主题</div>
         </div>
-      </WdLayoutSider>
+      </RdLayoutSider>
 
-      <WdLayout>
-        <WdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <RdLayout>
+        <RdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>工作区</strong>
-          <p style="margin:0;color:var(--wd-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--rd-color-text-muted);font-size:0.875rem">
             Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。
           </p>
-        </WdLayoutContent>
-        <WdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+        </RdLayoutContent>
+        <RdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--rd-color-text-muted);font-size:0.75rem">
           Ready · local
-        </WdLayoutFooter>
-      </WdLayout>
-    </WdLayout>
-  </WdLayout>
+        </RdLayoutFooter>
+      </RdLayout>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WdLayout, WdLayoutContent, WdLayoutHeader } from '@wex-design/ui'
+import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:12rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:12rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </WdLayoutHeader>
-    <WdLayoutContent embedded content-style="padding:1rem">
+    </RdLayoutHeader>
+    <RdLayoutContent embedded content-style="padding:1rem">
       嵌套表单 / 列表放在这里。
-    </WdLayoutContent>
-  </WdLayout>
+    </RdLayoutContent>
+  </RdLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ import { WdLayout, WdLayoutContent, WdLayoutHeader } from '@wex-design/ui'
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 </script>
 
 <template>
-  <WdLayout style="height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </WdLayoutHeader>
-    <WdLayout has-sider>
-      <WdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </RdLayoutHeader>
+    <RdLayout has-sider>
+      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
         固定侧栏
-      </WdLayoutSider>
-      <WdLayoutContent embedded content-style="padding:1rem">
+      </RdLayoutSider>
+      <RdLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             行 {{ n }} — 向下滚动
           </div>
         </div>
-      </WdLayoutContent>
-    </WdLayout>
-  </WdLayout>
+      </RdLayoutContent>
+    </RdLayout>
+  </RdLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  WdLayout,
-  WdLayoutContent,
-  WdLayoutHeader,
-  WdLayoutSider,
-} from '@wex-design/ui'
+  RdLayout,
+  RdLayoutContent,
+  RdLayoutHeader,
+  RdLayoutSider,
+} from '@roost-design/ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md);overflow:hidden">
-    <WdLayout position="absolute" has-sider>
-      <WdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
+    <RdLayout position="absolute" has-sider>
+      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </WdLayoutSider>
-      <WdLayout>
-        <WdLayoutHeader bordered style="padding:0.75rem 1rem">
+      </RdLayoutSider>
+      <RdLayout>
+        <RdLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </WdLayoutHeader>
-        <WdLayoutContent embedded content-style="padding:1rem">
+        </RdLayoutHeader>
+        <RdLayoutContent embedded content-style="padding:1rem">
           填满相对定位容器
-        </WdLayoutContent>
-      </WdLayout>
-    </WdLayout>
+        </RdLayoutContent>
+      </RdLayout>
+    </RdLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | 横向容纳 `WdLayoutSider`。 |
+| `hasSider` | `boolean` | `false` | 横向容纳 `RdLayoutSider`。 |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | 侧栏位置。 |
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
@@ -315,17 +315,17 @@ import {
 
 ## Expose
 
-`WdLayout` / `WdLayoutContent` / `WdLayoutSider` 均暴露 `scrollTo(...)`。
+`RdLayout` / `RdLayoutContent` / `RdLayoutSider` 均暴露 `scrollTo(...)`。
 
 ## Components
 
 | 组件 | 说明 |
 | --- | --- |
-| `WdLayout` | 根布局。 |
-| `WdLayoutHeader` | 顶栏。 |
-| `WdLayoutContent` | 主内容区（默认撑满剩余空间）。 |
-| `WdLayoutFooter` | 底栏。 |
-| `WdLayoutSider` | 侧栏。 |
+| `RdLayout` | 根布局。 |
+| `RdLayoutHeader` | 顶栏。 |
+| `RdLayoutContent` | 主内容区（默认撑满剩余空间）。 |
+| `RdLayoutFooter` | 底栏。 |
+| `RdLayoutSider` | 侧栏。 |
 
 ## Slots
 

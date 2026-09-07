@@ -8,7 +8,7 @@ import type {
   TreeSelectionKeys,
 } from './types'
 import { computed, nextTick, provide, reactive, ref, useSlots, watch } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   buildChildMap,
@@ -18,7 +18,7 @@ import {
   syncAncestors,
   walkTree,
 } from './checkStrategy'
-import { WD_TREE_KEY, WD_TREE_NODE_SLOT } from './context'
+import { RD_TREE_KEY, RD_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
 const props = withDefaults(defineProps<TreeProps>(), {
   selectionMode: 'single',
@@ -50,8 +50,8 @@ const emit = defineEmits<{
   (event: 'node-drop', payload: { dragKey: string; dropKey: string; position: 'before' | 'after' | 'inside' }): void
 }>()
 const slots = useSlots()
-const locale = useWdLocale()
-provide(WD_TREE_NODE_SLOT, slots.default)
+const locale = useRdLocale()
+provide(RD_TREE_NODE_SLOT, slots.default)
 
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyMessage,
@@ -338,9 +338,9 @@ watch(keyboard.activeIndex, () => {
   void nextTick(() => {
     const key = activeKey.value
     if (key == null || !root.value) return
-    const items = root.value.querySelectorAll<HTMLElement>('[data-wd-tree-key]')
+    const items = root.value.querySelectorAll<HTMLElement>('[data-rd-tree-key]')
     for (const item of items) {
-      if (item.dataset.wdTreeKey === key) {
+      if (item.dataset.rdTreeKey === key) {
         item.focus({ preventScroll: true })
         break
       }
@@ -374,7 +374,7 @@ function onTreeKeydown(event: KeyboardEvent) {
   keyboard.onKeydown(event)
 }
 
-provide(WD_TREE_KEY, {
+provide(RD_TREE_KEY, {
   isExpanded,
   isSelected,
   isChecked,
@@ -410,15 +410,15 @@ provide(WD_TREE_KEY, {
 </script>
 
 <template>
-  <div class="wd-tree-root">
-    <ul v-if="visibleRoots.length" ref="root" class="wd-tree" role="tree" @keydown="onTreeKeydown">
+  <div class="rd-tree-root">
+    <ul v-if="visibleRoots.length" ref="root" class="rd-tree" role="tree" @keydown="onTreeKeydown">
       <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" :depth="1" />
     </ul>
-    <div v-else-if="isFilterEmpty" class="wd-tree__message" role="status">
+    <div v-else-if="isFilterEmpty" class="rd-tree__message" role="status">
       <slot name="empty">
-        <p class="wd-tree__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="rd-tree__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
-    <ul v-else ref="root" class="wd-tree" role="tree" @keydown="onTreeKeydown" />
+    <ul v-else ref="root" class="rd-tree" role="tree" @keydown="onTreeKeydown" />
   </div>
 </template>

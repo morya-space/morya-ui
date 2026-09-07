@@ -1,12 +1,12 @@
 ---
 title: Configuration
 order: 5
-description: ConfigProvider, createWexDesign, and useWdConfig.
+description: ConfigProvider, createRoostDesign, and useRdConfig.
 ---
 
 # Configuration
 
-Wex Design provides app-level and page-level defaults for overlay mount, size, density, and copy.
+Roost Design provides app-level and page-level defaults for overlay mount, size, density, and copy.
 
 ## Capabilities
 
@@ -19,23 +19,23 @@ Wex Design provides app-level and page-level defaults for overlay mount, size, d
 | `zIndex` | Overlay z-index base |
 | `locale` | Confirm, empty, loading, and placeholder copy. Pass built-in packs `zhCN` / `enUS` |
 
-Priority: **component props > `WdConfigProvider` > `createWexDesign` > built-in default (Chinese)**.
+Priority: **component props > `RdConfigProvider` > `createRoostDesign` > built-in default (Chinese)**.
 
 ## Locale packs
 
 Built-in copy defaults to Chinese. Pass `enUS` to switch to English:
 
 ```ts
-import { createWexDesign, enUS, zhCN } from '@wex-design/ui'
+import { createRoostDesign, enUS, zhCN } from '@roost-design/ui'
 import { createApp } from 'vue'
 
-createApp(App).use(createWexDesign({ locale: enUS })).mount('#app')
+createApp(App).use(createRoostDesign({ locale: enUS })).mount('#app')
 ```
 
 You can also override a subset:
 
 ```ts
-createWexDesign({
+createRoostDesign({
   locale: {
     ...zhCN,
     accept: 'OK',
@@ -43,7 +43,7 @@ createWexDesign({
 })
 ```
 
-The **中 / EN** switch in the docs header injects the same pack into `WdConfigProvider`, so live examples (empty states, confirm, dates, and so on) follow the selected language. Markdown pages load `*.en.md` when English is selected.
+The **中 / EN** switch in the docs header injects the same pack into `RdConfigProvider`, so live examples (empty states, confirm, dates, and so on) follow the selected language. Markdown pages load `*.en.md` when English is selected.
 
 ## Size
 
@@ -51,7 +51,7 @@ Controls without a local `size` inherit from ConfigProvider.
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput, WdSelect } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -64,25 +64,25 @@ const options = [
 <template>
   <div style="display:grid;gap:1rem">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
         Default size
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <WdButton label="Button" />
-        <WdInput placeholder="Input" style="width:10rem" />
-        <WdSelect v-model="city" :options="options" style="width:10rem" />
+        <RdButton label="Button" />
+        <RdInput placeholder="Input" style="width:10rem" />
+        <RdSelect v-model="city" :options="options" style="width:10rem" />
       </div>
     </div>
-    <WdConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--wd-color-text-muted);font-size:0.75rem">
+    <RdConfigProvider size="small">
+      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
         Config size="small"
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <WdButton label="Button" />
-        <WdInput placeholder="Input" style="width:10rem" />
-        <WdSelect v-model="city" :options="options" style="width:10rem" />
+        <RdButton label="Button" />
+        <RdInput placeholder="Input" style="width:10rem" />
+        <RdSelect v-model="city" :options="options" style="width:10rem" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -91,7 +91,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdInput } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
@@ -100,7 +100,7 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <WdButton
+      <RdButton
         v-for="item in (['compact', 'comfortable', 'spacious'] as const)"
         :key="item"
         :label="item"
@@ -109,12 +109,12 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
         @click="density = item"
       />
     </div>
-    <WdConfigProvider :density="density" :global-density="false">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--wd-color-border);border-radius:var(--wd-radius-md)">
-        <WdButton label="Save" />
-        <WdInput placeholder="Nickname" style="width:12rem" />
+    <RdConfigProvider :density="density" :global-density="false">
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+        <RdButton label="Save" />
+        <RdInput placeholder="Nickname" style="width:12rem" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -123,29 +123,29 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 
 ```vue preview
 <script setup lang="ts">
-import { WdConfigProvider, WdInput, WdTextarea } from '@wex-design/ui'
+import { RdConfigProvider, RdInput, RdTextarea } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
-    <WdConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wd-color-text-muted)">
+    <RdConfigProvider input-variant="outlined">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--rd-color-text-muted)">
         outlined
       </p>
       <div style="display:grid;gap:0.5rem">
-        <WdInput placeholder="Outlined input" />
-        <WdTextarea placeholder="Outlined textarea" :rows="2" />
+        <RdInput placeholder="Outlined input" />
+        <RdTextarea placeholder="Outlined textarea" :rows="2" />
       </div>
-    </WdConfigProvider>
-    <WdConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wd-color-text-muted)">
+    </RdConfigProvider>
+    <RdConfigProvider input-variant="filled">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--rd-color-text-muted)">
         filled
       </p>
       <div style="display:grid;gap:0.5rem">
-        <WdInput placeholder="Filled input" />
-        <WdTextarea placeholder="Filled textarea" :rows="2" />
+        <RdInput placeholder="Filled input" />
+        <RdTextarea placeholder="Filled textarea" :rows="2" />
       </div>
-    </WdConfigProvider>
+    </RdConfigProvider>
   </div>
 </template>
 ```
@@ -154,7 +154,7 @@ import { WdConfigProvider, WdInput, WdTextarea } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdConfirmDialog, WdSelect } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -166,19 +166,19 @@ const options = [
 </script>
 
 <template>
-  <WdConfigProvider
+  <RdConfigProvider
     :locale="{ selectPlaceholder: 'Pick a city', accept: 'OK', reject: 'Not now' }"
   >
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WdSelect v-model="city" :options="options" style="width:12rem" />
-      <WdButton label="Open confirm" @click="confirmOpen = true" />
-      <WdConfirmDialog
+      <RdSelect v-model="city" :options="options" style="width:12rem" />
+      <RdButton label="Open confirm" @click="confirmOpen = true" />
+      <RdConfirmDialog
         v-model="confirmOpen"
         header="Confirm"
         message="Button labels come from locale.accept / reject."
       />
     </div>
-  </WdConfigProvider>
+  </RdConfigProvider>
 </template>
 ```
 
@@ -186,32 +186,32 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfigProvider, WdDialog } from '@wex-design/ui'
+import { RdButton, RdConfigProvider, RdDialog } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <WdConfigProvider append-to="body" :z-index="2200">
-    <WdButton label="Open dialog" @click="visible = true" />
-    <WdDialog v-model="visible" header="Mounted to body" width="24rem">
+  <RdConfigProvider append-to="body" :z-index="2200">
+    <RdButton label="Open dialog" @click="visible = true" />
+    <RdDialog v-model="visible" header="Mounted to body" width="24rem">
       <p style="margin:0">
         Overlays Teleport to body by default. The z-index base comes from ConfigProvider.
       </p>
-    </WdDialog>
-  </WdConfigProvider>
+    </RdDialog>
+  </RdConfigProvider>
 </template>
 ```
 
-## App-level: `createWexDesign`
+## App-level: `createRoostDesign`
 
 ```ts
-import { createWexDesign } from '@wex-design/ui'
+import { createRoostDesign } from '@roost-design/ui'
 import { createApp } from 'vue'
 
 createApp(App).use(
-    createWexDesign({
+    createRoostDesign({
       appendTo: 'body',
       size: 'small',
       zIndex: 2000,
@@ -223,9 +223,9 @@ createApp(App).use(
 ## Reading config
 
 ```ts
-import { useWdConfig } from '@wex-design/ui'
+import { useRdConfig } from '@roost-design/ui'
 
-const config = useWdConfig()
+const config = useRdConfig()
 // config.value.appendTo / size / locale …
 ```
 

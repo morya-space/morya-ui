@@ -11,22 +11,22 @@ description: 可访问的表单标签。
 ## 引入
 
 ```ts
-import { WdLabel } from '@wex-design/ui'
+import { RdLabel } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdInput, WdLabel } from '@wex-design/ui'
+import { RdInput, RdLabel } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WdLabel html-for="demo-email">
+    <RdLabel html-for="demo-email">
       邮箱
-    </WdLabel>
-    <WdInput id="demo-email" placeholder="you@example.com" />
+    </RdLabel>
+    <RdInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>
 ```

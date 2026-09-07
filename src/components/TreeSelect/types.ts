@@ -1,5 +1,5 @@
-import type { WdAppendTo } from '../../shared/overlay'
-import type { WdSizeInput } from '../../shared/types'
+import type { RdAppendTo } from '../../shared/overlay'
+import type { RdSizeInput } from '../../shared/types'
 import type { TreeCheckStrategy } from '../Tree/types'
 
 export type { TreeCheckStrategy }
@@ -24,7 +24,7 @@ export interface TreeSelectProps {
   errorMessage?: string
   placeholder?: string
   disabled?: boolean
-  size?: WdSizeInput
+  size?: RdSizeInput
   /** Keep for compatibility; `multiple` is the switch. */
   selectionMode?: 'single' | 'multiple'
   multiple?: boolean
@@ -41,7 +41,7 @@ export interface TreeSelectProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WdAppendTo
+  appendTo?: RdAppendTo
 }
 
 export interface TreeSelectEmits {

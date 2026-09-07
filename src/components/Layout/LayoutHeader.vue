@@ -3,7 +3,7 @@ import type { LayoutHeaderProps } from "./types";
 import { computed } from "vue";
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 
-defineOptions({ name: "WdLayoutHeader" });
+defineOptions({ name: "RdLayoutHeader" });
 
 const props = withDefaults(defineProps<LayoutHeaderProps>(), {
     bordered: true,
@@ -13,17 +13,17 @@ const props = withDefaults(defineProps<LayoutHeaderProps>(), {
 
 const rootStyle = useLayoutRegionStyle(() => ({
     height: props.height,
-    heightFallback: "var(--wd-layout-header-height, 56px)",
+    heightFallback: "var(--rd-layout-header-height, 56px)",
     padding: props.padding,
     radius: props.radius,
 }));
 
 const rootClass = computed(() => [
-    "wd-layout-header",
-    `wd-layout-header--${props.position}-positioned`,
+    "rd-layout-header",
+    `rd-layout-header--${props.position}-positioned`,
     {
-        "wd-layout-header--bordered": props.bordered,
-        "wd-layout-header--inverted": props.inverted,
+        "rd-layout-header--bordered": props.bordered,
+        "rd-layout-header--inverted": props.inverted,
     },
 ]);
 </script>

@@ -6,39 +6,39 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 
 # Icon
 
-`WdIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `@wex-design/ui`。
+`RdIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `@roost-design/ui`。
 
 ## 引入
 
 ```ts
-import { iconNames, WdIcon } from '@wex-design/ui'
+import { iconNames, RdIcon } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdIcon } from '@wex-design/ui'
+import { RdIcon } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WdIcon name="search" />
-    <WdIcon name="check-circle" size="small" />
-    <WdIcon name="warning" size="large" />
-    <WdIcon name="loader" size="sm" label="Loading" />
+    <RdIcon name="search" />
+    <RdIcon name="check-circle" size="small" />
+    <RdIcon name="warning" size="large" />
+    <RdIcon name="loader" size="sm" label="Loading" />
   </div>
 </template>
 ```
 
 ## 全部系统图标
 
-点击图标即可复制名称（如 `search`），用法：`<WdIcon name="search" />`。
+点击图标即可复制名称（如 `search`），用法：`<RdIcon name="search" />`。
 
 ```vue preview
 <script setup lang="ts">
-import type {ToastMessage} from '@wex-design/ui';
-import { iconNames,  WdIcon, WdInput, WdToast } from '@wex-design/ui'
+import type {ToastMessage} from '@roost-design/ui';
+import { iconNames,  RdIcon, RdInput, RdToast } from '@roost-design/ui'
 import { computed, ref } from 'vue'
 
 const query = ref('')
@@ -57,10 +57,10 @@ function itemStyle(name: string) {
   const active = copied.value === name
   return [
     'align-items:center',
-    'background:var(--wd-color-surface)',
-    `border:1px solid ${active ? 'var(--wd-color-primary)' : 'var(--wd-color-border)'}`,
-    'border-radius:var(--wd-radius-control, 3px)',
-    `color:${active ? 'var(--wd-color-primary)' : 'var(--wd-color-text)'}`,
+    'background:var(--rd-color-surface)',
+    `border:1px solid ${active ? 'var(--rd-color-primary)' : 'var(--rd-color-border)'}`,
+    'border-radius:var(--rd-radius-control, 3px)',
+    `color:${active ? 'var(--rd-color-primary)' : 'var(--rd-color-text)'}`,
     'cursor:pointer',
     'display:flex',
     'flex-direction:column',
@@ -113,7 +113,7 @@ function onToastClose(message: ToastMessage) {
 
 <template>
   <div style="width:100%">
-    <WdInput
+    <RdInput
       v-model="query"
       clearable
       fluid
@@ -121,13 +121,13 @@ function onToastClose(message: ToastMessage) {
       style="max-width: 20rem; margin-bottom: 1rem"
     >
       <template #prefix>
-        <WdIcon name="search" size="sm" />
+        <RdIcon name="search" size="sm" />
       </template>
-    </WdInput>
+    </RdInput>
 
     <p
       v-if="!filtered.length"
-      style="color: var(--wd-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
+      style="color: var(--rd-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
     >
       没有匹配的图标
     </p>
@@ -144,7 +144,7 @@ function onToastClose(message: ToastMessage) {
         :title="`点击复制 ${name}`"
         @click="copyName(name)"
       >
-        <WdIcon :name="name" size="large" />
+        <RdIcon :name="name" size="large" />
         <span
           style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.72rem;line-height:1.3;max-width:100%;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap"
         >
@@ -153,7 +153,7 @@ function onToastClose(message: ToastMessage) {
       </button>
     </div>
 
-    <WdToast :messages="messages" position="top-right" @close="onToastClose" />
+    <RdToast :messages="messages" position="top-right" @close="onToastClose" />
   </div>
 </template>
 ```
@@ -164,26 +164,26 @@ function onToastClose(message: ToastMessage) {
 
 ```vue
 <script setup lang="ts">
-import { WdButton, WdIcon, WdIconField, WdInput } from '@wex-design/ui'
+import { RdButton, RdIcon, RdIconField, RdInput } from '@roost-design/ui'
 import { User } from 'lucide-vue-next'
 </script>
 
 <template>
-  <WdIcon label="用户" size="md">
+  <RdIcon label="用户" size="md">
     <User :size="16" :stroke-width="1.8" />
-  </WdIcon>
+  </RdIcon>
 
-  <WdIconField>
+  <RdIconField>
     <template #icon>
-      <WdIcon size="sm">
+      <RdIcon size="sm">
         <User :size="14" :stroke-width="1.8" />
-      </WdIcon>
+      </RdIcon>
     </template>
-    <WdInput placeholder="搜索用户" />
-  </WdIconField>
+    <RdInput placeholder="搜索用户" />
+  </RdIconField>
 
-  <!-- Button 也可直接传组件，不必包 WdIcon -->
-  <WdButton :icon="User" label="资料" />
+  <!-- Button 也可直接传组件，不必包 RdIcon -->
+  <RdButton :icon="User" label="资料" />
 </template>
 ```
 

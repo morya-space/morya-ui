@@ -12,7 +12,7 @@
     },
     "wex-design-ui": {
       "command": "node",
-      "args": ["packages/ui-mcp/bin/wex-design-ui-mcp.js"]
+      "args": ["packages/ui-mcp/bin/roost-design-ui-mcp.js"]
     }
   },
   "format_on_save": "on"

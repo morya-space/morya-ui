@@ -1,8 +1,8 @@
-# @wex-design/ui
+# @roost-design/ui
 
 ## 0.1.1
 
-Initial public release of `@wex-design/ui`, using the current component library as the baseline.
+Initial public release of `@roost-design/ui`, using the current component library as the baseline.
 
 ### Components (88)
 
@@ -17,17 +17,17 @@ Initial public release of `@wex-design/ui`, using the current component library 
 
 - Light / dark themes (`useTheme`, `applyTheme`, `getPreferredTheme`)
 - Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-wd-motion`)
-- Token system on `--wd-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
-- Subtree overrides via `WdConfigProvider` (theme, density, motion, component defaults)
+- Token system on `--rd-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
+- Subtree overrides via `RdConfigProvider` (theme, density, motion, component defaults)
 
 ### Global config & utilities
 
-- Plugin entry: full registration with `WexDesign`, defaults with `createWexDesign`
-- On-demand builds: `WexDesignResolver` for `unplugin-vue-components`
-- ESM subpath exports (`@wex-design/ui/button`, etc.) with tree-shaking
+- Plugin entry: full registration with `RoostDesign`, defaults with `createRoostDesign`
+- On-demand builds: `RoostDesignResolver` for `unplugin-vue-components`
+- ESM subpath exports (`@roost-design/ui/button`, etc.) with tree-shaking
 - Imperative APIs: `useConfirm`, `useToast` / `toast`, `useMessage` / `message`, `useContextMenu`
-- Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useWdId`
-- i18n: `zhCN`, `enUS`, `mergeLocale`, `useWdLocale`, `formatLocale`
+- Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useRdId`
+- i18n: `zhCN`, `enUS`, `mergeLocale`, `useRdLocale`, `formatLocale`
 
 ### Build output & types
 
@@ -40,12 +40,12 @@ Initial public release of `@wex-design/ui`, using the current component library 
 - Interactive docs with Markdown and live `vue preview` examples
 - Component catalog and guides (quick start, theme, config, SSR, accessibility)
 - Light / dark theme, bilingual UI, global search (CommandMenu)
-- Deployed to GitHub Pages: https://wex-design.github.io/wex-design-ui/
+- Deployed to GitHub Pages: https://roost-design.github.io/roost-design-ui/
 
 ### Ecosystem packages
 
-- **`@wex-design/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
-- **`@wex-design/ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
+- **`@roost-design/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
+- **`@roost-design/ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
 
 ### SSR & framework integration
 

@@ -1,3 +1,3 @@
 import './style'
-export { default as WdIconField } from './IconField.vue'
+export { default as RdIconField } from './IconField.vue'
 export type { IconFieldProps } from './types'

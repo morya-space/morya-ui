@@ -11,14 +11,14 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { WdTieredMenu, type TieredMenuItem } from '@wex-design/ui'
+import { RdTieredMenu, type TieredMenuItem } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdTieredMenu } from '@wex-design/ui'
+import { RdTieredMenu } from '@roost-design/ui'
 
 const model = [
   {
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <WdTieredMenu :model="model" />
+  <RdTieredMenu :model="model" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdTieredMenu } from '@wex-design/ui'
+import { RdButton, RdTieredMenu } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -52,8 +52,8 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 </script>
 
 <template>
-  <WdButton label="操作" @click="open = true" />
-  <WdTieredMenu v-model="open" popup :model="model" />
+  <RdButton label="操作" @click="open = true" />
+  <RdTieredMenu v-model="open" popup :model="model" />
 </template>
 ```
 

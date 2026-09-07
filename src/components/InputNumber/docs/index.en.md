@@ -11,21 +11,21 @@ Number input. Can show increment and decrement buttons, and constrain values wit
 ## Import
 
 ```ts
-import { WdInputNumber } from '@wex-design/ui'
+import { RdInputNumber } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputNumber } from '@wex-design/ui'
+import { RdInputNumber } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(1)
 </script>
 
 <template>
-  <WdInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
+  <RdInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputNumber } from '@wex-design/ui'
+import { RdInputNumber } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WdInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
+  <RdInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
 </template>
 ```
 
@@ -50,14 +50,14 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { WdInputNumber } from '@wex-design/ui'
+import { RdInputNumber } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const value = ref(1.25)
 </script>
 
 <template>
-  <WdInputNumber v-model="value" show-buttons button-placement="right" :precision="2" :step="0.25" clearable />
+  <RdInputNumber v-model="value" show-buttons button-placement="right" :precision="2" :step="0.25" clearable />
 </template>
 ```
 

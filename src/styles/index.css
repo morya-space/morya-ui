@@ -1,4 +1,5 @@
 @import "../theme/styles.css";
+@import "../theme/wd-compat.css";
 @import "./base.css";
 @import "../shared/styles/form-tags.css";
 @import "../shared/styles/control-suffix.css";

@@ -11,14 +11,14 @@ Lightweight confirmation overlay. Supports `target` or coordinate positioning.
 ## Import
 
 ```ts
-import { WdConfirmPopup } from '@wex-design/ui'
+import { RdConfirmPopup } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfirmPopup } from '@wex-design/ui'
+import { RdButton, RdConfirmPopup } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,8 +31,8 @@ function ask(event: MouseEvent) {
 </script>
 
 <template>
-  <WdButton label="Delete" severity="danger" @click="ask" />
-  <WdConfirmPopup v-model="open" :target="target" message="Delete this item?" icon="info" placement="top" />
+  <RdButton label="Delete" severity="danger" @click="ask" />
+  <RdConfirmPopup v-model="open" :target="target" message="Delete this item?" icon="info" placement="top" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ Returning `false` from `beforeAccept` keeps the popup open and skips the `accept
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdConfirmPopup } from '@wex-design/ui'
+import { RdButton, RdConfirmPopup } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -59,8 +59,8 @@ async function beforeAccept() {
 </script>
 
 <template>
-  <WdButton label="With guard" @click="ask" />
-  <WdConfirmPopup v-model="open" :target="target" message="Continue?" :before-accept="beforeAccept" />
+  <RdButton label="With guard" @click="ask" />
+  <RdConfirmPopup v-model="open" :target="target" message="Continue?" :before-accept="beforeAccept" />
 </template>
 ```
 

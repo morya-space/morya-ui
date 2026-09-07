@@ -1,22 +1,24 @@
 // Evaluate the registry before the individual component re-exports.
 import "./component-registry";
 
-export { wdComponentNames, wdComponents } from "./component-registry";
-export { default as WdAccordion } from "./components/Accordion/Accordion.vue";
+export { rdComponentNames, rdComponents } from "./component-registry";
+/** @deprecated Use `rdComponentNames` */
+export { rdComponentNames as wdComponentNames } from "./component-registry";
+export { default as RdAccordion } from "./components/Accordion/Accordion.vue";
 export type {
   AccordionEmits,
   AccordionProps,
   AccordionTab,
 } from "./components/Accordion/types";
-export { default as WdAutoComplete } from "./components/AutoComplete/AutoComplete.vue";
+export { default as RdAutoComplete } from "./components/AutoComplete/AutoComplete.vue";
 export type {
   AutoCompleteEmits,
   AutoCompleteOption,
   AutoCompleteProps,
   AutoCompleteSuggestion,
 } from "./components/AutoComplete/types";
-export { default as WdAvatar } from "./components/Avatar/Avatar.vue";
-export { default as WdAvatarGroup } from "./components/Avatar/AvatarGroup.vue";
+export { default as RdAvatar } from "./components/Avatar/Avatar.vue";
+export { default as RdAvatarGroup } from "./components/Avatar/AvatarGroup.vue";
 export type {
   AvatarEmits,
   AvatarGroupProps,
@@ -24,23 +26,23 @@ export type {
   AvatarShape,
   AvatarSize,
 } from "./components/Avatar/types";
-export { default as WdBadge } from "./components/Badge/Badge.vue";
+export { default as RdBadge } from "./components/Badge/Badge.vue";
 export type {
   BadgeOffset,
   BadgeProps,
   BadgeSeverity,
   BadgeSize,
 } from "./components/Badge/types";
-export { default as WdBlockUI } from "./components/BlockUI/BlockUI.vue";
+export { default as RdBlockUI } from "./components/BlockUI/BlockUI.vue";
 export type { BlockUIProps } from "./components/BlockUI/types";
-export { default as WdBreadcrumb } from "./components/Breadcrumb/Breadcrumb.vue";
+export { default as RdBreadcrumb } from "./components/Breadcrumb/Breadcrumb.vue";
 export type {
   BreadcrumbHome,
   BreadcrumbItem,
   BreadcrumbProps,
 } from "./components/Breadcrumb/types";
-export { default as WdButton } from "./components/Button/Button.vue";
-export { default as WdButtonGroup } from "./components/Button/ButtonGroup.vue";
+export { default as RdButton } from "./components/Button/Button.vue";
+export { default as RdButtonGroup } from "./components/Button/ButtonGroup.vue";
 export type {
   ButtonBadgeSeverity,
   ButtonEmits,
@@ -52,19 +54,19 @@ export type {
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/types";
-export { default as WdCard } from "./components/Card/Card.vue";
+export { default as RdCard } from "./components/Card/Card.vue";
 export type { CardProps, CardSize } from "./components/Card/types";
-export { default as WdCarousel } from "./components/Carousel/Carousel.vue";
+export { default as RdCarousel } from "./components/Carousel/Carousel.vue";
 export type { CarouselEmits, CarouselProps } from "./components/Carousel/types";
-export { default as WdCascadeSelect } from "./components/CascadeSelect/CascadeSelect.vue";
+export { default as RdCascadeSelect } from "./components/CascadeSelect/CascadeSelect.vue";
 export type {
   CascadeSelectEmits,
   CascadeSelectOption,
   CascadeSelectProps,
   CascadeSelectValue,
 } from "./components/CascadeSelect/types";
-export { default as WdCheckbox } from "./components/Checkbox/Checkbox.vue";
-export { default as WdCheckboxGroup } from "./components/Checkbox/CheckboxGroup.vue";
+export { default as RdCheckbox } from "./components/Checkbox/Checkbox.vue";
+export { default as RdCheckboxGroup } from "./components/Checkbox/CheckboxGroup.vue";
 export type {
   CheckboxEmits,
   CheckboxGroupEmits,
@@ -73,40 +75,40 @@ export type {
   CheckboxSize,
   CheckboxValue,
 } from "./components/Checkbox/types";
-export { default as WdChip } from "./components/Chip/Chip.vue";
+export { default as RdChip } from "./components/Chip/Chip.vue";
 export type {
   ChipEmits,
   ChipProps,
   ChipSeverity,
   ChipSize,
 } from "./components/Chip/types";
-export { default as WdCommandMenu } from "./components/CommandMenu/CommandMenu.vue";
+export { default as RdCommandMenu } from "./components/CommandMenu/CommandMenu.vue";
 export type {
   CommandMenuEmits,
   CommandMenuItem,
   CommandMenuProps,
 } from "./components/CommandMenu/types";
-export { default as WdConfigProvider } from "./components/ConfigProvider/ConfigProvider.vue";
+export { default as RdConfigProvider } from "./components/ConfigProvider/ConfigProvider.vue";
 export type {
-  WdComponentDefaults,
-  WdDensity,
-  WdGlobalConfig,
-  WdLocaleConfig,
+  RdComponentDefaults,
+  RdDensity,
+  RdGlobalConfig,
+  RdLocaleConfig,
 } from "./components/ConfigProvider/types";
-export { default as WdConfirmDialog } from "./components/ConfirmDialog/ConfirmDialog.vue";
+export { default as RdConfirmDialog } from "./components/ConfirmDialog/ConfirmDialog.vue";
 export type {
   ConfirmDialogEmits,
   ConfirmDialogProps,
 } from "./components/ConfirmDialog/types";
 export { useConfirm } from "./components/ConfirmDialog/useConfirm";
 export type { ConfirmRequireOptions } from "./components/ConfirmDialog/useConfirm";
-export { default as WdConfirmPopup } from "./components/ConfirmPopup/ConfirmPopup.vue";
+export { default as RdConfirmPopup } from "./components/ConfirmPopup/ConfirmPopup.vue";
 export type {
   ConfirmPopupEmits,
   ConfirmPopupPlacement,
   ConfirmPopupProps,
 } from "./components/ConfirmPopup/types";
-export { default as WdContextMenu } from "./components/ContextMenu/ContextMenu.vue";
+export { default as RdContextMenu } from "./components/ContextMenu/ContextMenu.vue";
 export type {
   ContextMenuEmits,
   ContextMenuInstance,
@@ -115,12 +117,12 @@ export type {
   ContextMenuProps,
 } from "./components/ContextMenu/types";
 export { useContextMenu } from "./components/ContextMenu/useContextMenu";
-export { default as WdDataView } from "./components/DataView/DataView.vue";
+export { default as RdDataView } from "./components/DataView/DataView.vue";
 export type {
   DataViewLayout,
   DataViewProps,
 } from "./components/DataView/types";
-export { default as WdDatePicker } from "./components/DatePicker/DatePicker.vue";
+export { default as RdDatePicker } from "./components/DatePicker/DatePicker.vue";
 export type {
   DatePickerDateValue,
   DatePickerEmits,
@@ -130,7 +132,7 @@ export type {
   DatePickerType,
   DatePickerValue,
 } from "./components/DatePicker/types";
-export { default as WdDialog } from "./components/Dialog/Dialog.vue";
+export { default as RdDialog } from "./components/Dialog/Dialog.vue";
 export type {
   DialogClickGuard,
   DialogCloseGuard,
@@ -139,22 +141,22 @@ export type {
   DialogProps,
   DialogType,
 } from "./components/Dialog/types";
-export { default as WdDivider } from "./components/Divider/Divider.vue";
+export { default as RdDivider } from "./components/Divider/Divider.vue";
 export type {
   DividerAlign,
   DividerLayout,
   DividerProps,
   DividerType,
 } from "./components/Divider/types";
-export { default as WdDock } from "./components/Dock/Dock.vue";
+export { default as RdDock } from "./components/Dock/Dock.vue";
 export type { DockItem, DockProps } from "./components/Dock/types";
-export { default as WdDrawer } from "./components/Drawer/Drawer.vue";
+export { default as RdDrawer } from "./components/Drawer/Drawer.vue";
 export type {
   DrawerEmits,
   DrawerPosition,
   DrawerProps,
 } from "./components/Drawer/types";
-export { default as WdDropdown } from "./components/Dropdown/Dropdown.vue";
+export { default as RdDropdown } from "./components/Dropdown/Dropdown.vue";
 export type {
   DropdownEmits,
   DropdownItem,
@@ -162,9 +164,9 @@ export type {
   DropdownProps,
   DropdownTrigger,
 } from "./components/Dropdown/types";
-export { default as WdFieldset } from "./components/Fieldset/Fieldset.vue";
+export { default as RdFieldset } from "./components/Fieldset/Fieldset.vue";
 export type { FieldsetEmits, FieldsetProps } from "./components/Fieldset/types";
-export { default as WdFileUpload } from "./components/FileUpload/FileUpload.vue";
+export { default as RdFileUpload } from "./components/FileUpload/FileUpload.vue";
 export type {
   FileUploadEmits,
   FileUploadExpose,
@@ -177,25 +179,25 @@ export type {
   FileUploadSlots,
   FileUploadStatus,
 } from "./components/FileUpload/types";
-export { default as WdFlex } from "./components/Flex/Flex.vue";
+export { default as RdFlex } from "./components/Flex/Flex.vue";
 export type {
   FlexAlign,
   FlexJustify,
   FlexProps,
   FlexSize,
 } from "./components/Flex/types";
-export { default as WdFloatLabel } from "./components/FloatLabel/FloatLabel.vue";
+export { default as RdFloatLabel } from "./components/FloatLabel/FloatLabel.vue";
 export type { FloatLabelProps } from "./components/FloatLabel/types";
-export { default as WdFluid } from "./components/Fluid/Fluid.vue";
+export { default as RdFluid } from "./components/Fluid/Fluid.vue";
 export type { FluidProps } from "./components/Fluid/types";
-export { WD_FORM_ERRORS_KEY, WD_FORM_KEY } from "./components/Form/context";
+export { RD_FORM_ERRORS_KEY, RD_FORM_KEY } from "./components/Form/context";
 export type {
   FormFieldValidator,
-  WdFormContext,
-  WdFormFieldRegistration,
+  RdFormContext,
+  RdFormFieldRegistration,
 } from "./components/Form/context";
-export { default as WdForm } from "./components/Form/Form.vue";
-export { default as WdFormItem } from "./components/Form/FormItem.vue";
+export { default as RdForm } from "./components/Form/Form.vue";
+export { default as RdFormItem } from "./components/Form/FormItem.vue";
 export type {
   FormInstance,
   FormItemProps,
@@ -208,18 +210,18 @@ export type {
   FormValidateResult,
   FormValidateTrigger,
 } from "./components/Form/types";
-export { default as WdGallery } from "./components/Gallery/Gallery.vue";
+export { default as RdGallery } from "./components/Gallery/Gallery.vue";
 export type { GalleryEmits, GalleryProps } from "./components/Gallery/types";
-export { default as WdGrid } from "./components/Grid/Grid.vue";
-export { default as WdGridItem } from "./components/Grid/GridItem.vue";
-export { default as WdGi } from "./components/Grid/GridItem.vue";
+export { default as RdGrid } from "./components/Grid/Grid.vue";
+export { default as RdGridItem } from "./components/Grid/GridItem.vue";
+export { default as RdGi } from "./components/Grid/GridItem.vue";
 export type {
   GridItemProps,
   GridProps,
   GridResponsive,
 } from "./components/Grid/types";
-export { WD_GRID_KEY } from "./components/Grid/types";
-export { default as WdIcon } from "./components/Icon/Icon.vue";
+export { RD_GRID_KEY } from "./components/Grid/types";
+export { default as RdIcon } from "./components/Icon/Icon.vue";
 export {
   getIconDefinition,
   iconNames,
@@ -232,54 +234,54 @@ export type {
   IconPrimitive,
 } from "./components/Icon/icons";
 export type { IconProps, IconSize } from "./components/Icon/types";
-export { default as WdIconField } from "./components/IconField/IconField.vue";
+export { default as RdIconField } from "./components/IconField/IconField.vue";
 export type { IconFieldProps } from "./components/IconField/types";
-export { default as WdInplace } from "./components/Inplace/Inplace.vue";
+export { default as RdInplace } from "./components/Inplace/Inplace.vue";
 export type { InplaceEmits, InplaceProps } from "./components/Inplace/types";
-export { default as WdInput } from "./components/Input/Input.vue";
+export { default as RdInput } from "./components/Input/Input.vue";
 export type { InputEmits, InputProps } from "./components/Input/types";
-export { default as WdInputColor } from "./components/InputColor/InputColor.vue";
+export { default as RdInputColor } from "./components/InputColor/InputColor.vue";
 export type {
   InputColorEmits,
   InputColorProps,
 } from "./components/InputColor/types";
-export { default as WdInputGroup } from "./components/InputGroup/InputGroup.vue";
-export { default as WdInputGroupAddon } from "./components/InputGroup/InputGroupAddon.vue";
+export { default as RdInputGroup } from "./components/InputGroup/InputGroup.vue";
+export { default as RdInputGroupAddon } from "./components/InputGroup/InputGroupAddon.vue";
 export type {
   InputGroupAddonProps,
   InputGroupProps,
 } from "./components/InputGroup/types";
-export { default as WdInputNumber } from "./components/InputNumber/InputNumber.vue";
+export { default as RdInputNumber } from "./components/InputNumber/InputNumber.vue";
 export type {
   InputNumberButtonPlacement,
   InputNumberEmits,
   InputNumberProps,
 } from "./components/InputNumber/types";
-export { default as WdInputOtp } from "./components/InputOtp/InputOtp.vue";
+export { default as RdInputOtp } from "./components/InputOtp/InputOtp.vue";
 export type { InputOtpEmits, InputOtpProps } from "./components/InputOtp/types";
-export { default as WdInputPassword } from "./components/InputPassword/InputPassword.vue";
+export { default as RdInputPassword } from "./components/InputPassword/InputPassword.vue";
 export type {
   InputPasswordEmits,
   InputPasswordProps,
   InputPasswordSlots,
   PasswordStrength,
-  WdShowPasswordOn,
+  RdShowPasswordOn,
 } from "./components/InputPassword/types";
-export { default as WdInputTags } from "./components/InputTags/InputTags.vue";
+export { default as RdInputTags } from "./components/InputTags/InputTags.vue";
 export type {
   InputTagsEmits,
   InputTagsProps,
 } from "./components/InputTags/types";
-export { default as WdKnob } from "./components/Knob/Knob.vue";
+export { default as RdKnob } from "./components/Knob/Knob.vue";
 export type { KnobEmits, KnobProps } from "./components/Knob/types";
-export { default as WdLabel } from "./components/Label/Label.vue";
+export { default as RdLabel } from "./components/Label/Label.vue";
 export type { LabelProps } from "./components/Label/types";
-export { WD_LAYOUT_KEY } from "./components/Layout/context";
-export { default as WdLayout } from "./components/Layout/Layout.vue";
-export { default as WdLayoutContent } from "./components/Layout/LayoutContent.vue";
-export { default as WdLayoutFooter } from "./components/Layout/LayoutFooter.vue";
-export { default as WdLayoutHeader } from "./components/Layout/LayoutHeader.vue";
-export { default as WdLayoutSider } from "./components/Layout/LayoutSider.vue";
+export { RD_LAYOUT_KEY } from "./components/Layout/context";
+export { default as RdLayout } from "./components/Layout/Layout.vue";
+export { default as RdLayoutContent } from "./components/Layout/LayoutContent.vue";
+export { default as RdLayoutFooter } from "./components/Layout/LayoutFooter.vue";
+export { default as RdLayoutHeader } from "./components/Layout/LayoutHeader.vue";
+export { default as RdLayoutSider } from "./components/Layout/LayoutSider.vue";
 export type {
   LayoutCollapseMode,
   LayoutContentProps,
@@ -293,25 +295,25 @@ export type {
   LayoutSiderProps,
   LayoutTrigger,
 } from "./components/Layout/types";
-export { default as WdListbox } from "./components/Listbox/Listbox.vue";
+export { default as RdListbox } from "./components/Listbox/Listbox.vue";
 export type {
   ListboxEmits,
   ListboxOption,
   ListboxProps,
   ListboxValue,
 } from "./components/Listbox/types";
-export { default as WdMegaMenu } from "./components/MegaMenu/MegaMenu.vue";
+export { default as RdMegaMenu } from "./components/MegaMenu/MegaMenu.vue";
 export type { MegaMenuItem, MegaMenuProps } from "./components/MegaMenu/types";
-export { default as WdMenu } from "./components/Menu/Menu.vue";
+export { default as RdMenu } from "./components/Menu/Menu.vue";
 export type { MenuEmits, MenuItem, MenuProps } from "./components/Menu/types";
-export { default as WdMenubar } from "./components/Menubar/Menubar.vue";
+export { default as RdMenubar } from "./components/Menubar/Menubar.vue";
 export type {
   MenubarEmits,
   MenubarItem,
   MenubarProps,
 } from "./components/Menubar/types";
 export { message, useMessage } from "./components/Message/message";
-export { default as WdMessage } from "./components/Message/Message.vue";
+export { default as RdMessage } from "./components/Message/Message.vue";
 export type {
   MessageHandle,
   MessageHostConfig,
@@ -322,48 +324,48 @@ export type {
   MessageProps,
   MessageSeverity,
 } from "./components/Message/types";
-export { default as WdMeterGroup } from "./components/MeterGroup/MeterGroup.vue";
+export { default as RdMeterGroup } from "./components/MeterGroup/MeterGroup.vue";
 export type {
   MeterGroupItem,
   MeterGroupProps,
 } from "./components/MeterGroup/types";
-export { default as WdOrderList } from "./components/OrderList/OrderList.vue";
+export { default as RdOrderList } from "./components/OrderList/OrderList.vue";
 export type {
   OrderListEmits,
   OrderListProps,
 } from "./components/OrderList/types";
-export { default as WdPagination } from "./components/Pagination/Pagination.vue";
+export { default as RdPagination } from "./components/Pagination/Pagination.vue";
 export type {
   PaginationEmits,
   PaginationInstance,
   PaginationProps,
 } from "./components/Pagination/types";
-export { default as WdPanel } from "./components/Panel/Panel.vue";
+export { default as RdPanel } from "./components/Panel/Panel.vue";
 export type {
   PanelEmits,
   PanelProps,
   PanelSize,
 } from "./components/Panel/types";
-export { default as WdPickList } from "./components/PickList/PickList.vue";
+export { default as RdPickList } from "./components/PickList/PickList.vue";
 export type { PickListEmits, PickListProps } from "./components/PickList/types";
-export { default as WdPopover } from "./components/Popover/Popover.vue";
+export { default as RdPopover } from "./components/Popover/Popover.vue";
 export type {
   PopoverEmits,
   PopoverPlacement,
   PopoverProps,
   PopoverTrigger,
 } from "./components/Popover/types";
-export { default as WdProgressBar } from "./components/ProgressBar/ProgressBar.vue";
+export { default as RdProgressBar } from "./components/ProgressBar/ProgressBar.vue";
 export type {
   ProgressBarMode,
   ProgressBarProps,
   ProgressBarStatus,
   ProgressBarType,
 } from "./components/ProgressBar/types";
-export { default as WdProgressSpinner } from "./components/ProgressSpinner/ProgressSpinner.vue";
+export { default as RdProgressSpinner } from "./components/ProgressSpinner/ProgressSpinner.vue";
 export type { ProgressSpinnerProps } from "./components/ProgressSpinner/types";
-export { default as WdRadio } from "./components/Radio/Radio.vue";
-export { default as WdRadioGroup } from "./components/Radio/RadioGroup.vue";
+export { default as RdRadio } from "./components/Radio/Radio.vue";
+export { default as RdRadioGroup } from "./components/Radio/RadioGroup.vue";
 export type {
   RadioEmits,
   RadioGroupEmits,
@@ -372,9 +374,9 @@ export type {
   RadioSize,
   RadioValue,
 } from "./components/Radio/types";
-export { default as WdRating } from "./components/Rating/Rating.vue";
+export { default as RdRating } from "./components/Rating/Rating.vue";
 export type { RatingEmits, RatingProps } from "./components/Rating/types";
-export { default as WdScrollbar } from "./components/Scrollbar/Scrollbar.vue";
+export { default as RdScrollbar } from "./components/Scrollbar/Scrollbar.vue";
 export type {
   ScrollbarAriaOrientation,
   ScrollbarDirection,
@@ -383,12 +385,12 @@ export type {
   ScrollbarProps,
   ScrollbarScrollPayload,
 } from "./components/Scrollbar/types";
-export { default as WdScrollTop } from "./components/ScrollTop/ScrollTop.vue";
+export { default as RdScrollTop } from "./components/ScrollTop/ScrollTop.vue";
 export type {
   ScrollTopProps,
   ScrollTopTarget,
 } from "./components/ScrollTop/types";
-export { default as WdSelect } from "./components/Select/Select.vue";
+export { default as RdSelect } from "./components/Select/Select.vue";
 export type {
   SelectEmits,
   SelectModelValue,
@@ -397,55 +399,55 @@ export type {
   SelectSize,
   SelectValue,
 } from "./components/Select/types";
-export { default as WdSelectButton } from "./components/SelectButton/SelectButton.vue";
+export { default as RdSelectButton } from "./components/SelectButton/SelectButton.vue";
 export type {
   SelectButtonEmits,
   SelectButtonOption,
   SelectButtonProps,
   SelectButtonValue,
 } from "./components/SelectButton/types";
-export { default as WdSidebar } from "./components/Sidebar/Sidebar.vue";
+export { default as RdSidebar } from "./components/Sidebar/Sidebar.vue";
 export type { SidebarItem, SidebarProps } from "./components/Sidebar/types";
-export { default as WdSkeleton } from "./components/Skeleton/Skeleton.vue";
+export { default as RdSkeleton } from "./components/Skeleton/Skeleton.vue";
 export type {
   SkeletonAnimation,
   SkeletonProps,
   SkeletonShape,
 } from "./components/Skeleton/types";
-export { default as WdSlider } from "./components/Slider/Slider.vue";
+export { default as RdSlider } from "./components/Slider/Slider.vue";
 export type {
   SliderEmits,
   SliderMarks,
   SliderProps,
 } from "./components/Slider/types";
-export { default as WdSpace } from "./components/Space/Space.vue";
+export { default as RdSpace } from "./components/Space/Space.vue";
 export type {
   SpaceAlign,
   SpaceJustify,
   SpaceProps,
   SpaceSize,
 } from "./components/Space/types";
-export { default as WdSpeedDial } from "./components/SpeedDial/SpeedDial.vue";
+export { default as RdSpeedDial } from "./components/SpeedDial/SpeedDial.vue";
 export type {
   SpeedDialDirection,
   SpeedDialEmits,
   SpeedDialItem,
   SpeedDialProps,
 } from "./components/SpeedDial/types";
-export { default as WdSplitButton } from "./components/SplitButton/SplitButton.vue";
+export { default as RdSplitButton } from "./components/SplitButton/SplitButton.vue";
 export type {
   SplitButtonEmits,
   SplitButtonItem,
   SplitButtonProps,
 } from "./components/SplitButton/types";
-export { default as WdSplitter } from "./components/Splitter/Splitter.vue";
+export { default as RdSplitter } from "./components/Splitter/Splitter.vue";
 export type {
   SplitterEmits,
   SplitterLayout,
   SplitterProps,
   SplitterSize,
 } from "./components/Splitter/types";
-export { default as WdStepper } from "./components/Stepper/Stepper.vue";
+export { default as RdStepper } from "./components/Stepper/Stepper.vue";
 export type {
   StepperEmits,
   StepperOrientation,
@@ -453,13 +455,13 @@ export type {
   StepperStatus,
   StepperStep,
 } from "./components/Stepper/types";
-export { default as WdSwitch } from "./components/Switch/Switch.vue";
+export { default as RdSwitch } from "./components/Switch/Switch.vue";
 export type {
   SwitchEmits,
   SwitchProps,
   SwitchSize,
 } from "./components/Switch/types";
-export { default as WdTable } from "./components/Table/Table.vue";
+export { default as RdTable } from "./components/Table/Table.vue";
 export type {
   TableBodyItemClassName,
   TableBodyRowClassName,
@@ -481,36 +483,36 @@ export type {
   TableSortType,
   TableTextDirection,
 } from "./components/Table/types";
-export { default as WdTabs } from "./components/Tabs/Tabs.vue";
+export { default as RdTabs } from "./components/Tabs/Tabs.vue";
 export type {
   TabItem,
   TabsEmits,
   TabsProps,
   TabsType,
 } from "./components/Tabs/types";
-export { default as WdTag } from "./components/Tag/Tag.vue";
+export { default as RdTag } from "./components/Tag/Tag.vue";
 export type {
   TagEmits,
   TagProps,
   TagSeverity,
   TagSize,
 } from "./components/Tag/types";
-export { default as WdTerminal } from "./components/Terminal/Terminal.vue";
+export { default as RdTerminal } from "./components/Terminal/Terminal.vue";
 export type { TerminalEmits, TerminalProps } from "./components/Terminal/types";
-export { default as WdTextarea } from "./components/Textarea/Textarea.vue";
+export { default as RdTextarea } from "./components/Textarea/Textarea.vue";
 export type {
   TextareaEmits,
   TextareaInstance,
   TextareaProps,
-  WdTextareaAutosize,
+  RdTextareaAutosize,
 } from "./components/Textarea/types";
-export { default as WdTieredMenu } from "./components/TieredMenu/TieredMenu.vue";
+export { default as RdTieredMenu } from "./components/TieredMenu/TieredMenu.vue";
 export type {
   TieredMenuEmits,
   TieredMenuItem,
   TieredMenuProps,
 } from "./components/TieredMenu/types";
-export { default as WdTimeline } from "./components/Timeline/Timeline.vue";
+export { default as RdTimeline } from "./components/Timeline/Timeline.vue";
 export type {
   TimelineAlign,
   TimelineEvent,
@@ -519,7 +521,7 @@ export type {
   TimelineSeverity,
 } from "./components/Timeline/types";
 export { toast, useToast } from "./components/Toast/toast";
-export { default as WdToast } from "./components/Toast/Toast.vue";
+export { default as RdToast } from "./components/Toast/Toast.vue";
 export type {
   ToastEmits,
   ToastHandle,
@@ -530,16 +532,16 @@ export type {
   ToastProps,
   ToastSeverity,
 } from "./components/Toast/types";
-export { default as WdToggleButton } from "./components/ToggleButton/ToggleButton.vue";
+export { default as RdToggleButton } from "./components/ToggleButton/ToggleButton.vue";
 export type {
   ToggleButtonEmits,
   ToggleButtonProps,
 } from "./components/ToggleButton/types";
-export { default as WdToolbar } from "./components/Toolbar/Toolbar.vue";
+export { default as RdToolbar } from "./components/Toolbar/Toolbar.vue";
 export type { ToolbarProps } from "./components/Toolbar/types";
-export { default as WdTooltip } from "./components/Tooltip/Tooltip.vue";
+export { default as RdTooltip } from "./components/Tooltip/Tooltip.vue";
 export type { TooltipProps } from "./components/Tooltip/types";
-export { default as WdTree } from "./components/Tree/Tree.vue";
+export { default as RdTree } from "./components/Tree/Tree.vue";
 
 export type {
   TreeCheckedKeys,
@@ -551,14 +553,14 @@ export type {
   TreeSelectionKeys,
   TreeSelectionMode,
 } from "./components/Tree/types";
-export { default as WdTreeSelect } from "./components/TreeSelect/TreeSelect.vue";
+export { default as RdTreeSelect } from "./components/TreeSelect/TreeSelect.vue";
 export type {
   TreeSelectEmits,
   TreeSelectNode,
   TreeSelectProps,
   TreeSelectValue,
 } from "./components/TreeSelect/types";
-export { default as WdTreeTable } from "./components/TreeTable/TreeTable.vue";
+export { default as RdTreeTable } from "./components/TreeTable/TreeTable.vue";
 export type {
   TreeTableColumn,
   TreeTableEmits,
@@ -570,40 +572,44 @@ export type {
   VirtualScrollerItemSlotProps,
   VirtualScrollerProps,
 } from "./components/VirtualScroller/types";
-export { default as WdVirtualScroller } from "./components/VirtualScroller/VirtualScroller.vue";
-export { enUS, formatLocale, mergeLocale, useWdLocale, zhCN } from "./locale";
-export type { WdLocaleMessages, WdLocaleName } from "./locale";
-export type { WdComponentDefaultMap } from "./shared/componentDefaults";
+export { default as RdVirtualScroller } from "./components/VirtualScroller/VirtualScroller.vue";
+export { enUS, formatLocale, mergeLocale, useRdLocale, useWdLocale, zhCN } from "./locale";
+export type { RdLocaleMessages, RdLocaleName } from "./locale";
+export type { RdComponentDefaultMap } from "./shared/componentDefaults";
 export {
+  createRoostDesign,
   createWexDesign,
   getComponentDefault,
   getComponentDefaults,
-  getDefaultWdConfig,
+  getDefaultRdConfig,
+  installRoostDesign,
   installWexDesign,
   mergeComponentDefaults,
-  mergeWdConfig,
-  provideWdConfig,
+  mergeRdConfig,
+  provideRdConfig,
   resolveConfiguredAppendTo,
   useComponentDefaults,
   useConfiguredGapSize,
   useConfiguredSize,
   useConfiguredVariant,
+  useRdConfig,
   useWdConfig,
+  RoostDesign,
   WexDesign,
-  WD_CONFIG_KEY,
+  RD_CONFIG_KEY,
 } from "./shared/config";
-export type { WdInstallerOptions } from "./shared/config";
-export { WexDesign as default } from "./shared/config";
-export type { WdRenderable } from "./shared/content";
-export type { WdAppendTo, WdOverlayMountProps } from "./shared/overlay";
+export type { RdInstallerOptions } from "./shared/config";
+export { RoostDesign as default } from "./shared/config";
+export type { RdRenderable } from "./shared/content";
+export type { RdAppendTo, RdOverlayMountProps } from "./shared/overlay";
 export { isOverlayTeleported, resolveOverlayTeleport } from "./shared/overlay";
 export type {
-  WdInputVariant,
-  WdSeverity,
-  WdSize,
-  WdSizeInput,
-  WdTagSeverity,
-  WdToastSeverity,
+  RdInputVariant,
+  RdSeverity,
+  RdSize,
+  RdSizeInput,
+  RdTagSeverity,
+  RdToastSeverity,
 } from "./shared/types";
 export { normalizeSeverity, resolveSizeClass } from "./shared/types";
 export { useModalOverlay } from "./shared/useModalOverlay";
@@ -633,3 +639,5 @@ export type {
   SpacingTokens,
   ThemeName,
 } from "./theme";
+
+export * from "./compat/wd-exports";

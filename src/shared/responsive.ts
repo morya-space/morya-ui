@@ -1,5 +1,5 @@
 /** Naive-compatible breakpoint map (min-width, px). */
-export const WD_BREAKPOINTS = {
+export const RD_BREAKPOINTS = {
   xs: 0,
   s: 640,
   m: 1024,
@@ -8,7 +8,7 @@ export const WD_BREAKPOINTS = {
   '2xl': 1920,
 } as const
 
-export type WdBreakpoint = keyof typeof WD_BREAKPOINTS
+export type RdBreakpoint = keyof typeof RD_BREAKPOINTS
 
 /**
  * Parse responsive prop values such as `2`, `"2"`, or `"1 s:2 m:3 l:4"`.
@@ -35,10 +35,10 @@ export function parseResponsiveValue(
       if (Number.isFinite(n)) base = n
       continue
     }
-    const key = part.slice(0, colon) as WdBreakpoint
+    const key = part.slice(0, colon) as RdBreakpoint
     const n = Number(part.slice(colon + 1))
     if (!Number.isFinite(n)) continue
-    const min = WD_BREAKPOINTS[key]
+    const min = RD_BREAKPOINTS[key]
     if (min == null) continue
     if (queryWidth == null) {
       if (min === 0) matched = n

@@ -15,10 +15,10 @@ const root = ref<HTMLElement | null>(null)
 const display = ref<HTMLElement | null>(null)
 
 const rootClass = computed(() => [
-  'wd-inplace',
+  'rd-inplace',
   {
-    'wd-inplace--active': props.modelValue,
-    'wd-inplace--disabled': props.disabled,
+    'rd-inplace--active': props.modelValue,
+    'rd-inplace--disabled': props.disabled,
   },
 ])
 
@@ -79,7 +79,7 @@ defineExpose({ activate, deactivate })
     <div
       v-if="!modelValue"
       ref="display"
-      class="wd-inplace__display"
+      class="rd-inplace__display"
       role="button"
       :tabindex="disabled ? -1 : 0"
       :aria-expanded="modelValue"
@@ -90,7 +90,7 @@ defineExpose({ activate, deactivate })
     >
       <slot name="display" />
     </div>
-    <div v-else class="wd-inplace__content">
+    <div v-else class="rd-inplace__content">
       <slot name="content" :close="deactivate" />
     </div>
   </div>

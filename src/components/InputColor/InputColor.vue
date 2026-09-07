@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { InputColorProps } from './types'
 import { computed } from 'vue'
-import { useWdLocale } from '../../locale'
+import { useRdLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useWdId } from '../../shared/useWdId'
+import { useRdId } from '../../shared/useRdId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 
 const props = withDefaults(defineProps<InputColorProps>(), {
@@ -15,9 +15,9 @@ const props = withDefaults(defineProps<InputColorProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
-const locale = useWdLocale()
+const locale = useRdLocale()
 const sizeClass = useConfiguredSize('InputColor', () => props.size)
-const autoFieldId = useWdId('wd-inputcolor')
+const autoFieldId = useRdId('rd-inputcolor')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid } = useFieldFeedback(props)
 
@@ -27,11 +27,11 @@ const hexValue = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wd-inputcolor',
-  `wd-inputcolor--${sizeClass.value}`,
+  'rd-inputcolor',
+  `rd-inputcolor--${sizeClass.value}`,
   {
-    'wd-inputcolor--disabled': props.disabled,
-    'wd-inputcolor--invalid': isInvalid.value,
+    'rd-inputcolor--disabled': props.disabled,
+    'rd-inputcolor--invalid': isInvalid.value,
   },
 ])
 
@@ -52,13 +52,13 @@ function pickSwatch(color: string) {
 </script>
 
 <template>
-  <div class="wd-inputcolor-field">
-    <label v-if="label" class="wd-inputcolor-field__label" :for="fieldId">{{ label }}</label>
+  <div class="rd-inputcolor-field">
+    <label v-if="label" class="rd-inputcolor-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <slot name="trigger">
-        <div class="wd-inputcolor__row">
+        <div class="rd-inputcolor__row">
           <input
-            class="wd-inputcolor__swatch"
+            class="rd-inputcolor__swatch"
             type="color"
             :value="hexValue"
             :disabled="disabled"
@@ -67,7 +67,7 @@ function pickSwatch(color: string) {
           >
           <input
             :id="fieldId"
-            class="wd-inputcolor__text"
+            class="rd-inputcolor__text"
             type="text"
             :value="modelValue"
             :disabled="disabled"
@@ -77,12 +77,12 @@ function pickSwatch(color: string) {
             :aria-label="label ?? locale.colorHexValue"
             @input="onTextInput"
           >
-          <div v-if="swatches?.length" class="wd-inputcolor__swatches">
+          <div v-if="swatches?.length" class="rd-inputcolor__swatches">
             <button
               v-for="color in swatches"
               :key="color"
               type="button"
-              class="wd-inputcolor__preset"
+              class="rd-inputcolor__preset"
               :style="{ background: color }"
               :disabled="disabled"
               :aria-label="color"

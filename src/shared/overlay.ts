@@ -1,7 +1,7 @@
 /** Overlay mount target. Prefer `'body'`; use `'self'` to keep in place. */
-export type WdAppendTo = string | HTMLElement | 'self'
+export type RdAppendTo = string | HTMLElement | 'self'
 
-export interface WdOverlayMountProps {
+export interface RdOverlayMountProps {
   /**
    * Whether to Teleport the overlay. Defaults to `true`.
    * Prefer `appendTo` when you need a custom container.
@@ -12,13 +12,13 @@ export interface WdOverlayMountProps {
    * Pass `'self'` to render in place (same as `teleport: false`).
    * `false` is still accepted at runtime for compatibility.
    */
-  appendTo?: WdAppendTo | false
+  appendTo?: RdAppendTo | false
 }
 
 export function resolveOverlayTeleport(
-  options: WdOverlayMountProps = {},
-  /** Global default from ConfigProvider / createWexDesign. */
-  globalAppendTo: WdAppendTo | false = 'body',
+  options: RdOverlayMountProps = {},
+  /** Global default from ConfigProvider / createRoostDesign. */
+  globalAppendTo: RdAppendTo | false = 'body',
 ): {
   disabled: boolean
   to: string | HTMLElement
@@ -32,8 +32,8 @@ export function resolveOverlayTeleport(
 }
 
 export function isOverlayTeleported(
-  options: WdOverlayMountProps = {},
-  globalAppendTo: WdAppendTo | false = 'body',
+  options: RdOverlayMountProps = {},
+  globalAppendTo: RdAppendTo | false = 'body',
 ): boolean {
   return !resolveOverlayTeleport(options, globalAppendTo).disabled
 }

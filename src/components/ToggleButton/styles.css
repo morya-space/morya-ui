@@ -1,52 +1,52 @@
 /* —— Form: ToggleButton —— */
-.wd-togglebutton {
-    --wd-button-padding-x-small: var(--wd-control-padding-x-small);
-    --wd-button-padding-x-medium: calc(
-        var(--wd-control-padding-x-medium) + var(--wd-space-1)
+.rd-togglebutton {
+    --rd-button-padding-x-small: var(--rd-control-padding-x-small);
+    --rd-button-padding-x-medium: calc(
+        var(--rd-control-padding-x-medium) + var(--rd-space-1)
     );
-    --wd-button-padding-x-large: calc(
-        var(--wd-control-padding-x-large) + var(--wd-space-1)
+    --rd-button-padding-x-large: calc(
+        var(--rd-control-padding-x-large) + var(--rd-space-1)
     );
     align-items: center;
-    background: color-mix(in srgb, var(--wd-color-text-muted) 14%, var(--wd-color-surface));
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-control);
-    color: var(--wd-color-text);
+    background: color-mix(in srgb, var(--rd-color-text-muted) 14%, var(--rd-color-surface));
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-control);
+    color: var(--rd-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--wd-control-font-medium);
+    font-size: var(--rd-control-font-medium);
     font-weight: 600;
-    gap: var(--wd-space-2);
-    min-height: var(--wd-control-height-medium);
-    padding: 0 var(--wd-button-padding-x-medium);
+    gap: var(--rd-space-2);
+    min-height: var(--rd-control-height-medium);
+    padding: 0 var(--rd-button-padding-x-medium);
 }
 
-.wd-togglebutton--small {
-    font-size: var(--wd-control-font-small);
-    min-height: var(--wd-control-height-small);
-    padding: 0 var(--wd-button-padding-x-small);
+.rd-togglebutton--small {
+    font-size: var(--rd-control-font-small);
+    min-height: var(--rd-control-height-small);
+    padding: 0 var(--rd-button-padding-x-small);
 }
 
-.wd-togglebutton--large {
-    font-size: var(--wd-control-font-large);
-    min-height: var(--wd-control-height-large);
-    padding: 0 var(--wd-button-padding-x-large);
+.rd-togglebutton--large {
+    font-size: var(--rd-control-font-large);
+    min-height: var(--rd-control-height-large);
+    padding: 0 var(--rd-button-padding-x-large);
 }
 
-.wd-togglebutton--checked {
-    background: var(--wd-color-primary);
-    border-color: var(--wd-color-primary);
-    color: var(--wd-color-on-emphasis);
+.rd-togglebutton--checked {
+    background: var(--rd-color-primary);
+    border-color: var(--rd-color-primary);
+    color: var(--rd-color-on-emphasis);
 }
 
-.wd-togglebutton:disabled,
-.wd-togglebutton--disabled {
+.rd-togglebutton:disabled,
+.rd-togglebutton--disabled {
     cursor: not-allowed;
-    opacity: var(--wd-opacity-disabled);
+    opacity: var(--rd-opacity-disabled);
 }
 
-.wd-togglebutton:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-togglebutton:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }

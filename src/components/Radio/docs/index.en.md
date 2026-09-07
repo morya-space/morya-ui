@@ -11,14 +11,14 @@ Radio button.
 ## Import
 
 ```ts
-import { WdRadio } from '@wex-design/ui'
+import { RdRadio } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdRadio } from '@wex-design/ui'
+import { RdRadio } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const size = ref('md')
@@ -26,9 +26,9 @@ const size = ref('md')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WdRadio v-model="size" name="size" value="sm" label="Small" />
-    <WdRadio v-model="size" name="size" value="md" label="Medium" />
-    <WdRadio v-model="size" name="size" value="lg" label="Large" />
+    <RdRadio v-model="size" name="size" value="sm" label="Small" />
+    <RdRadio v-model="size" name="size" value="md" label="Medium" />
+    <RdRadio v-model="size" name="size" value="lg" label="Large" />
   </div>
 </template>
 ```
@@ -37,7 +37,7 @@ const size = ref('md')
 
 ```vue preview
 <script setup lang="ts">
-import { WdRadio } from '@wex-design/ui'
+import { RdRadio } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const plan = ref('')
@@ -45,8 +45,8 @@ const plan = ref('')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WdRadio v-model="plan" name="plan" value="free" invalid label="Free" />
-    <WdRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
+    <RdRadio v-model="plan" name="plan" value="free" invalid label="Free" />
+    <RdRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ const plan = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WdRadio } from '@wex-design/ui'
+import { RdRadio } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WdRadio model-value="a" value="a" disabled label="Selected" />
-    <WdRadio model-value="a" value="b" disabled label="Other" />
+    <RdRadio model-value="a" value="a" disabled label="Selected" />
+    <RdRadio model-value="a" value="b" disabled label="Other" />
   </div>
 </template>
 ```
@@ -70,18 +70,18 @@ import { WdRadio } from '@wex-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WdRadio, WdRadioGroup } from '@wex-design/ui'
+import { RdRadio, RdRadioGroup } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const size = ref('md')
 </script>
 
 <template>
-  <WdRadioGroup v-model="size">
-    <WdRadio value="sm" label="Small" />
-    <WdRadio value="md" label="Medium" />
-    <WdRadio value="lg" label="Large" />
-  </WdRadioGroup>
+  <RdRadioGroup v-model="size">
+    <RdRadio value="sm" label="Small" />
+    <RdRadio value="md" label="Medium" />
+    <RdRadio value="lg" label="Large" />
+  </RdRadioGroup>
 </template>
 ```
 

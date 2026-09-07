@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <defs>
-    <linearGradient id="wd-bg" x1="6" y1="2" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+    <linearGradient id="rd-bg" x1="6" y1="2" x2="26" y2="30" gradientUnits="userSpaceOnUse">
       <stop stop-color="#3b82f6"/>
       <stop offset="1" stop-color="#1d4ed8"/>
     </linearGradient>

@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import type { WdGlobalConfig } from '../../shared/config'
+import type { RdGlobalConfig } from '../../shared/config'
 import { applyTheme, getPreferredTheme } from '../../theme'
 import { computed, inject, onBeforeUnmount, toValue, watch } from 'vue'
 import {
-  mergeWdConfig,
-  provideWdConfig,
-  WD_CONFIG_KEY,
+  mergeRdConfig,
+  provideRdConfig,
+  RD_CONFIG_KEY,
 } from '../../shared/config'
 import { applyDensity } from '../../theme'
 
 const props = defineProps<{
-  /** Global defaults for descendant Wex Design components. */
-  config?: WdGlobalConfig
+  /** Global defaults for descendant Roost Design components. */
+  config?: RdGlobalConfig
   /** Shorthand: default overlay Teleport target. */
-  appendTo?: WdGlobalConfig['appendTo']
+  appendTo?: RdGlobalConfig['appendTo']
   /** Shorthand: default control size. */
-  size?: WdGlobalConfig['size']
+  size?: RdGlobalConfig['size']
   /** Shorthand: default input variant. */
-  inputVariant?: WdGlobalConfig['inputVariant']
+  inputVariant?: RdGlobalConfig['inputVariant']
   /** Shorthand: overlay z-index base. */
-  zIndex?: WdGlobalConfig['zIndex']
+  zIndex?: RdGlobalConfig['zIndex']
   /** Shorthand: content density. */
-  density?: WdGlobalConfig['density']
+  density?: RdGlobalConfig['density']
   /** Shorthand: color theme (`light` / `dark` / `system`). */
-  theme?: WdGlobalConfig['theme']
+  theme?: RdGlobalConfig['theme']
   /** Shorthand: locale dictionary. */
-  locale?: WdGlobalConfig['locale']
+  locale?: RdGlobalConfig['locale']
   /** Shorthand: per-component default props. */
-  componentDefaults?: WdGlobalConfig['componentDefaults']
+  componentDefaults?: RdGlobalConfig['componentDefaults']
   /**
    * When true (default), also write density / theme to `documentElement`
    * so the whole page picks up token changes. Set false to scope
@@ -36,9 +36,9 @@ const props = defineProps<{
   globalDensity?: boolean
 }>()
 
-const parent = inject(WD_CONFIG_KEY, null)
+const parent = inject(RD_CONFIG_KEY, null)
 
-const local = computed<WdGlobalConfig>(() => ({
+const local = computed<RdGlobalConfig>(() => ({
   ...(props.config ?? {}),
   ...(props.appendTo !== undefined ? { appendTo: props.appendTo } : {}),
   ...(props.size !== undefined ? { size: props.size } : {}),
@@ -50,12 +50,12 @@ const local = computed<WdGlobalConfig>(() => ({
   ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
 }))
 
-const resolved = computed<WdGlobalConfig>(() => {
+const resolved = computed<RdGlobalConfig>(() => {
   const parentValue = parent ? toValue(parent) : {}
-  return mergeWdConfig(parentValue, local.value)
+  return mergeRdConfig(parentValue, local.value)
 })
 
-provideWdConfig(resolved)
+provideRdConfig(resolved)
 
 const densityAttr = computed(() => resolved.value.density ?? 'comfortable')
 const applyGlobal = computed(() => props.globalDensity !== false)
@@ -63,7 +63,7 @@ const applyGlobal = computed(() => props.globalDensity !== false)
 const layerStyle = computed(() => {
   const base = resolved.value.zIndex
   if (base == null) return undefined
-  return { '--wd-z-base': String(base) } as Record<string, string>
+  return { '--rd-z-base': String(base) } as Record<string, string>
 })
 
 let previousDensity: string | undefined
@@ -79,12 +79,12 @@ function syncGlobalSideEffects() {
   if (!applyGlobal.value || typeof document === 'undefined') return
   const { density, zIndex, theme } = resolved.value
   if (density) {
-    previousDensity = document.documentElement.dataset.wdDensity
+    previousDensity = document.documentElement.dataset.rdDensity
     applyDensity(density)
   }
   if (zIndex != null) {
-    previousZBase = document.documentElement.style.getPropertyValue('--wd-z-base')
-    document.documentElement.style.setProperty('--wd-z-base', String(zIndex))
+    previousZBase = document.documentElement.style.getPropertyValue('--rd-z-base')
+    document.documentElement.style.setProperty('--rd-z-base', String(zIndex))
   }
   if (theme !== undefined) {
     previousTheme = document.documentElement.dataset.theme
@@ -106,12 +106,12 @@ watch(
 onBeforeUnmount(() => {
   if (!applyGlobal.value || typeof document === 'undefined') return
   if (previousDensity !== undefined) {
-    if (previousDensity) document.documentElement.dataset.wdDensity = previousDensity
-    else delete document.documentElement.dataset.wdDensity
+    if (previousDensity) document.documentElement.dataset.rdDensity = previousDensity
+    else delete document.documentElement.dataset.rdDensity
   }
   if (previousZBase !== undefined) {
-    if (previousZBase) document.documentElement.style.setProperty('--wd-z-base', previousZBase)
-    else document.documentElement.style.removeProperty('--wd-z-base')
+    if (previousZBase) document.documentElement.style.setProperty('--rd-z-base', previousZBase)
+    else document.documentElement.style.removeProperty('--rd-z-base')
   }
   if (previousTheme !== undefined) {
     if (previousTheme) document.documentElement.dataset.theme = previousTheme
@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="wd-config-provider" :data-wd-density="densityAttr" :style="layerStyle">
+  <div class="rd-config-provider" :data-rd-density="densityAttr" :style="layerStyle">
     <slot />
   </div>
 </template>

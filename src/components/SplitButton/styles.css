@@ -1,184 +1,184 @@
 /* —— Primitive: SplitButton —— */
-.wd-splitbutton {
-    --wd-button-padding-x-medium: calc(
-        var(--wd-control-padding-x-medium) + var(--wd-space-1)
+.rd-splitbutton {
+    --rd-button-padding-x-medium: calc(
+        var(--rd-control-padding-x-medium) + var(--rd-space-1)
     );
-    --wd-splitbutton-icon-size: 1rem;
+    --rd-splitbutton-icon-size: 1rem;
     display: inline-flex;
     position: relative;
     vertical-align: middle;
 }
 
-.wd-splitbutton__main,
-.wd-splitbutton__trigger {
+.rd-splitbutton__main,
+.rd-splitbutton__trigger {
     align-items: center;
-    background: var(--wd-color-primary);
-    border: var(--wd-border-width) solid var(--wd-color-primary);
-    color: var(--wd-color-on-emphasis);
+    background: var(--rd-color-primary);
+    border: var(--rd-border-width) solid var(--rd-color-primary);
+    color: var(--rd-color-on-emphasis);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--wd-control-font-medium);
+    font-size: var(--rd-control-font-medium);
     font-weight: 600;
-    gap: var(--wd-space-2);
-    min-height: var(--wd-control-height-medium);
-    padding: 0 var(--wd-button-padding-x-medium);
+    gap: var(--rd-space-2);
+    min-height: var(--rd-control-height-medium);
+    padding: 0 var(--rd-button-padding-x-medium);
 }
 
-.wd-splitbutton__main {
-    border-bottom-left-radius: var(--wd-radius-control);
-    border-top-left-radius: var(--wd-radius-control);
+.rd-splitbutton__main {
+    border-bottom-left-radius: var(--rd-radius-control);
+    border-top-left-radius: var(--rd-radius-control);
 }
 
-.wd-splitbutton__trigger {
-    border-bottom-right-radius: var(--wd-radius-control);
-    border-left: var(--wd-border-width) solid
+.rd-splitbutton__trigger {
+    border-bottom-right-radius: var(--rd-radius-control);
+    border-left: var(--rd-border-width) solid
         color-mix(
             in srgb,
-            var(--wd-color-on-emphasis) 35%,
-            var(--wd-color-primary)
+            var(--rd-color-on-emphasis) 35%,
+            var(--rd-color-primary)
         );
-    border-top-right-radius: var(--wd-radius-control);
-    padding: 0 var(--wd-control-padding-x-medium);
+    border-top-right-radius: var(--rd-radius-control);
+    padding: 0 var(--rd-control-padding-x-medium);
 }
 
-.wd-splitbutton__main:hover:not(:disabled),
-.wd-splitbutton__trigger:hover:not(:disabled) {
+.rd-splitbutton__main:hover:not(:disabled),
+.rd-splitbutton__trigger:hover:not(:disabled) {
     filter: brightness(1.06);
 }
 
-.wd-splitbutton--outlined .wd-splitbutton__main:hover:not(:disabled),
-.wd-splitbutton--outlined .wd-splitbutton__trigger:hover:not(:disabled),
-.wd-splitbutton--secondary .wd-splitbutton__main:hover:not(:disabled),
-.wd-splitbutton--secondary .wd-splitbutton__trigger:hover:not(:disabled) {
+.rd-splitbutton--outlined .rd-splitbutton__main:hover:not(:disabled),
+.rd-splitbutton--outlined .rd-splitbutton__trigger:hover:not(:disabled),
+.rd-splitbutton--secondary .rd-splitbutton__main:hover:not(:disabled),
+.rd-splitbutton--secondary .rd-splitbutton__trigger:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--wd-color-primary) 10%,
-        var(--wd-color-surface)
+        var(--rd-color-primary) 10%,
+        var(--rd-color-surface)
     );
     filter: none;
 }
 
-.wd-splitbutton__main:focus-visible,
-.wd-splitbutton__trigger:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-splitbutton__main:focus-visible,
+.rd-splitbutton__trigger:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-splitbutton--outlined .wd-splitbutton__main,
-.wd-splitbutton--outlined .wd-splitbutton__trigger {
+.rd-splitbutton--outlined .rd-splitbutton__main,
+.rd-splitbutton--outlined .rd-splitbutton__trigger {
     background: transparent;
-    color: var(--wd-color-primary);
+    color: var(--rd-color-primary);
 }
 
-.wd-splitbutton--outlined .wd-splitbutton__trigger {
-    border-left-color: var(--wd-color-primary);
+.rd-splitbutton--outlined .rd-splitbutton__trigger {
+    border-left-color: var(--rd-color-primary);
 }
 
-.wd-splitbutton--secondary .wd-splitbutton__main,
-.wd-splitbutton--secondary .wd-splitbutton__trigger {
+.rd-splitbutton--secondary .rd-splitbutton__main,
+.rd-splitbutton--secondary .rd-splitbutton__trigger {
     background: color-mix(
         in srgb,
-        var(--wd-color-text-muted) 16%,
-        var(--wd-color-surface)
+        var(--rd-color-text-muted) 16%,
+        var(--rd-color-surface)
     );
-    border-color: var(--wd-color-border);
-    color: var(--wd-color-text);
+    border-color: var(--rd-color-border);
+    color: var(--rd-color-text);
 }
 
-.wd-splitbutton--danger .wd-splitbutton__main,
-.wd-splitbutton--danger .wd-splitbutton__trigger {
-    background: var(--wd-color-danger);
-    border-color: var(--wd-color-danger);
+.rd-splitbutton--danger .rd-splitbutton__main,
+.rd-splitbutton--danger .rd-splitbutton__trigger {
+    background: var(--rd-color-danger);
+    border-color: var(--rd-color-danger);
 }
 
-.wd-splitbutton--small .wd-splitbutton__main,
-.wd-splitbutton--small .wd-splitbutton__trigger {
-    --wd-splitbutton-icon-size: 0.875rem;
-    min-height: var(--wd-control-height-small);
-    font-size: var(--wd-control-font-small);
+.rd-splitbutton--small .rd-splitbutton__main,
+.rd-splitbutton--small .rd-splitbutton__trigger {
+    --rd-splitbutton-icon-size: 0.875rem;
+    min-height: var(--rd-control-height-small);
+    font-size: var(--rd-control-font-small);
 }
 
-.wd-splitbutton--large .wd-splitbutton__main,
-.wd-splitbutton--large .wd-splitbutton__trigger {
-    --wd-splitbutton-icon-size: 1.125rem;
-    min-height: var(--wd-control-height-large);
-    font-size: var(--wd-control-font-large);
+.rd-splitbutton--large .rd-splitbutton__main,
+.rd-splitbutton--large .rd-splitbutton__trigger {
+    --rd-splitbutton-icon-size: 1.125rem;
+    min-height: var(--rd-control-height-large);
+    font-size: var(--rd-control-font-large);
 }
 
-.wd-splitbutton__icon {
+.rd-splitbutton__icon {
     align-items: center;
     display: inline-flex;
     flex-shrink: 0;
-    height: var(--wd-splitbutton-icon-size);
+    height: var(--rd-splitbutton-icon-size);
     justify-content: center;
     line-height: 0;
-    width: var(--wd-splitbutton-icon-size);
+    width: var(--rd-splitbutton-icon-size);
 }
 
-.wd-splitbutton__icon :is(.wd-icon, svg) {
+.rd-splitbutton__icon :is(.rd-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.wd-splitbutton__trigger :is(.wd-icon, svg) {
+.rd-splitbutton__trigger :is(.rd-icon, svg) {
     display: block;
-    height: var(--wd-splitbutton-icon-size);
-    width: var(--wd-splitbutton-icon-size);
+    height: var(--rd-splitbutton-icon-size);
+    width: var(--rd-splitbutton-icon-size);
 }
 
-.wd-splitbutton--disabled {
-    opacity: var(--wd-opacity-disabled);
+.rd-splitbutton--disabled {
+    opacity: var(--rd-opacity-disabled);
     pointer-events: none;
 }
 
-.wd-splitbutton__menu {
-    background: var(--wd-color-surface);
-    border: var(--wd-border-width) solid var(--wd-color-border);
-    border-radius: var(--wd-radius-md);
-    box-shadow: var(--wd-shadow-md);
+.rd-splitbutton__menu {
+    background: var(--rd-color-surface);
+    border: var(--rd-border-width) solid var(--rd-color-border);
+    border-radius: var(--rd-radius-md);
+    box-shadow: var(--rd-shadow-md);
     list-style: none;
-    margin: var(--wd-space-1) 0 0;
+    margin: var(--rd-space-1) 0 0;
     min-width: 100%;
-    padding: var(--wd-space-1);
+    padding: var(--rd-space-1);
     position: absolute;
     right: 0;
     top: 100%;
     transform-origin: top right;
-    z-index: var(--wd-z-popper);
+    z-index: var(--rd-z-popper);
 }
 
-.wd-splitbutton__menu--teleported {
+.rd-splitbutton__menu--teleported {
     margin: 0;
     position: fixed;
     right: auto;
     top: auto;
-    z-index: var(--wd-z-overlay);
+    z-index: var(--rd-z-overlay);
 }
 
-.wd-splitbutton__item {
+.rd-splitbutton__item {
     background: transparent;
     border: 0;
-    border-radius: var(--wd-radius-sm);
-    color: var(--wd-color-text);
+    border-radius: var(--rd-radius-sm);
+    color: var(--rd-color-text);
     cursor: pointer;
     display: block;
     font: inherit;
-    padding: var(--wd-space-2) var(--wd-space-3);
+    padding: var(--rd-space-2) var(--rd-space-3);
     text-align: start;
     width: 100%;
 }
 
-.wd-splitbutton__item:hover:not(:disabled) {
+.rd-splitbutton__item:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--wd-color-primary) 10%,
-        var(--wd-color-surface)
+        var(--rd-color-primary) 10%,
+        var(--rd-color-surface)
     );
 }
 
-.wd-splitbutton__item:disabled {
+.rd-splitbutton__item:disabled {
     cursor: not-allowed;
-    opacity: var(--wd-opacity-disabled);
+    opacity: var(--rd-opacity-disabled);
 }

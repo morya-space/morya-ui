@@ -8,21 +8,21 @@ description: Action menu overlay (not a form select). Unlike Select, it is used 
 
 Action menu overlay. Opens a set of actions from a trigger.
 
-**Difference from Select:** `WdDropdown` is a menu overlay; for form option selection, use `WdSelect`.
+**Difference from Select:** `RdDropdown` is a menu overlay; for form option selection, use `RdSelect`.
 
 Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), nested `items`, and `trigger: 'hover'` with `showDelay` / `hideDelay`. Keyboard highlight still covers top-level leaves only.
 
 ## Import
 
 ```ts
-import { WdButton, WdDropdown } from '@wex-design/ui'
+import { RdButton, RdDropdown } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdDropdown } from '@wex-design/ui'
+import { RdButton, RdDropdown } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -39,11 +39,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <WdDropdown v-model="open" :items="items" @select="onSelect">
+  <RdDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <WdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <RdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </WdDropdown>
+  </RdDropdown>
 </template>
 ```
 
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdDropdown } from '@wex-design/ui'
+import { RdButton, RdDropdown } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -63,11 +63,11 @@ const items = [
 </script>
 
 <template>
-  <WdDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
+  <RdDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
     <template #trigger>
-      <WdButton label="Hover to open" severity="secondary" />
+      <RdButton label="Hover to open" severity="secondary" />
     </template>
-  </WdDropdown>
+  </RdDropdown>
 </template>
 ```
 

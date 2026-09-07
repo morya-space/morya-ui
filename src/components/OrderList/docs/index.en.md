@@ -11,21 +11,21 @@ Reorder with a drag handle (native HTML5 DnD, no external library). Up and down 
 ## Import
 
 ```ts
-import { WdOrderList } from '@wex-design/ui'
+import { RdOrderList } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdOrderList } from '@wex-design/ui'
+import { RdOrderList } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const items = ref(['Design', 'Development', 'Testing', 'Release'])
 </script>
 
 <template>
-  <WdOrderList v-model="items" />
+  <RdOrderList v-model="items" />
 </template>
 ```
 

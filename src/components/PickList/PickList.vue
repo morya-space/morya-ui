@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PickListProps } from './types'
 import { computed, ref } from 'vue'
-import { useWdLocale } from '../../locale'
-import WdIcon from '../Icon/Icon.vue'
+import { useRdLocale } from '../../locale'
+import RdIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PickListProps>(), {
   source: () => [],
@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const selectedSource = ref<Array<string | number>>([])
 const selectedTarget = ref<Array<string | number>>([])
-const locale = useWdLocale()
+const locale = useRdLocale()
 const sourceTitle = computed(() => props.sourceHeader ?? locale.value.sourceHeader)
 const targetTitle = computed(() => props.targetHeader ?? locale.value.targetHeader)
 const resolvedEmptyMessage = computed(
@@ -77,17 +77,17 @@ function moveAllToSource() {
 </script>
 
 <template>
-  <div class="wd-picklist">
-    <div class="wd-picklist__listbox">
-      <div class="wd-picklist__header">
+  <div class="rd-picklist">
+    <div class="rd-picklist__listbox">
+      <div class="rd-picklist__header">
         {{ sourceTitle }}
       </div>
-      <ul class="wd-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
+      <ul class="rd-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in source"
           :key="itemKey(item, index)"
-          class="wd-picklist__item"
-          :class="{ 'wd-picklist__item--selected': isSelected('source', item, index) }"
+          class="rd-picklist__item"
+          :class="{ 'rd-picklist__item--selected': isSelected('source', item, index) }"
           role="option"
           :aria-selected="isSelected('source', item, index)"
           tabindex="0"
@@ -99,39 +99,39 @@ function moveAllToSource() {
             {{ item }}
           </slot>
         </li>
-        <li v-if="!source.length" class="wd-picklist__empty" role="status">
+        <li v-if="!source.length" class="rd-picklist__empty" role="status">
           <slot name="empty">
             {{ resolvedEmptyMessage }}
           </slot>
         </li>
       </ul>
     </div>
-    <div class="wd-picklist__controls">
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
-        <WdIcon name="chevron-right" size="sm" />
-        <WdIcon name="chevron-right" size="sm" />
+    <div class="rd-picklist__controls">
+      <button type="button" class="rd-picklist__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
+        <RdIcon name="chevron-right" size="sm" />
+        <RdIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
-        <WdIcon name="chevron-right" size="sm" />
+      <button type="button" class="rd-picklist__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
+        <RdIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
-        <WdIcon name="chevron-left" size="sm" />
+      <button type="button" class="rd-picklist__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
+        <RdIcon name="chevron-left" size="sm" />
       </button>
-      <button type="button" class="wd-picklist__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
-        <WdIcon name="chevron-left" size="sm" />
-        <WdIcon name="chevron-left" size="sm" />
+      <button type="button" class="rd-picklist__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
+        <RdIcon name="chevron-left" size="sm" />
+        <RdIcon name="chevron-left" size="sm" />
       </button>
     </div>
-    <div class="wd-picklist__listbox">
-      <div class="wd-picklist__header">
+    <div class="rd-picklist__listbox">
+      <div class="rd-picklist__header">
         {{ targetTitle }}
       </div>
-      <ul class="wd-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
+      <ul class="rd-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in target"
           :key="itemKey(item, index)"
-          class="wd-picklist__item"
-          :class="{ 'wd-picklist__item--selected': isSelected('target', item, index) }"
+          class="rd-picklist__item"
+          :class="{ 'rd-picklist__item--selected': isSelected('target', item, index) }"
           role="option"
           :aria-selected="isSelected('target', item, index)"
           tabindex="0"
@@ -143,7 +143,7 @@ function moveAllToSource() {
             {{ item }}
           </slot>
         </li>
-        <li v-if="!target.length" class="wd-picklist__empty" role="status">
+        <li v-if="!target.length" class="rd-picklist__empty" role="status">
           <slot name="empty">
             {{ resolvedEmptyMessage }}
           </slot>

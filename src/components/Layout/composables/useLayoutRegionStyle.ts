@@ -25,11 +25,11 @@ export function useLayoutRegionStyle(
         const style: Record<string, string> = {
             padding: resolveTokenLength(
                 props.padding,
-                "var(--wd-layout-padding, var(--wd-space-4))",
+                "var(--rd-layout-padding, var(--rd-space-4))",
             ),
             borderRadius: resolveTokenLength(
                 props.radius,
-                "var(--wd-layout-radius, 0)",
+                "var(--rd-layout-radius, 0)",
             ),
         };
 

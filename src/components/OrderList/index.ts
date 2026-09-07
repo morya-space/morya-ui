@@ -1,3 +1,3 @@
 import './style'
-export { default as WdOrderList } from './OrderList.vue'
+export { default as RdOrderList } from './OrderList.vue'
 export type { OrderListEmits, OrderListProps } from './types'

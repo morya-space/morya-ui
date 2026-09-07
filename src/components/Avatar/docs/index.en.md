@@ -11,43 +11,43 @@ Avatar displays a user or entity identity. Display priority: `image` > `icon` > 
 ## Import
 
 ```ts
-import { WdAvatar } from '@wex-design/ui'
+import { RdAvatar } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdAvatar } from '@wex-design/ui'
+import { RdAvatar } from '@roost-design/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WdAvatar label="AB" />
-    <WdAvatar icon="check" />
-    <WdAvatar label="SQ" shape="square" />
-    <WdAvatar label="LG" size="large" />
-    <WdAvatar label="XL" size="xlarge" />
+    <RdAvatar label="AB" />
+    <RdAvatar icon="check" />
+    <RdAvatar label="SQ" shape="square" />
+    <RdAvatar label="LG" size="large" />
+    <RdAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WdAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
+`RdAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
 
 ```vue preview
 <script setup lang="ts">
-import { WdAvatar, WdAvatarGroup } from '@wex-design/ui'
+import { RdAvatar, RdAvatarGroup } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdAvatarGroup :max="3">
-    <WdAvatar label="AL" />
-    <WdAvatar label="BK" />
-    <WdAvatar label="CN" />
-    <WdAvatar label="DY" />
-  </WdAvatarGroup>
+  <RdAvatarGroup :max="3">
+    <RdAvatar label="AL" />
+    <RdAvatar label="BK" />
+    <RdAvatar label="CN" />
+    <RdAvatar label="DY" />
+  </RdAvatarGroup>
 </template>
 ```
 
@@ -57,7 +57,7 @@ import { WdAvatar, WdAvatarGroup } from '@wex-design/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | Text fallback when there is no image or icon. |
 | `image` | `string` | — | Image URL; highest priority. |
-| `icon` | `IconName` | — | `WdIcon` icon name. |
+| `icon` | `IconName` | — | `RdIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |
 
@@ -67,7 +67,7 @@ import { WdAvatar, WdAvatarGroup } from '@wex-design/ui'
 | --- | --- | --- |
 | `error` | `Event` | Image failed to load. |
 
-`WdAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
+`RdAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
 
 ## Slots
 

@@ -11,28 +11,28 @@ Horizontal action bar, commonly used as a list page header.
 ## Import
 
 ```ts
-import { WdButton, WdToolbar } from '@wex-design/ui'
+import { RdButton, RdToolbar } from '@roost-design/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WdButton, WdToolbar } from '@wex-design/ui'
+import { RdButton, RdToolbar } from '@roost-design/ui'
 </script>
 
 <template>
-  <WdToolbar>
+  <RdToolbar>
     <template #start>
-      <WdButton label="New" size="small" />
+      <RdButton label="New" size="small" />
     </template>
     <template #center>
       <span>Toolbar</span>
     </template>
     <template #end>
-      <WdButton label="Export" severity="secondary" size="small" />
+      <RdButton label="Export" severity="secondary" size="small" />
     </template>
-  </WdToolbar>
+  </RdToolbar>
 </template>
 ```
 

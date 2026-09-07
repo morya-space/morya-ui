@@ -1,79 +1,79 @@
 /* —— Media: Carousel —— */
-.wd-carousel {
-    --wd-carousel-indicator-size: 0.45rem;
+.rd-carousel {
+    --rd-carousel-indicator-size: 0.45rem;
     align-items: center;
     display: flex;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     width: 100%;
 }
 
-.wd-carousel__viewport {
+.rd-carousel__viewport {
     display: flex;
     flex: 1;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     min-width: 0;
     overflow: hidden;
     touch-action: pan-y;
 }
 
-.wd-carousel__item {
+.rd-carousel__item {
     box-sizing: border-box;
     min-width: 0;
     transition:
-        opacity var(--wd-motion-normal) var(--wd-motion-ease),
-        transform var(--wd-motion-normal) var(--wd-motion-ease);
+        opacity var(--rd-motion-normal) var(--rd-motion-ease),
+        transform var(--rd-motion-normal) var(--rd-motion-ease);
 }
 
-.wd-carousel__main {
+.rd-carousel__main {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--wd-space-2);
+    gap: var(--rd-space-2);
     min-width: 0;
 }
 
-.wd-carousel__indicators {
+.rd-carousel__indicators {
     display: flex;
-    gap: var(--wd-space-1);
+    gap: var(--rd-space-1);
     justify-content: center;
 }
 
-.wd-carousel__indicator {
-    background: color-mix(in srgb, var(--wd-color-text-muted) 40%, transparent);
+.rd-carousel__indicator {
+    background: color-mix(in srgb, var(--rd-color-text-muted) 40%, transparent);
     border: 0;
-    border-radius: var(--wd-radius-full);
+    border-radius: var(--rd-radius-full);
     cursor: pointer;
-    height: var(--wd-carousel-indicator-size);
+    height: var(--rd-carousel-indicator-size);
     padding: 0;
     position: relative;
-    width: var(--wd-carousel-indicator-size);
+    width: var(--rd-carousel-indicator-size);
 }
 
-.wd-carousel__indicator::after {
+.rd-carousel__indicator::after {
     content: '';
     inset: -0.45rem;
     position: absolute;
 }
 
-.wd-carousel__indicator:hover {
-    background: color-mix(in srgb, var(--wd-color-text-muted) 70%, transparent);
+.rd-carousel__indicator:hover {
+    background: color-mix(in srgb, var(--rd-color-text-muted) 70%, transparent);
 }
 
-.wd-carousel__indicator:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-carousel__indicator:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }
 
-.wd-carousel__indicator--active,
-.wd-carousel__indicator--active:hover {
-    background: var(--wd-color-primary);
+.rd-carousel__indicator--active,
+.rd-carousel__indicator--active:hover {
+    background: var(--rd-color-primary);
 }
 
-.wd-carousel__nav:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wd-color-primary) 8%, transparent);
+.rd-carousel__nav:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--rd-color-primary) 8%, transparent);
 }
 
-.wd-carousel__nav:focus-visible {
-    box-shadow: var(--wd-focus-shadow);
+.rd-carousel__nav:focus-visible {
+    box-shadow: var(--rd-focus-shadow);
     outline: none;
 }

@@ -11,14 +11,14 @@ description: 可折叠面板组。支持单开 / 多开，tabs 配置 header 与
 ## 引入
 
 ```ts
-import { WdAccordion } from '@wex-design/ui'
+import { RdAccordion } from '@roost-design/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WdAccordion } from '@wex-design/ui'
+import { RdAccordion } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -30,7 +30,7 @@ const tabs = [
 </script>
 
 <template>
-  <WdAccordion v-model="active" :tabs="tabs">
+  <RdAccordion v-model="active" :tabs="tabs">
     <template #design>
       <p style="margin:0">
         Design system tokens and layout rules.
@@ -41,7 +41,7 @@ const tabs = [
         Implementation notes and API contracts.
       </p>
     </template>
-  </WdAccordion>
+  </RdAccordion>
 </template>
 ```
 
@@ -49,7 +49,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdAccordion } from '@wex-design/ui'
+import { RdAccordion } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref<string[]>(['a'])
@@ -60,7 +60,7 @@ const tabs = [
 </script>
 
 <template>
-  <WdAccordion v-model="active" multiple :tabs="tabs">
+  <RdAccordion v-model="active" multiple :tabs="tabs">
     <template #a>
       <p style="margin:0">
         First section content.
@@ -71,7 +71,7 @@ const tabs = [
         Second section content.
       </p>
     </template>
-  </WdAccordion>
+  </RdAccordion>
 </template>
 ```
 
@@ -81,7 +81,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WdAccordion, WdButton } from '@wex-design/ui'
+import { RdAccordion, RdButton } from '@roost-design/ui'
 import { ref } from 'vue'
 
 const active = ref('a')
@@ -91,16 +91,16 @@ const tabs = [
 </script>
 
 <template>
-  <WdAccordion v-model="active" :tabs="tabs">
+  <RdAccordion v-model="active" :tabs="tabs">
     <template #extra="{ tab }">
-      <WdButton :label="tab.header" size="small" text />
+      <RdButton :label="tab.header" size="small" text />
     </template>
     <template #a>
       <p style="margin:0">
         Content.
       </p>
     </template>
-  </WdAccordion>
+  </RdAccordion>
 </template>
 ```
 

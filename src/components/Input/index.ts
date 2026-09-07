@@ -1,4 +1,4 @@
 import './style'
 
-export { default as WdInput } from './Input.vue'
+export { default as RdInput } from './Input.vue'
 export type { InputEmits, InputProps } from './types'
