@@ -8,7 +8,7 @@ description: Roost Design UI 是什么、适合谁用、如何开始。
 
 **Roost Design UI**（`@roost-design/ui`）是一套**开源**的 Vue 3 组件库，内置设计令牌、亮暗主题、国际化与交互式文档。
 
-- **文档站**：[wex-design.github.io/wex-design-ui](https://roost-design.github.io/roost-design-ui/)
+- **文档站**：[roost-design.github.io/roost-design-ui](https://roost-design.github.io/roost-design-ui/)
 - **源码**：[GitHub](https://github.com/roost-design/roost-design-ui)
 - **npm**：[`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
 

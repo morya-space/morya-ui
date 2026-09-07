@@ -1,30 +1,8 @@
 # @roost-design/ui
 
-## 0.1.15
-
-### Features
-
-- rebrand to @wex-design/ui and reset release baseline to 0.0.1
-- add SSR support for Nuxt, Astro, and Vite
-
-### Docs
-
-- describe Vue 3 support with 3.5+ recommendation
-- polish docs site home, changelog, and branding
-- rebrand as open-source library with logo and README
-
-### Changes
-
-- update catalog generation timestamp and adjust component exports
-- rebrand library from @wex-design/ui to @roost-design/ui
-- reset release baseline to 0.1.1 with fresh changelog
-- update Vue peer dependency and documentation references
-- deploy docs site to GitHub Pages
-- remove admin-manage-project from monorepo
-
 ## 0.1.1
 
-Initial public release of `@roost-design/ui`, using the current component library as the baseline.
+Initial public release of `@roost-design/ui` (Roost Design UI), using the current component library as the baseline.
 
 ### Components (88)
 
@@ -38,9 +16,10 @@ Initial public release of `@roost-design/ui`, using the current component librar
 ### Theme & design tokens
 
 - Light / dark themes (`useTheme`, `applyTheme`, `getPreferredTheme`)
-- Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-wd-motion`)
+- Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-rd-motion`)
 - Token system on `--rd-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
 - Subtree overrides via `RdConfigProvider` (theme, density, motion, component defaults)
+- Backward compatibility: `Wd*` component aliases and `--wd-*` token aliases (`wd-compat.css` / `wd-exports`)
 
 ### Global config & utilities
 
@@ -60,7 +39,7 @@ Initial public release of `@roost-design/ui`, using the current component librar
 ### Documentation site
 
 - Interactive docs with Markdown and live `vue preview` examples
-- Component catalog and guides (quick start, theme, config, SSR, accessibility)
+- Component catalog and guides (quick start, theme, config, SSR, accessibility, MCP)
 - Light / dark theme, bilingual UI, global search (CommandMenu)
 - Deployed to GitHub Pages: https://roost-design.github.io/roost-design-ui/
 
@@ -71,7 +50,7 @@ Initial public release of `@roost-design/ui`, using the current component librar
 
 ### SSR & framework integration
 
-- Works with Nuxt 3, Astro + Vue, Vite SSR, and similar setups
+- Works with Nuxt 3, Astro + Vue, Vite SSR, and similar setups (Vue 3.5+ recommended)
 - Unified overlay mounting and placement (flip / clamp) strategy
 
 ### Accessibility

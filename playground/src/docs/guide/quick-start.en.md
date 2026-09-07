@@ -6,7 +6,7 @@ description: Install the package, import styles, and render the first component.
 
 # Quick start
 
-> Live docs: [wex-design.github.io/wex-design-ui](https://roost-design.github.io/roost-design-ui/) · Source: [GitHub](https://github.com/roost-design/roost-design-ui) · npm: [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
+> Live docs: [roost-design.github.io/roost-design-ui](https://roost-design.github.io/roost-design-ui/) · Source: [GitHub](https://github.com/roost-design/roost-design-ui) · npm: [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
 
 ## Install
 
