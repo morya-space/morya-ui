@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-07T09:54:12.160Z",
+  "generatedAt": "2026-09-07T09:58:37.048Z",
   "library": {
     "name": "@roost-design/ui",
-    "version": "0.1.1"
+    "version": "0.1.15"
   },
   "mcp": {
     "name": "@roost-design/ui-mcp",
-    "version": "0.1.1"
+    "version": "0.1.15"
   },
   "components": [
     {

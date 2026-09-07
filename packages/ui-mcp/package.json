@@ -1,7 +1,7 @@
 {
   "name": "@roost-design/ui-mcp",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.15",
   "packageManager": "pnpm@10.12.4",
   "description": "MCP server for @roost-design/ui — component docs, examples, and usage guidance for AI coding agents.",
   "license": "MIT",

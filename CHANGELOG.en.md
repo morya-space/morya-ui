@@ -1,5 +1,27 @@
 # @roost-design/ui
 
+## 0.1.15
+
+### Features
+
+- rebrand to @wex-design/ui and reset release baseline to 0.0.1
+- add SSR support for Nuxt, Astro, and Vite
+
+### Docs
+
+- describe Vue 3 support with 3.5+ recommendation
+- polish docs site home, changelog, and branding
+- rebrand as open-source library with logo and README
+
+### Changes
+
+- update catalog generation timestamp and adjust component exports
+- rebrand library from @wex-design/ui to @roost-design/ui
+- reset release baseline to 0.1.1 with fresh changelog
+- update Vue peer dependency and documentation references
+- deploy docs site to GitHub Pages
+- remove admin-manage-project from monorepo
+
 ## 0.1.1
 
 Initial public release of `@roost-design/ui`, using the current component library as the baseline.
