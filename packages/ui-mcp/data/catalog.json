@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-08T08:23:48.095Z",
+  "generatedAt": "2026-09-08T08:32:32.426Z",
   "library": {
     "name": "@wise-kit/ui",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "mcp": {
     "name": "@wise-kit/ui-mcp",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "components": [
     {

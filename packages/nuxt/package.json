@@ -1,7 +1,7 @@
 {
   "name": "@wise-kit/nuxt",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Nuxt 3 module for @wise-kit/ui — styles, transpile, and client overlay context.",
   "license": "MIT",
   "homepage": "https://github.com/wise-kit/wise-kit-ui/tree/main/packages/nuxt#readme",
@@ -37,7 +37,7 @@
     "@nuxt/kit": "^3.16.0"
   },
   "peerDependencies": {
-    "@wise-kit/ui": "^0.1.1",
+    "@wise-kit/ui": "^0.1.2",
     "nuxt": "^3.10.0"
   }
 }
