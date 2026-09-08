@@ -1,5 +1,11 @@
 # @wise-kit/ui
 
+## 0.1.2
+
+### 变更
+
+- migrate to Wk tokens and remove legacy compat layers
+
 ## 0.1.1
 
 `@wise-kit/ui` 的初始公开版本（Wise Kit UI），以当前组件库能力为基准。

@@ -1,5 +1,11 @@
 # @wise-kit/ui
 
+## 0.1.2
+
+### Changes
+
+- migrate to Wk tokens and remove legacy compat layers
+
 ## 0.1.1
 
 Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current component library as the baseline.
