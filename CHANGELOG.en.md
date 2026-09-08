@@ -1,5 +1,14 @@
 # @wise-kit/ui
 
+## 0.2.0
+
+### Features
+
+- enhance design token management and documentation
+- add reduced motion policy support across components
+- integrate WkScrollbar into AutoComplete, CascadeSelect, CommandMenu, and Listbox components
+- enhance WkSelect component with scrollbar and max-height functionality
+
 ## 0.1.2
 
 ### Changes
