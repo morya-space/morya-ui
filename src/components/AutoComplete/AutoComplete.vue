@@ -8,6 +8,7 @@ import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WkIcon from '../Icon/Icon.vue'
+import WkScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   modelValue: '',
@@ -224,32 +225,39 @@ const panelOpen = computed(() => open.value)
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="wk-scale-fade">
-        <ul
+        <div
           v-if="panelOpen"
           ref="panel"
           class="wk-autocomplete__panel"
           :class="{ 'wk-autocomplete__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
-          role="listbox"
         >
-          <li v-if="loading && !filtered.length" class="wk-autocomplete__status">
-            {{ locale.loading }}
-          </li>
-          <li v-else-if="!filtered.length" class="wk-autocomplete__status">
-            <slot name="empty">{{ resolvedEmptyMessage }}</slot>
-          </li>
-          <li
-            v-for="(item, index) in filtered"
-            :key="`${item.value}-${index}`"
-            class="wk-autocomplete__item"
-            role="option"
-            :class="{ 'wk-autocomplete__item--active': index === highlight }"
-            :aria-selected="index === highlight"
-            @mousedown.prevent="select(item)"
+          <WkScrollbar
+            tag="ul"
+            role="listbox"
+            class="wk-autocomplete__panel-scroll"
+            fit-content
+            view-class="wk-autocomplete__panel-list"
           >
-            <slot name="item" :option="item">{{ item.label }}</slot>
-          </li>
-        </ul>
+            <li v-if="loading && !filtered.length" class="wk-autocomplete__status">
+              {{ locale.loading }}
+            </li>
+            <li v-else-if="!filtered.length" class="wk-autocomplete__status">
+              <slot name="empty">{{ resolvedEmptyMessage }}</slot>
+            </li>
+            <li
+              v-for="(item, index) in filtered"
+              :key="`${item.value}-${index}`"
+              class="wk-autocomplete__item"
+              role="option"
+              :class="{ 'wk-autocomplete__item--active': index === highlight }"
+              :aria-selected="index === highlight"
+              @mousedown.prevent="select(item)"
+            >
+              <slot name="item" :option="item">{{ item.label }}</slot>
+            </li>
+          </WkScrollbar>
+        </div>
       </Transition>
     </Teleport>
     </div>

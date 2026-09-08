@@ -102,6 +102,7 @@
 
 .wk-select__menu {
     --wk-select-menu-max-height: min(18rem, 45vh);
+    --wk-select-list-max-height: var(--wk-select-menu-max-height);
     background: var(--wk-color-surface);
     border: var(--wk-border-width) solid var(--wk-color-border);
     border-radius: var(--wk-radius-md);
@@ -109,12 +110,17 @@
     display: flex;
     flex-direction: column;
     margin-top: var(--wk-space-2);
+    max-height: var(--wk-select-menu-max-height);
     min-width: 100%;
     overflow: hidden;
     padding: var(--wk-space-1);
     position: absolute;
     width: max-content;
     z-index: var(--wk-z-popper);
+}
+
+.wk-select__menu:has(.wk-select__filter) {
+    --wk-select-list-max-height: calc(var(--wk-select-menu-max-height) - 2.75rem);
 }
 
 .wk-select__filter {
@@ -131,8 +137,7 @@
 }
 
 .wk-select__list {
-    flex: 0 1 auto;
-    height: auto;
+    max-height: var(--wk-select-list-max-height);
     min-height: 0;
 }
 

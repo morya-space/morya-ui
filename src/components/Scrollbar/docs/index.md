@@ -255,6 +255,7 @@ function loadMore(direction: ScrollbarDirection) {
 | --- | --- | --- | --- |
 | height | `string \| number` | — | 可视区域高度 |
 | maxHeight | `string \| number` | — | 最大高度 |
+| fitContent | `boolean` | `false` | 随内容增高，配合根节点 CSS `max-height` 使用（下拉面板） |
 | native | `boolean` | `false` | 使用原生滚动条 |
 | wrapStyle / wrapClass | style / class | — | wrap 容器样式 |
 | viewStyle / viewClass | style / class | — | 内容区样式 |

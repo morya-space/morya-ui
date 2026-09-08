@@ -1,0 +1,418 @@
+{
+  "categories": [
+    {
+      "id": "color",
+      "order": 1,
+      "title": { "zh-CN": "颜色", "en-US": "Color" },
+      "description": {
+        "zh-CN": "语义色与表面色，亮/暗主题通过 `[data-theme=\"dark\"]` 覆盖。",
+        "en-US": "Semantic and surface colors; dark theme overrides via `[data-theme=\"dark\"]`."
+      }
+    },
+    {
+      "id": "control",
+      "order": 2,
+      "title": { "zh-CN": "控件尺寸", "en-US": "Control sizing" },
+      "description": {
+        "zh-CN": "表单控件高度、字号、内边距与附加区（清除按钮等）尺寸。",
+        "en-US": "Form control heights, font sizes, padding, and affix (clear button) sizing."
+      }
+    },
+    {
+      "id": "spacing",
+      "order": 3,
+      "title": { "zh-CN": "间距", "en-US": "Spacing" },
+      "description": {
+        "zh-CN": "全局间距阶梯；`data-wk-density` 会缩放这些值。",
+        "en-US": "Global spacing scale; scaled by `data-wk-density`."
+      }
+    },
+    {
+      "id": "radius",
+      "order": 4,
+      "title": { "zh-CN": "圆角", "en-US": "Radius" },
+      "description": {
+        "zh-CN": "控件与容器的圆角阶梯。",
+        "en-US": "Corner radius scale for controls and containers."
+      }
+    },
+    {
+      "id": "shadow",
+      "order": 5,
+      "title": { "zh-CN": "阴影", "en-US": "Shadow" },
+      "description": {
+        "zh-CN": "卡片、浮层与粘性列阴影。",
+        "en-US": "Shadows for cards, overlays, and sticky columns."
+      }
+    },
+    {
+      "id": "typography",
+      "order": 6,
+      "title": { "zh-CN": "字体", "en-US": "Typography" },
+      "description": {
+        "zh-CN": "正文字号阶梯与 sans 字体栈。",
+        "en-US": "Body type scale and sans-serif stack."
+      }
+    },
+    {
+      "id": "motion",
+      "order": 7,
+      "title": { "zh-CN": "动效", "en-US": "Motion" },
+      "description": {
+        "zh-CN": "过渡时长、缓动与组件动画周期；`data-wk-motion` 可缩短或关闭。",
+        "en-US": "Transition durations, easing, and component animation periods; shortened or disabled via `data-wk-motion`."
+      }
+    },
+    {
+      "id": "layering",
+      "order": 8,
+      "title": { "zh-CN": "层级", "en-US": "Layering" },
+      "description": {
+        "zh-CN": "浮层 z-index 预算；`ConfigProvider` / `createWiseKit` 的 `zIndex` 会写入 `--wk-z-base`。",
+        "en-US": "Overlay z-index budget; `ConfigProvider` / `createWiseKit` `zIndex` writes `--wk-z-base`."
+      }
+    },
+    {
+      "id": "focus",
+      "order": 9,
+      "title": { "zh-CN": "聚焦", "en-US": "Focus" },
+      "description": {
+        "zh-CN": "键盘聚焦时的描边与光晕。",
+        "en-US": "Keyboard focus border and glow."
+      }
+    },
+    {
+      "id": "state",
+      "order": 10,
+      "title": { "zh-CN": "状态", "en-US": "State" },
+      "description": {
+        "zh-CN": "禁用等交互状态的视觉参数。",
+        "en-US": "Visual parameters for disabled and similar states."
+      }
+    },
+    {
+      "id": "border",
+      "order": 11,
+      "title": { "zh-CN": "边框", "en-US": "Border" },
+      "description": {
+        "zh-CN": "默认描边宽度等边框参数。",
+        "en-US": "Default stroke width and related border tokens."
+      }
+    },
+    {
+      "id": "overlay",
+      "order": 12,
+      "title": { "zh-CN": "浮层", "en-US": "Overlay" },
+      "description": {
+        "zh-CN": "对话框、抽屉等遮罩层颜色。",
+        "en-US": "Scrim color for dialogs, drawers, and similar overlays."
+      }
+    },
+    {
+      "id": "density",
+      "order": 13,
+      "title": { "zh-CN": "密度", "en-US": "Density" },
+      "description": {
+        "zh-CN": "内容密度缩放系数与密度相关尺寸。",
+        "en-US": "Content density scale factor and density-scoped sizing."
+      }
+    },
+    {
+      "id": "table",
+      "order": 14,
+      "title": { "zh-CN": "表格", "en-US": "Table" },
+      "description": {
+        "zh-CN": "WkTable 行高、单元格间距与行状态底色。",
+        "en-US": "WkTable row height, cell spacing, and row state backgrounds."
+      }
+    },
+    {
+      "id": "layout",
+      "order": 15,
+      "title": { "zh-CN": "布局", "en-US": "Layout" },
+      "description": {
+        "zh-CN": "Layout 壳层 Header / Sider / Footer 尺寸与触发条。",
+        "en-US": "Layout shell header, sider, footer sizing and trigger bars."
+      }
+    },
+    {
+      "id": "menu",
+      "order": 16,
+      "title": { "zh-CN": "菜单", "en-US": "Menu" },
+      "description": {
+        "zh-CN": "Menu / Menubar / Dropdown 等菜单项尺寸。",
+        "en-US": "Menu item sizing for Menu, Menubar, Dropdown, and related components."
+      }
+    },
+    {
+      "id": "tree",
+      "order": 17,
+      "title": { "zh-CN": "树形", "en-US": "Tree" },
+      "description": {
+        "zh-CN": "WkTree 缩进与节点间距。",
+        "en-US": "WkTree indent and node spacing."
+      }
+    },
+    {
+      "id": "timeline",
+      "order": 18,
+      "title": { "zh-CN": "时间线", "en-US": "Timeline" },
+      "description": {
+        "zh-CN": "WkTimeline 节点高度与标记尺寸。",
+        "en-US": "WkTimeline event height and marker size."
+      }
+    },
+    {
+      "id": "slider",
+      "order": 19,
+      "title": { "zh-CN": "滑块", "en-US": "Slider" },
+      "description": {
+        "zh-CN": "WkSlider 轨道、滑块与提示框尺寸。",
+        "en-US": "WkSlider track, thumb, and tooltip sizing."
+      }
+    },
+    {
+      "id": "rating",
+      "order": 20,
+      "title": { "zh-CN": "评分", "en-US": "Rating" },
+      "description": {
+        "zh-CN": "WkRating 星形尺寸与间距。",
+        "en-US": "WkRating star sizes and spacing."
+      }
+    },
+    {
+      "id": "tag",
+      "order": 21,
+      "title": { "zh-CN": "标签", "en-US": "Tag" },
+      "description": {
+        "zh-CN": "WkTag 字号等样式参数。",
+        "en-US": "WkTag typography and related styling."
+      }
+    },
+    {
+      "id": "stepper",
+      "order": 22,
+      "title": { "zh-CN": "步骤条", "en-US": "Stepper" },
+      "description": {
+        "zh-CN": "WkStepper 连接线等样式。",
+        "en-US": "WkStepper connector and related styling."
+      }
+    },
+    {
+      "id": "dataview",
+      "order": 23,
+      "title": { "zh-CN": "数据视图", "en-US": "DataView" },
+      "description": {
+        "zh-CN": "WkDataView 网格布局参数。",
+        "en-US": "WkDataView grid layout parameters."
+      }
+    },
+    {
+      "id": "component",
+      "order": 99,
+      "title": { "zh-CN": "组件专用", "en-US": "Component-specific" },
+      "description": {
+        "zh-CN": "单个组件 styles.css 中定义的局部变量。",
+        "en-US": "Local variables defined in individual component styles.css files."
+      }
+    }
+  ],
+  "tokens": {
+    "--wk-color-primary": {
+      "category": "color",
+      "description": {
+        "zh-CN": "品牌主色，用于 primary 按钮、链接与聚焦描边。",
+        "en-US": "Brand primary color for primary buttons, links, and focus rings."
+      }
+    },
+    "--wk-color-primary-hover": {
+      "category": "color",
+      "description": {
+        "zh-CN": "主色 hover / active 态，也用于聚焦边框色。",
+        "en-US": "Primary hover/active state; also used for focused control borders."
+      }
+    },
+    "--wk-color-surface": {
+      "category": "color",
+      "description": {
+        "zh-CN": "页面与卡片默认背景色。",
+        "en-US": "Default page and card background."
+      }
+    },
+    "--wk-color-text": {
+      "category": "color",
+      "description": {
+        "zh-CN": "正文与标题默认文字色。",
+        "en-US": "Default body and heading text color."
+      }
+    },
+    "--wk-color-text-muted": {
+      "category": "color",
+      "description": {
+        "zh-CN": "次要说明、占位符与弱化文字。",
+        "en-US": "Secondary copy, placeholders, and muted text."
+      }
+    },
+    "--wk-color-border": {
+      "category": "color",
+      "description": {
+        "zh-CN": "分割线、输入框与卡片描边。",
+        "en-US": "Dividers, input outlines, and card borders."
+      }
+    },
+    "--wk-color-focus-ring": {
+      "category": "color",
+      "description": {
+        "zh-CN": "无障碍聚焦环颜色（部分组件直接使用）。",
+        "en-US": "Accessibility focus ring color (used directly by some components)."
+      }
+    },
+    "--wk-color-success": {
+      "category": "color",
+      "description": { "zh-CN": "成功语义色。", "en-US": "Success semantic color." }
+    },
+    "--wk-color-info": {
+      "category": "color",
+      "description": { "zh-CN": "信息语义色。", "en-US": "Info semantic color." }
+    },
+    "--wk-color-warning": {
+      "category": "color",
+      "description": { "zh-CN": "警告语义色。", "en-US": "Warning semantic color." }
+    },
+    "--wk-color-warn": {
+      "category": "color",
+      "description": {
+        "zh-CN": "警告语义色别名，指向 `--wk-color-warning`。",
+        "en-US": "Warning alias pointing to `--wk-color-warning`."
+      }
+    },
+    "--wk-color-help": {
+      "category": "color",
+      "description": { "zh-CN": "帮助 / 提示语义色。", "en-US": "Help semantic color." }
+    },
+    "--wk-color-danger": {
+      "category": "color",
+      "description": { "zh-CN": "错误 / 危险语义色。", "en-US": "Error / danger semantic color." }
+    },
+    "--wk-color-contrast": {
+      "category": "color",
+      "description": {
+        "zh-CN": "高对比按钮（contrast 变体）背景色。",
+        "en-US": "High-contrast button (contrast variant) background."
+      }
+    },
+    "--wk-color-contrast-fg": {
+      "category": "color",
+      "description": {
+        "zh-CN": "高对比按钮前景文字色。",
+        "en-US": "High-contrast button foreground text."
+      }
+    },
+    "--wk-color-on-emphasis": {
+      "category": "color",
+      "description": {
+        "zh-CN": "强调色块上的前景（如图标、文字）。",
+        "en-US": "Foreground on emphasis surfaces (icons, text)."
+      }
+    },
+    "--wk-color-fill-light": {
+      "category": "color",
+      "description": {
+        "zh-CN": "浅填充色，用于 hover 行、表头等。",
+        "en-US": "Light fill for hover rows, table headers, etc."
+      }
+    },
+    "--wk-color-fill-lighter": {
+      "category": "color",
+      "description": {
+        "zh-CN": "更浅的填充色，用于斑马纹与展开行。",
+        "en-US": "Lighter fill for zebra stripes and expanded rows."
+      }
+    },
+    "--wk-control-height-small": {
+      "category": "control",
+      "description": {
+        "zh-CN": "small 尺寸控件高度；受密度影响。",
+        "en-US": "Height for `small` controls; affected by density."
+      }
+    },
+    "--wk-control-height-medium": {
+      "category": "control",
+      "description": {
+        "zh-CN": "默认 / medium 控件高度。",
+        "en-US": "Default / `medium` control height."
+      }
+    },
+    "--wk-control-height-large": {
+      "category": "control",
+      "description": {
+        "zh-CN": "large 尺寸控件高度。",
+        "en-US": "Height for `large` controls."
+      }
+    },
+    "--wk-space-1": {
+      "category": "spacing",
+      "description": { "zh-CN": "最小间距阶梯（0.25rem 基准）。", "en-US": "Smallest spacing step (0.25rem base)." }
+    },
+    "--wk-space-4": {
+      "category": "spacing",
+      "description": { "zh-CN": "常用内容间距（1rem）。", "en-US": "Common content spacing (1rem)." }
+    },
+    "--wk-radius-control": {
+      "category": "radius",
+      "description": {
+        "zh-CN": "输入框、按钮等控件的默认圆角。",
+        "en-US": "Default corner radius for inputs, buttons, and controls."
+      }
+    },
+    "--wk-z-base": {
+      "category": "layering",
+      "description": {
+        "zh-CN": "浮层 z-index 基准；可通过全局配置覆盖。",
+        "en-US": "Base z-index for overlays; overridable via global config."
+      }
+    },
+    "--wk-opacity-disabled": {
+      "category": "state",
+      "description": {
+        "zh-CN": "禁用控件的不透明度。",
+        "en-US": "Opacity applied to disabled controls."
+      }
+    },
+    "--wk-overlay-scrim": {
+      "category": "overlay",
+      "description": {
+        "zh-CN": "Modal / Drawer 等遮罩背景色。",
+        "en-US": "Scrim background for Modal, Drawer, and similar overlays."
+      }
+    },
+    "--wk-focus-shadow": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "默认聚焦光晕（主色 20% 混合）。",
+        "en-US": "Default focus glow (primary at 20% mix)."
+      }
+    },
+    "--wk-focus-shadow-danger": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "危险态控件聚焦光晕。",
+        "en-US": "Focus glow for danger-styled controls."
+      }
+    },
+    "--wk-density-scale": {
+      "category": "density",
+      "description": {
+        "zh-CN": "密度缩放系数，comfortable 为 1。",
+        "en-US": "Density scale factor; `comfortable` equals 1."
+      }
+    },
+    "--wk-menu-item-height": {
+      "category": "menu",
+      "description": {
+        "zh-CN": "菜单项行高，随密度变化。",
+        "en-US": "Menu item row height; varies with density."
+      }
+    }
+  }
+}

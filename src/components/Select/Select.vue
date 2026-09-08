@@ -149,9 +149,6 @@ const menuOptions = computed<MenuOption[]>(() => {
 const enabledOptions = computed(() => menuOptions.value.filter((option) => !option.disabled))
 const createLabel = computed(() => formatLocale(locale.value.createOption, { value: query.value }))
 const moreTagsLabel = computed(() => formatLocale(locale.value.moreTags, { count: hiddenTagCount.value }))
-const menuListMaxHeight = computed(() =>
-  resolvedFilter.value ? 'calc(min(18rem, 45vh) - 2.75rem)' : 'min(18rem, 45vh)',
-)
 
 function isSelected(value: SelectValue) {
   return selectedValues.value.some((item) => item === value)
@@ -430,7 +427,7 @@ onBeforeUnmount(() => {
           >
           <WkScrollbar
             class="wk-select__list"
-            :max-height="menuListMaxHeight"
+            fit-content
             wrap-class="wk-select__list-wrap"
             view-class="wk-select__list-view"
           >

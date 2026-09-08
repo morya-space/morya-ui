@@ -95,14 +95,23 @@
     border-radius: var(--wk-radius-md);
     box-shadow: var(--wk-shadow-md);
     left: 0;
-    list-style: none;
     margin: var(--wk-space-1) 0 0;
     max-height: var(--wk-autocomplete-dropdown-max-height);
-    overflow: auto;
-    padding: var(--wk-space-1);
+    overflow: hidden;
     position: absolute;
     right: 0;
     z-index: var(--wk-z-popper);
+}
+
+.wk-autocomplete__panel-scroll {
+    max-height: var(--wk-autocomplete-dropdown-max-height);
+    min-height: 0;
+}
+
+.wk-autocomplete__panel-list {
+    list-style: none;
+    margin: 0;
+    padding: var(--wk-space-1);
 }
 
 .wk-autocomplete__panel--teleported {

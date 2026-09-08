@@ -12,14 +12,37 @@
     );
     --wk-scrollbar-opacity: 0.5;
     --wk-scrollbar-hover-opacity: 0.8;
-    height: 100%;
+    min-height: 0;
     overflow: hidden;
     position: relative;
 }
 
-.wk-scrollbar__wrap {
+.wk-scrollbar--fill {
     height: 100%;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+}
+
+.wk-scrollbar__wrap {
     overflow: auto;
+}
+
+.wk-scrollbar--fill .wk-scrollbar__wrap {
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+}
+
+.wk-scrollbar--fit-content.wk-scrollbar--fill {
+    height: auto;
+}
+
+.wk-scrollbar--fit-content.wk-scrollbar--fill .wk-scrollbar__wrap {
+    height: auto;
+    max-height: inherit;
+    max-width: inherit;
 }
 
 .wk-scrollbar__wrap--hidden-default {

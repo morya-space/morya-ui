@@ -48,7 +48,7 @@ describe('wkSelect', () => {
     expect(wrapper.get('[role="combobox"]').classes()).toContain('wk-select--small')
   })
 
-  it('applies max-height to the option list scrollbar', async () => {
+  it('constrains the menu height and fills the list area with WkScrollbar', async () => {
     const manyOptions = Array.from({ length: 30 }, (_, index) => ({
       label: `Option ${index + 1}`,
       value: index + 1,
@@ -60,7 +60,9 @@ describe('wkSelect', () => {
     await wrapper.get('[role="combobox"]').trigger('click')
     await nextTick()
 
-    expect(wrapper.get('.wk-select__list-wrap').attributes('style')).toContain('max-height: min(18rem, 45vh)')
+    expect(wrapper.get('.wk-select__menu').classes()).toContain('wk-select__menu')
+    expect(wrapper.get('.wk-select__list').classes()).toContain('wk-scrollbar--fill')
+    expect(wrapper.get('.wk-select__list').classes()).toContain('wk-scrollbar--fit-content')
     wrapper.unmount()
   })
 

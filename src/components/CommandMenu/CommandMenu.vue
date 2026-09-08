@@ -7,6 +7,7 @@ import { resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import WkIcon from '../Icon/Icon.vue'
+import WkScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
   model: () => [],
@@ -112,7 +113,13 @@ watch(filtered, () => {
             :placeholder="searchPlaceholder"
             :aria-label="locale.searchCommands"
           >
-          <ul class="wk-commandmenu__list" role="listbox">
+          <WkScrollbar
+            tag="ul"
+            role="listbox"
+            class="wk-commandmenu__list"
+            fit-content
+            view-class="wk-commandmenu__list-view"
+          >
             <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
               <button
                 type="button"
@@ -134,7 +141,7 @@ watch(filtered, () => {
             <li v-if="!filtered.length" class="wk-commandmenu__empty">
               {{ locale.noMatch }}
             </li>
-          </ul>
+          </WkScrollbar>
         </div>
       </div>
     </Transition>

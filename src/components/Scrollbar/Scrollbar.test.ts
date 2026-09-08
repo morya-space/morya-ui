@@ -82,6 +82,14 @@ describe('wkScrollbar', () => {
     wrapper.unmount()
   })
 
+  it('uses fill layout by default to inherit the parent size', () => {
+    const wrapper = mount(WkScrollbar, {
+      slots: { default: '<p>Content</p>' },
+    })
+
+    expect(wrapper.get('.wk-scrollbar').classes()).toContain('wk-scrollbar--fill')
+  })
+
   it('applies max-height and view accessibility attributes', () => {
     const wrapper = mount(WkScrollbar, {
       props: {
@@ -94,12 +102,52 @@ describe('wkScrollbar', () => {
       slots: { default: '<p>Content</p>' },
     })
 
-    expect(wrapper.get('.wk-scrollbar__wrap').attributes('style')).toContain('max-height: 240px')
+    const root = wrapper.get('.wk-scrollbar')
+    expect(root.attributes('style')).toContain('max-height: 240px')
+    expect(root.attributes('style')).toContain('min-height: 0')
+    expect(root.classes()).not.toContain('wk-scrollbar--fill')
+
+    const wrap = wrapper.get('.wk-scrollbar__wrap')
+    expect(wrap.attributes('style')).toContain('max-height: 240px')
+    expect(wrap.attributes('style')).toContain('min-height: 0')
+
     const view = wrapper.get('.wk-scrollbar__view')
     expect(view.attributes('id')).toBe('panel-view')
     expect(view.attributes('role')).toBe('region')
     expect(view.attributes('aria-label')).toBe('Scrollable panel')
     expect(view.attributes('aria-orientation')).toBe('vertical')
+  })
+
+  it('uses constrain layout when max-width is set', () => {
+    const wrapper = mount(WkScrollbar, {
+      props: { maxWidth: '320px' },
+      slots: { default: '<p>Content</p>' },
+    })
+
+    expect(wrapper.get('.wk-scrollbar').classes()).not.toContain('wk-scrollbar--fill')
+    expect(wrapper.get('.wk-scrollbar__wrap').attributes('style')).toContain('max-width: 320px')
+  })
+
+  it('uses fill layout when height is set without max-height', () => {
+    const wrapper = mount(WkScrollbar, {
+      props: { height: 200 },
+      slots: { default: '<p>Content</p>' },
+    })
+
+    expect(wrapper.get('.wk-scrollbar').classes()).toContain('wk-scrollbar--fill')
+    expect(wrapper.get('.wk-scrollbar__wrap').attributes('style')).toContain('height: 200px')
+  })
+
+  it('uses fit-content layout for CSS max-height panels', () => {
+    const wrapper = mount(WkScrollbar, {
+      props: { fitContent: true },
+      attrs: { style: 'max-height: 240px' },
+      slots: { default: '<p>Content</p>' },
+    })
+
+    const root = wrapper.get('.wk-scrollbar')
+    expect(root.classes()).toContain('wk-scrollbar--fill')
+    expect(root.classes()).toContain('wk-scrollbar--fit-content')
   })
 
   it('shows thumbs when trigger is none', async () => {
