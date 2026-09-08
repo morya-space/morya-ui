@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T10:11:31.102Z",
+  "generatedAt": "2026-09-08T07:59:33.770Z",
   "library": {
     "name": "@wise-kit/ui",
     "version": "0.1.1"
@@ -22498,7 +22498,7 @@
             },
             {
               "title": "应用级：`createWiseKit`",
-              "id": "应用级-createroostdesign",
+              "id": "应用级-createwisekit",
               "body": "```ts\nimport { createWiseKit } from '@wise-kit/ui'\nimport { createApp } from 'vue'\n\ncreateApp(App).use(\n    createWiseKit({\n      appendTo: 'body',\n      size: 'small',\n      zIndex: 2000,\n      locale: { accept: '确认', reject: '取消' },\n    }),\n  ).mount('#app')\n```"
             },
             {
@@ -22555,7 +22555,7 @@
             },
             {
               "title": "App-level: `createWiseKit`",
-              "id": "app-level-createroostdesign",
+              "id": "app-level-createwisekit",
               "body": "```ts\nimport { createWiseKit } from '@wise-kit/ui'\nimport { createApp } from 'vue'\n\ncreateApp(App).use(\n    createWiseKit({\n      appendTo: 'body',\n      size: 'small',\n      zIndex: 2000,\n      locale: { accept: 'OK', reject: 'Cancel' },\n    }),\n  ).mount('#app')\n```"
             },
             {
