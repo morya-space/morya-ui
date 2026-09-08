@@ -1,7 +1,7 @@
 ---
 title: Configuration
 order: 5
-description: ConfigProvider, createWiseKit, and useRdConfig.
+description: ConfigProvider, createWiseKit, and useWkConfig.
 ---
 
 # Configuration
@@ -19,7 +19,7 @@ Wise Kit provides app-level and page-level defaults for overlay mount, size, den
 | `zIndex` | Overlay z-index base |
 | `locale` | Confirm, empty, loading, and placeholder copy. Pass built-in packs `zhCN` / `enUS` |
 
-Priority: **component props > `RdConfigProvider` > `createWiseKit` > built-in default (Chinese)**.
+Priority: **component props > `WkConfigProvider` > `createWiseKit` > built-in default (Chinese)**.
 
 ## Locale packs
 
@@ -43,7 +43,7 @@ createWiseKit({
 })
 ```
 
-The **中 / EN** switch in the docs header injects the same pack into `RdConfigProvider`, so live examples (empty states, confirm, dates, and so on) follow the selected language. Markdown pages load `*.en.md` when English is selected.
+The **中 / EN** switch in the docs header injects the same pack into `WkConfigProvider`, so live examples (empty states, confirm, dates, and so on) follow the selected language. Markdown pages load `*.en.md` when English is selected.
 
 ## Size
 
@@ -51,7 +51,7 @@ Controls without a local `size` inherit from ConfigProvider.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput, WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -64,25 +64,25 @@ const options = [
 <template>
   <div style="display:grid;gap:1rem">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
+      <p style="margin:0 0 0.5rem;color:var(--wk-color-text-muted);font-size:0.75rem">
         Default size
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <RdButton label="Button" />
-        <RdInput placeholder="Input" style="width:10rem" />
-        <RdSelect v-model="city" :options="options" style="width:10rem" />
+        <WkButton label="Button" />
+        <WkInput placeholder="Input" style="width:10rem" />
+        <WkSelect v-model="city" :options="options" style="width:10rem" />
       </div>
     </div>
-    <RdConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
+    <WkConfigProvider size="small">
+      <p style="margin:0 0 0.5rem;color:var(--wk-color-text-muted);font-size:0.75rem">
         Config size="small"
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <RdButton label="Button" />
-        <RdInput placeholder="Input" style="width:10rem" />
-        <RdSelect v-model="city" :options="options" style="width:10rem" />
+        <WkButton label="Button" />
+        <WkInput placeholder="Input" style="width:10rem" />
+        <WkSelect v-model="city" :options="options" style="width:10rem" />
       </div>
-    </RdConfigProvider>
+    </WkConfigProvider>
   </div>
 </template>
 ```
@@ -91,7 +91,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
@@ -100,7 +100,7 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <RdButton
+      <WkButton
         v-for="item in (['compact', 'comfortable', 'spacious'] as const)"
         :key="item"
         :label="item"
@@ -109,12 +109,12 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
         @click="density = item"
       />
     </div>
-    <RdConfigProvider :density="density" :global-density="false">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
-        <RdButton label="Save" />
-        <RdInput placeholder="Nickname" style="width:12rem" />
+    <WkConfigProvider :density="density" :global-density="false">
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
+        <WkButton label="Save" />
+        <WkInput placeholder="Nickname" style="width:12rem" />
       </div>
-    </RdConfigProvider>
+    </WkConfigProvider>
   </div>
 </template>
 ```
@@ -123,29 +123,29 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 
 ```vue preview
 <script setup lang="ts">
-import { RdConfigProvider, RdInput, RdTextarea } from '@wise-kit/ui'
+import { WkConfigProvider, WkInput, WkTextarea } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
-    <RdConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--rd-color-text-muted)">
+    <WkConfigProvider input-variant="outlined">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wk-color-text-muted)">
         outlined
       </p>
       <div style="display:grid;gap:0.5rem">
-        <RdInput placeholder="Outlined input" />
-        <RdTextarea placeholder="Outlined textarea" :rows="2" />
+        <WkInput placeholder="Outlined input" />
+        <WkTextarea placeholder="Outlined textarea" :rows="2" />
       </div>
-    </RdConfigProvider>
-    <RdConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--rd-color-text-muted)">
+    </WkConfigProvider>
+    <WkConfigProvider input-variant="filled">
+      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--wk-color-text-muted)">
         filled
       </p>
       <div style="display:grid;gap:0.5rem">
-        <RdInput placeholder="Filled input" />
-        <RdTextarea placeholder="Filled textarea" :rows="2" />
+        <WkInput placeholder="Filled input" />
+        <WkTextarea placeholder="Filled textarea" :rows="2" />
       </div>
-    </RdConfigProvider>
+    </WkConfigProvider>
   </div>
 </template>
 ```
@@ -154,7 +154,7 @@ import { RdConfigProvider, RdInput, RdTextarea } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkConfirmDialog, WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -166,19 +166,19 @@ const options = [
 </script>
 
 <template>
-  <RdConfigProvider
+  <WkConfigProvider
     :locale="{ selectPlaceholder: 'Pick a city', accept: 'OK', reject: 'Not now' }"
   >
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdSelect v-model="city" :options="options" style="width:12rem" />
-      <RdButton label="Open confirm" @click="confirmOpen = true" />
-      <RdConfirmDialog
+      <WkSelect v-model="city" :options="options" style="width:12rem" />
+      <WkButton label="Open confirm" @click="confirmOpen = true" />
+      <WkConfirmDialog
         v-model="confirmOpen"
         header="Confirm"
         message="Button labels come from locale.accept / reject."
       />
     </div>
-  </RdConfigProvider>
+  </WkConfigProvider>
 </template>
 ```
 
@@ -186,21 +186,21 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <RdConfigProvider append-to="body" :z-index="2200">
-    <RdButton label="Open dialog" @click="visible = true" />
-    <RdDialog v-model="visible" header="Mounted to body" width="24rem">
+  <WkConfigProvider append-to="body" :z-index="2200">
+    <WkButton label="Open dialog" @click="visible = true" />
+    <WkDialog v-model="visible" header="Mounted to body" width="24rem">
       <p style="margin:0">
         Overlays Teleport to body by default. The z-index base comes from ConfigProvider.
       </p>
-    </RdDialog>
-  </RdConfigProvider>
+    </WkDialog>
+  </WkConfigProvider>
 </template>
 ```
 
@@ -223,9 +223,9 @@ createApp(App).use(
 ## Reading config
 
 ```ts
-import { useRdConfig } from '@wise-kit/ui'
+import { useWkConfig } from '@wise-kit/ui'
 
-const config = useRdConfig()
+const config = useWkConfig()
 // config.value.appendTo / size / locale …
 ```
 

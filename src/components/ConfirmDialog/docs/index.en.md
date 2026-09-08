@@ -11,22 +11,22 @@ Modal dialog used when the user must explicitly confirm an action.
 ## Import
 
 ```ts
-import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
+import { WkButton, WkConfirmDialog } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
+import { WkButton, WkConfirmDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <RdButton label="Delete" severity="danger" @click="visible = true" />
-  <RdConfirmDialog
+  <WkButton label="Delete" severity="danger" @click="visible = true" />
+  <WkConfirmDialog
     v-model="visible"
     header="Confirm delete"
     message="Are you sure you want to delete this item? This action cannot be undone."

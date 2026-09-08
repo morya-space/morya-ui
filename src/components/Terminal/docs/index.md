@@ -11,14 +11,14 @@ description: 简易命令提示符 UI。
 ## 引入
 
 ```ts
-import { RdTerminal } from '@wise-kit/ui'
+import { WkTerminal } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTerminal } from '@wise-kit/ui'
+import { WkTerminal } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -26,7 +26,7 @@ const last = ref('')
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <RdTerminal welcome-message="Wise Kit Terminal" @command="last = $event" />
+    <WkTerminal welcome-message="Wise Kit Terminal" @command="last = $event" />
     <div v-if="last">
       最近命令：{{ last }}
     </div>

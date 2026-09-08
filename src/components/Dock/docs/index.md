@@ -11,14 +11,14 @@ description: macOS 风格图标坞。
 ## 引入
 
 ```ts
-import { RdDock } from '@wise-kit/ui'
+import { WkDock } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdDock } from '@wise-kit/ui'
+import { WkDock } from '@wise-kit/ui'
 
 const model = [
   { label: '主页', icon: '⌂' },
@@ -28,7 +28,7 @@ const model = [
 </script>
 
 <template>
-  <RdDock :model="model" />
+  <WkDock :model="model" />
 </template>
 ```
 

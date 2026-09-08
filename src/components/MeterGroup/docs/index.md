@@ -11,14 +11,14 @@ description: 多段占比计量条。
 ## 引入
 
 ```ts
-import { RdMeterGroup } from '@wise-kit/ui'
+import { WkMeterGroup } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdMeterGroup } from '@wise-kit/ui'
+import { WkMeterGroup } from '@wise-kit/ui'
 
 const value = [
   { label: '应用', value: 45, color: '#2563eb' },
@@ -28,7 +28,7 @@ const value = [
 </script>
 
 <template>
-  <RdMeterGroup :value="value" :max="100" />
+  <WkMeterGroup :value="value" :max="100" />
 </template>
 ```
 

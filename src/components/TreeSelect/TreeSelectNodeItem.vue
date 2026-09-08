@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { TreeSelectNode } from './types'
 import type { VNode } from 'vue'
-import { useRdLocale } from '../../locale'
-import RdCheckbox from '../Checkbox/Checkbox.vue'
-import RdIcon from '../Icon/Icon.vue'
+import { useWkLocale } from '../../locale'
+import WkCheckbox from '../Checkbox/Checkbox.vue'
+import WkIcon from '../Icon/Icon.vue'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 defineProps<{
@@ -23,13 +23,13 @@ defineEmits<{
   (event: 'check', node: TreeSelectNode): void
 }>()
 
-const locale = useRdLocale()
+const locale = useWkLocale()
 </script>
 
 <template>
   <li
-    class="rd-treeselect__node"
-    :class="{ 'rd-treeselect__node--active': node.key === activeKey }"
+    class="wk-treeselect__node"
+    :class="{ 'wk-treeselect__node--active': node.key === activeKey }"
     role="treeitem"
     :aria-expanded="node.children?.length ? Boolean(expanded[node.key]) : undefined"
     :aria-level="depth + 1"
@@ -37,21 +37,21 @@ const locale = useRdLocale()
     :aria-selected="showCheckbox ? undefined : selectedKeys.includes(node.key)"
     :aria-checked="showCheckbox ? Boolean(checkedKeys[node.key]) : undefined"
   >
-    <div class="rd-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
+    <div class="wk-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
       <button
         v-if="node.children?.length"
         type="button"
-        class="rd-treeselect__toggler"
+        class="wk-treeselect__toggler"
         tabindex="-1"
         :aria-label="expanded[node.key] ? locale.collapse : locale.expand"
         @click.stop="$emit('toggle', node.key)"
       >
-        <RdIcon :name="expanded[node.key] ? 'chevron-down' : 'chevron-right'" size="sm" />
+        <WkIcon :name="expanded[node.key] ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="rd-treeselect__toggler-spacer" />
-      <RdCheckbox
+      <span v-else class="wk-treeselect__toggler-spacer" />
+      <WkCheckbox
         v-if="showCheckbox"
-        class="rd-treeselect__checkbox"
+        class="wk-treeselect__checkbox"
         tabindex="-1"
         :model-value="Boolean(checkedKeys[node.key])"
         :disabled="node.disabled"
@@ -60,8 +60,8 @@ const locale = useRdLocale()
       />
       <button
         type="button"
-        class="rd-treeselect__option"
-        :class="{ 'rd-treeselect__option--selected': selectedKeys.includes(node.key) }"
+        class="wk-treeselect__option"
+        :class="{ 'wk-treeselect__option--selected': selectedKeys.includes(node.key) }"
         :disabled="node.disabled"
         :tabindex="node.key === activeKey ? 0 : -1"
         @click="$emit('select', node)"

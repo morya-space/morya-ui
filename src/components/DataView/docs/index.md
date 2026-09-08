@@ -11,20 +11,20 @@ description: 列表或网格布局展示数据，可分页。
 ## 引入
 
 ```ts
-import { RdDataView } from '@wise-kit/ui'
+import { WkDataView } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdDataView } from '@wise-kit/ui'
+import { WkDataView } from '@wise-kit/ui'
 
 const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 </script>
 
 <template>
-  <RdDataView :value="items" layout="grid" paginator :rows="4">
+  <WkDataView :value="items" layout="grid" paginator :rows="4">
     <template #grid="{ items: page }">
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
         <div v-for="item in page" :key="item">
@@ -32,7 +32,7 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
         </div>
       </div>
     </template>
-  </RdDataView>
+  </WkDataView>
 </template>
 ```
 
@@ -67,4 +67,4 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | --- | --- | --- |
 | `update:page` | — | — |
 
-本组件无自定义事件；分页交互由内置 `RdPagination` 处理。
+本组件无自定义事件；分页交互由内置 `WkPagination` 处理。

@@ -7,11 +7,11 @@ alwaysApply: true
 
 1. **先读** 项目根目录 `DESIGN.md`，再读 `docs/components.md`。
 2. **只用** `@wise-kit/ui` 的 `Rd*` 组件；全局样式 `@wise-kit/ui/styles.css`。
-3. **颜色/间距/圆角** 使用 `--rd-*` CSS 变量，禁止裸 hex/rgb（见 `scripts/check-raw-colors.mjs`）。
+3. **颜色/间距/圆角** 使用 `--wk-*` CSS 变量，禁止裸 hex/rgb（见 `scripts/check-raw-colors.mjs`）。
 4. **页面结构** 对齐 `docs/golden-pages/`（列表 / 表单 / 仪表盘），不要发明新布局范式。
-5. **表单选项** 用 `RdSelect` / `RdTreeSelect`；**动作菜单** 用 `RdDropdown`。
+5. **表单选项** 用 `WkSelect` / `WkTreeSelect`；**动作菜单** 用 `WkDropdown`。
 6. 不确定 API 时查文档站或 MCP，**禁止臆造 prop**。
-7. 根节点用 `RdConfigProvider`；后台布局用 `RdLayout` 系列。
-8. **操作反馈默认 `message` API**；仅 `summary + detail` 或异步通知用 `toast`；表单常驻错误用 `<RdMessage>`。见 `docs/feedback-message-vs-toast.md`。
+7. 根节点用 `WkConfigProvider`；后台布局用 `WkLayout` 系列。
+8. **操作反馈默认 `message` API**；仅 `summary + detail` 或异步通知用 `toast`；表单常驻错误用 `<WkMessage>`。见 `docs/feedback-message-vs-toast.md`。
 
 Token 参考：`design-tokens/tokens.json`

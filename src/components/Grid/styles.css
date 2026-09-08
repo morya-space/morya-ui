@@ -1,9 +1,9 @@
 /* —— Panel: Grid —— */
-.rd-grid {
+.wk-grid {
     box-sizing: border-box;
 }
 
-.rd-grid-item {
+.wk-grid-item {
     box-sizing: border-box;
     min-width: 0;
 }

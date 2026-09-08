@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import RdListbox from './Listbox.vue'
+import WkListbox from './Listbox.vue'
 
 const options = [
   { label: 'Apple', value: 'a' },
@@ -8,41 +8,41 @@ const options = [
   { label: 'Cherry', value: 'c', disabled: true },
 ]
 
-describe('rdListbox', () => {
+describe('wkListbox', () => {
   it('emits single selection', async () => {
-    const wrapper = mount(RdListbox, { props: { options, modelValue: 'a' } })
-    await wrapper.findAll('.rd-listbox__option')[1]!.trigger('click')
+    const wrapper = mount(WkListbox, { props: { options, modelValue: 'a' } })
+    await wrapper.findAll('.wk-listbox__option')[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['b']])
   })
 
   it('supports multiple and filter', async () => {
-    const wrapper = mount(RdListbox, {
+    const wrapper = mount(WkListbox, {
       props: { options, multiple: true, filter: true, modelValue: ['a'] },
     })
-    await wrapper.find('.rd-listbox__filter').setValue('ban')
-    expect(wrapper.findAll('.rd-listbox__option')).toHaveLength(1)
-    await wrapper.find('.rd-listbox__option').trigger('click')
+    await wrapper.find('.wk-listbox__filter').setValue('ban')
+    expect(wrapper.findAll('.wk-listbox__option')).toHaveLength(1)
+    await wrapper.find('.wk-listbox__option').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['a', 'b']])
-    await wrapper.findAll('.rd-listbox__option')[0]
+    await wrapper.findAll('.wk-listbox__option')[0]
   })
 
   it('ignores disabled options', async () => {
-    const wrapper = mount(RdListbox, { props: { options, modelValue: 'a' } })
-    await wrapper.findAll('.rd-listbox__option')[2]!.trigger('click')
+    const wrapper = mount(WkListbox, { props: { options, modelValue: 'a' } })
+    await wrapper.findAll('.wk-listbox__option')[2]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
   })
 
   it('supports roving tabindex and keyboard selection', async () => {
-    const wrapper = mount(RdListbox, {
+    const wrapper = mount(WkListbox, {
       props: { options, modelValue: 'a' },
       attachTo: document.body,
     })
-    const options_ = () => wrapper.findAll('.rd-listbox__option')
+    const options_ = () => wrapper.findAll('.wk-listbox__option')
     // selected option is the single tab stop
     expect(options_()[0]!.attributes('tabindex')).toBe('0')
     expect(options_()[1]!.attributes('tabindex')).toBe('-1')
 
-    const list = wrapper.get('.rd-listbox__list')
+    const list = wrapper.get('.wk-listbox__list')
     expect(list.attributes('aria-label')).toBeTruthy()
 
     // tab into the list: focus lands on the selected option

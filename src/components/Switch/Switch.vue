@@ -2,7 +2,7 @@
 import type { SwitchProps } from './types'
 import { computed, onMounted, useAttrs, useSlots } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
+import { useWkId } from '../../shared/useWkId'
 
 defineOptions({ inheritAttrs: false })
 
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
 const slots = useSlots()
-const autoInputId = useRdId('rd-switch')
+const autoInputId = useWkId('wk-switch')
 const resolvedInputId = computed(
   () => props.inputId ?? props.id ?? autoInputId,
 )
@@ -25,12 +25,12 @@ const isDisabled = computed(() => props.disabled || props.loading)
 const stateText = computed(() => (props.modelValue ? props.checkedText : props.uncheckedText))
 
 const rootClass = computed(() => [
-  'rd-switch',
-  `rd-switch--${sizeClass.value}`,
+  'wk-switch',
+  `wk-switch--${sizeClass.value}`,
   {
-    'rd-switch--disabled': isDisabled.value,
-    'rd-switch--invalid': props.invalid,
-    'rd-switch--loading': props.loading,
+    'wk-switch--disabled': isDisabled.value,
+    'wk-switch--invalid': props.invalid,
+    'wk-switch--loading': props.loading,
   },
 ])
 
@@ -41,7 +41,7 @@ function updateValue(event: Event) {
 
 onMounted(() => {
   if (import.meta.env.DEV && !props.label && !slots.default) {
-    console.warn('[RdSwitch] Provide `label` prop or default slot for an accessible name.')
+    console.warn('[WkSwitch] Provide `label` prop or default slot for an accessible name.')
   }
 })
 </script>
@@ -51,7 +51,7 @@ onMounted(() => {
     <input
       v-bind="attrs"
       :id="resolvedInputId"
-      class="rd-switch__input"
+      class="wk-switch__input"
       type="checkbox"
       role="switch"
       :name="name"
@@ -64,12 +64,12 @@ onMounted(() => {
       :aria-busy="loading || undefined"
       @change="updateValue"
     >
-    <span class="rd-switch__track" aria-hidden="true">
-      <span v-if="stateText" class="rd-switch__text">{{ stateText }}</span>
-      <span class="rd-switch__thumb">
-        <span v-if="loading" class="rd-switch__spinner" />
+    <span class="wk-switch__track" aria-hidden="true">
+      <span v-if="stateText" class="wk-switch__text">{{ stateText }}</span>
+      <span class="wk-switch__thumb">
+        <span v-if="loading" class="wk-switch__spinner" />
       </span>
     </span>
-    <span v-if="label || $slots.default" class="rd-switch__label"><slot>{{ label }}</slot></span>
+    <span v-if="label || $slots.default" class="wk-switch__label"><slot>{{ label }}</slot></span>
   </label>
 </template>

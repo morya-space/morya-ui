@@ -8,21 +8,21 @@ description: Action menu overlay (not a form select). Unlike Select, it is used 
 
 Action menu overlay. Opens a set of actions from a trigger.
 
-**Difference from Select:** `RdDropdown` is a menu overlay; for form option selection, use `RdSelect`.
+**Difference from Select:** `WkDropdown` is a menu overlay; for form option selection, use `WkSelect`.
 
 Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), nested `items`, and `trigger: 'hover'` with `showDelay` / `hideDelay`. Keyboard highlight still covers top-level leaves only.
 
 ## Import
 
 ```ts
-import { RdButton, RdDropdown } from '@wise-kit/ui'
+import { WkButton, WkDropdown } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDropdown } from '@wise-kit/ui'
+import { WkButton, WkDropdown } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -39,11 +39,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <RdDropdown v-model="open" :items="items" @select="onSelect">
+  <WkDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <RdButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <WkButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </RdDropdown>
+  </WkDropdown>
 </template>
 ```
 
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDropdown } from '@wise-kit/ui'
+import { WkButton, WkDropdown } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -63,11 +63,11 @@ const items = [
 </script>
 
 <template>
-  <RdDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
+  <WkDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
     <template #trigger>
-      <RdButton label="Hover to open" severity="secondary" />
+      <WkButton label="Hover to open" severity="secondary" />
     </template>
-  </RdDropdown>
+  </WkDropdown>
 </template>
 ```
 

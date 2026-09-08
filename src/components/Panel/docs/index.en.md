@@ -11,28 +11,28 @@ Panel for grouping content. Collapse can be enabled.
 ## Import
 
 ```ts
-import { RdPanel } from '@wise-kit/ui'
+import { WkPanel } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdPanel } from '@wise-kit/ui'
+import { WkPanel } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <RdPanel v-model="collapsed" header="Panel" toggleable>
+  <WkPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       Collapsible panel content.
     </p>
     <template #footer>
       Actions
     </template>
-  </RdPanel>
+  </WkPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdPanel } from '@wise-kit/ui'
+import { WkPanel } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdPanel header="Small" size="small">
+  <WkPanel header="Small" size="small">
     <p style="margin:0">
       A more compact panel.
     </p>
-  </RdPanel>
+  </WkPanel>
 </template>
 ```
 

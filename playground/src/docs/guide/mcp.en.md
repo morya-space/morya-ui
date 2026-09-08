@@ -184,11 +184,11 @@ The assistant should call tools first, then produce something like:
 
 ```vue
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdButton label="Delete" severity="danger" />
+  <WkButton label="Delete" severity="danger" />
 </template>
 ```
 

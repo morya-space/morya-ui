@@ -11,14 +11,14 @@ Browse an image list and keep `activeIndex` in sync.
 ## Import
 
 ```ts
-import { RdGallery } from '@wise-kit/ui'
+import { WkGallery } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdGallery } from '@wise-kit/ui'
+import { WkGallery } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)
@@ -30,7 +30,7 @@ const images = [
 </script>
 
 <template>
-  <RdGallery v-model:active-index="activeIndex" :images="images" />
+  <WkGallery v-model:active-index="activeIndex" :images="images" />
 </template>
 ```
 

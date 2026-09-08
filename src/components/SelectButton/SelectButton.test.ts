@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import RdSelectButton from './SelectButton.vue'
+import WkSelectButton from './SelectButton.vue'
 
 const options = [
   { label: 'Left', value: 'left' },
@@ -8,20 +8,20 @@ const options = [
   { label: 'Right', value: 'right', disabled: true },
 ]
 
-describe('rdSelectButton', () => {
+describe('wkSelectButton', () => {
   it('emits single selection', async () => {
-    const wrapper = mount(RdSelectButton, { props: { options, modelValue: 'left' } })
-    const buttons = wrapper.findAll('.rd-selectbutton__button')
+    const wrapper = mount(WkSelectButton, { props: { options, modelValue: 'left' } })
+    const buttons = wrapper.findAll('.wk-selectbutton__button')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['center']])
-    expect(buttons[0]!.classes()).toContain('rd-selectbutton__button--active')
+    expect(buttons[0]!.classes()).toContain('wk-selectbutton__button--active')
   })
 
   it('supports multiple selection and ignores disabled options', async () => {
-    const wrapper = mount(RdSelectButton, {
+    const wrapper = mount(WkSelectButton, {
       props: { options, multiple: true, modelValue: ['left'] },
     })
-    const buttons = wrapper.findAll('.rd-selectbutton__button')
+    const buttons = wrapper.findAll('.wk-selectbutton__button')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['left', 'center']])
     await buttons[2]!.trigger('click')
@@ -29,24 +29,24 @@ describe('rdSelectButton', () => {
   })
 
   it('maps size and invalid classes', () => {
-    const wrapper = mount(RdSelectButton, {
+    const wrapper = mount(WkSelectButton, {
       props: { options, size: 'large', invalid: true },
     })
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(['rd-selectbutton--large', 'rd-selectbutton--invalid']),
+      expect.arrayContaining(['wk-selectbutton--large', 'wk-selectbutton--invalid']),
     )
   })
 
   it('supports group roving tabindex and arrow keys', async () => {
-    const wrapper = mount(RdSelectButton, {
+    const wrapper = mount(WkSelectButton, {
       props: { options, modelValue: 'left' },
       attachTo: document.body,
     })
-    const buttons = () => wrapper.findAll('.rd-selectbutton__button')
+    const buttons = () => wrapper.findAll('.wk-selectbutton__button')
     expect(buttons()[0]!.attributes('tabindex')).toBe('0')
     expect(buttons()[1]!.attributes('tabindex')).toBe('-1')
 
-    const group = wrapper.get('.rd-selectbutton')
+    const group = wrapper.get('.wk-selectbutton')
     await group.trigger('keydown', { key: 'ArrowRight' })
     expect(document.activeElement).toBe(buttons()[0]!.element)
 

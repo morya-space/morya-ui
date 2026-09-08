@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
-import { formatLocale, useRdLocale } from '../../locale'
-import { useComponentDefaults, useConfiguredSize, useRdConfig } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
+import { formatLocale, useWkLocale } from '../../locale'
+import { useComponentDefaults, useConfiguredSize, useWkConfig } from '../../shared/config'
+import { useWkId } from '../../shared/useWkId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -40,8 +40,8 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 const defaults = useComponentDefaults('Select')
-const config = useRdConfig()
-const locale = useRdLocale()
+const config = useWkConfig()
+const locale = useWkLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
@@ -51,7 +51,7 @@ const filterQuery = ref('')
 const highlightedIndex = ref(-1)
 const menuStyle = ref<Record<string, string>>({})
 const createdOptions = ref<SelectOption[]>([])
-const autoSelectId = useRdId('rd-select')
+const autoSelectId = useWkId('wk-select')
 const selectId = computed(() => props.id ?? autoSelectId)
 
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -314,29 +314,29 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="rd-select-field" :class="{ 'rd-select-field--fluid': resolvedFluid }">
-    <label v-if="label" class="rd-select-field__label" :for="selectId">{{ label }}</label>
+  <div ref="root" class="wk-select-field" :class="{ 'wk-select-field--fluid': resolvedFluid }">
+    <label v-if="label" class="wk-select-field__label" :for="selectId">{{ label }}</label>
     <div
-      class="rd-select__control"
+      class="wk-select__control"
       :class="{
-        'rd-select__control--clearable': showClearButton,
-        'rd-select__control--open': open,
+        'wk-select__control--clearable': showClearButton,
+        'wk-select__control--open': open,
       }"
     >
       <div
         :id="selectId"
         ref="trigger"
-        class="rd-select"
+        class="wk-select"
         :class="[
-          `rd-select--${sizeClass}`,
+          `wk-select--${sizeClass}`,
           {
-            'rd-select--invalid': isInvalid,
-            'rd-select--open': open,
-            'rd-select--placeholder': !hasValue,
-            'rd-select--fluid': resolvedFluid,
-            'rd-select--multiple': resolvedMultiple,
-            'rd-select--disabled': disabled,
-            'rd-select--loading': resolvedLoading,
+            'wk-select--invalid': isInvalid,
+            'wk-select--open': open,
+            'wk-select--placeholder': !hasValue,
+            'wk-select--fluid': resolvedFluid,
+            'wk-select--multiple': resolvedMultiple,
+            'wk-select--disabled': disabled,
+            'wk-select--loading': resolvedLoading,
           },
         ]"
         role="combobox"
@@ -352,60 +352,60 @@ onBeforeUnmount(() => {
         @click="setOpen(!open)"
         @keydown="onTriggerKeydown"
       >
-        <div v-if="resolvedMultiple && hasValue" class="rd-select__tags">
-          <span v-for="option in visibleTags" :key="String(option.value)" class="rd-select__tag">
-            <span class="rd-select__tag-label">{{ option.label }}</span>
+        <div v-if="resolvedMultiple && hasValue" class="wk-select__tags">
+          <span v-for="option in visibleTags" :key="String(option.value)" class="wk-select__tag">
+            <span class="wk-select__tag-label">{{ option.label }}</span>
             <button
-              class="rd-select__tag-remove"
+              class="wk-select__tag-remove"
               type="button"
               :aria-label="locale.removeTag"
               :disabled="disabled"
               @click="removeTag(option.value, $event)"
             >
-              <RdIcon name="close" size="sm" />
+              <WkIcon name="close" size="sm" />
             </button>
           </span>
           <span
             v-if="hiddenTagCount"
-            class="rd-select__tag rd-select__tag--more"
+            class="wk-select__tag wk-select__tag--more"
             :aria-label="moreTagsLabel"
           >
             +{{ hiddenTagCount }}
           </span>
         </div>
-        <span v-else class="rd-select__value">
+        <span v-else class="wk-select__value">
           <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
           <template v-else>{{ displayLabel }}</template>
         </span>
-        <span v-if="resolvedLoading" class="rd-select__spinner" aria-hidden="true" />
+        <span v-if="resolvedLoading" class="wk-select__spinner" aria-hidden="true" />
       </div>
-      <div class="rd-select__suffix">
+      <div class="wk-select__suffix">
         <button
           v-if="showClearButton"
-          class="rd-select__clear"
+          class="wk-select__clear"
           type="button"
           :aria-label="locale.clear"
           @click="clear"
         >
-          <RdIcon name="close" class="rd-control-affix-icon" />
+          <WkIcon name="close" class="wk-control-affix-icon" />
         </button>
         <span
-          class="rd-select__indicator"
-          :class="{ 'rd-select__indicator--open': open }"
+          class="wk-select__indicator"
+          :class="{ 'wk-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <RdIcon name="chevron-down" class="rd-control-affix-icon" />
+          <WkIcon name="chevron-down" class="wk-control-affix-icon" />
         </span>
       </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="rd-scale-fade">
+      <Transition name="wk-scale-fade">
         <div
           v-if="open"
           :id="`${selectId}-listbox`"
           ref="menu"
-          class="rd-select__menu"
-          :class="[`rd-select__menu--${placement}`, { 'rd-select__menu--teleported': teleported }]"
+          class="wk-select__menu"
+          :class="[`wk-select__menu--${placement}`, { 'wk-select__menu--teleported': teleported }]"
           :style="teleported ? menuStyle : undefined"
           role="listbox"
           tabindex="-1"
@@ -417,24 +417,24 @@ onBeforeUnmount(() => {
             v-if="resolvedFilter"
             ref="filterInput"
             v-model="filterQuery"
-            class="rd-select__filter"
+            class="wk-select__filter"
             type="search"
             :placeholder="locale.searchPlaceholder"
             :aria-label="locale.filterOptions"
             @click.stop
             @keydown.stop="onMenuKeydown"
           >
-          <div v-if="resolvedLoading" class="rd-select__empty" role="status">
+          <div v-if="resolvedLoading" class="wk-select__empty" role="status">
             {{ locale.loading }}
           </div>
           <button
             v-for="option in menuOptions"
             :key="option.created ? `__create:${String(option.value)}` : String(option.value)"
-            class="rd-select__option"
+            class="wk-select__option"
             :class="{
-              'rd-select__option--selected': !option.created && isSelected(option.value),
-              'rd-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
-              'rd-select__option--create': option.created,
+              'wk-select__option--selected': !option.created && isSelected(option.value),
+              'wk-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
+              'wk-select__option--create': option.created,
             }"
             type="button"
             role="option"
@@ -446,14 +446,14 @@ onBeforeUnmount(() => {
             <slot name="option" :option="option">
               <span>{{ option.created ? createLabel : option.label }}</span>
             </slot>
-            <RdIcon
+            <WkIcon
               v-if="!option.created && isSelected(option.value)"
-              class="rd-select__check"
+              class="wk-select__check"
               name="check"
               size="sm"
             />
           </button>
-          <div v-if="!menuOptions.length && !resolvedLoading" class="rd-select__empty" role="status">
+          <div v-if="!menuOptions.length && !resolvedLoading" class="wk-select__empty" role="status">
             {{ resolvedEmptyMessage }}
           </div>
         </div>
@@ -461,7 +461,7 @@ onBeforeUnmount(() => {
     </Teleport>
     <input
       v-if="required"
-      class="rd-select__required-input"
+      class="wk-select__required-input"
       tabindex="-1"
       aria-hidden="true"
       :required="!hasValue"
@@ -470,8 +470,8 @@ onBeforeUnmount(() => {
     <span
       v-if="feedbackText"
       :id="`${selectId}-help`"
-      class="rd-select-field__help"
-      :class="{ 'rd-select-field__help--invalid': feedbackIsError }"
+      class="wk-select-field__help"
+      :class="{ 'wk-select-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

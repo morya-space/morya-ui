@@ -48,7 +48,7 @@ Whether you are starting a new admin dashboard, SaaS product, or internal tool, 
 
 ### Theme-ready
 
-Light and dark modes powered by `--rd-*` CSS variables. Switch themes with `useTheme`, tune density and motion with `useDensity` / `useMotion`, and override per subtree via `RdConfigProvider`.
+Light and dark modes powered by `--wk-*` CSS variables. Switch themes with `useTheme`, tune density and motion with `useDensity` / `useMotion`, and override per subtree via `WkConfigProvider`.
 
 ### TypeScript-first
 
@@ -105,8 +105,8 @@ createApp(App).use(WiseKit).mount('#app')
 On-demand import (styles included automatically):
 
 ```ts
-import { RdButton } from '@wise-kit/ui/button'
-import { RdInput } from '@wise-kit/ui/input'
+import { WkButton } from '@wise-kit/ui/button'
+import { WkInput } from '@wise-kit/ui/input'
 ```
 
 For global defaults (locale, size, overlay mount point):

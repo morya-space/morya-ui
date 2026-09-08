@@ -11,14 +11,14 @@ Modal dialog. Visibility uses `v-model` (`modelValue`), corresponding to `visibl
 ## Import
 
 ```ts
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -26,12 +26,12 @@ const open = ref(false)
 
 <template>
   <div>
-    <RdButton label="Open Dialog" @click="open = true" />
-    <RdDialog v-model="open" header="Confirm" width="28rem">
+    <WkButton label="Open Dialog" @click="open = true" />
+    <WkDialog v-model="open" header="Confirm" width="28rem">
       <p style="margin:0">
         Use <code>header</code> or <code>title</code> for the dialog title.
       </p>
-    </RdDialog>
+    </WkDialog>
   </div>
 </template>
 ```
@@ -42,7 +42,7 @@ Supports `center` / `top` / `bottom` / `left` / `right` and the four corner posi
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -56,15 +56,15 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <RdButton label="Center" size="small" @click="openAt('center')" />
-    <RdButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <RdButton label="Top Right" size="small" @click="openAt('topright')" />
-    <RdButton label="Bottom Left" size="small" severity="secondary" @click="openAt('bottomleft')" />
-    <RdDialog v-model="open" :header="`Position: ${position}`" :position="position">
+    <WkButton label="Center" size="small" @click="openAt('center')" />
+    <WkButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
+    <WkButton label="Top Right" size="small" @click="openAt('topright')" />
+    <WkButton label="Bottom Left" size="small" severity="secondary" @click="openAt('bottomleft')" />
+    <WkDialog v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">
         Dialog can dock to edges and corners.
       </p>
-    </RdDialog>
+    </WkDialog>
   </div>
 </template>
 ```
@@ -73,7 +73,7 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -81,18 +81,18 @@ const open = ref(false)
 
 <template>
   <div>
-    <RdButton label="With Footer" @click="open = true" />
-    <RdDialog v-model="open" header="Save changes" width="28rem">
+    <WkButton label="With Footer" @click="open = true" />
+    <WkDialog v-model="open" header="Save changes" width="28rem">
       <p style="margin:0">
         Footer slot is for primary and secondary actions.
       </p>
       <template #footer>
         <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-          <RdButton label="Cancel" severity="secondary" text @click="open = false" />
-          <RdButton label="Confirm" @click="open = false" />
+          <WkButton label="Cancel" severity="secondary" text @click="open = false" />
+          <WkButton label="Confirm" @click="open = false" />
         </div>
       </template>
-    </RdDialog>
+    </WkDialog>
   </div>
 </template>
 ```
@@ -103,7 +103,7 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}`), clicking the 
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -111,12 +111,12 @@ const open = ref(false)
 
 <template>
   <div>
-    <RdButton label="No Mask Dismiss" severity="secondary" @click="open = true" />
-    <RdDialog v-model="open" header="Stay open" :dismissable-mask="false">
+    <WkButton label="No Mask Dismiss" severity="secondary" @click="open = true" />
+    <WkDialog v-model="open" header="Stay open" :dismissable-mask="false">
       <p style="margin:0">
         Click the mask — the dialog stays open. Use the close button or Esc.
       </p>
-    </RdDialog>
+    </WkDialog>
   </div>
 </template>
 ```
@@ -127,7 +127,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -135,12 +135,12 @@ const open = ref(false)
 
 <template>
   <div>
-    <RdButton label="Maximizable" @click="open = true" />
-    <RdDialog v-model="open" header="Workspace" maximizable width="32rem">
+    <WkButton label="Maximizable" @click="open = true" />
+    <WkDialog v-model="open" header="Workspace" maximizable width="32rem">
       <p style="margin:0">
         Toggle maximize to fill the viewport.
       </p>
-    </RdDialog>
+    </WkDialog>
   </div>
 </template>
 ```
@@ -151,7 +151,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@wise-kit/ui'
+import { WkButton, WkDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -163,8 +163,8 @@ async function save() {
 
 <template>
   <div>
-    <RdButton label="Save dialog" @click="open = true" />
-    <RdDialog
+    <WkButton label="Save dialog" @click="open = true" />
+    <WkDialog
       v-model="open"
       header="Save changes"
       type="info"
@@ -177,7 +177,7 @@ async function save() {
       <p style="margin:0">
         The close button, Esc, and mask run <code>beforeClose</code>; Save runs <code>onPositiveClick</code>.
       </p>
-    </RdDialog>
+    </WkDialog>
   </div>
 </template>
 ```

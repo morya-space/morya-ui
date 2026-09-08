@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdConfigProvider } from '@wise-kit/ui'
+import { WkConfigProvider } from '@wise-kit/ui'
 import { RouterView } from 'vue-router'
 import SiteHeader from './components/SiteHeader.vue'
 import { useDocsI18n } from './i18n'
@@ -8,7 +8,7 @@ const { componentLocale } = useDocsI18n()
 </script>
 
 <template>
-  <RdConfigProvider class="site-config" :locale="componentLocale" :global-density="false">
+  <WkConfigProvider class="site-config" :locale="componentLocale" :global-density="false">
     <div class="site-shell">
       <div class="site-atmosphere" aria-hidden="true">
         <div class="site-atmosphere__glow site-atmosphere__glow--a" />
@@ -20,7 +20,7 @@ const { componentLocale } = useDocsI18n()
         <RouterView />
       </div>
     </div>
-  </RdConfigProvider>
+  </WkConfigProvider>
 </template>
 
 <style>
@@ -28,13 +28,13 @@ const { componentLocale } = useDocsI18n()
   --docs-display: 'Syne', 'Segoe UI', sans-serif;
   --docs-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
   --docs-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --docs-ink: color-mix(in srgb, var(--rd-color-text) 92%, #041018);
-  --docs-glow: color-mix(in srgb, var(--rd-color-primary) 55%, #22d3ee);
-  --docs-panel: color-mix(in srgb, var(--rd-color-surface) 78%, transparent);
-  --docs-edge: color-mix(in srgb, var(--rd-color-border) 70%, transparent);
+  --docs-ink: color-mix(in srgb, var(--wk-color-text) 92%, #041018);
+  --docs-glow: color-mix(in srgb, var(--wk-color-primary) 55%, #22d3ee);
+  --docs-panel: color-mix(in srgb, var(--wk-color-surface) 78%, transparent);
+  --docs-edge: color-mix(in srgb, var(--wk-color-border) 70%, transparent);
 
-  color: var(--rd-color-text);
-  background: var(--rd-color-surface);
+  color: var(--wk-color-text);
+  background: var(--wk-color-surface);
   font-family: var(--docs-body);
 }
 
@@ -62,14 +62,14 @@ input {
 button:focus-visible,
 input:focus-visible,
 a:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--rd-color-focus-ring) 40%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--wk-color-focus-ring) 40%, transparent);
   outline-offset: 3px;
 }
 
-.rd-autocomplete__input:focus-visible,
-.rd-autocomplete__dropdown:focus-visible,
-.rd-select:focus-visible,
-.rd-icon-field input:focus-visible {
+.wk-autocomplete__input:focus-visible,
+.wk-autocomplete__dropdown:focus-visible,
+.wk-select:focus-visible,
+.wk-icon-field input:focus-visible {
   outline: none;
   outline-offset: 0;
 }
@@ -82,7 +82,7 @@ a:focus-visible {
 }
 
 .site-shell {
-  background: var(--rd-color-surface);
+  background: var(--wk-color-surface);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -115,7 +115,7 @@ a:focus-visible {
 }
 
 .site-atmosphere__glow--b {
-  background: radial-gradient(circle, color-mix(in srgb, var(--rd-color-primary) 45%, #0ea5e9) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--wk-color-primary) 45%, #0ea5e9) 0%, transparent 70%);
   bottom: -12rem;
   height: 32rem;
   opacity: 0.28;

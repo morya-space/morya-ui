@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { RdFormFieldRegistration } from './context'
+import type { WkFormFieldRegistration } from './context'
 import type { FormProps, FormValidateTrigger } from './types'
 import { computed, provide, reactive, ref, toRaw, watch } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
 import {
-  RD_FORM_KEY,
-  RD_FORM_ERRORS_KEY,
+  WK_FORM_KEY,
+  WK_FORM_ERRORS_KEY,
 } from './context'
 
 const props = withDefaults(defineProps<FormProps>(), {
@@ -23,7 +23,7 @@ const emit = defineEmits<{
   (event: 'validate', payload: { valid: boolean; errors: Record<string, string> }): void
 }>()
 
-const fields = new Map<string, RdFormFieldRegistration>()
+const fields = new Map<string, WkFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
 const initialSnapshot = ref<Record<string, unknown> | undefined>(undefined)
 
@@ -110,7 +110,7 @@ function resetFields(names?: string | string[]) {
   else clearValidate(names)
 }
 
-function registerField(field: RdFormFieldRegistration) {
+function registerField(field: WkFormFieldRegistration) {
   fields.set(field.name, field)
 }
 
@@ -148,8 +148,8 @@ const context = computed(() => ({
   notifyInput,
 }))
 
-provide(RD_FORM_KEY, context)
-provide(RD_FORM_ERRORS_KEY, internalErrors)
+provide(WK_FORM_KEY, context)
+provide(WK_FORM_ERRORS_KEY, internalErrors)
 
 async function onSubmit() {
   if (validateOn.value.includes('submit')) {
@@ -165,20 +165,20 @@ defineExpose({ validate, clearValidate, reset, resetFields, errors: internalErro
 
 <template>
   <form
-    class="rd-form"
+    class="wk-form"
     :class="[
-      `rd-form--label-${resolvedLabelPosition}`,
-      `rd-form--align-${labelAlign}`,
-      sizeClass ? `rd-form--size-${sizeClass}` : undefined,
+      `wk-form--label-${resolvedLabelPosition}`,
+      `wk-form--align-${labelAlign}`,
+      sizeClass ? `wk-form--size-${sizeClass}` : undefined,
       {
-        'rd-form--disabled': disabled,
-        'rd-form--inline': inline,
+        'wk-form--disabled': disabled,
+        'wk-form--inline': inline,
       },
     ]"
     :aria-disabled="disabled || undefined"
     @submit.prevent="onSubmit"
   >
-    <fieldset class="rd-form__fieldset" :disabled="disabled">
+    <fieldset class="wk-form__fieldset" :disabled="disabled">
       <slot />
     </fieldset>
   </form>

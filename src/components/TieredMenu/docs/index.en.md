@@ -11,14 +11,14 @@ Vertical menu with **one** submenu level on hover or click. Use `popup` for over
 ## Import
 
 ```ts
-import { RdTieredMenu, type TieredMenuItem } from '@wise-kit/ui'
+import { WkTieredMenu, type TieredMenuItem } from '@wise-kit/ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { RdTieredMenu } from '@wise-kit/ui'
+import { WkTieredMenu } from '@wise-kit/ui'
 
 const model = [
   {
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <RdTieredMenu :model="model" />
+  <WkTieredMenu :model="model" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ Combine `popup` with `v-model` for toolbar triggers:
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTieredMenu } from '@wise-kit/ui'
+import { WkButton, WkTieredMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -52,8 +52,8 @@ const model = [{ label: 'Copy' }, { label: 'Paste' }]
 </script>
 
 <template>
-  <RdButton label="Actions" @click="open = true" />
-  <RdTieredMenu v-model="open" popup :model="model" />
+  <WkButton label="Actions" @click="open = true" />
+  <WkTieredMenu v-model="open" popup :model="model" />
 </template>
 ```
 

@@ -2,9 +2,9 @@ import { mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import { resetToastService, toast, toastState } from './toast'
-import RdToast from './Toast.vue'
+import WkToast from './Toast.vue'
 
-describe('rdToast', () => {
+describe('wkToast', () => {
   afterEach(() => {
     vi.useRealTimers()
     resetToastService()
@@ -12,9 +12,9 @@ describe('rdToast', () => {
 
   it('renders messages and emits the closed message', async () => {
     const message = { id: 'saved', summary: 'Saved', detail: 'Your changes are live.', severity: 'success' as const }
-    const wrapper = mount(RdToast, { attachTo: document.body, props: { messages: [message] } })
+    const wrapper = mount(WkToast, { attachTo: document.body, props: { messages: [message] } })
     expect(document.body.textContent).toContain('Your changes are live.')
-    const closeButton = document.body.querySelector('.rd-toast__close')
+    const closeButton = document.body.querySelector('.wk-toast__close')
     expect(closeButton).toBeTruthy()
     closeButton!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await wrapper.vm.$nextTick()
@@ -27,10 +27,10 @@ describe('rdToast', () => {
       { id: 'w1', summary: 'Warn', severity: 'warn' as const },
       { id: 'w2', summary: 'Warning', severity: 'warning' as const },
     ]
-    const wrapper = mount(RdToast, { attachTo: document.body, props: { messages } })
-    const nodes = document.body.querySelectorAll('.rd-toast__message')
-    expect(nodes[0]?.classList.contains('rd-toast__message--warn')).toBe(true)
-    expect(nodes[1]?.classList.contains('rd-toast__message--warn')).toBe(true)
+    const wrapper = mount(WkToast, { attachTo: document.body, props: { messages } })
+    const nodes = document.body.querySelectorAll('.wk-toast__message')
+    expect(nodes[0]?.classList.contains('wk-toast__message--warn')).toBe(true)
+    expect(nodes[1]?.classList.contains('wk-toast__message--warn')).toBe(true)
     wrapper.unmount()
   })
 })
@@ -50,7 +50,7 @@ describe('toast API', () => {
       severity: 'success',
     })
     await nextTick()
-    expect(document.body.querySelector('.rd-toast')).toBeTruthy()
+    expect(document.body.querySelector('.wk-toast')).toBeTruthy()
     expect(document.body.textContent).toContain('Saved')
   })
 
@@ -70,8 +70,8 @@ describe('toast API', () => {
       life: 0,
     })
     await nextTick()
-    expect(document.body.querySelector('.rd-toast__content strong')?.textContent).toBe('Title node')
-    expect(document.body.querySelector('.rd-toast__content em')?.textContent).toBe('Detail node')
+    expect(document.body.querySelector('.wk-toast__content strong')?.textContent).toBe('Title node')
+    expect(document.body.querySelector('.wk-toast__content em')?.textContent).toBe('Detail node')
   })
 
   it('drops the oldest toast when max is reached', () => {
@@ -100,7 +100,7 @@ describe('toast API', () => {
     vi.useFakeTimers()
     toast.info({ summary: 'Hover me', life: 1000 })
     await nextTick()
-    const node = document.body.querySelector('.rd-toast__message')
+    const node = document.body.querySelector('.wk-toast__message')
     expect(node).toBeTruthy()
     node!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
     await vi.advanceTimersByTimeAsync(1500)
@@ -114,6 +114,6 @@ describe('toast API', () => {
     toast.setDefaults({ position: 'top' })
     toast.info({ summary: 'Centered', life: 0 })
     await nextTick()
-    expect(document.body.querySelector('.rd-toast--top')).toBeTruthy()
+    expect(document.body.querySelector('.wk-toast--top')).toBeTruthy()
   })
 })

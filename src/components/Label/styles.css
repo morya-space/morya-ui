@@ -1,8 +1,8 @@
 /* —— Form: Label —— */
-.rd-label {
-    color: var(--rd-color-text);
+.wk-label {
+    color: var(--wk-color-text);
     display: inline-block;
-    font-size: var(--rd-font-size-md);
+    font-size: var(--wk-font-size-md);
     font-weight: 600;
     line-height: 1.4;
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AvatarProps, AvatarSize } from './types'
 import { computed, ref, watch } from 'vue'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<AvatarProps>(), {
   shape: 'circle',
@@ -36,9 +36,9 @@ const iconSize = computed(() => {
 })
 
 const avatarClass = computed(() => [
-  'rd-avatar',
-  `rd-avatar--${props.shape}`,
-  `rd-avatar--${resolvedSize.value}`,
+  'wk-avatar',
+  `wk-avatar--${props.shape}`,
+  `wk-avatar--${resolvedSize.value}`,
 ])
 
 const displayMode = computed(() => {
@@ -57,14 +57,14 @@ function onImageError(event: Event) {
   <span :class="avatarClass" role="img" :aria-label="label || undefined">
     <img
       v-if="displayMode === 'image'"
-      class="rd-avatar__image"
+      class="wk-avatar__image"
       :src="image"
       :alt="label || ''"
       @error="onImageError"
     >
-    <span v-else-if="displayMode === 'icon'" class="rd-avatar__icon">
-      <RdIcon :name="icon!" :size="iconSize" />
+    <span v-else-if="displayMode === 'icon'" class="wk-avatar__icon">
+      <WkIcon :name="icon!" :size="iconSize" />
     </span>
-    <span v-else-if="label" class="rd-avatar__label">{{ label }}</span>
+    <span v-else-if="label" class="wk-avatar__label">{{ label }}</span>
   </span>
 </template>

@@ -4,9 +4,9 @@ import type { LayoutExpose, LayoutProps } from "./types";
 import { computed, provide, ref } from "vue";
 import { toCssLength } from "../../shared/responsive";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
-import { RD_LAYOUT_KEY } from "./context";
+import { WK_LAYOUT_KEY } from "./context";
 
-defineOptions({ name: "RdLayout" });
+defineOptions({ name: "WkLayout" });
 
 const props = withDefaults(defineProps<LayoutProps>(), {
     embedded: false,
@@ -19,7 +19,7 @@ const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
 
-provide(RD_LAYOUT_KEY, {
+provide(WK_LAYOUT_KEY, {
     get hasSider() {
         return props.hasSider;
     },
@@ -37,12 +37,12 @@ const rootStyle = computed(() => ({
 }));
 
 const rootClass = computed(() => [
-    "rd-layout",
-    `rd-layout--${props.position}-positioned`,
+    "wk-layout",
+    `wk-layout--${props.position}-positioned`,
     {
-        "rd-layout--embedded": props.embedded,
-        "rd-layout--has-sider": props.hasSider,
-        "rd-layout--sider-right":
+        "wk-layout--embedded": props.embedded,
+        "wk-layout--has-sider": props.hasSider,
+        "wk-layout--sider-right":
             props.hasSider && props.siderPlacement === "right",
     },
 ]);
@@ -59,9 +59,9 @@ const scrollStyle = computed((): StyleValue => {
 });
 
 const scrollClass = computed(() => [
-    "rd-layout__scroll",
+    "wk-layout__scroll",
     props.contentClass,
-    { "rd-layout__scroll--has-sider": props.hasSider },
+    { "wk-layout__scroll--has-sider": props.hasSider },
 ]);
 
 defineExpose<LayoutExpose>({ scrollTo });

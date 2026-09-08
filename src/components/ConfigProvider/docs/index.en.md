@@ -6,7 +6,7 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 # ConfigProvider
 
-Provide global defaults for the component tree via `RdConfigProvider` or `createWiseKit`. Local props take precedence over global config.
+Provide global defaults for the component tree via `WkConfigProvider` or `createWiseKit`. Local props take precedence over global config.
 
 ## Capabilities
 
@@ -24,7 +24,7 @@ Provide global defaults for the component tree via `RdConfigProvider` or `create
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput, WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -35,20 +35,20 @@ const options = [
 </script>
 
 <template>
-  <RdConfigProvider size="small">
+  <WkConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdButton label="Inherit small" />
-      <RdInput placeholder="Inherit small" style="width:10rem" />
-      <RdSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
-      <RdButton label="Override to large" size="large" />
+      <WkButton label="Inherit small" />
+      <WkInput placeholder="Inherit small" style="width:10rem" />
+      <WkSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
+      <WkButton label="Override to large" size="large" />
     </div>
-  </RdConfigProvider>
+  </WkConfigProvider>
 </template>
 ```
 
 ## Component Defaults
 
-Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Rd*` aliases.
+Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Wk*` aliases.
 
 Precedence: **component props > `componentDefaults[component]` > global `size` / `inputVariant` > built-in defaults**.
 
@@ -56,25 +56,25 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput, WkSpace } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const note = ref('Clearable')
 </script>
 
 <template>
-  <RdConfigProvider
+  <WkConfigProvider
     size="large"
     :component-defaults="{
       Input: { size: 'small', clearable: true },
       Space: { size: 16 },
     }"
   >
-    <RdSpace>
-      <RdButton label="Still large" />
-      <RdInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
-    </RdSpace>
-  </RdConfigProvider>
+    <WkSpace>
+      <WkButton label="Still large" />
+      <WkInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
+    </WkSpace>
+  </WkConfigProvider>
 </template>
 ```
 
@@ -82,23 +82,23 @@ const note = ref('Clearable')
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <RdConfigProvider density="compact">
+    <WkConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <RdButton label="compact" />
-        <RdInput placeholder="compact" style="width:10rem" />
+        <WkButton label="compact" />
+        <WkInput placeholder="compact" style="width:10rem" />
       </div>
-    </RdConfigProvider>
-    <RdConfigProvider density="spacious">
+    </WkConfigProvider>
+    <WkConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <RdButton label="spacious" />
-        <RdInput placeholder="spacious" style="width:10rem" />
+        <WkButton label="spacious" />
+        <WkInput placeholder="spacious" style="width:10rem" />
       </div>
-    </RdConfigProvider>
+    </WkConfigProvider>
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkDialog, WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -119,17 +119,17 @@ const options = [
 </script>
 
 <template>
-  <RdConfigProvider input-variant="filled" append-to="body">
+  <WkConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
-      <RdButton label="Open dialog" @click="visible = true" />
+      <WkSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
+      <WkButton label="Open dialog" @click="visible = true" />
     </div>
-    <RdDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
+    <WkDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
       <p style="margin:0">
         Overlay mount target is provided by ConfigProvider.
       </p>
-    </RdDialog>
-  </RdConfigProvider>
+    </WkDialog>
+  </WkConfigProvider>
 </template>
 ```
 
@@ -162,17 +162,17 @@ createApp(App)
   .mount('#app')
 ```
 
-By default **all components are registered globally** (use `<RdButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
+By default **all components are registered globally** (use `<WkButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
 
 ## Reading config
 
 ```ts
-import { useRdConfig } from '@wise-kit/ui'
+import { useWkConfig } from '@wise-kit/ui'
 
-const config = useRdConfig()
+const config = useWkConfig()
 ```
 
-Precedence: **component props > `RdConfigProvider` > `createWiseKit()` > built-in defaults**.
+Precedence: **component props > `WkConfigProvider` > `createWiseKit()` > built-in defaults**.
 
 ## Theme and motion
 

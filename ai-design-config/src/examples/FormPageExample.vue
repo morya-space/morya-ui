@@ -4,20 +4,20 @@
  * @see DESIGN.md §3
  */
 import {
-  RdBreadcrumb,
-  RdButton,
-  RdConfigProvider,
-  RdDatePicker,
-  RdForm,
-  RdFormItem,
-  RdInput,
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdSelect,
-  RdSpace,
-  RdSwitch,
-  RdTextarea,
+  WkBreadcrumb,
+  WkButton,
+  WkConfigProvider,
+  WkDatePicker,
+  WkForm,
+  WkFormItem,
+  WkInput,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkSelect,
+  WkSpace,
+  WkSwitch,
+  WkTextarea,
   zhCN,
 } from '@wise-kit/ui'
 import { reactive, ref } from 'vue'
@@ -49,100 +49,100 @@ async function onSubmit() {
 </script>
 
 <template>
-  <RdConfigProvider :locale="zhCN">
-    <RdLayout class="page-form">
-      <RdLayoutHeader class="page-form__header">
-        <RdBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理', to: '/users' }, { label: '新建用户' }]" />
-      </RdLayoutHeader>
+  <WkConfigProvider :locale="zhCN">
+    <WkLayout class="page-form">
+      <WkLayoutHeader class="page-form__header">
+        <WkBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理', to: '/users' }, { label: '新建用户' }]" />
+      </WkLayoutHeader>
 
-      <RdLayoutContent class="page-form__content">
+      <WkLayoutContent class="page-form__content">
         <header class="page-form__intro">
           <h1 class="page-form__title">新建用户</h1>
           <p class="page-form__desc">填写基本信息并分配角色。</p>
         </header>
 
-        <RdForm class="page-form__form" @submit="onSubmit">
-          <RdFormItem label="姓名" name="name" required>
-            <RdInput v-model="model.name" placeholder="请输入姓名" fluid />
-          </RdFormItem>
+        <WkForm class="page-form__form" @submit="onSubmit">
+          <WkFormItem label="姓名" name="name" required>
+            <WkInput v-model="model.name" placeholder="请输入姓名" fluid />
+          </WkFormItem>
 
-          <RdFormItem label="邮箱" name="email" required>
-            <RdInput v-model="model.email" type="email" placeholder="name@example.com" fluid />
-          </RdFormItem>
+          <WkFormItem label="邮箱" name="email" required>
+            <WkInput v-model="model.email" type="email" placeholder="name@example.com" fluid />
+          </WkFormItem>
 
-          <RdFormItem label="角色" name="role" required>
-            <RdSelect v-model="model.role" :options="roleOptions" placeholder="请选择角色" fluid />
-          </RdFormItem>
+          <WkFormItem label="角色" name="role" required>
+            <WkSelect v-model="model.role" :options="roleOptions" placeholder="请选择角色" fluid />
+          </WkFormItem>
 
-          <RdFormItem label="入职日期" name="joinedAt">
-            <RdDatePicker v-model="model.joinedAt" placeholder="选择日期" fluid />
-          </RdFormItem>
+          <WkFormItem label="入职日期" name="joinedAt">
+            <WkDatePicker v-model="model.joinedAt" placeholder="选择日期" fluid />
+          </WkFormItem>
 
-          <RdFormItem label="启用账号" name="active">
-            <RdSwitch v-model="model.active" />
-          </RdFormItem>
+          <WkFormItem label="启用账号" name="active">
+            <WkSwitch v-model="model.active" />
+          </WkFormItem>
 
-          <RdFormItem label="简介" name="bio">
-            <RdTextarea v-model="model.bio" :rows="4" placeholder="可选" fluid />
-          </RdFormItem>
+          <WkFormItem label="简介" name="bio">
+            <WkTextarea v-model="model.bio" :rows="4" placeholder="可选" fluid />
+          </WkFormItem>
 
           <footer class="page-form__actions">
-            <RdSpace>
-              <RdButton native-type="submit" severity="primary" :loading="submitting">保存</RdButton>
-              <RdButton severity="secondary">取消</RdButton>
-            </RdSpace>
+            <WkSpace>
+              <WkButton native-type="submit" severity="primary" :loading="submitting">保存</WkButton>
+              <WkButton severity="secondary">取消</WkButton>
+            </WkSpace>
           </footer>
-        </RdForm>
-      </RdLayoutContent>
-    </RdLayout>
-  </RdConfigProvider>
+        </WkForm>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkConfigProvider>
 </template>
 
 <style scoped>
 .page-form {
   min-height: 100vh;
-  background: var(--rd-color-surface);
+  background: var(--wk-color-surface);
 }
 
 .page-form__header {
-  padding: var(--rd-space-4) var(--rd-space-6);
-  border-bottom: 1px solid var(--rd-color-border);
-  background: var(--rd-color-surface);
+  padding: var(--wk-space-4) var(--wk-space-6);
+  border-bottom: 1px solid var(--wk-color-border);
+  background: var(--wk-color-surface);
 }
 
 .page-form__content {
-  padding: var(--rd-space-6);
+  padding: var(--wk-space-6);
   max-width: 42rem;
 }
 
 .page-form__intro {
-  margin-bottom: var(--rd-space-6);
+  margin-bottom: var(--wk-space-6);
 }
 
 .page-form__title {
-  margin: 0 0 var(--rd-space-2);
-  font-size: var(--rd-font-size-lg);
+  margin: 0 0 var(--wk-space-2);
+  font-size: var(--wk-font-size-lg);
   font-weight: 600;
-  color: var(--rd-color-text);
+  color: var(--wk-color-text);
 }
 
 .page-form__desc {
   margin: 0;
-  color: var(--rd-color-text-muted);
-  font-size: var(--rd-font-size-md);
+  color: var(--wk-color-text-muted);
+  font-size: var(--wk-font-size-md);
 }
 
 .page-form__form {
-  padding: var(--rd-space-6);
-  background: var(--rd-color-surface);
-  border: 1px solid var(--rd-color-border);
-  border-radius: var(--rd-radius-md);
-  box-shadow: var(--rd-shadow-sm);
+  padding: var(--wk-space-6);
+  background: var(--wk-color-surface);
+  border: 1px solid var(--wk-color-border);
+  border-radius: var(--wk-radius-md);
+  box-shadow: var(--wk-shadow-sm);
 }
 
 .page-form__actions {
-  margin-top: var(--rd-space-6);
-  padding-top: var(--rd-space-4);
-  border-top: 1px solid var(--rd-color-border);
+  margin-top: var(--wk-space-6);
+  padding-top: var(--wk-space-4);
+  border-top: 1px solid var(--wk-color-border);
 }
 </style>

@@ -1,14 +1,14 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
-import { rdComponents } from '../../component-registry'
+import { wkComponents } from '../../component-registry'
 import { createWiseKit, WiseKit } from '../../shared/config'
-import RdButton from '../Button/Button.vue'
+import WkButton from '../Button/Button.vue'
 
 describe('createWiseKit / WiseKit installer', () => {
   it('registers all components globally by default', () => {
     const Host = defineComponent({
-      template: '<RdButton label="Go" />',
+      template: '<WkButton label="Go" />',
     })
 
     const wrapper = mount(Host, {
@@ -18,12 +18,12 @@ describe('createWiseKit / WiseKit installer', () => {
     })
 
     expect(wrapper.get('button').text()).toContain('Go')
-    expect(Object.keys(rdComponents).length).toBeGreaterThan(50)
+    expect(Object.keys(wkComponents).length).toBeGreaterThan(50)
   })
 
   it('accepts options via app.use(WiseKit, options)', () => {
     const Host = defineComponent({
-      template: '<RdButton label="Sized" />',
+      template: '<WkButton label="Sized" />',
     })
 
     const wrapper = mount(Host, {
@@ -32,7 +32,7 @@ describe('createWiseKit / WiseKit installer', () => {
       },
     })
 
-    expect(wrapper.get('.rd-button').classes()).toContain('rd-button--small')
+    expect(wrapper.get('.wk-button').classes()).toContain('wk-button--small')
   })
 
   it('skips component registration when components is false', () => {
@@ -48,22 +48,22 @@ describe('createWiseKit / WiseKit installer', () => {
       },
     })
 
-    expect(wrapper.vm.$.appContext.components.RdButton).toBeUndefined()
-    expect(wrapper.vm.$.appContext.config.globalProperties.$rd?.size).toBe('large')
+    expect(wrapper.vm.$.appContext.components.WkButton).toBeUndefined()
+    expect(wrapper.vm.$.appContext.config.globalProperties.$wk?.size).toBe('large')
   })
 
   it('registers a partial component list', () => {
     const Host = defineComponent({
-      template: '<RdButton label="Only" />',
+      template: '<WkButton label="Only" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWiseKit({ components: [RdButton] })],
+        plugins: [createWiseKit({ components: [WkButton] })],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Only')
-    expect(wrapper.vm.$.appContext.components.RdInput).toBeUndefined()
+    expect(wrapper.vm.$.appContext.components.WkInput).toBeUndefined()
   })
 })

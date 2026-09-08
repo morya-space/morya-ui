@@ -1,90 +1,90 @@
-.rd-message-host {
-    --rd-message-host-max-width: 28rem;
+.wk-message-host {
+    --wk-message-host-max-width: 28rem;
     display: flex;
     flex-direction: column;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     left: 50%;
     max-width: min(
-        var(--rd-message-host-max-width),
-        calc(100vw - 2 * var(--rd-space-4))
+        var(--wk-message-host-max-width),
+        calc(100vw - 2 * var(--wk-space-4))
     );
     pointer-events: none;
     position: fixed;
-    top: var(--rd-space-4);
+    top: var(--wk-space-4);
     transform: translateX(-50%);
     width: max-content;
-    z-index: var(--rd-z-toast);
+    z-index: var(--wk-z-toast);
 }
 
-.rd-message-host--top-left {
-    left: var(--rd-space-4);
+.wk-message-host--top-left {
+    left: var(--wk-space-4);
     transform: none;
 }
 
-.rd-message-host--top-right {
+.wk-message-host--top-right {
     left: auto;
-    right: var(--rd-space-4);
+    right: var(--wk-space-4);
     transform: none;
 }
 
-.rd-message-host--bottom,
-.rd-message-host--bottom-left,
-.rd-message-host--bottom-right {
-    bottom: var(--rd-space-4);
+.wk-message-host--bottom,
+.wk-message-host--bottom-left,
+.wk-message-host--bottom-right {
+    bottom: var(--wk-space-4);
     flex-direction: column-reverse;
     top: auto;
 }
 
-.rd-message-host--bottom-left {
-    left: var(--rd-space-4);
+.wk-message-host--bottom-left {
+    left: var(--wk-space-4);
     transform: none;
 }
 
-.rd-message-host--bottom-right {
+.wk-message-host--bottom-right {
     left: auto;
-    right: var(--rd-space-4);
+    right: var(--wk-space-4);
     transform: none;
 }
 
-.rd-message {
-    --rd-message-min-width: 16rem;
+.wk-message {
+    --wk-message-min-width: 16rem;
     align-items: flex-start;
     background: color-mix(
         in srgb,
-        var(--rd-color-info) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-info) 10%,
+        var(--wk-color-surface)
     );
-    border: var(--rd-border-width) solid
-        color-mix(in srgb, var(--rd-color-info) 28%, var(--rd-color-border));
-    border-radius: var(--rd-radius-md);
-    box-shadow: var(--rd-shadow-md);
-    color: var(--rd-color-text);
+    border: var(--wk-border-width) solid
+        color-mix(in srgb, var(--wk-color-info) 28%, var(--wk-color-border));
+    border-radius: var(--wk-radius-md);
+    box-shadow: var(--wk-shadow-md);
+    color: var(--wk-color-text);
     display: flex;
-    font-family: var(--rd-font-sans);
-    font-size: var(--rd-font-size-md);
-    gap: var(--rd-space-3);
+    font-family: var(--wk-font-sans);
+    font-size: var(--wk-font-size-md);
+    gap: var(--wk-space-3);
     line-height: 1.45;
-    min-width: var(--rd-message-min-width);
-    padding: var(--rd-space-3) var(--rd-space-4);
+    min-width: var(--wk-message-min-width);
+    padding: var(--wk-space-3) var(--wk-space-4);
     pointer-events: auto;
 }
 
-.rd-message__icon {
-    color: var(--rd-color-info);
+.wk-message__icon {
+    color: var(--wk-color-info);
     flex-shrink: 0;
     margin-top: 0.1rem;
 }
 
-.rd-message__content {
+.wk-message__content {
     flex: 1 1 auto;
     min-width: 0;
 }
 
-.rd-message__close {
+.wk-message__close {
     align-items: center;
     background: transparent;
     border: 0;
-    color: var(--rd-color-text-muted);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
@@ -93,129 +93,129 @@
     padding: 0;
 }
 
-.rd-message__close:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-message__close:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-message--success {
+.wk-message--success {
     background: color-mix(
         in srgb,
-        var(--rd-color-success) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-success) 10%,
+        var(--wk-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--rd-color-success) 28%,
-        var(--rd-color-border)
+        var(--wk-color-success) 28%,
+        var(--wk-color-border)
     );
 }
 
-.rd-message--success .rd-message__icon {
-    color: var(--rd-color-success);
+.wk-message--success .wk-message__icon {
+    color: var(--wk-color-success);
 }
 
-.rd-message--info {
+.wk-message--info {
     background: color-mix(
         in srgb,
-        var(--rd-color-info) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-info) 10%,
+        var(--wk-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--rd-color-info) 28%,
-        var(--rd-color-border)
+        var(--wk-color-info) 28%,
+        var(--wk-color-border)
     );
 }
 
-.rd-message--info .rd-message__icon {
-    color: var(--rd-color-info);
+.wk-message--info .wk-message__icon {
+    color: var(--wk-color-info);
 }
 
-.rd-message--warn,
-.rd-message--warning {
+.wk-message--warn,
+.wk-message--warning {
     background: color-mix(
         in srgb,
-        var(--rd-color-warn) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-warn) 10%,
+        var(--wk-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--rd-color-warn) 28%,
-        var(--rd-color-border)
+        var(--wk-color-warn) 28%,
+        var(--wk-color-border)
     );
 }
 
-.rd-message--warn .rd-message__icon,
-.rd-message--warning .rd-message__icon {
-    color: var(--rd-color-warn);
+.wk-message--warn .wk-message__icon,
+.wk-message--warning .wk-message__icon {
+    color: var(--wk-color-warn);
 }
 
-.rd-message--error,
-.rd-message--danger {
+.wk-message--error,
+.wk-message--danger {
     background: color-mix(
         in srgb,
-        var(--rd-color-danger) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-danger) 10%,
+        var(--wk-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--rd-color-danger) 28%,
-        var(--rd-color-border)
+        var(--wk-color-danger) 28%,
+        var(--wk-color-border)
     );
 }
 
-.rd-message--error .rd-message__icon,
-.rd-message--danger .rd-message__icon {
-    color: var(--rd-color-danger);
+.wk-message--error .wk-message__icon,
+.wk-message--danger .wk-message__icon {
+    color: var(--wk-color-danger);
 }
 
-.rd-message--secondary {
+.wk-message--secondary {
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 10%,
+        var(--wk-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 22%,
-        var(--rd-color-border)
+        var(--wk-color-text-muted) 22%,
+        var(--wk-color-border)
     );
 }
 
-.rd-message--secondary .rd-message__icon {
-    color: var(--rd-color-text-muted);
+.wk-message--secondary .wk-message__icon {
+    color: var(--wk-color-text-muted);
 }
 
-.rd-message--contrast {
-    background: var(--rd-color-contrast);
-    border-color: var(--rd-color-contrast);
-    color: var(--rd-color-contrast-fg);
+.wk-message--contrast {
+    background: var(--wk-color-contrast);
+    border-color: var(--wk-color-contrast);
+    color: var(--wk-color-contrast-fg);
 }
 
-.rd-message--contrast .rd-message__icon,
-.rd-message--contrast .rd-message__close {
-    color: var(--rd-color-contrast-fg);
+.wk-message--contrast .wk-message__icon,
+.wk-message--contrast .wk-message__close {
+    color: var(--wk-color-contrast-fg);
 }
 
-.rd-message-slide-enter-active {
+.wk-message-slide-enter-active {
     transition:
-        opacity var(--rd-motion-enter) var(--rd-motion-ease),
-        transform var(--rd-motion-enter) var(--rd-motion-ease);
+        opacity var(--wk-motion-enter) var(--wk-motion-ease),
+        transform var(--wk-motion-enter) var(--wk-motion-ease);
 }
 
-.rd-message-slide-leave-active {
+.wk-message-slide-leave-active {
     transition:
-        opacity var(--rd-motion-exit) var(--rd-motion-ease),
-        transform var(--rd-motion-exit) var(--rd-motion-ease);
+        opacity var(--wk-motion-exit) var(--wk-motion-ease),
+        transform var(--wk-motion-exit) var(--wk-motion-ease);
 }
 
-.rd-message-slide-enter-from,
-.rd-message-slide-leave-to {
+.wk-message-slide-enter-from,
+.wk-message-slide-leave-to {
     opacity: 0;
-    transform: translateY(calc(var(--rd-motion-distance) * -1));
+    transform: translateY(calc(var(--wk-motion-distance) * -1));
 }
 
-.rd-message-slide-move {
-    transition: transform var(--rd-motion-enter) var(--rd-motion-ease);
+.wk-message-slide-move {
+    transition: transform var(--wk-motion-enter) var(--wk-motion-ease);
 }

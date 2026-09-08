@@ -1,86 +1,86 @@
-.rd-pagination {
-    --rd-pagination-simple-width: 3.5rem;
-    --rd-pagination-jumper-width: 3.5rem;
+.wk-pagination {
+    --wk-pagination-simple-width: 3.5rem;
+    --wk-pagination-jumper-width: 3.5rem;
     align-items: center;
     display: flex;
-    font-family: var(--rd-font-sans);
-    gap: var(--rd-space-1);
+    font-family: var(--wk-font-sans);
+    gap: var(--wk-space-1);
 }
 
-.rd-pagination__button {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-control);
-    color: var(--rd-color-text);
+.wk-pagination__button {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-control);
+    color: var(--wk-color-text);
     cursor: pointer;
     font: inherit;
-    font-size: var(--rd-control-font-small);
-    min-height: var(--rd-control-height-small);
-    min-width: var(--rd-control-height-small);
-    padding: 0 var(--rd-control-padding-x-small);
+    font-size: var(--wk-control-font-small);
+    min-height: var(--wk-control-height-small);
+    min-width: var(--wk-control-height-small);
+    padding: 0 var(--wk-control-padding-x-small);
     transition:
-        background-color var(--rd-motion-fast) var(--rd-motion-ease),
-        border-color var(--rd-motion-fast) var(--rd-motion-ease),
-        box-shadow var(--rd-motion-fast) var(--rd-motion-ease);
+        background-color var(--wk-motion-fast) var(--wk-motion-ease),
+        border-color var(--wk-motion-fast) var(--wk-motion-ease),
+        box-shadow var(--wk-motion-fast) var(--wk-motion-ease);
 }
 
-.rd-pagination__button--active {
-    background: var(--rd-color-primary);
-    border-color: var(--rd-color-primary);
-    color: var(--rd-color-on-emphasis);
+.wk-pagination__button--active {
+    background: var(--wk-color-primary);
+    border-color: var(--wk-color-primary);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-pagination__button:disabled {
+.wk-pagination__button:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-pagination__button:hover:not(:disabled):not(.rd-pagination__button--active) {
+.wk-pagination__button:hover:not(:disabled):not(.wk-pagination__button--active) {
     background: color-mix(
         in srgb,
-        var(--rd-color-primary) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-primary) 10%,
+        var(--wk-color-surface)
     );
 }
 
-.rd-pagination__button:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-pagination__button:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-pagination--simple {
-    gap: var(--rd-space-2);
+.wk-pagination--simple {
+    gap: var(--wk-space-2);
 }
 
-.rd-pagination__simple {
-    color: var(--rd-color-text);
-    font-size: var(--rd-font-size-sm);
-    min-width: var(--rd-pagination-simple-width);
+.wk-pagination__simple {
+    color: var(--wk-color-text);
+    font-size: var(--wk-font-size-sm);
+    min-width: var(--wk-pagination-simple-width);
     text-align: center;
 }
 
-.rd-pagination__sizer,
-.rd-pagination__jumper {
+.wk-pagination__sizer,
+.wk-pagination__jumper {
     align-items: center;
-    color: var(--rd-color-text-muted);
+    color: var(--wk-color-text-muted);
     display: inline-flex;
-    font-size: var(--rd-font-size-sm);
-    gap: var(--rd-space-1);
-    margin-left: var(--rd-space-2);
+    font-size: var(--wk-font-size-sm);
+    gap: var(--wk-space-1);
+    margin-left: var(--wk-space-2);
 }
 
-.rd-pagination__select,
-.rd-pagination__input {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-control);
-    color: var(--rd-color-text);
+.wk-pagination__select,
+.wk-pagination__input {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-control);
+    color: var(--wk-color-text);
     font: inherit;
-    font-size: var(--rd-font-size-sm);
-    height: var(--rd-control-height-small);
-    padding: 0 var(--rd-space-2);
+    font-size: var(--wk-font-size-sm);
+    height: var(--wk-control-height-small);
+    padding: 0 var(--wk-space-2);
 }
 
-.rd-pagination__input {
-    width: var(--rd-pagination-jumper-width);
+.wk-pagination__input {
+    width: var(--wk-pagination-jumper-width);
 }

@@ -1,17 +1,17 @@
-import type { RdLocaleConfig, RdLocaleMessages } from './types'
+import type { WkLocaleConfig, WkLocaleMessages } from './types'
 import { computed } from 'vue'
-import { useRdConfig } from '../shared/config'
+import { useWkConfig } from '../shared/config'
 import { zhCN } from './zh-CN'
 
 export { enUS } from './en-US'
-export type { RdLocaleConfig, RdLocaleMessages, RdLocaleName } from './types'
+export type { WkLocaleConfig, WkLocaleMessages, WkLocaleName } from './types'
 export { zhCN } from './zh-CN'
 
 export function formatLocale(template: string, vars: Record<string, string | number>) {
   return template.replace(/\{(\w+)\}/g, (_, key: string) => String(vars[key] ?? ''))
 }
 
-export function mergeLocale(locale?: RdLocaleConfig): RdLocaleMessages {
+export function mergeLocale(locale?: WkLocaleConfig): WkLocaleMessages {
   return {
     ...zhCN,
     ...locale,
@@ -21,10 +21,7 @@ export function mergeLocale(locale?: RdLocaleConfig): RdLocaleMessages {
   }
 }
 
-export function useRdLocale() {
-  const config = useRdConfig()
+export function useWkLocale() {
+  const config = useWkConfig()
   return computed(() => mergeLocale(config.value.locale))
 }
-
-/** @deprecated Use `useRdLocale` */
-export const useWdLocale = useRdLocale

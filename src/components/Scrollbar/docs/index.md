@@ -11,7 +11,7 @@ description: 可换肤自定义滚动条，提供一致的滚动体验。
 ## 引入
 
 ```ts
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,24 +20,24 @@ import { RdScrollbar } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdScrollbar height="240px" always style="width: 200px">
+  <WkScrollbar height="240px" always style="width: 200px">
     <p
       v-for="item in 20"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
-        color:var(--rd-color-primary);
+        background:color-mix(in srgb, var(--wk-color-primary) 12%, transparent);
+        color:var(--wk-color-primary);
       "
     >
       {{ item }}
     </p>
-  </RdScrollbar>
+  </WkScrollbar>
 </template>
 ```
 
@@ -47,7 +47,7 @@ import { RdScrollbar } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdScrollbar } from '@wise-kit/ui'
+import { WkButton, WkScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const count = ref(3)
@@ -56,23 +56,23 @@ const count = ref(3)
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem">
-      <RdButton label="Add" size="small" @click="count++" />
-      <RdButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
+      <WkButton label="Add" size="small" @click="count++" />
+      <WkButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
     </div>
-    <RdScrollbar max-height="220px" always style="width: 200px">
+    <WkScrollbar max-height="220px" always style="width: 200px">
       <p
         v-for="item in count"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--rd-color-info) 12%, transparent);
-          color:var(--rd-color-info);
+          background:color-mix(in srgb, var(--wk-color-info) 12%, transparent);
+          color:var(--wk-color-info);
         "
       >
         Item {{ item }}
       </p>
-    </RdScrollbar>
+    </WkScrollbar>
   </div>
 </template>
 ```
@@ -81,15 +81,15 @@ const count = ref(3)
 
 内容宽度超出容器时显示横向滚动条。`trigger="none"` 与 `always` 都会常显滑块；默认 `trigger="hover"` 在悬停时显示。
 
-`RdLayout` 在 `native-scrollbar={false}` 时会接入本组件。
+`WkLayout` 在 `native-scrollbar={false}` 时会接入本组件。
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdScrollbar always>
+  <WkScrollbar always>
     <div style="display:flex;width:fit-content">
       <p
         v-for="item in 30"
@@ -97,14 +97,14 @@ import { RdScrollbar } from '@wise-kit/ui'
         style="
           flex-shrink:0;display:flex;align-items:center;justify-content:center;
           width:96px;height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--rd-color-danger) 12%, transparent);
-          color:var(--rd-color-danger);
+          background:color-mix(in srgb, var(--wk-color-danger) 12%, transparent);
+          color:var(--wk-color-danger);
         "
       >
         {{ item }}
       </p>
     </div>
-  </RdScrollbar>
+  </WkScrollbar>
 </template>
 ```
 
@@ -114,30 +114,30 @@ import { RdScrollbar } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted)">
+      <p style="margin:0 0 0.5rem;color:var(--wk-color-text-muted)">
         always
       </p>
-      <RdScrollbar height="160px" always>
+      <WkScrollbar height="160px" always>
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
           Line {{ n }}
         </p>
-      </RdScrollbar>
+      </WkScrollbar>
     </div>
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--rd-color-text-muted)">
+      <p style="margin:0 0 0.5rem;color:var(--wk-color-text-muted)">
         native
       </p>
-      <RdScrollbar height="160px" native style="width: 200px">
+      <WkScrollbar height="160px" native style="width: 200px">
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
           Line {{ n }}
         </p>
-      </RdScrollbar>
+      </WkScrollbar>
     </div>
   </div>
 </template>
@@ -150,7 +150,7 @@ import { RdScrollbar } from '@wise-kit/ui'
 ```vue preview
 <script setup lang="ts">
 import type { ScrollbarInstance } from '@wise-kit/ui'
-import { RdButton, RdScrollbar } from '@wise-kit/ui'
+import { WkButton, WkScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -168,25 +168,25 @@ function onScroll(payload: { scrollTop: number }) {
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <RdButton label="Top" size="small" @click="jump(0)" />
-      <RdButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
-      <RdButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
-      <span style="color:var(--rd-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
+      <WkButton label="Top" size="small" @click="jump(0)" />
+      <WkButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
+      <WkButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
+      <span style="color:var(--wk-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
     </div>
-    <RdScrollbar ref="scrollbarRef" height="200px" style="width: 200px" always @scroll="onScroll">
+    <WkScrollbar ref="scrollbarRef" height="200px" style="width: 200px" always @scroll="onScroll">
       <p
         v-for="item in 24"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--rd-color-success) 12%, transparent);
-          color:var(--rd-color-success);
+          background:color-mix(in srgb, var(--wk-color-success) 12%, transparent);
+          color:var(--wk-color-success);
         "
       >
         {{ item }}
       </p>
-    </RdScrollbar>
+    </WkScrollbar>
   </div>
 </template>
 ```
@@ -198,7 +198,7 @@ function onScroll(payload: { scrollTop: number }) {
 ```vue preview
 <script setup lang="ts">
 import type { ScrollbarDirection } from '@wise-kit/ui'
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const num = ref(20)
@@ -209,20 +209,20 @@ function loadMore(direction: ScrollbarDirection) {
 </script>
 
 <template>
-  <RdScrollbar height="220px" always style="width: 200px" @end-reached="loadMore">
+  <WkScrollbar height="220px" always style="width: 200px" @end-reached="loadMore">
     <p
       v-for="item in num"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--rd-color-primary) 12%, transparent);
-        color:var(--rd-color-primary);
+        background:color-mix(in srgb, var(--wk-color-primary) 12%, transparent);
+        color:var(--wk-color-primary);
       "
     >
       {{ item }}
     </p>
-  </RdScrollbar>
+  </WkScrollbar>
 </template>
 ```
 

@@ -1,184 +1,184 @@
 /* —— Primitive: SplitButton —— */
-.rd-splitbutton {
-    --rd-button-padding-x-medium: calc(
-        var(--rd-control-padding-x-medium) + var(--rd-space-1)
+.wk-splitbutton {
+    --wk-button-padding-x-medium: calc(
+        var(--wk-control-padding-x-medium) + var(--wk-space-1)
     );
-    --rd-splitbutton-icon-size: 1rem;
+    --wk-splitbutton-icon-size: 1rem;
     display: inline-flex;
     position: relative;
     vertical-align: middle;
 }
 
-.rd-splitbutton__main,
-.rd-splitbutton__trigger {
+.wk-splitbutton__main,
+.wk-splitbutton__trigger {
     align-items: center;
-    background: var(--rd-color-primary);
-    border: var(--rd-border-width) solid var(--rd-color-primary);
-    color: var(--rd-color-on-emphasis);
+    background: var(--wk-color-primary);
+    border: var(--wk-border-width) solid var(--wk-color-primary);
+    color: var(--wk-color-on-emphasis);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--rd-control-font-medium);
+    font-size: var(--wk-control-font-medium);
     font-weight: 600;
-    gap: var(--rd-space-2);
-    min-height: var(--rd-control-height-medium);
-    padding: 0 var(--rd-button-padding-x-medium);
+    gap: var(--wk-space-2);
+    min-height: var(--wk-control-height-medium);
+    padding: 0 var(--wk-button-padding-x-medium);
 }
 
-.rd-splitbutton__main {
-    border-bottom-left-radius: var(--rd-radius-control);
-    border-top-left-radius: var(--rd-radius-control);
+.wk-splitbutton__main {
+    border-bottom-left-radius: var(--wk-radius-control);
+    border-top-left-radius: var(--wk-radius-control);
 }
 
-.rd-splitbutton__trigger {
-    border-bottom-right-radius: var(--rd-radius-control);
-    border-left: var(--rd-border-width) solid
+.wk-splitbutton__trigger {
+    border-bottom-right-radius: var(--wk-radius-control);
+    border-left: var(--wk-border-width) solid
         color-mix(
             in srgb,
-            var(--rd-color-on-emphasis) 35%,
-            var(--rd-color-primary)
+            var(--wk-color-on-emphasis) 35%,
+            var(--wk-color-primary)
         );
-    border-top-right-radius: var(--rd-radius-control);
-    padding: 0 var(--rd-control-padding-x-medium);
+    border-top-right-radius: var(--wk-radius-control);
+    padding: 0 var(--wk-control-padding-x-medium);
 }
 
-.rd-splitbutton__main:hover:not(:disabled),
-.rd-splitbutton__trigger:hover:not(:disabled) {
+.wk-splitbutton__main:hover:not(:disabled),
+.wk-splitbutton__trigger:hover:not(:disabled) {
     filter: brightness(1.06);
 }
 
-.rd-splitbutton--outlined .rd-splitbutton__main:hover:not(:disabled),
-.rd-splitbutton--outlined .rd-splitbutton__trigger:hover:not(:disabled),
-.rd-splitbutton--secondary .rd-splitbutton__main:hover:not(:disabled),
-.rd-splitbutton--secondary .rd-splitbutton__trigger:hover:not(:disabled) {
+.wk-splitbutton--outlined .wk-splitbutton__main:hover:not(:disabled),
+.wk-splitbutton--outlined .wk-splitbutton__trigger:hover:not(:disabled),
+.wk-splitbutton--secondary .wk-splitbutton__main:hover:not(:disabled),
+.wk-splitbutton--secondary .wk-splitbutton__trigger:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--rd-color-primary) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-primary) 10%,
+        var(--wk-color-surface)
     );
     filter: none;
 }
 
-.rd-splitbutton__main:focus-visible,
-.rd-splitbutton__trigger:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-splitbutton__main:focus-visible,
+.wk-splitbutton__trigger:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-splitbutton--outlined .rd-splitbutton__main,
-.rd-splitbutton--outlined .rd-splitbutton__trigger {
+.wk-splitbutton--outlined .wk-splitbutton__main,
+.wk-splitbutton--outlined .wk-splitbutton__trigger {
     background: transparent;
-    color: var(--rd-color-primary);
+    color: var(--wk-color-primary);
 }
 
-.rd-splitbutton--outlined .rd-splitbutton__trigger {
-    border-left-color: var(--rd-color-primary);
+.wk-splitbutton--outlined .wk-splitbutton__trigger {
+    border-left-color: var(--wk-color-primary);
 }
 
-.rd-splitbutton--secondary .rd-splitbutton__main,
-.rd-splitbutton--secondary .rd-splitbutton__trigger {
+.wk-splitbutton--secondary .wk-splitbutton__main,
+.wk-splitbutton--secondary .wk-splitbutton__trigger {
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 16%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 16%,
+        var(--wk-color-surface)
     );
-    border-color: var(--rd-color-border);
-    color: var(--rd-color-text);
+    border-color: var(--wk-color-border);
+    color: var(--wk-color-text);
 }
 
-.rd-splitbutton--danger .rd-splitbutton__main,
-.rd-splitbutton--danger .rd-splitbutton__trigger {
-    background: var(--rd-color-danger);
-    border-color: var(--rd-color-danger);
+.wk-splitbutton--danger .wk-splitbutton__main,
+.wk-splitbutton--danger .wk-splitbutton__trigger {
+    background: var(--wk-color-danger);
+    border-color: var(--wk-color-danger);
 }
 
-.rd-splitbutton--small .rd-splitbutton__main,
-.rd-splitbutton--small .rd-splitbutton__trigger {
-    --rd-splitbutton-icon-size: 0.875rem;
-    min-height: var(--rd-control-height-small);
-    font-size: var(--rd-control-font-small);
+.wk-splitbutton--small .wk-splitbutton__main,
+.wk-splitbutton--small .wk-splitbutton__trigger {
+    --wk-splitbutton-icon-size: 0.875rem;
+    min-height: var(--wk-control-height-small);
+    font-size: var(--wk-control-font-small);
 }
 
-.rd-splitbutton--large .rd-splitbutton__main,
-.rd-splitbutton--large .rd-splitbutton__trigger {
-    --rd-splitbutton-icon-size: 1.125rem;
-    min-height: var(--rd-control-height-large);
-    font-size: var(--rd-control-font-large);
+.wk-splitbutton--large .wk-splitbutton__main,
+.wk-splitbutton--large .wk-splitbutton__trigger {
+    --wk-splitbutton-icon-size: 1.125rem;
+    min-height: var(--wk-control-height-large);
+    font-size: var(--wk-control-font-large);
 }
 
-.rd-splitbutton__icon {
+.wk-splitbutton__icon {
     align-items: center;
     display: inline-flex;
     flex-shrink: 0;
-    height: var(--rd-splitbutton-icon-size);
+    height: var(--wk-splitbutton-icon-size);
     justify-content: center;
     line-height: 0;
-    width: var(--rd-splitbutton-icon-size);
+    width: var(--wk-splitbutton-icon-size);
 }
 
-.rd-splitbutton__icon :is(.rd-icon, svg) {
+.wk-splitbutton__icon :is(.wk-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.rd-splitbutton__trigger :is(.rd-icon, svg) {
+.wk-splitbutton__trigger :is(.wk-icon, svg) {
     display: block;
-    height: var(--rd-splitbutton-icon-size);
-    width: var(--rd-splitbutton-icon-size);
+    height: var(--wk-splitbutton-icon-size);
+    width: var(--wk-splitbutton-icon-size);
 }
 
-.rd-splitbutton--disabled {
-    opacity: var(--rd-opacity-disabled);
+.wk-splitbutton--disabled {
+    opacity: var(--wk-opacity-disabled);
     pointer-events: none;
 }
 
-.rd-splitbutton__menu {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-md);
-    box-shadow: var(--rd-shadow-md);
+.wk-splitbutton__menu {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-md);
+    box-shadow: var(--wk-shadow-md);
     list-style: none;
-    margin: var(--rd-space-1) 0 0;
+    margin: var(--wk-space-1) 0 0;
     min-width: 100%;
-    padding: var(--rd-space-1);
+    padding: var(--wk-space-1);
     position: absolute;
     right: 0;
     top: 100%;
     transform-origin: top right;
-    z-index: var(--rd-z-popper);
+    z-index: var(--wk-z-popper);
 }
 
-.rd-splitbutton__menu--teleported {
+.wk-splitbutton__menu--teleported {
     margin: 0;
     position: fixed;
     right: auto;
     top: auto;
-    z-index: var(--rd-z-overlay);
+    z-index: var(--wk-z-overlay);
 }
 
-.rd-splitbutton__item {
+.wk-splitbutton__item {
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text);
     cursor: pointer;
     display: block;
     font: inherit;
-    padding: var(--rd-space-2) var(--rd-space-3);
+    padding: var(--wk-space-2) var(--wk-space-3);
     text-align: start;
     width: 100%;
 }
 
-.rd-splitbutton__item:hover:not(:disabled) {
+.wk-splitbutton__item:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--rd-color-primary) 10%,
-        var(--rd-color-surface)
+        var(--wk-color-primary) 10%,
+        var(--wk-color-surface)
     );
 }
 
-.rd-splitbutton__item:disabled {
+.wk-splitbutton__item:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }

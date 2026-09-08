@@ -1,5 +1,5 @@
 import './style'
-export { default as RdConfirmDialog } from './ConfirmDialog.vue'
+export { default as WkConfirmDialog } from './ConfirmDialog.vue'
 export type { ConfirmDialogEmits, ConfirmDialogProps } from './types'
 export { useConfirm } from './useConfirm'
 export type { ConfirmRequireOptions } from './useConfirm'

@@ -1,65 +1,65 @@
 /* —— Menu: Sidebar —— */
-.rd-sidebar {
-    --rd-sidebar-width: 12rem;
-    --rd-sidebar-collapsed-width: 3.5rem;
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-md);
-    min-width: var(--rd-sidebar-width);
-    padding: var(--rd-space-2);
-    width: var(--rd-sidebar-width);
+.wk-sidebar {
+    --wk-sidebar-width: 12rem;
+    --wk-sidebar-collapsed-width: 3.5rem;
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-md);
+    min-width: var(--wk-sidebar-width);
+    padding: var(--wk-space-2);
+    width: var(--wk-sidebar-width);
 }
 
-.rd-sidebar--collapsed {
-    min-width: var(--rd-sidebar-collapsed-width);
-    width: var(--rd-sidebar-collapsed-width);
+.wk-sidebar--collapsed {
+    min-width: var(--wk-sidebar-collapsed-width);
+    width: var(--wk-sidebar-collapsed-width);
 }
 
-.rd-sidebar__list,
-.rd-sidebar__children {
+.wk-sidebar__list,
+.wk-sidebar__children {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.rd-sidebar__children {
-    margin-left: var(--rd-space-4);
+.wk-sidebar__children {
+    margin-left: var(--wk-space-4);
 }
 
-.rd-sidebar__link {
+.wk-sidebar__link {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
+    border-radius: var(--wk-radius-sm);
     color: inherit;
     cursor: pointer;
     display: flex;
     font: inherit;
-    gap: var(--rd-space-2);
-    padding: var(--rd-space-2);
+    gap: var(--wk-space-2);
+    padding: var(--wk-space-2);
     text-align: left;
     width: 100%;
 }
 
-.rd-sidebar__link:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--rd-color-primary) 10%, transparent);
+.wk-sidebar__link:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
 }
 
-.rd-sidebar__link:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-sidebar__link:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-sidebar__link:disabled {
+.wk-sidebar__link:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-sidebar__link--child {
-    font-size: var(--rd-font-size-md);
+.wk-sidebar__link--child {
+    font-size: var(--wk-font-size-md);
 }
 
-.rd-sidebar__icon {
+.wk-sidebar__icon {
     flex: 0 0 1.25rem;
     text-align: center;
 }

@@ -4,7 +4,7 @@
   "components": [
     {
       "id": "Accordion",
-      "exportName": "RdAccordion",
+      "exportName": "WkAccordion",
       "examples": 8,
       "props": {
         "total": 4,
@@ -33,7 +33,7 @@
     },
     {
       "id": "AutoComplete",
-      "exportName": "RdAutoComplete",
+      "exportName": "WkAutoComplete",
       "examples": 8,
       "props": {
         "total": 16,
@@ -76,7 +76,7 @@
     },
     {
       "id": "Avatar",
-      "exportName": "RdAvatar",
+      "exportName": "WkAvatar",
       "examples": 6,
       "props": {
         "total": 6,
@@ -105,7 +105,7 @@
     },
     {
       "id": "Badge",
-      "exportName": "RdBadge",
+      "exportName": "WkBadge",
       "examples": 10,
       "props": {
         "total": 6,
@@ -132,7 +132,7 @@
     },
     {
       "id": "BlockUI",
-      "exportName": "RdBlockUI",
+      "exportName": "WkBlockUI",
       "examples": 4,
       "props": {
         "total": 1,
@@ -157,7 +157,7 @@
     },
     {
       "id": "Breadcrumb",
-      "exportName": "RdBreadcrumb",
+      "exportName": "WkBreadcrumb",
       "examples": 6,
       "props": {
         "total": 3,
@@ -185,7 +185,7 @@
     },
     {
       "id": "Button",
-      "exportName": "RdButton",
+      "exportName": "WkButton",
       "examples": 20,
       "props": {
         "total": 24,
@@ -220,7 +220,7 @@
     },
     {
       "id": "Card",
-      "exportName": "RdCard",
+      "exportName": "WkCard",
       "examples": 8,
       "props": {
         "total": 7,
@@ -249,7 +249,7 @@
     },
     {
       "id": "Carousel",
-      "exportName": "RdCarousel",
+      "exportName": "WkCarousel",
       "examples": 6,
       "props": {
         "total": 8,
@@ -279,7 +279,7 @@
     },
     {
       "id": "CascadeSelect",
-      "exportName": "RdCascadeSelect",
+      "exportName": "WkCascadeSelect",
       "examples": 6,
       "props": {
         "total": 15,
@@ -322,7 +322,7 @@
     },
     {
       "id": "Checkbox",
-      "exportName": "RdCheckbox",
+      "exportName": "WkCheckbox",
       "examples": 10,
       "props": {
         "total": 10,
@@ -354,7 +354,7 @@
     },
     {
       "id": "Chip",
-      "exportName": "RdChip",
+      "exportName": "WkChip",
       "examples": 4,
       "props": {
         "total": 7,
@@ -386,7 +386,7 @@
     },
     {
       "id": "CommandMenu",
-      "exportName": "RdCommandMenu",
+      "exportName": "WkCommandMenu",
       "examples": 4,
       "props": {
         "total": 5,
@@ -416,7 +416,7 @@
     },
     {
       "id": "ConfigProvider",
-      "exportName": "RdConfigProvider",
+      "exportName": "WkConfigProvider",
       "examples": 14,
       "props": {
         "total": 10,
@@ -446,7 +446,7 @@
     },
     {
       "id": "ConfirmDialog",
-      "exportName": "RdConfirmDialog",
+      "exportName": "WkConfirmDialog",
       "examples": 4,
       "props": {
         "total": 15,
@@ -489,7 +489,7 @@
     },
     {
       "id": "ConfirmPopup",
-      "exportName": "RdConfirmPopup",
+      "exportName": "WkConfirmPopup",
       "examples": 6,
       "props": {
         "total": 12,
@@ -527,7 +527,7 @@
     },
     {
       "id": "ContextMenu",
-      "exportName": "RdContextMenu",
+      "exportName": "WkContextMenu",
       "examples": 6,
       "props": {
         "total": 5,
@@ -561,7 +561,7 @@
     },
     {
       "id": "DataView",
-      "exportName": "RdDataView",
+      "exportName": "WkDataView",
       "examples": 4,
       "props": {
         "total": 10,
@@ -594,7 +594,7 @@
     },
     {
       "id": "DatePicker",
-      "exportName": "RdDatePicker",
+      "exportName": "WkDatePicker",
       "examples": 20,
       "props": {
         "total": 18,
@@ -634,7 +634,7 @@
     },
     {
       "id": "Dialog",
-      "exportName": "RdDialog",
+      "exportName": "WkDialog",
       "examples": 14,
       "props": {
         "total": 22,
@@ -684,7 +684,7 @@
     },
     {
       "id": "Divider",
-      "exportName": "RdDivider",
+      "exportName": "WkDivider",
       "examples": 12,
       "props": {
         "total": 5,
@@ -711,7 +711,7 @@
     },
     {
       "id": "Dock",
-      "exportName": "RdDock",
+      "exportName": "WkDock",
       "examples": 4,
       "props": {
         "total": 2,
@@ -740,7 +740,7 @@
     },
     {
       "id": "Drawer",
-      "exportName": "RdDrawer",
+      "exportName": "WkDrawer",
       "examples": 6,
       "props": {
         "total": 14,
@@ -785,7 +785,7 @@
     },
     {
       "id": "Dropdown",
-      "exportName": "RdDropdown",
+      "exportName": "WkDropdown",
       "examples": 6,
       "props": {
         "total": 9,
@@ -819,7 +819,7 @@
     },
     {
       "id": "Fieldset",
-      "exportName": "RdFieldset",
+      "exportName": "WkFieldset",
       "examples": 4,
       "props": {
         "total": 4,
@@ -848,7 +848,7 @@
     },
     {
       "id": "FileUpload",
-      "exportName": "RdFileUpload",
+      "exportName": "WkFileUpload",
       "examples": 16,
       "props": {
         "total": 22,
@@ -898,7 +898,7 @@
     },
     {
       "id": "Flex",
-      "exportName": "RdFlex",
+      "exportName": "WkFlex",
       "examples": 8,
       "props": {
         "total": 7,
@@ -927,7 +927,7 @@
     },
     {
       "id": "FloatLabel",
-      "exportName": "RdFloatLabel",
+      "exportName": "WkFloatLabel",
       "examples": 4,
       "props": {
         "total": 1,
@@ -952,7 +952,7 @@
     },
     {
       "id": "Fluid",
-      "exportName": "RdFluid",
+      "exportName": "WkFluid",
       "examples": 4,
       "props": {
         "total": 1,
@@ -979,7 +979,7 @@
     },
     {
       "id": "Form",
-      "exportName": "RdForm",
+      "exportName": "WkForm",
       "examples": 8,
       "props": {
         "total": 0,
@@ -1009,7 +1009,7 @@
     },
     {
       "id": "Gallery",
-      "exportName": "RdGallery",
+      "exportName": "WkGallery",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1036,7 +1036,7 @@
     },
     {
       "id": "Grid",
-      "exportName": "RdGrid",
+      "exportName": "WkGrid",
       "examples": 10,
       "props": {
         "total": 0,
@@ -1061,7 +1061,7 @@
     },
     {
       "id": "Icon",
-      "exportName": "RdIcon",
+      "exportName": "WkIcon",
       "examples": 8,
       "props": {
         "total": 3,
@@ -1086,7 +1086,7 @@
     },
     {
       "id": "IconField",
-      "exportName": "RdIconField",
+      "exportName": "WkIconField",
       "examples": 4,
       "props": {
         "total": 1,
@@ -1111,7 +1111,7 @@
     },
     {
       "id": "Inplace",
-      "exportName": "RdInplace",
+      "exportName": "WkInplace",
       "examples": 4,
       "props": {
         "total": 4,
@@ -1147,7 +1147,7 @@
     },
     {
       "id": "Input",
-      "exportName": "RdInput",
+      "exportName": "WkInput",
       "examples": 20,
       "props": {
         "total": 15,
@@ -1186,7 +1186,7 @@
     },
     {
       "id": "InputColor",
-      "exportName": "RdInputColor",
+      "exportName": "WkInputColor",
       "examples": 6,
       "props": {
         "total": 7,
@@ -1221,7 +1221,7 @@
     },
     {
       "id": "InputGroup",
-      "exportName": "RdInputGroup",
+      "exportName": "WkInputGroup",
       "examples": 4,
       "props": {
         "total": 0,
@@ -1246,7 +1246,7 @@
     },
     {
       "id": "InputNumber",
-      "exportName": "RdInputNumber",
+      "exportName": "WkInputNumber",
       "examples": 8,
       "props": {
         "total": 17,
@@ -1292,7 +1292,7 @@
     },
     {
       "id": "InputOtp",
-      "exportName": "RdInputOtp",
+      "exportName": "WkInputOtp",
       "examples": 6,
       "props": {
         "total": 9,
@@ -1323,7 +1323,7 @@
     },
     {
       "id": "InputPassword",
-      "exportName": "RdInputPassword",
+      "exportName": "WkInputPassword",
       "examples": 12,
       "props": {
         "total": 17,
@@ -1366,7 +1366,7 @@
     },
     {
       "id": "InputTags",
-      "exportName": "RdInputTags",
+      "exportName": "WkInputTags",
       "examples": 6,
       "props": {
         "total": 10,
@@ -1402,7 +1402,7 @@
     },
     {
       "id": "Knob",
-      "exportName": "RdKnob",
+      "exportName": "WkKnob",
       "examples": 4,
       "props": {
         "total": 10,
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "Label",
-      "exportName": "RdLabel",
+      "exportName": "WkLabel",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1464,7 +1464,7 @@
     },
     {
       "id": "Layout",
-      "exportName": "RdLayout",
+      "exportName": "WkLayout",
       "examples": 16,
       "props": {
         "total": 0,
@@ -1489,7 +1489,7 @@
     },
     {
       "id": "Listbox",
-      "exportName": "RdListbox",
+      "exportName": "WkListbox",
       "examples": 4,
       "props": {
         "total": 9,
@@ -1524,7 +1524,7 @@
     },
     {
       "id": "MegaMenu",
-      "exportName": "RdMegaMenu",
+      "exportName": "WkMegaMenu",
       "examples": 6,
       "props": {
         "total": 4,
@@ -1556,7 +1556,7 @@
     },
     {
       "id": "Menu",
-      "exportName": "RdMenu",
+      "exportName": "WkMenu",
       "examples": 18,
       "props": {
         "total": 18,
@@ -1593,7 +1593,7 @@
     },
     {
       "id": "Menubar",
-      "exportName": "RdMenubar",
+      "exportName": "WkMenubar",
       "examples": 4,
       "props": {
         "total": 4,
@@ -1626,7 +1626,7 @@
     },
     {
       "id": "Message",
-      "exportName": "RdMessage",
+      "exportName": "WkMessage",
       "examples": 8,
       "props": {
         "total": 0,
@@ -1651,7 +1651,7 @@
     },
     {
       "id": "MeterGroup",
-      "exportName": "RdMeterGroup",
+      "exportName": "WkMeterGroup",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1678,7 +1678,7 @@
     },
     {
       "id": "OrderList",
-      "exportName": "RdOrderList",
+      "exportName": "WkOrderList",
       "examples": 4,
       "props": {
         "total": 5,
@@ -1711,7 +1711,7 @@
     },
     {
       "id": "Pagination",
-      "exportName": "RdPagination",
+      "exportName": "WkPagination",
       "examples": 6,
       "props": {
         "total": 10,
@@ -1745,7 +1745,7 @@
     },
     {
       "id": "Panel",
-      "exportName": "RdPanel",
+      "exportName": "WkPanel",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1777,7 +1777,7 @@
     },
     {
       "id": "PickList",
-      "exportName": "RdPickList",
+      "exportName": "WkPickList",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1804,7 +1804,7 @@
     },
     {
       "id": "Popover",
-      "exportName": "RdPopover",
+      "exportName": "WkPopover",
       "examples": 8,
       "props": {
         "total": 8,
@@ -1841,7 +1841,7 @@
     },
     {
       "id": "ProgressBar",
-      "exportName": "RdProgressBar",
+      "exportName": "WkProgressBar",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1868,7 +1868,7 @@
     },
     {
       "id": "ProgressSpinner",
-      "exportName": "RdProgressSpinner",
+      "exportName": "WkProgressSpinner",
       "examples": 6,
       "props": {
         "total": 7,
@@ -1896,7 +1896,7 @@
     },
     {
       "id": "Radio",
-      "exportName": "RdRadio",
+      "exportName": "WkRadio",
       "examples": 10,
       "props": {
         "total": 9,
@@ -1926,7 +1926,7 @@
     },
     {
       "id": "Rating",
-      "exportName": "RdRating",
+      "exportName": "WkRating",
       "examples": 8,
       "props": {
         "total": 13,
@@ -1965,7 +1965,7 @@
     },
     {
       "id": "Scrollbar",
-      "exportName": "RdScrollbar",
+      "exportName": "WkScrollbar",
       "examples": 14,
       "props": {
         "total": 0,
@@ -1996,7 +1996,7 @@
     },
     {
       "id": "ScrollTop",
-      "exportName": "RdScrollTop",
+      "exportName": "WkScrollTop",
       "examples": 4,
       "props": {
         "total": 6,
@@ -2026,7 +2026,7 @@
     },
     {
       "id": "Select",
-      "exportName": "RdSelect",
+      "exportName": "WkSelect",
       "examples": 24,
       "props": {
         "total": 24,
@@ -2068,7 +2068,7 @@
     },
     {
       "id": "SelectButton",
-      "exportName": "RdSelectButton",
+      "exportName": "WkSelectButton",
       "examples": 6,
       "props": {
         "total": 7,
@@ -2100,7 +2100,7 @@
     },
     {
       "id": "Sidebar",
-      "exportName": "RdSidebar",
+      "exportName": "WkSidebar",
       "examples": 4,
       "props": {
         "total": 2,
@@ -2127,7 +2127,7 @@
     },
     {
       "id": "Skeleton",
-      "exportName": "RdSkeleton",
+      "exportName": "WkSkeleton",
       "examples": 10,
       "props": {
         "total": 7,
@@ -2152,7 +2152,7 @@
     },
     {
       "id": "Slider",
-      "exportName": "RdSlider",
+      "exportName": "WkSlider",
       "examples": 8,
       "props": {
         "total": 15,
@@ -2190,7 +2190,7 @@
     },
     {
       "id": "Space",
-      "exportName": "RdSpace",
+      "exportName": "WkSpace",
       "examples": 10,
       "props": {
         "total": 10,
@@ -2223,7 +2223,7 @@
     },
     {
       "id": "SpeedDial",
-      "exportName": "RdSpeedDial",
+      "exportName": "WkSpeedDial",
       "examples": 4,
       "props": {
         "total": 7,
@@ -2260,7 +2260,7 @@
     },
     {
       "id": "SplitButton",
-      "exportName": "RdSplitButton",
+      "exportName": "WkSplitButton",
       "examples": 4,
       "props": {
         "total": 9,
@@ -2297,7 +2297,7 @@
     },
     {
       "id": "Splitter",
-      "exportName": "RdSplitter",
+      "exportName": "WkSplitter",
       "examples": 10,
       "props": {
         "total": 12,
@@ -2337,7 +2337,7 @@
     },
     {
       "id": "Stepper",
-      "exportName": "RdStepper",
+      "exportName": "WkStepper",
       "examples": 6,
       "props": {
         "total": 5,
@@ -2370,7 +2370,7 @@
     },
     {
       "id": "Switch",
-      "exportName": "RdSwitch",
+      "exportName": "WkSwitch",
       "examples": 10,
       "props": {
         "total": 13,
@@ -2406,7 +2406,7 @@
     },
     {
       "id": "Table",
-      "exportName": "RdTable",
+      "exportName": "WkTable",
       "examples": 14,
       "props": {
         "total": 64,
@@ -2512,7 +2512,7 @@
     },
     {
       "id": "Tabs",
-      "exportName": "RdTabs",
+      "exportName": "WkTabs",
       "examples": 6,
       "props": {
         "total": 5,
@@ -2540,7 +2540,7 @@
     },
     {
       "id": "Tag",
-      "exportName": "RdTag",
+      "exportName": "WkTag",
       "examples": 10,
       "props": {
         "total": 9,
@@ -2570,7 +2570,7 @@
     },
     {
       "id": "Terminal",
-      "exportName": "RdTerminal",
+      "exportName": "WkTerminal",
       "examples": 4,
       "props": {
         "total": 4,
@@ -2605,7 +2605,7 @@
     },
     {
       "id": "Textarea",
-      "exportName": "RdTextarea",
+      "exportName": "WkTextarea",
       "examples": 10,
       "props": {
         "total": 17,
@@ -2646,7 +2646,7 @@
     },
     {
       "id": "TieredMenu",
-      "exportName": "RdTieredMenu",
+      "exportName": "WkTieredMenu",
       "examples": 6,
       "props": {
         "total": 6,
@@ -2677,7 +2677,7 @@
     },
     {
       "id": "Timeline",
-      "exportName": "RdTimeline",
+      "exportName": "WkTimeline",
       "examples": 8,
       "props": {
         "total": 4,
@@ -2702,7 +2702,7 @@
     },
     {
       "id": "Toast",
-      "exportName": "RdToast",
+      "exportName": "WkToast",
       "examples": 8,
       "props": {
         "total": 12,
@@ -2737,7 +2737,7 @@
     },
     {
       "id": "ToggleButton",
-      "exportName": "RdToggleButton",
+      "exportName": "WkToggleButton",
       "examples": 6,
       "props": {
         "total": 7,
@@ -2770,7 +2770,7 @@
     },
     {
       "id": "Toolbar",
-      "exportName": "RdToolbar",
+      "exportName": "WkToolbar",
       "examples": 4,
       "props": {
         "total": 1,
@@ -2797,7 +2797,7 @@
     },
     {
       "id": "Tooltip",
-      "exportName": "RdTooltip",
+      "exportName": "WkTooltip",
       "examples": 4,
       "props": {
         "total": 8,
@@ -2826,7 +2826,7 @@
     },
     {
       "id": "Tree",
-      "exportName": "RdTree",
+      "exportName": "WkTree",
       "examples": 10,
       "props": {
         "total": 17,
@@ -2872,7 +2872,7 @@
     },
     {
       "id": "TreeSelect",
-      "exportName": "RdTreeSelect",
+      "exportName": "WkTreeSelect",
       "examples": 8,
       "props": {
         "total": 22,
@@ -2917,7 +2917,7 @@
     },
     {
       "id": "TreeTable",
-      "exportName": "RdTreeTable",
+      "exportName": "WkTreeTable",
       "examples": 4,
       "props": {
         "total": 4,
@@ -2952,7 +2952,7 @@
     },
     {
       "id": "VirtualScroller",
-      "exportName": "RdVirtualScroller",
+      "exportName": "WkVirtualScroller",
       "examples": 4,
       "props": {
         "total": 4,

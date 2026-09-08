@@ -1,108 +1,108 @@
-.rd-tabs {
-    font-family: var(--rd-font-sans);
+.wk-tabs {
+    font-family: var(--wk-font-sans);
 }
 
-.rd-tabs__bar {
+.wk-tabs__bar {
     align-items: center;
     display: flex;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
 }
 
-.rd-tabs__scroller {
+.wk-tabs__scroller {
     flex: 1;
     min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
 }
 
-.rd-tabs__scroller::-webkit-scrollbar {
+.wk-tabs__scroller::-webkit-scrollbar {
     display: none;
 }
 
-.rd-tabs__list {
-    border-bottom: var(--rd-border-width) solid var(--rd-color-border);
+.wk-tabs__list {
+    border-bottom: var(--wk-border-width) solid var(--wk-color-border);
     display: flex;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     min-width: max-content;
 }
 
-.rd-tabs--card .rd-tabs__list {
+.wk-tabs--card .wk-tabs__list {
     border-bottom: 0;
-    gap: var(--rd-space-1);
+    gap: var(--wk-space-1);
 }
 
-.rd-tabs__item {
+.wk-tabs__item {
     align-items: center;
     display: inline-flex;
     position: relative;
 }
 
-.rd-tabs__tab {
+.wk-tabs__tab {
     background: transparent;
     border: 0;
     border-bottom: 2px solid transparent;
-    color: var(--rd-color-text-muted);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     font: inherit;
-    padding: var(--rd-space-3) var(--rd-space-2);
+    padding: var(--wk-space-3) var(--wk-space-2);
     transition:
-        color var(--rd-motion-fast) var(--rd-motion-ease),
-        border-color var(--rd-motion-fast) var(--rd-motion-ease);
+        color var(--wk-motion-fast) var(--wk-motion-ease),
+        border-color var(--wk-motion-fast) var(--wk-motion-ease);
 }
 
-.rd-tabs__tab--active {
-    border-color: var(--rd-color-primary);
-    color: var(--rd-color-primary);
+.wk-tabs__tab--active {
+    border-color: var(--wk-color-primary);
+    color: var(--wk-color-primary);
     font-weight: 600;
 }
 
-.rd-tabs--card .rd-tabs__tab {
-    background: color-mix(in srgb, var(--rd-color-border) 35%, var(--rd-color-surface));
-    border: var(--rd-border-width) solid var(--rd-color-border);
+.wk-tabs--card .wk-tabs__tab {
+    background: color-mix(in srgb, var(--wk-color-border) 35%, var(--wk-color-surface));
+    border: var(--wk-border-width) solid var(--wk-color-border);
     border-bottom: 0;
-    border-radius: var(--rd-radius-sm) var(--rd-radius-sm) 0 0;
+    border-radius: var(--wk-radius-sm) var(--wk-radius-sm) 0 0;
 }
 
-.rd-tabs--card .rd-tabs__tab--active {
-    background: var(--rd-color-surface);
-    border-color: var(--rd-color-border);
-    color: var(--rd-color-primary);
+.wk-tabs--card .wk-tabs__tab--active {
+    background: var(--wk-color-surface);
+    border-color: var(--wk-color-border);
+    color: var(--wk-color-primary);
 }
 
-.rd-tabs__tab:disabled {
+.wk-tabs__tab:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-tabs__tab:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-tabs__tab:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-tabs__close,
-.rd-tabs__add,
-.rd-tabs__scroll {
+.wk-tabs__close,
+.wk-tabs__add,
+.wk-tabs__scroll {
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     font: inherit;
     line-height: 1;
-    padding: var(--rd-space-1) var(--rd-space-2);
+    padding: var(--wk-space-1) var(--wk-space-2);
 }
 
-.rd-tabs__close:hover,
-.rd-tabs__add:hover,
-.rd-tabs__scroll:hover {
-    background: color-mix(in srgb, var(--rd-color-primary) 10%, transparent);
-    color: var(--rd-color-primary);
+.wk-tabs__close:hover,
+.wk-tabs__add:hover,
+.wk-tabs__scroll:hover {
+    background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
+    color: var(--wk-color-primary);
 }
 
-.rd-tabs__extra {
+.wk-tabs__extra {
     margin-left: auto;
 }
 
-.rd-tabs__panel {
-    padding-top: var(--rd-space-4);
+.wk-tabs__panel {
+    padding-top: var(--wk-space-4);
 }

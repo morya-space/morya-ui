@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
-import RdCarousel from './Carousel.vue'
+import WkCarousel from './Carousel.vue'
 
-describe('rdCarousel', () => {
+describe('wkCarousel', () => {
   it('pages through items', async () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: { value: ['a', 'b', 'c'], numVisible: 1 },
       slots: {
         item: `<template #item="{ item }"><span class="slide">{{ item }}</span></template>`,
@@ -17,7 +17,7 @@ describe('rdCarousel', () => {
   })
 
   it('wraps when circular', async () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: { value: ['a', 'b'], numVisible: 1, circular: true },
     })
     await wrapper.find('[aria-label="上一页"]').trigger('click')
@@ -25,18 +25,18 @@ describe('rdCarousel', () => {
   })
 
   it('hides arrows and shows indicators', async () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: { value: ['a', 'b', 'c'], showArrows: false, showIndicators: true },
     })
-    expect(wrapper.find('.rd-carousel__nav').exists()).toBe(false)
-    const dots = wrapper.findAll('.rd-carousel__indicator')
+    expect(wrapper.find('.wk-carousel__nav').exists()).toBe(false)
+    const dots = wrapper.findAll('.wk-carousel__indicator')
     expect(dots.length).toBeGreaterThan(1)
     await dots[1]!.trigger('click')
     expect(wrapper.emitted('update:page')?.at(-1)).toEqual([1])
   })
 
   it('supports controlled page via v-model:page', async () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: {
         'value': ['a', 'b', 'c'],
         'numVisible': 1,
@@ -54,7 +54,7 @@ describe('rdCarousel', () => {
   })
 
   it('navigates with arrow keys', async () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: { value: ['a', 'b', 'c'], numVisible: 1 },
     })
     await wrapper.trigger('keydown', { key: 'ArrowRight' })
@@ -64,10 +64,10 @@ describe('rdCarousel', () => {
   })
 
   it('changes page on touch swipe', async () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: { value: ['a', 'b', 'c'], numVisible: 1 },
     })
-    const viewport = wrapper.find('.rd-carousel__viewport')
+    const viewport = wrapper.find('.wk-carousel__viewport')
     await viewport.trigger('pointerdown', { isPrimary: true, pointerType: 'touch', clientX: 200 })
     await viewport.trigger('pointerup', { isPrimary: true, pointerType: 'touch', clientX: 100 })
     expect(wrapper.emitted('update:page')?.at(-1)).toEqual([1])
@@ -77,10 +77,10 @@ describe('rdCarousel', () => {
   })
 
   it('uses semantic indicator labels', () => {
-    const wrapper = mount(RdCarousel, {
+    const wrapper = mount(WkCarousel, {
       props: { value: ['a', 'b', 'c'], numVisible: 1 },
     })
-    const dots = wrapper.findAll('.rd-carousel__indicator')
+    const dots = wrapper.findAll('.wk-carousel__indicator')
     expect(dots[0]!.attributes('aria-label')).toBe('第 1 页，共 3 页')
     expect(dots[2]!.attributes('aria-label')).toBe('第 3 页，共 3 页')
   })
@@ -88,7 +88,7 @@ describe('rdCarousel', () => {
   it('pauses autoplay on hover and resumes on leave', async () => {
     vi.useFakeTimers()
     try {
-      const wrapper = mount(RdCarousel, {
+      const wrapper = mount(WkCarousel, {
         props: { value: ['a', 'b', 'c'], numVisible: 1, autoplay: true, interval: 1000 },
       })
       await wrapper.trigger('mouseenter')

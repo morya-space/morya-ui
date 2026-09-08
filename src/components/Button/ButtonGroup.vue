@@ -7,8 +7,8 @@ const props = withDefaults(defineProps<ButtonGroupProps>(), {
 })
 
 const groupClass = computed(() => [
-  'rd-button-group',
-  { 'rd-button-group--fluid': props.fluid },
+  'wk-button-group',
+  { 'wk-button-group--fluid': props.fluid },
 ])
 </script>
 

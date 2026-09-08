@@ -11,22 +11,22 @@ Adds consistent spacing between children. Prefer [`Flex`](/components/Flex/) for
 ## Import
 
 ```ts
-import { RdSpace } from '@wise-kit/ui'
+import { WkSpace } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@wise-kit/ui'
+import { WkButton, WkSpace } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSpace>
-    <RdButton label="Save" size="small" />
-    <RdButton label="Cancel" size="small" severity="secondary" />
-    <RdButton label="Reset" size="small" severity="secondary" />
-  </RdSpace>
+  <WkSpace>
+    <WkButton label="Save" size="small" />
+    <WkButton label="Cancel" size="small" severity="secondary" />
+    <WkButton label="Reset" size="small" severity="secondary" />
+  </WkSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { RdButton, RdSpace } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@wise-kit/ui'
+import { WkSpace, WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSpace vertical>
-    <RdTag value="Alpha" />
-    <RdTag value="Bravo" />
-    <RdTag value="Charlie" />
-  </RdSpace>
+  <WkSpace vertical>
+    <WkTag value="Alpha" />
+    <WkTag value="Bravo" />
+    <WkTag value="Charlie" />
+  </WkSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { RdSpace, RdTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@wise-kit/ui'
+import { WkButton, WkSpace } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <RdSpace size="small">
-      <RdButton label="S" size="small" />
-      <RdButton label="S" size="small" severity="secondary" />
-    </RdSpace>
-    <RdSpace :size="20">
-      <RdButton label="20px" size="small" />
-      <RdButton label="20px" size="small" severity="secondary" />
-    </RdSpace>
+    <WkSpace size="small">
+      <WkButton label="S" size="small" />
+      <WkButton label="S" size="small" severity="secondary" />
+    </WkSpace>
+    <WkSpace :size="20">
+      <WkButton label="20px" size="small" />
+      <WkButton label="20px" size="small" severity="secondary" />
+    </WkSpace>
   </div>
 </template>
 ```
 
-When `size` is omitted it defaults to `medium`. Override the global gap with `RdConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
+When `size` is omitted it defaults to `medium`. Override the global gap with `WkConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ Set `wrapItem=false` to skip the per-child wrapper (useful when children manage 
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@wise-kit/ui'
+import { WkSpace, WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSpace :wrap-item="false" :size="8">
-    <RdTag value="Direct" />
-    <RdTag value="Children" />
-  </RdSpace>
+  <WkSpace :wrap-item="false" :size="8">
+    <WkTag value="Direct" />
+    <WkTag value="Children" />
+  </WkSpace>
 </template>
 ```
 

@@ -11,21 +11,21 @@ Circular dial control with drag and keyboard adjustment.
 ## Import
 
 ```ts
-import { RdKnob } from '@wise-kit/ui'
+import { WkKnob } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdKnob } from '@wise-kit/ui'
+import { WkKnob } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(60)
 </script>
 
 <template>
-  <RdKnob v-model="value" :size="120" value-template="{value}%" />
+  <WkKnob v-model="value" :size="120" value-template="{value}%" />
 </template>
 ```
 

@@ -6,7 +6,7 @@ description: Light and dark themes, design tokens, and motion preferences.
 
 # Theme
 
-Theme support is built into `@wise-kit/ui`. Components consume semantic CSS variables (`--rd-*`) and do not keep a second palette.
+Theme support is built into `@wise-kit/ui`. Components consume semantic CSS variables (`--wk-*`) and do not keep a second palette.
 
 Importing `@wise-kit/ui/styles.css` already includes these variables. Theme JS APIs (`useTheme` and friends) come from the same package.
 
@@ -29,17 +29,17 @@ Common variables:
 
 | Token | Use |
 | --- | --- |
-| `--rd-color-primary` | Brand color |
-| `--rd-color-surface` | Page background |
-| `--rd-color-text` | Body text |
-| `--rd-color-border` | Dividers / strokes |
-| `--rd-radius-sm/md/lg` | Radius scale |
-| `--rd-space-*` | Spacing scale |
-| `--rd-font-size-xs/sm/md/lg` | Component type scale |
-| `--rd-opacity-disabled` | Disabled opacity |
-| `--rd-z-base` / `--rd-z-overlay` / `--rd-z-dropdown` / `--rd-z-toast` | Overlay stacking (`zIndex` writes `--rd-z-base`) |
-| `--rd-menu-min-width` / `--rd-control-affix-*` | Menu min width, input clear-button size |
-| `--rd-motion-fast/normal` | Transition duration |
+| `--wk-color-primary` | Brand color |
+| `--wk-color-surface` | Page background |
+| `--wk-color-text` | Body text |
+| `--wk-color-border` | Dividers / strokes |
+| `--wk-radius-sm/md/lg` | Radius scale |
+| `--wk-space-*` | Spacing scale |
+| `--wk-font-size-xs/sm/md/lg` | Component type scale |
+| `--wk-opacity-disabled` | Disabled opacity |
+| `--wk-z-base` / `--wk-z-overlay` / `--wk-z-dropdown` / `--wk-z-toast` | Overlay stacking (`zIndex` writes `--wk-z-base`) |
+| `--wk-menu-min-width` / `--wk-control-affix-*` | Menu min width, input clear-button size |
+| `--wk-motion-fast/normal` | Transition duration |
 
 ## Density
 
@@ -50,8 +50,8 @@ const { preference, setDensity } = useDensity()
 setDensity('compact') // 'compact' | 'comfortable' | 'spacious'
 ```
 
-This writes `data-rd-density` on `document.documentElement` and scales `--rd-space-*` plus `--rd-control-height-*`.  
-At the app level use `createWiseKit({ density: 'compact' })` or `<RdConfigProvider density="compact">`.
+This writes `data-wk-density` on `document.documentElement` and scales `--wk-space-*` plus `--wk-control-height-*`.  
+At the app level use `createWiseKit({ density: 'compact' })` or `<WkConfigProvider density="compact">`.
 
 The Components page sidebar Theme panel can temporarily change accent, radius, and density for local preview.
 
@@ -74,19 +74,19 @@ Default control heights follow a compact rhythm:
 
 | Size | Height | Font size |
 | --- | --- | --- |
-| `small` | `28px` (`--rd-control-height-small`) | `14px` |
+| `small` | `28px` (`--wk-control-height-small`) | `14px` |
 | Default / `medium` | `34px` | `14px` |
 | `large` | `40px` | `15px` |
 
 Focus uses a **brand border + 2px tinted glow** (not an outset outline ring):
 
 ```css
-border-color: var(--rd-color-primary-hover);
-box-shadow: var(--rd-focus-shadow); /* 0 0 0 2px primary@20% */
+border-color: var(--wk-color-primary-hover);
+box-shadow: var(--wk-focus-shadow); /* 0 0 0 2px primary@20% */
 ```
 
-Related tokens: `--rd-radius-control`, `--rd-control-padding-x-*`, `--rd-button-padding-x-*`, `--rd-focus-shadow` / `--rd-focus-shadow-danger`.
+Related tokens: `--wk-radius-control`, `--wk-control-padding-x-*`, `--wk-button-padding-x-*`, `--wk-focus-shadow` / `--wk-focus-shadow-danger`.
 
 ## With ConfigProvider
 
-Theme switching is the visual layer. `RdConfigProvider` / `createWiseKit` own size, copy, overlay mount, and other behavioral defaults. Use both together; see [Configuration](/docs/config).
+Theme switching is the visual layer. `WkConfigProvider` / `createWiseKit` own size, copy, overlay mount, and other behavioral defaults. Use both together; see [Configuration](/docs/config).

@@ -1,121 +1,121 @@
 /* —— Panel: Stepper —— */
-.rd-stepper {
-    --rd-stepper-marker-size: 1.5rem;
+.wk-stepper {
+    --wk-stepper-marker-size: 1.5rem;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     position: relative;
 }
 
-.rd-stepper__step:not(:last-child)::after {
-    background: var(--rd-stepper-connector-color);
+.wk-stepper__step:not(:last-child)::after {
+    background: var(--wk-stepper-connector-color);
     content: '';
-    height: var(--rd-border-width);
-    margin-inline: var(--rd-space-1);
+    height: var(--wk-border-width);
+    margin-inline: var(--wk-space-1);
     width: 1.25rem;
 }
 
-.rd-stepper__step {
+.wk-stepper__step {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-md);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-md);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    gap: var(--rd-space-2);
-    padding: var(--rd-space-2) var(--rd-space-3);
+    gap: var(--wk-space-2);
+    padding: var(--wk-space-2) var(--wk-space-3);
 }
 
-.rd-stepper__step--active {
-    color: var(--rd-color-primary);
+.wk-stepper__step--active {
+    color: var(--wk-color-primary);
     font-weight: 600;
 }
 
-.rd-stepper__step--completed {
-    color: var(--rd-color-text);
+.wk-stepper__step--completed {
+    color: var(--wk-color-text);
 }
 
-.rd-stepper__step--disabled,
-.rd-stepper__step:disabled {
+.wk-stepper__step--disabled,
+.wk-stepper__step:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-stepper__step:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-stepper__step:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-stepper__marker {
+.wk-stepper__marker {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 16%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 16%,
+        var(--wk-color-surface)
     );
-    border-radius: var(--rd-radius-full);
+    border-radius: var(--wk-radius-full);
     display: inline-flex;
-    font-size: var(--rd-font-size-xs);
+    font-size: var(--wk-font-size-xs);
     font-weight: 700;
-    height: var(--rd-stepper-marker-size);
+    height: var(--wk-stepper-marker-size);
     justify-content: center;
-    width: var(--rd-stepper-marker-size);
+    width: var(--wk-stepper-marker-size);
 }
 
-.rd-stepper__step--active .rd-stepper__marker {
-    background: var(--rd-color-primary);
-    color: var(--rd-color-on-emphasis);
+.wk-stepper__step--active .wk-stepper__marker {
+    background: var(--wk-color-primary);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-stepper__content {
-    margin-top: var(--rd-space-4);
+.wk-stepper__content {
+    margin-top: var(--wk-space-4);
 }
 
-.rd-stepper--vertical {
+.wk-stepper--vertical {
     align-items: stretch;
     flex-direction: column;
 }
 
-.rd-stepper__copy {
+.wk-stepper__copy {
     display: grid;
     gap: 0.15rem;
     text-align: start;
 }
 
-.rd-stepper__description {
-    color: var(--rd-color-text-muted);
-    font-size: var(--rd-font-size-xs);
+.wk-stepper__description {
+    color: var(--wk-color-text-muted);
+    font-size: var(--wk-font-size-xs);
     font-weight: 400;
 }
 
-.rd-stepper__step--error .rd-stepper__marker {
-    background: var(--rd-color-danger);
-    color: var(--rd-color-on-emphasis);
+.wk-stepper__step--error .wk-stepper__marker {
+    background: var(--wk-color-danger);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-stepper__step--finish .rd-stepper__marker {
-    background: color-mix(in srgb, var(--rd-color-primary) 14%, var(--rd-color-surface));
-    color: var(--rd-color-primary);
-    box-shadow: inset 0 0 0 var(--rd-border-width) var(--rd-color-primary);
+.wk-stepper__step--finish .wk-stepper__marker {
+    background: color-mix(in srgb, var(--wk-color-primary) 14%, var(--wk-color-surface));
+    color: var(--wk-color-primary);
+    box-shadow: inset 0 0 0 var(--wk-border-width) var(--wk-color-primary);
 }
 
-.rd-stepper__step--process .rd-stepper__marker {
-    background: var(--rd-color-primary);
-    color: var(--rd-color-on-emphasis);
+.wk-stepper__step--process .wk-stepper__marker {
+    background: var(--wk-color-primary);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-stepper__step--wait {
-    color: var(--rd-color-text-muted);
+.wk-stepper__step--wait {
+    color: var(--wk-color-text-muted);
 }
 
-.rd-stepper__step--finish {
-    color: var(--rd-color-text);
+.wk-stepper__step--finish {
+    color: var(--wk-color-text);
 }
 
-.rd-stepper__step--process {
-    color: var(--rd-color-primary);
+.wk-stepper__step--process {
+    color: var(--wk-color-primary);
     font-weight: 600;
 }

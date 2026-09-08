@@ -63,7 +63,7 @@ const { t } = useDocsI18n()
 }
 
 .doc-section-nav__count {
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   letter-spacing: 0.04em;
@@ -82,29 +82,29 @@ const { t } = useDocsI18n()
   background: transparent;
   border: 0;
   border-left: 2px solid transparent;
-  border-radius: 0 var(--rd-radius-sm) var(--rd-radius-sm) 0;
-  color: var(--rd-color-text-muted);
+  border-radius: 0 var(--wk-radius-sm) var(--wk-radius-sm) 0;
+  color: var(--wk-color-text-muted);
   cursor: pointer;
   font-size: 0.78rem;
   line-height: 1.45;
   padding: 0.35rem 0 0.35rem 0.55rem;
   text-align: left;
   transition:
-    background-color var(--rd-motion-fast) var(--rd-motion-ease),
-    border-color var(--rd-motion-fast) var(--rd-motion-ease),
-    color var(--rd-motion-fast) var(--rd-motion-ease);
+    background-color var(--wk-motion-fast) var(--wk-motion-ease),
+    border-color var(--wk-motion-fast) var(--wk-motion-ease),
+    color var(--wk-motion-fast) var(--wk-motion-ease);
   width: 100%;
 }
 
 .doc-section-nav__item button:hover {
-  border-left-color: var(--rd-color-primary);
-  color: var(--rd-color-primary);
+  border-left-color: var(--wk-color-primary);
+  color: var(--wk-color-primary);
 }
 
 .doc-section-nav__item--active button {
-  background: color-mix(in srgb, var(--rd-color-primary) 12%, var(--rd-color-surface));
-  border-left-color: var(--rd-color-primary);
-  color: var(--rd-color-primary);
+  background: color-mix(in srgb, var(--wk-color-primary) 12%, var(--wk-color-surface));
+  border-left-color: var(--wk-color-primary);
+  color: var(--wk-color-primary);
   font-weight: 600;
 }
 
@@ -114,7 +114,7 @@ const { t } = useDocsI18n()
 }
 
 .doc-section-nav__empty {
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   font-size: 0.75rem;
   line-height: 1.5;
   margin: 0;

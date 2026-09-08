@@ -6,7 +6,7 @@ import { useMotion } from './useMotion'
 describe('useMotion', () => {
   beforeEach(() => {
     localStorage.clear()
-    delete document.documentElement.dataset.rdMotion
+    delete document.documentElement.dataset.wkMotion
   })
 
   it('applies and persists a global motion preference', async () => {
@@ -18,7 +18,7 @@ describe('useMotion', () => {
     await nextTick()
 
     expect(vm.preference).toBe('none')
-    expect(document.documentElement.dataset.rdMotion).toBe('none')
+    expect(document.documentElement.dataset.wkMotion).toBe('none')
     expect(localStorage.getItem('wex-design-motion')).toBe('none')
   })
 })

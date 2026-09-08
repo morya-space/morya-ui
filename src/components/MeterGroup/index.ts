@@ -1,3 +1,3 @@
 import './style'
-export { default as RdMeterGroup } from './MeterGroup.vue'
+export { default as WkMeterGroup } from './MeterGroup.vue'
 export type { MeterGroupItem, MeterGroupProps } from './types'

@@ -13,36 +13,36 @@ const sizeTone = computed(() => resolveSizeClass(props.size))
 const titleTag = computed(() => `h${props.headingLevel}` as const)
 
 const rootClass = computed(() => [
-  'rd-card',
+  'wk-card',
   {
-    'rd-card--bordered': props.bordered,
-    'rd-card--borderless': !props.bordered,
-    'rd-card--hoverable': props.hoverable,
-    'rd-card--small': sizeTone.value === 'small',
-    'rd-card--large': sizeTone.value === 'large',
+    'wk-card--bordered': props.bordered,
+    'wk-card--borderless': !props.bordered,
+    'wk-card--hoverable': props.hoverable,
+    'wk-card--small': sizeTone.value === 'small',
+    'wk-card--large': sizeTone.value === 'large',
   },
 ])
 </script>
 
 <template>
   <section :class="rootClass" :aria-label="ariaLabel ?? title">
-    <div v-if="$slots.cover" class="rd-card__cover">
+    <div v-if="$slots.cover" class="wk-card__cover">
       <slot name="cover" />
     </div>
-    <div v-if="$slots.header || title || subtitle" class="rd-card__header">
+    <div v-if="$slots.header || title || subtitle" class="wk-card__header">
       <slot name="header">
-        <component :is="titleTag" v-if="title" class="rd-card__title">
+        <component :is="titleTag" v-if="title" class="wk-card__title">
           {{ title }}
         </component>
-        <p v-if="subtitle" class="rd-card__subtitle">
+        <p v-if="subtitle" class="wk-card__subtitle">
           {{ subtitle }}
         </p>
       </slot>
     </div>
-    <div class="rd-card__body">
+    <div class="wk-card__body">
       <slot />
     </div>
-    <footer v-if="$slots.footer" class="rd-card__footer">
+    <footer v-if="$slots.footer" class="wk-card__footer">
       <slot name="footer" />
     </footer>
   </section>

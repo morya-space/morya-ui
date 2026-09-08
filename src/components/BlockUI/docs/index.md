@@ -11,24 +11,24 @@ description: 在内容上叠加遮罩以阻止交互。
 ## 引入
 
 ```ts
-import { RdBlockUI } from '@wise-kit/ui'
+import { WkBlockUI } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdBlockUI, RdButton } from '@wise-kit/ui'
+import { WkBlockUI, WkButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const blocked = ref(false)
 </script>
 
 <template>
-  <RdButton :label="blocked ? '解除' : '锁定'" @click="blocked = !blocked" />
-  <RdBlockUI :blocked="blocked" style="margin-top: 1rem">
+  <WkButton :label="blocked ? '解除' : '锁定'" @click="blocked = !blocked" />
+  <WkBlockUI :blocked="blocked" style="margin-top: 1rem">
     <p>面板内容</p>
-  </RdBlockUI>
+  </WkBlockUI>
 </template>
 ```
 

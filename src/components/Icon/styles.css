@@ -1,37 +1,37 @@
-.rd-icon {
+.wk-icon {
     display: inline-flex;
     height: 1rem;
     width: 1rem;
 }
 
-.rd-icon svg {
+.wk-icon svg {
     height: 100%;
     width: 100%;
 }
 
-.rd-icon--sm,
-.rd-icon--small {
+.wk-icon--sm,
+.wk-icon--small {
     height: 0.875rem;
     width: 0.875rem;
 }
 
-.rd-icon--md,
-.rd-icon--normal {
+.wk-icon--md,
+.wk-icon--normal {
     height: 1rem;
     width: 1rem;
 }
 
-.rd-icon--lg,
-.rd-icon--large {
+.wk-icon--lg,
+.wk-icon--large {
     height: 1.25rem;
     width: 1.25rem;
 }
 
-.rd-icon--spin svg {
-    animation: rd-icon-spin var(--rd-motion-spin-fast) linear infinite;
+.wk-icon--spin svg {
+    animation: wk-icon-spin var(--wk-motion-spin-fast) linear infinite;
 }
 
-@keyframes rd-icon-spin {
+@keyframes wk-icon-spin {
     to {
         transform: rotate(360deg);
     }

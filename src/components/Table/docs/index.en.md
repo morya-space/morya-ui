@@ -6,7 +6,7 @@ description: Data table with sorting, filtering, selection, pagination, frozen c
 
 # Table
 
-`RdTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.
+`WkTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.
 
 Column width rules:
 
@@ -17,7 +17,7 @@ Column width rules:
 ## Import
 
 ```ts
-import { RdTable, RdTag } from '@wise-kit/ui'
+import { WkTable, WkTag } from '@wise-kit/ui'
 import type { TableColumnDefinition, TableItem } from '@wise-kit/ui'
 ```
 
@@ -25,7 +25,7 @@ import type { TableColumnDefinition, TableItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable, RdTag } from '@wise-kit/ui'
+import { WkTable, WkTag } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: 'Project', minWidth: 140, sortable: true },
@@ -39,14 +39,14 @@ const rows = [
 </script>
 
 <template>
-  <RdTable :columns="columns" :rows="rows" striped bordered>
+  <WkTable :columns="columns" :rows="rows" striped bordered>
     <template #cell-status="{ value }">
-      <RdTag
+      <WkTag
         :value="String(value)"
         :severity="value === 'Published' ? 'success' : 'secondary'"
       />
     </template>
-  </RdTable>
+  </WkTable>
 </template>
 ```
 
@@ -56,7 +56,7 @@ Use `selection-mode="multiple"` with `v-model:selection`, or `selection-mode="si
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -71,7 +71,7 @@ const selection = ref<Record<string, unknown>[]>([])
 </script>
 
 <template>
-  <RdTable
+  <WkTable
     v-model:selection="selection"
     :columns="columns"
     :rows="rows"
@@ -88,7 +88,7 @@ Use `search-value` / `filter-options` for client filtering. Enable `paginator` w
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -105,7 +105,7 @@ const page = ref(1)
 </script>
 
 <template>
-  <RdTable
+  <WkTable
     v-model:page="page"
     :columns="columns"
     :rows="rows"
@@ -121,7 +121,7 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: 'Name' },
@@ -131,11 +131,11 @@ const rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]
 </script>
 
 <template>
-  <RdTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
+  <WkTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
     <template #expansion="{ row }">
       {{ row.extra }}
     </template>
-  </RdTable>
+  </WkTable>
 </template>
 ```
 
@@ -143,7 +143,7 @@ const rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTable } from '@wise-kit/ui'
+import { WkButton, WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -155,8 +155,8 @@ const columns = [
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <RdButton :label="loading ? 'Stop loading' : 'Start loading'" @click="loading = !loading" />
-    <RdTable
+    <WkButton :label="loading ? 'Stop loading' : 'Start loading'" @click="loading = !loading" />
+    <WkTable
       :columns="columns"
       :rows="[]"
       :loading="loading"

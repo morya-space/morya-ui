@@ -21,7 +21,7 @@ src/components/Button/
     └── index.en.md
 ```
 
-- **Prefix**: components export as `Wd*`, CSS classes as `.rd-*`.
+- **Prefix**: components export as `Wk*`, CSS classes as `.wk-*`.
 - **Types**: Props / Emits live in `types.ts` and are re-exported from the package entry.
 - **Tests**: behavior-oriented Vitest + Vue Test Utils.
 
@@ -61,14 +61,14 @@ Overlays Teleport to `body` by default and support:
 
 Shared motion names:
 
-- Modal: `rd-fade`
-- Anchored menus: `rd-scale-fade`
-- Toast: `rd-slide-fade`
-- Message: `rd-message-slide` (from top)
+- Modal: `wk-fade`
+- Anchored menus: `wk-scale-fade`
+- Toast: `wk-slide-fade`
+- Message: `wk-message-slide` (from top)
 
 Set a global mount target with `appendTo` on [ConfigProvider](/docs/config).
 
 ## Icon conventions
 
-- **System icons**: internal and generic actions use `RdIcon` + `name` (see the [Icon](/components/Icon) registry).
-- **Product icons**: install Lucide (or similar) in the app and pass them through the `RdIcon` default slot or Button’s `icon` component. Do not dump a full SVG set into the library.
+- **System icons**: internal and generic actions use `WkIcon` + `name` (see the [Icon](/components/Icon) registry).
+- **Product icons**: install Lucide (or similar) in the app and pass them through the `WkIcon` default slot or Button’s `icon` component. Do not dump a full SVG set into the library.

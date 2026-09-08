@@ -7,7 +7,7 @@ withDefaults(defineProps<FluidProps>(), {
 </script>
 
 <template>
-  <component :is="as" class="rd-fluid">
+  <component :is="as" class="wk-fluid">
     <slot />
   </component>
 </template>

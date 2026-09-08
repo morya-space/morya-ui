@@ -6,7 +6,7 @@ export interface ListboxOption {
   disabled?: boolean
 }
 
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
 export interface ListboxProps {
   modelValue?: ListboxValue | ListboxValue[]
@@ -14,7 +14,7 @@ export interface ListboxProps {
   multiple?: boolean
   disabled?: boolean
   invalid?: boolean
-  size?: RdSizeInput
+  size?: WkSizeInput
   filter?: boolean
   emptyMessage?: string
   listStyle?: string | Record<string, string>

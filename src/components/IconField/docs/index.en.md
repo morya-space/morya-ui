@@ -11,14 +11,14 @@ Place an icon to the left or right of an input control.
 ## Import
 
 ```ts
-import { RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
+import { WkIcon, WkIconField, WkInput } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
+import { WkIcon, WkIconField, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -26,18 +26,18 @@ const value = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <RdIconField>
+    <WkIconField>
       <template #icon>
-        <RdIcon name="info" size="sm" />
+        <WkIcon name="info" size="sm" />
       </template>
-      <RdInput v-model="value" placeholder="Search" fluid />
-    </RdIconField>
-    <RdIconField icon-position="right">
+      <WkInput v-model="value" placeholder="Search" fluid />
+    </WkIconField>
+    <WkIconField icon-position="right">
       <template #icon>
-        <RdIcon name="check" size="sm" />
+        <WkIcon name="check" size="sm" />
       </template>
-      <RdInput v-model="value" placeholder="Verified" fluid />
-    </RdIconField>
+      <WkInput v-model="value" placeholder="Verified" fluid />
+    </WkIconField>
   </div>
 </template>
 ```

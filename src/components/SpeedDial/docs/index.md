@@ -11,14 +11,14 @@ description: 悬浮快捷操作按钮组。
 ## 引入
 
 ```ts
-import { RdSpeedDial } from '@wise-kit/ui'
+import { WkSpeedDial } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpeedDial } from '@wise-kit/ui'
+import { WkSpeedDial } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,7 +31,7 @@ const items = [
 
 <template>
   <div style="min-height:8rem;display:flex;align-items:flex-end;justify-content:center">
-    <RdSpeedDial v-model="open" :model="items" direction="up" />
+    <WkSpeedDial v-model="open" :model="items" direction="up" />
   </div>
 </template>
 ```

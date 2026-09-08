@@ -38,7 +38,7 @@ export default defineNuxtConfig({
 })
 ```
 
-Wrap your app with `RdConfigProvider` in `app.vue` for theme and global defaults.
+Wrap your app with `WkConfigProvider` in `app.vue` for theme and global defaults.
 
 ## Options (`WiseKit`)
 

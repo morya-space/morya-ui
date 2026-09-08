@@ -2,19 +2,19 @@
 import type { IconName } from '../Icon/types'
 import type { TreeNode } from './types'
 import { computed, inject } from 'vue'
-import { useRdLocale } from '../../locale'
-import RdCheckbox from '../Checkbox/Checkbox.vue'
-import RdIcon from '../Icon/Icon.vue'
+import { useWkLocale } from '../../locale'
+import WkCheckbox from '../Checkbox/Checkbox.vue'
+import WkIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
-import { RD_TREE_KEY, RD_TREE_NODE_SLOT } from './context'
+import { WK_TREE_KEY, WK_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
 
 const props = withDefaults(defineProps<{ node: TreeNode; depth?: number }>(), {
   depth: 1,
 })
-const tree = inject(RD_TREE_KEY)!
-const nodeSlot = inject(RD_TREE_NODE_SLOT, undefined)
-const locale = useRdLocale()
+const tree = inject(WK_TREE_KEY)!
+const nodeSlot = inject(WK_TREE_NODE_SLOT, undefined)
+const locale = useWkLocale()
 
 const expanded = computed(() => tree.isExpanded(props.node.key))
 const selected = computed(() => tree.isSelected(props.node.key))
@@ -39,8 +39,8 @@ const customContent = computed(() =>
 
 <template>
   <li
-    class="rd-tree__node"
-    :class="{ 'rd-tree__node--active': tree.activeKey.value === node.key }"
+    class="wk-tree__node"
+    :class="{ 'wk-tree__node--active': tree.activeKey.value === node.key }"
     role="treeitem"
     :aria-expanded="hasChildren ? expanded : undefined"
     :aria-disabled="disabled || undefined"
@@ -48,16 +48,16 @@ const customContent = computed(() =>
     :aria-selected="selected"
     :aria-checked="tree.showCheckbox ? checked : undefined"
     :tabindex="tree.tabindexForKey(node.key)"
-    :data-rd-tree-key="node.key"
+    :data-wk-tree-key="node.key"
     @focus="tree.setActiveKey(node.key)"
   >
     <div
-      class="rd-tree__row"
+      class="wk-tree__row"
       :class="{
-        'rd-tree__row--selected': selected,
-        'rd-tree__row--disabled': disabled,
-        'rd-tree__row--matched': matched,
-        'rd-tree__row--indeterminate': indeterminate,
+        'wk-tree__row--selected': selected,
+        'wk-tree__row--disabled': disabled,
+        'wk-tree__row--matched': matched,
+        'wk-tree__row--indeterminate': indeterminate,
       }"
       :draggable="tree.draggable && !disabled"
       @dragstart="tree.onDragStart(node, $event)"
@@ -68,20 +68,20 @@ const customContent = computed(() =>
       <button
         v-if="hasChildren"
         type="button"
-        class="rd-tree__toggler"
+        class="wk-tree__toggler"
         tabindex="-1"
         :aria-label="expanded ? locale.collapse : locale.expand"
         :disabled="disabled"
         @click="tree.toggleExpand(node)"
       >
-        <RdIcon v-if="loading" name="loader" size="sm" />
-        <RdIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
+        <WkIcon v-if="loading" name="loader" size="sm" />
+        <WkIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="rd-tree__toggler rd-tree__toggler--leaf" aria-hidden="true" />
+      <span v-else class="wk-tree__toggler wk-tree__toggler--leaf" aria-hidden="true" />
 
-      <RdCheckbox
+      <WkCheckbox
         v-if="tree.showCheckbox"
-        class="rd-tree__checkbox"
+        class="wk-tree__checkbox"
         tabindex="-1"
         :model-value="checked || indeterminate"
         :disabled="disabled"
@@ -89,14 +89,14 @@ const customContent = computed(() =>
         @click.stop
       />
 
-      <span v-if="iconName || node.icon" class="rd-tree__icon" aria-hidden="true">
-        <RdIcon v-if="iconName" :name="iconName" size="sm" />
+      <span v-if="iconName || node.icon" class="wk-tree__icon" aria-hidden="true">
+        <WkIcon v-if="iconName" :name="iconName" size="sm" />
         <template v-else>{{ node.icon }}</template>
       </span>
 
       <button
         type="button"
-        class="rd-tree__label"
+        class="wk-tree__label"
         tabindex="-1"
         :disabled="disabled"
         @click="tree.select(node)"
@@ -110,7 +110,7 @@ const customContent = computed(() =>
       </button>
     </div>
 
-    <ul v-if="hasChildren && expanded" class="rd-tree__children" role="group">
+    <ul v-if="hasChildren && expanded" class="wk-tree__children" role="group">
       <TreeNodeItem v-for="child in visibleChildren" :key="child.key" :node="child" :depth="depth + 1" />
     </ul>
   </li>

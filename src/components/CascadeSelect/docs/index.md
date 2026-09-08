@@ -11,14 +11,14 @@ description: 多级联级选择，支持嵌套 options 与分栏面板。
 ## 引入
 
 ```ts
-import { RdCascadeSelect } from '@wise-kit/ui'
+import { WkCascadeSelect } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@wise-kit/ui'
+import { WkCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | null>(null)
@@ -36,7 +36,7 @@ const options = [
 </script>
 
 <template>
-  <RdCascadeSelect v-model="value" :options="options" placeholder="选择分类" />
+  <WkCascadeSelect v-model="value" :options="options" placeholder="选择分类" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@wise-kit/ui'
+import { WkCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(null)
@@ -58,9 +58,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <RdCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <RdCascadeSelect v-model="b" :options="options" placeholder="Default" />
-    <RdCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <WkCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <WkCascadeSelect v-model="b" :options="options" placeholder="Default" />
+    <WkCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -79,7 +79,7 @@ const options = [
 | `placeholder` | `string` | `'请选择'` | 占位文案。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 表单必填辅助。 |
-| `size` | `RdSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `WkSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
 | `clearable` | `boolean` | `false` | 有值时显示清除按钮（hover 单槽 suffix）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |

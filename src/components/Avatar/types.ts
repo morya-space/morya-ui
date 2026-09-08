@@ -9,7 +9,7 @@ export interface AvatarProps {
   label?: string
   /** Image URL. Takes priority over icon and label. */
   image?: string
-  /** Icon name from RdIcon. Used when image is absent. */
+  /** Icon name from WkIcon. Used when image is absent. */
   icon?: IconName
   /** Shape of the avatar. */
   shape?: AvatarShape

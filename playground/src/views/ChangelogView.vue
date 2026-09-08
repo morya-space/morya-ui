@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loadChangelog } from '../docs/loadChangelog'
@@ -35,7 +35,7 @@ function selectVersion(version: string) {
 <template>
   <div class="changelog-shell">
     <aside class="changelog-sidebar" :aria-label="t.changelogNav">
-      <RdScrollbar class="changelog-scroll">
+      <WkScrollbar class="changelog-scroll">
         <div class="changelog-sidebar__body">
           <p class="changelog-kicker">
             RELEASES
@@ -60,11 +60,11 @@ function selectVersion(version: string) {
             </button>
           </nav>
         </div>
-      </RdScrollbar>
+      </WkScrollbar>
     </aside>
 
     <main class="changelog-main">
-      <RdScrollbar class="changelog-scroll">
+      <WkScrollbar class="changelog-scroll">
         <div class="changelog-main__body">
           <template v-if="activeRelease">
             <header class="changelog-hero">
@@ -94,7 +94,7 @@ function selectVersion(version: string) {
             <p>{{ t.noReleasesHint }}</p>
           </section>
         </div>
-      </RdScrollbar>
+      </WkScrollbar>
     </main>
   </div>
 </template>
@@ -109,7 +109,7 @@ function selectVersion(version: string) {
 }
 
 .changelog-sidebar {
-  background: color-mix(in srgb, var(--rd-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--wk-color-surface) 62%, transparent);
   border-right: 1px solid var(--docs-edge);
   min-height: 0;
   backdrop-filter: blur(12px);
@@ -143,7 +143,7 @@ function selectVersion(version: string) {
 
 .changelog-sidebar__meta {
   align-items: center;
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   display: flex;
   flex-wrap: wrap;
   font-family: var(--docs-mono);
@@ -162,7 +162,7 @@ function selectVersion(version: string) {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0.7rem;
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   cursor: pointer;
   display: flex;
   font-size: 0.86rem;
@@ -171,24 +171,24 @@ function selectVersion(version: string) {
   padding: 0.55rem 0.7rem;
   text-align: left;
   transition:
-    color var(--rd-motion-fast) var(--rd-motion-ease),
-    background var(--rd-motion-fast) var(--rd-motion-ease),
-    border-color var(--rd-motion-fast) var(--rd-motion-ease);
+    color var(--wk-motion-fast) var(--wk-motion-ease),
+    background var(--wk-motion-fast) var(--wk-motion-ease),
+    border-color var(--wk-motion-fast) var(--wk-motion-ease);
 }
 
 .changelog-nav__item:hover,
 .changelog-nav__item.is-active {
-  background: color-mix(in srgb, var(--rd-color-primary) 10%, transparent);
-  color: var(--rd-color-primary);
+  background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
+  color: var(--wk-color-primary);
 }
 
 .changelog-nav__item.is-active {
-  border-color: color-mix(in srgb, var(--rd-color-primary) 28%, transparent);
+  border-color: color-mix(in srgb, var(--wk-color-primary) 28%, transparent);
   font-weight: 700;
 }
 
 .changelog-nav__badge {
-  color: var(--rd-color-primary);
+  color: var(--wk-color-primary);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   letter-spacing: 0.04em;
@@ -237,14 +237,14 @@ function selectVersion(version: string) {
 }
 
 .changelog-section li {
-  color: var(--rd-color-text);
+  color: var(--wk-color-text);
   font-size: 0.92rem;
   line-height: 1.6;
   opacity: 0.92;
 }
 
 .changelog-empty {
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
 }
 
 .changelog-empty code {

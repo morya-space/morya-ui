@@ -11,23 +11,23 @@ description: 芯片用于展示标签化信息，可带图标、图片与移除�
 ## 引入
 
 ```ts
-import { RdChip } from '@wise-kit/ui'
+import { WkChip } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdChip } from '@wise-kit/ui'
+import { WkChip } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdChip label="Basic" />
-    <RdChip label="With Icon" icon="check" />
-    <RdChip label="Removable" removable />
-    <RdChip label="Success" severity="success" size="small" />
-    <RdChip label="Disabled" removable disabled />
+    <WkChip label="Basic" />
+    <WkChip label="With Icon" icon="check" />
+    <WkChip label="Removable" removable />
+    <WkChip label="Success" severity="success" size="small" />
+    <WkChip label="Disabled" removable disabled />
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ import { RdChip } from '@wise-kit/ui'
 | `image` | `string` | — | 前置图片 URL（优先于 icon）。 |
 | `removable` | `boolean` | `false` | 显示 × 移除按钮。 |
 | `disabled` | `boolean` | `false` | 禁用交互。 |
-| `severity` | `RdTagSeverity \| 'warning'` | — | 语义色。 |
+| `severity` | `WkTagSeverity \| 'warning'` | — | 语义色。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 
 ## Events

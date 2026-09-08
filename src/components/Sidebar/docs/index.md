@@ -6,19 +6,19 @@ description: 导航轨侧栏，可折叠。
 
 # Sidebar
 
-应用导航侧栏（非 Drawer 浮层）。导出为 `RdSidebar`。
+应用导航侧栏（非 Drawer 浮层）。导出为 `WkSidebar`。
 
 ## 引入
 
 ```ts
-import { RdSidebar } from '@wise-kit/ui'
+import { WkSidebar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSidebar } from '@wise-kit/ui'
+import { WkButton, WkSidebar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -35,8 +35,8 @@ const model = [
 
 <template>
   <div style="display:flex;gap:1rem;align-items:flex-start">
-    <RdSidebar :model="model" :collapsed="collapsed" />
-    <RdButton :label="collapsed ? '展开' : '折叠'" size="small" @click="collapsed = !collapsed" />
+    <WkSidebar :model="model" :collapsed="collapsed" />
+    <WkButton :label="collapsed ? '展开' : '折叠'" size="small" @click="collapsed = !collapsed" />
   </div>
 </template>
 ```

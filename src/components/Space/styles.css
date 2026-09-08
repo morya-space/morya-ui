@@ -1,10 +1,10 @@
 /* —— Panel: Space —— */
-.rd-space {
+.wk-space {
     box-sizing: border-box;
     min-width: 0;
 }
 
-.rd-space__item {
+.wk-space__item {
     display: block;
     max-width: 100%;
 }

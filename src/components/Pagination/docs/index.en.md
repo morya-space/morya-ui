@@ -13,14 +13,14 @@ Naive mapping: `pageSize` is an alias of `rows` (`pageSize` wins when both are s
 ## Import
 
 ```ts
-import { RdPagination } from '@wise-kit/ui'
+import { WkPagination } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdPagination } from '@wise-kit/ui'
+import { WkPagination } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
@@ -28,8 +28,8 @@ const page = ref(1)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <RdPagination v-model="page" :total-records="95" :rows="10" :page-link-size="5" />
-    <p style="margin:0;color:var(--rd-color-text-muted);font-size:0.875rem">
+    <WkPagination v-model="page" :total-records="95" :rows="10" :page-link-size="5" />
+    <p style="margin:0;color:var(--wk-color-text-muted);font-size:0.875rem">
       Page {{ page }} · first ≈ {{ (page - 1) * 10 }}
     </p>
   </div>
@@ -40,7 +40,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdPagination } from '@wise-kit/ui'
+import { WkPagination } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
@@ -49,7 +49,7 @@ const pageSize = ref(10)
 
 <template>
   <div style="display:grid;gap:1rem">
-    <RdPagination
+    <WkPagination
       v-model="page"
       v-model:page-size="pageSize"
       :total-records="200"
@@ -57,7 +57,7 @@ const pageSize = ref(10)
       :page-sizes="[10, 20, 50]"
       show-quick-jumper
     />
-    <RdPagination v-model="page" :total-records="200" :page-size="pageSize" simple />
+    <WkPagination v-model="page" :total-records="200" :page-size="pageSize" simple />
   </div>
 </template>
 ```

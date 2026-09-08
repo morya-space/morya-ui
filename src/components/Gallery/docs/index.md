@@ -11,14 +11,14 @@ description: 主图 + 缩略图的图片画廊。
 ## 引入
 
 ```ts
-import { RdGallery } from '@wise-kit/ui'
+import { WkGallery } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdGallery } from '@wise-kit/ui'
+import { WkGallery } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)
@@ -30,7 +30,7 @@ const images = [
 </script>
 
 <template>
-  <RdGallery v-model:active-index="activeIndex" :images="images" />
+  <WkGallery v-model:active-index="activeIndex" :images="images" />
 </template>
 ```
 

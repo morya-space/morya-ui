@@ -40,14 +40,14 @@ const rootStyle = computed((): CSSProperties => {
 </script>
 
 <template>
-  <div class="rd-space" :style="rootStyle">
+  <div class="wk-space" :style="rootStyle">
     <template v-if="!wrapItem">
       <slot />
     </template>
     <template v-else>
       <template v-for="(child, index) in children" :key="index">
         <component :is="child" v-if="child.type === Comment" />
-        <div v-else class="rd-space__item" :class="itemClass" :style="itemStyle">
+        <div v-else class="wk-space__item" :class="itemClass" :style="itemStyle">
           <component :is="child" />
         </div>
       </template>

@@ -11,14 +11,14 @@ description: 按钮组形式的单选或多选控件。
 ## 引入
 
 ```ts
-import { RdSelectButton } from '@wise-kit/ui'
+import { WkSelectButton } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelectButton } from '@wise-kit/ui'
+import { WkSelectButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('center')
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelectButton v-model="value" :options="options" />
+  <WkSelectButton v-model="value" :options="options" />
 </template>
 ```
 
@@ -38,7 +38,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelectButton } from '@wise-kit/ui'
+import { WkSelectButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(['left'])
@@ -50,7 +50,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelectButton v-model="value" :options="options" multiple />
+  <WkSelectButton v-model="value" :options="options" multiple />
 </template>
 ```
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { ConfirmPopupProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useRdConfig } from '../../shared/config'
+import { useWkConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import RdButton from '../Button/Button.vue'
-import RdIcon from '../Icon/Icon.vue'
+import WkButton from '../Button/Button.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,
@@ -23,8 +23,8 @@ const emit = defineEmits<{
   (event: 'reject'): void
 }>()
 
-const config = useRdConfig()
-const locale = useRdLocale()
+const config = useWkConfig()
+const locale = useWkLocale()
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const pending = ref(false)
@@ -135,23 +135,23 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="rd-scale-fade">
+    <Transition name="wk-scale-fade">
       <div
         v-if="visible"
         ref="panel"
-        class="rd-confirmpopup"
-        :class="{ 'rd-confirmpopup--teleported': teleported }"
+        class="wk-confirmpopup"
+        :class="{ 'wk-confirmpopup--teleported': teleported }"
         role="alertdialog"
         tabindex="-1"
         :style="panelStyle"
       >
-        <div class="rd-confirmpopup__message">
-          <RdIcon v-if="icon" class="rd-confirmpopup__icon" :name="icon" size="sm" />
+        <div class="wk-confirmpopup__message">
+          <WkIcon v-if="icon" class="wk-confirmpopup__icon" :name="icon" size="sm" />
           <slot>{{ message }}</slot>
         </div>
-        <div class="rd-confirmpopup__footer">
-          <RdButton :label="rejectText" severity="secondary" size="small" @click="reject" />
-          <RdButton
+        <div class="wk-confirmpopup__footer">
+          <WkButton :label="rejectText" severity="secondary" size="small" @click="reject" />
+          <WkButton
             :label="acceptText"
             size="small"
             :severity="acceptSeverity"

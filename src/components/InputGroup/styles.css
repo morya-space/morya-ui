@@ -1,5 +1,5 @@
 /* —�?Form: InputGroup —�?*/
-.rd-inputgroup {
+.wk-inputgroup {
     align-items: stretch;
     display: flex;
     flex-wrap: nowrap;
@@ -7,14 +7,14 @@
     width: 100%;
 }
 
-.rd-inputgroup-addon {
+.wk-inputgroup-addon {
     align-items: center;
-    background: color-mix(in srgb, var(--rd-color-text-muted) 10%, var(--rd-color-surface));
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    color: var(--rd-color-text-muted);
+    background: color-mix(in srgb, var(--wk-color-text-muted) 10%, var(--wk-color-surface));
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    color: var(--wk-color-text-muted);
     display: inline-flex;
     flex: 0 0 auto;
-    font-size: var(--rd-control-font-medium);
-    padding: 0 var(--rd-control-padding-x-medium);
+    font-size: var(--wk-control-font-medium);
+    padding: 0 var(--wk-control-padding-x-medium);
     white-space: nowrap;
 }

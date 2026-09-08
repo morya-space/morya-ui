@@ -11,14 +11,14 @@ Display tree data with children using column configuration.
 ## Import
 
 ```ts
-import { RdTreeTable } from '@wise-kit/ui'
+import { WkTreeTable } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeTable } from '@wise-kit/ui'
+import { WkTreeTable } from '@wise-kit/ui'
 
 const columns = [
   { field: 'name', header: 'Name' },
@@ -37,7 +37,7 @@ const value = [
 </script>
 
 <template>
-  <RdTreeTable :value="value" :columns="columns" />
+  <WkTreeTable :value="value" :columns="columns" />
 </template>
 ```
 

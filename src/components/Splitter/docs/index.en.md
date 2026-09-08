@@ -11,18 +11,18 @@ Split content into two panes with a draggable gutter. Covers common Naive `n-spl
 ## Import
 
 ```ts
-import { RdSplitter } from '@wise-kit/ui'
+import { WkSplitter } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@wise-kit/ui'
+import { WkSplitter } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSplitter style="min-height: 8rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden">
+  <WkSplitter style="min-height: 8rem; border: 1px solid var(--wk-color-border); border-radius: var(--wk-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding: 0.75rem">
         Panel A — drag the gutter
@@ -33,7 +33,7 @@ import { RdSplitter } from '@wise-kit/ui'
         Panel B
       </div>
     </template>
-  </RdSplitter>
+  </WkSplitter>
 </template>
 ```
 
@@ -43,11 +43,11 @@ import { RdSplitter } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@wise-kit/ui'
+import { WkSplitter } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden">
+  <WkSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--wk-color-border); border-radius: var(--wk-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding: 0.75rem">
         Top
@@ -58,7 +58,7 @@ import { RdSplitter } from '@wise-kit/ui'
         Bottom
       </div>
     </template>
-  </RdSplitter>
+  </WkSplitter>
 </template>
 ```
 
@@ -70,7 +70,7 @@ import { RdSplitter } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@wise-kit/ui'
+import { WkSplitter } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const percent = ref(40)
@@ -79,9 +79,9 @@ const ratio = ref(0.3)
 
 <template>
   <div style="display:grid;gap:1rem">
-    <RdSplitter
+    <WkSplitter
       v-model:size="percent"
-      style="min-height: 7rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden"
+      style="min-height: 7rem; border: 1px solid var(--wk-color-border); border-radius: var(--wk-radius-md); overflow: hidden"
     >
       <template #panel1>
         <div style="padding:0.75rem">
@@ -93,12 +93,12 @@ const ratio = ref(0.3)
           rest
         </div>
       </template>
-    </RdSplitter>
-    <RdSplitter
+    </WkSplitter>
+    <WkSplitter
       v-model:size="ratio"
       :min="0.15"
       :max="0.85"
-      style="min-height: 7rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden"
+      style="min-height: 7rem; border: 1px solid var(--wk-color-border); border-radius: var(--wk-radius-md); overflow: hidden"
     >
       <template #panel1>
         <div style="padding:0.75rem">
@@ -110,7 +110,7 @@ const ratio = ref(0.3)
           rest
         </div>
       </template>
-    </RdSplitter>
+    </WkSplitter>
   </div>
 </template>
 ```
@@ -119,11 +119,11 @@ const ratio = ref(0.3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@wise-kit/ui'
+import { WkSplitter } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--rd-color-border); border-radius: var(--rd-radius-md); overflow: hidden">
+  <WkSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--wk-color-border); border-radius: var(--wk-radius-md); overflow: hidden">
     <template #panel1>
       <div style="padding:0.75rem">
         Not draggable
@@ -134,7 +134,7 @@ import { RdSplitter } from '@wise-kit/ui'
         B
       </div>
     </template>
-  </RdSplitter>
+  </WkSplitter>
 </template>
 ```
 

@@ -11,26 +11,26 @@ Slides content in a window of `numVisible` items.
 ## Import
 
 ```ts
-import { RdCarousel } from '@wise-kit/ui'
+import { WkCarousel } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdCarousel } from '@wise-kit/ui'
+import { WkCarousel } from '@wise-kit/ui'
 
 const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 </script>
 
 <template>
-  <RdCarousel :value="value" :num-visible="1" circular>
+  <WkCarousel :value="value" :num-visible="1" circular>
     <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--rd-color-surface-muted, #f3f4f6);border-radius:var(--rd-radius-md)">
+      <div style="padding:2rem;text-align:center;background:var(--wk-color-surface-muted, #f3f4f6);border-radius:var(--wk-radius-md)">
         {{ item }}
       </div>
     </template>
-  </RdCarousel>
+  </WkCarousel>
 </template>
 ```
 
@@ -40,19 +40,19 @@ const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 
 ```vue preview
 <script setup lang="ts">
-import { RdCarousel } from '@wise-kit/ui'
+import { WkCarousel } from '@wise-kit/ui'
 
 const value = ['A', 'B', 'C']
 </script>
 
 <template>
-  <RdCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
+  <WkCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
     <template #item="{ item }">
-      <div style="padding:1.5rem;text-align:center;background:var(--rd-color-surface-muted, #f3f4f6);border-radius:var(--rd-radius-md)">
+      <div style="padding:1.5rem;text-align:center;background:var(--wk-color-surface-muted, #f3f4f6);border-radius:var(--wk-radius-md)">
         {{ item }}
       </div>
     </template>
-  </RdCarousel>
+  </WkCarousel>
 </template>
 ```
 

@@ -48,7 +48,7 @@ import '@wise-kit/ui/styles.css'
 createApp(App).use(WiseKit).mount('#app')
 ```
 
-模板中可直接使用 `<RdButton>`、`<RdInput>` 等，无需逐个 import。
+模板中可直接使用 `<WkButton>`、`<WkInput>` 等，无需逐个 import。
 
 ### 2. 按名导入 + 全量样式
 
@@ -64,7 +64,7 @@ createApp(App).mount('#app')
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdInput } from '@wise-kit/ui'
+import { WkButton, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const name = ref('')
@@ -72,8 +72,8 @@ const name = ref('')
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <RdInput v-model="name" label="名称" placeholder="输入名称" />
-    <RdButton label="提交" @click="() => undefined" />
+    <WkInput v-model="name" label="名称" placeholder="输入名称" />
+    <WkButton label="提交" @click="() => undefined" />
   </div>
 </template>
 ```
@@ -85,8 +85,8 @@ const name = ref('')
 从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `@wise-kit/ui/styles.css`：
 
 ```ts
-import { RdButton } from '@wise-kit/ui/button'
-import { RdInput } from '@wise-kit/ui/input'
+import { WkButton } from '@wise-kit/ui/button'
+import { WkInput } from '@wise-kit/ui/input'
 ```
 
 仅要样式时：
@@ -98,7 +98,7 @@ import '@wise-kit/ui/button/style.css'
 
 ### 2. 自动按需（Vite）
 
-安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<RdButton>`：
+安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<WkButton>`：
 
 ```ts
 import { WiseKitResolver } from '@wise-kit/ui/resolver'

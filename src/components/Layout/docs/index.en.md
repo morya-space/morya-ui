@@ -6,17 +6,17 @@ description: Page layout shell with Header / Sider / Content / Footer.
 
 # Layout
 
-Page-level layout shell. Set `has-sider` on the `RdLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `RdLayoutContent` can fill the remaining space.
+Page-level layout shell. Set `has-sider` on the `WkLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `WkLayoutContent` can fill the remaining space.
 
 ## Import
 
 ```ts
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutFooter,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutFooter,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 ```
 
@@ -26,21 +26,21 @@ Header / Content / Footer. Content fills the leftover height.
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@wise-kit/ui'
+import { WkLayout, WkLayoutContent, WkLayoutFooter, WkLayoutHeader } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </RdLayoutHeader>
-    <RdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </WkLayoutHeader>
+    <WkLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content (fills remaining space)
-    </RdLayoutContent>
-    <RdLayoutFooter bordered style="padding:0.75rem 1rem">
+    </WkLayoutContent>
+    <WkLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </RdLayoutFooter>
-  </RdLayout>
+    </WkLayoutFooter>
+  </WkLayout>
 </template>
 ```
 
@@ -51,10 +51,10 @@ Header + left sider + main. The inner `has-sider` layout consumes all height bel
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 import { ref } from 'vue'
 
@@ -62,13 +62,13 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--rd-color-text-muted);font-size:0.75rem">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>
-    </RdLayoutHeader>
-    <RdLayout has-sider>
-      <RdLayoutSider
+      <span style="color:var(--wk-color-text-muted);font-size:0.75rem">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>
+    </WkLayoutHeader>
+    <WkLayout has-sider>
+      <WkLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>Projects</div>
           <div>Settings</div>
         </div>
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding:1rem">
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding:1rem">
         Main area stretches both horizontally and vertically.
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </RdLayoutHeader>
-    <RdLayout has-sider sider-placement="right">
-      <RdLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </WkLayoutHeader>
+    <WkLayout has-sider sider-placement="right">
+      <WkLayoutSider bordered :width="140" content-style="padding:0.75rem">
         Props panel
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding:1rem">
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding:1rem">
         Canvas / main
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -125,13 +125,13 @@ Admin-style shell: header + sider + content + footer.
 ```vue preview
 <script setup lang="ts">
 import {
-  RdButton,
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutFooter,
-  RdLayoutHeader,
-  RdLayoutSider,
-  RdTag,
+  WkButton,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutFooter,
+  WkLayoutHeader,
+  WkLayoutSider,
+  WkTag,
 } from '@wise-kit/ui'
 import { ref } from 'vue'
 
@@ -139,20 +139,20 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <RdLayout style="height:18rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader
+  <WkLayout style="height:18rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
       <strong>Wise Kit</strong>
-      <RdTag value="Studio" />
+      <WkTag value="Studio" />
       <span style="flex:1" />
-      <RdButton size="small" label="Publish" />
-    </RdLayoutHeader>
+      <WkButton size="small" label="Publish" />
+    </WkLayoutHeader>
 
-    <RdLayout has-sider>
-      <RdLayoutSider
+    <WkLayout has-sider>
+      <WkLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>Widgets</div>
           <div>Theme</div>
         </div>
-      </RdLayoutSider>
+      </WkLayoutSider>
 
-      <RdLayout>
-        <RdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <WkLayout>
+        <WkLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>Workspace</strong>
-          <p style="margin:0;color:var(--rd-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--wk-color-text-muted);font-size:0.875rem">
             Content fills the space between Header and Footer; collapsing the sider keeps the height.
           </p>
-        </RdLayoutContent>
-        <RdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--rd-color-text-muted);font-size:0.75rem">
+        </WkLayoutContent>
+        <WkLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wk-color-text-muted);font-size:0.75rem">
           Ready · local
-        </RdLayoutFooter>
-      </RdLayout>
-    </RdLayout>
-  </RdLayout>
+        </WkLayoutFooter>
+      </WkLayout>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@wise-kit/ui'
+import { WkLayout, WkLayoutContent, WkLayoutHeader } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:12rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:12rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </RdLayoutHeader>
-    <RdLayoutContent embedded content-style="padding:1rem">
+    </WkLayoutHeader>
+    <WkLayoutContent embedded content-style="padding:1rem">
       Nested forms / lists go here.
-    </RdLayoutContent>
-  </RdLayout>
+    </WkLayoutContent>
+  </WkLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ Only the content pane scrolls; header and sider stay fixed.
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </RdLayoutHeader>
-    <RdLayout has-sider>
-      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </WkLayoutHeader>
+    <WkLayout has-sider>
+      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Fixed sider
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding:1rem">
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             Row {{ n }} — scroll down
           </div>
         </div>
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayout position="absolute" has-sider>
-      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayout position="absolute" has-sider>
+      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </RdLayoutSider>
-      <RdLayout>
-        <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+      </WkLayoutSider>
+      <WkLayout>
+        <WkLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </RdLayoutHeader>
-        <RdLayoutContent embedded content-style="padding:1rem">
+        </WkLayoutHeader>
+        <WkLayoutContent embedded content-style="padding:1rem">
           Fills the relative container
-        </RdLayoutContent>
-      </RdLayout>
-    </RdLayout>
+        </WkLayoutContent>
+      </WkLayout>
+    </WkLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | Horizontal layout for `RdLayoutSider`. |
+| `hasSider` | `boolean` | `false` | Horizontal layout for `WkLayoutSider`. |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | Sider side. |
 | `embedded` | `boolean` | `false` | Soft background for nested content. |
 | `position` | `'static' \| 'absolute'` | `'static'` | Positioning mode. |
@@ -307,17 +307,17 @@ import {
 
 ## Expose
 
-`RdLayout` / `RdLayoutContent` / `RdLayoutSider` expose `scrollTo(...)`.
+`WkLayout` / `WkLayoutContent` / `WkLayoutSider` expose `scrollTo(...)`.
 
 ## Components
 
 | Component | Description |
 | --- | --- |
-| `RdLayout` | Root layout. |
-| `RdLayoutHeader` | Header bar. |
-| `RdLayoutContent` | Main content (fills leftover space by default). |
-| `RdLayoutFooter` | Footer bar. |
-| `RdLayoutSider` | Side panel. |
+| `WkLayout` | Root layout. |
+| `WkLayoutHeader` | Header bar. |
+| `WkLayoutContent` | Main content (fills leftover space by default). |
+| `WkLayoutFooter` | Footer bar. |
+| `WkLayoutSider` | Side panel. |
 
 ## Slots
 

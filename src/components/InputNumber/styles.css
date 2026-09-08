@@ -1,175 +1,175 @@
 /* —— Form: InputNumber —— */
-.rd-inputnumber-field {
+.wk-inputnumber-field {
     display: grid;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
 }
 
-.rd-inputnumber-field--fluid {
+.wk-inputnumber-field--fluid {
     width: 100%;
 }
 
-.rd-inputnumber-field__label {
-    color: var(--rd-color-text);
-    font-size: var(--rd-font-size-md);
+.wk-inputnumber-field__label {
+    color: var(--wk-color-text);
+    font-size: var(--wk-font-size-md);
     font-weight: 600;
 }
 
-.rd-inputnumber-field__help {
-    color: var(--rd-color-text-muted);
-    font-size: var(--rd-font-size-xs);
+.wk-inputnumber-field__help {
+    color: var(--wk-color-text-muted);
+    font-size: var(--wk-font-size-xs);
 }
 
-.rd-inputnumber-field__help--invalid {
-    color: var(--rd-color-danger);
+.wk-inputnumber-field__help--invalid {
+    color: var(--wk-color-danger);
 }
 
-.rd-inputnumber {
-    --rd-inputnumber-width: 8rem;
-    --rd-inputnumber-stack-button-padding-x: var(--rd-space-2);
+.wk-inputnumber {
+    --wk-inputnumber-width: 8rem;
+    --wk-inputnumber-stack-button-padding-x: var(--wk-space-2);
     align-items: stretch;
     display: inline-flex;
     max-width: 100%;
 }
 
-.rd-inputnumber--fluid {
+.wk-inputnumber--fluid {
     display: flex;
     width: 100%;
 }
 
-.rd-inputnumber__input-wrap {
+.wk-inputnumber__input-wrap {
     align-items: center;
     display: flex;
     position: relative;
-    width: var(--rd-inputnumber-width);
+    width: var(--wk-inputnumber-width);
 }
 
-.rd-inputnumber__prefix,
-.rd-inputnumber__suffix {
-    color: var(--rd-color-text-muted);
+.wk-inputnumber__prefix,
+.wk-inputnumber__suffix {
+    color: var(--wk-color-text-muted);
     flex: 0 0 auto;
-    padding-inline: var(--rd-space-2);
+    padding-inline: var(--wk-space-2);
 }
 
-.rd-inputnumber--fluid .rd-inputnumber__input-wrap {
+.wk-inputnumber--fluid .wk-inputnumber__input-wrap {
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
 }
 
-.rd-inputnumber__input-wrap .rd-inputnumber__input {
+.wk-inputnumber__input-wrap .wk-inputnumber__input {
     flex: 1 1 auto;
     min-width: 0;
     width: 100%;
 }
 
-.rd-inputnumber__input-wrap .rd-inputnumber__clear {
+.wk-inputnumber__input-wrap .wk-inputnumber__clear {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     display: flex;
-    height: var(--rd-control-affix-size);
+    height: var(--wk-control-affix-size);
     justify-content: center;
     padding: 0;
     position: absolute;
-    right: var(--rd-space-1);
+    right: var(--wk-space-1);
     top: 50%;
     transform: translateY(-50%);
-    width: var(--rd-control-affix-size);
+    width: var(--wk-control-affix-size);
     z-index: 1;
 }
 
-.rd-inputnumber__input {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-control);
-    color: var(--rd-color-text);
+.wk-inputnumber__input {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-control);
+    color: var(--wk-color-text);
     font: inherit;
-    font-size: var(--rd-control-font-medium);
-    min-height: var(--rd-control-height-medium);
+    font-size: var(--wk-control-font-medium);
+    min-height: var(--wk-control-height-medium);
     min-width: 0;
-    padding: 0 var(--rd-control-padding-x-medium);
+    padding: 0 var(--wk-control-padding-x-medium);
 }
 
-.rd-inputnumber--buttons .rd-inputnumber__input {
+.wk-inputnumber--buttons .wk-inputnumber__input {
     border-radius: 0;
     text-align: center;
 }
 
-.rd-inputnumber--small .rd-inputnumber__input,
-.rd-inputnumber--small .rd-inputnumber__button {
-    min-height: var(--rd-control-height-small);
-    font-size: var(--rd-control-font-small);
+.wk-inputnumber--small .wk-inputnumber__input,
+.wk-inputnumber--small .wk-inputnumber__button {
+    min-height: var(--wk-control-height-small);
+    font-size: var(--wk-control-font-small);
 }
 
-.rd-inputnumber--large .rd-inputnumber__input,
-.rd-inputnumber--large .rd-inputnumber__button {
-    min-height: var(--rd-control-height-large);
-    font-size: var(--rd-control-font-large);
+.wk-inputnumber--large .wk-inputnumber__input,
+.wk-inputnumber--large .wk-inputnumber__button {
+    min-height: var(--wk-control-height-large);
+    font-size: var(--wk-control-font-large);
 }
 
-.rd-inputnumber--invalid .rd-inputnumber__input {
-    border-color: var(--rd-color-danger);
+.wk-inputnumber--invalid .wk-inputnumber__input {
+    border-color: var(--wk-color-danger);
 }
 
-.rd-inputnumber__button {
+.wk-inputnumber__button {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 12%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 12%,
+        var(--wk-color-surface)
     );
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    color: var(--rd-color-text);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    color: var(--wk-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--rd-control-font-medium);
+    font-size: var(--wk-control-font-medium);
     justify-content: center;
-    min-height: var(--rd-control-height-medium);
-    min-width: var(--rd-control-height-medium);
+    min-height: var(--wk-control-height-medium);
+    min-width: var(--wk-control-height-medium);
     padding: 0;
 }
 
-.rd-inputnumber__button--decrement {
-    border-radius: var(--rd-radius-control) 0 0 var(--rd-radius-control);
+.wk-inputnumber__button--decrement {
+    border-radius: var(--wk-radius-control) 0 0 var(--wk-radius-control);
     border-right: 0;
 }
 
-.rd-inputnumber__button--increment {
+.wk-inputnumber__button--increment {
     border-left: 0;
-    border-radius: 0 var(--rd-radius-control) var(--rd-radius-control) 0;
+    border-radius: 0 var(--wk-radius-control) var(--wk-radius-control) 0;
 }
 
-.rd-inputnumber__button:hover:not(:disabled) {
+.wk-inputnumber__button:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 20%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 20%,
+        var(--wk-color-surface)
     );
 }
 
-.rd-inputnumber__button:disabled,
-.rd-inputnumber--disabled .rd-inputnumber__input {
+.wk-inputnumber__button:disabled,
+.wk-inputnumber--disabled .wk-inputnumber__input {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-inputnumber__input:focus-visible,
-.rd-inputnumber__button:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-inputnumber__input:focus-visible,
+.wk-inputnumber__button:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
     z-index: 1;
 }
 
-.rd-inputnumber__stack {
+.wk-inputnumber__stack {
     display: flex;
     flex-direction: column;
 }
 
-.rd-inputnumber__stack .rd-inputnumber__button {
+.wk-inputnumber__stack .wk-inputnumber__button {
     min-height: 0;
-    padding: 0 var(--rd-inputnumber-stack-button-padding-x);
+    padding: 0 var(--wk-inputnumber-stack-button-padding-x);
 }

@@ -11,7 +11,7 @@ Tags display status or category.
 ## Import
 
 ```ts
-import { RdTag } from '@wise-kit/ui'
+import { WkTag } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ Show text via `value` or the default slot.
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@wise-kit/ui'
+import { WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdTag value="Primary" />
-    <RdTag>Slot Label</RdTag>
-    <RdTag value="Rounded" rounded />
+    <WkTag value="Primary" />
+    <WkTag>Slot Label</WkTag>
+    <WkTag value="Rounded" rounded />
   </div>
 </template>
 ```
@@ -38,36 +38,36 @@ Use `severity` for semantic color; defaults to primary when omitted. The legacy 
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@wise-kit/ui'
+import { WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdTag value="Primary" />
-    <RdTag value="Secondary" severity="secondary" />
-    <RdTag value="Success" severity="success" />
-    <RdTag value="Info" severity="info" />
-    <RdTag value="Warn" severity="warn" />
-    <RdTag value="Danger" severity="danger" />
-    <RdTag value="Contrast" severity="contrast" />
+    <WkTag value="Primary" />
+    <WkTag value="Secondary" severity="secondary" />
+    <WkTag value="Success" severity="success" />
+    <WkTag value="Info" severity="info" />
+    <WkTag value="Warn" severity="warn" />
+    <WkTag value="Danger" severity="danger" />
+    <WkTag value="Contrast" severity="contrast" />
   </div>
 </template>
 ```
 
 ## Icons
 
-Pass a `RdIcon` icon name to `icon`.
+Pass a `WkIcon` icon name to `icon`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@wise-kit/ui'
+import { WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdTag value="New" icon="plus" severity="info" />
-    <RdTag value="Done" icon="check" severity="success" />
-    <RdTag value="Alert" icon="info" severity="warn" rounded />
+    <WkTag value="New" icon="plus" severity="info" />
+    <WkTag value="Done" icon="check" severity="success" />
+    <WkTag value="Alert" icon="info" severity="warn" rounded />
   </div>
 </template>
 ```
@@ -76,13 +76,13 @@ import { RdTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@wise-kit/ui'
+import { WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdTag value="Draft" closable bordered />
-    <RdTag value="Small" size="small" severity="success" closable />
+    <WkTag value="Draft" closable bordered />
+    <WkTag value="Small" size="small" severity="success" closable />
   </div>
 </template>
 ```
@@ -94,7 +94,7 @@ import { RdTag } from '@wise-kit/ui'
 | `value` | `string` | — | Tag text. The default slot takes precedence when present. |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
-| `icon` | `IconName` | — | `RdIcon` icon name. |
+| `icon` | `IconName` | — | `WkIcon` icon name. |
 | `closable` | `boolean` | `false` | Show a close control. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `bordered` | `boolean` | `false` | Draw a border. |

@@ -1,25 +1,25 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import RdDataView from './DataView.vue'
+import WkDataView from './DataView.vue'
 
-describe('rdDataView', () => {
+describe('wkDataView', () => {
   it('renders list layout by default', () => {
-    const wrapper = mount(RdDataView, { props: { value: ['A', 'B', 'C'] } })
-    expect(wrapper.classes()).toContain('rd-dataview--list')
-    expect(wrapper.findAll('.rd-dataview__list-item')).toHaveLength(3)
+    const wrapper = mount(WkDataView, { props: { value: ['A', 'B', 'C'] } })
+    expect(wrapper.classes()).toContain('wk-dataview--list')
+    expect(wrapper.findAll('.wk-dataview__list-item')).toHaveLength(3)
   })
 
   it('paginates items when enabled', async () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: { value: Array.from({ length: 12 }, (_, i) => `Item ${i}`), paginator: true, rows: 5 },
     })
-    expect(wrapper.findAll('.rd-dataview__list-item')).toHaveLength(5)
-    expect(wrapper.find('.rd-dataview__paginator').exists()).toBe(true)
+    expect(wrapper.findAll('.wk-dataview__list-item')).toHaveLength(5)
+    expect(wrapper.find('.wk-dataview__paginator').exists()).toBe(true)
   })
 
   it('uses grid slot', () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: { value: [1, 2], layout: 'grid' },
       slots: {
         grid: ({ items }: { items: unknown[] }) =>
@@ -30,13 +30,13 @@ describe('rdDataView', () => {
   })
 
   it('shows default empty message', () => {
-    const wrapper = mount(RdDataView, { props: { value: [] } })
-    expect(wrapper.find('.rd-dataview__message').exists()).toBe(true)
-    expect(wrapper.find('.rd-dataview__empty-text').text()).toBe('暂无数据')
+    const wrapper = mount(WkDataView, { props: { value: [] } })
+    expect(wrapper.find('.wk-dataview__message').exists()).toBe(true)
+    expect(wrapper.find('.wk-dataview__empty-text').text()).toBe('暂无数据')
   })
 
   it('supports custom empty slot', () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: { value: [] },
       slots: { empty: '<p class="custom-empty">Nothing here</p>' },
     })
@@ -44,14 +44,14 @@ describe('rdDataView', () => {
   })
 
   it('shows loading overlay', () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: { value: ['a'], loading: true },
     })
-    expect(wrapper.find('.rd-dataview__loading').exists()).toBe(true)
+    expect(wrapper.find('.wk-dataview__loading').exists()).toBe(true)
   })
 
   it('supports controlled page via v-model:page', async () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: {
         'value': Array.from({ length: 12 }, (_, i) => `Item ${i}`),
         'paginator': true,
@@ -60,12 +60,12 @@ describe('rdDataView', () => {
         'onUpdate:page': (page: number) => wrapper.setProps({ page }),
       },
     })
-    expect(wrapper.findAll('.rd-dataview__list-item')).toHaveLength(5)
-    expect(wrapper.find('.rd-dataview__list-item').text()).toBe('Item 5')
+    expect(wrapper.findAll('.wk-dataview__list-item')).toHaveLength(5)
+    expect(wrapper.find('.wk-dataview__list-item').text()).toBe('Item 5')
   })
 
   it('does not reset page when data is appended', async () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: {
         'value': Array.from({ length: 12 }, (_, i) => `Item ${i}`),
         'paginator': true,
@@ -81,10 +81,10 @@ describe('rdDataView', () => {
   })
 
   it('renders header slot', () => {
-    const wrapper = mount(RdDataView, {
+    const wrapper = mount(WkDataView, {
       props: { value: ['a'] },
       slots: { header: '<div class="header-toolbar">Toolbar</div>' },
     })
-    expect(wrapper.find('.rd-dataview__header .header-toolbar').text()).toBe('Toolbar')
+    expect(wrapper.find('.wk-dataview__header .header-toolbar').text()).toBe('Toolbar')
   })
 })

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdCommandMenu, RdIcon } from '@wise-kit/ui'
+import { WkCommandMenu, WkIcon } from '@wise-kit/ui'
 import { onMounted, onUnmounted } from 'vue'
 import { useSiteSearchPalette } from '../composables/useSiteSearch'
 import { useDocsI18n } from '../i18n'
@@ -25,11 +25,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     :aria-label="t.searchOpen"
     @click="open"
   >
-    <RdIcon name="search" size="sm" />
+    <WkIcon name="search" size="sm" />
     <span class="site-search-trigger__label">{{ t.searchOpen }}</span>
     <kbd class="site-search-trigger__kbd" aria-hidden="true">⌘K</kbd>
   </button>
-  <RdCommandMenu
+  <WkCommandMenu
     v-model="visible"
     :model="items"
     :placeholder="t.searchPlaceholder"
@@ -39,22 +39,22 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 <style scoped>
 .site-search-trigger {
   align-items: center;
-  background: color-mix(in srgb, var(--rd-color-surface) 88%, transparent);
+  background: color-mix(in srgb, var(--wk-color-surface) 88%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 999px;
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   cursor: pointer;
   display: inline-flex;
   gap: 0.4rem;
   padding: 0.35rem 0.65rem;
   transition:
-    border-color var(--rd-motion-fast) var(--rd-motion-ease),
-    color var(--rd-motion-fast) var(--rd-motion-ease);
+    border-color var(--wk-motion-fast) var(--wk-motion-ease),
+    color var(--wk-motion-fast) var(--wk-motion-ease);
 }
 
 .site-search-trigger:hover {
-  border-color: color-mix(in srgb, var(--rd-color-primary) 35%, var(--docs-edge));
-  color: var(--rd-color-text);
+  border-color: color-mix(in srgb, var(--wk-color-primary) 35%, var(--docs-edge));
+  color: var(--wk-color-text);
 }
 
 .site-search-trigger__label {
@@ -62,7 +62,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 .site-search-trigger__kbd {
-  background: color-mix(in srgb, var(--rd-color-text) 6%, var(--rd-color-surface));
+  background: color-mix(in srgb, var(--wk-color-text) 6%, var(--wk-color-surface));
   border: 1px solid var(--docs-edge);
   border-radius: 0.35rem;
   font-family: var(--docs-mono);

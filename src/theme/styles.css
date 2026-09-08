@@ -1,271 +1,271 @@
 :root {
-    --rd-color-primary: #2563eb;
-    --rd-color-primary-hover: #1d4ed8;
-    --rd-color-surface: #ffffff;
-    --rd-color-text: #0f172a;
-    --rd-color-text-muted: #64748b;
-    --rd-color-border: #e2e8f0;
-    --rd-color-focus-ring: #2563eb;
+    --wk-color-primary: #2563eb;
+    --wk-color-primary-hover: #1d4ed8;
+    --wk-color-surface: #ffffff;
+    --wk-color-text: #0f172a;
+    --wk-color-text-muted: #64748b;
+    --wk-color-border: #e2e8f0;
+    --wk-color-focus-ring: #2563eb;
     /* Naive-inspired control sizing (tiny omitted; medium = default) */
-    --rd-control-height-small: 28px;
-    --rd-control-height-medium: 34px;
-    --rd-control-height-large: 40px;
-    --rd-control-font-small: 14px;
-    --rd-control-font-medium: 14px;
-    --rd-control-font-large: 15px;
-    --rd-control-padding-x-small: 10px;
-    --rd-control-padding-x-medium: 12px;
-    --rd-control-padding-x-large: 14px;
+    --wk-control-height-small: 28px;
+    --wk-control-height-medium: 34px;
+    --wk-control-height-large: 40px;
+    --wk-control-font-small: 14px;
+    --wk-control-font-medium: 14px;
+    --wk-control-font-large: 15px;
+    --wk-control-padding-x-small: 10px;
+    --wk-control-padding-x-medium: 12px;
+    --wk-control-padding-x-large: 14px;
 
-    --rd-radius-control: 3px;
-    --rd-border-width: 1px;
-    --rd-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--rd-color-primary) 20%, transparent);
-    --rd-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--rd-color-danger) 20%, transparent);
-    --rd-color-success: #159570;
-    --rd-color-info: #2563eb;
-    --rd-color-warning: #d97706;
-    --rd-color-warn: var(--rd-color-warning);
-    --rd-color-help: #9333ea;
-    --rd-color-danger: #dc2626;
-    --rd-color-contrast: #0f172a;
-    --rd-color-contrast-fg: #ffffff;
-    --rd-color-contrast-hover: #1e293b;
-    --rd-color-contrast-active: #020617;
-    --rd-color-on-emphasis: #ffffff;
-    --rd-overlay-scrim: rgb(15 23 42 / 0.55);
-    --rd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
-    --rd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
-    --rd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
-    --rd-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
-    --rd-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --wk-radius-control: 3px;
+    --wk-border-width: 1px;
+    --wk-focus-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--wk-color-primary) 20%, transparent);
+    --wk-focus-shadow-danger: 0 0 0 2px
+        color-mix(in srgb, var(--wk-color-danger) 20%, transparent);
+    --wk-color-success: #159570;
+    --wk-color-info: #2563eb;
+    --wk-color-warning: #d97706;
+    --wk-color-warn: var(--wk-color-warning);
+    --wk-color-help: #9333ea;
+    --wk-color-danger: #dc2626;
+    --wk-color-contrast: #0f172a;
+    --wk-color-contrast-fg: #ffffff;
+    --wk-color-contrast-hover: #1e293b;
+    --wk-color-contrast-active: #020617;
+    --wk-color-on-emphasis: #ffffff;
+    --wk-overlay-scrim: rgb(15 23 42 / 0.55);
+    --wk-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
+    --wk-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
+    --wk-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --wk-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --wk-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
 
     /* Typography scale (component text, not control-height fonts) */
-    --rd-font-size-xs: 0.75rem;
-    --rd-font-size-sm: 0.8125rem;
-    --rd-font-size-md: 0.875rem;
-    --rd-font-size-lg: 1.125rem;
-    --rd-opacity-disabled: 0.55;
-    /* Layering: override --rd-z-base via ConfigProvider / createWiseKit */
-    --rd-z-base: 1000;
-    --rd-z-overlay: var(--rd-z-base);
-    --rd-z-overlay-raised: calc(var(--rd-z-base) + 1);
-    --rd-z-dropdown: calc(var(--rd-z-base) + 50);
-    --rd-z-tooltip: calc(var(--rd-z-base) + 60);
-    --rd-z-toast: calc(var(--rd-z-base) + 100);
-    --rd-z-popper: 40;
+    --wk-font-size-xs: 0.75rem;
+    --wk-font-size-sm: 0.8125rem;
+    --wk-font-size-md: 0.875rem;
+    --wk-font-size-lg: 1.125rem;
+    --wk-opacity-disabled: 0.55;
+    /* Layering: override --wk-z-base via ConfigProvider / createWiseKit */
+    --wk-z-base: 1000;
+    --wk-z-overlay: var(--wk-z-base);
+    --wk-z-overlay-raised: calc(var(--wk-z-base) + 1);
+    --wk-z-dropdown: calc(var(--wk-z-base) + 50);
+    --wk-z-tooltip: calc(var(--wk-z-base) + 60);
+    --wk-z-toast: calc(var(--wk-z-base) + 100);
+    --wk-z-popper: 40;
 
-    --rd-control-affix-size: 2rem;
-    --rd-control-affix-gap: 2.35rem;
-    --rd-control-affix-padding: 2.5rem;
-    --rd-space-1: 0.25rem;
-    --rd-space-2: 0.5rem;
-    --rd-space-3: 0.75rem;
-    --rd-space-4: 1rem;
-    --rd-space-5: 1.25rem;
-    --rd-space-6: 1.5rem;
-    --rd-space-8: 2rem;
-    --rd-radius-sm: 0.25rem;
-    --rd-radius-md: 0.5rem;
-    --rd-radius-lg: 0.75rem;
-    --rd-radius-full: 9999px;
-    --rd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-    --rd-motion-fast: 150ms;
-    --rd-motion-normal: 250ms;
-    --rd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
-    --rd-motion-enter: 180ms;
-    --rd-motion-exit: 130ms;
-    --rd-motion-distance: 0.5rem;
-    --rd-motion-spin: 1s;
-    --rd-motion-spin-dash: 1.5s;
-    --rd-motion-spin-fast: 0.8s;
-    --rd-motion-spin-medium: 0.7s;
-    --rd-motion-skeleton: 1.4s;
-    --rd-motion-pulse: 1.2s;
-    --rd-motion-scrollbar-show: 340ms;
-    --rd-motion-scrollbar-hide: 120ms;
-    --rd-dataview-grid-min: 10rem;
-    --rd-tree-indent: 0.7rem;
-    --rd-tree-indent-padding: var(--rd-space-3);
-    --rd-layout-trigger-bar-height: 4.5rem;
-    --rd-layout-trigger-bar-offset: 1.75rem;
-    --rd-layout-trigger-bar-width: 2rem;
-    --rd-layout-trigger-bar-top: 2.25rem;
-    --rd-timeline-event-min-height: 4rem;
-    --rd-timeline-marker-size: 1.5rem;
-    --rd-tag-font-size-small: var(--rd-font-size-xs);
-    --rd-slider-tooltip-offset: 1.5rem;
-    --rd-slider-tooltip-padding-block: 0.15rem;
-    --rd-slider-tooltip-padding-inline: 0.4rem;
-    --rd-rating-star-size-small: 1rem;
-    --rd-rating-star-size-medium: 1.25rem;
-    --rd-rating-star-size-large: 1.5rem;
-    --rd-rating-star-padding: 0.15rem;
-    --rd-slider-marks-inset: 0.9rem;
-    --rd-slider-marks-side: 0.5rem;
-    --rd-stepper-connector-color: var(--rd-color-border);
+    --wk-control-affix-size: 2rem;
+    --wk-control-affix-gap: 2.35rem;
+    --wk-control-affix-padding: 2.5rem;
+    --wk-space-1: 0.25rem;
+    --wk-space-2: 0.5rem;
+    --wk-space-3: 0.75rem;
+    --wk-space-4: 1rem;
+    --wk-space-5: 1.25rem;
+    --wk-space-6: 1.5rem;
+    --wk-space-8: 2rem;
+    --wk-radius-sm: 0.25rem;
+    --wk-radius-md: 0.5rem;
+    --wk-radius-lg: 0.75rem;
+    --wk-radius-full: 9999px;
+    --wk-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --wk-motion-fast: 150ms;
+    --wk-motion-normal: 250ms;
+    --wk-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --wk-motion-enter: 180ms;
+    --wk-motion-exit: 130ms;
+    --wk-motion-distance: 0.5rem;
+    --wk-motion-spin: 1s;
+    --wk-motion-spin-dash: 1.5s;
+    --wk-motion-spin-fast: 0.8s;
+    --wk-motion-spin-medium: 0.7s;
+    --wk-motion-skeleton: 1.4s;
+    --wk-motion-pulse: 1.2s;
+    --wk-motion-scrollbar-show: 340ms;
+    --wk-motion-scrollbar-hide: 120ms;
+    --wk-dataview-grid-min: 10rem;
+    --wk-tree-indent: 0.7rem;
+    --wk-tree-indent-padding: var(--wk-space-3);
+    --wk-layout-trigger-bar-height: 4.5rem;
+    --wk-layout-trigger-bar-offset: 1.75rem;
+    --wk-layout-trigger-bar-width: 2rem;
+    --wk-layout-trigger-bar-top: 2.25rem;
+    --wk-timeline-event-min-height: 4rem;
+    --wk-timeline-marker-size: 1.5rem;
+    --wk-tag-font-size-small: var(--wk-font-size-xs);
+    --wk-slider-tooltip-offset: 1.5rem;
+    --wk-slider-tooltip-padding-block: 0.15rem;
+    --wk-slider-tooltip-padding-inline: 0.4rem;
+    --wk-rating-star-size-small: 1rem;
+    --wk-rating-star-size-medium: 1.25rem;
+    --wk-rating-star-size-large: 1.5rem;
+    --wk-rating-star-padding: 0.15rem;
+    --wk-slider-marks-inset: 0.9rem;
+    --wk-slider-marks-side: 0.5rem;
+    --wk-stepper-connector-color: var(--wk-color-border);
 
     /* Table (Element Plus–aligned) */
-    --rd-color-fill-light: color-mix(in srgb, var(--rd-color-text) 6%, var(--rd-color-surface));
-    --rd-color-fill-lighter: color-mix(in srgb, var(--rd-color-text) 3.5%, var(--rd-color-surface));
-    --rd-table-border-color: var(--rd-color-border);
-    --rd-table-header-bg: var(--rd-color-fill-light);
-    --rd-table-header-text: var(--rd-color-text);
-    --rd-table-text: var(--rd-color-text);
-    --rd-table-row-bg: var(--rd-color-surface);
-    --rd-table-row-hover-bg: var(--rd-color-fill-light);
-    --rd-table-row-striped-bg: var(--rd-color-fill-lighter);
-    --rd-table-row-current-bg: color-mix(in srgb, var(--rd-color-primary) 10%, var(--rd-color-surface));
-    --rd-table-row-selected-bg: color-mix(in srgb, var(--rd-color-primary) 14%, var(--rd-color-surface));
-    --rd-table-expanded-bg: var(--rd-color-fill-lighter);
-    --rd-table-font-size: var(--rd-font-size-md);
-    --rd-table-row-height: 40px;
-    --rd-table-cell-line-height: 23px;
-    --rd-table-cell-padding-inline: 12px;
+    --wk-color-fill-light: color-mix(in srgb, var(--wk-color-text) 6%, var(--wk-color-surface));
+    --wk-color-fill-lighter: color-mix(in srgb, var(--wk-color-text) 3.5%, var(--wk-color-surface));
+    --wk-table-border-color: var(--wk-color-border);
+    --wk-table-header-bg: var(--wk-color-fill-light);
+    --wk-table-header-text: var(--wk-color-text);
+    --wk-table-text: var(--wk-color-text);
+    --wk-table-row-bg: var(--wk-color-surface);
+    --wk-table-row-hover-bg: var(--wk-color-fill-light);
+    --wk-table-row-striped-bg: var(--wk-color-fill-lighter);
+    --wk-table-row-current-bg: color-mix(in srgb, var(--wk-color-primary) 10%, var(--wk-color-surface));
+    --wk-table-row-selected-bg: color-mix(in srgb, var(--wk-color-primary) 14%, var(--wk-color-surface));
+    --wk-table-expanded-bg: var(--wk-color-fill-lighter);
+    --wk-table-font-size: var(--wk-font-size-md);
+    --wk-table-row-height: 40px;
+    --wk-table-cell-line-height: 23px;
+    --wk-table-cell-padding-inline: 12px;
 }
 
-:root[data-rd-motion="reduced"] {
-    --rd-motion-fast: 80ms;
-    --rd-motion-normal: 120ms;
-    --rd-motion-enter: 100ms;
-    --rd-motion-exit: 80ms;
-    --rd-motion-distance: 0;
+:root[data-wk-motion="reduced"] {
+    --wk-motion-fast: 80ms;
+    --wk-motion-normal: 120ms;
+    --wk-motion-enter: 100ms;
+    --wk-motion-exit: 80ms;
+    --wk-motion-distance: 0;
 }
 
-:root[data-rd-motion="none"] {
-    --rd-motion-fast: 0ms;
-    --rd-motion-normal: 0ms;
-    --rd-motion-enter: 0ms;
-    --rd-motion-exit: 0ms;
-    --rd-motion-distance: 0;
+:root[data-wk-motion="none"] {
+    --wk-motion-fast: 0ms;
+    --wk-motion-normal: 0ms;
+    --wk-motion-enter: 0ms;
+    --wk-motion-exit: 0ms;
+    --wk-motion-distance: 0;
 }
 
 /* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */
 :root,
-[data-rd-density="comfortable"] {
-    --rd-density-scale: 1;
-    --rd-menu-item-height: calc(var(--rd-control-height-medium) + var(--rd-space-2));
-    --rd-checkbox-control-size: 1.125rem;
+[data-wk-density="comfortable"] {
+    --wk-density-scale: 1;
+    --wk-menu-item-height: calc(var(--wk-control-height-medium) + var(--wk-space-2));
+    --wk-checkbox-control-size: 1.125rem;
 }
 
-[data-rd-density="compact"] {
-    --rd-menu-item-height: calc(var(--rd-control-height-medium) + var(--rd-space-1));
-    --rd-control-affix-padding: 2.15rem;
-    --rd-control-affix-gap: 2rem;
-    --rd-checkbox-control-size: 1rem;
-    --rd-space-1: 0.2rem;
-    --rd-space-2: 0.4rem;
-    --rd-space-3: 0.6rem;
-    --rd-space-4: 0.85rem;
-    --rd-space-5: 1.05rem;
-    --rd-space-6: 1.25rem;
-    --rd-space-8: 1.7rem;
-    --rd-control-height-small: 24px;
-    --rd-control-height-medium: 28px;
-    --rd-control-height-large: 34px;
-    --rd-control-font-small: 13px;
-    --rd-control-font-medium: 13px;
-    --rd-control-font-large: 14px;
-    --rd-control-padding-x-small: 8px;
-    --rd-control-padding-x-medium: 10px;
-    --rd-control-padding-x-large: 12px;
-    --rd-table-row-height: 36px;
-    --rd-table-cell-line-height: 20px;
-    --rd-table-cell-padding-inline: 10px;
-    --rd-table-font-size: var(--rd-font-size-sm);
+[data-wk-density="compact"] {
+    --wk-menu-item-height: calc(var(--wk-control-height-medium) + var(--wk-space-1));
+    --wk-control-affix-padding: 2.15rem;
+    --wk-control-affix-gap: 2rem;
+    --wk-checkbox-control-size: 1rem;
+    --wk-space-1: 0.2rem;
+    --wk-space-2: 0.4rem;
+    --wk-space-3: 0.6rem;
+    --wk-space-4: 0.85rem;
+    --wk-space-5: 1.05rem;
+    --wk-space-6: 1.25rem;
+    --wk-space-8: 1.7rem;
+    --wk-control-height-small: 24px;
+    --wk-control-height-medium: 28px;
+    --wk-control-height-large: 34px;
+    --wk-control-font-small: 13px;
+    --wk-control-font-medium: 13px;
+    --wk-control-font-large: 14px;
+    --wk-control-padding-x-small: 8px;
+    --wk-control-padding-x-medium: 10px;
+    --wk-control-padding-x-large: 12px;
+    --wk-table-row-height: 36px;
+    --wk-table-cell-line-height: 20px;
+    --wk-table-cell-padding-inline: 10px;
+    --wk-table-font-size: var(--wk-font-size-sm);
 }
 
-[data-rd-density="spacious"] {
-    --rd-menu-item-height: calc(var(--rd-control-height-medium) + var(--rd-space-3));
-    --rd-control-affix-padding: 2.85rem;
-    --rd-control-affix-gap: 2.65rem;
-    --rd-checkbox-control-size: 1.25rem;
-    --rd-space-1: 0.3rem;
-    --rd-space-2: 0.6rem;
-    --rd-space-3: 0.9rem;
-    --rd-space-4: 1.15rem;
-    --rd-space-5: 1.45rem;
-    --rd-space-6: 1.75rem;
-    --rd-space-8: 2.35rem;
-    --rd-control-height-small: 32px;
-    --rd-control-height-medium: 40px;
-    --rd-control-height-large: 46px;
-    --rd-control-font-small: 14px;
-    --rd-control-font-medium: 15px;
-    --rd-control-font-large: 16px;
-    --rd-control-padding-x-small: 12px;
-    --rd-control-padding-x-medium: 14px;
-    --rd-control-padding-x-large: 16px;
-    --rd-table-row-height: 48px;
-    --rd-table-cell-line-height: 26px;
-    --rd-table-cell-padding-inline: 16px;
-    --rd-table-font-size: 1rem;
+[data-wk-density="spacious"] {
+    --wk-menu-item-height: calc(var(--wk-control-height-medium) + var(--wk-space-3));
+    --wk-control-affix-padding: 2.85rem;
+    --wk-control-affix-gap: 2.65rem;
+    --wk-checkbox-control-size: 1.25rem;
+    --wk-space-1: 0.3rem;
+    --wk-space-2: 0.6rem;
+    --wk-space-3: 0.9rem;
+    --wk-space-4: 1.15rem;
+    --wk-space-5: 1.45rem;
+    --wk-space-6: 1.75rem;
+    --wk-space-8: 2.35rem;
+    --wk-control-height-small: 32px;
+    --wk-control-height-medium: 40px;
+    --wk-control-height-large: 46px;
+    --wk-control-font-small: 14px;
+    --wk-control-font-medium: 15px;
+    --wk-control-font-large: 16px;
+    --wk-control-padding-x-small: 12px;
+    --wk-control-padding-x-medium: 14px;
+    --wk-control-padding-x-large: 16px;
+    --wk-table-row-height: 48px;
+    --wk-table-cell-line-height: 26px;
+    --wk-table-cell-padding-inline: 16px;
+    --wk-table-font-size: 1rem;
 }
 
-[data-rd-density="compact"] .rd-layout-header {
-    --rd-layout-header-height: 48px;
+[data-wk-density="compact"] .wk-layout-header {
+    --wk-layout-header-height: 48px;
 }
 
-[data-rd-density="compact"] .rd-layout-footer {
-    --rd-layout-footer-height: 40px;
+[data-wk-density="compact"] .wk-layout-footer {
+    --wk-layout-footer-height: 40px;
 }
 
-[data-rd-density="compact"] .rd-layout-sider {
-    --rd-layout-sider-width: 240px;
-    --rd-layout-sider-collapsed-width: 52px;
+[data-wk-density="compact"] .wk-layout-sider {
+    --wk-layout-sider-width: 240px;
+    --wk-layout-sider-collapsed-width: 52px;
 }
 
-[data-rd-density="spacious"] .rd-layout-header {
-    --rd-layout-header-height: 64px;
+[data-wk-density="spacious"] .wk-layout-header {
+    --wk-layout-header-height: 64px;
 }
 
-[data-rd-density="spacious"] .rd-layout-footer {
-    --rd-layout-footer-height: 56px;
+[data-wk-density="spacious"] .wk-layout-footer {
+    --wk-layout-footer-height: 56px;
 }
 
-[data-rd-density="spacious"] .rd-layout-sider {
-    --rd-layout-sider-width: 288px;
-    --rd-layout-sider-collapsed-width: 72px;
+[data-wk-density="spacious"] .wk-layout-sider {
+    --wk-layout-sider-width: 288px;
+    --wk-layout-sider-collapsed-width: 72px;
 }
 
 [data-theme="dark"] {
-    --rd-color-primary: #60a5fa;
-    --rd-color-primary-hover: #93c5fd;
-    --rd-color-surface: #0f172a;
-    --rd-color-text: #f8fafc;
-    --rd-color-text-muted: #94a3b8;
-    --rd-color-border: #334155;
-    --rd-color-focus-ring: #93c5fd;
-    --rd-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--rd-color-primary) 28%, transparent);
-    --rd-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--rd-color-danger) 28%, transparent);
-    --rd-color-success: #5eead4;
-    --rd-color-info: #93c5fd;
-    --rd-color-warning: #fbbf24;
-    --rd-color-warn: var(--rd-color-warning);
-    --rd-color-help: #c084fc;
-    --rd-color-danger: #fca5a5;
-    --rd-color-contrast: #f8fafc;
-    --rd-color-contrast-fg: #0f172a;
-    --rd-color-contrast-hover: #e2e8f0;
-    --rd-color-contrast-active: #cbd5e1;
-    --rd-overlay-scrim: rgb(2 6 23 / 0.72);
-    --rd-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
-    --rd-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
-    --rd-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
-    --rd-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
-    --rd-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --wk-color-primary: #60a5fa;
+    --wk-color-primary-hover: #93c5fd;
+    --wk-color-surface: #0f172a;
+    --wk-color-text: #f8fafc;
+    --wk-color-text-muted: #94a3b8;
+    --wk-color-border: #334155;
+    --wk-color-focus-ring: #93c5fd;
+    --wk-focus-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--wk-color-primary) 28%, transparent);
+    --wk-focus-shadow-danger: 0 0 0 2px
+        color-mix(in srgb, var(--wk-color-danger) 28%, transparent);
+    --wk-color-success: #5eead4;
+    --wk-color-info: #93c5fd;
+    --wk-color-warning: #fbbf24;
+    --wk-color-warn: var(--wk-color-warning);
+    --wk-color-help: #c084fc;
+    --wk-color-danger: #fca5a5;
+    --wk-color-contrast: #f8fafc;
+    --wk-color-contrast-fg: #0f172a;
+    --wk-color-contrast-hover: #e2e8f0;
+    --wk-color-contrast-active: #cbd5e1;
+    --wk-overlay-scrim: rgb(2 6 23 / 0.72);
+    --wk-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+    --wk-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
+    --wk-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
+    --wk-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --wk-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
 
-    --rd-table-border-color: color-mix(in srgb, var(--rd-color-border) 88%, var(--rd-color-text));
-    --rd-color-fill-light: color-mix(in srgb, var(--rd-color-text) 10%, var(--rd-color-surface));
-    --rd-color-fill-lighter: color-mix(in srgb, var(--rd-color-text) 6%, var(--rd-color-surface));
-    --rd-table-header-bg: var(--rd-color-fill-light);
-    --rd-table-row-bg: var(--rd-color-surface);
-    --rd-table-row-hover-bg: color-mix(in srgb, var(--rd-color-text) 8%, var(--rd-color-surface));
-    --rd-table-row-striped-bg: var(--rd-color-fill-lighter);
-    --rd-table-row-current-bg: color-mix(in srgb, var(--rd-color-primary) 16%, var(--rd-color-surface));
-    --rd-table-row-selected-bg: color-mix(in srgb, var(--rd-color-primary) 20%, var(--rd-color-surface));
-    --rd-table-expanded-bg: var(--rd-color-fill-lighter);
+    --wk-table-border-color: color-mix(in srgb, var(--wk-color-border) 88%, var(--wk-color-text));
+    --wk-color-fill-light: color-mix(in srgb, var(--wk-color-text) 10%, var(--wk-color-surface));
+    --wk-color-fill-lighter: color-mix(in srgb, var(--wk-color-text) 6%, var(--wk-color-surface));
+    --wk-table-header-bg: var(--wk-color-fill-light);
+    --wk-table-row-bg: var(--wk-color-surface);
+    --wk-table-row-hover-bg: color-mix(in srgb, var(--wk-color-text) 8%, var(--wk-color-surface));
+    --wk-table-row-striped-bg: var(--wk-color-fill-lighter);
+    --wk-table-row-current-bg: color-mix(in srgb, var(--wk-color-primary) 16%, var(--wk-color-surface));
+    --wk-table-row-selected-bg: color-mix(in srgb, var(--wk-color-primary) 20%, var(--wk-color-surface));
+    --wk-table-expanded-bg: var(--wk-color-fill-lighter);
 }

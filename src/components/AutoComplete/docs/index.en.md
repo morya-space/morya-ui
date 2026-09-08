@@ -11,14 +11,14 @@ Input suggestions and completion; the `complete` event makes async loading from 
 ## Import
 
 ```ts
-import { RdAutoComplete } from '@wise-kit/ui'
+import { WkAutoComplete } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@wise-kit/ui'
+import { WkAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -26,7 +26,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 </script>
 
 <template>
-  <RdAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="Search…" />
+  <WkAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="Search…" />
 </template>
 ```
 
@@ -34,7 +34,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@wise-kit/ui'
+import { WkAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref('')
@@ -45,9 +45,9 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <RdAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
-    <RdAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
-    <RdAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
+    <WkAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
+    <WkAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
+    <WkAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
   </div>
 </template>
 ```
@@ -58,7 +58,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@wise-kit/ui'
+import { WkAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -69,7 +69,7 @@ const suggestions = [
 </script>
 
 <template>
-  <RdAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="Option objects…" />
+  <WkAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="Option objects…" />
 </template>
 ```
 
@@ -83,7 +83,7 @@ const suggestions = [
 | `clearable` | `boolean` | `false` | Show a clear button. |
 | `dropdown` | `boolean` | `false` | Show dropdown button. |
 | `placeholder` | `string` | — | Placeholder. |
-| `size` | `RdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WkSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |

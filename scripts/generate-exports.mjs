@@ -15,7 +15,7 @@ function toSlug(folder) {
     .toLowerCase()
 }
 
-const exportRe = /export\s+\{\s*default\s+as\s+(Rd[A-Za-z0-9]+)/g
+const exportRe = /export\s+\{\s*default\s+as\s+(Wk[A-Za-z0-9]+)/g
 
 const componentImportMap = {}
 for (const folder of comps) {

@@ -1,79 +1,79 @@
 /* —— Media: Carousel —— */
-.rd-carousel {
-    --rd-carousel-indicator-size: 0.45rem;
+.wk-carousel {
+    --wk-carousel-indicator-size: 0.45rem;
     align-items: center;
     display: flex;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     width: 100%;
 }
 
-.rd-carousel__viewport {
+.wk-carousel__viewport {
     display: flex;
     flex: 1;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     min-width: 0;
     overflow: hidden;
     touch-action: pan-y;
 }
 
-.rd-carousel__item {
+.wk-carousel__item {
     box-sizing: border-box;
     min-width: 0;
     transition:
-        opacity var(--rd-motion-normal) var(--rd-motion-ease),
-        transform var(--rd-motion-normal) var(--rd-motion-ease);
+        opacity var(--wk-motion-normal) var(--wk-motion-ease),
+        transform var(--wk-motion-normal) var(--wk-motion-ease);
 }
 
-.rd-carousel__main {
+.wk-carousel__main {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     min-width: 0;
 }
 
-.rd-carousel__indicators {
+.wk-carousel__indicators {
     display: flex;
-    gap: var(--rd-space-1);
+    gap: var(--wk-space-1);
     justify-content: center;
 }
 
-.rd-carousel__indicator {
-    background: color-mix(in srgb, var(--rd-color-text-muted) 40%, transparent);
+.wk-carousel__indicator {
+    background: color-mix(in srgb, var(--wk-color-text-muted) 40%, transparent);
     border: 0;
-    border-radius: var(--rd-radius-full);
+    border-radius: var(--wk-radius-full);
     cursor: pointer;
-    height: var(--rd-carousel-indicator-size);
+    height: var(--wk-carousel-indicator-size);
     padding: 0;
     position: relative;
-    width: var(--rd-carousel-indicator-size);
+    width: var(--wk-carousel-indicator-size);
 }
 
-.rd-carousel__indicator::after {
+.wk-carousel__indicator::after {
     content: '';
     inset: -0.45rem;
     position: absolute;
 }
 
-.rd-carousel__indicator:hover {
-    background: color-mix(in srgb, var(--rd-color-text-muted) 70%, transparent);
+.wk-carousel__indicator:hover {
+    background: color-mix(in srgb, var(--wk-color-text-muted) 70%, transparent);
 }
 
-.rd-carousel__indicator:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-carousel__indicator:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-carousel__indicator--active,
-.rd-carousel__indicator--active:hover {
-    background: var(--rd-color-primary);
+.wk-carousel__indicator--active,
+.wk-carousel__indicator--active:hover {
+    background: var(--wk-color-primary);
 }
 
-.rd-carousel__nav:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--rd-color-primary) 8%, transparent);
+.wk-carousel__nav:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--wk-color-primary) 8%, transparent);
 }
 
-.rd-carousel__nav:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-carousel__nav:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }

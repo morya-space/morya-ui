@@ -11,7 +11,7 @@ description: 状态角标或圆点。
 ## 引入
 
 ```ts
-import { RdBadge } from '@wise-kit/ui'
+import { WkBadge } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { RdBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@wise-kit/ui'
+import { WkBadge } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdBadge :value="2" />
-    <RdBadge value="New" />
-    <RdBadge />
+    <WkBadge :value="2" />
+    <WkBadge value="New" />
+    <WkBadge />
   </div>
 </template>
 ```
@@ -38,18 +38,18 @@ import { RdBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@wise-kit/ui'
+import { WkBadge } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdBadge :value="1" />
-    <RdBadge :value="2" severity="secondary" />
-    <RdBadge :value="3" severity="success" />
-    <RdBadge :value="4" severity="info" />
-    <RdBadge :value="5" severity="warn" />
-    <RdBadge :value="6" severity="danger" />
-    <RdBadge :value="7" severity="contrast" />
+    <WkBadge :value="1" />
+    <WkBadge :value="2" severity="secondary" />
+    <WkBadge :value="3" severity="success" />
+    <WkBadge :value="4" severity="info" />
+    <WkBadge :value="5" severity="warn" />
+    <WkBadge :value="6" severity="danger" />
+    <WkBadge :value="7" severity="contrast" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ import { RdBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@wise-kit/ui'
+import { WkBadge } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdBadge :value="8" size="small" />
-    <RdBadge :value="9" />
-    <RdBadge :value="10" size="large" />
+    <WkBadge :value="8" size="small" />
+    <WkBadge :value="9" />
+    <WkBadge :value="10" size="large" />
   </div>
 </template>
 ```
@@ -78,17 +78,17 @@ import { RdBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge, RdButton } from '@wise-kit/ui'
+import { WkBadge, WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <RdBadge :value="120" :max="99">
-      <RdButton label="Inbox" severity="secondary" />
-    </RdBadge>
-    <RdBadge processing>
-      <RdButton label="Live" icon="check" />
-    </RdBadge>
+    <WkBadge :value="120" :max="99">
+      <WkButton label="Inbox" severity="secondary" />
+    </WkBadge>
+    <WkBadge processing>
+      <WkButton label="Live" icon="check" />
+    </WkBadge>
   </div>
 </template>
 ```

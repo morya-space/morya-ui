@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { SpeedDialItem, SpeedDialProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useRdLocale } from '../../locale'
-import { useRdConfig } from '../../shared/config'
+import { useWkLocale } from '../../locale'
+import { useWkConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import { useRdId } from '../../shared/useRdId'
+import { useWkId } from '../../shared/useWkId'
 import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
   model: () => [],
@@ -23,23 +23,23 @@ const emit = defineEmits<{
   (event: 'item-click', item: SpeedDialItem): void
 }>()
 
-const config = useRdConfig()
-const locale = useRdLocale()
+const config = useWkConfig()
+const locale = useWkLocale()
 const speedDialLabel = computed(() => props.ariaLabel ?? locale.value.speedDial)
 const root = ref<HTMLElement | null>(null)
 const button = ref<HTMLElement | null>(null)
 const list = ref<HTMLElement | null>(null)
 const listStyle = ref<Record<string, string>>({})
-const listId = useRdId('rd-speeddial-list')
+const listId = useWkId('wk-speeddial-list')
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 const rootClass = computed(() => [
-  'rd-speeddial',
-  `rd-speeddial--${props.direction}`,
+  'wk-speeddial',
+  `wk-speeddial--${props.direction}`,
   {
-    'rd-speeddial--open': props.modelValue,
-    'rd-speeddial--disabled': props.disabled,
+    'wk-speeddial--open': props.modelValue,
+    'wk-speeddial--disabled': props.disabled,
   },
 ])
 
@@ -71,7 +71,7 @@ function close(restoreFocus = false) {
 function focusActiveAction() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  list.value?.querySelectorAll<HTMLElement>('.rd-speeddial__action')[index]?.focus({ preventScroll: true })
+  list.value?.querySelectorAll<HTMLElement>('.wk-speeddial__action')[index]?.focus({ preventScroll: true })
 }
 
 function arrowDelta(key: string): number | null {
@@ -206,13 +206,13 @@ onBeforeUnmount(() => {
 <template>
   <div ref="root" :class="rootClass">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="rd-scale-fade">
+      <Transition name="wk-scale-fade">
         <ul
           v-if="modelValue"
           :id="listId"
           ref="list"
-          class="rd-speeddial__list"
-          :class="{ 'rd-speeddial__list--teleported': teleported }"
+          class="wk-speeddial__list"
+          :class="{ 'wk-speeddial__list--teleported': teleported }"
           :style="teleported ? listStyle : undefined"
           role="menu"
           @keydown="onListKeydown"
@@ -220,7 +220,7 @@ onBeforeUnmount(() => {
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="none">
             <button
               type="button"
-              class="rd-speeddial__action"
+              class="wk-speeddial__action"
               role="menuitem"
               :title="item.label"
               :aria-label="item.label"
@@ -230,9 +230,9 @@ onBeforeUnmount(() => {
             >
               <slot name="item" :item="item">
                 <span v-if="iconOf(item)" aria-hidden="true">
-                  <RdIcon :name="iconOf(item)!" size="sm" />
+                  <WkIcon :name="iconOf(item)!" size="sm" />
                 </span>
-                <span class="rd-speeddial__action-label">{{ item.label }}</span>
+                <span class="wk-speeddial__action-label">{{ item.label }}</span>
               </slot>
             </button>
           </li>
@@ -243,7 +243,7 @@ onBeforeUnmount(() => {
       <button
         ref="button"
         type="button"
-        class="rd-speeddial__button"
+        class="wk-speeddial__button"
         :aria-label="speedDialLabel"
         :aria-expanded="modelValue"
         :aria-controls="modelValue ? listId : undefined"
@@ -253,7 +253,7 @@ onBeforeUnmount(() => {
         @keydown="onButtonKeydown"
       >
         <slot name="icon">
-          <RdIcon name="plus" size="sm" />
+          <WkIcon name="plus" size="sm" />
         </slot>
       </button>
     </slot>

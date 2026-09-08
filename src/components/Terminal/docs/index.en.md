@@ -11,14 +11,14 @@ Shows a welcome message and command history; submitting emits `command`.
 ## Import
 
 ```ts
-import { RdTerminal } from '@wise-kit/ui'
+import { WkTerminal } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTerminal } from '@wise-kit/ui'
+import { WkTerminal } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -26,7 +26,7 @@ const last = ref('')
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <RdTerminal welcome-message="Wise Kit Terminal" @command="last = $event" />
+    <WkTerminal welcome-message="Wise Kit Terminal" @command="last = $event" />
     <div v-if="last">
       Last command: {{ last }}
     </div>

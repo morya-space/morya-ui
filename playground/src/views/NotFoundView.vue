@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdButton, RdScrollbar } from '@wise-kit/ui'
+import { WkButton, WkScrollbar } from '@wise-kit/ui'
 import { RouterLink } from 'vue-router'
 import { useDocsI18n } from '../i18n'
 
@@ -7,7 +7,7 @@ const { t } = useDocsI18n()
 </script>
 
 <template>
-  <RdScrollbar class="not-found-scroll">
+  <WkScrollbar class="not-found-scroll">
     <section class="not-found">
       <p class="not-found__code" aria-hidden="true">
         404
@@ -16,14 +16,14 @@ const { t } = useDocsI18n()
       <p>{{ t.notFoundBody }}</p>
       <div class="not-found__actions">
         <RouterLink :to="{ name: 'home' }">
-          <RdButton :label="t.notFoundHome" />
+          <WkButton :label="t.notFoundHome" />
         </RouterLink>
         <RouterLink :to="{ name: 'components' }">
-          <RdButton :label="t.browse" outlined />
+          <WkButton :label="t.browse" outlined />
         </RouterLink>
       </div>
     </section>
-  </RdScrollbar>
+  </WkScrollbar>
 </template>
 
 <style scoped>
@@ -40,7 +40,7 @@ const { t } = useDocsI18n()
 }
 
 .not-found__code {
-  color: var(--rd-color-primary);
+  color: var(--wk-color-primary);
   font-family: var(--docs-display);
   font-size: clamp(3rem, 12vw, 5rem);
   font-weight: 800;
@@ -59,7 +59,7 @@ const { t } = useDocsI18n()
 }
 
 .not-found p {
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   line-height: 1.6;
   margin: 0 auto 1.5rem;
   max-width: 28rem;

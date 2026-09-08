@@ -1,8 +1,8 @@
-import type { RdFlexAlign, RdFlexJustify, RdGapSize } from '../../shared/gap'
+import type { WkFlexAlign, WkFlexJustify, WkGapSize } from '../../shared/gap'
 
-export type FlexAlign = RdFlexAlign
-export type FlexJustify = RdFlexJustify
-export type FlexSize = RdGapSize
+export type FlexAlign = WkFlexAlign
+export type FlexJustify = WkFlexJustify
+export type FlexSize = WkGapSize
 
 export interface FlexProps {
   /** Cross-axis alignment. */

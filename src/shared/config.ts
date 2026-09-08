@@ -1,10 +1,10 @@
 import type {App, Component, ComputedRef, InjectionKey, MaybeRefOrGetter, Plugin} from 'vue';
-import type { RdLocaleConfig } from '../locale/types'
+import type { WkLocaleConfig } from '../locale/types'
 import type {DensityPreference} from '../theme';
-import type {RdComponentDefaults} from './componentDefaults';
-import type { RdGapSize } from './gap'
-import type { RdAppendTo } from './overlay'
-import type {RdInputVariant, RdSizeInput} from './types';
+import type {WkComponentDefaults} from './componentDefaults';
+import type { WkGapSize } from './gap'
+import type { WkAppendTo } from './overlay'
+import type {WkInputVariant, WkSizeInput} from './types';
 import {
   
   
@@ -17,7 +17,7 @@ import {
   provide,
   toValue
 } from 'vue'
-import { rdComponents } from '../component-registry'
+import { wkComponents } from '../component-registry'
 import { zhCN } from '../locale/zh-CN'
 import { applyDensity  } from '../theme'
 import {
@@ -26,41 +26,41 @@ import {
   mergeComponentDefaults
   
 } from './componentDefaults'
-import { setRdOverlayAppContext } from './overlayHost'
+import { setWkOverlayAppContext } from './overlayHost'
 import { resolveSizeClass   } from './types'
 
-export type { RdComponentDefaultMap, RdComponentDefaults, RdShowPasswordOn, RdTextareaAutosize } from './componentDefaults'
+export type { WkComponentDefaultMap, WkComponentDefaults, WkShowPasswordOn, WkTextareaAutosize } from './componentDefaults'
 export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } from './componentDefaults'
 
-export type RdDensity = DensityPreference
-export type { RdLocaleConfig }
+export type WkDensity = DensityPreference
+export type { WkLocaleConfig }
 
 export type ThemePreference = 'light' | 'dark' | 'system'
 
 /** Application-level default configuration. */
-export interface RdGlobalConfig {
+export interface WkGlobalConfig {
   /** Color theme. `system` follows `prefers-color-scheme`. */
   theme?: ThemePreference
   /** Default Teleport target for overlays. Defaults to `'body'`. */
-  appendTo?: RdAppendTo
+  appendTo?: WkAppendTo
   /** Default control size for form components that support `size`. */
-  size?: RdSizeInput
+  size?: WkSizeInput
   /** Default input surface style. */
-  inputVariant?: RdInputVariant
+  inputVariant?: WkInputVariant
   /** Starting z-index budget for overlays (modal / menu / tooltip layers). */
   zIndex?: number
   /**
-   * Global content density. Scales spacing + control heights via `data-rd-density`.
+   * Global content density. Scales spacing + control heights via `data-wk-density`.
    * Local ConfigProvider scopes to its subtree; plugin applies on `documentElement`.
    */
-  density?: RdDensity
+  density?: WkDensity
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
-  locale?: RdLocaleConfig
+  locale?: WkLocaleConfig
   /**
    * Per-component default props. Local component props win.
-   * Keys: unprefixed names (`Input`, `Space`) or `Rd*` aliases.
+   * Keys: unprefixed names (`Input`, `Space`) or `Wk*` aliases.
    */
-  componentDefaults?: RdComponentDefaults
+  componentDefaults?: WkComponentDefaults
 }
 
 /**
@@ -69,7 +69,7 @@ export interface RdGlobalConfig {
  * By default every public component is registered globally.
  * Pass `components: false` to only install config, or pass a list for partial registration.
  */
-export interface RdInstallerOptions extends RdGlobalConfig {
+export interface WkInstallerOptions extends WkGlobalConfig {
   /**
    * Components to register globally.
    * - omit / `undefined`: register all
@@ -79,9 +79,9 @@ export interface RdInstallerOptions extends RdGlobalConfig {
   components?: Component[] | false
 }
 
-export const RD_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<RdGlobalConfig>> = Symbol('rdConfig')
+export const WK_CONFIG_KEY: InjectionKey<MaybeRefOrGetter<WkGlobalConfig>> = Symbol('wkConfig')
 
-const defaultConfig: Required<Pick<RdGlobalConfig, 'appendTo' | 'zIndex' | 'density'>> & RdGlobalConfig = {
+const defaultConfig: Required<Pick<WkGlobalConfig, 'appendTo' | 'zIndex' | 'density'>> & WkGlobalConfig = {
   appendTo: 'body',
   zIndex: 1000,
   density: 'comfortable',
@@ -89,7 +89,7 @@ const defaultConfig: Required<Pick<RdGlobalConfig, 'appendTo' | 'zIndex' | 'dens
   locale: { ...zhCN },
 }
 
-export function getDefaultRdConfig(): RdGlobalConfig {
+export function getDefaultWkConfig(): WkGlobalConfig {
   return {
     appendTo: defaultConfig.appendTo,
     zIndex: defaultConfig.zIndex,
@@ -99,12 +99,12 @@ export function getDefaultRdConfig(): RdGlobalConfig {
   }
 }
 
-export function provideRdConfig(config: MaybeRefOrGetter<RdGlobalConfig>) {
-  provide(RD_CONFIG_KEY, config)
+export function provideWkConfig(config: MaybeRefOrGetter<WkGlobalConfig>) {
+  provide(WK_CONFIG_KEY, config)
 }
 
 /** Merge nested / plugin config. Child keys win; `locale` and `componentDefaults` merge. */
-export function mergeRdConfig(parent: RdGlobalConfig, child: RdGlobalConfig): RdGlobalConfig {
+export function mergeWkConfig(parent: WkGlobalConfig, child: WkGlobalConfig): WkGlobalConfig {
   return {
     ...parent,
     ...child,
@@ -114,39 +114,36 @@ export function mergeRdConfig(parent: RdGlobalConfig, child: RdGlobalConfig): Rd
   }
 }
 
-export function useRdConfig() {
-  const injected = inject(RD_CONFIG_KEY, null)
-  return computed<RdGlobalConfig>(() => {
+export function useWkConfig() {
+  const injected = inject(WK_CONFIG_KEY, null)
+  return computed<WkGlobalConfig>(() => {
     const value = injected ? toValue(injected) : {}
     return {
-      ...getDefaultRdConfig(),
+      ...getDefaultWkConfig(),
       ...value,
       locale: {
-        ...getDefaultRdConfig().locale,
+        ...getDefaultWkConfig().locale,
         ...value.locale,
       },
     }
   })
 }
 
-/** @deprecated Use `useRdConfig` */
-export const useWdConfig = useRdConfig
-
 export function useComponentDefaults(name: string): ComputedRef<Record<string, unknown>> {
-  const config = useRdConfig()
+  const config = useWkConfig()
   return computed(() => getComponentDefaults(config.value.componentDefaults, name))
 }
 
 /** Control size: local prop > componentDefaults[name].size > global size > medium. */
 export function useConfiguredSize(
   componentName: string,
-  localSize: MaybeRefOrGetter<RdSizeInput | undefined>,
+  localSize: MaybeRefOrGetter<WkSizeInput | undefined>,
 ) {
-  const config = useRdConfig()
+  const config = useWkConfig()
   return computed(() =>
     resolveSizeClass(
       toValue(localSize)
-        ?? getComponentDefault<RdSizeInput>(config.value.componentDefaults, componentName, 'size')
+        ?? getComponentDefault<WkSizeInput>(config.value.componentDefaults, componentName, 'size')
         ?? config.value.size,
     ),
   )
@@ -155,13 +152,13 @@ export function useConfiguredSize(
 /** Input surface: local prop > componentDefaults[name].variant > global inputVariant > outlined. */
 export function useConfiguredVariant(
   componentName: string,
-  localVariant: MaybeRefOrGetter<RdInputVariant | undefined>,
+  localVariant: MaybeRefOrGetter<WkInputVariant | undefined>,
 ) {
-  const config = useRdConfig()
+  const config = useWkConfig()
   return computed(
     () =>
       toValue(localVariant)
-      ?? getComponentDefault<RdInputVariant>(config.value.componentDefaults, componentName, 'variant')
+      ?? getComponentDefault<WkInputVariant>(config.value.componentDefaults, componentName, 'variant')
       ?? config.value.inputVariant
       ?? 'outlined',
   )
@@ -170,58 +167,58 @@ export function useConfiguredVariant(
 /** Space / Flex gap: local prop > componentDefaults[name].size > medium. Does not use global control size. */
 export function useConfiguredGapSize(
   componentName: 'Space' | 'Flex',
-  localSize: MaybeRefOrGetter<RdGapSize | undefined>,
+  localSize: MaybeRefOrGetter<WkGapSize | undefined>,
 ) {
-  const config = useRdConfig()
+  const config = useWkConfig()
   return computed(
     () =>
       toValue(localSize)
-      ?? getComponentDefault<RdGapSize>(config.value.componentDefaults, componentName, 'size')
+      ?? getComponentDefault<WkGapSize>(config.value.componentDefaults, componentName, 'size')
       ?? 'medium',
   )
 }
 
 /** Resolve overlay mount target: local props > ConfigProvider > body. */
 export function resolveConfiguredAppendTo(
-  local: RdAppendTo | undefined,
-  configAppendTo: RdAppendTo | undefined,
-): RdAppendTo {
+  local: WkAppendTo | undefined,
+  configAppendTo: WkAppendTo | undefined,
+): WkAppendTo {
   if (local !== undefined) return local
   if (configAppendTo !== undefined) return configAppendTo
   return 'body'
 }
 
-function resolveComponentsToRegister(components: RdInstallerOptions['components']): Array<[string, Component]> {
+function resolveComponentsToRegister(components: WkInstallerOptions['components']): Array<[string, Component]> {
   if (components === false) return []
   if (Array.isArray(components)) {
     if (components.length === 0) return []
     const selected = new Set(components)
-    return Object.entries(rdComponents).filter(([, component]) => selected.has(component))
+    return Object.entries(wkComponents).filter(([, component]) => selected.has(component))
   }
-  return Object.entries(rdComponents)
+  return Object.entries(wkComponents)
 }
 
-function applyInstallerConfig(app: App, options: RdInstallerOptions) {
+function applyInstallerConfig(app: App, options: WkInstallerOptions) {
   const { components: _components, ...config } = options
-  app.provide(RD_CONFIG_KEY, config)
-  app.config.globalProperties.$rd = config
-  setRdOverlayAppContext(app._context)
+  app.provide(WK_CONFIG_KEY, config)
+  app.config.globalProperties.$wk = config
+  setWkOverlayAppContext(app._context)
   if (typeof document !== 'undefined') {
     if (config.density) applyDensity(config.density)
     if (config.zIndex != null) {
-      document.documentElement.style.setProperty('--rd-z-base', String(config.zIndex))
+      document.documentElement.style.setProperty('--wk-z-base', String(config.zIndex))
     }
   }
 }
 
-function registerComponents(app: App, components: RdInstallerOptions['components']) {
+function registerComponents(app: App, components: WkInstallerOptions['components']) {
   for (const [name, component] of resolveComponentsToRegister(components)) {
     app.component(name, component)
   }
 }
 
 /** Shared install used by `createWiseKit` and the default plugin. */
-export function installWiseKit(app: App, options: RdInstallerOptions = {}) {
+export function installWiseKit(app: App, options: WkInstallerOptions = {}) {
   applyInstallerConfig(app, options)
   registerComponents(app, options.components)
 }
@@ -236,7 +233,7 @@ export function installWiseKit(app: App, options: RdInstallerOptions = {}) {
  * import '@wise-kit/ui/styles.css'
  *
  * createApp(App).use(createWiseKit({ size: 'small', density: 'compact' })).mount('#app')
- * // templates can use <RdButton> without importing
+ * // templates can use <WkButton> without importing
  * ```
  *
  * Config only (no global components):
@@ -244,7 +241,7 @@ export function installWiseKit(app: App, options: RdInstallerOptions = {}) {
  * createWiseKit({ size: 'small', components: false })
  * ```
  */
-export function createWiseKit(options: RdInstallerOptions = {}): Plugin {
+export function createWiseKit(options: WkInstallerOptions = {}): Plugin {
   return {
     install(app: App) {
       installWiseKit(app, options)
@@ -257,31 +254,13 @@ export function createWiseKit(options: RdInstallerOptions = {}): Plugin {
  * `app.use(WiseKit)` or `app.use(WiseKit, { size: 'small' })`.
  */
 export const WiseKit: Plugin = {
-  install(app: App, options: RdInstallerOptions = {}) {
+  install(app: App, options: WkInstallerOptions = {}) {
     installWiseKit(app, options)
   },
 }
 
-/** @deprecated Use `createWiseKit` */
-export const createWexDesign = createWiseKit
-/** @deprecated Use `installWiseKit` */
-export const installWexDesign = installWiseKit
-/** @deprecated Use `WiseKit` */
-export const WexDesign = WiseKit
-
-/** @deprecated Use `getDefaultRdConfig` */
-export const getDefaultWdConfig = getDefaultRdConfig
-/** @deprecated Use `mergeRdConfig` */
-export const mergeWdConfig = mergeRdConfig
-/** @deprecated Use `provideRdConfig` */
-export const provideWdConfig = provideRdConfig
-/** @deprecated Use `RD_CONFIG_KEY` */
-export const WD_CONFIG_KEY = RD_CONFIG_KEY
-
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $rd?: RdGlobalConfig
-    /** @deprecated Use `$rd` */
-    $wd?: RdGlobalConfig
+    $wk?: WkGlobalConfig
   }
 }

@@ -17,9 +17,9 @@ const useSlot = computed(() => Boolean(slots.default))
 const hasContent = computed(() => useSlot.value || Boolean(definition.value))
 
 const rootClass = computed(() => [
-  'rd-icon',
-  `rd-icon--${sizeClass.value}`,
-  { 'rd-icon--spin': definition.value?.spin },
+  'wk-icon',
+  `wk-icon--${sizeClass.value}`,
+  { 'wk-icon--spin': definition.value?.spin },
 ])
 </script>
 

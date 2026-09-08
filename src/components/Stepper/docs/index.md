@@ -11,14 +11,14 @@ description: 步骤指示器，支持线性前进约束。
 ## 引入
 
 ```ts
-import { RdStepper } from '@wise-kit/ui'
+import { WkStepper } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdStepper } from '@wise-kit/ui'
+import { WkStepper } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(0)
@@ -30,7 +30,7 @@ const steps = [
 </script>
 
 <template>
-  <RdStepper v-model="active" :steps="steps" />
+  <WkStepper v-model="active" :steps="steps" />
 </template>
 ```
 
@@ -40,7 +40,7 @@ const steps = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdStepper } from '@wise-kit/ui'
+import { WkStepper } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(1)
@@ -52,7 +52,7 @@ const steps = [
 </script>
 
 <template>
-  <RdStepper v-model="active" vertical :steps="steps" />
+  <WkStepper v-model="active" vertical :steps="steps" />
 </template>
 ```
 

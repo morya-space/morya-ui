@@ -6,7 +6,7 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 
 # Form
 
-`RdForm` / `RdFormItem` 负责布局、必填标记与错误展示。校验有两条路，可同时使用：
+`WkForm` / `WkFormItem` 负责布局、必填标记与错误展示。校验有两条路，可同时使用：
 
 1. **声明式 `rules`（推荐）**：按字段名配置 `required` / `min` / `max` / `pattern` / `validator`。
 2. **回调 `validate`**：FormItem 上传入函数，返回错误文案。仍可用于复杂跨字段逻辑。
@@ -19,7 +19,7 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 
 ```ts
 import type { FormInstance, FormRules } from '@wise-kit/ui'
-import { RdForm, RdFormItem } from '@wise-kit/ui'
+import { WkForm, WkFormItem } from '@wise-kit/ui'
 ```
 
 ## 声明式 rules
@@ -27,7 +27,7 @@ import { RdForm, RdFormItem } from '@wise-kit/ui'
 ```vue preview
 <script setup lang="ts">
 import type { FormInstance, FormRules } from '@wise-kit/ui'
-import { RdButton, RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
+import { WkButton, WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -47,7 +47,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <RdForm
+  <WkForm
     ref="formRef"
     :model="model"
     :rules="rules"
@@ -56,18 +56,18 @@ async function onSubmit() {
     style="max-width: 22rem"
     @submit="onSubmit"
   >
-    <RdFormItem label="名称" name="name">
+    <WkFormItem label="名称" name="name">
       <template #default="{ id, invalid }">
-        <RdInput :id="id" v-model="model.name" fluid :invalid="invalid" />
+        <WkInput :id="id" v-model="model.name" fluid :invalid="invalid" />
       </template>
-    </RdFormItem>
-    <RdFormItem label="邮箱" name="email" help="用于接收通知">
+    </WkFormItem>
+    <WkFormItem label="邮箱" name="email" help="用于接收通知">
       <template #default="{ id, invalid }">
-        <RdInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
+        <WkInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
-    </RdFormItem>
-    <RdButton native-type="submit" label="提交" />
-  </RdForm>
+    </WkFormItem>
+    <WkButton native-type="submit" label="提交" />
+  </WkForm>
 </template>
 ```
 
@@ -75,26 +75,26 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
+import { WkButton, WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
 </script>
 
 <template>
-  <RdForm validate-on="submit" style="max-width: 22rem">
-    <RdFormItem
+  <WkForm validate-on="submit" style="max-width: 22rem">
+    <WkFormItem
       label="名称"
       name="name"
       required
       :validate="() => (form.name.trim() ? undefined : '请输入名称')"
     >
       <template #default="{ id, invalid }">
-        <RdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <WkInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </RdFormItem>
-    <RdButton native-type="submit" label="提交" />
-  </RdForm>
+    </WkFormItem>
+    <WkButton native-type="submit" label="提交" />
+  </WkForm>
 </template>
 ```
 
@@ -102,14 +102,14 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
+import { WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>
 
 <template>
-  <RdForm
+  <WkForm
     :model="model"
     inline
     label-placement="left"
@@ -117,17 +117,17 @@ const model = reactive({ city: '', zip: '' })
     :label-width="72"
     :rules="{ city: { required: true, message: '必填' } }"
   >
-    <RdFormItem label="城市" name="city">
+    <WkFormItem label="城市" name="city">
       <template #default="{ id }">
-        <RdInput :id="id" v-model="model.city" />
+        <WkInput :id="id" v-model="model.city" />
       </template>
-    </RdFormItem>
-    <RdFormItem label="邮编" name="zip">
+    </WkFormItem>
+    <WkFormItem label="邮编" name="zip">
       <template #default="{ id }">
-        <RdInput :id="id" v-model="model.zip" />
+        <WkInput :id="id" v-model="model.zip" />
       </template>
-    </RdFormItem>
-  </RdForm>
+    </WkFormItem>
+  </WkForm>
 </template>
 ```
 
@@ -146,7 +146,7 @@ const model = reactive({ city: '', zip: '' })
 | `disabled` | `boolean` | `false` | 禁用态 |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |
 | `for` | `string` | — | — |
-| `size` | `RdSizeInput` | — | — |
+| `size` | `WkSizeInput` | — | — |
 
 ## Props — FormItem
 

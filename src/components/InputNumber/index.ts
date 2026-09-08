@@ -1,3 +1,3 @@
 import './style'
-export { default as RdInputNumber } from './InputNumber.vue'
+export { default as WkInputNumber } from './InputNumber.vue'
 export type { InputNumberButtonPlacement, InputNumberEmits, InputNumberProps } from './types'

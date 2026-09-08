@@ -11,21 +11,21 @@ description: 颜色选择，支持色板与十六进制文本。
 ## 引入
 
 ```ts
-import { RdInputColor } from '@wise-kit/ui'
+import { WkInputColor } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@wise-kit/ui'
+import { WkInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <RdInputColor v-model="color" />
+  <WkInputColor v-model="color" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@wise-kit/ui'
+import { WkInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <RdInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
+  <WkInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
 </template>
 ```
 
@@ -56,7 +56,7 @@ const color = ref('#2563eb')
 | `id` | `string` | — | 色板 input id。 |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `RdSizeInput` | — | — |
+| `size` | `WkSizeInput` | — | — |
 
 ## Events
 

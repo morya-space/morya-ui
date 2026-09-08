@@ -1,8 +1,8 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
 export type CheckboxValue = string | number | boolean
-export type CheckboxSize = RdSizeInput
+export type CheckboxSize = WkSizeInput
 
 export interface CheckboxProps {
   /** Binary checked state when used outside a group. */
@@ -10,7 +10,7 @@ export interface CheckboxProps {
   label?: string
   id?: string
   name?: string
-  /** Option value. Required when used inside `RdCheckboxGroup`. */
+  /** Option value. Required when used inside `WkCheckboxGroup`. */
   value?: CheckboxValue
   /** Mixed state. Visual only; does not change `modelValue`. */
   indeterminate?: boolean
@@ -38,7 +38,7 @@ export interface CheckboxGroupEmits {
   (event: 'update:modelValue', value: CheckboxValue[]): void
 }
 
-export interface RdCheckboxGroupContext {
+export interface WkCheckboxGroupContext {
   modelValue: ComputedRef<CheckboxValue[]>
   name: ComputedRef<string | undefined>
   size: ComputedRef<CheckboxSize | undefined>
@@ -47,4 +47,4 @@ export interface RdCheckboxGroupContext {
   toggle: (value: CheckboxValue, checked: boolean) => void
 }
 
-export const RD_CHECKBOX_GROUP_KEY: InjectionKey<RdCheckboxGroupContext> = Symbol('rdCheckboxGroup')
+export const WK_CHECKBOX_GROUP_KEY: InjectionKey<WkCheckboxGroupContext> = Symbol('rdCheckboxGroup')

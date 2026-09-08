@@ -1,8 +1,8 @@
-import type { RdSizeInput, RdTagSeverity } from '../../shared/types'
+import type { WkSizeInput, WkTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type TagSeverity = RdTagSeverity | 'warning'
-export type TagSize = RdSizeInput
+export type TagSeverity = WkTagSeverity | 'warning'
+export type TagSize = WkSizeInput
 
 export interface TagProps {
   /** Display text. Ignored when default slot has content. */
@@ -14,7 +14,7 @@ export interface TagProps {
   severity?: TagSeverity
   /** Fully rounded corners. */
   rounded?: boolean
-  /** Icon name from RdIcon. */
+  /** Icon name from WkIcon. */
   icon?: IconName
   /** Show a close control. */
   closable?: boolean

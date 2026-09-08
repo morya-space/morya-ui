@@ -11,21 +11,21 @@ Edit hex colors with the native color picker and a text field.
 ## Import
 
 ```ts
-import { RdInputColor } from '@wise-kit/ui'
+import { WkInputColor } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@wise-kit/ui'
+import { WkInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <RdInputColor v-model="color" />
+  <WkInputColor v-model="color" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@wise-kit/ui'
+import { WkInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
 </script>
 
 <template>
-  <RdInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
+  <WkInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
 </template>
 ```
 

@@ -48,7 +48,7 @@
 
 ### 主题开箱即用
 
-亮/暗色模式基于 `--rd-*` CSS 变量；通过 `useTheme` 切换主题，用 `useDensity` / `useMotion` 调整密度与动效，子树可用 `RdConfigProvider` 覆盖。
+亮/暗色模式基于 `--wk-*` CSS 变量；通过 `useTheme` 切换主题，用 `useDensity` / `useMotion` 调整密度与动效，子树可用 `WkConfigProvider` 覆盖。
 
 ### TypeScript 优先
 
@@ -105,8 +105,8 @@ createApp(App).use(WiseKit).mount('#app')
 按需引入（样式自动带入）：
 
 ```ts
-import { RdButton } from '@wise-kit/ui/button'
-import { RdInput } from '@wise-kit/ui/input'
+import { WkButton } from '@wise-kit/ui/button'
+import { WkInput } from '@wise-kit/ui/input'
 ```
 
 应用级默认配置（语言、尺寸、浮层挂载点等）：

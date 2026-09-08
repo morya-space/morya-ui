@@ -11,21 +11,21 @@ Password input. Includes a show/hide toggle by default; optional password streng
 ## Import
 
 ```ts
-import { RdInputPassword } from '@wise-kit/ui'
+import { WkInputPassword } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@wise-kit/ui'
+import { WkInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <RdInputPassword v-model="value" label="Password" />
+  <WkInputPassword v-model="value" label="Password" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@wise-kit/ui'
+import { WkInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <RdInputPassword v-model="value" label="Password" feedback />
+  <WkInputPassword v-model="value" label="Password" feedback />
 </template>
 ```
 
@@ -50,7 +50,7 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon, RdInputPassword } from '@wise-kit/ui'
+import { WkIcon, WkInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const byProp = ref('')
@@ -59,15 +59,15 @@ const bySlot = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;max-width:20rem">
-    <RdInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
-    <RdInputPassword v-model="bySlot" label="Via slots">
+    <WkInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
+    <WkInputPassword v-model="bySlot" label="Via slots">
       <template #showIcon>
-        <RdIcon name="search" size="sm" />
+        <WkIcon name="search" size="sm" />
       </template>
       <template #hideIcon>
-        <RdIcon name="close" size="sm" />
+        <WkIcon name="close" size="sm" />
       </template>
-    </RdInputPassword>
+    </WkInputPassword>
   </div>
 </template>
 ```
@@ -78,14 +78,14 @@ const bySlot = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@wise-kit/ui'
+import { WkInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('secret')
 </script>
 
 <template>
-  <RdInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
+  <WkInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
 </template>
 ```
 
@@ -93,14 +93,14 @@ const value = ref('secret')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@wise-kit/ui'
+import { WkInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('draft-pass')
 </script>
 
 <template>
-  <RdInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
+  <WkInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
 </template>
 ```
 

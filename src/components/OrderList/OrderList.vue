@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { OrderListProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
   modelValue: () => [],
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: unknown[]): void
   (event: 'reorder', value: unknown[]): void
 }>()
-const locale = useRdLocale()
+const locale = useWkLocale()
 
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyMessage,
@@ -52,7 +52,7 @@ function itemTabindex(index: number): 0 | -1 {
 
 function focusItem(index: number) {
   list.value
-    ?.querySelectorAll<HTMLElement>('.rd-orderlist__item')
+    ?.querySelectorAll<HTMLElement>('.wk-orderlist__item')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -142,20 +142,20 @@ function resetDrag() {
 </script>
 
 <template>
-  <div class="rd-orderlist">
-    <div class="rd-orderlist__controls">
-      <button type="button" class="rd-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
-        <RdIcon name="chevron-up" size="sm" />
+  <div class="wk-orderlist">
+    <div class="wk-orderlist__controls">
+      <button type="button" class="wk-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
+        <WkIcon name="chevron-up" size="sm" />
       </button>
-      <button type="button" class="rd-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
-        <RdIcon name="chevron-down" size="sm" />
+      <button type="button" class="wk-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
+        <WkIcon name="chevron-down" size="sm" />
       </button>
     </div>
 
     <ul
       v-if="modelValue.length"
       ref="list"
-      class="rd-orderlist__list"
+      class="wk-orderlist__list"
       :style="listStyle"
       role="listbox"
       :aria-label="locale.selectOption"
@@ -164,11 +164,11 @@ function resetDrag() {
       <li
         v-for="(item, index) in modelValue"
         :key="itemKey(item, index)"
-        class="rd-orderlist__item"
+        class="wk-orderlist__item"
         :class="{
-          'rd-orderlist__item--selected': selectedIndex === index,
-          'rd-orderlist__ghost': dragdrop && dragFrom === index,
-          'rd-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
+          'wk-orderlist__item--selected': selectedIndex === index,
+          'wk-orderlist__ghost': dragdrop && dragFrom === index,
+          'wk-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
         }"
         role="option"
         :aria-selected="selectedIndex === index"
@@ -184,22 +184,22 @@ function resetDrag() {
         <button
           v-if="dragdrop"
           type="button"
-          class="rd-orderlist__handle"
+          class="wk-orderlist__handle"
           :aria-label="locale.dragToReorder"
           tabindex="-1"
           @click.stop
           @pointerdown="armHandle"
         >
-          <RdIcon name="grip" size="sm" />
+          <WkIcon name="grip" size="sm" />
         </button>
-        <span class="rd-orderlist__label">
+        <span class="wk-orderlist__label">
           <slot name="item" :item="item" :index="index">{{ item }}</slot>
         </span>
       </li>
     </ul>
-    <div v-else class="rd-orderlist__message" role="status">
+    <div v-else class="wk-orderlist__message" role="status">
       <slot name="empty">
-        <p class="rd-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="wk-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
   </div>

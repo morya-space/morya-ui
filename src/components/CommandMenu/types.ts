@@ -1,4 +1,4 @@
-import type { RdAppendTo } from '../../shared/overlay'
+import type { WkAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export interface CommandMenuItem extends Omit<MenuNodeBase, 'label'> {
@@ -12,7 +12,7 @@ export interface CommandMenuProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: RdAppendTo
+  appendTo?: WkAppendTo
 }
 
 export interface CommandMenuEmits {

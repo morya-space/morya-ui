@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import RdTextarea from './Textarea.vue'
+import WkTextarea from './Textarea.vue'
 
-describe('rdTextarea', () => {
+describe('wkTextarea', () => {
   it('associates its label and emits model updates', async () => {
-    const wrapper = mount(RdTextarea, { props: { id: 'notes', label: 'Notes' } })
+    const wrapper = mount(WkTextarea, { props: { id: 'notes', label: 'Notes' } })
 
     expect(wrapper.get('label').attributes('for')).toBe('notes')
     await wrapper.get('textarea').setValue('A project note')
@@ -13,32 +13,32 @@ describe('rdTextarea', () => {
   })
 
   it('exposes invalid state and help text', () => {
-    const wrapper = mount(RdTextarea, { props: { id: 'notes', invalid: true, helpText: 'Required' } })
+    const wrapper = mount(WkTextarea, { props: { id: 'notes', invalid: true, helpText: 'Required' } })
 
     expect(wrapper.get('textarea').attributes('aria-invalid')).toBe('true')
     expect(wrapper.get('textarea').attributes('aria-describedby')).toBe('notes-help')
-    expect(wrapper.get('textarea').classes()).toContain('rd-textarea--invalid')
+    expect(wrapper.get('textarea').classes()).toContain('wk-textarea--invalid')
   })
 
   it('maps size, variant, fluid, and autosize', async () => {
-    const wrapper = mount(RdTextarea, {
+    const wrapper = mount(WkTextarea, {
       props: { size: 'sm', variant: 'filled', fluid: true, autosize: true, modelValue: 'line' },
     })
 
-    expect(wrapper.classes()).toContain('rd-textarea-field--fluid')
+    expect(wrapper.classes()).toContain('wk-textarea-field--fluid')
     expect(wrapper.get('textarea').classes()).toEqual(
       expect.arrayContaining([
-        'rd-textarea--small',
-        'rd-textarea--filled',
-        'rd-textarea--fluid',
-        'rd-textarea--auto-resize',
+        'wk-textarea--small',
+        'wk-textarea--filled',
+        'wk-textarea--fluid',
+        'wk-textarea--auto-resize',
       ]),
     )
     expect((wrapper.get('textarea').element as HTMLTextAreaElement).style.resize).toBe('none')
   })
 
   it('supports clearable, count, and autosize row clamp', async () => {
-    const wrapper = mount(RdTextarea, {
+    const wrapper = mount(WkTextarea, {
       props: {
         modelValue: 'Hello',
         clearable: true,
@@ -49,10 +49,10 @@ describe('rdTextarea', () => {
       },
     })
     expect(wrapper.get('textarea').attributes('rows')).toBe('3')
-    expect(wrapper.get('textarea').classes()).toContain('rd-textarea--auto-resize')
-    expect(wrapper.get('.rd-textarea-field__count').text()).toBe('5 / 20')
+    expect(wrapper.get('textarea').classes()).toContain('wk-textarea--auto-resize')
+    expect(wrapper.get('.wk-textarea-field__count').text()).toBe('5 / 20')
     expect(wrapper.get('textarea').attributes('aria-describedby')).toContain('notes-count')
-    await wrapper.get('.rd-textarea__clear').trigger('click')
+    await wrapper.get('.wk-textarea__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['']])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })

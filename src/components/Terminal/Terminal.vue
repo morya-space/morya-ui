@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TerminalEmits, TerminalProps } from './types'
 import { computed, nextTick, ref } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 
 const props = withDefaults(defineProps<TerminalProps>(), {
   welcomeMessage: 'Welcome to Wise Kit Terminal',
@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<TerminalProps>(), {
 
 const emit = defineEmits<TerminalEmits>()
 
-const locale = useRdLocale()
+const locale = useWkLocale()
 const draft = ref('')
 const innerLines = ref<string[]>([])
 const innerResponses = ref<string[]>([])
@@ -73,27 +73,27 @@ defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
 </script>
 
 <template>
-  <div class="rd-terminal">
-    <div ref="bodyRef" class="rd-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
-      <div v-if="welcomeMessage" class="rd-terminal__welcome">
+  <div class="wk-terminal">
+    <div ref="bodyRef" class="wk-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
+      <div v-if="welcomeMessage" class="wk-terminal__welcome">
         {{ welcomeMessage }}
       </div>
       <template v-for="(line, index) in displayLines" :key="`${line}-${index}`">
-        <div class="rd-terminal__line">
-          <span class="rd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+        <div class="wk-terminal__line">
+          <span class="wk-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
           <span>{{ line }}</span>
         </div>
-        <div v-if="displayResponses[index]" class="rd-terminal__response">
+        <div v-if="displayResponses[index]" class="wk-terminal__response">
           {{ displayResponses[index] }}
         </div>
       </template>
     </div>
-    <form class="rd-terminal__form" @submit.prevent="submit">
-      <span class="rd-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
+    <form class="wk-terminal__form" @submit.prevent="submit">
+      <span class="wk-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
       <input
         ref="inputRef"
         v-model="draft"
-        class="rd-terminal__input"
+        class="wk-terminal__input"
         type="text"
         :aria-label="locale.commandInput"
         autocomplete="off"

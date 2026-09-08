@@ -1,5 +1,5 @@
 import './style'
-export { default as RdSpeedDial } from './SpeedDial.vue'
+export { default as WkSpeedDial } from './SpeedDial.vue'
 export type {
   SpeedDialDirection,
   SpeedDialEmits,

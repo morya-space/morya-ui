@@ -1,18 +1,18 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import RdToolbar from './Toolbar.vue'
+import WkToolbar from './Toolbar.vue'
 
-describe('rdToolbar', () => {
+describe('wkToolbar', () => {
   it('renders start, center, and end slots', () => {
-    const wrapper = mount(RdToolbar, {
+    const wrapper = mount(WkToolbar, {
       slots: {
         start: 'Start',
         center: 'Center',
         end: 'End',
       },
     })
-    expect(wrapper.get('.rd-toolbar__start').text()).toBe('Start')
-    expect(wrapper.get('.rd-toolbar__center').text()).toBe('Center')
-    expect(wrapper.get('.rd-toolbar__end').text()).toBe('End')
+    expect(wrapper.get('.wk-toolbar__start').text()).toBe('Start')
+    expect(wrapper.get('.wk-toolbar__center').text()).toBe('Center')
+    expect(wrapper.get('.wk-toolbar__end').text()).toBe('End')
   })
 })
