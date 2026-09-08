@@ -17,6 +17,8 @@
     border: var(--wk-border-width) solid var(--wk-color-border);
     border-radius: var(--wk-radius-lg);
     box-shadow: var(--wk-shadow-md);
+    display: flex;
+    flex-direction: column;
     max-width: var(--wk-commandmenu-width);
     overflow: hidden;
     width: min(var(--wk-commandmenu-width), calc(100vw - 2rem));
@@ -34,10 +36,13 @@
 }
 
 .wk-commandmenu__list {
+    max-height: var(--wk-commandmenu-list-max-height);
+    min-height: 0;
+}
+
+.wk-commandmenu__list-view {
     list-style: none;
     margin: 0;
-    max-height: var(--wk-commandmenu-list-max-height);
-    overflow: auto;
     padding: var(--wk-space-2);
 }
 

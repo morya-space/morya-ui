@@ -100,11 +100,15 @@
 
 .wk-cascadeselect__column {
     flex: 1 1 0;
-    list-style: none;
     margin: 0;
     max-height: var(--wk-cascadeselect-column-max-height);
+    min-height: 0;
     min-width: 0;
-    overflow: auto;
+}
+
+.wk-cascadeselect__column-list {
+    list-style: none;
+    margin: 0;
     padding: var(--wk-space-1);
 }
 

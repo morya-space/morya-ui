@@ -8,6 +8,7 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import WkIcon from '../Icon/Icon.vue'
+import WkScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
@@ -339,10 +340,13 @@ onBeforeUnmount(() => {
           role="listbox"
           @keydown="onPanelKeydown"
         >
-          <ul
+          <WkScrollbar
             v-for="(column, columnIndex) in path"
             :key="columnIndex"
+            tag="ul"
             class="wk-cascadeselect__column"
+            fit-content
+            view-class="wk-cascadeselect__column-list"
           >
             <li v-for="option in column" :key="String(option.value)">
               <button
@@ -368,7 +372,7 @@ onBeforeUnmount(() => {
                 />
               </button>
             </li>
-          </ul>
+          </WkScrollbar>
         </div>
       </Transition>
     </Teleport>

@@ -26,10 +26,13 @@
 }
 
 .wk-listbox__list {
+    max-height: var(--wk-listbox-list-max-height);
+    min-height: 0;
+}
+
+.wk-listbox__list-view {
     list-style: none;
     margin: 0;
-    max-height: var(--wk-listbox-list-max-height);
-    overflow: auto;
     padding: var(--wk-space-1);
 }
 

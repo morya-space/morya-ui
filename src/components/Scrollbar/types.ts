@@ -18,8 +18,17 @@ export type ScrollbarClassValue =
 export interface ScrollbarProps {
   /** Viewport height. */
   height?: string | number
-  /** Max viewport height; scrollbar appears only when content exceeds it. */
+  /** Max viewport height; content-sized up to this cap (disables default fill layout). */
   maxHeight?: string | number
+  /** Viewport width. */
+  width?: string | number
+  /** Max viewport width; content-sized up to this cap (disables default fill layout). */
+  maxWidth?: string | number
+  /**
+   * Size to content up to a CSS `max-height` / `max-width` on the root.
+   * Use for dropdown panels; pair with `max-height` on the root class, not `height: 100%` fill.
+   */
+  fitContent?: boolean
   /** Use the browser native scrollbar instead of custom thumbs. */
   native?: boolean
   /** Style of the scroll wrap container. */
@@ -48,6 +57,8 @@ export interface ScrollbarProps {
   role?: string
   /** aria-label of the view element. */
   ariaLabel?: string
+  /** aria-multiselectable of the view element. */
+  ariaMultiselectable?: boolean
   /** aria-orientation of the view element. */
   ariaOrientation?: ScrollbarAriaOrientation
   /** Distance (px) from an edge that triggers `end-reached`. */

@@ -26,6 +26,9 @@ const props = withDefaults(defineProps<ScrollbarProps>(), {
   distance: 0,
   height: '',
   maxHeight: '',
+  width: '',
+  maxWidth: '',
+  fitContent: false,
   wrapStyle: '',
   wrapClass: '',
   viewStyle: '',
@@ -72,14 +75,55 @@ const DIRECTION_PAIRS: Record<ScrollbarDirection, ScrollbarDirection> = {
   right: 'left',
 }
 
+const useConstrainLayout = computed(
+  () => Boolean(addUnit(props.maxHeight)) || Boolean(addUnit(props.maxWidth)),
+)
+
+function applyAxisStyle(
+  style: CSSProperties,
+  axis: 'height' | 'width',
+  fixed: string | undefined,
+  max: string | undefined,
+) {
+  const minKey = axis === 'height' ? 'minHeight' : 'minWidth'
+  if (fixed) style[axis] = fixed
+  if (max) {
+    style[axis === 'height' ? 'maxHeight' : 'maxWidth'] = max
+    if (!fixed) {
+      style[axis] = 'auto'
+      style[minKey] = '0'
+    }
+  }
+}
+
+const resolvedRootStyle = computed<StyleValue>(() => {
+  const style: CSSProperties = {}
+  applyAxisStyle(style, 'height', addUnit(props.height), addUnit(props.maxHeight))
+  applyAxisStyle(style, 'width', addUnit(props.width), addUnit(props.maxWidth))
+  return style
+})
+
 const resolvedWrapStyle = computed<StyleValue>(() => {
   const style: CSSProperties = {}
   const height = addUnit(props.height)
   const maxHeight = addUnit(props.maxHeight)
+  const width = addUnit(props.width)
+  const maxWidth = addUnit(props.maxWidth)
+
   if (height) style.height = height
-  if (maxHeight) style.maxHeight = maxHeight
+  else if (maxHeight) applyAxisStyle(style, 'height', undefined, maxHeight)
+
+  if (width) style.width = width
+  else if (maxWidth) applyAxisStyle(style, 'width', undefined, maxWidth)
+
   return [props.wrapStyle, style]
 })
+
+const rootClassList = computed(() => [
+  'wk-scrollbar',
+  { 'wk-scrollbar--fill': !useConstrainLayout.value },
+  { 'wk-scrollbar--fit-content': props.fitContent },
+])
 
 const wrapClassList = computed(() => [
   'wk-scrollbar__wrap',
@@ -249,7 +293,7 @@ watch(
 )
 
 watch(
-  () => [props.maxHeight, props.height, props.native] as const,
+  () => [props.maxHeight, props.maxWidth, props.height, props.width, props.native] as const,
   () => {
     if (!props.native) nextTick(() => update())
   },
@@ -288,7 +332,7 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="scrollbarRef" class="wk-scrollbar">
+  <div ref="scrollbarRef" :class="rootClassList" :style="resolvedRootStyle">
     <div
       ref="wrapRef"
       :class="wrapClassList"
@@ -304,6 +348,7 @@ defineExpose({
         :style="viewStyle"
         :role="role"
         :aria-label="ariaLabel"
+        :aria-multiselectable="ariaMultiselectable === true ? true : undefined"
         :aria-orientation="ariaOrientation"
       >
         <slot />

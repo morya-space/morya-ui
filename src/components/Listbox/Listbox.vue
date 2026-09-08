@@ -5,6 +5,7 @@ import { useWkLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import WkScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
@@ -61,7 +62,11 @@ function select(option: ListboxOption) {
   emit('update:modelValue', option.value)
 }
 
-const list = ref<HTMLElement | null>(null)
+const list = ref<InstanceType<typeof WkScrollbar> | null>(null)
+
+function listRoot(): ParentNode | null {
+  return list.value?.$el ?? null
+}
 
 const keyboard = useMenuKeyboard({
   itemCount: () => filteredOptions.value.length,
@@ -86,7 +91,7 @@ function optionTabindex(index: number): 0 | -1 {
 function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  list.value
+  listRoot()
     ?.querySelectorAll<HTMLElement>('.wk-listbox__option')
     [index]?.focus({ preventScroll: true })
 }
@@ -105,7 +110,7 @@ function onFilterKeydown(event: KeyboardEvent) {
 watch(keyboard.activeIndex, () => {
   // Follow the highlight only when focus is already inside the list, so
   // typing in the filter input never steals focus.
-  if (list.value?.contains(document.activeElement)) focusActiveOption()
+  if (listRoot()?.contains(document.activeElement)) focusActiveOption()
 })
 </script>
 
@@ -121,14 +126,16 @@ watch(keyboard.activeIndex, () => {
       :aria-label="locale.filterOptions"
       @keydown="onFilterKeydown"
     >
-    <ul
+    <WkScrollbar
       ref="list"
-      class="wk-listbox__list"
+      tag="ul"
       role="listbox"
+      class="wk-listbox__list"
+      fit-content
+      view-class="wk-listbox__list-view"
+      :view-style="resolvedListStyle"
       :aria-label="locale.selectOption"
       :aria-multiselectable="multiple || undefined"
-      :style="resolvedListStyle"
-      :aria-invalid="isInvalid || undefined"
       @keydown="onListKeydown"
     >
       <li v-for="(option, index) in filteredOptions" :key="String(option.value)" role="presentation">
@@ -149,6 +156,6 @@ watch(keyboard.activeIndex, () => {
       <li v-if="!filteredOptions.length" class="wk-listbox__empty">
         {{ resolvedEmptyMessage }}
       </li>
-    </ul>
+    </WkScrollbar>
   </div>
 </template>
