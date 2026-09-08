@@ -101,17 +101,31 @@ const activeSection = computed(() => {
         <span aria-hidden="true">{{ isDark ? '☀' : '☾' }}</span>
       </button>
       <a
-        class="site-icon-btn"
+        class="site-icon-btn site-icon-btn--npm"
         :href="SITE_NPM_URL"
         target="_blank"
         rel="noopener noreferrer"
         :aria-label="t.openNpm"
         :title="t.npmPackage"
       >
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
-          <path
-            d="M1.753 8.005 0 8v14h24V8h-1.752l-1.49 4.265-1.444-4.265H6.686l-1.444 4.265L3.753 8.005ZM16.5 11a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm4.5 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
-          />
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M1 8h22v7h-12v2h-4v-2h-6l0-7" />
+          <path d="M7 8v7" />
+          <path d="M14 8v7" />
+          <path d="M17 11v4" />
+          <path d="M4 11v4" />
+          <path d="M11 11v1" />
+          <path d="M20 11v4" />
         </svg>
       </a>
       <a
@@ -284,6 +298,15 @@ const activeSection = computed(() => {
   border-color: color-mix(in srgb, var(--rd-color-primary) 45%, var(--rd-color-border));
   color: var(--rd-color-primary);
   transform: translateY(-1px);
+}
+
+.site-icon-btn--npm {
+  color: #cb3837;
+}
+
+.site-icon-btn--npm:hover {
+  border-color: color-mix(in srgb, #cb3837 45%, var(--rd-color-border));
+  color: #cb3837;
 }
 
 @media (max-width: 700px) {
