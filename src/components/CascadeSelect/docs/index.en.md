@@ -11,14 +11,14 @@ Select a value step by step from nested options.
 ## Import
 
 ```ts
-import { RdCascadeSelect } from '@roost-design/ui'
+import { RdCascadeSelect } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@roost-design/ui'
+import { RdCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | null>(null)
@@ -44,7 +44,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@roost-design/ui'
+import { RdCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(null)

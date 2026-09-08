@@ -1,18 +1,18 @@
 {
-  "name": "@roost-design/ui-mcp",
+  "name": "@wise-kit/ui-mcp",
   "type": "module",
-  "version": "0.1.3",
+  "version": "0.1.1",
   "packageManager": "pnpm@10.12.4",
-  "description": "MCP server for @roost-design/ui — component docs, examples, and usage guidance for AI coding agents.",
+  "description": "MCP server for @wise-kit/ui — component docs, examples, and usage guidance for AI coding agents.",
   "license": "MIT",
-  "homepage": "https://github.com/roost-design/roost-design-ui/tree/main/packages/ui-mcp#readme",
+  "homepage": "https://github.com/wise-kit/wise-kit-ui/tree/main/packages/ui-mcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roost-design/roost-design-ui.git",
+    "url": "git+https://github.com/wise-kit/wise-kit-ui.git",
     "directory": "packages/ui-mcp"
   },
   "bugs": {
-    "url": "https://github.com/roost-design/roost-design-ui/issues"
+    "url": "https://github.com/wise-kit/wise-kit-ui/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -21,7 +21,7 @@
     ".": "./dist/index.js"
   },
   "bin": {
-    "roost-design-ui-mcp": "./bin/roost-design-ui-mcp.js"
+    "wise-kit-ui-mcp": "./bin/wise-kit-ui-mcp.js"
   },
   "files": [
     "README.md",

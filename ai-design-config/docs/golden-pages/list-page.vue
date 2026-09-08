@@ -18,7 +18,7 @@ import {
   RdTable,
   RdTag,
   zhCN,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const keyword = ref('')

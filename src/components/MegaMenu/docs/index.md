@@ -11,14 +11,14 @@ description: 水平菜单，子项按多列面板展示。
 ## 引入
 
 ```ts
-import { RdMegaMenu, type MegaMenuItem } from '@roost-design/ui'
+import { RdMegaMenu, type MegaMenuItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdMegaMenu } from '@roost-design/ui'
+import { RdMegaMenu } from '@wise-kit/ui'
 
 const model = [
   {

@@ -11,14 +11,14 @@ description: 侧边抽屉面板。
 ## 引入
 
 ```ts
-import { RdButton, RdDrawer } from '@roost-design/ui'
+import { RdButton, RdDrawer } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDrawer } from '@roost-design/ui'
+import { RdButton, RdDrawer } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -42,7 +42,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDrawer } from '@roost-design/ui'
+import { RdButton, RdDrawer } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

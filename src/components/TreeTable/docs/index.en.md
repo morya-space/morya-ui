@@ -11,14 +11,14 @@ Display tree data with children using column configuration.
 ## Import
 
 ```ts
-import { RdTreeTable } from '@roost-design/ui'
+import { RdTreeTable } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeTable } from '@roost-design/ui'
+import { RdTreeTable } from '@wise-kit/ui'
 
 const columns = [
   { field: 'name', header: 'Name' },

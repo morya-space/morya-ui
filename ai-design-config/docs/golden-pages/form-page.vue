@@ -19,7 +19,7 @@ import {
   RdSwitch,
   RdTextarea,
   zhCN,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 import { reactive, ref } from 'vue'
 
 const submitting = ref(false)

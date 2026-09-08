@@ -11,14 +11,14 @@ Radio button.
 ## Import
 
 ```ts
-import { RdRadio } from '@roost-design/ui'
+import { RdRadio } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdRadio } from '@roost-design/ui'
+import { RdRadio } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const size = ref('md')
@@ -37,7 +37,7 @@ const size = ref('md')
 
 ```vue preview
 <script setup lang="ts">
-import { RdRadio } from '@roost-design/ui'
+import { RdRadio } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const plan = ref('')
@@ -55,7 +55,7 @@ const plan = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdRadio } from '@roost-design/ui'
+import { RdRadio } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -70,7 +70,7 @@ import { RdRadio } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdRadio, RdRadioGroup } from '@roost-design/ui'
+import { RdRadio, RdRadioGroup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const size = ref('md')

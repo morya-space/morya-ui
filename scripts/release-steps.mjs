@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { formatChangelogBody, prepareUiRelease, readUiPackage, root } from './ui-changelog.mjs'
 
-export const PACKAGE_NAME = '@roost-design/ui'
+export const PACKAGE_NAME = '@wise-kit/ui'
 export const UI_RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md']
 export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/package.json',
@@ -214,7 +214,7 @@ export async function stepPrepare(options) {
 }
 
 export async function stepBuild(options = {}) {
-  console.log('[build] @roost-design/ui')
+  console.log('[build] @wise-kit/ui')
   run('pnpm run build')
   if (!options.noMcp) {
     const { buildMcp } = await loadMcp()
@@ -246,7 +246,7 @@ export function stepCommit(options = {}) {
   if (hasStagedChanges()) {
     const message = options.noMcp
       ? `release: ${PACKAGE_NAME} v${version}`
-      : `release: ${PACKAGE_NAME} / @roost-design/ui-mcp / @roost-design/nuxt v${version}`
+      : `release: ${PACKAGE_NAME} / @wise-kit/ui-mcp / @wise-kit/nuxt v${version}`
     git(['commit', '-m', message], { stdio: 'inherit' })
     console.log(`Committed ${message}`)
     return true
@@ -262,7 +262,7 @@ export function stepBranch() {
 }
 
 export async function stepPublish(options = {}) {
-  console.log('[publish] @roost-design/ui')
+  console.log('[publish] @wise-kit/ui')
   run('pnpm publish --access public --no-git-checks')
   if (!options.noMcp) {
     const { publishMcp } = await loadMcp()
@@ -354,7 +354,7 @@ export async function runReleaseSteps(selectedSteps, options) {
     }
   } else if (selectedSteps.length > 1 && selectedSteps.at(-1) === 'push') {
     const version = plan?.version || readVersion()
-    const mcpNote = options.noMcp ? '' : ' (+ @roost-design/ui-mcp, @roost-design/nuxt)'
+    const mcpNote = options.noMcp ? '' : ' (+ @wise-kit/ui-mcp, @wise-kit/nuxt)'
     console.log(`Released ${PACKAGE_NAME} v${version}${mcpNote}`)
   }
 

@@ -11,14 +11,14 @@ Simple label with `htmlFor` / `for` and a default slot.
 ## Import
 
 ```ts
-import { RdLabel } from '@roost-design/ui'
+import { RdLabel } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdLabel } from '@roost-design/ui'
+import { RdInput, RdLabel } from '@wise-kit/ui'
 </script>
 
 <template>

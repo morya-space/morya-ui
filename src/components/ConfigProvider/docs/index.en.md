@@ -6,7 +6,7 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 # ConfigProvider
 
-Provide global defaults for the component tree via `RdConfigProvider` or `createRoostDesign`. Local props take precedence over global config.
+Provide global defaults for the component tree via `RdConfigProvider` or `createWiseKit`. Local props take precedence over global config.
 
 ## Capabilities
 
@@ -24,7 +24,7 @@ Provide global defaults for the component tree via `RdConfigProvider` or `create
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -56,7 +56,7 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const note = ref('Clearable')
@@ -82,7 +82,7 @@ const note = ref('Clearable')
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -107,7 +107,7 @@ import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -136,18 +136,18 @@ const options = [
 ## App-level plugin
 
 ```ts
-import RoostDesign, { createRoostDesign, enUS } from '@roost-design/ui'
+import WiseKit, { createWiseKit, enUS } from '@wise-kit/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 // Option A: default export
-createApp(App).use(RoostDesign, { locale: enUS }).mount('#app')
+createApp(App).use(WiseKit, { locale: enUS }).mount('#app')
 
 // Option B: factory
 createApp(App)
   .use(
-    createRoostDesign({
+    createWiseKit({
       appendTo: 'body',
       size: 'small',
       density: 'comfortable',
@@ -167,19 +167,19 @@ By default **all components are registered globally** (use `<RdButton>` in templ
 ## Reading config
 
 ```ts
-import { useRdConfig } from '@roost-design/ui'
+import { useRdConfig } from '@wise-kit/ui'
 
 const config = useRdConfig()
 ```
 
-Precedence: **component props > `RdConfigProvider` > `createRoostDesign()` > built-in defaults**.
+Precedence: **component props > `RdConfigProvider` > `createWiseKit()` > built-in defaults**.
 
 ## Theme and motion
 
-Theme and motion APIs are also exported from `@roost-design/ui` and can be used alongside ConfigProvider:
+Theme and motion APIs are also exported from `@wise-kit/ui` and can be used alongside ConfigProvider:
 
 ```ts
-import { useMotion, useTheme } from '@roost-design/ui'
+import { useMotion, useTheme } from '@wise-kit/ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

@@ -11,14 +11,14 @@ Move items between the source and target lists.
 ## Import
 
 ```ts
-import { RdPickList } from '@roost-design/ui'
+import { RdPickList } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdPickList } from '@roost-design/ui'
+import { RdPickList } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const source = ref(['Apple', 'Banana', 'Cherry', 'Grape'])
@@ -39,7 +39,7 @@ const target = ref(['Durian'])
 
 ```vue preview
 <script setup lang="ts">
-import { RdPickList } from '@roost-design/ui'
+import { RdPickList } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const source = ref([

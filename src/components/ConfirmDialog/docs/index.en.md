@@ -11,14 +11,14 @@ Modal dialog used when the user must explicitly confirm an action.
 ## Import
 
 ```ts
-import { RdButton, RdConfirmDialog } from '@roost-design/ui'
+import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmDialog } from '@roost-design/ui'
+import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)

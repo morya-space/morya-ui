@@ -24,14 +24,14 @@ Queue UI extras are out of scope this batch.
 ## Import
 
 ```ts
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -56,7 +56,7 @@ Set `drag` to show a dashed drop zone. Drop files or click the area to choose.
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -85,8 +85,8 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@roost-design/ui';
-import {  RdFileUpload } from '@roost-design/ui'
+import type {FileUploadFile} from '@wise-kit/ui';
+import {  RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const preview = ref('')
@@ -109,7 +109,7 @@ A photo wall: the plus tile opens the picker; hover to preview or remove. Images
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -123,8 +123,8 @@ With `httpRequest` (or `action`), files upload automatically. The demo mocks the
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadRequestOptions} from '@roost-design/ui';
-import {  RdFileUpload } from '@roost-design/ui'
+import type {FileUploadRequestOptions} from '@wise-kit/ui';
+import {  RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -161,8 +161,8 @@ With `auto-upload="false"`, files join the list first; click Upload to send them
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@roost-design/ui';
-import {  RdFileUpload } from '@roost-design/ui'
+import type {FileUploadFile} from '@wise-kit/ui';
+import {  RdFileUpload } from '@wise-kit/ui'
 
 async function mockUpload() {
   await new Promise((resolve) => setTimeout(resolve, 300))
@@ -197,7 +197,7 @@ Use a template ref to control the picker, upload queue, cancellation, and cleari
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const uploader = ref<{

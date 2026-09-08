@@ -11,7 +11,7 @@ description: 可换肤自定义滚动条，提供一致的滚动体验。
 ## 引入
 
 ```ts
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdScrollbar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -47,7 +47,7 @@ import { RdScrollbar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdScrollbar } from '@roost-design/ui'
+import { RdButton, RdScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const count = ref(3)
@@ -85,7 +85,7 @@ const count = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -114,7 +114,7 @@ import { RdScrollbar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -149,8 +149,8 @@ import { RdScrollbar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarInstance } from '@roost-design/ui'
-import { RdButton, RdScrollbar } from '@roost-design/ui'
+import type { ScrollbarInstance } from '@wise-kit/ui'
+import { RdButton, RdScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -197,8 +197,8 @@ function onScroll(payload: { scrollTop: number }) {
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarDirection } from '@roost-design/ui'
-import { RdScrollbar } from '@roost-design/ui'
+import type { ScrollbarDirection } from '@wise-kit/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const num = ref(20)

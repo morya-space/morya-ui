@@ -11,14 +11,14 @@ description: 列表拖拽与上下按钮排序。
 ## 引入
 
 ```ts
-import { RdOrderList } from '@roost-design/ui'
+import { RdOrderList } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdOrderList } from '@roost-design/ui'
+import { RdOrderList } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const items = ref(['设计', '开发', '测试', '发布'])

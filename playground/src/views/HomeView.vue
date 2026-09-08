@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdButton, RdScrollbar } from '@roost-design/ui'
+import { RdButton, RdScrollbar } from '@wise-kit/ui'
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import {

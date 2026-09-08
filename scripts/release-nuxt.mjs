@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { run } from './release-steps.mjs'
 import { root } from './ui-changelog.mjs'
 
-export const NUXT_NAME = '@roost-design/nuxt'
+export const NUXT_NAME = '@wise-kit/nuxt'
 export const NUXT_PKG_PATH = join(root, 'packages/nuxt/package.json')
 export const NUXT_RELEASE_PATHS = ['packages/nuxt/package.json']
 
@@ -27,7 +27,7 @@ export function readUiVersion() {
   return { uiPkg, version }
 }
 
-/** Align @roost-design/nuxt version and peer range with @roost-design/ui. */
+/** Align @wise-kit/nuxt version and peer range with @wise-kit/ui. */
 export function syncNuxtVersion(version = readUiVersion().version) {
   const nuxtPkg = readJson(NUXT_PKG_PATH)
   let changed = false
@@ -37,12 +37,12 @@ export function syncNuxtVersion(version = readUiVersion().version) {
     changed = true
   }
 
-  const peer = nuxtPkg.peerDependencies?.['@roost-design/ui']
+  const peer = nuxtPkg.peerDependencies?.['@wise-kit/ui']
   const nextPeer = `^${version}`
   if (peer !== nextPeer) {
     nuxtPkg.peerDependencies = {
       ...nuxtPkg.peerDependencies,
-      '@roost-design/ui': nextPeer,
+      '@wise-kit/ui': nextPeer,
     }
     changed = true
   }
@@ -58,13 +58,13 @@ export function syncNuxtVersion(version = readUiVersion().version) {
 }
 
 export function buildNuxt() {
-  console.log('[build] @roost-design/nuxt')
-  run('pnpm --filter @roost-design/nuxt build')
+  console.log('[build] @wise-kit/nuxt')
+  run('pnpm --filter @wise-kit/nuxt build')
 }
 
 export function publishNuxt() {
-  console.log('[publish] @roost-design/nuxt')
-  run('pnpm --filter @roost-design/nuxt publish --access public --no-git-checks')
+  console.log('[publish] @wise-kit/nuxt')
+  run('pnpm --filter @wise-kit/nuxt publish --access public --no-git-checks')
 }
 
 const isCli =

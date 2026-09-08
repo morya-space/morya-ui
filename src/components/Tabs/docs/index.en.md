@@ -11,14 +11,14 @@ Tabs switch content panels within the same view.
 ## Import
 
 ```ts
-import { RdTabs } from '@roost-design/ui'
+import { RdTabs } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTabs } from '@roost-design/ui'
+import { RdTabs } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -44,7 +44,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTabs } from '@roost-design/ui'
+import { RdButton, RdTabs } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref('a')

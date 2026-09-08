@@ -1,12 +1,12 @@
 ---
 title: SSR & meta-frameworks
 order: 7
-description: Use Roost Design UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
+description: Use Wise Kit UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
 ---
 
 # SSR & meta-frameworks
 
-Roost Design UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
+Wise Kit UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
 
 All setups below are supported; choose **full SSR** or **client islands** based on your app.
 
@@ -14,20 +14,20 @@ All setups below are supported; choose **full SSR** or **client islands** based 
 
 | Topic | Recommendation |
 | --- | --- |
-| Styles | Import `@roost-design/ui/styles.css` in app entry or framework config |
+| Styles | Import `@wise-kit/ui/styles.css` in app entry or framework config |
 | Theme | Prefer root **`RdConfigProvider`** for `theme` / `density` instead of calling `useTheme()` alone during SSR |
 | Imperative APIs | `toast()`, `message()`, `confirm()` run in the browser only; SSR calls are safe no-ops |
-| On-demand | Use `@roost-design/ui/resolver` with `unplugin-vue-components` |
+| On-demand | Use `@wise-kit/ui/resolver` with `unplugin-vue-components` |
 | Overlays | Dialog / Select / Tooltip use Vue `Teleport`; SSR renders placeholders, interaction hydrates on the client |
 
 ## Nuxt 3
 
-Use the **`@roost-design/nuxt`** module (`packages/nuxt` in this repo).
+Use the **`@wise-kit/nuxt`** module (`packages/nuxt` in this repo).
 
 ### Install
 
 ```bash
-pnpm add @roost-design/ui @roost-design/nuxt
+pnpm add @wise-kit/ui @wise-kit/nuxt
 pnpm add -D unplugin-vue-components
 ```
 
@@ -36,14 +36,14 @@ pnpm add -D unplugin-vue-components
 ```ts
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { RoostDesignResolver } from '@roost-design/ui/resolver'
+import { WiseKitResolver } from '@wise-kit/ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@roost-design/nuxt'],
+  modules: ['@wise-kit/nuxt'],
   vite: {
     plugins: [
       Components({
-        resolvers: [RoostDesignResolver()],
+        resolvers: [WiseKitResolver()],
       }),
     ],
   },
@@ -52,8 +52,8 @@ export default defineNuxtConfig({
 
 The module by default:
 
-- Adds `@roost-design/ui/styles.css`
-- Transpiles `@roost-design/ui` for SSR
+- Adds `@wise-kit/ui/styles.css`
+- Transpiles `@wise-kit/ui` for SSR
 - Registers overlay app context on the client (for `toast` / `message`)
 
 ### Root layout
@@ -71,7 +71,7 @@ const theme = ref<'light' | 'dark'>('light')
 </script>
 ```
 
-With on-demand imports you do not need `app.use(RoostDesign)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(RoostDesign)`.
+With on-demand imports you do not need `app.use(WiseKit)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(WiseKit)`.
 
 ### Client-only islands
 
@@ -84,7 +84,7 @@ Best for **static sites + Vue islands** (admin shells embedded in marketing page
 ### Install
 
 ```bash
-pnpm add @roost-design/ui
+pnpm add @wise-kit/ui
 npx astro add vue
 ```
 
@@ -99,8 +99,8 @@ import AdminShell from '../components/AdminShell.vue'
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdConfigProvider } from '@roost-design/ui'
-import '@roost-design/ui/styles.css'
+import { RdButton, RdConfigProvider } from '@wise-kit/ui'
+import '@wise-kit/ui/styles.css'
 </script>
 
 <template>
@@ -117,7 +117,7 @@ Use `client:load` or `client:only` for interactive admin UIs; `client:visible` f
 ```ts
 import { createSSRApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 export function createApp() {
   return { app: createSSRApp(App) }
@@ -127,18 +127,18 @@ export function createApp() {
 Client entry:
 
 ```ts
-import { createRoostDesign } from '@roost-design/ui'
+import { createWiseKit } from '@wise-kit/ui'
 
-app.use(createRoostDesign({ components: false })).mount('#app')
+app.use(createWiseKit({ components: false })).mount('#app')
 ```
 
-Add `@roost-design/ui` to `ssr.noExternal` so `.vue` and CSS side effects resolve correctly.
+Add `@wise-kit/ui` to `ssr.noExternal` so `.vue` and CSS side effects resolve correctly.
 
 ## Other Vue SSR stacks
 
 | Stack | Notes |
 | --- | --- |
-| **Quasar SSR** | Add `@roost-design/ui` to `build.transpileDependencies`; import styles in entry |
+| **Quasar SSR** | Add `@wise-kit/ui` to `build.transpileDependencies`; import styles in entry |
 | **vike / vite-plugin-ssr** | Same as Vite SSR |
 | **Inertia + Vue SSR** | Wrap with `RdConfigProvider`; call imperative APIs after mount |
 
@@ -147,7 +147,7 @@ Add `@roost-design/ui` to `ssr.noExternal` so `.vue` and CSS side effects resolv
 - **Vue 2 is not supported** (Vue 3 SSR only).
 - **IE** is out of scope.
 - Theme `localStorage` persistence is client-only; sync theme via `RdConfigProvider` or cookies to avoid flash.
-- Full SSR E2E coverage is evolving; please [open an issue](https://github.com/roost-design/roost-design-ui/issues) with a minimal repro if you see hydration warnings.
+- Full SSR E2E coverage is evolving; please [open an issue](https://github.com/wise-kit/wise-kit-ui/issues) with a minimal repro if you see hydration warnings.
 
 ## Next
 

@@ -11,14 +11,14 @@ description: 滚动超过阈值后显示回到顶部按钮。
 ## 引入
 
 ```ts
-import { RdScrollTop } from '@roost-design/ui'
+import { RdScrollTop } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollTop } from '@roost-design/ui'
+import { RdScrollTop } from '@wise-kit/ui'
 </script>
 
 <template>

@@ -11,14 +11,14 @@ Shows task completion, or an indeterminate loading state.
 ## Import
 
 ```ts
-import { RdProgressBar } from '@roost-design/ui'
+import { RdProgressBar } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressBar } from '@roost-design/ui'
+import { RdProgressBar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { RdProgressBar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressBar } from '@roost-design/ui'
+import { RdProgressBar } from '@wise-kit/ui'
 </script>
 
 <template>

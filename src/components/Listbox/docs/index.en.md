@@ -11,14 +11,14 @@ Present options as a list with single selection, multiple selection, and filteri
 ## Import
 
 ```ts
-import { RdListbox } from '@roost-design/ui'
+import { RdListbox } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdListbox } from '@roost-design/ui'
+import { RdListbox } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('a')

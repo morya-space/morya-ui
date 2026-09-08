@@ -11,14 +11,14 @@ description: 头像用于展示用户或实体标识。支持图片、图标与�
 ## 引入
 
 ```ts
-import { RdAvatar } from '@roost-design/ui'
+import { RdAvatar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdAvatar } from '@roost-design/ui'
+import { RdAvatar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdAvatar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdAvatar, RdAvatarGroup } from '@roost-design/ui'
+import { RdAvatar, RdAvatarGroup } from '@wise-kit/ui'
 </script>
 
 <template>

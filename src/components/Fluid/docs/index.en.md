@@ -11,14 +11,14 @@ Fluid layout container that applies `width: 100%` to child controls.
 ## Import
 
 ```ts
-import { RdFluid } from '@roost-design/ui'
+import { RdFluid } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFluid, RdInput } from '@roost-design/ui'
+import { RdButton, RdFluid, RdInput } from '@wise-kit/ui'
 </script>
 
 <template>

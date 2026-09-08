@@ -11,14 +11,14 @@ Collapsible panels for organizing grouped content in limited space.
 ## Import
 
 ```ts
-import { RdAccordion } from '@roost-design/ui'
+import { RdAccordion } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdAccordion } from '@roost-design/ui'
+import { RdAccordion } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -49,7 +49,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdAccordion } from '@roost-design/ui'
+import { RdAccordion } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref<string[]>(['a'])
@@ -81,7 +81,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdAccordion, RdButton } from '@roost-design/ui'
+import { RdAccordion, RdButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref('a')

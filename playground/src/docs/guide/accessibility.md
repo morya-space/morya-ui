@@ -1,12 +1,12 @@
 ---
 title: 无障碍
 order: 8
-description: 使用 Roost Design 组件时的无障碍约定与检查清单。
+description: 使用 Wise Kit 组件时的无障碍约定与检查清单。
 ---
 
 # 无障碍
 
-Roost Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件尽量自带标签关联、键盘路径与浮层焦点管理；业务侧仍需提供有意义的文案与结构。
+Wise Kit 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件尽量自带标签关联、键盘路径与浮层焦点管理；业务侧仍需提供有意义的文案与结构。
 
 ## 快速检查清单
 
@@ -79,7 +79,7 @@ Roost Design 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组�
 ## 动效与对比度
 
 ```ts
-import { useMotion } from '@roost-design/ui'
+import { useMotion } from '@wise-kit/ui'
 
 const { setMotion } = useMotion()
 setMotion('reduced') // 或 'none'

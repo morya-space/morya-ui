@@ -11,14 +11,14 @@ description: 相对触发元素定位的浮层面板。支持 placement、Telepo
 ## 引入
 
 ```ts
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -40,7 +40,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -66,7 +66,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

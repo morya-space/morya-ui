@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "paths": {
-      "@roost-design/ui": ["../src"],
+      "@wise-kit/ui": ["../src"],
       "@/*": ["./src/*"]
     },
     "types": ["vite/client"]

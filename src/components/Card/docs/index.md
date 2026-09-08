@@ -11,14 +11,14 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 ## 引入
 
 ```ts
-import { RdButton, RdCard } from '@roost-design/ui'
+import { RdButton, RdCard } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdCard } from '@roost-design/ui'
+import { RdButton, RdCard } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -40,7 +40,7 @@ import { RdButton, RdCard } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdCard, RdTag } from '@roost-design/ui'
+import { RdCard, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ import { RdCard, RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdCard } from '@roost-design/ui'
+import { RdCard } from '@wise-kit/ui'
 </script>
 
 <template>

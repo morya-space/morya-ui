@@ -11,14 +11,14 @@ Place an icon to the left or right of an input control.
 ## Import
 
 ```ts
-import { RdIcon, RdIconField, RdInput } from '@roost-design/ui'
+import { RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon, RdIconField, RdInput } from '@roost-design/ui'
+import { RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')

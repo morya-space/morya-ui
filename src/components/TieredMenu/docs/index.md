@@ -11,14 +11,14 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { RdTieredMenu, type TieredMenuItem } from '@roost-design/ui'
+import { RdTieredMenu, type TieredMenuItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTieredMenu } from '@roost-design/ui'
+import { RdTieredMenu } from '@wise-kit/ui'
 
 const model = [
   {
@@ -44,7 +44,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTieredMenu } from '@roost-design/ui'
+import { RdButton, RdTieredMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

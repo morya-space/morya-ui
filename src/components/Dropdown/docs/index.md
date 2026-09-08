@@ -15,14 +15,14 @@ description: 动作菜单覆盖层（非表单选择器）。与 Select 不同�
 ## 引入
 
 ```ts
-import { RdButton, RdDropdown } from '@roost-design/ui'
+import { RdButton, RdDropdown } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDropdown } from '@roost-design/ui'
+import { RdButton, RdDropdown } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDropdown } from '@roost-design/ui'
+import { RdButton, RdDropdown } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

@@ -13,14 +13,14 @@ Hierarchical node tree with expand, check, filter, and drag-and-drop.
 ## Import
 
 ```ts
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selected = ref<string | null>(null)
@@ -46,7 +46,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref({})
@@ -78,7 +78,7 @@ With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref<Record<string, boolean>>({})
@@ -114,7 +114,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdTree } from '@roost-design/ui'
+import { RdInput, RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const query = ref('')

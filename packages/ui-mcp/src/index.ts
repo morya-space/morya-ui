@@ -39,7 +39,7 @@ function register(
 
 register(
   'list',
-  'List @roost-design/ui components, guides, examples, categories, or page patterns.',
+  'List @wise-kit/ui components, guides, examples, categories, or page patterns.',
   {
     kind: z
       .enum(['components', 'guides', 'examples', 'categories', 'patterns'])
@@ -108,7 +108,7 @@ register(
 
 register(
   'get_setup',
-  'Return installation and setup guidance for consuming @roost-design/ui.',
+  'Return installation and setup guidance for consuming @wise-kit/ui.',
   {
     environment: z.string().optional(),
     mode: z.string().optional(),
@@ -138,7 +138,7 @@ register(
 
 register(
   'list_patterns',
-  'List reusable page patterns for composing @roost-design/ui components.',
+  'List reusable page patterns for composing @wise-kit/ui components.',
   {
     mode: z.string().optional(),
     limit: z.number().int().min(1).max(200).optional(),

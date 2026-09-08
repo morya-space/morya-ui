@@ -11,14 +11,14 @@ description: SVG 圆形旋钮，用于选择数值。
 ## 引入
 
 ```ts
-import { RdKnob } from '@roost-design/ui'
+import { RdKnob } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdKnob } from '@roost-design/ui'
+import { RdKnob } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(60)

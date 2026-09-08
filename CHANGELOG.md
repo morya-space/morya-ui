@@ -1,20 +1,8 @@
-# @roost-design/ui
-
-## 0.1.3
-
-### 修复
-
-- 修复文档站 logo SVG 渐变引用（`#rd-bg` / `#rd-mark`），恢复正确显示
-- 修复向后兼容模块引用路径（`wd-exports` / `wd-compat.css`）
-
-### 文档
-
-- 统一指南、README、MCP 配置示例中的 Roost Design 品牌与链接
-- MCP bin 重命名为 `roost-design-ui-mcp.js`
+# @wise-kit/ui
 
 ## 0.1.1
 
-`@roost-design/ui` 的初始公开版本（Roost Design UI），以当前组件库能力为基准。
+`@wise-kit/ui` 的初始公开版本（Wise Kit UI），以当前组件库能力为基准。
 
 ### 组件（88 个）
 
@@ -35,9 +23,9 @@
 
 ### 全局配置与工具 API
 
-- 插件入口：`RoostDesign` 全量注册、`createRoostDesign` 按需/默认配置
-- 按需构建：`RoostDesignResolver`（配合 `unplugin-vue-components`）
-- ESM 子路径导出（`@roost-design/ui/button` 等），tree-shaking 友好
+- 插件入口：`WiseKit` 全量注册、`createWiseKit` 按需/默认配置
+- 按需构建：`WiseKitResolver`（配合 `unplugin-vue-components`）
+- ESM 子路径导出（`@wise-kit/ui/button` 等），tree-shaking 友好
 - 命令式 API：`useConfirm`、`useToast` / `toast`、`useMessage` / `message`、`useContextMenu`
 - 共享 composable：`useControllable`、`useFieldFeedback`、`useMenuKeyboard`、`useModalOverlay`、`useRdId`
 - 国际化：`zhCN`、`enUS`、`mergeLocale`、`useRdLocale`、`formatLocale`
@@ -53,12 +41,12 @@
 - 交互式文档站（Markdown + `vue preview` 实时示例）
 - 组件目录、指南（快速上手、主题、配置、SSR、无障碍、MCP）
 - 亮/暗主题切换、中英文切换、全局搜索（CommandMenu）
-- 部署至 GitHub Pages：https://roost-design.github.io/roost-design-ui/
+- 部署至 GitHub Pages：https://wise-kit.github.io/wise-kit-ui/
 
 ### 生态包
 
-- **`@roost-design/nuxt`**：Nuxt 3 模块（样式注入、transpile、客户端 overlay 上下文）
-- **`@roost-design/ui-mcp`**：MCP 服务，供 AI 客户端检索组件文档、示例与用法建议
+- **`@wise-kit/nuxt`**：Nuxt 3 模块（样式注入、transpile、客户端 overlay 上下文）
+- **`@wise-kit/ui-mcp`**：MCP 服务，供 AI 客户端检索组件文档、示例与用法建议
 
 ### SSR 与框架集成
 

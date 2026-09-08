@@ -11,14 +11,14 @@ Side drawer that slides in from the screen edge. Suited to navigation, filters, 
 ## Import
 
 ```ts
-import { RdButton, RdDrawer } from '@roost-design/ui'
+import { RdButton, RdDrawer } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDrawer } from '@roost-design/ui'
+import { RdButton, RdDrawer } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -42,7 +42,7 @@ Supports `left` / `right` / `top` / `bottom`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDrawer } from '@roost-design/ui'
+import { RdButton, RdDrawer } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

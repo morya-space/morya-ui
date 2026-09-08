@@ -11,14 +11,14 @@ Context menu that opens at the pointer position. Nested `items` are supported. `
 ## Import
 
 ```ts
-import { useContextMenu, RdContextMenu } from '@roost-design/ui'
+import { useContextMenu, RdContextMenu } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdContextMenu } from '@roost-design/ui'
+import { RdContextMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -57,7 +57,7 @@ function onContext(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, RdContextMenu } from '@roost-design/ui'
+import { useContextMenu, RdContextMenu } from '@wise-kit/ui'
 
 const menu = useContextMenu()
 const model = [

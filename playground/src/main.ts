@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import CodePreview from './components/CodePreview.vue'
 import router from './router'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 const app = createApp(App)
 app.component('CodePreview', CodePreview)

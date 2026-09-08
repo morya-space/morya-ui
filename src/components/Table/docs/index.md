@@ -17,15 +17,15 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 引入
 
 ```ts
-import { RdTable, RdTag } from '@roost-design/ui'
-import type { TableColumnDefinition, TableItem } from '@roost-design/ui'
+import { RdTable, RdTag } from '@wise-kit/ui'
+import type { TableColumnDefinition, TableItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable, RdTag } from '@roost-design/ui'
+import { RdTable, RdTag } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: '项目', minWidth: 140, sortable: true },
@@ -59,7 +59,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -91,7 +91,7 @@ const selection = ref<Record<string, unknown>[]>([])
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -126,7 +126,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
@@ -152,7 +152,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },
@@ -176,7 +176,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTable } from '@roost-design/ui'
+import { RdButton, RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -207,7 +207,7 @@ const columns = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [

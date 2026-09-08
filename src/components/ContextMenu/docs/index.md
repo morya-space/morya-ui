@@ -11,14 +11,14 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 ## 引入
 
 ```ts
-import { useContextMenu, RdContextMenu } from '@roost-design/ui'
+import { useContextMenu, RdContextMenu } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdContextMenu } from '@roost-design/ui'
+import { RdContextMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -57,7 +57,7 @@ function onContext(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, RdContextMenu } from '@roost-design/ui'
+import { useContextMenu, RdContextMenu } from '@wise-kit/ui'
 
 const menu = useContextMenu()
 const model = [

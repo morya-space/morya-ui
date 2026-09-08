@@ -11,14 +11,14 @@ Flexbox layout container. Prefer CSS `gap` for spacing between children.
 ## Import
 
 ```ts
-import { RdFlex } from '@roost-design/ui'
+import { RdFlex } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@roost-design/ui'
+import { RdButton, RdFlex } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { RdButton, RdFlex } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@roost-design/ui'
+import { RdButton, RdFlex } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -50,7 +50,7 @@ import { RdButton, RdFlex } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex, RdTag } from '@roost-design/ui'
+import { RdButton, RdFlex, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>

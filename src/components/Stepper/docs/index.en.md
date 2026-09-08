@@ -11,14 +11,14 @@ Shows progress through a multi-step flow and lets users switch steps.
 ## Import
 
 ```ts
-import { RdStepper } from '@roost-design/ui'
+import { RdStepper } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdStepper } from '@roost-design/ui'
+import { RdStepper } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(0)
@@ -40,7 +40,7 @@ const steps = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdStepper } from '@roost-design/ui'
+import { RdStepper } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(1)

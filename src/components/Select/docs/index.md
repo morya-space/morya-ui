@@ -13,14 +13,14 @@ description: 表单选择器，支持多选标签、远程搜索、invalid、siz
 ## 引入
 
 ```ts
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -42,7 +42,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>('design')
@@ -61,7 +61,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -86,7 +86,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 
 const options = [
   { label: 'Design', value: 'design' },
@@ -103,7 +103,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -126,7 +126,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -147,7 +147,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>(['design'])
@@ -172,7 +172,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>([])
@@ -193,7 +193,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -238,7 +238,7 @@ function onSearch(query: string) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -263,7 +263,7 @@ const cities = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()

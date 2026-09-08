@@ -1,6 +1,6 @@
-# Roost Design 设计系统（AI 第一信源）
+# Wise Kit 设计系统（AI 第一信源）
 
-> 基于 `@roost-design/ui` v0.1.x。生成或审查业务页面时，**必须先遵守本文**，再查阅 `docs/components.md` 与 `docs/golden-pages/`。
+> 基于 `@wise-kit/ui` v0.1.x。生成或审查业务页面时，**必须先遵守本文**，再查阅 `docs/components.md` 与 `docs/golden-pages/`。
 
 ## 1. 设计原则
 
@@ -14,8 +14,8 @@
 
 ```vue
 <script setup lang="ts">
-import { RdConfigProvider, zhCN } from '@roost-design/ui'
-import '@roost-design/ui/styles.css'
+import { RdConfigProvider, zhCN } from '@wise-kit/ui'
+import '@wise-kit/ui/styles.css'
 </script>
 
 <template>
@@ -94,7 +94,7 @@ import '@roost-design/ui/styles.css'
 - 禁止在业务 CSS 中写死主题色；暗色模式必须能随 `[data-theme="dark"]` 生效。
 - 禁止用 `<div onclick>` 代替 `<button>` / `RdButton`。
 - 禁止 Select 与 Dropdown 混用：选项选择用 `RdSelect` / `RdTreeSelect`；动作菜单用 `RdDropdown`。
-- 禁止跳过 `import '@roost-design/ui/styles.css'`。
+- 禁止跳过 `import '@wise-kit/ui/styles.css'`。
 
 ## 9. AI 工作流
 
@@ -107,7 +107,7 @@ import '@roost-design/ui/styles.css'
 
 ## 10. 相关资源
 
-- 包入口：`@roost-design/ui`
-- 全局样式：`@roost-design/ui/styles.css`
-- 按需引入：`@roost-design/ui/button` 等 + 对应 `style`
+- 包入口：`@wise-kit/ui`
+- 全局样式：`@wise-kit/ui/styles.css`
+- 按需引入：`@wise-kit/ui/button` 等 + 对应 `style`
 - 主题 API：`useTheme` / `useDensity` / `useMotion`（同包导出）

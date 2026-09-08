@@ -17,15 +17,15 @@ Column width rules:
 ## Import
 
 ```ts
-import { RdTable, RdTag } from '@roost-design/ui'
-import type { TableColumnDefinition, TableItem } from '@roost-design/ui'
+import { RdTable, RdTag } from '@wise-kit/ui'
+import type { TableColumnDefinition, TableItem } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable, RdTag } from '@roost-design/ui'
+import { RdTable, RdTag } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: 'Project', minWidth: 140, sortable: true },
@@ -56,7 +56,7 @@ Use `selection-mode="multiple"` with `v-model:selection`, or `selection-mode="si
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -88,7 +88,7 @@ Use `search-value` / `filter-options` for client filtering. Enable `paginator` w
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -121,7 +121,7 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@roost-design/ui'
+import { RdTable } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: 'Name' },
@@ -143,7 +143,7 @@ const rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTable } from '@roost-design/ui'
+import { RdButton, RdTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)

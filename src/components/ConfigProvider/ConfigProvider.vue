@@ -10,7 +10,7 @@ import {
 import { applyDensity } from '../../theme'
 
 const props = defineProps<{
-  /** Global defaults for descendant Roost Design components. */
+  /** Global defaults for descendant Wise Kit components. */
   config?: RdGlobalConfig
   /** Shorthand: default overlay Teleport target. */
   appendTo?: RdGlobalConfig['appendTo']

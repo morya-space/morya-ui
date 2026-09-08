@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { git, run } from './release-steps.mjs'
 import { root } from './ui-changelog.mjs'
 
-export const MCP_NAME = '@roost-design/ui-mcp'
+export const MCP_NAME = '@wise-kit/ui-mcp'
 export const MCP_PKG_PATH = join(root, 'packages/ui-mcp/package.json')
 export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/package.json',
@@ -35,7 +35,7 @@ export function readUiVersion() {
   return { uiPkg, version }
 }
 
-/** Align @roost-design/ui-mcp version with @roost-design/ui. */
+/** Align @wise-kit/ui-mcp version with @wise-kit/ui. */
 export function syncMcpVersion(version = readUiVersion().version) {
   const mcpPkg = readJson(MCP_PKG_PATH)
   if (mcpPkg.version === version) {
@@ -49,11 +49,11 @@ export function syncMcpVersion(version = readUiVersion().version) {
 }
 
 export function buildMcp() {
-  console.log('[build] @roost-design/ui-mcp (catalog + compile)')
-  run('pnpm --filter @roost-design/ui-mcp build')
-  console.log('[check] @roost-design/ui-mcp catalog')
+  console.log('[build] @wise-kit/ui-mcp (catalog + compile)')
+  run('pnpm --filter @wise-kit/ui-mcp build')
+  console.log('[check] @wise-kit/ui-mcp catalog')
   run('pnpm mcp:validate-catalog')
-  console.log('[audit] @roost-design/ui-mcp example coverage')
+  console.log('[audit] @wise-kit/ui-mcp example coverage')
   run('pnpm mcp:audit-examples -- --write')
 }
 
@@ -70,8 +70,8 @@ export function commitMcpRelease(version = readUiVersion().version) {
 }
 
 export function publishMcp() {
-  console.log('[publish] @roost-design/ui-mcp')
-  run('pnpm --filter @roost-design/ui-mcp publish --access public --no-git-checks')
+  console.log('[publish] @wise-kit/ui-mcp')
+  run('pnpm --filter @wise-kit/ui-mcp publish --access public --no-git-checks')
 }
 
 /**

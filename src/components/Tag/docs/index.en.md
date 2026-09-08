@@ -11,7 +11,7 @@ Tags display status or category.
 ## Import
 
 ```ts
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Show text via `value` or the default slot.
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ Use `severity` for semantic color; defaults to primary when omitted. The legacy 
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ Pass a `RdIcon` icon name to `icon`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -76,7 +76,7 @@ import { RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>

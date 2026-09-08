@@ -11,14 +11,14 @@ Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-sel
 ## Import
 
 ```ts
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -43,7 +43,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string[]>([])
@@ -78,7 +78,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(null)

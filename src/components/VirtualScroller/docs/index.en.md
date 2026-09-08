@@ -11,7 +11,7 @@ Windowed list rendering based on scroll position. Best for large, **equal-height
 ## Import
 
 ```ts
-import { RdVirtualScroller } from '@roost-design/ui'
+import { RdVirtualScroller } from '@wise-kit/ui'
 ```
 
 ## Basic usage
@@ -20,7 +20,7 @@ import { RdVirtualScroller } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdVirtualScroller } from '@roost-design/ui'
+import { RdVirtualScroller } from '@wise-kit/ui'
 
 const items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)
 </script>

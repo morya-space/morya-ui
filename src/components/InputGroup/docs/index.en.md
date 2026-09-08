@@ -11,14 +11,14 @@ Combine an input with prefix and suffix addons. Use `RdInputGroupAddon` for addo
 ## Import
 
 ```ts
-import { RdInput, RdInputGroup, RdInputGroupAddon } from '@roost-design/ui'
+import { RdInput, RdInputGroup, RdInputGroupAddon } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdInputGroup, RdInputGroupAddon } from '@roost-design/ui'
+import { RdInput, RdInputGroup, RdInputGroupAddon } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const price = ref('')

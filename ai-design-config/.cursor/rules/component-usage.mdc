@@ -1,5 +1,5 @@
 ---
-description: Roost Design 组件用法与选型（Vue 业务代码）
+description: Wise Kit 组件用法与选型（Vue 业务代码）
 globs: src/**/*.vue
 alwaysApply: false
 ---
@@ -9,9 +9,9 @@ alwaysApply: false
 ## 引入
 
 ```ts
-import { RdButton, RdInput } from '@roost-design/ui'
-// 按需：import RdButton from '@roost-design/ui/button'
-//        import '@roost-design/ui/button/style'
+import { RdButton, RdInput } from '@wise-kit/ui'
+// 按需：import RdButton from '@wise-kit/ui/button'
+//        import '@wise-kit/ui/button/style'
 ```
 
 ## 必选模式

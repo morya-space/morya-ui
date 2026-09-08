@@ -11,14 +11,14 @@ description: 在开/关两种标签状态间切换的按钮。
 ## 引入
 
 ```ts
-import { RdToggleButton } from '@roost-design/ui'
+import { RdToggleButton } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdToggleButton } from '@roost-design/ui'
+import { RdToggleButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const on = ref(false)
@@ -33,7 +33,7 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdToggleButton } from '@roost-design/ui'
+import { RdToggleButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(false)

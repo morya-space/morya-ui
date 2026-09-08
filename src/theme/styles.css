@@ -47,7 +47,7 @@
     --rd-font-size-md: 0.875rem;
     --rd-font-size-lg: 1.125rem;
     --rd-opacity-disabled: 0.55;
-    /* Layering: override --rd-z-base via ConfigProvider / createRoostDesign */
+    /* Layering: override --rd-z-base via ConfigProvider / createWiseKit */
     --rd-z-base: 1000;
     --rd-z-overlay: var(--rd-z-base);
     --rd-z-overlay-raised: calc(var(--rd-z-base) + 1);

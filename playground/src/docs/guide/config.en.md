@@ -1,12 +1,12 @@
 ---
 title: Configuration
 order: 5
-description: ConfigProvider, createRoostDesign, and useRdConfig.
+description: ConfigProvider, createWiseKit, and useRdConfig.
 ---
 
 # Configuration
 
-Roost Design provides app-level and page-level defaults for overlay mount, size, density, and copy.
+Wise Kit provides app-level and page-level defaults for overlay mount, size, density, and copy.
 
 ## Capabilities
 
@@ -19,23 +19,23 @@ Roost Design provides app-level and page-level defaults for overlay mount, size,
 | `zIndex` | Overlay z-index base |
 | `locale` | Confirm, empty, loading, and placeholder copy. Pass built-in packs `zhCN` / `enUS` |
 
-Priority: **component props > `RdConfigProvider` > `createRoostDesign` > built-in default (Chinese)**.
+Priority: **component props > `RdConfigProvider` > `createWiseKit` > built-in default (Chinese)**.
 
 ## Locale packs
 
 Built-in copy defaults to Chinese. Pass `enUS` to switch to English:
 
 ```ts
-import { createRoostDesign, enUS, zhCN } from '@roost-design/ui'
+import { createWiseKit, enUS, zhCN } from '@wise-kit/ui'
 import { createApp } from 'vue'
 
-createApp(App).use(createRoostDesign({ locale: enUS })).mount('#app')
+createApp(App).use(createWiseKit({ locale: enUS })).mount('#app')
 ```
 
 You can also override a subset:
 
 ```ts
-createRoostDesign({
+createWiseKit({
   locale: {
     ...zhCN,
     accept: 'OK',
@@ -51,7 +51,7 @@ Controls without a local `size` inherit from ConfigProvider.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -91,7 +91,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
@@ -123,7 +123,7 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 
 ```vue preview
 <script setup lang="ts">
-import { RdConfigProvider, RdInput, RdTextarea } from '@roost-design/ui'
+import { RdConfigProvider, RdInput, RdTextarea } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -154,7 +154,7 @@ import { RdConfigProvider, RdInput, RdTextarea } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -186,7 +186,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -204,14 +204,14 @@ const visible = ref(false)
 </template>
 ```
 
-## App-level: `createRoostDesign`
+## App-level: `createWiseKit`
 
 ```ts
-import { createRoostDesign } from '@roost-design/ui'
+import { createWiseKit } from '@wise-kit/ui'
 import { createApp } from 'vue'
 
 createApp(App).use(
-    createRoostDesign({
+    createWiseKit({
       appendTo: 'body',
       size: 'small',
       zIndex: 2000,
@@ -223,7 +223,7 @@ createApp(App).use(
 ## Reading config
 
 ```ts
-import { useRdConfig } from '@roost-design/ui'
+import { useRdConfig } from '@wise-kit/ui'
 
 const config = useRdConfig()
 // config.value.appendTo / size / locale …

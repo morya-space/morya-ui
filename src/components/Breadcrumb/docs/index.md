@@ -11,14 +11,14 @@ description: 展示当前页面在层级中的位置。
 ## 引入
 
 ```ts
-import { RdBreadcrumb } from '@roost-design/ui'
+import { RdBreadcrumb } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdBreadcrumb } from '@roost-design/ui'
+import { RdBreadcrumb } from '@wise-kit/ui'
 
 const items = [
   { label: 'Electronics', to: '/electronics' },
@@ -38,7 +38,7 @@ const items = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdBreadcrumb } from '@roost-design/ui'
+import { RdBreadcrumb } from '@wise-kit/ui'
 
 const items = [
   { label: 'Library', to: '/lib' },

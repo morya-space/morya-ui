@@ -11,14 +11,14 @@ description: 可搜索的命令面板对话框。
 ## 引入
 
 ```ts
-import { RdCommandMenu, type CommandMenuItem } from '@roost-design/ui'
+import { RdCommandMenu, type CommandMenuItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdCommandMenu } from '@roost-design/ui'
+import { RdButton, RdCommandMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)

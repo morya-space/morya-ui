@@ -13,14 +13,14 @@ description: 树形结构。支持勾选半选、过滤、受控展开、懒加�
 ## 引入
 
 ```ts
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selected = ref<string | null>(null)
@@ -46,7 +46,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref({})
@@ -78,7 +78,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@roost-design/ui'
+import { RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref<Record<string, boolean>>({})
@@ -114,7 +114,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdTree } from '@roost-design/ui'
+import { RdInput, RdTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const query = ref('')

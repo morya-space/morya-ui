@@ -6,14 +6,14 @@ description: 亮暗主题、设计令牌与动效偏好。
 
 # 主题
 
-主题能力内置于 `@roost-design/ui`。组件只消费语义化 CSS 变量（`--rd-*`），不自行维护第二套色板。
+主题能力内置于 `@wise-kit/ui`。组件只消费语义化 CSS 变量（`--rd-*`），不自行维护第二套色板。
 
-引入 `@roost-design/ui/styles.css` 时已包含这些变量；主题 JS API（`useTheme` 等）从同一包导入。
+引入 `@wise-kit/ui/styles.css` 时已包含这些变量；主题 JS API（`useTheme` 等）从同一包导入。
 
 ## 亮 / 暗色
 
 ```ts
-import { useTheme } from '@roost-design/ui'
+import { useTheme } from '@wise-kit/ui'
 
 const { isDark, setTheme, toggleTheme } = useTheme()
 
@@ -44,21 +44,21 @@ toggleTheme()
 ## 内容密度
 
 ```ts
-import { useDensity } from '@roost-design/ui'
+import { useDensity } from '@wise-kit/ui'
 
 const { preference, setDensity } = useDensity()
 setDensity('compact') // 'compact' | 'comfortable' | 'spacious'
 ```
 
 也会写到 `document.documentElement` 的 `data-rd-density`，并缩放 `--rd-space-*` 与 `--rd-control-height-*`。  
-应用级可用 `createRoostDesign({ density: 'compact' })` 或 `<RdConfigProvider density="compact">`。
+应用级可用 `createWiseKit({ density: 'compact' })` 或 `<RdConfigProvider density="compact">`。
 
 在组件页侧栏「主题」可临时改主色、圆角与密度，用于本地预览。
 
 ## 动效偏好
 
 ```ts
-import { useMotion } from '@roost-design/ui'
+import { useMotion } from '@wise-kit/ui'
 
 const { preference, setMotion } = useMotion()
 setMotion('full') // 'full' | 'reduced' | 'none'
@@ -89,4 +89,4 @@ box-shadow: var(--rd-focus-shadow); /* 0 0 0 2px primary@20% */
 
 ## 与 ConfigProvider
 
-主题切换是「视觉层」；`RdConfigProvider` / `createRoostDesign` 负责尺寸、文案、浮层挂载等「行为默认值」。二者可同时使用，详见 [全局配置](/docs/config)。
+主题切换是「视觉层」；`RdConfigProvider` / `createWiseKit` 负责尺寸、文案、浮层挂载等「行为默认值」。二者可同时使用，详见 [全局配置](/docs/config)。

@@ -15,14 +15,14 @@ Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), n
 ## Import
 
 ```ts
-import { RdButton, RdDropdown } from '@roost-design/ui'
+import { RdButton, RdDropdown } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDropdown } from '@roost-design/ui'
+import { RdButton, RdDropdown } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDropdown } from '@roost-design/ui'
+import { RdButton, RdDropdown } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

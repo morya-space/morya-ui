@@ -11,14 +11,14 @@ description: 在内容上叠加遮罩以阻止交互。
 ## 引入
 
 ```ts
-import { RdBlockUI } from '@roost-design/ui'
+import { RdBlockUI } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdBlockUI, RdButton } from '@roost-design/ui'
+import { RdBlockUI, RdButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const blocked = ref(false)

@@ -11,14 +11,14 @@ Wraps an input. The label floats up on focus or when the field has content. Nest
 ## Import
 
 ```ts
-import { RdFloatLabel, RdInput } from '@roost-design/ui'
+import { RdFloatLabel, RdInput } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdFloatLabel, RdInput } from '@roost-design/ui'
+import { RdFloatLabel, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')

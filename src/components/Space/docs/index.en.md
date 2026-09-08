@@ -11,14 +11,14 @@ Adds consistent spacing between children. Prefer [`Flex`](/components/Flex/) for
 ## Import
 
 ```ts
-import { RdSpace } from '@roost-design/ui'
+import { RdSpace } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@roost-design/ui'
+import { RdButton, RdSpace } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { RdButton, RdSpace } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@roost-design/ui'
+import { RdSpace, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -50,7 +50,7 @@ import { RdSpace, RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@roost-design/ui'
+import { RdButton, RdSpace } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -75,7 +75,7 @@ Set `wrapItem=false` to skip the per-child wrapper (useful when children manage 
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@roost-design/ui'
+import { RdSpace, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>

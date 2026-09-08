@@ -11,14 +11,14 @@ Browse an image list and keep `activeIndex` in sync.
 ## Import
 
 ```ts
-import { RdGallery } from '@roost-design/ui'
+import { RdGallery } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdGallery } from '@roost-design/ui'
+import { RdGallery } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)

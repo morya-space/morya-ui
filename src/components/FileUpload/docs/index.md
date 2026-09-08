@@ -24,14 +24,14 @@ description: 选择、拖拽、列表、预览与上传。
 ## 引入
 
 ```ts
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -56,7 +56,7 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const names = ref<string[]>([])
@@ -85,8 +85,8 @@ function onSelect(files: File[]) {
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@roost-design/ui';
-import {  RdFileUpload } from '@roost-design/ui'
+import type {FileUploadFile} from '@wise-kit/ui';
+import {  RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const preview = ref('')
@@ -109,7 +109,7 @@ function onPreview(file: FileUploadFile) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -123,8 +123,8 @@ import { RdFileUpload } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadRequestOptions} from '@roost-design/ui';
-import {  RdFileUpload } from '@roost-design/ui'
+import type {FileUploadRequestOptions} from '@wise-kit/ui';
+import {  RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -161,8 +161,8 @@ function onSuccess(_file: unknown, response: unknown) {
 
 ```vue preview
 <script setup lang="ts">
-import type {FileUploadFile} from '@roost-design/ui';
-import {  RdFileUpload } from '@roost-design/ui'
+import type {FileUploadFile} from '@wise-kit/ui';
+import {  RdFileUpload } from '@wise-kit/ui'
 
 async function mockUpload() {
   await new Promise((resolve) => setTimeout(resolve, 300))
@@ -197,7 +197,7 @@ function beforeUpload(file: File, _item: FileUploadFile) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdFileUpload } from '@roost-design/ui'
+import { RdFileUpload } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const uploader = ref<{

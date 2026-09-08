@@ -11,7 +11,7 @@ description: 标签用于展示状态或分类。
 ## 引入
 
 ```ts
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ import { RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -76,7 +76,7 @@ import { RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTag } from '@roost-design/ui'
+import { RdTag } from '@wise-kit/ui'
 </script>
 
 <template>

@@ -11,14 +11,14 @@ Single-line text input.
 ## Import
 
 ```ts
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -35,7 +35,7 @@ Use `invalid` for validation failure, or rely on `error-message` alone.
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -47,7 +47,7 @@ import { RdInput } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('Draft note')
@@ -62,7 +62,7 @@ const value = ref('Draft note')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const amount = ref('128')
@@ -92,7 +92,7 @@ const host = ref('docs')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const password = ref('')
@@ -109,7 +109,7 @@ Supports `small` / `large`, and also `sm` / `md` / `lg`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -127,7 +127,7 @@ import { RdInput } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const bio = ref('Hello')
@@ -142,7 +142,7 @@ const bio = ref('Hello')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -158,7 +158,7 @@ import { RdInput } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput } from '@roost-design/ui'
+import { RdInput } from '@wise-kit/ui'
 </script>
 
 <template>

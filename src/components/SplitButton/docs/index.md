@@ -11,14 +11,14 @@ description: 主操作按钮附带下拉菜单项。
 ## 引入
 
 ```ts
-import { RdSplitButton } from '@roost-design/ui'
+import { RdSplitButton } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitButton } from '@roost-design/ui'
+import { RdSplitButton } from '@wise-kit/ui'
 
 const items = [
   { label: '另存为', command: () => console.log('save as') },

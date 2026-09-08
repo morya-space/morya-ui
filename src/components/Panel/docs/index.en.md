@@ -11,14 +11,14 @@ Panel for grouping content. Collapse can be enabled.
 ## Import
 
 ```ts
-import { RdPanel } from '@roost-design/ui'
+import { RdPanel } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdPanel } from '@roost-design/ui'
+import { RdPanel } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -40,7 +40,7 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdPanel } from '@roost-design/ui'
+import { RdPanel } from '@wise-kit/ui'
 </script>
 
 <template>

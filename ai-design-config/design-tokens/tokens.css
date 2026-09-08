@@ -1,6 +1,6 @@
 /**
- * Roost Design design tokens (compiled view for AI / static tooling).
- * Runtime source of truth: @roost-design/ui/styles.css
+ * Wise Kit design tokens (compiled view for AI / static tooling).
+ * Runtime source of truth: @wise-kit/ui/styles.css
  * Do not hand-edit hex values in business code — use --rd-* variables.
  */
 :root {

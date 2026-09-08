@@ -11,14 +11,14 @@ description: 芯片用于展示标签化信息，可带图标、图片与移除�
 ## 引入
 
 ```ts
-import { RdChip } from '@roost-design/ui'
+import { RdChip } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdChip } from '@roost-design/ui'
+import { RdChip } from '@wise-kit/ui'
 </script>
 
 <template>

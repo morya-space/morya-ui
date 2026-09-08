@@ -1,4 +1,4 @@
-# Roost Design 组件清单（AI 选型索引）
+# Wise Kit 组件清单（AI 选型索引）
 
 > 完整 API 以文档站 `/components` 或 MCP 为准。下表用于**场景选型**，不是 prop 手册。
 

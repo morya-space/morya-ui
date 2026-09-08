@@ -11,14 +11,14 @@ description: 日历弹层选择日期。单日或日期范围，值优先为 ISO
 ## 引入
 
 ```ts
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
@@ -33,7 +33,7 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref('2024-06-15')
@@ -56,7 +56,7 @@ const c = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
@@ -76,7 +76,7 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
@@ -91,7 +91,7 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -103,7 +103,7 @@ import { RdDatePicker } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -120,7 +120,7 @@ const value = ref<string | null>(null)
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -137,7 +137,7 @@ const value = ref<string | null>(null)
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
@@ -152,7 +152,7 @@ const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 
 ```vue preview
 <script setup lang="ts">
-import { RdDatePicker } from '@roost-design/ui'
+import { RdDatePicker } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)

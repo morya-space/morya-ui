@@ -11,14 +11,14 @@ description: 星级评分控件，支持清除与只读。
 ## 引入
 
 ```ts
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
@@ -33,7 +33,7 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -47,7 +47,7 @@ import { RdRating } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)

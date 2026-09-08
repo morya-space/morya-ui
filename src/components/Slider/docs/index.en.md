@@ -11,14 +11,14 @@ Drag to pick a number. In `range` mode there are two thumbs and the bound value 
 ## Import
 
 ```ts
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(40)
@@ -38,7 +38,7 @@ const value = ref(40)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref([20, 70])
@@ -60,7 +60,7 @@ const value = ref([20, 70])
 
 ```vue preview
 <script setup lang="ts">
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(50)

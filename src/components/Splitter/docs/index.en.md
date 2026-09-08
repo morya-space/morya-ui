@@ -11,14 +11,14 @@ Split content into two panes with a draggable gutter. Covers common Naive `n-spl
 ## Import
 
 ```ts
-import { RdSplitter } from '@roost-design/ui'
+import { RdSplitter } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@roost-design/ui'
+import { RdSplitter } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -43,7 +43,7 @@ import { RdSplitter } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@roost-design/ui'
+import { RdSplitter } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -70,7 +70,7 @@ import { RdSplitter } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@roost-design/ui'
+import { RdSplitter } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const percent = ref(40)
@@ -119,7 +119,7 @@ const ratio = ref(0.3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitter } from '@roost-design/ui'
+import { RdSplitter } from '@wise-kit/ui'
 </script>
 
 <template>

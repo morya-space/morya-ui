@@ -11,14 +11,14 @@ description: 芯片式标签输入，回车添加、可移除。
 ## 引入
 
 ```ts
-import { RdInputTags } from '@roost-design/ui'
+import { RdInputTags } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputTags } from '@roost-design/ui'
+import { RdInputTags } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue', 'design'])
@@ -35,7 +35,7 @@ const tags = ref(['vue', 'design'])
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputTags } from '@roost-design/ui'
+import { RdInputTags } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue'])

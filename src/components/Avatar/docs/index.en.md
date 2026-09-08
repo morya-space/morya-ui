@@ -11,14 +11,14 @@ Avatar displays a user or entity identity. Display priority: `image` > `icon` > 
 ## Import
 
 ```ts
-import { RdAvatar } from '@roost-design/ui'
+import { RdAvatar } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdAvatar } from '@roost-design/ui'
+import { RdAvatar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdAvatar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdAvatar, RdAvatarGroup } from '@roost-design/ui'
+import { RdAvatar, RdAvatarGroup } from '@wise-kit/ui'
 </script>
 
 <template>

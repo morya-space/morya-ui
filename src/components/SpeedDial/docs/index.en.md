@@ -11,14 +11,14 @@ A main button that expands a set of directional shortcut actions.
 ## Import
 
 ```ts
-import { RdSpeedDial } from '@roost-design/ui'
+import { RdSpeedDial } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpeedDial } from '@roost-design/ui'
+import { RdSpeedDial } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

@@ -11,14 +11,14 @@ description: 水平菜单栏，支持一级下拉。
 ## 引入
 
 ```ts
-import { RdMenubar } from '@roost-design/ui'
+import { RdMenubar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenubar } from '@roost-design/ui'
+import { RdMenubar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref<string | null>(null)

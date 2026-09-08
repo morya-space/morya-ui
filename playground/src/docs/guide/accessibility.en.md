@@ -1,12 +1,12 @@
 ---
 title: Accessibility
 order: 8
-description: Accessibility conventions when using Roost Design components.
+description: Accessibility conventions when using Wise Kit components.
 ---
 
 # Accessibility
 
-Roost Design favors **semantic HTML first, ARIA when necessary**. Components handle labels, keyboard paths, and overlay focus where possible; apps still must supply meaningful copy and structure.
+Wise Kit favors **semantic HTML first, ARIA when necessary**. Components handle labels, keyboard paths, and overlay focus where possible; apps still must supply meaningful copy and structure.
 
 ## Quick checklist
 
@@ -79,7 +79,7 @@ Document keyboard tables in component `docs/` when adding new widgets.
 ## Motion and contrast
 
 ```ts
-import { useMotion } from '@roost-design/ui'
+import { useMotion } from '@wise-kit/ui'
 
 const { setMotion } = useMotion()
 setMotion('reduced') // or 'none'

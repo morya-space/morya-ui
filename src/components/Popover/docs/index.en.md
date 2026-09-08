@@ -11,14 +11,14 @@ Overlay positioned relative to a trigger. Use it for filters, quick actions, or 
 ## Import
 
 ```ts
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -40,7 +40,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -66,7 +66,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdPopover } from '@roost-design/ui'
+import { RdButton, RdPopover } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

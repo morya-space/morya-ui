@@ -11,14 +11,14 @@ Edit hex colors with the native color picker and a text field.
 ## Import
 
 ```ts
-import { RdInputColor } from '@roost-design/ui'
+import { RdInputColor } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@roost-design/ui'
+import { RdInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
@@ -35,7 +35,7 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@roost-design/ui'
+import { RdInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')

@@ -11,14 +11,14 @@ Listens to window or parent scroll and jumps back to the top.
 ## Import
 
 ```ts
-import { RdScrollTop } from '@roost-design/ui'
+import { RdScrollTop } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollTop } from '@roost-design/ui'
+import { RdScrollTop } from '@wise-kit/ui'
 </script>
 
 <template>

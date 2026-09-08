@@ -6,16 +6,16 @@ description: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客�
 
 # MCP
 
-[`@roost-design/ui-mcp`](https://www.npmjs.com/package/@roost-design/ui-mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
+[`@wise-kit/ui-mcp`](https://www.npmjs.com/package/@wise-kit/ui-mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
 
 日常使用组件库 **不需要** 安装或配置 MCP。应用里仍然只依赖：
 
 ```bash
-pnpm add @roost-design/ui
+pnpm add @wise-kit/ui
 ```
 
 ```ts
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 ```
 
 ## 接入方式
@@ -23,7 +23,7 @@ import '@roost-design/ui/styles.css'
 MCP 客户端通过 stdio 启动本包即可：
 
 ```bash
-npx -y @roost-design/ui-mcp
+npx -y @wise-kit/ui-mcp
 ```
 
 通用写法：
@@ -31,7 +31,7 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@roost-design/ui-mcp"]
+  "args": ["-y", "@wise-kit/ui-mcp"]
 }
 ```
 
@@ -46,9 +46,9 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -59,9 +59,9 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -72,9 +72,9 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -85,9 +85,9 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -98,9 +98,9 @@ npx -y @roost-design/ui-mcp
 ```json
 {
   "context_servers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -112,9 +112,9 @@ npx -y @roost-design/ui-mcp
 {
   "mcpServers": [
     {
-      "name": "roost-design-ui",
+      "name": "wise-kit-ui",
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   ]
 }
@@ -174,7 +174,7 @@ npx -y @roost-design/ui-mcp
 
 接入后，可直接让助手调用本服务，例如：
 
-> 用 roost-design-ui 的 MCP 查一下 Dialog 的 props，并给一个带确认 / 取消按钮的示例。
+> 用 wise-kit-ui 的 MCP 查一下 Dialog 的 props，并给一个带确认 / 取消按钮的示例。
 
 > 搜索和「日期」相关的组件，选一个适合表单的，按文档写出最小用法。
 
@@ -184,7 +184,7 @@ npx -y @roost-design/ui-mcp
 
 ```vue
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -194,9 +194,9 @@ import { RdButton } from '@roost-design/ui'
 
 ## 与文档站的关系
 
-目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@roost-design/ui-mcp`，客户端通过 `npx -y` 即可拿到新版本。
+目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@wise-kit/ui-mcp`，客户端通过 `npx -y` 即可拿到新版本。
 
-更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/roost-design/roost-design-ui/tree/main/packages/ui-mcp)。
+更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/wise-kit/wise-kit-ui/tree/main/packages/ui-mcp)。
 
 ## 下一步
 

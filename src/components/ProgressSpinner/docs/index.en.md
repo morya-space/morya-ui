@@ -11,14 +11,14 @@ SVG circular loading indicator.
 ## Import
 
 ```ts
-import { RdProgressSpinner } from '@roost-design/ui'
+import { RdProgressSpinner } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressSpinner } from '@roost-design/ui'
+import { RdProgressSpinner } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -35,7 +35,7 @@ When wrapping content, `show` toggles the overlay and `delay` waits before it ap
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdProgressSpinner } from '@roost-design/ui'
+import { RdButton, RdProgressSpinner } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(true)

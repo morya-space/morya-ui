@@ -88,7 +88,7 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
 
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { RdButton, RdCard, RdConfigProvider, RdInput, RdTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from '@roost-design/ui'
+import { RdButton, RdCard, RdConfigProvider, RdInput, RdTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from '@wise-kit/ui'
 
 const loading = ref(false)
 const error = ref('')
@@ -936,9 +936,9 @@ export function createToolHandlers(catalog = loadCatalog()) {
     return textResult({
       library: catalog.library,
       environment: args.environment || 'vue3-vite',
-      install: 'pnpm add @roost-design/ui',
+      install: 'pnpm add @wise-kit/ui',
       peer: 'vue@^3.3.0',
-      styles: "import '@roost-design/ui/styles.css'",
+      styles: "import '@wise-kit/ui/styles.css'",
       guides: {
         introduction: pickMarkdown(intro),
         quickStart: pickMarkdown(quickStart),
@@ -985,11 +985,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
       const issues: Array<{ type: string; message: string }> = []
 
-      if (code && !code.includes('@roost-design/ui') && /import\s+/.test(code)) {
-        if (!/from\s+['"]@roost-design\/ui['"]/.test(code)) {
+      if (code && !code.includes('@wise-kit/ui') && /import\s+/.test(code)) {
+        if (!/from\s+['"]@wise-kit\/ui['"]/.test(code)) {
           issues.push({
             type: 'import',
-            message: `Import should come from '@roost-design/ui' (expected ${component.exportName}).`,
+            message: `Import should come from '@wise-kit/ui' (expected ${component.exportName}).`,
           })
         }
       }

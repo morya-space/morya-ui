@@ -11,14 +11,14 @@ Slides content in a window of `numVisible` items.
 ## Import
 
 ```ts
-import { RdCarousel } from '@roost-design/ui'
+import { RdCarousel } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdCarousel } from '@roost-design/ui'
+import { RdCarousel } from '@wise-kit/ui'
 
 const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 </script>
@@ -40,7 +40,7 @@ const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 
 ```vue preview
 <script setup lang="ts">
-import { RdCarousel } from '@roost-design/ui'
+import { RdCarousel } from '@wise-kit/ui'
 
 const value = ['A', 'B', 'C']
 </script>

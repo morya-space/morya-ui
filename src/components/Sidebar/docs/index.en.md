@@ -11,14 +11,14 @@ Application navigation sidebar (not a Drawer overlay). Exported as `RdSidebar`.
 ## Import
 
 ```ts
-import { RdSidebar } from '@roost-design/ui'
+import { RdSidebar } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSidebar } from '@roost-design/ui'
+import { RdButton, RdSidebar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)

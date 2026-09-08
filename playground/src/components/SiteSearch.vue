@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdCommandMenu, RdIcon } from '@roost-design/ui'
+import { RdCommandMenu, RdIcon } from '@wise-kit/ui'
 import { onMounted, onUnmounted } from 'vue'
 import { useSiteSearchPalette } from '../composables/useSiteSearch'
 import { useDocsI18n } from '../i18n'

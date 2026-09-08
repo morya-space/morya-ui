@@ -11,14 +11,14 @@ description: 轮播展示一组内容项。
 ## 引入
 
 ```ts
-import { RdCarousel } from '@roost-design/ui'
+import { RdCarousel } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdCarousel } from '@roost-design/ui'
+import { RdCarousel } from '@wise-kit/ui'
 
 const value = ['春', '夏', '秋', '冬']
 </script>
@@ -40,7 +40,7 @@ const value = ['春', '夏', '秋', '冬']
 
 ```vue preview
 <script setup lang="ts">
-import { RdCarousel } from '@roost-design/ui'
+import { RdCarousel } from '@wise-kit/ui'
 
 const value = ['A', 'B', 'C']
 </script>

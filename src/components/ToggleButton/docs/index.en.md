@@ -11,14 +11,14 @@ A boolean toggle button with configurable on/off labels and icons.
 ## Import
 
 ```ts
-import { RdToggleButton } from '@roost-design/ui'
+import { RdToggleButton } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdToggleButton } from '@roost-design/ui'
+import { RdToggleButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const on = ref(false)
@@ -33,7 +33,7 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdToggleButton } from '@roost-design/ui'
+import { RdToggleButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(false)

@@ -6,19 +6,19 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 
 # Icon
 
-`RdIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `@roost-design/ui`。
+`RdIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `@wise-kit/ui`。
 
 ## 引入
 
 ```ts
-import { iconNames, RdIcon } from '@roost-design/ui'
+import { iconNames, RdIcon } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon } from '@roost-design/ui'
+import { RdIcon } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -37,8 +37,8 @@ import { RdIcon } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import type {ToastMessage} from '@roost-design/ui';
-import { iconNames,  RdIcon, RdInput, RdToast } from '@roost-design/ui'
+import type {ToastMessage} from '@wise-kit/ui';
+import { iconNames,  RdIcon, RdInput, RdToast } from '@wise-kit/ui'
 import { computed, ref } from 'vue'
 
 const query = ref('')
@@ -164,7 +164,7 @@ function onToastClose(message: ToastMessage) {
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdIcon, RdIconField, RdInput } from '@roost-design/ui'
+import { RdButton, RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
 import { User } from 'lucide-vue-next'
 </script>
 

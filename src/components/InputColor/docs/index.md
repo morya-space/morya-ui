@@ -11,14 +11,14 @@ description: 颜色选择，支持色板与十六进制文本。
 ## 引入
 
 ```ts
-import { RdInputColor } from '@roost-design/ui'
+import { RdInputColor } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@roost-design/ui'
+import { RdInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')
@@ -35,7 +35,7 @@ const color = ref('#2563eb')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputColor } from '@roost-design/ui'
+import { RdInputColor } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const color = ref('#2563eb')

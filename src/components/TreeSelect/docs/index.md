@@ -11,14 +11,14 @@ description: 下拉树选择。支持单选/多选、勾选级联、过滤、清
 ## 引入
 
 ```ts
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -43,7 +43,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string[]>([])
@@ -78,7 +78,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeSelect } from '@roost-design/ui'
+import { RdTreeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(null)

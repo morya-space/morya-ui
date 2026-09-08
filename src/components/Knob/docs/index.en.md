@@ -11,14 +11,14 @@ Circular dial control with drag and keyboard adjustment.
 ## Import
 
 ```ts
-import { RdKnob } from '@roost-design/ui'
+import { RdKnob } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdKnob } from '@roost-design/ui'
+import { RdKnob } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(60)

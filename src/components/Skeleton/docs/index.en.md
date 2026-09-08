@@ -11,7 +11,7 @@ Loading placeholder skeleton for visual feedback while content is not ready.
 ## Import
 
 ```ts
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Rectangle by default, `100%` wide, with a `wave` animation.
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -55,7 +55,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -72,7 +72,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>

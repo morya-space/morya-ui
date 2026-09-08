@@ -11,14 +11,14 @@ description: 锚定在目标旁的确认气泡。
 ## 引入
 
 ```ts
-import { RdConfirmPopup } from '@roost-design/ui'
+import { RdConfirmPopup } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@roost-design/ui'
+import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -42,7 +42,7 @@ function ask(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@roost-design/ui'
+import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

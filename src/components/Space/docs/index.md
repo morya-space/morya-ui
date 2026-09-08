@@ -11,14 +11,14 @@ description: 在子元素之间自动加入一致间距的布局容器。
 ## 引入
 
 ```ts
-import { RdSpace } from '@roost-design/ui'
+import { RdSpace } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@roost-design/ui'
+import { RdButton, RdSpace } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { RdButton, RdSpace } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@roost-design/ui'
+import { RdSpace, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -50,7 +50,7 @@ import { RdSpace, RdTag } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@roost-design/ui'
+import { RdButton, RdSpace } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -75,7 +75,7 @@ import { RdButton, RdSpace } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@roost-design/ui'
+import { RdSpace, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>

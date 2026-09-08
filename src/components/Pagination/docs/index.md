@@ -13,14 +13,14 @@ description: 分页器，v-model 为页码；实例暴露 first（零基首条�
 ## 引入
 
 ```ts
-import { RdPagination } from '@roost-design/ui'
+import { RdPagination } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdPagination } from '@roost-design/ui'
+import { RdPagination } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
@@ -40,7 +40,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdPagination } from '@roost-design/ui'
+import { RdPagination } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
