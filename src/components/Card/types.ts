@@ -1,6 +1,6 @@
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
-export type CardSize = RdSizeInput
+export type CardSize = WkSizeInput
 
 export interface CardProps {
   title?: string

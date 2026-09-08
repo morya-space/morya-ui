@@ -11,22 +11,22 @@ description: 可访问的表单标签。
 ## 引入
 
 ```ts
-import { RdLabel } from '@wise-kit/ui'
+import { WkLabel } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdLabel } from '@wise-kit/ui'
+import { WkInput, WkLabel } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <RdLabel html-for="demo-email">
+    <WkLabel html-for="demo-email">
       邮箱
-    </RdLabel>
-    <RdInput id="demo-email" placeholder="you@example.com" />
+    </WkLabel>
+    <WkInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>
 ```

@@ -1,4 +1,4 @@
-import type { RdAppendTo } from '../../shared/overlay'
+import type { WkAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export interface ContextMenuItem extends MenuNodeBase {
@@ -17,7 +17,7 @@ export interface ContextMenuProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: RdAppendTo
+  appendTo?: WkAppendTo
 }
 
 export interface ContextMenuEmits {

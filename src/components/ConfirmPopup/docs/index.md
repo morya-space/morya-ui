@@ -11,14 +11,14 @@ description: 锚定在目标旁的确认气泡。
 ## 引入
 
 ```ts
-import { RdConfirmPopup } from '@wise-kit/ui'
+import { WkConfirmPopup } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
+import { WkButton, WkConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,8 +31,8 @@ function ask(event: MouseEvent) {
 </script>
 
 <template>
-  <RdButton label="删除" severity="danger" @click="ask" />
-  <RdConfirmPopup v-model="open" :target="target" message="确认删除？" icon="info" placement="top" />
+  <WkButton label="删除" severity="danger" @click="ask" />
+  <WkConfirmPopup v-model="open" :target="target" message="确认删除？" icon="info" placement="top" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ function ask(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
+import { WkButton, WkConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -59,8 +59,8 @@ async function beforeAccept() {
 </script>
 
 <template>
-  <RdButton label="带拦截" @click="ask" />
-  <RdConfirmPopup v-model="open" :target="target" message="继续？" :before-accept="beforeAccept" />
+  <WkButton label="带拦截" @click="ask" />
+  <WkConfirmPopup v-model="open" :target="target" message="继续？" :before-accept="beforeAccept" />
 </template>
 ```
 

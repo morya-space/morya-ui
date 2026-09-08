@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ChipProps } from './types'
 import { computed } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import { normalizeSeverity, resolveIconSize, resolveSizeClass } from '../../shared/types'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ChipProps>(), {
   removable: false,
@@ -11,19 +11,19 @@ const props = withDefaults(defineProps<ChipProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'remove', value: MouseEvent): void }>()
-const locale = useRdLocale()
+const locale = useWkLocale()
 const severityTone = computed(() => (props.severity ? normalizeSeverity(props.severity) : undefined))
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const iconSize = computed(() => resolveIconSize(props.size))
 
 const chipClass = computed(() => [
-  'rd-chip',
+  'wk-chip',
   {
-    'rd-chip--disabled': props.disabled,
-    'rd-chip--removable': props.removable,
-    [`rd-chip--${severityTone.value}`]: Boolean(severityTone.value),
-    'rd-chip--small': sizeTone.value === 'small',
-    'rd-chip--large': sizeTone.value === 'large',
+    'wk-chip--disabled': props.disabled,
+    'wk-chip--removable': props.removable,
+    [`wk-chip--${severityTone.value}`]: Boolean(severityTone.value),
+    'wk-chip--small': sizeTone.value === 'small',
+    'wk-chip--large': sizeTone.value === 'large',
   },
 ])
 
@@ -36,21 +36,21 @@ function handleRemove(event: MouseEvent) {
 <template>
   <span :class="chipClass" :aria-disabled="disabled || undefined">
     <slot name="icon">
-      <img v-if="image" class="rd-chip__image" :src="image" alt="">
-      <RdIcon v-else-if="icon" class="rd-chip__icon" :name="icon" :size="iconSize" />
+      <img v-if="image" class="wk-chip__image" :src="image" alt="">
+      <WkIcon v-else-if="icon" class="wk-chip__icon" :name="icon" :size="iconSize" />
     </slot>
     <slot>
-      <span v-if="label" class="rd-chip__label">{{ label }}</span>
+      <span v-if="label" class="wk-chip__label">{{ label }}</span>
     </slot>
     <button
       v-if="removable"
       type="button"
-      class="rd-chip__remove"
+      class="wk-chip__remove"
       :disabled="disabled"
       :aria-label="locale.remove"
       @click="handleRemove"
     >
-      <RdIcon name="close" :size="iconSize" />
+      <WkIcon name="close" :size="iconSize" />
     </button>
   </span>
 </template>

@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import RdLayoutSider from './LayoutSider.vue'
+import WkLayoutSider from './LayoutSider.vue'
 
 describe('LayoutSider', () => {
   it('toggles collapsed via trigger in transform mode', async () => {
-    const wrapper = mount(RdLayoutSider, {
+    const wrapper = mount(WkLayoutSider, {
       props: {
         showTrigger: 'arrow-circle',
         width: 220,
@@ -17,17 +17,17 @@ describe('LayoutSider', () => {
       },
       slots: { default: 'Nav' },
     })
-    await wrapper.get('.rd-layout-sider__trigger').trigger('click')
+    await wrapper.get('.wk-layout-sider__trigger').trigger('click')
     await nextTick()
-    expect(wrapper.classes()).toContain('rd-layout-sider--collapsed')
+    expect(wrapper.classes()).toContain('wk-layout-sider--collapsed')
     expect(wrapper.element.style.maxWidth).toBe('52px')
   })
 
   it('applies inverted and bordered modifiers', () => {
-    const wrapper = mount(RdLayoutSider, {
+    const wrapper = mount(WkLayoutSider, {
       props: { inverted: true, bordered: true },
     })
-    expect(wrapper.classes()).toContain('rd-layout-sider--inverted')
-    expect(wrapper.classes()).toContain('rd-layout-sider--bordered')
+    expect(wrapper.classes()).toContain('wk-layout-sider--inverted')
+    expect(wrapper.classes()).toContain('wk-layout-sider--bordered')
   })
 })

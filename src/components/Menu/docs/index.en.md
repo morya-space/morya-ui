@@ -11,14 +11,14 @@ Navigation menu rendered from a `model`. Typical uses: admin sidebar, top naviga
 - Nested `items` with controlled `selectedKey`
 - Auto-expand ancestor path when selection changes; optional `accordion`
 - `collapsed` icon rail with right-side flyout submenus (Popover)
-- Non-popup menus default to `embedded` (borderless, full-width in `RdLayoutSider`)
+- Non-popup menus default to `embedded` (borderless, full-width in `WkLayoutSider`)
 
 > One-level hover submenus: [TieredMenu](/components/TieredMenu). Top bar: [Menubar](/components/Menubar). Action lists: [Dropdown](/components/Dropdown).
 
 ## Import
 
 ```ts
-import { RdMenu, type MenuItem } from '@wise-kit/ui'
+import { WkMenu, type MenuItem } from '@wise-kit/ui'
 ```
 
 ## Selection
@@ -27,7 +27,7 @@ Give leaf items stable `key` values; sync with routing via `v-model:selected-key
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@wise-kit/ui'
+import { WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -42,14 +42,14 @@ const model = [
   <div
     style="
       width: 15rem;
-      padding: var(--rd-space-3);
-      background: var(--rd-color-surface);
-      border: 1px solid var(--rd-color-border);
-      border-radius: var(--rd-radius-lg);
-      box-shadow: var(--rd-shadow-sm);
+      padding: var(--wk-space-3);
+      background: var(--wk-color-surface);
+      border: 1px solid var(--wk-color-border);
+      border-radius: var(--wk-radius-lg);
+      box-shadow: var(--wk-shadow-sm);
     "
   >
-    <RdMenu
+    <WkMenu
       v-model:selected-key="selectedKey"
       :model="model"
       embedded
@@ -67,7 +67,7 @@ Click a group to expand/collapse. When a child is selected, the parent shows `ch
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@wise-kit/ui'
+import { WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('reports')
@@ -89,14 +89,14 @@ const model = [
   <div
     style="
       width: 16rem;
-      padding: var(--rd-space-3);
-      background: var(--rd-color-surface);
-      border: 1px solid var(--rd-color-border);
-      border-radius: var(--rd-radius-lg);
-      box-shadow: var(--rd-shadow-sm);
+      padding: var(--wk-space-3);
+      background: var(--wk-color-surface);
+      border: 1px solid var(--wk-color-border);
+      border-radius: var(--wk-radius-lg);
+      box-shadow: var(--wk-shadow-sm);
     "
   >
-    <RdMenu v-model:selected-key="selectedKey" :model="model" embedded />
+    <WkMenu v-model:selected-key="selectedKey" :model="model" embedded />
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@wise-kit/ui'
+import { WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('a1')
@@ -121,25 +121,25 @@ const model = [
   <div
     style="
       width: 14rem;
-      padding: var(--rd-space-3);
-      background: var(--rd-color-surface);
-      border: 1px solid var(--rd-color-border);
-      border-radius: var(--rd-radius-lg);
-      box-shadow: var(--rd-shadow-sm);
+      padding: var(--wk-space-3);
+      background: var(--wk-color-surface);
+      border: 1px solid var(--wk-color-border);
+      border-radius: var(--wk-radius-lg);
+      box-shadow: var(--wk-shadow-sm);
     "
   >
-    <RdMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
+    <WkMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
   </div>
 </template>
 ```
 
 ## Collapsed & flyout
 
-`collapsed` hides labels and keeps icons. Hover/focus on a group opens a right flyout (`.rd-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
+`collapsed` hides labels and keeps icons. Hover/focus on a group opens a right flyout (`.wk-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@wise-kit/ui'
+import { WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -158,50 +158,50 @@ const model = [
 </script>
 
 <template>
-  <div style="display: flex; gap: var(--rd-space-4); align-items: stretch">
+  <div style="display: flex; gap: var(--wk-space-4); align-items: stretch">
     <div
       style="
         flex: 1;
         min-width: 0;
-        padding: var(--rd-space-3);
-        background: var(--rd-color-surface);
-        border: 1px solid var(--rd-color-border);
-        border-radius: var(--rd-radius-lg);
-        box-shadow: var(--rd-shadow-sm);
+        padding: var(--wk-space-3);
+        background: var(--wk-color-surface);
+        border: 1px solid var(--wk-color-border);
+        border-radius: var(--wk-radius-lg);
+        box-shadow: var(--wk-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--rd-space-3);
-          font-size: var(--rd-font-size-xs);
-          color: var(--rd-color-text-muted);
+          margin: 0 0 var(--wk-space-3);
+          font-size: var(--wk-font-size-xs);
+          color: var(--wk-color-text-muted);
         "
       >
         Expanded
       </p>
-      <RdMenu v-model:selected-key="selectedKey" :model="model" embedded />
+      <WkMenu v-model:selected-key="selectedKey" :model="model" embedded />
     </div>
     <div
       style="
         width: 4.5rem;
-        padding: var(--rd-space-3) var(--rd-space-2);
-        background: var(--rd-color-surface);
-        border: 1px solid var(--rd-color-border);
-        border-radius: var(--rd-radius-lg);
-        box-shadow: var(--rd-shadow-sm);
+        padding: var(--wk-space-3) var(--wk-space-2);
+        background: var(--wk-color-surface);
+        border: 1px solid var(--wk-color-border);
+        border-radius: var(--wk-radius-lg);
+        box-shadow: var(--wk-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--rd-space-3);
-          font-size: var(--rd-font-size-xs);
-          color: var(--rd-color-text-muted);
+          margin: 0 0 var(--wk-space-3);
+          font-size: var(--wk-font-size-xs);
+          color: var(--wk-color-text-muted);
           text-align: center;
         "
       >
         Collapsed
       </p>
-      <RdMenu
+      <WkMenu
         v-model:selected-key="selectedKey"
         :model="model"
         collapsed
@@ -215,16 +215,16 @@ const model = [
 
 ## Embed in Layout sider
 
-Recommended shell: **global Header + inner `has-sider` Layout**. Bind menu `collapsed` to `RdLayoutSider`.
+Recommended shell: **global Header + inner `has-sider` Layout**. Bind menu `collapsed` to `WkLayoutSider`.
 
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
-  RdMenu,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
+  WkMenu,
 } from '@wise-kit/ui'
 import { ref } from 'vue'
 
@@ -245,49 +245,49 @@ const model = [
 </script>
 
 <template>
-  <RdLayout
+  <WkLayout
     style="
       height: 14rem;
-      border: 1px solid var(--rd-color-border);
-      border-radius: var(--rd-radius-lg);
-      box-shadow: var(--rd-shadow-sm);
+      border: 1px solid var(--wk-color-border);
+      border-radius: var(--wk-radius-lg);
+      box-shadow: var(--wk-shadow-sm);
       overflow: hidden;
     "
   >
-    <RdLayoutHeader
+    <WkLayoutHeader
       bordered
       style="
-        padding: 0 var(--rd-space-4);
+        padding: 0 var(--wk-space-4);
         display: flex;
         align-items: center;
-        min-height: var(--rd-layout-header-height);
+        min-height: var(--wk-layout-header-height);
       "
     >
-      <strong style="color: var(--rd-color-primary); font-size: var(--rd-font-size-md)">Wise Kit</strong>
-    </RdLayoutHeader>
-    <RdLayout has-sider>
-      <RdLayoutSider
+      <strong style="color: var(--wk-color-primary); font-size: var(--wk-font-size-md)">Wise Kit</strong>
+    </WkLayoutHeader>
+    <WkLayout has-sider>
+      <WkLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
         collapse-mode="width"
         :collapsed-width="64"
       >
-        <RdMenu
+        <WkMenu
           v-model:selected-key="selectedKey"
           :model="model"
           :collapsed="collapsed"
           :collapsed-width="64"
           accordion
         />
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding: var(--rd-space-4)">
-        <p style="margin: 0; color: var(--rd-color-text-muted); font-size: var(--rd-font-size-sm)">
-          Selected: <strong style="color: var(--rd-color-text)">{{ selectedKey }}</strong>
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding: var(--wk-space-4)">
+        <p style="margin: 0; color: var(--wk-color-text-muted); font-size: var(--wk-font-size-sm)">
+          Selected: <strong style="color: var(--wk-color-text)">{{ selectedKey }}</strong>
         </p>
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -297,7 +297,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@wise-kit/ui'
+import { WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -319,25 +319,25 @@ const model = [
 <template>
   <div
     style="
-      padding: 0 var(--rd-space-2);
-      background: var(--rd-color-surface);
-      border: 1px solid var(--rd-color-border);
-      border-radius: var(--rd-radius-lg);
-      box-shadow: var(--rd-shadow-sm);
+      padding: 0 var(--wk-space-2);
+      background: var(--wk-color-surface);
+      border: 1px solid var(--wk-color-border);
+      border-radius: var(--wk-radius-lg);
+      box-shadow: var(--wk-shadow-sm);
     "
   >
-    <RdMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
+    <WkMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
   </div>
 </template>
 ```
 
 ## Inverted (dark sider)
 
-Use `inverted` with `RdLayoutSider`'s `inverted` on dark backgrounds.
+Use `inverted` with `WkLayoutSider`'s `inverted` on dark backgrounds.
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutSider, RdMenu } from '@wise-kit/ui'
+import { WkLayout, WkLayoutSider, WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -348,19 +348,19 @@ const model = [
 </script>
 
 <template>
-  <RdLayout
+  <WkLayout
     has-sider
     style="
       height: 10rem;
-      border-radius: var(--rd-radius-lg);
-      box-shadow: var(--rd-shadow-sm);
+      border-radius: var(--wk-radius-lg);
+      box-shadow: var(--wk-shadow-sm);
       overflow: hidden;
     "
   >
-    <RdLayoutSider inverted bordered style="width: 12rem">
-      <RdMenu v-model:selected-key="selectedKey" :model="model" inverted />
-    </RdLayoutSider>
-  </RdLayout>
+    <WkLayoutSider inverted bordered style="width: 12rem">
+      <WkMenu v-model:selected-key="selectedKey" :model="model" inverted />
+    </WkLayoutSider>
+  </WkLayout>
 </template>
 ```
 
@@ -370,7 +370,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdMenu } from '@wise-kit/ui'
+import { WkButton, WkMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -382,9 +382,9 @@ const model = [
 </script>
 
 <template>
-  <RdMenu v-model="open" popup :model="model">
-    <RdButton label="More" @click="open = !open" />
-  </RdMenu>
+  <WkMenu v-model="open" popup :model="model">
+    <WkButton label="More" @click="open = !open" />
+  </WkMenu>
 </template>
 ```
 

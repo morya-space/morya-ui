@@ -13,14 +13,14 @@ Hierarchical node tree with expand, check, filter, and drag-and-drop.
 ## Import
 
 ```ts
-import { RdTree } from '@wise-kit/ui'
+import { WkTree } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@wise-kit/ui'
+import { WkTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selected = ref<string | null>(null)
@@ -38,7 +38,7 @@ const nodes = [
 </script>
 
 <template>
-  <RdTree v-model="selected" :value="nodes" default-expand-all />
+  <WkTree v-model="selected" :value="nodes" default-expand-all />
 </template>
 ```
 
@@ -46,7 +46,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@wise-kit/ui'
+import { WkTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref({})
@@ -63,7 +63,7 @@ const nodes = [
 </script>
 
 <template>
-  <RdTree
+  <WkTree
     v-model:checked-keys="checkedKeys"
     :value="nodes"
     show-checkbox
@@ -78,7 +78,7 @@ With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-
 
 ```vue preview
 <script setup lang="ts">
-import { RdTree } from '@wise-kit/ui'
+import { WkTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const checkedKeys = ref<Record<string, boolean>>({})
@@ -96,14 +96,14 @@ const nodes = [
 
 <template>
   <div style="display:grid;gap:0.5rem">
-    <RdTree
+    <WkTree
       v-model:checked-keys="checkedKeys"
       :value="nodes"
       show-checkbox
       check-strategy="child"
       default-expand-all
     />
-    <p style="margin:0;color:var(--rd-color-text-muted);font-size:0.875rem">
+    <p style="margin:0;color:var(--wk-color-text-muted);font-size:0.875rem">
       keys: {{ Object.keys(checkedKeys).join(', ') || '(none)' }}
     </p>
   </div>
@@ -114,7 +114,7 @@ const nodes = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdTree } from '@wise-kit/ui'
+import { WkInput, WkTree } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const query = ref('')
@@ -133,8 +133,8 @@ const nodes = [
 
 <template>
   <div style="display:grid;gap:0.75rem;max-width:20rem">
-    <RdInput v-model="query" placeholder="Filter nodes" clearable fluid />
-    <RdTree :value="nodes" :filter="query" default-expand-all />
+    <WkInput v-model="query" placeholder="Filter nodes" clearable fluid />
+    <WkTree :value="nodes" :filter="query" default-expand-all />
   </div>
 </template>
 ```

@@ -1,6 +1,6 @@
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
-export type TableSize = RdSizeInput
+export type TableSize = WkSizeInput
 export type TableSortType = 'asc' | 'desc'
 export type TableItem = Record<string, unknown>
 export type TableTextDirection = 'left' | 'center' | 'right'

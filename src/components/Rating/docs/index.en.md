@@ -11,21 +11,21 @@ Click stars to rate. A clear button is shown by default.
 ## Import
 
 ```ts
-import { RdRating } from '@wise-kit/ui'
+import { WkRating } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@wise-kit/ui'
+import { WkRating } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <RdRating v-model="value" />
+  <WkRating v-model="value" />
 </template>
 ```
 
@@ -33,11 +33,11 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@wise-kit/ui'
+import { WkRating } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdRating :model-value="4" readonly :cancel="false" />
+  <WkRating :model-value="4" readonly :cancel="false" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { RdRating } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@wise-kit/ui'
+import { WkRating } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)
 </script>
 
 <template>
-  <RdRating v-model="value" allow-half />
+  <WkRating v-model="value" allow-half />
 </template>
 ```
 

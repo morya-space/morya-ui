@@ -11,14 +11,14 @@ description: 点击展示区切换为可编辑内容。
 ## 引入
 
 ```ts
-import { RdInplace } from '@wise-kit/ui'
+import { WkInplace } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdInplace, RdInput } from '@wise-kit/ui'
+import { WkButton, WkInplace, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(false)
@@ -26,17 +26,17 @@ const text = ref('点击编辑')
 </script>
 
 <template>
-  <RdInplace v-model="active">
+  <WkInplace v-model="active">
     <template #display>
       {{ text }}
     </template>
     <template #content="{ close }">
       <div style="display:flex;gap:8px">
-        <RdInput v-model="text" />
-        <RdButton label="完成" size="small" @click="close" />
+        <WkInput v-model="text" />
+        <WkButton label="完成" size="small" @click="close" />
       </div>
     </template>
-  </RdInplace>
+  </WkInplace>
 </template>
 ```
 

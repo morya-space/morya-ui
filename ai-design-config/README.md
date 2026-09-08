@@ -7,7 +7,7 @@
 | 路径 | 用途 |
 | --- | --- |
 | `DESIGN.md` | AI 第一信源：设计原则、布局、令牌、禁止项 |
-| `design-tokens/` | 机器可读 token + CSS 变量（与组件库 `--rd-*` 对齐） |
+| `design-tokens/` | 机器可读 token + CSS 变量（与组件库 `--wk-*` 对齐） |
 | `docs/components.md` | 组件清单与场景选型（替代零散 Skills） |
 | `docs/golden-pages/` | 黄金样例页面（列表 / 表单 / 仪表盘） |
 | `src/examples/` | 与 golden-pages 对应的可运行参考（供 `@` 引用） |

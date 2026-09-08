@@ -1,80 +1,80 @@
 /* —— Form: Rating —— */
-.rd-rating-field {
+.wk-rating-field {
     display: grid;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
 }
 
-.rd-rating-field__label {
-    color: var(--rd-color-text);
-    font-size: var(--rd-font-size-md);
+.wk-rating-field__label {
+    color: var(--wk-color-text);
+    font-size: var(--wk-font-size-md);
     font-weight: 600;
 }
 
-.rd-rating-field__help {
-    color: var(--rd-color-text-muted);
-    font-size: var(--rd-font-size-xs);
+.wk-rating-field__help {
+    color: var(--wk-color-text-muted);
+    font-size: var(--wk-font-size-xs);
 }
 
-.rd-rating-field__help--invalid {
-    color: var(--rd-color-danger);
+.wk-rating-field__help--invalid {
+    color: var(--wk-color-danger);
 }
 
-.rd-rating {
+.wk-rating {
     align-items: center;
     display: inline-flex;
-    gap: var(--rd-space-1);
+    gap: var(--wk-space-1);
 }
 
-.rd-rating__star,
-.rd-rating__cancel {
+.wk-rating__star,
+.wk-rating__cancel {
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     font: inherit;
-    font-size: var(--rd-rating-star-size-medium);
+    font-size: var(--wk-rating-star-size-medium);
     line-height: 1;
-    padding: var(--rd-rating-star-padding);
+    padding: var(--wk-rating-star-padding);
 }
 
-.rd-rating__star--on {
-    color: var(--rd-color-warn);
+.wk-rating__star--on {
+    color: var(--wk-color-warn);
 }
 
-.rd-rating__star:hover:not(:disabled),
-.rd-rating__cancel:hover:not(:disabled) {
-    color: var(--rd-color-primary);
+.wk-rating__star:hover:not(:disabled),
+.wk-rating__cancel:hover:not(:disabled) {
+    color: var(--wk-color-primary);
 }
 
-.rd-rating:focus-visible,
-.rd-rating__star:focus-visible,
-.rd-rating__cancel:focus-visible {
-    border-radius: var(--rd-radius-sm);
-    box-shadow: var(--rd-focus-shadow);
+.wk-rating:focus-visible,
+.wk-rating__star:focus-visible,
+.wk-rating__cancel:focus-visible {
+    border-radius: var(--wk-radius-sm);
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-rating--disabled,
-.rd-rating--readonly {
+.wk-rating--disabled,
+.wk-rating--readonly {
     pointer-events: none;
 }
 
-.rd-rating--disabled {
-    opacity: var(--rd-opacity-disabled);
+.wk-rating--disabled {
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-rating__star {
+.wk-rating__star {
     position: relative;
 }
 
-.rd-rating__star-off,
-.rd-rating__star-on {
+.wk-rating__star-off,
+.wk-rating__star-on {
     display: block;
 }
 
-.rd-rating__star-on {
-    color: var(--rd-color-warn);
+.wk-rating__star-on {
+    color: var(--wk-color-warn);
     left: 0;
     overflow: hidden;
     position: absolute;
@@ -82,32 +82,32 @@
     width: 0;
 }
 
-.rd-rating__star-on .rd-icon svg {
+.wk-rating__star-on .wk-icon svg {
     fill: currentColor;
     stroke: none;
 }
 
-.rd-rating__star--on .rd-rating__star-on,
-.rd-rating__star--half .rd-rating__star-on {
+.wk-rating__star--on .wk-rating__star-on,
+.wk-rating__star--half .wk-rating__star-on {
     width: 100%;
 }
 
-.rd-rating__star--half .rd-rating__star-on {
+.wk-rating__star--half .wk-rating__star-on {
     width: 50%;
 }
 
-.rd-rating--small .rd-rating__star,
-.rd-rating--small .rd-rating__cancel {
-    font-size: var(--rd-rating-star-size-small);
+.wk-rating--small .wk-rating__star,
+.wk-rating--small .wk-rating__cancel {
+    font-size: var(--wk-rating-star-size-small);
 }
 
-.rd-rating--large .rd-rating__star,
-.rd-rating--large .rd-rating__cancel {
-    font-size: var(--rd-rating-star-size-large);
+.wk-rating--large .wk-rating__star,
+.wk-rating--large .wk-rating__cancel {
+    font-size: var(--wk-rating-star-size-large);
 }
 
-.rd-rating--invalid .rd-rating__star,
-.rd-rating--invalid .rd-rating__cancel {
-    outline: var(--rd-border-width) solid var(--rd-color-danger);
+.wk-rating--invalid .wk-rating__star,
+.wk-rating--invalid .wk-rating__cancel {
+    outline: var(--wk-border-width) solid var(--wk-color-danger);
     outline-offset: 2px;
 }

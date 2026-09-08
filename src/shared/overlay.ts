@@ -1,7 +1,7 @@
 /** Overlay mount target. Prefer `'body'`; use `'self'` to keep in place. */
-export type RdAppendTo = string | HTMLElement | 'self'
+export type WkAppendTo = string | HTMLElement | 'self'
 
-export interface RdOverlayMountProps {
+export interface WkOverlayMountProps {
   /**
    * Whether to Teleport the overlay. Defaults to `true`.
    * Prefer `appendTo` when you need a custom container.
@@ -12,13 +12,13 @@ export interface RdOverlayMountProps {
    * Pass `'self'` to render in place (same as `teleport: false`).
    * `false` is still accepted at runtime for compatibility.
    */
-  appendTo?: RdAppendTo | false
+  appendTo?: WkAppendTo | false
 }
 
 export function resolveOverlayTeleport(
-  options: RdOverlayMountProps = {},
+  options: WkOverlayMountProps = {},
   /** Global default from ConfigProvider / createWiseKit. */
-  globalAppendTo: RdAppendTo | false = 'body',
+  globalAppendTo: WkAppendTo | false = 'body',
 ): {
   disabled: boolean
   to: string | HTMLElement
@@ -32,8 +32,8 @@ export function resolveOverlayTeleport(
 }
 
 export function isOverlayTeleported(
-  options: RdOverlayMountProps = {},
-  globalAppendTo: RdAppendTo | false = 'body',
+  options: WkOverlayMountProps = {},
+  globalAppendTo: WkAppendTo | false = 'body',
 ): boolean {
   return !resolveOverlayTeleport(options, globalAppendTo).disabled
 }

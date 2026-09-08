@@ -25,4 +25,4 @@ export interface MenuContext {
   tabindexForKey: (key: string) => 0 | -1
 }
 
-export const RD_MENU_KEY: InjectionKey<MenuContext> = Symbol('rdMenu')
+export const WK_MENU_KEY: InjectionKey<MenuContext> = Symbol('rdMenu')

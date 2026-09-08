@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ResolvedGuideDoc } from '../docs/guide/loadGuideDocs'
-import { RdScrollbar } from '@wise-kit/ui'
+import { WkScrollbar } from '@wise-kit/ui'
 import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
@@ -74,7 +74,7 @@ watch([activeSlug, lang], async () => {
     </MobileSidebarShell>
 
     <main class="docs-main">
-      <RdScrollbar class="docs-scroll">
+      <WkScrollbar class="docs-scroll">
         <div class="docs-main__body">
           <p v-if="docLoading" class="docs-loading" aria-live="polite">
             …
@@ -91,14 +91,14 @@ watch([activeSlug, lang], async () => {
             </RouterLink>
           </section>
         </div>
-      </RdScrollbar>
+      </WkScrollbar>
     </main>
   </div>
 </template>
 
 <style>
 .docs-sidebar {
-  background: color-mix(in srgb, var(--rd-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--wk-color-surface) 62%, transparent);
   border-right: 1px solid var(--docs-edge);
   backdrop-filter: blur(12px);
   display: flex;
@@ -144,7 +144,7 @@ watch([activeSlug, lang], async () => {
 
 .docs-brand {
   align-items: center;
-  color: var(--rd-color-text);
+  color: var(--wk-color-text);
   display: inline-flex;
   font-family: var(--docs-display);
   font-size: 0.92rem;
@@ -175,25 +175,25 @@ watch([activeSlug, lang], async () => {
 .docs-nav__item {
   border: 1px solid transparent;
   border-radius: 0.7rem;
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
   font-size: 0.86rem;
   font-weight: 500;
   padding: 0.55rem 0.7rem;
   text-decoration: none;
   transition:
-    color var(--rd-motion-fast) var(--rd-motion-ease),
-    background var(--rd-motion-fast) var(--rd-motion-ease),
-    border-color var(--rd-motion-fast) var(--rd-motion-ease);
+    color var(--wk-motion-fast) var(--wk-motion-ease),
+    background var(--wk-motion-fast) var(--wk-motion-ease),
+    border-color var(--wk-motion-fast) var(--wk-motion-ease);
 }
 
 .docs-nav__item:hover,
 .docs-nav__item.is-active {
-  background: color-mix(in srgb, var(--rd-color-primary) 10%, transparent);
-  color: var(--rd-color-primary);
+  background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
+  color: var(--wk-color-primary);
 }
 
 .docs-nav__item.is-active {
-  border-color: color-mix(in srgb, var(--rd-color-primary) 28%, transparent);
+  border-color: color-mix(in srgb, var(--wk-color-primary) 28%, transparent);
   font-weight: 700;
 }
 
@@ -210,7 +210,7 @@ watch([activeSlug, lang], async () => {
 
 .docs-loading,
 .docs-missing {
-  color: var(--rd-color-text-muted);
+  color: var(--wk-color-text-muted);
 }
 
 @media (max-width: 700px) {

@@ -11,14 +11,14 @@ Searchable command palette for running actions from `model`. Fits global shortcu
 ## Import
 
 ```ts
-import { RdCommandMenu, type CommandMenuItem } from '@wise-kit/ui'
+import { WkCommandMenu, type CommandMenuItem } from '@wise-kit/ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdCommandMenu } from '@wise-kit/ui'
+import { WkButton, WkCommandMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -30,8 +30,8 @@ const model = [
 </script>
 
 <template>
-  <RdButton label="Open command menu" @click="visible = true" />
-  <RdCommandMenu v-model="visible" :model="model" placeholder="Search commands…" />
+  <WkButton label="Open command menu" @click="visible = true" />
+  <WkCommandMenu v-model="visible" :model="model" placeholder="Search commands…" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ const model = [
 | Field | Type | Description |
 | --- | --- | --- |
 | `label` | `string` | Display text; included in local filtering. |
-| `icon` | `string` | Optional leading character (not a RdIcon name). |
+| `icon` | `string` | Optional leading character (not a WkIcon name). |
 | `shortcut` | `string` | Optional shortcut hint. |
 | `command` | `() => void` | Runs on activate; closes the palette afterward. |
 | `disabled` | `boolean` | Disabled items cannot be activated. |

@@ -1,24 +1,24 @@
 /* —— Data: VirtualScroller —— */
-.rd-virtualscroller {
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-md);
+.wk-virtualscroller {
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-md);
     overflow: auto;
     position: relative;
     width: 100%;
 }
 
-.rd-virtualscroller__spacer {
+.wk-virtualscroller__spacer {
     position: relative;
     width: 100%;
 }
 
-.rd-virtualscroller__content {
+.wk-virtualscroller__content {
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
 }
 
-.rd-virtualscroller__item {
+.wk-virtualscroller__item {
     box-sizing: border-box;
 }

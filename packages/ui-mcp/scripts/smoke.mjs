@@ -9,7 +9,7 @@ const validation = JSON.parse(
   (
     await h.validateUsage({
       component: 'Button',
-      code: '<RdButton label="Hi" foo="1" />',
+      code: '<WkButton label="Hi" foo="1" />',
     })
   ).content[0].text,
 )

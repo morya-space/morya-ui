@@ -11,14 +11,14 @@ Lightweight confirmation overlay. Supports `target` or coordinate positioning.
 ## Import
 
 ```ts
-import { RdConfirmPopup } from '@wise-kit/ui'
+import { WkConfirmPopup } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
+import { WkButton, WkConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,8 +31,8 @@ function ask(event: MouseEvent) {
 </script>
 
 <template>
-  <RdButton label="Delete" severity="danger" @click="ask" />
-  <RdConfirmPopup v-model="open" :target="target" message="Delete this item?" icon="info" placement="top" />
+  <WkButton label="Delete" severity="danger" @click="ask" />
+  <WkConfirmPopup v-model="open" :target="target" message="Delete this item?" icon="info" placement="top" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ Returning `false` from `beforeAccept` keeps the popup open and skips the `accept
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
+import { WkButton, WkConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -59,8 +59,8 @@ async function beforeAccept() {
 </script>
 
 <template>
-  <RdButton label="With guard" @click="ask" />
-  <RdConfirmPopup v-model="open" :target="target" message="Continue?" :before-accept="beforeAccept" />
+  <WkButton label="With guard" @click="ask" />
+  <WkConfirmPopup v-model="open" :target="target" message="Continue?" :before-accept="beforeAccept" />
 </template>
 ```
 

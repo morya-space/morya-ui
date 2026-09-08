@@ -6,7 +6,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 
 # Table
 
-`RdTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。
+`WkTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。
 
 列宽规则：
 
@@ -17,7 +17,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 引入
 
 ```ts
-import { RdTable, RdTag } from '@wise-kit/ui'
+import { WkTable, WkTag } from '@wise-kit/ui'
 import type { TableColumnDefinition, TableItem } from '@wise-kit/ui'
 ```
 
@@ -25,7 +25,7 @@ import type { TableColumnDefinition, TableItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable, RdTag } from '@wise-kit/ui'
+import { WkTable, WkTag } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: '项目', minWidth: 140, sortable: true },
@@ -42,14 +42,14 @@ const rows = [
 </script>
 
 <template>
-  <RdTable :columns="columns" :rows="rows" striped bordered>
+  <WkTable :columns="columns" :rows="rows" striped bordered>
     <template #cell-status="{ value }">
-      <RdTag
+      <WkTag
         :value="String(value)"
         :severity="value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'"
       />
     </template>
-  </RdTable>
+  </WkTable>
 </template>
 ```
 
@@ -59,7 +59,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -74,7 +74,7 @@ const selection = ref<Record<string, unknown>[]>([])
 </script>
 
 <template>
-  <RdTable
+  <WkTable
     v-model:selection="selection"
     :columns="columns"
     :rows="rows"
@@ -91,7 +91,7 @@ const selection = ref<Record<string, unknown>[]>([])
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -110,7 +110,7 @@ const page = ref(1)
 </script>
 
 <template>
-  <RdTable
+  <WkTable
     v-model:page="page"
     :columns="columns"
     :rows="rows"
@@ -126,7 +126,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
@@ -142,7 +142,7 @@ const rows = [
 </script>
 
 <template>
-  <RdTable :columns="columns" :rows="rows" bordered :paginator="false" />
+  <WkTable :columns="columns" :rows="rows" bordered :paginator="false" />
 </template>
 ```
 
@@ -152,7 +152,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 
 const columns = [
   { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },
@@ -164,11 +164,11 @@ const rows = [
 </script>
 
 <template>
-  <RdTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
+  <WkTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
     <template #expansion="{ row }">
       {{ row.extra }}
     </template>
-  </RdTable>
+  </WkTable>
 </template>
 ```
 
@@ -176,7 +176,7 @@ const rows = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTable } from '@wise-kit/ui'
+import { WkButton, WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -188,8 +188,8 @@ const columns = [
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <RdButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
-    <RdTable
+    <WkButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
+    <WkTable
       :columns="columns"
       :rows="[]"
       :loading="loading"
@@ -207,7 +207,7 @@ const columns = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTable } from '@wise-kit/ui'
+import { WkTable } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const columns = [
@@ -223,7 +223,7 @@ const total = ref(42)
 </script>
 
 <template>
-  <RdTable
+  <WkTable
     v-model:server-options="serverOptions"
     :columns="columns"
     :rows="rows"

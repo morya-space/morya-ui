@@ -24,7 +24,7 @@ Wise Kit favors **semantic HTML first, ARIA when necessary**. Components handle 
 Input-family components (`Input`, `Textarea`, `Select`, …) share the same field pattern:
 
 ```vue
-<RdInput
+<WkInput
   id="email"
   v-model="email"
   label="Email"
@@ -42,11 +42,11 @@ Notes:
 
 ## Icons and buttons
 
-`RdIcon` covers **system icons** only. Without `label` the icon is decorative (`aria-hidden`); informative icons need `label`:
+`WkIcon` covers **system icons** only. Without `label` the icon is decorative (`aria-hidden`); informative icons need `label`:
 
 ```vue
-<RdIcon name="info" label="More information" />
-<RdButton icon="search" aria-label="Search" icon-only />
+<WkIcon name="info" label="More information" />
+<WkButton icon="search" aria-label="Search" icon-only />
 ```
 
 Prefer default slot / `label` text on buttons; avoid duplicating `aria-label` when visible text exists.
@@ -85,9 +85,9 @@ const { setMotion } = useMotion()
 setMotion('reduced') // or 'none'
 ```
 
-`reduced` / `none` shortens or disables `--rd-motion-*` transitions.
+`reduced` / `none` shortens or disables `--wk-motion-*` transitions.
 
-Consume colors through `--rd-color-*` tokens for light/dark parity. After theming, spot-check body text and error states on real content.
+Consume colors through `--wk-color-*` tokens for light/dark parity. After theming, spot-check body text and error states on real content.
 
 ## In-library improvements
 

@@ -1,99 +1,99 @@
-.rd-scrollbar {
-    --rd-scrollbar-track-size: 6px;
-    --rd-scrollbar-bg: color-mix(
+.wk-scrollbar {
+    --wk-scrollbar-track-size: 6px;
+    --wk-scrollbar-bg: color-mix(
         in srgb,
-        var(--rd-color-text) 28%,
+        var(--wk-color-text) 28%,
         transparent
     );
-    --rd-scrollbar-hover-bg: color-mix(
+    --wk-scrollbar-hover-bg: color-mix(
         in srgb,
-        var(--rd-color-text) 45%,
+        var(--wk-color-text) 45%,
         transparent
     );
-    --rd-scrollbar-opacity: 0.5;
-    --rd-scrollbar-hover-opacity: 0.8;
+    --wk-scrollbar-opacity: 0.5;
+    --wk-scrollbar-hover-opacity: 0.8;
     height: 100%;
     overflow: hidden;
     position: relative;
 }
 
-.rd-scrollbar__wrap {
+.wk-scrollbar__wrap {
     height: 100%;
     overflow: auto;
 }
 
-.rd-scrollbar__wrap--hidden-default {
+.wk-scrollbar__wrap--hidden-default {
     scrollbar-width: none;
 }
 
-.rd-scrollbar__wrap--hidden-default::-webkit-scrollbar {
+.wk-scrollbar__wrap--hidden-default::-webkit-scrollbar {
     display: none;
 }
 
-.rd-scrollbar__view {
+.wk-scrollbar__view {
     box-sizing: border-box;
 }
 
-.rd-scrollbar__bar {
-    border-radius: var(--rd-radius-sm);
+.wk-scrollbar__bar {
+    border-radius: var(--wk-radius-sm);
     bottom: 2px;
     position: absolute;
     right: 2px;
     z-index: 1;
 }
 
-.rd-scrollbar__bar--vertical {
+.wk-scrollbar__bar--vertical {
     top: 2px;
-    width: var(--rd-scrollbar-track-size);
+    width: var(--wk-scrollbar-track-size);
 }
 
-.rd-scrollbar__bar--vertical > .rd-scrollbar__thumb {
+.wk-scrollbar__bar--vertical > .wk-scrollbar__thumb {
     width: 100%;
 }
 
-.rd-scrollbar__bar--horizontal {
-    height: var(--rd-scrollbar-track-size);
+.wk-scrollbar__bar--horizontal {
+    height: var(--wk-scrollbar-track-size);
     left: 2px;
 }
 
-.rd-scrollbar__bar--horizontal > .rd-scrollbar__thumb {
+.wk-scrollbar__bar--horizontal > .wk-scrollbar__thumb {
     height: 100%;
 }
 
-.rd-scrollbar__bar:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-scrollbar__bar:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
     outline-offset: 1px;
 }
 
-.rd-scrollbar__thumb {
-    background-color: var(--rd-scrollbar-bg);
+.wk-scrollbar__thumb {
+    background-color: var(--wk-scrollbar-bg);
     border-radius: inherit;
     cursor: pointer;
     display: block;
     height: 0;
-    opacity: var(--rd-scrollbar-opacity);
+    opacity: var(--wk-scrollbar-opacity);
     position: relative;
     transition:
-        background-color var(--rd-motion-fast) var(--rd-motion-ease),
-        opacity var(--rd-motion-fast) var(--rd-motion-ease);
+        background-color var(--wk-motion-fast) var(--wk-motion-ease),
+        opacity var(--wk-motion-fast) var(--wk-motion-ease);
     width: 0;
 }
 
-.rd-scrollbar__thumb:hover {
-    background-color: var(--rd-scrollbar-hover-bg);
-    opacity: var(--rd-scrollbar-hover-opacity);
+.wk-scrollbar__thumb:hover {
+    background-color: var(--wk-scrollbar-hover-bg);
+    opacity: var(--wk-scrollbar-hover-opacity);
 }
 
-.rd-scrollbar-fade-enter-active {
-    transition: opacity var(--rd-motion-scrollbar-show) var(--rd-motion-ease);
+.wk-scrollbar-fade-enter-active {
+    transition: opacity var(--wk-motion-scrollbar-show) var(--wk-motion-ease);
 }
 
-.rd-scrollbar-fade-leave-active {
-    transition: opacity var(--rd-motion-scrollbar-hide) var(--rd-motion-ease);
+.wk-scrollbar-fade-leave-active {
+    transition: opacity var(--wk-motion-scrollbar-hide) var(--wk-motion-ease);
 }
 
-.rd-scrollbar-fade-enter-from,
-.rd-scrollbar-fade-leave-to {
+.wk-scrollbar-fade-enter-from,
+.wk-scrollbar-fade-leave-to {
     opacity: 0;
 }

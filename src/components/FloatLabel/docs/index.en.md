@@ -11,23 +11,23 @@ Wraps an input. The label floats up on focus or when the field has content. Nest
 ## Import
 
 ```ts
-import { RdFloatLabel, RdInput } from '@wise-kit/ui'
+import { WkFloatLabel, WkInput } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdFloatLabel, RdInput } from '@wise-kit/ui'
+import { WkFloatLabel, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <RdFloatLabel label="Username">
-    <RdInput v-model="value" placeholder=" " />
-  </RdFloatLabel>
+  <WkFloatLabel label="Username">
+    <WkInput v-model="value" placeholder=" " />
+  </WkFloatLabel>
 </template>
 ```
 

@@ -24,7 +24,7 @@ Wise Kit 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件�
 输入类组件（`Input`、`Textarea`、`Select` 等）共享字段模式：
 
 ```vue
-<RdInput
+<WkInput
   id="email"
   v-model="email"
   label="邮箱"
@@ -42,11 +42,11 @@ Wise Kit 以**语义化 HTML 优先、必要时补充 ARIA**为原则。组件�
 
 ## 图标与按钮
 
-`RdIcon` 仅承载**系统图标**。无 `label` 时视为装饰并隐藏；信息性图标请传 `label`：
+`WkIcon` 仅承载**系统图标**。无 `label` 时视为装饰并隐藏；信息性图标请传 `label`：
 
 ```vue
-<RdIcon name="info" label="更多信息" />
-<RdButton icon="search" aria-label="搜索" icon-only />
+<WkIcon name="info" label="更多信息" />
+<WkButton icon="search" aria-label="搜索" icon-only />
 ```
 
 带文字的按钮优先用默认插槽或 `label`，不必重复 `aria-label`。
@@ -85,9 +85,9 @@ const { setMotion } = useMotion()
 setMotion('reduced') // 或 'none'
 ```
 
-`reduced` / `none` 会缩短或关闭 `--rd-motion-*` 过渡，减轻 vestibular 不适。
+`reduced` / `none` 会缩短或关闭 `--wk-motion-*` 过渡，减轻 vestibular 不适。
 
-颜色应通过 `--rd-color-*` 令牌消费，以保证亮/暗主题下对比度一致。自定义主题后请在真实内容上抽查正文与错误态可读性。
+颜色应通过 `--wk-color-*` 令牌消费，以保证亮/暗主题下对比度一致。自定义主题后请在真实内容上抽查正文与错误态可读性。
 
 ## 组件库内已知实践
 

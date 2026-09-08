@@ -1,6 +1,6 @@
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
-export type SwitchSize = RdSizeInput
+export type SwitchSize = WkSizeInput
 
 export interface SwitchProps {
   modelValue?: boolean

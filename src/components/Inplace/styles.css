@@ -1,26 +1,26 @@
 /* —— Misc: Inplace —— */
-.rd-inplace__display {
-    border-radius: var(--rd-radius-sm);
+.wk-inplace__display {
+    border-radius: var(--wk-radius-sm);
     cursor: pointer;
     display: inline-block;
-    padding: var(--rd-space-1) var(--rd-space-2);
+    padding: var(--wk-space-1) var(--wk-space-2);
 }
 
-.rd-inplace__display:hover {
-    background: color-mix(in srgb, var(--rd-color-primary) 8%, var(--rd-color-surface));
+.wk-inplace__display:hover {
+    background: color-mix(in srgb, var(--wk-color-primary) 8%, var(--wk-color-surface));
 }
 
-.rd-inplace__display:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-inplace__display:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-inplace--disabled .rd-inplace__display {
+.wk-inplace--disabled .wk-inplace__display {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
     pointer-events: none;
 }
 
-.rd-inplace__content {
+.wk-inplace__content {
     display: inline-block;
 }

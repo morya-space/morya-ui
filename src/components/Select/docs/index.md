@@ -8,19 +8,19 @@ description: 表单选择器，支持多选标签、远程搜索、invalid、siz
 
 表单选择器，用于从选项列表中选择一个或多个值。
 
-**与 Dropdown 的区别：** `RdSelect` 是表单控件；动作菜单请使用 `RdDropdown`。
+**与 Dropdown 的区别：** `WkSelect` 是表单控件；动作菜单请使用 `WkDropdown`。
 
 ## 引入
 
 ```ts
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -32,7 +32,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
+  <WkSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>('design')
@@ -53,7 +53,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect v-model="value" label="Team" :options="options" show-clear />
+  <WkSelect v-model="value" label="Team" :options="options" show-clear />
 </template>
 ```
 
@@ -61,7 +61,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -72,7 +72,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect
+  <WkSelect
     v-model="value"
     :options="options"
     placeholder="Required"
@@ -86,7 +86,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 
 const options = [
   { label: 'Design', value: 'design' },
@@ -95,7 +95,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect model-value="design" :options="options" disabled />
+  <WkSelect model-value="design" :options="options" disabled />
 </template>
 ```
 
@@ -103,7 +103,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -115,9 +115,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-start">
-    <RdSelect v-model="value" :options="options" size="small" placeholder="Small" />
-    <RdSelect v-model="value" :options="options" placeholder="Normal" />
-    <RdSelect v-model="value" :options="options" size="large" placeholder="Large" />
+    <WkSelect v-model="value" :options="options" size="small" placeholder="Small" />
+    <WkSelect v-model="value" :options="options" placeholder="Normal" />
+    <WkSelect v-model="value" :options="options" size="large" placeholder="Large" />
   </div>
 </template>
 ```
@@ -126,7 +126,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -137,7 +137,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
+  <WkSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
 </template>
 ```
 
@@ -147,7 +147,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>(['design'])
@@ -160,8 +160,8 @@ const options = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <RdSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
-    <RdSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
+    <WkSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
+    <WkSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
   </div>
 </template>
 ```
@@ -172,7 +172,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>([])
@@ -183,7 +183,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
+  <WkSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
 </template>
 ```
 
@@ -193,7 +193,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -220,7 +220,7 @@ function onSearch(query: string) {
 </script>
 
 <template>
-  <RdSelect
+  <WkSelect
     v-model="value"
     :options="options"
     filter
@@ -238,7 +238,7 @@ function onSearch(query: string) {
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -251,8 +251,8 @@ const cities = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <RdSelect v-model="value" :options="[]" empty-message="暂无选项" placeholder="Empty list" />
-    <RdSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
+    <WkSelect v-model="value" :options="[]" empty-message="暂无选项" placeholder="Empty list" />
+    <WkSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
   </div>
 </template>
 ```
@@ -263,7 +263,7 @@ const cities = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@wise-kit/ui'
+import { WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -274,7 +274,7 @@ const options = [
 </script>
 
 <template>
-  <RdSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
+  <WkSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
 </template>
 ```
 

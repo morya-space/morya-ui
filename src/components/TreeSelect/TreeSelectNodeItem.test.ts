@@ -14,7 +14,7 @@ describe('TreeSelectNodeItem', () => {
         showCheckbox: false,
       },
     })
-    await wrapper.get('.rd-treeselect__option').trigger('click')
+    await wrapper.get('.wk-treeselect__option').trigger('click')
     expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ key: 'a' })
   })
 
@@ -29,7 +29,7 @@ describe('TreeSelectNodeItem', () => {
         showCheckbox: false,
       },
     })
-    await wrapper.get('.rd-treeselect__toggler').trigger('click')
+    await wrapper.get('.wk-treeselect__toggler').trigger('click')
     expect(wrapper.emitted('toggle')?.[0]).toEqual(['p'])
   })
 
@@ -44,7 +44,7 @@ describe('TreeSelectNodeItem', () => {
         showCheckbox: true,
       },
     })
-    await wrapper.get('.rd-checkbox__input').setValue(true)
+    await wrapper.get('.wk-checkbox__input').setValue(true)
     expect(wrapper.emitted('check')?.[0]?.[0]).toMatchObject({ key: 'x' })
   })
 })

@@ -8,16 +8,16 @@ export interface ComponentResolver {
 }
 
 export interface WiseKitResolverOptions {
-  /** Component name prefix. Default: `Rd`. */
+  /** Component name prefix. Default: `Wk`. */
   prefix?: string
 }
 
 /**
- * Resolver for `unplugin-vue-components` that maps `Rd*` components to
+ * Resolver for `unplugin-vue-components` that maps `Wk*` components to
  * on-demand subpath imports such as `@wise-kit/ui/button`.
  */
 export function WiseKitResolver(options: WiseKitResolverOptions = {}): ComponentResolver {
-  const prefix = options.prefix ?? 'Rd'
+  const prefix = options.prefix ?? 'Wk'
 
   return {
     type: 'component',
@@ -34,8 +34,3 @@ export function WiseKitResolver(options: WiseKitResolverOptions = {}): Component
 }
 
 export { componentImportMap }
-
-/** @deprecated Use `WiseKitResolver` */
-export const WexDesignResolver = WiseKitResolver
-/** @deprecated Use `WiseKitResolverOptions` */
-export type WexDesignResolverOptions = WiseKitResolverOptions

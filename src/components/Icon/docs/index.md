@@ -6,39 +6,39 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 
 # Icon
 
-`RdIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `@wise-kit/ui`。
+`WkIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `@wise-kit/ui`。
 
 ## 引入
 
 ```ts
-import { iconNames, RdIcon } from '@wise-kit/ui'
+import { iconNames, WkIcon } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon } from '@wise-kit/ui'
+import { WkIcon } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <RdIcon name="search" />
-    <RdIcon name="check-circle" size="small" />
-    <RdIcon name="warning" size="large" />
-    <RdIcon name="loader" size="sm" label="Loading" />
+    <WkIcon name="search" />
+    <WkIcon name="check-circle" size="small" />
+    <WkIcon name="warning" size="large" />
+    <WkIcon name="loader" size="sm" label="Loading" />
   </div>
 </template>
 ```
 
 ## 全部系统图标
 
-点击图标即可复制名称（如 `search`），用法：`<RdIcon name="search" />`。
+点击图标即可复制名称（如 `search`），用法：`<WkIcon name="search" />`。
 
 ```vue preview
 <script setup lang="ts">
 import type {ToastMessage} from '@wise-kit/ui';
-import { iconNames,  RdIcon, RdInput, RdToast } from '@wise-kit/ui'
+import { iconNames,  WkIcon, WkInput, WkToast } from '@wise-kit/ui'
 import { computed, ref } from 'vue'
 
 const query = ref('')
@@ -57,10 +57,10 @@ function itemStyle(name: string) {
   const active = copied.value === name
   return [
     'align-items:center',
-    'background:var(--rd-color-surface)',
-    `border:1px solid ${active ? 'var(--rd-color-primary)' : 'var(--rd-color-border)'}`,
-    'border-radius:var(--rd-radius-control, 3px)',
-    `color:${active ? 'var(--rd-color-primary)' : 'var(--rd-color-text)'}`,
+    'background:var(--wk-color-surface)',
+    `border:1px solid ${active ? 'var(--wk-color-primary)' : 'var(--wk-color-border)'}`,
+    'border-radius:var(--wk-radius-control, 3px)',
+    `color:${active ? 'var(--wk-color-primary)' : 'var(--wk-color-text)'}`,
     'cursor:pointer',
     'display:flex',
     'flex-direction:column',
@@ -113,7 +113,7 @@ function onToastClose(message: ToastMessage) {
 
 <template>
   <div style="width:100%">
-    <RdInput
+    <WkInput
       v-model="query"
       clearable
       fluid
@@ -121,13 +121,13 @@ function onToastClose(message: ToastMessage) {
       style="max-width: 20rem; margin-bottom: 1rem"
     >
       <template #prefix>
-        <RdIcon name="search" size="sm" />
+        <WkIcon name="search" size="sm" />
       </template>
-    </RdInput>
+    </WkInput>
 
     <p
       v-if="!filtered.length"
-      style="color: var(--rd-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
+      style="color: var(--wk-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
     >
       没有匹配的图标
     </p>
@@ -144,7 +144,7 @@ function onToastClose(message: ToastMessage) {
         :title="`点击复制 ${name}`"
         @click="copyName(name)"
       >
-        <RdIcon :name="name" size="large" />
+        <WkIcon :name="name" size="large" />
         <span
           style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.72rem;line-height:1.3;max-width:100%;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap"
         >
@@ -153,7 +153,7 @@ function onToastClose(message: ToastMessage) {
       </button>
     </div>
 
-    <RdToast :messages="messages" position="top-right" @close="onToastClose" />
+    <WkToast :messages="messages" position="top-right" @close="onToastClose" />
   </div>
 </template>
 ```
@@ -164,26 +164,26 @@ function onToastClose(message: ToastMessage) {
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
+import { WkButton, WkIcon, WkIconField, WkInput } from '@wise-kit/ui'
 import { User } from 'lucide-vue-next'
 </script>
 
 <template>
-  <RdIcon label="用户" size="md">
+  <WkIcon label="用户" size="md">
     <User :size="16" :stroke-width="1.8" />
-  </RdIcon>
+  </WkIcon>
 
-  <RdIconField>
+  <WkIconField>
     <template #icon>
-      <RdIcon size="sm">
+      <WkIcon size="sm">
         <User :size="14" :stroke-width="1.8" />
-      </RdIcon>
+      </WkIcon>
     </template>
-    <RdInput placeholder="搜索用户" />
-  </RdIconField>
+    <WkInput placeholder="搜索用户" />
+  </WkIconField>
 
-  <!-- Button 也可直接传组件，不必包 RdIcon -->
-  <RdButton :icon="User" label="资料" />
+  <!-- Button 也可直接传组件，不必包 WkIcon -->
+  <WkButton :icon="User" label="资料" />
 </template>
 ```
 

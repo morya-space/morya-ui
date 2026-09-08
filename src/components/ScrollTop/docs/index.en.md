@@ -11,14 +11,14 @@ Listens to window or parent scroll and jumps back to the top.
 ## Import
 
 ```ts
-import { RdScrollTop } from '@wise-kit/ui'
+import { WkScrollTop } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollTop } from '@wise-kit/ui'
+import { WkScrollTop } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import { RdScrollTop } from '@wise-kit/ui'
     <div style="height: 40rem">
       Scroll down…
     </div>
-    <RdScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    <WkScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```

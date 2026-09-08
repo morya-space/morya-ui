@@ -6,7 +6,7 @@ description: Form layout and field validation. Declarative rules, label alignmen
 
 # Form
 
-`RdForm` / `RdFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
+`WkForm` / `WkFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
 
 1. **Declarative `rules` (preferred):** `required` / `min` / `max` / `pattern` / `validator` keyed by field name.
 2. **`validate` callback:** return an error string from FormItem. Still useful for cross-field logic.
@@ -19,7 +19,7 @@ Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and
 
 ```ts
 import type { FormInstance, FormRules } from '@wise-kit/ui'
-import { RdForm, RdFormItem } from '@wise-kit/ui'
+import { WkForm, WkFormItem } from '@wise-kit/ui'
 ```
 
 ## Declarative rules
@@ -27,7 +27,7 @@ import { RdForm, RdFormItem } from '@wise-kit/ui'
 ```vue preview
 <script setup lang="ts">
 import type { FormInstance, FormRules } from '@wise-kit/ui'
-import { RdButton, RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
+import { WkButton, WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -47,7 +47,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <RdForm
+  <WkForm
     ref="formRef"
     :model="model"
     :rules="rules"
@@ -56,18 +56,18 @@ async function onSubmit() {
     style="max-width: 22rem"
     @submit="onSubmit"
   >
-    <RdFormItem label="Name" name="name">
+    <WkFormItem label="Name" name="name">
       <template #default="{ id, invalid }">
-        <RdInput :id="id" v-model="model.name" fluid :invalid="invalid" />
+        <WkInput :id="id" v-model="model.name" fluid :invalid="invalid" />
       </template>
-    </RdFormItem>
-    <RdFormItem label="Email" name="email" help="Used for notifications">
+    </WkFormItem>
+    <WkFormItem label="Email" name="email" help="Used for notifications">
       <template #default="{ id, invalid }">
-        <RdInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
+        <WkInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
-    </RdFormItem>
-    <RdButton native-type="submit" label="Submit" />
-  </RdForm>
+    </WkFormItem>
+    <WkButton native-type="submit" label="Submit" />
+  </WkForm>
 </template>
 ```
 
@@ -75,26 +75,26 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
+import { WkButton, WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
 </script>
 
 <template>
-  <RdForm validate-on="submit" style="max-width: 22rem">
-    <RdFormItem
+  <WkForm validate-on="submit" style="max-width: 22rem">
+    <WkFormItem
       label="Name"
       name="name"
       required
       :validate="() => (form.name.trim() ? undefined : 'Enter a name')"
     >
       <template #default="{ id, invalid }">
-        <RdInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <WkInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </RdFormItem>
-    <RdButton native-type="submit" label="Submit" />
-  </RdForm>
+    </WkFormItem>
+    <WkButton native-type="submit" label="Submit" />
+  </WkForm>
 </template>
 ```
 
@@ -102,14 +102,14 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
+import { WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>
 
 <template>
-  <RdForm
+  <WkForm
     :model="model"
     inline
     label-placement="left"
@@ -117,17 +117,17 @@ const model = reactive({ city: '', zip: '' })
     :label-width="72"
     :rules="{ city: { required: true, message: 'Required' } }"
   >
-    <RdFormItem label="City" name="city">
+    <WkFormItem label="City" name="city">
       <template #default="{ id }">
-        <RdInput :id="id" v-model="model.city" />
+        <WkInput :id="id" v-model="model.city" />
       </template>
-    </RdFormItem>
-    <RdFormItem label="ZIP" name="zip">
+    </WkFormItem>
+    <WkFormItem label="ZIP" name="zip">
       <template #default="{ id }">
-        <RdInput :id="id" v-model="model.zip" />
+        <WkInput :id="id" v-model="model.zip" />
       </template>
-    </RdFormItem>
-  </RdForm>
+    </WkFormItem>
+  </WkForm>
 </template>
 ```
 

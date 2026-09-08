@@ -6,7 +6,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 # ConfigProvider
 
-通过 `RdConfigProvider` 或 `createWiseKit` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
+通过 `WkConfigProvider` 或 `createWiseKit` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
 
 ## 能力一览
 
@@ -24,7 +24,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput, WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -35,20 +35,20 @@ const options = [
 </script>
 
 <template>
-  <RdConfigProvider size="small">
+  <WkConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdButton label="继承 small" />
-      <RdInput placeholder="继承 small" style="width:10rem" />
-      <RdSelect v-model="city" :options="options" placeholder="继承 small" style="width:10rem" />
-      <RdButton label="覆盖为 large" size="large" />
+      <WkButton label="继承 small" />
+      <WkInput placeholder="继承 small" style="width:10rem" />
+      <WkSelect v-model="city" :options="options" placeholder="继承 small" style="width:10rem" />
+      <WkButton label="覆盖为 large" size="large" />
     </div>
-  </RdConfigProvider>
+  </WkConfigProvider>
 </template>
 ```
 
 ## Component Defaults
 
-按组件名覆盖默认 props。键名用无前缀名称（`Input`、`Space`）或 `Rd*` 别名均可。
+按组件名覆盖默认 props。键名用无前缀名称（`Input`、`Space`）或 `Wk*` 别名均可。
 
 优先级：**组件 Props > `componentDefaults[组件]` > 全局 `size` / `inputVariant` > 内置默认值**。
 
@@ -56,25 +56,25 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput, WkSpace } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const note = ref('可清除')
 </script>
 
 <template>
-  <RdConfigProvider
+  <WkConfigProvider
     size="large"
     :component-defaults="{
       Input: { size: 'small', clearable: true },
       Space: { size: 16 },
     }"
   >
-    <RdSpace>
-      <RdButton label="仍是 large" />
-      <RdInput v-model="note" placeholder="Input 默认 small + clearable" style="width:14rem" />
-    </RdSpace>
-  </RdConfigProvider>
+    <WkSpace>
+      <WkButton label="仍是 large" />
+      <WkInput v-model="note" placeholder="Input 默认 small + clearable" style="width:14rem" />
+    </WkSpace>
+  </WkConfigProvider>
 </template>
 ```
 
@@ -82,23 +82,23 @@ const note = ref('可清除')
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkInput } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <RdConfigProvider density="compact">
+    <WkConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <RdButton label="compact" />
-        <RdInput placeholder="compact" style="width:10rem" />
+        <WkButton label="compact" />
+        <WkInput placeholder="compact" style="width:10rem" />
       </div>
-    </RdConfigProvider>
-    <RdConfigProvider density="spacious">
+    </WkConfigProvider>
+    <WkConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <RdButton label="spacious" />
-        <RdInput placeholder="spacious" style="width:10rem" />
+        <WkButton label="spacious" />
+        <WkInput placeholder="spacious" style="width:10rem" />
       </div>
-    </RdConfigProvider>
+    </WkConfigProvider>
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@wise-kit/ui'
+import { WkButton, WkConfigProvider, WkDialog, WkSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -119,17 +119,17 @@ const options = [
 </script>
 
 <template>
-  <RdConfigProvider input-variant="filled" append-to="body">
+  <WkConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdSelect v-model="city" :options="options" placeholder="filled 输入" style="width:12rem" />
-      <RdButton label="打开对话框" @click="visible = true" />
+      <WkSelect v-model="city" :options="options" placeholder="filled 输入" style="width:12rem" />
+      <WkButton label="打开对话框" @click="visible = true" />
     </div>
-    <RdDialog v-model="visible" title="继承 appendTo" style="width: 24rem">
+    <WkDialog v-model="visible" title="继承 appendTo" style="width: 24rem">
       <p style="margin:0">
         浮层挂载目标由 ConfigProvider 提供。
       </p>
-    </RdDialog>
-  </RdConfigProvider>
+    </WkDialog>
+  </WkConfigProvider>
 </template>
 ```
 
@@ -162,17 +162,17 @@ createApp(App)
   .mount('#app')
 ```
 
-默认会**全局注册全部组件**（模板可直接用 `<RdButton>`）。仅注入配置时传 `components: false`；也可传组件数组做部分注册。
+默认会**全局注册全部组件**（模板可直接用 `<WkButton>`）。仅注入配置时传 `components: false`；也可传组件数组做部分注册。
 
 ## 读取配置
 
 ```ts
-import { useRdConfig } from '@wise-kit/ui'
+import { useWkConfig } from '@wise-kit/ui'
 
-const config = useRdConfig()
+const config = useWkConfig()
 ```
 
-优先级：**组件 Props > `RdConfigProvider` > `createWiseKit()` > 内置默认值**。
+优先级：**组件 Props > `WkConfigProvider` > `createWiseKit()` > 内置默认值**。
 
 ## 主题与动效
 
@@ -189,14 +189,14 @@ const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `config` | `Partial<RdGlobalConfig>` | — | 一次性传入完整配置（与下列 shorthand 等价）。 |
+| `config` | `Partial<WkGlobalConfig>` | — | 一次性传入完整配置（与下列 shorthand 等价）。 |
 | `appendTo` | `string \| HTMLElement` | `'body'` | 浮层默认 Teleport 目标。 |
-| `size` | `RdSizeInput` | — | 表单控件默认尺寸。 |
+| `size` | `WkSizeInput` | — | 表单控件默认尺寸。 |
 | `inputVariant` | `'outlined' \| 'filled'` | — | 输入框默认视觉变体。 |
 | `zIndex` | `number` | — | 浮层基础 z-index。 |
 | `density` | `'compact' \| 'comfortable' \| 'spacious'` | — | 全局内容密度。 |
 | `theme` | `'light' \| 'dark' \| 'system'` | — | 主题；`system` 跟随系统偏好。 |
-| `locale` | `RdLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
+| `locale` | `WkLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
 | `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props。 |
 | `globalDensity` | `boolean` | `true` | 是否将 density / theme 写入 `documentElement`。 |
 

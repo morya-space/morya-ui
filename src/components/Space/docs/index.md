@@ -11,22 +11,22 @@ description: 在子元素之间自动加入一致间距的布局容器。
 ## 引入
 
 ```ts
-import { RdSpace } from '@wise-kit/ui'
+import { WkSpace } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@wise-kit/ui'
+import { WkButton, WkSpace } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSpace>
-    <RdButton label="保存" size="small" />
-    <RdButton label="取消" size="small" severity="secondary" />
-    <RdButton label="重置" size="small" severity="secondary" />
-  </RdSpace>
+  <WkSpace>
+    <WkButton label="保存" size="small" />
+    <WkButton label="取消" size="small" severity="secondary" />
+    <WkButton label="重置" size="small" severity="secondary" />
+  </WkSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { RdButton, RdSpace } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@wise-kit/ui'
+import { WkSpace, WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSpace vertical>
-    <RdTag value="Alpha" />
-    <RdTag value="Bravo" />
-    <RdTag value="Charlie" />
-  </RdSpace>
+  <WkSpace vertical>
+    <WkTag value="Alpha" />
+    <WkTag value="Bravo" />
+    <WkTag value="Charlie" />
+  </WkSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { RdSpace, RdTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSpace } from '@wise-kit/ui'
+import { WkButton, WkSpace } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <RdSpace size="small">
-      <RdButton label="S" size="small" />
-      <RdButton label="S" size="small" severity="secondary" />
-    </RdSpace>
-    <RdSpace :size="20">
-      <RdButton label="20px" size="small" />
-      <RdButton label="20px" size="small" severity="secondary" />
-    </RdSpace>
+    <WkSpace size="small">
+      <WkButton label="S" size="small" />
+      <WkButton label="S" size="small" severity="secondary" />
+    </WkSpace>
+    <WkSpace :size="20">
+      <WkButton label="20px" size="small" />
+      <WkButton label="20px" size="small" severity="secondary" />
+    </WkSpace>
   </div>
 </template>
 ```
 
-未传 `size` 时默认 `medium`。可用 `RdConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
+未传 `size` 时默认 `medium`。可用 `WkConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ import { RdButton, RdSpace } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSpace, RdTag } from '@wise-kit/ui'
+import { WkSpace, WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSpace :wrap-item="false" :size="8">
-    <RdTag value="Direct" />
-    <RdTag value="Children" />
-  </RdSpace>
+  <WkSpace :wrap-item="false" :size="8">
+    <WkTag value="Direct" />
+    <WkTag value="Children" />
+  </WkSpace>
 </template>
 ```
 

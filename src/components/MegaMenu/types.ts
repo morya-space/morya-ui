@@ -1,4 +1,4 @@
-import type { RdAppendTo } from '../../shared/overlay'
+import type { WkAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export interface MegaMenuItem extends Omit<MenuNodeBase, 'label' | 'items'> {
@@ -14,5 +14,5 @@ export interface MegaMenuProps {
   /** Teleport panel. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: RdAppendTo
+  appendTo?: WkAppendTo
 }

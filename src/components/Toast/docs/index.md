@@ -17,34 +17,34 @@ description: 四角浮层通知，支持 API 与受控列表。
 ## 引入
 
 ```ts
-import { toast, useToast, RdToast } from '@wise-kit/ui'
+import { toast, useToast, WkToast } from '@wise-kit/ui'
 ```
 
 ## API
 
 ```vue preview
 <script setup lang="ts">
-import { toast, RdButton } from '@wise-kit/ui'
+import { toast, WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton
+    <WkButton
       label="Success"
       severity="success"
       @click="toast.success({ summary: '已保存', detail: '变更已生效。' })"
     />
-    <RdButton
+    <WkButton
       label="Info"
       severity="info"
       @click="toast.info({ summary: '提示', detail: '可以继续操作。' })"
     />
-    <RdButton
+    <WkButton
       label="Warn"
       severity="warn"
       @click="toast.warn({ summary: '注意', detail: '请再核对一次。' })"
     />
-    <RdButton
+    <WkButton
       label="Error"
       severity="danger"
       @click="toast.error({ summary: '失败', detail: '请稍后重试。' })"
@@ -59,7 +59,7 @@ import { toast, RdButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { toast, RdButton } from '@wise-kit/ui'
+import { toast, WkButton } from '@wise-kit/ui'
 import { h } from 'vue'
 
 function showRich() {
@@ -72,7 +72,7 @@ function showRich() {
 </script>
 
 <template>
-  <RdButton label="富文本 Toast" @click="showRich" />
+  <WkButton label="富文本 Toast" @click="showRich" />
 </template>
 ```
 
@@ -83,7 +83,7 @@ function showRich() {
 ```vue preview
 <script setup lang="ts">
 import type { ToastMessage } from '@wise-kit/ui'
-import { RdButton, RdToast } from '@wise-kit/ui'
+import { WkButton, WkToast } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const messages = ref<ToastMessage[]>([])
@@ -103,10 +103,10 @@ function onClose(message: ToastMessage) {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <RdButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
+    <WkButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
+    <WkButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
   </div>
-  <RdToast :messages="messages" position="top-right" @close="onClose" />
+  <WkToast :messages="messages" position="top-right" @close="onClose" />
 </template>
 ```
 

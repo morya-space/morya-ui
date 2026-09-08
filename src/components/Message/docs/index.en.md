@@ -6,13 +6,13 @@ description: Top-center floating notice with an imperative API.
 
 # Message
 
-A lightweight notice that slides in from the top center by default (`placement` can move it). Prefer the `message` API; you can also mount `<RdMessage />` as a custom host.
+A lightweight notice that slides in from the top center by default (`placement` can move it). Prefer the `message` API; you can also mount `<WkMessage />` as a custom host.
 
 Vs [Toast](/components/Toast):
 
 - **Message (default)**: short single-line feedback; no title/detail. Use for most CRUD / save / delete confirmations.
 - **Toast**: corner notifications with `summary` / `detail`; use only when supplementary detail is needed.
-- **`<RdMessage>` component**: inline banner for persistent form/auth errors.
+- **`<WkMessage>` component**: inline banner for persistent form/auth errors.
 
 > Selection guide: [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md).
 
@@ -21,7 +21,7 @@ Vs [Toast](/components/Toast):
 ## Import
 
 ```ts
-import { message, useMessage, RdMessage } from '@wise-kit/ui'
+import { message, useMessage, WkMessage } from '@wise-kit/ui'
 ```
 
 ## API
@@ -30,16 +30,16 @@ The first call auto-mounts a floating host; no template component is required.
 
 ```vue preview
 <script setup lang="ts">
-import { message, RdButton } from '@wise-kit/ui'
+import { message, WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <RdButton label="Success" severity="success" @click="message.success('Saved')" />
-    <RdButton label="Info" severity="info" @click="message.info('A short tip')" />
-    <RdButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
-    <RdButton label="Error" severity="danger" @click="message.error('Request failed')" />
-    <RdButton
+    <WkButton label="Success" severity="success" @click="message.success('Saved')" />
+    <WkButton label="Info" severity="info" @click="message.info('A short tip')" />
+    <WkButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
+    <WkButton label="Error" severity="danger" @click="message.error('Request failed')" />
+    <WkButton
       label="Closable"
       @click="message.info({ content: 'Dismiss manually', closable: true, life: 0 })"
     />
@@ -53,14 +53,14 @@ import { message, RdButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, RdButton, RdIcon } from '@wise-kit/ui'
+import { message, WkButton, WkIcon } from '@wise-kit/ui'
 import { h } from 'vue'
 
 function showVNode() {
   message.info({
     content: () =>
       h('span', [
-        h(RdIcon, { name: 'check-circle', size: 'sm' }),
+        h(WkIcon, { name: 'check-circle', size: 'sm' }),
         ' Built with ',
         h('strong', 'h()'),
         ' render',
@@ -71,7 +71,7 @@ function showVNode() {
 </script>
 
 <template>
-  <RdButton label="VNode content" @click="showVNode" />
+  <WkButton label="VNode content" @click="showVNode" />
 </template>
 ```
 
@@ -106,12 +106,12 @@ Returns `{ id, close }`.
 For a custom `appendTo`, place this at the app root:
 
 ```vue
-<RdMessage append-to="body" />
+<WkMessage append-to="body" />
 ```
 
 When a manual host exists, the API will not mount a second one.
 
-## Props (`RdMessage`)
+## Props (`WkMessage`)
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -122,7 +122,7 @@ When a manual host exists, the API will not mount a second one.
 
 ## Events
 
-The `<RdMessage />` host emits no Vue events. Use the `{ id, close }` return value from `message.*` APIs to control lifetime.
+The `<WkMessage />` host emits no Vue events. Use the `{ id, close }` return value from `message.*` APIs to control lifetime.
 
 ## Slots
 

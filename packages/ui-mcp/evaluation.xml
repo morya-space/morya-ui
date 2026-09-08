@@ -2,12 +2,12 @@
 <evaluation name="wise-kit-ui-mcp">
   <description>Read-only evaluation tasks for component discovery, composition guidance, and page validation.</description>
   <task id="component-api">
-    <prompt>Find the RdButton API and identify the prop used for a danger action. Include the documented default if available.</prompt>
+    <prompt>Find the WkButton API and identify the prop used for a danger action. Include the documented default if available.</prompt>
     <checks>Calls get_component for Button with includeApi and reports a documented prop.</checks>
   </task>
   <task id="chinese-alias">
     <prompt>查找“数据表格”组件，并说明它对应的导出名称和分页相关用法。</prompt>
-    <checks>Resolves the alias to Table/RdTable and uses source-backed API or examples.</checks>
+    <checks>Resolves the alias to Table/WkTable and uses source-backed API or examples.</checks>
   </task>
   <task id="overlay-choice">
     <prompt>Choose between Dialog, Drawer, Popover, and Tooltip for editing a record while keeping the list visible. Explain why.</prompt>
@@ -27,18 +27,18 @@
   </task>
   <task id="dashboard-scaffold">
     <prompt>Recommend a dashboard pattern for production monitoring with includeScaffold enabled. Identify loading and metric components.</prompt>
-    <checks>Calls recommend_page with includeScaffold; output contains RdProgressBar and RdSkeleton.</checks>
+    <checks>Calls recommend_page with includeScaffold; output contains WkProgressBar and WkSkeleton.</checks>
   </task>
   <task id="design-tokens">
     <prompt>What spacing, radius, typography, and motion tokens should a generated page use?</prompt>
-    <checks>Calls get_design_rules and reports the --rd-* token families.</checks>
+    <checks>Calls get_design_rules and reports the --wk-* token families.</checks>
   </task>
   <task id="accessibility">
     <prompt>Review the design guidance for an icon-only action and a form field with an error.</prompt>
     <checks>Calls get_design_rules; mentions aria-label/ariaLabel, visible label, and role=alert for errors.</checks>
   </task>
   <task id="usage-validation">
-    <prompt>Validate a RdButton snippet that uses an unknown prop and explain the issue.</prompt>
+    <prompt>Validate a WkButton snippet that uses an unknown prop and explain the issue.</prompt>
     <checks>Calls validate_usage and reports unknown-prop for the invalid attribute.</checks>
   </task>
 </evaluation>

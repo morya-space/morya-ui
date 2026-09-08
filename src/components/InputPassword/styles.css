@@ -1,168 +1,168 @@
 /* —— Form: InputPassword —— */
-.rd-password-field {
+.wk-password-field {
     display: grid;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
 }
 
-.rd-password-field--fluid {
+.wk-password-field--fluid {
     width: 100%;
 }
 
-.rd-password-field__label {
-    color: var(--rd-color-text);
-    font-size: var(--rd-font-size-md);
+.wk-password-field__label {
+    color: var(--wk-color-text);
+    font-size: var(--wk-font-size-md);
     font-weight: 600;
 }
 
-.rd-password {
-    --rd-password-toggle-size: var(--rd-control-affix-size);
+.wk-password {
+    --wk-password-toggle-size: var(--wk-control-affix-size);
     display: inline-flex;
     max-width: 100%;
     position: relative;
 }
 
-.rd-password--fluid {
+.wk-password--fluid {
     display: flex;
     width: 100%;
 }
 
-.rd-password__input {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-control);
-    color: var(--rd-color-text);
+.wk-password__input {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-control);
+    color: var(--wk-color-text);
     font: inherit;
-    font-size: var(--rd-control-font-medium);
-    min-height: var(--rd-control-height-medium);
-    padding: 0 var(--rd-control-padding-x-medium);
+    font-size: var(--wk-control-font-medium);
+    min-height: var(--wk-control-height-medium);
+    padding: 0 var(--wk-control-padding-x-medium);
     width: 100%;
 }
 
-.rd-password--toggle .rd-password__input {
-    padding-right: var(--rd-control-affix-gap);
+.wk-password--toggle .wk-password__input {
+    padding-right: var(--wk-control-affix-gap);
 }
 
-.rd-password--small .rd-password__input {
-    min-height: var(--rd-control-height-small);
-    font-size: var(--rd-control-font-small);
-    padding: 0 var(--rd-control-padding-x-small);
+.wk-password--small .wk-password__input {
+    min-height: var(--wk-control-height-small);
+    font-size: var(--wk-control-font-small);
+    padding: 0 var(--wk-control-padding-x-small);
 }
 
-.rd-password--small.rd-password--toggle .rd-password__input {
-    padding-right: var(--rd-control-affix-gap);
+.wk-password--small.wk-password--toggle .wk-password__input {
+    padding-right: var(--wk-control-affix-gap);
 }
 
-.rd-password--large .rd-password__input {
-    min-height: var(--rd-control-height-large);
-    font-size: var(--rd-control-font-large);
-    padding: 0 var(--rd-control-padding-x-large);
+.wk-password--large .wk-password__input {
+    min-height: var(--wk-control-height-large);
+    font-size: var(--wk-control-font-large);
+    padding: 0 var(--wk-control-padding-x-large);
 }
 
-.rd-password--large.rd-password--toggle .rd-password__input {
-    padding-right: var(--rd-control-affix-gap);
+.wk-password--large.wk-password--toggle .wk-password__input {
+    padding-right: var(--wk-control-affix-gap);
 }
 
-.rd-password--invalid .rd-password__input {
-    border-color: var(--rd-color-danger);
+.wk-password--invalid .wk-password__input {
+    border-color: var(--wk-color-danger);
 }
 
-.rd-password--filled .rd-password__input {
+.wk-password--filled .wk-password__input {
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 12%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 12%,
+        var(--wk-color-surface)
     );
     border-color: transparent;
 }
 
-.rd-password__clear {
+.wk-password__clear {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    font-size: var(--rd-font-size-lg);
-    height: var(--rd-control-affix-size);
+    font-size: var(--wk-font-size-lg);
+    height: var(--wk-control-affix-size);
     justify-content: center;
     padding: 0;
     position: absolute;
-    right: var(--rd-space-1);
+    right: var(--wk-space-1);
     top: 50%;
     transform: translateY(-50%);
-    width: var(--rd-control-affix-size);
+    width: var(--wk-control-affix-size);
     z-index: 1;
 }
 
-.rd-password--toggle .rd-password__clear {
-    right: calc(var(--rd-control-affix-size) + var(--rd-space-2));
+.wk-password--toggle .wk-password__clear {
+    right: calc(var(--wk-control-affix-size) + var(--wk-space-2));
 }
 
-.rd-password__clear:hover:not(:disabled) {
-    color: var(--rd-color-text);
+.wk-password__clear:hover:not(:disabled) {
+    color: var(--wk-color-text);
 }
 
-.rd-password__clear:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-password__clear:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-password__clear:disabled {
+.wk-password__clear:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-password--disabled .rd-password__input {
+.wk-password--disabled .wk-password__input {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-password__toggle {
+.wk-password__toggle {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
-    min-height: var(--rd-password-toggle-size);
-    min-width: var(--rd-password-toggle-size);
-    padding: var(--rd-space-1);
+    min-height: var(--wk-password-toggle-size);
+    min-width: var(--wk-password-toggle-size);
+    padding: var(--wk-space-1);
     position: absolute;
-    right: var(--rd-space-1);
+    right: var(--wk-space-1);
     top: 50%;
     transform: translateY(-50%);
 }
 
-.rd-password__toggle:hover:not(:disabled) {
-    color: var(--rd-color-text);
+.wk-password__toggle:hover:not(:disabled) {
+    color: var(--wk-color-text);
 }
 
-.rd-password__toggle:disabled {
+.wk-password__toggle:disabled {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-password__input:focus-visible,
-.rd-password__toggle:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-password__input:focus-visible,
+.wk-password__toggle:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-password__feedback {
-    font-size: var(--rd-font-size-xs);
+.wk-password__feedback {
+    font-size: var(--wk-font-size-xs);
 }
 
-.rd-password__feedback--weak {
-    color: var(--rd-color-danger);
+.wk-password__feedback--weak {
+    color: var(--wk-color-danger);
 }
 
-.rd-password__feedback--medium {
-    color: var(--rd-color-warn);
+.wk-password__feedback--medium {
+    color: var(--wk-color-warn);
 }
 
-.rd-password__feedback--strong {
-    color: var(--rd-color-success);
+.wk-password__feedback--strong {
+    color: var(--wk-color-success);
 }

@@ -2,9 +2,9 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
 import { enUS, mergeLocale, zhCN } from '.'
-import RdConfigProvider from '../components/ConfigProvider/ConfigProvider.vue'
-import RdConfirmDialog from '../components/ConfirmDialog/ConfirmDialog.vue'
-import RdPagination from '../components/Pagination/Pagination.vue'
+import WkConfigProvider from '../components/ConfigProvider/ConfigProvider.vue'
+import WkConfirmDialog from '../components/ConfirmDialog/ConfirmDialog.vue'
+import WkPagination from '../components/Pagination/Pagination.vue'
 
 describe('locale packs', () => {
   it('exposes matching keys for zh-CN and en-US', () => {
@@ -25,10 +25,10 @@ describe('locale packs', () => {
   })
 
   it('switches ConfirmDialog copy through ConfigProvider locale', () => {
-    const wrapper = mount(RdConfigProvider, {
+    const wrapper = mount(WkConfigProvider, {
       props: { locale: enUS, globalDensity: false },
       slots: {
-        default: () => h(RdConfirmDialog, { modelValue: true, teleport: false }),
+        default: () => h(WkConfirmDialog, { modelValue: true, teleport: false }),
       },
     })
     expect(wrapper.text()).toContain('OK')
@@ -36,10 +36,10 @@ describe('locale packs', () => {
   })
 
   it('switches Pagination accessible names through ConfigProvider locale', () => {
-    const wrapper = mount(RdConfigProvider, {
+    const wrapper = mount(WkConfigProvider, {
       props: { locale: enUS, globalDensity: false },
       slots: {
-        default: () => h(RdPagination, { totalRecords: 40, rows: 10, modelValue: 1 }),
+        default: () => h(WkPagination, { totalRecords: 40, rows: 10, modelValue: 1 }),
       },
     })
     expect(wrapper.get('[aria-label="Next page"]').attributes('aria-label')).toBe('Next page')

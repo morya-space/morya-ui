@@ -1,68 +1,68 @@
 /* —— Menu: Dock —— */
-.rd-dock {
-    --rd-dock-icon-size: 2.75rem;
-    --rd-dock-edge-offset: var(--rd-space-4);
+.wk-dock {
+    --wk-dock-icon-size: 2.75rem;
+    --wk-dock-edge-offset: var(--wk-space-4);
     display: flex;
     justify-content: center;
 }
 
-.rd-dock--top,
-.rd-dock--bottom {
+.wk-dock--top,
+.wk-dock--bottom {
     left: 50%;
     position: fixed;
     transform: translateX(-50%);
-    z-index: var(--rd-z-overlay);
+    z-index: var(--wk-z-overlay);
 }
 
-.rd-dock--top {
-    top: var(--rd-dock-edge-offset);
+.wk-dock--top {
+    top: var(--wk-dock-edge-offset);
 }
 
-.rd-dock--bottom {
-    bottom: var(--rd-dock-edge-offset);
+.wk-dock--bottom {
+    bottom: var(--wk-dock-edge-offset);
 }
 
-.rd-dock__list {
+.wk-dock__list {
     align-items: flex-end;
-    background: color-mix(in srgb, var(--rd-color-surface) 85%, transparent);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-lg);
+    background: color-mix(in srgb, var(--wk-color-surface) 85%, transparent);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-lg);
     display: flex;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     list-style: none;
     margin: 0;
-    padding: var(--rd-space-2) var(--rd-space-3);
+    padding: var(--wk-space-2) var(--wk-space-3);
 }
 
-.rd-dock__button {
+.wk-dock__button {
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-md);
+    border-radius: var(--wk-radius-md);
     cursor: pointer;
-    padding: var(--rd-space-1);
-    transition: transform var(--rd-motion-fast, 150ms) ease;
+    padding: var(--wk-space-1);
+    transition: transform var(--wk-motion-fast, 150ms) ease;
 }
 
-.rd-dock__button:hover:not(:disabled) {
+.wk-dock__button:hover:not(:disabled) {
     transform: translateY(-0.25rem) scale(1.08);
 }
 
-.rd-dock__button:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-dock__button:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-dock__icon {
+.wk-dock__icon {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--rd-color-primary) 14%,
-        var(--rd-color-surface)
+        var(--wk-color-primary) 14%,
+        var(--wk-color-surface)
     );
-    border-radius: var(--rd-radius-md);
+    border-radius: var(--wk-radius-md);
     display: inline-flex;
     font-size: 1.25rem;
-    height: var(--rd-dock-icon-size);
+    height: var(--wk-dock-icon-size);
     justify-content: center;
-    width: var(--rd-dock-icon-size);
+    width: var(--wk-dock-icon-size);
 }

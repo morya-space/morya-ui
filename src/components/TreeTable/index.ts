@@ -1,5 +1,5 @@
 import './style'
-export { default as RdTreeTable } from './TreeTable.vue'
+export { default as WkTreeTable } from './TreeTable.vue'
 export type {
   TreeTableColumn,
   TreeTableEmits,

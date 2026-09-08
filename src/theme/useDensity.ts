@@ -8,7 +8,7 @@ const densityPreferences: readonly DensityPreference[] = ['compact', 'comfortabl
 export function applyDensity(preference: DensityPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.rdDensity = preference
+  el.dataset.wkDensity = preference
 }
 
 export function useDensity() {

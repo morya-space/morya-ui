@@ -1,38 +1,38 @@
 /* —— Data: TreeTable —— */
-.rd-treetable {
+.wk-treetable {
     overflow: auto;
     width: 100%;
 }
 
-.rd-treetable__table {
+.wk-treetable__table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.rd-treetable__table th,
-.rd-treetable__cell {
-    border-bottom: var(--rd-border-width) solid var(--rd-color-border);
-    padding: var(--rd-space-2) var(--rd-space-3);
+.wk-treetable__table th,
+.wk-treetable__cell {
+    border-bottom: var(--wk-border-width) solid var(--wk-color-border);
+    padding: var(--wk-space-2) var(--wk-space-3);
     text-align: left;
 }
 
-.rd-treetable__table th {
-    background: var(--rd-table-header-bg);
-    font-size: var(--rd-font-size-sm);
+.wk-treetable__table th {
+    background: var(--wk-table-header-bg);
+    font-size: var(--wk-font-size-sm);
     font-weight: 600;
 }
 
-.rd-treetable__tree-cell {
+.wk-treetable__tree-cell {
     align-items: center;
     display: flex;
-    gap: var(--rd-space-1);
+    gap: var(--wk-space-1);
 }
 
-.rd-treetable__toggler,
-.rd-treetable__toggler-spacer {
+.wk-treetable__toggler,
+.wk-treetable__toggler-spacer {
     background: transparent;
     border: 0;
-    color: var(--rd-color-text-muted);
+    color: var(--wk-color-text-muted);
     flex: 0 0 1.25rem;
     font: inherit;
     height: 1.25rem;
@@ -40,22 +40,22 @@
     width: 1.25rem;
 }
 
-.rd-treetable__message {
+.wk-treetable__message {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--rd-control-height-medium, 2.5rem) * 2);
-    padding: var(--rd-space-5);
+    min-height: calc(var(--wk-control-height-medium, 2.5rem) * 2);
+    padding: var(--wk-space-5);
 }
 
-.rd-treetable__expansion-cell {
-    background: color-mix(in srgb, var(--rd-color-primary) 6%, var(--rd-color-surface));
-    padding: var(--rd-space-3);
+.wk-treetable__expansion-cell {
+    background: color-mix(in srgb, var(--wk-color-primary) 6%, var(--wk-color-surface));
+    padding: var(--wk-space-3);
 }
 
-.rd-treetable__empty-text {
+.wk-treetable__empty-text {
     margin: 0;
-    color: var(--rd-color-text-muted);
-    font-size: var(--rd-font-size-sm);
+    color: var(--wk-color-text-muted);
+    font-size: var(--wk-font-size-sm);
     line-height: 1.5;
 }

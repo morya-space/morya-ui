@@ -29,7 +29,7 @@ const onDemandEntries = Object.fromEntries(
 
 function keepStyleSideEffect(): Plugin {
   return {
-    name: 'rd-keep-style-side-effect',
+    name: 'wk-keep-style-side-effect',
     enforce: 'pre',
     resolveId(id) {
       if (id === './style' || id === './style.ts') {

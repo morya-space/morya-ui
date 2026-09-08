@@ -16,10 +16,9 @@ Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current compon
 ### Theme & design tokens
 
 - Light / dark themes (`useTheme`, `applyTheme`, `getPreferredTheme`)
-- Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-rd-motion`)
-- Token system on `--rd-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
-- Subtree overrides via `RdConfigProvider` (theme, density, motion, component defaults)
-- Backward compatibility: `Wd*` component aliases and `--wd-*` token aliases (`wd-compat.css` / `wd-exports`)
+- Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-wk-motion`)
+- Token system on `--wk-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
+- Subtree overrides via `WkConfigProvider` (theme, density, motion, component defaults)
 
 ### Global config & utilities
 
@@ -27,8 +26,8 @@ Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current compon
 - On-demand builds: `WiseKitResolver` for `unplugin-vue-components`
 - ESM subpath exports (`@wise-kit/ui/button`, etc.) with tree-shaking
 - Imperative APIs: `useConfirm`, `useToast` / `toast`, `useMessage` / `message`, `useContextMenu`
-- Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useRdId`
-- i18n: `zhCN`, `enUS`, `mergeLocale`, `useRdLocale`, `formatLocale`
+- Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useWkId`
+- i18n: `zhCN`, `enUS`, `mergeLocale`, `useWkLocale`, `formatLocale`
 
 ### Build output & types
 

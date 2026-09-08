@@ -1,22 +1,22 @@
-.rd-skeleton {
-    --rd-skeleton-bg: color-mix(in srgb, var(--rd-color-text-muted) 14%, var(--rd-color-surface));
-    background: var(--rd-skeleton-bg);
-    border-radius: var(--rd-radius-sm);
+.wk-skeleton {
+    --wk-skeleton-bg: color-mix(in srgb, var(--wk-color-text-muted) 14%, var(--wk-color-surface));
+    background: var(--wk-skeleton-bg);
+    border-radius: var(--wk-radius-sm);
     display: block;
     overflow: hidden;
     position: relative;
 }
 
-.rd-skeleton--circle {
-    border-radius: var(--rd-radius-full);
+.wk-skeleton--circle {
+    border-radius: var(--wk-radius-full);
 }
 
-.rd-skeleton--wave::after {
-    animation: rd-skeleton-wave var(--rd-motion-skeleton) linear infinite;
+.wk-skeleton--wave::after {
+    animation: wk-skeleton-wave var(--wk-motion-skeleton) linear infinite;
     background: linear-gradient(
         90deg,
         transparent,
-        color-mix(in srgb, var(--rd-color-surface) 55%, transparent),
+        color-mix(in srgb, var(--wk-color-surface) 55%, transparent),
         transparent
     );
     content: "";
@@ -25,18 +25,18 @@
     transform: translateX(-100%);
 }
 
-@keyframes rd-skeleton-wave {
+@keyframes wk-skeleton-wave {
     100% {
         transform: translateX(100%);
     }
 }
 
-.rd-skeleton-repeat {
+.wk-skeleton-repeat {
     display: grid;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     width: 100%;
 }
 
-.rd-skeleton--text {
+.wk-skeleton--text {
     height: 0.85em;
 }

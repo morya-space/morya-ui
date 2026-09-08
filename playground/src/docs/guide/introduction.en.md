@@ -17,7 +17,7 @@ description: What Wise Kit UI is, who it is for, and how to get started.
 | | |
 | --- | --- |
 | **88 components** | Basics, forms, navigation, data display, layout, and feedback |
-| **Theme system** | `--rd-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
+| **Theme system** | `--wk-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
 | **TypeScript** | Built with Composition API; fully typed props, emits, and locale |
 | **On-demand** | ESM subpaths + `WiseKitResolver` with tree-shaking |
 | **Docs as preview** | Markdown + interactive `vue preview` for every component |

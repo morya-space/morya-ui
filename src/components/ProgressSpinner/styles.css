@@ -1,23 +1,23 @@
-.rd-progress-spinner {
-    --rd-progress-spinner-size: 2.5rem;
-    --rd-progress-spinner-color: var(--rd-color-primary);
-    animation: rd-progress-spinner-rotate var(--rd-motion-spin) linear infinite;
-    color: var(--rd-progress-spinner-color);
+.wk-progress-spinner {
+    --wk-progress-spinner-size: 2.5rem;
+    --wk-progress-spinner-color: var(--wk-color-primary);
+    animation: wk-progress-spinner-rotate var(--wk-motion-spin) linear infinite;
+    color: var(--wk-progress-spinner-color);
     display: inline-block;
-    height: var(--rd-progress-spinner-size);
+    height: var(--wk-progress-spinner-size);
     vertical-align: middle;
-    width: var(--rd-progress-spinner-size);
+    width: var(--wk-progress-spinner-size);
 }
 
-.rd-progress-spinner__circle {
-    animation: rd-progress-spinner-dash var(--rd-motion-spin-dash) ease-in-out infinite;
+.wk-progress-spinner__circle {
+    animation: wk-progress-spinner-dash var(--wk-motion-spin-dash) ease-in-out infinite;
     stroke: currentColor;
     stroke-dasharray: 90, 150;
     stroke-dashoffset: 0;
     stroke-linecap: round;
 }
 
-@keyframes rd-progress-spinner-dash {
+@keyframes wk-progress-spinner-dash {
     0% {
         stroke-dasharray: 1, 150;
         stroke-dashoffset: 0;
@@ -32,35 +32,35 @@
     }
 }
 
-.rd-progress-spinner--small {
-    --rd-progress-spinner-size: 1.5rem;
+.wk-progress-spinner--small {
+    --wk-progress-spinner-size: 1.5rem;
 }
 
-.rd-progress-spinner--large {
-    --rd-progress-spinner-size: 3.5rem;
+.wk-progress-spinner--large {
+    --wk-progress-spinner-size: 3.5rem;
 }
 
-.rd-progress-spinner-wrap {
+.wk-progress-spinner-wrap {
     position: relative;
 }
 
-.rd-progress-spinner-wrap--active .rd-progress-spinner-wrap__content {
-    opacity: var(--rd-opacity-disabled);
+.wk-progress-spinner-wrap--active .wk-progress-spinner-wrap__content {
+    opacity: var(--wk-opacity-disabled);
     pointer-events: none;
 }
 
-.rd-progress-spinner-wrap__overlay {
+.wk-progress-spinner-wrap__overlay {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
     inset: 0;
     justify-content: center;
     position: absolute;
 }
 
-.rd-progress-spinner__description {
-    color: var(--rd-color-text-muted);
-    font-size: var(--rd-font-size-sm);
+.wk-progress-spinner__description {
+    color: var(--wk-color-text-muted);
+    font-size: var(--wk-font-size-sm);
     margin: 0;
 }

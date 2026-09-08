@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type {Component} from 'vue';
-import type { RdShowPasswordOn } from '../../shared/componentDefaults'
+import type { WkShowPasswordOn } from '../../shared/componentDefaults'
 import type { IconName } from '../Icon/types'
 import type { InputPasswordProps } from './types'
 import {  computed, onBeforeUnmount, ref, useAttrs } from 'vue'
-import { formatLocale, useRdLocale } from '../../locale'
+import { formatLocale, useWkLocale } from '../../locale'
 import {
   useComponentDefaults,
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
+import { useWkId } from '../../shared/useWkId'
 import { resolveIconSizeFromClass } from '../../shared/types'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -38,10 +38,10 @@ const emit = defineEmits<{
 }>()
 const attrs = useAttrs()
 const defaults = useComponentDefaults('InputPassword')
-const locale = useRdLocale()
+const locale = useWkLocale()
 const unmasked = ref(false)
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useRdId('rd-password')
+const autoInputId = useWkId('wk-password')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputPassword', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
@@ -49,8 +49,8 @@ const resolvedVariant = useConfiguredVariant('InputPassword', () => props.varian
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
 const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
-const resolvedShowPasswordOn = computed<RdShowPasswordOn>(
-  () => props.showPasswordOn ?? (defaults.value.showPasswordOn as RdShowPasswordOn | undefined) ?? 'click',
+const resolvedShowPasswordOn = computed<WkShowPasswordOn>(
+  () => props.showPasswordOn ?? (defaults.value.showPasswordOn as WkShowPasswordOn | undefined) ?? 'click',
 )
 
 const showIconName = computed(() => (typeof props.showIcon === 'string' ? (props.showIcon as IconName) : undefined))
@@ -102,14 +102,14 @@ const describedBy = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'rd-password',
-  `rd-password--${sizeClass.value}`,
+  'wk-password',
+  `wk-password--${sizeClass.value}`,
   {
-    'rd-password--filled': resolvedVariant.value === 'filled',
-    'rd-password--fluid': resolvedFluid.value,
-    'rd-password--invalid': props.invalid,
-    'rd-password--disabled': props.disabled,
-    'rd-password--toggle': props.toggleMask,
+    'wk-password--filled': resolvedVariant.value === 'filled',
+    'wk-password--fluid': resolvedFluid.value,
+    'wk-password--invalid': props.invalid,
+    'wk-password--disabled': props.disabled,
+    'wk-password--toggle': props.toggleMask,
   },
 ])
 
@@ -194,14 +194,14 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="rd-password-field" :class="{ 'rd-password-field--fluid': resolvedFluid }">
-    <label v-if="label" class="rd-password-field__label" :for="inputId">{{ label }}</label>
+  <div class="wk-password-field" :class="{ 'wk-password-field--fluid': resolvedFluid }">
+    <label v-if="label" class="wk-password-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <input
         v-bind="attrs"
         :id="inputId"
         ref="inputElement"
-        class="rd-password__input"
+        class="wk-password__input"
         :type="unmasked ? 'text' : 'password'"
         :value="modelValue"
         :disabled="disabled"
@@ -217,17 +217,17 @@ defineExpose({ focus, blur, select })
       >
       <button
         v-if="showClear"
-        class="rd-password__clear"
+        class="wk-password__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <RdIcon name="close" :size="iconSize" />
+        <WkIcon name="close" :size="iconSize" />
       </button>
       <button
         v-if="toggleMask"
-        class="rd-password__toggle"
+        class="wk-password__toggle"
         type="button"
         :aria-label="unmasked ? locale.hidePassword : locale.showPassword"
         :aria-pressed="unmasked"
@@ -237,21 +237,21 @@ defineExpose({ focus, blur, select })
         @keydown="onToggleKeydown"
       >
         <slot v-if="unmasked" name="hideIcon" :unmasked="unmasked">
-          <RdIcon v-if="hideIconName" :name="hideIconName" :size="iconSize" />
-          <component :is="hideIconComponent" v-else-if="hideIconComponent" class="rd-control-affix-icon__graphic" />
+          <WkIcon v-if="hideIconName" :name="hideIconName" :size="iconSize" />
+          <component :is="hideIconComponent" v-else-if="hideIconComponent" class="wk-control-affix-icon__graphic" />
         </slot>
         <slot v-else name="showIcon" :unmasked="unmasked">
-          <RdIcon v-if="showIconName" :name="showIconName" :size="iconSize" />
-          <component :is="showIconComponent" v-else-if="showIconComponent" class="rd-control-affix-icon__graphic" />
+          <WkIcon v-if="showIconName" :name="showIconName" :size="iconSize" />
+          <component :is="showIconComponent" v-else-if="showIconComponent" class="wk-control-affix-icon__graphic" />
         </slot>
       </button>
     </div>
-    <div v-if="(feedback && strength !== 'empty') || resolvedShowCount" class="rd-password-field__meta">
+    <div v-if="(feedback && strength !== 'empty') || resolvedShowCount" class="wk-password-field__meta">
       <span
         v-if="feedback && strength !== 'empty'"
         :id="`${inputId}-feedback`"
-        class="rd-password__feedback"
-        :class="`rd-password__feedback--${strength}`"
+        class="wk-password__feedback"
+        :class="`wk-password__feedback--${strength}`"
         role="meter"
         :aria-valuemin="0"
         :aria-valuemax="4"
@@ -263,7 +263,7 @@ defineExpose({ focus, blur, select })
       <span
         v-if="resolvedShowCount"
         :id="`${inputId}-count`"
-        class="rd-password-field__count"
+        class="wk-password-field__count"
         aria-live="polite"
       >
         {{ countText }}

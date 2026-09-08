@@ -1,6 +1,6 @@
-import type { RdLocaleMessages } from './types'
+import type { WkLocaleMessages } from './types'
 
-export const zhCN: RdLocaleMessages = {
+export const zhCN: WkLocaleMessages = {
   name: 'zh-CN',
   accept: '确认',
   reject: '取消',

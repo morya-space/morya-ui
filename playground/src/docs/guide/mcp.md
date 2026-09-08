@@ -184,11 +184,11 @@ npx -y @wise-kit/ui-mcp
 
 ```vue
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdButton label="删除" severity="danger" />
+  <WkButton label="删除" severity="danger" />
 </template>
 ```
 

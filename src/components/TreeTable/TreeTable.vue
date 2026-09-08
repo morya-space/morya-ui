@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TreeTableEmits, TreeTableNode, TreeTableProps } from './types'
 import { computed, ref, useSlots } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
 
 const props = defineProps<TreeTableProps>()
@@ -9,7 +9,7 @@ const props = defineProps<TreeTableProps>()
 const emit = defineEmits<TreeTableEmits>()
 const slots = useSlots()
 
-const locale = useRdLocale()
+const locale = useWkLocale()
 const internalExpanded = ref<Record<string, boolean>>({})
 const expanded = computed(() => props.expandedKeys ?? internalExpanded.value)
 
@@ -35,8 +35,8 @@ function toggle(node: TreeTableNode) {
 </script>
 
 <template>
-  <div class="rd-treetable">
-    <table class="rd-treetable__table" role="treegrid">
+  <div class="wk-treetable">
+    <table class="wk-treetable__table" role="treegrid">
       <thead>
         <tr>
           <th v-for="column in columns" :key="column.field" scope="col">
@@ -57,9 +57,9 @@ function toggle(node: TreeTableNode) {
         />
       </tbody>
     </table>
-    <div v-if="!value.length" class="rd-treetable__message" role="status">
+    <div v-if="!value.length" class="wk-treetable__message" role="status">
       <slot name="empty">
-        <p class="rd-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="wk-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
   </div>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { RatingProps } from './types'
 import { computed } from 'vue'
-import { formatLocale, useRdLocale } from '../../locale'
+import { formatLocale, useWkLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
+import { useWkId } from '../../shared/useWkId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<RatingProps>(), {
   modelValue: 0,
@@ -19,9 +19,9 @@ const props = withDefaults(defineProps<RatingProps>(), {
   ariaLabel: undefined,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number): void }>()
-const locale = useRdLocale()
+const locale = useWkLocale()
 const sizeClass = useConfiguredSize('Rating', () => props.size)
-const fieldId = useRdId('rd-rating')
+const fieldId = useWkId('wk-rating')
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
 const canClear = computed(() => props.allowClear ?? props.cancel ?? true)
@@ -30,13 +30,13 @@ const valueText = computed(() => formatLocale(locale.value.star, { value: props.
 const starList = computed(() => Array.from({ length: Math.max(1, props.stars) }, (_, index) => index + 1))
 
 const rootClass = computed(() => [
-  'rd-rating',
-  `rd-rating--${sizeClass.value}`,
+  'wk-rating',
+  `wk-rating--${sizeClass.value}`,
   {
-    'rd-rating--disabled': props.disabled,
-    'rd-rating--readonly': props.readonly,
-    'rd-rating--half': props.allowHalf,
-    'rd-rating--invalid': isInvalid.value,
+    'wk-rating--disabled': props.disabled,
+    'wk-rating--readonly': props.readonly,
+    'wk-rating--half': props.allowHalf,
+    'wk-rating--invalid': isInvalid.value,
   },
 ])
 
@@ -86,8 +86,8 @@ function onSliderKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="rd-rating-field">
-    <label v-if="label" class="rd-rating-field__label" :id="`${fieldId}-label`">{{ label }}</label>
+  <div class="wk-rating-field">
+    <label v-if="label" class="wk-rating-field__label" :id="`${fieldId}-label`">{{ label }}</label>
     <div
       :class="rootClass"
       role="slider"
@@ -107,22 +107,22 @@ function onSliderKeydown(event: KeyboardEvent) {
     <button
       v-if="canClear"
       type="button"
-      class="rd-rating__cancel"
+      class="wk-rating__cancel"
       :aria-label="locale.clearRating"
       :disabled="disabled || readonly"
       tabindex="-1"
       @click="clearRating"
     >
-      <RdIcon name="close" size="sm" />
+      <WkIcon name="close" size="sm" />
     </button>
     <button
       v-for="star in starList"
       :key="star"
       type="button"
-      class="rd-rating__star"
+      class="wk-rating__star"
       :class="{
-        'rd-rating__star--on': starFill(star) === 1,
-        'rd-rating__star--half': starFill(star) === 0.5,
+        'wk-rating__star--on': starFill(star) === 1,
+        'wk-rating__star--half': starFill(star) === 0.5,
       }"
       :aria-label="formatLocale(locale.star, { value: star })"
       :disabled="disabled || readonly"
@@ -136,11 +136,11 @@ function onSliderKeydown(event: KeyboardEvent) {
         :filled="starFill(star) === 1"
         :half="starFill(star) === 0.5"
       >
-        <span class="rd-rating__star-off" aria-hidden="true">
-          <RdIcon name="star" size="lg" />
+        <span class="wk-rating__star-off" aria-hidden="true">
+          <WkIcon name="star" size="lg" />
         </span>
-        <span class="rd-rating__star-on" aria-hidden="true">
-          <RdIcon name="star" size="lg" />
+        <span class="wk-rating__star-on" aria-hidden="true">
+          <WkIcon name="star" size="lg" />
         </span>
       </slot>
     </button>
@@ -148,8 +148,8 @@ function onSliderKeydown(event: KeyboardEvent) {
     <span
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="rd-rating-field__help"
-      :class="{ 'rd-rating-field__help--invalid': feedbackIsError }"
+      class="wk-rating-field__help"
+      :class="{ 'wk-rating-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

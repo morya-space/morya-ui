@@ -11,25 +11,25 @@ description: 带图例的字段分组，可折叠。
 ## 引入
 
 ```ts
-import { RdFieldset } from '@wise-kit/ui'
+import { WkFieldset } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdFieldset } from '@wise-kit/ui'
+import { WkFieldset } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <RdFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
+  <WkFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
     <p style="margin:0">
       字段分组内容。
     </p>
-  </RdFieldset>
+  </WkFieldset>
 </template>
 ```
 

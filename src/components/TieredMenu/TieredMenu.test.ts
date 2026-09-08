@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import RdTieredMenu from './TieredMenu.vue'
+import WkTieredMenu from './TieredMenu.vue'
 
-describe('rdTieredMenu', () => {
+describe('wkTieredMenu', () => {
   it('opens submenu on hover and runs nested command', async () => {
     const command = vi.fn()
-    const wrapper = mount(RdTieredMenu, {
+    const wrapper = mount(WkTieredMenu, {
       props: {
         model: [
           { label: 'File', items: [{ label: 'Export', command }] },
@@ -14,14 +14,14 @@ describe('rdTieredMenu', () => {
         ],
       },
     })
-    await wrapper.get('.rd-tieredmenu__row').trigger('mouseenter')
-    expect(wrapper.find('.rd-tieredmenu__submenu').exists()).toBe(true)
-    await wrapper.get('.rd-tieredmenu__submenu .rd-tieredmenu__item').trigger('click')
+    await wrapper.get('.wk-tieredmenu__row').trigger('mouseenter')
+    expect(wrapper.find('.wk-tieredmenu__submenu').exists()).toBe(true)
+    await wrapper.get('.wk-tieredmenu__submenu .wk-tieredmenu__item').trigger('click')
     expect(command).toHaveBeenCalledOnce()
   })
 
   it('teleports popup menu to body by default', async () => {
-    const wrapper = mount(RdTieredMenu, {
+    const wrapper = mount(WkTieredMenu, {
       props: {
         popup: true,
         modelValue: true,
@@ -30,7 +30,7 @@ describe('rdTieredMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.rd-tieredmenu--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wk-tieredmenu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 })

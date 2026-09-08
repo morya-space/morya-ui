@@ -7,9 +7,6 @@ export interface WiseKitNuxtOptions {
   transpile?: boolean
 }
 
-/** @deprecated Use `WiseKitNuxtOptions` */
-export type WexDesignNuxtOptions = WiseKitNuxtOptions
-
 export default defineNuxtModule<WiseKitNuxtOptions>({
   meta: {
     name: '@wise-kit/nuxt',

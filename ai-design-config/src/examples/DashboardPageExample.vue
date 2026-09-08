@@ -4,18 +4,18 @@
  * @see DESIGN.md §3
  */
 import {
-  RdBreadcrumb,
-  RdCard,
-  RdConfigProvider,
-  RdGrid,
-  RdGridItem,
-  RdIcon,
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdSpace,
-  RdTable,
-  RdTag,
+  WkBreadcrumb,
+  WkCard,
+  WkConfigProvider,
+  WkGrid,
+  WkGridItem,
+  WkIcon,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkSpace,
+  WkTable,
+  WkTag,
   zhCN,
 } from '@wise-kit/ui'
 
@@ -53,124 +53,124 @@ function statusLabel(s: string) {
 </script>
 
 <template>
-  <RdConfigProvider :locale="zhCN">
-    <RdLayout class="page-dashboard">
-      <RdLayoutHeader class="page-dashboard__header">
-        <RdBreadcrumb :model="[{ label: '首页' }, { label: '仪表盘' }]" />
-      </RdLayoutHeader>
+  <WkConfigProvider :locale="zhCN">
+    <WkLayout class="page-dashboard">
+      <WkLayoutHeader class="page-dashboard__header">
+        <WkBreadcrumb :model="[{ label: '首页' }, { label: '仪表盘' }]" />
+      </WkLayoutHeader>
 
-      <RdLayoutContent class="page-dashboard__content">
+      <WkLayoutContent class="page-dashboard__content">
         <h1 class="page-dashboard__title">仪表盘</h1>
 
         <!-- KPI 卡片 -->
-        <RdGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
-          <RdGridItem v-for="item in stats" :key="item.label" :span="1">
-            <RdCard class="page-dashboard__stat">
-              <RdSpace align="center" justify="space-between">
+        <WkGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
+          <WkGridItem v-for="item in stats" :key="item.label" :span="1">
+            <WkCard class="page-dashboard__stat">
+              <WkSpace align="center" justify="space-between">
                 <div>
                   <p class="page-dashboard__stat-label">{{ item.label }}</p>
                   <p class="page-dashboard__stat-value">{{ item.value }}</p>
                   <p class="page-dashboard__stat-trend">{{ item.trend }}</p>
                 </div>
-                <RdIcon :name="item.icon" size="lg" aria-hidden="true" class="page-dashboard__stat-icon" />
-              </RdSpace>
-            </RdCard>
-          </RdGridItem>
-        </RdGrid>
+                <WkIcon :name="item.icon" size="lg" aria-hidden="true" class="page-dashboard__stat-icon" />
+              </WkSpace>
+            </WkCard>
+          </WkGridItem>
+        </WkGrid>
 
         <!-- 主内容两栏 -->
-        <RdGrid :cols="2" :x-gap="16" :y-gap="16" class="page-dashboard__main">
-          <RdGridItem :span="1">
-            <RdCard title="趋势概览">
+        <WkGrid :cols="2" :x-gap="16" :y-gap="16" class="page-dashboard__main">
+          <WkGridItem :span="1">
+            <WkCard title="趋势概览">
               <div class="page-dashboard__chart-placeholder" role="img" aria-label="图表占位">
                 图表区域（接入 ECharts / 业务组件）
               </div>
-            </RdCard>
-          </RdGridItem>
-          <RdGridItem :span="1">
-            <RdCard title="最近工单">
-              <RdTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered>
+            </WkCard>
+          </WkGridItem>
+          <WkGridItem :span="1">
+            <WkCard title="最近工单">
+              <WkTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered>
                 <template #cell-priority="{ value }">
-                  <RdTag :value="String(value)" :severity="prioritySeverity(String(value))" />
+                  <WkTag :value="String(value)" :severity="prioritySeverity(String(value))" />
                 </template>
                 <template #cell-status="{ value }">
-                  <RdTag :value="statusLabel(String(value))" severity="info" />
+                  <WkTag :value="statusLabel(String(value))" severity="info" />
                 </template>
-              </RdTable>
-            </RdCard>
-          </RdGridItem>
-        </RdGrid>
-      </RdLayoutContent>
-    </RdLayout>
-  </RdConfigProvider>
+              </WkTable>
+            </WkCard>
+          </WkGridItem>
+        </WkGrid>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkConfigProvider>
 </template>
 
 <style scoped>
 .page-dashboard {
   min-height: 100vh;
-  background: var(--rd-color-surface);
+  background: var(--wk-color-surface);
 }
 
 .page-dashboard__header {
-  padding: var(--rd-space-4) var(--rd-space-6);
-  border-bottom: 1px solid var(--rd-color-border);
-  background: var(--rd-color-surface);
+  padding: var(--wk-space-4) var(--wk-space-6);
+  border-bottom: 1px solid var(--wk-color-border);
+  background: var(--wk-color-surface);
 }
 
 .page-dashboard__content {
-  padding: var(--rd-space-6);
+  padding: var(--wk-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--rd-space-6);
+  gap: var(--wk-space-6);
 }
 
 .page-dashboard__title {
   margin: 0;
-  font-size: var(--rd-font-size-lg);
+  font-size: var(--wk-font-size-lg);
   font-weight: 600;
-  color: var(--rd-color-text);
+  color: var(--wk-color-text);
 }
 
 .page-dashboard__stat {
-  box-shadow: var(--rd-shadow-sm);
+  box-shadow: var(--wk-shadow-sm);
 }
 
 .page-dashboard__stat-label {
   margin: 0;
-  color: var(--rd-color-text-muted);
-  font-size: var(--rd-font-size-sm);
+  color: var(--wk-color-text-muted);
+  font-size: var(--wk-font-size-sm);
 }
 
 .page-dashboard__stat-value {
-  margin: var(--rd-space-1) 0;
+  margin: var(--wk-space-1) 0;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--rd-color-text);
+  color: var(--wk-color-text);
 }
 
 .page-dashboard__stat-trend {
   margin: 0;
-  color: var(--rd-color-primary);
-  font-size: var(--rd-font-size-sm);
+  color: var(--wk-color-primary);
+  font-size: var(--wk-font-size-sm);
 }
 
 .page-dashboard__stat-icon {
-  color: var(--rd-color-primary);
+  color: var(--wk-color-primary);
   opacity: 0.85;
 }
 
 .page-dashboard__main {
-  margin-top: var(--rd-space-2);
+  margin-top: var(--wk-space-2);
 }
 
 .page-dashboard__chart-placeholder {
   display: grid;
   place-items: center;
   min-height: 12rem;
-  border: 1px dashed var(--rd-color-border);
-  border-radius: var(--rd-radius-md);
-  color: var(--rd-color-text-muted);
-  font-size: var(--rd-font-size-sm);
-  background: color-mix(in srgb, var(--rd-color-border) 15%, transparent);
+  border: 1px dashed var(--wk-color-border);
+  border-radius: var(--wk-radius-md);
+  color: var(--wk-color-text-muted);
+  font-size: var(--wk-font-size-sm);
+  background: color-mix(in srgb, var(--wk-color-border) 15%, transparent);
 }
 </style>

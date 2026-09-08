@@ -1,8 +1,8 @@
-export type RdLocaleName = 'zh-CN' | 'en-US'
+export type WkLocaleName = 'zh-CN' | 'en-US'
 
 /** Shared UI copy. Partial overrides merge onto the active language pack. */
-export interface RdLocaleConfig {
-  name?: RdLocaleName | (string & {})
+export interface WkLocaleConfig {
+  name?: WkLocaleName | (string & {})
   accept?: string
   reject?: string
   confirm?: string
@@ -112,8 +112,8 @@ export interface RdLocaleConfig {
   today?: string
 }
 
-export type RdLocaleMessages = Required<
-  Omit<RdLocaleConfig, 'name' | 'weekdays' | 'monthNames'>
+export type WkLocaleMessages = Required<
+  Omit<WkLocaleConfig, 'name' | 'weekdays' | 'monthNames'>
 > & {
   name: string
   weekdays: string[]

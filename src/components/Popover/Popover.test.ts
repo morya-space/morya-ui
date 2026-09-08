@@ -1,11 +1,11 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import { nextTick } from "vue";
-import RdPopover from "./Popover.vue";
+import WkPopover from "./Popover.vue";
 
-describe("rdPopover", () => {
+describe('wkPopover', () => {
   it("shows content and emits lifecycle events", async () => {
-    const wrapper = mount(RdPopover, {
+    const wrapper = mount(WkPopover, {
       attachTo: document.body,
       props: { modelValue: true },
       slots: {
@@ -15,10 +15,10 @@ describe("rdPopover", () => {
     });
     await nextTick();
     expect(
-      document.body.querySelector(".rd-popover__content")?.textContent,
+      document.body.querySelector(".wk-popover__content")?.textContent,
     ).toContain("Popover body");
     expect(
-      document.body.querySelector(".rd-popover__content--teleported"),
+      document.body.querySelector(".wk-popover__content--teleported"),
     ).toBeTruthy();
     expect(wrapper.emitted("show")).toHaveLength(1);
     await wrapper.setProps({ modelValue: false });
@@ -28,7 +28,7 @@ describe("rdPopover", () => {
   });
 
   it("uses the popover transition for its floating content", async () => {
-    const wrapper = mount(RdPopover, {
+    const wrapper = mount(WkPopover, {
       attachTo: document.body,
       props: { modelValue: false, teleport: false },
       slots: {
@@ -38,15 +38,15 @@ describe("rdPopover", () => {
     });
 
     await wrapper.setProps({ modelValue: true });
-    expect(wrapper.find(".rd-popover__content").exists()).toBe(true);
-    expect(wrapper.find(".rd-popover__content").classes()).toContain(
-      "rd-popover__content--bottom",
+    expect(wrapper.find(".wk-popover__content").exists()).toBe(true);
+    expect(wrapper.find(".wk-popover__content").classes()).toContain(
+      "wk-popover__content--bottom",
     );
     wrapper.unmount();
   });
 
   it("closes on Escape and outside click", async () => {
-    const wrapper = mount(RdPopover, {
+    const wrapper = mount(WkPopover, {
       attachTo: document.body,
       props: { modelValue: true },
       slots: {
@@ -59,7 +59,7 @@ describe("rdPopover", () => {
     expect(wrapper.emitted("update:modelValue")).toEqual([[false]]);
     wrapper.unmount();
 
-    const outside = mount(RdPopover, {
+    const outside = mount(WkPopover, {
       attachTo: document.body,
       props: { modelValue: true },
       slots: {
@@ -75,7 +75,7 @@ describe("rdPopover", () => {
   });
 
   it("opens on hover when trigger is hover", async () => {
-    const wrapper = mount(RdPopover, {
+    const wrapper = mount(WkPopover, {
       attachTo: document.body,
       props: {
         modelValue: false,
@@ -96,7 +96,7 @@ describe("rdPopover", () => {
   });
 
   it("exposes show, hide and toggle", async () => {
-    const wrapper = mount(RdPopover, {
+    const wrapper = mount(WkPopover, {
       attachTo: document.body,
       props: { modelValue: false, teleport: false },
       slots: {
@@ -114,7 +114,7 @@ describe("rdPopover", () => {
   });
 
   it("does not open when disabled", async () => {
-    const wrapper = mount(RdPopover, {
+    const wrapper = mount(WkPopover, {
       attachTo: document.body,
       props: { modelValue: false, disabled: true, trigger: "click" },
       slots: {
@@ -122,7 +122,7 @@ describe("rdPopover", () => {
         content: "<p>Body</p>",
       },
     });
-    await wrapper.find(".rd-popover__trigger").trigger("click");
+    await wrapper.find(".wk-popover__trigger").trigger("click");
     expect(wrapper.emitted("update:modelValue")).toBeUndefined();
     await (wrapper.vm as { show: () => void }).show();
     expect(wrapper.emitted("update:modelValue")).toBeUndefined();

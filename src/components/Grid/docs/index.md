@@ -6,29 +6,29 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 
 # Grid
 
-24 列栅格布局（可用 `cols` 调整）。子项请使用 `RdGridItem`（别名 `RdGi`）。
+24 列栅格布局（可用 `cols` 调整）。子项请使用 `WkGridItem`（别名 `WkGi`）。
 
 ## 引入
 
 ```ts
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdGrid :cols="4" :x-gap="12" :y-gap="12">
-    <RdGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+  <WkGrid :cols="4" :x-gap="12" :y-gap="12">
+    <WkGridItem v-for="n in 4" :key="n" :span="1">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         {{ n }}
       </div>
-    </RdGridItem>
-  </RdGrid>
+    </WkGridItem>
+  </WkGrid>
 </template>
 ```
 
@@ -36,44 +36,44 @@ import { RdGrid, RdGridItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdGrid :cols="6" :x-gap="12" :y-gap="12">
-    <RdGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+  <WkGrid :cols="6" :x-gap="12" :y-gap="12">
+    <WkGridItem :span="2">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         span 2
       </div>
-    </RdGridItem>
-    <RdGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+    </WkGridItem>
+    <WkGridItem :span="2" :offset="1">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         offset 1
       </div>
-    </RdGridItem>
-  </RdGrid>
+    </WkGridItem>
+  </WkGrid>
 </template>
 ```
 
 ## Responsive
 
-`cols` / `xGap` / `yGap` 与 `RdGridItem` 的 `span` / `offset` 均支持响应式字符串，例如 `1 s:2 m:3`（断点：`xs` `s` `m` `l` `xl` `2xl`）。
+`cols` / `xGap` / `yGap` 与 `WkGridItem` 的 `span` / `offset` 均支持响应式字符串，例如 `1 s:2 m:3`（断点：`xs` `s` `m` `l` `xl` `2xl`）。
 
 当 `cols` / 间距是普通数字、但 item 仍要用响应式 `span` 时，请打开 `itemResponsive`。
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <RdGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+  <WkGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
+    <WkGridItem v-for="n in 4" :key="n" span="1 m:2">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         {{ n }}
       </div>
-    </RdGridItem>
-  </RdGrid>
+    </WkGridItem>
+  </WkGrid>
 </template>
 ```
 
@@ -81,7 +81,7 @@ import { RdGrid, RdGridItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkButton, WkGrid, WkGridItem } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)
@@ -89,23 +89,23 @@ const collapsed = ref(true)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <RdButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
-    <RdGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <RdGridItem v-for="n in 6" :key="n" :span="1">
+    <WkButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
+    <WkGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
+      <WkGridItem v-for="n in 6" :key="n" :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+          <div style="padding:0.5rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
             {{ n }}{{ overflow && n > 4 ? '' : '' }}
           </div>
         </template>
-      </RdGridItem>
-      <RdGridItem suffix :span="1">
+      </WkGridItem>
+      <WkGridItem suffix :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
+          <div style="padding:0.5rem;color:var(--wk-color-text-muted);font-size:0.75rem">
             {{ overflow ? '还有更多…' : '全部' }}
           </div>
         </template>
-      </RdGridItem>
-    </RdGrid>
+      </WkGridItem>
+    </WkGrid>
   </div>
 </template>
 ```

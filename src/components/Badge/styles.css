@@ -1,138 +1,138 @@
-.rd-badge {
-    --rd-badge-size: 1.25rem;
-    --rd-badge-font-size: var(--rd-font-size-xs);
-    --rd-badge-padding-y: var(--rd-space-1);
-    --rd-badge-padding-x: var(--rd-space-2);
+.wk-badge {
+    --wk-badge-size: 1.25rem;
+    --wk-badge-font-size: var(--wk-font-size-xs);
+    --wk-badge-padding-y: var(--wk-space-1);
+    --wk-badge-padding-x: var(--wk-space-2);
 
-    --rd-badge-size-small: 1rem;
-    --rd-badge-size-large: 1.5rem;
-    --rd-badge-dot-size: 0.5rem;
-    --rd-badge-dot-size-small: 0.375rem;
-    --rd-badge-dot-size-large: 0.625rem;
+    --wk-badge-size-small: 1rem;
+    --wk-badge-size-large: 1.5rem;
+    --wk-badge-dot-size: 0.5rem;
+    --wk-badge-dot-size-small: 0.375rem;
+    --wk-badge-dot-size-large: 0.625rem;
     align-items: center;
-    background: var(--rd-color-primary);
-    border-radius: var(--rd-radius-full);
-    color: var(--rd-color-on-emphasis);
+    background: var(--wk-color-primary);
+    border-radius: var(--wk-radius-full);
+    color: var(--wk-color-on-emphasis);
     display: inline-flex;
-    font-family: var(--rd-font-sans);
-    font-size: var(--rd-badge-font-size);
+    font-family: var(--wk-font-sans);
+    font-size: var(--wk-badge-font-size);
     font-weight: 700;
     justify-content: center;
     line-height: 1;
-    min-height: var(--rd-badge-size);
-    min-width: var(--rd-badge-size);
-    padding: var(--rd-badge-padding-y) var(--rd-badge-padding-x);
+    min-height: var(--wk-badge-size);
+    min-width: var(--wk-badge-size);
+    padding: var(--wk-badge-padding-y) var(--wk-badge-padding-x);
     vertical-align: middle;
 }
 
-.rd-badge--dot {
-    height: var(--rd-badge-dot-size);
-    min-height: var(--rd-badge-dot-size);
-    min-width: var(--rd-badge-dot-size);
+.wk-badge--dot {
+    height: var(--wk-badge-dot-size);
+    min-height: var(--wk-badge-dot-size);
+    min-width: var(--wk-badge-dot-size);
     padding: 0;
-    width: var(--rd-badge-dot-size);
+    width: var(--wk-badge-dot-size);
 }
 
-.rd-badge--small {
-    --rd-badge-size: var(--rd-badge-size-small);
-    --rd-badge-font-size: var(--rd-font-size-xs);
-    min-height: var(--rd-badge-size);
-    min-width: var(--rd-badge-size);
-    padding: var(--rd-space-1) var(--rd-space-2);
+.wk-badge--small {
+    --wk-badge-size: var(--wk-badge-size-small);
+    --wk-badge-font-size: var(--wk-font-size-xs);
+    min-height: var(--wk-badge-size);
+    min-width: var(--wk-badge-size);
+    padding: var(--wk-space-1) var(--wk-space-2);
 }
 
-.rd-badge--small.rd-badge--dot {
-    --rd-badge-dot-size: var(--rd-badge-dot-size-small);
-    height: var(--rd-badge-dot-size);
-    min-height: var(--rd-badge-dot-size);
-    min-width: var(--rd-badge-dot-size);
-    width: var(--rd-badge-dot-size);
+.wk-badge--small.wk-badge--dot {
+    --wk-badge-dot-size: var(--wk-badge-dot-size-small);
+    height: var(--wk-badge-dot-size);
+    min-height: var(--wk-badge-dot-size);
+    min-width: var(--wk-badge-dot-size);
+    width: var(--wk-badge-dot-size);
 }
 
-.rd-badge--large {
-    --rd-badge-size: var(--rd-badge-size-large);
-    --rd-badge-font-size: var(--rd-font-size-sm);
-    min-height: var(--rd-badge-size);
-    min-width: var(--rd-badge-size);
-    padding: var(--rd-space-1) var(--rd-space-2);
+.wk-badge--large {
+    --wk-badge-size: var(--wk-badge-size-large);
+    --wk-badge-font-size: var(--wk-font-size-sm);
+    min-height: var(--wk-badge-size);
+    min-width: var(--wk-badge-size);
+    padding: var(--wk-space-1) var(--wk-space-2);
 }
 
-.rd-badge--large.rd-badge--dot {
-    --rd-badge-dot-size: var(--rd-badge-dot-size-large);
-    height: var(--rd-badge-dot-size);
-    min-height: var(--rd-badge-dot-size);
-    min-width: var(--rd-badge-dot-size);
-    width: var(--rd-badge-dot-size);
+.wk-badge--large.wk-badge--dot {
+    --wk-badge-dot-size: var(--wk-badge-dot-size-large);
+    height: var(--wk-badge-dot-size);
+    min-height: var(--wk-badge-dot-size);
+    min-width: var(--wk-badge-dot-size);
+    width: var(--wk-badge-dot-size);
 }
 
-.rd-badge--primary {
-    background: var(--rd-color-primary);
-    color: var(--rd-color-on-emphasis);
+.wk-badge--primary {
+    background: var(--wk-color-primary);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-badge--secondary {
+.wk-badge--secondary {
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 25%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 25%,
+        var(--wk-color-surface)
     );
-    color: var(--rd-color-text);
+    color: var(--wk-color-text);
 }
 
-.rd-badge--success {
-    background: var(--rd-color-success);
-    color: var(--rd-color-on-emphasis);
+.wk-badge--success {
+    background: var(--wk-color-success);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-badge--info {
-    background: var(--rd-color-info);
-    color: var(--rd-color-on-emphasis);
+.wk-badge--info {
+    background: var(--wk-color-info);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-badge--warn,
-.rd-badge--warning {
-    background: var(--rd-color-warn);
-    color: var(--rd-color-on-emphasis);
+.wk-badge--warn,
+.wk-badge--warning {
+    background: var(--wk-color-warn);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-badge--danger {
-    background: var(--rd-color-danger);
-    color: var(--rd-color-on-emphasis);
+.wk-badge--danger {
+    background: var(--wk-color-danger);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-badge--contrast {
-    background: var(--rd-color-contrast);
-    color: var(--rd-color-contrast-fg);
+.wk-badge--contrast {
+    background: var(--wk-color-contrast);
+    color: var(--wk-color-contrast-fg);
 }
 
-.rd-badge--help {
-    background: var(--rd-color-help);
-    color: var(--rd-color-on-emphasis);
+.wk-badge--help {
+    background: var(--wk-color-help);
+    color: var(--wk-color-on-emphasis);
 }
 
-.rd-badge-wrap {
+.wk-badge-wrap {
     display: inline-flex;
     position: relative;
     vertical-align: middle;
 }
 
-.rd-badge-wrap > .rd-badge {
-    --rd-badge-offset-x: 0px;
-    --rd-badge-offset-y: 0px;
+.wk-badge-wrap > .wk-badge {
+    --wk-badge-offset-x: 0px;
+    --wk-badge-offset-y: 0px;
     position: absolute;
     right: 0;
     top: 0;
     transform: translate(
-        calc(50% + var(--rd-badge-offset-x)),
-        calc(-50% + var(--rd-badge-offset-y))
+        calc(50% + var(--wk-badge-offset-x)),
+        calc(-50% + var(--wk-badge-offset-y))
     );
 }
 
-.rd-badge--processing {
-    animation: rd-badge-pulse var(--rd-motion-pulse) ease-in-out infinite;
+.wk-badge--processing {
+    animation: wk-badge-pulse var(--wk-motion-pulse) ease-in-out infinite;
 }
 
-@keyframes rd-badge-pulse {
+@keyframes wk-badge-pulse {
     0%,
     100% {
         box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);

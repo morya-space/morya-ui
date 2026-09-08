@@ -3,7 +3,7 @@ import type { IconName } from '../Icon/types'
 import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
 import { computed } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
 
 const props = withDefaults(defineProps<TimelineProps>(), {
@@ -26,10 +26,10 @@ const events = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'rd-timeline',
-  `rd-timeline--${props.layout}`,
-  `rd-timeline--${props.align}`,
-  { 'rd-timeline--pending': pendingLabel.value != null },
+  'wk-timeline',
+  `wk-timeline--${props.layout}`,
+  `wk-timeline--${props.align}`,
+  { 'wk-timeline--pending': pendingLabel.value != null },
 ])
 
 function side(index: number): 'left' | 'right' {
@@ -45,13 +45,13 @@ function markerTone(severity?: TimelineSeverity) {
 }
 
 function markerStyle(event: TimelineEvent) {
-  if (event.color) return { background: event.color, borderColor: event.color, color: 'var(--rd-color-contrast-fg)' }
+  if (event.color) return { background: event.color, borderColor: event.color, color: 'var(--wk-color-contrast-fg)' }
   return undefined
 }
 
 function markerClass(event: TimelineEvent) {
   const tone = markerTone(event.severity)
-  return tone ? `rd-timeline__marker--${tone}` : undefined
+  return tone ? `wk-timeline__marker--${tone}` : undefined
 }
 
 function iconName(event: TimelineEvent): IconName | undefined {
@@ -69,33 +69,33 @@ function isPending(index: number) {
     <li
       v-for="(event, index) in events"
       :key="index"
-      class="rd-timeline__event"
-      :class="[`rd-timeline__event--${side(index)}`, { 'rd-timeline__event--pending': isPending(index) }]"
+      class="wk-timeline__event"
+      :class="[`wk-timeline__event--${side(index)}`, { 'wk-timeline__event--pending': isPending(index) }]"
     >
       <slot name="item" :item="event" :index="index">
-        <div class="rd-timeline__opposite">
+        <div class="wk-timeline__opposite">
           <slot name="opposite" :item="event" :index="index">
             {{ event.date }}
           </slot>
         </div>
-        <div class="rd-timeline__separator">
+        <div class="wk-timeline__separator">
           <slot name="marker" :item="event" :index="index">
             <span
-              class="rd-timeline__marker"
+              class="wk-timeline__marker"
               :class="markerClass(event)"
               :style="markerStyle(event)"
             >
-              <RdIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
+              <WkIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
               <span v-else-if="event.icon" aria-hidden="true">{{ event.icon }}</span>
             </span>
           </slot>
           <slot name="connector" :item="event" :index="index">
-            <span class="rd-timeline__connector" />
+            <span class="wk-timeline__connector" />
           </slot>
         </div>
-        <div class="rd-timeline__content">
+        <div class="wk-timeline__content">
           <slot name="content" :item="event" :index="index">
-            <div v-if="event.status" class="rd-timeline__status">
+            <div v-if="event.status" class="wk-timeline__status">
               {{ event.status }}
             </div>
             <div>{{ event.content }}</div>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
-import RdIcon from '../Icon/Icon.vue'
+import { useWkId } from '../../shared/useWkId'
+import WkIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<InputProps>(), {
@@ -27,9 +27,9 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const slots = useSlots()
 const defaults = useComponentDefaults('Input')
-const locale = useRdLocale()
+const locale = useWkLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useRdId('rd-input')
+const autoInputId = useWkId('wk-input')
 const inputId = computed(() => props.id ?? autoInputId)
 const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Input', () => props.size)
@@ -53,14 +53,14 @@ const describedBy = computed(() => {
 })
 
 const inputClass = computed(() => [
-  'rd-input',
-  `rd-input--${sizeClass.value}`,
+  'wk-input',
+  `wk-input--${sizeClass.value}`,
   {
-    'rd-input--filled': resolvedVariant.value === 'filled',
-    'rd-input--fluid': resolvedFluid.value,
-    'rd-input--invalid': isInvalid.value,
-    'rd-input--has-prefix': hasPrefix.value,
-    'rd-input--has-suffix': hasSuffix.value,
+    'wk-input--filled': resolvedVariant.value === 'filled',
+    'wk-input--fluid': resolvedFluid.value,
+    'wk-input--invalid': isInvalid.value,
+    'wk-input--has-prefix': hasPrefix.value,
+    'wk-input--has-suffix': hasSuffix.value,
   },
 ])
 
@@ -91,18 +91,18 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="rd-input-field" :class="{ 'rd-input-field--fluid': resolvedFluid }">
-    <label v-if="label" class="rd-input-field__label" :for="inputId">{{ label }}</label>
+  <div class="wk-input-field" :class="{ 'wk-input-field--fluid': resolvedFluid }">
+    <label v-if="label" class="wk-input-field__label" :for="inputId">{{ label }}</label>
     <div
-      class="rd-input-field__control"
+      class="wk-input-field__control"
       :class="{
-        'rd-input-field__control--clearable': resolvedClearable && modelValue,
-        'rd-input-field__control--counted': resolvedShowCount,
-        'rd-input-field__control--prefixed': hasPrefix,
-        'rd-input-field__control--suffixed': Boolean($slots.suffix),
+        'wk-input-field__control--clearable': resolvedClearable && modelValue,
+        'wk-input-field__control--counted': resolvedShowCount,
+        'wk-input-field__control--prefixed': hasPrefix,
+        'wk-input-field__control--suffixed': Boolean($slots.suffix),
       }"
     >
-      <span v-if="$slots.prefix" class="rd-input__prefix">
+      <span v-if="$slots.prefix" class="wk-input__prefix">
         <slot name="prefix" />
       </span>
       <input
@@ -122,26 +122,26 @@ defineExpose({ focus, blur, select })
         @blur="emit('blur', $event)"
         @change="emit('change', ($event.target as HTMLInputElement).value)"
       >
-      <span v-if="$slots.suffix" class="rd-input__suffix">
+      <span v-if="$slots.suffix" class="wk-input__suffix">
         <slot name="suffix" />
       </span>
       <button
         v-if="resolvedClearable && modelValue"
-        class="rd-input__clear"
+        class="wk-input__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <RdIcon name="close" size="sm" />
+        <WkIcon name="close" size="sm" />
       </button>
     </div>
-    <div v-if="feedbackText || resolvedShowCount" class="rd-input-field__meta">
+    <div v-if="feedbackText || resolvedShowCount" class="wk-input-field__meta">
       <span
         v-if="feedbackText"
         :id="`${inputId}-help`"
-        class="rd-input-field__help"
-        :class="{ 'rd-input-field__help--invalid': feedbackIsError }"
+        class="wk-input-field__help"
+        :class="{ 'wk-input-field__help--invalid': feedbackIsError }"
         :role="feedbackIsError ? 'alert' : undefined"
       >
         {{ feedbackText }}
@@ -149,7 +149,7 @@ defineExpose({ focus, blur, select })
       <span
         v-if="resolvedShowCount"
         :id="`${inputId}-count`"
-        class="rd-input-field__count"
+        class="wk-input-field__count"
         aria-live="polite"
       >
         {{ countText }}

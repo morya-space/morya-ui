@@ -1,42 +1,42 @@
 /* —— Form: InputOtp —— */
-.rd-inputotp {
+.wk-inputotp {
     display: inline-flex;
-    gap: var(--rd-space-2);
+    gap: var(--wk-space-2);
 }
 
-.rd-inputotp--disabled {
-    opacity: var(--rd-opacity-disabled);
+.wk-inputotp--disabled {
+    opacity: var(--wk-opacity-disabled);
     pointer-events: none;
 }
 
-.rd-inputotp__input {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-control);
-    color: var(--rd-color-text);
+.wk-inputotp__input {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-control);
+    color: var(--wk-color-text);
     font: inherit;
-    font-size: var(--rd-control-font-medium);
-    height: var(--rd-control-height-medium);
+    font-size: var(--wk-control-font-medium);
+    height: var(--wk-control-height-medium);
     text-align: center;
-    width: var(--rd-control-height-medium);
+    width: var(--wk-control-height-medium);
 }
 
-.rd-inputotp {
-    --rd-inputotp-gap: var(--rd-space-2);
-    gap: var(--rd-inputotp-gap);
+.wk-inputotp {
+    --wk-inputotp-gap: var(--wk-space-2);
+    gap: var(--wk-inputotp-gap);
 }
 
-.rd-inputotp--small .rd-inputotp__input {
-    height: var(--rd-control-height-small);
-    width: var(--rd-control-height-small);
+.wk-inputotp--small .wk-inputotp__input {
+    height: var(--wk-control-height-small);
+    width: var(--wk-control-height-small);
 }
 
-.rd-inputotp--large .rd-inputotp__input {
-    font-size: var(--rd-control-font-large);
-    height: var(--rd-control-height-large);
-    width: var(--rd-control-height-large);
+.wk-inputotp--large .wk-inputotp__input {
+    font-size: var(--wk-control-font-large);
+    height: var(--wk-control-height-large);
+    width: var(--wk-control-height-large);
 }
 
-.rd-inputotp--invalid .rd-inputotp__input {
-    border-color: var(--rd-color-danger);
+.wk-inputotp--invalid .wk-inputotp__input {
+    border-color: var(--wk-color-danger);
 }

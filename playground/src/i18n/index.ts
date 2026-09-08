@@ -1,10 +1,10 @@
-import type {RdLocaleMessages} from '@wise-kit/ui';
+import type {WkLocaleMessages} from '@wise-kit/ui';
 import { enUS,  zhCN } from '@wise-kit/ui'
 import { computed, ref, watch } from 'vue'
 
 export type DocsLang = 'zh-CN' | 'en-US'
 
-const STORAGE_KEY = 'rd-docs-lang'
+const STORAGE_KEY = 'wk-docs-lang'
 
 function readStoredLang(): DocsLang {
   if (typeof window === 'undefined') return 'zh-CN'
@@ -69,7 +69,7 @@ const messages = {
     pillarCompleteBody: '88 个组件覆盖基础、表单、导航、数据展示与反馈，均支持 tree-shaking。',
     pillarThemeLabel: 'Theme',
     pillarThemeTitle: '主题开箱即用',
-    pillarThemeBody: '亮/暗色、密度与动效基于 --rd-* 令牌；useTheme 与 RdConfigProvider 同包提供。',
+    pillarThemeBody: '亮/暗色、密度与动效基于 --wk-* 令牌；useTheme 与 WkConfigProvider 同包提供。',
     pillarTypeScriptLabel: 'TypeScript',
     pillarTypeScriptTitle: 'TypeScript 优先',
     pillarTypeScriptBody: 'Composition API 编写，Props、Emits 与 locale 类型完整，IDE 体验友好。',
@@ -112,7 +112,7 @@ const messages = {
     noComponent: '没有找到组件',
     tokens: '设计令牌',
     tokenDesc: '组件共享同一套视觉语法。主题切换时，语义保持不变。',
-    tokenNote: '所有组件都使用 --rd-* 设计变量。',
+    tokenNote: '所有组件都使用 --wk-* 设计变量。',
     defaultDoc: '组件文档。',
     groupAria: '{title}组件',
     useAccent: '使用{label}主题色',
@@ -196,7 +196,7 @@ const messages = {
     pillarCompleteBody: 'Basics, forms, navigation, data display, layout, and feedback — all tree-shakeable.',
     pillarThemeLabel: 'Theme',
     pillarThemeTitle: 'Theme-ready',
-    pillarThemeBody: 'Light/dark, density, and motion via --rd-* tokens; useTheme and RdConfigProvider ship in-package.',
+    pillarThemeBody: 'Light/dark, density, and motion via --wk-* tokens; useTheme and WkConfigProvider ship in-package.',
     pillarTypeScriptLabel: 'TypeScript',
     pillarTypeScriptTitle: 'TypeScript-first',
     pillarTypeScriptBody: 'Built with Composition API; fully typed props, emits, and locale for a smooth IDE experience.',
@@ -239,7 +239,7 @@ const messages = {
     noComponent: 'No components found',
     tokens: 'Design tokens',
     tokenDesc: 'Components share one visual grammar. Semantics stay stable when the theme changes.',
-    tokenNote: 'Every component uses --rd-* design tokens.',
+    tokenNote: 'Every component uses --wk-* design tokens.',
     defaultDoc: 'Component docs.',
     groupAria: '{title} components',
     useAccent: 'Use {label} accent',
@@ -301,7 +301,7 @@ watch(
 
 export function useDocsI18n() {
   const t = computed(() => messages[lang.value])
-  const componentLocale = computed<RdLocaleMessages>(() => (lang.value === 'en-US' ? enUS : zhCN))
+  const componentLocale = computed<WkLocaleMessages>(() => (lang.value === 'en-US' ? enUS : zhCN))
 
   function setLang(next: DocsLang) {
     lang.value = next

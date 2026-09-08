@@ -16,10 +16,9 @@
 ### 主题与设计令牌
 
 - 亮/暗色主题（`useTheme`、`applyTheme`、`getPreferredTheme`）
-- 密度与动效偏好（`useDensity`、`useMotion`，支持 `prefers-reduced-motion` 与 `data-rd-motion`）
-- 基于 `--rd-*` CSS 变量的设计令牌体系（颜色、间距、圆角、阴影、边框、布局、树形、时间线、分割面板等）
-- 子树级覆盖：`RdConfigProvider` 注入主题、密度、动效与组件默认项
-- 向后兼容：保留 `Wd*` 组件别名与 `--wd-*` token 别名（见 `wd-compat.css` / `wd-exports`）
+- 密度与动效偏好（`useDensity`、`useMotion`，支持 `prefers-reduced-motion` 与 `data-wk-motion`）
+- 基于 `--wk-*` CSS 变量的设计令牌体系（颜色、间距、圆角、阴影、边框、布局、树形、时间线、分割面板等）
+- 子树级覆盖：`WkConfigProvider` 注入主题、密度、动效与组件默认项
 
 ### 全局配置与工具 API
 
@@ -27,8 +26,8 @@
 - 按需构建：`WiseKitResolver`（配合 `unplugin-vue-components`）
 - ESM 子路径导出（`@wise-kit/ui/button` 等），tree-shaking 友好
 - 命令式 API：`useConfirm`、`useToast` / `toast`、`useMessage` / `message`、`useContextMenu`
-- 共享 composable：`useControllable`、`useFieldFeedback`、`useMenuKeyboard`、`useModalOverlay`、`useRdId`
-- 国际化：`zhCN`、`enUS`、`mergeLocale`、`useRdLocale`、`formatLocale`
+- 共享 composable：`useControllable`、`useFieldFeedback`、`useMenuKeyboard`、`useModalOverlay`、`useWkId`
+- 国际化：`zhCN`、`enUS`、`mergeLocale`、`useWkLocale`、`formatLocale`
 
 ### 打包与类型
 

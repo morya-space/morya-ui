@@ -1,5 +1,5 @@
 import './style'
-export { default as RdAutoComplete } from './AutoComplete.vue'
+export { default as WkAutoComplete } from './AutoComplete.vue'
 export type {
   AutoCompleteEmits,
   AutoCompleteOption,

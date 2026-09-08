@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { SliderProps } from './types'
 import { computed, ref } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
+import { useWkId } from '../../shared/useWkId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 
 const props = withDefaults(defineProps<SliderProps>(), {
@@ -18,10 +18,10 @@ const props = withDefaults(defineProps<SliderProps>(), {
   vertical: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | number[]): void }>()
-const locale = useRdLocale()
+const locale = useWkLocale()
 const hovering = ref(false)
 const sizeClass = useConfiguredSize('Slider', () => props.size)
-const fieldId = useRdId('rd-slider')
+const fieldId = useWkId('wk-slider')
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
 const singleValue = computed(() => {
@@ -58,14 +58,14 @@ const tooltipText = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'rd-slider',
-  `rd-slider--${sizeClass.value}`,
+  'wk-slider',
+  `wk-slider--${sizeClass.value}`,
   {
-    'rd-slider--disabled': props.disabled,
-    'rd-slider--range': props.range,
-    'rd-slider--vertical': props.vertical,
-    'rd-slider--tooltip': props.tooltip,
-    'rd-slider--invalid': isInvalid.value,
+    'wk-slider--disabled': props.disabled,
+    'wk-slider--range': props.range,
+    'wk-slider--vertical': props.vertical,
+    'wk-slider--tooltip': props.tooltip,
+    'wk-slider--invalid': isInvalid.value,
   },
 ])
 
@@ -87,8 +87,8 @@ function emitRange(index: 0 | 1, event: Event) {
 </script>
 
 <template>
-  <div class="rd-slider-field">
-    <label v-if="label" :id="`${fieldId}-label`" class="rd-slider-field__label">{{ label }}</label>
+  <div class="wk-slider-field">
+    <label v-if="label" :id="`${fieldId}-label`" class="wk-slider-field__label">{{ label }}</label>
     <div
       :class="rootClass"
       :aria-invalid="isInvalid || undefined"
@@ -98,10 +98,10 @@ function emitRange(index: 0 | 1, event: Event) {
       @focusin="hovering = true"
       @focusout="hovering = false"
     >
-      <span v-if="tooltip && hovering" class="rd-slider__tooltip">{{ tooltipText }}</span>
+      <span v-if="tooltip && hovering" class="wk-slider__tooltip">{{ tooltipText }}</span>
       <template v-if="range">
         <input
-          class="rd-slider__input rd-slider__input--start"
+          class="wk-slider__input wk-slider__input--start"
           type="range"
           :min="min"
           :max="max"
@@ -114,7 +114,7 @@ function emitRange(index: 0 | 1, event: Event) {
           @input="emitRange(0, $event)"
         >
         <input
-          class="rd-slider__input rd-slider__input--end"
+          class="wk-slider__input wk-slider__input--end"
           type="range"
           :min="min"
           :max="max"
@@ -129,7 +129,7 @@ function emitRange(index: 0 | 1, event: Event) {
       </template>
       <input
         v-else
-        class="rd-slider__input"
+        class="wk-slider__input"
         type="range"
         :min="min"
         :max="max"
@@ -142,11 +142,11 @@ function emitRange(index: 0 | 1, event: Event) {
         :aria-valuetext="tooltipText"
         @input="emitSingle"
       >
-      <div v-if="markItems.length" class="rd-slider__marks" aria-hidden="true">
+      <div v-if="markItems.length" class="wk-slider__marks" aria-hidden="true">
         <span
           v-for="mark in markItems"
           :key="mark.value"
-          class="rd-slider__mark"
+          class="wk-slider__mark"
           :style="vertical ? { bottom: `${mark.percent}%` } : { left: `${mark.percent}%` }"
         >
           {{ mark.label }}
@@ -156,8 +156,8 @@ function emitRange(index: 0 | 1, event: Event) {
     <span
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="rd-slider-field__help"
-      :class="{ 'rd-slider-field__help--invalid': feedbackIsError }"
+      class="wk-slider-field__help"
+      :class="{ 'wk-slider-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

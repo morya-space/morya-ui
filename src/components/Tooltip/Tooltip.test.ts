@@ -4,14 +4,14 @@ import { fileURLToPath } from 'node:url'
 import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import RdTooltip from './Tooltip.vue'
+import WkTooltip from './Tooltip.vue'
 
 const tooltipStyles = readFileSync(
   join(dirname(fileURLToPath(import.meta.url)), 'styles.css'),
   'utf8',
 )
 
-describe('rdTooltip', () => {
+describe('wkTooltip', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })
@@ -22,7 +22,7 @@ describe('rdTooltip', () => {
   })
 
   it('shows content for mouse and keyboard focus on body by default', async () => {
-    const wrapper = mount(RdTooltip, {
+    const wrapper = mount(WkTooltip, {
       props: { content: 'More information' },
       slots: { default: '<button>Info</button>' },
       attachTo: document.body,
@@ -30,7 +30,7 @@ describe('rdTooltip', () => {
     await wrapper.trigger('mouseenter')
     await nextTick()
     expect(document.body.querySelector('[role="tooltip"]')?.textContent).toBe('More information')
-    expect(document.body.querySelector('.rd-tooltip__content--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.wk-tooltip__content--teleported')).toBeTruthy()
     await wrapper.trigger('mouseleave')
     await nextTick()
     expect(document.body.querySelector('[role="tooltip"]')).toBeNull()
@@ -38,7 +38,7 @@ describe('rdTooltip', () => {
   })
 
   it('respects showDelay before becoming visible', async () => {
-    const wrapper = mount(RdTooltip, {
+    const wrapper = mount(WkTooltip, {
       props: { content: 'Delayed', showDelay: 200 },
       slots: { default: '<button>Info</button>' },
       attachTo: document.body,
@@ -52,18 +52,18 @@ describe('rdTooltip', () => {
   })
 
   it('can render in place when teleport is disabled', async () => {
-    const wrapper = mount(RdTooltip, {
+    const wrapper = mount(WkTooltip, {
       props: { content: 'Inline', teleport: false },
       slots: { default: '<button>Info</button>' },
     })
     await wrapper.trigger('mouseenter')
     await nextTick()
     expect(wrapper.get('[role="tooltip"]').text()).toBe('Inline')
-    expect(wrapper.find('.rd-tooltip__content--teleported').exists()).toBe(false)
+    expect(wrapper.find('.wk-tooltip__content--teleported').exists()).toBe(false)
   })
 
   it('respects hideDelay before hiding', async () => {
-    const wrapper = mount(RdTooltip, {
+    const wrapper = mount(WkTooltip, {
       props: { content: 'Stay', hideDelay: 200, teleport: false },
       slots: { default: '<button>Info</button>' },
     })
@@ -79,7 +79,7 @@ describe('rdTooltip', () => {
   })
 
   it('links the trigger with aria-describedby while visible', async () => {
-    const wrapper = mount(RdTooltip, {
+    const wrapper = mount(WkTooltip, {
       props: { content: 'Details', teleport: false },
       slots: { default: '<button>Info</button>' },
     })
@@ -95,6 +95,6 @@ describe('rdTooltip', () => {
   })
 
   it('uses normal white-space in teleported mode styles', () => {
-    expect(tooltipStyles).toMatch(/\.rd-tooltip__content--teleported[\s\S]*white-space:\s*normal/)
+    expect(tooltipStyles).toMatch(/\.wk-tooltip__content--teleported[\s\S]*white-space:\s*normal/)
   })
 })

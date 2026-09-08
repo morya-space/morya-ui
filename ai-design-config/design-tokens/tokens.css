@@ -1,55 +1,55 @@
 /**
  * Wise Kit design tokens (compiled view for AI / static tooling).
  * Runtime source of truth: @wise-kit/ui/styles.css
- * Do not hand-edit hex values in business code — use --rd-* variables.
+ * Do not hand-edit hex values in business code — use --wk-* variables.
  */
 :root {
-    --rd-color-primary: #2563eb;
-    --rd-color-primary-hover: #1d4ed8;
-    --rd-color-surface: #ffffff;
-    --rd-color-text: #0f172a;
-    --rd-color-text-muted: #64748b;
-    --rd-color-border: #e2e8f0;
-    --rd-color-focus-ring: #2563eb;
-    --rd-color-success: #159570;
-    --rd-color-info: #2563eb;
-    --rd-color-warning: #d97706;
-    --rd-color-help: #9333ea;
-    --rd-color-danger: #dc2626;
-    --rd-color-contrast: #0f172a;
-    --rd-color-contrast-fg: #ffffff;
-    --rd-overlay-scrim: rgb(15 23 42 / 0.55);
+    --wk-color-primary: #2563eb;
+    --wk-color-primary-hover: #1d4ed8;
+    --wk-color-surface: #ffffff;
+    --wk-color-text: #0f172a;
+    --wk-color-text-muted: #64748b;
+    --wk-color-border: #e2e8f0;
+    --wk-color-focus-ring: #2563eb;
+    --wk-color-success: #159570;
+    --wk-color-info: #2563eb;
+    --wk-color-warning: #d97706;
+    --wk-color-help: #9333ea;
+    --wk-color-danger: #dc2626;
+    --wk-color-contrast: #0f172a;
+    --wk-color-contrast-fg: #ffffff;
+    --wk-overlay-scrim: rgb(15 23 42 / 0.55);
 
-    --rd-control-height-small: 28px;
-    --rd-control-height-medium: 34px;
-    --rd-control-height-large: 40px;
-    --rd-radius-control: 3px;
-    --rd-space-1: 0.25rem;
-    --rd-space-2: 0.5rem;
-    --rd-space-3: 0.75rem;
-    --rd-space-4: 1rem;
-    --rd-space-6: 1.5rem;
-    --rd-space-8: 2rem;
-    --rd-radius-sm: 0.25rem;
-    --rd-radius-md: 0.5rem;
-    --rd-radius-lg: 0.75rem;
-    --rd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
-    --rd-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
-    --rd-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
-    --rd-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-    --rd-motion-fast: 150ms;
-    --rd-motion-normal: 250ms;
-    --rd-motion-ease: cubic-bezier(0.2, 0, 0, 1);
-    --rd-z-base: 1000;
+    --wk-control-height-small: 28px;
+    --wk-control-height-medium: 34px;
+    --wk-control-height-large: 40px;
+    --wk-radius-control: 3px;
+    --wk-space-1: 0.25rem;
+    --wk-space-2: 0.5rem;
+    --wk-space-3: 0.75rem;
+    --wk-space-4: 1rem;
+    --wk-space-6: 1.5rem;
+    --wk-space-8: 2rem;
+    --wk-radius-sm: 0.25rem;
+    --wk-radius-md: 0.5rem;
+    --wk-radius-lg: 0.75rem;
+    --wk-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
+    --wk-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
+    --wk-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --wk-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --wk-motion-fast: 150ms;
+    --wk-motion-normal: 250ms;
+    --wk-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+    --wk-z-base: 1000;
 }
 
 [data-theme="dark"] {
-    --rd-color-primary: #60a5fa;
-    --rd-color-primary-hover: #93c5fd;
-    --rd-color-surface: #0f172a;
-    --rd-color-text: #f8fafc;
-    --rd-color-text-muted: #94a3b8;
-    --rd-color-border: #334155;
-    --rd-color-danger: #fca5a5;
-    --rd-overlay-scrim: rgb(2 6 23 / 0.72);
+    --wk-color-primary: #60a5fa;
+    --wk-color-primary-hover: #93c5fd;
+    --wk-color-surface: #0f172a;
+    --wk-color-text: #f8fafc;
+    --wk-color-text-muted: #94a3b8;
+    --wk-color-border: #334155;
+    --wk-color-danger: #fca5a5;
+    --wk-overlay-scrim: rgb(2 6 23 / 0.72);
 }

@@ -11,14 +11,14 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { RdTieredMenu, type TieredMenuItem } from '@wise-kit/ui'
+import { WkTieredMenu, type TieredMenuItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTieredMenu } from '@wise-kit/ui'
+import { WkTieredMenu } from '@wise-kit/ui'
 
 const model = [
   {
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <RdTieredMenu :model="model" />
+  <WkTieredMenu :model="model" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTieredMenu } from '@wise-kit/ui'
+import { WkButton, WkTieredMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -52,8 +52,8 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 </script>
 
 <template>
-  <RdButton label="操作" @click="open = true" />
-  <RdTieredMenu v-model="open" popup :model="model" />
+  <WkButton label="操作" @click="open = true" />
+  <WkTieredMenu v-model="open" popup :model="model" />
 </template>
 ```
 

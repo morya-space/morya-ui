@@ -1,4 +1,4 @@
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
 export interface ToggleButtonProps {
   modelValue?: boolean
@@ -7,7 +7,7 @@ export interface ToggleButtonProps {
   onIcon?: string
   offIcon?: string
   disabled?: boolean
-  size?: RdSizeInput
+  size?: WkSizeInput
 }
 
 export interface ToggleButtonEmits {

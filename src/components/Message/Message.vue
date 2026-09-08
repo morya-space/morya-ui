@@ -2,12 +2,12 @@
 import type { IconName } from '../Icon/types'
 import type { MessageItem, MessageProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
-import { useRdLocale } from '../../locale'
-import { useRdConfig } from '../../shared/config'
+import { useWkLocale } from '../../locale'
+import { useWkConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { RdRenderableView } from '../../shared/Renderable'
+import { WkRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 import {
   closeMessageItem,
   messageState,
@@ -23,8 +23,8 @@ const props = withDefaults(defineProps<MessageProps>(), {
   auto: false,
 })
 
-const config = useRdConfig()
-const locale = useRdLocale()
+const config = useWkConfig()
+const locale = useWkLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
 const list = computed(() => props.messages ?? messageState.items)
@@ -67,7 +67,7 @@ function iconName(severity?: MessageItem['severity']): IconName {
 }
 
 function severityClass(severity?: MessageItem['severity']) {
-  return `rd-message--${normalizeSeverity(severity) ?? 'info'}`
+  return `wk-message--${normalizeSeverity(severity) ?? 'info'}`
 }
 
 function onClose(item: MessageItem) {
@@ -86,35 +86,35 @@ function onMouseLeave(item: MessageItem) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
-      class="rd-message-host"
-      :class="`rd-message-host--${resolvedPlacement}`"
+      class="wk-message-host"
+      :class="`wk-message-host--${resolvedPlacement}`"
       aria-live="polite"
       aria-atomic="false"
     >
-      <TransitionGroup name="rd-message-slide">
+      <TransitionGroup name="wk-message-slide">
         <div
           v-for="item in list"
           :key="item.id"
-          class="rd-message"
+          class="wk-message"
           :class="severityClass(item.severity)"
           role="status"
           @mouseenter="onMouseEnter(item)"
           @mouseleave="onMouseLeave(item)"
         >
-          <span v-if="item.icon !== false" class="rd-message__icon" aria-hidden="true">
-            <RdIcon :name="iconName(item.severity)" size="sm" />
+          <span v-if="item.icon !== false" class="wk-message__icon" aria-hidden="true">
+            <WkIcon :name="iconName(item.severity)" size="sm" />
           </span>
-          <div class="rd-message__content">
-            <RdRenderableView :value="item.content" />
+          <div class="wk-message__content">
+            <WkRenderableView :value="item.content" />
           </div>
           <button
             v-if="item.closable"
             type="button"
-            class="rd-message__close"
+            class="wk-message__close"
             :aria-label="locale.close"
             @click="onClose(item)"
           >
-            <RdIcon name="close" size="sm" />
+            <WkIcon name="close" size="sm" />
           </button>
         </div>
       </TransitionGroup>

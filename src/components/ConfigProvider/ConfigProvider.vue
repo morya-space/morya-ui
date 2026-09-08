@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import type { RdGlobalConfig } from '../../shared/config'
+import type { WkGlobalConfig } from '../../shared/config'
 import { applyTheme, getPreferredTheme } from '../../theme'
 import { computed, inject, onBeforeUnmount, toValue, watch } from 'vue'
 import {
-  mergeRdConfig,
-  provideRdConfig,
-  RD_CONFIG_KEY,
+  mergeWkConfig,
+  provideWkConfig,
+  WK_CONFIG_KEY,
 } from '../../shared/config'
 import { applyDensity } from '../../theme'
 
 const props = defineProps<{
   /** Global defaults for descendant Wise Kit components. */
-  config?: RdGlobalConfig
+  config?: WkGlobalConfig
   /** Shorthand: default overlay Teleport target. */
-  appendTo?: RdGlobalConfig['appendTo']
+  appendTo?: WkGlobalConfig['appendTo']
   /** Shorthand: default control size. */
-  size?: RdGlobalConfig['size']
+  size?: WkGlobalConfig['size']
   /** Shorthand: default input variant. */
-  inputVariant?: RdGlobalConfig['inputVariant']
+  inputVariant?: WkGlobalConfig['inputVariant']
   /** Shorthand: overlay z-index base. */
-  zIndex?: RdGlobalConfig['zIndex']
+  zIndex?: WkGlobalConfig['zIndex']
   /** Shorthand: content density. */
-  density?: RdGlobalConfig['density']
+  density?: WkGlobalConfig['density']
   /** Shorthand: color theme (`light` / `dark` / `system`). */
-  theme?: RdGlobalConfig['theme']
+  theme?: WkGlobalConfig['theme']
   /** Shorthand: locale dictionary. */
-  locale?: RdGlobalConfig['locale']
+  locale?: WkGlobalConfig['locale']
   /** Shorthand: per-component default props. */
-  componentDefaults?: RdGlobalConfig['componentDefaults']
+  componentDefaults?: WkGlobalConfig['componentDefaults']
   /**
    * When true (default), also write density / theme to `documentElement`
    * so the whole page picks up token changes. Set false to scope
@@ -36,9 +36,9 @@ const props = defineProps<{
   globalDensity?: boolean
 }>()
 
-const parent = inject(RD_CONFIG_KEY, null)
+const parent = inject(WK_CONFIG_KEY, null)
 
-const local = computed<RdGlobalConfig>(() => ({
+const local = computed<WkGlobalConfig>(() => ({
   ...(props.config ?? {}),
   ...(props.appendTo !== undefined ? { appendTo: props.appendTo } : {}),
   ...(props.size !== undefined ? { size: props.size } : {}),
@@ -50,12 +50,12 @@ const local = computed<RdGlobalConfig>(() => ({
   ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
 }))
 
-const resolved = computed<RdGlobalConfig>(() => {
+const resolved = computed<WkGlobalConfig>(() => {
   const parentValue = parent ? toValue(parent) : {}
-  return mergeRdConfig(parentValue, local.value)
+  return mergeWkConfig(parentValue, local.value)
 })
 
-provideRdConfig(resolved)
+provideWkConfig(resolved)
 
 const densityAttr = computed(() => resolved.value.density ?? 'comfortable')
 const applyGlobal = computed(() => props.globalDensity !== false)
@@ -63,7 +63,7 @@ const applyGlobal = computed(() => props.globalDensity !== false)
 const layerStyle = computed(() => {
   const base = resolved.value.zIndex
   if (base == null) return undefined
-  return { '--rd-z-base': String(base) } as Record<string, string>
+  return { '--wk-z-base': String(base) } as Record<string, string>
 })
 
 let previousDensity: string | undefined
@@ -79,12 +79,12 @@ function syncGlobalSideEffects() {
   if (!applyGlobal.value || typeof document === 'undefined') return
   const { density, zIndex, theme } = resolved.value
   if (density) {
-    previousDensity = document.documentElement.dataset.rdDensity
+    previousDensity = document.documentElement.dataset.wkDensity
     applyDensity(density)
   }
   if (zIndex != null) {
-    previousZBase = document.documentElement.style.getPropertyValue('--rd-z-base')
-    document.documentElement.style.setProperty('--rd-z-base', String(zIndex))
+    previousZBase = document.documentElement.style.getPropertyValue('--wk-z-base')
+    document.documentElement.style.setProperty('--wk-z-base', String(zIndex))
   }
   if (theme !== undefined) {
     previousTheme = document.documentElement.dataset.theme
@@ -106,12 +106,12 @@ watch(
 onBeforeUnmount(() => {
   if (!applyGlobal.value || typeof document === 'undefined') return
   if (previousDensity !== undefined) {
-    if (previousDensity) document.documentElement.dataset.rdDensity = previousDensity
-    else delete document.documentElement.dataset.rdDensity
+    if (previousDensity) document.documentElement.dataset.wkDensity = previousDensity
+    else delete document.documentElement.dataset.wkDensity
   }
   if (previousZBase !== undefined) {
-    if (previousZBase) document.documentElement.style.setProperty('--rd-z-base', previousZBase)
-    else document.documentElement.style.removeProperty('--rd-z-base')
+    if (previousZBase) document.documentElement.style.setProperty('--wk-z-base', previousZBase)
+    else document.documentElement.style.removeProperty('--wk-z-base')
   }
   if (previousTheme !== undefined) {
     if (previousTheme) document.documentElement.dataset.theme = previousTheme
@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="rd-config-provider" :data-rd-density="densityAttr" :style="layerStyle">
+  <div class="wk-config-provider" :data-wk-density="densityAttr" :style="layerStyle">
     <slot />
   </div>
 </template>

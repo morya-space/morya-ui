@@ -11,24 +11,24 @@ Short hint for a trigger element, suited to icon buttons or truncated text.
 ## Import
 
 ```ts
-import { RdButton, RdTooltip } from '@wise-kit/ui'
+import { WkButton, WkTooltip } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTooltip } from '@wise-kit/ui'
+import { WkButton, WkTooltip } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <RdTooltip content="Save changes" placement="top">
-      <RdButton icon="check" icon-only aria-label="Save" />
-    </RdTooltip>
-    <RdTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
-      <RdButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
-    </RdTooltip>
+    <WkTooltip content="Save changes" placement="top">
+      <WkButton icon="check" icon-only aria-label="Save" />
+    </WkTooltip>
+    <WkTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
+      <WkButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
+    </WkTooltip>
   </div>
 </template>
 ```

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputOtpProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
-import { formatLocale, useRdLocale } from '../../locale'
+import { formatLocale, useWkLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 
 const props = withDefaults(defineProps<InputOtpProps>(), {
@@ -17,7 +17,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
 
-const locale = useRdLocale()
+const locale = useWkLocale()
 const inputs = ref<(HTMLInputElement | null)[]>([])
 const sizeClass = useConfiguredSize('InputOtp', () => props.size)
 
@@ -27,19 +27,19 @@ const chars = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'rd-inputotp',
-  `rd-inputotp--${sizeClass.value}`,
+  'wk-inputotp',
+  `wk-inputotp--${sizeClass.value}`,
   {
-    'rd-inputotp--disabled': props.disabled,
-    'rd-inputotp--mask': props.mask,
-    'rd-inputotp--invalid': props.invalid,
+    'wk-inputotp--disabled': props.disabled,
+    'wk-inputotp--mask': props.mask,
+    'wk-inputotp--invalid': props.invalid,
   },
 ])
 
 const rootStyle = computed(() => {
   if (props.gap == null) return undefined
   const gap = typeof props.gap === 'number' ? `${props.gap}px` : props.gap
-  return { '--rd-inputotp-gap': gap }
+  return { '--wk-inputotp-gap': gap }
 })
 
 function setInputRef(el: unknown, index: number) {
@@ -118,7 +118,7 @@ watch(
       v-for="(char, index) in chars"
       :key="index"
       :ref="(el) => setInputRef(el, index)"
-      class="rd-inputotp__input"
+      class="wk-inputotp__input"
       :type="mask ? 'password' : 'text'"
       inputmode="text"
       maxlength="1"

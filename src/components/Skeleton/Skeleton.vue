@@ -13,11 +13,11 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
 const count = computed(() => Math.max(1, props.repeat ?? 1))
 
 const itemClass = computed(() => [
-  'rd-skeleton',
+  'wk-skeleton',
   {
-    'rd-skeleton--circle': props.shape === 'circle',
-    'rd-skeleton--wave': props.animation === 'wave',
-    'rd-skeleton--text': props.text,
+    'wk-skeleton--circle': props.shape === 'circle',
+    'wk-skeleton--wave': props.animation === 'wave',
+    'wk-skeleton--text': props.text,
   },
 ])
 
@@ -29,7 +29,7 @@ const itemStyle = computed(() => ({
 </script>
 
 <template>
-  <div v-if="count > 1" class="rd-skeleton-repeat">
+  <div v-if="count > 1" class="wk-skeleton-repeat">
     <div v-for="index in count" :key="index" :class="itemClass" :style="itemStyle" aria-hidden="true" />
   </div>
   <div v-else :class="itemClass" :style="itemStyle" aria-hidden="true" />

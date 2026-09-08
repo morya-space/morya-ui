@@ -1,53 +1,53 @@
 /* Shared multi-select tag chips (Select, TreeSelect, InputTags). */
-.rd-select__tag {
+.wk-select__tag {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--rd-color-text-muted) 14%,
-        var(--rd-color-surface)
+        var(--wk-color-text-muted) 14%,
+        var(--wk-color-surface)
     );
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text);
     display: inline-flex;
-    font-size: var(--rd-font-size-xs);
-    gap: var(--rd-space-1);
+    font-size: var(--wk-font-size-xs);
+    gap: var(--wk-space-1);
     line-height: 1.2;
     max-width: 100%;
-    padding: var(--rd-space-1) var(--rd-space-2) var(--rd-space-1) var(--rd-space-2);
+    padding: var(--wk-space-1) var(--wk-space-2) var(--wk-space-1) var(--wk-space-2);
 }
 
-.rd-select__tag-label {
+.wk-select__tag-label {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.rd-select__tag-remove {
+.wk-select__tag-remove {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
-    color: var(--rd-color-text-muted);
+    border-radius: var(--wk-radius-sm);
+    color: var(--wk-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    height: var(--rd-control-affix-size);
+    height: var(--wk-control-affix-size);
     justify-content: center;
     line-height: 1;
     padding: 0;
-    width: var(--rd-control-affix-size);
+    width: var(--wk-control-affix-size);
 }
 
-.rd-select__tag-remove:hover:not(:disabled) {
-    color: var(--rd-color-text);
+.wk-select__tag-remove:hover:not(:disabled) {
+    color: var(--wk-color-text);
 }
 
-.rd-select__tag-remove:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-select__tag-remove:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-select__tag--more {
-    color: var(--rd-color-text-muted);
-    padding-right: var(--rd-space-2);
+.wk-select__tag--more {
+    color: var(--wk-color-text-muted);
+    padding-right: var(--wk-space-2);
 }

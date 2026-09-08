@@ -2,7 +2,7 @@
 import type { DockItem, DockProps } from './types'
 import { computed, useSlots } from 'vue'
 import { resolveMenuIcon } from '../../shared/menu'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DockProps>(), {
   model: () => [],
@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<DockProps>(), {
 })
 
 const slots = useSlots()
-const rootClass = computed(() => ['rd-dock', `rd-dock--${props.position}`])
+const rootClass = computed(() => ['wk-dock', `wk-dock--${props.position}`])
 
 function activate(item: DockItem) {
   if (item.disabled) return
@@ -24,20 +24,20 @@ function iconOf(item: DockItem) {
 
 <template>
   <nav :class="rootClass" aria-label="Dock">
-    <ul class="rd-dock__list">
+    <ul class="wk-dock__list">
       <slot v-if="slots.default" />
       <template v-else>
-        <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="rd-dock__item">
+        <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="wk-dock__item">
         <button
           type="button"
-          class="rd-dock__button"
+          class="wk-dock__button"
           :title="item.label"
           :aria-label="item.label"
           :disabled="item.disabled"
           @click="activate(item)"
         >
-          <span class="rd-dock__icon" aria-hidden="true">
-            <RdIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+          <span class="wk-dock__icon" aria-hidden="true">
+            <WkIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
             <template v-else>{{ item.label.slice(0, 1) }}</template>
           </span>
         </button>

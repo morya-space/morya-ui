@@ -1,21 +1,21 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import RdFloatLabel from './FloatLabel.vue'
+import WkFloatLabel from './FloatLabel.vue'
 
-describe('rdFloatLabel', () => {
+describe('wkFloatLabel', () => {
   it('renders default slot and label prop', () => {
-    const wrapper = mount(RdFloatLabel, {
+    const wrapper = mount(WkFloatLabel, {
       props: { label: 'Email' },
       slots: { default: '<input placeholder=" " />' },
     })
-    expect(wrapper.classes()).toContain('rd-float-label')
+    expect(wrapper.classes()).toContain('wk-float-label')
     expect(wrapper.get('label').text()).toBe('Email')
     expect(wrapper.find('input').exists()).toBe(true)
   })
 
   it('supports label slot', () => {
-    const wrapper = mount(RdFloatLabel, {
+    const wrapper = mount(WkFloatLabel, {
       slots: {
         default: '<input placeholder=" " />',
         label: 'Name',
@@ -25,7 +25,7 @@ describe('rdFloatLabel', () => {
   })
 
   it('associates label with the slotted control', async () => {
-    const wrapper = mount(RdFloatLabel, {
+    const wrapper = mount(WkFloatLabel, {
       props: { label: 'Email' },
       slots: { default: '<input placeholder=" " />' },
       attachTo: document.body,

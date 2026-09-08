@@ -48,7 +48,7 @@ import '@wise-kit/ui/styles.css'
 createApp(App).use(WiseKit).mount('#app')
 ```
 
-Templates can use `<RdButton>`, `<RdInput>`, etc. without per-file imports.
+Templates can use `<WkButton>`, `<WkInput>`, etc. without per-file imports.
 
 ### 2. Named imports + full CSS
 
@@ -64,7 +64,7 @@ createApp(App).mount('#app')
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdInput } from '@wise-kit/ui'
+import { WkButton, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const name = ref('')
@@ -72,8 +72,8 @@ const name = ref('')
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <RdInput v-model="name" label="Name" placeholder="Enter a name" />
-    <RdButton label="Submit" @click="() => undefined" />
+    <WkInput v-model="name" label="Name" placeholder="Enter a name" />
+    <WkButton label="Submit" @click="() => undefined" />
   </div>
 </template>
 ```
@@ -85,8 +85,8 @@ const name = ref('')
 Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `@wise-kit/ui/styles.css` required:
 
 ```ts
-import { RdButton } from '@wise-kit/ui/button'
-import { RdInput } from '@wise-kit/ui/input'
+import { WkButton } from '@wise-kit/ui/button'
+import { WkInput } from '@wise-kit/ui/input'
 ```
 
 Styles only:
@@ -98,7 +98,7 @@ import '@wise-kit/ui/button/style.css'
 
 ### 2. Auto on-demand (Vite)
 
-With `unplugin-vue-components`, add the resolver so templates can use `<RdButton>` without manual imports:
+With `unplugin-vue-components`, add the resolver so templates can use `<WkButton>` without manual imports:
 
 ```ts
 import { WiseKitResolver } from '@wise-kit/ui/resolver'

@@ -11,21 +11,21 @@ Toggle switch control.
 ## Import
 
 ```ts
-import { RdSwitch } from '@wise-kit/ui'
+import { WkSwitch } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@wise-kit/ui'
+import { WkSwitch } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const enabled = ref(false)
 </script>
 
 <template>
-  <RdSwitch v-model="enabled" label="Enable notifications" />
+  <WkSwitch v-model="enabled" label="Enable notifications" />
 </template>
 ```
 
@@ -35,7 +35,7 @@ const enabled = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@wise-kit/ui'
+import { WkSwitch } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const dark = ref(false)
@@ -43,8 +43,8 @@ const dark = ref(false)
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <RdSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
-    <RdSwitch :model-value="false" invalid label="Must be enabled" />
+    <WkSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
+    <WkSwitch :model-value="false" invalid label="Must be enabled" />
   </div>
 </template>
 ```
@@ -53,13 +53,13 @@ const dark = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@wise-kit/ui'
+import { WkSwitch } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <RdSwitch :model-value="true" disabled label="On disabled" />
-    <RdSwitch :model-value="false" disabled label="Off disabled" />
+    <WkSwitch :model-value="true" disabled label="On disabled" />
+    <WkSwitch :model-value="false" disabled label="Off disabled" />
   </div>
 </template>
 ```
@@ -68,14 +68,14 @@ import { RdSwitch } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@wise-kit/ui'
+import { WkSwitch } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const on = ref(true)
 </script>
 
 <template>
-  <RdSwitch v-model="on" checked-text="On" unchecked-text="Off" />
+  <WkSwitch v-model="on" checked-text="On" unchecked-text="Off" />
 </template>
 ```
 

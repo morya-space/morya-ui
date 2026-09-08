@@ -11,22 +11,22 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 ## 引入
 
 ```ts
-import { RdFlex } from '@wise-kit/ui'
+import { WkFlex } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@wise-kit/ui'
+import { WkButton, WkFlex } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdFlex>
-    <RdButton label="一" size="small" />
-    <RdButton label="二" size="small" severity="secondary" />
-    <RdButton label="三" size="small" severity="secondary" />
-  </RdFlex>
+  <WkFlex>
+    <WkButton label="一" size="small" />
+    <WkButton label="二" size="small" severity="secondary" />
+    <WkButton label="三" size="small" severity="secondary" />
+  </WkFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { RdButton, RdFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@wise-kit/ui'
+import { WkButton, WkFlex } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdFlex vertical>
-    <RdButton label="上" size="small" />
-    <RdButton label="中" size="small" severity="secondary" />
-    <RdButton label="下" size="small" severity="secondary" />
-  </RdFlex>
+  <WkFlex vertical>
+    <WkButton label="上" size="small" />
+    <WkButton label="中" size="small" severity="secondary" />
+    <WkButton label="下" size="small" severity="secondary" />
+  </WkFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { RdButton, RdFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex, RdTag } from '@wise-kit/ui'
+import { WkButton, WkFlex, WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <RdTag value="标签" />
-    <RdButton label="操作" size="small" />
-  </RdFlex>
+  <WkFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <WkTag value="标签" />
+    <WkButton label="操作" size="small" />
+  </WkFlex>
 </template>
 ```
 

@@ -11,25 +11,25 @@ Group a form or related content with a legend.
 ## Import
 
 ```ts
-import { RdFieldset } from '@wise-kit/ui'
+import { WkFieldset } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdFieldset } from '@wise-kit/ui'
+import { WkFieldset } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <RdFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
+  <WkFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
     <p style="margin:0">
       Field group content.
     </p>
-  </RdFieldset>
+  </WkFieldset>
 </template>
 ```
 

@@ -138,7 +138,7 @@ export function resolveLocale(mode?: string): Locale {
 }
 
 export function normalizeName(input: string): string {
-  return input.trim().toLowerCase().replace(/^wd/, '').replace(/[-_\s]/g, '')
+  return input.trim().toLowerCase().replace(/^wk/, '').replace(/[-_\s]/g, '')
 }
 
 export function findComponent(catalog: Catalog, name: string): ComponentRecord | undefined {

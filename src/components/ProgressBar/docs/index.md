@@ -11,21 +11,21 @@ description: 进度条用于展示确定或不确定进度。
 ## 引入
 
 ```ts
-import { RdProgressBar } from '@wise-kit/ui'
+import { WkProgressBar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressBar } from '@wise-kit/ui'
+import { WkProgressBar } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <RdProgressBar :value="35" />
-    <RdProgressBar :value="70" :show-value="false" />
-    <RdProgressBar mode="indeterminate" />
+    <WkProgressBar :value="35" />
+    <WkProgressBar :value="70" :show-value="false" />
+    <WkProgressBar mode="indeterminate" />
   </div>
 </template>
 ```
@@ -34,13 +34,13 @@ import { RdProgressBar } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressBar } from '@wise-kit/ui'
+import { WkProgressBar } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <RdProgressBar :value="72" type="circle" status="success" />
-    <RdProgressBar :value="40" status="warn" />
+    <WkProgressBar :value="72" type="circle" status="success" />
+    <WkProgressBar :value="40" status="warn" />
   </div>
 </template>
 ```

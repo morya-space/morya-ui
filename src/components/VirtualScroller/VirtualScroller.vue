@@ -43,16 +43,16 @@ function onScroll(event: Event) {
 
 <template>
   <div
-    class="rd-virtualscroller"
+    class="wk-virtualscroller"
     :style="{ height: typeof height === 'number' ? `${height}px` : height }"
     @scroll="onScroll"
   >
-    <div class="rd-virtualscroller__spacer" :style="{ height: `${totalHeight}px` }">
-      <div class="rd-virtualscroller__content" :style="{ transform: `translateY(${offsetY}px)` }">
+    <div class="wk-virtualscroller__spacer" :style="{ height: `${totalHeight}px` }">
+      <div class="wk-virtualscroller__content" :style="{ transform: `translateY(${offsetY}px)` }">
         <div
           v-for="entry in visibleItems"
           :key="entry.index"
-          class="rd-virtualscroller__item"
+          class="wk-virtualscroller__item"
           :style="{ height: `${itemSize}px` }"
         >
           <slot name="item" :item="entry.item" :index="entry.index">

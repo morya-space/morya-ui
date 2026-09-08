@@ -11,14 +11,14 @@ Shortcut entries shown as an icon list.
 ## Import
 
 ```ts
-import { RdDock } from '@wise-kit/ui'
+import { WkDock } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdDock } from '@wise-kit/ui'
+import { WkDock } from '@wise-kit/ui'
 
 const model = [
   { label: 'Home', icon: '⌂' },
@@ -28,7 +28,7 @@ const model = [
 </script>
 
 <template>
-  <RdDock :model="model" />
+  <WkDock :model="model" />
 </template>
 ```
 

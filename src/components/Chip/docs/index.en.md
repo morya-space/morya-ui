@@ -11,23 +11,23 @@ Chip displays short tagged information, with optional icon/image and a remove bu
 ## Import
 
 ```ts
-import { RdChip } from '@wise-kit/ui'
+import { WkChip } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdChip } from '@wise-kit/ui'
+import { WkChip } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdChip label="Basic" />
-    <RdChip label="With Icon" icon="check" />
-    <RdChip label="Removable" removable />
-    <RdChip label="Success" severity="success" size="small" />
-    <RdChip label="Disabled" removable disabled />
+    <WkChip label="Basic" />
+    <WkChip label="With Icon" icon="check" />
+    <WkChip label="Removable" removable />
+    <WkChip label="Success" severity="success" size="small" />
+    <WkChip label="Disabled" removable disabled />
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ import { RdChip } from '@wise-kit/ui'
 | `image` | `string` | — | Leading image URL (takes precedence over icon). |
 | `removable` | `boolean` | `false` | Show × remove button. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
-| `severity` | `RdTagSeverity \| 'warning'` | — | Semantic color. |
+| `severity` | `WkTagSeverity \| 'warning'` | — | Semantic color. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 
 ## Events

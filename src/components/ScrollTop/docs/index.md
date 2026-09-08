@@ -11,14 +11,14 @@ description: 滚动超过阈值后显示回到顶部按钮。
 ## 引入
 
 ```ts
-import { RdScrollTop } from '@wise-kit/ui'
+import { WkScrollTop } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollTop } from '@wise-kit/ui'
+import { WkScrollTop } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import { RdScrollTop } from '@wise-kit/ui'
     <div style="height: 40rem">
       向下滚动…
     </div>
-    <RdScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    <WkScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```

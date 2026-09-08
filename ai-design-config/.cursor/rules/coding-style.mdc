@@ -11,7 +11,7 @@ alwaysApply: false
 - 使用 `<script setup lang="ts">`。
 - 组件名 PascalCase；模板中用 `Rd*` 前缀组件。
 - `v-model` 与组件库 emit 对齐（如 `v-model:page`）。
-- 页面级样式 `scoped`；仅使用 `--rd-*` 与设计令牌。
+- 页面级样式 `scoped`；仅使用 `--wk-*` 与设计令牌。
 
 ## TypeScript
 

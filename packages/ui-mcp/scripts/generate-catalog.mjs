@@ -155,9 +155,9 @@ function extractCodeBlocks(body) {
 function extractExportName(componentDir, folderName) {
   const indexPath = join(componentDir, 'index.ts')
   const index = readText(indexPath)
-  const match = index.match(/export\s+\{\s*default\s+as\s+(Rd\w+)\s*\}/)
+  const match = index.match(/export\s+\{\s*default\s+as\s+(Wk\w+)\s*\}/)
   if (match) return match[1]
-  return `Rd${folderName}`
+  return `Wk${folderName}`
 }
 
 function extractImportHint(body, exportName) {

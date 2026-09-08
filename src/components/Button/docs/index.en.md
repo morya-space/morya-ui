@@ -11,7 +11,7 @@ Button triggers an immediate action.
 ## Import
 
 ```ts
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,14 +20,14 @@ Show button text via the default slot or the `label` prop.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton>Submit</RdButton>
-    <RdButton label="Label Prop" />
-    <RdButton severity="secondary" label="Secondary" />
+    <WkButton>Submit</WkButton>
+    <WkButton label="Label Prop" />
+    <WkButton severity="secondary" label="Secondary" />
   </div>
 </template>
 ```
@@ -38,19 +38,19 @@ Use `severity` for semantic color; defaults to primary when omitted.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton label="Primary" />
-    <RdButton label="Secondary" severity="secondary" />
-    <RdButton label="Success" severity="success" />
-    <RdButton label="Info" severity="info" />
-    <RdButton label="Warn" severity="warn" />
-    <RdButton label="Help" severity="help" />
-    <RdButton label="Danger" severity="danger" />
-    <RdButton label="Contrast" severity="contrast" />
+    <WkButton label="Primary" />
+    <WkButton label="Secondary" severity="secondary" />
+    <WkButton label="Success" severity="success" />
+    <WkButton label="Info" severity="info" />
+    <WkButton label="Warn" severity="warn" />
+    <WkButton label="Help" severity="help" />
+    <WkButton label="Danger" severity="danger" />
+    <WkButton label="Contrast" severity="contrast" />
   </div>
 </template>
 ```
@@ -61,25 +61,25 @@ import { RdButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdButton label="Outlined" outlined />
-      <RdButton label="Success" severity="success" outlined />
-      <RdButton label="Danger" severity="danger" outlined />
+      <WkButton label="Outlined" outlined />
+      <WkButton label="Success" severity="success" outlined />
+      <WkButton label="Danger" severity="danger" outlined />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdButton label="Raised" raised />
-      <RdButton label="Rounded" rounded />
-      <RdButton label="Plain Text" text plain />
+      <WkButton label="Raised" raised />
+      <WkButton label="Rounded" rounded />
+      <WkButton label="Plain Text" text plain />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <RdButton label="Small" size="small" />
-      <RdButton label="Large" size="large" />
-      <RdButton label="Fluid" fluid />
+      <WkButton label="Small" size="small" />
+      <WkButton label="Large" size="large" />
+      <WkButton label="Fluid" fluid />
     </div>
   </div>
 </template>
@@ -91,15 +91,15 @@ import { RdButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton label="Text" text />
-    <RdButton label="Text Danger" text severity="danger" />
-    <RdButton label="Link" link />
-    <RdButton label="Link Secondary" link severity="secondary" />
+    <WkButton label="Text" text />
+    <WkButton label="Text Danger" text severity="danger" />
+    <WkButton label="Link" link />
+    <WkButton label="Link Secondary" link severity="secondary" />
   </div>
 </template>
 ```
@@ -110,34 +110,34 @@ import { RdButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton label="Ghost" ghost />
-    <RdButton label="Ghost Danger" ghost severity="danger" />
-    <RdButton label="Quaternary" quaternary />
-    <RdButton label="Custom" color="#e11d48" />
+    <WkButton label="Ghost" ghost />
+    <WkButton label="Ghost Danger" ghost severity="danger" />
+    <WkButton label="Quaternary" quaternary />
+    <WkButton label="Custom" color="#e11d48" />
   </div>
 </template>
 ```
 
 ## Button Group
 
-`RdButtonGroup` joins adjacent buttons.
+`WkButtonGroup` joins adjacent buttons.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdButtonGroup } from '@wise-kit/ui'
+import { WkButton, WkButtonGroup } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdButtonGroup aria-label="Align">
-    <RdButton label="Left" />
-    <RdButton label="Center" severity="secondary" />
-    <RdButton label="Right" severity="secondary" />
-  </RdButtonGroup>
+  <WkButtonGroup aria-label="Align">
+    <WkButton label="Left" />
+    <WkButton label="Center" severity="secondary" />
+    <WkButton label="Right" severity="secondary" />
+  </WkButtonGroup>
 </template>
 ```
 
@@ -147,16 +147,16 @@ Supports `icon`, `iconPos`, `iconOnly`, and a `badge`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton icon="check" label="Save" />
-    <RdButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <RdButton icon="plus" icon-only rounded aria-label="Add" />
-    <RdButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <RdButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
+    <WkButton icon="check" label="Save" />
+    <WkButton icon="search" label="Search" icon-pos="right" severity="secondary" />
+    <WkButton icon="plus" icon-only rounded aria-label="Add" />
+    <WkButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
+    <WkButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
   </div>
 </template>
 ```
@@ -167,7 +167,7 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -182,8 +182,8 @@ function toggleLoading() {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <RdButton label="Always Loading" loading severity="secondary" />
+    <WkButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
+    <WkButton label="Always Loading" loading severity="secondary" />
   </div>
 </template>
 ```
@@ -192,14 +192,14 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@wise-kit/ui'
+import { WkButton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdButton label="Disabled" disabled />
-    <RdButton label="Disabled Outlined" outlined disabled />
-    <RdButton label="Disabled Text" text disabled />
+    <WkButton label="Disabled" disabled />
+    <WkButton label="Disabled Outlined" outlined disabled />
+    <WkButton label="Disabled Text" text disabled />
   </div>
 </template>
 ```

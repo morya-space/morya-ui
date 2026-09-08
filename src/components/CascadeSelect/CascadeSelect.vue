@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
-import { useRdLocale } from '../../locale'
-import { useComponentDefaults, useConfiguredSize, useRdConfig } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
+import { useWkLocale } from '../../locale'
+import { useComponentDefaults, useConfiguredSize, useWkConfig } from '../../shared/config'
+import { useWkId } from '../../shared/useWkId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
@@ -27,8 +27,8 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 const defaults = useComponentDefaults('CascadeSelect')
-const config = useRdConfig()
-const locale = useRdLocale()
+const config = useWkConfig()
+const locale = useWkLocale()
 const sizeClass = useConfiguredSize('CascadeSelect', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -36,7 +36,7 @@ const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const path = ref<CascadeSelectOption[][]>([])
-const autoFieldId = useRdId('rd-cascadeselect')
+const autoFieldId = useWkId('wk-cascadeselect')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
@@ -120,8 +120,8 @@ function buildPathToValue(
 function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.rd-cascadeselect__column')[activeColumn.value]
-  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.rd-cascadeselect__option')[index]
+  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.wk-cascadeselect__column')[activeColumn.value]
+  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.wk-cascadeselect__option')[index]
   optionEl?.focus({ preventScroll: true })
 }
 
@@ -263,31 +263,31 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="rd-select-field rd-cascadeselect"
+    class="wk-select-field wk-cascadeselect"
     :class="[
-      `rd-cascadeselect--${sizeClass}`,
+      `wk-cascadeselect--${sizeClass}`,
       {
-        'rd-select-field--fluid': resolvedFluid,
-        'rd-cascadeselect--disabled': disabled,
-        'rd-cascadeselect--open': open,
+        'wk-select-field--fluid': resolvedFluid,
+        'wk-cascadeselect--disabled': disabled,
+        'wk-cascadeselect--open': open,
       },
     ]"
   >
-    <label v-if="label" class="rd-select-field__label" :for="fieldId">{{ label }}</label>
+    <label v-if="label" class="wk-select-field__label" :for="fieldId">{{ label }}</label>
     <div
-      class="rd-cascadeselect__control rd-select__control"
+      class="wk-cascadeselect__control wk-select__control"
       :class="{
-        'rd-select__control--clearable': showClearButton,
-        'rd-select__control--open': open,
+        'wk-select__control--clearable': showClearButton,
+        'wk-select__control--open': open,
       }"
     >
       <button
         :id="fieldId"
         ref="trigger"
         type="button"
-        class="rd-cascadeselect__trigger"
+        class="wk-cascadeselect__trigger"
         role="combobox"
-        :class="{ 'rd-cascadeselect__trigger--invalid': isInvalid, 'rd-cascadeselect__trigger--placeholder': !hasValue }"
+        :class="{ 'wk-cascadeselect__trigger--invalid': isInvalid, 'wk-cascadeselect__trigger--placeholder': !hasValue }"
         :disabled="disabled"
         :aria-expanded="open"
         :aria-controls="open ? panelId : undefined"
@@ -298,43 +298,43 @@ onBeforeUnmount(() => {
         @keydown="onTriggerKeydown"
       >
         <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
-        <span v-else class="rd-cascadeselect__label">{{ displayLabel }}</span>
+        <span v-else class="wk-cascadeselect__label">{{ displayLabel }}</span>
       </button>
-      <div class="rd-select__suffix">
+      <div class="wk-select__suffix">
         <button
           v-if="showClearButton"
-          class="rd-select__clear"
+          class="wk-select__clear"
           type="button"
           :aria-label="locale.clear"
           @click="clear"
         >
-          <RdIcon name="close" class="rd-control-affix-icon" />
+          <WkIcon name="close" class="wk-control-affix-icon" />
         </button>
         <span
-          class="rd-select__indicator"
-          :class="{ 'rd-select__indicator--open': open }"
+          class="wk-select__indicator"
+          :class="{ 'wk-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <RdIcon name="chevron-down" class="rd-control-affix-icon" />
+          <WkIcon name="chevron-down" class="wk-control-affix-icon" />
         </span>
       </div>
     </div>
     <p
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="rd-select-field__help"
-      :class="{ 'rd-select-field__help--invalid': feedbackIsError }"
+      class="wk-select-field__help"
+      :class="{ 'wk-select-field__help--invalid': feedbackIsError }"
     >
       {{ feedbackText }}
     </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="rd-scale-fade">
+      <Transition name="wk-scale-fade">
         <div
           v-if="open"
           :id="panelId"
           ref="panel"
-          class="rd-cascadeselect__panel"
-          :class="{ 'rd-cascadeselect__panel--teleported': teleported }"
+          class="wk-cascadeselect__panel"
+          :class="{ 'wk-cascadeselect__panel--teleported': teleported }"
           :style="panelStyle"
           role="listbox"
           @keydown="onPanelKeydown"
@@ -342,15 +342,15 @@ onBeforeUnmount(() => {
           <ul
             v-for="(column, columnIndex) in path"
             :key="columnIndex"
-            class="rd-cascadeselect__column"
+            class="wk-cascadeselect__column"
           >
             <li v-for="option in column" :key="String(option.value)">
               <button
                 type="button"
-                class="rd-cascadeselect__option"
+                class="wk-cascadeselect__option"
                 :class="{
-                  'rd-cascadeselect__option--selected': option.value === modelValue,
-                  'rd-cascadeselect__option--parent': Boolean(option.children?.length),
+                  'wk-cascadeselect__option--selected': option.value === modelValue,
+                  'wk-cascadeselect__option--parent': Boolean(option.children?.length),
                 }"
                 :disabled="option.disabled"
                 role="option"
@@ -360,7 +360,7 @@ onBeforeUnmount(() => {
                 <slot name="option" :option="option">
                   <span>{{ option.label }}</span>
                 </slot>
-                <RdIcon
+                <WkIcon
                   v-if="option.children?.length"
                   name="chevron-right"
                   size="sm"

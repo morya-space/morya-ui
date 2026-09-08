@@ -11,28 +11,28 @@ description: 工具栏布局，分 start / center / end 区域。
 ## 引入
 
 ```ts
-import { RdButton, RdToolbar } from '@wise-kit/ui'
+import { WkButton, WkToolbar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdToolbar } from '@wise-kit/ui'
+import { WkButton, WkToolbar } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdToolbar>
+  <WkToolbar>
     <template #start>
-      <RdButton label="新建" size="small" />
+      <WkButton label="新建" size="small" />
     </template>
     <template #center>
       <span>工具栏</span>
     </template>
     <template #end>
-      <RdButton label="导出" severity="secondary" size="small" />
+      <WkButton label="导出" severity="secondary" size="small" />
     </template>
-  </RdToolbar>
+  </WkToolbar>
 </template>
 ```
 

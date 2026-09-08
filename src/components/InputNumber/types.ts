@@ -1,4 +1,4 @@
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
 export type InputNumberButtonPlacement = 'both' | 'right'
 
@@ -17,7 +17,7 @@ export interface InputNumberProps {
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   fluid?: boolean
-  size?: RdSizeInput
+  size?: WkSizeInput
   showButtons?: boolean
   /** Where increment/decrement buttons sit. Defaults to `'both'`. */
   buttonPlacement?: InputNumberButtonPlacement

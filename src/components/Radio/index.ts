@@ -1,6 +1,6 @@
 import './style'
-export { default as RdRadio } from './Radio.vue'
-export { default as RdRadioGroup } from './RadioGroup.vue'
+export { default as WkRadio } from './Radio.vue'
+export { default as WkRadioGroup } from './RadioGroup.vue'
 export type {
   RadioEmits,
   RadioGroupEmits,

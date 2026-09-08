@@ -11,7 +11,7 @@ description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 
 ## 引入
 
 ```ts
-import { RdSkeleton } from '@wise-kit/ui'
+import { WkSkeleton } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { RdSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@wise-kit/ui'
+import { WkSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <RdSkeleton height="1.25rem" />
-    <RdSkeleton height="1.25rem" width="70%" />
-    <RdSkeleton height="6rem" border-radius="0.5rem" />
+    <WkSkeleton height="1.25rem" />
+    <WkSkeleton height="1.25rem" width="70%" />
+    <WkSkeleton height="6rem" border-radius="0.5rem" />
   </div>
 </template>
 ```
@@ -38,13 +38,13 @@ import { RdSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@wise-kit/ui'
+import { WkSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <RdSkeleton shape="circle" width="3rem" height="3rem" />
-    <RdSkeleton width="10rem" height="3rem" />
+    <WkSkeleton shape="circle" width="3rem" height="3rem" />
+    <WkSkeleton width="10rem" height="3rem" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ import { RdSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@wise-kit/ui'
+import { WkSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <RdSkeleton height="1.25rem" animation="wave" />
-    <RdSkeleton height="1.25rem" animation="none" />
+    <WkSkeleton height="1.25rem" animation="wave" />
+    <WkSkeleton height="1.25rem" animation="none" />
   </div>
 </template>
 ```
@@ -72,11 +72,11 @@ import { RdSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@wise-kit/ui'
+import { WkSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdSkeleton text :repeat="3" />
+  <WkSkeleton text :repeat="3" />
 </template>
 ```
 

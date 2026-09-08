@@ -11,43 +11,43 @@ Avatar displays a user or entity identity. Display priority: `image` > `icon` > 
 ## Import
 
 ```ts
-import { RdAvatar } from '@wise-kit/ui'
+import { WkAvatar } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdAvatar } from '@wise-kit/ui'
+import { WkAvatar } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdAvatar label="AB" />
-    <RdAvatar icon="check" />
-    <RdAvatar label="SQ" shape="square" />
-    <RdAvatar label="LG" size="large" />
-    <RdAvatar label="XL" size="xlarge" />
+    <WkAvatar label="AB" />
+    <WkAvatar icon="check" />
+    <WkAvatar label="SQ" shape="square" />
+    <WkAvatar label="LG" size="large" />
+    <WkAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
 
 ## Group
 
-`RdAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
+`WkAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdAvatar, RdAvatarGroup } from '@wise-kit/ui'
+import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdAvatarGroup :max="3">
-    <RdAvatar label="AL" />
-    <RdAvatar label="BK" />
-    <RdAvatar label="CN" />
-    <RdAvatar label="DY" />
-  </RdAvatarGroup>
+  <WkAvatarGroup :max="3">
+    <WkAvatar label="AL" />
+    <WkAvatar label="BK" />
+    <WkAvatar label="CN" />
+    <WkAvatar label="DY" />
+  </WkAvatarGroup>
 </template>
 ```
 
@@ -57,7 +57,7 @@ import { RdAvatar, RdAvatarGroup } from '@wise-kit/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | Text fallback when there is no image or icon. |
 | `image` | `string` | — | Image URL; highest priority. |
-| `icon` | `IconName` | — | `RdIcon` icon name. |
+| `icon` | `IconName` | — | `WkIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |
 
@@ -67,7 +67,7 @@ import { RdAvatar, RdAvatarGroup } from '@wise-kit/ui'
 | --- | --- | --- |
 | `error` | `Event` | Image failed to load. |
 
-`RdAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
+`WkAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
 
 ## Slots
 

@@ -11,22 +11,22 @@ Simple label with `htmlFor` / `for` and a default slot.
 ## Import
 
 ```ts
-import { RdLabel } from '@wise-kit/ui'
+import { WkLabel } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdLabel } from '@wise-kit/ui'
+import { WkInput, WkLabel } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <RdLabel html-for="demo-email">
+    <WkLabel html-for="demo-email">
       Email
-    </RdLabel>
-    <RdInput id="demo-email" placeholder="you@example.com" />
+    </WkLabel>
+    <WkInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>
 ```

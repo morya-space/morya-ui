@@ -1,75 +1,75 @@
 /* —— Form: TreeSelect —— */
-.rd-treeselect {
-    --rd-treeselect-min-width: 12rem;
-    --rd-treeselect-toggler-size: 1.25rem;
+.wk-treeselect {
+    --wk-treeselect-min-width: 12rem;
+    --wk-treeselect-toggler-size: 1.25rem;
     display: inline-block;
     max-width: 100%;
     position: relative;
 }
 
-.rd-treeselect__control {
+.wk-treeselect__control {
     display: inline-block;
     max-width: 100%;
-    min-width: var(--rd-treeselect-min-width);
+    min-width: var(--wk-treeselect-min-width);
 }
 
-.rd-treeselect__trigger {
+.wk-treeselect__trigger {
     align-items: center;
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-control);
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-control);
     box-sizing: border-box;
-    color: var(--rd-color-text);
+    color: var(--wk-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--rd-control-font-medium);
-    gap: var(--rd-space-1);
-    min-height: var(--rd-control-height-medium);
-    padding: 0 var(--rd-control-padding-x-medium);
-    padding-right: var(--rd-control-end-padding);
+    font-size: var(--wk-control-font-medium);
+    gap: var(--wk-space-1);
+    min-height: var(--wk-control-height-medium);
+    padding: 0 var(--wk-control-padding-x-medium);
+    padding-right: var(--wk-control-end-padding);
     width: 100%;
 }
 
-.rd-treeselect--small .rd-treeselect__trigger {
-    font-size: var(--rd-control-font-small);
-    min-height: var(--rd-control-height-small);
-    padding-left: var(--rd-control-padding-x-small);
-    padding-right: var(--rd-control-end-padding);
+.wk-treeselect--small .wk-treeselect__trigger {
+    font-size: var(--wk-control-font-small);
+    min-height: var(--wk-control-height-small);
+    padding-left: var(--wk-control-padding-x-small);
+    padding-right: var(--wk-control-end-padding);
 }
 
-.rd-treeselect--large .rd-treeselect__trigger {
-    font-size: var(--rd-control-font-large);
-    min-height: var(--rd-control-height-large);
-    padding-left: var(--rd-control-padding-x-large);
-    padding-right: var(--rd-control-end-padding);
+.wk-treeselect--large .wk-treeselect__trigger {
+    font-size: var(--wk-control-font-large);
+    min-height: var(--wk-control-height-large);
+    padding-left: var(--wk-control-padding-x-large);
+    padding-right: var(--wk-control-end-padding);
 }
 
-.rd-treeselect__trigger:focus-visible {
-    box-shadow: var(--rd-focus-shadow);
+.wk-treeselect__trigger:focus-visible {
+    box-shadow: var(--wk-focus-shadow);
     outline: none;
 }
 
-.rd-treeselect--multiple .rd-treeselect__trigger {
+.wk-treeselect--multiple .wk-treeselect__trigger {
     align-items: center;
     height: auto;
-    padding-top: var(--rd-space-1);
-    padding-bottom: var(--rd-space-1);
+    padding-top: var(--wk-space-1);
+    padding-bottom: var(--wk-space-1);
 }
 
-.rd-treeselect__tags {
+.wk-treeselect__tags {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    gap: var(--rd-space-1);
+    gap: var(--wk-space-1);
     min-width: 0;
 }
 
-.rd-treeselect__label--placeholder {
-    color: var(--rd-color-text-muted);
+.wk-treeselect__label--placeholder {
+    color: var(--wk-color-text-muted);
 }
 
-.rd-treeselect__label {
+.wk-treeselect__label {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
@@ -78,85 +78,85 @@
     text-align: left;
 }
 
-.rd-treeselect__filter {
-    background: var(--rd-color-surface);
+.wk-treeselect__filter {
+    background: var(--wk-color-surface);
     border: 0;
-    border-bottom: var(--rd-border-width) solid var(--rd-color-border);
+    border-bottom: var(--wk-border-width) solid var(--wk-color-border);
     box-sizing: border-box;
-    color: var(--rd-color-text);
+    color: var(--wk-color-text);
     font: inherit;
-    padding: var(--rd-space-2) var(--rd-space-3);
+    padding: var(--wk-space-2) var(--wk-space-3);
     width: 100%;
 }
 
-.rd-treeselect--disabled .rd-treeselect__trigger {
+.wk-treeselect--disabled .wk-treeselect__trigger {
     cursor: not-allowed;
-    opacity: var(--rd-opacity-disabled);
+    opacity: var(--wk-opacity-disabled);
 }
 
-.rd-treeselect__panel {
-    background: var(--rd-color-surface);
-    border: var(--rd-border-width) solid var(--rd-color-border);
-    border-radius: var(--rd-radius-md);
-    box-shadow: var(--rd-shadow-md);
+.wk-treeselect__panel {
+    background: var(--wk-color-surface);
+    border: var(--wk-border-width) solid var(--wk-color-border);
+    border-radius: var(--wk-radius-md);
+    box-shadow: var(--wk-shadow-md);
     left: 0;
-    margin-top: var(--rd-space-1);
+    margin-top: var(--wk-space-1);
     min-width: 100%;
     position: absolute;
     top: 100%;
-    z-index: var(--rd-z-popper);
+    z-index: var(--wk-z-popper);
 }
 
-.rd-treeselect__panel--teleported {
+.wk-treeselect__panel--teleported {
     margin-top: 0;
     position: fixed;
     top: auto;
-    z-index: var(--rd-z-dropdown);
+    z-index: var(--wk-z-dropdown);
 }
 
-.rd-treeselect__tree,
-.rd-treeselect__node ul {
+.wk-treeselect__tree,
+.wk-treeselect__node ul {
     list-style: none;
     margin: 0;
-    padding: var(--rd-space-1);
+    padding: var(--wk-space-1);
 }
 
-.rd-treeselect__row {
+.wk-treeselect__row {
     align-items: center;
     display: flex;
-    gap: var(--rd-space-1);
+    gap: var(--wk-space-1);
 }
 
-.rd-treeselect__toggler,
-.rd-treeselect__toggler-spacer {
+.wk-treeselect__toggler,
+.wk-treeselect__toggler-spacer {
     background: transparent;
     border: 0;
-    color: var(--rd-color-text-muted);
-    flex: 0 0 var(--rd-treeselect-toggler-size);
+    color: var(--wk-color-text-muted);
+    flex: 0 0 var(--wk-treeselect-toggler-size);
     font: inherit;
-    height: var(--rd-treeselect-toggler-size);
+    height: var(--wk-treeselect-toggler-size);
     padding: 0;
-    width: var(--rd-treeselect-toggler-size);
+    width: var(--wk-treeselect-toggler-size);
 }
 
-.rd-treeselect__option {
+.wk-treeselect__option {
     background: transparent;
     border: 0;
-    border-radius: var(--rd-radius-sm);
+    border-radius: var(--wk-radius-sm);
     color: inherit;
     cursor: pointer;
     flex: 1;
     font: inherit;
-    padding: var(--rd-space-1) var(--rd-space-2);
+    padding: var(--wk-space-1) var(--wk-space-2);
     text-align: left;
 }
 
-.rd-treeselect__option--selected,
-.rd-treeselect__option:hover:not(:disabled),
-.rd-treeselect__node--active > .rd-treeselect__row .rd-treeselect__option:not(:disabled) {
-    background: color-mix(in srgb, var(--rd-color-primary) 10%, transparent);
+.wk-treeselect__option--selected,
+.wk-treeselect__option:hover:not(:disabled),
+.wk-treeselect__node--active > .wk-treeselect__row .wk-treeselect__option:not(:disabled) {
+    background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
 }
 
-.rd-treeselect--invalid .rd-treeselect__trigger {
-    border-color: var(--rd-color-danger);
+.wk-treeselect--invalid .wk-treeselect__trigger {
+    border-color: var(--wk-color-danger);
 }

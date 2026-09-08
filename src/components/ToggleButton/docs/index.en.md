@@ -11,21 +11,21 @@ A boolean toggle button with configurable on/off labels and icons.
 ## Import
 
 ```ts
-import { RdToggleButton } from '@wise-kit/ui'
+import { WkToggleButton } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdToggleButton } from '@wise-kit/ui'
+import { WkToggleButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const on = ref(false)
 </script>
 
 <template>
-  <RdToggleButton v-model="on" on-label="On" off-label="Off" />
+  <WkToggleButton v-model="on" on-label="On" off-label="Off" />
 </template>
 ```
 
@@ -33,7 +33,7 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdToggleButton } from '@wise-kit/ui'
+import { WkToggleButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(false)
@@ -43,9 +43,9 @@ const c = ref(false)
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <RdToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
-    <RdToggleButton v-model="b" on-label="Default" off-label="Default" />
-    <RdToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
+    <WkToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
+    <WkToggleButton v-model="b" on-label="Default" off-label="Default" />
+    <WkToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
   </div>
 </template>
 ```
@@ -57,7 +57,7 @@ const c = ref(false)
 | `modelValue` | `boolean` | `false` | Whether it is on. |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | Labels. |
 | `onIcon` / `offIcon` | `string` | — | Optional icon characters. |
-| `size` | `RdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WkSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 
 ## Events

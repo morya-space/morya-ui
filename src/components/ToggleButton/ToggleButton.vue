@@ -3,7 +3,7 @@ import type { ToggleButtonProps } from './types'
 import { computed } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { resolveMenuIcon } from '../../shared/menu'
-import RdIcon from '../Icon/Icon.vue'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ToggleButtonProps>(), {
   modelValue: false,
@@ -19,11 +19,11 @@ const emit = defineEmits<{
 const sizeClass = useConfiguredSize('ToggleButton', () => props.size)
 
 const rootClass = computed(() => [
-  'rd-togglebutton',
-  `rd-togglebutton--${sizeClass.value}`,
+  'wk-togglebutton',
+  `wk-togglebutton--${sizeClass.value}`,
   {
-    'rd-togglebutton--checked': props.modelValue,
-    'rd-togglebutton--disabled': props.disabled,
+    'wk-togglebutton--checked': props.modelValue,
+    'wk-togglebutton--disabled': props.disabled,
   },
 ])
 
@@ -45,11 +45,11 @@ function toggle() {
     :aria-pressed="modelValue"
     @click="toggle"
   >
-    <span v-if="resolvedIcon" class="rd-togglebutton__icon" aria-hidden="true">
-      <RdIcon :name="resolvedIcon" size="sm" />
+    <span v-if="resolvedIcon" class="wk-togglebutton__icon" aria-hidden="true">
+      <WkIcon :name="resolvedIcon" size="sm" />
     </span>
     <slot>
-      <span class="rd-togglebutton__label">{{ label }}</span>
+      <span class="wk-togglebutton__label">{{ label }}</span>
     </slot>
   </button>
 </template>

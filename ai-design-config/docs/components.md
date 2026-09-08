@@ -6,61 +6,61 @@
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdConfigProvider` | 根配置：locale、主题、密度、浮层挂载、组件默认 props |
-| `RdLayout` / `RdLayoutHeader` / `RdLayoutSider` / `RdLayoutContent` / `RdLayoutFooter` | 后台整体布局 |
-| `RdSidebar` | 独立侧栏容器（非 Layout 子项场景） |
-| `RdBreadcrumb` | 页面路径 |
-| `RdToolbar` | 顶栏工具区 |
+| `WkConfigProvider` | 根配置：locale、主题、密度、浮层挂载、组件默认 props |
+| `WkLayout` / `WkLayoutHeader` / `WkLayoutSider` / `WkLayoutContent` / `WkLayoutFooter` | 后台整体布局 |
+| `WkSidebar` | 独立侧栏容器（非 Layout 子项场景） |
+| `WkBreadcrumb` | 页面路径 |
+| `WkToolbar` | 顶栏工具区 |
 
 ## 表单 · 输入
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdForm` / `RdFormItem` | 表单容器、校验、提交 |
-| `RdInput` | 单行文本 |
-| `RdInputPassword` | 密码 |
-| `RdInputNumber` | 数字 |
-| `RdTextarea` | 多行文本 |
-| `RdSelect` | 下拉选择（单选/多选/远程/filter） |
-| `RdTreeSelect` | 树形选择 |
-| `RdCascadeSelect` | 级联选择 |
-| `RdDatePicker` | 日期 / 日期范围 |
-| `RdAutoComplete` | 自动完成 |
-| `RdCheckbox` / `RdCheckboxGroup` | 多选 |
-| `RdRadio` / `RdRadioGroup` | 单选组 |
-| `RdSwitch` | 开关 |
-| `RdSlider` | 滑块 |
-| `RdRating` | 评分 |
-| `RdInputTags` | 标签输入 |
-| `RdFileUpload` | 文件上传 |
-| `RdFloatLabel` | 浮动标签包装 |
-| `RdIconField` | 输入框前缀/后缀图标 |
+| `WkForm` / `WkFormItem` | 表单容器、校验、提交 |
+| `WkInput` | 单行文本 |
+| `WkInputPassword` | 密码 |
+| `WkInputNumber` | 数字 |
+| `WkTextarea` | 多行文本 |
+| `WkSelect` | 下拉选择（单选/多选/远程/filter） |
+| `WkTreeSelect` | 树形选择 |
+| `WkCascadeSelect` | 级联选择 |
+| `WkDatePicker` | 日期 / 日期范围 |
+| `WkAutoComplete` | 自动完成 |
+| `WkCheckbox` / `WkCheckboxGroup` | 多选 |
+| `WkRadio` / `WkRadioGroup` | 单选组 |
+| `WkSwitch` | 开关 |
+| `WkSlider` | 滑块 |
+| `WkRating` | 评分 |
+| `WkInputTags` | 标签输入 |
+| `WkFileUpload` | 文件上传 |
+| `WkFloatLabel` | 浮动标签包装 |
+| `WkIconField` | 输入框前缀/后缀图标 |
 
 ## 表单 · 布局
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdGrid` / `RdGridItem` | 响应式栅格 |
-| `RdFlex` | Flex 布局 |
-| `RdSpace` | 间距 |
-| `RdFluid` | 子项撑满宽度 |
-| `RdDivider` | 分隔线 |
-| `RdFieldset` | 分组fieldset |
+| `WkGrid` / `WkGridItem` | 响应式栅格 |
+| `WkFlex` | Flex 布局 |
+| `WkSpace` | 间距 |
+| `WkFluid` | 子项撑满宽度 |
+| `WkDivider` | 分隔线 |
+| `WkFieldset` | 分组fieldset |
 
 ## 数据展示
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdTable` | 数据表格 |
-| `RdTreeTable` | 树形表格 |
-| `RdDataView` | 卡片/列表数据视图 |
-| `RdTree` | 树 |
-| `RdPagination` | 分页 |
-| `RdTag` / `RdChip` / `RdBadge` | 标签、徽章 |
-| `RdAvatar` / `RdAvatarGroup` | 头像 |
-| `RdTimeline` | 时间线 |
-| `RdMeterGroup` | 多段进度条 |
-| `RdVirtualScroller` | 虚拟滚动长列表 |
+| `WkTable` | 数据表格 |
+| `WkTreeTable` | 树形表格 |
+| `WkDataView` | 卡片/列表数据视图 |
+| `WkTree` | 树 |
+| `WkPagination` | 分页 |
+| `WkTag` / `WkChip` / `WkBadge` | 标签、徽章 |
+| `WkAvatar` / `WkAvatarGroup` | 头像 |
+| `WkTimeline` | 时间线 |
+| `WkMeterGroup` | 多段进度条 |
+| `WkVirtualScroller` | 虚拟滚动长列表 |
 
 ## 反馈
 
@@ -68,10 +68,10 @@
 | --- | --- | --- |
 | `message` | **默认**：单行操作回执（已保存 / 已删除） | ★ 首选 |
 | `toast` | 仅当需要 `summary` + `detail` 或异步通知 | 次要 |
-| `<RdMessage>` | 表单/认证区**常驻**错误条 | 内嵌场景 |
-| `RdProgressBar` / `RdProgressSpinner` | 加载进度 | |
-| `RdSkeleton` | 骨架屏 | |
-| `RdBlockUI` | 遮罩阻塞 | |
+| `<WkMessage>` | 表单/认证区**常驻**错误条 | 内嵌场景 |
+| `WkProgressBar` / `WkProgressSpinner` | 加载进度 | |
+| `WkSkeleton` | 骨架屏 | |
+| `WkBlockUI` | 遮罩阻塞 | |
 
 选型细则：[`feedback-message-vs-toast.md`](./feedback-message-vs-toast.md)
 
@@ -79,51 +79,51 @@
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdDialog` | 模态对话框 |
-| `RdDrawer` | 抽屉 |
-| `RdConfirmDialog` / `RdConfirmPopup` | 二次确认 |
-| `RdPopover` | 气泡卡片 |
-| `RdTooltip` | 文字提示 |
-| `RdDropdown` | **动作**下拉菜单（非表单选项） |
+| `WkDialog` | 模态对话框 |
+| `WkDrawer` | 抽屉 |
+| `WkConfirmDialog` / `WkConfirmPopup` | 二次确认 |
+| `WkPopover` | 气泡卡片 |
+| `WkTooltip` | 文字提示 |
+| `WkDropdown` | **动作**下拉菜单（非表单选项） |
 
 ## 导航 · 菜单
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdMenu` / `RdMenubar` / `RdTieredMenu` / `RdMegaMenu` | 菜单 |
-| `RdTabs` | 标签页 |
-| `RdStepper` | 步骤条 |
-| `RdCommandMenu` | 命令面板 |
-| `RdSplitButton` / `RdSelectButton` / `RdToggleButton` | 复合按钮 |
+| `WkMenu` / `WkMenubar` / `WkTieredMenu` / `WkMegaMenu` | 菜单 |
+| `WkTabs` | 标签页 |
+| `WkStepper` | 步骤条 |
+| `WkCommandMenu` | 命令面板 |
+| `WkSplitButton` / `WkSelectButton` / `WkToggleButton` | 复合按钮 |
 
 ## 展示 · 媒体
 
 | 组件 | 用途 |
 | --- | --- |
-| `RdCard` / `RdPanel` | 卡片、面板 |
-| `RdAccordion` | 折叠面板 |
-| `RdCarousel` / `RdGallery` | 轮播、图库 |
-| `RdIcon` | 图标（Tabler 集） |
-| `RdScrollbar` | 自定义滚动条 |
+| `WkCard` / `WkPanel` | 卡片、面板 |
+| `WkAccordion` | 折叠面板 |
+| `WkCarousel` / `WkGallery` | 轮播、图库 |
+| `WkIcon` | 图标（Tabler 集） |
+| `WkScrollbar` | 自定义滚动条 |
 
 ## 场景速查
 
 | 我要做… | 首选组件 |
 | --- | --- |
-| 用户列表 + 搜索 + 分页 | `RdTable` + `RdInput` + `RdPagination` |
-| 新建/编辑实体 | `RdForm` + 字段组件 + `RdDialog` 或独立路由页 |
-| 删除确认 | `RdConfirmDialog` |
-| 筛选侧栏 | `RdDrawer` + 表单控件 |
-| 状态标签 | `RdTag`（`severity`: success/warn/danger/info） |
-| 主/次按钮组 | `RdSpace` + `RdButton`（primary / secondary text） |
-| 后台首页 KPI | `RdGrid` + `RdCard` |
-| 组织架构 | `RdTree` 或 `RdTreeSelect` |
+| 用户列表 + 搜索 + 分页 | `WkTable` + `WkInput` + `WkPagination` |
+| 新建/编辑实体 | `WkForm` + 字段组件 + `WkDialog` 或独立路由页 |
+| 删除确认 | `WkConfirmDialog` |
+| 筛选侧栏 | `WkDrawer` + 表单控件 |
+| 状态标签 | `WkTag`（`severity`: success/warn/danger/info） |
+| 主/次按钮组 | `WkSpace` + `WkButton`（primary / secondary text） |
+| 后台首页 KPI | `WkGrid` + `WkCard` |
+| 组织架构 | `WkTree` 或 `WkTreeSelect` |
 
 ## 常见错误
 
 | 错误 | 正确 |
 | --- | --- |
-| 用 `RdDropdown` 做表单枚举 | 用 `RdSelect` |
-| 手写 `<table>` | 用 `RdTable` |
-| 手写 modal div | 用 `RdDialog` |
+| 用 `WkDropdown` 做表单枚举 | 用 `WkSelect` |
+| 手写 `<table>` | 用 `WkTable` |
+| 手写 modal div | 用 `WkDialog` |
 | `showClear` 与 `clearable` 混用概念 | Select 两者等价；其他组件看文档是否支持 `clearable` |

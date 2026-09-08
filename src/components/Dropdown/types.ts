@@ -1,4 +1,4 @@
-import type { RdAppendTo } from '../../shared/overlay'
+import type { WkAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export type DropdownItemType = 'item' | 'group' | 'divider'
@@ -27,7 +27,7 @@ export interface DropdownProps {
    */
   teleport?: boolean
   /** 挂载目标，默认 `'body'`；`'self'` / `false` 表示就地渲染。 */
-  appendTo?: RdAppendTo
+  appendTo?: WkAppendTo
 }
 
 export interface DropdownEmits {

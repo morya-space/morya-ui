@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { InputTagsProps } from './types'
 import { computed, ref } from 'vue'
-import { useRdLocale } from '../../locale'
+import { useWkLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useRdId } from '../../shared/useRdId'
-import RdIcon from '../Icon/Icon.vue'
+import { useWkId } from '../../shared/useWkId'
+import WkIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
   modelValue: () => [],
@@ -17,10 +17,10 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string[]): void
 }>()
 
-const locale = useRdLocale()
+const locale = useWkLocale()
 const draft = ref('')
 const sizeClass = useConfiguredSize('InputTags', () => props.size)
-const autoFieldId = useRdId('rd-inputtags')
+const autoFieldId = useWkId('wk-inputtags')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
 const separators = computed(() => {
@@ -30,11 +30,11 @@ const separators = computed(() => {
 const atMax = computed(() => props.max != null && props.modelValue.length >= props.max)
 
 const rootClass = computed(() => [
-  'rd-inputtags',
-  `rd-inputtags--${sizeClass.value}`,
+  'wk-inputtags',
+  `wk-inputtags--${sizeClass.value}`,
   {
-    'rd-inputtags--disabled': props.disabled,
-    'rd-inputtags--invalid': props.invalid,
+    'wk-inputtags--disabled': props.disabled,
+    'wk-inputtags--invalid': props.invalid,
   },
 ])
 
@@ -103,29 +103,29 @@ function onBlur() {
 </script>
 
 <template>
-  <div class="rd-inputtags-field">
-    <label v-if="label" class="rd-inputtags-field__label" :for="fieldId">{{ label }}</label>
+  <div class="wk-inputtags-field">
+    <label v-if="label" class="wk-inputtags-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <span
         v-for="(tag, index) in modelValue"
         :key="`${tag}-${index}`"
-        class="rd-inputtags__chip"
+        class="wk-inputtags__chip"
       >
         <slot name="tag" :tag="tag" :index="index">{{ tag }}</slot>
         <button
           type="button"
-          class="rd-inputtags__remove"
+          class="wk-inputtags__remove"
           :disabled="disabled"
           :aria-label="locale.removeTag"
           @click="removeTag(index)"
         >
-          <RdIcon name="close" size="sm" />
+          <WkIcon name="close" size="sm" />
         </button>
       </span>
       <input
         :id="fieldId"
         :value="draft"
-        class="rd-inputtags__input"
+        class="wk-inputtags__input"
         type="text"
         :placeholder="modelValue.length ? '' : addPlaceholder"
         :disabled="disabled || atMax"

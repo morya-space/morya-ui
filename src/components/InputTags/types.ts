@@ -1,4 +1,4 @@
-import type { RdSizeInput } from '../../shared/types'
+import type { WkSizeInput } from '../../shared/types'
 
 export interface InputTagsProps {
   modelValue?: string[]
@@ -7,7 +7,7 @@ export interface InputTagsProps {
   placeholder?: string
   disabled?: boolean
   invalid?: boolean
-  size?: RdSizeInput
+  size?: WkSizeInput
   addOnBlur?: boolean
   /** Max number of tags. */
   max?: number

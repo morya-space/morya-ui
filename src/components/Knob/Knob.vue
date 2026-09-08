@@ -43,8 +43,8 @@ const displayValue = computed(() =>
 )
 
 const rootClass = computed(() => [
-  'rd-knob',
-  { 'rd-knob--disabled': props.disabled },
+  'wk-knob',
+  { 'wk-knob--disabled': props.disabled },
 ])
 
 function snap(value: number): number {
@@ -127,14 +127,14 @@ onBeforeUnmount(() => {
   >
     <svg
       ref="svgRef"
-      class="rd-knob__svg"
+      class="wk-knob__svg"
       :width="diameter"
       :height="diameter"
       :viewBox="`0 0 ${diameter} ${diameter}`"
       @pointerdown="onPointerDown"
     >
       <circle
-        class="rd-knob__track"
+        class="wk-knob__track"
         :cx="diameter / 2"
         :cy="diameter / 2"
         :r="radius"
@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
         stroke-width="8"
       />
       <circle
-        class="rd-knob__value"
+        class="wk-knob__value"
         :cx="diameter / 2"
         :cy="diameter / 2"
         :r="radius"
@@ -153,6 +153,6 @@ onBeforeUnmount(() => {
         :transform="`rotate(-90 ${diameter / 2} ${diameter / 2})`"
       />
     </svg>
-    <span class="rd-knob__label">{{ displayValue }}</span>
+    <span class="wk-knob__label">{{ displayValue }}</span>
   </div>
 </template>

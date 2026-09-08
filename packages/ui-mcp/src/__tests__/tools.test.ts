@@ -41,7 +41,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     )
 
     expect(result.id).toBe('Table')
-    expect(result.exportName).toBe('RdTable')
+    expect(result.exportName).toBe('WkTable')
   })
 
   it('paginates component examples and reports API coverage', () => {
@@ -74,7 +74,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string; message: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<RdButton label="Save" severity="danger" foo="bar" />',
+        code: '<WkButton label="Save" severity="danger" foo="bar" />',
       }),
     )
 
@@ -89,7 +89,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<RdButton icon-only aria-label="Add"><Plus /></RdButton>',
+        code: '<WkButton icon-only aria-label="Add"><Plus /></WkButton>',
       }),
     )
 
@@ -106,7 +106,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     const result = read<{ ok: boolean }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<RdButton icon="plus" icon-only aria-label="Add" />',
+        code: '<WkButton icon="plus" icon-only aria-label="Add" />',
       }),
     )
 
@@ -135,8 +135,8 @@ describe('@wise-kit/ui-mcp handlers', () => {
     )
 
     expect(result.matchedPattern).toBe('dashboard')
-    expect(result.scaffold.files.component).toContain('RdGrid')
-    expect(result.scaffold.files.component).toContain('RdSkeleton')
+    expect(result.scaffold.files.component).toContain('WkGrid')
+    expect(result.scaffold.files.component).toContain('WkSkeleton')
   })
 
   it('lists component decision guides when query is omitted', () => {

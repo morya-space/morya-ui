@@ -11,7 +11,7 @@ Content divider, optionally with a label.
 ## Import
 
 ```ts
-import { RdDivider } from '@wise-kit/ui'
+import { WkDivider } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Default horizontal solid divider.
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@wise-kit/ui'
+import { WkDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -28,7 +28,7 @@ import { RdDivider } from '@wise-kit/ui'
     <p style="margin:0">
       Above
     </p>
-    <RdDivider />
+    <WkDivider />
     <p style="margin:0">
       Below
     </p>
@@ -42,14 +42,14 @@ import { RdDivider } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@wise-kit/ui'
+import { WkDivider } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <RdDivider type="solid" label="Solid" />
-    <RdDivider type="dashed" label="Dashed" />
-    <RdDivider type="dotted" label="Dotted" />
+    <WkDivider type="solid" label="Solid" />
+    <WkDivider type="dashed" label="Dashed" />
+    <WkDivider type="dotted" label="Dotted" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ When the divider is horizontal and has a label, use `align` to control the label
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@wise-kit/ui'
+import { WkDivider } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <RdDivider label="Left" align="left" />
-    <RdDivider label="Center" align="center" />
-    <RdDivider label="Right" align="right" />
+    <WkDivider label="Left" align="left" />
+    <WkDivider label="Center" align="center" />
+    <WkDivider label="Right" align="right" />
   </div>
 </template>
 ```
@@ -78,11 +78,11 @@ import { RdDivider } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@wise-kit/ui'
+import { WkDivider } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdDivider label="Or" title-placement="right" />
+  <WkDivider label="Or" title-placement="right" />
 </template>
 ```
 
@@ -92,15 +92,15 @@ import { RdDivider } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@wise-kit/ui'
+import { WkDivider } from '@wise-kit/ui'
 </script>
 
 <template>
   <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
     <span>Left</span>
-    <RdDivider layout="vertical" />
+    <WkDivider layout="vertical" />
     <span>Middle</span>
-    <RdDivider layout="vertical" type="dashed" />
+    <WkDivider layout="vertical" type="dashed" />
     <span>Right</span>
   </div>
 </template>

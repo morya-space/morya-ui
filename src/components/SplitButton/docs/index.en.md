@@ -11,14 +11,14 @@ The left primary button emits `click`; items in the right-side menu emit `comman
 ## Import
 
 ```ts
-import { RdSplitButton } from '@wise-kit/ui'
+import { WkSplitButton } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSplitButton } from '@wise-kit/ui'
+import { WkSplitButton } from '@wise-kit/ui'
 
 const items = [
   { label: 'Save as', command: () => console.log('save as') },
@@ -27,7 +27,7 @@ const items = [
 </script>
 
 <template>
-  <RdSplitButton label="Save" :model="items" @click="() => console.log('save')" />
+  <WkSplitButton label="Save" :model="items" @click="() => console.log('save')" />
 </template>
 ```
 

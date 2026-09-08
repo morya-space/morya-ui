@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import RdMeterGroup from './MeterGroup.vue'
+import WkMeterGroup from './MeterGroup.vue'
 
-describe('rdMeterGroup', () => {
+describe('wkMeterGroup', () => {
   it('renders segments and legend', () => {
-    const wrapper = mount(RdMeterGroup, {
+    const wrapper = mount(WkMeterGroup, {
       props: {
         value: [
           { label: 'Apps', value: 40, color: '#2563eb' },
@@ -13,13 +13,13 @@ describe('rdMeterGroup', () => {
         max: 100,
       },
     })
-    expect(wrapper.findAll('.rd-metergroup__segment')).toHaveLength(2)
+    expect(wrapper.findAll('.wk-metergroup__segment')).toHaveLength(2)
     expect(wrapper.text()).toContain('Apps')
-    expect(wrapper.find('.rd-metergroup__segment').attributes('style')).toContain('40%')
+    expect(wrapper.find('.wk-metergroup__segment').attributes('style')).toContain('40%')
   })
 
   it('exposes aria-valuenow on the meter', () => {
-    const wrapper = mount(RdMeterGroup, {
+    const wrapper = mount(WkMeterGroup, {
       props: {
         value: [
           { label: 'Apps', value: 40, color: '#2563eb' },

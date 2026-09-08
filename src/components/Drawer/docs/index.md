@@ -11,14 +11,14 @@ description: 侧边抽屉面板。
 ## 引入
 
 ```ts
-import { RdButton, RdDrawer } from '@wise-kit/ui'
+import { WkButton, WkDrawer } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDrawer } from '@wise-kit/ui'
+import { WkButton, WkDrawer } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -26,12 +26,12 @@ const open = ref(false)
 
 <template>
   <div>
-    <RdButton label="Open Drawer" @click="open = true" />
-    <RdDrawer v-model="open" header="Navigation">
+    <WkButton label="Open Drawer" @click="open = true" />
+    <WkDrawer v-model="open" header="Navigation">
       <p style="margin:0">
         Drawer body content. Esc or mask click closes by default.
       </p>
-    </RdDrawer>
+    </WkDrawer>
   </div>
 </template>
 ```
@@ -42,7 +42,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDrawer } from '@wise-kit/ui'
+import { WkButton, WkDrawer } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -56,15 +56,15 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <RdButton label="Left" size="small" @click="openAt('left')" />
-    <RdButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
-    <RdButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <RdButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
-    <RdDrawer v-model="open" :header="`Position: ${position}`" :position="position">
+    <WkButton label="Left" size="small" @click="openAt('left')" />
+    <WkButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
+    <WkButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
+    <WkButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
+    <WkDrawer v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">
         Use <code>dismissable</code> to control mask dismiss.
       </p>
-    </RdDrawer>
+    </WkDrawer>
   </div>
 </template>
 ```

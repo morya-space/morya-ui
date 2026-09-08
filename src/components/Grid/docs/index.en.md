@@ -6,29 +6,29 @@ description: CSS Grid layout with GridItem span / offset control.
 
 # Grid
 
-24-column grid layout (override with `cols`). Use `RdGridItem` (alias `RdGi`) as children.
+24-column grid layout (override with `cols`). Use `WkGridItem` (alias `WkGi`) as children.
 
 ## Import
 
 ```ts
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdGrid :cols="4" :x-gap="12" :y-gap="12">
-    <RdGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+  <WkGrid :cols="4" :x-gap="12" :y-gap="12">
+    <WkGridItem v-for="n in 4" :key="n" :span="1">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         {{ n }}
       </div>
-    </RdGridItem>
-  </RdGrid>
+    </WkGridItem>
+  </WkGrid>
 </template>
 ```
 
@@ -36,22 +36,22 @@ import { RdGrid, RdGridItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdGrid :cols="6" :x-gap="12" :y-gap="12">
-    <RdGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+  <WkGrid :cols="6" :x-gap="12" :y-gap="12">
+    <WkGridItem :span="2">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         span 2
       </div>
-    </RdGridItem>
-    <RdGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+    </WkGridItem>
+    <WkGridItem :span="2" :offset="1">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         offset 1
       </div>
-    </RdGridItem>
-  </RdGrid>
+    </WkGridItem>
+  </WkGrid>
 </template>
 ```
 
@@ -63,17 +63,17 @@ When `cols` / gaps are plain numbers but items still need responsive `span`, ena
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkGrid, WkGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <RdGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+  <WkGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
+    <WkGridItem v-for="n in 4" :key="n" span="1 m:2">
+      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
         {{ n }}
       </div>
-    </RdGridItem>
-  </RdGrid>
+    </WkGridItem>
+  </WkGrid>
 </template>
 ```
 
@@ -81,7 +81,7 @@ import { RdGrid, RdGridItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdGrid, RdGridItem } from '@wise-kit/ui'
+import { WkButton, WkGrid, WkGridItem } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)
@@ -89,21 +89,21 @@ const collapsed = ref(true)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <RdButton size="small" :label="collapsed ? 'Expand' : 'Collapse'" @click="collapsed = !collapsed" />
-    <RdGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <RdGridItem v-for="n in 6" :key="n" :span="1">
-        <div style="padding:0.5rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md)">
+    <WkButton size="small" :label="collapsed ? 'Expand' : 'Collapse'" @click="collapsed = !collapsed" />
+    <WkGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
+      <WkGridItem v-for="n in 6" :key="n" :span="1">
+        <div style="padding:0.5rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
           {{ n }}
         </div>
-      </RdGridItem>
-      <RdGridItem suffix :span="1">
+      </WkGridItem>
+      <WkGridItem suffix :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--rd-color-text-muted);font-size:0.75rem">
+          <div style="padding:0.5rem;color:var(--wk-color-text-muted);font-size:0.75rem">
             {{ overflow ? 'More…' : 'All' }}
           </div>
         </template>
-      </RdGridItem>
-    </RdGrid>
+      </WkGridItem>
+    </WkGrid>
   </div>
 </template>
 ```

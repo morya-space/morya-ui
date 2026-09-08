@@ -11,22 +11,22 @@ Flexbox layout container. Prefer CSS `gap` for spacing between children.
 ## Import
 
 ```ts
-import { RdFlex } from '@wise-kit/ui'
+import { WkFlex } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@wise-kit/ui'
+import { WkButton, WkFlex } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdFlex>
-    <RdButton label="One" size="small" />
-    <RdButton label="Two" size="small" severity="secondary" />
-    <RdButton label="Three" size="small" severity="secondary" />
-  </RdFlex>
+  <WkFlex>
+    <WkButton label="One" size="small" />
+    <WkButton label="Two" size="small" severity="secondary" />
+    <WkButton label="Three" size="small" severity="secondary" />
+  </WkFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { RdButton, RdFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@wise-kit/ui'
+import { WkButton, WkFlex } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdFlex vertical>
-    <RdButton label="Top" size="small" />
-    <RdButton label="Middle" size="small" severity="secondary" />
-    <RdButton label="Bottom" size="small" severity="secondary" />
-  </RdFlex>
+  <WkFlex vertical>
+    <WkButton label="Top" size="small" />
+    <WkButton label="Middle" size="small" severity="secondary" />
+    <WkButton label="Bottom" size="small" severity="secondary" />
+  </WkFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { RdButton, RdFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex, RdTag } from '@wise-kit/ui'
+import { WkButton, WkFlex, WkTag } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <RdTag value="Tag" />
-    <RdButton label="Action" size="small" />
-  </RdFlex>
+  <WkFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <WkTag value="Tag" />
+    <WkButton label="Action" size="small" />
+  </WkFlex>
 </template>
 ```
 

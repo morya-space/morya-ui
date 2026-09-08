@@ -1,4 +1,4 @@
 import './style'
-export { default as RdInputGroup } from './InputGroup.vue'
-export { default as RdInputGroupAddon } from './InputGroupAddon.vue'
+export { default as WkInputGroup } from './InputGroup.vue'
+export { default as WkInputGroupAddon } from './InputGroupAddon.vue'
 export type { InputGroupAddonProps, InputGroupProps } from './types'

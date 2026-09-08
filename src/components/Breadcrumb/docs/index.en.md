@@ -11,14 +11,14 @@ Breadcrumb navigation. Items with `to` render as links; otherwise as text.
 ## Import
 
 ```ts
-import { RdBreadcrumb } from '@wise-kit/ui'
+import { WkBreadcrumb } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdBreadcrumb } from '@wise-kit/ui'
+import { WkBreadcrumb } from '@wise-kit/ui'
 
 const items = [
   { label: 'Electronics', to: '/electronics' },
@@ -28,7 +28,7 @@ const items = [
 </script>
 
 <template>
-  <RdBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
+  <WkBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
 </template>
 ```
 
@@ -38,7 +38,7 @@ const items = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdBreadcrumb } from '@wise-kit/ui'
+import { WkBreadcrumb } from '@wise-kit/ui'
 
 const items = [
   { label: 'Library', to: '/lib' },
@@ -47,7 +47,7 @@ const items = [
 </script>
 
 <template>
-  <RdBreadcrumb :model="items" separator=">" />
+  <WkBreadcrumb :model="items" separator=">" />
 </template>
 ```
 

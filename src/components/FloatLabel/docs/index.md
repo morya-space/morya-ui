@@ -11,23 +11,23 @@ description: 浮动标签容器，聚焦或有值时上浮。
 ## 引入
 
 ```ts
-import { RdFloatLabel, RdInput } from '@wise-kit/ui'
+import { WkFloatLabel, WkInput } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdFloatLabel, RdInput } from '@wise-kit/ui'
+import { WkFloatLabel, WkInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <RdFloatLabel label="Username">
-    <RdInput v-model="value" placeholder=" " />
-  </RdFloatLabel>
+  <WkFloatLabel label="Username">
+    <WkInput v-model="value" placeholder=" " />
+  </WkFloatLabel>
 </template>
 ```
 

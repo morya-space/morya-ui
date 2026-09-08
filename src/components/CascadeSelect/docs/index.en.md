@@ -11,14 +11,14 @@ Select a value step by step from nested options.
 ## Import
 
 ```ts
-import { RdCascadeSelect } from '@wise-kit/ui'
+import { WkCascadeSelect } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@wise-kit/ui'
+import { WkCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | null>(null)
@@ -36,7 +36,7 @@ const options = [
 </script>
 
 <template>
-  <RdCascadeSelect v-model="value" :options="options" placeholder="Select a category" />
+  <WkCascadeSelect v-model="value" :options="options" placeholder="Select a category" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@wise-kit/ui'
+import { WkCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(null)
@@ -58,9 +58,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <RdCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <RdCascadeSelect v-model="b" :options="options" placeholder="Default" />
-    <RdCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <WkCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <WkCascadeSelect v-model="b" :options="options" placeholder="Default" />
+    <WkCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -79,7 +79,7 @@ const options = [
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Form required hint. |
-| `size` | `RdSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `WkSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `clearable` | `boolean` | `false` | Show clear button when a value is selected (hover suffix slot). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |

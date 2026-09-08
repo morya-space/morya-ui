@@ -1,18 +1,18 @@
 import type {PropType} from 'vue';
-import type {RdRenderable} from './content';
+import type {WkRenderable} from './content';
 import { defineComponent  } from 'vue'
-import { renderRdContent  } from './content'
+import { renderWkContent  } from './content'
 
 /** Renders string / VNode / component / `() => VNode` content. */
-export const RdRenderableView = defineComponent({
-  name: 'RdRenderable',
+export const WkRenderableView = defineComponent({
+  name: 'WkRenderable',
   props: {
     value: {
-      type: [String, Number, Object, Function] as PropType<RdRenderable>,
+      type: [String, Number, Object, Function] as PropType<WkRenderable>,
       required: true,
     },
   },
   setup(props) {
-    return () => renderRdContent(props.value)
+    return () => renderWkContent(props.value)
   },
 })

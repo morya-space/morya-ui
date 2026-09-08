@@ -1,5 +1,5 @@
 import type { AsyncGuard } from '../../shared/asyncGuard'
-import type { RdAppendTo } from '../../shared/overlay'
+import type { WkAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity } from '../Button/types'
 
 export type DialogType = 'info' | 'success' | 'warning' | 'error' | 'warn'
@@ -39,7 +39,7 @@ export interface DialogProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: RdAppendTo
+  appendTo?: WkAppendTo
   /** Lock page scroll while open (default true when modal). */
   blockScroll?: boolean
   /**

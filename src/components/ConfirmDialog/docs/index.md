@@ -11,22 +11,22 @@ description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 ## 引入
 
 ```ts
-import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
+import { WkButton, WkConfirmDialog } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
+import { WkButton, WkConfirmDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
 </script>
 
 <template>
-  <RdButton label="删除" severity="danger" @click="visible = true" />
-  <RdConfirmDialog
+  <WkButton label="删除" severity="danger" @click="visible = true" />
+  <WkConfirmDialog
     v-model="visible"
     header="删除确认"
     message="确定要删除该项吗？此操作不可撤销。"

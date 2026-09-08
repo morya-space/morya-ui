@@ -6,17 +6,17 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 
 # Layout
 
-页面级布局容器。侧栏场景需在对应 `RdLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`RdLayoutContent` 会自动撑满剩余空间。
+页面级布局容器。侧栏场景需在对应 `WkLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WkLayoutContent` 会自动撑满剩余空间。
 
 ## 引入
 
 ```ts
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutFooter,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutFooter,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 ```
 
@@ -26,21 +26,21 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@wise-kit/ui'
+import { WkLayout, WkLayoutContent, WkLayoutFooter, WkLayoutHeader } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </RdLayoutHeader>
-    <RdLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </WkLayoutHeader>
+    <WkLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content（自动撑开）
-    </RdLayoutContent>
-    <RdLayoutFooter bordered style="padding:0.75rem 1rem">
+    </WkLayoutContent>
+    <WkLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </RdLayoutFooter>
-  </RdLayout>
+    </WkLayoutFooter>
+  </WkLayout>
 </template>
 ```
 
@@ -51,10 +51,10 @@ import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@wise
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 import { ref } from 'vue'
 
@@ -62,13 +62,13 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <RdLayout style="height:16rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--rd-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
-    </RdLayoutHeader>
-    <RdLayout has-sider>
-      <RdLayoutSider
+      <span style="color:var(--wk-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
+    </WkLayoutHeader>
+    <WkLayout has-sider>
+      <WkLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>项目</div>
           <div>设置</div>
         </div>
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding:1rem">
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding:1rem">
         主内容区会横向、纵向同时撑满。
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </RdLayoutHeader>
-    <RdLayout has-sider sider-placement="right">
-      <RdLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </WkLayoutHeader>
+    <WkLayout has-sider sider-placement="right">
+      <WkLayoutSider bordered :width="140" content-style="padding:0.75rem">
         属性面板
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding:1rem">
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding:1rem">
         画布 / 主区域
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -125,13 +125,13 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  RdButton,
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutFooter,
-  RdLayoutHeader,
-  RdLayoutSider,
-  RdTag,
+  WkButton,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutFooter,
+  WkLayoutHeader,
+  WkLayoutSider,
+  WkTag,
 } from '@wise-kit/ui'
 import { ref } from 'vue'
 
@@ -139,20 +139,20 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <RdLayout style="height:18rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader
+  <WkLayout style="height:18rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
       <strong>Wise Kit</strong>
-      <RdTag value="Studio" />
+      <WkTag value="Studio" />
       <span style="flex:1" />
-      <RdButton size="small" label="发布" />
-    </RdLayoutHeader>
+      <WkButton size="small" label="发布" />
+    </WkLayoutHeader>
 
-    <RdLayout has-sider>
-      <RdLayoutSider
+    <WkLayout has-sider>
+      <WkLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>组件</div>
           <div>主题</div>
         </div>
-      </RdLayoutSider>
+      </WkLayoutSider>
 
-      <RdLayout>
-        <RdLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <WkLayout>
+        <WkLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>工作区</strong>
-          <p style="margin:0;color:var(--rd-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--wk-color-text-muted);font-size:0.875rem">
             Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。
           </p>
-        </RdLayoutContent>
-        <RdLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--rd-color-text-muted);font-size:0.75rem">
+        </WkLayoutContent>
+        <WkLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wk-color-text-muted);font-size:0.75rem">
           Ready · local
-        </RdLayoutFooter>
-      </RdLayout>
-    </RdLayout>
-  </RdLayout>
+        </WkLayoutFooter>
+      </WkLayout>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@wise-kit/ui'
+import { WkLayout, WkLayoutContent, WkLayoutHeader } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:12rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:12rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </RdLayoutHeader>
-    <RdLayoutContent embedded content-style="padding:1rem">
+    </WkLayoutHeader>
+    <WkLayoutContent embedded content-style="padding:1rem">
       嵌套表单 / 列表放在这里。
-    </RdLayoutContent>
-  </RdLayout>
+    </WkLayoutContent>
+  </WkLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@wise-kit/ui'
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 </script>
 
 <template>
-  <RdLayout style="height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </RdLayoutHeader>
-    <RdLayout has-sider>
-      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </WkLayoutHeader>
+    <WkLayout has-sider>
+      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
         固定侧栏
-      </RdLayoutSider>
-      <RdLayoutContent embedded content-style="padding:1rem">
+      </WkLayoutSider>
+      <WkLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             行 {{ n }} — 向下滚动
           </div>
         </div>
-      </RdLayoutContent>
-    </RdLayout>
-  </RdLayout>
+      </WkLayoutContent>
+    </WkLayout>
+  </WkLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  RdLayout,
-  RdLayoutContent,
-  RdLayoutHeader,
-  RdLayoutSider,
+  WkLayout,
+  WkLayoutContent,
+  WkLayoutHeader,
+  WkLayoutSider,
 } from '@wise-kit/ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--rd-color-border);border-radius:var(--rd-radius-md);overflow:hidden">
-    <RdLayout position="absolute" has-sider>
-      <RdLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
+    <WkLayout position="absolute" has-sider>
+      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </RdLayoutSider>
-      <RdLayout>
-        <RdLayoutHeader bordered style="padding:0.75rem 1rem">
+      </WkLayoutSider>
+      <WkLayout>
+        <WkLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </RdLayoutHeader>
-        <RdLayoutContent embedded content-style="padding:1rem">
+        </WkLayoutHeader>
+        <WkLayoutContent embedded content-style="padding:1rem">
           填满相对定位容器
-        </RdLayoutContent>
-      </RdLayout>
-    </RdLayout>
+        </WkLayoutContent>
+      </WkLayout>
+    </WkLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | 横向容纳 `RdLayoutSider`。 |
+| `hasSider` | `boolean` | `false` | 横向容纳 `WkLayoutSider`。 |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | 侧栏位置。 |
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
@@ -315,17 +315,17 @@ import {
 
 ## Expose
 
-`RdLayout` / `RdLayoutContent` / `RdLayoutSider` 均暴露 `scrollTo(...)`。
+`WkLayout` / `WkLayoutContent` / `WkLayoutSider` 均暴露 `scrollTo(...)`。
 
 ## Components
 
 | 组件 | 说明 |
 | --- | --- |
-| `RdLayout` | 根布局。 |
-| `RdLayoutHeader` | 顶栏。 |
-| `RdLayoutContent` | 主内容区（默认撑满剩余空间）。 |
-| `RdLayoutFooter` | 底栏。 |
-| `RdLayoutSider` | 侧栏。 |
+| `WkLayout` | 根布局。 |
+| `WkLayoutHeader` | 顶栏。 |
+| `WkLayoutContent` | 主内容区（默认撑满剩余空间）。 |
+| `WkLayoutFooter` | 底栏。 |
+| `WkLayoutSider` | 侧栏。 |
 
 ## Slots
 

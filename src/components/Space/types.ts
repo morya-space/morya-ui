@@ -1,9 +1,9 @@
 import type { CSSProperties } from 'vue'
-import type { RdFlexAlign, RdFlexJustify, RdGapSize } from '../../shared/gap'
+import type { WkFlexAlign, WkFlexJustify, WkGapSize } from '../../shared/gap'
 
-export type SpaceAlign = RdFlexAlign
-export type SpaceJustify = RdFlexJustify
-export type SpaceSize = RdGapSize
+export type SpaceAlign = WkFlexAlign
+export type SpaceJustify = WkFlexJustify
+export type SpaceSize = WkGapSize
 
 export interface SpaceProps {
   /** Cross-axis alignment. */
