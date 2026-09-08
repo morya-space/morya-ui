@@ -1,9 +1,13 @@
 import { ref, watch } from 'vue'
+import { readStoredValue, writeStoredValue } from './storage'
 
 export type DensityPreference = 'compact' | 'comfortable' | 'spacious'
 
-const storageKey = 'wex-design-density'
+const storageKey = 'wise-kit-density'
+const legacyStorageKeys = ['wex-design-density']
 const densityPreferences: readonly DensityPreference[] = ['compact', 'comfortable', 'spacious']
+
+const preference = ref<DensityPreference>(getInitialDensity())
 
 export function applyDensity(preference: DensityPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
@@ -11,31 +15,29 @@ export function applyDensity(preference: DensityPreference, target?: HTMLElement
   el.dataset.wkDensity = preference
 }
 
-export function useDensity() {
-  const preference = ref<DensityPreference>(getInitialDensity())
-
-  function setDensity(next: DensityPreference) {
-    preference.value = next
+function getInitialDensity(): DensityPreference {
+  const saved = readStoredValue(storageKey, legacyStorageKeys)
+  if (saved && densityPreferences.includes(saved as DensityPreference)) {
+    return saved as DensityPreference
   }
+  return 'comfortable'
+}
 
+if (typeof window !== 'undefined') {
   watch(
     preference,
     (next) => {
       applyDensity(next)
-      if (typeof localStorage !== 'undefined') localStorage.setItem(storageKey, next)
+      writeStoredValue(storageKey, next, legacyStorageKeys)
     },
     { immediate: true },
   )
-
-  return { preference, densityPreferences, setDensity }
 }
 
-function getInitialDensity(): DensityPreference {
-  if (typeof localStorage !== 'undefined') {
-    const saved = localStorage.getItem(storageKey)
-    if (saved && densityPreferences.includes(saved as DensityPreference)) {
-      return saved as DensityPreference
-    }
+export function useDensity() {
+  function setDensity(next: DensityPreference) {
+    preference.value = next
   }
-  return 'comfortable'
+
+  return { preference, densityPreferences, setDensity }
 }

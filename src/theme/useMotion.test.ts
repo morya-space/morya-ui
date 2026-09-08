@@ -1,12 +1,13 @@
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, nextTick } from 'vue'
-import { useMotion } from './useMotion'
+import { applyReducedMotionPolicy, useMotion } from './useMotion'
 
 describe('useMotion', () => {
   beforeEach(() => {
     localStorage.clear()
     delete document.documentElement.dataset.wkMotion
+    delete document.documentElement.dataset.wkIgnoreReducedMotion
   })
 
   it('applies and persists a global motion preference', async () => {
@@ -19,6 +20,22 @@ describe('useMotion', () => {
 
     expect(vm.preference).toBe('none')
     expect(document.documentElement.dataset.wkMotion).toBe('none')
-    expect(localStorage.getItem('wex-design-motion')).toBe('none')
+    expect(localStorage.getItem('wise-kit-motion')).toBe('none')
+  })
+
+  it('respects OS reduced motion by default', () => {
+    applyReducedMotionPolicy(undefined)
+    expect(document.documentElement.dataset.wkIgnoreReducedMotion).toBeUndefined()
+
+    applyReducedMotionPolicy(true)
+    expect(document.documentElement.dataset.wkIgnoreReducedMotion).toBeUndefined()
+  })
+
+  it('can opt out of OS reduced motion', () => {
+    applyReducedMotionPolicy(false)
+    expect(document.documentElement.dataset.wkIgnoreReducedMotion).toBe('true')
+
+    applyReducedMotionPolicy(undefined)
+    expect(document.documentElement.dataset.wkIgnoreReducedMotion).toBeUndefined()
   })
 })

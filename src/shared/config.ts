@@ -19,7 +19,7 @@ import {
 } from 'vue'
 import { wkComponents } from '../component-registry'
 import { zhCN } from '../locale/zh-CN'
-import { applyDensity  } from '../theme'
+import { applyDensity, applyReducedMotionPolicy } from '../theme'
 import {
   getComponentDefault,
   getComponentDefaults,
@@ -54,6 +54,11 @@ export interface WkGlobalConfig {
    * Local ConfigProvider scopes to its subtree; plugin applies on `documentElement`.
    */
   density?: WkDensity
+  /**
+   * When true (default), honor `prefers-reduced-motion` and soften/disable motion.
+   * Set to `false` to keep component transitions regardless of OS preference.
+   */
+  respectReducedMotion?: boolean
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
   locale?: WkLocaleConfig
   /**
@@ -205,6 +210,7 @@ function applyInstallerConfig(app: App, options: WkInstallerOptions) {
   setWkOverlayAppContext(app._context)
   if (typeof document !== 'undefined') {
     if (config.density) applyDensity(config.density)
+    applyReducedMotionPolicy(config.respectReducedMotion)
     if (config.zIndex != null) {
       document.documentElement.style.setProperty('--wk-z-base', String(config.zIndex))
     }

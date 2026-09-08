@@ -572,9 +572,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    html:not([data-wk-ignore-reduced-motion]) *,
+    html:not([data-wk-ignore-reduced-motion]) *::before,
+    html:not([data-wk-ignore-reduced-motion]) *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;

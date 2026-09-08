@@ -7,7 +7,7 @@ import {
   provideWkConfig,
   WK_CONFIG_KEY,
 } from '../../shared/config'
-import { applyDensity } from '../../theme'
+import { applyDensity, applyReducedMotionPolicy } from '../../theme'
 
 const props = defineProps<{
   /** Global defaults for descendant Wise Kit components. */
@@ -29,6 +29,11 @@ const props = defineProps<{
   /** Shorthand: per-component default props. */
   componentDefaults?: WkGlobalConfig['componentDefaults']
   /**
+   * When true (default), honor `prefers-reduced-motion`.
+   * Set false to keep transitions when the OS requests reduced motion.
+   */
+  respectReducedMotion?: WkGlobalConfig['respectReducedMotion']
+  /**
    * When true (default), also write density / theme to `documentElement`
    * so the whole page picks up token changes. Set false to scope
    * side effects to this wrapper only.
@@ -48,6 +53,9 @@ const local = computed<WkGlobalConfig>(() => ({
   ...(props.theme !== undefined ? { theme: props.theme } : {}),
   ...(props.locale !== undefined ? { locale: props.locale } : {}),
   ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
+  ...(props.respectReducedMotion !== undefined
+    ? { respectReducedMotion: props.respectReducedMotion }
+    : {}),
 }))
 
 const resolved = computed<WkGlobalConfig>(() => {
@@ -69,10 +77,17 @@ const layerStyle = computed(() => {
 let previousDensity: string | undefined
 let previousZBase: string | undefined
 let previousTheme: string | undefined
+let previousIgnoreReducedMotion: string | undefined
 let systemMedia: MediaQueryList | null = null
 
 function onSystemThemeChange() {
   if (resolved.value.theme === 'system') applyTheme(getPreferredTheme())
+}
+
+function syncReducedMotionPolicy() {
+  if (typeof document === 'undefined') return
+  previousIgnoreReducedMotion = document.documentElement.dataset.wkIgnoreReducedMotion
+  applyReducedMotionPolicy(resolved.value.respectReducedMotion)
 }
 
 function syncGlobalSideEffects() {
@@ -97,14 +112,30 @@ function syncGlobalSideEffects() {
   }
 }
 
+watch(() => resolved.value.respectReducedMotion, syncReducedMotionPolicy, { immediate: true })
+
 watch(
-  () => [applyGlobal.value, resolved.value.density, resolved.value.zIndex, resolved.value.theme] as const,
+  () =>
+    [
+      applyGlobal.value,
+      resolved.value.density,
+      resolved.value.zIndex,
+      resolved.value.theme,
+    ] as const,
   syncGlobalSideEffects,
   { immediate: true },
 )
 
 onBeforeUnmount(() => {
-  if (!applyGlobal.value || typeof document === 'undefined') return
+  if (typeof document === 'undefined') return
+  if (previousIgnoreReducedMotion !== undefined) {
+    if (previousIgnoreReducedMotion) {
+      document.documentElement.dataset.wkIgnoreReducedMotion = previousIgnoreReducedMotion
+    } else {
+      delete document.documentElement.dataset.wkIgnoreReducedMotion
+    }
+  }
+  if (!applyGlobal.value) return
   if (previousDensity !== undefined) {
     if (previousDensity) document.documentElement.dataset.wkDensity = previousDensity
     else delete document.documentElement.dataset.wkDensity
