@@ -48,6 +48,28 @@ describe('wkSelect', () => {
     expect(wrapper.get('[role="combobox"]').classes()).toContain('wk-select--small')
   })
 
+  it('applies max-height to the option list scrollbar', async () => {
+    const manyOptions = Array.from({ length: 30 }, (_, index) => ({
+      label: `Option ${index + 1}`,
+      value: index + 1,
+    }))
+    const wrapper = mount(WkSelect, {
+      props: { options: manyOptions, teleport: false },
+      attachTo: document.body,
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await nextTick()
+
+    expect(wrapper.get('.wk-select__list-wrap').attributes('style')).toContain('max-height: min(18rem, 45vh)')
+    wrapper.unmount()
+  })
+
+  it('uses WkScrollbar for option list scrolling', async () => {
+    const wrapper = mount(WkSelect, { props: { options, teleport: false } })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    expect(wrapper.find('.wk-select__list.wk-scrollbar').exists()).toBe(true)
+  })
+
   it('teleports the styled menu to body by default', async () => {
     const wrapper = mount(WkSelect, { props: { options, modelValue: 'sm' }, attachTo: document.body })
     await wrapper.get('[role="combobox"]').trigger('click')

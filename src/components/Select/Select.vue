@@ -7,6 +7,7 @@ import { useWkId } from '../../shared/useWkId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import WkIcon from '../Icon/Icon.vue'
+import WkScrollbar from '../Scrollbar/Scrollbar.vue'
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -148,6 +149,9 @@ const menuOptions = computed<MenuOption[]>(() => {
 const enabledOptions = computed(() => menuOptions.value.filter((option) => !option.disabled))
 const createLabel = computed(() => formatLocale(locale.value.createOption, { value: query.value }))
 const moreTagsLabel = computed(() => formatLocale(locale.value.moreTags, { count: hiddenTagCount.value }))
+const menuListMaxHeight = computed(() =>
+  resolvedFilter.value ? 'calc(min(18rem, 45vh) - 2.75rem)' : 'min(18rem, 45vh)',
+)
 
 function isSelected(value: SelectValue) {
   return selectedValues.value.some((item) => item === value)
@@ -424,38 +428,45 @@ onBeforeUnmount(() => {
             @click.stop
             @keydown.stop="onMenuKeydown"
           >
-          <div v-if="resolvedLoading" class="wk-select__empty" role="status">
-            {{ locale.loading }}
-          </div>
-          <button
-            v-for="option in menuOptions"
-            :key="option.created ? `__create:${String(option.value)}` : String(option.value)"
-            class="wk-select__option"
-            :class="{
-              'wk-select__option--selected': !option.created && isSelected(option.value),
-              'wk-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
-              'wk-select__option--create': option.created,
-            }"
-            type="button"
-            role="option"
-            :aria-selected="option.created ? undefined : isSelected(option.value)"
-            :disabled="option.disabled"
-            @mouseenter="!option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === option.value && Boolean(item.created) === Boolean(option.created)))"
-            @click="selectOption(option)"
+          <WkScrollbar
+            class="wk-select__list"
+            :max-height="menuListMaxHeight"
+            wrap-class="wk-select__list-wrap"
+            view-class="wk-select__list-view"
           >
-            <slot name="option" :option="option">
-              <span>{{ option.created ? createLabel : option.label }}</span>
-            </slot>
-            <WkIcon
-              v-if="!option.created && isSelected(option.value)"
-              class="wk-select__check"
-              name="check"
-              size="sm"
-            />
-          </button>
-          <div v-if="!menuOptions.length && !resolvedLoading" class="wk-select__empty" role="status">
-            {{ resolvedEmptyMessage }}
-          </div>
+            <div v-if="resolvedLoading" class="wk-select__empty" role="status">
+              {{ locale.loading }}
+            </div>
+            <button
+              v-for="option in menuOptions"
+              :key="option.created ? `__create:${String(option.value)}` : String(option.value)"
+              class="wk-select__option"
+              :class="{
+                'wk-select__option--selected': !option.created && isSelected(option.value),
+                'wk-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
+                'wk-select__option--create': option.created,
+              }"
+              type="button"
+              role="option"
+              :aria-selected="option.created ? undefined : isSelected(option.value)"
+              :disabled="option.disabled"
+              @mouseenter="!option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === option.value && Boolean(item.created) === Boolean(option.created)))"
+              @click="selectOption(option)"
+            >
+              <slot name="option" :option="option">
+                <span>{{ option.created ? createLabel : option.label }}</span>
+              </slot>
+              <WkIcon
+                v-if="!option.created && isSelected(option.value)"
+                class="wk-select__check"
+                name="check"
+                size="sm"
+              />
+            </button>
+            <div v-if="!menuOptions.length && !resolvedLoading" class="wk-select__empty" role="status">
+              {{ resolvedEmptyMessage }}
+            </div>
+          </WkScrollbar>
         </div>
       </Transition>
     </Teleport>

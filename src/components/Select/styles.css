@@ -106,12 +106,11 @@
     border: var(--wk-border-width) solid var(--wk-color-border);
     border-radius: var(--wk-radius-md);
     box-shadow: var(--wk-shadow-md);
-    display: grid;
-    gap: var(--wk-space-1);
+    display: flex;
+    flex-direction: column;
     margin-top: var(--wk-space-2);
-    max-height: var(--wk-select-menu-max-height);
     min-width: 100%;
-    overflow-y: auto;
+    overflow: hidden;
     padding: var(--wk-space-1);
     position: absolute;
     width: max-content;
@@ -124,13 +123,22 @@
     border-bottom: var(--wk-border-width) solid var(--wk-color-border);
     border-radius: var(--wk-radius-sm);
     color: var(--wk-color-text);
+    flex: 0 0 auto;
     font: inherit;
     margin: calc(var(--wk-space-1) * -1) calc(var(--wk-space-1) * -1) 0;
     padding: var(--wk-space-2) var(--wk-space-3);
-    position: sticky;
-    top: calc(var(--wk-space-1) * -1);
     width: calc(100% + var(--wk-space-1) * 2);
-    z-index: 1;
+}
+
+.wk-select__list {
+    flex: 0 1 auto;
+    height: auto;
+    min-height: 0;
+}
+
+.wk-select__list-view {
+    display: grid;
+    gap: var(--wk-space-1);
 }
 
 .wk-select__filter:focus-visible {
