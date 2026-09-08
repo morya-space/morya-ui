@@ -10,7 +10,7 @@ import {
     WkIcon,
     WkScrollbar,
 } from "@wise-kit/ui";
-import { computed, nextTick, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import ComponentDocViewer from "../components/ComponentDocViewer.vue";
 import DocSectionNav from "../components/DocSectionNav.vue";
@@ -134,6 +134,15 @@ function groupByCategory(items: DocumentedComponentMeta[]) {
     );
 }
 
+const PLAYGROUND_THEME_PROPS = [
+    "--wk-color-primary",
+    "--wk-color-primary-hover",
+    "--wk-color-focus-ring",
+    "--wk-radius-sm",
+    "--wk-radius-md",
+    "--wk-radius-lg",
+] as const;
+
 function applyPlaygroundTheme() {
     const root = document.documentElement;
     const selectedAccent =
@@ -159,28 +168,20 @@ function applyPlaygroundTheme() {
         "--wk-radius-lg",
         selectedRadius.values[2] ?? "0.75rem",
     );
-    // Density comes from useDensity() → data-wk-density tokens; do not override spaces here.
-    root.style.setProperty(
-        "--wk-motion-fast",
-        motionPreference.value === "full"
-            ? "150ms"
-            : motionPreference.value === "reduced"
-              ? "80ms"
-              : "0ms",
-    );
-    root.style.setProperty(
-        "--wk-motion-normal",
-        motionPreference.value === "full"
-            ? "250ms"
-            : motionPreference.value === "reduced"
-              ? "120ms"
-              : "0ms",
-    );
 }
 
-watch([accent, radius, motionPreference], applyPlaygroundTheme, {
+function resetPlaygroundTheme() {
+    const root = document.documentElement;
+    for (const prop of PLAYGROUND_THEME_PROPS) {
+        root.style.removeProperty(prop);
+    }
+}
+
+watch([accent, radius], applyPlaygroundTheme, {
     immediate: true,
 });
+
+onBeforeUnmount(resetPlaygroundTheme);
 
 const themeSummary = computed(() => {
     const mode = isDark.value ? "Dark" : "Light";

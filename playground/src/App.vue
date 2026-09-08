@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { WkConfigProvider } from '@wise-kit/ui'
+import { WkConfigProvider, useDensity, useMotion } from '@wise-kit/ui'
 import { RouterView } from 'vue-router'
 import SiteHeader from './components/SiteHeader.vue'
 import { useDocsI18n } from './i18n'
 
 const { componentLocale } = useDocsI18n()
+useMotion()
+useDensity()
 </script>
 
 <template>
-  <WkConfigProvider class="site-config" :locale="componentLocale" :global-density="false">
+  <WkConfigProvider
+    class="site-config"
+    :locale="componentLocale"
+    :global-density="false"
+    :respect-reduced-motion="false"
+  >
     <div class="site-shell">
       <div class="site-atmosphere" aria-hidden="true">
         <div class="site-atmosphere__glow site-atmosphere__glow--a" />
@@ -155,8 +162,8 @@ a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-atmosphere__glow--a,
-  .site-atmosphere__glow--b {
+  html:not([data-wk-ignore-reduced-motion]) .site-atmosphere__glow--a,
+  html:not([data-wk-ignore-reduced-motion]) .site-atmosphere__glow--b {
     animation: none;
   }
 }

@@ -659,9 +659,10 @@
   },
   "scripts": {
     "prepare": "husky",
-    "dev": "vite --config playground/vite.config.ts",
-    "build:docs": "vite build --config playground/vite.config.ts",
-    "build:docs:pages": "node scripts/build-docs-pages.mjs",
+    "dev": "node scripts/generate-token-docs.mjs && vite --config playground/vite.config.ts",
+    "build:docs": "node scripts/generate-token-docs.mjs && vite build --config playground/vite.config.ts",
+    "build:docs:pages": "node scripts/generate-token-docs.mjs && node scripts/build-docs-pages.mjs",
+    "tokens:generate": "node scripts/generate-token-docs.mjs",
     "preview": "vite preview --config playground/vite.config.ts",
     "build": "node scripts/prepare-on-demand.mjs && node scripts/generate-exports.mjs && vite build && vite build --mode on-demand && node scripts/emit-style-entries.mjs",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",

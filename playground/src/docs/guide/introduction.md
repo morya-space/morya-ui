@@ -47,6 +47,7 @@ pnpm add @wise-kit/ui
 
 - [快速上手](/docs/quick-start)：安装与最小示例
 - [主题](/docs/theme)：亮暗色与动效
+- [设计令牌](/docs/design-tokens)：全部 `--wk-*` 变量与用途
 - [全局配置](/docs/config)：`ConfigProvider` / `createWiseKit`
 - [无障碍](/docs/accessibility)：键盘、表单与浮层约定
 - [组件](/components)：浏览全部组件与 API

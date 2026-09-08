@@ -25,7 +25,7 @@ The button at the top-right of the docs site uses the same API. The preference i
 
 ## Design tokens
 
-Common variables:
+See the full [Design tokens](/docs/design-tokens) catalog (searchable, grouped by category).
 
 | Token | Use |
 | --- | --- |

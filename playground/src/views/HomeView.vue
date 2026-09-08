@@ -419,9 +419,9 @@ async function copyInstall() {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-hero,
-  .home-install,
-  .home-pillar {
+  html:not([data-wk-ignore-reduced-motion]) .home-hero,
+  html:not([data-wk-ignore-reduced-motion]) .home-install,
+  html:not([data-wk-ignore-reduced-motion]) .home-pillar {
     animation: none;
   }
 }
