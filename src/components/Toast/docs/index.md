@@ -17,14 +17,14 @@ description: 四角浮层通知，支持 API 与受控列表。
 ## 引入
 
 ```ts
-import { toast, useToast, RdToast } from '@roost-design/ui'
+import { toast, useToast, RdToast } from '@wise-kit/ui'
 ```
 
 ## API
 
 ```vue preview
 <script setup lang="ts">
-import { toast, RdButton } from '@roost-design/ui'
+import { toast, RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -59,7 +59,7 @@ import { toast, RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { toast, RdButton } from '@roost-design/ui'
+import { toast, RdButton } from '@wise-kit/ui'
 import { h } from 'vue'
 
 function showRich() {
@@ -82,8 +82,8 @@ function showRich() {
 
 ```vue preview
 <script setup lang="ts">
-import type { ToastMessage } from '@roost-design/ui'
-import { RdButton, RdToast } from '@roost-design/ui'
+import type { ToastMessage } from '@wise-kit/ui'
+import { RdButton, RdToast } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const messages = ref<ToastMessage[]>([])

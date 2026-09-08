@@ -11,14 +11,14 @@ Toggle switch control.
 ## Import
 
 ```ts
-import { RdSwitch } from '@roost-design/ui'
+import { RdSwitch } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@roost-design/ui'
+import { RdSwitch } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const enabled = ref(false)
@@ -35,7 +35,7 @@ const enabled = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@roost-design/ui'
+import { RdSwitch } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const dark = ref(false)
@@ -53,7 +53,7 @@ const dark = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@roost-design/ui'
+import { RdSwitch } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -68,7 +68,7 @@ import { RdSwitch } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSwitch } from '@roost-design/ui'
+import { RdSwitch } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const on = ref(true)

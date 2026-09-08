@@ -1,37 +1,37 @@
-# @roost-design/nuxt
+# @wise-kit/nuxt
 
-Nuxt 3 module for [@roost-design/ui](https://www.npmjs.com/package/@roost-design/ui).
+Nuxt 3 module for [@wise-kit/ui](https://www.npmjs.com/package/@wise-kit/ui).
 
 ## Features
 
-- Imports `@roost-design/ui/styles.css`
-- Transpiles `@roost-design/ui` for SSR
-- Client plugin: `createRoostDesign({ components: false })` for toast/message overlay context
+- Imports `@wise-kit/ui/styles.css`
+- Transpiles `@wise-kit/ui` for SSR
+- Client plugin: `createWiseKit({ components: false })` for toast/message overlay context
 
-Component auto-import remains via `RoostDesignResolver` + `unplugin-vue-components` (see [SSR guide](https://roost-design.github.io/roost-design-ui/docs/ssr)).
+Component auto-import remains via `WiseKitResolver` + `unplugin-vue-components` (see [SSR guide](https://wise-kit.github.io/wise-kit-ui/docs/ssr)).
 
 ## Setup
 
 ```bash
-pnpm add @roost-design/ui @roost-design/nuxt
+pnpm add @wise-kit/ui @wise-kit/nuxt
 pnpm add -D unplugin-vue-components
 ```
 
 ```ts
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { RoostDesignResolver } from '@roost-design/ui/resolver'
+import { WiseKitResolver } from '@wise-kit/ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@roost-design/nuxt'],
-  RoostDesign: {
+  modules: ['@wise-kit/nuxt'],
+  WiseKit: {
     css: true,
     transpile: true,
   },
   vite: {
     plugins: [
       Components({
-        resolvers: [RoostDesignResolver()],
+        resolvers: [WiseKitResolver()],
       }),
     ],
   },
@@ -40,7 +40,7 @@ export default defineNuxtConfig({
 
 Wrap your app with `RdConfigProvider` in `app.vue` for theme and global defaults.
 
-## Options (`RoostDesign`)
+## Options (`WiseKit`)
 
 | Option | Default | Description |
 | --- | --- | --- |

@@ -11,14 +11,14 @@ description: 复选框。二进制 modelValue，支持 invalid。
 ## 引入
 
 ```ts
-import { RdCheckbox } from '@roost-design/ui'
+import { RdCheckbox } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdCheckbox } from '@roost-design/ui'
+import { RdCheckbox } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const accepted = ref(false)
@@ -33,7 +33,7 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdCheckbox } from '@roost-design/ui'
+import { RdCheckbox } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const accepted = ref(false)
@@ -48,7 +48,7 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdCheckbox } from '@roost-design/ui'
+import { RdCheckbox } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -65,7 +65,7 @@ import { RdCheckbox } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdCheckbox, RdCheckboxGroup } from '@roost-design/ui'
+import { RdCheckbox, RdCheckboxGroup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selected = ref(['vue'])

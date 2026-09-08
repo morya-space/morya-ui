@@ -11,14 +11,14 @@ Click stars to rate. A clear button is shown by default.
 ## Import
 
 ```ts
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
@@ -33,7 +33,7 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -47,7 +47,7 @@ import { RdRating } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdRating } from '@roost-design/ui'
+import { RdRating } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)

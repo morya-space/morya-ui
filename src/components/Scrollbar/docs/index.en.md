@@ -11,7 +11,7 @@ Replaces the native browser scrollbar with a themeable, cross-browser scrolling 
 ## Import
 
 ```ts
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Use `height` to fix the viewport height. If omitted, it follows the parent heigh
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -47,7 +47,7 @@ The scrollbar appears only when content exceeds `max-height`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdScrollbar } from '@roost-design/ui'
+import { RdButton, RdScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const count = ref(3)
@@ -85,7 +85,7 @@ A horizontal scrollbar appears when content is wider than the container. `trigge
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -114,7 +114,7 @@ import { RdScrollbar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -149,8 +149,8 @@ Control scrolling with instance methods `setScrollTop` / `setScrollLeft` / `scro
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarInstance } from '@roost-design/ui'
-import { RdButton, RdScrollbar } from '@roost-design/ui'
+import type { ScrollbarInstance } from '@wise-kit/ui'
+import { RdButton, RdScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -197,8 +197,8 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarDirection } from '@roost-design/ui'
-import { RdScrollbar } from '@roost-design/ui'
+import type { ScrollbarDirection } from '@wise-kit/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const num = ref(20)

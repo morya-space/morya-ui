@@ -11,14 +11,14 @@ description: CSS Grid layout with GridItem span / offset control.
 ## Import
 
 ```ts
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -36,7 +36,7 @@ import { RdGrid, RdGridItem } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -63,7 +63,7 @@ When `cols` / gaps are plain numbers but items still need responsive `span`, ena
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -81,7 +81,7 @@ import { RdGrid, RdGridItem } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdButton, RdGrid, RdGridItem } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)

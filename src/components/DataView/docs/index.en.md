@@ -11,14 +11,14 @@ Render a collection in list / grid layout, with optional pagination.
 ## Import
 
 ```ts
-import { RdDataView } from '@roost-design/ui'
+import { RdDataView } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdDataView } from '@roost-design/ui'
+import { RdDataView } from '@wise-kit/ui'
 
 const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 </script>

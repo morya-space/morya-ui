@@ -578,19 +578,19 @@ export { enUS, formatLocale, mergeLocale, useRdLocale, useWdLocale, zhCN } from 
 export type { RdLocaleMessages, RdLocaleName } from "./locale";
 export type { RdComponentDefaultMap } from "./shared/componentDefaults";
 export {
-  createRoostDesign,
+  createWiseKit,
   createWexDesign,
   getComponentDefault,
   getComponentDefaults,
   getDefaultRdConfig,
-  installRoostDesign,
+  installWiseKit,
   installWexDesign,
   mergeComponentDefaults,
   mergeRdConfig,
   provideRdConfig,
   RD_CONFIG_KEY,
   resolveConfiguredAppendTo,
-  RoostDesign,
+  WiseKit,
   useComponentDefaults,
   useConfiguredGapSize,
   useConfiguredSize,
@@ -600,7 +600,7 @@ export {
   WexDesign,
 } from "./shared/config";
 export type { RdInstallerOptions } from "./shared/config";
-export { RoostDesign as default } from "./shared/config";
+export { WiseKit as default } from "./shared/config";
 export type { RdRenderable } from "./shared/content";
 export type { RdAppendTo, RdOverlayMountProps } from "./shared/overlay";
 export { isOverlayTeleported, resolveOverlayTeleport } from "./shared/overlay";

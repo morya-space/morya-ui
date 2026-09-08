@@ -11,14 +11,14 @@ Shortcut entries shown as an icon list.
 ## Import
 
 ```ts
-import { RdDock } from '@roost-design/ui'
+import { RdDock } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdDock } from '@roost-design/ui'
+import { RdDock } from '@wise-kit/ui'
 
 const model = [
   { label: 'Home', icon: '⌂' },

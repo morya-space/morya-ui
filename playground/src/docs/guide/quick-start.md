@@ -6,17 +6,17 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 
 # 快速上手
 
-> 在线文档：[roost-design.github.io/roost-design-ui](https://roost-design.github.io/roost-design-ui/) · 源码：[GitHub](https://github.com/roost-design/roost-design-ui) · npm：[`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
+> 在线文档：[wise-kit.github.io/wise-kit-ui](https://wise-kit.github.io/wise-kit-ui/) · 源码：[GitHub](https://github.com/wise-kit/wise-kit-ui) · npm：[`@wise-kit/ui`](https://www.npmjs.com/package/@wise-kit/ui)
 
 ## 安装
 
 **在应用项目中（npm / pnpm / yarn）：**
 
 ```bash
-pnpm add @roost-design/ui
+pnpm add @wise-kit/ui
 ```
 
-需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `@roost-design/ui` 中。
+需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `@wise-kit/ui` 中。
 
 克隆本仓库后执行 `pnpm install`。文档站通过 Vite alias 直连 `src/` 源码（见 `playground/vite.config.ts`）。
 
@@ -29,8 +29,8 @@ pnpm add @roost-design/ui
 | | 全量 | 按需 |
 | --- | --- | --- |
 | 典型场景 | 组件用得较多、希望快速上手 | 打包体积敏感、只用少量组件 |
-| 组件来源 | `app.use(RoostDesign)` 或 `@roost-design/ui` 按名导入 | `@roost-design/ui/button` 等子路径，或 Vite 自动解析 |
-| 样式 | 入口引入 `@roost-design/ui/styles.css` | 子路径自动带入（含 theme + 依赖组件样式） |
+| 组件来源 | `app.use(WiseKit)` 或 `@wise-kit/ui` 按名导入 | `@wise-kit/ui/button` 等子路径，或 Vite 自动解析 |
+| 样式 | 入口引入 `@wise-kit/ui/styles.css` | 子路径自动带入（含 theme + 依赖组件样式） |
 | JS 体积 | 全量注册会打入完整组件；按名导入可 tree-shake | 仅打入用到的组件及其依赖 |
 
 ## 全量用法
@@ -40,12 +40,12 @@ pnpm add @roost-design/ui
 在应用入口引入**全量样式**，并通过插件一次注册所有组件：
 
 ```ts
-import RoostDesign from '@roost-design/ui'
+import WiseKit from '@wise-kit/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
-createApp(App).use(RoostDesign).mount('#app')
+createApp(App).use(WiseKit).mount('#app')
 ```
 
 模板中可直接使用 `<RdButton>`、`<RdInput>` 等，无需逐个 import。
@@ -57,14 +57,14 @@ createApp(App).use(RoostDesign).mount('#app')
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 createApp(App).mount('#app')
 ```
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdInput } from '@roost-design/ui'
+import { RdButton, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const name = ref('')
@@ -82,18 +82,18 @@ const name = ref('')
 
 ### 1. 子路径导入
 
-从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `@roost-design/ui/styles.css`：
+从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `@wise-kit/ui/styles.css`：
 
 ```ts
-import { RdButton } from '@roost-design/ui/button'
-import { RdInput } from '@roost-design/ui/input'
+import { RdButton } from '@wise-kit/ui/button'
+import { RdInput } from '@wise-kit/ui/input'
 ```
 
 仅要样式时：
 
 ```ts
-import '@roost-design/ui/button/style'
-import '@roost-design/ui/button/style.css'
+import '@wise-kit/ui/button/style'
+import '@wise-kit/ui/button/style.css'
 ```
 
 ### 2. 自动按需（Vite）
@@ -101,34 +101,34 @@ import '@roost-design/ui/button/style.css'
 安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<RdButton>`：
 
 ```ts
-import { RoostDesignResolver } from '@roost-design/ui/resolver'
+import { WiseKitResolver } from '@wise-kit/ui/resolver'
 import Components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
   plugins: [
     vue(),
     Components({
-      resolvers: [RoostDesignResolver()],
+      resolvers: [WiseKitResolver()],
     }),
   ],
 })
 ```
 
-按需模式下，`createRoostDesign({ components: false })` 仍可注入全局配置而不注册组件。
+按需模式下，`createWiseKit({ components: false })` 仍可注入全局配置而不注册组件。
 
 ## 可选：应用级全局配置
 
-`createRoostDesign` 会写入全局默认值，并默认注册全部组件：
+`createWiseKit` 会写入全局默认值，并默认注册全部组件：
 
 ```ts
-import { createRoostDesign } from '@roost-design/ui'
+import { createWiseKit } from '@wise-kit/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 createApp(App)
   .use(
-    createRoostDesign({
+    createWiseKit({
       appendTo: 'body',
       size: 'small',
       zIndex: 1100,
@@ -146,7 +146,7 @@ createApp(App)
 亮暗切换等能力从同一包引入：
 
 ```ts
-import { useTheme } from '@roost-design/ui'
+import { useTheme } from '@wise-kit/ui'
 
 const { toggleTheme } = useTheme()
 ```
@@ -156,9 +156,9 @@ const { toggleTheme } = useTheme()
 ## 启动本仓库文档站
 
 ```bash
-pnpm --filter @roost-design/ui dev
+pnpm --filter @wise-kit/ui dev
 # http://localhost:5182
 
 # 构建静态文档站
-pnpm --filter @roost-design/ui build:docs
+pnpm --filter @wise-kit/ui build:docs
 ```

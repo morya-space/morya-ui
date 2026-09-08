@@ -11,14 +11,14 @@ description: 密码输入框，支持显示/隐藏与强度提示。
 ## 引入
 
 ```ts
-import { RdInputPassword } from '@roost-design/ui'
+import { RdInputPassword } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@roost-design/ui'
+import { RdInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -33,7 +33,7 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@roost-design/ui'
+import { RdInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -50,7 +50,7 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon, RdInputPassword } from '@roost-design/ui'
+import { RdIcon, RdInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const byProp = ref('')
@@ -78,7 +78,7 @@ const bySlot = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@roost-design/ui'
+import { RdInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('secret')
@@ -93,7 +93,7 @@ const value = ref('secret')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputPassword } from '@roost-design/ui'
+import { RdInputPassword } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('draft-pass')

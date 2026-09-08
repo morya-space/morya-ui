@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loadChangelog } from '../docs/loadChangelog'

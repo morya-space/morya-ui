@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdIcon } from '@roost-design/ui'
+import { RdIcon } from '@wise-kit/ui'
 import { computed, onBeforeUnmount, ref } from 'vue'
 import { useDocsI18n } from '../i18n'
 import { copyText } from '../utils/copyText'

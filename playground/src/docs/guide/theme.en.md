@@ -6,14 +6,14 @@ description: Light and dark themes, design tokens, and motion preferences.
 
 # Theme
 
-Theme support is built into `@roost-design/ui`. Components consume semantic CSS variables (`--rd-*`) and do not keep a second palette.
+Theme support is built into `@wise-kit/ui`. Components consume semantic CSS variables (`--rd-*`) and do not keep a second palette.
 
-Importing `@roost-design/ui/styles.css` already includes these variables. Theme JS APIs (`useTheme` and friends) come from the same package.
+Importing `@wise-kit/ui/styles.css` already includes these variables. Theme JS APIs (`useTheme` and friends) come from the same package.
 
 ## Light / dark
 
 ```ts
-import { useTheme } from '@roost-design/ui'
+import { useTheme } from '@wise-kit/ui'
 
 const { isDark, setTheme, toggleTheme } = useTheme()
 
@@ -44,21 +44,21 @@ Common variables:
 ## Density
 
 ```ts
-import { useDensity } from '@roost-design/ui'
+import { useDensity } from '@wise-kit/ui'
 
 const { preference, setDensity } = useDensity()
 setDensity('compact') // 'compact' | 'comfortable' | 'spacious'
 ```
 
 This writes `data-rd-density` on `document.documentElement` and scales `--rd-space-*` plus `--rd-control-height-*`.  
-At the app level use `createRoostDesign({ density: 'compact' })` or `<RdConfigProvider density="compact">`.
+At the app level use `createWiseKit({ density: 'compact' })` or `<RdConfigProvider density="compact">`.
 
 The Components page sidebar Theme panel can temporarily change accent, radius, and density for local preview.
 
 ## Motion preference
 
 ```ts
-import { useMotion } from '@roost-design/ui'
+import { useMotion } from '@wise-kit/ui'
 
 const { preference, setMotion } = useMotion()
 setMotion('full') // 'full' | 'reduced' | 'none'
@@ -89,4 +89,4 @@ Related tokens: `--rd-radius-control`, `--rd-control-padding-x-*`, `--rd-button-
 
 ## With ConfigProvider
 
-Theme switching is the visual layer. `RdConfigProvider` / `createRoostDesign` own size, copy, overlay mount, and other behavioral defaults. Use both together; see [Configuration](/docs/config).
+Theme switching is the visual layer. `RdConfigProvider` / `createWiseKit` own size, copy, overlay mount, and other behavioral defaults. Use both together; see [Configuration](/docs/config).

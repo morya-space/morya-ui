@@ -17,7 +17,7 @@ export interface RdOverlayMountProps {
 
 export function resolveOverlayTeleport(
   options: RdOverlayMountProps = {},
-  /** Global default from ConfigProvider / createRoostDesign. */
+  /** Global default from ConfigProvider / createWiseKit. */
   globalAppendTo: RdAppendTo | false = 'body',
 ): {
   disabled: boolean

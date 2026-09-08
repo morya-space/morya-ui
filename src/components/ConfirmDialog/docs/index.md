@@ -11,14 +11,14 @@ description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 ## 引入
 
 ```ts
-import { RdButton, RdConfirmDialog } from '@roost-design/ui'
+import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmDialog } from '@roost-design/ui'
+import { RdButton, RdConfirmDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)

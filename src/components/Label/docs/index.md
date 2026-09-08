@@ -11,14 +11,14 @@ description: 可访问的表单标签。
 ## 引入
 
 ```ts
-import { RdLabel } from '@roost-design/ui'
+import { RdLabel } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInput, RdLabel } from '@roost-design/ui'
+import { RdInput, RdLabel } from '@wise-kit/ui'
 </script>
 
 <template>

@@ -1,20 +1,8 @@
-# @roost-design/ui
-
-## 0.1.3
-
-### Fixes
-
-- Fix docs site logo SVG gradient refs (`#rd-bg` / `#rd-mark`) so the mark renders correctly
-- Restore backward-compat import paths (`wd-exports` / `wd-compat.css`)
-
-### Docs
-
-- Align guide, README, and MCP config examples with Roost Design branding and URLs
-- Rename MCP bin to `roost-design-ui-mcp.js`
+# @wise-kit/ui
 
 ## 0.1.1
 
-Initial public release of `@roost-design/ui` (Roost Design UI), using the current component library as the baseline.
+Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current component library as the baseline.
 
 ### Components (88)
 
@@ -35,9 +23,9 @@ Initial public release of `@roost-design/ui` (Roost Design UI), using the curren
 
 ### Global config & utilities
 
-- Plugin entry: full registration with `RoostDesign`, defaults with `createRoostDesign`
-- On-demand builds: `RoostDesignResolver` for `unplugin-vue-components`
-- ESM subpath exports (`@roost-design/ui/button`, etc.) with tree-shaking
+- Plugin entry: full registration with `WiseKit`, defaults with `createWiseKit`
+- On-demand builds: `WiseKitResolver` for `unplugin-vue-components`
+- ESM subpath exports (`@wise-kit/ui/button`, etc.) with tree-shaking
 - Imperative APIs: `useConfirm`, `useToast` / `toast`, `useMessage` / `message`, `useContextMenu`
 - Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useRdId`
 - i18n: `zhCN`, `enUS`, `mergeLocale`, `useRdLocale`, `formatLocale`
@@ -53,12 +41,12 @@ Initial public release of `@roost-design/ui` (Roost Design UI), using the curren
 - Interactive docs with Markdown and live `vue preview` examples
 - Component catalog and guides (quick start, theme, config, SSR, accessibility, MCP)
 - Light / dark theme, bilingual UI, global search (CommandMenu)
-- Deployed to GitHub Pages: https://roost-design.github.io/roost-design-ui/
+- Deployed to GitHub Pages: https://wise-kit.github.io/wise-kit-ui/
 
 ### Ecosystem packages
 
-- **`@roost-design/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
-- **`@roost-design/ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
+- **`@wise-kit/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
+- **`@wise-kit/ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
 
 ### SSR & framework integration
 

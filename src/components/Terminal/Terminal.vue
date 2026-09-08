@@ -4,7 +4,7 @@ import { computed, nextTick, ref } from 'vue'
 import { useRdLocale } from '../../locale'
 
 const props = withDefaults(defineProps<TerminalProps>(), {
-  welcomeMessage: 'Welcome to Roost Design Terminal',
+  welcomeMessage: 'Welcome to Wise Kit Terminal',
   prompt: '>',
 })
 

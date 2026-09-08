@@ -11,7 +11,7 @@ Status badge or dot for counts and status cues.
 ## Import
 
 ```ts
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Pass `value` to show text or a number; omit `value` to render a dot.
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ Use `severity` for semantic color; defaults to primary when omitted. Legacy valu
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ import { RdBadge } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -78,7 +78,7 @@ Wrap content with the default slot. `max` caps numeric values; `processing` puls
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge, RdButton } from '@roost-design/ui'
+import { RdBadge, RdButton } from '@wise-kit/ui'
 </script>
 
 <template>

@@ -10,9 +10,9 @@
       "command": "npx",
       "args": ["-y", "@primevue/mcp"]
     },
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "node",
-      "args": ["packages/ui-mcp/bin/roost-design-ui-mcp.js"]
+      "args": ["packages/ui-mcp/bin/wise-kit-ui-mcp.js"]
     }
   },
   "format_on_save": "on"

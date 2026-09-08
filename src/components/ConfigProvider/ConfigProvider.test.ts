@@ -1,7 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h, nextTick } from 'vue'
-import { createRoostDesign, useRdConfig } from '../../shared/config'
+import { createWiseKit, useRdConfig } from '../../shared/config'
 import { applyTheme } from '../../theme'
 import RdInput from '../Input/Input.vue'
 import RdSpace from '../Space/Space.vue'
@@ -140,7 +140,7 @@ describe('rdConfigProvider', () => {
     const wrapper = mount(RdConfigProvider, {
       props: { density: 'compact', globalDensity: false },
       global: {
-        plugins: [createRoostDesign({ size: 'small', components: false })],
+        plugins: [createWiseKit({ size: 'small', components: false })],
       },
       slots: {
         default: () => h(RdInput, { modelValue: '', 'onUpdate:modelValue': () => undefined }),

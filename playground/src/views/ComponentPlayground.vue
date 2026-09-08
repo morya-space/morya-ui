@@ -9,7 +9,7 @@ import {
     RdCard,
     RdIcon,
     RdScrollbar,
-} from "@roost-design/ui";
+} from "@wise-kit/ui";
 import { computed, nextTick, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import ComponentDocViewer from "../components/ComponentDocViewer.vue";

@@ -17,7 +17,7 @@ import {
   RdTable,
   RdTag,
   zhCN,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 
 const stats = [
   { label: '总用户', value: '12,480', trend: '+8.2%', icon: 'users' },

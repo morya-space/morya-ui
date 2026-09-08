@@ -11,14 +11,14 @@ Reorder with a drag handle (native HTML5 DnD, no external library). Up and down 
 ## Import
 
 ```ts
-import { RdOrderList } from '@roost-design/ui'
+import { RdOrderList } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdOrderList } from '@roost-design/ui'
+import { RdOrderList } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const items = ref(['Design', 'Development', 'Testing', 'Release'])

@@ -11,14 +11,14 @@ description: 列表形式的单选或多选控件，可筛选。
 ## 引入
 
 ```ts
-import { RdListbox } from '@roost-design/ui'
+import { RdListbox } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdListbox } from '@roost-design/ui'
+import { RdListbox } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('a')

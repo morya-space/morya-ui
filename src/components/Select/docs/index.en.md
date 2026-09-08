@@ -13,14 +13,14 @@ Form select for choosing one or more values from a list of options.
 ## Import
 
 ```ts
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -42,7 +42,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>('design')
@@ -61,7 +61,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -86,7 +86,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 
 const options = [
   { label: 'Design', value: 'design' },
@@ -103,7 +103,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -126,7 +126,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -147,7 +147,7 @@ With `multiple`, `v-model` is an array. Selected values render as removable tags
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>(['design'])
@@ -172,7 +172,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>([])
@@ -193,7 +193,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -238,7 +238,7 @@ Shows empty-state text when there are no options or the filter has no matches. O
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -263,7 +263,7 @@ The menu Teleports to `body` by default (`teleport` + `appendTo`). Set `append-t
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelect } from '@roost-design/ui'
+import { RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()

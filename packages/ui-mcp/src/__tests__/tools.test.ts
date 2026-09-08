@@ -5,7 +5,7 @@ function read<T>(result: { content: Array<{ text: string }> }): T {
   return JSON.parse(result.content[0].text) as T
 }
 
-describe('@roost-design/ui-mcp handlers', () => {
+describe('@wise-kit/ui-mcp handlers', () => {
   const handlers = createToolHandlers()
 
   it('returns complete pagination metadata for component lists', () => {

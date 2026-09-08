@@ -11,14 +11,14 @@ Number input. Can show increment and decrement buttons, and constrain values wit
 ## Import
 
 ```ts
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(1)
@@ -33,7 +33,7 @@ const value = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
@@ -50,7 +50,7 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(1.25)

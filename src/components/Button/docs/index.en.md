@@ -11,7 +11,7 @@ Button triggers an immediate action.
 ## Import
 
 ```ts
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Show button text via the default slot or the `label` prop.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ Use `severity` for semantic color; defaults to primary when omitted.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -61,7 +61,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -91,7 +91,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -110,7 +110,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -129,7 +129,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdButtonGroup } from '@roost-design/ui'
+import { RdButton, RdButtonGroup } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -147,7 +147,7 @@ Supports `icon`, `iconPos`, `iconOnly`, and a `badge`.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -167,7 +167,7 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -192,7 +192,7 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>

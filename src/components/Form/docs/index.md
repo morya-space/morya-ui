@@ -18,16 +18,16 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 ## 引入
 
 ```ts
-import type { FormInstance, FormRules } from '@roost-design/ui'
-import { RdForm, RdFormItem } from '@roost-design/ui'
+import type { FormInstance, FormRules } from '@wise-kit/ui'
+import { RdForm, RdFormItem } from '@wise-kit/ui'
 ```
 
 ## 声明式 rules
 
 ```vue preview
 <script setup lang="ts">
-import type { FormInstance, FormRules } from '@roost-design/ui'
-import { RdButton, RdForm, RdFormItem, RdInput } from '@roost-design/ui'
+import type { FormInstance, FormRules } from '@wise-kit/ui'
+import { RdButton, RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -75,7 +75,7 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdForm, RdFormItem, RdInput } from '@roost-design/ui'
+import { RdButton, RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
@@ -102,7 +102,7 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { RdForm, RdFormItem, RdInput } from '@roost-design/ui'
+import { RdForm, RdFormItem, RdInput } from '@wise-kit/ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })

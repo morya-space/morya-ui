@@ -11,14 +11,14 @@ description: 为输入框添加左/右侧图标的容器。
 ## 引入
 
 ```ts
-import { RdIcon, RdIconField, RdInput } from '@roost-design/ui'
+import { RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon, RdIconField, RdInput } from '@roost-design/ui'
+import { RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')

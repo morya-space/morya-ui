@@ -18,7 +18,7 @@ description: 垂直/水平导航菜单，支持多级嵌套、受控选中、手
 ## 引入
 
 ```ts
-import { RdMenu, type MenuItem } from '@roost-design/ui'
+import { RdMenu, type MenuItem } from '@wise-kit/ui'
 ```
 
 ## 导航选中
@@ -27,7 +27,7 @@ import { RdMenu, type MenuItem } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -67,7 +67,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('reports')
@@ -107,7 +107,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('a1')
@@ -139,7 +139,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -225,7 +225,7 @@ import {
   RdLayoutHeader,
   RdLayoutSider,
   RdMenu,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -296,7 +296,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -336,7 +336,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutSider, RdMenu } from '@roost-design/ui'
+import { RdLayout, RdLayoutSider, RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -369,7 +369,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdMenu } from '@roost-design/ui'
+import { RdButton, RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

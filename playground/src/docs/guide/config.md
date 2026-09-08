@@ -1,12 +1,12 @@
 ---
 title: 全局配置
 order: 5
-description: ConfigProvider、createRoostDesign 与 useRdConfig。
+description: ConfigProvider、createWiseKit 与 useRdConfig。
 ---
 
 # 全局配置
 
-Roost Design 提供应用级 / 页面级默认值，用于统一浮层挂载、尺寸、密度与文案。
+Wise Kit 提供应用级 / 页面级默认值，用于统一浮层挂载、尺寸、密度与文案。
 
 ## 能力一览
 
@@ -19,23 +19,23 @@ Roost Design 提供应用级 / 页面级默认值，用于统一浮层挂载、�
 | `zIndex` | 浮层基准层级 |
 | `locale` | 确认、空态、加载、占位等文案。可传入内置语言包 `zhCN` / `enUS` |
 
-优先级：**组件 Props > `RdConfigProvider` > `createRoostDesign` > 内置默认（中文）**。
+优先级：**组件 Props > `RdConfigProvider` > `createWiseKit` > 内置默认（中文）**。
 
 ## 语言包
 
 组件内置文案默认中文。切换英文时传入 `enUS`：
 
 ```ts
-import { createRoostDesign, enUS, zhCN } from '@roost-design/ui'
+import { createWiseKit, enUS, zhCN } from '@wise-kit/ui'
 import { createApp } from 'vue'
 
-createApp(App).use(createRoostDesign({ locale: enUS })).mount('#app')
+createApp(App).use(createWiseKit({ locale: enUS })).mount('#app')
 ```
 
 也可以只覆盖部分文案：
 
 ```ts
-createRoostDesign({
+createWiseKit({
   locale: {
     ...zhCN,
     accept: '确定',
@@ -51,7 +51,7 @@ createRoostDesign({
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -91,7 +91,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
@@ -123,7 +123,7 @@ const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
 
 ```vue preview
 <script setup lang="ts">
-import { RdConfigProvider, RdInput, RdTextarea } from '@roost-design/ui'
+import { RdConfigProvider, RdInput, RdTextarea } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -154,7 +154,7 @@ import { RdConfigProvider, RdInput, RdTextarea } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdConfirmDialog, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -186,7 +186,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -204,14 +204,14 @@ const visible = ref(false)
 </template>
 ```
 
-## 应用级：`createRoostDesign`
+## 应用级：`createWiseKit`
 
 ```ts
-import { createRoostDesign } from '@roost-design/ui'
+import { createWiseKit } from '@wise-kit/ui'
 import { createApp } from 'vue'
 
 createApp(App).use(
-    createRoostDesign({
+    createWiseKit({
       appendTo: 'body',
       size: 'small',
       zIndex: 2000,
@@ -223,7 +223,7 @@ createApp(App).use(
 ## 读取配置
 
 ```ts
-import { useRdConfig } from '@roost-design/ui'
+import { useRdConfig } from '@wise-kit/ui'
 
 const config = useRdConfig()
 // config.value.appendTo / size / locale …

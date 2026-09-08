@@ -11,7 +11,7 @@ description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 
 ## 引入
 
 ```ts
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -55,7 +55,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -72,7 +72,7 @@ import { RdSkeleton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdSkeleton } from '@roost-design/ui'
+import { RdSkeleton } from '@wise-kit/ui'
 </script>
 
 <template>

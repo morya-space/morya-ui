@@ -11,7 +11,7 @@ description: 按可视窗口渲染长列表。
 ## 引入
 
 ```ts
-import { RdVirtualScroller } from '@roost-design/ui'
+import { RdVirtualScroller } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdVirtualScroller } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdVirtualScroller } from '@roost-design/ui'
+import { RdVirtualScroller } from '@wise-kit/ui'
 
 const items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)
 </script>

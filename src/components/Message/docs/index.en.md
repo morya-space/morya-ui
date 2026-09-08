@@ -21,7 +21,7 @@ Vs [Toast](/components/Toast):
 ## Import
 
 ```ts
-import { message, useMessage, RdMessage } from '@roost-design/ui'
+import { message, useMessage, RdMessage } from '@wise-kit/ui'
 ```
 
 ## API
@@ -30,7 +30,7 @@ The first call auto-mounts a floating host; no template component is required.
 
 ```vue preview
 <script setup lang="ts">
-import { message, RdButton } from '@roost-design/ui'
+import { message, RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -53,7 +53,7 @@ import { message, RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, RdButton, RdIcon } from '@roost-design/ui'
+import { message, RdButton, RdIcon } from '@wise-kit/ui'
 import { h } from 'vue'
 
 function showVNode() {

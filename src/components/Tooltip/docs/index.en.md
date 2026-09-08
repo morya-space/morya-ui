@@ -11,14 +11,14 @@ Short hint for a trigger element, suited to icon buttons or truncated text.
 ## Import
 
 ```ts
-import { RdButton, RdTooltip } from '@roost-design/ui'
+import { RdButton, RdTooltip } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTooltip } from '@roost-design/ui'
+import { RdButton, RdTooltip } from '@wise-kit/ui'
 </script>
 
 <template>

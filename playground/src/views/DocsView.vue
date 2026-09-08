@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ResolvedGuideDoc } from '../docs/guide/loadGuideDocs'
-import { RdScrollbar } from '@roost-design/ui'
+import { RdScrollbar } from '@wise-kit/ui'
 import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
@@ -52,7 +52,7 @@ watch([activeSlug, lang], async () => {
               height="24"
               alt=""
             />
-            <span>Roost Design UI</span>
+            <span>Wise Kit UI</span>
           </RouterLink>
           <p class="docs-kicker">
             DOCUMENTATION

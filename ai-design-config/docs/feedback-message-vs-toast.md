@@ -31,7 +31,7 @@
 - 复制成功、导入触发等**一句话**反馈
 
 ```ts
-import { message } from '@roost-design/ui'
+import { message } from '@wise-kit/ui'
 
 message.success('已创建')
 message.info('已移入回收站')
@@ -84,7 +84,7 @@ message.error('操作失败')
 
 ## 与 Naive / Element Plus 的对应
 
-| Roost Design | 近似概念 |
+| Wise Kit | 近似概念 |
 | --- | --- |
 | `message` | Naive `message` / Element `ElMessage` |
 | `toast` | Naive `notification` / Element `ElNotification` |

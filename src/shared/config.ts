@@ -64,7 +64,7 @@ export interface RdGlobalConfig {
 }
 
 /**
- * Options for `app.use(RoostDesign, options)` / `createRoostDesign(options)`.
+ * Options for `app.use(WiseKit, options)` / `createWiseKit(options)`.
  *
  * By default every public component is registered globally.
  * Pass `components: false` to only install config, or pass a list for partial registration.
@@ -220,8 +220,8 @@ function registerComponents(app: App, components: RdInstallerOptions['components
   }
 }
 
-/** Shared install used by `createRoostDesign` and the default plugin. */
-export function installRoostDesign(app: App, options: RdInstallerOptions = {}) {
+/** Shared install used by `createWiseKit` and the default plugin. */
+export function installWiseKit(app: App, options: RdInstallerOptions = {}) {
   applyInstallerConfig(app, options)
   registerComponents(app, options.components)
 }
@@ -232,42 +232,42 @@ export function installRoostDesign(app: App, options: RdInstallerOptions = {}) {
  * @example
  * ```ts
  * import { createApp } from 'vue'
- * import { createRoostDesign } from '@roost-design/ui'
- * import '@roost-design/ui/styles.css'
+ * import { createWiseKit } from '@wise-kit/ui'
+ * import '@wise-kit/ui/styles.css'
  *
- * createApp(App).use(createRoostDesign({ size: 'small', density: 'compact' })).mount('#app')
+ * createApp(App).use(createWiseKit({ size: 'small', density: 'compact' })).mount('#app')
  * // templates can use <RdButton> without importing
  * ```
  *
  * Config only (no global components):
  * ```ts
- * createRoostDesign({ size: 'small', components: false })
+ * createWiseKit({ size: 'small', components: false })
  * ```
  */
-export function createRoostDesign(options: RdInstallerOptions = {}): Plugin {
+export function createWiseKit(options: RdInstallerOptions = {}): Plugin {
   return {
     install(app: App) {
-      installRoostDesign(app, options)
+      installWiseKit(app, options)
     },
   }
 }
 
 /**
  * Default plugin:
- * `app.use(RoostDesign)` or `app.use(RoostDesign, { size: 'small' })`.
+ * `app.use(WiseKit)` or `app.use(WiseKit, { size: 'small' })`.
  */
-export const RoostDesign: Plugin = {
+export const WiseKit: Plugin = {
   install(app: App, options: RdInstallerOptions = {}) {
-    installRoostDesign(app, options)
+    installWiseKit(app, options)
   },
 }
 
-/** @deprecated Use `createRoostDesign` */
-export const createWexDesign = createRoostDesign
-/** @deprecated Use `installRoostDesign` */
-export const installWexDesign = installRoostDesign
-/** @deprecated Use `RoostDesign` */
-export const WexDesign = RoostDesign
+/** @deprecated Use `createWiseKit` */
+export const createWexDesign = createWiseKit
+/** @deprecated Use `installWiseKit` */
+export const installWexDesign = installWiseKit
+/** @deprecated Use `WiseKit` */
+export const WexDesign = WiseKit
 
 /** @deprecated Use `getDefaultRdConfig` */
 export const getDefaultWdConfig = getDefaultRdConfig

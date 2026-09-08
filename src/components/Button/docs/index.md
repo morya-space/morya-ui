@@ -11,7 +11,7 @@ description: 按钮用于触发即时动作。
 ## 引入
 
 ```ts
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -61,7 +61,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -91,7 +91,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -110,7 +110,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -129,7 +129,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdButtonGroup } from '@roost-design/ui'
+import { RdButton, RdButtonGroup } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -147,7 +147,7 @@ import { RdButton, RdButtonGroup } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -167,7 +167,7 @@ import { RdButton } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -192,7 +192,7 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>

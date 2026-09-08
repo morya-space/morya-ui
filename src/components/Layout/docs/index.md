@@ -17,7 +17,7 @@ import {
   RdLayoutFooter,
   RdLayoutHeader,
   RdLayoutSider,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -26,7 +26,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@roost-design/ui'
+import { RdLayout, RdLayoutContent, RdLayoutFooter, RdLayoutHeader } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -55,7 +55,7 @@ import {
   RdLayoutContent,
   RdLayoutHeader,
   RdLayoutSider,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -98,7 +98,7 @@ import {
   RdLayoutContent,
   RdLayoutHeader,
   RdLayoutSider,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 </script>
 
 <template>
@@ -132,7 +132,7 @@ import {
   RdLayoutHeader,
   RdLayoutSider,
   RdTag,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -145,7 +145,7 @@ const collapsed = ref(false)
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
-      <strong>Roost Design</strong>
+      <strong>Wise Kit</strong>
       <RdTag value="Studio" />
       <span style="flex:1" />
       <RdButton size="small" label="发布" />
@@ -191,7 +191,7 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@roost-design/ui'
+import { RdLayout, RdLayoutContent, RdLayoutHeader } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -217,7 +217,7 @@ import {
   RdLayoutContent,
   RdLayoutHeader,
   RdLayoutSider,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 </script>
 
 <template>
@@ -252,7 +252,7 @@ import {
   RdLayoutContent,
   RdLayoutHeader,
   RdLayoutSider,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 </script>
 
 <template>

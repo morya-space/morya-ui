@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdConfigProvider } from '@roost-design/ui'
+import { RdConfigProvider } from '@wise-kit/ui'
 import { RouterView } from 'vue-router'
 import SiteHeader from './components/SiteHeader.vue'
 import { useDocsI18n } from './i18n'

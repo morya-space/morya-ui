@@ -11,14 +11,14 @@ description: 滑动条，支持单值与区间选择。
 ## 引入
 
 ```ts
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(40)
@@ -38,7 +38,7 @@ const value = ref(40)
 
 ```vue preview
 <script setup lang="ts">
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref([20, 70])
@@ -60,7 +60,7 @@ const value = ref([20, 70])
 
 ```vue preview
 <script setup lang="ts">
-import { RdSlider } from '@roost-design/ui'
+import { RdSlider } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(50)

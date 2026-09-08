@@ -11,14 +11,14 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 ## 引入
 
 ```ts
-import { RdFlex } from '@roost-design/ui'
+import { RdFlex } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@roost-design/ui'
+import { RdButton, RdFlex } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { RdButton, RdFlex } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex } from '@roost-design/ui'
+import { RdButton, RdFlex } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -50,7 +50,7 @@ import { RdButton, RdFlex } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFlex, RdTag } from '@roost-design/ui'
+import { RdButton, RdFlex, RdTag } from '@wise-kit/ui'
 </script>
 
 <template>

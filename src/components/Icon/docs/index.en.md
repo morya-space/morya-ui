@@ -6,19 +6,19 @@ description: System outline icon registry. Use the default slot for business ico
 
 # Icon
 
-`RdIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `@roost-design/ui`.
+`RdIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `@wise-kit/ui`.
 
 ## Import
 
 ```ts
-import { iconNames, RdIcon } from '@roost-design/ui'
+import { iconNames, RdIcon } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdIcon } from '@roost-design/ui'
+import { RdIcon } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -37,8 +37,8 @@ Click an icon to copy its name (for example `search`). Usage: `<RdIcon name="sea
 
 ```vue preview
 <script setup lang="ts">
-import type {ToastMessage} from '@roost-design/ui';
-import { iconNames,  RdIcon, RdInput, RdToast } from '@roost-design/ui'
+import type {ToastMessage} from '@wise-kit/ui';
+import { iconNames,  RdIcon, RdInput, RdToast } from '@wise-kit/ui'
 import { computed, ref } from 'vue'
 
 const query = ref('')
@@ -164,7 +164,7 @@ When system icons are not enough, do not pile SVGs into the component library. M
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdIcon, RdIconField, RdInput } from '@roost-design/ui'
+import { RdButton, RdIcon, RdIconField, RdInput } from '@wise-kit/ui'
 import { User } from 'lucide-vue-next'
 </script>
 

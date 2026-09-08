@@ -11,14 +11,14 @@ Multi-line text input.
 ## Import
 
 ```ts
-import { RdTextarea } from '@roost-design/ui'
+import { RdTextarea } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTextarea } from '@roost-design/ui'
+import { RdTextarea } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -33,7 +33,7 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdTextarea } from '@roost-design/ui'
+import { RdTextarea } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -51,7 +51,7 @@ import { RdTextarea } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdTextarea } from '@roost-design/ui'
+import { RdTextarea } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('Line 1\nLine 2')
@@ -71,7 +71,7 @@ const limited = ref('Clamped height')
 
 ```vue preview
 <script setup lang="ts">
-import { RdTextarea } from '@roost-design/ui'
+import { RdTextarea } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('Draft notes')

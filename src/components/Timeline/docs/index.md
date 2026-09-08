@@ -11,14 +11,14 @@ description: 垂直 / 水平时间轴，支持图标 marker 与自定义插槽�
 ## 引入
 
 ```ts
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 
 const events = [
   { status: 'Ordered', date: '15/10/2024', content: 'Order placed', icon: 'check', severity: 'success' },
@@ -36,7 +36,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 
 const events = [
   { status: 'Start', date: '周一', content: 'Kickoff', icon: 'check' },
@@ -56,7 +56,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 
 const events = [
   { status: 'Done', date: '周一', content: 'Shipped' },

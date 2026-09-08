@@ -11,14 +11,14 @@ description: 列表或网格布局展示数据，可分页。
 ## 引入
 
 ```ts
-import { RdDataView } from '@roost-design/ui'
+import { RdDataView } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdDataView } from '@roost-design/ui'
+import { RdDataView } from '@wise-kit/ui'
 
 const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 </script>

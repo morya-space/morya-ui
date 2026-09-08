@@ -11,14 +11,14 @@ Chip displays short tagged information, with optional icon/image and a remove bu
 ## Import
 
 ```ts
-import { RdChip } from '@roost-design/ui'
+import { RdChip } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdChip } from '@roost-design/ui'
+import { RdChip } from '@wise-kit/ui'
 </script>
 
 <template>

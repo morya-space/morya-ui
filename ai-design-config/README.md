@@ -1,6 +1,6 @@
-# Roost Design AI 设计配置
+# Wise Kit AI 设计配置
 
-面向 **基于 `@roost-design/ui` 用 AI 生成业务页面** 的可复制配置包。将本目录内容合并到业务项目根目录（或按需选取子目录）即可。
+面向 **基于 `@wise-kit/ui` 用 AI 生成业务页面** 的可复制配置包。将本目录内容合并到业务项目根目录（或按需选取子目录）即可。
 
 ## 目录说明
 
@@ -19,13 +19,13 @@
 1. **安装组件库**
 
    ```bash
-   pnpm add @roost-design/ui
+   pnpm add @wise-kit/ui
    ```
 
 2. **引入全局样式**（`main.ts`）
 
    ```ts
-   import '@roost-design/ui/styles.css'
+   import '@wise-kit/ui/styles.css'
    ```
 
 3. **复制本配置包**到业务项目根目录（合并 `.cursor/rules`，勿覆盖已有规则时可改文件名前缀）。
@@ -44,13 +44,13 @@
 
 ## 与组件库的关系
 
-- **Token 单一事实源**：运行时以 `@roost-design/ui` 的 `styles.css` 为准；本目录 `design-tokens/` 供 AI 与静态检查使用，发版后如有差异以 npm 包为准。
-- **组件 API**：以文档站 `/components` 或 MCP `@roost-design/ui-mcp` 为准；`docs/components.md` 仅作索引与场景指引。
+- **Token 单一事实源**：运行时以 `@wise-kit/ui` 的 `styles.css` 为准；本目录 `design-tokens/` 供 AI 与静态检查使用，发版后如有差异以 npm 包为准。
+- **组件 API**：以文档站 `/components` 或 MCP `@wise-kit/ui-mcp` 为准；`docs/components.md` 仅作索引与场景指引。
 
 ## 可选：MCP 文档检索
 
 ```bash
-npx -y @roost-design/ui-mcp
+npx -y @wise-kit/ui-mcp
 ```
 
 在 Cursor / 其他 MCP 客户端配置后，生成代码时可检索真实 Props / Events。

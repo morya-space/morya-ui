@@ -33,7 +33,7 @@ function highlightCode(code: string, lang: string) {
 }
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/roost-design-ui/' : '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/wise-kit-ui/' : '/',
   root: playgroundDir,
   plugins: [
     docsManifestPlugin(repoRoot, guideDir),
@@ -59,51 +59,51 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@roost-design/ui/button/style',
+        find: '@wise-kit/ui/button/style',
         replacement: fileURLToPath(new URL('../src/components/Button/style.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/button',
+        find: '@wise-kit/ui/button',
         replacement: fileURLToPath(new URL('../src/components/Button/index.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/input/style',
+        find: '@wise-kit/ui/input/style',
         replacement: fileURLToPath(new URL('../src/components/Input/style.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/input',
+        find: '@wise-kit/ui/input',
         replacement: fileURLToPath(new URL('../src/components/Input/index.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/select/style',
+        find: '@wise-kit/ui/select/style',
         replacement: fileURLToPath(new URL('../src/components/Select/style.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/select',
+        find: '@wise-kit/ui/select',
         replacement: fileURLToPath(new URL('../src/components/Select/index.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/dialog/style',
+        find: '@wise-kit/ui/dialog/style',
         replacement: fileURLToPath(new URL('../src/components/Dialog/style.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/dialog',
+        find: '@wise-kit/ui/dialog',
         replacement: fileURLToPath(new URL('../src/components/Dialog/index.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/icon/style',
+        find: '@wise-kit/ui/icon/style',
         replacement: fileURLToPath(new URL('../src/components/Icon/style.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/icon',
+        find: '@wise-kit/ui/icon',
         replacement: fileURLToPath(new URL('../src/components/Icon/index.ts', import.meta.url)),
       },
       {
-        find: '@roost-design/ui/styles.css',
+        find: '@wise-kit/ui/styles.css',
         replacement: fileURLToPath(new URL('../src/styles/index.css', import.meta.url)),
       },
       {
-        find: '@roost-design/ui',
+        find: '@wise-kit/ui',
         replacement: fileURLToPath(new URL('../src', import.meta.url)),
       },
       {

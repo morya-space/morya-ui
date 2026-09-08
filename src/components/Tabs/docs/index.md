@@ -11,14 +11,14 @@ description: 标签页切换。支持 line/card、关闭/新增、extra 与溢�
 ## 引入
 
 ```ts
-import { RdTabs } from '@roost-design/ui'
+import { RdTabs } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTabs } from '@roost-design/ui'
+import { RdTabs } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -44,7 +44,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTabs } from '@roost-design/ui'
+import { RdButton, RdTabs } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref('a')

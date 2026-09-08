@@ -11,7 +11,7 @@ description: 状态角标或圆点。
 ## 引入
 
 ```ts
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdBadge } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import { RdBadge } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ import { RdBadge } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge } from '@roost-design/ui'
+import { RdBadge } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -78,7 +78,7 @@ import { RdBadge } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdBadge, RdButton } from '@roost-design/ui'
+import { RdBadge, RdButton } from '@wise-kit/ui'
 </script>
 
 <template>

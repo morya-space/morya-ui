@@ -6,16 +6,16 @@ description: Optional MCP server for AI clients that support the Model Context P
 
 # MCP
 
-[`@roost-design/ui-mcp`](https://www.npmjs.com/package/@roost-design/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
+[`@wise-kit/ui-mcp`](https://www.npmjs.com/package/@wise-kit/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
 
 You do **not** need MCP to use the component library. Apps still only depend on:
 
 ```bash
-pnpm add @roost-design/ui
+pnpm add @wise-kit/ui
 ```
 
 ```ts
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 ```
 
 ## How to connect
@@ -23,7 +23,7 @@ import '@roost-design/ui/styles.css'
 MCP clients start the package over stdio:
 
 ```bash
-npx -y @roost-design/ui-mcp
+npx -y @wise-kit/ui-mcp
 ```
 
 Generic shape:
@@ -31,7 +31,7 @@ Generic shape:
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@roost-design/ui-mcp"]
+  "args": ["-y", "@wise-kit/ui-mcp"]
 }
 ```
 
@@ -46,9 +46,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -59,9 +59,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -72,9 +72,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -85,9 +85,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -98,9 +98,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "context_servers": {
-    "roost-design-ui": {
+    "wise-kit-ui": {
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   }
 }
@@ -112,9 +112,9 @@ Snippets for popular products. Key names may change across versions — check ea
 {
   "mcpServers": [
     {
-      "name": "roost-design-ui",
+      "name": "wise-kit-ui",
       "command": "npx",
-      "args": ["-y", "@roost-design/ui-mcp"]
+      "args": ["-y", "@wise-kit/ui-mcp"]
     }
   ]
 }
@@ -174,7 +174,7 @@ Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
 
 After connecting, you can ask the assistant to use this server, for example:
 
-> Use the roost-design-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
+> Use the wise-kit-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
 
 > Search for date-related components, pick one suitable for forms, and write a minimal usage from the docs.
 
@@ -184,7 +184,7 @@ The assistant should call tools first, then produce something like:
 
 ```vue
 <script setup lang="ts">
-import { RdButton } from '@roost-design/ui'
+import { RdButton } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -194,9 +194,9 @@ import { RdButton } from '@roost-design/ui'
 
 ## Relation to this site
 
-The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@roost-design/ui-mcp`; clients using `npx -y` pick up the new release.
+The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@wise-kit/ui-mcp`; clients using `npx -y` pick up the new release.
 
-Implementation notes live in [packages/ui-mcp/README.md](https://github.com/roost-design/roost-design-ui/tree/main/packages/ui-mcp).
+Implementation notes live in [packages/ui-mcp/README.md](https://github.com/wise-kit/wise-kit-ui/tree/main/packages/ui-mcp).
 
 ## Next steps
 

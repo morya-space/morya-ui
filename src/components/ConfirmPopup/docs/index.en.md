@@ -11,14 +11,14 @@ Lightweight confirmation overlay. Supports `target` or coordinate positioning.
 ## Import
 
 ```ts
-import { RdConfirmPopup } from '@roost-design/ui'
+import { RdConfirmPopup } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@roost-design/ui'
+import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -42,7 +42,7 @@ Returning `false` from `beforeAccept` keeps the popup open and skips the `accept
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfirmPopup } from '@roost-design/ui'
+import { RdButton, RdConfirmPopup } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

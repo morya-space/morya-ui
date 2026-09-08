@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<evaluation name="roost-design-ui-mcp">
+<evaluation name="wise-kit-ui-mcp">
   <description>Read-only evaluation tasks for component discovery, composition guidance, and page validation.</description>
   <task id="component-api">
     <prompt>Find the RdButton API and identify the prop used for a danger action. Include the documented default if available.</prompt>

@@ -11,14 +11,14 @@ description: 导航轨侧栏，可折叠。
 ## 引入
 
 ```ts
-import { RdSidebar } from '@roost-design/ui'
+import { RdSidebar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdSidebar } from '@roost-design/ui'
+import { RdButton, RdSidebar } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)

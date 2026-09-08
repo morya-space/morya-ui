@@ -11,14 +11,14 @@ Present options as a button group, with single and multiple selection.
 ## Import
 
 ```ts
-import { RdSelectButton } from '@roost-design/ui'
+import { RdSelectButton } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelectButton } from '@roost-design/ui'
+import { RdSelectButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('center')
@@ -38,7 +38,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdSelectButton } from '@roost-design/ui'
+import { RdSelectButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(['left'])

@@ -18,7 +18,7 @@ Navigation menu rendered from a `model`. Typical uses: admin sidebar, top naviga
 ## Import
 
 ```ts
-import { RdMenu, type MenuItem } from '@roost-design/ui'
+import { RdMenu, type MenuItem } from '@wise-kit/ui'
 ```
 
 ## Selection
@@ -27,7 +27,7 @@ Give leaf items stable `key` values; sync with routing via `v-model:selected-key
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -67,7 +67,7 @@ Click a group to expand/collapse. When a child is selected, the parent shows `ch
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('reports')
@@ -107,7 +107,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('a1')
@@ -139,7 +139,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -225,7 +225,7 @@ import {
   RdLayoutHeader,
   RdLayoutSider,
   RdMenu,
-} from '@roost-design/ui'
+} from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -263,7 +263,7 @@ const model = [
         min-height: var(--rd-layout-header-height);
       "
     >
-      <strong style="color: var(--rd-color-primary); font-size: var(--rd-font-size-md)">Roost Design</strong>
+      <strong style="color: var(--rd-color-primary); font-size: var(--rd-font-size-md)">Wise Kit</strong>
     </RdLayoutHeader>
     <RdLayout has-sider>
       <RdLayoutSider
@@ -297,7 +297,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdMenu } from '@roost-design/ui'
+import { RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -337,7 +337,7 @@ Use `inverted` with `RdLayoutSider`'s `inverted` on dark backgrounds.
 
 ```vue preview
 <script setup lang="ts">
-import { RdLayout, RdLayoutSider, RdMenu } from '@roost-design/ui'
+import { RdLayout, RdLayoutSider, RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -370,7 +370,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdMenu } from '@roost-design/ui'
+import { RdButton, RdMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

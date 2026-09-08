@@ -2,7 +2,7 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-Maintainer documentation for the open-source `@roost-design/ui` project. Public overview: [README](../README.md) · [文档站](https://roost-design.github.io/roost-design-ui/)
+Maintainer documentation for the open-source `@wise-kit/ui` project. Public overview: [README](../README.md) · [文档站](https://wise-kit.github.io/wise-kit-ui/)
 
 | Document | Description |
 | --- | --- |

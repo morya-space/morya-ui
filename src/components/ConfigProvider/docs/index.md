@@ -6,7 +6,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 # ConfigProvider
 
-通过 `RdConfigProvider` 或 `createRoostDesign` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
+通过 `RdConfigProvider` 或 `createWiseKit` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
 
 ## 能力一览
 
@@ -24,7 +24,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -56,7 +56,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput, RdSpace } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const note = ref('可清除')
@@ -82,7 +82,7 @@ const note = ref('可清除')
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdInput } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -107,7 +107,7 @@ import { RdButton, RdConfigProvider, RdInput } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@roost-design/ui'
+import { RdButton, RdConfigProvider, RdDialog, RdSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -136,18 +136,18 @@ const options = [
 ## 应用级插件
 
 ```ts
-import RoostDesign, { createRoostDesign, enUS } from '@roost-design/ui'
+import WiseKit, { createWiseKit, enUS } from '@wise-kit/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 // 方式一：默认导出
-createApp(App).use(RoostDesign, { locale: enUS }).mount('#app')
+createApp(App).use(WiseKit, { locale: enUS }).mount('#app')
 
 // 方式二：工厂函数
 createApp(App)
   .use(
-    createRoostDesign({
+    createWiseKit({
       appendTo: 'body',
       size: 'small',
       density: 'comfortable',
@@ -167,19 +167,19 @@ createApp(App)
 ## 读取配置
 
 ```ts
-import { useRdConfig } from '@roost-design/ui'
+import { useRdConfig } from '@wise-kit/ui'
 
 const config = useRdConfig()
 ```
 
-优先级：**组件 Props > `RdConfigProvider` > `createRoostDesign()` > 内置默认值**。
+优先级：**组件 Props > `RdConfigProvider` > `createWiseKit()` > 内置默认值**。
 
 ## 主题与动效
 
-主题与动效 API 由 `@roost-design/ui` 一并导出，可与 ConfigProvider 并用：
+主题与动效 API 由 `@wise-kit/ui` 一并导出，可与 ConfigProvider 并用：
 
 ```ts
-import { useMotion, useTheme } from '@roost-design/ui'
+import { useMotion, useTheme } from '@wise-kit/ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RdIcon, RdScrollbar } from '@roost-design/ui'
+import { RdIcon, RdScrollbar } from '@wise-kit/ui'
 import { onUnmounted, ref, useAttrs, watch } from 'vue'
 
 defineOptions({ inheritAttrs: false })

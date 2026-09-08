@@ -7,16 +7,16 @@ export interface ComponentResolver {
   ) => { name: string; from: string; sideEffects?: string[] } | undefined | null | void
 }
 
-export interface RoostDesignResolverOptions {
+export interface WiseKitResolverOptions {
   /** Component name prefix. Default: `Rd`. */
   prefix?: string
 }
 
 /**
  * Resolver for `unplugin-vue-components` that maps `Rd*` components to
- * on-demand subpath imports such as `@roost-design/ui/button`.
+ * on-demand subpath imports such as `@wise-kit/ui/button`.
  */
-export function RoostDesignResolver(options: RoostDesignResolverOptions = {}): ComponentResolver {
+export function WiseKitResolver(options: WiseKitResolverOptions = {}): ComponentResolver {
   const prefix = options.prefix ?? 'Rd'
 
   return {
@@ -27,7 +27,7 @@ export function RoostDesignResolver(options: RoostDesignResolverOptions = {}): C
       if (!slug) return
       return {
         name,
-        from: `@roost-design/ui/${slug}`,
+        from: `@wise-kit/ui/${slug}`,
       }
     },
   }
@@ -35,7 +35,7 @@ export function RoostDesignResolver(options: RoostDesignResolverOptions = {}): C
 
 export { componentImportMap }
 
-/** @deprecated Use `RoostDesignResolver` */
-export const WexDesignResolver = RoostDesignResolver
-/** @deprecated Use `RoostDesignResolverOptions` */
-export type WexDesignResolverOptions = RoostDesignResolverOptions
+/** @deprecated Use `WiseKitResolver` */
+export const WexDesignResolver = WiseKitResolver
+/** @deprecated Use `WiseKitResolverOptions` */
+export type WexDesignResolverOptions = WiseKitResolverOptions

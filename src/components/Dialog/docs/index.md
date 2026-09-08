@@ -11,14 +11,14 @@ description: 模态对话框。支持预设页脚、异步关闭拦截、状态 
 ## 引入
 
 ```ts
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -42,7 +42,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -73,7 +73,7 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -103,7 +103,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -127,7 +127,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -151,7 +151,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

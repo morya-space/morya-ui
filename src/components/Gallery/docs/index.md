@@ -11,14 +11,14 @@ description: 主图 + 缩略图的图片画廊。
 ## 引入
 
 ```ts
-import { RdGallery } from '@roost-design/ui'
+import { RdGallery } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdGallery } from '@roost-design/ui'
+import { RdGallery } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)

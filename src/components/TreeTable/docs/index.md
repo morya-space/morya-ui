@@ -11,14 +11,14 @@ description: 可展开的树形表格。
 ## 引入
 
 ```ts
-import { RdTreeTable } from '@roost-design/ui'
+import { RdTreeTable } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdTreeTable } from '@roost-design/ui'
+import { RdTreeTable } from '@wise-kit/ui'
 
 const columns = [
   { field: 'name', header: '名称' },

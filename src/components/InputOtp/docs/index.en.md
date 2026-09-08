@@ -11,14 +11,14 @@ Split a string across multiple single-character inputs.
 ## Import
 
 ```ts
-import { RdInputOtp } from '@roost-design/ui'
+import { RdInputOtp } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputOtp } from '@roost-design/ui'
+import { RdInputOtp } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const code = ref('')
@@ -35,7 +35,7 @@ const code = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputOtp } from '@roost-design/ui'
+import { RdInputOtp } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const code = ref('')

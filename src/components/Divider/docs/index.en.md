@@ -11,7 +11,7 @@ Content divider, optionally with a label.
 ## Import
 
 ```ts
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Default horizontal solid divider.
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -42,7 +42,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ When the divider is horizontal and has a label, use `align` to control the label
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -78,7 +78,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -92,7 +92,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>

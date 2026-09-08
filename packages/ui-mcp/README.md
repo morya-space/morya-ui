@@ -1,11 +1,11 @@
-# @roost-design/ui-mcp
+# @wise-kit/ui-mcp
 
-Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui).
+Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@wise-kit/ui`](https://www.npmjs.com/package/@wise-kit/ui).
 
 It indexes component docs, guides, examples, and reusable page patterns so **any MCP-capable AI client** can look up the real API before writing code. It does **not** replace installing the UI library:
 
 ```bash
-pnpm add @roost-design/ui
+pnpm add @wise-kit/ui
 ```
 
 Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
@@ -13,7 +13,7 @@ Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
 ## Run
 
 ```bash
-npx -y @roost-design/ui-mcp
+npx -y @wise-kit/ui-mcp
 ```
 
 Typical client config (field names vary by client):
@@ -21,15 +21,15 @@ Typical client config (field names vary by client):
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@roost-design/ui-mcp"]
+  "args": ["-y", "@wise-kit/ui-mcp"]
 }
 ```
 
 Local checkout:
 
 ```bash
-pnpm --filter @roost-design/ui-mcp build
-node packages/ui-mcp/bin/roost-design-ui-mcp.js
+pnpm --filter @wise-kit/ui-mcp build
+node packages/ui-mcp/bin/wise-kit-ui-mcp.js
 ```
 
 ## Tools
@@ -127,7 +127,7 @@ pnpm mcp:audit-examples
 
 ## Release
 
-From the repo root (version syncs from `@roost-design/ui`):
+From the repo root (version syncs from `@wise-kit/ui`):
 
 ```bash
 pnpm release:mcp -- --dry-run

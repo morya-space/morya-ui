@@ -6,17 +6,17 @@ description: Install the package, import styles, and render the first component.
 
 # Quick start
 
-> Live docs: [roost-design.github.io/roost-design-ui](https://roost-design.github.io/roost-design-ui/) · Source: [GitHub](https://github.com/roost-design/roost-design-ui) · npm: [`@roost-design/ui`](https://www.npmjs.com/package/@roost-design/ui)
+> Live docs: [wise-kit.github.io/wise-kit-ui](https://wise-kit.github.io/wise-kit-ui/) · Source: [GitHub](https://github.com/wise-kit/wise-kit-ui) · npm: [`@wise-kit/ui`](https://www.npmjs.com/package/@wise-kit/ui)
 
 ## Install
 
 **In an application (npm / pnpm / yarn):**
 
 ```bash
-pnpm add @roost-design/ui
+pnpm add @wise-kit/ui
 ```
 
-Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `@roost-design/ui`.
+Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `@wise-kit/ui`.
 
 After cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).
 
@@ -29,8 +29,8 @@ The library supports **full** and **on-demand** usage. Pick one per app (stay co
 | | Full | On-demand |
 | --- | --- | --- |
 | Best for | Many components, fastest setup | Bundle size, few components |
-| Components | `app.use(RoostDesign)` or named imports from `@roost-design/ui` | `@roost-design/ui/button` subpaths, or Vite auto-resolver |
-| Styles | Import `@roost-design/ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |
+| Components | `app.use(WiseKit)` or named imports from `@wise-kit/ui` | `@wise-kit/ui/button` subpaths, or Vite auto-resolver |
+| Styles | Import `@wise-kit/ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |
 | JS size | Full plugin bundles all components; named imports tree-shake | Only used components and their deps |
 
 ## Full usage
@@ -40,12 +40,12 @@ The library supports **full** and **on-demand** usage. Pick one per app (stay co
 Import the **full stylesheet** and register all components once:
 
 ```ts
-import RoostDesign from '@roost-design/ui'
+import WiseKit from '@wise-kit/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
-createApp(App).use(RoostDesign).mount('#app')
+createApp(App).use(WiseKit).mount('#app')
 ```
 
 Templates can use `<RdButton>`, `<RdInput>`, etc. without per-file imports.
@@ -57,14 +57,14 @@ Skip the plugin; import components in SFCs. JS can tree-shake, but styles still 
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 createApp(App).mount('#app')
 ```
 
 ```vue
 <script setup lang="ts">
-import { RdButton, RdInput } from '@roost-design/ui'
+import { RdButton, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const name = ref('')
@@ -82,18 +82,18 @@ const name = ref('')
 
 ### 1. Subpath imports
 
-Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `@roost-design/ui/styles.css` required:
+Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `@wise-kit/ui/styles.css` required:
 
 ```ts
-import { RdButton } from '@roost-design/ui/button'
-import { RdInput } from '@roost-design/ui/input'
+import { RdButton } from '@wise-kit/ui/button'
+import { RdInput } from '@wise-kit/ui/input'
 ```
 
 Styles only:
 
 ```ts
-import '@roost-design/ui/button/style'
-import '@roost-design/ui/button/style.css'
+import '@wise-kit/ui/button/style'
+import '@wise-kit/ui/button/style.css'
 ```
 
 ### 2. Auto on-demand (Vite)
@@ -101,32 +101,32 @@ import '@roost-design/ui/button/style.css'
 With `unplugin-vue-components`, add the resolver so templates can use `<RdButton>` without manual imports:
 
 ```ts
-import { RoostDesignResolver } from '@roost-design/ui/resolver'
+import { WiseKitResolver } from '@wise-kit/ui/resolver'
 import Components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
   plugins: [
     vue(),
-    Components({ resolvers: [RoostDesignResolver()] }),
+    Components({ resolvers: [WiseKitResolver()] }),
   ],
 })
 ```
 
-In on-demand mode, `createRoostDesign({ components: false })` still applies global config without registering components.
+In on-demand mode, `createWiseKit({ components: false })` still applies global config without registering components.
 
 ## Optional: app-level defaults
 
-`createRoostDesign` applies global defaults and registers all components by default:
+`createWiseKit` applies global defaults and registers all components by default:
 
 ```ts
-import { createRoostDesign } from '@roost-design/ui'
+import { createWiseKit } from '@wise-kit/ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@roost-design/ui/styles.css'
+import '@wise-kit/ui/styles.css'
 
 createApp(App)
   .use(
-    createRoostDesign({
+    createWiseKit({
       appendTo: 'body',
       size: 'small',
       zIndex: 1100,
@@ -144,7 +144,7 @@ See [Configuration](/docs/config) for details.
 Color-mode helpers come from the same package:
 
 ```ts
-import { useTheme } from '@roost-design/ui'
+import { useTheme } from '@wise-kit/ui'
 
 const { toggleTheme } = useTheme()
 ```
@@ -154,9 +154,9 @@ See [Theme](/docs/theme).
 ## Run this docs site
 
 ```bash
-pnpm --filter @roost-design/ui dev
+pnpm --filter @wise-kit/ui dev
 # http://localhost:5182
 
 # Build the static docs site
-pnpm --filter @roost-design/ui build:docs
+pnpm --filter @wise-kit/ui build:docs
 ```

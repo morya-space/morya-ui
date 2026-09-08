@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTheme } from '@roost-design/ui'
+import { useTheme } from '@wise-kit/ui'
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import {

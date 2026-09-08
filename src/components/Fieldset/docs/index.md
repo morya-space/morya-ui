@@ -11,14 +11,14 @@ description: 带图例的字段分组，可折叠。
 ## 引入
 
 ```ts
-import { RdFieldset } from '@roost-design/ui'
+import { RdFieldset } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdFieldset } from '@roost-design/ui'
+import { RdFieldset } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)

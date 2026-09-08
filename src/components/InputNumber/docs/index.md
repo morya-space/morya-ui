@@ -11,14 +11,14 @@ description: 数字输入框，支持步进按钮、上下限与尺寸。
 ## 引入
 
 ```ts
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(1)
@@ -33,7 +33,7 @@ const value = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(3)
@@ -50,7 +50,7 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputNumber } from '@roost-design/ui'
+import { RdInputNumber } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref(1.25)

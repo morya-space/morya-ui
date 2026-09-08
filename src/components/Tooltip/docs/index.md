@@ -11,14 +11,14 @@ description: 悬停或聚焦时显示的短提示。支持 placement、disabled 
 ## 引入
 
 ```ts
-import { RdButton, RdTooltip } from '@roost-design/ui'
+import { RdButton, RdTooltip } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdTooltip } from '@roost-design/ui'
+import { RdButton, RdTooltip } from '@wise-kit/ui'
 </script>
 
 <template>

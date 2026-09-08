@@ -11,14 +11,14 @@ Toggle between display and content views.
 ## Import
 
 ```ts
-import { RdInplace } from '@roost-design/ui'
+import { RdInplace } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdInplace, RdInput } from '@roost-design/ui'
+import { RdButton, RdInplace, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(false)

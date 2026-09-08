@@ -11,14 +11,14 @@ SVG 环形加载指示器。
 ## 引入
 
 ```ts
-import { RdProgressSpinner } from '@roost-design/ui'
+import { RdProgressSpinner } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressSpinner } from '@roost-design/ui'
+import { RdProgressSpinner } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -35,7 +35,7 @@ import { RdProgressSpinner } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdProgressSpinner } from '@roost-design/ui'
+import { RdButton, RdProgressSpinner } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const loading = ref(true)

@@ -11,14 +11,14 @@ Wraps content and shows a mask when `blocked` is true.
 ## Import
 
 ```ts
-import { RdBlockUI } from '@roost-design/ui'
+import { RdBlockUI } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdBlockUI, RdButton } from '@roost-design/ui'
+import { RdBlockUI, RdButton } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const blocked = ref(false)

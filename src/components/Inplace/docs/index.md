@@ -11,14 +11,14 @@ description: 点击展示区切换为可编辑内容。
 ## 引入
 
 ```ts
-import { RdInplace } from '@roost-design/ui'
+import { RdInplace } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdInplace, RdInput } from '@roost-design/ui'
+import { RdButton, RdInplace, RdInput } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const active = ref(false)

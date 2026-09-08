@@ -11,14 +11,14 @@ description: 多级联级选择，支持嵌套 options 与分栏面板。
 ## 引入
 
 ```ts
-import { RdCascadeSelect } from '@roost-design/ui'
+import { RdCascadeSelect } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@roost-design/ui'
+import { RdCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | null>(null)
@@ -44,7 +44,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdCascadeSelect } from '@roost-design/ui'
+import { RdCascadeSelect } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref(null)

@@ -11,14 +11,14 @@ description: 双列表穿梭选择。
 ## 引入
 
 ```ts
-import { RdPickList } from '@roost-design/ui'
+import { RdPickList } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdPickList } from '@roost-design/ui'
+import { RdPickList } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const source = ref(['苹果', '香蕉', '樱桃', '葡萄'])
@@ -39,7 +39,7 @@ const target = ref(['榴莲'])
 
 ```vue preview
 <script setup lang="ts">
-import { RdPickList } from '@roost-design/ui'
+import { RdPickList } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const source = ref([

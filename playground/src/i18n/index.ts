@@ -1,5 +1,5 @@
-import type {RdLocaleMessages} from '@roost-design/ui';
-import { enUS,  zhCN } from '@roost-design/ui'
+import type {RdLocaleMessages} from '@wise-kit/ui';
+import { enUS,  zhCN } from '@wise-kit/ui'
 import { computed, ref, watch } from 'vue'
 
 export type DocsLang = 'zh-CN' | 'en-US'
@@ -35,7 +35,7 @@ const messages = {
     docs: '文档',
     components: '组件',
     changelog: '更新日志',
-    homeAria: 'Roost Design UI 首页',
+    homeAria: 'Wise Kit UI 首页',
     navAria: '站点导航',
     lightMode: '浅色模式',
     darkMode: '暗色模式',
@@ -162,7 +162,7 @@ const messages = {
     docs: 'Docs',
     components: 'Components',
     changelog: 'Changelog',
-    homeAria: 'Roost Design UI home',
+    homeAria: 'Wise Kit UI home',
     navAria: 'Site navigation',
     lightMode: 'Light mode',
     darkMode: 'Dark mode',

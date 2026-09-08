@@ -11,14 +11,14 @@ description: 多格单字符输入，适用于验证码。
 ## 引入
 
 ```ts
-import { RdInputOtp } from '@roost-design/ui'
+import { RdInputOtp } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputOtp } from '@roost-design/ui'
+import { RdInputOtp } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const code = ref('')
@@ -35,7 +35,7 @@ const code = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { RdInputOtp } from '@roost-design/ui'
+import { RdInputOtp } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const code = ref('')

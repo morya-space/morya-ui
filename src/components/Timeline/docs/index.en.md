@@ -11,14 +11,14 @@ Display event nodes in chronological order.
 ## Import
 
 ```ts
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 
 const events = [
   { status: 'Ordered', date: '15/10/2024', content: 'Order placed', icon: 'check', severity: 'success' },
@@ -36,7 +36,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 
 const events = [
   { status: 'Start', date: 'Monday', content: 'Kickoff', icon: 'check' },
@@ -56,7 +56,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { RdTimeline } from '@roost-design/ui'
+import { RdTimeline } from '@wise-kit/ui'
 
 const events = [
   { status: 'Done', date: 'Mon', content: 'Shipped' },

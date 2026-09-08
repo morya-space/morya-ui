@@ -2,10 +2,10 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
 import { rdComponents } from '../../component-registry'
-import { createRoostDesign, RoostDesign } from '../../shared/config'
+import { createWiseKit, WiseKit } from '../../shared/config'
 import RdButton from '../Button/Button.vue'
 
-describe('createRoostDesign / RoostDesign installer', () => {
+describe('createWiseKit / WiseKit installer', () => {
   it('registers all components globally by default', () => {
     const Host = defineComponent({
       template: '<RdButton label="Go" />',
@@ -13,7 +13,7 @@ describe('createRoostDesign / RoostDesign installer', () => {
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createRoostDesign()],
+        plugins: [createWiseKit()],
       },
     })
 
@@ -21,14 +21,14 @@ describe('createRoostDesign / RoostDesign installer', () => {
     expect(Object.keys(rdComponents).length).toBeGreaterThan(50)
   })
 
-  it('accepts options via app.use(RoostDesign, options)', () => {
+  it('accepts options via app.use(WiseKit, options)', () => {
     const Host = defineComponent({
       template: '<RdButton label="Sized" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [[RoostDesign, { size: 'small' }]],
+        plugins: [[WiseKit, { size: 'small' }]],
       },
     })
 
@@ -44,7 +44,7 @@ describe('createRoostDesign / RoostDesign installer', () => {
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createRoostDesign({ components: false, size: 'large' })],
+        plugins: [createWiseKit({ components: false, size: 'large' })],
       },
     })
 
@@ -59,7 +59,7 @@ describe('createRoostDesign / RoostDesign installer', () => {
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createRoostDesign({ components: [RdButton] })],
+        plugins: [createWiseKit({ components: [RdButton] })],
       },
     })
 

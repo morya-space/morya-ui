@@ -11,14 +11,14 @@ Searchable command palette for running actions from `model`. Fits global shortcu
 ## Import
 
 ```ts
-import { RdCommandMenu, type CommandMenuItem } from '@roost-design/ui'
+import { RdCommandMenu, type CommandMenuItem } from '@wise-kit/ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdCommandMenu } from '@roost-design/ui'
+import { RdButton, RdCommandMenu } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const visible = ref(false)

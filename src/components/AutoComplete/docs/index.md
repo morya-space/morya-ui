@@ -11,14 +11,14 @@ description: 输入时给出建议列表，可本地过滤或由父级提供。
 ## 引入
 
 ```ts
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -34,7 +34,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref('')
@@ -58,7 +58,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')

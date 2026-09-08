@@ -11,14 +11,14 @@ description: 让子元素宽度撑满的布局包裹。
 ## 引入
 
 ```ts
-import { RdFluid } from '@roost-design/ui'
+import { RdFluid } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdFluid, RdInput } from '@roost-design/ui'
+import { RdButton, RdFluid, RdInput } from '@wise-kit/ui'
 </script>
 
 <template>

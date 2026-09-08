@@ -11,14 +11,14 @@ Horizontal action bar, commonly used as a list page header.
 ## Import
 
 ```ts
-import { RdButton, RdToolbar } from '@roost-design/ui'
+import { RdButton, RdToolbar } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdToolbar } from '@roost-design/ui'
+import { RdButton, RdToolbar } from '@wise-kit/ui'
 </script>
 
 <template>

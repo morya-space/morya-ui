@@ -11,14 +11,14 @@ description: 进度条用于展示确定或不确定进度。
 ## 引入
 
 ```ts
-import { RdProgressBar } from '@roost-design/ui'
+import { RdProgressBar } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressBar } from '@roost-design/ui'
+import { RdProgressBar } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -34,7 +34,7 @@ import { RdProgressBar } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdProgressBar } from '@roost-design/ui'
+import { RdProgressBar } from '@wise-kit/ui'
 </script>
 
 <template>

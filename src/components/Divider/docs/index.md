@@ -11,7 +11,7 @@ description: 内容分隔线。
 ## 引入
 
 ```ts
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 ```
 
 ## 基础用法
@@ -20,7 +20,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -42,7 +42,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -60,7 +60,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -78,7 +78,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -92,7 +92,7 @@ import { RdDivider } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdDivider } from '@roost-design/ui'
+import { RdDivider } from '@wise-kit/ui'
 </script>
 
 <template>

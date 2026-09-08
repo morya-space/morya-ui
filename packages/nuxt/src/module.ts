@@ -1,19 +1,19 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
 
-export interface RoostDesignNuxtOptions {
-  /** Import `@roost-design/ui/styles.css`. Default `true`. */
+export interface WiseKitNuxtOptions {
+  /** Import `@wise-kit/ui/styles.css`. Default `true`. */
   css?: boolean
-  /** Add `@roost-design/ui` to `build.transpile`. Default `true`. */
+  /** Add `@wise-kit/ui` to `build.transpile`. Default `true`. */
   transpile?: boolean
 }
 
-/** @deprecated Use `RoostDesignNuxtOptions` */
-export type WexDesignNuxtOptions = RoostDesignNuxtOptions
+/** @deprecated Use `WiseKitNuxtOptions` */
+export type WexDesignNuxtOptions = WiseKitNuxtOptions
 
-export default defineNuxtModule<RoostDesignNuxtOptions>({
+export default defineNuxtModule<WiseKitNuxtOptions>({
   meta: {
-    name: '@roost-design/nuxt',
-    configKey: 'RoostDesign',
+    name: '@wise-kit/nuxt',
+    configKey: 'WiseKit',
     compatibility: {
       nuxt: '>=3.10.0',
     },
@@ -26,11 +26,11 @@ export default defineNuxtModule<RoostDesignNuxtOptions>({
     const resolver = createResolver(import.meta.url)
 
     if (options.transpile) {
-      nuxt.options.build.transpile.push('@roost-design/ui')
+      nuxt.options.build.transpile.push('@wise-kit/ui')
     }
 
     if (options.css) {
-      nuxt.options.css.push('@roost-design/ui/styles.css')
+      nuxt.options.css.push('@wise-kit/ui/styles.css')
     }
 
     addPlugin({

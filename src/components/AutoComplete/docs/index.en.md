@@ -11,14 +11,14 @@ Input suggestions and completion; the `complete` event makes async loading from 
 ## Import
 
 ```ts
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -34,7 +34,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const a = ref('')
@@ -58,7 +58,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 ```vue preview
 <script setup lang="ts">
-import { RdAutoComplete } from '@roost-design/ui'
+import { RdAutoComplete } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const value = ref('')

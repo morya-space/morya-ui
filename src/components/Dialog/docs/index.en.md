@@ -11,14 +11,14 @@ Modal dialog. Visibility uses `v-model` (`modelValue`), corresponding to `visibl
 ## Import
 
 ```ts
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -42,7 +42,7 @@ Supports `center` / `top` / `bottom` / `left` / `right` and the four corner posi
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -73,7 +73,7 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -103,7 +103,7 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}`), clicking the 
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -127,7 +127,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -151,7 +151,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdDialog } from '@roost-design/ui'
+import { RdButton, RdDialog } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const open = ref(false)

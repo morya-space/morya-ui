@@ -11,14 +11,14 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 ## 引入
 
 ```ts
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -36,7 +36,7 @@ import { RdGrid, RdGridItem } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -63,7 +63,7 @@ import { RdGrid, RdGridItem } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdGrid, RdGridItem } from '@wise-kit/ui'
 </script>
 
 <template>
@@ -81,7 +81,7 @@ import { RdGrid, RdGridItem } from '@roost-design/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { RdButton, RdGrid, RdGridItem } from '@roost-design/ui'
+import { RdButton, RdGrid, RdGridItem } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)

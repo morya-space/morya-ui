@@ -13,14 +13,14 @@ Naive mapping: `pageSize` is an alias of `rows` (`pageSize` wins when both are s
 ## Import
 
 ```ts
-import { RdPagination } from '@roost-design/ui'
+import { RdPagination } from '@wise-kit/ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { RdPagination } from '@roost-design/ui'
+import { RdPagination } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
@@ -40,7 +40,7 @@ const page = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { RdPagination } from '@roost-design/ui'
+import { RdPagination } from '@wise-kit/ui'
 import { ref } from 'vue'
 
 const page = ref(1)
