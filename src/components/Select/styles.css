@@ -69,7 +69,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .wk-select__spinner {
+    html:not([data-wk-ignore-reduced-motion]) .wk-select__spinner {
         animation: none;
         border-top-color: var(--wk-color-text-muted);
     }

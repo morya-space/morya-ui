@@ -1,9 +1,13 @@
 import { computed, ref, watch } from 'vue'
+import { readStoredValue, writeStoredValue } from './storage'
 
 export type MotionPreference = 'full' | 'reduced' | 'none'
 
-const storageKey = 'wex-design-motion'
+const storageKey = 'wise-kit-motion'
+const legacyStorageKeys = ['wex-design-motion']
 const motionPreferences: readonly MotionPreference[] = ['full', 'reduced', 'none']
+
+const preference = ref<MotionPreference>(getInitialMotion())
 
 export function applyMotion(preference: MotionPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
@@ -11,30 +15,46 @@ export function applyMotion(preference: MotionPreference, target?: HTMLElement) 
   el.dataset.wkMotion = preference
 }
 
+/** When `respect` is false, ignore OS `prefers-reduced-motion`. Default is to respect it. */
+export function applyReducedMotionPolicy(respect: boolean | undefined, target?: HTMLElement) {
+  const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
+  if (!el) return
+  if (respect === false) {
+    el.dataset.wkIgnoreReducedMotion = 'true'
+  } else {
+    delete el.dataset.wkIgnoreReducedMotion
+  }
+}
+
 export function getPreferredMotion(): MotionPreference {
   return 'full'
 }
 
+function getInitialMotion(): MotionPreference {
+  const saved = readStoredValue(storageKey, legacyStorageKeys)
+  if (saved && motionPreferences.includes(saved as MotionPreference)) {
+    return saved as MotionPreference
+  }
+  return getPreferredMotion()
+}
+
+if (typeof window !== 'undefined') {
+  watch(
+    preference,
+    (next) => {
+      applyMotion(next)
+      writeStoredValue(storageKey, next, legacyStorageKeys)
+    },
+    { immediate: true },
+  )
+}
+
 export function useMotion() {
-  const preference = ref<MotionPreference>(getInitialMotion())
   const isMotionEnabled = computed(() => preference.value !== 'none')
 
   function setMotion(next: MotionPreference) {
     preference.value = next
   }
 
-  watch(preference, (next) => {
-    applyMotion(next)
-    if (typeof localStorage !== 'undefined') localStorage.setItem(storageKey, next)
-  }, { immediate: true })
-
   return { preference, isMotionEnabled, motionPreferences, setMotion }
-}
-
-function getInitialMotion(): MotionPreference {
-  if (typeof localStorage !== 'undefined') {
-    const saved = localStorage.getItem(storageKey)
-    if (saved && motionPreferences.includes(saved as MotionPreference)) return saved as MotionPreference
-  }
-  return getPreferredMotion()
 }

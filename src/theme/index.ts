@@ -14,7 +14,7 @@ export type {
 } from "./tokens";
 export { applyDensity, useDensity } from "./useDensity";
 export type { DensityPreference } from "./useDensity";
-export { applyMotion, getPreferredMotion, useMotion } from "./useMotion";
+export { applyMotion, applyReducedMotionPolicy, getPreferredMotion, useMotion } from "./useMotion";
 export type { MotionPreference } from "./useMotion";
 export { useTheme } from "./useTheme";
 

@@ -613,6 +613,7 @@ export type { UseModalOverlayOptions } from "./shared/useModalOverlay";
 export {
   applyDensity,
   applyMotion,
+  applyReducedMotionPolicy,
   applyTheme,
   darkTokens,
   getPreferredMotion,

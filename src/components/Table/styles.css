@@ -457,9 +457,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .wk-table__header th,
-    .wk-table__body td,
-    .wk-table__expand-btn {
+    html:not([data-wk-ignore-reduced-motion]) .wk-table__header th,
+    html:not([data-wk-ignore-reduced-motion]) .wk-table__body td,
+    html:not([data-wk-ignore-reduced-motion]) .wk-table__expand-btn {
         transition: none;
     }
 }
