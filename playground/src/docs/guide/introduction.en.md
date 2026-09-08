@@ -47,6 +47,7 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 
 - [Quick start](/docs/quick-start): install and a minimal example
 - [Theme](/docs/theme): light/dark and motion
+- [Design tokens](/docs/design-tokens): full `--wk-*` reference
 - [Configuration](/docs/config): `ConfigProvider` / `createWiseKit`
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
 - [Components](/components): browse all components and APIs
