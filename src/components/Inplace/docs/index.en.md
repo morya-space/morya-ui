@@ -11,14 +11,14 @@ Toggle between display and content views.
 ## Import
 
 ```ts
-import { WkInplace } from '@wise-kit/ui'
+import { MInplace } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkInplace, WkInput } from '@wise-kit/ui'
+import { MButton, MInplace, MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const active = ref(false)
@@ -26,17 +26,17 @@ const text = ref('Click to edit')
 </script>
 
 <template>
-  <WkInplace v-model="active">
+  <MInplace v-model="active">
     <template #display>
       {{ text }}
     </template>
     <template #content="{ close }">
       <div style="display:flex;gap:8px">
-        <WkInput v-model="text" />
-        <WkButton label="Done" size="small" @click="close" />
+        <MInput v-model="text" />
+        <MButton label="Done" size="small" @click="close" />
       </div>
     </template>
-  </WkInplace>
+  </MInplace>
 </template>
 ```
 

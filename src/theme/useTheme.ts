@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { applyTheme, getPreferredTheme } from './index'
 import { readStoredValue, writeStoredValue } from './storage'
 
-const storageKey = 'wise-kit-theme'
+const storageKey = 'morya-ui-theme'
 const legacyStorageKeys = ['wex-design-theme']
 
 const theme = ref<ThemeName>(getInitialTheme())

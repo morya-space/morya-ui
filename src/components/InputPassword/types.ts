@@ -1,9 +1,9 @@
 import type { Component } from 'vue'
-import type { WkShowPasswordOn } from '../../shared/componentDefaults'
-import type { WkInputVariant, WkSizeInput } from '../../shared/types'
+import type { MShowPasswordOn } from '../../shared/componentDefaults'
+import type { MInputVariant, MSizeInput } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type { WkShowPasswordOn }
+export type { MShowPasswordOn }
 
 export interface InputPasswordProps {
   modelValue?: string
@@ -12,8 +12,8 @@ export interface InputPasswordProps {
   readonly?: boolean
   invalid?: boolean
   fluid?: boolean
-  size?: WkSizeInput
-  variant?: WkInputVariant
+  size?: MSizeInput
+  variant?: MInputVariant
   /** Show password strength hint. */
   feedback?: boolean
   /** Show toggle mask button. */
@@ -22,13 +22,13 @@ export interface InputPasswordProps {
    * When to reveal the password.
    * `click` toggles; `mousedown` is hold-to-peek (mouse or Space/Enter).
    */
-  showPasswordOn?: WkShowPasswordOn
+  showPasswordOn?: MShowPasswordOn
   clearable?: boolean
   maxlength?: number
   showCount?: boolean
-  /** Icon when the value is masked (click to reveal). Built-in `WkIcon` name or a Vue component. */
+  /** Icon when the value is masked (click to reveal). Built-in `MIcon` name or a Vue component. */
   showIcon?: IconName | Component
-  /** Icon when the value is visible (click to hide). Built-in `WkIcon` name or a Vue component. */
+  /** Icon when the value is visible (click to hide). Built-in `MIcon` name or a Vue component. */
   hideIcon?: IconName | Component
   id?: string
 }

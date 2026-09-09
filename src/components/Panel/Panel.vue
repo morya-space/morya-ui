@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PanelProps } from './types'
 import { computed } from 'vue'
-import { useWkId } from '../../shared/useWkId'
-import { useWkLocale } from '../../locale'
+import { useMId } from '../../shared/useMId'
+import { useMLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
 import { useControllable } from '../../shared/useControllable'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PanelProps>(), {
   toggleable: false,
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const locale = useWkLocale()
-const contentId = useWkId()
+const locale = useMLocale()
+const contentId = useMId()
 const sizeTone = computed(() => resolveSizeClass(props.size))
 
 function resolveControlledCollapsed() {
@@ -41,11 +41,11 @@ const { value: isCollapsed, setValue: setCollapsed } = useControllable(
 )
 
 const rootClass = computed(() => [
-  'wk-panel',
+  'm-panel',
   {
-    'wk-panel--collapsed': isCollapsed.value,
-    'wk-panel--small': sizeTone.value === 'small',
-    'wk-panel--large': sizeTone.value === 'large',
+    'm-panel--collapsed': isCollapsed.value,
+    'm-panel--small': sizeTone.value === 'small',
+    'm-panel--large': sizeTone.value === 'large',
   },
 ])
 
@@ -57,8 +57,8 @@ function toggle() {
 
 <template>
   <section :class="rootClass">
-    <header v-if="$slots.header || header || toggleable" class="wk-panel__header">
-      <div class="wk-panel__title">
+    <header v-if="$slots.header || header || toggleable" class="m-panel__header">
+      <div class="m-panel__title">
         <slot name="header">
           {{ header }}
         </slot>
@@ -66,21 +66,21 @@ function toggle() {
       <button
         v-if="toggleable"
         type="button"
-        class="wk-panel__toggler"
+        class="m-panel__toggler"
         :aria-expanded="!isCollapsed"
         :aria-controls="contentId"
         :aria-label="isCollapsed ? locale.expand : locale.collapse"
         @click="toggle"
       >
-        <WkIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
+        <MIcon :name="isCollapsed ? 'chevron-right' : 'chevron-down'" size="sm" />
       </button>
     </header>
-    <Transition name="wk-panel-collapse">
-      <div v-show="!isCollapsed" :id="contentId" class="wk-panel__content">
+    <Transition name="m-panel-collapse">
+      <div v-show="!isCollapsed" :id="contentId" class="m-panel__content">
         <slot />
       </div>
     </Transition>
-    <footer v-if="$slots.footer && !isCollapsed" class="wk-panel__footer">
+    <footer v-if="$slots.footer && !isCollapsed" class="m-panel__footer">
       <slot name="footer" />
     </footer>
   </section>

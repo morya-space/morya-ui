@@ -11,14 +11,14 @@ Browse an image list and keep `activeIndex` in sync.
 ## Import
 
 ```ts
-import { WkGallery } from '@wise-kit/ui'
+import { MGallery } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkGallery } from '@wise-kit/ui'
+import { MGallery } from 'morya-ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)
@@ -30,7 +30,7 @@ const images = [
 </script>
 
 <template>
-  <WkGallery v-model:active-index="activeIndex" :images="images" />
+  <MGallery v-model:active-index="activeIndex" :images="images" />
 </template>
 ```
 

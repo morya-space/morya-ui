@@ -11,14 +11,14 @@ description: 水平菜单栏，支持一级下拉。
 ## 引入
 
 ```ts
-import { WkMenubar } from '@wise-kit/ui'
+import { MMenubar } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkMenubar } from '@wise-kit/ui'
+import { MMenubar } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref<string | null>(null)
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <WkMenubar v-model:selected-key="selectedKey" :model="model" />
+  <MMenubar v-model:selected-key="selectedKey" :model="model" />
 </template>
 ```
 

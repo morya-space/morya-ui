@@ -36,5 +36,5 @@ export interface TreeContext {
 
 export interface TreeNodeSlotProps { node: TreeNode; data: TreeNode }
 
-export const WK_TREE_KEY: InjectionKey<TreeContext> = Symbol('wk-tree')
-export const WK_TREE_NODE_SLOT: InjectionKey<Slot<TreeNodeSlotProps> | undefined> = Symbol('wk-tree-node-slot')
+export const M_TREE_KEY: InjectionKey<TreeContext> = Symbol('m-tree')
+export const M_TREE_NODE_SLOT: InjectionKey<Slot<TreeNodeSlotProps> | undefined> = Symbol('m-tree-node-slot')

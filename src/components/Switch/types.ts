@@ -1,6 +1,6 @@
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
-export type SwitchSize = WkSizeInput
+export type SwitchSize = MSizeInput
 
 export interface SwitchProps {
   modelValue?: boolean

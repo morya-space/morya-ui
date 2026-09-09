@@ -11,22 +11,22 @@ description: 可访问的表单标签。
 ## 引入
 
 ```ts
-import { WkLabel } from '@wise-kit/ui'
+import { MLabel } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput, WkLabel } from '@wise-kit/ui'
+import { MInput, MLabel } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WkLabel html-for="demo-email">
+    <MLabel html-for="demo-email">
       邮箱
-    </WkLabel>
-    <WkInput id="demo-email" placeholder="you@example.com" />
+    </MLabel>
+    <MInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>
 ```

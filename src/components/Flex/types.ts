@@ -1,8 +1,8 @@
-import type { WkFlexAlign, WkFlexJustify, WkGapSize } from '../../shared/gap'
+import type { MFlexAlign, MFlexJustify, MGapSize } from '../../shared/gap'
 
-export type FlexAlign = WkFlexAlign
-export type FlexJustify = WkFlexJustify
-export type FlexSize = WkGapSize
+export type FlexAlign = MFlexAlign
+export type FlexJustify = MFlexJustify
+export type FlexSize = MGapSize
 
 export interface FlexProps {
   /** Cross-axis alignment. */

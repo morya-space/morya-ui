@@ -1,7 +1,7 @@
 /** Overlay mount target. Prefer `'body'`; use `'self'` to keep in place. */
-export type WkAppendTo = string | HTMLElement | 'self'
+export type MAppendTo = string | HTMLElement | 'self'
 
-export interface WkOverlayMountProps {
+export interface MOverlayMountProps {
   /**
    * Whether to Teleport the overlay. Defaults to `true`.
    * Prefer `appendTo` when you need a custom container.
@@ -12,13 +12,13 @@ export interface WkOverlayMountProps {
    * Pass `'self'` to render in place (same as `teleport: false`).
    * `false` is still accepted at runtime for compatibility.
    */
-  appendTo?: WkAppendTo | false
+  appendTo?: MAppendTo | false
 }
 
 export function resolveOverlayTeleport(
-  options: WkOverlayMountProps = {},
-  /** Global default from ConfigProvider / createWiseKit. */
-  globalAppendTo: WkAppendTo | false = 'body',
+  options: MOverlayMountProps = {},
+  /** Global default from ConfigProvider / createMoryaUI. */
+  globalAppendTo: MAppendTo | false = 'body',
 ): {
   disabled: boolean
   to: string | HTMLElement
@@ -32,8 +32,8 @@ export function resolveOverlayTeleport(
 }
 
 export function isOverlayTeleported(
-  options: WkOverlayMountProps = {},
-  globalAppendTo: WkAppendTo | false = 'body',
+  options: MOverlayMountProps = {},
+  globalAppendTo: MAppendTo | false = 'body',
 ): boolean {
   return !resolveOverlayTeleport(options, globalAppendTo).disabled
 }

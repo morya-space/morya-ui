@@ -2,7 +2,7 @@ import type { Component } from 'vue'
 import { getCurrentInstance, toRaw } from 'vue'
 
 /** Minimal route target when vue-router is not installed. */
-export type WkRouteLocationRaw = string | Record<string, unknown>
+export type MRouteLocationRaw = string | Record<string, unknown>
 
 function appHasRouter(): boolean {
   const instance = getCurrentInstance()
@@ -20,14 +20,14 @@ export function resolveOptionalRouterLink(): Component | null {
   return (link as Component | undefined) ?? null
 }
 
-export function resolveRouteHref(to: WkRouteLocationRaw): string {
+export function resolveRouteHref(to: MRouteLocationRaw): string {
   if (typeof to === 'string') return to
   if (typeof to.path === 'string') return to.path
   if (typeof to.href === 'string') return to.href
   return '#'
 }
 
-export function isExternalRoute(to: WkRouteLocationRaw): boolean {
+export function isExternalRoute(to: MRouteLocationRaw): boolean {
   if (typeof to === 'string') {
     return /^(?:[a-z][a-z\d+\-.]*:)?\/\//i.test(to) || to.startsWith('mailto:') || to.startsWith('tel:')
   }

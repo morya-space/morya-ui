@@ -6,19 +6,19 @@ description: 将输入框与前后缀附加内容组合为同一控件组。
 
 # InputGroup
 
-组合输入与前后缀。附加内容使用 `WkInputGroupAddon`，或手动添加 `wk-inputgroup-addon` class。
+组合输入与前后缀。附加内容使用 `MInputGroupAddon`，或手动添加 `m-inputgroup-addon` class。
 
 ## 引入
 
 ```ts
-import { WkInput, WkInputGroup, WkInputGroupAddon } from '@wise-kit/ui'
+import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput, WkInputGroup, WkInputGroupAddon } from '@wise-kit/ui'
+import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 import { ref } from 'vue'
 
 const price = ref('')
@@ -27,15 +27,15 @@ const url = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WkInputGroup>
-      <WkInputGroupAddon>$</WkInputGroupAddon>
-      <WkInput v-model="price" placeholder="Price" fluid />
-      <WkInputGroupAddon>.00</WkInputGroupAddon>
-    </WkInputGroup>
-    <WkInputGroup>
-      <WkInputGroupAddon>https://</WkInputGroupAddon>
-      <WkInput v-model="url" placeholder="example.com" fluid />
-    </WkInputGroup>
+    <MInputGroup>
+      <MInputGroupAddon>$</MInputGroupAddon>
+      <MInput v-model="price" placeholder="Price" fluid />
+      <MInputGroupAddon>.00</MInputGroupAddon>
+    </MInputGroup>
+    <MInputGroup>
+      <MInputGroupAddon>https://</MInputGroupAddon>
+      <MInput v-model="url" placeholder="example.com" fluid />
+    </MInputGroup>
   </div>
 </template>
 ```
@@ -46,7 +46,7 @@ const url = ref('')
 | --- | --- |
 | `default` | 附加项与输入控件。 |
 
-Addon 组件仅提供默认插槽，根元素 class 为 `wk-inputgroup-addon`。
+Addon 组件仅提供默认插槽，根元素 class 为 `m-inputgroup-addon`。
 
 ## Events
 

@@ -1,5 +1,5 @@
-import type { WkAppendTo } from '../../shared/overlay'
-import type { WkSizeInput } from '../../shared/types'
+import type { MAppendTo } from '../../shared/overlay'
+import type { MSizeInput } from '../../shared/types'
 
 export interface AutoCompleteOption {
   label: string
@@ -21,13 +21,13 @@ export interface AutoCompleteProps {
   dropdown?: boolean
   disabled?: boolean
   placeholder?: string
-  size?: WkSizeInput
+  size?: MSizeInput
   loading?: boolean
   clearable?: boolean
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }
 
 export interface AutoCompleteEmits {

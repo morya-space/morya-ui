@@ -11,7 +11,7 @@ Content divider, optionally with a label.
 ## Import
 
 ```ts
-import { WkDivider } from '@wise-kit/ui'
+import { MDivider } from 'morya-ui'
 ```
 
 ## Basic
@@ -20,7 +20,7 @@ Default horizontal solid divider.
 
 ```vue preview
 <script setup lang="ts">
-import { WkDivider } from '@wise-kit/ui'
+import { MDivider } from 'morya-ui'
 </script>
 
 <template>
@@ -28,7 +28,7 @@ import { WkDivider } from '@wise-kit/ui'
     <p style="margin:0">
       Above
     </p>
-    <WkDivider />
+    <MDivider />
     <p style="margin:0">
       Below
     </p>
@@ -42,14 +42,14 @@ import { WkDivider } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkDivider } from '@wise-kit/ui'
+import { MDivider } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WkDivider type="solid" label="Solid" />
-    <WkDivider type="dashed" label="Dashed" />
-    <WkDivider type="dotted" label="Dotted" />
+    <MDivider type="solid" label="Solid" />
+    <MDivider type="dashed" label="Dashed" />
+    <MDivider type="dotted" label="Dotted" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ When the divider is horizontal and has a label, use `align` to control the label
 
 ```vue preview
 <script setup lang="ts">
-import { WkDivider } from '@wise-kit/ui'
+import { MDivider } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <WkDivider label="Left" align="left" />
-    <WkDivider label="Center" align="center" />
-    <WkDivider label="Right" align="right" />
+    <MDivider label="Left" align="left" />
+    <MDivider label="Center" align="center" />
+    <MDivider label="Right" align="right" />
   </div>
 </template>
 ```
@@ -78,11 +78,11 @@ import { WkDivider } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkDivider } from '@wise-kit/ui'
+import { MDivider } from 'morya-ui'
 </script>
 
 <template>
-  <WkDivider label="Or" title-placement="right" />
+  <MDivider label="Or" title-placement="right" />
 </template>
 ```
 
@@ -92,15 +92,15 @@ import { WkDivider } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkDivider } from '@wise-kit/ui'
+import { MDivider } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
     <span>Left</span>
-    <WkDivider layout="vertical" />
+    <MDivider layout="vertical" />
     <span>Middle</span>
-    <WkDivider layout="vertical" type="dashed" />
+    <MDivider layout="vertical" type="dashed" />
     <span>Right</span>
   </div>
 </template>

@@ -11,14 +11,14 @@ description: 垂直/水平导航菜单，支持多级嵌套、受控选中、手
 - 多级嵌套 `items` 与受控 `selectedKey`
 - 展开路径自动跟随选中项；`accordion` 手风琴
 - `collapsed` 图标模式 + 右侧飞出子菜单（Popover）
-- 非 popup 时默认 `embedded`，无边框铺满 `WkLayoutSider`
+- 非 popup 时默认 `embedded`，无边框铺满 `MLayoutSider`
 
 > 单层悬停子菜单见 [TieredMenu](/components/TieredMenu)；顶栏菜单见 [Menubar](/components/Menubar)；操作列表见 [Dropdown](/components/Dropdown)。
 
 ## 引入
 
 ```ts
-import { WkMenu, type MenuItem } from '@wise-kit/ui'
+import { MMenu, type MenuItem } from 'morya-ui'
 ```
 
 ## 导航选中
@@ -27,7 +27,7 @@ import { WkMenu, type MenuItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkMenu } from '@wise-kit/ui'
+import { MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -42,14 +42,14 @@ const model = [
   <div
     style="
       width: 15rem;
-      padding: var(--wk-space-3);
-      background: var(--wk-color-surface);
-      border: 1px solid var(--wk-color-border);
-      border-radius: var(--wk-radius-lg);
-      box-shadow: var(--wk-shadow-sm);
+      padding: var(--m-space-3);
+      background: var(--m-color-surface);
+      border: 1px solid var(--m-color-border);
+      border-radius: var(--m-radius-lg);
+      box-shadow: var(--m-shadow-sm);
     "
   >
-    <WkMenu
+    <MMenu
       v-model:selected-key="selectedKey"
       :model="model"
       embedded
@@ -67,7 +67,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkMenu } from '@wise-kit/ui'
+import { MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('reports')
@@ -89,14 +89,14 @@ const model = [
   <div
     style="
       width: 16rem;
-      padding: var(--wk-space-3);
-      background: var(--wk-color-surface);
-      border: 1px solid var(--wk-color-border);
-      border-radius: var(--wk-radius-lg);
-      box-shadow: var(--wk-shadow-sm);
+      padding: var(--m-space-3);
+      background: var(--m-color-surface);
+      border: 1px solid var(--m-color-border);
+      border-radius: var(--m-radius-lg);
+      box-shadow: var(--m-shadow-sm);
     "
   >
-    <WkMenu v-model:selected-key="selectedKey" :model="model" embedded />
+    <MMenu v-model:selected-key="selectedKey" :model="model" embedded />
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkMenu } from '@wise-kit/ui'
+import { MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('a1')
@@ -121,25 +121,25 @@ const model = [
   <div
     style="
       width: 14rem;
-      padding: var(--wk-space-3);
-      background: var(--wk-color-surface);
-      border: 1px solid var(--wk-color-border);
-      border-radius: var(--wk-radius-lg);
-      box-shadow: var(--wk-shadow-sm);
+      padding: var(--m-space-3);
+      background: var(--m-color-surface);
+      border: 1px solid var(--m-color-border);
+      border-radius: var(--m-radius-lg);
+      box-shadow: var(--m-shadow-sm);
     "
   >
-    <WkMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
+    <MMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
   </div>
 </template>
 ```
 
 ## 折叠与飞出层
 
-`collapsed` 隐藏文案，仅保留图标；悬停/聚焦带子项的节点时，在右侧弹出飞出层（`.wk-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
+`collapsed` 隐藏文案，仅保留图标；悬停/聚焦带子项的节点时，在右侧弹出飞出层（`.m-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
 
 ```vue preview
 <script setup lang="ts">
-import { WkMenu } from '@wise-kit/ui'
+import { MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -158,50 +158,50 @@ const model = [
 </script>
 
 <template>
-  <div style="display: flex; gap: var(--wk-space-4); align-items: stretch">
+  <div style="display: flex; gap: var(--m-space-4); align-items: stretch">
     <div
       style="
         flex: 1;
         min-width: 0;
-        padding: var(--wk-space-3);
-        background: var(--wk-color-surface);
-        border: 1px solid var(--wk-color-border);
-        border-radius: var(--wk-radius-lg);
-        box-shadow: var(--wk-shadow-sm);
+        padding: var(--m-space-3);
+        background: var(--m-color-surface);
+        border: 1px solid var(--m-color-border);
+        border-radius: var(--m-radius-lg);
+        box-shadow: var(--m-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--wk-space-3);
-          font-size: var(--wk-font-size-xs);
-          color: var(--wk-color-text-muted);
+          margin: 0 0 var(--m-space-3);
+          font-size: var(--m-font-size-xs);
+          color: var(--m-color-text-muted);
         "
       >
         展开
       </p>
-      <WkMenu v-model:selected-key="selectedKey" :model="model" embedded />
+      <MMenu v-model:selected-key="selectedKey" :model="model" embedded />
     </div>
     <div
       style="
         width: 4.5rem;
-        padding: var(--wk-space-3) var(--wk-space-2);
-        background: var(--wk-color-surface);
-        border: 1px solid var(--wk-color-border);
-        border-radius: var(--wk-radius-lg);
-        box-shadow: var(--wk-shadow-sm);
+        padding: var(--m-space-3) var(--m-space-2);
+        background: var(--m-color-surface);
+        border: 1px solid var(--m-color-border);
+        border-radius: var(--m-radius-lg);
+        box-shadow: var(--m-shadow-sm);
       "
     >
       <p
         style="
-          margin: 0 0 var(--wk-space-3);
-          font-size: var(--wk-font-size-xs);
-          color: var(--wk-color-text-muted);
+          margin: 0 0 var(--m-space-3);
+          font-size: var(--m-font-size-xs);
+          color: var(--m-color-text-muted);
           text-align: center;
         "
       >
         折叠
       </p>
-      <WkMenu
+      <MMenu
         v-model:selected-key="selectedKey"
         :model="model"
         collapsed
@@ -215,17 +215,17 @@ const model = [
 
 ## 嵌入 Layout 侧栏
 
-推荐结构：**全局 Header + 下方 `has-sider` Layout**。菜单放在 `WkLayoutSider` 内，与 `v-model:collapsed` 联动。
+推荐结构：**全局 Header + 下方 `has-sider` Layout**。菜单放在 `MLayoutSider` 内，与 `v-model:collapsed` 联动。
 
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-  WkMenu,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+  MMenu,
+} from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -245,48 +245,48 @@ const model = [
 </script>
 
 <template>
-  <WkLayout
+  <MLayout
     style="
       height: 14rem;
-      border: 1px solid var(--wk-color-border);
-      border-radius: var(--wk-radius-lg);
-      box-shadow: var(--wk-shadow-sm);
+      border: 1px solid var(--m-color-border);
+      border-radius: var(--m-radius-lg);
+      box-shadow: var(--m-shadow-sm);
       overflow: hidden;
     "
   >
-    <WkLayoutHeader
+    <MLayoutHeader
       bordered
       style="
-        padding: 0 var(--wk-space-4);
+        padding: 0 var(--m-space-4);
         display: flex;
         align-items: center;
-        min-height: var(--wk-layout-header-height);
+        min-height: var(--m-layout-header-height);
       "
     >
-      <strong style="color: var(--wk-color-primary); font-size: var(--wk-font-size-md)">头部菜单</strong>
-    </WkLayoutHeader>
-    <WkLayout has-sider>
-      <WkLayoutSider
+      <strong style="color: var(--m-color-primary); font-size: var(--m-font-size-md)">头部菜单</strong>
+    </MLayoutHeader>
+    <MLayout has-sider>
+      <MLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
         collapse-mode="width"
         :collapsed-width="120"
       >
-        <WkMenu
+        <MMenu
           v-model:selected-key="selectedKey"
           :model="model"
           :collapsed="collapsed"
           :collapsed-width="64"
         />
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding: var(--wk-space-4)">
-        <p style="margin: 0; color: var(--wk-color-text-muted); font-size: var(--wk-font-size-sm)">
-          当前选中：<strong style="color: var(--wk-color-text)">{{ selectedKey }}</strong>
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding: var(--m-space-4)">
+        <p style="margin: 0; color: var(--m-color-text-muted); font-size: var(--m-font-size-sm)">
+          当前选中：<strong style="color: var(--m-color-text)">{{ selectedKey }}</strong>
         </p>
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -296,7 +296,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkMenu } from '@wise-kit/ui'
+import { MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('home')
@@ -318,25 +318,25 @@ const model = [
 <template>
   <div
     style="
-      padding: 0 var(--wk-space-2);
-      background: var(--wk-color-surface);
-      border: 1px solid var(--wk-color-border);
-      border-radius: var(--wk-radius-lg);
-      box-shadow: var(--wk-shadow-sm);
+      padding: 0 var(--m-space-2);
+      background: var(--m-color-surface);
+      border: 1px solid var(--m-color-border);
+      border-radius: var(--m-radius-lg);
+      box-shadow: var(--m-shadow-sm);
     "
   >
-    <WkMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
+    <MMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
   </div>
 </template>
 ```
 
 ## 反色（深色侧栏）
 
-`inverted` 配合 `WkLayoutSider` 的 `inverted`，用于深色背景侧栏。
+`inverted` 配合 `MLayoutSider` 的 `inverted`，用于深色背景侧栏。
 
 ```vue preview
 <script setup lang="ts">
-import { WkLayout, WkLayoutSider, WkMenu } from '@wise-kit/ui'
+import { MLayout, MLayoutSider, MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const selectedKey = ref('dashboard')
@@ -347,19 +347,19 @@ const model = [
 </script>
 
 <template>
-  <WkLayout
+  <MLayout
     has-sider
     style="
       height: 10rem;
-      border-radius: var(--wk-radius-lg);
-      box-shadow: var(--wk-shadow-sm);
+      border-radius: var(--m-radius-lg);
+      box-shadow: var(--m-shadow-sm);
       overflow: hidden;
     "
   >
-    <WkLayoutSider inverted bordered style="width: 12rem">
-      <WkMenu v-model:selected-key="selectedKey" :model="model" inverted />
-    </WkLayoutSider>
-  </WkLayout>
+    <MLayoutSider inverted bordered style="width: 12rem">
+      <MMenu v-model:selected-key="selectedKey" :model="model" inverted />
+    </MLayoutSider>
+  </MLayout>
 </template>
 ```
 
@@ -369,7 +369,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkMenu } from '@wise-kit/ui'
+import { MButton, MMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -381,9 +381,9 @@ const model = [
 </script>
 
 <template>
-  <WkMenu v-model="open" popup :model="model">
-    <WkButton label="更多操作" @click="open = !open" />
-  </WkMenu>
+  <MMenu v-model="open" popup :model="model">
+    <MButton label="更多操作" @click="open = !open" />
+  </MMenu>
 </template>
 ```
 

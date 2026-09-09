@@ -6,18 +6,18 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 
 # Layout
 
-页面级布局容器。侧栏场景需在对应 `WkLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`WkLayoutContent` 会自动撑满剩余空间。
+页面级布局容器。侧栏场景需在对应 `MLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`MLayoutContent` 会自动撑满剩余空间。
 
 ## 引入
 
 ```ts
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutFooter,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutFooter,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 ```
 
 ## 基础用法
@@ -26,21 +26,21 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ```vue preview
 <script setup lang="ts">
-import { WkLayout, WkLayoutContent, WkLayoutFooter, WkLayoutHeader } from '@wise-kit/ui'
+import { MLayout, MLayoutContent, MLayoutFooter, MLayoutHeader } from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:16rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </WkLayoutHeader>
-    <WkLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </MLayoutHeader>
+    <MLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content（自动撑开）
-    </WkLayoutContent>
-    <WkLayoutFooter bordered style="padding:0.75rem 1rem">
+    </MLayoutContent>
+    <MLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </WkLayoutFooter>
-  </WkLayout>
+    </MLayoutFooter>
+  </MLayout>
 </template>
 ```
 
@@ -51,24 +51,24 @@ import { WkLayout, WkLayoutContent, WkLayoutFooter, WkLayoutHeader } from '@wise
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <MLayout style="height:16rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--wk-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
-    </WkLayoutHeader>
-    <WkLayout has-sider>
-      <WkLayoutSider
+      <span style="color:var(--m-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
+    </MLayoutHeader>
+    <MLayout has-sider>
+      <MLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>项目</div>
           <div>设置</div>
         </div>
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding:1rem">
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding:1rem">
         主内容区会横向、纵向同时撑满。
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </WkLayoutHeader>
-    <WkLayout has-sider sider-placement="right">
-      <WkLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </MLayoutHeader>
+    <MLayout has-sider sider-placement="right">
+      <MLayoutSider bordered :width="140" content-style="padding:0.75rem">
         属性面板
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding:1rem">
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding:1rem">
         画布 / 主区域
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -125,34 +125,34 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  WkButton,
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutFooter,
-  WkLayoutHeader,
-  WkLayoutSider,
-  WkTag,
-} from '@wise-kit/ui'
+  MButton,
+  MLayout,
+  MLayoutContent,
+  MLayoutFooter,
+  MLayoutHeader,
+  MLayoutSider,
+  MTag,
+} from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkLayout style="height:18rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader
+  <MLayout style="height:18rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
-      <strong>Wise Kit</strong>
-      <WkTag value="Studio" />
+      <strong>Morya UI</strong>
+      <MTag value="Studio" />
       <span style="flex:1" />
-      <WkButton size="small" label="发布" />
-    </WkLayoutHeader>
+      <MButton size="small" label="发布" />
+    </MLayoutHeader>
 
-    <WkLayout has-sider>
-      <WkLayoutSider
+    <MLayout has-sider>
+      <MLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>组件</div>
           <div>主题</div>
         </div>
-      </WkLayoutSider>
+      </MLayoutSider>
 
-      <WkLayout>
-        <WkLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <MLayout>
+        <MLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>工作区</strong>
-          <p style="margin:0;color:var(--wk-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--m-color-text-muted);font-size:0.875rem">
             Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。
           </p>
-        </WkLayoutContent>
-        <WkLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wk-color-text-muted);font-size:0.75rem">
+        </MLayoutContent>
+        <MLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--m-color-text-muted);font-size:0.75rem">
           Ready · local
-        </WkLayoutFooter>
-      </WkLayout>
-    </WkLayout>
-  </WkLayout>
+        </MLayoutFooter>
+      </MLayout>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkLayout, WkLayoutContent, WkLayoutHeader } from '@wise-kit/ui'
+import { MLayout, MLayoutContent, MLayoutHeader } from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:12rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:12rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </WkLayoutHeader>
-    <WkLayoutContent embedded content-style="padding:1rem">
+    </MLayoutHeader>
+    <MLayoutContent embedded content-style="padding:1rem">
       嵌套表单 / 列表放在这里。
-    </WkLayoutContent>
-  </WkLayout>
+    </MLayoutContent>
+  </MLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ import { WkLayout, WkLayoutContent, WkLayoutHeader } from '@wise-kit/ui'
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </WkLayoutHeader>
-    <WkLayout has-sider>
-      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </MLayoutHeader>
+    <MLayout has-sider>
+      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
         固定侧栏
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding:1rem">
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             行 {{ n }} — 向下滚动
           </div>
         </div>
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ import {
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayout position="absolute" has-sider>
-      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayout position="absolute" has-sider>
+      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </WkLayoutSider>
-      <WkLayout>
-        <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+      </MLayoutSider>
+      <MLayout>
+        <MLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </WkLayoutHeader>
-        <WkLayoutContent embedded content-style="padding:1rem">
+        </MLayoutHeader>
+        <MLayoutContent embedded content-style="padding:1rem">
           填满相对定位容器
-        </WkLayoutContent>
-      </WkLayout>
-    </WkLayout>
+        </MLayoutContent>
+      </MLayout>
+    </MLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | 横向容纳 `WkLayoutSider`。 |
+| `hasSider` | `boolean` | `false` | 横向容纳 `MLayoutSider`。 |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | 侧栏位置。 |
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
@@ -315,17 +315,17 @@ import {
 
 ## Expose
 
-`WkLayout` / `WkLayoutContent` / `WkLayoutSider` 均暴露 `scrollTo(...)`。
+`MLayout` / `MLayoutContent` / `MLayoutSider` 均暴露 `scrollTo(...)`。
 
 ## Components
 
 | 组件 | 说明 |
 | --- | --- |
-| `WkLayout` | 根布局。 |
-| `WkLayoutHeader` | 顶栏。 |
-| `WkLayoutContent` | 主内容区（默认撑满剩余空间）。 |
-| `WkLayoutFooter` | 底栏。 |
-| `WkLayoutSider` | 侧栏。 |
+| `MLayout` | 根布局。 |
+| `MLayoutHeader` | 顶栏。 |
+| `MLayoutContent` | 主内容区（默认撑满剩余空间）。 |
+| `MLayoutFooter` | 底栏。 |
+| `MLayoutSider` | 侧栏。 |
 
 ## Slots
 

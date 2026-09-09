@@ -11,21 +11,21 @@ description: 列表拖拽与上下按钮排序。
 ## 引入
 
 ```ts
-import { WkOrderList } from '@wise-kit/ui'
+import { MOrderList } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkOrderList } from '@wise-kit/ui'
+import { MOrderList } from 'morya-ui'
 import { ref } from 'vue'
 
 const items = ref(['设计', '开发', '测试', '发布'])
 </script>
 
 <template>
-  <WkOrderList v-model="items" />
+  <MOrderList v-model="items" />
 </template>
 ```
 

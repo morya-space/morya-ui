@@ -1,8 +1,8 @@
-import type { WkSizeInput, WkTagSeverity } from '../../shared/types'
+import type { MSizeInput, MTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type TagSeverity = WkTagSeverity | 'warning'
-export type TagSize = WkSizeInput
+export type TagSeverity = MTagSeverity | 'warning'
+export type TagSize = MSizeInput
 
 export interface TagProps {
   /** Display text. Ignored when default slot has content. */
@@ -14,7 +14,7 @@ export interface TagProps {
   severity?: TagSeverity
   /** Fully rounded corners. */
   rounded?: boolean
-  /** Icon name from WkIcon. */
+  /** Icon name from MIcon. */
   icon?: IconName
   /** Show a close control. */
   closable?: boolean

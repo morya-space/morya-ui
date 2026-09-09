@@ -1,6 +1,6 @@
-import type { WkLocaleMessages } from './types'
+import type { MLocaleMessages } from './types'
 
-export const enUS: WkLocaleMessages = {
+export const enUS: MLocaleMessages = {
   name: 'en-US',
   accept: 'OK',
   reject: 'Cancel',

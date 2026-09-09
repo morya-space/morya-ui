@@ -7,17 +7,17 @@ export interface ComponentResolver {
   ) => { name: string; from: string; sideEffects?: string[] } | undefined | null | void
 }
 
-export interface WiseKitResolverOptions {
-  /** Component name prefix. Default: `Wk`. */
+export interface MoryaUIResolverOptions {
+  /** Component name prefix. Default: `M`. */
   prefix?: string
 }
 
 /**
- * Resolver for `unplugin-vue-components` that maps `Wk*` components to
- * on-demand subpath imports such as `@wise-kit/ui/button`.
+ * Resolver for `unplugin-vue-components` that maps `M*` components to
+ * on-demand subpath imports such as `morya-ui/button`.
  */
-export function WiseKitResolver(options: WiseKitResolverOptions = {}): ComponentResolver {
-  const prefix = options.prefix ?? 'Wk'
+export function MoryaUIResolver(options: MoryaUIResolverOptions = {}): ComponentResolver {
+  const prefix = options.prefix ?? 'M'
 
   return {
     type: 'component',
@@ -27,7 +27,7 @@ export function WiseKitResolver(options: WiseKitResolverOptions = {}): Component
       if (!slug) return
       return {
         name,
-        from: `@wise-kit/ui/${slug}`,
+        from: `morya-ui/${slug}`,
       }
     },
   }

@@ -85,7 +85,7 @@ function examplePropNames(code) {
   const props = []
   let start = 0
   while (start < code.length) {
-    const open = code.indexOf('<Wk', start)
+    const open = code.indexOf('<M', start)
     if (open === -1) break
     const nameMatch = code.slice(open + 3).match(/^[A-Z][A-Za-z0-9]*/)
     if (!nameMatch) {
@@ -109,7 +109,7 @@ function examplePropNames(code) {
     for (const attr of attrs.matchAll(/(?:^|\s)([-:\\w@#]+)(?:\s*=|\s|$)/g)) {
       const name = attr[1]
       if (name.startsWith(':') || name.startsWith('@') || name.startsWith('#') || name.startsWith('v-')) continue
-      props.push({ component: `Wk${nameMatch[0]}`, name })
+      props.push({ component: `M${nameMatch[0]}`, name })
     }
     start = end + 1
   }

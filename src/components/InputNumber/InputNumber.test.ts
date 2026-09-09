@@ -1,46 +1,46 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkInputNumber from './InputNumber.vue'
+import MInputNumber from './InputNumber.vue'
 
-describe('wkInputNumber', () => {
+describe('muInputNumber', () => {
   it('associates label and emits numeric updates', async () => {
-    const wrapper = mount(WkInputNumber, { props: { label: 'Qty', id: 'qty' } })
+    const wrapper = mount(MInputNumber, { props: { label: 'Qty', id: 'qty' } })
     expect(wrapper.get('label').attributes('for')).toBe('qty')
     await wrapper.get('input').setValue('12')
     expect(wrapper.emitted('update:modelValue')).toEqual([[12]])
   })
 
   it('clamps with buttons and respects min/max', async () => {
-    const wrapper = mount(WkInputNumber, {
+    const wrapper = mount(MInputNumber, {
       props: { modelValue: 5, min: 0, max: 10, step: 2, showButtons: true },
     })
-    await wrapper.get('.wk-inputnumber__button--increment').trigger('click')
+    await wrapper.get('.m-inputnumber__button--increment').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([7])
     await wrapper.setProps({ modelValue: 9 })
-    await wrapper.get('.wk-inputnumber__button--increment').trigger('click')
+    await wrapper.get('.m-inputnumber__button--increment').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([10])
   })
 
   it('maps size, fluid, and invalid classes', () => {
-    const wrapper = mount(WkInputNumber, {
+    const wrapper = mount(MInputNumber, {
       props: { size: 'small', fluid: true, invalid: true },
     })
-    expect(wrapper.get('.wk-inputnumber').classes()).toEqual(
-      expect.arrayContaining(['wk-inputnumber--small', 'wk-inputnumber--fluid', 'wk-inputnumber--invalid']),
+    expect(wrapper.get('.m-inputnumber').classes()).toEqual(
+      expect.arrayContaining(['m-inputnumber--small', 'm-inputnumber--fluid', 'm-inputnumber--invalid']),
     )
   })
 
   it('rounds to precision and can clear', async () => {
-    const wrapper = mount(WkInputNumber, { props: { modelValue: 1.234, precision: 1, step: 0.1, clearable: true } })
-    await wrapper.get('.wk-inputnumber__clear').trigger('click')
+    const wrapper = mount(MInputNumber, { props: { modelValue: 1.234, precision: 1, step: 0.1, clearable: true } })
+    await wrapper.get('.m-inputnumber__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
-    const stepped = mount(WkInputNumber, { props: { modelValue: 1.24, precision: 1, step: 0.1, showButtons: true } })
-    await stepped.get('.wk-inputnumber__button--increment').trigger('click')
+    const stepped = mount(MInputNumber, { props: { modelValue: 1.24, precision: 1, step: 0.1, showButtons: true } })
+    await stepped.get('.m-inputnumber__button--increment').trigger('click')
     expect(stepped.emitted('update:modelValue')?.at(-1)).toEqual([1.3])
   })
 
   it('keeps draft while typing negative numbers and decimals', async () => {
-    const wrapper = mount(WkInputNumber, { props: { modelValue: 3 } })
+    const wrapper = mount(MInputNumber, { props: { modelValue: 3 } })
     const input = wrapper.get('input')
     const el = input.element as HTMLInputElement
 
@@ -63,7 +63,7 @@ describe('wkInputNumber', () => {
   })
 
   it('clamps draft on blur without disturbing typing', async () => {
-    const wrapper = mount(WkInputNumber, { props: { min: 0, max: 10 } })
+    const wrapper = mount(MInputNumber, { props: { min: 0, max: 10 } })
     const input = wrapper.get('input')
     await input.setValue('-4')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([-4])
@@ -73,7 +73,7 @@ describe('wkInputNumber', () => {
   })
 
   it('commits draft on Enter', async () => {
-    const wrapper = mount(WkInputNumber, { props: { precision: 1 } })
+    const wrapper = mount(MInputNumber, { props: { precision: 1 } })
     const input = wrapper.get('input')
     await input.setValue('1.26')
     await input.trigger('keydown', { key: 'Enter' })

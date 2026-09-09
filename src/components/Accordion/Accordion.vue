@@ -39,11 +39,11 @@ function isActive(value: string) {
 }
 
 function panelId(value: string) {
-  return `wk-accordion-panel-${value}`
+  return `m-accordion-panel-${value}`
 }
 
 function headerId(value: string) {
-  return `wk-accordion-header-${value}`
+  return `m-accordion-header-${value}`
 }
 
 function toggle(value: string, disabled?: boolean) {
@@ -61,27 +61,27 @@ function toggle(value: string, disabled?: boolean) {
 </script>
 
 <template>
-  <div class="wk-accordion">
-    <div v-for="tab in tabs" :key="tab.value" class="wk-accordion__tab">
+  <div class="m-accordion">
+    <div v-for="tab in tabs" :key="tab.value" class="m-accordion__tab">
       <button
         :id="headerId(tab.value)"
         type="button"
-        class="wk-accordion__header"
-        :class="{ 'wk-accordion__header--active': isActive(tab.value) }"
+        class="m-accordion__header"
+        :class="{ 'm-accordion__header--active': isActive(tab.value) }"
         :aria-expanded="isActive(tab.value)"
         :aria-controls="panelId(tab.value)"
         :disabled="tab.disabled"
         @click="toggle(tab.value, tab.disabled)"
       >
-        <span class="wk-accordion__header-text">{{ tab.header }}</span>
-        <span v-if="$slots.extra" class="wk-accordion__header-extra" @click.stop>
+        <span class="m-accordion__header-text">{{ tab.header }}</span>
+        <span v-if="$slots.extra" class="m-accordion__header-extra" @click.stop>
           <slot name="extra" :tab="tab" />
         </span>
       </button>
       <div
         v-show="isActive(tab.value)"
         :id="panelId(tab.value)"
-        class="wk-accordion__content"
+        class="m-accordion__content"
         role="region"
         :aria-labelledby="headerId(tab.value)"
       >

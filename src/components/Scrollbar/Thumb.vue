@@ -14,7 +14,7 @@ const props = defineProps<{
 
 const scrollbarContext = inject(scrollbarContextKey)
 if (!scrollbarContext) {
-  throw new Error('[WkScrollbar] Thumb must be used inside WkScrollbar')
+  throw new Error('[MScrollbar] Thumb must be used inside MScrollbar')
 }
 const scrollbar = scrollbarContext
 
@@ -224,12 +224,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <transition name="wk-scrollbar-fade">
+  <transition name="m-scrollbar-fade">
     <div
       v-show="size && show"
       ref="trackRef"
-      class="wk-scrollbar__bar"
-      :class="vertical ? 'wk-scrollbar__bar--vertical' : 'wk-scrollbar__bar--horizontal'"
+      class="m-scrollbar__bar"
+      :class="vertical ? 'm-scrollbar__bar--vertical' : 'm-scrollbar__bar--horizontal'"
       role="scrollbar"
       :aria-orientation="vertical ? 'vertical' : 'horizontal'"
       :aria-controls="scrollbar.contentId"
@@ -239,7 +239,7 @@ onBeforeUnmount(() => {
     >
       <div
         ref="thumbRef"
-        class="wk-scrollbar__thumb"
+        class="m-scrollbar__thumb"
         :style="thumbStyle"
         @mousedown="onThumbMouseDown"
       />

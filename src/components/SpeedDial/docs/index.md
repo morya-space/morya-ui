@@ -11,14 +11,14 @@ description: 悬浮快捷操作按钮组。
 ## 引入
 
 ```ts
-import { WkSpeedDial } from '@wise-kit/ui'
+import { MSpeedDial } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkSpeedDial } from '@wise-kit/ui'
+import { MSpeedDial } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -31,7 +31,7 @@ const items = [
 
 <template>
   <div style="min-height:8rem;display:flex;align-items:flex-end;justify-content:center">
-    <WkSpeedDial v-model="open" :model="items" direction="up" />
+    <MSpeedDial v-model="open" :model="items" direction="up" />
   </div>
 </template>
 ```

@@ -11,28 +11,28 @@ description: 工具栏布局，分 start / center / end 区域。
 ## 引入
 
 ```ts
-import { WkButton, WkToolbar } from '@wise-kit/ui'
+import { MButton, MToolbar } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkToolbar } from '@wise-kit/ui'
+import { MButton, MToolbar } from 'morya-ui'
 </script>
 
 <template>
-  <WkToolbar>
+  <MToolbar>
     <template #start>
-      <WkButton label="新建" size="small" />
+      <MButton label="新建" size="small" />
     </template>
     <template #center>
       <span>工具栏</span>
     </template>
     <template #end>
-      <WkButton label="导出" severity="secondary" size="small" />
+      <MButton label="导出" severity="secondary" size="small" />
     </template>
-  </WkToolbar>
+  </MToolbar>
 </template>
 ```
 

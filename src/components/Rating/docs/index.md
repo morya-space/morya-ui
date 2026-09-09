@@ -11,21 +11,21 @@ description: 星级评分控件，支持清除与只读。
 ## 引入
 
 ```ts
-import { WkRating } from '@wise-kit/ui'
+import { MRating } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkRating } from '@wise-kit/ui'
+import { MRating } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WkRating v-model="value" />
+  <MRating v-model="value" />
 </template>
 ```
 
@@ -33,11 +33,11 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { WkRating } from '@wise-kit/ui'
+import { MRating } from 'morya-ui'
 </script>
 
 <template>
-  <WkRating :model-value="4" readonly :cancel="false" />
+  <MRating :model-value="4" readonly :cancel="false" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { WkRating } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkRating } from '@wise-kit/ui'
+import { MRating } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(2.5)
 </script>
 
 <template>
-  <WkRating v-model="value" allow-half />
+  <MRating v-model="value" allow-half />
 </template>
 ```
 
@@ -74,7 +74,7 @@ const value = ref(2.5)
 | `helpText` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `WkSizeInput` | — | — |
+| `size` | `MSizeInput` | — | — |
 
 ## Events
 

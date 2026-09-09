@@ -6,19 +6,19 @@ description: 导航轨侧栏，可折叠。
 
 # Sidebar
 
-应用导航侧栏（非 Drawer 浮层）。导出为 `WkSidebar`。
+应用导航侧栏（非 Drawer 浮层）。导出为 `MSidebar`。
 
 ## 引入
 
 ```ts
-import { WkSidebar } from '@wise-kit/ui'
+import { MSidebar } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkSidebar } from '@wise-kit/ui'
+import { MButton, MSidebar } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -35,8 +35,8 @@ const model = [
 
 <template>
   <div style="display:flex;gap:1rem;align-items:flex-start">
-    <WkSidebar :model="model" :collapsed="collapsed" />
-    <WkButton :label="collapsed ? '展开' : '折叠'" size="small" @click="collapsed = !collapsed" />
+    <MSidebar :model="model" :collapsed="collapsed" />
+    <MButton :label="collapsed ? '展开' : '折叠'" size="small" @click="collapsed = !collapsed" />
   </div>
 </template>
 ```

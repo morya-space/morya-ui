@@ -1,4 +1,4 @@
-import type { WkAppendTo } from '../../shared/overlay'
+import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export interface MenubarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
@@ -12,7 +12,7 @@ export interface MenubarProps {
   /** Teleport submenu. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }
 
 export interface MenubarEmits {

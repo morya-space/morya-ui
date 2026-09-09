@@ -3,7 +3,7 @@ import { readStoredValue, writeStoredValue } from './storage'
 
 export type DensityPreference = 'compact' | 'comfortable' | 'spacious'
 
-const storageKey = 'wise-kit-density'
+const storageKey = 'morya-ui-density'
 const legacyStorageKeys = ['wex-design-density']
 const densityPreferences: readonly DensityPreference[] = ['compact', 'comfortable', 'spacious']
 
@@ -12,7 +12,7 @@ const preference = ref<DensityPreference>(getInitialDensity())
 export function applyDensity(preference: DensityPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.wkDensity = preference
+  el.dataset.muDensity = preference
 }
 
 function getInitialDensity(): DensityPreference {

@@ -1,10 +1,10 @@
-import type {WkLocaleMessages} from '@wise-kit/ui';
-import { enUS,  zhCN } from '@wise-kit/ui'
+import type {MLocaleMessages} from 'morya-ui';
+import { enUS,  zhCN } from 'morya-ui'
 import { computed, ref, watch } from 'vue'
 
 export type DocsLang = 'zh-CN' | 'en-US'
 
-const STORAGE_KEY = 'wk-docs-lang'
+const STORAGE_KEY = 'm-docs-lang'
 
 function readStoredLang(): DocsLang {
   if (typeof window === 'undefined') return 'zh-CN'
@@ -35,7 +35,7 @@ const messages = {
     docs: '文档',
     components: '组件',
     changelog: '更新日志',
-    homeAria: 'Wise Kit UI 首页',
+    homeAria: 'Morya UI 首页',
     navAria: '站点导航',
     lightMode: '浅色模式',
     darkMode: '暗色模式',
@@ -69,7 +69,7 @@ const messages = {
     pillarCompleteBody: '88 个组件覆盖基础、表单、导航、数据展示与反馈，均支持 tree-shaking。',
     pillarThemeLabel: 'Theme',
     pillarThemeTitle: '主题开箱即用',
-    pillarThemeBody: '亮/暗色、密度与动效基于 --wk-* 令牌；useTheme 与 WkConfigProvider 同包提供。',
+    pillarThemeBody: '亮/暗色、密度与动效基于 --m-* 令牌；useTheme 与 MConfigProvider 同包提供。',
     pillarTypeScriptLabel: 'TypeScript',
     pillarTypeScriptTitle: 'TypeScript 优先',
     pillarTypeScriptBody: 'Composition API 编写，Props、Emits 与 locale 类型完整，IDE 体验友好。',
@@ -112,7 +112,7 @@ const messages = {
     noComponent: '没有找到组件',
     tokens: '设计令牌',
     tokenDesc: '组件共享同一套视觉语法。主题切换时，语义保持不变。',
-    tokenNote: '所有组件都使用 --wk-* 设计变量。',
+    tokenNote: '所有组件都使用 --m-* 设计变量。',
     defaultDoc: '组件文档。',
     groupAria: '{title}组件',
     useAccent: '使用{label}主题色',
@@ -137,7 +137,7 @@ const messages = {
     searchOpen: '搜索站点',
     searchPlaceholder: '搜索文档与组件…',
     openNav: '打开导航',
-    tokenCatalogIntro: '共 {count} 个 `--wk-*` 变量，来自主题与各组件 styles.css。',
+    tokenCatalogIntro: '共 {count} 个 `--m-*` 变量，来自主题与各组件 styles.css。',
     tokenCatalogHint: '用途说明可在 `src/theme/token-descriptions.json` 中补充；重新生成请运行 `pnpm tokens:generate`。',
     tokenCatalogSearch: '搜索 token 名称或用途…',
     tokenCatalogAllCategories: '全部分类',
@@ -174,7 +174,7 @@ const messages = {
     docs: 'Docs',
     components: 'Components',
     changelog: 'Changelog',
-    homeAria: 'Wise Kit UI home',
+    homeAria: 'Morya UI home',
     navAria: 'Site navigation',
     lightMode: 'Light mode',
     darkMode: 'Dark mode',
@@ -208,7 +208,7 @@ const messages = {
     pillarCompleteBody: 'Basics, forms, navigation, data display, layout, and feedback — all tree-shakeable.',
     pillarThemeLabel: 'Theme',
     pillarThemeTitle: 'Theme-ready',
-    pillarThemeBody: 'Light/dark, density, and motion via --wk-* tokens; useTheme and WkConfigProvider ship in-package.',
+    pillarThemeBody: 'Light/dark, density, and motion via --m-* tokens; useTheme and MConfigProvider ship in-package.',
     pillarTypeScriptLabel: 'TypeScript',
     pillarTypeScriptTitle: 'TypeScript-first',
     pillarTypeScriptBody: 'Built with Composition API; fully typed props, emits, and locale for a smooth IDE experience.',
@@ -251,7 +251,7 @@ const messages = {
     noComponent: 'No components found',
     tokens: 'Design tokens',
     tokenDesc: 'Components share one visual grammar. Semantics stay stable when the theme changes.',
-    tokenNote: 'Every component uses --wk-* design tokens.',
+    tokenNote: 'Every component uses --m-* design tokens.',
     defaultDoc: 'Component docs.',
     groupAria: '{title} components',
     useAccent: 'Use {label} accent',
@@ -276,7 +276,7 @@ const messages = {
     searchOpen: 'Search site',
     searchPlaceholder: 'Search docs and components…',
     openNav: 'Open navigation',
-    tokenCatalogIntro: '{count} `--wk-*` variables extracted from theme and component styles.css files.',
+    tokenCatalogIntro: '{count} `--m-*` variables extracted from theme and component styles.css files.',
     tokenCatalogHint: 'Extend descriptions in `src/theme/token-descriptions.json`; regenerate with `pnpm tokens:generate`.',
     tokenCatalogSearch: 'Search token name or usage…',
     tokenCatalogAllCategories: 'All categories',
@@ -325,7 +325,7 @@ watch(
 
 export function useDocsI18n() {
   const t = computed(() => messages[lang.value])
-  const componentLocale = computed<WkLocaleMessages>(() => (lang.value === 'en-US' ? enUS : zhCN))
+  const componentLocale = computed<MLocaleMessages>(() => (lang.value === 'en-US' ? enUS : zhCN))
 
   function setLang(next: DocsLang) {
     lang.value = next

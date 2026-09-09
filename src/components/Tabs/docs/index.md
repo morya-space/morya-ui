@@ -11,14 +11,14 @@ description: 标签页切换。支持 line/card、关闭/新增、extra 与溢�
 ## 引入
 
 ```ts
-import { WkTabs } from '@wise-kit/ui'
+import { MTabs } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkTabs } from '@wise-kit/ui'
+import { MTabs } from 'morya-ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -30,13 +30,13 @@ const tabs = [
 </script>
 
 <template>
-  <WkTabs v-model="active" :tabs="tabs">
+  <MTabs v-model="active" :tabs="tabs">
     <template #default="{ activeValue }">
       <p style="margin:0">
         Active panel: {{ activeValue }}
       </p>
     </template>
-  </WkTabs>
+  </MTabs>
 </template>
 ```
 
@@ -44,7 +44,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkTabs } from '@wise-kit/ui'
+import { MButton, MTabs } from 'morya-ui'
 import { ref } from 'vue'
 
 const active = ref('a')
@@ -66,7 +66,7 @@ function onAdd() {
 </script>
 
 <template>
-  <WkTabs
+  <MTabs
     v-model="active"
     type="card"
     closable
@@ -76,14 +76,14 @@ function onAdd() {
     @add="onAdd"
   >
     <template #extra>
-      <WkButton label="操作" size="small" severity="secondary" />
+      <MButton label="操作" size="small" severity="secondary" />
     </template>
     <template #default="{ activeValue }">
       <p style="margin:0">
         {{ activeValue }}
       </p>
     </template>
-  </WkTabs>
+  </MTabs>
 </template>
 ```
 

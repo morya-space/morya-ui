@@ -11,26 +11,26 @@ Slides content in a window of `numVisible` items.
 ## Import
 
 ```ts
-import { WkCarousel } from '@wise-kit/ui'
+import { MCarousel } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkCarousel } from '@wise-kit/ui'
+import { MCarousel } from 'morya-ui'
 
 const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 </script>
 
 <template>
-  <WkCarousel :value="value" :num-visible="1" circular>
+  <MCarousel :value="value" :num-visible="1" circular>
     <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--wk-color-surface-muted, #f3f4f6);border-radius:var(--wk-radius-md)">
+      <div style="padding:2rem;text-align:center;background:var(--m-color-surface-muted, #f3f4f6);border-radius:var(--m-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WkCarousel>
+  </MCarousel>
 </template>
 ```
 
@@ -40,19 +40,19 @@ const value = ['Spring', 'Summer', 'Autumn', 'Winter']
 
 ```vue preview
 <script setup lang="ts">
-import { WkCarousel } from '@wise-kit/ui'
+import { MCarousel } from 'morya-ui'
 
 const value = ['A', 'B', 'C']
 </script>
 
 <template>
-  <WkCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
+  <MCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
     <template #item="{ item }">
-      <div style="padding:1.5rem;text-align:center;background:var(--wk-color-surface-muted, #f3f4f6);border-radius:var(--wk-radius-md)">
+      <div style="padding:1.5rem;text-align:center;background:var(--m-color-surface-muted, #f3f4f6);border-radius:var(--m-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WkCarousel>
+  </MCarousel>
 </template>
 ```
 

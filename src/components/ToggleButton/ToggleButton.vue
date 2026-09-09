@@ -3,7 +3,7 @@ import type { ToggleButtonProps } from './types'
 import { computed } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { resolveMenuIcon } from '../../shared/menu'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ToggleButtonProps>(), {
   modelValue: false,
@@ -19,11 +19,11 @@ const emit = defineEmits<{
 const sizeClass = useConfiguredSize('ToggleButton', () => props.size)
 
 const rootClass = computed(() => [
-  'wk-togglebutton',
-  `wk-togglebutton--${sizeClass.value}`,
+  'm-togglebutton',
+  `m-togglebutton--${sizeClass.value}`,
   {
-    'wk-togglebutton--checked': props.modelValue,
-    'wk-togglebutton--disabled': props.disabled,
+    'm-togglebutton--checked': props.modelValue,
+    'm-togglebutton--disabled': props.disabled,
   },
 ])
 
@@ -45,11 +45,11 @@ function toggle() {
     :aria-pressed="modelValue"
     @click="toggle"
   >
-    <span v-if="resolvedIcon" class="wk-togglebutton__icon" aria-hidden="true">
-      <WkIcon :name="resolvedIcon" size="sm" />
+    <span v-if="resolvedIcon" class="m-togglebutton__icon" aria-hidden="true">
+      <MIcon :name="resolvedIcon" size="sm" />
     </span>
     <slot>
-      <span class="wk-togglebutton__label">{{ label }}</span>
+      <span class="m-togglebutton__label">{{ label }}</span>
     </slot>
   </button>
 </template>

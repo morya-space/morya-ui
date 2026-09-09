@@ -11,14 +11,14 @@ Present options as a list with single selection, multiple selection, and filteri
 ## Import
 
 ```ts
-import { WkListbox } from '@wise-kit/ui'
+import { MListbox } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkListbox } from '@wise-kit/ui'
+import { MListbox } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('a')
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <WkListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
+  <MListbox v-model="value" :options="options" filter list-style="max-height: 12rem" />
 </template>
 ```
 

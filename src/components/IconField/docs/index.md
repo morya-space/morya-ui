@@ -11,14 +11,14 @@ description: 为输入框添加左/右侧图标的容器。
 ## 引入
 
 ```ts
-import { WkIcon, WkIconField, WkInput } from '@wise-kit/ui'
+import { MIcon, MIconField, MInput } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkIcon, WkIconField, WkInput } from '@wise-kit/ui'
+import { MIcon, MIconField, MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -26,18 +26,18 @@ const value = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WkIconField>
+    <MIconField>
       <template #icon>
-        <WkIcon name="info" size="sm" />
+        <MIcon name="info" size="sm" />
       </template>
-      <WkInput v-model="value" placeholder="Search" fluid />
-    </WkIconField>
-    <WkIconField icon-position="right">
+      <MInput v-model="value" placeholder="Search" fluid />
+    </MIconField>
+    <MIconField icon-position="right">
       <template #icon>
-        <WkIcon name="check" size="sm" />
+        <MIcon name="check" size="sm" />
       </template>
-      <WkInput v-model="value" placeholder="Verified" fluid />
-    </WkIconField>
+      <MInput v-model="value" placeholder="Verified" fluid />
+    </MIconField>
   </div>
 </template>
 ```

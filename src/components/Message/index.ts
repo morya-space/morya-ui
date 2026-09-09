@@ -1,6 +1,6 @@
 import './style'
 export { message, useMessage } from './message'
-export { default as WkMessage } from './Message.vue'
+export { default as MMessage } from './Message.vue'
 export type {
   MessageHandle,
   MessageHostConfig,
@@ -10,5 +10,5 @@ export type {
   MessagePlacement,
   MessageProps,
   MessageSeverity,
-  WkRenderable,
+  MRenderable,
 } from './types'

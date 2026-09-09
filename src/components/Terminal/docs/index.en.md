@@ -11,14 +11,14 @@ Shows a welcome message and command history; submitting emits `command`.
 ## Import
 
 ```ts
-import { WkTerminal } from '@wise-kit/ui'
+import { MTerminal } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkTerminal } from '@wise-kit/ui'
+import { MTerminal } from 'morya-ui'
 import { ref } from 'vue'
 
 const last = ref('')
@@ -26,7 +26,7 @@ const last = ref('')
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WkTerminal welcome-message="Wise Kit Terminal" @command="last = $event" />
+    <MTerminal welcome-message="Morya UI Terminal" @command="last = $event" />
     <div v-if="last">
       Last command: {{ last }}
     </div>
@@ -38,7 +38,7 @@ const last = ref('')
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `welcomeMessage` | `string` | `'Welcome to Wise Kit Terminal'` | Welcome message at the top. |
+| `welcomeMessage` | `string` | `'Welcome to Morya UI Terminal'` | Welcome message at the top. |
 | `prompt` | `string` | `'>'` | Prompt. |
 
 ## Events

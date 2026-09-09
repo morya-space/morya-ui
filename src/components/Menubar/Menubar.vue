@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { MenubarItem, MenubarProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import { useWkConfig } from '../../shared/config'
+import { useMLocale } from '../../locale'
+import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<MenubarProps>(), {
   selectedKey: null,
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'select', item: MenubarItem): void
 }>()
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const openIndex = ref<number | null>(null)
 const root = ref<HTMLElement | null>(null)
 const triggerEls = ref<(HTMLElement | null)[]>([])
@@ -101,16 +101,16 @@ function focusTop(index: number) {
 }
 
 function openSubmenuEl(): HTMLElement | null {
-  const local = root.value?.querySelector<HTMLElement>('.wk-menubar__submenu')
+  const local = root.value?.querySelector<HTMLElement>('.m-menubar__submenu')
   if (local) return local
-  return document.querySelector<HTMLElement>('.wk-menubar__submenu--teleported')
+  return document.querySelector<HTMLElement>('.m-menubar__submenu--teleported')
 }
 
 function focusActiveSubitem() {
   const index = subKeyboard.activeIndex.value
   if (index < 0) return
   openSubmenuEl()
-    ?.querySelectorAll<HTMLElement>('.wk-menubar__subitem')
+    ?.querySelectorAll<HTMLElement>('.m-menubar__subitem')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -199,7 +199,7 @@ watch(subKeyboard.activeIndex, () => {
 function onDocumentClick(event: MouseEvent) {
   const target = event.target as Node
   if (root.value?.contains(target)) return
-  const openSubmenu = document.querySelector('.wk-menubar__submenu--teleported')
+  const openSubmenu = document.querySelector('.m-menubar__submenu--teleported')
   if (openSubmenu?.contains(target)) return
   closeSubmenu()
 }
@@ -227,21 +227,21 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav ref="root" class="wk-menubar" :aria-label="locale.menubar" @keydown="onTopKeydown">
-    <div v-if="$slots.start" class="wk-menubar__start">
+  <nav ref="root" class="m-menubar" :aria-label="locale.menubar" @keydown="onTopKeydown">
+    <div v-if="$slots.start" class="m-menubar__start">
       <slot name="start" />
     </div>
     <div
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
-      class="wk-menubar__item"
-      :class="{ 'wk-menubar__item--open': openIndex === index, 'wk-menubar__item--selected': isSelected(item) }"
+      class="m-menubar__item"
+      :class="{ 'm-menubar__item--open': openIndex === index, 'm-menubar__item--selected': isSelected(item) }"
     >
       <button
         :ref="(el) => setTriggerRef(el, index)"
         type="button"
-        class="wk-menubar__trigger"
-        :class="{ 'wk-menubar__trigger--selected': isSelected(item) }"
+        class="m-menubar__trigger"
+        :class="{ 'm-menubar__trigger--selected': isSelected(item) }"
         :disabled="item.disabled"
         :tabindex="topKeyboard.tabindexFor(index)"
         :aria-expanded="item.items?.length ? openIndex === index : undefined"
@@ -249,20 +249,20 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="iconOf(item)" class="wk-menubar__icon" aria-hidden="true">
-          <WkIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="iconOf(item)" class="m-menubar__icon" aria-hidden="true">
+          <MIcon :name="iconOf(item)!" size="sm" />
         </span>
         {{ item.label }}
-        <span v-if="item.items?.length" class="wk-menubar__caret" aria-hidden="true">
-          <WkIcon name="chevron-down" size="sm" />
+        <span v-if="item.items?.length" class="m-menubar__caret" aria-hidden="true">
+          <MIcon name="chevron-down" size="sm" />
         </span>
       </button>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="wk-scale-fade">
+        <Transition name="m-scale-fade">
           <div
             v-if="item.items?.length && openIndex === index"
-            class="wk-menubar__submenu"
-            :class="{ 'wk-menubar__submenu--teleported': teleported }"
+            class="m-menubar__submenu"
+            :class="{ 'm-menubar__submenu--teleported': teleported }"
             :style="teleported ? submenuStyle : undefined"
             role="menu"
             @keydown="onSubmenuKeydown"
@@ -271,15 +271,15 @@ onBeforeUnmount(() => {
               v-for="(child, childIndex) in item.items"
               :key="`${child.label}-${childIndex}`"
               type="button"
-              class="wk-menubar__subitem"
-              :class="{ 'wk-menubar__subitem--selected': isSelected(child) }"
+              class="m-menubar__subitem"
+              :class="{ 'm-menubar__subitem--selected': isSelected(child) }"
               role="menuitem"
               :disabled="child.disabled"
               :tabindex="subKeyboard.tabindexFor(childIndex)"
               @click.stop="activateChild(child)"
             >
-              <span v-if="iconOf(child)" class="wk-menubar__icon" aria-hidden="true">
-                <WkIcon :name="iconOf(child)!" size="sm" />
+              <span v-if="iconOf(child)" class="m-menubar__icon" aria-hidden="true">
+                <MIcon :name="iconOf(child)!" size="sm" />
               </span>
               {{ child.label }}
             </button>
@@ -287,7 +287,7 @@ onBeforeUnmount(() => {
         </Transition>
       </Teleport>
     </div>
-    <div v-if="$slots.end" class="wk-menubar__end">
+    <div v-if="$slots.end" class="m-menubar__end">
       <slot name="end" />
     </div>
   </nav>

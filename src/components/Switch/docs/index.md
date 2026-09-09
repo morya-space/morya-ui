@@ -11,21 +11,21 @@ description: 开关。
 ## 引入
 
 ```ts
-import { WkSwitch } from '@wise-kit/ui'
+import { MSwitch } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkSwitch } from '@wise-kit/ui'
+import { MSwitch } from 'morya-ui'
 import { ref } from 'vue'
 
 const enabled = ref(false)
 </script>
 
 <template>
-  <WkSwitch v-model="enabled" label="Enable notifications" />
+  <MSwitch v-model="enabled" label="Enable notifications" />
 </template>
 ```
 
@@ -35,7 +35,7 @@ const enabled = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkSwitch } from '@wise-kit/ui'
+import { MSwitch } from 'morya-ui'
 import { ref } from 'vue'
 
 const dark = ref(false)
@@ -43,8 +43,8 @@ const dark = ref(false)
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WkSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
-    <WkSwitch :model-value="false" invalid label="Must be enabled" />
+    <MSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
+    <MSwitch :model-value="false" invalid label="Must be enabled" />
   </div>
 </template>
 ```
@@ -53,13 +53,13 @@ const dark = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkSwitch } from '@wise-kit/ui'
+import { MSwitch } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WkSwitch :model-value="true" disabled label="On disabled" />
-    <WkSwitch :model-value="false" disabled label="Off disabled" />
+    <MSwitch :model-value="true" disabled label="On disabled" />
+    <MSwitch :model-value="false" disabled label="Off disabled" />
   </div>
 </template>
 ```
@@ -68,14 +68,14 @@ import { WkSwitch } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSwitch } from '@wise-kit/ui'
+import { MSwitch } from 'morya-ui'
 import { ref } from 'vue'
 
 const on = ref(true)
 </script>
 
 <template>
-  <WkSwitch v-model="on" checked-text="开" unchecked-text="关" />
+  <MSwitch v-model="on" checked-text="开" unchecked-text="关" />
 </template>
 ```
 

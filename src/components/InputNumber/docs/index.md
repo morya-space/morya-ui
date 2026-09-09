@@ -11,21 +11,21 @@ description: 数字输入框，支持步进按钮、上下限与尺寸。
 ## 引入
 
 ```ts
-import { WkInputNumber } from '@wise-kit/ui'
+import { MInputNumber } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputNumber } from '@wise-kit/ui'
+import { MInputNumber } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(1)
 </script>
 
 <template>
-  <WkInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
+  <MInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref(1)
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputNumber } from '@wise-kit/ui'
+import { MInputNumber } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(3)
 </script>
 
 <template>
-  <WkInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
+  <MInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
 </template>
 ```
 
@@ -50,14 +50,14 @@ const value = ref(3)
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputNumber } from '@wise-kit/ui'
+import { MInputNumber } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(1.25)
 </script>
 
 <template>
-  <WkInputNumber v-model="value" show-buttons button-placement="right" :precision="2" :step="0.25" clearable />
+  <MInputNumber v-model="value" show-buttons button-placement="right" :precision="2" :step="0.25" clearable />
 </template>
 ```
 

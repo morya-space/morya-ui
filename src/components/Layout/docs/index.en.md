@@ -6,18 +6,18 @@ description: Page layout shell with Header / Sider / Content / Footer.
 
 # Layout
 
-Page-level layout shell. Set `has-sider` on the `WkLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `WkLayoutContent` can fill the remaining space.
+Page-level layout shell. Set `has-sider` on the `MLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `MLayoutContent` can fill the remaining space.
 
 ## Import
 
 ```ts
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutFooter,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutFooter,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 ```
 
 ## Basic
@@ -26,21 +26,21 @@ Header / Content / Footer. Content fills the leftover height.
 
 ```vue preview
 <script setup lang="ts">
-import { WkLayout, WkLayoutContent, WkLayoutFooter, WkLayoutHeader } from '@wise-kit/ui'
+import { MLayout, MLayoutContent, MLayoutFooter, MLayoutHeader } from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:16rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Header
-    </WkLayoutHeader>
-    <WkLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
+    </MLayoutHeader>
+    <MLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
       Content (fills remaining space)
-    </WkLayoutContent>
-    <WkLayoutFooter bordered style="padding:0.75rem 1rem">
+    </MLayoutContent>
+    <MLayoutFooter bordered style="padding:0.75rem 1rem">
       Footer
-    </WkLayoutFooter>
-  </WkLayout>
+    </MLayoutFooter>
+  </MLayout>
 </template>
 ```
 
@@ -51,24 +51,24 @@ Header + left sider + main. The inner `has-sider` layout consumes all height bel
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkLayout style="height:16rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
+  <MLayout style="height:16rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
       <strong>App</strong>
-      <span style="color:var(--wk-color-text-muted);font-size:0.75rem">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>
-    </WkLayoutHeader>
-    <WkLayout has-sider>
-      <WkLayoutSider
+      <span style="color:var(--m-color-text-muted);font-size:0.75rem">{{ collapsed ? 'Collapsed' : 'Expanded' }}</span>
+    </MLayoutHeader>
+    <MLayout has-sider>
+      <MLayoutSider
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
@@ -80,12 +80,12 @@ const collapsed = ref(false)
           <div>Projects</div>
           <div>Settings</div>
         </div>
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding:1rem">
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding:1rem">
         Main area stretches both horizontally and vertically.
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -94,27 +94,27 @@ const collapsed = ref(false)
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Inspector
-    </WkLayoutHeader>
-    <WkLayout has-sider sider-placement="right">
-      <WkLayoutSider bordered :width="140" content-style="padding:0.75rem">
+    </MLayoutHeader>
+    <MLayout has-sider sider-placement="right">
+      <MLayoutSider bordered :width="140" content-style="padding:0.75rem">
         Props panel
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding:1rem">
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding:1rem">
         Canvas / main
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -125,34 +125,34 @@ Admin-style shell: header + sider + content + footer.
 ```vue preview
 <script setup lang="ts">
 import {
-  WkButton,
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutFooter,
-  WkLayoutHeader,
-  WkLayoutSider,
-  WkTag,
-} from '@wise-kit/ui'
+  MButton,
+  MLayout,
+  MLayoutContent,
+  MLayoutFooter,
+  MLayoutHeader,
+  MLayoutSider,
+  MTag,
+} from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkLayout style="height:18rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader
+  <MLayout style="height:18rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader
       bordered
       inverted
       style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
     >
-      <strong>Wise Kit</strong>
-      <WkTag value="Studio" />
+      <strong>Morya UI</strong>
+      <MTag value="Studio" />
       <span style="flex:1" />
-      <WkButton size="small" label="Publish" />
-    </WkLayoutHeader>
+      <MButton size="small" label="Publish" />
+    </MLayoutHeader>
 
-    <WkLayout has-sider>
-      <WkLayoutSider
+    <MLayout has-sider>
+      <MLayoutSider
         v-model:collapsed="collapsed"
         bordered
         inverted
@@ -167,21 +167,21 @@ const collapsed = ref(false)
           <div>Widgets</div>
           <div>Theme</div>
         </div>
-      </WkLayoutSider>
+      </MLayoutSider>
 
-      <WkLayout>
-        <WkLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
+      <MLayout>
+        <MLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
           <strong>Workspace</strong>
-          <p style="margin:0;color:var(--wk-color-text-muted);font-size:0.875rem">
+          <p style="margin:0;color:var(--m-color-text-muted);font-size:0.875rem">
             Content fills the space between Header and Footer; collapsing the sider keeps the height.
           </p>
-        </WkLayoutContent>
-        <WkLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--wk-color-text-muted);font-size:0.75rem">
+        </MLayoutContent>
+        <MLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--m-color-text-muted);font-size:0.75rem">
           Ready · local
-        </WkLayoutFooter>
-      </WkLayout>
-    </WkLayout>
-  </WkLayout>
+        </MLayoutFooter>
+      </MLayout>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -191,18 +191,18 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkLayout, WkLayoutContent, WkLayoutHeader } from '@wise-kit/ui'
+import { MLayout, MLayoutContent, MLayoutHeader } from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:12rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:12rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
-    </WkLayoutHeader>
-    <WkLayoutContent embedded content-style="padding:1rem">
+    </MLayoutHeader>
+    <MLayoutContent embedded content-style="padding:1rem">
       Nested forms / lists go here.
-    </WkLayoutContent>
-  </WkLayout>
+    </MLayoutContent>
+  </MLayout>
 </template>
 ```
 
@@ -213,31 +213,31 @@ Only the content pane scrolls; header and sider stay fixed.
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 </script>
 
 <template>
-  <WkLayout style="height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+  <MLayout style="height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Scroll demo
-    </WkLayoutHeader>
-    <WkLayout has-sider>
-      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
+    </MLayoutHeader>
+    <MLayout has-sider>
+      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Fixed sider
-      </WkLayoutSider>
-      <WkLayoutContent embedded content-style="padding:1rem">
+      </MLayoutSider>
+      <MLayoutContent embedded content-style="padding:1rem">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             Row {{ n }} — scroll down
           </div>
         </div>
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
 </template>
 ```
 
@@ -248,28 +248,28 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 ```vue preview
 <script setup lang="ts">
 import {
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-} from '@wise-kit/ui'
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+} from 'morya-ui'
 </script>
 
 <template>
-  <div style="position:relative;height:14rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md);overflow:hidden">
-    <WkLayout position="absolute" has-sider>
-      <WkLayoutSider bordered :width="120" content-style="padding:0.75rem">
+  <div style="position:relative;height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
+    <MLayout position="absolute" has-sider>
+      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
         Nav
-      </WkLayoutSider>
-      <WkLayout>
-        <WkLayoutHeader bordered style="padding:0.75rem 1rem">
+      </MLayoutSider>
+      <MLayout>
+        <MLayoutHeader bordered style="padding:0.75rem 1rem">
           Absolute layout
-        </WkLayoutHeader>
-        <WkLayoutContent embedded content-style="padding:1rem">
+        </MLayoutHeader>
+        <MLayoutContent embedded content-style="padding:1rem">
           Fills the relative container
-        </WkLayoutContent>
-      </WkLayout>
-    </WkLayout>
+        </MLayoutContent>
+      </MLayout>
+    </MLayout>
   </div>
 </template>
 ```
@@ -278,7 +278,7 @@ import {
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `hasSider` | `boolean` | `false` | Horizontal layout for `WkLayoutSider`. |
+| `hasSider` | `boolean` | `false` | Horizontal layout for `MLayoutSider`. |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | Sider side. |
 | `embedded` | `boolean` | `false` | Soft background for nested content. |
 | `position` | `'static' \| 'absolute'` | `'static'` | Positioning mode. |
@@ -307,17 +307,17 @@ import {
 
 ## Expose
 
-`WkLayout` / `WkLayoutContent` / `WkLayoutSider` expose `scrollTo(...)`.
+`MLayout` / `MLayoutContent` / `MLayoutSider` expose `scrollTo(...)`.
 
 ## Components
 
 | Component | Description |
 | --- | --- |
-| `WkLayout` | Root layout. |
-| `WkLayoutHeader` | Header bar. |
-| `WkLayoutContent` | Main content (fills leftover space by default). |
-| `WkLayoutFooter` | Footer bar. |
-| `WkLayoutSider` | Side panel. |
+| `MLayout` | Root layout. |
+| `MLayoutHeader` | Header bar. |
+| `MLayoutContent` | Main content (fills leftover space by default). |
+| `MLayoutFooter` | Footer bar. |
+| `MLayoutSider` | Side panel. |
 
 ## Slots
 

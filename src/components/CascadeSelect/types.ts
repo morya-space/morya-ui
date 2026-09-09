@@ -1,5 +1,5 @@
-import type { WkAppendTo } from '../../shared/overlay'
-import type { WkSizeInput } from '../../shared/types'
+import type { MAppendTo } from '../../shared/overlay'
+import type { MSizeInput } from '../../shared/types'
 
 export interface CascadeSelectOption {
   label: string
@@ -22,14 +22,14 @@ export interface CascadeSelectProps {
   placeholder?: string
   disabled?: boolean
   required?: boolean
-  size?: WkSizeInput
+  size?: MSizeInput
   fluid?: boolean
   /** Show clear button when a value is selected. */
   clearable?: boolean
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }
 
 export interface CascadeSelectEmits {

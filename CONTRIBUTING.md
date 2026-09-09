@@ -1,19 +1,19 @@
-# Contributing
+﻿# Contributing
 
 [English](./CONTRIBUTING.md) · [中文](./CONTRIBUTING.zh-CN.md)
 
-Thank you for your interest in Wise Kit UI!
+Thank you for your interest in Morya UI!
 
 ## Ways to contribute
 
-- **Report bugs** — [Open an issue](https://github.com/wise-kit/wise-kit-ui/issues) with reproduction steps.
+- **Report bugs** — [Open an issue](https://github.com/morya-space/morya-ui/issues) with reproduction steps.
 - **Suggest features** — Describe the use case and expected API in an issue first.
 - **Improve docs** — Fix typos, clarify guides, or add examples via pull request.
 - **Submit code** — Bug fixes and component enhancements are welcome.
 
 ## Before you start
 
-1. Read the [documentation site](https://wise-kit.github.io/wise-kit-ui/).
+1. Read the [documentation site](https://morya-ui.github.io/morya-ui/).
 2. For local setup, see [Development guide](./docs/DEVELOPMENT.md).
 3. Follow [Conventional Commits](./docs/COMMIT_CONVENTION.md) for commit messages.
 
@@ -31,4 +31,4 @@ Be respectful and constructive. We aim to keep the project welcoming to contribu
 
 ## Questions
 
-Open a [GitHub Discussion or Issue](https://github.com/wise-kit/wise-kit-ui/issues) if you are unsure whether a change fits — we are happy to help before you invest time in a large PR.
+Open a [GitHub Discussion or Issue](https://github.com/morya-space/morya-ui/issues) if you are unsure whether a change fits — we are happy to help before you invest time in a large PR.

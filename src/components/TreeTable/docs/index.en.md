@@ -11,14 +11,14 @@ Display tree data with children using column configuration.
 ## Import
 
 ```ts
-import { WkTreeTable } from '@wise-kit/ui'
+import { MTreeTable } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkTreeTable } from '@wise-kit/ui'
+import { MTreeTable } from 'morya-ui'
 
 const columns = [
   { field: 'name', header: 'Name' },
@@ -37,7 +37,7 @@ const value = [
 </script>
 
 <template>
-  <WkTreeTable :value="value" :columns="columns" />
+  <MTreeTable :value="value" :columns="columns" />
 </template>
 ```
 

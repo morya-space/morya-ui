@@ -1,11 +1,11 @@
-import type { WkRenderable } from '../../shared/content'
-import type { WkAppendTo } from '../../shared/overlay'
-import type { WkToastSeverity } from '../../shared/types'
+import type { MRenderable } from '../../shared/content'
+import type { MAppendTo } from '../../shared/overlay'
+import type { MToastSeverity } from '../../shared/types'
 
-export type { WkRenderable }
+export type { MRenderable }
 
 /** message severities; `warning` kept as legacy alias for `warn`. */
-export type MessageSeverity = WkToastSeverity | 'warning'
+export type MessageSeverity = MToastSeverity | 'warning'
 
 export type MessagePlacement =
   | 'top'
@@ -17,7 +17,7 @@ export type MessagePlacement =
 
 export interface MessageItem {
   id: string | number
-  content: WkRenderable
+  content: MRenderable
   severity?: MessageSeverity
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
@@ -27,13 +27,13 @@ export interface MessageItem {
 
 export type MessageOptions = Omit<MessageItem, 'id' | 'content'> & {
   id?: string | number
-  content: WkRenderable
+  content: MRenderable
   /** When true (default service setting), refresh life for duplicate content. */
   dedupe?: boolean
 }
 
 /** String / VNode / component / render factory, or a full options object. */
-export type MessageInput = WkRenderable | MessageOptions
+export type MessageInput = MRenderable | MessageOptions
 
 export interface MessageProps {
   /** Controlled message list. When omitted, binds to the shared service queue. */
@@ -41,14 +41,14 @@ export interface MessageProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
   /** Host placement. Default `top` (Naive MessageProvider). */
   placement?: MessagePlacement
   /** Max visible messages; oldest is dropped. Omit for unlimited. */
   max?: number
   /**
    * Internal: auto-mounted service host.
-   * Manual `<WkMessage />` claims the host and disables auto-mount.
+   * Manual `<MMessage />` claims the host and disables auto-mount.
    */
   auto?: boolean
 }

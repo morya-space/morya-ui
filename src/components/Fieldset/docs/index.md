@@ -11,25 +11,25 @@ description: 带图例的字段分组，可折叠。
 ## 引入
 
 ```ts
-import { WkFieldset } from '@wise-kit/ui'
+import { MFieldset } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkFieldset } from '@wise-kit/ui'
+import { MFieldset } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
+  <MFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
     <p style="margin:0">
       字段分组内容。
     </p>
-  </WkFieldset>
+  </MFieldset>
 </template>
 ```
 

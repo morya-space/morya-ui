@@ -8,7 +8,7 @@ import type {
   TreeSelectionKeys,
 } from './types'
 import { computed, nextTick, provide, reactive, ref, useSlots, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   buildChildMap,
@@ -18,7 +18,7 @@ import {
   syncAncestors,
   walkTree,
 } from './checkStrategy'
-import { WK_TREE_KEY, WK_TREE_NODE_SLOT } from './context'
+import { M_TREE_KEY, M_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
 const props = withDefaults(defineProps<TreeProps>(), {
   selectionMode: 'single',
@@ -50,8 +50,8 @@ const emit = defineEmits<{
   (event: 'node-drop', payload: { dragKey: string; dropKey: string; position: 'before' | 'after' | 'inside' }): void
 }>()
 const slots = useSlots()
-const locale = useWkLocale()
-provide(WK_TREE_NODE_SLOT, slots.default)
+const locale = useMLocale()
+provide(M_TREE_NODE_SLOT, slots.default)
 
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyMessage,
@@ -338,9 +338,9 @@ watch(keyboard.activeIndex, () => {
   void nextTick(() => {
     const key = activeKey.value
     if (key == null || !root.value) return
-    const items = root.value.querySelectorAll<HTMLElement>('[data-wk-tree-key]')
+    const items = root.value.querySelectorAll<HTMLElement>('[data-m-tree-key]')
     for (const item of items) {
-      if (item.dataset.wkTreeKey === key) {
+      if (item.dataset.muTreeKey === key) {
         item.focus({ preventScroll: true })
         break
       }
@@ -374,7 +374,7 @@ function onTreeKeydown(event: KeyboardEvent) {
   keyboard.onKeydown(event)
 }
 
-provide(WK_TREE_KEY, {
+provide(M_TREE_KEY, {
   isExpanded,
   isSelected,
   isChecked,
@@ -410,15 +410,15 @@ provide(WK_TREE_KEY, {
 </script>
 
 <template>
-  <div class="wk-tree-root">
-    <ul v-if="visibleRoots.length" ref="root" class="wk-tree" role="tree" @keydown="onTreeKeydown">
+  <div class="m-tree-root">
+    <ul v-if="visibleRoots.length" ref="root" class="m-tree" role="tree" @keydown="onTreeKeydown">
       <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" :depth="1" />
     </ul>
-    <div v-else-if="isFilterEmpty" class="wk-tree__message" role="status">
+    <div v-else-if="isFilterEmpty" class="m-tree__message" role="status">
       <slot name="empty">
-        <p class="wk-tree__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="m-tree__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
-    <ul v-else ref="root" class="wk-tree" role="tree" @keydown="onTreeKeydown" />
+    <ul v-else ref="root" class="m-tree" role="tree" @keydown="onTreeKeydown" />
   </div>
 </template>

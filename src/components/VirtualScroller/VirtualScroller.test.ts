@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkVirtualScroller from './VirtualScroller.vue'
+import MVirtualScroller from './VirtualScroller.vue'
 
-describe('wkVirtualScroller', () => {
+describe('muVirtualScroller', () => {
   it('renders a window of items', () => {
     const items = Array.from({ length: 100 }, (_, i) => `Item ${i}`)
-    const wrapper = mount(WkVirtualScroller, {
+    const wrapper = mount(MVirtualScroller, {
       props: { items, itemSize: 32, height: 128, buffer: 0 },
       slots: {
         item: `<template #item="{ item }"><span class="row">{{ item }}</span></template>`,
@@ -19,10 +19,10 @@ describe('wkVirtualScroller', () => {
 
   it('updates window on scroll', async () => {
     const items = Array.from({ length: 50 }, (_, i) => i)
-    const wrapper = mount(WkVirtualScroller, {
+    const wrapper = mount(MVirtualScroller, {
       props: { items, itemSize: 20, height: 100, buffer: 0 },
     })
-    const root = wrapper.find('.wk-virtualscroller')
+    const root = wrapper.find('.m-virtualscroller')
     Object.defineProperty(root.element, 'scrollTop', { value: 200, configurable: true })
     await root.trigger('scroll')
     expect(wrapper.text()).toContain('10')

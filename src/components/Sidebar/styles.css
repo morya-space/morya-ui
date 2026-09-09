@@ -1,65 +1,65 @@
 /* —— Menu: Sidebar —— */
-.wk-sidebar {
-    --wk-sidebar-width: 12rem;
-    --wk-sidebar-collapsed-width: 3.5rem;
-    background: var(--wk-color-surface);
-    border: var(--wk-border-width) solid var(--wk-color-border);
-    border-radius: var(--wk-radius-md);
-    min-width: var(--wk-sidebar-width);
-    padding: var(--wk-space-2);
-    width: var(--wk-sidebar-width);
+.m-sidebar {
+    --m-sidebar-width: 12rem;
+    --m-sidebar-collapsed-width: 3.5rem;
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-md);
+    min-width: var(--m-sidebar-width);
+    padding: var(--m-space-2);
+    width: var(--m-sidebar-width);
 }
 
-.wk-sidebar--collapsed {
-    min-width: var(--wk-sidebar-collapsed-width);
-    width: var(--wk-sidebar-collapsed-width);
+.m-sidebar--collapsed {
+    min-width: var(--m-sidebar-collapsed-width);
+    width: var(--m-sidebar-collapsed-width);
 }
 
-.wk-sidebar__list,
-.wk-sidebar__children {
+.m-sidebar__list,
+.m-sidebar__children {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wk-sidebar__children {
-    margin-left: var(--wk-space-4);
+.m-sidebar__children {
+    margin-left: var(--m-space-4);
 }
 
-.wk-sidebar__link {
+.m-sidebar__link {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-sm);
+    border-radius: var(--m-radius-sm);
     color: inherit;
     cursor: pointer;
     display: flex;
     font: inherit;
-    gap: var(--wk-space-2);
-    padding: var(--wk-space-2);
+    gap: var(--m-space-2);
+    padding: var(--m-space-2);
     text-align: left;
     width: 100%;
 }
 
-.wk-sidebar__link:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
+.m-sidebar__link:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
 }
 
-.wk-sidebar__link:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-sidebar__link:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-sidebar__link:disabled {
+.m-sidebar__link:disabled {
     cursor: not-allowed;
-    opacity: var(--wk-opacity-disabled);
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-sidebar__link--child {
-    font-size: var(--wk-font-size-md);
+.m-sidebar__link--child {
+    font-size: var(--m-font-size-md);
 }
 
-.wk-sidebar__icon {
+.m-sidebar__icon {
     flex: 0 0 1.25rem;
     text-align: center;
 }

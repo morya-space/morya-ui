@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkInputGroupAddon from './InputGroupAddon.vue'
+import MInputGroupAddon from './InputGroupAddon.vue'
 
 describe('InputGroupAddon', () => {
   it('renders addon slot content', () => {
-    const wrapper = mount(WkInputGroupAddon, {
+    const wrapper = mount(MInputGroupAddon, {
       slots: { default: '@' },
     })
-    expect(wrapper.classes()).toContain('wk-inputgroup-addon')
+    expect(wrapper.classes()).toContain('m-inputgroup-addon')
     expect(wrapper.text()).toBe('@')
   })
 })

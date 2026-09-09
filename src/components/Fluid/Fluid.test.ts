@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkFluid from './Fluid.vue'
+import MFluid from './Fluid.vue'
 
-describe('wkFluid', () => {
+describe('muFluid', () => {
   it('wraps children with fluid class', () => {
-    const wrapper = mount(WkFluid, {
+    const wrapper = mount(MFluid, {
       slots: { default: '<input class="child" />' },
     })
-    expect(wrapper.classes()).toContain('wk-fluid')
+    expect(wrapper.classes()).toContain('m-fluid')
     expect(wrapper.find('.child').exists()).toBe(true)
   })
 })

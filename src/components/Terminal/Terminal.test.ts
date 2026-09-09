@@ -1,27 +1,27 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkTerminal from './Terminal.vue'
+import MTerminal from './Terminal.vue'
 
-describe('wkTerminal', () => {
+describe('muTerminal', () => {
   it('emits command on submit', async () => {
-    const wrapper = mount(WkTerminal, {
+    const wrapper = mount(MTerminal, {
       props: { welcomeMessage: 'Hello' },
     })
     expect(wrapper.text()).toContain('Hello')
-    await wrapper.find('.wk-terminal__input').setValue('help')
-    await wrapper.find('.wk-terminal__form').trigger('submit')
+    await wrapper.find('.m-terminal__input').setValue('help')
+    await wrapper.find('.m-terminal__form').trigger('submit')
     expect(wrapper.emitted('command')?.at(-1)).toEqual(['help'])
     expect(wrapper.text()).toContain('help')
   })
 
   it('uses role=log on the body', () => {
-    const wrapper = mount(WkTerminal)
-    expect(wrapper.find('.wk-terminal__body').attributes('role')).toBe('log')
-    expect(wrapper.find('.wk-terminal').attributes('role')).toBeUndefined()
+    const wrapper = mount(MTerminal)
+    expect(wrapper.find('.m-terminal__body').attributes('role')).toBe('log')
+    expect(wrapper.find('.m-terminal').attributes('role')).toBeUndefined()
   })
 
   it('displays controlled lines and responses', () => {
-    const wrapper = mount(WkTerminal, {
+    const wrapper = mount(MTerminal, {
       props: {
         lines: ['help', 'clear'],
         responses: ['Available commands', 'Done'],
@@ -34,27 +34,27 @@ describe('wkTerminal', () => {
   })
 
   it('emits update:lines when uncontrolled', async () => {
-    const wrapper = mount(WkTerminal)
-    await wrapper.find('.wk-terminal__input').setValue('ls')
-    await wrapper.find('.wk-terminal__form').trigger('submit')
+    const wrapper = mount(MTerminal)
+    await wrapper.find('.m-terminal__input').setValue('ls')
+    await wrapper.find('.m-terminal__form').trigger('submit')
     expect(wrapper.emitted('update:lines')?.at(-1)).toEqual([['ls']])
   })
 
   it('emits update:responses via appendResponse', async () => {
-    const wrapper = mount(WkTerminal)
-    await wrapper.find('.wk-terminal__input').setValue('help')
-    await wrapper.find('.wk-terminal__form').trigger('submit')
+    const wrapper = mount(MTerminal)
+    await wrapper.find('.m-terminal__input').setValue('help')
+    await wrapper.find('.m-terminal__form').trigger('submit')
     ;(wrapper.vm as { appendResponse: (text: string) => void }).appendResponse('Available commands')
     await wrapper.vm.$nextTick()
     expect(wrapper.emitted('update:responses')?.at(-1)).toEqual([['Available commands']])
-    expect(wrapper.find('.wk-terminal__response').text()).toBe('Available commands')
+    expect(wrapper.find('.m-terminal__response').text()).toBe('Available commands')
   })
 
   it('navigates command history with arrow keys', async () => {
-    const wrapper = mount(WkTerminal, {
+    const wrapper = mount(MTerminal, {
       props: { lines: ['first', 'second'] },
     })
-    const input = wrapper.find('.wk-terminal__input')
+    const input = wrapper.find('.m-terminal__input')
     await input.trigger('keydown', { key: 'ArrowUp' })
     expect((input.element as HTMLInputElement).value).toBe('second')
     await input.trigger('keydown', { key: 'ArrowUp' })

@@ -11,28 +11,28 @@ Panel for grouping content. Collapse can be enabled.
 ## Import
 
 ```ts
-import { WkPanel } from '@wise-kit/ui'
+import { MPanel } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkPanel } from '@wise-kit/ui'
+import { MPanel } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkPanel v-model="collapsed" header="Panel" toggleable>
+  <MPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       Collapsible panel content.
     </p>
     <template #footer>
       Actions
     </template>
-  </WkPanel>
+  </MPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkPanel } from '@wise-kit/ui'
+import { MPanel } from 'morya-ui'
 </script>
 
 <template>
-  <WkPanel header="Small" size="small">
+  <MPanel header="Small" size="small">
     <p style="margin:0">
       A more compact panel.
     </p>
-  </WkPanel>
+  </MPanel>
 </template>
 ```
 

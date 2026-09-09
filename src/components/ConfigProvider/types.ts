@@ -1,6 +1,6 @@
 export type {
-  WkComponentDefaults,
-  WkDensity,
-  WkGlobalConfig,
-  WkLocaleConfig,
+  MComponentDefaults,
+  MDensity,
+  MGlobalConfig,
+  MLocaleConfig,
 } from '../../shared/config'

@@ -1,25 +1,25 @@
----
+﻿---
 title: Introduction
 order: 1
-description: What Wise Kit UI is, who it is for, and how to get started.
+description: What Morya UI is, who it is for, and how to get started.
 ---
 
 # Introduction
 
-**Wise Kit UI** (`@wise-kit/ui`) is an **open-source** Vue 3 component library with design tokens, light/dark themes, i18n, and interactive documentation.
+**Morya UI** (`morya-ui`) is an **open-source** Vue 3 component library with design tokens, light/dark themes, i18n, and interactive documentation.
 
-- **Docs**: [wise-kit.github.io/wise-kit-ui](https://wise-kit.github.io/wise-kit-ui/)
-- **Source**: [GitHub](https://github.com/wise-kit/wise-kit-ui)
-- **npm**: [`@wise-kit/ui`](https://www.npmjs.com/package/@wise-kit/ui)
+- **Docs**: [morya-ui.github.io/morya-ui](https://morya-ui.github.io/morya-ui/)
+- **Source**: [GitHub](https://github.com/morya-space/morya-ui)
+- **npm**: [`morya-ui`](https://www.npmjs.com/package/morya-ui)
 
-## Why Wise Kit UI
+## Why Morya UI
 
 | | |
 | --- | --- |
 | **88 components** | Basics, forms, navigation, data display, layout, and feedback |
-| **Theme system** | `--wk-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
+| **Theme system** | `--m-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
 | **TypeScript** | Built with Composition API; fully typed props, emits, and locale |
-| **On-demand** | ESM subpaths + `WiseKitResolver` with tree-shaking |
+| **On-demand** | ESM subpaths + `MoryaUIResolver` with tree-shaking |
 | **Docs as preview** | Markdown + interactive `vue preview` for every component |
 
 ## Use cases
@@ -32,13 +32,13 @@ description: What Wise Kit UI is, who it is for, and how to get started.
 
 | Package | Role |
 | --- | --- |
-| `@wise-kit/ui` | Components, styles, theme APIs, docs site source |
-| `@wise-kit/ui-mcp` | (Optional) MCP server for AI clients that support the protocol |
+| `morya-ui` | Components, styles, theme APIs, docs site source |
+| `morya-ui-mcp` | (Optional) MCP server for AI clients that support the protocol |
 
 ## Install
 
 ```bash
-pnpm add @wise-kit/ui
+pnpm add morya-ui
 ```
 
 Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](/docs/ssr). See [Quick start](/docs/quick-start).
@@ -47,8 +47,8 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 
 - [Quick start](/docs/quick-start): install and a minimal example
 - [Theme](/docs/theme): light/dark and motion
-- [Design tokens](/docs/design-tokens): full `--wk-*` reference
-- [Configuration](/docs/config): `ConfigProvider` / `createWiseKit`
+- [Design tokens](/docs/design-tokens): full `--m-*` reference
+- [Configuration](/docs/config): `ConfigProvider` / `createMoryaUI`
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
 - [Components](/components): browse all components and APIs
-- [Contributing](https://github.com/wise-kit/wise-kit-ui/blob/main/CONTRIBUTING.md)
+- [Contributing](https://github.com/morya-space/morya-ui/blob/main/CONTRIBUTING.md)

@@ -1,4 +1,4 @@
----
+﻿---
 title: MCP
 order: 6
 description: Optional MCP server for AI clients that support the Model Context Protocol.
@@ -6,16 +6,16 @@ description: Optional MCP server for AI clients that support the Model Context P
 
 # MCP
 
-[`@wise-kit/ui-mcp`](https://www.npmjs.com/package/@wise-kit/ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
+[`morya-ui-mcp`](https://www.npmjs.com/package/morya-ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
 
 You do **not** need MCP to use the component library. Apps still only depend on:
 
 ```bash
-pnpm add @wise-kit/ui
+pnpm add morya-ui
 ```
 
 ```ts
-import '@wise-kit/ui/styles.css'
+import 'morya-ui/styles.css'
 ```
 
 ## How to connect
@@ -23,7 +23,7 @@ import '@wise-kit/ui/styles.css'
 MCP clients start the package over stdio:
 
 ```bash
-npx -y @wise-kit/ui-mcp
+npx -y morya-ui-mcp
 ```
 
 Generic shape:
@@ -31,7 +31,7 @@ Generic shape:
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@wise-kit/ui-mcp"]
+  "args": ["-y", "morya-ui-mcp"]
 }
 ```
 
@@ -46,9 +46,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wise-kit-ui": {
+    "morya-ui": {
       "command": "npx",
-      "args": ["-y", "@wise-kit/ui-mcp"]
+      "args": ["-y", "morya-ui-mcp"]
     }
   }
 }
@@ -59,9 +59,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wise-kit-ui": {
+    "morya-ui": {
       "command": "npx",
-      "args": ["-y", "@wise-kit/ui-mcp"]
+      "args": ["-y", "morya-ui-mcp"]
     }
   }
 }
@@ -72,9 +72,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wise-kit-ui": {
+    "morya-ui": {
       "command": "npx",
-      "args": ["-y", "@wise-kit/ui-mcp"]
+      "args": ["-y", "morya-ui-mcp"]
     }
   }
 }
@@ -85,9 +85,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "mcpServers": {
-    "wise-kit-ui": {
+    "morya-ui": {
       "command": "npx",
-      "args": ["-y", "@wise-kit/ui-mcp"]
+      "args": ["-y", "morya-ui-mcp"]
     }
   }
 }
@@ -98,9 +98,9 @@ Snippets for popular products. Key names may change across versions — check ea
 ```json
 {
   "context_servers": {
-    "wise-kit-ui": {
+    "morya-ui": {
       "command": "npx",
-      "args": ["-y", "@wise-kit/ui-mcp"]
+      "args": ["-y", "morya-ui-mcp"]
     }
   }
 }
@@ -112,9 +112,9 @@ Snippets for popular products. Key names may change across versions — check ea
 {
   "mcpServers": [
     {
-      "name": "wise-kit-ui",
+      "name": "morya-ui",
       "command": "npx",
-      "args": ["-y", "@wise-kit/ui-mcp"]
+      "args": ["-y", "morya-ui-mcp"]
     }
   ]
 }
@@ -174,7 +174,7 @@ Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
 
 After connecting, you can ask the assistant to use this server, for example:
 
-> Use the wise-kit-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
+> Use the morya-ui MCP to look up Dialog props and give an example with confirm / cancel actions.
 
 > Search for date-related components, pick one suitable for forms, and write a minimal usage from the docs.
 
@@ -184,19 +184,19 @@ The assistant should call tools first, then produce something like:
 
 ```vue
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
-  <WkButton label="Delete" severity="danger" />
+  <MButton label="Delete" severity="danger" />
 </template>
 ```
 
 ## Relation to this site
 
-The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@wise-kit/ui-mcp`; clients using `npx -y` pick up the new release.
+The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `morya-ui-mcp`; clients using `npx -y` pick up the new release.
 
-Implementation notes live in [packages/ui-mcp/README.md](https://github.com/wise-kit/wise-kit-ui/tree/main/packages/ui-mcp).
+Implementation notes live in [packages/ui-mcp/README.md](https://github.com/morya-space/morya-ui/tree/main/packages/ui-mcp).
 
 ## Next steps
 

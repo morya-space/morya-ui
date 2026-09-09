@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTheme } from '@wise-kit/ui'
+import { useTheme } from 'morya-ui'
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import {
@@ -149,7 +149,7 @@ const activeSection = computed(() => {
 <style scoped>
 .site-header {
   align-items: center;
-  background: color-mix(in srgb, var(--wk-color-surface) 72%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
   border-bottom: 1px solid var(--docs-edge);
   display: grid;
   flex: 0 0 auto;
@@ -166,7 +166,7 @@ const activeSection = computed(() => {
 
 .site-brand {
   align-items: center;
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
   display: inline-flex;
   gap: 0.75rem;
   text-decoration: none;
@@ -175,7 +175,7 @@ const activeSection = computed(() => {
 
 .site-brand__logo {
   border-radius: 0.55rem;
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--wk-color-primary) 28%, transparent);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--m-color-primary) 28%, transparent);
   display: block;
   flex: 0 0 auto;
   height: 2rem;
@@ -196,7 +196,7 @@ const activeSection = computed(() => {
 }
 
 .site-brand__version {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.62rem;
   font-weight: 500;
@@ -205,7 +205,7 @@ const activeSection = computed(() => {
 
 .site-nav {
   align-items: center;
-  background: color-mix(in srgb, var(--wk-color-surface) 55%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 55%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 999px;
   display: flex;
@@ -216,25 +216,25 @@ const activeSection = computed(() => {
 
 .site-nav__link {
   border-radius: 999px;
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.84rem;
   font-weight: 600;
   padding: 0.42rem 0.95rem;
   text-decoration: none;
   transition:
-    color var(--wk-motion-fast) var(--wk-motion-ease),
-    background var(--wk-motion-fast) var(--wk-motion-ease),
-    box-shadow var(--wk-motion-fast) var(--wk-motion-ease);
+    color var(--m-motion-fast) var(--m-motion-ease),
+    background var(--m-motion-fast) var(--m-motion-ease),
+    box-shadow var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .site-nav__link:hover {
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
 }
 
 .site-nav__link.is-active {
-  background: color-mix(in srgb, var(--wk-color-primary) 16%, var(--wk-color-surface));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--wk-color-primary) 30%, transparent);
-  color: var(--wk-color-primary);
+  background: color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--m-color-primary) 30%, transparent);
+  color: var(--m-color-primary);
 }
 
 .site-header__actions {
@@ -245,7 +245,7 @@ const activeSection = computed(() => {
 }
 
 .site-lang {
-  background: color-mix(in srgb, var(--wk-color-surface) 70%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 0.65rem;
   display: inline-flex;
@@ -257,7 +257,7 @@ const activeSection = computed(() => {
   background: transparent;
   border: 0;
   border-radius: 0.5rem;
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   cursor: pointer;
   font-family: var(--docs-mono);
   font-size: 0.68rem;
@@ -268,35 +268,35 @@ const activeSection = computed(() => {
 }
 
 .site-lang__btn:hover {
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
 }
 
 .site-lang__btn.is-active {
-  background: color-mix(in srgb, var(--wk-color-primary) 16%, var(--wk-color-surface));
-  color: var(--wk-color-primary);
+  background: color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface));
+  color: var(--m-color-primary);
 }
 
 .site-icon-btn {
   align-items: center;
-  background: color-mix(in srgb, var(--wk-color-surface) 70%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 0.65rem;
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
   cursor: pointer;
   display: inline-flex;
   height: 2.2rem;
   justify-content: center;
   text-decoration: none;
   transition:
-    border-color var(--wk-motion-fast) var(--wk-motion-ease),
-    color var(--wk-motion-fast) var(--wk-motion-ease),
-    transform var(--wk-motion-fast) var(--wk-motion-ease);
+    border-color var(--m-motion-fast) var(--m-motion-ease),
+    color var(--m-motion-fast) var(--m-motion-ease),
+    transform var(--m-motion-fast) var(--m-motion-ease);
   width: 2.2rem;
 }
 
 .site-icon-btn:hover {
-  border-color: color-mix(in srgb, var(--wk-color-primary) 45%, var(--wk-color-border));
-  color: var(--wk-color-primary);
+  border-color: color-mix(in srgb, var(--m-color-primary) 45%, var(--m-color-border));
+  color: var(--m-color-primary);
   transform: translateY(-1px);
 }
 
@@ -305,7 +305,7 @@ const activeSection = computed(() => {
 }
 
 .site-icon-btn--npm:hover {
-  border-color: color-mix(in srgb, #cb3837 45%, var(--wk-color-border));
+  border-color: color-mix(in srgb, #cb3837 45%, var(--m-color-border));
   color: #cb3837;
 }
 

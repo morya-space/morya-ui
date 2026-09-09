@@ -1,8 +1,8 @@
-import type { WkSizeInput, WkTagSeverity } from '../../shared/types'
+import type { MSizeInput, MTagSeverity } from '../../shared/types'
 
-export type BadgeSeverity = WkTagSeverity | 'warning'
+export type BadgeSeverity = MTagSeverity | 'warning'
 
-export type BadgeSize = WkSizeInput
+export type BadgeSize = MSizeInput
 
 export type BadgeOffset = [number, number]
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import WkIcon from '../Icon/Icon.vue'
+import { useMLocale } from '../../locale'
+import MIcon from '../Icon/Icon.vue'
 import { ajaxUpload } from './ajax'
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
@@ -38,7 +38,7 @@ const inputRef = ref<HTMLInputElement | null>(null)
 const items = ref<FileUploadFile[]>([])
 const dragOver = ref(false)
 const requests = new Map<string, XMLHttpRequest>()
-const locale = useWkLocale()
+const locale = useMLocale()
 const chooseText = computed(() => props.chooseLabel ?? locale.value.chooseFile)
 const isPictureCard = computed(() => props.listType === 'picture-card')
 const isPicture = computed(() => props.listType === 'picture' || isPictureCard.value)
@@ -56,12 +56,12 @@ const showSubmit = computed(
 const showToolbar = computed(() => items.value.length > 0 && props.showFileList)
 
 const rootClass = computed(() => [
-  'wk-fileupload',
-  `wk-fileupload--${props.mode}`,
-  `wk-fileupload--${props.listType}`,
+  'm-fileupload',
+  `m-fileupload--${props.mode}`,
+  `m-fileupload--${props.listType}`,
   {
-    'wk-fileupload--disabled': props.disabled,
-    'wk-fileupload--drag': props.drag,
+    'm-fileupload--disabled': props.disabled,
+    'm-fileupload--drag': props.drag,
   },
 ])
 
@@ -81,7 +81,7 @@ watch(
 
 function nextUid() {
   uidSeed += 1
-  return `wk-upload-${Date.now()}-${uidSeed}`
+  return `m-upload-${Date.now()}-${uidSeed}`
 }
 
 function commit(next: FileUploadFile[]) {
@@ -340,7 +340,7 @@ defineExpose({
   <div :class="rootClass">
     <input
       ref="inputRef"
-      class="wk-fileupload__input"
+      class="m-fileupload__input"
       type="file"
       :multiple="multiple || directory"
       :accept="accept"
@@ -351,8 +351,8 @@ defineExpose({
 
     <div
       v-if="drag && showTrigger"
-      class="wk-fileupload__dragger"
-      :class="{ 'wk-fileupload__dragger--over': dragOver }"
+      class="m-fileupload__dragger"
+      :class="{ 'm-fileupload__dragger--over': dragOver }"
       role="button"
       tabindex="0"
       :aria-disabled="disabled || undefined"
@@ -365,8 +365,8 @@ defineExpose({
       @drop="onDrop"
     >
       <slot>
-        <WkIcon class="wk-fileupload__icon" name="upload" />
-        <p class="wk-fileupload__text">
+        <MIcon class="m-fileupload__icon" name="upload" />
+        <p class="m-fileupload__text">
           {{ locale.dropFileHere }}
           <em>{{ locale.clickToUpload }}</em>
         </p>
@@ -376,7 +376,7 @@ defineExpose({
     <button
       v-else-if="showTrigger && $slots.trigger"
       type="button"
-      class="wk-fileupload__choose wk-fileupload__choose--slot"
+      class="m-fileupload__choose wk-fileupload__choose--slot"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
@@ -385,69 +385,69 @@ defineExpose({
     <button
       v-else-if="showTrigger"
       type="button"
-      class="wk-fileupload__choose"
+      class="m-fileupload__choose"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
       {{ chooseText }}
     </button>
 
-    <div v-if="$slots.tip" class="wk-fileupload__tip">
+    <div v-if="$slots.tip" class="m-fileupload__tip">
       <slot name="tip" />
     </div>
 
-    <ul v-if="showList && !isPictureCard" class="wk-fileupload__list">
+    <ul v-if="showList && !isPictureCard" class="m-fileupload__list">
       <li
         v-for="file in items"
         :key="file.uid"
-        class="wk-fileupload__file"
-        :class="[`wk-fileupload__file--${file.status}`, { 'wk-fileupload__file--picture': isPicture }]"
+        class="m-fileupload__file"
+        :class="[`m-fileupload__file--${file.status}`, { 'm-fileupload__file--picture': isPicture }]"
       >
         <slot name="file" :file="file">
-          <div class="wk-fileupload__file-body">
+          <div class="m-fileupload__file-body">
             <img
               v-if="isPicture && file.url && isImageFile(file)"
-              class="wk-fileupload__thumb"
+              class="m-fileupload__thumb"
               :src="file.url"
               :alt="file.name"
               @click="previewFile(file)"
             >
-            <span class="wk-fileupload__name">{{ file.name }}</span>
-            <span v-if="file.size != null" class="wk-fileupload__size">{{ formatSize(file.size) }}</span>
-            <span v-if="file.status === 'fail'" class="wk-fileupload__status">{{ file.error || locale.uploadFailed }}</span>
-            <span class="wk-fileupload__actions">
+            <span class="m-fileupload__name">{{ file.name }}</span>
+            <span v-if="file.size != null" class="m-fileupload__size">{{ formatSize(file.size) }}</span>
+            <span v-if="file.status === 'fail'" class="m-fileupload__status">{{ file.error || locale.uploadFailed }}</span>
+            <span class="m-fileupload__actions">
               <button
                 v-if="file.url && isImageFile(file)"
                 type="button"
-                class="wk-fileupload__action"
+                class="m-fileupload__action"
                 :aria-label="locale.previewFile"
                 @click="previewFile(file)"
               >
-                <WkIcon name="eye" size="sm" />
+                <MIcon name="eye" size="sm" />
               </button>
               <button
                 v-if="file.status === 'fail'"
                 type="button"
-                class="wk-fileupload__action"
+                class="m-fileupload__action"
                 :aria-label="locale.retryUpload"
                 @click="uploadOne(file)"
               >
-                <WkIcon name="refresh" size="sm" />
+                <MIcon name="refresh" size="sm" />
               </button>
               <button
                 type="button"
-                class="wk-fileupload__action"
+                class="m-fileupload__action"
                 :aria-label="locale.removeFile"
                 :disabled="disabled"
                 @click="removeFile(file)"
               >
-                <WkIcon name="trash" size="sm" />
+                <MIcon name="trash" size="sm" />
               </button>
             </span>
           </div>
           <div
             v-if="file.status === 'uploading'"
-            class="wk-fileupload__progress"
+            class="m-fileupload__progress"
             role="progressbar"
             :aria-valuemin="0"
             :aria-valuemax="100"
@@ -460,8 +460,8 @@ defineExpose({
 
     <div
       v-if="isPictureCard"
-      class="wk-fileupload__cards"
-      :class="{ 'wk-fileupload__cards--over': dragOver }"
+      class="m-fileupload__cards"
+      :class="{ 'm-fileupload__cards--over': dragOver }"
       @dragenter="onDragOver"
       @dragover="onDragOver"
       @dragleave="onDragLeave"
@@ -470,48 +470,48 @@ defineExpose({
       <div
         v-for="file in showFileList ? items : []"
         :key="file.uid"
-        class="wk-fileupload__card"
-        :class="`wk-fileupload__card--${file.status}`"
+        class="m-fileupload__card"
+        :class="`m-fileupload__card--${file.status}`"
       >
         <slot name="file" :file="file">
           <img
             v-if="file.url && isImageFile(file)"
-            class="wk-fileupload__card-image"
+            class="m-fileupload__card-image"
             :src="file.url"
             :alt="file.name"
             @click="previewFile(file)"
           >
-          <span v-else class="wk-fileupload__card-name">{{ file.name }}</span>
-          <div v-if="file.status === 'uploading'" class="wk-fileupload__card-progress">
+          <span v-else class="m-fileupload__card-name">{{ file.name }}</span>
+          <div v-if="file.status === 'uploading'" class="m-fileupload__card-progress">
             {{ Math.round(file.percentage ?? 0) }}%
           </div>
-          <div v-else class="wk-fileupload__card-mask">
+          <div v-else class="m-fileupload__card-mask">
             <button
               v-if="file.url && isImageFile(file)"
               type="button"
-              class="wk-fileupload__action"
+              class="m-fileupload__action"
               :aria-label="locale.previewFile"
               @click="previewFile(file)"
             >
-              <WkIcon name="eye" size="sm" />
+              <MIcon name="eye" size="sm" />
             </button>
             <button
               v-if="file.status === 'fail'"
               type="button"
-              class="wk-fileupload__action"
+              class="m-fileupload__action"
               :aria-label="locale.retryUpload"
               @click="uploadOne(file)"
             >
-              <WkIcon name="refresh" size="sm" />
+              <MIcon name="refresh" size="sm" />
             </button>
             <button
               type="button"
-              class="wk-fileupload__action"
+              class="m-fileupload__action"
               :aria-label="locale.removeFile"
               :disabled="disabled"
               @click="removeFile(file)"
             >
-              <WkIcon name="trash" size="sm" />
+              <MIcon name="trash" size="sm" />
             </button>
           </div>
         </slot>
@@ -519,19 +519,19 @@ defineExpose({
       <button
         v-if="canAdd"
         type="button"
-        class="wk-fileupload__card wk-fileupload__card--add"
+        class="m-fileupload__card wk-fileupload__card--add"
         :aria-label="locale.addFile"
         @click="openPicker"
       >
-        <WkIcon name="plus" />
+        <MIcon name="plus" />
       </button>
     </div>
 
-    <div v-if="showToolbar" class="wk-fileupload__toolbar">
-      <button v-if="showSubmit" type="button" class="wk-fileupload__choose" @click="submit">
+    <div v-if="showToolbar" class="m-fileupload__toolbar">
+      <button v-if="showSubmit" type="button" class="m-fileupload__choose" @click="submit">
         {{ locale.uploadFile }}
       </button>
-      <button type="button" class="wk-fileupload__clear" @click="clearFiles">
+      <button type="button" class="m-fileupload__clear" @click="clearFiles">
         {{ locale.clear }}
       </button>
     </div>

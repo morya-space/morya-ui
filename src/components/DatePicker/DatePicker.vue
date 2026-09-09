@@ -7,12 +7,12 @@ import type {
   DatePickerValue,
 } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { formatLocale, useWkLocale } from '../../locale'
-import { useConfiguredSize, useWkConfig } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
+import { formatLocale, useMLocale } from '../../locale'
+import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
@@ -31,8 +31,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 })
 const emit = defineEmits<DatePickerEmits>()
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const sizeClass = useConfiguredSize('DatePicker', () => props.size)
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -45,7 +45,7 @@ const viewMonth = ref(new Date().getMonth())
 const activeDate = ref(startOfDay(new Date()))
 const rangeDraft = ref<Date | null>(null)
 const hoverDate = ref<Date | null>(null)
-const autoFieldId = useWkId('wk-datepicker')
+const autoFieldId = useMId('m-datepicker')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const panelId = computed(() => `${fieldId.value}-panel`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -182,14 +182,14 @@ function buildCell(date: Date, inMonth: boolean) {
 }
 
 const rootClass = computed(() => [
-  'wk-datepicker',
-  `wk-datepicker--${sizeClass.value}`,
+  'm-datepicker',
+  `m-datepicker--${sizeClass.value}`,
   {
-    'wk-datepicker--fluid': props.fluid,
-    'wk-datepicker--disabled': props.disabled,
-    'wk-datepicker--invalid': props.invalid,
-    'wk-datepicker--open': open.value,
-    'wk-datepicker--range': isRange.value,
+    'm-datepicker--fluid': props.fluid,
+    'm-datepicker--disabled': props.disabled,
+    'm-datepicker--invalid': props.invalid,
+    'm-datepicker--open': open.value,
+    'm-datepicker--range': isRange.value,
   },
 ])
 
@@ -318,7 +318,7 @@ function isActiveDay(date: Date): boolean {
 
 function focusActiveDay() {
   panel.value
-    ?.querySelector<HTMLElement>(`[data-wk-date="${toIso(activeDate.value)}"]`)
+    ?.querySelector<HTMLElement>(`[data-m-date="${toIso(activeDate.value)}"]`)
     ?.focus({ preventScroll: true })
 }
 
@@ -396,13 +396,13 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="root" :class="rootClass">
-    <label v-if="label" class="wk-datepicker__label" :for="fieldId">{{ label }}</label>
-    <div ref="triggerEl" class="wk-datepicker__control">
+    <label v-if="label" class="m-datepicker__label" :for="fieldId">{{ label }}</label>
+    <div ref="triggerEl" class="m-datepicker__control">
       <slot name="trigger" :value="displayValue" :open="open">
         <input
           :id="fieldId"
           ref="inputEl"
-          class="wk-datepicker__input"
+          class="m-datepicker__input"
           type="text"
           role="combobox"
           readonly
@@ -421,64 +421,64 @@ onBeforeUnmount(() => {
         <button
           v-if="clearable && displayValue"
           type="button"
-          class="wk-datepicker__clear"
+          class="m-datepicker__clear"
           :aria-label="locale.clearDate"
           :disabled="disabled"
           @click.stop="clear"
         >
-          <WkIcon name="close" size="sm" />
+          <MIcon name="close" size="sm" />
         </button>
       </slot>
     </div>
     <p
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="wk-datepicker__help"
-      :class="{ 'wk-datepicker__help--invalid': feedbackIsError }"
+      class="m-datepicker__help"
+      :class="{ 'm-datepicker__help--invalid': feedbackIsError }"
     >
       {{ feedbackText }}
     </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wk-scale-fade">
+      <Transition name="m-scale-fade">
         <div
           v-if="open"
           ref="panel"
-          class="wk-datepicker__panel"
+          class="m-datepicker__panel"
           :class="{
-            'wk-datepicker__panel--teleported': teleported,
-            'wk-datepicker__panel--with-shortcuts': shortcuts.length,
+            'm-datepicker__panel--teleported': teleported,
+            'm-datepicker__panel--with-shortcuts': shortcuts.length,
           }"
           :style="teleported ? panelStyle : undefined"
           :id="panelId"
           role="dialog"
           :aria-label="locale.datePicker"
         >
-          <div v-if="shortcuts.length" class="wk-datepicker__shortcuts">
+          <div v-if="shortcuts.length" class="m-datepicker__shortcuts">
             <button
               v-for="shortcut in shortcuts"
               :key="shortcut.label"
               type="button"
-              class="wk-datepicker__shortcut"
+              class="m-datepicker__shortcut"
               @click="applyShortcut(shortcut)"
             >
               {{ shortcut.label }}
             </button>
           </div>
-          <div class="wk-datepicker__calendar">
-            <div class="wk-datepicker__header">
-              <button type="button" class="wk-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
-                <WkIcon name="chevron-left" size="sm" />
+          <div class="m-datepicker__calendar">
+            <div class="m-datepicker__header">
+              <button type="button" class="m-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
+                <MIcon name="chevron-left" size="sm" />
               </button>
-              <span class="wk-datepicker__month">{{ monthLabel }}</span>
-              <button type="button" class="wk-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
-                <WkIcon name="chevron-right" size="sm" />
+              <span class="m-datepicker__month">{{ monthLabel }}</span>
+              <button type="button" class="m-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
+                <MIcon name="chevron-right" size="sm" />
               </button>
             </div>
-            <div class="wk-datepicker__weekdays" aria-hidden="true">
+            <div class="m-datepicker__weekdays" aria-hidden="true">
               <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>
             </div>
             <div
-              class="wk-datepicker__grid"
+              class="m-datepicker__grid"
               role="grid"
               :aria-label="monthLabel"
               @keydown="onGridKeydown"
@@ -487,17 +487,17 @@ onBeforeUnmount(() => {
                 v-for="cell in calendarDays"
                 :key="cell.date.toISOString()"
                 type="button"
-                class="wk-datepicker__day"
+                class="m-datepicker__day"
                 :class="{
-                  'wk-datepicker__day--other': !cell.inMonth,
-                  'wk-datepicker__day--selected': cell.selected,
-                  'wk-datepicker__day--in-range': cell.inRange,
-                  'wk-datepicker__day--range-start': cell.rangeStart,
-                  'wk-datepicker__day--range-end': cell.rangeEnd,
+                  'm-datepicker__day--other': !cell.inMonth,
+                  'm-datepicker__day--selected': cell.selected,
+                  'm-datepicker__day--in-range': cell.inRange,
+                  'm-datepicker__day--range-start': cell.rangeStart,
+                  'm-datepicker__day--range-end': cell.rangeEnd,
                 }"
                 role="gridcell"
                 :aria-selected="cell.selected"
-                :data-wk-date="toIso(cell.date)"
+                :data-m-date="toIso(cell.date)"
                 :tabindex="isActiveDay(cell.date) && !cell.disabled ? 0 : -1"
                 :disabled="cell.disabled"
                 @click="pick(cell.date, cell.disabled)"

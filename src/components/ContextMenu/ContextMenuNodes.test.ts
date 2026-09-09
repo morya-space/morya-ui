@@ -7,7 +7,7 @@ describe('ContextMenuNodes', () => {
     const wrapper = mount(ContextMenuNodes, {
       props: { items: [{ label: 'Copy' }, { label: 'Paste' }] },
     })
-    await wrapper.findAll('.wk-contextmenu__item')[1]!.trigger('click')
+    await wrapper.findAll('.m-contextmenu__item')[1]!.trigger('click')
     expect(wrapper.emitted('activate')?.[0]?.[0]).toMatchObject({ label: 'Paste' })
   })
 
@@ -17,7 +17,7 @@ describe('ContextMenuNodes', () => {
         items: [{ label: 'Share', items: [{ label: 'Email' }] }],
       },
     })
-    await wrapper.get('.wk-contextmenu__submenu-wrap').trigger('mouseenter')
-    expect(wrapper.find('.wk-contextmenu__submenu').exists()).toBe(true)
+    await wrapper.get('.m-contextmenu__submenu-wrap').trigger('mouseenter')
+    expect(wrapper.find('.m-contextmenu__submenu').exists()).toBe(true)
   })
 })

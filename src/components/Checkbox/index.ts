@@ -1,6 +1,6 @@
 import './style'
-export { default as WkCheckbox } from './Checkbox.vue'
-export { default as WkCheckboxGroup } from './CheckboxGroup.vue'
+export { default as MCheckbox } from './Checkbox.vue'
+export { default as MCheckboxGroup } from './CheckboxGroup.vue'
 export type {
   CheckboxEmits,
   CheckboxGroupEmits,

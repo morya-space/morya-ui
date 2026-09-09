@@ -11,24 +11,24 @@ Wraps content and shows a mask when `blocked` is true.
 ## Import
 
 ```ts
-import { WkBlockUI } from '@wise-kit/ui'
+import { MBlockUI } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkBlockUI, WkButton } from '@wise-kit/ui'
+import { MBlockUI, MButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const blocked = ref(false)
 </script>
 
 <template>
-  <WkButton :label="blocked ? 'Unblock' : 'Block'" @click="blocked = !blocked" />
-  <WkBlockUI :blocked="blocked" style="margin-top: 1rem">
+  <MButton :label="blocked ? 'Unblock' : 'Block'" @click="blocked = !blocked" />
+  <MBlockUI :blocked="blocked" style="margin-top: 1rem">
     <p>Panel content</p>
-  </WkBlockUI>
+  </MBlockUI>
 </template>
 ```
 

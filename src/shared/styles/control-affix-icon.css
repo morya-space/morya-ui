@@ -1,110 +1,110 @@
 /* Normalize inline icons inside compact control affordances (clear, toggle, chevrons). */
-.wk-input__clear,
-.wk-password__clear,
-.wk-password__toggle,
-.wk-textarea__clear,
-.wk-select__clear,
-.wk-select__indicator,
-.wk-autocomplete__clear,
-.wk-autocomplete__dropdown,
-.wk-datepicker__clear,
-.wk-datepicker__nav,
-.wk-inputnumber__clear,
-.wk-inputnumber__button,
-.wk-inputtags__remove,
-.wk-treeselect__clear,
-.wk-treeselect__indicator,
-.wk-cascadeselect__clear,
-.wk-cascadeselect__indicator {
-    --wk-affix-icon-size: 1rem;
+.m-input__clear,
+.m-password__clear,
+.m-password__toggle,
+.m-textarea__clear,
+.m-select__clear,
+.m-select__indicator,
+.m-autocomplete__clear,
+.m-autocomplete__dropdown,
+.m-datepicker__clear,
+.m-datepicker__nav,
+.m-inputnumber__clear,
+.m-inputnumber__button,
+.m-inputtags__remove,
+.m-treeselect__clear,
+.m-treeselect__indicator,
+.m-cascadeselect__clear,
+.m-cascadeselect__indicator {
+    --m-affix-icon-size: 1rem;
 }
 
-.wk-input-field__control:has(.wk-input--small) .wk-input__clear,
-.wk-password--small .wk-password__clear,
-.wk-password--small .wk-password__toggle,
-.wk-textarea-field__control:has(.wk-textarea--small) .wk-textarea__clear,
-.wk-select__control:has(.wk-select--small) .wk-select__clear,
-.wk-select__control:has(.wk-select--small) .wk-select__indicator,
-.wk-autocomplete--small .wk-autocomplete__clear,
-.wk-autocomplete--small .wk-autocomplete__dropdown,
-.wk-datepicker--small .wk-datepicker__clear,
-.wk-datepicker--small .wk-datepicker__nav,
-.wk-inputnumber--small .wk-inputnumber__clear,
-.wk-inputnumber--small .wk-inputnumber__button,
-.wk-select__control:has(.wk-treeselect--small) .wk-treeselect__clear,
-.wk-select__control:has(.wk-treeselect--small) .wk-treeselect__indicator,
-.wk-select__control:has(.wk-cascadeselect--small) .wk-cascadeselect__clear,
-.wk-select__control:has(.wk-cascadeselect--small) .wk-cascadeselect__indicator {
-    --wk-affix-icon-size: 0.875rem;
+.m-input-field__control:has(.m-input--small) .m-input__clear,
+.m-password--small .m-password__clear,
+.m-password--small .m-password__toggle,
+.m-textarea-field__control:has(.m-textarea--small) .m-textarea__clear,
+.m-select__control:has(.m-select--small) .m-select__clear,
+.m-select__control:has(.m-select--small) .m-select__indicator,
+.m-autocomplete--small .m-autocomplete__clear,
+.m-autocomplete--small .m-autocomplete__dropdown,
+.m-datepicker--small .m-datepicker__clear,
+.m-datepicker--small .m-datepicker__nav,
+.m-inputnumber--small .m-inputnumber__clear,
+.m-inputnumber--small .m-inputnumber__button,
+.m-select__control:has(.m-treeselect--small) .m-treeselect__clear,
+.m-select__control:has(.m-treeselect--small) .m-treeselect__indicator,
+.m-select__control:has(.m-cascadeselect--small) .m-cascadeselect__clear,
+.m-select__control:has(.m-cascadeselect--small) .m-cascadeselect__indicator {
+    --m-affix-icon-size: 0.875rem;
 }
 
-.wk-input-field__control:has(.wk-input--large) .wk-input__clear,
-.wk-password--large .wk-password__clear,
-.wk-password--large .wk-password__toggle,
-.wk-textarea-field__control:has(.wk-textarea--large) .wk-textarea__clear,
-.wk-select__control:has(.wk-select--large) .wk-select__clear,
-.wk-select__control:has(.wk-select--large) .wk-select__indicator,
-.wk-autocomplete--large .wk-autocomplete__clear,
-.wk-autocomplete--large .wk-autocomplete__dropdown,
-.wk-datepicker--large .wk-datepicker__clear,
-.wk-datepicker--large .wk-datepicker__nav,
-.wk-inputnumber--large .wk-inputnumber__clear,
-.wk-inputnumber--large .wk-inputnumber__button,
-.wk-select__control:has(.wk-treeselect--large) .wk-treeselect__clear,
-.wk-select__control:has(.wk-treeselect--large) .wk-treeselect__indicator,
-.wk-select__control:has(.wk-cascadeselect--large) .wk-cascadeselect__clear,
-.wk-select__control:has(.wk-cascadeselect--large) .wk-cascadeselect__indicator {
-    --wk-affix-icon-size: 1.125rem;
+.m-input-field__control:has(.m-input--large) .m-input__clear,
+.m-password--large .m-password__clear,
+.m-password--large .m-password__toggle,
+.m-textarea-field__control:has(.m-textarea--large) .m-textarea__clear,
+.m-select__control:has(.m-select--large) .m-select__clear,
+.m-select__control:has(.m-select--large) .m-select__indicator,
+.m-autocomplete--large .m-autocomplete__clear,
+.m-autocomplete--large .m-autocomplete__dropdown,
+.m-datepicker--large .m-datepicker__clear,
+.m-datepicker--large .m-datepicker__nav,
+.m-inputnumber--large .m-inputnumber__clear,
+.m-inputnumber--large .m-inputnumber__button,
+.m-select__control:has(.m-treeselect--large) .m-treeselect__clear,
+.m-select__control:has(.m-treeselect--large) .m-treeselect__indicator,
+.m-select__control:has(.m-cascadeselect--large) .m-cascadeselect__clear,
+.m-select__control:has(.m-cascadeselect--large) .m-cascadeselect__indicator {
+    --m-affix-icon-size: 1.125rem;
 }
 
-.wk-control-affix-icon,
-.wk-input__clear,
-.wk-password__clear,
-.wk-password__toggle,
-.wk-textarea__clear,
-.wk-autocomplete__clear,
-.wk-autocomplete__dropdown,
-.wk-datepicker__clear,
-.wk-datepicker__nav,
-.wk-inputnumber__clear,
-.wk-inputnumber__button,
-.wk-inputtags__remove,
-.wk-treeselect__clear,
-.wk-treeselect__indicator,
-.wk-cascadeselect__clear,
-.wk-cascadeselect__indicator {
+.m-control-affix-icon,
+.m-input__clear,
+.m-password__clear,
+.m-password__toggle,
+.m-textarea__clear,
+.m-autocomplete__clear,
+.m-autocomplete__dropdown,
+.m-datepicker__clear,
+.m-datepicker__nav,
+.m-inputnumber__clear,
+.m-inputnumber__button,
+.m-inputtags__remove,
+.m-treeselect__clear,
+.m-treeselect__indicator,
+.m-cascadeselect__clear,
+.m-cascadeselect__indicator {
     align-items: center;
     display: inline-flex;
     justify-content: center;
     line-height: 0;
 }
 
-.wk-control-affix-icon {
+.m-control-affix-icon {
     flex-shrink: 0;
-    height: var(--wk-affix-icon-size, 1rem);
-    width: var(--wk-affix-icon-size, 1rem);
+    height: var(--m-affix-icon-size, 1rem);
+    width: var(--m-affix-icon-size, 1rem);
 }
 
-.wk-input__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-password__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-password__toggle :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-textarea__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-select__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-select__indicator :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-autocomplete__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-autocomplete__dropdown :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-datepicker__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-datepicker__nav :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-inputnumber__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-inputnumber__button :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-inputtags__remove :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-treeselect__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-treeselect__indicator :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-cascadeselect__clear :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-cascadeselect__indicator :is(.wk-icon, .wk-control-affix-icon__graphic, svg),
-.wk-control-affix-icon :is(.wk-icon, .wk-control-affix-icon__graphic, svg) {
+.m-input__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-password__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-password__toggle :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-textarea__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-select__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-select__indicator :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-autocomplete__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-autocomplete__dropdown :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-datepicker__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-datepicker__nav :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-inputnumber__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-inputnumber__button :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-inputtags__remove :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-treeselect__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-treeselect__indicator :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-cascadeselect__clear :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-cascadeselect__indicator :is(.m-icon, .m-control-affix-icon__graphic, svg),
+.m-control-affix-icon :is(.m-icon, .m-control-affix-icon__graphic, svg) {
     display: block;
     flex-shrink: 0;
-    height: var(--wk-affix-icon-size, 1rem);
-    width: var(--wk-affix-icon-size, 1rem);
+    height: var(--m-affix-icon-size, 1rem);
+    width: var(--m-affix-icon-size, 1rem);
 }

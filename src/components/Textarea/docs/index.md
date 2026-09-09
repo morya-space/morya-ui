@@ -11,21 +11,21 @@ description: 多行文本输入。
 ## 引入
 
 ```ts
-import { WkTextarea } from '@wise-kit/ui'
+import { MTextarea } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkTextarea } from '@wise-kit/ui'
+import { MTextarea } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WkTextarea v-model="value" label="Notes" placeholder="Write something…" />
+  <MTextarea v-model="value" label="Notes" placeholder="Write something…" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkTextarea } from '@wise-kit/ui'
+import { MTextarea } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WkTextarea size="small" label="Small" rows="3" />
-    <WkTextarea variant="filled" label="Filled" rows="3" />
-    <WkTextarea size="large" fluid label="Large Fluid" rows="3" />
+    <MTextarea size="small" label="Small" rows="3" />
+    <MTextarea variant="filled" label="Filled" rows="3" />
+    <MTextarea size="large" fluid label="Large Fluid" rows="3" />
   </div>
 </template>
 ```
@@ -51,7 +51,7 @@ import { WkTextarea } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkTextarea } from '@wise-kit/ui'
+import { MTextarea } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('Line 1\nLine 2')
@@ -60,9 +60,9 @@ const limited = ref('Clamped height')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WkTextarea v-model="value" autosize label="Auto resize" />
-    <WkTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
-    <WkTextarea invalid label="Required" help-text="This field is required" model-value="" />
+    <MTextarea v-model="value" autosize label="Auto resize" />
+    <MTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
+    <MTextarea invalid label="Required" help-text="This field is required" model-value="" />
   </div>
 </template>
 ```
@@ -71,14 +71,14 @@ const limited = ref('Clamped height')
 
 ```vue preview
 <script setup lang="ts">
-import { WkTextarea } from '@wise-kit/ui'
+import { MTextarea } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('Draft notes')
 </script>
 
 <template>
-  <WkTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
+  <MTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
 </template>
 ```
 

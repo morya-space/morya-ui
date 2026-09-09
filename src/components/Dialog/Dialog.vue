@@ -2,14 +2,14 @@
 import type { IconName } from '../Icon/types'
 import type { DialogProps } from './types'
 import { computed, ref, toRef, useSlots, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useWkConfig } from '../../shared/config'
+import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WkButton from '../Button/Button.vue'
-import WkIcon from '../Icon/Icon.vue'
+import MButton from '../Button/Button.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
@@ -30,8 +30,8 @@ const emit = defineEmits<{
   (event: 'unmaximize'): void
 }>()
 const slots = useSlots()
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const dialogElement = ref<HTMLElement | null>(null)
 const maximized = ref(false)
 const origin = ref(getLastPointer())
@@ -65,8 +65,8 @@ const showFooter = computed(() => Boolean(slots.footer || showPresetFooter.value
 const busy = computed(() => pending.value != null)
 const dialogAriaLabel = computed(() => props.ariaLabel ?? dialogTitle.value)
 const backdropStyle = computed(() => ({
-  '--wk-dialog-origin-x': `${origin.value.x}px`,
-  '--wk-dialog-origin-y': `${origin.value.y}px`,
+  '--m-dialog-origin-x': `${origin.value.x}px`,
+  '--m-dialog-origin-y': `${origin.value.y}px`,
 }))
 const isDismissableMask = computed(() => {
   if (props.dismissableMask !== undefined) return props.dismissableMask
@@ -163,26 +163,26 @@ defineExpose({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wk-dialog">
+    <Transition name="m-dialog">
       <div
         v-if="modelValue"
-        class="wk-dialog-backdrop"
+        class="m-dialog-backdrop"
         :class="[
-          `wk-dialog-backdrop--${position}`,
+          `m-dialog-backdrop--${position}`,
           {
-            'wk-dialog-backdrop--modal': modal,
-            'wk-dialog-backdrop--maximized': maximized,
+            'm-dialog-backdrop--modal': modal,
+            'm-dialog-backdrop--maximized': maximized,
           },
         ]"
         :style="backdropStyle"
       >
-        <div class="wk-dialog-zoom" @click.self="onOutsideClick">
+        <div class="m-dialog-zoom" @click.self="onOutsideClick">
           <section
             ref="dialogElement"
-            class="wk-dialog"
+            class="m-dialog"
             :class="{
-              'wk-dialog--maximized': maximized,
-              [`wk-dialog--${resolvedType}`]: resolvedType,
+              'm-dialog--maximized': maximized,
+              [`m-dialog--${resolvedType}`]: resolvedType,
             }"
             :style="width && !maximized ? { width } : undefined"
             role="dialog"
@@ -190,10 +190,10 @@ defineExpose({
             :aria-label="dialogAriaLabel"
             tabindex="-1"
           >
-            <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="wk-dialog__header">
-              <div class="wk-dialog__heading">
-                <span v-if="typeIcon" class="wk-dialog__type-icon" aria-hidden="true">
-                  <WkIcon :name="typeIcon" size="sm" />
+            <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="m-dialog__header">
+              <div class="m-dialog__heading">
+                <span v-if="typeIcon" class="m-dialog__type-icon" aria-hidden="true">
+                  <MIcon :name="typeIcon" size="sm" />
                 </span>
                 <slot name="header">
                   <h2 v-if="dialogTitle">
@@ -201,39 +201,39 @@ defineExpose({
                   </h2>
                 </slot>
               </div>
-              <div v-if="maximizable || closable" class="wk-dialog__actions">
+              <div v-if="maximizable || closable" class="m-dialog__actions">
                 <button
                   v-if="maximizable"
                   type="button"
-                  class="wk-dialog__action"
+                  class="m-dialog__action"
                   :aria-label="maximized ? locale.restore : locale.maximize"
                   :disabled="busy"
                   @click="toggleMaximize"
                 >
-                  <WkIcon :name="maximized ? 'restore' : 'maximize'" size="sm" />
+                  <MIcon :name="maximized ? 'restore' : 'maximize'" size="sm" />
                 </button>
                 <button
                   v-if="closable"
                   type="button"
-                  class="wk-dialog__action"
+                  class="m-dialog__action"
                   :aria-label="locale.close"
                   :disabled="busy"
                   @click="dismiss"
                 >
-                  <WkIcon name="close" size="sm" />
+                  <MIcon name="close" size="sm" />
                 </button>
               </div>
             </header>
-            <div class="wk-dialog__body">
+            <div class="m-dialog__body">
               <slot />
             </div>
             <footer
               v-if="showFooter"
-              class="wk-dialog__footer"
-              :class="{ 'wk-dialog__footer--preset': showPresetFooter }"
+              class="m-dialog__footer"
+              :class="{ 'm-dialog__footer--preset': showPresetFooter }"
             >
               <slot name="footer">
-                <WkButton
+                <MButton
                   v-if="negativeText"
                   :label="negativeText"
                   severity="secondary"
@@ -241,7 +241,7 @@ defineExpose({
                   :loading="pending === 'negative'"
                   @click="onNegative"
                 />
-                <WkButton
+                <MButton
                   v-if="positiveText"
                   :label="positiveText"
                   :severity="positiveSeverity"

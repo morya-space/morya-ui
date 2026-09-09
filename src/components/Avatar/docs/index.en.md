@@ -11,43 +11,43 @@ Avatar displays a user or entity identity. Display priority: `image` > `icon` > 
 ## Import
 
 ```ts
-import { WkAvatar } from '@wise-kit/ui'
+import { MAvatar } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkAvatar } from '@wise-kit/ui'
+import { MAvatar } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkAvatar label="AB" />
-    <WkAvatar icon="check" />
-    <WkAvatar label="SQ" shape="square" />
-    <WkAvatar label="LG" size="large" />
-    <WkAvatar label="XL" size="xlarge" />
+    <MAvatar label="AB" />
+    <MAvatar icon="check" />
+    <MAvatar label="SQ" shape="square" />
+    <MAvatar label="LG" size="large" />
+    <MAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WkAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
+`MAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
 
 ```vue preview
 <script setup lang="ts">
-import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
+import { MAvatar, MAvatarGroup } from 'morya-ui'
 </script>
 
 <template>
-  <WkAvatarGroup :max="3">
-    <WkAvatar label="AL" />
-    <WkAvatar label="BK" />
-    <WkAvatar label="CN" />
-    <WkAvatar label="DY" />
-  </WkAvatarGroup>
+  <MAvatarGroup :max="3">
+    <MAvatar label="AL" />
+    <MAvatar label="BK" />
+    <MAvatar label="CN" />
+    <MAvatar label="DY" />
+  </MAvatarGroup>
 </template>
 ```
 
@@ -57,7 +57,7 @@ import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | Text fallback when there is no image or icon. |
 | `image` | `string` | — | Image URL; highest priority. |
-| `icon` | `IconName` | — | `WkIcon` icon name. |
+| `icon` | `IconName` | — | `MIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |
 
@@ -67,7 +67,7 @@ import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
 | --- | --- | --- |
 | `error` | `Event` | Image failed to load. |
 
-`WkAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
+`MAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
 
 ## Slots
 

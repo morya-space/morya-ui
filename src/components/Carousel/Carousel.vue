@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { CarouselProps } from './types'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import WkIcon from '../Icon/Icon.vue'
+import { useMLocale } from '../../locale'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   numVisible: 1,
@@ -19,7 +19,7 @@ const emit = defineEmits<{
 
 const innerPage = ref(0)
 const page = computed(() => props.page ?? innerPage.value)
-const locale = useWkLocale()
+const locale = useMLocale()
 let timer: ReturnType<typeof setInterval> | null = null
 
 const maxPage = computed(() => Math.max(0, props.value.length - props.numVisible))
@@ -124,7 +124,7 @@ onBeforeUnmount(stopAutoplay)
 
 <template>
   <div
-    class="wk-carousel"
+    class="m-carousel"
     @keydown="onKeydown"
     @mouseenter="stopAutoplay"
     @mouseleave="startAutoplay"
@@ -134,16 +134,16 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="wk-carousel__nav wk-carousel__nav--prev"
+      class="m-carousel__nav wk-carousel__nav--prev"
       :aria-label="locale.prev"
       :disabled="!circular && page <= 0"
       @click="prev"
     >
-      <WkIcon name="chevron-left" size="sm" />
+      <MIcon name="chevron-left" size="sm" />
     </button>
-    <div class="wk-carousel__main">
+    <div class="m-carousel__main">
       <div
-        class="wk-carousel__viewport"
+        class="m-carousel__viewport"
         @pointerdown="onPointerDown"
         @pointerup="onPointerUp"
         @pointercancel="onPointerCancel"
@@ -151,7 +151,7 @@ onBeforeUnmount(stopAutoplay)
         <div
           v-for="entry in visibleItems"
           :key="entry.index"
-          class="wk-carousel__item"
+          class="m-carousel__item"
           :style="{ flex: `0 0 ${100 / numVisible}%` }"
         >
           <slot name="item" :item="entry.item" :index="entry.index">
@@ -159,13 +159,13 @@ onBeforeUnmount(stopAutoplay)
           </slot>
         </div>
       </div>
-      <div v-if="showIndicators && pages.length > 1" class="wk-carousel__indicators">
+      <div v-if="showIndicators && pages.length > 1" class="m-carousel__indicators">
         <button
           v-for="index in pages"
           :key="index"
           type="button"
-          class="wk-carousel__indicator"
-          :class="{ 'wk-carousel__indicator--active': index === page }"
+          class="m-carousel__indicator"
+          :class="{ 'm-carousel__indicator--active': index === page }"
           :aria-label="indicatorLabel(index)"
           :aria-current="index === page ? 'true' : undefined"
           @click="go(index)"
@@ -175,12 +175,12 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="wk-carousel__nav wk-carousel__nav--next"
+      class="m-carousel__nav wk-carousel__nav--next"
       :aria-label="locale.next"
       :disabled="!circular && page >= maxPage"
       @click="next"
     >
-      <WkIcon name="chevron-right" size="sm" />
+      <MIcon name="chevron-right" size="sm" />
     </button>
   </div>
 </template>

@@ -1,8 +1,8 @@
-export type WkLocaleName = 'zh-CN' | 'en-US'
+export type MLocaleName = 'zh-CN' | 'en-US'
 
 /** Shared UI copy. Partial overrides merge onto the active language pack. */
-export interface WkLocaleConfig {
-  name?: WkLocaleName | (string & {})
+export interface MLocaleConfig {
+  name?: MLocaleName | (string & {})
   accept?: string
   reject?: string
   confirm?: string
@@ -112,8 +112,8 @@ export interface WkLocaleConfig {
   today?: string
 }
 
-export type WkLocaleMessages = Required<
-  Omit<WkLocaleConfig, 'name' | 'weekdays' | 'monthNames'>
+export type MLocaleMessages = Required<
+  Omit<MLocaleConfig, 'name' | 'weekdays' | 'monthNames'>
 > & {
   name: string
   weekdays: string[]

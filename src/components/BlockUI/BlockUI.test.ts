@@ -3,41 +3,41 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkBlockUI from './BlockUI.vue'
+import MBlockUI from './BlockUI.vue'
 
 const blockUiStyles = readFileSync(
   join(dirname(fileURLToPath(import.meta.url)), 'styles.css'),
   'utf8',
 )
 
-describe('wkBlockUI', () => {
+describe('muBlockUI', () => {
   it('renders default slot without overlay when not blocked', () => {
-    const wrapper = mount(WkBlockUI, { slots: { default: '<p>Content</p>' } })
+    const wrapper = mount(MBlockUI, { slots: { default: '<p>Content</p>' } })
     expect(wrapper.text()).toContain('Content')
-    expect(wrapper.find('.wk-blockui__overlay').exists()).toBe(false)
+    expect(wrapper.find('.m-blockui__overlay').exists()).toBe(false)
   })
 
   it('shows overlay when blocked', () => {
-    const wrapper = mount(WkBlockUI, {
+    const wrapper = mount(MBlockUI, {
       props: { blocked: true },
       slots: { default: '<p>Content</p>' },
     })
-    expect(wrapper.classes()).toContain('wk-blockui--blocked')
-    expect(wrapper.find('.wk-blockui__overlay').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('m-blockui--blocked')
+    expect(wrapper.find('.m-blockui__overlay').exists()).toBe(true)
   })
 
   it('marks content inert and busy when blocked', () => {
-    const wrapper = mount(WkBlockUI, {
+    const wrapper = mount(MBlockUI, {
       props: { blocked: true },
       slots: { default: '<button type="button">Action</button>' },
     })
-    const content = wrapper.find('.wk-blockui__content')
+    const content = wrapper.find('.m-blockui__content')
     expect(content.attributes('inert')).toBeDefined()
     expect(content.attributes('aria-busy')).toBe('true')
   })
 
   it('uses component z-index token on overlay', () => {
-    expect(blockUiStyles).toContain('--wk-blockui-z-index')
-    expect(blockUiStyles).toMatch(/z-index:\s*var\(--wk-blockui-z-index\)/)
+    expect(blockUiStyles).toContain('--m-blockui-z-index')
+    expect(blockUiStyles).toMatch(/z-index:\s*var\(--m-blockui-z-index\)/)
   })
 })

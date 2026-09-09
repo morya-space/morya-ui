@@ -11,21 +11,21 @@ Binary checkbox.
 ## Import
 
 ```ts
-import { WkCheckbox } from '@wise-kit/ui'
+import { MCheckbox } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkCheckbox } from '@wise-kit/ui'
+import { MCheckbox } from 'morya-ui'
 import { ref } from 'vue'
 
 const accepted = ref(false)
 </script>
 
 <template>
-  <WkCheckbox v-model="accepted" label="Accept terms and conditions" />
+  <MCheckbox v-model="accepted" label="Accept terms and conditions" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkCheckbox } from '@wise-kit/ui'
+import { MCheckbox } from 'morya-ui'
 import { ref } from 'vue'
 
 const accepted = ref(false)
 </script>
 
 <template>
-  <WkCheckbox v-model="accepted" invalid label="You must accept to continue" />
+  <MCheckbox v-model="accepted" invalid label="You must accept to continue" />
 </template>
 ```
 
@@ -48,35 +48,35 @@ const accepted = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkCheckbox } from '@wise-kit/ui'
+import { MCheckbox } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <WkCheckbox :model-value="true" disabled label="Checked disabled" />
-    <WkCheckbox :model-value="false" disabled label="Unchecked disabled" />
+    <MCheckbox :model-value="true" disabled label="Checked disabled" />
+    <MCheckbox :model-value="false" disabled label="Unchecked disabled" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WkCheckboxGroup` uses an array `v-model`. Children identify themselves with `value`. `indeterminate` is a mixed visual.
+`MCheckboxGroup` uses an array `v-model`. Children identify themselves with `value`. `indeterminate` is a mixed visual.
 
 ```vue preview
 <script setup lang="ts">
-import { WkCheckbox, WkCheckboxGroup } from '@wise-kit/ui'
+import { MCheckbox, MCheckboxGroup } from 'morya-ui'
 import { ref } from 'vue'
 
 const selected = ref(['vue'])
 </script>
 
 <template>
-  <WkCheckboxGroup v-model="selected">
-    <WkCheckbox value="vue" label="Vue" />
-    <WkCheckbox value="react" label="React" />
-    <WkCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
-  </WkCheckboxGroup>
+  <MCheckboxGroup v-model="selected">
+    <MCheckbox value="vue" label="Vue" />
+    <MCheckbox value="react" label="React" />
+    <MCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
+  </MCheckboxGroup>
 </template>
 ```
 

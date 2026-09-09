@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WkScrollbar from './Scrollbar.vue'
+import MScrollbar from './Scrollbar.vue'
 
-describe('wkScrollbar', () => {
+describe('muScrollbar', () => {
   it('renders content and applies height to the wrap', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { height: 200, always: true },
       slots: {
         default: '<p class="item">One</p><p class="item">Two</p>',
@@ -13,13 +13,13 @@ describe('wkScrollbar', () => {
       attachTo: document.body,
     })
 
-    expect(wrapper.get('.wk-scrollbar__view').text()).toContain('One')
-    expect(wrapper.get('.wk-scrollbar__wrap').attributes('style')).toContain('height: 200px')
+    expect(wrapper.get('.m-scrollbar__view').text()).toContain('One')
+    expect(wrapper.get('.m-scrollbar__wrap').attributes('style')).toContain('height: 200px')
     wrapper.unmount()
   })
 
   it('hides the native scrollbar by default and exposes custom bars when always', async () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { height: 120, always: true },
       slots: {
         default: Array.from({ length: 20 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
@@ -28,26 +28,26 @@ describe('wkScrollbar', () => {
     })
 
     await nextTick()
-    expect(wrapper.get('.wk-scrollbar__wrap').classes()).toContain('wk-scrollbar__wrap--hidden-default')
-    expect(wrapper.findAll('.wk-scrollbar__bar').length).toBe(2)
+    expect(wrapper.get('.m-scrollbar__wrap').classes()).toContain('m-scrollbar__wrap--hidden-default')
+    expect(wrapper.findAll('.m-scrollbar__bar').length).toBe(2)
     wrapper.unmount()
   })
 
   it('uses native scrollbar when native is true', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { height: 120, native: true },
       slots: { default: '<p>Native</p>' },
     })
 
-    expect(wrapper.find('.wk-scrollbar__bar').exists()).toBe(false)
-    expect(wrapper.get('.wk-scrollbar__wrap').classes()).not.toContain(
-      'wk-scrollbar__wrap--hidden-default',
+    expect(wrapper.find('.m-scrollbar__bar').exists()).toBe(false)
+    expect(wrapper.get('.m-scrollbar__wrap').classes()).not.toContain(
+      'm-scrollbar__wrap--hidden-default',
     )
   })
 
   it('emits scroll and supports setScrollTop / setScrollLeft', async () => {
     const onScroll = vi.fn()
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { height: 100, always: true, onScroll },
       slots: {
         default: Array.from({ length: 30 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
@@ -55,7 +55,7 @@ describe('wkScrollbar', () => {
       attachTo: document.body,
     })
 
-    const wrap = wrapper.get('.wk-scrollbar__wrap').element as HTMLDivElement
+    const wrap = wrapper.get('.m-scrollbar__wrap').element as HTMLDivElement
     Object.defineProperty(wrap, 'scrollHeight', { configurable: true, value: 1200 })
     Object.defineProperty(wrap, 'clientHeight', { configurable: true, value: 100 })
     Object.defineProperty(wrap, 'scrollWidth', { configurable: true, value: 800 })
@@ -83,15 +83,15 @@ describe('wkScrollbar', () => {
   })
 
   it('uses fill layout by default to inherit the parent size', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       slots: { default: '<p>Content</p>' },
     })
 
-    expect(wrapper.get('.wk-scrollbar').classes()).toContain('wk-scrollbar--fill')
+    expect(wrapper.get('.m-scrollbar').classes()).toContain('m-scrollbar--fill')
   })
 
   it('applies max-height and view accessibility attributes', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: {
         maxHeight: '240px',
         id: 'panel-view',
@@ -102,16 +102,16 @@ describe('wkScrollbar', () => {
       slots: { default: '<p>Content</p>' },
     })
 
-    const root = wrapper.get('.wk-scrollbar')
+    const root = wrapper.get('.m-scrollbar')
     expect(root.attributes('style')).toContain('max-height: 240px')
     expect(root.attributes('style')).toContain('min-height: 0')
-    expect(root.classes()).not.toContain('wk-scrollbar--fill')
+    expect(root.classes()).not.toContain('m-scrollbar--fill')
 
-    const wrap = wrapper.get('.wk-scrollbar__wrap')
+    const wrap = wrapper.get('.m-scrollbar__wrap')
     expect(wrap.attributes('style')).toContain('max-height: 240px')
     expect(wrap.attributes('style')).toContain('min-height: 0')
 
-    const view = wrapper.get('.wk-scrollbar__view')
+    const view = wrapper.get('.m-scrollbar__view')
     expect(view.attributes('id')).toBe('panel-view')
     expect(view.attributes('role')).toBe('region')
     expect(view.attributes('aria-label')).toBe('Scrollable panel')
@@ -119,39 +119,39 @@ describe('wkScrollbar', () => {
   })
 
   it('uses constrain layout when max-width is set', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { maxWidth: '320px' },
       slots: { default: '<p>Content</p>' },
     })
 
-    expect(wrapper.get('.wk-scrollbar').classes()).not.toContain('wk-scrollbar--fill')
-    expect(wrapper.get('.wk-scrollbar__wrap').attributes('style')).toContain('max-width: 320px')
+    expect(wrapper.get('.m-scrollbar').classes()).not.toContain('m-scrollbar--fill')
+    expect(wrapper.get('.m-scrollbar__wrap').attributes('style')).toContain('max-width: 320px')
   })
 
   it('uses fill layout when height is set without max-height', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { height: 200 },
       slots: { default: '<p>Content</p>' },
     })
 
-    expect(wrapper.get('.wk-scrollbar').classes()).toContain('wk-scrollbar--fill')
-    expect(wrapper.get('.wk-scrollbar__wrap').attributes('style')).toContain('height: 200px')
+    expect(wrapper.get('.m-scrollbar').classes()).toContain('m-scrollbar--fill')
+    expect(wrapper.get('.m-scrollbar__wrap').attributes('style')).toContain('height: 200px')
   })
 
   it('uses fit-content layout for CSS max-height panels', () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { fitContent: true },
       attrs: { style: 'max-height: 240px' },
       slots: { default: '<p>Content</p>' },
     })
 
-    const root = wrapper.get('.wk-scrollbar')
-    expect(root.classes()).toContain('wk-scrollbar--fill')
-    expect(root.classes()).toContain('wk-scrollbar--fit-content')
+    const root = wrapper.get('.m-scrollbar')
+    expect(root.classes()).toContain('m-scrollbar--fill')
+    expect(root.classes()).toContain('m-scrollbar--fit-content')
   })
 
   it('shows thumbs when trigger is none', async () => {
-    const wrapper = mount(WkScrollbar, {
+    const wrapper = mount(MScrollbar, {
       props: { height: 120, trigger: 'none' },
       slots: {
         default: Array.from({ length: 20 }, (_, i) => `<p style="height:40px">${i}</p>`).join(''),
@@ -159,7 +159,7 @@ describe('wkScrollbar', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(wrapper.findAll('.wk-scrollbar__bar').length).toBe(2)
+    expect(wrapper.findAll('.m-scrollbar__bar').length).toBe(2)
     wrapper.unmount()
   })
 })

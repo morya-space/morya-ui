@@ -11,28 +11,28 @@ Horizontal action bar, commonly used as a list page header.
 ## Import
 
 ```ts
-import { WkButton, WkToolbar } from '@wise-kit/ui'
+import { MButton, MToolbar } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkToolbar } from '@wise-kit/ui'
+import { MButton, MToolbar } from 'morya-ui'
 </script>
 
 <template>
-  <WkToolbar>
+  <MToolbar>
     <template #start>
-      <WkButton label="New" size="small" />
+      <MButton label="New" size="small" />
     </template>
     <template #center>
       <span>Toolbar</span>
     </template>
     <template #end>
-      <WkButton label="Export" severity="secondary" size="small" />
+      <MButton label="Export" severity="secondary" size="small" />
     </template>
-  </WkToolbar>
+  </MToolbar>
 </template>
 ```
 

@@ -1,22 +1,22 @@
-.wk-skeleton {
-    --wk-skeleton-bg: color-mix(in srgb, var(--wk-color-text-muted) 14%, var(--wk-color-surface));
-    background: var(--wk-skeleton-bg);
-    border-radius: var(--wk-radius-sm);
+.m-skeleton {
+    --m-skeleton-bg: color-mix(in srgb, var(--m-color-text-muted) 14%, var(--m-color-surface));
+    background: var(--m-skeleton-bg);
+    border-radius: var(--m-radius-sm);
     display: block;
     overflow: hidden;
     position: relative;
 }
 
-.wk-skeleton--circle {
-    border-radius: var(--wk-radius-full);
+.m-skeleton--circle {
+    border-radius: var(--m-radius-full);
 }
 
-.wk-skeleton--wave::after {
-    animation: wk-skeleton-wave var(--wk-motion-skeleton) linear infinite;
+.m-skeleton--wave::after {
+    animation: wk-skeleton-wave var(--m-motion-skeleton) linear infinite;
     background: linear-gradient(
         90deg,
         transparent,
-        color-mix(in srgb, var(--wk-color-surface) 55%, transparent),
+        color-mix(in srgb, var(--m-color-surface) 55%, transparent),
         transparent
     );
     content: "";
@@ -31,12 +31,12 @@
     }
 }
 
-.wk-skeleton-repeat {
+.m-skeleton-repeat {
     display: grid;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     width: 100%;
 }
 
-.wk-skeleton--text {
+.m-skeleton--text {
     height: 0.85em;
 }

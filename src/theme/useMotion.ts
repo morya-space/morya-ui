@@ -3,7 +3,7 @@ import { readStoredValue, writeStoredValue } from './storage'
 
 export type MotionPreference = 'full' | 'reduced' | 'none'
 
-const storageKey = 'wise-kit-motion'
+const storageKey = 'morya-ui-motion'
 const legacyStorageKeys = ['wex-design-motion']
 const motionPreferences: readonly MotionPreference[] = ['full', 'reduced', 'none']
 
@@ -12,7 +12,7 @@ const preference = ref<MotionPreference>(getInitialMotion())
 export function applyMotion(preference: MotionPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.wkMotion = preference
+  el.dataset.muMotion = preference
 }
 
 /** When `respect` is false, ignore OS `prefers-reduced-motion`. Default is to respect it. */
@@ -20,9 +20,9 @@ export function applyReducedMotionPolicy(respect: boolean | undefined, target?: 
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
   if (respect === false) {
-    el.dataset.wkIgnoreReducedMotion = 'true'
+    el.dataset.muIgnoreReducedMotion = 'true'
   } else {
-    delete el.dataset.wkIgnoreReducedMotion
+    delete el.dataset.muIgnoreReducedMotion
   }
 }
 

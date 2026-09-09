@@ -11,28 +11,28 @@ description: 相对触发元素定位的浮层面板。支持 placement、Telepo
 ## 引入
 
 ```ts
-import { WkButton, WkPopover } from '@wise-kit/ui'
+import { MButton, MPopover } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkPopover } from '@wise-kit/ui'
+import { MButton, MPopover } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
 </script>
 
 <template>
-  <WkPopover v-model="open" placement="bottom">
-    <WkButton label="Toggle Popover" @click="open = !open" />
+  <MPopover v-model="open" placement="bottom">
+    <MButton label="Toggle Popover" @click="open = !open" />
     <template #content>
       <p style="margin:0">
         Click outside or press Esc to close.
       </p>
     </template>
-  </WkPopover>
+  </MPopover>
 </template>
 ```
 
@@ -40,7 +40,7 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkPopover } from '@wise-kit/ui'
+import { MButton, MPopover } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -48,14 +48,14 @@ const open = ref(false)
 
 <template>
   <div style="display:flex;justify-content:center;padding:2rem">
-    <WkPopover v-model="open" placement="bottom-start">
-      <WkButton label="bottom-start" severity="secondary" @click="open = !open" />
+    <MPopover v-model="open" placement="bottom-start">
+      <MButton label="bottom-start" severity="secondary" @click="open = !open" />
       <template #content>
         <p style="margin:0">
           Aligned to the start of the trigger.
         </p>
       </template>
-    </WkPopover>
+    </MPopover>
   </div>
 </template>
 ```
@@ -66,21 +66,21 @@ const open = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkPopover } from '@wise-kit/ui'
+import { MButton, MPopover } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
 </script>
 
 <template>
-  <WkPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
-    <WkButton label="Hover me" severity="secondary" />
+  <MPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
+    <MButton label="Hover me" severity="secondary" />
     <template #content>
       <p style="margin:0">
         Opens on hover.
       </p>
     </template>
-  </WkPopover>
+  </MPopover>
 </template>
 ```
 

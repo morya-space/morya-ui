@@ -155,13 +155,13 @@ function extractCodeBlocks(body) {
 function extractExportName(componentDir, folderName) {
   const indexPath = join(componentDir, 'index.ts')
   const index = readText(indexPath)
-  const match = index.match(/export\s+\{\s*default\s+as\s+(Wk\w+)\s*\}/)
+  const match = index.match(/export\s+\{\s*default\s+as\s+(M\w+)\s*\}/)
   if (match) return match[1]
-  return `Wk${folderName}`
+  return `M${folderName}`
 }
 
 function extractImportHint(body, exportName) {
-  const re = /import\s*\{([^}]+)\}\s*from\s*['"]@wise-kit\/ui['"]/
+  const re = /import\s*\{([^}]+)\}\s*from\s*['"]morya-ui['"]/
   const match = body.match(re)
   if (match) {
     const names = match[1]
@@ -169,11 +169,11 @@ function extractImportHint(body, exportName) {
       .map((part) => part.trim())
       .filter(Boolean)
     if (names.includes(exportName)) {
-      return `import { ${exportName} } from '@wise-kit/ui'`
+      return `import { ${exportName} } from 'morya-ui'`
     }
-    return `import { ${names.join(', ')} } from '@wise-kit/ui'`
+    return `import { ${names.join(', ')} } from 'morya-ui'`
   }
-  return `import { ${exportName} } from '@wise-kit/ui'`
+  return `import { ${exportName} } from 'morya-ui'`
 }
 
 function buildDocLocale(raw, exportName) {
@@ -255,7 +255,7 @@ function collectComponents() {
       category: primary?.category || '',
       description: zh?.description || en?.description || '',
       descriptionEn: en?.description || '',
-      import: primary?.import || `import { ${exportName} } from '@wise-kit/ui'`,
+      import: primary?.import || `import { ${exportName} } from 'morya-ui'`,
       props: primary?.props || [],
       events: primary?.events || [],
       slots: primary?.slots || [],

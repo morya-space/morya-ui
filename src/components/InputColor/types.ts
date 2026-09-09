@@ -1,4 +1,4 @@
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
 export interface InputColorProps {
   modelValue?: string
@@ -6,7 +6,7 @@ export interface InputColorProps {
   id?: string
   label?: string
   invalid?: boolean
-  size?: WkSizeInput
+  size?: MSizeInput
   /** Preset hex colors shown under the input. */
   swatches?: string[]
 }

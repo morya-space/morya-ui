@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkInplace from './Inplace.vue'
+import MInplace from './Inplace.vue'
 
-describe('wkInplace', () => {
+describe('muInplace', () => {
   it('switches from display to content on activate', async () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: false },
       slots: {
         display: '<span>Edit me</span>',
@@ -12,12 +12,12 @@ describe('wkInplace', () => {
       },
     })
     expect(wrapper.text()).toContain('Edit me')
-    await wrapper.find('.wk-inplace__display').trigger('click')
+    await wrapper.find('.m-inplace__display').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[true]])
   })
 
   it('shows content when active', () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: true },
       slots: {
         display: 'Display',
@@ -25,22 +25,22 @@ describe('wkInplace', () => {
       },
     })
     expect(wrapper.find('.active-content').exists()).toBe(true)
-    expect(wrapper.find('.wk-inplace__display').exists()).toBe(false)
+    expect(wrapper.find('.m-inplace__display').exists()).toBe(false)
   })
 
   it('exposes aria-expanded and aria-disabled on the display trigger', () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: false, disabled: true },
       slots: { display: 'Display', content: 'Content' },
     })
-    const display = wrapper.find('.wk-inplace__display')
+    const display = wrapper.find('.m-inplace__display')
     expect(display.attributes('aria-expanded')).toBe('false')
     expect(display.attributes('aria-disabled')).toBe('true')
     expect(display.attributes('tabindex')).toBe('-1')
   })
 
   it('emits open and close on transitions', async () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: false },
       slots: { display: 'Display', content: 'Content' },
     })
@@ -51,7 +51,7 @@ describe('wkInplace', () => {
   })
 
   it('closes on Escape when closeOnEsc is enabled', async () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: true },
       slots: { display: 'Display', content: 'Content' },
       attachTo: document.body,
@@ -62,7 +62,7 @@ describe('wkInplace', () => {
   })
 
   it('ignores Escape when closeOnEsc is false', () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: true, closeOnEsc: false },
       slots: { display: 'Display', content: 'Content' },
       attachTo: document.body,
@@ -73,7 +73,7 @@ describe('wkInplace', () => {
   })
 
   it('closes on outside click only when dismissable', async () => {
-    const wrapper = mount(WkInplace, {
+    const wrapper = mount(MInplace, {
       props: { modelValue: true, dismissable: true },
       slots: { display: 'Display', content: 'Content' },
       attachTo: document.body,

@@ -16,6 +16,6 @@ describe('useTheme', () => {
 
     expect(vm.theme).toBe('dark')
     expect(document.documentElement.dataset.theme).toBe('dark')
-    expect(localStorage.getItem('wise-kit-theme')).toBe('dark')
+    expect(localStorage.getItem('morya-ui-theme')).toBe('dark')
   })
 })

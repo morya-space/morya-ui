@@ -4,7 +4,7 @@
   "components": [
     {
       "id": "Accordion",
-      "exportName": "WkAccordion",
+      "exportName": "MAccordion",
       "examples": 8,
       "props": {
         "total": 4,
@@ -33,7 +33,7 @@
     },
     {
       "id": "AutoComplete",
-      "exportName": "WkAutoComplete",
+      "exportName": "MAutoComplete",
       "examples": 8,
       "props": {
         "total": 16,
@@ -76,7 +76,7 @@
     },
     {
       "id": "Avatar",
-      "exportName": "WkAvatar",
+      "exportName": "MAvatar",
       "examples": 6,
       "props": {
         "total": 6,
@@ -105,7 +105,7 @@
     },
     {
       "id": "Badge",
-      "exportName": "WkBadge",
+      "exportName": "MBadge",
       "examples": 10,
       "props": {
         "total": 6,
@@ -132,7 +132,7 @@
     },
     {
       "id": "BlockUI",
-      "exportName": "WkBlockUI",
+      "exportName": "MBlockUI",
       "examples": 4,
       "props": {
         "total": 1,
@@ -157,7 +157,7 @@
     },
     {
       "id": "Breadcrumb",
-      "exportName": "WkBreadcrumb",
+      "exportName": "MBreadcrumb",
       "examples": 6,
       "props": {
         "total": 3,
@@ -185,7 +185,7 @@
     },
     {
       "id": "Button",
-      "exportName": "WkButton",
+      "exportName": "MButton",
       "examples": 20,
       "props": {
         "total": 24,
@@ -220,7 +220,7 @@
     },
     {
       "id": "Card",
-      "exportName": "WkCard",
+      "exportName": "MCard",
       "examples": 8,
       "props": {
         "total": 7,
@@ -249,7 +249,7 @@
     },
     {
       "id": "Carousel",
-      "exportName": "WkCarousel",
+      "exportName": "MCarousel",
       "examples": 6,
       "props": {
         "total": 8,
@@ -279,7 +279,7 @@
     },
     {
       "id": "CascadeSelect",
-      "exportName": "WkCascadeSelect",
+      "exportName": "MCascadeSelect",
       "examples": 6,
       "props": {
         "total": 15,
@@ -322,7 +322,7 @@
     },
     {
       "id": "Checkbox",
-      "exportName": "WkCheckbox",
+      "exportName": "MCheckbox",
       "examples": 10,
       "props": {
         "total": 10,
@@ -354,7 +354,7 @@
     },
     {
       "id": "Chip",
-      "exportName": "WkChip",
+      "exportName": "MChip",
       "examples": 4,
       "props": {
         "total": 7,
@@ -386,7 +386,7 @@
     },
     {
       "id": "CommandMenu",
-      "exportName": "WkCommandMenu",
+      "exportName": "MCommandMenu",
       "examples": 4,
       "props": {
         "total": 5,
@@ -416,7 +416,7 @@
     },
     {
       "id": "ConfigProvider",
-      "exportName": "WkConfigProvider",
+      "exportName": "MConfigProvider",
       "examples": 14,
       "props": {
         "total": 10,
@@ -446,7 +446,7 @@
     },
     {
       "id": "ConfirmDialog",
-      "exportName": "WkConfirmDialog",
+      "exportName": "MConfirmDialog",
       "examples": 4,
       "props": {
         "total": 15,
@@ -489,7 +489,7 @@
     },
     {
       "id": "ConfirmPopup",
-      "exportName": "WkConfirmPopup",
+      "exportName": "MConfirmPopup",
       "examples": 6,
       "props": {
         "total": 12,
@@ -527,7 +527,7 @@
     },
     {
       "id": "ContextMenu",
-      "exportName": "WkContextMenu",
+      "exportName": "MContextMenu",
       "examples": 6,
       "props": {
         "total": 5,
@@ -561,7 +561,7 @@
     },
     {
       "id": "DataView",
-      "exportName": "WkDataView",
+      "exportName": "MDataView",
       "examples": 4,
       "props": {
         "total": 10,
@@ -594,7 +594,7 @@
     },
     {
       "id": "DatePicker",
-      "exportName": "WkDatePicker",
+      "exportName": "MDatePicker",
       "examples": 20,
       "props": {
         "total": 18,
@@ -634,7 +634,7 @@
     },
     {
       "id": "Dialog",
-      "exportName": "WkDialog",
+      "exportName": "MDialog",
       "examples": 14,
       "props": {
         "total": 22,
@@ -684,7 +684,7 @@
     },
     {
       "id": "Divider",
-      "exportName": "WkDivider",
+      "exportName": "MDivider",
       "examples": 12,
       "props": {
         "total": 5,
@@ -711,7 +711,7 @@
     },
     {
       "id": "Dock",
-      "exportName": "WkDock",
+      "exportName": "MDock",
       "examples": 4,
       "props": {
         "total": 2,
@@ -740,7 +740,7 @@
     },
     {
       "id": "Drawer",
-      "exportName": "WkDrawer",
+      "exportName": "MDrawer",
       "examples": 6,
       "props": {
         "total": 14,
@@ -785,7 +785,7 @@
     },
     {
       "id": "Dropdown",
-      "exportName": "WkDropdown",
+      "exportName": "MDropdown",
       "examples": 6,
       "props": {
         "total": 9,
@@ -819,7 +819,7 @@
     },
     {
       "id": "Fieldset",
-      "exportName": "WkFieldset",
+      "exportName": "MFieldset",
       "examples": 4,
       "props": {
         "total": 4,
@@ -848,7 +848,7 @@
     },
     {
       "id": "FileUpload",
-      "exportName": "WkFileUpload",
+      "exportName": "MFileUpload",
       "examples": 16,
       "props": {
         "total": 22,
@@ -898,7 +898,7 @@
     },
     {
       "id": "Flex",
-      "exportName": "WkFlex",
+      "exportName": "MFlex",
       "examples": 8,
       "props": {
         "total": 7,
@@ -927,7 +927,7 @@
     },
     {
       "id": "FloatLabel",
-      "exportName": "WkFloatLabel",
+      "exportName": "MFloatLabel",
       "examples": 4,
       "props": {
         "total": 1,
@@ -952,7 +952,7 @@
     },
     {
       "id": "Fluid",
-      "exportName": "WkFluid",
+      "exportName": "MFluid",
       "examples": 4,
       "props": {
         "total": 1,
@@ -979,7 +979,7 @@
     },
     {
       "id": "Form",
-      "exportName": "WkForm",
+      "exportName": "MForm",
       "examples": 8,
       "props": {
         "total": 0,
@@ -1009,7 +1009,7 @@
     },
     {
       "id": "Gallery",
-      "exportName": "WkGallery",
+      "exportName": "MGallery",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1036,7 +1036,7 @@
     },
     {
       "id": "Grid",
-      "exportName": "WkGrid",
+      "exportName": "MGrid",
       "examples": 10,
       "props": {
         "total": 0,
@@ -1061,7 +1061,7 @@
     },
     {
       "id": "Icon",
-      "exportName": "WkIcon",
+      "exportName": "MIcon",
       "examples": 8,
       "props": {
         "total": 3,
@@ -1086,7 +1086,7 @@
     },
     {
       "id": "IconField",
-      "exportName": "WkIconField",
+      "exportName": "MIconField",
       "examples": 4,
       "props": {
         "total": 1,
@@ -1111,7 +1111,7 @@
     },
     {
       "id": "Inplace",
-      "exportName": "WkInplace",
+      "exportName": "MInplace",
       "examples": 4,
       "props": {
         "total": 4,
@@ -1147,7 +1147,7 @@
     },
     {
       "id": "Input",
-      "exportName": "WkInput",
+      "exportName": "MInput",
       "examples": 20,
       "props": {
         "total": 15,
@@ -1186,7 +1186,7 @@
     },
     {
       "id": "InputColor",
-      "exportName": "WkInputColor",
+      "exportName": "MInputColor",
       "examples": 6,
       "props": {
         "total": 7,
@@ -1221,7 +1221,7 @@
     },
     {
       "id": "InputGroup",
-      "exportName": "WkInputGroup",
+      "exportName": "MInputGroup",
       "examples": 4,
       "props": {
         "total": 0,
@@ -1246,7 +1246,7 @@
     },
     {
       "id": "InputNumber",
-      "exportName": "WkInputNumber",
+      "exportName": "MInputNumber",
       "examples": 8,
       "props": {
         "total": 17,
@@ -1292,7 +1292,7 @@
     },
     {
       "id": "InputOtp",
-      "exportName": "WkInputOtp",
+      "exportName": "MInputOtp",
       "examples": 6,
       "props": {
         "total": 9,
@@ -1323,7 +1323,7 @@
     },
     {
       "id": "InputPassword",
-      "exportName": "WkInputPassword",
+      "exportName": "MInputPassword",
       "examples": 12,
       "props": {
         "total": 17,
@@ -1366,7 +1366,7 @@
     },
     {
       "id": "InputTags",
-      "exportName": "WkInputTags",
+      "exportName": "MInputTags",
       "examples": 6,
       "props": {
         "total": 10,
@@ -1402,7 +1402,7 @@
     },
     {
       "id": "Knob",
-      "exportName": "WkKnob",
+      "exportName": "MKnob",
       "examples": 4,
       "props": {
         "total": 10,
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "Label",
-      "exportName": "WkLabel",
+      "exportName": "MLabel",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1464,7 +1464,7 @@
     },
     {
       "id": "Layout",
-      "exportName": "WkLayout",
+      "exportName": "MLayout",
       "examples": 16,
       "props": {
         "total": 0,
@@ -1489,7 +1489,7 @@
     },
     {
       "id": "Listbox",
-      "exportName": "WkListbox",
+      "exportName": "MListbox",
       "examples": 4,
       "props": {
         "total": 9,
@@ -1524,7 +1524,7 @@
     },
     {
       "id": "MegaMenu",
-      "exportName": "WkMegaMenu",
+      "exportName": "MMegaMenu",
       "examples": 6,
       "props": {
         "total": 4,
@@ -1556,7 +1556,7 @@
     },
     {
       "id": "Menu",
-      "exportName": "WkMenu",
+      "exportName": "MMenu",
       "examples": 18,
       "props": {
         "total": 18,
@@ -1593,7 +1593,7 @@
     },
     {
       "id": "Menubar",
-      "exportName": "WkMenubar",
+      "exportName": "MMenubar",
       "examples": 4,
       "props": {
         "total": 4,
@@ -1626,7 +1626,7 @@
     },
     {
       "id": "Message",
-      "exportName": "WkMessage",
+      "exportName": "MMessage",
       "examples": 8,
       "props": {
         "total": 0,
@@ -1651,7 +1651,7 @@
     },
     {
       "id": "MeterGroup",
-      "exportName": "WkMeterGroup",
+      "exportName": "MMeterGroup",
       "examples": 4,
       "props": {
         "total": 2,
@@ -1678,7 +1678,7 @@
     },
     {
       "id": "OrderList",
-      "exportName": "WkOrderList",
+      "exportName": "MOrderList",
       "examples": 4,
       "props": {
         "total": 5,
@@ -1711,7 +1711,7 @@
     },
     {
       "id": "Pagination",
-      "exportName": "WkPagination",
+      "exportName": "MPagination",
       "examples": 6,
       "props": {
         "total": 10,
@@ -1745,7 +1745,7 @@
     },
     {
       "id": "Panel",
-      "exportName": "WkPanel",
+      "exportName": "MPanel",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1777,7 +1777,7 @@
     },
     {
       "id": "PickList",
-      "exportName": "WkPickList",
+      "exportName": "MPickList",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1804,7 +1804,7 @@
     },
     {
       "id": "Popover",
-      "exportName": "WkPopover",
+      "exportName": "MPopover",
       "examples": 8,
       "props": {
         "total": 8,
@@ -1841,7 +1841,7 @@
     },
     {
       "id": "ProgressBar",
-      "exportName": "WkProgressBar",
+      "exportName": "MProgressBar",
       "examples": 6,
       "props": {
         "total": 6,
@@ -1868,7 +1868,7 @@
     },
     {
       "id": "ProgressSpinner",
-      "exportName": "WkProgressSpinner",
+      "exportName": "MProgressSpinner",
       "examples": 6,
       "props": {
         "total": 7,
@@ -1896,7 +1896,7 @@
     },
     {
       "id": "Radio",
-      "exportName": "WkRadio",
+      "exportName": "MRadio",
       "examples": 10,
       "props": {
         "total": 9,
@@ -1926,7 +1926,7 @@
     },
     {
       "id": "Rating",
-      "exportName": "WkRating",
+      "exportName": "MRating",
       "examples": 8,
       "props": {
         "total": 13,
@@ -1965,7 +1965,7 @@
     },
     {
       "id": "Scrollbar",
-      "exportName": "WkScrollbar",
+      "exportName": "MScrollbar",
       "examples": 14,
       "props": {
         "total": 0,
@@ -1996,7 +1996,7 @@
     },
     {
       "id": "ScrollTop",
-      "exportName": "WkScrollTop",
+      "exportName": "MScrollTop",
       "examples": 4,
       "props": {
         "total": 6,
@@ -2026,7 +2026,7 @@
     },
     {
       "id": "Select",
-      "exportName": "WkSelect",
+      "exportName": "MSelect",
       "examples": 24,
       "props": {
         "total": 24,
@@ -2068,7 +2068,7 @@
     },
     {
       "id": "SelectButton",
-      "exportName": "WkSelectButton",
+      "exportName": "MSelectButton",
       "examples": 6,
       "props": {
         "total": 7,
@@ -2100,7 +2100,7 @@
     },
     {
       "id": "Sidebar",
-      "exportName": "WkSidebar",
+      "exportName": "MSidebar",
       "examples": 4,
       "props": {
         "total": 2,
@@ -2127,7 +2127,7 @@
     },
     {
       "id": "Skeleton",
-      "exportName": "WkSkeleton",
+      "exportName": "MSkeleton",
       "examples": 10,
       "props": {
         "total": 7,
@@ -2152,7 +2152,7 @@
     },
     {
       "id": "Slider",
-      "exportName": "WkSlider",
+      "exportName": "MSlider",
       "examples": 8,
       "props": {
         "total": 15,
@@ -2190,7 +2190,7 @@
     },
     {
       "id": "Space",
-      "exportName": "WkSpace",
+      "exportName": "MSpace",
       "examples": 10,
       "props": {
         "total": 10,
@@ -2223,7 +2223,7 @@
     },
     {
       "id": "SpeedDial",
-      "exportName": "WkSpeedDial",
+      "exportName": "MSpeedDial",
       "examples": 4,
       "props": {
         "total": 7,
@@ -2260,7 +2260,7 @@
     },
     {
       "id": "SplitButton",
-      "exportName": "WkSplitButton",
+      "exportName": "MSplitButton",
       "examples": 4,
       "props": {
         "total": 9,
@@ -2297,7 +2297,7 @@
     },
     {
       "id": "Splitter",
-      "exportName": "WkSplitter",
+      "exportName": "MSplitter",
       "examples": 10,
       "props": {
         "total": 12,
@@ -2337,7 +2337,7 @@
     },
     {
       "id": "Stepper",
-      "exportName": "WkStepper",
+      "exportName": "MStepper",
       "examples": 6,
       "props": {
         "total": 5,
@@ -2370,7 +2370,7 @@
     },
     {
       "id": "Switch",
-      "exportName": "WkSwitch",
+      "exportName": "MSwitch",
       "examples": 10,
       "props": {
         "total": 13,
@@ -2406,7 +2406,7 @@
     },
     {
       "id": "Table",
-      "exportName": "WkTable",
+      "exportName": "MTable",
       "examples": 14,
       "props": {
         "total": 64,
@@ -2512,7 +2512,7 @@
     },
     {
       "id": "Tabs",
-      "exportName": "WkTabs",
+      "exportName": "MTabs",
       "examples": 6,
       "props": {
         "total": 5,
@@ -2540,7 +2540,7 @@
     },
     {
       "id": "Tag",
-      "exportName": "WkTag",
+      "exportName": "MTag",
       "examples": 10,
       "props": {
         "total": 9,
@@ -2570,7 +2570,7 @@
     },
     {
       "id": "Terminal",
-      "exportName": "WkTerminal",
+      "exportName": "MTerminal",
       "examples": 4,
       "props": {
         "total": 4,
@@ -2605,7 +2605,7 @@
     },
     {
       "id": "Textarea",
-      "exportName": "WkTextarea",
+      "exportName": "MTextarea",
       "examples": 10,
       "props": {
         "total": 17,
@@ -2646,7 +2646,7 @@
     },
     {
       "id": "TieredMenu",
-      "exportName": "WkTieredMenu",
+      "exportName": "MTieredMenu",
       "examples": 6,
       "props": {
         "total": 6,
@@ -2677,7 +2677,7 @@
     },
     {
       "id": "Timeline",
-      "exportName": "WkTimeline",
+      "exportName": "MTimeline",
       "examples": 8,
       "props": {
         "total": 4,
@@ -2702,7 +2702,7 @@
     },
     {
       "id": "Toast",
-      "exportName": "WkToast",
+      "exportName": "MToast",
       "examples": 8,
       "props": {
         "total": 12,
@@ -2737,7 +2737,7 @@
     },
     {
       "id": "ToggleButton",
-      "exportName": "WkToggleButton",
+      "exportName": "MToggleButton",
       "examples": 6,
       "props": {
         "total": 7,
@@ -2770,7 +2770,7 @@
     },
     {
       "id": "Toolbar",
-      "exportName": "WkToolbar",
+      "exportName": "MToolbar",
       "examples": 4,
       "props": {
         "total": 1,
@@ -2797,7 +2797,7 @@
     },
     {
       "id": "Tooltip",
-      "exportName": "WkTooltip",
+      "exportName": "MTooltip",
       "examples": 4,
       "props": {
         "total": 8,
@@ -2826,7 +2826,7 @@
     },
     {
       "id": "Tree",
-      "exportName": "WkTree",
+      "exportName": "MTree",
       "examples": 10,
       "props": {
         "total": 17,
@@ -2872,7 +2872,7 @@
     },
     {
       "id": "TreeSelect",
-      "exportName": "WkTreeSelect",
+      "exportName": "MTreeSelect",
       "examples": 8,
       "props": {
         "total": 22,
@@ -2917,7 +2917,7 @@
     },
     {
       "id": "TreeTable",
-      "exportName": "WkTreeTable",
+      "exportName": "MTreeTable",
       "examples": 4,
       "props": {
         "total": 4,
@@ -2952,7 +2952,7 @@
     },
     {
       "id": "VirtualScroller",
-      "exportName": "WkVirtualScroller",
+      "exportName": "MVirtualScroller",
       "examples": 4,
       "props": {
         "total": 4,

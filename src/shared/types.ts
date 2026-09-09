@@ -3,7 +3,7 @@
  * Canonical vocabulary: `primary / success / info / warning / danger / help / contrast`;
  * `warn` / `error` are accepted as deprecated runtime aliases.
  */
-export type WkSeverity =
+export type MSeverity =
   | 'secondary'
   | 'success'
   | 'info'
@@ -14,10 +14,10 @@ export type WkSeverity =
   | 'danger'
   | 'contrast'
 
-export type WkTagSeverity = WkSeverity | 'primary'
+export type MTagSeverity = MSeverity | 'primary'
 
 /** Canonical severities: success/info/warning/danger (+ secondary/contrast). `warn` / `error` are deprecated aliases. */
-export type WkToastSeverity =
+export type MToastSeverity =
   | 'success'
   | 'info'
   | 'warning'
@@ -30,25 +30,25 @@ export type WkToastSeverity =
   | 'contrast'
 
 /** Size tokens; legacy sm/md/lg remain accepted. */
-export type WkSize = 'small' | 'medium' | 'large'
-export type WkSizeInput = WkSize | 'sm' | 'md' | 'lg'
+export type MSize = 'small' | 'medium' | 'large'
+export type MSizeInput = MSize | 'sm' | 'md' | 'lg'
 
-export type WkInputVariant = 'outlined' | 'filled'
+export type MInputVariant = 'outlined' | 'filled'
 
-export function resolveSizeClass(size?: WkSizeInput): 'small' | 'normal' | 'large' {
+export function resolveSizeClass(size?: MSizeInput): 'small' | 'normal' | 'large' {
   if (size === 'sm' || size === 'small') return 'small'
   if (size === 'lg' || size === 'large') return 'large'
   return 'normal'
 }
 
-/** Map control / chip / tag size to WkIcon size tokens. */
-export function resolveIconSize(size?: WkSizeInput): 'sm' | 'md' | 'lg' {
+/** Map control / chip / tag size to MIcon size tokens. */
+export function resolveIconSize(size?: MSizeInput): 'sm' | 'md' | 'lg' {
   if (size === 'sm' || size === 'small') return 'sm'
   if (size === 'lg' || size === 'large') return 'lg'
   return 'md'
 }
 
-/** Map resolved size class to WkIcon size tokens. */
+/** Map resolved size class to MIcon size tokens. */
 export function resolveIconSizeFromClass(sizeClass: 'small' | 'normal' | 'large'): 'sm' | 'md' | 'lg' {
   if (sizeClass === 'small') return 'sm'
   if (sizeClass === 'large') return 'lg'

@@ -11,14 +11,14 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { WkTieredMenu, type TieredMenuItem } from '@wise-kit/ui'
+import { MTieredMenu, type TieredMenuItem } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkTieredMenu } from '@wise-kit/ui'
+import { MTieredMenu } from 'morya-ui'
 
 const model = [
   {
@@ -34,7 +34,7 @@ const model = [
 </script>
 
 <template>
-  <WkTieredMenu :model="model" />
+  <MTieredMenu :model="model" />
 </template>
 ```
 
@@ -44,7 +44,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkTieredMenu } from '@wise-kit/ui'
+import { MButton, MTieredMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -52,8 +52,8 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 </script>
 
 <template>
-  <WkButton label="操作" @click="open = true" />
-  <WkTieredMenu v-model="open" popup :model="model" />
+  <MButton label="操作" @click="open = true" />
+  <MTieredMenu v-model="open" popup :model="model" />
 </template>
 ```
 

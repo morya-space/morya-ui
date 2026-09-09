@@ -5,7 +5,7 @@ import {  h, isVNode   } from 'vue'
  * Content accepted by Message / Toast APIs:
  * string, number, VNode (`h(...)`), component, or a factory `() => VNodeChild`.
  */
-export type WkRenderable =
+export type MRenderable =
   | string
   | number
   | VNode
@@ -42,7 +42,7 @@ function isComponentLike(value: unknown): value is Component {
 }
 
 /** Resolve API / slot content into something Vue can render. */
-export function renderWkContent(value: WkRenderable | null | undefined): VNodeChild {
+export function renderMContent(value: MRenderable | null | undefined): VNodeChild {
   if (value == null) return null
   if (typeof value === 'string' || typeof value === 'number') return value
   if (isVNode(value)) return value
@@ -54,12 +54,12 @@ export function renderWkContent(value: WkRenderable | null | undefined): VNodeCh
 }
 
 /** Best-effort plain text for aria-labels when content is rich. */
-export function plainTextOf(value: WkRenderable | null | undefined): string {
+export function plainTextOf(value: MRenderable | null | undefined): string {
   if (typeof value === 'string' || typeof value === 'number') return String(value)
   return ''
 }
 
-export function isMessageOptionsObject(value: unknown): value is { content: WkRenderable } {
+export function isMessageOptionsObject(value: unknown): value is { content: MRenderable } {
   return (
     !!value &&
     typeof value === 'object' &&
@@ -69,7 +69,7 @@ export function isMessageOptionsObject(value: unknown): value is { content: WkRe
   )
 }
 
-export function isToastOptionsObject(value: unknown): value is { summary: WkRenderable } {
+export function isToastOptionsObject(value: unknown): value is { summary: MRenderable } {
   return (
     !!value &&
     typeof value === 'object' &&

@@ -1,4 +1,4 @@
-import type { CommandMenuItem } from '@wise-kit/ui'
+import type { CommandMenuItem } from 'morya-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { listDocumentedComponents } from '../docs/loadComponentDocs'

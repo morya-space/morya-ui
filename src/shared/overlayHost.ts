@@ -4,11 +4,11 @@ import {   createVNode, render } from 'vue'
 let appContext: AppContext | undefined
 
 /** Keep overlay hosts inside the same app context (locale / config inject). */
-export function setWkOverlayAppContext(context: AppContext | null | undefined) {
+export function setMOverlayAppContext(context: AppContext | null | undefined) {
   appContext = context ?? undefined
 }
 
-export function getWkOverlayAppContext() {
+export function getMOverlayAppContext() {
   return appContext
 }
 

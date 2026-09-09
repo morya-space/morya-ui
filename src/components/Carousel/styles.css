@@ -1,79 +1,79 @@
 /* —— Media: Carousel —— */
-.wk-carousel {
-    --wk-carousel-indicator-size: 0.45rem;
+.m-carousel {
+    --m-carousel-indicator-size: 0.45rem;
     align-items: center;
     display: flex;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     width: 100%;
 }
 
-.wk-carousel__viewport {
+.m-carousel__viewport {
     display: flex;
     flex: 1;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     min-width: 0;
     overflow: hidden;
     touch-action: pan-y;
 }
 
-.wk-carousel__item {
+.m-carousel__item {
     box-sizing: border-box;
     min-width: 0;
     transition:
-        opacity var(--wk-motion-normal) var(--wk-motion-ease),
-        transform var(--wk-motion-normal) var(--wk-motion-ease);
+        opacity var(--m-motion-normal) var(--m-motion-ease),
+        transform var(--m-motion-normal) var(--m-motion-ease);
 }
 
-.wk-carousel__main {
+.m-carousel__main {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     min-width: 0;
 }
 
-.wk-carousel__indicators {
+.m-carousel__indicators {
     display: flex;
-    gap: var(--wk-space-1);
+    gap: var(--m-space-1);
     justify-content: center;
 }
 
-.wk-carousel__indicator {
-    background: color-mix(in srgb, var(--wk-color-text-muted) 40%, transparent);
+.m-carousel__indicator {
+    background: color-mix(in srgb, var(--m-color-text-muted) 40%, transparent);
     border: 0;
-    border-radius: var(--wk-radius-full);
+    border-radius: var(--m-radius-full);
     cursor: pointer;
-    height: var(--wk-carousel-indicator-size);
+    height: var(--m-carousel-indicator-size);
     padding: 0;
     position: relative;
-    width: var(--wk-carousel-indicator-size);
+    width: var(--m-carousel-indicator-size);
 }
 
-.wk-carousel__indicator::after {
+.m-carousel__indicator::after {
     content: '';
     inset: -0.45rem;
     position: absolute;
 }
 
-.wk-carousel__indicator:hover {
-    background: color-mix(in srgb, var(--wk-color-text-muted) 70%, transparent);
+.m-carousel__indicator:hover {
+    background: color-mix(in srgb, var(--m-color-text-muted) 70%, transparent);
 }
 
-.wk-carousel__indicator:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-carousel__indicator:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-carousel__indicator--active,
-.wk-carousel__indicator--active:hover {
-    background: var(--wk-color-primary);
+.m-carousel__indicator--active,
+.m-carousel__indicator--active:hover {
+    background: var(--m-color-primary);
 }
 
-.wk-carousel__nav:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wk-color-primary) 8%, transparent);
+.m-carousel__nav:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
 }
 
-.wk-carousel__nav:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-carousel__nav:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }

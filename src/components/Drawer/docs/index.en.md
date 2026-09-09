@@ -11,14 +11,14 @@ Side drawer that slides in from the screen edge. Suited to navigation, filters, 
 ## Import
 
 ```ts
-import { WkButton, WkDrawer } from '@wise-kit/ui'
+import { MButton, MDrawer } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkDrawer } from '@wise-kit/ui'
+import { MButton, MDrawer } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -26,12 +26,12 @@ const open = ref(false)
 
 <template>
   <div>
-    <WkButton label="Open Drawer" @click="open = true" />
-    <WkDrawer v-model="open" header="Navigation">
+    <MButton label="Open Drawer" @click="open = true" />
+    <MDrawer v-model="open" header="Navigation">
       <p style="margin:0">
         Drawer body content. Esc or mask click closes by default.
       </p>
-    </WkDrawer>
+    </MDrawer>
   </div>
 </template>
 ```
@@ -42,7 +42,7 @@ Supports `left` / `right` / `top` / `bottom`.
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkDrawer } from '@wise-kit/ui'
+import { MButton, MDrawer } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -56,15 +56,15 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WkButton label="Left" size="small" @click="openAt('left')" />
-    <WkButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
-    <WkButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <WkButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
-    <WkDrawer v-model="open" :header="`Position: ${position}`" :position="position">
+    <MButton label="Left" size="small" @click="openAt('left')" />
+    <MButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
+    <MButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
+    <MButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
+    <MDrawer v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">
         Use <code>dismissable</code> to control mask dismiss.
       </p>
-    </WkDrawer>
+    </MDrawer>
   </div>
 </template>
 ```

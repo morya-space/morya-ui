@@ -11,14 +11,14 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 ## 引入
 
 ```ts
-import { useContextMenu, WkContextMenu } from '@wise-kit/ui'
+import { useContextMenu, MContextMenu } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkContextMenu } from '@wise-kit/ui'
+import { MContextMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -39,12 +39,12 @@ function onContext(event: MouseEvent) {
 
 <template>
   <div
-    style="border: 1px dashed var(--wk-color-border); padding: 2rem; border-radius: var(--wk-radius-md)"
+    style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
     @contextmenu.prevent="onContext"
   >
     右键此处打开菜单
   </div>
-  <WkContextMenu
+  <MContextMenu
     ref="menu"
     v-model="visible"
     v-model:position="position"
@@ -57,7 +57,7 @@ function onContext(event: MouseEvent) {
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, WkContextMenu } from '@wise-kit/ui'
+import { useContextMenu, MContextMenu } from 'morya-ui'
 
 const menu = useContextMenu()
 const model = [
@@ -68,12 +68,12 @@ const model = [
 
 <template>
   <div
-    style="border: 1px dashed var(--wk-color-border); padding: 2rem; border-radius: var(--wk-radius-md)"
+    style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
     @contextmenu="menu.show"
   >
     右键此处（composable）
   </div>
-  <WkContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
+  <MContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
 </template>
 ```
 

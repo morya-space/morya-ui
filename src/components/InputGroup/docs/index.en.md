@@ -6,19 +6,19 @@ description: Combine an input with prefix and suffix addons into one control gro
 
 # InputGroup
 
-Combine an input with prefix and suffix addons. Use `WkInputGroupAddon` for addons, or add the `wk-inputgroup-addon` class manually.
+Combine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-inputgroup-addon` class manually.
 
 ## Import
 
 ```ts
-import { WkInput, WkInputGroup, WkInputGroupAddon } from '@wise-kit/ui'
+import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput, WkInputGroup, WkInputGroupAddon } from '@wise-kit/ui'
+import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 import { ref } from 'vue'
 
 const price = ref('')
@@ -27,15 +27,15 @@ const url = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <WkInputGroup>
-      <WkInputGroupAddon>$</WkInputGroupAddon>
-      <WkInput v-model="price" placeholder="Price" fluid />
-      <WkInputGroupAddon>.00</WkInputGroupAddon>
-    </WkInputGroup>
-    <WkInputGroup>
-      <WkInputGroupAddon>https://</WkInputGroupAddon>
-      <WkInput v-model="url" placeholder="example.com" fluid />
-    </WkInputGroup>
+    <MInputGroup>
+      <MInputGroupAddon>$</MInputGroupAddon>
+      <MInput v-model="price" placeholder="Price" fluid />
+      <MInputGroupAddon>.00</MInputGroupAddon>
+    </MInputGroup>
+    <MInputGroup>
+      <MInputGroupAddon>https://</MInputGroupAddon>
+      <MInput v-model="url" placeholder="example.com" fluid />
+    </MInputGroup>
   </div>
 </template>
 ```
@@ -46,7 +46,7 @@ const url = ref('')
 | --- | --- |
 | `default` | Addons and input controls. |
 
-The addon component only provides a default slot; its root element class is `wk-inputgroup-addon`.
+The addon component only provides a default slot; its root element class is `m-inputgroup-addon`.
 
 ## Events
 

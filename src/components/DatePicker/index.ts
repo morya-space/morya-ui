@@ -1,5 +1,5 @@
 import './style'
-export { default as WkDatePicker } from './DatePicker.vue'
+export { default as MDatePicker } from './DatePicker.vue'
 export type {
   DatePickerDateValue,
   DatePickerEmits,

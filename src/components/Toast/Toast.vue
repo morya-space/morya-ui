@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ToastMessage, ToastProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
-import { formatLocale, useWkLocale } from '../../locale'
-import { useWkConfig } from '../../shared/config'
+import { formatLocale, useMLocale } from '../../locale'
+import { useMConfig } from '../../shared/config'
 import { plainTextOf } from '../../shared/content'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { WkRenderableView } from '../../shared/Renderable'
+import { MRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import {
   closeToastItem,
@@ -16,15 +16,15 @@ import {
   trimToastsToMax,
   unregisterToastManualHost,
 } from './toastState'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
   teleport: true,
   auto: false,
 })
 const emit = defineEmits<{ (event: 'close', message: ToastMessage): void }>()
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
 const list = computed(() => props.messages ?? toastState.messages)
@@ -51,7 +51,7 @@ watch(
 )
 
 function messageSeverityClass(severity?: ToastMessage['severity']) {
-  return `wk-toast__message--${normalizeSeverity(severity) ?? 'info'}`
+  return `m-toast__message--${normalizeSeverity(severity) ?? 'info'}`
 }
 
 function closeLabel(message: ToastMessage) {
@@ -77,35 +77,35 @@ function onMouseLeave(message: ToastMessage) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
-      class="wk-toast"
-      :class="`wk-toast--${resolvedPosition}`"
+      class="m-toast"
+      :class="`m-toast--${resolvedPosition}`"
       aria-live="polite"
       aria-atomic="true"
     >
-      <TransitionGroup name="wk-slide-fade">
+      <TransitionGroup name="m-slide-fade">
         <article
           v-for="message in list"
           :key="message.id"
-          class="wk-toast__message"
+          class="m-toast__message"
           :class="messageSeverityClass(message.severity)"
           role="status"
           @mouseenter="onMouseEnter(message)"
           @mouseleave="onMouseLeave(message)"
         >
-          <div class="wk-toast__content">
-            <strong><WkRenderableView :value="message.summary" /></strong>
+          <div class="m-toast__content">
+            <strong><MRenderableView :value="message.summary" /></strong>
             <p v-if="message.detail != null && message.detail !== ''">
-              <WkRenderableView :value="message.detail" />
+              <MRenderableView :value="message.detail" />
             </p>
           </div>
           <button
             v-if="message.closable !== false"
             type="button"
-            class="wk-toast__close"
+            class="m-toast__close"
             :aria-label="closeLabel(message)"
             @click="onClose(message)"
           >
-            <WkIcon name="close" size="sm" />
+            <MIcon name="close" size="sm" />
           </button>
         </article>
       </TransitionGroup>

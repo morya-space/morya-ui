@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import type { WkGlobalConfig } from '../../shared/config'
+import type { MGlobalConfig } from '../../shared/config'
 import { applyTheme, getPreferredTheme } from '../../theme'
 import { computed, inject, onBeforeUnmount, toValue, watch } from 'vue'
 import {
-  mergeWkConfig,
-  provideWkConfig,
-  WK_CONFIG_KEY,
+  mergeMConfig,
+  provideMConfig,
+  M_CONFIG_KEY,
 } from '../../shared/config'
 import { applyDensity, applyReducedMotionPolicy } from '../../theme'
 
 const props = defineProps<{
-  /** Global defaults for descendant Wise Kit components. */
-  config?: WkGlobalConfig
+  /** Global defaults for descendant Morya UI components. */
+  config?: MGlobalConfig
   /** Shorthand: default overlay Teleport target. */
-  appendTo?: WkGlobalConfig['appendTo']
+  appendTo?: MGlobalConfig['appendTo']
   /** Shorthand: default control size. */
-  size?: WkGlobalConfig['size']
+  size?: MGlobalConfig['size']
   /** Shorthand: default input variant. */
-  inputVariant?: WkGlobalConfig['inputVariant']
+  inputVariant?: MGlobalConfig['inputVariant']
   /** Shorthand: overlay z-index base. */
-  zIndex?: WkGlobalConfig['zIndex']
+  zIndex?: MGlobalConfig['zIndex']
   /** Shorthand: content density. */
-  density?: WkGlobalConfig['density']
+  density?: MGlobalConfig['density']
   /** Shorthand: color theme (`light` / `dark` / `system`). */
-  theme?: WkGlobalConfig['theme']
+  theme?: MGlobalConfig['theme']
   /** Shorthand: locale dictionary. */
-  locale?: WkGlobalConfig['locale']
+  locale?: MGlobalConfig['locale']
   /** Shorthand: per-component default props. */
-  componentDefaults?: WkGlobalConfig['componentDefaults']
+  componentDefaults?: MGlobalConfig['componentDefaults']
   /**
    * When true (default), honor `prefers-reduced-motion`.
    * Set false to keep transitions when the OS requests reduced motion.
    */
-  respectReducedMotion?: WkGlobalConfig['respectReducedMotion']
+  respectReducedMotion?: MGlobalConfig['respectReducedMotion']
   /**
    * When true (default), also write density / theme to `documentElement`
    * so the whole page picks up token changes. Set false to scope
@@ -41,9 +41,9 @@ const props = defineProps<{
   globalDensity?: boolean
 }>()
 
-const parent = inject(WK_CONFIG_KEY, null)
+const parent = inject(M_CONFIG_KEY, null)
 
-const local = computed<WkGlobalConfig>(() => ({
+const local = computed<MGlobalConfig>(() => ({
   ...(props.config ?? {}),
   ...(props.appendTo !== undefined ? { appendTo: props.appendTo } : {}),
   ...(props.size !== undefined ? { size: props.size } : {}),
@@ -58,12 +58,12 @@ const local = computed<WkGlobalConfig>(() => ({
     : {}),
 }))
 
-const resolved = computed<WkGlobalConfig>(() => {
+const resolved = computed<MGlobalConfig>(() => {
   const parentValue = parent ? toValue(parent) : {}
-  return mergeWkConfig(parentValue, local.value)
+  return mergeMConfig(parentValue, local.value)
 })
 
-provideWkConfig(resolved)
+provideMConfig(resolved)
 
 const densityAttr = computed(() => resolved.value.density ?? 'comfortable')
 const applyGlobal = computed(() => props.globalDensity !== false)
@@ -71,7 +71,7 @@ const applyGlobal = computed(() => props.globalDensity !== false)
 const layerStyle = computed(() => {
   const base = resolved.value.zIndex
   if (base == null) return undefined
-  return { '--wk-z-base': String(base) } as Record<string, string>
+  return { '--m-z-base': String(base) } as Record<string, string>
 })
 
 let previousDensity: string | undefined
@@ -86,7 +86,7 @@ function onSystemThemeChange() {
 
 function syncReducedMotionPolicy() {
   if (typeof document === 'undefined') return
-  previousIgnoreReducedMotion = document.documentElement.dataset.wkIgnoreReducedMotion
+  previousIgnoreReducedMotion = document.documentElement.dataset.muIgnoreReducedMotion
   applyReducedMotionPolicy(resolved.value.respectReducedMotion)
 }
 
@@ -94,12 +94,12 @@ function syncGlobalSideEffects() {
   if (!applyGlobal.value || typeof document === 'undefined') return
   const { density, zIndex, theme } = resolved.value
   if (density) {
-    previousDensity = document.documentElement.dataset.wkDensity
+    previousDensity = document.documentElement.dataset.muDensity
     applyDensity(density)
   }
   if (zIndex != null) {
-    previousZBase = document.documentElement.style.getPropertyValue('--wk-z-base')
-    document.documentElement.style.setProperty('--wk-z-base', String(zIndex))
+    previousZBase = document.documentElement.style.getPropertyValue('--m-z-base')
+    document.documentElement.style.setProperty('--m-z-base', String(zIndex))
   }
   if (theme !== undefined) {
     previousTheme = document.documentElement.dataset.theme
@@ -130,19 +130,19 @@ onBeforeUnmount(() => {
   if (typeof document === 'undefined') return
   if (previousIgnoreReducedMotion !== undefined) {
     if (previousIgnoreReducedMotion) {
-      document.documentElement.dataset.wkIgnoreReducedMotion = previousIgnoreReducedMotion
+      document.documentElement.dataset.muIgnoreReducedMotion = previousIgnoreReducedMotion
     } else {
-      delete document.documentElement.dataset.wkIgnoreReducedMotion
+      delete document.documentElement.dataset.muIgnoreReducedMotion
     }
   }
   if (!applyGlobal.value) return
   if (previousDensity !== undefined) {
-    if (previousDensity) document.documentElement.dataset.wkDensity = previousDensity
-    else delete document.documentElement.dataset.wkDensity
+    if (previousDensity) document.documentElement.dataset.muDensity = previousDensity
+    else delete document.documentElement.dataset.muDensity
   }
   if (previousZBase !== undefined) {
-    if (previousZBase) document.documentElement.style.setProperty('--wk-z-base', previousZBase)
-    else document.documentElement.style.removeProperty('--wk-z-base')
+    if (previousZBase) document.documentElement.style.setProperty('--m-z-base', previousZBase)
+    else document.documentElement.style.removeProperty('--m-z-base')
   }
   if (previousTheme !== undefined) {
     if (previousTheme) document.documentElement.dataset.theme = previousTheme
@@ -154,7 +154,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="wk-config-provider" :data-wk-density="densityAttr" :style="layerStyle">
+  <div class="m-config-provider" :data-m-density="densityAttr" :style="layerStyle">
     <slot />
   </div>
 </template>

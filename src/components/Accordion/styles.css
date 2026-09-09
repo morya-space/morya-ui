@@ -1,55 +1,55 @@
-.wk-accordion {
-    border: var(--wk-border-width) solid var(--wk-color-border);
-    border-radius: var(--wk-radius-md);
+.m-accordion {
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-md);
     overflow: hidden;
 }
 
-.wk-accordion__tab + .wk-accordion__tab {
-    border-top: var(--wk-border-width) solid var(--wk-color-border);
+.m-accordion__tab + .m-accordion__tab {
+    border-top: var(--m-border-width) solid var(--m-color-border);
 }
 
-.wk-accordion__header {
+.m-accordion__header {
     align-items: center;
-    background: var(--wk-color-surface);
+    background: var(--m-color-surface);
     border: 0;
-    color: var(--wk-color-text);
+    color: var(--m-color-text);
     cursor: pointer;
     display: flex;
     font: inherit;
     font-weight: 600;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     justify-content: space-between;
-    padding: var(--wk-space-3) var(--wk-space-4);
+    padding: var(--m-space-3) var(--m-space-4);
     text-align: left;
-    transition: background-color var(--wk-motion-fast) var(--wk-motion-ease);
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
-.wk-accordion__header:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--wk-color-primary) 6%, var(--wk-color-surface));
+.m-accordion__header:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface));
 }
 
-.wk-accordion__header--active {
-    color: var(--wk-color-primary);
+.m-accordion__header--active {
+    color: var(--m-color-primary);
 }
 
-.wk-accordion__header:disabled {
-    color: var(--wk-color-text-muted);
+.m-accordion__header:disabled {
+    color: var(--m-color-text-muted);
     cursor: not-allowed;
-    opacity: var(--wk-opacity-disabled);
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-accordion__header:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-accordion__header:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-accordion__content {
-    background: var(--wk-color-surface);
-    color: var(--wk-color-text);
-    padding: 0 var(--wk-space-4) var(--wk-space-4);
+.m-accordion__content {
+    background: var(--m-color-surface);
+    color: var(--m-color-text);
+    padding: 0 var(--m-space-4) var(--m-space-4);
 }
 
-.wk-accordion__header-extra {
+.m-accordion__header-extra {
     display: inline-flex;
 }

@@ -6,29 +6,29 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 
 # Grid
 
-24 列栅格布局（可用 `cols` 调整）。子项请使用 `WkGridItem`（别名 `WkGi`）。
+24 列栅格布局（可用 `cols` 调整）。子项请使用 `MGridItem`（别名 `MGi`）。
 
 ## 引入
 
 ```ts
-import { WkGrid, WkGridItem } from '@wise-kit/ui'
+import { MGrid, MGridItem } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkGrid, WkGridItem } from '@wise-kit/ui'
+import { MGrid, MGridItem } from 'morya-ui'
 </script>
 
 <template>
-  <WkGrid :cols="4" :x-gap="12" :y-gap="12">
-    <WkGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
+  <MGrid :cols="4" :x-gap="12" :y-gap="12">
+    <MGridItem v-for="n in 4" :key="n" :span="1">
+      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
         {{ n }}
       </div>
-    </WkGridItem>
-  </WkGrid>
+    </MGridItem>
+  </MGrid>
 </template>
 ```
 
@@ -36,44 +36,44 @@ import { WkGrid, WkGridItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkGrid, WkGridItem } from '@wise-kit/ui'
+import { MGrid, MGridItem } from 'morya-ui'
 </script>
 
 <template>
-  <WkGrid :cols="6" :x-gap="12" :y-gap="12">
-    <WkGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
+  <MGrid :cols="6" :x-gap="12" :y-gap="12">
+    <MGridItem :span="2">
+      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
         span 2
       </div>
-    </WkGridItem>
-    <WkGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
+    </MGridItem>
+    <MGridItem :span="2" :offset="1">
+      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
         offset 1
       </div>
-    </WkGridItem>
-  </WkGrid>
+    </MGridItem>
+  </MGrid>
 </template>
 ```
 
 ## Responsive
 
-`cols` / `xGap` / `yGap` 与 `WkGridItem` 的 `span` / `offset` 均支持响应式字符串，例如 `1 s:2 m:3`（断点：`xs` `s` `m` `l` `xl` `2xl`）。
+`cols` / `xGap` / `yGap` 与 `MGridItem` 的 `span` / `offset` 均支持响应式字符串，例如 `1 s:2 m:3`（断点：`xs` `s` `m` `l` `xl` `2xl`）。
 
 当 `cols` / 间距是普通数字、但 item 仍要用响应式 `span` 时，请打开 `itemResponsive`。
 
 ```vue preview
 <script setup lang="ts">
-import { WkGrid, WkGridItem } from '@wise-kit/ui'
+import { MGrid, MGridItem } from 'morya-ui'
 </script>
 
 <template>
-  <WkGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <WkGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
+  <MGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
+    <MGridItem v-for="n in 4" :key="n" span="1 m:2">
+      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
         {{ n }}
       </div>
-    </WkGridItem>
-  </WkGrid>
+    </MGridItem>
+  </MGrid>
 </template>
 ```
 
@@ -81,7 +81,7 @@ import { WkGrid, WkGridItem } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkGrid, WkGridItem } from '@wise-kit/ui'
+import { MButton, MGrid, MGridItem } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(true)
@@ -89,23 +89,23 @@ const collapsed = ref(true)
 
 <template>
   <div style="display:grid;gap:0.75rem">
-    <WkButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
-    <WkGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <WkGridItem v-for="n in 6" :key="n" :span="1">
+    <MButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
+    <MGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
+      <MGridItem v-for="n in 6" :key="n" :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;border:1px solid var(--wk-color-border);border-radius:var(--wk-radius-md)">
+          <div style="padding:0.5rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
             {{ n }}{{ overflow && n > 4 ? '' : '' }}
           </div>
         </template>
-      </WkGridItem>
-      <WkGridItem suffix :span="1">
+      </MGridItem>
+      <MGridItem suffix :span="1">
         <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--wk-color-text-muted);font-size:0.75rem">
+          <div style="padding:0.5rem;color:var(--m-color-text-muted);font-size:0.75rem">
             {{ overflow ? '还有更多…' : '全部' }}
           </div>
         </template>
-      </WkGridItem>
-    </WkGrid>
+      </MGridItem>
+    </MGrid>
   </div>
 </template>
 ```

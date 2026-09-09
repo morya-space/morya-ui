@@ -1,26 +1,26 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkButton from './Button.vue'
+import MButton from './Button.vue'
 
-describe('wkButton', () => {
+describe('muButton', () => {
   it('renders slot label and emits click when enabled', async () => {
-    const wrapper = mount(WkButton, { slots: { default: 'Save' } })
+    const wrapper = mount(MButton, { slots: { default: 'Save' } })
 
     await wrapper.get('button').trigger('click')
 
     expect(wrapper.text()).toContain('Save')
-    expect(wrapper.classes()).toContain('wk-button--primary')
+    expect(wrapper.classes()).toContain('m-button--primary')
     expect(wrapper.emitted('click')).toHaveLength(1)
   })
 
   it('renders label prop when no default slot content', () => {
-    const wrapper = mount(WkButton, { props: { label: 'Submit' } })
+    const wrapper = mount(MButton, { props: { label: 'Submit' } })
     expect(wrapper.text()).toContain('Submit')
   })
 
   it('does not emit click while disabled or loading', async () => {
-    const disabled = mount(WkButton, { props: { disabled: true, label: 'X' } })
-    const loading = mount(WkButton, { props: { loading: true, label: 'X' } })
+    const disabled = mount(MButton, { props: { disabled: true, label: 'X' } })
+    const loading = mount(MButton, { props: { loading: true, label: 'X' } })
 
     await disabled.get('button').trigger('click')
     await loading.get('button').trigger('click')
@@ -28,11 +28,11 @@ describe('wkButton', () => {
     expect(disabled.emitted('click')).toBeUndefined()
     expect(loading.emitted('click')).toBeUndefined()
     expect(loading.get('button').attributes('aria-busy')).toBe('true')
-    expect(loading.find('.wk-button__spinner').exists()).toBe(true)
+    expect(loading.find('.m-button__spinner').exists()).toBe(true)
   })
 
   it('applies severity and style modifiers', () => {
-    const wrapper = mount(WkButton, {
+    const wrapper = mount(MButton, {
       props: {
         label: 'Warn',
         severity: 'warn',
@@ -48,28 +48,28 @@ describe('wkButton', () => {
 
     expect(wrapper.classes()).toEqual(
       expect.arrayContaining([
-        'wk-button--warn',
-        'wk-button--raised',
-        'wk-button--rounded',
-        'wk-button--outlined',
-        'wk-button--text',
-        'wk-button--link',
-        'wk-button--plain',
-        'wk-button--fluid',
+        'm-button--warn',
+        'm-button--raised',
+        'm-button--rounded',
+        'm-button--outlined',
+        'm-button--text',
+        'm-button--link',
+        'm-button--plain',
+        'm-button--fluid',
       ]),
     )
   })
 
   it('supports variant shortcut and size aliases', () => {
-    const outlined = mount(WkButton, { props: { label: 'A', variant: 'outlined', size: 'small' } })
-    const large = mount(WkButton, { props: { label: 'B', size: 'lg' } })
+    const outlined = mount(MButton, { props: { label: 'A', variant: 'outlined', size: 'small' } })
+    const large = mount(MButton, { props: { label: 'B', size: 'lg' } })
 
-    expect(outlined.classes()).toEqual(expect.arrayContaining(['wk-button--outlined', 'wk-button--small']))
-    expect(large.classes()).toContain('wk-button--large')
+    expect(outlined.classes()).toEqual(expect.arrayContaining(['m-button--outlined', 'm-button--small']))
+    expect(large.classes()).toContain('m-button--large')
   })
 
   it('renders icon, iconPos, iconOnly, badge and aria-label', () => {
-    const wrapper = mount(WkButton, {
+    const wrapper = mount(MButton, {
       props: {
         icon: 'edit',
         iconOnly: true,
@@ -81,22 +81,22 @@ describe('wkButton', () => {
       },
     })
 
-    expect(wrapper.find('.wk-button__icon').exists()).toBe(true)
+    expect(wrapper.find('.m-button__icon').exists()).toBe(true)
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(['wk-button--icon-only', 'wk-button--icon-top', 'wk-button--help']),
+      expect.arrayContaining(['m-button--icon-only', 'm-button--icon-top', 'm-button--help']),
     )
     expect(wrapper.get('button').attributes('aria-label')).toBe('Edit item')
-    expect(wrapper.find('.wk-button__badge--danger').text()).toBe('2')
+    expect(wrapper.find('.m-button__badge--danger').text()).toBe('2')
   })
 
   it('supports fluid layout and exposes focus/ref', () => {
-    const wrapper = mount(WkButton, {
+    const wrapper = mount(MButton, {
       props: { label: 'Focus', fluid: true },
       attachTo: document.body,
     })
     const instance = wrapper.vm as unknown as { focus: () => void; ref: HTMLButtonElement | null }
 
-    expect(wrapper.classes()).toContain('wk-button--fluid')
+    expect(wrapper.classes()).toContain('m-button--fluid')
     instance.focus()
     expect(document.activeElement).toBe(wrapper.get('button').element)
     expect(instance.ref).toBe(wrapper.get('button').element)
@@ -105,29 +105,29 @@ describe('wkButton', () => {
   })
 
   it('applies ghost, quaternary, and custom color', () => {
-    const ghost = mount(WkButton, { props: { label: 'Ghost', variant: 'ghost' } })
-    const color = mount(WkButton, { props: { label: 'Tint', color: '#e11d48' } })
-    expect(ghost.classes()).toContain('wk-button--ghost')
-    expect(color.classes()).toContain('wk-button--custom')
-    expect(color.attributes('style')).toContain('--wk-button-color: #e11d48')
+    const ghost = mount(MButton, { props: { label: 'Ghost', variant: 'ghost' } })
+    const color = mount(MButton, { props: { label: 'Tint', color: '#e11d48' } })
+    expect(ghost.classes()).toContain('m-button--ghost')
+    expect(color.classes()).toContain('m-button--custom')
+    expect(color.attributes('style')).toContain('--m-button-color: #e11d48')
   })
 
   it('maps button size to icon sizing', () => {
-    const small = mount(WkButton, { props: { icon: 'edit', iconOnly: true, size: 'small', ariaLabel: 'Edit' } })
-    const large = mount(WkButton, { props: { icon: 'edit', iconOnly: true, size: 'large', ariaLabel: 'Edit' } })
+    const small = mount(MButton, { props: { icon: 'edit', iconOnly: true, size: 'small', ariaLabel: 'Edit' } })
+    const large = mount(MButton, { props: { icon: 'edit', iconOnly: true, size: 'large', ariaLabel: 'Edit' } })
 
-    expect(small.find('.wk-icon').classes()).toContain('wk-icon--small')
-    expect(large.find('.wk-icon').classes()).toContain('wk-icon--large')
+    expect(small.find('.m-icon').classes()).toContain('m-icon--small')
+    expect(large.find('.m-icon').classes()).toContain('m-icon--large')
   })
 
   it('tags custom icon components for button icon normalization', () => {
     const LargeIcon = {
       template: '<svg data-testid="custom-icon" />',
     }
-    const wrapper = mount(WkButton, {
+    const wrapper = mount(MButton, {
       props: { icon: LargeIcon, iconOnly: true, ariaLabel: 'Custom' },
     })
 
-    expect(wrapper.find('[data-testid="custom-icon"]').classes()).toContain('wk-button__icon-graphic')
+    expect(wrapper.find('[data-testid="custom-icon"]').classes()).toContain('m-button__icon-graphic')
   })
 })

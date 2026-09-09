@@ -1,12 +1,12 @@
 import type { CSSProperties } from 'vue'
 
-export type WkGapToken = 'small' | 'medium' | 'large'
-export type WkGapSize = WkGapToken | number | [number, number]
+export type MGapToken = 'small' | 'medium' | 'large'
+export type MGapSize = MGapToken | number | [number, number]
 
-const TOKEN_GAP: Record<WkGapToken, string> = {
-  small: 'var(--wk-space-2)',
-  medium: 'var(--wk-space-3)',
-  large: 'var(--wk-space-4)',
+const TOKEN_GAP: Record<MGapToken, string> = {
+  small: 'var(--m-space-2)',
+  medium: 'var(--m-space-3)',
+  large: 'var(--m-space-4)',
 }
 
 export interface ResolvedGap {
@@ -20,11 +20,11 @@ export interface ResolvedGap {
 
 /** Resolve Space / Flex / Grid gap tokens to CSS lengths. */
 export function resolveGapCSSValue(
-  size: WkGapSize | string | number | undefined | null,
+  size: MGapSize | string | number | undefined | null,
 ): string {
   if (size == null || size === '') return '0'
   if (typeof size === 'string') {
-    const token = size.trim() as WkGapToken
+    const token = size.trim() as MGapToken
     if (token in TOKEN_GAP) return TOKEN_GAP[token]
     if (/^\d+(\.\d+)?$/.test(size.trim())) return `${size.trim()}px`
     return TOKEN_GAP.medium
@@ -37,7 +37,7 @@ export function resolveGapCSSValue(
   return TOKEN_GAP.medium
 }
 /** Resolve Space / Flex size prop into CSS gap lengths. */
-export function resolveGap(size: WkGapSize = 'medium'): ResolvedGap {
+export function resolveGap(size: MGapSize = 'medium'): ResolvedGap {
   if (Array.isArray(size)) {
     const col = `${size[0]}px`
     const row = `${size[1]}px`
@@ -51,8 +51,8 @@ export function resolveGap(size: WkGapSize = 'medium'): ResolvedGap {
   return { row: value, col: value, css: value }
 }
 
-export type WkFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch'
-export type WkFlexJustify =
+export type MFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch'
+export type MFlexJustify =
   | 'start'
   | 'end'
   | 'center'
@@ -60,7 +60,7 @@ export type WkFlexJustify =
   | 'space-between'
   | 'space-evenly'
 
-export function resolveAlign(align?: WkFlexAlign): CSSProperties['alignItems'] {
+export function resolveAlign(align?: MFlexAlign): CSSProperties['alignItems'] {
   if (!align) return undefined
   if (align === 'start') return 'flex-start'
   if (align === 'end') return 'flex-end'
@@ -68,7 +68,7 @@ export function resolveAlign(align?: WkFlexAlign): CSSProperties['alignItems'] {
 }
 
 export function resolveJustify(
-  justify: WkFlexJustify = 'start',
+  justify: MFlexJustify = 'start',
 ): NonNullable<CSSProperties['justifyContent']> {
   if (justify === 'start') return 'flex-start'
   if (justify === 'end') return 'flex-end'

@@ -11,21 +11,21 @@ Reorder with a drag handle (native HTML5 DnD, no external library). Up and down 
 ## Import
 
 ```ts
-import { WkOrderList } from '@wise-kit/ui'
+import { MOrderList } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkOrderList } from '@wise-kit/ui'
+import { MOrderList } from 'morya-ui'
 import { ref } from 'vue'
 
 const items = ref(['Design', 'Development', 'Testing', 'Release'])
 </script>
 
 <template>
-  <WkOrderList v-model="items" />
+  <MOrderList v-model="items" />
 </template>
 ```
 

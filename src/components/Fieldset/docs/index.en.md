@@ -11,25 +11,25 @@ Group a form or related content with a legend.
 ## Import
 
 ```ts
-import { WkFieldset } from '@wise-kit/ui'
+import { MFieldset } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkFieldset } from '@wise-kit/ui'
+import { MFieldset } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
+  <MFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
     <p style="margin:0">
       Field group content.
     </p>
-  </WkFieldset>
+  </MFieldset>
 </template>
 ```
 

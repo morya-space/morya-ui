@@ -11,23 +11,23 @@ description: 浮动标签容器，聚焦或有值时上浮。
 ## 引入
 
 ```ts
-import { WkFloatLabel, WkInput } from '@wise-kit/ui'
+import { MFloatLabel, MInput } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkFloatLabel, WkInput } from '@wise-kit/ui'
+import { MFloatLabel, MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WkFloatLabel label="Username">
-    <WkInput v-model="value" placeholder=" " />
-  </WkFloatLabel>
+  <MFloatLabel label="Username">
+    <MInput v-model="value" placeholder=" " />
+  </MFloatLabel>
 </template>
 ```
 

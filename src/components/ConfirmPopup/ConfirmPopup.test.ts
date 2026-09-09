@@ -1,17 +1,17 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
-import WkConfirmPopup from './ConfirmPopup.vue'
+import MConfirmPopup from './ConfirmPopup.vue'
 
-describe('wkConfirmPopup', () => {
+describe('muConfirmPopup', () => {
   it('emits accept and closes', async () => {
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, message: 'Delete?', acceptLabel: 'Yes', rejectLabel: 'No' },
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.wk-confirmpopup__message')?.textContent).toContain('Delete?')
-    const buttons = Array.from(document.body.querySelectorAll('.wk-confirmpopup .wk-button'))
+    expect(document.body.querySelector('.m-confirmpopup__message')?.textContent).toContain('Delete?')
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
     expect(accept).toBeTruthy()
     accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -22,12 +22,12 @@ describe('wkConfirmPopup', () => {
   })
 
   it('emits reject from cancel', async () => {
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, position: { top: 10, left: 20 } },
       attachTo: document.body,
     })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.wk-confirmpopup .wk-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
     const reject = buttons.find((btn) => btn.textContent?.includes('取消'))
     expect(reject).toBeTruthy()
     reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -37,34 +37,34 @@ describe('wkConfirmPopup', () => {
   })
 
   it('teleports popup to body by default', async () => {
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, message: 'Hi' },
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.wk-confirmpopup--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-confirmpopup--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
   it('keeps open when beforeAccept returns false', async () => {
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, message: 'Sure?', acceptLabel: 'Yes', beforeAccept: () => false, teleport: false },
     })
-    const accept = wrapper.findAll('.wk-button').find((btn) => btn.text().includes('Yes'))
+    const accept = wrapper.findAll('.m-button').find((btn) => btn.text().includes('Yes'))
     await accept!.trigger('click')
     await nextTick()
     expect(wrapper.emitted('accept')).toBeUndefined()
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-    expect(wrapper.find('.wk-confirmpopup').exists()).toBe(true)
+    expect(wrapper.find('.m-confirmpopup').exists()).toBe(true)
   })
 
   it('uses non-modal semantics without aria-modal', async () => {
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, message: 'Hi' },
       attachTo: document.body,
     })
     await nextTick()
-    const panel = document.body.querySelector('.wk-confirmpopup')
+    const panel = document.body.querySelector('.m-confirmpopup')
     expect(panel?.getAttribute('role')).toBe('alertdialog')
     expect(panel?.getAttribute('aria-modal')).toBeNull()
     wrapper.unmount()
@@ -74,12 +74,12 @@ describe('wkConfirmPopup', () => {
     const target = document.createElement('button')
     document.body.appendChild(target)
     target.focus()
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, message: 'Sure?', target },
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.activeElement?.classList.contains('wk-confirmpopup')).toBe(true)
+    expect(document.activeElement?.classList.contains('m-confirmpopup')).toBe(true)
     await wrapper.setProps({ modelValue: false })
     await nextTick()
     expect(document.activeElement).toBe(target)
@@ -88,14 +88,14 @@ describe('wkConfirmPopup', () => {
   })
 
   it('applies acceptSeverity to the accept button', async () => {
-    const wrapper = mount(WkConfirmPopup, {
+    const wrapper = mount(MConfirmPopup, {
       props: { modelValue: true, message: 'Delete?', acceptLabel: 'Yes', acceptSeverity: 'danger' },
       attachTo: document.body,
     })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.wk-confirmpopup .wk-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
-    expect(accept?.classList.contains('wk-button--danger')).toBe(true)
+    expect(accept?.classList.contains('m-button--danger')).toBe(true)
     wrapper.unmount()
   })
 })

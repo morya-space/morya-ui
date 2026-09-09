@@ -11,22 +11,22 @@ description: 在子元素之间自动加入一致间距的布局容器。
 ## 引入
 
 ```ts
-import { WkSpace } from '@wise-kit/ui'
+import { MSpace } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkSpace } from '@wise-kit/ui'
+import { MButton, MSpace } from 'morya-ui'
 </script>
 
 <template>
-  <WkSpace>
-    <WkButton label="保存" size="small" />
-    <WkButton label="取消" size="small" severity="secondary" />
-    <WkButton label="重置" size="small" severity="secondary" />
-  </WkSpace>
+  <MSpace>
+    <MButton label="保存" size="small" />
+    <MButton label="取消" size="small" severity="secondary" />
+    <MButton label="重置" size="small" severity="secondary" />
+  </MSpace>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WkButton, WkSpace } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSpace, WkTag } from '@wise-kit/ui'
+import { MSpace, MTag } from 'morya-ui'
 </script>
 
 <template>
-  <WkSpace vertical>
-    <WkTag value="Alpha" />
-    <WkTag value="Bravo" />
-    <WkTag value="Charlie" />
-  </WkSpace>
+  <MSpace vertical>
+    <MTag value="Alpha" />
+    <MTag value="Bravo" />
+    <MTag value="Charlie" />
+  </MSpace>
 </template>
 ```
 
@@ -50,24 +50,24 @@ import { WkSpace, WkTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkSpace } from '@wise-kit/ui'
+import { MButton, MSpace } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WkSpace size="small">
-      <WkButton label="S" size="small" />
-      <WkButton label="S" size="small" severity="secondary" />
-    </WkSpace>
-    <WkSpace :size="20">
-      <WkButton label="20px" size="small" />
-      <WkButton label="20px" size="small" severity="secondary" />
-    </WkSpace>
+    <MSpace size="small">
+      <MButton label="S" size="small" />
+      <MButton label="S" size="small" severity="secondary" />
+    </MSpace>
+    <MSpace :size="20">
+      <MButton label="20px" size="small" />
+      <MButton label="20px" size="small" severity="secondary" />
+    </MSpace>
   </div>
 </template>
 ```
 
-未传 `size` 时默认 `medium`。可用 `WkConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
+未传 `size` 时默认 `medium`。可用 `MConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
 
 ## Without Item Wrapper
 
@@ -75,14 +75,14 @@ import { WkButton, WkSpace } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSpace, WkTag } from '@wise-kit/ui'
+import { MSpace, MTag } from 'morya-ui'
 </script>
 
 <template>
-  <WkSpace :wrap-item="false" :size="8">
-    <WkTag value="Direct" />
-    <WkTag value="Children" />
-  </WkSpace>
+  <MSpace :wrap-item="false" :size="8">
+    <MTag value="Direct" />
+    <MTag value="Children" />
+  </MSpace>
 </template>
 ```
 

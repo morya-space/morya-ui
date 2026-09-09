@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import { useConfiguredSize, useWkConfig } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
+import { useMLocale } from '../../locale'
+import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WkIcon from '../Icon/Icon.vue'
-import WkScrollbar from '../Scrollbar/Scrollbar.vue'
+import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   modelValue: '',
@@ -28,10 +28,10 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
-const autoFieldId = useWkId('wk-autocomplete')
+const autoFieldId = useMId('m-autocomplete')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -63,13 +63,13 @@ const filtered = computed(() => {
 const showClear = computed(() => props.clearable && Boolean(props.modelValue) && !props.disabled)
 
 const rootClass = computed(() => [
-  'wk-autocomplete',
-  `wk-autocomplete--${sizeClass.value}`,
+  'm-autocomplete',
+  `m-autocomplete--${sizeClass.value}`,
   {
-    'wk-autocomplete--disabled': props.disabled,
-    'wk-autocomplete--open': open.value,
-    'wk-autocomplete--loading': props.loading,
-    'wk-autocomplete--invalid': isInvalid.value,
+    'm-autocomplete--disabled': props.disabled,
+    'm-autocomplete--open': open.value,
+    'm-autocomplete--loading': props.loading,
+    'm-autocomplete--invalid': isInvalid.value,
   },
 ])
 
@@ -181,13 +181,13 @@ const panelOpen = computed(() => open.value)
 </script>
 
 <template>
-  <div ref="root" class="wk-select-field">
-    <label v-if="label" class="wk-select-field__label" :for="fieldId">{{ label }}</label>
+  <div ref="root" class="m-select-field">
+    <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
-      <div ref="trigger" class="wk-autocomplete__control">
+      <div ref="trigger" class="m-autocomplete__control">
         <input
           :id="fieldId"
-          class="wk-autocomplete__input"
+          class="m-autocomplete__input"
           type="text"
           role="combobox"
           :value="modelValue"
@@ -202,61 +202,61 @@ const panelOpen = computed(() => open.value)
           @keydown="onKeydown"
           @focus="requestComplete(modelValue ?? '')"
         >
-      <span v-if="loading" class="wk-autocomplete__spinner" aria-hidden="true" />
+      <span v-if="loading" class="m-autocomplete__spinner" aria-hidden="true" />
       <button
         v-else-if="showClear"
         type="button"
-        class="wk-autocomplete__clear"
+        class="m-autocomplete__clear"
         :aria-label="locale.clearInput"
         @click="clear"
       >
-        <WkIcon name="close" size="sm" />
+        <MIcon name="close" size="sm" />
       </button>
       <button
         v-if="dropdown"
         type="button"
-        class="wk-autocomplete__dropdown"
+        class="m-autocomplete__dropdown"
         :aria-label="locale.showSuggestions"
         :disabled="disabled"
         @click="toggleDropdown"
       >
-        <WkIcon name="chevron-down" size="sm" />
+        <MIcon name="chevron-down" size="sm" />
       </button>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wk-scale-fade">
+      <Transition name="m-scale-fade">
         <div
           v-if="panelOpen"
           ref="panel"
-          class="wk-autocomplete__panel"
-          :class="{ 'wk-autocomplete__panel--teleported': teleported }"
+          class="m-autocomplete__panel"
+          :class="{ 'm-autocomplete__panel--teleported': teleported }"
           :style="teleported ? panelStyle : undefined"
         >
-          <WkScrollbar
+          <MScrollbar
             tag="ul"
             role="listbox"
-            class="wk-autocomplete__panel-scroll"
+            class="m-autocomplete__panel-scroll"
             fit-content
-            view-class="wk-autocomplete__panel-list"
+            view-class="m-autocomplete__panel-list"
           >
-            <li v-if="loading && !filtered.length" class="wk-autocomplete__status">
+            <li v-if="loading && !filtered.length" class="m-autocomplete__status">
               {{ locale.loading }}
             </li>
-            <li v-else-if="!filtered.length" class="wk-autocomplete__status">
+            <li v-else-if="!filtered.length" class="m-autocomplete__status">
               <slot name="empty">{{ resolvedEmptyMessage }}</slot>
             </li>
             <li
               v-for="(item, index) in filtered"
               :key="`${item.value}-${index}`"
-              class="wk-autocomplete__item"
+              class="m-autocomplete__item"
               role="option"
-              :class="{ 'wk-autocomplete__item--active': index === highlight }"
+              :class="{ 'm-autocomplete__item--active': index === highlight }"
               :aria-selected="index === highlight"
               @mousedown.prevent="select(item)"
             >
               <slot name="item" :option="item">{{ item.label }}</slot>
             </li>
-          </WkScrollbar>
+          </MScrollbar>
         </div>
       </Transition>
     </Teleport>
@@ -264,8 +264,8 @@ const panelOpen = computed(() => open.value)
     <span
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="wk-select-field__help"
-      :class="{ 'wk-select-field__help--invalid': feedbackIsError }"
+      class="m-select-field__help"
+      :class="{ 'm-select-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

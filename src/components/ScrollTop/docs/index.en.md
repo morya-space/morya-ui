@@ -11,14 +11,14 @@ Listens to window or parent scroll and jumps back to the top.
 ## Import
 
 ```ts
-import { WkScrollTop } from '@wise-kit/ui'
+import { MScrollTop } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkScrollTop } from '@wise-kit/ui'
+import { MScrollTop } from 'morya-ui'
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import { WkScrollTop } from '@wise-kit/ui'
     <div style="height: 40rem">
       Scroll down…
     </div>
-    <WkScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    <MScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
   </div>
 </template>
 ```

@@ -1,16 +1,16 @@
-.wk-progress-spinner {
-    --wk-progress-spinner-size: 2.5rem;
-    --wk-progress-spinner-color: var(--wk-color-primary);
-    animation: wk-progress-spinner-rotate var(--wk-motion-spin) linear infinite;
-    color: var(--wk-progress-spinner-color);
+.m-progress-spinner {
+    --m-progress-spinner-size: 2.5rem;
+    --m-progress-spinner-color: var(--m-color-primary);
+    animation: wk-progress-spinner-rotate var(--m-motion-spin) linear infinite;
+    color: var(--m-progress-spinner-color);
     display: inline-block;
-    height: var(--wk-progress-spinner-size);
+    height: var(--m-progress-spinner-size);
     vertical-align: middle;
-    width: var(--wk-progress-spinner-size);
+    width: var(--m-progress-spinner-size);
 }
 
-.wk-progress-spinner__circle {
-    animation: wk-progress-spinner-dash var(--wk-motion-spin-dash) ease-in-out infinite;
+.m-progress-spinner__circle {
+    animation: wk-progress-spinner-dash var(--m-motion-spin-dash) ease-in-out infinite;
     stroke: currentColor;
     stroke-dasharray: 90, 150;
     stroke-dashoffset: 0;
@@ -32,35 +32,35 @@
     }
 }
 
-.wk-progress-spinner--small {
-    --wk-progress-spinner-size: 1.5rem;
+.m-progress-spinner--small {
+    --m-progress-spinner-size: 1.5rem;
 }
 
-.wk-progress-spinner--large {
-    --wk-progress-spinner-size: 3.5rem;
+.m-progress-spinner--large {
+    --m-progress-spinner-size: 3.5rem;
 }
 
-.wk-progress-spinner-wrap {
+.m-progress-spinner-wrap {
     position: relative;
 }
 
-.wk-progress-spinner-wrap--active .wk-progress-spinner-wrap__content {
-    opacity: var(--wk-opacity-disabled);
+.m-progress-spinner-wrap--active .m-progress-spinner-wrap__content {
+    opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
 
-.wk-progress-spinner-wrap__overlay {
+.m-progress-spinner-wrap__overlay {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     inset: 0;
     justify-content: center;
     position: absolute;
 }
 
-.wk-progress-spinner__description {
-    color: var(--wk-color-text-muted);
-    font-size: var(--wk-font-size-sm);
+.m-progress-spinner__description {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-sm);
     margin: 0;
 }

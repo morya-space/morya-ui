@@ -1,15 +1,15 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
-import WkDock from './Dock.vue'
+import MDock from './Dock.vue'
 
-describe('wkDock', () => {
+describe('muDock', () => {
   it('renders dock icons and runs command', async () => {
     const command = vi.fn()
-    const wrapper = mount(WkDock, {
+    const wrapper = mount(MDock, {
       props: { model: [{ label: 'Finder', icon: '📁', command }] },
     })
-    expect(wrapper.classes()).toContain('wk-dock')
-    await wrapper.find('.wk-dock__button').trigger('click')
+    expect(wrapper.classes()).toContain('m-dock')
+    await wrapper.find('.m-dock__button').trigger('click')
     expect(command).toHaveBeenCalled()
   })
 })

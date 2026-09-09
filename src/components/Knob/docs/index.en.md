@@ -11,21 +11,21 @@ Circular dial control with drag and keyboard adjustment.
 ## Import
 
 ```ts
-import { WkKnob } from '@wise-kit/ui'
+import { MKnob } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkKnob } from '@wise-kit/ui'
+import { MKnob } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(60)
 </script>
 
 <template>
-  <WkKnob v-model="value" :size="120" value-template="{value}%" />
+  <MKnob v-model="value" :size="120" value-template="{value}%" />
 </template>
 ```
 

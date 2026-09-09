@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { SplitButtonItem, SplitButtonProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import { useConfiguredSize, useWkConfig } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
+import { useMLocale } from '../../locale'
+import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveIconSizeFromClass } from '../../shared/types'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { isIconName } from '../Icon/icons'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
   model: () => [],
@@ -23,14 +23,14 @@ const emit = defineEmits<{
   (event: 'command', item: SplitButtonItem): void
 }>()
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
 const menuStyle = ref<Record<string, string>>({})
-const menuId = useWkId('wk-splitbutton-menu')
+const menuId = useMId('m-splitbutton-menu')
 const sizeClass = useConfiguredSize('SplitButton', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const iconName = computed(() => (props.icon && isIconName(props.icon) ? props.icon : undefined))
@@ -39,13 +39,13 @@ const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 const rootClass = computed(() => [
-  'wk-splitbutton',
-  `wk-splitbutton--${sizeClass.value}`,
+  'm-splitbutton',
+  `m-splitbutton--${sizeClass.value}`,
   {
-    'wk-splitbutton--disabled': props.disabled,
-    'wk-splitbutton--outlined': props.outlined,
-    [`wk-splitbutton--${props.severity}`]: Boolean(props.severity),
-    'wk-splitbutton--open': open.value,
+    'm-splitbutton--disabled': props.disabled,
+    'm-splitbutton--outlined': props.outlined,
+    [`m-splitbutton--${props.severity}`]: Boolean(props.severity),
+    'm-splitbutton--open': open.value,
   },
 ])
 
@@ -79,7 +79,7 @@ const keyboard = useMenuKeyboard({
 function focusActiveItem() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  menu.value?.querySelectorAll<HTMLElement>('.wk-splitbutton__item')[index]?.focus({ preventScroll: true })
+  menu.value?.querySelectorAll<HTMLElement>('.m-splitbutton__item')[index]?.focus({ preventScroll: true })
 }
 
 function onMainClick(event: MouseEvent) {
@@ -171,13 +171,13 @@ onBeforeUnmount(() => {
   <div ref="root" :class="rootClass">
     <button
       type="button"
-      class="wk-splitbutton__main"
+      class="m-splitbutton__main"
       :disabled="disabled"
       @click="onMainClick"
     >
       <slot>
-        <span v-if="iconName || iconGlyph" class="wk-splitbutton__icon" aria-hidden="true">
-          <WkIcon v-if="iconName" :name="iconName" :size="iconSize" />
+        <span v-if="iconName || iconGlyph" class="m-splitbutton__icon" aria-hidden="true">
+          <MIcon v-if="iconName" :name="iconName" :size="iconSize" />
           <template v-else>{{ iconGlyph }}</template>
         </span>
         <span v-if="label">{{ label }}</span>
@@ -186,7 +186,7 @@ onBeforeUnmount(() => {
     <button
       ref="trigger"
       type="button"
-      class="wk-splitbutton__trigger"
+      class="m-splitbutton__trigger"
       :aria-label="locale.moreActions"
       :aria-expanded="open"
       :aria-controls="open ? menuId : undefined"
@@ -195,16 +195,16 @@ onBeforeUnmount(() => {
       @click="toggleMenu"
       @keydown="onTriggerKeydown"
     >
-      <WkIcon name="chevron-down" :size="iconSize" />
+      <MIcon name="chevron-down" :size="iconSize" />
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wk-scale-fade">
+      <Transition name="m-scale-fade">
         <ul
           v-if="open"
           :id="menuId"
           ref="menu"
-          class="wk-splitbutton__menu"
-          :class="{ 'wk-splitbutton__menu--teleported': teleported }"
+          class="m-splitbutton__menu"
+          :class="{ 'm-splitbutton__menu--teleported': teleported }"
           :style="teleported ? menuStyle : undefined"
           role="menu"
           @keydown="keyboard.onKeydown"
@@ -212,7 +212,7 @@ onBeforeUnmount(() => {
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="presentation">
             <button
               type="button"
-              class="wk-splitbutton__item"
+              class="m-splitbutton__item"
               role="menuitem"
               :disabled="item.disabled"
               :tabindex="keyboard.tabindexFor(index)"

@@ -35,9 +35,9 @@ function componentApiPayload(component: ComponentRecord) {
 function registerStaticResources(server: McpServer, catalog: Catalog) {
   server.registerResource(
     'catalog-index',
-    'wi://catalog/index.json',
+    'm://catalog/index.json',
     {
-      title: 'Wise Kit UI catalog index',
+      title: 'Morya UI catalog index',
       description: 'Index of all components and guides in the MCP catalog.',
       mimeType: 'application/json',
     },
@@ -55,15 +55,15 @@ function registerStaticResources(server: McpServer, catalog: Catalog) {
                 id: item.id,
                 exportName: item.exportName,
                 category: item.category,
-                docsZh: `wi://components/${item.id}/docs/zh-CN`,
-                docsEn: `wi://components/${item.id}/docs/en-US`,
-                api: `wi://components/${item.id}/api.json`,
+                docsZh: `m://components/${item.id}/docs/zh-CN`,
+                docsEn: `m://components/${item.id}/docs/en-US`,
+                api: `m://components/${item.id}/api.json`,
               })),
               guides: catalog.guides.map((item) => ({
                 id: item.id,
                 title: item.title,
-                docsZh: `wi://guides/${item.id}/docs/zh-CN`,
-                docsEn: `wi://guides/${item.id}/docs/en-US`,
+                docsZh: `m://guides/${item.id}/docs/zh-CN`,
+                docsEn: `m://guides/${item.id}/docs/en-US`,
               })),
             },
             null,
@@ -76,9 +76,9 @@ function registerStaticResources(server: McpServer, catalog: Catalog) {
 
   server.registerResource(
     'design-rules',
-    'wi://design-rules.json',
+    'm://design-rules.json',
     {
-      title: 'Wise Kit design rules',
+      title: 'Morya UI design rules',
       description: 'Design tokens, semantic actions, accessibility, and composition rules.',
       mimeType: 'application/json',
     },
@@ -99,13 +99,13 @@ function registerComponentDocTemplate(server: McpServer, catalog: Catalog) {
 
   server.registerResource(
     'component-docs',
-    new ResourceTemplate('wi://components/{component}/docs/{locale}', {
+    new ResourceTemplate('m://components/{component}/docs/{locale}', {
       list: async () => ({
         resources: catalog.components.flatMap((component) =>
           DOC_LOCALES.filter((locale) => component.locales[locale]?.markdown).map((locale) => {
             const doc = component.locales[locale]!
             return {
-              uri: `wi://components/${component.id}/docs/${locale}`,
+              uri: `m://components/${component.id}/docs/${locale}`,
               name: `${component.id}-docs-${locale}`,
               title: `${component.exportName} documentation (${locale})`,
               description: doc.description || component.description,
@@ -121,7 +121,7 @@ function registerComponentDocTemplate(server: McpServer, catalog: Catalog) {
     }),
     {
       title: 'Component documentation',
-      description: 'Markdown documentation for a @wise-kit/ui component.',
+      description: 'Markdown documentation for a morya-ui component.',
       mimeType: 'text/markdown',
     },
     async (uri, variables) => {
@@ -143,10 +143,10 @@ function registerComponentApiTemplate(server: McpServer, catalog: Catalog) {
 
   server.registerResource(
     'component-api',
-    new ResourceTemplate('wi://components/{component}/api.json', {
+    new ResourceTemplate('m://components/{component}/api.json', {
       list: async () => ({
         resources: catalog.components.map((component) => ({
-          uri: `wi://components/${component.id}/api.json`,
+          uri: `m://components/${component.id}/api.json`,
           name: `${component.id}-api`,
           title: `${component.exportName} API`,
           description: `Props, events, and slots for ${component.exportName}.`,
@@ -159,7 +159,7 @@ function registerComponentApiTemplate(server: McpServer, catalog: Catalog) {
     }),
     {
       title: 'Component API',
-      description: 'Props, events, slots, and methods for a @wise-kit/ui component.',
+      description: 'Props, events, slots, and methods for a morya-ui component.',
       mimeType: 'application/json',
     },
     async (uri, variables) => {
@@ -185,13 +185,13 @@ function registerGuideDocTemplate(server: McpServer, catalog: Catalog) {
 
   server.registerResource(
     'guide-docs',
-    new ResourceTemplate('wi://guides/{guide}/docs/{locale}', {
+    new ResourceTemplate('m://guides/{guide}/docs/{locale}', {
       list: async () => ({
         resources: catalog.guides.flatMap((guide) =>
           DOC_LOCALES.filter((locale) => guide.locales[locale]?.markdown).map((locale) => {
             const doc = guide.locales[locale]!
             return {
-              uri: `wi://guides/${guide.id}/docs/${locale}`,
+              uri: `m://guides/${guide.id}/docs/${locale}`,
               name: `${guide.id}-docs-${locale}`,
               title: `${doc.title} (${locale})`,
               description: doc.description,
@@ -207,7 +207,7 @@ function registerGuideDocTemplate(server: McpServer, catalog: Catalog) {
     }),
     {
       title: 'Guide documentation',
-      description: 'Markdown guide docs for @wise-kit/ui.',
+      description: 'Markdown guide docs for morya-ui.',
       mimeType: 'text/markdown',
     },
     async (uri, variables) => {

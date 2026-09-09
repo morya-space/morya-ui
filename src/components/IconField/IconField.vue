@@ -7,14 +7,14 @@ const props = withDefaults(defineProps<IconFieldProps>(), {
 })
 
 const rootClass = computed(() => [
-  'wk-icon-field',
-  props.iconPosition === 'right' ? 'wk-icon-field--right' : 'wk-icon-field--left',
+  'm-icon-field',
+  props.iconPosition === 'right' ? 'm-icon-field--right' : 'm-icon-field--left',
 ])
 </script>
 
 <template>
   <div :class="rootClass">
-    <span v-if="$slots.icon" class="wk-icon-field__icon" aria-hidden="true">
+    <span v-if="$slots.icon" class="m-icon-field__icon" aria-hidden="true">
       <slot name="icon" />
     </span>
     <slot />

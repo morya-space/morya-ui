@@ -11,14 +11,14 @@ description: 可折叠面板组。支持单开 / 多开，tabs 配置 header 与
 ## 引入
 
 ```ts
-import { WkAccordion } from '@wise-kit/ui'
+import { MAccordion } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkAccordion } from '@wise-kit/ui'
+import { MAccordion } from 'morya-ui'
 import { ref } from 'vue'
 
 const active = ref('design')
@@ -30,7 +30,7 @@ const tabs = [
 </script>
 
 <template>
-  <WkAccordion v-model="active" :tabs="tabs">
+  <MAccordion v-model="active" :tabs="tabs">
     <template #design>
       <p style="margin:0">
         Design system tokens and layout rules.
@@ -41,7 +41,7 @@ const tabs = [
         Implementation notes and API contracts.
       </p>
     </template>
-  </WkAccordion>
+  </MAccordion>
 </template>
 ```
 
@@ -49,7 +49,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkAccordion } from '@wise-kit/ui'
+import { MAccordion } from 'morya-ui'
 import { ref } from 'vue'
 
 const active = ref<string[]>(['a'])
@@ -60,7 +60,7 @@ const tabs = [
 </script>
 
 <template>
-  <WkAccordion v-model="active" multiple :tabs="tabs">
+  <MAccordion v-model="active" multiple :tabs="tabs">
     <template #a>
       <p style="margin:0">
         First section content.
@@ -71,7 +71,7 @@ const tabs = [
         Second section content.
       </p>
     </template>
-  </WkAccordion>
+  </MAccordion>
 </template>
 ```
 
@@ -81,7 +81,7 @@ const tabs = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkAccordion, WkButton } from '@wise-kit/ui'
+import { MAccordion, MButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const active = ref('a')
@@ -91,16 +91,16 @@ const tabs = [
 </script>
 
 <template>
-  <WkAccordion v-model="active" :tabs="tabs">
+  <MAccordion v-model="active" :tabs="tabs">
     <template #extra="{ tab }">
-      <WkButton :label="tab.header" size="small" text />
+      <MButton :label="tab.header" size="small" text />
     </template>
     <template #a>
       <p style="margin:0">
         Content.
       </p>
     </template>
-  </WkAccordion>
+  </MAccordion>
 </template>
 ```
 

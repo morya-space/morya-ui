@@ -1,52 +1,52 @@
 /* —— Form: ToggleButton —— */
-.wk-togglebutton {
-    --wk-button-padding-x-small: var(--wk-control-padding-x-small);
-    --wk-button-padding-x-medium: calc(
-        var(--wk-control-padding-x-medium) + var(--wk-space-1)
+.m-togglebutton {
+    --m-button-padding-x-small: var(--m-control-padding-x-small);
+    --m-button-padding-x-medium: calc(
+        var(--m-control-padding-x-medium) + var(--m-space-1)
     );
-    --wk-button-padding-x-large: calc(
-        var(--wk-control-padding-x-large) + var(--wk-space-1)
+    --m-button-padding-x-large: calc(
+        var(--m-control-padding-x-large) + var(--m-space-1)
     );
     align-items: center;
-    background: color-mix(in srgb, var(--wk-color-text-muted) 14%, var(--wk-color-surface));
-    border: var(--wk-border-width) solid var(--wk-color-border);
-    border-radius: var(--wk-radius-control);
-    color: var(--wk-color-text);
+    background: color-mix(in srgb, var(--m-color-text-muted) 14%, var(--m-color-surface));
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-control);
+    color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    font-size: var(--wk-control-font-medium);
+    font-size: var(--m-control-font-medium);
     font-weight: 600;
-    gap: var(--wk-space-2);
-    min-height: var(--wk-control-height-medium);
-    padding: 0 var(--wk-button-padding-x-medium);
+    gap: var(--m-space-2);
+    min-height: var(--m-control-height-medium);
+    padding: 0 var(--m-button-padding-x-medium);
 }
 
-.wk-togglebutton--small {
-    font-size: var(--wk-control-font-small);
-    min-height: var(--wk-control-height-small);
-    padding: 0 var(--wk-button-padding-x-small);
+.m-togglebutton--small {
+    font-size: var(--m-control-font-small);
+    min-height: var(--m-control-height-small);
+    padding: 0 var(--m-button-padding-x-small);
 }
 
-.wk-togglebutton--large {
-    font-size: var(--wk-control-font-large);
-    min-height: var(--wk-control-height-large);
-    padding: 0 var(--wk-button-padding-x-large);
+.m-togglebutton--large {
+    font-size: var(--m-control-font-large);
+    min-height: var(--m-control-height-large);
+    padding: 0 var(--m-button-padding-x-large);
 }
 
-.wk-togglebutton--checked {
-    background: var(--wk-color-primary);
-    border-color: var(--wk-color-primary);
-    color: var(--wk-color-on-emphasis);
+.m-togglebutton--checked {
+    background: var(--m-color-primary);
+    border-color: var(--m-color-primary);
+    color: var(--m-color-on-emphasis);
 }
 
-.wk-togglebutton:disabled,
-.wk-togglebutton--disabled {
+.m-togglebutton:disabled,
+.m-togglebutton--disabled {
     cursor: not-allowed;
-    opacity: var(--wk-opacity-disabled);
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-togglebutton:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-togglebutton:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }

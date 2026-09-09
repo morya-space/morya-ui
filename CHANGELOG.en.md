@@ -1,4 +1,4 @@
-# @wise-kit/ui
+﻿# morya-ui
 
 ## 0.2.0
 
@@ -6,18 +6,18 @@
 
 - enhance design token management and documentation
 - add reduced motion policy support across components
-- integrate WkScrollbar into AutoComplete, CascadeSelect, CommandMenu, and Listbox components
-- enhance WkSelect component with scrollbar and max-height functionality
+- integrate MScrollbar into AutoComplete, CascadeSelect, CommandMenu, and Listbox components
+- enhance MSelect component with scrollbar and max-height functionality
 
 ## 0.1.2
 
 ### Changes
 
-- migrate to Wk tokens and remove legacy compat layers
+- migrate to M design tokens and remove legacy compat layers
 
 ## 0.1.1
 
-Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current component library as the baseline.
+Initial public release of `morya-ui` (Morya UI), using the current component library as the baseline.
 
 ### Components (88)
 
@@ -31,18 +31,18 @@ Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current compon
 ### Theme & design tokens
 
 - Light / dark themes (`useTheme`, `applyTheme`, `getPreferredTheme`)
-- Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-wk-motion`)
-- Token system on `--wk-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
-- Subtree overrides via `WkConfigProvider` (theme, density, motion, component defaults)
+- Density and motion preferences (`useDensity`, `useMotion`, with `prefers-reduced-motion` and `data-m-motion`)
+- Token system on `--m-*` CSS variables (color, spacing, radius, shadow, border, layout, tree, timeline, splitter, and more)
+- Subtree overrides via `MConfigProvider` (theme, density, motion, component defaults)
 
 ### Global config & utilities
 
-- Plugin entry: full registration with `WiseKit`, defaults with `createWiseKit`
-- On-demand builds: `WiseKitResolver` for `unplugin-vue-components`
-- ESM subpath exports (`@wise-kit/ui/button`, etc.) with tree-shaking
+- Plugin entry: full registration with `MoryaUI`, defaults with `createMoryaUI`
+- On-demand builds: `MoryaUIResolver` for `unplugin-vue-components`
+- ESM subpath exports (`morya-ui/button`, etc.) with tree-shaking
 - Imperative APIs: `useConfirm`, `useToast` / `toast`, `useMessage` / `message`, `useContextMenu`
-- Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useWkId`
-- i18n: `zhCN`, `enUS`, `mergeLocale`, `useWkLocale`, `formatLocale`
+- Shared composables: `useControllable`, `useFieldFeedback`, `useMenuKeyboard`, `useModalOverlay`, `useMId`
+- i18n: `zhCN`, `enUS`, `mergeLocale`, `useMLocale`, `formatLocale`
 
 ### Build output & types
 
@@ -55,12 +55,12 @@ Initial public release of `@wise-kit/ui` (Wise Kit UI), using the current compon
 - Interactive docs with Markdown and live `vue preview` examples
 - Component catalog and guides (quick start, theme, config, SSR, accessibility, MCP)
 - Light / dark theme, bilingual UI, global search (CommandMenu)
-- Deployed to GitHub Pages: https://wise-kit.github.io/wise-kit-ui/
+- Deployed to GitHub Pages: https://morya-ui.github.io/morya-ui/
 
 ### Ecosystem packages
 
-- **`@wise-kit/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
-- **`@wise-kit/ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
+- **`@morya-space/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
+- **`morya-ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
 
 ### SSR & framework integration
 

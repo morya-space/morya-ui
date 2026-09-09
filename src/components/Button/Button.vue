@@ -5,7 +5,7 @@ import type { ButtonProps } from './types'
 import { Comment, computed, Fragment, ref, Text, useSlots   } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   iconPos: 'left',
@@ -52,33 +52,33 @@ const iconName = computed(() => (typeof props.icon === 'string' ? (props.icon as
 const iconComponent = computed(() => (typeof props.icon === 'string' || !props.icon ? undefined : props.icon))
 
 const buttonClass = computed(() => [
-  'wk-button',
-  `wk-button--${severityTone.value}`,
-  `wk-button--${resolvedSize.value}`,
-  `wk-button--icon-${props.iconPos}`,
+  'm-button',
+  `m-button--${severityTone.value}`,
+  `m-button--${resolvedSize.value}`,
+  `m-button--icon-${props.iconPos}`,
   {
-    'wk-button--raised': props.raised,
-    'wk-button--rounded': props.rounded,
-    'wk-button--text': isText.value,
-    'wk-button--outlined': isOutlined.value,
-    'wk-button--link': isLink.value,
-    'wk-button--ghost': isGhost.value,
-    'wk-button--quaternary': isQuaternary.value,
-    'wk-button--plain': props.plain,
-    'wk-button--fluid': isFluid.value,
-    'wk-button--loading': props.loading,
-    'wk-button--icon-only': isIconOnly.value,
-    'wk-button--custom': Boolean(props.color),
+    'm-button--raised': props.raised,
+    'm-button--rounded': props.rounded,
+    'm-button--text': isText.value,
+    'm-button--outlined': isOutlined.value,
+    'm-button--link': isLink.value,
+    'm-button--ghost': isGhost.value,
+    'm-button--quaternary': isQuaternary.value,
+    'm-button--plain': props.plain,
+    'm-button--fluid': isFluid.value,
+    'm-button--loading': props.loading,
+    'm-button--icon-only': isIconOnly.value,
+    'm-button--custom': Boolean(props.color),
   },
 ])
 
 const buttonStyle = computed(() =>
-  props.color ? { '--wk-button-color': props.color } : undefined,
+  props.color ? { '--m-button-color': props.color } : undefined,
 )
 
 const badgeClass = computed(() => [
-  'wk-button__badge',
-  props.badgeSeverity ? `wk-button__badge--${normalizeSeverity(props.badgeSeverity)}` : 'wk-button__badge--contrast',
+  'm-button__badge',
+  props.badgeSeverity ? `m-button__badge--${normalizeSeverity(props.badgeSeverity)}` : 'm-button__badge--contrast',
 ])
 
 function hasRenderableContent(node: VNodeChild): boolean {
@@ -121,22 +121,22 @@ defineExpose({ focus, ref: buttonElement })
   >
     <span
       v-if="loading || icon || $slots.icon"
-      class="wk-button__icon"
-      :class="{ 'wk-button__icon--loading': loading }"
+      class="m-button__icon"
+      :class="{ 'm-button__icon--loading': loading }"
       aria-hidden="true"
     >
       <slot v-if="loading" name="loadingicon">
-        <span class="wk-button__spinner" />
+        <span class="m-button__spinner" />
       </slot>
       <template v-else>
-        <slot name="icon" class="wk-button__icon-slot">
-          <WkIcon v-if="iconName" :name="iconName" :size="iconSize" />
-          <component :is="iconComponent" v-else-if="iconComponent" class="wk-button__icon-graphic" />
+        <slot name="icon" class="m-button__icon-slot">
+          <MIcon v-if="iconName" :name="iconName" :size="iconSize" />
+          <component :is="iconComponent" v-else-if="iconComponent" class="m-button__icon-graphic" />
         </slot>
       </template>
     </span>
 
-    <span v-if="hasLabel && !iconOnly" class="wk-button__label">
+    <span v-if="hasLabel && !iconOnly" class="m-button__label">
       <slot>{{ label }}</slot>
     </span>
 

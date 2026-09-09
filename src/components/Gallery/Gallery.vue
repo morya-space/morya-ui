@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { GalleryImage, GalleryProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<GalleryProps>(), {
 const emit = defineEmits<{
   (event: 'update:activeIndex', value: number): void
 }>()
-const locale = useWkLocale()
+const locale = useMLocale()
 
 function imageSrc(image: string | GalleryImage) {
   return typeof image === 'string' ? image : image.src
@@ -62,51 +62,51 @@ watch(keyboard.activeIndex, (index) => {
   void nextTick(() => {
     const list = thumbs.value
     if (!list || !list.contains(document.activeElement)) return
-    const items = list.querySelectorAll<HTMLElement>('.wk-gallery__thumb')
+    const items = list.querySelectorAll<HTMLElement>('.m-gallery__thumb')
     items[index]?.focus({ preventScroll: true })
   })
 })
 </script>
 
 <template>
-  <div class="wk-gallery">
-    <div class="wk-gallery__main">
+  <div class="m-gallery">
+    <div class="m-gallery__main">
       <button
         type="button"
-        class="wk-gallery__nav wk-gallery__nav--prev"
+        class="m-gallery__nav wk-gallery__nav--prev"
         :aria-label="locale.prevImage"
         :disabled="activeIndex <= 0"
         @click="prev"
       >
-        <WkIcon name="chevron-left" size="sm" />
+        <MIcon name="chevron-left" size="sm" />
       </button>
-      <figure class="wk-gallery__stage">
-        <Transition name="wk-gallery-fade" mode="out-in">
+      <figure class="m-gallery__stage">
+        <Transition name="m-gallery-fade" mode="out-in">
           <img
             v-if="current"
             :key="activeIndex"
-            class="wk-gallery__image"
+            class="m-gallery__image"
             :src="currentSrc"
             :alt="currentAlt"
           >
         </Transition>
-        <figcaption v-if="currentCaption" class="wk-gallery__caption">
+        <figcaption v-if="currentCaption" class="m-gallery__caption">
           {{ currentCaption }}
         </figcaption>
       </figure>
       <button
         type="button"
-        class="wk-gallery__nav wk-gallery__nav--next"
+        class="m-gallery__nav wk-gallery__nav--next"
         :aria-label="locale.nextImage"
         :disabled="activeIndex >= images.length - 1"
         @click="next"
       >
-        <WkIcon name="chevron-right" size="sm" />
+        <MIcon name="chevron-right" size="sm" />
       </button>
     </div>
     <ul
       ref="thumbs"
-      class="wk-gallery__thumbs"
+      class="m-gallery__thumbs"
       role="listbox"
       :aria-label="locale.thumbnails"
       @keydown="keyboard.onKeydown"
@@ -114,8 +114,8 @@ watch(keyboard.activeIndex, (index) => {
       <li v-for="(image, index) in images" :key="`${imageSrc(image)}-${index}`">
         <button
           type="button"
-          class="wk-gallery__thumb"
-          :class="{ 'wk-gallery__thumb--active': index === activeIndex }"
+          class="m-gallery__thumb"
+          :class="{ 'm-gallery__thumb--active': index === activeIndex }"
           role="option"
           :aria-selected="index === activeIndex"
           :tabindex="thumbTabindex(index)"

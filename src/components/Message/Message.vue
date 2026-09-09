@@ -2,12 +2,12 @@
 import type { IconName } from '../Icon/types'
 import type { MessageItem, MessageProps } from './types'
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import { useWkConfig } from '../../shared/config'
+import { useMLocale } from '../../locale'
+import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { WkRenderableView } from '../../shared/Renderable'
+import { MRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 import {
   closeMessageItem,
   messageState,
@@ -23,8 +23,8 @@ const props = withDefaults(defineProps<MessageProps>(), {
   auto: false,
 })
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
 const list = computed(() => props.messages ?? messageState.items)
@@ -67,7 +67,7 @@ function iconName(severity?: MessageItem['severity']): IconName {
 }
 
 function severityClass(severity?: MessageItem['severity']) {
-  return `wk-message--${normalizeSeverity(severity) ?? 'info'}`
+  return `m-message--${normalizeSeverity(severity) ?? 'info'}`
 }
 
 function onClose(item: MessageItem) {
@@ -86,35 +86,35 @@ function onMouseLeave(item: MessageItem) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
-      class="wk-message-host"
-      :class="`wk-message-host--${resolvedPlacement}`"
+      class="m-message-host"
+      :class="`m-message-host--${resolvedPlacement}`"
       aria-live="polite"
       aria-atomic="false"
     >
-      <TransitionGroup name="wk-message-slide">
+      <TransitionGroup name="m-message-slide">
         <div
           v-for="item in list"
           :key="item.id"
-          class="wk-message"
+          class="m-message"
           :class="severityClass(item.severity)"
           role="status"
           @mouseenter="onMouseEnter(item)"
           @mouseleave="onMouseLeave(item)"
         >
-          <span v-if="item.icon !== false" class="wk-message__icon" aria-hidden="true">
-            <WkIcon :name="iconName(item.severity)" size="sm" />
+          <span v-if="item.icon !== false" class="m-message__icon" aria-hidden="true">
+            <MIcon :name="iconName(item.severity)" size="sm" />
           </span>
-          <div class="wk-message__content">
-            <WkRenderableView :value="item.content" />
+          <div class="m-message__content">
+            <MRenderableView :value="item.content" />
           </div>
           <button
             v-if="item.closable"
             type="button"
-            class="wk-message__close"
+            class="m-message__close"
             :aria-label="locale.close"
             @click="onClose(item)"
           >
-            <WkIcon name="close" size="sm" />
+            <MIcon name="close" size="sm" />
           </button>
         </div>
       </TransitionGroup>

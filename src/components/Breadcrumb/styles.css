@@ -1,50 +1,50 @@
 /* —— Menu: Breadcrumb —— */
-.wk-breadcrumb {
-    color: var(--wk-color-text-muted);
-    font-size: var(--wk-font-size-md);
+.m-breadcrumb {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-md);
 }
 
-.wk-breadcrumb__list {
+.m-breadcrumb__list {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.wk-breadcrumb__item {
+.m-breadcrumb__item {
     align-items: center;
     display: inline-flex;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
 }
 
-.wk-breadcrumb__link {
+.m-breadcrumb__link {
     color: inherit;
     text-decoration: none;
 }
 
-a.wk-breadcrumb__link:hover {
-    color: var(--wk-color-primary);
+a.m-breadcrumb__link:hover {
+    color: var(--m-color-primary);
 }
 
-a.wk-breadcrumb__link:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+a.m-breadcrumb__link:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-breadcrumb__link--current {
-    color: var(--wk-color-text);
+.m-breadcrumb__link--current {
+    color: var(--m-color-text);
     font-weight: 600;
 }
 
-.wk-breadcrumb__link--disabled {
+.m-breadcrumb__link--disabled {
     cursor: not-allowed;
-    opacity: var(--wk-opacity-disabled);
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-breadcrumb__separator {
-    color: var(--wk-color-text-muted);
+.m-breadcrumb__separator {
+    color: var(--m-color-text-muted);
     opacity: 0.7;
 }

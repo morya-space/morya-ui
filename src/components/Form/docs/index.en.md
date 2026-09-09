@@ -6,7 +6,7 @@ description: Form layout and field validation. Declarative rules, label alignmen
 
 # Form
 
-`WkForm` / `WkFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
+`MForm` / `MFormItem` handle layout, required marks, and error display. Validation can use both of these, together:
 
 1. **Declarative `rules` (preferred):** `required` / `min` / `max` / `pattern` / `validator` keyed by field name.
 2. **`validate` callback:** return an error string from FormItem. Still useful for cross-field logic.
@@ -18,16 +18,16 @@ Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and
 ## Import
 
 ```ts
-import type { FormInstance, FormRules } from '@wise-kit/ui'
-import { WkForm, WkFormItem } from '@wise-kit/ui'
+import type { FormInstance, FormRules } from 'morya-ui'
+import { MForm, MFormItem } from 'morya-ui'
 ```
 
 ## Declarative rules
 
 ```vue preview
 <script setup lang="ts">
-import type { FormInstance, FormRules } from '@wise-kit/ui'
-import { WkButton, WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
+import type { FormInstance, FormRules } from 'morya-ui'
+import { MButton, MForm, MFormItem, MInput } from 'morya-ui'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<FormInstance | null>(null)
@@ -47,7 +47,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <WkForm
+  <MForm
     ref="formRef"
     :model="model"
     :rules="rules"
@@ -56,18 +56,18 @@ async function onSubmit() {
     style="max-width: 22rem"
     @submit="onSubmit"
   >
-    <WkFormItem label="Name" name="name">
+    <MFormItem label="Name" name="name">
       <template #default="{ id, invalid }">
-        <WkInput :id="id" v-model="model.name" fluid :invalid="invalid" />
+        <MInput :id="id" v-model="model.name" fluid :invalid="invalid" />
       </template>
-    </WkFormItem>
-    <WkFormItem label="Email" name="email" help="Used for notifications">
+    </MFormItem>
+    <MFormItem label="Email" name="email" help="Used for notifications">
       <template #default="{ id, invalid }">
-        <WkInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
+        <MInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
-    </WkFormItem>
-    <WkButton native-type="submit" label="Submit" />
-  </WkForm>
+    </MFormItem>
+    <MButton native-type="submit" label="Submit" />
+  </MForm>
 </template>
 ```
 
@@ -75,26 +75,26 @@ async function onSubmit() {
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
+import { MButton, MForm, MFormItem, MInput } from 'morya-ui'
 import { reactive } from 'vue'
 
 const form = reactive({ name: '' })
 </script>
 
 <template>
-  <WkForm validate-on="submit" style="max-width: 22rem">
-    <WkFormItem
+  <MForm validate-on="submit" style="max-width: 22rem">
+    <MFormItem
       label="Name"
       name="name"
       required
       :validate="() => (form.name.trim() ? undefined : 'Enter a name')"
     >
       <template #default="{ id, invalid }">
-        <WkInput :id="id" v-model="form.name" fluid :invalid="invalid" />
+        <MInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
-    </WkFormItem>
-    <WkButton native-type="submit" label="Submit" />
-  </WkForm>
+    </MFormItem>
+    <MButton native-type="submit" label="Submit" />
+  </MForm>
 </template>
 ```
 
@@ -102,14 +102,14 @@ const form = reactive({ name: '' })
 
 ```vue preview
 <script setup lang="ts">
-import { WkForm, WkFormItem, WkInput } from '@wise-kit/ui'
+import { MForm, MFormItem, MInput } from 'morya-ui'
 import { reactive } from 'vue'
 
 const model = reactive({ city: '', zip: '' })
 </script>
 
 <template>
-  <WkForm
+  <MForm
     :model="model"
     inline
     label-placement="left"
@@ -117,17 +117,17 @@ const model = reactive({ city: '', zip: '' })
     :label-width="72"
     :rules="{ city: { required: true, message: 'Required' } }"
   >
-    <WkFormItem label="City" name="city">
+    <MFormItem label="City" name="city">
       <template #default="{ id }">
-        <WkInput :id="id" v-model="model.city" />
+        <MInput :id="id" v-model="model.city" />
       </template>
-    </WkFormItem>
-    <WkFormItem label="ZIP" name="zip">
+    </MFormItem>
+    <MFormItem label="ZIP" name="zip">
       <template #default="{ id }">
-        <WkInput :id="id" v-model="model.zip" />
+        <MInput :id="id" v-model="model.zip" />
       </template>
-    </WkFormItem>
-  </WkForm>
+    </MFormItem>
+  </MForm>
 </template>
 ```
 

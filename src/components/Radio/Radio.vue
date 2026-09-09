@@ -2,8 +2,8 @@
 import type {RadioProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
-import {  WK_RADIO_GROUP_KEY } from './types'
+import { useMId } from '../../shared/useMId'
+import {  M_RADIO_GROUP_KEY } from './types'
 
 defineOptions({ inheritAttrs: false })
 
@@ -14,8 +14,8 @@ const props = withDefaults(defineProps<RadioProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: string | number | boolean): void }>()
 const attrs = useAttrs()
-const group = inject(WK_RADIO_GROUP_KEY, null)
-const autoInputId = useWkId('wk-radio')
+const group = inject(M_RADIO_GROUP_KEY, null)
+const autoInputId = useMId('m-radio')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('Radio', () => props.size ?? group?.size.value)
 const isDisabled = computed(() => props.disabled || Boolean(group?.disabled.value))
@@ -25,11 +25,11 @@ const currentValue = computed(() => (group ? group.modelValue.value : props.mode
 const isChecked = computed(() => currentValue.value === props.value)
 
 const rootClass = computed(() => [
-  'wk-radio',
-  `wk-radio--${sizeClass.value}`,
+  'm-radio',
+  `m-radio--${sizeClass.value}`,
   {
-    'wk-radio--disabled': isDisabled.value,
-    'wk-radio--invalid': isInvalid.value,
+    'm-radio--disabled': isDisabled.value,
+    'm-radio--invalid': isInvalid.value,
   },
 ])
 
@@ -48,7 +48,7 @@ function updateValue(event: Event) {
     <input
       v-bind="attrs"
       :id="inputId"
-      class="wk-radio__input"
+      class="m-radio__input"
       type="radio"
       :name="inputName"
       :value="String(value)"
@@ -58,7 +58,7 @@ function updateValue(event: Event) {
       :aria-invalid="isInvalid || undefined"
       @change="updateValue"
     >
-    <span class="wk-radio__control" aria-hidden="true" />
-    <span v-if="label || $slots.default" class="wk-radio__label"><slot>{{ label }}</slot></span>
+    <span class="m-radio__control" aria-hidden="true" />
+    <span v-if="label || $slots.default" class="m-radio__label"><slot>{{ label }}</slot></span>
   </label>
 </template>

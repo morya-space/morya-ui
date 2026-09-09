@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { CommandMenuItem, CommandMenuProps } from './types'
 import { computed, nextTick, ref, toRef, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import { useWkConfig } from '../../shared/config'
+import { useMLocale } from '../../locale'
+import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useModalOverlay } from '../../shared/useModalOverlay'
-import WkIcon from '../Icon/Icon.vue'
-import WkScrollbar from '../Scrollbar/Scrollbar.vue'
+import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
   model: () => [],
@@ -19,8 +19,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const searchPlaceholder = computed(() => props.placeholder ?? locale.value.searchCommands)
 const query = ref('')
 const panelRef = ref<HTMLElement | null>(null)
@@ -94,11 +94,11 @@ watch(filtered, () => {
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wk-fade">
-      <div v-if="modelValue" class="wk-commandmenu-backdrop" @click.self="close">
+    <Transition name="m-fade">
+      <div v-if="modelValue" class="m-commandmenu-backdrop" @click.self="close">
         <div
           ref="panelRef"
-          class="wk-commandmenu"
+          class="m-commandmenu"
           role="dialog"
           aria-modal="true"
           :aria-label="locale.commandPalette"
@@ -108,40 +108,40 @@ watch(filtered, () => {
           <input
             ref="inputRef"
             v-model="query"
-            class="wk-commandmenu__input"
+            class="m-commandmenu__input"
             type="search"
             :placeholder="searchPlaceholder"
             :aria-label="locale.searchCommands"
           >
-          <WkScrollbar
+          <MScrollbar
             tag="ul"
             role="listbox"
-            class="wk-commandmenu__list"
+            class="m-commandmenu__list"
             fit-content
-            view-class="wk-commandmenu__list-view"
+            view-class="m-commandmenu__list-view"
           >
             <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
               <button
                 type="button"
-                class="wk-commandmenu__item"
+                class="m-commandmenu__item"
                 role="option"
-                :class="{ 'wk-commandmenu__item--active': index === activeIndex }"
+                :class="{ 'm-commandmenu__item--active': index === activeIndex }"
                 :aria-selected="index === activeIndex"
                 :disabled="item.disabled"
                 @click="activate(item)"
                 @mouseenter="activeIndex = index"
               >
-                <span v-if="iconOf(item)" class="wk-commandmenu__icon" aria-hidden="true">
-                  <WkIcon :name="iconOf(item)!" size="sm" />
+                <span v-if="iconOf(item)" class="m-commandmenu__icon" aria-hidden="true">
+                  <MIcon :name="iconOf(item)!" size="sm" />
                 </span>
-                <span class="wk-commandmenu__label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="wk-commandmenu__shortcut">{{ item.shortcut }}</span>
+                <span class="m-commandmenu__label">{{ item.label }}</span>
+                <span v-if="item.shortcut" class="m-commandmenu__shortcut">{{ item.shortcut }}</span>
               </button>
             </li>
-            <li v-if="!filtered.length" class="wk-commandmenu__empty">
+            <li v-if="!filtered.length" class="m-commandmenu__empty">
               {{ locale.noMatch }}
             </li>
-          </WkScrollbar>
+          </MScrollbar>
         </div>
       </div>
     </Transition>

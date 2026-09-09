@@ -1,5 +1,5 @@
 import './style'
-export { default as WkTable } from './Table.vue'
+export { default as MTable } from './Table.vue'
 export type {
   TableBodyItemClassName,
   TableBodyRowClassName,

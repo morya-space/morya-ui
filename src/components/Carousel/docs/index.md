@@ -11,26 +11,26 @@ description: 轮播展示一组内容项。
 ## 引入
 
 ```ts
-import { WkCarousel } from '@wise-kit/ui'
+import { MCarousel } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkCarousel } from '@wise-kit/ui'
+import { MCarousel } from 'morya-ui'
 
 const value = ['春', '夏', '秋', '冬']
 </script>
 
 <template>
-  <WkCarousel :value="value" :num-visible="1" circular>
+  <MCarousel :value="value" :num-visible="1" circular>
     <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--wk-color-surface-muted, #f3f4f6);border-radius:var(--wk-radius-md)">
+      <div style="padding:2rem;text-align:center;background:var(--m-color-surface-muted, #f3f4f6);border-radius:var(--m-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WkCarousel>
+  </MCarousel>
 </template>
 ```
 
@@ -40,19 +40,19 @@ const value = ['春', '夏', '秋', '冬']
 
 ```vue preview
 <script setup lang="ts">
-import { WkCarousel } from '@wise-kit/ui'
+import { MCarousel } from 'morya-ui'
 
 const value = ['A', 'B', 'C']
 </script>
 
 <template>
-  <WkCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
+  <MCarousel :value="value" autoplay :interval="4000" :show-arrows="false">
     <template #item="{ item }">
-      <div style="padding:1.5rem;text-align:center;background:var(--wk-color-surface-muted, #f3f4f6);border-radius:var(--wk-radius-md)">
+      <div style="padding:1.5rem;text-align:center;background:var(--m-color-surface-muted, #f3f4f6);border-radius:var(--m-radius-md)">
         {{ item }}
       </div>
     </template>
-  </WkCarousel>
+  </MCarousel>
 </template>
 ```
 

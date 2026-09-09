@@ -11,14 +11,14 @@ description: 输入时给出建议列表，可本地过滤或由父级提供。
 ## 引入
 
 ```ts
-import { WkAutoComplete } from '@wise-kit/ui'
+import { MAutoComplete } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkAutoComplete } from '@wise-kit/ui'
+import { MAutoComplete } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -26,7 +26,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 </script>
 
 <template>
-  <WkAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="搜索…" />
+  <MAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="搜索…" />
 </template>
 ```
 
@@ -34,7 +34,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
 
 ```vue preview
 <script setup lang="ts">
-import { WkAutoComplete } from '@wise-kit/ui'
+import { MAutoComplete } from 'morya-ui'
 import { ref } from 'vue'
 
 const a = ref('')
@@ -45,9 +45,9 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WkAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
-    <WkAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
-    <WkAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
+    <MAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
+    <MAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
+    <MAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
   </div>
 </template>
 ```
@@ -58,7 +58,7 @@ const suggestions = ['Vue', 'Vite', 'Vitest']
 
 ```vue preview
 <script setup lang="ts">
-import { WkAutoComplete } from '@wise-kit/ui'
+import { MAutoComplete } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -69,7 +69,7 @@ const suggestions = [
 </script>
 
 <template>
-  <WkAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="选项对象…" />
+  <MAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="选项对象…" />
 </template>
 ```
 
@@ -83,7 +83,7 @@ const suggestions = [
 | `clearable` | `boolean` | `false` | 显示清空按钮。 |
 | `dropdown` | `boolean` | `false` | 显示下拉按钮。 |
 | `placeholder` | `string` | — | 占位。 |
-| `size` | `WkSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |

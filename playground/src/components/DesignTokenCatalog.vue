@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WkInput, WkSelect } from '@wise-kit/ui'
+import { MInput, MSelect } from 'morya-ui'
 import { computed, ref } from 'vue'
 import catalog from '../data/design-tokens.json'
 import { useDocsI18n } from '../i18n'
@@ -74,21 +74,21 @@ function isColorToken(name: string, value: string) {
 
 function previewStyle(name: string, value: string) {
   if (isColorToken(name, value)) {
-    return { background: `var(${name})`, border: '1px solid var(--wk-color-border)' }
+    return { background: `var(${name})`, border: '1px solid var(--m-color-border)' }
   }
   if (name.includes('space-') || name.includes('height') || name.includes('width') || name.includes('size')) {
     const numeric = Number.parseFloat(value)
     if (!Number.isNaN(numeric)) {
       const px = value.endsWith('rem') ? numeric * 16 : numeric
-      return { width: `${Math.min(Math.max(px, 8), 96)}px`, height: '12px', background: 'var(--wk-color-primary)' }
+      return { width: `${Math.min(Math.max(px, 8), 96)}px`, height: '12px', background: 'var(--m-color-primary)' }
     }
   }
   if (name.includes('radius')) {
     return {
       width: '28px',
       height: '28px',
-      background: 'color-mix(in srgb, var(--wk-color-primary) 18%, transparent)',
-      border: '1px solid var(--wk-color-primary)',
+      background: 'color-mix(in srgb, var(--m-color-primary) 18%, transparent)',
+      border: '1px solid var(--m-color-primary)',
       borderRadius: value,
     }
   }
@@ -115,13 +115,13 @@ function formatVariants(variants?: Record<string, string>) {
     </div>
 
     <div class="token-catalog__toolbar">
-      <WkInput
+      <MInput
         v-model="query"
         clearable
         :placeholder="t.tokenCatalogSearch"
         style="flex: 1 1 16rem"
       />
-      <WkSelect
+      <MSelect
         v-model="category"
         :options="categoryOptions"
         style="flex: 0 1 12rem"
@@ -196,7 +196,7 @@ function formatVariants(variants?: Record<string, string>) {
 
 .token-catalog__meta,
 .token-catalog__hint {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.92rem;
   line-height: 1.6;
   margin: 0;
@@ -209,7 +209,7 @@ function formatVariants(variants?: Record<string, string>) {
 }
 
 .token-catalog__count {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.82rem;
   margin: 0;
 }
@@ -225,15 +225,15 @@ function formatVariants(variants?: Record<string, string>) {
 }
 
 .token-catalog__group-head p {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.88rem;
   line-height: 1.55;
   margin: 0;
 }
 
 .token-catalog__table-wrap {
-  border: 1px solid var(--wk-color-border);
-  border-radius: var(--wk-radius-md);
+  border: 1px solid var(--m-color-border);
+  border-radius: var(--m-radius-md);
   overflow: auto;
 }
 
@@ -246,15 +246,15 @@ function formatVariants(variants?: Record<string, string>) {
 
 .token-catalog__table th,
 .token-catalog__table td {
-  border-bottom: 1px solid color-mix(in srgb, var(--wk-color-border) 80%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--m-color-border) 80%, transparent);
   padding: 0.65rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 
 .token-catalog__table th {
-  background: color-mix(in srgb, var(--wk-color-text) 4%, var(--wk-color-surface));
-  color: var(--wk-color-text-muted);
+  background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+  color: var(--m-color-text-muted);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -266,30 +266,30 @@ function formatVariants(variants?: Record<string, string>) {
 }
 
 .token-catalog__source {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   display: block;
   font-size: 0.72rem;
   margin-top: 0.2rem;
 }
 
 .token-catalog__preview {
-  border-radius: var(--wk-radius-sm);
+  border-radius: var(--m-radius-sm);
   display: inline-block;
 }
 
 .token-catalog__preview--empty {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
 }
 
 .token-catalog__variants {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   display: block;
   font-size: 0.76rem;
   margin-top: 0.35rem;
 }
 
 .token-catalog__empty {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   margin: 0;
 }
 </style>

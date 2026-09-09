@@ -64,7 +64,7 @@ function componentCoverage(component) {
   )
   const coveredSlots = slots.filter((slot) =>
     examples.includes(`#${slot}`) ||
-    (slot === 'default' && examples.includes('<Wk') && examples.includes('</Wk')),
+    (slot === 'default' && examples.includes('<M') && examples.includes('</M')),
   )
   const coveredMethods = methods.filter((method) =>
     new RegExp(`(?:\\.|ref\\?\\.)${method}\\s*\\(`).test(examples) ||

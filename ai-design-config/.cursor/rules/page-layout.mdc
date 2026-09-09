@@ -1,5 +1,5 @@
 ---
-description: 生成 Wise Kit 业务页面（列表/表单/仪表盘）时的布局规范
+description: 生成 Morya UI 业务页面（列表/表单/仪表盘）时的布局规范
 alwaysApply: false
 ---
 
@@ -15,30 +15,30 @@ alwaysApply: false
 
 ## 列表页区块顺序
 
-1. `WkLayout` + 可选 `WkLayoutSider`
-2. `WkBreadcrumb`
-3. 筛选区（`WkSpace` + Input/Select + 查询/重置）
+1. `MLayout` + 可选 `MLayoutSider`
+2. `MBreadcrumb`
+3. 筛选区（`MSpace` + Input/Select + 查询/重置）
 4. 工具栏（标题 + 主操作按钮）
-5. `WkTable`
-6. `WkPagination`（右对齐）
+5. `MTable`
+6. `MPagination`（右对齐）
 
 ## 表单页区块顺序
 
-1. `WkBreadcrumb`
+1. `MBreadcrumb`
 2. 标题 + 简短说明
-3. `WkForm`（`max-width: ~42rem`）
+3. `MForm`（`max-width: ~42rem`）
 4. 底栏：保存（primary）+ 取消（secondary）
 
 ## 仪表盘区块顺序
 
-1. `WkBreadcrumb` + 页面标题
-2. KPI：`WkGrid` + `WkCard`（4 列或响应式）
-3. 主区两栏：图表占位 + 最近列表 `WkTable`
+1. `MBreadcrumb` + 页面标题
+2. KPI：`MGrid` + `MCard`（4 列或响应式）
+3. 主区两栏：图表占位 + 最近列表 `MTable`
 
 ## 样式
 
-- 页面背景：`var(--wk-color-surface)`
-- 区块间距：`var(--wk-space-4)` / `var(--wk-space-6)`
-- 筛选区背景：`color-mix(in srgb, var(--wk-color-border) 25%, transparent)`
+- 页面背景：`var(--m-color-surface)`
+- 区块间距：`var(--m-space-4)` / `var(--m-space-6)`
+- 筛选区背景：`color-mix(in srgb, var(--m-color-border) 25%, transparent)`
 
 引用可运行示例：`src/examples/*PageExample.vue`

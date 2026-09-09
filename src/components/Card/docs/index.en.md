@@ -11,28 +11,28 @@ Content container for grouping title, body, and actions. Footer is extended via 
 ## Import
 
 ```ts
-import { WkButton, WkCard } from '@wise-kit/ui'
+import { MButton, MCard } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkCard } from '@wise-kit/ui'
+import { MButton, MCard } from 'morya-ui'
 </script>
 
 <template>
-  <WkCard title="Project overview" subtitle="Updated 2 hours ago">
-    <p style="margin:0;color:var(--wk-color-text-muted)">
+  <MCard title="Project overview" subtitle="Updated 2 hours ago">
+    <p style="margin:0;color:var(--m-color-text-muted)">
       Title and subtitle align in the header. Body content stays in the default slot.
     </p>
     <template #footer>
       <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-        <WkButton label="Dismiss" severity="secondary" text />
-        <WkButton label="Continue" />
+        <MButton label="Dismiss" severity="secondary" text />
+        <MButton label="Continue" />
       </div>
     </template>
-  </WkCard>
+  </MCard>
 </template>
 ```
 
@@ -40,19 +40,19 @@ import { WkButton, WkCard } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkCard, WkTag } from '@wise-kit/ui'
+import { MCard, MTag } from 'morya-ui'
 </script>
 
 <template>
-  <WkCard>
+  <MCard>
     <template #header>
       <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:1rem">
         <strong>Custom header</strong>
-        <WkTag value="Active" severity="success" />
+        <MTag value="Active" severity="success" />
       </div>
     </template>
     Prefer the header slot when you need more than title/subtitle text.
-  </WkCard>
+  </MCard>
 </template>
 ```
 
@@ -60,16 +60,16 @@ import { WkCard, WkTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkCard } from '@wise-kit/ui'
+import { MCard } from 'morya-ui'
 </script>
 
 <template>
-  <WkCard title="Cover card" hoverable size="small">
+  <MCard title="Cover card" hoverable size="small">
     <template #cover>
-      <div style="height:6rem;background:color-mix(in srgb, var(--wk-color-primary) 18%, transparent)" />
+      <div style="height:6rem;background:color-mix(in srgb, var(--m-color-primary) 18%, transparent)" />
     </template>
     Hover to lift. Set `bordered` to false for a borderless surface.
-  </WkCard>
+  </MCard>
 </template>
 ```
 

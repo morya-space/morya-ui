@@ -1,8 +1,8 @@
-# UI package development
+﻿# UI package development
 
 [English](./ui-development.md) · [中文](./ui-development.zh-CN.md)
 
-Maintainer notes for `@wise-kit/ui` (build, docs playground, publish). External consumers should use the [root README](../README.md). Contributor setup: [DEVELOPMENT.md](./DEVELOPMENT.md).
+Maintainer notes for `morya-ui` (build, docs playground, publish). External consumers should use the [root README](../README.md). Contributor setup: [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## Build
 
@@ -10,7 +10,7 @@ Maintainer notes for `@wise-kit/ui` (build, docs playground, publish). External 
 pnpm build
 ```
 
-Output is under `dist/` (`index.js`, `index.d.ts`, `styles.css`, `resolver.js`, plus per-component kebab-case subpaths such as `button/index.js`). Subpath entries such as `@wise-kit/ui/button` include JS, dependencies, and styles.
+Output is under `dist/` (`index.js`, `index.d.ts`, `styles.css`, `resolver.js`, plus per-component kebab-case subpaths such as `button/index.js`). Subpath entries such as `morya-ui/button` include JS, dependencies, and styles.
 
 The `pnpm build` pipeline runs:
 
@@ -24,7 +24,7 @@ Component styles live in `src/components/<Name>/styles.css` and are aggregated b
 
 ### Full vs on-demand (build)
 
-- **Full entry** (`src/index.ts` → `dist/index.js`): re-exports `.vue` files directly, not component `index.ts`, so on-demand style side-effects stay out of the main bundle; pair with `@wise-kit/ui/styles.css`.
+- **Full entry** (`src/index.ts` → `dist/index.js`): re-exports `.vue` files directly, not component `index.ts`, so on-demand style side-effects stay out of the main bundle; pair with `morya-ui/styles.css`.
 - **On-demand entries** (`src/components/<Name>/index.ts` → `dist/<slug>/index.js`): separate chunks with `import './style'`, including theme, base, and dependency CSS.
 
 Both outputs are produced in one `pnpm build` and do not conflict.
@@ -51,7 +51,7 @@ Equivalent to `build` + `pnpm publish --access public --no-git-checks`.
 
 ## Full release
 
-Run step-by-step or use the orchestrator. See [scripts/README.md](../scripts/README.md). By default this publishes both `@wise-kit/ui` and `@wise-kit/ui-mcp`:
+Run step-by-step or use the orchestrator. See [scripts/README.md](../scripts/README.md). By default this publishes both `morya-ui` and `morya-ui-mcp`:
 
 ```bash
 pnpm release:prepare -- --dry-run   # preview
@@ -74,7 +74,7 @@ Before publishing, verify:
 
 ## MCP package
 
-`@wise-kit/ui-mcp` is an optional stdio server for clients that support [MCP](https://modelcontextprotocol.io/) (it does not replace installing `@wise-kit/ui`). Public docs: docs site [MCP](/docs/mcp). Implementation: [packages/ui-mcp/README.md](../packages/ui-mcp/README.md).
+`morya-ui-mcp` is an optional stdio server for clients that support [MCP](https://modelcontextprotocol.io/) (it does not replace installing `morya-ui`). Public docs: docs site [MCP](/docs/mcp). Implementation: [packages/ui-mcp/README.md](../packages/ui-mcp/README.md).
 
 The full UI release already includes MCP. Use these only to republish MCP alone:
 

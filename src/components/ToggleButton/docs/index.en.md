@@ -11,21 +11,21 @@ A boolean toggle button with configurable on/off labels and icons.
 ## Import
 
 ```ts
-import { WkToggleButton } from '@wise-kit/ui'
+import { MToggleButton } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkToggleButton } from '@wise-kit/ui'
+import { MToggleButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const on = ref(false)
 </script>
 
 <template>
-  <WkToggleButton v-model="on" on-label="On" off-label="Off" />
+  <MToggleButton v-model="on" on-label="On" off-label="Off" />
 </template>
 ```
 
@@ -33,7 +33,7 @@ const on = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkToggleButton } from '@wise-kit/ui'
+import { MToggleButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const a = ref(false)
@@ -43,9 +43,9 @@ const c = ref(false)
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
-    <WkToggleButton v-model="b" on-label="Default" off-label="Default" />
-    <WkToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
+    <MToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
+    <MToggleButton v-model="b" on-label="Default" off-label="Default" />
+    <MToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
   </div>
 </template>
 ```
@@ -57,7 +57,7 @@ const c = ref(false)
 | `modelValue` | `boolean` | `false` | Whether it is on. |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | Labels. |
 | `onIcon` / `offIcon` | `string` | — | Optional icon characters. |
-| `size` | `WkSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 
 ## Events

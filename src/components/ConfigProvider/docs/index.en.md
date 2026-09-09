@@ -6,7 +6,7 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 # ConfigProvider
 
-Provide global defaults for the component tree via `WkConfigProvider` or `createWiseKit`. Local props take precedence over global config.
+Provide global defaults for the component tree via `MConfigProvider` or `createMoryaUI`. Local props take precedence over global config.
 
 ## Capabilities
 
@@ -24,7 +24,7 @@ Provide global defaults for the component tree via `WkConfigProvider` or `create
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkConfigProvider, WkInput, WkSelect } from '@wise-kit/ui'
+import { MButton, MConfigProvider, MInput, MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -35,20 +35,20 @@ const options = [
 </script>
 
 <template>
-  <WkConfigProvider size="small">
+  <MConfigProvider size="small">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WkButton label="Inherit small" />
-      <WkInput placeholder="Inherit small" style="width:10rem" />
-      <WkSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
-      <WkButton label="Override to large" size="large" />
+      <MButton label="Inherit small" />
+      <MInput placeholder="Inherit small" style="width:10rem" />
+      <MSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
+      <MButton label="Override to large" size="large" />
     </div>
-  </WkConfigProvider>
+  </MConfigProvider>
 </template>
 ```
 
 ## Component Defaults
 
-Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `Wk*` aliases.
+Override default props per component. Keys may be unprefixed (`Input`, `Space`) or `M*` aliases.
 
 Precedence: **component props > `componentDefaults[component]` > global `size` / `inputVariant` > built-in defaults**.
 
@@ -56,25 +56,25 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkConfigProvider, WkInput, WkSpace } from '@wise-kit/ui'
+import { MButton, MConfigProvider, MInput, MSpace } from 'morya-ui'
 import { ref } from 'vue'
 
 const note = ref('Clearable')
 </script>
 
 <template>
-  <WkConfigProvider
+  <MConfigProvider
     size="large"
     :component-defaults="{
       Input: { size: 'small', clearable: true },
       Space: { size: 16 },
     }"
   >
-    <WkSpace>
-      <WkButton label="Still large" />
-      <WkInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
-    </WkSpace>
-  </WkConfigProvider>
+    <MSpace>
+      <MButton label="Still large" />
+      <MInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
+    </MSpace>
+  </MConfigProvider>
 </template>
 ```
 
@@ -82,23 +82,23 @@ const note = ref('Clearable')
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkConfigProvider, WkInput } from '@wise-kit/ui'
+import { MButton, MConfigProvider, MInput } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem">
-    <WkConfigProvider density="compact">
+    <MConfigProvider density="compact">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WkButton label="compact" />
-        <WkInput placeholder="compact" style="width:10rem" />
+        <MButton label="compact" />
+        <MInput placeholder="compact" style="width:10rem" />
       </div>
-    </WkConfigProvider>
-    <WkConfigProvider density="spacious">
+    </MConfigProvider>
+    <MConfigProvider density="spacious">
       <div style="display:flex;gap:0.75rem;align-items:center">
-        <WkButton label="spacious" />
-        <WkInput placeholder="spacious" style="width:10rem" />
+        <MButton label="spacious" />
+        <MInput placeholder="spacious" style="width:10rem" />
       </div>
-    </WkConfigProvider>
+    </MConfigProvider>
   </div>
 </template>
 ```
@@ -107,7 +107,7 @@ import { WkButton, WkConfigProvider, WkInput } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkConfigProvider, WkDialog, WkSelect } from '@wise-kit/ui'
+import { MButton, MConfigProvider, MDialog, MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const city = ref<string | undefined>()
@@ -119,35 +119,35 @@ const options = [
 </script>
 
 <template>
-  <WkConfigProvider input-variant="filled" append-to="body">
+  <MConfigProvider input-variant="filled" append-to="body">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WkSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
-      <WkButton label="Open dialog" @click="visible = true" />
+      <MSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
+      <MButton label="Open dialog" @click="visible = true" />
     </div>
-    <WkDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
+    <MDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
       <p style="margin:0">
         Overlay mount target is provided by ConfigProvider.
       </p>
-    </WkDialog>
-  </WkConfigProvider>
+    </MDialog>
+  </MConfigProvider>
 </template>
 ```
 
 ## App-level plugin
 
 ```ts
-import WiseKit, { createWiseKit, enUS } from '@wise-kit/ui'
+import MoryaUI, { createMoryaUI, enUS } from 'morya-ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wise-kit/ui/styles.css'
+import 'morya-ui/styles.css'
 
 // Option A: default export
-createApp(App).use(WiseKit, { locale: enUS }).mount('#app')
+createApp(App).use(MoryaUI, { locale: enUS }).mount('#app')
 
 // Option B: factory
 createApp(App)
   .use(
-    createWiseKit({
+    createMoryaUI({
       appendTo: 'body',
       size: 'small',
       density: 'comfortable',
@@ -162,24 +162,24 @@ createApp(App)
   .mount('#app')
 ```
 
-By default **all components are registered globally** (use `<WkButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
+By default **all components are registered globally** (use `<MButton>` in templates). Pass `components: false` for config-only, or pass a component array for partial registration.
 
 ## Reading config
 
 ```ts
-import { useWkConfig } from '@wise-kit/ui'
+import { useMConfig } from 'morya-ui'
 
-const config = useWkConfig()
+const config = useMConfig()
 ```
 
-Precedence: **component props > `WkConfigProvider` > `createWiseKit()` > built-in defaults**.
+Precedence: **component props > `MConfigProvider` > `createMoryaUI()` > built-in defaults**.
 
 ## Theme and motion
 
-Theme and motion APIs are also exported from `@wise-kit/ui` and can be used alongside ConfigProvider:
+Theme and motion APIs are also exported from `morya-ui` and can be used alongside ConfigProvider:
 
 ```ts
-import { useMotion, useTheme } from '@wise-kit/ui'
+import { useMotion, useTheme } from 'morya-ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'

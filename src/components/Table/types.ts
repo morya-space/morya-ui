@@ -1,6 +1,6 @@
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
-export type TableSize = WkSizeInput
+export type TableSize = MSizeInput
 export type TableSortType = 'asc' | 'desc'
 export type TableItem = Record<string, unknown>
 export type TableTextDirection = 'left' | 'center' | 'right'

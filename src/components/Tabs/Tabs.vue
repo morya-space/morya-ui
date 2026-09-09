@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { TabItem, TabsProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWkId } from '../../shared/useWkId'
-import { useWkLocale } from '../../locale'
-import WkIcon from '../Icon/Icon.vue'
+import { useMId } from '../../shared/useMId'
+import { useMLocale } from '../../locale'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',
@@ -17,8 +17,8 @@ const emit = defineEmits<{
   (event: 'add'): void
 }>()
 
-const locale = useWkLocale()
-const tabsUid = useWkId()
+const locale = useMLocale()
+const tabsUid = useMId()
 const scroller = ref<HTMLElement | null>(null)
 const overflowed = ref(false)
 const activeValue = computed(() => props.modelValue ?? props.tabs.find((tab) => !tab.disabled)?.value)
@@ -55,7 +55,7 @@ function onKeydown(event: KeyboardEvent, index: number) {
   if (!target) return
   selectTab(target.value)
   requestAnimationFrame(() =>
-    document.getElementById(`wk-tab-${target.value}`)?.focus({ preventScroll: true }),
+    document.getElementById(`m-tab-${target.value}`)?.focus({ preventScroll: true }),
   )
 }
 
@@ -92,29 +92,29 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 
 <template>
-  <div class="wk-tabs" :class="`wk-tabs--${type}`">
-    <div class="wk-tabs__bar">
+  <div class="m-tabs" :class="`m-tabs--${type}`">
+    <div class="m-tabs__bar">
       <button
         v-if="overflowed"
         type="button"
-        class="wk-tabs__scroll"
+        class="m-tabs__scroll"
         :aria-label="locale.prev"
         @click="scrollTabs(-1)"
       >
-        <WkIcon name="chevron-left" size="sm" />
+        <MIcon name="chevron-left" size="sm" />
       </button>
-      <div ref="scroller" class="wk-tabs__scroller">
-        <div class="wk-tabs__list" role="tablist" :aria-label="locale.tabs">
+      <div ref="scroller" class="m-tabs__scroller">
+        <div class="m-tabs__list" role="tablist" :aria-label="locale.tabs">
           <div
             v-for="(tab, index) in tabs"
             :key="tab.value"
-            class="wk-tabs__item"
-            :class="{ 'wk-tabs__item--active': activeValue === tab.value }"
+            class="m-tabs__item"
+            :class="{ 'm-tabs__item--active': activeValue === tab.value }"
           >
             <button
-              :id="`wk-tab-${tab.value}`"
-              class="wk-tabs__tab"
-              :class="{ 'wk-tabs__tab--active': activeValue === tab.value }"
+              :id="`m-tab-${tab.value}`"
+              class="m-tabs__tab"
+              :class="{ 'm-tabs__tab--active': activeValue === tab.value }"
               type="button"
               role="tab"
               :aria-selected="activeValue === tab.value"
@@ -128,12 +128,12 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
             <button
               v-if="isClosable(tab)"
               type="button"
-              class="wk-tabs__close"
+              class="m-tabs__close"
               :aria-label="locale.closeTab"
               :disabled="tab.disabled"
               @click.stop="closeTab(tab)"
             >
-              <WkIcon name="close" size="sm" />
+              <MIcon name="close" size="sm" />
             </button>
           </div>
         </div>
@@ -141,31 +141,31 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
       <button
         v-if="overflowed"
         type="button"
-        class="wk-tabs__scroll"
+        class="m-tabs__scroll"
         :aria-label="locale.next"
         @click="scrollTabs(1)"
       >
-        <WkIcon name="chevron-right" size="sm" />
+        <MIcon name="chevron-right" size="sm" />
       </button>
       <button
         v-if="addable"
         type="button"
-        class="wk-tabs__add"
+        class="m-tabs__add"
         :aria-label="locale.addTab"
         @click="emit('add')"
       >
-        <WkIcon name="plus" size="sm" />
+        <MIcon name="plus" size="sm" />
       </button>
-      <div v-if="$slots.extra" class="wk-tabs__extra">
+      <div v-if="$slots.extra" class="m-tabs__extra">
         <slot name="extra" />
       </div>
     </div>
     <div
       v-if="activeValue"
       :id="`${tabsUid}-panel-${activeValue}`"
-      class="wk-tabs__panel"
+      class="m-tabs__panel"
       role="tabpanel"
-      :aria-labelledby="`wk-tab-${activeValue}`"
+      :aria-labelledby="`m-tab-${activeValue}`"
     >
       <slot :active-value="activeValue" />
     </div>
