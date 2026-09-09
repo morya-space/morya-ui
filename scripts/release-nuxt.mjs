@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { run } from './release-steps.mjs'
 import { root } from './ui-changelog.mjs'
 
-export const NUXT_NAME = '@morya-space/nuxt'
+export const NUXT_NAME = 'morya-ui-nuxt'
 export const NUXT_PKG_PATH = join(root, 'packages/nuxt/package.json')
 export const NUXT_RELEASE_PATHS = ['packages/nuxt/package.json']
 
@@ -27,7 +27,7 @@ export function readUiVersion() {
   return { uiPkg, version }
 }
 
-/** Align @morya-space/nuxt version and peer range with morya-ui. */
+/** Align morya-ui-nuxt version and peer range with morya-ui. */
 export function syncNuxtVersion(version = readUiVersion().version) {
   const nuxtPkg = readJson(NUXT_PKG_PATH)
   let changed = false
@@ -58,13 +58,13 @@ export function syncNuxtVersion(version = readUiVersion().version) {
 }
 
 export function buildNuxt() {
-  console.log('[build] @morya-space/nuxt')
-  run('pnpm --filter @morya-space/nuxt build')
+  console.log('[build] morya-ui-nuxt')
+  run('pnpm --filter morya-ui-nuxt build')
 }
 
 export function publishNuxt() {
-  console.log('[publish] @morya-space/nuxt')
-  run('pnpm --filter @morya-space/nuxt publish --access public --no-git-checks')
+  console.log('[publish] morya-ui-nuxt')
+  run('pnpm --filter morya-ui-nuxt publish --access public --no-git-checks')
 }
 
 const isCli =

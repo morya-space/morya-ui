@@ -22,12 +22,12 @@ All setups below are supported; choose **full SSR** or **client islands** based 
 
 ## Nuxt 3
 
-Use the **`@morya-space/nuxt`** module (`packages/nuxt` in this repo).
+Use the **`morya-ui-nuxt`** module (`packages/nuxt` in this repo).
 
 ### Install
 
 ```bash
-pnpm add morya-ui @morya-space/nuxt
+pnpm add morya-ui morya-ui-nuxt
 pnpm add -D unplugin-vue-components
 ```
 
@@ -39,7 +39,7 @@ import Components from 'unplugin-vue-components/vite'
 import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@morya-space/nuxt'],
+  modules: ['morya-ui-nuxt'],
   vite: {
     plugins: [
       Components({

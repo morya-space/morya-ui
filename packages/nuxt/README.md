@@ -1,4 +1,4 @@
-﻿# @morya-space/nuxt
+﻿# morya-ui-nuxt
 
 Nuxt 3 module for [morya-ui](https://www.npmjs.com/package/morya-ui).
 
@@ -13,7 +13,7 @@ Component auto-import remains via `MoryaUIResolver` + `unplugin-vue-components` 
 ## Setup
 
 ```bash
-pnpm add morya-ui @morya-space/nuxt
+pnpm add morya-ui morya-ui-nuxt
 pnpm add -D unplugin-vue-components
 ```
 
@@ -23,7 +23,7 @@ import Components from 'unplugin-vue-components/vite'
 import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@morya-space/nuxt'],
+  modules: ['morya-ui-nuxt'],
   moryaUI: {
     css: true,
     transpile: true,
