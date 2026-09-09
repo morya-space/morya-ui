@@ -1,18 +1,18 @@
 {
-  "name": "@wise-kit/ui-mcp",
+  "name": "morya-ui-mcp",
   "type": "module",
   "version": "0.2.0",
   "packageManager": "pnpm@10.12.4",
-  "description": "MCP server for @wise-kit/ui — component docs, examples, and usage guidance for AI coding agents.",
+  "description": "MCP server for morya-ui — component docs, examples, and usage guidance for AI coding agents.",
   "license": "MIT",
-  "homepage": "https://github.com/wise-kit/wise-kit-ui/tree/main/packages/ui-mcp#readme",
+  "homepage": "https://github.com/morya-space/morya-ui/tree/main/packages/ui-mcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wise-kit/wise-kit-ui.git",
+    "url": "git+https://github.com/morya-space/morya-ui.git",
     "directory": "packages/ui-mcp"
   },
   "bugs": {
-    "url": "https://github.com/wise-kit/wise-kit-ui/issues"
+    "url": "https://github.com/morya-space/morya-ui/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -21,7 +21,7 @@
     ".": "./dist/index.js"
   },
   "bin": {
-    "wise-kit-ui-mcp": "./bin/wise-kit-ui-mcp.js"
+    "morya-ui-mcp": "./bin/morya-ui-mcp.js"
   },
   "files": [
     "README.md",

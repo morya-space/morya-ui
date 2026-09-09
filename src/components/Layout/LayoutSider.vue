@@ -2,15 +2,15 @@
 import type { CSSProperties, StyleValue } from "vue";
 import type { LayoutExpose, LayoutSiderProps } from "./types";
 import { computed, inject, ref } from "vue";
-import { useWkLocale } from "../../locale";
+import { useMLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
-import WkIcon from "../Icon/Icon.vue";
+import MIcon from "../Icon/Icon.vue";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
-import { WK_LAYOUT_KEY } from "./context";
+import { M_LAYOUT_KEY } from "./context";
 import { resolveLayoutTrigger } from "./utils";
 
-defineOptions({ name: "WkLayoutSider" });
+defineOptions({ name: "MLayoutSider" });
 
 const props = withDefaults(defineProps<LayoutSiderProps>(), {
     bordered: false,
@@ -31,23 +31,23 @@ const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
 
-const locale = useWkLocale();
-const layout = inject(WK_LAYOUT_KEY, null);
+const locale = useMLocale();
+const layout = inject(M_LAYOUT_KEY, null);
 const scrollEl = ref<HTMLElement | null>(null);
 const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
 const { mergedCollapsed, toggle } = useLayoutSiderCollapse(props, emit);
 
 const siderPlacement = computed(() => layout?.siderPlacement ?? "left");
 
-/** Explicit prop values only — defaults live in `.wk-layout-sider` CSS. */
+/** Explicit prop values only — defaults live in `.m-layout-sider` CSS. */
 const expandedWidth = computed(() => toCssLength(props.width));
 const collapsedWidth = computed(() => toCssLength(props.collapsedWidth));
 
 const effectiveExpandedWidth = computed(
-    () => expandedWidth.value ?? "var(--wk-layout-sider-width)",
+    () => expandedWidth.value ?? "var(--m-layout-sider-width)",
 );
 const effectiveCollapsedWidth = computed(
-    () => collapsedWidth.value ?? "var(--wk-layout-sider-collapsed-width)",
+    () => collapsedWidth.value ?? "var(--m-layout-sider-collapsed-width)",
 );
 
 const layoutWidth = computed(() =>
@@ -63,15 +63,15 @@ const showContent = computed(
 );
 
 const rootClass = computed(() => [
-    "wk-layout-sider",
-    `wk-layout-sider--${props.position}-positioned`,
-    `wk-layout-sider--${siderPlacement.value}-placement`,
-    `wk-layout-sider--collapse-${props.collapseMode}`,
+    "m-layout-sider",
+    `m-layout-sider--${props.position}-positioned`,
+    `m-layout-sider--${siderPlacement.value}-placement`,
+    `m-layout-sider--collapse-${props.collapseMode}`,
     {
-        "wk-layout-sider--bordered": props.bordered,
-        "wk-layout-sider--inverted": props.inverted,
-        "wk-layout-sider--collapsed": mergedCollapsed.value,
-        "wk-layout-sider--show-content": showContent.value,
+        "m-layout-sider--bordered": props.bordered,
+        "m-layout-sider--inverted": props.inverted,
+        "m-layout-sider--collapsed": mergedCollapsed.value,
+        "m-layout-sider--show-content": showContent.value,
     },
 ]);
 
@@ -81,7 +81,7 @@ const rootStyle = computed(() => {
         minWidth: "0",
         borderRadius:
             props.radius == null
-                ? "var(--wk-layout-radius, 0)"
+                ? "var(--m-layout-radius, 0)"
                 : toCssLength(props.radius)!,
         width: isWidthMode ? layoutWidth.value : effectiveExpandedWidth.value,
         maxWidth: layoutWidth.value,
@@ -91,19 +91,19 @@ const rootStyle = computed(() => {
         expandedWidth.value &&
         !isSelfReferencingCssVar(
             expandedWidth.value,
-            "--wk-layout-sider-width",
+            "--m-layout-sider-width",
         )
     ) {
-        style["--wk-layout-sider-width"] = expandedWidth.value;
+        style["--m-layout-sider-width"] = expandedWidth.value;
     }
     if (
         collapsedWidth.value &&
         !isSelfReferencingCssVar(
             collapsedWidth.value,
-            "--wk-layout-sider-collapsed-width",
+            "--m-layout-sider-collapsed-width",
         )
     ) {
-        style["--wk-layout-sider-collapsed-width"] = collapsedWidth.value;
+        style["--m-layout-sider-collapsed-width"] = collapsedWidth.value;
     }
 
     return style;
@@ -111,7 +111,7 @@ const rootStyle = computed(() => {
 
 const siderPadding = computed(() =>
     props.padding == null
-        ? "var(--wk-layout-padding, var(--wk-space-4))"
+        ? "var(--m-layout-padding, var(--m-space-4))"
         : toCssLength(props.padding),
 );
 
@@ -126,7 +126,7 @@ const scrollStyle = computed((): StyleValue => {
 });
 
 const scrollClass = computed(() => [
-    "wk-layout-sider__scroll",
+    "m-layout-sider__scroll",
     props.contentClass,
 ]);
 
@@ -165,12 +165,12 @@ defineExpose<LayoutExpose>({ scrollTo });
     <button
       v-if="triggerKind"
       type="button"
-      class="wk-layout-sider__trigger"
+      class="m-layout-sider__trigger"
       :class="[
         triggerClass,
         {
-          'wk-layout-sider__trigger--bar': triggerKind === 'bar',
-          'wk-layout-sider__trigger--arrow-circle':
+          'm-layout-sider__trigger--bar': triggerKind === 'bar',
+          'm-layout-sider__trigger--arrow-circle':
             triggerKind === 'arrow-circle',
         },
       ]"
@@ -181,20 +181,20 @@ defineExpose<LayoutExpose>({ scrollTo });
     >
       <span
         v-if="triggerKind === 'arrow-circle'"
-        class="wk-layout-sider__arrow"
+        class="m-layout-sider__arrow"
         aria-hidden="true"
       >
-        <WkIcon name="chevron-right" size="sm" />
+        <MIcon name="chevron-right" size="sm" />
       </span>
-      <span v-else class="wk-layout-sider__bar" aria-hidden="true">
-        <i class="wk-layout-sider__bar-top" />
-        <i class="wk-layout-sider__bar-bottom" />
+      <span v-else class="m-layout-sider__bar" aria-hidden="true">
+        <i class="m-layout-sider__bar-top" />
+        <i class="m-layout-sider__bar-bottom" />
       </span>
     </button>
 
     <div
       v-if="bordered"
-      class="wk-layout-sider__border"
+      class="m-layout-sider__border"
       aria-hidden="true"
     />
   </aside>

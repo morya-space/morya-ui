@@ -11,14 +11,14 @@ Searchable command palette for running actions from `model`. Fits global shortcu
 ## Import
 
 ```ts
-import { WkCommandMenu, type CommandMenuItem } from '@wise-kit/ui'
+import { MCommandMenu, type CommandMenuItem } from 'morya-ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkCommandMenu } from '@wise-kit/ui'
+import { MButton, MCommandMenu } from 'morya-ui'
 import { ref } from 'vue'
 
 const visible = ref(false)
@@ -30,8 +30,8 @@ const model = [
 </script>
 
 <template>
-  <WkButton label="Open command menu" @click="visible = true" />
-  <WkCommandMenu v-model="visible" :model="model" placeholder="Search commands…" />
+  <MButton label="Open command menu" @click="visible = true" />
+  <MCommandMenu v-model="visible" :model="model" placeholder="Search commands…" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ const model = [
 | Field | Type | Description |
 | --- | --- | --- |
 | `label` | `string` | Display text; included in local filtering. |
-| `icon` | `string` | Optional leading character (not a WkIcon name). |
+| `icon` | `string` | Optional leading character (not a MIcon name). |
 | `shortcut` | `string` | Optional shortcut hint. |
 | `command` | `() => void` | Runs on activate; closes the palette afterward. |
 | `disabled` | `boolean` | Disabled items cannot be activated. |

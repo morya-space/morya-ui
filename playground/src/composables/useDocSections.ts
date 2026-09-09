@@ -24,7 +24,7 @@ export function useDocSections(
   let clickLockUntil = 0
 
   function resolveScrollContainer() {
-    return bodyRef.value?.closest('.wk-scrollbar__wrap') as HTMLElement | null
+    return bodyRef.value?.closest('.m-scrollbar__wrap') as HTMLElement | null
   }
 
   function teardownScrollSpy() {

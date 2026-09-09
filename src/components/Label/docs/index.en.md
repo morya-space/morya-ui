@@ -11,22 +11,22 @@ Simple label with `htmlFor` / `for` and a default slot.
 ## Import
 
 ```ts
-import { WkLabel } from '@wise-kit/ui'
+import { MLabel } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput, WkLabel } from '@wise-kit/ui'
+import { MInput, MLabel } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <WkLabel html-for="demo-email">
+    <MLabel html-for="demo-email">
       Email
-    </WkLabel>
-    <WkInput id="demo-email" placeholder="you@example.com" />
+    </MLabel>
+    <MInput id="demo-email" placeholder="you@example.com" />
   </div>
 </template>
 ```

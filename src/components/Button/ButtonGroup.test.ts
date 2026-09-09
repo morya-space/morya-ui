@@ -1,21 +1,21 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkButtonGroup from './ButtonGroup.vue'
+import MButtonGroup from './ButtonGroup.vue'
 
-describe('wkButtonGroup', () => {
+describe('muButtonGroup', () => {
   it('groups buttons and can stretch fluid', () => {
-    const wrapper = mount(WkButtonGroup, {
+    const wrapper = mount(MButtonGroup, {
       props: { fluid: true, ariaLabel: 'Align' },
       slots: {
         default: [
-          '<button class="wk-button">Left</button>',
-          '<button class="wk-button">Right</button>',
+          '<button class="m-button">Left</button>',
+          '<button class="m-button">Right</button>',
         ],
       },
     })
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['wk-button-group', 'wk-button-group--fluid']))
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['m-button-group', 'm-button-group--fluid']))
     expect(wrapper.attributes('role')).toBe('group')
     expect(wrapper.attributes('aria-label')).toBe('Align')
-    expect(wrapper.findAll('.wk-button')).toHaveLength(2)
+    expect(wrapper.findAll('.m-button')).toHaveLength(2)
   })
 })

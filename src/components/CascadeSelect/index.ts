@@ -1,5 +1,5 @@
 import './style'
-export { default as WkCascadeSelect } from './CascadeSelect.vue'
+export { default as MCascadeSelect } from './CascadeSelect.vue'
 export type {
   CascadeSelectEmits,
   CascadeSelectOption,

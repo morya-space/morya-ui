@@ -6,39 +6,39 @@ description: System outline icon registry. Use the default slot for business ico
 
 # Icon
 
-`WkIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `@wise-kit/ui`.
+`MIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `morya-ui`.
 
 ## Import
 
 ```ts
-import { iconNames, WkIcon } from '@wise-kit/ui'
+import { iconNames, MIcon } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkIcon } from '@wise-kit/ui'
+import { MIcon } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WkIcon name="search" />
-    <WkIcon name="check-circle" size="small" />
-    <WkIcon name="warning" size="large" />
-    <WkIcon name="loader" size="sm" label="Loading" />
+    <MIcon name="search" />
+    <MIcon name="check-circle" size="small" />
+    <MIcon name="warning" size="large" />
+    <MIcon name="loader" size="sm" label="Loading" />
   </div>
 </template>
 ```
 
 ## All system icons
 
-Click an icon to copy its name (for example `search`). Usage: `<WkIcon name="search" />`.
+Click an icon to copy its name (for example `search`). Usage: `<MIcon name="search" />`.
 
 ```vue preview
 <script setup lang="ts">
-import type {ToastMessage} from '@wise-kit/ui';
-import { iconNames,  WkIcon, WkInput, WkToast } from '@wise-kit/ui'
+import type {ToastMessage} from 'morya-ui';
+import { iconNames,  MIcon, MInput, MToast } from 'morya-ui'
 import { computed, ref } from 'vue'
 
 const query = ref('')
@@ -57,10 +57,10 @@ function itemStyle(name: string) {
   const active = copied.value === name
   return [
     'align-items:center',
-    'background:var(--wk-color-surface)',
-    `border:1px solid ${active ? 'var(--wk-color-primary)' : 'var(--wk-color-border)'}`,
-    'border-radius:var(--wk-radius-control, 3px)',
-    `color:${active ? 'var(--wk-color-primary)' : 'var(--wk-color-text)'}`,
+    'background:var(--m-color-surface)',
+    `border:1px solid ${active ? 'var(--m-color-primary)' : 'var(--m-color-border)'}`,
+    'border-radius:var(--m-radius-control, 3px)',
+    `color:${active ? 'var(--m-color-primary)' : 'var(--m-color-text)'}`,
     'cursor:pointer',
     'display:flex',
     'flex-direction:column',
@@ -113,7 +113,7 @@ function onToastClose(message: ToastMessage) {
 
 <template>
   <div style="width:100%">
-    <WkInput
+    <MInput
       v-model="query"
       clearable
       fluid
@@ -121,13 +121,13 @@ function onToastClose(message: ToastMessage) {
       style="max-width: 20rem; margin-bottom: 1rem"
     >
       <template #prefix>
-        <WkIcon name="search" size="sm" />
+        <MIcon name="search" size="sm" />
       </template>
-    </WkInput>
+    </MInput>
 
     <p
       v-if="!filtered.length"
-      style="color: var(--wk-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
+      style="color: var(--m-color-text-muted); font-size: 0.875rem; margin: 0.5rem 0 0"
     >
       No matching icons
     </p>
@@ -144,7 +144,7 @@ function onToastClose(message: ToastMessage) {
         :title="`Click to copy ${name}`"
         @click="copyName(name)"
       >
-        <WkIcon :name="name" size="large" />
+        <MIcon :name="name" size="large" />
         <span
           style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.72rem;line-height:1.3;max-width:100%;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap"
         >
@@ -153,7 +153,7 @@ function onToastClose(message: ToastMessage) {
       </button>
     </div>
 
-    <WkToast :messages="messages" position="top-right" @close="onToastClose" />
+    <MToast :messages="messages" position="top-right" @close="onToastClose" />
   </div>
 </template>
 ```
@@ -164,26 +164,26 @@ When system icons are not enough, do not pile SVGs into the component library. M
 
 ```vue
 <script setup lang="ts">
-import { WkButton, WkIcon, WkIconField, WkInput } from '@wise-kit/ui'
+import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
 import { User } from 'lucide-vue-next'
 </script>
 
 <template>
-  <WkIcon label="User" size="md">
+  <MIcon label="User" size="md">
     <User :size="16" :stroke-width="1.8" />
-  </WkIcon>
+  </MIcon>
 
-  <WkIconField>
+  <MIconField>
     <template #icon>
-      <WkIcon size="sm">
+      <MIcon size="sm">
         <User :size="14" :stroke-width="1.8" />
-      </WkIcon>
+      </MIcon>
     </template>
-    <WkInput placeholder="Search users" />
-  </WkIconField>
+    <MInput placeholder="Search users" />
+  </MIconField>
 
-  <!-- Button can also take a component directly without wrapping WkIcon -->
-  <WkButton :icon="User" label="Profile" />
+  <!-- Button can also take a component directly without wrapping MIcon -->
+  <MButton :icon="User" label="Profile" />
 </template>
 ```
 

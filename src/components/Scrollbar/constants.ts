@@ -6,7 +6,7 @@ export interface ScrollbarContext {
   contentId: string
 }
 
-export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol('rdScrollbar')
+export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol('muScrollbar')
 
 /** Internal shape used when providing refs via reactive(). */
 export interface ScrollbarProvideSource {

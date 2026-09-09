@@ -11,14 +11,14 @@ Display event nodes in chronological order.
 ## Import
 
 ```ts
-import { WkTimeline } from '@wise-kit/ui'
+import { MTimeline } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkTimeline } from '@wise-kit/ui'
+import { MTimeline } from 'morya-ui'
 
 const events = [
   { status: 'Ordered', date: '15/10/2024', content: 'Order placed', icon: 'check', severity: 'success' },
@@ -28,7 +28,7 @@ const events = [
 </script>
 
 <template>
-  <WkTimeline :value="events" align="alternate" />
+  <MTimeline :value="events" align="alternate" />
 </template>
 ```
 
@@ -36,7 +36,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkTimeline } from '@wise-kit/ui'
+import { MTimeline } from 'morya-ui'
 
 const events = [
   { status: 'Start', date: 'Monday', content: 'Kickoff', icon: 'check' },
@@ -46,7 +46,7 @@ const events = [
 </script>
 
 <template>
-  <WkTimeline :value="events" layout="horizontal" />
+  <MTimeline :value="events" layout="horizontal" />
 </template>
 ```
 
@@ -56,7 +56,7 @@ const events = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkTimeline } from '@wise-kit/ui'
+import { MTimeline } from 'morya-ui'
 
 const events = [
   { status: 'Done', date: 'Mon', content: 'Shipped' },
@@ -64,11 +64,11 @@ const events = [
 </script>
 
 <template>
-  <WkTimeline :value="events" pending="Waiting">
+  <MTimeline :value="events" pending="Waiting">
     <template #item="{ item }">
       <span>{{ item.content || item.status }}</span>
     </template>
-  </WkTimeline>
+  </MTimeline>
 </template>
 ```
 

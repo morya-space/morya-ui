@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkBreadcrumb from './Breadcrumb.vue'
+import MBreadcrumb from './Breadcrumb.vue'
 
-describe('wkBreadcrumb', () => {
+describe('muBreadcrumb', () => {
   it('renders home and model items with separators', () => {
-    const wrapper = mount(WkBreadcrumb, {
+    const wrapper = mount(MBreadcrumb, {
       props: {
         home: { label: 'Home', to: '/' },
         model: [
@@ -14,31 +14,31 @@ describe('wkBreadcrumb', () => {
         ],
       },
     })
-    expect(wrapper.findAll('.wk-breadcrumb__item')).toHaveLength(4)
-    expect(wrapper.findAll('.wk-breadcrumb__separator')).toHaveLength(3)
+    expect(wrapper.findAll('.m-breadcrumb__item')).toHaveLength(4)
+    expect(wrapper.findAll('.m-breadcrumb__separator')).toHaveLength(3)
     expect(wrapper.get('a[href="/"]').text()).toBe('Home')
     expect(wrapper.get('a[href="/products"]').text()).toBe('Products')
-    expect(wrapper.find('.wk-breadcrumb__link--disabled').text()).toBe('Shoes')
+    expect(wrapper.find('.m-breadcrumb__link--disabled').text()).toBe('Shoes')
     expect(wrapper.find('[aria-current="page"]').text()).toBe('Detail')
   })
 
   it('renders span when to is missing', () => {
-    const wrapper = mount(WkBreadcrumb, {
+    const wrapper = mount(MBreadcrumb, {
       props: { model: [{ label: 'Only' }] },
     })
     expect(wrapper.find('a').exists()).toBe(false)
-    expect(wrapper.get('.wk-breadcrumb__link').text()).toBe('Only')
+    expect(wrapper.get('.m-breadcrumb__link').text()).toBe('Only')
   })
 
   it('uses a custom separator', () => {
-    const wrapper = mount(WkBreadcrumb, {
+    const wrapper = mount(MBreadcrumb, {
       props: { model: [{ label: 'A', to: '/a' }, { label: 'B' }], separator: '>' },
     })
-    expect(wrapper.get('.wk-breadcrumb__separator').text()).toBe('>')
+    expect(wrapper.get('.m-breadcrumb__separator').text()).toBe('>')
   })
 
   it('uses locale home label by default', () => {
-    const wrapper = mount(WkBreadcrumb, {
+    const wrapper = mount(MBreadcrumb, {
       props: {
         home: { to: '/' },
         model: [{ label: 'Detail' }],
@@ -48,7 +48,7 @@ describe('wkBreadcrumb', () => {
   })
 
   it('supports item slot override', () => {
-    const wrapper = mount(WkBreadcrumb, {
+    const wrapper = mount(MBreadcrumb, {
       props: { model: [{ label: 'A', to: '/a' }, { label: 'B' }] },
       slots: {
         item: ({ item, active }: { item: { label: string }; active: boolean }) =>

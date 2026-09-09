@@ -1,35 +1,35 @@
 /* —— Overlay: ConfirmPopup —— */
-.wk-confirmpopup {
-    --wk-confirmpopup-width: 20rem;
-    background: var(--wk-color-surface);
-    border: var(--wk-border-width) solid var(--wk-color-border);
-    border-radius: var(--wk-radius-md);
-    box-shadow: var(--wk-shadow-md);
-    max-width: min(var(--wk-confirmpopup-width), calc(100vw - 2rem));
-    padding: var(--wk-space-3);
+.m-confirmpopup {
+    --m-confirmpopup-width: 20rem;
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-md);
+    box-shadow: var(--m-shadow-md);
+    max-width: min(var(--m-confirmpopup-width), calc(100vw - 2rem));
+    padding: var(--m-space-3);
     position: fixed;
-    z-index: var(--wk-z-popper);
+    z-index: var(--m-z-popper);
 }
 
-.wk-confirmpopup--teleported {
-    z-index: var(--wk-z-dropdown);
+.m-confirmpopup--teleported {
+    z-index: var(--m-z-dropdown);
 }
 
-.wk-confirmpopup__message {
+.m-confirmpopup__message {
     align-items: center;
-    color: var(--wk-color-text);
+    color: var(--m-color-text);
     display: flex;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     line-height: 1.5;
-    margin-bottom: var(--wk-space-3);
+    margin-bottom: var(--m-space-3);
 }
 
-.wk-confirmpopup__footer {
+.m-confirmpopup__footer {
     display: flex;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     justify-content: flex-end;
 }
 
-.wk-confirmpopup__icon {
+.m-confirmpopup__icon {
     flex-shrink: 0;
 }

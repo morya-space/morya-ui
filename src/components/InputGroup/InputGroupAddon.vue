@@ -5,7 +5,7 @@ defineProps<InputGroupAddonProps>()
 </script>
 
 <template>
-  <span class="wk-inputgroup-addon">
+  <span class="m-inputgroup-addon">
     <slot />
   </span>
 </template>

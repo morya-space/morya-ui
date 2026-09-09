@@ -1,5 +1,5 @@
 import './style'
-export { default as WkTree } from './Tree.vue'
+export { default as MTree } from './Tree.vue'
 export type {
   TreeCheckedKeys,
   TreeCheckStrategy,

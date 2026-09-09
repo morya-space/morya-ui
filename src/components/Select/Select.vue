@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
-import { formatLocale, useWkLocale } from '../../locale'
-import { useComponentDefaults, useConfiguredSize, useWkConfig } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
+import { formatLocale, useMLocale } from '../../locale'
+import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
+import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WkIcon from '../Icon/Icon.vue'
-import WkScrollbar from '../Scrollbar/Scrollbar.vue'
+import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -41,8 +41,8 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 const defaults = useComponentDefaults('Select')
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
@@ -52,7 +52,7 @@ const filterQuery = ref('')
 const highlightedIndex = ref(-1)
 const menuStyle = ref<Record<string, string>>({})
 const createdOptions = ref<SelectOption[]>([])
-const autoSelectId = useWkId('wk-select')
+const autoSelectId = useMId('m-select')
 const selectId = computed(() => props.id ?? autoSelectId)
 
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -315,29 +315,29 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="wk-select-field" :class="{ 'wk-select-field--fluid': resolvedFluid }">
-    <label v-if="label" class="wk-select-field__label" :for="selectId">{{ label }}</label>
+  <div ref="root" class="m-select-field" :class="{ 'm-select-field--fluid': resolvedFluid }">
+    <label v-if="label" class="m-select-field__label" :for="selectId">{{ label }}</label>
     <div
-      class="wk-select__control"
+      class="m-select__control"
       :class="{
-        'wk-select__control--clearable': showClearButton,
-        'wk-select__control--open': open,
+        'm-select__control--clearable': showClearButton,
+        'm-select__control--open': open,
       }"
     >
       <div
         :id="selectId"
         ref="trigger"
-        class="wk-select"
+        class="m-select"
         :class="[
-          `wk-select--${sizeClass}`,
+          `m-select--${sizeClass}`,
           {
-            'wk-select--invalid': isInvalid,
-            'wk-select--open': open,
-            'wk-select--placeholder': !hasValue,
-            'wk-select--fluid': resolvedFluid,
-            'wk-select--multiple': resolvedMultiple,
-            'wk-select--disabled': disabled,
-            'wk-select--loading': resolvedLoading,
+            'm-select--invalid': isInvalid,
+            'm-select--open': open,
+            'm-select--placeholder': !hasValue,
+            'm-select--fluid': resolvedFluid,
+            'm-select--multiple': resolvedMultiple,
+            'm-select--disabled': disabled,
+            'm-select--loading': resolvedLoading,
           },
         ]"
         role="combobox"
@@ -353,60 +353,60 @@ onBeforeUnmount(() => {
         @click="setOpen(!open)"
         @keydown="onTriggerKeydown"
       >
-        <div v-if="resolvedMultiple && hasValue" class="wk-select__tags">
-          <span v-for="option in visibleTags" :key="String(option.value)" class="wk-select__tag">
-            <span class="wk-select__tag-label">{{ option.label }}</span>
+        <div v-if="resolvedMultiple && hasValue" class="m-select__tags">
+          <span v-for="option in visibleTags" :key="String(option.value)" class="m-select__tag">
+            <span class="m-select__tag-label">{{ option.label }}</span>
             <button
-              class="wk-select__tag-remove"
+              class="m-select__tag-remove"
               type="button"
               :aria-label="locale.removeTag"
               :disabled="disabled"
               @click="removeTag(option.value, $event)"
             >
-              <WkIcon name="close" size="sm" />
+              <MIcon name="close" size="sm" />
             </button>
           </span>
           <span
             v-if="hiddenTagCount"
-            class="wk-select__tag wk-select__tag--more"
+            class="m-select__tag wk-select__tag--more"
             :aria-label="moreTagsLabel"
           >
             +{{ hiddenTagCount }}
           </span>
         </div>
-        <span v-else class="wk-select__value">
+        <span v-else class="m-select__value">
           <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
           <template v-else>{{ displayLabel }}</template>
         </span>
-        <span v-if="resolvedLoading" class="wk-select__spinner" aria-hidden="true" />
+        <span v-if="resolvedLoading" class="m-select__spinner" aria-hidden="true" />
       </div>
-      <div class="wk-select__suffix">
+      <div class="m-select__suffix">
         <button
           v-if="showClearButton"
-          class="wk-select__clear"
+          class="m-select__clear"
           type="button"
           :aria-label="locale.clear"
           @click="clear"
         >
-          <WkIcon name="close" class="wk-control-affix-icon" />
+          <MIcon name="close" class="m-control-affix-icon" />
         </button>
         <span
-          class="wk-select__indicator"
-          :class="{ 'wk-select__indicator--open': open }"
+          class="m-select__indicator"
+          :class="{ 'm-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <WkIcon name="chevron-down" class="wk-control-affix-icon" />
+          <MIcon name="chevron-down" class="m-control-affix-icon" />
         </span>
       </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="wk-scale-fade">
+      <Transition name="m-scale-fade">
         <div
           v-if="open"
           :id="`${selectId}-listbox`"
           ref="menu"
-          class="wk-select__menu"
-          :class="[`wk-select__menu--${placement}`, { 'wk-select__menu--teleported': teleported }]"
+          class="m-select__menu"
+          :class="[`m-select__menu--${placement}`, { 'm-select__menu--teleported': teleported }]"
           :style="teleported ? menuStyle : undefined"
           role="listbox"
           tabindex="-1"
@@ -418,30 +418,30 @@ onBeforeUnmount(() => {
             v-if="resolvedFilter"
             ref="filterInput"
             v-model="filterQuery"
-            class="wk-select__filter"
+            class="m-select__filter"
             type="search"
             :placeholder="locale.searchPlaceholder"
             :aria-label="locale.filterOptions"
             @click.stop
             @keydown.stop="onMenuKeydown"
           >
-          <WkScrollbar
-            class="wk-select__list"
+          <MScrollbar
+            class="m-select__list"
             fit-content
-            wrap-class="wk-select__list-wrap"
-            view-class="wk-select__list-view"
+            wrap-class="m-select__list-wrap"
+            view-class="m-select__list-view"
           >
-            <div v-if="resolvedLoading" class="wk-select__empty" role="status">
+            <div v-if="resolvedLoading" class="m-select__empty" role="status">
               {{ locale.loading }}
             </div>
             <button
               v-for="option in menuOptions"
               :key="option.created ? `__create:${String(option.value)}` : String(option.value)"
-              class="wk-select__option"
+              class="m-select__option"
               :class="{
-                'wk-select__option--selected': !option.created && isSelected(option.value),
-                'wk-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
-                'wk-select__option--create': option.created,
+                'm-select__option--selected': !option.created && isSelected(option.value),
+                'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
+                'm-select__option--create': option.created,
               }"
               type="button"
               role="option"
@@ -453,23 +453,23 @@ onBeforeUnmount(() => {
               <slot name="option" :option="option">
                 <span>{{ option.created ? createLabel : option.label }}</span>
               </slot>
-              <WkIcon
+              <MIcon
                 v-if="!option.created && isSelected(option.value)"
-                class="wk-select__check"
+                class="m-select__check"
                 name="check"
                 size="sm"
               />
             </button>
-            <div v-if="!menuOptions.length && !resolvedLoading" class="wk-select__empty" role="status">
+            <div v-if="!menuOptions.length && !resolvedLoading" class="m-select__empty" role="status">
               {{ resolvedEmptyMessage }}
             </div>
-          </WkScrollbar>
+          </MScrollbar>
         </div>
       </Transition>
     </Teleport>
     <input
       v-if="required"
-      class="wk-select__required-input"
+      class="m-select__required-input"
       tabindex="-1"
       aria-hidden="true"
       :required="!hasValue"
@@ -478,8 +478,8 @@ onBeforeUnmount(() => {
     <span
       v-if="feedbackText"
       :id="`${selectId}-help`"
-      class="wk-select-field__help"
-      :class="{ 'wk-select-field__help--invalid': feedbackIsError }"
+      class="m-select-field__help"
+      :class="{ 'm-select-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

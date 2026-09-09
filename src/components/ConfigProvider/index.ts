@@ -1,3 +1,3 @@
 import './style'
-export { default as WkConfigProvider } from './ConfigProvider.vue'
-export type { WkComponentDefaults, WkGlobalConfig, WkLocaleConfig } from './types'
+export { default as MConfigProvider } from './ConfigProvider.vue'
+export type { MComponentDefaults, MGlobalConfig, MLocaleConfig } from './types'

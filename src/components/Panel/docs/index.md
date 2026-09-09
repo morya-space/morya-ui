@@ -11,28 +11,28 @@ description: 带可选折叠的内容面板。
 ## 引入
 
 ```ts
-import { WkPanel } from '@wise-kit/ui'
+import { MPanel } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkPanel } from '@wise-kit/ui'
+import { MPanel } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
 </script>
 
 <template>
-  <WkPanel v-model="collapsed" header="Panel" toggleable>
+  <MPanel v-model="collapsed" header="Panel" toggleable>
     <p style="margin:0">
       可折叠面板内容。
     </p>
     <template #footer>
       操作区
     </template>
-  </WkPanel>
+  </MPanel>
 </template>
 ```
 
@@ -40,15 +40,15 @@ const collapsed = ref(false)
 
 ```vue preview
 <script setup lang="ts">
-import { WkPanel } from '@wise-kit/ui'
+import { MPanel } from 'morya-ui'
 </script>
 
 <template>
-  <WkPanel header="Small" size="small">
+  <MPanel header="Small" size="small">
     <p style="margin:0">
       更紧凑的面板。
     </p>
-  </WkPanel>
+  </MPanel>
 </template>
 ```
 

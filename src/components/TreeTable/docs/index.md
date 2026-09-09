@@ -11,14 +11,14 @@ description: 可展开的树形表格。
 ## 引入
 
 ```ts
-import { WkTreeTable } from '@wise-kit/ui'
+import { MTreeTable } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkTreeTable } from '@wise-kit/ui'
+import { MTreeTable } from 'morya-ui'
 
 const columns = [
   { field: 'name', header: '名称' },
@@ -37,7 +37,7 @@ const value = [
 </script>
 
 <template>
-  <WkTreeTable :value="value" :columns="columns" />
+  <MTreeTable :value="value" :columns="columns" />
 </template>
 ```
 

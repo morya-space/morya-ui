@@ -11,23 +11,23 @@ Fluid layout container that applies `width: 100%` to child controls.
 ## Import
 
 ```ts
-import { WkFluid } from '@wise-kit/ui'
+import { MFluid } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFluid, WkInput } from '@wise-kit/ui'
+import { MButton, MFluid, MInput } from 'morya-ui'
 </script>
 
 <template>
-  <WkFluid>
+  <MFluid>
     <div style="display:flex;flex-direction:column;gap:0.75rem">
-      <WkInput placeholder="Fluid-width input" />
-      <WkButton label="Submit" />
+      <MInput placeholder="Fluid-width input" />
+      <MButton label="Submit" />
     </div>
-  </WkFluid>
+  </MFluid>
 </template>
 ```
 

@@ -6,19 +6,19 @@ description: Collapsible navigation rail.
 
 # Sidebar
 
-Application navigation sidebar (not a Drawer overlay). Exported as `WkSidebar`.
+Application navigation sidebar (not a Drawer overlay). Exported as `MSidebar`.
 
 ## Import
 
 ```ts
-import { WkSidebar } from '@wise-kit/ui'
+import { MSidebar } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkSidebar } from '@wise-kit/ui'
+import { MButton, MSidebar } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
@@ -35,8 +35,8 @@ const model = [
 
 <template>
   <div style="display:flex;gap:1rem;align-items:flex-start">
-    <WkSidebar :model="model" :collapsed="collapsed" />
-    <WkButton :label="collapsed ? 'Expand' : 'Collapse'" size="small" @click="collapsed = !collapsed" />
+    <MSidebar :model="model" :collapsed="collapsed" />
+    <MButton :label="collapsed ? 'Expand' : 'Collapse'" size="small" @click="collapsed = !collapsed" />
   </div>
 </template>
 ```

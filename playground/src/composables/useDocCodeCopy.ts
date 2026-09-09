@@ -3,7 +3,7 @@ import { nextTick, onBeforeUnmount,  watch } from 'vue'
 import { useDocsI18n } from '../i18n'
 import { copyText } from '../utils/copyText'
 
-const READY = 'data-wk-copy-ready'
+const READY = 'data-m-copy-ready'
 
 function extractCode(pre: HTMLElement) {
   return (pre.querySelector('code') ?? pre).textContent ?? ''
@@ -20,20 +20,20 @@ function mountCopyButton(
   if (!parent) return () => undefined
 
   let wrapper: HTMLElement
-  if (parent.classList.contains('wk-code-block')) {
+  if (parent.classList.contains('m-code-block')) {
     wrapper = parent
   } else {
     wrapper = document.createElement('div')
-    wrapper.className = 'wk-code-block'
+    wrapper.className = 'm-code-block'
     parent.insertBefore(wrapper, pre)
     wrapper.appendChild(pre)
   }
 
-  let button = wrapper.querySelector<HTMLButtonElement>('.wk-code-block__copy')
+  let button = wrapper.querySelector<HTMLButtonElement>('.m-code-block__copy')
   if (!button) {
     button = document.createElement('button')
     button.type = 'button'
-    button.className = 'wk-code-block__copy'
+    button.className = 'm-code-block__copy'
     wrapper.appendChild(button)
   }
 

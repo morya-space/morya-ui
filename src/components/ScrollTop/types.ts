@@ -1,4 +1,4 @@
-import type { WkAppendTo } from '../../shared/overlay'
+import type { MAppendTo } from '../../shared/overlay'
 
 export type ScrollTopTarget = 'window' | 'parent'
 
@@ -12,5 +12,5 @@ export interface ScrollTopProps {
   /** Teleport button. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }

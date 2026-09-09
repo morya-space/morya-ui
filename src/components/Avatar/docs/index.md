@@ -11,43 +11,43 @@ description: 头像用于展示用户或实体标识。支持图片、图标与�
 ## 引入
 
 ```ts
-import { WkAvatar } from '@wise-kit/ui'
+import { MAvatar } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkAvatar } from '@wise-kit/ui'
+import { MAvatar } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkAvatar label="AB" />
-    <WkAvatar icon="check" />
-    <WkAvatar label="SQ" shape="square" />
-    <WkAvatar label="LG" size="large" />
-    <WkAvatar label="XL" size="xlarge" />
+    <MAvatar label="AB" />
+    <MAvatar icon="check" />
+    <MAvatar label="SQ" shape="square" />
+    <MAvatar label="LG" size="large" />
+    <MAvatar label="XL" size="xlarge" />
   </div>
 </template>
 ```
 
 ## Group
 
-`WkAvatarGroup` 可叠放头像，`max` 超出时显示 `+N`。图片加载失败会回退到 `icon` / `label` 并触发 `error`。
+`MAvatarGroup` 可叠放头像，`max` 超出时显示 `+N`。图片加载失败会回退到 `icon` / `label` 并触发 `error`。
 
 ```vue preview
 <script setup lang="ts">
-import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
+import { MAvatar, MAvatarGroup } from 'morya-ui'
 </script>
 
 <template>
-  <WkAvatarGroup :max="3">
-    <WkAvatar label="AL" />
-    <WkAvatar label="BK" />
-    <WkAvatar label="CN" />
-    <WkAvatar label="DY" />
-  </WkAvatarGroup>
+  <MAvatarGroup :max="3">
+    <MAvatar label="AL" />
+    <MAvatar label="BK" />
+    <MAvatar label="CN" />
+    <MAvatar label="DY" />
+  </MAvatarGroup>
 </template>
 ```
 
@@ -57,10 +57,10 @@ import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | 无图片/图标时的文字回退。 |
 | `image` | `string` | — | 图片 URL，优先级最高。 |
-| `icon` | `IconName` | — | `WkIcon` 图标名称。 |
+| `icon` | `IconName` | — | `MIcon` 图标名称。 |
 | `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |
-| `max` | `number` | — | `WkAvatarGroup`：最多展示个数，超出显示 +N。 |
+| `max` | `number` | — | `MAvatarGroup`：最多展示个数，超出显示 +N。 |
 
 ## Events
 
@@ -68,7 +68,7 @@ import { WkAvatar, WkAvatarGroup } from '@wise-kit/ui'
 | --- | --- | --- |
 | `error` | `Event` | 图片加载失败。 |
 
-`WkAvatarGroup`：`max` 最多展示个数；`size` 作用于溢出标记。
+`MAvatarGroup`：`max` 最多展示个数；`size` 作用于溢出标记。
 
 ## Slots
 

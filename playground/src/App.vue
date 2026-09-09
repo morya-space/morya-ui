@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WkConfigProvider, useDensity, useMotion } from '@wise-kit/ui'
+import { MConfigProvider, useDensity, useMotion } from 'morya-ui'
 import { RouterView } from 'vue-router'
 import SiteHeader from './components/SiteHeader.vue'
 import { useDocsI18n } from './i18n'
@@ -10,7 +10,7 @@ useDensity()
 </script>
 
 <template>
-  <WkConfigProvider
+  <MConfigProvider
     class="site-config"
     :locale="componentLocale"
     :global-density="false"
@@ -27,7 +27,7 @@ useDensity()
         <RouterView />
       </div>
     </div>
-  </WkConfigProvider>
+  </MConfigProvider>
 </template>
 
 <style>
@@ -35,13 +35,13 @@ useDensity()
   --docs-display: 'Syne', 'Segoe UI', sans-serif;
   --docs-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
   --docs-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --docs-ink: color-mix(in srgb, var(--wk-color-text) 92%, #041018);
-  --docs-glow: color-mix(in srgb, var(--wk-color-primary) 55%, #22d3ee);
-  --docs-panel: color-mix(in srgb, var(--wk-color-surface) 78%, transparent);
-  --docs-edge: color-mix(in srgb, var(--wk-color-border) 70%, transparent);
+  --docs-ink: color-mix(in srgb, var(--m-color-text) 92%, #041018);
+  --docs-glow: color-mix(in srgb, var(--m-color-primary) 55%, #22d3ee);
+  --docs-panel: color-mix(in srgb, var(--m-color-surface) 78%, transparent);
+  --docs-edge: color-mix(in srgb, var(--m-color-border) 70%, transparent);
 
-  color: var(--wk-color-text);
-  background: var(--wk-color-surface);
+  color: var(--m-color-text);
+  background: var(--m-color-surface);
   font-family: var(--docs-body);
 }
 
@@ -69,14 +69,14 @@ input {
 button:focus-visible,
 input:focus-visible,
 a:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--wk-color-focus-ring) 40%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--m-color-focus-ring) 40%, transparent);
   outline-offset: 3px;
 }
 
-.wk-autocomplete__input:focus-visible,
-.wk-autocomplete__dropdown:focus-visible,
-.wk-select:focus-visible,
-.wk-icon-field input:focus-visible {
+.m-autocomplete__input:focus-visible,
+.m-autocomplete__dropdown:focus-visible,
+.m-select:focus-visible,
+.m-icon-field input:focus-visible {
   outline: none;
   outline-offset: 0;
 }
@@ -89,7 +89,7 @@ a:focus-visible {
 }
 
 .site-shell {
-  background: var(--wk-color-surface);
+  background: var(--m-color-surface);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -122,7 +122,7 @@ a:focus-visible {
 }
 
 .site-atmosphere__glow--b {
-  background: radial-gradient(circle, color-mix(in srgb, var(--wk-color-primary) 45%, #0ea5e9) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 45%, #0ea5e9) 0%, transparent 70%);
   bottom: -12rem;
   height: 32rem;
   opacity: 0.28;
@@ -162,8 +162,8 @@ a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:not([data-wk-ignore-reduced-motion]) .site-atmosphere__glow--a,
-  html:not([data-wk-ignore-reduced-motion]) .site-atmosphere__glow--b {
+  html:not([data-m-ignore-reduced-motion]) .site-atmosphere__glow--a,
+  html:not([data-m-ignore-reduced-motion]) .site-atmosphere__glow--b {
     animation: none;
   }
 }

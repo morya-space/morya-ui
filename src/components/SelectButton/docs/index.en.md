@@ -11,14 +11,14 @@ Present options as a button group, with single and multiple selection.
 ## Import
 
 ```ts
-import { WkSelectButton } from '@wise-kit/ui'
+import { MSelectButton } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelectButton } from '@wise-kit/ui'
+import { MSelectButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('center')
@@ -30,7 +30,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelectButton v-model="value" :options="options" />
+  <MSelectButton v-model="value" :options="options" />
 </template>
 ```
 
@@ -38,7 +38,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelectButton } from '@wise-kit/ui'
+import { MSelectButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(['left'])
@@ -50,7 +50,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelectButton v-model="value" :options="options" multiple />
+  <MSelectButton v-model="value" :options="options" multiple />
 </template>
 ```
 

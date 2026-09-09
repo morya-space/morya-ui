@@ -1,11 +1,11 @@
-# @wise-kit/ui-mcp
+﻿# morya-ui-mcp
 
-Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`@wise-kit/ui`](https://www.npmjs.com/package/@wise-kit/ui).
+Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`morya-ui`](https://www.npmjs.com/package/morya-ui).
 
 It indexes component docs, guides, examples, and reusable page patterns so **any MCP-capable AI client** can look up the real API before writing code. It does **not** replace installing the UI library:
 
 ```bash
-pnpm add @wise-kit/ui
+pnpm add morya-ui
 ```
 
 Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
@@ -13,7 +13,7 @@ Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
 ## Run
 
 ```bash
-npx -y @wise-kit/ui-mcp
+npx -y morya-ui-mcp
 ```
 
 Typical client config (field names vary by client):
@@ -21,15 +21,15 @@ Typical client config (field names vary by client):
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@wise-kit/ui-mcp"]
+  "args": ["-y", "morya-ui-mcp"]
 }
 ```
 
 Local checkout:
 
 ```bash
-pnpm --filter @wise-kit/ui-mcp build
-node packages/ui-mcp/bin/wise-kit-ui-mcp.js
+pnpm --filter morya-ui-mcp build
+node packages/ui-mcp/bin/morya-ui-mcp.js
 ```
 
 ## Tools
@@ -38,14 +38,14 @@ MCP also exposes **resources** and **resource templates** for clients that suppo
 
 Static resources:
 
-- `wi://catalog/index.json`
-- `wi://design-rules.json`
+- `m://catalog/index.json`
+- `m://design-rules.json`
 
 Resource templates:
 
-- `component-docs` → `wi://components/{component}/docs/{locale}`
-- `component-api` → `wi://components/{component}/api.json`
-- `guide-docs` → `wi://guides/{guide}/docs/{locale}`
+- `component-docs` → `m://components/{component}/docs/{locale}`
+- `component-api` → `m://components/{component}/api.json`
+- `guide-docs` → `m://guides/{guide}/docs/{locale}`
 
 ### Core — component docs
 
@@ -127,7 +127,7 @@ pnpm mcp:audit-examples
 
 ## Release
 
-From the repo root (version syncs from `@wise-kit/ui`):
+From the repo root (version syncs from `morya-ui`):
 
 ```bash
 pnpm release:mcp -- --dry-run

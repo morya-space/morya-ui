@@ -1,27 +1,27 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WkRadio from './Radio.vue'
-import WkRadioGroup from './RadioGroup.vue'
+import MRadio from './Radio.vue'
+import MRadioGroup from './RadioGroup.vue'
 
 describe('RadioGroup', () => {
   it('exposes radiogroup role and propagates disabled state', () => {
-    const wrapper = mount(WkRadioGroup, {
+    const wrapper = mount(MRadioGroup, {
       props: { disabled: true, invalid: true },
-      slots: { default: () => h(WkRadio, { value: 'a', label: 'A' }) },
+      slots: { default: () => h(MRadio, { value: 'a', label: 'A' }) },
     })
     expect(wrapper.attributes('role')).toBe('radiogroup')
-    expect(wrapper.classes()).toContain('wk-radio-group--disabled')
-    expect(wrapper.classes()).toContain('wk-radio-group--invalid')
+    expect(wrapper.classes()).toContain('m-radio-group--disabled')
+    expect(wrapper.classes()).toContain('m-radio-group--invalid')
   })
 
   it('updates model when a child radio is selected', async () => {
-    const wrapper = mount(WkRadioGroup, {
+    const wrapper = mount(MRadioGroup, {
       props: { modelValue: 'a' },
       slots: {
         default: () => [
-          h(WkRadio, { value: 'a', label: 'A' }),
-          h(WkRadio, { value: 'b', label: 'B' }),
+          h(MRadio, { value: 'a', label: 'A' }),
+          h(MRadio, { value: 'b', label: 'B' }),
         ],
       },
     })

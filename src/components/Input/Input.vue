@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
-import WkIcon from '../Icon/Icon.vue'
+import { useMId } from '../../shared/useMId'
+import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<InputProps>(), {
@@ -27,9 +27,9 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const slots = useSlots()
 const defaults = useComponentDefaults('Input')
-const locale = useWkLocale()
+const locale = useMLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useWkId('wk-input')
+const autoInputId = useMId('m-input')
 const inputId = computed(() => props.id ?? autoInputId)
 const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const sizeClass = useConfiguredSize('Input', () => props.size)
@@ -53,14 +53,14 @@ const describedBy = computed(() => {
 })
 
 const inputClass = computed(() => [
-  'wk-input',
-  `wk-input--${sizeClass.value}`,
+  'm-input',
+  `m-input--${sizeClass.value}`,
   {
-    'wk-input--filled': resolvedVariant.value === 'filled',
-    'wk-input--fluid': resolvedFluid.value,
-    'wk-input--invalid': isInvalid.value,
-    'wk-input--has-prefix': hasPrefix.value,
-    'wk-input--has-suffix': hasSuffix.value,
+    'm-input--filled': resolvedVariant.value === 'filled',
+    'm-input--fluid': resolvedFluid.value,
+    'm-input--invalid': isInvalid.value,
+    'm-input--has-prefix': hasPrefix.value,
+    'm-input--has-suffix': hasSuffix.value,
   },
 ])
 
@@ -91,18 +91,18 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="wk-input-field" :class="{ 'wk-input-field--fluid': resolvedFluid }">
-    <label v-if="label" class="wk-input-field__label" :for="inputId">{{ label }}</label>
+  <div class="m-input-field" :class="{ 'm-input-field--fluid': resolvedFluid }">
+    <label v-if="label" class="m-input-field__label" :for="inputId">{{ label }}</label>
     <div
-      class="wk-input-field__control"
+      class="m-input-field__control"
       :class="{
-        'wk-input-field__control--clearable': resolvedClearable && modelValue,
-        'wk-input-field__control--counted': resolvedShowCount,
-        'wk-input-field__control--prefixed': hasPrefix,
-        'wk-input-field__control--suffixed': Boolean($slots.suffix),
+        'm-input-field__control--clearable': resolvedClearable && modelValue,
+        'm-input-field__control--counted': resolvedShowCount,
+        'm-input-field__control--prefixed': hasPrefix,
+        'm-input-field__control--suffixed': Boolean($slots.suffix),
       }"
     >
-      <span v-if="$slots.prefix" class="wk-input__prefix">
+      <span v-if="$slots.prefix" class="m-input__prefix">
         <slot name="prefix" />
       </span>
       <input
@@ -122,26 +122,26 @@ defineExpose({ focus, blur, select })
         @blur="emit('blur', $event)"
         @change="emit('change', ($event.target as HTMLInputElement).value)"
       >
-      <span v-if="$slots.suffix" class="wk-input__suffix">
+      <span v-if="$slots.suffix" class="m-input__suffix">
         <slot name="suffix" />
       </span>
       <button
         v-if="resolvedClearable && modelValue"
-        class="wk-input__clear"
+        class="m-input__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <WkIcon name="close" size="sm" />
+        <MIcon name="close" size="sm" />
       </button>
     </div>
-    <div v-if="feedbackText || resolvedShowCount" class="wk-input-field__meta">
+    <div v-if="feedbackText || resolvedShowCount" class="m-input-field__meta">
       <span
         v-if="feedbackText"
         :id="`${inputId}-help`"
-        class="wk-input-field__help"
-        :class="{ 'wk-input-field__help--invalid': feedbackIsError }"
+        class="m-input-field__help"
+        :class="{ 'm-input-field__help--invalid': feedbackIsError }"
         :role="feedbackIsError ? 'alert' : undefined"
       >
         {{ feedbackText }}
@@ -149,7 +149,7 @@ defineExpose({ focus, blur, select })
       <span
         v-if="resolvedShowCount"
         :id="`${inputId}-count`"
-        class="wk-input-field__count"
+        class="m-input-field__count"
         aria-live="polite"
       >
         {{ countText }}

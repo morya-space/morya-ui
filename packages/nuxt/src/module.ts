@@ -1,16 +1,16 @@
-import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
+﻿import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
 
-export interface WiseKitNuxtOptions {
-  /** Import `@wise-kit/ui/styles.css`. Default `true`. */
+export interface MoryaUINuxtOptions {
+  /** Import `morya-ui/styles.css`. Default `true`. */
   css?: boolean
-  /** Add `@wise-kit/ui` to `build.transpile`. Default `true`. */
+  /** Add `morya-ui` to `build.transpile`. Default `true`. */
   transpile?: boolean
 }
 
-export default defineNuxtModule<WiseKitNuxtOptions>({
+export default defineNuxtModule<MoryaUINuxtOptions>({
   meta: {
-    name: '@wise-kit/nuxt',
-    configKey: 'WiseKit',
+    name: '@morya-space/nuxt',
+    configKey: 'moryaUI',
     compatibility: {
       nuxt: '>=3.10.0',
     },
@@ -23,11 +23,11 @@ export default defineNuxtModule<WiseKitNuxtOptions>({
     const resolver = createResolver(import.meta.url)
 
     if (options.transpile) {
-      nuxt.options.build.transpile.push('@wise-kit/ui')
+      nuxt.options.build.transpile.push('morya-ui')
     }
 
     if (options.css) {
-      nuxt.options.css.push('@wise-kit/ui/styles.css')
+      nuxt.options.css.push('morya-ui/styles.css')
     }
 
     addPlugin({

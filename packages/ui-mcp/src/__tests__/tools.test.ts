@@ -1,11 +1,11 @@
-import { describe, expect, it } from 'vitest'
+﻿import { describe, expect, it } from 'vitest'
 import { createToolHandlers } from '../tools.js'
 
 function read<T>(result: { content: Array<{ text: string }> }): T {
   return JSON.parse(result.content[0].text) as T
 }
 
-describe('@wise-kit/ui-mcp handlers', () => {
+describe('morya-ui-mcp handlers', () => {
   const handlers = createToolHandlers()
 
   it('returns complete pagination metadata for component lists', () => {
@@ -41,7 +41,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     )
 
     expect(result.id).toBe('Table')
-    expect(result.exportName).toBe('WkTable')
+    expect(result.exportName).toBe('MTable')
   })
 
   it('paginates component examples and reports API coverage', () => {
@@ -74,7 +74,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string; message: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WkButton label="Save" severity="danger" foo="bar" />',
+        code: '<MButton label="Save" severity="danger" foo="bar" />',
       }),
     )
 
@@ -89,7 +89,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WkButton icon-only aria-label="Add"><Plus /></WkButton>',
+        code: '<MButton icon-only aria-label="Add"><Plus /></MButton>',
       }),
     )
 
@@ -106,7 +106,7 @@ describe('@wise-kit/ui-mcp handlers', () => {
     const result = read<{ ok: boolean }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<WkButton icon="plus" icon-only aria-label="Add" />',
+        code: '<MButton icon="plus" icon-only aria-label="Add" />',
       }),
     )
 
@@ -135,8 +135,8 @@ describe('@wise-kit/ui-mcp handlers', () => {
     )
 
     expect(result.matchedPattern).toBe('dashboard')
-    expect(result.scaffold.files.component).toContain('WkGrid')
-    expect(result.scaffold.files.component).toContain('WkSkeleton')
+    expect(result.scaffold.files.component).toContain('MGrid')
+    expect(result.scaffold.files.component).toContain('MSkeleton')
   })
 
   it('lists component decision guides when query is omitted', () => {

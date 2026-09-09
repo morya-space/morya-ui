@@ -6,7 +6,7 @@ export interface ListboxOption {
   disabled?: boolean
 }
 
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
 export interface ListboxProps {
   modelValue?: ListboxValue | ListboxValue[]
@@ -14,7 +14,7 @@ export interface ListboxProps {
   multiple?: boolean
   disabled?: boolean
   invalid?: boolean
-  size?: WkSizeInput
+  size?: MSizeInput
   filter?: boolean
   emptyMessage?: string
   listStyle?: string | Record<string, string>

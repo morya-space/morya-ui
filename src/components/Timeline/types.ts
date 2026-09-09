@@ -1,9 +1,9 @@
-import type { WkToastSeverity } from '../../shared/types'
+import type { MToastSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
 export type TimelineAlign = 'left' | 'right' | 'alternate'
 export type TimelineLayout = 'vertical' | 'horizontal'
-export type TimelineSeverity = WkToastSeverity | 'warning' | 'help'
+export type TimelineSeverity = MToastSeverity | 'warning' | 'help'
 
 export interface TimelineEvent {
   status?: string

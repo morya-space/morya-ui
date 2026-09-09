@@ -1,5 +1,5 @@
-import type { WkAppendTo } from '../../shared/overlay'
-import type { WkSizeInput } from '../../shared/types'
+import type { MAppendTo } from '../../shared/overlay'
+import type { MSizeInput } from '../../shared/types'
 import type { TreeCheckStrategy } from '../Tree/types'
 
 export type { TreeCheckStrategy }
@@ -24,7 +24,7 @@ export interface TreeSelectProps {
   errorMessage?: string
   placeholder?: string
   disabled?: boolean
-  size?: WkSizeInput
+  size?: MSizeInput
   /** Keep for compatibility; `multiple` is the switch. */
   selectionMode?: 'single' | 'multiple'
   multiple?: boolean
@@ -41,7 +41,7 @@ export interface TreeSelectProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }
 
 export interface TreeSelectEmits {

@@ -1,121 +1,121 @@
 /* —— Panel: Stepper —— */
-.wk-stepper {
-    --wk-stepper-marker-size: 1.5rem;
+.m-stepper {
+    --m-stepper-marker-size: 1.5rem;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     position: relative;
 }
 
-.wk-stepper__step:not(:last-child)::after {
-    background: var(--wk-stepper-connector-color);
+.m-stepper__step:not(:last-child)::after {
+    background: var(--m-stepper-connector-color);
     content: '';
-    height: var(--wk-border-width);
-    margin-inline: var(--wk-space-1);
+    height: var(--m-border-width);
+    margin-inline: var(--m-space-1);
     width: 1.25rem;
 }
 
-.wk-stepper__step {
+.m-stepper__step {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-md);
-    color: var(--wk-color-text-muted);
+    border-radius: var(--m-radius-md);
+    color: var(--m-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    gap: var(--wk-space-2);
-    padding: var(--wk-space-2) var(--wk-space-3);
+    gap: var(--m-space-2);
+    padding: var(--m-space-2) var(--m-space-3);
 }
 
-.wk-stepper__step--active {
-    color: var(--wk-color-primary);
+.m-stepper__step--active {
+    color: var(--m-color-primary);
     font-weight: 600;
 }
 
-.wk-stepper__step--completed {
-    color: var(--wk-color-text);
+.m-stepper__step--completed {
+    color: var(--m-color-text);
 }
 
-.wk-stepper__step--disabled,
-.wk-stepper__step:disabled {
+.m-stepper__step--disabled,
+.m-stepper__step:disabled {
     cursor: not-allowed;
-    opacity: var(--wk-opacity-disabled);
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-stepper__step:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-stepper__step:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-stepper__marker {
+.m-stepper__marker {
     align-items: center;
     background: color-mix(
         in srgb,
-        var(--wk-color-text-muted) 16%,
-        var(--wk-color-surface)
+        var(--m-color-text-muted) 16%,
+        var(--m-color-surface)
     );
-    border-radius: var(--wk-radius-full);
+    border-radius: var(--m-radius-full);
     display: inline-flex;
-    font-size: var(--wk-font-size-xs);
+    font-size: var(--m-font-size-xs);
     font-weight: 700;
-    height: var(--wk-stepper-marker-size);
+    height: var(--m-stepper-marker-size);
     justify-content: center;
-    width: var(--wk-stepper-marker-size);
+    width: var(--m-stepper-marker-size);
 }
 
-.wk-stepper__step--active .wk-stepper__marker {
-    background: var(--wk-color-primary);
-    color: var(--wk-color-on-emphasis);
+.m-stepper__step--active .m-stepper__marker {
+    background: var(--m-color-primary);
+    color: var(--m-color-on-emphasis);
 }
 
-.wk-stepper__content {
-    margin-top: var(--wk-space-4);
+.m-stepper__content {
+    margin-top: var(--m-space-4);
 }
 
-.wk-stepper--vertical {
+.m-stepper--vertical {
     align-items: stretch;
     flex-direction: column;
 }
 
-.wk-stepper__copy {
+.m-stepper__copy {
     display: grid;
     gap: 0.15rem;
     text-align: start;
 }
 
-.wk-stepper__description {
-    color: var(--wk-color-text-muted);
-    font-size: var(--wk-font-size-xs);
+.m-stepper__description {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-xs);
     font-weight: 400;
 }
 
-.wk-stepper__step--error .wk-stepper__marker {
-    background: var(--wk-color-danger);
-    color: var(--wk-color-on-emphasis);
+.m-stepper__step--error .m-stepper__marker {
+    background: var(--m-color-danger);
+    color: var(--m-color-on-emphasis);
 }
 
-.wk-stepper__step--finish .wk-stepper__marker {
-    background: color-mix(in srgb, var(--wk-color-primary) 14%, var(--wk-color-surface));
-    color: var(--wk-color-primary);
-    box-shadow: inset 0 0 0 var(--wk-border-width) var(--wk-color-primary);
+.m-stepper__step--finish .m-stepper__marker {
+    background: color-mix(in srgb, var(--m-color-primary) 14%, var(--m-color-surface));
+    color: var(--m-color-primary);
+    box-shadow: inset 0 0 0 var(--m-border-width) var(--m-color-primary);
 }
 
-.wk-stepper__step--process .wk-stepper__marker {
-    background: var(--wk-color-primary);
-    color: var(--wk-color-on-emphasis);
+.m-stepper__step--process .m-stepper__marker {
+    background: var(--m-color-primary);
+    color: var(--m-color-on-emphasis);
 }
 
-.wk-stepper__step--wait {
-    color: var(--wk-color-text-muted);
+.m-stepper__step--wait {
+    color: var(--m-color-text-muted);
 }
 
-.wk-stepper__step--finish {
-    color: var(--wk-color-text);
+.m-stepper__step--finish {
+    color: var(--m-color-text);
 }
 
-.wk-stepper__step--process {
-    color: var(--wk-color-primary);
+.m-stepper__step--process {
+    color: var(--m-color-primary);
     font-weight: 600;
 }

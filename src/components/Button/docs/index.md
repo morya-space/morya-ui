@@ -11,7 +11,7 @@ description: 按钮用于触发即时动作。
 ## 引入
 
 ```ts
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton>Submit</WkButton>
-    <WkButton label="Label Prop" />
-    <WkButton severity="secondary" label="Secondary" />
+    <MButton>Submit</MButton>
+    <MButton label="Label Prop" />
+    <MButton severity="secondary" label="Secondary" />
   </div>
 </template>
 ```
@@ -38,19 +38,19 @@ import { WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton label="Primary" />
-    <WkButton label="Secondary" severity="secondary" />
-    <WkButton label="Success" severity="success" />
-    <WkButton label="Info" severity="info" />
-    <WkButton label="Warn" severity="warn" />
-    <WkButton label="Help" severity="help" />
-    <WkButton label="Danger" severity="danger" />
-    <WkButton label="Contrast" severity="contrast" />
+    <MButton label="Primary" />
+    <MButton label="Secondary" severity="secondary" />
+    <MButton label="Success" severity="success" />
+    <MButton label="Info" severity="info" />
+    <MButton label="Warn" severity="warn" />
+    <MButton label="Help" severity="help" />
+    <MButton label="Danger" severity="danger" />
+    <MButton label="Contrast" severity="contrast" />
   </div>
 </template>
 ```
@@ -61,25 +61,25 @@ import { WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WkButton label="Outlined" outlined />
-      <WkButton label="Success" severity="success" outlined />
-      <WkButton label="Danger" severity="danger" outlined />
+      <MButton label="Outlined" outlined />
+      <MButton label="Success" severity="success" outlined />
+      <MButton label="Danger" severity="danger" outlined />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WkButton label="Raised" raised />
-      <WkButton label="Rounded" rounded />
-      <WkButton label="Plain Text" text plain />
+      <MButton label="Raised" raised />
+      <MButton label="Rounded" rounded />
+      <MButton label="Plain Text" text plain />
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <WkButton label="Small" size="small" />
-      <WkButton label="Large" size="large" />
-      <WkButton label="Fluid" fluid />
+      <MButton label="Small" size="small" />
+      <MButton label="Large" size="large" />
+      <MButton label="Fluid" fluid />
     </div>
   </div>
 </template>
@@ -91,15 +91,15 @@ import { WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton label="Text" text />
-    <WkButton label="Text Danger" text severity="danger" />
-    <WkButton label="Link" link />
-    <WkButton label="Link Secondary" link severity="secondary" />
+    <MButton label="Text" text />
+    <MButton label="Text Danger" text severity="danger" />
+    <MButton label="Link" link />
+    <MButton label="Link Secondary" link severity="secondary" />
   </div>
 </template>
 ```
@@ -110,34 +110,34 @@ import { WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton label="Ghost" ghost />
-    <WkButton label="Ghost Danger" ghost severity="danger" />
-    <WkButton label="Quaternary" quaternary />
-    <WkButton label="Custom" color="#e11d48" />
+    <MButton label="Ghost" ghost />
+    <MButton label="Ghost Danger" ghost severity="danger" />
+    <MButton label="Quaternary" quaternary />
+    <MButton label="Custom" color="#e11d48" />
   </div>
 </template>
 ```
 
 ## Button Group
 
-`WkButtonGroup` 将相邻按钮拼成一组。
+`MButtonGroup` 将相邻按钮拼成一组。
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkButtonGroup } from '@wise-kit/ui'
+import { MButton, MButtonGroup } from 'morya-ui'
 </script>
 
 <template>
-  <WkButtonGroup aria-label="对齐">
-    <WkButton label="左" />
-    <WkButton label="中" severity="secondary" />
-    <WkButton label="右" severity="secondary" />
-  </WkButtonGroup>
+  <MButtonGroup aria-label="对齐">
+    <MButton label="左" />
+    <MButton label="中" severity="secondary" />
+    <MButton label="右" severity="secondary" />
+  </MButtonGroup>
 </template>
 ```
 
@@ -147,16 +147,16 @@ import { WkButton, WkButtonGroup } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton icon="check" label="Save" />
-    <WkButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <WkButton icon="plus" icon-only rounded aria-label="Add" />
-    <WkButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <WkButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
+    <MButton icon="check" label="Save" />
+    <MButton icon="search" label="Search" icon-pos="right" severity="secondary" />
+    <MButton icon="plus" icon-only rounded aria-label="Add" />
+    <MButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
+    <MButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
   </div>
 </template>
 ```
@@ -167,7 +167,7 @@ import { WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -182,8 +182,8 @@ function toggleLoading() {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <WkButton label="Always Loading" loading severity="secondary" />
+    <MButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
+    <MButton label="Always Loading" loading severity="secondary" />
   </div>
 </template>
 ```
@@ -192,14 +192,14 @@ function toggleLoading() {
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton } from '@wise-kit/ui'
+import { MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton label="Disabled" disabled />
-    <WkButton label="Disabled Outlined" outlined disabled />
-    <WkButton label="Disabled Text" text disabled />
+    <MButton label="Disabled" disabled />
+    <MButton label="Disabled Outlined" outlined disabled />
+    <MButton label="Disabled Text" text disabled />
   </div>
 </template>
 ```

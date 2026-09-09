@@ -1,5 +1,5 @@
-import type { WkAppendTo } from '../../shared/overlay'
-import type { WkSizeInput } from '../../shared/types'
+import type { MAppendTo } from '../../shared/overlay'
+import type { MSizeInput } from '../../shared/types'
 
 export type DatePickerType = 'date' | 'daterange'
 export type DatePickerDateValue = string | Date
@@ -26,7 +26,7 @@ export interface DatePickerProps {
   disabled?: boolean
   invalid?: boolean
   fluid?: boolean
-  size?: WkSizeInput
+  size?: MSizeInput
   minDate?: DatePickerDateValue | null
   maxDate?: DatePickerDateValue | null
   placeholder?: string
@@ -41,7 +41,7 @@ export interface DatePickerProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }
 
 export interface DatePickerEmits {

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { TagProps } from './types'
 import { computed } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TagProps>(), {
   severity: 'primary',
@@ -15,26 +15,26 @@ const props = withDefaults(defineProps<TagProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'close', value: MouseEvent): void }>()
-const locale = useWkLocale()
+const locale = useMLocale()
 const sizeClass = useConfiguredSize('Tag', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
 
 const rootClass = computed(() => [
-  'wk-tag',
-  `wk-tag--${severityTone.value}`,
-  `wk-tag--${sizeClass.value}`,
+  'm-tag',
+  `m-tag--${severityTone.value}`,
+  `m-tag--${sizeClass.value}`,
   {
-    'wk-tag--rounded': props.rounded,
-    'wk-tag--bordered': props.bordered,
-    'wk-tag--closable': props.closable,
-    'wk-tag--disabled': props.disabled,
-    'wk-tag--custom': Boolean(props.color),
+    'm-tag--rounded': props.rounded,
+    'm-tag--bordered': props.bordered,
+    'm-tag--closable': props.closable,
+    'm-tag--disabled': props.disabled,
+    'm-tag--custom': Boolean(props.color),
   },
 ])
 
 const rootStyle = computed(() =>
-  props.color ? { '--wk-tag-color': props.color } : undefined,
+  props.color ? { '--m-tag-color': props.color } : undefined,
 )
 
 function onClose(event: MouseEvent) {
@@ -46,17 +46,17 @@ function onClose(event: MouseEvent) {
 
 <template>
   <span :class="rootClass" :style="rootStyle">
-    <WkIcon v-if="icon" class="wk-tag__icon" :name="icon" :size="iconSize" />
+    <MIcon v-if="icon" class="m-tag__icon" :name="icon" :size="iconSize" />
     <slot>{{ value }}</slot>
     <button
       v-if="closable"
       type="button"
-      class="wk-tag__close"
+      class="m-tag__close"
       :disabled="disabled"
       :aria-label="locale.close"
       @click="onClose"
     >
-      <WkIcon name="close" :size="iconSize" />
+      <MIcon name="close" :size="iconSize" />
     </button>
   </span>
 </template>

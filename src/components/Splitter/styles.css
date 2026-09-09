@@ -1,70 +1,70 @@
 /* —— Panel: Splitter —— */
-.wk-splitter {
-    --wk-splitter-trigger-size: 6px;
+.m-splitter {
+    --m-splitter-trigger-size: 6px;
     display: flex;
     min-height: 6rem;
     overflow: hidden;
     width: 100%;
 }
 
-.wk-splitter--horizontal {
+.m-splitter--horizontal {
     flex-direction: row;
 }
 
-.wk-splitter--vertical {
+.m-splitter--vertical {
     flex-direction: column;
 }
 
-.wk-splitter--dragging,
-.wk-splitter--dragging * {
+.m-splitter--dragging,
+.m-splitter--dragging * {
     user-select: none !important;
 }
 
-.wk-splitter__panel {
-    background: var(--wk-color-surface);
+.m-splitter__panel {
+    background: var(--m-color-surface);
     min-height: 0;
     min-width: 0;
     overflow: auto;
 }
 
-.wk-splitter__panel--fill {
+.m-splitter__panel--fill {
     flex: 1 1 0;
 }
 
-.wk-splitter__gutter {
-    background: var(--wk-color-border);
-    flex: 0 0 var(--wk-splitter-trigger-size);
+.m-splitter__gutter {
+    background: var(--m-color-border);
+    flex: 0 0 var(--m-splitter-trigger-size);
     touch-action: none;
-    z-index: var(--wk-z-popper);
+    z-index: var(--m-z-popper);
 }
 
-.wk-splitter--horizontal > .wk-splitter__gutter {
+.m-splitter--horizontal > .m-splitter__gutter {
     cursor: col-resize;
-    width: var(--wk-splitter-trigger-size);
+    width: var(--m-splitter-trigger-size);
 }
 
-.wk-splitter--vertical > .wk-splitter__gutter {
+.m-splitter--vertical > .m-splitter__gutter {
     cursor: row-resize;
-    height: var(--wk-splitter-trigger-size);
+    height: var(--m-splitter-trigger-size);
     width: 100%;
 }
 
-.wk-splitter__gutter:hover,
-.wk-splitter--dragging > .wk-splitter__gutter,
-.wk-splitter__gutter:focus-visible {
-    background: var(--wk-color-primary);
+.m-splitter__gutter:hover,
+.m-splitter--dragging > .m-splitter__gutter,
+.m-splitter__gutter:focus-visible {
+    background: var(--m-color-primary);
 }
 
-.wk-splitter__gutter:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-splitter__gutter:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-splitter--disabled {
-    opacity: var(--wk-opacity-disabled);
+.m-splitter--disabled {
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-splitter--disabled > .wk-splitter__gutter {
+.m-splitter--disabled > .m-splitter__gutter {
     cursor: not-allowed;
     pointer-events: none;
 }

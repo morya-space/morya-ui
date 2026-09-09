@@ -11,14 +11,14 @@ description: 主图 + 缩略图的图片画廊。
 ## 引入
 
 ```ts
-import { WkGallery } from '@wise-kit/ui'
+import { MGallery } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkGallery } from '@wise-kit/ui'
+import { MGallery } from 'morya-ui'
 import { ref } from 'vue'
 
 const activeIndex = ref(0)
@@ -30,7 +30,7 @@ const images = [
 </script>
 
 <template>
-  <WkGallery v-model:active-index="activeIndex" :images="images" />
+  <MGallery v-model:active-index="activeIndex" :images="images" />
 </template>
 ```
 

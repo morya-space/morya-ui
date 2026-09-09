@@ -1,5 +1,5 @@
----
-description: Wise Kit 组件用法与选型（Vue 业务代码）
+﻿---
+description: Morya UI 组件用法与选型（Vue 业务代码）
 globs: src/**/*.vue
 alwaysApply: false
 ---
@@ -9,20 +9,20 @@ alwaysApply: false
 ## 引入
 
 ```ts
-import { WkButton, WkInput } from '@wise-kit/ui'
-// 按需：import WkButton from '@wise-kit/ui/button'
-//        import '@wise-kit/ui/button/style'
+import { MButton, MInput } from 'morya-ui'
+// 按需：import MButton from 'morya-ui/button'
+//        import 'morya-ui/button/style'
 ```
 
 ## 必选模式
 
-- 表单：`WkForm` + `WkFormItem` + 字段组件；提交用 `@submit` + `type="submit"`。
-- 表格：`WkTable` 的 `columns` + `data` + `row-key`；单元格用 `#cell-{key}` 插槽。
-- 浮层：详情/编辑 `WkDialog`；侧栏 `WkDrawer`；删除确认 `WkConfirmDialog`。
+- 表单：`MForm` + `MFormItem` + 字段组件；提交用 `@submit` + `type="submit"`。
+- 表格：`MTable` 的 `columns` + `data` + `row-key`；单元格用 `#cell-{key}` 插槽。
+- 浮层：详情/编辑 `MDialog`；侧栏 `MDrawer`；删除确认 `MConfirmDialog`。
 - 反馈（**默认 Message**）：
   - 单行操作结果 → `message.success/info/warn/error('…')`
   - 有标题 + 详情 / 异步通知 → `toast.*({ summary, detail })`
-  - 表单区常驻错误 → `<WkMessage>` 或字段 `errorMessage`
+  - 表单区常驻错误 → `<MMessage>` 或字段 `errorMessage`
   - 详见 `docs/feedback-message-vs-toast.md`
 
 ## Props 约定
@@ -35,7 +35,7 @@ import { WkButton, WkInput } from '@wise-kit/ui'
 ## 禁止
 
 - 同一页面混用其他 UI 库。
-- 用 `WkDropdown` 代替 Select 做枚举选择。
-- 手写 table/modal 替代 `WkTable` / `WkDialog`。
+- 用 `MDropdown` 代替 Select 做枚举选择。
+- 手写 table/modal 替代 `MTable` / `MDialog`。
 
 完整清单：`docs/components.md`

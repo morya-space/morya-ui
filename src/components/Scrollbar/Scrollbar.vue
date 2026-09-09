@@ -16,11 +16,11 @@ import {
   watch
 } from 'vue'
 import { scrollbarContextKey } from './constants'
-import { useWkId } from '../../shared/useWkId'
+import { useMId } from '../../shared/useMId'
 import Thumb from './Thumb.vue'
 import { addUnit, GAP, isNumber, isObject } from './util'
 
-defineOptions({ name: 'WkScrollbar' })
+defineOptions({ name: 'MScrollbar' })
 
 const props = withDefaults(defineProps<ScrollbarProps>(), {
   distance: 0,
@@ -52,7 +52,7 @@ const sizeHeight = ref('')
 const ratioX = ref(1)
 const ratioY = ref(1)
 
-const fallbackViewId = useWkId('wk-scrollbar-view')
+const fallbackViewId = useMId('m-scrollbar-view')
 const contentId = computed(() => props.id ?? fallbackViewId)
 
 let wrapScrollTop = 0
@@ -120,18 +120,18 @@ const resolvedWrapStyle = computed<StyleValue>(() => {
 })
 
 const rootClassList = computed(() => [
-  'wk-scrollbar',
-  { 'wk-scrollbar--fill': !useConstrainLayout.value },
-  { 'wk-scrollbar--fit-content': props.fitContent },
+  'm-scrollbar',
+  { 'm-scrollbar--fill': !useConstrainLayout.value },
+  { 'm-scrollbar--fit-content': props.fitContent },
 ])
 
 const wrapClassList = computed(() => [
-  'wk-scrollbar__wrap',
+  'm-scrollbar__wrap',
   props.wrapClass,
-  { 'wk-scrollbar__wrap--hidden-default': !props.native },
+  { 'm-scrollbar__wrap--hidden-default': !props.native },
 ])
 
-const viewClassList = computed(() => ['wk-scrollbar__view', props.viewClass])
+const viewClassList = computed(() => ['m-scrollbar__view', props.viewClass])
 const alwaysVisible = computed(() => Boolean(props.always || props.trigger === 'none'))
 
 provide(

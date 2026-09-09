@@ -1,28 +1,28 @@
 /* Shared picker suffix slot: clear + dropdown indicator (Select, TreeSelect). */
-.wk-select__control {
-    --wk-control-end-padding: var(--wk-control-affix-padding);
+.m-select__control {
+    --m-control-end-padding: var(--m-control-affix-padding);
     position: relative;
     width: 100%;
 }
 
-.wk-select__suffix {
+.m-select__suffix {
     align-items: center;
     display: block;
-    height: var(--wk-control-affix-size);
+    height: var(--m-control-affix-size);
     pointer-events: none;
     position: absolute;
-    right: var(--wk-space-1);
+    right: var(--m-space-1);
     top: 50%;
     transform: translateY(-50%);
-    width: var(--wk-control-affix-size);
+    width: var(--m-control-affix-size);
 }
 
-.wk-select__clear {
+.m-select__clear {
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-sm);
-    color: var(--wk-color-text-muted);
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text-muted);
     cursor: pointer;
     display: flex;
     height: 100%;
@@ -32,25 +32,25 @@
     padding: 0;
     pointer-events: none;
     position: absolute;
-    transition: opacity var(--wk-motion-fast) var(--wk-motion-ease);
+    transition: opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
     z-index: 1;
 }
 
-.wk-select__control--clearable:not(.wk-select__control--open):hover .wk-select__clear,
-.wk-select__control--clearable:not(.wk-select__control--open) .wk-select__clear:focus-visible {
+.m-select__control--clearable:not(.m-select__control--open):hover .m-select__clear,
+.m-select__control--clearable:not(.m-select__control--open) .m-select__clear:focus-visible {
     opacity: 1;
     pointer-events: auto;
 }
 
-.wk-select__clear:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-select__clear:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-select__indicator {
+.m-select__indicator {
     align-items: center;
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     display: flex;
     height: 100%;
     inset: 0;
@@ -58,49 +58,49 @@
     pointer-events: none;
     position: absolute;
     transition:
-        opacity var(--wk-motion-fast) var(--wk-motion-ease),
-        transform var(--wk-motion-fast) var(--wk-motion-ease);
+        opacity var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
-.wk-select__control--clearable:not(.wk-select__control--open):hover .wk-select__indicator,
-.wk-select__control--clearable:not(.wk-select__control--open) .wk-select__clear:focus-visible ~ .wk-select__indicator {
+.m-select__control--clearable:not(.m-select__control--open):hover .m-select__indicator,
+.m-select__control--clearable:not(.m-select__control--open) .m-select__clear:focus-visible ~ .m-select__indicator {
     opacity: 0;
 }
 
-.wk-select__indicator--open {
+.m-select__indicator--open {
     transform: rotate(180deg);
 }
 
-.wk-select__suffix {
-    --wk-affix-icon-size: 1rem;
+.m-select__suffix {
+    --m-affix-icon-size: 1rem;
 }
 
-.wk-select__control:has(.wk-select--small) .wk-select__suffix,
-.wk-select__control:has(.wk-select--sm) .wk-select__suffix,
-.wk-select__control:has(.wk-treeselect--small) .wk-select__suffix,
-.wk-select__control:has(.wk-cascadeselect--small) .wk-select__suffix {
-    --wk-affix-icon-size: 0.875rem;
+.m-select__control:has(.m-select--small) .m-select__suffix,
+.m-select__control:has(.m-select--sm) .m-select__suffix,
+.m-select__control:has(.m-treeselect--small) .m-select__suffix,
+.m-select__control:has(.m-cascadeselect--small) .m-select__suffix {
+    --m-affix-icon-size: 0.875rem;
 }
 
-.wk-select__control:has(.wk-select--large) .wk-select__suffix,
-.wk-select__control:has(.wk-select--lg) .wk-select__suffix,
-.wk-select__control:has(.wk-treeselect--large) .wk-select__suffix,
-.wk-select__control:has(.wk-cascadeselect--large) .wk-select__suffix {
-    --wk-affix-icon-size: 1.125rem;
+.m-select__control:has(.m-select--large) .m-select__suffix,
+.m-select__control:has(.m-select--lg) .m-select__suffix,
+.m-select__control:has(.m-treeselect--large) .m-select__suffix,
+.m-select__control:has(.m-cascadeselect--large) .m-select__suffix {
+    --m-affix-icon-size: 1.125rem;
 }
 
-.wk-select__suffix .wk-select__clear .wk-icon,
-.wk-select__suffix .wk-select__indicator .wk-icon,
-.wk-select__suffix .wk-control-affix-icon {
+.m-select__suffix .m-select__clear .m-icon,
+.m-select__suffix .m-select__indicator .m-icon,
+.m-select__suffix .m-control-affix-icon {
     flex-shrink: 0;
-    height: var(--wk-affix-icon-size);
-    width: var(--wk-affix-icon-size);
+    height: var(--m-affix-icon-size);
+    width: var(--m-affix-icon-size);
 }
 
-.wk-select__suffix .wk-select__clear .wk-icon svg,
-.wk-select__suffix .wk-select__indicator .wk-icon svg,
-.wk-select__suffix .wk-control-affix-icon svg {
+.m-select__suffix .m-select__clear .m-icon svg,
+.m-select__suffix .m-select__indicator .m-icon svg,
+.m-select__suffix .m-control-affix-icon svg {
     display: block;
     height: 100%;
     width: 100%;

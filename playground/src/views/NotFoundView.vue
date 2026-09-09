@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WkButton, WkScrollbar } from '@wise-kit/ui'
+import { MButton, MScrollbar } from 'morya-ui'
 import { RouterLink } from 'vue-router'
 import { useDocsI18n } from '../i18n'
 
@@ -7,7 +7,7 @@ const { t } = useDocsI18n()
 </script>
 
 <template>
-  <WkScrollbar class="not-found-scroll">
+  <MScrollbar class="not-found-scroll">
     <section class="not-found">
       <p class="not-found__code" aria-hidden="true">
         404
@@ -16,14 +16,14 @@ const { t } = useDocsI18n()
       <p>{{ t.notFoundBody }}</p>
       <div class="not-found__actions">
         <RouterLink :to="{ name: 'home' }">
-          <WkButton :label="t.notFoundHome" />
+          <MButton :label="t.notFoundHome" />
         </RouterLink>
         <RouterLink :to="{ name: 'components' }">
-          <WkButton :label="t.browse" outlined />
+          <MButton :label="t.browse" outlined />
         </RouterLink>
       </div>
     </section>
-  </WkScrollbar>
+  </MScrollbar>
 </template>
 
 <style scoped>
@@ -40,7 +40,7 @@ const { t } = useDocsI18n()
 }
 
 .not-found__code {
-  color: var(--wk-color-primary);
+  color: var(--m-color-primary);
   font-family: var(--docs-display);
   font-size: clamp(3rem, 12vw, 5rem);
   font-weight: 800;
@@ -59,7 +59,7 @@ const { t } = useDocsI18n()
 }
 
 .not-found p {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   line-height: 1.6;
   margin: 0 auto 1.5rem;
   max-width: 28rem;

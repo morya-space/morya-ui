@@ -11,14 +11,14 @@ Shortcut entries shown as an icon list.
 ## Import
 
 ```ts
-import { WkDock } from '@wise-kit/ui'
+import { MDock } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkDock } from '@wise-kit/ui'
+import { MDock } from 'morya-ui'
 
 const model = [
   { label: 'Home', icon: '⌂' },
@@ -28,7 +28,7 @@ const model = [
 </script>
 
 <template>
-  <WkDock :model="model" />
+  <MDock :model="model" />
 </template>
 ```
 

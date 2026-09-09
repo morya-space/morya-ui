@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkLabel from './Label.vue'
+import MLabel from './Label.vue'
 
-describe('wkLabel', () => {
+describe('muLabel', () => {
   it('renders slot content and for attribute', () => {
-    const wrapper = mount(WkLabel, {
+    const wrapper = mount(MLabel, {
       props: { htmlFor: 'email' },
       slots: { default: 'Email' },
     })
     expect(wrapper.text()).toBe('Email')
     expect(wrapper.attributes('for')).toBe('email')
-    expect(wrapper.classes()).toContain('wk-label')
+    expect(wrapper.classes()).toContain('m-label')
   })
 
   it('accepts for prop alias', () => {
-    const wrapper = mount(WkLabel, { props: { for: 'name' }, slots: { default: 'Name' } })
+    const wrapper = mount(MLabel, { props: { for: 'name' }, slots: { default: 'Name' } })
     expect(wrapper.attributes('for')).toBe('name')
   })
 })

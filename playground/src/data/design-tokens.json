@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-08T11:14:25.453Z",
+  "generatedAt": "2026-09-09T16:06:24.794Z",
   "source": "src/**/*.css",
-  "prefix": "wk",
+  "prefix": "m",
   "categories": [
     {
       "id": "color",
@@ -35,8 +35,8 @@
         "en-US": "Spacing"
       },
       "description": {
-        "zh-CN": "全局间距阶梯；`data-wk-density` 会缩放这些值。",
-        "en-US": "Global spacing scale; scaled by `data-wk-density`."
+        "zh-CN": "全局间距阶梯；`data-m-density` 会缩放这些值。",
+        "en-US": "Global spacing scale; scaled by `data-m-density`."
       }
     },
     {
@@ -83,8 +83,8 @@
         "en-US": "Motion"
       },
       "description": {
-        "zh-CN": "过渡时长、缓动与组件动画周期；`data-wk-motion` 可缩短或关闭。",
-        "en-US": "Transition durations, easing, and component animation periods; shortened or disabled via `data-wk-motion`."
+        "zh-CN": "过渡时长、缓动与组件动画周期；`data-m-motion` 可缩短或关闭。",
+        "en-US": "Transition durations, easing, and component animation periods; shortened or disabled via `data-m-motion`."
       }
     },
     {
@@ -95,8 +95,8 @@
         "en-US": "Layering"
       },
       "description": {
-        "zh-CN": "浮层 z-index 预算；`ConfigProvider` / `createWiseKit` 的 `zIndex` 会写入 `--wk-z-base`。",
-        "en-US": "Overlay z-index budget; `ConfigProvider` / `createWiseKit` `zIndex` writes `--wk-z-base`."
+        "zh-CN": "浮层 z-index 预算；`ConfigProvider` / `createMoryaUI` 的 `zIndex` 会写入 `--m-z-base`。",
+        "en-US": "Overlay z-index budget; `ConfigProvider` / `createMoryaUI` `zIndex` writes `--m-z-base`."
       }
     },
     {
@@ -167,8 +167,8 @@
         "en-US": "Table"
       },
       "description": {
-        "zh-CN": "WkTable 行高、单元格间距与行状态底色。",
-        "en-US": "WkTable row height, cell spacing, and row state backgrounds."
+        "zh-CN": "MTable 行高、单元格间距与行状态底色。",
+        "en-US": "MTable row height, cell spacing, and row state backgrounds."
       }
     },
     {
@@ -203,8 +203,8 @@
         "en-US": "Tree"
       },
       "description": {
-        "zh-CN": "WkTree 缩进与节点间距。",
-        "en-US": "WkTree indent and node spacing."
+        "zh-CN": "MTree 缩进与节点间距。",
+        "en-US": "MTree indent and node spacing."
       }
     },
     {
@@ -215,8 +215,8 @@
         "en-US": "Timeline"
       },
       "description": {
-        "zh-CN": "WkTimeline 节点高度与标记尺寸。",
-        "en-US": "WkTimeline event height and marker size."
+        "zh-CN": "MTimeline 节点高度与标记尺寸。",
+        "en-US": "MTimeline event height and marker size."
       }
     },
     {
@@ -227,8 +227,8 @@
         "en-US": "Slider"
       },
       "description": {
-        "zh-CN": "WkSlider 轨道、滑块与提示框尺寸。",
-        "en-US": "WkSlider track, thumb, and tooltip sizing."
+        "zh-CN": "MSlider 轨道、滑块与提示框尺寸。",
+        "en-US": "MSlider track, thumb, and tooltip sizing."
       }
     },
     {
@@ -239,8 +239,8 @@
         "en-US": "Rating"
       },
       "description": {
-        "zh-CN": "WkRating 星形尺寸与间距。",
-        "en-US": "WkRating star sizes and spacing."
+        "zh-CN": "MRating 星形尺寸与间距。",
+        "en-US": "MRating star sizes and spacing."
       }
     },
     {
@@ -251,8 +251,8 @@
         "en-US": "Tag"
       },
       "description": {
-        "zh-CN": "WkTag 字号等样式参数。",
-        "en-US": "WkTag typography and related styling."
+        "zh-CN": "MTag 字号等样式参数。",
+        "en-US": "MTag typography and related styling."
       }
     },
     {
@@ -263,8 +263,8 @@
         "en-US": "Stepper"
       },
       "description": {
-        "zh-CN": "WkStepper 连接线等样式。",
-        "en-US": "WkStepper connector and related styling."
+        "zh-CN": "MStepper 连接线等样式。",
+        "en-US": "MStepper connector and related styling."
       }
     },
     {
@@ -275,8 +275,8 @@
         "en-US": "DataView"
       },
       "description": {
-        "zh-CN": "WkDataView 网格布局参数。",
-        "en-US": "WkDataView grid layout parameters."
+        "zh-CN": "MDataView 网格布局参数。",
+        "en-US": "MDataView grid layout parameters."
       }
     },
     {
@@ -292,10 +292,10 @@
       }
     }
   ],
-  "tokenCount": 288,
+  "tokenCount": 289,
   "tokens": [
     {
-      "name": "--wk-affix-icon-size",
+      "name": "--m-affix-icon-size",
       "category": "component",
       "source": "src/shared/styles/control-affix-icon.css",
       "default": "1.125rem",
@@ -305,7 +305,7 @@
       }
     },
     {
-      "name": "--wk-autocomplete-dropdown-max-height",
+      "name": "--m-autocomplete-dropdown-max-height",
       "category": "component",
       "source": "src/components/AutoComplete/styles.css",
       "default": "14rem",
@@ -315,7 +315,7 @@
       }
     },
     {
-      "name": "--wk-autocomplete-min-width",
+      "name": "--m-autocomplete-min-width",
       "category": "component",
       "source": "src/components/AutoComplete/styles.css",
       "default": "14rem",
@@ -325,7 +325,7 @@
       }
     },
     {
-      "name": "--wk-autocomplete-spinner-size",
+      "name": "--m-autocomplete-spinner-size",
       "category": "component",
       "source": "src/components/AutoComplete/styles.css",
       "default": "0.85rem",
@@ -335,27 +335,27 @@
       }
     },
     {
-      "name": "--wk-avatar-bg",
+      "name": "--m-avatar-bg",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-text-muted) 16%, var(--wk-color-surface) )",
+      "default": "color-mix( in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface) )",
       "description": {
         "zh-CN": "组件专用相关变量：Avatar Bg",
         "en-US": "Component-specific token: Avatar Bg"
       }
     },
     {
-      "name": "--wk-avatar-fg",
+      "name": "--m-avatar-fg",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
-      "default": "var(--wk-color-text)",
+      "default": "var(--m-color-text)",
       "description": {
         "zh-CN": "组件专用相关变量：Avatar Fg",
         "en-US": "Component-specific token: Avatar Fg"
       }
     },
     {
-      "name": "--wk-avatar-font-size-xlarge",
+      "name": "--m-avatar-font-size-xlarge",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "1.5rem",
@@ -365,17 +365,17 @@
       }
     },
     {
-      "name": "--wk-avatar-group-overlap",
+      "name": "--m-avatar-group-overlap",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
-      "default": "var(--wk-space-2)",
+      "default": "var(--m-space-2)",
       "description": {
         "zh-CN": "组件专用相关变量：Avatar Group Overlap",
         "en-US": "Component-specific token: Avatar Group Overlap"
       }
     },
     {
-      "name": "--wk-avatar-group-ring-width",
+      "name": "--m-avatar-group-ring-width",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "2px",
@@ -385,7 +385,7 @@
       }
     },
     {
-      "name": "--wk-avatar-icon-size",
+      "name": "--m-avatar-icon-size",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "2rem",
@@ -395,17 +395,17 @@
       }
     },
     {
-      "name": "--wk-avatar-size",
+      "name": "--m-avatar-size",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
-      "default": "var(--wk-avatar-size-xlarge)",
+      "default": "var(--m-avatar-size-xlarge)",
       "description": {
         "zh-CN": "组件专用相关变量：Avatar Size",
         "en-US": "Component-specific token: Avatar Size"
       }
     },
     {
-      "name": "--wk-avatar-size-large",
+      "name": "--m-avatar-size-large",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "3.5rem",
@@ -415,7 +415,7 @@
       }
     },
     {
-      "name": "--wk-avatar-size-medium",
+      "name": "--m-avatar-size-medium",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "2.5rem",
@@ -425,7 +425,7 @@
       }
     },
     {
-      "name": "--wk-avatar-size-small",
+      "name": "--m-avatar-size-small",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "2rem",
@@ -435,7 +435,7 @@
       }
     },
     {
-      "name": "--wk-avatar-size-xlarge",
+      "name": "--m-avatar-size-xlarge",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
       "default": "5rem",
@@ -445,17 +445,17 @@
       }
     },
     {
-      "name": "--wk-badge-dot-size",
+      "name": "--m-badge-dot-size",
       "category": "component",
       "source": "src/components/Badge/styles.css",
-      "default": "var(--wk-badge-dot-size-large)",
+      "default": "var(--m-badge-dot-size-large)",
       "description": {
         "zh-CN": "组件专用相关变量：Badge Dot Size",
         "en-US": "Component-specific token: Badge Dot Size"
       }
     },
     {
-      "name": "--wk-badge-dot-size-large",
+      "name": "--m-badge-dot-size-large",
       "category": "component",
       "source": "src/components/Badge/styles.css",
       "default": "0.625rem",
@@ -465,7 +465,7 @@
       }
     },
     {
-      "name": "--wk-badge-dot-size-small",
+      "name": "--m-badge-dot-size-small",
       "category": "component",
       "source": "src/components/Badge/styles.css",
       "default": "0.375rem",
@@ -475,17 +475,17 @@
       }
     },
     {
-      "name": "--wk-badge-font-size",
+      "name": "--m-badge-font-size",
       "category": "component",
       "source": "src/components/Badge/styles.css",
-      "default": "var(--wk-font-size-sm)",
+      "default": "var(--m-font-size-sm)",
       "description": {
         "zh-CN": "组件专用相关变量：Badge Font Size",
         "en-US": "Component-specific token: Badge Font Size"
       }
     },
     {
-      "name": "--wk-badge-offset-x",
+      "name": "--m-badge-offset-x",
       "category": "component",
       "source": "src/components/Badge/styles.css",
       "default": "0px",
@@ -495,7 +495,7 @@
       }
     },
     {
-      "name": "--wk-badge-offset-y",
+      "name": "--m-badge-offset-y",
       "category": "component",
       "source": "src/components/Badge/styles.css",
       "default": "0px",
@@ -505,37 +505,37 @@
       }
     },
     {
-      "name": "--wk-badge-padding-x",
+      "name": "--m-badge-padding-x",
       "category": "component",
       "source": "src/components/Badge/styles.css",
-      "default": "var(--wk-space-2)",
+      "default": "var(--m-space-2)",
       "description": {
         "zh-CN": "组件专用相关变量：Badge Padding X",
         "en-US": "Component-specific token: Badge Padding X"
       }
     },
     {
-      "name": "--wk-badge-padding-y",
+      "name": "--m-badge-padding-y",
       "category": "component",
       "source": "src/components/Badge/styles.css",
-      "default": "var(--wk-space-1)",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "组件专用相关变量：Badge Padding Y",
         "en-US": "Component-specific token: Badge Padding Y"
       }
     },
     {
-      "name": "--wk-badge-size",
+      "name": "--m-badge-size",
       "category": "component",
       "source": "src/components/Badge/styles.css",
-      "default": "var(--wk-badge-size-large)",
+      "default": "var(--m-badge-size-large)",
       "description": {
         "zh-CN": "组件专用相关变量：Badge Size",
         "en-US": "Component-specific token: Badge Size"
       }
     },
     {
-      "name": "--wk-badge-size-large",
+      "name": "--m-badge-size-large",
       "category": "component",
       "source": "src/components/Badge/styles.css",
       "default": "1.5rem",
@@ -545,7 +545,7 @@
       }
     },
     {
-      "name": "--wk-badge-size-small",
+      "name": "--m-badge-size-small",
       "category": "component",
       "source": "src/components/Badge/styles.css",
       "default": "1rem",
@@ -555,7 +555,7 @@
       }
     },
     {
-      "name": "--wk-blockui-z-index",
+      "name": "--m-blockui-z-index",
       "category": "component",
       "source": "src/components/BlockUI/styles.css",
       "default": "10",
@@ -565,7 +565,7 @@
       }
     },
     {
-      "name": "--wk-border-width",
+      "name": "--m-border-width",
       "category": "border",
       "source": "src/theme/styles.css",
       "default": "1px",
@@ -575,17 +575,17 @@
       }
     },
     {
-      "name": "--wk-button-active-bg",
+      "name": "--m-button-active-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "color-mix( in srgb, var(--wk-button-color) 75%, black )",
+      "default": "color-mix( in srgb, var(--m-button-color) 75%, black )",
       "description": {
         "zh-CN": "组件专用相关变量：Button Active Bg",
         "en-US": "Component-specific token: Button Active Bg"
       }
     },
     {
-      "name": "--wk-button-badge-min-width",
+      "name": "--m-button-badge-min-width",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "1.15rem",
@@ -595,7 +595,7 @@
       }
     },
     {
-      "name": "--wk-button-bg",
+      "name": "--m-button-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "transparent",
@@ -605,7 +605,7 @@
       }
     },
     {
-      "name": "--wk-button-border",
+      "name": "--m-button-border",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "transparent",
@@ -615,27 +615,27 @@
       }
     },
     {
-      "name": "--wk-button-fg",
+      "name": "--m-button-fg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--wk-button-color)",
+      "default": "var(--m-button-color)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Fg",
         "en-US": "Component-specific token: Button Fg"
       }
     },
     {
-      "name": "--wk-button-hover-bg",
+      "name": "--m-button-hover-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "color-mix( in srgb, var(--wk-button-color) 12%, transparent )",
+      "default": "color-mix( in srgb, var(--m-button-color) 12%, transparent )",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Bg",
         "en-US": "Component-specific token: Button Hover Bg"
       }
     },
     {
-      "name": "--wk-button-hover-border",
+      "name": "--m-button-hover-border",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "transparent",
@@ -645,17 +645,17 @@
       }
     },
     {
-      "name": "--wk-button-hover-fg",
+      "name": "--m-button-hover-fg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--wk-button-color)",
+      "default": "var(--m-button-color)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Fg",
         "en-US": "Component-specific token: Button Hover Fg"
       }
     },
     {
-      "name": "--wk-button-icon-size",
+      "name": "--m-button-icon-size",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "1.25rem",
@@ -665,7 +665,7 @@
       }
     },
     {
-      "name": "--wk-button-icon-stack-min-height",
+      "name": "--m-button-icon-stack-min-height",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "3.25rem",
@@ -675,37 +675,37 @@
       }
     },
     {
-      "name": "--wk-button-padding-x-large",
+      "name": "--m-button-padding-x-large",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "calc( var(--wk-control-padding-x-large) + var(--wk-space-1) )",
+      "default": "calc( var(--m-control-padding-x-large) + var(--m-space-1) )",
       "description": {
         "zh-CN": "组件专用相关变量：Button Padding X Large",
         "en-US": "Component-specific token: Button Padding X Large"
       }
     },
     {
-      "name": "--wk-button-padding-x-medium",
+      "name": "--m-button-padding-x-medium",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "calc( var(--wk-control-padding-x-medium) + var(--wk-space-1) )",
+      "default": "calc( var(--m-control-padding-x-medium) + var(--m-space-1) )",
       "description": {
         "zh-CN": "组件专用相关变量：Button Padding X Medium",
         "en-US": "Component-specific token: Button Padding X Medium"
       }
     },
     {
-      "name": "--wk-button-padding-x-small",
+      "name": "--m-button-padding-x-small",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--wk-control-padding-x-small)",
+      "default": "var(--m-control-padding-x-small)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Padding X Small",
         "en-US": "Component-specific token: Button Padding X Small"
       }
     },
     {
-      "name": "--wk-button-spinner-size",
+      "name": "--m-button-spinner-size",
       "category": "component",
       "source": "src/components/Button/styles.css",
       "default": "0.875rem",
@@ -715,7 +715,7 @@
       }
     },
     {
-      "name": "--wk-carousel-indicator-size",
+      "name": "--m-carousel-indicator-size",
       "category": "component",
       "source": "src/components/Carousel/styles.css",
       "default": "0.45rem",
@@ -725,7 +725,7 @@
       }
     },
     {
-      "name": "--wk-cascadeselect-column-max-height",
+      "name": "--m-cascadeselect-column-max-height",
       "category": "component",
       "source": "src/components/CascadeSelect/styles.css",
       "default": "16rem",
@@ -735,7 +735,7 @@
       }
     },
     {
-      "name": "--wk-cascadeselect-min-width",
+      "name": "--m-cascadeselect-min-width",
       "category": "component",
       "source": "src/components/CascadeSelect/styles.css",
       "default": "12rem",
@@ -745,7 +745,7 @@
       }
     },
     {
-      "name": "--wk-checkbox-control-size",
+      "name": "--m-checkbox-control-size",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "1.25rem",
@@ -760,7 +760,7 @@
       }
     },
     {
-      "name": "--wk-chip-avatar-size",
+      "name": "--m-chip-avatar-size",
       "category": "component",
       "source": "src/components/Chip/styles.css",
       "default": "1.25rem",
@@ -770,7 +770,7 @@
       }
     },
     {
-      "name": "--wk-chip-icon-size",
+      "name": "--m-chip-icon-size",
       "category": "component",
       "source": "src/components/Chip/styles.css",
       "default": "1.25rem",
@@ -780,17 +780,17 @@
       }
     },
     {
-      "name": "--wk-chip-remove-size",
+      "name": "--m-chip-remove-size",
       "category": "component",
       "source": "src/components/Chip/styles.css",
-      "default": "var(--wk-chip-avatar-size)",
+      "default": "var(--m-chip-avatar-size)",
       "description": {
         "zh-CN": "组件专用相关变量：Chip Remove Size",
         "en-US": "Component-specific token: Chip Remove Size"
       }
     },
     {
-      "name": "--wk-chip-small-padding-y",
+      "name": "--m-chip-small-padding-y",
       "category": "component",
       "source": "src/components/Chip/styles.css",
       "default": "0.15rem",
@@ -800,7 +800,7 @@
       }
     },
     {
-      "name": "--wk-color-border",
+      "name": "--m-color-border",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#334155",
@@ -810,7 +810,7 @@
       }
     },
     {
-      "name": "--wk-color-contrast",
+      "name": "--m-color-contrast",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#f8fafc",
@@ -820,7 +820,7 @@
       }
     },
     {
-      "name": "--wk-color-contrast-active",
+      "name": "--m-color-contrast-active",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#cbd5e1",
@@ -830,7 +830,7 @@
       }
     },
     {
-      "name": "--wk-color-contrast-fg",
+      "name": "--m-color-contrast-fg",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#0f172a",
@@ -840,7 +840,7 @@
       }
     },
     {
-      "name": "--wk-color-contrast-hover",
+      "name": "--m-color-contrast-hover",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#e2e8f0",
@@ -850,7 +850,7 @@
       }
     },
     {
-      "name": "--wk-color-danger",
+      "name": "--m-color-danger",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#fca5a5",
@@ -860,27 +860,27 @@
       }
     },
     {
-      "name": "--wk-color-fill-light",
+      "name": "--m-color-fill-light",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-text) 10%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-text) 10%, var(--m-color-surface))",
       "description": {
         "zh-CN": "浅填充色，用于 hover 行、表头等。",
         "en-US": "Light fill for hover rows, table headers, etc."
       }
     },
     {
-      "name": "--wk-color-fill-lighter",
+      "name": "--m-color-fill-lighter",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-text) 6%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface))",
       "description": {
         "zh-CN": "更浅的填充色，用于斑马纹与展开行。",
         "en-US": "Lighter fill for zebra stripes and expanded rows."
       }
     },
     {
-      "name": "--wk-color-focus-ring",
+      "name": "--m-color-focus-ring",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#93c5fd",
@@ -890,7 +890,7 @@
       }
     },
     {
-      "name": "--wk-color-help",
+      "name": "--m-color-help",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#c084fc",
@@ -900,7 +900,7 @@
       }
     },
     {
-      "name": "--wk-color-info",
+      "name": "--m-color-info",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#93c5fd",
@@ -910,7 +910,7 @@
       }
     },
     {
-      "name": "--wk-color-on-emphasis",
+      "name": "--m-color-on-emphasis",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#ffffff",
@@ -920,7 +920,7 @@
       }
     },
     {
-      "name": "--wk-color-primary",
+      "name": "--m-color-primary",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#60a5fa",
@@ -930,7 +930,7 @@
       }
     },
     {
-      "name": "--wk-color-primary-hover",
+      "name": "--m-color-primary-hover",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#93c5fd",
@@ -940,7 +940,7 @@
       }
     },
     {
-      "name": "--wk-color-success",
+      "name": "--m-color-success",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#5eead4",
@@ -950,7 +950,7 @@
       }
     },
     {
-      "name": "--wk-color-surface",
+      "name": "--m-color-surface",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#0f172a",
@@ -960,7 +960,7 @@
       }
     },
     {
-      "name": "--wk-color-text",
+      "name": "--m-color-text",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#f8fafc",
@@ -970,7 +970,7 @@
       }
     },
     {
-      "name": "--wk-color-text-muted",
+      "name": "--m-color-text-muted",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#94a3b8",
@@ -980,17 +980,17 @@
       }
     },
     {
-      "name": "--wk-color-warn",
+      "name": "--m-color-warn",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-warning)",
+      "default": "var(--m-color-warning)",
       "description": {
-        "zh-CN": "警告语义色别名，指向 `--wk-color-warning`。",
-        "en-US": "Warning alias pointing to `--wk-color-warning`."
+        "zh-CN": "警告语义色别名，指向 `--m-color-warning`。",
+        "en-US": "Warning alias pointing to `--m-color-warning`."
       }
     },
     {
-      "name": "--wk-color-warning",
+      "name": "--m-color-warning",
       "category": "color",
       "source": "src/theme/styles.css",
       "default": "#fbbf24",
@@ -1000,7 +1000,7 @@
       }
     },
     {
-      "name": "--wk-commandmenu-list-max-height",
+      "name": "--m-commandmenu-list-max-height",
       "category": "menu",
       "source": "src/components/CommandMenu/styles.css",
       "default": "18rem",
@@ -1010,7 +1010,7 @@
       }
     },
     {
-      "name": "--wk-commandmenu-width",
+      "name": "--m-commandmenu-width",
       "category": "menu",
       "source": "src/components/CommandMenu/styles.css",
       "default": "32rem",
@@ -1020,7 +1020,7 @@
       }
     },
     {
-      "name": "--wk-confirmdialog-width",
+      "name": "--m-confirmdialog-width",
       "category": "component",
       "source": "src/components/ConfirmDialog/styles.css",
       "default": "28rem",
@@ -1030,7 +1030,7 @@
       }
     },
     {
-      "name": "--wk-confirmpopup-width",
+      "name": "--m-confirmpopup-width",
       "category": "component",
       "source": "src/components/ConfirmPopup/styles.css",
       "default": "20rem",
@@ -1040,7 +1040,7 @@
       }
     },
     {
-      "name": "--wk-contextmenu-item-gap",
+      "name": "--m-contextmenu-item-gap",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
       "default": "0.125rem",
@@ -1050,7 +1050,7 @@
       }
     },
     {
-      "name": "--wk-contextmenu-min-width",
+      "name": "--m-contextmenu-min-width",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
       "default": "10rem",
@@ -1060,7 +1060,7 @@
       }
     },
     {
-      "name": "--wk-control-affix-gap",
+      "name": "--m-control-affix-gap",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "2.65rem",
@@ -1074,7 +1074,7 @@
       }
     },
     {
-      "name": "--wk-control-affix-padding",
+      "name": "--m-control-affix-padding",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "2.85rem",
@@ -1088,7 +1088,7 @@
       }
     },
     {
-      "name": "--wk-control-affix-size",
+      "name": "--m-control-affix-size",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "2rem",
@@ -1098,17 +1098,17 @@
       }
     },
     {
-      "name": "--wk-control-end-padding",
+      "name": "--m-control-end-padding",
       "category": "control",
       "source": "src/shared/styles/control-suffix.css",
-      "default": "var(--wk-control-affix-padding)",
+      "default": "var(--m-control-affix-padding)",
       "description": {
         "zh-CN": "控件尺寸相关变量：Control End Padding",
         "en-US": "Control sizing token: Control End Padding"
       }
     },
     {
-      "name": "--wk-control-font-large",
+      "name": "--m-control-font-large",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "16px",
@@ -1122,7 +1122,7 @@
       }
     },
     {
-      "name": "--wk-control-font-medium",
+      "name": "--m-control-font-medium",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "15px",
@@ -1136,7 +1136,7 @@
       }
     },
     {
-      "name": "--wk-control-font-small",
+      "name": "--m-control-font-small",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "14px",
@@ -1150,7 +1150,7 @@
       }
     },
     {
-      "name": "--wk-control-height-large",
+      "name": "--m-control-height-large",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "46px",
@@ -1164,7 +1164,7 @@
       }
     },
     {
-      "name": "--wk-control-height-medium",
+      "name": "--m-control-height-medium",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "40px",
@@ -1178,7 +1178,7 @@
       }
     },
     {
-      "name": "--wk-control-height-small",
+      "name": "--m-control-height-small",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "32px",
@@ -1192,7 +1192,7 @@
       }
     },
     {
-      "name": "--wk-control-padding-x-large",
+      "name": "--m-control-padding-x-large",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "16px",
@@ -1206,7 +1206,7 @@
       }
     },
     {
-      "name": "--wk-control-padding-x-medium",
+      "name": "--m-control-padding-x-medium",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "14px",
@@ -1220,7 +1220,7 @@
       }
     },
     {
-      "name": "--wk-control-padding-x-small",
+      "name": "--m-control-padding-x-small",
       "category": "control",
       "source": "src/theme/styles.css",
       "default": "12px",
@@ -1234,7 +1234,7 @@
       }
     },
     {
-      "name": "--wk-dataview-grid-min",
+      "name": "--m-dataview-grid-min",
       "category": "dataview",
       "source": "src/theme/styles.css",
       "default": "10rem",
@@ -1244,27 +1244,27 @@
       }
     },
     {
-      "name": "--wk-datepicker-calendar-cell-size",
+      "name": "--m-datepicker-calendar-cell-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "var(--wk-control-affix-size, 2rem)",
+      "default": "var(--m-control-affix-size, 2rem)",
       "description": {
         "zh-CN": "组件专用相关变量：Datepicker Calendar Cell Size",
         "en-US": "Component-specific token: Datepicker Calendar Cell Size"
       }
     },
     {
-      "name": "--wk-datepicker-day-size",
+      "name": "--m-datepicker-day-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "var(--wk-datepicker-calendar-cell-size)",
+      "default": "var(--m-datepicker-calendar-cell-size)",
       "description": {
         "zh-CN": "组件专用相关变量：Datepicker Day Size",
         "en-US": "Component-specific token: Datepicker Day Size"
       }
     },
     {
-      "name": "--wk-datepicker-grid-gap",
+      "name": "--m-datepicker-grid-gap",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "0.125rem",
@@ -1274,27 +1274,27 @@
       }
     },
     {
-      "name": "--wk-datepicker-input-end-padding",
+      "name": "--m-datepicker-input-end-padding",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "calc(var(--wk-space-2) + 1.25rem)",
+      "default": "calc(var(--m-space-2) + 1.25rem)",
       "description": {
         "zh-CN": "组件专用相关变量：Datepicker Input End Padding",
         "en-US": "Component-specific token: Datepicker Input End Padding"
       }
     },
     {
-      "name": "--wk-datepicker-panel-min-width",
+      "name": "--m-datepicker-panel-min-width",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "calc( 7 * var(--wk-datepicker-calendar-cell-size) + 6 * var(--wk-datepicker-grid-gap) + 2 * var(--wk-space-3) )",
+      "default": "calc( 7 * var(--m-datepicker-calendar-cell-size) + 6 * var(--m-datepicker-grid-gap) + 2 * var(--m-space-3) )",
       "description": {
         "zh-CN": "组件专用相关变量：Datepicker Panel Min Width",
         "en-US": "Component-specific token: Datepicker Panel Min Width"
       }
     },
     {
-      "name": "--wk-datepicker-shortcuts-width",
+      "name": "--m-datepicker-shortcuts-width",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "6rem",
@@ -1304,7 +1304,7 @@
       }
     },
     {
-      "name": "--wk-density-scale",
+      "name": "--m-density-scale",
       "category": "density",
       "source": "src/theme/styles.css",
       "default": "1",
@@ -1317,7 +1317,7 @@
       }
     },
     {
-      "name": "--wk-dialog-max-height",
+      "name": "--m-dialog-max-height",
       "category": "component",
       "source": "src/components/Dialog/styles.css",
       "default": "min(90vh, 100%)",
@@ -1327,7 +1327,7 @@
       }
     },
     {
-      "name": "--wk-dialog-radius",
+      "name": "--m-dialog-radius",
       "category": "component",
       "source": "src/components/Dialog/styles.css",
       "default": "0",
@@ -1337,7 +1337,7 @@
       }
     },
     {
-      "name": "--wk-dialog-width",
+      "name": "--m-dialog-width",
       "category": "component",
       "source": "src/components/Dialog/styles.css",
       "default": "32rem",
@@ -1347,17 +1347,17 @@
       }
     },
     {
-      "name": "--wk-dock-edge-offset",
+      "name": "--m-dock-edge-offset",
       "category": "component",
       "source": "src/components/Dock/styles.css",
-      "default": "var(--wk-space-4)",
+      "default": "var(--m-space-4)",
       "description": {
         "zh-CN": "组件专用相关变量：Dock Edge Offset",
         "en-US": "Component-specific token: Dock Edge Offset"
       }
     },
     {
-      "name": "--wk-dock-icon-size",
+      "name": "--m-dock-icon-size",
       "category": "component",
       "source": "src/components/Dock/styles.css",
       "default": "2.75rem",
@@ -1367,7 +1367,7 @@
       }
     },
     {
-      "name": "--wk-drawer-side-width",
+      "name": "--m-drawer-side-width",
       "category": "component",
       "source": "src/components/Drawer/styles.css",
       "default": "20rem",
@@ -1377,7 +1377,7 @@
       }
     },
     {
-      "name": "--wk-drawer-top-height",
+      "name": "--m-drawer-top-height",
       "category": "component",
       "source": "src/components/Drawer/styles.css",
       "default": "40vh",
@@ -1387,7 +1387,7 @@
       }
     },
     {
-      "name": "--wk-dropdown-menu-min-width",
+      "name": "--m-dropdown-menu-min-width",
       "category": "menu",
       "source": "src/components/Dropdown/styles.css",
       "default": "10rem",
@@ -1397,7 +1397,7 @@
       }
     },
     {
-      "name": "--wk-fileupload-card-size",
+      "name": "--m-fileupload-card-size",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "7.5rem",
@@ -1407,7 +1407,7 @@
       }
     },
     {
-      "name": "--wk-fileupload-dropzone-min-height",
+      "name": "--m-fileupload-dropzone-min-height",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "10rem",
@@ -1417,7 +1417,7 @@
       }
     },
     {
-      "name": "--wk-fileupload-icon-size",
+      "name": "--m-fileupload-icon-size",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "2.5rem",
@@ -1427,7 +1427,7 @@
       }
     },
     {
-      "name": "--wk-fileupload-progress-height",
+      "name": "--m-fileupload-progress-height",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "0.25rem",
@@ -1437,7 +1437,7 @@
       }
     },
     {
-      "name": "--wk-fileupload-thumb-size",
+      "name": "--m-fileupload-thumb-size",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "2.5rem",
@@ -1447,27 +1447,27 @@
       }
     },
     {
-      "name": "--wk-focus-shadow",
+      "name": "--m-focus-shadow",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--wk-color-primary) 28%, transparent)",
+      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-primary) 28%, transparent)",
       "description": {
         "zh-CN": "默认聚焦光晕（主色 20% 混合）。",
         "en-US": "Default focus glow (primary at 20% mix)."
       }
     },
     {
-      "name": "--wk-focus-shadow-danger",
+      "name": "--m-focus-shadow-danger",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--wk-color-danger) 28%, transparent)",
+      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-danger) 28%, transparent)",
       "description": {
         "zh-CN": "危险态控件聚焦光晕。",
         "en-US": "Focus glow for danger-styled controls."
       }
     },
     {
-      "name": "--wk-font-sans",
+      "name": "--m-font-sans",
       "category": "typography",
       "source": "src/theme/styles.css",
       "default": "Inter, ui-sans-serif, system-ui, sans-serif",
@@ -1477,7 +1477,7 @@
       }
     },
     {
-      "name": "--wk-font-size-lg",
+      "name": "--m-font-size-lg",
       "category": "typography",
       "source": "src/theme/styles.css",
       "default": "1.125rem",
@@ -1487,7 +1487,7 @@
       }
     },
     {
-      "name": "--wk-font-size-md",
+      "name": "--m-font-size-md",
       "category": "typography",
       "source": "src/theme/styles.css",
       "default": "0.875rem",
@@ -1497,7 +1497,7 @@
       }
     },
     {
-      "name": "--wk-font-size-sm",
+      "name": "--m-font-size-sm",
       "category": "typography",
       "source": "src/theme/styles.css",
       "default": "0.8125rem",
@@ -1507,7 +1507,7 @@
       }
     },
     {
-      "name": "--wk-font-size-xs",
+      "name": "--m-font-size-xs",
       "category": "typography",
       "source": "src/theme/styles.css",
       "default": "0.75rem",
@@ -1517,7 +1517,7 @@
       }
     },
     {
-      "name": "--wk-form-inline-item-min-width",
+      "name": "--m-form-inline-item-min-width",
       "category": "component",
       "source": "src/components/Form/styles.css",
       "default": "12rem",
@@ -1527,7 +1527,7 @@
       }
     },
     {
-      "name": "--wk-gallery-image-max-height",
+      "name": "--m-gallery-image-max-height",
       "category": "component",
       "source": "src/components/Gallery/styles.css",
       "default": "20rem",
@@ -1537,7 +1537,7 @@
       }
     },
     {
-      "name": "--wk-gallery-thumb-height",
+      "name": "--m-gallery-thumb-height",
       "category": "component",
       "source": "src/components/Gallery/styles.css",
       "default": "3.5rem",
@@ -1547,7 +1547,7 @@
       }
     },
     {
-      "name": "--wk-gallery-thumb-width",
+      "name": "--m-gallery-thumb-width",
       "category": "component",
       "source": "src/components/Gallery/styles.css",
       "default": "5rem",
@@ -1557,7 +1557,7 @@
       }
     },
     {
-      "name": "--wk-inputcolor-preset-size",
+      "name": "--m-inputcolor-preset-size",
       "category": "component",
       "source": "src/components/InputColor/styles.css",
       "default": "1.25rem",
@@ -1567,7 +1567,7 @@
       }
     },
     {
-      "name": "--wk-inputcolor-text-min-width",
+      "name": "--m-inputcolor-text-min-width",
       "category": "component",
       "source": "src/components/InputColor/styles.css",
       "default": "7rem",
@@ -1577,17 +1577,17 @@
       }
     },
     {
-      "name": "--wk-inputnumber-stack-button-padding-x",
+      "name": "--m-inputnumber-stack-button-padding-x",
       "category": "component",
       "source": "src/components/InputNumber/styles.css",
-      "default": "var(--wk-space-2)",
+      "default": "var(--m-space-2)",
       "description": {
         "zh-CN": "组件专用相关变量：Inputnumber Stack Button Padding X",
         "en-US": "Component-specific token: Inputnumber Stack Button Padding X"
       }
     },
     {
-      "name": "--wk-inputnumber-width",
+      "name": "--m-inputnumber-width",
       "category": "component",
       "source": "src/components/InputNumber/styles.css",
       "default": "8rem",
@@ -1597,37 +1597,37 @@
       }
     },
     {
-      "name": "--wk-inputotp-gap",
+      "name": "--m-inputotp-gap",
       "category": "component",
       "source": "src/components/InputOtp/styles.css",
-      "default": "var(--wk-space-2)",
+      "default": "var(--m-space-2)",
       "description": {
         "zh-CN": "组件专用相关变量：Inputotp Gap",
         "en-US": "Component-specific token: Inputotp Gap"
       }
     },
     {
-      "name": "--wk-inputtags-chip-padding-x",
+      "name": "--m-inputtags-chip-padding-x",
       "category": "component",
       "source": "src/components/InputTags/styles.css",
-      "default": "var(--wk-space-2)",
+      "default": "var(--m-space-2)",
       "description": {
         "zh-CN": "组件专用相关变量：Inputtags Chip Padding X",
         "en-US": "Component-specific token: Inputtags Chip Padding X"
       }
     },
     {
-      "name": "--wk-inputtags-chip-padding-y",
+      "name": "--m-inputtags-chip-padding-y",
       "category": "component",
       "source": "src/components/InputTags/styles.css",
-      "default": "var(--wk-space-1)",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "组件专用相关变量：Inputtags Chip Padding Y",
         "en-US": "Component-specific token: Inputtags Chip Padding Y"
       }
     },
     {
-      "name": "--wk-inputtags-input-min-width",
+      "name": "--m-inputtags-input-min-width",
       "category": "component",
       "source": "src/components/InputTags/styles.css",
       "default": "6rem",
@@ -1637,7 +1637,7 @@
       }
     },
     {
-      "name": "--wk-layout-footer-height",
+      "name": "--m-layout-footer-height",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "56px",
@@ -1651,7 +1651,7 @@
       }
     },
     {
-      "name": "--wk-layout-header-height",
+      "name": "--m-layout-header-height",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "64px",
@@ -1665,7 +1665,7 @@
       }
     },
     {
-      "name": "--wk-layout-height",
+      "name": "--m-layout-height",
       "category": "layout",
       "source": "src/components/Layout/styles.css",
       "default": "100%",
@@ -1675,17 +1675,17 @@
       }
     },
     {
-      "name": "--wk-layout-padding",
+      "name": "--m-layout-padding",
       "category": "layout",
       "source": "src/components/Layout/styles.css",
-      "default": "var(--wk-space-4)",
+      "default": "var(--m-space-4)",
       "description": {
         "zh-CN": "布局相关变量：Layout Padding",
         "en-US": "Layout token: Layout Padding"
       }
     },
     {
-      "name": "--wk-layout-radius",
+      "name": "--m-layout-radius",
       "category": "layout",
       "source": "src/components/Layout/styles.css",
       "default": "0",
@@ -1695,7 +1695,7 @@
       }
     },
     {
-      "name": "--wk-layout-sider-collapsed-width",
+      "name": "--m-layout-sider-collapsed-width",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "72px",
@@ -1709,7 +1709,7 @@
       }
     },
     {
-      "name": "--wk-layout-sider-width",
+      "name": "--m-layout-sider-width",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "288px",
@@ -1723,7 +1723,7 @@
       }
     },
     {
-      "name": "--wk-layout-trigger-bar-height",
+      "name": "--m-layout-trigger-bar-height",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "4.5rem",
@@ -1733,7 +1733,7 @@
       }
     },
     {
-      "name": "--wk-layout-trigger-bar-offset",
+      "name": "--m-layout-trigger-bar-offset",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "1.75rem",
@@ -1743,7 +1743,7 @@
       }
     },
     {
-      "name": "--wk-layout-trigger-bar-top",
+      "name": "--m-layout-trigger-bar-top",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "2.25rem",
@@ -1753,7 +1753,7 @@
       }
     },
     {
-      "name": "--wk-layout-trigger-bar-width",
+      "name": "--m-layout-trigger-bar-width",
       "category": "layout",
       "source": "src/theme/styles.css",
       "default": "2rem",
@@ -1763,7 +1763,7 @@
       }
     },
     {
-      "name": "--wk-layout-trigger-size",
+      "name": "--m-layout-trigger-size",
       "category": "layout",
       "source": "src/components/Layout/styles.css",
       "default": "1.5rem",
@@ -1773,7 +1773,7 @@
       }
     },
     {
-      "name": "--wk-listbox-list-max-height",
+      "name": "--m-listbox-list-max-height",
       "category": "component",
       "source": "src/components/Listbox/styles.css",
       "default": "14rem",
@@ -1783,7 +1783,7 @@
       }
     },
     {
-      "name": "--wk-listbox-min-width",
+      "name": "--m-listbox-min-width",
       "category": "component",
       "source": "src/components/Listbox/styles.css",
       "default": "12rem",
@@ -1793,7 +1793,7 @@
       }
     },
     {
-      "name": "--wk-megamenu-column-min-width",
+      "name": "--m-megamenu-column-min-width",
       "category": "menu",
       "source": "src/components/MegaMenu/styles.css",
       "default": "8rem",
@@ -1803,27 +1803,27 @@
       }
     },
     {
-      "name": "--wk-megamenu-panel-gap",
+      "name": "--m-megamenu-panel-gap",
       "category": "menu",
       "source": "src/components/MegaMenu/styles.css",
-      "default": "var(--wk-space-4)",
+      "default": "var(--m-space-4)",
       "description": {
         "zh-CN": "菜单相关变量：Megamenu Panel Gap",
         "en-US": "Menu token: Megamenu Panel Gap"
       }
     },
     {
-      "name": "--wk-menu-arrow",
+      "name": "--m-menu-arrow",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-contrast-fg) 72%, transparent )",
+      "default": "color-mix( in srgb, var(--m-color-contrast-fg) 72%, transparent )",
       "description": {
         "zh-CN": "菜单相关变量：Menu Arrow",
         "en-US": "Menu token: Menu Arrow"
       }
     },
     {
-      "name": "--wk-menu-color",
+      "name": "--m-menu-color",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
       "default": "transparent",
@@ -1833,17 +1833,17 @@
       }
     },
     {
-      "name": "--wk-menu-flyout-gap",
+      "name": "--m-menu-flyout-gap",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-space-1)",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Flyout Gap",
         "en-US": "Menu token: Menu Flyout Gap"
       }
     },
     {
-      "name": "--wk-menu-flyout-item-height",
+      "name": "--m-menu-flyout-item-height",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
       "default": "2.5rem",
@@ -1853,37 +1853,37 @@
       }
     },
     {
-      "name": "--wk-menu-flyout-padding",
+      "name": "--m-menu-flyout-padding",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-space-2)",
+      "default": "var(--m-space-2)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Flyout Padding",
         "en-US": "Menu token: Menu Flyout Padding"
       }
     },
     {
-      "name": "--wk-menu-flyout-radius",
+      "name": "--m-menu-flyout-radius",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-radius-md)",
+      "default": "var(--m-radius-md)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Flyout Radius",
         "en-US": "Menu token: Menu Flyout Radius"
       }
     },
     {
-      "name": "--wk-menu-horizontal-gap",
+      "name": "--m-menu-horizontal-gap",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-space-1)",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Horizontal Gap",
         "en-US": "Menu token: Menu Horizontal Gap"
       }
     },
     {
-      "name": "--wk-menu-horizontal-height",
+      "name": "--m-menu-horizontal-height",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
       "default": "2.5rem",
@@ -1893,44 +1893,44 @@
       }
     },
     {
-      "name": "--wk-menu-indent",
+      "name": "--m-menu-indent",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-space-3)",
+      "default": "var(--m-space-3)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Indent",
         "en-US": "Menu token: Menu Indent"
       }
     },
     {
-      "name": "--wk-menu-item-color-active",
+      "name": "--m-menu-item-color-active",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-color-primary)",
+      "default": "var(--m-color-primary)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Color Active",
         "en-US": "Menu token: Menu Item Color Active"
       }
     },
     {
-      "name": "--wk-menu-item-color-hover",
+      "name": "--m-menu-item-color-hover",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-contrast-fg) 8%, transparent )",
+      "default": "color-mix( in srgb, var(--m-color-contrast-fg) 8%, transparent )",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Color Hover",
         "en-US": "Menu token: Menu Item Color Hover"
       }
     },
     {
-      "name": "--wk-menu-item-height",
+      "name": "--m-menu-item-height",
       "category": "menu",
       "source": "src/theme/styles.css",
-      "default": "calc(var(--wk-control-height-medium) + var(--wk-space-3))",
+      "default": "calc(var(--m-control-height-medium) + var(--m-space-3))",
       "variants": {
-        "density-comfortable": "calc(var(--wk-control-height-medium) + var(--wk-space-2))",
-        "density-compact": "calc(var(--wk-control-height-medium) + var(--wk-space-1))",
-        "density-spacious": "calc(var(--wk-control-height-medium) + var(--wk-space-3))"
+        "density-comfortable": "calc(var(--m-control-height-medium) + var(--m-space-2))",
+        "density-compact": "calc(var(--m-control-height-medium) + var(--m-space-1))",
+        "density-spacious": "calc(var(--m-control-height-medium) + var(--m-space-3))"
       },
       "description": {
         "zh-CN": "菜单项行高，随密度变化。",
@@ -1938,67 +1938,67 @@
       }
     },
     {
-      "name": "--wk-menu-item-icon",
+      "name": "--m-menu-item-icon",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-contrast-fg) 82%, transparent )",
+      "default": "color-mix( in srgb, var(--m-color-contrast-fg) 82%, transparent )",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Icon",
         "en-US": "Menu token: Menu Item Icon"
       }
     },
     {
-      "name": "--wk-menu-item-icon-active",
+      "name": "--m-menu-item-icon-active",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-color-contrast-fg)",
+      "default": "var(--m-color-contrast-fg)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Icon Active",
         "en-US": "Menu token: Menu Item Icon Active"
       }
     },
     {
-      "name": "--wk-menu-item-radius",
+      "name": "--m-menu-item-radius",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-radius-md)",
+      "default": "var(--m-radius-md)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Radius",
         "en-US": "Menu token: Menu Item Radius"
       }
     },
     {
-      "name": "--wk-menu-item-text",
+      "name": "--m-menu-item-text",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-contrast-fg) 82%, transparent )",
+      "default": "color-mix( in srgb, var(--m-color-contrast-fg) 82%, transparent )",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Text",
         "en-US": "Menu token: Menu Item Text"
       }
     },
     {
-      "name": "--wk-menu-item-text-active",
+      "name": "--m-menu-item-text-active",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-color-contrast-fg)",
+      "default": "var(--m-color-contrast-fg)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Text Active",
         "en-US": "Menu token: Menu Item Text Active"
       }
     },
     {
-      "name": "--wk-menu-item-text-child-active",
+      "name": "--m-menu-item-text-child-active",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-color-contrast-fg)",
+      "default": "var(--m-color-contrast-fg)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Item Text Child Active",
         "en-US": "Menu token: Menu Item Text Child Active"
       }
     },
     {
-      "name": "--wk-menu-min-width",
+      "name": "--m-menu-min-width",
       "category": "menu",
       "source": "src/styles/base.css",
       "default": "12rem",
@@ -2008,17 +2008,17 @@
       }
     },
     {
-      "name": "--wk-menu-root-indent",
+      "name": "--m-menu-root-indent",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
-      "default": "var(--wk-space-4)",
+      "default": "var(--m-space-4)",
       "description": {
         "zh-CN": "菜单相关变量：Menu Root Indent",
         "en-US": "Menu token: Menu Root Indent"
       }
     },
     {
-      "name": "--wk-menubar-item-gap",
+      "name": "--m-menubar-item-gap",
       "category": "menu",
       "source": "src/components/Menubar/styles.css",
       "default": "0.125rem",
@@ -2028,7 +2028,7 @@
       }
     },
     {
-      "name": "--wk-menubar-menu-min-width",
+      "name": "--m-menubar-menu-min-width",
       "category": "menu",
       "source": "src/components/Menubar/styles.css",
       "default": "10rem",
@@ -2038,7 +2038,7 @@
       }
     },
     {
-      "name": "--wk-message-host-max-width",
+      "name": "--m-message-host-max-width",
       "category": "component",
       "source": "src/components/Message/styles.css",
       "default": "28rem",
@@ -2048,7 +2048,7 @@
       }
     },
     {
-      "name": "--wk-message-min-width",
+      "name": "--m-message-min-width",
       "category": "component",
       "source": "src/components/Message/styles.css",
       "default": "16rem",
@@ -2058,7 +2058,7 @@
       }
     },
     {
-      "name": "--wk-metergroup-meter-height",
+      "name": "--m-metergroup-meter-height",
       "category": "component",
       "source": "src/components/MeterGroup/styles.css",
       "default": "0.75rem",
@@ -2068,7 +2068,7 @@
       }
     },
     {
-      "name": "--wk-metergroup-swatch-size",
+      "name": "--m-metergroup-swatch-size",
       "category": "component",
       "source": "src/components/MeterGroup/styles.css",
       "default": "0.75rem",
@@ -2078,7 +2078,7 @@
       }
     },
     {
-      "name": "--wk-motion-distance",
+      "name": "--m-motion-distance",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0",
@@ -2092,7 +2092,7 @@
       }
     },
     {
-      "name": "--wk-motion-ease",
+      "name": "--m-motion-ease",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "cubic-bezier(0.2, 0, 0, 1)",
@@ -2102,7 +2102,7 @@
       }
     },
     {
-      "name": "--wk-motion-enter",
+      "name": "--m-motion-enter",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0ms",
@@ -2116,7 +2116,7 @@
       }
     },
     {
-      "name": "--wk-motion-exit",
+      "name": "--m-motion-exit",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0ms",
@@ -2130,7 +2130,7 @@
       }
     },
     {
-      "name": "--wk-motion-fast",
+      "name": "--m-motion-fast",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0ms",
@@ -2144,7 +2144,7 @@
       }
     },
     {
-      "name": "--wk-motion-normal",
+      "name": "--m-motion-normal",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0ms",
@@ -2158,7 +2158,7 @@
       }
     },
     {
-      "name": "--wk-motion-pulse",
+      "name": "--m-motion-pulse",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "1.2s",
@@ -2168,7 +2168,7 @@
       }
     },
     {
-      "name": "--wk-motion-scrollbar-hide",
+      "name": "--m-motion-scrollbar-hide",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "120ms",
@@ -2178,7 +2178,7 @@
       }
     },
     {
-      "name": "--wk-motion-scrollbar-show",
+      "name": "--m-motion-scrollbar-show",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "340ms",
@@ -2188,7 +2188,7 @@
       }
     },
     {
-      "name": "--wk-motion-skeleton",
+      "name": "--m-motion-skeleton",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "1.4s",
@@ -2198,7 +2198,7 @@
       }
     },
     {
-      "name": "--wk-motion-spin",
+      "name": "--m-motion-spin",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "1s",
@@ -2208,7 +2208,7 @@
       }
     },
     {
-      "name": "--wk-motion-spin-dash",
+      "name": "--m-motion-spin-dash",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "1.5s",
@@ -2218,7 +2218,7 @@
       }
     },
     {
-      "name": "--wk-motion-spin-fast",
+      "name": "--m-motion-spin-fast",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0.8s",
@@ -2228,7 +2228,7 @@
       }
     },
     {
-      "name": "--wk-motion-spin-medium",
+      "name": "--m-motion-spin-medium",
       "category": "motion",
       "source": "src/theme/styles.css",
       "default": "0.7s",
@@ -2238,7 +2238,7 @@
       }
     },
     {
-      "name": "--wk-opacity-disabled",
+      "name": "--m-opacity-disabled",
       "category": "state",
       "source": "src/theme/styles.css",
       "default": "0.55",
@@ -2248,7 +2248,7 @@
       }
     },
     {
-      "name": "--wk-overlay-scrim",
+      "name": "--m-overlay-scrim",
       "category": "overlay",
       "source": "src/theme/styles.css",
       "default": "rgb(2 6 23 / 0.72)",
@@ -2258,7 +2258,7 @@
       }
     },
     {
-      "name": "--wk-pagination-jumper-width",
+      "name": "--m-pagination-jumper-width",
       "category": "component",
       "source": "src/components/Pagination/styles.css",
       "default": "3.5rem",
@@ -2268,7 +2268,7 @@
       }
     },
     {
-      "name": "--wk-pagination-simple-width",
+      "name": "--m-pagination-simple-width",
       "category": "component",
       "source": "src/components/Pagination/styles.css",
       "default": "3.5rem",
@@ -2278,17 +2278,17 @@
       }
     },
     {
-      "name": "--wk-password-toggle-size",
+      "name": "--m-password-toggle-size",
       "category": "component",
       "source": "src/components/InputPassword/styles.css",
-      "default": "var(--wk-control-affix-size)",
+      "default": "var(--m-control-affix-size)",
       "description": {
         "zh-CN": "组件专用相关变量：Password Toggle Size",
         "en-US": "Component-specific token: Password Toggle Size"
       }
     },
     {
-      "name": "--wk-popover-min-width",
+      "name": "--m-popover-min-width",
       "category": "component",
       "source": "src/components/Popover/styles.css",
       "default": "12rem",
@@ -2298,17 +2298,17 @@
       }
     },
     {
-      "name": "--wk-progress-spinner-color",
+      "name": "--m-progress-spinner-color",
       "category": "component",
       "source": "src/components/ProgressSpinner/styles.css",
-      "default": "var(--wk-color-primary)",
+      "default": "var(--m-color-primary)",
       "description": {
         "zh-CN": "组件专用相关变量：Progress Spinner Color",
         "en-US": "Component-specific token: Progress Spinner Color"
       }
     },
     {
-      "name": "--wk-progress-spinner-size",
+      "name": "--m-progress-spinner-size",
       "category": "component",
       "source": "src/components/ProgressSpinner/styles.css",
       "default": "3.5rem",
@@ -2318,17 +2318,17 @@
       }
     },
     {
-      "name": "--wk-progressbar-fill",
+      "name": "--m-progressbar-fill",
       "category": "component",
       "source": "src/components/ProgressBar/styles.css",
-      "default": "var(--wk-color-danger)",
+      "default": "var(--m-color-danger)",
       "description": {
         "zh-CN": "组件专用相关变量：Progressbar Fill",
         "en-US": "Component-specific token: Progressbar Fill"
       }
     },
     {
-      "name": "--wk-progressbar-height",
+      "name": "--m-progressbar-height",
       "category": "component",
       "source": "src/components/ProgressBar/styles.css",
       "default": "1.25rem",
@@ -2338,7 +2338,7 @@
       }
     },
     {
-      "name": "--wk-progressbar-size",
+      "name": "--m-progressbar-size",
       "category": "component",
       "source": "src/components/ProgressBar/styles.css",
       "default": "5.5rem",
@@ -2348,17 +2348,17 @@
       }
     },
     {
-      "name": "--wk-progressbar-track",
+      "name": "--m-progressbar-track",
       "category": "component",
       "source": "src/components/ProgressBar/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-text-muted) 16%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface))",
       "description": {
         "zh-CN": "组件专用相关变量：Progressbar Track",
         "en-US": "Component-specific token: Progressbar Track"
       }
     },
     {
-      "name": "--wk-radius-control",
+      "name": "--m-radius-control",
       "category": "radius",
       "source": "src/theme/styles.css",
       "default": "3px",
@@ -2368,7 +2368,7 @@
       }
     },
     {
-      "name": "--wk-radius-full",
+      "name": "--m-radius-full",
       "category": "radius",
       "source": "src/theme/styles.css",
       "default": "9999px",
@@ -2378,7 +2378,7 @@
       }
     },
     {
-      "name": "--wk-radius-lg",
+      "name": "--m-radius-lg",
       "category": "radius",
       "source": "src/theme/styles.css",
       "default": "0.75rem",
@@ -2388,7 +2388,7 @@
       }
     },
     {
-      "name": "--wk-radius-md",
+      "name": "--m-radius-md",
       "category": "radius",
       "source": "src/theme/styles.css",
       "default": "0.5rem",
@@ -2398,7 +2398,7 @@
       }
     },
     {
-      "name": "--wk-radius-sm",
+      "name": "--m-radius-sm",
       "category": "radius",
       "source": "src/theme/styles.css",
       "default": "0.25rem",
@@ -2408,7 +2408,7 @@
       }
     },
     {
-      "name": "--wk-rating-star-padding",
+      "name": "--m-rating-star-padding",
       "category": "rating",
       "source": "src/theme/styles.css",
       "default": "0.15rem",
@@ -2418,7 +2418,7 @@
       }
     },
     {
-      "name": "--wk-rating-star-size-large",
+      "name": "--m-rating-star-size-large",
       "category": "rating",
       "source": "src/theme/styles.css",
       "default": "1.5rem",
@@ -2428,7 +2428,7 @@
       }
     },
     {
-      "name": "--wk-rating-star-size-medium",
+      "name": "--m-rating-star-size-medium",
       "category": "rating",
       "source": "src/theme/styles.css",
       "default": "1.25rem",
@@ -2438,7 +2438,7 @@
       }
     },
     {
-      "name": "--wk-rating-star-size-small",
+      "name": "--m-rating-star-size-small",
       "category": "rating",
       "source": "src/theme/styles.css",
       "default": "1rem",
@@ -2448,27 +2448,27 @@
       }
     },
     {
-      "name": "--wk-scrollbar-bg",
+      "name": "--m-scrollbar-bg",
       "category": "component",
       "source": "src/components/Scrollbar/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-text) 28%, transparent )",
+      "default": "color-mix( in srgb, var(--m-color-text) 28%, transparent )",
       "description": {
         "zh-CN": "组件专用相关变量：Scrollbar Bg",
         "en-US": "Component-specific token: Scrollbar Bg"
       }
     },
     {
-      "name": "--wk-scrollbar-hover-bg",
+      "name": "--m-scrollbar-hover-bg",
       "category": "component",
       "source": "src/components/Scrollbar/styles.css",
-      "default": "color-mix( in srgb, var(--wk-color-text) 45%, transparent )",
+      "default": "color-mix( in srgb, var(--m-color-text) 45%, transparent )",
       "description": {
         "zh-CN": "组件专用相关变量：Scrollbar Hover Bg",
         "en-US": "Component-specific token: Scrollbar Hover Bg"
       }
     },
     {
-      "name": "--wk-scrollbar-hover-opacity",
+      "name": "--m-scrollbar-hover-opacity",
       "category": "component",
       "source": "src/components/Scrollbar/styles.css",
       "default": "0.8",
@@ -2478,7 +2478,7 @@
       }
     },
     {
-      "name": "--wk-scrollbar-opacity",
+      "name": "--m-scrollbar-opacity",
       "category": "component",
       "source": "src/components/Scrollbar/styles.css",
       "default": "0.45",
@@ -2488,7 +2488,7 @@
       }
     },
     {
-      "name": "--wk-scrollbar-track-size",
+      "name": "--m-scrollbar-track-size",
       "category": "component",
       "source": "src/components/Scrollbar/styles.css",
       "default": "6px",
@@ -2498,7 +2498,17 @@
       }
     },
     {
-      "name": "--wk-select-menu-max-height",
+      "name": "--m-select-list-max-height",
+      "category": "component",
+      "source": "src/components/Select/styles.css",
+      "default": "calc(var(--m-select-menu-max-height) - 2.75rem)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Select List Max Height",
+        "en-US": "Component-specific token: Select List Max Height"
+      }
+    },
+    {
+      "name": "--m-select-menu-max-height",
       "category": "menu",
       "source": "src/components/Select/styles.css",
       "default": "min(18rem, 45vh)",
@@ -2508,7 +2518,7 @@
       }
     },
     {
-      "name": "--wk-shadow-lg",
+      "name": "--m-shadow-lg",
       "category": "shadow",
       "source": "src/theme/styles.css",
       "default": "0 1rem 3rem rgb(0 0 0 / 0.55)",
@@ -2518,7 +2528,7 @@
       }
     },
     {
-      "name": "--wk-shadow-md",
+      "name": "--m-shadow-md",
       "category": "shadow",
       "source": "src/theme/styles.css",
       "default": "0 0.75rem 2rem rgb(0 0 0 / 0.45)",
@@ -2528,7 +2538,7 @@
       }
     },
     {
-      "name": "--wk-shadow-sm",
+      "name": "--m-shadow-sm",
       "category": "shadow",
       "source": "src/theme/styles.css",
       "default": "0 1px 2px rgb(0 0 0 / 0.45)",
@@ -2538,7 +2548,7 @@
       }
     },
     {
-      "name": "--wk-shadow-sticky",
+      "name": "--m-shadow-sticky",
       "category": "shadow",
       "source": "src/theme/styles.css",
       "default": "4px 0 8px color-mix(in srgb, #000 35%, transparent)",
@@ -2548,7 +2558,7 @@
       }
     },
     {
-      "name": "--wk-shadow-sticky-end",
+      "name": "--m-shadow-sticky-end",
       "category": "shadow",
       "source": "src/theme/styles.css",
       "default": "-4px 0 8px color-mix(in srgb, #000 35%, transparent)",
@@ -2558,7 +2568,7 @@
       }
     },
     {
-      "name": "--wk-sidebar-collapsed-width",
+      "name": "--m-sidebar-collapsed-width",
       "category": "component",
       "source": "src/components/Sidebar/styles.css",
       "default": "3.5rem",
@@ -2568,7 +2578,7 @@
       }
     },
     {
-      "name": "--wk-sidebar-width",
+      "name": "--m-sidebar-width",
       "category": "component",
       "source": "src/components/Sidebar/styles.css",
       "default": "12rem",
@@ -2578,17 +2588,17 @@
       }
     },
     {
-      "name": "--wk-skeleton-bg",
+      "name": "--m-skeleton-bg",
       "category": "component",
       "source": "src/components/Skeleton/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-text-muted) 14%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-text-muted) 14%, var(--m-color-surface))",
       "description": {
         "zh-CN": "组件专用相关变量：Skeleton Bg",
         "en-US": "Component-specific token: Skeleton Bg"
       }
     },
     {
-      "name": "--wk-slider-marks-inset",
+      "name": "--m-slider-marks-inset",
       "category": "slider",
       "source": "src/theme/styles.css",
       "default": "0.9rem",
@@ -2598,7 +2608,7 @@
       }
     },
     {
-      "name": "--wk-slider-marks-inset-block",
+      "name": "--m-slider-marks-inset-block",
       "category": "slider",
       "source": "src/components/Slider/styles.css",
       "default": "0.9rem",
@@ -2608,7 +2618,7 @@
       }
     },
     {
-      "name": "--wk-slider-marks-inset-inline",
+      "name": "--m-slider-marks-inset-inline",
       "category": "slider",
       "source": "src/components/Slider/styles.css",
       "default": "0.5rem",
@@ -2618,7 +2628,7 @@
       }
     },
     {
-      "name": "--wk-slider-marks-side",
+      "name": "--m-slider-marks-side",
       "category": "slider",
       "source": "src/theme/styles.css",
       "default": "0.5rem",
@@ -2628,7 +2638,7 @@
       }
     },
     {
-      "name": "--wk-slider-thumb-size",
+      "name": "--m-slider-thumb-size",
       "category": "slider",
       "source": "src/components/Slider/styles.css",
       "default": "1.15rem",
@@ -2638,7 +2648,7 @@
       }
     },
     {
-      "name": "--wk-slider-tooltip-offset",
+      "name": "--m-slider-tooltip-offset",
       "category": "slider",
       "source": "src/theme/styles.css",
       "default": "1.5rem",
@@ -2648,7 +2658,7 @@
       }
     },
     {
-      "name": "--wk-slider-tooltip-padding-block",
+      "name": "--m-slider-tooltip-padding-block",
       "category": "slider",
       "source": "src/theme/styles.css",
       "default": "0.15rem",
@@ -2658,7 +2668,7 @@
       }
     },
     {
-      "name": "--wk-slider-tooltip-padding-inline",
+      "name": "--m-slider-tooltip-padding-inline",
       "category": "slider",
       "source": "src/theme/styles.css",
       "default": "0.4rem",
@@ -2668,7 +2678,7 @@
       }
     },
     {
-      "name": "--wk-slider-track-height",
+      "name": "--m-slider-track-height",
       "category": "slider",
       "source": "src/components/Slider/styles.css",
       "default": "0.35rem",
@@ -2678,7 +2688,7 @@
       }
     },
     {
-      "name": "--wk-slider-vertical-height",
+      "name": "--m-slider-vertical-height",
       "category": "slider",
       "source": "src/components/Slider/styles.css",
       "default": "12rem",
@@ -2688,7 +2698,7 @@
       }
     },
     {
-      "name": "--wk-slider-vertical-width",
+      "name": "--m-slider-vertical-width",
       "category": "slider",
       "source": "src/components/Slider/styles.css",
       "default": "2.5rem",
@@ -2698,7 +2708,7 @@
       }
     },
     {
-      "name": "--wk-space-1",
+      "name": "--m-space-1",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "0.3rem",
@@ -2712,7 +2722,7 @@
       }
     },
     {
-      "name": "--wk-space-2",
+      "name": "--m-space-2",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "0.6rem",
@@ -2726,7 +2736,7 @@
       }
     },
     {
-      "name": "--wk-space-3",
+      "name": "--m-space-3",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "0.9rem",
@@ -2740,7 +2750,7 @@
       }
     },
     {
-      "name": "--wk-space-4",
+      "name": "--m-space-4",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "1.15rem",
@@ -2754,7 +2764,7 @@
       }
     },
     {
-      "name": "--wk-space-5",
+      "name": "--m-space-5",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "1.45rem",
@@ -2768,7 +2778,7 @@
       }
     },
     {
-      "name": "--wk-space-6",
+      "name": "--m-space-6",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "1.75rem",
@@ -2782,7 +2792,7 @@
       }
     },
     {
-      "name": "--wk-space-8",
+      "name": "--m-space-8",
       "category": "spacing",
       "source": "src/theme/styles.css",
       "default": "2.35rem",
@@ -2796,7 +2806,7 @@
       }
     },
     {
-      "name": "--wk-splitbutton-icon-size",
+      "name": "--m-splitbutton-icon-size",
       "category": "component",
       "source": "src/components/SplitButton/styles.css",
       "default": "1.125rem",
@@ -2806,7 +2816,7 @@
       }
     },
     {
-      "name": "--wk-splitter-trigger-size",
+      "name": "--m-splitter-trigger-size",
       "category": "component",
       "source": "src/components/Splitter/styles.css",
       "default": "6px",
@@ -2816,17 +2826,17 @@
       }
     },
     {
-      "name": "--wk-stepper-connector-color",
+      "name": "--m-stepper-connector-color",
       "category": "stepper",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-border)",
+      "default": "var(--m-color-border)",
       "description": {
         "zh-CN": "步骤条相关变量：Stepper Connector Color",
         "en-US": "Stepper token: Stepper Connector Color"
       }
     },
     {
-      "name": "--wk-stepper-marker-size",
+      "name": "--m-stepper-marker-size",
       "category": "stepper",
       "source": "src/components/Stepper/styles.css",
       "default": "1.5rem",
@@ -2836,7 +2846,7 @@
       }
     },
     {
-      "name": "--wk-switch-checked-offset",
+      "name": "--m-switch-checked-offset",
       "category": "component",
       "source": "src/components/Switch/styles.css",
       "default": "1.25rem",
@@ -2846,7 +2856,7 @@
       }
     },
     {
-      "name": "--wk-switch-spinner-size",
+      "name": "--m-switch-spinner-size",
       "category": "component",
       "source": "src/components/Switch/styles.css",
       "default": "0.55rem",
@@ -2856,7 +2866,7 @@
       }
     },
     {
-      "name": "--wk-switch-thumb-size",
+      "name": "--m-switch-thumb-size",
       "category": "component",
       "source": "src/components/Switch/styles.css",
       "default": "1.2rem",
@@ -2866,7 +2876,7 @@
       }
     },
     {
-      "name": "--wk-switch-track-height",
+      "name": "--m-switch-track-height",
       "category": "component",
       "source": "src/components/Switch/styles.css",
       "default": "1.5rem",
@@ -2876,7 +2886,7 @@
       }
     },
     {
-      "name": "--wk-switch-track-width",
+      "name": "--m-switch-track-width",
       "category": "component",
       "source": "src/components/Switch/styles.css",
       "default": "2.75rem",
@@ -2886,17 +2896,17 @@
       }
     },
     {
-      "name": "--wk-table-border-color",
+      "name": "--m-table-border-color",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-border) 88%, var(--wk-color-text))",
+      "default": "color-mix(in srgb, var(--m-color-border) 88%, var(--m-color-text))",
       "description": {
         "zh-CN": "表格相关变量：Table Border Color",
         "en-US": "Table token: Table Border Color"
       }
     },
     {
-      "name": "--wk-table-cell-line-height",
+      "name": "--m-table-cell-line-height",
       "category": "table",
       "source": "src/theme/styles.css",
       "default": "26px",
@@ -2910,7 +2920,7 @@
       }
     },
     {
-      "name": "--wk-table-cell-padding-block",
+      "name": "--m-table-cell-padding-block",
       "category": "table",
       "source": "src/components/Table/styles.css",
       "default": "12px",
@@ -2920,7 +2930,7 @@
       }
     },
     {
-      "name": "--wk-table-cell-padding-inline",
+      "name": "--m-table-cell-padding-inline",
       "category": "table",
       "source": "src/theme/styles.css",
       "default": "16px",
@@ -2934,22 +2944,22 @@
       }
     },
     {
-      "name": "--wk-table-expanded-bg",
+      "name": "--m-table-expanded-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-fill-lighter)",
+      "default": "var(--m-color-fill-lighter)",
       "description": {
         "zh-CN": "表格相关变量：Table Expanded Bg",
         "en-US": "Table token: Table Expanded Bg"
       }
     },
     {
-      "name": "--wk-table-font-size",
+      "name": "--m-table-font-size",
       "category": "table",
       "source": "src/theme/styles.css",
       "default": "1rem",
       "variants": {
-        "density-compact": "var(--wk-font-size-sm)",
+        "density-compact": "var(--m-font-size-sm)",
         "density-spacious": "1rem"
       },
       "description": {
@@ -2958,47 +2968,47 @@
       }
     },
     {
-      "name": "--wk-table-header-bg",
+      "name": "--m-table-header-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-fill-light)",
+      "default": "var(--m-color-fill-light)",
       "description": {
         "zh-CN": "表格相关变量：Table Header Bg",
         "en-US": "Table token: Table Header Bg"
       }
     },
     {
-      "name": "--wk-table-header-text",
+      "name": "--m-table-header-text",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-text)",
+      "default": "var(--m-color-text)",
       "description": {
         "zh-CN": "表格相关变量：Table Header Text",
         "en-US": "Table token: Table Header Text"
       }
     },
     {
-      "name": "--wk-table-row-bg",
+      "name": "--m-table-row-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-surface)",
+      "default": "var(--m-color-surface)",
       "description": {
         "zh-CN": "表格相关变量：Table Row Bg",
         "en-US": "Table token: Table Row Bg"
       }
     },
     {
-      "name": "--wk-table-row-current-bg",
+      "name": "--m-table-row-current-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-primary) 16%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface))",
       "description": {
         "zh-CN": "表格相关变量：Table Row Current Bg",
         "en-US": "Table token: Table Row Current Bg"
       }
     },
     {
-      "name": "--wk-table-row-height",
+      "name": "--m-table-row-height",
       "category": "table",
       "source": "src/theme/styles.css",
       "default": "48px",
@@ -3012,57 +3022,57 @@
       }
     },
     {
-      "name": "--wk-table-row-hover-bg",
+      "name": "--m-table-row-hover-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-text) 8%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-text) 8%, var(--m-color-surface))",
       "description": {
         "zh-CN": "表格相关变量：Table Row Hover Bg",
         "en-US": "Table token: Table Row Hover Bg"
       }
     },
     {
-      "name": "--wk-table-row-selected-bg",
+      "name": "--m-table-row-selected-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-primary) 20%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-primary) 20%, var(--m-color-surface))",
       "description": {
         "zh-CN": "表格相关变量：Table Row Selected Bg",
         "en-US": "Table token: Table Row Selected Bg"
       }
     },
     {
-      "name": "--wk-table-row-striped-bg",
+      "name": "--m-table-row-striped-bg",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-fill-lighter)",
+      "default": "var(--m-color-fill-lighter)",
       "description": {
         "zh-CN": "表格相关变量：Table Row Striped Bg",
         "en-US": "Table token: Table Row Striped Bg"
       }
     },
     {
-      "name": "--wk-table-text",
+      "name": "--m-table-text",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-color-text)",
+      "default": "var(--m-color-text)",
       "description": {
         "zh-CN": "表格相关变量：Table Text",
         "en-US": "Table token: Table Text"
       }
     },
     {
-      "name": "--wk-tag-font-size-small",
+      "name": "--m-tag-font-size-small",
       "category": "tag",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-font-size-xs)",
+      "default": "var(--m-font-size-xs)",
       "description": {
         "zh-CN": "标签相关变量：Tag Font Size Small",
         "en-US": "Tag token: Tag Font Size Small"
       }
     },
     {
-      "name": "--wk-tag-icon-size",
+      "name": "--m-tag-icon-size",
       "category": "tag",
       "source": "src/components/Tag/styles.css",
       "default": "1.25rem",
@@ -3072,37 +3082,37 @@
       }
     },
     {
-      "name": "--wk-terminal-bg",
+      "name": "--m-terminal-bg",
       "category": "component",
       "source": "src/components/Terminal/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-text) 6%, var(--wk-color-surface))",
+      "default": "color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface))",
       "description": {
         "zh-CN": "组件专用相关变量：Terminal Bg",
         "en-US": "Component-specific token: Terminal Bg"
       }
     },
     {
-      "name": "--wk-terminal-border",
+      "name": "--m-terminal-border",
       "category": "component",
       "source": "src/components/Terminal/styles.css",
-      "default": "color-mix(in srgb, var(--wk-color-on-emphasis) 14%, transparent)",
+      "default": "color-mix(in srgb, var(--m-color-on-emphasis) 14%, transparent)",
       "description": {
         "zh-CN": "组件专用相关变量：Terminal Border",
         "en-US": "Component-specific token: Terminal Border"
       }
     },
     {
-      "name": "--wk-terminal-fg",
+      "name": "--m-terminal-fg",
       "category": "component",
       "source": "src/components/Terminal/styles.css",
-      "default": "var(--wk-color-text)",
+      "default": "var(--m-color-text)",
       "description": {
         "zh-CN": "组件专用相关变量：Terminal Fg",
         "en-US": "Component-specific token: Terminal Fg"
       }
     },
     {
-      "name": "--wk-terminal-min-height",
+      "name": "--m-terminal-min-height",
       "category": "component",
       "source": "src/components/Terminal/styles.css",
       "default": "12rem",
@@ -3112,17 +3122,17 @@
       }
     },
     {
-      "name": "--wk-terminal-prompt",
+      "name": "--m-terminal-prompt",
       "category": "component",
       "source": "src/components/Terminal/styles.css",
-      "default": "var(--wk-color-success)",
+      "default": "var(--m-color-success)",
       "description": {
         "zh-CN": "组件专用相关变量：Terminal Prompt",
         "en-US": "Component-specific token: Terminal Prompt"
       }
     },
     {
-      "name": "--wk-textarea-min-height",
+      "name": "--m-textarea-min-height",
       "category": "component",
       "source": "src/components/Textarea/styles.css",
       "default": "6rem",
@@ -3132,7 +3142,7 @@
       }
     },
     {
-      "name": "--wk-textarea-min-height-large",
+      "name": "--m-textarea-min-height-large",
       "category": "component",
       "source": "src/components/Textarea/styles.css",
       "default": "7.5rem",
@@ -3142,7 +3152,7 @@
       }
     },
     {
-      "name": "--wk-textarea-min-height-small",
+      "name": "--m-textarea-min-height-small",
       "category": "component",
       "source": "src/components/Textarea/styles.css",
       "default": "4.5rem",
@@ -3152,7 +3162,7 @@
       }
     },
     {
-      "name": "--wk-tieredmenu-item-gap",
+      "name": "--m-tieredmenu-item-gap",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "0.125rem",
@@ -3162,7 +3172,7 @@
       }
     },
     {
-      "name": "--wk-tieredmenu-min-width",
+      "name": "--m-tieredmenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "12rem",
@@ -3172,7 +3182,7 @@
       }
     },
     {
-      "name": "--wk-tieredmenu-submenu-min-width",
+      "name": "--m-tieredmenu-submenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "10rem",
@@ -3182,7 +3192,7 @@
       }
     },
     {
-      "name": "--wk-timeline-event-min-height",
+      "name": "--m-timeline-event-min-height",
       "category": "timeline",
       "source": "src/theme/styles.css",
       "default": "4rem",
@@ -3192,7 +3202,7 @@
       }
     },
     {
-      "name": "--wk-timeline-marker-size",
+      "name": "--m-timeline-marker-size",
       "category": "timeline",
       "source": "src/theme/styles.css",
       "default": "1.5rem",
@@ -3202,7 +3212,7 @@
       }
     },
     {
-      "name": "--wk-tree-indent",
+      "name": "--m-tree-indent",
       "category": "tree",
       "source": "src/theme/styles.css",
       "default": "0.7rem",
@@ -3212,17 +3222,17 @@
       }
     },
     {
-      "name": "--wk-tree-indent-padding",
+      "name": "--m-tree-indent-padding",
       "category": "tree",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-space-3)",
+      "default": "var(--m-space-3)",
       "description": {
         "zh-CN": "树形相关变量：Tree Indent Padding",
         "en-US": "Tree token: Tree Indent Padding"
       }
     },
     {
-      "name": "--wk-treeselect-min-width",
+      "name": "--m-treeselect-min-width",
       "category": "component",
       "source": "src/components/TreeSelect/styles.css",
       "default": "12rem",
@@ -3232,7 +3242,7 @@
       }
     },
     {
-      "name": "--wk-treeselect-toggler-size",
+      "name": "--m-treeselect-toggler-size",
       "category": "component",
       "source": "src/components/TreeSelect/styles.css",
       "default": "1.25rem",
@@ -3242,7 +3252,7 @@
       }
     },
     {
-      "name": "--wk-z-base",
+      "name": "--m-z-base",
       "category": "layering",
       "source": "src/theme/styles.css",
       "default": "1000",
@@ -3252,37 +3262,37 @@
       }
     },
     {
-      "name": "--wk-z-dropdown",
+      "name": "--m-z-dropdown",
       "category": "layering",
       "source": "src/theme/styles.css",
-      "default": "calc(var(--wk-z-base) + 50)",
+      "default": "calc(var(--m-z-base) + 50)",
       "description": {
         "zh-CN": "层级相关变量：Z Dropdown",
         "en-US": "Layering token: Z Dropdown"
       }
     },
     {
-      "name": "--wk-z-overlay",
+      "name": "--m-z-overlay",
       "category": "layering",
       "source": "src/theme/styles.css",
-      "default": "var(--wk-z-base)",
+      "default": "var(--m-z-base)",
       "description": {
         "zh-CN": "层级相关变量：Z Overlay",
         "en-US": "Layering token: Z Overlay"
       }
     },
     {
-      "name": "--wk-z-overlay-raised",
+      "name": "--m-z-overlay-raised",
       "category": "layering",
       "source": "src/theme/styles.css",
-      "default": "calc(var(--wk-z-base) + 1)",
+      "default": "calc(var(--m-z-base) + 1)",
       "description": {
         "zh-CN": "层级相关变量：Z Overlay Raised",
         "en-US": "Layering token: Z Overlay Raised"
       }
     },
     {
-      "name": "--wk-z-popper",
+      "name": "--m-z-popper",
       "category": "layering",
       "source": "src/theme/styles.css",
       "default": "40",
@@ -3292,20 +3302,20 @@
       }
     },
     {
-      "name": "--wk-z-toast",
+      "name": "--m-z-toast",
       "category": "layering",
       "source": "src/theme/styles.css",
-      "default": "calc(var(--wk-z-base) + 100)",
+      "default": "calc(var(--m-z-base) + 100)",
       "description": {
         "zh-CN": "层级相关变量：Z Toast",
         "en-US": "Layering token: Z Toast"
       }
     },
     {
-      "name": "--wk-z-tooltip",
+      "name": "--m-z-tooltip",
       "category": "layering",
       "source": "src/theme/styles.css",
-      "default": "calc(var(--wk-z-base) + 60)",
+      "default": "calc(var(--m-z-base) + 60)",
       "description": {
         "zh-CN": "层级相关变量：Z Tooltip",
         "en-US": "Layering token: Z Tooltip"

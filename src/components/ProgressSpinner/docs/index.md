@@ -11,20 +11,20 @@ SVG 环形加载指示器。
 ## 引入
 
 ```ts
-import { WkProgressSpinner } from '@wise-kit/ui'
+import { MProgressSpinner } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkProgressSpinner } from '@wise-kit/ui'
+import { MProgressSpinner } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WkProgressSpinner />
-    <WkProgressSpinner stroke-width="4" animation-duration="0.6s" />
+    <MProgressSpinner />
+    <MProgressSpinner stroke-width="4" animation-duration="0.6s" />
   </div>
 </template>
 ```
@@ -35,19 +35,19 @@ import { WkProgressSpinner } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkProgressSpinner } from '@wise-kit/ui'
+import { MButton, MProgressSpinner } from 'morya-ui'
 import { ref } from 'vue'
 
 const loading = ref(true)
 </script>
 
 <template>
-  <WkProgressSpinner :show="loading" description="Loading">
+  <MProgressSpinner :show="loading" description="Loading">
     <p style="margin:0">
       Form content
     </p>
-  </WkProgressSpinner>
-  <WkButton label="Toggle" size="small" @click="loading = !loading" />
+  </MProgressSpinner>
+  <MButton label="Toggle" size="small" @click="loading = !loading" />
 </template>
 ```
 

@@ -1,8 +1,8 @@
 import './style'
-export { WK_FORM_ERRORS_KEY, WK_FORM_KEY } from './context'
-export type { FormFieldValidator, WkFormContext, WkFormFieldRegistration } from './context'
-export { default as WkForm } from './Form.vue'
-export { default as WkFormItem } from './FormItem.vue'
+export { M_FORM_ERRORS_KEY, M_FORM_KEY } from './context'
+export type { FormFieldValidator, MFormContext, MFormFieldRegistration } from './context'
+export { default as MForm } from './Form.vue'
+export { default as MFormItem } from './FormItem.vue'
 export type {
   FormInstance,
   FormItemProps,

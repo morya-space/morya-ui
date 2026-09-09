@@ -1,108 +1,108 @@
-.wk-tabs {
-    font-family: var(--wk-font-sans);
+.m-tabs {
+    font-family: var(--m-font-sans);
 }
 
-.wk-tabs__bar {
+.m-tabs__bar {
     align-items: center;
     display: flex;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
 }
 
-.wk-tabs__scroller {
+.m-tabs__scroller {
     flex: 1;
     min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
 }
 
-.wk-tabs__scroller::-webkit-scrollbar {
+.m-tabs__scroller::-webkit-scrollbar {
     display: none;
 }
 
-.wk-tabs__list {
-    border-bottom: var(--wk-border-width) solid var(--wk-color-border);
+.m-tabs__list {
+    border-bottom: var(--m-border-width) solid var(--m-color-border);
     display: flex;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     min-width: max-content;
 }
 
-.wk-tabs--card .wk-tabs__list {
+.m-tabs--card .m-tabs__list {
     border-bottom: 0;
-    gap: var(--wk-space-1);
+    gap: var(--m-space-1);
 }
 
-.wk-tabs__item {
+.m-tabs__item {
     align-items: center;
     display: inline-flex;
     position: relative;
 }
 
-.wk-tabs__tab {
+.m-tabs__tab {
     background: transparent;
     border: 0;
     border-bottom: 2px solid transparent;
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     cursor: pointer;
     font: inherit;
-    padding: var(--wk-space-3) var(--wk-space-2);
+    padding: var(--m-space-3) var(--m-space-2);
     transition:
-        color var(--wk-motion-fast) var(--wk-motion-ease),
-        border-color var(--wk-motion-fast) var(--wk-motion-ease);
+        color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.wk-tabs__tab--active {
-    border-color: var(--wk-color-primary);
-    color: var(--wk-color-primary);
+.m-tabs__tab--active {
+    border-color: var(--m-color-primary);
+    color: var(--m-color-primary);
     font-weight: 600;
 }
 
-.wk-tabs--card .wk-tabs__tab {
-    background: color-mix(in srgb, var(--wk-color-border) 35%, var(--wk-color-surface));
-    border: var(--wk-border-width) solid var(--wk-color-border);
+.m-tabs--card .m-tabs__tab {
+    background: color-mix(in srgb, var(--m-color-border) 35%, var(--m-color-surface));
+    border: var(--m-border-width) solid var(--m-color-border);
     border-bottom: 0;
-    border-radius: var(--wk-radius-sm) var(--wk-radius-sm) 0 0;
+    border-radius: var(--m-radius-sm) var(--m-radius-sm) 0 0;
 }
 
-.wk-tabs--card .wk-tabs__tab--active {
-    background: var(--wk-color-surface);
-    border-color: var(--wk-color-border);
-    color: var(--wk-color-primary);
+.m-tabs--card .m-tabs__tab--active {
+    background: var(--m-color-surface);
+    border-color: var(--m-color-border);
+    color: var(--m-color-primary);
 }
 
-.wk-tabs__tab:disabled {
+.m-tabs__tab:disabled {
     cursor: not-allowed;
-    opacity: var(--wk-opacity-disabled);
+    opacity: var(--m-opacity-disabled);
 }
 
-.wk-tabs__tab:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-tabs__tab:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-tabs__close,
-.wk-tabs__add,
-.wk-tabs__scroll {
+.m-tabs__close,
+.m-tabs__add,
+.m-tabs__scroll {
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-sm);
-    color: var(--wk-color-text-muted);
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text-muted);
     cursor: pointer;
     font: inherit;
     line-height: 1;
-    padding: var(--wk-space-1) var(--wk-space-2);
+    padding: var(--m-space-1) var(--m-space-2);
 }
 
-.wk-tabs__close:hover,
-.wk-tabs__add:hover,
-.wk-tabs__scroll:hover {
-    background: color-mix(in srgb, var(--wk-color-primary) 10%, transparent);
-    color: var(--wk-color-primary);
+.m-tabs__close:hover,
+.m-tabs__add:hover,
+.m-tabs__scroll:hover {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    color: var(--m-color-primary);
 }
 
-.wk-tabs__extra {
+.m-tabs__extra {
     margin-left: auto;
 }
 
-.wk-tabs__panel {
-    padding-top: var(--wk-space-4);
+.m-tabs__panel {
+    padding-top: var(--m-space-4);
 }

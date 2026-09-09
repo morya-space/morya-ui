@@ -4,20 +4,20 @@
  * @see DESIGN.md §3
  */
 import {
-  WkBreadcrumb,
-  WkCard,
-  WkConfigProvider,
-  WkGrid,
-  WkGridItem,
-  WkIcon,
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkSpace,
-  WkTable,
-  WkTag,
+  MBreadcrumb,
+  MCard,
+  MConfigProvider,
+  MGrid,
+  MGridItem,
+  MIcon,
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MSpace,
+  MTable,
+  MTag,
   zhCN,
-} from '@wise-kit/ui'
+} from 'morya-ui'
 
 const stats = [
   { label: '总用户', value: '12,480', trend: '+8.2%', icon: 'users' },
@@ -53,124 +53,124 @@ function statusLabel(s: string) {
 </script>
 
 <template>
-  <WkConfigProvider :locale="zhCN">
-    <WkLayout class="page-dashboard">
-      <WkLayoutHeader class="page-dashboard__header">
-        <WkBreadcrumb :model="[{ label: '首页' }, { label: '仪表盘' }]" />
-      </WkLayoutHeader>
+  <MConfigProvider :locale="zhCN">
+    <MLayout class="page-dashboard">
+      <MLayoutHeader class="page-dashboard__header">
+        <MBreadcrumb :model="[{ label: '首页' }, { label: '仪表盘' }]" />
+      </MLayoutHeader>
 
-      <WkLayoutContent class="page-dashboard__content">
+      <MLayoutContent class="page-dashboard__content">
         <h1 class="page-dashboard__title">仪表盘</h1>
 
         <!-- KPI 卡片 -->
-        <WkGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
-          <WkGridItem v-for="item in stats" :key="item.label" :span="1">
-            <WkCard class="page-dashboard__stat">
-              <WkSpace align="center" justify="space-between">
+        <MGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
+          <MGridItem v-for="item in stats" :key="item.label" :span="1">
+            <MCard class="page-dashboard__stat">
+              <MSpace align="center" justify="space-between">
                 <div>
                   <p class="page-dashboard__stat-label">{{ item.label }}</p>
                   <p class="page-dashboard__stat-value">{{ item.value }}</p>
                   <p class="page-dashboard__stat-trend">{{ item.trend }}</p>
                 </div>
-                <WkIcon :name="item.icon" size="lg" aria-hidden="true" class="page-dashboard__stat-icon" />
-              </WkSpace>
-            </WkCard>
-          </WkGridItem>
-        </WkGrid>
+                <MIcon :name="item.icon" size="lg" aria-hidden="true" class="page-dashboard__stat-icon" />
+              </MSpace>
+            </MCard>
+          </MGridItem>
+        </MGrid>
 
         <!-- 主内容两栏 -->
-        <WkGrid :cols="2" :x-gap="16" :y-gap="16" class="page-dashboard__main">
-          <WkGridItem :span="1">
-            <WkCard title="趋势概览">
+        <MGrid :cols="2" :x-gap="16" :y-gap="16" class="page-dashboard__main">
+          <MGridItem :span="1">
+            <MCard title="趋势概览">
               <div class="page-dashboard__chart-placeholder" role="img" aria-label="图表占位">
                 图表区域（接入 ECharts / 业务组件）
               </div>
-            </WkCard>
-          </WkGridItem>
-          <WkGridItem :span="1">
-            <WkCard title="最近工单">
-              <WkTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered>
+            </MCard>
+          </MGridItem>
+          <MGridItem :span="1">
+            <MCard title="最近工单">
+              <MTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered>
                 <template #cell-priority="{ value }">
-                  <WkTag :value="String(value)" :severity="prioritySeverity(String(value))" />
+                  <MTag :value="String(value)" :severity="prioritySeverity(String(value))" />
                 </template>
                 <template #cell-status="{ value }">
-                  <WkTag :value="statusLabel(String(value))" severity="info" />
+                  <MTag :value="statusLabel(String(value))" severity="info" />
                 </template>
-              </WkTable>
-            </WkCard>
-          </WkGridItem>
-        </WkGrid>
-      </WkLayoutContent>
-    </WkLayout>
-  </WkConfigProvider>
+              </MTable>
+            </MCard>
+          </MGridItem>
+        </MGrid>
+      </MLayoutContent>
+    </MLayout>
+  </MConfigProvider>
 </template>
 
 <style scoped>
 .page-dashboard {
   min-height: 100vh;
-  background: var(--wk-color-surface);
+  background: var(--m-color-surface);
 }
 
 .page-dashboard__header {
-  padding: var(--wk-space-4) var(--wk-space-6);
-  border-bottom: 1px solid var(--wk-color-border);
-  background: var(--wk-color-surface);
+  padding: var(--m-space-4) var(--m-space-6);
+  border-bottom: 1px solid var(--m-color-border);
+  background: var(--m-color-surface);
 }
 
 .page-dashboard__content {
-  padding: var(--wk-space-6);
+  padding: var(--m-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--wk-space-6);
+  gap: var(--m-space-6);
 }
 
 .page-dashboard__title {
   margin: 0;
-  font-size: var(--wk-font-size-lg);
+  font-size: var(--m-font-size-lg);
   font-weight: 600;
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
 }
 
 .page-dashboard__stat {
-  box-shadow: var(--wk-shadow-sm);
+  box-shadow: var(--m-shadow-sm);
 }
 
 .page-dashboard__stat-label {
   margin: 0;
-  color: var(--wk-color-text-muted);
-  font-size: var(--wk-font-size-sm);
+  color: var(--m-color-text-muted);
+  font-size: var(--m-font-size-sm);
 }
 
 .page-dashboard__stat-value {
-  margin: var(--wk-space-1) 0;
+  margin: var(--m-space-1) 0;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
 }
 
 .page-dashboard__stat-trend {
   margin: 0;
-  color: var(--wk-color-primary);
-  font-size: var(--wk-font-size-sm);
+  color: var(--m-color-primary);
+  font-size: var(--m-font-size-sm);
 }
 
 .page-dashboard__stat-icon {
-  color: var(--wk-color-primary);
+  color: var(--m-color-primary);
   opacity: 0.85;
 }
 
 .page-dashboard__main {
-  margin-top: var(--wk-space-2);
+  margin-top: var(--m-space-2);
 }
 
 .page-dashboard__chart-placeholder {
   display: grid;
   place-items: center;
   min-height: 12rem;
-  border: 1px dashed var(--wk-color-border);
-  border-radius: var(--wk-radius-md);
-  color: var(--wk-color-text-muted);
-  font-size: var(--wk-font-size-sm);
-  background: color-mix(in srgb, var(--wk-color-border) 15%, transparent);
+  border: 1px dashed var(--m-color-border);
+  border-radius: var(--m-radius-md);
+  color: var(--m-color-text-muted);
+  font-size: var(--m-font-size-sm);
+  background: color-mix(in srgb, var(--m-color-border) 15%, transparent);
 }
 </style>

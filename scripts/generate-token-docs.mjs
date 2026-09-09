@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Extract --wk-* CSS variables from src CSS files, merge descriptions,
+ * Extract --m-* CSS variables from src CSS files, merge descriptions,
  * and emit playground/src/data/design-tokens.json for the docs site.
  */
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -32,14 +32,14 @@ function parseSelectorContext(selector) {
   const contexts = new Set(['default'])
 
   if (/\[data-theme=["']dark["']\]/i.test(normalized)) contexts.add('dark')
-  if (/\[data-wk-density=["']compact["']\]/i.test(normalized)) contexts.add('density-compact')
-  if (/\[data-wk-density=["']spacious["']\]/i.test(normalized)) contexts.add('density-spacious')
-  if (/\[data-wk-density=["']comfortable["']\]/i.test(normalized)) contexts.add('density-comfortable')
-  if (/\[data-wk-motion=["']reduced["']\]/i.test(normalized)) contexts.add('motion-reduced')
-  if (/\[data-wk-motion=["']none["']\]/i.test(normalized)) contexts.add('motion-none')
+  if (/\[data-m-density=["']compact["']\]/i.test(normalized)) contexts.add('density-compact')
+  if (/\[data-m-density=["']spacious["']\]/i.test(normalized)) contexts.add('density-spacious')
+  if (/\[data-m-density=["']comfortable["']\]/i.test(normalized)) contexts.add('density-comfortable')
+  if (/\[data-m-motion=["']reduced["']\]/i.test(normalized)) contexts.add('motion-reduced')
+  if (/\[data-m-motion=["']none["']\]/i.test(normalized)) contexts.add('motion-none')
 
   if (contexts.size === 1 && contexts.has('default') && normalized !== ':root' && !normalized.startsWith(':root,')) {
-    if (!/^:root(?:\s*,\s*\[data-wk-density="comfortable"\])?$/.test(normalized)) {
+    if (!/^:root(?:\s*,\s*\[data-m-density="comfortable"\])?$/.test(normalized)) {
       contexts.add('scoped')
     }
   }
@@ -56,7 +56,7 @@ function parseCssTokens(css, source) {
     const selector = match[1]
     const body = match[2]
     const contexts = parseSelectorContext(selector)
-    const declRe = /(--wk-[a-z0-9-]+)\s*:\s*((?:[^;]|var\([^)]*\))+);/g
+    const declRe = /(--m-[a-z0-9-]+)\s*:\s*((?:[^;]|var\([^)]*\))+);/g
 
     for (const decl of body.matchAll(declRe)) {
       const name = decl[1]
@@ -87,7 +87,7 @@ function inferCategory(name) {
   const override = metadata.tokens?.[name]
   if (override?.category) return override.category
 
-  const token = name.replace(/^--wk-/, '')
+  const token = name.replace(/^--m-/, '')
   if (token.startsWith('color-')) return 'color'
   if (token.startsWith('control-')) return 'control'
   if (token.startsWith('space-')) return 'spacing'
@@ -117,7 +117,7 @@ function inferCategory(name) {
 
 function humanizeToken(name) {
   return name
-    .replace(/^--wk-/, '')
+    .replace(/^--m-/, '')
     .split('-')
     .map((part) => (/^\d+$/.test(part) ? part : part.charAt(0).toUpperCase() + part.slice(1)))
     .join(' ')
@@ -178,7 +178,7 @@ function buildCatalog() {
   return {
     generatedAt: new Date().toISOString(),
     source: 'src/**/*.css',
-    prefix: 'wk',
+    prefix: 'm',
     categories: metadata.categories,
     tokenCount: tokens.length,
     tokens,

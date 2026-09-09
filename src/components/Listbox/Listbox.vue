@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
 import { computed, ref, useSlots, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WkScrollbar from '../Scrollbar/Scrollbar.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
@@ -19,7 +19,7 @@ const emit = defineEmits<{
 }>()
 
 const filterQuery = ref('')
-const locale = useWkLocale()
+const locale = useMLocale()
 const sizeClass = useConfiguredSize('Listbox', () => props.size)
 const { isInvalid } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -32,12 +32,12 @@ const filteredOptions = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wk-listbox',
-  `wk-listbox--${sizeClass.value}`,
+  'm-listbox',
+  `m-listbox--${sizeClass.value}`,
   {
-    'wk-listbox--disabled': props.disabled,
-    'wk-listbox--multiple': props.multiple,
-    'wk-listbox--invalid': isInvalid.value,
+    'm-listbox--disabled': props.disabled,
+    'm-listbox--multiple': props.multiple,
+    'm-listbox--invalid': isInvalid.value,
   },
 ])
 
@@ -62,7 +62,7 @@ function select(option: ListboxOption) {
   emit('update:modelValue', option.value)
 }
 
-const list = ref<InstanceType<typeof WkScrollbar> | null>(null)
+const list = ref<InstanceType<typeof MScrollbar> | null>(null)
 
 function listRoot(): ParentNode | null {
   return list.value?.$el ?? null
@@ -92,7 +92,7 @@ function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
   listRoot()
-    ?.querySelectorAll<HTMLElement>('.wk-listbox__option')
+    ?.querySelectorAll<HTMLElement>('.m-listbox__option')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -119,20 +119,20 @@ watch(keyboard.activeIndex, () => {
     <input
       v-if="filter"
       v-model="filterQuery"
-      class="wk-listbox__filter"
+      class="m-listbox__filter"
       type="search"
       :placeholder="locale.filterOptions"
       :disabled="disabled"
       :aria-label="locale.filterOptions"
       @keydown="onFilterKeydown"
     >
-    <WkScrollbar
+    <MScrollbar
       ref="list"
       tag="ul"
       role="listbox"
-      class="wk-listbox__list"
+      class="m-listbox__list"
       fit-content
-      view-class="wk-listbox__list-view"
+      view-class="m-listbox__list-view"
       :view-style="resolvedListStyle"
       :aria-label="locale.selectOption"
       :aria-multiselectable="multiple || undefined"
@@ -141,9 +141,9 @@ watch(keyboard.activeIndex, () => {
       <li v-for="(option, index) in filteredOptions" :key="String(option.value)" role="presentation">
         <button
           type="button"
-          class="wk-listbox__option"
+          class="m-listbox__option"
           role="option"
-          :class="{ 'wk-listbox__option--selected': isSelected(option.value) }"
+          :class="{ 'm-listbox__option--selected': isSelected(option.value) }"
           :aria-selected="isSelected(option.value)"
           :disabled="disabled || option.disabled"
           :tabindex="optionTabindex(index)"
@@ -153,9 +153,9 @@ watch(keyboard.activeIndex, () => {
           <slot name="option" :option="option">{{ option.label }}</slot>
         </button>
       </li>
-      <li v-if="!filteredOptions.length" class="wk-listbox__empty">
+      <li v-if="!filteredOptions.length" class="m-listbox__empty">
         {{ resolvedEmptyMessage }}
       </li>
-    </WkScrollbar>
+    </MScrollbar>
   </div>
 </template>

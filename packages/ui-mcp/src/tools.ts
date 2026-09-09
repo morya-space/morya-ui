@@ -13,7 +13,7 @@ import { designRules, findPattern, pagePatterns, scorePattern } from './patterns
 import { countCatalogResourceTemplates, countCatalogResources } from './resources.js'
 
 function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
-  const pairedTagRe = /<WkButton\b([^>]*)>([\s\S]*?)<\/WkButton>/gi
+  const pairedTagRe = /<MButton\b([^>]*)>([\s\S]*?)<\/MButton>/gi
   let match = pairedTagRe.exec(code)
   while (match !== null) {
     const attrs = match[1] || ''
@@ -23,19 +23,19 @@ function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; 
     if (hasIconOnly && !hasIconProp) {
       issues.push({
         type: 'icon-only-missing-icon',
-        message: 'WkButton with icon-only must set icon (or :icon). Default slot content is not rendered when iconOnly is true.',
+        message: 'MButton with icon-only must set icon (or :icon). Default slot content is not rendered when iconOnly is true.',
       })
     }
     if (hasIconOnly && inner.length > 0) {
       issues.push({
         type: 'icon-only-default-slot',
-        message: 'WkButton with icon-only ignores default slot content. Pass the icon via icon / :icon instead.',
+        message: 'MButton with icon-only ignores default slot content. Pass the icon via icon / :icon instead.',
       })
     }
     match = pairedTagRe.exec(code)
   }
 
-  const selfClosingRe = /<WkButton\b([^>]*)\/>/gi
+  const selfClosingRe = /<MButton\b([^>]*)\/>/gi
   match = selfClosingRe.exec(code)
   while (match !== null) {
     const attrs = match[1] || ''
@@ -44,7 +44,7 @@ function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; 
     if (hasIconOnly && !hasIconProp) {
       issues.push({
         type: 'icon-only-missing-icon',
-        message: 'WkButton with icon-only must set icon (or :icon).',
+        message: 'MButton with icon-only must set icon (or :icon).',
       })
     }
     match = selfClosingRe.exec(code)
@@ -59,7 +59,7 @@ function pickLocale<T extends { locales: Partial<Record<Locale, unknown>> }>(
 }
 
 function vueName(name: string): string {
-  return `Wk${name}`
+  return `M${name}`
 }
 
 function generatedPageCode(patternId: string, intent: string, locale: Locale): { script: string; template: string; style: string } {
@@ -76,19 +76,19 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const title = intent || (zh ? '业务页面' : 'Business page')
 
   const layoutImports = useLayoutShell
-    ? ', WkLayout, WkLayoutContent, WkLayoutHeader, WkLayoutSider, WkBreadcrumb'
+    ? ', MLayout, MLayoutContent, MLayoutHeader, MLayoutSider, MBreadcrumb'
     : ''
-  const listImports = isList ? ', WkSelect, WkSpace, WkTable' : ''
-  const formImports = isForm || isAuth || isWizard ? ', WkForm, WkFormItem, WkSelect' : ''
-  const dashboardImports = isDashboard ? ', WkCard, WkGrid, WkGridItem, WkSkeleton, WkTable' : ''
-  const detailImports = isDetail ? ', WkDivider' : ''
-  const emptyImports = isEmpty ? ', WkDataView' : ''
-  const wizardImports = isWizard ? ', WkStepper' : ''
-  const settingsImports = isSettings ? ', WkTabs' : ''
+  const listImports = isList ? ', MSelect, MSpace, MTable' : ''
+  const formImports = isForm || isAuth || isWizard ? ', MForm, MFormItem, MSelect' : ''
+  const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MSkeleton, MTable' : ''
+  const detailImports = isDetail ? ', MDivider' : ''
+  const emptyImports = isEmpty ? ', MDataView' : ''
+  const wizardImports = isWizard ? ', MStepper' : ''
+  const settingsImports = isSettings ? ', MTabs' : ''
 
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { WkButton, WkCard, WkConfigProvider, WkInput, WkTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from '@wise-kit/ui'
+import { MButton, MCard, MConfigProvider, MInput, MTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from 'morya-ui'
 
 const loading = ref(false)
 const error = ref('')
@@ -114,181 +114,181 @@ async function submit() {
 }
 </script>`
 
-  const listContent = `          <section class="wk-generated-filters" aria-label="${zh ? '筛选' : 'Filters'}">
-            <WkSpace wrap>
-              <WkInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
-              <WkButton severity="primary">${zh ? '查询' : 'Search'}</WkButton>
-              <WkButton severity="secondary">${zh ? '重置' : 'Reset'}</WkButton>
-            </WkSpace>
+  const listContent = `          <section class="m-generated-filters" aria-label="${zh ? '筛选' : 'Filters'}">
+            <MSpace wrap>
+              <MInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
+              <MButton severity="primary">${zh ? '查询' : 'Search'}</MButton>
+              <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
+            </MSpace>
           </section>
-          <header class="wk-generated-toolbar">
-            <h1 class="wk-generated-title">${title}</h1>
-            <WkButton severity="primary">${zh ? '新建' : 'Create'}</WkButton>
+          <header class="m-generated-toolbar">
+            <h1 class="m-generated-title">${title}</h1>
+            <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
           </header>
-          <WkTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
+          <MTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
             <template #empty>
-              <p class="wk-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
+              <p class="m-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
             </template>
-          </WkTable>`
+          </MTable>`
 
-  const formContent = `          <header class="wk-generated-intro">
-            <h1 class="wk-generated-title">${title}</h1>
-            <p class="wk-generated-muted">${zh ? '填写表单并保存。' : 'Fill in the form and save.'}</p>
+  const formContent = `          <header class="m-generated-intro">
+            <h1 class="m-generated-title">${title}</h1>
+            <p class="m-generated-muted">${zh ? '填写表单并保存。' : 'Fill in the form and save.'}</p>
           </header>
-          <WkForm class="wk-generated-form" @submit.prevent="submit">
-            <WkFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
-              <WkInput v-model="model.name" fluid />
-            </WkFormItem>
-            <footer class="wk-generated-actions">
-              <WkButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</WkButton>
-              <WkButton severity="secondary">${zh ? '取消' : 'Cancel'}</WkButton>
+          <MForm class="m-generated-form" @submit.prevent="submit">
+            <MFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
+              <MInput v-model="model.name" fluid />
+            </MFormItem>
+            <footer class="m-generated-actions">
+              <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
+              <MButton severity="secondary">${zh ? '取消' : 'Cancel'}</MButton>
             </footer>
-          </WkForm>`
+          </MForm>`
 
-  const dashboardContent = `          <h1 class="wk-generated-title">${title}</h1>
-          <WkGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
-            <WkGridItem v-for="metric in metrics" :key="metric.label" :span="1">
-              <WkCard>
-                <p class="wk-generated-muted">{{ metric.label }}</p>
-                <strong class="wk-generated-metric">{{ metric.value }}</strong>
-              </WkCard>
-            </WkGridItem>
-          </WkGrid>
-          <WkCard :title="${zh ? '趋势概览' : 'Trend overview'}">
-            <WkSkeleton v-if="loading" height="8rem" />
-            <p v-else class="wk-generated-muted">${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}</p>
-          </WkCard>`
+  const dashboardContent = `          <h1 class="m-generated-title">${title}</h1>
+          <MGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
+            <MGridItem v-for="metric in metrics" :key="metric.label" :span="1">
+              <MCard>
+                <p class="m-generated-muted">{{ metric.label }}</p>
+                <strong class="m-generated-metric">{{ metric.value }}</strong>
+              </MCard>
+            </MGridItem>
+          </MGrid>
+          <MCard :title="${zh ? '趋势概览' : 'Trend overview'}">
+            <MSkeleton v-if="loading" height="8rem" />
+            <p v-else class="m-generated-muted">${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}</p>
+          </MCard>`
 
-  const detailContent = `          <header class="wk-generated-toolbar">
+  const detailContent = `          <header class="m-generated-toolbar">
             <div>
-              <h1 class="wk-generated-title">${title}</h1>
-              <WkTag value="${zh ? '正常' : 'Active'}" severity="success" />
+              <h1 class="m-generated-title">${title}</h1>
+              <MTag value="${zh ? '正常' : 'Active'}" severity="success" />
             </div>
-            <WkButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</WkButton>
+            <MButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</MButton>
           </header>
-          <WkCard>
-            <WkDivider />
-            <dl class="wk-generated-details">
+          <MCard>
+            <MDivider />
+            <dl class="m-generated-details">
               <div><dt>${zh ? '名称' : 'Name'}</dt><dd>${zh ? '示例资源' : 'Example resource'}</dd></div>
               <div><dt>${zh ? '更新时间' : 'Updated'}</dt><dd>—</dd></div>
             </dl>
-          </WkCard>`
+          </MCard>`
 
-  const settingsContent = `          <h1 class="wk-generated-title">${title}</h1>
-          <WkTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
-          <WkForm class="wk-generated-form" @submit.prevent="submit">
-            <WkFormItem label="${zh ? '显示名称' : 'Display name'}" name="name">
-              <WkInput v-model="model.name" fluid />
-            </WkFormItem>
-            <WkButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存设置' : 'Save settings'}</WkButton>
-          </WkForm>`
+  const settingsContent = `          <h1 class="m-generated-title">${title}</h1>
+          <MTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
+          <MForm class="m-generated-form" @submit.prevent="submit">
+            <MFormItem label="${zh ? '显示名称' : 'Display name'}" name="name">
+              <MInput v-model="model.name" fluid />
+            </MFormItem>
+            <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存设置' : 'Save settings'}</MButton>
+          </MForm>`
 
   let innerTemplate = ''
   if (isList) {
-    innerTemplate = `<WkConfigProvider :locale="zhCN">
-  <WkLayout has-sider class="wk-generated-page">
-    <WkLayoutSider class="wk-generated-sider" />
-    <WkLayout>
-      <WkLayoutHeader class="wk-generated-header">
-        <WkBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
-      </WkLayoutHeader>
-      <WkLayoutContent class="wk-generated-content">
+    innerTemplate = `<MConfigProvider :locale="zhCN">
+  <MLayout has-sider class="m-generated-page">
+    <MLayoutSider class="m-generated-sider" />
+    <MLayout>
+      <MLayoutHeader class="m-generated-header">
+        <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+      </MLayoutHeader>
+      <MLayoutContent class="m-generated-content">
 ${listContent}
-      </WkLayoutContent>
-    </WkLayout>
-  </WkLayout>
-</WkConfigProvider>`
+      </MLayoutContent>
+    </MLayout>
+  </MLayout>
+</MConfigProvider>`
   } else if (useLayoutShell) {
     const content = isDashboard ? dashboardContent : isDetail ? detailContent : isSettings ? settingsContent : formContent
-    innerTemplate = `<WkConfigProvider :locale="zhCN">
-  <WkLayout class="wk-generated-page">
-    <WkLayoutHeader class="wk-generated-header">
-      <WkBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
-    </WkLayoutHeader>
-    <WkLayoutContent class="wk-generated-content">
+    innerTemplate = `<MConfigProvider :locale="zhCN">
+  <MLayout class="m-generated-page">
+    <MLayoutHeader class="m-generated-header">
+      <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+    </MLayoutHeader>
+    <MLayoutContent class="m-generated-content">
 ${content}
-    </WkLayoutContent>
-  </WkLayout>
-</WkConfigProvider>`
+    </MLayoutContent>
+  </MLayout>
+</MConfigProvider>`
   } else if (isAuth) {
-    innerTemplate = `<WkConfigProvider :locale="zhCN">
-  <main class="wk-generated-page wk-generated-auth">
-    <WkCard>
-      <WkForm label-position="top" @submit.prevent="submit">
-        <WkFormItem label="${zh ? '邮箱' : 'Email'}" name="email">
-          <WkInput type="email" fluid />
-        </WkFormItem>
-        <WkFormItem label="${zh ? '密码' : 'Password'}" name="password">
-          <WkInput type="password" fluid />
-        </WkFormItem>
-        <WkButton native-type="submit" severity="primary" :loading="loading" fluid>${zh ? '登录' : 'Sign in'}</WkButton>
-      </WkForm>
-    </WkCard>
+    innerTemplate = `<MConfigProvider :locale="zhCN">
+  <main class="m-generated-page m-generated-auth">
+    <MCard>
+      <MForm label-position="top" @submit.prevent="submit">
+        <MFormItem label="${zh ? '邮箱' : 'Email'}" name="email">
+          <MInput type="email" fluid />
+        </MFormItem>
+        <MFormItem label="${zh ? '密码' : 'Password'}" name="password">
+          <MInput type="password" fluid />
+        </MFormItem>
+        <MButton native-type="submit" severity="primary" :loading="loading" fluid>${zh ? '登录' : 'Sign in'}</MButton>
+      </MForm>
+    </MCard>
   </main>
-</WkConfigProvider>`
+</MConfigProvider>`
   } else if (isEmpty) {
-    innerTemplate = `<WkConfigProvider :locale="zhCN">
-  <main class="wk-generated-page">
-    <WkCard>
-      <WkDataView :value="[]">
+    innerTemplate = `<MConfigProvider :locale="zhCN">
+  <main class="m-generated-page">
+    <MCard>
+      <MDataView :value="[]">
         <template #empty>
-          <div class="wk-generated-empty">
+          <div class="m-generated-empty">
             <strong>${zh ? '暂无内容' : 'Nothing here yet'}</strong>
-            <p class="wk-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
-            <WkButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</WkButton>
+            <p class="m-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
+            <MButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
           </div>
         </template>
-      </WkDataView>
-    </WkCard>
+      </MDataView>
+    </MCard>
   </main>
-</WkConfigProvider>`
+</MConfigProvider>`
   } else if (isWizard) {
-    innerTemplate = `<WkConfigProvider :locale="zhCN">
-  <main class="wk-generated-page">
-    <WkCard>
-      <WkStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
-      <WkForm label-position="top" @submit.prevent="submit">
-        <WkFormItem label="${zh ? '名称' : 'Name'}" name="name"><WkInput v-model="model.name" fluid /></WkFormItem>
-        <WkButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</WkButton>
-      </WkForm>
-    </WkCard>
+    innerTemplate = `<MConfigProvider :locale="zhCN">
+  <main class="m-generated-page">
+    <MCard>
+      <MStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
+      <MForm label-position="top" @submit.prevent="submit">
+        <MFormItem label="${zh ? '名称' : 'Name'}" name="name"><MInput v-model="model.name" fluid /></MFormItem>
+        <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</MButton>
+      </MForm>
+    </MCard>
   </main>
-</WkConfigProvider>`
+</MConfigProvider>`
   } else {
-    innerTemplate = `<WkConfigProvider :locale="zhCN">
-  <main class="wk-generated-page">
-    <WkCard>
-      <p class="wk-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
-      <WkTag value="${zh ? '示例' : 'Example'}" severity="info" />
-    </WkCard>
+    innerTemplate = `<MConfigProvider :locale="zhCN">
+  <main class="m-generated-page">
+    <MCard>
+      <p class="m-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
+      <MTag value="${zh ? '示例' : 'Example'}" severity="info" />
+    </MCard>
   </main>
-</WkConfigProvider>`
+</MConfigProvider>`
   }
 
   const template = `<template>
   ${innerTemplate}
-  <p v-if="error" role="alert" class="wk-generated-error">${'{{ error }}'}</p>
+  <p v-if="error" role="alert" class="m-generated-error">${'{{ error }}'}</p>
 </template>`
 
   const style = `<style scoped>
-.wk-generated-page { min-height: 100vh; background: var(--wk-color-surface); }
-.wk-generated-sider { border-right: 1px solid var(--wk-color-border); }
-.wk-generated-header { padding: var(--wk-space-4) var(--wk-space-6); border-bottom: 1px solid var(--wk-color-border); }
-.wk-generated-content { padding: var(--wk-space-6); display: flex; flex-direction: column; gap: var(--wk-space-4); }
-.wk-generated-filters { padding: var(--wk-space-4); background: color-mix(in srgb, var(--wk-color-border) 25%, transparent); border-radius: var(--wk-radius-md); border: 1px solid var(--wk-color-border); }
-.wk-generated-toolbar, .wk-generated-actions { display: flex; gap: var(--wk-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.wk-generated-title { margin: 0; font-size: var(--wk-font-size-lg); font-weight: 600; color: var(--wk-color-text); }
-.wk-generated-intro { margin-bottom: var(--wk-space-2); }
-.wk-generated-form { padding: var(--wk-space-6); border: 1px solid var(--wk-color-border); border-radius: var(--wk-radius-md); box-shadow: var(--wk-shadow-sm); }
-.wk-generated-auth { display: grid; place-items: center; padding: var(--wk-space-8); max-width: 24rem; margin: 0 auto; }
-.wk-generated-metric { display: block; font-size: var(--wk-font-size-lg); margin: var(--wk-space-2) 0; }
-.wk-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--wk-space-4); margin: 0; }
-.wk-generated-details dt { color: var(--wk-color-text-muted); font-size: var(--wk-font-size-sm); }
-.wk-generated-details dd { margin: var(--wk-space-1) 0 0; }
-.wk-generated-empty { display: grid; gap: var(--wk-space-2); justify-items: center; padding: var(--wk-space-8); text-align: center; }
-.wk-generated-muted { margin: 0; color: var(--wk-color-text-muted); }
-.wk-generated-error { color: var(--wk-color-danger); padding: 0 var(--wk-space-6); }
-@media (max-width: 48rem) { .wk-generated-content { padding: var(--wk-space-4); } .wk-generated-details { grid-template-columns: 1fr; } }
+.m-generated-page { min-height: 100vh; background: var(--m-color-surface); }
+.m-generated-sider { border-right: 1px solid var(--m-color-border); }
+.m-generated-header { padding: var(--m-space-4) var(--m-space-6); border-bottom: 1px solid var(--m-color-border); }
+.m-generated-content { padding: var(--m-space-6); display: flex; flex-direction: column; gap: var(--m-space-4); }
+.m-generated-filters { padding: var(--m-space-4); background: color-mix(in srgb, var(--m-color-border) 25%, transparent); border-radius: var(--m-radius-md); border: 1px solid var(--m-color-border); }
+.m-generated-toolbar, .m-generated-actions { display: flex; gap: var(--m-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.m-generated-title { margin: 0; font-size: var(--m-font-size-lg); font-weight: 600; color: var(--m-color-text); }
+.m-generated-intro { margin-bottom: var(--m-space-2); }
+.m-generated-form { padding: var(--m-space-6); border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); box-shadow: var(--m-shadow-sm); }
+.m-generated-auth { display: grid; place-items: center; padding: var(--m-space-8); max-width: 24rem; margin: 0 auto; }
+.m-generated-metric { display: block; font-size: var(--m-font-size-lg); margin: var(--m-space-2) 0; }
+.m-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--m-space-4); margin: 0; }
+.m-generated-details dt { color: var(--m-color-text-muted); font-size: var(--m-font-size-sm); }
+.m-generated-details dd { margin: var(--m-space-1) 0 0; }
+.m-generated-empty { display: grid; gap: var(--m-space-2); justify-items: center; padding: var(--m-space-8); text-align: center; }
+.m-generated-muted { margin: 0; color: var(--m-color-text-muted); }
+.m-generated-error { color: var(--m-color-danger); padding: 0 var(--m-space-6); }
+@media (max-width: 48rem) { .m-generated-content { padding: var(--m-space-4); } .m-generated-details { grid-template-columns: 1fr; } }
 </style>`
   return { script, template, style }
 }
@@ -342,7 +342,7 @@ function apiCoverage(component: ComponentRecord, examples: ComponentRecord['exam
   }
   const eventHas = (name: string) => source.includes(`@${name}`) || source.includes(`@${toKebab(name)}`)
   const slotHas = (name: string) => source.includes(`#${name}`) ||
-    (name === 'default' && source.includes('<Wk') && source.includes('</Wk>'))
+    (name === 'default' && source.includes('<M') && source.includes('</M>'))
   const summary = (items: string[], predicate: (item: string) => boolean) => ({
     total: items.length,
     covered: items.filter(predicate).length,
@@ -789,8 +789,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
       nextStep: locale === 'en-US'
-        ? `Read goldenPage (${best.pattern.goldenPage || 'none'}) and matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file aligned with WkLayout shell.`
-        : `先阅读 goldenPage（${best.pattern.goldenPage || '无'}）并用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true（已对齐 WkLayout 骨架）。`,
+        ? `Read goldenPage (${best.pattern.goldenPage || 'none'}) and matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file aligned with MLayout shell.`
+        : `先阅读 goldenPage（${best.pattern.goldenPage || '无'}）并用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true（已对齐 MLayout 骨架）。`,
     }
     if (args.includeScaffold) {
       const code = generatedPageCode(best.pattern.id, args.intent, locale)
@@ -813,28 +813,28 @@ export function createToolHandlers(catalog = loadCatalog()) {
     if (locale === 'zh-CN') return textResult(designRules)
     return textResult({
       tokens: {
-        colors: ['--wk-color-primary', '--wk-color-surface', '--wk-color-text', '--wk-color-border'],
-        spacing: '--wk-space-*',
-        radius: '--wk-radius-sm/md/lg',
-        typography: '--wk-font-size-xs/sm/md/lg',
-        motion: '--wk-motion-fast/normal',
+        colors: ['--m-color-primary', '--m-color-surface', '--m-color-text', '--m-color-border'],
+        spacing: '--m-space-*',
+        radius: '--m-radius-sm/md/lg',
+        typography: '--m-font-size-xs/sm/md/lg',
+        motion: '--m-motion-fast/normal',
       },
       actions: {
-        primary: { component: 'WkButton', props: ['omit severity or use primary'] },
-        secondary: { component: 'WkButton', props: ['severity="secondary"', 'outlined or text'] },
-        destructive: { component: 'WkButton', props: ['severity="danger"'], requiresConfirmation: true },
-        cancel: { component: 'WkButton', props: ['severity="secondary"', 'text'] },
+        primary: { component: 'MButton', props: ['omit severity or use primary'] },
+        secondary: { component: 'MButton', props: ['severity="secondary"', 'outlined or text'] },
+        destructive: { component: 'MButton', props: ['severity="danger"'], requiresConfirmation: true },
+        cancel: { component: 'MButton', props: ['severity="secondary"', 'text'] },
       },
-      status: { component: 'WkTag', mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' } },
+      status: { component: 'MTag', mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' } },
       feedback: {
         default: 'message',
         message: { when: ['single-line action result', 'save/delete/create confirmations'] },
         toast: { when: ['summary + detail', 'async or background notifications'] },
-        inlineMessage: { component: 'WkMessage', when: ['persistent form/auth errors'] },
+        inlineMessage: { component: 'MMessage', when: ['persistent form/auth errors'] },
         doc: 'docs/feedback-message-vs-toast.md',
       },
       global: [
-        'Prefer library components and --wk-* tokens; do not maintain a second color system.',
+        'Prefer library components and --m-* tokens; do not maintain a second color system.',
         'Default action feedback to message; do not use toast with summary-only text.',
         'Icon-only buttons must provide aria-label or ariaLabel.',
         'Form controls must have a visible label or an equivalent accessible name.',
@@ -936,9 +936,9 @@ export function createToolHandlers(catalog = loadCatalog()) {
     return textResult({
       library: catalog.library,
       environment: args.environment || 'vue3-vite',
-      install: 'pnpm add @wise-kit/ui',
+      install: 'pnpm add morya-ui',
       peer: 'vue@^3.3.0',
-      styles: "import '@wise-kit/ui/styles.css'",
+      styles: "import 'morya-ui/styles.css'",
       guides: {
         introduction: pickMarkdown(intro),
         quickStart: pickMarkdown(quickStart),
@@ -961,8 +961,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
     const reports = usages.slice(0, 10).map((usage) => {
       const code = usage.code || ''
-      const componentTagMatch = code.match(/<(Wk)([A-Z][A-Za-z0-9]*)\b/)
-      const componentImportMatch = code.match(/import\s*\{[^}]*\b(Wk)([A-Z][A-Za-z0-9]*)\b/)
+      const componentTagMatch = code.match(/<(M)([A-Z][A-Za-z0-9]*)\b/)
+      const componentImportMatch = code.match(/import\s*\{[^}]*\b(M)([A-Z][A-Za-z0-9]*)\b/)
       const componentName =
         usage.component ||
         (componentTagMatch ? `${componentTagMatch[1]}${componentTagMatch[2]}` : undefined) ||
@@ -987,16 +987,16 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
       const issues: Array<{ type: string; message: string }> = []
 
-      if (code && !code.includes('@wise-kit/ui') && /import\s+/.test(code)) {
-        if (!/from\s+['"]@wise-kit\/ui['"]/.test(code)) {
+      if (code && !code.includes('morya-ui') && /import\s+/.test(code)) {
+        if (!/from\s+['"]morya-ui['"]/.test(code)) {
           issues.push({
             type: 'import',
-            message: `Import should come from '@wise-kit/ui' (expected ${component.exportName}).`,
+            message: `Import should come from 'morya-ui' (expected ${component.exportName}).`,
           })
         }
       }
 
-      const attrRe = /<Wk[A-Z][A-Za-z0-9]*\b([^>]*)>/g
+      const attrRe = /<M[A-Z][A-Za-z0-9]*\b([^>]*)>/g
       let tagMatch = attrRe.exec(code)
       while (tagMatch !== null) {
         const attrs = tagMatch[1] || ''

@@ -1,5 +1,5 @@
 /** Naive-compatible breakpoint map (min-width, px). */
-export const WK_BREAKPOINTS = {
+export const M_BREAKPOINTS = {
   xs: 0,
   s: 640,
   m: 1024,
@@ -8,7 +8,7 @@ export const WK_BREAKPOINTS = {
   '2xl': 1920,
 } as const
 
-export type WkBreakpoint = keyof typeof WK_BREAKPOINTS
+export type MBreakpoint = keyof typeof M_BREAKPOINTS
 
 /**
  * Parse responsive prop values such as `2`, `"2"`, or `"1 s:2 m:3 l:4"`.
@@ -35,10 +35,10 @@ export function parseResponsiveValue(
       if (Number.isFinite(n)) base = n
       continue
     }
-    const key = part.slice(0, colon) as WkBreakpoint
+    const key = part.slice(0, colon) as MBreakpoint
     const n = Number(part.slice(colon + 1))
     if (!Number.isFinite(n)) continue
-    const min = WK_BREAKPOINTS[key]
+    const min = M_BREAKPOINTS[key]
     if (min == null) continue
     if (queryWidth == null) {
       if (min === 0) matched = n

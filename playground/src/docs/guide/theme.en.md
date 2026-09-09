@@ -6,14 +6,14 @@ description: Light and dark themes, design tokens, and motion preferences.
 
 # Theme
 
-Theme support is built into `@wise-kit/ui`. Components consume semantic CSS variables (`--wk-*`) and do not keep a second palette.
+Theme support is built into `morya-ui`. Components consume semantic CSS variables (`--m-*`) and do not keep a second palette.
 
-Importing `@wise-kit/ui/styles.css` already includes these variables. Theme JS APIs (`useTheme` and friends) come from the same package.
+Importing `morya-ui/styles.css` already includes these variables. Theme JS APIs (`useTheme` and friends) come from the same package.
 
 ## Light / dark
 
 ```ts
-import { useTheme } from '@wise-kit/ui'
+import { useTheme } from 'morya-ui'
 
 const { isDark, setTheme, toggleTheme } = useTheme()
 
@@ -29,36 +29,36 @@ See the full [Design tokens](/docs/design-tokens) catalog (searchable, grouped b
 
 | Token | Use |
 | --- | --- |
-| `--wk-color-primary` | Brand color |
-| `--wk-color-surface` | Page background |
-| `--wk-color-text` | Body text |
-| `--wk-color-border` | Dividers / strokes |
-| `--wk-radius-sm/md/lg` | Radius scale |
-| `--wk-space-*` | Spacing scale |
-| `--wk-font-size-xs/sm/md/lg` | Component type scale |
-| `--wk-opacity-disabled` | Disabled opacity |
-| `--wk-z-base` / `--wk-z-overlay` / `--wk-z-dropdown` / `--wk-z-toast` | Overlay stacking (`zIndex` writes `--wk-z-base`) |
-| `--wk-menu-min-width` / `--wk-control-affix-*` | Menu min width, input clear-button size |
-| `--wk-motion-fast/normal` | Transition duration |
+| `--m-color-primary` | Brand color |
+| `--m-color-surface` | Page background |
+| `--m-color-text` | Body text |
+| `--m-color-border` | Dividers / strokes |
+| `--m-radius-sm/md/lg` | Radius scale |
+| `--m-space-*` | Spacing scale |
+| `--m-font-size-xs/sm/md/lg` | Component type scale |
+| `--m-opacity-disabled` | Disabled opacity |
+| `--m-z-base` / `--m-z-overlay` / `--m-z-dropdown` / `--m-z-toast` | Overlay stacking (`zIndex` writes `--m-z-base`) |
+| `--m-menu-min-width` / `--m-control-affix-*` | Menu min width, input clear-button size |
+| `--m-motion-fast/normal` | Transition duration |
 
 ## Density
 
 ```ts
-import { useDensity } from '@wise-kit/ui'
+import { useDensity } from 'morya-ui'
 
 const { preference, setDensity } = useDensity()
 setDensity('compact') // 'compact' | 'comfortable' | 'spacious'
 ```
 
-This writes `data-wk-density` on `document.documentElement` and scales `--wk-space-*` plus `--wk-control-height-*`.  
-At the app level use `createWiseKit({ density: 'compact' })` or `<WkConfigProvider density="compact">`.
+This writes `data-m-density` on `document.documentElement` and scales `--m-space-*` plus `--m-control-height-*`.  
+At the app level use `createMoryaUI({ density: 'compact' })` or `<MConfigProvider density="compact">`.
 
 The Components page sidebar Theme panel can temporarily change accent, radius, and density for local preview.
 
 ## Motion preference
 
 ```ts
-import { useMotion } from '@wise-kit/ui'
+import { useMotion } from 'morya-ui'
 
 const { preference, setMotion } = useMotion()
 setMotion('full') // 'full' | 'reduced' | 'none'
@@ -74,19 +74,19 @@ Default control heights follow a compact rhythm:
 
 | Size | Height | Font size |
 | --- | --- | --- |
-| `small` | `28px` (`--wk-control-height-small`) | `14px` |
+| `small` | `28px` (`--m-control-height-small`) | `14px` |
 | Default / `medium` | `34px` | `14px` |
 | `large` | `40px` | `15px` |
 
 Focus uses a **brand border + 2px tinted glow** (not an outset outline ring):
 
 ```css
-border-color: var(--wk-color-primary-hover);
-box-shadow: var(--wk-focus-shadow); /* 0 0 0 2px primary@20% */
+border-color: var(--m-color-primary-hover);
+box-shadow: var(--m-focus-shadow); /* 0 0 0 2px primary@20% */
 ```
 
-Related tokens: `--wk-radius-control`, `--wk-control-padding-x-*`, `--wk-button-padding-x-*`, `--wk-focus-shadow` / `--wk-focus-shadow-danger`.
+Related tokens: `--m-radius-control`, `--m-control-padding-x-*`, `--m-button-padding-x-*`, `--m-focus-shadow` / `--m-focus-shadow-danger`.
 
 ## With ConfigProvider
 
-Theme switching is the visual layer. `WkConfigProvider` / `createWiseKit` own size, copy, overlay mount, and other behavioral defaults. Use both together; see [Configuration](/docs/config).
+Theme switching is the visual layer. `MConfigProvider` / `createMoryaUI` own size, copy, overlay mount, and other behavioral defaults. Use both together; see [Configuration](/docs/config).

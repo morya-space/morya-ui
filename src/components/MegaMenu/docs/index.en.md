@@ -11,14 +11,14 @@ Horizontal top navigation. Sub-links render in a **multi-column panel**—suited
 ## Import
 
 ```ts
-import { WkMegaMenu, type MegaMenuItem } from '@wise-kit/ui'
+import { MMegaMenu, type MegaMenuItem } from 'morya-ui'
 ```
 
 ## Basic usage
 
 ```vue preview
 <script setup lang="ts">
-import { WkMegaMenu } from '@wise-kit/ui'
+import { MMegaMenu } from 'morya-ui'
 
 const model = [
   {
@@ -33,7 +33,7 @@ const model = [
 </script>
 
 <template>
-  <WkMegaMenu :model="model" />
+  <MMegaMenu :model="model" />
 </template>
 ```
 

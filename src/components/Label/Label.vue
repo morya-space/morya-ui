@@ -11,7 +11,7 @@ const forId = computed(() => props.htmlFor ?? props.for)
 </script>
 
 <template>
-  <label class="wk-label" :for="forId" v-bind="attrs">
+  <label class="m-label" :for="forId" v-bind="attrs">
     <slot />
   </label>
 </template>

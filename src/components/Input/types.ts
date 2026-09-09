@@ -1,4 +1,4 @@
-import type { WkInputVariant, WkSizeInput } from '../../shared/types'
+import type { MInputVariant, MSizeInput } from '../../shared/types'
 
 export interface InputProps {
   modelValue?: string
@@ -11,9 +11,9 @@ export interface InputProps {
   id?: string
   type?: 'text' | 'email' | 'password' | 'search' | 'url' | 'tel'
   /** Size aligned with InputText; also accepts legacy sm/md/lg. */
-  size?: WkSizeInput
+  size?: MSizeInput
   /** Visual variant; default outlined. */
-  variant?: WkInputVariant
+  variant?: MInputVariant
   /** Full-width input. */
   fluid?: boolean
   disabled?: boolean

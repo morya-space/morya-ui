@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type {Component} from 'vue';
-import type { WkShowPasswordOn } from '../../shared/componentDefaults'
+import type { MShowPasswordOn } from '../../shared/componentDefaults'
 import type { IconName } from '../Icon/types'
 import type { InputPasswordProps } from './types'
 import {  computed, onBeforeUnmount, ref, useAttrs } from 'vue'
-import { formatLocale, useWkLocale } from '../../locale'
+import { formatLocale, useMLocale } from '../../locale'
 import {
   useComponentDefaults,
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
+import { useMId } from '../../shared/useMId'
 import { resolveIconSizeFromClass } from '../../shared/types'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -38,10 +38,10 @@ const emit = defineEmits<{
 }>()
 const attrs = useAttrs()
 const defaults = useComponentDefaults('InputPassword')
-const locale = useWkLocale()
+const locale = useMLocale()
 const unmasked = ref(false)
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useWkId('wk-password')
+const autoInputId = useMId('m-password')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputPassword', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
@@ -49,8 +49,8 @@ const resolvedVariant = useConfiguredVariant('InputPassword', () => props.varian
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
 const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
-const resolvedShowPasswordOn = computed<WkShowPasswordOn>(
-  () => props.showPasswordOn ?? (defaults.value.showPasswordOn as WkShowPasswordOn | undefined) ?? 'click',
+const resolvedShowPasswordOn = computed<MShowPasswordOn>(
+  () => props.showPasswordOn ?? (defaults.value.showPasswordOn as MShowPasswordOn | undefined) ?? 'click',
 )
 
 const showIconName = computed(() => (typeof props.showIcon === 'string' ? (props.showIcon as IconName) : undefined))
@@ -102,14 +102,14 @@ const describedBy = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wk-password',
-  `wk-password--${sizeClass.value}`,
+  'm-password',
+  `m-password--${sizeClass.value}`,
   {
-    'wk-password--filled': resolvedVariant.value === 'filled',
-    'wk-password--fluid': resolvedFluid.value,
-    'wk-password--invalid': props.invalid,
-    'wk-password--disabled': props.disabled,
-    'wk-password--toggle': props.toggleMask,
+    'm-password--filled': resolvedVariant.value === 'filled',
+    'm-password--fluid': resolvedFluid.value,
+    'm-password--invalid': props.invalid,
+    'm-password--disabled': props.disabled,
+    'm-password--toggle': props.toggleMask,
   },
 ])
 
@@ -194,14 +194,14 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="wk-password-field" :class="{ 'wk-password-field--fluid': resolvedFluid }">
-    <label v-if="label" class="wk-password-field__label" :for="inputId">{{ label }}</label>
+  <div class="m-password-field" :class="{ 'm-password-field--fluid': resolvedFluid }">
+    <label v-if="label" class="m-password-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <input
         v-bind="attrs"
         :id="inputId"
         ref="inputElement"
-        class="wk-password__input"
+        class="m-password__input"
         :type="unmasked ? 'text' : 'password'"
         :value="modelValue"
         :disabled="disabled"
@@ -217,17 +217,17 @@ defineExpose({ focus, blur, select })
       >
       <button
         v-if="showClear"
-        class="wk-password__clear"
+        class="m-password__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
         @click="clear"
       >
-        <WkIcon name="close" :size="iconSize" />
+        <MIcon name="close" :size="iconSize" />
       </button>
       <button
         v-if="toggleMask"
-        class="wk-password__toggle"
+        class="m-password__toggle"
         type="button"
         :aria-label="unmasked ? locale.hidePassword : locale.showPassword"
         :aria-pressed="unmasked"
@@ -237,21 +237,21 @@ defineExpose({ focus, blur, select })
         @keydown="onToggleKeydown"
       >
         <slot v-if="unmasked" name="hideIcon" :unmasked="unmasked">
-          <WkIcon v-if="hideIconName" :name="hideIconName" :size="iconSize" />
-          <component :is="hideIconComponent" v-else-if="hideIconComponent" class="wk-control-affix-icon__graphic" />
+          <MIcon v-if="hideIconName" :name="hideIconName" :size="iconSize" />
+          <component :is="hideIconComponent" v-else-if="hideIconComponent" class="m-control-affix-icon__graphic" />
         </slot>
         <slot v-else name="showIcon" :unmasked="unmasked">
-          <WkIcon v-if="showIconName" :name="showIconName" :size="iconSize" />
-          <component :is="showIconComponent" v-else-if="showIconComponent" class="wk-control-affix-icon__graphic" />
+          <MIcon v-if="showIconName" :name="showIconName" :size="iconSize" />
+          <component :is="showIconComponent" v-else-if="showIconComponent" class="m-control-affix-icon__graphic" />
         </slot>
       </button>
     </div>
-    <div v-if="(feedback && strength !== 'empty') || resolvedShowCount" class="wk-password-field__meta">
+    <div v-if="(feedback && strength !== 'empty') || resolvedShowCount" class="m-password-field__meta">
       <span
         v-if="feedback && strength !== 'empty'"
         :id="`${inputId}-feedback`"
-        class="wk-password__feedback"
-        :class="`wk-password__feedback--${strength}`"
+        class="m-password__feedback"
+        :class="`m-password__feedback--${strength}`"
         role="meter"
         :aria-valuemin="0"
         :aria-valuemax="4"
@@ -263,7 +263,7 @@ defineExpose({ focus, blur, select })
       <span
         v-if="resolvedShowCount"
         :id="`${inputId}-count`"
-        class="wk-password-field__count"
+        class="m-password-field__count"
         aria-live="polite"
       >
         {{ countText }}

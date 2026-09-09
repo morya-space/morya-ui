@@ -68,7 +68,7 @@ const contributingUrl = computed(() =>
 
 .site-footer__brand {
   align-items: center;
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
   display: inline-flex;
   font-family: var(--docs-display);
   font-size: 0.88rem;
@@ -84,7 +84,7 @@ const contributingUrl = computed(() =>
 }
 
 .site-footer__version {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.68rem;
   font-weight: 500;
@@ -98,18 +98,18 @@ const contributingUrl = computed(() =>
 }
 
 .site-footer__nav a {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.78rem;
   font-weight: 500;
   text-decoration: none;
 }
 
 .site-footer__nav a:hover {
-  color: var(--wk-color-primary);
+  color: var(--m-color-primary);
 }
 
 .site-footer__meta {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.64rem;
   letter-spacing: 0.03em;

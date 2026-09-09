@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DropdownItem } from './types'
 import { ref } from 'vue'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
 import DropdownNodes from './DropdownNodes.vue'
 
@@ -46,9 +46,9 @@ function onLeave() {
 
 <template>
   <template v-for="(item, index) in items" :key="itemKey(item, index)">
-    <div v-if="isDivider(item)" class="wk-dropdown__separator" role="separator" />
-    <div v-else-if="isGroup(item)" class="wk-dropdown__group">
-      <div class="wk-dropdown__group-label">
+    <div v-if="isDivider(item)" class="m-dropdown__separator" role="separator" />
+    <div v-else-if="isGroup(item)" class="m-dropdown__group">
+      <div class="m-dropdown__group-label">
         {{ item.label }}
       </div>
       <DropdownNodes
@@ -61,29 +61,29 @@ function onLeave() {
     </div>
     <div
       v-else-if="item.items?.length"
-      class="wk-dropdown__submenu-wrap"
+      class="m-dropdown__submenu-wrap"
       @mouseenter="onEnter(item, index)"
       @mouseleave="onLeave"
     >
       <button
         type="button"
-        class="wk-dropdown__item wk-dropdown__item--parent"
-        :class="{ 'wk-dropdown__item--highlighted': highlightedValue === item.value }"
+        class="m-dropdown__item wk-dropdown__item--parent"
+        :class="{ 'm-dropdown__item--highlighted': highlightedValue === item.value }"
         role="menuitem"
         :disabled="item.disabled"
         :aria-haspopup="true"
       >
-        <span v-if="iconOf(item)" class="wk-dropdown__icon" aria-hidden="true">
-          <WkIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="iconOf(item)" class="m-dropdown__icon" aria-hidden="true">
+          <MIcon :name="iconOf(item)!" size="sm" />
         </span>
         <slot name="item" :item="item">
           {{ item.label }}
         </slot>
-        <span class="wk-dropdown__caret" aria-hidden="true">
-          <WkIcon name="chevron-right" size="sm" />
+        <span class="m-dropdown__caret" aria-hidden="true">
+          <MIcon name="chevron-right" size="sm" />
         </span>
       </button>
-      <div v-if="openValue === itemKey(item, index)" class="wk-dropdown__submenu" role="menu">
+      <div v-if="openValue === itemKey(item, index)" class="m-dropdown__submenu" role="menu">
         <DropdownNodes
           :items="item.items"
           :highlighted-value="highlightedValue"
@@ -95,15 +95,15 @@ function onLeave() {
     <button
       v-else
       type="button"
-      class="wk-dropdown__item"
-      :class="{ 'wk-dropdown__item--highlighted': highlightedValue === item.value }"
+      class="m-dropdown__item"
+      :class="{ 'm-dropdown__item--highlighted': highlightedValue === item.value }"
       role="menuitem"
       :disabled="item.disabled"
       @mouseenter="!item.disabled && $emit('highlight', item.value)"
       @click="$emit('select', item)"
     >
-      <span v-if="iconOf(item)" class="wk-dropdown__icon" aria-hidden="true">
-        <WkIcon :name="iconOf(item)!" size="sm" />
+      <span v-if="iconOf(item)" class="m-dropdown__icon" aria-hidden="true">
+        <MIcon :name="iconOf(item)!" size="sm" />
       </span>
       <slot name="item" :item="item">
         {{ item.label }}

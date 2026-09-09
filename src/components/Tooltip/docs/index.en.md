@@ -11,24 +11,24 @@ Short hint for a trigger element, suited to icon buttons or truncated text.
 ## Import
 
 ```ts
-import { WkButton, WkTooltip } from '@wise-kit/ui'
+import { MButton, MTooltip } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkTooltip } from '@wise-kit/ui'
+import { MButton, MTooltip } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WkTooltip content="Save changes" placement="top">
-      <WkButton icon="check" icon-only aria-label="Save" />
-    </WkTooltip>
-    <WkTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
-      <WkButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
-    </WkTooltip>
+    <MTooltip content="Save changes" placement="top">
+      <MButton icon="check" icon-only aria-label="Save" />
+    </MTooltip>
+    <MTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
+      <MButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
+    </MTooltip>
   </div>
 </template>
 ```

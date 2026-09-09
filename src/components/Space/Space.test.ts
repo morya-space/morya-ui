@@ -1,28 +1,28 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import WkSpace from './Space.vue'
+import MSpace from './Space.vue'
 
-describe('wkSpace', () => {
+describe('muSpace', () => {
   it('wraps children by default', () => {
-    const wrapper = mount(WkSpace, {
+    const wrapper = mount(MSpace, {
       slots: { default: '<span class="a">A</span><span class="b">B</span>' },
     })
-    expect(wrapper.classes()).toContain('wk-space')
-    expect(wrapper.findAll('.wk-space__item')).toHaveLength(2)
+    expect(wrapper.classes()).toContain('m-space')
+    expect(wrapper.findAll('.m-space__item')).toHaveLength(2)
     expect(wrapper.find('.a').exists()).toBe(true)
   })
 
   it('can skip item wrapping', () => {
-    const wrapper = mount(WkSpace, {
+    const wrapper = mount(MSpace, {
       props: { wrapItem: false },
       slots: { default: '<span class="a">A</span><span class="b">B</span>' },
     })
-    expect(wrapper.findAll('.wk-space__item')).toHaveLength(0)
+    expect(wrapper.findAll('.m-space__item')).toHaveLength(0)
     expect(wrapper.findAll('.a, .b')).toHaveLength(2)
   })
 
   it('supports vertical layout', () => {
-    const wrapper = mount(WkSpace, {
+    const wrapper = mount(MSpace, {
       props: { vertical: true, size: [8, 16] },
       slots: { default: '<span>A</span>' },
     })
@@ -31,9 +31,9 @@ describe('wkSpace', () => {
   })
 
   it('defaults gap to the medium token', () => {
-    const wrapper = mount(WkSpace, {
+    const wrapper = mount(MSpace, {
       slots: { default: '<span>A</span>' },
     })
-    expect(wrapper.element.style.gap).toBe('var(--wk-space-3)')
+    expect(wrapper.element.style.gap).toBe('var(--m-space-3)')
   })
 })

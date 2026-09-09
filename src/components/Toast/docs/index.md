@@ -17,34 +17,34 @@ description: 四角浮层通知，支持 API 与受控列表。
 ## 引入
 
 ```ts
-import { toast, useToast, WkToast } from '@wise-kit/ui'
+import { toast, useToast, MToast } from 'morya-ui'
 ```
 
 ## API
 
 ```vue preview
 <script setup lang="ts">
-import { toast, WkButton } from '@wise-kit/ui'
+import { toast, MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton
+    <MButton
       label="Success"
       severity="success"
       @click="toast.success({ summary: '已保存', detail: '变更已生效。' })"
     />
-    <WkButton
+    <MButton
       label="Info"
       severity="info"
       @click="toast.info({ summary: '提示', detail: '可以继续操作。' })"
     />
-    <WkButton
+    <MButton
       label="Warn"
       severity="warn"
       @click="toast.warn({ summary: '注意', detail: '请再核对一次。' })"
     />
-    <WkButton
+    <MButton
       label="Error"
       severity="danger"
       @click="toast.error({ summary: '失败', detail: '请稍后重试。' })"
@@ -59,7 +59,7 @@ import { toast, WkButton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { toast, WkButton } from '@wise-kit/ui'
+import { toast, MButton } from 'morya-ui'
 import { h } from 'vue'
 
 function showRich() {
@@ -72,7 +72,7 @@ function showRich() {
 </script>
 
 <template>
-  <WkButton label="富文本 Toast" @click="showRich" />
+  <MButton label="富文本 Toast" @click="showRich" />
 </template>
 ```
 
@@ -82,8 +82,8 @@ function showRich() {
 
 ```vue preview
 <script setup lang="ts">
-import type { ToastMessage } from '@wise-kit/ui'
-import { WkButton, WkToast } from '@wise-kit/ui'
+import type { ToastMessage } from 'morya-ui'
+import { MButton, MToast } from 'morya-ui'
 import { ref } from 'vue'
 
 const messages = ref<ToastMessage[]>([])
@@ -103,10 +103,10 @@ function onClose(message: ToastMessage) {
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <WkButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
+    <MButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
+    <MButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
   </div>
-  <WkToast :messages="messages" position="top-right" @close="onClose" />
+  <MToast :messages="messages" position="top-right" @close="onClose" />
 </template>
 ```
 

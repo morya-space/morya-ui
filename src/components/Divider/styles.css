@@ -1,48 +1,48 @@
-.wk-divider {
+.m-divider {
     align-items: center;
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     display: flex;
-    font-family: var(--wk-font-sans);
-    gap: var(--wk-space-3);
+    font-family: var(--m-font-sans);
+    gap: var(--m-space-3);
     width: 100%;
 }
 
-.wk-divider__line {
-    background: var(--wk-color-border);
+.m-divider__line {
+    background: var(--m-color-border);
     border: 0;
     flex: 1 1 0;
     height: 1px;
     min-width: 0;
 }
 
-.wk-divider__label {
-    font-size: var(--wk-font-size-xs);
+.m-divider__label {
+    font-size: var(--m-font-size-xs);
     white-space: nowrap;
 }
 
-.wk-divider--dashed .wk-divider__line,
-.wk-divider--dotted .wk-divider__line {
+.m-divider--dashed .m-divider__line,
+.m-divider--dotted .m-divider__line {
     background: transparent;
     height: 0;
 }
 
-.wk-divider--dashed .wk-divider__line {
-    border-top: var(--wk-border-width) dashed var(--wk-color-border);
+.m-divider--dashed .m-divider__line {
+    border-top: var(--m-border-width) dashed var(--m-color-border);
 }
 
-.wk-divider--dotted .wk-divider__line {
-    border-top: var(--wk-border-width) dotted var(--wk-color-border);
+.m-divider--dotted .m-divider__line {
+    border-top: var(--m-border-width) dotted var(--m-color-border);
 }
 
-.wk-divider--align-left > .wk-divider__line:first-child {
+.m-divider--align-left > .m-divider__line:first-child {
     flex: 0 0 1.25rem;
 }
 
-.wk-divider--align-right > .wk-divider__line:last-child {
+.m-divider--align-right > .m-divider__line:last-child {
     flex: 0 0 1.25rem;
 }
 
-.wk-divider--vertical {
+.m-divider--vertical {
     align-self: stretch;
     display: inline-flex;
     flex-direction: column;
@@ -51,29 +51,29 @@
     width: auto;
 }
 
-.wk-divider--vertical .wk-divider__line {
+.m-divider--vertical .m-divider__line {
     height: auto;
     min-height: 100%;
     width: 1px;
 }
 
-.wk-divider--vertical.wk-divider--dashed .wk-divider__line,
-.wk-divider--vertical.wk-divider--dotted .wk-divider__line {
+.m-divider--vertical.m-divider--dashed .m-divider__line,
+.m-divider--vertical.m-divider--dotted .m-divider__line {
     height: auto;
     min-height: 1.25rem;
     width: 0;
 }
 
-.wk-divider--vertical.wk-divider--dashed .wk-divider__line {
-    border-left: var(--wk-border-width) dashed var(--wk-color-border);
+.m-divider--vertical.m-divider--dashed .m-divider__line {
+    border-left: var(--m-border-width) dashed var(--m-color-border);
     border-top: 0;
 }
 
-.wk-divider--vertical.wk-divider--dotted .wk-divider__line {
-    border-left: var(--wk-border-width) dotted var(--wk-color-border);
+.m-divider--vertical.m-divider--dotted .m-divider__line {
+    border-left: var(--m-border-width) dotted var(--m-color-border);
     border-top: 0;
 }
 
-.wk-divider--vertical .wk-divider__label {
+.m-divider--vertical .m-divider__label {
     writing-mode: vertical-rl;
 }

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { MenuItem } from './types'
-import type { WkRouteLocationRaw } from '../../shared/optionalRouter'
+import type { MRouteLocationRaw } from '../../shared/optionalRouter'
 import { computed, inject } from 'vue'
-import WkIcon from '../Icon/Icon.vue'
-import WkPopover from '../Popover/Popover.vue'
+import MIcon from '../Icon/Icon.vue'
+import MPopover from '../Popover/Popover.vue'
 import { resolveMenuIcon } from '../../shared/menu'
 import { isExternalRoute, resolveOptionalRouterLink, resolveRouteHref } from '../../shared/optionalRouter'
-import { WK_MENU_KEY } from './context'
+import { M_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
 
 const props = defineProps<{
@@ -17,9 +17,9 @@ const props = defineProps<{
   flyout?: boolean
 }>()
 
-const menu = inject(WK_MENU_KEY)
+const menu = inject(M_MENU_KEY)
 if (!menu) {
-  throw new Error('MenuNodes must be used inside WkMenu')
+  throw new Error('MenuNodes must be used inside MMenu')
 }
 
 const ctx = menu
@@ -63,12 +63,12 @@ function isSubmenuExpanded(item: MenuItem, index: number) {
 function contentClass(item: MenuItem, index: number) {
   const icon = iconOf(item)
   return {
-    'wk-menu__item-content--selected': ctx.isSelected(item, index, props.prefix),
-    'wk-menu__item-content--child-active': ctx.isChildActive(item, index, props.prefix),
-    'wk-menu__item-content--disabled': Boolean(item.disabled),
-    'wk-menu__item-content--collapsed': collapsed.value,
-    'wk-menu__item-content--no-icon': !icon,
-    'wk-menu__item-content--active': ctx.activeKey.value === itemKey(item, index),
+    'm-menu__item-content--selected': ctx.isSelected(item, index, props.prefix),
+    'm-menu__item-content--child-active': ctx.isChildActive(item, index, props.prefix),
+    'm-menu__item-content--disabled': Boolean(item.disabled),
+    'm-menu__item-content--collapsed': collapsed.value,
+    'm-menu__item-content--no-icon': !icon,
+    'm-menu__item-content--active': ctx.activeKey.value === itemKey(item, index),
   }
 }
 
@@ -95,7 +95,7 @@ function leafHref(item: MenuItem) {
   return resolveRouteHref(item.to)
 }
 
-function leafLinkTo(item: MenuItem): WkRouteLocationRaw | undefined {
+function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
   if (!usesRouterLink(item) || !item.to) return undefined
   return item.to
 }
@@ -103,17 +103,17 @@ function leafLinkTo(item: MenuItem): WkRouteLocationRaw | undefined {
 
 <template>
   <template v-for="(item, index) in items" :key="itemKey(item, index)">
-    <div v-if="item.separator" class="wk-menu__separator" role="separator" />
+    <div v-if="item.separator" class="m-menu__separator" role="separator" />
 
     <div
       v-else-if="item.items?.length"
-      class="wk-menu__item wk-menu__item--submenu"
-      :class="{ 'wk-menu__item--horizontal': horizontal }"
+      class="m-menu__item wk-menu__item--submenu"
+      :class="{ 'm-menu__item--horizontal': horizontal }"
       role="none"
     >
-      <WkPopover
+      <MPopover
         v-if="useFlyout"
-        class="wk-menu__collapsed-popover"
+        class="m-menu__collapsed-popover"
         :model-value="Boolean(ctx.flyoutOpen[itemKey(item, index)])"
         :trigger="horizontal ? 'click' : 'hover'"
         :placement="horizontal ? 'bottom-start' : 'right-start'"
@@ -123,28 +123,28 @@ function leafLinkTo(item: MenuItem): WkRouteLocationRaw | undefined {
       >
         <template #default>
           <div
-            class="wk-menu__item-content"
+            class="m-menu__item-content"
             :class="contentClass(item, index)"
             :style="paddingStyle(depth)"
             role="menuitem"
             :tabindex="itemTabindex(item, index)"
-            :data-wk-menu-key="flyout ? undefined : itemKey(item, index)"
+            :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
             :aria-label="item.label"
             aria-haspopup="menu"
             :aria-expanded="horizontal ? Boolean(ctx.flyoutOpen[itemKey(item, index)]) : undefined"
             :title="collapsed ? item.label : undefined"
           >
-            <span v-if="iconOf(item)" class="wk-menu__icon" aria-hidden="true">
-              <WkIcon :name="iconOf(item)!" size="sm" />
+            <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
+              <MIcon :name="iconOf(item)!" size="sm" />
             </span>
-            <span class="wk-menu__label">{{ item.label }}</span>
-            <span v-if="horizontal" class="wk-menu__arrow" aria-hidden="true">
-              <WkIcon name="chevron-down" size="sm" />
+            <span class="m-menu__label">{{ item.label }}</span>
+            <span v-if="horizontal" class="m-menu__arrow" aria-hidden="true">
+              <MIcon name="chevron-down" size="sm" />
             </span>
           </div>
         </template>
         <template #content>
-          <div class="wk-menu wk-menu--flyout" role="menu">
+          <div class="m-menu wk-menu--flyout" role="menu">
             <MenuNodes
               :items="item.items"
               :depth="0"
@@ -153,34 +153,34 @@ function leafLinkTo(item: MenuItem): WkRouteLocationRaw | undefined {
             />
           </div>
         </template>
-      </WkPopover>
+      </MPopover>
 
       <template v-else>
         <div
-          class="wk-menu__item-content"
+          class="m-menu__item-content"
           :class="contentClass(item, index)"
           :style="paddingStyle(depth)"
           role="menuitem"
           :tabindex="itemTabindex(item, index)"
-          :data-wk-menu-key="flyout ? undefined : itemKey(item, index)"
+          :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
           aria-haspopup="menu"
           :aria-expanded="isSubmenuExpanded(item, index)"
           :aria-disabled="item.disabled || undefined"
           @click="onParentClick(item, index)"
         >
-          <span v-if="iconOf(item)" class="wk-menu__icon" aria-hidden="true">
-            <WkIcon :name="iconOf(item)!" size="sm" />
+          <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
+            <MIcon :name="iconOf(item)!" size="sm" />
           </span>
-          <span class="wk-menu__label">{{ item.label }}</span>
-          <span class="wk-menu__arrow" aria-hidden="true">
-            <WkIcon :name="arrowIcon(item, index)" size="sm" />
+          <span class="m-menu__label">{{ item.label }}</span>
+          <span class="m-menu__arrow" aria-hidden="true">
+            <MIcon :name="arrowIcon(item, index)" size="sm" />
           </span>
         </div>
 
-        <Transition name="wk-menu-expand">
+        <Transition name="m-menu-expand">
           <div
             v-if="isSubmenuExpanded(item, index)"
-            class="wk-menu__submenu"
+            class="m-menu__submenu"
             role="group"
           >
             <MenuNodes
@@ -195,18 +195,18 @@ function leafLinkTo(item: MenuItem): WkRouteLocationRaw | undefined {
 
     <div
       v-else
-      class="wk-menu__item"
-      :class="{ 'wk-menu__item--horizontal': horizontal }"
+      class="m-menu__item"
+      :class="{ 'm-menu__item--horizontal': horizontal }"
       role="none"
     >
       <component
         :is="usesRouterLink(item) ? RouterLink : leafHref(item) ? 'a' : 'div'"
-        class="wk-menu__item-content"
+        class="m-menu__item-content"
         :class="contentClass(item, index)"
         :style="paddingStyle(depth)"
         role="menuitem"
         :tabindex="itemTabindex(item, index)"
-        :data-wk-menu-key="flyout ? undefined : itemKey(item, index)"
+        :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
         :aria-disabled="item.disabled || undefined"
         :aria-current="ctx.isSelected(item, index, prefix) ? 'page' : undefined"
         :title="collapsed ? item.label : undefined"
@@ -214,10 +214,10 @@ function leafLinkTo(item: MenuItem): WkRouteLocationRaw | undefined {
         :to="leafLinkTo(item)"
         @click="onLeafClick(item, $event)"
       >
-        <span v-if="iconOf(item)" class="wk-menu__icon" aria-hidden="true">
-          <WkIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
+          <MIcon :name="iconOf(item)!" size="sm" />
         </span>
-        <span class="wk-menu__label">{{ item.label }}</span>
+        <span class="m-menu__label">{{ item.label }}</span>
       </component>
     </div>
   </template>

@@ -11,14 +11,14 @@ description: 水平菜单，子项按多列面板展示。
 ## 引入
 
 ```ts
-import { WkMegaMenu, type MegaMenuItem } from '@wise-kit/ui'
+import { MMegaMenu, type MegaMenuItem } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkMegaMenu } from '@wise-kit/ui'
+import { MMegaMenu } from 'morya-ui'
 
 const model = [
   {
@@ -33,7 +33,7 @@ const model = [
 </script>
 
 <template>
-  <WkMegaMenu :model="model" />
+  <MMegaMenu :model="model" />
 </template>
 ```
 

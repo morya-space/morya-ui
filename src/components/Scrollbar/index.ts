@@ -1,5 +1,5 @@
 import './style'
-export { default as WkScrollbar } from './Scrollbar.vue'
+export { default as MScrollbar } from './Scrollbar.vue'
 export type {
   ScrollbarAriaOrientation,
   ScrollbarDirection,

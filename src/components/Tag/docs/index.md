@@ -11,7 +11,7 @@ description: 标签用于展示状态或分类。
 ## 引入
 
 ```ts
-import { WkTag } from '@wise-kit/ui'
+import { MTag } from 'morya-ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WkTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkTag } from '@wise-kit/ui'
+import { MTag } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkTag value="Primary" />
-    <WkTag>Slot Label</WkTag>
-    <WkTag value="Rounded" rounded />
+    <MTag value="Primary" />
+    <MTag>Slot Label</MTag>
+    <MTag value="Rounded" rounded />
   </div>
 </template>
 ```
@@ -38,36 +38,36 @@ import { WkTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkTag } from '@wise-kit/ui'
+import { MTag } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkTag value="Primary" />
-    <WkTag value="Secondary" severity="secondary" />
-    <WkTag value="Success" severity="success" />
-    <WkTag value="Info" severity="info" />
-    <WkTag value="Warn" severity="warn" />
-    <WkTag value="Danger" severity="danger" />
-    <WkTag value="Contrast" severity="contrast" />
+    <MTag value="Primary" />
+    <MTag value="Secondary" severity="secondary" />
+    <MTag value="Success" severity="success" />
+    <MTag value="Info" severity="info" />
+    <MTag value="Warn" severity="warn" />
+    <MTag value="Danger" severity="danger" />
+    <MTag value="Contrast" severity="contrast" />
   </div>
 </template>
 ```
 
 ## Icons
 
-`icon` 传入 `WkIcon` 的图标名称。
+`icon` 传入 `MIcon` 的图标名称。
 
 ```vue preview
 <script setup lang="ts">
-import { WkTag } from '@wise-kit/ui'
+import { MTag } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkTag value="New" icon="plus" severity="info" />
-    <WkTag value="Done" icon="check" severity="success" />
-    <WkTag value="Alert" icon="info" severity="warn" rounded />
+    <MTag value="New" icon="plus" severity="info" />
+    <MTag value="Done" icon="check" severity="success" />
+    <MTag value="Alert" icon="info" severity="warn" rounded />
   </div>
 </template>
 ```
@@ -76,13 +76,13 @@ import { WkTag } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkTag } from '@wise-kit/ui'
+import { MTag } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkTag value="Draft" closable bordered />
-    <WkTag value="Small" size="small" severity="success" closable />
+    <MTag value="Draft" closable bordered />
+    <MTag value="Small" size="small" severity="success" closable />
   </div>
 </template>
 ```
@@ -94,7 +94,7 @@ import { WkTag } from '@wise-kit/ui'
 | `value` | `string` | — | 标签文案。存在默认插槽内容时以插槽为准。 |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
-| `icon` | `IconName` | — | `WkIcon` 图标名称。 |
+| `icon` | `IconName` | — | `MIcon` 图标名称。 |
 | `closable` | `boolean` | `false` | 显示关闭按钮。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `bordered` | `boolean` | `false` | 描边。 |

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { OrderListProps } from './types'
 import { computed, nextTick, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
   modelValue: () => [],
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: unknown[]): void
   (event: 'reorder', value: unknown[]): void
 }>()
-const locale = useWkLocale()
+const locale = useMLocale()
 
 const resolvedEmptyMessage = computed(
   () => props.emptyMessage ?? locale.value.emptyMessage,
@@ -52,7 +52,7 @@ function itemTabindex(index: number): 0 | -1 {
 
 function focusItem(index: number) {
   list.value
-    ?.querySelectorAll<HTMLElement>('.wk-orderlist__item')
+    ?.querySelectorAll<HTMLElement>('.m-orderlist__item')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -142,20 +142,20 @@ function resetDrag() {
 </script>
 
 <template>
-  <div class="wk-orderlist">
-    <div class="wk-orderlist__controls">
-      <button type="button" class="wk-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
-        <WkIcon name="chevron-up" size="sm" />
+  <div class="m-orderlist">
+    <div class="m-orderlist__controls">
+      <button type="button" class="m-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
+        <MIcon name="chevron-up" size="sm" />
       </button>
-      <button type="button" class="wk-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
-        <WkIcon name="chevron-down" size="sm" />
+      <button type="button" class="m-orderlist__btn" :aria-label="locale.moveDown" :disabled="selectedIndex === null || selectedIndex >= modelValue.length - 1" @click="move(1)">
+        <MIcon name="chevron-down" size="sm" />
       </button>
     </div>
 
     <ul
       v-if="modelValue.length"
       ref="list"
-      class="wk-orderlist__list"
+      class="m-orderlist__list"
       :style="listStyle"
       role="listbox"
       :aria-label="locale.selectOption"
@@ -164,11 +164,11 @@ function resetDrag() {
       <li
         v-for="(item, index) in modelValue"
         :key="itemKey(item, index)"
-        class="wk-orderlist__item"
+        class="m-orderlist__item"
         :class="{
-          'wk-orderlist__item--selected': selectedIndex === index,
-          'wk-orderlist__ghost': dragdrop && dragFrom === index,
-          'wk-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
+          'm-orderlist__item--selected': selectedIndex === index,
+          'm-orderlist__ghost': dragdrop && dragFrom === index,
+          'm-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
         }"
         role="option"
         :aria-selected="selectedIndex === index"
@@ -184,22 +184,22 @@ function resetDrag() {
         <button
           v-if="dragdrop"
           type="button"
-          class="wk-orderlist__handle"
+          class="m-orderlist__handle"
           :aria-label="locale.dragToReorder"
           tabindex="-1"
           @click.stop
           @pointerdown="armHandle"
         >
-          <WkIcon name="grip" size="sm" />
+          <MIcon name="grip" size="sm" />
         </button>
-        <span class="wk-orderlist__label">
+        <span class="m-orderlist__label">
           <slot name="item" :item="item" :index="index">{{ item }}</slot>
         </span>
       </li>
     </ul>
-    <div v-else class="wk-orderlist__message" role="status">
+    <div v-else class="m-orderlist__message" role="status">
       <slot name="empty">
-        <p class="wk-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="m-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
   </div>

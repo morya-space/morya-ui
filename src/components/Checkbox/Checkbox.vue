@@ -2,8 +2,8 @@
 import type {CheckboxProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
-import {  WK_CHECKBOX_GROUP_KEY } from './types'
+import { useMId } from '../../shared/useMId'
+import {  M_CHECKBOX_GROUP_KEY } from './types'
 
 defineOptions({ inheritAttrs: false })
 
@@ -16,8 +16,8 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
-const group = inject(WK_CHECKBOX_GROUP_KEY, null)
-const autoInputId = useWkId('wk-checkbox')
+const group = inject(M_CHECKBOX_GROUP_KEY, null)
+const autoInputId = useMId('m-checkbox')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('Checkbox', () => props.size ?? group?.size.value)
 const isDisabled = computed(() => props.disabled || Boolean(group?.disabled.value))
@@ -30,12 +30,12 @@ const isChecked = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'wk-checkbox',
-  `wk-checkbox--${sizeClass.value}`,
+  'm-checkbox',
+  `m-checkbox--${sizeClass.value}`,
   {
-    'wk-checkbox--disabled': isDisabled.value,
-    'wk-checkbox--invalid': isInvalid.value,
-    'wk-checkbox--indeterminate': props.indeterminate,
+    'm-checkbox--disabled': isDisabled.value,
+    'm-checkbox--invalid': isInvalid.value,
+    'm-checkbox--indeterminate': props.indeterminate,
   },
 ])
 
@@ -55,7 +55,7 @@ function updateValue(event: Event) {
     <input
       v-bind="attrs"
       :id="inputId"
-      class="wk-checkbox__input"
+      class="m-checkbox__input"
       type="checkbox"
       :name="inputName"
       :value="value == null ? undefined : String(value)"
@@ -67,12 +67,12 @@ function updateValue(event: Event) {
       :aria-checked="indeterminate ? 'mixed' : isChecked"
       @change="updateValue"
     >
-    <span class="wk-checkbox__control" aria-hidden="true">
+    <span class="m-checkbox__control" aria-hidden="true">
       <svg viewBox="0 0 16 16" focusable="false">
         <path v-if="indeterminate" d="M4 8h8" />
         <path v-else-if="isChecked" d="m3.5 8.5 3 3 6-7" />
       </svg>
     </span>
-    <span v-if="label || $slots.default" class="wk-checkbox__label"><slot>{{ label }}</slot></span>
+    <span v-if="label || $slots.default" class="m-checkbox__label"><slot>{{ label }}</slot></span>
   </label>
 </template>

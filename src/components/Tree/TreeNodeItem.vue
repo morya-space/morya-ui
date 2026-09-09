@@ -2,19 +2,19 @@
 import type { IconName } from '../Icon/types'
 import type { TreeNode } from './types'
 import { computed, inject } from 'vue'
-import { useWkLocale } from '../../locale'
-import WkCheckbox from '../Checkbox/Checkbox.vue'
-import WkIcon from '../Icon/Icon.vue'
+import { useMLocale } from '../../locale'
+import MCheckbox from '../Checkbox/Checkbox.vue'
+import MIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
-import { WK_TREE_KEY, WK_TREE_NODE_SLOT } from './context'
+import { M_TREE_KEY, M_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
 
 const props = withDefaults(defineProps<{ node: TreeNode; depth?: number }>(), {
   depth: 1,
 })
-const tree = inject(WK_TREE_KEY)!
-const nodeSlot = inject(WK_TREE_NODE_SLOT, undefined)
-const locale = useWkLocale()
+const tree = inject(M_TREE_KEY)!
+const nodeSlot = inject(M_TREE_NODE_SLOT, undefined)
+const locale = useMLocale()
 
 const expanded = computed(() => tree.isExpanded(props.node.key))
 const selected = computed(() => tree.isSelected(props.node.key))
@@ -39,8 +39,8 @@ const customContent = computed(() =>
 
 <template>
   <li
-    class="wk-tree__node"
-    :class="{ 'wk-tree__node--active': tree.activeKey.value === node.key }"
+    class="m-tree__node"
+    :class="{ 'm-tree__node--active': tree.activeKey.value === node.key }"
     role="treeitem"
     :aria-expanded="hasChildren ? expanded : undefined"
     :aria-disabled="disabled || undefined"
@@ -48,16 +48,16 @@ const customContent = computed(() =>
     :aria-selected="selected"
     :aria-checked="tree.showCheckbox ? checked : undefined"
     :tabindex="tree.tabindexForKey(node.key)"
-    :data-wk-tree-key="node.key"
+    :data-m-tree-key="node.key"
     @focus="tree.setActiveKey(node.key)"
   >
     <div
-      class="wk-tree__row"
+      class="m-tree__row"
       :class="{
-        'wk-tree__row--selected': selected,
-        'wk-tree__row--disabled': disabled,
-        'wk-tree__row--matched': matched,
-        'wk-tree__row--indeterminate': indeterminate,
+        'm-tree__row--selected': selected,
+        'm-tree__row--disabled': disabled,
+        'm-tree__row--matched': matched,
+        'm-tree__row--indeterminate': indeterminate,
       }"
       :draggable="tree.draggable && !disabled"
       @dragstart="tree.onDragStart(node, $event)"
@@ -68,20 +68,20 @@ const customContent = computed(() =>
       <button
         v-if="hasChildren"
         type="button"
-        class="wk-tree__toggler"
+        class="m-tree__toggler"
         tabindex="-1"
         :aria-label="expanded ? locale.collapse : locale.expand"
         :disabled="disabled"
         @click="tree.toggleExpand(node)"
       >
-        <WkIcon v-if="loading" name="loader" size="sm" />
-        <WkIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
+        <MIcon v-if="loading" name="loader" size="sm" />
+        <MIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="wk-tree__toggler wk-tree__toggler--leaf" aria-hidden="true" />
+      <span v-else class="m-tree__toggler wk-tree__toggler--leaf" aria-hidden="true" />
 
-      <WkCheckbox
+      <MCheckbox
         v-if="tree.showCheckbox"
-        class="wk-tree__checkbox"
+        class="m-tree__checkbox"
         tabindex="-1"
         :model-value="checked || indeterminate"
         :disabled="disabled"
@@ -89,14 +89,14 @@ const customContent = computed(() =>
         @click.stop
       />
 
-      <span v-if="iconName || node.icon" class="wk-tree__icon" aria-hidden="true">
-        <WkIcon v-if="iconName" :name="iconName" size="sm" />
+      <span v-if="iconName || node.icon" class="m-tree__icon" aria-hidden="true">
+        <MIcon v-if="iconName" :name="iconName" size="sm" />
         <template v-else>{{ node.icon }}</template>
       </span>
 
       <button
         type="button"
-        class="wk-tree__label"
+        class="m-tree__label"
         tabindex="-1"
         :disabled="disabled"
         @click="tree.select(node)"
@@ -110,7 +110,7 @@ const customContent = computed(() =>
       </button>
     </div>
 
-    <ul v-if="hasChildren && expanded" class="wk-tree__children" role="group">
+    <ul v-if="hasChildren && expanded" class="m-tree__children" role="group">
       <TreeNodeItem v-for="child in visibleChildren" :key="child.key" :node="child" :depth="depth + 1" />
     </ul>
   </li>

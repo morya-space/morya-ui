@@ -1,20 +1,20 @@
 /* —�?Panel: Fieldset —�?*/
-.wk-fieldset {
-    background: var(--wk-color-surface);
-    border: var(--wk-border-width) solid var(--wk-color-border);
-    border-radius: var(--wk-radius-md);
+.m-fieldset {
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-md);
     margin: 0;
     min-inline-size: 0;
-    padding: var(--wk-space-3) var(--wk-space-4) var(--wk-space-4);
+    padding: var(--m-space-3) var(--m-space-4) var(--m-space-4);
 }
 
-.wk-fieldset__legend {
-    color: var(--wk-color-text);
+.m-fieldset__legend {
+    color: var(--m-color-text);
     font-weight: 600;
-    padding: 0 var(--wk-space-1);
+    padding: 0 var(--m-space-1);
 }
 
-.wk-fieldset__toggler {
+.m-fieldset__toggler {
     align-items: center;
     background: transparent;
     border: 0;
@@ -22,31 +22,31 @@
     cursor: pointer;
     display: inline-flex;
     font: inherit;
-    gap: var(--wk-space-2);
+    gap: var(--m-space-2);
     padding: 0;
 }
 
-.wk-fieldset__toggler:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-fieldset__toggler:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.wk-fieldset__content {
-    color: var(--wk-color-text);
-    padding-top: var(--wk-space-2);
+.m-fieldset__content {
+    color: var(--m-color-text);
+    padding-top: var(--m-space-2);
 }
 
-.wk-fieldset-collapse-enter-active,
-.wk-fieldset-collapse-leave-active {
+.m-fieldset-collapse-enter-active,
+.m-fieldset-collapse-leave-active {
     overflow: hidden;
     transition:
-        max-height var(--wk-motion-normal) var(--wk-motion-ease),
-        opacity var(--wk-motion-normal) var(--wk-motion-ease),
-        padding var(--wk-motion-normal) var(--wk-motion-ease);
+        max-height var(--m-motion-normal) var(--m-motion-ease),
+        opacity var(--m-motion-normal) var(--m-motion-ease),
+        padding var(--m-motion-normal) var(--m-motion-ease);
 }
 
-.wk-fieldset-collapse-enter-from,
-.wk-fieldset-collapse-leave-to {
+.m-fieldset-collapse-enter-from,
+.m-fieldset-collapse-leave-to {
     max-height: 0;
     opacity: 0;
     padding-top: 0;

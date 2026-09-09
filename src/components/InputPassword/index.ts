@@ -1,3 +1,3 @@
 import './style'
-export { default as WkInputPassword } from './InputPassword.vue'
-export type { InputPasswordEmits, InputPasswordProps, InputPasswordSlots, PasswordStrength, WkShowPasswordOn } from './types'
+export { default as MInputPassword } from './InputPassword.vue'
+export type { InputPasswordEmits, InputPasswordProps, InputPasswordSlots, PasswordStrength, MShowPasswordOn } from './types'

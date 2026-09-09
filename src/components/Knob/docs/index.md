@@ -11,21 +11,21 @@ description: SVG 圆形旋钮，用于选择数值。
 ## 引入
 
 ```ts
-import { WkKnob } from '@wise-kit/ui'
+import { MKnob } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkKnob } from '@wise-kit/ui'
+import { MKnob } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(60)
 </script>
 
 <template>
-  <WkKnob v-model="value" :size="120" value-template="{value}%" />
+  <MKnob v-model="value" :size="120" value-template="{value}%" />
 </template>
 ```
 

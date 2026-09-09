@@ -1,4 +1,4 @@
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
 export interface RatingProps {
   modelValue?: number
@@ -9,7 +9,7 @@ export interface RatingProps {
   invalid?: boolean
   helpText?: string
   errorMessage?: string
-  size?: WkSizeInput
+  size?: MSizeInput
   /**
    * @deprecated Use `allowClear` instead. Kept as an alias; `allowClear`
    * takes precedence when both are set.

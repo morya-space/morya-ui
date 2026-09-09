@@ -11,14 +11,14 @@ description: macOS 风格图标坞。
 ## 引入
 
 ```ts
-import { WkDock } from '@wise-kit/ui'
+import { MDock } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkDock } from '@wise-kit/ui'
+import { MDock } from 'morya-ui'
 
 const model = [
   { label: '主页', icon: '⌂' },
@@ -28,7 +28,7 @@ const model = [
 </script>
 
 <template>
-  <WkDock :model="model" />
+  <MDock :model="model" />
 </template>
 ```
 

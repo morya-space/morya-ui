@@ -1,4 +1,4 @@
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
 export interface ProgressSpinnerProps {
   /** SVG circle stroke width. */
@@ -12,7 +12,7 @@ export interface ProgressSpinnerProps {
   /** Delay in ms before showing the overlay. */
   delay?: number
   /** Size of the spinner. */
-  size?: WkSizeInput
+  size?: MSizeInput
   /** Optional description under the spinner. */
   description?: string
 }

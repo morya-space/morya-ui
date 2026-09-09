@@ -11,22 +11,22 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 ## 引入
 
 ```ts
-import { WkFlex } from '@wise-kit/ui'
+import { MFlex } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFlex } from '@wise-kit/ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <WkFlex>
-    <WkButton label="一" size="small" />
-    <WkButton label="二" size="small" severity="secondary" />
-    <WkButton label="三" size="small" severity="secondary" />
-  </WkFlex>
+  <MFlex>
+    <MButton label="一" size="small" />
+    <MButton label="二" size="small" severity="secondary" />
+    <MButton label="三" size="small" severity="secondary" />
+  </MFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WkButton, WkFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFlex } from '@wise-kit/ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <WkFlex vertical>
-    <WkButton label="上" size="small" />
-    <WkButton label="中" size="small" severity="secondary" />
-    <WkButton label="下" size="small" severity="secondary" />
-  </WkFlex>
+  <MFlex vertical>
+    <MButton label="上" size="small" />
+    <MButton label="中" size="small" severity="secondary" />
+    <MButton label="下" size="small" severity="secondary" />
+  </MFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { WkButton, WkFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFlex, WkTag } from '@wise-kit/ui'
+import { MButton, MFlex, MTag } from 'morya-ui'
 </script>
 
 <template>
-  <WkFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <WkTag value="标签" />
-    <WkButton label="操作" size="small" />
-  </WkFlex>
+  <MFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <MTag value="标签" />
+    <MButton label="操作" size="small" />
+  </MFlex>
 </template>
 ```
 

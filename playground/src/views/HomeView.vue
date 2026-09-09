@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WkButton, WkScrollbar } from '@wise-kit/ui'
+import { MButton, MScrollbar } from 'morya-ui'
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import {
@@ -50,7 +50,7 @@ async function copyInstall() {
 </script>
 
 <template>
-  <WkScrollbar class="home-scroll">
+  <MScrollbar class="home-scroll">
     <div class="home-page">
       <section class="home-hero">
         <img class="home-logo" :src="SITE_LOGO_URL" width="96" height="96" alt="" />
@@ -68,13 +68,13 @@ async function copyInstall() {
         </p>
         <div class="home-actions">
           <RouterLink :to="{ name: 'docs', params: { slug: 'quick-start' } }">
-            <WkButton :label="t.start" />
+            <MButton :label="t.start" />
           </RouterLink>
           <RouterLink :to="{ name: 'components' }">
-            <WkButton :label="t.browse" outlined />
+            <MButton :label="t.browse" outlined />
           </RouterLink>
           <a :href="SITE_GITHUB_URL" target="_blank" rel="noopener noreferrer">
-            <WkButton :label="t.viewGithub" outlined />
+            <MButton :label="t.viewGithub" outlined />
           </a>
         </div>
         <div class="home-meta" :aria-label="t.techTags">
@@ -132,7 +132,7 @@ async function copyInstall() {
 
       <SiteFooter />
     </div>
-  </WkScrollbar>
+  </MScrollbar>
 </template>
 
 <style scoped>
@@ -150,13 +150,13 @@ async function copyInstall() {
 }
 
 .home-hero {
-  animation: home-rise 0.7s var(--wk-motion-ease) both;
+  animation: home-rise 0.7s var(--m-motion-ease) both;
   max-width: 46rem;
   position: relative;
 }
 
 .home-logo {
-  animation: home-rise 0.7s var(--wk-motion-ease) both;
+  animation: home-rise 0.7s var(--m-motion-ease) both;
   display: block;
   height: clamp(4.5rem, 12vw, 6rem);
   margin: 0 0 1.25rem;
@@ -175,9 +175,9 @@ async function copyInstall() {
 .home-brand {
   background: linear-gradient(
     120deg,
-    var(--wk-color-text) 10%,
-    color-mix(in srgb, var(--wk-color-primary) 75%, #22d3ee) 55%,
-    var(--wk-color-primary) 100%
+    var(--m-color-text) 10%,
+    color-mix(in srgb, var(--m-color-primary) 75%, #22d3ee) 55%,
+    var(--m-color-primary) 100%
   );
   background-clip: text;
   color: transparent;
@@ -190,7 +190,7 @@ async function copyInstall() {
 }
 
 .home-headline {
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
   font-family: var(--docs-display);
   font-size: clamp(1.35rem, 2.6vw, 1.85rem);
   font-weight: 600;
@@ -200,7 +200,7 @@ async function copyInstall() {
 }
 
 .home-lead {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 1.05rem;
   line-height: 1.7;
   margin: 0;
@@ -226,18 +226,18 @@ async function copyInstall() {
 }
 
 .home-meta span {
-  background: color-mix(in srgb, var(--wk-color-surface) 65%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 65%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 999px;
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.68rem;
   padding: 0.35rem 0.7rem;
 }
 
 .home-install {
-  animation: home-rise 0.75s var(--wk-motion-ease) both;
-  background: color-mix(in srgb, var(--wk-color-surface) 72%, transparent);
+  animation: home-rise 0.75s var(--m-motion-ease) both;
+  background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 1.1rem;
   margin-top: clamp(2.5rem, 6vw, 3.5rem);
@@ -253,7 +253,7 @@ async function copyInstall() {
 }
 
 .home-install__head p {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.9rem;
   line-height: 1.55;
   margin: 0 0 1rem;
@@ -261,7 +261,7 @@ async function copyInstall() {
 
 .home-install__cmd {
   align-items: center;
-  background: color-mix(in srgb, var(--wk-color-text) 4%, var(--wk-color-surface));
+  background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
   border: 1px solid var(--docs-edge);
   border-radius: 0.75rem;
   display: flex;
@@ -271,16 +271,16 @@ async function copyInstall() {
 }
 
 .home-install__cmd code {
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
   font-family: var(--docs-mono);
   font-size: 0.84rem;
 }
 
 .home-install__copy {
-  background: color-mix(in srgb, var(--wk-color-primary) 12%, var(--wk-color-surface));
-  border: 1px solid color-mix(in srgb, var(--wk-color-primary) 28%, transparent);
+  background: color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface));
+  border: 1px solid color-mix(in srgb, var(--m-color-primary) 28%, transparent);
   border-radius: 0.55rem;
-  color: var(--wk-color-primary);
+  color: var(--m-color-primary);
   cursor: pointer;
   font-family: var(--docs-mono);
   font-size: 0.72rem;
@@ -289,7 +289,7 @@ async function copyInstall() {
 }
 
 .home-install__npm {
-  color: var(--wk-color-primary);
+  color: var(--m-color-primary);
   display: inline-block;
   font-size: 0.84rem;
   font-weight: 600;
@@ -309,8 +309,8 @@ async function copyInstall() {
 }
 
 .home-pillar {
-  animation: home-rise 0.8s var(--wk-motion-ease) both;
-  background: color-mix(in srgb, var(--wk-color-surface) 70%, transparent);
+  animation: home-rise 0.8s var(--m-motion-ease) both;
+  background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
   border: 1px solid var(--docs-edge);
   border-radius: 1.1rem;
   padding: 1.35rem 1.25rem 1.45rem;
@@ -331,7 +331,7 @@ async function copyInstall() {
 }
 
 .home-pillar::before {
-  background: linear-gradient(120deg, transparent, color-mix(in srgb, var(--wk-color-primary) 35%, transparent));
+  background: linear-gradient(120deg, transparent, color-mix(in srgb, var(--m-color-primary) 35%, transparent));
   content: '';
   height: 1px;
   left: 0;
@@ -358,7 +358,7 @@ async function copyInstall() {
 }
 
 .home-pillar p {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-size: 0.92rem;
   line-height: 1.6;
   margin: 0;
@@ -385,7 +385,7 @@ async function copyInstall() {
 }
 
 .home-cta p {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   margin: 0;
 }
 
@@ -396,7 +396,7 @@ async function copyInstall() {
 }
 
 .home-text-link {
-  color: var(--wk-color-primary);
+  color: var(--m-color-primary);
   font-family: var(--docs-display);
   font-size: 0.95rem;
   font-weight: 600;
@@ -419,9 +419,9 @@ async function copyInstall() {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:not([data-wk-ignore-reduced-motion]) .home-hero,
-  html:not([data-wk-ignore-reduced-motion]) .home-install,
-  html:not([data-wk-ignore-reduced-motion]) .home-pillar {
+  html:not([data-m-ignore-reduced-motion]) .home-hero,
+  html:not([data-m-ignore-reduced-motion]) .home-install,
+  html:not([data-m-ignore-reduced-motion]) .home-pillar {
     animation: none;
   }
 }

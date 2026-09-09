@@ -11,7 +11,7 @@ Replaces the native browser scrollbar with a themeable, cross-browser scrolling 
 ## Import
 
 ```ts
-import { WkScrollbar } from '@wise-kit/ui'
+import { MScrollbar } from 'morya-ui'
 ```
 
 ## Basic
@@ -20,24 +20,24 @@ Use `height` to fix the viewport height. If omitted, it follows the parent heigh
 
 ```vue preview
 <script setup lang="ts">
-import { WkScrollbar } from '@wise-kit/ui'
+import { MScrollbar } from 'morya-ui'
 </script>
 
 <template>
-  <WkScrollbar height="240px" always style="width: 200px">
+  <MScrollbar height="240px" always style="width: 200px">
     <p
       v-for="item in 20"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--wk-color-primary) 12%, transparent);
-        color:var(--wk-color-primary);
+        background:color-mix(in srgb, var(--m-color-primary) 12%, transparent);
+        color:var(--m-color-primary);
       "
     >
       {{ item }}
     </p>
-  </WkScrollbar>
+  </MScrollbar>
 </template>
 ```
 
@@ -47,7 +47,7 @@ The scrollbar appears only when content exceeds `max-height`.
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkScrollbar } from '@wise-kit/ui'
+import { MButton, MScrollbar } from 'morya-ui'
 import { ref } from 'vue'
 
 const count = ref(3)
@@ -56,23 +56,23 @@ const count = ref(3)
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;gap:0.5rem">
-      <WkButton label="Add" size="small" @click="count++" />
-      <WkButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
+      <MButton label="Add" size="small" @click="count++" />
+      <MButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
     </div>
-    <WkScrollbar max-height="220px" always style="width: 200px">
+    <MScrollbar max-height="220px" always style="width: 200px">
       <p
         v-for="item in count"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wk-color-info) 12%, transparent);
-          color:var(--wk-color-info);
+          background:color-mix(in srgb, var(--m-color-info) 12%, transparent);
+          color:var(--m-color-info);
         "
       >
         Item {{ item }}
       </p>
-    </WkScrollbar>
+    </MScrollbar>
   </div>
 </template>
 ```
@@ -81,15 +81,15 @@ const count = ref(3)
 
 A horizontal scrollbar appears when content is wider than the container. `trigger="none"` and `always` keep the thumb visible; the default `trigger="hover"` shows it on hover.
 
-`WkLayout` uses this component when `native-scrollbar={false}`.
+`MLayout` uses this component when `native-scrollbar={false}`.
 
 ```vue preview
 <script setup lang="ts">
-import { WkScrollbar } from '@wise-kit/ui'
+import { MScrollbar } from 'morya-ui'
 </script>
 
 <template>
-  <WkScrollbar always>
+  <MScrollbar always>
     <div style="display:flex;width:fit-content">
       <p
         v-for="item in 30"
@@ -97,14 +97,14 @@ import { WkScrollbar } from '@wise-kit/ui'
         style="
           flex-shrink:0;display:flex;align-items:center;justify-content:center;
           width:96px;height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wk-color-danger) 12%, transparent);
-          color:var(--wk-color-danger);
+          background:color-mix(in srgb, var(--m-color-danger) 12%, transparent);
+          color:var(--m-color-danger);
         "
       >
         {{ item }}
       </p>
     </div>
-  </WkScrollbar>
+  </MScrollbar>
 </template>
 ```
 
@@ -114,30 +114,30 @@ import { WkScrollbar } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkScrollbar } from '@wise-kit/ui'
+import { MScrollbar } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wk-color-text-muted)">
+      <p style="margin:0 0 0.5rem;color:var(--m-color-text-muted)">
         always
       </p>
-      <WkScrollbar height="160px" always>
+      <MScrollbar height="160px" always>
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
           Line {{ n }}
         </p>
-      </WkScrollbar>
+      </MScrollbar>
     </div>
     <div>
-      <p style="margin:0 0 0.5rem;color:var(--wk-color-text-muted)">
+      <p style="margin:0 0 0.5rem;color:var(--m-color-text-muted)">
         native
       </p>
-      <WkScrollbar height="160px" native style="width: 200px">
+      <MScrollbar height="160px" native style="width: 200px">
         <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
           Line {{ n }}
         </p>
-      </WkScrollbar>
+      </MScrollbar>
     </div>
   </div>
 </template>
@@ -149,8 +149,8 @@ Control scrolling with instance methods `setScrollTop` / `setScrollLeft` / `scro
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarInstance } from '@wise-kit/ui'
-import { WkButton, WkScrollbar } from '@wise-kit/ui'
+import type { ScrollbarInstance } from 'morya-ui'
+import { MButton, MScrollbar } from 'morya-ui'
 import { ref } from 'vue'
 
 const scrollbarRef = ref<ScrollbarInstance>()
@@ -168,25 +168,25 @@ function onScroll(payload: { scrollTop: number }) {
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <WkButton label="Top" size="small" @click="jump(0)" />
-      <WkButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
-      <WkButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
-      <span style="color:var(--wk-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
+      <MButton label="Top" size="small" @click="jump(0)" />
+      <MButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
+      <MButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
+      <span style="color:var(--m-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
     </div>
-    <WkScrollbar ref="scrollbarRef" height="200px" always style="width: 200px" @scroll="onScroll">
+    <MScrollbar ref="scrollbarRef" height="200px" always style="width: 200px" @scroll="onScroll">
       <p
         v-for="item in 24"
         :key="item"
         style="
           display:flex;align-items:center;justify-content:center;
           height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--wk-color-success) 12%, transparent);
-          color:var(--wk-color-success);
+          background:color-mix(in srgb, var(--m-color-success) 12%, transparent);
+          color:var(--m-color-success);
         "
       >
         {{ item }}
       </p>
-    </WkScrollbar>
+    </MScrollbar>
   </div>
 </template>
 ```
@@ -197,8 +197,8 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 
 ```vue preview
 <script setup lang="ts">
-import type { ScrollbarDirection } from '@wise-kit/ui'
-import { WkScrollbar } from '@wise-kit/ui'
+import type { ScrollbarDirection } from 'morya-ui'
+import { MScrollbar } from 'morya-ui'
 import { ref } from 'vue'
 
 const num = ref(20)
@@ -209,20 +209,20 @@ function loadMore(direction: ScrollbarDirection) {
 </script>
 
 <template>
-  <WkScrollbar height="220px" style="width: 200px" always @end-reached="loadMore">
+  <MScrollbar height="220px" style="width: 200px" always @end-reached="loadMore">
     <p
       v-for="item in num"
       :key="item"
       style="
         display:flex;align-items:center;justify-content:center;
         height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--wk-color-primary) 12%, transparent);
-        color:var(--wk-color-primary);
+        background:color-mix(in srgb, var(--m-color-primary) 12%, transparent);
+        color:var(--m-color-primary);
       "
     >
       {{ item }}
     </p>
-  </WkScrollbar>
+  </MScrollbar>
 </template>
 ```
 

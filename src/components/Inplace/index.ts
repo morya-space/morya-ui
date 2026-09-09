@@ -1,3 +1,3 @@
 import './style'
-export { default as WkInplace } from './Inplace.vue'
+export { default as MInplace } from './Inplace.vue'
 export type { InplaceEmits, InplaceProps } from './types'

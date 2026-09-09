@@ -1,5 +1,5 @@
 import './style'
-export { default as WkFileUpload } from './FileUpload.vue'
+export { default as MFileUpload } from './FileUpload.vue'
 export type {
   FileUploadEmits,
   FileUploadExpose,

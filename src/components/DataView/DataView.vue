@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { DataViewEmits, DataViewProps } from './types'
 import { computed, ref, useSlots, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import WkPagination from '../Pagination/Pagination.vue'
-import WkProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+import { useMLocale } from '../../locale'
+import MPagination from '../Pagination/Pagination.vue'
+import MProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
 
 const props = withDefaults(defineProps<DataViewProps>(), {
   value: () => [],
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<DataViewProps>(), {
 
 const emit = defineEmits<DataViewEmits>()
 
-const locale = useWkLocale()
+const locale = useMLocale()
 const slots = useSlots()
 const innerPage = ref(1)
 
@@ -43,8 +43,8 @@ const resolvedEmptyMessage = computed(
 )
 
 const rootClass = computed(() => [
-  'wk-dataview',
-  `wk-dataview--${props.layout}`,
+  'm-dataview',
+  `m-dataview--${props.layout}`,
 ])
 
 watch(
@@ -66,43 +66,43 @@ watch(
 
 <template>
   <div :class="rootClass">
-    <div v-if="slots.header" class="wk-dataview__header">
+    <div v-if="slots.header" class="m-dataview__header">
       <slot name="header" />
     </div>
-    <div class="wk-dataview__content">
+    <div class="m-dataview__content">
       <slot v-if="layout === 'list'" name="list" :items="pagedValue">
-        <ul v-if="pagedValue.length" class="wk-dataview__list">
-          <li v-for="(item, index) in pagedValue" :key="index" class="wk-dataview__list-item">
+        <ul v-if="pagedValue.length" class="m-dataview__list">
+          <li v-for="(item, index) in pagedValue" :key="index" class="m-dataview__list-item">
             {{ item }}
           </li>
         </ul>
       </slot>
       <slot v-else name="grid" :items="pagedValue">
-        <div v-if="pagedValue.length" class="wk-dataview__grid">
-          <div v-for="(item, index) in pagedValue" :key="index" class="wk-dataview__grid-item">
+        <div v-if="pagedValue.length" class="m-dataview__grid">
+          <div v-for="(item, index) in pagedValue" :key="index" class="m-dataview__grid-item">
             {{ item }}
           </div>
         </div>
       </slot>
 
-      <div v-if="loading" class="wk-dataview__loading">
-        <div class="wk-dataview__loading-mask" />
-        <div class="wk-dataview__loading-body">
+      <div v-if="loading" class="m-dataview__loading">
+        <div class="m-dataview__loading-mask" />
+        <div class="m-dataview__loading-body">
           <slot v-if="slots.loading" name="loading" />
-          <WkProgressSpinner v-else size="sm" />
+          <MProgressSpinner v-else size="sm" />
         </div>
       </div>
 
-      <div v-if="isEmpty && !loading" class="wk-dataview__message" role="status">
+      <div v-if="isEmpty && !loading" class="m-dataview__message" role="status">
         <slot name="empty">
-          <p class="wk-dataview__empty-text">{{ resolvedEmptyMessage }}</p>
+          <p class="m-dataview__empty-text">{{ resolvedEmptyMessage }}</p>
         </slot>
       </div>
     </div>
-    <WkPagination
+    <MPagination
       v-if="paginator"
       v-model="page"
-      class="wk-dataview__paginator"
+      class="m-dataview__paginator"
       :total-records="value.length"
       :rows="rows"
       :disabled="disabled"

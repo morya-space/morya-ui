@@ -1,16 +1,16 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import WkTable from './Table.vue'
+import MTable from './Table.vue'
 
 const columns = [
   { key: 'name', label: 'Name', sortable: true },
   { key: 'status', label: 'Status' },
 ]
 
-describe('WkTable', () => {
+describe('MTable', () => {
   it('renders columns, row values, and cell slot', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [{ id: 1, name: 'Landing page', status: 'Draft' }],
@@ -24,7 +24,7 @@ describe('WkTable', () => {
   })
 
   it('shows empty message overlay when there are no rows', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [],
@@ -32,22 +32,22 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.get('.wk-table__empty-text').text()).toContain('Nothing here')
+    expect(wrapper.get('.m-table__empty-text').text()).toContain('Nothing here')
   })
 
-  it('uses WkScrollbar for table body scrolling', () => {
-    const wrapper = mount(WkTable, {
+  it('uses MScrollbar for table body scrolling', () => {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [{ id: 1, name: 'A' }],
         paginator: false,
       },
     })
-    expect(wrapper.find('.wk-table__scrollbar.wk-scrollbar').exists()).toBe(true)
+    expect(wrapper.find('.m-table__scrollbar.m-scrollbar').exists()).toBe(true)
   })
 
   it('applies density size class', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [{ id: 1, name: 'A' }],
@@ -55,11 +55,11 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.classes()).toContain('wk-table--large')
+    expect(wrapper.classes()).toContain('m-table--large')
   })
 
   it('applies striped and bordered modifiers', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [{ id: 1, name: 'A' }],
@@ -68,12 +68,12 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.classes()).toContain('wk-table--striped')
-    expect(wrapper.classes()).toContain('wk-table--border')
+    expect(wrapper.classes()).toContain('m-table--striped')
+    expect(wrapper.classes()).toContain('m-table--border')
   })
 
   it('shows loading overlay', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [],
@@ -81,12 +81,12 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.find('.wk-table__loading').exists()).toBe(true)
-    expect(wrapper.find('.wk-table__message').exists()).toBe(false)
+    expect(wrapper.find('.m-table__loading').exists()).toBe(true)
+    expect(wrapper.find('.m-table__message').exists()).toBe(false)
   })
 
   it('sorts rows when sortable header is clicked', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [
@@ -96,7 +96,7 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    await wrapper.get('th.wk-table__header-cell--sortable').trigger('click')
+    await wrapper.get('th.m-table__header-cell--sortable').trigger('click')
     const firstCell = wrapper.find('tbody td').text()
     expect(firstCell).toBe('Ada')
     expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
@@ -107,7 +107,7 @@ describe('WkTable', () => {
       { id: 1, name: 'Ada' },
       { id: 2, name: 'Lin' },
     ]
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows,
@@ -116,7 +116,7 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    await wrapper.findAll('.wk-checkbox__input')[1]!.setValue(true)
+    await wrapper.findAll('.m-checkbox__input')[1]!.setValue(true)
     expect(wrapper.emitted('update:selection')?.at(-1)?.[0]).toEqual([rows[0]])
   })
 
@@ -125,7 +125,7 @@ describe('WkTable', () => {
       { id: 1, name: 'Ada' },
       { id: 2, name: 'Lin' },
     ]
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows,
@@ -133,13 +133,13 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    await wrapper.findAll('.wk-radio__input')[0]!.setValue(true)
+    await wrapper.findAll('.m-radio__input')[0]!.setValue(true)
     expect(wrapper.emitted('update:selectedItem')?.at(-1)?.[0]).toEqual(rows[0])
   })
 
-  it('paginates with WkPagination in footer mode', async () => {
+  it('paginates with MPagination in footer mode', async () => {
     const rows = Array.from({ length: 5 }, (_, i) => ({ id: i + 1, name: `R${i + 1}` }))
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows,
@@ -148,15 +148,15 @@ describe('WkTable', () => {
         paginator: true,
       },
     })
-    expect(wrapper.find('.wk-pagination').exists()).toBe(true)
+    expect(wrapper.find('.m-pagination').exists()).toBe(true)
     expect(wrapper.findAll('tbody tr')).toHaveLength(2)
-    const buttons = wrapper.findAll('.wk-pagination__button')
+    const buttons = wrapper.findAll('.m-pagination__button')
     await buttons.at(-1)!.trigger('click')
     expect(wrapper.text()).toContain('R3')
   })
 
   it('highlights current row when enabled', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [
@@ -169,11 +169,11 @@ describe('WkTable', () => {
     })
     await wrapper.findAll('tbody tr')[0]!.trigger('click')
     expect(wrapper.emitted('update:currentRowKey')?.at(-1)?.[0]).toBe(1)
-    expect(wrapper.find('tbody tr.wk-table__row--current').exists()).toBe(true)
+    expect(wrapper.find('tbody tr.m-table__row--current').exists()).toBe(true)
   })
 
   it('renders expansion slot', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [{ id: 1, name: 'Ada', extra: 'Design system' }],
@@ -185,13 +185,13 @@ describe('WkTable', () => {
           h('p', { class: 'exp' }, `${row.name} ${row.extra}`),
       },
     })
-    await wrapper.get('.wk-table__expand-btn').trigger('click')
-    expect(wrapper.get('.wk-table__cell--expanded').text()).toContain('Ada Design system')
+    await wrapper.get('.m-table__expand-btn').trigger('click')
+    expect(wrapper.get('.m-table__cell--expanded').text()).toContain('Ada Design system')
     expect(wrapper.emitted('expand')).toBeTruthy()
   })
 
   it('renders column render output', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name', render: (row: { name: string }) => `*${row.name}*` }],
         rows: [{ id: 1, name: 'Ada' }],
@@ -202,7 +202,7 @@ describe('WkTable', () => {
   })
 
   it('sorts numeric columns numerically', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'score', label: 'Score', sortable: true }],
         rows: [
@@ -213,13 +213,13 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    await wrapper.get('th.wk-table__header-cell--sortable').trigger('click')
-    const cells = wrapper.findAll('tbody td .wk-table__cell-text')
+    await wrapper.get('th.m-table__header-cell--sortable').trigger('click')
+    const cells = wrapper.findAll('tbody td .m-table__cell-text')
     expect(cells.map((cell) => cell.text())).toEqual(['9', '25', '100'])
   })
 
   it('treats search input as plain text, not regex', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [{ key: 'name', label: 'Name' }],
         rows: [
@@ -235,7 +235,7 @@ describe('WkTable', () => {
   })
 
   it('supports v-model:expandedRowKeys and keeps expansion across sorting', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         'columns': [
           { key: 'name', label: 'Name', sortable: true },
@@ -254,17 +254,17 @@ describe('WkTable', () => {
         expansion: ({ row }: { row: { extra: string } }) => h('p', { class: 'exp' }, row.extra),
       },
     })
-    const expandButtons = wrapper.findAll('.wk-table__expand-btn')
+    const expandButtons = wrapper.findAll('.m-table__expand-btn')
     await expandButtons[0]!.trigger('click')
     expect(wrapper.emitted('update:expandedRowKeys')?.at(-1)).toEqual([[1]])
-    expect(wrapper.find('.wk-table__cell--expanded').exists()).toBe(true)
+    expect(wrapper.find('.m-table__cell--expanded').exists()).toBe(true)
 
-    await wrapper.get('th.wk-table__header-cell--sortable').trigger('click')
-    expect(wrapper.find('.wk-table__cell--expanded').exists()).toBe(true)
+    await wrapper.get('th.m-table__header-cell--sortable').trigger('click')
+    expect(wrapper.find('.m-table__cell--expanded').exists()).toBe(true)
   })
 
   it('renders right-fixed columns with right offsets', () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns: [
           { key: 'name', label: 'Name' },
@@ -276,11 +276,11 @@ describe('WkTable', () => {
     })
     const opsHeader = wrapper.findAll('th').at(-1)!
     expect(opsHeader.attributes('style')).toContain('right: 0px')
-    expect(opsHeader.classes()).toContain('wk-table__header-cell--shadow-end')
+    expect(opsHeader.classes()).toContain('m-table__header-cell--shadow-end')
   })
 
   it('sortMode emit only emits without client sorting', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         sortMode: 'emit' as const,
@@ -291,13 +291,13 @@ describe('WkTable', () => {
         paginator: false,
       },
     })
-    await wrapper.get('th.wk-table__header-cell--sortable').trigger('click')
+    await wrapper.get('th.m-table__header-cell--sortable').trigger('click')
     expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
     expect(wrapper.find('tbody td').text()).toBe('Lin')
   })
 
   it('filters rows via controlled filters prop', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [
@@ -316,7 +316,7 @@ describe('WkTable', () => {
   })
 
   it('emits update:filters when setFilters is called', async () => {
-    const wrapper = mount(WkTable, {
+    const wrapper = mount(MTable, {
       props: {
         columns,
         rows: [

@@ -6,10 +6,10 @@ import {
     useDensity,
     useMotion,
     useTheme,
-    WkCard,
-    WkIcon,
-    WkScrollbar,
-} from "@wise-kit/ui";
+    MCard,
+    MIcon,
+    MScrollbar,
+} from "morya-ui";
 import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import ComponentDocViewer from "../components/ComponentDocViewer.vue";
@@ -135,12 +135,12 @@ function groupByCategory(items: DocumentedComponentMeta[]) {
 }
 
 const PLAYGROUND_THEME_PROPS = [
-    "--wk-color-primary",
-    "--wk-color-primary-hover",
-    "--wk-color-focus-ring",
-    "--wk-radius-sm",
-    "--wk-radius-md",
-    "--wk-radius-lg",
+    "--m-color-primary",
+    "--m-color-primary-hover",
+    "--m-color-focus-ring",
+    "--m-radius-sm",
+    "--m-radius-md",
+    "--m-radius-lg",
 ] as const;
 
 function applyPlaygroundTheme() {
@@ -153,19 +153,19 @@ function applyPlaygroundTheme() {
         radiusOptions.value[1];
     if (!selectedAccent || !selectedRadius) return;
 
-    root.style.setProperty("--wk-color-primary", selectedAccent.color);
-    root.style.setProperty("--wk-color-primary-hover", selectedAccent.hover);
-    root.style.setProperty("--wk-color-focus-ring", selectedAccent.color);
+    root.style.setProperty("--m-color-primary", selectedAccent.color);
+    root.style.setProperty("--m-color-primary-hover", selectedAccent.hover);
+    root.style.setProperty("--m-color-focus-ring", selectedAccent.color);
     root.style.setProperty(
-        "--wk-radius-sm",
+        "--m-radius-sm",
         selectedRadius.values[0] ?? "0.25rem",
     );
     root.style.setProperty(
-        "--wk-radius-md",
+        "--m-radius-md",
         selectedRadius.values[1] ?? "0.5rem",
     );
     root.style.setProperty(
-        "--wk-radius-lg",
+        "--m-radius-lg",
         selectedRadius.values[2] ?? "0.75rem",
     );
 }
@@ -259,7 +259,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                 body-class="sidebar-body"
             >
                         <label class="search-box">
-                            <WkIcon name="search" size="sm" />
+                            <MIcon name="search" size="sm" />
                             <input
                                 v-model="search"
                                 type="search"
@@ -469,7 +469,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
             </MobileSidebarShell>
 
             <main class="content">
-                <WkScrollbar ref="contentScroll" class="column-scroll">
+                <MScrollbar ref="contentScroll" class="column-scroll">
                     <div
                         class="content-body"
                         :class="{
@@ -521,7 +521,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                                         })
                                     "
                                 >
-                                    <WkCard
+                                    <MCard
                                         v-for="item in group.items"
                                         :key="item.name"
                                         class="overview-card"
@@ -541,7 +541,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                                         >
                                             {{ t.viewDetails }} <span>→</span>
                                         </RouterLink>
-                                    </WkCard>
+                                    </MCard>
                                 </section>
                             </template>
                         </template>
@@ -570,14 +570,14 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                             </RouterLink>
                         </section>
                     </div>
-                </WkScrollbar>
+                </MScrollbar>
             </main>
 
             <aside
                 class="token-panel"
                 :aria-label="activePackageDoc ? t.componentSection : t.tokens"
             >
-                <WkScrollbar class="column-scroll">
+                <MScrollbar class="column-scroll">
                     <div class="token-panel-body">
                         <DocSectionNav
                             v-if="activePackageDoc"
@@ -635,13 +635,13 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                                 </div>
                             </div>
                             <div class="token-note">
-                                <WkIcon name="info" size="sm" /><span>{{
+                                <MIcon name="info" size="sm" /><span>{{
                                     t.tokenNote
                                 }}</span>
                             </div>
                         </template>
                     </div>
-                </WkScrollbar>
+                </MScrollbar>
             </aside>
         </div>
     </div>
@@ -656,7 +656,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     overflow: hidden;
 }
 .token-index {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
     font-size: 0.68rem;
     letter-spacing: 0.04em;
@@ -681,12 +681,12 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     height: 100%;
     min-height: 0;
 }
-.column-scroll :deep(.wk-scrollbar__wrap) {
+.column-scroll :deep(.m-scrollbar__wrap) {
     overscroll-behavior: contain;
 }
 .sidebar,
 .token-panel {
-    background: color-mix(in srgb, var(--wk-color-surface) 62%, transparent);
+    background: color-mix(in srgb, var(--m-color-surface) 62%, transparent);
     border-right: 1px solid var(--docs-edge);
     backdrop-filter: blur(12px);
 }
@@ -722,9 +722,9 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .search-box {
     align-items: center;
-    background: color-mix(in srgb, var(--wk-color-border) 35%, transparent);
-    border-radius: var(--wk-radius-sm);
-    color: var(--wk-color-text-muted);
+    background: color-mix(in srgb, var(--m-color-border) 35%, transparent);
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text-muted);
     display: flex;
     gap: 0.5rem;
     padding: 0.5rem 0.65rem;
@@ -732,13 +732,13 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .search-box input {
     background: transparent;
     border: 0;
-    color: var(--wk-color-text);
+    color: var(--m-color-text);
     min-width: 0;
     outline: 0;
     width: 100%;
 }
 .theme-panel {
-    border-bottom: 1px solid var(--wk-color-border);
+    border-bottom: 1px solid var(--m-color-border);
     margin: 0.85rem 0 0.35rem;
     padding-bottom: 0.85rem;
 }
@@ -746,8 +746,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-sm);
-    color: var(--wk-color-text);
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text);
     cursor: pointer;
     display: grid;
     gap: 0.2rem 0.5rem;
@@ -757,21 +757,21 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     width: 100%;
 }
 .theme-panel__toggle:hover {
-    background: color-mix(in srgb, var(--wk-color-primary) 8%, transparent);
+    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
 }
 .theme-panel__title {
     font-size: 0.78rem;
     font-weight: 650;
 }
 .theme-panel__summary {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-family: ui-monospace, monospace;
     font-size: 0.58rem;
     grid-column: 1 / 3;
     letter-spacing: 0.02em;
 }
 .theme-panel__chevron {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-size: 0.7rem;
     grid-column: 3;
     grid-row: 1 / 3;
@@ -796,7 +796,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .setting-label,
 .nav-heading {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-family: ui-monospace, monospace;
     font-size: 0.72rem;
     font-weight: 650;
@@ -805,8 +805,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     text-transform: uppercase;
 }
 .segmented-control {
-    background: color-mix(in srgb, var(--wk-color-border) 45%, transparent);
-    border-radius: var(--wk-radius-sm);
+    background: color-mix(in srgb, var(--m-color-border) 45%, transparent);
+    border-radius: var(--m-radius-sm);
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.15rem;
@@ -817,16 +817,16 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .segmented-control button {
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-sm);
-    color: var(--wk-color-text-muted);
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text-muted);
     cursor: pointer;
     font-size: 0.68rem;
     padding: 0.38rem 0.25rem;
 }
 .segmented-control button.is-selected {
-    background: var(--wk-color-surface);
-    box-shadow: var(--wk-shadow-sm);
-    color: var(--wk-color-text);
+    background: var(--m-color-surface);
+    box-shadow: var(--m-shadow-sm);
+    color: var(--m-color-text);
     font-weight: 650;
 }
 .accent-list {
@@ -845,7 +845,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .accent-swatch.is-selected {
     box-shadow:
-        0 0 0 2px var(--wk-color-surface),
+        0 0 0 2px var(--m-color-surface),
         0 0 0 4px var(--swatch-color);
 }
 .component-nav {
@@ -862,8 +862,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     align-items: baseline;
     color: color-mix(
         in srgb,
-        var(--wk-color-text) 72%,
-        var(--wk-color-surface)
+        var(--m-color-text) 72%,
+        var(--m-color-surface)
     );
     display: flex;
     gap: 0.45rem;
@@ -873,8 +873,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .nav-heading__count {
     color: color-mix(
         in srgb,
-        var(--wk-color-text-muted) 82%,
-        var(--wk-color-surface)
+        var(--m-color-text-muted) 82%,
+        var(--m-color-surface)
     );
     font-family: ui-monospace, monospace;
     font-size: 0.7rem;
@@ -885,11 +885,11 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     align-items: center;
     background: transparent;
     border: 0;
-    border-radius: var(--wk-radius-sm);
+    border-radius: var(--m-radius-sm);
     color: color-mix(
         in srgb,
-        var(--wk-color-text) 78%,
-        var(--wk-color-surface)
+        var(--m-color-text) 78%,
+        var(--m-color-surface)
     );
     cursor: pointer;
     display: flex;
@@ -907,24 +907,24 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .nav-item:hover,
 .nav-item--active {
-    background: color-mix(in srgb, var(--wk-color-primary) 9%, transparent);
+    background: color-mix(in srgb, var(--m-color-primary) 9%, transparent);
     color: color-mix(
         in srgb,
-        var(--wk-color-primary) 82%,
-        var(--wk-color-text)
+        var(--m-color-primary) 82%,
+        var(--m-color-text)
     );
 }
 .nav-item--active {
     font-weight: 700;
 }
 .nav-count {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-family: ui-monospace, monospace;
     font-size: 0.72rem;
     opacity: 0.9;
 }
 .empty-search {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
 }
@@ -947,10 +947,10 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin: 1rem 0 1.3rem;
 }
 .hero h1 span {
-    color: var(--wk-color-primary);
+    color: var(--m-color-primary);
 }
 .hero-copy {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
@@ -967,9 +967,9 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin-top: 1.5rem;
 }
 .doc-meta span {
-    border: 1px solid var(--wk-color-border);
-    border-radius: var(--wk-radius-full);
-    color: var(--wk-color-text-muted);
+    border: 1px solid var(--m-color-border);
+    border-radius: var(--m-radius-full);
+    color: var(--m-color-text-muted);
     font-family: ui-monospace, monospace;
     font-size: 0.6rem;
     padding: 0.3rem 0.55rem;
@@ -991,7 +991,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin: 0.5rem 0 0;
 }
 .section-rule {
-    background: var(--wk-color-border);
+    background: var(--m-color-border);
     flex: 1;
     height: 1px;
     margin-bottom: 0.45rem;
@@ -1000,14 +1000,14 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     align-items: center;
     background: linear-gradient(
         145deg,
-        color-mix(in srgb, var(--wk-color-primary) 18%, transparent),
+        color-mix(in srgb, var(--m-color-primary) 18%, transparent),
         transparent
     );
     border: 1px solid var(--docs-edge);
     border-radius: 50%;
     box-shadow: 0 20px 50px
-        color-mix(in srgb, var(--wk-color-primary) 22%, transparent);
-    color: var(--wk-color-primary);
+        color-mix(in srgb, var(--m-color-primary) 22%, transparent);
+    color: var(--m-color-primary);
     display: flex;
     font-family: var(--docs-display);
     font-size: 4.5rem;
@@ -1031,7 +1031,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     position: relative;
 }
 .overview-card__number {
-    color: var(--wk-color-primary);
+    color: var(--m-color-primary);
     font-family: ui-monospace, monospace;
     font-size: 0.65rem;
 }
@@ -1043,7 +1043,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin: 2.5rem 0 0.5rem;
 }
 .overview-card p {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-size: 0.78rem;
     line-height: 1.5;
     margin: 0;
@@ -1052,7 +1052,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .text-link {
     background: transparent;
     border: 0;
-    color: var(--wk-color-primary);
+    color: var(--m-color-primary);
     cursor: pointer;
     display: inline-flex;
     font-size: 0.75rem;
@@ -1063,13 +1063,13 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .text-link span {
     display: inline-block;
     margin-left: 0.35rem;
-    transition: transform var(--wk-motion-fast) var(--wk-motion-ease);
+    transition: transform var(--m-motion-fast) var(--m-motion-ease);
 }
 .text-link:hover span {
     transform: translateX(0.25rem);
 }
 .missing-doc {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
 }
 .missing-doc .text-link {
     margin-top: 1rem;
@@ -1079,14 +1079,14 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     justify-content: space-between;
 }
 .token-description {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-family: var(--docs-body);
     font-size: 0.8rem;
     line-height: 1.5;
     margin: 1.5rem 0 2.5rem;
 }
 .token-group {
-    border-top: 1px solid var(--wk-color-border);
+    border-top: 1px solid var(--m-color-border);
     padding: 1rem 0;
 }
 .token-group h3 {
@@ -1099,7 +1099,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .swatch-row {
     align-items: center;
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     display: grid;
     font-size: 0.7rem;
     gap: 0.5rem;
@@ -1107,47 +1107,47 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin: 0.6rem 0;
 }
 .swatch {
-    border: 1px solid var(--wk-color-border);
+    border: 1px solid var(--m-color-border);
     border-radius: 50%;
     height: 0.8rem;
     width: 0.8rem;
 }
 .swatch--primary {
-    background: var(--wk-color-primary);
+    background: var(--m-color-primary);
 }
 .swatch--surface {
-    background: var(--wk-color-surface);
+    background: var(--m-color-surface);
 }
 .swatch--border {
-    background: var(--wk-color-border);
+    background: var(--m-color-border);
 }
 .swatch-row code {
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     font-family: ui-monospace, monospace;
     font-size: 0.6rem;
 }
 .radius-row {
     align-items: center;
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     display: flex;
     font-family: ui-monospace, monospace;
     font-size: 0.6rem;
     gap: 0.35rem;
 }
 .radius-sample {
-    background: color-mix(in srgb, var(--wk-color-primary) 15%, transparent);
-    border: 1px solid var(--wk-color-primary);
+    background: color-mix(in srgb, var(--m-color-primary) 15%, transparent);
+    border: 1px solid var(--m-color-primary);
     height: 1.25rem;
     width: 1.25rem;
 }
 .radius-sample--sm {
-    border-radius: var(--wk-radius-sm);
+    border-radius: var(--m-radius-sm);
 }
 .radius-sample--md {
-    border-radius: var(--wk-radius-md);
+    border-radius: var(--m-radius-md);
 }
 .radius-sample--lg {
-    border-radius: var(--wk-radius-lg);
+    border-radius: var(--m-radius-lg);
 }
 .spacing-bars {
     align-items: end;
@@ -1157,8 +1157,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .spacing-bars span {
     align-items: center;
-    background: color-mix(in srgb, var(--wk-color-primary) 20%, transparent);
-    color: var(--wk-color-primary);
+    background: color-mix(in srgb, var(--m-color-primary) 20%, transparent);
+    color: var(--m-color-primary);
     display: flex;
     font-family: ui-monospace, monospace;
     font-size: 0.6rem;
@@ -1168,8 +1168,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .token-note {
     align-items: start;
-    border: 1px solid var(--wk-color-border);
-    color: var(--wk-color-text-muted);
+    border: 1px solid var(--m-color-border);
+    color: var(--m-color-text-muted);
     display: flex;
     font-size: 0.68rem;
     gap: 0.5rem;
@@ -1177,8 +1177,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin-top: 2rem;
     padding: 0.75rem;
 }
-.token-note .wk-icon {
-    color: var(--wk-color-primary);
+.token-note .m-icon {
+    color: var(--m-color-primary);
     flex: 0 0 auto;
 }
 @media (max-width: 1100px) {

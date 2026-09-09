@@ -1,13 +1,13 @@
-import type { WkSizeInput, WkTagSeverity } from '../../shared/types'
+import type { MSizeInput, MTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type ChipSeverity = WkTagSeverity | 'warning'
-export type ChipSize = WkSizeInput
+export type ChipSeverity = MTagSeverity | 'warning'
+export type ChipSize = MSizeInput
 
 export interface ChipProps {
   /** Chip text. */
   label?: string
-  /** Leading icon from WkIcon. */
+  /** Leading icon from MIcon. */
   icon?: IconName
   /** Leading image URL. */
   image?: string

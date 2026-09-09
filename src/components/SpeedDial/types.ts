@@ -1,4 +1,4 @@
-import type { WkAppendTo } from '../../shared/overlay'
+import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export type SpeedDialDirection = 'up' | 'down' | 'left' | 'right'
@@ -16,7 +16,7 @@ export interface SpeedDialProps {
   /** Teleport action list. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }
 
 export interface SpeedDialEmits {

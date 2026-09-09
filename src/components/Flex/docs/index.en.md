@@ -11,22 +11,22 @@ Flexbox layout container. Prefer CSS `gap` for spacing between children.
 ## Import
 
 ```ts
-import { WkFlex } from '@wise-kit/ui'
+import { MFlex } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFlex } from '@wise-kit/ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <WkFlex>
-    <WkButton label="One" size="small" />
-    <WkButton label="Two" size="small" severity="secondary" />
-    <WkButton label="Three" size="small" severity="secondary" />
-  </WkFlex>
+  <MFlex>
+    <MButton label="One" size="small" />
+    <MButton label="Two" size="small" severity="secondary" />
+    <MButton label="Three" size="small" severity="secondary" />
+  </MFlex>
 </template>
 ```
 
@@ -34,15 +34,15 @@ import { WkButton, WkFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFlex } from '@wise-kit/ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <WkFlex vertical>
-    <WkButton label="Top" size="small" />
-    <WkButton label="Middle" size="small" severity="secondary" />
-    <WkButton label="Bottom" size="small" severity="secondary" />
-  </WkFlex>
+  <MFlex vertical>
+    <MButton label="Top" size="small" />
+    <MButton label="Middle" size="small" severity="secondary" />
+    <MButton label="Bottom" size="small" severity="secondary" />
+  </MFlex>
 </template>
 ```
 
@@ -50,14 +50,14 @@ import { WkButton, WkFlex } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFlex, WkTag } from '@wise-kit/ui'
+import { MButton, MFlex, MTag } from 'morya-ui'
 </script>
 
 <template>
-  <WkFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <WkTag value="Tag" />
-    <WkButton label="Action" size="small" />
-  </WkFlex>
+  <MFlex justify="space-between" align="center" style="width:min(28rem,100%)">
+    <MTag value="Tag" />
+    <MButton label="Action" size="small" />
+  </MFlex>
 </template>
 ```
 

@@ -1,207 +1,207 @@
 import type { Component } from 'vue'
-import WkAccordion from './components/Accordion/Accordion.vue'
-import WkAutoComplete from './components/AutoComplete/AutoComplete.vue'
-import WkAvatar from './components/Avatar/Avatar.vue'
-import WkAvatarGroup from './components/Avatar/AvatarGroup.vue'
-import WkBadge from './components/Badge/Badge.vue'
-import WkBlockUI from './components/BlockUI/BlockUI.vue'
-import WkBreadcrumb from './components/Breadcrumb/Breadcrumb.vue'
-import WkButton from './components/Button/Button.vue'
-import WkButtonGroup from './components/Button/ButtonGroup.vue'
-import WkCard from './components/Card/Card.vue'
-import WkCarousel from './components/Carousel/Carousel.vue'
-import WkCascadeSelect from './components/CascadeSelect/CascadeSelect.vue'
-import WkCheckbox from './components/Checkbox/Checkbox.vue'
-import WkCheckboxGroup from './components/Checkbox/CheckboxGroup.vue'
-import WkChip from './components/Chip/Chip.vue'
-import WkCommandMenu from './components/CommandMenu/CommandMenu.vue'
-import WkConfigProvider from './components/ConfigProvider/ConfigProvider.vue'
-import WkConfirmDialog from './components/ConfirmDialog/ConfirmDialog.vue'
-import WkConfirmPopup from './components/ConfirmPopup/ConfirmPopup.vue'
-import WkContextMenu from './components/ContextMenu/ContextMenu.vue'
-import WkDataView from './components/DataView/DataView.vue'
-import WkDatePicker from './components/DatePicker/DatePicker.vue'
-import WkDialog from './components/Dialog/Dialog.vue'
-import WkDivider from './components/Divider/Divider.vue'
-import WkDock from './components/Dock/Dock.vue'
-import WkDrawer from './components/Drawer/Drawer.vue'
-import WkDropdown from './components/Dropdown/Dropdown.vue'
-import WkFieldset from './components/Fieldset/Fieldset.vue'
-import WkFileUpload from './components/FileUpload/FileUpload.vue'
-import WkFlex from './components/Flex/Flex.vue'
-import WkFloatLabel from './components/FloatLabel/FloatLabel.vue'
-import WkFluid from './components/Fluid/Fluid.vue'
-import WkForm from './components/Form/Form.vue'
-import WkFormItem from './components/Form/FormItem.vue'
-import WkGallery from './components/Gallery/Gallery.vue'
-import WkGrid from './components/Grid/Grid.vue'
-import WkGi from './components/Grid/GridItem.vue'
-import WkGridItem from './components/Grid/GridItem.vue'
-import WkIcon from './components/Icon/Icon.vue'
-import WkIconField from './components/IconField/IconField.vue'
-import WkInplace from './components/Inplace/Inplace.vue'
-import WkInput from './components/Input/Input.vue'
-import WkInputColor from './components/InputColor/InputColor.vue'
-import WkInputGroup from './components/InputGroup/InputGroup.vue'
-import WkInputGroupAddon from './components/InputGroup/InputGroupAddon.vue'
-import WkInputNumber from './components/InputNumber/InputNumber.vue'
-import WkInputOtp from './components/InputOtp/InputOtp.vue'
-import WkInputPassword from './components/InputPassword/InputPassword.vue'
-import WkInputTags from './components/InputTags/InputTags.vue'
-import WkKnob from './components/Knob/Knob.vue'
-import WkLabel from './components/Label/Label.vue'
-import WkLayout from './components/Layout/Layout.vue'
-import WkLayoutContent from './components/Layout/LayoutContent.vue'
-import WkLayoutFooter from './components/Layout/LayoutFooter.vue'
-import WkLayoutHeader from './components/Layout/LayoutHeader.vue'
-import WkLayoutSider from './components/Layout/LayoutSider.vue'
-import WkListbox from './components/Listbox/Listbox.vue'
-import WkMegaMenu from './components/MegaMenu/MegaMenu.vue'
-import WkMenu from './components/Menu/Menu.vue'
-import WkMenubar from './components/Menubar/Menubar.vue'
-import WkMessage from './components/Message/Message.vue'
-import WkMeterGroup from './components/MeterGroup/MeterGroup.vue'
-import WkOrderList from './components/OrderList/OrderList.vue'
-import WkPagination from './components/Pagination/Pagination.vue'
-import WkPanel from './components/Panel/Panel.vue'
-import WkPickList from './components/PickList/PickList.vue'
-import WkPopover from './components/Popover/Popover.vue'
-import WkProgressBar from './components/ProgressBar/ProgressBar.vue'
-import WkProgressSpinner from './components/ProgressSpinner/ProgressSpinner.vue'
-import WkRadio from './components/Radio/Radio.vue'
-import WkRadioGroup from './components/Radio/RadioGroup.vue'
-import WkRating from './components/Rating/Rating.vue'
-import WkScrollbar from './components/Scrollbar/Scrollbar.vue'
-import WkScrollTop from './components/ScrollTop/ScrollTop.vue'
-import WkSelect from './components/Select/Select.vue'
-import WkSelectButton from './components/SelectButton/SelectButton.vue'
-import WkSidebar from './components/Sidebar/Sidebar.vue'
-import WkSkeleton from './components/Skeleton/Skeleton.vue'
-import WkSlider from './components/Slider/Slider.vue'
-import WkSpace from './components/Space/Space.vue'
-import WkSpeedDial from './components/SpeedDial/SpeedDial.vue'
-import WkSplitButton from './components/SplitButton/SplitButton.vue'
-import WkSplitter from './components/Splitter/Splitter.vue'
-import WkStepper from './components/Stepper/Stepper.vue'
-import WkSwitch from './components/Switch/Switch.vue'
-import WkTable from './components/Table/Table.vue'
-import WkTabs from './components/Tabs/Tabs.vue'
-import WkTag from './components/Tag/Tag.vue'
-import WkTerminal from './components/Terminal/Terminal.vue'
-import WkTextarea from './components/Textarea/Textarea.vue'
-import WkTieredMenu from './components/TieredMenu/TieredMenu.vue'
-import WkTimeline from './components/Timeline/Timeline.vue'
-import WkToast from './components/Toast/Toast.vue'
-import WkToggleButton from './components/ToggleButton/ToggleButton.vue'
-import WkToolbar from './components/Toolbar/Toolbar.vue'
-import WkTooltip from './components/Tooltip/Tooltip.vue'
-import WkTree from './components/Tree/Tree.vue'
-import WkTreeSelect from './components/TreeSelect/TreeSelect.vue'
-import WkTreeTable from './components/TreeTable/TreeTable.vue'
-import WkVirtualScroller from './components/VirtualScroller/VirtualScroller.vue'
+import MAccordion from './components/Accordion/Accordion.vue'
+import MAutoComplete from './components/AutoComplete/AutoComplete.vue'
+import MAvatar from './components/Avatar/Avatar.vue'
+import MAvatarGroup from './components/Avatar/AvatarGroup.vue'
+import MBadge from './components/Badge/Badge.vue'
+import MBlockUI from './components/BlockUI/BlockUI.vue'
+import MBreadcrumb from './components/Breadcrumb/Breadcrumb.vue'
+import MButton from './components/Button/Button.vue'
+import MButtonGroup from './components/Button/ButtonGroup.vue'
+import MCard from './components/Card/Card.vue'
+import MCarousel from './components/Carousel/Carousel.vue'
+import MCascadeSelect from './components/CascadeSelect/CascadeSelect.vue'
+import MCheckbox from './components/Checkbox/Checkbox.vue'
+import MCheckboxGroup from './components/Checkbox/CheckboxGroup.vue'
+import MChip from './components/Chip/Chip.vue'
+import MCommandMenu from './components/CommandMenu/CommandMenu.vue'
+import MConfigProvider from './components/ConfigProvider/ConfigProvider.vue'
+import MConfirmDialog from './components/ConfirmDialog/ConfirmDialog.vue'
+import MConfirmPopup from './components/ConfirmPopup/ConfirmPopup.vue'
+import MContextMenu from './components/ContextMenu/ContextMenu.vue'
+import MDataView from './components/DataView/DataView.vue'
+import MDatePicker from './components/DatePicker/DatePicker.vue'
+import MDialog from './components/Dialog/Dialog.vue'
+import MDivider from './components/Divider/Divider.vue'
+import MDock from './components/Dock/Dock.vue'
+import MDrawer from './components/Drawer/Drawer.vue'
+import MDropdown from './components/Dropdown/Dropdown.vue'
+import MFieldset from './components/Fieldset/Fieldset.vue'
+import MFileUpload from './components/FileUpload/FileUpload.vue'
+import MFlex from './components/Flex/Flex.vue'
+import MFloatLabel from './components/FloatLabel/FloatLabel.vue'
+import MFluid from './components/Fluid/Fluid.vue'
+import MForm from './components/Form/Form.vue'
+import MFormItem from './components/Form/FormItem.vue'
+import MGallery from './components/Gallery/Gallery.vue'
+import MGrid from './components/Grid/Grid.vue'
+import MGi from './components/Grid/GridItem.vue'
+import MGridItem from './components/Grid/GridItem.vue'
+import MIcon from './components/Icon/Icon.vue'
+import MIconField from './components/IconField/IconField.vue'
+import MInplace from './components/Inplace/Inplace.vue'
+import MInput from './components/Input/Input.vue'
+import MInputColor from './components/InputColor/InputColor.vue'
+import MInputGroup from './components/InputGroup/InputGroup.vue'
+import MInputGroupAddon from './components/InputGroup/InputGroupAddon.vue'
+import MInputNumber from './components/InputNumber/InputNumber.vue'
+import MInputOtp from './components/InputOtp/InputOtp.vue'
+import MInputPassword from './components/InputPassword/InputPassword.vue'
+import MInputTags from './components/InputTags/InputTags.vue'
+import MKnob from './components/Knob/Knob.vue'
+import MLabel from './components/Label/Label.vue'
+import MLayout from './components/Layout/Layout.vue'
+import MLayoutContent from './components/Layout/LayoutContent.vue'
+import MLayoutFooter from './components/Layout/LayoutFooter.vue'
+import MLayoutHeader from './components/Layout/LayoutHeader.vue'
+import MLayoutSider from './components/Layout/LayoutSider.vue'
+import MListbox from './components/Listbox/Listbox.vue'
+import MMegaMenu from './components/MegaMenu/MegaMenu.vue'
+import MMenu from './components/Menu/Menu.vue'
+import MMenubar from './components/Menubar/Menubar.vue'
+import MMessage from './components/Message/Message.vue'
+import MMeterGroup from './components/MeterGroup/MeterGroup.vue'
+import MOrderList from './components/OrderList/OrderList.vue'
+import MPagination from './components/Pagination/Pagination.vue'
+import MPanel from './components/Panel/Panel.vue'
+import MPickList from './components/PickList/PickList.vue'
+import MPopover from './components/Popover/Popover.vue'
+import MProgressBar from './components/ProgressBar/ProgressBar.vue'
+import MProgressSpinner from './components/ProgressSpinner/ProgressSpinner.vue'
+import MRadio from './components/Radio/Radio.vue'
+import MRadioGroup from './components/Radio/RadioGroup.vue'
+import MRating from './components/Rating/Rating.vue'
+import MScrollbar from './components/Scrollbar/Scrollbar.vue'
+import MScrollTop from './components/ScrollTop/ScrollTop.vue'
+import MSelect from './components/Select/Select.vue'
+import MSelectButton from './components/SelectButton/SelectButton.vue'
+import MSidebar from './components/Sidebar/Sidebar.vue'
+import MSkeleton from './components/Skeleton/Skeleton.vue'
+import MSlider from './components/Slider/Slider.vue'
+import MSpace from './components/Space/Space.vue'
+import MSpeedDial from './components/SpeedDial/SpeedDial.vue'
+import MSplitButton from './components/SplitButton/SplitButton.vue'
+import MSplitter from './components/Splitter/Splitter.vue'
+import MStepper from './components/Stepper/Stepper.vue'
+import MSwitch from './components/Switch/Switch.vue'
+import MTable from './components/Table/Table.vue'
+import MTabs from './components/Tabs/Tabs.vue'
+import MTag from './components/Tag/Tag.vue'
+import MTerminal from './components/Terminal/Terminal.vue'
+import MTextarea from './components/Textarea/Textarea.vue'
+import MTieredMenu from './components/TieredMenu/TieredMenu.vue'
+import MTimeline from './components/Timeline/Timeline.vue'
+import MToast from './components/Toast/Toast.vue'
+import MToggleButton from './components/ToggleButton/ToggleButton.vue'
+import MToolbar from './components/Toolbar/Toolbar.vue'
+import MTooltip from './components/Tooltip/Tooltip.vue'
+import MTree from './components/Tree/Tree.vue'
+import MTreeSelect from './components/TreeSelect/TreeSelect.vue'
+import MTreeTable from './components/TreeTable/TreeTable.vue'
+import MVirtualScroller from './components/VirtualScroller/VirtualScroller.vue'
 
 /** Public components available for global registration (`app.use`). */
-export const wkComponents: Record<string, Component> = {
-  WkAccordion,
-  WkAutoComplete,
-  WkAvatar,
-  WkAvatarGroup,
-  WkBadge,
-  WkBlockUI,
-  WkBreadcrumb,
-  WkButton,
-  WkButtonGroup,
-  WkCard,
-  WkCarousel,
-  WkCascadeSelect,
-  WkCheckbox,
-  WkCheckboxGroup,
-  WkChip,
-  WkCommandMenu,
-  WkConfigProvider,
-  WkConfirmDialog,
-  WkConfirmPopup,
-  WkContextMenu,
-  WkDataView,
-  WkDatePicker,
-  WkDialog,
-  WkDivider,
-  WkDock,
-  WkDrawer,
-  WkDropdown,
-  WkFieldset,
-  WkFileUpload,
-  WkFlex,
-  WkFloatLabel,
-  WkFluid,
-  WkForm,
-  WkFormItem,
-  WkGallery,
-  WkGi,
-  WkGrid,
-  WkGridItem,
-  WkIcon,
-  WkIconField,
-  WkInplace,
-  WkInput,
-  WkInputColor,
-  WkInputGroup,
-  WkInputGroupAddon,
-  WkInputNumber,
-  WkInputOtp,
-  WkInputPassword,
-  WkInputTags,
-  WkKnob,
-  WkLabel,
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutFooter,
-  WkLayoutHeader,
-  WkLayoutSider,
-  WkListbox,
-  WkMegaMenu,
-  WkMenu,
-  WkMenubar,
-  WkMessage,
-  WkMeterGroup,
-  WkOrderList,
-  WkPagination,
-  WkPanel,
-  WkPickList,
-  WkPopover,
-  WkProgressBar,
-  WkProgressSpinner,
-  WkRadio,
-  WkRadioGroup,
-  WkRating,
-  WkScrollbar,
-  WkScrollTop,
-  WkSelect,
-  WkSelectButton,
-  WkSidebar,
-  WkSkeleton,
-  WkSlider,
-  WkSpace,
-  WkSpeedDial,
-  WkSplitButton,
-  WkSplitter,
-  WkStepper,
-  WkSwitch,
-  WkTable,
-  WkTabs,
-  WkTag,
-  WkTerminal,
-  WkTextarea,
-  WkTieredMenu,
-  WkTimeline,
-  WkToast,
-  WkToggleButton,
-  WkToolbar,
-  WkTooltip,
-  WkTree,
-  WkTreeSelect,
-  WkTreeTable,
-  WkVirtualScroller,
+export const mComponents: Record<string, Component> = {
+  MAccordion,
+  MAutoComplete,
+  MAvatar,
+  MAvatarGroup,
+  MBadge,
+  MBlockUI,
+  MBreadcrumb,
+  MButton,
+  MButtonGroup,
+  MCard,
+  MCarousel,
+  MCascadeSelect,
+  MCheckbox,
+  MCheckboxGroup,
+  MChip,
+  MCommandMenu,
+  MConfigProvider,
+  MConfirmDialog,
+  MConfirmPopup,
+  MContextMenu,
+  MDataView,
+  MDatePicker,
+  MDialog,
+  MDivider,
+  MDock,
+  MDrawer,
+  MDropdown,
+  MFieldset,
+  MFileUpload,
+  MFlex,
+  MFloatLabel,
+  MFluid,
+  MForm,
+  MFormItem,
+  MGallery,
+  MGi,
+  MGrid,
+  MGridItem,
+  MIcon,
+  MIconField,
+  MInplace,
+  MInput,
+  MInputColor,
+  MInputGroup,
+  MInputGroupAddon,
+  MInputNumber,
+  MInputOtp,
+  MInputPassword,
+  MInputTags,
+  MKnob,
+  MLabel,
+  MLayout,
+  MLayoutContent,
+  MLayoutFooter,
+  MLayoutHeader,
+  MLayoutSider,
+  MListbox,
+  MMegaMenu,
+  MMenu,
+  MMenubar,
+  MMessage,
+  MMeterGroup,
+  MOrderList,
+  MPagination,
+  MPanel,
+  MPickList,
+  MPopover,
+  MProgressBar,
+  MProgressSpinner,
+  MRadio,
+  MRadioGroup,
+  MRating,
+  MScrollbar,
+  MScrollTop,
+  MSelect,
+  MSelectButton,
+  MSidebar,
+  MSkeleton,
+  MSlider,
+  MSpace,
+  MSpeedDial,
+  MSplitButton,
+  MSplitter,
+  MStepper,
+  MSwitch,
+  MTable,
+  MTabs,
+  MTag,
+  MTerminal,
+  MTextarea,
+  MTieredMenu,
+  MTimeline,
+  MToast,
+  MToggleButton,
+  MToolbar,
+  MTooltip,
+  MTree,
+  MTreeSelect,
+  MTreeTable,
+  MVirtualScroller,
 }
 
-export const wkComponentNames = Object.keys(wkComponents)
+export const mComponentNames = Object.keys(mComponents)

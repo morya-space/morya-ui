@@ -21,7 +21,7 @@ src/components/Button/
     └── index.en.md
 ```
 
-- **前缀**：组件导出为 `Wk*`，CSS 类为 `.wk-*`。
+- **前缀**：组件导出为 `M*`，CSS 类为 `.m-*`。
 - **类型**：Props / Emits 放在 `types.ts`，并从包入口再导出。
 - **测试**：用户行为导向的 Vitest + Vue Test Utils。
 
@@ -59,14 +59,14 @@ description: 触发动作的按钮
 
 动效统一：
 
-- 模态：`wk-fade`
-- 锚定菜单：`wk-scale-fade`
-- Toast：`wk-slide-fade`
-- Message：`wk-message-slide`（顶部滑入）
+- 模态：`m-fade`
+- 锚定菜单：`m-scale-fade`
+- Toast：`m-slide-fade`
+- Message：`m-message-slide`（顶部滑入）
 
 全局默认挂载点可通过 [ConfigProvider](/docs/config) 的 `appendTo` 统一设置。
 
 ## 图标约定
 
-- **系统图标**：组件内部与通用操作使用 `WkIcon` + `name`（见 [Icon](/components/Icon) 注册表）。
-- **业务图标**：在应用侧安装 Lucide 等库，通过 `WkIcon` 默认插槽或 Button 的 `icon` 组件传入，不要往组件库堆全量 SVG。
+- **系统图标**：组件内部与通用操作使用 `MIcon` + `name`（见 [Icon](/components/Icon) 注册表）。
+- **业务图标**：在应用侧安装 Lucide 等库，通过 `MIcon` 默认插槽或 Button 的 `icon` 组件传入，不要往组件库堆全量 SVG。

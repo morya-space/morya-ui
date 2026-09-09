@@ -11,21 +11,21 @@ Manage string tags as a chip list.
 ## Import
 
 ```ts
-import { WkInputTags } from '@wise-kit/ui'
+import { MInputTags } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputTags } from '@wise-kit/ui'
+import { MInputTags } from 'morya-ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue', 'design'])
 </script>
 
 <template>
-  <WkInputTags v-model="tags" />
+  <MInputTags v-model="tags" />
 </template>
 ```
 
@@ -35,14 +35,14 @@ const tags = ref(['vue', 'design'])
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputTags } from '@wise-kit/ui'
+import { MInputTags } from 'morya-ui'
 import { ref } from 'vue'
 
 const tags = ref(['vue'])
 </script>
 
 <template>
-  <WkInputTags v-model="tags" :max="3" separator="," placeholder="Comma-separated, max 3" />
+  <MInputTags v-model="tags" :max="3" separator="," placeholder="Comma-separated, max 3" />
 </template>
 ```
 

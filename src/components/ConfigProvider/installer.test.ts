@@ -1,38 +1,38 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
-import { wkComponents } from '../../component-registry'
-import { createWiseKit, WiseKit } from '../../shared/config'
-import WkButton from '../Button/Button.vue'
+import { mComponents } from '../../component-registry'
+import { createMoryaUI, MoryaUI } from '../../shared/config'
+import MButton from '../Button/Button.vue'
 
-describe('createWiseKit / WiseKit installer', () => {
+describe('createMoryaUI / MoryaUI installer', () => {
   it('registers all components globally by default', () => {
     const Host = defineComponent({
-      template: '<WkButton label="Go" />',
+      template: '<MButton label="Go" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWiseKit()],
+        plugins: [createMoryaUI()],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Go')
-    expect(Object.keys(wkComponents).length).toBeGreaterThan(50)
+    expect(Object.keys(mComponents).length).toBeGreaterThan(50)
   })
 
-  it('accepts options via app.use(WiseKit, options)', () => {
+  it('accepts options via app.use(MoryaUI, options)', () => {
     const Host = defineComponent({
-      template: '<WkButton label="Sized" />',
+      template: '<MButton label="Sized" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [[WiseKit, { size: 'small' }]],
+        plugins: [[MoryaUI, { size: 'small' }]],
       },
     })
 
-    expect(wrapper.get('.wk-button').classes()).toContain('wk-button--small')
+    expect(wrapper.get('.m-button').classes()).toContain('m-button--small')
   })
 
   it('skips component registration when components is false', () => {
@@ -44,26 +44,26 @@ describe('createWiseKit / WiseKit installer', () => {
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWiseKit({ components: false, size: 'large' })],
+        plugins: [createMoryaUI({ components: false, size: 'large' })],
       },
     })
 
-    expect(wrapper.vm.$.appContext.components.WkButton).toBeUndefined()
-    expect(wrapper.vm.$.appContext.config.globalProperties.$wk?.size).toBe('large')
+    expect(wrapper.vm.$.appContext.components.MButton).toBeUndefined()
+    expect(wrapper.vm.$.appContext.config.globalProperties.$m?.size).toBe('large')
   })
 
   it('registers a partial component list', () => {
     const Host = defineComponent({
-      template: '<WkButton label="Only" />',
+      template: '<MButton label="Only" />',
     })
 
     const wrapper = mount(Host, {
       global: {
-        plugins: [createWiseKit({ components: [WkButton] })],
+        plugins: [createMoryaUI({ components: [MButton] })],
       },
     })
 
     expect(wrapper.get('button').text()).toContain('Only')
-    expect(wrapper.vm.$.appContext.components.WkInput).toBeUndefined()
+    expect(wrapper.vm.$.appContext.components.MInput).toBeUndefined()
   })
 })

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { ScrollTopProps } from './types'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
-import { useWkConfig } from '../../shared/config'
+import { useMLocale } from '../../locale'
+import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ScrollTopProps>(), {
   threshold: 400,
@@ -12,8 +12,8 @@ const props = withDefaults(defineProps<ScrollTopProps>(), {
   teleport: true,
 })
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const anchor = ref<HTMLElement | null>(null)
 const root = ref<HTMLElement | null>(null)
 const visible = ref(false)
@@ -26,11 +26,11 @@ function toCssSize(value?: string | number) {
 }
 
 const rootClass = computed(() => [
-  'wk-scrolltop',
+  'm-scrolltop',
   {
-    'wk-scrolltop--visible': visible.value,
-    'wk-scrolltop--parent': props.target === 'parent',
-    'wk-scrolltop--teleported': teleported.value,
+    'm-scrolltop--visible': visible.value,
+    'm-scrolltop--parent': props.target === 'parent',
+    'm-scrolltop--teleported': teleported.value,
   },
 ])
 
@@ -92,7 +92,7 @@ watch(
 </script>
 
 <template>
-  <span ref="anchor" class="wk-scrolltop-anchor" aria-hidden="true">
+  <span ref="anchor" class="m-scrolltop-anchor" aria-hidden="true">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <button
         ref="root"
@@ -104,7 +104,7 @@ watch(
         @click="scrollToTop"
       >
         <slot>
-          <WkIcon name="arrow-up" size="sm" />
+          <MIcon name="arrow-up" size="sm" />
         </slot>
       </button>
     </Teleport>

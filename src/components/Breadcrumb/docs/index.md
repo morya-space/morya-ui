@@ -11,14 +11,14 @@ description: 展示当前页面在层级中的位置。
 ## 引入
 
 ```ts
-import { WkBreadcrumb } from '@wise-kit/ui'
+import { MBreadcrumb } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkBreadcrumb } from '@wise-kit/ui'
+import { MBreadcrumb } from 'morya-ui'
 
 const items = [
   { label: 'Electronics', to: '/electronics' },
@@ -28,7 +28,7 @@ const items = [
 </script>
 
 <template>
-  <WkBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
+  <MBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
 </template>
 ```
 
@@ -38,7 +38,7 @@ const items = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkBreadcrumb } from '@wise-kit/ui'
+import { MBreadcrumb } from 'morya-ui'
 
 const items = [
   { label: 'Library', to: '/lib' },
@@ -47,7 +47,7 @@ const items = [
 </script>
 
 <template>
-  <WkBreadcrumb :model="items" separator=">" />
+  <MBreadcrumb :model="items" separator=">" />
 </template>
 ```
 

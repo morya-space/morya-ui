@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PickListProps } from './types'
 import { computed, ref } from 'vue'
-import { useWkLocale } from '../../locale'
-import WkIcon from '../Icon/Icon.vue'
+import { useMLocale } from '../../locale'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<PickListProps>(), {
   source: () => [],
@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const selectedSource = ref<Array<string | number>>([])
 const selectedTarget = ref<Array<string | number>>([])
-const locale = useWkLocale()
+const locale = useMLocale()
 const sourceTitle = computed(() => props.sourceHeader ?? locale.value.sourceHeader)
 const targetTitle = computed(() => props.targetHeader ?? locale.value.targetHeader)
 const resolvedEmptyMessage = computed(
@@ -77,17 +77,17 @@ function moveAllToSource() {
 </script>
 
 <template>
-  <div class="wk-picklist">
-    <div class="wk-picklist__listbox">
-      <div class="wk-picklist__header">
+  <div class="m-picklist">
+    <div class="m-picklist__listbox">
+      <div class="m-picklist__header">
         {{ sourceTitle }}
       </div>
-      <ul class="wk-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
+      <ul class="m-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in source"
           :key="itemKey(item, index)"
-          class="wk-picklist__item"
-          :class="{ 'wk-picklist__item--selected': isSelected('source', item, index) }"
+          class="m-picklist__item"
+          :class="{ 'm-picklist__item--selected': isSelected('source', item, index) }"
           role="option"
           :aria-selected="isSelected('source', item, index)"
           tabindex="0"
@@ -99,39 +99,39 @@ function moveAllToSource() {
             {{ item }}
           </slot>
         </li>
-        <li v-if="!source.length" class="wk-picklist__empty" role="status">
+        <li v-if="!source.length" class="m-picklist__empty" role="status">
           <slot name="empty">
             {{ resolvedEmptyMessage }}
           </slot>
         </li>
       </ul>
     </div>
-    <div class="wk-picklist__controls">
-      <button type="button" class="wk-picklist__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
-        <WkIcon name="chevron-right" size="sm" />
-        <WkIcon name="chevron-right" size="sm" />
+    <div class="m-picklist__controls">
+      <button type="button" class="m-picklist__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
+        <MIcon name="chevron-right" size="sm" />
+        <MIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wk-picklist__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
-        <WkIcon name="chevron-right" size="sm" />
+      <button type="button" class="m-picklist__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
+        <MIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="wk-picklist__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
-        <WkIcon name="chevron-left" size="sm" />
+      <button type="button" class="m-picklist__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
+        <MIcon name="chevron-left" size="sm" />
       </button>
-      <button type="button" class="wk-picklist__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
-        <WkIcon name="chevron-left" size="sm" />
-        <WkIcon name="chevron-left" size="sm" />
+      <button type="button" class="m-picklist__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
+        <MIcon name="chevron-left" size="sm" />
+        <MIcon name="chevron-left" size="sm" />
       </button>
     </div>
-    <div class="wk-picklist__listbox">
-      <div class="wk-picklist__header">
+    <div class="m-picklist__listbox">
+      <div class="m-picklist__header">
         {{ targetTitle }}
       </div>
-      <ul class="wk-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
+      <ul class="m-picklist__list" role="listbox" aria-multiselectable="true" tabindex="0">
         <li
           v-for="(item, index) in target"
           :key="itemKey(item, index)"
-          class="wk-picklist__item"
-          :class="{ 'wk-picklist__item--selected': isSelected('target', item, index) }"
+          class="m-picklist__item"
+          :class="{ 'm-picklist__item--selected': isSelected('target', item, index) }"
           role="option"
           :aria-selected="isSelected('target', item, index)"
           tabindex="0"
@@ -143,7 +143,7 @@ function moveAllToSource() {
             {{ item }}
           </slot>
         </li>
-        <li v-if="!target.length" class="wk-picklist__empty" role="status">
+        <li v-if="!target.length" class="m-picklist__empty" role="status">
           <slot name="empty">
             {{ resolvedEmptyMessage }}
           </slot>

@@ -1,6 +1,6 @@
 import './style'
 
-export { default as WkDialog } from './Dialog.vue'
+export { default as MDialog } from './Dialog.vue'
 export type {
   DialogClickGuard,
   DialogCloseGuard,

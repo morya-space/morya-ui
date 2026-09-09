@@ -11,14 +11,14 @@ description: 多段占比计量条。
 ## 引入
 
 ```ts
-import { WkMeterGroup } from '@wise-kit/ui'
+import { MMeterGroup } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkMeterGroup } from '@wise-kit/ui'
+import { MMeterGroup } from 'morya-ui'
 
 const value = [
   { label: '应用', value: 45, color: '#2563eb' },
@@ -28,7 +28,7 @@ const value = [
 </script>
 
 <template>
-  <WkMeterGroup :value="value" :max="100" />
+  <MMeterGroup :value="value" :max="100" />
 </template>
 ```
 

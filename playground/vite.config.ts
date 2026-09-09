@@ -33,7 +33,7 @@ function highlightCode(code: string, lang: string) {
 }
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/wise-kit-ui/' : '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/morya-ui/' : '/',
   root: playgroundDir,
   plugins: [
     docsManifestPlugin(repoRoot, guideDir),
@@ -41,7 +41,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     Markdown({
-      wrapperClasses: 'wk-markdown-doc',
+      wrapperClasses: 'm-markdown-doc',
       markdownOptions: {
         highlight: highlightCode,
       },
@@ -59,51 +59,51 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@wise-kit/ui/button/style',
+        find: 'morya-ui/button/style',
         replacement: fileURLToPath(new URL('../src/components/Button/style.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/button',
+        find: 'morya-ui/button',
         replacement: fileURLToPath(new URL('../src/components/Button/index.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/input/style',
+        find: 'morya-ui/input/style',
         replacement: fileURLToPath(new URL('../src/components/Input/style.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/input',
+        find: 'morya-ui/input',
         replacement: fileURLToPath(new URL('../src/components/Input/index.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/select/style',
+        find: 'morya-ui/select/style',
         replacement: fileURLToPath(new URL('../src/components/Select/style.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/select',
+        find: 'morya-ui/select',
         replacement: fileURLToPath(new URL('../src/components/Select/index.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/dialog/style',
+        find: 'morya-ui/dialog/style',
         replacement: fileURLToPath(new URL('../src/components/Dialog/style.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/dialog',
+        find: 'morya-ui/dialog',
         replacement: fileURLToPath(new URL('../src/components/Dialog/index.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/icon/style',
+        find: 'morya-ui/icon/style',
         replacement: fileURLToPath(new URL('../src/components/Icon/style.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/icon',
+        find: 'morya-ui/icon',
         replacement: fileURLToPath(new URL('../src/components/Icon/index.ts', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui/styles.css',
+        find: 'morya-ui/styles.css',
         replacement: fileURLToPath(new URL('../src/styles/index.css', import.meta.url)),
       },
       {
-        find: '@wise-kit/ui',
+        find: 'morya-ui',
         replacement: fileURLToPath(new URL('../src', import.meta.url)),
       },
       {

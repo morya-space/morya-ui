@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { InputNumberProps } from './types'
 import { computed, ref, useAttrs, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useWkId } from '../../shared/useWkId'
+import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -27,23 +27,23 @@ const emit = defineEmits<{
   (event: 'change', value: number | null): void
 }>()
 const attrs = useAttrs()
-const locale = useWkLocale()
+const locale = useMLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useWkId('wk-inputnumber')
+const autoInputId = useMId('m-inputnumber')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputNumber', () => props.size)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const showClear = computed(() => props.clearable && props.modelValue != null && !props.disabled)
 
 const rootClass = computed(() => [
-  'wk-inputnumber',
-  `wk-inputnumber--${sizeClass.value}`,
+  'm-inputnumber',
+  `m-inputnumber--${sizeClass.value}`,
   {
-    'wk-inputnumber--fluid': props.fluid,
-    'wk-inputnumber--invalid': isInvalid.value,
-    'wk-inputnumber--disabled': props.disabled,
-    'wk-inputnumber--buttons': props.showButtons,
-    'wk-inputnumber--buttons-right': props.showButtons && props.buttonPlacement === 'right',
+    'm-inputnumber--fluid': props.fluid,
+    'm-inputnumber--invalid': isInvalid.value,
+    'm-inputnumber--disabled': props.disabled,
+    'm-inputnumber--buttons': props.showButtons,
+    'm-inputnumber--buttons-right': props.showButtons && props.buttonPlacement === 'right',
   },
 ])
 
@@ -145,28 +145,28 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="wk-inputnumber-field" :class="{ 'wk-inputnumber-field--fluid': fluid }">
-    <label v-if="label" class="wk-inputnumber-field__label" :for="inputId">{{ label }}</label>
+  <div class="m-inputnumber-field" :class="{ 'm-inputnumber-field--fluid': fluid }">
+    <label v-if="label" class="m-inputnumber-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <button
         v-if="showButtons && buttonPlacement === 'both'"
-        class="wk-inputnumber__button wk-inputnumber__button--decrement"
+        class="m-inputnumber__button wk-inputnumber__button--decrement"
         type="button"
         :aria-label="locale.decrease"
         :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
         @click="stepBy(-1)"
       >
-        <WkIcon name="minus" size="sm" />
+        <MIcon name="minus" size="sm" />
       </button>
-      <div class="wk-inputnumber__input-wrap">
-        <span v-if="$slots.prefix" class="wk-inputnumber__prefix">
+      <div class="m-inputnumber__input-wrap">
+        <span v-if="$slots.prefix" class="m-inputnumber__prefix">
           <slot name="prefix" />
         </span>
         <input
           v-bind="attrs"
           :id="inputId"
           ref="inputElement"
-          class="wk-inputnumber__input"
+          class="m-inputnumber__input"
           type="text"
           inputmode="decimal"
           :value="displayValue"
@@ -179,55 +179,55 @@ defineExpose({ focus, blur, select })
           @blur="onBlur"
           @keydown="onInputKeydown"
         >
-        <span v-if="$slots.suffix" class="wk-inputnumber__suffix">
+        <span v-if="$slots.suffix" class="m-inputnumber__suffix">
           <slot name="suffix" />
         </span>
         <button
           v-if="showClear"
           type="button"
-          class="wk-inputnumber__clear"
+          class="m-inputnumber__clear"
           :aria-label="locale.clearInput"
           @click="clear"
         >
-          <WkIcon name="close" size="sm" />
+          <MIcon name="close" size="sm" />
         </button>
       </div>
-      <div v-if="showButtons && buttonPlacement === 'right'" class="wk-inputnumber__stack">
+      <div v-if="showButtons && buttonPlacement === 'right'" class="m-inputnumber__stack">
         <button
-          class="wk-inputnumber__button wk-inputnumber__button--increment"
+          class="m-inputnumber__button wk-inputnumber__button--increment"
           type="button"
           :aria-label="locale.increase"
           :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
           @click="stepBy(1)"
         >
-          <WkIcon name="plus" size="sm" />
+          <MIcon name="plus" size="sm" />
         </button>
         <button
-          class="wk-inputnumber__button wk-inputnumber__button--decrement"
+          class="m-inputnumber__button wk-inputnumber__button--decrement"
           type="button"
           :aria-label="locale.decrease"
           :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
           @click="stepBy(-1)"
         >
-          <WkIcon name="minus" size="sm" />
+          <MIcon name="minus" size="sm" />
         </button>
       </div>
       <button
         v-else-if="showButtons"
-        class="wk-inputnumber__button wk-inputnumber__button--increment"
+        class="m-inputnumber__button wk-inputnumber__button--increment"
         type="button"
         :aria-label="locale.increase"
         :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
         @click="stepBy(1)"
       >
-        <WkIcon name="plus" size="sm" />
+        <MIcon name="plus" size="sm" />
       </button>
     </div>
     <span
       v-if="feedbackText"
       :id="`${inputId}-help`"
-      class="wk-inputnumber-field__help"
-      :class="{ 'wk-inputnumber-field__help--invalid': feedbackIsError }"
+      class="m-inputnumber-field__help"
+      :class="{ 'm-inputnumber-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}

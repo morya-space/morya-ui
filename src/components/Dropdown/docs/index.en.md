@@ -8,21 +8,21 @@ description: Action menu overlay (not a form select). Unlike Select, it is used 
 
 Action menu overlay. Opens a set of actions from a trigger.
 
-**Difference from Select:** `WkDropdown` is a menu overlay; for form option selection, use `WkSelect`.
+**Difference from Select:** `MDropdown` is a menu overlay; for form option selection, use `MSelect`.
 
 Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), nested `items`, and `trigger: 'hover'` with `showDelay` / `hideDelay`. Keyboard highlight still covers top-level leaves only.
 
 ## Import
 
 ```ts
-import { WkButton, WkDropdown } from '@wise-kit/ui'
+import { MButton, MDropdown } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkDropdown } from '@wise-kit/ui'
+import { MButton, MDropdown } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -39,11 +39,11 @@ function onSelect(item: { value: string; label: string }) {
 </script>
 
 <template>
-  <WkDropdown v-model="open" :items="items" @select="onSelect">
+  <MDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <WkButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <MButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
     </template>
-  </WkDropdown>
+  </MDropdown>
 </template>
 ```
 
@@ -51,7 +51,7 @@ function onSelect(item: { value: string; label: string }) {
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkDropdown } from '@wise-kit/ui'
+import { MButton, MDropdown } from 'morya-ui'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -63,11 +63,11 @@ const items = [
 </script>
 
 <template>
-  <WkDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
+  <MDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
     <template #trigger>
-      <WkButton label="Hover to open" severity="secondary" />
+      <MButton label="Hover to open" severity="secondary" />
     </template>
-  </WkDropdown>
+  </MDropdown>
 </template>
 ```
 

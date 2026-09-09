@@ -11,7 +11,7 @@ description: 状态角标或圆点。
 ## 引入
 
 ```ts
-import { WkBadge } from '@wise-kit/ui'
+import { MBadge } from 'morya-ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WkBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkBadge } from '@wise-kit/ui'
+import { MBadge } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkBadge :value="2" />
-    <WkBadge value="New" />
-    <WkBadge />
+    <MBadge :value="2" />
+    <MBadge value="New" />
+    <MBadge />
   </div>
 </template>
 ```
@@ -38,18 +38,18 @@ import { WkBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkBadge } from '@wise-kit/ui'
+import { MBadge } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkBadge :value="1" />
-    <WkBadge :value="2" severity="secondary" />
-    <WkBadge :value="3" severity="success" />
-    <WkBadge :value="4" severity="info" />
-    <WkBadge :value="5" severity="warn" />
-    <WkBadge :value="6" severity="danger" />
-    <WkBadge :value="7" severity="contrast" />
+    <MBadge :value="1" />
+    <MBadge :value="2" severity="secondary" />
+    <MBadge :value="3" severity="success" />
+    <MBadge :value="4" severity="info" />
+    <MBadge :value="5" severity="warn" />
+    <MBadge :value="6" severity="danger" />
+    <MBadge :value="7" severity="contrast" />
   </div>
 </template>
 ```
@@ -60,14 +60,14 @@ import { WkBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkBadge } from '@wise-kit/ui'
+import { MBadge } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkBadge :value="8" size="small" />
-    <WkBadge :value="9" />
-    <WkBadge :value="10" size="large" />
+    <MBadge :value="8" size="small" />
+    <MBadge :value="9" />
+    <MBadge :value="10" size="large" />
   </div>
 </template>
 ```
@@ -78,17 +78,17 @@ import { WkBadge } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkBadge, WkButton } from '@wise-kit/ui'
+import { MBadge, MButton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <WkBadge :value="120" :max="99">
-      <WkButton label="Inbox" severity="secondary" />
-    </WkBadge>
-    <WkBadge processing>
-      <WkButton label="Live" icon="check" />
-    </WkBadge>
+    <MBadge :value="120" :max="99">
+      <MButton label="Inbox" severity="secondary" />
+    </MBadge>
+    <MBadge processing>
+      <MButton label="Live" icon="check" />
+    </MBadge>
   </div>
 </template>
 ```

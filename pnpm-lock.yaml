@@ -71,8 +71,8 @@ importers:
       '@nuxt/kit':
         specifier: ^3.16.0
         version: 3.21.11(magicast@0.5.4)
-      '@wise-kit/ui':
-        specifier: ^0.1.1
+      morya-ui:
+        specifier: ^0.2.0
         version: link:../..
       nuxt:
         specifier: ^3.10.0

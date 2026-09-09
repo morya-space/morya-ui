@@ -11,21 +11,21 @@ description: 日历弹层选择日期。单日或日期范围，值优先为 ISO
 ## 引入
 
 ```ts
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="日期" />
+  <MDatePicker v-model="value" label="日期" />
 </template>
 ```
 
@@ -33,7 +33,7 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const a = ref('2024-06-15')
@@ -43,9 +43,9 @@ const c = ref('2024-06-15')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end">
-    <WkDatePicker v-model="a" size="small" label="Small" />
-    <WkDatePicker v-model="b" label="Default" />
-    <WkDatePicker v-model="c" size="large" label="Large" />
+    <MDatePicker v-model="a" size="small" label="Small" />
+    <MDatePicker v-model="b" label="Default" />
+    <MDatePicker v-model="c" size="large" label="Large" />
   </div>
 </template>
 ```
@@ -56,14 +56,14 @@ const c = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WkDatePicker
+  <MDatePicker
     v-model="value"
     label="范围内"
     min-date="2024-06-01"
@@ -76,14 +76,14 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="校验失败" invalid />
+  <MDatePicker v-model="value" label="校验失败" invalid />
 </template>
 ```
 
@@ -91,11 +91,11 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 </script>
 
 <template>
-  <WkDatePicker model-value="2024-06-15" label="禁用" disabled />
+  <MDatePicker model-value="2024-06-15" label="禁用" disabled />
 </template>
 ```
 
@@ -103,14 +103,14 @@ import { WkDatePicker } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="全宽" fluid placeholder="选择日期" />
+  <MDatePicker v-model="value" label="全宽" fluid placeholder="选择日期" />
 </template>
 ```
 
@@ -120,14 +120,14 @@ const value = ref<string | null>(null)
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="就地面板" append-to="self" />
+  <MDatePicker v-model="value" label="就地面板" append-to="self" />
 </template>
 ```
 
@@ -137,14 +137,14 @@ const value = ref<string | null>(null)
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 </script>
 
 <template>
-  <WkDatePicker v-model="value" type="daterange" label="日期范围" />
+  <MDatePicker v-model="value" type="daterange" label="日期范围" />
 </template>
 ```
 
@@ -152,7 +152,7 @@ const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -163,7 +163,7 @@ const shortcuts = [
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="快捷选项" :shortcuts="shortcuts" />
+  <MDatePicker v-model="value" label="快捷选项" :shortcuts="shortcuts" />
 </template>
 ```
 
@@ -181,7 +181,7 @@ const shortcuts = [
 | `clearable` | `boolean` | `true` | 显示清除按钮。 |
 | `shortcuts` | `DatePickerShortcut[]` | `[]` | 面板快捷选项。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
-| `size` | `WkSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `teleport` | `boolean` | `true` | 面板 Teleport；默认挂到 `body`。 |

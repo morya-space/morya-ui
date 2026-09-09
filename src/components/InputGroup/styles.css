@@ -1,5 +1,5 @@
 /* —�?Form: InputGroup —�?*/
-.wk-inputgroup {
+.m-inputgroup {
     align-items: stretch;
     display: flex;
     flex-wrap: nowrap;
@@ -7,14 +7,14 @@
     width: 100%;
 }
 
-.wk-inputgroup-addon {
+.m-inputgroup-addon {
     align-items: center;
-    background: color-mix(in srgb, var(--wk-color-text-muted) 10%, var(--wk-color-surface));
-    border: var(--wk-border-width) solid var(--wk-color-border);
-    color: var(--wk-color-text-muted);
+    background: color-mix(in srgb, var(--m-color-text-muted) 10%, var(--m-color-surface));
+    border: var(--m-border-width) solid var(--m-color-border);
+    color: var(--m-color-text-muted);
     display: inline-flex;
     flex: 0 0 auto;
-    font-size: var(--wk-control-font-medium);
-    padding: 0 var(--wk-control-padding-x-medium);
+    font-size: var(--m-control-font-medium);
+    padding: 0 var(--m-control-padding-x-medium);
     white-space: nowrap;
 }

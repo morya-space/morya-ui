@@ -42,7 +42,7 @@ export interface GridItemLayout {
   show: boolean
 }
 
-export interface WkGridContext {
+export interface MGridContext {
   overflow: Ref<boolean>
   itemStyle: Ref<string | CSSProperties | undefined>
   xGap: Ref<string>
@@ -52,5 +52,5 @@ export interface WkGridContext {
   unregister: (uid: number) => void
 }
 
-export const WK_GRID_KEY: InjectionKey<WkGridContext> = Symbol('rdGrid')
-export const WK_GRID_ITEM_FLAG = '__WI_GRID_ITEM__' as const
+export const M_GRID_KEY: InjectionKey<MGridContext> = Symbol('muGrid')
+export const M_GRID_ITEM_FLAG = '__M_GRID_ITEM__' as const

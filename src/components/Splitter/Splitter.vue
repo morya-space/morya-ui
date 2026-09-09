@@ -2,7 +2,7 @@
 import type {VNode} from 'vue';
 import type { SplitterProps, SplitterSize } from './types'
 import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useSlots,  watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import {
   clampPx,
   detectSizeMode,
@@ -25,7 +25,7 @@ const emit = defineEmits<{
   (event: 'drag-end', eventPayload: Event): void
 }>()
 
-const locale = useWkLocale()
+const locale = useMLocale()
 const slots = useSlots()
 const root = ref<HTMLElement | null>(null)
 const dragging = ref(false)
@@ -233,25 +233,25 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="wk-splitter"
-    :style="{ '--wk-splitter-trigger-size': `${resizeTriggerSize}px` }"
+    class="m-splitter"
+    :style="{ '--m-splitter-trigger-size': `${resizeTriggerSize}px` }"
     :class="[
-      `wk-splitter--${resolvedLayout}`,
+      `m-splitter--${resolvedLayout}`,
       {
-        'wk-splitter--dragging': dragging,
-        'wk-splitter--disabled': disabled,
+        'm-splitter--dragging': dragging,
+        'm-splitter--disabled': disabled,
       },
     ]"
     :aria-orientation="isVertical ? 'vertical' : 'horizontal'"
   >
-    <div class="wk-splitter__panel" :class="pane1Class" :style="panel1Style">
+    <div class="m-splitter__panel" :class="pane1Class" :style="panel1Style">
       <slot v-if="slots.panel1" name="panel1" />
       <slot v-else-if="slots['1']" name="1" />
       <component :is="defaultPanels[0]" v-else-if="defaultPanels[0]" />
     </div>
 
     <div
-      class="wk-splitter__gutter"
+      class="m-splitter__gutter"
       role="separator"
       :tabindex="disabled ? -1 : 0"
       :aria-orientation="isVertical ? 'horizontal' : 'vertical'"
@@ -268,7 +268,7 @@ onBeforeUnmount(() => {
       <slot name="resize-trigger" />
     </div>
 
-    <div class="wk-splitter__panel wk-splitter__panel--fill" :class="pane2Class" :style="panel2Style">
+    <div class="m-splitter__panel wk-splitter__panel--fill" :class="pane2Class" :style="panel2Style">
       <slot v-if="slots.panel2" name="panel2" />
       <slot v-else-if="slots['2']" name="2" />
       <component :is="defaultPanels[1]" v-else-if="defaultPanels[1]" />

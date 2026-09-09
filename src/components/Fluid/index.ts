@@ -1,3 +1,3 @@
 import './style'
-export { default as WkFluid } from './Fluid.vue'
+export { default as MFluid } from './Fluid.vue'
 export type { FluidProps } from './types'

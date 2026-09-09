@@ -1,4 +1,4 @@
-import type { WkSizeInput } from '../../shared/types'
+import type { MSizeInput } from '../../shared/types'
 
 export interface InputTagsProps {
   modelValue?: string[]
@@ -7,7 +7,7 @@ export interface InputTagsProps {
   placeholder?: string
   disabled?: boolean
   invalid?: boolean
-  size?: WkSizeInput
+  size?: MSizeInput
   addOnBlur?: boolean
   /** Max number of tags. */
   max?: number

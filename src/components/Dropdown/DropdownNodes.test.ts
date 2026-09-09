@@ -14,11 +14,11 @@ describe('DropdownNodes', () => {
       },
     })
 
-    await wrapper.get('.wk-dropdown__item').trigger('mouseenter')
+    await wrapper.get('.m-dropdown__item').trigger('mouseenter')
     expect(wrapper.emitted('highlight')?.[0]).toEqual(['edit'])
-    await wrapper.get('.wk-dropdown__item').trigger('click')
+    await wrapper.get('.m-dropdown__item').trigger('click')
     expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ value: 'edit' })
-    expect(wrapper.find('.wk-dropdown__separator').exists()).toBe(true)
+    expect(wrapper.find('.m-dropdown__separator').exists()).toBe(true)
   })
 
   it('opens flyout submenu on parent hover', async () => {
@@ -27,7 +27,7 @@ describe('DropdownNodes', () => {
         items: [{ value: 'more', label: 'More', items: [{ value: 'a', label: 'A' }] }],
       },
     })
-    await wrapper.get('.wk-dropdown__submenu-wrap').trigger('mouseenter')
-    expect(wrapper.find('.wk-dropdown__submenu').exists()).toBe(true)
+    await wrapper.get('.m-dropdown__submenu-wrap').trigger('mouseenter')
+    expect(wrapper.find('.m-dropdown__submenu').exists()).toBe(true)
   })
 })

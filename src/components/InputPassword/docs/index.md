@@ -11,21 +11,21 @@ description: 密码输入框，支持显示/隐藏与强度提示。
 ## 引入
 
 ```ts
-import { WkInputPassword } from '@wise-kit/ui'
+import { MInputPassword } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputPassword } from '@wise-kit/ui'
+import { MInputPassword } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WkInputPassword v-model="value" label="Password" />
+  <MInputPassword v-model="value" label="Password" />
 </template>
 ```
 
@@ -33,14 +33,14 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputPassword } from '@wise-kit/ui'
+import { MInputPassword } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WkInputPassword v-model="value" label="Password" feedback />
+  <MInputPassword v-model="value" label="Password" feedback />
 </template>
 ```
 
@@ -50,7 +50,7 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkIcon, WkInputPassword } from '@wise-kit/ui'
+import { MIcon, MInputPassword } from 'morya-ui'
 import { ref } from 'vue'
 
 const byProp = ref('')
@@ -59,15 +59,15 @@ const bySlot = ref('')
 
 <template>
   <div style="display:grid;gap:1rem;max-width:20rem">
-    <WkInputPassword v-model="byProp" label="属性替换" show-icon="unlock" hide-icon="lock" />
-    <WkInputPassword v-model="bySlot" label="插槽替换">
+    <MInputPassword v-model="byProp" label="属性替换" show-icon="unlock" hide-icon="lock" />
+    <MInputPassword v-model="bySlot" label="插槽替换">
       <template #showIcon>
-        <WkIcon name="search" size="sm" />
+        <MIcon name="search" size="sm" />
       </template>
       <template #hideIcon>
-        <WkIcon name="close" size="sm" />
+        <MIcon name="close" size="sm" />
       </template>
-    </WkInputPassword>
+    </MInputPassword>
   </div>
 </template>
 ```
@@ -78,14 +78,14 @@ const bySlot = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputPassword } from '@wise-kit/ui'
+import { MInputPassword } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('secret')
 </script>
 
 <template>
-  <WkInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
+  <MInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
 </template>
 ```
 
@@ -93,14 +93,14 @@ const value = ref('secret')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInputPassword } from '@wise-kit/ui'
+import { MInputPassword } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('draft-pass')
 </script>
 
 <template>
-  <WkInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
+  <MInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
 </template>
 ```
 

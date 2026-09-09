@@ -11,14 +11,14 @@ description: 下拉树选择。支持单选/多选、勾选级联、过滤、清
 ## 引入
 
 ```ts
-import { WkTreeSelect } from '@wise-kit/ui'
+import { MTreeSelect } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkTreeSelect } from '@wise-kit/ui'
+import { MTreeSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -35,7 +35,7 @@ const options = [
 </script>
 
 <template>
-  <WkTreeSelect v-model="value" :options="options" />
+  <MTreeSelect v-model="value" :options="options" />
 </template>
 ```
 
@@ -43,7 +43,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkTreeSelect } from '@wise-kit/ui'
+import { MTreeSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string[]>([])
@@ -60,7 +60,7 @@ const options = [
 </script>
 
 <template>
-  <WkTreeSelect
+  <MTreeSelect
     v-model="value"
     :options="options"
     multiple
@@ -78,7 +78,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkTreeSelect } from '@wise-kit/ui'
+import { MTreeSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const a = ref(null)
@@ -89,9 +89,9 @@ const options = [{ key: 'docs', label: '文档' }]
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <WkTreeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <WkTreeSelect v-model="b" :options="options" placeholder="Default" />
-    <WkTreeSelect v-model="c" size="large" :options="options" placeholder="Large" />
+    <MTreeSelect v-model="a" size="small" :options="options" placeholder="Small" />
+    <MTreeSelect v-model="b" :options="options" placeholder="Default" />
+    <MTreeSelect v-model="c" size="large" :options="options" placeholder="Large" />
   </div>
 </template>
 ```
@@ -103,7 +103,7 @@ const options = [{ key: 'docs', label: '文档' }]
 | `options` | `TreeSelectNode[]` | — | 树节点。 |
 | `modelValue` | `string \| string[] \| null` | `null` | 选中节点 key；多选为数组。 |
 | `placeholder` | `string` | locale | 占位文案。 |
-| `size` | `WkSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `multiple` | `boolean` | `false` | 多选。 |
 | `checkable` | `boolean` | `false` | 显示勾选框（级联语义同 Tree）。 |

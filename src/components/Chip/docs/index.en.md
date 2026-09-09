@@ -11,23 +11,23 @@ Chip displays short tagged information, with optional icon/image and a remove bu
 ## Import
 
 ```ts
-import { WkChip } from '@wise-kit/ui'
+import { MChip } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkChip } from '@wise-kit/ui'
+import { MChip } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <WkChip label="Basic" />
-    <WkChip label="With Icon" icon="check" />
-    <WkChip label="Removable" removable />
-    <WkChip label="Success" severity="success" size="small" />
-    <WkChip label="Disabled" removable disabled />
+    <MChip label="Basic" />
+    <MChip label="With Icon" icon="check" />
+    <MChip label="Removable" removable />
+    <MChip label="Success" severity="success" size="small" />
+    <MChip label="Disabled" removable disabled />
   </div>
 </template>
 ```
@@ -41,7 +41,7 @@ import { WkChip } from '@wise-kit/ui'
 | `image` | `string` | — | Leading image URL (takes precedence over icon). |
 | `removable` | `boolean` | `false` | Show × remove button. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
-| `severity` | `WkTagSeverity \| 'warning'` | — | Semantic color. |
+| `severity` | `MTagSeverity \| 'warning'` | — | Semantic color. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 
 ## Events

@@ -1,17 +1,17 @@
 {
-  "name": "@wise-kit/ui",
+  "name": "morya-ui",
   "type": "module",
   "version": "0.2.0",
   "packageManager": "pnpm@10.12.4",
   "description": "Open-source Vue 3 component library with design tokens, themes, and interactive docs.",
   "license": "MIT",
-  "homepage": "https://wise-kit.github.io/wise-kit-ui/",
+  "homepage": "https://morya-ui.github.io/morya-ui/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wise-kit/wise-kit-ui.git"
+    "url": "git+https://github.com/morya-space/morya-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/wise-kit/wise-kit-ui/issues"
+    "url": "https://github.com/morya-space/morya-ui/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -682,12 +682,12 @@
     "release:git": "node scripts/release-git.mjs --tag --branch",
     "release:mcp": "node scripts/release-mcp.mjs",
     "release:nuxt": "node scripts/release-nuxt.mjs",
-    "mcp:generate": "pnpm --filter @wise-kit/ui-mcp generate",
-    "mcp:check-catalog": "pnpm --filter @wise-kit/ui-mcp check-catalog",
-    "mcp:validate-catalog": "pnpm --filter @wise-kit/ui-mcp validate-catalog",
-    "mcp:audit-examples": "pnpm --filter @wise-kit/ui-mcp audit-example-coverage",
-    "mcp:build": "pnpm --filter @wise-kit/ui-mcp build",
-    "mcp:start": "pnpm --filter @wise-kit/ui-mcp start",
+    "mcp:generate": "pnpm --filter morya-ui-mcp generate",
+    "mcp:check-catalog": "pnpm --filter morya-ui-mcp check-catalog",
+    "mcp:validate-catalog": "pnpm --filter morya-ui-mcp validate-catalog",
+    "mcp:audit-examples": "pnpm --filter morya-ui-mcp audit-example-coverage",
+    "mcp:build": "pnpm --filter morya-ui-mcp build",
+    "mcp:start": "pnpm --filter morya-ui-mcp start",
     "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src ai-design-config/docs/golden-pages ai-design-config/src/examples",
     "check:tokens": "node ai-design-config/scripts/check-undefined-tokens.mjs src",
     "check:docs": "node ai-design-config/scripts/check-docs-drift.mjs"

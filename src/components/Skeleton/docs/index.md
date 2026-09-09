@@ -11,7 +11,7 @@ description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 
 ## 引入
 
 ```ts
-import { WkSkeleton } from '@wise-kit/ui'
+import { MSkeleton } from 'morya-ui'
 ```
 
 ## 基础用法
@@ -20,14 +20,14 @@ import { WkSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSkeleton } from '@wise-kit/ui'
+import { MSkeleton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <WkSkeleton height="1.25rem" />
-    <WkSkeleton height="1.25rem" width="70%" />
-    <WkSkeleton height="6rem" border-radius="0.5rem" />
+    <MSkeleton height="1.25rem" />
+    <MSkeleton height="1.25rem" width="70%" />
+    <MSkeleton height="6rem" border-radius="0.5rem" />
   </div>
 </template>
 ```
@@ -38,13 +38,13 @@ import { WkSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSkeleton } from '@wise-kit/ui'
+import { MSkeleton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <WkSkeleton shape="circle" width="3rem" height="3rem" />
-    <WkSkeleton width="10rem" height="3rem" />
+    <MSkeleton shape="circle" width="3rem" height="3rem" />
+    <MSkeleton width="10rem" height="3rem" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ import { WkSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSkeleton } from '@wise-kit/ui'
+import { MSkeleton } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <WkSkeleton height="1.25rem" animation="wave" />
-    <WkSkeleton height="1.25rem" animation="none" />
+    <MSkeleton height="1.25rem" animation="wave" />
+    <MSkeleton height="1.25rem" animation="none" />
   </div>
 </template>
 ```
@@ -72,11 +72,11 @@ import { WkSkeleton } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkSkeleton } from '@wise-kit/ui'
+import { MSkeleton } from 'morya-ui'
 </script>
 
 <template>
-  <WkSkeleton text :repeat="3" />
+  <MSkeleton text :repeat="3" />
 </template>
 ```
 

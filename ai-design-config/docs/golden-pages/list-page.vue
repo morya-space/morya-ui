@@ -4,21 +4,21 @@
  * @see DESIGN.md §3
  */
 import {
-  WkBreadcrumb,
-  WkButton,
-  WkConfigProvider,
-  WkInput,
-  WkLayout,
-  WkLayoutContent,
-  WkLayoutHeader,
-  WkLayoutSider,
-  WkMenu,
-  WkSelect,
-  WkSpace,
-  WkTable,
-  WkTag,
+  MBreadcrumb,
+  MButton,
+  MConfigProvider,
+  MInput,
+  MLayout,
+  MLayoutContent,
+  MLayoutHeader,
+  MLayoutSider,
+  MMenu,
+  MSelect,
+  MSpace,
+  MTable,
+  MTag,
   zhCN,
-} from '@wise-kit/ui'
+} from 'morya-ui'
 import { ref } from 'vue'
 
 const keyword = ref('')
@@ -47,42 +47,42 @@ const rows = [
 </script>
 
 <template>
-  <WkConfigProvider :locale="zhCN">
-    <WkLayout has-sider class="page-list">
-      <WkLayoutSider class="page-list__sider">
-        <WkMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
-      </WkLayoutSider>
+  <MConfigProvider :locale="zhCN">
+    <MLayout has-sider class="page-list">
+      <MLayoutSider class="page-list__sider">
+        <MMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
+      </MLayoutSider>
 
-      <WkLayout>
-        <WkLayoutHeader class="page-list__header">
-          <WkBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
-        </WkLayoutHeader>
+      <MLayout>
+        <MLayoutHeader class="page-list__header">
+          <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
+        </MLayoutHeader>
 
-        <WkLayoutContent class="page-list__content">
+        <MLayoutContent class="page-list__content">
           <!-- 筛选区 -->
           <section class="page-list__filters" aria-label="筛选">
-            <WkSpace wrap>
-              <WkInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
-              <WkSelect
+            <MSpace wrap>
+              <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
+              <MSelect
                 v-model="status"
                 :options="statusOptions"
                 placeholder="状态"
                 clearable
                 style="width: 10rem"
               />
-              <WkButton severity="primary">查询</WkButton>
-              <WkButton severity="secondary">重置</WkButton>
-            </WkSpace>
+              <MButton severity="primary">查询</MButton>
+              <MButton severity="secondary">重置</MButton>
+            </MSpace>
           </section>
 
           <!-- 工具栏 -->
           <header class="page-list__toolbar">
             <h1 class="page-list__title">用户管理</h1>
-            <WkButton severity="primary">新建用户</WkButton>
+            <MButton severity="primary">新建用户</MButton>
           </header>
 
           <!-- 表格 -->
-          <WkTable
+          <MTable
             :columns="columns"
             :rows="rows"
             :rows-per-page="3"
@@ -93,72 +93,72 @@ const rows = [
             aria-label="用户列表"
           >
             <template #cell-status="{ value }">
-              <WkTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
+              <MTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
             </template>
             <template #cell-actions>
-              <WkSpace>
-                <WkButton severity="secondary" size="small">编辑</WkButton>
-                <WkButton severity="danger" size="small">删除</WkButton>
-              </WkSpace>
+              <MSpace>
+                <MButton severity="secondary" size="small">编辑</MButton>
+                <MButton severity="danger" size="small">删除</MButton>
+              </MSpace>
             </template>
             <template #empty>
               <p class="page-list__empty">暂无用户数据</p>
             </template>
-          </WkTable>
-        </WkLayoutContent>
-      </WkLayout>
-    </WkLayout>
-  </WkConfigProvider>
+          </MTable>
+        </MLayoutContent>
+      </MLayout>
+    </MLayout>
+  </MConfigProvider>
 </template>
 
 <style scoped>
 .page-list {
   min-height: 100vh;
-  background: var(--wk-color-surface);
+  background: var(--m-color-surface);
 }
 
 .page-list__sider {
-  border-right: 1px solid var(--wk-color-border);
+  border-right: 1px solid var(--m-color-border);
 }
 
 .page-list__header {
-  padding: var(--wk-space-4) var(--wk-space-6);
-  border-bottom: 1px solid var(--wk-color-border);
-  background: var(--wk-color-surface);
+  padding: var(--m-space-4) var(--m-space-6);
+  border-bottom: 1px solid var(--m-color-border);
+  background: var(--m-color-surface);
 }
 
 .page-list__content {
-  padding: var(--wk-space-6);
+  padding: var(--m-space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--wk-space-4);
+  gap: var(--m-space-4);
 }
 
 .page-list__filters {
-  padding: var(--wk-space-4);
-  background: color-mix(in srgb, var(--wk-color-border) 25%, transparent);
-  border-radius: var(--wk-radius-md);
-  border: 1px solid var(--wk-color-border);
+  padding: var(--m-space-4);
+  background: color-mix(in srgb, var(--m-color-border) 25%, transparent);
+  border-radius: var(--m-radius-md);
+  border: 1px solid var(--m-color-border);
 }
 
 .page-list__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--wk-space-4);
+  gap: var(--m-space-4);
 }
 
 .page-list__title {
   margin: 0;
-  font-size: var(--wk-font-size-lg);
+  font-size: var(--m-font-size-lg);
   font-weight: 600;
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
 }
 
 .page-list__empty {
   margin: 0;
-  padding: var(--wk-space-8);
+  padding: var(--m-space-8);
   text-align: center;
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
 }
 </style>

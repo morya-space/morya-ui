@@ -11,21 +11,21 @@ Date picker with month navigation and a day grid.
 ## Import
 
 ```ts
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="Date" />
+  <MDatePicker v-model="value" label="Date" />
 </template>
 ```
 
@@ -33,7 +33,7 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const a = ref('2024-06-15')
@@ -43,9 +43,9 @@ const c = ref('2024-06-15')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end">
-    <WkDatePicker v-model="a" size="small" label="Small" />
-    <WkDatePicker v-model="b" label="Default" />
-    <WkDatePicker v-model="c" size="large" label="Large" />
+    <MDatePicker v-model="a" size="small" label="Small" />
+    <MDatePicker v-model="b" label="Default" />
+    <MDatePicker v-model="c" size="large" label="Large" />
   </div>
 </template>
 ```
@@ -56,14 +56,14 @@ Dates outside the range are disabled in the calendar.
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WkDatePicker
+  <MDatePicker
     v-model="value"
     label="In range"
     min-date="2024-06-01"
@@ -76,14 +76,14 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('2024-06-15')
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="Invalid" invalid />
+  <MDatePicker v-model="value" label="Invalid" invalid />
 </template>
 ```
 
@@ -91,11 +91,11 @@ const value = ref('2024-06-15')
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 </script>
 
 <template>
-  <WkDatePicker model-value="2024-06-15" label="Disabled" disabled />
+  <MDatePicker model-value="2024-06-15" label="Disabled" disabled />
 </template>
 ```
 
@@ -103,14 +103,14 @@ import { WkDatePicker } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="Full width" fluid placeholder="Select date" />
+  <MDatePicker v-model="value" label="Full width" fluid placeholder="Select date" />
 </template>
 ```
 
@@ -120,14 +120,14 @@ The panel Teleports to `body` by default. Use `append-to="self"` or `teleport={f
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="In-place panel" append-to="self" />
+  <MDatePicker v-model="value" label="In-place panel" append-to="self" />
 </template>
 ```
 
@@ -137,14 +137,14 @@ With `type="daterange"`, click the start date then the end date. The value is `[
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 </script>
 
 <template>
-  <WkDatePicker v-model="value" type="daterange" label="Date range" />
+  <MDatePicker v-model="value" type="daterange" label="Date range" />
 </template>
 ```
 
@@ -152,7 +152,7 @@ const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
 
 ```vue preview
 <script setup lang="ts">
-import { WkDatePicker } from '@wise-kit/ui'
+import { MDatePicker } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | null>(null)
@@ -163,7 +163,7 @@ const shortcuts = [
 </script>
 
 <template>
-  <WkDatePicker v-model="value" label="Shortcuts" :shortcuts="shortcuts" />
+  <MDatePicker v-model="value" label="Shortcuts" :shortcuts="shortcuts" />
 </template>
 ```
 
@@ -181,7 +181,7 @@ const shortcuts = [
 | `clearable` | `boolean` | `true` | Show a clear button. |
 | `shortcuts` | `DatePickerShortcut[]` | `[]` | Panel shortcuts. |
 | `fluid` | `boolean` | `false` | Stretch to full width. |
-| `size` | `WkSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `invalid` | `boolean` | `false` | Invalid state. |
 | `teleport` | `boolean` | `true` | Panel Teleport; mounts to `body` by default. |

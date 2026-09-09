@@ -1,18 +1,18 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
-import WkScrollTop from './ScrollTop.vue'
+import MScrollTop from './ScrollTop.vue'
 
-describe('wkScrollTop', () => {
+describe('muScrollTop', () => {
   it('becomes visible after threshold and scrolls window', async () => {
     const scrollTo = vi.fn()
     vi.stubGlobal('scrollTo', scrollTo)
     Object.defineProperty(window, 'scrollY', { configurable: true, value: 500 })
-    const wrapper = mount(WkScrollTop, { props: { threshold: 400 }, attachTo: document.body })
+    const wrapper = mount(MScrollTop, { props: { threshold: 400 }, attachTo: document.body })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    const button = document.body.querySelector('.wk-scrolltop') as HTMLButtonElement
-    expect(button.classList.contains('wk-scrolltop--visible')).toBe(true)
+    const button = document.body.querySelector('.m-scrolltop') as HTMLButtonElement
+    expect(button.classList.contains('m-scrolltop--visible')).toBe(true)
     button.click()
     expect(scrollTo).toHaveBeenCalled()
     wrapper.unmount()
@@ -21,33 +21,33 @@ describe('wkScrollTop', () => {
 
   it('stays hidden below threshold', async () => {
     Object.defineProperty(window, 'scrollY', { configurable: true, value: 10 })
-    const wrapper = mount(WkScrollTop, { props: { threshold: 400 }, attachTo: document.body })
+    const wrapper = mount(MScrollTop, { props: { threshold: 400 }, attachTo: document.body })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    const button = document.body.querySelector('.wk-scrolltop') as HTMLButtonElement
-    expect(button.classList.contains('wk-scrolltop--visible')).toBe(false)
+    const button = document.body.querySelector('.m-scrolltop') as HTMLButtonElement
+    expect(button.classList.contains('m-scrolltop--visible')).toBe(false)
     wrapper.unmount()
   })
 
   it('teleports button to body by default', async () => {
     Object.defineProperty(window, 'scrollY', { configurable: true, value: 500 })
-    const wrapper = mount(WkScrollTop, { props: { threshold: 400 }, attachTo: document.body })
+    const wrapper = mount(MScrollTop, { props: { threshold: 400 }, attachTo: document.body })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    expect(document.body.querySelector('.wk-scrolltop--teleported')).toBeTruthy()
-    expect(wrapper.find('.wk-scrolltop').exists()).toBe(false)
+    expect(document.body.querySelector('.m-scrolltop--teleported')).toBeTruthy()
+    expect(wrapper.find('.m-scrolltop').exists()).toBe(false)
     wrapper.unmount()
   })
 
   it('applies right and bottom offsets', async () => {
     Object.defineProperty(window, 'scrollY', { configurable: true, value: 500 })
-    const wrapper = mount(WkScrollTop, {
+    const wrapper = mount(MScrollTop, {
       props: { threshold: 400, right: 24, bottom: 32 },
       attachTo: document.body,
     })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    const button = document.body.querySelector('.wk-scrolltop') as HTMLButtonElement
+    const button = document.body.querySelector('.m-scrolltop') as HTMLButtonElement
     expect(button.style.right).toBe('24px')
     expect(button.style.bottom).toBe('32px')
     wrapper.unmount()

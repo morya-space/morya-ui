@@ -1,10 +1,10 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+﻿import { readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { run } from './release-steps.mjs'
 import { root } from './ui-changelog.mjs'
 
-export const NUXT_NAME = '@wise-kit/nuxt'
+export const NUXT_NAME = '@morya-space/nuxt'
 export const NUXT_PKG_PATH = join(root, 'packages/nuxt/package.json')
 export const NUXT_RELEASE_PATHS = ['packages/nuxt/package.json']
 
@@ -27,7 +27,7 @@ export function readUiVersion() {
   return { uiPkg, version }
 }
 
-/** Align @wise-kit/nuxt version and peer range with @wise-kit/ui. */
+/** Align @morya-space/nuxt version and peer range with morya-ui. */
 export function syncNuxtVersion(version = readUiVersion().version) {
   const nuxtPkg = readJson(NUXT_PKG_PATH)
   let changed = false
@@ -37,12 +37,12 @@ export function syncNuxtVersion(version = readUiVersion().version) {
     changed = true
   }
 
-  const peer = nuxtPkg.peerDependencies?.['@wise-kit/ui']
+  const peer = nuxtPkg.peerDependencies?.['morya-ui']
   const nextPeer = `^${version}`
   if (peer !== nextPeer) {
     nuxtPkg.peerDependencies = {
       ...nuxtPkg.peerDependencies,
-      '@wise-kit/ui': nextPeer,
+      'morya-ui': nextPeer,
     }
     changed = true
   }
@@ -58,13 +58,13 @@ export function syncNuxtVersion(version = readUiVersion().version) {
 }
 
 export function buildNuxt() {
-  console.log('[build] @wise-kit/nuxt')
-  run('pnpm --filter @wise-kit/nuxt build')
+  console.log('[build] @morya-space/nuxt')
+  run('pnpm --filter @morya-space/nuxt build')
 }
 
 export function publishNuxt() {
-  console.log('[publish] @wise-kit/nuxt')
-  run('pnpm --filter @wise-kit/nuxt publish --access public --no-git-checks')
+  console.log('[publish] @morya-space/nuxt')
+  run('pnpm --filter @morya-space/nuxt publish --access public --no-git-checks')
 }
 
 const isCli =

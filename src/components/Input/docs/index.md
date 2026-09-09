@@ -11,21 +11,21 @@ description: 文本输入框。
 ## 引入
 
 ```ts
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('')
 </script>
 
 <template>
-  <WkInput v-model="value" label="Name" placeholder="Enter your name" />
+  <MInput v-model="value" label="Name" placeholder="Enter your name" />
 </template>
 ```
 
@@ -35,11 +35,11 @@ const value = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 </script>
 
 <template>
-  <WkInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
+  <MInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
 </template>
 ```
 
@@ -47,14 +47,14 @@ import { WkInput } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref('Draft note')
 </script>
 
 <template>
-  <WkInput v-model="value" clearable label="Note" />
+  <MInput v-model="value" clearable label="Note" />
 </template>
 ```
 
@@ -62,7 +62,7 @@ const value = ref('Draft note')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const amount = ref('128')
@@ -71,19 +71,19 @@ const host = ref('docs')
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WkInput v-model="amount" label="金额" fluid>
+    <MInput v-model="amount" label="金额" fluid>
       <template #prefix>
         ¥
       </template>
       <template #suffix>
         .00
       </template>
-    </WkInput>
-    <WkInput v-model="host" label="域名" fluid>
+    </MInput>
+    <MInput v-model="host" label="域名" fluid>
       <template #suffix>
         .well.design
       </template>
-    </WkInput>
+    </MInput>
   </div>
 </template>
 ```
@@ -92,14 +92,14 @@ const host = ref('docs')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const password = ref('')
 </script>
 
 <template>
-  <WkInput v-model="password" type="password" label="Password" placeholder="••••••••" />
+  <MInput v-model="password" type="password" label="Password" placeholder="••••••••" />
 </template>
 ```
 
@@ -109,14 +109,14 @@ const password = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WkInput size="small" label="Small" placeholder="Small" />
-    <WkInput label="Normal" placeholder="Normal" />
-    <WkInput size="large" label="Large" placeholder="Large" />
+    <MInput size="small" label="Small" placeholder="Small" />
+    <MInput label="Normal" placeholder="Normal" />
+    <MInput size="large" label="Large" placeholder="Large" />
   </div>
 </template>
 ```
@@ -127,14 +127,14 @@ import { WkInput } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const bio = ref('Hello')
 </script>
 
 <template>
-  <WkInput v-model="bio" label="Bio" :maxlength="20" show-count />
+  <MInput v-model="bio" label="Bio" :maxlength="20" show-count />
 </template>
 ```
 
@@ -142,14 +142,14 @@ const bio = ref('Hello')
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:grid;gap:1rem;width:100%">
-    <WkInput variant="outlined" label="Outlined" placeholder="Outlined" />
-    <WkInput variant="filled" label="Filled" placeholder="Filled" />
-    <WkInput fluid label="Fluid" placeholder="Full width" />
+    <MInput variant="outlined" label="Outlined" placeholder="Outlined" />
+    <MInput variant="filled" label="Filled" placeholder="Filled" />
+    <MInput fluid label="Fluid" placeholder="Full width" />
   </div>
 </template>
 ```
@@ -158,11 +158,11 @@ import { WkInput } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkInput } from '@wise-kit/ui'
+import { MInput } from 'morya-ui'
 </script>
 
 <template>
-  <WkInput model-value="Read only value" label="Disabled" disabled />
+  <MInput model-value="Read only value" label="Disabled" disabled />
 </template>
 ```
 

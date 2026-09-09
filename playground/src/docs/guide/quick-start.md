@@ -1,4 +1,4 @@
----
+﻿---
 title: 快速上手
 order: 2
 description: 安装依赖、引入样式，并渲染第一个组件。
@@ -6,17 +6,17 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 
 # 快速上手
 
-> 在线文档：[wise-kit.github.io/wise-kit-ui](https://wise-kit.github.io/wise-kit-ui/) · 源码：[GitHub](https://github.com/wise-kit/wise-kit-ui) · npm：[`@wise-kit/ui`](https://www.npmjs.com/package/@wise-kit/ui)
+> 在线文档：[morya-ui.github.io/morya-ui](https://morya-ui.github.io/morya-ui/) · 源码：[GitHub](https://github.com/morya-space/morya-ui) · npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)
 
 ## 安装
 
 **在应用项目中（npm / pnpm / yarn）：**
 
 ```bash
-pnpm add @wise-kit/ui
+pnpm add morya-ui
 ```
 
-需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `@wise-kit/ui` 中。
+需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `morya-ui` 中。
 
 克隆本仓库后执行 `pnpm install`。文档站通过 Vite alias 直连 `src/` 源码（见 `playground/vite.config.ts`）。
 
@@ -29,8 +29,8 @@ pnpm add @wise-kit/ui
 | | 全量 | 按需 |
 | --- | --- | --- |
 | 典型场景 | 组件用得较多、希望快速上手 | 打包体积敏感、只用少量组件 |
-| 组件来源 | `app.use(WiseKit)` 或 `@wise-kit/ui` 按名导入 | `@wise-kit/ui/button` 等子路径，或 Vite 自动解析 |
-| 样式 | 入口引入 `@wise-kit/ui/styles.css` | 子路径自动带入（含 theme + 依赖组件样式） |
+| 组件来源 | `app.use(MoryaUI)` 或 `morya-ui` 按名导入 | `morya-ui/button` 等子路径，或 Vite 自动解析 |
+| 样式 | 入口引入 `morya-ui/styles.css` | 子路径自动带入（含 theme + 依赖组件样式） |
 | JS 体积 | 全量注册会打入完整组件；按名导入可 tree-shake | 仅打入用到的组件及其依赖 |
 
 ## 全量用法
@@ -40,15 +40,15 @@ pnpm add @wise-kit/ui
 在应用入口引入**全量样式**，并通过插件一次注册所有组件：
 
 ```ts
-import WiseKit from '@wise-kit/ui'
+import MoryaUI from 'morya-ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wise-kit/ui/styles.css'
+import 'morya-ui/styles.css'
 
-createApp(App).use(WiseKit).mount('#app')
+createApp(App).use(MoryaUI).mount('#app')
 ```
 
-模板中可直接使用 `<WkButton>`、`<WkInput>` 等，无需逐个 import。
+模板中可直接使用 `<MButton>`、`<MInput>` 等，无需逐个 import。
 
 ### 2. 按名导入 + 全量样式
 
@@ -57,14 +57,14 @@ createApp(App).use(WiseKit).mount('#app')
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wise-kit/ui/styles.css'
+import 'morya-ui/styles.css'
 
 createApp(App).mount('#app')
 ```
 
 ```vue
 <script setup lang="ts">
-import { WkButton, WkInput } from '@wise-kit/ui'
+import { MButton, MInput } from 'morya-ui'
 import { ref } from 'vue'
 
 const name = ref('')
@@ -72,8 +72,8 @@ const name = ref('')
 
 <template>
   <div style="display: grid; gap: 1rem; max-width: 20rem">
-    <WkInput v-model="name" label="名称" placeholder="输入名称" />
-    <WkButton label="提交" @click="() => undefined" />
+    <MInput v-model="name" label="名称" placeholder="输入名称" />
+    <MButton label="提交" @click="() => undefined" />
   </div>
 </template>
 ```
@@ -82,53 +82,53 @@ const name = ref('')
 
 ### 1. 子路径导入
 
-从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `@wise-kit/ui/styles.css`：
+从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`：
 
 ```ts
-import { WkButton } from '@wise-kit/ui/button'
-import { WkInput } from '@wise-kit/ui/input'
+import { MButton } from 'morya-ui/button'
+import { MInput } from 'morya-ui/input'
 ```
 
 仅要样式时：
 
 ```ts
-import '@wise-kit/ui/button/style'
-import '@wise-kit/ui/button/style.css'
+import 'morya-ui/button/style'
+import 'morya-ui/button/style.css'
 ```
 
 ### 2. 自动按需（Vite）
 
-安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<WkButton>`：
+安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<MButton>`：
 
 ```ts
-import { WiseKitResolver } from '@wise-kit/ui/resolver'
+import { MoryaUIResolver } from 'morya-ui/resolver'
 import Components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
   plugins: [
     vue(),
     Components({
-      resolvers: [WiseKitResolver()],
+      resolvers: [MoryaUIResolver()],
     }),
   ],
 })
 ```
 
-按需模式下，`createWiseKit({ components: false })` 仍可注入全局配置而不注册组件。
+按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。
 
 ## 可选：应用级全局配置
 
-`createWiseKit` 会写入全局默认值，并默认注册全部组件：
+`createMoryaUI` 会写入全局默认值，并默认注册全部组件：
 
 ```ts
-import { createWiseKit } from '@wise-kit/ui'
+import { createMoryaUI } from 'morya-ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@wise-kit/ui/styles.css'
+import 'morya-ui/styles.css'
 
 createApp(App)
   .use(
-    createWiseKit({
+    createMoryaUI({
       appendTo: 'body',
       size: 'small',
       zIndex: 1100,
@@ -146,7 +146,7 @@ createApp(App)
 亮暗切换等能力从同一包引入：
 
 ```ts
-import { useTheme } from '@wise-kit/ui'
+import { useTheme } from 'morya-ui'
 
 const { toggleTheme } = useTheme()
 ```
@@ -156,9 +156,9 @@ const { toggleTheme } = useTheme()
 ## 启动本仓库文档站
 
 ```bash
-pnpm --filter @wise-kit/ui dev
+pnpm --filter morya-ui dev
 # http://localhost:5182
 
 # 构建静态文档站
-pnpm --filter @wise-kit/ui build:docs
+pnpm --filter morya-ui build:docs
 ```

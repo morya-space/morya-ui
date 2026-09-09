@@ -19,8 +19,8 @@ describe('TreeTableRow', () => {
         isExpanded: () => true,
       },
     })
-    expect(wrapper.get('.wk-treetable__tree-cell').text()).toContain('Root')
-    expect(wrapper.findAll('.wk-treetable__row').length).toBeGreaterThan(1)
+    expect(wrapper.get('.m-treetable__tree-cell').text()).toContain('Root')
+    expect(wrapper.findAll('.m-treetable__row').length).toBeGreaterThan(1)
   })
 
   it('emits toggle when expand button is clicked', async () => {
@@ -36,7 +36,7 @@ describe('TreeTableRow', () => {
         isExpanded: () => false,
       },
     })
-    await wrapper.get('.wk-treetable__toggler').trigger('click')
+    await wrapper.get('.m-treetable__toggler').trigger('click')
     expect(wrapper.emitted('toggle')?.[0]?.[0]).toMatchObject({ key: '1' })
   })
 })

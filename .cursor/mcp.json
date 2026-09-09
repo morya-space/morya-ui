@@ -8,9 +8,9 @@
       "command": "npx",
       "args": ["-y", "@primevue/mcp"]
     },
-    "wise-kit-ui": {
+    "morya-ui": {
       "command": "node",
-      "args": ["packages/ui-mcp/bin/wise-kit-ui-mcp.js"]
+      "args": ["packages/ui-mcp/bin/morya-ui-mcp.js"]
     }
   }
 }

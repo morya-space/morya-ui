@@ -11,23 +11,23 @@ description: 让子元素宽度撑满的布局包裹。
 ## 引入
 
 ```ts
-import { WkFluid } from '@wise-kit/ui'
+import { MFluid } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkButton, WkFluid, WkInput } from '@wise-kit/ui'
+import { MButton, MFluid, MInput } from 'morya-ui'
 </script>
 
 <template>
-  <WkFluid>
+  <MFluid>
     <div style="display:flex;flex-direction:column;gap:0.75rem">
-      <WkInput placeholder="流体宽度输入" />
-      <WkButton label="提交" />
+      <MInput placeholder="流体宽度输入" />
+      <MButton label="提交" />
     </div>
-  </WkFluid>
+  </MFluid>
 </template>
 ```
 

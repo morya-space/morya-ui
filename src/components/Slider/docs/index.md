@@ -11,14 +11,14 @@ description: 滑动条，支持单值与区间选择。
 ## 引入
 
 ```ts
-import { WkSlider } from '@wise-kit/ui'
+import { MSlider } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkSlider } from '@wise-kit/ui'
+import { MSlider } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(40)
@@ -26,8 +26,8 @@ const value = ref(40)
 
 <template>
   <div style="width:min(24rem,100%)">
-    <WkSlider v-model="value" />
-    <p style="margin:.5rem 0 0;color:var(--wk-color-text-muted)">
+    <MSlider v-model="value" />
+    <p style="margin:.5rem 0 0;color:var(--m-color-text-muted)">
       {{ value }}
     </p>
   </div>
@@ -38,7 +38,7 @@ const value = ref(40)
 
 ```vue preview
 <script setup lang="ts">
-import { WkSlider } from '@wise-kit/ui'
+import { MSlider } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref([20, 70])
@@ -46,8 +46,8 @@ const value = ref([20, 70])
 
 <template>
   <div style="width:min(24rem,100%)">
-    <WkSlider v-model="value" range />
-    <p style="margin:.5rem 0 0;color:var(--wk-color-text-muted)">
+    <MSlider v-model="value" range />
+    <p style="margin:.5rem 0 0;color:var(--m-color-text-muted)">
       {{ value.join(' – ') }}
     </p>
   </div>
@@ -60,7 +60,7 @@ const value = ref([20, 70])
 
 ```vue preview
 <script setup lang="ts">
-import { WkSlider } from '@wise-kit/ui'
+import { MSlider } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref(50)
@@ -69,9 +69,9 @@ const value = ref(50)
 <template>
   <div style="display:flex;gap:2rem;align-items:stretch;height:10rem">
     <div style="flex:1">
-      <WkSlider v-model="value" tooltip :marks="{ 0: '0', 50: '半', 100: '满' }" />
+      <MSlider v-model="value" tooltip :marks="{ 0: '0', 50: '半', 100: '满' }" />
     </div>
-    <WkSlider v-model="value" vertical tooltip />
+    <MSlider v-model="value" vertical tooltip />
   </div>
 </template>
 ```
@@ -94,7 +94,7 @@ const value = ref(50)
 | `helpText` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `WkSizeInput` | — | — |
+| `size` | `MSizeInput` | — | — |
 
 ## Events
 

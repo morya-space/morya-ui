@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { BreadcrumbItem, BreadcrumbProps } from './types'
 import { computed } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: '/',
 })
-const locale = useWkLocale()
+const locale = useMLocale()
 
 const items = computed(() => {
   const list: BreadcrumbItem[] = []
@@ -22,9 +22,9 @@ const items = computed(() => {
 </script>
 
 <template>
-  <nav class="wk-breadcrumb" :aria-label="locale.breadcrumb">
-    <ol class="wk-breadcrumb__list">
-      <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="wk-breadcrumb__item">
+  <nav class="m-breadcrumb" :aria-label="locale.breadcrumb">
+    <ol class="m-breadcrumb__list">
+      <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="m-breadcrumb__item">
         <slot
           name="item"
           :item="item"
@@ -33,24 +33,24 @@ const items = computed(() => {
         >
           <a
             v-if="item.to && !item.disabled"
-            class="wk-breadcrumb__link"
+            class="m-breadcrumb__link"
             :href="item.to"
           >
             {{ item.label }}
           </a>
           <span
             v-else
-            class="wk-breadcrumb__link"
+            class="m-breadcrumb__link"
             :class="{
-              'wk-breadcrumb__link--current': index === items.length - 1,
-              'wk-breadcrumb__link--disabled': item.disabled,
+              'm-breadcrumb__link--current': index === items.length - 1,
+              'm-breadcrumb__link--disabled': item.disabled,
             }"
             :aria-current="index === items.length - 1 ? 'page' : undefined"
           >
             {{ item.label }}
           </span>
         </slot>
-        <span v-if="index < items.length - 1" class="wk-breadcrumb__separator" aria-hidden="true">
+        <span v-if="index < items.length - 1" class="m-breadcrumb__separator" aria-hidden="true">
           <slot name="separator">{{ separator }}</slot>
         </span>
       </li>

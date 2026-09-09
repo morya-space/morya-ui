@@ -11,14 +11,14 @@ description: 单选框。支持 invalid。
 ## 引入
 
 ```ts
-import { WkRadio } from '@wise-kit/ui'
+import { MRadio } from 'morya-ui'
 ```
 
 ## 基础用法
 
 ```vue preview
 <script setup lang="ts">
-import { WkRadio } from '@wise-kit/ui'
+import { MRadio } from 'morya-ui'
 import { ref } from 'vue'
 
 const size = ref('md')
@@ -26,9 +26,9 @@ const size = ref('md')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WkRadio v-model="size" name="size" value="sm" label="Small" />
-    <WkRadio v-model="size" name="size" value="md" label="Medium" />
-    <WkRadio v-model="size" name="size" value="lg" label="Large" />
+    <MRadio v-model="size" name="size" value="sm" label="Small" />
+    <MRadio v-model="size" name="size" value="md" label="Medium" />
+    <MRadio v-model="size" name="size" value="lg" label="Large" />
   </div>
 </template>
 ```
@@ -37,7 +37,7 @@ const size = ref('md')
 
 ```vue preview
 <script setup lang="ts">
-import { WkRadio } from '@wise-kit/ui'
+import { MRadio } from 'morya-ui'
 import { ref } from 'vue'
 
 const plan = ref('')
@@ -45,8 +45,8 @@ const plan = ref('')
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WkRadio v-model="plan" name="plan" value="free" invalid label="Free" />
-    <WkRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
+    <MRadio v-model="plan" name="plan" value="free" invalid label="Free" />
+    <MRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
   </div>
 </template>
 ```
@@ -55,13 +55,13 @@ const plan = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { WkRadio } from '@wise-kit/ui'
+import { MRadio } from 'morya-ui'
 </script>
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <WkRadio model-value="a" value="a" disabled label="Selected" />
-    <WkRadio model-value="a" value="b" disabled label="Other" />
+    <MRadio model-value="a" value="a" disabled label="Selected" />
+    <MRadio model-value="a" value="b" disabled label="Other" />
   </div>
 </template>
 ```
@@ -70,18 +70,18 @@ import { WkRadio } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkRadio, WkRadioGroup } from '@wise-kit/ui'
+import { MRadio, MRadioGroup } from 'morya-ui'
 import { ref } from 'vue'
 
 const size = ref('md')
 </script>
 
 <template>
-  <WkRadioGroup v-model="size">
-    <WkRadio value="sm" label="Small" />
-    <WkRadio value="md" label="Medium" />
-    <WkRadio value="lg" label="Large" />
-  </WkRadioGroup>
+  <MRadioGroup v-model="size">
+    <MRadio value="sm" label="Small" />
+    <MRadio value="md" label="Medium" />
+    <MRadio value="lg" label="Large" />
+  </MRadioGroup>
 </template>
 ```
 

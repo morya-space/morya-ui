@@ -1,12 +1,12 @@
----
+﻿---
 title: SSR & meta-frameworks
 order: 7
-description: Use Wise Kit UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
+description: Use Morya UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
 ---
 
 # SSR & meta-frameworks
 
-Wise Kit UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
+Morya UI targets **Vue 3** SSR (3.5+ recommended): the server never touches `document` / `window`, instance ids stay stable across server and client, and imperative APIs (`toast` / `message` / `confirm`) no-op safely on the server.
 
 All setups below are supported; choose **full SSR** or **client islands** based on your app.
 
@@ -14,20 +14,20 @@ All setups below are supported; choose **full SSR** or **client islands** based 
 
 | Topic | Recommendation |
 | --- | --- |
-| Styles | Import `@wise-kit/ui/styles.css` in app entry or framework config |
-| Theme | Prefer root **`WkConfigProvider`** for `theme` / `density` instead of calling `useTheme()` alone during SSR |
+| Styles | Import `morya-ui/styles.css` in app entry or framework config |
+| Theme | Prefer root **`MConfigProvider`** for `theme` / `density` instead of calling `useTheme()` alone during SSR |
 | Imperative APIs | `toast()`, `message()`, `confirm()` run in the browser only; SSR calls are safe no-ops |
-| On-demand | Use `@wise-kit/ui/resolver` with `unplugin-vue-components` |
+| On-demand | Use `morya-ui/resolver` with `unplugin-vue-components` |
 | Overlays | Dialog / Select / Tooltip use Vue `Teleport`; SSR renders placeholders, interaction hydrates on the client |
 
 ## Nuxt 3
 
-Use the **`@wise-kit/nuxt`** module (`packages/nuxt` in this repo).
+Use the **`@morya-space/nuxt`** module (`packages/nuxt` in this repo).
 
 ### Install
 
 ```bash
-pnpm add @wise-kit/ui @wise-kit/nuxt
+pnpm add morya-ui @morya-space/nuxt
 pnpm add -D unplugin-vue-components
 ```
 
@@ -36,14 +36,14 @@ pnpm add -D unplugin-vue-components
 ```ts
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { WiseKitResolver } from '@wise-kit/ui/resolver'
+import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['@wise-kit/nuxt'],
+  modules: ['@morya-space/nuxt'],
   vite: {
     plugins: [
       Components({
-        resolvers: [WiseKitResolver()],
+        resolvers: [MoryaUIResolver()],
       }),
     ],
   },
@@ -52,8 +52,8 @@ export default defineNuxtConfig({
 
 The module by default:
 
-- Adds `@wise-kit/ui/styles.css`
-- Transpiles `@wise-kit/ui` for SSR
+- Adds `morya-ui/styles.css`
+- Transpiles `morya-ui` for SSR
 - Registers overlay app context on the client (for `toast` / `message`)
 
 ### Root layout
@@ -61,9 +61,9 @@ The module by default:
 ```vue
 <!-- app.vue -->
 <template>
-  <WkConfigProvider :theme="theme" density="comfortable">
+  <MConfigProvider :theme="theme" density="comfortable">
     <NuxtPage />
-  </WkConfigProvider>
+  </MConfigProvider>
 </template>
 
 <script setup lang="ts">
@@ -71,7 +71,7 @@ const theme = ref<'light' | 'dark'>('light')
 </script>
 ```
 
-With on-demand imports you do not need `app.use(WiseKit)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(WiseKit)`.
+With on-demand imports you do not need `app.use(MoryaUI)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(MoryaUI)`.
 
 ### Client-only islands
 
@@ -84,7 +84,7 @@ Best for **static sites + Vue islands** (admin shells embedded in marketing page
 ### Install
 
 ```bash
-pnpm add @wise-kit/ui
+pnpm add morya-ui
 npx astro add vue
 ```
 
@@ -99,14 +99,14 @@ import AdminShell from '../components/AdminShell.vue'
 
 ```vue
 <script setup lang="ts">
-import { WkButton, WkConfigProvider } from '@wise-kit/ui'
-import '@wise-kit/ui/styles.css'
+import { MButton, MConfigProvider } from 'morya-ui'
+import 'morya-ui/styles.css'
 </script>
 
 <template>
-  <WkConfigProvider theme="light">
-    <WkButton label="Hello" />
-  </WkConfigProvider>
+  <MConfigProvider theme="light">
+    <MButton label="Hello" />
+  </MConfigProvider>
 </template>
 ```
 
@@ -117,7 +117,7 @@ Use `client:load` or `client:only` for interactive admin UIs; `client:visible` f
 ```ts
 import { createSSRApp } from 'vue'
 import App from './App.vue'
-import '@wise-kit/ui/styles.css'
+import 'morya-ui/styles.css'
 
 export function createApp() {
   return { app: createSSRApp(App) }
@@ -127,27 +127,27 @@ export function createApp() {
 Client entry:
 
 ```ts
-import { createWiseKit } from '@wise-kit/ui'
+import { createMoryaUI } from 'morya-ui'
 
-app.use(createWiseKit({ components: false })).mount('#app')
+app.use(createMoryaUI({ components: false })).mount('#app')
 ```
 
-Add `@wise-kit/ui` to `ssr.noExternal` so `.vue` and CSS side effects resolve correctly.
+Add `morya-ui` to `ssr.noExternal` so `.vue` and CSS side effects resolve correctly.
 
 ## Other Vue SSR stacks
 
 | Stack | Notes |
 | --- | --- |
-| **Quasar SSR** | Add `@wise-kit/ui` to `build.transpileDependencies`; import styles in entry |
+| **Quasar SSR** | Add `morya-ui` to `build.transpileDependencies`; import styles in entry |
 | **vike / vite-plugin-ssr** | Same as Vite SSR |
-| **Inertia + Vue SSR** | Wrap with `WkConfigProvider`; call imperative APIs after mount |
+| **Inertia + Vue SSR** | Wrap with `MConfigProvider`; call imperative APIs after mount |
 
 ## Limitations
 
 - **Vue 2 is not supported** (Vue 3 SSR only).
 - **IE** is out of scope.
-- Theme `localStorage` persistence is client-only; sync theme via `WkConfigProvider` or cookies to avoid flash.
-- Full SSR E2E coverage is evolving; please [open an issue](https://github.com/wise-kit/wise-kit-ui/issues) with a minimal repro if you see hydration warnings.
+- Theme `localStorage` persistence is client-only; sync theme via `MConfigProvider` or cookies to avoid flash.
+- Full SSR E2E coverage is evolving; please [open an issue](https://github.com/morya-space/morya-ui/issues) with a minimal repro if you see hydration warnings.
 
 ## Next
 

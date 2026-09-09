@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WkIcon } from '@wise-kit/ui'
+import { MIcon } from 'morya-ui'
 import { computed, onBeforeUnmount, ref } from 'vue'
 import { useDocsI18n } from '../i18n'
 import { copyText } from '../utils/copyText'
@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
           :aria-label="label"
           @click="onCopy"
         >
-          <WkIcon :name="copied ? 'check' : 'copy'" size="sm" />
+          <MIcon :name="copied ? 'check' : 'copy'" size="sm" />
           <span>{{ label }}</span>
         </button>
       </summary>
@@ -66,36 +66,36 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .code-preview {
-  border: 1px solid var(--wk-color-border);
-  border-radius: var(--wk-radius-md);
+  border: 1px solid var(--m-color-border);
+  border-radius: var(--m-radius-md);
   margin: 1.25rem 0 1.75rem;
   overflow: hidden;
 }
 .code-preview__demo {
   align-items: center;
-  background: color-mix(in srgb, var(--wk-color-primary) 4%, var(--wk-color-surface));
+  background: color-mix(in srgb, var(--m-color-primary) 4%, var(--m-color-surface));
   display: flex;
   flex-wrap: wrap;
-  gap: var(--wk-space-3);
+  gap: var(--m-space-3);
   min-height: 7rem;
-  padding: var(--wk-space-4);
+  padding: var(--m-space-4);
 }
-.code-preview__demo :deep(.wk-splitter) {
+.code-preview__demo :deep(.m-splitter) {
   align-self: stretch;
   flex: 1 1 100%;
   width: 100%;
 }
 .code-preview__code summary {
   align-items: center;
-  border-top: 1px solid var(--wk-color-border);
-  color: var(--wk-color-text);
+  border-top: 1px solid var(--m-color-border);
+  color: var(--m-color-text);
   cursor: pointer;
   display: flex;
   font-size: 0.78rem;
   gap: 0.75rem;
   justify-content: space-between;
   list-style: none;
-  padding: var(--wk-space-3) var(--wk-space-4);
+  padding: var(--m-space-3) var(--m-space-4);
 }
 .code-preview__code summary::-webkit-details-marker {
   display: none;
@@ -106,7 +106,7 @@ onBeforeUnmount(() => {
   gap: 0.55rem;
 }
 .code-preview__summary-label em {
-  color: var(--wk-color-text-muted);
+  color: var(--m-color-text-muted);
   font-family: ui-monospace, monospace;
   font-size: 0.65rem;
   font-style: normal;
@@ -114,10 +114,10 @@ onBeforeUnmount(() => {
 }
 .code-preview__copy {
   align-items: center;
-  background: color-mix(in srgb, var(--wk-color-surface) 80%, transparent);
-  border: 1px solid var(--wk-color-border);
-  border-radius: var(--wk-radius-sm);
-  color: var(--wk-color-text-muted);
+  background: color-mix(in srgb, var(--m-color-surface) 80%, transparent);
+  border: 1px solid var(--m-color-border);
+  border-radius: var(--m-radius-sm);
+  color: var(--m-color-text-muted);
   cursor: pointer;
   display: inline-flex;
   font-size: 0.72rem;
@@ -125,23 +125,23 @@ onBeforeUnmount(() => {
   padding: 0.28rem 0.55rem;
 }
 .code-preview__copy:hover {
-  border-color: color-mix(in srgb, var(--wk-color-primary) 40%, var(--wk-color-border));
-  color: var(--wk-color-primary);
+  border-color: color-mix(in srgb, var(--m-color-primary) 40%, var(--m-color-border));
+  color: var(--m-color-primary);
 }
 .code-preview__copy[data-copied='true'] {
-  border-color: color-mix(in srgb, var(--wk-color-success, #16a34a) 45%, var(--wk-color-border));
-  color: var(--wk-color-success, #16a34a);
+  border-color: color-mix(in srgb, var(--m-color-success, #16a34a) 45%, var(--m-color-border));
+  color: var(--m-color-success, #16a34a);
 }
 .code-preview__highlight,
 .code-preview__fallback {
-  background: color-mix(in srgb, var(--wk-color-text) 7%, var(--wk-color-surface));
-  border-top: 1px solid var(--wk-color-border);
+  background: color-mix(in srgb, var(--m-color-text) 7%, var(--m-color-surface));
+  border-top: 1px solid var(--m-color-border);
   margin: 0;
   overflow-x: auto;
-  padding: var(--wk-space-4);
+  padding: var(--m-space-4);
 }
 .code-preview__fallback {
-  color: var(--wk-color-text);
+  color: var(--m-color-text);
   font-family: ui-monospace, monospace;
   font-size: 0.7rem;
   line-height: 1.6;

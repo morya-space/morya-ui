@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { TieredMenuItem, TieredMenuProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWkConfig } from '../../shared/config'
+import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WkIcon from '../Icon/Icon.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<TieredMenuProps>(), {
   popup: false,
@@ -18,7 +18,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
 
-const config = useWkConfig()
+const config = useMConfig()
 const root = ref<HTMLElement | null>(null)
 const openIndex = ref<number | null>(null)
 const popupStyle = ref<Record<string, string>>({})
@@ -118,20 +118,20 @@ onBeforeUnmount(() => {
   <div
     v-if="!popup"
     ref="root"
-    class="wk-tieredmenu"
+    class="m-tieredmenu"
     role="menu"
   >
     <div
       v-for="(item, index) in model"
       :key="`${item.label ?? 'sep'}-${index}`"
-      class="wk-tieredmenu__row"
+      class="m-tieredmenu__row"
       @mouseenter="openSubmenu(index, item)"
     >
-      <div v-if="item.separator" class="wk-tieredmenu__separator" role="separator" />
+      <div v-if="item.separator" class="m-tieredmenu__separator" role="separator" />
       <button
         v-else
         type="button"
-        class="wk-tieredmenu__item"
+        class="m-tieredmenu__item"
         role="menuitem"
         :disabled="item.disabled"
         :aria-haspopup="item.items?.length ? 'menu' : undefined"
@@ -139,21 +139,21 @@ onBeforeUnmount(() => {
         @click="item.items?.length ? openSubmenu(index, item) : activate(item)"
       >
         <span>{{ item.label }}</span>
-        <span v-if="item.items?.length" class="wk-tieredmenu__caret" aria-hidden="true">
-          <WkIcon name="chevron-right" size="sm" />
+        <span v-if="item.items?.length" class="m-tieredmenu__caret" aria-hidden="true">
+          <MIcon name="chevron-right" size="sm" />
         </span>
       </button>
       <div
         v-if="item.items?.length && openIndex === index"
-        class="wk-tieredmenu__submenu"
+        class="m-tieredmenu__submenu"
         role="menu"
       >
         <template v-for="(child, childIndex) in item.items" :key="`${child.label ?? 'sep'}-${childIndex}`">
-          <div v-if="child.separator" class="wk-tieredmenu__separator" role="separator" />
+          <div v-if="child.separator" class="m-tieredmenu__separator" role="separator" />
           <button
             v-else
             type="button"
-            class="wk-tieredmenu__item"
+            class="m-tieredmenu__item"
             role="menuitem"
             :disabled="child.disabled"
             @click="activateChild(child)"
@@ -165,26 +165,26 @@ onBeforeUnmount(() => {
     </div>
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wk-scale-fade">
+    <Transition name="m-scale-fade">
       <div
         v-if="modelValue"
         ref="root"
-        class="wk-tieredmenu wk-tieredmenu--popup"
-        :class="{ 'wk-tieredmenu--teleported': teleported }"
+        class="m-tieredmenu wk-tieredmenu--popup"
+        :class="{ 'm-tieredmenu--teleported': teleported }"
         :style="teleported ? popupStyle : undefined"
         role="menu"
       >
         <div
           v-for="(item, index) in model"
           :key="`${item.label ?? 'sep'}-${index}`"
-          class="wk-tieredmenu__row"
+          class="m-tieredmenu__row"
           @mouseenter="openSubmenu(index, item)"
         >
-          <div v-if="item.separator" class="wk-tieredmenu__separator" role="separator" />
+          <div v-if="item.separator" class="m-tieredmenu__separator" role="separator" />
           <button
             v-else
             type="button"
-            class="wk-tieredmenu__item"
+            class="m-tieredmenu__item"
             role="menuitem"
             :disabled="item.disabled"
             :aria-haspopup="item.items?.length ? 'menu' : undefined"
@@ -192,21 +192,21 @@ onBeforeUnmount(() => {
             @click="item.items?.length ? openSubmenu(index, item) : activate(item)"
           >
             <span>{{ item.label }}</span>
-            <span v-if="item.items?.length" class="wk-tieredmenu__caret" aria-hidden="true">
-              <WkIcon name="chevron-right" size="sm" />
+            <span v-if="item.items?.length" class="m-tieredmenu__caret" aria-hidden="true">
+              <MIcon name="chevron-right" size="sm" />
             </span>
           </button>
           <div
             v-if="item.items?.length && openIndex === index"
-            class="wk-tieredmenu__submenu"
+            class="m-tieredmenu__submenu"
             role="menu"
           >
             <template v-for="(child, childIndex) in item.items" :key="`${child.label ?? 'sep'}-${childIndex}`">
-              <div v-if="child.separator" class="wk-tieredmenu__separator" role="separator" />
+              <div v-if="child.separator" class="m-tieredmenu__separator" role="separator" />
               <button
                 v-else
                 type="button"
-                class="wk-tieredmenu__item"
+                class="m-tieredmenu__item"
                 role="menuitem"
                 :disabled="child.disabled"
                 @click="activateChild(child)"

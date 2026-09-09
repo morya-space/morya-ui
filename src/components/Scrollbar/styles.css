@@ -1,122 +1,122 @@
-.wk-scrollbar {
-    --wk-scrollbar-track-size: 6px;
-    --wk-scrollbar-bg: color-mix(
+.m-scrollbar {
+    --m-scrollbar-track-size: 6px;
+    --m-scrollbar-bg: color-mix(
         in srgb,
-        var(--wk-color-text) 28%,
+        var(--m-color-text) 28%,
         transparent
     );
-    --wk-scrollbar-hover-bg: color-mix(
+    --m-scrollbar-hover-bg: color-mix(
         in srgb,
-        var(--wk-color-text) 45%,
+        var(--m-color-text) 45%,
         transparent
     );
-    --wk-scrollbar-opacity: 0.5;
-    --wk-scrollbar-hover-opacity: 0.8;
+    --m-scrollbar-opacity: 0.5;
+    --m-scrollbar-hover-opacity: 0.8;
     min-height: 0;
     overflow: hidden;
     position: relative;
 }
 
-.wk-scrollbar--fill {
+.m-scrollbar--fill {
     height: 100%;
     min-height: 0;
     min-width: 0;
     width: 100%;
 }
 
-.wk-scrollbar__wrap {
+.m-scrollbar__wrap {
     overflow: auto;
 }
 
-.wk-scrollbar--fill .wk-scrollbar__wrap {
+.m-scrollbar--fill .m-scrollbar__wrap {
     height: 100%;
     min-height: 0;
     min-width: 0;
     width: 100%;
 }
 
-.wk-scrollbar--fit-content.wk-scrollbar--fill {
+.m-scrollbar--fit-content.m-scrollbar--fill {
     height: auto;
 }
 
-.wk-scrollbar--fit-content.wk-scrollbar--fill .wk-scrollbar__wrap {
+.m-scrollbar--fit-content.m-scrollbar--fill .m-scrollbar__wrap {
     height: auto;
     max-height: inherit;
     max-width: inherit;
 }
 
-.wk-scrollbar__wrap--hidden-default {
+.m-scrollbar__wrap--hidden-default {
     scrollbar-width: none;
 }
 
-.wk-scrollbar__wrap--hidden-default::-webkit-scrollbar {
+.m-scrollbar__wrap--hidden-default::-webkit-scrollbar {
     display: none;
 }
 
-.wk-scrollbar__view {
+.m-scrollbar__view {
     box-sizing: border-box;
 }
 
-.wk-scrollbar__bar {
-    border-radius: var(--wk-radius-sm);
+.m-scrollbar__bar {
+    border-radius: var(--m-radius-sm);
     bottom: 2px;
     position: absolute;
     right: 2px;
     z-index: 1;
 }
 
-.wk-scrollbar__bar--vertical {
+.m-scrollbar__bar--vertical {
     top: 2px;
-    width: var(--wk-scrollbar-track-size);
+    width: var(--m-scrollbar-track-size);
 }
 
-.wk-scrollbar__bar--vertical > .wk-scrollbar__thumb {
+.m-scrollbar__bar--vertical > .m-scrollbar__thumb {
     width: 100%;
 }
 
-.wk-scrollbar__bar--horizontal {
-    height: var(--wk-scrollbar-track-size);
+.m-scrollbar__bar--horizontal {
+    height: var(--m-scrollbar-track-size);
     left: 2px;
 }
 
-.wk-scrollbar__bar--horizontal > .wk-scrollbar__thumb {
+.m-scrollbar__bar--horizontal > .m-scrollbar__thumb {
     height: 100%;
 }
 
-.wk-scrollbar__bar:focus-visible {
-    box-shadow: var(--wk-focus-shadow);
+.m-scrollbar__bar:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
     outline-offset: 1px;
 }
 
-.wk-scrollbar__thumb {
-    background-color: var(--wk-scrollbar-bg);
+.m-scrollbar__thumb {
+    background-color: var(--m-scrollbar-bg);
     border-radius: inherit;
     cursor: pointer;
     display: block;
     height: 0;
-    opacity: var(--wk-scrollbar-opacity);
+    opacity: var(--m-scrollbar-opacity);
     position: relative;
     transition:
-        background-color var(--wk-motion-fast) var(--wk-motion-ease),
-        opacity var(--wk-motion-fast) var(--wk-motion-ease);
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 0;
 }
 
-.wk-scrollbar__thumb:hover {
-    background-color: var(--wk-scrollbar-hover-bg);
-    opacity: var(--wk-scrollbar-hover-opacity);
+.m-scrollbar__thumb:hover {
+    background-color: var(--m-scrollbar-hover-bg);
+    opacity: var(--m-scrollbar-hover-opacity);
 }
 
-.wk-scrollbar-fade-enter-active {
-    transition: opacity var(--wk-motion-scrollbar-show) var(--wk-motion-ease);
+.m-scrollbar-fade-enter-active {
+    transition: opacity var(--m-motion-scrollbar-show) var(--m-motion-ease);
 }
 
-.wk-scrollbar-fade-leave-active {
-    transition: opacity var(--wk-motion-scrollbar-hide) var(--wk-motion-ease);
+.m-scrollbar-fade-leave-active {
+    transition: opacity var(--m-motion-scrollbar-hide) var(--m-motion-ease);
 }
 
-.wk-scrollbar-fade-enter-from,
-.wk-scrollbar-fade-leave-to {
+.m-scrollbar-fade-enter-from,
+.m-scrollbar-fade-leave-to {
     opacity: 0;
 }

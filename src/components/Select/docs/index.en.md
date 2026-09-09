@@ -8,19 +8,19 @@ description: Form select. Supports multiple tags, remote search, invalid, size, 
 
 Form select for choosing one or more values from a list of options.
 
-**Unlike Dropdown:** `WkSelect` is a form control. Use `WkDropdown` for action menus.
+**Unlike Dropdown:** `MSelect` is a form control. Use `MDropdown` for action menus.
 
 ## Import
 
 ```ts
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 ```
 
 ## Basic
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -32,7 +32,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
+  <MSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
 </template>
 ```
 
@@ -42,7 +42,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>('design')
@@ -53,7 +53,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect v-model="value" label="Team" :options="options" show-clear />
+  <MSelect v-model="value" label="Team" :options="options" show-clear />
 </template>
 ```
 
@@ -61,7 +61,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -72,7 +72,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect
+  <MSelect
     v-model="value"
     :options="options"
     placeholder="Required"
@@ -86,7 +86,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 
 const options = [
   { label: 'Design', value: 'design' },
@@ -95,7 +95,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect model-value="design" :options="options" disabled />
+  <MSelect model-value="design" :options="options" disabled />
 </template>
 ```
 
@@ -103,7 +103,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -115,9 +115,9 @@ const options = [
 
 <template>
   <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-start">
-    <WkSelect v-model="value" :options="options" size="small" placeholder="Small" />
-    <WkSelect v-model="value" :options="options" placeholder="Normal" />
-    <WkSelect v-model="value" :options="options" size="large" placeholder="Large" />
+    <MSelect v-model="value" :options="options" size="small" placeholder="Small" />
+    <MSelect v-model="value" :options="options" placeholder="Normal" />
+    <MSelect v-model="value" :options="options" size="large" placeholder="Large" />
   </div>
 </template>
 ```
@@ -126,7 +126,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -137,7 +137,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
+  <MSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
 </template>
 ```
 
@@ -147,7 +147,7 @@ With `multiple`, `v-model` is an array. Selected values render as removable tags
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>(['design'])
@@ -160,8 +160,8 @@ const options = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WkSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
-    <WkSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
+    <MSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
+    <MSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
   </div>
 </template>
 ```
@@ -172,7 +172,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<Array<string | number>>([])
@@ -183,7 +183,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
+  <MSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
 </template>
 ```
 
@@ -193,7 +193,7 @@ const options = [
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | number | undefined>()
@@ -220,7 +220,7 @@ function onSearch(query: string) {
 </script>
 
 <template>
-  <WkSelect
+  <MSelect
     v-model="value"
     :options="options"
     filter
@@ -238,7 +238,7 @@ Shows empty-state text when there are no options or the filter has no matches. O
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -251,8 +251,8 @@ const cities = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <WkSelect v-model="value" :options="[]" empty-message="No options" placeholder="Empty list" />
-    <WkSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
+    <MSelect v-model="value" :options="[]" empty-message="No options" placeholder="Empty list" />
+    <MSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
   </div>
 </template>
 ```
@@ -263,7 +263,7 @@ The menu Teleports to `body` by default (`teleport` + `appendTo`). Set `append-t
 
 ```vue preview
 <script setup lang="ts">
-import { WkSelect } from '@wise-kit/ui'
+import { MSelect } from 'morya-ui'
 import { ref } from 'vue'
 
 const value = ref<string | undefined>()
@@ -274,7 +274,7 @@ const options = [
 </script>
 
 <template>
-  <WkSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
+  <MSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
 </template>
 ```
 

@@ -1,4 +1,4 @@
-import type { WkAppendTo } from '../../shared/overlay'
+import type { MAppendTo } from '../../shared/overlay'
 
 export interface TooltipProps {
   content: string
@@ -13,5 +13,5 @@ export interface TooltipProps {
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
-  appendTo?: WkAppendTo
+  appendTo?: MAppendTo
 }

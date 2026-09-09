@@ -1,38 +1,38 @@
 /* —— Data: TreeTable —— */
-.wk-treetable {
+.m-treetable {
     overflow: auto;
     width: 100%;
 }
 
-.wk-treetable__table {
+.m-treetable__table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.wk-treetable__table th,
-.wk-treetable__cell {
-    border-bottom: var(--wk-border-width) solid var(--wk-color-border);
-    padding: var(--wk-space-2) var(--wk-space-3);
+.m-treetable__table th,
+.m-treetable__cell {
+    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    padding: var(--m-space-2) var(--m-space-3);
     text-align: left;
 }
 
-.wk-treetable__table th {
-    background: var(--wk-table-header-bg);
-    font-size: var(--wk-font-size-sm);
+.m-treetable__table th {
+    background: var(--m-table-header-bg);
+    font-size: var(--m-font-size-sm);
     font-weight: 600;
 }
 
-.wk-treetable__tree-cell {
+.m-treetable__tree-cell {
     align-items: center;
     display: flex;
-    gap: var(--wk-space-1);
+    gap: var(--m-space-1);
 }
 
-.wk-treetable__toggler,
-.wk-treetable__toggler-spacer {
+.m-treetable__toggler,
+.m-treetable__toggler-spacer {
     background: transparent;
     border: 0;
-    color: var(--wk-color-text-muted);
+    color: var(--m-color-text-muted);
     flex: 0 0 1.25rem;
     font: inherit;
     height: 1.25rem;
@@ -40,22 +40,22 @@
     width: 1.25rem;
 }
 
-.wk-treetable__message {
+.m-treetable__message {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--wk-control-height-medium, 2.5rem) * 2);
-    padding: var(--wk-space-5);
+    min-height: calc(var(--m-control-height-medium, 2.5rem) * 2);
+    padding: var(--m-space-5);
 }
 
-.wk-treetable__expansion-cell {
-    background: color-mix(in srgb, var(--wk-color-primary) 6%, var(--wk-color-surface));
-    padding: var(--wk-space-3);
+.m-treetable__expansion-cell {
+    background: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface));
+    padding: var(--m-space-3);
 }
 
-.wk-treetable__empty-text {
+.m-treetable__empty-text {
     margin: 0;
-    color: var(--wk-color-text-muted);
-    font-size: var(--wk-font-size-sm);
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-sm);
     line-height: 1.5;
 }

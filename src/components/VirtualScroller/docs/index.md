@@ -11,7 +11,7 @@ description: 按可视窗口渲染长列表。
 ## 引入
 
 ```ts
-import { WkVirtualScroller } from '@wise-kit/ui'
+import { MVirtualScroller } from 'morya-ui'
 ```
 
 ## 基础用法
@@ -20,19 +20,19 @@ import { WkVirtualScroller } from '@wise-kit/ui'
 
 ```vue preview
 <script setup lang="ts">
-import { WkVirtualScroller } from '@wise-kit/ui'
+import { MVirtualScroller } from 'morya-ui'
 
 const items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)
 </script>
 
 <template>
-  <WkVirtualScroller :items="items" :item-size="36" :height="220">
+  <MVirtualScroller :items="items" :item-size="36" :height="220">
     <template #item="{ item, index }">
-      <div style="padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--wk-color-border)">
-        {{ item }} <span style="margin-left:auto;color:var(--wk-color-text-muted);font-size:0.75rem">#{{ index }}</span>
+      <div style="padding:0 0.75rem;display:flex;align-items:center;height:100%;border-bottom:1px solid var(--m-color-border)">
+        {{ item }} <span style="margin-left:auto;color:var(--m-color-text-muted);font-size:0.75rem">#{{ index }}</span>
       </div>
     </template>
-  </WkVirtualScroller>
+  </MVirtualScroller>
 </template>
 ```
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { ConfirmPopupProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useWkLocale } from '../../locale'
+import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
-import { useWkConfig } from '../../shared/config'
+import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import WkButton from '../Button/Button.vue'
-import WkIcon from '../Icon/Icon.vue'
+import MButton from '../Button/Button.vue'
+import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,
@@ -23,8 +23,8 @@ const emit = defineEmits<{
   (event: 'reject'): void
 }>()
 
-const config = useWkConfig()
-const locale = useWkLocale()
+const config = useMConfig()
+const locale = useMLocale()
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const pending = ref(false)
@@ -135,23 +135,23 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="wk-scale-fade">
+    <Transition name="m-scale-fade">
       <div
         v-if="visible"
         ref="panel"
-        class="wk-confirmpopup"
-        :class="{ 'wk-confirmpopup--teleported': teleported }"
+        class="m-confirmpopup"
+        :class="{ 'm-confirmpopup--teleported': teleported }"
         role="alertdialog"
         tabindex="-1"
         :style="panelStyle"
       >
-        <div class="wk-confirmpopup__message">
-          <WkIcon v-if="icon" class="wk-confirmpopup__icon" :name="icon" size="sm" />
+        <div class="m-confirmpopup__message">
+          <MIcon v-if="icon" class="m-confirmpopup__icon" :name="icon" size="sm" />
           <slot>{{ message }}</slot>
         </div>
-        <div class="wk-confirmpopup__footer">
-          <WkButton :label="rejectText" severity="secondary" size="small" @click="reject" />
-          <WkButton
+        <div class="m-confirmpopup__footer">
+          <MButton :label="rejectText" severity="secondary" size="small" @click="reject" />
+          <MButton
             :label="acceptText"
             size="small"
             :severity="acceptSeverity"
