@@ -44,7 +44,7 @@
 
 ### 生态包
 
-- **`@morya-space/nuxt`**：Nuxt 3 模块（样式注入、transpile、客户端 overlay 上下文）
+- **`morya-ui-nuxt`**：Nuxt 3 模块（样式注入、transpile、客户端 overlay 上下文）
 - **`morya-ui-mcp`**：MCP 服务，供 AI 客户端检索组件文档、示例与用法建议
 
 ### SSR 与框架集成

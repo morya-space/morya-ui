@@ -64,7 +64,7 @@
 
 ### SSR 与元框架
 
-兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`@morya-space/nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://morya-ui.github.io/morya-ui/docs/ssr)。
+兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`morya-ui-nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://morya-ui.github.io/morya-ui/docs/ssr)。
 
 ## 文档
 
@@ -124,7 +124,7 @@ createApp(App).use(createMoryaUI({ locale: zhCN })).mount('#app')
 | 包 | 说明 |
 | --- | --- |
 | [`morya-ui`](https://www.npmjs.com/package/morya-ui) | 组件、样式、主题与语言工具 |
-| [`@morya-space/nuxt`](./packages/nuxt) | Nuxt 3 模块（样式、transpile、overlay 上下文） |
+| [`morya-ui-nuxt`](./packages/nuxt) | Nuxt 3 模块（样式、transpile、overlay 上下文） |
 | [`morya-ui-mcp`](https://www.npmjs.com/package/morya-ui-mcp) | 可选 MCP 服务，供 AI 客户端检索文档 |
 
 ## 参与贡献

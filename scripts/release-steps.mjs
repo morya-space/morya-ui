@@ -246,7 +246,7 @@ export function stepCommit(options = {}) {
   if (hasStagedChanges()) {
     const message = options.noMcp
       ? `release: ${PACKAGE_NAME} v${version}`
-      : `release: ${PACKAGE_NAME} / morya-ui-mcp / @morya-space/nuxt v${version}`
+      : `release: ${PACKAGE_NAME} / morya-ui-mcp / morya-ui-nuxt v${version}`
     git(['commit', '-m', message], { stdio: 'inherit' })
     console.log(`Committed ${message}`)
     return true
@@ -354,7 +354,7 @@ export async function runReleaseSteps(selectedSteps, options) {
     }
   } else if (selectedSteps.length > 1 && selectedSteps.at(-1) === 'push') {
     const version = plan?.version || readVersion()
-    const mcpNote = options.noMcp ? '' : ' (+ morya-ui-mcp, @morya-space/nuxt)'
+    const mcpNote = options.noMcp ? '' : ' (+ morya-ui-mcp, morya-ui-nuxt)'
     console.log(`Released ${PACKAGE_NAME} v${version}${mcpNote}`)
   }
 
