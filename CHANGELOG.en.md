@@ -1,20 +1,5 @@
 ﻿# morya-ui
 
-## 0.2.0
-
-### Features
-
-- enhance design token management and documentation
-- add reduced motion policy support across components
-- integrate MScrollbar into AutoComplete, CascadeSelect, CommandMenu, and Listbox components
-- enhance MSelect component with scrollbar and max-height functionality
-
-## 0.1.2
-
-### Changes
-
-- migrate to M design tokens and remove legacy compat layers
-
 ## 0.1.1
 
 Initial public release of `morya-ui` (Morya UI), using the current component library as the baseline.

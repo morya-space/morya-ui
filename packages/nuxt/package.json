@@ -1,7 +1,7 @@
 {
   "name": "@morya-space/nuxt",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.1.1",
   "description": "Nuxt 3 module for morya-ui — styles, transpile, and client overlay context.",
   "license": "MIT",
   "homepage": "https://github.com/morya-space/morya-ui/tree/main/packages/nuxt#readme",
@@ -37,7 +37,7 @@
     "@nuxt/kit": "^3.16.0"
   },
   "peerDependencies": {
-    "morya-ui": "^0.2.0",
+    "morya-ui": "^0.1.1",
     "nuxt": "^3.10.0"
   }
 }
