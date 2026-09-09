@@ -33,7 +33,7 @@ description: Morya UI 是什么、适合谁用、如何开始。
 | 包 | 说明 |
 | --- | --- |
 | `morya-ui` | 组件、样式、主题 API、文档站源码 |
-| `morya-ui-mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |
+| `@morya-ui/mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |
 
 ## 安装
 

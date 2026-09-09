@@ -33,7 +33,7 @@ description: What Morya UI is, who it is for, and how to get started.
 | Package | Role |
 | --- | --- |
 | `morya-ui` | Components, styles, theme APIs, docs site source |
-| `morya-ui-mcp` | (Optional) MCP server for AI clients that support the protocol |
+| `@morya-ui/mcp` | (Optional) MCP server for AI clients that support the protocol |
 
 ## Install
 

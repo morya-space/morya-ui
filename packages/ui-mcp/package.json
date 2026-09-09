@@ -1,5 +1,5 @@
 {
-  "name": "morya-ui-mcp",
+  "name": "@morya-ui/mcp",
   "type": "module",
   "version": "0.1.1",
   "packageManager": "pnpm@10.12.4",
@@ -20,9 +20,7 @@
   "exports": {
     ".": "./dist/index.js"
   },
-  "bin": {
-    "morya-ui-mcp": "./bin/morya-ui-mcp.js"
-  },
+  "bin": "./bin/morya-ui-mcp.js",
   "files": [
     "README.md",
     "bin",

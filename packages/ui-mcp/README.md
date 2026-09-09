@@ -1,4 +1,4 @@
-﻿# morya-ui-mcp
+﻿# @morya-ui/mcp
 
 Optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server for [`morya-ui`](https://www.npmjs.com/package/morya-ui).
 
@@ -13,7 +13,7 @@ Public docs: run the docs site (`pnpm dev`) and open **Docs → MCP**.
 ## Run
 
 ```bash
-npx -y morya-ui-mcp
+npx -y @morya-ui/mcp
 ```
 
 Typical client config (field names vary by client):
@@ -21,14 +21,14 @@ Typical client config (field names vary by client):
 ```json
 {
   "command": "npx",
-  "args": ["-y", "morya-ui-mcp"]
+  "args": ["-y", "@morya-ui/mcp"]
 }
 ```
 
 Local checkout:
 
 ```bash
-pnpm --filter morya-ui-mcp build
+pnpm --filter @morya-ui/mcp build
 node packages/ui-mcp/bin/morya-ui-mcp.js
 ```
 

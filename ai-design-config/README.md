@@ -45,12 +45,12 @@
 ## 与组件库的关系
 
 - **Token 单一事实源**：运行时以 `morya-ui` 的 `styles.css` 为准；本目录 `design-tokens/` 供 AI 与静态检查使用，发版后如有差异以 npm 包为准。
-- **组件 API**：以文档站 `/components` 或 MCP `morya-ui-mcp` 为准；`docs/components.md` 仅作索引与场景指引。
+- **组件 API**：以文档站 `/components` 或 MCP `@morya-ui/mcp` 为准；`docs/components.md` 仅作索引与场景指引。
 
 ## 可选：MCP 文档检索
 
 ```bash
-npx -y morya-ui-mcp
+npx -y @morya-ui/mcp
 ```
 
 在 Cursor / 其他 MCP 客户端配置后，生成代码时可检索真实 Props / Events。

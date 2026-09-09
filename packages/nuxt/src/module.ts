@@ -9,7 +9,7 @@ export interface MoryaUINuxtOptions {
 
 export default defineNuxtModule<MoryaUINuxtOptions>({
   meta: {
-    name: 'morya-ui-nuxt',
+    name: '@morya-ui/nuxt',
     configKey: 'moryaUI',
     compatibility: {
       nuxt: '>=3.10.0',

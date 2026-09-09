@@ -64,7 +64,7 @@ Every component includes Markdown docs with interactive `vue preview` blocks. Br
 
 ### SSR & meta-frameworks
 
-Works with **Nuxt 3**, **Astro + Vue**, **Vite SSR**, and similar setups. Includes the [`morya-ui-nuxt`](./packages/nuxt) module — see the [SSR guide](https://morya-ui.github.io/morya-ui/docs/ssr).
+Works with **Nuxt 3**, **Astro + Vue**, **Vite SSR**, and similar setups. Includes the [`@morya-ui/nuxt`](./packages/nuxt) module — see the [SSR guide](https://morya-ui.github.io/morya-ui/docs/ssr).
 
 ## Documentation
 
@@ -124,8 +124,8 @@ See the [Quick start guide](https://morya-ui.github.io/morya-ui/docs/quick-start
 | Package | Description |
 | --- | --- |
 | [`morya-ui`](https://www.npmjs.com/package/morya-ui) | Components, styles, theme & locale helpers |
-| [`morya-ui-nuxt`](./packages/nuxt) | Nuxt 3 module (styles, transpile, overlay context) |
-| [`morya-ui-mcp`](https://www.npmjs.com/package/morya-ui-mcp) | Optional MCP server for AI-assisted doc lookup |
+| [`@morya-ui/nuxt`](./packages/nuxt) | Nuxt 3 module (styles, transpile, overlay context) |
+| [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) | Optional MCP server for AI-assisted doc lookup |
 
 ## Contributing
 
