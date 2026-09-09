@@ -6,7 +6,7 @@ description: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客�
 
 # MCP
 
-[`morya-ui-mcp`](https://www.npmjs.com/package/morya-ui-mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
+[`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
 
 日常使用组件库 **不需要** 安装或配置 MCP。应用里仍然只依赖：
 
@@ -23,7 +23,7 @@ import 'morya-ui/styles.css'
 MCP 客户端通过 stdio 启动本包即可：
 
 ```bash
-npx -y morya-ui-mcp
+npx -y @morya-ui/mcp
 ```
 
 通用写法：
@@ -31,7 +31,7 @@ npx -y morya-ui-mcp
 ```json
 {
   "command": "npx",
-  "args": ["-y", "morya-ui-mcp"]
+  "args": ["-y", "@morya-ui/mcp"]
 }
 ```
 
@@ -48,7 +48,7 @@ npx -y morya-ui-mcp
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -61,7 +61,7 @@ npx -y morya-ui-mcp
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -74,7 +74,7 @@ npx -y morya-ui-mcp
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -87,7 +87,7 @@ npx -y morya-ui-mcp
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -100,7 +100,7 @@ npx -y morya-ui-mcp
   "context_servers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -114,7 +114,7 @@ npx -y morya-ui-mcp
     {
       "name": "morya-ui",
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   ]
 }
@@ -194,7 +194,7 @@ import { MButton } from 'morya-ui'
 
 ## 与文档站的关系
 
-目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `morya-ui-mcp`，客户端通过 `npx -y` 即可拿到新版本。
+目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@morya-ui/mcp`，客户端通过 `npx -y` 即可拿到新版本。
 
 更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/morya-space/morya-ui/tree/main/packages/ui-mcp)。
 

@@ -49,7 +49,7 @@ pnpm release:npm
 
 ## 完整发版
 
-分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)。默认同时发布 `morya-ui` 与 `morya-ui-mcp`：
+分步执行或一键编排，详见 [scripts/README.md](../scripts/README.md)。默认同时发布 `morya-ui` 与 `@morya-ui/mcp`：
 
 ```bash
 pnpm release:prepare -- --dry-run   # 预览
@@ -67,7 +67,7 @@ pnpm release -- --no-mcp            # 只发 UI
 
 ## MCP 包
 
-`morya-ui-mcp` 为可选 stdio 服务，供支持 [MCP](https://modelcontextprotocol.io/) 的客户端检索文档（不替代安装 `morya-ui`）。对外说明见文档站 [MCP](/docs/mcp)；实现见 [packages/ui-mcp/README.md](../packages/ui-mcp/README.md)。
+`@morya-ui/mcp` 为可选 stdio 服务，供支持 [MCP](https://modelcontextprotocol.io/) 的客户端检索文档（不替代安装 `morya-ui`）。对外说明见文档站 [MCP](/docs/mcp)；实现见 [packages/ui-mcp/README.md](../packages/ui-mcp/README.md)。
 
 完整 UI 发版已包含 MCP。仅需单独重发 MCP 时：
 

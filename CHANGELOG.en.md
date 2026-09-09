@@ -44,8 +44,8 @@ Initial public release of `morya-ui` (Morya UI), using the current component lib
 
 ### Ecosystem packages
 
-- **`morya-ui-nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
-- **`morya-ui-mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
+- **`@morya-ui/nuxt`**: Nuxt 3 module (styles, transpile, client overlay context)
+- **`@morya-ui/mcp`**: MCP server for AI clients to query component docs, examples, and usage guidance
 
 ### SSR & framework integration
 

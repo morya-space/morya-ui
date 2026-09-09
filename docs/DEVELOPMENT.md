@@ -11,7 +11,7 @@ Internal documentation for contributors. Public overview: [root README](../READM
 | `src/` | Library source (components, theme, locale, styles) |
 | `playground/` | Docs site (Vite + Markdown preview) |
 | `scripts/` | Release & CHANGELOG tooling |
-| `packages/ui-mcp/` | `morya-ui-mcp` stdio MCP server |
+| `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP server |
 | `docs/` | Maintainer docs |
 | `dist/` | Build output (do not edit by hand) |
 
@@ -36,7 +36,7 @@ pnpm release:push         # push branches & tag
 pnpm release:npm          # build + publish only (UI + MCP; set version first)
 pnpm release:git          # create tag / release branch only
 pnpm release:mcp          # MCP-only publish (usually unnecessary; full release includes it)
-pnpm mcp:build            # build morya-ui-mcp (catalog + stdio server)
+pnpm mcp:build            # build @morya-ui/mcp (catalog + stdio server)
 pnpm mcp:audit-examples   # audit Props / Events / Slots / Methods example coverage
 pnpm mcp:start            # run MCP locally (stdio)
 ```

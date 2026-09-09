@@ -51,7 +51,7 @@ Equivalent to `build` + `pnpm publish --access public --no-git-checks`.
 
 ## Full release
 
-Run step-by-step or use the orchestrator. See [scripts/README.md](../scripts/README.md). By default this publishes both `morya-ui` and `morya-ui-mcp`:
+Run step-by-step or use the orchestrator. See [scripts/README.md](../scripts/README.md). By default this publishes both `morya-ui` and `@morya-ui/mcp`:
 
 ```bash
 pnpm release:prepare -- --dry-run   # preview
@@ -74,7 +74,7 @@ Before publishing, verify:
 
 ## MCP package
 
-`morya-ui-mcp` is an optional stdio server for clients that support [MCP](https://modelcontextprotocol.io/) (it does not replace installing `morya-ui`). Public docs: docs site [MCP](/docs/mcp). Implementation: [packages/ui-mcp/README.md](../packages/ui-mcp/README.md).
+`@morya-ui/mcp` is an optional stdio server for clients that support [MCP](https://modelcontextprotocol.io/) (it does not replace installing `morya-ui`). Public docs: docs site [MCP](/docs/mcp). Implementation: [packages/ui-mcp/README.md](../packages/ui-mcp/README.md).
 
 The full UI release already includes MCP. Use these only to republish MCP alone:
 

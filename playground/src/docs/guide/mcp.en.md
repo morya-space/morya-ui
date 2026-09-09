@@ -6,7 +6,7 @@ description: Optional MCP server for AI clients that support the Model Context P
 
 # MCP
 
-[`morya-ui-mcp`](https://www.npmjs.com/package/morya-ui-mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
+[`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) is an optional [Model Context Protocol](https://modelcontextprotocol.io/) (stdio) server. It indexes this site’s component docs, examples, and guides so **any MCP-capable AI client** can look up the real API.
 
 You do **not** need MCP to use the component library. Apps still only depend on:
 
@@ -23,7 +23,7 @@ import 'morya-ui/styles.css'
 MCP clients start the package over stdio:
 
 ```bash
-npx -y morya-ui-mcp
+npx -y @morya-ui/mcp
 ```
 
 Generic shape:
@@ -31,7 +31,7 @@ Generic shape:
 ```json
 {
   "command": "npx",
-  "args": ["-y", "morya-ui-mcp"]
+  "args": ["-y", "@morya-ui/mcp"]
 }
 ```
 
@@ -48,7 +48,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -61,7 +61,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -74,7 +74,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -87,7 +87,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -100,7 +100,7 @@ Snippets for popular products. Key names may change across versions — check ea
   "context_servers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   }
 }
@@ -114,7 +114,7 @@ Snippets for popular products. Key names may change across versions — check ea
     {
       "name": "morya-ui",
       "command": "npx",
-      "args": ["-y", "morya-ui-mcp"]
+      "args": ["-y", "@morya-ui/mcp"]
     }
   ]
 }
@@ -194,7 +194,7 @@ import { MButton } from 'morya-ui'
 
 ## Relation to this site
 
-The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `morya-ui-mcp`; clients using `npx -y` pick up the new release.
+The catalog is generated from the same sources as this site (component `docs/` + guide Markdown). After docs change, maintainers republish `@morya-ui/mcp`; clients using `npx -y` pick up the new release.
 
 Implementation notes live in [packages/ui-mcp/README.md](https://github.com/morya-space/morya-ui/tree/main/packages/ui-mcp).
 

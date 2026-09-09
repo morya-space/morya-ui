@@ -22,12 +22,12 @@ Morya UI 面向 **Vue 3** 的 SSR 场景做了兼容（推荐 3.5 及以上）�
 
 ## Nuxt 3
 
-推荐使用官方模块 **`morya-ui-nuxt`**（同仓库 `packages/nuxt`）。
+推荐使用官方模块 **`@morya-ui/nuxt`**（同仓库 `packages/nuxt`）。
 
 ### 安装
 
 ```bash
-pnpm add morya-ui morya-ui-nuxt
+pnpm add morya-ui @morya-ui/nuxt
 pnpm add -D unplugin-vue-components
 ```
 
@@ -39,7 +39,7 @@ import Components from 'unplugin-vue-components/vite'
 import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
-  modules: ['morya-ui-nuxt'],
+  modules: ['@morya-ui/nuxt'],
   vite: {
     plugins: [
       Components({
