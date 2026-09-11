@@ -5,8 +5,9 @@ describe('applyDensity', () => {
   it('writes data-m-density on the target element', () => {
     const el = document.createElement('div')
     applyDensity('compact', el)
-    expect(el.dataset.muDensity).toBe('compact')
+    expect(el.dataset.mDensity).toBe('compact')
+    expect(el.getAttribute('data-m-density')).toBe('compact')
     applyDensity('spacious', el)
-    expect(el.dataset.muDensity).toBe('spacious')
+    expect(el.dataset.mDensity).toBe('spacious')
   })
 })
