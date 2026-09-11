@@ -42,6 +42,8 @@ const items = [
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 是否将菜单 Teleport 出去。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 表示就地渲染。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

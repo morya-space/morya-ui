@@ -69,6 +69,8 @@ const value = ref(2.5)
 | `allowHalf` | `boolean` | `false` | Allow half-star values. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

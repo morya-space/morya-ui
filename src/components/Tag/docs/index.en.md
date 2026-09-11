@@ -94,12 +94,14 @@ import { MTag } from 'morya-ui'
 | `value` | `string` | — | Tag text. The default slot takes precedence when present. |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
-| `icon` | `IconName` | — | `MIcon` icon name. |
+| `icon` | [IconName](/docs/types#IconName) | — | `MIcon` icon name. |
 | `closable` | `boolean` | `false` | Show a close control. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `bordered` | `boolean` | `false` | Draw a border. |
 | `color` | `string` | — | Custom color. |
 | `disabled` | `boolean` | `false` | Disable the close control. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

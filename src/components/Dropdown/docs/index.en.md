@@ -83,6 +83,8 @@ const items = [
 | `showDelay` / `hideDelay` | `number` | `0` / `200` | Hover delays in ms. |
 | `teleport` | `boolean` | `true` | Teleport the menu; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -139,6 +139,25 @@ const nodes = [
 </template>
 ```
 
+## 类型
+
+<h4 id="TreeNode">TreeNode</h4>
+
+`value` 数组项：
+
+```ts
+interface TreeNode {
+  key: string
+  label: string
+  children?: TreeNode[]
+  icon?: string
+  disabled?: boolean
+  isLeaf?: boolean
+}
+```
+
+选中/勾选/展开分别用 `selectionKeys`、`checkedKeys`、`expandedKeys`（`Record<string, boolean>`）。`checkStrategy` 为 `'all' | 'parent' | 'child'`。更多见 [API 类型](/docs/types)。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -151,6 +170,8 @@ const nodes = [
 | `lazy` / `load` | — | — | 懒加载子节点。 |
 | `draggable` | `boolean` | `false` | 拖拽；落点通过 `node-drop` 由业务改树。 |
 | `emptyMessage` | `string` | — | 无数据时的提示文案。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots / Events
 

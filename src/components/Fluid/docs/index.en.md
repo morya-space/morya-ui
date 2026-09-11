@@ -36,6 +36,8 @@ import { MButton, MFluid, MInput } from 'morya-ui'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `as` | `string` | `'div'` | Root element tag. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

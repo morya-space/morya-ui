@@ -56,6 +56,8 @@ const tags = ref(['vue'])
 | `addOnBlur` | `boolean` | `false` | Also add on blur. |
 | `max` | `number` | — | Maximum number of tags. |
 | `separator` | `string \| string[]` | — | Extra separators, for example `,`. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

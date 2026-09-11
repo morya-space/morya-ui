@@ -278,12 +278,32 @@ const options = [
 </template>
 ```
 
+## 样式与 attrs
+
+除控件 **事件** 外，fallthrough attrs 落在外层 field 根；`@keydown` 等由内部 combobox 接收。`placeholder`、`name` 优先用 props。下拉位置用 `placement` / `appendTo`；改面板 DOM 用 `pt`（键名见 Props）。详见 [样式与 attrs](/docs/attrs)。
+
+## 类型
+
+<h4 id="SelectOption">SelectOption</h4>
+
+```ts
+interface SelectOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+}
+```
+
+<h4 id="SelectModelValue">SelectModelValue</h4>
+
+单选为 `string | number`；`multiple` 时为 `(string | number)[]`。详见 [API 类型](/docs/types#SelectModelValue)。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `modelValue` | `string \| number \| Array<string \| number>` | — | 选中值；`multiple` 时为数组。 |
-| `options` | `SelectOption[]` | — | 选项列表。 |
+| `options` | [SelectOption](/docs/types#SelectOption)`[]` | — | 选项列表。 |
 | `label` | `string` | — | 字段标签。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
@@ -306,18 +326,20 @@ const options = [
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | 菜单对齐。 |
 | `id` | `string` | — | 控件 id。 |
 | `errorMessage` | `string` | — | 校验错误文案；与 `invalid` 同时生效时优先展示。 |
+| `name` | `string` | — | 辅助原生 name（存在隐藏 input 时）。 |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 分段透传（`root`、`control` 等）。 |
 
 ## Events
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
-| `update:modelValue` | `SelectModelValue` | 值变化。 |
-| `change` | `SelectModelValue` | 选择完成或清除。 |
+| `update:modelValue` | [SelectModelValue](/docs/types#SelectModelValue) | 值变化。 |
+| `change` | [SelectModelValue](/docs/types#SelectModelValue) | 选择完成或清除。 |
 | `clear` | — | 点击清除时触发。 |
 | `show` | — | 菜单打开。 |
 | `hide` | — | 菜单关闭。 |
 | `search` | `string` | 筛选词变化（`filter` / `remote`）。 |
-| `create` | `SelectOption` | `tag` 模式下创建了新选项。 |
+| `create` | [SelectOption](/docs/types#SelectOption) `{ label, value, disabled? }` | `tag` 模式下创建了新选项。 |
 
 ## Slots
 

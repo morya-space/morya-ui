@@ -62,6 +62,8 @@ import { MPanel } from 'morya-ui'
 | `modelValue` | `boolean` | — | `collapsed` 的 `v-model` 别名。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `defaultCollapsed` | `boolean` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

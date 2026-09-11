@@ -38,6 +38,8 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `DockItem[]` | `[]` | Icon items. |
 | `position` | `'bottom' \| 'top'` | `'bottom'` | Visual position modifier. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

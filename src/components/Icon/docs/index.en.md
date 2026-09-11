@@ -195,9 +195,11 @@ When the default slot is present, it is **rendered first** and `name` is ignored
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `IconName` | — | System icon name; optional when a slot is provided. |
+| `name` | [IconName](/docs/types#IconName) | — | System icon name; optional when a slot is provided. |
 | `label` | `string` | — | Accessible name; omitted icons use `aria-hidden`. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Size; `sm`/`lg` map to small/large. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

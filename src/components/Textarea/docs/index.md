@@ -102,7 +102,12 @@ const value = ref('Draft notes')
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
-| `errorMessage` | `string` | — | — |
+| `errorMessage` | `string` | — | 错误文案。 |
+| `placeholder` | `string` | — | 占位符。 |
+| `name` | `string` | — | 原生 name。 |
+| `autocomplete` | `string` | — | 原生 autocomplete。 |
+| `autofocus` | `boolean` | `false` | 挂载后聚焦。 |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 分段透传（`root`、`input`、`label` 等）。 |
 
 ## Events
 

@@ -98,6 +98,8 @@ When tabs overflow the container, scroll buttons appear at both ends.
 | `type` | `'line' \| 'card'` | `'line'` | Appearance. |
 | `closable` | `boolean` | `false` | Show close buttons; per-item `closable` wins. |
 | `addable` | `boolean` | `false` | Show an add button. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

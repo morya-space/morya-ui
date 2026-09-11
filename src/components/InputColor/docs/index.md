@@ -56,7 +56,9 @@ const color = ref('#2563eb')
 | `id` | `string` | — | 色板 input id。 |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
-| `size` | `MSizeInput` | — | — |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

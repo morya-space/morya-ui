@@ -46,7 +46,9 @@ const options = [
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `emptyMessage` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
-| `size` | `MSizeInput` | — | — |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

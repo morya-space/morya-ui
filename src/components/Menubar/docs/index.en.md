@@ -46,6 +46,8 @@ const model = [
 | `selectedKey` | `string \| null` | — | Selected item (`item.key` or `item.label`). |
 | `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

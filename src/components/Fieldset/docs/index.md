@@ -41,6 +41,8 @@ const collapsed = ref(false)
 | `toggleable` | `boolean` | `false` | 是否可折叠。 |
 | `collapsed` | `boolean` | `false` | 是否折叠。 |
 | `defaultCollapsed` | `boolean` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

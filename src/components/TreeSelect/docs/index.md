@@ -103,7 +103,7 @@ const options = [{ key: 'docs', label: '文档' }]
 | `options` | `TreeSelectNode[]` | — | 树节点。 |
 | `modelValue` | `string \| string[] \| null` | `null` | 选中节点 key；多选为数组。 |
 | `placeholder` | `string` | locale | 占位文案。 |
-| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `multiple` | `boolean` | `false` | 多选。 |
 | `checkable` | `boolean` | `false` | 显示勾选框（级联语义同 Tree）。 |
@@ -122,6 +122,8 @@ const options = [{ key: 'docs', label: '文档' }]
 | `id` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

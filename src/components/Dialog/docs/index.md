@@ -202,10 +202,15 @@ async function save() {
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
 | `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | 标题状态图标；`warning` 与 `warn` 同义 |
 | `positiveText` / `negativeText` | `string` | — | 预设页脚按钮；有 `footer` 插槽时忽略 |
-| `positiveSeverity` | `ButtonSeverity` | — | 确认按钮语义色 |
+| `positiveSeverity` | [ButtonSeverity](/docs/types#ButtonSeverity) | — | 确认按钮语义色 |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
-| `ariaLabel` | `string` | — | — |
+| `ariaLabel` | `string` | — | 对话框可访问名称。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 遮罩层（backdrop）透传，键名 `root`。 |
+
+## 样式与 attrs
+
+Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`class`、`style`、`data-*`、`title` 等）落在**遮罩层**（`.m-dialog-backdrop`），不是内层 `.m-dialog` 面板。面板宽度用 `width` prop；内层 DOM 用 `pt`。详见 [样式与 attrs](/docs/attrs)。
 
 ## Events
 

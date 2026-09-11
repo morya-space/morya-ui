@@ -124,6 +124,8 @@ const value = ref('draft-pass')
 | `clearable` | `boolean` | `false` | Show a clear button. |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

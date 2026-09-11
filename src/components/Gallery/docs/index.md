@@ -40,6 +40,8 @@ const images = [
 | --- | --- | --- | --- |
 | `images` | `string[]` | — | 图片 URL。 |
 | `activeIndex` | `number` | `0` | 当前索引。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

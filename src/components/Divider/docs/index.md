@@ -115,6 +115,8 @@ import { MDivider } from 'morya-ui'
 | `align` | `'left' \| 'center' \| 'right'` | `'center'` | 水平分隔带标签时的标签对齐。 |
 | `titlePlacement` | `'left' \| 'center' \| 'right'` | — | `align` 的别名；传入时优先。 |
 | `label` | `string` | — | 中间标签文案。存在默认插槽时以插槽为准。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

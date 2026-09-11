@@ -38,6 +38,8 @@ const value = [
 | --- | --- | --- | --- |
 | `value` | `MeterGroupItem[]` | — | Segment data. |
 | `max` | `number` | Sum of segments | Maximum total. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

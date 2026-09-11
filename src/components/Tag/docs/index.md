@@ -94,12 +94,14 @@ import { MTag } from 'morya-ui'
 | `value` | `string` | — | 标签文案。存在默认插槽内容时以插槽为准。 |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
-| `icon` | `IconName` | — | `MIcon` 图标名称。 |
+| `icon` | [IconName](/docs/types#IconName) | — | `MIcon` 图标名称。 |
 | `closable` | `boolean` | `false` | 显示关闭按钮。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `bordered` | `boolean` | `false` | 描边。 |
 | `color` | `string` | — | 自定义颜色。 |
 | `disabled` | `boolean` | `false` | 禁用关闭。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -64,6 +64,8 @@ const options = [
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `invalid` | `boolean` | `false` | Invalid (validation failed) state. |
 | `disabled` | `boolean` | `false` | Disable the entire group. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

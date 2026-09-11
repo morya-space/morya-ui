@@ -40,6 +40,8 @@ const images = [
 | --- | --- | --- | --- |
 | `images` | `string[]` | — | Image URLs. |
 | `activeIndex` | `number` | `0` | Current index. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

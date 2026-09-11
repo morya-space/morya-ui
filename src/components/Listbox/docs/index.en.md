@@ -44,6 +44,8 @@ const options = [
 | `filter` | `boolean` | `false` | Show filter box. |
 | `listStyle` | `string` | — | Inline styles for the list. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

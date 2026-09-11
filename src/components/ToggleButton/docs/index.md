@@ -57,8 +57,10 @@ const c = ref(false)
 | `modelValue` | `boolean` | `false` | 是否开启。 |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | 文案。 |
 | `onIcon` / `offIcon` | `string` | — | 可选图标字符。 |
-| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

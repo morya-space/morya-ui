@@ -61,6 +61,8 @@ import { MPanel } from 'morya-ui'
 | `collapsed` | `boolean` | `false` | Collapsed state. |
 | `modelValue` | `boolean` | — | `v-model` alias for `collapsed`. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

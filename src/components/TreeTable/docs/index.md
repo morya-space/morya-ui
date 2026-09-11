@@ -49,6 +49,8 @@ const value = [
 | `columns` | `TreeTableColumn[]` | — | 列定义。 |
 | `emptyMessage` | `string` | — | — |
 | `expandedKeys` | `Record<string, boolean>` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -151,6 +151,8 @@ import { MSplitter } from 'morya-ui'
 | `resizeTriggerSize` | `number` | `6` | Gutter thickness in px. |
 | `pane1Class` / `pane1Style` | — | — | Primary pane class / style. |
 | `pane2Class` / `pane2Style` | — | — | Secondary pane class / style. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

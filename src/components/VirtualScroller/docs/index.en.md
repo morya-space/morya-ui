@@ -50,6 +50,8 @@ const items = Array.from({ length: 1000 }, (_, i) => `Row ${i + 1}`)
 | `itemSize` | `number` | — | Row height in px. |
 | `height` | `number \| string` | `240` | Viewport height. |
 | `buffer` | `number` | `3` | Extra rows rendered above/below the viewport. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

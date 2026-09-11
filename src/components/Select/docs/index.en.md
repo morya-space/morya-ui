@@ -278,12 +278,32 @@ const options = [
 </template>
 ```
 
+## Styling & attrs
+
+Fallthrough attrs except control **events** bind to the field wrapper; `@keydown` and similar listeners attach to the combobox. Prefer `placeholder` / `name` as props. Use `placement` / `appendTo` for the panel, or `pt` for inner DOM. See [Styling & attrs](/docs/attrs).
+
+## Types
+
+<h4 id="SelectOption">SelectOption</h4>
+
+```ts
+interface SelectOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+}
+```
+
+<h4 id="SelectModelValue">SelectModelValue</h4>
+
+Scalar when single-select; array when `multiple`. See [API types](/docs/types#SelectModelValue).
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `modelValue` | `string \| number \| Array<string \| number>` | — | Selected value; an array when `multiple`. |
-| `options` | `SelectOption[]` | — | Options list. |
+| `options` | [SelectOption](/docs/types#SelectOption)`[]` | — | Options list. |
 | `label` | `string` | — | Field label. |
 | `helpText` | `string` | — | Help text. |
 | `invalid` | `boolean` | `false` | Invalid state. |
@@ -305,18 +325,21 @@ const options = [
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target. `'self'` renders in place. |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | Menu alignment. |
 | `id` | `string` | — | Control id. |
+| `errorMessage` | `string` | — | Validation error copy. |
+| `name` | `string` | — | Native name when a hidden input is present. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through (`root`, `control`, …). |
 
 ## Events
 
 | Event | Prop | Description |
 | --- | --- | --- |
-| `update:modelValue` | `SelectModelValue` | Emitted when the value changes. |
-| `change` | `SelectModelValue` | Emitted after a selection or clear. |
+| `update:modelValue` | [SelectModelValue](/docs/types#SelectModelValue) | Emitted when the value changes. |
+| `change` | [SelectModelValue](/docs/types#SelectModelValue) | Emitted after a selection or clear. |
 | `clear` | — | Emitted when clear is clicked. |
 | `show` | — | Emitted when the menu opens. |
 | `hide` | — | Emitted when the menu closes. |
 | `search` | `string` | Emitted as the filter query changes (`filter` / `remote`). |
-| `create` | `SelectOption` | Emitted when `tag` creates a new option. |
+| `create` | [SelectOption](/docs/types#SelectOption) `{ label, value, disabled? }` | Emitted when `tag` creates a new option. |
 
 ## Slots
 

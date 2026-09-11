@@ -65,6 +65,8 @@ const steps = [
 | `linear` | `boolean` | `false` | Only the current and previous steps can be selected. |
 | `vertical` | `boolean` | `false` | Vertical layout. |
 | `orientation` | `'horizontal' \| 'vertical'` | — | Alias of `vertical`. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

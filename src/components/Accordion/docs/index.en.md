@@ -111,6 +111,8 @@ const tabs = [
 | `modelValue` | `string \| string[]` | — | Currently expanded tab key; an array when multiple is enabled. |
 | `multiple` | `boolean` | `false` | Allow multiple panels to be expanded at once. |
 | `tabs` | `{ value: string; header: string; disabled?: boolean }[]` | — | Panel list. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

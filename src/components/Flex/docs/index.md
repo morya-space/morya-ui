@@ -72,6 +72,8 @@ import { MButton, MFlex, MTag } from 'morya-ui'
 | `reverse` | `boolean` | `false` | 主轴反向。 |
 | `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 子项间距（`gap`）。 |
 | `wrap` | `boolean` | `true` | 是否换行（纵向时强制不换行）。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

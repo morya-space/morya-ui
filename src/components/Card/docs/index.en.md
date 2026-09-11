@@ -83,6 +83,8 @@ import { MCard } from 'morya-ui'
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Padding size. |
 | `bordered` | `boolean` | `true` | Show a border. |
 | `hoverable` | `boolean` | `false` | Elevate on hover. |
+| `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | `2` | Heading level for the title. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Root pass-through; key `root`. |
 
 ## Slots
 

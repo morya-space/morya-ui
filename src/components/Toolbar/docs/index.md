@@ -41,6 +41,8 @@ import { MButton, MToolbar } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `ariaLabel` | `string` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

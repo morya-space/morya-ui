@@ -38,6 +38,8 @@ const value = ref(60)
 | `size` | `number` | `100` | Diameter in pixels. |
 | `valueTemplate` | `string` | `{value}` | Display template. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

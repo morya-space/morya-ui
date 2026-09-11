@@ -77,6 +77,8 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 | `teleport` | `boolean` | `true` | popup 时 Teleport；默认 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标。 |
 | `placement` | `FloatingOverlayPlacement` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -103,6 +103,8 @@ import { MBadge, MButton } from 'morya-ui'
 | `max` | `number` | — | 数字上限，超出显示 `{max}+`。 |
 | `offset` | `[number, number]` | — | 包裹模式下的位移 `[x, y]`。 |
 | `processing` | `boolean` | `false` | 脉冲动画。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

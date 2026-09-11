@@ -112,6 +112,8 @@ const tabs = [
 | `multiple` | `boolean` | `false` | 允许多个面板同时展开。 |
 | `tabs` | `{ value: string; header: string; disabled?: boolean }[]` | — | 面板列表。 |
 | `defaultValue` | `string \| string[]` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

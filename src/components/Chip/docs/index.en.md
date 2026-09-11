@@ -37,12 +37,14 @@ import { MChip } from 'morya-ui'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `label` | `string` | — | Chip text. |
-| `icon` | `IconName` | — | Leading icon name. |
+| `icon` | [IconName](/docs/types#IconName) | — | Leading icon name. |
 | `image` | `string` | — | Leading image URL (takes precedence over icon). |
 | `removable` | `boolean` | `false` | Show × remove button. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
 | `severity` | `MTagSeverity \| 'warning'` | — | Semantic color. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -91,6 +91,8 @@ import { MSkeleton } from 'morya-ui'
 | `animation` | `'wave' \| 'none'` | `'wave'` | 加载动画。 |
 | `text` | `boolean` | `false` | 按文本行高度渲染。 |
 | `repeat` | `number` | `1` | 重复行数。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

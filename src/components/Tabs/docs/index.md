@@ -98,6 +98,8 @@ function onAdd() {
 | `type` | `'line' \| 'card'` | `'line'` | 外观。 |
 | `closable` | `boolean` | `false` | 显示关闭按钮；单项 `closable` 优先。 |
 | `addable` | `boolean` | `false` | 显示新增按钮。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -42,6 +42,8 @@ const last = ref('')
 | `prompt` | `string` | `'>'` | 提示符。 |
 | `lines` | `string[]` | — | — |
 | `responses` | `string[]` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

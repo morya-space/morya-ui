@@ -139,6 +139,25 @@ const nodes = [
 </template>
 ```
 
+## Types
+
+<h4 id="TreeNode">TreeNode</h4>
+
+Each node in `value`:
+
+```ts
+interface TreeNode {
+  key: string
+  label: string
+  children?: TreeNode[]
+  icon?: string
+  disabled?: boolean
+  isLeaf?: boolean
+}
+```
+
+Selection, check, and expand state use `selectionKeys`, `checkedKeys`, and `expandedKeys` (`Record<string, boolean>`). `checkStrategy` is `'all' | 'parent' | 'child'`. See also [API types](/docs/types).
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -150,6 +169,8 @@ const nodes = [
 | `filter` / `filterNode` | — | — | Filter. |
 | `lazy` / `load` | — | — | Lazy-load child nodes. |
 | `draggable` | `boolean` | `false` | Drag and drop; the drop target is applied by the consumer via `node-drop`. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots / Events
 

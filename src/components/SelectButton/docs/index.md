@@ -65,6 +65,8 @@ const options = [
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用整组。 |
 | `label` | `string` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

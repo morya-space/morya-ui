@@ -80,6 +80,10 @@ const selected = ref(['vue'])
 </template>
 ```
 
+## 样式与 attrs
+
+除 inner input 的 **事件**（`@change` 等）外，其余 fallthrough attrs 落在可见 `<label>` 根。`name`、`value` 优先用 props；精确改 label 或 hidden input 用 `pt.root` / `pt.input`。详见 [样式与 attrs](/docs/attrs)。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -94,6 +98,7 @@ const selected = ref(['vue'])
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 原生 required。 |
+| `pt` | [ControlPassThrough](/docs/types#ControlPassThrough) `{ root?, input? }` | — | `root`（label）、`input`。 |
 
 ## Events
 

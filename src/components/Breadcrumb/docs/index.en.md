@@ -58,6 +58,8 @@ const items = [
 | `model` | `{ label: string; to?: string; disabled?: boolean }[]` | — | Path items. |
 | `home` | `{ label?: string; to?: string }` | — | Home item; default label is `Home`. |
 | `separator` | `string` | `'/'` | Separator text. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

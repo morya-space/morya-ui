@@ -76,6 +76,8 @@ const pageSize = ref(10)
 | `showQuickJumper` | `boolean` | `false` | 显示跳转到指定页。 |
 | `simple` | `boolean` | `false` | 精简为上一页 / 当前页 / 下一页。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

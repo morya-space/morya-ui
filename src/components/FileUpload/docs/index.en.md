@@ -249,6 +249,8 @@ const uploader = ref<{
 | `httpRequest` | `(options) => void \| Promise \| XMLHttpRequest` | — | Custom uploader. A returned Promise is treated as the success response. |
 | `beforeUpload` | `(file, uploadFile) => boolean \| Promise` | — | Return `false` to skip the file. |
 | `beforeRemove` | `(uploadFile, fileList) => boolean \| Promise` | — | Return `false` to cancel removal. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

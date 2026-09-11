@@ -40,6 +40,8 @@ const collapsed = ref(false)
 | `legend` | `string` | — | Legend text. |
 | `toggleable` | `boolean` | `false` | Whether the fieldset can be collapsed. |
 | `collapsed` | `boolean` | `false` | Whether it is collapsed. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -79,11 +79,13 @@ const options = [
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Form required hint. |
-| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `clearable` | `boolean` | `false` | Show clear button when a value is selected (hover suffix slot). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

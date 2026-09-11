@@ -86,6 +86,8 @@ const model = [
 | `position` | `{ x: number; y: number }` | — | Menu coordinates. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

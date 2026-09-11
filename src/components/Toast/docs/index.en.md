@@ -142,6 +142,8 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 | `severity` | `'success' \| 'info' \| 'warn' \| 'error' \| …` | `'info'` | Tone |
 | `closable` | `boolean` | `true` | Close button |
 | `life` | `number` | API default `3000` | Auto-close ms |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

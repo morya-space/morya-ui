@@ -37,6 +37,8 @@ const blocked = ref(false)
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `blocked` | `boolean` | `false` | 是否遮罩。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

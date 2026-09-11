@@ -57,8 +57,10 @@ const c = ref(false)
 | `modelValue` | `boolean` | `false` | Whether it is on. |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | Labels. |
 | `onIcon` / `offIcon` | `string` | — | Optional icon characters. |
-| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -59,6 +59,8 @@ const code = ref('')
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

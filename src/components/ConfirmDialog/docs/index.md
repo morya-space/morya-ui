@@ -46,7 +46,7 @@ const visible = ref(false)
 | `message` | `string` | — | 正文。 |
 | `acceptLabel` | `string` | `'确认'` | 确认按钮文案。 |
 | `rejectLabel` | `string` | `'取消'` | 取消按钮文案。 |
-| `acceptSeverity` | `ButtonSeverity` | — | 确认按钮语义色。 |
+| `acceptSeverity` | [ButtonSeverity](/docs/types#ButtonSeverity) | — | 确认按钮语义色。 |
 | `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | 正文状态图标；确认流程用本组件，Dialog `type` 只做标题图标。 |
 | `loading` | `boolean` | `false` | 确认按钮加载中。 |
 | `beforeAccept` | `() => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭、不触发 `accept`。 |
@@ -56,6 +56,8 @@ const visible = ref(false)
 | `blockScroll` | `boolean` | — | — |
 | `closeOnEsc` | `boolean` | — | — |
 | `closeOnOutsideClick` | `boolean` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -103,7 +103,7 @@ const options = [{ key: 'docs', label: 'Documents' }]
 | `options` | `TreeSelectNode[]` | — | Tree nodes. |
 | `modelValue` | `string \| string[] \| null` | `null` | Selected key(s); array when multiple. |
 | `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |
-| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `multiple` | `boolean` | `false` | Multiple selection. |
 | `checkable` | `boolean` | `false` | Show checkboxes (cascade like Tree). |
@@ -117,6 +117,8 @@ const options = [{ key: 'docs', label: 'Documents' }]
 | `selectionMode` | `'single' \| 'multiple'` | `'single'` | Compatibility; prefer `multiple`. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

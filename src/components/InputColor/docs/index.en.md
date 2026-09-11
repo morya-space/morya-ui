@@ -54,6 +54,8 @@ const color = ref('#2563eb')
 | `swatches` | `string[]` | — | Preset color chips. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `id` | `string` | — | Color input id. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

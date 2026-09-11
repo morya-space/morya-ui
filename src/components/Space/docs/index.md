@@ -99,6 +99,8 @@ import { MSpace, MTag } from 'morya-ui'
 | `wrap` | `boolean` | `true` | 是否换行。 |
 | `wrapItem` | `boolean` | `true` | 是否用容器包裹每个子节点。 |
 | `itemClass` / `itemStyle` | — | — | 包裹层 class / style（`wrapItem` 为 true 时生效）。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

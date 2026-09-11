@@ -67,6 +67,8 @@ const target = ref([{ id: 3, name: 'Testing' }])
 | `sourceHeader` | `string` | locale `sourceHeader` | Source header. |
 | `targetHeader` | `string` | locale `targetHeader` | Target header. |
 | `dataKey` | `string` | — | Unique key for object items. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 
