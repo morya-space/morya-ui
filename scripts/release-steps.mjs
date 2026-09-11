@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { formatChangelogBody, prepareUiRelease, readUiPackage, root } from './ui-changelog.mjs'
 
 export const PACKAGE_NAME = 'morya-ui'
-export const UI_RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md']
+export const UI_RELEASE_PATHS = ['package.json', 'CHANGELOG.md', 'CHANGELOG.en.md', 'pnpm-lock.yaml']
 export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/package.json',
   'packages/ui-mcp/data/catalog.json',
@@ -208,6 +208,8 @@ export async function stepPrepare(options) {
       const { syncNuxtVersion } = await loadNuxt()
       syncNuxtVersion(plan.version)
     }
+    console.log('[prepare] sync pnpm-lock.yaml')
+    run('pnpm install')
   }
 
   return plan
