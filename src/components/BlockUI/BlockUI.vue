@@ -1,10 +1,16 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { BlockUIProps } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 
 const props = withDefaults(defineProps<BlockUIProps>(), {
   blocked: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const rootClass = computed(() => [
   'm-blockui',
@@ -13,7 +19,7 @@ const rootClass = computed(() => [
 </script>
 
 <template>
-  <div :class="rootClass">
+  <div v-bind="rootAttrs" :class="rootClass">
     <div class="m-blockui__content" :aria-busy="blocked || undefined" :inert="blocked">
       <slot />
     </div>

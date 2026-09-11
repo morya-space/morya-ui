@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MenuNodeBase } from '../../shared/menu'
 
 export interface SidebarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
@@ -6,6 +7,7 @@ export interface SidebarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
 }
 
 export interface SidebarProps {
+  pt?: RootPassThrough
   model?: SidebarItem[]
   collapsed?: boolean
 }

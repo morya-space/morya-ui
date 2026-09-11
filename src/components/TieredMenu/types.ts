@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 
@@ -10,6 +11,7 @@ export interface TieredMenuItem {
 }
 
 export interface TieredMenuProps {
+  pt?: RootPassThrough
   model: TieredMenuItem[]
   popup?: boolean
   modelValue?: boolean

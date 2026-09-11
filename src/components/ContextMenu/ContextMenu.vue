@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import ContextMenuNodes from './ContextMenuNodes.vue'
@@ -9,6 +12,9 @@ const props = withDefaults(defineProps<ContextMenuProps>(), {
   modelValue: false,
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -90,7 +96,7 @@ defineExpose({ show, hide })
 </script>
 
 <template>
-  <div class="m-contextmenu-anchor" @contextmenu="onContextMenu">
+  <div v-bind="rootAttrs" class="m-contextmenu-anchor" @contextmenu="onContextMenu">
     <slot />
   </div>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">

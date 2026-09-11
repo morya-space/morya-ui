@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { MenuItem, MenuProps } from './types'
-import { computed, nextTick, onBeforeUnmount, provide, reactive, ref, useSlots, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, provide, reactive, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import {
   collectExpandableKeys,
@@ -33,6 +36,9 @@ const props = withDefaults(defineProps<MenuProps>(), {
   embedded: undefined,
   teleport: true,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -280,7 +286,7 @@ function focusEntryByKey(key: string | null) {
   if (key == null || !root.value) return
   const nodes = root.value.querySelectorAll<HTMLElement>('[data-m-menu-key]')
   for (const node of nodes) {
-    if (node.dataset.muMenuKey === key) {
+    if (node.dataset.mMenuKey === key) {
       node.focus({ preventScroll: true })
       return
     }
@@ -411,6 +417,7 @@ const popupPanelStyle = computed(() =>
   <div
     v-if="!popup"
     ref="root"
+    v-bind="rootAttrs"
     :class="menuClass"
     :style="menuStyle"
     role="menu"
@@ -418,7 +425,7 @@ const popupPanelStyle = computed(() =>
   >
     <MenuNodes :items="model" :depth="0" prefix="item" />
   </div>
-  <div v-else-if="hasTriggerSlot" class="m-menu-popup">
+  <div v-else-if="hasTriggerSlot" v-bind="rootAttrs" class="m-menu-popup">
     <div ref="triggerEl" class="m-menu-popup__anchor">
       <slot />
     </div>
@@ -442,6 +449,7 @@ const popupPanelStyle = computed(() =>
       <div
         v-if="modelValue"
         ref="root"
+        v-bind="rootAttrs"
           :class="menuClass"
           :style="teleported ? { ...menuStyle, ...popupStyle } : menuStyle"
           role="menu"

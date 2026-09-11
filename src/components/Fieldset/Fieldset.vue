@@ -1,5 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { FieldsetProps } from './types'
+import { useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useControllable } from '../../shared/useControllable'
 import MIcon from '../Icon/Icon.vue'
@@ -9,6 +13,9 @@ const props = withDefaults(defineProps<FieldsetProps>(), {
   defaultCollapsed: false,
   collapsed: undefined,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
@@ -31,7 +38,7 @@ function toggle() {
 </script>
 
 <template>
-  <fieldset class="m-fieldset" :class="{ 'm-fieldset--collapsed': isCollapsed }">
+  <fieldset v-bind="rootAttrs" class="m-fieldset" :class="{ 'm-fieldset--collapsed': isCollapsed }">
     <legend v-if="$slots.legend || legend || toggleable" class="m-fieldset__legend">
       <button
         v-if="toggleable"

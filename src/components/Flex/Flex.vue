@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type {CSSProperties} from 'vue';
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { FlexProps } from './types'
-import { computed,  useSlots } from 'vue'
+import { computed, useAttrs, useSlots } from 'vue'
 import { useConfiguredGapSize } from '../../shared/config'
 import {
   resolveAlign,
@@ -18,6 +21,9 @@ const props = withDefaults(defineProps<FlexProps>(), {
   reverse: false,
   wrap: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const slots = useSlots()
 const resolvedSize = useConfiguredGapSize('Flex', () => props.size)
@@ -38,7 +44,7 @@ const rootStyle = computed((): CSSProperties | undefined => {
 </script>
 
 <template>
-  <div v-if="children.length" class="m-flex" role="none" :style="rootStyle">
+  <div v-bind="rootAttrs" v-if="children.length" class="m-flex" role="none" :style="rootStyle">
     <component :is="child" v-for="(child, index) in children" :key="index" />
   </div>
 </template>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type {VNode} from 'vue';
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { SplitterProps, SplitterSize } from './types'
-import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useSlots,  watch } from 'vue'
+import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import {
   clampPx,
@@ -16,6 +19,9 @@ const props = withDefaults(defineProps<SplitterProps>(), {
   disabled: false,
   resizeTriggerSize: 6,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:size', value: SplitterSize): void
@@ -233,6 +239,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
+    v-bind="rootAttrs"
     class="m-splitter"
     :style="{ '--m-splitter-trigger-size': `${resizeTriggerSize}px` }"
     :class="[
@@ -268,7 +275,7 @@ onBeforeUnmount(() => {
       <slot name="resize-trigger" />
     </div>
 
-    <div class="m-splitter__panel wk-splitter__panel--fill" :class="pane2Class" :style="panel2Style">
+    <div class="m-splitter__panel m-splitter__panel--fill" :class="pane2Class" :style="panel2Style">
       <slot v-if="slots.panel2" name="panel2" />
       <slot v-else-if="slots['2']" name="2" />
       <component :is="defaultPanels[1]" v-else-if="defaultPanels[1]" />

@@ -1,4 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
+import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type SelectValue = string | number
@@ -12,7 +14,7 @@ export interface SelectOption {
   disabled?: boolean
 }
 
-export interface SelectProps {
+export interface SelectProps extends MNativeComboboxFieldProps {
   modelValue?: SelectModelValue
   options: SelectOption[]
   label?: string
@@ -21,7 +23,6 @@ export interface SelectProps {
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string
-  placeholder?: string
   disabled?: boolean
   required?: boolean
   size?: SelectSize
@@ -55,6 +56,8 @@ export interface SelectProps {
   /** Mount target. Defaults to `'body'`. */
   appendTo?: MAppendTo
   placement?: 'bottom-start' | 'bottom-end'
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface SelectEmits {

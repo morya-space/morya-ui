@@ -1,4 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
+import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 import type { TreeCheckStrategy } from '../Tree/types'
 
@@ -13,7 +15,7 @@ export interface TreeSelectNode {
 
 export type TreeSelectValue = string | string[] | null
 
-export interface TreeSelectProps {
+export interface TreeSelectProps extends MNativeComboboxFieldProps {
   options: TreeSelectNode[]
   modelValue?: TreeSelectValue
   id?: string
@@ -22,7 +24,6 @@ export interface TreeSelectProps {
   invalid?: boolean
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
-  placeholder?: string
   disabled?: boolean
   size?: MSizeInput
   /** Keep for compatibility; `multiple` is the switch. */
@@ -42,6 +43,8 @@ export interface TreeSelectProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface TreeSelectEmits {

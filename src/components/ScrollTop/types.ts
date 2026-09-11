@@ -1,8 +1,10 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 
 export type ScrollTopTarget = 'window' | 'parent'
 
 export interface ScrollTopProps {
+  pt?: RootPassThrough
   threshold?: number
   target?: ScrollTopTarget
   /** Distance from the right edge. Number is pixels. */

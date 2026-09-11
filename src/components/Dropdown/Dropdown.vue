@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { DropdownItem, DropdownProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import DropdownNodes from './DropdownNodes.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DropdownProps>(), {
   modelValue: false,
@@ -20,6 +23,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'select', item: DropdownItem): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
 const locale = useMLocale()
@@ -191,7 +196,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="m-dropdown">
+  <div ref="root" v-bind="rootAttrs" class="m-dropdown">
     <span
       ref="trigger"
       class="m-dropdown__trigger"

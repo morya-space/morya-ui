@@ -1,3 +1,5 @@
+import type { RootPassThrough } from '../../shared/passThrough'
+
 export interface KnobProps {
   modelValue?: number
   min?: number
@@ -17,6 +19,8 @@ export interface KnobProps {
   ariaLabel?: string
   /** Id of the element labelling the slider. */
   ariaLabelledby?: string
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface KnobEmits {

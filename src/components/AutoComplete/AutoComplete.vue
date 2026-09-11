@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   modelValue: '',
@@ -28,6 +31,8 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const config = useMConfig()
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
@@ -181,17 +186,21 @@ const panelOpen = computed(() => open.value)
 </script>
 
 <template>
-  <div ref="root" class="m-select-field">
+  <div ref="root" v-bind="rootAttrs" class="m-select-field">
     <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <div ref="trigger" class="m-autocomplete__control">
         <input
+          v-bind="controlAttrs"
           :id="fieldId"
           class="m-autocomplete__input"
           type="text"
           role="combobox"
           :value="modelValue"
           :placeholder="placeholder"
+          :name="name"
+          :autocomplete="autocomplete"
+          :autofocus="autofocus || undefined"
           :disabled="disabled"
           :aria-expanded="open"
           :aria-busy="loading || undefined"

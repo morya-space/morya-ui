@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { ConfirmPopupProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
@@ -16,6 +19,9 @@ const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   placement: 'bottom',
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -139,6 +145,7 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
       <div
         v-if="visible"
         ref="panel"
+        v-bind="rootAttrs"
         class="m-confirmpopup"
         :class="{ 'm-confirmpopup--teleported': teleported }"
         role="alertdialog"

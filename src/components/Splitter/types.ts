@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { CSSProperties } from 'vue'
 
 export type SplitterLayout = 'horizontal' | 'vertical'
@@ -6,6 +7,7 @@ export type SplitterLayout = 'horizontal' | 'vertical'
 export type SplitterSize = number | string
 
 export interface SplitterProps {
+  pt?: RootPassThrough
   /** Split direction. Prefer this name; `direction` is a Naive-compatible alias. */
   layout?: SplitterLayout
   /** Alias of `layout` (Naive `n-split` naming). */

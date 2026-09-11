@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { PaginationProps } from './types'
-import { computed, ref } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, useAttrs } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
 
@@ -14,6 +17,9 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   showQuickJumper: false,
   simple: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
   (event: 'page', value: number): void
@@ -77,6 +83,7 @@ defineExpose({ first, pageCount })
 
 <template>
   <nav
+    v-bind="rootAttrs"
     class="m-pagination"
     :class="{ 'm-pagination--simple': simple }"
     :aria-label="locale.pagination"

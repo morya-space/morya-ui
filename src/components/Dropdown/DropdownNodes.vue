@@ -67,7 +67,7 @@ function onLeave() {
     >
       <button
         type="button"
-        class="m-dropdown__item wk-dropdown__item--parent"
+        class="m-dropdown__item m-dropdown__item--parent"
         :class="{ 'm-dropdown__item--highlighted': highlightedValue === item.value }"
         role="menuitem"
         :disabled="item.disabled"

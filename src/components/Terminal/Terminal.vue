@@ -1,12 +1,18 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { TerminalEmits, TerminalProps } from './types'
-import { computed, nextTick, ref } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 
 const props = withDefaults(defineProps<TerminalProps>(), {
   welcomeMessage: 'Welcome to Morya UI Terminal',
   prompt: '>',
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<TerminalEmits>()
 
@@ -73,7 +79,7 @@ defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
 </script>
 
 <template>
-  <div class="m-terminal">
+  <div v-bind="rootAttrs" class="m-terminal">
     <div ref="bodyRef" class="m-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
       <div v-if="welcomeMessage" class="m-terminal__welcome">
         {{ welcomeMessage }}

@@ -1,8 +1,10 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type CardSize = MSizeInput
 
 export interface CardProps {
+  pt?: RootPassThrough
   title?: string
   subtitle?: string
   ariaLabel?: string

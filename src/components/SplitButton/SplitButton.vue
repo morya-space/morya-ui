@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { SplitButtonItem, SplitButtonProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
 import { useMId } from '../../shared/useMId'
@@ -17,6 +20,9 @@ const props = withDefaults(defineProps<SplitButtonProps>(), {
   outlined: false,
   teleport: true,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'click', value: MouseEvent): void
@@ -168,7 +174,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" :class="rootClass">
+  <div v-bind="rootAttrs" ref="root" :class="rootClass">
     <button
       type="button"
       class="m-splitbutton__main"

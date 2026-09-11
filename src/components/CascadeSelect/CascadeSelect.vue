@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
   modelValue: null,
@@ -26,6 +29,8 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const slots = useSlots()
 const defaults = useComponentDefaults('CascadeSelect')
 const config = useMConfig()
@@ -264,7 +269,8 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    class="m-select-field wk-cascadeselect"
+    v-bind="rootAttrs"
+    class="m-select-field m-cascadeselect"
     :class="[
       `m-cascadeselect--${sizeClass}`,
       {
@@ -276,13 +282,14 @@ onBeforeUnmount(() => {
   >
     <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div
-      class="m-cascadeselect__control wk-select__control"
+      class="m-cascadeselect__control m-select__control"
       :class="{
         'm-select__control--clearable': showClearButton,
         'm-select__control--open': open,
       }"
     >
       <button
+        v-bind="controlAttrs"
         :id="fieldId"
         ref="trigger"
         type="button"

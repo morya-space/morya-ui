@@ -638,7 +638,7 @@
 }
 
 .m-button__spinner {
-    animation: wk-button-spin var(--m-motion-spin-fast) linear infinite;
+    animation: m-button-spin var(--m-motion-spin-fast) linear infinite;
     border: 2px solid currentColor;
     border-right-color: transparent;
     border-radius: var(--m-radius-full);
@@ -646,7 +646,7 @@
     width: var(--m-button-spinner-size);
 }
 
-@keyframes wk-button-spin {
+@keyframes m-button-spin {
     to {
         transform: rotate(360deg);
     }

@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 
 export type PopoverPlacement =
@@ -13,6 +14,7 @@ export type PopoverPlacement =
 export type PopoverTrigger = 'manual' | 'click' | 'hover' | 'focus'
 
 export interface PopoverProps {
+  pt?: RootPassThrough
   /** Visibility. Use with `v-model`. */
   modelValue?: boolean
   /** Disable trigger interactions and force the popover closed. */

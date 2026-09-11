@@ -1,3 +1,4 @@
+import type { FieldPassThrough } from '../../shared/passThrough'
 export type FileUploadMode = 'basic' | 'advanced'
 export type FileUploadListType = 'text' | 'picture' | 'picture-card'
 export type FileUploadStatus = 'ready' | 'uploading' | 'success' | 'fail'
@@ -29,6 +30,7 @@ export interface FileUploadRequestOptions {
 }
 
 export interface FileUploadProps {
+  pt?: FieldPassThrough
   mode?: FileUploadMode
   multiple?: boolean
   accept?: string

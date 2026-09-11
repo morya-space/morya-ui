@@ -1,6 +1,8 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export interface ProgressSpinnerProps {
+  pt?: RootPassThrough
   /** SVG circle stroke width. */
   strokeWidth?: string
   /** Rotation animation duration. */

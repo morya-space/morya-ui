@@ -1,6 +1,11 @@
+import type { MNativeInputProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough, PassThroughPart } from '../../shared/passThrough'
 import type { MInputVariant, MSizeInput } from '../../shared/types'
 
-export interface InputProps {
+export type InputPassThrough = FieldPassThrough &
+  Partial<Record<'prefix' | 'suffix' | 'help' | 'count', PassThroughPart>>
+
+export interface InputProps extends MNativeInputProps {
   modelValue?: string
   label?: string
   helpText?: string
@@ -23,6 +28,8 @@ export interface InputProps {
   maxlength?: number
   /** Show character count (with maxlength when set). */
   showCount?: boolean
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: InputPassThrough
 }
 
 export interface InputEmits {

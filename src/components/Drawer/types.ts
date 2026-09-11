@@ -1,9 +1,11 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 
 export type DrawerPosition = 'left' | 'right' | 'top' | 'bottom'
 
 export interface DrawerProps {
+  pt?: RootPassThrough
   /** Visibility. Use with `v-model`. */
   modelValue?: boolean
   position?: DrawerPosition

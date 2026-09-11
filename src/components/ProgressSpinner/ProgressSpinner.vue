@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { ProgressSpinnerProps } from './types'
-import { computed, onBeforeUnmount, ref, useSlots, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
 
@@ -10,6 +13,9 @@ const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
   show: true,
   delay: 0,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const slots = useSlots()
 const locale = useMLocale()
@@ -60,7 +66,7 @@ const sizeClass = computed(() => ({
 </script>
 
 <template>
-  <div v-if="wrapping" class="m-progress-spinner-wrap" :class="{ 'm-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
+  <div v-bind="rootAttrs" v-if="wrapping" class="m-progress-spinner-wrap" :class="{ 'm-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
     <div class="m-progress-spinner-wrap__content" :inert="visible || undefined">
       <slot />
     </div>
@@ -89,6 +95,7 @@ const sizeClass = computed(() => ({
   </div>
   <svg
     v-else
+    v-bind="rootAttrs"
     class="m-progress-spinner"
     :class="sizeClass"
     viewBox="0 0 50 50"

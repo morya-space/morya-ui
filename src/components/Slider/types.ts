@@ -1,8 +1,10 @@
+import type { MNativeRangeProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type SliderMarks = number[] | Record<number, string>
 
-export interface SliderProps {
+export interface SliderProps extends MNativeRangeProps {
   modelValue?: number | number[]
   min?: number
   max?: number
@@ -23,6 +25,8 @@ export interface SliderProps {
   vertical?: boolean
   /** Accessible name for single-thumb mode. */
   ariaLabel?: string
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface SliderEmits {

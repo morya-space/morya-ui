@@ -1,9 +1,15 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { VNode, VNodeChild } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { AvatarGroupProps, AvatarSize } from './types'
-import { Comment, computed, Fragment, Text, useSlots } from 'vue'
+import { Comment, computed, Fragment, Text, useAttrs, useSlots } from 'vue'
 
 const props = defineProps<AvatarGroupProps>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const slots = useSlots()
 
 function resolveAvatarSize(size: AvatarGroupProps['size']): AvatarSize {
@@ -52,11 +58,11 @@ const groupClass = computed(() => [
 </script>
 
 <template>
-  <div :class="groupClass">
+  <div v-bind="rootAttrs" :class="groupClass">
     <component :is="child" v-for="(child, index) in visible" :key="index" />
     <span
       v-if="overflow > 0"
-      class="m-avatar wk-avatar--circle wk-avatar-group__overflow"
+      class="m-avatar m-avatar--circle m-avatar-group__overflow"
       :class="`m-avatar--${resolvedSize}`"
     >
       +{{ overflow }}

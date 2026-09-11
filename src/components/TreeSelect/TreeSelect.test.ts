@@ -56,7 +56,7 @@ describe('muTreeSelect', () => {
     const wrapper = mount(MTreeSelect, {
       props: { options, modelValue: 'home', clearable: true, teleport: false },
     })
-    await wrapper.find('.m-select__control').trigger('mouseenter')
+    await wrapper.find('.m-treeselect__control').trigger('mouseenter')
     await wrapper.find('.m-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
     expect(wrapper.emitted('clear')).toHaveLength(1)

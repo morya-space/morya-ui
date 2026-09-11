@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { ButtonHTMLAttributes, Component } from 'vue'
 import type { IconName } from '../Icon/types'
 
@@ -80,6 +81,7 @@ export interface ButtonInstance {
 }
 
 export interface ButtonGroupProps {
+  pt?: RootPassThrough
   /** Stretch to full container width. */
   fluid?: boolean
   /** Accessible name for the group. */

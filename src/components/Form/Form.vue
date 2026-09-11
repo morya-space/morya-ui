@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import type { MFormFieldRegistration } from './context'
 import type { FormProps, FormValidateTrigger } from './types'
-import { computed, provide, reactive, ref, toRaw, watch } from 'vue'
+import { computed, provide, reactive, ref, toRaw, useAttrs, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { resolveSizeClass } from '../../shared/types'
 import {
   M_FORM_KEY,
   M_FORM_ERRORS_KEY,
 } from './context'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FormProps>(), {
   labelPosition: undefined,
@@ -22,6 +25,8 @@ const emit = defineEmits<{
   (event: 'submit', payload: { valid: boolean }): void
   (event: 'validate', payload: { valid: boolean; errors: Record<string, string> }): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const fields = new Map<string, MFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
@@ -165,6 +170,7 @@ defineExpose({ validate, clearValidate, reset, resetFields, errors: internalErro
 
 <template>
   <form
+    v-bind="rootAttrs"
     class="m-form"
     :class="[
       `m-form--label-${resolvedLabelPosition}`,

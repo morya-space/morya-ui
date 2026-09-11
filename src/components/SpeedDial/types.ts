@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
@@ -8,6 +9,7 @@ export interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
 }
 
 export interface SpeedDialProps {
+  pt?: RootPassThrough
   model?: SpeedDialItem[]
   direction?: SpeedDialDirection
   modelValue?: boolean

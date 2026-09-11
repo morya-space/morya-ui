@@ -2,6 +2,7 @@
 import type {RadioProps} from './types';
 import { computed, inject, useAttrs } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useControlRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import {  M_RADIO_GROUP_KEY } from './types'
 
@@ -14,6 +15,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: string | number | boolean): void }>()
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useControlRootParts(attrs, () => props.pt)
 const group = inject(M_RADIO_GROUP_KEY, null)
 const autoInputId = useMId('m-radio')
 const inputId = computed(() => props.id ?? autoInputId)
@@ -44,9 +46,9 @@ function updateValue(event: Event) {
 </script>
 
 <template>
-  <label :class="rootClass" :for="inputId">
+  <label v-bind="rootAttrs" :class="rootClass" :for="inputId">
     <input
-      v-bind="attrs"
+      v-bind="controlAttrs"
       :id="inputId"
       class="m-radio__input"
       type="radio"

@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { CardProps } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<CardProps>(), {
   hoverable: false,
   headingLevel: 2,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const titleTag = computed(() => `h${props.headingLevel}` as const)
@@ -25,7 +31,7 @@ const rootClass = computed(() => [
 </script>
 
 <template>
-  <section :class="rootClass" :aria-label="ariaLabel ?? title">
+  <section v-bind="rootAttrs" :class="rootClass" :aria-label="ariaLabel ?? title">
     <div v-if="$slots.cover" class="m-card__cover">
       <slot name="cover" />
     </div>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { SliderProps } from './types'
-import { computed, ref } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SliderProps>(), {
   modelValue: 0,
@@ -18,6 +21,8 @@ const props = withDefaults(defineProps<SliderProps>(), {
   vertical: false,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number | number[]): void }>()
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const hovering = ref(false)
 const sizeClass = useConfiguredSize('Slider', () => props.size)
@@ -87,7 +92,7 @@ function emitRange(index: 0 | 1, event: Event) {
 </script>
 
 <template>
-  <div class="m-slider-field">
+  <div v-bind="rootAttrs" class="m-slider-field">
     <label v-if="label" :id="`${fieldId}-label`" class="m-slider-field__label">{{ label }}</label>
     <div
       :class="rootClass"
@@ -101,12 +106,15 @@ function emitRange(index: 0 | 1, event: Event) {
       <span v-if="tooltip && hovering" class="m-slider__tooltip">{{ tooltipText }}</span>
       <template v-if="range">
         <input
-          class="m-slider__input wk-slider__input--start"
+          v-bind="controlAttrs"
+          class="m-slider__input m-slider__input--start"
           type="range"
           :min="min"
           :max="max"
           :step="step"
           :value="rangeValues[0]"
+          :name="name"
+          :autofocus="autofocus || undefined"
           :disabled="disabled"
           :orient="vertical ? 'vertical' : undefined"
           :aria-label="locale.rangeStart"
@@ -114,7 +122,7 @@ function emitRange(index: 0 | 1, event: Event) {
           @input="emitRange(0, $event)"
         >
         <input
-          class="m-slider__input wk-slider__input--end"
+          class="m-slider__input m-slider__input--end"
           type="range"
           :min="min"
           :max="max"
@@ -129,12 +137,15 @@ function emitRange(index: 0 | 1, event: Event) {
       </template>
       <input
         v-else
+        v-bind="controlAttrs"
         class="m-slider__input"
         type="range"
         :min="min"
         :max="max"
         :step="step"
         :value="singleValue"
+        :name="name"
+        :autofocus="autofocus || undefined"
         :disabled="disabled"
         :orient="vertical ? 'vertical' : undefined"
         :aria-label="ariaLabel ?? locale.sliderControl"

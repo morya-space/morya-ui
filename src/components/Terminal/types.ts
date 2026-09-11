@@ -1,4 +1,7 @@
+import type { RootPassThrough } from '../../shared/passThrough'
+
 export interface TerminalProps {
+  pt?: RootPassThrough
   welcomeMessage?: string
   prompt?: string
   /** Controlled command history (`v-model:lines`). Uncontrolled when omitted. */

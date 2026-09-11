@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
@@ -8,6 +9,7 @@ export interface MegaMenuItem extends Omit<MenuNodeBase, 'label' | 'items'> {
 }
 
 export interface MegaMenuProps {
+  pt?: RootPassThrough
   model?: MegaMenuItem[]
   /** Currently selected item key (`v-model:selectedKey`). */
   selectedKey?: string | null

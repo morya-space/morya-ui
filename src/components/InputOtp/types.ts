@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export interface InputOtpProps {
@@ -12,6 +13,8 @@ export interface InputOtpProps {
   size?: MSizeInput
   /** Gap between cells. Number is pixels. */
   gap?: string | number
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface InputOtpEmits {

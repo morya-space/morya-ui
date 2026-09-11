@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type TableSize = MSizeInput
@@ -66,6 +67,7 @@ export type TableBodyRowClassName = string | ((item: TableItem, rowNumber: numbe
 export type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)
 
 export interface TableProps {
+  pt?: RootPassThrough
   columns: TableColumnDefinition[]
   rows: TableItem[]
   selection?: TableItem[] | null

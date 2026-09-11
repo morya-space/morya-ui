@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MToastSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
@@ -16,6 +17,7 @@ export interface TimelineEvent {
 }
 
 export interface TimelineProps {
+  pt?: RootPassThrough
   value: TimelineEvent[]
   align?: TimelineAlign
   layout?: TimelineLayout

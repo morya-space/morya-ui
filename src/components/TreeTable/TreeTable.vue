@@ -1,10 +1,16 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { TreeTableEmits, TreeTableNode, TreeTableProps } from './types'
-import { computed, ref, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
 
 const props = defineProps<TreeTableProps>()
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<TreeTableEmits>()
 const slots = useSlots()
@@ -35,7 +41,7 @@ function toggle(node: TreeTableNode) {
 </script>
 
 <template>
-  <div class="m-treetable">
+  <div v-bind="rootAttrs" class="m-treetable">
     <table class="m-treetable__table" role="treegrid">
       <thead>
         <tr>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { InputTagsProps } from './types'
-import { computed, ref } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputTagsProps>(), {
   modelValue: () => [],
@@ -17,6 +20,8 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string[]): void
 }>()
 
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const draft = ref('')
 const sizeClass = useConfiguredSize('InputTags', () => props.size)
@@ -103,7 +108,7 @@ function onBlur() {
 </script>
 
 <template>
-  <div class="m-inputtags-field">
+  <div v-bind="rootAttrs" class="m-inputtags-field">
     <label v-if="label" class="m-inputtags-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <span
@@ -123,11 +128,15 @@ function onBlur() {
         </button>
       </span>
       <input
+        v-bind="controlAttrs"
         :id="fieldId"
         :value="draft"
         class="m-inputtags__input"
         type="text"
-        :placeholder="modelValue.length ? '' : addPlaceholder"
+        :placeholder="modelValue.length ? '' : (placeholder ?? addPlaceholder)"
+        :name="name"
+        :autocomplete="autocomplete"
+        :autofocus="autofocus || undefined"
         :disabled="disabled || atMax"
         :aria-invalid="invalid || undefined"
         :aria-label="label ?? addPlaceholder"

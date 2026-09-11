@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useFieldParts } from '../../shared/useComponentAttrs'
+import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
 import { ajaxUpload } from './ajax'
@@ -18,6 +21,9 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
   autoUpload: true,
   directory: false,
 })
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'input' })
+
 
 const emit = defineEmits<{
   (event: 'select', files: File[]): void
@@ -337,7 +343,7 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="rootClass">
+  <div v-bind="rootAttrs" :class="rootClass">
     <input
       ref="inputRef"
       class="m-fileupload__input"
@@ -347,7 +353,7 @@ defineExpose({
       :disabled="disabled"
       :webkitdirectory="directory || undefined"
       @change="onChange"
-    >
+     v-bind="controlAttrs">
 
     <div
       v-if="drag && showTrigger"
@@ -376,7 +382,7 @@ defineExpose({
     <button
       v-else-if="showTrigger && $slots.trigger"
       type="button"
-      class="m-fileupload__choose wk-fileupload__choose--slot"
+      class="m-fileupload__choose m-fileupload__choose--slot"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
@@ -519,7 +525,7 @@ defineExpose({
       <button
         v-if="canAdd"
         type="button"
-        class="m-fileupload__card wk-fileupload__card--add"
+        class="m-fileupload__card m-fileupload__card--add"
         :aria-label="locale.addFile"
         @click="openPicker"
       >

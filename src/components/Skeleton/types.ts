@@ -1,7 +1,9 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export type SkeletonShape = 'rectangle' | 'circle'
 export type SkeletonAnimation = 'wave' | 'none'
 
 export interface SkeletonProps {
+  pt?: RootPassThrough
   /** Shape of the placeholder. Defaults to `rectangle`. */
   shape?: SkeletonShape
   /** CSS width. Defaults to `100%`. */

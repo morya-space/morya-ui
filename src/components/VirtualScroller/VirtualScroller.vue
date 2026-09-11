@@ -1,11 +1,17 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { VirtualScrollerProps } from './types'
-import { computed, ref } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, useAttrs } from 'vue'
 
 const props = withDefaults(defineProps<VirtualScrollerProps>(), {
   height: 240,
   buffer: 3,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const scrollTop = ref(0)
 
@@ -43,6 +49,7 @@ function onScroll(event: Event) {
 
 <template>
   <div
+    v-bind="rootAttrs"
     class="m-virtualscroller"
     :style="{ height: typeof height === 'number' ? `${height}px` : height }"
     @scroll="onScroll"

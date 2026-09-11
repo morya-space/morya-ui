@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { PanelProps } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 import { useMId } from '../../shared/useMId'
 import { useMLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
@@ -13,6 +16,9 @@ const props = withDefaults(defineProps<PanelProps>(), {
   collapsed: undefined,
   modelValue: undefined,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
@@ -56,7 +62,7 @@ function toggle() {
 </script>
 
 <template>
-  <section :class="rootClass">
+  <section v-bind="rootAttrs" :class="rootClass">
     <header v-if="$slots.header || header || toggleable" class="m-panel__header">
       <div class="m-panel__title">
         <slot name="header">

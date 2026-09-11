@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { InplaceEmits, InplaceProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 
 const props = withDefaults(defineProps<InplaceProps>(), {
   modelValue: false,
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<InplaceProps>(), {
   closeOnEsc: true,
   dismissable: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<InplaceEmits>()
 
@@ -75,7 +81,7 @@ defineExpose({ activate, deactivate })
 </script>
 
 <template>
-  <div ref="root" :class="rootClass">
+  <div v-bind="rootAttrs" ref="root" :class="rootClass">
     <div
       v-if="!modelValue"
       ref="display"

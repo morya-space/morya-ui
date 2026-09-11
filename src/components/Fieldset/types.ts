@@ -1,4 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface FieldsetProps {
+  pt?: RootPassThrough
   legend?: string
   toggleable?: boolean
   /** Collapsed state. Use with `v-model:collapsed`. */

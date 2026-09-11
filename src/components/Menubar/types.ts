@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
@@ -7,6 +8,7 @@ export interface MenubarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
 }
 
 export interface MenubarProps {
+  pt?: RootPassThrough
   model: MenubarItem[]
   selectedKey?: string | null
   /** Teleport submenu. Defaults to `true`. */

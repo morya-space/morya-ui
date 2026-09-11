@@ -1,4 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface CarouselProps {
+  pt?: RootPassThrough
   value: unknown[]
   /** Controlled active page. Use with `v-model:page`; omit for uncontrolled. */
   page?: number

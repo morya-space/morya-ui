@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export type TabsType = 'line' | 'card'
 
 export interface TabItem {
@@ -9,6 +10,7 @@ export interface TabItem {
 }
 
 export interface TabsProps {
+  pt?: RootPassThrough
   modelValue?: string
   tabs: TabItem[]
   type?: TabsType

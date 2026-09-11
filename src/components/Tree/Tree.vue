@@ -1,4 +1,6 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type {
   TreeCheckedKeys,
   TreeCheckStrategy,
@@ -7,7 +9,8 @@ import type {
   TreeProps,
   TreeSelectionKeys,
 } from './types'
-import { computed, nextTick, provide, reactive, ref, useSlots, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, provide, reactive, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
@@ -35,6 +38,8 @@ const props = withDefaults(defineProps<TreeProps>(), {
   lazy: false,
   draggable: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'update:selectionKeys', value: TreeSelectionKeys): void
@@ -410,7 +415,7 @@ provide(M_TREE_KEY, {
 </script>
 
 <template>
-  <div class="m-tree-root">
+  <div v-bind="rootAttrs" class="m-tree-root">
     <ul v-if="visibleRoots.length" ref="root" class="m-tree" role="tree" @keydown="onTreeKeydown">
       <TreeNodeItem v-for="node in visibleRoots" :key="node.key" :node="node" :depth="1" />
     </ul>

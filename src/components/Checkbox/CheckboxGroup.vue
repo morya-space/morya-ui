@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type {CheckboxGroupProps, CheckboxValue} from './types';
-import { computed, provide } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, provide, useAttrs } from 'vue'
 import {   M_CHECKBOX_GROUP_KEY } from './types'
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   disabled: false,
   invalid: false,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{ (event: 'update:modelValue', value: CheckboxValue[]): void }>()
 
@@ -34,6 +40,7 @@ provide(M_CHECKBOX_GROUP_KEY, {
 
 <template>
   <div
+    v-bind="rootAttrs"
     class="m-checkbox-group"
     role="group"
     :aria-label="label"

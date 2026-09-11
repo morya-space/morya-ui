@@ -3,6 +3,7 @@ import type { InputProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 
@@ -25,6 +26,7 @@ const emit = defineEmits<{
   (event: 'change', value: string): void
 }>()
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const slots = useSlots()
 const defaults = useComponentDefaults('Input')
 const locale = useMLocale()
@@ -91,7 +93,11 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="m-input-field" :class="{ 'm-input-field--fluid': resolvedFluid }">
+  <div
+    v-bind="rootAttrs"
+    class="m-input-field"
+    :class="{ 'm-input-field--fluid': resolvedFluid }"
+  >
     <label v-if="label" class="m-input-field__label" :for="inputId">{{ label }}</label>
     <div
       class="m-input-field__control"
@@ -106,7 +112,7 @@ defineExpose({ focus, blur, select })
         <slot name="prefix" />
       </span>
       <input
-        v-bind="attrs"
+        v-bind="controlAttrs"
         :id="inputId"
         ref="inputElement"
         :class="inputClass"
@@ -115,6 +121,10 @@ defineExpose({ focus, blur, select })
         :disabled="disabled"
         :readonly="readonly"
         :maxlength="maxlength"
+        :placeholder="placeholder"
+        :name="name"
+        :autocomplete="autocomplete"
+        :autofocus="autofocus || undefined"
         :aria-invalid="isInvalid || undefined"
         :aria-describedby="describedBy"
         @input="updateValue"

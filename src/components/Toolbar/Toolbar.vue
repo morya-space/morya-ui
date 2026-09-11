@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import type { ToolbarProps } from './types'
 
-defineProps<ToolbarProps>()
+defineOptions({ inheritAttrs: false })
+import type { ToolbarProps } from './types'
+import { useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+
+const props = defineProps<ToolbarProps>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 </script>
 
 <template>
-  <div class="m-toolbar" role="toolbar" :aria-label="ariaLabel">
+  <div v-bind="rootAttrs" class="m-toolbar" role="toolbar" :aria-label="ariaLabel">
     <div v-if="$slots.start" class="m-toolbar__start">
       <slot name="start" />
     </div>

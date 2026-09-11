@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface TreeTableColumn {
   field: string
   header: string
@@ -10,6 +11,7 @@ export interface TreeTableNode {
 }
 
 export interface TreeTableProps {
+  pt?: RootPassThrough
   value: TreeTableNode[]
   columns: TreeTableColumn[]
   /** Controlled expanded keys map (`v-model:expandedKeys`). Uncontrolled when omitted. */

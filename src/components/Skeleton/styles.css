@@ -12,7 +12,7 @@
 }
 
 .m-skeleton--wave::after {
-    animation: wk-skeleton-wave var(--m-motion-skeleton) linear infinite;
+    animation: m-skeleton-wave var(--m-motion-skeleton) linear infinite;
     background: linear-gradient(
         90deg,
         transparent,
@@ -25,7 +25,7 @@
     transform: translateX(-100%);
 }
 
-@keyframes wk-skeleton-wave {
+@keyframes m-skeleton-wave {
     100% {
         transform: translateX(100%);
     }

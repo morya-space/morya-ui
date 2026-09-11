@@ -1,4 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
+import type { ControlPassThrough, RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type CheckboxValue = string | number | boolean
@@ -19,6 +20,8 @@ export interface CheckboxProps {
   invalid?: boolean
   disabled?: boolean
   required?: boolean
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: ControlPassThrough
 }
 
 export interface CheckboxEmits {
@@ -26,6 +29,7 @@ export interface CheckboxEmits {
 }
 
 export interface CheckboxGroupProps {
+  pt?: RootPassThrough
   modelValue?: CheckboxValue[]
   name?: string
   label?: string

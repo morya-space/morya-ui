@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { OrderListProps } from './types'
-import { computed, nextTick, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
@@ -10,6 +13,9 @@ const props = withDefaults(defineProps<OrderListProps>(), {
   dataKey: undefined,
   dragdrop: true,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: unknown[]): void
@@ -142,7 +148,7 @@ function resetDrag() {
 </script>
 
 <template>
-  <div class="m-orderlist">
+  <div v-bind="rootAttrs" class="m-orderlist">
     <div class="m-orderlist__controls">
       <button type="button" class="m-orderlist__btn" :aria-label="locale.moveUp" :disabled="selectedIndex === null || selectedIndex <= 0" @click="move(-1)">
         <MIcon name="chevron-up" size="sm" />

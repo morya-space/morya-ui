@@ -107,7 +107,7 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
 
     <div
       v-else-if="item.items?.length"
-      class="m-menu__item wk-menu__item--submenu"
+      class="m-menu__item m-menu__item--submenu"
       :class="{ 'm-menu__item--horizontal': horizontal }"
       role="none"
     >
@@ -144,7 +144,7 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
           </div>
         </template>
         <template #content>
-          <div class="m-menu wk-menu--flyout" role="menu">
+          <div class="m-menu m-menu--flyout" role="menu">
             <MenuNodes
               :items="item.items"
               :depth="0"

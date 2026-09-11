@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
-import { computed, ref, useSlots, watch } from 'vue'
+import { computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
@@ -17,6 +20,8 @@ const props = withDefaults(defineProps<ListboxProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: ListboxValue | ListboxValue[] | undefined): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const filterQuery = ref('')
 const locale = useMLocale()
@@ -115,7 +120,7 @@ watch(keyboard.activeIndex, () => {
 </script>
 
 <template>
-  <div :class="rootClass">
+  <div v-bind="rootAttrs" :class="rootClass">
     <input
       v-if="filter"
       v-model="filterQuery"

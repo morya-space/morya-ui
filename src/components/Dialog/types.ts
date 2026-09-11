@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity } from '../Button/types'
@@ -19,6 +20,7 @@ export type DialogPosition =
   | 'bottomright'
 
 export interface DialogProps {
+  pt?: RootPassThrough
   /** Visibility. Use with `v-model`. */
   modelValue?: boolean
   /** Dialog title text. Alias of `header`. */

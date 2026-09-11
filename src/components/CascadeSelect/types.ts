@@ -1,4 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
+import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export interface CascadeSelectOption {
@@ -10,7 +12,7 @@ export interface CascadeSelectOption {
 
 export type CascadeSelectValue = string | number | null
 
-export interface CascadeSelectProps {
+export interface CascadeSelectProps extends MNativeComboboxFieldProps {
   modelValue?: CascadeSelectValue
   options: CascadeSelectOption[]
   label?: string
@@ -19,7 +21,6 @@ export interface CascadeSelectProps {
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string
-  placeholder?: string
   disabled?: boolean
   required?: boolean
   size?: MSizeInput
@@ -30,6 +31,8 @@ export interface CascadeSelectProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface CascadeSelectEmits {

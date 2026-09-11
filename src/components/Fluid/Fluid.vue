@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import type { FluidProps } from './types'
 
-withDefaults(defineProps<FluidProps>(), {
+defineOptions({ inheritAttrs: false })
+import type { FluidProps } from './types'
+import { useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+
+const props = withDefaults(defineProps<FluidProps>(), {
   as: 'div',
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 </script>
 
 <template>
-  <component :is="as" class="m-fluid">
+  <component v-bind="rootAttrs" :is="as" class="m-fluid">
     <slot />
   </component>
 </template>

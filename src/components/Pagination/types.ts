@@ -1,4 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface PaginationProps {
+  pt?: RootPassThrough
   /** Current page (1-based). Use with `v-model`. */
   modelValue?: number
   totalRecords: number

@@ -1,4 +1,5 @@
 import type { CSSProperties, InjectionKey, Ref } from 'vue'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type GridResponsive = 'self' | 'screen'
 
@@ -24,6 +25,8 @@ export interface GridProps {
   collapsedRows?: number
   /** Style applied to each grid item. */
   itemStyle?: string | CSSProperties
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface GridItemProps {
@@ -33,6 +36,8 @@ export interface GridItemProps {
   offset?: number | string
   /** Stick to the end of the last visible row when collapsed. */
   suffix?: boolean
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface GridItemLayout {

@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { SpeedDialItem, SpeedDialProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -17,6 +20,9 @@ const props = withDefaults(defineProps<SpeedDialProps>(), {
   disabled: false,
   teleport: true,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -204,7 +210,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" :class="rootClass">
+  <div v-bind="rootAttrs" ref="root" :class="rootClass">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition name="m-scale-fade">
         <ul

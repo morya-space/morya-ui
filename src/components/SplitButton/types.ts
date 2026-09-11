@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity, ButtonSize } from '../Button/types'
 
@@ -8,6 +9,7 @@ export interface SplitButtonItem {
 }
 
 export interface SplitButtonProps {
+  pt?: RootPassThrough
   label?: string
   icon?: string
   model?: SplitButtonItem[]

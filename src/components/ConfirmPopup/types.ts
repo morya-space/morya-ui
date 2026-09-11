@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity } from '../Button/types'
@@ -6,6 +7,7 @@ import type { IconName } from '../Icon/types'
 export type ConfirmPopupPlacement = 'top' | 'bottom' | 'left' | 'right'
 
 export interface ConfirmPopupProps {
+  pt?: RootPassThrough
   modelValue?: boolean
   message?: string
   acceptLabel?: string

@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { StepperProps, StepperStatus } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 import MIcon from '../Icon/Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps>(), {
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<StepperProps>(), {
   linear: false,
   vertical: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
@@ -41,7 +47,7 @@ const rootClass = computed(() => [
 </script>
 
 <template>
-  <div :class="rootClass" role="tablist">
+  <div v-bind="rootAttrs" :class="rootClass" role="tablist">
     <button
       v-for="(step, index) in steps"
       :key="`${step.label}-${index}`"

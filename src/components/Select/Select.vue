@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+
+defineOptions({ inheritAttrs: false })
 
 interface MenuOption extends SelectOption {
   created?: boolean
@@ -40,6 +43,8 @@ const emit = defineEmits<{
 }>()
 
 const slots = useSlots()
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const defaults = useComponentDefaults('Select')
 const config = useMConfig()
 const locale = useMLocale()
@@ -315,7 +320,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="m-select-field" :class="{ 'm-select-field--fluid': resolvedFluid }">
+  <div
+    ref="root"
+    v-bind="rootAttrs"
+    class="m-select-field"
+    :class="{ 'm-select-field--fluid': resolvedFluid }"
+  >
     <label v-if="label" class="m-select-field__label" :for="selectId">{{ label }}</label>
     <div
       class="m-select__control"
@@ -325,6 +335,7 @@ onBeforeUnmount(() => {
       }"
     >
       <div
+        v-bind="controlAttrs"
         :id="selectId"
         ref="trigger"
         class="m-select"
@@ -368,7 +379,7 @@ onBeforeUnmount(() => {
           </span>
           <span
             v-if="hiddenTagCount"
-            class="m-select__tag wk-select__tag--more"
+            class="m-select__tag m-select__tag--more"
             :aria-label="moreTagsLabel"
           >
             +{{ hiddenTagCount }}
@@ -472,6 +483,7 @@ onBeforeUnmount(() => {
       class="m-select__required-input"
       tabindex="-1"
       aria-hidden="true"
+      :name="name"
       :required="!hasValue"
       :value="resolvedMultiple ? selectedValues.join(',') : selectedValues[0]"
     >
