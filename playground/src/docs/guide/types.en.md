@@ -148,6 +148,24 @@ Scalar when single-select; array when `multiple`.
 
 Registered icon id for [`MIcon`](/components/Icon) / [`Button`](/components/Button), e.g. `'search'`. See the Icon registry.
 
+<h3 id="MenuNodeBase">MenuNodeBase</h3>
+
+Shared fields for Menu / Dropdown / ContextMenu items:
+
+```ts
+interface MenuNodeBase {
+  key?: string
+  label?: string
+  value?: string
+  icon?: string
+  disabled?: boolean
+  separator?: boolean
+  shortcut?: string
+  command?: () => void
+  items?: MenuNodeBase[]
+}
+```
+
 <h3 id="MSeverity">MSeverity</h3>
 
 Status tone for Message, Tag, etc.:

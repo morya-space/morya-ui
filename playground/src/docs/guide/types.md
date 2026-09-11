@@ -150,6 +150,24 @@ type SelectModelValue = SelectValue | SelectValue[] | undefined
 
 [`MIcon`](/components/Icon) / [`Button`](/components/Button) 的 `icon` / `name` 使用的注册名，例如 `'search'`、`'chevron-down'`。完整列表见 Icon 文档注册表。
 
+<h3 id="MenuNodeBase">MenuNodeBase</h3>
+
+Menu / Dropdown / ContextMenu 等导航项的公共字段：
+
+```ts
+interface MenuNodeBase {
+  key?: string
+  label?: string
+  value?: string
+  icon?: string
+  disabled?: boolean
+  separator?: boolean
+  shortcut?: string
+  command?: () => void
+  items?: MenuNodeBase[]
+}
+```
+
 <h3 id="MSeverity">MSeverity</h3>
 
 Message、Tag 等的状态色：
