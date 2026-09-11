@@ -19,11 +19,6 @@ import { useContextMenu, MContextMenu } from 'morya-ui'
 ```vue preview
 <script setup lang="ts">
 import { MContextMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const visible = ref(false)
-const position = ref({ x: 0, y: 0 })
-const menu = ref<{ show: (e: MouseEvent) => void } | null>(null)
 
 const model = [
   { label: 'Copy' },
@@ -31,25 +26,16 @@ const model = [
   { separator: true },
   { label: 'Delete', disabled: true },
 ]
-
-function onContext(event: MouseEvent) {
-  menu.value?.show(event)
-}
 </script>
 
 <template>
-  <div
-    style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
-    @contextmenu.prevent="onContext"
-  >
-    Right-click here to open the menu
-  </div>
-  <MContextMenu
-    ref="menu"
-    v-model="visible"
-    v-model:position="position"
-    :model="model"
-  />
+  <MContextMenu :model="model">
+    <div
+      style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
+    >
+      Right-click here to open the menu
+    </div>
+  </MContextMenu>
 </template>
 ```
 
@@ -110,3 +96,15 @@ const model = [
 | Slot | Description |
 | --- | --- |
 | `default` | Trigger element (inline mode). |
+
+## Types
+
+<h4 id="ContextMenuItem">ContextMenuItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface ContextMenuItem extends MenuNodeBase {
+  items?: ContextMenuItem[]
+}
+```

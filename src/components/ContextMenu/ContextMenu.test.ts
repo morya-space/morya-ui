@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
-import { nextTick } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
 import MContextMenu from './ContextMenu.vue'
 
 describe('muContextMenu', () => {
@@ -46,6 +46,74 @@ describe('muContextMenu', () => {
     })
     await nextTick()
     expect(document.body.querySelector('.m-contextmenu--teleported')).toBeTruthy()
+    wrapper.unmount()
+  })
+
+  it('opens on anchor contextmenu without v-model', async () => {
+    const wrapper = mount(MContextMenu, {
+      props: { model: [{ label: 'Copy' }] },
+      slots: { default: '<div class="trigger">Right click</div>' },
+      attachTo: document.body,
+    })
+    await wrapper.find('.trigger').trigger('contextmenu', { clientX: 50, clientY: 60 })
+    await nextTick()
+    await flushPromises()
+    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    wrapper.unmount()
+  })
+
+  it('opens on anchor contextmenu with v-model', async () => {
+    const visible = ref(false)
+    const position = ref({ x: 0, y: 0 })
+    const Parent = defineComponent({
+      components: { MContextMenu },
+      setup() {
+        return { visible, position, model: [{ label: 'Copy' }] }
+      },
+      template: `
+        <MContextMenu v-model="visible" v-model:position="position" :model="model">
+          <div class="trigger">Right click</div>
+        </MContextMenu>
+      `,
+    })
+    const wrapper = mount(Parent, { attachTo: document.body })
+    await wrapper.find('.trigger').trigger('contextmenu', { clientX: 50, clientY: 60 })
+    await nextTick()
+    await flushPromises()
+    expect(visible.value).toBe(true)
+    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    wrapper.unmount()
+  })
+
+  it('opens via external trigger and expose.show with v-model', async () => {
+    const visible = ref(false)
+    const position = ref({ x: 0, y: 0 })
+    const Parent = defineComponent({
+      components: { MContextMenu },
+      setup() {
+        const menu = ref<{ show: (event: MouseEvent) => void } | null>(null)
+        return {
+          visible,
+          position,
+          menu,
+          model: [{ label: 'Copy' }],
+          onContext(event: MouseEvent) {
+            menu.value?.show(event)
+          },
+        }
+      },
+      template: `
+        <div class="trigger" @contextmenu.prevent="onContext">Right click</div>
+        <MContextMenu ref="menu" v-model="visible" v-model:position="position" :model="model" />
+      `,
+    })
+    const wrapper = mount(Parent, { attachTo: document.body })
+    await nextTick()
+    await wrapper.find('.trigger').trigger('contextmenu', { clientX: 80, clientY: 90 })
+    await nextTick()
+    await flushPromises()
+    expect(visible.value).toBe(true)
+    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
     wrapper.unmount()
   })
 
