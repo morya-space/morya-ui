@@ -1,4 +1,35 @@
-﻿# morya-ui
+# morya-ui
+
+## 0.2.1
+
+### Breaking Changes
+
+- rebrand WiseKit to morya-ui with M-prefixed public API
+
+### Features
+
+- link API table types to doc anchors
+- add hybrid fallthrough attrs helpers
+
+### Fixes
+
+- support uncontrolled open and slot trigger
+- rename Nuxt module to morya-ui-nuxt for npm publish
+
+### Docs
+
+- add type sections at end of component docs
+- document shared types and type link conventions
+- document pt props and trim attrs boilerplate
+- add attrs and types guides with updated nav
+
+### Changes
+
+- add component doc type section tooling
+- add attrs audit and doc maintenance tooling
+- apply hybrid attrs routing across library
+- update documentation links to reflect new GitHub Pages URL
+- rename satellite packages to @morya-ui scope
 
 ## 0.1.1
 
