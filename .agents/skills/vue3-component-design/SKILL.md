@@ -137,18 +137,72 @@ const props = withDefaults(defineProps<Props>(), { modelValue: '' })
 - MUST scope all styles to the component root
 - SHOULD use CSS custom properties for theming
 - MUST NOT leak styles to sibling components
-- SHOULD support `inheritAttrs: false` when using attrs manually
+
+### Hybrid attrs & pass-through (Morya UI)
+
+Use the **hybrid** pattern for compound field/control components:
+
+1. **Explicit props** for common native semantics (`placeholder`, `name`, `autocomplete`, `disabled`, …).
+2. **Root fallthrough** for all attrs except control event listeners → component root (`class`, `style`, `data-*`, `title`, undeclared attrs, …).
+3. **Control fallthrough** for **event listeners only** (`@keydown`, `@paste`, …) → native control via `useFieldParts` / `useControlRootParts`.
+4. **`pt` prop** when an attr must land on a specific inner part (`pt.input`, `pt.control`, …), not the field root.
+5. **Never** `v-bind="attrs"` blindly on an inner element.
+6. **Component-managed** attrs (`id`, `aria-invalid`, `aria-describedby`, `disabled`, `modelValue`, …) are props/internal bindings only.
+
+| User passes | Bind target | Mechanism |
+|-------------|-------------|-----------|
+| `class`, `style`, `data-testid`, `title`, … | Root wrapper | fallthrough → `rootAttrs` |
+| `placeholder`, `name`, `autocomplete` | Native control | **prop** (preferred) |
+| `@keydown`, `@paste` | Native control | fallthrough events → `controlAttrs` |
+| `inputmode`, `pattern`, `data-*` on input only | Native control | `pt.input` |
+| `invalid`, `label`, `errorMessage` | Component logic | **prop** |
+
+Composable choice:
+
+| Component shape | Composable |
+|-----------------|------------|
+| Field: root + label + control + meta | `useFieldParts(attrs, () => props.pt)` |
+| Label wraps hidden input (Checkbox, Switch) | `useControlRootParts(attrs, () => props.pt)` |
+| Single root (Form, Grid, Button-like) | `useRootParts(attrs, () => props.pt)` |
+
+Shared native prop interfaces live in `src/shared/nativeControlProps.ts`:
+
+| Interface | Use for |
+|-----------|---------|
+| `MNativeInputProps` | `<input>` / text-like controls (Input, AutoComplete, InputTags, InputColor) |
+| `MNativeTextareaProps` | Textarea |
+| `MNativeComboboxFieldProps` | Select, TreeSelect, CascadeSelect (`placeholder`, `name`) |
+| `MNativeDateInputProps` | DatePicker readonly input (`name`, `autocomplete`, `autofocus` + local `placeholder`) |
+| `MNativeNumberInputProps` | InputNumber |
+| `MNativeRangeProps` | Slider range inputs |
 
 ```vue
 <script setup lang="ts">
+import { useAttrs } from 'vue'
+import { useFieldParts } from '../../shared/useComponentAttrs'
+
 defineOptions({ inheritAttrs: false })
+
+const props = defineProps<{
+  modelValue?: string
+  placeholder?: string
+  name?: string
+  pt?: FieldPassThrough
+}>()
+
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 </script>
 
 <template>
-  <button v-bind="attrs">
-    <slot />
-  </button>
+  <div v-bind="rootAttrs" class="m-input-field">
+    <input
+      v-bind="controlAttrs"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :name="name"
+    >
+  </div>
 </template>
 ```
 
@@ -221,3 +275,4 @@ When designing a component:
 - [ ] Accessible by keyboard with visible focus
 - [ ] Export barrel file (`index.ts`) is present
 - [ ] No direct prop mutation
+- [ ] Hybrid attrs: common native props declared; root vs control fallthrough documented; no blind inner `v-bind="attrs"`
