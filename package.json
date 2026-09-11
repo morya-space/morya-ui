@@ -668,6 +668,8 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "audit:attrs": "node scripts/audit-component-attrs.mjs && node scripts/audit-root-bind.mjs && node scripts/audit-wk-classes.mjs",
     "docs:enrich-types": "node scripts/enrich-component-doc-types.mjs",
+    "docs:sync-type-sections": "node scripts/sync-component-doc-type-sections.mjs",
+    "docs:move-types-bottom": "node scripts/move-component-doc-types-to-bottom.mjs",
     "docs:sync-attrs": "node scripts/sync-component-docs-attrs.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
