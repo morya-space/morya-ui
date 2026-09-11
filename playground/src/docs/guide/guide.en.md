@@ -56,6 +56,7 @@ The docs site language switcher loads `index.en.md` when English is selected, an
 
 When documenting a component:
 
+- PascalCase names in Props / Events tables (e.g. `DropdownItem`) become clickable links: same-page **Types** section at the bottom of the doc first, otherwise [API types](/docs/types#TypeName). Run `pnpm docs:sync-type-sections` to backfill missing type sections from `types.ts`.
 - List `pt` in the Props table when present, with the DOM part keys (`root`, `input`, …).
 - For fields, note that events bind to the native control and other fallthrough attrs bind to the field root; prefer props for `placeholder`, `name`, etc.
 - Call out non-obvious targets (Dialog backdrop, Checkbox label) with a short section or example instead of copying the whole guide.

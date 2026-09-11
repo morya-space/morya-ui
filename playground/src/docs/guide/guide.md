@@ -54,7 +54,8 @@ description: 触发动作的按钮
 
 写组件文档时：
 
-- Props 表加上 `pt`（若有），说明可用的 DOM 键名；复杂类型链到 [API 类型](/docs/types) 或组件内 **类型** 小节。
+- Props / Events 表里的 PascalCase 类型名（如 `DropdownItem`）会自动变成可点击链接：优先跳到文档末尾 **类型** 小节的 `<h4 id="TypeName">`，否则跳到 [API 类型](/docs/types#TypeName)。运行 `pnpm docs:sync-type-sections` 可根据 `types.ts` 补全缺失的类型小节。
+- Props 表加上 `pt`（若有），说明可用的 DOM 键名。
 - 字段组件说明：事件在原生控件，其它 fallthrough 在 field 根；`placeholder` / `name` 等优先写 props。
 - 有非显然落点的（Dialog 的 backdrop、Checkbox 的 label），在正文用一小节或示例说明，不必每页重复整篇指南。
 
