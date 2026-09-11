@@ -1,6 +1,6 @@
 ﻿---
 title: MCP
-order: 6
+order: 10
 description: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客户端检索本库文档。
 ---
 

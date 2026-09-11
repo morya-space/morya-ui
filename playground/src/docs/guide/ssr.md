@@ -1,6 +1,6 @@
 ﻿---
 title: SSR 与服务端框架
-order: 7
+order: 8
 description: 在 Nuxt、Astro、Vite SSR 等环境中使用 Morya UI。
 ---
 

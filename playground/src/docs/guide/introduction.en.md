@@ -46,9 +46,12 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 ## Next steps
 
 - [Quick start](/docs/quick-start): install and a minimal example
-- [Theme](/docs/theme): light/dark and motion
 - [Design tokens](/docs/design-tokens): full `--m-*` reference
+- [Theme](/docs/theme): light/dark and motion
+- [Styling & attrs](/docs/attrs): fallthrough, `pt`, and event placement
+- [API types](/docs/types): shapes behind names like `FieldPassThrough`, `SelectOption`
 - [Configuration](/docs/config): `ConfigProvider` / `createMoryaUI`
+- [SSR](/docs/ssr): Nuxt, Astro, and similar setups
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
 - [Components](/components): browse all components and APIs
 - [Contributing](https://github.com/morya-space/morya-ui/blob/main/CONTRIBUTING.md)

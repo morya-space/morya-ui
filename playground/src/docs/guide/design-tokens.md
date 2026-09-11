@@ -1,6 +1,6 @@
 ---
 title: 设计令牌
-order: 4.5
+order: 3
 description: 全部 --m-* CSS 变量、默认值与用途说明。
 ---
 
