@@ -62,3 +62,28 @@ const value = [
 | Slot | Description |
 | --- | --- |
 | `expansion` | Expanded row `{ row }`. |
+
+## Types
+
+<h4 id="TreeTableColumn">TreeTableColumn</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface TreeTableColumn {
+  field: string
+  header: string
+}
+```
+
+<h4 id="TreeTableNode">TreeTableNode</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface TreeTableNode {
+  key: string
+  data: Record<string, unknown>
+  children?: TreeTableNode[]
+}
+```

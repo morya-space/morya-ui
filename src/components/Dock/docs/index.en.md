@@ -50,3 +50,15 @@ No custom events.
 | Slot | Description |
 | --- | --- |
 | `default` | Dock items. |
+
+## Types
+
+<h4 id="DockItem">DockItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface DockItem extends Omit<MenuNodeBase, 'label'> {
+  label: string
+}
+```

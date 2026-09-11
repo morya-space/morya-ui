@@ -285,3 +285,24 @@ const uploader = ref<{
 | `submit()` | 上传列表中 `ready` / `fail` 的文件。 |
 | `abort(file?)` | 取消进行中的请求；不传则全部取消。 |
 | `clear()` / `clearFiles()` | 清空列表并中止上传。 |
+
+## 类型
+
+<h4 id="FileUploadFile">FileUploadFile</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface FileUploadFile {
+  uid: string
+  name: string
+  size?: number
+  type?: string
+  status: FileUploadStatus
+  percentage?: number
+  url?: string
+  raw?: File
+  response?: unknown
+  error?: string
+}
+```

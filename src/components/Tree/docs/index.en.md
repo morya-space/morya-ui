@@ -139,25 +139,6 @@ const nodes = [
 </template>
 ```
 
-## Types
-
-<h4 id="TreeNode">TreeNode</h4>
-
-Each node in `value`:
-
-```ts
-interface TreeNode {
-  key: string
-  label: string
-  children?: TreeNode[]
-  icon?: string
-  disabled?: boolean
-  isLeaf?: boolean
-}
-```
-
-Selection, check, and expand state use `selectionKeys`, `checkedKeys`, and `expandedKeys` (`Record<string, boolean>`). `checkStrategy` is `'all' | 'parent' | 'child'`. See also [API types](/docs/types).
-
 ## Props
 
 | Prop | Type | Default | Description |
@@ -189,3 +170,22 @@ Selection, check, and expand state use `selectionKeys`, `checkedKeys`, and `expa
 | `node-select` | `TreeNode` | Node selected. |
 | `node-expand` | `TreeNode` | Node expanded. |
 | `node-collapse` | `TreeNode` | Node collapsed. |
+
+## Types
+
+<h4 id="TreeNode">TreeNode</h4>
+
+Each node in `value`:
+
+```ts
+interface TreeNode {
+  key: string
+  label: string
+  children?: TreeNode[]
+  icon?: string
+  disabled?: boolean
+  isLeaf?: boolean
+}
+```
+
+Selection, check, and expand state use `selectionKeys`, `checkedKeys`, and `expandedKeys` (`Record<string, boolean>`). `checkStrategy` is `'all' | 'parent' | 'child'`. See also [API types](/docs/types).

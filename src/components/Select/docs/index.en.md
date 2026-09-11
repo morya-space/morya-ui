@@ -282,22 +282,6 @@ const options = [
 
 Fallthrough attrs except control **events** bind to the field wrapper; `@keydown` and similar listeners attach to the combobox. Prefer `placeholder` / `name` as props. Use `placement` / `appendTo` for the panel, or `pt` for inner DOM. See [Styling & attrs](/docs/attrs).
 
-## Types
-
-<h4 id="SelectOption">SelectOption</h4>
-
-```ts
-interface SelectOption {
-  label: string
-  value: string | number
-  disabled?: boolean
-}
-```
-
-<h4 id="SelectModelValue">SelectModelValue</h4>
-
-Scalar when single-select; array when `multiple`. See [API types](/docs/types#SelectModelValue).
-
 ## Props
 
 | Prop | Type | Default | Description |
@@ -347,3 +331,19 @@ Scalar when single-select; array when `multiple`. See [API types](/docs/types#Se
 | --- | --- |
 | `value` | Custom single-select trigger display. |
 | `option` | Option `{ option }`. |
+
+## Types
+
+<h4 id="SelectOption">SelectOption</h4>
+
+```ts
+interface SelectOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+}
+```
+
+<h4 id="SelectModelValue">SelectModelValue</h4>
+
+Scalar when single-select; array when `multiple`. See [API types](/docs/types#SelectModelValue).

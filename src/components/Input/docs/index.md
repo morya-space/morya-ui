@@ -234,23 +234,6 @@ import { MInput } from 'morya-ui'
 </template>
 ```
 
-## 类型
-
-<h4 id="InputPassThrough">InputPassThrough</h4>
-
-`pt` 的类型。在 [FieldPassThrough](/docs/types#FieldPassThrough) 基础上多了前后缀等键：
-
-```ts
-type InputPassThrough = FieldPassThrough & {
-  prefix?: PassThroughPart
-  suffix?: PassThroughPart
-  help?: PassThroughPart
-  count?: PassThroughPart
-}
-```
-
-`PassThroughPart` 见 [API 类型 · PassThroughPart](/docs/types#PassThroughPart)。
-
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -298,3 +281,20 @@ type InputPassThrough = FieldPassThrough & {
 | 方法 | 说明 |
 | --- | --- |
 | `focus()` | 聚焦底层 input。 |
+
+## 类型
+
+<h4 id="InputPassThrough">InputPassThrough</h4>
+
+`pt` 的类型。在 [FieldPassThrough](/docs/types#FieldPassThrough) 基础上多了前后缀等键：
+
+```ts
+type InputPassThrough = FieldPassThrough & {
+  prefix?: PassThroughPart
+  suffix?: PassThroughPart
+  help?: PassThroughPart
+  count?: PassThroughPart
+}
+```
+
+`PassThroughPart` 见 [API 类型 · PassThroughPart](/docs/types#PassThroughPart)。

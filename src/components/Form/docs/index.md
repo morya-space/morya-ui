@@ -183,3 +183,13 @@ const model = reactive({ city: '', zip: '' })
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 表单项。 |
+
+## 类型
+
+<h4 id="FormRules">FormRules</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type FormRules = Record<string, FormItemRule | FormItemRule[]>
+```

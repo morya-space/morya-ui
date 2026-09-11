@@ -50,3 +50,17 @@ No custom events.
 | Slot | Description |
 | --- | --- |
 | `label` | Custom label `{ meter }`. |
+
+## Types
+
+<h4 id="MeterGroupItem">MeterGroupItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface MeterGroupItem {
+  label: string
+  value: number
+  color?: string
+}
+```

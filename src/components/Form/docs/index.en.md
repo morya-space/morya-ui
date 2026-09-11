@@ -181,3 +181,13 @@ const model = reactive({ city: '', zip: '' })
 | Slot | Description |
 | --- | --- |
 | `default` | Form items. |
+
+## Types
+
+<h4 id="FormRules">FormRules</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+type FormRules = Record<string, FormItemRule | FormItemRule[]>
+```

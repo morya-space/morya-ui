@@ -50,3 +50,17 @@ const value = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `label` | 自定义标签 `{ meter }`。 |
+
+## 类型
+
+<h4 id="MeterGroupItem">MeterGroupItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface MeterGroupItem {
+  label: string
+  value: number
+  color?: string
+}
+```

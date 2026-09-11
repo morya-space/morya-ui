@@ -99,3 +99,16 @@ const items = [
 | --- | --- |
 | `trigger` | Trigger. |
 | `item` | Custom menu item, scope `{ item }`. |
+
+## Types
+
+<h4 id="DropdownItem">DropdownItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface DropdownItem extends MenuNodeBase {
+  type?: DropdownItemType
+  items?: DropdownItem[]
+}
+```

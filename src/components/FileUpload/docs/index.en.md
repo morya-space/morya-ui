@@ -283,3 +283,24 @@ const uploader = ref<{
 | `submit()` | Upload `ready` / `fail` files in the list. |
 | `abort(file?)` | Abort in-flight request(s); omit `file` to abort all. |
 | `clear()` / `clearFiles()` | Clear the list and abort uploads. |
+
+## Types
+
+<h4 id="FileUploadFile">FileUploadFile</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface FileUploadFile {
+  uid: string
+  name: string
+  size?: number
+  type?: string
+  status: FileUploadStatus
+  percentage?: number
+  url?: string
+  raw?: File
+  response?: unknown
+  error?: string
+}
+```

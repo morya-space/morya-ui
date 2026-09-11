@@ -387,27 +387,6 @@ const model = [
 </template>
 ```
 
-## 类型
-
-<h4 id="MenuItem">MenuItem</h4>
-
-`model` 数组项，支持嵌套：
-
-```ts
-interface MenuItem {
-  key?: string
-  label?: string
-  icon?: string
-  to?: string | RouteLocationRaw   // 有 vue-router 时用 RouterLink
-  command?: () => void
-  disabled?: boolean
-  separator?: boolean
-  items?: MenuItem[]
-}
-```
-
-`key` 未传时用 `label` 作为标识。`separator: true` 时渲染分隔线。更多见 [API 类型](/docs/types)。
-
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -459,3 +438,24 @@ interface MenuItem {
 | `disabled` | `boolean` | 禁用。 |
 | `separator` | `boolean` | 分隔线（忽略其他字段）。 |
 | `items` | `MenuItem[]` | 子菜单。 |
+
+## 类型
+
+<h4 id="MenuItem">MenuItem</h4>
+
+`model` 数组项，支持嵌套：
+
+```ts
+interface MenuItem {
+  key?: string
+  label?: string
+  icon?: string
+  to?: string | RouteLocationRaw   // 有 vue-router 时用 RouterLink
+  command?: () => void
+  disabled?: boolean
+  separator?: boolean
+  items?: MenuItem[]
+}
+```
+
+`key` 未传时用 `label` 作为标识。`separator: true` 时渲染分隔线。更多见 [API 类型](/docs/types)。

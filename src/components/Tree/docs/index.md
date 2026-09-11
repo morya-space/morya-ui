@@ -139,25 +139,6 @@ const nodes = [
 </template>
 ```
 
-## 类型
-
-<h4 id="TreeNode">TreeNode</h4>
-
-`value` 数组项：
-
-```ts
-interface TreeNode {
-  key: string
-  label: string
-  children?: TreeNode[]
-  icon?: string
-  disabled?: boolean
-  isLeaf?: boolean
-}
-```
-
-选中/勾选/展开分别用 `selectionKeys`、`checkedKeys`、`expandedKeys`（`Record<string, boolean>`）。`checkStrategy` 为 `'all' | 'parent' | 'child'`。更多见 [API 类型](/docs/types)。
-
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -200,3 +181,22 @@ interface TreeNode {
 | 插槽名 | 说明 |
 | --- | --- |
 | `empty` | 自定义 `empty` 内容。 |
+
+## 类型
+
+<h4 id="TreeNode">TreeNode</h4>
+
+`value` 数组项：
+
+```ts
+interface TreeNode {
+  key: string
+  label: string
+  children?: TreeNode[]
+  icon?: string
+  disabled?: boolean
+  isLeaf?: boolean
+}
+```
+
+选中/勾选/展开分别用 `selectionKeys`、`checkedKeys`、`expandedKeys`（`Record<string, boolean>`）。`checkStrategy` 为 `'all' | 'parent' | 'child'`。更多见 [API 类型](/docs/types)。

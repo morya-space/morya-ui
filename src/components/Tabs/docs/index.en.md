@@ -116,3 +116,19 @@ When tabs overflow the container, scroll buttons appear at both ends.
 | --- | --- |
 | `default` | Panel content; scoped slot `{ activeValue }`. |
 | `extra` | Extra content on the right of the tab bar. |
+
+## Types
+
+<h4 id="TabItem">TabItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface TabItem {
+  label: string
+  value: string
+  disabled?: boolean
+  /** When set, overrides the Tabs `closable` prop for this item. */
+  closable?: boolean
+}
+```

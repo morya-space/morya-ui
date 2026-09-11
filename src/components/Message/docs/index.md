@@ -129,3 +129,21 @@ function showVNode() {
 ## Slots
 
 无插槽；通过 `message.*` API 注入内容。
+
+## 类型
+
+<h4 id="MessageItem">MessageItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface MessageItem {
+  id: string | number
+  content: MRenderable
+  severity?: MessageSeverity
+  closable?: boolean
+  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
+  life?: number
+  icon?: boolean
+}
+```

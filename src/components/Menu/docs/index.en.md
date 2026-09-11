@@ -388,27 +388,6 @@ const model = [
 </template>
 ```
 
-## Types
-
-<h4 id="MenuItem">MenuItem</h4>
-
-Each entry in `model`; supports nesting:
-
-```ts
-interface MenuItem {
-  key?: string
-  label?: string
-  icon?: string
-  to?: string | RouteLocationRaw   // RouterLink when vue-router is installed
-  command?: () => void
-  disabled?: boolean
-  separator?: boolean
-  items?: MenuItem[]
-}
-```
-
-When `key` is omitted, `label` is used as the identifier. `separator: true` renders a divider. See also [API types](/docs/types).
-
 ## Props
 
 | Prop | Type | Default | Description |
@@ -460,3 +439,24 @@ When `key` is omitted, `label` is used as the identifier. `separator: true` rend
 | `disabled` | `boolean` | Disabled state. |
 | `separator` | `boolean` | Separator line (ignores other fields). |
 | `items` | `MenuItem[]` | Child menu items. |
+
+## Types
+
+<h4 id="MenuItem">MenuItem</h4>
+
+Each entry in `model`; supports nesting:
+
+```ts
+interface MenuItem {
+  key?: string
+  label?: string
+  icon?: string
+  to?: string | RouteLocationRaw   // RouterLink when vue-router is installed
+  command?: () => void
+  disabled?: boolean
+  separator?: boolean
+  items?: MenuItem[]
+}
+```
+
+When `key` is omitted, `label` is used as the identifier. `separator: true` renders a divider. See also [API types](/docs/types).

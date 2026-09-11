@@ -100,3 +100,27 @@ const options = [
 | --- | --- |
 | `value` | 触发器展示内容。 |
 | `option` | 选项 `{ option }`。 |
+
+## 类型
+
+<h4 id="CascadeSelectValue">CascadeSelectValue</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type CascadeSelectValue = string | number | null
+```
+
+
+<h4 id="CascadeSelectOption">CascadeSelectOption</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface CascadeSelectOption {
+  label: string
+  value: string | number
+  children?: CascadeSelectOption[]
+  disabled?: boolean
+}
+```

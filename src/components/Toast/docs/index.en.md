@@ -154,3 +154,21 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 ## Slots
 
 No slots; driven by the `messages` prop or toast API.
+
+## Types
+
+<h4 id="ToastMessage">ToastMessage</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface ToastMessage {
+  id: string | number
+  summary: MRenderable
+  detail?: MRenderable
+  severity?: ToastSeverity
+  closable?: boolean
+  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
+  life?: number
+}
+```

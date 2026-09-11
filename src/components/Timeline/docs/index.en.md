@@ -98,3 +98,21 @@ const events = [
 ## Events
 
 No custom events.
+
+## Types
+
+<h4 id="TimelineEvent">TimelineEvent</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface TimelineEvent {
+  status?: string
+  content?: string
+  date?: string
+  /** Built-in IconName, or raw text glyph fallback. */
+  icon?: IconName | string
+  color?: string
+  severity?: TimelineSeverity
+}
+```

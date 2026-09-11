@@ -62,3 +62,15 @@ const items = [
 | --- | --- |
 | `button` | Custom main button. |
 | `item` | Action `{ item }`. |
+
+## Types
+
+<h4 id="SpeedDialItem">SpeedDialItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
+  label: string
+}
+```

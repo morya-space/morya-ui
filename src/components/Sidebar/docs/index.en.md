@@ -59,3 +59,16 @@ No custom events.
 | Slot | Description |
 | --- | --- |
 | `default` | Sidebar content. |
+
+## Types
+
+<h4 id="SidebarItem">SidebarItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface SidebarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
+  label: string
+  items?: SidebarItem[]
+}
+```

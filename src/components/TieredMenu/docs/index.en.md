@@ -88,3 +88,19 @@ const model = [{ label: 'Copy' }, { label: 'Paste' }]
 ## Slots
 
 No slots.
+
+## Types
+
+<h4 id="TieredMenuItem">TieredMenuItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface TieredMenuItem {
+  label?: string
+  command?: () => void
+  disabled?: boolean
+  separator?: boolean
+  items?: TieredMenuItem[]
+}
+```
