@@ -72,7 +72,7 @@ importers:
         specifier: ^3.16.0
         version: 3.21.11(magicast@0.5.4)
       morya-ui:
-        specifier: ^0.1.1
+        specifier: ^0.2.1
         version: link:../..
       nuxt:
         specifier: ^3.10.0
