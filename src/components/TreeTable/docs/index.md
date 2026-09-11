@@ -66,3 +66,28 @@ const value = [
 | --- | --- |
 | `expansion` | 展开行 `{ row }`。 |
 | `empty` | 自定义 `empty` 内容。 |
+
+## 类型
+
+<h4 id="TreeTableColumn">TreeTableColumn</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface TreeTableColumn {
+  field: string
+  header: string
+}
+```
+
+<h4 id="TreeTableNode">TreeTableNode</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface TreeTableNode {
+  key: string
+  data: Record<string, unknown>
+  children?: TreeTableNode[]
+}
+```

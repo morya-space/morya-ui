@@ -100,3 +100,27 @@ const options = [
 | --- | --- |
 | `value` | Trigger display. |
 | `option` | Option `{ option }`. |
+
+## Types
+
+<h4 id="CascadeSelectValue">CascadeSelectValue</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+type CascadeSelectValue = string | number | null
+```
+
+
+<h4 id="CascadeSelectOption">CascadeSelectOption</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface CascadeSelectOption {
+  label: string
+  value: string | number
+  children?: CascadeSelectOption[]
+  disabled?: boolean
+}
+```

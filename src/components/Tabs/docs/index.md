@@ -116,3 +116,19 @@ function onAdd() {
 | --- | --- |
 | `default` | 面板内容，作用域 `{ activeValue }`。 |
 | `extra` | 标签栏右侧额外内容。 |
+
+## 类型
+
+<h4 id="TabItem">TabItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface TabItem {
+  label: string
+  value: string
+  disabled?: boolean
+  /** When set, overrides the Tabs `closable` prop for this item. */
+  closable?: boolean
+}
+```

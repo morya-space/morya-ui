@@ -291,3 +291,24 @@ function loadMore(direction: ScrollbarDirection) {
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 可滚动内容。 |
+
+## 类型
+
+<h4 id="ScrollbarAriaOrientation">ScrollbarAriaOrientation</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type ScrollbarAriaOrientation = 'horizontal' | 'vertical'
+```
+
+<h4 id="ScrollbarClassValue">ScrollbarClassValue</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type ScrollbarClassValue = | string
+  | string[]
+  | Record<string, boolean>
+  | Array<string | Record<string, boolean> | null | undefined | false>
+```

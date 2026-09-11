@@ -99,3 +99,16 @@ const items = [
 | --- | --- |
 | `trigger` | 触发器。 |
 | `item` | 自定义菜单项，作用域 `{ item }`。 |
+
+## 类型
+
+<h4 id="DropdownItem">DropdownItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface DropdownItem extends MenuNodeBase {
+  type?: DropdownItemType
+  items?: DropdownItem[]
+}
+```

@@ -133,3 +133,18 @@ const options = [{ key: 'docs', label: 'Documents' }]
 | --- | --- |
 | `value` | Trigger display. |
 | `option` | Tree node `{ node }`. |
+
+## Types
+
+<h4 id="TreeSelectNode">TreeSelectNode</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface TreeSelectNode {
+  key: string
+  label: string
+  children?: TreeSelectNode[]
+  disabled?: boolean
+}
+```

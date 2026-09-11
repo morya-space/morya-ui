@@ -85,3 +85,17 @@ No custom events.
 ## Slots
 
 No slots.
+
+## Types
+
+<h4 id="MegaMenuItem">MegaMenuItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface MegaMenuItem extends Omit<MenuNodeBase, 'label' | 'items'> {
+  label: string
+  /** Column groups for mega panel; each entry is a column of items. */
+  items?: MegaMenuItem[][]
+}
+```

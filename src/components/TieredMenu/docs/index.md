@@ -89,3 +89,19 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 ## Slots
 
 无插槽。
+
+## 类型
+
+<h4 id="TieredMenuItem">TieredMenuItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface TieredMenuItem {
+  label?: string
+  command?: () => void
+  disabled?: boolean
+  separator?: boolean
+  items?: TieredMenuItem[]
+}
+```

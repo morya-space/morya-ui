@@ -83,3 +83,15 @@ When open:
 ## Slots
 
 No slots.
+
+## Types
+
+<h4 id="CommandMenuItem">CommandMenuItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface CommandMenuItem extends Omit<MenuNodeBase, 'label'> {
+  label: string
+}
+```

@@ -83,3 +83,15 @@ const model = [
 ## Slots
 
 无插槽。
+
+## 类型
+
+<h4 id="CommandMenuItem">CommandMenuItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface CommandMenuItem extends Omit<MenuNodeBase, 'label'> {
+  label: string
+}
+```

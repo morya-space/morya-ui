@@ -155,3 +155,21 @@ function onClose(message: ToastMessage) {
 ## Slots
 
 无插槽；通过 `messages` prop 或 toast API 驱动。
+
+## 类型
+
+<h4 id="ToastMessage">ToastMessage</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface ToastMessage {
+  id: string | number
+  summary: MRenderable
+  detail?: MRenderable
+  severity?: ToastSeverity
+  closable?: boolean
+  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
+  life?: number
+}
+```

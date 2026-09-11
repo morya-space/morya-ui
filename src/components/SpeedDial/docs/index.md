@@ -64,3 +64,15 @@ const items = [
 | `button` | 自定义主按钮。 |
 | `item` | 动作项 `{ item }`。 |
 | `icon` | 自定义 `icon` 内容。 |
+
+## 类型
+
+<h4 id="SpeedDialItem">SpeedDialItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
+  label: string
+}
+```

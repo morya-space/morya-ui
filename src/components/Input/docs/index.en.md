@@ -234,23 +234,6 @@ import { MInput } from 'morya-ui'
 </template>
 ```
 
-## Types
-
-<h4 id="InputPassThrough">InputPassThrough</h4>
-
-Type of `pt`. Extends [FieldPassThrough](/docs/types#FieldPassThrough) with affix parts:
-
-```ts
-type InputPassThrough = FieldPassThrough & {
-  prefix?: PassThroughPart
-  suffix?: PassThroughPart
-  help?: PassThroughPart
-  count?: PassThroughPart
-}
-```
-
-See [PassThroughPart](/docs/types#PassThroughPart) in API types.
-
 ## Props
 
 | Prop | Type | Default | Description |
@@ -295,3 +278,20 @@ See [PassThroughPart](/docs/types#PassThroughPart) in API types.
 | Method | Description |
 | --- | --- |
 | `focus()` | Focus the underlying input. |
+
+## Types
+
+<h4 id="InputPassThrough">InputPassThrough</h4>
+
+Type of `pt`. Extends [FieldPassThrough](/docs/types#FieldPassThrough) with affix parts:
+
+```ts
+type InputPassThrough = FieldPassThrough & {
+  prefix?: PassThroughPart
+  suffix?: PassThroughPart
+  help?: PassThroughPart
+  count?: PassThroughPart
+}
+```
+
+See [PassThroughPart](/docs/types#PassThroughPart) in API types.

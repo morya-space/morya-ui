@@ -62,3 +62,16 @@ const model = [
 | --- | --- |
 | `start` | 菜单栏起始区域。 |
 | `end` | 菜单栏末尾区域。 |
+
+## 类型
+
+<h4 id="MenubarItem">MenubarItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface MenubarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
+  label: string
+  items?: MenubarItem[]
+}
+```

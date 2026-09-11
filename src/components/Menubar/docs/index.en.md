@@ -62,3 +62,16 @@ const model = [
 | --- | --- |
 | `start` | Start of menubar. |
 | `end` | End of menubar. |
+
+## Types
+
+<h4 id="MenubarItem">MenubarItem</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface MenubarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
+  label: string
+  items?: MenubarItem[]
+}
+```

@@ -247,43 +247,6 @@ const total = ref(42)
 | `render` | `(row) => unknown` | 自定义单元格渲染。 |
 | `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |
 
-## 类型
-
-<h4 id="TableColumnDefinition">TableColumnDefinition</h4>
-
-列定义，传给 `columns`：
-
-```ts
-interface TableColumnDefinition {
-  key: string
-  label: string
-  width?: number
-  minWidth?: number
-  sortable?: boolean
-  fixed?: boolean | 'left' | 'right'
-  align?: 'start' | 'center' | 'end' | 'left' | 'right'
-  render?: (row: TableItem) => unknown
-  filterable?: boolean
-  filters?: { label: string; value: string | number }[]
-  showOverflowTooltip?: boolean
-}
-```
-
-<h4 id="TableServerOptions">TableServerOptions</h4>
-
-服务端分页/排序时传给 `serverOptions`，配合 `serverItemsLength`：
-
-```ts
-interface TableServerOptions {
-  page: number
-  rowsPerPage: number
-  sortBy?: string | string[]
-  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]
-}
-```
-
-`TableItem` 为 `Record<string, unknown>` 行对象。更多见 [API 类型](/docs/types)。
-
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -397,3 +360,102 @@ interface TableServerOptions {
 ## 实例方法
 
 通过 `ref` 可访问分页控制：`nextPage`、`prevPage`、`updatePage`、`currentPaginationNumber`、`maxPaginationNumber` 等。
+
+## 类型
+
+<h4 id="TableItem">TableItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableItem = Record<string, unknown>
+```
+
+<h4 id="TableTextDirection">TableTextDirection</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableTextDirection = 'left' | 'center' | 'right'
+```
+
+<h4 id="TableClickEventType">TableClickEventType</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableClickEventType = 'single' | 'double'
+```
+
+<h4 id="TableFilterOption">TableFilterOption</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }
+  | { field: string; comparison: '=' | '!='; criteria: number | string }
+  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }
+  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }
+  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }
+```
+
+<h4 id="TableHeaderItemClassName">TableHeaderItemClassName</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)
+```
+
+<h4 id="TableBodyRowClassName">TableBodyRowClassName</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)
+```
+
+<h4 id="TableBodyItemClassName">TableBodyItemClassName</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)
+```
+
+
+
+<h4 id="TableColumnDefinition">TableColumnDefinition</h4>
+
+列定义，传给 `columns`：
+
+```ts
+interface TableColumnDefinition {
+  key: string
+  label: string
+  width?: number
+  minWidth?: number
+  sortable?: boolean
+  fixed?: boolean | 'left' | 'right'
+  align?: 'start' | 'center' | 'end' | 'left' | 'right'
+  render?: (row: TableItem) => unknown
+  filterable?: boolean
+  filters?: { label: string; value: string | number }[]
+  showOverflowTooltip?: boolean
+}
+```
+
+<h4 id="TableServerOptions">TableServerOptions</h4>
+
+服务端分页/排序时传给 `serverOptions`，配合 `serverItemsLength`：
+
+```ts
+interface TableServerOptions {
+  page: number
+  rowsPerPage: number
+  sortBy?: string | string[]
+  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]
+}
+```
+
+更多见 [API 类型](/docs/types)。

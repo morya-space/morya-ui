@@ -282,22 +282,6 @@ const options = [
 
 除控件 **事件** 外，fallthrough attrs 落在外层 field 根；`@keydown` 等由内部 combobox 接收。`placeholder`、`name` 优先用 props。下拉位置用 `placement` / `appendTo`；改面板 DOM 用 `pt`（键名见 Props）。详见 [样式与 attrs](/docs/attrs)。
 
-## 类型
-
-<h4 id="SelectOption">SelectOption</h4>
-
-```ts
-interface SelectOption {
-  label: string
-  value: string | number
-  disabled?: boolean
-}
-```
-
-<h4 id="SelectModelValue">SelectModelValue</h4>
-
-单选为 `string | number`；`multiple` 时为 `(string | number)[]`。详见 [API 类型](/docs/types#SelectModelValue)。
-
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -347,3 +331,19 @@ interface SelectOption {
 | --- | --- |
 | `value` | 自定义触发器展示（单选）。 |
 | `option` | 选项 `{ option }`。 |
+
+## 类型
+
+<h4 id="SelectOption">SelectOption</h4>
+
+```ts
+interface SelectOption {
+  label: string
+  value: string | number
+  disabled?: boolean
+}
+```
+
+<h4 id="SelectModelValue">SelectModelValue</h4>
+
+单选为 `string | number`；`multiple` 时为 `(string | number)[]`。详见 [API 类型](/docs/types#SelectModelValue)。

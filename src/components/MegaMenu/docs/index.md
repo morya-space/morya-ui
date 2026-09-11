@@ -89,3 +89,17 @@ const model = [
 ## Slots
 
 无插槽。
+
+## 类型
+
+<h4 id="MegaMenuItem">MegaMenuItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface MegaMenuItem extends Omit<MenuNodeBase, 'label' | 'items'> {
+  label: string
+  /** Column groups for mega panel; each entry is a column of items. */
+  items?: MegaMenuItem[][]
+}
+```

@@ -50,3 +50,15 @@ const model = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 停靠项。 |
+
+## 类型
+
+<h4 id="DockItem">DockItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface DockItem extends Omit<MenuNodeBase, 'label'> {
+  label: string
+}
+```

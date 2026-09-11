@@ -207,3 +207,19 @@ const shortcuts = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `trigger` | 自定义触发器 `{ value, open }`。 |
+
+## 类型
+
+<h4 id="DatePickerShortcut">DatePickerShortcut</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface DatePickerShortcut {
+  label: string
+  value:
+    | DatePickerDateValue
+    | [DatePickerDateValue, DatePickerDateValue]
+    | (() => DatePickerDateValue | [DatePickerDateValue, DatePickerDateValue])
+}
+```

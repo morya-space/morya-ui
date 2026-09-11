@@ -201,3 +201,19 @@ const shortcuts = [
 | Slot | Description |
 | --- | --- |
 | `trigger` | Custom trigger `{ value, open }`. |
+
+## Types
+
+<h4 id="DatePickerShortcut">DatePickerShortcut</h4>
+
+See source `types.ts` for the full definition.
+
+```ts
+interface DatePickerShortcut {
+  label: string
+  value:
+    | DatePickerDateValue
+    | [DatePickerDateValue, DatePickerDateValue]
+    | (() => DatePickerDateValue | [DatePickerDateValue, DatePickerDateValue])
+}
+```

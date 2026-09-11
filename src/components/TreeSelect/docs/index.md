@@ -138,3 +138,18 @@ const options = [{ key: 'docs', label: '文档' }]
 | --- | --- |
 | `value` | 触发器展示。 |
 | `option` | 树节点 `{ node }`。 |
+
+## 类型
+
+<h4 id="TreeSelectNode">TreeSelectNode</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface TreeSelectNode {
+  key: string
+  label: string
+  children?: TreeSelectNode[]
+  disabled?: boolean
+}
+```

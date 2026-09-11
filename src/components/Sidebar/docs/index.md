@@ -59,3 +59,16 @@ const model = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 侧栏内容。 |
+
+## 类型
+
+<h4 id="SidebarItem">SidebarItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface SidebarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
+  label: string
+  items?: SidebarItem[]
+}
+```

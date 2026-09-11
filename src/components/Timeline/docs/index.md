@@ -98,3 +98,21 @@ const events = [
 ## Events
 
 无自定义事件。
+
+## 类型
+
+<h4 id="TimelineEvent">TimelineEvent</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface TimelineEvent {
+  status?: string
+  content?: string
+  date?: string
+  /** Built-in IconName, or raw text glyph fallback. */
+  icon?: IconName | string
+  color?: string
+  severity?: TimelineSeverity
+}
+```
