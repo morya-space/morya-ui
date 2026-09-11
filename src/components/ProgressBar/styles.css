@@ -34,11 +34,11 @@
 }
 
 .m-progressbar--indeterminate .m-progressbar__value {
-    animation: wk-progressbar-indeterminate var(--m-motion-pulse) var(--m-motion-ease) infinite;
+    animation: m-progressbar-indeterminate var(--m-motion-pulse) var(--m-motion-ease) infinite;
     width: 40%;
 }
 
-@keyframes wk-progressbar-indeterminate {
+@keyframes m-progressbar-indeterminate {
     0% {
         transform: translateX(-120%);
     }
@@ -91,7 +91,7 @@
 }
 
 .m-progressbar--indeterminate.m-progressbar--circle .m-progressbar__circle-value {
-    animation: wk-progress-spinner-rotate var(--m-motion-spin) linear infinite;
+    animation: m-progress-spinner-rotate var(--m-motion-spin) linear infinite;
     stroke-dasharray: 80 180;
 }
 

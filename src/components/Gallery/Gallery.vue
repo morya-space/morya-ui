@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { GalleryImage, GalleryProps } from './types'
-import { computed, nextTick, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
@@ -8,6 +11,9 @@ import MIcon from '../Icon/Icon.vue'
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:activeIndex', value: number): void
@@ -69,11 +75,11 @@ watch(keyboard.activeIndex, (index) => {
 </script>
 
 <template>
-  <div class="m-gallery">
+  <div v-bind="rootAttrs" class="m-gallery">
     <div class="m-gallery__main">
       <button
         type="button"
-        class="m-gallery__nav wk-gallery__nav--prev"
+        class="m-gallery__nav m-gallery__nav--prev"
         :aria-label="locale.prevImage"
         :disabled="activeIndex <= 0"
         @click="prev"
@@ -96,7 +102,7 @@ watch(keyboard.activeIndex, (index) => {
       </figure>
       <button
         type="button"
-        class="m-gallery__nav wk-gallery__nav--next"
+        class="m-gallery__nav m-gallery__nav--next"
         :aria-label="locale.nextImage"
         :disabled="activeIndex >= images.length - 1"
         @click="next"

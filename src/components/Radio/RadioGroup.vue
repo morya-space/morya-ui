@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type {RadioGroupProps, RadioValue} from './types';
-import { computed, provide } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, provide, useAttrs } from 'vue'
 import { useMId } from '../../shared/useMId'
 import {   M_RADIO_GROUP_KEY } from './types'
 
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
   disabled: false,
   invalid: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{ (event: 'update:modelValue', value: RadioValue): void }>()
 const fallbackName = useMId('m-radio-group')
@@ -29,6 +35,7 @@ provide(M_RADIO_GROUP_KEY, {
 
 <template>
   <div
+    v-bind="rootAttrs"
     class="m-radio-group"
     role="radiogroup"
     :aria-label="label"

@@ -1,9 +1,11 @@
 import type { MTextareaAutosize } from '../../shared/componentDefaults'
+import type { MNativeInputProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MInputVariant, MSizeInput } from '../../shared/types'
 
 export type { MTextareaAutosize }
 
-export interface TextareaProps {
+export interface TextareaProps extends MNativeInputProps {
   modelValue?: string
   label?: string
   helpText?: string
@@ -30,6 +32,8 @@ export interface TextareaProps {
   clearable?: boolean
   maxlength?: number
   showCount?: boolean
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface TextareaEmits {

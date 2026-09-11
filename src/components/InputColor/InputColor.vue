@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { InputColorProps } from './types'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputColorProps>(), {
   modelValue: '#000000',
@@ -15,6 +18,8 @@ const props = withDefaults(defineProps<InputColorProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('InputColor', () => props.size)
 const autoFieldId = useMId('m-inputcolor')
@@ -52,7 +57,7 @@ function pickSwatch(color: string) {
 </script>
 
 <template>
-  <div class="m-inputcolor-field">
+  <div v-bind="rootAttrs" class="m-inputcolor-field">
     <label v-if="label" class="m-inputcolor-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <slot name="trigger">
@@ -66,12 +71,16 @@ function pickSwatch(color: string) {
             @input="onColorInput"
           >
           <input
+            v-bind="controlAttrs"
             :id="fieldId"
             class="m-inputcolor__text"
             type="text"
             :value="modelValue"
             :disabled="disabled"
-            placeholder="#000000"
+            :placeholder="placeholder ?? '#000000'"
+            :name="name"
+            :autocomplete="autocomplete"
+            :autofocus="autofocus || undefined"
             spellcheck="false"
             :aria-invalid="isInvalid || undefined"
             :aria-label="label ?? locale.colorHexValue"

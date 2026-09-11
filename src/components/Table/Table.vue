@@ -1,14 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { TableEmits, TableHeader, TableItem, TableProps } from './types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { HeaderForRender, TableEmitFn } from './hooks'
-import {
-  computed,
-  provide,
-  ref,
-  toRefs,
-  useSlots,
-  watch,
-} from 'vue'
+import { computed, provide, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { useControllable } from '../../shared/useControllable'
 import { useMLocale } from '../../locale'
@@ -105,6 +101,9 @@ const props = withDefaults(defineProps<TableProps>(), {
   ariaLabel: undefined,
   size: undefined,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<TableEmits>()
 const tableEmit: TableEmitFn = (event, ...args) => {
@@ -607,6 +606,7 @@ defineExpose({
 <template>
   <div
     ref="dataTable"
+    v-bind="rootAttrs"
     class="m-table"
     :class="tableRootClass"
     :aria-label="ariaLabel || undefined"
@@ -648,7 +648,7 @@ defineExpose({
             >
               <div
                 v-if="header.text === 'checkbox'"
-                class="m-table__cell-inner wk-table__cell-inner--selection"
+                class="m-table__cell-inner m-table__cell-inner--selection"
               >
                 <MCheckbox
                   :key="multipleSelectStatus"
@@ -661,7 +661,7 @@ defineExpose({
               </div>
               <div
                 v-else-if="header.value === 'radio'"
-                class="m-table__cell-inner wk-table__cell-inner--selection"
+                class="m-table__cell-inner m-table__cell-inner--selection"
               />
               <span v-else :class="headerInnerClass()">
                 <slot v-if="slots[`header-${header.value}`]" :name="`header-${header.value}`" v-bind="header" />
@@ -669,8 +669,8 @@ defineExpose({
                 <slot v-else-if="slots.header" name="header" v-bind="header" />
                 <span v-else class="m-table__header-text" :title="header.text">{{ header.text }}</span>
                 <span v-if="header.sortable" class="m-table__caret-wrapper">
-                  <i class="m-table__sort-caret wk-table__sort-caret--ascending" />
-                  <i class="m-table__sort-caret wk-table__sort-caret--descending" />
+                  <i class="m-table__sort-caret m-table__sort-caret--ascending" />
+                  <i class="m-table__sort-caret m-table__sort-caret--descending" />
                 </span>
                 <span v-if="multiSort && isMultiSorting(header.value)" class="m-table__multi-sort-number">
                   {{ getMultiSortNumber(header.value) }}

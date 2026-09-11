@@ -1,4 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
+import type { MNativeDateInputProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type DatePickerType = 'date' | 'daterange'
@@ -17,7 +19,7 @@ export interface DatePickerShortcut {
     | (() => DatePickerDateValue | [DatePickerDateValue, DatePickerDateValue])
 }
 
-export interface DatePickerProps {
+export interface DatePickerProps extends MNativeDateInputProps {
   modelValue?: DatePickerValue
   type?: DatePickerType
   label?: string
@@ -42,6 +44,8 @@ export interface DatePickerProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface DatePickerEmits {

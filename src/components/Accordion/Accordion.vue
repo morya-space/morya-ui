@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { AccordionProps } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 import { useControllable } from '../../shared/useControllable'
 
 const props = withDefaults(defineProps<AccordionProps>(), {
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<AccordionProps>(), {
   modelValue: undefined,
   defaultValue: undefined,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string | string[]): void
 }>()
@@ -61,7 +67,7 @@ function toggle(value: string, disabled?: boolean) {
 </script>
 
 <template>
-  <div class="m-accordion">
+  <div v-bind="rootAttrs" class="m-accordion">
     <div v-for="tab in tabs" :key="tab.value" class="m-accordion__tab">
       <button
         :id="headerId(tab.value)"

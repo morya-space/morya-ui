@@ -3,6 +3,7 @@ import type { InputNumberProps } from './types'
 import { computed, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import MIcon from '../Icon/Icon.vue'
@@ -27,6 +28,7 @@ const emit = defineEmits<{
   (event: 'change', value: number | null): void
 }>()
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
 const autoInputId = useMId('m-inputnumber')
@@ -145,12 +147,16 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="m-inputnumber-field" :class="{ 'm-inputnumber-field--fluid': fluid }">
+  <div
+    v-bind="rootAttrs"
+    class="m-inputnumber-field"
+    :class="{ 'm-inputnumber-field--fluid': fluid }"
+  >
     <label v-if="label" class="m-inputnumber-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <button
         v-if="showButtons && buttonPlacement === 'both'"
-        class="m-inputnumber__button wk-inputnumber__button--decrement"
+        class="m-inputnumber__button m-inputnumber__button--decrement"
         type="button"
         :aria-label="locale.decrease"
         :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
@@ -163,13 +169,16 @@ defineExpose({ focus, blur, select })
           <slot name="prefix" />
         </span>
         <input
-          v-bind="attrs"
+          v-bind="controlAttrs"
           :id="inputId"
           ref="inputElement"
           class="m-inputnumber__input"
           type="text"
           inputmode="decimal"
           :value="displayValue"
+          :placeholder="placeholder"
+          :name="name"
+          :autofocus="autofocus || undefined"
           :disabled="disabled"
           :readonly="readonly"
           :aria-invalid="isInvalid || undefined"
@@ -194,7 +203,7 @@ defineExpose({ focus, blur, select })
       </div>
       <div v-if="showButtons && buttonPlacement === 'right'" class="m-inputnumber__stack">
         <button
-          class="m-inputnumber__button wk-inputnumber__button--increment"
+          class="m-inputnumber__button m-inputnumber__button--increment"
           type="button"
           :aria-label="locale.increase"
           :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
@@ -203,7 +212,7 @@ defineExpose({ focus, blur, select })
           <MIcon name="plus" size="sm" />
         </button>
         <button
-          class="m-inputnumber__button wk-inputnumber__button--decrement"
+          class="m-inputnumber__button m-inputnumber__button--decrement"
           type="button"
           :aria-label="locale.decrease"
           :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
@@ -214,7 +223,7 @@ defineExpose({ focus, blur, select })
       </div>
       <button
         v-else-if="showButtons"
-        class="m-inputnumber__button wk-inputnumber__button--increment"
+        class="m-inputnumber__button m-inputnumber__button--increment"
         type="button"
         :aria-label="locale.increase"
         :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"

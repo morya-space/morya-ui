@@ -2,6 +2,7 @@
 import type { SwitchProps } from './types'
 import { computed, onMounted, useAttrs, useSlots } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useControlRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 
 defineOptions({ inheritAttrs: false })
@@ -15,6 +16,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: boolean): void }>()
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useControlRootParts(attrs, () => props.pt)
 const slots = useSlots()
 const autoInputId = useMId('m-switch')
 const resolvedInputId = computed(
@@ -47,9 +49,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <label :class="rootClass" :for="resolvedInputId">
+  <label v-bind="rootAttrs" :class="rootClass" :for="resolvedInputId">
     <input
-      v-bind="attrs"
+      v-bind="controlAttrs"
       :id="resolvedInputId"
       class="m-switch__input"
       type="checkbox"

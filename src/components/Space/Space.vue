@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type {CSSProperties} from 'vue';
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { SpaceProps } from './types'
-import { Comment, computed,  useSlots } from 'vue'
+import { Comment, computed, useAttrs, useSlots } from 'vue'
 import { useConfiguredGapSize } from '../../shared/config'
 import {
   resolveAlign,
@@ -20,6 +23,9 @@ const props = withDefaults(defineProps<SpaceProps>(), {
   wrapItem: true,
   wrap: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const slots = useSlots()
 const resolvedSize = useConfiguredGapSize('Space', () => props.size)
@@ -40,7 +46,7 @@ const rootStyle = computed((): CSSProperties => {
 </script>
 
 <template>
-  <div class="m-space" :style="rootStyle">
+  <div v-bind="rootAttrs" class="m-space" :style="rootStyle">
     <template v-if="!wrapItem">
       <slot />
     </template>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { DataViewEmits, DataViewProps } from './types'
-import { computed, ref, useSlots, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import MPagination from '../Pagination/Pagination.vue'
 import MProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
@@ -15,6 +18,9 @@ const props = withDefaults(defineProps<DataViewProps>(), {
   showSizePicker: false,
   pageSizes: () => [10, 20, 50, 100],
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<DataViewEmits>()
 
@@ -65,7 +71,7 @@ watch(
 </script>
 
 <template>
-  <div :class="rootClass">
+  <div v-bind="rootAttrs" :class="rootClass">
     <div v-if="slots.header" class="m-dataview__header">
       <slot name="header" />
     </div>

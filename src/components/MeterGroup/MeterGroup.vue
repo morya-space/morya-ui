@@ -1,10 +1,16 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { MeterGroupProps } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 
 const props = withDefaults(defineProps<MeterGroupProps>(), {
   max: undefined,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const totalMax = computed(() => {
   if (props.max !== undefined) return props.max
@@ -23,7 +29,7 @@ const segments = computed(() =>
 </script>
 
 <template>
-  <div class="m-metergroup">
+  <div v-bind="rootAttrs" class="m-metergroup">
     <div class="m-metergroup__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax" :aria-valuenow="totalValue">
       <div
         v-for="(segment, index) in segments"

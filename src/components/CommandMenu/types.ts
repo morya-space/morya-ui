@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
@@ -6,6 +7,7 @@ export interface CommandMenuItem extends Omit<MenuNodeBase, 'label'> {
 }
 
 export interface CommandMenuProps {
+  pt?: RootPassThrough
   model?: CommandMenuItem[]
   modelValue?: boolean
   placeholder?: string

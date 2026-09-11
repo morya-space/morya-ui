@@ -1,8 +1,10 @@
+import type { MNativeNumberInputProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type InputNumberButtonPlacement = 'both' | 'right'
 
-export interface InputNumberProps {
+export interface InputNumberProps extends MNativeNumberInputProps {
   modelValue?: number | null
   label?: string
   min?: number
@@ -23,6 +25,8 @@ export interface InputNumberProps {
   buttonPlacement?: InputNumberButtonPlacement
   clearable?: boolean
   id?: string
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface InputNumberEmits {

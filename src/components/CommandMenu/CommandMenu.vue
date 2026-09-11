@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { CommandMenuItem, CommandMenuProps } from './types'
-import { computed, nextTick, ref, toRef, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, ref, toRef, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
@@ -14,6 +17,9 @@ const props = withDefaults(defineProps<CommandMenuProps>(), {
   modelValue: false,
   teleport: true,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -95,7 +101,7 @@ watch(filtered, () => {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <Transition name="m-fade">
-      <div v-if="modelValue" class="m-commandmenu-backdrop" @click.self="close">
+      <div v-bind="rootAttrs" v-if="modelValue" class="m-commandmenu-backdrop" @click.self="close">
         <div
           ref="panelRef"
           class="m-commandmenu"

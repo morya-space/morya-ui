@@ -1,9 +1,11 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { ButtonSeverity } from '../Button/types'
 import type { DialogType } from '../Dialog/types'
 
 export interface ConfirmDialogProps {
+  pt?: RootPassThrough
   modelValue?: boolean
   header?: string
   message?: string

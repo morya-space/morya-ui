@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { MessageItem, MessageProps } from './types'
-import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
@@ -22,6 +25,9 @@ const props = withDefaults(defineProps<MessageProps>(), {
   teleport: true,
   auto: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const config = useMConfig()
 const locale = useMLocale()
@@ -86,6 +92,7 @@ function onMouseLeave(item: MessageItem) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
+      v-bind="rootAttrs"
       class="m-message-host"
       :class="`m-message-host--${resolvedPlacement}`"
       aria-live="polite"

@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import type { LayoutHeaderProps } from "./types";
-import { computed } from "vue";
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from "vue";
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 
-defineOptions({ name: "MLayoutHeader" });
+defineOptions({ name: "MLayoutHeader", inheritAttrs: false });
 
 const props = withDefaults(defineProps<LayoutHeaderProps>(), {
     bordered: true,
     inverted: false,
     position: "static",
-});
+})
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const rootStyle = useLayoutRegionStyle(() => ({
     height: props.height,
@@ -29,7 +32,7 @@ const rootClass = computed(() => [
 </script>
 
 <template>
-  <header :class="rootClass" :style="rootStyle">
+  <header v-bind="rootAttrs" :class="rootClass" :style="rootStyle">
     <slot />
   </header>
 </template>

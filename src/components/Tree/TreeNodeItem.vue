@@ -77,7 +77,7 @@ const customContent = computed(() =>
         <MIcon v-if="loading" name="loader" size="sm" />
         <MIcon v-else :name="expanded ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="m-tree__toggler wk-tree__toggler--leaf" aria-hidden="true" />
+      <span v-else class="m-tree__toggler m-tree__toggler--leaf" aria-hidden="true" />
 
       <MCheckbox
         v-if="tree.showCheckbox"

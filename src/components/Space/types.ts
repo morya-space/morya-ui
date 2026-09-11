@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { CSSProperties } from 'vue'
 import type { MFlexAlign, MFlexJustify, MGapSize } from '../../shared/gap'
 
@@ -6,6 +7,7 @@ export type SpaceJustify = MFlexJustify
 export type SpaceSize = MGapSize
 
 export interface SpaceProps {
+  pt?: RootPassThrough
   /** Cross-axis alignment. */
   align?: SpaceAlign
   /** Main-axis alignment. */

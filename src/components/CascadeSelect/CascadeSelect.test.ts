@@ -38,7 +38,7 @@ describe('muCascadeSelect', () => {
     const wrapper = mount(MCascadeSelect, {
       props: { options, modelValue: 'laptop', clearable: true, teleport: false },
     })
-    await wrapper.get('.m-select__control').trigger('mouseenter')
+    await wrapper.get('.m-cascadeselect__control').trigger('mouseenter')
     await wrapper.get('.m-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
     expect(wrapper.emitted('clear')).toHaveLength(1)

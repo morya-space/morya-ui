@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { TabItem, TabsProps } from './types'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMId } from '../../shared/useMId'
 import { useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
@@ -10,6 +13,9 @@ const props = withDefaults(defineProps<TabsProps>(), {
   closable: false,
   addable: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'change', value: string): void
@@ -92,7 +98,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 
 <template>
-  <div class="m-tabs" :class="`m-tabs--${type}`">
+  <div v-bind="rootAttrs" class="m-tabs" :class="`m-tabs--${type}`">
     <div class="m-tabs__bar">
       <button
         v-if="overflowed"

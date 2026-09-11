@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export type StepperOrientation = 'horizontal' | 'vertical'
 export type StepperStatus = 'wait' | 'process' | 'finish' | 'error'
 
@@ -9,6 +10,7 @@ export interface StepperStep {
 }
 
 export interface StepperProps {
+  pt?: RootPassThrough
   /** Active step index (0-based). */
   modelValue?: number
   steps: StepperStep[]

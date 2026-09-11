@@ -8,6 +8,7 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 
@@ -32,6 +33,7 @@ const emit = defineEmits<{
   (event: 'change', value: string): void
 }>()
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const defaults = useComponentDefaults('Textarea')
 const locale = useMLocale()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
@@ -156,14 +158,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="m-textarea-field" :class="{ 'm-textarea-field--fluid': resolvedFluid }">
+  <div
+    v-bind="rootAttrs"
+    class="m-textarea-field"
+    :class="{ 'm-textarea-field--fluid': resolvedFluid }"
+  >
     <label v-if="label" class="m-textarea-field__label" :for="textareaId">{{ label }}</label>
     <div
       class="m-textarea-field__control"
       :class="{ 'm-textarea-field__control--clearable': showClear }"
     >
       <textarea
-        v-bind="attrs"
+        v-bind="controlAttrs"
         :id="textareaId"
         ref="textareaElement"
         :class="textareaClass"
@@ -172,6 +178,10 @@ onMounted(() => {
         :disabled="disabled"
         :readonly="readonly"
         :maxlength="maxlength"
+        :placeholder="placeholder"
+        :name="name"
+        :autocomplete="autocomplete"
+        :autofocus="autofocus || undefined"
         :aria-invalid="isInvalid || undefined"
         :aria-describedby="describedBy"
         :style="{ resize: resizeStyle }"

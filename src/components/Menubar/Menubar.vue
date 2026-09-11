@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { MenubarItem, MenubarProps } from './types'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -13,6 +16,9 @@ const props = withDefaults(defineProps<MenubarProps>(), {
   selectedKey: null,
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:selectedKey', value: string | null): void
@@ -227,7 +233,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav ref="root" class="m-menubar" :aria-label="locale.menubar" @keydown="onTopKeydown">
+  <nav v-bind="rootAttrs" ref="root" class="m-menubar" :aria-label="locale.menubar" @keydown="onTopKeydown">
     <div v-if="$slots.start" class="m-menubar__start">
       <slot name="start" />
     </div>

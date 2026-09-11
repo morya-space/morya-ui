@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { SidebarItem, SidebarProps } from './types'
-import { computed, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import { resolveMenuIcon } from '../../shared/menu'
 import MIcon from '../Icon/Icon.vue'
@@ -9,6 +12,9 @@ const props = withDefaults(defineProps<SidebarProps>(), {
   model: () => [],
   collapsed: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const locale = useMLocale()
 
 const slots = useSlots()
@@ -28,7 +34,7 @@ function iconOf(item: SidebarItem) {
 </script>
 
 <template>
-  <nav :class="rootClass" :aria-label="locale.sidebar">
+  <nav v-bind="rootAttrs" :class="rootClass" :aria-label="locale.sidebar">
     <slot v-if="slots.default" />
     <ul v-else class="m-sidebar__list">
       <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="m-sidebar__item">
@@ -48,7 +54,7 @@ function iconOf(item: SidebarItem) {
           <li v-for="(child, childIndex) in item.items" :key="`${child.label}-${childIndex}`">
             <button
               type="button"
-              class="m-sidebar__link wk-sidebar__link--child"
+              class="m-sidebar__link m-sidebar__link--child"
               :disabled="child.disabled"
               @click="activate(child)"
             >

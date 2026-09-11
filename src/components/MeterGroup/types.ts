@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface MeterGroupItem {
   label: string
   value: number
@@ -5,6 +6,7 @@ export interface MeterGroupItem {
 }
 
 export interface MeterGroupProps {
+  pt?: RootPassThrough
   value: MeterGroupItem[]
   max?: number
 }

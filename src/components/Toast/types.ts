@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MRenderable } from '../../shared/content'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MToastSeverity } from '../../shared/types'
@@ -37,6 +38,7 @@ export type ToastOptions = Omit<ToastMessage, 'id' | 'summary'> & {
 export type ToastInput = MRenderable | ToastOptions
 
 export interface ToastProps {
+  pt?: RootPassThrough
   /**
    * Controlled message list. When omitted, the component binds to the shared
    * `toast` service queue (and claims the service host).

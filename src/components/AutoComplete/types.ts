@@ -1,4 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
+import type { MNativeInputProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export interface AutoCompleteOption {
@@ -8,7 +10,7 @@ export interface AutoCompleteOption {
 
 export type AutoCompleteSuggestion = string | AutoCompleteOption
 
-export interface AutoCompleteProps {
+export interface AutoCompleteProps extends MNativeInputProps {
   modelValue?: string
   suggestions?: AutoCompleteSuggestion[]
   id?: string
@@ -20,7 +22,6 @@ export interface AutoCompleteProps {
   emptyMessage?: string
   dropdown?: boolean
   disabled?: boolean
-  placeholder?: string
   size?: MSizeInput
   loading?: boolean
   clearable?: boolean
@@ -28,6 +29,8 @@ export interface AutoCompleteProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface AutoCompleteEmits {

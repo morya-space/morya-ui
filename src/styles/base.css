@@ -175,7 +175,7 @@
 }
 
 /* Shared loading spinner rotation (ProgressSpinner, Switch, ProgressBar, AutoComplete) */
-@keyframes wk-progress-spinner-rotate {
+@keyframes m-progress-spinner-rotate {
     100% {
         transform: rotate(360deg);
     }

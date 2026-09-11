@@ -29,7 +29,7 @@ function iconOf(item: ContextMenuItem) {
     >
       <button
         type="button"
-        class="m-contextmenu__item wk-contextmenu__item--parent"
+        class="m-contextmenu__item m-contextmenu__item--parent"
         role="menuitem"
         :disabled="item.disabled"
       >

@@ -1,3 +1,4 @@
+import type { ControlPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type SwitchSize = MSizeInput
@@ -22,6 +23,8 @@ export interface SwitchProps {
   invalid?: boolean
   disabled?: boolean
   required?: boolean
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: ControlPassThrough
 }
 
 export interface SwitchEmits {

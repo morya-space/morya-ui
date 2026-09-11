@@ -129,10 +129,10 @@
 }
 
 .m-badge--processing {
-    animation: wk-badge-pulse var(--m-motion-pulse) ease-in-out infinite;
+    animation: m-badge-pulse var(--m-motion-pulse) ease-in-out infinite;
 }
 
-@keyframes wk-badge-pulse {
+@keyframes m-badge-pulse {
     0%,
     100% {
         box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);

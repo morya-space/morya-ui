@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { DialogProps } from './types'
-import { computed, ref, toRef, useSlots, watch } from 'vue'
+import { computed, ref, toRef, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
@@ -21,6 +24,9 @@ const props = withDefaults(defineProps<DialogProps>(), {
   teleport: true,
   blockScroll: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'close'): void
@@ -166,6 +172,7 @@ defineExpose({
     <Transition name="m-dialog">
       <div
         v-if="modelValue"
+        v-bind="rootAttrs"
         class="m-dialog-backdrop"
         :class="[
           `m-dialog-backdrop--${position}`,

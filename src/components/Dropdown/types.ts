@@ -1,5 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type DropdownItemType = 'item' | 'group' | 'divider'
 export type DropdownTrigger = 'click' | 'hover'
@@ -28,6 +29,8 @@ export interface DropdownProps {
   teleport?: boolean
   /** 挂载目标，默认 `'body'`；`'self'` / `false` 表示就地渲染。 */
   appendTo?: MAppendTo
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface DropdownEmits {

@@ -6,6 +6,7 @@ export interface ListboxOption {
   disabled?: boolean
 }
 
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export interface ListboxProps {
@@ -18,6 +19,8 @@ export interface ListboxProps {
   filter?: boolean
   emptyMessage?: string
   listStyle?: string | Record<string, string>
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface ListboxEmits {

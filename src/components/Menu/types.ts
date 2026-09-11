@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MRouteLocationRaw } from '../../shared/optionalRouter'
 
@@ -22,6 +23,7 @@ export type MenuPopupPlacement =
   | 'top-end'
 
 export interface MenuProps {
+  pt?: RootPassThrough
   model: MenuItem[]
   /** Render as popup overlay when true. */
   popup?: boolean

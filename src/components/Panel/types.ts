@@ -1,8 +1,10 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type PanelSize = MSizeInput
 
 export interface PanelProps {
+  pt?: RootPassThrough
   header?: string
   toggleable?: boolean
   /** Collapsed state. Use with `v-model:collapsed`. */

@@ -1,7 +1,7 @@
 .m-progress-spinner {
     --m-progress-spinner-size: 2.5rem;
     --m-progress-spinner-color: var(--m-color-primary);
-    animation: wk-progress-spinner-rotate var(--m-motion-spin) linear infinite;
+    animation: m-progress-spinner-rotate var(--m-motion-spin) linear infinite;
     color: var(--m-progress-spinner-color);
     display: inline-block;
     height: var(--m-progress-spinner-size);
@@ -10,14 +10,14 @@
 }
 
 .m-progress-spinner__circle {
-    animation: wk-progress-spinner-dash var(--m-motion-spin-dash) ease-in-out infinite;
+    animation: m-progress-spinner-dash var(--m-motion-spin-dash) ease-in-out infinite;
     stroke: currentColor;
     stroke-dasharray: 90, 150;
     stroke-dashoffset: 0;
     stroke-linecap: round;
 }
 
-@keyframes wk-progress-spinner-dash {
+@keyframes m-progress-spinner-dash {
     0% {
         stroke-dasharray: 1, 150;
         stroke-dashoffset: 0;

@@ -1,4 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface VirtualScrollerProps {
+  pt?: RootPassThrough
   items: unknown[]
   itemSize: number
   /** Visible viewport height in px. */

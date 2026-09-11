@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type FormLabelPosition = 'top' | 'left'
@@ -69,6 +70,8 @@ export interface FormProps {
    * Also the default `trigger` for rules that omit one.
    */
   validateOn?: FormValidateTrigger | FormValidateTrigger[]
+  /** Pass-through attrs/classes/styles for the root `<form>` element. */
+  pt?: RootPassThrough
 }
 
 export interface FormItemProps {
@@ -94,4 +97,6 @@ export interface FormItemProps {
   labelAlign?: FormLabelAlign
   /** Override Form `labelWidth`. */
   labelWidth?: string | number
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }

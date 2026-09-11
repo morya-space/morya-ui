@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { CSSProperties, StyleValue } from 'vue'
 
 export type ScrollbarDirection = 'top' | 'bottom' | 'left' | 'right'
@@ -16,6 +17,7 @@ export type ScrollbarClassValue =
   | Array<string | Record<string, boolean> | null | undefined | false>
 
 export interface ScrollbarProps {
+  pt?: RootPassThrough
   /** Viewport height. */
   height?: string | number
   /** Max viewport height; content-sized up to this cap (disables default fill layout). */

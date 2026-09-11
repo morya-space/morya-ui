@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MRenderable } from '../../shared/content'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MToastSeverity } from '../../shared/types'
@@ -36,6 +37,7 @@ export type MessageOptions = Omit<MessageItem, 'id' | 'content'> & {
 export type MessageInput = MRenderable | MessageOptions
 
 export interface MessageProps {
+  pt?: RootPassThrough
   /** Controlled message list. When omitted, binds to the shared service queue. */
   messages?: MessageItem[]
   /** Teleport overlay. Defaults to `true`. */

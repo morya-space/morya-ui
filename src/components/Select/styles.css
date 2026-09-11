@@ -59,10 +59,10 @@
     flex: 0 0 auto;
     height: 0.85rem;
     width: 0.85rem;
-    animation: wk-select-spin var(--m-motion-spin-medium) linear infinite;
+    animation: m-select-spin var(--m-motion-spin-medium) linear infinite;
 }
 
-@keyframes wk-select-spin {
+@keyframes m-select-spin {
     to {
         transform: rotate(360deg);
     }

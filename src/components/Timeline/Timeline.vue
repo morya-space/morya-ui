@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
 import MIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
@@ -10,6 +13,9 @@ const props = withDefaults(defineProps<TimelineProps>(), {
   align: 'left',
   layout: 'vertical',
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const pendingLabel = computed(() => {
   if (props.pending === true) return ''
@@ -65,7 +71,7 @@ function isPending(index: number) {
 </script>
 
 <template>
-  <ul :class="rootClass">
+  <ul v-bind="rootAttrs" :class="rootClass">
     <li
       v-for="(event, index) in events"
       :key="index"

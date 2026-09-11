@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { PopoverProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMId } from '../../shared/useMId'
 import { useMConfig } from "../../shared/config";
 import {
@@ -17,7 +20,10 @@ const props = withDefaults(defineProps<PopoverProps>(), {
     showDelay: 0,
     hideDelay: 200,
     teleport: true,
-});
+})
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+;
 const emit = defineEmits<{
     (event: "update:modelValue", value: boolean): void;
     (event: "show"): void;
@@ -187,6 +193,7 @@ onBeforeUnmount(() => {
 <template>
     <span
         ref="root"
+        v-bind="rootAttrs"
         class="m-popover"
         @mouseenter="onTriggerEnter"
         @mouseleave="onTriggerLeave"

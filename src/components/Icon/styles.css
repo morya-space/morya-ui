@@ -28,10 +28,10 @@
 }
 
 .m-icon--spin svg {
-    animation: wk-icon-spin var(--m-motion-spin-fast) linear infinite;
+    animation: m-icon-spin var(--m-motion-spin-fast) linear infinite;
 }
 
-@keyframes wk-icon-spin {
+@keyframes m-icon-spin {
     to {
         transform: rotate(360deg);
     }

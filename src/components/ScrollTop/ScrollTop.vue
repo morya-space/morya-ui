@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { ScrollTopProps } from './types'
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -11,6 +14,9 @@ const props = withDefaults(defineProps<ScrollTopProps>(), {
   target: 'window',
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const config = useMConfig()
 const locale = useMLocale()
@@ -94,7 +100,7 @@ watch(
 <template>
   <span ref="anchor" class="m-scrolltop-anchor" aria-hidden="true">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <button
+      <button v-bind="rootAttrs"
         ref="root"
         type="button"
         :class="rootClass"

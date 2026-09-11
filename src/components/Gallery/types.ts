@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface GalleryImage {
   src: string
   alt?: string
@@ -5,6 +6,7 @@ export interface GalleryImage {
 }
 
 export interface GalleryProps {
+  pt?: RootPassThrough
   /** Plain urls or `{ src, alt, caption }` objects. */
   images: Array<string | GalleryImage>
   activeIndex?: number

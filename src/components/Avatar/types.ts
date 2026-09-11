@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { IconName } from '../Icon/types'
 
 export type AvatarShape = 'circle' | 'square'
@@ -22,6 +23,7 @@ export interface AvatarEmits {
 }
 
 export interface AvatarGroupProps {
+  pt?: RootPassThrough
   /** Max avatars to show. Extra count is summarized as `+N`. */
   max?: number
   /** Size applied to overflow rest marker. */

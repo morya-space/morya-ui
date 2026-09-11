@@ -10,11 +10,12 @@ import {
   provide,
   ref,
   toRef,
+  useAttrs,
   useSlots,
-  
   watch
 } from 'vue'
 import { resolveGapCSSValue } from '../../shared/gap'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { parseResponsiveValue } from '../../shared/responsive'
 import { flattenVNodes } from '../../shared/vnode'
 import {  M_GRID_ITEM_FLAG, M_GRID_KEY } from './types'
@@ -31,6 +32,8 @@ const props = withDefaults(defineProps<GridProps>(), {
   collapsed: false,
   collapsedRows: 1,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const slots = useSlots()
 const rootEl = ref<HTMLElement | null>(null)
@@ -240,7 +243,7 @@ provide(M_GRID_KEY, {
 </script>
 
 <template>
-  <div ref="rootEl" class="m-grid" :style="gridStyle" v-bind="$attrs">
+  <div ref="rootEl" v-bind="rootAttrs" class="m-grid" :style="gridStyle">
     <template v-if="layoutShiftDisabled">
       <slot />
     </template>

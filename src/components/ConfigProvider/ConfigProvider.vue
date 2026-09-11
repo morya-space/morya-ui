@@ -1,7 +1,11 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
+import type { RootPassThrough } from '../../shared/passThrough'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { MGlobalConfig } from '../../shared/config'
 import { applyTheme, getPreferredTheme } from '../../theme'
-import { computed, inject, onBeforeUnmount, toValue, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, toValue, useAttrs, watch } from 'vue'
 import {
   mergeMConfig,
   provideMConfig,
@@ -39,7 +43,11 @@ const props = defineProps<{
    * side effects to this wrapper only.
    */
   globalDensity?: boolean
+  pt?: RootPassThrough
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const parent = inject(M_CONFIG_KEY, null)
 
@@ -154,7 +162,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="m-config-provider" :data-m-density="densityAttr" :style="layerStyle">
+  <div v-bind="rootAttrs" class="m-config-provider" :data-m-density="densityAttr" :style="layerStyle">
     <slot />
   </div>
 </template>

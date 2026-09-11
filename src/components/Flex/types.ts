@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MFlexAlign, MFlexJustify, MGapSize } from '../../shared/gap'
 
 export type FlexAlign = MFlexAlign
@@ -5,6 +6,7 @@ export type FlexJustify = MFlexJustify
 export type FlexSize = MGapSize
 
 export interface FlexProps {
+  pt?: RootPassThrough
   /** Cross-axis alignment. */
   align?: FlexAlign
   /** Main-axis alignment. */

@@ -1,4 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
+import type { ControlPassThrough, RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type RadioValue = string | number | boolean
@@ -15,6 +16,8 @@ export interface RadioProps {
   invalid?: boolean
   disabled?: boolean
   required?: boolean
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: ControlPassThrough
 }
 
 export interface RadioEmits {
@@ -22,6 +25,7 @@ export interface RadioEmits {
 }
 
 export interface RadioGroupProps {
+  pt?: RootPassThrough
   modelValue?: RadioValue
   name?: string
   label?: string

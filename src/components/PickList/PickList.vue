@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { PickListProps } from './types'
-import { computed, ref } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
 
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<PickListProps>(), {
   source: () => [],
   target: () => [],
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
   (event: 'update:source', value: unknown[]): void
@@ -77,7 +83,7 @@ function moveAllToSource() {
 </script>
 
 <template>
-  <div class="m-picklist">
+  <div v-bind="rootAttrs" class="m-picklist">
     <div class="m-picklist__listbox">
       <div class="m-picklist__header">
         {{ sourceTitle }}

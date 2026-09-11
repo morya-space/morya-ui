@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from "vue";
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutExpose, LayoutProps } from "./types";
-import { computed, provide, ref } from "vue";
+import { computed, provide, ref, useAttrs } from "vue";
 import { toCssLength } from "../../shared/responsive";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { M_LAYOUT_KEY } from "./context";
 
-defineOptions({ name: "MLayout" });
+defineOptions({ name: "MLayout", inheritAttrs: false });
 
 const props = withDefaults(defineProps<LayoutProps>(), {
     embedded: false,
     position: "static",
     hasSider: false,
     siderPlacement: "left",
-});
+})
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
@@ -68,7 +71,7 @@ defineExpose<LayoutExpose>({ scrollTo });
 </script>
 
 <template>
-  <div :class="rootClass" :style="rootStyle">
+  <div v-bind="rootAttrs" :class="rootClass" :style="rootStyle">
     <div
       ref="scrollEl"
       :class="scrollClass"

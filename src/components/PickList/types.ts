@@ -1,4 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface PickListProps {
+  pt?: RootPassThrough
   source?: unknown[]
   target?: unknown[]
   dataKey?: string

@@ -18,7 +18,7 @@ describe('muAccordion', () => {
     await headers[0]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['one']])
     await wrapper.setProps({ modelValue: 'one' })
-    expect(wrapper.get('#wk-accordion-panel-one').isVisible()).toBe(true)
+    expect(wrapper.get('#m-accordion-panel-one').isVisible()).toBe(true)
     expect(headers[0]!.attributes('aria-expanded')).toBe('true')
     await headers[0]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([''])
@@ -51,7 +51,7 @@ describe('muAccordion', () => {
       props: { tabs, defaultValue: 'one' },
       slots: { one: '<p>Panel one</p>', two: '<p>Panel two</p>' },
     })
-    expect(wrapper.get('#wk-accordion-panel-one').isVisible()).toBe(true)
+    expect(wrapper.get('#m-accordion-panel-one').isVisible()).toBe(true)
     await wrapper.findAll('.m-accordion__header')[0]!.trigger('click')
     expect(wrapper.findAll('.m-accordion__header')[0]!.attributes('aria-expanded')).toBe('false')
     expect(wrapper.emitted('update:modelValue')).toEqual([['']])

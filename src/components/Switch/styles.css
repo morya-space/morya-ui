@@ -96,7 +96,7 @@
 }
 
 .m-switch__spinner {
-    animation: wk-progress-spinner-rotate var(--m-motion-spin-fast) linear infinite;
+    animation: m-progress-spinner-rotate var(--m-motion-spin-fast) linear infinite;
     border: 1.5px solid
         color-mix(in srgb, var(--m-color-primary) 40%, transparent);
     border-radius: 50%;

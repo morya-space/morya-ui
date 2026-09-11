@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { InputOtpProps } from './types'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useRootParts } from '../../shared/useComponentAttrs'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputOtpProps>(), {
   modelValue: '',
@@ -16,6 +19,8 @@ const props = withDefaults(defineProps<InputOtpProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
 const inputs = ref<(HTMLInputElement | null)[]>([])
@@ -113,7 +118,14 @@ watch(
 </script>
 
 <template>
-  <div :class="rootClass" :style="rootStyle" role="group" :aria-label="label ?? locale.otpGroup" @paste="onPaste">
+  <div
+    v-bind="rootAttrs"
+    :class="rootClass"
+    :style="rootStyle"
+    role="group"
+    :aria-label="label ?? locale.otpGroup"
+    @paste="onPaste"
+  >
     <input
       v-for="(char, index) in chars"
       :key="index"

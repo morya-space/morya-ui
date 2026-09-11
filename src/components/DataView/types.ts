@@ -1,6 +1,8 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export type DataViewLayout = 'list' | 'grid'
 
 export interface DataViewProps {
+  pt?: RootPassThrough
   value?: unknown[]
   layout?: DataViewLayout
   paginator?: boolean

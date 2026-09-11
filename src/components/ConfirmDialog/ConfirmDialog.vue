@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { ConfirmDialogProps } from './types'
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, toRef, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
@@ -20,6 +23,9 @@ const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   blockScroll: true,
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -117,25 +123,26 @@ useModalOverlay({
     <Transition name="m-dialog">
       <div
         v-if="modelValue"
-        class="m-dialog-backdrop wk-dialog-backdrop--center wk-dialog-backdrop--modal wk-confirmdialog-backdrop"
+        v-bind="rootAttrs"
+        class="m-dialog-backdrop m-dialog-backdrop--center m-dialog-backdrop--modal"
         :style="zoomStyle"
       >
         <div class="m-dialog-zoom" @click.self="onOutsideClick">
           <section
             ref="dialogElement"
-            class="m-dialog wk-confirmdialog"
+            class="m-dialog m-confirmdialog"
             :class="{ [`m-dialog--${resolvedType}`]: resolvedType }"
             role="alertdialog"
             aria-modal="true"
             :aria-label="title"
             tabindex="-1"
           >
-            <header class="m-dialog__header wk-confirmdialog__header">
+            <header class="m-dialog__header">
               <slot name="header">
                 <h2>{{ title }}</h2>
               </slot>
             </header>
-            <div class="m-dialog__body wk-confirmdialog__message">
+            <div class="m-dialog__body m-confirmdialog__message">
               <span v-if="typeIcon" class="m-dialog__type-icon" aria-hidden="true">
                 <MIcon :name="typeIcon" size="sm" />
               </span>
@@ -143,7 +150,7 @@ useModalOverlay({
                 <slot>{{ message }}</slot>
               </div>
             </div>
-            <footer class="m-dialog__footer wk-confirmdialog__footer">
+            <footer class="m-dialog__footer m-confirmdialog__footer">
               <slot name="footer">
                 <MButton
                   :label="rejectText"

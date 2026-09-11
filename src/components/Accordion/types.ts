@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface AccordionTab {
   value: string
   header: string
@@ -5,6 +6,7 @@ export interface AccordionTab {
 }
 
 export interface AccordionProps {
+  pt?: RootPassThrough
   /** Active tab key(s). Use with `v-model`. */
   modelValue?: string | string[]
   /** Uncontrolled initial active key(s) when `modelValue` is omitted. */

@@ -10,6 +10,7 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { resolveIconSizeFromClass } from '../../shared/types'
 import MIcon from '../Icon/Icon.vue'
@@ -37,6 +38,7 @@ const emit = defineEmits<{
   (event: 'change', value: string): void
 }>()
 const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const defaults = useComponentDefaults('InputPassword')
 const locale = useMLocale()
 const unmasked = ref(false)
@@ -194,11 +196,15 @@ defineExpose({ focus, blur, select })
 </script>
 
 <template>
-  <div class="m-password-field" :class="{ 'm-password-field--fluid': resolvedFluid }">
+  <div
+    v-bind="rootAttrs"
+    class="m-password-field"
+    :class="{ 'm-password-field--fluid': resolvedFluid }"
+  >
     <label v-if="label" class="m-password-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <input
-        v-bind="attrs"
+        v-bind="controlAttrs"
         :id="inputId"
         ref="inputElement"
         class="m-password__input"
@@ -207,9 +213,12 @@ defineExpose({ focus, blur, select })
         :disabled="disabled"
         :readonly="readonly"
         :maxlength="maxlength"
+        :placeholder="placeholder"
+        :name="name"
+        :autocomplete="autocomplete ?? 'current-password'"
+        :autofocus="autofocus || undefined"
         :aria-invalid="invalid || undefined"
         :aria-describedby="describedBy"
-        autocomplete="current-password"
         @input="updateValue"
         @focus="emit('focus', $event)"
         @blur="emit('blur', $event)"

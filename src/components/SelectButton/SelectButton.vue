@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
-import { computed, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, useAttrs, watch } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 
@@ -9,6 +12,9 @@ const props = withDefaults(defineProps<SelectButtonProps>(), {
   disabled: false,
   invalid: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: SelectButtonValue | SelectButtonValue[] | undefined): void
 }>()
@@ -76,7 +82,7 @@ watch(keyboard.activeIndex, (index) => {
 </script>
 
 <template>
-  <div ref="root" :class="rootClass" role="group" :aria-label="label" @keydown="onKeydown">
+  <div v-bind="rootAttrs" ref="root" :class="rootClass" role="group" :aria-label="label" @keydown="onKeydown">
     <button
       v-for="(option, index) in options"
       :key="String(option.value)"

@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface TreeNode {
   key: string
   label: string
@@ -15,6 +16,7 @@ export type TreeSelectionMode = 'single' | 'multiple'
 export type TreeCheckStrategy = 'all' | 'parent' | 'child'
 
 export interface TreeProps {
+  pt?: RootPassThrough
   value: TreeNode[]
   selectionKeys?: TreeSelectionKeys
   modelValue?: string | null

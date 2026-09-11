@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { ToastMessage, ToastProps } from './types'
-import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, onBeforeUnmount, onMounted, useAttrs, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { plainTextOf } from '../../shared/content'
@@ -22,6 +25,9 @@ const props = withDefaults(defineProps<ToastProps>(), {
   teleport: true,
   auto: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{ (event: 'close', message: ToastMessage): void }>()
 const config = useMConfig()
 const locale = useMLocale()
@@ -77,6 +83,7 @@ function onMouseLeave(message: ToastMessage) {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <div
+      v-bind="rootAttrs"
       class="m-toast"
       :class="`m-toast--${resolvedPosition}`"
       aria-live="polite"

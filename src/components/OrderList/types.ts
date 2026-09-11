@@ -1,4 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 export interface OrderListProps {
+  pt?: RootPassThrough
   modelValue?: unknown[]
   dataKey?: string
   listStyle?: string | Record<string, string>

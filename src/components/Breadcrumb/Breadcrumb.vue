@@ -1,11 +1,17 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { BreadcrumbItem, BreadcrumbProps } from './types'
-import { computed } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: '/',
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const locale = useMLocale()
 
 const items = computed(() => {
@@ -22,7 +28,7 @@ const items = computed(() => {
 </script>
 
 <template>
-  <nav class="m-breadcrumb" :aria-label="locale.breadcrumb">
+  <nav v-bind="rootAttrs" class="m-breadcrumb" :aria-label="locale.breadcrumb">
     <ol class="m-breadcrumb__list">
       <li v-for="(item, index) in items" :key="`${item.label}-${index}`" class="m-breadcrumb__item">
         <slot

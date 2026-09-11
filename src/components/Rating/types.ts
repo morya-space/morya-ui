@@ -1,3 +1,4 @@
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export interface RatingProps {
@@ -21,6 +22,8 @@ export interface RatingProps {
   allowHalf?: boolean
   /** Accessible label for the slider root. Falls back to the locale string. */
   ariaLabel?: string
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface RatingEmits {

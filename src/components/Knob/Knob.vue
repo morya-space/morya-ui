@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { KnobProps } from './types'
-import { computed, onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<KnobProps>(), {
   modelValue: 0,
@@ -18,6 +21,8 @@ const props = withDefaults(defineProps<KnobProps>(), {
 const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const svgRef = ref<SVGSVGElement | null>(null)
 const dragging = ref(false)
@@ -113,6 +118,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
+    v-bind="rootAttrs"
     :class="rootClass"
     role="slider"
     :aria-valuemin="min"

@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { TieredMenuItem, TieredMenuProps } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -13,6 +16,9 @@ const props = withDefaults(defineProps<TieredMenuProps>(), {
   placement: 'bottom-start',
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -118,6 +124,7 @@ onBeforeUnmount(() => {
   <div
     v-if="!popup"
     ref="root"
+    v-bind="rootAttrs"
     class="m-tieredmenu"
     role="menu"
   >
@@ -169,7 +176,8 @@ onBeforeUnmount(() => {
       <div
         v-if="modelValue"
         ref="root"
-        class="m-tieredmenu wk-tieredmenu--popup"
+        v-bind="rootAttrs"
+        class="m-tieredmenu m-tieredmenu--popup"
         :class="{ 'm-tieredmenu--teleported': teleported }"
         :style="teleported ? popupStyle : undefined"
         role="menu"

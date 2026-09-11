@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from "vue";
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutExpose, LayoutSiderProps } from "./types";
-import { computed, inject, ref } from "vue";
+import { computed, inject, ref, useAttrs } from "vue";
 import { useMLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
 import MIcon from "../Icon/Icon.vue";
@@ -10,7 +11,7 @@ import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
 import { M_LAYOUT_KEY } from "./context";
 import { resolveLayoutTrigger } from "./utils";
 
-defineOptions({ name: "MLayoutSider" });
+defineOptions({ name: "MLayoutSider", inheritAttrs: false });
 
 const props = withDefaults(defineProps<LayoutSiderProps>(), {
     bordered: false,
@@ -20,7 +21,9 @@ const props = withDefaults(defineProps<LayoutSiderProps>(), {
     collapseMode: "transform",
     showCollapsedContent: true,
     showTrigger: false,
-});
+})
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const emit = defineEmits<{
     (event: "update:collapsed", value: boolean): void;
@@ -148,7 +151,7 @@ defineExpose<LayoutExpose>({ scrollTo });
 </script>
 
 <template>
-  <aside
+  <aside v-bind="rootAttrs"
     :class="rootClass"
     :style="rootStyle"
     @transitionend="onTransitionEnd"

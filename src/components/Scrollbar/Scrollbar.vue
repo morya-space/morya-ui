@@ -1,26 +1,14 @@
 <script setup lang="ts">
 import type {CSSProperties, StyleValue} from 'vue';
+import { useRootParts } from '../../shared/useComponentAttrs'
 import type { ScrollbarDirection, ScrollbarEmits, ScrollbarProps } from './types'
-import {
-  computed,
-  
-  nextTick,
-  onActivated,
-  onBeforeUnmount,
-  onMounted,
-  onUpdated,
-  provide,
-  reactive,
-  ref,
-  
-  watch
-} from 'vue'
+import { computed, nextTick, onActivated, onBeforeUnmount, onMounted, onUpdated, provide, reactive, ref, useAttrs, watch } from 'vue'
 import { scrollbarContextKey } from './constants'
 import { useMId } from '../../shared/useMId'
 import Thumb from './Thumb.vue'
 import { addUnit, GAP, isNumber, isObject } from './util'
 
-defineOptions({ name: 'MScrollbar' })
+defineOptions({ name: 'MScrollbar', inheritAttrs: false })
 
 const props = withDefaults(defineProps<ScrollbarProps>(), {
   distance: 0,
@@ -38,6 +26,9 @@ const props = withDefaults(defineProps<ScrollbarProps>(), {
   tabindex: undefined,
   trigger: 'hover',
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<ScrollbarEmits>()
 
@@ -332,7 +323,7 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="scrollbarRef" :class="rootClassList" :style="resolvedRootStyle">
+  <div v-bind="rootAttrs" ref="scrollbarRef" :class="rootClassList" :style="resolvedRootStyle">
     <div
       ref="wrapRef"
       :class="wrapClassList"

@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
 
@@ -11,6 +12,7 @@ export interface ContextMenuPosition {
 }
 
 export interface ContextMenuProps {
+  pt?: RootPassThrough
   model: ContextMenuItem[]
   modelValue?: boolean
   position?: ContextMenuPosition

@@ -1,11 +1,13 @@
 import type { Component } from 'vue'
 import type { MShowPasswordOn } from '../../shared/componentDefaults'
+import type { MNativeInputProps } from '../../shared/nativeControlProps'
+import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MInputVariant, MSizeInput } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
 export type { MShowPasswordOn }
 
-export interface InputPasswordProps {
+export interface InputPasswordProps extends MNativeInputProps {
   modelValue?: string
   label?: string
   disabled?: boolean
@@ -31,6 +33,8 @@ export interface InputPasswordProps {
   /** Icon when the value is visible (click to hide). Built-in `MIcon` name or a Vue component. */
   hideIcon?: IconName | Component
   id?: string
+  /** Pass-through attrs/classes/styles per DOM part. */
+  pt?: FieldPassThrough
 }
 
 export interface InputPasswordEmits {

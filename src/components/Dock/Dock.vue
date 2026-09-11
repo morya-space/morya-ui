@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { DockItem, DockProps } from './types'
-import { computed, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, useAttrs, useSlots } from 'vue'
 import { resolveMenuIcon } from '../../shared/menu'
 import MIcon from '../Icon/Icon.vue'
 
@@ -8,6 +11,9 @@ const props = withDefaults(defineProps<DockProps>(), {
   model: () => [],
   position: 'bottom',
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const slots = useSlots()
 const rootClass = computed(() => ['m-dock', `m-dock--${props.position}`])
@@ -23,7 +29,7 @@ function iconOf(item: DockItem) {
 </script>
 
 <template>
-  <nav :class="rootClass" aria-label="Dock">
+  <nav v-bind="rootAttrs" :class="rootClass" aria-label="Dock">
     <ul class="m-dock__list">
       <slot v-if="slots.default" />
       <template v-else>

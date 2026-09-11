@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { TreeCheckedKeys } from '../Tree/types'
 import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, useSlots, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -19,6 +20,8 @@ import {
 } from '../Tree/checkStrategy'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 import MIcon from '../Icon/Icon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
   modelValue: null,
@@ -42,6 +45,8 @@ const emit = defineEmits<{
   (event: 'clear'): void
 }>()
 
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const slots = useSlots()
 const config = useMConfig()
 const locale = useMLocale()
@@ -340,7 +345,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" class="m-select-field">
+  <div ref="root" v-bind="rootAttrs" class="m-select-field">
     <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div
       class="m-treeselect"
@@ -355,13 +360,14 @@ onBeforeUnmount(() => {
       ]"
     >
     <div
-      class="m-treeselect__control wk-select__control"
+      class="m-treeselect__control m-select__control"
       :class="{
         'm-select__control--clearable': showClearButton,
         'm-select__control--open': open,
       }"
     >
       <div
+        v-bind="controlAttrs"
         :id="fieldId"
         ref="trigger"
         class="m-treeselect__trigger"
@@ -389,7 +395,7 @@ onBeforeUnmount(() => {
               <MIcon name="close" size="sm" />
             </button>
           </span>
-          <span v-if="hiddenTagCount" class="m-select__tag wk-select__tag--more">
+          <span v-if="hiddenTagCount" class="m-select__tag m-select__tag--more">
             {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
           </span>
         </div>

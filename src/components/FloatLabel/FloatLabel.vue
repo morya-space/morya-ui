@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import type { FloatLabelProps } from './types'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<FloatLabelProps>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const root = ref<HTMLElement | null>(null)
 const inputId = useMId()
@@ -20,7 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <span ref="root" class="m-float-label">
+  <span ref="root" v-bind="rootAttrs" class="m-float-label">
     <slot />
     <label v-if="props.label || $slots.label" :for="labelFor">
       <slot name="label">{{ props.label }}</slot>

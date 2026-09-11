@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { CarouselProps } from './types'
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
 
@@ -12,6 +15,9 @@ const props = withDefaults(defineProps<CarouselProps>(), {
   showArrows: true,
   showIndicators: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const emit = defineEmits<{
   (event: 'update:page', value: number): void
@@ -124,6 +130,7 @@ onBeforeUnmount(stopAutoplay)
 
 <template>
   <div
+    v-bind="rootAttrs"
     class="m-carousel"
     @keydown="onKeydown"
     @mouseenter="stopAutoplay"
@@ -134,7 +141,7 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="m-carousel__nav wk-carousel__nav--prev"
+      class="m-carousel__nav m-carousel__nav--prev"
       :aria-label="locale.prev"
       :disabled="!circular && page <= 0"
       @click="prev"
@@ -175,7 +182,7 @@ onBeforeUnmount(stopAutoplay)
     <button
       v-if="showArrows"
       type="button"
-      class="m-carousel__nav wk-carousel__nav--next"
+      class="m-carousel__nav m-carousel__nav--next"
       :aria-label="locale.next"
       :disabled="!circular && page >= maxPage"
       @click="next"

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { RatingProps } from './types'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import MIcon from '../Icon/Icon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<RatingProps>(), {
   modelValue: 0,
@@ -19,6 +22,8 @@ const props = withDefaults(defineProps<RatingProps>(), {
   ariaLabel: undefined,
 })
 const emit = defineEmits<{ (event: 'update:modelValue', value: number): void }>()
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('Rating', () => props.size)
 const fieldId = useMId('m-rating')
@@ -86,9 +91,10 @@ function onSliderKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="m-rating-field">
+  <div v-bind="rootAttrs" class="m-rating-field">
     <label v-if="label" class="m-rating-field__label" :id="`${fieldId}-label`">{{ label }}</label>
     <div
+      v-bind="controlAttrs"
       :class="rootClass"
       role="slider"
       :aria-valuenow="modelValue"

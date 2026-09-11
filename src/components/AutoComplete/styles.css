@@ -137,7 +137,7 @@
 }
 
 .m-autocomplete__spinner {
-    animation: wk-progress-spinner-rotate var(--m-motion-spin-fast) linear infinite;
+    animation: m-progress-spinner-rotate var(--m-motion-spin-fast) linear infinite;
     border: 2px solid
         color-mix(in srgb, var(--m-color-primary) 30%, transparent);
     border-radius: var(--m-radius-full);

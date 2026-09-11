@@ -6,13 +6,16 @@ import type {
   DatePickerShortcut,
   DatePickerValue,
 } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import MIcon from '../Icon/Icon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
@@ -30,6 +33,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   teleport: true,
 })
 const emit = defineEmits<DatePickerEmits>()
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 
 const config = useMConfig()
 const locale = useMLocale()
@@ -395,11 +400,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" :class="rootClass">
+  <div ref="root" v-bind="rootAttrs" :class="rootClass">
     <label v-if="label" class="m-datepicker__label" :for="fieldId">{{ label }}</label>
     <div ref="triggerEl" class="m-datepicker__control">
       <slot name="trigger" :value="displayValue" :open="open">
         <input
+          v-bind="controlAttrs"
           :id="fieldId"
           ref="inputEl"
           class="m-datepicker__input"
@@ -408,6 +414,9 @@ onBeforeUnmount(() => {
           readonly
           :value="displayValue"
           :placeholder="placeholderText"
+          :name="name"
+          :autocomplete="autocomplete"
+          :autofocus="autofocus || undefined"
           :disabled="disabled"
           :aria-invalid="isInvalid || undefined"
           :aria-expanded="open"

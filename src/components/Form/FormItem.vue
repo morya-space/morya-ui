@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
-import { computed, inject, onBeforeUnmount, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, useAttrs, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useMLocale } from '../../locale'
 import { M_FORM_ERRORS_KEY, M_FORM_KEY } from './context'
@@ -11,10 +12,14 @@ import {
   toCssSize,
 } from './rules'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<FormItemProps>(), {
   required: false,
   invalid: false,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const form = inject(M_FORM_KEY, null)
 const formErrors = inject(M_FORM_ERRORS_KEY, null)
@@ -117,7 +122,13 @@ function onInput() {
 </script>
 
 <template>
-  <div :class="rootClass" @focusout="onFocusOut" @change="onChange" @input="onInput">
+  <div
+    v-bind="rootAttrs"
+    :class="rootClass"
+    @focusout="onFocusOut"
+    @change="onChange"
+    @input="onInput"
+  >
     <label
       v-if="label"
       class="m-form-item__label"

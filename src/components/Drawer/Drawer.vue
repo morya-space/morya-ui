@@ -1,6 +1,9 @@
 <script setup lang="ts">
+
+defineOptions({ inheritAttrs: false })
 import type { DrawerProps } from './types'
-import { computed, ref, toRef } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { computed, ref, toRef, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
@@ -18,6 +21,9 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   blockScroll: true,
   teleport: true,
 })
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'close'): void
@@ -100,6 +106,7 @@ useModalOverlay({
     <Transition name="m-drawer" @after-leave="emit('after-leave')">
       <div
         v-if="modelValue"
+        v-bind="rootAttrs"
         class="m-drawer-backdrop"
         :class="{ 'm-drawer-backdrop--modal': modal }"
         @click.self="onOutsideClick"
