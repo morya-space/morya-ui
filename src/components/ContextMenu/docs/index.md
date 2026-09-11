@@ -19,11 +19,6 @@ import { useContextMenu, MContextMenu } from 'morya-ui'
 ```vue preview
 <script setup lang="ts">
 import { MContextMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const visible = ref(false)
-const position = ref({ x: 0, y: 0 })
-const menu = ref<{ show: (e: MouseEvent) => void } | null>(null)
 
 const model = [
   { label: '复制' },
@@ -31,25 +26,16 @@ const model = [
   { separator: true },
   { label: '删除', disabled: true },
 ]
-
-function onContext(event: MouseEvent) {
-  menu.value?.show(event)
-}
 </script>
 
 <template>
-  <div
-    style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
-    @contextmenu.prevent="onContext"
-  >
-    右键此处打开菜单
-  </div>
-  <MContextMenu
-    ref="menu"
-    v-model="visible"
-    v-model:position="position"
-    :model="model"
-  />
+  <MContextMenu :model="model">
+    <div
+      style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
+    >
+      右键此处打开菜单
+    </div>
+  </MContextMenu>
 </template>
 ```
 
@@ -110,3 +96,15 @@ const model = [
 | 插槽名 | 说明 |
 | --- | --- |
 | `default` | 触发元素（非 popup 模式）。 |
+
+## 类型
+
+<h4 id="ContextMenuItem">ContextMenuItem</h4>
+
+完整定义见源码 `types.ts`。
+
+```ts
+interface ContextMenuItem extends MenuNodeBase {
+  items?: ContextMenuItem[]
+}
+```

@@ -8,6 +8,7 @@ export function useContextMenu() {
 
   function show(event: MouseEvent | ContextMenuPosition) {
     if ('preventDefault' in event) event.preventDefault()
+    if ('stopPropagation' in event) event.stopPropagation()
     const next =
       'clientX' in event ? { x: event.clientX, y: event.clientY } : { x: event.x, y: event.y }
     position.value = next
