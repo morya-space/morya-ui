@@ -82,8 +82,8 @@ function paddingStyle(depth: number) {
   return ctx.paddingStyle(depth)
 }
 
-function arrowIcon(item: MenuItem, index: number) {
-  return isSubmenuExpanded(item, index) ? 'chevron-down' : 'chevron-right'
+function arrowExpanded(item: MenuItem, index: number) {
+  return isSubmenuExpanded(item, index)
 }
 
 function usesRouterLink(item: MenuItem) {
@@ -172,8 +172,12 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
             <MIcon :name="iconOf(item)!" size="sm" />
           </span>
           <span class="m-menu__label">{{ item.label }}</span>
-          <span class="m-menu__arrow" aria-hidden="true">
-            <MIcon :name="arrowIcon(item, index)" size="sm" />
+          <span
+            class="m-menu__arrow"
+            :class="{ 'm-menu__arrow--expanded': arrowExpanded(item, index) }"
+            aria-hidden="true"
+          >
+            <MIcon name="chevron-right" size="sm" />
           </span>
         </div>
 
@@ -183,11 +187,13 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
             class="m-menu__submenu"
             role="group"
           >
-            <MenuNodes
-              :items="item.items"
-              :depth="depth + 1"
-              :prefix="`${prefix}-${index}`"
-            />
+            <div class="m-menu__submenu-inner">
+              <MenuNodes
+                :items="item.items"
+                :depth="depth + 1"
+                :prefix="`${prefix}-${index}`"
+              />
+            </div>
           </div>
         </Transition>
       </template>
