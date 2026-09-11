@@ -2,7 +2,7 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-开源项目 `morya-ui` 的维护者文档。对外说明见根目录 [README](../README.zh-CN.md) · [文档站](https://morya-ui.github.io/morya-ui/)
+开源项目 `morya-ui` 的维护者文档。对外说明见根目录 [README](../README.zh-CN.md) · [文档站](https://morya-space.github.io/morya-ui/)
 
 | 文档 | 说明 |
 | --- | --- |

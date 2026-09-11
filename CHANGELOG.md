@@ -40,7 +40,7 @@
 - 交互式文档站（Markdown + `vue preview` 实时示例）
 - 组件目录、指南（快速上手、主题、配置、SSR、无障碍、MCP）
 - 亮/暗主题切换、中英文切换、全局搜索（CommandMenu）
-- 部署至 GitHub Pages：https://morya-ui.github.io/morya-ui/
+- 部署至 GitHub Pages：https://morya-space.github.io/morya-ui/
 
 ### 生态包
 

@@ -8,7 +8,7 @@ description: What Morya UI is, who it is for, and how to get started.
 
 **Morya UI** (`morya-ui`) is an **open-source** Vue 3 component library with design tokens, light/dark themes, i18n, and interactive documentation.
 
-- **Docs**: [morya-ui.github.io/morya-ui](https://morya-ui.github.io/morya-ui/)
+- **Docs**: [morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/)
 - **Source**: [GitHub](https://github.com/morya-space/morya-ui)
 - **npm**: [`morya-ui`](https://www.npmjs.com/package/morya-ui)
 

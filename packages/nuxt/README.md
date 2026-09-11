@@ -8,7 +8,7 @@ Nuxt 3 module for [morya-ui](https://www.npmjs.com/package/morya-ui).
 - Transpiles `morya-ui` for SSR
 - Client plugin: `createMoryaUI({ components: false })` for toast/message overlay context
 
-Component auto-import remains via `MoryaUIResolver` + `unplugin-vue-components` (see [SSR guide](https://morya-ui.github.io/morya-ui/docs/ssr)).
+Component auto-import remains via `MoryaUIResolver` + `unplugin-vue-components` (see [SSR guide](https://morya-space.github.io/morya-ui/docs/ssr)).
 
 ## Setup
 

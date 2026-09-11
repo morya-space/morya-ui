@@ -6,7 +6,7 @@ description: Install the package, import styles, and render the first component.
 
 # Quick start
 
-> Live docs: [morya-ui.github.io/morya-ui](https://morya-ui.github.io/morya-ui/) · Source: [GitHub](https://github.com/morya-space/morya-ui) · npm: [`morya-ui`](https://www.npmjs.com/package/morya-ui)
+> Live docs: [morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/) · Source: [GitHub](https://github.com/morya-space/morya-ui) · npm: [`morya-ui`](https://www.npmjs.com/package/morya-ui)
 
 ## Install
 
