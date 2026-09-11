@@ -1,6 +1,6 @@
 ﻿---
 title: MCP
-order: 6
+order: 10
 description: Optional MCP server for AI clients that support the Model Context Protocol.
 ---
 

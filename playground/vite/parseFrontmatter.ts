@@ -1,5 +1,6 @@
 export function parseYamlFrontmatter(raw: string): Record<string, string> {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  const normalized = raw.replace(/^\uFEFF/, '')
+  const match = normalized.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!match?.[1]) return {}
 
   const result: Record<string, string> = {}

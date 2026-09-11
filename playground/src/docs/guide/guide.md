@@ -1,6 +1,6 @@
 ---
 title: 指南
-order: 3
+order: 11
 description: 组件目录约定、文档写法与浮层通用约定。
 ---
 
@@ -47,6 +47,16 @@ description: 触发动作的按钮
 | `01 / PRIMITIVE` | 基础 |
 | `02 / FORM` | 表单 |
 | `03 / OVERLAY` | 浮层 |
+
+## 样式与 attrs
+
+**字段 / Label 控件**：除绑定在子控件上的 **事件** 外，其余 fallthrough attrs 落在根（field 外层或 `<label>`）；**容器 / 浮层**：全部 attrs 落在组件根；**叶子**：与原生 Vue 一致。详见 [样式与 attrs](/docs/attrs)。
+
+写组件文档时：
+
+- Props 表加上 `pt`（若有），说明可用的 DOM 键名；复杂类型链到 [API 类型](/docs/types) 或组件内 **类型** 小节。
+- 字段组件说明：事件在原生控件，其它 fallthrough 在 field 根；`placeholder` / `name` 等优先写 props。
+- 有非显然落点的（Dialog 的 backdrop、Checkbox 的 label），在正文用一小节或示例说明，不必每页重复整篇指南。
 
 ## 浮层约定
 

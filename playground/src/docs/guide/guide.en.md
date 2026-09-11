@@ -1,6 +1,6 @@
 ---
 title: Guide
-order: 3
+order: 11
 description: Component folder conventions, how to write docs, and shared overlay rules.
 ---
 
@@ -49,6 +49,16 @@ Keep `category` identical in both languages so sidebar grouping stays stable. Th
 | `03 / OVERLAY` | Overlay |
 
 The docs site language switcher loads `index.en.md` when English is selected, and falls back to `index.md` if the English file is missing.
+
+## Styling & attrs
+
+**Fields / label controls:** fallthrough attrs except **events** bound to the child control land on the root (field wrapper or `<label>`). **Containers / overlays:** all attrs on the component root. **Leaf components:** same as a native Vue element. See [Styling & attrs](/docs/attrs).
+
+When documenting a component:
+
+- List `pt` in the Props table when present, with the DOM part keys (`root`, `input`, …).
+- For fields, note that events bind to the native control and other fallthrough attrs bind to the field root; prefer props for `placeholder`, `name`, etc.
+- Call out non-obvious targets (Dialog backdrop, Checkbox label) with a short section or example instead of copying the whole guide.
 
 ## Overlay conventions
 

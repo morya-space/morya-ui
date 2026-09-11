@@ -251,6 +251,14 @@ defineExpose({ scrollToSection })
   text-align: left;
   vertical-align: top;
 }
+.m-markdown-doc h3[id],
+.m-markdown-doc h4[id] {
+  scroll-margin-top: 5rem;
+}
+.m-markdown-doc h4[id] {
+  font-size: 0.95rem;
+  margin-top: 1.25rem;
+}
 .m-markdown-doc thead th {
   background: color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
   color: var(--m-color-text);

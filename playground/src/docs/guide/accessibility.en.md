@@ -1,6 +1,6 @@
 ---
 title: Accessibility
-order: 8
+order: 9
 description: Accessibility conventions when using Morya UI components.
 ---
 

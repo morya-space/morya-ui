@@ -1,6 +1,6 @@
 ---
 title: Design tokens
-order: 4.5
+order: 3
 description: Full --m-* CSS variable reference with defaults and usage notes.
 ---
 

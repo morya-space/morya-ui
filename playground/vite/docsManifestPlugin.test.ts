@@ -18,13 +18,16 @@ describe('docsManifestPlugin', () => {
 
     expect(Object.keys(manifest).sort()).toEqual([
       'accessibility',
+      'attrs',
       'config',
+      'design-tokens',
       'guide',
       'introduction',
       'mcp',
       'quick-start',
       'ssr',
       'theme',
+      'types',
     ])
     expect(manifest.introduction['zh-CN'].title).toBe('介绍')
   })
