@@ -38,6 +38,8 @@ const items = ref(['设计', '开发', '测试', '发布'])
 | `listStyle` | `string \| object` | — | 列表样式。 |
 | `dragdrop` | `boolean` | `true` | 是否启用拖拽。 |
 | `emptyMessage` | `string` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

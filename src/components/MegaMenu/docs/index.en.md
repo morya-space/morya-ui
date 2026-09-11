@@ -70,6 +70,8 @@ Top-level entries without `items` behave as plain links via `command`.
 | `model` | `MegaMenuItem[]` | `[]` | Top-level items. |
 | `teleport` | `boolean` | `true` | Panel Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Accessibility
 

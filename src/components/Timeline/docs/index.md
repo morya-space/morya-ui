@@ -80,6 +80,8 @@ const events = [
 | `align` | `'left' \| 'right' \| 'alternate'` | `'left'` | 垂直布局对齐。 |
 | `layout` | `'vertical' \| 'horizontal'` | `'vertical'` | 方向。 |
 | `pending` | `boolean \| string` | — | 追加末尾待处理项；字符串作为文案。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 `TimelineEvent`：`status` / `content` / `date` / `icon`（`IconName` 或文字）/ `color` / `severity`。
 

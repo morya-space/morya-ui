@@ -99,6 +99,8 @@ import { MSpace, MTag } from 'morya-ui'
 | `wrap` | `boolean` | `true` | Allow wrapping. |
 | `wrapItem` | `boolean` | `true` | Wrap each child in a container. |
 | `itemClass` / `itemStyle` | — | — | Wrapper class / style when `wrapItem` is true. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

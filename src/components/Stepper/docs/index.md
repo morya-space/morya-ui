@@ -65,6 +65,8 @@ const steps = [
 | `linear` | `boolean` | `false` | 仅允许选择当前及之前步骤。 |
 | `vertical` | `boolean` | `false` | 竖排。 |
 | `orientation` | `'horizontal' \| 'vertical'` | — | `vertical` 的别名。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

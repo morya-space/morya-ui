@@ -38,6 +38,8 @@ const value = [
 | --- | --- | --- | --- |
 | `value` | `MeterGroupItem[]` | — | 分段数据。 |
 | `max` | `number` | 分段之和 | 总量上限。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

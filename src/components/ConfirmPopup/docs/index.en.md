@@ -71,13 +71,15 @@ async function beforeAccept() {
 | `modelValue` | `boolean` | `false` | Whether the popup is shown. |
 | `message` | `string` | — | Prompt text. |
 | `acceptLabel` / `rejectLabel` | `string` | `OK` / `Cancel` | Buttons. |
-| `icon` | `IconName` | — | Icon beside the message. |
+| `icon` | [IconName](/docs/types#IconName) | — | Icon beside the message. |
 | `beforeAccept` | `() => boolean \| Promise<boolean>` | — | Return `false` to keep the popup open. |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Position relative to `target`. |
 | `target` | `HTMLElement \| null` | — | Anchor element. |
 | `position` | `{ top, left } \| null` | — | Coordinates when there is no anchor. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

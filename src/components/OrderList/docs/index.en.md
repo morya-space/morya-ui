@@ -37,6 +37,8 @@ const items = ref(['Design', 'Development', 'Testing', 'Release'])
 | `dataKey` | `string` | — | Unique key for object items. |
 | `listStyle` | `string \| object` | — | List styles. |
 | `dragdrop` | `boolean` | `true` | Whether to enable drag-and-drop. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

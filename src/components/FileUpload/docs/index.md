@@ -249,6 +249,8 @@ const uploader = ref<{
 | `httpRequest` | `(options) => void \| Promise \| XMLHttpRequest` | — | 自定义上传。返回 Promise 时以 resolve 值为成功响应。 |
 | `beforeUpload` | `(file, uploadFile) => boolean \| Promise` | — | 上传前钩子，返回 `false` 则跳过该文件。 |
 | `beforeRemove` | `(uploadFile, fileList) => boolean \| Promise` | — | 删除前钩子，返回 `false` 则取消删除。 |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

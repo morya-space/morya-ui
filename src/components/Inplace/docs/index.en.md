@@ -46,6 +46,8 @@ const text = ref('Click to edit')
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | Whether the editor is active. |
 | `disabled` | `boolean` | `false` | Disable toggling. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

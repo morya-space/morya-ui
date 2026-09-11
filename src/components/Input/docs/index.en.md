@@ -166,6 +166,91 @@ import { MInput } from 'morya-ui'
 </template>
 ```
 
+## Outer attrs & layout
+
+All fallthrough attrs except **control events** (`@keydown`, `@focus`, …) bind to the field wrapper (`.m-input-field`), not the raw `<input>`—including `class`, `style`, `data-*`, `title`, `tabindex`, and undeclared attrs:
+
+```vue preview
+<script setup lang="ts">
+import { MInput } from 'morya-ui'
+import { ref } from 'vue'
+
+const q = ref('')
+</script>
+
+<template>
+  <MInput
+    v-model="q"
+    label="Search"
+    class="toolbar-search"
+    data-testid="search"
+    style="max-width: 16rem"
+  />
+</template>
+```
+
+See [Styling & attrs](/docs/attrs) for library-wide rules.
+
+## Keyboard & focus events
+
+`@keydown`, `@focus`, `@blur`, and similar listeners attach to the underlying input:
+
+```vue preview
+<script setup lang="ts">
+import { MInput } from 'morya-ui'
+import { ref } from 'vue'
+
+const code = ref('')
+</script>
+
+<template>
+  <MInput
+    v-model="code"
+    label="Code"
+    maxlength="6"
+    @keydown.enter="$event.target instanceof HTMLInputElement && $event.target.blur()"
+  />
+</template>
+```
+
+## pt
+
+Pass-through per DOM part. Common keys: `root`, `input`, `label`, `prefix`, `suffix`, `help`, `count`.
+
+```vue preview
+<script setup lang="ts">
+import { MInput } from 'morya-ui'
+</script>
+
+<template>
+  <MInput
+    label="Token"
+    placeholder="sk-…"
+    :pt="{
+      root: { class: 'token-field' },
+      input: { class: 'font-mono', autocomplete: 'off' },
+    }"
+  />
+</template>
+```
+
+## Types
+
+<h4 id="InputPassThrough">InputPassThrough</h4>
+
+Type of `pt`. Extends [FieldPassThrough](/docs/types#FieldPassThrough) with affix parts:
+
+```ts
+type InputPassThrough = FieldPassThrough & {
+  prefix?: PassThroughPart
+  suffix?: PassThroughPart
+  help?: PassThroughPart
+  count?: PassThroughPart
+}
+```
+
+See [PassThroughPart](/docs/types#PassThroughPart) in API types.
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -184,6 +269,12 @@ import { MInput } from 'morya-ui'
 | `clearable` | `boolean` | `false` | Show clear button. |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
+| `errorMessage` | `string` | — | Error copy; implies invalid when set. |
+| `placeholder` | `string` | — | Placeholder. |
+| `name` | `string` | — | Native name. |
+| `autocomplete` | `string` | — | Native autocomplete. |
+| `autofocus` | `boolean` | `false` | Focus on mount. |
+| `pt` | [InputPassThrough](/docs/types#InputPassThrough) | — | Pass-through per DOM part; see **pt** above. |
 
 ## Slots
 

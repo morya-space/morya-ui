@@ -78,6 +78,8 @@ const value = ref(1.25)
 | `fluid` | `boolean` | `false` | Full width. |
 | `invalid` | `boolean` | `false` | Validation failed state. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -191,7 +191,7 @@ const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
 | --- | --- | --- | --- |
 | `config` | `Partial<MGlobalConfig>` | — | 一次性传入完整配置（与下列 shorthand 等价）。 |
 | `appendTo` | `string \| HTMLElement` | `'body'` | 浮层默认 Teleport 目标。 |
-| `size` | `MSizeInput` | — | 表单控件默认尺寸。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | 表单控件默认尺寸。 |
 | `inputVariant` | `'outlined' \| 'filled'` | — | 输入框默认视觉变体。 |
 | `zIndex` | `number` | — | 浮层基础 z-index。 |
 | `density` | `'compact' \| 'comfortable' \| 'spacious'` | — | 全局内容密度。 |
@@ -199,6 +199,8 @@ const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
 | `locale` | `MLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
 | `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props。 |
 | `globalDensity` | `boolean` | `true` | 是否将 density / theme 写入 `documentElement`。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -143,6 +143,8 @@ function onClose(message: ToastMessage) {
 | `severity` | `'success' \| 'info' \| 'warn' \| 'error' \| …` | `'info'` | 语义色 |
 | `closable` | `boolean` | `true` | 关闭按钮 |
 | `life` | `number` | API 默认 `3000` | 自动关闭毫秒 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

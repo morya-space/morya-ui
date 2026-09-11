@@ -47,6 +47,8 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `SidebarItem[]` | `[]` | Menu items. |
 | `collapsed` | `boolean` | `false` | Icon-only mode. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

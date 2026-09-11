@@ -83,6 +83,8 @@ const items = [
 | `showDelay` / `hideDelay` | `number` | `0` / `200` | hover 延迟（ms）。 |
 | `teleport` | `boolean` | `true` | 将菜单 Teleport 出去；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 表示就地渲染。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

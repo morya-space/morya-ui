@@ -91,6 +91,8 @@ import { MSkeleton } from 'morya-ui'
 | `animation` | `'wave' \| 'none'` | `'wave'` | Loading animation. |
 | `text` | `boolean` | `false` | Render as a text-line height. |
 | `repeat` | `number` | `1` | Number of repeated rows. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

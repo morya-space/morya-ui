@@ -82,6 +82,8 @@ const value = ref(1.25)
 | `helpText` | `string` | — | — |
 | `id` | `string` | — | — |
 | `readonly` | `boolean` | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

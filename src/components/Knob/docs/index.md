@@ -41,6 +41,8 @@ const value = ref(60)
 | `ariaLabel` | `string` | — | — |
 | `ariaLabelledby` | `string` | — | — |
 | `diameter` | `number` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

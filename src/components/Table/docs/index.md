@@ -247,6 +247,43 @@ const total = ref(42)
 | `render` | `(row) => unknown` | 自定义单元格渲染。 |
 | `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |
 
+## 类型
+
+<h4 id="TableColumnDefinition">TableColumnDefinition</h4>
+
+列定义，传给 `columns`：
+
+```ts
+interface TableColumnDefinition {
+  key: string
+  label: string
+  width?: number
+  minWidth?: number
+  sortable?: boolean
+  fixed?: boolean | 'left' | 'right'
+  align?: 'start' | 'center' | 'end' | 'left' | 'right'
+  render?: (row: TableItem) => unknown
+  filterable?: boolean
+  filters?: { label: string; value: string | number }[]
+  showOverflowTooltip?: boolean
+}
+```
+
+<h4 id="TableServerOptions">TableServerOptions</h4>
+
+服务端分页/排序时传给 `serverOptions`，配合 `serverItemsLength`：
+
+```ts
+interface TableServerOptions {
+  page: number
+  rowsPerPage: number
+  sortBy?: string | string[]
+  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]
+}
+```
+
+`TableItem` 为 `Record<string, unknown>` 行对象。更多见 [API 类型](/docs/types)。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -313,6 +350,8 @@ const total = ref(42)
 | `tableHeight` | `number \| null` | — | — |
 | `tableMinHeight` | `number` | — | — |
 | `tableNodeId` | `string` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

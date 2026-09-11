@@ -79,11 +79,13 @@ const options = [
 | `placeholder` | `string` | `'请选择'` | 占位文案。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 表单必填辅助。 |
-| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
 | `clearable` | `boolean` | `false` | 有值时显示清除按钮（hover 单槽 suffix）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

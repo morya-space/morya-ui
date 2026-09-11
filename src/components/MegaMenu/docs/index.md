@@ -71,6 +71,8 @@ const model = [
 | `teleport` | `boolean` | `true` | 面板 Teleport；默认 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标。 |
 | `selectedKey` | `string \| null` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## 无障碍
 

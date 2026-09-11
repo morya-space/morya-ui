@@ -94,6 +94,8 @@ const open = ref(false)
 | `showDelay` / `hideDelay` | `number` | `0` / `200` | Hover/focus delay in ms. |
 | `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

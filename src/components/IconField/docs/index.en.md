@@ -47,6 +47,8 @@ const value = ref('')
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `iconPosition` | `'left' \| 'right'` | `'left'` | Icon position. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

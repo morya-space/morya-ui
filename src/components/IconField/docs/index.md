@@ -47,6 +47,8 @@ const value = ref('')
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `iconPosition` | `'left' \| 'right'` | `'left'` | 图标位置。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

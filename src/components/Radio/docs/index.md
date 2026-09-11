@@ -98,6 +98,8 @@ const size = ref('md')
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 原生 required。 |
+| `pt` | [ControlPassThrough](/docs/types#ControlPassThrough) `{ root?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

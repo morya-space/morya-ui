@@ -37,6 +37,8 @@ const blocked = ref(false)
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `blocked` | `boolean` | `false` | Whether the overlay is active. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

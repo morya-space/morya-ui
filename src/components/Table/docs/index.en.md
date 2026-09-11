@@ -182,6 +182,43 @@ const columns = [
 | `render` | `(row) => unknown` | Custom cell renderer. |
 | `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |
 
+## Types
+
+<h4 id="TableColumnDefinition">TableColumnDefinition</h4>
+
+Column definition passed to `columns`:
+
+```ts
+interface TableColumnDefinition {
+  key: string
+  label: string
+  width?: number
+  minWidth?: number
+  sortable?: boolean
+  fixed?: boolean | 'left' | 'right'
+  align?: 'start' | 'center' | 'end' | 'left' | 'right'
+  render?: (row: TableItem) => unknown
+  filterable?: boolean
+  filters?: { label: string; value: string | number }[]
+  showOverflowTooltip?: boolean
+}
+```
+
+<h4 id="TableServerOptions">TableServerOptions</h4>
+
+Server-side paging/sorting payload for `serverOptions`, with `serverItemsLength`:
+
+```ts
+interface TableServerOptions {
+  page: number
+  rowsPerPage: number
+  sortBy?: string | string[]
+  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]
+}
+```
+
+`TableItem` is `Record<string, unknown>`. See also [API types](/docs/types).
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -200,6 +237,8 @@ const columns = [
 | `maxHeight` | `number \| null` | `null` | Scrollable body max height. |
 | `rowKey` | `string` | `'id'` | Stable row key field. |
 | `size` | `'sm' \| 'md' \| 'lg'` | — | Table density. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

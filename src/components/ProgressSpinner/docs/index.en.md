@@ -62,6 +62,8 @@ const loading = ref(true)
 | `delay` | `number` | `0` | Delay before showing (ms). |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `description` | `string` | — | Caption under the spinner. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

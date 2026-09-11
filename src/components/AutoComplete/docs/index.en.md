@@ -83,10 +83,12 @@ const suggestions = [
 | `clearable` | `boolean` | `false` | Show a clear button. |
 | `dropdown` | `boolean` | `false` | Show dropdown button. |
 | `placeholder` | `string` | — | Placeholder. |
-| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

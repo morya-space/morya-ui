@@ -41,6 +41,8 @@ import { MScrollTop } from 'morya-ui'
 | `bottom` | `string \| number` | — | Distance from the bottom edge; a number is pixels. |
 | `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -57,6 +57,8 @@ const code = ref('')
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `gap` | `string \| number` | — | Cell gap; a number is pixels. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

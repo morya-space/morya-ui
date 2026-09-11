@@ -40,6 +40,8 @@ const last = ref('')
 | --- | --- | --- | --- |
 | `welcomeMessage` | `string` | `'Welcome to Morya UI Terminal'` | Welcome message at the top. |
 | `prompt` | `string` | `'>'` | Prompt. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -55,6 +55,8 @@ import { MProgressBar } from 'morya-ui'
 | `type` | `'line' \| 'circle'` | `'line'` | Line or circle. |
 | `status` | `'success' \| 'info' \| 'warn' \| 'danger' \| 'error'` | — | Semantic fill. |
 | `color` | `string` | — | Custom fill color. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

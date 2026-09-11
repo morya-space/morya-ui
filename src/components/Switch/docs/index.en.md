@@ -96,6 +96,8 @@ const on = ref(true)
 | `invalid` | `boolean` | `false` | Invalid (validation failed) state. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Native required. |
+| `pt` | [ControlPassThrough](/docs/types#ControlPassThrough) `{ root?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

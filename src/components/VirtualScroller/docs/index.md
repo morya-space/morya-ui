@@ -50,6 +50,8 @@ const items = Array.from({ length: 1000 }, (_, i) => `行 ${i + 1}`)
 | `itemSize` | `number` | — | 单项高度（px）。 |
 | `height` | `number \| string` | `240` | 视口高度。 |
 | `buffer` | `number` | `3` | 视口上下额外渲染行数。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

@@ -181,11 +181,13 @@ const shortcuts = [
 | `clearable` | `boolean` | `true` | Show a clear button. |
 | `shortcuts` | `DatePickerShortcut[]` | `[]` | Panel shortcuts. |
 | `fluid` | `boolean` | `false` | Stretch to full width. |
-| `size` | `MSizeInput` | — | `small` / `large`; can inherit from ConfigProvider. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `invalid` | `boolean` | `false` | Invalid state. |
 | `teleport` | `boolean` | `true` | Panel Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

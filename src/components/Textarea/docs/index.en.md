@@ -102,6 +102,12 @@ const value = ref('Draft notes')
 | `clearable` | `boolean` | `false` | Show a clear button. |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
+| `errorMessage` | `string` | — | Error copy. |
+| `placeholder` | `string` | — | Placeholder. |
+| `name` | `string` | — | Native name. |
+| `autocomplete` | `string` | — | Native autocomplete. |
+| `autofocus` | `boolean` | `false` | Focus on mount. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through per DOM part (`root`, `input`, `label`, …). |
 
 ## Events
 

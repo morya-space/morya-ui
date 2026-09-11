@@ -37,6 +37,8 @@ import { MInput, MLabel } from 'morya-ui'
 | --- | --- | --- | --- |
 | `htmlFor` | `string` | — | Associated control id. |
 | `for` | `string` | — | Alias for `htmlFor`. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

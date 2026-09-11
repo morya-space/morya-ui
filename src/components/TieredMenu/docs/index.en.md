@@ -76,6 +76,8 @@ const model = [{ label: 'Copy' }, { label: 'Paste' }]
 | `modelValue` | `boolean` | `false` | Popup visibility (`v-model`). |
 | `teleport` | `boolean` | `true` | Teleport when `popup`; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

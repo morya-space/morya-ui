@@ -57,7 +57,7 @@ import { MAvatar, MAvatarGroup } from 'morya-ui'
 | --- | --- | --- | --- |
 | `label` | `string` | — | 无图片/图标时的文字回退。 |
 | `image` | `string` | — | 图片 URL，优先级最高。 |
-| `icon` | `IconName` | — | `MIcon` 图标名称。 |
+| `icon` | [IconName](/docs/types#IconName) | — | `MIcon` 图标名称。 |
 | `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |
 | `max` | `number` | — | `MAvatarGroup`：最多展示个数，超出显示 +N。 |

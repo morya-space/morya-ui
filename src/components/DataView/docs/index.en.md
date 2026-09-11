@@ -44,6 +44,8 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | `layout` | `'list' \| 'grid'` | `'list'` | Layout. |
 | `paginator` | `boolean` | `false` | Enable pagination. |
 | `rows` | `number` | `10` | Rows per page. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

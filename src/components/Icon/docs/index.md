@@ -195,9 +195,11 @@ import { User } from 'lucide-vue-next'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `name` | `IconName` | — | 系统图标名；插槽存在时可省略。 |
+| `name` | [IconName](/docs/types#IconName) | — | 系统图标名；插槽存在时可省略。 |
 | `label` | `string` | — | 可访问名称；省略时 `aria-hidden`。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | `'md'` | 尺寸；`sm`/`lg` 映射到 small/large。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

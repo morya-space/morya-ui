@@ -181,7 +181,7 @@ const shortcuts = [
 | `clearable` | `boolean` | `true` | 显示清除按钮。 |
 | `shortcuts` | `DatePickerShortcut[]` | `[]` | 面板快捷选项。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
-| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `teleport` | `boolean` | `true` | 面板 Teleport；默认挂到 `body`。 |
@@ -189,6 +189,8 @@ const shortcuts = [
 | `errorMessage` | `string` | — | — |
 | `helpText` | `string` | — | — |
 | `id` | `string` | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

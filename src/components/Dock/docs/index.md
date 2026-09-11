@@ -38,6 +38,8 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `DockItem[]` | `[]` | 图标项。 |
 | `position` | `'bottom' \| 'top'` | `'bottom'` | 视觉位置修饰。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

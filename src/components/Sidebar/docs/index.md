@@ -47,6 +47,8 @@ const model = [
 | --- | --- | --- | --- |
 | `model` | `SidebarItem[]` | `[]` | 菜单项。 |
 | `collapsed` | `boolean` | `false` | 仅显示图标。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

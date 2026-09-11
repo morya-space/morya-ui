@@ -151,6 +151,8 @@ import { MSplitter } from 'morya-ui'
 | `resizeTriggerSize` | `number` | `6` | 分隔条厚度（px）。 |
 | `pane1Class` / `pane1Style` | — | — | 主面板 class / style。 |
 | `pane2Class` / `pane2Style` | — | — | 次面板 class / style。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

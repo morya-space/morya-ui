@@ -68,6 +68,8 @@ const value = ['A', 'B', 'C']
 | `showArrows` | `boolean` | `true` | 显示左右箭头。 |
 | `showIndicators` | `boolean` | `true` | 显示指示点。 |
 | `page` | `number` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

@@ -36,6 +36,8 @@ const value = ref('')
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `label` | `string` | — | 标签文案；也可用 `label` 插槽。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

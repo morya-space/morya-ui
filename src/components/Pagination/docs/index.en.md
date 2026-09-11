@@ -76,6 +76,8 @@ const pageSize = ref(10)
 | `showQuickJumper` | `boolean` | `false` | Jump-to-page input. |
 | `simple` | `boolean` | `false` | Compact prev / current / next. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

@@ -146,7 +146,7 @@ const model = reactive({ city: '', zip: '' })
 | `disabled` | `boolean` | `false` | 禁用态 |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |
 | `for` | `string` | — | — |
-| `size` | `MSizeInput` | — | — |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | — |
 
 ## Props — FormItem
 

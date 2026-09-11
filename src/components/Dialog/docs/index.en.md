@@ -202,9 +202,15 @@ async function save() {
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` renders in place. |
 | `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | Status icon in the header; `warning` is an alias of `warn` |
 | `positiveText` / `negativeText` | `string` | — | Preset footer buttons; ignored when the `footer` slot is used |
-| `positiveSeverity` | `ButtonSeverity` | — | Confirm button severity |
+| `positiveSeverity` | [ButtonSeverity](/docs/types#ButtonSeverity) | — | Confirm button severity |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | Return `false` to keep the dialog open |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | Runs before X / Esc / mask dismiss; return `false` to keep open |
+| `ariaLabel` | `string` | — | Accessible dialog name. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Backdrop pass-through; key `root`. |
+
+## Styling & attrs
+
+After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `title`, …) land on the **backdrop** (`.m-dialog-backdrop`), not the inner `.m-dialog` panel. Use the `width` prop for panel width; use `pt` for inner DOM. See [Styling & attrs](/docs/attrs).
 
 ## Events
 

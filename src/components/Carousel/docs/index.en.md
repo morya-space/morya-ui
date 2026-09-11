@@ -67,6 +67,8 @@ const value = ['A', 'B', 'C']
 | `interval` | `number` | `3000` | Autoplay interval in milliseconds. |
 | `showArrows` | `boolean` | `true` | Show prev/next arrows. |
 | `showIndicators` | `boolean` | `true` | Show page dots. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

@@ -50,6 +50,8 @@ const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 | `page` | `number` | — | — |
 | `pageSizes` | `number[]` | — | — |
 | `showSizePicker` | `boolean` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

@@ -83,7 +83,8 @@ import { MCard } from 'morya-ui'
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 内边距尺寸。 |
 | `bordered` | `boolean` | `true` | 是否描边。 |
 | `hoverable` | `boolean` | `false` | 悬停抬起。 |
-| `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | — | — |
+| `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | `2` | 标题 heading 级别。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 根节点透传，键名 `root`。 |
 
 ## Slots
 

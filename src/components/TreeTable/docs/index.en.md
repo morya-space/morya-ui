@@ -47,6 +47,8 @@ const value = [
 | --- | --- | --- | --- |
 | `value` | `TreeTableNode[]` | — | Tree row data. |
 | `columns` | `TreeTableColumn[]` | — | Column definitions. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

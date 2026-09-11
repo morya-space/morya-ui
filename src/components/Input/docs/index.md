@@ -166,6 +166,91 @@ import { MInput } from 'morya-ui'
 </template>
 ```
 
+## 外层 attrs 与布局
+
+除 `@keydown`、`@focus` 等**控件事件**外，其余 fallthrough attrs（`class`、`style`、`data-*`、`title`、`tabindex` 等）均落在 field 外层（`.m-input-field`），不会直接写到 `<input>`。栅格、间距、测试 id 这样写即可：
+
+```vue preview
+<script setup lang="ts">
+import { MInput } from 'morya-ui'
+import { ref } from 'vue'
+
+const q = ref('')
+</script>
+
+<template>
+  <MInput
+    v-model="q"
+    label="搜索"
+    class="toolbar-search"
+    data-testid="search"
+    style="max-width: 16rem"
+  />
+</template>
+```
+
+更多约定见 [样式与 attrs](/docs/attrs)。
+
+## 键盘与焦点事件
+
+`@keydown`、`@focus`、`@blur` 等绑在底层 input 上，用法与原生 input 相同：
+
+```vue preview
+<script setup lang="ts">
+import { MInput } from 'morya-ui'
+import { ref } from 'vue'
+
+const code = ref('')
+</script>
+
+<template>
+  <MInput
+    v-model="code"
+    label="验证码"
+    maxlength="6"
+    @keydown.enter="$event.target instanceof HTMLInputElement && $event.target.blur()"
+  />
+</template>
+```
+
+## pt
+
+按 DOM 分段透传。常用键：`root`、`input`、`label`、`prefix`、`suffix`、`help`、`count`。
+
+```vue preview
+<script setup lang="ts">
+import { MInput } from 'morya-ui'
+</script>
+
+<template>
+  <MInput
+    label="Token"
+    placeholder="sk-…"
+    :pt="{
+      root: { class: 'token-field' },
+      input: { class: 'font-mono', autocomplete: 'off' },
+    }"
+  />
+</template>
+```
+
+## 类型
+
+<h4 id="InputPassThrough">InputPassThrough</h4>
+
+`pt` 的类型。在 [FieldPassThrough](/docs/types#FieldPassThrough) 基础上多了前后缀等键：
+
+```ts
+type InputPassThrough = FieldPassThrough & {
+  prefix?: PassThroughPart
+  suffix?: PassThroughPart
+  help?: PassThroughPart
+  count?: PassThroughPart
+}
+```
+
+`PassThroughPart` 见 [API 类型 · PassThroughPart](/docs/types#PassThroughPart)。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -184,7 +269,12 @@ import { MInput } from 'morya-ui'
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
-| `errorMessage` | `string` | — | — |
+| `errorMessage` | `string` | — | 错误文案；有值时视为 invalid。 |
+| `placeholder` | `string` | — | 占位符。 |
+| `name` | `string` | — | 原生 name。 |
+| `autocomplete` | `string` | — | 原生 autocomplete。 |
+| `autofocus` | `boolean` | `false` | 挂载后聚焦。 |
+| `pt` | [InputPassThrough](/docs/types#InputPassThrough) | — | DOM 分段透传，见上文 `pt`。 |
 
 ## Slots
 

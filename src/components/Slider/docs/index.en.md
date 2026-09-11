@@ -89,6 +89,8 @@ const value = ref(50)
 | `tooltip` | `boolean` | `false` | Show the current value while dragging. |
 | `vertical` | `boolean` | `false` | Vertical layout. |
 | `disabled` | `boolean` | `false` | Disabled. |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

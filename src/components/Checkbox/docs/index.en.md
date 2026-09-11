@@ -80,6 +80,10 @@ const selected = ref(['vue'])
 </template>
 ```
 
+## Styling & attrs
+
+Fallthrough attrs except input **events** (`@change`, …) bind to the visible `<label>` root. Prefer `name` / `value` as props; use `pt.root` / `pt.input` for inner DOM. See [Styling & attrs](/docs/attrs).
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -94,6 +98,7 @@ const selected = ref(['vue'])
 | `invalid` | `boolean` | `false` | Invalid validation state. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Native required. |
+| `pt` | [ControlPassThrough](/docs/types#ControlPassThrough) `{ root?, input? }` | — | `root` (label), `input`. |
 
 ## Events
 

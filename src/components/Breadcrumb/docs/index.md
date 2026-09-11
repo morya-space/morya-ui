@@ -58,6 +58,8 @@ const items = [
 | `model` | `{ label: string; to?: string; disabled?: boolean }[]` | — | 路径项。 |
 | `home` | `{ label?: string; to?: string }` | — | 首页项；默认文案 `Home`。 |
 | `separator` | `string` | `'/'` | 分隔符。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

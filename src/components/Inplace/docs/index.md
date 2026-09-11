@@ -48,6 +48,8 @@ const text = ref('点击编辑')
 | `disabled` | `boolean` | `false` | 禁用切换。 |
 | `closeOnEsc` | `boolean` | — | — |
 | `dismissable` | `boolean` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

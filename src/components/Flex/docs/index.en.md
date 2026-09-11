@@ -72,6 +72,8 @@ import { MButton, MFlex, MTag } from 'morya-ui'
 | `reverse` | `boolean` | `false` | Reverse main axis. |
 | `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | Gap between items. |
 | `wrap` | `boolean` | `true` | Allow wrapping (forced off when vertical). |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Events
 

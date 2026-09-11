@@ -80,6 +80,8 @@ const events = [
 | `align` | `'left' \| 'right' \| 'alternate'` | `'left'` | Alignment for vertical layout. |
 | `layout` | `'vertical' \| 'horizontal'` | `'vertical'` | Direction. |
 | `pending` | `boolean \| string` | — | Append a trailing pending item; a string is used as the label. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 `TimelineEvent`: `status` / `content` / `date` / `icon` (`IconName` or text) / `color` / `severity`.
 

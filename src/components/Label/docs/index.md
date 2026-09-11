@@ -37,6 +37,8 @@ import { MInput, MLabel } from 'morya-ui'
 | --- | --- | --- | --- |
 | `htmlFor` | `string` | — | 关联控件 id。 |
 | `for` | `string` | — | `htmlFor` 别名。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Slots
 

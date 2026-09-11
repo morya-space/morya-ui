@@ -83,7 +83,7 @@ const suggestions = [
 | `clearable` | `boolean` | `false` | 显示清空按钮。 |
 | `dropdown` | `boolean` | `false` | 显示下拉按钮。 |
 | `placeholder` | `string` | — | 占位。 |
-| `size` | `MSizeInput` | — | `small` / `large`；可继承 ConfigProvider。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
@@ -93,6 +93,8 @@ const suggestions = [
 | `id` | `string` | — | — |
 | `invalid` | `boolean` | — | — |
 | `label` | `string` | — | — |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 

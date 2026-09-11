@@ -103,6 +103,8 @@ import { MBadge, MButton } from 'morya-ui'
 | `max` | `number` | — | Cap numeric values as `{max}+`. |
 | `offset` | `[number, number]` | — | Offset `[x, y]` when wrapping content. |
 | `processing` | `boolean` | `false` | Pulse animation. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 
 ## Slots
 

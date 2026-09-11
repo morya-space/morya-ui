@@ -68,6 +68,8 @@ const target = ref([{ id: 3, name: '测试' }])
 | `targetHeader` | `string` | `'已选'` | 右侧标题。 |
 | `dataKey` | `string` | — | 对象唯一键。 |
 | `emptyMessage` | `string` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 
 ## Events
 
