@@ -4,6 +4,7 @@ import type { ResolvedComponentDoc } from '../docs/loadComponentDocs'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useDocCodeCopy } from '../composables/useDocCodeCopy'
 import { useDocSections } from '../composables/useDocSections'
+import { useDocTypeLinks } from '../composables/useDocTypeLinks'
 import { useDocsI18n } from '../i18n'
 
 const props = defineProps<{
@@ -20,6 +21,7 @@ const docSource = computed(() => props.doc)
 const docKey = computed(() => props.doc.name)
 const { t } = useDocsI18n()
 useDocCodeCopy(bodyRef, docSource)
+useDocTypeLinks(bodyRef, docSource)
 
 const {
   sections,
@@ -276,6 +278,20 @@ defineExpose({ scrollToSection })
 .m-markdown-doc tbody td code {
   color: var(--m-color-primary);
   font-weight: 600;
+}
+.m-markdown-doc a.m-doc-type-link {
+  color: var(--m-color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.m-markdown-doc a.m-doc-type-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.m-markdown-doc a.m-doc-type-link code {
+  color: inherit;
+  cursor: pointer;
+  font-weight: inherit;
 }
 
 /* Shiki dual theme：跟随 documentElement[data-theme] */
