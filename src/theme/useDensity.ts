@@ -12,7 +12,7 @@ const preference = ref<DensityPreference>(getInitialDensity())
 export function applyDensity(preference: DensityPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.muDensity = preference
+  el.dataset.mDensity = preference
 }
 
 function getInitialDensity(): DensityPreference {

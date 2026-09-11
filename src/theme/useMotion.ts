@@ -12,7 +12,7 @@ const preference = ref<MotionPreference>(getInitialMotion())
 export function applyMotion(preference: MotionPreference, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
-  el.dataset.muMotion = preference
+  el.dataset.mMotion = preference
 }
 
 /** When `respect` is false, ignore OS `prefers-reduced-motion`. Default is to respect it. */
@@ -20,9 +20,9 @@ export function applyReducedMotionPolicy(respect: boolean | undefined, target?: 
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
   if (respect === false) {
-    el.dataset.muIgnoreReducedMotion = 'true'
+    el.dataset.mIgnoreReducedMotion = 'true'
   } else {
-    delete el.dataset.muIgnoreReducedMotion
+    delete el.dataset.mIgnoreReducedMotion
   }
 }
 

@@ -94,7 +94,7 @@ function onSystemThemeChange() {
 
 function syncReducedMotionPolicy() {
   if (typeof document === 'undefined') return
-  previousIgnoreReducedMotion = document.documentElement.dataset.muIgnoreReducedMotion
+  previousIgnoreReducedMotion = document.documentElement.dataset.mIgnoreReducedMotion
   applyReducedMotionPolicy(resolved.value.respectReducedMotion)
 }
 
@@ -102,7 +102,7 @@ function syncGlobalSideEffects() {
   if (!applyGlobal.value || typeof document === 'undefined') return
   const { density, zIndex, theme } = resolved.value
   if (density) {
-    previousDensity = document.documentElement.dataset.muDensity
+    previousDensity = document.documentElement.dataset.mDensity
     applyDensity(density)
   }
   if (zIndex != null) {
@@ -138,15 +138,15 @@ onBeforeUnmount(() => {
   if (typeof document === 'undefined') return
   if (previousIgnoreReducedMotion !== undefined) {
     if (previousIgnoreReducedMotion) {
-      document.documentElement.dataset.muIgnoreReducedMotion = previousIgnoreReducedMotion
+      document.documentElement.dataset.mIgnoreReducedMotion = previousIgnoreReducedMotion
     } else {
-      delete document.documentElement.dataset.muIgnoreReducedMotion
+      delete document.documentElement.dataset.mIgnoreReducedMotion
     }
   }
   if (!applyGlobal.value) return
   if (previousDensity !== undefined) {
-    if (previousDensity) document.documentElement.dataset.muDensity = previousDensity
-    else delete document.documentElement.dataset.muDensity
+    if (previousDensity) document.documentElement.dataset.mDensity = previousDensity
+    else delete document.documentElement.dataset.mDensity
   }
   if (previousZBase !== undefined) {
     if (previousZBase) document.documentElement.style.setProperty('--m-z-base', previousZBase)

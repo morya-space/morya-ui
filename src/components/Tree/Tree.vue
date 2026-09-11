@@ -345,7 +345,7 @@ watch(keyboard.activeIndex, () => {
     if (key == null || !root.value) return
     const items = root.value.querySelectorAll<HTMLElement>('[data-m-tree-key]')
     for (const item of items) {
-      if (item.dataset.muTreeKey === key) {
+      if (item.dataset.mTreeKey === key) {
         item.focus({ preventScroll: true })
         break
       }

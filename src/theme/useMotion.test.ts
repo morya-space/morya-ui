@@ -6,8 +6,8 @@ import { applyReducedMotionPolicy, useMotion } from './useMotion'
 describe('useMotion', () => {
   beforeEach(() => {
     localStorage.clear()
-    delete document.documentElement.dataset.muMotion
-    delete document.documentElement.dataset.muIgnoreReducedMotion
+    delete document.documentElement.dataset.mMotion
+    delete document.documentElement.dataset.mIgnoreReducedMotion
   })
 
   it('applies and persists a global motion preference', async () => {
@@ -19,23 +19,25 @@ describe('useMotion', () => {
     await nextTick()
 
     expect(vm.preference).toBe('none')
-    expect(document.documentElement.dataset.muMotion).toBe('none')
+    expect(document.documentElement.dataset.mMotion).toBe('none')
+    expect(document.documentElement.getAttribute('data-m-motion')).toBe('none')
     expect(localStorage.getItem('morya-ui-motion')).toBe('none')
   })
 
   it('respects OS reduced motion by default', () => {
     applyReducedMotionPolicy(undefined)
-    expect(document.documentElement.dataset.muIgnoreReducedMotion).toBeUndefined()
+    expect(document.documentElement.dataset.mIgnoreReducedMotion).toBeUndefined()
 
     applyReducedMotionPolicy(true)
-    expect(document.documentElement.dataset.muIgnoreReducedMotion).toBeUndefined()
+    expect(document.documentElement.dataset.mIgnoreReducedMotion).toBeUndefined()
   })
 
   it('can opt out of OS reduced motion', () => {
     applyReducedMotionPolicy(false)
-    expect(document.documentElement.dataset.muIgnoreReducedMotion).toBe('true')
+    expect(document.documentElement.dataset.mIgnoreReducedMotion).toBe('true')
+    expect(document.documentElement.getAttribute('data-m-ignore-reduced-motion')).toBe('true')
 
     applyReducedMotionPolicy(undefined)
-    expect(document.documentElement.dataset.muIgnoreReducedMotion).toBeUndefined()
+    expect(document.documentElement.dataset.mIgnoreReducedMotion).toBeUndefined()
   })
 })
