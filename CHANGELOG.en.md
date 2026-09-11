@@ -40,7 +40,7 @@ Initial public release of `morya-ui` (Morya UI), using the current component lib
 - Interactive docs with Markdown and live `vue preview` examples
 - Component catalog and guides (quick start, theme, config, SSR, accessibility, MCP)
 - Light / dark theme, bilingual UI, global search (CommandMenu)
-- Deployed to GitHub Pages: https://morya-ui.github.io/morya-ui/
+- Deployed to GitHub Pages: https://morya-space.github.io/morya-ui/
 
 ### Ecosystem packages
 

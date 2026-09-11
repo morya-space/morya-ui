@@ -13,7 +13,7 @@
 
 ## 开始之前
 
-1. 阅读 [在线文档](https://morya-ui.github.io/morya-ui/)。
+1. 阅读 [在线文档](https://morya-space.github.io/morya-ui/)。
 2. 本地环境见 [开发指南](./docs/DEVELOPMENT.zh-CN.md)。
 3. 提交信息遵循 [Conventional Commits](./docs/COMMIT_CONVENTION.md)。
 

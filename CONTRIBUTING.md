@@ -13,7 +13,7 @@ Thank you for your interest in Morya UI!
 
 ## Before you start
 
-1. Read the [documentation site](https://morya-ui.github.io/morya-ui/).
+1. Read the [documentation site](https://morya-space.github.io/morya-ui/).
 2. For local setup, see [Development guide](./docs/DEVELOPMENT.md).
 3. Follow [Conventional Commits](./docs/COMMIT_CONVENTION.md) for commit messages.
 

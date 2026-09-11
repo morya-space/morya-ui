@@ -8,7 +8,7 @@ description: Morya UI 是什么、适合谁用、如何开始。
 
 **Morya UI**（`morya-ui`）是一套**开源**的 Vue 3 组件库，内置设计令牌、亮暗主题、国际化与交互式文档。
 
-- **文档站**：[morya-ui.github.io/morya-ui](https://morya-ui.github.io/morya-ui/)
+- **文档站**：[morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/)
 - **源码**：[GitHub](https://github.com/morya-space/morya-ui)
 - **npm**：[`morya-ui`](https://www.npmjs.com/package/morya-ui)
 

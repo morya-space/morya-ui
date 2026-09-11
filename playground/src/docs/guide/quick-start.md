@@ -6,7 +6,7 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 
 # 快速上手
 
-> 在线文档：[morya-ui.github.io/morya-ui](https://morya-ui.github.io/morya-ui/) · 源码：[GitHub](https://github.com/morya-space/morya-ui) · npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)
+> 在线文档：[morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/) · 源码：[GitHub](https://github.com/morya-space/morya-ui) · npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)
 
 ## 安装
 

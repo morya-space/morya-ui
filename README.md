@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  <a href="https://morya-ui.github.io/morya-ui/">
+  <a href="https://morya-space.github.io/morya-ui/">
     <img src="./assets/logo.svg" alt="Morya UI" width="96" height="96" />
   </a>
 </p>
@@ -23,9 +23,9 @@
 </p>
 
 <p align="center">
-  <a href="https://morya-ui.github.io/morya-ui/"><b>Documentation</b></a>
+  <a href="https://morya-space.github.io/morya-ui/"><b>Documentation</b></a>
   ·
-  <a href="https://morya-ui.github.io/morya-ui/components">Components</a>
+  <a href="https://morya-space.github.io/morya-ui/components">Components</a>
   ·
   <a href="https://github.com/morya-space/morya-ui/issues">Issues</a>
   ·
@@ -64,20 +64,20 @@ Every component includes Markdown docs with interactive `vue preview` blocks. Br
 
 ### SSR & meta-frameworks
 
-Works with **Nuxt 3**, **Astro + Vue**, **Vite SSR**, and similar setups. Includes the [`@morya-ui/nuxt`](./packages/nuxt) module — see the [SSR guide](https://morya-ui.github.io/morya-ui/docs/ssr).
+Works with **Nuxt 3**, **Astro + Vue**, **Vite SSR**, and similar setups. Includes the [`@morya-ui/nuxt`](./packages/nuxt) module — see the [SSR guide](https://morya-space.github.io/morya-ui/docs/ssr).
 
 ## Documentation
 
-**https://morya-ui.github.io/morya-ui/**
+**https://morya-space.github.io/morya-ui/**
 
 | Section | Link |
 | --- | --- |
-| Quick start | [Guide](https://morya-ui.github.io/morya-ui/docs/quick-start) |
-| Theme | [Theme](https://morya-ui.github.io/morya-ui/docs/theme) |
-| Configuration | [Config](https://morya-ui.github.io/morya-ui/docs/config) |
-| SSR | [Nuxt / Astro / Vite SSR](https://morya-ui.github.io/morya-ui/docs/ssr) |
-| Components | [Catalog](https://morya-ui.github.io/morya-ui/components) |
-| Changelog | [Releases](https://morya-ui.github.io/morya-ui/changelog) |
+| Quick start | [Guide](https://morya-space.github.io/morya-ui/docs/quick-start) |
+| Theme | [Theme](https://morya-space.github.io/morya-ui/docs/theme) |
+| Configuration | [Config](https://morya-space.github.io/morya-ui/docs/config) |
+| SSR | [Nuxt / Astro / Vite SSR](https://morya-space.github.io/morya-ui/docs/ssr) |
+| Components | [Catalog](https://morya-space.github.io/morya-ui/components) |
+| Changelog | [Releases](https://morya-space.github.io/morya-ui/changelog) |
 
 ## Install
 
@@ -117,7 +117,7 @@ import { createMoryaUI, enUS } from 'morya-ui'
 createApp(App).use(createMoryaUI({ locale: enUS })).mount('#app')
 ```
 
-See the [Quick start guide](https://morya-ui.github.io/morya-ui/docs/quick-start) for full import modes, Vite resolver setup, and theme APIs.
+See the [Quick start guide](https://morya-space.github.io/morya-ui/docs/quick-start) for full import modes, Vite resolver setup, and theme APIs.
 
 ## Ecosystem
 

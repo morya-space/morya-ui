@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  <a href="https://morya-ui.github.io/morya-ui/">
+  <a href="https://morya-space.github.io/morya-ui/">
     <img src="./assets/logo.svg" alt="Morya UI" width="96" height="96" />
   </a>
 </p>
@@ -23,9 +23,9 @@
 </p>
 
 <p align="center">
-  <a href="https://morya-ui.github.io/morya-ui/"><b>文档站</b></a>
+  <a href="https://morya-space.github.io/morya-ui/"><b>文档站</b></a>
   ·
-  <a href="https://morya-ui.github.io/morya-ui/components">组件</a>
+  <a href="https://morya-space.github.io/morya-ui/components">组件</a>
   ·
   <a href="https://github.com/morya-space/morya-ui/issues">Issues</a>
   ·
@@ -64,20 +64,20 @@
 
 ### SSR 与元框架
 
-兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`@morya-ui/nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://morya-ui.github.io/morya-ui/docs/ssr)。
+兼容 **Nuxt 3**、**Astro + Vue**、**Vite SSR** 等场景；提供 [`@morya-ui/nuxt`](./packages/nuxt) 模块，详见 [SSR 指南](https://morya-space.github.io/morya-ui/docs/ssr)。
 
 ## 文档
 
-**https://morya-ui.github.io/morya-ui/**
+**https://morya-space.github.io/morya-ui/**
 
 | 章节 | 链接 |
 | --- | --- |
-| 快速上手 | [指南](https://morya-ui.github.io/morya-ui/docs/quick-start) |
-| 主题 | [主题](https://morya-ui.github.io/morya-ui/docs/theme) |
-| 全局配置 | [配置](https://morya-ui.github.io/morya-ui/docs/config) |
-| SSR | [Nuxt / Astro / Vite SSR](https://morya-ui.github.io/morya-ui/docs/ssr) |
-| 组件 | [目录](https://morya-ui.github.io/morya-ui/components) |
-| 更新日志 | [版本](https://morya-ui.github.io/morya-ui/changelog) |
+| 快速上手 | [指南](https://morya-space.github.io/morya-ui/docs/quick-start) |
+| 主题 | [主题](https://morya-space.github.io/morya-ui/docs/theme) |
+| 全局配置 | [配置](https://morya-space.github.io/morya-ui/docs/config) |
+| SSR | [Nuxt / Astro / Vite SSR](https://morya-space.github.io/morya-ui/docs/ssr) |
+| 组件 | [目录](https://morya-space.github.io/morya-ui/components) |
+| 更新日志 | [版本](https://morya-space.github.io/morya-ui/changelog) |
 
 ## 安装
 
@@ -117,7 +117,7 @@ import { createMoryaUI, zhCN } from 'morya-ui'
 createApp(App).use(createMoryaUI({ locale: zhCN })).mount('#app')
 ```
 
-完整接入方式、Vite 解析器与主题 API 见 [快速上手](https://morya-ui.github.io/morya-ui/docs/quick-start)。
+完整接入方式、Vite 解析器与主题 API 见 [快速上手](https://morya-space.github.io/morya-ui/docs/quick-start)。
 
 ## 生态
 

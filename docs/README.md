@@ -2,7 +2,7 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-Maintainer documentation for the open-source `morya-ui` project. Public overview: [README](../README.md) · [文档站](https://morya-ui.github.io/morya-ui/)
+Maintainer documentation for the open-source `morya-ui` project. Public overview: [README](../README.md) · [文档站](https://morya-space.github.io/morya-ui/)
 
 | Document | Description |
 | --- | --- |
