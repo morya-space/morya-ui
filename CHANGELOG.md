@@ -1,5 +1,16 @@
 # morya-ui
 
+## 0.2.3
+
+### 新功能
+
+- add page composition tooling for AI agents
+- add MPage composition components for admin layouts
+
+### 修复
+
+- register Page styles in global stylesheet
+
 ## 0.2.2
 
 ### 新功能
