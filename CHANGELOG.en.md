@@ -1,5 +1,16 @@
 # morya-ui
 
+## 0.2.2
+
+### Features
+
+- add tooltip support for collapsed menu items
+
+### Changes
+
+- improve submenu arrow icon and expand behavior
+- update dataset keys from 'mu' to 'm' for consistency
+
 ## 0.2.1
 
 ### Breaking Changes
