@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<LayoutProps>(), {
     position: "static",
     hasSider: false,
     siderPlacement: "left",
+    fillViewport: false,
 })
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
@@ -44,6 +45,7 @@ const rootClass = computed(() => [
     `m-layout--${props.position}-positioned`,
     {
         "m-layout--embedded": props.embedded,
+        "m-layout--fill-viewport": props.fillViewport,
         "m-layout--has-sider": props.hasSider,
         "m-layout--sider-right":
             props.hasSider && props.siderPlacement === "right",

@@ -338,6 +338,26 @@ export type {
   PaginationInstance,
   PaginationProps,
 } from "./components/Pagination/types";
+export { default as MPageContent } from "./components/Page/PageContent.vue";
+export { default as MPageFilters } from "./components/Page/PageFilters.vue";
+export { default as MPageHeader } from "./components/Page/PageHeader.vue";
+export { default as MPagePlaceholder } from "./components/Page/PagePlaceholder.vue";
+export { default as MPageSection } from "./components/Page/PageSection.vue";
+export { default as MPageStat } from "./components/Page/PageStat.vue";
+export { default as MPageToolbar } from "./components/Page/PageToolbar.vue";
+export type {
+  PageContentDensity,
+  PageContentProps,
+  PageContentWidth,
+  PageFiltersProps,
+  PageHeaderProps,
+  PagePlaceholderProps,
+  PageSectionProps,
+  PageSectionVariant,
+  PageStatProps,
+  PageStatTrendSeverity,
+  PageToolbarProps,
+} from "./components/Page/types";
 export { default as MPanel } from "./components/Panel/Panel.vue";
 export type {
   PanelEmits,

@@ -27,6 +27,10 @@
     );
 }
 
+.m-layout--fill-viewport {
+    min-height: 100vh;
+}
+
 .m-layout--absolute-positioned {
     inset: 0;
     position: absolute;
