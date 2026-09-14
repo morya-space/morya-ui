@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-14T03:19:40.333Z",
-  "catalogGeneratedAt": "2026-09-14T03:19:36.680Z",
+  "generatedAt": "2026-09-14T07:44:52.185Z",
+  "catalogGeneratedAt": "2026-09-14T07:44:48.362Z",
   "components": [
     {
       "id": "Accordion",
@@ -2100,10 +2100,8 @@
       },
       "slots": {
         "total": 1,
-        "covered": 0,
-        "missing": [
-          "default"
-        ]
+        "covered": 1,
+        "missing": []
       },
       "methods": {
         "total": 0,
