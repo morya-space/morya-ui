@@ -116,16 +116,30 @@
 }
 
 .m-dropdown__submenu {
+    --m-dropdown-submenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
-    left: 100%;
+    max-height: var(--m-dropdown-submenu-max-height);
     min-width: 10rem;
+    overflow: hidden;
     padding: var(--m-space-1);
-    position: absolute;
-    top: 0;
-    z-index: var(--m-z-popper);
+}
+
+.m-dropdown__submenu--teleported {
+    position: fixed;
+    z-index: var(--m-z-dropdown);
+}
+
+.m-dropdown__submenu-scroll {
+    max-height: calc(var(--m-dropdown-submenu-max-height) - var(--m-space-2));
+    min-height: 0;
+}
+
+.m-dropdown__submenu-view {
+    display: grid;
+    gap: var(--m-space-1);
 }
 
 .m-fade-enter-active,
@@ -389,6 +403,29 @@
     overflow-x: hidden;
 }
 
+.m-dialog__scrollbar > .m-scrollbar__wrap,
+.m-drawer__scrollbar > .m-scrollbar__wrap,
+.m-splitter__scrollbar > .m-scrollbar__wrap,
+.m-treetable__scrollbar > .m-scrollbar__wrap,
+.m-terminal__scrollbar > .m-scrollbar__wrap {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.m-scroll-body.m-scrollbar {
+    min-height: 0;
+    min-width: 0;
+}
+
+/* fit-content scroll wrappers: grow with content; max-height only clips when set on the wrapper */
+.m-scrollbar--fit-content.m-scrollbar--fill:not(.m-layout__scrollbar):not(.m-layout-sider__scrollbar):not(.m-dialog__scrollbar):not(.m-drawer__scrollbar):not(.m-scroll-body) {
+    width: 100%;
+}
+
+.m-scrollbar--fit-content.m-scrollbar--fill:not(.m-layout__scrollbar):not(.m-layout-sider__scrollbar):not(.m-dialog__scrollbar):not(.m-drawer__scrollbar):not(.m-scroll-body) .m-scrollbar__wrap {
+    overflow: auto;
+}
+
 .m-orderlist__btn,
 .m-picklist__btn {
     align-items: center;
@@ -423,19 +460,27 @@
     margin-left: -0.35rem;
 }
 
+.m-orderlist__scrollbar,
+.m-picklist__scrollbar {
+    flex: 1;
+    max-height: 16rem;
+    min-height: 12rem;
+    min-width: var(--m-menu-min-width);
+}
+
 .m-orderlist__list,
 .m-picklist__list {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
-    flex: 1;
+    padding: var(--m-space-1);
+}
+
+.m-orderlist__options,
+.m-picklist__options {
     list-style: none;
     margin: 0;
-    max-height: 16rem;
-    min-height: 12rem;
-    min-width: var(--m-menu-min-width);
-    overflow: auto;
-    padding: var(--m-space-1);
+    padding: 0;
 }
 
 .m-orderlist__item,
