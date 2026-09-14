@@ -20,7 +20,7 @@ alwaysApply: false
 3. `MLayoutContent` → `MPageContent`
 4. `MPageFilters`（内 `MSpace` + Input/Select + 查询/重置）
 5. `MPageToolbar`（标题 + `#actions` 主操作）
-6. `MTable`（直接放置，勿包 `MCard`）
+6. `MTable`（直接放置，通常不必包 `MCard`）
 7. 分页由 `MTable paginator` 或同级 `MPagination`
 
 ## 表单页区块顺序
@@ -38,11 +38,26 @@ alwaysApply: false
 3. KPI：`MGrid` + `MPageStat`（4 列或响应式）
 4. 主区两栏：`MCard` + `MPagePlaceholder` / 最近列表 `MTable`
 
-## 样式
+## 页面标准
 
-- **优先 MPage* 组件**，不要手写筛选区/工具栏/表单表面 CSS
-- 仅允许控件宽度等局部 inline style（如筛选项 `width: 14rem`）
-- MCP 整页：`get_golden_page` → `validate_page`
-- MCP 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions`）→ `validate_page`
+推荐实践（非强制），完整列表见 MCP `get_design_rules` → `standards`：
 
-引用可运行示例：`src/examples/*PageExample.vue`；MCP：`get_golden_page` / `get_page_snippet`
+| 主题 | 推荐 | 通常不必 |
+| --- | --- | --- |
+| 骨架 | `MLayout fillViewport` + `MPageContent` | 手写 `min-height:100vh` |
+| 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-filters` 等 CSS |
+| 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包一层 bordered 表格 |
+| 滚动 | 主滚动交给 Layout；局部限高用 `MScrollbar` | 页面壳 / 面板写 `overflow:auto` |
+| 颜色 | `--m-*` Token | 页面级 hex / 裸 rgb() |
+| 反馈 | 单行结果用 `message`；危险操作用 `MConfirmDialog` | 仅一行文案却用 toast |
+| 无障碍 | 图标按钮 `aria-label`、表单可见 label | — |
+
+仅允许控件宽度等局部 inline style（如筛选项 `width: 14rem`）。
+
+## MCP
+
+- 整页：`recommend_page` → `get_golden_page` → `get_design_rules`
+- 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions` / `scrollable-panel`）
+- 可选：`validate_page`（参考建议，不阻断）
+
+引用可运行示例：`src/examples/*PageExample.vue`

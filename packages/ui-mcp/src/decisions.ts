@@ -246,6 +246,68 @@ export const componentDecisions: ComponentDecision[] = [
     ],
   },
   {
+    id: 'page-scroll-choice',
+    title: '页面滚动如何选择',
+    titleEn: 'Choosing page scroll strategy',
+    question: '这是整页滚动、组件内置滚动，还是业务手写的局部滚动区？',
+    questionEn: 'Is this whole-page scroll, built-in component scroll, or a hand-written local scroll region?',
+    keywords: [
+      'scroll',
+      'scrollbar',
+      '滚动',
+      '滚动条',
+      'overflow',
+      '页面滚动',
+      'layout scroll',
+      'panel scroll',
+    ],
+    options: [
+      {
+        component: 'MLayout fillViewport',
+        when: [
+          '整页后台列表/表单/仪表盘',
+          '需要 Header + Content + 可选 Sider 的应用骨架',
+          '页面主滚动应随 Layout 主题化',
+        ],
+        whenEn: [
+          'Full admin list/form/dashboard pages',
+          'App shell with header, content, and optional sider',
+          'Main page scroll should follow the layout theme',
+        ],
+        avoidWhen: ['单个卡片内部的小块内容', 'Dialog/Drawer 内部'],
+        avoidWhenEn: ['Small regions inside a single card', 'Inside Dialog/Drawer bodies'],
+      },
+      {
+        component: 'MScrollbar',
+        when: [
+          '卡片正文、侧栏、日志/评论列表等局部限高区域',
+          'Split 面板、自定义面板需要统一滚动条样式',
+          'MCP 生成页面时出现 max-height 且内容可能溢出',
+        ],
+        whenEn: [
+          'Card bodies, side panels, logs, or comment lists with a height cap',
+          'Split panes or custom panels that need themed scrollbars',
+          'MCP-generated pages with max-height and potentially overflowing content',
+        ],
+        avoidWhen: ['MTable / MLayoutContent 外层', 'Select/Dropdown/Menu 弹出层'],
+        avoidWhenEn: ['Wrapping MTable or MLayoutContent', 'Select/Dropdown/Menu popups'],
+      },
+      {
+        component: 'Built-in (no extra wrapper)',
+        when: [
+          'MTable、MDialog、MDrawer、MSplitter、MVirtualScroller 等已内置 MScrollbar',
+          '浮层菜单与子菜单（Dropdown/ContextMenu/TieredMenu/Menu flyout）',
+        ],
+        whenEn: [
+          'MTable, MDialog, MDrawer, MSplitter, MVirtualScroller already scroll internally',
+          'Overlay menus and nested flyouts (Dropdown/ContextMenu/TieredMenu/Menu flyout)',
+        ],
+        avoidWhen: ['业务代码手写 overflow:auto 容器'],
+        avoidWhenEn: ['Hand-written overflow:auto containers in product code'],
+      },
+    ],
+  },
+  {
     id: 'surface-nesting-choice',
     title: '如何避免双边框与多余容器',
     titleEn: 'Avoiding double borders and redundant wrappers',

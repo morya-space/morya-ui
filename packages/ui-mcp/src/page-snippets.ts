@@ -367,6 +367,55 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     avoid: ['不要手写 min-height: 100vh'],
     avoidEn: ['Do not hand-write min-height: 100vh'],
   },
+  {
+    id: 'scrollable-panel',
+    title: '局部可滚动面板',
+    titleEn: 'Scrollable local panel',
+    description:
+      '业务页中卡片、侧栏、日志区等限高滚动区域的推荐写法：优先 MScrollbar。',
+    descriptionEn:
+      'Recommended pattern for capped scroll regions in business pages: prefer MScrollbar.',
+    pageTypes: ['list', 'form', 'dashboard', 'detail', 'common'],
+    keywords: [
+      'scroll',
+      'scrollbar',
+      '滚动',
+      '滚动条',
+      'overflow',
+      'max-height',
+      'panel',
+      'card body',
+      'sidebar',
+      'log',
+    ],
+    imports: ['MScrollbar', 'MCard'],
+    template: `<MCard title="活动日志">
+  <MScrollbar max-height="16rem">
+    <ul style="margin:0;padding:0;list-style:none">
+      <li v-for="item in logLines" :key="item.id" style="padding:var(--m-space-2) 0;border-bottom:1px solid var(--m-color-border)">
+        {{ item.text }}
+      </li>
+    </ul>
+  </MScrollbar>
+</MCard>`,
+    scriptSetup: `const logLines = [
+  { id: '1', text: '用户 admin 登录成功' },
+  { id: '2', text: '导出任务已完成' },
+  { id: '3', text: '配置已保存' },
+]`,
+    rules: [
+      '整页主滚动推荐 MLayout fillViewport',
+      '固定高度用 height；仅超出时才滚动用 max-height',
+      'MTable / Dialog / Drawer 等通常已内置滚动，一般无需再包一层',
+    ],
+    rulesEn: [
+      'Main page scroll: prefer MLayout fillViewport',
+      'Use height for fixed viewports; use max-height when scroll should appear only on overflow',
+      'MTable / Dialog / Drawer usually scroll internally; an extra wrapper is often unnecessary',
+    ],
+    avoid: ['整页壳写 overflow:auto', '重复包裹已内置滚动的组件'],
+    avoidEn: ['overflow:auto on the page shell', 'Double-wrapping components that already scroll'],
+  },
 ]
 
 export function findPageSnippet(id: string): PageSnippet | undefined {
