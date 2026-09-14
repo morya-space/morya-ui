@@ -24,6 +24,8 @@ import {
 
 ## 列表页组合
 
+`MPageContent` 负责内容区 **padding**（默认 `--m-space-6`）与子区块 **gap**（默认 `--m-space-4`），文档预览中外框仅模拟 `MLayoutContent` 边界。
+
 ```vue preview
 <script setup lang="ts">
 import {
@@ -40,8 +42,11 @@ const keyword = ref('')
 </script>
 
 <template>
-  <div style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MPageContent density="compact">
+  <div
+    class="doc-demo-frame"
+    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
+  >
+    <MPageContent>
       <MPageFilters aria-label="筛选">
         <MSpace wrap>
           <MInput v-model="keyword" placeholder="搜索" clearable style="width:12rem" />
@@ -80,8 +85,11 @@ const name = ref('')
 </script>
 
 <template>
-  <div style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MPageContent width="narrow" density="compact">
+  <div
+    class="doc-demo-frame"
+    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
+  >
+    <MPageContent width="narrow">
       <MPageHeader title="新建用户" description="填写基本信息。" />
       <MPageSection variant="form">
         <MForm @submit.prevent>
@@ -105,11 +113,18 @@ const name = ref('')
 
 ```vue preview
 <script setup lang="ts">
-import { MPageStat } from 'morya-ui'
+import { MPageContent, MPageStat } from 'morya-ui'
 </script>
 
 <template>
-  <MPageStat label="总用户" value="12,480" trend="+8.2%" icon="users" />
+  <div
+    class="doc-demo-frame"
+    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
+  >
+    <MPageContent density="compact">
+      <MPageStat label="总用户" value="12,480" trend="+8.2%" icon="users" />
+    </MPageContent>
+  </div>
 </template>
 ```
 
