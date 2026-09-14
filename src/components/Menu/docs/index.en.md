@@ -136,7 +136,7 @@ const model = [
 
 ## Collapsed & flyout
 
-`collapsed` hides labels and keeps icons. Hover shows an `MTooltip` with the label; groups also open a right flyout (`.m-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
+`collapsed` hides labels and keeps icons. Hover shows an `MTooltip` with the label; groups also open a right flyout (`.m-menu--flyout`) via `MPopover` teleported to `body`, so it is not clipped by sider scroll regions. Set `collapsed-width` to match the sider width for centered icons.
 
 ```vue preview
 <script setup lang="ts">
@@ -294,7 +294,7 @@ const model = [
 
 ## Horizontal mode
 
-`mode="horizontal"` for top nav bars. Submenus open in a dropdown flyout and close after selection.
+`mode="horizontal"` for top nav bars. Submenus open in a `MPopover` dropdown flyout (teleported, themed scrollbar) and close after selection. Popup mode root menus also use built-in `MScrollbar`.
 
 ```vue preview
 <script setup lang="ts">

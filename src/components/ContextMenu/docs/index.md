@@ -63,6 +63,10 @@ const model = [
 </template>
 ```
 
+## 滚动与嵌套子菜单
+
+菜单列表与嵌套 `items` 飞出层使用内置 `MScrollbar`（`max-height: min(18rem, 45vh)`）。嵌套层 Teleport 到 `body` 相对父项定位，避免长列表滚动时侧向菜单被裁剪。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |

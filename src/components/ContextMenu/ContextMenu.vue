@@ -7,6 +7,7 @@ import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import ContextMenuNodes from './ContextMenuNodes.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<Omit<ContextMenuProps, 'modelValue' | 'position'>>(), {
   teleport: true,
@@ -114,7 +115,14 @@ defineExpose({ show, hide })
         :style="menuStyle"
         @click.stop
       >
-        <ContextMenuNodes :items="model" @activate="activate" />
+        <MScrollbar
+          class="m-contextmenu__scroll"
+          fit-content
+          wrap-class="m-contextmenu__scroll-wrap"
+          view-class="m-contextmenu__scroll-view"
+        >
+          <ContextMenuNodes :items="model" @activate="activate" />
+        </MScrollbar>
       </div>
     </Transition>
   </Teleport>

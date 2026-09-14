@@ -127,7 +127,7 @@ const model = [
 
 ## 折叠与飞出层
 
-`collapsed` 隐藏文案，仅保留图标；悬停时在右侧显示 `MTooltip` 标签，带子项的节点还会弹出飞出层（`.m-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
+`collapsed` 隐藏文案，仅保留图标；悬停时在右侧显示 `MTooltip` 标签，带子项的节点还会弹出飞出层（`.m-menu--flyout`）。飞出层经 `MPopover` Teleport 到 `body`，不会被侧栏或 `MLayoutSider` 滚动区域裁剪。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
 
 ```vue preview
 <script setup lang="ts">
@@ -284,7 +284,7 @@ const model = [
 
 ## 水平菜单
 
-`mode="horizontal"` 用于顶栏一级导航；子菜单以下拉飞出层展示，选中后自动关闭。
+`mode="horizontal"` 用于顶栏一级导航；子菜单经 `MPopover` 以下拉飞出层展示（Teleport + 主题滚动条），选中后自动关闭。`popup` 模式的主菜单列表同样内置 `MScrollbar`。
 
 ```vue preview
 <script setup lang="ts">

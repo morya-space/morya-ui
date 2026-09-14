@@ -11,6 +11,7 @@ import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<MenubarProps>(), {
   selectedKey: null,
@@ -273,22 +274,29 @@ onBeforeUnmount(() => {
             role="menu"
             @keydown="onSubmenuKeydown"
           >
-            <button
-              v-for="(child, childIndex) in item.items"
-              :key="`${child.label}-${childIndex}`"
-              type="button"
-              class="m-menubar__subitem"
-              :class="{ 'm-menubar__subitem--selected': isSelected(child) }"
-              role="menuitem"
-              :disabled="child.disabled"
-              :tabindex="subKeyboard.tabindexFor(childIndex)"
-              @click.stop="activateChild(child)"
+            <MScrollbar
+              class="m-menubar__submenu-scroll"
+              fit-content
+              wrap-class="m-menubar__submenu-wrap"
+              view-class="m-menubar__submenu-view"
             >
-              <span v-if="iconOf(child)" class="m-menubar__icon" aria-hidden="true">
-                <MIcon :name="iconOf(child)!" size="sm" />
-              </span>
-              {{ child.label }}
-            </button>
+              <button
+                v-for="(child, childIndex) in item.items"
+                :key="`${child.label}-${childIndex}`"
+                type="button"
+                class="m-menubar__subitem"
+                :class="{ 'm-menubar__subitem--selected': isSelected(child) }"
+                role="menuitem"
+                :disabled="child.disabled"
+                :tabindex="subKeyboard.tabindexFor(childIndex)"
+                @click.stop="activateChild(child)"
+              >
+                <span v-if="iconOf(child)" class="m-menubar__icon" aria-hidden="true">
+                  <MIcon :name="iconOf(child)!" size="sm" />
+                </span>
+                {{ child.label }}
+              </button>
+            </MScrollbar>
           </div>
         </Transition>
       </Teleport>

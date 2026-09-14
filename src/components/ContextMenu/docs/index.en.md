@@ -63,6 +63,10 @@ const model = [
 </template>
 ```
 
+## Scrolling & nested flyouts
+
+The menu list and nested `items` flyouts use built-in `MScrollbar` (`max-height: min(18rem, 45vh)`). Nested panels teleport to `body` and anchor to the parent item so side flyouts are not clipped when the root menu scrolls.
+
 ## Props
 
 | Prop | Type | Default | Description |

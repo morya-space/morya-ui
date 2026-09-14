@@ -71,6 +71,10 @@ const items = [
 </template>
 ```
 
+## Scrolling & nested flyouts
+
+Both the root menu and nested `items` flyouts use built-in `MScrollbar` with `max-height: min(18rem, 45vh)`. Nested submenus are **also teleported to `body`** and positioned against the parent item so they are not clipped when the root menu scrolls; a short hover delay keeps the flyout open while moving the pointer into it.
+
 ## Props
 
 | Prop | Type | Default | Description |

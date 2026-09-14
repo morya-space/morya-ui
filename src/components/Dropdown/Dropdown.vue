@@ -7,6 +7,7 @@ import { useRootParts } from '../../shared/useComponentAttrs'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import DropdownNodes from './DropdownNodes.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -225,16 +226,23 @@ onBeforeUnmount(() => {
           @mouseenter="onMenuEnter"
           @mouseleave="onMenuLeave"
         >
-          <DropdownNodes
-            :items="items"
-            :highlighted-value="highlightedValue"
-            @select="selectItem"
-            @highlight="(value) => (highlightedIndex = enabledItems.findIndex((item) => item.value === value))"
+          <MScrollbar
+            class="m-dropdown__scroll"
+            fit-content
+            wrap-class="m-dropdown__scroll-wrap"
+            view-class="m-dropdown__scroll-view"
           >
-            <template v-if="$slots.item" #item="{ item }">
-              <slot name="item" :item="item" />
-            </template>
-          </DropdownNodes>
+            <DropdownNodes
+              :items="items"
+              :highlighted-value="highlightedValue"
+              @select="selectItem"
+              @highlight="(value) => (highlightedIndex = enabledItems.findIndex((item) => item.value === value))"
+            >
+              <template v-if="$slots.item" #item="{ item }">
+                <slot name="item" :item="item" />
+              </template>
+            </DropdownNodes>
+          </MScrollbar>
         </div>
       </Transition>
     </Teleport>

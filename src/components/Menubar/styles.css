@@ -56,6 +56,7 @@
 }
 
 .m-menubar__submenu {
+    --m-menubar-submenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
@@ -64,11 +65,24 @@
     flex-direction: column;
     gap: var(--m-menubar-item-gap);
     left: 0;
+    max-height: var(--m-menubar-submenu-max-height);
     min-width: var(--m-menubar-menu-min-width);
+    overflow: hidden;
     padding: var(--m-space-1);
     position: absolute;
     top: calc(100% + 0.25rem);
     z-index: var(--m-z-popper);
+}
+
+.m-menubar__submenu-scroll {
+    max-height: 100%;
+    min-height: 0;
+}
+
+.m-menubar__submenu-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-menubar-item-gap);
 }
 
 .m-menubar__submenu--teleported {

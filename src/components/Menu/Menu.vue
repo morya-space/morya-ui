@@ -18,6 +18,7 @@ import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { M_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<MenuProps>(), {
   popup: false,
@@ -439,7 +440,14 @@ const popupPanelStyle = computed(() =>
           role="menu"
           @keydown="onMenuKeydown"
         >
-          <MenuNodes :items="model" :depth="0" prefix="item" />
+          <MScrollbar
+            class="m-menu__scroll"
+            fit-content
+            wrap-class="m-menu__scroll-wrap"
+            view-class="m-menu__scroll-view"
+          >
+            <MenuNodes :items="model" :depth="0" prefix="item" />
+          </MScrollbar>
         </div>
       </Transition>
     </Teleport>
@@ -455,7 +463,14 @@ const popupPanelStyle = computed(() =>
           role="menu"
         @keydown="onMenuKeydown"
       >
-        <MenuNodes :items="model" :depth="0" prefix="item" />
+        <MScrollbar
+          class="m-menu__scroll"
+          fit-content
+          wrap-class="m-menu__scroll-wrap"
+          view-class="m-menu__scroll-view"
+        >
+          <MenuNodes :items="model" :depth="0" prefix="item" />
+        </MScrollbar>
       </div>
     </Transition>
   </Teleport>

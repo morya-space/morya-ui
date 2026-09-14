@@ -13,11 +13,13 @@ describe('muTieredMenu', () => {
           { label: 'Help', command: vi.fn() },
         ],
       },
+      attachTo: document.body,
     })
     await wrapper.get('.m-tieredmenu__row').trigger('mouseenter')
-    expect(wrapper.find('.m-tieredmenu__submenu').exists()).toBe(true)
-    await wrapper.get('.m-tieredmenu__submenu .m-tieredmenu__item').trigger('click')
+    expect(document.body.querySelector('.m-tieredmenu__submenu--teleported')).toBeTruthy()
+    ;(document.body.querySelector('.m-tieredmenu__submenu--teleported .m-tieredmenu__item') as HTMLButtonElement).click()
     expect(command).toHaveBeenCalledOnce()
+    wrapper.unmount()
   })
 
   it('teleports popup menu to body by default', async () => {
