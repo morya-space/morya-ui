@@ -403,8 +403,6 @@
     overflow-x: hidden;
 }
 
-.m-dialog__scrollbar > .m-scrollbar__wrap,
-.m-drawer__scrollbar > .m-scrollbar__wrap,
 .m-treetable__scrollbar > .m-scrollbar__wrap,
 .m-terminal__scrollbar > .m-scrollbar__wrap {
     height: 100%;
@@ -417,11 +415,11 @@
 }
 
 /* fit-content scroll wrappers: grow with content; max-height only clips when set on the wrapper */
-.m-scrollbar--fit-content.m-scrollbar--fill:not(.m-layout__scrollbar):not(.m-layout-sider__scrollbar):not(.m-dialog__scrollbar):not(.m-drawer__scrollbar):not(.m-scroll-body) {
+.m-scrollbar--fit-content.m-scrollbar--fill:not(.m-layout__scrollbar):not(.m-layout-sider__scrollbar):not(.m-scroll-body) {
     width: 100%;
 }
 
-.m-scrollbar--fit-content.m-scrollbar--fill:not(.m-layout__scrollbar):not(.m-layout-sider__scrollbar):not(.m-dialog__scrollbar):not(.m-drawer__scrollbar):not(.m-scroll-body) .m-scrollbar__wrap {
+.m-scrollbar--fit-content.m-scrollbar--fill:not(.m-layout__scrollbar):not(.m-layout-sider__scrollbar):not(.m-scroll-body) .m-scrollbar__wrap {
     overflow: auto;
 }
 

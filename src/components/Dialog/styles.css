@@ -177,11 +177,7 @@
 
 .m-dialog__body {
     flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-}
-
-.m-dialog__body.m-dialog__scrollbar > .m-scrollbar__wrap {
+    overflow: auto;
     padding: var(--m-space-4);
 }
 

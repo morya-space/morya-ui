@@ -127,11 +127,7 @@
 }
 
 .m-drawer__body {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-}
-
-.m-drawer__body.m-drawer__scrollbar > .m-scrollbar__wrap {
+    flex: 1;
+    overflow: auto;
     padding: var(--m-space-4);
 }

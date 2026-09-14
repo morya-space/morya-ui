@@ -274,26 +274,28 @@ export const componentDecisions: ComponentDecision[] = [
           'App shell with header, content, and optional sider',
           'Main page scroll should follow the layout theme',
         ],
-        avoidWhen: ['单个卡片内部的小块内容', 'Dialog/Drawer 内部'],
-        avoidWhenEn: ['Small regions inside a single card', 'Inside Dialog/Drawer bodies'],
+        avoidWhen: ['单个卡片内部的小块内容', '需要业务自行控制滚动的 Dialog/Drawer 内容'],
+        avoidWhenEn: ['Small regions inside a single card', 'Dialog/Drawer bodies where apps control scrolling'],
       },
       {
         component: 'MScrollbar',
         when: [
           '业务自行限高的卡片正文、侧栏、日志列表，且希望主题化滚动条',
+          'Dialog / Drawer 等内容区需要主题滚动时由业务显式包一层',
           '组件未内置滚动、又需要统一滚动外观时',
         ],
         whenEn: [
           'App-owned capped regions (card bodies, side panels, logs) that want themed scrollbars',
+          'Dialog / Drawer content where the app opts into themed scrolling',
           'No built-in component scroll, but a consistent scrollbar look is desired',
         ],
         avoidWhen: [
-          'Popover / Splitter 等用户内容插槽（应由业务决定是否滚动）',
+          'Dialog / Drawer / Popover / Splitter 等用户内容插槽被组件库强行包滚动',
           'Textarea 等原生控件自身的滚动',
           'MTable / MLayoutContent / Select 弹出层等已内置滚动的区域',
         ],
         avoidWhenEn: [
-          'User content slots such as Popover or Splitter panes (apps decide scrolling)',
+          'Library-forced scroll around user content slots such as Dialog, Drawer, Popover, or Splitter',
           'Native control scrolling such as Textarea',
           'Areas that already scroll internally (MTable, MLayoutContent, Select popups)',
         ],
@@ -301,11 +303,11 @@ export const componentDecisions: ComponentDecision[] = [
       {
         component: 'Built-in (no extra wrapper)',
         when: [
-          'MLayout、MDialog、MDrawer、MTable、MVirtualScroller、菜单/下拉面板等已内置 MScrollbar',
+          'MLayout、MTable、MVirtualScroller、菜单/下拉面板等已内置 MScrollbar',
           '浮层菜单与子菜单（Dropdown/ContextMenu/TieredMenu/Menu flyout）',
         ],
         whenEn: [
-          'MLayout, MDialog, MDrawer, MTable, MVirtualScroller, and menu/select panels already scroll internally',
+          'MLayout, MTable, MVirtualScroller, and menu/select panels already scroll internally',
           'Overlay menus and nested flyouts (Dropdown/ContextMenu/TieredMenu/Menu flyout)',
         ],
         avoidWhen: ['在已内置滚动的组件外再包一层滚动容器'],
