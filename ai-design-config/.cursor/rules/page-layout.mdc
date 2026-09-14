@@ -15,30 +15,34 @@ alwaysApply: false
 
 ## 列表页区块顺序
 
-1. `MLayout` + 可选 `MLayoutSider`
-2. `MBreadcrumb`
-3. 筛选区（`MSpace` + Input/Select + 查询/重置）
-4. 工具栏（标题 + 主操作按钮）
-5. `MTable`
-6. `MPagination`（右对齐）
+1. `MLayout fillViewport` + 可选 `MLayoutSider bordered`
+2. `MLayoutHeader` → `MBreadcrumb`
+3. `MLayoutContent` → `MPageContent`
+4. `MPageFilters`（内 `MSpace` + Input/Select + 查询/重置）
+5. `MPageToolbar`（标题 + `#actions` 主操作）
+6. `MTable`（直接放置，勿包 `MCard`）
+7. 分页由 `MTable paginator` 或同级 `MPagination`
 
 ## 表单页区块顺序
 
-1. `MBreadcrumb`
-2. 标题 + 简短说明
-3. `MForm`（`max-width: ~42rem`）
-4. 底栏：保存（primary）+ 取消（secondary）
+1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
+2. `MPageContent width="narrow"`
+3. `MPageHeader`（标题 + 说明）
+4. `MPageSection variant="form"` → `MForm`
+5. `MPageSection variant="actions"`：保存（primary）+ 取消（secondary）
 
 ## 仪表盘区块顺序
 
-1. `MBreadcrumb` + 页面标题
-2. KPI：`MGrid` + `MCard`（4 列或响应式）
-3. 主区两栏：图表占位 + 最近列表 `MTable`
+1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
+2. `MPageContent density="spacious"` → `MPageHeader`
+3. KPI：`MGrid` + `MPageStat`（4 列或响应式）
+4. 主区两栏：`MCard` + `MPagePlaceholder` / 最近列表 `MTable`
 
 ## 样式
 
-- 页面背景：`var(--m-color-surface)`
-- 区块间距：`var(--m-space-4)` / `var(--m-space-6)`
-- 筛选区背景：`color-mix(in srgb, var(--m-color-border) 25%, transparent)`
+- **优先 MPage* 组件**，不要手写筛选区/工具栏/表单表面 CSS
+- 仅允许控件宽度等局部 inline style（如筛选项 `width: 14rem`）
+- MCP 整页：`get_golden_page` → `validate_page`
+- MCP 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions`）→ `validate_page`
 
-引用可运行示例：`src/examples/*PageExample.vue`
+引用可运行示例：`src/examples/*PageExample.vue`；MCP：`get_golden_page` / `get_page_snippet`

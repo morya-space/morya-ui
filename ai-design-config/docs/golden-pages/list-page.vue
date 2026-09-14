@@ -13,6 +13,9 @@ import {
   MLayoutHeader,
   MLayoutSider,
   MMenu,
+  MPageContent,
+  MPageFilters,
+  MPageToolbar,
   MSelect,
   MSpace,
   MTable,
@@ -48,117 +51,67 @@ const rows = [
 
 <template>
   <MConfigProvider :locale="zhCN">
-    <MLayout has-sider class="page-list">
-      <MLayoutSider class="page-list__sider">
+    <MLayout has-sider fill-viewport>
+      <MLayoutSider bordered>
         <MMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
       </MLayoutSider>
 
       <MLayout>
-        <MLayoutHeader class="page-list__header">
+        <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
           <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
         </MLayoutHeader>
 
-        <MLayoutContent class="page-list__content">
-          <!-- 筛选区 -->
-          <section class="page-list__filters" aria-label="筛选">
-            <MSpace wrap>
-              <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
-              <MSelect
-                v-model="status"
-                :options="statusOptions"
-                placeholder="状态"
-                clearable
-                style="width: 10rem"
-              />
-              <MButton severity="primary">查询</MButton>
-              <MButton severity="secondary">重置</MButton>
-            </MSpace>
-          </section>
-
-          <!-- 工具栏 -->
-          <header class="page-list__toolbar">
-            <h1 class="page-list__title">用户管理</h1>
-            <MButton severity="primary">新建用户</MButton>
-          </header>
-
-          <!-- 表格 -->
-          <MTable
-            :columns="columns"
-            :rows="rows"
-            :rows-per-page="3"
-            paginator
-            striped
-            bordered
-            row-key="id"
-            aria-label="用户列表"
-          >
-            <template #cell-status="{ value }">
-              <MTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
-            </template>
-            <template #cell-actions>
-              <MSpace>
-                <MButton severity="secondary" size="small">编辑</MButton>
-                <MButton severity="danger" size="small">删除</MButton>
+        <MLayoutContent>
+          <MPageContent>
+            <MPageFilters aria-label="筛选">
+              <MSpace wrap>
+                <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
+                <MSelect
+                  v-model="status"
+                  :options="statusOptions"
+                  placeholder="状态"
+                  clearable
+                  style="width: 10rem"
+                />
+                <MButton severity="primary">查询</MButton>
+                <MButton severity="secondary">重置</MButton>
               </MSpace>
-            </template>
-            <template #empty>
-              <p class="page-list__empty">暂无用户数据</p>
-            </template>
-          </MTable>
+            </MPageFilters>
+
+            <MPageToolbar title="用户管理">
+              <template #actions>
+                <MButton severity="primary">新建用户</MButton>
+              </template>
+            </MPageToolbar>
+
+            <MTable
+              :columns="columns"
+              :rows="rows"
+              :rows-per-page="3"
+              paginator
+              striped
+              bordered
+              row-key="id"
+              aria-label="用户列表"
+            >
+              <template #cell-status="{ value }">
+                <MTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
+              </template>
+              <template #cell-actions>
+                <MSpace>
+                  <MButton severity="secondary" size="small">编辑</MButton>
+                  <MButton severity="danger" size="small">删除</MButton>
+                </MSpace>
+              </template>
+              <template #empty>
+                <p style="margin: 0; padding: var(--m-space-8); text-align: center; color: var(--m-color-text-muted)">
+                  暂无用户数据
+                </p>
+              </template>
+            </MTable>
+          </MPageContent>
         </MLayoutContent>
       </MLayout>
     </MLayout>
   </MConfigProvider>
 </template>
-
-<style scoped>
-.page-list {
-  min-height: 100vh;
-  background: var(--m-color-surface);
-}
-
-.page-list__sider {
-  border-right: 1px solid var(--m-color-border);
-}
-
-.page-list__header {
-  padding: var(--m-space-4) var(--m-space-6);
-  border-bottom: 1px solid var(--m-color-border);
-  background: var(--m-color-surface);
-}
-
-.page-list__content {
-  padding: var(--m-space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--m-space-4);
-}
-
-.page-list__filters {
-  padding: var(--m-space-4);
-  background: color-mix(in srgb, var(--m-color-border) 25%, transparent);
-  border-radius: var(--m-radius-md);
-  border: 1px solid var(--m-color-border);
-}
-
-.page-list__toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--m-space-4);
-}
-
-.page-list__title {
-  margin: 0;
-  font-size: var(--m-font-size-lg);
-  font-weight: 600;
-  color: var(--m-color-text);
-}
-
-.page-list__empty {
-  margin: 0;
-  padding: var(--m-space-8);
-  text-align: center;
-  color: var(--m-color-text-muted);
-}
-</style>

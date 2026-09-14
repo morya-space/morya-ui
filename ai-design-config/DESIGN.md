@@ -31,8 +31,12 @@ import 'morya-ui/styles.css'
 </template>
 ```
 
-- 管理后台：`MLayout` + `MLayoutSider` + `MLayoutHeader` + `MLayoutContent`
-- 页面内分区：`MCard` / `MPanel` / `MFieldset`
+- 管理后台：`MLayout fillViewport` + `MLayoutSider` + `MLayoutHeader` + `MLayoutContent`
+- 页面内容堆叠：`MPageContent`（内置于 `MLayoutContent`）
+- 列表筛选 / 工具栏：`MPageFilters` + `MPageToolbar`
+- 表单引导 / 表面：`MPageHeader` + `MPageSection variant="form|actions"`
+- 仪表盘 KPI / 占位：`MPageStat` + `MPagePlaceholder`
+- 其他分区：`MCard`（图表/明细模块）/ `MPanel` / `MFieldset`
 - 栅格：`MGrid` + `MGridItem` 或 `MFlex` + `MSpace`
 
 ## 3. 页面类型与黄金样例
@@ -43,7 +47,7 @@ import 'morya-ui/styles.css'
 | 表单页 | `docs/golden-pages/form-page.vue` | 面包屑、分组表单、`MForm` / `MFormItem`、提交/取消 |
 | 仪表盘 | `docs/golden-pages/dashboard-page.vue` | 统计卡片栅格、图表区占位、快捷入口 / 最近列表 |
 
-生成新页面时：**结构对齐黄金样例，业务字段替换，不另起布局范式**。
+生成新页面时：**结构对齐黄金样例，用 MPage* 组件拼装，尽量不写 scoped CSS**。
 
 ## 4. 表单约定
 
