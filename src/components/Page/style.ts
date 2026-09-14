@@ -1,3 +1,5 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Card/styles.css'
+import '../Icon/styles.css'
 import './styles.css'
