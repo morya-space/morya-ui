@@ -216,11 +216,16 @@
     max-width: 100%;
     min-height: 0;
     min-width: 0;
-    opacity: 0;
     overflow: hidden;
     overflow-x: hidden;
-    transition: opacity var(--m-motion-normal) var(--m-motion-ease);
     width: 100%;
+}
+
+/* Opacity only on the scrollbar root. The wrap keeps `.m-layout-sider__scroll`
+   and must stay opaque once the root fades in. */
+.m-layout-sider__scrollbar {
+    opacity: 0;
+    transition: opacity var(--m-motion-normal) var(--m-motion-ease);
 }
 
 .m-layout-sider--collapse-transform > .m-layout-sider__scroll,
