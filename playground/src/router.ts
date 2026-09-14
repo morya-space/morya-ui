@@ -39,6 +39,14 @@ const router = createRouter({
       component: () => import('./views/ChangelogView.vue'),
     },
     {
+      path: '/components-demos',
+      name: 'components-demos',
+      component: () => import('./views/components-demos-view/ComponentsDemosView.vue'),
+      meta: {
+        title: '开发调试组件页面：不对外',
+      }
+    },
+    {
       // 兼容旧路径 /Button → /components/Button（仅已知组件名）
       path: '/:component',
       redirect: (to) => {
