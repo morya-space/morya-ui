@@ -20,6 +20,7 @@ import {
 } from '../Tree/checkStrategy'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -447,23 +448,30 @@ onBeforeUnmount(() => {
             @click.stop
             @keydown="onFilterKeydown"
           >
-          <ul class="m-treeselect__tree" role="tree">
-            <TreeSelectNodeItem
-              v-for="node in filteredOptions"
-              :key="node.key"
-              :node="node"
-              :depth="0"
-              :selected-keys="selectedKeys"
-              :checked-keys="checkedKeys"
-              :expanded="expanded"
-              :show-checkbox="checkable"
-              :active-key="activeKey"
-              :render-option="renderOption"
-              @toggle="toggleExpand"
-              @select="select"
-              @check="toggleCheck"
-            />
-          </ul>
+          <MScrollbar
+            class="m-treeselect__tree-scroll"
+            fit-content
+            wrap-class="m-treeselect__tree-wrap"
+            view-class="m-treeselect__tree-view"
+          >
+            <ul class="m-treeselect__tree" role="tree">
+              <TreeSelectNodeItem
+                v-for="node in filteredOptions"
+                :key="node.key"
+                :node="node"
+                :depth="0"
+                :selected-keys="selectedKeys"
+                :checked-keys="checkedKeys"
+                :expanded="expanded"
+                :show-checkbox="checkable"
+                :active-key="activeKey"
+                :render-option="renderOption"
+                @toggle="toggleExpand"
+                @select="select"
+                @check="toggleCheck"
+              />
+            </ul>
+          </MScrollbar>
         </div>
       </Transition>
     </Teleport>

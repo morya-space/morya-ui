@@ -16,7 +16,7 @@ describe('muTerminal', () => {
 
   it('uses role=log on the body', () => {
     const wrapper = mount(MTerminal)
-    expect(wrapper.find('.m-terminal__body').attributes('role')).toBe('log')
+    expect(wrapper.find('.m-terminal__body [role="log"]').exists()).toBe(true)
     expect(wrapper.find('.m-terminal').attributes('role')).toBeUndefined()
   })
 

@@ -6,6 +6,7 @@ import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import TreeTableRow from './TreeTableRow.vue'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = defineProps<TreeTableProps>()
 
@@ -41,7 +42,11 @@ function toggle(node: TreeTableNode) {
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-treetable">
+  <ScrollBody
+    v-bind="rootAttrs"
+    root-class="m-treetable m-treetable__scrollbar"
+    wrap-class="m-treetable__scroll"
+  >
     <table class="m-treetable__table" role="treegrid">
       <thead>
         <tr>
@@ -68,5 +73,5 @@ function toggle(node: TreeTableNode) {
         <p class="m-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
       </slot>
     </div>
-  </div>
+  </ScrollBody>
 </template>

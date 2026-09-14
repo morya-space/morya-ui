@@ -3,7 +3,9 @@
 defineOptions({ inheritAttrs: false })
 import type { VirtualScrollerProps } from './types'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import type { ScrollbarScrollPayload } from '../Scrollbar/types'
 import { computed, ref, useAttrs } from 'vue'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<VirtualScrollerProps>(), {
   height: 240,
@@ -11,7 +13,6 @@ const props = withDefaults(defineProps<VirtualScrollerProps>(), {
 })
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 
 const scrollTop = ref(0)
 
@@ -41,17 +42,21 @@ const visibleItems = computed(() =>
 
 const offsetY = computed(() => startIndex.value * props.itemSize)
 
-function onScroll(event: Event) {
-  const target = event.target as HTMLElement
-  scrollTop.value = target.scrollTop
+const rootStyle = computed(() => ({
+  height: typeof props.height === 'number' ? `${props.height}px` : props.height,
+}))
+
+function onScroll(payload: ScrollbarScrollPayload) {
+  scrollTop.value = payload.scrollTop
 }
 </script>
 
 <template>
-  <div
+  <ScrollBody
     v-bind="rootAttrs"
-    class="m-virtualscroller"
-    :style="{ height: typeof height === 'number' ? `${height}px` : height }"
+    root-class="m-virtualscroller m-virtualscroller__scrollbar"
+    wrap-class="m-virtualscroller__scroll"
+    :wrap-style="rootStyle"
     @scroll="onScroll"
   >
     <div class="m-virtualscroller__spacer" :style="{ height: `${totalHeight}px` }">
@@ -68,5 +73,5 @@ function onScroll(event: Event) {
         </div>
       </div>
     </div>
-  </div>
+  </ScrollBody>
 </template>

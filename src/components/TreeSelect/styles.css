@@ -95,16 +95,26 @@
 }
 
 .m-treeselect__panel {
+    --m-treeselect-panel-max-height: min(18rem, 45vh);
+    --m-treeselect-list-max-height: var(--m-treeselect-panel-max-height);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
+    display: flex;
+    flex-direction: column;
     left: 0;
     margin-top: var(--m-space-1);
+    max-height: var(--m-treeselect-panel-max-height);
     min-width: 100%;
+    overflow: hidden;
     position: absolute;
     top: 100%;
     z-index: var(--m-z-popper);
+}
+
+.m-treeselect__panel:has(.m-treeselect__filter) {
+    --m-treeselect-list-max-height: calc(var(--m-treeselect-panel-max-height) - 2.75rem);
 }
 
 .m-treeselect__panel--teleported {
@@ -112,6 +122,11 @@
     position: fixed;
     top: auto;
     z-index: var(--m-z-dropdown);
+}
+
+.m-treeselect__tree-scroll {
+    max-height: var(--m-treeselect-list-max-height);
+    min-height: 0;
 }
 
 .m-treeselect__tree,

@@ -22,9 +22,9 @@ describe('muVirtualScroller', () => {
     const wrapper = mount(MVirtualScroller, {
       props: { items, itemSize: 20, height: 100, buffer: 0 },
     })
-    const root = wrapper.find('.m-virtualscroller')
-    Object.defineProperty(root.element, 'scrollTop', { value: 200, configurable: true })
-    await root.trigger('scroll')
+    const wrap = wrapper.find('.m-virtualscroller .m-scrollbar__wrap')
+    Object.defineProperty(wrap.element, 'scrollTop', { value: 200, configurable: true })
+    await wrap.trigger('scroll')
     expect(wrapper.text()).toContain('10')
   })
 })
