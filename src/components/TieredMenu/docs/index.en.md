@@ -57,6 +57,10 @@ const model = [{ label: 'Copy' }, { label: 'Paste' }]
 </template>
 ```
 
+## Scrolling & submenu flyout
+
+The root list and side submenu use built-in `MScrollbar` (`max-height: min(18rem, 45vh)`). Submenus teleport to `body` and anchor to the trigger so they stay visible when the root menu scrolls.
+
 ## Item shape
 
 | Field | Type | Description |

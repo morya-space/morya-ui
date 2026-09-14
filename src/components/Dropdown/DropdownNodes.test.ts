@@ -26,8 +26,10 @@ describe('DropdownNodes', () => {
       props: {
         items: [{ value: 'more', label: 'More', items: [{ value: 'a', label: 'A' }] }],
       },
+      attachTo: document.body,
     })
     await wrapper.get('.m-dropdown__submenu-wrap').trigger('mouseenter')
-    expect(wrapper.find('.m-dropdown__submenu').exists()).toBe(true)
+    expect(document.body.querySelector('.m-dropdown__submenu--teleported')).toBeTruthy()
+    wrapper.unmount()
   })
 })

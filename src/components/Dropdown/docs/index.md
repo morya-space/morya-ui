@@ -71,6 +71,10 @@ const items = [
 </template>
 ```
 
+## 滚动与嵌套子菜单
+
+主菜单与嵌套 `items` 的侧向飞出层均内置 `MScrollbar`，高度上限为 `min(18rem, 45vh)`。嵌套子菜单会 **额外 Teleport 到 `body`** 并相对父项定位，避免主菜单滚动时裁剪飞出层；hover 移入飞出层时有短暂延迟关闭。
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |

@@ -4,6 +4,8 @@ import { ref } from 'vue'
 import MIcon from '../Icon/Icon.vue'
 import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
 import DropdownNodes from './DropdownNodes.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import FlyoutSubmenu from '../../shared/FlyoutSubmenu.vue'
 
 const props = defineProps<{
   items: DropdownItem[]
@@ -16,6 +18,21 @@ const emit = defineEmits<{
 }>()
 
 const openValue = ref<string | null>(null)
+const openAnchor = ref<HTMLElement | null>(null)
+let hideTimer: ReturnType<typeof setTimeout> | undefined
+
+function clearHideTimer() {
+  if (hideTimer) clearTimeout(hideTimer)
+  hideTimer = undefined
+}
+
+function scheduleClose() {
+  clearHideTimer()
+  hideTimer = setTimeout(() => {
+    openValue.value = null
+    openAnchor.value = null
+  }, 150)
+}
 
 function isDivider(item: DropdownItem) {
   return item.separator || item.type === 'divider'
@@ -33,14 +50,26 @@ function iconOf(item: DropdownItem) {
   return resolveMenuIcon(item.icon)
 }
 
-function onEnter(item: DropdownItem, index: number) {
+function onEnter(item: DropdownItem, index: number, event: MouseEvent) {
   if (item.disabled || isDivider(item) || isGroup(item)) return
+  clearHideTimer()
   emit('highlight', item.value)
-  if (item.items?.length) openValue.value = itemKey(item, index)
+  if (!item.items?.length) return
+  openValue.value = itemKey(item, index)
+  const wrap = event.currentTarget as HTMLElement | null
+  openAnchor.value = wrap?.querySelector<HTMLElement>('.m-dropdown__item--parent') ?? wrap
 }
 
 function onLeave() {
-  openValue.value = null
+  scheduleClose()
+}
+
+function onSubmenuEnter() {
+  clearHideTimer()
+}
+
+function onSubmenuLeave() {
+  scheduleClose()
 }
 </script>
 
@@ -62,7 +91,7 @@ function onLeave() {
     <div
       v-else-if="item.items?.length"
       class="m-dropdown__submenu-wrap"
-      @mouseenter="onEnter(item, index)"
+      @mouseenter="onEnter(item, index, $event)"
       @mouseleave="onLeave"
     >
       <button
@@ -83,14 +112,27 @@ function onLeave() {
           <MIcon name="chevron-right" size="sm" />
         </span>
       </button>
-      <div v-if="openValue === itemKey(item, index)" class="m-dropdown__submenu" role="menu">
-        <DropdownNodes
-          :items="item.items"
-          :highlighted-value="highlightedValue"
-          @select="$emit('select', $event)"
-          @highlight="$emit('highlight', $event)"
-        />
-      </div>
+      <FlyoutSubmenu
+        :open="openValue === itemKey(item, index)"
+        :anchor="openValue === itemKey(item, index) ? openAnchor : null"
+        panel-class="m-dropdown__submenu"
+        @enter="onSubmenuEnter"
+        @leave="onSubmenuLeave"
+      >
+        <MScrollbar
+          class="m-dropdown__submenu-scroll"
+          fit-content
+          wrap-class="m-dropdown__submenu-wrap-inner"
+          view-class="m-dropdown__submenu-view"
+        >
+          <DropdownNodes
+            :items="item.items"
+            :highlighted-value="highlightedValue"
+            @select="$emit('select', $event)"
+            @highlight="$emit('highlight', $event)"
+          />
+        </MScrollbar>
+      </FlyoutSubmenu>
     </div>
     <button
       v-else

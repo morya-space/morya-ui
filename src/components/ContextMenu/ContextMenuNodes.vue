@@ -4,10 +4,27 @@ import { ref } from 'vue'
 import MIcon from '../Icon/Icon.vue'
 import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
 import ContextMenuNodes from './ContextMenuNodes.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import FlyoutSubmenu from '../../shared/FlyoutSubmenu.vue'
 
 const props = defineProps<{ items: ContextMenuItem[] }>()
 const emit = defineEmits<{ (event: 'activate', item: ContextMenuItem): void }>()
 const openIndex = ref<number | null>(null)
+const openAnchor = ref<HTMLElement | null>(null)
+let hideTimer: ReturnType<typeof setTimeout> | undefined
+
+function clearHideTimer() {
+  if (hideTimer) clearTimeout(hideTimer)
+  hideTimer = undefined
+}
+
+function scheduleClose() {
+  clearHideTimer()
+  hideTimer = setTimeout(() => {
+    openIndex.value = null
+    openAnchor.value = null
+  }, 150)
+}
 
 function itemKey(item: ContextMenuItem, index: number) {
   return menuNodeKey(item, index, 'cm')
@@ -15,6 +32,21 @@ function itemKey(item: ContextMenuItem, index: number) {
 
 function iconOf(item: ContextMenuItem) {
   return resolveMenuIcon(item.icon)
+}
+
+function onSubmenuWrapEnter(index: number, event: MouseEvent) {
+  clearHideTimer()
+  openIndex.value = index
+  const wrap = event.currentTarget as HTMLElement | null
+  openAnchor.value = wrap?.querySelector<HTMLElement>('.m-contextmenu__item--parent') ?? wrap
+}
+
+function onSubmenuEnter() {
+  clearHideTimer()
+}
+
+function onSubmenuLeave() {
+  scheduleClose()
 }
 </script>
 
@@ -24,8 +56,8 @@ function iconOf(item: ContextMenuItem) {
     <div
       v-else-if="item.items?.length"
       class="m-contextmenu__submenu-wrap"
-      @mouseenter="openIndex = index"
-      @mouseleave="openIndex = null"
+      @mouseenter="onSubmenuWrapEnter(index, $event)"
+      @mouseleave="scheduleClose()"
     >
       <button
         type="button"
@@ -42,9 +74,22 @@ function iconOf(item: ContextMenuItem) {
           <MIcon name="chevron-right" size="sm" />
         </span>
       </button>
-      <div v-if="openIndex === index" class="m-contextmenu__submenu" role="menu">
-        <ContextMenuNodes :items="item.items" @activate="$emit('activate', $event)" />
-      </div>
+      <FlyoutSubmenu
+        :open="openIndex === index"
+        :anchor="openIndex === index ? openAnchor : null"
+        panel-class="m-contextmenu__submenu"
+        @enter="onSubmenuEnter"
+        @leave="onSubmenuLeave"
+      >
+        <MScrollbar
+          class="m-contextmenu__submenu-scroll"
+          fit-content
+          wrap-class="m-contextmenu__submenu-wrap-inner"
+          view-class="m-contextmenu__submenu-view"
+        >
+          <ContextMenuNodes :items="item.items" @activate="$emit('activate', $event)" />
+        </MScrollbar>
+      </FlyoutSubmenu>
     </div>
     <button
       v-else

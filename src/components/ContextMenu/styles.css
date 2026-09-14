@@ -2,6 +2,7 @@
 .m-contextmenu {
     --m-contextmenu-min-width: 10rem;
     --m-contextmenu-item-gap: 0.125rem;
+    --m-contextmenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
@@ -9,10 +10,23 @@
     display: flex;
     flex-direction: column;
     gap: var(--m-contextmenu-item-gap);
+    max-height: var(--m-contextmenu-max-height);
     min-width: var(--m-contextmenu-min-width);
+    overflow: hidden;
     padding: var(--m-space-1);
     position: fixed;
     z-index: var(--m-z-popper);
+}
+
+.m-contextmenu__scroll {
+    max-height: 100%;
+    min-height: 0;
+}
+
+.m-contextmenu__scroll-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-contextmenu-item-gap);
 }
 
 .m-contextmenu--teleported {
@@ -86,14 +100,29 @@
 }
 
 .m-contextmenu__submenu {
+    --m-contextmenu-submenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
-    left: 100%;
+    max-height: var(--m-contextmenu-submenu-max-height);
     min-width: 10rem;
+    overflow: hidden;
     padding: var(--m-space-1);
-    position: absolute;
-    top: 0;
-    z-index: var(--m-z-popper);
+}
+
+.m-contextmenu__submenu--teleported {
+    position: fixed;
+    z-index: var(--m-z-dropdown);
+}
+
+.m-contextmenu__submenu-scroll {
+    max-height: calc(var(--m-contextmenu-submenu-max-height) - var(--m-space-2));
+    min-height: 0;
+}
+
+.m-contextmenu__submenu-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-contextmenu-item-gap);
 }

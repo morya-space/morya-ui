@@ -15,6 +15,7 @@
 }
 
 .m-dropdown__menu {
+    --m-dropdown-menu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
@@ -26,6 +27,16 @@
     position: absolute;
     top: calc(100% + var(--m-space-2));
     z-index: var(--m-z-popper);
+}
+
+.m-dropdown__scroll {
+    max-height: var(--m-dropdown-menu-max-height);
+    min-height: 0;
+}
+
+.m-dropdown__scroll-view {
+    display: grid;
+    gap: var(--m-space-1);
 }
 
 .m-dropdown__menu--bottom-start {

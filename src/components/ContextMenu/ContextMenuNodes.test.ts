@@ -16,8 +16,10 @@ describe('ContextMenuNodes', () => {
       props: {
         items: [{ label: 'Share', items: [{ label: 'Email' }] }],
       },
+      attachTo: document.body,
     })
     await wrapper.get('.m-contextmenu__submenu-wrap').trigger('mouseenter')
-    expect(wrapper.find('.m-contextmenu__submenu').exists()).toBe(true)
+    expect(document.body.querySelector('.m-contextmenu__submenu--teleported')).toBeTruthy()
+    wrapper.unmount()
   })
 })

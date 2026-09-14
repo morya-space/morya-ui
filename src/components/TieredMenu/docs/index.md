@@ -57,6 +57,10 @@ const model = [{ label: '复制' }, { label: '粘贴' }]
 </template>
 ```
 
+## 滚动与子菜单
+
+主列表与侧向子菜单使用内置 `MScrollbar`（`max-height: min(18rem, 45vh)`）。子菜单 Teleport 到 `body` 相对触发项定位，长列表滚动时不会被主面板裁剪。
+
 ## 菜单项结构
 
 | 字段 | 类型 | 说明 |
