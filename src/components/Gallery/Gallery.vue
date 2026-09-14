@@ -7,6 +7,7 @@ import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
@@ -110,29 +111,36 @@ watch(keyboard.activeIndex, (index) => {
         <MIcon name="chevron-right" size="sm" />
       </button>
     </div>
-    <ul
-      ref="thumbs"
-      class="m-gallery__thumbs"
-      role="listbox"
-      :aria-label="locale.thumbnails"
-      @keydown="keyboard.onKeydown"
+    <MScrollbar
+      class="m-gallery__thumbs-scroll"
+      fit-content
+      wrap-class="m-gallery__thumbs-wrap"
+      view-class="m-gallery__thumbs-view"
     >
-      <li v-for="(image, index) in images" :key="`${imageSrc(image)}-${index}`">
-        <button
-          type="button"
-          class="m-gallery__thumb"
-          :class="{ 'm-gallery__thumb--active': index === activeIndex }"
-          role="option"
-          :aria-selected="index === activeIndex"
-          :tabindex="thumbTabindex(index)"
-          @click="select(index)"
-          @focus="keyboard.setActive(index)"
-        >
-          <slot name="item" :item="image" :index="index">
-            <img :src="imageSrc(image)" :alt="imageAlt(image)">
-          </slot>
-        </button>
-      </li>
-    </ul>
+      <ul
+        ref="thumbs"
+        class="m-gallery__thumbs"
+        role="listbox"
+        :aria-label="locale.thumbnails"
+        @keydown="keyboard.onKeydown"
+      >
+        <li v-for="(image, index) in images" :key="`${imageSrc(image)}-${index}`">
+          <button
+            type="button"
+            class="m-gallery__thumb"
+            :class="{ 'm-gallery__thumb--active': index === activeIndex }"
+            role="option"
+            :aria-selected="index === activeIndex"
+            :tabindex="thumbTabindex(index)"
+            @click="select(index)"
+            @focus="keyboard.setActive(index)"
+          >
+            <slot name="item" :item="image" :index="index">
+              <img :src="imageSrc(image)" :alt="imageAlt(image)">
+            </slot>
+          </button>
+        </li>
+      </ul>
+    </MScrollbar>
   </div>
 </template>

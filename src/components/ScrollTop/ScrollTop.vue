@@ -49,10 +49,22 @@ const rootStyle = computed(() => {
   return style
 })
 
+function findScrollContainer(start: HTMLElement | null): HTMLElement | Window {
+  let el = start
+  while (el) {
+    if (el.classList.contains('m-scrollbar__wrap')) return el
+    const { overflowY } = window.getComputedStyle(el)
+    if ((overflowY === 'auto' || overflowY === 'scroll') && el.scrollHeight > el.clientHeight) {
+      return el
+    }
+    el = el.parentElement
+  }
+  return window
+}
+
 function getScrollParent(): HTMLElement | Window {
   if (props.target === 'window') return window
-  const parent = anchor.value?.parentElement
-  return parent ?? window
+  return findScrollContainer(anchor.value?.parentElement ?? null)
 }
 
 function getScrollTop(): number {

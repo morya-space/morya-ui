@@ -55,5 +55,6 @@ describe('muTextarea', () => {
     await wrapper.get('.m-textarea__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['']])
     expect(wrapper.emitted('clear')).toHaveLength(1)
+    expect(wrapper.find('.m-textarea__scroll.m-scrollbar').exists()).toBe(true)
   })
 })

@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MScrollTop from './ScrollTop.vue'
 
 describe('muScrollTop', () => {
@@ -36,6 +37,27 @@ describe('muScrollTop', () => {
     await nextTick()
     expect(document.body.querySelector('.m-scrolltop--teleported')).toBeTruthy()
     expect(wrapper.find('.m-scrolltop').exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('listens to MScrollbar wrap when target is parent', async () => {
+    const wrapper = mount(
+      {
+        template: `
+          <MScrollbar height="120px">
+            <div style="height: 400px" />
+            <MScrollTop target="parent" :threshold="40" :teleport="false" />
+          </MScrollbar>
+        `,
+        components: { MScrollTop, MScrollbar },
+      },
+      { attachTo: document.body },
+    )
+    const wrap = wrapper.element.querySelector('.m-scrollbar__wrap') as HTMLElement
+    Object.defineProperty(wrap, 'scrollTop', { configurable: true, value: 80, writable: true })
+    wrap.dispatchEvent(new Event('scroll'))
+    await nextTick()
+    expect(wrapper.find('.m-scrolltop--visible').exists()).toBe(true)
     wrapper.unmount()
   })
 

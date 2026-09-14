@@ -18,18 +18,24 @@ import { MScrollTop } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { MScrollTop } from 'morya-ui'
+import { MScrollTop, MScrollbar } from 'morya-ui'
 </script>
 
 <template>
-  <div style="height: 8rem; overflow: auto; position: relative">
-    <div style="height: 40rem">
-      向下滚动…
-    </div>
-    <MScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+  <div style="height: 8rem; position: relative">
+    <MScrollbar height="8rem">
+      <div style="height: 40rem; padding: var(--m-space-3)">
+        向下滚动…
+      </div>
+      <MScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    </MScrollbar>
   </div>
 </template>
 ```
+
+## 与 MScrollbar 配合
+
+`target="parent"` 时会向上查找最近的 `.m-scrollbar__wrap`（或原生 overflow 容器）作为滚动源。推荐将 `MScrollTop` 放在 `MScrollbar` 内容 slot 内，并保留 `teleport`（默认）以便按钮固定在视口角落。
 
 ## Props
 
