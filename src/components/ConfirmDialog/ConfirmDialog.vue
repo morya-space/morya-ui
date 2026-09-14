@@ -13,6 +13,7 @@ import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   modelValue: false,
@@ -142,14 +143,17 @@ useModalOverlay({
                 <h2>{{ title }}</h2>
               </slot>
             </header>
-            <div class="m-dialog__body m-confirmdialog__message">
+            <ScrollBody
+              root-class="m-dialog__body m-dialog__scrollbar m-confirmdialog__message"
+              wrap-class="m-dialog__scroll"
+            >
               <span v-if="typeIcon" class="m-dialog__type-icon" aria-hidden="true">
                 <MIcon :name="typeIcon" size="sm" />
               </span>
               <div class="m-confirmdialog__copy">
                 <slot>{{ message }}</slot>
               </div>
-            </div>
+            </ScrollBody>
             <footer class="m-dialog__footer m-confirmdialog__footer">
               <slot name="footer">
                 <MButton

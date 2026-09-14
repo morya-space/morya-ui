@@ -13,6 +13,7 @@ import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
@@ -231,9 +232,12 @@ defineExpose({
                 </button>
               </div>
             </header>
-            <div class="m-dialog__body">
+            <ScrollBody
+              root-class="m-dialog__body m-dialog__scrollbar"
+              wrap-class="m-dialog__scroll"
+            >
               <slot />
-            </div>
+            </ScrollBody>
             <footer
               v-if="showFooter"
               class="m-dialog__footer"

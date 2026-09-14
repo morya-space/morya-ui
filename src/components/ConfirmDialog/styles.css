@@ -10,7 +10,7 @@
     justify-content: flex-end;
 }
 
-.m-confirmdialog__message {
+.m-confirmdialog__message > .m-scrollbar__view {
     align-items: flex-start;
     color: var(--m-color-text);
     display: flex;

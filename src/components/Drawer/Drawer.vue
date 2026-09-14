@@ -10,6 +10,7 @@ import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MIcon from '../Icon/Icon.vue'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   modelValue: false,
@@ -137,9 +138,12 @@ useModalOverlay({
               <MIcon name="close" size="sm" />
             </button>
           </header>
-          <div class="m-drawer__body">
+          <ScrollBody
+            root-class="m-drawer__body m-drawer__scrollbar"
+            wrap-class="m-drawer__scroll"
+          >
             <slot />
-          </div>
+          </ScrollBody>
         </aside>
       </div>
     </Transition>
