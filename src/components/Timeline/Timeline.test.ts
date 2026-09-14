@@ -10,7 +10,7 @@ const value = [
 describe('muTimeline', () => {
   it('renders events and alternate alignment', () => {
     const wrapper = mount(MTimeline, { props: { value, align: 'alternate' } })
-    expect(wrapper.classes()).toContain('m-timeline--alternate')
+    expect(wrapper.find('.m-timeline').classes()).toContain('m-timeline--alternate')
     expect(wrapper.findAll('.m-timeline__event')).toHaveLength(2)
     expect(wrapper.text()).toContain('Order placed')
   })

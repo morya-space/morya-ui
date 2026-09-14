@@ -8,6 +8,7 @@ import { computed, useAttrs } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
 import MIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<TimelineProps>(), {
   align: 'left',
@@ -71,7 +72,54 @@ function isPending(index: number) {
 </script>
 
 <template>
-  <ul v-bind="rootAttrs" :class="rootClass">
+  <MScrollbar
+    v-if="layout === 'horizontal'"
+    class="m-timeline__scroll m-timeline__scroll--horizontal"
+    fit-content
+    wrap-class="m-timeline__scroll-wrap"
+    view-class="m-timeline__scroll-view"
+  >
+    <ul v-bind="rootAttrs" :class="rootClass">
+      <li
+        v-for="(event, index) in events"
+        :key="index"
+        class="m-timeline__event"
+        :class="[`m-timeline__event--${side(index)}`, { 'm-timeline__event--pending': isPending(index) }]"
+      >
+        <slot name="item" :item="event" :index="index">
+          <div class="m-timeline__opposite">
+            <slot name="opposite" :item="event" :index="index">
+              {{ event.date }}
+            </slot>
+          </div>
+          <div class="m-timeline__separator">
+            <slot name="marker" :item="event" :index="index">
+              <span
+                class="m-timeline__marker"
+                :class="markerClass(event)"
+                :style="markerStyle(event)"
+              >
+                <MIcon v-if="iconName(event)" :name="iconName(event)!" size="sm" />
+                <span v-else-if="event.icon" aria-hidden="true">{{ event.icon }}</span>
+              </span>
+            </slot>
+            <slot name="connector" :item="event" :index="index">
+              <span class="m-timeline__connector" />
+            </slot>
+          </div>
+          <div class="m-timeline__content">
+            <slot name="content" :item="event" :index="index">
+              <div v-if="event.status" class="m-timeline__status">
+                {{ event.status }}
+              </div>
+              <div>{{ event.content }}</div>
+            </slot>
+          </div>
+        </slot>
+      </li>
+    </ul>
+  </MScrollbar>
+  <ul v-else v-bind="rootAttrs" :class="rootClass">
     <li
       v-for="(event, index) in events"
       :key="index"

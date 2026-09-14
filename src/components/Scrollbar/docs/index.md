@@ -24,7 +24,7 @@ import { MScrollbar } from 'morya-ui'
 </script>
 
 <template>
-  <MScrollbar height="240px" always style="width: 200px">
+  <MScrollbar height="240px" always style="width: 100%">
     <p
       v-for="item in 20"
       :key="item"
@@ -59,7 +59,7 @@ const count = ref(3)
       <MButton label="Add" size="small" @click="count++" />
       <MButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
     </div>
-    <MScrollbar max-height="220px" always style="width: 200px">
+    <MScrollbar max-height="220px" always style="width: 100%">
       <p
         v-for="item in count"
         :key="item"
@@ -81,7 +81,7 @@ const count = ref(3)
 
 内容宽度超出容器时显示横向滚动条。`trigger="none"` 与 `always` 都会常显滑块；默认 `trigger="hover"` 在悬停时显示。
 
-`MLayout` 在 `native-scrollbar={false}` 时会接入本组件。
+`MLayout` / `MLayoutContent` / `MLayoutSider`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MTreeTable`、`MVirtualScroller` 等组件已内置本组件。
 
 ```vue preview
 <script setup lang="ts">

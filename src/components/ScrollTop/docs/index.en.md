@@ -18,18 +18,24 @@ import { MScrollTop } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { MScrollTop } from 'morya-ui'
+import { MScrollTop, MScrollbar } from 'morya-ui'
 </script>
 
 <template>
-  <div style="height: 8rem; overflow: auto; position: relative">
-    <div style="height: 40rem">
-      Scroll down…
-    </div>
-    <MScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+  <div style="height: 8rem; position: relative">
+    <MScrollbar height="8rem">
+      <div style="height: 40rem; padding: var(--m-space-3)">
+        Scroll down…
+      </div>
+      <MScrollTop :threshold="80" target="parent" :right="16" :bottom="16" />
+    </MScrollbar>
   </div>
 </template>
 ```
+
+## With MScrollbar
+
+When `target="parent"`, ScrollTop walks up the DOM for the nearest `.m-scrollbar__wrap` (or native overflow container). Place `MScrollTop` inside the `MScrollbar` default slot and keep `teleport` enabled (default) so the button stays pinned to the viewport corner.
 
 ## Props
 

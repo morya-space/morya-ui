@@ -48,13 +48,17 @@
     text-align: center;
 }
 
+.m-gallery__thumbs-scroll {
+    width: 100%;
+}
+
 .m-gallery__thumbs {
     display: flex;
     gap: var(--m-space-2);
     list-style: none;
     margin: 0;
-    overflow-x: auto;
     padding: 0;
+    width: max-content;
 }
 
 .m-gallery__thumb {

@@ -24,7 +24,7 @@ import { MScrollbar } from 'morya-ui'
 </script>
 
 <template>
-  <MScrollbar height="240px" always style="width: 200px">
+  <MScrollbar height="240px" always style="width: 100%">
     <p
       v-for="item in 20"
       :key="item"
@@ -59,7 +59,7 @@ const count = ref(3)
       <MButton label="Add" size="small" @click="count++" />
       <MButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
     </div>
-    <MScrollbar max-height="220px" always style="width: 200px">
+    <MScrollbar max-height="220px" always style="width: 100%">
       <p
         v-for="item in count"
         :key="item"
@@ -81,7 +81,7 @@ const count = ref(3)
 
 A horizontal scrollbar appears when content is wider than the container. `trigger="none"` and `always` keep the thumb visible; the default `trigger="hover"` shows it on hover.
 
-`MLayout` uses this component when `native-scrollbar={false}`.
+`MLayout`, `MLayoutContent`, `MLayoutSider`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, `MTreeTable`, and `MVirtualScroller` integrate this component internally.
 
 ```vue preview
 <script setup lang="ts">

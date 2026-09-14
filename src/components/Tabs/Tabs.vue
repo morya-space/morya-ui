@@ -7,6 +7,8 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } 
 import { useMId } from '../../shared/useMId'
 import { useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import type { ScrollbarInstance } from '../Scrollbar/types'
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',
@@ -25,7 +27,11 @@ const emit = defineEmits<{
 
 const locale = useMLocale()
 const tabsUid = useMId()
-const scroller = ref<HTMLElement | null>(null)
+const scroller = ref<ScrollbarInstance | null>(null)
+
+function scrollerEl() {
+  return scroller.value?.wrapRef ?? null
+}
 const overflowed = ref(false)
 const activeValue = computed(() => props.modelValue ?? props.tabs.find((tab) => !tab.disabled)?.value)
 
@@ -66,12 +72,12 @@ function onKeydown(event: KeyboardEvent, index: number) {
 }
 
 function updateOverflow() {
-  const el = scroller.value
+  const el = scrollerEl()
   overflowed.value = Boolean(el && el.scrollWidth > el.clientWidth + 1)
 }
 
 function scrollTabs(direction: number) {
-  const el = scroller.value
+  const el = scrollerEl()
   if (!el) return
   const step = Math.round(el.clientWidth * 0.75) * Math.sign(direction)
   el.scrollBy({ left: step, behavior: 'smooth' })
@@ -81,9 +87,10 @@ let resizeObserver: ResizeObserver | undefined
 
 onMounted(() => {
   updateOverflow()
-  if (!scroller.value || typeof ResizeObserver === 'undefined') return
+  const el = scrollerEl()
+  if (!el || typeof ResizeObserver === 'undefined') return
   resizeObserver = new ResizeObserver(() => updateOverflow())
-  resizeObserver.observe(scroller.value)
+  resizeObserver.observe(el)
 })
 
 watch(
@@ -109,14 +116,21 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
       >
         <MIcon name="chevron-left" size="sm" />
       </button>
-      <div ref="scroller" class="m-tabs__scroller">
-        <div class="m-tabs__list" role="tablist" :aria-label="locale.tabs">
-          <div
-            v-for="(tab, index) in tabs"
-            :key="tab.value"
-            class="m-tabs__item"
-            :class="{ 'm-tabs__item--active': activeValue === tab.value }"
-          >
+      <MScrollbar
+        ref="scroller"
+        class="m-tabs__scroller"
+        fit-content
+        wrap-class="m-tabs__scroller-wrap"
+        view-class="m-tabs__list"
+        role="tablist"
+        :aria-label="locale.tabs"
+      >
+        <div
+          v-for="(tab, index) in tabs"
+          :key="tab.value"
+          class="m-tabs__item"
+          :class="{ 'm-tabs__item--active': activeValue === tab.value }"
+        >
             <button
               :id="`m-tab-${tab.value}`"
               class="m-tabs__tab"
@@ -141,9 +155,8 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
             >
               <MIcon name="close" size="sm" />
             </button>
-          </div>
         </div>
-      </div>
+      </MScrollbar>
       <button
         v-if="overflowed"
         type="button"

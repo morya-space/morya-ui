@@ -11,12 +11,6 @@
 .m-tabs__scroller {
     flex: 1;
     min-width: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.m-tabs__scroller::-webkit-scrollbar {
-    display: none;
 }
 
 .m-tabs__list {
@@ -24,6 +18,7 @@
     display: flex;
     gap: var(--m-space-2);
     min-width: max-content;
+    width: max-content;
 }
 
 .m-tabs--card .m-tabs__list {

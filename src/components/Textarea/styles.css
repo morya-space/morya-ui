@@ -48,6 +48,14 @@
     position: relative;
 }
 
+.m-textarea-field__control--scroll .m-textarea__scroll {
+    width: 100%;
+}
+
+.m-textarea__scroll-view {
+    display: block;
+}
+
 .m-textarea__clear {
     align-items: center;
     background: transparent;

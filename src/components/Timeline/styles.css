@@ -104,10 +104,13 @@
     font-size: var(--m-font-size-md);
 }
 
+.m-timeline__scroll--horizontal {
+    width: 100%;
+}
+
 .m-timeline--horizontal {
     flex-direction: row;
-    overflow-x: auto;
-    width: 100%;
+    width: max-content;
 }
 
 .m-timeline--horizontal .m-timeline__event {
