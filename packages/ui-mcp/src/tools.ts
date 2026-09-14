@@ -797,8 +797,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
           listGoldenPages().find((item) => item.patternId === best.pattern.id)?.id ||
           best.pattern.id
         return locale === 'en-US'
-          ? `Call get_golden_page("${goldenId}"), get_pattern, get_design_rules, then get_component/get_example. Pass includeScaffold: true for MPage* starter code. Run validate_page on the result.`
-          : `调用 get_golden_page("${goldenId}")、get_pattern、get_design_rules，再用 get_component/get_example 查 API。需要 starter 时传 includeScaffold: true（已使用 MPage* 组件）。生成后请 validate_page 校验。`
+          ? `Call get_golden_page("${goldenId}"), get_pattern, get_design_rules, then get_component/get_example. Pass includeScaffold: true for starter code. Optionally validate_page.`
+          : `调用 get_golden_page("${goldenId}")、get_pattern、get_design_rules，再用 get_component/get_example 查 API。需要 starter 时传 includeScaffold: true。可选用 validate_page。`
       })(),
     }
     if (args.includeScaffold) {
@@ -834,8 +834,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       source: payload.source,
       nextStep:
         locale === 'en-US'
-          ? 'Copy this structure and replace business data. Prefer MPage* components over custom scoped CSS.'
-          : '复制此结构并替换业务数据。优先使用 MPage* 组件，而不是自定义 scoped CSS。',
+          ? 'Copy this structure and replace business data. Prefer MPage* components; see get_design_rules for page standards.'
+          : '复制此结构并替换业务数据。优先使用 MPage* 组件；页面标准见 get_design_rules。',
     })
   }
 
@@ -929,45 +929,49 @@ export function createToolHandlers(catalog = loadCatalog()) {
   function validatePage(args: { code?: string; mode?: string }) {
     const locale = resolveLocale(args.mode)
     const code = args.code || ''
-    const issues: Array<{ type: string; message: string }> = []
+    const suggestions: Array<{ standardId: string; type: string; message: string }> = []
 
     if (/#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})\b/i.test(code)) {
-      issues.push({
+      suggestions.push({
+        standardId: 'tokens',
         type: 'raw-color',
         message:
           locale === 'en-US'
-            ? 'Use --m-* design tokens instead of hex colors.'
-            : '请使用 --m-* 设计令牌，不要写 hex 色值。',
+            ? 'Standard: prefer --m-* design tokens over hex colors.'
+            : '标准建议：颜色优先使用 --m-* 设计令牌，而非 hex 色值。',
       })
     }
 
     if (/\brgb\s*\(/i.test(code) && !/--m-/.test(code)) {
-      issues.push({
+      suggestions.push({
+        standardId: 'tokens',
         type: 'raw-color',
         message:
           locale === 'en-US'
-            ? 'Use --m-* tokens instead of raw rgb()/rgba() page styles.'
-            : '页面样式请使用 --m-* 令牌，不要写裸 rgb()/rgba()。',
+            ? 'Standard: prefer --m-* tokens over raw rgb()/rgba() in page styles.'
+            : '标准建议：页面样式优先 --m-* 令牌，而非裸 rgb()/rgba()。',
       })
     }
 
     if (/<MCard\b[^>]*>[\s\S]*?<MTable\b[^>]*\bbordered\b/i.test(code)) {
-      issues.push({
+      suggestions.push({
+        standardId: 'page-sections',
         type: 'double-border',
         message:
           locale === 'en-US'
-            ? 'Avoid wrapping bordered MTable with MCard; place MTable directly in MPageContent.'
-            : '避免用 MCard 包裹 bordered 的 MTable；表格应直接放在 MPageContent 内。',
+            ? 'Standard: place bordered MTable directly in MPageContent instead of wrapping it with MCard.'
+            : '标准建议：bordered 的 MTable 直接放在 MPageContent 内，通常不必再包 MCard。',
       })
     }
 
     if (/<MLayoutContent\b/i.test(code) && !/<MPageContent\b/i.test(code)) {
-      issues.push({
+      suggestions.push({
+        standardId: 'layout-shell',
         type: 'missing-page-content',
         message:
           locale === 'en-US'
-            ? 'Prefer MPageContent inside MLayoutContent for consistent page spacing.'
-            : '建议在 MLayoutContent 内使用 MPageContent 统一页面间距。',
+            ? 'Standard: prefer MPageContent inside MLayoutContent for consistent page spacing.'
+            : '标准建议：MLayoutContent 内使用 MPageContent 统一页面间距。',
       })
     }
 
@@ -976,44 +980,105 @@ export function createToolHandlers(catalog = loadCatalog()) {
         /class="[^"]*filters/i.test(code)) &&
       !/<MPage(?:Content|Filters|Toolbar|Header|Section|Stat)\b/i.test(code)
     ) {
-      issues.push({
+      suggestions.push({
+        standardId: 'page-sections',
         type: 'custom-page-css',
         message:
           locale === 'en-US'
-            ? 'Replace custom page section CSS with MPageFilters, MPageToolbar, MPageHeader, or MPageSection.'
-            : '请用 MPageFilters / MPageToolbar / MPageHeader / MPageSection 替代自定义页面区块 CSS。',
+            ? 'Standard: prefer MPageFilters, MPageToolbar, MPageHeader, or MPageSection over custom page section CSS.'
+            : '标准建议：筛选/工具栏/表单区块优先 MPage* 组件，少写自定义 page section CSS。',
       })
     }
 
     if (/<MPageFilters\b/i.test(code) && /<MCard\b[^>]*>[\s\S]*?<MPageFilters\b/i.test(code)) {
-      issues.push({
+      suggestions.push({
+        standardId: 'page-sections',
         type: 'redundant-wrapper',
         message:
           locale === 'en-US'
-            ? 'Do not wrap MPageFilters in MCard; MPageFilters already provides the surface.'
-            : '不要用 MCard 包裹 MPageFilters；MPageFilters 已自带表面样式。',
+            ? 'Standard: MPageFilters already provides a surface; wrapping it in MCard is usually redundant.'
+            : '标准建议：MPageFilters 已自带表面样式，通常不必再用 MCard 包裹。',
+      })
+    }
+
+    if (
+      /style="[^"]*overflow(?:-y|-x)?\s*:\s*(auto|scroll)/i.test(code) ||
+      /<style\b[^>]*>[\s\S]*?overflow(?:-y|-x)?\s*:\s*(auto|scroll)/i.test(code)
+    ) {
+      suggestions.push({
+        standardId: 'scroll',
+        type: 'native-scroll',
+        message:
+          locale === 'en-US'
+            ? 'Standard: prefer MScrollbar or MLayout scroll regions over overflow:auto/scroll in page styles.'
+            : '标准建议：页面滚动优先 MLayout 主滚动或 MScrollbar，少写 overflow:auto/scroll。',
+      })
+    }
+
+    if (/::-webkit-scrollbar|scrollbar-width\s*:/i.test(code)) {
+      suggestions.push({
+        standardId: 'scroll',
+        type: 'custom-scrollbar-css',
+        message:
+          locale === 'en-US'
+            ? 'Standard: prefer MScrollbar or layout defaults over native scrollbar CSS in product code.'
+            : '标准建议：业务代码优先 MScrollbar 或 Layout 默认滚动，少定制原生滚动条样式。',
+      })
+    }
+
+    if (/min-height\s*:\s*100vh/i.test(code) && !/<MLayout\b[^>]*fill-viewport/i.test(code)) {
+      suggestions.push({
+        standardId: 'layout-shell',
+        type: 'viewport-height',
+        message:
+          locale === 'en-US'
+            ? 'Standard: prefer MLayout fillViewport over hand-written min-height:100vh page shells.'
+            : '标准建议：整页高度优先 MLayout fillViewport，少写 min-height:100vh。',
       })
     }
 
     return textResult({
-      ok: issues.length === 0,
-      issues,
-      recommendations:
+      ok: true,
+      advisory: true,
+      summary:
         locale === 'en-US'
-          ? designRules.composition.workflow
-          : [
-              '生成页面前先调用 recommend_page 与 get_golden_page。',
-              'MLayout 使用 fillViewport；MLayoutContent 内放 MPageContent。',
-              '筛选区用 MPageFilters，标题+操作用 MPageToolbar，表单用 MPageSection。',
-              '列表表格不要额外包 MCard。',
-            ],
+          ? suggestions.length === 0
+            ? 'No deviations from page standards detected.'
+            : `${suggestions.length} advisory suggestion(s).`
+          : suggestions.length === 0
+            ? '未发现与页面标准的明显偏差。'
+            : `${suggestions.length} 条参考建议。`,
+      suggestions,
+      nextStep:
+        locale === 'en-US'
+          ? 'See get_design_rules.standards for the full recommended page standards.'
+          : '完整页面标准见 get_design_rules.standards。',
     })
   }
 
   function getDesignRules(args: { mode?: string } = {}) {
     const locale = resolveLocale(args.mode)
-    if (locale === 'zh-CN') return textResult(designRules)
+    if (locale === 'zh-CN') {
+      return textResult({
+        meta: designRules.meta,
+        standards: designRules.standards,
+        tokens: designRules.tokens,
+        composition: designRules.composition,
+        actions: designRules.actions,
+        status: designRules.status,
+        feedback: designRules.feedback,
+        global: designRules.global,
+      })
+    }
     return textResult({
+      meta: designRules.meta,
+      standards: designRules.standards.map((item) => ({
+        id: item.id,
+        title: item.titleEn,
+        recommend: item.recommendEn,
+        discouraged: item.discouragedEn,
+        mcp: item.mcp,
+      })),
       tokens: {
         colors: ['--m-color-primary', '--m-color-surface', '--m-color-text', '--m-color-border'],
         spacing: '--m-space-*',
@@ -1037,10 +1102,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
         doc: 'docs/feedback-message-vs-toast.md',
       },
       global: [
-        'Prefer library components and --m-* tokens; do not maintain a second color system.',
-        'Default action feedback to message; do not use toast with summary-only text.',
-        'Icon-only buttons must provide aria-label or ariaLabel.',
-        'Form controls must have a visible label or an equivalent accessible name.',
+        'Prefer library components and --m-* tokens.',
+        'Default action feedback to message; prefer message over toast for single-line-only text.',
+        'Icon-only buttons should provide aria-label or ariaLabel.',
+        'Form controls should have a visible label or an equivalent accessible name.',
         'Overlays teleport to body by default; only change appendTo for a clear layout constraint.',
         'Prefer documented component variants over deep CSS overrides.',
       ],

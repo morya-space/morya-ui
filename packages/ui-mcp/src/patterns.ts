@@ -348,7 +348,144 @@ export const pagePatterns: PagePattern[] = [
   },
 ]
 
+export interface PageStandard {
+  id: string
+  title: string
+  titleEn: string
+  recommend: string[]
+  recommendEn: string[]
+  discouraged?: string[]
+  discouragedEn?: string[]
+  mcp?: {
+    snippet?: string
+    decision?: string
+  }
+}
+
+/** Advisory page-writing standards for MCP and human authors — not enforced blockers. */
+export const pageStandards: PageStandard[] = [
+  {
+    id: 'layout-shell',
+    title: '页面骨架',
+    titleEn: 'Page shell',
+    recommend: [
+      '后台页根布局使用 MLayout fillViewport',
+      'MLayoutContent 内使用 MPageContent 统一 padding 与区块间距',
+      '写整页前先 get_golden_page 复制对应类型结构',
+    ],
+    recommendEn: [
+      'Use MLayout fillViewport as the admin page root',
+      'Place MPageContent inside MLayoutContent for consistent padding and section gap',
+      'Call get_golden_page before writing a full page and copy the matching structure',
+    ],
+    discouraged: ['手写 min-height:100vh', '在 MLayoutContent 上写 padding/gap'],
+    discouragedEn: ['Hand-written min-height:100vh', 'Padding/gap on MLayoutContent instead of MPageContent'],
+    mcp: { snippet: 'layout-app-shell' },
+  },
+  {
+    id: 'page-sections',
+    title: '页面区块组件',
+    titleEn: 'Page section components',
+    recommend: [
+      '筛选区用 MPageFilters，标题+操作用 MPageToolbar，表单区用 MPageSection',
+      '列表页 MTable 直接放在 MPageContent 内',
+      '局部区块优先 get_page_snippet（filters / toolbar / form-actions 等）',
+    ],
+    recommendEn: [
+      'Use MPageFilters, MPageToolbar, and MPageSection for filters, headers/actions, and forms',
+      'Place MTable directly in MPageContent on list pages',
+      'Prefer get_page_snippet for local blocks such as filters, toolbar, or form-actions',
+    ],
+    discouraged: ['手写 .page-filters / .page-toolbar 类', '用 MCard 包裹 MPageFilters 或 bordered MTable'],
+    discouragedEn: [
+      'Hand-written .page-filters / .page-toolbar classes',
+      'Wrapping MPageFilters or bordered MTable with MCard',
+    ],
+    mcp: { decision: 'surface-nesting-choice' },
+  },
+  {
+    id: 'scroll',
+    title: '滚动',
+    titleEn: 'Scroll',
+    recommend: [
+      '整页主滚动交给 MLayout fillViewport（MLayoutContent / MLayoutSider 内置 MScrollbar）',
+      '卡片正文、侧栏、日志等局部限高区域优先 MScrollbar（height 或 max-height）',
+      'Table / Dialog / Drawer / Select / Menu 等已内置滚动，通常无需再包一层',
+      '嵌套飞出菜单已 Teleport，勿再包 overflow 容器裁剪子菜单',
+    ],
+    recommendEn: [
+      'Rely on MLayout fillViewport for main page scroll (MLayoutContent / MLayoutSider use MScrollbar)',
+      'Prefer MScrollbar (height or max-height) for local capped regions such as card bodies, side panels, or logs',
+      'Table, Dialog, Drawer, Select, and Menu already scroll internally in most cases',
+      'Nested flyouts teleport; avoid overflow wrappers that clip submenus',
+    ],
+    discouraged: [
+      '页面壳或业务面板写 overflow:auto/scroll',
+      '业务代码定制 ::-webkit-scrollbar',
+      '重复包裹 MTable 或 MLayoutContent 的滚动容器',
+    ],
+    discouragedEn: [
+      'overflow:auto/scroll on page shells or business panels',
+      '::-webkit-scrollbar styling in product code',
+      'Extra scroll wrappers around MTable or MLayoutContent',
+    ],
+    mcp: { snippet: 'scrollable-panel', decision: 'page-scroll-choice' },
+  },
+  {
+    id: 'tokens',
+    title: '设计令牌',
+    titleEn: 'Design tokens',
+    recommend: ['颜色、间距、圆角、字号优先 --m-* Token', '控件宽度等局部尺寸可用 inline style'],
+    recommendEn: [
+      'Prefer --m-* tokens for color, spacing, radius, and typography',
+      'Inline styles are fine for local control widths',
+    ],
+    discouraged: ['页面级 hex / 裸 rgb() 色值', '维护第二套色板变量'],
+    discouragedEn: ['Page-level hex or raw rgb() colors', 'Maintaining a second color palette'],
+  },
+  {
+    id: 'feedback',
+    title: '操作反馈',
+    titleEn: 'Action feedback',
+    recommend: [
+      '单行结果（已保存/已删除）默认 message.success / error',
+      '需要标题+补充说明时用 toast',
+      '危险操作配合 MConfirmDialog',
+    ],
+    recommendEn: [
+      'Default single-line results to message.success / error',
+      'Use toast when a summary plus detail is needed',
+      'Pair destructive actions with MConfirmDialog',
+    ],
+    discouraged: ['只有一行文案却用 toast', '删除等危险操作无确认'],
+    discouragedEn: ['Toast for single-line-only feedback', 'Destructive actions without confirmation'],
+    mcp: { decision: 'overlay-choice' },
+  },
+  {
+    id: 'accessibility',
+    title: '无障碍',
+    titleEn: 'Accessibility',
+    recommend: [
+      '图标按钮提供 aria-label 或 ariaLabel',
+      '表单控件有可见 label 或等价可访问名称',
+      '筛选区、表格等语义区域可加 aria-label',
+    ],
+    recommendEn: [
+      'Provide aria-label or ariaLabel on icon-only buttons',
+      'Give form controls a visible label or equivalent accessible name',
+      'Add aria-label to semantic regions such as filter bars or tables when helpful',
+    ],
+  },
+]
+
 export const designRules = {
+  meta: {
+    nature: 'recommended',
+    noteZh: 'standards 为页面书写标准（推荐实践）；特殊场景可偏离。validate_page 仅给出参考建议。',
+    noteEn: 'standards are recommended page-writing practices; deviations are fine when justified. validate_page is advisory only.',
+  },
+  /** Page writing standards — single source for layout, scroll, tokens, feedback, a11y, etc. */
+  standards: pageStandards,
   tokens: {
     colors: ['--m-color-primary', '--m-color-surface', '--m-color-text', '--m-color-border'],
     spacing: '--m-space-*',
@@ -358,8 +495,8 @@ export const designRules = {
   },
   composition: {
     workflow: [
-      'For full pages: recommend_page then get_golden_page before writing layout code.',
-      'For local edits: get_page_snippet(section) for filters/toolbar/form-actions/KPI blocks instead of reading the whole golden page.',
+      'For full pages: recommend_page → get_golden_page → get_design_rules.',
+      'For local edits: get_page_snippet(section) for filters/toolbar/form-actions/KPI/scrollable-panel blocks.',
       'Use MLayout fillViewport as the app shell; put MPageContent inside MLayoutContent.',
       'Prefer MPage* components over scoped CSS for filters, toolbars, headers, form surfaces, and KPI cards.',
       'Use MSpace or MFlex for control groups inside MPageFilters; use MPageToolbar for title + primary action.',
@@ -375,6 +512,7 @@ export const designRules = {
       'dashboard-kpi-grid',
       'dashboard-chart-card',
       'layout-app-shell',
+      'scrollable-panel',
     ],
     pageStack: {
       list: ['MLayout', 'MLayoutHeader', 'MLayoutContent', 'MPageContent', 'MPageFilters', 'MPageToolbar', 'MTable'],
@@ -427,12 +565,11 @@ export const designRules = {
     doc: 'docs/feedback-message-vs-toast.md',
   },
   global: [
-    '优先使用组件库组件和 --m-* Token，不重复维护第二套色板',
-    '操作反馈默认 message；无 detail 禁止用 toast.add({ summary only })',
-    '图标按钮必须提供 aria-label 或 ariaLabel',
-    '表单字段必须有可见 label 或等价的可访问名称',
-    '浮层默认 Teleport 到 body；只有有明确布局约束时才改 appendTo',
-    '优先使用组件的 documented variant，不通过深层 CSS 覆盖内部样式',
+    '优先使用组件库组件和 --m-* Token',
+    '操作反馈默认 message；仅一行文案时优先于 toast',
+    '图标按钮建议提供 aria-label；表单字段建议有可见 label',
+    '浮层默认 Teleport 到 body；有明确布局约束时再改 appendTo',
+    '优先使用组件 documented variant，少写深层 CSS 覆盖',
   ],
 } as const
 

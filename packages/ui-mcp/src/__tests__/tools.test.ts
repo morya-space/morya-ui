@@ -172,14 +172,81 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.items.some((item) => item.type === 'snippet' && item.id === 'list-toolbar')).toBe(true)
   })
 
-  it('flags double-border page composition issues', () => {
-    const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
+  it('suggests double-border page composition as advisory standard', () => {
+    const result = read<{ ok: boolean; advisory: boolean; suggestions: Array<{ type: string }> }>(
       handlers.validatePage({
         code: '<MLayoutContent><MCard><MTable bordered /></MCard></MLayoutContent>',
       }),
     )
-    expect(result.ok).toBe(false)
-    expect(result.issues.some((issue) => issue.type === 'double-border')).toBe(true)
+    expect(result.ok).toBe(true)
+    expect(result.advisory).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'double-border')).toBe(true)
+  })
+
+  it('suggests MScrollbar over inline overflow scroll styles', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string; standardId: string }> }>(
+      handlers.validatePage({
+        code: '<div style="overflow:auto;height:20rem"><MTable /></div>',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'native-scroll' && item.standardId === 'scroll')).toBe(true)
+  })
+
+  it('suggests MScrollbar over overflow in style blocks', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<template><div class="panel">x</div></template><style>.panel { max-height: 20rem; overflow-y: auto; }</style>',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'native-scroll')).toBe(true)
+  })
+
+  it('returns scrollable-panel snippet for scroll queries', () => {
+    const result = read<{ id: string; template: string; imports: string[] }>(
+      handlers.getPageSnippet({ section: 'scrollable-panel' }),
+    )
+    expect(result.id).toBe('scrollable-panel')
+    expect(result.template).toContain('MScrollbar')
+    expect(result.imports).toContain('MScrollbar')
+  })
+
+  it('keeps recommend_page focused on pattern matching', () => {
+    const result = read<{ matchedPattern: string; nextStep: string; pageStandards?: unknown; scrollStandards?: unknown }>(
+      handlers.recommendPage({ intent: '用户列表页', pageType: 'list' }),
+    )
+    expect(result.matchedPattern).toBe('admin-list')
+    expect(result.nextStep).toContain('get_design_rules')
+    expect(result.pageStandards).toBeUndefined()
+    expect(result.scrollStandards).toBeUndefined()
+  })
+
+  it('keeps get_golden_page focused on source code', () => {
+    const result = read<{ source: string; nextStep: string; pageStandards?: unknown; scrollStandards?: unknown }>(
+      handlers.getGoldenPage({ page: 'list-page' }),
+    )
+    expect(result.source).toContain('MLayout')
+    expect(result.nextStep).toContain('get_design_rules')
+    expect(result.pageStandards).toBeUndefined()
+    expect(result.scrollStandards).toBeUndefined()
+  })
+
+  it('exposes page standards from get_design_rules', () => {
+    const result = read<{ meta: { nature: string }; standards: Array<{ id: string }> }>(
+      handlers.getDesignRules({ mode: 'zh-CN' }),
+    )
+    expect(result.meta.nature).toBe('recommended')
+    expect(result.standards.some((item) => item.id === 'scroll')).toBe(true)
+    expect(result.standards.some((item) => item.id === 'feedback')).toBe(true)
+  })
+
+  it('reads page scroll decision guide by id', () => {
+    const result = read<{ id: string; options: Array<{ component: string }> }>(
+      handlers.recommendComponent({ decision: 'page-scroll-choice' }),
+    )
+    expect(result.id).toBe('page-scroll-choice')
+    expect(result.options.some((option) => option.component === 'MScrollbar')).toBe(true)
   })
 
   it('lists component decision guides when query is omitted', () => {

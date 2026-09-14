@@ -104,7 +104,7 @@
 | `MAccordion` | 折叠面板 |
 | `MCarousel` / `MGallery` | 轮播、图库 |
 | `MIcon` | 图标（Tabler 集） |
-| `MScrollbar` | 自定义滚动条 |
+| `MScrollbar` | 主题化滚动条；Layout / Dialog / Table / Menu 等已内置；业务局部限高滚动 **推荐** 使用 |
 
 ## 场景速查
 
@@ -118,8 +118,14 @@
 | 主/次按钮组 | `MSpace` + `MButton`（primary / secondary text） |
 | 后台首页 KPI | `MGrid` + `MCard` |
 | 组织架构 | `MTree` 或 `MTreeSelect` |
+| 整页后台页（MCP 生成） | `MLayout fillViewport`（主滚动内置 `MScrollbar`） |
+| 卡片/侧栏/日志等局部滚动 | `MScrollbar`（MCP：`get_page_snippet("scrollable-panel")`） |
 
-## 常见错误
+## 页面标准
+
+MCP `get_design_rules` → `standards` 汇总推荐实践（非强制）：骨架、区块、滚动、令牌、反馈、无障碍等。`validate_page` 仅给参考建议。
+
+## 常见对照
 
 | 错误 | 正确 |
 | --- | --- |
@@ -127,3 +133,5 @@
 | 手写 `<table>` | 用 `MTable` |
 | 手写 modal div | 用 `MDialog` |
 | `showClear` 与 `clearable` 混用概念 | Select 两者等价；其他组件看文档是否支持 `clearable` |
+| 页面/卡片手写 `overflow: auto/scroll` | 推荐 `MScrollbar` 或依赖 Layout / 浮层组件内置滚动 |
+| 嵌套菜单被滚动容器裁剪 | Dropdown / ContextMenu / TieredMenu 侧向子菜单已 Teleport；Menu 水平/折叠飞出层用 Popover |
