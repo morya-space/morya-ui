@@ -1,7 +1,10 @@
 /* —— Data: TreeTable —— */
 .m-treetable {
-    overflow: auto;
     width: 100%;
+}
+
+.m-treetable__scrollbar {
+    max-width: 100%;
 }
 
 .m-treetable__table {

@@ -7,6 +7,7 @@ import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<OrderListProps>(), {
   modelValue: () => [],
@@ -158,51 +159,57 @@ function resetDrag() {
       </button>
     </div>
 
-    <ul
+    <ScrollBody
       v-if="modelValue.length"
-      ref="list"
-      class="m-orderlist__list"
-      :style="listStyle"
-      role="listbox"
-      :aria-label="locale.selectOption"
-      @keydown="onListKeydown"
+      root-class="m-orderlist__scrollbar"
+      wrap-class="m-orderlist__list"
+      :wrap-style="listStyle"
     >
-      <li
-        v-for="(item, index) in modelValue"
-        :key="itemKey(item, index)"
-        class="m-orderlist__item"
-        :class="{
-          'm-orderlist__item--selected': selectedIndex === index,
-          'm-orderlist__ghost': dragdrop && dragFrom === index,
-          'm-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
-        }"
-        role="option"
-        :aria-selected="selectedIndex === index"
-        :draggable="dragdrop"
-        :tabindex="itemTabindex(index)"
-        @click="select(index)"
-        @focus="select(index)"
-        @dragstart="onDragStart(index, $event)"
-        @dragover="onDragOver(index, $event)"
-        @drop="onDrop(index, $event)"
-        @dragend="onDragEnd"
+      <ul
+        ref="list"
+        class="m-orderlist__options"
+        role="listbox"
+        tabindex="0"
+        :aria-label="locale.selectOption"
+        @keydown="onListKeydown"
       >
-        <button
-          v-if="dragdrop"
-          type="button"
-          class="m-orderlist__handle"
-          :aria-label="locale.dragToReorder"
-          tabindex="-1"
-          @click.stop
-          @pointerdown="armHandle"
+        <li
+          v-for="(item, index) in modelValue"
+          :key="itemKey(item, index)"
+          class="m-orderlist__item"
+          :class="{
+            'm-orderlist__item--selected': selectedIndex === index,
+            'm-orderlist__ghost': dragdrop && dragFrom === index,
+            'm-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
+          }"
+          role="option"
+          :aria-selected="selectedIndex === index"
+          :draggable="dragdrop"
+          :tabindex="itemTabindex(index)"
+          @click="select(index)"
+          @focus="select(index)"
+          @dragstart="onDragStart(index, $event)"
+          @dragover="onDragOver(index, $event)"
+          @drop="onDrop(index, $event)"
+          @dragend="onDragEnd"
         >
-          <MIcon name="grip" size="sm" />
-        </button>
-        <span class="m-orderlist__label">
-          <slot name="item" :item="item" :index="index">{{ item }}</slot>
-        </span>
-      </li>
-    </ul>
+          <button
+            v-if="dragdrop"
+            type="button"
+            class="m-orderlist__handle"
+            :aria-label="locale.dragToReorder"
+            tabindex="-1"
+            @click.stop
+            @pointerdown="armHandle"
+          >
+            <MIcon name="grip" size="sm" />
+          </button>
+          <span class="m-orderlist__label">
+            <slot name="item" :item="item" :index="index">{{ item }}</slot>
+          </span>
+        </li>
+      </ul>
+    </ScrollBody>
     <div v-else class="m-orderlist__message" role="status">
       <slot name="empty">
         <p class="m-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>

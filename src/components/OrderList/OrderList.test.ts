@@ -60,7 +60,7 @@ describe('muOrderList', () => {
     expect(items()[0]!.attributes('tabindex')).toBe('0')
     expect(items()[1]!.attributes('tabindex')).toBe('-1')
 
-    const list = wrapper.get('.m-orderlist__list')
+    const list = wrapper.get('.m-orderlist__options')
     items()[0]!.element.focus()
     await list.trigger('keydown', { key: 'ArrowDown' })
     expect(document.activeElement).toBe(items()[1]!.element)

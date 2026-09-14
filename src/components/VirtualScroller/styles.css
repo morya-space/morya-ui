@@ -2,9 +2,12 @@
 .m-virtualscroller {
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
-    overflow: auto;
     position: relative;
     width: 100%;
+}
+
+.m-virtualscroller__scrollbar {
+    overflow: hidden;
 }
 
 .m-virtualscroller__spacer {

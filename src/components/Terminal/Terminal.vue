@@ -5,6 +5,7 @@ import type { TerminalEmits, TerminalProps } from './types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
+import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<TerminalProps>(), {
   welcomeMessage: 'Welcome to Morya UI Terminal',
@@ -20,7 +21,7 @@ const locale = useMLocale()
 const draft = ref('')
 const innerLines = ref<string[]>([])
 const innerResponses = ref<string[]>([])
-const bodyRef = ref<HTMLElement | null>(null)
+const bodyRef = ref<InstanceType<typeof ScrollBody> | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
 const historyPointer = ref(-1)
 
@@ -49,7 +50,8 @@ async function submit() {
   draft.value = ''
   historyPointer.value = -1
   await nextTick()
-  if (bodyRef.value) bodyRef.value.scrollTop = bodyRef.value.scrollHeight
+  const wrap = bodyRef.value?.wrapRef
+  if (wrap) wrap.scrollTop = wrap.scrollHeight
 }
 
 function onInputKeydown(event: KeyboardEvent) {
@@ -80,7 +82,13 @@ defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
 
 <template>
   <div v-bind="rootAttrs" class="m-terminal">
-    <div ref="bodyRef" class="m-terminal__body" role="log" aria-live="polite" :aria-label="locale.terminal">
+    <ScrollBody
+      ref="bodyRef"
+      root-class="m-terminal__body m-terminal__scrollbar"
+      wrap-class="m-terminal__scroll"
+      role="log"
+      :aria-label="locale.terminal"
+    >
       <div v-if="welcomeMessage" class="m-terminal__welcome">
         {{ welcomeMessage }}
       </div>
@@ -93,7 +101,7 @@ defineExpose({ appendResponse, focus: () => inputRef.value?.focus() })
           {{ displayResponses[index] }}
         </div>
       </template>
-    </div>
+    </ScrollBody>
     <form class="m-terminal__form" @submit.prevent="submit">
       <span class="m-terminal__prompt" aria-hidden="true">{{ prompt }}</span>
       <input
