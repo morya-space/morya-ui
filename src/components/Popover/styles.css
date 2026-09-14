@@ -20,6 +20,11 @@
     z-index: var(--m-z-popper);
 }
 
+.m-popover__scroll {
+    --m-popover-max-height: min(18rem, 45vh);
+    max-height: var(--m-popover-max-height);
+}
+
 .m-popover__content--top {
     bottom: calc(100% + var(--m-space-2));
     left: 50%;
