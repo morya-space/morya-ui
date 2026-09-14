@@ -408,22 +408,22 @@ export const pageStandards: PageStandard[] = [
     title: '滚动',
     titleEn: 'Scroll',
     recommend: [
-      '组件内置滚动区（Layout 壳、Dialog/Drawer body、菜单/下拉面板、Table 视口等）使用内置 MScrollbar',
-      '业务插槽/可定制区域不要强行包 MScrollbar；需要主题滚动时由业务自行使用 MScrollbar',
+      '组件内置滚动区（Layout 壳、菜单/下拉面板、Table 视口等）使用内置 MScrollbar',
+      'Dialog / Drawer / Popover / Splitter 等内容区不强制主题滚动；需要时由业务自行包 MScrollbar',
       '已内置滚动的组件通常无需再外包一层',
     ],
     recommendEn: [
-      'Component-owned scroll chrome (Layout shell, Dialog/Drawer body, menu/select panels, Table viewport) uses built-in MScrollbar',
-      'Do not force MScrollbar around user slots or customizable regions; apps can opt in with MScrollbar when needed',
+      'Component-owned scroll chrome (Layout shell, menu/select panels, Table viewport) uses built-in MScrollbar',
+      'Do not force themed scroll into Dialog / Drawer / Popover / Splitter content; apps can wrap MScrollbar when needed',
       'Components that already scroll internally usually need no extra wrapper',
     ],
     discouraged: [
-      '在 Popover / Splitter 面板 / Textarea 等用户内容区强行内置 MScrollbar',
+      '在 Dialog / Drawer / Popover / Splitter / Textarea 等用户内容区强行内置 MScrollbar',
       '业务代码定制 ::-webkit-scrollbar 替代组件内置滚动',
       '重复包裹已内置滚动的组件',
     ],
     discouragedEn: [
-      'Forcing MScrollbar into user content areas such as Popover, Splitter panes, or Textarea',
+      'Forcing MScrollbar into user content areas such as Dialog, Drawer, Popover, Splitter, or Textarea',
       '::-webkit-scrollbar styling instead of component-owned scroll chrome',
       'Extra scroll wrappers around components that already scroll',
     ],
