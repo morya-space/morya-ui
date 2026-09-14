@@ -378,8 +378,16 @@ export const pageStandards: PageStandard[] = [
       'Place MPageContent inside MLayoutContent for consistent padding and section gap',
       'Call get_golden_page before writing a full page and copy the matching structure',
     ],
-    discouraged: ['手写 min-height:100vh', '在 MLayoutContent 上写 padding/gap'],
-    discouragedEn: ['Hand-written min-height:100vh', 'Padding/gap on MLayoutContent instead of MPageContent'],
+    discouraged: [
+      '手写 min-height:100vh',
+      '在 MLayoutContent 上写 padding/gap',
+      '嵌套多层 MPageContent',
+    ],
+    discouragedEn: [
+      'Hand-written min-height:100vh',
+      'Padding/gap on MLayoutContent instead of MPageContent',
+      'Nesting multiple MPageContent shells',
+    ],
     mcp: { snippet: 'layout-app-shell' },
   },
   {
@@ -389,17 +397,24 @@ export const pageStandards: PageStandard[] = [
     recommend: [
       '筛选区用 MPageFilters，标题+操作用 MPageToolbar，表单区用 MPageSection',
       '列表页 MTable 直接放在 MPageContent 内',
+      '同行控件用 MSpace / MFlex；区块之间依赖 MPageContent 的 gap',
       '局部区块优先 get_page_snippet（filters / toolbar / form-actions 等）',
     ],
     recommendEn: [
       'Use MPageFilters, MPageToolbar, and MPageSection for filters, headers/actions, and forms',
       'Place MTable directly in MPageContent on list pages',
+      'Use MSpace / MFlex for same-row controls; let MPageContent gap separate sections',
       'Prefer get_page_snippet for local blocks such as filters, toolbar, or form-actions',
     ],
-    discouraged: ['手写 .page-filters / .page-toolbar 类', '用 MCard 包裹 MPageFilters 或 bordered MTable'],
+    discouraged: [
+      '手写 .page-filters / .page-toolbar 类',
+      '用 MCard 或带 padding 的容器再包 MPageFilters / MPageSection / MPageToolbar',
+      '在已有 MPage* 区块之间再写 margin 叠间距',
+    ],
     discouragedEn: [
       'Hand-written .page-filters / .page-toolbar classes',
-      'Wrapping MPageFilters or bordered MTable with MCard',
+      'Wrapping MPageFilters / MPageSection / MPageToolbar with MCard or extra padded containers',
+      'Adding margin between MPage* siblings that PageContent gap already spaces',
     ],
     mcp: { decision: 'surface-nesting-choice' },
   },

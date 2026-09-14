@@ -249,6 +249,20 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.options.some((option) => option.component === 'MScrollbar')).toBe(true)
   })
 
+  it('suggests redundant wrappers around MPage blocks', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string; standardId: string }> }>(
+      handlers.validatePage({
+        code: '<MPageContent><div style="padding:24px"><MPageFilters /></div></MPageContent>',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(
+      result.suggestions.some(
+        (item) => item.type === 'redundant-wrapper' && item.standardId === 'page-sections',
+      ),
+    ).toBe(true)
+  })
+
   it('lists component decision guides when query is omitted', () => {
     const result = read<{ kind: string; items: Array<{ id: string }> }>(
       handlers.recommendComponent({ limit: 5 }),

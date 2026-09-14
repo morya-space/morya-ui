@@ -44,9 +44,10 @@ alwaysApply: false
 
 | 主题 | 推荐 | 通常不必 |
 | --- | --- | --- |
-| 骨架 | `MLayout fillViewport` + `MPageContent` | 手写 `min-height:100vh` |
-| 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-filters` 等 CSS |
-| 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包一层 bordered 表格 |
+| 骨架 | `MLayout fillViewport` + `MPageContent` | 手写 `min-height:100vh`；`MLayoutContent` 再写 padding |
+| 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-*`；`MCard` 再包一层 |
+| 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包 bordered 表格 |
+| 控件间距 | 同行用 `MSpace` / `MFlex`；区块靠 `MPageContent` gap | 外包 padded `div` 叠间距 |
 | 滚动 | 组件内置滚动壳用 `MScrollbar`；Dialog/Drawer 等内容留给业务 | 在用户内容区强行内置滚动 |
 | 颜色 | `--m-*` Token | 页面级 hex / 裸 rgb() |
 | 反馈 | 单行结果用 `message`；危险操作用 `MConfirmDialog` | 仅一行文案却用 toast |

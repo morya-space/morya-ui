@@ -1002,6 +1002,46 @@ export function createToolHandlers(catalog = loadCatalog()) {
     }
 
     if (
+      /<MPageSection\b[^>]*variant=["']form["']/i.test(code) &&
+      /<MCard\b[^>]*>[\s\S]*?<MPageSection\b/i.test(code)
+    ) {
+      suggestions.push({
+        standardId: 'page-sections',
+        type: 'redundant-wrapper',
+        message:
+          locale === 'en-US'
+            ? 'Standard: MPageSection variant="form" already provides a surface; wrapping it in MCard is usually redundant.'
+            : '标准建议：MPageSection variant="form" 已自带表面样式，通常不必再用 MCard 包裹。',
+      })
+    }
+
+    if (/<MPageContent\b[^>]*>[\s\S]*?<MPageContent\b/i.test(code)) {
+      suggestions.push({
+        standardId: 'layout-shell',
+        type: 'redundant-wrapper',
+        message:
+          locale === 'en-US'
+            ? 'Standard: prefer a single MPageContent shell for page padding and section gap.'
+            : '标准建议：页面 padding 与区块间距优先只用一层 MPageContent。',
+      })
+    }
+
+    if (
+      /<(?:div|section|main)\b[^>]*style=["'][^"']*(?:padding|gap)\s*:[^"']*["'][^>]*>\s*<(?:MPage(?:Content|Filters|Toolbar|Header|Section)|MTable)\b/i.test(
+        code,
+      )
+    ) {
+      suggestions.push({
+        standardId: 'page-sections',
+        type: 'redundant-wrapper',
+        message:
+          locale === 'en-US'
+            ? 'Standard: avoid extra padded wrappers around MPage* blocks; prefer the components’ built-in spacing.'
+            : '标准建议：少在 MPage* 外包带 padding 的容器；优先使用组件自带间距。',
+      })
+    }
+
+    if (
       /style="[^"]*overflow(?:-y|-x)?\s*:\s*(auto|scroll)/i.test(code) ||
       /<style\b[^>]*>[\s\S]*?overflow(?:-y|-x)?\s*:\s*(auto|scroll)/i.test(code)
     ) {

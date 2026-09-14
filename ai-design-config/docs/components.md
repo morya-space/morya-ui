@@ -123,7 +123,7 @@
 
 ## 页面标准
 
-MCP `get_design_rules` → `standards` 汇总推荐实践（非强制）：骨架、区块、滚动、令牌、反馈、无障碍等。`validate_page` 仅给参考建议。
+MCP `get_design_rules` → `standards` 汇总推荐实践（非强制）。`validate_page` 仅给参考建议。
 
 ## 常见对照
 
@@ -134,4 +134,5 @@ MCP `get_design_rules` → `standards` 汇总推荐实践（非强制）：骨�
 | 手写 modal div | 用 `MDialog` |
 | `showClear` 与 `clearable` 混用概念 | Select 两者等价；其他组件看文档是否支持 `clearable` |
 | 页面壳手写 `overflow: auto` 替代 Layout 内置滚动 | 依赖 `MLayout` 内置滚动；业务局部滚动再显式用 `MScrollbar` |
+| `MPage*` 外包 `MCard` 或 padded `div` | 直接使用 `MPage*` 组件自带间距与表面 |
 | 嵌套菜单被滚动容器裁剪 | Dropdown / ContextMenu / TieredMenu 侧向子菜单已 Teleport；Menu 水平/折叠飞出层用 Popover |
