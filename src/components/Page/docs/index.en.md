@@ -24,6 +24,8 @@ import {
 
 ## List page stack
 
+`MPageContent` owns content **padding** (default `--m-space-6`) and section **gap** (default `--m-space-4`). The bordered frame in previews simulates `MLayoutContent` only.
+
 ```vue preview
 <script setup lang="ts">
 import {
@@ -40,8 +42,11 @@ const keyword = ref('')
 </script>
 
 <template>
-  <div style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MPageContent density="compact">
+  <div
+    class="doc-demo-frame"
+    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
+  >
+    <MPageContent>
       <MPageFilters aria-label="Filters">
         <MSpace wrap>
           <MInput v-model="keyword" placeholder="Search" clearable style="width:12rem" />

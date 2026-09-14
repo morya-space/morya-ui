@@ -80,7 +80,9 @@ onBeforeUnmount(() => {
   min-height: 7rem;
   padding: var(--m-space-4);
 }
-.code-preview__demo :deep(.m-splitter) {
+.code-preview__demo :deep(.m-splitter),
+.code-preview__demo :deep(.m-page-content),
+.code-preview__demo :deep(.doc-demo-frame) {
   align-self: stretch;
   flex: 1 1 100%;
   width: 100%;

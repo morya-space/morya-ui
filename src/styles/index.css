@@ -48,6 +48,7 @@
 @import "../components/Space/styles.css";
 @import "../components/Grid/styles.css";
 @import "../components/Layout/styles.css";
+@import "../components/Page/styles.css";
 @import "../components/Splitter/styles.css";
 @import "../components/Stepper/styles.css";
 @import "../components/Toolbar/styles.css";
