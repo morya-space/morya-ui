@@ -18,7 +18,8 @@ description: 垂直/水平导航菜单，支持多级嵌套、受控选中、手
 ## 引入
 
 ```ts
-import { MMenu, type MenuItem } from 'morya-ui'
+import type {MenuItem} from 'morya-ui';
+import {  MMenu } from 'morya-ui'
 ```
 
 ## 导航选中
@@ -39,16 +40,7 @@ const model = [
 </script>
 
 <template>
-  <div
-    style="
-      width: 15rem;
-      padding: var(--m-space-3);
-      background: var(--m-color-surface);
-      border: 1px solid var(--m-color-border);
-      border-radius: var(--m-radius-lg);
-      box-shadow: var(--m-shadow-sm);
-    "
-  >
+  <div>
     <MMenu
       v-model:selected-key="selectedKey"
       :model="model"
@@ -135,7 +127,7 @@ const model = [
 
 ## 折叠与飞出层
 
-`collapsed` 隐藏文案，仅保留图标；悬停/聚焦带子项的节点时，在右侧弹出飞出层（`.m-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
+`collapsed` 隐藏文案，仅保留图标；悬停时在右侧显示 `MTooltip` 标签，带子项的节点还会弹出飞出层（`.m-menu--flyout`）。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
 
 ```vue preview
 <script setup lang="ts">
