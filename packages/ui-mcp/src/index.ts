@@ -57,7 +57,7 @@ register(
   'Search components, guides, API text, examples, page patterns, and component decision guides.',
   {
     query: z.string().min(1),
-    scope: z.enum(['all', 'components', 'guides', 'api', 'examples', 'patterns', 'decisions']).optional(),
+    scope: z.enum(['all', 'components', 'guides', 'api', 'examples', 'patterns', 'decisions', 'snippets']).optional(),
     mode: z.string().optional(),
     limit: z.number().int().min(1).max(50).optional(),
     offset: z.number().int().min(0).optional(),
@@ -188,6 +188,57 @@ register(
     offset: z.number().int().min(0).optional(),
   },
   async (args) => handlers.recommendComponent(args),
+)
+
+register(
+  'list_golden_pages',
+  'List golden page samples for list, form, and dashboard layouts.',
+  { mode: z.string().optional() },
+  async (args) => handlers.listGoldenPageCatalog(args),
+)
+
+register(
+  'get_golden_page',
+  'Read a golden page Vue source sample (list-page, form-page, dashboard-page).',
+  {
+    page: z.string().min(1),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.getGoldenPage(args),
+)
+
+register(
+  'validate_page',
+  'Validate a generated page for composition, spacing, and border anti-patterns.',
+  {
+    code: z.string().min(1),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.validatePage(args),
+)
+
+register(
+  'list_page_snippets',
+  'List reusable page section snippets for local edits (filters, toolbar, form actions, KPI grid, etc.).',
+  {
+    query: z.string().optional(),
+    pageType: z.string().optional(),
+    mode: z.string().optional(),
+    limit: z.number().int().min(1).max(100).optional(),
+    offset: z.number().int().min(0).optional(),
+  },
+  async (args) => handlers.listPageSnippets(args),
+)
+
+register(
+  'get_page_snippet',
+  'Read a standard page section snippet by id or keyword (e.g. filters, toolbar, form-actions). Pass includeScript: true for import + template bundle.',
+  {
+    section: z.string().min(1),
+    mode: z.string().optional(),
+    includeScript: z.boolean().optional(),
+  },
+  async (args) => handlers.getPageSnippet(args),
 )
 
 register('version', 'Return MCP package, library version, and catalog status.', {}, async () =>

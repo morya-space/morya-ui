@@ -9,6 +9,8 @@ import {
   toKebab,
 } from './catalog.js'
 import { componentDecisions, findDecision, scoreDecision } from './decisions.js'
+import { findGoldenPage, listGoldenPages, readGoldenPageSource } from './golden-pages.js'
+import { filterPageSnippets, findPageSnippet, pageSnippets, scorePageSnippet } from './page-snippets.js'
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
 import { countCatalogResourceTemplates, countCatalogResources } from './resources.js'
 
@@ -78,9 +80,12 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const layoutImports = useLayoutShell
     ? ', MLayout, MLayoutContent, MLayoutHeader, MLayoutSider, MBreadcrumb'
     : ''
+  const pageImports = useLayoutShell
+    ? ', MPageContent, MPageFilters, MPageHeader, MPageSection, MPageToolbar'
+    : ''
   const listImports = isList ? ', MSelect, MSpace, MTable' : ''
   const formImports = isForm || isAuth || isWizard ? ', MForm, MFormItem, MSelect' : ''
-  const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MSkeleton, MTable' : ''
+  const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MPagePlaceholder, MPageStat, MSkeleton, MTable' : ''
   const detailImports = isDetail ? ', MDivider' : ''
   const emptyImports = isEmpty ? ', MDataView' : ''
   const wizardImports = isWizard ? ', MStepper' : ''
@@ -88,7 +93,7 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
 
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { MButton, MCard, MConfigProvider, MInput, MTag, zhCN${layoutImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from 'morya-ui'
+import { MButton, MCard, MConfigProvider, MInput, MTag, zhCN${layoutImports}${pageImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from 'morya-ui'
 
 const loading = ref(false)
 const error = ref('')
@@ -114,65 +119,58 @@ async function submit() {
 }
 </script>`
 
-  const listContent = `          <section class="m-generated-filters" aria-label="${zh ? '筛选' : 'Filters'}">
-            <MSpace wrap>
-              <MInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
-              <MButton severity="primary">${zh ? '查询' : 'Search'}</MButton>
-              <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
-            </MSpace>
-          </section>
-          <header class="m-generated-toolbar">
-            <h1 class="m-generated-title">${title}</h1>
-            <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
-          </header>
-          <MTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
-            <template #empty>
-              <p class="m-generated-muted">${zh ? '暂无数据' : 'No data yet'}</p>
-            </template>
-          </MTable>`
+  const listContent = `            <MPageFilters :aria-label="${zh ? '筛选' : 'Filters'}">
+              <MSpace wrap>
+                <MInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
+                <MButton severity="primary">${zh ? '查询' : 'Search'}</MButton>
+                <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
+              </MSpace>
+            </MPageFilters>
+            <MPageToolbar :title="title">
+              <template #actions>
+                <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
+              </template>
+            </MPageToolbar>
+            <MTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
+              <template #empty>
+                <p style="margin:0;padding:var(--m-space-8);text-align:center;color:var(--m-color-text-muted)">${zh ? '暂无数据' : 'No data yet'}</p>
+              </template>
+            </MTable>`
 
-  const formContent = `          <header class="m-generated-intro">
-            <h1 class="m-generated-title">${title}</h1>
-            <p class="m-generated-muted">${zh ? '填写表单并保存。' : 'Fill in the form and save.'}</p>
-          </header>
-          <MForm class="m-generated-form" @submit.prevent="submit">
-            <MFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
-              <MInput v-model="model.name" fluid />
-            </MFormItem>
-            <footer class="m-generated-actions">
-              <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
-              <MButton severity="secondary">${zh ? '取消' : 'Cancel'}</MButton>
-            </footer>
-          </MForm>`
+  const formContent = `            <MPageHeader :title="title" :description="${zh ? '填写表单并保存。' : 'Fill in the form and save.'}" />
+            <MPageSection variant="form">
+              <MForm @submit.prevent="submit">
+                <MFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
+                  <MInput v-model="model.name" fluid />
+                </MFormItem>
+                <MPageSection variant="actions">
+                  <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
+                  <MButton severity="secondary">${zh ? '取消' : 'Cancel'}</MButton>
+                </MPageSection>
+              </MForm>
+            </MPageSection>`
 
-  const dashboardContent = `          <h1 class="m-generated-title">${title}</h1>
-          <MGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
-            <MGridItem v-for="metric in metrics" :key="metric.label" :span="1">
-              <MCard>
-                <p class="m-generated-muted">{{ metric.label }}</p>
-                <strong class="m-generated-metric">{{ metric.value }}</strong>
-              </MCard>
-            </MGridItem>
-          </MGrid>
-          <MCard :title="${zh ? '趋势概览' : 'Trend overview'}">
-            <MSkeleton v-if="loading" height="8rem" />
-            <p v-else class="m-generated-muted">${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}</p>
-          </MCard>`
+  const dashboardContent = `            <MPageHeader :title="title" />
+            <MGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
+              <MGridItem v-for="metric in metrics" :key="metric.label" :span="1">
+                <MPageStat :label="metric.label" :value="metric.value" icon="activity" />
+              </MGridItem>
+            </MGrid>
+            <MCard :title="${zh ? '趋势概览' : 'Trend overview'}">
+              <MSkeleton v-if="loading" height="8rem" />
+              <MPagePlaceholder v-else :description="${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}" aria-label="${zh ? '图表占位' : 'Chart placeholder'}" />
+            </MCard>`
 
-  const detailContent = `          <header class="m-generated-toolbar">
-            <div>
-              <h1 class="m-generated-title">${title}</h1>
-              <MTag value="${zh ? '正常' : 'Active'}" severity="success" />
-            </div>
-            <MButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</MButton>
-          </header>
-          <MCard>
-            <MDivider />
-            <dl class="m-generated-details">
-              <div><dt>${zh ? '名称' : 'Name'}</dt><dd>${zh ? '示例资源' : 'Example resource'}</dd></div>
-              <div><dt>${zh ? '更新时间' : 'Updated'}</dt><dd>—</dd></div>
-            </dl>
-          </MCard>`
+  const detailContent = `            <MPageToolbar :title="title">
+              <template #actions>
+                <MButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</MButton>
+              </template>
+            </MPageToolbar>
+            <MTag value="${zh ? '正常' : 'Active'}" severity="success" />
+            <MCard>
+              <MDivider />
+              <p style="margin:0;color:var(--m-color-text-muted)">${zh ? '示例资源详情' : 'Example resource details'}</p>
+            </MCard>`
 
   const settingsContent = `          <h1 class="m-generated-title">${title}</h1>
           <MTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
@@ -186,27 +184,32 @@ async function submit() {
   let innerTemplate = ''
   if (isList) {
     innerTemplate = `<MConfigProvider :locale="zhCN">
-  <MLayout has-sider class="m-generated-page">
-    <MLayoutSider class="m-generated-sider" />
+  <MLayout has-sider fill-viewport>
+    <MLayoutSider bordered />
     <MLayout>
-      <MLayoutHeader class="m-generated-header">
+      <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
         <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
       </MLayoutHeader>
-      <MLayoutContent class="m-generated-content">
+      <MLayoutContent>
+        <MPageContent>
 ${listContent}
+        </MPageContent>
       </MLayoutContent>
     </MLayout>
   </MLayout>
 </MConfigProvider>`
   } else if (useLayoutShell) {
     const content = isDashboard ? dashboardContent : isDetail ? detailContent : isSettings ? settingsContent : formContent
+    const pageContentAttrs = isForm || isSettings ? ' width="narrow"' : isDashboard ? ' density="spacious"' : ''
     innerTemplate = `<MConfigProvider :locale="zhCN">
-  <MLayout class="m-generated-page">
-    <MLayoutHeader class="m-generated-header">
+  <MLayout fill-viewport>
+    <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
       <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
     </MLayoutHeader>
-    <MLayoutContent class="m-generated-content">
+    <MLayoutContent>
+      <MPageContent${pageContentAttrs}>
 ${content}
+      </MPageContent>
     </MLayoutContent>
   </MLayout>
 </MConfigProvider>`
@@ -271,24 +274,9 @@ ${content}
 </template>`
 
   const style = `<style scoped>
-.m-generated-page { min-height: 100vh; background: var(--m-color-surface); }
-.m-generated-sider { border-right: 1px solid var(--m-color-border); }
-.m-generated-header { padding: var(--m-space-4) var(--m-space-6); border-bottom: 1px solid var(--m-color-border); }
-.m-generated-content { padding: var(--m-space-6); display: flex; flex-direction: column; gap: var(--m-space-4); }
-.m-generated-filters { padding: var(--m-space-4); background: color-mix(in srgb, var(--m-color-border) 25%, transparent); border-radius: var(--m-radius-md); border: 1px solid var(--m-color-border); }
-.m-generated-toolbar, .m-generated-actions { display: flex; gap: var(--m-space-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.m-generated-title { margin: 0; font-size: var(--m-font-size-lg); font-weight: 600; color: var(--m-color-text); }
-.m-generated-intro { margin-bottom: var(--m-space-2); }
-.m-generated-form { padding: var(--m-space-6); border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); box-shadow: var(--m-shadow-sm); }
-.m-generated-auth { display: grid; place-items: center; padding: var(--m-space-8); max-width: 24rem; margin: 0 auto; }
-.m-generated-metric { display: block; font-size: var(--m-font-size-lg); margin: var(--m-space-2) 0; }
-.m-generated-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--m-space-4); margin: 0; }
-.m-generated-details dt { color: var(--m-color-text-muted); font-size: var(--m-font-size-sm); }
-.m-generated-details dd { margin: var(--m-space-1) 0 0; }
+.m-generated-auth { display: grid; place-items: center; padding: var(--m-space-8); max-width: 24rem; margin: 0 auto; min-height: 100vh; }
 .m-generated-empty { display: grid; gap: var(--m-space-2); justify-items: center; padding: var(--m-space-8); text-align: center; }
-.m-generated-muted { margin: 0; color: var(--m-color-text-muted); }
 .m-generated-error { color: var(--m-color-danger); padding: 0 var(--m-space-6); }
-@media (max-width: 48rem) { .m-generated-content { padding: var(--m-space-4); } .m-generated-details { grid-template-columns: 1fr; } }
 </style>`
   return { script, template, style }
 }
@@ -441,7 +429,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
   function search(args: {
     query: string
-    scope?: 'all' | 'components' | 'guides' | 'api' | 'examples' | 'patterns' | 'decisions'
+    scope?: 'all' | 'components' | 'guides' | 'api' | 'examples' | 'patterns' | 'decisions' | 'snippets'
     mode?: string
     limit?: number
     offset?: number
@@ -483,6 +471,21 @@ export function createToolHandlers(catalog = loadCatalog()) {
               locale === 'en-US'
                 ? component.descriptionEn || component.description
                 : component.description,
+          })
+        }
+      }
+    }
+
+    if (scope === 'all' || scope === 'snippets') {
+      for (const snippet of pageSnippets) {
+        const score = scorePageSnippet(snippet, query)
+        if (score > 0) {
+          hits.push({
+            type: 'snippet',
+            id: snippet.id,
+            title: locale === 'en-US' ? snippet.titleEn : snippet.title,
+            score,
+            snippet: locale === 'en-US' ? snippet.descriptionEn : snippet.description,
           })
         }
       }
@@ -788,9 +791,15 @@ export function createToolHandlers(catalog = loadCatalog()) {
       interactionRules: best.pattern.interactionRules,
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
-      nextStep: locale === 'en-US'
-        ? `Read goldenPage (${best.pattern.goldenPage || 'none'}) and matchedPattern with get_pattern, then verify component APIs with get_component or get_example. Pass includeScaffold: true for a starter Vue file aligned with MLayout shell.`
-        : `先阅读 goldenPage（${best.pattern.goldenPage || '无'}）并用 get_pattern 读取 matchedPattern，再用 get_component 或 get_example 核对组件 API。需要 starter 代码时传 includeScaffold: true（已对齐 MLayout 骨架）。`,
+      nextStep: (() => {
+        const goldenId =
+          best.pattern.goldenPage?.split('/').pop()?.replace(/\.vue$/i, '') ||
+          listGoldenPages().find((item) => item.patternId === best.pattern.id)?.id ||
+          best.pattern.id
+        return locale === 'en-US'
+          ? `Call get_golden_page("${goldenId}"), get_pattern, get_design_rules, then get_component/get_example. Pass includeScaffold: true for MPage* starter code. Run validate_page on the result.`
+          : `调用 get_golden_page("${goldenId}")、get_pattern、get_design_rules，再用 get_component/get_example 查 API。需要 starter 时传 includeScaffold: true（已使用 MPage* 组件）。生成后请 validate_page 校验。`
+      })(),
     }
     if (args.includeScaffold) {
       const code = generatedPageCode(best.pattern.id, args.intent, locale)
@@ -808,6 +817,199 @@ export function createToolHandlers(catalog = loadCatalog()) {
     return textResult(result)
   }
 
+  function getGoldenPage(args: { page: string; mode?: string }) {
+    const locale = resolveLocale(args.mode)
+    const payload = readGoldenPageSource(args.page)
+    if (!payload) {
+      return textResult({
+        error: `Golden page not found: ${args.page}`,
+        availablePages: listGoldenPages().map((item) => item.id),
+      })
+    }
+    return textResult({
+      id: payload.record.id,
+      patternId: payload.record.patternId,
+      title: locale === 'en-US' ? payload.record.titleEn : payload.record.title,
+      file: payload.record.file,
+      source: payload.source,
+      nextStep:
+        locale === 'en-US'
+          ? 'Copy this structure and replace business data. Prefer MPage* components over custom scoped CSS.'
+          : '复制此结构并替换业务数据。优先使用 MPage* 组件，而不是自定义 scoped CSS。',
+    })
+  }
+
+  function listGoldenPageCatalog(args: { mode?: string } = {}) {
+    const locale = resolveLocale(args.mode)
+    return textResult({
+      items: listGoldenPages().map((item) => ({
+        id: item.id,
+        patternId: item.patternId,
+        title: locale === 'en-US' ? item.titleEn : item.title,
+        file: item.file,
+      })),
+    })
+  }
+
+  function listPageSnippets(args: {
+    query?: string
+    pageType?: string
+    mode?: string
+    limit?: number
+    offset?: number
+  }) {
+    const locale = resolveLocale(args.mode)
+    const result = filterPageSnippets(args)
+    return textResult({
+      ...result,
+      items: result.items.map((item) => ({
+        id: item.id,
+        title: locale === 'en-US' ? item.titleEn : item.title,
+        description: locale === 'en-US' ? item.descriptionEn : item.description,
+        pageTypes: item.pageTypes,
+        keywords: item.keywords,
+        imports: item.imports,
+      })),
+    })
+  }
+
+  function getPageSnippet(args: { section: string; mode?: string; includeScript?: boolean }) {
+    const locale = resolveLocale(args.mode)
+    const ranked = pageSnippets
+      .map((snippet) => ({ snippet, score: scorePageSnippet(snippet, args.section) }))
+      .sort((a, b) => b.score - a.score || a.snippet.id.localeCompare(b.snippet.id))
+    const match = findPageSnippet(args.section) || (ranked[0]?.score ? ranked[0].snippet : undefined)
+
+    if (!match || (ranked[0]?.score ?? 0) === 0) {
+      return textResult({
+        error: `Page snippet not found: ${args.section}`,
+        availableSnippets: pageSnippets.map((item) => item.id),
+        suggestion: locale === 'en-US'
+          ? 'Try list_page_snippets with query like "filters", "toolbar", or pageType="list".'
+          : '可尝试 list_page_snippets，query 如 "filters"、"toolbar"，或 pageType="list"。',
+      })
+    }
+
+    const imports = [...new Set(match.imports)].sort()
+    const payload: Record<string, unknown> = {
+      id: match.id,
+      title: locale === 'en-US' ? match.titleEn : match.title,
+      description: locale === 'en-US' ? match.descriptionEn : match.description,
+      pageTypes: match.pageTypes,
+      imports,
+      template: match.template,
+      rules: locale === 'en-US' ? match.rulesEn : match.rules,
+      avoid: locale === 'en-US' ? match.avoidEn : match.avoid,
+      nextStep:
+        locale === 'en-US'
+          ? 'Merge this block into the existing page. Call get_component/get_example for unfamiliar imports, then validate_usage and validate_page.'
+          : '将此区块合并进现有页面。不熟悉的 import 用 get_component/get_example 核对，完成后 validate_usage / validate_page。',
+    }
+    if (match.scriptSetup) payload.scriptSetup = match.scriptSetup
+
+    if (args.includeScript) {
+      payload.vue = {
+        imports: `import { ${imports.join(', ')} } from 'morya-ui'`,
+        scriptSetup: match.scriptSetup || '',
+        template: match.template,
+      }
+    }
+
+    if (!findPageSnippet(args.section) && ranked.length > 1 && ranked[0]?.score) {
+      payload.matchedBy = 'query'
+      payload.alternatives = ranked
+        .slice(1, 4)
+        .filter((entry) => entry.score > 0)
+        .map((entry) => ({ id: entry.snippet.id, score: entry.score }))
+    }
+
+    return textResult(payload)
+  }
+
+  function validatePage(args: { code?: string; mode?: string }) {
+    const locale = resolveLocale(args.mode)
+    const code = args.code || ''
+    const issues: Array<{ type: string; message: string }> = []
+
+    if (/#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})\b/i.test(code)) {
+      issues.push({
+        type: 'raw-color',
+        message:
+          locale === 'en-US'
+            ? 'Use --m-* design tokens instead of hex colors.'
+            : '请使用 --m-* 设计令牌，不要写 hex 色值。',
+      })
+    }
+
+    if (/\brgb\s*\(/i.test(code) && !/--m-/.test(code)) {
+      issues.push({
+        type: 'raw-color',
+        message:
+          locale === 'en-US'
+            ? 'Use --m-* tokens instead of raw rgb()/rgba() page styles.'
+            : '页面样式请使用 --m-* 令牌，不要写裸 rgb()/rgba()。',
+      })
+    }
+
+    if (/<MCard\b[^>]*>[\s\S]*?<MTable\b[^>]*\bbordered\b/i.test(code)) {
+      issues.push({
+        type: 'double-border',
+        message:
+          locale === 'en-US'
+            ? 'Avoid wrapping bordered MTable with MCard; place MTable directly in MPageContent.'
+            : '避免用 MCard 包裹 bordered 的 MTable；表格应直接放在 MPageContent 内。',
+      })
+    }
+
+    if (/<MLayoutContent\b/i.test(code) && !/<MPageContent\b/i.test(code)) {
+      issues.push({
+        type: 'missing-page-content',
+        message:
+          locale === 'en-US'
+            ? 'Prefer MPageContent inside MLayoutContent for consistent page spacing.'
+            : '建议在 MLayoutContent 内使用 MPageContent 统一页面间距。',
+      })
+    }
+
+    if (
+      (/\bpage[-_](?:list|form|dashboard)?[-_]?(?:filters|toolbar|content|header)\b/i.test(code) ||
+        /class="[^"]*filters/i.test(code)) &&
+      !/<MPage(?:Content|Filters|Toolbar|Header|Section|Stat)\b/i.test(code)
+    ) {
+      issues.push({
+        type: 'custom-page-css',
+        message:
+          locale === 'en-US'
+            ? 'Replace custom page section CSS with MPageFilters, MPageToolbar, MPageHeader, or MPageSection.'
+            : '请用 MPageFilters / MPageToolbar / MPageHeader / MPageSection 替代自定义页面区块 CSS。',
+      })
+    }
+
+    if (/<MPageFilters\b/i.test(code) && /<MCard\b[^>]*>[\s\S]*?<MPageFilters\b/i.test(code)) {
+      issues.push({
+        type: 'redundant-wrapper',
+        message:
+          locale === 'en-US'
+            ? 'Do not wrap MPageFilters in MCard; MPageFilters already provides the surface.'
+            : '不要用 MCard 包裹 MPageFilters；MPageFilters 已自带表面样式。',
+      })
+    }
+
+    return textResult({
+      ok: issues.length === 0,
+      issues,
+      recommendations:
+        locale === 'en-US'
+          ? designRules.composition.workflow
+          : [
+              '生成页面前先调用 recommend_page 与 get_golden_page。',
+              'MLayout 使用 fillViewport；MLayoutContent 内放 MPageContent。',
+              '筛选区用 MPageFilters，标题+操作用 MPageToolbar，表单用 MPageSection。',
+              '列表表格不要额外包 MCard。',
+            ],
+    })
+  }
+
   function getDesignRules(args: { mode?: string } = {}) {
     const locale = resolveLocale(args.mode)
     if (locale === 'zh-CN') return textResult(designRules)
@@ -819,6 +1021,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         typography: '--m-font-size-xs/sm/md/lg',
         motion: '--m-motion-fast/normal',
       },
+      composition: designRules.composition,
       actions: {
         primary: { component: 'MButton', props: ['omit severity or use primary'] },
         secondary: { component: 'MButton', props: ['severity="secondary"', 'outlined or text'] },
@@ -1100,6 +1303,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'recommend_page',
         'get_design_rules',
         'recommend_component',
+        'list_golden_pages',
+        'get_golden_page',
+        'list_page_snippets',
+        'get_page_snippet',
+        'validate_page',
         'version',
       ],
     })
@@ -1119,6 +1327,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
     recommendPage,
     getDesignRules,
     recommendComponent,
+    listGoldenPageCatalog,
+    getGoldenPage,
+    listPageSnippets,
+    getPageSnippet,
+    validatePage,
     version,
   }
 }

@@ -136,7 +136,50 @@ describe('@morya-ui/mcp handlers', () => {
 
     expect(result.matchedPattern).toBe('dashboard')
     expect(result.scaffold.files.component).toContain('MGrid')
+    expect(result.scaffold.files.component).toContain('MPageStat')
     expect(result.scaffold.files.component).toContain('MSkeleton')
+  })
+
+  it('returns a golden page source sample', () => {
+    const result = read<{ id: string; source: string }>(handlers.getGoldenPage({ page: 'list-page' }))
+    expect(result.id).toBe('list-page')
+    expect(result.source).toContain('MPageContent')
+    expect(result.source).toContain('MPageFilters')
+  })
+
+  it('returns a page section snippet by keyword', () => {
+    const result = read<{ id: string; template: string; imports: string[] }>(
+      handlers.getPageSnippet({ section: 'filters' }),
+    )
+    expect(result.id).toBe('list-filters')
+    expect(result.template).toContain('MPageFilters')
+    expect(result.imports).toContain('MPageFilters')
+  })
+
+  it('lists page snippets filtered by page type', () => {
+    const result = read<{ items: Array<{ id: string }> }>(
+      handlers.listPageSnippets({ pageType: 'form', limit: 10 }),
+    )
+    expect(result.items.some((item) => item.id === 'form-actions')).toBe(true)
+    expect(result.items.some((item) => item.id === 'page-content-form')).toBe(true)
+    expect(result.items.some((item) => item.id === 'list-filters')).toBe(false)
+  })
+
+  it('searches page snippets scope', () => {
+    const result = read<{ items: Array<{ type: string; id: string }> }>(
+      handlers.search({ query: 'toolbar', scope: 'snippets', limit: 5 }),
+    )
+    expect(result.items.some((item) => item.type === 'snippet' && item.id === 'list-toolbar')).toBe(true)
+  })
+
+  it('flags double-border page composition issues', () => {
+    const result = read<{ ok: boolean; issues: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MLayoutContent><MCard><MTable bordered /></MCard></MLayoutContent>',
+      }),
+    )
+    expect(result.ok).toBe(false)
+    expect(result.issues.some((issue) => issue.type === 'double-border')).toBe(true)
   })
 
   it('lists component decision guides when query is omitted', () => {
@@ -171,7 +214,10 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.counts.decisions).toBeGreaterThan(0)
     expect(result.counts.resources).toBeGreaterThan(100)
     expect(result.counts.resourceTemplates).toBe(3)
-    expect(result.tools).toHaveLength(13)
+    expect(result.tools).toHaveLength(18)
+    expect(result.tools).toContain('get_golden_page')
+    expect(result.tools).toContain('get_page_snippet')
+    expect(result.tools).toContain('validate_page')
     expect(result.tools).not.toContain('create_page')
   })
 })
