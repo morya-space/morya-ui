@@ -2,6 +2,8 @@
 .m-menu {
     --m-menu-indent: var(--m-space-3);
     --m-menu-root-indent: var(--m-space-4);
+    --m-menu-submenu-gap: var(--m-space-2);
+    --m-menu-submenu-inset: var(--m-space-2);
     --m-menu-item-radius: var(--m-radius-md);
     --m-menu-color: transparent;
     --m-menu-item-color-hover: color-mix(
@@ -210,6 +212,12 @@
     margin-top: 0.25rem;
 }
 
+.m-menu--collapsed .m-menu__item .m-tooltip,
+.m-menu--collapsed .m-menu__collapsed-popover .m-tooltip {
+    display: flex;
+    width: 100%;
+}
+
 .m-menu--collapsed .m-menu__item-content {
     align-items: center;
     display: flex;
@@ -390,6 +398,8 @@
 .m-menu__submenu-inner {
     min-height: 0;
     overflow: hidden;
+    padding-block-start: var(--m-menu-submenu-gap);
+    padding-inline-start: var(--m-menu-submenu-inset);
 }
 
 .m-menu-expand-enter-active,

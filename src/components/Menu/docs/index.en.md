@@ -18,7 +18,8 @@ Navigation menu rendered from a `model`. Typical uses: admin sidebar, top naviga
 ## Import
 
 ```ts
-import { MMenu, type MenuItem } from 'morya-ui'
+import type {MenuItem} from 'morya-ui';
+import {  MMenu } from 'morya-ui'
 ```
 
 ## Selection
@@ -135,7 +136,7 @@ const model = [
 
 ## Collapsed & flyout
 
-`collapsed` hides labels and keeps icons. Hover/focus on a group opens a right flyout (`.m-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
+`collapsed` hides labels and keeps icons. Hover shows an `MTooltip` with the label; groups also open a right flyout (`.m-menu--flyout`). Set `collapsed-width` to match the sider width for centered icons.
 
 ```vue preview
 <script setup lang="ts">

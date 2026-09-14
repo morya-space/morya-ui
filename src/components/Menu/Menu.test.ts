@@ -138,6 +138,33 @@ describe('muMenu', () => {
     expect(wrapper.find('.m-menu--embedded').exists()).toBe(true)
   })
 
+  it('wraps collapsed items with MTooltip instead of native title', () => {
+    const wrapper = mount(MMenu, {
+      props: {
+        collapsed: true,
+        model: [
+          { key: 'home', label: 'Home', icon: 'home' },
+          { key: 'system', label: 'System', icon: 'settings', items: [{ key: 'users', label: 'Users' }] },
+        ],
+      },
+    })
+    expect(wrapper.findAll('.m-tooltip')).toHaveLength(2)
+    expect(wrapper.find('.m-menu__item-content').attributes('title')).toBeUndefined()
+  })
+
+  it('does not render MTooltip when the menu is expanded', () => {
+    const wrapper = mount(MMenu, {
+      props: {
+        collapsed: false,
+        model: [
+          { key: 'home', label: 'Home', icon: 'home' },
+          { key: 'system', label: 'System', icon: 'settings', items: [{ key: 'users', label: 'Users' }] },
+        ],
+      },
+    })
+    expect(wrapper.find('.m-tooltip').exists()).toBe(false)
+  })
+
   it('opens horizontal submenu in flyout instead of inline expand', async () => {
     const wrapper = mount(MMenu, {
       props: {

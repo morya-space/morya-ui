@@ -4,6 +4,7 @@ import type { MRouteLocationRaw } from '../../shared/optionalRouter'
 import { computed, inject } from 'vue'
 import MIcon from '../Icon/Icon.vue'
 import MPopover from '../Popover/Popover.vue'
+import MenuCollapsedTooltip from './MenuCollapsedTooltip.vue'
 import { resolveMenuIcon } from '../../shared/menu'
 import { isExternalRoute, resolveOptionalRouterLink, resolveRouteHref } from '../../shared/optionalRouter'
 import { M_MENU_KEY } from './context'
@@ -99,6 +100,14 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
   if (!usesRouterLink(item) || !item.to) return undefined
   return item.to
 }
+
+function showCollapsedTooltip(item: MenuItem) {
+  return collapsed.value && Boolean(item.label)
+}
+
+function flyoutTooltipSuspended(item: MenuItem, index: number) {
+  return Boolean(ctx.flyoutOpen[itemKey(item, index)])
+}
 </script>
 
 <template>
@@ -122,26 +131,31 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
         @update:model-value="setFlyoutOpen(itemKey(item, index), $event)"
       >
         <template #default>
-          <div
-            class="m-menu__item-content"
-            :class="contentClass(item, index)"
-            :style="paddingStyle(depth)"
-            role="menuitem"
-            :tabindex="itemTabindex(item, index)"
-            :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
-            :aria-label="item.label"
-            aria-haspopup="menu"
-            :aria-expanded="horizontal ? Boolean(ctx.flyoutOpen[itemKey(item, index)]) : undefined"
-            :title="collapsed ? item.label : undefined"
+          <MenuCollapsedTooltip
+            :label="item.label"
+            :active="showCollapsedTooltip(item)"
+            :suspended="flyoutTooltipSuspended(item, index)"
           >
-            <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
-              <MIcon :name="iconOf(item)!" size="sm" />
-            </span>
-            <span class="m-menu__label">{{ item.label }}</span>
-            <span v-if="horizontal" class="m-menu__arrow" aria-hidden="true">
-              <MIcon name="chevron-down" size="sm" />
-            </span>
-          </div>
+            <div
+              class="m-menu__item-content"
+              :class="contentClass(item, index)"
+              :style="paddingStyle(depth)"
+              role="menuitem"
+              :tabindex="itemTabindex(item, index)"
+              :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
+              :aria-label="item.label"
+              aria-haspopup="menu"
+              :aria-expanded="horizontal ? Boolean(ctx.flyoutOpen[itemKey(item, index)]) : undefined"
+            >
+              <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
+                <MIcon :name="iconOf(item)!" size="sm" />
+              </span>
+              <span class="m-menu__label">{{ item.label }}</span>
+              <span v-if="horizontal" class="m-menu__arrow" aria-hidden="true">
+                <MIcon name="chevron-down" size="sm" />
+              </span>
+            </div>
+          </MenuCollapsedTooltip>
         </template>
         <template #content>
           <div class="m-menu m-menu--flyout" role="menu">
@@ -205,26 +219,27 @@ function leafLinkTo(item: MenuItem): MRouteLocationRaw | undefined {
       :class="{ 'm-menu__item--horizontal': horizontal }"
       role="none"
     >
-      <component
-        :is="usesRouterLink(item) ? RouterLink : leafHref(item) ? 'a' : 'div'"
-        class="m-menu__item-content"
-        :class="contentClass(item, index)"
-        :style="paddingStyle(depth)"
-        role="menuitem"
-        :tabindex="itemTabindex(item, index)"
-        :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
-        :aria-disabled="item.disabled || undefined"
-        :aria-current="ctx.isSelected(item, index, prefix) ? 'page' : undefined"
-        :title="collapsed ? item.label : undefined"
-        :href="leafHref(item)"
-        :to="leafLinkTo(item)"
-        @click="onLeafClick(item, $event)"
-      >
-        <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
-          <MIcon :name="iconOf(item)!" size="sm" />
-        </span>
-        <span class="m-menu__label">{{ item.label }}</span>
-      </component>
+      <MenuCollapsedTooltip :label="item.label" :active="showCollapsedTooltip(item)">
+        <component
+          :is="usesRouterLink(item) ? RouterLink : leafHref(item) ? 'a' : 'div'"
+          class="m-menu__item-content"
+          :class="contentClass(item, index)"
+          :style="paddingStyle(depth)"
+          role="menuitem"
+          :tabindex="itemTabindex(item, index)"
+          :data-m-menu-key="flyout ? undefined : itemKey(item, index)"
+          :aria-disabled="item.disabled || undefined"
+          :aria-current="ctx.isSelected(item, index, prefix) ? 'page' : undefined"
+          :href="leafHref(item)"
+          :to="leafLinkTo(item)"
+          @click="onLeafClick(item, $event)"
+        >
+          <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
+            <MIcon :name="iconOf(item)!" size="sm" />
+          </span>
+          <span class="m-menu__label">{{ item.label }}</span>
+        </component>
+      </MenuCollapsedTooltip>
     </div>
   </template>
 </template>
