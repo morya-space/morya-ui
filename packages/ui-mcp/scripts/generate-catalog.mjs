@@ -378,3 +378,5 @@ if (process.argv.includes('--check')) {
     `Generated ${outFile} (${catalog.components.length} components, ${catalog.guides.length} guides)`,
   )
 }
+
+await import('./copy-golden-pages.mjs')

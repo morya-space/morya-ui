@@ -41,4 +41,20 @@
     <prompt>Validate a MButton snippet that uses an unknown prop and explain the issue.</prompt>
     <checks>Calls validate_usage and reports unknown-prop for the invalid attribute.</checks>
   </task>
+  <task id="golden-page">
+    <prompt>Read the list-page golden sample and name the page composition components used for filters and toolbar.</prompt>
+    <checks>Calls get_golden_page; mentions MPageFilters and MPageToolbar.</checks>
+  </task>
+  <task id="page-composition">
+    <prompt>What components should stack inside MLayoutContent for a form page, and what should be avoided for list tables?</prompt>
+    <checks>Calls get_design_rules composition section; mentions MPageContent/MPageSection and avoiding MCard around bordered MTable.</checks>
+  </task>
+  <task id="validate-page">
+    <prompt>Validate a page that wraps bordered MTable in MCard and explain the issue.</prompt>
+    <checks>Calls validate_page and reports double-border.</checks>
+  </task>
+  <task id="page-snippet">
+    <prompt>Add a filter bar to an existing list page. Return the standard snippet and its imports.</prompt>
+    <checks>Calls get_page_snippet or list_page_snippets; returns list-filters with MPageFilters.</checks>
+  </task>
 </evaluation>

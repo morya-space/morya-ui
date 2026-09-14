@@ -142,8 +142,13 @@ npx -y @morya-ui/mcp
 | `list_patterns` | 列出可复用的页面组合模式 |
 | `get_pattern` | 读取模式的结构、布局与交互规则 |
 | `recommend_page` | 根据页面意图推荐模式；可附带 starter 脚手架 |
-| `get_design_rules` | 设计令牌与组合规则 |
+| `get_design_rules` | 设计令牌与 MPage* 组合配方 |
 | `recommend_component` | 列出、阅读或推荐组件选型指南 |
+| `list_golden_pages` | 列出黄金样例页面 |
+| `get_golden_page` | 读取黄金样例 Vue 源码 |
+| `list_page_snippets` | 列出可复用的页面区块 snippet |
+| `get_page_snippet` | 读取局部区块 snippet（筛选区、工具栏等） |
+| `validate_page` | 校验页面组合、间距与双边框问题 |
 
 多数工具支持 `mode`：`zh`（默认）或 `en`。
 
@@ -151,7 +156,9 @@ npx -y @morya-ui/mcp
 
 **查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`
 
-**规划整页：** `recommend_page` → `get_pattern` → `get_component` / `get_example` → `get_design_rules`；组件取舍不明时调用 `recommend_component`
+**规划整页：** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → `validate_page`
+
+**改局部区块：** `get_page_snippet(section)` → `get_component` / `get_example` → `validate_usage` → `validate_page`
 
 需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：
 

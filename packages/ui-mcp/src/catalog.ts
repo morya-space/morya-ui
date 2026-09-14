@@ -122,6 +122,20 @@ export const componentAliases: Record<string, string> = {
   layoutcontent: 'Layout',
   layoutfooter: 'Layout',
   griditem: 'Grid',
+  pagecontent: 'Page',
+  pagefilters: 'Page',
+  pagetoolbar: 'Page',
+  pageheader: 'Page',
+  pagesection: 'Page',
+  pagestat: 'Page',
+  pageplaceholder: 'Page',
+  mpagecontent: 'Page',
+  mpagefilters: 'Page',
+  mpagetoolbar: 'Page',
+  mpageheader: 'Page',
+  mpagesection: 'Page',
+  mpagestat: 'Page',
+  mpageplaceholder: 'Page',
 }
 
 const here = dirname(fileURLToPath(import.meta.url))

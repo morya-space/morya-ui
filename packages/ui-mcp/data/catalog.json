@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T01:38:01.275Z",
+  "generatedAt": "2026-09-14T02:46:25.269Z",
   "library": {
     "name": "morya-ui",
     "version": "0.2.2"
@@ -13554,6 +13554,150 @@
       }
     },
     {
+      "id": "Page",
+      "name": "Page",
+      "exportName": "MPageContent",
+      "category": "06 / LAYOUT",
+      "description": "业务页面组合区块，封装间距、边框与标题层级，少写或不写页面 CSS。",
+      "descriptionEn": "Composable page sections for spacing, borders, and headings with little or no custom CSS.",
+      "import": "import { MPageContent } from 'morya-ui'",
+      "props": [],
+      "events": [],
+      "slots": [],
+      "examples": [
+        {
+          "id": "引入-1",
+          "section": "引入",
+          "sectionId": "引入",
+          "lang": "ts",
+          "preview": false,
+          "code": "import {\n  MPageContent,\n  MPageFilters,\n  MPageHeader,\n  MPagePlaceholder,\n  MPageSection,\n  MPageStat,\n  MPageToolbar,\n} from 'morya-ui'",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "列表页组合-1",
+          "section": "列表页组合",
+          "sectionId": "列表页组合",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport {\n  MButton,\n  MInput,\n  MPageContent,\n  MPageFilters,\n  MPageToolbar,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst keyword = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent density=\"compact\">\n      <MPageFilters aria-label=\"筛选\">\n        <MSpace wrap>\n          <MInput v-model=\"keyword\" placeholder=\"搜索\" clearable style=\"width:12rem\" />\n          <MButton severity=\"primary\">查询</MButton>\n        </MSpace>\n      </MPageFilters>\n      <MPageToolbar title=\"用户管理\">\n        <template #actions>\n          <MButton severity=\"primary\">新建</MButton>\n        </template>\n      </MPageToolbar>\n    </MPageContent>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "表单页组合-1",
+          "section": "表单页组合",
+          "sectionId": "表单页组合",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport {\n  MButton,\n  MForm,\n  MFormItem,\n  MInput,\n  MPageContent,\n  MPageHeader,\n  MPageSection,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent width=\"narrow\" density=\"compact\">\n      <MPageHeader title=\"新建用户\" description=\"填写基本信息。\" />\n      <MPageSection variant=\"form\">\n        <MForm @submit.prevent>\n          <MFormItem label=\"姓名\" name=\"name\">\n            <MInput v-model=\"name\" fluid />\n          </MFormItem>\n          <MPageSection variant=\"actions\">\n            <MSpace>\n              <MButton native-type=\"submit\" severity=\"primary\">保存</MButton>\n              <MButton severity=\"secondary\">取消</MButton>\n            </MSpace>\n          </MPageSection>\n        </MForm>\n      </MPageSection>\n    </MPageContent>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "仪表盘-kpi-1",
+          "section": "仪表盘 KPI",
+          "sectionId": "仪表盘-kpi",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MPageStat } from 'morya-ui'\n</script>\n\n<template>\n  <MPageStat label=\"总用户\" value=\"12,480\" trend=\"+8.2%\" icon=\"users\" />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "import-1",
+          "section": "Import",
+          "sectionId": "import",
+          "lang": "ts",
+          "preview": false,
+          "code": "import {\n  MPageContent,\n  MPageFilters,\n  MPageHeader,\n  MPagePlaceholder,\n  MPageSection,\n  MPageStat,\n  MPageToolbar,\n} from 'morya-ui'",
+          "locale": "en-US"
+        },
+        {
+          "id": "list-page-stack-1",
+          "section": "List page stack",
+          "sectionId": "list-page-stack",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport {\n  MButton,\n  MInput,\n  MPageContent,\n  MPageFilters,\n  MPageToolbar,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst keyword = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent density=\"compact\">\n      <MPageFilters aria-label=\"Filters\">\n        <MSpace wrap>\n          <MInput v-model=\"keyword\" placeholder=\"Search\" clearable style=\"width:12rem\" />\n          <MButton severity=\"primary\">Search</MButton>\n        </MSpace>\n      </MPageFilters>\n      <MPageToolbar title=\"Users\">\n        <template #actions>\n          <MButton severity=\"primary\">Create</MButton>\n        </template>\n      </MPageToolbar>\n    </MPageContent>\n  </div>\n</template>",
+          "locale": "en-US"
+        }
+      ],
+      "locales": {
+        "zh-CN": {
+          "title": "Page",
+          "description": "业务页面组合区块，封装间距、边框与标题层级，少写或不写页面 CSS。",
+          "sections": [
+            {
+              "id": "overview",
+              "title": "",
+              "body": "# Page\n\n业务页面组合组件。与 `MLayout` 搭配使用，把列表页筛选区、工具栏、表单分组、KPI 卡片等常见区块的间距和边框内聚到组件内，**优先用 Page 组件拼装页面，而不是每页手写 scoped CSS**。"
+            },
+            {
+              "id": "引入",
+              "title": "引入",
+              "body": "```ts\nimport {\n  MPageContent,\n  MPageFilters,\n  MPageHeader,\n  MPagePlaceholder,\n  MPageSection,\n  MPageStat,\n  MPageToolbar,\n} from 'morya-ui'\n```"
+            },
+            {
+              "id": "列表页组合",
+              "title": "列表页组合",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport {\n  MButton,\n  MInput,\n  MPageContent,\n  MPageFilters,\n  MPageToolbar,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst keyword = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent density=\"compact\">\n      <MPageFilters aria-label=\"筛选\">\n        <MSpace wrap>\n          <MInput v-model=\"keyword\" placeholder=\"搜索\" clearable style=\"width:12rem\" />\n          <MButton severity=\"primary\">查询</MButton>\n        </MSpace>\n      </MPageFilters>\n      <MPageToolbar title=\"用户管理\">\n        <template #actions>\n          <MButton severity=\"primary\">新建</MButton>\n        </template>\n      </MPageToolbar>\n    </MPageContent>\n  </div>\n</template>\n```"
+            },
+            {
+              "id": "表单页组合",
+              "title": "表单页组合",
+              "body": "`MPageContent width=\"narrow\"` 限制表单宽度；`MPageSection variant=\"form\"` 提供表单表面；`variant=\"actions\"` 用于底栏操作。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  MButton,\n  MForm,\n  MFormItem,\n  MInput,\n  MPageContent,\n  MPageHeader,\n  MPageSection,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent width=\"narrow\" density=\"compact\">\n      <MPageHeader title=\"新建用户\" description=\"填写基本信息。\" />\n      <MPageSection variant=\"form\">\n        <MForm @submit.prevent>\n          <MFormItem label=\"姓名\" name=\"name\">\n            <MInput v-model=\"name\" fluid />\n          </MFormItem>\n          <MPageSection variant=\"actions\">\n            <MSpace>\n              <MButton native-type=\"submit\" severity=\"primary\">保存</MButton>\n              <MButton severity=\"secondary\">取消</MButton>\n            </MSpace>\n          </MPageSection>\n        </MForm>\n      </MPageSection>\n    </MPageContent>\n  </div>\n</template>\n```"
+            },
+            {
+              "id": "仪表盘-kpi",
+              "title": "仪表盘 KPI",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport { MPageStat } from 'morya-ui'\n</script>\n\n<template>\n  <MPageStat label=\"总用户\" value=\"12,480\" trend=\"+8.2%\" icon=\"users\" />\n</template>\n```"
+            },
+            {
+              "id": "组合规则",
+              "title": "组合规则",
+              "body": "| 场景 | 推荐组件 | 避免 |\n| --- | --- | --- |\n| 内容区垂直堆叠 | `MPageContent` | 手写 `gap` / `padding` |\n| 筛选区 | `MPageFilters` + `MSpace` / `MFlex` | 额外包一层 `MCard` |\n| 标题 + 主操作 | `MPageToolbar` | 裸 `div` + `justify-content` |\n| 页面说明 | `MPageHeader` | 无层级的裸 `h1` |\n| 表单主体 | `MPageSection variant=\"form\"` | 重复边框的 `MCard` 嵌套 |\n| 列表表格 | 直接放 `MTable` | `MCard` 再包 `MTable bordered` |\n| KPI | `MPageStat` | 每页自定义 stat CSS |\n| 图表占位 | `MPagePlaceholder` |  dashed border 手写样式 |\n\n完整黄金样例见 `docs/golden-pages/`（MCP：`get_golden_page`）。"
+            },
+            {
+              "id": "api",
+              "title": "API",
+              "body": "### MPageContent\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `density` | `'default' \\| 'compact' \\| 'spacious'` | `'default'` | 子区块垂直间距。 |\n| `width` | `'full' \\| 'narrow'` | `'full'` | `narrow` 约 42rem，适合表单页。 |\n\n### MPageFilters\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `ariaLabel` | `string` | — | 筛选区无障碍名称。 |\n\n### MPageToolbar\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `title` | `string` | — | 页面标题。 |\n| `headingLevel` | `1–6` | `1` | 标题层级。 |\n\n| Slot | 说明 |\n| --- | --- |\n| `default` | 无 `title` 时的左侧内容。 |\n| `actions` | 右侧操作区。 |\n\n### MPageHeader\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `title` | `string` | — | 页面标题。 |\n| `description` | `string` | — | 副标题/说明。 |\n| `headingLevel` | `1–6` | `1` | 标题层级。 |\n\n| Slot | 说明 |\n| --- | --- |\n| `actions` | 右侧操作。 |\n\n### MPageSection\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `variant` | `'default' \\| 'muted' \\| 'form' \\| 'actions'` | `'default'` | 视觉变体。 |\n| `title` | `string` | — | 可选分组标题。 |\n\n### MPageStat\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `label` | `string` | — | 指标名称。 |\n| `value` | `string \\| number` | — | 主数值。 |\n| `trend` | `string` | — | 变化量或说明。 |\n| `trendSeverity` | `'primary' \\| 'success' \\| 'warn' \\| 'danger' \\| 'secondary'` | `'primary'` | 趋势色。 |\n| `icon` | `string` | — | 右侧图标名。 |\n\n### MPagePlaceholder\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `description` | `string` | — | 占位说明。 |\n| `ariaLabel` | `string` | `'Placeholder'` | 无障碍标签。 |\n| `minHeight` | `number \\| string` | `'12rem'` | 最小高度。 |"
+            }
+          ],
+          "markdown": "---\ntitle: Page\ncategory: 06 / LAYOUT\ndescription: 业务页面组合区块，封装间距、边框与标题层级，少写或不写页面 CSS。\n---\n\n# Page\n\n业务页面组合组件。与 `MLayout` 搭配使用，把列表页筛选区、工具栏、表单分组、KPI 卡片等常见区块的间距和边框内聚到组件内，**优先用 Page 组件拼装页面，而不是每页手写 scoped CSS**。\n\n## 引入\n\n```ts\nimport {\n  MPageContent,\n  MPageFilters,\n  MPageHeader,\n  MPagePlaceholder,\n  MPageSection,\n  MPageStat,\n  MPageToolbar,\n} from 'morya-ui'\n```\n\n## 列表页组合\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  MButton,\n  MInput,\n  MPageContent,\n  MPageFilters,\n  MPageToolbar,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst keyword = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent density=\"compact\">\n      <MPageFilters aria-label=\"筛选\">\n        <MSpace wrap>\n          <MInput v-model=\"keyword\" placeholder=\"搜索\" clearable style=\"width:12rem\" />\n          <MButton severity=\"primary\">查询</MButton>\n        </MSpace>\n      </MPageFilters>\n      <MPageToolbar title=\"用户管理\">\n        <template #actions>\n          <MButton severity=\"primary\">新建</MButton>\n        </template>\n      </MPageToolbar>\n    </MPageContent>\n  </div>\n</template>\n```\n\n## 表单页组合\n\n`MPageContent width=\"narrow\"` 限制表单宽度；`MPageSection variant=\"form\"` 提供表单表面；`variant=\"actions\"` 用于底栏操作。\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  MButton,\n  MForm,\n  MFormItem,\n  MInput,\n  MPageContent,\n  MPageHeader,\n  MPageSection,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent width=\"narrow\" density=\"compact\">\n      <MPageHeader title=\"新建用户\" description=\"填写基本信息。\" />\n      <MPageSection variant=\"form\">\n        <MForm @submit.prevent>\n          <MFormItem label=\"姓名\" name=\"name\">\n            <MInput v-model=\"name\" fluid />\n          </MFormItem>\n          <MPageSection variant=\"actions\">\n            <MSpace>\n              <MButton native-type=\"submit\" severity=\"primary\">保存</MButton>\n              <MButton severity=\"secondary\">取消</MButton>\n            </MSpace>\n          </MPageSection>\n        </MForm>\n      </MPageSection>\n    </MPageContent>\n  </div>\n</template>\n```\n\n## 仪表盘 KPI\n\n```vue preview\n<script setup lang=\"ts\">\nimport { MPageStat } from 'morya-ui'\n</script>\n\n<template>\n  <MPageStat label=\"总用户\" value=\"12,480\" trend=\"+8.2%\" icon=\"users\" />\n</template>\n```\n\n## 组合规则\n\n| 场景 | 推荐组件 | 避免 |\n| --- | --- | --- |\n| 内容区垂直堆叠 | `MPageContent` | 手写 `gap` / `padding` |\n| 筛选区 | `MPageFilters` + `MSpace` / `MFlex` | 额外包一层 `MCard` |\n| 标题 + 主操作 | `MPageToolbar` | 裸 `div` + `justify-content` |\n| 页面说明 | `MPageHeader` | 无层级的裸 `h1` |\n| 表单主体 | `MPageSection variant=\"form\"` | 重复边框的 `MCard` 嵌套 |\n| 列表表格 | 直接放 `MTable` | `MCard` 再包 `MTable bordered` |\n| KPI | `MPageStat` | 每页自定义 stat CSS |\n| 图表占位 | `MPagePlaceholder` |  dashed border 手写样式 |\n\n完整黄金样例见 `docs/golden-pages/`（MCP：`get_golden_page`）。\n\n## API\n\n### MPageContent\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `density` | `'default' \\| 'compact' \\| 'spacious'` | `'default'` | 子区块垂直间距。 |\n| `width` | `'full' \\| 'narrow'` | `'full'` | `narrow` 约 42rem，适合表单页。 |\n\n### MPageFilters\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `ariaLabel` | `string` | — | 筛选区无障碍名称。 |\n\n### MPageToolbar\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `title` | `string` | — | 页面标题。 |\n| `headingLevel` | `1–6` | `1` | 标题层级。 |\n\n| Slot | 说明 |\n| --- | --- |\n| `default` | 无 `title` 时的左侧内容。 |\n| `actions` | 右侧操作区。 |\n\n### MPageHeader\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `title` | `string` | — | 页面标题。 |\n| `description` | `string` | — | 副标题/说明。 |\n| `headingLevel` | `1–6` | `1` | 标题层级。 |\n\n| Slot | 说明 |\n| --- | --- |\n| `actions` | 右侧操作。 |\n\n### MPageSection\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `variant` | `'default' \\| 'muted' \\| 'form' \\| 'actions'` | `'default'` | 视觉变体。 |\n| `title` | `string` | — | 可选分组标题。 |\n\n### MPageStat\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `label` | `string` | — | 指标名称。 |\n| `value` | `string \\| number` | — | 主数值。 |\n| `trend` | `string` | — | 变化量或说明。 |\n| `trendSeverity` | `'primary' \\| 'success' \\| 'warn' \\| 'danger' \\| 'secondary'` | `'primary'` | 趋势色。 |\n| `icon` | `string` | — | 右侧图标名。 |\n\n### MPagePlaceholder\n\n| Prop | 类型 | 默认 | 说明 |\n| --- | --- | --- | --- |\n| `description` | `string` | — | 占位说明。 |\n| `ariaLabel` | `string` | `'Placeholder'` | 无障碍标签。 |\n| `minHeight` | `number \\| string` | `'12rem'` | 最小高度。 |\n"
+        },
+        "en-US": {
+          "title": "Page",
+          "description": "Composable page sections for spacing, borders, and headings with little or no custom CSS.",
+          "sections": [
+            {
+              "id": "overview",
+              "title": "",
+              "body": "# Page\n\nPage composition components. Use them with `MLayout` to encode filter bars, toolbars, form surfaces, KPI cards, and other admin-page blocks **without rewriting scoped CSS on every page**."
+            },
+            {
+              "id": "import",
+              "title": "Import",
+              "body": "```ts\nimport {\n  MPageContent,\n  MPageFilters,\n  MPageHeader,\n  MPagePlaceholder,\n  MPageSection,\n  MPageStat,\n  MPageToolbar,\n} from 'morya-ui'\n```"
+            },
+            {
+              "id": "list-page-stack",
+              "title": "List page stack",
+              "body": "```vue preview\n<script setup lang=\"ts\">\nimport {\n  MButton,\n  MInput,\n  MPageContent,\n  MPageFilters,\n  MPageToolbar,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst keyword = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent density=\"compact\">\n      <MPageFilters aria-label=\"Filters\">\n        <MSpace wrap>\n          <MInput v-model=\"keyword\" placeholder=\"Search\" clearable style=\"width:12rem\" />\n          <MButton severity=\"primary\">Search</MButton>\n        </MSpace>\n      </MPageFilters>\n      <MPageToolbar title=\"Users\">\n        <template #actions>\n          <MButton severity=\"primary\">Create</MButton>\n        </template>\n      </MPageToolbar>\n    </MPageContent>\n  </div>\n</template>\n```"
+            },
+            {
+              "id": "form-page-stack",
+              "title": "Form page stack",
+              "body": "Use `MPageContent width=\"narrow\"`, `MPageSection variant=\"form\"`, and `variant=\"actions\"` for the footer."
+            },
+            {
+              "id": "composition-rules",
+              "title": "Composition rules",
+              "body": "| Scenario | Use | Avoid |\n| --- | --- | --- |\n| Vertical page stack | `MPageContent` | Hand-written `gap` / `padding` |\n| Filters | `MPageFilters` | Extra bordered `MCard` wrapper |\n| Title + actions | `MPageToolbar` | Raw flex divs |\n| Form surface | `MPageSection variant=\"form\"` | Nested bordered cards |\n| Data table | `MTable` directly | `MCard` around bordered table |\n| KPI metric | `MPageStat` | Custom stat CSS per page |\n\nGolden references: `docs/golden-pages/` (MCP: `get_golden_page`)."
+            }
+          ],
+          "markdown": "---\ntitle: Page\ncategory: 06 / LAYOUT\ndescription: Composable page sections for spacing, borders, and headings with little or no custom CSS.\n---\n\n# Page\n\nPage composition components. Use them with `MLayout` to encode filter bars, toolbars, form surfaces, KPI cards, and other admin-page blocks **without rewriting scoped CSS on every page**.\n\n## Import\n\n```ts\nimport {\n  MPageContent,\n  MPageFilters,\n  MPageHeader,\n  MPagePlaceholder,\n  MPageSection,\n  MPageStat,\n  MPageToolbar,\n} from 'morya-ui'\n```\n\n## List page stack\n\n```vue preview\n<script setup lang=\"ts\">\nimport {\n  MButton,\n  MInput,\n  MPageContent,\n  MPageFilters,\n  MPageToolbar,\n  MSpace,\n} from 'morya-ui'\nimport { ref } from 'vue'\n\nconst keyword = ref('')\n</script>\n\n<template>\n  <div style=\"border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden\">\n    <MPageContent density=\"compact\">\n      <MPageFilters aria-label=\"Filters\">\n        <MSpace wrap>\n          <MInput v-model=\"keyword\" placeholder=\"Search\" clearable style=\"width:12rem\" />\n          <MButton severity=\"primary\">Search</MButton>\n        </MSpace>\n      </MPageFilters>\n      <MPageToolbar title=\"Users\">\n        <template #actions>\n          <MButton severity=\"primary\">Create</MButton>\n        </template>\n      </MPageToolbar>\n    </MPageContent>\n  </div>\n</template>\n```\n\n## Form page stack\n\nUse `MPageContent width=\"narrow\"`, `MPageSection variant=\"form\"`, and `variant=\"actions\"` for the footer.\n\n## Composition rules\n\n| Scenario | Use | Avoid |\n| --- | --- | --- |\n| Vertical page stack | `MPageContent` | Hand-written `gap` / `padding` |\n| Filters | `MPageFilters` | Extra bordered `MCard` wrapper |\n| Title + actions | `MPageToolbar` | Raw flex divs |\n| Form surface | `MPageSection variant=\"form\"` | Nested bordered cards |\n| Data table | `MTable` directly | `MCard` around bordered table |\n| KPI metric | `MPageStat` | Custom stat CSS per page |\n\nGolden references: `docs/golden-pages/` (MCP: `get_golden_page`).\n"
+        }
+      }
+    },
+    {
       "id": "Pagination",
       "name": "Pagination",
       "exportName": "MPagination",
@@ -24417,7 +24561,7 @@
         "zh-CN": {
           "title": "MCP",
           "description": "可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客户端检索本库文档。",
-          "markdown": "---\ntitle: MCP\norder: 10\ndescription: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客户端检索本库文档。\n---\n\n# MCP\n\n[`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。\n\n日常使用组件库 **不需要** 安装或配置 MCP。应用里仍然只依赖：\n\n```bash\npnpm add morya-ui\n```\n\n```ts\nimport 'morya-ui/styles.css'\n```\n\n## 接入方式\n\nMCP 客户端通过 stdio 启动本包即可：\n\n```bash\nnpx -y @morya-ui/mcp\n```\n\n通用写法：\n\n```json\n{\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@morya-ui/mcp\"]\n}\n```\n\n字段名因客户端而异，只要支持 MCP stdio 即可接入。\n\n### 常见客户端配置示例\n\n以下为常见产品的配置片段，键名可能随版本变化，以各产品官方文档为准。\n\n**Cursor**（`.cursor/mcp.json` 或用户级 MCP 配置）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Claude Desktop / Claude Code**（`claude_desktop_config.json` 等）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Windsurf**（MCP 设置中的 servers 配置）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Cline**（VS Code 扩展设置中的 MCP servers）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Zed**（`settings.json` → `context_servers`）：\n\n```json\n{\n  \"context_servers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Continue**（`config.json` / YAML 中的 MCP servers，字段名以当前版本为准）：\n\n```json\n{\n  \"mcpServers\": [\n    {\n      \"name\": \"morya-ui\",\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  ]\n}\n```\n\n## 可用工具\n\n### 基础 — 查组件文档\n\n| 工具 | 作用 |\n| --- | --- |\n| `list` | 列出组件 / 指南 / 示例 / 分类 / 页面模式 |\n| `search` | 搜索文档、示例、页面模式与组件选型指南 |\n| `get_component` | 读取组件说明与 API |\n| `get_example` | 获取源码示例 |\n| `get_guide` | 读取指南 |\n| `get_setup` | 安装与初始化说明 |\n| `validate_usage` | 对照文档粗检 props / events 用法 |\n| `version` | 版本与目录状态 |\n\n### 高级 — 页面组合（可选）\n\n| 工具 | 作用 |\n| --- | --- |\n| `list_patterns` | 列出可复用的页面组合模式 |\n| `get_pattern` | 读取模式的结构、布局与交互规则 |\n| `recommend_page` | 根据页面意图推荐模式；可附带 starter 脚手架 |\n| `get_design_rules` | 设计令牌与组合规则 |\n| `recommend_component` | 列出、阅读或推荐组件选型指南 |\n\n多数工具支持 `mode`：`zh`（默认）或 `en`。\n\n### 推荐工作流\n\n**查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`\n\n**规划整页：** `recommend_page` → `get_pattern` → `get_component` / `get_example` → `get_design_rules`；组件取舍不明时调用 `recommend_component`\n\n需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：\n\n```json\n{\n  \"intent\": \"油井管理列表\",\n  \"pageType\": \"list\",\n  \"features\": [\"筛选\", \"新增\", \"分页\"],\n  \"includeScaffold\": true\n}\n```\n\n`recommend_component` 用法：\n\n- 不传 `query` 和 `decision` → 列出全部选型指南\n- 只传 `decision`（如 `overlay-choice`）→ 阅读某一指南\n- 传 `query` → 根据问题推荐组件\n\n## 对话示例\n\n接入后，可直接让助手调用本服务，例如：\n\n> 用 morya-ui 的 MCP 查一下 Dialog 的 props，并给一个带确认 / 取消按钮的示例。\n\n> 搜索和「日期」相关的组件，选一个适合表单的，按文档写出最小用法。\n\n> 根据 MCP 里 Button 的文档，写一个 `severity=\"danger\"` 的删除按钮，并校验 props 是否合法。\n\n助手应先调用工具，再基于返回内容生成类似：\n\n```vue\n<script setup lang=\"ts\">\nimport { MButton } from 'morya-ui'\n</script>\n\n<template>\n  <MButton label=\"删除\" severity=\"danger\" />\n</template>\n```\n\n## 与文档站的关系\n\n目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@morya-ui/mcp`，客户端通过 `npx -y` 即可拿到新版本。\n\n更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/morya-space/morya-ui/tree/main/packages/ui-mcp)。\n\n## 下一步\n\n- [快速上手](/docs/quick-start)：在应用中安装并使用组件\n- [组件](/components)：浏览全部组件与交互示例\n",
+          "markdown": "---\ntitle: MCP\norder: 10\ndescription: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客户端检索本库文档。\n---\n\n# MCP\n\n[`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。\n\n日常使用组件库 **不需要** 安装或配置 MCP。应用里仍然只依赖：\n\n```bash\npnpm add morya-ui\n```\n\n```ts\nimport 'morya-ui/styles.css'\n```\n\n## 接入方式\n\nMCP 客户端通过 stdio 启动本包即可：\n\n```bash\nnpx -y @morya-ui/mcp\n```\n\n通用写法：\n\n```json\n{\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@morya-ui/mcp\"]\n}\n```\n\n字段名因客户端而异，只要支持 MCP stdio 即可接入。\n\n### 常见客户端配置示例\n\n以下为常见产品的配置片段，键名可能随版本变化，以各产品官方文档为准。\n\n**Cursor**（`.cursor/mcp.json` 或用户级 MCP 配置）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Claude Desktop / Claude Code**（`claude_desktop_config.json` 等）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Windsurf**（MCP 设置中的 servers 配置）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Cline**（VS Code 扩展设置中的 MCP servers）：\n\n```json\n{\n  \"mcpServers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Zed**（`settings.json` → `context_servers`）：\n\n```json\n{\n  \"context_servers\": {\n    \"morya-ui\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  }\n}\n```\n\n**Continue**（`config.json` / YAML 中的 MCP servers，字段名以当前版本为准）：\n\n```json\n{\n  \"mcpServers\": [\n    {\n      \"name\": \"morya-ui\",\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@morya-ui/mcp\"]\n    }\n  ]\n}\n```\n\n## 可用工具\n\n### 基础 — 查组件文档\n\n| 工具 | 作用 |\n| --- | --- |\n| `list` | 列出组件 / 指南 / 示例 / 分类 / 页面模式 |\n| `search` | 搜索文档、示例、页面模式与组件选型指南 |\n| `get_component` | 读取组件说明与 API |\n| `get_example` | 获取源码示例 |\n| `get_guide` | 读取指南 |\n| `get_setup` | 安装与初始化说明 |\n| `validate_usage` | 对照文档粗检 props / events 用法 |\n| `version` | 版本与目录状态 |\n\n### 高级 — 页面组合（可选）\n\n| 工具 | 作用 |\n| --- | --- |\n| `list_patterns` | 列出可复用的页面组合模式 |\n| `get_pattern` | 读取模式的结构、布局与交互规则 |\n| `recommend_page` | 根据页面意图推荐模式；可附带 starter 脚手架 |\n| `get_design_rules` | 设计令牌与 MPage* 组合配方 |\n| `recommend_component` | 列出、阅读或推荐组件选型指南 |\n| `list_golden_pages` | 列出黄金样例页面 |\n| `get_golden_page` | 读取黄金样例 Vue 源码 |\n| `list_page_snippets` | 列出可复用的页面区块 snippet |\n| `get_page_snippet` | 读取局部区块 snippet（筛选区、工具栏等） |\n| `validate_page` | 校验页面组合、间距与双边框问题 |\n\n多数工具支持 `mode`：`zh`（默认）或 `en`。\n\n### 推荐工作流\n\n**查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`\n\n**规划整页：** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → `validate_page`\n\n**改局部区块：** `get_page_snippet(section)` → `get_component` / `get_example` → `validate_usage` → `validate_page`\n\n需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：\n\n```json\n{\n  \"intent\": \"油井管理列表\",\n  \"pageType\": \"list\",\n  \"features\": [\"筛选\", \"新增\", \"分页\"],\n  \"includeScaffold\": true\n}\n```\n\n`recommend_component` 用法：\n\n- 不传 `query` 和 `decision` → 列出全部选型指南\n- 只传 `decision`（如 `overlay-choice`）→ 阅读某一指南\n- 传 `query` → 根据问题推荐组件\n\n## 对话示例\n\n接入后，可直接让助手调用本服务，例如：\n\n> 用 morya-ui 的 MCP 查一下 Dialog 的 props，并给一个带确认 / 取消按钮的示例。\n\n> 搜索和「日期」相关的组件，选一个适合表单的，按文档写出最小用法。\n\n> 根据 MCP 里 Button 的文档，写一个 `severity=\"danger\"` 的删除按钮，并校验 props 是否合法。\n\n助手应先调用工具，再基于返回内容生成类似：\n\n```vue\n<script setup lang=\"ts\">\nimport { MButton } from 'morya-ui'\n</script>\n\n<template>\n  <MButton label=\"删除\" severity=\"danger\" />\n</template>\n```\n\n## 与文档站的关系\n\n目录与本站同源（组件 `docs/` + 指南 Markdown）。官网文档更新后，维护者重新发布 `@morya-ui/mcp`，客户端通过 `npx -y` 即可拿到新版本。\n\n更多实现细节见仓库内 [packages/ui-mcp/README.md](https://github.com/morya-space/morya-ui/tree/main/packages/ui-mcp)。\n\n## 下一步\n\n- [快速上手](/docs/quick-start)：在应用中安装并使用组件\n- [组件](/components)：浏览全部组件与交互示例\n",
           "sections": [
             {
               "title": "",
@@ -24432,7 +24576,7 @@
             {
               "title": "可用工具",
               "id": "可用工具",
-              "body": "### 基础 — 查组件文档\n\n| 工具 | 作用 |\n| --- | --- |\n| `list` | 列出组件 / 指南 / 示例 / 分类 / 页面模式 |\n| `search` | 搜索文档、示例、页面模式与组件选型指南 |\n| `get_component` | 读取组件说明与 API |\n| `get_example` | 获取源码示例 |\n| `get_guide` | 读取指南 |\n| `get_setup` | 安装与初始化说明 |\n| `validate_usage` | 对照文档粗检 props / events 用法 |\n| `version` | 版本与目录状态 |\n\n### 高级 — 页面组合（可选）\n\n| 工具 | 作用 |\n| --- | --- |\n| `list_patterns` | 列出可复用的页面组合模式 |\n| `get_pattern` | 读取模式的结构、布局与交互规则 |\n| `recommend_page` | 根据页面意图推荐模式；可附带 starter 脚手架 |\n| `get_design_rules` | 设计令牌与组合规则 |\n| `recommend_component` | 列出、阅读或推荐组件选型指南 |\n\n多数工具支持 `mode`：`zh`（默认）或 `en`。\n\n### 推荐工作流\n\n**查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`\n\n**规划整页：** `recommend_page` → `get_pattern` → `get_component` / `get_example` → `get_design_rules`；组件取舍不明时调用 `recommend_component`\n\n需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：\n\n```json\n{\n  \"intent\": \"油井管理列表\",\n  \"pageType\": \"list\",\n  \"features\": [\"筛选\", \"新增\", \"分页\"],\n  \"includeScaffold\": true\n}\n```\n\n`recommend_component` 用法：\n\n- 不传 `query` 和 `decision` → 列出全部选型指南\n- 只传 `decision`（如 `overlay-choice`）→ 阅读某一指南\n- 传 `query` → 根据问题推荐组件"
+              "body": "### 基础 — 查组件文档\n\n| 工具 | 作用 |\n| --- | --- |\n| `list` | 列出组件 / 指南 / 示例 / 分类 / 页面模式 |\n| `search` | 搜索文档、示例、页面模式与组件选型指南 |\n| `get_component` | 读取组件说明与 API |\n| `get_example` | 获取源码示例 |\n| `get_guide` | 读取指南 |\n| `get_setup` | 安装与初始化说明 |\n| `validate_usage` | 对照文档粗检 props / events 用法 |\n| `version` | 版本与目录状态 |\n\n### 高级 — 页面组合（可选）\n\n| 工具 | 作用 |\n| --- | --- |\n| `list_patterns` | 列出可复用的页面组合模式 |\n| `get_pattern` | 读取模式的结构、布局与交互规则 |\n| `recommend_page` | 根据页面意图推荐模式；可附带 starter 脚手架 |\n| `get_design_rules` | 设计令牌与 MPage* 组合配方 |\n| `recommend_component` | 列出、阅读或推荐组件选型指南 |\n| `list_golden_pages` | 列出黄金样例页面 |\n| `get_golden_page` | 读取黄金样例 Vue 源码 |\n| `list_page_snippets` | 列出可复用的页面区块 snippet |\n| `get_page_snippet` | 读取局部区块 snippet（筛选区、工具栏等） |\n| `validate_page` | 校验页面组合、间距与双边框问题 |\n\n多数工具支持 `mode`：`zh`（默认）或 `en`。\n\n### 推荐工作流\n\n**查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`\n\n**规划整页：** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → `validate_page`\n\n**改局部区块：** `get_page_snippet(section)` → `get_component` / `get_example` → `validate_usage` → `validate_page`\n\n需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：\n\n```json\n{\n  \"intent\": \"油井管理列表\",\n  \"pageType\": \"list\",\n  \"features\": [\"筛选\", \"新增\", \"分页\"],\n  \"includeScaffold\": true\n}\n```\n\n`recommend_component` 用法：\n\n- 不传 `query` 和 `decision` → 列出全部选型指南\n- 只传 `decision`（如 `overlay-choice`）→ 阅读某一指南\n- 传 `query` → 根据问题推荐组件"
             },
             {
               "title": "对话示例",

@@ -69,6 +69,11 @@ Resource templates:
 | `recommend_page`      | Recommend a pattern from page intent; optional starter scaffold |
 | `get_design_rules`    | Design-token and composition rules                            |
 | `recommend_component` | List, read, or recommend component selection guides           |
+| `list_golden_pages`   | List golden page samples (list / form / dashboard)            |
+| `get_golden_page`     | Read golden page Vue source                                   |
+| `list_page_snippets`  | List section snippets for local page edits                      |
+| `get_page_snippet`    | Read a section snippet (`filters`, `toolbar`, `form-actions`…)  |
+| `validate_page`       | Check page composition, spacing, and border anti-patterns     |
 
 `mode`: `zh` (default) or `en`.
 
@@ -85,10 +90,19 @@ Component lookup accepts common aliases such as `DataTable`, `数据表格`, `Pa
 **Plan a page:**
 
 1. `recommend_page` with business intent, page type, and features
-2. `get_pattern` for the returned `matchedPattern`
-3. `get_component` / `get_example` for core components
-4. `get_design_rules` before custom layout or CSS
-5. `recommend_component` when choosing between similar components
+2. `get_golden_page` for the matched golden sample (`list-page`, `form-page`, `dashboard-page`)
+3. `get_pattern` for the returned `matchedPattern`
+4. `get_design_rules` for MPage* composition recipes
+5. `get_component` / `get_example` for core components (including `Page`)
+6. `recommend_component` when choosing between similar components
+7. `validate_page` on generated Vue code before finishing
+
+**Edit one section of an existing page:**
+
+1. `list_page_snippets` with `query` or `pageType`
+2. `get_page_snippet` for the matched section (`list-filters`, `form-actions`, …)
+3. `get_component` / `get_example` for unfamiliar imports
+4. `validate_usage` + `validate_page` on the merged result
 
 For a starter Vue file, pass `includeScaffold: true` to `recommend_page`:
 
