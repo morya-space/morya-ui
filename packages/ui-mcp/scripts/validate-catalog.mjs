@@ -44,7 +44,15 @@ const patternComponentParents = {
   LayoutSider: 'Layout',
   LayoutHeader: 'Layout',
   LayoutContent: 'Layout',
+  LayoutFooter: 'Layout',
   GridItem: 'Grid',
+  PageContent: 'Page',
+  PageFilters: 'Page',
+  PageToolbar: 'Page',
+  PageHeader: 'Page',
+  PageSection: 'Page',
+  PageStat: 'Page',
+  PagePlaceholder: 'Page',
 }
 
 const patternsSource = readFileSync(patternsPath, 'utf8')
