@@ -13,7 +13,6 @@ import {
   pxToSize,
   sizeToFlexBasis,
 } from './size'
-import ScrollBody from '../../shared/ScrollBody.vue'
 
 const props = withDefaults(defineProps<SplitterProps>(), {
   defaultSize: 50,
@@ -253,11 +252,9 @@ onBeforeUnmount(() => {
     :aria-orientation="isVertical ? 'vertical' : 'horizontal'"
   >
     <div class="m-splitter__panel" :class="pane1Class" :style="panel1Style">
-      <ScrollBody root-class="m-splitter__scrollbar" wrap-class="m-splitter__scroll">
-        <slot v-if="slots.panel1" name="panel1" />
-        <slot v-else-if="slots['1']" name="1" />
-        <component :is="defaultPanels[0]" v-else-if="defaultPanels[0]" />
-      </ScrollBody>
+      <slot v-if="slots.panel1" name="panel1" />
+      <slot v-else-if="slots['1']" name="1" />
+      <component :is="defaultPanels[0]" v-else-if="defaultPanels[0]" />
     </div>
 
     <div
@@ -279,11 +276,9 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="m-splitter__panel m-splitter__panel--fill" :class="pane2Class" :style="panel2Style">
-      <ScrollBody root-class="m-splitter__scrollbar" wrap-class="m-splitter__scroll">
-        <slot v-if="slots.panel2" name="panel2" />
-        <slot v-else-if="slots['2']" name="2" />
-        <component :is="defaultPanels[1]" v-else-if="defaultPanels[1]" />
-      </ScrollBody>
+      <slot v-if="slots.panel2" name="panel2" />
+      <slot v-else-if="slots['2']" name="2" />
+      <component :is="defaultPanels[1]" v-else-if="defaultPanels[1]" />
     </div>
   </div>
 </template>

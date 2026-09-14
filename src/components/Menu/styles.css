@@ -452,21 +452,6 @@
     padding: 0;
 }
 
-.m-popover__content:has(.m-menu--flyout) .m-popover__scroll,
-.m-popover__content:has(.m-menu--flyout) .m-scrollbar {
-    max-height: none;
-    overflow: visible;
-}
-
-.m-popover__content:has(.m-menu--flyout) .m-scrollbar__wrap {
-    max-height: none;
-    overflow: visible;
-}
-
-.m-popover__content:has(.m-menu--flyout) .m-popover__scroll-view {
-    padding: 0;
-}
-
 .m-popover__content--right:has(.m-menu--flyout),
 .m-popover__content--right-start:has(.m-menu--flyout) {
     left: calc(100% + var(--m-space-2));

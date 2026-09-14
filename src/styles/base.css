@@ -405,7 +405,6 @@
 
 .m-dialog__scrollbar > .m-scrollbar__wrap,
 .m-drawer__scrollbar > .m-scrollbar__wrap,
-.m-splitter__scrollbar > .m-scrollbar__wrap,
 .m-treetable__scrollbar > .m-scrollbar__wrap,
 .m-terminal__scrollbar > .m-scrollbar__wrap {
     height: 100%;

@@ -22,17 +22,9 @@
 
 .m-splitter__panel {
     background: var(--m-color-surface);
-    display: flex;
-    flex-direction: column;
     min-height: 0;
     min-width: 0;
-    overflow: hidden;
-}
-
-.m-splitter__scrollbar {
-    flex: 1 1 auto;
-    min-height: 0;
-    min-width: 0;
+    overflow: auto;
 }
 
 .m-splitter__panel--fill {

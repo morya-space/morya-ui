@@ -372,9 +372,9 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     title: '局部可滚动面板',
     titleEn: 'Scrollable local panel',
     description:
-      '业务页中卡片、侧栏、日志区等限高滚动区域的推荐写法：优先 MScrollbar。',
+      '业务自行限高滚动时的可选写法：显式使用 MScrollbar。组件内置滚动区无需再包。',
     descriptionEn:
-      'Recommended pattern for capped scroll regions in business pages: prefer MScrollbar.',
+      'Optional pattern when the app wants a themed capped scroll region. Do not wrap component-owned scroll chrome again.',
     pageTypes: ['list', 'form', 'dashboard', 'detail', 'common'],
     keywords: [
       'scroll',

@@ -11,7 +11,6 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
-import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,
@@ -153,15 +152,10 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
         tabindex="-1"
         :style="panelStyle"
       >
-        <MScrollbar
-          class="m-confirmpopup__message-scroll"
-          fit-content
-          wrap-class="m-confirmpopup__message-wrap"
-          view-class="m-confirmpopup__message"
-        >
+        <div class="m-confirmpopup__message">
           <MIcon v-if="icon" class="m-confirmpopup__icon" :name="icon" size="sm" />
           <slot>{{ message }}</slot>
-        </MScrollbar>
+        </div>
         <div class="m-confirmpopup__footer">
           <MButton :label="rejectText" severity="secondary" size="small" @click="reject" />
           <MButton

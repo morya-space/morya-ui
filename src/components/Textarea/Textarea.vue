@@ -11,7 +11,6 @@ import {
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
-import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -61,13 +60,6 @@ const resolvedRows = computed(() => {
 })
 
 const isAutosize = computed(() => Boolean(resolvedAutosize.value))
-const useAutosizeScroll = computed(
-  () => typeof resolvedAutosize.value === 'object' && resolvedAutosize.value.maxRows != null,
-)
-const autosizeScrollMaxHeight = ref<number | null>(null)
-const autosizeScrollStyle = computed(() =>
-  autosizeScrollMaxHeight.value != null ? { maxHeight: `${autosizeScrollMaxHeight.value}px` } : undefined,
-)
 const resizeStyle = computed(() => (isAutosize.value ? 'none' : props.resize))
 const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
@@ -112,23 +104,13 @@ function resizeToFit() {
       el.style.minHeight = `${minHeight}px`
     }
     if (maxHeight != null) {
-      autosizeScrollMaxHeight.value = maxHeight
-      if (useAutosizeScroll.value) {
-        el.style.height = `${Math.max(contentHeight, minHeight ?? contentHeight)}px`
-        el.style.maxHeight = 'none'
-        el.style.overflowY = 'hidden'
-        return
-      }
       height = Math.min(height, maxHeight)
       el.style.maxHeight = `${maxHeight}px`
       el.style.overflowY = contentHeight > maxHeight ? 'auto' : 'hidden'
-    } else {
-      autosizeScrollMaxHeight.value = null
     }
     el.style.height = `${height}px`
     return
   }
-  autosizeScrollMaxHeight.value = null
   el.style.height = `${contentHeight}px`
 }
 
@@ -184,44 +166,9 @@ onMounted(() => {
     <label v-if="label" class="m-textarea-field__label" :for="textareaId">{{ label }}</label>
     <div
       class="m-textarea-field__control"
-      :class="{
-        'm-textarea-field__control--clearable': showClear,
-        'm-textarea-field__control--scroll': useAutosizeScroll,
-      }"
+      :class="{ 'm-textarea-field__control--clearable': showClear }"
     >
-      <MScrollbar
-        v-if="useAutosizeScroll"
-        class="m-textarea__scroll"
-        fit-content
-        :style="autosizeScrollStyle"
-        wrap-class="m-textarea__scroll-wrap"
-        view-class="m-textarea__scroll-view"
-      >
-        <textarea
-          v-bind="controlAttrs"
-          :id="textareaId"
-          ref="textareaElement"
-          :class="textareaClass"
-          :value="modelValue"
-          :rows="resolvedRows"
-          :disabled="disabled"
-          :readonly="readonly"
-          :maxlength="maxlength"
-          :placeholder="placeholder"
-          :name="name"
-          :autocomplete="autocomplete"
-          :autofocus="autofocus || undefined"
-          :aria-invalid="isInvalid || undefined"
-          :aria-describedby="describedBy"
-          :style="{ resize: resizeStyle }"
-          @input="updateValue"
-          @focus="emit('focus', $event)"
-          @blur="emit('blur', $event)"
-          @change="emit('change', ($event.target as HTMLTextAreaElement).value)"
-        />
-      </MScrollbar>
       <textarea
-        v-else
         v-bind="controlAttrs"
         :id="textareaId"
         ref="textareaElement"

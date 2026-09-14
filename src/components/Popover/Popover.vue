@@ -11,7 +11,6 @@ import {
     resolveOverlayTeleport,
 } from "../../shared/overlay";
 import { computeFloatingOverlayStyle } from "../../shared/overlayPlacement";
-import MScrollbar from "../Scrollbar/Scrollbar.vue";
 
 const props = withDefaults(defineProps<PopoverProps>(), {
     modelValue: false,
@@ -227,14 +226,7 @@ onBeforeUnmount(() => {
                     @mouseenter="onPanelEnter"
                     @mouseleave="onPanelLeave"
                 >
-                    <MScrollbar
-                        class="m-popover__scroll"
-                        fit-content
-                        wrap-class="m-popover__scroll-wrap"
-                        view-class="m-popover__scroll-view"
-                    >
-                        <slot name="content" />
-                    </MScrollbar>
+                    <slot name="content" />
                 </div>
             </Transition>
         </Teleport>

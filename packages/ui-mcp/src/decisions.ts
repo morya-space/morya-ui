@@ -280,30 +280,36 @@ export const componentDecisions: ComponentDecision[] = [
       {
         component: 'MScrollbar',
         when: [
-          '卡片正文、侧栏、日志/评论列表等局部限高区域',
-          'Split 面板、自定义面板需要统一滚动条样式',
-          'MCP 生成页面时出现 max-height 且内容可能溢出',
+          '业务自行限高的卡片正文、侧栏、日志列表，且希望主题化滚动条',
+          '组件未内置滚动、又需要统一滚动外观时',
         ],
         whenEn: [
-          'Card bodies, side panels, logs, or comment lists with a height cap',
-          'Split panes or custom panels that need themed scrollbars',
-          'MCP-generated pages with max-height and potentially overflowing content',
+          'App-owned capped regions (card bodies, side panels, logs) that want themed scrollbars',
+          'No built-in component scroll, but a consistent scrollbar look is desired',
         ],
-        avoidWhen: ['MTable / MLayoutContent 外层', 'Select/Dropdown/Menu 弹出层'],
-        avoidWhenEn: ['Wrapping MTable or MLayoutContent', 'Select/Dropdown/Menu popups'],
+        avoidWhen: [
+          'Popover / Splitter 等用户内容插槽（应由业务决定是否滚动）',
+          'Textarea 等原生控件自身的滚动',
+          'MTable / MLayoutContent / Select 弹出层等已内置滚动的区域',
+        ],
+        avoidWhenEn: [
+          'User content slots such as Popover or Splitter panes (apps decide scrolling)',
+          'Native control scrolling such as Textarea',
+          'Areas that already scroll internally (MTable, MLayoutContent, Select popups)',
+        ],
       },
       {
         component: 'Built-in (no extra wrapper)',
         when: [
-          'MTable、MDialog、MDrawer、MSplitter、MVirtualScroller 等已内置 MScrollbar',
+          'MLayout、MDialog、MDrawer、MTable、MVirtualScroller、菜单/下拉面板等已内置 MScrollbar',
           '浮层菜单与子菜单（Dropdown/ContextMenu/TieredMenu/Menu flyout）',
         ],
         whenEn: [
-          'MTable, MDialog, MDrawer, MSplitter, MVirtualScroller already scroll internally',
+          'MLayout, MDialog, MDrawer, MTable, MVirtualScroller, and menu/select panels already scroll internally',
           'Overlay menus and nested flyouts (Dropdown/ContextMenu/TieredMenu/Menu flyout)',
         ],
-        avoidWhen: ['业务代码手写 overflow:auto 容器'],
-        avoidWhenEn: ['Hand-written overflow:auto containers in product code'],
+        avoidWhen: ['在已内置滚动的组件外再包一层滚动容器'],
+        avoidWhenEn: ['Wrapping another scroll container around built-in scroll chrome'],
       },
     ],
   },

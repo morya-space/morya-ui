@@ -47,7 +47,7 @@ alwaysApply: false
 | 骨架 | `MLayout fillViewport` + `MPageContent` | 手写 `min-height:100vh` |
 | 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-filters` 等 CSS |
 | 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包一层 bordered 表格 |
-| 滚动 | 主滚动交给 Layout；局部限高用 `MScrollbar` | 页面壳 / 面板写 `overflow:auto` |
+| 滚动 | 组件内置滚动壳用 `MScrollbar`；业务插槽自行决定 | 在 Popover / Splitter / Textarea 等用户区强行内置 |
 | 颜色 | `--m-*` Token | 页面级 hex / 裸 rgb() |
 | 反馈 | 单行结果用 `message`；危险操作用 `MConfirmDialog` | 仅一行文案却用 toast |
 | 无障碍 | 图标按钮 `aria-label`、表单可见 label | — |

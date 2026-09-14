@@ -11,12 +11,6 @@
     z-index: var(--m-z-popper);
 }
 
-.m-confirmpopup__message-scroll {
-    --m-confirmpopup-message-max-height: min(12rem, 35vh);
-    margin-bottom: var(--m-space-3);
-    max-height: var(--m-confirmpopup-message-max-height);
-}
-
 .m-confirmpopup--teleported {
     z-index: var(--m-z-dropdown);
 }
@@ -27,7 +21,7 @@
     display: flex;
     gap: var(--m-space-2);
     line-height: 1.5;
-    margin-bottom: 0;
+    margin-bottom: var(--m-space-3);
 }
 
 .m-confirmpopup__footer {
