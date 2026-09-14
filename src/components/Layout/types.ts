@@ -25,6 +25,8 @@ export interface LayoutProps {
   contentClass?: string;
   /** Extra style on the scroll / content wrapper. */
   contentStyle?: string | CSSProperties;
+  /** Stretch the layout to at least the viewport height. */
+  fillViewport?: boolean;
 }
 
 export interface LayoutHeaderProps {

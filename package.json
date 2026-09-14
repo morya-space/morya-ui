@@ -71,6 +71,7 @@
     "**/message/index.js",
     "**/meter-group/index.js",
     "**/order-list/index.js",
+    "**/page/index.js",
     "**/pagination/index.js",
     "**/panel/index.js",
     "**/pick-list/index.js",
@@ -430,6 +431,12 @@
     },
     "./order-list/style": "./dist/order-list/style.js",
     "./order-list/style.css": "./dist/order-list/style.css",
+    "./page": {
+      "types": "./dist/components/Page/index.d.ts",
+      "import": "./dist/page/index.js"
+    },
+    "./page/style": "./dist/page/style.js",
+    "./page/style.css": "./dist/page/style.css",
     "./pagination": {
       "types": "./dist/components/Pagination/index.d.ts",
       "import": "./dist/pagination/index.js"
