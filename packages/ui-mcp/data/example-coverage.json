@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-14T01:38:04.233Z",
-  "catalogGeneratedAt": "2026-09-14T01:38:01.275Z",
+  "generatedAt": "2026-09-14T03:19:40.333Z",
+  "catalogGeneratedAt": "2026-09-14T03:19:36.680Z",
   "components": [
     {
       "id": "Accordion",
@@ -1763,6 +1763,31 @@
       }
     },
     {
+      "id": "Page",
+      "exportName": "MPageContent",
+      "examples": 6,
+      "props": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
       "id": "Pagination",
       "exportName": "MPagination",
       "examples": 6,
@@ -3075,8 +3100,8 @@
     }
   ],
   "summary": {
-    "components": 88,
+    "components": 89,
     "componentsWithMissingCoverage": 84,
-    "totalExamples": 751
+    "totalExamples": 757
   }
 }
