@@ -1,5 +1,27 @@
 # morya-ui
 
+## 0.2.4
+
+### Features
+
+- add new route for components demos page
+- theme Tabs, Gallery, Timeline, and Textarea scrolling
+- use MScrollbar in data and panel scroll surfaces
+- theme popup and flyout scroll with MScrollbar
+- use MScrollbar in dialogs, drawers, and popovers
+- route layout scroll through MScrollbar
+- add ScrollBody and FlyoutSubmenu for themed scrolling
+
+### Fixes
+
+- leave Dialog and Drawer scroll to app code
+- stop forcing MScrollbar on user-customizable regions
+
+### Changes
+
+- regenerate design tokens for scrollbar-related CSS vars
+- import additional styles for Card and Icon components
+
 ## 0.2.3
 
 ### Features
