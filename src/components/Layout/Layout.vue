@@ -4,7 +4,7 @@ import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutExpose, LayoutProps } from "./types";
 import { computed, provide, ref, useAttrs } from "vue";
 import { toCssLength } from "../../shared/responsive";
-import { useLayoutScroll } from "./composables/useLayoutScroll";
+import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 import { M_LAYOUT_KEY } from "./context";
 
 defineOptions({ name: "MLayout", inheritAttrs: false });
@@ -32,8 +32,7 @@ provide(M_LAYOUT_KEY, {
     },
 });
 
-const scrollEl = ref<HTMLElement | null>(null);
-const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
+const scrollRegionRef = ref<InstanceType<typeof LayoutScrollRegion>>();
 
 const rootStyle = computed(() => ({
     ...(props.height != null ? { height: toCssLength(props.height) } : {}),
@@ -52,16 +51,18 @@ const rootClass = computed(() => [
     },
 ]);
 
-const scrollStyle = computed((): StyleValue => {
-    if (!props.hasSider) return props.contentStyle;
-    const hasSiderStyle: CSSProperties = {
-        display: "flex",
-        flexWrap: "nowrap",
-        width: "100%",
-        flexDirection: props.siderPlacement === "right" ? "row-reverse" : "row",
-    };
-    return [props.contentStyle, hasSiderStyle];
-});
+const hasSiderStyle = computed((): CSSProperties => ({
+    display: "flex",
+    flexWrap: "nowrap",
+    width: "100%",
+    flexDirection: props.siderPlacement === "right" ? "row-reverse" : "row",
+}));
+
+const scrollStyle = computed((): StyleValue => props.contentStyle);
+
+const viewStyle = computed((): StyleValue =>
+    props.hasSider ? hasSiderStyle.value : undefined,
+);
 
 const scrollClass = computed(() => [
     "m-layout__scroll",
@@ -69,18 +70,30 @@ const scrollClass = computed(() => [
     { "m-layout__scroll--has-sider": props.hasSider },
 ]);
 
-defineExpose<LayoutExpose>({ scrollTo });
+const viewClass = computed(() => ({
+    "m-layout__scroll-view--has-sider": props.hasSider,
+}));
+
+defineExpose<LayoutExpose>({
+    scrollTo: ((...args: Parameters<LayoutExpose["scrollTo"]>) =>
+        scrollRegionRef.value?.scrollTo(...args)) as LayoutExpose["scrollTo"],
+});
 </script>
 
 <template>
   <div v-bind="rootAttrs" :class="rootClass" :style="rootStyle">
-    <div
-      ref="scrollEl"
-      :class="scrollClass"
-      :style="scrollStyle"
-      @scroll="onScroll"
+    <LayoutScrollRegion
+      ref="scrollRegionRef"
+      :has-sider="hasSider"
+      :sider-placement="siderPlacement"
+      scrollbar-root-class="m-layout__scrollbar"
+      :scroll-class="scrollClass"
+      :scroll-style="scrollStyle"
+      :view-class="viewClass"
+      :view-style="viewStyle"
+      @scroll="emit('scroll', $event)"
     >
       <slot />
-    </div>
+    </LayoutScrollRegion>
   </div>
 </template>

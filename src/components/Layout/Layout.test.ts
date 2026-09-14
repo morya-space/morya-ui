@@ -195,7 +195,7 @@ describe('muLayout', () => {
     );
   });
 
-  it("always uses the native scroll container", () => {
+  it("uses MScrollbar in layout scroll regions by default", () => {
     const wrapper = mount(MLayout, {
       slots: {
         default: () => [
@@ -205,7 +205,8 @@ describe('muLayout', () => {
       },
     });
     expect(wrapper.find(".m-layout__scroll").exists()).toBe(true);
-    expect(wrapper.find(".m-layout__scrollbar").exists()).toBe(false);
-    expect(wrapper.find(".m-scrollbar").exists()).toBe(false);
+    expect(wrapper.find(".m-layout__scrollbar").exists()).toBe(true);
+    expect(wrapper.find(".m-scrollbar").exists()).toBe(true);
   });
+
 });

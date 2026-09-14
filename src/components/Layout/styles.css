@@ -36,35 +36,50 @@
     position: absolute;
 }
 
-.m-layout__scroll {
+.m-layout__scroll,
+.m-layout__scroll-view {
     box-sizing: border-box;
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    height: 100%;
     min-height: 0;
     min-width: 0;
-    overflow: auto;
-    overflow-x: hidden;
     position: relative;
     width: 100%;
 }
 
-.m-layout__scroll--has-sider {
+.m-layout__scroll-view {
+    min-height: 100%;
+}
+
+.m-layout__scrollbar {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+}
+
+.m-layout__scroll--has-sider,
+.m-layout__scroll-view--has-sider {
     /* direction set inline (matches naive hasSiderStyle) */
     align-items: stretch;
     flex-wrap: nowrap;
 }
 
 .m-layout__scroll--has-sider > .m-layout-sider,
-.m-layout__scroll--has-sider > .m-layout {
+.m-layout__scroll--has-sider > .m-layout,
+.m-layout__scroll-view--has-sider > .m-layout-sider,
+.m-layout__scroll-view--has-sider > .m-layout {
     align-self: stretch;
     min-height: 100%;
 }
 
 /* Nested layout / content grow to fill remaining space */
 .m-layout__scroll > .m-layout,
-.m-layout__scroll > .m-layout-content {
+.m-layout__scroll > .m-layout-content,
+.m-layout__scroll-view > .m-layout,
+.m-layout__scroll-view > .m-layout-content {
     flex: 1 1 auto;
     min-height: 0;
     min-width: 0;
@@ -80,7 +95,8 @@
     min-width: 0;
 }
 
-.m-layout-content > .m-layout__scroll {
+.m-layout-content > .m-layout__scroll,
+.m-layout-content > .m-layout__scrollbar {
     flex: 1 1 auto;
     min-height: 0;
 }
@@ -192,7 +208,8 @@
     justify-content: flex-start;
 }
 
-.m-layout-sider__scroll {
+.m-layout-sider__scroll,
+.m-layout-sider__scrollbar {
     box-sizing: border-box;
     flex: 1 1 auto;
     height: 100%;
@@ -206,17 +223,18 @@
     width: 100%;
 }
 
-.m-layout-sider--collapse-transform > .m-layout-sider__scroll {
+.m-layout-sider--collapse-transform > .m-layout-sider__scroll,
+.m-layout-sider--collapse-transform > .m-layout-sider__scrollbar {
     flex-shrink: 0;
     min-width: var(--m-layout-sider-width);
 }
 
-.m-layout-sider--show-content > .m-layout-sider__scroll {
+.m-layout-sider--show-content > .m-layout-sider__scrollbar {
     opacity: 1;
-    overflow: auto;
 }
 
-.m-layout-sider--collapse-width > .m-layout-sider__scroll {
+.m-layout-sider--collapse-width > .m-layout-sider__scroll,
+.m-layout-sider--collapse-width > .m-layout-sider__scrollbar {
     flex-shrink: 1;
     min-width: 0;
 }

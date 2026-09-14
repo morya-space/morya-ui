@@ -6,8 +6,8 @@ import { computed, inject, ref, useAttrs } from "vue";
 import { useMLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
 import MIcon from "../Icon/Icon.vue";
-import { useLayoutScroll } from "./composables/useLayoutScroll";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
+import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 import { M_LAYOUT_KEY } from "./context";
 import { resolveLayoutTrigger } from "./utils";
 
@@ -36,8 +36,7 @@ const emit = defineEmits<{
 
 const locale = useMLocale();
 const layout = inject(M_LAYOUT_KEY, null);
-const scrollEl = ref<HTMLElement | null>(null);
-const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
+const scrollRegionRef = ref<InstanceType<typeof LayoutScrollRegion>>();
 const { mergedCollapsed, toggle } = useLayoutSiderCollapse(props, emit);
 
 const siderPlacement = computed(() => layout?.siderPlacement ?? "left");
@@ -147,7 +146,10 @@ function onTransitionEnd(event: TransitionEvent) {
     else emit("after-enter");
 }
 
-defineExpose<LayoutExpose>({ scrollTo });
+defineExpose<LayoutExpose>({
+    scrollTo: ((...args: Parameters<LayoutExpose["scrollTo"]>) =>
+        scrollRegionRef.value?.scrollTo(...args)) as LayoutExpose["scrollTo"],
+});
 </script>
 
 <template>
@@ -156,14 +158,15 @@ defineExpose<LayoutExpose>({ scrollTo });
     :style="rootStyle"
     @transitionend="onTransitionEnd"
   >
-    <div
-      ref="scrollEl"
-      :class="scrollClass"
-      :style="scrollStyle"
-      @scroll="onScroll"
+    <LayoutScrollRegion
+      ref="scrollRegionRef"
+      scrollbar-root-class="m-layout-sider__scrollbar"
+      :scroll-class="scrollClass"
+      :scroll-style="scrollStyle"
+      @scroll="emit('scroll', $event)"
     >
       <slot />
-    </div>
+    </LayoutScrollRegion>
 
     <button
       v-if="triggerKind"
