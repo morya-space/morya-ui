@@ -4,7 +4,7 @@ import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutContentProps, LayoutExpose } from "./types";
 import { computed, ref, useAttrs } from "vue";
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
-import { useLayoutScroll } from "./composables/useLayoutScroll";
+import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 
 defineOptions({ name: "MLayoutContent", inheritAttrs: false });
 
@@ -19,8 +19,7 @@ const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
 
-const scrollEl = ref<HTMLElement | null>(null);
-const { scrollTo, onScroll } = useLayoutScroll(scrollEl, emit);
+const scrollRegionRef = ref<InstanceType<typeof LayoutScrollRegion>>();
 
 const rootStyle = useLayoutRegionStyle(() => ({
     height: props.height,
@@ -40,18 +39,22 @@ const rootClass = computed(() => [
 const scrollClass = computed(() => ["m-layout__scroll", props.contentClass]);
 const scrollStyle = computed((): StyleValue => props.contentStyle);
 
-defineExpose<LayoutExpose>({ scrollTo });
+defineExpose<LayoutExpose>({
+    scrollTo: ((...args: Parameters<LayoutExpose["scrollTo"]>) =>
+        scrollRegionRef.value?.scrollTo(...args)) as LayoutExpose["scrollTo"],
+});
 </script>
 
 <template>
   <main v-bind="rootAttrs" :class="rootClass" :style="rootStyle">
-    <div
-      ref="scrollEl"
-      :class="scrollClass"
-      :style="scrollStyle"
-      @scroll="onScroll"
+    <LayoutScrollRegion
+      ref="scrollRegionRef"
+      scrollbar-root-class="m-layout__scrollbar"
+      :scroll-class="scrollClass"
+      :scroll-style="scrollStyle"
+      @scroll="emit('scroll', $event)"
     >
       <slot />
-    </div>
+    </LayoutScrollRegion>
   </main>
 </template>

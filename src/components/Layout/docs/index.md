@@ -208,7 +208,7 @@ import { MLayout, MLayoutContent, MLayoutHeader } from 'morya-ui'
 
 ## Scrollable Content
 
-内容超出时仅 Content 区域滚动，Header / Sider 保持固定。
+内容超出时仅 Content 区域滚动，Header / Sider 保持固定。`MLayout` / `MLayoutContent` / `MLayoutSider` 通过内置 `MScrollbar` 提供统一滚动条。
 
 ```vue preview
 <script setup lang="ts">
@@ -301,6 +301,7 @@ import {
 | `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |
 | `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |
 | `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |
+| `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |
 
 ## Events
 

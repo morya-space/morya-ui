@@ -208,7 +208,7 @@ import { MLayout, MLayoutContent, MLayoutHeader } from 'morya-ui'
 
 ## Scrollable Content
 
-Only the content pane scrolls; header and sider stay fixed.
+Only the content pane scrolls; header and sider stay fixed. `MLayout`, `MLayoutContent`, and `MLayoutSider` use built-in `MScrollbar`.
 
 ```vue preview
 <script setup lang="ts">
@@ -298,6 +298,7 @@ import {
 | `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |
 | `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |
 | `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |
+| `contentClass` / `contentStyle` | — | — | Scroll container class / style. |
 
 ## Events
 
