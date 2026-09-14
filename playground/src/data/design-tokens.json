@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T07:18:27.569Z",
+  "generatedAt": "2026-09-14T06:26:04.838Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 289,
+  "tokenCount": 305,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1030,6 +1030,16 @@
       }
     },
     {
+      "name": "--m-confirmpopup-message-max-height",
+      "category": "component",
+      "source": "src/components/ConfirmPopup/styles.css",
+      "default": "min(12rem, 35vh)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Confirmpopup Message Max Height",
+        "en-US": "Component-specific token: Confirmpopup Message Max Height"
+      }
+    },
+    {
       "name": "--m-confirmpopup-width",
       "category": "component",
       "source": "src/components/ConfirmPopup/styles.css",
@@ -1050,6 +1060,16 @@
       }
     },
     {
+      "name": "--m-contextmenu-max-height",
+      "category": "menu",
+      "source": "src/components/ContextMenu/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Contextmenu Max Height",
+        "en-US": "Menu token: Contextmenu Max Height"
+      }
+    },
+    {
       "name": "--m-contextmenu-min-width",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
@@ -1057,6 +1077,16 @@
       "description": {
         "zh-CN": "菜单相关变量：Contextmenu Min Width",
         "en-US": "Menu token: Contextmenu Min Width"
+      }
+    },
+    {
+      "name": "--m-contextmenu-submenu-max-height",
+      "category": "menu",
+      "source": "src/components/ContextMenu/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Contextmenu Submenu Max Height",
+        "en-US": "Menu token: Contextmenu Submenu Max Height"
       }
     },
     {
@@ -1387,6 +1417,16 @@
       }
     },
     {
+      "name": "--m-dropdown-menu-max-height",
+      "category": "menu",
+      "source": "src/components/Dropdown/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Dropdown Menu Max Height",
+        "en-US": "Menu token: Dropdown Menu Max Height"
+      }
+    },
+    {
       "name": "--m-dropdown-menu-min-width",
       "category": "menu",
       "source": "src/components/Dropdown/styles.css",
@@ -1394,6 +1434,16 @@
       "description": {
         "zh-CN": "菜单相关变量：Dropdown Menu Min Width",
         "en-US": "Menu token: Dropdown Menu Min Width"
+      }
+    },
+    {
+      "name": "--m-dropdown-submenu-max-height",
+      "category": "menu",
+      "source": "src/styles/base.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Dropdown Submenu Max Height",
+        "en-US": "Menu token: Dropdown Submenu Max Height"
       }
     },
     {
@@ -2008,6 +2058,16 @@
       }
     },
     {
+      "name": "--m-menu-popup-max-height",
+      "category": "menu",
+      "source": "src/components/Menu/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Menu Popup Max Height",
+        "en-US": "Menu token: Menu Popup Max Height"
+      }
+    },
+    {
       "name": "--m-menu-root-indent",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
@@ -2015,6 +2075,26 @@
       "description": {
         "zh-CN": "菜单相关变量：Menu Root Indent",
         "en-US": "Menu token: Menu Root Indent"
+      }
+    },
+    {
+      "name": "--m-menu-submenu-gap",
+      "category": "menu",
+      "source": "src/components/Menu/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "菜单相关变量：Menu Submenu Gap",
+        "en-US": "Menu token: Menu Submenu Gap"
+      }
+    },
+    {
+      "name": "--m-menu-submenu-inset",
+      "category": "menu",
+      "source": "src/components/Menu/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "菜单相关变量：Menu Submenu Inset",
+        "en-US": "Menu token: Menu Submenu Inset"
       }
     },
     {
@@ -2035,6 +2115,16 @@
       "description": {
         "zh-CN": "菜单相关变量：Menubar Menu Min Width",
         "en-US": "Menu token: Menubar Menu Min Width"
+      }
+    },
+    {
+      "name": "--m-menubar-submenu-max-height",
+      "category": "menu",
+      "source": "src/components/Menubar/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Menubar Submenu Max Height",
+        "en-US": "Menu token: Menubar Submenu Max Height"
       }
     },
     {
@@ -2258,6 +2348,26 @@
       }
     },
     {
+      "name": "--m-page-content-gap",
+      "category": "component",
+      "source": "src/components/Page/styles.css",
+      "default": "var(--m-space-6)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Page Content Gap",
+        "en-US": "Component-specific token: Page Content Gap"
+      }
+    },
+    {
+      "name": "--m-page-content-padding",
+      "category": "component",
+      "source": "src/components/Page/styles.css",
+      "default": "var(--m-space-4)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Page Content Padding",
+        "en-US": "Component-specific token: Page Content Padding"
+      }
+    },
+    {
       "name": "--m-pagination-jumper-width",
       "category": "component",
       "source": "src/components/Pagination/styles.css",
@@ -2285,6 +2395,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Password Toggle Size",
         "en-US": "Component-specific token: Password Toggle Size"
+      }
+    },
+    {
+      "name": "--m-popover-max-height",
+      "category": "component",
+      "source": "src/components/Popover/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Popover Max Height",
+        "en-US": "Component-specific token: Popover Max Height"
       }
     },
     {
@@ -3172,6 +3292,16 @@
       }
     },
     {
+      "name": "--m-tieredmenu-max-height",
+      "category": "menu",
+      "source": "src/components/TieredMenu/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Tieredmenu Max Height",
+        "en-US": "Menu token: Tieredmenu Max Height"
+      }
+    },
+    {
       "name": "--m-tieredmenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
@@ -3179,6 +3309,16 @@
       "description": {
         "zh-CN": "菜单相关变量：Tieredmenu Min Width",
         "en-US": "Menu token: Tieredmenu Min Width"
+      }
+    },
+    {
+      "name": "--m-tieredmenu-submenu-max-height",
+      "category": "menu",
+      "source": "src/components/TieredMenu/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "菜单相关变量：Tieredmenu Submenu Max Height",
+        "en-US": "Menu token: Tieredmenu Submenu Max Height"
       }
     },
     {
@@ -3232,6 +3372,16 @@
       }
     },
     {
+      "name": "--m-treeselect-list-max-height",
+      "category": "component",
+      "source": "src/components/TreeSelect/styles.css",
+      "default": "calc(var(--m-treeselect-panel-max-height) - 2.75rem)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Treeselect List Max Height",
+        "en-US": "Component-specific token: Treeselect List Max Height"
+      }
+    },
+    {
       "name": "--m-treeselect-min-width",
       "category": "component",
       "source": "src/components/TreeSelect/styles.css",
@@ -3239,6 +3389,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Treeselect Min Width",
         "en-US": "Component-specific token: Treeselect Min Width"
+      }
+    },
+    {
+      "name": "--m-treeselect-panel-max-height",
+      "category": "component",
+      "source": "src/components/TreeSelect/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Treeselect Panel Max Height",
+        "en-US": "Component-specific token: Treeselect Panel Max Height"
       }
     },
     {
