@@ -90,7 +90,7 @@ Component lookup accepts common aliases such as `DataTable`, `数据表格`, `Pa
 **Plan a page:**
 
 1. `recommend_page` with business intent, page type, and features
-2. `get_golden_page` for the matched golden sample (`list-page`, `form-page`, `dashboard-page`)
+2. `get_golden_page` for the matched golden sample (`list-page`, `form-page`, `dashboard-page`, `login-page`, `landing-page`, `empty-state`)
 3. `get_pattern` for the returned `matchedPattern`
 4. `get_design_rules` for MPage* composition recipes
 5. `get_component` / `get_example` for core components (including `Page`)

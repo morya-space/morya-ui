@@ -199,7 +199,7 @@ register(
 
 register(
   'get_golden_page',
-  'Read a golden page Vue source sample (list-page, form-page, dashboard-page).',
+  'Read a golden page Vue source sample (list-page, form-page, dashboard-page, login-page, landing-page, empty-state).',
   {
     page: z.string().min(1),
     mode: z.string().optional(),
