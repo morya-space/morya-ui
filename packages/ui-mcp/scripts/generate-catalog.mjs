@@ -136,17 +136,24 @@ function mapApiRows(rows, kind) {
   })
 }
 
-function extractCodeBlocks(body) {
+function extractCodeBlocks(body, mdPath = '') {
   const blocks = []
   const re = /```([^\n`]*)\n([\s\S]*?)```/g
   for (const match of body.matchAll(re)) {
     const info = (match[1] || '').trim()
     const lang = info.split(/\s+/)[0] || 'text'
     const preview = /\bpreview\b/i.test(info)
+    const srcMatch = info.match(/\bsrc=(?:"([^"]+)"|'([^']+)'|(\S+))/)
+    let code = match[2].replace(/\s+$/, '')
+    if (srcMatch && mdPath) {
+      const src = srcMatch[1] || srcMatch[2] || srcMatch[3]
+      const abs = join(dirname(mdPath), src)
+      if (existsSync(abs)) code = readText(abs).replace(/\s+$/, '')
+    }
     blocks.push({
       lang,
       preview,
-      code: match[2].replace(/\s+$/, ''),
+      code,
     })
   }
   return blocks
@@ -176,7 +183,7 @@ function extractImportHint(body, exportName) {
   return `import { ${exportName} } from 'morya-ui'`
 }
 
-function buildDocLocale(raw, exportName) {
+function buildDocLocale(raw, exportName, mdPath = '') {
   if (!raw) return null
   const { data, body } = parseFrontmatter(raw)
   const sections = splitSections(body)
@@ -184,7 +191,7 @@ function buildDocLocale(raw, exportName) {
 
   for (const section of sections) {
     if (!section.title) continue
-    const blocks = extractCodeBlocks(section.body)
+    const blocks = extractCodeBlocks(section.body, mdPath)
     for (const [index, block] of blocks.entries()) {
       if (!['vue', 'ts', 'typescript', 'js', 'javascript', 'bash', 'shell'].includes(block.lang)) continue
       examples.push({
@@ -244,8 +251,8 @@ function collectComponents() {
     if (!existsSync(zhPath) && !existsSync(enPath)) continue
 
     const exportName = extractExportName(dir, folder)
-    const zh = buildDocLocale(readText(zhPath), exportName)
-    const en = buildDocLocale(readText(enPath), exportName)
+    const zh = buildDocLocale(readText(zhPath), exportName, zhPath)
+    const en = buildDocLocale(readText(enPath), exportName, enPath)
     const primary = zh || en
 
     components.push({
