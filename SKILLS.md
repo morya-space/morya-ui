@@ -38,7 +38,7 @@
 | 新增 / 重构可复用组件或组件库工程 | `vue3-component-library` |
 | 单个组件 Props / Emits / Slots | `vue3-component-design` |
 | 组件 / composable 单元测试 | `vue3-unit-testing` |
-| 优化已有页面或文档站 UI | `frontend-design`、`improve-ui` |
+| 优化已有页面或文档站 UI | `frontend-design`、`improve-ui`、可选 `impeccable` / `ui-ux-pro-max` |
 | 主题、token、亮暗模式 | `theme-system` |
 | 无障碍检查 | `fixing-accessibility` |
 | 动画卡顿或滚动性能问题 | `fixing-motion-performance` |
@@ -89,10 +89,12 @@ skill 通常会规定适用场景、调查顺序、约束、验证命令和交�
 | `fixing-accessibility` | 检查和修复无障碍问题（ARIA、键盘、焦点、对比度等）。 |
 | `fixing-motion-performance` | 排查动画卡顿、布局抖动、滚动关联动画等性能问题。 |
 | `frontend-design` | 创建或重塑有明确视觉方向的前端界面。 |
+| `impeccable` | 生产级界面设计 / 审计 / polish（quieter、typeset、audit 等命名通道）。 |
 | `improve-ui` | 对现有界面做只读 UI 审计并输出可执行实现计划。 |
 | `skill-creator` | 创建、修改、评估 skill。 |
 | `theme-system` | 设计令牌与主题系统（亮暗、多主题、命名规范）。 |
 | `ui-skills-root` | UI 相关任务入口，通过 ui-skills CLI 选择最小必要上下文。 |
+| `ui-ux-pro-max` | UI/UX 设计情报：风格、配色、字体配对、行业/产品建议（审美参考，不覆盖本库令牌与组件契约）。 |
 | `vite-docs` | Vite 官方文档优先：配置、插件、构建与优化。 |
 | `vue3-component-design` | Vue3 组件 API、v-model、Slots、样式隔离与无障碍。 |
 | `vue3-component-library` | Vue3 组件库工程规范：token、主题、API、测试、文档与兼容性。 |
