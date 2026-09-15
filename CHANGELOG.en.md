@@ -1,5 +1,156 @@
 # morya-ui
 
+## 0.2.5
+
+### Breaking Changes
+
+- rebrand WiseKit to morya-ui with M-prefixed public API
+- drop deprecated prop and CSS aliases
+
+### Features
+
+- export Empty, Result, and Status from the library
+- add empty state component
+- add result page component with locale strings
+- add status indicator component
+- extract guide page previews into demo SFCs
+- extract component previews into shared demo SFCs
+- support UnoCSS demos and markdown preview src=
+- add new route for components demos page
+- theme Tabs, Gallery, Timeline, and Textarea scrolling
+- use MScrollbar in data and panel scroll surfaces
+- theme popup and flyout scroll with MScrollbar
+- use MScrollbar in dialogs, drawers, and popovers
+- route layout scroll through MScrollbar
+- add ScrollBody and FlyoutSubmenu for themed scrolling
+- add page composition tooling for AI agents
+- add MPage composition components for admin layouts
+- add tooltip support for collapsed menu items
+- link API table types to doc anchors
+- add hybrid fallthrough attrs helpers
+- enhance design token management and documentation
+- add reduced motion policy support across components
+- integrate WkScrollbar into AutoComplete, CascadeSelect, CommandMenu, and Listbox components
+- enhance WkSelect component with scrollbar and max-height functionality
+- rebrand to @wex-design/ui and reset release baseline to 0.0.1
+- add SSR support for Nuxt, Astro, and Vite
+- enhance admin management project with new components and feedback system
+- enhance ConfirmDialog and Accordion components
+- add design-system guardrails and shared primitives
+- add admin management project with initial setup and configuration
+- enhance Table component with scrollbar and styling improvements
+- implement dynamic icon sizing across components
+- enhance resource management and documentation in MCP
+- add mobile sidebar drawer for docs and components
+- add global site search with CommandMenu
+- persist language in URL query
+- add dedicated 404 page
+- add favicon and meta description
+- Harden MCP catalog tooling
+- enhance package exports and sideEffects for improved component management
+- add extra slot and enhance components in Accordion and AutoComplete
+- enhance component defaults and improve configuration management
+- add component registry import to index for improved component management
+- enhance documentation and component registration for WellInsight
+- enhance release process to include MCP build and version sync
+- Add MCP server documentation and package reference
+- bootstrap standalone @well-insight/ui component library
+
+### Fixes
+
+- disable respect reduced motion for improved layout consistency
+- tighten layout typing and demo typecheck
+- improve dark semantic contrast and layout rem tokens
+- import Scrollbar styles in on-demand component entries
+- restore sider content opacity after MScrollbar
+- leave Dialog and Drawer scroll to app code
+- stop forcing MScrollbar on user-customizable regions
+- register Page styles in global stylesheet
+- support uncontrolled open and slot trigger
+- rename Nuxt module to morya-ui-nuxt for npm publish
+- restore wd compat import paths after bulk rename
+- fix api with component
+- unify suffix icons and Select clearable hover behavior
+- restore DatePicker panel grid after teleport
+- add invalid modifier class alongside error alias
+- improve FloatLabel, Popover, and Slider
+- scroll doc TOC inside WiScrollbar
+- repair guide links and quick-start copy
+- Fix layout header and footer padding axis
+- Expose component-specific CSS variables and adjust layout defaults
+- Add Configurable Layout Sizing And CSS Tokens
+- Improve playground navigation styling
+- Standardize Project Linting And Module Exports
+- rename Wd to Wi in component library and documentation
+
+### Docs
+
+- note style polish and enable docs reduced-motion
+- add AI setup and Agent Skill guides
+- recommend npx @morya-ui/setup for one-shot onboarding
+- move contributor guide out of the public docs site
+- add type sections at end of component docs
+- document shared types and type link conventions
+- document pt props and trim attrs boilerplate
+- add attrs and types guides with updated nav
+- describe Vue 3 support with 3.5+ recommendation
+- polish docs site home, changelog, and branding
+- rebrand as open-source library with logo and README
+- complete Events/Slots sections and remove migration guide
+- add Events and a11y sections to high-traffic components
+- rename Basic sections to 基础用法 in Chinese component docs
+- add accessibility guide for playground
+- expand menu and virtual scroller component pages
+- add deprecated API migration guide
+- Add UI MCP server and docs site links
+- Update install docs to omit explicit Vue dependency
+
+### Changes
+
+- polish component styles and shared base motion
+- refresh docs site visual polish
+- remove redundant package declaration and update peer dependency rules
+- regenerate design tokens for scrollbar-related CSS vars
+- import additional styles for Card and Icon components
+- improve submenu arrow icon and expand behavior
+- update dataset keys from 'mu' to 'm' for consistency
+- add component doc type section tooling
+- add attrs audit and doc maintenance tooling
+- apply hybrid attrs routing across library
+- update documentation links to reflect new GitHub Pages URL
+- rename satellite packages to @morya-ui scope
+- migrate to Wk tokens and remove legacy compat layers
+- rebrand to @wise-kit/ui and reset release baseline to 0.1.1
+- update @roost-design/ui version in pnpm-lock.yaml and enhance SiteHeader component
+- rebrand library to @roost-design/ui and reset version to 0.1.1
+- update catalog generation timestamp and adjust component exports
+- rebrand library from @wex-design/ui to @roost-design/ui
+- reset release baseline to 0.1.1 with fresh changelog
+- update Vue peer dependency and documentation references
+- deploy docs site to GitHub Pages
+- remove admin-manage-project from monorepo
+- update check-docs-drift script and package.json
+- update CHANGELOG for version 0.1.14
+- update Table component to use columns and rows structure
+- update Table component structure and improve functionality
+- import Icon styles across multiple components
+- enhance MobileSidebarShell and DocsView layout with improved flex properties
+- unify clearable API across pickers (phase 6b)
+- phase 6a icon unification and shared picker suffix
+- split vendor chunks and replace eager markdown manifest
+- add unit tests for 16 sub-components
+- migrate remaining overlays to shared placement util
+- add shared menu icon and key utilities
+- replace hardcoded colors with design tokens
+- migrate Select and Dropdown to shared overlay placement
+- extract shared overlay placement utility
+- lazy-load routes and markdown docs
+- streamline MCP tools from 18 to 13
+- Simplify layout components by removing custom scrollbar support and enhancing layout styles
+- clean up whitespace in base.css for consistency
+- Simplify package.json exports by removing development paths for styles and index files
+- restructure release process and update documentation
+
 ## Unreleased
 
 ### Fixes

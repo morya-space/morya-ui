@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-14T07:44:52.185Z",
-  "catalogGeneratedAt": "2026-09-14T07:44:48.362Z",
+  "generatedAt": "2026-09-15T13:16:12.638Z",
+  "catalogGeneratedAt": "2026-09-15T13:16:07.335Z",
   "components": [
     {
       "id": "Accordion",
@@ -833,6 +833,39 @@
         "covered": 1,
         "missing": [
           "item"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Empty",
+      "exportName": "MEmpty",
+      "examples": 8,
+      "props": {
+        "total": 5,
+        "covered": 3,
+        "missing": [
+          "image",
+          "pt"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 6,
+        "covered": 2,
+        "missing": [
+          "icon",
+          "image",
+          "title",
+          "description"
         ]
       },
       "methods": {
@@ -2050,6 +2083,39 @@
       }
     },
     {
+      "id": "Result",
+      "exportName": "MResult",
+      "examples": 8,
+      "props": {
+        "total": 5,
+        "covered": 2,
+        "missing": [
+          "title",
+          "icon",
+          "pt"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 5,
+        "covered": 2,
+        "missing": [
+          "icon",
+          "title",
+          "description"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
       "id": "Scrollbar",
       "exportName": "MScrollbar",
       "examples": 16,
@@ -2425,6 +2491,33 @@
         "missing": [
           "resize-trigger"
         ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
+      "id": "Status",
+      "exportName": "MStatus",
+      "examples": 8,
+      "props": {
+        "total": 5,
+        "covered": 4,
+        "missing": [
+          "color"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 1,
+        "covered": 1,
+        "missing": []
       },
       "methods": {
         "total": 0,
@@ -3098,8 +3191,8 @@
     }
   ],
   "summary": {
-    "components": 89,
-    "componentsWithMissingCoverage": 84,
-    "totalExamples": 757
+    "components": 92,
+    "componentsWithMissingCoverage": 87,
+    "totalExamples": 781
   }
 }
