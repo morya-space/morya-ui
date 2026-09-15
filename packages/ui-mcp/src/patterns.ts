@@ -714,7 +714,7 @@ export const designRules = {
       avoid: ['不要用手写图标+文案替代 MResult', '不要用 MEmpty 表达阻断错误'],
     },
     inlineMessage: {
-      component: 'token-styled alert or field errorMessage',
+      api: 'field errorMessage | token-styled role=alert',
       when: [
         '登录/表单区常驻错误：优先字段 errorMessage',
         '表单级总结：使用 --m-* 样式的 role=alert 条（见 login-page 黄金样例）',

@@ -1152,7 +1152,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         default: 'message',
         message: { when: ['single-line action result', 'save/delete/create confirmations'] },
         toast: { when: ['summary + detail', 'async or background notifications'] },
-        inlineMessage: { component: 'MMessage', when: ['persistent form/auth errors'] },
+        inlineMessage: { api: 'field errorMessage | token-styled role=alert', when: ['persistent form/auth errors'] },
         doc: 'docs/feedback-message-vs-toast.md',
       },
       global: [
