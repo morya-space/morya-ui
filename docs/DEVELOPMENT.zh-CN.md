@@ -46,7 +46,7 @@ pnpm mcp:start            # 本地启动 MCP（stdio）
 | 文档 | 内容 |
 | --- | --- |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | 提交规范 |
-| [UI 开发](./ui-development.zh-CN.md) | 构建与发版 |
+| [UI 开发](./ui-development.zh-CN.md) | 构建、发版、组件与文档约定 |
 | [scripts/README.md](../scripts/README.md) | 发版脚本说明 |
 | [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP 服务 |
 | [AGENTS.md](../AGENTS.md) | Agent / Skills 使用规则 |

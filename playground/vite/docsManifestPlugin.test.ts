@@ -21,7 +21,6 @@ describe('docsManifestPlugin', () => {
       'attrs',
       'config',
       'design-tokens',
-      'guide',
       'introduction',
       'mcp',
       'quick-start',

@@ -37,7 +37,69 @@ pnpm build:docs
 pnpm preview
 ```
 
-组件文档：`src/components/*/docs/index.md` 与 `index.en.md`。更新日志页读取根目录 `CHANGELOG.md` / `CHANGELOG.en.md`。
+组件文档：`src/components/*/docs/index.md` 与 `index.en.md`。更新日志页读取根目录 `CHANGELOG.md` / `CHANGELOG.en.md`。对外指南页在 `playground/src/docs/guide/`（介绍、快速开始、主题等）；**不要**把贡献者约定写进文档站侧栏。
+
+### 组件目录
+
+每个公开组件推荐：
+
+```text
+src/components/Button/
+├── Button.vue
+├── types.ts
+├── index.ts
+├── Button.test.ts
+└── docs/
+    ├── index.md
+    ├── index.en.md
+    └── demos/           # 可交互示例 SFC；中英文 md 用 src 引用
+        └── Basic.vue
+```
+
+- **前缀**：组件导出为 `M*`，CSS 类为 `.m-*`。
+- **类型**：Props / Emits 放在 `types.ts`，并从包入口再导出。
+- **测试**：用户行为导向的 Vitest + Vue Test Utils。
+
+### 写组件文档
+
+在 `docs/index.md`（中文）和 `docs/index.en.md`（英文）顶部写 frontmatter：
+
+```md
+---
+title: Button
+category: 01 / PRIMITIVE
+description: 触发动作的按钮
+---
+```
+
+正文用 Markdown。可交互示例写成 `docs/demos/*.vue`，中英文通过：
+
+````md
+```vue preview src="./demos/Basic.vue"
+```
+````
+
+引用；布局优先 UnoCSS 工具类。两种语言的 `category` 保持一致（英文缺失则回退中文）。分类前缀决定侧栏排序，例如：
+
+| 前缀 | 分类 |
+| --- | --- |
+| `00 / GUIDE` | 指南类（如 ConfigProvider） |
+| `01 / PRIMITIVE` | 基础 |
+| `02 / FORM` | 表单 |
+| `03 / OVERLAY` | 浮层 |
+
+Attrs / `pt` 落点约定见对外页 [样式与 attrs](https://morya-space.github.io/morya-ui/docs/attrs)。写组件文档时：
+
+- Props / Events 表里的 PascalCase 类型名会链到文末 **类型** 小节或 [API 类型](https://morya-space.github.io/morya-ui/docs/types)；可用 `pnpm docs:sync-type-sections` 从 `types.ts` 补全。
+- Props 表加上 `pt`（若有）及 DOM 键名。
+- 字段组件：事件在原生控件，其它 fallthrough 在 field 根；`placeholder` / `name` 等优先写 props。
+
+### 浮层与图标约定
+
+浮层默认 Teleport 到 `body`，支持 `teleport` / `appendTo`（`'self'` 就地渲染）。动效：`m-fade`（模态）、`m-scale-fade`（锚定菜单）、`m-slide-fade`（Toast）、`m-message-slide`（Message）。全局挂载点用 ConfigProvider 的 `appendTo`。
+
+- **系统图标**：`MIcon` + `name`。
+- **业务图标**：应用侧传入，不要往组件库堆全量 SVG。
 
 ## 仅发布到 npm
 

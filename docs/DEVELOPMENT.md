@@ -46,7 +46,7 @@ pnpm mcp:start            # run MCP locally (stdio)
 | Doc | Topic |
 | --- | --- |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits + husky / commitlint |
-| [UI development](./ui-development.md) | Build, publish, changelog |
+| [UI development](./ui-development.md) | Build, publish, component & docs conventions |
 | [scripts/README.md](../scripts/README.md) | Interactive release tooling |
 | [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP server |
 | [AGENTS.md](../AGENTS.md) | Agent / Skills rules |

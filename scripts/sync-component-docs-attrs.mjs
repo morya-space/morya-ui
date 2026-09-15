@@ -3,4 +3,4 @@
  * Fallthrough attrs behavior is documented in playground/src/docs/guide/attrs.md.
  * To strip leftover boilerplate: node scripts/remove-generic-attrs-docs.mjs
  */
-console.log('docs:sync-attrs is deprecated — see playground/src/docs/guide/attrs.md and guide.md')
+console.log('docs:sync-attrs is deprecated — see playground/src/docs/guide/attrs.md and docs/ui-development.zh-CN.md')

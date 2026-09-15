@@ -37,7 +37,62 @@ pnpm build:docs
 pnpm preview
 ```
 
-Component pages: `src/components/*/docs/index.md` and `index.en.md`. Changelog pages read root `CHANGELOG.md` / `CHANGELOG.en.md`.
+Component pages: `src/components/*/docs/index.md` and `index.en.md`. Changelog pages read root `CHANGELOG.md` / `CHANGELOG.en.md`. Public guide pages live under `playground/src/docs/guide/` (introduction, quick start, theme, …). **Do not** put contributor-only conventions in the public docs sidebar.
+
+### Component folder
+
+Keep each public component in this shape:
+
+```text
+src/components/Button/
+├── Button.vue
+├── types.ts
+├── index.ts
+├── Button.test.ts
+└── docs/
+    ├── index.md
+    ├── index.en.md
+    └── demos/           # interactive SFCs; zh/en md reference via src=
+        └── Basic.vue
+```
+
+- **Prefix**: `M*` exports, `.m-*` CSS classes.
+- **Types**: Props / Emits in `types.ts`, re-exported from the package entry.
+- **Tests**: behavior-oriented Vitest + Vue Test Utils.
+
+### Writing component docs
+
+Frontmatter on `docs/index.md` / `docs/index.en.md`:
+
+```md
+---
+title: Button
+category: 01 / PRIMITIVE
+description: A button that triggers an action
+---
+```
+
+Body in Markdown. Put demos in `docs/demos/*.vue` and reference them:
+
+````md
+```vue preview src="./demos/Basic.vue"
+```
+````
+
+Prefer UnoCSS utilities for demo layout. Keep `category` identical across locales (English falls back to Chinese). Numeric prefixes control sidebar order (`00 / GUIDE`, `01 / PRIMITIVE`, …).
+
+Attrs / `pt` fallthrough rules: public [Styling & attrs](https://morya-space.github.io/morya-ui/docs/attrs). When documenting:
+
+- PascalCase names in Props / Events tables link to the doc **Types** section or [API types](https://morya-space.github.io/morya-ui/docs/types); run `pnpm docs:sync-type-sections` to backfill from `types.ts`.
+- List `pt` and DOM part keys when present.
+- For fields: events on the native control, other fallthrough on the field root; prefer props for `placeholder` / `name`.
+
+### Overlay and icon conventions
+
+Overlays Teleport to `body` by default (`teleport` / `appendTo`; `'self'` in place). Motion: `m-fade`, `m-scale-fade`, `m-slide-fade`, `m-message-slide`. Global mount via ConfigProvider `appendTo`.
+
+- **System icons**: `MIcon` + `name`.
+- **Product icons**: pass from the app; do not dump a full SVG set into the library.
 
 ## Publish to npm only
 
