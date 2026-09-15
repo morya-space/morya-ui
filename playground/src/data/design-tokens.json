@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T08:37:46.832Z",
+  "generatedAt": "2026-09-15T12:19:06.442Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 305,
+  "tokenCount": 321,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -378,7 +378,7 @@
       "name": "--m-avatar-group-ring-width",
       "category": "component",
       "source": "src/components/Avatar/styles.css",
-      "default": "2px",
+      "default": "var(--m-border-width)",
       "description": {
         "zh-CN": "组件专用相关变量：Avatar Group Ring Width",
         "en-US": "Component-specific token: Avatar Group Ring Width"
@@ -853,7 +853,7 @@
       "name": "--m-color-danger",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#fca5a5",
+      "default": "#dc2626",
       "description": {
         "zh-CN": "错误 / 危险语义色。",
         "en-US": "Error / danger semantic color."
@@ -893,7 +893,7 @@
       "name": "--m-color-help",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#c084fc",
+      "default": "#7e22ce",
       "description": {
         "zh-CN": "帮助 / 提示语义色。",
         "en-US": "Help semantic color."
@@ -903,7 +903,7 @@
       "name": "--m-color-info",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#93c5fd",
+      "default": "#1d4ed8",
       "description": {
         "zh-CN": "信息语义色。",
         "en-US": "Info semantic color."
@@ -943,7 +943,7 @@
       "name": "--m-color-success",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#5eead4",
+      "default": "#0f766e",
       "description": {
         "zh-CN": "成功语义色。",
         "en-US": "Success semantic color."
@@ -993,7 +993,7 @@
       "name": "--m-color-warning",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#fbbf24",
+      "default": "#b45309",
       "description": {
         "zh-CN": "警告语义色。",
         "en-US": "Warning semantic color."
@@ -1043,7 +1043,7 @@
       "name": "--m-contextmenu-item-gap",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
-      "default": "0.125rem",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "菜单相关变量：Contextmenu Item Gap",
         "en-US": "Menu token: Contextmenu Item Gap"
@@ -1063,7 +1063,7 @@
       "name": "--m-contextmenu-min-width",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
-      "default": "10rem",
+      "default": "var(--m-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Contextmenu Min Width",
         "en-US": "Menu token: Contextmenu Min Width"
@@ -1367,6 +1367,16 @@
       }
     },
     {
+      "name": "--m-divider-stub",
+      "category": "component",
+      "source": "src/components/Divider/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Divider Stub",
+        "en-US": "Component-specific token: Divider Stub"
+      }
+    },
+    {
       "name": "--m-dock-edge-offset",
       "category": "component",
       "source": "src/components/Dock/styles.css",
@@ -1420,7 +1430,7 @@
       "name": "--m-dropdown-menu-min-width",
       "category": "menu",
       "source": "src/components/Dropdown/styles.css",
-      "default": "10rem",
+      "default": "var(--m-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Dropdown Menu Min Width",
         "en-US": "Menu token: Dropdown Menu Min Width"
@@ -1434,6 +1444,26 @@
       "description": {
         "zh-CN": "菜单相关变量：Dropdown Submenu Max Height",
         "en-US": "Menu token: Dropdown Submenu Max Height"
+      }
+    },
+    {
+      "name": "--m-empty-mark-size",
+      "category": "component",
+      "source": "src/components/Empty/styles.css",
+      "default": "3.25rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Empty Mark Size",
+        "en-US": "Component-specific token: Empty Mark Size"
+      }
+    },
+    {
+      "name": "--m-empty-max-width",
+      "category": "component",
+      "source": "src/components/Empty/styles.css",
+      "default": "28rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Empty Max Width",
+        "en-US": "Component-specific token: Empty Max Width"
       }
     },
     {
@@ -1680,10 +1710,10 @@
       "name": "--m-layout-footer-height",
       "category": "layout",
       "source": "src/theme/styles.css",
-      "default": "56px",
+      "default": "3.5rem",
       "variants": {
-        "density-compact": "40px",
-        "density-spacious": "56px"
+        "density-compact": "2.5rem",
+        "density-spacious": "3.5rem"
       },
       "description": {
         "zh-CN": "布局相关变量：Layout Footer Height",
@@ -1694,10 +1724,10 @@
       "name": "--m-layout-header-height",
       "category": "layout",
       "source": "src/theme/styles.css",
-      "default": "64px",
+      "default": "4rem",
       "variants": {
-        "density-compact": "48px",
-        "density-spacious": "64px"
+        "density-compact": "3rem",
+        "density-spacious": "4rem"
       },
       "description": {
         "zh-CN": "布局相关变量：Layout Header Height",
@@ -1738,10 +1768,10 @@
       "name": "--m-layout-sider-collapsed-width",
       "category": "layout",
       "source": "src/theme/styles.css",
-      "default": "72px",
+      "default": "4.5rem",
       "variants": {
-        "density-compact": "52px",
-        "density-spacious": "72px"
+        "density-compact": "3.25rem",
+        "density-spacious": "4.5rem"
       },
       "description": {
         "zh-CN": "布局相关变量：Layout Sider Collapsed Width",
@@ -1752,10 +1782,10 @@
       "name": "--m-layout-sider-width",
       "category": "layout",
       "source": "src/theme/styles.css",
-      "default": "288px",
+      "default": "18rem",
       "variants": {
-        "density-compact": "240px",
-        "density-spacious": "288px"
+        "density-compact": "15rem",
+        "density-spacious": "18rem"
       },
       "description": {
         "zh-CN": "布局相关变量：Layout Sider Width",
@@ -2091,7 +2121,7 @@
       "name": "--m-menubar-item-gap",
       "category": "menu",
       "source": "src/components/Menubar/styles.css",
-      "default": "0.125rem",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "菜单相关变量：Menubar Item Gap",
         "en-US": "Menu token: Menubar Item Gap"
@@ -2101,7 +2131,7 @@
       "name": "--m-menubar-menu-min-width",
       "category": "menu",
       "source": "src/components/Menubar/styles.css",
-      "default": "10rem",
+      "default": "var(--m-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Menubar Menu Min Width",
         "en-US": "Menu token: Menubar Menu Min Width"
@@ -2358,6 +2388,16 @@
       }
     },
     {
+      "name": "--m-page-stat-value-size",
+      "category": "component",
+      "source": "src/components/Page/styles.css",
+      "default": "1.5rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Page Stat Value Size",
+        "en-US": "Component-specific token: Page Stat Value Size"
+      }
+    },
+    {
       "name": "--m-pagination-jumper-width",
       "category": "component",
       "source": "src/components/Pagination/styles.css",
@@ -2548,6 +2588,46 @@
       }
     },
     {
+      "name": "--m-result-glyph-size",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "1.75rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Glyph Size",
+        "en-US": "Component-specific token: Result Glyph Size"
+      }
+    },
+    {
+      "name": "--m-result-icon-size",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "4rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Icon Size",
+        "en-US": "Component-specific token: Result Icon Size"
+      }
+    },
+    {
+      "name": "--m-result-max-width",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "32rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Max Width",
+        "en-US": "Component-specific token: Result Max Width"
+      }
+    },
+    {
+      "name": "--m-result-title-size",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "1.35rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Title Size",
+        "en-US": "Component-specific token: Result Title Size"
+      }
+    },
+    {
       "name": "--m-result-tone",
       "category": "component",
       "source": "src/components/Result/styles.css",
@@ -2585,6 +2665,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Scrollbar Hover Opacity",
         "en-US": "Component-specific token: Scrollbar Hover Opacity"
+      }
+    },
+    {
+      "name": "--m-scrollbar-inset",
+      "category": "component",
+      "source": "src/components/Scrollbar/styles.css",
+      "default": "0.125rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Scrollbar Inset",
+        "en-US": "Component-specific token: Scrollbar Inset"
       }
     },
     {
@@ -2628,6 +2718,16 @@
       }
     },
     {
+      "name": "--m-select-spinner-size",
+      "category": "component",
+      "source": "src/components/Select/styles.css",
+      "default": "0.85rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Select Spinner Size",
+        "en-US": "Component-specific token: Select Spinner Size"
+      }
+    },
+    {
       "name": "--m-shadow-lg",
       "category": "shadow",
       "source": "src/theme/styles.css",
@@ -2645,6 +2745,16 @@
       "description": {
         "zh-CN": "阴影相关变量：Shadow Md",
         "en-US": "Shadow token: Shadow Md"
+      }
+    },
+    {
+      "name": "--m-shadow-raised",
+      "category": "shadow",
+      "source": "src/theme/styles.css",
+      "default": "0 0.25rem 0.75rem color-mix(in srgb, var(--m-color-text) 22%, transparent)",
+      "description": {
+        "zh-CN": "阴影相关变量：Shadow Raised",
+        "en-US": "Shadow token: Shadow Raised"
       }
     },
     {
@@ -2926,6 +3036,16 @@
       }
     },
     {
+      "name": "--m-splitter-min-height",
+      "category": "component",
+      "source": "src/components/Splitter/styles.css",
+      "default": "6rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Splitter Min Height",
+        "en-US": "Component-specific token: Splitter Min Height"
+      }
+    },
+    {
       "name": "--m-splitter-trigger-size",
       "category": "component",
       "source": "src/components/Splitter/styles.css",
@@ -2953,6 +3073,16 @@
       "description": {
         "zh-CN": "步骤条相关变量：Stepper Connector Color",
         "en-US": "Stepper token: Stepper Connector Color"
+      }
+    },
+    {
+      "name": "--m-stepper-connector-width",
+      "category": "stepper",
+      "source": "src/components/Stepper/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "步骤条相关变量：Stepper Connector Width",
+        "en-US": "Stepper token: Stepper Connector Width"
       }
     },
     {
@@ -3043,7 +3173,7 @@
       "name": "--m-table-cell-padding-block",
       "category": "table",
       "source": "src/components/Table/styles.css",
-      "default": "12px",
+      "default": "var(--m-space-3)",
       "description": {
         "zh-CN": "表格相关变量：Table Cell Padding Block",
         "en-US": "Table token: Table Cell Padding Block"
@@ -3182,6 +3312,16 @@
       }
     },
     {
+      "name": "--m-tabs-indicator-width",
+      "category": "component",
+      "source": "src/components/Tabs/styles.css",
+      "default": "2px",
+      "description": {
+        "zh-CN": "组件专用相关变量：Tabs Indicator Width",
+        "en-US": "Component-specific token: Tabs Indicator Width"
+      }
+    },
+    {
       "name": "--m-tag-font-size-small",
       "category": "tag",
       "source": "src/theme/styles.css",
@@ -3285,7 +3425,7 @@
       "name": "--m-tieredmenu-item-gap",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
-      "default": "0.125rem",
+      "default": "var(--m-space-1)",
       "description": {
         "zh-CN": "菜单相关变量：Tieredmenu Item Gap",
         "en-US": "Menu token: Tieredmenu Item Gap"
@@ -3305,7 +3445,7 @@
       "name": "--m-tieredmenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
-      "default": "12rem",
+      "default": "var(--m-menu-min-width)",
       "description": {
         "zh-CN": "菜单相关变量：Tieredmenu Min Width",
         "en-US": "Menu token: Tieredmenu Min Width"
@@ -3325,7 +3465,7 @@
       "name": "--m-tieredmenu-submenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
-      "default": "10rem",
+      "default": "var(--m-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Tieredmenu Submenu Min Width",
         "en-US": "Menu token: Tieredmenu Submenu Min Width"
@@ -3349,6 +3489,16 @@
       "description": {
         "zh-CN": "时间线相关变量：Timeline Marker Size",
         "en-US": "Timeline token: Timeline Marker Size"
+      }
+    },
+    {
+      "name": "--m-toast-accent-width",
+      "category": "component",
+      "source": "src/components/Toast/styles.css",
+      "default": "3px",
+      "description": {
+        "zh-CN": "组件专用相关变量：Toast Accent Width",
+        "en-US": "Component-specific token: Toast Accent Width"
       }
     },
     {
@@ -3409,6 +3559,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Treeselect Toggler Size",
         "en-US": "Component-specific token: Treeselect Toggler Size"
+      }
+    },
+    {
+      "name": "--m-treetable-toggler-size",
+      "category": "component",
+      "source": "src/components/TreeTable/styles.css",
+      "default": "1.25rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Treetable Toggler Size",
+        "en-US": "Component-specific token: Treetable Toggler Size"
       }
     },
     {

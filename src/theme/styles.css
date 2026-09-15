@@ -38,8 +38,12 @@
     --m-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
     --m-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
     --m-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
-    --m-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 6%, transparent);
-    --m-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 6%, transparent);
+    --m-shadow-raised: 0 0.25rem 0.75rem
+        color-mix(in srgb, var(--m-color-text) 14%, transparent);
+    --m-shadow-sticky: 4px 0 8px
+        color-mix(in srgb, var(--m-color-text) 6%, transparent);
+    --m-shadow-sticky-end: -4px 0 8px
+        color-mix(in srgb, var(--m-color-text) 6%, transparent);
 
     /* Typography scale (component text, not control-height fonts) */
     --m-font-size-xs: 0.75rem;
@@ -204,29 +208,29 @@
 }
 
 [data-m-density="compact"] .m-layout-header {
-    --m-layout-header-height: 48px;
+    --m-layout-header-height: 3rem;
 }
 
 [data-m-density="compact"] .m-layout-footer {
-    --m-layout-footer-height: 40px;
+    --m-layout-footer-height: 2.5rem;
 }
 
 [data-m-density="compact"] .m-layout-sider {
-    --m-layout-sider-width: 240px;
-    --m-layout-sider-collapsed-width: 52px;
+    --m-layout-sider-width: 15rem;
+    --m-layout-sider-collapsed-width: 3.25rem;
 }
 
 [data-m-density="spacious"] .m-layout-header {
-    --m-layout-header-height: 64px;
+    --m-layout-header-height: 4rem;
 }
 
 [data-m-density="spacious"] .m-layout-footer {
-    --m-layout-footer-height: 56px;
+    --m-layout-footer-height: 3.5rem;
 }
 
 [data-m-density="spacious"] .m-layout-sider {
-    --m-layout-sider-width: 288px;
-    --m-layout-sider-collapsed-width: 72px;
+    --m-layout-sider-width: 18rem;
+    --m-layout-sider-collapsed-width: 4.5rem;
 }
 
 [data-theme="dark"] {
@@ -241,12 +245,13 @@
         color-mix(in srgb, var(--m-color-primary) 28%, transparent);
     --m-focus-shadow-danger: 0 0 0 2px
         color-mix(in srgb, var(--m-color-danger) 28%, transparent);
-    --m-color-success: #5eead4;
-    --m-color-info: #93c5fd;
-    --m-color-warning: #fbbf24;
+    /* Mid solids: keep ≥~4.5:1 with --m-color-on-emphasis on dark surfaces */
+    --m-color-success: #0f766e;
+    --m-color-info: #1d4ed8;
+    --m-color-warning: #b45309;
     --m-color-warn: var(--m-color-warning);
-    --m-color-help: #c084fc;
-    --m-color-danger: #fca5a5;
+    --m-color-help: #7e22ce;
+    --m-color-danger: #dc2626;
     --m-color-contrast: #f8fafc;
     --m-color-contrast-fg: #0f172a;
     --m-color-contrast-hover: #e2e8f0;
@@ -255,8 +260,12 @@
     --m-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
     --m-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
     --m-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
-    --m-shadow-sticky: 4px 0 8px color-mix(in srgb, #000 35%, transparent);
-    --m-shadow-sticky-end: -4px 0 8px color-mix(in srgb, #000 35%, transparent);
+    --m-shadow-raised: 0 0.25rem 0.75rem
+        color-mix(in srgb, var(--m-color-text) 22%, transparent);
+    --m-shadow-sticky: 4px 0 8px
+        color-mix(in srgb, #000 35%, transparent);
+    --m-shadow-sticky-end: -4px 0 8px
+        color-mix(in srgb, #000 35%, transparent);
 
     --m-table-border-color: color-mix(in srgb, var(--m-color-border) 88%, var(--m-color-text));
     --m-color-fill-light: color-mix(in srgb, var(--m-color-text) 10%, var(--m-color-surface));
