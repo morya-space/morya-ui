@@ -37,9 +37,6 @@ function selectVersion(version: string) {
     <aside class="changelog-sidebar" :aria-label="t.changelogNav">
       <MScrollbar class="changelog-scroll">
         <div class="changelog-sidebar__body">
-          <p class="changelog-kicker">
-            RELEASES
-          </p>
           <h1 class="changelog-sidebar__title">
             {{ t.changelogTitle }}
           </h1>
@@ -109,10 +106,9 @@ function selectVersion(version: string) {
 }
 
 .changelog-sidebar {
-  background: color-mix(in srgb, var(--m-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 94%, transparent);
   border-right: 1px solid var(--docs-edge);
   min-height: 0;
-  backdrop-filter: blur(12px);
 }
 
 .changelog-scroll {
@@ -124,18 +120,9 @@ function selectVersion(version: string) {
   padding: 1.5rem 1rem 2rem;
 }
 
-.changelog-kicker {
-  color: var(--docs-glow);
-  font-family: var(--docs-mono);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  margin: 0 0 0.55rem;
-}
-
 .changelog-sidebar__title {
   font-family: var(--docs-display);
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.04em;
   margin: 0 0 0.85rem;

@@ -54,9 +54,6 @@ watch([activeSlug, lang], async () => {
         >
         <span>Morya UI</span>
       </RouterLink>
-      <p class="docs-kicker">
-        DOCUMENTATION
-      </p>
       <h1 class="docs-sidebar__title">
         {{ t.docsTitle }}
       </h1>
@@ -98,9 +95,8 @@ watch([activeSlug, lang], async () => {
 
 <style>
 .docs-sidebar {
-  background: color-mix(in srgb, var(--m-color-surface) 62%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 94%, transparent);
   border-right: 1px solid var(--docs-edge);
-  backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -133,15 +129,6 @@ watch([activeSlug, lang], async () => {
   overflow: hidden;
 }
 
-.docs-kicker {
-  color: var(--docs-glow);
-  font-family: var(--docs-mono);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  margin: 0.85rem 0 0.55rem;
-}
-
 .docs-brand {
   align-items: center;
   color: var(--m-color-text);
@@ -161,10 +148,10 @@ watch([activeSlug, lang], async () => {
 
 .docs-sidebar__title {
   font-family: var(--docs-display);
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.04em;
-  margin: 0 0 1.15rem;
+  margin: 1rem 0 1.15rem;
 }
 
 .docs-nav {
@@ -204,7 +191,7 @@ watch([activeSlug, lang], async () => {
 
 .docs-main__body {
   margin: 0 auto;
-  max-width: 52rem;
+  max-width: 48rem;
   padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem;
 }
 

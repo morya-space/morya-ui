@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T04:47:37.638Z",
+  "generatedAt": "2026-09-15T08:37:46.832Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 303,
+  "tokenCount": 305,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -2548,6 +2548,16 @@
       }
     },
     {
+      "name": "--m-result-tone",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "var(--m-color-text-muted)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Tone",
+        "en-US": "Component-specific token: Result Tone"
+      }
+    },
+    {
       "name": "--m-scrollbar-bg",
       "category": "component",
       "source": "src/components/Scrollbar/styles.css",
@@ -2923,6 +2933,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Splitter Trigger Size",
         "en-US": "Component-specific token: Splitter Trigger Size"
+      }
+    },
+    {
+      "name": "--m-status-dot-size",
+      "category": "component",
+      "source": "src/components/Status/styles.css",
+      "default": "0.625rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Status Dot Size",
+        "en-US": "Component-specific token: Status Dot Size"
       }
     },
     {

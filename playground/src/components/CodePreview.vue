@@ -66,18 +66,18 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .code-preview {
-  border: 1px solid var(--m-color-border);
+  border: 1px solid var(--docs-edge);
   border-radius: var(--m-radius-md);
   margin: 1.25rem 0 1.75rem;
   overflow: hidden;
 }
 .code-preview__demo {
   align-items: center;
-  background: color-mix(in srgb, var(--m-color-primary) 4%, var(--m-color-surface));
+  background: var(--m-color-surface);
   display: flex;
   flex-wrap: wrap;
   gap: var(--m-space-3);
-  min-height: 7rem;
+  min-height: 6.5rem;
   padding: var(--m-space-4);
 }
 .code-preview__demo :deep(.m-splitter),
@@ -89,11 +89,12 @@ onBeforeUnmount(() => {
 }
 .code-preview__code summary {
   align-items: center;
-  border-top: 1px solid var(--m-color-border);
+  background: color-mix(in srgb, var(--m-color-text) 2.5%, var(--m-color-surface));
+  border-top: 1px solid var(--docs-edge);
   color: var(--m-color-text);
   cursor: pointer;
   display: flex;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   gap: 0.75rem;
   justify-content: space-between;
   list-style: none;
@@ -109,15 +110,14 @@ onBeforeUnmount(() => {
 }
 .code-preview__summary-label em {
   color: var(--m-color-text-muted);
-  font-family: ui-monospace, monospace;
-  font-size: 0.65rem;
+  font-family: var(--docs-mono);
+  font-size: 0.68rem;
   font-style: normal;
-  text-transform: uppercase;
 }
 .code-preview__copy {
   align-items: center;
-  background: color-mix(in srgb, var(--m-color-surface) 80%, transparent);
-  border: 1px solid var(--m-color-border);
+  background: transparent;
+  border: 1px solid var(--docs-edge);
   border-radius: var(--m-radius-sm);
   color: var(--m-color-text-muted);
   cursor: pointer;
@@ -136,16 +136,16 @@ onBeforeUnmount(() => {
 }
 .code-preview__highlight,
 .code-preview__fallback {
-  background: color-mix(in srgb, var(--m-color-text) 7%, var(--m-color-surface));
-  border-top: 1px solid var(--m-color-border);
+  background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+  border-top: 1px solid var(--docs-edge);
   margin: 0;
   overflow-x: auto;
   padding: var(--m-space-4);
 }
 .code-preview__fallback {
   color: var(--m-color-text);
-  font-family: ui-monospace, monospace;
-  font-size: 0.7rem;
+  font-family: var(--docs-mono);
+  font-size: 0.75rem;
   line-height: 1.6;
   white-space: pre;
 }
@@ -165,8 +165,8 @@ onBeforeUnmount(() => {
 .code-preview__highlight :deep(code),
 .code-preview__highlight :deep(.shiki code) {
   background: transparent;
-  font-family: ui-monospace, monospace;
-  font-size: 0.7rem;
+  font-family: var(--docs-mono);
+  font-size: 0.75rem;
   line-height: 1.6;
   padding: 0;
   white-space: pre;

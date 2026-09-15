@@ -20,7 +20,6 @@ useDensity()
       <div class="site-atmosphere" aria-hidden="true">
         <div class="site-atmosphere__glow site-atmosphere__glow--a" />
         <div class="site-atmosphere__glow site-atmosphere__glow--b" />
-        <div class="site-atmosphere__grid" />
       </div>
       <SiteHeader />
       <div class="site-shell__body">
@@ -34,15 +33,25 @@ useDensity()
 :root {
   --docs-display: 'Syne', 'Segoe UI', sans-serif;
   --docs-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
-  --docs-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --docs-ink: color-mix(in srgb, var(--m-color-text) 92%, #041018);
-  --docs-glow: color-mix(in srgb, var(--m-color-primary) 55%, #22d3ee);
-  --docs-panel: color-mix(in srgb, var(--m-color-surface) 78%, transparent);
-  --docs-edge: color-mix(in srgb, var(--m-color-border) 70%, transparent);
+  --docs-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --docs-ink: var(--m-color-text);
+  --docs-glow: color-mix(in srgb, var(--m-color-primary) 72%, var(--m-color-text-muted));
+  --docs-panel: color-mix(in srgb, var(--m-color-surface) 88%, transparent);
+  --docs-edge: color-mix(in srgb, var(--m-color-border) 82%, transparent);
+  --docs-measure: 68ch;
 
   color: var(--m-color-text);
   background: var(--m-color-surface);
   font-family: var(--docs-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--m-color-primary) 28%, transparent);
+  color: var(--m-color-text);
 }
 
 html,
@@ -69,8 +78,8 @@ input {
 button:focus-visible,
 input:focus-visible,
 a:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--m-color-focus-ring) 40%, transparent);
-  outline-offset: 3px;
+  outline: 2px solid var(--m-color-focus-ring);
+  outline-offset: 2px;
 }
 
 .m-autocomplete__input:focus-visible,
@@ -107,39 +116,28 @@ a:focus-visible {
 
 .site-atmosphere__glow {
   border-radius: 50%;
-  filter: blur(48px);
-  opacity: 0.42;
+  filter: blur(64px);
+  opacity: 0.22;
   position: absolute;
 }
 
 .site-atmosphere__glow--a {
-  background: radial-gradient(circle, var(--docs-glow) 0%, transparent 68%);
-  height: 28rem;
-  left: -8rem;
-  top: -10rem;
-  width: 28rem;
-  animation: docs-drift 18s ease-in-out infinite alternate;
+  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 40%, transparent) 0%, transparent 72%);
+  height: 24rem;
+  left: -10rem;
+  top: -12rem;
+  width: 24rem;
+  animation: docs-drift 28s ease-in-out infinite alternate;
 }
 
 .site-atmosphere__glow--b {
-  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 45%, #0ea5e9) 0%, transparent 70%);
-  bottom: -12rem;
-  height: 32rem;
-  opacity: 0.28;
-  right: -10rem;
-  width: 32rem;
-  animation: docs-drift 22s ease-in-out infinite alternate-reverse;
-}
-
-.site-atmosphere__grid {
-  background-image:
-    linear-gradient(var(--docs-edge) 1px, transparent 1px),
-    linear-gradient(90deg, var(--docs-edge) 1px, transparent 1px);
-  background-size: 48px 48px;
-  inset: 0;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 20%, transparent 75%);
-  opacity: 0.35;
-  position: absolute;
+  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 22%, transparent) 0%, transparent 74%);
+  bottom: -14rem;
+  height: 28rem;
+  opacity: 0.16;
+  right: -12rem;
+  width: 28rem;
+  animation: docs-drift 34s ease-in-out infinite alternate-reverse;
 }
 
 .site-shell__body {
@@ -157,7 +155,7 @@ a:focus-visible {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(2rem, 1.5rem, 0) scale(1.08);
+    transform: translate3d(1.25rem, 1rem, 0) scale(1.04);
   }
 }
 

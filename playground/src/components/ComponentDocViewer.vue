@@ -80,19 +80,20 @@ defineExpose({ scrollToSection })
   padding-bottom: 1rem;
 }
 .component-doc-viewer__label {
-  color: var(--docs-glow);
+  color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 .component-doc-viewer__intro h2 {
   font-family: var(--docs-display);
   font-size: clamp(1.45rem, 2.4vw, 1.85rem);
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  margin: 0.35rem 0 0.45rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  margin: 0.4rem 0 0.55rem;
+  text-wrap: balance;
 }
 .component-doc-viewer__stats {
   color: var(--m-color-text-muted);
@@ -133,12 +134,12 @@ defineExpose({ scrollToSection })
   font-weight: 600;
 }
 .component-doc-viewer__intro p {
-  color: var(--m-color-text);
-  font-size: 0.86rem;
-  line-height: 1.55;
+  color: var(--m-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin: 0;
-  max-width: 42rem;
-  opacity: 0.82;
+  max-width: var(--docs-measure);
+  opacity: 1;
 }
 
 @media (max-width: 1100px) {
@@ -151,7 +152,7 @@ defineExpose({ scrollToSection })
 <style>
 .m-markdown-doc {
   color: var(--m-color-text);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.7;
   width: 100%;
 }
@@ -165,13 +166,14 @@ defineExpose({ scrollToSection })
   font-family: var(--docs-display);
   font-weight: 700;
   letter-spacing: -0.03em;
-  margin: 1.6rem 0 0.7rem;
+  margin: 1.85rem 0 0.65rem;
+  text-wrap: balance;
 }
 .m-markdown-doc h1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 .m-markdown-doc h2 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 .m-markdown-doc h3 {
   font-size: 1.05rem;
@@ -182,17 +184,18 @@ defineExpose({ scrollToSection })
 .m-markdown-doc li,
 .m-markdown-doc blockquote {
   color: var(--m-color-text);
-  margin: 0.55rem 0;
+  margin: 0.65rem 0;
 }
 .m-markdown-doc a {
   color: var(--m-color-primary);
+  text-underline-offset: 0.15em;
 }
 .m-markdown-doc code {
-  background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
+  background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
   border-radius: var(--m-radius-sm);
   color: var(--m-color-text);
-  font-family: ui-monospace, monospace;
-  font-size: 0.82em;
+  font-family: var(--docs-mono);
+  font-size: 0.84em;
   padding: 0.12rem 0.35rem;
 }
 .m-markdown-doc pre {
@@ -262,14 +265,14 @@ defineExpose({ scrollToSection })
   margin-top: 1.25rem;
 }
 .m-markdown-doc thead th {
-  background: color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
-  color: var(--m-color-text);
-  font-family: ui-monospace, monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  background: color-mix(in srgb, var(--m-color-text) 5%, var(--m-color-surface));
+  color: var(--m-color-text-muted);
+  font-family: var(--docs-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   opacity: 1;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .m-markdown-doc tbody td {
   color: var(--m-color-text);

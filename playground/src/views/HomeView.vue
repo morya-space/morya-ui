@@ -18,22 +18,18 @@ const copied = ref(false)
 
 const pillars = computed(() => [
   {
-    label: t.value.pillarCompleteLabel,
     title: t.value.pillarCompleteTitle,
     body: t.value.pillarCompleteBody,
   },
   {
-    label: t.value.pillarThemeLabel,
     title: t.value.pillarThemeTitle,
     body: t.value.pillarThemeBody,
   },
   {
-    label: t.value.pillarTypeScriptLabel,
     title: t.value.pillarTypeScriptTitle,
     body: t.value.pillarTypeScriptBody,
   },
   {
-    label: t.value.pillarDocsLabel,
     title: t.value.pillarDocsTitle,
     body: t.value.pillarDocsBody,
   },
@@ -54,9 +50,6 @@ async function copyInstall() {
     <div class="home-page">
       <section class="home-hero">
         <img class="home-logo" :src="SITE_LOGO_URL" width="96" height="96" alt="">
-        <p class="home-kicker">
-          {{ t.homeKicker }}
-        </p>
         <h1 class="home-brand">
           {{ SITE_NAME }}
         </h1>
@@ -103,7 +96,6 @@ async function copyInstall() {
 
       <section class="home-pillars" :aria-label="t.capabilities">
         <article v-for="item in pillars" :key="item.title" class="home-pillar">
-          <span class="home-pillar__label">{{ item.label }}</span>
           <h2>{{ item.title }}</h2>
           <p>{{ item.body }}</p>
         </article>
@@ -156,62 +148,48 @@ async function copyInstall() {
 }
 
 .home-logo {
-  animation: home-rise 0.7s var(--m-motion-ease) both;
   display: block;
-  height: clamp(4.5rem, 12vw, 6rem);
-  margin: 0 0 1.25rem;
-  width: clamp(4.5rem, 12vw, 6rem);
-}
-
-.home-kicker {
-  color: var(--docs-glow);
-  font-family: var(--docs-mono);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  margin: 0 0 1.1rem;
+  height: clamp(4rem, 10vw, 5.25rem);
+  margin: 0 0 1.5rem;
+  width: clamp(4rem, 10vw, 5.25rem);
 }
 
 .home-brand {
-  background: linear-gradient(
-    120deg,
-    var(--m-color-text) 10%,
-    color-mix(in srgb, var(--m-color-primary) 75%, #22d3ee) 55%,
-    var(--m-color-primary) 100%
-  );
-  background-clip: text;
-  color: transparent;
+  color: var(--m-color-text);
   font-family: var(--docs-display);
-  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
   font-weight: 800;
-  letter-spacing: -0.06em;
-  line-height: 0.92;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
   margin: 0 0 1rem;
+  text-wrap: balance;
 }
 
 .home-headline {
   color: var(--m-color-text);
   font-family: var(--docs-display);
-  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.25;
-  margin: 0 0 1rem;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  margin: 0 0 0.85rem;
+  max-width: 36rem;
+  text-wrap: balance;
 }
 
 .home-lead {
   color: var(--m-color-text-muted);
   font-size: 1.05rem;
-  line-height: 1.7;
+  line-height: 1.65;
   margin: 0;
-  max-width: 38rem;
+  max-width: var(--docs-measure);
 }
 
 .home-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 2.1rem;
+  margin-top: 2rem;
 }
 
 .home-actions a {
@@ -221,32 +199,28 @@ async function copyInstall() {
 .home-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.75rem;
+  gap: 0.65rem 1.1rem;
+  margin-top: 1.6rem;
 }
 
 .home-meta span {
-  background: color-mix(in srgb, var(--m-color-surface) 65%, transparent);
-  border: 1px solid var(--docs-edge);
-  border-radius: 999px;
   color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
-  font-size: 0.68rem;
-  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .home-install {
   animation: home-rise 0.75s var(--m-motion-ease) both;
-  background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
-  border: 1px solid var(--docs-edge);
-  border-radius: 1.1rem;
-  margin-top: clamp(2.5rem, 6vw, 3.5rem);
-  padding: 1.35rem 1.25rem 1.2rem;
+  border-top: 1px solid var(--docs-edge);
+  margin-top: clamp(2.75rem, 6vw, 3.75rem);
+  padding: 1.5rem 0 0;
 }
 
 .home-install__head h2 {
   font-family: var(--docs-display);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   margin: 0 0 0.35rem;
@@ -254,20 +228,20 @@ async function copyInstall() {
 
 .home-install__head p {
   color: var(--m-color-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.55;
   margin: 0 0 1rem;
 }
 
 .home-install__cmd {
   align-items: center;
-  background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+  background: color-mix(in srgb, var(--m-color-text) 3%, var(--m-color-surface));
   border: 1px solid var(--docs-edge);
-  border-radius: 0.75rem;
+  border-radius: var(--m-radius-md, 0.65rem);
   display: flex;
   gap: 0.75rem;
   justify-content: space-between;
-  padding: 0.75rem 0.85rem;
+  padding: 0.7rem 0.8rem;
 }
 
 .home-install__cmd code {
@@ -277,15 +251,23 @@ async function copyInstall() {
 }
 
 .home-install__copy {
-  background: color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface));
-  border: 1px solid color-mix(in srgb, var(--m-color-primary) 28%, transparent);
-  border-radius: 0.55rem;
-  color: var(--m-color-primary);
+  background: transparent;
+  border: 1px solid var(--docs-edge);
+  border-radius: var(--m-radius-sm, 0.45rem);
+  color: var(--m-color-text-muted);
   cursor: pointer;
   font-family: var(--docs-mono);
   font-size: 0.72rem;
   font-weight: 600;
   padding: 0.35rem 0.65rem;
+  transition:
+    border-color var(--m-motion-fast) var(--m-motion-ease),
+    color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-install__copy:hover {
+  border-color: color-mix(in srgb, var(--m-color-primary) 40%, var(--docs-edge));
+  color: var(--m-color-primary);
 }
 
 .home-install__npm {
@@ -299,62 +281,47 @@ async function copyInstall() {
 
 .home-install__npm:hover {
   text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .home-pillars {
   display: grid;
-  gap: 1rem;
+  gap: 0;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--docs-edge);
 }
 
 .home-pillar {
   animation: home-rise 0.8s var(--m-motion-ease) both;
-  background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
-  border: 1px solid var(--docs-edge);
-  border-radius: 1.1rem;
-  padding: 1.35rem 1.25rem 1.45rem;
-  position: relative;
-  overflow: hidden;
+  border-bottom: 1px solid var(--docs-edge);
+  padding: 1.5rem 1.25rem 1.5rem 0;
+}
+
+.home-pillar:nth-child(even) {
+  padding-left: 1.25rem;
+  padding-right: 0;
+  border-left: 1px solid var(--docs-edge);
 }
 
 .home-pillar:nth-child(2) {
-  animation-delay: 0.06s;
+  animation-delay: 0.05s;
 }
 
 .home-pillar:nth-child(3) {
-  animation-delay: 0.12s;
+  animation-delay: 0.1s;
 }
 
 .home-pillar:nth-child(4) {
-  animation-delay: 0.18s;
-}
-
-.home-pillar::before {
-  background: linear-gradient(120deg, transparent, color-mix(in srgb, var(--m-color-primary) 35%, transparent));
-  content: '';
-  height: 1px;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.home-pillar__label {
-  color: var(--docs-glow);
-  font-family: var(--docs-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  animation-delay: 0.15s;
 }
 
 .home-pillar h2 {
   font-family: var(--docs-display);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.03em;
-  margin: 0.7rem 0 0.55rem;
+  margin: 0 0 0.55rem;
 }
 
 .home-pillar p {
@@ -362,6 +329,7 @@ async function copyInstall() {
   font-size: 0.92rem;
   line-height: 1.6;
   margin: 0;
+  max-width: 34rem;
 }
 
 .home-cta {
@@ -429,6 +397,12 @@ async function copyInstall() {
 @media (max-width: 900px) {
   .home-pillars {
     grid-template-columns: 1fr;
+  }
+
+  .home-pillar:nth-child(even) {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 </style>

@@ -163,7 +163,7 @@ function onPanelClick(event: MouseEvent) {
     transition: transform var(--m-motion-normal) var(--m-motion-ease);
     width: min(18rem, 88vw);
     z-index: 290;
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(10px);
   }
 
   .mobile-sidebar-shell__panel[data-open='true'] {

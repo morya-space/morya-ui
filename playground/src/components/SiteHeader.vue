@@ -98,7 +98,35 @@ const activeSection = computed(() => {
         :title="isDark ? t.lightMode : t.darkMode"
         @click="toggleTheme"
       >
-        <span aria-hidden="true">{{ isDark ? '☀' : '☾' }}</span>
+        <svg
+          v-if="isDark"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg>
+        <svg
+          v-else
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z" />
+        </svg>
       </button>
       <a
         class="site-icon-btn site-icon-btn--npm"
@@ -149,19 +177,19 @@ const activeSection = computed(() => {
 <style scoped>
 .site-header {
   align-items: center;
-  background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
+  background: color-mix(in srgb, var(--m-color-surface) 92%, transparent);
   border-bottom: 1px solid var(--docs-edge);
   display: grid;
   flex: 0 0 auto;
   gap: 1rem;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  height: 4rem;
+  height: 3.75rem;
   padding: 0 clamp(1rem, 3vw, 2.5rem);
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 200;
-  backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(10px);
 }
 
 .site-brand {
@@ -174,12 +202,11 @@ const activeSection = computed(() => {
 }
 
 .site-brand__logo {
-  border-radius: 0.55rem;
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--m-color-primary) 28%, transparent);
+  border-radius: 0.45rem;
   display: block;
   flex: 0 0 auto;
-  height: 2rem;
-  width: 2rem;
+  height: 1.85rem;
+  width: 1.85rem;
 }
 
 .site-brand__text {
@@ -205,26 +232,22 @@ const activeSection = computed(() => {
 
 .site-nav {
   align-items: center;
-  background: color-mix(in srgb, var(--m-color-surface) 55%, transparent);
-  border: 1px solid var(--docs-edge);
-  border-radius: 999px;
   display: flex;
-  gap: 0.15rem;
+  gap: 0.1rem;
   justify-content: center;
-  padding: 0.2rem;
+  padding: 0;
 }
 
 .site-nav__link {
-  border-radius: 999px;
+  border-radius: 0.55rem;
   color: var(--m-color-text-muted);
   font-size: 0.84rem;
-  font-weight: 600;
-  padding: 0.42rem 0.95rem;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
   text-decoration: none;
   transition:
     color var(--m-motion-fast) var(--m-motion-ease),
-    background var(--m-motion-fast) var(--m-motion-ease),
-    box-shadow var(--m-motion-fast) var(--m-motion-ease);
+    background var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .site-nav__link:hover {
@@ -232,9 +255,9 @@ const activeSection = computed(() => {
 }
 
 .site-nav__link.is-active {
-  background: color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--m-color-primary) 30%, transparent);
+  background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
   color: var(--m-color-primary);
+  font-weight: 600;
 }
 
 .site-header__actions {
@@ -289,15 +312,13 @@ const activeSection = computed(() => {
   text-decoration: none;
   transition:
     border-color var(--m-motion-fast) var(--m-motion-ease),
-    color var(--m-motion-fast) var(--m-motion-ease),
-    transform var(--m-motion-fast) var(--m-motion-ease);
+    color var(--m-motion-fast) var(--m-motion-ease);
   width: 2.2rem;
 }
 
 .site-icon-btn:hover {
-  border-color: color-mix(in srgb, var(--m-color-primary) 45%, var(--m-color-border));
+  border-color: color-mix(in srgb, var(--m-color-primary) 40%, var(--m-color-border));
   color: var(--m-color-primary);
-  transform: translateY(-1px);
 }
 
 .site-icon-btn--npm {

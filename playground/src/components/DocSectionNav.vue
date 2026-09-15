@@ -17,7 +17,7 @@ const { t } = useDocsI18n()
 <template>
   <nav class="doc-section-nav" :aria-label="t.componentSection">
     <div class="doc-section-nav__heading">
-      <span class="kicker">{{ t.componentSection }}</span>
+      <h2 class="doc-section-nav__title">{{ t.componentSection }}</h2>
       <span v-if="sections.length" class="doc-section-nav__count">
         {{ t.sectionsCount.replace('{count}', String(sections.length)) }}
       </span>
@@ -62,17 +62,25 @@ const { t } = useDocsI18n()
   justify-content: space-between;
 }
 
+.doc-section-nav__title {
+  color: var(--m-color-text);
+  font-family: var(--docs-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
 .doc-section-nav__count {
   color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  font-size: 0.68rem;
 }
 
 .doc-section-nav__list {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -81,36 +89,33 @@ const { t } = useDocsI18n()
 .doc-section-nav__item button {
   background: transparent;
   border: 0;
-  border-left: 2px solid transparent;
-  border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
+  border-radius: var(--m-radius-sm);
   color: var(--m-color-text-muted);
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   line-height: 1.45;
-  padding: 0.35rem 0 0.35rem 0.55rem;
+  padding: 0.4rem 0.55rem;
   text-align: left;
   transition:
     background-color var(--m-motion-fast) var(--m-motion-ease),
-    border-color var(--m-motion-fast) var(--m-motion-ease),
     color var(--m-motion-fast) var(--m-motion-ease);
   width: 100%;
 }
 
 .doc-section-nav__item button:hover {
-  border-left-color: var(--m-color-primary);
+  background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
   color: var(--m-color-primary);
 }
 
 .doc-section-nav__item--active button {
-  background: color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface));
-  border-left-color: var(--m-color-primary);
+  background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
   color: var(--m-color-primary);
   font-weight: 600;
 }
 
 .doc-section-nav__item--sub button {
-  font-size: 0.72rem;
-  padding-left: 1.1rem;
+  font-size: 0.74rem;
+  padding-left: 1rem;
 }
 
 .doc-section-nav__empty {

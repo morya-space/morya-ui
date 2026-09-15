@@ -478,9 +478,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
             <template v-if="selectedComponent === OVERVIEW">
               <section class="hero">
                 <div>
-                  <p class="eyebrow">
-                    COMPONENTS / OVERVIEW
-                  </p>
                   <h1>{{ t.labTitle }}</h1>
                   <p class="hero-copy">
                     {{ t.labCopy }}
@@ -488,9 +485,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                   <div class="doc-meta">
                     <span>Vue 3</span><span>TypeScript</span><span>Live Preview</span>
                   </div>
-                </div>
-                <div class="hero-glyph" aria-hidden="true">
-                  <span>W</span>
                 </div>
               </section>
 
@@ -500,15 +494,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
               >
                 <div class="section-heading">
                   <div>
-                    <p class="eyebrow">
-                      {{
-                        String(group.order).padStart(
-                          2,
-                          "0",
-                        )
-                      }}
-                      / {{ group.label }}
-                    </p>
                     <h2>{{ group.title }}</h2>
                   </div>
                   <span class="section-rule" />
@@ -526,9 +511,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
                     :key="item.name"
                     class="overview-card"
                   >
-                    <div class="overview-card__number">
-                      {{ group.label.slice(0, 2) }}
-                    </div>
                     <h2>{{ item.name }}</h2>
                     <p>
                       {{
@@ -587,7 +569,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
             />
             <template v-else>
               <div class="token-heading">
-                <span class="kicker">TOKENS</span><span class="token-index">/ 04</span>
+                <h2>Tokens</h2>
               </div>
               <p class="token-description">
                 {{ t.tokenDesc }}
@@ -643,12 +625,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     min-height: 0;
     overflow: hidden;
 }
-.token-index {
-    color: var(--m-color-text-muted);
-    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
-}
 .workspace {
     display: grid;
     flex: 1;
@@ -674,9 +650,8 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .sidebar,
 .token-panel {
-    background: color-mix(in srgb, var(--m-color-surface) 62%, transparent);
+    background: color-mix(in srgb, var(--m-color-surface) 94%, transparent);
     border-right: 1px solid var(--docs-edge);
-    backdrop-filter: blur(12px);
 }
 .token-panel {
     border-left: 1px solid var(--docs-edge);
@@ -699,14 +674,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .token-panel-body :deep(.doc-section-nav) {
     position: sticky;
     top: 0;
-}
-.kicker,
-.eyebrow {
-    color: var(--docs-glow);
-    font-family: var(--docs-mono);
-    font-size: 0.63rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
 }
 .search-box {
     align-items: center;
@@ -749,14 +716,13 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .theme-panel__title {
     font-size: 0.78rem;
-    font-weight: 650;
+    font-weight: 600;
 }
 .theme-panel__summary {
     color: var(--m-color-text-muted);
-    font-family: ui-monospace, monospace;
-    font-size: 0.58rem;
+    font-family: var(--docs-mono);
+    font-size: 0.62rem;
     grid-column: 1 / 3;
-    letter-spacing: 0.02em;
 }
 .theme-panel__chevron {
     color: var(--m-color-text-muted);
@@ -921,90 +887,65 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     width: 100%;
 }
 .hero {
-    align-items: end;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
+    max-width: 42rem;
 }
 .hero h1 {
     font-family: var(--docs-display);
-    font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
     font-weight: 800;
-    letter-spacing: -0.06em;
-    line-height: 0.95;
-    margin: 1rem 0 1.3rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: 0 0 1rem;
+    text-wrap: balance;
 }
 .hero h1 span {
     color: var(--m-color-primary);
 }
 .hero-copy {
     color: var(--m-color-text-muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.65;
     margin: 0;
-    max-width: 36rem;
+    max-width: var(--docs-measure);
 }
 .hero-copy code {
-    font-family: ui-monospace, monospace;
-    font-size: 0.8em;
+    font-family: var(--docs-mono);
+    font-size: 0.84em;
 }
 .doc-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    gap: 0.65rem 1rem;
+    margin-top: 1.35rem;
 }
 .doc-meta span {
-    border: 1px solid var(--m-color-border);
-    border-radius: var(--m-radius-full);
     color: var(--m-color-text-muted);
-    font-family: ui-monospace, monospace;
-    font-size: 0.6rem;
-    padding: 0.3rem 0.55rem;
+    font-family: var(--docs-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
 }
 .section-heading {
     align-items: end;
     display: flex;
     gap: 1rem;
-    margin: 2.5rem 0 1rem;
+    margin: 2.25rem 0 1rem;
 }
 .section-heading:first-of-type {
     margin-top: 0;
 }
 .section-heading h2 {
     font-family: var(--docs-display);
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    letter-spacing: -0.04em;
-    margin: 0.5rem 0 0;
+    letter-spacing: -0.03em;
+    margin: 0;
 }
 .section-rule {
     background: var(--m-color-border);
     flex: 1;
     height: 1px;
-    margin-bottom: 0.45rem;
-}
-.hero-glyph {
-    align-items: center;
-    background: linear-gradient(
-        145deg,
-        color-mix(in srgb, var(--m-color-primary) 18%, transparent),
-        transparent
-    );
-    border: 1px solid var(--docs-edge);
-    border-radius: 50%;
-    box-shadow: 0 20px 50px
-        color-mix(in srgb, var(--m-color-primary) 22%, transparent);
-    color: var(--m-color-primary);
-    display: flex;
-    font-family: var(--docs-display);
-    font-size: 4.5rem;
-    font-weight: 800;
-    height: 9rem;
-    justify-content: center;
-    opacity: 0.9;
-    transform: rotate(-10deg);
-    width: 9rem;
+    margin-bottom: 0.35rem;
 }
 .demo-grid {
     display: grid;
@@ -1015,27 +956,21 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin-bottom: 1rem;
 }
 .overview-card {
-    min-height: 13rem;
-    position: relative;
-}
-.overview-card__number {
-    color: var(--m-color-primary);
-    font-family: ui-monospace, monospace;
-    font-size: 0.65rem;
+    min-height: auto;
 }
 .overview-card h2 {
     font-family: var(--docs-display);
-    font-size: 1.65rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: -0.04em;
-    margin: 2.5rem 0 0.5rem;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.45rem;
 }
 .overview-card p {
     color: var(--m-color-text-muted);
-    font-size: 0.78rem;
-    line-height: 1.5;
+    font-size: 0.84rem;
+    line-height: 1.55;
     margin: 0;
-    max-width: 15rem;
+    max-width: 22rem;
 }
 .text-link {
     background: transparent;
@@ -1063,8 +998,15 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     margin-top: 1rem;
 }
 .token-heading {
-    display: flex;
-    justify-content: space-between;
+    display: block;
+    margin: 0 0 0.35rem;
+}
+.token-heading h2 {
+    font-family: var(--docs-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0;
 }
 .token-description {
     color: var(--m-color-text-muted);
@@ -1078,12 +1020,10 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     padding: 1rem 0;
 }
 .token-group h3 {
-    font-family: ui-monospace, monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    margin: 0 0 1rem;
-    text-transform: uppercase;
+    font-family: var(--docs-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin: 0 0 0.85rem;
 }
 .swatch-row {
     align-items: center;
@@ -1222,12 +1162,6 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     }
     .content-body {
         padding: 2rem 1.25rem;
-    }
-    .hero {
-        align-items: start;
-    }
-    .hero-glyph {
-        display: none;
     }
     .demo-grid {
         grid-template-columns: 1fr;
