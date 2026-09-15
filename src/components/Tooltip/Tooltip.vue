@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { TooltipProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { useMId } from '../../shared/useMId'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
+import { useMId } from '../../shared/useMId'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',

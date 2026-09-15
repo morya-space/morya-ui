@@ -1,6 +1,6 @@
+import type { Plugin } from 'vite'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import type { Plugin } from 'vite'
 import { parseYamlFrontmatter } from './parseFrontmatter.ts'
 
 export const COMPONENT_DOCS_MANIFEST_ID = 'virtual:component-docs-manifest'

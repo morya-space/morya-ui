@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T06:26:04.838Z",
+  "generatedAt": "2026-09-15T00:35:58.002Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 305,
+  "tokenCount": 303,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1027,16 +1027,6 @@
       "description": {
         "zh-CN": "组件专用相关变量：Confirmdialog Width",
         "en-US": "Component-specific token: Confirmdialog Width"
-      }
-    },
-    {
-      "name": "--m-confirmpopup-message-max-height",
-      "category": "component",
-      "source": "src/components/ConfirmPopup/styles.css",
-      "default": "min(12rem, 35vh)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Confirmpopup Message Max Height",
-        "en-US": "Component-specific token: Confirmpopup Message Max Height"
       }
     },
     {
@@ -2395,16 +2385,6 @@
       "description": {
         "zh-CN": "组件专用相关变量：Password Toggle Size",
         "en-US": "Component-specific token: Password Toggle Size"
-      }
-    },
-    {
-      "name": "--m-popover-max-height",
-      "category": "component",
-      "source": "src/components/Popover/styles.css",
-      "default": "min(18rem, 45vh)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Popover Max Height",
-        "en-US": "Component-specific token: Popover Max Height"
       }
     },
     {

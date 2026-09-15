@@ -17,8 +17,8 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 引入
 
 ```ts
-import { MTable, MTag } from 'morya-ui'
 import type { TableColumnDefinition, TableItem } from 'morya-ui'
+import { MTable, MTag } from 'morya-ui'
 ```
 
 ## 基础用法

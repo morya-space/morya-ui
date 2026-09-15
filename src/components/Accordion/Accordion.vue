@@ -1,22 +1,21 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { AccordionProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useControllable } from '../../shared/useControllable'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AccordionProps>(), {
   multiple: false,
   modelValue: undefined,
   defaultValue: undefined,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string | string[]): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 function resolveDefaultValue(): string | string[] {
   if (props.defaultValue !== undefined) return props.defaultValue

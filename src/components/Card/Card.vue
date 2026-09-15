@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { CardProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CardProps>(), {
   bordered: true,

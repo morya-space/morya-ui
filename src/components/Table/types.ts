@@ -156,7 +156,7 @@ export interface TableEmits {
   (event: 'update:filters', value: Record<string, unknown> | null): void
 }
 
-/** @internal Normalized render model. */
+/** @internal */
 export interface TableHeader {
   text: string
   value: string

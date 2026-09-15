@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { CSSProperties, StyleValue } from "vue";
+import type { CSSProperties } from "vue";
+import type { ScrollbarClassValue, ScrollbarInstance } from "../Scrollbar/types";
+import type { LayoutExpose, LayoutScrollEmits, LayoutSiderPlacement } from "./types";
 import { computed, inject, ref } from "vue";
 import MScrollbar from "../Scrollbar/Scrollbar.vue";
-import type { ScrollbarClassValue, ScrollbarInstance } from "../Scrollbar/types";
-import LayoutScrollContext from "./LayoutScrollContext.vue";
-import { M_LAYOUT_KEY } from "./context";
 import { useLayoutScroll } from "./composables/useLayoutScroll";
-import type { LayoutScrollEmits, LayoutExpose, LayoutSiderPlacement } from "./types";
+import { M_LAYOUT_KEY } from "./context";
+import LayoutScrollContext from "./LayoutScrollContext.vue";
 
 defineOptions({ name: "MLayoutScrollRegion", inheritAttrs: false });
 
@@ -76,7 +76,7 @@ defineExpose<LayoutExpose>({ scrollTo });
 <template>
   <MScrollbar
     ref="scrollbarRef"
-    :class="[scrollbarRootClass, 'm-scrollbar--fill']"
+    class="m-scrollbar--fill" :class="[scrollbarRootClass]"
     :wrap-class="wrapClass"
     :wrap-style="scrollStyle"
     :view-class="viewClassList"

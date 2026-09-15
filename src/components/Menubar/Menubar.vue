@@ -1,30 +1,29 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { MenubarItem, MenubarProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
+import { resolveMenuIcon } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import { resolveMenuIcon } from '../../shared/menu'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<MenubarProps>(), {
   selectedKey: null,
   teleport: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:selectedKey', value: string | null): void
   (event: 'select', item: MenubarItem): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const config = useMConfig()
 const locale = useMLocale()

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type {
   TreeCheckedKeys,
   TreeCheckStrategy,
@@ -9,9 +8,9 @@ import type {
   TreeProps,
   TreeSelectionKeys,
 } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, provide, reactive, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   buildChildMap,
@@ -23,6 +22,7 @@ import {
 } from './checkStrategy'
 import { M_TREE_KEY, M_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
+defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<TreeProps>(), {
   selectionMode: 'single',
   selectionKeys: () => ({}),
@@ -38,9 +38,6 @@ const props = withDefaults(defineProps<TreeProps>(), {
   lazy: false,
   draggable: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:selectionKeys', value: TreeSelectionKeys): void
   (event: 'update:modelValue', value: string | null): void
@@ -54,6 +51,9 @@ const emit = defineEmits<{
   (event: 'check', payload: { node: TreeNode; checkedKeys: TreeCheckedKeys }): void
   (event: 'node-drop', payload: { dragKey: string; dropKey: string; position: 'before' | 'after' | 'inside' }): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const slots = useSlots()
 const locale = useMLocale()
 provide(M_TREE_NODE_SLOT, slots.default)
@@ -421,7 +421,9 @@ provide(M_TREE_KEY, {
     </ul>
     <div v-else-if="isFilterEmpty" class="m-tree__message" role="status">
       <slot name="empty">
-        <p class="m-tree__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="m-tree__empty-text">
+          {{ resolvedEmptyMessage }}
+        </p>
       </slot>
     </div>
     <ul v-else ref="root" class="m-tree" role="tree" @keydown="onTreeKeydown" />

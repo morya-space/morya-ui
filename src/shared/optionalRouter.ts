@@ -1,5 +1,5 @@
 import type { Component } from 'vue'
-import { getCurrentInstance, toRaw } from 'vue'
+import { getCurrentInstance } from 'vue'
 
 /** Minimal route target when vue-router is not installed. */
 export type MRouteLocationRaw = string | Record<string, unknown>

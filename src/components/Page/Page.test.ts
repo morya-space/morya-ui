@@ -6,7 +6,7 @@ import MPageHeader from './PageHeader.vue'
 import MPageSection from './PageSection.vue'
 import MPageToolbar from './PageToolbar.vue'
 
-describe('MPageContent', () => {
+describe('mPageContent', () => {
   it('applies density and width modifiers', () => {
     const wrapper = mount(MPageContent, {
       props: { density: 'spacious', width: 'narrow' },
@@ -19,7 +19,7 @@ describe('MPageContent', () => {
   })
 })
 
-describe('MPageFilters', () => {
+describe('mPageFilters', () => {
   it('renders a labelled filter section', () => {
     const wrapper = mount(MPageFilters, {
       props: { ariaLabel: 'Filters' },
@@ -31,7 +31,7 @@ describe('MPageFilters', () => {
   })
 })
 
-describe('MPageToolbar', () => {
+describe('mPageToolbar', () => {
   it('renders title and actions slot', () => {
     const wrapper = mount(MPageToolbar, {
       props: { title: 'Users' },
@@ -42,7 +42,7 @@ describe('MPageToolbar', () => {
   })
 })
 
-describe('MPageHeader', () => {
+describe('mPageHeader', () => {
   it('renders title, description, and actions', () => {
     const wrapper = mount(MPageHeader, {
       props: { title: 'Create user', description: 'Fill in the form.' },
@@ -54,7 +54,7 @@ describe('MPageHeader', () => {
   })
 })
 
-describe('MPageSection', () => {
+describe('mPageSection', () => {
   it('applies form variant class', () => {
     const wrapper = mount(MPageSection, {
       props: { variant: 'form', title: 'Details' },

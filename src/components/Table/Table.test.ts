@@ -8,7 +8,7 @@ const columns = [
   { key: 'status', label: 'Status' },
 ]
 
-describe('MTable', () => {
+describe('mTable', () => {
   it('renders columns, row values, and cell slot', () => {
     const wrapper = mount(MTable, {
       props: {

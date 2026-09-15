@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ToolbarProps } from './types'
 import { useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ToolbarProps>()
 const attrs = useAttrs()

@@ -1,5 +1,5 @@
-import type { MAppendTo } from '../../shared/overlay'
 import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
+import type { MAppendTo } from '../../shared/overlay'
 import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 

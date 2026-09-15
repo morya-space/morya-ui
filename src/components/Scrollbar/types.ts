@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { CSSProperties, StyleValue } from 'vue'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type ScrollbarDirection = 'top' | 'bottom' | 'left' | 'right'
 

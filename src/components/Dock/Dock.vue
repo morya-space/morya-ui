@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { DockItem, DockProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs, useSlots } from 'vue'
 import { resolveMenuIcon } from '../../shared/menu'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DockProps>(), {
   model: () => [],
@@ -34,20 +34,20 @@ function iconOf(item: DockItem) {
       <slot v-if="slots.default" />
       <template v-else>
         <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="m-dock__item">
-        <button
-          type="button"
-          class="m-dock__button"
-          :title="item.label"
-          :aria-label="item.label"
-          :disabled="item.disabled"
-          @click="activate(item)"
-        >
-          <span class="m-dock__icon" aria-hidden="true">
-            <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
-            <template v-else>{{ item.label.slice(0, 1) }}</template>
-          </span>
-        </button>
-      </li>
+          <button
+            type="button"
+            class="m-dock__button"
+            :title="item.label"
+            :aria-label="item.label"
+            :disabled="item.disabled"
+            @click="activate(item)"
+          >
+            <span class="m-dock__icon" aria-hidden="true">
+              <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+              <template v-else>{{ item.label.slice(0, 1) }}</template>
+            </span>
+          </button>
+        </li>
       </template>
     </ul>
   </nav>

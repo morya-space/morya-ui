@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import ContextMenuNodes from './ContextMenuNodes.vue'
 
-describe('ContextMenuNodes', () => {
+describe('contextMenuNodes', () => {
   it('emits activate for leaf items', async () => {
     const wrapper = mount(ContextMenuNodes, {
       props: { items: [{ label: 'Copy' }, { label: 'Paste' }] },

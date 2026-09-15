@@ -15,8 +15,8 @@ import {
   watch
 } from 'vue'
 import { resolveGapCSSValue } from '../../shared/gap'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { parseResponsiveValue } from '../../shared/responsive'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { flattenVNodes } from '../../shared/vnode'
 import {  M_GRID_ITEM_FLAG, M_GRID_KEY } from './types'
 

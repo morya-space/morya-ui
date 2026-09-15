@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { VNode, VNodeChild } from 'vue'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { AvatarGroupProps, AvatarSize } from './types'
 import { Comment, computed, Fragment, Text, useAttrs, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = defineProps<AvatarGroupProps>()
 const attrs = useAttrs()

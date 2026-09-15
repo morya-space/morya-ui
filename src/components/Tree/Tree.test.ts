@@ -1,6 +1,5 @@
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount  } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
-import { flushPromises } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import MTree from './Tree.vue'
 

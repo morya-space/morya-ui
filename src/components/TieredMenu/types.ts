@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
 import type { FloatingOverlayPlacement } from '../../shared/overlayPlacement'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export interface TieredMenuItem {
   label?: string

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { PageToolbarProps } from './types'
 import { computed, useAttrs, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 
 defineOptions({ name: 'MPageToolbar', inheritAttrs: false })
 

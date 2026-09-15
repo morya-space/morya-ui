@@ -1,4 +1,4 @@
-﻿import { execFileSync, execSync } from 'node:child_process'
+import { execFileSync, execSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { formatChangelogBody, prepareUiRelease, readUiPackage, root } from './ui-changelog.mjs'

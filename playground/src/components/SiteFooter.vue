@@ -26,7 +26,7 @@ const contributingUrl = computed(() =>
   <footer class="site-footer">
     <div class="site-footer__inner">
       <RouterLink class="site-footer__brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-        <img class="site-footer__logo" :src="SITE_LOGO_URL" width="20" height="20" alt="" />
+        <img class="site-footer__logo" :src="SITE_LOGO_URL" width="20" height="20" alt="">
         <span>{{ SITE_NAME }}</span>
         <span class="site-footer__version">v{{ uiMeta.version }}</span>
       </RouterLink>

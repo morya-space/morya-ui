@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LayoutFooterProps } from "./types";
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from "vue";
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 
 defineOptions({ name: "MLayoutFooter", inheritAttrs: false });

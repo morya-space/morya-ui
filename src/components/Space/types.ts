@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { CSSProperties } from 'vue'
 import type { MFlexAlign, MFlexJustify, MGapSize } from '../../shared/gap'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type SpaceAlign = MFlexAlign
 export type SpaceJustify = MFlexJustify

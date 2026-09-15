@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { ConfirmDialogProps } from './types'
 import { computed, ref, toRef, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
@@ -10,9 +8,11 @@ import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   modelValue: false,
@@ -23,15 +23,14 @@ const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   blockScroll: true,
   teleport: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'accept'): void
   (event: 'reject'): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const config = useMConfig()
 const locale = useMLocale()

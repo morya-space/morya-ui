@@ -1,21 +1,20 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { TerminalEmits, TerminalProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import ScrollBody from '../../shared/ScrollBody.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TerminalProps>(), {
   welcomeMessage: 'Welcome to Morya UI Terminal',
   prompt: '>',
 })
+const emit = defineEmits<TerminalEmits>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
-
-const emit = defineEmits<TerminalEmits>()
 
 const locale = useMLocale()
 const draft = ref('')

@@ -11,7 +11,7 @@ describe('docsManifestPlugin', () => {
     const code = plugin.load(`\0${GUIDE_DOCS_MANIFEST_ID}`)
     expect(code).toBeTruthy()
 
-    const manifest = Function(`return ${code!.replace('export default ', '')}`)() as Record<
+    const manifest = new Function(`return ${code!.replace('export default ', '')}`)() as Record<
       string,
       Record<'zh-CN' | 'en-US', Record<string, string>>
     >

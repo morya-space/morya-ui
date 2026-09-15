@@ -157,7 +157,7 @@ function parseTypesFile(text) {
         pendingComment = ''
         continue
       }
-      const fm = raw.match(/^\s*(?:readonly\s+)?([A-Za-z_$][\w$]*)\s*\??\s*:\s*(.*)$/)
+      const fm = raw.match(/^\s*(?:readonly\s+)?([A-Za-z_$][\w$]*)\s*(?:\?\s*)?:\s*(.*)$/)
       if (fm) {
         let type = fm[2].replace(/;+\s*$/, '').trim()
         // 类型跨行续接：括号未平衡或以 | 结尾时向下合并
@@ -229,7 +229,7 @@ const KNOWN_GLOBAL_TYPES = new Set([
 /** 用本文件 export type 别名递归展开类型文本（深度受限，防循环）。 */
 function expandType(typeText, aliases, depth = 0, seen = new Set()) {
   if (depth > 5) return typeText
-  return typeText.replace(/\b[A-Za-z_$][\w$]*\b/g, (id) => {
+  return typeText.replace(/\b[A-Z_$][\w$]*\b/gi, (id) => {
     if (!aliases.has(id) || seen.has(id)) return id
     const next = new Set(seen)
     next.add(id)
@@ -248,7 +248,7 @@ function extractLiterals(text) {
 function interfaceExpansions(parsed) {
   const map = new Map()
   for (const [name, iface] of parsed.interfaces) {
-    if (/Emits$/.test(name) || !iface.fields.size) continue
+    if (name.endsWith('Emits') || !iface.fields.size) continue
     const body = [...iface.fields].map(([fname, f]) => `${fname}: ${f.type || 'unknown'}`).join('; ')
     map.set(name, { line: iface.line, type: `{ ${body} }` })
   }
@@ -264,7 +264,7 @@ function checkTypeMismatch(docTypeRaw, implTypeRaw, parsed, expandMap) {
   if (!docType || docType === '—' || docType === '-' || docType === '–') return null
   const expanded = expandType(implTypeRaw, expandMap)
   // 已知全局类型与本文件类型名置空后仍有大写标识符 → 含未解析引用（如跨文件 import），跳过
-  const scrubbed = expanded.replace(/\b[A-Za-z_$][\w$]*\b/g, (id) =>
+  const scrubbed = expanded.replace(/\b[A-Z_$][\w$]*\b/gi, (id) =>
     KNOWN_GLOBAL_TYPES.has(id) || parsed.typeNames.has(id) ? ' ' : id,
   )
   if (/\b[A-Z][\w$]*/.test(scrubbed)) return null
@@ -294,7 +294,7 @@ function checkTypeMismatch(docTypeRaw, implTypeRaw, parsed, expandMap) {
     array: /\[\s*\]|\barray\s*</i,
     function: /=>|\bfunction\b/i,
     Date: /\bdate\b/i,
-    object: /\bobject\b|\brecord\s*<|\bCSSProperties\b|\bVNode\b|\{\s*[A-Za-z_'"]/i,
+    object: /\bobject\b|\brecord\s*<|\bCSSProperties\b|\bVNode\b|\{\s*[A-Z_'"]/i,
   }
   const missingPrim = []
   for (const [label, re] of docPrimPatterns) {
@@ -416,7 +416,7 @@ function parseDoc(text, compName) {
           const slotName = sm[1] ?? sm[2]
           // 向前找最近的未自闭合组件标签，仅当属于本组件时归属
           const prefix = codeText.slice(0, sm.index)
-          const tagRe = /<([A-Z][\w]*)\b[^>]*?(\/?)>/g
+          const tagRe = /<([A-Z]\w*)\b[^>]*?(\/?)>/g
           let tm
           let owner = null
           while ((tm = tagRe.exec(prefix))) {
@@ -488,11 +488,11 @@ function parseVueFile(text) {
       const body = text.slice(open + 1, close)
       const baseLine = lineOf(text, open)
       body.split(/\r?\n/).forEach((l, k) => {
-        const fm = l.match(/^\s*(?:readonly\s+)?([A-Za-z_$][\w$]*)\s*\??\s*:/)
+        const fm = l.match(/^\s*(?:readonly\s+)?([A-Za-z_$][\w$]*)\s*(?:\?\s*)?:/)
         if (fm && !l.trim().startsWith('(')) inlineProps.set(fm[1], { line: baseLine + k })
       })
     } else {
-      const nm = rest.match(/^([A-Za-z_$][\w$]*)\s*>/)
+      const nm = rest.match(/^([A-Z_$][\w$]*)\s*>/i)
       if (nm) propTypeRefs.push(nm[1])
     }
   }
@@ -510,7 +510,7 @@ function parseVueFile(text) {
       let ev
       while ((ev = evRe.exec(body))) inlineEmits.push({ name: ev[1], line: baseLine + lineOf(body, ev.index) - 1 })
     } else {
-      const nm = rest.match(/^([A-Za-z_$][\w$]*)\s*>/)
+      const nm = rest.match(/^([A-Z_$][\w$]*)\s*>/i)
       if (nm) emitTypeRefs.push(nm[1])
       const arr = rest.match(/^\(\s*\[([^\]]*)\]/)
       if (arr) {
@@ -634,7 +634,7 @@ function analyzeComponent(dir) {
   const implProps = new Map() // name -> { loc, type, internal }
   const propsIfaceRe = new RegExp(`^${escapeRegExp(name)}\\w*Props$`)
   for (const [ifaceName, iface] of parsed.interfaces) {
-    if (!propsIfaceRe.test(ifaceName) || /SlotProps$/.test(ifaceName)) continue
+    if (!propsIfaceRe.test(ifaceName) || ifaceName.endsWith('SlotProps')) continue
     for (const [fieldName, field] of iface.fields) {
       if (!implProps.has(fieldName)) {
         implProps.set(fieldName, {
@@ -648,7 +648,7 @@ function analyzeComponent(dir) {
   for (const pv of allVueParsed.values()) {
     for (const ref of pv.propTypeRefs) {
       const iface = parsed.interfaces.get(ref)
-      if (!iface || propsIfaceRe.test(ref) || /SlotProps$/.test(ref)) continue
+      if (!iface || propsIfaceRe.test(ref) || ref.endsWith('SlotProps')) continue
       for (const [fieldName, field] of iface.fields) {
         if (!implProps.has(fieldName)) {
           implProps.set(fieldName, { loc: `types.ts:${field.line}`, type: field.type, internal: false })
@@ -790,7 +790,7 @@ function escDocCell(text) {
 
 function formatDocType(type) {
   if (!type) return '—'
-  const withoutDefault = type.replace(/=\s*[^;]+;?\s*$/, '').trim()
+  const withoutDefault = type.replace(/=[^;]+(?:;\s*)?$/, '').trim()
   const compact = withoutDefault.replace(/\s+/g, ' ').trim()
   if (compact.length > 96) return `${compact.slice(0, 93)}...`
   return compact
@@ -819,8 +819,8 @@ function sectionHeadingRe(sectionKind) {
 }
 
 function sectionInsertBeforeRe(sectionKind) {
-  if (sectionKind === 'props') return /^#{2,4}\s+.*(events|emits|slots)/i
-  if (sectionKind === 'events') return /^#{2,4}\s+.*slots/i
+  if (sectionKind === 'props') return /^#{2,4}\s+(?:\S.*)?(events|emits|slots)/i
+  if (sectionKind === 'events') return /^#{2,4}\s+(?:\S.*)?slots/i
   return null
 }
 
@@ -860,7 +860,7 @@ function appendRowsToSection(lines, sectionStart, sectionKind, rows) {
   let i = sectionStart + 1
   while (i < lines.length && !/^#{2,4}\s+/.test(lines[i])) {
     const trimmed = lines[i].trim()
-    if (/^无/.test(trimmed) || /^none\b/i.test(trimmed)) {
+    if (trimmed.startsWith('无') || /^none\b/i.test(trimmed)) {
       lines.splice(i, 1, ...sectionBlock(sectionKind, rows).slice(3))
       return rows.length
     }

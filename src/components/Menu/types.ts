@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
-import type { MAppendTo } from '../../shared/overlay'
 import type { MRouteLocationRaw } from '../../shared/optionalRouter'
+import type { MAppendTo } from '../../shared/overlay'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export interface MenuItem {
   key?: string

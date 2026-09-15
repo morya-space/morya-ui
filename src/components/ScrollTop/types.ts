@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { MAppendTo } from '../../shared/overlay'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type ScrollTopTarget = 'window' | 'parent'
 

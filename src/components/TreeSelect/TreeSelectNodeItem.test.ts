@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
-describe('TreeSelectNodeItem', () => {
+describe('treeSelectNodeItem', () => {
   it('emits select for leaf nodes', async () => {
     const wrapper = mount(TreeSelectNodeItem, {
       props: {

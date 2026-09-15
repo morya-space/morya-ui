@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TreeSelectNode } from './types'
 import type { VNode } from 'vue'
+import type { TreeSelectNode } from './types'
 import { useMLocale } from '../../locale'
 import MCheckbox from '../Checkbox/Checkbox.vue'
 import MIcon from '../Icon/Icon.vue'
@@ -67,7 +67,9 @@ const locale = useMLocale()
         @click="$emit('select', node)"
       >
         <component :is="() => renderOption?.(node)" v-if="renderOption" />
-        <template v-else>{{ node.label }}</template>
+        <template v-else>
+          {{ node.label }}
+        </template>
       </button>
     </div>
     <ul v-if="node.children?.length && expanded[node.key]" role="group">
@@ -85,8 +87,7 @@ const locale = useMLocale()
         @toggle="$emit('toggle', $event)"
         @select="$emit('select', $event)"
         @check="$emit('check', $event)"
-      >
-      </TreeSelectNodeItem>
+      />
     </ul>
   </li>
 </template>

@@ -1,4 +1,5 @@
-import { computed, ref, type Ref } from 'vue'
+import type {Ref} from 'vue';
+import { computed, ref  } from 'vue'
 
 export interface UseControllableOptions<T> {
   /** Current controlled value; `undefined` means uncontrolled. */

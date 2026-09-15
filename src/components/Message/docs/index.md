@@ -21,7 +21,7 @@ description: 顶部居中浮层提示，支持 API 调用。
 ## 引入
 
 ```ts
-import { message, useMessage, MMessage } from 'morya-ui'
+import { message, MMessage, useMessage } from 'morya-ui'
 ```
 
 ## API
@@ -30,7 +30,7 @@ import { message, useMessage, MMessage } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, MButton } from 'morya-ui'
+import { MButton, message } from 'morya-ui'
 </script>
 
 <template>
@@ -53,7 +53,7 @@ import { message, MButton } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, MButton, MIcon } from 'morya-ui'
+import { MButton, message, MIcon } from 'morya-ui'
 import { h } from 'vue'
 
 function showVNode() {

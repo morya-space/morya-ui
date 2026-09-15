@@ -3,11 +3,11 @@ import type { CascadeSelectOption, CascadeSelectProps, CascadeSelectValue } from
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
-import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 

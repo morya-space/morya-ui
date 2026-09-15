@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ContextMenuItem } from './types'
 import { ref } from 'vue'
-import MIcon from '../Icon/Icon.vue'
-import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
-import ContextMenuNodes from './ContextMenuNodes.vue'
-import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import FlyoutSubmenu from '../../shared/FlyoutSubmenu.vue'
+import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
+import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import ContextMenuNodes from './ContextMenuNodes.vue'
 
 const props = defineProps<{ items: ContextMenuItem[] }>()
 const emit = defineEmits<{ (event: 'activate', item: ContextMenuItem): void }>()

@@ -18,7 +18,7 @@ import { MScrollTop } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { MScrollTop, MScrollbar } from 'morya-ui'
+import { MScrollbar, MScrollTop } from 'morya-ui'
 </script>
 
 <template>

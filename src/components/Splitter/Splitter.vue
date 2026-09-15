@@ -1,11 +1,10 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type {VNode} from 'vue';
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { SplitterProps, SplitterSize } from './types'
 import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import {
   clampPx,
   detectSizeMode,
@@ -13,16 +12,13 @@ import {
   pxToSize,
   sizeToFlexBasis,
 } from './size'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SplitterProps>(), {
   defaultSize: 50,
   disabled: false,
   resizeTriggerSize: 6,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:size', value: SplitterSize): void
   (event: 'resize', value: SplitterSize): void
@@ -30,6 +26,9 @@ const emit = defineEmits<{
   (event: 'drag-move', eventPayload: Event): void
   (event: 'drag-end', eventPayload: Event): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const locale = useMLocale()
 const slots = useSlots()

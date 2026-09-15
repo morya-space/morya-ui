@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ContextMenuItem, ContextMenuPosition, ContextMenuProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import ContextMenuNodes from './ContextMenuNodes.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import ContextMenuNodes from './ContextMenuNodes.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<Omit<ContextMenuProps, 'modelValue' | 'position'>>(), {
   teleport: true,

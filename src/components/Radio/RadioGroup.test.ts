@@ -4,7 +4,7 @@ import { h } from 'vue'
 import MRadio from './Radio.vue'
 import MRadioGroup from './RadioGroup.vue'
 
-describe('RadioGroup', () => {
+describe('radioGroup', () => {
   it('exposes radiogroup role and propagates disabled state', () => {
     const wrapper = mount(MRadioGroup, {
       props: { disabled: true, invalid: true },

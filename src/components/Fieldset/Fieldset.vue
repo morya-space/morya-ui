@@ -1,25 +1,24 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { FieldsetProps } from './types'
 import { useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { useControllable } from '../../shared/useControllable'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FieldsetProps>(), {
   toggleable: false,
   defaultCollapsed: false,
   collapsed: undefined,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const contentId = useMId()
 

@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { CSSProperties } from "vue";
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type LayoutPosition = "static" | "absolute";
 export type LayoutSiderPlacement = "left" | "right";

@@ -11,7 +11,8 @@ description: 水平菜单，子项按多列面板展示。
 ## 引入
 
 ```ts
-import { MMegaMenu, type MegaMenuItem } from 'morya-ui'
+import type {MegaMenuItem} from 'morya-ui';
+import {  MMegaMenu } from 'morya-ui'
 ```
 
 ## 基础用法

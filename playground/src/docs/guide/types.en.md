@@ -23,7 +23,7 @@ Common keys: `class`, `style`, `data-*`, `onClick` / `onKeydown`, and valid nati
 Single-root containers (Card, Dialog backdrop, Tabs, …):
 
 ```ts
-type RootPassThrough = {
+interface RootPassThrough {
   root?: PassThroughPart
 }
 ```
@@ -33,7 +33,7 @@ type RootPassThrough = {
 Checkbox / Radio / Switch (visible `<label>` root + hidden input):
 
 ```ts
-type ControlPassThrough = {
+interface ControlPassThrough {
   root?: PassThroughPart   // usually the label
   input?: PassThroughPart  // native input
 }
@@ -44,7 +44,7 @@ type ControlPassThrough = {
 Form fields (Input, Select, DatePicker, …):
 
 ```ts
-type FieldPassThrough = {
+interface FieldPassThrough {
   root?: PassThroughPart    // outer .m-*-field
   label?: PassThroughPart
   control?: PassThroughPart // trigger / composite control

@@ -11,7 +11,7 @@ Context menu that opens at the pointer position. Nested `items` are supported. `
 ## Import
 
 ```ts
-import { useContextMenu, MContextMenu } from 'morya-ui'
+import { MContextMenu, useContextMenu } from 'morya-ui'
 ```
 
 ## Basic
@@ -43,7 +43,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, MContextMenu } from 'morya-ui'
+import { MContextMenu, useContextMenu } from 'morya-ui'
 
 const menu = useContextMenu()
 const model = [

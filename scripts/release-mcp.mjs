@@ -1,4 +1,4 @@
-﻿import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { git, run } from './release-steps.mjs'

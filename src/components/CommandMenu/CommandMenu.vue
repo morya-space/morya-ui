@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { CommandMenuItem, CommandMenuProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, ref, toRef, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
-import { resolveOverlayTeleport } from '../../shared/overlay'
 import { resolveMenuIcon } from '../../shared/menu'
+import { resolveOverlayTeleport } from '../../shared/overlay'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
   model: () => [],
@@ -18,12 +18,11 @@ const props = withDefaults(defineProps<CommandMenuProps>(), {
   teleport: true,
 })
 
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
 const locale = useMLocale()
@@ -101,7 +100,7 @@ watch(filtered, () => {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <Transition name="m-fade">
-      <div v-bind="rootAttrs" v-if="modelValue" class="m-commandmenu-backdrop" @click.self="close">
+      <div v-if="modelValue" v-bind="rootAttrs" class="m-commandmenu-backdrop" @click.self="close">
         <div
           ref="panelRef"
           class="m-commandmenu"

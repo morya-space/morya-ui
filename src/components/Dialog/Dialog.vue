@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { DialogProps } from './types'
 import { computed, ref, toRef, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
@@ -10,9 +8,11 @@ import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
@@ -24,9 +24,6 @@ const props = withDefaults(defineProps<DialogProps>(), {
   teleport: true,
   blockScroll: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'close'): void
@@ -35,6 +32,9 @@ const emit = defineEmits<{
   (event: 'maximize'): void
   (event: 'unmaximize'): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const slots = useSlots()
 const config = useMConfig()
 const locale = useMLocale()

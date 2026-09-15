@@ -1,9 +1,9 @@
+import type { TreeContext } from './context'
+import type { TreeNode } from './types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { h, provide, ref } from 'vue'
 import { M_TREE_KEY } from './context'
-import type { TreeContext } from './context'
-import type { TreeNode } from './types'
 import TreeNodeItem from './TreeNodeItem.vue'
 
 const node: TreeNode = { key: '1', label: 'Docs', children: [{ key: '1-1', label: 'Readme' }] }
@@ -49,7 +49,7 @@ function mountNode(overrides: Partial<Parameters<typeof mount>[1]> = {}) {
   return mount(Host, overrides)
 }
 
-describe('TreeNodeItem', () => {
+describe('treeNodeItem', () => {
   it('renders expanded node with children', () => {
     const wrapper = mountNode()
     expect(wrapper.get('.m-tree__label').text()).toBe('Docs')

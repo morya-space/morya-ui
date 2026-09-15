@@ -3,7 +3,7 @@
  * Keeps only components with non-obvious attrs placement documented in that section.
  * Run: node scripts/remove-generic-attrs-docs.mjs
  */
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 

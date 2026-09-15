@@ -2,11 +2,11 @@
 import type { MFormFieldRegistration } from './context'
 import type { FormProps, FormValidateTrigger } from './types'
 import { computed, provide, reactive, ref, toRaw, useAttrs, watch } from 'vue'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { resolveSizeClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import {
-  M_FORM_KEY,
   M_FORM_ERRORS_KEY,
+  M_FORM_KEY,
 } from './context'
 
 defineOptions({ inheritAttrs: false })

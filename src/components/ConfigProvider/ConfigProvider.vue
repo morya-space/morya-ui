@@ -1,17 +1,16 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
-import type { RootPassThrough } from '../../shared/passThrough'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { MGlobalConfig } from '../../shared/config'
-import { applyTheme, getPreferredTheme } from '../../theme'
+import type { RootPassThrough } from '../../shared/passThrough'
 import { computed, inject, onBeforeUnmount, toValue, useAttrs, watch } from 'vue'
 import {
+  M_CONFIG_KEY,
   mergeMConfig,
   provideMConfig,
-  M_CONFIG_KEY,
 } from '../../shared/config'
-import { applyDensity, applyReducedMotionPolicy } from '../../theme'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { applyDensity, applyReducedMotionPolicy, applyTheme, getPreferredTheme  } from '../../theme'
+defineOptions({ inheritAttrs: false })
 
 const props = defineProps<{
   /** Global defaults for descendant Morya UI components. */

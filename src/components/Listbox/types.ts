@@ -1,3 +1,6 @@
+import type { RootPassThrough } from '../../shared/passThrough'
+import type { MSizeInput } from '../../shared/types'
+
 export type ListboxValue = string | number
 
 export interface ListboxOption {
@@ -5,9 +8,6 @@ export interface ListboxOption {
   value: ListboxValue
   disabled?: boolean
 }
-
-import type { RootPassThrough } from '../../shared/passThrough'
-import type { MSizeInput } from '../../shared/types'
 
 export interface ListboxProps {
   modelValue?: ListboxValue | ListboxValue[]

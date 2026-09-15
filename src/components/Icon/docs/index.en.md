@@ -164,8 +164,8 @@ When system icons are not enough, do not pile SVGs into the component library. M
 
 ```vue
 <script setup lang="ts">
-import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
 import { User } from 'lucide-vue-next'
+import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
 </script>
 
 <template>

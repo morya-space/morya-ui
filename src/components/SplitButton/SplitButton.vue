@@ -1,18 +1,18 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { SplitButtonItem, SplitButtonProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
-import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { resolveIconSizeFromClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
-import { isIconName } from '../Icon/icons'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
+import { isIconName } from '../Icon/icons'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
   model: () => [],
@@ -21,13 +21,12 @@ const props = withDefaults(defineProps<SplitButtonProps>(), {
   teleport: true,
 })
 
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'click', value: MouseEvent): void
   (event: 'command', item: SplitButtonItem): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
 const locale = useMLocale()

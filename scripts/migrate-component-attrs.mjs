@@ -3,7 +3,7 @@
  * Run: node scripts/migrate-component-attrs.mjs
  */
 import { readFile, writeFile } from 'node:fs/promises'
-import { join, dirname } from 'node:path'
+import { dirname, join } from 'node:path'
 
 const ROOT = new URL('../src/components', import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')
 
@@ -187,7 +187,7 @@ function injectAttrsSetup(src, composable, field = false) {
     return src
   }
 
-  const propsMatch = src.match(/const props = (withDefaults\(defineProps[^)]+\([^)]*\)[^)]*\)|defineProps[^;]+;)/)
+  const propsMatch = src.match(/const props = (withDefaults\(defineProps[^)][^()]*\([^)]*\)[^)]*\)|defineProps[^;]+;)/)
   if (propsMatch) {
     const insertAt = propsMatch.index + propsMatch[0].length
     const block = `\nconst attrs = useAttrs()\n${destructuring}\n`
@@ -213,7 +213,7 @@ function addRootBind(src) {
   const template = src.slice(templateIdx)
 
   // Prefer :class="rootClass"
-  let m = template.match(/(<[a-z][a-z0-9-]*)(\s[^>]*?:class="rootClass")/i)
+  const m = template.match(/(<[a-z][a-z0-9-]*)(\s[^>]*?:class="rootClass")/i)
   if (m && !m[0].includes('v-bind="rootAttrs"')) {
     const replaced = template.replace(m[0], `${m[1]} v-bind="rootAttrs"${m[2]}`)
     return src.slice(0, templateIdx) + replaced
@@ -253,7 +253,7 @@ function migrateConfigProviderTypes(src) {
     )
   }
   return src.replace(
-    /(globalDensity\?: boolean\n)(\}\>\(\))/,
+    /(globalDensity\?: boolean\n)(\}>\(\))/,
     `$1  pt?: RootPassThrough\n$2`,
   )
 }

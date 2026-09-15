@@ -1,5 +1,5 @@
-import type { ScrollbarInstance } from "../../Scrollbar/types";
 import type { ShallowRef } from "vue";
+import type { ScrollbarInstance } from "../../Scrollbar/types";
 import type { LayoutExpose, LayoutScrollEmits } from "../types";
 
 type LayoutScrollTarget = HTMLElement | ScrollbarInstance | null | undefined;

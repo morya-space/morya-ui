@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ProgressSpinnerProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
   strokeWidth: '2',
@@ -66,7 +66,7 @@ const sizeClass = computed(() => ({
 </script>
 
 <template>
-  <div v-bind="rootAttrs" v-if="wrapping" class="m-progress-spinner-wrap" :class="{ 'm-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
+  <div v-if="wrapping" v-bind="rootAttrs" class="m-progress-spinner-wrap" :class="{ 'm-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
     <div class="m-progress-spinner-wrap__content" :inert="visible || undefined">
       <slot />
     </div>

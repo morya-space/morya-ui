@@ -1,5 +1,5 @@
 import type { ConfirmDialogProps } from './types'
-import { createVNode, ref, render } from 'vue'
+import { createVNode, render } from 'vue'
 import { getMOverlayAppContext } from '../../shared/overlayHost'
 import MConfirmDialog from './ConfirmDialog.vue'
 

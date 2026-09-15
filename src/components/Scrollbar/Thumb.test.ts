@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import MScrollbar from './Scrollbar.vue'
 import Thumb from './Thumb.vue'
 
-describe('Thumb', () => {
+describe('thumb', () => {
   it('renders thumb elements inside Scrollbar when always visible', async () => {
     const wrapper = mount(MScrollbar, {
       props: { height: 120, always: true },

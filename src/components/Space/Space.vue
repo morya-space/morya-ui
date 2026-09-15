@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type {CSSProperties} from 'vue';
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { SpaceProps } from './types'
 import { Comment, computed, useAttrs, useSlots } from 'vue'
 import { useConfiguredGapSize } from '../../shared/config'
@@ -12,7 +10,9 @@ import {
   resolveGap,
   resolveJustify,
 } from '../../shared/gap'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { flattenVNodes } from '../../shared/vnode'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SpaceProps>(), {
   align: 'center',

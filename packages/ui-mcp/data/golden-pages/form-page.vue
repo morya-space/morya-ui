@@ -54,7 +54,7 @@ async function onSubmit() {
 <template>
   <MConfigProvider :locale="zhCN">
     <MLayout fill-viewport>
-      <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
+      <MLayoutHeader padding="var(--m-space-4) var(--m-space-6)">
         <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理', to: '/users' }, { label: '新建用户' }]" />
       </MLayoutHeader>
 
@@ -90,8 +90,12 @@ async function onSubmit() {
 
               <MPageSection variant="actions">
                 <MSpace>
-                  <MButton native-type="submit" severity="primary" :loading="submitting">保存</MButton>
-                  <MButton severity="secondary">取消</MButton>
+                  <MButton native-type="submit" severity="primary" :loading="submitting">
+                    保存
+                  </MButton>
+                  <MButton severity="secondary">
+                    取消
+                  </MButton>
                 </MSpace>
               </MPageSection>
             </MForm>

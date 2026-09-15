@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ButtonGroupProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ButtonGroupProps>(), {
   fluid: false,

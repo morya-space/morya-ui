@@ -3,7 +3,7 @@
  * Links in Props/Events tables resolve to <h4 id="TypeName"> anchors.
  * Run: node scripts/sync-component-doc-type-sections.mjs
  */
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 

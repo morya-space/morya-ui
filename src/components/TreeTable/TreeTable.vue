@@ -1,19 +1,19 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { TreeTableEmits, TreeTableNode, TreeTableProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
-import TreeTableRow from './TreeTableRow.vue'
 import ScrollBody from '../../shared/ScrollBody.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import TreeTableRow from './TreeTableRow.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = defineProps<TreeTableProps>()
 
+const emit = defineEmits<TreeTableEmits>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
-const emit = defineEmits<TreeTableEmits>()
 const slots = useSlots()
 
 const locale = useMLocale()
@@ -70,7 +70,9 @@ function toggle(node: TreeTableNode) {
     </table>
     <div v-if="!value.length" class="m-treetable__message" role="status">
       <slot name="empty">
-        <p class="m-treetable__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="m-treetable__empty-text">
+          {{ resolvedEmptyMessage }}
+        </p>
       </slot>
     </div>
   </ScrollBody>

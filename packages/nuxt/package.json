@@ -33,11 +33,11 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {
-    "@nuxt/kit": "^3.16.0"
-  },
   "peerDependencies": {
     "morya-ui": "^0.2.4",
     "nuxt": "^3.10.0"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.16.0"
   }
 }

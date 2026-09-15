@@ -9,10 +9,10 @@ import type {
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
-import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -451,6 +451,7 @@ onBeforeUnmount(() => {
       <Transition name="m-scale-fade">
         <div
           v-if="open"
+          :id="panelId"
           ref="panel"
           class="m-datepicker__panel"
           :class="{
@@ -458,7 +459,6 @@ onBeforeUnmount(() => {
             'm-datepicker__panel--with-shortcuts': shortcuts.length,
           }"
           :style="teleported ? panelStyle : undefined"
-          :id="panelId"
           role="dialog"
           :aria-label="locale.datePicker"
         >

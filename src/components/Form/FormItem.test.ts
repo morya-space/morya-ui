@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
 import MFormItem from './FormItem.vue'
 
-describe('FormItem', () => {
+describe('formItem', () => {
   it('renders label, help, and invalid state standalone', () => {
     const wrapper = mount(MFormItem, {
       props: { label: '名称', help: '可选', invalid: true, error: '格式错误' },

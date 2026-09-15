@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from "vue";
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutExpose, LayoutProps } from "./types";
 import { computed, provide, ref, useAttrs } from "vue";
 import { toCssLength } from "../../shared/responsive";
-import LayoutScrollRegion from "./LayoutScrollRegion.vue";
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { M_LAYOUT_KEY } from "./context";
+import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 
 defineOptions({ name: "MLayout", inheritAttrs: false });
 
@@ -16,12 +16,11 @@ const props = withDefaults(defineProps<LayoutProps>(), {
     siderPlacement: "left",
     fillViewport: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 provide(M_LAYOUT_KEY, {
     get hasSider() {

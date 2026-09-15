@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { MessageItem, MessageProps } from './types'
 import { computed, onBeforeUnmount, onMounted, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
@@ -10,6 +8,7 @@ import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { MRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 import {
   closeMessageItem,
@@ -20,6 +19,7 @@ import {
   trimMessagesToMax,
   unregisterMessageManualHost,
 } from './messageState'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<MessageProps>(), {
   teleport: true,

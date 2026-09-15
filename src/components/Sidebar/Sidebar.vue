@@ -1,12 +1,12 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { SidebarItem, SidebarProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import { resolveMenuIcon } from '../../shared/menu'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   model: () => [],

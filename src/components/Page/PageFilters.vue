@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { PageFiltersProps } from './types'
 import { useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 
 defineOptions({ name: 'MPageFilters', inheritAttrs: false })
 

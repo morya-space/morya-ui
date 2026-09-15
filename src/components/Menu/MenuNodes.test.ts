@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import MMenu from './Menu.vue'
 
-describe('MenuNodes', () => {
+describe('menuNodes', () => {
   it('activates leaf items and toggles nested groups', async () => {
     const wrapper = mount(MMenu, {
       props: {

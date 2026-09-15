@@ -34,9 +34,9 @@ pnpm add -D unplugin-vue-components
 ### 配置
 
 ```ts
+import { MoryaUIResolver } from 'morya-ui/resolver'
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
   modules: ['@morya-ui/nuxt'],
@@ -60,15 +60,15 @@ export default defineNuxtConfig({
 
 ```vue
 <!-- app.vue -->
+<script setup lang="ts">
+const theme = ref<'light' | 'dark'>('light')
+</script>
+
 <template>
   <MConfigProvider :theme="theme" density="comfortable">
     <NuxtPage />
   </MConfigProvider>
 </template>
-
-<script setup lang="ts">
-const theme = ref<'light' | 'dark'>('light')
-</script>
 ```
 
 按需导入时无需 `app.use(MoryaUI)`；若需全量注册，可在 `plugins/morya-ui.client.ts` 中 `nuxtApp.vueApp.use(MoryaUI)`。
@@ -119,10 +119,10 @@ import 'morya-ui/styles.css'
 ## Vite SSR（含自定义服务端）
 
 ```ts
+import { MConfigProvider } from 'morya-ui/config-provider'
 // main.server.ts / entry-server.ts
 import { createSSRApp } from 'vue'
 import App from './App.vue'
-import { MConfigProvider } from 'morya-ui/config-provider'
 import 'morya-ui/styles.css'
 
 export function createApp() {

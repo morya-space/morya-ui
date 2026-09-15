@@ -4,12 +4,14 @@ import type { TreeSelectNode, TreeSelectProps, TreeSelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
-import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
-import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import { useMId } from '../../shared/useMId'
+import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import {
   expandCheckedKeys,
   findNode,
@@ -19,8 +21,6 @@ import {
   syncAncestors,
 } from '../Tree/checkStrategy'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
-import MIcon from '../Icon/Icon.vue'
-import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -360,121 +360,121 @@ onBeforeUnmount(() => {
         },
       ]"
     >
-    <div
-      class="m-treeselect__control m-select__control"
-      :class="{
-        'm-select__control--clearable': showClearButton,
-        'm-select__control--open': open,
-      }"
-    >
       <div
-        v-bind="controlAttrs"
-        :id="fieldId"
-        ref="trigger"
-        class="m-treeselect__trigger"
-        role="combobox"
-        :tabindex="disabled ? -1 : 0"
-        :aria-disabled="disabled || undefined"
-        :aria-expanded="open"
-        :aria-controls="open ? panelId : undefined"
-        :aria-invalid="isInvalid || undefined"
-        :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
-        aria-haspopup="tree"
-        @click="toggle"
-        @keydown="onTriggerKeydown"
+        class="m-treeselect__control m-select__control"
+        :class="{
+          'm-select__control--clearable': showClearButton,
+          'm-select__control--open': open,
+        }"
       >
-        <div v-if="isMultiple && selectedTags.length" class="m-treeselect__tags">
-          <span v-for="tag in visibleTags" :key="tag.key" class="m-select__tag">
-            <span class="m-select__tag-label">{{ tag.label }}</span>
-            <button
-              type="button"
-              class="m-select__tag-remove"
-              :aria-label="locale.removeTag"
-              :disabled="disabled"
-              @click.stop="removeTag(tag.key)"
-            >
-              <MIcon name="close" size="sm" />
-            </button>
-          </span>
-          <span v-if="hiddenTagCount" class="m-select__tag m-select__tag--more">
-            {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
-          </span>
-        </div>
-        <span
-          v-else-if="!(slots.value && selectedNode)"
-          class="m-treeselect__label"
-          :class="{ 'm-treeselect__label--placeholder': !selectedKeys.length }"
-        >
-          {{ displayLabel }}
-        </span>
-        <slot v-else name="value" :option="selectedNode" />
-      </div>
-      <div class="m-select__suffix">
-        <button
-          v-if="showClearButton"
-          class="m-select__clear"
-          type="button"
-          :aria-label="locale.clear"
-          @click="clear"
-        >
-          <MIcon name="close" class="m-control-affix-icon" />
-        </button>
-        <span
-          class="m-select__indicator"
-          :class="{ 'm-select__indicator--open': open }"
-          aria-hidden="true"
-        >
-          <MIcon name="chevron-down" class="m-control-affix-icon" />
-        </span>
-      </div>
-    </div>
-    <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
         <div
-          v-if="open"
-          :id="panelId"
-          ref="panel"
-          class="m-treeselect__panel"
-          :class="{ 'm-treeselect__panel--teleported': teleported }"
-          :style="teleported ? panelStyle : undefined"
-          @keydown="onTreeKeydown"
+          v-bind="controlAttrs"
+          :id="fieldId"
+          ref="trigger"
+          class="m-treeselect__trigger"
+          role="combobox"
+          :tabindex="disabled ? -1 : 0"
+          :aria-disabled="disabled || undefined"
+          :aria-expanded="open"
+          :aria-controls="open ? panelId : undefined"
+          :aria-invalid="isInvalid || undefined"
+          :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
+          aria-haspopup="tree"
+          @click="toggle"
+          @keydown="onTriggerKeydown"
         >
-          <input
-            v-if="filterable"
-            v-model="query"
-            class="m-treeselect__filter"
-            type="search"
-            :placeholder="locale.searchPlaceholder"
-            @click.stop
-            @keydown="onFilterKeydown"
+          <div v-if="isMultiple && selectedTags.length" class="m-treeselect__tags">
+            <span v-for="tag in visibleTags" :key="tag.key" class="m-select__tag">
+              <span class="m-select__tag-label">{{ tag.label }}</span>
+              <button
+                type="button"
+                class="m-select__tag-remove"
+                :aria-label="locale.removeTag"
+                :disabled="disabled"
+                @click.stop="removeTag(tag.key)"
+              >
+                <MIcon name="close" size="sm" />
+              </button>
+            </span>
+            <span v-if="hiddenTagCount" class="m-select__tag m-select__tag--more">
+              {{ hiddenTagCount > 0 ? `+${hiddenTagCount}` : '' }}
+            </span>
+          </div>
+          <span
+            v-else-if="!(slots.value && selectedNode)"
+            class="m-treeselect__label"
+            :class="{ 'm-treeselect__label--placeholder': !selectedKeys.length }"
           >
-          <MScrollbar
-            class="m-treeselect__tree-scroll"
-            fit-content
-            wrap-class="m-treeselect__tree-wrap"
-            view-class="m-treeselect__tree-view"
-          >
-            <ul class="m-treeselect__tree" role="tree">
-              <TreeSelectNodeItem
-                v-for="node in filteredOptions"
-                :key="node.key"
-                :node="node"
-                :depth="0"
-                :selected-keys="selectedKeys"
-                :checked-keys="checkedKeys"
-                :expanded="expanded"
-                :show-checkbox="checkable"
-                :active-key="activeKey"
-                :render-option="renderOption"
-                @toggle="toggleExpand"
-                @select="select"
-                @check="toggleCheck"
-              />
-            </ul>
-          </MScrollbar>
+            {{ displayLabel }}
+          </span>
+          <slot v-else name="value" :option="selectedNode" />
         </div>
-      </Transition>
-    </Teleport>
+        <div class="m-select__suffix">
+          <button
+            v-if="showClearButton"
+            class="m-select__clear"
+            type="button"
+            :aria-label="locale.clear"
+            @click="clear"
+          >
+            <MIcon name="close" class="m-control-affix-icon" />
+          </button>
+          <span
+            class="m-select__indicator"
+            :class="{ 'm-select__indicator--open': open }"
+            aria-hidden="true"
+          >
+            <MIcon name="chevron-down" class="m-control-affix-icon" />
+          </span>
+        </div>
+      </div>
+      <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
+        <Transition name="m-scale-fade">
+          <div
+            v-if="open"
+            :id="panelId"
+            ref="panel"
+            class="m-treeselect__panel"
+            :class="{ 'm-treeselect__panel--teleported': teleported }"
+            :style="teleported ? panelStyle : undefined"
+            @keydown="onTreeKeydown"
+          >
+            <input
+              v-if="filterable"
+              v-model="query"
+              class="m-treeselect__filter"
+              type="search"
+              :placeholder="locale.searchPlaceholder"
+              @click.stop
+              @keydown="onFilterKeydown"
+            >
+            <MScrollbar
+              class="m-treeselect__tree-scroll"
+              fit-content
+              wrap-class="m-treeselect__tree-wrap"
+              view-class="m-treeselect__tree-view"
+            >
+              <ul class="m-treeselect__tree" role="tree">
+                <TreeSelectNodeItem
+                  v-for="node in filteredOptions"
+                  :key="node.key"
+                  :node="node"
+                  :depth="0"
+                  :selected-keys="selectedKeys"
+                  :checked-keys="checkedKeys"
+                  :expanded="expanded"
+                  :show-checkbox="checkable"
+                  :active-key="activeKey"
+                  :render-option="renderOption"
+                  @toggle="toggleExpand"
+                  @select="select"
+                  @check="toggleCheck"
+                />
+              </ul>
+            </MScrollbar>
+          </div>
+        </Transition>
+      </Teleport>
     </div>
     <span
       v-if="feedbackText"

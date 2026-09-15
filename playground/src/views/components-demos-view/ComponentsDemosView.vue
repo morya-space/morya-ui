@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type {MenuItem} from 'morya-ui';
 import type {Component} from 'vue';
-import  { MCard, MFlex, MMenu   } from 'morya-ui';
+import  { MFlex, MMenu   } from 'morya-ui';
 
 import {  computed, defineAsyncComponent, h, ref } from 'vue';
 

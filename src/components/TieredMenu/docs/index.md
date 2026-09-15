@@ -11,7 +11,8 @@ description: 带一层子菜单的垂直分层菜单。
 ## 引入
 
 ```ts
-import { MTieredMenu, type TieredMenuItem } from 'morya-ui'
+import type {TieredMenuItem} from 'morya-ui';
+import { MTieredMenu  } from 'morya-ui'
 ```
 
 ## 基础用法

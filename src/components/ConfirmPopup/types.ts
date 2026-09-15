@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { ButtonSeverity } from '../Button/types'
 import type { IconName } from '../Icon/types'
 

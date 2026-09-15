@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { PageSectionProps } from './types'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 
 defineOptions({ name: 'MPageSection', inheritAttrs: false })
 

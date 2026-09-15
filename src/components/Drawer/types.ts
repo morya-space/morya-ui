@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type DrawerPosition = 'left' | 'right' | 'top' | 'bottom'
 

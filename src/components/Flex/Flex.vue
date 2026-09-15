@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type {CSSProperties} from 'vue';
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { FlexProps } from './types'
 import { computed, useAttrs, useSlots } from 'vue'
 import { useConfiguredGapSize } from '../../shared/config'
@@ -12,7 +10,9 @@ import {
   resolveGap,
   resolveJustify,
 } from '../../shared/gap'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { flattenVNodes } from '../../shared/vnode'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FlexProps>(), {
   justify: 'start',
@@ -44,7 +44,7 @@ const rootStyle = computed((): CSSProperties | undefined => {
 </script>
 
 <template>
-  <div v-bind="rootAttrs" v-if="children.length" class="m-flex" role="none" :style="rootStyle">
+  <div v-if="children.length" v-bind="rootAttrs" class="m-flex" role="none" :style="rootStyle">
     <component :is="child" v-for="(child, index) in children" :key="index" />
   </div>
 </template>

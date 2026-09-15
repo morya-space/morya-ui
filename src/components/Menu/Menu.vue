@@ -1,10 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { MenuItem, MenuProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, provide, reactive, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
+import { getLastPointer } from '../../shared/lastPointer'
 import {
   collectExpandableKeys,
   collectTopLevelKeys,
@@ -12,13 +11,14 @@ import {
   menuHasDescendantKey,
   resolveMenuItemKey,
 } from '../../shared/menu'
-import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import { M_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
-import MScrollbar from '../Scrollbar/Scrollbar.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<MenuProps>(), {
   popup: false,
@@ -38,15 +38,14 @@ const props = withDefaults(defineProps<MenuProps>(), {
   teleport: true,
 })
 
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'update:selectedKey', value: string | null): void
   (event: 'update:expandedKeys', value: string[]): void
   (event: 'select', item: MenuItem): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const slots = useSlots()
 const config = useMConfig()
@@ -458,9 +457,9 @@ const popupPanelStyle = computed(() =>
         v-if="modelValue"
         ref="root"
         v-bind="rootAttrs"
-          :class="menuClass"
-          :style="teleported ? { ...menuStyle, ...popupStyle } : menuStyle"
-          role="menu"
+        :class="menuClass"
+        :style="teleported ? { ...menuStyle, ...popupStyle } : menuStyle"
+        role="menu"
         @keydown="onMenuKeydown"
       >
         <MScrollbar

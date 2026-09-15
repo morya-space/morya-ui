@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { DropdownItem } from './types'
 import { ref } from 'vue'
-import MIcon from '../Icon/Icon.vue'
-import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
-import DropdownNodes from './DropdownNodes.vue'
-import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import FlyoutSubmenu from '../../shared/FlyoutSubmenu.vue'
+import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
+import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import DropdownNodes from './DropdownNodes.vue'
 
 const props = defineProps<{
   items: DropdownItem[]

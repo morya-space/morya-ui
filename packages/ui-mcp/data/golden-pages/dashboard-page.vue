@@ -57,7 +57,7 @@ function statusLabel(s: string) {
 <template>
   <MConfigProvider :locale="zhCN">
     <MLayout fill-viewport>
-      <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
+      <MLayoutHeader padding="var(--m-space-4) var(--m-space-6)">
         <MBreadcrumb :model="[{ label: '首页' }, { label: '仪表盘' }]" />
       </MLayoutHeader>
 

@@ -11,7 +11,8 @@ Horizontal top navigation. Sub-links render in a **multi-column panel**—suited
 ## Import
 
 ```ts
-import { MMegaMenu, type MegaMenuItem } from 'morya-ui'
+import type {MegaMenuItem} from 'morya-ui';
+import {  MMegaMenu } from 'morya-ui'
 ```
 
 ## Basic usage

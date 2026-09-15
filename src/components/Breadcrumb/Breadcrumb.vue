@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { BreadcrumbItem, BreadcrumbProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: '/',

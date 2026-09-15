@@ -21,7 +21,7 @@ Vs [Toast](/components/Toast):
 ## Import
 
 ```ts
-import { message, useMessage, MMessage } from 'morya-ui'
+import { message, MMessage, useMessage } from 'morya-ui'
 ```
 
 ## API
@@ -30,7 +30,7 @@ The first call auto-mounts a floating host; no template component is required.
 
 ```vue preview
 <script setup lang="ts">
-import { message, MButton } from 'morya-ui'
+import { MButton, message } from 'morya-ui'
 </script>
 
 <template>
@@ -53,7 +53,7 @@ import { message, MButton } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { message, MButton, MIcon } from 'morya-ui'
+import { MButton, message, MIcon } from 'morya-ui'
 import { h } from 'vue'
 
 function showVNode() {

@@ -7,7 +7,7 @@ import MLayoutSider from './LayoutSider.vue'
 
 const siderStyles = readFileSync(resolve(import.meta.dirname, './styles.css'), 'utf8')
 
-describe('LayoutSider', () => {
+describe('layoutSider', () => {
   it('toggles collapsed via trigger in transform mode', async () => {
     const wrapper = mount(MLayoutSider, {
       props: {
@@ -50,13 +50,13 @@ describe('LayoutSider', () => {
 
   it('applies collapse opacity only on scrollbar root, not the inner wrap', () => {
     expect(siderStyles).toMatch(
-      /\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*0/s,
+      /\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*0/,
     )
     expect(siderStyles).toMatch(
-      /\.m-layout-sider--show-content\s*>\s*\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*1/s,
+      /\.m-layout-sider--show-content\s*>\s*\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*1/,
     )
     expect(siderStyles).not.toMatch(
-      /\.m-layout-sider__scroll,\s*\n\s*\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*0/s,
+      /\.m-layout-sider__scroll,[\t\v\f\r \xA0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]*\n\s*\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*0/,
     )
   })
 })

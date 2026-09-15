@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { InplaceEmits, InplaceProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InplaceProps>(), {
   modelValue: false,
@@ -11,11 +11,10 @@ const props = withDefaults(defineProps<InplaceProps>(), {
   closeOnEsc: true,
   dismissable: false,
 })
+const emit = defineEmits<InplaceEmits>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
-
-const emit = defineEmits<InplaceEmits>()
 
 const root = ref<HTMLElement | null>(null)
 const display = ref<HTMLElement | null>(null)

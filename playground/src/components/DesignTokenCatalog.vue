@@ -142,11 +142,21 @@ function formatVariants(variants?: Record<string, string>) {
         <table class="token-catalog__table">
           <thead>
             <tr>
-              <th scope="col">{{ t.tokenCatalogColumnToken }}</th>
-              <th scope="col">{{ t.tokenCatalogColumnPreview }}</th>
-              <th scope="col">{{ t.tokenCatalogColumnDefault }}</th>
-              <th scope="col">{{ t.tokenCatalogColumnDark }}</th>
-              <th scope="col">{{ t.tokenCatalogColumnUsage }}</th>
+              <th scope="col">
+                {{ t.tokenCatalogColumnToken }}
+              </th>
+              <th scope="col">
+                {{ t.tokenCatalogColumnPreview }}
+              </th>
+              <th scope="col">
+                {{ t.tokenCatalogColumnDefault }}
+              </th>
+              <th scope="col">
+                {{ t.tokenCatalogColumnDark }}
+              </th>
+              <th scope="col">
+                {{ t.tokenCatalogColumnUsage }}
+              </th>
             </tr>
           </thead>
           <tbody>

@@ -1,5 +1,5 @@
-import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
+import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 
 export type DropdownItemType = 'item' | 'group' | 'divider'

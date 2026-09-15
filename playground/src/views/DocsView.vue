@@ -5,8 +5,8 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
 import MobileSidebarShell from '../components/MobileSidebarShell.vue'
-import { guideDocExists, listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { SITE_LOGO_URL } from '../config/site'
+import { guideDocExists, listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { useDocsI18n } from '../i18n'
 
 const route = useRoute()
@@ -44,33 +44,33 @@ watch([activeSlug, lang], async () => {
       scroll-class="docs-scroll"
       body-class="docs-sidebar__body"
     >
-          <RouterLink class="docs-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-            <img
-              class="docs-brand__logo"
-              :src="SITE_LOGO_URL"
-              width="24"
-              height="24"
-              alt=""
-            />
-            <span>Morya UI</span>
-          </RouterLink>
-          <p class="docs-kicker">
-            DOCUMENTATION
-          </p>
-          <h1 class="docs-sidebar__title">
-            {{ t.docsTitle }}
-          </h1>
-          <nav class="docs-nav">
-            <RouterLink
-              v-for="item in guides"
-              :key="item.slug"
-              class="docs-nav__item"
-              :class="{ 'is-active': activeSlug === item.slug }"
-              :to="{ name: 'docs', params: { slug: item.slug } }"
-            >
-              <span>{{ t.guideTitles[item.slug] ?? item.title }}</span>
-            </RouterLink>
-          </nav>
+      <RouterLink class="docs-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
+        <img
+          class="docs-brand__logo"
+          :src="SITE_LOGO_URL"
+          width="24"
+          height="24"
+          alt=""
+        >
+        <span>Morya UI</span>
+      </RouterLink>
+      <p class="docs-kicker">
+        DOCUMENTATION
+      </p>
+      <h1 class="docs-sidebar__title">
+        {{ t.docsTitle }}
+      </h1>
+      <nav class="docs-nav">
+        <RouterLink
+          v-for="item in guides"
+          :key="item.slug"
+          class="docs-nav__item"
+          :class="{ 'is-active': activeSlug === item.slug }"
+          :to="{ name: 'docs', params: { slug: item.slug } }"
+        >
+          <span>{{ t.guideTitles[item.slug] ?? item.title }}</span>
+        </RouterLink>
+      </nav>
     </MobileSidebarShell>
 
     <main class="docs-main">

@@ -1,6 +1,6 @@
-﻿import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
+import { countCatalogResources, countCatalogResourceTemplates } from '../resources.js'
 import { createToolHandlers } from '../tools.js'
-import { countCatalogResourceTemplates, countCatalogResources } from '../resources.js'
 
 describe('@morya-ui/mcp resources', () => {
   const handlers = createToolHandlers()

@@ -3,11 +3,11 @@ import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } fr
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
-import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
-import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useFieldFeedback } from '../../shared/useFieldFeedback'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
@@ -211,64 +211,68 @@ const panelOpen = computed(() => open.value)
           @keydown="onKeydown"
           @focus="requestComplete(modelValue ?? '')"
         >
-      <span v-if="loading" class="m-autocomplete__spinner" aria-hidden="true" />
-      <button
-        v-else-if="showClear"
-        type="button"
-        class="m-autocomplete__clear"
-        :aria-label="locale.clearInput"
-        @click="clear"
-      >
-        <MIcon name="close" size="sm" />
-      </button>
-      <button
-        v-if="dropdown"
-        type="button"
-        class="m-autocomplete__dropdown"
-        :aria-label="locale.showSuggestions"
-        :disabled="disabled"
-        @click="toggleDropdown"
-      >
-        <MIcon name="chevron-down" size="sm" />
-      </button>
-    </div>
-    <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
-        <div
-          v-if="panelOpen"
-          ref="panel"
-          class="m-autocomplete__panel"
-          :class="{ 'm-autocomplete__panel--teleported': teleported }"
-          :style="teleported ? panelStyle : undefined"
+        <span v-if="loading" class="m-autocomplete__spinner" aria-hidden="true" />
+        <button
+          v-else-if="showClear"
+          type="button"
+          class="m-autocomplete__clear"
+          :aria-label="locale.clearInput"
+          @click="clear"
         >
-          <MScrollbar
-            tag="ul"
-            role="listbox"
-            class="m-autocomplete__panel-scroll"
-            fit-content
-            view-class="m-autocomplete__panel-list"
+          <MIcon name="close" size="sm" />
+        </button>
+        <button
+          v-if="dropdown"
+          type="button"
+          class="m-autocomplete__dropdown"
+          :aria-label="locale.showSuggestions"
+          :disabled="disabled"
+          @click="toggleDropdown"
+        >
+          <MIcon name="chevron-down" size="sm" />
+        </button>
+      </div>
+      <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
+        <Transition name="m-scale-fade">
+          <div
+            v-if="panelOpen"
+            ref="panel"
+            class="m-autocomplete__panel"
+            :class="{ 'm-autocomplete__panel--teleported': teleported }"
+            :style="teleported ? panelStyle : undefined"
           >
-            <li v-if="loading && !filtered.length" class="m-autocomplete__status">
-              {{ locale.loading }}
-            </li>
-            <li v-else-if="!filtered.length" class="m-autocomplete__status">
-              <slot name="empty">{{ resolvedEmptyMessage }}</slot>
-            </li>
-            <li
-              v-for="(item, index) in filtered"
-              :key="`${item.value}-${index}`"
-              class="m-autocomplete__item"
-              role="option"
-              :class="{ 'm-autocomplete__item--active': index === highlight }"
-              :aria-selected="index === highlight"
-              @mousedown.prevent="select(item)"
+            <MScrollbar
+              tag="ul"
+              role="listbox"
+              class="m-autocomplete__panel-scroll"
+              fit-content
+              view-class="m-autocomplete__panel-list"
             >
-              <slot name="item" :option="item">{{ item.label }}</slot>
-            </li>
-          </MScrollbar>
-        </div>
-      </Transition>
-    </Teleport>
+              <li v-if="loading && !filtered.length" class="m-autocomplete__status">
+                {{ locale.loading }}
+              </li>
+              <li v-else-if="!filtered.length" class="m-autocomplete__status">
+                <slot name="empty">
+                  {{ resolvedEmptyMessage }}
+                </slot>
+              </li>
+              <li
+                v-for="(item, index) in filtered"
+                :key="`${item.value}-${index}`"
+                class="m-autocomplete__item"
+                role="option"
+                :class="{ 'm-autocomplete__item--active': index === highlight }"
+                :aria-selected="index === highlight"
+                @mousedown.prevent="select(item)"
+              >
+                <slot name="item" :option="item">
+                  {{ item.label }}
+                </slot>
+              </li>
+            </MScrollbar>
+          </div>
+        </Transition>
+      </Teleport>
     </div>
     <span
       v-if="feedbackText"

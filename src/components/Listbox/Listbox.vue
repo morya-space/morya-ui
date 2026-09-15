@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
-import { computed, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useRootParts } from '../../shared/useComponentAttrs'
@@ -155,7 +155,9 @@ watch(keyboard.activeIndex, () => {
           @click="select(option)"
           @focus="keyboard.setActive(index)"
         >
-          <slot name="option" :option="option">{{ option.label }}</slot>
+          <slot name="option" :option="option">
+            {{ option.label }}
+          </slot>
         </button>
       </li>
       <li v-if="!filteredOptions.length" class="m-listbox__empty">

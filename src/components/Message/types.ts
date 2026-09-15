@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { MRenderable } from '../../shared/content'
 import type { MAppendTo } from '../../shared/overlay'
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MToastSeverity } from '../../shared/types'
 
 export type { MRenderable }

@@ -1,24 +1,24 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { GalleryImage, GalleryProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<GalleryProps>(), {
   activeIndex: 0,
 })
+const emit = defineEmits<{
+  (event: 'update:activeIndex', value: number): void
+}>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
-const emit = defineEmits<{
-  (event: 'update:activeIndex', value: number): void
-}>()
 const locale = useMLocale()
 
 function imageSrc(image: string | GalleryImage) {

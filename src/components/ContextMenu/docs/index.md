@@ -11,7 +11,7 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 ## 引入
 
 ```ts
-import { useContextMenu, MContextMenu } from 'morya-ui'
+import { MContextMenu, useContextMenu } from 'morya-ui'
 ```
 
 ## 基础用法
@@ -43,7 +43,7 @@ const model = [
 
 ```vue preview
 <script setup lang="ts">
-import { useContextMenu, MContextMenu } from 'morya-ui'
+import { MContextMenu, useContextMenu } from 'morya-ui'
 
 const menu = useContextMenu()
 const model = [

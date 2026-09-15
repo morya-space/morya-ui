@@ -11,7 +11,8 @@ Vertical menu with **one** submenu level on hover or click. Use `popup` for over
 ## Import
 
 ```ts
-import { MTieredMenu, type TieredMenuItem } from 'morya-ui'
+import type {TieredMenuItem} from 'morya-ui';
+import { MTieredMenu  } from 'morya-ui'
 ```
 
 ## Basic usage

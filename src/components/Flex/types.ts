@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { MFlexAlign, MFlexJustify, MGapSize } from '../../shared/gap'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export type FlexAlign = MFlexAlign
 export type FlexJustify = MFlexJustify

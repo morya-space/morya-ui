@@ -1,12 +1,12 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
-import { useFieldParts } from '../../shared/useComponentAttrs'
 import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useFieldParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 import { ajaxUpload } from './ajax'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
   mode: 'basic',
@@ -21,10 +21,6 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
   autoUpload: true,
   directory: false,
 })
-const attrs = useAttrs()
-const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'input' })
-
-
 const emit = defineEmits<{
   (event: 'select', files: File[]): void
   (event: 'exceed', files: File[]): void
@@ -38,6 +34,9 @@ const emit = defineEmits<{
   (event: 'error', file: FileUploadFile, error: Error): void
   (event: 'abort', file?: FileUploadFile): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'input' })
+
 
 let uidSeed = 0
 const inputRef = ref<HTMLInputElement | null>(null)
@@ -352,8 +351,9 @@ defineExpose({
       :accept="accept"
       :disabled="disabled"
       :webkitdirectory="directory || undefined"
+      v-bind="controlAttrs"
       @change="onChange"
-     v-bind="controlAttrs">
+    >
 
     <div
       v-if="drag && showTrigger"

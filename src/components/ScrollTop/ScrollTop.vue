@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ScrollTopProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ScrollTopProps>(), {
   threshold: 400,
@@ -112,7 +112,8 @@ watch(
 <template>
   <span ref="anchor" class="m-scrolltop-anchor" aria-hidden="true">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <button v-bind="rootAttrs"
+      <button
+        v-bind="rootAttrs"
         ref="root"
         type="button"
         :class="rootClass"

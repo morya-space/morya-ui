@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { MenuItem } from './types'
 import type { MRouteLocationRaw } from '../../shared/optionalRouter'
+import type { MenuItem } from './types'
 import { computed, inject } from 'vue'
-import MIcon from '../Icon/Icon.vue'
-import MPopover from '../Popover/Popover.vue'
-import MenuCollapsedTooltip from './MenuCollapsedTooltip.vue'
 import { resolveMenuIcon } from '../../shared/menu'
 import { isExternalRoute, resolveOptionalRouterLink, resolveRouteHref } from '../../shared/optionalRouter'
+import MIcon from '../Icon/Icon.vue'
+import MPopover from '../Popover/Popover.vue'
 import { M_MENU_KEY } from './context'
+import MenuCollapsedTooltip from './MenuCollapsedTooltip.vue'
 import MenuNodes from './MenuNodes.vue'
 
 const props = defineProps<{

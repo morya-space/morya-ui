@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { OrderListProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import ScrollBody from '../../shared/ScrollBody.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MIcon from '../Icon/Icon.vue'
-import ScrollBody from '../../shared/ScrollBody.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<OrderListProps>(), {
   modelValue: () => [],
@@ -15,13 +15,13 @@ const props = withDefaults(defineProps<OrderListProps>(), {
   dragdrop: true,
 })
 
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: unknown[]): void
   (event: 'reorder', value: unknown[]): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const locale = useMLocale()
 
 const resolvedEmptyMessage = computed(
@@ -212,7 +212,9 @@ function resetDrag() {
     </ScrollBody>
     <div v-else class="m-orderlist__message" role="status">
       <slot name="empty">
-        <p class="m-orderlist__empty-text">{{ resolvedEmptyMessage }}</p>
+        <p class="m-orderlist__empty-text">
+          {{ resolvedEmptyMessage }}
+        </p>
       </slot>
     </div>
   </div>

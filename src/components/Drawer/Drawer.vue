@@ -1,15 +1,15 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { DrawerProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, toRef, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   modelValue: false,
@@ -21,9 +21,6 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   blockScroll: true,
   teleport: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'close'): void
@@ -31,6 +28,8 @@ const emit = defineEmits<{
   (event: 'hide'): void
   (event: 'after-leave'): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
 const locale = useMLocale()

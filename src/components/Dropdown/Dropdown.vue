@@ -3,11 +3,11 @@ import type { DropdownItem, DropdownProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
-import DropdownNodes from './DropdownNodes.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import DropdownNodes from './DropdownNodes.vue'
 
 defineOptions({ inheritAttrs: false })
 

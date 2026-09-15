@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useRootParts } from '../../shared/useComponentAttrs'
-import { toCssLength } from '../../shared/responsive'
 import type { PagePlaceholderProps } from './types'
 import { computed, useAttrs } from 'vue'
+import { toCssLength } from '../../shared/responsive'
+import { useRootParts } from '../../shared/useComponentAttrs'
 
 defineOptions({ name: 'MPagePlaceholder', inheritAttrs: false })
 

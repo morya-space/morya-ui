@@ -17,14 +17,14 @@ description: 四角浮层通知，支持 API 与受控列表。
 ## 引入
 
 ```ts
-import { toast, useToast, MToast } from 'morya-ui'
+import { MToast, toast, useToast } from 'morya-ui'
 ```
 
 ## API
 
 ```vue preview
 <script setup lang="ts">
-import { toast, MButton } from 'morya-ui'
+import { MButton, toast } from 'morya-ui'
 </script>
 
 <template>
@@ -59,7 +59,7 @@ import { toast, MButton } from 'morya-ui'
 
 ```vue preview
 <script setup lang="ts">
-import { toast, MButton } from 'morya-ui'
+import { MButton, toast } from 'morya-ui'
 import { h } from 'vue'
 
 function showRich() {

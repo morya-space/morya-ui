@@ -9,8 +9,8 @@ import {
   SITE_NPM_URL,
 } from '../config/site'
 import { getUiPackageMeta } from '../docs/packageMeta'
-import SiteSearch from './SiteSearch.vue'
 import { useDocsI18n } from '../i18n'
+import SiteSearch from './SiteSearch.vue'
 
 const uiMeta = getUiPackageMeta()
 
@@ -31,7 +31,7 @@ const activeSection = computed(() => {
 <template>
   <header class="site-header">
     <RouterLink class="site-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-      <img class="site-brand__logo" :src="SITE_LOGO_URL" width="32" height="32" alt="" />
+      <img class="site-brand__logo" :src="SITE_LOGO_URL" width="32" height="32" alt="">
       <span class="site-brand__text">
         <span class="site-brand__name">{{ SITE_NAME }}</span>
         <span class="site-brand__version">v{{ uiMeta.version }}</span>

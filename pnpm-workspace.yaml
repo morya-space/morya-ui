@@ -3,10 +3,10 @@ shellEmulator: true
 
 trustPolicy: no-downgrade
 
+packages:
+  - .
+  - 'packages/*'
 peerDependencyRules:
   allowedVersions:
     '@nuxt/schema': '*'
 
-packages:
-  - .
-  - 'packages/*'

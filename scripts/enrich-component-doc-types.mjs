@@ -83,7 +83,7 @@ const TYPES = {
 }
 
 function fixBrokenPtRows(content) {
-  let out = content.replace(/\|\| `pt`/g, '\n| `pt`')
+  const out = content.replace(/\|\| `pt`/g, '\n| `pt`')
   const lines = out.split('\n')
   for (let i = 0; i < lines.length; i++) {
     if (!lines[i].startsWith('| `pt`')) continue

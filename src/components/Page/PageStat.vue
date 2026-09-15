@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import MCard from '../Card/Card.vue'
-import MIcon from '../Icon/Icon.vue'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { PageStatProps } from './types'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import MCard from '../Card/Card.vue'
+import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ name: 'MPageStat', inheritAttrs: false })
 
@@ -23,9 +23,15 @@ const trendClass = computed(() => [
   <MCard v-bind="rootAttrs" class="m-page-stat" :aria-label="label">
     <div class="m-page-stat__body">
       <div>
-        <p v-if="label" class="m-page-stat__label">{{ label }}</p>
-        <p v-if="value != null && value !== ''" class="m-page-stat__value">{{ value }}</p>
-        <p v-if="trend" :class="trendClass">{{ trend }}</p>
+        <p v-if="label" class="m-page-stat__label">
+          {{ label }}
+        </p>
+        <p v-if="value != null && value !== ''" class="m-page-stat__value">
+          {{ value }}
+        </p>
+        <p v-if="trend" :class="trendClass">
+          {{ trend }}
+        </p>
         <slot />
       </div>
       <MIcon

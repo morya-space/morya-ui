@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { MeterGroupProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<MeterGroupProps>(), {
   max: undefined,
@@ -41,7 +41,8 @@ const segments = computed(() =>
     </div>
     <ul class="m-metergroup__legend">
       <li v-for="(item, index) in value" :key="`${item.label}-${index}`" class="m-metergroup__legend-item">
-        <span class="m-metergroup__swatch"
+        <span
+          class="m-metergroup__swatch"
           :style="{ background: item.color ?? 'var(--m-color-primary)' }"
           aria-hidden="true"
         />

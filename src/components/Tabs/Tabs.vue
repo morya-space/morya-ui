@@ -1,29 +1,28 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
+import type { ScrollbarInstance } from '../Scrollbar/types'
 import type { TabItem, TabsProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
-import { useMId } from '../../shared/useMId'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
-import type { ScrollbarInstance } from '../Scrollbar/types'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',
   closable: false,
   addable: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
   (event: 'change', value: string): void
   (event: 'close', value: string): void
   (event: 'add'): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
 const tabsUid = useMId()
@@ -131,30 +130,30 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
           class="m-tabs__item"
           :class="{ 'm-tabs__item--active': activeValue === tab.value }"
         >
-            <button
-              :id="`m-tab-${tab.value}`"
-              class="m-tabs__tab"
-              :class="{ 'm-tabs__tab--active': activeValue === tab.value }"
-              type="button"
-              role="tab"
-              :aria-selected="activeValue === tab.value"
-              :aria-controls="`${tabsUid}-panel-${tab.value}`"
-              :disabled="tab.disabled"
-              @click="selectTab(tab.value)"
-              @keydown="onKeydown($event, index)"
-            >
-              {{ tab.label }}
-            </button>
-            <button
-              v-if="isClosable(tab)"
-              type="button"
-              class="m-tabs__close"
-              :aria-label="locale.closeTab"
-              :disabled="tab.disabled"
-              @click.stop="closeTab(tab)"
-            >
-              <MIcon name="close" size="sm" />
-            </button>
+          <button
+            :id="`m-tab-${tab.value}`"
+            class="m-tabs__tab"
+            :class="{ 'm-tabs__tab--active': activeValue === tab.value }"
+            type="button"
+            role="tab"
+            :aria-selected="activeValue === tab.value"
+            :aria-controls="`${tabsUid}-panel-${tab.value}`"
+            :disabled="tab.disabled"
+            @click="selectTab(tab.value)"
+            @keydown="onKeydown($event, index)"
+          >
+            {{ tab.label }}
+          </button>
+          <button
+            v-if="isClosable(tab)"
+            type="button"
+            class="m-tabs__close"
+            :aria-label="locale.closeTab"
+            :disabled="tab.disabled"
+            @click.stop="closeTab(tab)"
+          >
+            <MIcon name="close" size="sm" />
+          </button>
         </div>
       </MScrollbar>
       <button

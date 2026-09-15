@@ -2,8 +2,8 @@
  * Repair broken attrs migration (withDefaults split + import glitches).
  */
 import { readFile, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { readdir } from 'node:fs/promises'
+import { join } from 'node:path'
 
 const ROOT = new URL('../src/components', import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')
 
@@ -77,7 +77,7 @@ function ensureRootBind(src) {
   if (templateIdx === -1) return src
   const template = src.slice(templateIdx)
 
-  let m = template.match(/(<[a-z][a-z0-9-]*)(\s[^>]*?:class="rootClass")/i)
+  const m = template.match(/(<[a-z][a-z0-9-]*)(\s[^>]*?:class="rootClass")/i)
   if (m) {
     return src.slice(0, templateIdx) + template.replace(m[0], `${m[1]} v-bind="rootAttrs"${m[2]}`)
   }
@@ -100,7 +100,7 @@ function ensureTreeImport(src, filePath) {
   if (!filePath.endsWith('Tree.vue') || src.includes("from '../../shared/useComponentAttrs'")) {
     if (!src.includes("from '../../shared/useComponentAttrs'") && src.includes('useRootParts')) {
       // add import after types if missing
-      const typesEnd = src.match(/} from '\.\/types'\n/)
+      const typesEnd = src.match(/\} from '\.\/types'\n/)
       if (typesEnd) {
         src = src.replace(
           typesEnd[0],

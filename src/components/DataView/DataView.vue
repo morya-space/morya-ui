@@ -1,12 +1,12 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { DataViewEmits, DataViewProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MPagination from '../Pagination/Pagination.vue'
 import MProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DataViewProps>(), {
   value: () => [],
@@ -19,10 +19,9 @@ const props = withDefaults(defineProps<DataViewProps>(), {
   pageSizes: () => [10, 20, 50, 100],
 })
 
+const emit = defineEmits<DataViewEmits>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-const emit = defineEmits<DataViewEmits>()
 
 const locale = useMLocale()
 const slots = useSlots()
@@ -101,7 +100,9 @@ watch(
 
       <div v-if="isEmpty && !loading" class="m-dataview__message" role="status">
         <slot name="empty">
-          <p class="m-dataview__empty-text">{{ resolvedEmptyMessage }}</p>
+          <p class="m-dataview__empty-text">
+            {{ resolvedEmptyMessage }}
+          </p>
         </slot>
       </div>
     </div>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { PanelProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
-import { useMId } from '../../shared/useMId'
 import { useMLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useControllable } from '../../shared/useControllable'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PanelProps>(), {
   toggleable: false,
@@ -16,14 +16,13 @@ const props = withDefaults(defineProps<PanelProps>(), {
   collapsed: undefined,
   modelValue: undefined,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
   (event: 'update:modelValue', value: boolean): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const locale = useMLocale()
 const contentId = useMId()

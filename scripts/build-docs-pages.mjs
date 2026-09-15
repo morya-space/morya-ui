@@ -1,9 +1,9 @@
 #!/usr/bin/env node
+import { spawnSync } from 'node:child_process'
 /**
  * Build the docs site for GitHub Pages (subpath /morya-ui/) and add SPA 404 fallback.
  */
 import { copyFileSync } from 'node:fs'
-import { spawnSync } from 'node:child_process'
 
 process.env.GITHUB_PAGES = 'true'
 

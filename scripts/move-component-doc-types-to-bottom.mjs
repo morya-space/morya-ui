@@ -2,7 +2,7 @@
  * Move "## 类型" / "## Types" sections to the end of each component doc.
  * Run: node scripts/move-component-doc-types-to-bottom.mjs
  */
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type {CSSProperties, StyleValue} from 'vue';
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { ScrollbarDirection, ScrollbarEmits, ScrollbarProps } from './types'
 import { computed, nextTick, onActivated, onBeforeUnmount, onMounted, onUpdated, provide, reactive, ref, useAttrs, watch } from 'vue'
-import { scrollbarContextKey } from './constants'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { scrollbarContextKey } from './constants'
 import Thumb from './Thumb.vue'
 import { addUnit, GAP, isNumber, isObject } from './util'
 
@@ -26,11 +26,10 @@ const props = withDefaults(defineProps<ScrollbarProps>(), {
   tabindex: undefined,
   trigger: 'hover',
 })
+const emit = defineEmits<ScrollbarEmits>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
-
-const emit = defineEmits<ScrollbarEmits>()
 
 const scrollbarRef = ref<HTMLDivElement>()
 const wrapRef = ref<HTMLDivElement>()

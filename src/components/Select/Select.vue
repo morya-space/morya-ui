@@ -3,18 +3,14 @@ import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from '.
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
-import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
 defineOptions({ inheritAttrs: false })
-
-interface MenuOption extends SelectOption {
-  created?: boolean
-}
 
 const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: undefined,
@@ -32,6 +28,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   clearable: undefined,
   filter: undefined,
 })
+
 const emit = defineEmits<{
   (event: 'update:modelValue', value: SelectModelValue): void
   (event: 'change', value: SelectModelValue): void
@@ -41,6 +38,10 @@ const emit = defineEmits<{
   (event: 'search', query: string): void
   (event: 'create', option: SelectOption): void
 }>()
+
+interface MenuOption extends SelectOption {
+  created?: boolean
+}
 
 const slots = useSlots()
 const attrs = useAttrs()

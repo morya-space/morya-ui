@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
 import { computed, inject, onBeforeUnmount, useAttrs, watch } from 'vue'
+import { useMLocale } from '../../locale'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
-import { useMLocale } from '../../locale'
 import { M_FORM_ERRORS_KEY, M_FORM_KEY } from './context'
 import {
   evaluateFormRule,

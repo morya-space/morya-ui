@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { FluidProps } from './types'
 import { useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FluidProps>(), {
   as: 'div',

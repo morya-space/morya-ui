@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import MLayoutHeader from './LayoutHeader.vue'
 
-describe('LayoutHeader', () => {
+describe('layoutHeader', () => {
   it('renders slot content with bordered modifier by default', () => {
     const wrapper = mount(MLayoutHeader, {
       slots: { default: 'Top bar' },

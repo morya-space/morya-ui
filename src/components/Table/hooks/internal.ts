@@ -1,13 +1,13 @@
 import type { TableSortType } from '../types'
 
-export type ServerOptionsComputed = {
+export interface ServerOptionsComputed {
   page: number
   rowsPerPage: number
   sortBy: string | string[] | null
   sortType: TableSortType | TableSortType[] | null
 }
 
-export type HeaderForRender = {
+export interface HeaderForRender {
   text: string
   value: string
   sortable?: boolean
@@ -16,7 +16,7 @@ export type HeaderForRender = {
   width?: number
 }
 
-export type ClientSortOptions = {
+export interface ClientSortOptions {
   sortBy: string | string[]
   sortDesc: boolean | boolean[]
 }

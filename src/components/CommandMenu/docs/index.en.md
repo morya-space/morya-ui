@@ -11,7 +11,8 @@ Searchable command palette for running actions from `model`. Fits global shortcu
 ## Import
 
 ```ts
-import { MCommandMenu, type CommandMenuItem } from 'morya-ui'
+import type {CommandMenuItem} from 'morya-ui';
+import {  MCommandMenu } from 'morya-ui'
 ```
 
 ## Basic usage

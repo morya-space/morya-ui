@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ToastMessage, ToastProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, onBeforeUnmount, onMounted, useAttrs, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
@@ -10,6 +8,8 @@ import { plainTextOf } from '../../shared/content'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { MRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import MIcon from '../Icon/Icon.vue'
 import {
   closeToastItem,
   pauseToastLife,
@@ -19,16 +19,16 @@ import {
   trimToastsToMax,
   unregisterToastManualHost,
 } from './toastState'
-import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ToastProps>(), {
   teleport: true,
   auto: false,
 })
+const emit = defineEmits<{ (event: 'close', message: ToastMessage): void }>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
-const emit = defineEmits<{ (event: 'close', message: ToastMessage): void }>()
 const config = useMConfig()
 const locale = useMLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))

@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { MenuNodeBase } from '../../shared/menu'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export interface SidebarItem extends Omit<MenuNodeBase, 'label' | 'items'> {
   label: string

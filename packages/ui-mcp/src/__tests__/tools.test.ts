@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { createToolHandlers } from '../tools.js'
 
 function read<T>(result: { content: Array<{ text: string }> }): T {

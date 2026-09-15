@@ -10,9 +10,9 @@ import {
   useConfiguredSize,
   useConfiguredVariant,
 } from '../../shared/config'
+import { resolveIconSizeFromClass } from '../../shared/types'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
-import { resolveIconSizeFromClass } from '../../shared/types'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })

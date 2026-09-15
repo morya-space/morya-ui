@@ -1,23 +1,22 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { StepperProps, StepperStatus } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<StepperProps>(), {
   modelValue: 0,
   linear: false,
   vertical: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const activeIndex = computed(() => props.modelValue ?? 0)
 const isVertical = computed(() => props.vertical || props.orientation === 'vertical')

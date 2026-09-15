@@ -1,5 +1,6 @@
-import { ResourceTemplate, type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { Catalog, ComponentRecord, Locale } from './catalog.js'
+import {  ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { designRules } from './patterns.js'
 
 const DOC_LOCALES: Locale[] = ['zh-CN', 'en-US']

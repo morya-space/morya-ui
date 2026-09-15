@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { PaginationProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, useAttrs } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   modelValue: 1,
@@ -17,15 +17,15 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   showQuickJumper: false,
   simple: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
   (event: 'page', value: number): void
   (event: 'update:rows', value: number): void
   (event: 'update:pageSize', value: number): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const locale = useMLocale()
 const jumpDraft = ref('')
 const resolvedRows = computed(() => Math.max(1, props.pageSize ?? props.rows))

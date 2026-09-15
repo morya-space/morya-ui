@@ -4,7 +4,7 @@ import { h } from 'vue'
 import MGrid from './Grid.vue'
 import MGridItem from './GridItem.vue'
 
-describe('GridItem', () => {
+describe('gridItem', () => {
   it('spans columns inside a grid parent', async () => {
     const wrapper = mount(MGrid, {
       props: { cols: 12 },

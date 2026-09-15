@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { SkeletonProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
   shape: 'rectangle',
@@ -35,7 +35,7 @@ const itemStyle = computed(() => ({
 </script>
 
 <template>
-  <div v-bind="rootAttrs" v-if="count > 1" class="m-skeleton-repeat">
+  <div v-if="count > 1" v-bind="rootAttrs" class="m-skeleton-repeat">
     <div v-for="index in count" :key="index" :class="itemClass" :style="itemStyle" aria-hidden="true" />
   </div>
   <div v-else v-bind="rootAttrs" :class="itemClass" :style="itemStyle" aria-hidden="true" />

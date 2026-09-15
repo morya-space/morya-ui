@@ -3,8 +3,8 @@
  * Attrs behavior is documented in playground/src/docs/guide/attrs.md — do not add per-component boilerplate.
  */
 import { readFile, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { readdir } from 'node:fs/promises'
+import { join } from 'node:path'
 
 const ROOT = new URL('../src/components', import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')
 

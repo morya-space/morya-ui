@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { PopoverProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
-import { useMId } from '../../shared/useMId'
 import { useMConfig } from "../../shared/config";
 import {
     isOverlayTeleported,
     resolveOverlayTeleport,
 } from "../../shared/overlay";
 import { computeFloatingOverlayStyle } from "../../shared/overlayPlacement";
+import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMId } from '../../shared/useMId'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PopoverProps>(), {
     modelValue: false,
@@ -21,15 +21,14 @@ const props = withDefaults(defineProps<PopoverProps>(), {
     hideDelay: 200,
     teleport: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-;
 const emit = defineEmits<{
     (event: "update:modelValue", value: boolean): void;
     (event: "show"): void;
     (event: "hide"): void;
 }>();
-
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+;
 const config = useMConfig()
 const panelId = useMId()
 const root = ref<HTMLElement | null>(null)
@@ -191,44 +190,44 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <span
+    ref="root"
+    v-bind="rootAttrs"
+    class="m-popover"
+    @mouseenter="onTriggerEnter"
+    @mouseleave="onTriggerLeave"
+  >
     <span
-        ref="root"
-        v-bind="rootAttrs"
-        class="m-popover"
-        @mouseenter="onTriggerEnter"
-        @mouseleave="onTriggerLeave"
+      ref="trigger"
+      class="m-popover__trigger"
+      aria-haspopup="dialog"
+      :aria-expanded="modelValue"
+      :aria-controls="panelId"
+      @click="onTriggerClick"
+      @focusin="onTriggerFocus"
+      @focusout="onTriggerBlur"
     >
-        <span
-            ref="trigger"
-            class="m-popover__trigger"
-            aria-haspopup="dialog"
-            :aria-expanded="modelValue"
-            :aria-controls="panelId"
-            @click="onTriggerClick"
-            @focusin="onTriggerFocus"
-            @focusout="onTriggerBlur"
-        >
-            <slot />
-        </span>
-        <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-            <Transition name="m-popover">
-                <div
-                    v-if="modelValue"
-                    ref="panel"
-                    :id="panelId"
-                    class="m-popover__content"
-                    :class="[
-                        `m-popover__content--${placement}`,
-                        { 'm-popover__content--teleported': teleported },
-                    ]"
-                    :style="teleported ? panelStyle : undefined"
-                    role="dialog"
-                    @mouseenter="onPanelEnter"
-                    @mouseleave="onPanelLeave"
-                >
-                    <slot name="content" />
-                </div>
-            </Transition>
-        </Teleport>
+      <slot />
     </span>
+    <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
+      <Transition name="m-popover">
+        <div
+          v-if="modelValue"
+          :id="panelId"
+          ref="panel"
+          class="m-popover__content"
+          :class="[
+            `m-popover__content--${placement}`,
+            { 'm-popover__content--teleported': teleported },
+          ]"
+          :style="teleported ? panelStyle : undefined"
+          role="dialog"
+          @mouseenter="onPanelEnter"
+          @mouseleave="onPanelLeave"
+        >
+          <slot name="content" />
+        </div>
+      </Transition>
+    </Teleport>
+  </span>
 </template>

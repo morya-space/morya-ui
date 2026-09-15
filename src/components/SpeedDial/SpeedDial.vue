@@ -1,17 +1,18 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
+import type {FloatingOverlayPlacement} from '../../shared/overlayPlacement';
 import type { SpeedDialItem, SpeedDialProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
-import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
-import { useMId } from '../../shared/useMId'
-import { computeFloatingOverlayStyle, type FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 import { resolveMenuIcon } from '../../shared/menu'
+import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
+import { computeFloatingOverlayStyle  } from '../../shared/overlayPlacement'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
   model: () => [],
@@ -21,13 +22,12 @@ const props = withDefaults(defineProps<SpeedDialProps>(), {
   teleport: true,
 })
 
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'item-click', item: SpeedDialItem): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
 const locale = useMLocale()

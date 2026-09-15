@@ -11,7 +11,8 @@ description: 可搜索的命令面板对话框。
 ## 引入
 
 ```ts
-import { MCommandMenu, type CommandMenuItem } from 'morya-ui'
+import type {CommandMenuItem} from 'morya-ui';
+import {  MCommandMenu } from 'morya-ui'
 ```
 
 ## 基础用法

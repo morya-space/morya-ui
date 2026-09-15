@@ -57,7 +57,7 @@ const rows = [
       </MLayoutSider>
 
       <MLayout>
-        <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
+        <MLayoutHeader padding="var(--m-space-4) var(--m-space-6)">
           <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
         </MLayoutHeader>
 
@@ -73,14 +73,20 @@ const rows = [
                   clearable
                   style="width: 10rem"
                 />
-                <MButton severity="primary">查询</MButton>
-                <MButton severity="secondary">重置</MButton>
+                <MButton severity="primary">
+                  查询
+                </MButton>
+                <MButton severity="secondary">
+                  重置
+                </MButton>
               </MSpace>
             </MPageFilters>
 
             <MPageToolbar title="用户管理">
               <template #actions>
-                <MButton severity="primary">新建用户</MButton>
+                <MButton severity="primary">
+                  新建用户
+                </MButton>
               </template>
             </MPageToolbar>
 
@@ -99,8 +105,12 @@ const rows = [
               </template>
               <template #cell-actions>
                 <MSpace>
-                  <MButton severity="secondary" size="small">编辑</MButton>
-                  <MButton severity="danger" size="small">删除</MButton>
+                  <MButton severity="secondary" size="small">
+                    编辑
+                  </MButton>
+                  <MButton severity="danger" size="small">
+                    删除
+                  </MButton>
                 </MSpace>
               </template>
               <template #empty>

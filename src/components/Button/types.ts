@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { ButtonHTMLAttributes, Component } from 'vue'
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { IconName } from '../Icon/types'
 
 /** Color tone aligned with `severity`. Omit for primary. */

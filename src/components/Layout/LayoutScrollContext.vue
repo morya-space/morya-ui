@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { LayoutSiderPlacement } from "./types";
 import { provide } from "vue";
 import { M_LAYOUT_KEY } from "./context";
-import type { LayoutSiderPlacement } from "./types";
 
 const props = defineProps<{
   hasSider: boolean;

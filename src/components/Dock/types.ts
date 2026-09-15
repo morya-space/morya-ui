@@ -1,5 +1,5 @@
-import type { RootPassThrough } from '../../shared/passThrough'
 import type { MenuNodeBase } from '../../shared/menu'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export interface DockItem extends Omit<MenuNodeBase, 'label'> {
   label: string

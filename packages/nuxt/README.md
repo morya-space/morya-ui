@@ -18,9 +18,9 @@ pnpm add -D unplugin-vue-components
 ```
 
 ```ts
+import { MoryaUIResolver } from 'morya-ui/resolver'
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
   modules: ['@morya-ui/nuxt'],

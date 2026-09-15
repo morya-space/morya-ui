@@ -4,8 +4,8 @@ import { computed, useAttrs } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -92,7 +92,7 @@ function onSliderKeydown(event: KeyboardEvent) {
 
 <template>
   <div v-bind="rootAttrs" class="m-rating-field">
-    <label v-if="label" class="m-rating-field__label" :id="`${fieldId}-label`">{{ label }}</label>
+    <label v-if="label" :id="`${fieldId}-label`" class="m-rating-field__label">{{ label }}</label>
     <div
       v-bind="controlAttrs"
       :class="rootClass"
@@ -110,46 +110,46 @@ function onSliderKeydown(event: KeyboardEvent) {
       :tabindex="disabled || readonly ? -1 : 0"
       @keydown="onSliderKeydown"
     >
-    <button
-      v-if="canClear"
-      type="button"
-      class="m-rating__cancel"
-      :aria-label="locale.clearRating"
-      :disabled="disabled || readonly"
-      tabindex="-1"
-      @click="clearRating"
-    >
-      <MIcon name="close" size="sm" />
-    </button>
-    <button
-      v-for="star in starList"
-      :key="star"
-      type="button"
-      class="m-rating__star"
-      :class="{
-        'm-rating__star--on': starFill(star) === 1,
-        'm-rating__star--half': starFill(star) === 0.5,
-      }"
-      :aria-label="formatLocale(locale.star, { value: star })"
-      :disabled="disabled || readonly"
-      tabindex="-1"
-      aria-hidden="true"
-      @click="onStarClick(star, $event)"
-    >
-      <slot
-        name="icon"
-        :star="star"
-        :filled="starFill(star) === 1"
-        :half="starFill(star) === 0.5"
+      <button
+        v-if="canClear"
+        type="button"
+        class="m-rating__cancel"
+        :aria-label="locale.clearRating"
+        :disabled="disabled || readonly"
+        tabindex="-1"
+        @click="clearRating"
       >
-        <span class="m-rating__star-off" aria-hidden="true">
-          <MIcon name="star" size="lg" />
-        </span>
-        <span class="m-rating__star-on" aria-hidden="true">
-          <MIcon name="star" size="lg" />
-        </span>
-      </slot>
-    </button>
+        <MIcon name="close" size="sm" />
+      </button>
+      <button
+        v-for="star in starList"
+        :key="star"
+        type="button"
+        class="m-rating__star"
+        :class="{
+          'm-rating__star--on': starFill(star) === 1,
+          'm-rating__star--half': starFill(star) === 0.5,
+        }"
+        :aria-label="formatLocale(locale.star, { value: star })"
+        :disabled="disabled || readonly"
+        tabindex="-1"
+        aria-hidden="true"
+        @click="onStarClick(star, $event)"
+      >
+        <slot
+          name="icon"
+          :star="star"
+          :filled="starFill(star) === 1"
+          :half="starFill(star) === 0.5"
+        >
+          <span class="m-rating__star-off" aria-hidden="true">
+            <MIcon name="star" size="lg" />
+          </span>
+          <span class="m-rating__star-on" aria-hidden="true">
+            <MIcon name="star" size="lg" />
+          </span>
+        </slot>
+      </button>
     </div>
     <span
       v-if="feedbackText"

@@ -262,8 +262,8 @@ export type {
   InputPasswordEmits,
   InputPasswordProps,
   InputPasswordSlots,
-  PasswordStrength,
   MShowPasswordOn,
+  PasswordStrength,
 } from "./components/InputPassword/types";
 export { default as MInputTags } from "./components/InputTags/InputTags.vue";
 export type {
@@ -332,12 +332,6 @@ export type {
   OrderListEmits,
   OrderListProps,
 } from "./components/OrderList/types";
-export { default as MPagination } from "./components/Pagination/Pagination.vue";
-export type {
-  PaginationEmits,
-  PaginationInstance,
-  PaginationProps,
-} from "./components/Pagination/types";
 export { default as MPageContent } from "./components/Page/PageContent.vue";
 export { default as MPageFilters } from "./components/Page/PageFilters.vue";
 export { default as MPageHeader } from "./components/Page/PageHeader.vue";
@@ -358,6 +352,12 @@ export type {
   PageStatTrendSeverity,
   PageToolbarProps,
 } from "./components/Page/types";
+export { default as MPagination } from "./components/Pagination/Pagination.vue";
+export type {
+  PaginationEmits,
+  PaginationInstance,
+  PaginationProps,
+} from "./components/Pagination/types";
 export { default as MPanel } from "./components/Panel/Panel.vue";
 export type {
   PanelEmits,
@@ -600,12 +600,12 @@ export {
   getComponentDefaults,
   getDefaultMConfig,
   installMoryaUI,
+  M_CONFIG_KEY,
   mergeComponentDefaults,
   mergeMConfig,
-  provideMConfig,
-  M_CONFIG_KEY,
-  resolveConfiguredAppendTo,
   MoryaUI,
+  provideMConfig,
+  resolveConfiguredAppendTo,
   useComponentDefaults,
   useConfiguredGapSize,
   useConfiguredSize,

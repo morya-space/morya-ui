@@ -34,9 +34,9 @@ pnpm add -D unplugin-vue-components
 ### Config
 
 ```ts
+import { MoryaUIResolver } from 'morya-ui/resolver'
 // nuxt.config.ts
 import Components from 'unplugin-vue-components/vite'
-import { MoryaUIResolver } from 'morya-ui/resolver'
 
 export default defineNuxtConfig({
   modules: ['@morya-ui/nuxt'],
@@ -60,15 +60,15 @@ The module by default:
 
 ```vue
 <!-- app.vue -->
+<script setup lang="ts">
+const theme = ref<'light' | 'dark'>('light')
+</script>
+
 <template>
   <MConfigProvider :theme="theme" density="comfortable">
     <NuxtPage />
   </MConfigProvider>
 </template>
-
-<script setup lang="ts">
-const theme = ref<'light' | 'dark'>('light')
-</script>
 ```
 
 With on-demand imports you do not need `app.use(MoryaUI)`; for full registration, add a client plugin with `nuxtApp.vueApp.use(MoryaUI)`.

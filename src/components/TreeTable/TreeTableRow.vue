@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TreeTableColumn, TreeTableNode } from './types'
 import type { VNode } from 'vue'
+import type { TreeTableColumn, TreeTableNode } from './types'
 import { useMLocale } from '../../locale'
 import MIcon from '../Icon/Icon.vue'
 import TreeTableRow from './TreeTableRow.vue'

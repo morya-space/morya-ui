@@ -1,6 +1,6 @@
-import type { RootPassThrough } from '../../shared/passThrough'
-import type { MAppendTo } from '../../shared/overlay'
 import type { MenuNodeBase } from '../../shared/menu'
+import type { MAppendTo } from '../../shared/overlay'
+import type { RootPassThrough } from '../../shared/passThrough'
 
 export interface ContextMenuItem extends MenuNodeBase {
   items?: ContextMenuItem[]

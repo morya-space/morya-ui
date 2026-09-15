@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import MLayoutFooter from './LayoutFooter.vue'
 
-describe('LayoutFooter', () => {
+describe('layoutFooter', () => {
   it('renders footer slot without border by default', () => {
     const wrapper = mount(MLayoutFooter, {
       slots: { default: '© App' },

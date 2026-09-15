@@ -1,8 +1,8 @@
 import type { CommandMenuItem } from 'morya-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { listDocumentedComponents } from '../docs/loadComponentDocs'
 import { listGuideDocs } from '../docs/guide/loadGuideDocs'
+import { listDocumentedComponents } from '../docs/loadComponentDocs'
 import { useDocsI18n } from '../i18n'
 
 export function useSiteSearchItems() {

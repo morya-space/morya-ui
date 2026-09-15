@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { ConfirmPopupProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   modelValue: false,
@@ -19,15 +19,14 @@ const props = withDefaults(defineProps<ConfirmPopupProps>(), {
   placement: 'bottom',
   teleport: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
   (event: 'accept'): void
   (event: 'reject'): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const config = useMConfig()
 const locale = useMLocale()

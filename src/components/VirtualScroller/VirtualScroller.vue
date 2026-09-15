@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
-import type { VirtualScrollerProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { ScrollbarScrollPayload } from '../Scrollbar/types'
+import type { VirtualScrollerProps } from './types'
 import { computed, ref, useAttrs } from 'vue'
 import ScrollBody from '../../shared/ScrollBody.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<VirtualScrollerProps>(), {
   height: 240,

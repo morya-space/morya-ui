@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import MLayoutContent from './LayoutContent.vue'
 
-describe('LayoutContent', () => {
+describe('layoutContent', () => {
   it('renders main content region', () => {
     const wrapper = mount(MLayoutContent, {
       slots: { default: 'Page body' },

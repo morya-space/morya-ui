@@ -11,7 +11,7 @@ const roots = process.argv.slice(2).length ? process.argv.slice(2) : ['src']
 const IGNORE_DIRS = new Set(['node_modules', 'dist', 'coverage', 'design-tokens', 'theme', '.git'])
 const EXT = new Set(['.vue', '.css', '.scss', '.ts', '.tsx', '.js', '.jsx'])
 
-const HEX = /#[0-9a-fA-F]{3,8}\b/g
+const HEX = /#[0-9a-f]{3,8}\b/gi
 const RGB = /\brgb\s*\(/g
 const HSL = /\bhsl\s*\(/g
 

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { IconName } from '../Icon/types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
 import { computed, useAttrs } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TimelineProps>(), {
   align: 'left',

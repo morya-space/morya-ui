@@ -74,7 +74,7 @@ const MOVES = [
 
 async function removeRootBind(rel) {
   const path = join(ROOT, rel)
-  let src = await readFile(path, 'utf8')
+  const src = await readFile(path, 'utf8')
   const next = src.replace(/\s*v-bind="rootAttrs"/g, '')
   if (next !== src) {
     await writeFile(path, next, 'utf8')
@@ -186,7 +186,7 @@ async function fixLayoutImports() {
     const path = join(ROOT, rel)
     let src = await readFile(path, 'utf8')
     let changed = false
-    if (src.includes('useAttrs()') && !src.match(/import\s+\{[^}]*useAttrs/)) {
+    if (src.includes('useAttrs()') && !/import\s+\{[^}]*useAttrs/.test(src)) {
       src = src.replace(/from 'vue'/, (m) => {
         changed = true
         return m

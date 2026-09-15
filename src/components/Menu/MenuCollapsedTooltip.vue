@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MTooltip from '../Tooltip/Tooltip.vue'
 import { computed } from 'vue'
+import MTooltip from '../Tooltip/Tooltip.vue'
 
 const props = withDefaults(
   defineProps<{

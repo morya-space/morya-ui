@@ -50,12 +50,16 @@ const keyword = ref('')
       <MPageFilters aria-label="Filters">
         <MSpace wrap>
           <MInput v-model="keyword" placeholder="Search" clearable style="width:12rem" />
-          <MButton severity="primary">Search</MButton>
+          <MButton severity="primary">
+            Search
+          </MButton>
         </MSpace>
       </MPageFilters>
       <MPageToolbar title="Users">
         <template #actions>
-          <MButton severity="primary">Create</MButton>
+          <MButton severity="primary">
+            Create
+          </MButton>
         </template>
       </MPageToolbar>
     </MPageContent>

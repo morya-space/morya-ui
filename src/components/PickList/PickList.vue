@@ -1,25 +1,24 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { PickListProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
-import MIcon from '../Icon/Icon.vue'
 import ScrollBody from '../../shared/ScrollBody.vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PickListProps>(), {
   source: () => [],
   target: () => [],
 })
 
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:source', value: unknown[]): void
   (event: 'update:target', value: unknown[]): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const selectedSource = ref<Array<string | number>>([])
 const selectedTarget = ref<Array<string | number>>([])

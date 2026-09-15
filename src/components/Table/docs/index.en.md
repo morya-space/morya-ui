@@ -17,8 +17,8 @@ Column width rules:
 ## Import
 
 ```ts
-import { MTable, MTag } from 'morya-ui'
 import type { TableColumnDefinition, TableItem } from 'morya-ui'
+import { MTable, MTag } from 'morya-ui'
 ```
 
 ## Basic

@@ -1,4 +1,4 @@
-﻿import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
 
 export interface MoryaUINuxtOptions {
   /** Import `morya-ui/styles.css`. Default `true`. */

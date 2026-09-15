@@ -50,12 +50,16 @@ const keyword = ref('')
       <MPageFilters aria-label="筛选">
         <MSpace wrap>
           <MInput v-model="keyword" placeholder="搜索" clearable style="width:12rem" />
-          <MButton severity="primary">查询</MButton>
+          <MButton severity="primary">
+            查询
+          </MButton>
         </MSpace>
       </MPageFilters>
       <MPageToolbar title="用户管理">
         <template #actions>
-          <MButton severity="primary">新建</MButton>
+          <MButton severity="primary">
+            新建
+          </MButton>
         </template>
       </MPageToolbar>
     </MPageContent>
@@ -98,8 +102,12 @@ const name = ref('')
           </MFormItem>
           <MPageSection variant="actions">
             <MSpace>
-              <MButton native-type="submit" severity="primary">保存</MButton>
-              <MButton severity="secondary">取消</MButton>
+              <MButton native-type="submit" severity="primary">
+                保存
+              </MButton>
+              <MButton severity="secondary">
+                取消
+              </MButton>
             </MSpace>
           </MPageSection>
         </MForm>

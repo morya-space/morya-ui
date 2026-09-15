@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutContentProps, LayoutExpose } from "./types";
 import { computed, ref, useAttrs } from "vue";
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useLayoutRegionStyle } from "./composables/useLayoutRegionStyle";
 import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 
@@ -12,12 +12,11 @@ const props = withDefaults(defineProps<LayoutContentProps>(), {
     embedded: false,
     position: "static",
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
     (event: "scroll", eventPayload: Event): void;
 }>();
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const scrollRegionRef = ref<InstanceType<typeof LayoutScrollRegion>>();
 

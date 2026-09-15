@@ -1,5 +1,5 @@
-import type { IconName } from '../Icon/icons'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { IconName } from '../Icon/icons'
 
 export type PageContentDensity = 'default' | 'compact' | 'spacious'
 export type PageContentWidth = 'full' | 'narrow'

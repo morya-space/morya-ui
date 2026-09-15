@@ -1,4 +1,4 @@
-﻿export const SITE_NAME = 'Morya UI'
+export const SITE_NAME = 'Morya UI'
 export const SITE_PACKAGE = 'morya-ui'
 export const SITE_INSTALL_CMD = 'pnpm add morya-ui'
 export const SITE_LOGO_URL = `${import.meta.env.BASE_URL}logo.svg`

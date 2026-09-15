@@ -9,10 +9,10 @@ import {
   toKebab,
 } from './catalog.js'
 import { componentDecisions, findDecision, scoreDecision } from './decisions.js'
-import { findGoldenPage, listGoldenPages, readGoldenPageSource } from './golden-pages.js'
+import { listGoldenPages, readGoldenPageSource } from './golden-pages.js'
 import { filterPageSnippets, findPageSnippet, pageSnippets, scorePageSnippet } from './page-snippets.js'
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
-import { countCatalogResourceTemplates, countCatalogResources } from './resources.js'
+import { countCatalogResources, countCatalogResourceTemplates } from './resources.js'
 
 function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
   const pairedTagRe = /<MButton\b([^>]*)>([\s\S]*?)<\/MButton>/gi

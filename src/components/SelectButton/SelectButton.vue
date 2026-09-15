@@ -1,23 +1,22 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { SelectButtonOption, SelectButtonProps, SelectButtonValue } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, ref, useAttrs, watch } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectButtonProps>(), {
   multiple: false,
   disabled: false,
   invalid: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
   (event: 'update:modelValue', value: SelectButtonValue | SelectButtonValue[] | undefined): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const sizeClass = useConfiguredSize('SelectButton', () => props.size)
 

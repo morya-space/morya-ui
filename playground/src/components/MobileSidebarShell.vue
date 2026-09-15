@@ -62,7 +62,7 @@ function onPanelClick(event: MouseEvent) {
     </Transition>
 
     <aside
-      :class="['mobile-sidebar-shell__panel', attrs.class]"
+      class="mobile-sidebar-shell__panel" :class="[attrs.class]"
       :aria-label="title"
       :data-open="open ? 'true' : undefined"
     >

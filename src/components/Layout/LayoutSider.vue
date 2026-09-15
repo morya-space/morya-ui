@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { CSSProperties, StyleValue } from "vue";
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { LayoutExpose, LayoutSiderProps } from "./types";
 import { computed, inject, ref, useAttrs } from "vue";
 import { useMLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from "../Icon/Icon.vue";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
-import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 import { M_LAYOUT_KEY } from "./context";
+import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 import { resolveLayoutTrigger } from "./utils";
 
 defineOptions({ name: "MLayoutSider", inheritAttrs: false });
@@ -22,9 +22,6 @@ const props = withDefaults(defineProps<LayoutSiderProps>(), {
     showCollapsedContent: true,
     showTrigger: false,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
 const emit = defineEmits<{
     (event: "update:collapsed", value: boolean): void;
     (event: "collapse"): void;
@@ -33,6 +30,8 @@ const emit = defineEmits<{
     (event: "after-leave"): void;
     (event: "scroll", eventPayload: Event): void;
 }>();
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale();
 const layout = inject(M_LAYOUT_KEY, null);
@@ -153,7 +152,8 @@ defineExpose<LayoutExpose>({
 </script>
 
 <template>
-  <aside v-bind="rootAttrs"
+  <aside
+    v-bind="rootAttrs"
     :class="rootClass"
     :style="rootStyle"
     @transitionend="onTransitionEnd"

@@ -5,7 +5,7 @@ import { useMConfig } from './config'
 import { resolveOverlayTeleport } from './overlay'
 import { computeFloatingOverlayStyle } from './overlayPlacement'
 
-defineOptions({ inheritAttrs: false, name: 'MFlyoutSubmenu' })
+defineOptions({ name: 'MFlyoutSubmenu', inheritAttrs: false })
 
 const props = withDefaults(
   defineProps<{

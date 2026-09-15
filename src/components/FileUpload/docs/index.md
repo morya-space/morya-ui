@@ -213,11 +213,21 @@ const uploader = ref<{
   <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
     <MFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
-      <button type="button" @click="uploader?.openPicker()">选择文件</button>
-      <button type="button" @click="uploader?.submit()">提交队列</button>
-      <button type="button" @click="uploader?.abort()">取消上传</button>
-      <button type="button" @click="uploader?.clear()">清空</button>
-      <button type="button" @click="uploader?.clearFiles()">清空（别名）</button>
+      <button type="button" @click="uploader?.openPicker()">
+        选择文件
+      </button>
+      <button type="button" @click="uploader?.submit()">
+        提交队列
+      </button>
+      <button type="button" @click="uploader?.abort()">
+        取消上传
+      </button>
+      <button type="button" @click="uploader?.clear()">
+        清空
+      </button>
+      <button type="button" @click="uploader?.clearFiles()">
+        清空（别名）
+      </button>
     </div>
   </div>
 </template>

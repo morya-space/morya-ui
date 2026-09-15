@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRootParts } from '../../shared/useComponentAttrs'
 import type { PageHeaderProps } from './types'
 import { computed, useAttrs, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 
 defineOptions({ name: 'MPageHeader', inheritAttrs: false })
 

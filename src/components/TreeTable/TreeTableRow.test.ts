@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import TreeTableRow from './TreeTableRow.vue'
 
-describe('TreeTableRow', () => {
+describe('treeTableRow', () => {
   it('renders node data and toggler for branches', async () => {
     const wrapper = mount(TreeTableRow, {
       props: {

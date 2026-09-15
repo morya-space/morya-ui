@@ -23,7 +23,7 @@ type PassThroughPart = Record<string, unknown>
 单根容器（Card、Dialog 遮罩、Tabs 等）：
 
 ```ts
-type RootPassThrough = {
+interface RootPassThrough {
   root?: PassThroughPart
 }
 ```
@@ -33,7 +33,7 @@ type RootPassThrough = {
 Checkbox / Radio / Switch（可见根是 `<label>`，hidden input 单独一段）：
 
 ```ts
-type ControlPassThrough = {
+interface ControlPassThrough {
   root?: PassThroughPart   // 一般是 label
   input?: PassThroughPart  // 原生 input
 }
@@ -44,7 +44,7 @@ type ControlPassThrough = {
 表单字段（Input、Select、DatePicker 等）：
 
 ```ts
-type FieldPassThrough = {
+interface FieldPassThrough {
   root?: PassThroughPart    // 外层 .m-*-field
   label?: PassThroughPart
   control?: PassThroughPart // 触发器 / 组合控件（Select 等）

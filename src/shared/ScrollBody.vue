@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue";
-import { ref } from "vue";
-import MScrollbar from "../components/Scrollbar/Scrollbar.vue";
 import type {
     ScrollbarClassValue,
     ScrollbarInstance,
     ScrollbarScrollPayload,
 } from "../components/Scrollbar/types";
+import { ref } from "vue";
+import MScrollbar from "../components/Scrollbar/Scrollbar.vue";
 
-defineOptions({ inheritAttrs: false, name: "MScrollBody" });
+defineOptions({ name: "MScrollBody", inheritAttrs: false });
 
 withDefaults(
     defineProps<{
@@ -48,7 +48,7 @@ defineExpose({
 <template>
   <MScrollbar
     ref="scrollbarRef"
-    :class="[rootClass, 'm-scroll-body', 'm-scrollbar--fill']"
+    class="m-scroll-body m-scrollbar--fill" :class="[rootClass]"
     :wrap-class="wrapClass"
     :wrap-style="wrapStyle"
     :view-class="viewClass"

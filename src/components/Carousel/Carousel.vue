@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type { CarouselProps } from './types'
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   numVisible: 1,
@@ -15,13 +15,12 @@ const props = withDefaults(defineProps<CarouselProps>(), {
   showArrows: true,
   showIndicators: true,
 })
-const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-
 const emit = defineEmits<{
   (event: 'update:page', value: number): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 
 const innerPage = ref(0)
 const page = computed(() => props.page ?? innerPage.value)

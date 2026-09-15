@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-defineOptions({ inheritAttrs: false })
 import type {CheckboxGroupProps, CheckboxValue} from './types';
-import { useRootParts } from '../../shared/useComponentAttrs'
 import { computed, provide, useAttrs } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import {   M_CHECKBOX_GROUP_KEY } from './types'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   modelValue: () => [],
@@ -12,10 +12,9 @@ const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   invalid: false,
 })
 
+const emit = defineEmits<{ (event: 'update:modelValue', value: CheckboxValue[]): void }>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
-
-const emit = defineEmits<{ (event: 'update:modelValue', value: CheckboxValue[]): void }>()
 
 function toggle(value: CheckboxValue, checked: boolean) {
   if (props.disabled) return

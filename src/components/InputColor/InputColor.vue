@@ -4,8 +4,8 @@ import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useFieldParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
+import { useMId } from '../../shared/useMId'
 
 defineOptions({ inheritAttrs: false })
 

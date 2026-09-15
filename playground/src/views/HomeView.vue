@@ -2,6 +2,7 @@
 import { MButton, MScrollbar } from 'morya-ui'
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import SiteFooter from '../components/SiteFooter.vue'
 import {
   SITE_GITHUB_URL,
   SITE_INSTALL_CMD,
@@ -9,9 +10,8 @@ import {
   SITE_NAME,
   SITE_NPM_URL,
 } from '../config/site'
-import { copyText } from '../utils/copyText'
-import SiteFooter from '../components/SiteFooter.vue'
 import { useDocsI18n } from '../i18n'
+import { copyText } from '../utils/copyText'
 
 const { t } = useDocsI18n()
 const copied = ref(false)
@@ -53,7 +53,7 @@ async function copyInstall() {
   <MScrollbar class="home-scroll">
     <div class="home-page">
       <section class="home-hero">
-        <img class="home-logo" :src="SITE_LOGO_URL" width="96" height="96" alt="" />
+        <img class="home-logo" :src="SITE_LOGO_URL" width="96" height="96" alt="">
         <p class="home-kicker">
           {{ t.homeKicker }}
         </p>
