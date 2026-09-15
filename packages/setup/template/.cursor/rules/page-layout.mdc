@@ -1,0 +1,67 @@
+---
+description: 生成 Morya UI 业务页面（列表/表单/仪表盘）时的布局规范
+alwaysApply: false
+---
+
+# 页面布局（Agent Requested）
+
+生成完整页面时，先确定类型并 **复制黄金样例结构**：
+
+| 类型 | 模板 |
+| --- | --- |
+| 列表页 | `docs/golden-pages/list-page.vue` |
+| 表单页 | `docs/golden-pages/form-page.vue` |
+| 仪表盘 | `docs/golden-pages/dashboard-page.vue` |
+| 登录页 | `docs/golden-pages/login-page.vue` |
+| 营销落地 | `docs/golden-pages/landing-page.vue` |
+| 空状态 | `docs/golden-pages/empty-state.vue` |
+
+## 列表页区块顺序
+
+1. `MLayout fillViewport` + 可选 `MLayoutSider bordered`
+2. `MLayoutHeader` → `MBreadcrumb`
+3. `MLayoutContent` → `MPageContent`
+4. `MPageFilters`（内 `MSpace` + Input/Select + 查询/重置）
+5. `MPageToolbar`（标题 + `#actions` 主操作）
+6. `MTable`（直接放置，通常不必包 `MCard`）
+7. 分页由 `MTable paginator` 或同级 `MPagination`
+
+## 表单页区块顺序
+
+1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
+2. `MPageContent width="narrow"`
+3. `MPageHeader`（标题 + 说明）
+4. `MPageSection variant="form"` → `MForm`
+5. `MPageSection variant="actions"`：保存（primary）+ 取消（secondary）
+
+## 仪表盘区块顺序
+
+1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
+2. `MPageContent density="spacious"` → `MPageHeader`
+3. KPI：`MGrid` + `MPageStat`（4 列或响应式）
+4. 主区两栏：`MCard` + `MPagePlaceholder` / 最近列表 `MTable`
+
+## 页面标准
+
+推荐实践（非强制），完整列表见 MCP `get_design_rules` → `standards`：
+
+| 主题 | 推荐 | 通常不必 |
+| --- | --- | --- |
+| 骨架 | `MLayout fillViewport` + `MPageContent` | 手写 `min-height:100vh`；`MLayoutContent` 再写 padding |
+| 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-*`；`MCard` 再包一层 |
+| 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包 bordered 表格 |
+| 控件间距 | 同行用 `MSpace` / `MFlex`；区块靠 `MPageContent` gap | 外包 padded `div` 叠间距 |
+| 滚动 | 组件内置滚动壳用 `MScrollbar`；Dialog/Drawer 等内容留给业务 | 在用户内容区强行内置滚动 |
+| 颜色 | `--m-*` Token | 页面级 hex / 裸 rgb() |
+| 反馈 | 单行结果用 `message`；危险操作用 `MConfirmDialog` | 仅一行文案却用 toast |
+| 无障碍 | 图标按钮 `aria-label`、表单可见 label | — |
+
+仅允许控件宽度等局部 inline style（如筛选项 `width: 14rem`）。
+
+## MCP
+
+- 整页：`recommend_page` → `get_golden_page` → `get_design_rules`
+- 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions` / `scrollable-panel`）
+- 可选：`validate_page`（参考建议，不阻断）
+
+引用可运行示例：`src/examples/*PageExample.vue`

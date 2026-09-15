@@ -1,0 +1,37 @@
+{
+  "name": "@morya-ui/setup",
+  "type": "module",
+  "version": "0.2.4",
+  "packageManager": "pnpm@10.12.4",
+  "description": "One-shot setup for morya-ui: install the library, Cursor MCP, Agent skills, and design config.",
+  "license": "MIT",
+  "homepage": "https://github.com/morya-space/morya-ui/tree/main/packages/setup#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morya-space/morya-ui.git",
+    "directory": "packages/setup"
+  },
+  "bugs": {
+    "url": "https://github.com/morya-space/morya-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "morya-ui-setup": "./bin/morya-ui-setup.js"
+  },
+  "files": [
+    "README.md",
+    "bin",
+    "src",
+    "template"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "sync-template": "node ./scripts/sync-template.mjs",
+    "build": "pnpm run sync-template",
+    "prepublishOnly": "pnpm run build"
+  }
+}
