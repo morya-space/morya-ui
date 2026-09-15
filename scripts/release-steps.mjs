@@ -11,6 +11,10 @@ export const MCP_RELEASE_PATHS = [
   'packages/ui-mcp/data/example-coverage.json',
 ]
 export const NUXT_RELEASE_PATHS = ['packages/nuxt/package.json']
+export const SETUP_RELEASE_PATHS = [
+  'packages/setup/package.json',
+  'packages/setup/template',
+]
 /** Build before commit so MCP catalog is included in the release commit. */
 export const STEPS = ['prepare', 'build', 'commit', 'branch', 'publish', 'tag', 'push']
 
@@ -47,7 +51,7 @@ function hasStagedChanges() {
 function releasePaths({ noMcp }) {
   return noMcp
     ? UI_RELEASE_PATHS
-    : [...UI_RELEASE_PATHS, ...MCP_RELEASE_PATHS, ...NUXT_RELEASE_PATHS]
+    : [...UI_RELEASE_PATHS, ...MCP_RELEASE_PATHS, ...NUXT_RELEASE_PATHS, ...SETUP_RELEASE_PATHS]
 }
 
 async function loadMcp() {
@@ -56,6 +60,10 @@ async function loadMcp() {
 
 async function loadNuxt() {
   return import('./release-nuxt.mjs')
+}
+
+async function loadSetup() {
+  return import('./release-setup.mjs')
 }
 
 export function parseReleaseOptions(argv) {
@@ -196,7 +204,9 @@ export async function stepPrepare(options) {
       console.log(`\nCHANGELOG.md preview:\n\n## ${plan.version}\n\n${formatChangelogBody(plan.commits, 'zh-CN')}\n`)
     }
     if (!options.noMcp) {
-      console.log(`Would also sync ${MCP_RELEASE_PATHS[0]} and ${NUXT_RELEASE_PATHS[0]} to v${plan.version}`)
+      console.log(
+        `Would also sync ${MCP_RELEASE_PATHS[0]}, ${NUXT_RELEASE_PATHS[0]}, and ${SETUP_RELEASE_PATHS[0]} to v${plan.version}`,
+      )
     }
   } else {
     if (!plan.firstRelease && !plan.resume) {
@@ -207,6 +217,8 @@ export async function stepPrepare(options) {
       syncMcpVersion(plan.version)
       const { syncNuxtVersion } = await loadNuxt()
       syncNuxtVersion(plan.version)
+      const { syncSetupVersion } = await loadSetup()
+      syncSetupVersion(plan.version)
     }
     console.log('[prepare] sync pnpm-lock.yaml')
     run('pnpm install')
@@ -223,6 +235,8 @@ export async function stepBuild(options = {}) {
     buildMcp()
     const { buildNuxt } = await loadNuxt()
     buildNuxt()
+    const { buildSetup } = await loadSetup()
+    buildSetup()
   }
 }
 
@@ -248,7 +262,7 @@ export function stepCommit(options = {}) {
   if (hasStagedChanges()) {
     const message = options.noMcp
       ? `release: ${PACKAGE_NAME} v${version}`
-      : `release: ${PACKAGE_NAME} / @morya-ui/mcp / @morya-ui/nuxt v${version}`
+      : `release: ${PACKAGE_NAME} / @morya-ui/mcp / @morya-ui/nuxt / @morya-ui/setup v${version}`
     git(['commit', '-m', message], { stdio: 'inherit' })
     console.log(`Committed ${message}`)
     return true
@@ -271,6 +285,8 @@ export async function stepPublish(options = {}) {
     publishMcp()
     const { publishNuxt } = await loadNuxt()
     publishNuxt()
+    const { publishSetup } = await loadSetup()
+    publishSetup()
   }
 }
 
