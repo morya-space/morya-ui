@@ -33,6 +33,7 @@ description: Morya UI 是什么、适合谁用、如何开始。
 | 包 | 说明 |
 | --- | --- |
 | `morya-ui` | 组件、样式、主题 API、文档站源码 |
+| `@morya-ui/setup` | （可选）业务项目一键接入：库 + AI Skill / rules + MCP |
 | `@morya-ui/mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |
 
 ## 安装
@@ -53,5 +54,8 @@ pnpm add morya-ui
 - [全局配置](/docs/config)：`ConfigProvider` / `createMoryaUI`
 - [SSR](/docs/ssr)：Nuxt / Astro 等集成
 - [无障碍](/docs/accessibility)：键盘、表单与浮层约定
+- [AI 接入](/docs/ai-setup)：`npx @morya-ui/setup` 与 Agent 配置
+- [Agent Skill](/docs/agent-skill)：`morya-ui-pages` 页面生成约定
+- [Agent MCP](/docs/mcp)：AI 客户端文档检索
 - [组件](/components)：浏览全部组件与 API
 - [参与贡献](https://github.com/morya-space/morya-ui/blob/main/CONTRIBUTING.zh-CN.md)

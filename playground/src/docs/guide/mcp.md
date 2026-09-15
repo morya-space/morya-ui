@@ -1,10 +1,10 @@
 ﻿---
-title: MCP
-order: 10
+title: Agent MCP
+order: 11
 description: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客户端检索本库文档。
 ---
 
-# MCP
+# Agent MCP
 
 [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) 是可选的 [Model Context Protocol](https://modelcontextprotocol.io/)（stdio）服务。它把本站组件文档、示例与指南做成可检索工具，方便 **支持 MCP 的 AI 客户端** 按真实 API 生成代码。
 
@@ -18,15 +18,7 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
-## 一键接入（推荐）
-
-业务项目可用 [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) 一次完成：安装 `morya-ui`、复制 AI skill / rules / `DESIGN.md`、写入 Cursor MCP、尝试注入样式 import：
-
-```bash
-npx @morya-ui/setup
-```
-
-完成后重启 Cursor（或重载 MCP）。更多 flags 见仓库 [`packages/setup/README.md`](https://github.com/morya-space/morya-ui/tree/main/packages/setup)。
+若要连同 Agent Skill、Cursor 规则一起装好，见 [AI 接入](/docs/ai-setup)；Skill 本身说明见 [Agent Skill](/docs/agent-skill)。
 
 ## 接入方式
 
@@ -217,5 +209,7 @@ import { MButton } from 'morya-ui'
 
 ## 下一步
 
+- [AI 接入](/docs/ai-setup)：`npx @morya-ui/setup`、skill 与 Cursor MCP
+- [Agent Skill](/docs/agent-skill)：`morya-ui-pages` 何时用、表面地图
 - [快速上手](/docs/quick-start)：在应用中安装并使用组件
 - [组件](/components)：浏览全部组件与交互示例

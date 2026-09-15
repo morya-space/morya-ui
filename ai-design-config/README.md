@@ -10,7 +10,13 @@
 npx @morya-ui/setup
 ```
 
-会安装 `morya-ui`、复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入 `import 'morya-ui/styles.css'`。详见 [`packages/setup/README.md`](../packages/setup/README.md)。
+会安装 `morya-ui`、复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入 `import 'morya-ui/styles.css'`。
+
+完整说明（flags、冲突策略）：
+
+- 文档站：[AI 接入](https://morya-space.github.io/morya-ui/docs/ai-setup)
+- Skill 说明：[Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill)
+- 包 README：[`packages/setup/README.md`](../packages/setup/README.md)
 
 手动合并本目录亦可（见下方步骤）。
 
@@ -55,7 +61,7 @@ npx @morya-ui/setup
 
 5. 生成页面前让 AI 先读 `DESIGN.md`，再读对应 `docs/golden-pages/*.vue` 与 `docs/components.md`。
 
-6. **（推荐）** 若客户端支持 Agent Skills，保留 `.agents/skills/morya-ui-pages/`，让 Agent 在生成列表/表单/仪表盘时自动遵循组件契约；与 `.cursor/rules` 互补（rules 偏编辑器常驻，skill 偏按需工作流）。
+6. **（推荐）** 若客户端支持 Agent Skills，保留 `.agents/skills/morya-ui-pages/`。说明见文档站 [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill)；与 `.cursor/rules` 互补（rules 偏编辑器常驻，skill 偏按需工作流）。
 
 ## 与组件库的关系
 

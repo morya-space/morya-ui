@@ -2,6 +2,11 @@
 
 One-shot setup for consumer Vue projects using [`morya-ui`](https://www.npmjs.com/package/morya-ui).
 
+Docs (zh/en):
+
+- [AI setup](https://morya-space.github.io/morya-ui/docs/ai-setup) — one-shot CLI
+- [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
+
 Installs the UI library, copies Agent skill / Cursor rules / design docs from `ai-design-config`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and tries to inject `import 'morya-ui/styles.css'` into the app entry.
 
 ## Usage

@@ -155,7 +155,7 @@ const messages = {
       'design-tokens': '设计令牌',
       config: '全局配置',
       accessibility: '无障碍',
-      mcp: 'MCP',
+      mcp: 'Agent MCP',
     } as Record<string, string>,
     categories: {
       GUIDE: '指南',
@@ -293,7 +293,7 @@ const messages = {
       'design-tokens': 'Design tokens',
       config: 'Configuration',
       accessibility: 'Accessibility',
-      mcp: 'MCP',
+      mcp: 'Agent MCP',
     } as Record<string, string>,
     categories: {
       GUIDE: 'Guide',

@@ -33,6 +33,7 @@ description: What Morya UI is, who it is for, and how to get started.
 | Package | Role |
 | --- | --- |
 | `morya-ui` | Components, styles, theme APIs, docs site source |
+| `@morya-ui/setup` | (Optional) One-shot app onboarding: library + AI skill / rules + MCP |
 | `@morya-ui/mcp` | (Optional) MCP server for AI clients that support the protocol |
 
 ## Install
@@ -53,5 +54,8 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 - [Configuration](/docs/config): `ConfigProvider` / `createMoryaUI`
 - [SSR](/docs/ssr): Nuxt, Astro, and similar setups
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
+- [AI setup](/docs/ai-setup): `npx @morya-ui/setup` and Agent config
+- [Agent Skill](/docs/agent-skill): `morya-ui-pages` page-generation contract
+- [Agent MCP](/docs/mcp): doc lookup for AI clients
 - [Components](/components): browse all components and APIs
 - [Contributing](https://github.com/morya-space/morya-ui/blob/main/CONTRIBUTING.md)
