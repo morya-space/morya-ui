@@ -18,6 +18,16 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
+## One-shot setup (recommended)
+
+Use [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) in a consumer app to install `morya-ui`, copy AI skill / rules / `DESIGN.md`, write Cursor MCP config, and try to inject the styles import:
+
+```bash
+npx @morya-ui/setup
+```
+
+Restart Cursor (or reload MCP) afterwards. Flags: [`packages/setup/README.md`](https://github.com/morya-space/morya-ui/tree/main/packages/setup).
+
 ## How to connect
 
 MCP clients start the package over stdio:

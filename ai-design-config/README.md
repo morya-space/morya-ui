@@ -1,6 +1,18 @@
 ﻿# Morya UI AI 设计配置
 
-面向 **基于 `morya-ui` 用 AI 生成业务页面** 的可复制配置包。将本目录内容合并到业务项目根目录（或按需选取子目录）即可。
+面向 **基于 `morya-ui` 用 AI 生成业务页面** 的可复制配置包。
+
+## 推荐：一键接入
+
+在业务项目根目录执行：
+
+```bash
+npx @morya-ui/setup
+```
+
+会安装 `morya-ui`、复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入 `import 'morya-ui/styles.css'`。详见 [`packages/setup/README.md`](../packages/setup/README.md)。
+
+手动合并本目录亦可（见下方步骤）。
 
 ## 目录说明
 
@@ -15,7 +27,7 @@
 | `.cursor/rules/` | Cursor 规则（设计系统、组件用法、页面布局、编码风格） |
 | `.agents/skills/morya-ui-pages/` | 消费方 Agent Skill：Ops / 账户 / 流程 / 系统 / 营销等全场景；可与 rules 并存 |
 
-## 接入步骤
+## 手动接入步骤
 
 1. **安装组件库**
 
@@ -56,4 +68,4 @@
 npx -y @morya-ui/mcp
 ```
 
-在 Cursor / 其他 MCP 客户端配置后，生成代码时可检索真实 Props / Events。
+在 Cursor / 其他 MCP 客户端配置后，生成代码时可检索真实 Props / Events。使用 `@morya-ui/setup` 时会自动写入 Cursor 的 `.cursor/mcp.json`。

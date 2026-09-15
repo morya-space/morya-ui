@@ -18,6 +18,16 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
+## 一键接入（推荐）
+
+业务项目可用 [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) 一次完成：安装 `morya-ui`、复制 AI skill / rules / `DESIGN.md`、写入 Cursor MCP、尝试注入样式 import：
+
+```bash
+npx @morya-ui/setup
+```
+
+完成后重启 Cursor（或重载 MCP）。更多 flags 见仓库 [`packages/setup/README.md`](https://github.com/morya-space/morya-ui/tree/main/packages/setup)。
+
 ## 接入方式
 
 MCP 客户端通过 stdio 启动本包即可：
