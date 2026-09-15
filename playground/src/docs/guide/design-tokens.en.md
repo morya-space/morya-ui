@@ -21,14 +21,7 @@ See [Theme](/docs/theme) for theme APIs and density behavior.
 
 ## Full catalog
 
-```vue preview
-<script setup lang="ts">
-import DesignTokenCatalog from '../../components/DesignTokenCatalog.vue'
-</script>
-
-<template>
-  <DesignTokenCatalog />
-</template>
+```vue preview src="./demos/design-tokens/FullCatalog.vue"
 ```
 
 ## Customization

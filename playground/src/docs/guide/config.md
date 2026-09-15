@@ -49,159 +49,27 @@ createMoryaUI({
 
 未传本地 `size` 的控件继承 ConfigProvider。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput, MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const city = ref<string | undefined>()
-const options = [
-  { label: '北京', value: 'bj' },
-  { label: '上海', value: 'sh' },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem">
-    <div>
-      <p style="margin:0 0 0.5rem;color:var(--m-color-text-muted);font-size:0.75rem">
-        默认尺寸
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <MButton label="按钮" />
-        <MInput placeholder="输入" style="width:10rem" />
-        <MSelect v-model="city" :options="options" style="width:10rem" />
-      </div>
-    </div>
-    <MConfigProvider size="small">
-      <p style="margin:0 0 0.5rem;color:var(--m-color-text-muted);font-size:0.75rem">
-        Config size="small"
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-        <MButton label="按钮" />
-        <MInput placeholder="输入" style="width:10rem" />
-        <MSelect v-model="city" :options="options" style="width:10rem" />
-      </div>
-    </MConfigProvider>
-  </div>
-</template>
+```vue preview src="./demos/config/Size.zh.vue"
 ```
 
 ## Density
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const density = ref<'compact' | 'comfortable' | 'spacious'>('compact')
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <MButton
-        v-for="item in (['compact', 'comfortable', 'spacious'] as const)"
-        :key="item"
-        :label="item"
-        :outlined="density !== item"
-        size="small"
-        @click="density = item"
-      />
-    </div>
-    <MConfigProvider :density="density" :global-density="false">
-      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        <MButton label="保存" />
-        <MInput placeholder="昵称" style="width:12rem" />
-      </div>
-    </MConfigProvider>
-  </div>
-</template>
+```vue preview src="./demos/config/Density.zh.vue"
 ```
 
 ## Input variant
 
-```vue preview
-<script setup lang="ts">
-import { MConfigProvider, MInput, MTextarea } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
-    <MConfigProvider input-variant="outlined">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--m-color-text-muted)">
-        outlined
-      </p>
-      <div style="display:grid;gap:0.5rem">
-        <MInput placeholder="Outlined input" />
-        <MTextarea placeholder="Outlined textarea" :rows="2" />
-      </div>
-    </MConfigProvider>
-    <MConfigProvider input-variant="filled">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:var(--m-color-text-muted)">
-        filled
-      </p>
-      <div style="display:grid;gap:0.5rem">
-        <MInput placeholder="Filled input" />
-        <MTextarea placeholder="Filled textarea" :rows="2" />
-      </div>
-    </MConfigProvider>
-  </div>
-</template>
+```vue preview src="./demos/config/InputVariant.vue"
 ```
 
 ## Locale
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MConfirmDialog, MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const city = ref<string | undefined>()
-const confirmOpen = ref(false)
-const options = [
-  { label: '北京', value: 'bj' },
-  { label: '上海', value: 'sh' },
-]
-</script>
-
-<template>
-  <MConfigProvider
-    :locale="{ selectPlaceholder: '挑一个城市', accept: '好的', reject: '再想想' }"
-  >
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MSelect v-model="city" :options="options" style="width:12rem" />
-      <MButton label="打开确认框" @click="confirmOpen = true" />
-      <MConfirmDialog
-        v-model="confirmOpen"
-        header="确认操作"
-        message="文案来自 locale.accept / reject。"
-      />
-    </div>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/config/Locale.zh.vue"
 ```
 
 ## appendTo + zIndex
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const visible = ref(false)
-</script>
-
-<template>
-  <MConfigProvider append-to="body" :z-index="2200">
-    <MButton label="打开对话框" @click="visible = true" />
-    <MDialog v-model="visible" header="挂载到 body" width="24rem">
-      <p style="margin:0">
-        浮层默认 Teleport 到 body，zIndex 基准由 ConfigProvider 提供。
-      </p>
-    </MDialog>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/config/AppendToZIndex.zh.vue"
 ```
 
 ## 应用级：`createMoryaUI`

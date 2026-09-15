@@ -37,28 +37,7 @@ div.m-input-field          ← class / style / data-* / title / tabindex … 落
 
 因此：
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const name = ref('')
-function onEnter() {
-  // submit
-}
-</script>
-
-<template>
-  <!-- 布局类、测试 id 等加在外层；键盘事件绑控件 -->
-  <MInput
-    v-model="name"
-    class="signup-field"
-    data-testid="user-name"
-    title="Display name"
-    placeholder="Your name"
-    @keydown.enter="onEnter"
-  />
-</template>
+```vue preview src="./demos/attrs/FieldComponents.zh.vue"
 ```
 
 `placeholder`、`name`、`autocomplete`、`autofocus` 等请走 **props**（有类型与文档）；若作为未声明 attrs 传入，会落到 field 根而非 input——需要绑到 input 时用 `pt.input`。
@@ -69,17 +48,7 @@ Select、DatePicker、InputNumber 等同理：`class` 撑满栅格时加在 fiel
 
 Checkbox / Radio / Switch 的可点击区域是 `<label>`，`class` 加在 label 上；`@change` 等由内部 input 接收。
 
-```vue preview
-<script setup lang="ts">
-import { MCheckbox } from 'morya-ui'
-import { ref } from 'vue'
-
-const ok = ref(false)
-</script>
-
-<template>
-  <MCheckbox v-model="ok" class="terms-row" label="I agree" />
-</template>
+```vue preview src="./demos/attrs/LabelControls.vue"
 ```
 
 ## 容器组件
@@ -88,20 +57,7 @@ Card、Panel、Tabs、Table 等：`class` 加在整个组件根节点，和直�
 
 Dialog、Drawer 会 Teleport，`class` / `style` 加在**遮罩层**（backdrop）上，不是内层 `.m-dialog` 面板——这样你才能控制蒙层全屏布局或 z-index 相关样式。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <MButton label="Open" @click="open = true" />
-  <MDialog v-model="open" class="onboarding-dialog" header="Welcome">
-    Content
-  </MDialog>
-</template>
+```vue preview src="./demos/attrs/Containers.vue"
 ```
 
 ## pt 透传
@@ -140,4 +96,3 @@ const open = ref(false)
 - [Input](/components/Input)：字段类完整示例
 - [Checkbox](/components/Checkbox)：Label 控件
 - [Card](/components/Card)、[Dialog](/components/Dialog)：容器
-- [指南 · 写文档](/docs/guide)：贡献者如何描述 `pt`

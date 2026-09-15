@@ -37,26 +37,7 @@ div.m-input-field          ← class / style / data-* / title / tabindex … go 
 
 Example:
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const name = ref('')
-function onEnter() {
-  // submit
-}
-</script>
-
-<template>
-  <MInput
-    v-model="name"
-    class="signup-field"
-    data-testid="user-name"
-    placeholder="Your name"
-    @keydown.enter="onEnter"
-  />
-</template>
+```vue preview src="./demos/attrs/FieldComponents.en.vue"
 ```
 
 Use **props** for `placeholder`, `name`, `autocomplete`, and `autofocus` (typed and documented). Undeclared attrs of the same names fall through to the field root, not the input—use `pt.input` when you need them on the control.
@@ -67,17 +48,7 @@ The same split applies to Select, DatePicker, InputNumber, and similar fields.
 
 For Checkbox / Radio / Switch, `class` lands on the `<label>`; change/input events are wired on the inner input.
 
-```vue preview
-<script setup lang="ts">
-import { MCheckbox } from 'morya-ui'
-import { ref } from 'vue'
-
-const ok = ref(false)
-</script>
-
-<template>
-  <MCheckbox v-model="ok" class="terms-row" label="I agree" />
-</template>
+```vue preview src="./demos/attrs/LabelControls.vue"
 ```
 
 ## Containers
@@ -86,20 +57,7 @@ Card, Panel, Tabs, Table: `class` on the outer root, as you would expect.
 
 Dialog and Drawer Teleport to `body`. `class` / `style` apply to the **backdrop** layer, not the inner `.m-dialog` panel—so you can style the full-screen overlay without fighting panel layout.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <MButton label="Open" @click="open = true" />
-  <MDialog v-model="open" class="onboarding-dialog" header="Welcome">
-    Content
-  </MDialog>
-</template>
+```vue preview src="./demos/attrs/Containers.vue"
 ```
 
 ## Pass-through (`pt`)
@@ -138,4 +96,3 @@ If you are used to PrimeVue `pt` or putting `class` directly on the input: Morya
 - [Input](/components/Input): full field example
 - [Checkbox](/components/Checkbox): label control
 - [Card](/components/Card), [Dialog](/components/Dialog): containers
-- [Guide · Writing docs](/docs/guide): how contributors document `pt`

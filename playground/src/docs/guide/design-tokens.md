@@ -21,14 +21,7 @@ Morya UI 组件只消费语义化 CSS 变量（`--m-*`），不维护第二套�
 
 ## 完整列表
 
-```vue preview
-<script setup lang="ts">
-import DesignTokenCatalog from '../../components/DesignTokenCatalog.vue'
-</script>
-
-<template>
-  <DesignTokenCatalog />
-</template>
+```vue preview src="./demos/design-tokens/FullCatalog.vue"
 ```
 
 ## 自定义
