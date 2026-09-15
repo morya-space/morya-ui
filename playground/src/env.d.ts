@@ -24,6 +24,8 @@ declare module '*.json' {
   export default value
 }
 
+declare module 'virtual:uno.css' {}
+
 declare module 'virtual:component-docs-manifest' {
   const manifest: Record<string, Record<'zh-CN' | 'en-US', Record<string, string>>>
   export default manifest

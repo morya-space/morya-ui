@@ -3,6 +3,7 @@ import App from './App.vue'
 import CodePreview from './components/CodePreview.vue'
 import router from './router'
 import 'morya-ui/styles.css'
+import 'virtual:uno.css'
 
 const app = createApp(App)
 app.component('CodePreview', CodePreview)

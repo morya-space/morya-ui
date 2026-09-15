@@ -1,11 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import { createHighlighter } from 'shiki'
+import UnoCSS from 'unocss/vite'
 import Markdown from 'unplugin-vue-markdown/vite'
 import { defineConfig } from 'vite'
-import MarkdownPreview from 'vite-plugin-markdown-preview'
 import { docsChunkSplitting } from './vite/chunkSplitting.ts'
 import { docsManifestPlugin } from './vite/docsManifestPlugin.ts'
+import { markdownPreviewPlugin } from './vite/markdownPreviewPlugin.ts'
 
 const playgroundDir = fileURLToPath(new URL('.', import.meta.url))
 const repoRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -37,6 +38,9 @@ export default defineConfig({
   root: playgroundDir,
   plugins: [
     docsManifestPlugin(repoRoot, guideDir),
+    UnoCSS({
+      configFile: fileURLToPath(new URL('./uno.config.ts', import.meta.url)),
+    }),
     vue({
       include: [/\.vue$/, /\.md$/],
     }),
@@ -46,7 +50,7 @@ export default defineConfig({
         highlight: highlightCode,
       },
       transforms: {
-        // vite-plugin-markdown-preview 的 load() 会把 YAML 重写成 *** / ----，
+        // markdown-preview load() 会把 YAML 重写成 *** / ----，
         // markdown-it 会当成 hr + setext 标题，导致 frontmatter 原文出现在正文顶部。
         before: (code) =>
           code.replace(/^\*{3,}\r?\n([\s\S]*?)\r?\n-{3,}\r?\n/, '---\n$1\n---\n'),
@@ -54,7 +58,7 @@ export default defineConfig({
         after: (html) => html.replace(/<h1[^>]*>[\s\S]*?<\/h1>\s*/i, ''),
       },
     }),
-    MarkdownPreview(),
+    markdownPreviewPlugin(),
   ],
   resolve: {
     alias: [
