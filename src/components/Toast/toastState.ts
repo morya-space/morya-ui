@@ -131,7 +131,7 @@ export function trimToastsToMax(max?: number) {
   }
 }
 
-export function findDuplicateToast(item: ToastMessage) {
+export function findDuplicateToast(item: ToastMessage): ToastMessage | undefined {
   const key = toastMessageKey(item.summary, item.detail)
   return toastState.messages.find(
     (existing) => toastMessageKey(existing.summary, existing.detail) === key,

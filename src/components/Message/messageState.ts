@@ -131,7 +131,7 @@ export function trimMessagesToMax(max?: number) {
   }
 }
 
-export function findDuplicateMessage(item: MessageItem) {
+export function findDuplicateMessage(item: MessageItem): MessageItem | undefined {
   const key = messageItemKey(item.content)
   return messageState.items.find((existing) => messageItemKey(existing.content) === key)
 }

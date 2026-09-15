@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CSSProperties } from "vue";
+import type { StyleValue } from "vue";
 import type { ScrollbarClassValue, ScrollbarInstance } from "../Scrollbar/types";
 import type { LayoutExpose, LayoutScrollEmits, LayoutSiderPlacement } from "./types";
 import { computed, inject, ref } from "vue";
@@ -14,9 +14,9 @@ const props = withDefaults(
     defineProps<{
         scrollbarRootClass?: string;
         scrollClass?: ScrollbarClassValue;
-        scrollStyle?: string | CSSProperties;
+        scrollStyle?: StyleValue;
         viewClass?: ScrollbarClassValue;
-        viewStyle?: string | CSSProperties;
+        viewStyle?: StyleValue;
         hasSider?: boolean;
         siderPlacement?: LayoutSiderPlacement;
     }>(),
@@ -42,9 +42,9 @@ const scrollTarget = computed(() => scrollbarRef.value);
 
 const { scrollTo, onScroll } = useLayoutScroll(scrollTarget, emit);
 
-const wrapClass = computed(() => normalizeClass(props.scrollClass));
+const wrapClass = computed(() => normalizeClass(props.scrollClass).join(" "));
 const viewClassList = computed(() =>
-    normalizeClass(["m-layout__scroll-view", props.viewClass]),
+    ["m-layout__scroll-view", ...normalizeClass(props.viewClass)].join(" "),
 );
 
 function onScrollbarScroll() {

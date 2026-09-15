@@ -12,7 +12,7 @@ const target = ref([{ id: 3, name: '测试' }])
 <template>
   <MPickList v-model:source="source" v-model:target="target" data-key="id">
     <template #item="{ item }">
-      <strong>{{ item.name }}</strong>
+      <strong>{{ (item as { name: string }).name }}</strong>
     </template>
   </MPickList>
 </template>

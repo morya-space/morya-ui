@@ -16,7 +16,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const rootStyle = useLayoutRegionStyle(() => ({
     height: props.height,
-    heightFallback: "var(--m-layout-header-height, 56px)",
+    heightFallback: "var(--m-layout-header-height, 3.5rem)",
     padding: props.padding,
     radius: props.radius,
 }));

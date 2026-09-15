@@ -34,7 +34,7 @@ const locale = useMLocale()
       <div
         v-if="columnIndex === 0"
         class="m-treetable__tree-cell"
-        :style="{ paddingLeft: `${depth * 1}rem` }"
+        :style="{ '--m-treetable-depth': depth }"
       >
         <button
           v-if="node.children?.length"

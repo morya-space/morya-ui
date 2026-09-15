@@ -12,6 +12,7 @@ describe('treeSelectNodeItem', () => {
         checkedKeys: {},
         expanded: {},
         showCheckbox: false,
+        activeKey: null,
       },
     })
     await wrapper.get('.m-treeselect__option').trigger('click')
@@ -27,6 +28,7 @@ describe('treeSelectNodeItem', () => {
         checkedKeys: {},
         expanded: { p: false },
         showCheckbox: false,
+        activeKey: null,
       },
     })
     await wrapper.get('.m-treeselect__toggler').trigger('click')
@@ -42,6 +44,7 @@ describe('treeSelectNodeItem', () => {
         checkedKeys: {},
         expanded: {},
         showCheckbox: true,
+        activeKey: null,
       },
     })
     await wrapper.get('.m-checkbox__input').setValue(true)

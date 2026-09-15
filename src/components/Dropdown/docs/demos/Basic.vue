@@ -9,7 +9,7 @@ const items = [
   { value: 'delete', label: 'Delete', disabled: true },
 ]
 
-function onSelect(item: { value: string; label: string }) {
+function onSelect(item: { value?: string; label?: string }) {
   open.value = false
   console.log(item.value)
 }
