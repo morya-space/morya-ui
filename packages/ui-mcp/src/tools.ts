@@ -83,17 +83,18 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const pageImports = useLayoutShell
     ? ', MPageContent, MPageFilters, MPageHeader, MPageSection, MPageToolbar'
     : ''
-  const listImports = isList ? ', MSelect, MSpace, MTable' : ''
+  const listImports = isList ? ', MEmpty, MSelect, MSpace, MTable' : ''
   const formImports = isForm || isAuth || isWizard ? ', MForm, MFormItem, MSelect' : ''
   const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MPagePlaceholder, MPageStat, MSkeleton, MTable' : ''
   const detailImports = isDetail ? ', MDivider' : ''
-  const emptyImports = isEmpty ? ', MDataView' : ''
+  const emptyImports = isEmpty ? ', MEmpty, MPageToolbar' : ''
   const wizardImports = isWizard ? ', MStepper' : ''
   const settingsImports = isSettings ? ', MTabs' : ''
+  const statusImports = isList || isDetail || isDashboard ? ', MStatus' : ''
 
   const script = `<script setup lang="ts">
 import { ref } from 'vue'
-import { MButton, MCard, MConfigProvider, MInput, MTag, zhCN${layoutImports}${pageImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports} } from 'morya-ui'
+import { MButton, MCard, MConfigProvider, MInput, MTag, zhCN${layoutImports}${pageImports}${listImports}${formImports}${dashboardImports}${detailImports}${emptyImports}${wizardImports}${settingsImports}${statusImports} } from 'morya-ui'
 
 const loading = ref(false)
 const error = ref('')
@@ -132,8 +133,18 @@ async function submit() {
               </template>
             </MPageToolbar>
             <MTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
+              <template #cell-status="{ value }">
+                <MStatus :label="String(value ?? '')" :severity="value === 'active' ? 'success' : 'secondary'" />
+              </template>
               <template #empty>
-                <p style="margin:0;padding:var(--m-space-8);text-align:center;color:var(--m-color-text-muted)">${zh ? '暂无数据' : 'No data yet'}</p>
+                <MEmpty
+                  :title="${zh ? '暂无数据' : 'No data yet'}"
+                  :description="${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}"
+                >
+                  <template #extra>
+                    <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
+                  </template>
+                </MEmpty>
               </template>
             </MTable>`
 
@@ -232,17 +243,20 @@ ${content}
   } else if (isEmpty) {
     innerTemplate = `<MConfigProvider :locale="zhCN">
   <main class="m-generated-page">
-    <MCard>
-      <MDataView :value="[]">
-        <template #empty>
-          <div class="m-generated-empty">
-            <strong>${zh ? '暂无内容' : 'Nothing here yet'}</strong>
-            <p class="m-generated-muted">${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}</p>
-            <MButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
-          </div>
-        </template>
-      </MDataView>
-    </MCard>
+    <MPageToolbar :title="title">
+      <template #actions>
+        <MButton severity="primary" @click="submit">${zh ? '新建' : 'Create'}</MButton>
+      </template>
+    </MPageToolbar>
+    <MEmpty
+      :title="${zh ? '暂无内容' : 'Nothing here yet'}"
+      :description="${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}"
+      icon="database"
+    >
+      <template #extra>
+        <MButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
+      </template>
+    </MEmpty>
   </main>
 </MConfigProvider>`
   } else if (isWizard) {

@@ -146,10 +146,74 @@ const loading = ref(false)`,
     :severity="value === 'active' ? 'success' : 'secondary'"
   />
 </template>`,
-    rules: ['状态用 MTag，不要用 Button 颜色表达状态'],
-    rulesEn: ['Use MTag for status, not Button colors'],
+    rules: ['分类/强调态用 MTag；更轻的圆点+文案用 MStatus', '不要用 Button 颜色表达状态'],
+    rulesEn: ['Use MTag for chip-like status; use MStatus for lighter dot+label', 'Do not use Button colors for status'],
     avoid: ['不要用裸文本颜色区分状态'],
     avoidEn: ['Do not rely on raw text color for status'],
+  },
+  {
+    id: 'list-status-dot',
+    title: '表格状态列 Status',
+    titleEn: 'Table status dot cell',
+    description: '在 #cell-status 中用 MStatus 展示轻量业务状态。',
+    descriptionEn: 'Render lightweight business status with MStatus in #cell-status.',
+    pageTypes: ['list'],
+    keywords: ['状态', 'status', 'dot', 'cell-status', '在线'],
+    imports: ['MStatus'],
+    template: `<template #cell-status="{ value }">
+  <MStatus
+    :label="value === 'online' ? '在线' : '离线'"
+    :severity="value === 'online' ? 'success' : 'secondary'"
+  />
+</template>`,
+    rules: ['行内轻量状态优先 MStatus', '不要用 Button 颜色表达状态'],
+    rulesEn: ['Prefer MStatus for lightweight inline status', 'Do not use Button colors for status'],
+    avoid: ['不要用裸文本颜色区分状态'],
+    avoidEn: ['Do not rely on raw text color for status'],
+  },
+  {
+    id: 'empty-block',
+    title: '空状态 MEmpty',
+    titleEn: 'Empty state with MEmpty',
+    description: '列表或内容区无数据时使用 MEmpty，操作放在 #extra。',
+    descriptionEn: 'Use MEmpty for no-data regions; put actions in #extra.',
+    pageTypes: ['list', 'common'],
+    keywords: ['空状态', '无数据', 'empty', 'zero state', 'no data'],
+    imports: ['MEmpty', 'MButton'],
+    template: `<MEmpty
+  title="还没有数据"
+  description="创建第一条记录后即可在此查看。"
+  icon="database"
+>
+  <template #extra>
+    <MButton label="新建" />
+    <MButton label="导入" severity="secondary" text />
+  </template>
+</MEmpty>`,
+    rules: ['正常无数据用 MEmpty，不要用错误色', '主 CTA 用 primary，次动作用 text/secondary'],
+    rulesEn: ['Use MEmpty for normal emptiness, not error colors', 'Primary CTA + secondary/text for lesser actions'],
+    avoid: ['不要用手写 div 拼空态', '不要用 MResult 表达无数据'],
+    avoidEn: ['Do not hand-roll empty markup', 'Do not use MResult for no-data'],
+  },
+  {
+    id: 'result-block',
+    title: '结果页 MResult',
+    titleEn: 'Result page with MResult',
+    description: '提交成功、失败或 403/404/500 使用 MResult。',
+    descriptionEn: 'Use MResult for submit outcomes and 403/404/500 pages.',
+    pageTypes: ['common'],
+    keywords: ['结果', '成功', '失败', '404', '403', 'result', 'success', 'error'],
+    imports: ['MResult', 'MButton'],
+    template: `<MResult status="success" description="订单已创建，可在列表中查看详情。">
+  <template #extra>
+    <MButton label="查看订单" />
+    <MButton label="返回列表" severity="secondary" text />
+  </template>
+</MResult>`,
+    rules: ['流程终点用 MResult', '提供明确下一步操作'],
+    rulesEn: ['Use MResult for terminal outcomes', 'Provide clear next-step actions'],
+    avoid: ['不要用 MEmpty 表达 403/404/失败', '不要只靠颜色表达结果'],
+    avoidEn: ['Do not use MEmpty for 403/404/failure', 'Do not rely on color alone'],
   },
   {
     id: 'form-header',

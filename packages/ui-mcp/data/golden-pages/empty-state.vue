@@ -8,7 +8,7 @@ import {
   MBreadcrumb,
   MButton,
   MConfigProvider,
-  MIcon,
+  MEmpty,
   MLayout,
   MLayoutContent,
   MLayoutHeader,
@@ -33,18 +33,17 @@ import {
             </template>
           </MPageToolbar>
 
-          <div class="empty-state" role="status">
-            <div class="empty-state__mark" aria-hidden="true">
-              <MIcon name="book" size="lg" />
-            </div>
-            <h2 class="empty-state__title">还没有课程</h2>
-            <p class="empty-state__desc">
-              创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。
-            </p>
-            <div class="empty-state__actions">
-              <MButton label="创建第一门课程" />
-              <MButton label="从模板导入" severity="secondary" text />
-            </div>
+          <div class="empty-state-shell">
+            <MEmpty
+              title="还没有课程"
+              description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。"
+              icon="book"
+            >
+              <template #extra>
+                <MButton label="创建第一门课程" />
+                <MButton label="从模板导入" severity="secondary" text />
+              </template>
+            </MEmpty>
           </div>
         </MPageContent>
       </MLayoutContent>
@@ -53,12 +52,7 @@ import {
 </template>
 
 <style scoped>
-.empty-state {
-  display: grid;
-  justify-items: center;
-  gap: var(--m-space-3);
-  padding: clamp(2.5rem, 8vh, 4.5rem) var(--m-space-6);
-  text-align: center;
+.empty-state-shell {
   border: 1px dashed color-mix(in srgb, var(--m-color-border) 80%, var(--m-color-primary));
   border-radius: var(--m-radius-md);
   background:
@@ -68,38 +62,5 @@ import {
       transparent 55%
     ),
     var(--m-color-surface);
-}
-
-.empty-state__mark {
-  display: grid;
-  place-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  margin-bottom: var(--m-space-2);
-  border-radius: 999px;
-  color: var(--m-color-primary);
-  background: color-mix(in srgb, var(--m-color-primary) 14%, var(--m-color-surface));
-}
-
-.empty-state__title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-}
-
-.empty-state__desc {
-  margin: 0;
-  max-width: 28rem;
-  color: var(--m-color-text-muted);
-  line-height: 1.55;
-}
-
-.empty-state__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--m-space-3);
-  margin-top: var(--m-space-3);
 }
 </style>
