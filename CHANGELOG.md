@@ -1,5 +1,21 @@
 # morya-ui
 
+## Unreleased
+
+### 修复
+
+- Dropdown / SplitButton 传送菜单层级改为 `--m-z-dropdown`（与 Select / Menu 一致）
+- ProgressSpinner wrap 遮罩补局部 z-index，避免被内容盖住
+- 暗色主题语义实心色（success / danger 等）加深，保证与 `--m-color-on-emphasis` 对比可读
+- Button / Badge / 共享进出场 / Dialog / Drawer / Popover / Message / BlockUI 补齐 reduced-motion
+- Layout 默认宽高改为 rem token；ScrollRegion 样式类型与 Scrollbar 对齐
+- 文档站开启 `respect-reduced-motion`；修复 guide manifest 单测
+
+### 变更
+
+- 全库组件样式 polish（Batch 0–6）：状态、token、反馈层级与布局细节
+- Message / Toast `findDuplicate*` 补充显式返回类型
+
 ## 0.2.4
 
 ### 新功能

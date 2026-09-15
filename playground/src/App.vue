@@ -14,7 +14,7 @@ useDensity()
     class="site-config"
     :locale="componentLocale"
     :global-density="false"
-    :respect-reduced-motion="false"
+    :respect-reduced-motion="true"
   >
     <div class="site-shell">
       <div class="site-atmosphere" aria-hidden="true">

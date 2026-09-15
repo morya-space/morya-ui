@@ -18,6 +18,8 @@ describe('docsManifestPlugin', () => {
 
     expect(Object.keys(manifest).sort()).toEqual([
       'accessibility',
+      'agent-skill',
+      'ai-setup',
       'attrs',
       'config',
       'design-tokens',

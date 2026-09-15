@@ -1,5 +1,21 @@
 # morya-ui
 
+## Unreleased
+
+### Fixes
+
+- Use `--m-z-dropdown` for teleported Dropdown / SplitButton menus (aligned with Select / Menu)
+- Add local z-index on ProgressSpinner wrap overlay so dense content cannot paint over it
+- Darken dark-theme solid semantic colors so they keep contrast with `--m-color-on-emphasis`
+- Add reduced-motion guards for Button / Badge / shared enter transitions / Dialog / Drawer / Popover / Message / BlockUI
+- Layout default sizes use rem tokens; ScrollRegion style types align with Scrollbar
+- Docs site respects reduced motion; fix guide manifest unit test
+
+### Changes
+
+- Library-wide component style polish (Batches 0–6): states, tokens, feedback stacking, layout details
+- Explicit return types on Message / Toast `findDuplicate*` helpers
+
 ## 0.2.4
 
 ### Features
