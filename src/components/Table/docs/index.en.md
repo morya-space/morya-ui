@@ -23,149 +23,33 @@ import { MTable, MTag } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MTable, MTag } from 'morya-ui'
-
-const columns = [
-  { key: 'name', label: 'Project', minWidth: 140, sortable: true },
-  { key: 'status', label: 'Status', width: 120 },
-  { key: 'owner', label: 'Owner', minWidth: 100 },
-]
-const rows = [
-  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada' },
-  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin' },
-]
-</script>
-
-<template>
-  <MTable :columns="columns" :rows="rows" striped bordered>
-    <template #cell-status="{ value }">
-      <MTag
-        :value="String(value)"
-        :severity="value === 'Published' ? 'success' : 'secondary'"
-      />
-    </template>
-  </MTable>
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Selection
 
 Use `selection-mode="multiple"` with `v-model:selection`, or `selection-mode="single"` with `v-model:selected-item`.
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const columns = [
-  { key: 'name', label: 'Name', minWidth: 120 },
-  { key: 'role', label: 'Role', minWidth: 120 },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer' },
-  { id: 2, name: 'Lin', role: 'Engineer' },
-]
-const selection = ref<Record<string, unknown>[]>([])
-</script>
-
-<template>
-  <MTable
-    v-model:selection="selection"
-    :columns="columns"
-    :rows="rows"
-    selection-mode="multiple"
-    highlight-current
-    :paginator="false"
-  />
-</template>
+```vue preview src="./demos/Selection.en.vue"
 ```
 
 ## Filter and pagination
 
 Use `search-value` / `filter-options` for client filtering. Enable `paginator` with `v-model:page` and `rows-per-page`.
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const columns = [
-  { key: 'name', label: 'Name', sortable: true, minWidth: 120 },
-  { key: 'role', label: 'Role', minWidth: 120 },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer' },
-  { id: 2, name: 'Lin', role: 'Engineer' },
-  { id: 3, name: 'Kai', role: 'Engineer' },
-  { id: 4, name: 'Mia', role: 'Designer' },
-]
-const page = ref(1)
-</script>
-
-<template>
-  <MTable
-    v-model:page="page"
-    :columns="columns"
-    :rows="rows"
-    paginator
-    :rows-per-page="2"
-  />
-</template>
+```vue preview src="./demos/FilterAndPagination.en.vue"
 ```
 
 ## Expandable rows
 
 Set `expandable` and provide the `expansion` slot. Column `render` works for custom cells; a `cell-{key}` slot overrides `render`.
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-
-const columns = [
-  { key: 'name', label: 'Name' },
-  { key: 'role', label: 'Role' },
-]
-const rows = [{ id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' }]
-</script>
-
-<template>
-  <MTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
-    <template #expansion="{ row }">
-      {{ row.extra }}
-    </template>
-  </MTable>
-</template>
+```vue preview src="./demos/ExpandableRows.en.vue"
 ```
 
 ## Empty and loading
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const loading = ref(false)
-const columns = [
-  { key: 'name', label: 'Name', minWidth: 120 },
-  { key: 'role', label: 'Role', minWidth: 120 },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <MButton :label="loading ? 'Stop loading' : 'Start loading'" @click="loading = !loading" />
-    <MTable
-      :columns="columns"
-      :rows="[]"
-      :loading="loading"
-      empty-text="No data yet"
-      empty-description="Records will appear here after you create the first one"
-      :paginator="false"
-    />
-  </div>
-</template>
+```vue preview src="./demos/EmptyAndLoading.en.vue"
 ```
 
 ## TableColumnDefinition

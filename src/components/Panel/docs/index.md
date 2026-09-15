@@ -16,40 +16,12 @@ import { MPanel } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MPanel } from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(false)
-</script>
-
-<template>
-  <MPanel v-model="collapsed" header="Panel" toggleable>
-    <p style="margin:0">
-      可折叠面板内容。
-    </p>
-    <template #footer>
-      操作区
-    </template>
-  </MPanel>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MPanel } from 'morya-ui'
-</script>
-
-<template>
-  <MPanel header="Small" size="small">
-    <p style="margin:0">
-      更紧凑的面板。
-    </p>
-  </MPanel>
-</template>
+```vue preview src="./demos/Size.zh.vue"
 ```
 
 ## Props

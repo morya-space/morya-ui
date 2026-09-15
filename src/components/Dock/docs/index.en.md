@@ -16,20 +16,7 @@ import { MDock } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MDock } from 'morya-ui'
-
-const model = [
-  { label: 'Home', icon: '⌂' },
-  { label: 'Search', icon: '⌕' },
-  { label: 'Settings', icon: '⚙' },
-]
-</script>
-
-<template>
-  <MDock :model="model" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Props

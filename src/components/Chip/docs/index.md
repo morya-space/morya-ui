@@ -16,20 +16,7 @@ import { MChip } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MChip } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MChip label="Basic" />
-    <MChip label="With Icon" icon="check" />
-    <MChip label="Removable" removable />
-    <MChip label="Success" severity="success" size="small" />
-    <MChip label="Disabled" removable disabled />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Props

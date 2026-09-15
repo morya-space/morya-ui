@@ -18,190 +18,61 @@ import { MButton } from 'morya-ui'
 
 通过默认插槽或 `label` 展示按钮文案。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton>Submit</MButton>
-    <MButton label="Label Prop" />
-    <MButton severity="secondary" label="Secondary" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Severity
 
 使用 `severity` 定义按钮语义色；省略时为 primary。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Primary" />
-    <MButton label="Secondary" severity="secondary" />
-    <MButton label="Success" severity="success" />
-    <MButton label="Info" severity="info" />
-    <MButton label="Warn" severity="warn" />
-    <MButton label="Help" severity="help" />
-    <MButton label="Danger" severity="danger" />
-    <MButton label="Contrast" severity="contrast" />
-  </div>
-</template>
+```vue preview src="./demos/Severity.vue"
 ```
 
 ## Styles
 
 `outlined`、`text`、`link`、`raised`、`rounded`、`plain` 可自由组合。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:100%">
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Outlined" outlined />
-      <MButton label="Success" severity="success" outlined />
-      <MButton label="Danger" severity="danger" outlined />
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Raised" raised />
-      <MButton label="Rounded" rounded />
-      <MButton label="Plain Text" text plain />
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Small" size="small" />
-      <MButton label="Large" size="large" />
-      <MButton label="Fluid" fluid />
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/Styles.vue"
 ```
 
 ## Text & Link
 
 `text` 为轻量文字按钮；`link` 呈现为内联链接样式。二者均可与 `severity` 组合。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Text" text />
-    <MButton label="Text Danger" text severity="danger" />
-    <MButton label="Link" link />
-    <MButton label="Link Secondary" link severity="secondary" />
-  </div>
-</template>
+```vue preview src="./demos/TextAndLink.vue"
 ```
 
 ## Ghost & Quaternary
 
 `ghost` 为透明底 + 描边色文字；`quaternary` 更克制，适合工具栏次要操作。也可通过 `variant` 指定。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Ghost" ghost />
-    <MButton label="Ghost Danger" ghost severity="danger" />
-    <MButton label="Quaternary" quaternary />
-    <MButton label="Custom" color="#e11d48" />
-  </div>
-</template>
+```vue preview src="./demos/GhostAndQuaternary.vue"
 ```
 
 ## Button Group
 
 `MButtonGroup` 将相邻按钮拼成一组。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MButtonGroup } from 'morya-ui'
-</script>
-
-<template>
-  <MButtonGroup aria-label="对齐">
-    <MButton label="左" />
-    <MButton label="中" severity="secondary" />
-    <MButton label="右" severity="secondary" />
-  </MButtonGroup>
-</template>
+```vue preview src="./demos/ButtonGroup.zh.vue"
 ```
 
 ## Icons & Badge
 
 支持 `icon`、`iconPos`、`iconOnly`，以及 `badge` 徽标。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton icon="check" label="Save" />
-    <MButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <MButton icon="plus" icon-only rounded aria-label="Add" />
-    <MButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <MButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
-  </div>
-</template>
+```vue preview src="./demos/IconsAndBadge.vue"
 ```
 
 ## Loading
 
 `loading` 状态下显示 spinner 并阻止点击。
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const loading = ref(false)
-
-function toggleLoading() {
-  loading.value = true
-  window.setTimeout(() => {
-    loading.value = false
-  }, 900)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <MButton label="Always Loading" loading severity="secondary" />
-  </div>
-</template>
+```vue preview src="./demos/Loading.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Disabled" disabled />
-    <MButton label="Disabled Outlined" outlined disabled />
-    <MButton label="Disabled Text" text disabled />
-  </div>
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Props

@@ -18,66 +18,28 @@ import { MSkeleton } from 'morya-ui'
 
 默认矩形、宽度 `100%`，带 `wave` 动画。
 
-```vue preview
-<script setup lang="ts">
-import { MSkeleton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <MSkeleton height="1.25rem" />
-    <MSkeleton height="1.25rem" width="70%" />
-    <MSkeleton height="6rem" border-radius="0.5rem" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Shape
 
 `shape` 支持 `rectangle`（默认）与 `circle`。
 
-```vue preview
-<script setup lang="ts">
-import { MSkeleton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-    <MSkeleton shape="circle" width="3rem" height="3rem" />
-    <MSkeleton width="10rem" height="3rem" />
-  </div>
-</template>
+```vue preview src="./demos/Shape.vue"
 ```
 
 ## Animation
 
 `animation` 为 `wave`（默认）或 `none`。
 
-```vue preview
-<script setup lang="ts">
-import { MSkeleton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem;width:min(24rem,100%)">
-    <MSkeleton height="1.25rem" animation="wave" />
-    <MSkeleton height="1.25rem" animation="none" />
-  </div>
-</template>
+```vue preview src="./demos/Animation.vue"
 ```
 
 ## Text & repeat
 
 `text` 渲染为行高骨架；`repeat` 重复多行。
 
-```vue preview
-<script setup lang="ts">
-import { MSkeleton } from 'morya-ui'
-</script>
-
-<template>
-  <MSkeleton text :repeat="3" />
-</template>
+```vue preview src="./demos/TextAndRepeat.vue"
 ```
 
 ## Props

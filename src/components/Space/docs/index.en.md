@@ -16,55 +16,17 @@ import { MSpace } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MSpace } from 'morya-ui'
-</script>
-
-<template>
-  <MSpace>
-    <MButton label="Save" size="small" />
-    <MButton label="Cancel" size="small" severity="secondary" />
-    <MButton label="Reset" size="small" severity="secondary" />
-  </MSpace>
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Vertical
 
-```vue preview
-<script setup lang="ts">
-import { MSpace, MTag } from 'morya-ui'
-</script>
-
-<template>
-  <MSpace vertical>
-    <MTag value="Alpha" />
-    <MTag value="Bravo" />
-    <MTag value="Charlie" />
-  </MSpace>
-</template>
+```vue preview src="./demos/Vertical.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MSpace } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem">
-    <MSpace size="small">
-      <MButton label="S" size="small" />
-      <MButton label="S" size="small" severity="secondary" />
-    </MSpace>
-    <MSpace :size="20">
-      <MButton label="20px" size="small" />
-      <MButton label="20px" size="small" severity="secondary" />
-    </MSpace>
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 When `size` is omitted it defaults to `medium`. Override the global gap with `MConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
@@ -73,17 +35,7 @@ When `size` is omitted it defaults to `medium`. Override the global gap with `MC
 
 Set `wrapItem=false` to skip the per-child wrapper (useful when children manage their own layout).
 
-```vue preview
-<script setup lang="ts">
-import { MSpace, MTag } from 'morya-ui'
-</script>
-
-<template>
-  <MSpace :wrap-item="false" :size="8">
-    <MTag value="Direct" />
-    <MTag value="Children" />
-  </MSpace>
-</template>
+```vue preview src="./demos/WithoutItemWrapper.vue"
 ```
 
 ## Props

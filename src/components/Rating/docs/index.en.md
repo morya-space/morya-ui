@@ -16,46 +16,19 @@ import { MRating } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MRating } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(3)
-</script>
-
-<template>
-  <MRating v-model="value" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Readonly
 
-```vue preview
-<script setup lang="ts">
-import { MRating } from 'morya-ui'
-</script>
-
-<template>
-  <MRating :model-value="4" readonly :cancel="false" />
-</template>
+```vue preview src="./demos/Readonly.vue"
 ```
 
 ## Half
 
 `allowHalf` enables 0.5 increments. `allowClear` is an alias of `cancel` and takes precedence when set.
 
-```vue preview
-<script setup lang="ts">
-import { MRating } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(2.5)
-</script>
-
-<template>
-  <MRating v-model="value" allow-half />
-</template>
+```vue preview src="./demos/Half.vue"
 ```
 
 ## Props

@@ -16,61 +16,19 @@ import { MAutoComplete } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MAutoComplete } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
-</script>
-
-<template>
-  <MAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="Search…" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MAutoComplete } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref('')
-const b = ref('')
-const c = ref('')
-const suggestions = ['Vue', 'Vite', 'Vitest']
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
-    <MAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
-    <MAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 ## Options & loading
 
 `suggestions` can be strings or `{ label, value }` objects. `loading` / `clearable` control the spinner and clear button.
 
-```vue preview
-<script setup lang="ts">
-import { MAutoComplete } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-const suggestions = [
-  { label: 'Vue', value: 'vue' },
-  { label: 'Vite', value: 'vite' },
-]
-</script>
-
-<template>
-  <MAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="Option objects…" />
-</template>
+```vue preview src="./demos/OptionsAndLoading.en.vue"
 ```
 
 ## Props

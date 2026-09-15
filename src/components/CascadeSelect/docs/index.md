@@ -16,53 +16,12 @@ import { MCascadeSelect } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MCascadeSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | null>(null)
-const options = [
-  {
-    label: '电子产品',
-    value: 'electronics',
-    children: [
-      { label: '手机', value: 'phone' },
-      { label: '笔记本', value: 'laptop' },
-    ],
-  },
-  { label: '图书', value: 'books' },
-]
-</script>
-
-<template>
-  <MCascadeSelect v-model="value" :options="options" placeholder="选择分类" />
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MCascadeSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref(null)
-const b = ref(null)
-const c = ref(null)
-const options = [
-  { label: '图书', value: 'books' },
-  { label: '影音', value: 'media' },
-]
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MCascadeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <MCascadeSelect v-model="b" :options="options" placeholder="Default" />
-    <MCascadeSelect v-model="c" size="large" :options="options" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.zh.vue"
 ```
 
 ## Props

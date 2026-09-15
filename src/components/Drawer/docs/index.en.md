@@ -16,57 +16,14 @@ import { MButton, MDrawer } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDrawer } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <div>
-    <MButton label="Open Drawer" @click="open = true" />
-    <MDrawer v-model="open" header="Navigation">
-      <p style="margin:0">
-        Drawer body content. Esc or mask click closes by default.
-      </p>
-    </MDrawer>
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Position
 
 Supports `left` / `right` / `top` / `bottom`.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDrawer } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const position = ref<'left' | 'right' | 'top' | 'bottom'>('right')
-
-function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
-  position.value = next
-  open.value = true
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MButton label="Left" size="small" @click="openAt('left')" />
-    <MButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
-    <MButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <MButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
-    <MDrawer v-model="open" :header="`Position: ${position}`" :position="position">
-      <p style="margin:0">
-        Use <code>dismissable</code> to control mask dismiss.
-      </p>
-    </MDrawer>
-  </div>
-</template>
+```vue preview src="./demos/Position.vue"
 ```
 
 ## Props

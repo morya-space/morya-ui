@@ -16,52 +16,14 @@ import { MConfirmPopup } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfirmPopup } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const target = ref<HTMLElement | null>(null)
-
-function ask(event: MouseEvent) {
-  target.value = event.currentTarget as HTMLElement
-  open.value = true
-}
-</script>
-
-<template>
-  <MButton label="删除" severity="danger" @click="ask" />
-  <MConfirmPopup v-model="open" :target="target" message="确认删除？" icon="info" placement="top" />
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Before accept
 
 `beforeAccept` 返回 `false` 时保持打开且不触发 `accept`。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfirmPopup } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const target = ref<HTMLElement | null>(null)
-
-function ask(event: MouseEvent) {
-  target.value = event.currentTarget as HTMLElement
-  open.value = true
-}
-
-async function beforeAccept() {
-  return window.confirm('再次确认？')
-}
-</script>
-
-<template>
-  <MButton label="带拦截" @click="ask" />
-  <MConfirmPopup v-model="open" :target="target" message="继续？" :before-accept="beforeAccept" />
-</template>
+```vue preview src="./demos/BeforeAccept.zh.vue"
 ```
 
 ## Props

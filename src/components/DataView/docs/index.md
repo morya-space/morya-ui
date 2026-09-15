@@ -16,24 +16,7 @@ import { MDataView } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MDataView } from 'morya-ui'
-
-const items = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
-</script>
-
-<template>
-  <MDataView :value="items" layout="grid" paginator :rows="4">
-    <template #grid="{ items: page }">
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
-        <div v-for="item in page" :key="item">
-          {{ item }}
-        </div>
-      </div>
-    </template>
-  </MDataView>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Props

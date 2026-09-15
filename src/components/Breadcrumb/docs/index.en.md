@@ -16,39 +16,14 @@ import { MBreadcrumb } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MBreadcrumb } from 'morya-ui'
-
-const items = [
-  { label: 'Electronics', to: '/electronics' },
-  { label: 'Computer', to: '/electronics/computer' },
-  { label: 'Accessories' },
-]
-</script>
-
-<template>
-  <MBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Separator
 
 `separator` customizes the delimiter; `#separator` can replace it.
 
-```vue preview
-<script setup lang="ts">
-import { MBreadcrumb } from 'morya-ui'
-
-const items = [
-  { label: 'Library', to: '/lib' },
-  { label: 'Docs' },
-]
-</script>
-
-<template>
-  <MBreadcrumb :model="items" separator=">" />
-</template>
+```vue preview src="./demos/Separator.vue"
 ```
 
 ## Props

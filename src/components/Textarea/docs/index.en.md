@@ -16,70 +16,24 @@ import { MTextarea } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MTextarea } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MTextarea v-model="value" label="Notes" placeholder="Write something…" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Size & Variant
 
-```vue preview
-<script setup lang="ts">
-import { MTextarea } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <MTextarea size="small" label="Small" rows="3" />
-    <MTextarea variant="filled" label="Filled" rows="3" />
-    <MTextarea size="large" fluid label="Large Fluid" rows="3" />
-  </div>
-</template>
+```vue preview src="./demos/SizeAndVariant.vue"
 ```
 
 ## AutoResize & Invalid
 
 `autosize` grows with content. Pass `{ minRows, maxRows }` to clamp. `invalid` marks a validation failure.
 
-```vue preview
-<script setup lang="ts">
-import { MTextarea } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('Line 1\nLine 2')
-const limited = ref('Clamped height')
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <MTextarea v-model="value" autosize label="Auto resize" />
-    <MTextarea v-model="limited" :autosize="{ minRows: 3, maxRows: 6 }" label="min 3 / max 6" />
-    <MTextarea invalid label="Required" help-text="This field is required" model-value="" />
-  </div>
-</template>
+```vue preview src="./demos/AutoresizeAndInvalid.vue"
 ```
 
 ## Clearable & count
 
-```vue preview
-<script setup lang="ts">
-import { MTextarea } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('Draft notes')
-</script>
-
-<template>
-  <MTextarea v-model="value" label="Notes" clearable show-count :maxlength="120" :rows="3" />
-</template>
+```vue preview src="./demos/ClearableAndCount.vue"
 ```
 
 ## Props

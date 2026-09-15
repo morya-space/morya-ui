@@ -22,92 +22,21 @@ import { MToast, toast, useToast } from 'morya-ui'
 
 ## API
 
-```vue preview
-<script setup lang="ts">
-import { MButton, toast } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton
-      label="Success"
-      severity="success"
-      @click="toast.success({ summary: '已保存', detail: '变更已生效。' })"
-    />
-    <MButton
-      label="Info"
-      severity="info"
-      @click="toast.info({ summary: '提示', detail: '可以继续操作。' })"
-    />
-    <MButton
-      label="Warn"
-      severity="warn"
-      @click="toast.warn({ summary: '注意', detail: '请再核对一次。' })"
-    />
-    <MButton
-      label="Error"
-      severity="danger"
-      @click="toast.error({ summary: '失败', detail: '请稍后重试。' })"
-    />
-  </div>
-</template>
+```vue preview src="./demos/Api.zh.vue"
 ```
 
 ## 自定义内容
 
 `summary` / `detail` 同样支持字符串、`h()`、组件或渲染工厂。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, toast } from 'morya-ui'
-import { h } from 'vue'
-
-function showRich() {
-  toast.info({
-    summary: () => h('span', [h('strong', '自定义标题')]),
-    detail: () => h('em', '详情也可以是 VNode'),
-    life: 4000,
-  })
-}
-</script>
-
-<template>
-  <MButton label="富文本 Toast" @click="showRich" />
-</template>
+```vue preview src="./demos/CustomContent.zh.vue"
 ```
 
 ## Controlled
 
 仍可通过 `messages` + `close` 自行管理列表。
 
-```vue preview
-<script setup lang="ts">
-import type { ToastMessage } from 'morya-ui'
-import { MButton, MToast } from 'morya-ui'
-import { ref } from 'vue'
-
-const messages = ref<ToastMessage[]>([])
-let seq = 0
-
-function push(severity: ToastMessage['severity'], summary: string, detail?: string) {
-  messages.value = [
-    ...messages.value,
-    { id: `toast-${++seq}`, summary, detail, severity, life: 0 },
-  ]
-}
-
-function onClose(message: ToastMessage) {
-  messages.value = messages.value.filter((item) => item.id !== message.id)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <MButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
-  </div>
-  <MToast :messages="messages" position="top-right" @close="onClose" />
-</template>
+```vue preview src="./demos/Controlled.vue"
 ```
 
 ## Methods

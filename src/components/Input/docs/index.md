@@ -16,177 +16,60 @@ import { MInput } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MInput v-model="value" label="Name" placeholder="Enter your name" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Invalid
 
 `invalid` 表示校验失败；也可只传 `error-message`。
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
-</template>
+```vue preview src="./demos/Invalid.vue"
 ```
 
 ## Clearable
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('Draft note')
-</script>
-
-<template>
-  <MInput v-model="value" clearable label="Note" />
-</template>
+```vue preview src="./demos/Clearable.vue"
 ```
 
 ## Prefix / Suffix
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const amount = ref('128')
-const host = ref('docs')
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MInput v-model="amount" label="金额" fluid>
-      <template #prefix>
-        ¥
-      </template>
-      <template #suffix>
-        .00
-      </template>
-    </MInput>
-    <MInput v-model="host" label="域名" fluid>
-      <template #suffix>
-        .well.design
-      </template>
-    </MInput>
-  </div>
-</template>
+```vue preview src="./demos/PrefixSuffix.zh.vue"
 ```
 
 ## Password-like type
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const password = ref('')
-</script>
-
-<template>
-  <MInput v-model="password" type="password" label="Password" placeholder="••••••••" />
-</template>
+```vue preview src="./demos/PasswordLikeType.vue"
 ```
 
 ## Sizes
 
 支持 `small` / `large`，并兼容 `sm` / `md` / `lg`。
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MInput size="small" label="Small" placeholder="Small" />
-    <MInput label="Normal" placeholder="Normal" />
-    <MInput size="large" label="Large" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Sizes.vue"
 ```
 
 ## Count
 
 `showCount` 显示字数；配合 `maxlength` 展示上限。
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const bio = ref('Hello')
-</script>
-
-<template>
-  <MInput v-model="bio" label="Bio" :maxlength="20" show-count />
-</template>
+```vue preview src="./demos/Count.vue"
 ```
 
 ## Fluid
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:100%">
-    <MInput variant="outlined" label="Outlined" placeholder="Outlined" />
-    <MInput variant="filled" label="Filled" placeholder="Filled" />
-    <MInput fluid label="Fluid" placeholder="Full width" />
-  </div>
-</template>
+```vue preview src="./demos/Fluid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MInput model-value="Read only value" label="Disabled" disabled />
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## 外层 attrs 与布局
 
 除 `@keydown`、`@focus` 等**控件事件**外，其余 fallthrough attrs（`class`、`style`、`data-*`、`title`、`tabindex` 等）均落在 field 外层（`.m-input-field`），不会直接写到 `<input>`。栅格、间距、测试 id 这样写即可：
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const q = ref('')
-</script>
-
-<template>
-  <MInput
-    v-model="q"
-    label="搜索"
-    class="toolbar-search"
-    data-testid="search"
-    style="max-width: 16rem"
-  />
-</template>
+```vue preview src="./demos/OuterAttrsAndLayout.zh.vue"
 ```
 
 更多约定见 [样式与 attrs](/docs/attrs)。
@@ -195,43 +78,14 @@ const q = ref('')
 
 `@keydown`、`@focus`、`@blur` 等绑在底层 input 上，用法与原生 input 相同：
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const code = ref('')
-</script>
-
-<template>
-  <MInput
-    v-model="code"
-    label="验证码"
-    maxlength="6"
-    @keydown.enter="$event.target instanceof HTMLInputElement && $event.target.blur()"
-  />
-</template>
+```vue preview src="./demos/KeyboardAndFocusEvents.zh.vue"
 ```
 
 ## pt
 
 按 DOM 分段透传。常用键：`root`、`input`、`label`、`prefix`、`suffix`、`help`、`count`。
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MInput
-    label="Token"
-    placeholder="sk-…"
-    :pt="{
-      root: { class: 'token-field' },
-      input: { class: 'font-mono', autocomplete: 'off' },
-    }"
-  />
-</template>
+```vue preview src="./demos/Pt.vue"
 ```
 
 ## Props

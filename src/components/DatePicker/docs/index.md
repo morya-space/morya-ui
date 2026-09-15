@@ -16,155 +16,53 @@ import { MDatePicker } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('2024-06-15')
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="日期" />
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref('2024-06-15')
-const b = ref('2024-06-15')
-const c = ref('2024-06-15')
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end">
-    <MDatePicker v-model="a" size="small" label="Small" />
-    <MDatePicker v-model="b" label="Default" />
-    <MDatePicker v-model="c" size="large" label="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 ## Min / Max
 
 超出范围的日期在日历中禁用。
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('2024-06-15')
-</script>
-
-<template>
-  <MDatePicker
-    v-model="value"
-    label="范围内"
-    min-date="2024-06-01"
-    max-date="2024-06-30"
-  />
-</template>
+```vue preview src="./demos/MinMax.zh.vue"
 ```
 
 ## Invalid
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('2024-06-15')
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="校验失败" invalid />
-</template>
+```vue preview src="./demos/Invalid.zh.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-</script>
-
-<template>
-  <MDatePicker model-value="2024-06-15" label="禁用" disabled />
-</template>
+```vue preview src="./demos/Disabled.zh.vue"
 ```
 
 ## Fluid
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="全宽" fluid placeholder="选择日期" />
-</template>
+```vue preview src="./demos/Fluid.zh.vue"
 ```
 
 ## Teleport
 
 面板默认 Teleport 到 `body`。可用 `append-to="self"` 或 `teleport={false}` 就地渲染。
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="就地面板" append-to="self" />
-</template>
+```vue preview src="./demos/Teleport.zh.vue"
 ```
 
 ## Range
 
 `type="daterange"` 时先点起点、再点终点；值为 `[start, end]`（ISO 日期）。
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
-</script>
-
-<template>
-  <MDatePicker v-model="value" type="daterange" label="日期范围" />
-</template>
+```vue preview src="./demos/Range.zh.vue"
 ```
 
 ## Shortcuts
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-const shortcuts = [
-  { label: '今天', value: () => new Date() },
-  { label: '六月一日', value: '2024-06-01' },
-]
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="快捷选项" :shortcuts="shortcuts" />
-</template>
+```vue preview src="./demos/Shortcuts.zh.vue"
 ```
 
 ## Props

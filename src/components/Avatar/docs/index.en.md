@@ -16,39 +16,14 @@ import { MAvatar } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MAvatar } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MAvatar label="AB" />
-    <MAvatar icon="check" />
-    <MAvatar label="SQ" shape="square" />
-    <MAvatar label="LG" size="large" />
-    <MAvatar label="XL" size="xlarge" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Group
 
 `MAvatarGroup` stacks avatars. Extra items beyond `max` show as `+N`. A failed image falls back to `icon` / `label` and emits `error`.
 
-```vue preview
-<script setup lang="ts">
-import { MAvatar, MAvatarGroup } from 'morya-ui'
-</script>
-
-<template>
-  <MAvatarGroup :max="3">
-    <MAvatar label="AL" />
-    <MAvatar label="BK" />
-    <MAvatar label="CN" />
-    <MAvatar label="DY" />
-  </MAvatarGroup>
-</template>
+```vue preview src="./demos/Group.vue"
 ```
 
 ## Props

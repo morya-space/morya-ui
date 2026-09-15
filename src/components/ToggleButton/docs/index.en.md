@@ -16,38 +16,12 @@ import { MToggleButton } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MToggleButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const on = ref(false)
-</script>
-
-<template>
-  <MToggleButton v-model="on" on-label="On" off-label="Off" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MToggleButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref(false)
-const b = ref(true)
-const c = ref(false)
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MToggleButton v-model="a" size="small" on-label="Small" off-label="Small" />
-    <MToggleButton v-model="b" on-label="Default" off-label="Default" />
-    <MToggleButton v-model="c" size="large" on-label="Large" off-label="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.en.vue"
 ```
 
 ## Props

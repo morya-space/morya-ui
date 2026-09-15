@@ -16,55 +16,17 @@ import { MSpace } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MSpace } from 'morya-ui'
-</script>
-
-<template>
-  <MSpace>
-    <MButton label="保存" size="small" />
-    <MButton label="取消" size="small" severity="secondary" />
-    <MButton label="重置" size="small" severity="secondary" />
-  </MSpace>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Vertical
 
-```vue preview
-<script setup lang="ts">
-import { MSpace, MTag } from 'morya-ui'
-</script>
-
-<template>
-  <MSpace vertical>
-    <MTag value="Alpha" />
-    <MTag value="Bravo" />
-    <MTag value="Charlie" />
-  </MSpace>
-</template>
+```vue preview src="./demos/Vertical.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MSpace } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem">
-    <MSpace size="small">
-      <MButton label="S" size="small" />
-      <MButton label="S" size="small" severity="secondary" />
-    </MSpace>
-    <MSpace :size="20">
-      <MButton label="20px" size="small" />
-      <MButton label="20px" size="small" severity="secondary" />
-    </MSpace>
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 未传 `size` 时默认 `medium`。可用 `MConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
@@ -73,17 +35,7 @@ import { MButton, MSpace } from 'morya-ui'
 
 `wrapItem=false` 时不再包一层，子节点直接参与 flex 布局（适合已有自身间距的元素）。
 
-```vue preview
-<script setup lang="ts">
-import { MSpace, MTag } from 'morya-ui'
-</script>
-
-<template>
-  <MSpace :wrap-item="false" :size="8">
-    <MTag value="Direct" />
-    <MTag value="Children" />
-  </MSpace>
-</template>
+```vue preview src="./demos/WithoutItemWrapper.vue"
 ```
 
 ## Props

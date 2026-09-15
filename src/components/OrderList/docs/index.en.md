@@ -16,17 +16,7 @@ import { MOrderList } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MOrderList } from 'morya-ui'
-import { ref } from 'vue'
-
-const items = ref(['Design', 'Development', 'Testing', 'Release'])
-</script>
-
-<template>
-  <MOrderList v-model="items" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Props

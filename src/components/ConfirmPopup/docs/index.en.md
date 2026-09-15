@@ -16,52 +16,14 @@ import { MConfirmPopup } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfirmPopup } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const target = ref<HTMLElement | null>(null)
-
-function ask(event: MouseEvent) {
-  target.value = event.currentTarget as HTMLElement
-  open.value = true
-}
-</script>
-
-<template>
-  <MButton label="Delete" severity="danger" @click="ask" />
-  <MConfirmPopup v-model="open" :target="target" message="Delete this item?" icon="info" placement="top" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Before accept
 
 Returning `false` from `beforeAccept` keeps the popup open and skips the `accept` emit.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfirmPopup } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const target = ref<HTMLElement | null>(null)
-
-function ask(event: MouseEvent) {
-  target.value = event.currentTarget as HTMLElement
-  open.value = true
-}
-
-async function beforeAccept() {
-  return window.confirm('Confirm again?')
-}
-</script>
-
-<template>
-  <MButton label="With guard" @click="ask" />
-  <MConfirmPopup v-model="open" :target="target" message="Continue?" :before-accept="beforeAccept" />
-</template>
+```vue preview src="./demos/BeforeAccept.en.vue"
 ```
 
 ## Props

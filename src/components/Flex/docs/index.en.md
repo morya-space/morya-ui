@@ -16,49 +16,17 @@ import { MFlex } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MFlex } from 'morya-ui'
-</script>
-
-<template>
-  <MFlex>
-    <MButton label="One" size="small" />
-    <MButton label="Two" size="small" severity="secondary" />
-    <MButton label="Three" size="small" severity="secondary" />
-  </MFlex>
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Vertical
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MFlex } from 'morya-ui'
-</script>
-
-<template>
-  <MFlex vertical>
-    <MButton label="Top" size="small" />
-    <MButton label="Middle" size="small" severity="secondary" />
-    <MButton label="Bottom" size="small" severity="secondary" />
-  </MFlex>
-</template>
+```vue preview src="./demos/Vertical.en.vue"
 ```
 
 ## Justify & Align
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MFlex, MTag } from 'morya-ui'
-</script>
-
-<template>
-  <MFlex justify="space-between" align="center" style="width:min(28rem,100%)">
-    <MTag value="Tag" />
-    <MButton label="Action" size="small" />
-  </MFlex>
-</template>
+```vue preview src="./demos/JustifyAndAlign.en.vue"
 ```
 
 ## Props

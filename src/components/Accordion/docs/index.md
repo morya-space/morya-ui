@@ -16,92 +16,19 @@ import { MAccordion } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MAccordion } from 'morya-ui'
-import { ref } from 'vue'
-
-const active = ref('design')
-const tabs = [
-  { value: 'design', header: 'Design' },
-  { value: 'code', header: 'Code' },
-  { value: 'disabled', header: 'Disabled', disabled: true },
-]
-</script>
-
-<template>
-  <MAccordion v-model="active" :tabs="tabs">
-    <template #design>
-      <p style="margin:0">
-        Design system tokens and layout rules.
-      </p>
-    </template>
-    <template #code>
-      <p style="margin:0">
-        Implementation notes and API contracts.
-      </p>
-    </template>
-  </MAccordion>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Multiple
 
-```vue preview
-<script setup lang="ts">
-import { MAccordion } from 'morya-ui'
-import { ref } from 'vue'
-
-const active = ref<string[]>(['a'])
-const tabs = [
-  { value: 'a', header: 'Section A' },
-  { value: 'b', header: 'Section B' },
-]
-</script>
-
-<template>
-  <MAccordion v-model="active" multiple :tabs="tabs">
-    <template #a>
-      <p style="margin:0">
-        First section content.
-      </p>
-    </template>
-    <template #b>
-      <p style="margin:0">
-        Second section content.
-      </p>
-    </template>
-  </MAccordion>
-</template>
+```vue preview src="./demos/Multiple.vue"
 ```
 
 ## Extra
 
 `#extra` 渲染在标题右侧；点击不会切换展开。
 
-```vue preview
-<script setup lang="ts">
-import { MAccordion, MButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const active = ref('a')
-const tabs = [
-  { value: 'a', header: 'Section A' },
-]
-</script>
-
-<template>
-  <MAccordion v-model="active" :tabs="tabs">
-    <template #extra="{ tab }">
-      <MButton :label="tab.header" size="small" text />
-    </template>
-    <template #a>
-      <p style="margin:0">
-        Content.
-      </p>
-    </template>
-  </MAccordion>
-</template>
+```vue preview src="./demos/Extra.vue"
 ```
 
 ## Props

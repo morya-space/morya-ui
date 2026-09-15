@@ -16,19 +16,7 @@ import { MLabel } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MInput, MLabel } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.5rem">
-    <MLabel html-for="demo-email">
-      邮箱
-    </MLabel>
-    <MInput id="demo-email" placeholder="you@example.com" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Props

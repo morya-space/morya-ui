@@ -16,64 +16,19 @@ import { MSlider } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MSlider } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(40)
-</script>
-
-<template>
-  <div style="width:min(24rem,100%)">
-    <MSlider v-model="value" />
-    <p style="margin:.5rem 0 0;color:var(--m-color-text-muted)">
-      {{ value }}
-    </p>
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Range
 
-```vue preview
-<script setup lang="ts">
-import { MSlider } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref([20, 70])
-</script>
-
-<template>
-  <div style="width:min(24rem,100%)">
-    <MSlider v-model="value" range />
-    <p style="margin:.5rem 0 0;color:var(--m-color-text-muted)">
-      {{ value.join(' – ') }}
-    </p>
-  </div>
-</template>
+```vue preview src="./demos/Range.vue"
 ```
 
 ## Marks & vertical
 
 `marks` 可以是数值数组，或「值 → 文案」映射。`tooltip` 在拖动时显示当前值。
 
-```vue preview
-<script setup lang="ts">
-import { MSlider } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(50)
-</script>
-
-<template>
-  <div style="display:flex;gap:2rem;align-items:stretch;height:10rem">
-    <div style="flex:1">
-      <MSlider v-model="value" tooltip :marks="{ 0: '0', 50: '半', 100: '满' }" />
-    </div>
-    <MSlider v-model="value" vertical tooltip />
-  </div>
-</template>
+```vue preview src="./demos/MarksAndVertical.zh.vue"
 ```
 
 ## Props

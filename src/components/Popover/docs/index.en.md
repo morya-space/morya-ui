@@ -16,72 +16,19 @@ import { MButton, MPopover } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MPopover } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <MPopover v-model="open" placement="bottom">
-    <MButton label="Toggle Popover" @click="open = !open" />
-    <template #content>
-      <p style="margin:0">
-        Click outside or press Esc to close.
-      </p>
-    </template>
-  </MPopover>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Placement
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MPopover } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <div style="display:flex;justify-content:center;padding:2rem">
-    <MPopover v-model="open" placement="bottom-start">
-      <MButton label="bottom-start" severity="secondary" @click="open = !open" />
-      <template #content>
-        <p style="margin:0">
-          Aligned to the start of the trigger.
-        </p>
-      </template>
-    </MPopover>
-  </div>
-</template>
+```vue preview src="./demos/Placement.vue"
 ```
 
 ## Hover
 
 `trigger` defaults to `manual` (`v-model` only). Use `hover` / `click` / `focus` to let the component open itself.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MPopover } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <MPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
-    <MButton label="Hover me" severity="secondary" />
-    <template #content>
-      <p style="margin:0">
-        Opens on hover.
-      </p>
-    </template>
-  </MPopover>
-</template>
+```vue preview src="./demos/Hover.vue"
 ```
 
 ## Props

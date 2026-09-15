@@ -18,264 +18,69 @@ import { MSelect } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | undefined>()
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-  { label: 'Unavailable', value: 'na', disabled: true },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Clearable
 
 `showClear`（或别名 `clearable`）在已选值时显示清除按钮。
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | undefined>('design')
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" label="Team" :options="options" show-clear />
-</template>
+```vue preview src="./demos/Clearable.vue"
 ```
 
 ## Invalid
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect
-    v-model="value"
-    :options="options"
-    placeholder="Required"
-    invalid
-    help-text="Please select a team"
-  />
-</template>
+```vue preview src="./demos/Invalid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect model-value="design" :options="options" disabled />
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Sizes
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'Small', value: 'sm' },
-  { label: 'Large', value: 'lg' },
-]
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-start">
-    <MSelect v-model="value" :options="options" size="small" placeholder="Small" />
-    <MSelect v-model="value" :options="options" placeholder="Normal" />
-    <MSelect v-model="value" :options="options" size="large" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Sizes.vue"
 ```
 
 ## Fluid
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
-</template>
+```vue preview src="./demos/Fluid.vue"
 ```
 
 ## Multiple
 
 `multiple` 时 `v-model` 为数组；已选项以可移除标签展示。菜单在选择后保持打开。`maxTagCount` 可折叠多余标签。
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<Array<string | number>>(['design'])
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-  { label: 'Research', value: 'research' },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
-    <MSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
-  </div>
-</template>
+```vue preview src="./demos/Multiple.vue"
 ```
 
 ## Tag
 
 `tag` + `filter` 允许用当前筛选词创建选项（回车或点击「创建」行）。虚拟列表本批不做。
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<Array<string | number>>([])
-const options = [
-  { label: 'Vue', value: 'vue' },
-  { label: 'React', value: 'react' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
-</template>
+```vue preview src="./demos/Tag.vue"
 ```
 
 ## Remote
 
 `remote` 关闭本地筛选，输入时发出 `search`。用 `loading` 表示异步进行中。
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | undefined>()
-const loading = ref(false)
-const options = ref<{ label: string; value: string }[]>([])
-const catalog = [
-  { label: 'Shanghai', value: 'sh' },
-  { label: 'Beijing', value: 'bj' },
-  { label: 'Shenzhen', value: 'sz' },
-]
-
-function onSearch(query: string) {
-  if (!query) {
-    options.value = []
-    return
-  }
-  loading.value = true
-  window.setTimeout(() => {
-    const needle = query.toLowerCase()
-    options.value = catalog.filter((item) => item.label.toLowerCase().includes(needle))
-    loading.value = false
-  }, 400)
-}
-</script>
-
-<template>
-  <MSelect
-    v-model="value"
-    :options="options"
-    filter
-    remote
-    :loading="loading"
-    placeholder="Search a city"
-    @search="onSearch"
-  />
-</template>
+```vue preview src="./demos/Remote.vue"
 ```
 
 ## Empty
 
 无选项或筛选无结果时展示空态文案；可用 `emptyMessage` 覆盖，否则读取 ConfigProvider `locale.emptyMessage`。
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const cities = [
-  { label: 'Shanghai', value: 'sh' },
-  { label: 'Beijing', value: 'bj' },
-  { label: 'Shenzhen', value: 'sz' },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MSelect v-model="value" :options="[]" empty-message="暂无选项" placeholder="Empty list" />
-    <MSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
-  </div>
-</template>
+```vue preview src="./demos/Empty.zh.vue"
 ```
 
 ## Teleport
 
 菜单默认 Teleport 到 `body`（`teleport` + `appendTo`）。设 `append-to="self"` 或 `teleport={false}` 可就地渲染。
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'In place', value: 'local' },
-  { label: 'Teleported', value: 'body' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
-</template>
+```vue preview src="./demos/Teleport.vue"
 ```
 
 ## 样式与 attrs

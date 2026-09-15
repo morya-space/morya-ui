@@ -16,68 +16,24 @@ import { MCheckbox } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MCheckbox } from 'morya-ui'
-import { ref } from 'vue'
-
-const accepted = ref(false)
-</script>
-
-<template>
-  <MCheckbox v-model="accepted" label="Accept terms and conditions" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Invalid
 
-```vue preview
-<script setup lang="ts">
-import { MCheckbox } from 'morya-ui'
-import { ref } from 'vue'
-
-const accepted = ref(false)
-</script>
-
-<template>
-  <MCheckbox v-model="accepted" invalid label="You must accept to continue" />
-</template>
+```vue preview src="./demos/Invalid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MCheckbox } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <MCheckbox :model-value="true" disabled label="Checked disabled" />
-    <MCheckbox :model-value="false" disabled label="Unchecked disabled" />
-  </div>
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Group
 
 `MCheckboxGroup` 以数组为 `v-model`，子项用 `value` 标识。`indeterminate` 表示部分选中。
 
-```vue preview
-<script setup lang="ts">
-import { MCheckbox, MCheckboxGroup } from 'morya-ui'
-import { ref } from 'vue'
-
-const selected = ref(['vue'])
-</script>
-
-<template>
-  <MCheckboxGroup v-model="selected">
-    <MCheckbox value="vue" label="Vue" />
-    <MCheckbox value="react" label="React" />
-    <MCheckbox :indeterminate="selected.length === 1" label="Mixed (demo)" />
-  </MCheckboxGroup>
-</template>
+```vue preview src="./demos/Group.vue"
 ```
 
 ## 样式与 attrs

@@ -22,28 +22,7 @@ Provide global defaults for the component tree via `MConfigProvider` or `createM
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput, MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const city = ref<string | undefined>()
-const options = [
-  { label: 'Beijing', value: 'bj' },
-  { label: 'Shanghai', value: 'sh' },
-]
-</script>
-
-<template>
-  <MConfigProvider size="small">
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Inherit small" />
-      <MInput placeholder="Inherit small" style="width:10rem" />
-      <MSelect v-model="city" :options="options" placeholder="Inherit small" style="width:10rem" />
-      <MButton label="Override to large" size="large" />
-    </div>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/Size.en.vue"
 ```
 
 ## Component Defaults
@@ -54,83 +33,17 @@ Precedence: **component props > `componentDefaults[component]` > global `size` /
 
 `Space` / `Flex` `size` is gap and does **not** inherit the global control `size`.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput, MSpace } from 'morya-ui'
-import { ref } from 'vue'
-
-const note = ref('Clearable')
-</script>
-
-<template>
-  <MConfigProvider
-    size="large"
-    :component-defaults="{
-      Input: { size: 'small', clearable: true },
-      Space: { size: 16 },
-    }"
-  >
-    <MSpace>
-      <MButton label="Still large" />
-      <MInput v-model="note" placeholder="Input defaults to small + clearable" style="width:14rem" />
-    </MSpace>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/ComponentDefaults.en.vue"
 ```
 
 ## Density
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem">
-    <MConfigProvider density="compact">
-      <div style="display:flex;gap:0.75rem;align-items:center">
-        <MButton label="compact" />
-        <MInput placeholder="compact" style="width:10rem" />
-      </div>
-    </MConfigProvider>
-    <MConfigProvider density="spacious">
-      <div style="display:flex;gap:0.75rem;align-items:center">
-        <MButton label="spacious" />
-        <MInput placeholder="spacious" style="width:10rem" />
-      </div>
-    </MConfigProvider>
-  </div>
-</template>
+```vue preview src="./demos/Density.vue"
 ```
 
 ## Input Variant
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MDialog, MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const city = ref<string | undefined>()
-const visible = ref(false)
-const options = [
-  { label: 'Beijing', value: 'bj' },
-  { label: 'Shanghai', value: 'sh' },
-]
-</script>
-
-<template>
-  <MConfigProvider input-variant="filled" append-to="body">
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MSelect v-model="city" :options="options" placeholder="filled input" style="width:12rem" />
-      <MButton label="Open dialog" @click="visible = true" />
-    </div>
-    <MDialog v-model="visible" title="Inherits appendTo" style="width: 24rem">
-      <p style="margin:0">
-        Overlay mount target is provided by ConfigProvider.
-      </p>
-    </MDialog>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/InputVariant.en.vue"
 ```
 
 ## App-level plugin

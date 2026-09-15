@@ -16,73 +16,22 @@ import { MRadio } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MRadio } from 'morya-ui'
-import { ref } from 'vue'
-
-const size = ref('md')
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <MRadio v-model="size" name="size" value="sm" label="Small" />
-    <MRadio v-model="size" name="size" value="md" label="Medium" />
-    <MRadio v-model="size" name="size" value="lg" label="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Invalid
 
-```vue preview
-<script setup lang="ts">
-import { MRadio } from 'morya-ui'
-import { ref } from 'vue'
-
-const plan = ref('')
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <MRadio v-model="plan" name="plan" value="free" invalid label="Free" />
-    <MRadio v-model="plan" name="plan" value="pro" invalid label="Pro" />
-  </div>
-</template>
+```vue preview src="./demos/Invalid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MRadio } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:1rem">
-    <MRadio model-value="a" value="a" disabled label="Selected" />
-    <MRadio model-value="a" value="b" disabled label="Other" />
-  </div>
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Group
 
-```vue preview
-<script setup lang="ts">
-import { MRadio, MRadioGroup } from 'morya-ui'
-import { ref } from 'vue'
-
-const size = ref('md')
-</script>
-
-<template>
-  <MRadioGroup v-model="size">
-    <MRadio value="sm" label="Small" />
-    <MRadio value="md" label="Medium" />
-    <MRadio value="lg" label="Large" />
-  </MRadioGroup>
-</template>
+```vue preview src="./demos/Group.vue"
 ```
 
 ## Props

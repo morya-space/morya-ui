@@ -24,111 +24,17 @@ import { MForm, MFormItem } from 'morya-ui'
 
 ## Declarative rules
 
-```vue preview
-<script setup lang="ts">
-import type { FormInstance, FormRules } from 'morya-ui'
-import { MButton, MForm, MFormItem, MInput } from 'morya-ui'
-import { reactive, ref } from 'vue'
-
-const formRef = ref<FormInstance | null>(null)
-const model = reactive({ name: '', email: '' })
-const rules: FormRules = {
-  name: { required: true, message: 'Enter a name', trigger: ['blur', 'input'] },
-  email: [
-    { required: true, message: 'Enter an email', trigger: 'blur' },
-    { pattern: /.[^\n\r@\u2028\u2029]*@.+\..+/, message: 'Enter a valid email', trigger: 'blur' },
-  ],
-}
-
-async function onSubmit() {
-  const { valid } = await formRef.value!.validate()
-  if (!valid) return
-}
-</script>
-
-<template>
-  <MForm
-    ref="formRef"
-    :model="model"
-    :rules="rules"
-    label-position="top"
-    validate-on="submit"
-    style="max-width: 22rem"
-    @submit="onSubmit"
-  >
-    <MFormItem label="Name" name="name">
-      <template #default="{ id, invalid }">
-        <MInput :id="id" v-model="model.name" fluid :invalid="invalid" />
-      </template>
-    </MFormItem>
-    <MFormItem label="Email" name="email" help="Used for notifications">
-      <template #default="{ id, invalid }">
-        <MInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
-      </template>
-    </MFormItem>
-    <MButton native-type="submit" label="Submit" />
-  </MForm>
-</template>
+```vue preview src="./demos/DeclarativeRules.en.vue"
 ```
 
 ## Callback validation (compatible)
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MForm, MFormItem, MInput } from 'morya-ui'
-import { reactive } from 'vue'
-
-const form = reactive({ name: '' })
-</script>
-
-<template>
-  <MForm validate-on="submit" style="max-width: 22rem">
-    <MFormItem
-      label="Name"
-      name="name"
-      required
-      :validate="() => (form.name.trim() ? undefined : 'Enter a name')"
-    >
-      <template #default="{ id, invalid }">
-        <MInput :id="id" v-model="form.name" fluid :invalid="invalid" />
-      </template>
-    </MFormItem>
-    <MButton native-type="submit" label="Submit" />
-  </MForm>
-</template>
+```vue preview src="./demos/CallbackValidationCompatible.en.vue"
 ```
 
 ## Inline layout and label alignment
 
-```vue preview
-<script setup lang="ts">
-import { MForm, MFormItem, MInput } from 'morya-ui'
-import { reactive } from 'vue'
-
-const model = reactive({ city: '', zip: '' })
-</script>
-
-<template>
-  <MForm
-    :model="model"
-    inline
-    label-placement="left"
-    label-align="right"
-    :label-width="72"
-    :rules="{ city: { required: true, message: 'Required' } }"
-  >
-    <MFormItem label="City" name="city">
-      <template #default="{ id }">
-        <MInput :id="id" v-model="model.city" />
-      </template>
-    </MFormItem>
-    <MFormItem label="ZIP" name="zip">
-      <template #default="{ id }">
-        <MInput :id="id" v-model="model.zip" />
-      </template>
-    </MFormItem>
-  </MForm>
-</template>
+```vue preview src="./demos/InlineLayoutAndLabelAlignment.en.vue"
 ```
 
 ## Props — Form

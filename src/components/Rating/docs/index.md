@@ -16,46 +16,19 @@ import { MRating } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MRating } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(3)
-</script>
-
-<template>
-  <MRating v-model="value" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Readonly
 
-```vue preview
-<script setup lang="ts">
-import { MRating } from 'morya-ui'
-</script>
-
-<template>
-  <MRating :model-value="4" readonly :cancel="false" />
-</template>
+```vue preview src="./demos/Readonly.vue"
 ```
 
 ## Half
 
 `allowHalf` 支持 0.5 步进。`allowClear` 是 `cancel` 的别名，传入时优先。
 
-```vue preview
-<script setup lang="ts">
-import { MRating } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(2.5)
-</script>
-
-<template>
-  <MRating v-model="value" allow-half />
-</template>
+```vue preview src="./demos/Half.vue"
 ```
 
 ## Props

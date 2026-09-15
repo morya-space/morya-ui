@@ -26,29 +26,7 @@ import {  MMenu } from 'morya-ui'
 
 为叶子项设置稳定的 `key`，用 `v-model:selected-key` 与路由同步；点击时触发 `select`。
 
-```vue preview
-<script setup lang="ts">
-import { MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const selectedKey = ref('dashboard')
-const model = [
-  { key: 'dashboard', label: '仪表盘', icon: 'layout-dashboard' },
-  { key: 'users', label: '用户', icon: 'users' },
-  { key: 'settings', label: '设置', icon: 'settings', disabled: true },
-]
-</script>
-
-<template>
-  <div>
-    <MMenu
-      v-model:selected-key="selectedKey"
-      :model="model"
-      embedded
-      @select="(item) => console.log('select', item.key)"
-    />
-  </div>
-</template>
+```vue preview src="./demos/Selection.zh.vue"
 ```
 
 未提供 `key` 时会回退到 `label`；生产环境建议始终显式设置 `key`。
@@ -57,326 +35,49 @@ const model = [
 
 点击带子项的节点可展开/收起；选中子项时父级会显示 `child-active` 高亮。
 
-```vue preview
-<script setup lang="ts">
-import { MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const selectedKey = ref('reports')
-const model = [
-  {
-    key: 'analytics',
-    label: '数据分析',
-    icon: 'chart-bar',
-    items: [
-      { key: 'reports', label: '报表', icon: 'file-text' },
-      { key: 'monitor', label: '监控', icon: 'activity' },
-    ],
-  },
-  { key: 'settings', label: '系统设置', icon: 'settings' },
-]
-</script>
-
-<template>
-  <div
-    style="
-      width: 16rem;
-      padding: var(--m-space-3);
-      background: var(--m-color-surface);
-      border: 1px solid var(--m-color-border);
-      border-radius: var(--m-radius-lg);
-      box-shadow: var(--m-shadow-sm);
-    "
-  >
-    <MMenu v-model:selected-key="selectedKey" :model="model" embedded />
-  </div>
-</template>
+```vue preview src="./demos/NestedSubmenus.zh.vue"
 ```
 
 ## 手风琴与展开控制
 
 `accordion` 同时只保留一个一级子菜单展开。`defaultExpandedKeys` / `v-model:expanded-keys` 可受控展开项；变更 `selectedKey` 时会自动展开其祖先路径。
 
-```vue preview
-<script setup lang="ts">
-import { MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const selectedKey = ref('a1')
-const model = [
-  { key: 'a', label: '模块 A', items: [{ key: 'a1', label: 'A-1' }] },
-  { key: 'b', label: '模块 B', items: [{ key: 'b1', label: 'B-1' }] },
-]
-</script>
-
-<template>
-  <div
-    style="
-      width: 14rem;
-      padding: var(--m-space-3);
-      background: var(--m-color-surface);
-      border: 1px solid var(--m-color-border);
-      border-radius: var(--m-radius-lg);
-      box-shadow: var(--m-shadow-sm);
-    "
-  >
-    <MMenu v-model:selected-key="selectedKey" :model="model" accordion embedded />
-  </div>
-</template>
+```vue preview src="./demos/AccordionAndExpandedKeys.zh.vue"
 ```
 
 ## 折叠与飞出层
 
 `collapsed` 隐藏文案，仅保留图标；悬停时在右侧显示 `MTooltip` 标签，带子项的节点还会弹出飞出层（`.m-menu--flyout`）。飞出层经 `MPopover` Teleport 到 `body`，不会被侧栏或 `MLayoutSider` 滚动区域裁剪。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
 
-```vue preview
-<script setup lang="ts">
-import { MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const selectedKey = ref('home')
-const model = [
-  {
-    key: 'workspace',
-    label: '工作区',
-    icon: 'folder',
-    items: [
-      { key: 'home', label: '首页', icon: 'home' },
-      { key: 'docs', label: '文档', icon: 'file-text' },
-    ],
-  },
-  { key: 'settings', label: '设置', icon: 'settings' },
-]
-</script>
-
-<template>
-  <div style="display: flex; gap: var(--m-space-4); align-items: stretch">
-    <div
-      style="
-        flex: 1;
-        min-width: 0;
-        padding: var(--m-space-3);
-        background: var(--m-color-surface);
-        border: 1px solid var(--m-color-border);
-        border-radius: var(--m-radius-lg);
-        box-shadow: var(--m-shadow-sm);
-      "
-    >
-      <p
-        style="
-          margin: 0 0 var(--m-space-3);
-          font-size: var(--m-font-size-xs);
-          color: var(--m-color-text-muted);
-        "
-      >
-        展开
-      </p>
-      <MMenu v-model:selected-key="selectedKey" :model="model" embedded />
-    </div>
-    <div
-      style="
-        width: 4.5rem;
-        padding: var(--m-space-3) var(--m-space-2);
-        background: var(--m-color-surface);
-        border: 1px solid var(--m-color-border);
-        border-radius: var(--m-radius-lg);
-        box-shadow: var(--m-shadow-sm);
-      "
-    >
-      <p
-        style="
-          margin: 0 0 var(--m-space-3);
-          font-size: var(--m-font-size-xs);
-          color: var(--m-color-text-muted);
-          text-align: center;
-        "
-      >
-        折叠
-      </p>
-      <MMenu
-        v-model:selected-key="selectedKey"
-        :model="model"
-        collapsed
-        embedded
-        :collapsed-width="64"
-      />
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/CollapsedAndFlyout.zh.vue"
 ```
 
 ## 嵌入 Layout 侧栏
 
 推荐结构：**全局 Header + 下方 `has-sider` Layout**。菜单放在 `MLayoutSider` 内，与 `v-model:collapsed` 联动。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MLayout,
-  MLayoutContent,
-  MLayoutHeader,
-  MLayoutSider,
-  MMenu,
-} from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(false)
-const selectedKey = ref('dashboard')
-const model = [
-  { key: 'dashboard', label: '仪表盘', icon: 'layout-dashboard' },
-  {
-    key: 'system',
-    label: '系统',
-    icon: 'settings',
-    items: [
-      { key: 'users', label: '用户', icon: 'users' },
-      { key: 'roles', label: '角色', icon: 'shield' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <MLayout
-    style="
-      height: 14rem;
-      border: 1px solid var(--m-color-border);
-      border-radius: var(--m-radius-lg);
-      box-shadow: var(--m-shadow-sm);
-      overflow: hidden;
-    "
-  >
-    <MLayoutHeader
-      bordered
-      style="
-        padding: 0 var(--m-space-4);
-        display: flex;
-        align-items: center;
-        min-height: var(--m-layout-header-height);
-      "
-    >
-      <strong style="color: var(--m-color-primary); font-size: var(--m-font-size-md)">头部菜单</strong>
-    </MLayoutHeader>
-    <MLayout has-sider>
-      <MLayoutSider
-        v-model:collapsed="collapsed"
-        bordered
-        show-trigger="arrow-circle"
-        collapse-mode="width"
-        :collapsed-width="120"
-      >
-        <MMenu
-          v-model:selected-key="selectedKey"
-          :model="model"
-          :collapsed="collapsed"
-          :collapsed-width="64"
-        />
-      </MLayoutSider>
-      <MLayoutContent embedded content-style="padding: var(--m-space-4)">
-        <p style="margin: 0; color: var(--m-color-text-muted); font-size: var(--m-font-size-sm)">
-          当前选中：<strong style="color: var(--m-color-text)">{{ selectedKey }}</strong>
-        </p>
-      </MLayoutContent>
-    </MLayout>
-  </MLayout>
-</template>
+```vue preview src="./demos/EmbedInLayoutSider.zh.vue"
 ```
 
 ## 水平菜单
 
 `mode="horizontal"` 用于顶栏一级导航；子菜单经 `MPopover` 以下拉飞出层展示（Teleport + 主题滚动条），选中后自动关闭。`popup` 模式的主菜单列表同样内置 `MScrollbar`。
 
-```vue preview
-<script setup lang="ts">
-import { MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const selectedKey = ref('home')
-const model = [
-  { key: 'home', label: '首页', icon: 'home' },
-  {
-    key: 'products',
-    label: '产品',
-    icon: 'box',
-    items: [
-      { key: 'cloud', label: '云服务', icon: 'cloud' },
-      { key: 'edge', label: '边缘计算', icon: 'server' },
-    ],
-  },
-  { key: 'about', label: '关于', icon: 'info-circle' },
-]
-</script>
-
-<template>
-  <div
-    style="
-      padding: 0 var(--m-space-2);
-      background: var(--m-color-surface);
-      border: 1px solid var(--m-color-border);
-      border-radius: var(--m-radius-lg);
-      box-shadow: var(--m-shadow-sm);
-    "
-  >
-    <MMenu v-model:selected-key="selectedKey" :model="model" mode="horizontal" embedded />
-  </div>
-</template>
+```vue preview src="./demos/HorizontalMode.zh.vue"
 ```
 
 ## 反色（深色侧栏）
 
 `inverted` 配合 `MLayoutSider` 的 `inverted`，用于深色背景侧栏。
 
-```vue preview
-<script setup lang="ts">
-import { MLayout, MLayoutSider, MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const selectedKey = ref('dashboard')
-const model = [
-  { key: 'dashboard', label: '仪表盘', icon: 'layout-dashboard' },
-  { key: 'users', label: '用户', icon: 'users' },
-]
-</script>
-
-<template>
-  <MLayout
-    has-sider
-    style="
-      height: 10rem;
-      border-radius: var(--m-radius-lg);
-      box-shadow: var(--m-shadow-sm);
-      overflow: hidden;
-    "
-  >
-    <MLayoutSider inverted bordered style="width: 12rem">
-      <MMenu v-model:selected-key="selectedKey" :model="model" inverted />
-    </MLayoutSider>
-  </MLayout>
-</template>
+```vue preview src="./demos/InvertedDarkSider.zh.vue"
 ```
 
 ## 弹出模式
 
 `popup` + `v-model` 将菜单作为浮层，默认 Teleport 到 `body` 并相对**默认插槽触发器**定位（无插槽时回退到最后一次指针位置）。点击外部或选中叶子项后关闭。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const model = [
-  { label: '复制', command: () => undefined },
-  { separator: true },
-  { label: '删除', disabled: true },
-]
-</script>
-
-<template>
-  <MMenu v-model="open" popup :model="model">
-    <MButton label="更多操作" @click="open = !open" />
-  </MMenu>
-</template>
+```vue preview src="./demos/PopupMode.zh.vue"
 ```
 
 ## Props

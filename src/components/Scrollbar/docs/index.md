@@ -18,63 +18,14 @@ import { MScrollbar } from 'morya-ui'
 
 用 `height` 固定可视区域高度；不设时跟随父容器高度。
 
-```vue preview
-<script setup lang="ts">
-import { MScrollbar } from 'morya-ui'
-</script>
-
-<template>
-  <MScrollbar height="240px" always style="width: 100%">
-    <p
-      v-for="item in 20"
-      :key="item"
-      style="
-        display:flex;align-items:center;justify-content:center;
-        height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--m-color-primary) 12%, transparent);
-        color:var(--m-color-primary);
-      "
-    >
-      {{ item }}
-    </p>
-  </MScrollbar>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Max height
 
 仅当内容超出 `max-height` 时出现滚动条。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MScrollbar } from 'morya-ui'
-import { ref } from 'vue'
-
-const count = ref(3)
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <div style="display:flex;gap:0.5rem">
-      <MButton label="Add" size="small" @click="count++" />
-      <MButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
-    </div>
-    <MScrollbar max-height="220px" always style="width: 100%">
-      <p
-        v-for="item in count"
-        :key="item"
-        style="
-          display:flex;align-items:center;justify-content:center;
-          height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--m-color-info) 12%, transparent);
-          color:var(--m-color-info);
-        "
-      >
-        Item {{ item }}
-      </p>
-    </MScrollbar>
-  </div>
-</template>
+```vue preview src="./demos/MaxHeight.vue"
 ```
 
 ## Horizontal
@@ -83,147 +34,28 @@ const count = ref(3)
 
 `MLayout` / `MLayoutContent` / `MLayoutSider`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MTreeTable`、`MVirtualScroller` 等组件已内置本组件。
 
-```vue preview
-<script setup lang="ts">
-import { MScrollbar } from 'morya-ui'
-</script>
-
-<template>
-  <MScrollbar always>
-    <div style="display:flex;width:fit-content">
-      <p
-        v-for="item in 30"
-        :key="item"
-        style="
-          flex-shrink:0;display:flex;align-items:center;justify-content:center;
-          width:96px;height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--m-color-danger) 12%, transparent);
-          color:var(--m-color-danger);
-        "
-      >
-        {{ item }}
-      </p>
-    </div>
-  </MScrollbar>
-</template>
+```vue preview src="./demos/Horizontal.vue"
 ```
 
 ## Always / Native
 
 `always` 常显自定义滑块；`native` 使用浏览器原生滚动条。
 
-```vue preview
-<script setup lang="ts">
-import { MScrollbar } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1.25rem;grid-template-columns:1fr 1fr">
-    <div>
-      <p style="margin:0 0 0.5rem;color:var(--m-color-text-muted)">
-        always
-      </p>
-      <MScrollbar height="160px" always>
-        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
-          Line {{ n }}
-        </p>
-      </MScrollbar>
-    </div>
-    <div>
-      <p style="margin:0 0 0.5rem;color:var(--m-color-text-muted)">
-        native
-      </p>
-      <MScrollbar height="160px" native style="width: 200px">
-        <p v-for="n in 12" :key="n" style="margin:0.5rem 0">
-          Line {{ n }}
-        </p>
-      </MScrollbar>
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/AlwaysNative.vue"
 ```
 
 ## Manual scroll
 
 通过实例方法 `setScrollTop` / `setScrollLeft` / `scrollTo` / `update` 控制滚动。
 
-```vue preview
-<script setup lang="ts">
-import type { ScrollbarInstance } from 'morya-ui'
-import { MButton, MScrollbar } from 'morya-ui'
-import { ref } from 'vue'
-
-const scrollbarRef = ref<ScrollbarInstance>()
-const scrollTop = ref(0)
-
-function jump(top: number) {
-  scrollbarRef.value?.setScrollTop(top)
-}
-
-function onScroll(payload: { scrollTop: number }) {
-  scrollTop.value = Math.round(payload.scrollTop)
-}
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <MButton label="Top" size="small" @click="jump(0)" />
-      <MButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
-      <MButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
-      <span style="color:var(--m-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
-    </div>
-    <MScrollbar ref="scrollbarRef" height="200px" style="width: 200px" always @scroll="onScroll">
-      <p
-        v-for="item in 24"
-        :key="item"
-        style="
-          display:flex;align-items:center;justify-content:center;
-          height:48px;margin:8px;border-radius:6px;
-          background:color-mix(in srgb, var(--m-color-success) 12%, transparent);
-          color:var(--m-color-success);
-        "
-      >
-        {{ item }}
-      </p>
-    </MScrollbar>
-  </div>
-</template>
+```vue preview src="./demos/ManualScroll.zh.vue"
 ```
 
 ## Infinite scroll
 
 滚动到边缘时触发 `end-reached`，可用于无限加载。
 
-```vue preview
-<script setup lang="ts">
-import type { ScrollbarDirection } from 'morya-ui'
-import { MScrollbar } from 'morya-ui'
-import { ref } from 'vue'
-
-const num = ref(20)
-
-function loadMore(direction: ScrollbarDirection) {
-  if (direction === 'bottom') num.value += 5
-}
-</script>
-
-<template>
-  <MScrollbar height="220px" always style="width: 200px" @end-reached="loadMore">
-    <p
-      v-for="item in num"
-      :key="item"
-      style="
-        display:flex;align-items:center;justify-content:center;
-        height:48px;margin:8px;border-radius:6px;
-        background:color-mix(in srgb, var(--m-color-primary) 12%, transparent);
-        color:var(--m-color-primary);
-      "
-    >
-      {{ item }}
-    </p>
-  </MScrollbar>
-</template>
+```vue preview src="./demos/InfiniteScroll.zh.vue"
 ```
 
 ## API

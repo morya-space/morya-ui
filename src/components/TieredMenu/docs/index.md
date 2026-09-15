@@ -17,45 +17,14 @@ import { MTieredMenu  } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MTieredMenu } from 'morya-ui'
-
-const model = [
-  {
-    label: '文件',
-    items: [
-      { label: '新建', command: () => window.alert('新建') },
-      { label: '导出' },
-    ],
-  },
-  { separator: true },
-  { label: '帮助' },
-]
-</script>
-
-<template>
-  <MTieredMenu :model="model" />
-</template>
+```vue preview src="./demos/BasicUsage.zh.vue"
 ```
 
 ## 弹出模式
 
 `popup` + `v-model` 控制浮层显隐，适合工具栏按钮触发：
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MTieredMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const model = [{ label: '复制' }, { label: '粘贴' }]
-</script>
-
-<template>
-  <MButton label="操作" @click="open = true" />
-  <MTieredMenu v-model="open" popup :model="model" />
-</template>
+```vue preview src="./demos/PopupMode.zh.vue"
 ```
 
 ## 滚动与子菜单

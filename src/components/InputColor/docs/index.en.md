@@ -16,34 +16,14 @@ import { MInputColor } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MInputColor } from 'morya-ui'
-import { ref } from 'vue'
-
-const color = ref('#2563eb')
-</script>
-
-<template>
-  <MInputColor v-model="color" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Swatches
 
 `swatches` provides a row of preset colors.
 
-```vue preview
-<script setup lang="ts">
-import { MInputColor } from 'morya-ui'
-import { ref } from 'vue'
-
-const color = ref('#2563eb')
-</script>
-
-<template>
-  <MInputColor v-model="color" :swatches="['#2563eb', '#16a34a', '#dc2626']" />
-</template>
+```vue preview src="./demos/Swatches.vue"
 ```
 
 ## Props

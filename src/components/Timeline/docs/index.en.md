@@ -16,60 +16,19 @@ import { MTimeline } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MTimeline } from 'morya-ui'
-
-const events = [
-  { status: 'Ordered', date: '15/10/2024', content: 'Order placed', icon: 'check', severity: 'success' },
-  { status: 'Shipped', date: '16/10/2024', content: 'On the way', icon: 'upload', severity: 'info' },
-  { status: 'Delivered', date: '17/10/2024', content: 'Arrived', icon: 'home', severity: 'success' },
-]
-</script>
-
-<template>
-  <MTimeline :value="events" align="alternate" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Horizontal
 
-```vue preview
-<script setup lang="ts">
-import { MTimeline } from 'morya-ui'
-
-const events = [
-  { status: 'Start', date: 'Monday', content: 'Kickoff', icon: 'check' },
-  { status: 'Build', date: 'Wednesday', content: 'Implementation', icon: 'settings' },
-  { status: 'Ship', date: 'Friday', content: 'Release', icon: 'check-circle' },
-]
-</script>
-
-<template>
-  <MTimeline :value="events" layout="horizontal" />
-</template>
+```vue preview src="./demos/Horizontal.en.vue"
 ```
 
 ## Pending & item slot
 
 `pending` (`true` or a string) appends a trailing item. `#item` replaces the whole event.
 
-```vue preview
-<script setup lang="ts">
-import { MTimeline } from 'morya-ui'
-
-const events = [
-  { status: 'Done', date: 'Mon', content: 'Shipped' },
-]
-</script>
-
-<template>
-  <MTimeline :value="events" pending="Waiting">
-    <template #item="{ item }">
-      <span>{{ item.content || item.status }}</span>
-    </template>
-  </MTimeline>
-</template>
+```vue preview src="./demos/PendingAndItemSlot.en.vue"
 ```
 
 ## Props

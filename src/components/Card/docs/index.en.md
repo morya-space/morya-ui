@@ -16,61 +16,17 @@ import { MButton, MCard } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MCard } from 'morya-ui'
-</script>
-
-<template>
-  <MCard title="Project overview" subtitle="Updated 2 hours ago">
-    <p style="margin:0;color:var(--m-color-text-muted)">
-      Title and subtitle align in the header. Body content stays in the default slot.
-    </p>
-    <template #footer>
-      <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-        <MButton label="Dismiss" severity="secondary" text />
-        <MButton label="Continue" />
-      </div>
-    </template>
-  </MCard>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Custom Header
 
-```vue preview
-<script setup lang="ts">
-import { MCard, MTag } from 'morya-ui'
-</script>
-
-<template>
-  <MCard>
-    <template #header>
-      <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:1rem">
-        <strong>Custom header</strong>
-        <MTag value="Active" severity="success" />
-      </div>
-    </template>
-    Prefer the header slot when you need more than title/subtitle text.
-  </MCard>
-</template>
+```vue preview src="./demos/CustomHeader.vue"
 ```
 
 ## Cover & Hover
 
-```vue preview
-<script setup lang="ts">
-import { MCard } from 'morya-ui'
-</script>
-
-<template>
-  <MCard title="Cover card" hoverable size="small">
-    <template #cover>
-      <div style="height:6rem;background:color-mix(in srgb, var(--m-color-primary) 18%, transparent)" />
-    </template>
-    Hover to lift. Set `bordered` to false for a borderless surface.
-  </MCard>
-</template>
+```vue preview src="./demos/CoverAndHover.vue"
 ```
 
 ## Props

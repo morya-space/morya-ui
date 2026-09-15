@@ -16,46 +16,12 @@ import { MPickList } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MPickList } from 'morya-ui'
-import { ref } from 'vue'
-
-const source = ref(['Apple', 'Banana', 'Cherry', 'Grape'])
-const target = ref(['Durian'])
-</script>
-
-<template>
-  <MPickList
-    v-model:source="source"
-    v-model:target="target"
-    source-header="Available fruit"
-    target-header="Selected fruit"
-  />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Custom items
 
-```vue preview
-<script setup lang="ts">
-import { MPickList } from 'morya-ui'
-import { ref } from 'vue'
-
-const source = ref([
-  { id: 1, name: 'Design' },
-  { id: 2, name: 'Engineering' },
-])
-const target = ref([{ id: 3, name: 'Testing' }])
-</script>
-
-<template>
-  <MPickList v-model:source="source" v-model:target="target" data-key="id">
-    <template #item="{ item }">
-      <strong>{{ item.name }}</strong>
-    </template>
-  </MPickList>
-</template>
+```vue preview src="./demos/CustomItems.en.vue"
 ```
 
 ## Props

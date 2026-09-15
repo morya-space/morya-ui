@@ -22,92 +22,21 @@ import { MToast, toast, useToast } from 'morya-ui'
 
 ## API
 
-```vue preview
-<script setup lang="ts">
-import { MButton, toast } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton
-      label="Success"
-      severity="success"
-      @click="toast.success({ summary: 'Saved', detail: 'Your changes are live.' })"
-    />
-    <MButton
-      label="Info"
-      severity="info"
-      @click="toast.info({ summary: 'Tip', detail: 'You can continue.' })"
-    />
-    <MButton
-      label="Warn"
-      severity="warn"
-      @click="toast.warn({ summary: 'Caution', detail: 'Please double-check.' })"
-    />
-    <MButton
-      label="Error"
-      severity="danger"
-      @click="toast.error({ summary: 'Failed', detail: 'Try again later.' })"
-    />
-  </div>
-</template>
+```vue preview src="./demos/Api.en.vue"
 ```
 
 ## Custom content
 
 `summary` / `detail` also accept strings, `h()` VNodes, components, or render factories.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, toast } from 'morya-ui'
-import { h } from 'vue'
-
-function showRich() {
-  toast.info({
-    summary: () => h('span', [h('strong', 'Custom title')]),
-    detail: () => h('em', 'Detail can be a VNode too'),
-    life: 4000,
-  })
-}
-</script>
-
-<template>
-  <MButton label="Rich Toast" @click="showRich" />
-</template>
+```vue preview src="./demos/CustomContent.en.vue"
 ```
 
 ## Controlled
 
 You can still manage the list yourself with `messages` + `close`.
 
-```vue preview
-<script setup lang="ts">
-import type { ToastMessage } from 'morya-ui'
-import { MButton, MToast } from 'morya-ui'
-import { ref } from 'vue'
-
-const messages = ref<ToastMessage[]>([])
-let seq = 0
-
-function push(severity: ToastMessage['severity'], summary: string, detail?: string) {
-  messages.value = [
-    ...messages.value,
-    { id: `toast-${++seq}`, summary, detail, severity, life: 0 },
-  ]
-}
-
-function onClose(message: ToastMessage) {
-  messages.value = messages.value.filter((item) => item.id !== message.id)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <MButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
-  </div>
-  <MToast :messages="messages" position="top-right" @close="onClose" />
-</template>
+```vue preview src="./demos/Controlled.vue"
 ```
 
 ## Methods

@@ -24,254 +24,47 @@ import {
 
 Header / Content / Footer。Content 会占满中间剩余高度。
 
-```vue preview
-<script setup lang="ts">
-import { MLayout, MLayoutContent, MLayoutFooter, MLayoutHeader } from 'morya-ui'
-</script>
-
-<template>
-  <MLayout style="height:16rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayoutHeader bordered style="padding:0.75rem 1rem">
-      Header
-    </MLayoutHeader>
-    <MLayoutContent embedded content-style="padding:1rem;display:flex;align-items:center;justify-content:center">
-      Content（自动撑开）
-    </MLayoutContent>
-    <MLayoutFooter bordered style="padding:0.75rem 1rem">
-      Footer
-    </MLayoutFooter>
-  </MLayout>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## With Sider
 
 顶栏 + 左侧栏 + 主内容。内层 `has-sider` 的 Layout 会吃掉 Header 以下的全部高度。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MLayout,
-  MLayoutContent,
-  MLayoutHeader,
-  MLayoutSider,
-} from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(false)
-</script>
-
-<template>
-  <MLayout style="height:16rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayoutHeader bordered style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between">
-      <strong>App</strong>
-      <span style="color:var(--m-color-text-muted);font-size:0.75rem">{{ collapsed ? '已折叠' : '已展开' }}</span>
-    </MLayoutHeader>
-    <MLayout has-sider>
-      <MLayoutSider
-        v-model:collapsed="collapsed"
-        bordered
-        show-trigger="arrow-circle"
-        :width="160"
-        content-style="padding:0.75rem"
-      >
-        <div style="display:grid;gap:0.5rem">
-          <div>概览</div>
-          <div>项目</div>
-          <div>设置</div>
-        </div>
-      </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
-        主内容区会横向、纵向同时撑满。
-      </MLayoutContent>
-    </MLayout>
-  </MLayout>
-</template>
+```vue preview src="./demos/WithSider.zh.vue"
 ```
 
 ## Right Sider
 
-```vue preview
-<script setup lang="ts">
-import {
-  MLayout,
-  MLayoutContent,
-  MLayoutHeader,
-  MLayoutSider,
-} from 'morya-ui'
-</script>
-
-<template>
-  <MLayout style="height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayoutHeader bordered style="padding:0.75rem 1rem">
-      Inspector
-    </MLayoutHeader>
-    <MLayout has-sider sider-placement="right">
-      <MLayoutSider bordered :width="140" content-style="padding:0.75rem">
-        属性面板
-      </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
-        画布 / 主区域
-      </MLayoutContent>
-    </MLayout>
-  </MLayout>
-</template>
+```vue preview src="./demos/RightSider.zh.vue"
 ```
 
 ## Full Shell
 
 完整后台骨架：顶栏 + 侧栏 + 内容 + 底栏。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MButton,
-  MLayout,
-  MLayoutContent,
-  MLayoutFooter,
-  MLayoutHeader,
-  MLayoutSider,
-  MTag,
-} from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(false)
-</script>
-
-<template>
-  <MLayout style="height:18rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayoutHeader
-      bordered
-      inverted
-      style="padding:0.65rem 1rem;display:flex;align-items:center;gap:0.75rem"
-    >
-      <strong>Morya UI</strong>
-      <MTag value="Studio" />
-      <span style="flex:1" />
-      <MButton size="small" label="发布" />
-    </MLayoutHeader>
-
-    <MLayout has-sider>
-      <MLayoutSider
-        v-model:collapsed="collapsed"
-        bordered
-        inverted
-        show-trigger="bar"
-        :width="168"
-        :collapsed-width="56"
-        content-style="padding:0.75rem"
-      >
-        <div style="display:grid;gap:0.65rem;font-size:0.875rem">
-          <div>仪表盘</div>
-          <div>数据源</div>
-          <div>组件</div>
-          <div>主题</div>
-        </div>
-      </MLayoutSider>
-
-      <MLayout>
-        <MLayoutContent embedded content-style="padding:1rem;display:grid;gap:0.75rem;align-content:start">
-          <strong>工作区</strong>
-          <p style="margin:0;color:var(--m-color-text-muted);font-size:0.875rem">
-            Content 已撑满 Header 与 Footer 之间的空间；侧栏折叠不影响主区高度。
-          </p>
-        </MLayoutContent>
-        <MLayoutFooter bordered style="padding:0.5rem 1rem;color:var(--m-color-text-muted);font-size:0.75rem">
-          Ready · local
-        </MLayoutFooter>
-      </MLayout>
-    </MLayout>
-  </MLayout>
-</template>
+```vue preview src="./demos/FullShell.zh.vue"
 ```
 
 ## Embedded Content
 
 `embedded` 给内容区柔和背景，便于和顶栏/侧栏区分。
 
-```vue preview
-<script setup lang="ts">
-import { MLayout, MLayoutContent, MLayoutHeader } from 'morya-ui'
-</script>
-
-<template>
-  <MLayout style="height:12rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayoutHeader bordered style="padding:0.75rem 1rem">
-      Settings
-    </MLayoutHeader>
-    <MLayoutContent embedded content-style="padding:1rem">
-      嵌套表单 / 列表放在这里。
-    </MLayoutContent>
-  </MLayout>
-</template>
+```vue preview src="./demos/EmbeddedContent.zh.vue"
 ```
 
 ## Scrollable Content
 
 内容超出时仅 Content 区域滚动，Header / Sider 保持固定。`MLayout` / `MLayoutContent` / `MLayoutSider` 通过内置 `MScrollbar` 提供统一滚动条。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MLayout,
-  MLayoutContent,
-  MLayoutHeader,
-  MLayoutSider,
-} from 'morya-ui'
-</script>
-
-<template>
-  <MLayout style="height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayoutHeader bordered style="padding:0.75rem 1rem">
-      Scroll demo
-    </MLayoutHeader>
-    <MLayout has-sider>
-      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
-        固定侧栏
-      </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
-        <div style="display:grid;gap:0.5rem">
-          <div v-for="n in 20" :key="n">
-            行 {{ n }} — 向下滚动
-          </div>
-        </div>
-      </MLayoutContent>
-    </MLayout>
-  </MLayout>
-</template>
+```vue preview src="./demos/ScrollableContent.zh.vue"
 ```
 
 ## Absolute Shell
 
 根布局 `position="absolute"` 铺满父级（父级需 `position: relative` + 明确高度）。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MLayout,
-  MLayoutContent,
-  MLayoutHeader,
-  MLayoutSider,
-} from 'morya-ui'
-</script>
-
-<template>
-  <div style="position:relative;height:14rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden">
-    <MLayout position="absolute" has-sider>
-      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
-        Nav
-      </MLayoutSider>
-      <MLayout>
-        <MLayoutHeader bordered style="padding:0.75rem 1rem">
-          Absolute layout
-        </MLayoutHeader>
-        <MLayoutContent embedded content-style="padding:1rem">
-          填满相对定位容器
-        </MLayoutContent>
-      </MLayout>
-    </MLayout>
-  </div>
-</template>
+```vue preview src="./demos/AbsoluteShell.zh.vue"
 ```
 
 ## Layout Props

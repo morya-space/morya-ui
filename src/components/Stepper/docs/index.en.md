@@ -16,44 +16,14 @@ import { MStepper } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MStepper } from 'morya-ui'
-import { ref } from 'vue'
-
-const active = ref(0)
-const steps = [
-  { label: 'Basic info' },
-  { label: 'Confirm' },
-  { label: 'Done' },
-]
-</script>
-
-<template>
-  <MStepper v-model="active" :steps="steps" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Vertical
 
 `vertical` (or `orientation="vertical"`) stacks steps. Each step can include `description` / `status`.
 
-```vue preview
-<script setup lang="ts">
-import { MStepper } from 'morya-ui'
-import { ref } from 'vue'
-
-const active = ref(1)
-const steps = [
-  { label: 'Basic info', description: 'Fill in details', status: 'finish' },
-  { label: 'Confirm', description: 'Review', status: 'process' },
-  { label: 'Done', description: 'Submit' },
-]
-</script>
-
-<template>
-  <MStepper v-model="active" vertical :steps="steps" />
-</template>
+```vue preview src="./demos/Vertical.en.vue"
 ```
 
 ## Props

@@ -16,170 +16,40 @@ import { MButton, MDialog } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <div>
-    <MButton label="Open Dialog" @click="open = true" />
-    <MDialog v-model="open" header="Confirm" width="28rem">
-      <p style="margin:0">
-        Use <code>header</code> or <code>title</code> for the dialog title.
-      </p>
-    </MDialog>
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Positions
 
 支持 `center` / `top` / `bottom` / `left` / `right` 以及四角位置。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const position = ref<'center' | 'top' | 'topright' | 'bottomleft'>('center')
-
-function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
-  position.value = next
-  open.value = true
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MButton label="Center" size="small" @click="openAt('center')" />
-    <MButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <MButton label="Top Right" size="small" @click="openAt('topright')" />
-    <MButton label="Bottom Left" size="small" severity="secondary" @click="openAt('bottomleft')" />
-    <MDialog v-model="open" :header="`Position: ${position}`" :position="position">
-      <p style="margin:0">
-        Dialog can dock to edges and corners.
-      </p>
-    </MDialog>
-  </div>
-</template>
+```vue preview src="./demos/Positions.vue"
 ```
 
 ## Footer actions
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <div>
-    <MButton label="With Footer" @click="open = true" />
-    <MDialog v-model="open" header="Save changes" width="28rem">
-      <p style="margin:0">
-        Footer slot is for primary and secondary actions.
-      </p>
-      <template #footer>
-        <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-          <MButton label="Cancel" severity="secondary" text @click="open = false" />
-          <MButton label="Confirm" @click="open = false" />
-        </div>
-      </template>
-    </MDialog>
-  </div>
-</template>
+```vue preview src="./demos/FooterActions.vue"
 ```
 
 ## No dismiss mask
 
 `dismissableMask={false}`（或 `closeOnOutsideClick={false}`）时点击遮罩不关闭。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <div>
-    <MButton label="No Mask Dismiss" severity="secondary" @click="open = true" />
-    <MDialog v-model="open" header="Stay open" :dismissable-mask="false">
-      <p style="margin:0">
-        Click the mask — the dialog stays open. Use the close button or Esc.
-      </p>
-    </MDialog>
-  </div>
-</template>
+```vue preview src="./demos/NoDismissMask.vue"
 ```
 
 ## Maximizable
 
 `maximizable` 在标题栏提供最大化 / 还原切换。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-</script>
-
-<template>
-  <div>
-    <MButton label="Maximizable" @click="open = true" />
-    <MDialog v-model="open" header="Workspace" maximizable width="32rem">
-      <p style="margin:0">
-        Toggle maximize to fill the viewport.
-      </p>
-    </MDialog>
-  </div>
-</template>
+```vue preview src="./demos/Maximizable.vue"
 ```
 
 ## 预设页脚与异步关闭
 
 `positiveText` / `negativeText` 生成确认 / 取消按钮（`footer` 插槽优先）。处理函数返回 `false`（含 Promise）则保持打开。确认型流程请用 [ConfirmDialog](/components/ConfirmDialog)；`type` 只负责 Dialog 标题图标。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MDialog } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-
-async function save() {
-  await new Promise((resolve) => setTimeout(resolve, 400))
-}
-</script>
-
-<template>
-  <div>
-    <MButton label="Save dialog" @click="open = true" />
-    <MDialog
-      v-model="open"
-      header="保存更改"
-      type="info"
-      positive-text="保存"
-      negative-text="取消"
-      :on-positive-click="save"
-      :before-close="() => true"
-      width="28rem"
-    >
-      <p style="margin:0">
-        关闭按钮、Esc、遮罩会走 <code>beforeClose</code>；保存走 <code>onPositiveClick</code>。
-      </p>
-    </MDialog>
-  </div>
-</template>
+```vue preview src="./demos/PresetFooterAndAsyncClose.zh.vue"
 ```
 
 ## Props

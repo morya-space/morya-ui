@@ -29,208 +29,49 @@ import { MFileUpload } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const names = ref<string[]>([])
-function onSelect(files: File[]) {
-  names.value = files.map((f) => f.name)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <MFileUpload mode="advanced" multiple @select="onSelect" />
-    <div v-if="names.length">
-      已选：{{ names.join(', ') }}
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Drag to upload
 
 设置 `drag` 后出现虚线拖放区：可拖入文件，也可点击区域选择。
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const names = ref<string[]>([])
-function onSelect(files: File[]) {
-  names.value = files.map((f) => f.name)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
-      <template #tip>
-        支持图片或 PDF，可一次拖入多个文件。
-      </template>
-    </MFileUpload>
-    <div v-if="names.length">
-      已选：{{ names.join(', ') }}
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/DragToUpload.zh.vue"
 ```
 
 ## Picture list
 
 `list-type="picture"` 在列表中显示缩略图，可预览或删除。
 
-```vue preview
-<script setup lang="ts">
-import type {FileUploadFile} from 'morya-ui';
-import {  MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const preview = ref('')
-function onPreview(file: FileUploadFile) {
-  preview.value = file.url ?? ''
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
-    <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem">
-  </div>
-</template>
+```vue preview src="./demos/PictureList.vue"
 ```
 
 ## Picture card
 
 照片墙：加号卡片选择文件，悬停可预览 / 删除。也可直接把图片拖到卡片区域。
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-</script>
-
-<template>
-  <MFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
-</template>
+```vue preview src="./demos/PictureCard.vue"
 ```
 
 ## Auto upload
 
 提供 `httpRequest`（或 `action`）后默认自动上传。下面用本地模拟请求，不依赖真实接口。
 
-```vue preview
-<script setup lang="ts">
-import type {FileUploadRequestOptions} from 'morya-ui';
-import {  MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const last = ref('')
-
-async function mockUpload(options: FileUploadRequestOptions) {
-  options.onProgress(35)
-  await new Promise((resolve) => setTimeout(resolve, 400))
-  options.onProgress(100)
-  return { name: options.file.name }
-}
-
-function onSuccess(_file: unknown, response: unknown) {
-  last.value = JSON.stringify(response)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
-      <template #tip>
-        选择后立即模拟上传，并显示进度。
-      </template>
-    </MFileUpload>
-    <div v-if="last">
-      响应：{{ last }}
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/AutoUpload.zh.vue"
 ```
 
 ## Manual upload
 
 `auto-upload="false"` 时先加入列表，再点「上传」。`before-upload` 可拦截不合格文件。
 
-```vue preview
-<script setup lang="ts">
-import type {FileUploadFile} from 'morya-ui';
-import {  MFileUpload } from 'morya-ui'
-
-async function mockUpload() {
-  await new Promise((resolve) => setTimeout(resolve, 300))
-  return { ok: true }
-}
-
-function beforeUpload(file: File, _item: FileUploadFile) {
-  if (file.size > 2 * 1024 * 1024) return false
-  return true
-}
-</script>
-
-<template>
-  <MFileUpload
-    mode="advanced"
-    multiple
-    :auto-upload="false"
-    :max-size="2 * 1024 * 1024"
-    :before-upload="beforeUpload"
-    :http-request="mockUpload"
-  >
-    <template #tip>
-      单文件不超过 2MB。选好后点击上传。
-    </template>
-  </MFileUpload>
-</template>
+```vue preview src="./demos/ManualUpload.zh.vue"
 ```
 
 ## Instance methods
 
 通过模板 ref 可以控制选择器、提交队列、取消上传和清空列表。
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const uploader = ref<{
-  openPicker: () => void
-  submit: () => void
-  abort: () => void
-  clear: () => void
-  clearFiles: () => void
-} | null>(null)
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
-      <button type="button" @click="uploader?.openPicker()">
-        选择文件
-      </button>
-      <button type="button" @click="uploader?.submit()">
-        提交队列
-      </button>
-      <button type="button" @click="uploader?.abort()">
-        取消上传
-      </button>
-      <button type="button" @click="uploader?.clear()">
-        清空
-      </button>
-      <button type="button" @click="uploader?.clearFiles()">
-        清空（别名）
-      </button>
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/InstanceMethods.zh.vue"
 ```
 
 ## Props

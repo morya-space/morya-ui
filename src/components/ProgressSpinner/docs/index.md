@@ -16,39 +16,14 @@ import { MProgressSpinner } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MProgressSpinner } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <MProgressSpinner />
-    <MProgressSpinner stroke-width="4" animation-duration="0.6s" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Wrap
 
 包裹内容时用 `show` 控制遮罩，`delay` 延迟出现。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MProgressSpinner } from 'morya-ui'
-import { ref } from 'vue'
-
-const loading = ref(true)
-</script>
-
-<template>
-  <MProgressSpinner :show="loading" description="Loading">
-    <p style="margin:0">
-      Form content
-    </p>
-  </MProgressSpinner>
-  <MButton label="Toggle" size="small" @click="loading = !loading" />
-</template>
+```vue preview src="./demos/Wrap.vue"
 ```
 
 ## Props

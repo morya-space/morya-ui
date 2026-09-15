@@ -18,92 +18,35 @@ import { MDivider } from 'morya-ui'
 
 Default horizontal solid divider.
 
-```vue preview
-<script setup lang="ts">
-import { MDivider } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(28rem,100%)">
-    <p style="margin:0">
-      Above
-    </p>
-    <MDivider />
-    <p style="margin:0">
-      Below
-    </p>
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Type
 
 `type` supports `solid`, `dashed`, and `dotted`.
 
-```vue preview
-<script setup lang="ts">
-import { MDivider } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <MDivider type="solid" label="Solid" />
-    <MDivider type="dashed" label="Dashed" />
-    <MDivider type="dotted" label="Dotted" />
-  </div>
-</template>
+```vue preview src="./demos/Type.vue"
 ```
 
 ## Align
 
 When the divider is horizontal and has a label, use `align` to control the label position.
 
-```vue preview
-<script setup lang="ts">
-import { MDivider } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1.25rem;width:min(28rem,100%)">
-    <MDivider label="Left" align="left" />
-    <MDivider label="Center" align="center" />
-    <MDivider label="Right" align="right" />
-  </div>
-</template>
+```vue preview src="./demos/Align.vue"
 ```
 
 ## Title placement
 
 `titlePlacement` is an alias of `align`.
 
-```vue preview
-<script setup lang="ts">
-import { MDivider } from 'morya-ui'
-</script>
-
-<template>
-  <MDivider label="Or" title-placement="right" />
-</template>
+```vue preview src="./demos/TitlePlacement.vue"
 ```
 
 ## Layout
 
 `layout` controls horizontal / vertical orientation.
 
-```vue preview
-<script setup lang="ts">
-import { MDivider } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
-    <span>Left</span>
-    <MDivider layout="vertical" />
-    <span>Middle</span>
-    <MDivider layout="vertical" type="dashed" />
-    <span>Right</span>
-  </div>
-</template>
+```vue preview src="./demos/Layout.vue"
 ```
 
 ## Props

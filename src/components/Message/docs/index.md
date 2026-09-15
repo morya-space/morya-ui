@@ -28,51 +28,14 @@ import { message, MMessage, useMessage } from 'morya-ui'
 
 首次调用时会自动挂载浮层容器，无需在模板里放置组件。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, message } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MButton label="Success" severity="success" @click="message.success('保存成功')" />
-    <MButton label="Info" severity="info" @click="message.info('这是一条提示')" />
-    <MButton label="Warn" severity="warn" @click="message.warn('请核对后再提交')" />
-    <MButton label="Error" severity="danger" @click="message.error('请求失败，请重试')" />
-    <MButton
-      label="Closable"
-      @click="message.info({ content: '可手动关闭', closable: true, life: 0 })"
-    />
-  </div>
-</template>
+```vue preview src="./demos/Api.zh.vue"
 ```
 
 ## 自定义内容
 
 `content`（以及 Toast 的 `summary` / `detail`）支持字符串、`h()` 返回的 VNode、组件，或 `() => VNode` 工厂函数。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, message, MIcon } from 'morya-ui'
-import { h } from 'vue'
-
-function showVNode() {
-  message.info({
-    content: () =>
-      h('span', [
-        h(MIcon, { name: 'check-circle', size: 'sm' }),
-        ' 已用 ',
-        h('strong', 'h()'),
-        ' 渲染',
-      ]),
-    life: 4000,
-  })
-}
-</script>
-
-<template>
-  <MButton label="VNode 内容" @click="showVNode" />
-</template>
+```vue preview src="./demos/CustomContent.zh.vue"
 ```
 
 ## Methods

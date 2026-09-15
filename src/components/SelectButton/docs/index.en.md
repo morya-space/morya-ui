@@ -16,42 +16,12 @@ import { MSelectButton } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MSelectButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('center')
-const options = [
-  { label: 'Left', value: 'left' },
-  { label: 'Center', value: 'center' },
-  { label: 'Right', value: 'right' },
-]
-</script>
-
-<template>
-  <MSelectButton v-model="value" :options="options" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Multiple
 
-```vue preview
-<script setup lang="ts">
-import { MSelectButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(['left'])
-const options = [
-  { label: 'Left', value: 'left' },
-  { label: 'Center', value: 'center' },
-  { label: 'Right', value: 'right' },
-]
-</script>
-
-<template>
-  <MSelectButton v-model="value" :options="options" multiple />
-</template>
+```vue preview src="./demos/Multiple.vue"
 ```
 
 ## Props

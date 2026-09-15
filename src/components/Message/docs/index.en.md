@@ -28,51 +28,14 @@ import { message, MMessage, useMessage } from 'morya-ui'
 
 The first call auto-mounts a floating host; no template component is required.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, message } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MButton label="Success" severity="success" @click="message.success('Saved')" />
-    <MButton label="Info" severity="info" @click="message.info('A short tip')" />
-    <MButton label="Warn" severity="warn" @click="message.warn('Please double-check')" />
-    <MButton label="Error" severity="danger" @click="message.error('Request failed')" />
-    <MButton
-      label="Closable"
-      @click="message.info({ content: 'Dismiss manually', closable: true, life: 0 })"
-    />
-  </div>
-</template>
+```vue preview src="./demos/Api.en.vue"
 ```
 
 ## Custom content
 
 `content` (and Toast `summary` / `detail`) accepts a string, a VNode from `h()`, a component, or a `() => VNode` factory.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, message, MIcon } from 'morya-ui'
-import { h } from 'vue'
-
-function showVNode() {
-  message.info({
-    content: () =>
-      h('span', [
-        h(MIcon, { name: 'check-circle', size: 'sm' }),
-        ' Built with ',
-        h('strong', 'h()'),
-        ' render',
-      ]),
-    life: 4000,
-  })
-}
-</script>
-
-<template>
-  <MButton label="VNode content" @click="showVNode" />
-</template>
+```vue preview src="./demos/CustomContent.en.vue"
 ```
 
 ## Methods

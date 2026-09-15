@@ -18,73 +18,26 @@ import { MTag } from 'morya-ui'
 
 通过 `value` 或默认插槽展示文案。
 
-```vue preview
-<script setup lang="ts">
-import { MTag } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MTag value="Primary" />
-    <MTag>Slot Label</MTag>
-    <MTag value="Rounded" rounded />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Severity
 
 使用 `severity` 定义语义色；省略时为 primary。兼容旧值 `warning`（映射为 `warn`）。
 
-```vue preview
-<script setup lang="ts">
-import { MTag } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MTag value="Primary" />
-    <MTag value="Secondary" severity="secondary" />
-    <MTag value="Success" severity="success" />
-    <MTag value="Info" severity="info" />
-    <MTag value="Warn" severity="warn" />
-    <MTag value="Danger" severity="danger" />
-    <MTag value="Contrast" severity="contrast" />
-  </div>
-</template>
+```vue preview src="./demos/Severity.vue"
 ```
 
 ## Icons
 
 `icon` 传入 `MIcon` 的图标名称。
 
-```vue preview
-<script setup lang="ts">
-import { MTag } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MTag value="New" icon="plus" severity="info" />
-    <MTag value="Done" icon="check" severity="success" />
-    <MTag value="Alert" icon="info" severity="warn" rounded />
-  </div>
-</template>
+```vue preview src="./demos/Icons.vue"
 ```
 
 ## Closable
 
-```vue preview
-<script setup lang="ts">
-import { MTag } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MTag value="Draft" closable bordered />
-    <MTag value="Small" size="small" severity="success" closable />
-  </div>
-</template>
+```vue preview src="./demos/Closable.vue"
 ```
 
 ## Props

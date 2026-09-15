@@ -29,208 +29,49 @@ import { MFileUpload } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const names = ref<string[]>([])
-function onSelect(files: File[]) {
-  names.value = files.map((f) => f.name)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <MFileUpload mode="advanced" multiple @select="onSelect" />
-    <div v-if="names.length">
-      Selected: {{ names.join(', ') }}
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Drag to upload
 
 Set `drag` to show a dashed drop zone. Drop files or click the area to choose.
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const names = ref<string[]>([])
-function onSelect(files: File[]) {
-  names.value = files.map((f) => f.name)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload drag multiple accept="image/*,.pdf" @select="onSelect">
-      <template #tip>
-        Images or PDF. Multiple files can be dropped at once.
-      </template>
-    </MFileUpload>
-    <div v-if="names.length">
-      Selected: {{ names.join(', ') }}
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/DragToUpload.en.vue"
 ```
 
 ## Picture list
 
 `list-type="picture"` shows thumbnails in the list, with preview and remove.
 
-```vue preview
-<script setup lang="ts">
-import type {FileUploadFile} from 'morya-ui';
-import {  MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const preview = ref('')
-function onPreview(file: FileUploadFile) {
-  preview.value = file.url ?? ''
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload multiple accept="image/*" list-type="picture" @preview="onPreview" />
-    <img v-if="preview" :src="preview" alt="" style="max-width:12rem;border-radius:0.5rem">
-  </div>
-</template>
+```vue preview src="./demos/PictureList.vue"
 ```
 
 ## Picture card
 
 A photo wall: the plus tile opens the picker; hover to preview or remove. Images can also be dropped onto the card area.
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-</script>
-
-<template>
-  <MFileUpload multiple accept="image/*" list-type="picture-card" :limit="4" />
-</template>
+```vue preview src="./demos/PictureCard.vue"
 ```
 
 ## Auto upload
 
 With `httpRequest` (or `action`), files upload automatically. The demo mocks the request locally.
 
-```vue preview
-<script setup lang="ts">
-import type {FileUploadRequestOptions} from 'morya-ui';
-import {  MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const last = ref('')
-
-async function mockUpload(options: FileUploadRequestOptions) {
-  options.onProgress(35)
-  await new Promise((resolve) => setTimeout(resolve, 400))
-  options.onProgress(100)
-  return { name: options.file.name }
-}
-
-function onSuccess(_file: unknown, response: unknown) {
-  last.value = JSON.stringify(response)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload drag multiple :http-request="mockUpload" @success="onSuccess">
-      <template #tip>
-        Files upload immediately after selection, with progress.
-      </template>
-    </MFileUpload>
-    <div v-if="last">
-      Response: {{ last }}
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/AutoUpload.en.vue"
 ```
 
 ## Manual upload
 
 With `auto-upload="false"`, files join the list first; click Upload to send them. `before-upload` can reject a file.
 
-```vue preview
-<script setup lang="ts">
-import type {FileUploadFile} from 'morya-ui';
-import {  MFileUpload } from 'morya-ui'
-
-async function mockUpload() {
-  await new Promise((resolve) => setTimeout(resolve, 300))
-  return { ok: true }
-}
-
-function beforeUpload(file: File, _item: FileUploadFile) {
-  if (file.size > 2 * 1024 * 1024) return false
-  return true
-}
-</script>
-
-<template>
-  <MFileUpload
-    mode="advanced"
-    multiple
-    :auto-upload="false"
-    :max-size="2 * 1024 * 1024"
-    :before-upload="beforeUpload"
-    :http-request="mockUpload"
-  >
-    <template #tip>
-      Each file must be under 2MB. Choose files, then click Upload.
-    </template>
-  </MFileUpload>
-</template>
+```vue preview src="./demos/ManualUpload.en.vue"
 ```
 
 ## Instance methods
 
 Use a template ref to control the picker, upload queue, cancellation, and clearing.
 
-```vue preview
-<script setup lang="ts">
-import { MFileUpload } from 'morya-ui'
-import { ref } from 'vue'
-
-const uploader = ref<{
-  openPicker: () => void
-  submit: () => void
-  abort: () => void
-  clear: () => void
-  clearFiles: () => void
-} | null>(null)
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem;max-width:28rem">
-    <MFileUpload ref="uploader" mode="advanced" :auto-upload="false" />
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
-      <button type="button" @click="uploader?.openPicker()">
-        Choose
-      </button>
-      <button type="button" @click="uploader?.submit()">
-        Submit queue
-      </button>
-      <button type="button" @click="uploader?.abort()">
-        Abort
-      </button>
-      <button type="button" @click="uploader?.clear()">
-        Clear
-      </button>
-      <button type="button" @click="uploader?.clearFiles()">
-        Clear alias
-      </button>
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/InstanceMethods.en.vue"
 ```
 
 ## Props

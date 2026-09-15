@@ -16,34 +16,14 @@ import { MInputOtp } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MInputOtp } from 'morya-ui'
-import { ref } from 'vue'
-
-const code = ref('')
-</script>
-
-<template>
-  <MInputOtp v-model="code" :length="4" integer-only />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Mask & size
 
 `mask` renders password-style cells. `size` / `gap` control size and spacing.
 
-```vue preview
-<script setup lang="ts">
-import { MInputOtp } from 'morya-ui'
-import { ref } from 'vue'
-
-const code = ref('')
-</script>
-
-<template>
-  <MInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
-</template>
+```vue preview src="./demos/MaskAndSize.vue"
 ```
 
 ## Props

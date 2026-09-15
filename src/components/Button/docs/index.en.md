@@ -18,190 +18,61 @@ import { MButton } from 'morya-ui'
 
 Show button text via the default slot or the `label` prop.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton>Submit</MButton>
-    <MButton label="Label Prop" />
-    <MButton severity="secondary" label="Secondary" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Severity
 
 Use `severity` for semantic color; defaults to primary when omitted.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Primary" />
-    <MButton label="Secondary" severity="secondary" />
-    <MButton label="Success" severity="success" />
-    <MButton label="Info" severity="info" />
-    <MButton label="Warn" severity="warn" />
-    <MButton label="Help" severity="help" />
-    <MButton label="Danger" severity="danger" />
-    <MButton label="Contrast" severity="contrast" />
-  </div>
-</template>
+```vue preview src="./demos/Severity.vue"
 ```
 
 ## Styles
 
 `outlined`, `text`, `link`, `raised`, `rounded`, and `plain` can be combined freely.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:100%">
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Outlined" outlined />
-      <MButton label="Success" severity="success" outlined />
-      <MButton label="Danger" severity="danger" outlined />
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Raised" raised />
-      <MButton label="Rounded" rounded />
-      <MButton label="Plain Text" text plain />
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="Small" size="small" />
-      <MButton label="Large" size="large" />
-      <MButton label="Fluid" fluid />
-    </div>
-  </div>
-</template>
+```vue preview src="./demos/Styles.vue"
 ```
 
 ## Text & Link
 
 `text` is a lightweight text button; `link` renders as an inline link style. Both can be combined with `severity`.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Text" text />
-    <MButton label="Text Danger" text severity="danger" />
-    <MButton label="Link" link />
-    <MButton label="Link Secondary" link severity="secondary" />
-  </div>
-</template>
+```vue preview src="./demos/TextAndLink.vue"
 ```
 
 ## Ghost & Quaternary
 
 `ghost` is a transparent fill with tinted text; `quaternary` is quieter for secondary toolbar actions. Both can be set via `variant`.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Ghost" ghost />
-    <MButton label="Ghost Danger" ghost severity="danger" />
-    <MButton label="Quaternary" quaternary />
-    <MButton label="Custom" color="#e11d48" />
-  </div>
-</template>
+```vue preview src="./demos/GhostAndQuaternary.vue"
 ```
 
 ## Button Group
 
 `MButtonGroup` joins adjacent buttons.
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MButtonGroup } from 'morya-ui'
-</script>
-
-<template>
-  <MButtonGroup aria-label="Align">
-    <MButton label="Left" />
-    <MButton label="Center" severity="secondary" />
-    <MButton label="Right" severity="secondary" />
-  </MButtonGroup>
-</template>
+```vue preview src="./demos/ButtonGroup.en.vue"
 ```
 
 ## Icons & Badge
 
 Supports `icon`, `iconPos`, `iconOnly`, and a `badge`.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton icon="check" label="Save" />
-    <MButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <MButton icon="plus" icon-only rounded aria-label="Add" />
-    <MButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <MButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
-  </div>
-</template>
+```vue preview src="./demos/IconsAndBadge.vue"
 ```
 
 ## Loading
 
 In the `loading` state, a spinner is shown and clicks are blocked.
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-import { ref } from 'vue'
-
-const loading = ref(false)
-
-function toggleLoading() {
-  loading.value = true
-  window.setTimeout(() => {
-    loading.value = false
-  }, 900)
-}
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <MButton label="Always Loading" loading severity="secondary" />
-  </div>
-</template>
+```vue preview src="./demos/Loading.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MButton label="Disabled" disabled />
-    <MButton label="Disabled Outlined" outlined disabled />
-    <MButton label="Disabled Text" text disabled />
-  </div>
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Props

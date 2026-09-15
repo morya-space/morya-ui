@@ -16,84 +16,17 @@ import { MTreeSelect } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MTreeSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-const options = [
-  {
-    key: 'docs',
-    label: 'Documents',
-    children: [
-      { key: 'resume', label: 'Resume' },
-      { key: 'home', label: 'Home' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <MTreeSelect v-model="value" :options="options" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Multiple / filter / path
 
-```vue preview
-<script setup lang="ts">
-import { MTreeSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string[]>([])
-const options = [
-  {
-    key: 'docs',
-    label: 'Documents',
-    children: [
-      { key: 'resume', label: 'Resume' },
-      { key: 'home', label: 'Home' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <MTreeSelect
-    v-model="value"
-    :options="options"
-    multiple
-    checkable
-    filterable
-    clearable
-    show-path
-    placeholder="Select nodes"
-    style="min-width: 16rem"
-  />
-</template>
+```vue preview src="./demos/MultipleFilterPath.en.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MTreeSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref(null)
-const b = ref(null)
-const c = ref(null)
-const options = [{ key: 'docs', label: 'Documents' }]
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MTreeSelect v-model="a" size="small" :options="options" placeholder="Small" />
-    <MTreeSelect v-model="b" :options="options" placeholder="Default" />
-    <MTreeSelect v-model="c" size="large" :options="options" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.en.vue"
 ```
 
 ## Props

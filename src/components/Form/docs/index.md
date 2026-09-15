@@ -24,111 +24,17 @@ import { MForm, MFormItem } from 'morya-ui'
 
 ## 声明式 rules
 
-```vue preview
-<script setup lang="ts">
-import type { FormInstance, FormRules } from 'morya-ui'
-import { MButton, MForm, MFormItem, MInput } from 'morya-ui'
-import { reactive, ref } from 'vue'
-
-const formRef = ref<FormInstance | null>(null)
-const model = reactive({ name: '', email: '' })
-const rules: FormRules = {
-  name: { required: true, message: '请输入名称', trigger: ['blur', 'input'] },
-  email: [
-    { required: true, message: '请输入邮箱', trigger: 'blur' },
-    { pattern: /.[^\n\r@\u2028\u2029]*@.+\..+/, message: '邮箱格式不正确', trigger: 'blur' },
-  ],
-}
-
-async function onSubmit() {
-  const { valid } = await formRef.value!.validate()
-  if (!valid) return
-}
-</script>
-
-<template>
-  <MForm
-    ref="formRef"
-    :model="model"
-    :rules="rules"
-    label-position="top"
-    validate-on="submit"
-    style="max-width: 22rem"
-    @submit="onSubmit"
-  >
-    <MFormItem label="名称" name="name">
-      <template #default="{ id, invalid }">
-        <MInput :id="id" v-model="model.name" fluid :invalid="invalid" />
-      </template>
-    </MFormItem>
-    <MFormItem label="邮箱" name="email" help="用于接收通知">
-      <template #default="{ id, invalid }">
-        <MInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
-      </template>
-    </MFormItem>
-    <MButton native-type="submit" label="提交" />
-  </MForm>
-</template>
+```vue preview src="./demos/DeclarativeRules.zh.vue"
 ```
 
 ## 回调校验（兼容）
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MForm, MFormItem, MInput } from 'morya-ui'
-import { reactive } from 'vue'
-
-const form = reactive({ name: '' })
-</script>
-
-<template>
-  <MForm validate-on="submit" style="max-width: 22rem">
-    <MFormItem
-      label="名称"
-      name="name"
-      required
-      :validate="() => (form.name.trim() ? undefined : '请输入名称')"
-    >
-      <template #default="{ id, invalid }">
-        <MInput :id="id" v-model="form.name" fluid :invalid="invalid" />
-      </template>
-    </MFormItem>
-    <MButton native-type="submit" label="提交" />
-  </MForm>
-</template>
+```vue preview src="./demos/CallbackValidationCompatible.zh.vue"
 ```
 
 ## inline 与 label 对齐
 
-```vue preview
-<script setup lang="ts">
-import { MForm, MFormItem, MInput } from 'morya-ui'
-import { reactive } from 'vue'
-
-const model = reactive({ city: '', zip: '' })
-</script>
-
-<template>
-  <MForm
-    :model="model"
-    inline
-    label-placement="left"
-    label-align="right"
-    :label-width="72"
-    :rules="{ city: { required: true, message: '必填' } }"
-  >
-    <MFormItem label="城市" name="city">
-      <template #default="{ id }">
-        <MInput :id="id" v-model="model.city" />
-      </template>
-    </MFormItem>
-    <MFormItem label="邮编" name="zip">
-      <template #default="{ id }">
-        <MInput :id="id" v-model="model.zip" />
-      </template>
-    </MFormItem>
-  </MForm>
-</template>
+```vue preview src="./demos/InlineLayoutAndLabelAlignment.zh.vue"
 ```
 
 ## Props — Form

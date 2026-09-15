@@ -16,67 +16,24 @@ import { MSwitch } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MSwitch } from 'morya-ui'
-import { ref } from 'vue'
-
-const enabled = ref(false)
-</script>
-
-<template>
-  <MSwitch v-model="enabled" label="Enable notifications" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Invalid & inputId
 
 `inputId` is an alias for `id`.
 
-```vue preview
-<script setup lang="ts">
-import { MSwitch } from 'morya-ui'
-import { ref } from 'vue'
-
-const dark = ref(false)
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <MSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
-    <MSwitch :model-value="false" invalid label="Must be enabled" />
-  </div>
-</template>
+```vue preview src="./demos/InvalidAndInputid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MSwitch } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-direction:column;gap:0.75rem">
-    <MSwitch :model-value="true" disabled label="On disabled" />
-    <MSwitch :model-value="false" disabled label="Off disabled" />
-  </div>
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Loading & text
 
-```vue preview
-<script setup lang="ts">
-import { MSwitch } from 'morya-ui'
-import { ref } from 'vue'
-
-const on = ref(true)
-</script>
-
-<template>
-  <MSwitch v-model="on" checked-text="On" unchecked-text="Off" />
-</template>
+```vue preview src="./demos/LoadingAndText.en.vue"
 ```
 
 ## Props

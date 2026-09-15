@@ -17,45 +17,14 @@ import { MTieredMenu  } from 'morya-ui'
 
 ## Basic usage
 
-```vue preview
-<script setup lang="ts">
-import { MTieredMenu } from 'morya-ui'
-
-const model = [
-  {
-    label: 'File',
-    items: [
-      { label: 'New', command: () => window.alert('New') },
-      { label: 'Export' },
-    ],
-  },
-  { separator: true },
-  { label: 'Help' },
-]
-</script>
-
-<template>
-  <MTieredMenu :model="model" />
-</template>
+```vue preview src="./demos/BasicUsage.en.vue"
 ```
 
 ## Popup mode
 
 Combine `popup` with `v-model` for toolbar triggers:
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MTieredMenu } from 'morya-ui'
-import { ref } from 'vue'
-
-const open = ref(false)
-const model = [{ label: 'Copy' }, { label: 'Paste' }]
-</script>
-
-<template>
-  <MButton label="Actions" @click="open = true" />
-  <MTieredMenu v-model="open" popup :model="model" />
-</template>
+```vue preview src="./demos/PopupMode.en.vue"
 ```
 
 ## Scrolling & submenu flyout

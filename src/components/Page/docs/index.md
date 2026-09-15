@@ -26,114 +26,19 @@ import {
 
 `MPageContent` 负责内容区 **padding**（默认 `--m-space-6`）与子区块 **gap**（默认 `--m-space-4`），文档预览中外框仅模拟 `MLayoutContent` 边界。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MButton,
-  MInput,
-  MPageContent,
-  MPageFilters,
-  MPageToolbar,
-  MSpace,
-} from 'morya-ui'
-import { ref } from 'vue'
-
-const keyword = ref('')
-</script>
-
-<template>
-  <div
-    class="doc-demo-frame"
-    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
-  >
-    <MPageContent>
-      <MPageFilters aria-label="筛选">
-        <MSpace wrap>
-          <MInput v-model="keyword" placeholder="搜索" clearable style="width:12rem" />
-          <MButton severity="primary">
-            查询
-          </MButton>
-        </MSpace>
-      </MPageFilters>
-      <MPageToolbar title="用户管理">
-        <template #actions>
-          <MButton severity="primary">
-            新建
-          </MButton>
-        </template>
-      </MPageToolbar>
-    </MPageContent>
-  </div>
-</template>
+```vue preview src="./demos/ListPageStack.zh.vue"
 ```
 
 ## 表单页组合
 
 `MPageContent width="narrow"` 限制表单宽度；`MPageSection variant="form"` 提供表单表面；`variant="actions"` 用于底栏操作。
 
-```vue preview
-<script setup lang="ts">
-import {
-  MButton,
-  MForm,
-  MFormItem,
-  MInput,
-  MPageContent,
-  MPageHeader,
-  MPageSection,
-  MSpace,
-} from 'morya-ui'
-import { ref } from 'vue'
-
-const name = ref('')
-</script>
-
-<template>
-  <div
-    class="doc-demo-frame"
-    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
-  >
-    <MPageContent width="narrow">
-      <MPageHeader title="新建用户" description="填写基本信息。" />
-      <MPageSection variant="form">
-        <MForm @submit.prevent>
-          <MFormItem label="姓名" name="name">
-            <MInput v-model="name" fluid />
-          </MFormItem>
-          <MPageSection variant="actions">
-            <MSpace>
-              <MButton native-type="submit" severity="primary">
-                保存
-              </MButton>
-              <MButton severity="secondary">
-                取消
-              </MButton>
-            </MSpace>
-          </MPageSection>
-        </MForm>
-      </MPageSection>
-    </MPageContent>
-  </div>
-</template>
+```vue preview src="./demos/Demo2.vue"
 ```
 
 ## 仪表盘 KPI
 
-```vue preview
-<script setup lang="ts">
-import { MPageContent, MPageStat } from 'morya-ui'
-</script>
-
-<template>
-  <div
-    class="doc-demo-frame"
-    style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:hidden;background:var(--m-color-surface)"
-  >
-    <MPageContent density="compact">
-      <MPageStat label="总用户" value="12,480" trend="+8.2%" icon="users" />
-    </MPageContent>
-  </div>
-</template>
+```vue preview src="./demos/Kpi.vue"
 ```
 
 ## 组合规则

@@ -23,214 +23,47 @@ import { MTable, MTag } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MTable, MTag } from 'morya-ui'
-
-const columns = [
-  { key: 'name', label: '项目', minWidth: 140, sortable: true },
-  { key: 'status', label: '状态', width: 120 },
-  { key: 'owner', label: '负责人', minWidth: 100 },
-  { key: 'team', label: '团队', minWidth: 120 },
-  { key: 'progress', label: '进度', width: 100, align: 'end' as const },
-]
-const rows = [
-  { id: 1, name: 'Landing Redesign', status: 'Published', owner: 'Ada', team: 'Design', progress: '100%' },
-  { id: 2, name: 'Dashboard v2', status: 'Draft', owner: 'Lin', team: 'Frontend', progress: '62%' },
-  { id: 3, name: 'Auth Gateway', status: 'Review', owner: 'Kai', team: 'Backend', progress: '88%' },
-]
-</script>
-
-<template>
-  <MTable :columns="columns" :rows="rows" striped bordered>
-    <template #cell-status="{ value }">
-      <MTag
-        :value="String(value)"
-        :severity="value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'"
-      />
-    </template>
-  </MTable>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## 行选择
 
 多选配合 `selection-mode="multiple"` 与 `v-model:selection`；单选使用 `selection-mode="single"` 与 `v-model:selected-item`。
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const columns = [
-  { key: 'name', label: '姓名', minWidth: 120 },
-  { key: 'role', label: '角色', minWidth: 120 },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer' },
-  { id: 2, name: 'Lin', role: 'Engineer' },
-]
-const selection = ref<Record<string, unknown>[]>([])
-</script>
-
-<template>
-  <MTable
-    v-model:selection="selection"
-    :columns="columns"
-    :rows="rows"
-    selection-mode="multiple"
-    highlight-current
-    :paginator="false"
-  />
-</template>
+```vue preview src="./demos/Selection.zh.vue"
 ```
 
 ## 筛选与分页
 
 客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`。
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const columns = [
-  { key: 'name', label: '姓名', sortable: true, minWidth: 120 },
-  { key: 'role', label: '角色', minWidth: 120 },
-  { key: 'email', label: '邮箱', minWidth: 180 },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer', email: 'ada@well.design' },
-  { id: 2, name: 'Lin', role: 'Engineer', email: 'lin@well.design' },
-  { id: 3, name: 'Kai', role: 'Engineer', email: 'kai@well.design' },
-  { id: 4, name: 'Mia', role: 'Designer', email: 'mia@well.design' },
-  { id: 5, name: 'Neo', role: 'Engineer', email: 'neo@well.design' },
-]
-const page = ref(1)
-</script>
-
-<template>
-  <MTable
-    v-model:page="page"
-    :columns="columns"
-    :rows="rows"
-    paginator
-    :rows-per-page="3"
-  />
-</template>
+```vue preview src="./demos/FilterAndPagination.zh.vue"
 ```
 
 ## 固定列
 
 列定义中设置 `fixed: 'left'` 可冻结左侧列（当前批次支持左固定）。
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-
-const columns = [
-  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
-  { key: 'q1', label: 'Q1 营收', width: 140 },
-  { key: 'q2', label: 'Q2 营收', width: 140 },
-  { key: 'q3', label: 'Q3 营收', width: 140 },
-  { key: 'action', label: '操作', width: 100 },
-]
-const rows = [
-  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },
-  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },
-]
-</script>
-
-<template>
-  <MTable :columns="columns" :rows="rows" bordered :paginator="false" />
-</template>
+```vue preview src="./demos/ExpandableRows.zh.vue"
 ```
 
 ## 展开行与列渲染
 
 列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-
-const columns = [
-  { key: 'name', label: '姓名', render: (row: { name: string }) => `*${row.name}*` },
-  { key: 'role', label: '角色' },
-]
-const rows = [
-  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },
-]
-</script>
-
-<template>
-  <MTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
-    <template #expansion="{ row }">
-      {{ row.extra }}
-    </template>
-  </MTable>
-</template>
+```vue preview src="./demos/EmptyAndLoading.zh.vue"
 ```
 
 ## 空态与加载
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const loading = ref(false)
-const columns = [
-  { key: 'name', label: '姓名', minWidth: 120 },
-  { key: 'role', label: '角色', minWidth: 120 },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <MButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
-    <MTable
-      :columns="columns"
-      :rows="[]"
-      :loading="loading"
-      empty-text="还没有数据"
-      empty-description="创建第一条记录后会显示在这里"
-      :paginator="false"
-    />
-  </div>
-</template>
+```vue preview src="./demos/Demo6.vue"
 ```
 
 ## 服务端模式
 
 传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。
 
-```vue preview
-<script setup lang="ts">
-import { MTable } from 'morya-ui'
-import { ref } from 'vue'
-
-const columns = [
-  { key: 'name', label: '项目', sortable: true, minWidth: 140 },
-  { key: 'owner', label: '负责人', minWidth: 100 },
-]
-const rows = ref([
-  { id: 1, name: 'Landing', owner: 'Ada' },
-  { id: 2, name: 'Dashboard', owner: 'Lin' },
-])
-const serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })
-const total = ref(42)
-</script>
-
-<template>
-  <MTable
-    v-model:server-options="serverOptions"
-    :columns="columns"
-    :rows="rows"
-    :server-items-length="total"
-    :loading="false"
-  />
-</template>
+```vue preview src="./demos/Demo7.vue"
 ```
 
 ## TableColumnDefinition

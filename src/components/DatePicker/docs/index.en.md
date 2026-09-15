@@ -16,155 +16,53 @@ import { MDatePicker } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('2024-06-15')
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="Date" />
-</template>
+```vue preview src="./demos/Basic.en.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref('2024-06-15')
-const b = ref('2024-06-15')
-const c = ref('2024-06-15')
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end">
-    <MDatePicker v-model="a" size="small" label="Small" />
-    <MDatePicker v-model="b" label="Default" />
-    <MDatePicker v-model="c" size="large" label="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 ## Min / Max
 
 Dates outside the range are disabled in the calendar.
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('2024-06-15')
-</script>
-
-<template>
-  <MDatePicker
-    v-model="value"
-    label="In range"
-    min-date="2024-06-01"
-    max-date="2024-06-30"
-  />
-</template>
+```vue preview src="./demos/MinMax.en.vue"
 ```
 
 ## Invalid
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('2024-06-15')
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="Invalid" invalid />
-</template>
+```vue preview src="./demos/Invalid.en.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-</script>
-
-<template>
-  <MDatePicker model-value="2024-06-15" label="Disabled" disabled />
-</template>
+```vue preview src="./demos/Disabled.en.vue"
 ```
 
 ## Fluid
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="Full width" fluid placeholder="Select date" />
-</template>
+```vue preview src="./demos/Fluid.en.vue"
 ```
 
 ## Teleport
 
 The panel Teleports to `body` by default. Use `append-to="self"` or `teleport={false}` to render in place.
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="In-place panel" append-to="self" />
-</template>
+```vue preview src="./demos/Teleport.en.vue"
 ```
 
 ## Range
 
 With `type="daterange"`, click the start date then the end date. The value is `[start, end]` (ISO dates).
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<[string, string] | null>(['2024-06-01', '2024-06-12'])
-</script>
-
-<template>
-  <MDatePicker v-model="value" type="daterange" label="Date range" />
-</template>
+```vue preview src="./demos/Range.en.vue"
 ```
 
 ## Shortcuts
 
-```vue preview
-<script setup lang="ts">
-import { MDatePicker } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | null>(null)
-const shortcuts = [
-  { label: 'Today', value: () => new Date() },
-  { label: 'June 1', value: '2024-06-01' },
-]
-</script>
-
-<template>
-  <MDatePicker v-model="value" label="Shortcuts" :shortcuts="shortcuts" />
-</template>
+```vue preview src="./demos/Shortcuts.en.vue"
 ```
 
 ## Props

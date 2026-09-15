@@ -16,21 +16,7 @@ import { MFieldset } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MFieldset } from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(false)
-</script>
-
-<template>
-  <MFieldset legend="Account" toggleable :collapsed="collapsed" @update:collapsed="collapsed = $event">
-    <p style="margin:0">
-      字段分组内容。
-    </p>
-  </MFieldset>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Props

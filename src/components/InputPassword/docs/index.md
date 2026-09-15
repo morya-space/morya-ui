@@ -16,92 +16,31 @@ import { MInputPassword } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Password" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Feedback
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Password" feedback />
-</template>
+```vue preview src="./demos/Feedback.vue"
 ```
 
 ## Custom icons
 
 默认用 `eye` / `eye-off`。可用属性换成其它系统图标，或用插槽完全自定义。
 
-```vue preview
-<script setup lang="ts">
-import { MIcon, MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const byProp = ref('')
-const bySlot = ref('')
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;max-width:20rem">
-    <MInputPassword v-model="byProp" label="属性替换" show-icon="unlock" hide-icon="lock" />
-    <MInputPassword v-model="bySlot" label="插槽替换">
-      <template #showIcon>
-        <MIcon name="search" size="sm" />
-      </template>
-      <template #hideIcon>
-        <MIcon name="close" size="sm" />
-      </template>
-    </MInputPassword>
-  </div>
-</template>
+```vue preview src="./demos/CustomIcons.zh.vue"
 ```
 
 ## Hold to peek
 
 `showPasswordOn="mousedown"` 按住显示、松开隐藏（键盘 Space / Enter 同样按住预览）。
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('secret')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
-</template>
+```vue preview src="./demos/HoldToPeek.vue"
 ```
 
 ## Clearable & count
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('draft-pass')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
-</template>
+```vue preview src="./demos/ClearableAndCount.vue"
 ```
 
 ## Props

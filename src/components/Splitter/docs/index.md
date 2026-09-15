@@ -16,50 +16,14 @@ import { MSplitter } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MSplitter } from 'morya-ui'
-</script>
-
-<template>
-  <MSplitter style="min-height: 8rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden">
-    <template #panel1>
-      <div style="padding: 0.75rem">
-        Panel A — 拖中间分隔条
-      </div>
-    </template>
-    <template #panel2>
-      <div style="padding: 0.75rem">
-        Panel B
-      </div>
-    </template>
-  </MSplitter>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Vertical / direction
 
 `layout` 与 Naive 风格的 `direction` 等价。
 
-```vue preview
-<script setup lang="ts">
-import { MSplitter } from 'morya-ui'
-</script>
-
-<template>
-  <MSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden">
-    <template #panel1>
-      <div style="padding: 0.75rem">
-        Top
-      </div>
-    </template>
-    <template #panel2>
-      <div style="padding: 0.75rem">
-        Bottom
-      </div>
-    </template>
-  </MSplitter>
-</template>
+```vue preview src="./demos/VerticalDirection.vue"
 ```
 
 ## Size modes
@@ -68,74 +32,12 @@ import { MSplitter } from 'morya-ui'
 - `number ≤ 1`：比例（Naive，如 `0.35` → 35%）
 - `string`：像素（如 `'120px'`）
 
-```vue preview
-<script setup lang="ts">
-import { MSplitter } from 'morya-ui'
-import { ref } from 'vue'
-
-const percent = ref(40)
-const ratio = ref(0.3)
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem">
-    <MSplitter
-      v-model:size="percent"
-      style="min-height: 7rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden"
-    >
-      <template #panel1>
-        <div style="padding:0.75rem">
-          {{ percent }}%
-        </div>
-      </template>
-      <template #panel2>
-        <div style="padding:0.75rem">
-          rest
-        </div>
-      </template>
-    </MSplitter>
-    <MSplitter
-      v-model:size="ratio"
-      :min="0.15"
-      :max="0.85"
-      style="min-height: 7rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden"
-    >
-      <template #panel1>
-        <div style="padding:0.75rem">
-          ratio {{ ratio }}
-        </div>
-      </template>
-      <template #panel2>
-        <div style="padding:0.75rem">
-          rest
-        </div>
-      </template>
-    </MSplitter>
-  </div>
-</template>
+```vue preview src="./demos/SizeModes.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MSplitter } from 'morya-ui'
-</script>
-
-<template>
-  <MSplitter disabled :size="40" style="min-height: 7rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden">
-    <template #panel1>
-      <div style="padding:0.75rem">
-        不可拖拽
-      </div>
-    </template>
-    <template #panel2>
-      <div style="padding:0.75rem">
-        B
-      </div>
-    </template>
-  </MSplitter>
-</template>
+```vue preview src="./demos/Disabled.zh.vue"
 ```
 
 ## Props

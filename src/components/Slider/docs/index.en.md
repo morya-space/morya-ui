@@ -16,64 +16,19 @@ import { MSlider } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MSlider } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(40)
-</script>
-
-<template>
-  <div style="width:min(24rem,100%)">
-    <MSlider v-model="value" />
-    <p style="margin:.5rem 0 0;color:var(--m-color-text-muted)">
-      {{ value }}
-    </p>
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Range
 
-```vue preview
-<script setup lang="ts">
-import { MSlider } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref([20, 70])
-</script>
-
-<template>
-  <div style="width:min(24rem,100%)">
-    <MSlider v-model="value" range />
-    <p style="margin:.5rem 0 0;color:var(--m-color-text-muted)">
-      {{ value.join(' – ') }}
-    </p>
-  </div>
-</template>
+```vue preview src="./demos/Range.vue"
 ```
 
 ## Marks & vertical
 
 `marks` can be a number array or a value-to-label map. `tooltip` shows the current value while dragging.
 
-```vue preview
-<script setup lang="ts">
-import { MSlider } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(50)
-</script>
-
-<template>
-  <div style="display:flex;gap:2rem;align-items:stretch;height:10rem">
-    <div style="flex:1">
-      <MSlider v-model="value" tooltip :marks="{ 0: '0', 50: 'Mid', 100: 'Max' }" />
-    </div>
-    <MSlider v-model="value" vertical tooltip />
-  </div>
-</template>
+```vue preview src="./demos/MarksAndVertical.en.vue"
 ```
 
 ## Props

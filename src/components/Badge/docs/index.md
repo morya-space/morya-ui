@@ -18,79 +18,28 @@ import { MBadge } from 'morya-ui'
 
 传入 `value` 展示文案或数字；省略 `value` 时渲染为圆点。
 
-```vue preview
-<script setup lang="ts">
-import { MBadge } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MBadge :value="2" />
-    <MBadge value="New" />
-    <MBadge />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Severity
 
 使用 `severity` 定义语义色；省略时为 primary。兼容旧值 `warning`（映射为 `warn`）。
 
-```vue preview
-<script setup lang="ts">
-import { MBadge } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MBadge :value="1" />
-    <MBadge :value="2" severity="secondary" />
-    <MBadge :value="3" severity="success" />
-    <MBadge :value="4" severity="info" />
-    <MBadge :value="5" severity="warn" />
-    <MBadge :value="6" severity="danger" />
-    <MBadge :value="7" severity="contrast" />
-  </div>
-</template>
+```vue preview src="./demos/Severity.vue"
 ```
 
 ## Size
 
 `size` 支持 `small` / `large`，以及别名 `sm` / `lg`。
 
-```vue preview
-<script setup lang="ts">
-import { MBadge } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MBadge :value="8" size="small" />
-    <MBadge :value="9" />
-    <MBadge :value="10" size="large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 ## Overlay
 
 默认插槽包裹子节点；`max` 超出时显示 `99+`，`processing` 显示脉冲。
 
-```vue preview
-<script setup lang="ts">
-import { MBadge, MButton } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-    <MBadge :value="120" :max="99">
-      <MButton label="Inbox" severity="secondary" />
-    </MBadge>
-    <MBadge processing>
-      <MButton label="Live" icon="check" />
-    </MBadge>
-  </div>
-</template>
+```vue preview src="./demos/Overlay.vue"
 ```
 
 ## Props

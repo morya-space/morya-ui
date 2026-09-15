@@ -16,51 +16,12 @@ import { MContextMenu, useContextMenu } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MContextMenu } from 'morya-ui'
-
-const model = [
-  { label: '复制' },
-  { label: '粘贴' },
-  { separator: true },
-  { label: '删除', disabled: true },
-]
-</script>
-
-<template>
-  <MContextMenu :model="model">
-    <div
-      style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
-    >
-      右键此处打开菜单
-    </div>
-  </MContextMenu>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Nested + useContextMenu
 
-```vue preview
-<script setup lang="ts">
-import { MContextMenu, useContextMenu } from 'morya-ui'
-
-const menu = useContextMenu()
-const model = [
-  { label: '复制', command: () => undefined },
-  { label: '更多', items: [{ label: '深层' }] },
-]
-</script>
-
-<template>
-  <div
-    style="border: 1px dashed var(--m-color-border); padding: 2rem; border-radius: var(--m-radius-md)"
-    @contextmenu="menu.show"
-  >
-    右键此处（composable）
-  </div>
-  <MContextMenu v-model="menu.visible" v-model:position="menu.position" :model="model" />
-</template>
+```vue preview src="./demos/NestedUsecontextmenu.zh.vue"
 ```
 
 ## 滚动与嵌套子菜单

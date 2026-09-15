@@ -22,28 +22,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput, MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const city = ref<string | undefined>()
-const options = [
-  { label: '北京', value: 'bj' },
-  { label: '上海', value: 'sh' },
-]
-</script>
-
-<template>
-  <MConfigProvider size="small">
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MButton label="继承 small" />
-      <MInput placeholder="继承 small" style="width:10rem" />
-      <MSelect v-model="city" :options="options" placeholder="继承 small" style="width:10rem" />
-      <MButton label="覆盖为 large" size="large" />
-    </div>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/Size.zh.vue"
 ```
 
 ## Component Defaults
@@ -54,83 +33,17 @@ const options = [
 
 `Space` / `Flex` 的 `size` 是间距，**不会**继承全局控件 `size`。
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput, MSpace } from 'morya-ui'
-import { ref } from 'vue'
-
-const note = ref('可清除')
-</script>
-
-<template>
-  <MConfigProvider
-    size="large"
-    :component-defaults="{
-      Input: { size: 'small', clearable: true },
-      Space: { size: 16 },
-    }"
-  >
-    <MSpace>
-      <MButton label="仍是 large" />
-      <MInput v-model="note" placeholder="Input 默认 small + clearable" style="width:14rem" />
-    </MSpace>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/ComponentDefaults.zh.vue"
 ```
 
 ## Density
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MInput } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem">
-    <MConfigProvider density="compact">
-      <div style="display:flex;gap:0.75rem;align-items:center">
-        <MButton label="compact" />
-        <MInput placeholder="compact" style="width:10rem" />
-      </div>
-    </MConfigProvider>
-    <MConfigProvider density="spacious">
-      <div style="display:flex;gap:0.75rem;align-items:center">
-        <MButton label="spacious" />
-        <MInput placeholder="spacious" style="width:10rem" />
-      </div>
-    </MConfigProvider>
-  </div>
-</template>
+```vue preview src="./demos/Density.vue"
 ```
 
 ## Input Variant
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MConfigProvider, MDialog, MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const city = ref<string | undefined>()
-const visible = ref(false)
-const options = [
-  { label: '北京', value: 'bj' },
-  { label: '上海', value: 'sh' },
-]
-</script>
-
-<template>
-  <MConfigProvider input-variant="filled" append-to="body">
-    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-      <MSelect v-model="city" :options="options" placeholder="filled 输入" style="width:12rem" />
-      <MButton label="打开对话框" @click="visible = true" />
-    </div>
-    <MDialog v-model="visible" title="继承 appendTo" style="width: 24rem">
-      <p style="margin:0">
-        浮层挂载目标由 ConfigProvider 提供。
-      </p>
-    </MDialog>
-  </MConfigProvider>
-</template>
+```vue preview src="./demos/InputVariant.zh.vue"
 ```
 
 ## 应用级插件

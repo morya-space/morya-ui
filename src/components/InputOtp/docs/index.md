@@ -16,34 +16,14 @@ import { MInputOtp } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MInputOtp } from 'morya-ui'
-import { ref } from 'vue'
-
-const code = ref('')
-</script>
-
-<template>
-  <MInputOtp v-model="code" :length="4" integer-only />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Mask & size
 
 `mask` 将格子设为密码输入。`size` / `gap` 控制尺寸与间距。
 
-```vue preview
-<script setup lang="ts">
-import { MInputOtp } from 'morya-ui'
-import { ref } from 'vue'
-
-const code = ref('')
-</script>
-
-<template>
-  <MInputOtp v-model="code" :length="4" mask size="large" :gap="8" />
-</template>
+```vue preview src="./demos/MaskAndSize.vue"
 ```
 
 ## Props

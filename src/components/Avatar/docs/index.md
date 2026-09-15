@@ -16,39 +16,14 @@ import { MAvatar } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MAvatar } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-    <MAvatar label="AB" />
-    <MAvatar icon="check" />
-    <MAvatar label="SQ" shape="square" />
-    <MAvatar label="LG" size="large" />
-    <MAvatar label="XL" size="xlarge" />
-  </div>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Group
 
 `MAvatarGroup` 可叠放头像，`max` 超出时显示 `+N`。图片加载失败会回退到 `icon` / `label` 并触发 `error`。
 
-```vue preview
-<script setup lang="ts">
-import { MAvatar, MAvatarGroup } from 'morya-ui'
-</script>
-
-<template>
-  <MAvatarGroup :max="3">
-    <MAvatar label="AL" />
-    <MAvatar label="BK" />
-    <MAvatar label="CN" />
-    <MAvatar label="DY" />
-  </MAvatarGroup>
-</template>
+```vue preview src="./demos/Group.vue"
 ```
 
 ## Props

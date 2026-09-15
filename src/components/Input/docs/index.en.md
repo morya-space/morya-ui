@@ -16,177 +16,60 @@ import { MInput } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MInput v-model="value" label="Name" placeholder="Enter your name" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Invalid
 
 Use `invalid` for validation failure, or rely on `error-message` alone.
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MInput invalid label="Email" model-value="not-an-email" help-text="Enter a valid email" />
-</template>
+```vue preview src="./demos/Invalid.vue"
 ```
 
 ## Clearable
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('Draft note')
-</script>
-
-<template>
-  <MInput v-model="value" clearable label="Note" />
-</template>
+```vue preview src="./demos/Clearable.vue"
 ```
 
 ## Prefix / Suffix
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const amount = ref('128')
-const host = ref('docs')
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MInput v-model="amount" label="Amount" fluid>
-      <template #prefix>
-        ¥
-      </template>
-      <template #suffix>
-        .00
-      </template>
-    </MInput>
-    <MInput v-model="host" label="Domain" fluid>
-      <template #suffix>
-        .well.design
-      </template>
-    </MInput>
-  </div>
-</template>
+```vue preview src="./demos/PrefixSuffix.en.vue"
 ```
 
 ## Password-like type
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const password = ref('')
-</script>
-
-<template>
-  <MInput v-model="password" type="password" label="Password" placeholder="••••••••" />
-</template>
+```vue preview src="./demos/PasswordLikeType.vue"
 ```
 
 ## Sizes
 
 Supports `small` / `large`, and also `sm` / `md` / `lg`.
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MInput size="small" label="Small" placeholder="Small" />
-    <MInput label="Normal" placeholder="Normal" />
-    <MInput size="large" label="Large" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Sizes.vue"
 ```
 
 ## Count
 
 `showCount` shows the character count; pair with `maxlength` for an upper bound.
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const bio = ref('Hello')
-</script>
-
-<template>
-  <MInput v-model="bio" label="Bio" :maxlength="20" show-count />
-</template>
+```vue preview src="./demos/Count.vue"
 ```
 
 ## Fluid
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:100%">
-    <MInput variant="outlined" label="Outlined" placeholder="Outlined" />
-    <MInput variant="filled" label="Filled" placeholder="Filled" />
-    <MInput fluid label="Fluid" placeholder="Full width" />
-  </div>
-</template>
+```vue preview src="./demos/Fluid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MInput model-value="Read only value" label="Disabled" disabled />
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Outer attrs & layout
 
 All fallthrough attrs except **control events** (`@keydown`, `@focus`, …) bind to the field wrapper (`.m-input-field`), not the raw `<input>`—including `class`, `style`, `data-*`, `title`, `tabindex`, and undeclared attrs:
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const q = ref('')
-</script>
-
-<template>
-  <MInput
-    v-model="q"
-    label="Search"
-    class="toolbar-search"
-    data-testid="search"
-    style="max-width: 16rem"
-  />
-</template>
+```vue preview src="./demos/OuterAttrsAndLayout.en.vue"
 ```
 
 See [Styling & attrs](/docs/attrs) for library-wide rules.
@@ -195,43 +78,14 @@ See [Styling & attrs](/docs/attrs) for library-wide rules.
 
 `@keydown`, `@focus`, `@blur`, and similar listeners attach to the underlying input:
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-import { ref } from 'vue'
-
-const code = ref('')
-</script>
-
-<template>
-  <MInput
-    v-model="code"
-    label="Code"
-    maxlength="6"
-    @keydown.enter="$event.target instanceof HTMLInputElement && $event.target.blur()"
-  />
-</template>
+```vue preview src="./demos/KeyboardAndFocusEvents.en.vue"
 ```
 
 ## pt
 
 Pass-through per DOM part. Common keys: `root`, `input`, `label`, `prefix`, `suffix`, `help`, `count`.
 
-```vue preview
-<script setup lang="ts">
-import { MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MInput
-    label="Token"
-    placeholder="sk-…"
-    :pt="{
-      root: { class: 'token-field' },
-      input: { class: 'font-mono', autocomplete: 'off' },
-    }"
-  />
-</template>
+```vue preview src="./demos/Pt.vue"
 ```
 
 ## Props

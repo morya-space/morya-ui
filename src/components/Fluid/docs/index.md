@@ -16,19 +16,7 @@ import { MFluid } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MFluid, MInput } from 'morya-ui'
-</script>
-
-<template>
-  <MFluid>
-    <div style="display:flex;flex-direction:column;gap:0.75rem">
-      <MInput placeholder="流体宽度输入" />
-      <MButton label="提交" />
-    </div>
-  </MFluid>
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Props

@@ -18,125 +18,24 @@ import { MTree } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MTree } from 'morya-ui'
-import { ref } from 'vue'
-
-const selected = ref<string | null>(null)
-const nodes = [
-  {
-    key: '0',
-    label: 'Documents',
-    icon: 'menu',
-    children: [
-      { key: '0-0', label: 'Work', icon: 'edit' },
-      { key: '0-1', label: 'Home', icon: 'home' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <MTree v-model="selected" :value="nodes" default-expand-all />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Checkbox
 
-```vue preview
-<script setup lang="ts">
-import { MTree } from 'morya-ui'
-import { ref } from 'vue'
-
-const checkedKeys = ref({})
-const nodes = [
-  {
-    key: '1',
-    label: 'Guide',
-    children: [
-      { key: '1-1', label: 'Install' },
-      { key: '1-2', label: 'Quick Start' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <MTree
-    v-model:checked-keys="checkedKeys"
-    :value="nodes"
-    show-checkbox
-    default-expand-all
-  />
-</template>
+```vue preview src="./demos/Checkbox.en.vue"
 ```
 
 ## Check strategy
 
 With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-tree`).
 
-```vue preview
-<script setup lang="ts">
-import { MTree } from 'morya-ui'
-import { ref } from 'vue'
-
-const checkedKeys = ref<Record<string, boolean>>({})
-const nodes = [
-  {
-    key: '0',
-    label: 'Documents',
-    children: [
-      { key: '0-0', label: 'Work' },
-      { key: '0-1', label: 'Home' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:0.5rem">
-    <MTree
-      v-model:checked-keys="checkedKeys"
-      :value="nodes"
-      show-checkbox
-      check-strategy="child"
-      default-expand-all
-    />
-    <p style="margin:0;color:var(--m-color-text-muted);font-size:0.875rem">
-      keys: {{ Object.keys(checkedKeys).join(', ') || '(none)' }}
-    </p>
-  </div>
-</template>
+```vue preview src="./demos/CheckStrategy.vue"
 ```
 
 ## Filter
 
-```vue preview
-<script setup lang="ts">
-import { MInput, MTree } from 'morya-ui'
-import { ref } from 'vue'
-
-const query = ref('')
-const nodes = [
-  {
-    key: 'a',
-    label: 'Components',
-    children: [
-      { key: 'a-1', label: 'Button' },
-      { key: 'a-2', label: 'Table' },
-      { key: 'a-3', label: 'Tree' },
-    ],
-  },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem;max-width:20rem">
-    <MInput v-model="query" placeholder="Filter nodes" clearable fluid />
-    <MTree :value="nodes" :filter="query" default-expand-all />
-  </div>
-</template>
+```vue preview src="./demos/Filter.en.vue"
 ```
 
 ## Props

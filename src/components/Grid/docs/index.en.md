@@ -16,43 +16,12 @@ import { MGrid, MGridItem } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MGrid, MGridItem } from 'morya-ui'
-</script>
-
-<template>
-  <MGrid :cols="4" :x-gap="12" :y-gap="12">
-    <MGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        {{ n }}
-      </div>
-    </MGridItem>
-  </MGrid>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Span & Offset
 
-```vue preview
-<script setup lang="ts">
-import { MGrid, MGridItem } from 'morya-ui'
-</script>
-
-<template>
-  <MGrid :cols="6" :x-gap="12" :y-gap="12">
-    <MGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        span 2
-      </div>
-    </MGridItem>
-    <MGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        offset 1
-      </div>
-    </MGridItem>
-  </MGrid>
-</template>
+```vue preview src="./demos/SpanAndOffset.vue"
 ```
 
 ## Responsive
@@ -61,51 +30,12 @@ import { MGrid, MGridItem } from 'morya-ui'
 
 When `cols` / gaps are plain numbers but items still need responsive `span`, enable `itemResponsive`.
 
-```vue preview
-<script setup lang="ts">
-import { MGrid, MGridItem } from 'morya-ui'
-</script>
-
-<template>
-  <MGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <MGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        {{ n }}
-      </div>
-    </MGridItem>
-  </MGrid>
-</template>
+```vue preview src="./demos/Responsive.vue"
 ```
 
 ## Collapsed
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MGrid, MGridItem } from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(true)
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <MButton size="small" :label="collapsed ? 'Expand' : 'Collapse'" @click="collapsed = !collapsed" />
-    <MGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <MGridItem v-for="n in 6" :key="n" :span="1">
-        <div style="padding:0.5rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-          {{ n }}
-        </div>
-      </MGridItem>
-      <MGridItem suffix :span="1">
-        <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--m-color-text-muted);font-size:0.75rem">
-            {{ overflow ? 'More…' : 'All' }}
-          </div>
-        </template>
-      </MGridItem>
-    </MGrid>
-  </div>
-</template>
+```vue preview src="./demos/Collapsed.en.vue"
 ```
 
 ## Grid Props

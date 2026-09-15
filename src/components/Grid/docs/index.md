@@ -16,43 +16,12 @@ import { MGrid, MGridItem } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MGrid, MGridItem } from 'morya-ui'
-</script>
-
-<template>
-  <MGrid :cols="4" :x-gap="12" :y-gap="12">
-    <MGridItem v-for="n in 4" :key="n" :span="1">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        {{ n }}
-      </div>
-    </MGridItem>
-  </MGrid>
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Span & Offset
 
-```vue preview
-<script setup lang="ts">
-import { MGrid, MGridItem } from 'morya-ui'
-</script>
-
-<template>
-  <MGrid :cols="6" :x-gap="12" :y-gap="12">
-    <MGridItem :span="2">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        span 2
-      </div>
-    </MGridItem>
-    <MGridItem :span="2" :offset="1">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        offset 1
-      </div>
-    </MGridItem>
-  </MGrid>
-</template>
+```vue preview src="./demos/SpanAndOffset.vue"
 ```
 
 ## Responsive
@@ -61,53 +30,12 @@ import { MGrid, MGridItem } from 'morya-ui'
 
 当 `cols` / 间距是普通数字、但 item 仍要用响应式 `span` 时，请打开 `itemResponsive`。
 
-```vue preview
-<script setup lang="ts">
-import { MGrid, MGridItem } from 'morya-ui'
-</script>
-
-<template>
-  <MGrid cols="2 s:3 m:4" :x-gap="12" :y-gap="12" item-responsive>
-    <MGridItem v-for="n in 4" :key="n" span="1 m:2">
-      <div style="padding:0.75rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-        {{ n }}
-      </div>
-    </MGridItem>
-  </MGrid>
-</template>
+```vue preview src="./demos/Responsive.vue"
 ```
 
 ## Collapsed
 
-```vue preview
-<script setup lang="ts">
-import { MButton, MGrid, MGridItem } from 'morya-ui'
-import { ref } from 'vue'
-
-const collapsed = ref(true)
-</script>
-
-<template>
-  <div style="display:grid;gap:0.75rem">
-    <MButton size="small" :label="collapsed ? '展开' : '收起'" @click="collapsed = !collapsed" />
-    <MGrid :cols="4" :x-gap="8" :y-gap="8" :collapsed="collapsed" :collapsed-rows="1">
-      <MGridItem v-for="n in 6" :key="n" :span="1">
-        <template #default="{ overflow }">
-          <div style="padding:0.5rem;border:1px solid var(--m-color-border);border-radius:var(--m-radius-md)">
-            {{ n }}{{ overflow && n > 4 ? '' : '' }}
-          </div>
-        </template>
-      </MGridItem>
-      <MGridItem suffix :span="1">
-        <template #default="{ overflow }">
-          <div style="padding:0.5rem;color:var(--m-color-text-muted);font-size:0.75rem">
-            {{ overflow ? '还有更多…' : '全部' }}
-          </div>
-        </template>
-      </MGridItem>
-    </MGrid>
-  </div>
-</template>
+```vue preview src="./demos/Collapsed.zh.vue"
 ```
 
 ## Grid Props

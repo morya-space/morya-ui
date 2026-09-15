@@ -16,49 +16,19 @@ import { MInputNumber } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MInputNumber } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(1)
-</script>
-
-<template>
-  <MInputNumber v-model="value" label="Quantity" :min="0" :max="99" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Buttons
 
-```vue preview
-<script setup lang="ts">
-import { MInputNumber } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(3)
-</script>
-
-<template>
-  <MInputNumber v-model="value" label="With buttons" show-buttons :min="0" :max="20" :step="1" />
-</template>
+```vue preview src="./demos/Buttons.vue"
 ```
 
 ## Precision & placement
 
 `precision` rounds to a number of decimal places. `button-placement="right"` puts both buttons on the right. `clearable` shows a clear control.
 
-```vue preview
-<script setup lang="ts">
-import { MInputNumber } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref(1.25)
-</script>
-
-<template>
-  <MInputNumber v-model="value" show-buttons button-placement="right" :precision="2" :step="0.25" clearable />
-</template>
+```vue preview src="./demos/PrecisionAndPlacement.vue"
 ```
 
 ## Props

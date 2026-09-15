@@ -16,39 +16,14 @@ import { MBreadcrumb } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MBreadcrumb } from 'morya-ui'
-
-const items = [
-  { label: 'Electronics', to: '/electronics' },
-  { label: 'Computer', to: '/electronics/computer' },
-  { label: 'Accessories' },
-]
-</script>
-
-<template>
-  <MBreadcrumb :home="{ label: 'Home', to: '/' }" :model="items" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Separator
 
 `separator` 自定义分隔符；也可用 `#separator` 插槽。
 
-```vue preview
-<script setup lang="ts">
-import { MBreadcrumb } from 'morya-ui'
-
-const items = [
-  { label: 'Library', to: '/lib' },
-  { label: 'Docs' },
-]
-</script>
-
-<template>
-  <MBreadcrumb :model="items" separator=">" />
-</template>
+```vue preview src="./demos/Separator.vue"
 ```
 
 ## Props

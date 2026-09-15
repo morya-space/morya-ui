@@ -16,92 +16,31 @@ import { MInputPassword } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Password" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Feedback
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Password" feedback />
-</template>
+```vue preview src="./demos/Feedback.vue"
 ```
 
 ## Custom icons
 
 Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or replace them entirely with slots.
 
-```vue preview
-<script setup lang="ts">
-import { MIcon, MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const byProp = ref('')
-const bySlot = ref('')
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;max-width:20rem">
-    <MInputPassword v-model="byProp" label="Via props" show-icon="unlock" hide-icon="lock" />
-    <MInputPassword v-model="bySlot" label="Via slots">
-      <template #showIcon>
-        <MIcon name="search" size="sm" />
-      </template>
-      <template #hideIcon>
-        <MIcon name="close" size="sm" />
-      </template>
-    </MInputPassword>
-  </div>
-</template>
+```vue preview src="./demos/CustomIcons.en.vue"
 ```
 
 ## Hold to peek
 
 `showPasswordOn="mousedown"` reveals while pressed and hides on release (Space / Enter do the same).
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('secret')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Hold to peek" show-password-on="mousedown" />
-</template>
+```vue preview src="./demos/HoldToPeek.vue"
 ```
 
 ## Clearable & count
 
-```vue preview
-<script setup lang="ts">
-import { MInputPassword } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('draft-pass')
-</script>
-
-<template>
-  <MInputPassword v-model="value" label="Password" clearable show-count :maxlength="32" />
-</template>
+```vue preview src="./demos/ClearableAndCount.vue"
 ```
 
 ## Props

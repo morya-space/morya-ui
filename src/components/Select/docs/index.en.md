@@ -18,264 +18,69 @@ import { MSelect } from 'morya-ui'
 
 ## Basic
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | undefined>()
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-  { label: 'Unavailable', value: 'na', disabled: true },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" label="Team" :options="options" placeholder="Choose a team" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Clearable
 
 `showClear` (alias: `clearable`) shows a clear button when a value is selected.
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | undefined>('design')
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" label="Team" :options="options" show-clear />
-</template>
+```vue preview src="./demos/Clearable.vue"
 ```
 
 ## Invalid
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect
-    v-model="value"
-    :options="options"
-    placeholder="Required"
-    invalid
-    help-text="Please select a team"
-  />
-</template>
+```vue preview src="./demos/Invalid.vue"
 ```
 
 ## Disabled
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect model-value="design" :options="options" disabled />
-</template>
+```vue preview src="./demos/Disabled.vue"
 ```
 
 ## Sizes
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'Small', value: 'sm' },
-  { label: 'Large', value: 'lg' },
-]
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-start">
-    <MSelect v-model="value" :options="options" size="small" placeholder="Small" />
-    <MSelect v-model="value" :options="options" placeholder="Normal" />
-    <MSelect v-model="value" :options="options" size="large" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Sizes.vue"
 ```
 
 ## Fluid
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" :options="options" fluid placeholder="Fluid width" />
-</template>
+```vue preview src="./demos/Fluid.vue"
 ```
 
 ## Multiple
 
 With `multiple`, `v-model` is an array. Selected values render as removable tags and the menu stays open after a pick. `maxTagCount` collapses extra tags.
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<Array<string | number>>(['design'])
-const options = [
-  { label: 'Design', value: 'design' },
-  { label: 'Development', value: 'dev' },
-  { label: 'Research', value: 'research' },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
-    <MSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
-  </div>
-</template>
+```vue preview src="./demos/Multiple.vue"
 ```
 
 ## Tag
 
 `tag` + `filter` lets the user create an option from the current query (Enter or the create row). Virtual lists are deferred.
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<Array<string | number>>([])
-const options = [
-  { label: 'Vue', value: 'vue' },
-  { label: 'React', value: 'react' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
-</template>
+```vue preview src="./demos/Tag.vue"
 ```
 
 ## Remote
 
 `remote` skips local filtering and emits `search` as the query changes. Use `loading` for in-flight requests.
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | number | undefined>()
-const loading = ref(false)
-const options = ref<{ label: string; value: string }[]>([])
-const catalog = [
-  { label: 'Shanghai', value: 'sh' },
-  { label: 'Beijing', value: 'bj' },
-  { label: 'Shenzhen', value: 'sz' },
-]
-
-function onSearch(query: string) {
-  if (!query) {
-    options.value = []
-    return
-  }
-  loading.value = true
-  window.setTimeout(() => {
-    const needle = query.toLowerCase()
-    options.value = catalog.filter((item) => item.label.toLowerCase().includes(needle))
-    loading.value = false
-  }, 400)
-}
-</script>
-
-<template>
-  <MSelect
-    v-model="value"
-    :options="options"
-    filter
-    remote
-    :loading="loading"
-    placeholder="Search a city"
-    @search="onSearch"
-  />
-</template>
+```vue preview src="./demos/Remote.vue"
 ```
 
 ## Empty
 
 Shows empty-state text when there are no options or the filter has no matches. Override with `emptyMessage`, otherwise it reads ConfigProvider `locale.emptyMessage`.
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const cities = [
-  { label: 'Shanghai', value: 'sh' },
-  { label: 'Beijing', value: 'bj' },
-  { label: 'Shenzhen', value: 'sz' },
-]
-</script>
-
-<template>
-  <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MSelect v-model="value" :options="[]" empty-message="No options" placeholder="Empty list" />
-    <MSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
-  </div>
-</template>
+```vue preview src="./demos/Empty.en.vue"
 ```
 
 ## Teleport
 
 The menu Teleports to `body` by default (`teleport` + `appendTo`). Set `append-to="self"` or `teleport={false}` to render in place.
 
-```vue preview
-<script setup lang="ts">
-import { MSelect } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref<string | undefined>()
-const options = [
-  { label: 'In place', value: 'local' },
-  { label: 'Teleported', value: 'body' },
-]
-</script>
-
-<template>
-  <MSelect v-model="value" :options="options" append-to="self" placeholder="Append to self" />
-</template>
+```vue preview src="./demos/Teleport.vue"
 ```
 
 ## Styling & attrs

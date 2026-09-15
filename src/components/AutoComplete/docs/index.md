@@ -16,61 +16,19 @@ import { MAutoComplete } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MAutoComplete } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-const suggestions = ['Vue', 'Vite', 'Vitest', 'Vue Router']
-</script>
-
-<template>
-  <MAutoComplete v-model="value" :suggestions="suggestions" dropdown placeholder="搜索…" />
-</template>
+```vue preview src="./demos/Basic.zh.vue"
 ```
 
 ## Size
 
-```vue preview
-<script setup lang="ts">
-import { MAutoComplete } from 'morya-ui'
-import { ref } from 'vue'
-
-const a = ref('')
-const b = ref('')
-const c = ref('')
-const suggestions = ['Vue', 'Vite', 'Vitest']
-</script>
-
-<template>
-  <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
-    <MAutoComplete v-model="a" size="small" :suggestions="suggestions" placeholder="Small" />
-    <MAutoComplete v-model="b" :suggestions="suggestions" placeholder="Default" />
-    <MAutoComplete v-model="c" size="large" :suggestions="suggestions" placeholder="Large" />
-  </div>
-</template>
+```vue preview src="./demos/Size.vue"
 ```
 
 ## Options & loading
 
 `suggestions` 可传字符串或 `{ label, value }`。`loading` / `clearable` 控制加载与清空。
 
-```vue preview
-<script setup lang="ts">
-import { MAutoComplete } from 'morya-ui'
-import { ref } from 'vue'
-
-const value = ref('')
-const suggestions = [
-  { label: 'Vue', value: 'vue' },
-  { label: 'Vite', value: 'vite' },
-]
-</script>
-
-<template>
-  <MAutoComplete v-model="value" :suggestions="suggestions" clearable placeholder="选项对象…" />
-</template>
+```vue preview src="./demos/OptionsAndLoading.zh.vue"
 ```
 
 ## Props

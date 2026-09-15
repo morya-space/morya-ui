@@ -16,60 +16,19 @@ import { MTimeline } from 'morya-ui'
 
 ## 基础用法
 
-```vue preview
-<script setup lang="ts">
-import { MTimeline } from 'morya-ui'
-
-const events = [
-  { status: 'Ordered', date: '15/10/2024', content: 'Order placed', icon: 'check', severity: 'success' },
-  { status: 'Shipped', date: '16/10/2024', content: 'On the way', icon: 'upload', severity: 'info' },
-  { status: 'Delivered', date: '17/10/2024', content: 'Arrived', icon: 'home', severity: 'success' },
-]
-</script>
-
-<template>
-  <MTimeline :value="events" align="alternate" />
-</template>
+```vue preview src="./demos/Basic.vue"
 ```
 
 ## Horizontal
 
-```vue preview
-<script setup lang="ts">
-import { MTimeline } from 'morya-ui'
-
-const events = [
-  { status: 'Start', date: '周一', content: 'Kickoff', icon: 'check' },
-  { status: 'Build', date: '周三', content: 'Implementation', icon: 'settings' },
-  { status: 'Ship', date: '周五', content: 'Release', icon: 'check-circle' },
-]
-</script>
-
-<template>
-  <MTimeline :value="events" layout="horizontal" />
-</template>
+```vue preview src="./demos/Horizontal.zh.vue"
 ```
 
 ## Pending & item slot
 
 `pending` 为 `true` 或文案时追加末尾待处理节点。`#item` 可整项自定义。
 
-```vue preview
-<script setup lang="ts">
-import { MTimeline } from 'morya-ui'
-
-const events = [
-  { status: 'Done', date: '周一', content: 'Shipped' },
-]
-</script>
-
-<template>
-  <MTimeline :value="events" pending="Waiting">
-    <template #item="{ item }">
-      <span>{{ item.content || item.status }}</span>
-    </template>
-  </MTimeline>
-</template>
+```vue preview src="./demos/PendingAndItemSlot.zh.vue"
 ```
 
 ## Props
