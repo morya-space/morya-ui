@@ -53,7 +53,8 @@ import 'morya-ui/styles.css'
 - `MTable` with columns + data + `row-key`.
 - Row actions: text/link `MButton` or `MDropdown`.
 - Pagination: table `paginator` or sibling `MPagination`.
-- Empty states: `emptyMessage` or `#empty` — never a silent blank table.
+- Empty states: `MEmpty` in `#empty` / Flow golden — never a silent blank table.
+- Terminal outcomes (success / 403 / 404 / 500): `MResult` — do not reuse `MEmpty` for errors.
 
 ## Overlays
 

@@ -56,7 +56,7 @@ Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
 ## Detail page — suggested order
 
 1. Same admin chrome as list (breadcrumb → `MPageContent`)
-2. `MPageHeader` — title, status `MTag`, primary/secondary actions
+2. `MPageHeader` — title, status via `MStatus` (light) or `MTag` (chip), primary/secondary actions
 3. Summary `MCard` or definition sections via `MPageSection`
 4. Related data: nested `MTabs` + `MTable` / timeline
 5. Edit via route, or `MDrawer` / `MDialog` — do not turn detail into a marketing page

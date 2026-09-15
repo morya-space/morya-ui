@@ -28,10 +28,10 @@ Keep credential forms quiet: one primary CTA, clear labels, no decorative noise 
 
 | Surface | Job | Recipe |
 | --- | --- | --- |
-| Empty state | Invite first action | Golden: `docs/golden-pages/empty-state.vue` — icon mark + title + next step + primary/secondary `MButton` |
+| Empty state | Invite first action | Golden: `docs/golden-pages/empty-state.vue` — `MEmpty` + primary/secondary `MButton` in `#extra` |
 | Onboarding | Teach the product path | `MStepper` or paced cards; one decision per step; finish → Ops home |
 | Wizard | Multi-step create | `MStepper` + `MForm` per step + sticky actions (`上一步` / `下一步` / `提交`) |
-| Success / result | Confirm completion | Icon + outcome + next actions (`查看详情` / `返回列表`) |
+| Success / result | Confirm completion | `MResult` (`status="success"` / `error` …) + next actions (`查看详情` / `返回列表`) |
 
 Copy must tell the user **what to do next**, not celebrate the system.
 
@@ -39,9 +39,9 @@ Copy must tell the user **what to do next**, not celebrate the system.
 
 | Surface | Job | Recipe |
 | --- | --- | --- |
-| 404 / not found | Reorient | Code + plain explanation + `返回首页` / `返回上一页` |
-| Permission denied | Explain + escape | Why blocked + request access / switch account / go home |
-| Maintenance / error | Honest status | What happened + retry + support path; prefer `<MMessage>` for persistent banners |
+| 404 / not found | Reorient | `MResult status="404"` + `返回首页` / `返回上一页` |
+| Permission denied | Explain + escape | `MResult status="403"` + request access / switch account / go home |
+| Maintenance / error | Honest status | `MResult status="500"` or persistent `<MMessage>` banner; what happened + retry + support |
 
 Avoid witty 404 essays that hide the exit paths.
 

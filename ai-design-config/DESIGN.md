@@ -48,7 +48,7 @@ import 'morya-ui/styles.css'
 | 仪表盘 | `docs/golden-pages/dashboard-page.vue` | 统计卡片栅格、图表区占位、快捷入口 / 最近列表 |
 | 登录页 | `docs/golden-pages/login-page.vue` | 品牌区 + `MForm` / `MInputPassword`；表单级错误用 token 告警条 |
 | 营销落地 | `docs/golden-pages/landing-page.vue` | 单任务首屏、分节、`MButton` / `MTag` / `MAccordion` |
-| 空状态 | `docs/golden-pages/empty-state.vue` | 说明 + 主 CTA；可嵌列表 `#empty` |
+| 空状态 | `docs/golden-pages/empty-state.vue` | `MEmpty` + 说明 + 主 CTA；可嵌列表 `#empty` |
 
 生成 **Ops** 页面时：结构对齐对应黄金样例，用 `MPage*` 拼装，尽量少写 scoped CSS。  
 生成 **Account / Express / Flow** 页面时：对齐上表样例；允许有节制的 scoped 布局，但颜色/间距仍用 `--m-*`。

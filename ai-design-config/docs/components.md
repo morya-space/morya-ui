@@ -56,6 +56,7 @@
 | `MDataView` | 卡片/列表数据视图 |
 | `MTree` | 树 |
 | `MPagination` | 分页 |
+| `MStatus` | 行内状态（圆点 + 文案） |
 | `MTag` / `MChip` / `MBadge` | 标签、徽章 |
 | `MAvatar` / `MAvatarGroup` | 头像 |
 | `MTimeline` | 时间线 |
@@ -69,6 +70,8 @@
 | `message` | **默认**：单行操作回执（已保存 / 已删除） | ★ 首选 |
 | `toast` | 仅当需要 `summary` + `detail` 或异步通知 | 次要 |
 | `<MMessage>` | 表单/认证区**常驻**错误条 | 内嵌场景 |
+| `MEmpty` | 无数据 / 首次使用 / 筛选无结果 | 空态 |
+| `MResult` | 提交结果、403 / 404 / 500 等阻断页 | 结果页 |
 | `MProgressBar` / `MProgressSpinner` | 加载进度 | |
 | `MSkeleton` | 骨架屏 | |
 | `MBlockUI` | 遮罩阻塞 | |
@@ -114,7 +117,10 @@
 | 新建/编辑实体 | `MForm` + 字段组件 + `MDialog` 或独立路由页 |
 | 删除确认 | `MConfirmDialog` |
 | 筛选侧栏 | `MDrawer` + 表单控件 |
-| 状态标签 | `MTag`（`severity`: success/warn/danger/info） |
+| 状态指示（行内） | `MStatus`（圆点 + 文案） |
+| 状态芯片 / 可关闭标签 | `MTag`（`severity`: success/warn/danger/info） |
+| 空数据 / 首次使用 | `MEmpty` |
+| 提交结果 / 403 / 404 / 500 | `MResult` |
 | 主/次按钮组 | `MSpace` + `MButton`（primary / secondary text） |
 | 后台首页 KPI | `MGrid` + `MCard` |
 | 组织架构 | `MTree` 或 `MTreeSelect` |

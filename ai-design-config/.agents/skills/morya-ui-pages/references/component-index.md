@@ -21,7 +21,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Data
 
-`MTable`, `MTreeTable`, `MDataView`, `MTree`, `MPagination`, `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
+`MTable`, `MTreeTable`, `MDataView`, `MTree`, `MPagination`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
 
 ## Feedback
 
@@ -30,6 +30,8 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | `message` | **Default** one-line CRUD result |
 | `toast` | `summary` + `detail`, or async / background feel |
 | `<MMessage>` | Persistent in-page error / warning |
+| `MEmpty` | No-data / first-use / filtered empty (not an error) |
+| `MResult` | Terminal outcome: success, failure, 403 / 404 / 500 |
 | `MProgressBar` / `MProgressSpinner` / `MSkeleton` / `MBlockUI` | Loading / blocking |
 
 ## Overlays & menus
@@ -48,13 +50,15 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Create / edit entity page | Form golden layout + `MForm` |
 | Create / edit in place | `MDialog` or `MDrawer` + form |
 | Delete | `MConfirmDialog` |
-| Status chip | `MTag` severities |
+| Lightweight inline status | `MStatus` (dot + label) |
+| Status chip / closable label | `MTag` severities |
 | Primary / secondary actions | `MSpace` + `MButton` |
 | Dashboard KPIs | `MGrid` + `MPageStat` |
 | Org tree | `MTree` / `MTreeSelect` |
 | Login / auth | `login-page` golden + `MInputPassword` |
 | Marketing landing | `landing-page` golden + `MButton` / `MTag` / `MAccordion` |
-| Empty list | `empty-state` golden or `MTable` `#empty` |
+| Empty list / zero state | `MEmpty` (+ `empty-state` golden or `MTable` `#empty`) |
+| Submit success / HTTP error page | `MResult` |
 | Local capped scroll | Explicit `MScrollbar` |
 
 ## Common mistakes

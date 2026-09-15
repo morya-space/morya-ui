@@ -78,7 +78,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 **Ops:** mirror golden-page block order; prefer `MPage*` over custom chrome.
 
-**Account / Flow / System:** centered or split shells with `MCard` / `MForm` / `MMessage` / `MEmpty`-style patterns (see surfaces); keep controls as `M*`.
+**Account / Flow / System:** centered or split shells with `MCard` / `MForm` / `MMessage` / `MEmpty` / `MResult` (see surfaces); keep controls as `M*`.
 
 **Express:** hero + sections with intentional hierarchy; interactive bits still `MButton` / `MTag` / etc.; atmosphere via layout, motion, and tokens — not a second component library.
 

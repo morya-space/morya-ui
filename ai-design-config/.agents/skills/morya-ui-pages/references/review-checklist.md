@@ -22,7 +22,9 @@
 
 - [ ] Primary CTA obvious; escape paths present (back / home / support)
 - [ ] Auth errors persistent via `<MMessage>` or field errors where appropriate
+- [ ] Empty uses `MEmpty` (or table `#empty` with `MEmpty`); success / HTTP errors use `MResult`
 - [ ] Empty / success states tell the user the next action
+- [ ] Inline status prefers `MStatus`; chip-like labels use `MTag`
 - [ ] Wizard steps: one job each; actions labeled clearly
 
 ## Express
