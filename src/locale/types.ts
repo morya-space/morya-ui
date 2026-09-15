@@ -8,6 +8,13 @@ export interface MLocaleConfig {
   confirm?: string
   emptyMessage?: string
   emptyOptions?: string
+  resultSuccess?: string
+  resultInfo?: string
+  resultWarning?: string
+  resultError?: string
+  result403?: string
+  result404?: string
+  result500?: string
   searchPlaceholder?: string
   datePickerPlaceholder?: string
   selectPlaceholder?: string
