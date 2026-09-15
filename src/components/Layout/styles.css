@@ -1,4 +1,4 @@
-/* —— Panel: Layout —— */
+/* —— Layout: Layout —— */
 .m-layout {
     --m-layout-height: 100%;
     height: var(--m-layout-height, 100%);
@@ -117,13 +117,13 @@
 }
 
 .m-layout-header {
-    --m-layout-header-height: 56px;
+    --m-layout-header-height: 3.5rem;
     --m-layout-padding: 0 var(--m-space-4);
     --m-layout-radius: 0;
 }
 
 .m-layout-footer {
-    --m-layout-footer-height: 48px;
+    --m-layout-footer-height: 3rem;
     --m-layout-padding: 0 var(--m-space-4);
     --m-layout-radius: 0;
 }
@@ -177,8 +177,8 @@
 }
 
 .m-layout-sider {
-    --m-layout-sider-width: 200px;
-    --m-layout-sider-collapsed-width: 64px;
+    --m-layout-sider-width: 12.5rem;
+    --m-layout-sider-collapsed-width: 4rem;
     --m-layout-padding: var(--m-space-4);
     --m-layout-radius: 0;
     --m-layout-trigger-size: 1.5rem;
@@ -272,17 +272,31 @@
 .m-layout-sider__trigger {
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
     font: inherit;
     padding: 0;
     position: absolute;
+    transition:
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease);
     z-index: 2;
+}
+
+.m-layout-sider__trigger:hover:not(:disabled) {
+    color: var(--m-color-primary);
 }
 
 .m-layout-sider__trigger:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
+}
+
+.m-layout-sider__trigger:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-layout-sider__trigger--arrow-circle {
@@ -292,13 +306,18 @@
     border-radius: 50%;
     box-shadow: var(--m-shadow-sm);
     display: inline-flex;
-    font-size: 1rem;
+    font-size: var(--m-font-size-md);
     height: var(--m-layout-trigger-size);
     justify-content: center;
     right: 0;
     top: 50%;
     transform: translate(50%, -50%);
     width: var(--m-layout-trigger-size);
+}
+
+.m-layout-sider__trigger--arrow-circle:hover:not(:disabled) {
+    border-color: var(--m-color-primary);
+    color: var(--m-color-primary);
 }
 
 .m-layout-sider--right-placement > .m-layout-sider__trigger--arrow-circle {
@@ -365,14 +384,14 @@
 .m-layout-sider__bar-top,
 .m-layout-sider__bar-bottom {
     background: var(--m-color-text-muted);
-    border-radius: 2px;
+    border-radius: var(--m-radius-sm);
     height: 2.375rem;
     left: 0.875rem;
     position: absolute;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
         transform var(--m-motion-fast) var(--m-motion-ease);
-    width: 4px;
+    width: var(--m-space-1);
 }
 
 .m-layout-sider__bar-top {
@@ -408,4 +427,36 @@
     left: 0;
     position: absolute;
     top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-layout,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-header,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-footer,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-sider,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__scrollbar,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__arrow,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__bar-top,
+    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__bar-bottom {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-layout,
+[data-m-motion="reduced"] .m-layout-header,
+[data-m-motion="reduced"] .m-layout-footer,
+[data-m-motion="reduced"] .m-layout-sider,
+[data-m-motion="reduced"] .m-layout-sider__scrollbar,
+[data-m-motion="reduced"] .m-layout-sider__arrow,
+[data-m-motion="reduced"] .m-layout-sider__bar-top,
+[data-m-motion="reduced"] .m-layout-sider__bar-bottom,
+[data-m-motion="none"] .m-layout,
+[data-m-motion="none"] .m-layout-header,
+[data-m-motion="none"] .m-layout-footer,
+[data-m-motion="none"] .m-layout-sider,
+[data-m-motion="none"] .m-layout-sider__scrollbar,
+[data-m-motion="none"] .m-layout-sider__arrow,
+[data-m-motion="none"] .m-layout-sider__bar-top,
+[data-m-motion="none"] .m-layout-sider__bar-bottom {
+    transition: none;
 }

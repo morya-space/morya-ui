@@ -22,12 +22,16 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     gap: var(--m-space-1);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
     padding-right: var(--m-control-end-padding);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
@@ -89,6 +93,11 @@
     width: 100%;
 }
 
+.m-treeselect__filter:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
 .m-treeselect--disabled .m-treeselect__trigger {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
@@ -146,12 +155,24 @@
 .m-treeselect__toggler-spacer {
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
+    cursor: pointer;
     flex: 0 0 var(--m-treeselect-toggler-size);
     font: inherit;
     height: var(--m-treeselect-toggler-size);
     padding: 0;
     width: var(--m-treeselect-toggler-size);
+}
+
+.m-treeselect__toggler:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-treeselect__toggler-spacer {
+    cursor: default;
+    pointer-events: none;
 }
 
 .m-treeselect__option {
@@ -161,9 +182,10 @@
     color: inherit;
     cursor: pointer;
     flex: 1;
-    font: inherit;
+    font-family: var(--m-font-sans);
     padding: var(--m-space-1) var(--m-space-2);
     text-align: left;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-treeselect__option--selected,
@@ -172,6 +194,20 @@
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
 }
 
+.m-treeselect__option:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-treeselect__option:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
 .m-treeselect--invalid .m-treeselect__trigger {
     border-color: var(--m-color-danger);
+}
+
+.m-treeselect--invalid .m-treeselect__trigger:focus-visible {
+    box-shadow: var(--m-focus-shadow-danger);
 }

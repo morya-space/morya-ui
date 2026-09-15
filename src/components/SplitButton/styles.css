@@ -18,11 +18,17 @@
     cursor: pointer;
     display: inline-flex;
     font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     font-weight: 600;
     gap: var(--m-space-2);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-splitbutton__main {
@@ -44,19 +50,34 @@
 
 .m-splitbutton__main:hover:not(:disabled),
 .m-splitbutton__trigger:hover:not(:disabled) {
-    filter: brightness(1.06);
+    background: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary-hover);
 }
 
 .m-splitbutton--outlined .m-splitbutton__main:hover:not(:disabled),
-.m-splitbutton--outlined .m-splitbutton__trigger:hover:not(:disabled),
+.m-splitbutton--outlined .m-splitbutton__trigger:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        transparent
+    );
+    border-color: var(--m-color-primary);
+}
+
 .m-splitbutton--secondary .m-splitbutton__main:hover:not(:disabled),
 .m-splitbutton--secondary .m-splitbutton__trigger:hover:not(:disabled) {
     background: color-mix(
         in srgb,
-        var(--m-color-primary) 10%,
+        var(--m-color-text-muted) 24%,
         var(--m-color-surface)
     );
-    filter: none;
+    border-color: var(--m-color-border);
+}
+
+.m-splitbutton--danger .m-splitbutton__main:hover:not(:disabled),
+.m-splitbutton--danger .m-splitbutton__trigger:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-danger) 85%, black);
+    border-color: color-mix(in srgb, var(--m-color-danger) 85%, black);
 }
 
 .m-splitbutton__main:focus-visible,
@@ -129,8 +150,14 @@
 }
 
 .m-splitbutton--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
+}
+
+.m-splitbutton__item:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
 }
 
 .m-splitbutton__menu {
@@ -154,7 +181,7 @@
     position: fixed;
     right: auto;
     top: auto;
-    z-index: var(--m-z-overlay);
+    z-index: var(--m-z-dropdown);
 }
 
 .m-splitbutton__item {

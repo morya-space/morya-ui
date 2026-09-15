@@ -2,10 +2,17 @@
     --m-textarea-min-height: 6rem;
     --m-textarea-min-height-small: 4.5rem;
     --m-textarea-min-height-large: 7.5rem;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     line-height: 1.5;
     min-height: var(--m-textarea-min-height);
     padding: var(--m-space-3) var(--m-control-padding-x-medium);
+    resize: vertical;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-textarea--filled {
@@ -67,6 +74,10 @@
     z-index: 1;
 }
 
+.m-textarea__clear:hover:not(:disabled) {
+    color: var(--m-color-text);
+}
+
 .m-textarea__clear:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
@@ -79,6 +90,11 @@
 
 .m-textarea--invalid {
     border-color: var(--m-color-danger);
+}
+
+.m-textarea--invalid:focus-visible {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
 }
 
 .m-textarea:focus {

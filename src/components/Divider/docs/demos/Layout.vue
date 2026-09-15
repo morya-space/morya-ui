@@ -3,7 +3,7 @@ import { MDivider } from 'morya-ui'
 </script>
 
 <template>
-  <div style="display:flex;align-items:stretch;gap:1rem;min-height:6rem">
+  <div class="flex items-stretch gap-1rem min-h-6rem">
     <span>Left</span>
     <MDivider layout="vertical" />
     <span>Middle</span>

@@ -1,10 +1,12 @@
 /* —— Form: InputOtp —— */
 .m-inputotp {
+    --m-inputotp-gap: var(--m-space-2);
     display: inline-flex;
-    gap: var(--m-space-2);
+    gap: var(--m-inputotp-gap);
 }
 
 .m-inputotp--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
@@ -14,19 +16,20 @@
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
     color: var(--m-color-text);
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     height: var(--m-control-height-medium);
     text-align: center;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-control-height-medium);
 }
 
-.m-inputotp {
-    --m-inputotp-gap: var(--m-space-2);
-    gap: var(--m-inputotp-gap);
-}
-
 .m-inputotp--small .m-inputotp__input {
+    font-size: var(--m-control-font-small);
     height: var(--m-control-height-small);
     width: var(--m-control-height-small);
 }
@@ -39,4 +42,9 @@
 
 .m-inputotp--invalid .m-inputotp__input {
     border-color: var(--m-color-danger);
+}
+
+.m-inputotp--invalid .m-inputotp__input:focus-visible {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
 }

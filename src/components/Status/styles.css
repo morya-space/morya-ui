@@ -1,96 +1,106 @@
 .m-status {
-  --m-status-dot-size: 0.5rem;
-  align-items: center;
-  color: var(--m-color-text);
-  display: inline-flex;
-  font-family: var(--m-font-sans);
-  font-size: var(--m-font-size-sm);
-  gap: var(--m-space-2);
-  line-height: 1.25;
-  vertical-align: middle;
+    --m-status-dot-size: 0.5rem;
+    align-items: center;
+    color: var(--m-color-text);
+    display: inline-flex;
+    font-family: var(--m-font-sans);
+    font-size: var(--m-font-size-sm);
+    font-weight: 500;
+    gap: var(--m-space-2);
+    line-height: 1.25;
+    vertical-align: middle;
 }
 
 .m-status__dot {
-  background: currentColor;
-  border-radius: var(--m-radius-full);
-  flex-shrink: 0;
-  height: var(--m-status-dot-size);
-  width: var(--m-status-dot-size);
+    background: currentColor;
+    border-radius: var(--m-radius-full);
+    flex-shrink: 0;
+    height: var(--m-status-dot-size);
+    width: var(--m-status-dot-size);
 }
 
 .m-status__label {
-  min-width: 0;
+    min-width: 0;
 }
 
 .m-status--small {
-  --m-status-dot-size: 0.375rem;
-  font-size: var(--m-font-size-xs);
-  gap: var(--m-space-1);
+    --m-status-dot-size: 0.375rem;
+    font-size: var(--m-font-size-xs);
+    gap: var(--m-space-1);
 }
 
 .m-status--large {
-  --m-status-dot-size: 0.625rem;
-  font-size: var(--m-font-size-md);
-  gap: var(--m-space-2);
+    --m-status-dot-size: 0.625rem;
+    font-size: var(--m-font-size-md);
+    gap: var(--m-space-2);
 }
 
 .m-status--primary {
-  color: var(--m-color-primary);
+    color: var(--m-color-primary);
 }
 
 .m-status--secondary {
-  color: var(--m-color-text-muted);
+    color: var(--m-color-text-muted);
 }
 
 .m-status--secondary .m-status__dot {
-  background: color-mix(in srgb, var(--m-color-text-muted) 70%, var(--m-color-surface));
+    background: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 70%,
+        var(--m-color-surface)
+    );
 }
 
 .m-status--success {
-  color: var(--m-color-success);
+    color: var(--m-color-success);
 }
 
 .m-status--info {
-  color: var(--m-color-info);
+    color: var(--m-color-info);
 }
 
 .m-status--warn,
 .m-status--warning {
-  color: var(--m-color-warn);
+    color: var(--m-color-warn);
 }
 
 .m-status--danger {
-  color: var(--m-color-danger);
+    color: var(--m-color-danger);
 }
 
 .m-status--contrast {
-  color: var(--m-color-contrast);
+    color: var(--m-color-contrast);
 }
 
 .m-status--help {
-  color: var(--m-color-help);
+    color: var(--m-color-help);
 }
 
 .m-status--custom {
-  color: var(--m-status-color);
+    color: var(--m-status-color);
 }
 
 .m-status--processing .m-status__dot {
-  animation: m-status-pulse var(--m-motion-pulse) ease-in-out infinite;
+    animation: m-status-pulse var(--m-motion-pulse) ease-in-out infinite;
 }
 
 @keyframes m-status-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);
-  }
-  70% {
-    box-shadow: 0 0 0 0.4rem transparent;
-  }
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);
+    }
+    70% {
+        box-shadow: 0 0 0 0.4rem transparent;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .m-status--processing .m-status__dot {
+    .m-status--processing .m-status__dot {
+        animation: none;
+    }
+}
+
+:root[data-m-motion='none'] .m-status--processing .m-status__dot,
+:root[data-m-motion='reduced'] .m-status--processing .m-status__dot {
     animation: none;
-  }
 }

@@ -10,6 +10,7 @@
 
 .m-inputnumber-field__label {
     color: var(--m-color-text);
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 600;
 }
@@ -81,16 +82,35 @@
     z-index: 1;
 }
 
+.m-inputnumber__input-wrap .m-inputnumber__clear:hover:not(:disabled) {
+    color: var(--m-color-text);
+}
+
+.m-inputnumber__input-wrap .m-inputnumber__clear:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-inputnumber__input-wrap .m-inputnumber__clear:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
 .m-inputnumber__input {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
     color: var(--m-color-text);
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     min-height: var(--m-control-height-medium);
     min-width: 0;
     padding: 0 var(--m-control-padding-x-medium);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-inputnumber--buttons .m-inputnumber__input {
@@ -125,12 +145,15 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     justify-content: center;
     min-height: var(--m-control-height-medium);
     min-width: var(--m-control-height-medium);
     padding: 0;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-inputnumber__button--decrement {

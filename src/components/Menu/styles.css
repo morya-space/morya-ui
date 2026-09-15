@@ -283,7 +283,7 @@
     transition:
         color var(--m-motion-fast) var(--m-motion-ease),
         background-color var(--m-motion-fast) var(--m-motion-ease),
-        padding-left var(--m-motion-fast) var(--m-motion-ease);
+        padding-inline-start var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-menu__item-content--no-icon {
@@ -430,6 +430,20 @@
 .m-menu-expand-leave-from {
     grid-template-rows: 1fr;
     opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-menu-expand-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-menu-expand-leave-active {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-menu-expand-enter-active,
+[data-m-motion="reduced"] .m-menu-expand-leave-active,
+[data-m-motion="none"] .m-menu-expand-enter-active,
+[data-m-motion="none"] .m-menu-expand-leave-active {
+    transition: none;
 }
 
 /* Popover flyout: strip outer chrome, menu card provides it */

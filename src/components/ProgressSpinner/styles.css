@@ -1,9 +1,11 @@
+/* —— Feedback: ProgressSpinner —— */
 .m-progress-spinner {
     --m-progress-spinner-size: 2.5rem;
     --m-progress-spinner-color: var(--m-color-primary);
     animation: m-progress-spinner-rotate var(--m-motion-spin) linear infinite;
     color: var(--m-progress-spinner-color);
     display: inline-block;
+    font-family: var(--m-font-sans);
     height: var(--m-progress-spinner-size);
     vertical-align: middle;
     width: var(--m-progress-spinner-size);
@@ -51,16 +53,33 @@
 
 .m-progress-spinner-wrap__overlay {
     align-items: center;
+    background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
     display: flex;
     flex-direction: column;
     gap: var(--m-space-2);
     inset: 0;
     justify-content: center;
     position: absolute;
+    z-index: var(--m-blockui-z-index, 10);
 }
 
 .m-progress-spinner__description {
     color: var(--m-color-text-muted);
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-sm);
     margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-progress-spinner,
+    html:not([data-m-ignore-reduced-motion]) .m-progress-spinner__circle {
+        animation: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-progress-spinner,
+[data-m-motion="reduced"] .m-progress-spinner__circle,
+[data-m-motion="none"] .m-progress-spinner,
+[data-m-motion="none"] .m-progress-spinner__circle {
+    animation: none;
 }

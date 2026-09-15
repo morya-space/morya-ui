@@ -23,7 +23,9 @@
 }
 
 .m-card__title {
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-lg);
+    font-weight: 600;
     margin: 0;
 }
 
@@ -42,7 +44,13 @@
 }
 
 .m-card--hoverable:hover {
+    border-color: color-mix(in srgb, var(--m-color-primary) 35%, var(--m-color-border));
     box-shadow: var(--m-shadow-md);
+}
+
+.m-card--hoverable:focus-within {
+    border-color: var(--m-color-primary-hover);
+    box-shadow: var(--m-focus-shadow);
 }
 
 .m-card--small .m-card__header,

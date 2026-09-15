@@ -1,10 +1,11 @@
-/* —— Panel: Space —— */
 .m-space {
     box-sizing: border-box;
     min-width: 0;
 }
 
 .m-space__item {
+    box-sizing: border-box;
     display: block;
     max-width: 100%;
+    min-width: 0;
 }

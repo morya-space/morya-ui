@@ -1,4 +1,4 @@
-/* —— Menu: CommandMenu —— */
+/* —— Navigation: CommandMenu —— */
 .m-commandmenu-backdrop {
     align-items: flex-start;
     background: var(--m-overlay-scrim);
@@ -19,9 +19,10 @@
     box-shadow: var(--m-shadow-md);
     display: flex;
     flex-direction: column;
+    font-family: var(--m-font-sans);
     max-width: var(--m-commandmenu-width);
     overflow: hidden;
-    width: min(var(--m-commandmenu-width), calc(100vw - 2rem));
+    width: min(var(--m-commandmenu-width), calc(100vw - var(--m-space-8)));
 }
 
 .m-commandmenu__input {
@@ -33,6 +34,11 @@
     outline: none;
     padding: var(--m-space-3) var(--m-space-4);
     width: 100%;
+}
+
+.m-commandmenu__input:focus-visible {
+    box-shadow: inset 0 calc(var(--m-border-width) * -1) 0 0 var(--m-color-primary);
+    outline: none;
 }
 
 .m-commandmenu__list {
@@ -58,12 +64,25 @@
     gap: var(--m-space-2);
     padding: var(--m-space-2) var(--m-space-3);
     text-align: left;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
 .m-commandmenu__item--active,
 .m-commandmenu__item:hover:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 12%, transparent);
+}
+
+.m-commandmenu__item:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-commandmenu__item:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-commandmenu__label {

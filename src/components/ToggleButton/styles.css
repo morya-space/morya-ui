@@ -14,12 +14,18 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     font-weight: 600;
     gap: var(--m-space-2);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-togglebutton--small {
@@ -34,10 +40,22 @@
     padding: 0 var(--m-button-padding-x-large);
 }
 
+.m-togglebutton:hover:not(:disabled):not(.m-togglebutton--disabled):not(
+        .m-togglebutton--checked
+    ) {
+    background: color-mix(in srgb, var(--m-color-text-muted) 22%, var(--m-color-surface));
+    border-color: var(--m-color-primary-hover);
+}
+
 .m-togglebutton--checked {
     background: var(--m-color-primary);
     border-color: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
+}
+
+.m-togglebutton--checked:hover:not(:disabled):not(.m-togglebutton--disabled) {
+    background: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary-hover);
 }
 
 .m-togglebutton:disabled,

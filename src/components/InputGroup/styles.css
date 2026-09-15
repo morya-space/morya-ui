@@ -1,4 +1,4 @@
-/* —�?Form: InputGroup —�?*/
+/* —— Form: InputGroup —— */
 .m-inputgroup {
     align-items: stretch;
     display: flex;
@@ -14,6 +14,7 @@
     color: var(--m-color-text-muted);
     display: inline-flex;
     flex: 0 0 auto;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     padding: 0 var(--m-control-padding-x-medium);
     white-space: nowrap;

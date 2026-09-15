@@ -1,3 +1,4 @@
+/* —— Feedback: Message —— */
 .m-message-host {
     --m-message-host-max-width: 28rem;
     display: flex;
@@ -72,7 +73,7 @@
 .m-message__icon {
     color: var(--m-color-info);
     flex-shrink: 0;
-    margin-top: 0.1rem;
+    margin-top: var(--m-space-1);
 }
 
 .m-message__content {
@@ -84,13 +85,25 @@
     align-items: center;
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
     font: inherit;
+    height: var(--m-control-affix-size);
+    justify-content: center;
     line-height: 1;
     padding: 0;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+    width: var(--m-control-affix-size);
+}
+
+.m-message__close:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    color: var(--m-color-text);
 }
 
 .m-message__close:focus-visible {
@@ -218,4 +231,33 @@
 
 .m-message-slide-move {
     transition: transform var(--m-motion-enter) var(--m-motion-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-message-slide-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-message-slide-leave-active,
+    html:not([data-m-ignore-reduced-motion]) .m-message-slide-move {
+        transition: none;
+    }
+
+    html:not([data-m-ignore-reduced-motion]) .m-message-slide-enter-from,
+    html:not([data-m-ignore-reduced-motion]) .m-message-slide-leave-to {
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-message-slide-enter-active,
+[data-m-motion="reduced"] .m-message-slide-leave-active,
+[data-m-motion="reduced"] .m-message-slide-move,
+[data-m-motion="none"] .m-message-slide-enter-active,
+[data-m-motion="none"] .m-message-slide-leave-active,
+[data-m-motion="none"] .m-message-slide-move {
+    transition: none;
+}
+
+[data-m-motion="reduced"] .m-message-slide-enter-from,
+[data-m-motion="reduced"] .m-message-slide-leave-to,
+[data-m-motion="none"] .m-message-slide-enter-from,
+[data-m-motion="none"] .m-message-slide-leave-to {
+    transform: none;
 }

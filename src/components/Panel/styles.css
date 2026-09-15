@@ -1,8 +1,9 @@
-/* —�?Panel: Panel —�?*/
+/* —— Data: Panel —— */
 .m-panel {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
+    font-family: var(--m-font-sans);
     overflow: hidden;
 }
 
@@ -17,6 +18,7 @@
 
 .m-panel__title {
     color: var(--m-color-text);
+    font-family: var(--m-font-sans);
     font-weight: 600;
 }
 
@@ -29,6 +31,11 @@
     font: inherit;
     line-height: 1;
     padding: var(--m-space-1);
+    transition: color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-panel__toggler:hover:not(:disabled) {
+    color: var(--m-color-text);
 }
 
 .m-panel__toggler:focus-visible {
@@ -55,6 +62,18 @@
     max-height: 0;
     opacity: 0;
     padding-block: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-panel-collapse-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-panel-collapse-leave-active {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-panel-collapse-enter-active,
+[data-m-motion="reduced"] .m-panel-collapse-leave-active {
+    transition: none;
 }
 
 .m-panel__footer {

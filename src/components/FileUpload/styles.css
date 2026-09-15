@@ -1,4 +1,4 @@
-/* —�?File: FileUpload —�?*/
+/* —— Form: FileUpload —— */
 .m-fileupload {
     --m-fileupload-dropzone-min-height: 10rem;
     --m-fileupload-icon-size: 2.5rem;
@@ -7,6 +7,7 @@
     --m-fileupload-progress-height: 0.25rem;
     display: flex;
     flex-direction: column;
+    font-family: var(--m-font-sans);
     gap: var(--m-space-2);
 }
 
@@ -19,11 +20,18 @@
     align-self: flex-start;
     background: var(--m-color-primary);
     border: 0;
-    border-radius: var(--m-radius-md);
+    border-radius: var(--m-radius-control);
     color: var(--m-color-on-emphasis);
     cursor: pointer;
-    font: inherit;
+    font-family: var(--m-font-sans);
+    font-weight: 600;
     padding: var(--m-space-2) var(--m-space-3);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-fileupload__clear {
@@ -34,6 +42,12 @@
 
 .m-fileupload__choose:hover:not(:disabled) {
     background: var(--m-color-primary-hover);
+}
+
+.m-fileupload__choose:disabled,
+.m-fileupload__clear:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-fileupload__choose:focus-visible,
@@ -88,6 +102,12 @@
         var(--m-color-surface)
     );
     border-color: var(--m-color-primary);
+}
+
+.m-fileupload__dragger:focus-visible {
+    border-color: var(--m-color-primary);
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
 }
 
 .m-fileupload__icon {
@@ -194,6 +214,7 @@
     height: var(--m-control-affix-size);
     justify-content: center;
     padding: 0;
+    transition: color var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-control-affix-size);
 }
 
@@ -308,9 +329,12 @@
     color: var(--m-color-text-muted);
     cursor: pointer;
     display: flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     justify-content: center;
     padding: 0;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-fileupload__card--add:hover,

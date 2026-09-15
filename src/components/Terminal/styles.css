@@ -1,4 +1,4 @@
-/* —�?Misc: Terminal —�?*/
+/* —— Data: Terminal —— */
 .m-terminal {
     --m-terminal-bg: var(--m-color-contrast);
     --m-terminal-fg: var(--m-color-contrast-fg);
@@ -61,8 +61,14 @@
 .m-terminal__input {
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: inherit;
     flex: 1;
     font: inherit;
+    outline: none;
+}
+
+.m-terminal__input:focus-visible {
+    box-shadow: var(--m-focus-shadow);
     outline: none;
 }

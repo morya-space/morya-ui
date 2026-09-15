@@ -7,11 +7,17 @@
     border-radius: var(--m-radius-md);
     display: inline-flex;
     flex-direction: column;
+    font-family: var(--m-font-sans);
     min-width: var(--m-listbox-min-width);
     overflow: hidden;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-listbox--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
@@ -23,6 +29,11 @@
     color: var(--m-color-text);
     font: inherit;
     padding: var(--m-space-2) var(--m-space-3);
+}
+
+.m-listbox__filter:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
 }
 
 .m-listbox__list {
@@ -43,11 +54,13 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: block;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
     text-align: start;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
@@ -97,4 +110,8 @@
 
 .m-listbox--invalid {
     border-color: var(--m-color-danger);
+}
+
+.m-listbox--invalid:focus-within {
+    box-shadow: var(--m-focus-shadow-danger);
 }

@@ -3,7 +3,7 @@ import { MDivider } from 'morya-ui'
 </script>
 
 <template>
-  <div style="display:grid;gap:1rem;width:min(28rem,100%)">
+  <div class="grid gap-1rem w-full">
     <p style="margin:0">
       Above
     </p>

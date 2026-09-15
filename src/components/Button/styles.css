@@ -29,6 +29,7 @@
     cursor: pointer;
     display: inline-flex;
     flex-direction: row;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     font-weight: 600;
     gap: var(--m-space-2);
@@ -41,7 +42,8 @@
         background-color var(--m-motion-fast) var(--m-motion-ease),
         border-color var(--m-motion-fast) var(--m-motion-ease),
         color var(--m-motion-fast) var(--m-motion-ease),
-        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     vertical-align: middle;
     white-space: nowrap;
 }
@@ -64,6 +66,11 @@
 .m-button:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
+}
+
+.m-button:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-button--primary {
@@ -492,18 +499,21 @@
 }
 
 .m-button-group > .m-button:first-child {
-    border-top-left-radius: var(--m-radius-md);
-    border-bottom-left-radius: var(--m-radius-md);
+    border-top-left-radius: var(--m-radius-control);
+    border-bottom-left-radius: var(--m-radius-control);
 }
 
 .m-button-group > .m-button:last-child {
-    border-top-right-radius: var(--m-radius-md);
-    border-bottom-right-radius: var(--m-radius-md);
+    border-top-right-radius: var(--m-radius-control);
+    border-bottom-right-radius: var(--m-radius-control);
 }
 
 .m-button--raised {
-    box-shadow: 0 0.25rem 0.75rem
-        color-mix(in srgb, var(--m-color-text) 14%, transparent);
+    box-shadow: var(--m-shadow-raised);
+}
+
+.m-button--raised:focus-visible {
+    box-shadow: var(--m-focus-shadow), var(--m-shadow-raised);
 }
 
 .m-button--rounded {
@@ -650,4 +660,15 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-button__spinner {
+        animation: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-button__spinner,
+[data-m-motion="none"] .m-button__spinner {
+    animation: none;
 }

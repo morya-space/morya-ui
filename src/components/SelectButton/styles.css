@@ -17,13 +17,19 @@
     border: var(--m-border-width) solid var(--m-color-border);
     color: var(--m-color-text);
     cursor: pointer;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     font-weight: 600;
-    margin-left: -1px;
+    margin-left: calc(var(--m-border-width) * -1);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);
     position: relative;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-selectbutton__button:first-child {
@@ -56,6 +62,11 @@
     );
 }
 
+.m-selectbutton__button--active:hover:not(:disabled) {
+    background: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary-hover);
+}
+
 .m-selectbutton__button:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
@@ -77,7 +88,12 @@
     border-color: var(--m-color-danger);
 }
 
+.m-selectbutton--invalid .m-selectbutton__button:focus-visible {
+    box-shadow: var(--m-focus-shadow-danger);
+}
+
 .m-selectbutton--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }

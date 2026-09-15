@@ -75,10 +75,32 @@
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
     color: var(--m-color-text);
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-sm);
     height: var(--m-control-height-small);
     padding: 0 var(--m-space-2);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-pagination__select:hover:not(:disabled),
+.m-pagination__input:hover:not(:disabled):not(:focus) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-pagination__select:focus-visible,
+.m-pagination__input:focus-visible {
+    border-color: var(--m-color-primary-hover);
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-pagination__select:disabled,
+.m-pagination__input:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-pagination__input {

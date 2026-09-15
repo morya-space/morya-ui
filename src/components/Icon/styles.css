@@ -1,10 +1,15 @@
 .m-icon {
+    color: currentColor;
     display: inline-flex;
+    flex-shrink: 0;
     height: 1rem;
+    line-height: 0;
+    vertical-align: middle;
     width: 1rem;
 }
 
 .m-icon svg {
+    display: block;
     height: 100%;
     width: 100%;
 }
@@ -35,4 +40,15 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .m-icon--spin svg {
+        animation: none;
+    }
+}
+
+:root[data-m-motion='none'] .m-icon--spin svg,
+:root[data-m-motion='reduced'] .m-icon--spin svg {
+    animation: none;
 }

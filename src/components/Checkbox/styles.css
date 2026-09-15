@@ -16,3 +16,12 @@
     background: var(--m-color-primary);
     border-color: var(--m-color-primary);
 }
+
+.m-checkbox__input:focus-visible + .m-checkbox__control {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-checkbox--invalid .m-checkbox__input:focus-visible + .m-checkbox__control {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
+}

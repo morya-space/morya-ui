@@ -1,4 +1,4 @@
-/* —— Menu: Sidebar —— */
+/* —— Navigation: Sidebar —— */
 .m-sidebar {
     --m-sidebar-width: 12rem;
     --m-sidebar-collapsed-width: 3.5rem;
@@ -7,6 +7,9 @@
     border-radius: var(--m-radius-md);
     min-width: var(--m-sidebar-width);
     padding: var(--m-space-2);
+    transition:
+        width var(--m-motion-normal) var(--m-motion-ease),
+        min-width var(--m-motion-normal) var(--m-motion-ease);
     width: var(--m-sidebar-width);
 }
 
@@ -34,10 +37,13 @@
     color: inherit;
     cursor: pointer;
     display: flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     gap: var(--m-space-2);
     padding: var(--m-space-2);
     text-align: left;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
@@ -60,6 +66,17 @@
 }
 
 .m-sidebar__icon {
-    flex: 0 0 1.25rem;
+    flex: 0 0 var(--m-space-5);
     text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-sidebar {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-sidebar,
+[data-m-motion="none"] .m-sidebar {
+    transition: none;
 }

@@ -1,4 +1,4 @@
-/* —— Misc: ScrollTop —— */
+/* —— Navigation: ScrollTop —— */
 .m-scrolltop-anchor {
     display: contents;
 }
@@ -51,4 +51,17 @@
 .m-scrolltop:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-scrolltop {
+        transition: none;
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-scrolltop,
+[data-m-motion="none"] .m-scrolltop {
+    transition: none;
+    transform: none;
 }

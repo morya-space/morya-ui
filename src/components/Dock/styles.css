@@ -1,4 +1,4 @@
-/* —— Menu: Dock —— */
+/* —— Navigation: Dock —— */
 .m-dock {
     --m-dock-icon-size: 2.75rem;
     --m-dock-edge-offset: var(--m-space-4);
@@ -40,11 +40,17 @@
     border-radius: var(--m-radius-md);
     cursor: pointer;
     padding: var(--m-space-1);
-    transition: transform var(--m-motion-fast, 150ms) ease;
+    transition: transform var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-dock__button:hover:not(:disabled) {
-    transform: translateY(-0.25rem) scale(1.08);
+    transform: translateY(calc(var(--m-space-1) * -1)) scale(1.08);
+}
+
+.m-dock__button:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-dock__button:focus-visible {
@@ -61,8 +67,28 @@
     );
     border-radius: var(--m-radius-md);
     display: inline-flex;
-    font-size: 1.25rem;
+    font-size: var(--m-font-size-lg);
     height: var(--m-dock-icon-size);
     justify-content: center;
     width: var(--m-dock-icon-size);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-dock__button {
+        transition: none;
+    }
+
+    html:not([data-m-ignore-reduced-motion]) .m-dock__button:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-dock__button,
+[data-m-motion="none"] .m-dock__button {
+    transition: none;
+}
+
+[data-m-motion="reduced"] .m-dock__button:hover:not(:disabled),
+[data-m-motion="none"] .m-dock__button:hover:not(:disabled) {
+    transform: none;
 }

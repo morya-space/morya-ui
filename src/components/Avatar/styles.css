@@ -7,7 +7,7 @@
     --m-avatar-icon-size: 1rem;
     --m-avatar-font-size-xlarge: 1.5rem;
     --m-avatar-group-overlap: var(--m-space-2);
-    --m-avatar-group-ring-width: 2px;
+    --m-avatar-group-ring-width: var(--m-border-width);
     --m-avatar-bg: color-mix(
         in srgb,
         var(--m-color-text-muted) 16%,

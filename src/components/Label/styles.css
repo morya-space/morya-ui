@@ -1,7 +1,7 @@
-/* —— Form: Label —— */
 .m-label {
     color: var(--m-color-text);
     display: inline-block;
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 600;
     line-height: 1.4;

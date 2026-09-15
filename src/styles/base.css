@@ -25,13 +25,20 @@
 .m-splitter,
 .m-stepper,
 .m-toolbar,
+.m-page-content,
+.m-page-header,
+.m-page-toolbar,
 .m-menu,
 .m-menubar,
 .m-contextmenu,
 .m-tieredmenu,
+.m-dropdown,
+.m-breadcrumb,
+.m-tabs,
 .m-datepicker,
 .m-listbox,
 .m-togglebutton,
+.m-selectbutton,
 .m-inputotp,
 .m-knob,
 .m-autocomplete,
@@ -43,6 +50,12 @@
 .m-scrolltop,
 .m-blockui,
 .m-inplace,
+.m-message,
+.m-toast,
+.m-tooltip,
+.m-empty,
+.m-result,
+.m-progress-spinner,
 .m-cascadeselect,
 .m-treeselect,
 .m-inputcolor,
@@ -68,9 +81,25 @@
 }
 
 .m-button:disabled,
-.m-input:disabled {
+.m-input:disabled,
+.m-password__input:disabled,
+.m-inputnumber__input:disabled,
+.m-inputotp__input:disabled,
+.m-inputcolor__text:disabled,
+.m-inputcolor__swatch:disabled,
+.m-inputtags--disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
+}
+
+.m-input::placeholder,
+.m-textarea::placeholder,
+.m-password__input::placeholder,
+.m-inputnumber__input::placeholder,
+.m-inputtags__input::placeholder,
+.m-inputcolor__text::placeholder {
+    color: var(--m-color-text-muted);
+    opacity: 1;
 }
 
 .m-input-field__meta,
@@ -188,6 +217,50 @@
     transform: translateY(calc(var(--m-motion-distance) * -1));
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-fade-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-fade-leave-active,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-active,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-active {
+        transition: none;
+    }
+
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-from,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-to,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-from,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-to {
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-fade-enter-active,
+[data-m-motion="reduced"] .m-fade-leave-active,
+[data-m-motion="reduced"] .m-scale-fade-enter-active,
+[data-m-motion="reduced"] .m-scale-fade-leave-active,
+[data-m-motion="reduced"] .m-slide-fade-enter-active,
+[data-m-motion="reduced"] .m-slide-fade-leave-active,
+[data-m-motion="none"] .m-fade-enter-active,
+[data-m-motion="none"] .m-fade-leave-active,
+[data-m-motion="none"] .m-scale-fade-enter-active,
+[data-m-motion="none"] .m-scale-fade-leave-active,
+[data-m-motion="none"] .m-slide-fade-enter-active,
+[data-m-motion="none"] .m-slide-fade-leave-active {
+    transition: none;
+}
+
+[data-m-motion="reduced"] .m-scale-fade-enter-from,
+[data-m-motion="reduced"] .m-scale-fade-leave-to,
+[data-m-motion="reduced"] .m-slide-fade-enter-from,
+[data-m-motion="reduced"] .m-slide-fade-leave-to,
+[data-m-motion="none"] .m-scale-fade-enter-from,
+[data-m-motion="none"] .m-scale-fade-leave-to,
+[data-m-motion="none"] .m-slide-fade-enter-from,
+[data-m-motion="none"] .m-slide-fade-leave-to {
+    transform: none;
+}
+
 /* Shared loading spinner rotation (ProgressSpinner, Switch, ProgressBar, AutoComplete) */
 @keyframes m-progress-spinner-rotate {
     100% {
@@ -246,7 +319,8 @@
     justify-content: center;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
-        border-color var(--m-motion-fast) var(--m-motion-ease);
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-checkbox-control-size, 1.125rem);
 }
 
@@ -293,6 +367,7 @@
 .m-textarea-field__label,
 .m-select-field__label {
     color: var(--m-color-text);
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 600;
 }
@@ -337,7 +412,7 @@
 }
 
 .m-icon-field--left :is(.m-input, .m-password__input, .m-inputnumber__input, input) {
-    padding-left: 2.5rem;
+    padding-left: var(--m-control-affix-padding);
 }
 
 .m-icon-field--right :is(.m-input, .m-password__input, .m-inputnumber__input, input) {
@@ -390,7 +465,7 @@
 .m-inputgroup > .m-inputgroup-addon + .m-input-field .m-input,
 .m-inputgroup > .m-input + .m-inputgroup-addon,
 .m-inputgroup > .m-input-field + .m-inputgroup-addon {
-    margin-left: -1px;
+    margin-left: calc(var(--m-border-width) * -1);
 }
 
 .m-layout__scrollbar > .m-scrollbar__wrap {
@@ -440,10 +515,16 @@
     padding: var(--m-space-1) var(--m-space-2);
 }
 
-.m-orderlist__btn:hover,
-.m-picklist__btn:hover {
+.m-orderlist__btn:hover:not(:disabled),
+.m-picklist__btn:hover:not(:disabled) {
     border-color: var(--m-color-primary);
     color: var(--m-color-primary);
+}
+
+.m-orderlist__btn:disabled,
+.m-picklist__btn:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-orderlist__btn:focus-visible,
@@ -559,7 +640,10 @@
 
 .m-inputnumber--invalid .m-inputnumber__input:focus-visible,
 .m-password--invalid .m-password__input:focus-visible,
-.m-datepicker--invalid .m-datepicker__input:focus-visible {
+.m-datepicker--invalid .m-datepicker__input:focus-visible,
+.m-inputotp--invalid .m-inputotp__input:focus-visible,
+.m-inputtags--invalid:focus-within,
+.m-inputcolor--invalid .m-inputcolor__text:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
@@ -603,14 +687,14 @@
 }
 
 [data-m-motion="reduced"] .m-progress-spinner,
-[data-m-motion="reduced"] .m-progress-spinner__svg,
+[data-m-motion="reduced"] .m-progress-spinner__circle,
 [data-m-motion="reduced"] .m-skeleton,
-[data-m-motion="reduced"] .m-badge--pulse,
+[data-m-motion="reduced"] .m-badge--processing,
 [data-m-motion="reduced"] .m-icon--spin,
-[data-m-motion="reduced"] .m-button--loading .m-button__icon,
+[data-m-motion="reduced"] .m-button__spinner,
 [data-m-motion="reduced"] .m-select__loading-icon,
 [data-m-motion="reduced"] .m-switch__loading-icon {
-    animation-duration: calc(var(--m-motion-spin) * 2) !important;
+    animation: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

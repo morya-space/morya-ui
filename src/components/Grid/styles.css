@@ -1,6 +1,7 @@
-/* —— Panel: Grid —— */
+/* —— Layout: Grid —— */
 .m-grid {
     box-sizing: border-box;
+    font-family: var(--m-font-sans);
 }
 
 .m-grid-item {

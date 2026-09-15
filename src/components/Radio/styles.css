@@ -9,3 +9,12 @@
     height: 0.375rem;
     width: 0.375rem;
 }
+
+.m-radio__input:focus-visible + .m-radio__control {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-radio--invalid .m-radio__input:focus-visible + .m-radio__control {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
+}

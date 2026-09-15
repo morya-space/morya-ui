@@ -1,3 +1,4 @@
+/* —— Feedback: Drawer —— */
 .m-drawer-enter-active {
     transition: opacity var(--m-motion-enter) var(--m-motion-ease);
 }
@@ -78,16 +79,16 @@
 
 .m-drawer--top {
     left: 0;
+    max-height: min(var(--m-drawer-top-height), 100%);
     right: 0;
     top: 0;
-    max-height: min(var(--m-drawer-top-height), 100%);
 }
 
 .m-drawer--bottom {
     bottom: 0;
     left: 0;
-    right: 0;
     max-height: min(var(--m-drawer-top-height), 100%);
+    right: 0;
 }
 
 .m-drawer__header {
@@ -104,11 +105,21 @@
 }
 
 .m-drawer__close {
+    align-items: center;
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
-    font-size: 1.25rem;
+    display: inline-flex;
+    font-size: var(--m-font-size-lg);
+    height: var(--m-control-affix-size);
+    justify-content: center;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
+    width: var(--m-control-affix-size);
 }
 
 .m-drawer__close:hover:not(:disabled) {
@@ -117,8 +128,12 @@
         var(--m-color-primary) 10%,
         var(--m-color-surface)
     );
-    border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
+}
+
+.m-drawer__close:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-drawer__close:focus-visible {
@@ -130,4 +145,54 @@
     flex: 1;
     overflow: auto;
     padding: var(--m-space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active .m-drawer {
+        transition: none;
+    }
+
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--left,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--left,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--right,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--right,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--top,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--top,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--bottom,
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--bottom {
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-drawer-enter-active,
+[data-m-motion="reduced"] .m-drawer-leave-active,
+[data-m-motion="reduced"] .m-drawer-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-drawer-leave-active .m-drawer,
+[data-m-motion="none"] .m-drawer-enter-active,
+[data-m-motion="none"] .m-drawer-leave-active,
+[data-m-motion="none"] .m-drawer-enter-active .m-drawer,
+[data-m-motion="none"] .m-drawer-leave-active .m-drawer {
+    transition: none;
+}
+
+[data-m-motion="reduced"] .m-drawer-enter-from .m-drawer--left,
+[data-m-motion="reduced"] .m-drawer-leave-to .m-drawer--left,
+[data-m-motion="reduced"] .m-drawer-enter-from .m-drawer--right,
+[data-m-motion="reduced"] .m-drawer-leave-to .m-drawer--right,
+[data-m-motion="reduced"] .m-drawer-enter-from .m-drawer--top,
+[data-m-motion="reduced"] .m-drawer-leave-to .m-drawer--top,
+[data-m-motion="reduced"] .m-drawer-enter-from .m-drawer--bottom,
+[data-m-motion="reduced"] .m-drawer-leave-to .m-drawer--bottom,
+[data-m-motion="none"] .m-drawer-enter-from .m-drawer--left,
+[data-m-motion="none"] .m-drawer-leave-to .m-drawer--left,
+[data-m-motion="none"] .m-drawer-enter-from .m-drawer--right,
+[data-m-motion="none"] .m-drawer-leave-to .m-drawer--right,
+[data-m-motion="none"] .m-drawer-enter-from .m-drawer--top,
+[data-m-motion="none"] .m-drawer-leave-to .m-drawer--top,
+[data-m-motion="none"] .m-drawer-enter-from .m-drawer--bottom,
+[data-m-motion="none"] .m-drawer-leave-to .m-drawer--bottom {
+    transform: none;
 }

@@ -1,7 +1,9 @@
 /* —— Form: Knob —— */
 .m-knob {
     align-items: center;
+    border-radius: var(--m-radius-full);
     display: inline-flex;
+    font-family: var(--m-font-sans);
     justify-content: center;
     position: relative;
     touch-action: none;
@@ -9,6 +11,7 @@
 }
 
 .m-knob--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
@@ -30,6 +33,7 @@
 
 .m-knob__label {
     color: var(--m-color-text);
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 600;
     left: 50%;
@@ -42,4 +46,14 @@
 .m-knob:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-knob__value {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-knob__value {
+    transition: none;
 }

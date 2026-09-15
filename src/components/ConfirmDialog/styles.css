@@ -1,7 +1,7 @@
-/* —— Overlay: ConfirmDialog —— */
+/* —— Feedback: ConfirmDialog —— */
 .m-confirmdialog {
     --m-confirmdialog-width: 28rem;
-    max-width: min(var(--m-confirmdialog-width), calc(100vw - 2rem));
+    max-width: min(var(--m-confirmdialog-width), calc(100vw - 2 * var(--m-space-4)));
 }
 
 .m-confirmdialog__footer {

@@ -1,8 +1,8 @@
-/* —— Menu: TieredMenu —— */
+/* —— Navigation: TieredMenu —— */
 .m-tieredmenu {
-    --m-tieredmenu-submenu-min-width: 10rem;
-    --m-tieredmenu-min-width: 12rem;
-    --m-tieredmenu-item-gap: 0.125rem;
+    --m-tieredmenu-submenu-min-width: var(--m-menu-min-width, 10rem);
+    --m-tieredmenu-min-width: var(--m-menu-min-width);
+    --m-tieredmenu-item-gap: var(--m-space-1);
     --m-tieredmenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -51,10 +51,14 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     justify-content: space-between;
     padding: var(--m-space-2) var(--m-space-3);
     text-align: start;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
@@ -114,6 +118,6 @@
 
 .m-tieredmenu__separator {
     background: var(--m-color-border);
-    height: 1px;
+    height: var(--m-border-width);
     margin: var(--m-space-1) 0;
 }

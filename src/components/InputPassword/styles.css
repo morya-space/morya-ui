@@ -10,6 +10,7 @@
 
 .m-password-field__label {
     color: var(--m-color-text);
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 600;
 }
@@ -31,10 +32,15 @@
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
     color: var(--m-color-text);
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
@@ -145,10 +151,14 @@
     opacity: var(--m-opacity-disabled);
 }
 
-.m-password__input:focus-visible,
 .m-password__toggle:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
+}
+
+.m-password--invalid .m-password__input:focus-visible {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
 }
 
 .m-password__feedback {

@@ -43,7 +43,7 @@
 .m-timeline__marker {
     align-items: center;
     background: var(--m-color-surface);
-    border: 2px solid var(--m-color-primary);
+    border: var(--m-border-width) solid var(--m-color-primary);
     border-radius: 50%;
     color: var(--m-color-primary);
     display: inline-flex;
@@ -85,7 +85,7 @@
     background: var(--m-color-border);
     flex: 1;
     min-height: var(--m-control-height-small);
-    width: 2px;
+    width: var(--m-border-width);
 }
 
 .m-timeline__event:last-child .m-timeline__connector {
@@ -128,7 +128,7 @@
 }
 
 .m-timeline--horizontal .m-timeline__connector {
-    height: 2px;
+    height: var(--m-border-width);
     min-height: 0;
     min-width: var(--m-control-affix-size);
     width: auto;

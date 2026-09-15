@@ -1,6 +1,7 @@
-/* —— Panel: Stepper —— */
+/* —— Navigation: Stepper —— */
 .m-stepper {
     --m-stepper-marker-size: 1.5rem;
+    --m-stepper-connector-width: var(--m-space-5);
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -13,7 +14,7 @@
     content: '';
     height: var(--m-border-width);
     margin-inline: var(--m-space-1);
-    width: 1.25rem;
+    width: var(--m-stepper-connector-width);
 }
 
 .m-stepper__step {
@@ -24,9 +25,20 @@
     color: var(--m-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     gap: var(--m-space-2);
     padding: var(--m-space-2) var(--m-space-3);
+    transition:
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-stepper__step:hover:not(:disabled):not(.m-stepper__step--disabled):not(
+        .m-stepper__step--active
+    ):not(.m-stepper__step--process) {
+    background: color-mix(in srgb, var(--m-color-primary) 6%, transparent);
+    color: var(--m-color-text);
 }
 
 .m-stepper__step--active {
@@ -62,6 +74,8 @@
     font-weight: 700;
     height: var(--m-stepper-marker-size);
     justify-content: center;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-stepper-marker-size);
 }
 
@@ -81,7 +95,7 @@
 
 .m-stepper__copy {
     display: grid;
-    gap: 0.15rem;
+    gap: var(--m-space-1);
     text-align: start;
 }
 
@@ -98,8 +112,8 @@
 
 .m-stepper__step--finish .m-stepper__marker {
     background: color-mix(in srgb, var(--m-color-primary) 14%, var(--m-color-surface));
-    color: var(--m-color-primary);
     box-shadow: inset 0 0 0 var(--m-border-width) var(--m-color-primary);
+    color: var(--m-color-primary);
 }
 
 .m-stepper__step--process .m-stepper__marker {

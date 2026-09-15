@@ -47,6 +47,26 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-progressbar--indeterminate .m-progressbar__value,
+    html:not([data-m-ignore-reduced-motion])
+        .m-progressbar--indeterminate.m-progressbar--circle
+        .m-progressbar__circle-value {
+        animation: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-progressbar--indeterminate .m-progressbar__value,
+[data-m-motion="reduced"]
+    .m-progressbar--indeterminate.m-progressbar--circle
+    .m-progressbar__circle-value,
+[data-m-motion="none"] .m-progressbar--indeterminate .m-progressbar__value,
+[data-m-motion="none"]
+    .m-progressbar--indeterminate.m-progressbar--circle
+    .m-progressbar__circle-value {
+    animation: none;
+}
+
 .m-progressbar--success {
     --m-progressbar-fill: var(--m-color-success);
 }

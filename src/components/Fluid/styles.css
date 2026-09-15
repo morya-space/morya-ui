@@ -1,6 +1,9 @@
-/* —— Misc: Fluid —— */
 .m-fluid,
 .m-fluid > * {
     box-sizing: border-box;
     max-width: 100%;
+}
+
+.m-fluid {
+    width: 100%;
 }

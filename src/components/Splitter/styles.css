@@ -1,8 +1,10 @@
-/* —— Panel: Splitter —— */
+/* —— Layout: Splitter —— */
 .m-splitter {
     --m-splitter-trigger-size: 6px;
+    --m-splitter-min-height: 6rem;
     display: flex;
-    min-height: 6rem;
+    font-family: var(--m-font-sans);
+    min-height: var(--m-splitter-min-height);
     overflow: hidden;
     width: 100%;
 }
@@ -35,6 +37,7 @@
     background: var(--m-color-border);
     flex: 0 0 var(--m-splitter-trigger-size);
     touch-action: none;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
     z-index: var(--m-z-popper);
 }
 
@@ -61,6 +64,7 @@
 }
 
 .m-splitter--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 

@@ -7,6 +7,7 @@
     align-items: center;
     cursor: pointer;
     display: flex;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
@@ -52,20 +53,15 @@
 }
 
 .m-select__spinner {
-    border: 2px solid
+    --m-select-spinner-size: 0.85rem;
+    border: var(--m-border-width) solid
         color-mix(in srgb, var(--m-color-text-muted) 35%, transparent);
     border-radius: 50%;
     border-top-color: var(--m-color-primary);
     flex: 0 0 auto;
-    height: 0.85rem;
-    width: 0.85rem;
-    animation: m-select-spin var(--m-motion-spin-medium) linear infinite;
-}
-
-@keyframes m-select-spin {
-    to {
-        transform: rotate(360deg);
-    }
+    height: var(--m-select-spinner-size);
+    width: var(--m-select-spinner-size);
+    animation: m-progress-spinner-rotate var(--m-motion-spin-medium) linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -73,6 +69,11 @@
         animation: none;
         border-top-color: var(--m-color-text-muted);
     }
+}
+
+[data-m-motion="reduced"] .m-select__spinner {
+    animation: none;
+    border-top-color: var(--m-color-text-muted);
 }
 
 .m-select:hover:not(:disabled):not(.m-select--disabled):not(
@@ -180,13 +181,15 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     gap: var(--m-space-3);
     justify-content: space-between;
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
     text-align: left;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
     white-space: nowrap;
 }
 

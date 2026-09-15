@@ -22,8 +22,9 @@
     border-radius: var(--m-radius-sm);
     display: flex;
     gap: var(--m-space-1);
-    min-height: var(--m-control-height-small, 1.75rem);
+    min-height: var(--m-control-height-small);
     padding-right: var(--m-space-2);
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-tree__row:hover,
@@ -95,6 +96,7 @@
     flex: 1;
     padding: var(--m-space-1) var(--m-space-2);
     text-align: start;
+    transition: color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-tree__label:hover {
@@ -110,7 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--m-control-height-medium, 2.5rem) * 2);
+    min-height: calc(var(--m-control-height-medium) * 2);
     padding: var(--m-space-3);
 }
 

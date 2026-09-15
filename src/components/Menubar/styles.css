@@ -1,7 +1,7 @@
-/* —— Menu: Menubar —— */
+/* —— Navigation: Menubar —— */
 .m-menubar {
-    --m-menubar-menu-min-width: 10rem;
-    --m-menubar-item-gap: 0.125rem;
+    --m-menubar-menu-min-width: var(--m-menu-min-width, 10rem);
+    --m-menubar-item-gap: var(--m-space-1);
     align-items: stretch;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -24,11 +24,15 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     gap: var(--m-space-1);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-menubar__trigger:hover:not(:disabled),
@@ -70,7 +74,7 @@
     overflow: hidden;
     padding: var(--m-space-1);
     position: absolute;
-    top: calc(100% + 0.25rem);
+    top: calc(100% + var(--m-space-1));
     z-index: var(--m-z-popper);
 }
 
@@ -97,9 +101,13 @@
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
     cursor: pointer;
-    font: inherit;
+    font-family: var(--m-font-sans);
     padding: var(--m-space-2) var(--m-space-3);
     text-align: start;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 

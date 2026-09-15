@@ -1,4 +1,6 @@
+/* —— Feedback: Toast —— */
 .m-toast {
+    --m-toast-accent-width: 3px;
     display: grid;
     gap: var(--m-space-3);
     max-width: min(24rem, calc(100vw - 2 * var(--m-space-4)));
@@ -44,7 +46,7 @@
     align-items: flex-start;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
-    border-left: 3px solid var(--m-color-info);
+    border-left: var(--m-toast-accent-width) solid var(--m-color-info);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
     color: var(--m-color-text);
@@ -94,14 +96,28 @@
 }
 
 .m-toast__close {
+    align-items: center;
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
+    display: inline-flex;
     font: inherit;
     font-size: var(--m-font-size-lg);
+    height: var(--m-control-affix-size);
+    justify-content: center;
     line-height: 1;
     padding: 0;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+    width: var(--m-control-affix-size);
+}
+
+.m-toast__close:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    color: var(--m-color-text);
 }
 
 .m-toast__close:focus-visible {

@@ -31,6 +31,17 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-skeleton--wave::after {
+        animation: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-skeleton--wave::after,
+[data-m-motion="none"] .m-skeleton--wave::after {
+    animation: none;
+}
+
 .m-skeleton-repeat {
     display: grid;
     gap: var(--m-space-2);

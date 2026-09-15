@@ -15,6 +15,14 @@
 
 .m-tag__icon {
     flex-shrink: 0;
+    height: var(--m-tag-icon-size);
+    width: var(--m-tag-icon-size);
+}
+
+.m-tag__icon :is(.m-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .m-tag--rounded {
@@ -62,19 +70,6 @@
     color: var(--m-color-help);
 }
 
-/* —— Batch 3: visual + long-tail —— */
-.m-tag__icon {
-    flex-shrink: 0;
-    height: var(--m-tag-icon-size);
-    width: var(--m-tag-icon-size);
-}
-
-.m-tag__icon :is(.m-icon, svg) {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-
 .m-tag--small {
     --m-tag-icon-size: 0.875rem;
     font-size: var(--m-tag-font-size-small);
@@ -88,7 +83,7 @@
 }
 
 .m-tag--bordered {
-    box-shadow: inset 0 0 0 1px currentColor;
+    box-shadow: inset 0 0 0 var(--m-border-width) currentColor;
 }
 
 .m-tag--custom {
@@ -97,6 +92,7 @@
 }
 
 .m-tag--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
@@ -105,6 +101,7 @@
     align-items: center;
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: inherit;
     cursor: pointer;
     display: inline-flex;
@@ -124,15 +121,10 @@
 }
 
 .m-tag__close:hover:not(:disabled) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        var(--m-color-surface)
-    );
-    color: var(--m-color-text);
+    background: color-mix(in srgb, currentColor 14%, transparent);
 }
 
 .m-tag__close:focus-visible {
-    outline: none;
     box-shadow: var(--m-focus-shadow);
+    outline: none;
 }

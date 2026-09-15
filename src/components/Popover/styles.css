@@ -1,3 +1,4 @@
+/* —— Feedback: Popover —— */
 .m-popover {
     --m-popover-min-width: 12rem;
     display: inline-flex;
@@ -76,11 +77,16 @@
     z-index: var(--m-z-tooltip);
 }
 
-.m-popover-enter-active,
+.m-popover-enter-active {
+    transition:
+        opacity var(--m-motion-enter) var(--m-motion-ease),
+        transform var(--m-motion-enter) var(--m-motion-ease);
+}
+
 .m-popover-leave-active {
     transition:
-        opacity var(--m-motion-normal) var(--m-motion-ease),
-        transform var(--m-motion-normal) var(--m-motion-ease);
+        opacity var(--m-motion-exit) var(--m-motion-ease),
+        transform var(--m-motion-exit) var(--m-motion-ease);
 }
 
 .m-popover-enter-from,
@@ -115,4 +121,30 @@
 .m-popover__content--right.m-popover-enter-from,
 .m-popover__content--right.m-popover-leave-to {
     transform: translate(var(--m-motion-distance), -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-popover-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-popover-leave-active {
+        transition: none;
+    }
+
+    html:not([data-m-ignore-reduced-motion]) .m-popover-enter-from,
+    html:not([data-m-ignore-reduced-motion]) .m-popover-leave-to {
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-popover-enter-active,
+[data-m-motion="reduced"] .m-popover-leave-active,
+[data-m-motion="none"] .m-popover-enter-active,
+[data-m-motion="none"] .m-popover-leave-active {
+    transition: none;
+}
+
+[data-m-motion="reduced"] .m-popover-enter-from,
+[data-m-motion="reduced"] .m-popover-leave-to,
+[data-m-motion="none"] .m-popover-enter-from,
+[data-m-motion="none"] .m-popover-leave-to {
+    transform: none;
 }

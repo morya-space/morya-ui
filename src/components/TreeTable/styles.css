@@ -1,5 +1,8 @@
 /* —— Data: TreeTable —— */
 .m-treetable {
+    --m-treetable-toggler-size: 1.25rem;
+    color: var(--m-table-text);
+    font-family: var(--m-font-sans);
     width: 100%;
 }
 
@@ -15,39 +18,69 @@
 .m-treetable__table th,
 .m-treetable__cell {
     border-bottom: var(--m-border-width) solid var(--m-color-border);
+    color: var(--m-table-text);
+    font-size: var(--m-table-font-size, var(--m-font-size-md));
     padding: var(--m-space-2) var(--m-space-3);
     text-align: left;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-treetable__table th {
     background: var(--m-table-header-bg);
+    color: var(--m-table-header-text);
     font-size: var(--m-font-size-sm);
     font-weight: 600;
+}
+
+.m-treetable__row:hover > .m-treetable__cell {
+    background: var(--m-table-row-hover-bg);
 }
 
 .m-treetable__tree-cell {
     align-items: center;
     display: flex;
     gap: var(--m-space-1);
+    padding-left: calc(var(--m-treetable-depth, 0) * var(--m-tree-indent));
 }
 
 .m-treetable__toggler,
 .m-treetable__toggler-spacer {
     background: transparent;
     border: 0;
+    border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
-    flex: 0 0 1.25rem;
+    flex: 0 0 var(--m-treetable-toggler-size);
     font: inherit;
-    height: 1.25rem;
+    height: var(--m-treetable-toggler-size);
     padding: 0;
-    width: 1.25rem;
+    width: var(--m-treetable-toggler-size);
+}
+
+.m-treetable__toggler {
+    cursor: pointer;
+    transition: color var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-treetable__toggler:hover {
+    color: var(--m-color-primary);
+    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+}
+
+.m-treetable__toggler:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-treetable__toggler-spacer {
+    pointer-events: none;
 }
 
 .m-treetable__message {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: center;
-    min-height: calc(var(--m-control-height-medium, 2.5rem) * 2);
+    min-height: calc(var(--m-control-height-medium) * 2);
     padding: var(--m-space-5);
 }
 
@@ -57,8 +90,8 @@
 }
 
 .m-treetable__empty-text {
-    margin: 0;
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
     line-height: 1.5;
+    margin: 0;
 }

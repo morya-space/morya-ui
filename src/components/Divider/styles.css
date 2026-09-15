@@ -1,4 +1,5 @@
 .m-divider {
+    --m-divider-stub: var(--m-space-5);
     align-items: center;
     color: var(--m-color-text-muted);
     display: flex;
@@ -11,12 +12,14 @@
     background: var(--m-color-border);
     border: 0;
     flex: 1 1 0;
-    height: 1px;
+    height: var(--m-border-width);
     min-width: 0;
 }
 
 .m-divider__label {
     font-size: var(--m-font-size-xs);
+    font-weight: 500;
+    line-height: 1.25;
     white-space: nowrap;
 }
 
@@ -35,11 +38,11 @@
 }
 
 .m-divider--align-left > .m-divider__line:first-child {
-    flex: 0 0 1.25rem;
+    flex: 0 0 var(--m-divider-stub);
 }
 
 .m-divider--align-right > .m-divider__line:last-child {
-    flex: 0 0 1.25rem;
+    flex: 0 0 var(--m-divider-stub);
 }
 
 .m-divider--vertical {
@@ -54,13 +57,13 @@
 .m-divider--vertical .m-divider__line {
     height: auto;
     min-height: 100%;
-    width: 1px;
+    width: var(--m-border-width);
 }
 
 .m-divider--vertical.m-divider--dashed .m-divider__line,
 .m-divider--vertical.m-divider--dotted .m-divider__line {
     height: auto;
-    min-height: 1.25rem;
+    min-height: var(--m-divider-stub);
     width: 0;
 }
 

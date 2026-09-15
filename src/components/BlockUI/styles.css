@@ -1,4 +1,4 @@
-/* —— Misc: BlockUI —— */
+/* —— Feedback: BlockUI —— */
 .m-blockui {
     --m-blockui-z-index: 10;
     position: relative;
@@ -14,7 +14,7 @@
 }
 
 .m-blockui__overlay {
-    background: color-mix(in srgb, var(--m-color-surface) 45%, transparent);
+    background: color-mix(in srgb, var(--m-overlay-scrim) 72%, transparent);
     inset: 0;
     position: absolute;
     z-index: var(--m-blockui-z-index);
@@ -31,4 +31,18 @@
 .m-blockui-enter-from,
 .m-blockui-leave-to {
     opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-blockui-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-blockui-leave-active {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-blockui-enter-active,
+[data-m-motion="reduced"] .m-blockui-leave-active,
+[data-m-motion="none"] .m-blockui-enter-active,
+[data-m-motion="none"] .m-blockui-leave-active {
+    transition: none;
 }

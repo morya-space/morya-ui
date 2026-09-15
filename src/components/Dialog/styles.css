@@ -1,3 +1,4 @@
+/* —— Feedback: Dialog —— */
 .m-dialog button:focus {
     outline: none;
 }
@@ -166,7 +167,21 @@
     height: var(--m-control-affix-size);
     justify-content: center;
     line-height: 1;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-control-affix-size);
+}
+
+.m-dialog__action:hover:not(:disabled),
+.m-dialog__header button:hover:not(:disabled) {
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        var(--m-color-surface)
+    );
+    color: var(--m-color-text);
 }
 
 .m-dialog__action:focus-visible,
@@ -181,8 +196,9 @@
     padding: var(--m-space-4);
 }
 
-.m-dialog__action:disabled {
-    cursor: default;
+.m-dialog__action:disabled,
+.m-dialog__header button:disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
@@ -227,4 +243,36 @@
 .m-dialog-leave-to .m-dialog-zoom {
     opacity: 0;
     transform: scale(0.36);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active,
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active .m-dialog-zoom {
+        transition: none;
+    }
+
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-to .m-dialog-zoom {
+        transform: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-dialog-enter-active,
+[data-m-motion="reduced"] .m-dialog-leave-active,
+[data-m-motion="reduced"] .m-dialog-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-dialog-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-dialog-enter-active,
+[data-m-motion="none"] .m-dialog-leave-active,
+[data-m-motion="none"] .m-dialog-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-dialog-leave-active .m-dialog-zoom {
+    transition: none;
+}
+
+[data-m-motion="reduced"] .m-dialog-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-dialog-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-dialog-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-dialog-leave-to .m-dialog-zoom {
+    transform: none;
 }

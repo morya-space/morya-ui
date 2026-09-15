@@ -77,3 +77,14 @@
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-carousel__item {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-carousel__item,
+[data-m-motion="none"] .m-carousel__item {
+    transition: none;
+}

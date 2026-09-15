@@ -1,7 +1,7 @@
-/* —— Menu: ContextMenu —— */
+/* —— Navigation: ContextMenu —— */
 .m-contextmenu {
-    --m-contextmenu-min-width: 10rem;
-    --m-contextmenu-item-gap: 0.125rem;
+    --m-contextmenu-min-width: var(--m-menu-min-width, 10rem);
+    --m-contextmenu-item-gap: var(--m-space-1);
     --m-contextmenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -41,10 +41,13 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     gap: var(--m-space-2);
     padding: var(--m-space-2) var(--m-space-3);
     text-align: start;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
@@ -68,7 +71,7 @@
 
 .m-contextmenu__separator {
     background: var(--m-color-border);
-    height: 1px;
+    height: var(--m-border-width);
     margin: var(--m-space-1) 0;
 }
 
@@ -106,7 +109,7 @@
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
     max-height: var(--m-contextmenu-submenu-max-height);
-    min-width: 10rem;
+    min-width: var(--m-contextmenu-min-width);
     overflow: hidden;
     padding: var(--m-space-1);
 }

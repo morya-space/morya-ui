@@ -4,6 +4,7 @@
     cursor: pointer;
     display: inline-block;
     padding: var(--m-space-1) var(--m-space-2);
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-inplace__display:hover {

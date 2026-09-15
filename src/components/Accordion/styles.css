@@ -15,7 +15,7 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-weight: 600;
     gap: var(--m-space-2);
     justify-content: space-between;

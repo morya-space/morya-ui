@@ -6,6 +6,7 @@
 
 .m-inputcolor-field__label {
     color: var(--m-color-text);
+    font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 600;
 }
@@ -19,6 +20,7 @@
 }
 
 .m-inputcolor--disabled {
+    cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
@@ -29,6 +31,10 @@
     cursor: pointer;
     height: var(--m-control-height-medium);
     padding: 0;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-control-height-medium);
 }
 
@@ -37,11 +43,16 @@
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
     color: var(--m-color-text);
-    font: inherit;
+    font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     min-height: var(--m-control-height-medium);
     min-width: var(--m-inputcolor-text-min-width);
     padding: 0 var(--m-control-padding-x-medium);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-inputcolor__text:focus-visible,
@@ -69,7 +80,14 @@
     cursor: pointer;
     height: var(--m-inputcolor-preset-size);
     padding: 0;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-inputcolor-preset-size);
+}
+
+.m-inputcolor__preset:hover:not(:disabled) {
+    border-color: var(--m-color-primary-hover);
 }
 
 .m-inputcolor__preset:focus-visible {
@@ -81,6 +99,7 @@
 .m-inputcolor--small .m-inputcolor__text {
     min-height: var(--m-control-height-small);
     height: var(--m-control-height-small);
+    font-size: var(--m-control-font-small);
 }
 
 .m-inputcolor--small .m-inputcolor__swatch {
@@ -101,4 +120,10 @@
 .m-inputcolor--invalid .m-inputcolor__text,
 .m-inputcolor--invalid .m-inputcolor__swatch {
     border-color: var(--m-color-danger);
+}
+
+.m-inputcolor--invalid .m-inputcolor__text:focus-visible,
+.m-inputcolor--invalid .m-inputcolor__swatch:focus-visible {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
 }

@@ -33,16 +33,22 @@
 }
 
 .m-tabs__tab {
+    --m-tabs-indicator-width: 2px;
     background: transparent;
     border: 0;
-    border-bottom: 2px solid transparent;
+    border-bottom: var(--m-tabs-indicator-width) solid transparent;
     color: var(--m-color-text-muted);
     cursor: pointer;
-    font: inherit;
+    font-family: var(--m-font-sans);
     padding: var(--m-space-3) var(--m-space-2);
     transition:
         color var(--m-motion-fast) var(--m-motion-ease),
-        border-color var(--m-motion-fast) var(--m-motion-ease);
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-tabs__tab:hover:not(:disabled):not(.m-tabs__tab--active) {
+    color: var(--m-color-primary);
 }
 
 .m-tabs__tab--active {
@@ -62,6 +68,10 @@
     background: var(--m-color-surface);
     border-color: var(--m-color-border);
     color: var(--m-color-primary);
+}
+
+.m-tabs--card .m-tabs__tab:hover:not(:disabled):not(.m-tabs__tab--active) {
+    background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
 }
 
 .m-tabs__tab:disabled {
@@ -85,13 +95,31 @@
     font: inherit;
     line-height: 1;
     padding: var(--m-space-1) var(--m-space-2);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-tabs__close:hover,
-.m-tabs__add:hover,
-.m-tabs__scroll:hover {
+.m-tabs__close:hover:not(:disabled),
+.m-tabs__add:hover:not(:disabled),
+.m-tabs__scroll:hover:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     color: var(--m-color-primary);
+}
+
+.m-tabs__close:disabled,
+.m-tabs__add:disabled,
+.m-tabs__scroll:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-tabs__close:focus-visible,
+.m-tabs__add:focus-visible,
+.m-tabs__scroll:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
 }
 
 .m-tabs__extra {

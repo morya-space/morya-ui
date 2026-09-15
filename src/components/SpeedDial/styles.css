@@ -1,4 +1,4 @@
-/* —— Primitive: SpeedDial —— */
+/* —— Navigation: SpeedDial —— */
 .m-speeddial {
     display: inline-flex;
     position: relative;
@@ -12,11 +12,18 @@
     color: var(--m-color-on-emphasis);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
-    font-size: 1.25rem;
+    font-family: var(--m-font-sans);
+    font-size: var(--m-font-size-lg);
     height: var(--m-control-height-large);
     justify-content: center;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
     width: var(--m-control-height-large);
+}
+
+.m-speeddial__button:hover:not(:disabled) {
+    background: var(--m-color-primary-hover);
 }
 
 .m-speeddial__button:focus-visible {
@@ -24,6 +31,7 @@
     outline: none;
 }
 
+.m-speeddial__button:disabled,
 .m-speeddial--disabled .m-speeddial__button {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
@@ -97,11 +105,14 @@
     color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
-    font: inherit;
+    font-family: var(--m-font-sans);
     gap: var(--m-space-1);
     justify-content: center;
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-space-3);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .m-speeddial__action-label {
@@ -114,6 +125,11 @@
         var(--m-color-primary) 10%,
         var(--m-color-surface)
     );
+}
+
+.m-speeddial__action:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-speeddial__action:focus-visible {

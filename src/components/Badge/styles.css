@@ -141,3 +141,14 @@
         box-shadow: 0 0 0 0.4rem transparent;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .m-badge--processing {
+        animation: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-badge--processing,
+[data-m-motion="none"] .m-badge--processing {
+    animation: none;
+}
