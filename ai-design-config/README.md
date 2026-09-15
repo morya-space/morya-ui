@@ -9,10 +9,11 @@
 | `DESIGN.md` | AI 第一信源：设计原则、布局、令牌、禁止项 |
 | `design-tokens/` | 机器可读 token + CSS 变量（与组件库 `--m-*` 对齐） |
 | `docs/components.md` | 组件清单与场景选型（替代零散 Skills） |
-| `docs/golden-pages/` | 黄金样例页面（列表 / 表单 / 仪表盘） |
+| `docs/golden-pages/` | 黄金样例（列表 / 表单 / 仪表盘 / 登录 / 落地 / 空状态） |
 | `src/examples/` | 与 golden-pages 对应的可运行参考（供 `@` 引用） |
 | `scripts/check-raw-colors.mjs` | CI / 本地裸色值扫描 |
 | `.cursor/rules/` | Cursor 规则（设计系统、组件用法、页面布局、编码风格） |
+| `.agents/skills/morya-ui-pages/` | 消费方 Agent Skill：Ops / 账户 / 流程 / 系统 / 营销等全场景；可与 rules 并存 |
 
 ## 接入步骤
 
@@ -41,6 +42,8 @@
    ```
 
 5. 生成页面前让 AI 先读 `DESIGN.md`，再读对应 `docs/golden-pages/*.vue` 与 `docs/components.md`。
+
+6. **（推荐）** 若客户端支持 Agent Skills，保留 `.agents/skills/morya-ui-pages/`，让 Agent 在生成列表/表单/仪表盘时自动遵循组件契约；与 `.cursor/rules` 互补（rules 偏编辑器常驻，skill 偏按需工作流）。
 
 ## 与组件库的关系
 

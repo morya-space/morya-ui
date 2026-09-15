@@ -12,6 +12,9 @@ alwaysApply: false
 | 列表页 | `docs/golden-pages/list-page.vue` |
 | 表单页 | `docs/golden-pages/form-page.vue` |
 | 仪表盘 | `docs/golden-pages/dashboard-page.vue` |
+| 登录页 | `docs/golden-pages/login-page.vue` |
+| 营销落地 | `docs/golden-pages/landing-page.vue` |
+| 空状态 | `docs/golden-pages/empty-state.vue` |
 
 ## 列表页区块顺序
 

@@ -46,8 +46,12 @@ import 'morya-ui/styles.css'
 | 列表页 | `docs/golden-pages/list-page.vue` | 面包屑、筛选区、工具栏、表格、分页 |
 | 表单页 | `docs/golden-pages/form-page.vue` | 面包屑、分组表单、`MForm` / `MFormItem`、提交/取消 |
 | 仪表盘 | `docs/golden-pages/dashboard-page.vue` | 统计卡片栅格、图表区占位、快捷入口 / 最近列表 |
+| 登录页 | `docs/golden-pages/login-page.vue` | 品牌区 + `MForm` / `MInputPassword`；表单级错误用 token 告警条 |
+| 营销落地 | `docs/golden-pages/landing-page.vue` | 单任务首屏、分节、`MButton` / `MTag` / `MAccordion` |
+| 空状态 | `docs/golden-pages/empty-state.vue` | 说明 + 主 CTA；可嵌列表 `#empty` |
 
-生成新页面时：**结构对齐黄金样例，用 MPage* 组件拼装，尽量不写 scoped CSS**。
+生成 **Ops** 页面时：结构对齐对应黄金样例，用 `MPage*` 拼装，尽量少写 scoped CSS。  
+生成 **Account / Express / Flow** 页面时：对齐上表样例；允许有节制的 scoped 布局，但颜色/间距仍用 `--m-*`。
 
 ## 4. 表单约定
 
@@ -71,7 +75,7 @@ import 'morya-ui/styles.css'
 | 侧滑筛选 / 详情 | `MDrawer` |
 | **操作结果（默认）** | **`message` API**（单行：已保存 / 已删除） |
 | 标题 + 详情 / 异步通知 | `toast` API（`summary` + `detail`） |
-| 表单区常驻错误 | `<MMessage>` 或字段 `errorMessage` |
+| 表单区常驻错误 | token 告警条 / 字段 `errorMessage` |
 | 字段说明 | `MTooltip` |
 
 **选型细则见 [`docs/feedback-message-vs-toast.md`](docs/feedback-message-vs-toast.md)。AI 生成代码时：无 `detail` 的操作回执一律用 `message`，不要默认 Toast。**

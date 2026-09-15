@@ -16,7 +16,7 @@
 用户操作完成，需要即时反馈？
 ├─ 否 → 不需要 Message/Toast（可能用 MConfirmDialog / 字段 errorMessage）
 └─ 是 → 错误需留在表单区域直到用户修正？
-    ├─ 是 → <MMessage> 或字段级 invalid / errorMessage
+    ├─ 是 → 字段 invalid / errorMessage；表单级用 token 告警条（见 login-page）
     └─ 否 → 只有一句短文案（无独立 detail）？
         ├─ 是 → message.success / info / warn / error   ← 默认选这个
         └─ 否 → 有 summary + detail，或异步/后台通知感 → toast.*
@@ -61,18 +61,24 @@ message.error('操作失败')
 - 登录成功且需欢迎语 + 副文案
 - 需要角落堆叠、用户可能稍后查看的多条**通知**（非即时操作回执）
 
-## 应该用 MMessage 组件的场景
+## 应该用表单区常驻错误的场景
 
 - 登录 / 注册表单上方的**持久**错误（用户修正前不消失）
 - 页面级配置错误、需要与表单同区域的警告条
 - **不要**把字段校验错误只丢到 Toast/Message 浮层——优先字段 `errorMessage`
 
+字段级：
+
 ```vue
-<MMessage v-if="error" severity="error" :closable="false">
-  {{ error }}
-</MMessage>
+<MInput v-model="email" invalid :error-message="emailError" />
 ```
 
+表单级（见 `docs/golden-pages/login-page.vue`）：用 `--m-*` 样式的 `role="alert"` 条。  
+说明：`<MMessage>` 当前主要是 `message` 服务的挂载宿主，**不要**臆造 `severity` + 默认插槽的 Alert API。
+
+```vue
+<p v-if="error" class="form-alert" role="alert">{{ error }}</p>
+```
 ## 反模式（AI 禁止）
 
 | 反模式 | 应改为 |
