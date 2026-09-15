@@ -162,6 +162,8 @@ export type {
   DropdownProps,
   DropdownTrigger,
 } from "./components/Dropdown/types";
+export { default as MEmpty } from "./components/Empty/Empty.vue";
+export type { EmptyProps } from "./components/Empty/types";
 export { default as MFieldset } from "./components/Fieldset/Fieldset.vue";
 export type { FieldsetEmits, FieldsetProps } from "./components/Fieldset/types";
 export { default as MFileUpload } from "./components/FileUpload/FileUpload.vue";
@@ -394,6 +396,8 @@ export type {
 } from "./components/Radio/types";
 export { default as MRating } from "./components/Rating/Rating.vue";
 export type { RatingEmits, RatingProps } from "./components/Rating/types";
+export { default as MResult } from "./components/Result/Result.vue";
+export type { ResultProps, ResultStatus } from "./components/Result/types";
 export { default as MScrollbar } from "./components/Scrollbar/Scrollbar.vue";
 export type {
   ScrollbarAriaOrientation,
@@ -465,6 +469,12 @@ export type {
   SplitterProps,
   SplitterSize,
 } from "./components/Splitter/types";
+export { default as MStatus } from "./components/Status/Status.vue";
+export type {
+  StatusProps,
+  StatusSeverity,
+  StatusSize,
+} from "./components/Status/types";
 export { default as MStepper } from "./components/Stepper/Stepper.vue";
 export type {
   StepperEmits,

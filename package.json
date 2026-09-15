@@ -43,6 +43,7 @@
     "**/dock/index.js",
     "**/drawer/index.js",
     "**/dropdown/index.js",
+    "**/empty/index.js",
     "**/fieldset/index.js",
     "**/file-upload/index.js",
     "**/flex/index.js",
@@ -80,6 +81,7 @@
     "**/progress-spinner/index.js",
     "**/radio/index.js",
     "**/rating/index.js",
+    "**/result/index.js",
     "**/scroll-top/index.js",
     "**/scrollbar/index.js",
     "**/select/index.js",
@@ -91,6 +93,7 @@
     "**/speed-dial/index.js",
     "**/split-button/index.js",
     "**/splitter/index.js",
+    "**/status/index.js",
     "**/stepper/index.js",
     "**/switch/index.js",
     "**/table/index.js",
@@ -263,6 +266,12 @@
     },
     "./dropdown/style": "./dist/dropdown/style.js",
     "./dropdown/style.css": "./dist/dropdown/style.css",
+    "./empty": {
+      "types": "./dist/components/Empty/index.d.ts",
+      "import": "./dist/empty/index.js"
+    },
+    "./empty/style": "./dist/empty/style.js",
+    "./empty/style.css": "./dist/empty/style.css",
     "./fieldset": {
       "types": "./dist/components/Fieldset/index.d.ts",
       "import": "./dist/fieldset/index.js"
@@ -485,6 +494,12 @@
     },
     "./rating/style": "./dist/rating/style.js",
     "./rating/style.css": "./dist/rating/style.css",
+    "./result": {
+      "types": "./dist/components/Result/index.d.ts",
+      "import": "./dist/result/index.js"
+    },
+    "./result/style": "./dist/result/style.js",
+    "./result/style.css": "./dist/result/style.css",
     "./scroll-top": {
       "types": "./dist/components/ScrollTop/index.d.ts",
       "import": "./dist/scroll-top/index.js"
@@ -551,6 +566,12 @@
     },
     "./splitter/style": "./dist/splitter/style.js",
     "./splitter/style.css": "./dist/splitter/style.css",
+    "./status": {
+      "types": "./dist/components/Status/index.d.ts",
+      "import": "./dist/status/index.js"
+    },
+    "./status/style": "./dist/status/style.js",
+    "./status/style.css": "./dist/status/style.css",
     "./stepper": {
       "types": "./dist/components/Stepper/index.d.ts",
       "import": "./dist/stepper/index.js"

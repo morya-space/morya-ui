@@ -26,6 +26,7 @@ import MDivider from './components/Divider/Divider.vue'
 import MDock from './components/Dock/Dock.vue'
 import MDrawer from './components/Drawer/Drawer.vue'
 import MDropdown from './components/Dropdown/Dropdown.vue'
+import MEmpty from './components/Empty/Empty.vue'
 import MFieldset from './components/Fieldset/Fieldset.vue'
 import MFileUpload from './components/FileUpload/FileUpload.vue'
 import MFlex from './components/Flex/Flex.vue'
@@ -71,6 +72,7 @@ import MProgressSpinner from './components/ProgressSpinner/ProgressSpinner.vue'
 import MRadio from './components/Radio/Radio.vue'
 import MRadioGroup from './components/Radio/RadioGroup.vue'
 import MRating from './components/Rating/Rating.vue'
+import MResult from './components/Result/Result.vue'
 import MScrollbar from './components/Scrollbar/Scrollbar.vue'
 import MScrollTop from './components/ScrollTop/ScrollTop.vue'
 import MSelect from './components/Select/Select.vue'
@@ -82,6 +84,7 @@ import MSpace from './components/Space/Space.vue'
 import MSpeedDial from './components/SpeedDial/SpeedDial.vue'
 import MSplitButton from './components/SplitButton/SplitButton.vue'
 import MSplitter from './components/Splitter/Splitter.vue'
+import MStatus from './components/Status/Status.vue'
 import MStepper from './components/Stepper/Stepper.vue'
 import MSwitch from './components/Switch/Switch.vue'
 import MTable from './components/Table/Table.vue'
@@ -129,6 +132,7 @@ export const mComponents: Record<string, Component> = {
   MDock,
   MDrawer,
   MDropdown,
+  MEmpty,
   MFieldset,
   MFileUpload,
   MFlex,
@@ -174,6 +178,7 @@ export const mComponents: Record<string, Component> = {
   MRadio,
   MRadioGroup,
   MRating,
+  MResult,
   MScrollbar,
   MScrollTop,
   MSelect,
@@ -185,6 +190,7 @@ export const mComponents: Record<string, Component> = {
   MSpeedDial,
   MSplitButton,
   MSplitter,
+  MStatus,
   MStepper,
   MSwitch,
   MTable,
