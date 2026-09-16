@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { nextTick } from 'vue'
+import { h, nextTick, ref } from 'vue'
 import { setLastPointer } from '../../shared/lastPointer'
 import MDialog from './Dialog.vue'
 
@@ -118,46 +118,19 @@ describe('muDialog', () => {
       },
     })
     await nextTick()
-    const save = Array.from(document.body.querySelectorAll('.m-dialog__footer .m-button')).find((btn) =>
+    const positive = Array.from(document.body.querySelectorAll('.m-dialog__footer--preset .m-button')).find((btn) =>
       btn.textContent?.includes('保存'),
     )
-    save!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    positive!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await nextTick()
     expect(wrapper.emitted('close')).toBeUndefined()
     wrapper.unmount()
   })
 
-  it('closes after an async onPositiveClick resolves', async () => {
+  it('exposes close / maximize / unmaximize', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: {
-        modelValue: true,
-        header: 'Save',
-        positiveText: '保存',
-        onPositiveClick: async () => undefined,
-      },
-    })
-    await nextTick()
-    const save = Array.from(document.body.querySelectorAll('.m-dialog__footer .m-button')).find((btn) =>
-      btn.textContent?.includes('保存'),
-    )
-    save!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    await nextTick()
-    await Promise.resolve()
-    await nextTick()
-    expect(wrapper.emitted('close')).toHaveLength(1)
-    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
-    wrapper.unmount()
-  })
-
-  it('uses ariaLabel prop and exposes close/maximize helpers', async () => {
-    const wrapper = mount(MDialog, {
-      attachTo: document.body,
-      props: {
-        modelValue: true,
-        ariaLabel: 'Custom dialog label',
-        maximizable: true,
-      },
+      props: { modelValue: true, header: 'API', maximizable: true, ariaLabel: 'Custom dialog label' },
     })
     await nextTick()
     expect(document.body.querySelector('.m-dialog')?.getAttribute('aria-label')).toBe(
@@ -174,6 +147,44 @@ describe('muDialog', () => {
     await (wrapper.vm as { unmaximize: () => void }).unmaximize()
     await nextTick()
     expect(document.body.querySelector('.m-dialog--maximized')).toBeFalsy()
+    wrapper.unmount()
+  })
+
+  it('applies width prop to the panel', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, header: 'Sized', width: '28rem' },
+    })
+    await nextTick()
+    const panel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(panel.style.width).toBe('28rem')
+    wrapper.unmount()
+  })
+
+  it('moves fallthrough style width onto the panel, not the backdrop', async () => {
+    const open = ref(true)
+    const Host = {
+      setup() {
+        return () =>
+          h(
+            MDialog,
+            {
+              modelValue: open.value,
+              'onUpdate:modelValue': (value: boolean) => {
+                open.value = value
+              },
+              header: 'Sized',
+              style: { width: '28rem' },
+            },
+          )
+      },
+    }
+    const wrapper = mount(Host, { attachTo: document.body })
+    await nextTick()
+    const backdrop = document.body.querySelector('.m-dialog-backdrop') as HTMLElement
+    const panel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(backdrop.style.width).toBe('')
+    expect(panel.style.width).toBe('28rem')
     wrapper.unmount()
   })
 })

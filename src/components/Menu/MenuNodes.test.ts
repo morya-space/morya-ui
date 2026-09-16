@@ -32,7 +32,10 @@ describe('menuNodes', () => {
   it('renders RouterLink when item.to is set and router is available', async () => {
     const router = createRouter({
       history: createMemoryHistory(),
-      routes: [{ path: '/home', component: { template: '<div />' } }],
+      routes: [
+        { path: '/', component: { template: '<div />' } },
+        { path: '/home', component: { template: '<div />' } },
+      ],
     })
     await router.push('/')
     await router.isReady()
@@ -43,8 +46,9 @@ describe('menuNodes', () => {
         model: [{ key: 'home', label: 'Home', to: '/home' }],
       },
     })
-    expect(wrapper.find('a.m-menu__item-content').exists()).toBe(true)
-    expect(wrapper.get('a.m-menu__item-content').attributes('href')).toContain('/home')
+    const link = wrapper.findComponent({ name: 'RouterLink' })
+    expect(link.exists()).toBe(true)
+    expect(link.props('to')).toBe('/home')
   })
 
   it('renders anchor fallback when item.to is set without router', () => {
@@ -53,6 +57,7 @@ describe('menuNodes', () => {
         model: [{ key: 'docs', label: 'Docs', to: '/docs' }],
       },
     })
+    expect(wrapper.findComponent({ name: 'RouterLink' }).exists()).toBe(false)
     expect(wrapper.find('a.m-menu__item-content').attributes('href')).toBe('/docs')
   })
 })

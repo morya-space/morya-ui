@@ -68,4 +68,21 @@ describe('treeNodeItem', () => {
     await wrapper.get('.m-tree__label').trigger('click')
     expect(select).toHaveBeenCalledWith(node)
   })
+
+  it('passes indeterminate to checkbox without forcing checked', () => {
+    const Host = {
+      setup() {
+        provide(M_TREE_KEY, createContext({
+          showCheckbox: true,
+          isChecked: () => false,
+          isIndeterminate: () => true,
+        }))
+        return () => h(TreeNodeItem, { node })
+      },
+    }
+    const wrapper = mount(Host)
+    const input = wrapper.get('input[type="checkbox"]')
+    expect((input.element as HTMLInputElement).indeterminate).toBe(true)
+    expect((input.element as HTMLInputElement).checked).toBe(false)
+  })
 })
