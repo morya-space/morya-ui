@@ -33,7 +33,36 @@ const emit = defineEmits<{
   (event: 'unmaximize'): void
 }>()
 const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
+const { rootAttrs: mergedRootAttrs } = useRootParts(attrs, () => props.pt)
+
+/** Fallthrough `style.width` must not land on the full-viewport backdrop. */
+const fallthroughPanelWidth = computed(() => {
+  const style = mergedRootAttrs.value.style as string | Record<string, string> | undefined
+  if (!style) return undefined
+  if (typeof style === 'string') {
+    return style.match(/(?:^|;)\s*width\s*:\s*([^;]+)/i)?.[1]?.trim()
+  }
+  return typeof style.width === 'string' ? style.width : undefined
+})
+
+const rootAttrs = computed(() => {
+  const next = { ...mergedRootAttrs.value }
+  const style = next.style as string | Record<string, string> | undefined
+  if (!style || !fallthroughPanelWidth.value) return next
+  if (typeof style === 'string') {
+    const rest = style
+      .replace(/(?:^|;)\s*width\s*:\s*[^;]+/i, '')
+      .replace(/^;|;$/g, '')
+      .trim()
+    if (rest) next.style = rest
+    else delete next.style
+    return next
+  }
+  const { width: _width, ...rest } = style
+  if (Object.keys(rest).length) next.style = rest
+  else delete next.style
+  return next
+})
 
 const slots = useSlots()
 const config = useMConfig()
@@ -74,6 +103,11 @@ const backdropStyle = computed(() => ({
   '--m-dialog-origin-x': `${origin.value.x}px`,
   '--m-dialog-origin-y': `${origin.value.y}px`,
 }))
+const panelStyle = computed(() => {
+  if (maximized.value) return undefined
+  const width = props.width ?? fallthroughPanelWidth.value
+  return width ? { width } : undefined
+})
 const isDismissableMask = computed(() => {
   if (props.dismissableMask !== undefined) return props.dismissableMask
   if (props.closeOnOutsideClick !== undefined) return props.closeOnOutsideClick
@@ -191,7 +225,7 @@ defineExpose({
               'm-dialog--maximized': maximized,
               [`m-dialog--${resolvedType}`]: resolvedType,
             }"
-            :style="width && !maximized ? { width } : undefined"
+            :style="panelStyle"
             role="dialog"
             :aria-modal="modal || undefined"
             :aria-label="dialogAriaLabel"

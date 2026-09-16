@@ -4,13 +4,40 @@ import { getCurrentInstance } from 'vue'
 /** Minimal route target when vue-router is not installed. */
 export type MRouteLocationRaw = string | Record<string, unknown>
 
-function appHasRouter(): boolean {
+function isRouterLike(value: unknown): boolean {
+  return Boolean(
+    value
+    && typeof value === 'object'
+    && 'resolve' in value
+    && 'push' in value,
+  )
+}
+
+/**
+ * Vue Router injects via a Symbol key. `Object.values(provides)` skips Symbols,
+ * so we must walk `Reflect.ownKeys`.
+ */
+export function appHasRouter(): boolean {
   const instance = getCurrentInstance()
   if (!instance) return false
-  for (const value of Object.values(instance.appContext.provides)) {
-    if (value && typeof value === 'object' && 'resolve' in value && 'push' in value) return true
+
+  const provides = instance.appContext.provides
+  for (const key of Reflect.ownKeys(provides)) {
+    if (isRouterLike(provides[key as keyof typeof provides])) return true
   }
-  return false
+
+  let current: typeof instance | null = instance
+  while (current) {
+    const local = (current as { provides?: Record<PropertyKey, unknown> }).provides
+    if (local) {
+      for (const key of Reflect.ownKeys(local)) {
+        if (isRouterLike(local[key])) return true
+      }
+    }
+    current = current.parent
+  }
+
+  return Boolean(instance.appContext.components.RouterLink)
 }
 
 export function resolveOptionalRouterLink(): Component | null {

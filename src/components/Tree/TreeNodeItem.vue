@@ -83,7 +83,8 @@ const customContent = computed(() =>
         v-if="tree.showCheckbox"
         class="m-tree__checkbox"
         tabindex="-1"
-        :model-value="checked || indeterminate"
+        :model-value="checked"
+        :indeterminate="indeterminate"
         :disabled="disabled"
         @update:model-value="tree.toggleCheck(node)"
         @click.stop
