@@ -10,21 +10,27 @@ alwaysApply: false
 | 类型 | 模板 |
 | --- | --- |
 | 列表页 | `docs/golden-pages/list-page.vue` |
-| 表单页 | `docs/golden-pages/form-page.vue` |
+| 表单页 | `docs/golden-pages/form-page.vue`（仅长表单 / 独立配置页） |
 | 仪表盘 | `docs/golden-pages/dashboard-page.vue` |
 | 登录页 | `docs/golden-pages/login-page.vue` |
 | 营销落地 | `docs/golden-pages/landing-page.vue` |
 | 空状态 | `docs/golden-pages/empty-state.vue` |
 
+## 列表内新建 / 编辑（默认）
+
+后台 CRUD **优先**：列表页 + `MDialog`（或 `MDrawer`）内 `MForm`，不要把「新建用户 / 编辑角色」做成单独路由，除非字段很多或多步骤。
+
 ## 列表页区块顺序
 
 1. `MLayout fillViewport` + 可选 `MLayoutSider bordered`
-2. `MLayoutHeader` → `MBreadcrumb`
-3. `MLayoutContent` → `MPageContent`
-4. `MPageFilters`（内 `MSpace` + Input/Select + 查询/重置）
-5. `MPageToolbar`（标题 + `#actions` 主操作）
-6. `MTable`（直接放置，通常不必包 `MCard`）
-7. 分页由 `MTable paginator` 或同级 `MPagination`
+2. 侧栏 `MMenu`
+3. `MLayoutHeader` → `MBreadcrumb`
+4. `MLayoutContent` → `MPageContent`
+5. `MPageFilters`（内 `MSpace` + Input/Select + 查询/重置）
+6. `MPageToolbar`（标题 + `#actions` 主操作）
+7. `MTable`（直接放置，通常不必包 `MCard`）
+8. 分页由 `MTable paginator` 或同级 `MPagination`
+9. 短新建/编辑：同页 `MDialog` + `MForm`
 
 ## 表单页区块顺序
 
@@ -47,7 +53,7 @@ alwaysApply: false
 
 | 主题 | 推荐 | 通常不必 |
 | --- | --- | --- |
-| 骨架 | `MLayout fillViewport` + `MPageContent` | 手写 `min-height:100vh`；`MLayoutContent` 再写 padding |
+| 骨架 | `MLayout fillViewport` + `MPageContent` | `MLayoutContent` 再写 padding |
 | 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-*`；`MCard` 再包一层 |
 | 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包 bordered 表格 |
 | 控件间距 | 同行用 `MSpace` / `MFlex`；区块靠 `MPageContent` gap | 外包 padded `div` 叠间距 |

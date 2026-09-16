@@ -20,8 +20,15 @@ import 'morya-ui/styles.css'
 
 <template>
   <MConfigProvider :locale="zhCN">
-    <MLayout has-sider>
-      <MLayoutSider>...</MLayoutSider>
+    <MLayout has-sider fill-viewport>
+      <MLayoutSider bordered>
+        <MMenu
+          :model="[
+            { key: 'users', label: '用户管理', icon: 'user', to: '/users' },
+            { key: 'roles', label: '角色管理', icon: 'shield', to: '/roles' },
+          ]"
+        />
+      </MLayoutSider>
       <MLayout>
         <MLayoutHeader>...</MLayoutHeader>
         <MLayoutContent>...</MLayoutContent>
@@ -32,6 +39,7 @@ import 'morya-ui/styles.css'
 ```
 
 - 管理后台：`MLayout fillViewport` + `MLayoutSider` + `MLayoutHeader` + `MLayoutContent`
+- 侧栏导航：`MMenu`
 - 页面内容堆叠：`MPageContent`（内置于 `MLayoutContent`）
 - 列表筛选 / 工具栏：`MPageFilters` + `MPageToolbar`
 - 表单引导 / 表面：`MPageHeader` + `MPageSection variant="form|actions"`
@@ -56,9 +64,11 @@ import 'morya-ui/styles.css'
 ## 4. 表单约定
 
 - 使用 `MForm` + `MFormItem`，`name` 与校验规则对应。
+- **从列表新建/编辑（字段约 ≤8、单段表单）默认用 `MDialog` + `MForm`，不要为每个实体再开独立路由表单页。**
+- 多分组、长流程、向导式录入再用独立表单页（`docs/golden-pages/form-page.vue`）或 `MDrawer`。
 - 字段组件自带 `label` / `invalid` / `helpText` 时优先用组件 prop（如 `MInput`、`MSelect`），复杂表单再用 `MFormItem` 包一层。
 - 尺寸：默认 medium；密集后台可 `size="small"` 或 ConfigProvider `globalDensity`。
-- 宽度：筛选项 `fluid` 慎用；表单页主栏 `max-width: 40rem` 左右。
+- 宽度：筛选项 `fluid` 慎用；独立表单页主栏 `max-width: 40rem` 左右。
 
 ## 5. 数据展示
 

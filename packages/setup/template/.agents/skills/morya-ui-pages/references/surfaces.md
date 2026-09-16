@@ -6,12 +6,12 @@ Pick a lane, then a surface. Prefer project golden pages for **Ops**; use the re
 
 | Surface | Job | Compose from |
 | --- | --- | --- |
-| List | Scan, filter, act on many rows | Golden list + [page-layouts.md](page-layouts.md) |
-| Form | Create / edit one entity | Golden form |
+| List | Scan, filter, act on many rows | Golden list + [page-layouts.md](page-layouts.md); **create/edit with ≤~8 fields → `MDialog` on the list** |
+| Form | Create / edit one entity as a **dedicated page** | Golden form — only when multi-section, many fields, or user asked for an independent form route |
 | Dashboard | Orient + jump to work | Golden dashboard |
-| Detail | Read-heavy record + secondary actions | `MPageHeader` + `MDescriptions`-style sections via `MCard`/`MPageSection`, actions in toolbar; edit via route or `MDrawer`/`MDialog` |
+| Detail | Read-heavy record + secondary actions | `MPageHeader` + sections via `MCard`/`MPageSection`; edit via `MDialog` / `MDrawer` (prefer over a second form route) |
 | Settings | Grouped preferences | Narrow `MPageContent` + stacked `MPageSection` / `MTabs` + `MForm` |
-| Hybrid list | List + drawer/dialog | List golden + overlay recipe |
+| Hybrid list | List + drawer/dialog | **Default Ops CRUD pattern**: list golden + `MDialog`/`MDrawer` form |
 
 ## Account
 

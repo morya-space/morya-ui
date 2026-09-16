@@ -7,7 +7,7 @@ Docs (zh/en):
 - [AI setup](https://morya-space.github.io/morya-ui/docs/ai-setup) — one-shot CLI
 - [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
 
-Installs the UI library, copies Agent skill / Cursor rules / design docs from `ai-design-config`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and tries to inject `import 'morya-ui/styles.css'` into the app entry.
+Installs the UI library, copies Agent skill / Cursor rules / design docs from `ai-design-config`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), injects `import 'morya-ui/styles.css'`, and writes `src/styles/morya-app-shell.css` with its entry import.
 
 ## Usage
 
@@ -28,7 +28,7 @@ npx @morya-ui/setup
 | `--skip-install` | Do not install `morya-ui` |
 | `--skip-template` | Do not copy AI skill / rules / docs / tokens |
 | `--skip-mcp` | Do not write `.cursor/mcp.json` |
-| `--skip-styles` | Do not inject `styles.css` import |
+| `--skip-styles` | Do not inject `styles.css` / write app-shell CSS |
 | `--skip-scripts` | Do not add `check:colors` to `package.json` |
 | `-h`, `--help` | Show help |
 
@@ -50,6 +50,7 @@ From the package `template/` (synced from repo `ai-design-config/`):
 - `design-tokens/`
 - `scripts/check-raw-colors.mjs`
 - `src/examples/`
+- `src/styles/morya-app-shell.css`
 
 ### MCP (Cursor)
 
@@ -76,6 +77,7 @@ Looks for `src/main.ts` / `.js` / `.tsx` / `.jsx`, root `main.*`, `src/app.ts` /
 
 ```ts
 import 'morya-ui/styles.css'
+import './styles/morya-app-shell.css'
 ```
 
 The CLI does **not** call `app.use(MoryaUI)` or edit `App.vue`.

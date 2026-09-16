@@ -4,7 +4,7 @@ import { copyTemplate } from './copy-template.mjs'
 import { installMoryaUi } from './install.mjs'
 import { mergeMcpConfig } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
-import { ensureStylesImport } from './styles.mjs'
+import { ensureShellStyles, ensureStylesImport } from './styles.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PKG_ROOT = resolve(__dirname, '..')
@@ -26,6 +26,7 @@ One-shot setup for morya-ui in a consumer Vue project:
   - copy DESIGN.md, Agent skill, Cursor rules, docs, tokens, examples
   - merge .cursor/mcp.json for @morya-ui/mcp
   - inject import 'morya-ui/styles.css' into the app entry when found
+  - write src/styles/morya-app-shell.css (html/body/#app height chain) and inject its import
   - add check:colors script when missing
 
 Options:
@@ -36,7 +37,7 @@ Options:
   --skip-install    Skip dependency install
   --skip-template   Skip copying AI template files
   --skip-mcp        Skip writing .cursor/mcp.json
-  --skip-styles     Skip injecting styles.css import
+  --skip-styles     Skip injecting styles.css / app-shell CSS
   --skip-scripts    Skip adding check:colors to package.json
   -h, --help        Show this help
 `)
@@ -141,6 +142,10 @@ export async function runSetup(options) {
     ? { action: 'skipped', reason: 'skip-styles' }
     : ensureStylesImport(cwd, { dryRun })
 
+  const shell = skipStyles
+    ? { fileAction: 'skipped', importAction: 'skipped', reason: 'skip-styles' }
+    : ensureShellStyles(cwd, { dryRun, force })
+
   const scripts = skipScripts
     ? { action: 'skipped-flag' }
     : ensureCheckColorsScript(cwd, { force, dryRun })
@@ -183,6 +188,17 @@ export async function runSetup(options) {
     console.log("  import 'morya-ui/styles.css'")
   }
 
+  if (shell.reason === 'skip-styles') {
+    console.log('Shell CSS: skipped (--skip-styles)')
+  } else {
+    console.log(
+      `Shell CSS: file ${shell.fileAction}`
+        + (shell.path ? ` (${rel(cwd, shell.path)})` : '')
+        + `, import ${shell.importAction}`
+        + (shell.entry ? ` (${rel(cwd, shell.entry)})` : ''),
+    )
+  }
+
   if (scripts.action === 'skipped-flag') {
     console.log('Scripts: skipped (--skip-scripts)')
   } else {
@@ -191,10 +207,10 @@ export async function runSetup(options) {
 
   console.log('')
   console.log('Next:')
-  console.log('  1. Ensure the styles import is in your app entry (if not injected).')
+  console.log('  1. Ensure styles.css + morya-app-shell.css imports are in your app entry.')
   console.log('  2. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
   console.log('  3. Have the agent read DESIGN.md before generating pages.')
   console.log('  4. Optional: pnpm check:colors')
 
-  return { install, template, mcp, styles, scripts }
+  return { install, template, mcp, styles, shell, scripts }
 }

@@ -16,12 +16,14 @@ Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet`
 ## List page — block order
 
 1. `MLayout fillViewport` + optional `MLayoutSider bordered`
-2. `MLayoutHeader` → `MBreadcrumb`
-3. `MLayoutContent` → `MPageContent`
-4. `MPageFilters` — inner `MSpace` + Input/Select + query/reset
-5. `MPageToolbar` — title + `#actions` primary action
-6. `MTable` directly in content (usually **no** wrapping `MCard`)
-7. Pagination via `MTable` paginator or sibling `MPagination`
+2. Sider `MMenu`
+3. `MLayoutHeader` → `MBreadcrumb`
+4. `MLayoutContent` → `MPageContent`
+5. `MPageFilters` — inner `MSpace` + Input/Select + query/reset
+6. `MPageToolbar` — title + `#actions` primary action
+7. `MTable` directly in content (usually **no** wrapping `MCard`)
+8. Pagination via `MTable` paginator or sibling `MPagination`
+9. Short create/edit → `MDialog` + `MForm` on the same page (default)
 
 ## Form page — block order
 
@@ -42,7 +44,7 @@ Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet`
 
 | Topic | Prefer | Usually avoid |
 | --- | --- | --- |
-| Shell | `MLayout fillViewport` + `MPageContent` | Hand `min-height: 100vh`; padding on `MLayoutContent` |
+| Shell | `MLayout fillViewport` + `MPageContent` | Padding on `MLayoutContent` |
 | Sections | `MPageFilters` / `MPageToolbar` / `MPageSection` | Custom `.page-*`; extra `MCard` wrappers |
 | List table | `MTable` in `MPageContent` | Border card solely to wrap the table |
 | Spacing | `MSpace` / `MFlex` for peers; page gap from `MPageContent` | Nested padded divs stacking gaps |

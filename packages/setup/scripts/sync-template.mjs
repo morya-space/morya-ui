@@ -21,6 +21,7 @@ const INCLUDE = [
   'design-tokens',
   'scripts/check-raw-colors.mjs',
   'src/examples',
+  'src/styles',
 ]
 
 if (!existsSync(sourceRoot)) {
