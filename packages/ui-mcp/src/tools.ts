@@ -1091,6 +1091,36 @@ export function createToolHandlers(catalog = loadCatalog()) {
       })
     }
 
+    if (
+      (/fill-viewport|fillViewport/i.test(code) || /<MLayout\b/i.test(code))
+      && !/html\s*,\s*body\s*,\s*#app[\s\S]{0,80}height\s*:\s*100%/i.test(code)
+    ) {
+      suggestions.push({
+        standardId: 'layout-shell',
+        type: 'height-chain',
+        message:
+          locale === 'en-US'
+            ? 'Prefer layout-app-shell / golden pages: include html, body, #app { height: 100% } (morya-app-shell.css) with MLayout.'
+            : '对齐 layout-app-shell / 黄金样例：配合 MLayout 使用 html, body, #app { height: 100% }（morya-app-shell.css）。',
+      })
+    }
+
+    if (/<MMenu\b/i.test(code)) {
+      const iconCount = (code.match(/\bicon\s*:/g) || []).length
+      const looksLikeMenuModel =
+        /MMenu[\s\S]{0,1200}\b(label|model)\s*[:=]/i.test(code) || /:model=/i.test(code)
+      if (looksLikeMenuModel && iconCount === 0) {
+        suggestions.push({
+          standardId: 'layout-shell',
+          type: 'menu-missing-icons',
+          message:
+            locale === 'en-US'
+              ? 'Prefer golden / layout-app-shell menu items that include icon (e.g. user, shield, home).'
+              : '对齐黄金样例 / layout-app-shell：侧栏菜单项带上 icon（如 user、shield、home）。',
+        })
+      }
+    }
+
     return textResult({
       ok: true,
       advisory: true,

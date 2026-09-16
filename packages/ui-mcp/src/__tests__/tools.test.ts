@@ -263,6 +263,36 @@ describe('@morya-ui/mcp handlers', () => {
     ).toBe(true)
   })
 
+  it('suggests height-chain when MLayout is used without shell CSS', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MLayout fill-viewport has-sider><MLayoutContent /></MLayout>',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'height-chain')).toBe(true)
+  })
+
+  it('suggests menu icons when MMenu model has no icon fields', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: `<MMenu :model="[{ key: 'users', label: 'Users', to: '/users' }]" />`,
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'menu-missing-icons')).toBe(true)
+  })
+
+  it('does not suggest menu icons when model items include icon', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: `<MMenu :model="[{ key: 'users', label: 'Users', icon: 'user', to: '/users' }]" />`,
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'menu-missing-icons')).toBe(false)
+  })
+
   it('lists component decision guides when query is omitted', () => {
     const result = read<{ kind: string; items: Array<{ id: string }> }>(
       handlers.recommendComponent({ limit: 5 }),

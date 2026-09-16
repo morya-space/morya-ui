@@ -413,23 +413,51 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     descriptionEn: 'Minimal MLayout fillViewport shell with header and content.',
     pageTypes: ['common'],
     keywords: ['layout', 'shell', 'breadcrumb', 'sider', 'app'],
-    imports: ['MLayout', 'MLayoutHeader', 'MLayoutContent', 'MBreadcrumb', 'MConfigProvider', 'zhCN'],
+    imports: [
+      'MLayout',
+      'MLayoutHeader',
+      'MLayoutContent',
+      'MLayoutSider',
+      'MMenu',
+      'MBreadcrumb',
+      'MPageContent',
+      'MConfigProvider',
+      'zhCN',
+    ],
     template: `<MConfigProvider :locale="zhCN">
-  <MLayout fill-viewport>
-    <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
-      <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '当前页' }]" />
-    </MLayoutHeader>
-    <MLayoutContent>
-      <MPageContent>
-        <!-- page sections -->
-      </MPageContent>
-    </MLayoutContent>
+  <MLayout fill-viewport has-sider>
+    <MLayoutSider v-model:collapsed="siderCollapsed" bordered :collapsed-width="72">
+      <MMenu
+        :model="[
+          { key: 'users', label: '用户管理', icon: 'user', to: '/users' },
+          { key: 'roles', label: '角色管理', icon: 'shield', to: '/roles' },
+        ]"
+        :collapsed="siderCollapsed"
+        :collapsed-width="72"
+      />
+    </MLayoutSider>
+    <MLayout>
+      <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
+        <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '当前页' }]" />
+      </MLayoutHeader>
+      <MLayoutContent>
+        <MPageContent>
+          <!-- page sections -->
+        </MPageContent>
+      </MLayoutContent>
+    </MLayout>
   </MLayout>
 </MConfigProvider>`,
-    rules: ['根布局用 fillViewport', '面包屑放 MLayoutHeader'],
-    rulesEn: ['Use fillViewport on the root layout', 'Place breadcrumb in MLayoutHeader'],
-    avoid: ['不要手写 min-height: 100vh'],
-    avoidEn: ['Do not hand-write min-height: 100vh'],
+    rules: [
+      '根布局用 fillViewport',
+      '面包屑放 MLayoutHeader',
+    ],
+    rulesEn: [
+      'Use fillViewport on the root layout',
+      'Place breadcrumb in MLayoutHeader',
+    ],
+    avoid: ['不要在 MLayoutContent 上写 padding'],
+    avoidEn: ['Do not put padding on MLayoutContent'],
   },
   {
     id: 'scrollable-panel',

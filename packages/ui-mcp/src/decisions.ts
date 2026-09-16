@@ -18,6 +18,48 @@ export interface ComponentDecision {
 
 export const componentDecisions: ComponentDecision[] = [
   {
+    id: 'form-surface-choice',
+    title: '新建/编辑用弹窗还是独立表单页',
+    titleEn: 'Dialog vs dedicated form page for create/edit',
+    question: '表单是从列表触发的短录入，还是多分组/长流程的独立配置？',
+    questionEn: 'Is this a short create/edit from a list, or a multi-section dedicated form flow?',
+    keywords: ['新建', '编辑', '表单', '弹窗', '路由', 'create', 'edit', 'form', 'dialog', 'page'],
+    options: [
+      {
+        component: 'Dialog',
+        when: [
+          '从列表/工具栏打开新建或编辑',
+          '字段大约 ≤8 个、单段表单',
+          '希望保存后仍停留在列表上下文',
+        ],
+        whenEn: [
+          'Create/edit is launched from a list or toolbar',
+          'About ≤8 fields in a single section',
+          'User should stay in the list context after save',
+        ],
+        avoidWhen: ['多步骤向导', '多分组长配置页'],
+        avoidWhenEn: ['Multi-step wizards', 'Long multi-section configuration pages'],
+      },
+      {
+        component: 'Drawer',
+        when: ['表单比 Dialog 更长但仍需对照列表', '详情+编辑侧滑'],
+        whenEn: ['Form is longer than a dialog but list context matters', 'Detail plus edit in a side panel'],
+        avoidWhen: ['字段极少的确认式录入'],
+        avoidWhenEn: ['Tiny confirmation-style forms'],
+      },
+      {
+        component: 'Form',
+        when: ['用户明确要求独立表单页', '多分组、长校验、离开需确认的配置流'],
+        whenEn: [
+          'The user explicitly asked for a dedicated form page',
+          'Multi-section, heavy validation, or leave-confirm configuration flows',
+        ],
+        avoidWhen: ['列表上的常规短 CRUD'],
+        avoidWhenEn: ['Routine short CRUD from a list'],
+      },
+    ],
+  },
+  {
     id: 'overlay-choice',
     title: '如何选择浮层组件',
     titleEn: 'Choosing an overlay component',
@@ -27,10 +69,23 @@ export const componentDecisions: ComponentDecision[] = [
     options: [
       {
         component: 'Dialog',
-        when: ['需要用户聚焦完成一项短到中等任务', '需要确认危险操作', '内容不适合直接放在页面流中'],
-        whenEn: ['The user should focus on a short or medium-sized task', 'A destructive action needs confirmation', 'Content should not interrupt the page flow'],
-        avoidWhen: ['内容接近完整页面', '用户需要持续查看底层页面上下文'],
-        avoidWhenEn: ['The content is effectively a full page', 'The user must continuously reference the underlying page'],
+        when: [
+          '需要用户聚焦完成一项短到中等任务',
+          '列表页上的新建/编辑短表单（约 ≤8 个字段）',
+          '需要确认危险操作',
+          '内容不适合直接放在页面流中',
+        ],
+        whenEn: [
+          'The user should focus on a short or medium-sized task',
+          'Create/edit short forms launched from a list (~≤8 fields)',
+          'A destructive action needs confirmation',
+          'Content should not interrupt the page flow',
+        ],
+        avoidWhen: ['内容接近完整多分组页面', '用户需要持续查看底层页面上下文且表单很长'],
+        avoidWhenEn: [
+          'The content is effectively a multi-section full page',
+          'The user must continuously reference the underlying page and the form is long',
+        ],
       },
       {
         component: 'Drawer',
