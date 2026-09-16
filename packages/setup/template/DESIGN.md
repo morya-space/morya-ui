@@ -1,6 +1,6 @@
 # Morya UI 设计系统（AI 第一信源）
 
-> 基于 `morya-ui` v0.1.x。生成或审查业务页面时，**必须先遵守本文**，再查阅 `docs/components.md` 与 `docs/golden-pages/`。
+> 基于 `morya-ui` v0.2.6。生成或审查业务页面时，**必须先遵守本文**，再查阅 `docs/components.md` 与 `docs/golden-pages/`。
 
 ## 1. 设计原则
 
