@@ -192,6 +192,11 @@ export const pagePatterns: PagePattern[] = [
       '    ├── MForm + 字段',
       '    └── #footer → 取消 / 保存',
     ],
+    layout: {
+      host: '留在列表页，不另开路由',
+      dialog: 'MDialog 承载短表单；宽度约 28–36rem',
+      form: 'MForm + 字段；页脚用 Dialog #footer',
+    },
     styleRules: [
       'Dialog 宽度约 28–36rem；树/长内容区可限高滚动',
       '页脚用 Dialog #footer，不要把主按钮只放在表单流末尾却看不见',
