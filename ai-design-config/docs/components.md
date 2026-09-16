@@ -114,7 +114,8 @@
 | 我要做… | 首选组件 |
 | --- | --- |
 | 用户列表 + 搜索 + 分页 | `MTable` + `MInput` + `MPagination` |
-| 新建/编辑实体 | `MForm` + 字段组件 + `MDialog` 或独立路由页 |
+| 新建/编辑实体（短表单，列表内） | **`MDialog` + `MForm` + 字段组件**（首选） |
+| 新建/编辑实体（长表单 / 多分组） | `MForm` + 独立表单页或 `MDrawer` |
 | 删除确认 | `MConfirmDialog` |
 | 筛选侧栏 | `MDrawer` + 表单控件 |
 | 状态指示（行内） | `MStatus`（圆点 + 文案） |

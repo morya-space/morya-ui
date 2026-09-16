@@ -26,6 +26,12 @@ import { ref } from 'vue'
 
 const keyword = ref('')
 const status = ref<string | undefined>()
+const siderCollapsed = ref(false)
+
+const menuModel = [
+  { key: 'users', label: '用户管理', icon: 'user', to: '/users' },
+  { key: 'roles', label: '角色管理', icon: 'shield', to: '/roles' },
+]
 
 const statusOptions = [
   { label: '全部', value: '' },
@@ -52,8 +58,13 @@ const rows = [
 <template>
   <MConfigProvider :locale="zhCN">
     <MLayout has-sider fill-viewport>
-      <MLayoutSider bordered>
-        <MMenu :model="[{ label: '用户管理', key: 'users' }, { label: '角色管理', key: 'roles' }]" />
+      <MLayoutSider v-model:collapsed="siderCollapsed" bordered :collapsed-width="72">
+        <MMenu
+          :model="menuModel"
+          :collapsed="siderCollapsed"
+          :collapsed-width="72"
+          selected-key="users"
+        />
       </MLayoutSider>
 
       <MLayout>

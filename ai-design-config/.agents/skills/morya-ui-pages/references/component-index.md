@@ -47,8 +47,8 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Intent | Prefer |
 | --- | --- |
 | Searchable list + paging | `MPageFilters` + `MTable` (+ paginator) |
-| Create / edit entity page | Form golden layout + `MForm` |
-| Create / edit in place | `MDialog` or `MDrawer` + form |
+| Create / edit from a list (few–medium fields) | **`MDialog` + `MForm`** (stay on the list) |
+| Create / edit long / multi-section entity | Form golden page **or** `MDrawer` |
 | Delete | `MConfirmDialog` |
 | Lightweight inline status | `MStatus` (dot + label) |
 | Status chip / closable label | `MTag` severities |
@@ -60,6 +60,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Empty list / zero state | `MEmpty` (+ `empty-state` golden or `MTable` `#empty`) |
 | Submit success / HTTP error page | `MResult` |
 | Local capped scroll | Explicit `MScrollbar` |
+| Admin sider nav | `MMenu` |
 
 ## Common mistakes
 

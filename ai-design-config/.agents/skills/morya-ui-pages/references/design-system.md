@@ -21,7 +21,14 @@ import 'morya-ui/styles.css'
 <template>
   <MConfigProvider :locale="zhCN">
     <MLayout fill-viewport has-sider>
-      <MLayoutSider bordered>...</MLayoutSider>
+      <MLayoutSider bordered>
+        <MMenu
+          :model="[
+            { key: 'users', label: 'Users', icon: 'user', to: '/users' },
+            { key: 'roles', label: 'Roles', icon: 'shield', to: '/roles' },
+          ]"
+        />
+      </MLayoutSider>
       <MLayout>
         <MLayoutHeader>...</MLayoutHeader>
         <MLayoutContent>...</MLayoutContent>
@@ -34,6 +41,7 @@ import 'morya-ui/styles.css'
 | Role | Prefer |
 | --- | --- |
 | Admin chrome | `MLayout fillViewport` + sider / header / content |
+| Sider nav | `MMenu` |
 | Page stack | `MPageContent` inside `MLayoutContent` |
 | Filters / toolbar | `MPageFilters` + `MPageToolbar` |
 | Form surfaces | `MPageHeader` + `MPageSection variant="form|actions"` |
