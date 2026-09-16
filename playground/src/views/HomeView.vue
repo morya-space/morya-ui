@@ -72,7 +72,7 @@ async function copyInstall() {
         </div>
         <div class="home-meta" :aria-label="t.techTags">
           <span>Vue 3</span>
-          <span>88 Components</span>
+          <span>{{ t.homeMetaComponents }}</span>
           <span>TypeScript</span>
           <span>MIT</span>
         </div>

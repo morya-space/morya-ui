@@ -36,7 +36,7 @@
 
 ## Introduction
 
-**Morya UI** (`morya-ui`) is an open-source Vue 3 component library for building modern web applications. It ships **88 components**, a token-based theme system, built-in i18n, and a documentation site with live previews.
+**Morya UI** (`morya-ui`) is an open-source Vue 3 component library for building modern web applications. It ships **90+ components**, a token-based theme system, built-in i18n, and a documentation site with live previews.
 
 Whether you are starting a new admin dashboard, SaaS product, or internal tool, you get consistent forms, overlays, data display, and feedback primitives out of the box.
 
@@ -44,7 +44,7 @@ Whether you are starting a new admin dashboard, SaaS product, or internal tool, 
 
 ### Complete
 
-88 components covering basics, forms, navigation, data display, layout, and feedback — all tree-shakeable via ESM subpath imports.
+90+ components covering basics, forms, navigation, data display, layout, and feedback — all tree-shakeable via ESM subpath imports.
 
 ### Theme-ready
 
