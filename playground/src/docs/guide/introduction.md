@@ -16,7 +16,7 @@ description: Morya UI 是什么、适合谁用、如何开始。
 
 | | |
 | --- | --- |
-| **88 个组件** | 基础、表单、导航、数据展示、布局、反馈一应俱全 |
+| **90+ 个组件** | 基础、表单、导航、数据展示、布局、反馈一应俱全 |
 | **主题系统** | `--m-*` 设计令牌，亮/暗色、`useTheme` / `useDensity` / `useMotion` 同包导出 |
 | **TypeScript** | Composition API 编写，Props / Emits / locale 完整类型 |
 | **按需加载** | ESM 子路径 + `MoryaUIResolver`，支持 tree-shaking |

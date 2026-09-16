@@ -16,7 +16,7 @@ description: What Morya UI is, who it is for, and how to get started.
 
 | | |
 | --- | --- |
-| **88 components** | Basics, forms, navigation, data display, layout, and feedback |
+| **90+ components** | Basics, forms, navigation, data display, layout, and feedback |
 | **Theme system** | `--m-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
 | **TypeScript** | Built with Composition API; fully typed props, emits, and locale |
 | **On-demand** | ESM subpaths + `MoryaUIResolver` with tree-shaking |
