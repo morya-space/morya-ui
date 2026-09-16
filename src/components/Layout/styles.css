@@ -28,7 +28,12 @@
 }
 
 .m-layout--fill-viewport {
+    /* Definite height so has-sider children with min-height:100% / flex stretch fill the viewport.
+       min-height alone leaves height:auto and percentage children collapse to content height. */
+    height: 100vh;
+    height: 100dvh;
     min-height: 100vh;
+    min-height: 100dvh;
 }
 
 .m-layout--absolute-positioned {

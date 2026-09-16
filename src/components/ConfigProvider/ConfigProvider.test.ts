@@ -52,6 +52,16 @@ describe('muConfigProvider', () => {
     expect(wrapper.get('.m-config-provider').attributes('data-m-density')).toBe('compact')
   })
 
+  it('exposes resolved theme on the provider root', async () => {
+    applyTheme('light')
+    const wrapper = mount(MConfigProvider, {
+      props: { theme: 'dark', globalDensity: false },
+      slots: { default: () => h('span', 'x') },
+    })
+    await nextTick()
+    expect(wrapper.get('.m-config-provider').attributes('data-theme')).toBe('dark')
+  })
+
   it('writes overlay z-index base as a CSS variable', () => {
     const wrapper = mount(MConfigProvider, {
       props: { zIndex: 2200, globalDensity: false },

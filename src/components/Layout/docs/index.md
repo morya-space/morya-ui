@@ -6,7 +6,7 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 
 # Layout
 
-页面级布局容器。侧栏场景需在对应 `MLayout` 上设置 `has-sider`。给根布局固定高度（或 `min-height`）后，`MLayoutContent` 会自动撑满剩余空间。
+页面级布局容器。侧栏场景需在对应 `MLayout` 上设置 `has-sider`。根布局使用 `fill-viewport`（`height: 100dvh`）或显式 `height` 后，`MLayoutContent` / `MLayoutSider` 会撑满剩余空间。
 
 ## 引入
 
@@ -73,6 +73,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 | --- | --- | --- | --- |
 | `hasSider` | `boolean` | `false` | 横向容纳 `MLayoutSider`。 |
 | `siderPlacement` | `'left' \| 'right'` | `'left'` | 侧栏位置。 |
+| `fillViewport` | `boolean` | `false` | 根布局撑满视口（`100dvh`），侧栏/内容才能按剩余高度拉伸。 |
 | `embedded` | `boolean` | `false` | 柔和背景（嵌套内容区）。 |
 | `position` | `'static' \| 'absolute'` | `'static'` | 定位模式。 |
 | `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |

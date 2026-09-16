@@ -272,6 +272,7 @@
     align-items: center;
     border-radius: var(--m-menu-item-radius);
     box-sizing: border-box;
+    color: var(--m-menu-item-text);
     cursor: pointer;
     display: grid;
     grid-template-areas: "icon label arrow";
@@ -280,10 +281,21 @@
     line-height: 1.75;
     padding-inline-end: 0.75rem;
     position: relative;
+    text-decoration: none;
     transition:
         color var(--m-motion-fast) var(--m-motion-ease),
         background-color var(--m-motion-fast) var(--m-motion-ease),
         padding-inline-start var(--m-motion-fast) var(--m-motion-ease);
+}
+
+/* RouterLink / <a> must not keep browser link chrome (blue + underline). */
+a.m-menu__item-content,
+a.m-menu__item-content:link,
+a.m-menu__item-content:visited,
+a.m-menu__item-content:hover,
+a.m-menu__item-content:active {
+    color: var(--m-menu-item-text);
+    text-decoration: none;
 }
 
 .m-menu__item-content--no-icon {
@@ -315,6 +327,13 @@
 
 .m-menu__item-content--selected::before {
     background: var(--m-menu-item-color-active) !important;
+}
+
+.m-menu__item-content--selected,
+a.m-menu__item-content--selected,
+a.m-menu__item-content--selected:link,
+a.m-menu__item-content--selected:visited {
+    color: var(--m-menu-item-text-active);
 }
 
 .m-menu__item-content--selected .m-menu__label,

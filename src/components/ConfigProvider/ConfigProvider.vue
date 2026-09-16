@@ -73,6 +73,12 @@ const resolved = computed<MGlobalConfig>(() => {
 provideMConfig(resolved)
 
 const densityAttr = computed(() => resolved.value.density ?? 'comfortable')
+const themeAttr = computed(() => {
+  const theme = resolved.value.theme
+  if (theme === undefined) return undefined
+  if (theme === 'system') return getPreferredTheme()
+  return theme
+})
 const applyGlobal = computed(() => props.globalDensity !== false)
 
 const layerStyle = computed(() => {
@@ -86,6 +92,11 @@ let previousZBase: string | undefined
 let previousTheme: string | undefined
 let previousIgnoreReducedMotion: string | undefined
 let systemMedia: MediaQueryList | null = null
+
+function clearSystemThemeListener() {
+  systemMedia?.removeEventListener('change', onSystemThemeChange)
+  systemMedia = null
+}
 
 function onSystemThemeChange() {
   if (resolved.value.theme === 'system') applyTheme(getPreferredTheme())
@@ -113,9 +124,12 @@ function syncGlobalSideEffects() {
     applyTheme(theme === 'system' ? getPreferredTheme() : theme)
   }
   if (theme === 'system' && typeof window !== 'undefined') {
-    systemMedia?.removeEventListener('change', onSystemThemeChange)
+    clearSystemThemeListener()
     systemMedia = window.matchMedia('(prefers-color-scheme: dark)')
     systemMedia.addEventListener('change', onSystemThemeChange)
+  }
+  else {
+    clearSystemThemeListener()
   }
 }
 
@@ -142,7 +156,10 @@ onBeforeUnmount(() => {
       delete document.documentElement.dataset.mIgnoreReducedMotion
     }
   }
-  if (!applyGlobal.value) return
+  if (!applyGlobal.value) {
+    clearSystemThemeListener()
+    return
+  }
   if (previousDensity !== undefined) {
     if (previousDensity) document.documentElement.dataset.mDensity = previousDensity
     else delete document.documentElement.dataset.mDensity
@@ -155,13 +172,18 @@ onBeforeUnmount(() => {
     if (previousTheme) document.documentElement.dataset.theme = previousTheme
     else delete document.documentElement.dataset.theme
   }
-  systemMedia?.removeEventListener('change', onSystemThemeChange)
-  systemMedia = null
+  clearSystemThemeListener()
 })
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-config-provider" :data-m-density="densityAttr" :style="layerStyle">
+  <div
+    v-bind="rootAttrs"
+    class="m-config-provider"
+    :data-m-density="densityAttr"
+    :data-theme="themeAttr"
+    :style="layerStyle"
+  >
     <slot />
   </div>
 </template>
