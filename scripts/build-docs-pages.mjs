@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-import { spawnSync } from 'node:child_process'
 /**
- * Build the docs site for GitHub Pages (subpath /morya-ui/) and add SPA 404 fallback.
+ * Build the docs site for GitHub Pages (subpath /morya-ui/),
+ * then emit SEO prerender shells + sitemap/robots.
  */
-import { copyFileSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
+import { applyDocsSeo } from './docs-seo.mjs'
 
 process.env.GITHUB_PAGES = 'true'
 
@@ -22,5 +23,5 @@ if (result.status !== 0) {
   process.exit(result.status ?? 1)
 }
 
-copyFileSync('playground/dist/index.html', 'playground/dist/404.html')
-console.log('GitHub Pages build ready in playground/dist/')
+const seo = applyDocsSeo()
+console.log(`GitHub Pages build ready in ${seo.distDir}/ (${seo.pageCount} SEO pages)`)

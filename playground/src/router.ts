@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { SITE_NAME } from './config/site'
 import { listDocumentedComponentNames } from './docs/loadComponentDocs'
+import { setPageHead } from './seo/pageHead'
+import componentDocsManifest from 'virtual:component-docs-manifest'
+import guideDocsManifest from 'virtual:guide-docs-manifest'
 
 const LEGACY_COMPONENT_NAMES = new Set(
   listDocumentedComponentNames().map((name) => name.toLowerCase()),
@@ -44,7 +47,7 @@ const router = createRouter({
       component: () => import('./views/components-demos-view/ComponentsDemosView.vue'),
       meta: {
         title: '开发调试组件页面：不对外',
-      }
+      },
     },
     {
       // 兼容旧路径 /Button → /components/Button（仅已知组件名）
@@ -71,28 +74,82 @@ const router = createRouter({
   },
 })
 
+function manifestText(
+  entry: Record<string, string> | undefined,
+  key: 'title' | 'description',
+): string | undefined {
+  const value = entry?.[key]
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined
+}
+
 router.afterEach((to) => {
   if (typeof document === 'undefined') return
 
   const suffix = ` · ${SITE_NAME}`
+  const path = to.path
+
   if (to.name === 'home') {
-    document.title = SITE_NAME
+    setPageHead({
+      title: `${SITE_NAME} — Vue 3 Component Library`,
+      path,
+    })
     return
   }
+
   if (to.name === 'docs') {
-    document.title = `Docs${suffix}`
+    const slug = typeof to.params.slug === 'string' ? to.params.slug : ''
+    const entry = guideDocsManifest[slug]?.['zh-CN'] ?? guideDocsManifest[slug]?.['en-US']
+    const guideTitle = manifestText(entry, 'title') ?? slug
+    setPageHead({
+      title: `${guideTitle}${suffix}`,
+      description: manifestText(entry, 'description'),
+      path,
+    })
     return
   }
-  if (to.name === 'components' || to.name === 'component-doc') {
+
+  if (to.name === 'components') {
+    setPageHead({
+      title: `Components${suffix}`,
+      description: 'Browse 90+ Vue 3 components in Morya UI with interactive API docs and live previews.',
+      path,
+    })
+    return
+  }
+
+  if (to.name === 'component-doc') {
     const component = typeof to.params.component === 'string' ? to.params.component : ''
-    document.title = component ? `${component}${suffix}` : `Components${suffix}`
+    const entry = componentDocsManifest[component]?.['zh-CN']
+      ?? componentDocsManifest[component]?.['en-US']
+    setPageHead({
+      title: component ? `${component}${suffix}` : `Components${suffix}`,
+      description: manifestText(entry, 'description'),
+      path,
+    })
     return
   }
+
   if (to.name === 'changelog') {
-    document.title = `Changelog${suffix}`
+    setPageHead({
+      title: `Changelog${suffix}`,
+      description: 'Release notes and breaking changes for Morya UI.',
+      path,
+    })
     return
   }
-  document.title = SITE_NAME
+
+  if (to.name === 'components-demos') {
+    setPageHead({
+      title: `Component demos${suffix}`,
+      path,
+    })
+    return
+  }
+
+  setPageHead({
+    title: SITE_NAME,
+    path,
+  })
 })
 
 export default router
