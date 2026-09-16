@@ -1,5 +1,19 @@
 # morya-ui
 
+## 0.2.6
+
+### 新功能
+
+- enhance SEO and documentation for Morya UI
+
+### 修复
+
+- harden Layout fillViewport, Menu links, and ConfigProvider theme
+
+### 文档
+
+- update component count to 90+ in README and related files
+
 ## 0.2.5
 
 ### 破坏性变更

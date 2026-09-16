@@ -1,5 +1,19 @@
 # morya-ui
 
+## 0.2.6
+
+### Features
+
+- enhance SEO and documentation for Morya UI
+
+### Fixes
+
+- harden Layout fillViewport, Menu links, and ConfigProvider theme
+
+### Docs
+
+- update component count to 90+ in README and related files
+
 ## 0.2.5
 
 ### Breaking Changes
