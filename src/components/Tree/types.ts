@@ -12,7 +12,7 @@ export type TreeSelectionKeys = Record<string, boolean>
 export type TreeCheckedKeys = Record<string, boolean>
 export type TreeExpandedKeys = Record<string, boolean>
 export type TreeSelectionMode = 'single' | 'multiple'
-/** Naive `check-strategy`. Ignored when `checkStrictly`. */
+/** Check strategy for cascade selection. Ignored when `checkStrictly`. */
 export type TreeCheckStrategy = 'all' | 'parent' | 'child'
 
 export interface TreeProps {

@@ -1,7 +1,7 @@
 import type { IconName } from '../../components/Icon/types'
 import { isIconName } from '../../components/Icon/icons'
 
-/** Map common Tabler / Lucide-style names to built-in Wi icons. */
+/** Map common Tabler / Lucide-style names to built-in icons. */
 const menuIconAliases: Record<string, IconName> = {
   'layout-dashboard': 'home',
   'users': 'user',

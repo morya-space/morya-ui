@@ -88,13 +88,13 @@ message.error('操作失败')
 | 删除确认用 Message/Toast | `MConfirmDialog` |
 | 所有反馈都用 Toast | 默认改 Message，仅 detail 场景保留 Toast |
 
-## 与 Naive / Element Plus 的对应
+## 概念对照
 
-| Morya UI | 近似概念 |
+| API | 用途 |
 | --- | --- |
-| `message` | Naive `message` / Element `ElMessage` |
-| `toast` | Naive `notification` / Element `ElNotification` |
-| `<MMessage>` | 页面内 `el-alert` / 表单顶部错误条 |
+| `message` | 轻量、短暂的操作反馈（默认首选） |
+| `toast` | 带摘要 + 详情、或需停留更久的通知 |
+| `<MMessage>` | 页面内常驻提示条（如表单顶部错误） |
 
 ## 相关文档
 

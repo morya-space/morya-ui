@@ -13,7 +13,7 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 
 未指定 `trigger` 的规则继承 Form 的 `validateOn`。程序化 `validate()` 与 `validateOn` 含 `submit` 的原生提交会跑完该字段全部规则。
 
-**与 Naive UI 的差异：** 不引入 `async-validator`；`validate()` **始终 resolve** `{ valid, errors }`，校验失败不会 `reject`。Nested path（如 `user.name`）暂不支持，请用扁平字段名。
+**校验约定：** 不依赖外部校验库；`validate()` **始终 resolve** `{ valid, errors }`，校验失败不会 `reject`。Nested path（如 `user.name`）暂不支持，请用扁平字段名。
 
 ## 引入
 
@@ -44,7 +44,7 @@ import { MForm, MFormItem } from 'morya-ui'
 | `model` | `Record<string, unknown>` | — | 供 `rules` 读取的字段值 |
 | `rules` | `FormRules` | — | 按 `name` 声明的规则 |
 | `labelPosition` | `'top' \| 'left'` | `'top'` | 标签位置 |
-| `labelPlacement` | `'top' \| 'left'` | — | `labelPosition` 别名（Naive） |
+| `labelPlacement` | `'top' \| 'left'` | — | `labelPosition` 的别名 |
 | `labelAlign` | `'left' \| 'center' \| 'right'` | `'left'` | 标签文本对齐 |
 | `labelWidth` | `string \| number` | — | 左侧标签宽度；数字视为 px |
 | `inline` | `boolean` | `false` | 表单项横向排列 |

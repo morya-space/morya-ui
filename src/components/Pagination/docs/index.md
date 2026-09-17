@@ -8,7 +8,7 @@ description: 分页器，v-model 为页码；实例暴露 first（零基首条�
 
 分页导航，`v-model` 使用 **1-based 页码**；实例属性 `first` 对应零基首条记录索引 `(page - 1) * rows`。
 
-对照 Naive：`pageSize` 是 `rows` 的别名（同时传入时 `pageSize` 优先）；`showSizePicker` / `showQuickJumper` / `simple` 对应 `n-pagination` 的常用能力。
+`pageSize` 是 `rows` 的别名（同时传入时 `pageSize` 优先）；另支持 `showSizePicker`、`showQuickJumper`、`simple`。
 
 ## 引入
 
@@ -33,7 +33,7 @@ import { MPagination } from 'morya-ui'
 | `modelValue` | `number` | `1` | 当前页（从 1 开始）。 |
 | `totalRecords` | `number` | — | 总记录数。 |
 | `rows` | `number` | `10` | 每页条数。 |
-| `pageSize` | `number` | — | `rows` 的别名（Naive `page-size`）；两者同时传入时以 `pageSize` 为准。 |
+| `pageSize` | `number` | — | `rows` 的别名；两者同时传入时以 `pageSize` 为准。 |
 | `pageLinkSize` | `number` | `5` | 页码按钮数量。 |
 | `showSizePicker` | `boolean` | `false` | 显示每页条数选择器。 |
 | `pageSizes` | `number[]` | `[10, 20, 50, 100]` | `showSizePicker` 的选项。 |

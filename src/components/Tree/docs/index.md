@@ -8,7 +8,7 @@ description: 树形结构。支持勾选半选、过滤、受控展开、懒加�
 
 层级节点树，支持展开、勾选、过滤与拖拽等常用能力。
 
-**与 Naive 的差异：** 默认插槽 `{ node, data }` 自定义节点内容。`checkStrategy` 为 `'all' | 'parent' | 'child'`（`checkStrictly` 时忽略）。内部仍按级联计算半选；`v-model:checked-keys` 按策略投影。虚拟滚动不做。
+默认插槽 `{ node, data }` 可自定义节点内容。`checkStrategy` 为 `'all' | 'parent' | 'child'`（`checkStrictly` 时忽略）。内部仍按级联计算半选；`v-model:checked-keys` 按策略投影。虚拟滚动本期不做。
 
 ## 引入
 
@@ -28,7 +28,7 @@ import { MTree } from 'morya-ui'
 
 ## Check strategy
 
-勾选父节点时，`check-strategy="child"` 只绑定叶子 key（对照 Naive `n-tree`）。
+勾选父节点时，`check-strategy="child"` 只绑定叶子 key。
 
 ```vue preview src="./demos/CheckStrategy.vue"
 ```

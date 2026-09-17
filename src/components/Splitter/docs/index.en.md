@@ -6,7 +6,7 @@ description: Two-pane resizable split layout (horizontal / vertical).
 
 # Splitter
 
-Split content into two panes with a draggable gutter. Covers common Naive `n-split` capabilities while keeping Wi percent sizing.
+Split content into two panes with a draggable gutter.
 
 ## Import
 
@@ -21,15 +21,15 @@ import { MSplitter } from 'morya-ui'
 
 ## Vertical / direction
 
-`layout` and Naive-style `direction` are equivalent.
+`layout` and `direction` are equivalent (`direction` is an alias).
 
 ```vue preview src="./demos/VerticalDirection.vue"
 ```
 
 ## Size modes
 
-- `number > 1`: percent (Wi default, e.g. `35` → 35%)
-- `number ≤ 1`: ratio (Naive, e.g. `0.35` → 35%)
+- `number > 1`: percent (e.g. `35` → 35%)
+- `number ≤ 1`: ratio (e.g. `0.35` → 35%)
 - `string`: pixels (e.g. `'120px'`)
 
 ```vue preview src="./demos/SizeModes.vue"
@@ -45,7 +45,7 @@ import { MSplitter } from 'morya-ui'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | Split direction. |
-| `direction` | same | — | Alias of `layout` (Naive). |
+| `direction` | same | — | Alias of `layout`. |
 | `size` | `number \| string` | — | Controlled size; `>1` = `%`, `≤1` = ratio, `'Npx'` = pixels. |
 | `defaultSize` | `number \| string` | `50` | Uncontrolled initial size. |
 | `min` / `max` | `number \| string` | mode-based | Bounds (same unit family as `size`). |

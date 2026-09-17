@@ -51,7 +51,7 @@ export interface FormProps {
   rules?: FormRules
   /** Label placement for FormItem children. */
   labelPosition?: FormLabelPosition
-  /** Alias of `labelPosition` (Naive `label-placement`). `labelPosition` wins. */
+  /** Alias of `labelPosition`. `labelPosition` wins. */
   labelPlacement?: FormLabelPosition
   /** Label text alignment. */
   labelAlign?: FormLabelAlign

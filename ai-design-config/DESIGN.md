@@ -108,7 +108,7 @@ import 'morya-ui/styles.css'
 
 ## 8. 禁止项
 
-- 禁止引入第二套 UI 库（Element Plus、Naive UI 等）混用同一页面。
+- 禁止引入第二套 UI 库混用同一页面。
 - 禁止在业务 CSS 中写死主题色；暗色模式必须能随 `[data-theme="dark"]` 生效。
 - 禁止用 `<div onclick>` 代替 `<button>` / `MButton`。
 - 禁止 Select 与 Dropdown 混用：选项选择用 `MSelect` / `MTreeSelect`；动作菜单用 `MDropdown`。

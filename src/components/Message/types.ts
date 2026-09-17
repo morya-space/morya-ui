@@ -44,7 +44,7 @@ export interface MessageProps {
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
   appendTo?: MAppendTo
-  /** Host placement. Default `top` (Naive MessageProvider). */
+  /** Host placement. Default `top`. */
   placement?: MessagePlacement
   /** Max visible messages; oldest is dropped. Omit for unlimited. */
   max?: number

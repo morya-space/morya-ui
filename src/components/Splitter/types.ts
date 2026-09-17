@@ -8,14 +8,14 @@ export type SplitterSize = number | string
 
 export interface SplitterProps {
   pt?: RootPassThrough
-  /** Split direction. Prefer this name; `direction` is a Naive-compatible alias. */
+  /** Split direction. Prefer this name; `direction` is an alias. */
   layout?: SplitterLayout
-  /** Alias of `layout` (Naive `n-split` naming). */
+  /** Alias of `layout`. */
   direction?: SplitterLayout
   /**
    * Controlled primary pane size.
-   * - number `> 1` → percent (0–100), Wi legacy
-   * - number `≤ 1` → ratio (0–1), Naive-compatible
+   * - number `> 1` → percent (0–100)
+   * - number `≤ 1` → ratio (0–1)
    * - string → CSS length, e.g. `'120px'`
    */
   size?: SplitterSize

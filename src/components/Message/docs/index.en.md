@@ -48,7 +48,7 @@ The first call auto-mounts a floating host; no template component is required.
 | `message.error(content \| options)` | Error |
 | `message.open(content \| options)` | Open with options |
 | `message.close(id?)` | Close one / all |
-| `message.closeAll()` / `message.destroyAll()` | Close all (`destroyAll` matches Naive) |
+| `message.closeAll()` / `message.destroyAll()` | Close all (aliases of each other) |
 | `message.config({ placement, max })` | Host placement and concurrency cap |
 
 Returns `{ id, close }`.

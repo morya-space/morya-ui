@@ -220,7 +220,7 @@ function computeLayouts(nodes: VNode[]): VNode[] {
     }
 
     return cloneVNode(item.node, {
-      // Naive includes offset in privateSpan for grid-column span.
+      // Offset is included in the grid-column span.
       privateSpan: childSpan,
       privateOffset: item.offset,
       privateColStart: colStart,

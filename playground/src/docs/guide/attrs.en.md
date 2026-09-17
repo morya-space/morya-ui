@@ -87,9 +87,9 @@ Typical keys:
 
 For full shapes of `FieldPassThrough`, `RootPassThrough`, and similar names in Props tables, see [API types](/docs/types).
 
-## Coming from PrimeVue
+## Where layout classes land
 
-If you are used to PrimeVue `pt` or putting `class` directly on the input: Morya field components keep layout classes on the outer wrapper so labels and help text stay aligned. In most migrations you can leave `class` on the component tag and call it done.
+Field components keep layout `class` / `style` on the outer root so labels and help text stay aligned with the control width. Put layout classes on the component tag; you usually do not need to rebind them onto the inner input.
 
 ## See also
 
