@@ -14,6 +14,7 @@ export const zhCN: MLocaleMessages = {
   result403: '无权访问',
   result404: '页面不存在',
   result500: '服务器错误',
+  result418: '我是个茶壶',
   searchPlaceholder: '搜索',
   datePickerPlaceholder: '选择日期',
   selectPlaceholder: '请选择',

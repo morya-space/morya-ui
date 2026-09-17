@@ -409,7 +409,11 @@ export type {
 export { default as MRating } from "./components/Rating/Rating.vue";
 export type { RatingEmits, RatingProps } from "./components/Rating/types";
 export { default as MResult } from "./components/Result/Result.vue";
-export type { ResultProps, ResultStatus } from "./components/Result/types";
+export type {
+  ResultProps,
+  ResultSize,
+  ResultStatus,
+} from "./components/Result/types";
 export { default as MScrollbar } from "./components/Scrollbar/Scrollbar.vue";
 export type {
   ScrollbarAriaOrientation,

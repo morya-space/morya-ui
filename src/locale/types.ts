@@ -15,6 +15,7 @@ export interface MLocaleConfig {
   result403?: string
   result404?: string
   result500?: string
+  result418?: string
   searchPlaceholder?: string
   datePickerPlaceholder?: string
   selectPlaceholder?: string
