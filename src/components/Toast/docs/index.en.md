@@ -10,7 +10,7 @@ Corner notifications with a title and optional detail. Use the `toast` API, or k
 
 Vs [Message](/components/Message): Message is the **default** for short single-line feedback; Toast is for `summary` / `detail` or corner notifications. `max` applies to the service queue only.
 
-> Selection guide: [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md).
+> Selection guide: [`feedback-message-vs-toast.md`](../../../../design-kit/docs/feedback-message-vs-toast.md).
 
 Do **not** use `toast.add({ summary: 'Saved' })` when `message.success('Saved')` is enough.
 

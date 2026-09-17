@@ -15,12 +15,12 @@
  *   declared-unused  types.ts 声明但源码无引用 / 无 emit 调用（启发式，需人工确认）
  *
  * 用法：
- *   node ai-design-config/scripts/check-docs-drift.mjs                     打印控制台报告
- *   node ai-design-config/scripts/check-docs-drift.mjs --component Select  只查一个组件
- *   node ai-design-config/scripts/check-docs-drift.mjs --json              输出 JSON（请用脚本内 writeFileSync，勿用 shell 重定向）
- *   node ai-design-config/scripts/check-docs-drift.mjs --md [path]         生成 Markdown 报告（可选 path，默认不写文件）
- *   node ai-design-config/scripts/check-docs-drift.mjs --patch             按实现补齐 docs/index.md（impl-only）
- *   node ai-design-config/scripts/check-docs-drift.mjs --patch --dry-run   预览补丁，不写文件
+ *   node design-kit/scripts/check-docs-drift.mjs                     打印控制台报告
+ *   node design-kit/scripts/check-docs-drift.mjs --component Select  只查一个组件
+ *   node design-kit/scripts/check-docs-drift.mjs --json              输出 JSON（请用脚本内 writeFileSync，勿用 shell 重定向）
+ *   node design-kit/scripts/check-docs-drift.mjs --md [path]         生成 Markdown 报告（可选 path，默认不写文件）
+ *   node design-kit/scripts/check-docs-drift.mjs --patch             按实现补齐 docs/index.md（impl-only）
+ *   node design-kit/scripts/check-docs-drift.mjs --patch --dry-run   预览补丁，不写文件
  *
  * 报告模式：无论是否存在漂移，exit code 恒为 0。
  */
@@ -1048,8 +1048,8 @@ function buildMarkdown(results) {
   const out = []
   out.push('# 文档-实现漂移清单（docs drift report）')
   out.push('')
-  out.push('> 由 `ai-design-config/scripts/check-docs-drift.mjs` 生成（报告模式，exit code 恒 0）。')
-  out.push('> 重新生成：`node ai-design-config/scripts/check-docs-drift.mjs --md`')
+  out.push('> 由 `design-kit/scripts/check-docs-drift.mjs` 生成（报告模式，exit code 恒 0）。')
+  out.push('> 重新生成：`node design-kit/scripts/check-docs-drift.mjs --md`')
   out.push(`> 基准日期：2026-09-02；扫描组件 ${results.length} 个；漂移条目 ${total} 条。`)
   out.push('')
   out.push('## 类别说明')

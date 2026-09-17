@@ -57,7 +57,7 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 const bundledDir = join(pkgRoot, 'data/golden-pages')
-const repoDir = join(pkgRoot, '../../ai-design-config/docs/golden-pages')
+const repoDir = join(pkgRoot, '../../design-kit/docs/golden-pages')
 
 function resolveGoldenPagesDir(): string | null {
   if (existsSync(bundledDir)) return bundledDir

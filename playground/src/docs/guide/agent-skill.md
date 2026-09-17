@@ -20,7 +20,7 @@ description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分�
 
 支持 Agent Skills 自动发现的客户端（如 Cursor）会从 `.agents/skills` 读取。生成列表 / 表单 / 登录 / 落地等页面前，应优先匹配本 skill。
 
-源文件在仓库 [`ai-design-config/.agents/skills/morya-ui-pages/`](https://github.com/morya-space/morya-ui/tree/main/ai-design-config/.agents/skills/morya-ui-pages)，随 `@morya-ui/setup` 的 template 同步。
+源文件在仓库 [`design-kit/.agents/skills/morya-ui-pages/`](https://github.com/morya-space/morya-ui/tree/main/design-kit/.agents/skills/morya-ui-pages)，随 `@morya-ui/setup` 的 template 同步。
 
 ## 何时触发
 

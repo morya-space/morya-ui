@@ -59,7 +59,7 @@ npx @morya-ui/setup --skip-install --skip-template --skip-styles --skip-scripts
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
 | `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp`） |
 
-模板源在仓库 [`ai-design-config/`](https://github.com/morya-space/morya-ui/tree/main/ai-design-config)；CLI 细节见 [`packages/setup`](https://github.com/morya-space/morya-ui/tree/main/packages/setup)。
+模板源在仓库 [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit)；CLI 细节见 [`packages/setup`](https://github.com/morya-space/morya-ui/tree/main/packages/setup)。
 
 ## 与 Skill / MCP 的关系
 
