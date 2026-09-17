@@ -59,7 +59,7 @@ npx @morya-ui/setup --skip-install --skip-template --skip-styles --skip-scripts
 | `scripts/check-raw-colors.mjs` | Raw color scan |
 | `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp`) |
 
-Template source: [`ai-design-config/`](https://github.com/morya-space/morya-ui/tree/main/ai-design-config). CLI details: [`packages/setup`](https://github.com/morya-space/morya-ui/tree/main/packages/setup).
+Template source: [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit). CLI details: [`packages/setup`](https://github.com/morya-space/morya-ui/tree/main/packages/setup).
 
 ## Relation to Skill / MCP
 

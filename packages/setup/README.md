@@ -7,7 +7,7 @@ Docs (zh/en):
 - [AI setup](https://morya-space.github.io/morya-ui/docs/ai-setup) — one-shot CLI
 - [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
 
-Installs the UI library, copies Agent skill / Cursor rules / design docs from `ai-design-config`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), injects `import 'morya-ui/styles.css'`, and writes `src/styles/morya-app-shell.css` with its entry import.
+Installs the UI library, copies Agent skill / Cursor rules / design docs from `design-kit`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), injects `import 'morya-ui/styles.css'`, and writes `src/styles/morya-app-shell.css` with its entry import.
 
 ## Usage
 
@@ -41,7 +41,7 @@ npx @morya-ui/setup
 
 ### What gets copied
 
-From the package `template/` (synced from repo `ai-design-config/`):
+From the package `template/` (synced from repo `design-kit/`):
 
 - `DESIGN.md`
 - `.agents/skills/morya-ui-pages/`
@@ -85,7 +85,7 @@ The CLI does **not** call `app.use(MoryaUI)` or edit `App.vue`.
 ## Local development (this monorepo)
 
 ```bash
-pnpm setup:sync-template   # refresh packages/setup/template from ai-design-config
+pnpm setup:sync-template   # refresh packages/setup/template from design-kit
 pnpm setup:build
 node packages/setup/bin/morya-ui-setup.js --cwd /path/to/app --dry-run
 ```

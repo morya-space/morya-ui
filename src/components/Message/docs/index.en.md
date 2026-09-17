@@ -14,7 +14,7 @@ Vs [Toast](/components/Toast):
 - **Toast**: corner notifications with `summary` / `detail`; use only when supplementary detail is needed.
 - **`<MMessage>` component**: inline banner for persistent form/auth errors.
 
-> Selection guide: [`feedback-message-vs-toast.md`](../../../../ai-design-config/docs/feedback-message-vs-toast.md).
+> Selection guide: [`feedback-message-vs-toast.md`](../../../../design-kit/docs/feedback-message-vs-toast.md).
 
 **Rule of thumb**: one short sentence → `message.success('Saved')`; title + detail → `toast.success({ summary, detail })`.
 

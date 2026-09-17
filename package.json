@@ -725,9 +725,9 @@
     "mcp:start": "pnpm --filter @morya-ui/mcp start",
     "setup:sync-template": "pnpm --filter @morya-ui/setup sync-template",
     "setup:build": "pnpm --filter @morya-ui/setup build",
-    "check:colors": "node ai-design-config/scripts/check-raw-colors.mjs src ai-design-config/docs/golden-pages ai-design-config/src/examples",
-    "check:tokens": "node ai-design-config/scripts/check-undefined-tokens.mjs src",
-    "check:docs": "node ai-design-config/scripts/check-docs-drift.mjs"
+    "check:colors": "node design-kit/scripts/check-raw-colors.mjs src design-kit/docs/golden-pages design-kit/src/examples",
+    "check:tokens": "node design-kit/scripts/check-undefined-tokens.mjs src",
+    "check:docs": "node design-kit/scripts/check-docs-drift.mjs"
   },
   "peerDependencies": {
     "vue": "^3.3.0"

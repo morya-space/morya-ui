@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const here = dirname(fileURLToPath(import.meta.url))
 const pkgRoot = join(here, '..')
 const repoRoot = join(pkgRoot, '../..')
-const sourceDir = join(repoRoot, 'ai-design-config/docs/golden-pages')
+const sourceDir = join(repoRoot, 'design-kit/docs/golden-pages')
 const targetDir = join(pkgRoot, 'data/golden-pages')
 
 if (!existsSync(sourceDir)) {
