@@ -5,17 +5,17 @@ export interface PaginationProps {
   modelValue?: number
   totalRecords: number
   rows?: number
-  /** Alias of `rows` (Naive `page-size`). `pageSize` wins when both are set. */
+  /** Alias of `rows`. `pageSize` wins when both are set. */
   pageSize?: number
   pageLinkSize?: number
   disabled?: boolean
-  /** Show a page-size `<select>` (Naive `show-size-picker`). */
+  /** Show a page-size `<select>`. */
   showSizePicker?: boolean
   /** Options for `showSizePicker`. */
   pageSizes?: number[]
-  /** Jump-to-page input (Naive `show-quick-jumper`). */
+  /** Jump-to-page input. */
   showQuickJumper?: boolean
-  /** Compact prev / current / next (Naive `simple`). */
+  /** Compact prev / current / next. */
   simple?: boolean
 }
 

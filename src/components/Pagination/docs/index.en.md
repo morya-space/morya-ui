@@ -8,7 +8,7 @@ description: Pagination. v-model is the page number. The instance exposes first 
 
 Pagination. `v-model` uses a **1-based page number**. The instance property `first` is the zero-based index of the first record on the page: `(page - 1) * rows`.
 
-Naive mapping: `pageSize` is an alias of `rows` (`pageSize` wins when both are set). `showSizePicker` / `showQuickJumper` / `simple` cover the common `n-pagination` subset.
+`pageSize` is an alias of `rows` (`pageSize` wins when both are set). Also supports `showSizePicker`, `showQuickJumper`, and `simple`.
 
 ## Import
 
@@ -33,7 +33,7 @@ import { MPagination } from 'morya-ui'
 | `modelValue` | `number` | `1` | Current page (1-based). |
 | `totalRecords` | `number` | — | Total number of records. |
 | `rows` | `number` | `10` | Rows per page. |
-| `pageSize` | `number` | — | Alias of `rows` (Naive `page-size`); `pageSize` wins when both are set. |
+| `pageSize` | `number` | — | Alias of `rows`; `pageSize` wins when both are set. |
 | `pageLinkSize` | `number` | `5` | Number of page link buttons. |
 | `showSizePicker` | `boolean` | `false` | Show the page-size select. |
 | `pageSizes` | `number[]` | `[10, 20, 50, 100]` | Options for `showSizePicker`. |

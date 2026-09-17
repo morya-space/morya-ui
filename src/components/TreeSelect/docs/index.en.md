@@ -6,7 +6,7 @@ description: Tree select in a dropdown. Supports single/multiple, cascade checks
 
 # TreeSelect
 
-Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-select. `filterable`, `clearable`, and `showPath` cover the common `n-tree-select` subset.
+Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-select; `filterable`, `clearable`, and `showPath` are also available.
 
 ## Import
 

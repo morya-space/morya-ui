@@ -87,9 +87,9 @@ Dialog、Drawer 会 Teleport，`class` / `style` 加在**遮罩层**（backdrop�
 
 `FieldPassThrough`、`RootPassThrough` 等在 Props 表里的具体结构，见 [API 类型](/docs/types)。
 
-## 与 PrimeVue / 其它库的差异
+## 布局 class 落在哪里
 
-若你习惯 PrimeVue 的 `pt` 或把 `class` 直接写到 input 上：Morya 字段组件故意把布局类留在外层，避免 label/help 和输入框宽度对不齐。迁移时把布局 `class` 留在组件标签上即可，一般不用改模板结构。
+字段组件把布局相关的 `class` / `style` 留在外层根节点，避免 label、help 与输入框宽度对不齐。把布局 `class` 写在组件标签上即可，一般不必改模板结构或改绑到内部 input。
 
 ## 相关文档
 

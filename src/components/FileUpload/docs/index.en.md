@@ -8,16 +8,7 @@ description: Select, drag, list, preview, and upload.
 
 Pick local files. Supports click-to-choose, drag-and-drop, text / picture lists, a picture-card wall, and real uploads via `action` or `httpRequest`. `select` still emits the chosen `File[]`; the full list is `v-model:file-list`. The file list is shown by default; files upload automatically when `action` or `httpRequest` is set.
 
-**Naive `n-upload` name map:**
-
-| Naive | Wi |
-| --- | --- |
-| `action` | `action` |
-| `file-list` | `fileList` (`v-model:file-list`) |
-| `list-type` | `listType` |
-| `directory` | `directory` (`webkitdirectory`; folder pick where the browser supports it) |
-| `custom-request` | `httpRequest` |
-| `name` | `name` |
+Common options: `action` / `httpRequest` for real uploads, `v-model:file-list` for the queue, `listType` for list chrome, and `directory` for folder pick when the browser supports it.
 
 Queue UI extras are out of scope this batch.
 

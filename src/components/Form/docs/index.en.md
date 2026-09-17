@@ -13,7 +13,7 @@ description: Form layout and field validation. Declarative rules, label alignmen
 
 Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and native submit (when `validateOn` includes `submit`) run every rule on the field.
 
-**Difference from Naive UI:** there is no `async-validator` dependency. `validate()` **always resolves** `{ valid, errors }` and does not `reject` on failure. Nested paths such as `user.name` are not supported; use flat field names.
+**Validation contract:** no external schema validator dependency. `validate()` **always resolves** `{ valid, errors }` and does not `reject` on failure. Nested paths such as `user.name` are not supported; use flat field names.
 
 ## Import
 
@@ -44,7 +44,7 @@ import { MForm, MFormItem } from 'morya-ui'
 | `model` | `Record<string, unknown>` | — | Values read by `rules` |
 | `rules` | `FormRules` | — | Rules keyed by field `name` |
 | `labelPosition` | `'top' \| 'left'` | `'top'` | Label placement |
-| `labelPlacement` | `'top' \| 'left'` | — | Alias of `labelPosition` (Naive) |
+| `labelPlacement` | `'top' \| 'left'` | — | Alias of `labelPosition` |
 | `labelAlign` | `'left' \| 'center' \| 'right'` | `'left'` | Label text alignment |
 | `labelWidth` | `string \| number` | — | Left label width; numbers are px |
 | `inline` | `boolean` | `false` | Place items in a wrapping row |

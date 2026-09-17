@@ -8,7 +8,7 @@ description: Tree structure. Supports check with indeterminate state, filter, co
 
 Hierarchical node tree with expand, check, filter, and drag-and-drop.
 
-**Naive differences:** the default slot `{ node, data }` customizes node content. `checkStrategy` is `'all' | 'parent' | 'child'` (ignored when `checkStrictly`). Cascade still drives the UI; `v-model:checked-keys` is projected by strategy. Virtual scroll is out of scope.
+The default slot `{ node, data }` customizes node content. `checkStrategy` is `'all' | 'parent' | 'child'` (ignored when `checkStrictly`). Cascade still drives the UI; `v-model:checked-keys` is projected by strategy. Virtual scroll is out of scope.
 
 ## Import
 
@@ -28,7 +28,7 @@ import { MTree } from 'morya-ui'
 
 ## Check strategy
 
-With `check-strategy="child"`, checking a parent binds leaf keys only (Naive `n-tree`).
+With `check-strategy="child"`, checking a parent binds leaf keys only.
 
 ```vue preview src="./demos/CheckStrategy.vue"
 ```

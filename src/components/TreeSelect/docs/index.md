@@ -6,7 +6,7 @@ description: 下拉树选择。支持单选/多选、勾选级联、过滤、清
 
 # TreeSelect
 
-在下拉中展示可展开树。`multiple` / `checkable` 打开多选；`filterable`、`clearable`、`showPath` 对照 Naive `n-tree-select` 常用能力。
+在下拉中展示可展开树。`multiple` / `checkable` 打开多选；另支持 `filterable`、`clearable`、`showPath`。
 
 ## 引入
 

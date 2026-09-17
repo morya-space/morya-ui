@@ -48,7 +48,7 @@ import { message, MMessage, useMessage } from 'morya-ui'
 | `message.error(content \| options)` | 错误提示 |
 | `message.open(content \| options)` | 自定义打开 |
 | `message.close(id?)` | 关闭指定 / 全部 |
-| `message.closeAll()` / `message.destroyAll()` | 关闭全部（`destroyAll` 对齐 Naive） |
+| `message.closeAll()` / `message.destroyAll()` | 关闭全部（二者等价） |
 | `message.config({ placement, max })` | 宿主位置与并发上限 |
 
 返回值：`{ id, close }`。

@@ -37,7 +37,7 @@ describe('muGrid', () => {
     expect(items[2]!.element.style.display).toBe('none')
   })
 
-  it('applies offset into grid-column span like naive-ui', async () => {
+  it('applies offset into grid-column span', async () => {
     const wrapper = mount(MGrid, {
       props: { cols: 24 },
       slots: {

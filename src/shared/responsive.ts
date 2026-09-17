@@ -1,4 +1,4 @@
-/** Naive-compatible breakpoint map (min-width, px). */
+/** Breakpoint map (min-width, px). */
 export const M_BREAKPOINTS = {
   xs: 0,
   s: 640,
