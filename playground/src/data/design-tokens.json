@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T03:45:16.279Z",
+  "generatedAt": "2026-09-17T09:38:12.593Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 321,
+  "tokenCount": 331,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1447,20 +1447,50 @@
       }
     },
     {
-      "name": "--m-empty-mark-size",
+      "name": "--m-empty-font-size",
       "category": "component",
       "source": "src/components/Empty/styles.css",
-      "default": "3.25rem",
+      "default": "var(--m-font-size-lg)",
       "description": {
-        "zh-CN": "组件专用相关变量：Empty Mark Size",
-        "en-US": "Component-specific token: Empty Mark Size"
+        "zh-CN": "组件专用相关变量：Empty Font Size",
+        "en-US": "Component-specific token: Empty Font Size"
+      }
+    },
+    {
+      "name": "--m-empty-icon-size",
+      "category": "component",
+      "source": "src/components/Empty/styles.css",
+      "default": "2.5rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Empty Icon Size",
+        "en-US": "Component-specific token: Empty Icon Size"
+      }
+    },
+    {
+      "name": "--m-empty-illustration-height",
+      "category": "component",
+      "source": "src/components/Empty/styles.css",
+      "default": "7.75rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Empty Illustration Height",
+        "en-US": "Component-specific token: Empty Illustration Height"
+      }
+    },
+    {
+      "name": "--m-empty-illustration-width",
+      "category": "component",
+      "source": "src/components/Empty/styles.css",
+      "default": "15rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Empty Illustration Width",
+        "en-US": "Component-specific token: Empty Illustration Width"
       }
     },
     {
       "name": "--m-empty-max-width",
       "category": "component",
       "source": "src/components/Empty/styles.css",
-      "default": "28rem",
+      "default": "20rem",
       "description": {
         "zh-CN": "组件专用相关变量：Empty Max Width",
         "en-US": "Component-specific token: Empty Max Width"
@@ -2588,40 +2618,80 @@
       }
     },
     {
+      "name": "--m-result-desc-max-width",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "25rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Desc Max Width",
+        "en-US": "Component-specific token: Result Desc Max Width"
+      }
+    },
+    {
+      "name": "--m-result-footer-margin",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "2.25rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Footer Margin",
+        "en-US": "Component-specific token: Result Footer Margin"
+      }
+    },
+    {
       "name": "--m-result-glyph-size",
       "category": "component",
       "source": "src/components/Result/styles.css",
-      "default": "1.75rem",
+      "default": "2.5rem",
       "description": {
         "zh-CN": "组件专用相关变量：Result Glyph Size",
         "en-US": "Component-specific token: Result Glyph Size"
       }
     },
     {
+      "name": "--m-result-icon-margin",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "var(--m-space-6)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Icon Margin",
+        "en-US": "Component-specific token: Result Icon Margin"
+      }
+    },
+    {
       "name": "--m-result-icon-size",
       "category": "component",
       "source": "src/components/Result/styles.css",
-      "default": "4rem",
+      "default": "5.25rem",
       "description": {
         "zh-CN": "组件专用相关变量：Result Icon Size",
         "en-US": "Component-specific token: Result Icon Size"
       }
     },
     {
-      "name": "--m-result-max-width",
+      "name": "--m-result-illustration-height",
       "category": "component",
       "source": "src/components/Result/styles.css",
-      "default": "32rem",
+      "default": "11rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Result Max Width",
-        "en-US": "Component-specific token: Result Max Width"
+        "zh-CN": "组件专用相关变量：Result Illustration Height",
+        "en-US": "Component-specific token: Result Illustration Height"
+      }
+    },
+    {
+      "name": "--m-result-illustration-width",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "19rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Illustration Width",
+        "en-US": "Component-specific token: Result Illustration Width"
       }
     },
     {
       "name": "--m-result-title-size",
       "category": "component",
       "source": "src/components/Result/styles.css",
-      "default": "1.35rem",
+      "default": "1.75rem",
       "description": {
         "zh-CN": "组件专用相关变量：Result Title Size",
         "en-US": "Component-specific token: Result Title Size"
@@ -2631,10 +2701,20 @@
       "name": "--m-result-tone",
       "category": "component",
       "source": "src/components/Result/styles.css",
-      "default": "var(--m-color-text-muted)",
+      "default": "var(--m-color-primary)",
       "description": {
         "zh-CN": "组件专用相关变量：Result Tone",
         "en-US": "Component-specific token: Result Tone"
+      }
+    },
+    {
+      "name": "--m-result-tone-bg",
+      "category": "component",
+      "source": "src/components/Result/styles.css",
+      "default": "color-mix( in srgb, var(--m-result-tone) 14%, var(--m-color-surface) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Result Tone Bg",
+        "en-US": "Component-specific token: Result Tone Bg"
       }
     },
     {
@@ -3059,10 +3139,30 @@
       "name": "--m-status-dot-size",
       "category": "component",
       "source": "src/components/Status/styles.css",
-      "default": "0.625rem",
+      "default": "0.375rem",
       "description": {
         "zh-CN": "组件专用相关变量：Status Dot Size",
         "en-US": "Component-specific token: Status Dot Size"
+      }
+    },
+    {
+      "name": "--m-status-icon-size",
+      "category": "component",
+      "source": "src/components/Status/styles.css",
+      "default": "1.125rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Status Icon Size",
+        "en-US": "Component-specific token: Status Icon Size"
+      }
+    },
+    {
+      "name": "--m-status-soft-bg",
+      "category": "component",
+      "source": "src/components/Status/styles.css",
+      "default": "color-mix(in srgb, currentColor 16%, transparent)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Status Soft Bg",
+        "en-US": "Component-specific token: Status Soft Bg"
       }
     },
     {
