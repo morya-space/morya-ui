@@ -14,6 +14,7 @@ export const enUS: MLocaleMessages = {
   result403: 'Forbidden',
   result404: 'Not Found',
   result500: 'Server Error',
+  result418: "I'm a teapot",
   searchPlaceholder: 'Search',
   datePickerPlaceholder: 'Select date',
   selectPlaceholder: 'Select',

@@ -5,11 +5,12 @@ import { MButton, MResult } from 'morya-ui'
 <template>
   <div class="grid gap-8">
     <MResult status="403" description="You do not have permission to access this resource.">
-      <template #extra>
+      <template #footer>
         <MButton label="Go back" severity="secondary" />
       </template>
     </MResult>
     <MResult status="404" description="This page does not exist or was removed." />
     <MResult status="500" description="The service is temporarily unavailable. Try again later." />
+    <MResult :status="('418' as any)" description="The server refuses to brew coffee." />
   </div>
 </template>
