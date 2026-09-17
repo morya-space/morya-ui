@@ -1,0 +1,72 @@
+[
+  {
+    "key": "no-content",
+    "file": "no-content.svg",
+    "bytes": 5981
+  },
+  {
+    "key": "no-result",
+    "file": "no-result.svg",
+    "bytes": 6793
+  },
+  {
+    "key": "no-message",
+    "file": "no-message.svg",
+    "bytes": 5620
+  },
+  {
+    "key": "no-schedule",
+    "file": "no-schedule.svg",
+    "bytes": 11103
+  },
+  {
+    "key": "no-issue",
+    "file": "no-issue.svg",
+    "bytes": 6628
+  },
+  {
+    "key": "network-error",
+    "file": "network-error.svg",
+    "bytes": 8106
+  },
+  {
+    "key": "server-error",
+    "file": "server-error.svg",
+    "bytes": 7097
+  },
+  {
+    "key": "building",
+    "file": "building.svg",
+    "bytes": 4914
+  },
+  {
+    "key": "churn-high",
+    "file": "churn-high.svg",
+    "bytes": 6500
+  },
+  {
+    "key": "conversion-low",
+    "file": "conversion-low.svg",
+    "bytes": 7812
+  },
+  {
+    "key": "activity-low",
+    "file": "activity-low.svg",
+    "bytes": 8259
+  },
+  {
+    "key": "profile-unclear",
+    "file": "profile-unclear.svg",
+    "bytes": 7186
+  },
+  {
+    "key": "input-irregular",
+    "file": "input-irregular.svg",
+    "bytes": 6506
+  },
+  {
+    "key": "payment-cycle-long",
+    "file": "payment-cycle-long.svg",
+    "bytes": 8006
+  }
+]

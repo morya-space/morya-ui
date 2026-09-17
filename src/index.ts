@@ -162,8 +162,20 @@ export type {
   DropdownProps,
   DropdownTrigger,
 } from "./components/Dropdown/types";
+export type {
+  EmptyIllustration,
+  EmptyOutcomeIllustration,
+  EmptyPreset,
+} from "./components/Empty/illustrations";
+export {
+  EMPTY_ILLUSTRATION_KEYS,
+  EMPTY_OUTCOME_KEYS,
+  EMPTY_PRESET_KEYS,
+  isEmptyIllustration,
+  loadEmptyIllustration,
+} from "./components/Empty/illustrations";
 export { default as MEmpty } from "./components/Empty/Empty.vue";
-export type { EmptyProps } from "./components/Empty/types";
+export type { EmptyProps, EmptySize } from "./components/Empty/types";
 export { default as MFieldset } from "./components/Fieldset/Fieldset.vue";
 export type { FieldsetEmits, FieldsetProps } from "./components/Fieldset/types";
 export { default as MFileUpload } from "./components/FileUpload/FileUpload.vue";
