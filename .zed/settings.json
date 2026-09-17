@@ -6,14 +6,6 @@
         "args": ["-y", "icons-mcp"]
       }
     },
-    "primevue": {
-      "command": "npx",
-      "args": ["-y", "@primevue/mcp"]
-    },
-    "morya-ui": {
-      "command": "node",
-      "args": ["packages/ui-mcp/bin/morya-ui-mcp.js"]
-    }
   },
   "format_on_save": "on"
 }
