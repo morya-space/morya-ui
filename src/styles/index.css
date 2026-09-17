@@ -32,6 +32,7 @@
 @import "../components/ProgressSpinner/styles.css";
 @import "../components/Badge/styles.css";
 @import "../components/Message/styles.css";
+@import "../components/Status/styles.css";
 @import "../components/Result/styles.css";
 @import "../components/Empty/styles.css";
 @import "../components/Skeleton/styles.css";

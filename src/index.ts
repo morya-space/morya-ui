@@ -490,6 +490,7 @@ export type {
   StatusProps,
   StatusSeverity,
   StatusSize,
+  StatusVariant,
 } from "./components/Status/types";
 export { default as MStepper } from "./components/Stepper/Stepper.vue";
 export type {
