@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-16T08:52:49.016Z",
-  "catalogGeneratedAt": "2026-09-16T08:52:44.900Z",
+  "generatedAt": "2026-09-18T07:52:19.611Z",
+  "catalogGeneratedAt": "2026-09-18T07:52:14.544Z",
   "components": [
     {
       "id": "Accordion",
@@ -844,12 +844,15 @@
     {
       "id": "Empty",
       "exportName": "MEmpty",
-      "examples": 8,
+      "examples": 12,
       "props": {
-        "total": 5,
-        "covered": 3,
+        "total": 10,
+        "covered": 5,
         "missing": [
+          "showDescription",
+          "showIcon",
           "image",
+          "size",
           "pt"
         ]
       },
@@ -859,13 +862,12 @@
         "missing": []
       },
       "slots": {
-        "total": 6,
+        "total": 5,
         "covered": 2,
         "missing": [
           "icon",
           "image",
-          "title",
-          "description"
+          "title"
         ]
       },
       "methods": {
@@ -2085,12 +2087,11 @@
     {
       "id": "Result",
       "exportName": "MResult",
-      "examples": 8,
+      "examples": 10,
       "props": {
-        "total": 5,
-        "covered": 2,
+        "total": 6,
+        "covered": 4,
         "missing": [
-          "title",
           "icon",
           "pt"
         ]
@@ -2501,10 +2502,10 @@
     {
       "id": "Status",
       "exportName": "MStatus",
-      "examples": 8,
+      "examples": 10,
       "props": {
-        "total": 5,
-        "covered": 4,
+        "total": 8,
+        "covered": 7,
         "missing": [
           "color"
         ]
@@ -2515,9 +2516,11 @@
         "missing": []
       },
       "slots": {
-        "total": 1,
+        "total": 2,
         "covered": 1,
-        "missing": []
+        "missing": [
+          "icon"
+        ]
       },
       "methods": {
         "total": 0,
@@ -3193,6 +3196,6 @@
   "summary": {
     "components": 92,
     "componentsWithMissingCoverage": 87,
-    "totalExamples": 781
+    "totalExamples": 789
   }
 }

@@ -1,5 +1,27 @@
 # morya-ui
 
+## 0.2.7
+
+### 新功能
+
+- add variant and unify status presentation styles
+- redesign Result API and HTTP illustrations
+- add illustration catalog and enhance empty states
+
+### 修复
+
+- Menu RouterLink, Dialog panel width, and Tree indeterminate state
+
+### 文档
+
+- add one-shot setup guide page
+- remove other-library comparison wording from docs and comments
+
+### 变更
+
+- rename ai-design-config to design-kit
+- sync design tokens for Empty, Result, and Status
+
 ## 0.2.6
 
 ### 新功能
