@@ -21,10 +21,26 @@ function listFiles(dir) {
 }
 
 /**
+ * @param {string} rel
+ * @param {string[] | undefined} include
+ */
+function matchesInclude(rel, include) {
+  if (!include || include.length === 0) return true
+  const norm = rel.replace(/\\/g, '/')
+  return include.some((prefix) => {
+    const p = prefix.replace(/\\/g, '/')
+    return norm === p || norm.startsWith(`${p}/`)
+  })
+}
+
+/**
  * Copy template tree into target cwd.
+ * @param {string} templateRoot
+ * @param {string} cwd
+ * @param {{ force?: boolean, dryRun?: boolean, include?: string[] }} [options]
  * @returns {{ copied: string[], skipped: string[], forced: string[] }}
  */
-export function copyTemplate(templateRoot, cwd, { force = false, dryRun = false } = {}) {
+export function copyTemplate(templateRoot, cwd, { force = false, dryRun = false, include } = {}) {
   const copied = []
   const skipped = []
   const forced = []
@@ -35,7 +51,7 @@ export function copyTemplate(templateRoot, cwd, { force = false, dryRun = false 
     )
   }
 
-  const files = listFiles(templateRoot)
+  const files = listFiles(templateRoot).filter((rel) => matchesInclude(rel, include))
   for (const rel of files) {
     const from = join(templateRoot, rel)
     const to = join(cwd, rel)

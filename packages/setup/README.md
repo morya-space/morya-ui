@@ -4,8 +4,10 @@ One-shot setup for consumer Vue projects using [`morya-ui`](https://www.npmjs.co
 
 Docs (zh/en):
 
-- [AI setup](https://morya-space.github.io/morya-ui/docs/ai-setup) — one-shot CLI
+- [One-shot setup](https://morya-space.github.io/morya-ui/docs/setup) — CLI commands and options
+- [AI setup](https://morya-space.github.io/morya-ui/docs/ai-setup) — Agent workflow
 - [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
+- [Quick start](https://morya-space.github.io/morya-ui/docs/quick-start) — install and first component
 
 Installs the UI library, copies Agent skill / Cursor rules / design docs from `design-kit`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), injects `import 'morya-ui/styles.css'`, and writes `src/styles/morya-app-shell.css` with its entry import.
 
@@ -15,6 +17,16 @@ In your app project root:
 
 ```bash
 npx @morya-ui/setup
+```
+
+Other common commands:
+
+```bash
+# AI config + MCP only (library already installed)
+npx @morya-ui/setup ai
+
+# Library + styles only
+npx @morya-ui/setup app
 ```
 
 ### Options
@@ -31,6 +43,12 @@ npx @morya-ui/setup
 | `--skip-styles` | Do not inject `styles.css` / write app-shell CSS |
 | `--skip-scripts` | Do not add `check:colors` to `package.json` |
 | `-h`, `--help` | Show help |
+
+Example: MCP only:
+
+```bash
+npx @morya-ui/setup ai --skip-template --skip-scripts
+```
 
 ### Conflict policy
 
@@ -50,7 +68,8 @@ From the package `template/` (synced from repo `design-kit/`):
 - `design-tokens/`
 - `scripts/check-raw-colors.mjs`
 - `src/examples/`
-- `src/styles/morya-app-shell.css`
+
+`morya-app-shell.css` is written by the CLI (not copied from the template tree).
 
 ### MCP (Cursor)
 

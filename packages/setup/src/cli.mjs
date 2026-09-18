@@ -1,6 +1,8 @@
+import { existsSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { copyTemplate } from './copy-template.mjs'
+import { readJson } from './fs-utils.mjs'
 import { installMoryaUi } from './install.mjs'
 import { mergeMcpConfig } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
@@ -9,6 +11,26 @@ import { ensureShellStyles, ensureStylesImport } from './styles.mjs'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PKG_ROOT = resolve(__dirname, '..')
 const TEMPLATE_ROOT = join(PKG_ROOT, 'template')
+
+const MODES = new Set(['app', 'ai', 'full'])
+
+/** AI pack paths under template/ (excludes runtime src/styles — owned by app mode). */
+const AI_TEMPLATE_INCLUDE = [
+  'DESIGN.md',
+  '.agents/skills/morya-ui-pages',
+  '.cursor/rules',
+  'docs',
+  'design-tokens',
+  'scripts/check-raw-colors.mjs',
+  'src/examples',
+]
+
+/** Mode → default skips (user --skip-* can only add more skips). */
+const MODE_DEFAULTS = {
+  full: {},
+  app: { skipTemplate: true, skipMcp: true, skipScripts: true },
+  ai: { skipInstall: true, skipStyles: true },
+}
 
 const SKIP_FLAGS = {
   '--skip-install': 'skipInstall',
@@ -19,14 +41,20 @@ const SKIP_FLAGS = {
 }
 
 export function printHelp() {
-  console.log(`Usage: morya-ui-setup [options]
+  console.log(`Usage: morya-ui-setup [command] [options]
 
-One-shot setup for morya-ui in a consumer Vue project:
+Commands:
+  (default) / full  Install morya-ui, AI template, MCP, styles, check:colors
+  app               Install morya-ui and inject styles / app-shell CSS
+  ai                Copy Agent skill / rules / DESIGN / docs / tokens / examples,
+                    merge Cursor MCP, add check:colors
+
+Default command:
   - install morya-ui
   - copy DESIGN.md, Agent skill, Cursor rules, docs, tokens, examples
   - merge .cursor/mcp.json for @morya-ui/mcp
   - inject import 'morya-ui/styles.css' into the app entry when found
-  - write src/styles/morya-app-shell.css (html/body/#app height chain) and inject its import
+  - write src/styles/morya-app-shell.css and inject its import
   - add check:colors script when missing
 
 Options:
@@ -48,6 +76,7 @@ Options:
  */
 export function parseArgs(argv) {
   const options = {
+    mode: 'full',
     cwd: process.cwd(),
     pm: undefined,
     force: false,
@@ -64,6 +93,10 @@ export function parseArgs(argv) {
     const arg = argv[i]
     if (arg === '-h' || arg === '--help') {
       options.help = true
+      continue
+    }
+    if (MODES.has(arg)) {
+      options.mode = arg
       continue
     }
     if (arg === '--force') {
@@ -101,6 +134,11 @@ export function parseArgs(argv) {
     throw new Error(`Unknown argument: ${arg}`)
   }
 
+  const defaults = MODE_DEFAULTS[options.mode] || {}
+  for (const [key, value] of Object.entries(defaults)) {
+    if (value) options[key] = true
+  }
+
   return options
 }
 
@@ -110,10 +148,29 @@ function rel(cwd, path) {
 }
 
 /**
+ * @param {string} cwd
+ */
+function hasMoryaUiDependency(cwd) {
+  const path = join(cwd, 'package.json')
+  if (!existsSync(path)) return false
+  try {
+    const pkg = readJson(path)
+    return Boolean(
+      pkg.dependencies?.['morya-ui']
+      || pkg.devDependencies?.['morya-ui']
+      || pkg.peerDependencies?.['morya-ui'],
+    )
+  } catch {
+    return false
+  }
+}
+
+/**
  * @param {ReturnType<typeof parseArgs>} options
  */
 export async function runSetup(options) {
   const {
+    mode,
     cwd,
     force,
     dryRun,
@@ -125,14 +182,25 @@ export async function runSetup(options) {
     pm,
   } = options
 
-  console.log(`@morya-ui/setup → ${cwd}${dryRun ? ' (dry-run)' : ''}`)
+  console.log(`@morya-ui/setup [${mode}] → ${cwd}${dryRun ? ' (dry-run)' : ''}`)
   console.log('')
+
+  if (mode === 'ai' && !hasMoryaUiDependency(cwd)) {
+    console.log(
+      'Warning: morya-ui is not listed in package.json. Run `npx @morya-ui/setup app` first (or pnpm add morya-ui).',
+    )
+    console.log('')
+  }
 
   const install = installMoryaUi(cwd, { pm, dryRun, skipInstall })
 
   const template = skipTemplate
     ? { copied: [], skipped: [], forced: [], skippedStep: true }
-    : copyTemplate(TEMPLATE_ROOT, cwd, { force, dryRun })
+    : copyTemplate(TEMPLATE_ROOT, cwd, {
+        force,
+        dryRun,
+        include: mode === 'ai' || mode === 'full' ? AI_TEMPLATE_INCLUDE : undefined,
+      })
 
   const mcp = skipMcp
     ? { path: join(cwd, '.cursor', 'mcp.json'), action: 'skipped-flag' }
@@ -158,7 +226,7 @@ export async function runSetup(options) {
   }
 
   if (template.skippedStep) {
-    console.log('Template: skipped (--skip-template)')
+    console.log('Template: skipped (--skip-template or app mode)')
   } else {
     console.log(
       `Template: ${template.copied.length} copied, ${template.forced.length} overwritten, ${template.skipped.length} skipped`,
@@ -172,13 +240,13 @@ export async function runSetup(options) {
   }
 
   if (mcp.action === 'skipped-flag') {
-    console.log('MCP: skipped (--skip-mcp)')
+    console.log('MCP: skipped (--skip-mcp or app mode)')
   } else {
     console.log(`MCP: ${mcp.action} (${rel(cwd, mcp.path) || '.cursor/mcp.json'})`)
   }
 
   if (styles.reason === 'skip-styles') {
-    console.log('Styles: skipped (--skip-styles)')
+    console.log('Styles: skipped (--skip-styles or ai mode)')
   } else if (styles.action === 'injected') {
     console.log(`Styles: injected into ${rel(cwd, styles.path)}`)
   } else if (styles.action === 'skipped') {
@@ -189,7 +257,7 @@ export async function runSetup(options) {
   }
 
   if (shell.reason === 'skip-styles') {
-    console.log('Shell CSS: skipped (--skip-styles)')
+    console.log('Shell CSS: skipped (--skip-styles or ai mode)')
   } else {
     console.log(
       `Shell CSS: file ${shell.fileAction}`
@@ -200,17 +268,26 @@ export async function runSetup(options) {
   }
 
   if (scripts.action === 'skipped-flag') {
-    console.log('Scripts: skipped (--skip-scripts)')
+    console.log('Scripts: skipped (--skip-scripts or app mode)')
   } else {
     console.log(`Scripts: check:colors ${scripts.action}`)
   }
 
   console.log('')
   console.log('Next:')
-  console.log('  1. Ensure styles.css + morya-app-shell.css imports are in your app entry.')
-  console.log('  2. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
-  console.log('  3. Have the agent read DESIGN.md before generating pages.')
-  console.log('  4. Optional: pnpm check:colors')
+  if (mode === 'app') {
+    console.log('  1. Ensure styles.css + morya-app-shell.css imports are in your app entry.')
+    console.log('  2. Optional AI pack: npx @morya-ui/setup ai')
+  } else if (mode === 'ai') {
+    console.log('  1. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
+    console.log('  2. Have the agent read DESIGN.md before generating pages.')
+    console.log('  3. Optional: pnpm check:colors')
+  } else {
+    console.log('  1. Ensure styles.css + morya-app-shell.css imports are in your app entry.')
+    console.log('  2. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
+    console.log('  3. Have the agent read DESIGN.md before generating pages.')
+    console.log('  4. Optional: pnpm check:colors')
+  }
 
-  return { install, template, mcp, styles, shell, scripts }
+  return { mode, install, template, mcp, styles, shell, scripts }
 }

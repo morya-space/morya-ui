@@ -2,7 +2,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 
 export function readJson(path) {
-  return JSON.parse(readFileSync(path, 'utf8'))
+  const text = readFileSync(path, 'utf8').replace(/^\uFEFF/, '')
+  return JSON.parse(text)
 }
 
 export function writeJson(path, value, { dryRun = false } = {}) {
