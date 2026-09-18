@@ -16,7 +16,13 @@ description: Install the package, import styles, and render the first component.
 pnpm add morya-ui
 ```
 
-Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `morya-ui`.
+Or:
+
+```bash
+npx @morya-ui/setup app
+```
+
+This installs the dependency and tries to inject styles at the app entry. More commands and options: [One-shot setup](/docs/setup). Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `morya-ui`. For Agent skill / MCP, see [AI setup](/docs/ai-setup).
 
 After cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).
 

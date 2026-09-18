@@ -1,6 +1,6 @@
 ---
 title: Configuration
-order: 7
+order: 8
 description: ConfigProvider, createMoryaUI, and useMConfig.
 ---
 

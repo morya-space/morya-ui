@@ -10,11 +10,18 @@
 npx @morya-ui/setup
 ```
 
-会安装 `morya-ui`、复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入 `import 'morya-ui/styles.css'`。
+会安装 `morya-ui`、复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入样式。
+
+已安装组件库时，可只写入本配置与 MCP：
+
+```bash
+npx @morya-ui/setup ai
+```
 
 完整说明（flags、冲突策略）：
 
-- 文档站：[AI 接入](https://morya-space.github.io/morya-ui/docs/ai-setup)
+- 文档站：[一键接入](https://morya-space.github.io/morya-ui/docs/setup)
+- AI 流程：[AI 接入](https://morya-space.github.io/morya-ui/docs/ai-setup)
 - Skill 说明：[Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill)
 - 包 README：[`packages/setup/README.md`](../packages/setup/README.md)
 

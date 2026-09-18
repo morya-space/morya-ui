@@ -1,6 +1,6 @@
 ---
 title: Agent Skill
-order: 10
+order: 12
 description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分工、页面类型地图。
 ---
 
@@ -8,7 +8,7 @@ description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分�
 
 消费方用 AI 生成 **基于 `morya-ui` 的业务页面** 时，应加载 **`morya-ui-pages`** skill。它规定组件契约、页面类型与工作流；**不是**组件库源码里写新组件用的 skill。
 
-安装方式见 [AI 接入](/docs/ai-setup)（`npx @morya-ui/setup` 会复制到项目）。本文说明 skill **是什么、何时用、和其它配置怎么分工**。
+安装方式见 [一键接入](/docs/setup)（`npx @morya-ui/setup` 会复制到项目）；AI 侧流程见 [AI 接入](/docs/ai-setup)。本文说明 skill **是什么、何时用、和其它配置怎么分工**。
 
 ## 装到哪里
 
@@ -38,7 +38,8 @@ description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分�
 
 | 层 | 角色 |
 | --- | --- |
-| [AI 接入](/docs/ai-setup) / `@morya-ui/setup` | 一次性把库 + skill + rules + MCP 装进项目 |
+| [一键接入](/docs/setup) / `@morya-ui/setup` | 一次性把库 + skill + rules + MCP 装进项目 |
+| [AI 接入](/docs/ai-setup) | 装好后如何配合 Agent 生成页面 |
 | **`morya-ui-pages` skill** | 按需工作流：选表面、读黄金样例、组 `M*`、自检 |
 | `.cursor/rules/` | 编辑器常驻短规则（设计系统、组件用法、布局） |
 | `DESIGN.md` | 项目设计第一信源；与 skill 冲突时以项目 `DESIGN.md` 为准 |
@@ -74,7 +75,8 @@ description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分�
 
 ## 下一步
 
-- [AI 接入](/docs/ai-setup)：安装 skill 与其它 AI 配置  
+- [一键接入](/docs/setup)：安装 skill 与其它配置  
+- [AI 接入](/docs/ai-setup)：用 AI 生成页面时的流程  
 - [Agent MCP](/docs/mcp)：工具与客户端配置  
 - [快速上手](/docs/quick-start)：手写安装组件库  
 - [组件](/components)：浏览 API

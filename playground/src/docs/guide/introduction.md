@@ -47,6 +47,7 @@ pnpm add morya-ui
 ## 下一步
 
 - [快速上手](/docs/quick-start)：安装与最小示例
+- [一键接入](/docs/setup)：`@morya-ui/setup` 安装库与 AI 配置
 - [设计令牌](/docs/design-tokens)：全部 `--m-*` 变量与用途
 - [主题](/docs/theme)：亮暗色与动效
 - [样式与 attrs](/docs/attrs)：fallthrough、`pt`、事件在各组件上的落点
@@ -54,7 +55,7 @@ pnpm add morya-ui
 - [全局配置](/docs/config)：`ConfigProvider` / `createMoryaUI`
 - [SSR](/docs/ssr)：Nuxt / Astro 等集成
 - [无障碍](/docs/accessibility)：键盘、表单与浮层约定
-- [AI 接入](/docs/ai-setup)：`npx @morya-ui/setup` 与 Agent 配置
+- [AI 接入](/docs/ai-setup)：配合 Agent 生成业务页面
 - [Agent Skill](/docs/agent-skill)：`morya-ui-pages` 页面生成约定
 - [Agent MCP](/docs/mcp)：AI 客户端文档检索
 - [组件](/components)：浏览全部组件与 API

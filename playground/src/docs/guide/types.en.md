@@ -1,6 +1,6 @@
 ---
 title: API types
-order: 6
+order: 7
 description: Shapes behind type names in component Props tables.
 ---
 

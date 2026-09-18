@@ -16,11 +16,13 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 pnpm add morya-ui
 ```
 
-需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `morya-ui` 中。
+也可以用：
 
-克隆本仓库后执行 `pnpm install`。文档站通过 Vite alias 直连 `src/` 源码（见 `playground/vite.config.ts`）。
+```bash
+npx @morya-ui/setup app
+```
 
-在其他业务项目中联调本库时，使用 `link:` / `pnpm link` 并配置 Vite alias；从 npm 安装则始终解析 `dist/`。
+会安装依赖，并尽量在入口注入样式。更多命令与选项见 [一键接入](/docs/setup)。需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `morya-ui` 中。Agent Skill / MCP 见 [AI 接入](/docs/ai-setup)。
 
 ## 选择使用方式
 

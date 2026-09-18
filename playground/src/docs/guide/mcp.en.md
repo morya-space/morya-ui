@@ -1,6 +1,6 @@
 ﻿---
 title: Agent MCP
-order: 11
+order: 13
 description: Optional MCP server for AI clients that support the Model Context Protocol.
 ---
 
@@ -18,7 +18,7 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
-For Agent skill, Cursor rules, and writing MCP in one step, see [AI setup](/docs/ai-setup). Skill behavior: [Agent Skill](/docs/agent-skill).
+For Agent skill, Cursor rules, and writing MCP in one step, see [One-shot setup](/docs/setup). AI workflow: [AI setup](/docs/ai-setup). Skill behavior: [Agent Skill](/docs/agent-skill).
 
 ## How to connect
 
@@ -202,7 +202,8 @@ Implementation notes live in [packages/ui-mcp/README.md](https://github.com/mory
 
 ## Next steps
 
-- [AI setup](/docs/ai-setup): one-shot library + skill + MCP
+- [One-shot setup](/docs/setup): `npx @morya-ui/setup`
+- [AI setup](/docs/ai-setup): Agent skill and MCP workflow
 - [Agent Skill](/docs/agent-skill): when to use `morya-ui-pages`
 - [Quick start](/docs/quick-start): install and use components in an app
 - [Components](/components): browse live examples and APIs

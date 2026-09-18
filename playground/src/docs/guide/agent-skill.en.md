@@ -1,6 +1,6 @@
 ---
 title: Agent Skill
-order: 10
+order: 12
 description: Consumer morya-ui-pages skill — when it triggers, vs rules/MCP, and the surface map.
 ---
 
@@ -8,7 +8,7 @@ description: Consumer morya-ui-pages skill — when it triggers, vs rules/MCP, a
 
 When AI generates **morya-ui consumer pages**, load the **`morya-ui-pages`** skill. It defines the component contract, surface types, and workflow. It is **not** for authoring new components inside the library source.
 
-Install via [AI setup](/docs/ai-setup) (`npx @morya-ui/setup` copies it into the project). This page explains **what it is, when to use it, and how it relates to other config**.
+Install via [One-shot setup](/docs/setup) (`npx @morya-ui/setup` copies it into the project); AI workflow: [AI setup](/docs/ai-setup). This page explains **what it is, when to use it, and how it relates to other config**.
 
 ## Where it lives
 
@@ -38,7 +38,8 @@ Typical topics:
 
 | Layer | Role |
 | --- | --- |
-| [AI setup](/docs/ai-setup) / `@morya-ui/setup` | One-shot install of library + skill + rules + MCP |
+| [One-shot setup](/docs/setup) / `@morya-ui/setup` | One-shot install of library + skill + rules + MCP |
+| [AI setup](/docs/ai-setup) | How to use the Agent after install |
 | **`morya-ui-pages` skill** | On-demand workflow: pick surface, golden pages, compose `M*`, review |
 | `.cursor/rules/` | Always-on short editor rules |
 | `DESIGN.md` | Project design source of truth; wins over skill on conflict |
@@ -74,7 +75,8 @@ Full rules and hard boundaries live in the project’s `SKILL.md` — this page 
 
 ## Next steps
 
-- [AI setup](/docs/ai-setup): install the skill and related AI config  
+- [One-shot setup](/docs/setup): install the skill and related config  
+- [AI setup](/docs/ai-setup): AI page-generation workflow  
 - [Agent MCP](/docs/mcp): tools and client config  
 - [Quick start](/docs/quick-start): manual library install  
 - [Components](/components): browse APIs

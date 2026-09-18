@@ -1,6 +1,6 @@
 ---
 title: Theme
-order: 4
+order: 5
 description: Light and dark themes, design tokens, and motion preferences.
 ---
 

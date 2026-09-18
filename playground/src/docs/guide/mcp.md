@@ -1,6 +1,6 @@
 ﻿---
 title: Agent MCP
-order: 11
+order: 13
 description: 可选的 MCP 服务，供支持 Model Context Protocol 的 AI 客户端检索本库文档。
 ---
 
@@ -18,7 +18,7 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
-若要连同 Agent Skill、Cursor 规则一起装好，见 [AI 接入](/docs/ai-setup)；Skill 本身说明见 [Agent Skill](/docs/agent-skill)。
+若要连同 Agent Skill、Cursor 规则一起装好，见 [一键接入](/docs/setup)；AI 流程见 [AI 接入](/docs/ai-setup)；Skill 本身说明见 [Agent Skill](/docs/agent-skill)。
 
 ## 接入方式
 

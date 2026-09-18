@@ -47,6 +47,7 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 ## Next steps
 
 - [Quick start](/docs/quick-start): install and a minimal example
+- [One-shot setup](/docs/setup): `@morya-ui/setup` for library and AI config
 - [Design tokens](/docs/design-tokens): full `--m-*` reference
 - [Theme](/docs/theme): light/dark and motion
 - [Styling & attrs](/docs/attrs): fallthrough, `pt`, and event placement
@@ -54,7 +55,7 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 - [Configuration](/docs/config): `ConfigProvider` / `createMoryaUI`
 - [SSR](/docs/ssr): Nuxt, Astro, and similar setups
 - [Accessibility](/docs/accessibility): forms, keyboard, overlays
-- [AI setup](/docs/ai-setup): `npx @morya-ui/setup` and Agent config
+- [AI setup](/docs/ai-setup): Agent-assisted page generation
 - [Agent Skill](/docs/agent-skill): `morya-ui-pages` page-generation contract
 - [Agent MCP](/docs/mcp): doc lookup for AI clients
 - [Components](/components): browse all components and APIs

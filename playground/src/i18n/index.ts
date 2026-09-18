@@ -152,10 +152,13 @@ const messages = {
     guideTitles: {
       introduction: '介绍',
       'quick-start': '快速开始',
+      setup: '一键接入',
       theme: '主题',
       'design-tokens': '设计令牌',
       config: '全局配置',
       accessibility: '无障碍',
+      'ai-setup': 'AI 接入',
+      'agent-skill': 'Agent Skill',
       mcp: 'Agent MCP',
     } as Record<string, string>,
     categories: {
@@ -291,10 +294,13 @@ const messages = {
     guideTitles: {
       introduction: 'Introduction',
       'quick-start': 'Quick start',
+      setup: 'One-shot setup',
       theme: 'Theme',
       'design-tokens': 'Design tokens',
       config: 'Configuration',
       accessibility: 'Accessibility',
+      'ai-setup': 'AI setup',
+      'agent-skill': 'Agent Skill',
       mcp: 'Agent MCP',
     } as Record<string, string>,
     categories: {

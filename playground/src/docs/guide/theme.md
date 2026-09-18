@@ -1,6 +1,6 @@
 ---
 title: 主题
-order: 4
+order: 5
 description: 亮暗主题、设计令牌与动效偏好。
 ---
 

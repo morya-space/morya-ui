@@ -1,6 +1,6 @@
 ---
 title: 无障碍
-order: 9
+order: 10
 description: 使用 Morya UI 组件时的无障碍约定与检查清单。
 ---
 

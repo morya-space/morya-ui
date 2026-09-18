@@ -1,6 +1,6 @@
 ---
 title: API 类型
-order: 6
+order: 7
 description: 文档 Props 里常见类型名的结构与含义。
 ---
 
