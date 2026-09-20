@@ -1,10 +1,8 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join, relative, resolve } from 'node:path'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { join, resolve } from 'node:path'
 
 const STYLE_IMPORT = "import 'morya-ui/styles.css'"
 const STYLE_MARKER = 'morya-ui/styles.css'
-const SHELL_MARKER = 'morya-app-shell.css'
-const SHELL_REL = 'src/styles/morya-app-shell.css'
 
 const CANDIDATES = [
   'src/main.ts',
@@ -16,14 +14,6 @@ const CANDIDATES = [
   'src/app.ts',
   'src/app.js',
 ]
-
-const SHELL_CSS = `html,
-body,
-#app {
-  height: 100%;
-  margin: 0;
-}
-`
 
 /**
  * @param {string} cwd
@@ -101,16 +91,6 @@ export function injectStyleImport(source) {
 }
 
 /**
- * @param {string} entryFile absolute
- * @param {string} shellFile absolute
- */
-export function shellImportLine(entryFile, shellFile) {
-  let rel = relative(dirname(entryFile), shellFile).replace(/\\/g, '/')
-  if (!rel.startsWith('.')) rel = `./${rel}`
-  return `import '${rel}'`
-}
-
-/**
  * @returns {{
  *   action: 'injected' | 'skipped' | 'missing-entry',
  *   path?: string,
@@ -136,69 +116,4 @@ export function ensureStylesImport(cwd, { dryRun = false } = {}) {
   }
 
   return { action: 'injected', path: entry, dryRun }
-}
-
-/**
- * Write morya-app-shell.css (height chain) and inject its import into the entry.
- * @returns {{
- *   fileAction: 'written' | 'skipped' | 'dry-run',
- *   importAction: 'injected' | 'skipped' | 'missing-entry',
- *   path?: string,
- *   entry?: string,
- *   reason?: string,
- *   dryRun?: boolean
- * }}
- */
-export function ensureShellStyles(cwd, { dryRun = false, force = false } = {}) {
-  const shellFile = join(cwd, SHELL_REL)
-  const entry = findEntryFile(cwd)
-
-  let fileAction = 'skipped'
-  if (!existsSync(shellFile) || force) {
-    if (dryRun) {
-      fileAction = 'dry-run'
-    }
-    else {
-      mkdirSync(dirname(shellFile), { recursive: true })
-      writeFileSync(shellFile, SHELL_CSS, 'utf8')
-      fileAction = 'written'
-    }
-  }
-
-  if (!entry) {
-    return {
-      fileAction,
-      importAction: 'missing-entry',
-      path: shellFile,
-      reason: 'no-entry-found',
-      dryRun,
-    }
-  }
-
-  const importLine = shellImportLine(entry, shellFile)
-  const original = readFileSync(entry, 'utf8')
-  const { source, changed, reason } = injectImportLine(original, importLine, SHELL_MARKER)
-
-  if (!changed) {
-    return {
-      fileAction,
-      importAction: 'skipped',
-      path: shellFile,
-      entry,
-      reason: reason || 'already-present',
-      dryRun,
-    }
-  }
-
-  if (!dryRun) {
-    writeFileSync(entry, source, 'utf8')
-  }
-
-  return {
-    fileAction,
-    importAction: 'injected',
-    path: shellFile,
-    entry,
-    dryRun,
-  }
 }

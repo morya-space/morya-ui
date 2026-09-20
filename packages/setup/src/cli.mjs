@@ -6,7 +6,7 @@ import { readJson } from './fs-utils.mjs'
 import { installMoryaUi } from './install.mjs'
 import { mergeMcpConfig } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
-import { ensureShellStyles, ensureStylesImport } from './styles.mjs'
+import { ensureStylesImport } from './styles.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PKG_ROOT = resolve(__dirname, '..')
@@ -14,7 +14,7 @@ const TEMPLATE_ROOT = join(PKG_ROOT, 'template')
 
 const MODES = new Set(['app', 'ai', 'full'])
 
-/** AI pack paths under template/ (excludes runtime src/styles — owned by app mode). */
+/** AI pack paths under template/. */
 const AI_TEMPLATE_INCLUDE = [
   'DESIGN.md',
   '.agents/skills/morya-ui-pages',
@@ -43,7 +43,7 @@ export function printHelp() {
 
 Commands:
   (default) / full  Install morya-ui, AI template, MCP, styles, check:colors
-  app               Install morya-ui and inject styles / app-shell CSS
+  app               Install morya-ui and inject styles.css
   ai                Copy Agent skill / rules / DESIGN / docs,
                     merge Cursor MCP, add check:colors
 
@@ -52,7 +52,6 @@ Default command:
   - copy DESIGN.md, Agent skill, Cursor rules, docs
   - merge .cursor/mcp.json for @morya-ui/mcp
   - inject import 'morya-ui/styles.css' into the app entry when found
-  - write src/styles/morya-app-shell.css and inject its import
   - add check:colors script when missing
 
 Options:
@@ -63,7 +62,7 @@ Options:
   --skip-install    Skip dependency install
   --skip-template   Skip copying AI template files
   --skip-mcp        Skip writing .cursor/mcp.json
-  --skip-styles     Skip injecting styles.css / app-shell CSS
+  --skip-styles     Skip injecting styles.css
   --skip-scripts    Skip adding check:colors to package.json
   -h, --help        Show this help
 `)
@@ -208,10 +207,6 @@ export async function runSetup(options) {
     ? { action: 'skipped', reason: 'skip-styles' }
     : ensureStylesImport(cwd, { dryRun })
 
-  const shell = skipStyles
-    ? { fileAction: 'skipped', importAction: 'skipped', reason: 'skip-styles' }
-    : ensureShellStyles(cwd, { dryRun, force })
-
   const scripts = skipScripts
     ? { action: 'skipped-flag' }
     : ensureCheckColorsScript(cwd, { force, dryRun })
@@ -254,17 +249,6 @@ export async function runSetup(options) {
     console.log("  import 'morya-ui/styles.css'")
   }
 
-  if (shell.reason === 'skip-styles') {
-    console.log('Shell CSS: skipped (--skip-styles or ai mode)')
-  } else {
-    console.log(
-      `Shell CSS: file ${shell.fileAction}`
-        + (shell.path ? ` (${rel(cwd, shell.path)})` : '')
-        + `, import ${shell.importAction}`
-        + (shell.entry ? ` (${rel(cwd, shell.entry)})` : ''),
-    )
-  }
-
   if (scripts.action === 'skipped-flag') {
     console.log('Scripts: skipped (--skip-scripts or app mode)')
   } else {
@@ -274,18 +258,18 @@ export async function runSetup(options) {
   console.log('')
   console.log('Next:')
   if (mode === 'app') {
-    console.log('  1. Ensure styles.css + morya-app-shell.css imports are in your app entry.')
+    console.log('  1. Ensure the styles.css import is in your app entry.')
     console.log('  2. Optional AI pack: npx @morya-ui/setup ai')
   } else if (mode === 'ai') {
     console.log('  1. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
     console.log('  2. Have the agent read DESIGN.md before generating pages.')
     console.log('  3. Optional: pnpm check:colors')
   } else {
-    console.log('  1. Ensure styles.css + morya-app-shell.css imports are in your app entry.')
+    console.log('  1. Ensure the styles.css import is in your app entry.')
     console.log('  2. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
     console.log('  3. Have the agent read DESIGN.md before generating pages.')
     console.log('  4. Optional: pnpm check:colors')
   }
 
-  return { mode, install, template, mcp, styles, shell, scripts }
+  return { mode, install, template, mcp, styles, scripts }
 }

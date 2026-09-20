@@ -19,7 +19,6 @@ const INCLUDE = [
   '.cursor/rules',
   'docs',
   'scripts/check-raw-colors.mjs',
-  'src/styles',
 ]
 
 if (!existsSync(sourceRoot)) {

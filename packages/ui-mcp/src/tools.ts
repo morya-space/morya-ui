@@ -1100,8 +1100,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
         type: 'height-chain',
         message:
           locale === 'en-US'
-            ? 'Prefer layout-app-shell / golden pages: include html, body, #app { height: 100% } (morya-app-shell.css) with MLayout.'
-            : '对齐 layout-app-shell / 黄金样例：配合 MLayout 使用 html, body, #app { height: 100% }（morya-app-shell.css）。',
+            ? 'Prefer layout-app-shell / golden pages: with MLayout, set html, body, #app { height: 100% } when the shell is not using fillViewport.'
+            : '对齐 layout-app-shell / 黄金样例：未使用 fillViewport 时，配合 MLayout 设置 html, body, #app { height: 100% }。',
       })
     }
 
