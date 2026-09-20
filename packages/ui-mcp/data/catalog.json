@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T07:21:58.962Z",
+  "generatedAt": "2026-09-20T15:28:58.793Z",
   "library": {
     "name": "morya-ui",
     "version": "0.2.7"
@@ -6821,7 +6821,7 @@
           "sectionId": "内置插图",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MEmpty } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <div class=\"grid gap-8\">\r\n    <MEmpty\r\n      illustration=\"no-content\"\r\n      title=\"暂无相关内容\"\r\n      description=\"这里还没有可展示的内容。\"\r\n    />\r\n    <MEmpty\r\n      illustration=\"no-result\"\r\n      title=\"搜索结果为空\"\r\n      description=\"试试调整关键词或筛选条件。\"\r\n    />\r\n    <MEmpty\r\n      illustration=\"no-message\"\r\n      title=\"没有新消息\"\r\n      description=\"有新动态时会第一时间通知你。\"\r\n    />\r\n  </div>\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MEmpty } from 'morya-ui'\n</script>\n\n<template>\n  <div class=\"grid gap-8\">\n    <MEmpty\n      illustration=\"no-content\"\n      title=\"暂无相关内容\"\n      description=\"这里还没有可展示的内容。\"\n    />\n    <MEmpty\n      illustration=\"no-result\"\n      title=\"搜索结果为空\"\n      description=\"试试调整关键词或筛选条件。\"\n    />\n    <MEmpty\n      illustration=\"no-message\"\n      title=\"没有新消息\"\n      description=\"有新动态时会第一时间通知你。\"\n    />\n  </div>\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -6830,7 +6830,7 @@
           "sectionId": "紧凑模式",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MEmpty } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <MEmpty\r\n    simple\r\n    title=\"\"\r\n    description=\"该分组下暂无成员\"\r\n  />\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MEmpty } from 'morya-ui'\n</script>\n\n<template>\n  <MEmpty\n    simple\n    title=\"\"\n    description=\"该分组下暂无成员\"\n  />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -6875,7 +6875,7 @@
           "sectionId": "built-in-illustrations",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MEmpty } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <div class=\"grid gap-8\">\r\n    <MEmpty\r\n      illustration=\"no-content\"\r\n      title=\"暂无相关内容\"\r\n      description=\"这里还没有可展示的内容。\"\r\n    />\r\n    <MEmpty\r\n      illustration=\"no-result\"\r\n      title=\"搜索结果为空\"\r\n      description=\"试试调整关键词或筛选条件。\"\r\n    />\r\n    <MEmpty\r\n      illustration=\"no-message\"\r\n      title=\"没有新消息\"\r\n      description=\"有新动态时会第一时间通知你。\"\r\n    />\r\n  </div>\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MEmpty } from 'morya-ui'\n</script>\n\n<template>\n  <div class=\"grid gap-8\">\n    <MEmpty\n      illustration=\"no-content\"\n      title=\"暂无相关内容\"\n      description=\"这里还没有可展示的内容。\"\n    />\n    <MEmpty\n      illustration=\"no-result\"\n      title=\"搜索结果为空\"\n      description=\"试试调整关键词或筛选条件。\"\n    />\n    <MEmpty\n      illustration=\"no-message\"\n      title=\"没有新消息\"\n      description=\"有新动态时会第一时间通知你。\"\n    />\n  </div>\n</template>",
           "locale": "en-US"
         },
         {
@@ -6884,7 +6884,7 @@
           "sectionId": "compact",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MEmpty } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <MEmpty\r\n    simple\r\n    title=\"\"\r\n    description=\"No members in this group yet\"\r\n  />\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MEmpty } from 'morya-ui'\n</script>\n\n<template>\n  <MEmpty\n    simple\n    title=\"\"\n    description=\"No members in this group yet\"\n  />\n</template>",
           "locale": "en-US"
         }
       ],
@@ -12401,6 +12401,358 @@
       }
     },
     {
+      "id": "Loading",
+      "name": "Loading",
+      "exportName": "MLoading",
+      "category": "05 / FEEDBACK",
+      "description": "加载指示与遮罩：多种动效、区域加载、v-loading 指令和命令式 service。",
+      "descriptionEn": "Loading indicator and mask, with multiple effects, a region overlay, the v-loading directive, and an imperative service.",
+      "import": "import { MLoading } from 'morya-ui'",
+      "props": [
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": "true",
+          "description": "包裹内容或 `fullscreen` 时是否显示遮罩。单独指示器始终显示。"
+        },
+        {
+          "name": "effect",
+          "type": "'circular' | 'aurora' | 'bounce' | 'wave' | 'pulse' | 'stardust'",
+          "default": "'circular'",
+          "description": "动效。可用 `componentDefaults.Loading.effect` 改默认值。"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "default": "—",
+          "description": "指示器下方文案。不传则不显示。"
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "default": "locale `loading",
+          "description": "无文案时的可访问名称。有文案时以文案为准。"
+        },
+        {
+          "name": "size",
+          "type": "'small' | 'large' | 'sm' | 'md' | 'lg'",
+          "default": "—",
+          "description": "指示器缩放。"
+        },
+        {
+          "name": "background",
+          "type": "string",
+          "default": "—",
+          "description": "遮罩背景，任意 CSS 颜色。"
+        },
+        {
+          "name": "customClass",
+          "type": "string",
+          "default": "—",
+          "description": "加在遮罩上的类名。"
+        },
+        {
+          "name": "fullscreen",
+          "type": "boolean",
+          "default": "false",
+          "description": "遮罩铺满视口（Teleport 到 `body`）。"
+        },
+        {
+          "name": "lock",
+          "type": "boolean",
+          "default": "false",
+          "description": "显示时禁止页面滚动。"
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "default": "0",
+          "description": "显示前延迟（ms）。"
+        },
+        {
+          "name": "pt",
+          "type": "[RootPassThrough](/docs/types#RootPassThrough) `{ root? }",
+          "default": "—",
+          "description": "DOM 透传，见 [样式与 attrs](/docs/attrs)。"
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "default",
+          "description": "被遮罩盖住的内容。"
+        },
+        {
+          "name": "indicator",
+          "description": "替换遮罩中的指示器。仅在有默认插槽或 `fullscreen` 时生效。"
+        }
+      ],
+      "examples": [
+        {
+          "id": "引入-1",
+          "section": "引入",
+          "sectionId": "引入",
+          "lang": "ts",
+          "preview": false,
+          "code": "import { loading, MLoading, useLoading, vLoading } from 'morya-ui'",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "动效-1",
+          "section": "动效",
+          "sectionId": "动效",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MLoading } from 'morya-ui'\n\nconst effects = [\n  { id: 'circular', label: '圆环' },\n  { id: 'aurora', label: '极光环' },\n  { id: 'bounce', label: '弹跳球' },\n  { id: 'wave', label: '波浪条' },\n  { id: 'pulse', label: '脉冲环' },\n  { id: 'stardust', label: '星尘' },\n] as const\n</script>\n\n<template>\n  <div class=\"grid grid-cols-2 gap-4 md:grid-cols-3\">\n    <div\n      v-for=\"item in effects\"\n      :key=\"item.id\"\n      class=\"flex min-h-36 items-center justify-center rounded-md border border-solid border-[var(--m-color-border)] bg-[var(--m-color-surface)] p-4\"\n    >\n      <MLoading :effect=\"item.id\" :text=\"item.label\" />\n    </div>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "区域加载-1",
+          "section": "区域加载",
+          "sectionId": "区域加载",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MButton, MLoading, vLoading } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst loading = ref(true)\n</script>\n\n<template>\n  <div class=\"grid gap-4\">\n    <MLoading :loading=\"loading\" text=\"加载中\" effect=\"wave\">\n      <div class=\"min-h-32 p-4\">\n        区域内容\n      </div>\n    </MLoading>\n    <div\n      v-loading=\"loading\"\n      m-loading-text=\"加载中\"\n      m-loading-effect=\"circular\"\n      class=\"min-h-32 rounded-md border border-solid border-[var(--m-color-border)] p-4\"\n    >\n      指令覆盖的区域\n    </div>\n    <div>\n      <MButton size=\"small\" :label=\"loading ? '结束加载' : '开始加载'\" @click=\"loading = !loading\" />\n    </div>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "服务式调用-1",
+          "section": "服务式调用",
+          "sectionId": "服务式调用",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MButton, useLoading } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst panel = ref<HTMLElement>()\nconst { open } = useLoading()\n\nfunction openRegion() {\n  const instance = open({\n    target: panel.value,\n    text: '加载中',\n    effect: 'wave',\n  })\n  window.setTimeout(() => instance.close(), 1600)\n}\n\nfunction openFullscreen() {\n  const instance = open({\n    text: '正在提交',\n    effect: 'aurora',\n    lock: true,\n  })\n  window.setTimeout(() => instance.close(), 1600)\n}\n</script>\n\n<template>\n  <div class=\"grid gap-4\">\n    <div\n      ref=\"panel\"\n      class=\"min-h-32 rounded-md border border-solid border-[var(--m-color-border)] p-4\"\n    >\n      可被服务盖住的区域\n    </div>\n    <div class=\"flex flex-wrap gap-3\">\n      <MButton label=\"区域加载\" severity=\"secondary\" @click=\"openRegion\" />\n      <MButton label=\"全屏加载\" @click=\"openFullscreen\" />\n    </div>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "服务式调用-2",
+          "section": "服务式调用",
+          "sectionId": "服务式调用",
+          "lang": "ts",
+          "preview": false,
+          "code": "const instance = loading.service({\n  text: '正在提交',\n  effect: 'wave',\n  lock: true,\n})\ninstance.setText('即将完成')\ninstance.close()",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "服务式调用-3",
+          "section": "服务式调用",
+          "sectionId": "服务式调用",
+          "lang": "ts",
+          "preview": false,
+          "code": "loading.service({\n  target: '#panel',\n  text: '加载中',\n})\n\nloading.service({\n  spinner: () => h('span', '…'),\n  text: '自定义',\n})",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "服务式调用-4",
+          "section": "服务式调用",
+          "sectionId": "服务式调用",
+          "lang": "ts",
+          "preview": false,
+          "code": "const { open, close } = useLoading({ effect: 'wave' })\nopen({ text: '保存中' })\nclose()",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "import-1",
+          "section": "Import",
+          "sectionId": "import",
+          "lang": "ts",
+          "preview": false,
+          "code": "import { loading, MLoading, useLoading, vLoading } from 'morya-ui'",
+          "locale": "en-US"
+        },
+        {
+          "id": "effects-1",
+          "section": "Effects",
+          "sectionId": "effects",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MLoading } from 'morya-ui'\n\nconst effects = [\n  { id: 'circular', label: '圆环' },\n  { id: 'aurora', label: '极光环' },\n  { id: 'bounce', label: '弹跳球' },\n  { id: 'wave', label: '波浪条' },\n  { id: 'pulse', label: '脉冲环' },\n  { id: 'stardust', label: '星尘' },\n] as const\n</script>\n\n<template>\n  <div class=\"grid grid-cols-2 gap-4 md:grid-cols-3\">\n    <div\n      v-for=\"item in effects\"\n      :key=\"item.id\"\n      class=\"flex min-h-36 items-center justify-center rounded-md border border-solid border-[var(--m-color-border)] bg-[var(--m-color-surface)] p-4\"\n    >\n      <MLoading :effect=\"item.id\" :text=\"item.label\" />\n    </div>\n  </div>\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "region-1",
+          "section": "Region",
+          "sectionId": "region",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MButton, MLoading, vLoading } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst loading = ref(true)\n</script>\n\n<template>\n  <div class=\"grid gap-4\">\n    <MLoading :loading=\"loading\" text=\"Loading\" effect=\"wave\">\n      <div class=\"min-h-32 p-4\">\n        Region content\n      </div>\n    </MLoading>\n    <div\n      v-loading=\"loading\"\n      m-loading-text=\"Loading\"\n      m-loading-effect=\"circular\"\n      class=\"min-h-32 rounded-md border border-solid border-[var(--m-color-border)] p-4\"\n    >\n      Directive target\n    </div>\n    <div>\n      <MButton size=\"small\" :label=\"loading ? 'Stop' : 'Start'\" @click=\"loading = !loading\" />\n    </div>\n  </div>\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "service-1",
+          "section": "Service",
+          "sectionId": "service",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MButton, useLoading } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst panel = ref<HTMLElement>()\nconst { open } = useLoading()\n\nfunction openRegion() {\n  const instance = open({\n    target: panel.value,\n    text: 'Loading',\n    effect: 'wave',\n  })\n  window.setTimeout(() => instance.close(), 1600)\n}\n\nfunction openFullscreen() {\n  const instance = open({\n    text: 'Submitting',\n    effect: 'aurora',\n    lock: true,\n  })\n  window.setTimeout(() => instance.close(), 1600)\n}\n</script>\n\n<template>\n  <div class=\"grid gap-4\">\n    <div\n      ref=\"panel\"\n      class=\"min-h-32 rounded-md border border-solid border-[var(--m-color-border)] p-4\"\n    >\n      Region covered by the service\n    </div>\n    <div class=\"flex flex-wrap gap-3\">\n      <MButton label=\"Cover region\" severity=\"secondary\" @click=\"openRegion\" />\n      <MButton label=\"Fullscreen\" @click=\"openFullscreen\" />\n    </div>\n  </div>\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "service-2",
+          "section": "Service",
+          "sectionId": "service",
+          "lang": "ts",
+          "preview": false,
+          "code": "const instance = loading.service({\n  text: 'Submitting',\n  effect: 'wave',\n  lock: true,\n})\ninstance.setText('Almost done')\ninstance.close()",
+          "locale": "en-US"
+        },
+        {
+          "id": "service-3",
+          "section": "Service",
+          "sectionId": "service",
+          "lang": "ts",
+          "preview": false,
+          "code": "loading.service({\n  target: '#panel',\n  text: 'Loading',\n})\n\nloading.service({\n  spinner: () => h('span', '…'),\n  text: 'Custom',\n})",
+          "locale": "en-US"
+        },
+        {
+          "id": "service-4",
+          "section": "Service",
+          "sectionId": "service",
+          "lang": "ts",
+          "preview": false,
+          "code": "const { open, close } = useLoading({ effect: 'wave' })\nopen({ text: 'Saving' })\nclose()",
+          "locale": "en-US"
+        }
+      ],
+      "locales": {
+        "zh-CN": {
+          "title": "Loading",
+          "description": "加载指示与遮罩：多种动效、区域加载、v-loading 指令和命令式 service。",
+          "sections": [
+            {
+              "id": "overview",
+              "title": "",
+              "body": "# Loading\n\n用于区域或全屏的加载反馈。可以只渲染指示器，也可以盖住一块内容，或用指令和服务在任意节点上打开遮罩。\n\n内置圆环、极光环、弹跳球、波浪条、脉冲环和星尘。默认是圆环（`effect=\"circular\"`）。要改全局默认动效，设置 `componentDefaults.Loading.effect`。\n\n全屏遮罩会 Teleport 到 `body`，避免被父级 `overflow` / `transform` 裁切。同一时间只保留一个全屏实例。"
+            },
+            {
+              "id": "引入",
+              "title": "引入",
+              "body": "```ts\nimport { loading, MLoading, useLoading, vLoading } from 'morya-ui'\n```\n\n`app.use(MoryaUI)` 会注册 `v-loading`。按需引入时，在 `<script setup>` 里导入 `vLoading` 即可在模板中使用该指令。"
+            },
+            {
+              "id": "动效",
+              "title": "动效",
+              "body": "```vue preview src=\"./demos/Effects.vue\"\n```"
+            },
+            {
+              "id": "区域加载",
+              "title": "区域加载",
+              "body": "组件包住内容，或在元素上使用 `v-loading`。未传 `text` 时不显示文案，读屏仍使用 locale 的 `loading`。可用 `delay` 避免短请求闪一下。\n\n```vue preview src=\"./demos/Region.zh.vue\"\n```"
+            },
+            {
+              "id": "服务式调用",
+              "title": "服务式调用",
+              "body": "不传 `target` 时遮罩铺满视口。`close()` 会先播放离场再卸载，`setText()` 改文案。也可用 `useLoading()`，在组件卸载时自动关闭。\n\n```vue preview src=\"./demos/Service.zh.vue\"\n```\n\n```ts\nconst instance = loading.service({\n  text: '正在提交',\n  effect: 'wave',\n  lock: true,\n})\ninstance.setText('即将完成')\ninstance.close()\n```\n\n覆盖某个节点，或传入自定义指示器：\n\n```ts\nloading.service({\n  target: '#panel',\n  text: '加载中',\n})\n\nloading.service({\n  spinner: () => h('span', '…'),\n  text: '自定义',\n})\n```\n\n```ts\nconst { open, close } = useLoading({ effect: 'wave' })\nopen({ text: '保存中' })\nclose()\n```"
+            },
+            {
+              "id": "指令",
+              "title": "指令",
+              "body": "| 写法 | 说明 |\n| --- | --- |\n| `v-loading` | 布尔值，或带 `text` / `effect` / `background` / `lock` / `delay` / `spinner` 等字段的对象。 |\n| `v-loading.fullscreen` | 全屏遮罩。 |\n| `v-loading.lock` | 打开时锁定页面滚动。 |\n| `v-loading.body` | 遮罩挂到 `body`，并盖住当前元素（跟随尺寸变化）。 |\n| `m-loading-text` | 文案。 |\n| `m-loading-effect` | `circular` / `aurora` / `bounce` / `wave` / `pulse` / `stardust`。 |\n| `m-loading-background` | 遮罩背景色。 |\n| `m-loading-custom-class` | 加在遮罩上的类名。 |\n| `m-loading-delay` | 显示前延迟（ms）。 |"
+            },
+            {
+              "id": "props",
+              "title": "Props",
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `loading` | `boolean` | `true` | 包裹内容或 `fullscreen` 时是否显示遮罩。单独指示器始终显示。 |\n| `effect` | `'circular' \\| 'aurora' \\| 'bounce' \\| 'wave' \\| 'pulse' \\| 'stardust'` | `'circular'` | 动效。可用 `componentDefaults.Loading.effect` 改默认值。 |\n| `text` | `string` | — | 指示器下方文案。不传则不显示。 |\n| `ariaLabel` | `string` | locale `loading` | 无文案时的可访问名称。有文案时以文案为准。 |\n| `size` | `'small' \\| 'large' \\| 'sm' \\| 'md' \\| 'lg'` | — | 指示器缩放。 |\n| `background` | `string` | — | 遮罩背景，任意 CSS 颜色。 |\n| `customClass` | `string` | — | 加在遮罩上的类名。 |\n| `fullscreen` | `boolean` | `false` | 遮罩铺满视口（Teleport 到 `body`）。 |\n| `lock` | `boolean` | `false` | 显示时禁止页面滚动。 |\n| `delay` | `number` | `0` | 显示前延迟（ms）。 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs)。 |"
+            },
+            {
+              "id": "events",
+              "title": "Events",
+              "body": "无自定义事件。"
+            },
+            {
+              "id": "slots",
+              "title": "Slots",
+              "body": "| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 被遮罩盖住的内容。 |\n| `indicator` | 替换遮罩中的指示器。仅在有默认插槽或 `fullscreen` 时生效。 |"
+            },
+            {
+              "id": "服务",
+              "title": "服务",
+              "body": "`loading.service(options)` 返回 `{ close, setText }`。`useLoading(defaults)` 返回 `{ open, close, setText }`。\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `target` | `string \\| HTMLElement` | — | 要盖住的元素或选择器。省略则为全屏。 |\n| `fullscreen` | `boolean` | 无 `target` 时为 `true` | 铺满视口。 |\n| `body` | `boolean` | `false` | 遮罩挂到 `body`，定位到 `target` 上。 |\n| `lock` | `boolean` | `false` | 锁定页面滚动。 |\n| `text` | `string` | — | 文案。 |\n| `effect` | 同组件 | `'circular'` | 动效。 |\n| `spinner` | `MRenderable` | — | 自定义指示器；设置后忽略内置 `effect`。 |\n| `background` | `string` | — | 遮罩背景。 |\n| `customClass` | `string` | — | 遮罩类名。 |\n| `size` | 同组件 | — | 指示器尺寸。 |\n| `delay` | `number` | — | 显示前延迟（ms）。 |"
+            },
+            {
+              "id": "主题",
+              "title": "主题",
+              "body": "指示器颜色走语义色：`--m-color-primary`、`--m-color-success`、`--m-color-warning`、`--m-color-danger`、`--m-color-text-muted`。遮罩默认是表面色的半透明混合，可用 `background` 或 `--m-loading-mask-bg` 覆盖。全屏层级是 `--m-loading-z-index`（默认 `--m-z-base + 200`）。\n\n`prefers-reduced-motion: reduce` 时循环动效关闭。"
+            },
+            {
+              "id": "无障碍",
+              "title": "无障碍",
+              "body": "- 指示器使用 `role=\"status\"`。\n- 遮罩区域设置 `aria-busy`，被盖住的内容设为 `inert`。\n- 不要只靠动画表示加载；需要说明时传入 `text`。"
+            }
+          ],
+          "markdown": "---\ntitle: Loading\ncategory: 05 / FEEDBACK\ndescription: 加载指示与遮罩：多种动效、区域加载、v-loading 指令和命令式 service。\n---\n\n# Loading\n\n用于区域或全屏的加载反馈。可以只渲染指示器，也可以盖住一块内容，或用指令和服务在任意节点上打开遮罩。\n\n内置圆环、极光环、弹跳球、波浪条、脉冲环和星尘。默认是圆环（`effect=\"circular\"`）。要改全局默认动效，设置 `componentDefaults.Loading.effect`。\n\n全屏遮罩会 Teleport 到 `body`，避免被父级 `overflow` / `transform` 裁切。同一时间只保留一个全屏实例。\n\n## 引入\n\n```ts\nimport { loading, MLoading, useLoading, vLoading } from 'morya-ui'\n```\n\n`app.use(MoryaUI)` 会注册 `v-loading`。按需引入时，在 `<script setup>` 里导入 `vLoading` 即可在模板中使用该指令。\n\n## 动效\n\n```vue preview src=\"./demos/Effects.vue\"\n```\n\n## 区域加载\n\n组件包住内容，或在元素上使用 `v-loading`。未传 `text` 时不显示文案，读屏仍使用 locale 的 `loading`。可用 `delay` 避免短请求闪一下。\n\n```vue preview src=\"./demos/Region.zh.vue\"\n```\n\n## 服务式调用\n\n不传 `target` 时遮罩铺满视口。`close()` 会先播放离场再卸载，`setText()` 改文案。也可用 `useLoading()`，在组件卸载时自动关闭。\n\n```vue preview src=\"./demos/Service.zh.vue\"\n```\n\n```ts\nconst instance = loading.service({\n  text: '正在提交',\n  effect: 'wave',\n  lock: true,\n})\ninstance.setText('即将完成')\ninstance.close()\n```\n\n覆盖某个节点，或传入自定义指示器：\n\n```ts\nloading.service({\n  target: '#panel',\n  text: '加载中',\n})\n\nloading.service({\n  spinner: () => h('span', '…'),\n  text: '自定义',\n})\n```\n\n```ts\nconst { open, close } = useLoading({ effect: 'wave' })\nopen({ text: '保存中' })\nclose()\n```\n\n## 指令\n\n| 写法 | 说明 |\n| --- | --- |\n| `v-loading` | 布尔值，或带 `text` / `effect` / `background` / `lock` / `delay` / `spinner` 等字段的对象。 |\n| `v-loading.fullscreen` | 全屏遮罩。 |\n| `v-loading.lock` | 打开时锁定页面滚动。 |\n| `v-loading.body` | 遮罩挂到 `body`，并盖住当前元素（跟随尺寸变化）。 |\n| `m-loading-text` | 文案。 |\n| `m-loading-effect` | `circular` / `aurora` / `bounce` / `wave` / `pulse` / `stardust`。 |\n| `m-loading-background` | 遮罩背景色。 |\n| `m-loading-custom-class` | 加在遮罩上的类名。 |\n| `m-loading-delay` | 显示前延迟（ms）。 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `loading` | `boolean` | `true` | 包裹内容或 `fullscreen` 时是否显示遮罩。单独指示器始终显示。 |\n| `effect` | `'circular' \\| 'aurora' \\| 'bounce' \\| 'wave' \\| 'pulse' \\| 'stardust'` | `'circular'` | 动效。可用 `componentDefaults.Loading.effect` 改默认值。 |\n| `text` | `string` | — | 指示器下方文案。不传则不显示。 |\n| `ariaLabel` | `string` | locale `loading` | 无文案时的可访问名称。有文案时以文案为准。 |\n| `size` | `'small' \\| 'large' \\| 'sm' \\| 'md' \\| 'lg'` | — | 指示器缩放。 |\n| `background` | `string` | — | 遮罩背景，任意 CSS 颜色。 |\n| `customClass` | `string` | — | 加在遮罩上的类名。 |\n| `fullscreen` | `boolean` | `false` | 遮罩铺满视口（Teleport 到 `body`）。 |\n| `lock` | `boolean` | `false` | 显示时禁止页面滚动。 |\n| `delay` | `number` | `0` | 显示前延迟（ms）。 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs)。 |\n\n## Events\n\n无自定义事件。\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 被遮罩盖住的内容。 |\n| `indicator` | 替换遮罩中的指示器。仅在有默认插槽或 `fullscreen` 时生效。 |\n\n## 服务\n\n`loading.service(options)` 返回 `{ close, setText }`。`useLoading(defaults)` 返回 `{ open, close, setText }`。\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `target` | `string \\| HTMLElement` | — | 要盖住的元素或选择器。省略则为全屏。 |\n| `fullscreen` | `boolean` | 无 `target` 时为 `true` | 铺满视口。 |\n| `body` | `boolean` | `false` | 遮罩挂到 `body`，定位到 `target` 上。 |\n| `lock` | `boolean` | `false` | 锁定页面滚动。 |\n| `text` | `string` | — | 文案。 |\n| `effect` | 同组件 | `'circular'` | 动效。 |\n| `spinner` | `MRenderable` | — | 自定义指示器；设置后忽略内置 `effect`。 |\n| `background` | `string` | — | 遮罩背景。 |\n| `customClass` | `string` | — | 遮罩类名。 |\n| `size` | 同组件 | — | 指示器尺寸。 |\n| `delay` | `number` | — | 显示前延迟（ms）。 |\n\n## 主题\n\n指示器颜色走语义色：`--m-color-primary`、`--m-color-success`、`--m-color-warning`、`--m-color-danger`、`--m-color-text-muted`。遮罩默认是表面色的半透明混合，可用 `background` 或 `--m-loading-mask-bg` 覆盖。全屏层级是 `--m-loading-z-index`（默认 `--m-z-base + 200`）。\n\n`prefers-reduced-motion: reduce` 时循环动效关闭。\n\n## 无障碍\n\n- 指示器使用 `role=\"status\"`。\n- 遮罩区域设置 `aria-busy`，被盖住的内容设为 `inert`。\n- 不要只靠动画表示加载；需要说明时传入 `text`。\n"
+        },
+        "en-US": {
+          "title": "Loading",
+          "description": "Loading indicator and mask, with multiple effects, a region overlay, the v-loading directive, and an imperative service.",
+          "sections": [
+            {
+              "id": "overview",
+              "title": "",
+              "body": "# Loading\n\nRegion or fullscreen loading feedback. Render an indicator on its own, cover a block of content, or open a mask on any node with the directive or service.\n\nBuilt-in graphics are a circular spinner, aurora ring, bouncing balls, wave bars, pulse rings, and stardust. The default is the circular spinner (`effect=\"circular\"`). Set `componentDefaults.Loading.effect` to change the global default.\n\nFullscreen masks teleport to `body` so parent `overflow` / `transform` cannot clip them. Only one fullscreen instance stays open at a time."
+            },
+            {
+              "id": "import",
+              "title": "Import",
+              "body": "```ts\nimport { loading, MLoading, useLoading, vLoading } from 'morya-ui'\n```\n\n`app.use(MoryaUI)` registers `v-loading`. For on-demand usage, import `vLoading` in `<script setup>` and the template can use the directive."
+            },
+            {
+              "id": "effects",
+              "title": "Effects",
+              "body": "```vue preview src=\"./demos/Effects.vue\"\n```"
+            },
+            {
+              "id": "region",
+              "title": "Region",
+              "body": "Wrap content with the component, or put `v-loading` on an element. Omit `text` to hide the caption; screen readers still get the locale `loading` string. Use `delay` to avoid a flash on short requests.\n\n```vue preview src=\"./demos/Region.en.vue\"\n```"
+            },
+            {
+              "id": "service",
+              "title": "Service",
+              "body": "With no `target`, the mask covers the viewport. `close()` plays the leave transition before unmounting, and `setText()` changes the caption. `useLoading()` closes automatically when the caller unmounts.\n\n```vue preview src=\"./demos/Service.en.vue\"\n```\n\n```ts\nconst instance = loading.service({\n  text: 'Submitting',\n  effect: 'wave',\n  lock: true,\n})\ninstance.setText('Almost done')\ninstance.close()\n```\n\nCover one node, or pass a custom indicator:\n\n```ts\nloading.service({\n  target: '#panel',\n  text: 'Loading',\n})\n\nloading.service({\n  spinner: () => h('span', '…'),\n  text: 'Custom',\n})\n```\n\n```ts\nconst { open, close } = useLoading({ effect: 'wave' })\nopen({ text: 'Saving' })\nclose()\n```"
+            },
+            {
+              "id": "directive",
+              "title": "Directive",
+              "body": "| Form | Description |\n| --- | --- |\n| `v-loading` | A boolean, or an object with `text`, `effect`, `background`, `lock`, `delay`, `spinner`, and related fields. |\n| `v-loading.fullscreen` | Fullscreen mask. |\n| `v-loading.lock` | Lock page scrolling while open. |\n| `v-loading.body` | Mount the mask on `body`, positioned over the element (tracks size changes). |\n| `m-loading-text` | Caption. |\n| `m-loading-effect` | `circular` / `aurora` / `bounce` / `wave` / `pulse` / `stardust`. |\n| `m-loading-background` | Mask background. |\n| `m-loading-custom-class` | Extra class on the mask. |\n| `m-loading-delay` | Delay before showing (ms). |"
+            },
+            {
+              "id": "props",
+              "title": "Props",
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `loading` | `boolean` | `true` | Mask visibility when wrapping content or using `fullscreen`. A bare indicator is always shown. |\n| `effect` | `'circular' \\| 'aurora' \\| 'bounce' \\| 'wave' \\| 'pulse' \\| 'stardust'` | `'circular'` | Graphic. Override the default with `componentDefaults.Loading.effect`. |\n| `text` | `string` | — | Caption under the indicator. Hidden when omitted. |\n| `ariaLabel` | `string` | locale `loading` | Accessible name when there is no caption. A caption is used as the name when present. |\n| `size` | `'small' \\| 'large' \\| 'sm' \\| 'md' \\| 'lg'` | — | Indicator scale. |\n| `background` | `string` | — | Mask background, any CSS color. |\n| `customClass` | `string` | — | Extra class on the mask. |\n| `fullscreen` | `boolean` | `false` | Cover the viewport (teleported to `body`). |\n| `lock` | `boolean` | `false` | Prevent page scrolling while visible. |\n| `delay` | `number` | `0` | Delay before showing (ms). |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |"
+            },
+            {
+              "id": "events",
+              "title": "Events",
+              "body": "No custom events."
+            },
+            {
+              "id": "slots",
+              "title": "Slots",
+              "body": "| Slot | Description |\n| --- | --- |\n| `default` | Content covered by the mask. |\n| `indicator` | Replaces the indicator inside the mask. Used when there is a default slot or `fullscreen`. |"
+            },
+            {
+              "id": "service",
+              "title": "Service",
+              "body": "`loading.service(options)` returns `{ close, setText }`. `useLoading(defaults)` returns `{ open, close, setText }`.\n\n| Option | Type | Default | Description |\n| --- | --- | --- | --- |\n| `target` | `string \\| HTMLElement` | — | Element or selector to cover. Omit for fullscreen. |\n| `fullscreen` | `boolean` | `true` when `target` is omitted | Cover the viewport. |\n| `body` | `boolean` | `false` | Mount the mask on `body`, positioned over `target`. |\n| `lock` | `boolean` | `false` | Lock page scrolling. |\n| `text` | `string` | — | Caption. |\n| `effect` | same as the component | `'circular'` | Graphic. |\n| `spinner` | `MRenderable` | — | Custom indicator; skips built-in effects when set. |\n| `background` | `string` | — | Mask background. |\n| `customClass` | `string` | — | Extra mask class. |\n| `size` | same as the component | — | Indicator size. |\n| `delay` | `number` | — | Delay before showing (ms). |"
+            },
+            {
+              "id": "theme",
+              "title": "Theme",
+              "body": "Indicator colors use semantic tokens: `--m-color-primary`, `--m-color-success`, `--m-color-warning`, `--m-color-danger`, and `--m-color-text-muted`. The mask defaults to a translucent surface mix. Override it with `background` or `--m-loading-mask-bg`. Fullscreen stacking uses `--m-loading-z-index` (default `--m-z-base + 200`).\n\nLooping motion is disabled under `prefers-reduced-motion: reduce`."
+            },
+            {
+              "id": "accessibility",
+              "title": "Accessibility",
+              "body": "- The indicator uses `role=\"status\"`.\n- The masked region sets `aria-busy`, and covered content is `inert`.\n- Do not rely on motion alone; pass `text` when the wait needs an explanation."
+            }
+          ],
+          "markdown": "---\ntitle: Loading\ncategory: 05 / FEEDBACK\ndescription: Loading indicator and mask, with multiple effects, a region overlay, the v-loading directive, and an imperative service.\n---\n\n# Loading\n\nRegion or fullscreen loading feedback. Render an indicator on its own, cover a block of content, or open a mask on any node with the directive or service.\n\nBuilt-in graphics are a circular spinner, aurora ring, bouncing balls, wave bars, pulse rings, and stardust. The default is the circular spinner (`effect=\"circular\"`). Set `componentDefaults.Loading.effect` to change the global default.\n\nFullscreen masks teleport to `body` so parent `overflow` / `transform` cannot clip them. Only one fullscreen instance stays open at a time.\n\n## Import\n\n```ts\nimport { loading, MLoading, useLoading, vLoading } from 'morya-ui'\n```\n\n`app.use(MoryaUI)` registers `v-loading`. For on-demand usage, import `vLoading` in `<script setup>` and the template can use the directive.\n\n## Effects\n\n```vue preview src=\"./demos/Effects.vue\"\n```\n\n## Region\n\nWrap content with the component, or put `v-loading` on an element. Omit `text` to hide the caption; screen readers still get the locale `loading` string. Use `delay` to avoid a flash on short requests.\n\n```vue preview src=\"./demos/Region.en.vue\"\n```\n\n## Service\n\nWith no `target`, the mask covers the viewport. `close()` plays the leave transition before unmounting, and `setText()` changes the caption. `useLoading()` closes automatically when the caller unmounts.\n\n```vue preview src=\"./demos/Service.en.vue\"\n```\n\n```ts\nconst instance = loading.service({\n  text: 'Submitting',\n  effect: 'wave',\n  lock: true,\n})\ninstance.setText('Almost done')\ninstance.close()\n```\n\nCover one node, or pass a custom indicator:\n\n```ts\nloading.service({\n  target: '#panel',\n  text: 'Loading',\n})\n\nloading.service({\n  spinner: () => h('span', '…'),\n  text: 'Custom',\n})\n```\n\n```ts\nconst { open, close } = useLoading({ effect: 'wave' })\nopen({ text: 'Saving' })\nclose()\n```\n\n## Directive\n\n| Form | Description |\n| --- | --- |\n| `v-loading` | A boolean, or an object with `text`, `effect`, `background`, `lock`, `delay`, `spinner`, and related fields. |\n| `v-loading.fullscreen` | Fullscreen mask. |\n| `v-loading.lock` | Lock page scrolling while open. |\n| `v-loading.body` | Mount the mask on `body`, positioned over the element (tracks size changes). |\n| `m-loading-text` | Caption. |\n| `m-loading-effect` | `circular` / `aurora` / `bounce` / `wave` / `pulse` / `stardust`. |\n| `m-loading-background` | Mask background. |\n| `m-loading-custom-class` | Extra class on the mask. |\n| `m-loading-delay` | Delay before showing (ms). |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `loading` | `boolean` | `true` | Mask visibility when wrapping content or using `fullscreen`. A bare indicator is always shown. |\n| `effect` | `'circular' \\| 'aurora' \\| 'bounce' \\| 'wave' \\| 'pulse' \\| 'stardust'` | `'circular'` | Graphic. Override the default with `componentDefaults.Loading.effect`. |\n| `text` | `string` | — | Caption under the indicator. Hidden when omitted. |\n| `ariaLabel` | `string` | locale `loading` | Accessible name when there is no caption. A caption is used as the name when present. |\n| `size` | `'small' \\| 'large' \\| 'sm' \\| 'md' \\| 'lg'` | — | Indicator scale. |\n| `background` | `string` | — | Mask background, any CSS color. |\n| `customClass` | `string` | — | Extra class on the mask. |\n| `fullscreen` | `boolean` | `false` | Cover the viewport (teleported to `body`). |\n| `lock` | `boolean` | `false` | Prevent page scrolling while visible. |\n| `delay` | `number` | `0` | Delay before showing (ms). |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n## Events\n\nNo custom events.\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Content covered by the mask. |\n| `indicator` | Replaces the indicator inside the mask. Used when there is a default slot or `fullscreen`. |\n\n## Service\n\n`loading.service(options)` returns `{ close, setText }`. `useLoading(defaults)` returns `{ open, close, setText }`.\n\n| Option | Type | Default | Description |\n| --- | --- | --- | --- |\n| `target` | `string \\| HTMLElement` | — | Element or selector to cover. Omit for fullscreen. |\n| `fullscreen` | `boolean` | `true` when `target` is omitted | Cover the viewport. |\n| `body` | `boolean` | `false` | Mount the mask on `body`, positioned over `target`. |\n| `lock` | `boolean` | `false` | Lock page scrolling. |\n| `text` | `string` | — | Caption. |\n| `effect` | same as the component | `'circular'` | Graphic. |\n| `spinner` | `MRenderable` | — | Custom indicator; skips built-in effects when set. |\n| `background` | `string` | — | Mask background. |\n| `customClass` | `string` | — | Extra mask class. |\n| `size` | same as the component | — | Indicator size. |\n| `delay` | `number` | — | Delay before showing (ms). |\n\n## Theme\n\nIndicator colors use semantic tokens: `--m-color-primary`, `--m-color-success`, `--m-color-warning`, `--m-color-danger`, and `--m-color-text-muted`. The mask defaults to a translucent surface mix. Override it with `background` or `--m-loading-mask-bg`. Fullscreen stacking uses `--m-loading-z-index` (default `--m-z-base + 200`).\n\nLooping motion is disabled under `prefers-reduced-motion: reduce`.\n\n## Accessibility\n\n- The indicator uses `role=\"status\"`.\n- The masked region sets `aria-busy`, and covered content is `inert`.\n- Do not rely on motion alone; pass `text` when the wait needs an explanation.\n"
+        }
+      }
+    },
+    {
       "id": "MegaMenu",
       "name": "MegaMenu",
       "exportName": "MMegaMenu",
@@ -16067,7 +16419,7 @@
           "sectionId": "尺寸",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MButton, MResult } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <div class=\"grid gap-6\" style=\"grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\">\r\n    <MResult\r\n      size=\"small\"\r\n      status=\"success\"\r\n      title=\"保存成功\"\r\n    >\r\n      <template #footer>\r\n        <MButton\r\n          label=\"知道了\"\r\n          size=\"small\"\r\n          severity=\"secondary\"\r\n        />\r\n      </template>\r\n    </MResult>\r\n    <MResult\r\n      size=\"small\"\r\n      status=\"error\"\r\n      title=\"上传失败\"\r\n    >\r\n      <template #footer>\r\n        <MButton\r\n          label=\"重试\"\r\n          size=\"small\"\r\n        />\r\n      </template>\r\n    </MResult>\r\n  </div>\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MButton, MResult } from 'morya-ui'\n</script>\n\n<template>\n  <div class=\"grid gap-6\" style=\"grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\">\n    <MResult\n      size=\"small\"\n      status=\"success\"\n      title=\"保存成功\"\n    >\n      <template #footer>\n        <MButton\n          label=\"知道了\"\n          size=\"small\"\n          severity=\"secondary\"\n        />\n      </template>\n    </MResult>\n    <MResult\n      size=\"small\"\n      status=\"error\"\n      title=\"上传失败\"\n    >\n      <template #footer>\n        <MButton\n          label=\"重试\"\n          size=\"small\"\n        />\n      </template>\n    </MResult>\n  </div>\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -16112,7 +16464,7 @@
           "sectionId": "size",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MButton, MResult } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <div class=\"grid gap-6\" style=\"grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\">\r\n    <MResult\r\n      size=\"small\"\r\n      status=\"success\"\r\n      title=\"Saved\"\r\n    >\r\n      <template #footer>\r\n        <MButton\r\n          label=\"OK\"\r\n          size=\"small\"\r\n          severity=\"secondary\"\r\n        />\r\n      </template>\r\n    </MResult>\r\n    <MResult\r\n      size=\"small\"\r\n      status=\"error\"\r\n      title=\"Upload failed\"\r\n    >\r\n      <template #footer>\r\n        <MButton\r\n          label=\"Retry\"\r\n          size=\"small\"\r\n        />\r\n      </template>\r\n    </MResult>\r\n  </div>\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MButton, MResult } from 'morya-ui'\n</script>\n\n<template>\n  <div class=\"grid gap-6\" style=\"grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\">\n    <MResult\n      size=\"small\"\n      status=\"success\"\n      title=\"Saved\"\n    >\n      <template #footer>\n        <MButton\n          label=\"OK\"\n          size=\"small\"\n          severity=\"secondary\"\n        />\n      </template>\n    </MResult>\n    <MResult\n      size=\"small\"\n      status=\"error\"\n      title=\"Upload failed\"\n    >\n      <template #footer>\n        <MButton\n          label=\"Retry\"\n          size=\"small\"\n        />\n      </template>\n    </MResult>\n  </div>\n</template>",
           "locale": "en-US"
         }
       ],
@@ -19473,7 +19825,7 @@
           "sectionId": "标签-纯文字-自定义图标",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MStatus } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <div class=\"grid gap-4\">\r\n    <div class=\"flex flex-wrap gap-4 items-center\">\r\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"tag\" />\r\n      <MStatus label=\"运行中\" severity=\"info\" variant=\"tag\" processing />\r\n      <MStatus label=\"待审核\" severity=\"warn\" variant=\"tag\" />\r\n      <MStatus label=\"失败\" severity=\"danger\" variant=\"tag\" />\r\n      <MStatus label=\"已归档\" variant=\"tag\" />\r\n      <MStatus label=\"已禁用\" variant=\"tag\" disabled />\r\n    </div>\r\n    <div class=\"flex flex-wrap gap-4 items-center\">\r\n      <MStatus label=\"自定义图标\" severity=\"success\" icon=\"check\" />\r\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"text\" />\r\n      <MStatus label=\"同步中…\" severity=\"info\" variant=\"text\" />\r\n      <MStatus label=\"—\" variant=\"text\" />\r\n    </div>\r\n  </div>\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MStatus } from 'morya-ui'\n</script>\n\n<template>\n  <div class=\"grid gap-4\">\n    <div class=\"flex flex-wrap gap-4 items-center\">\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"tag\" />\n      <MStatus label=\"运行中\" severity=\"info\" variant=\"tag\" processing />\n      <MStatus label=\"待审核\" severity=\"warn\" variant=\"tag\" />\n      <MStatus label=\"失败\" severity=\"danger\" variant=\"tag\" />\n      <MStatus label=\"已归档\" variant=\"tag\" />\n      <MStatus label=\"已禁用\" variant=\"tag\" disabled />\n    </div>\n    <div class=\"flex flex-wrap gap-4 items-center\">\n      <MStatus label=\"自定义图标\" severity=\"success\" icon=\"check\" />\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"text\" />\n      <MStatus label=\"同步中…\" severity=\"info\" variant=\"text\" />\n      <MStatus label=\"—\" variant=\"text\" />\n    </div>\n  </div>\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -19518,7 +19870,7 @@
           "sectionId": "tag-text-custom-icon",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\r\nimport { MStatus } from 'morya-ui'\r\n</script>\r\n\r\n<template>\r\n  <div class=\"grid gap-4\">\r\n    <div class=\"flex flex-wrap gap-4 items-center\">\r\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"tag\" />\r\n      <MStatus label=\"运行中\" severity=\"info\" variant=\"tag\" processing />\r\n      <MStatus label=\"待审核\" severity=\"warn\" variant=\"tag\" />\r\n      <MStatus label=\"失败\" severity=\"danger\" variant=\"tag\" />\r\n      <MStatus label=\"已归档\" variant=\"tag\" />\r\n      <MStatus label=\"已禁用\" variant=\"tag\" disabled />\r\n    </div>\r\n    <div class=\"flex flex-wrap gap-4 items-center\">\r\n      <MStatus label=\"自定义图标\" severity=\"success\" icon=\"check\" />\r\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"text\" />\r\n      <MStatus label=\"同步中…\" severity=\"info\" variant=\"text\" />\r\n      <MStatus label=\"—\" variant=\"text\" />\r\n    </div>\r\n  </div>\r\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MStatus } from 'morya-ui'\n</script>\n\n<template>\n  <div class=\"grid gap-4\">\n    <div class=\"flex flex-wrap gap-4 items-center\">\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"tag\" />\n      <MStatus label=\"运行中\" severity=\"info\" variant=\"tag\" processing />\n      <MStatus label=\"待审核\" severity=\"warn\" variant=\"tag\" />\n      <MStatus label=\"失败\" severity=\"danger\" variant=\"tag\" />\n      <MStatus label=\"已归档\" variant=\"tag\" />\n      <MStatus label=\"已禁用\" variant=\"tag\" disabled />\n    </div>\n    <div class=\"flex flex-wrap gap-4 items-center\">\n      <MStatus label=\"自定义图标\" severity=\"success\" icon=\"check\" />\n      <MStatus label=\"已完成\" severity=\"success\" variant=\"text\" />\n      <MStatus label=\"同步中…\" severity=\"info\" variant=\"text\" />\n      <MStatus label=\"—\" variant=\"text\" />\n    </div>\n  </div>\n</template>",
           "locale": "en-US"
         }
       ],
@@ -21240,7 +21592,7 @@
               "body": "<h4 id=\"TabItem\">TabItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TabItem {\n  label: string\n  value: string\n  disabled?: boolean\n  /** When set, overrides the Tabs `closable` prop for this item. */\n  closable?: boolean\n}\n```"
             }
           ],
-          "markdown": "---\ntitle: Tabs\ncategory: 04 / NAVIGATION\ndescription: 标签页切换。支持 line/card、关闭/新增、extra 与溢出滚动。\n---\n\n# Tabs\n\n标签页用于在同一视图内切换内容分区。\n\n## 引入\n\n```ts\nimport { MTabs } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Card / closable / extra\n\n```vue preview src=\"./demos/CardClosableExtra.zh.vue\"\n```\n\n标签过多超出容器时，两端会出现滚动按钮。\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | — | 当前活动 tab。 |\n| `tabs` | `TabItem[]` | — | 标签列表；支持 `disabled` / `closable`。 |\n| `type` | `'line' \\| 'card'` | `'line'` | 外观。 |\n| `closable` | `boolean` | `false` | 显示关闭按钮；单项 `closable` 优先。 |\n| `addable` | `boolean` | `false` | 显示新增按钮。 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `string` | 活动项变化。 |\n| `change` | `string` | 切换完成。 |\n| `close` | `string` | 点击关闭。 |\n| `add` | — | 点击新增。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 面板内容，作用域 `{ activeValue }`。 |\n| `extra` | 标签栏右侧额外内容。 |\n\n## 类型\n\n<h4 id=\"TabItem\">TabItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TabItem {\r\n  label: string\r\n  value: string\r\n  disabled?: boolean\r\n  /** When set, overrides the Tabs `closable` prop for this item. */\r\n  closable?: boolean\r\n}\n```\n"
+          "markdown": "---\ntitle: Tabs\ncategory: 04 / NAVIGATION\ndescription: 标签页切换。支持 line/card、关闭/新增、extra 与溢出滚动。\n---\n\n# Tabs\n\n标签页用于在同一视图内切换内容分区。\n\n## 引入\n\n```ts\nimport { MTabs } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Card / closable / extra\n\n```vue preview src=\"./demos/CardClosableExtra.zh.vue\"\n```\n\n标签过多超出容器时，两端会出现滚动按钮。\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | — | 当前活动 tab。 |\n| `tabs` | `TabItem[]` | — | 标签列表；支持 `disabled` / `closable`。 |\n| `type` | `'line' \\| 'card'` | `'line'` | 外观。 |\n| `closable` | `boolean` | `false` | 显示关闭按钮；单项 `closable` 优先。 |\n| `addable` | `boolean` | `false` | 显示新增按钮。 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `string` | 活动项变化。 |\n| `change` | `string` | 切换完成。 |\n| `close` | `string` | 点击关闭。 |\n| `add` | — | 点击新增。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 面板内容，作用域 `{ activeValue }`。 |\n| `extra` | 标签栏右侧额外内容。 |\n\n## 类型\n\n<h4 id=\"TabItem\">TabItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TabItem {\n  label: string\n  value: string\n  disabled?: boolean\n  /** When set, overrides the Tabs `closable` prop for this item. */\n  closable?: boolean\n}\n```\n"
         },
         "en-US": {
           "title": "Tabs",
@@ -21287,7 +21639,7 @@
               "body": "<h4 id=\"TabItem\">TabItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TabItem {\n  label: string\n  value: string\n  disabled?: boolean\n  /** When set, overrides the Tabs `closable` prop for this item. */\n  closable?: boolean\n}\n```"
             }
           ],
-          "markdown": "---\ntitle: Tabs\ncategory: 04 / NAVIGATION\ndescription: Tab switcher with line/card types, closable/addable tabs, extra slot, and overflow scrolling.\n---\n\n# Tabs\n\nTabs switch content panels within the same view.\n\n## Import\n\n```ts\nimport { MTabs } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Card / closable / extra\n\n```vue preview src=\"./demos/CardClosableExtra.en.vue\"\n```\n\nWhen tabs overflow the container, scroll buttons appear at both ends.\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | — | Currently active tab. |\n| `tabs` | `TabItem[]` | — | Tab list; supports `disabled` / `closable`. |\n| `type` | `'line' \\| 'card'` | `'line'` | Appearance. |\n| `closable` | `boolean` | `false` | Show close buttons; per-item `closable` wins. |\n| `addable` | `boolean` | `false` | Show an add button. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `string` | Emitted when the active item changes. |\n| `change` | `string` | Emitted after the switch completes. |\n| `close` | `string` | Emitted when a close button is clicked. |\n| `add` | — | Emitted when the add button is clicked. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Panel content; scoped slot `{ activeValue }`. |\n| `extra` | Extra content on the right of the tab bar. |\n\n## Types\n\n<h4 id=\"TabItem\">TabItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TabItem {\r\n  label: string\r\n  value: string\r\n  disabled?: boolean\r\n  /** When set, overrides the Tabs `closable` prop for this item. */\r\n  closable?: boolean\r\n}\n```\n"
+          "markdown": "---\ntitle: Tabs\ncategory: 04 / NAVIGATION\ndescription: Tab switcher with line/card types, closable/addable tabs, extra slot, and overflow scrolling.\n---\n\n# Tabs\n\nTabs switch content panels within the same view.\n\n## Import\n\n```ts\nimport { MTabs } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Card / closable / extra\n\n```vue preview src=\"./demos/CardClosableExtra.en.vue\"\n```\n\nWhen tabs overflow the container, scroll buttons appear at both ends.\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | — | Currently active tab. |\n| `tabs` | `TabItem[]` | — | Tab list; supports `disabled` / `closable`. |\n| `type` | `'line' \\| 'card'` | `'line'` | Appearance. |\n| `closable` | `boolean` | `false` | Show close buttons; per-item `closable` wins. |\n| `addable` | `boolean` | `false` | Show an add button. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `string` | Emitted when the active item changes. |\n| `change` | `string` | Emitted after the switch completes. |\n| `close` | `string` | Emitted when a close button is clicked. |\n| `add` | — | Emitted when the add button is clicked. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Panel content; scoped slot `{ activeValue }`. |\n| `extra` | Extra content on the right of the tab bar. |\n\n## Types\n\n<h4 id=\"TabItem\">TabItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TabItem {\n  label: string\n  value: string\n  disabled?: boolean\n  /** When set, overrides the Tabs `closable` prop for this item. */\n  closable?: boolean\n}\n```\n"
         }
       }
     },
@@ -22863,7 +23215,7 @@
               "body": "<h4 id=\"ToastMessage\">ToastMessage</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface ToastMessage {\n  id: string | number\n  summary: MRenderable\n  detail?: MRenderable\n  severity?: ToastSeverity\n  closable?: boolean\n  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */\n  life?: number\n}\n```"
             }
           ],
-          "markdown": "---\r\ntitle: Toast\r\ncategory: 05 / FEEDBACK\r\ndescription: 四角浮层通知，支持 API 与受控列表。\r\n---\r\n\r\n# Toast\r\n\r\n带标题 / 详情的四角通知。可用 `toast` API，或继续用 `:messages` 受控渲染。\r\n\r\n与 [Message](/components/Message) 的分工：Message 是**默认**的轻量单行反馈；Toast 仅在需要 `summary` / `detail` 或角落通知时使用。受控 `:messages` 时请自行限制条数，`max` 只作用于服务队列。\r\n\r\n> AI / 业务代码选型细则见 [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md)。\r\n\r\n**不要**用 `toast.add({ summary: '已保存' })` 代替 `message.success('已保存')`。\r\n\r\n## 引入\r\n\r\n```ts\r\nimport { MToast, toast, useToast } from 'morya-ui'\r\n```\r\n\r\n## API\r\n\r\n```vue preview src=\"./demos/Api.zh.vue\"\r\n```\r\n\r\n## 自定义内容\r\n\r\n`summary` / `detail` 同样支持字符串、`h()`、组件或渲染工厂。\r\n\r\n```vue preview src=\"./demos/CustomContent.zh.vue\"\r\n```\r\n\r\n## Controlled\r\n\r\n仍可通过 `messages` + `close` 自行管理列表。\r\n\r\n```vue preview src=\"./demos/Controlled.vue\"\r\n```\r\n\r\n## Methods\r\n\r\n| 方法 | 说明 |\r\n| --- | --- |\r\n| `toast.success / info / warn / error` | 按语义添加 |\r\n| `toast.add(options)` | 添加一条 |\r\n| `toast.remove(id)` / `toast.close(id)` | 移除 |\r\n| `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | 清空 |\r\n| `toast.setDefaults({ position, max })` | 默认角落位置与并发上限 |\r\n\r\n字符串入参视为 `summary`。默认 `life` 为 `3000`；`0` 表示不自动关闭。\r\n\r\n## Props\r\n\r\n| 参数 | 类型 | 默认值 | 说明 |\r\n| --- | --- | --- | --- |\r\n| `messages` | `ToastMessage[]` | — | 受控列表；省略则绑定 `toast` 服务队列 |\r\n| `position` | `'top-right' \\| 'top-left' \\| 'bottom-right' \\| 'bottom-left'` | `'top-right'` | 容器定位 |\r\n| `max` | `number` | — | 同时可见条数；超出丢掉最旧一条（仅服务队列） |\r\n| `teleport` | `boolean` | `true` | 浮层 Teleport |\r\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标 |\r\n| `auto` | `boolean` | — | — |\r\n\r\n### ToastMessage\r\n\r\n| 字段 | 类型 | 默认值 | 说明 |\r\n| --- | --- | --- | --- |\r\n| `id` | `string \\| number` | — | 唯一键 |\r\n| `summary` | `string \\| number \\| VNode \\| Component \\| (() => VNodeChild)` | — | 标题 |\r\n| `detail` | 同上 | — | 详情 |\r\n| `severity` | `'success' \\| 'info' \\| 'warn' \\| 'error' \\| …` | `'info'` | 语义色 |\r\n| `closable` | `boolean` | `true` | 关闭按钮 |\r\n| `life` | `number` | API 默认 `3000` | 自动关闭毫秒 |\r\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\r\n\r\n\r\n## Events\r\n\r\n| 事件名 | 参数 | 说明 |\r\n| --- | --- | --- |\r\n| `close` | `ToastMessage` | 点击关闭；受控模式下由调用方移除 |\r\n\r\n## Slots\r\n\r\n无插槽；通过 `messages` prop 或 toast API 驱动。\r\n\r\n## 类型\r\n\r\n<h4 id=\"ToastMessage\">ToastMessage</h4>\r\n\r\n完整定义见源码 `types.ts`。\r\n\r\n```ts\r\ninterface ToastMessage {\r\n  id: string | number\r\n  summary: MRenderable\r\n  detail?: MRenderable\r\n  severity?: ToastSeverity\r\n  closable?: boolean\r\n  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */\r\n  life?: number\r\n}\r\n```\r\n"
+          "markdown": "---\ntitle: Toast\ncategory: 05 / FEEDBACK\ndescription: 四角浮层通知，支持 API 与受控列表。\n---\n\n# Toast\n\n带标题 / 详情的四角通知。可用 `toast` API，或继续用 `:messages` 受控渲染。\n\n与 [Message](/components/Message) 的分工：Message 是**默认**的轻量单行反馈；Toast 仅在需要 `summary` / `detail` 或角落通知时使用。受控 `:messages` 时请自行限制条数，`max` 只作用于服务队列。\n\n> AI / 业务代码选型细则见 [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md)。\n\n**不要**用 `toast.add({ summary: '已保存' })` 代替 `message.success('已保存')`。\n\n## 引入\n\n```ts\nimport { MToast, toast, useToast } from 'morya-ui'\n```\n\n## API\n\n```vue preview src=\"./demos/Api.zh.vue\"\n```\n\n## 自定义内容\n\n`summary` / `detail` 同样支持字符串、`h()`、组件或渲染工厂。\n\n```vue preview src=\"./demos/CustomContent.zh.vue\"\n```\n\n## Controlled\n\n仍可通过 `messages` + `close` 自行管理列表。\n\n```vue preview src=\"./demos/Controlled.vue\"\n```\n\n## Methods\n\n| 方法 | 说明 |\n| --- | --- |\n| `toast.success / info / warn / error` | 按语义添加 |\n| `toast.add(options)` | 添加一条 |\n| `toast.remove(id)` / `toast.close(id)` | 移除 |\n| `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | 清空 |\n| `toast.setDefaults({ position, max })` | 默认角落位置与并发上限 |\n\n字符串入参视为 `summary`。默认 `life` 为 `3000`；`0` 表示不自动关闭。\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `messages` | `ToastMessage[]` | — | 受控列表；省略则绑定 `toast` 服务队列 |\n| `position` | `'top-right' \\| 'top-left' \\| 'bottom-right' \\| 'bottom-left'` | `'top-right'` | 容器定位 |\n| `max` | `number` | — | 同时可见条数；超出丢掉最旧一条（仅服务队列） |\n| `teleport` | `boolean` | `true` | 浮层 Teleport |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标 |\n| `auto` | `boolean` | — | — |\n\n### ToastMessage\n\n| 字段 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `id` | `string \\| number` | — | 唯一键 |\n| `summary` | `string \\| number \\| VNode \\| Component \\| (() => VNodeChild)` | — | 标题 |\n| `detail` | 同上 | — | 详情 |\n| `severity` | `'success' \\| 'info' \\| 'warn' \\| 'error' \\| …` | `'info'` | 语义色 |\n| `closable` | `boolean` | `true` | 关闭按钮 |\n| `life` | `number` | API 默认 `3000` | 自动关闭毫秒 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `close` | `ToastMessage` | 点击关闭；受控模式下由调用方移除 |\n\n## Slots\n\n无插槽；通过 `messages` prop 或 toast API 驱动。\n\n## 类型\n\n<h4 id=\"ToastMessage\">ToastMessage</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface ToastMessage {\n  id: string | number\n  summary: MRenderable\n  detail?: MRenderable\n  severity?: ToastSeverity\n  closable?: boolean\n  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */\n  life?: number\n}\n```\n"
         },
         "en-US": {
           "title": "Toast",
@@ -22920,7 +23272,7 @@
               "body": "<h4 id=\"ToastMessage\">ToastMessage</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface ToastMessage {\n  id: string | number\n  summary: MRenderable\n  detail?: MRenderable\n  severity?: ToastSeverity\n  closable?: boolean\n  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */\n  life?: number\n}\n```"
             }
           ],
-          "markdown": "---\r\ntitle: Toast\r\ncategory: 05 / FEEDBACK\r\ndescription: Corner floating notifications with API and controlled lists.\r\n---\r\n\r\n# Toast\r\n\r\nCorner notifications with a title and optional detail. Use the `toast` API, or keep rendering with a controlled `:messages` list.\r\n\r\nVs [Message](/components/Message): Message is the **default** for short single-line feedback; Toast is for `summary` / `detail` or corner notifications. `max` applies to the service queue only.\r\n\r\n> Selection guide: [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md).\r\n\r\nDo **not** use `toast.add({ summary: 'Saved' })` when `message.success('Saved')` is enough.\r\n\r\n## Import\r\n\r\n```ts\r\nimport { MToast, toast, useToast } from 'morya-ui'\r\n```\r\n\r\n## API\r\n\r\n```vue preview src=\"./demos/Api.en.vue\"\r\n```\r\n\r\n## Custom content\r\n\r\n`summary` / `detail` also accept strings, `h()` VNodes, components, or render factories.\r\n\r\n```vue preview src=\"./demos/CustomContent.en.vue\"\r\n```\r\n\r\n## Controlled\r\n\r\nYou can still manage the list yourself with `messages` + `close`.\r\n\r\n```vue preview src=\"./demos/Controlled.vue\"\r\n```\r\n\r\n## Methods\r\n\r\n| Method | Description |\r\n| --- | --- |\r\n| `toast.success / info / warn / error` | Add by severity |\r\n| `toast.add(options)` | Add one |\r\n| `toast.remove(id)` / `toast.close(id)` | Remove |\r\n| `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | Clear all |\r\n| `toast.setDefaults({ position, max })` | Default corner and concurrency cap |\r\n\r\nA string argument is treated as `summary`. Default `life` is `3000`; use `0` to keep open.\r\n\r\n## Props\r\n\r\n| Prop | Type | Default | Description |\r\n| --- | --- | --- | --- |\r\n| `messages` | `ToastMessage[]` | — | Controlled list; omit to bind the `toast` service queue |\r\n| `position` | `'top-right' \\| 'top-left' \\| 'bottom-right' \\| 'bottom-left'` | `'top-right'` | Container placement |\r\n| `max` | `number` | — | Max visible items; oldest is dropped (service queue only) |\r\n| `teleport` | `boolean` | `true` | Whether to Teleport |\r\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target |\r\n\r\n### ToastMessage\r\n\r\n| Field | Type | Default | Description |\r\n| --- | --- | --- | --- |\r\n| `id` | `string \\| number` | — | Unique key |\r\n| `summary` | `string \\| number \\| VNode \\| Component \\| (() => VNodeChild)` | — | Title |\r\n| `detail` | same as above | — | Detail |\r\n| `severity` | `'success' \\| 'info' \\| 'warn' \\| 'error' \\| …` | `'info'` | Tone |\r\n| `closable` | `boolean` | `true` | Close button |\r\n| `life` | `number` | API default `3000` | Auto-close ms |\r\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\r\n\r\n\r\n## Events\r\n\r\n| Event | Payload | Description |\r\n| --- | --- | --- |\r\n| `close` | `ToastMessage` | Close clicked; remove it yourself in controlled mode |\r\n\r\n## Slots\r\n\r\nNo slots; driven by the `messages` prop or toast API.\r\n\r\n## Types\r\n\r\n<h4 id=\"ToastMessage\">ToastMessage</h4>\r\n\r\nSee source `types.ts` for the full definition.\r\n\r\n```ts\r\ninterface ToastMessage {\r\n  id: string | number\r\n  summary: MRenderable\r\n  detail?: MRenderable\r\n  severity?: ToastSeverity\r\n  closable?: boolean\r\n  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */\r\n  life?: number\r\n}\r\n```\r\n"
+          "markdown": "---\ntitle: Toast\ncategory: 05 / FEEDBACK\ndescription: Corner floating notifications with API and controlled lists.\n---\n\n# Toast\n\nCorner notifications with a title and optional detail. Use the `toast` API, or keep rendering with a controlled `:messages` list.\n\nVs [Message](/components/Message): Message is the **default** for short single-line feedback; Toast is for `summary` / `detail` or corner notifications. `max` applies to the service queue only.\n\n> Selection guide: [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md).\n\nDo **not** use `toast.add({ summary: 'Saved' })` when `message.success('Saved')` is enough.\n\n## Import\n\n```ts\nimport { MToast, toast, useToast } from 'morya-ui'\n```\n\n## API\n\n```vue preview src=\"./demos/Api.en.vue\"\n```\n\n## Custom content\n\n`summary` / `detail` also accept strings, `h()` VNodes, components, or render factories.\n\n```vue preview src=\"./demos/CustomContent.en.vue\"\n```\n\n## Controlled\n\nYou can still manage the list yourself with `messages` + `close`.\n\n```vue preview src=\"./demos/Controlled.vue\"\n```\n\n## Methods\n\n| Method | Description |\n| --- | --- |\n| `toast.success / info / warn / error` | Add by severity |\n| `toast.add(options)` | Add one |\n| `toast.remove(id)` / `toast.close(id)` | Remove |\n| `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | Clear all |\n| `toast.setDefaults({ position, max })` | Default corner and concurrency cap |\n\nA string argument is treated as `summary`. Default `life` is `3000`; use `0` to keep open.\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `messages` | `ToastMessage[]` | — | Controlled list; omit to bind the `toast` service queue |\n| `position` | `'top-right' \\| 'top-left' \\| 'bottom-right' \\| 'bottom-left'` | `'top-right'` | Container placement |\n| `max` | `number` | — | Max visible items; oldest is dropped (service queue only) |\n| `teleport` | `boolean` | `true` | Whether to Teleport |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target |\n\n### ToastMessage\n\n| Field | Type | Default | Description |\n| --- | --- | --- | --- |\n| `id` | `string \\| number` | — | Unique key |\n| `summary` | `string \\| number \\| VNode \\| Component \\| (() => VNodeChild)` | — | Title |\n| `detail` | same as above | — | Detail |\n| `severity` | `'success' \\| 'info' \\| 'warn' \\| 'error' \\| …` | `'info'` | Tone |\n| `closable` | `boolean` | `true` | Close button |\n| `life` | `number` | API default `3000` | Auto-close ms |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `close` | `ToastMessage` | Close clicked; remove it yourself in controlled mode |\n\n## Slots\n\nNo slots; driven by the `messages` prop or toast API.\n\n## Types\n\n<h4 id=\"ToastMessage\">ToastMessage</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface ToastMessage {\n  id: string | number\n  summary: MRenderable\n  detail?: MRenderable\n  severity?: ToastSeverity\n  closable?: boolean\n  /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */\n  life?: number\n}\n```\n"
         }
       }
     },
@@ -24745,7 +25097,7 @@
         "zh-CN": {
           "title": "快速上手",
           "description": "安装依赖、引入样式，并渲染第一个组件。",
-          "markdown": "---\ntitle: 快速上手\norder: 2\ndescription: 安装依赖、引入样式，并渲染第一个组件。\n---\n\n# 快速上手\n\n> 在线文档：[morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/) · 源码：[GitHub](https://github.com/morya-space/morya-ui) · npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)\n\n## 安装\n\n**在应用项目中（npm / pnpm / yarn）：**\n\n```bash\npnpm add morya-ui\n```\n\n也可以用：\n\n```bash\nnpx @morya-ui/setup app\n```\n\n会安装依赖，并尽量在入口注入样式。更多命令与选项见 [一键接入](/docs/setup)。需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `morya-ui` 中。Agent Skill / MCP 见 [AI 接入](/docs/ai-setup)。\n\n## 选择使用方式\n\n本库同时支持**全量**与**按需**两种消费方式，按项目需求任选其一（同一应用内建议保持一致）。\n\n| | 全量 | 按需 |\n| --- | --- | --- |\n| 典型场景 | 组件用得较多、希望快速上手 | 打包体积敏感、只用少量组件 |\n| 组件来源 | `app.use(MoryaUI)` 或 `morya-ui` 按名导入 | `morya-ui/button` 等子路径，或 Vite 自动解析 |\n| 样式 | 入口引入 `morya-ui/styles.css` | 子路径自动带入（含 theme + 依赖组件样式） |\n| JS 体积 | 全量注册会打入完整组件；按名导入可 tree-shake | 仅打入用到的组件及其依赖 |\n\n## 全量用法\n\n### 1. 插件注册（推荐的全量方式）\n\n在应用入口引入**全量样式**，并通过插件一次注册所有组件：\n\n```ts\nimport MoryaUI from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).use(MoryaUI).mount('#app')\n```\n\n模板中可直接使用 `<MButton>`、`<MInput>` 等，无需逐个 import。\n\n### 2. 按名导入 + 全量样式\n\n不注册插件、在 SFC 中按需写 import，JS 可由构建工具 tree-shake，但样式仍需全量 CSS：\n\n```ts\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).mount('#app')\n```\n\n```vue\n<script setup lang=\"ts\">\nimport { MButton, MInput } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"display: grid; gap: 1rem; max-width: 20rem\">\n    <MInput v-model=\"name\" label=\"名称\" placeholder=\"输入名称\" />\n    <MButton label=\"提交\" @click=\"() => undefined\" />\n  </div>\n</template>\n```\n\n## 按需用法\n\n### 1. 子路径导入\n\n从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`：\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\n仅要样式时：\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. 自动按需（Vite）\n\n安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<MButton>`：\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({\n      resolvers: [MoryaUIResolver()],\n    }),\n  ],\n})\n```\n\n按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。\n\n## 可选：应用级全局配置\n\n`createMoryaUI` 会写入全局默认值，并默认注册全部组件：\n\n```ts\nimport { createMoryaUI } from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App)\n  .use(\n    createMoryaUI({\n      appendTo: 'body',\n      size: 'small',\n      zIndex: 1100,\n    }),\n  )\n  .mount('#app')\n```\n\n仅配置、不注册组件时使用 `components: false`。\n\n更多说明见 [全局配置](/docs/config)。\n\n## 主题 API\n\n亮暗切换等能力从同一包引入：\n\n```ts\nimport { useTheme } from 'morya-ui'\n\nconst { toggleTheme } = useTheme()\n```\n\n详见 [主题](/docs/theme)。\n\n## 启动本仓库文档站\n\n```bash\npnpm --filter morya-ui dev\n# http://localhost:5182\n\n# 构建静态文档站\npnpm --filter morya-ui build:docs\n```\n",
+          "markdown": "---\ntitle: 快速上手\norder: 2\ndescription: 安装依赖、引入样式，并渲染第一个组件。\n---\n\n# 快速上手\n\n> 在线文档：[morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/) · 源码：[GitHub](https://github.com/morya-space/morya-ui) · npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)\n\n## 安装\n\n**在应用项目中（npm / pnpm / yarn）：**\n\n```bash\npnpm add morya-ui\n```\n\n也可以用：\n\n```bash\nnpx @morya-ui/setup app\n```\n\n会安装依赖，并尽量在入口注入样式。更多命令与选项见 [一键接入](/docs/setup)。需要 Vue 3（推荐 3.5 及以上）。主题 token、亮暗切换与动效 API 均包含在 `morya-ui` 中。Agent Skill / MCP 见 [AI 接入](/docs/ai-setup)。\n\n## 选择使用方式\n\n本库同时支持**全量**与**按需**两种消费方式，按项目需求任选其一（同一应用内建议保持一致）。\n\n| | 全量 | 按需 |\n| --- | --- | --- |\n| 典型场景 | 组件用得较多、希望快速上手 | 打包体积敏感、只用少量组件 |\n| 组件来源 | `app.use(MoryaUI)` 或 `morya-ui` 按名导入 | `morya-ui/button` 等子路径，或 Vite 自动解析 |\n| 样式 | 入口引入 `morya-ui/styles.css` | 子路径自动带入（含 theme + 依赖组件样式） |\n| JS 体积 | 全量注册会打入完整组件；按名导入可 tree-shake | 仅打入用到的组件及其依赖 |\n\n## 全量用法\n\n### 1. 插件注册（推荐的全量方式）\n\n在应用入口引入**全量样式**，并通过插件一次注册所有组件：\n\n```ts\nimport MoryaUI from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).use(MoryaUI).mount('#app')\n```\n\n模板中可直接使用 `<MButton>`、`<MInput>` 等，无需逐个 import。\n\n### 2. 按名导入 + 全量样式\n\n不注册插件、在 SFC 中按需写 import，JS 可由构建工具 tree-shake，但样式仍需全量 CSS：\n\n```ts\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).mount('#app')\n```\n\n```vue\n<script setup lang=\"ts\">\nimport { MButton, MInput } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"display: grid; gap: 1rem; max-width: 20rem\">\n    <MInput v-model=\"name\" label=\"名称\" placeholder=\"输入名称\" />\n    <MButton label=\"提交\" @click=\"() => undefined\" />\n  </div>\n</template>\n```\n\n## 按需用法\n\n### 1. 子路径导入\n\n从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、类型声明、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`。Props 等类型从同一路径导入，例如 `import type { ButtonProps } from 'morya-ui/button'`。\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\n仅要样式时：\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. 自动按需（Vite）\n\n安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<MButton>`：\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({\n      dts: 'src/components.d.ts',\n      resolvers: [MoryaUIResolver()],\n    }),\n  ],\n})\n```\n\n`dts` 会写出组件声明，编辑器和 `vue-tsc` 据此识别模板里的组件；该文件需落在 `tsconfig.json` 的 `include` 中。按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。\n\n## 可选：应用级全局配置\n\n`createMoryaUI` 会写入全局默认值，并默认注册全部组件：\n\n```ts\nimport { createMoryaUI } from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App)\n  .use(\n    createMoryaUI({\n      appendTo: 'body',\n      size: 'small',\n      zIndex: 1100,\n    }),\n  )\n  .mount('#app')\n```\n\n仅配置、不注册组件时使用 `components: false`。\n\n更多说明见 [全局配置](/docs/config)。\n\n## 主题 API\n\n亮暗切换等能力从同一包引入：\n\n```ts\nimport { useTheme } from 'morya-ui'\n\nconst { toggleTheme } = useTheme()\n```\n\n详见 [主题](/docs/theme)。\n\n## 启动本仓库文档站\n\n```bash\npnpm --filter morya-ui dev\n# http://localhost:5182\n\n# 构建静态文档站\npnpm --filter morya-ui build:docs\n```\n",
           "sections": [
             {
               "title": "",
@@ -24770,7 +25122,7 @@
             {
               "title": "按需用法",
               "id": "按需用法",
-              "body": "### 1. 子路径导入\n\n从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`：\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\n仅要样式时：\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. 自动按需（Vite）\n\n安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<MButton>`：\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({\n      resolvers: [MoryaUIResolver()],\n    }),\n  ],\n})\n```\n\n按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。"
+              "body": "### 1. 子路径导入\n\n从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、类型声明、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`。Props 等类型从同一路径导入，例如 `import type { ButtonProps } from 'morya-ui/button'`。\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\n仅要样式时：\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. 自动按需（Vite）\n\n安装 `unplugin-vue-components` 后，在 `vite.config.ts` 中配置解析器，模板里可直接写 `<MButton>`：\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({\n      dts: 'src/components.d.ts',\n      resolvers: [MoryaUIResolver()],\n    }),\n  ],\n})\n```\n\n`dts` 会写出组件声明，编辑器和 `vue-tsc` 据此识别模板里的组件；该文件需落在 `tsconfig.json` 的 `include` 中。按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。"
             },
             {
               "title": "可选：应用级全局配置",
@@ -24792,7 +25144,7 @@
         "en-US": {
           "title": "Quick start",
           "description": "Install the package, import styles, and render the first component.",
-          "markdown": "---\ntitle: Quick start\norder: 2\ndescription: Install the package, import styles, and render the first component.\n---\n\n# Quick start\n\n> Live docs: [morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/) · Source: [GitHub](https://github.com/morya-space/morya-ui) · npm: [`morya-ui`](https://www.npmjs.com/package/morya-ui)\n\n## Install\n\n**In an application (npm / pnpm / yarn):**\n\n```bash\npnpm add morya-ui\n```\n\nOr:\n\n```bash\nnpx @morya-ui/setup app\n```\n\nThis installs the dependency and tries to inject styles at the app entry. More commands and options: [One-shot setup](/docs/setup). Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `morya-ui`. For Agent skill / MCP, see [AI setup](/docs/ai-setup).\n\nAfter cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).\n\nTo debug from another app, use `link:` / `pnpm link` plus Vite aliases. A plain npm install always resolves `dist/`.\n\n## Choose an import mode\n\nThe library supports **full** and **on-demand** usage. Pick one per app (stay consistent within a project).\n\n| | Full | On-demand |\n| --- | --- | --- |\n| Best for | Many components, fastest setup | Bundle size, few components |\n| Components | `app.use(MoryaUI)` or named imports from `morya-ui` | `morya-ui/button` subpaths, or Vite auto-resolver |\n| Styles | Import `morya-ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |\n| JS size | Full plugin bundles all components; named imports tree-shake | Only used components and their deps |\n\n## Full usage\n\n### 1. Plugin registration (recommended full mode)\n\nImport the **full stylesheet** and register all components once:\n\n```ts\nimport MoryaUI from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).use(MoryaUI).mount('#app')\n```\n\nTemplates can use `<MButton>`, `<MInput>`, etc. without per-file imports.\n\n### 2. Named imports + full CSS\n\nSkip the plugin; import components in SFCs. JS can tree-shake, but styles still need the full CSS file:\n\n```ts\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).mount('#app')\n```\n\n```vue\n<script setup lang=\"ts\">\nimport { MButton, MInput } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"display: grid; gap: 1rem; max-width: 20rem\">\n    <MInput v-model=\"name\" label=\"Name\" placeholder=\"Enter a name\" />\n    <MButton label=\"Submit\" @click=\"() => undefined\" />\n  </div>\n</template>\n```\n\n## On-demand usage\n\n### 1. Subpath imports\n\nImport from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `morya-ui/styles.css` required:\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\nStyles only:\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. Auto on-demand (Vite)\n\nWith `unplugin-vue-components`, add the resolver so templates can use `<MButton>` without manual imports:\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({ resolvers: [MoryaUIResolver()] }),\n  ],\n})\n```\n\nIn on-demand mode, `createMoryaUI({ components: false })` still applies global config without registering components.\n\n## Optional: app-level defaults\n\n`createMoryaUI` applies global defaults and registers all components by default:\n\n```ts\nimport { createMoryaUI } from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App)\n  .use(\n    createMoryaUI({\n      appendTo: 'body',\n      size: 'small',\n      zIndex: 1100,\n    }),\n  )\n  .mount('#app')\n```\n\nUse `components: false` for config-only install.\n\nSee [Configuration](/docs/config) for details.\n\n## Theme API\n\nColor-mode helpers come from the same package:\n\n```ts\nimport { useTheme } from 'morya-ui'\n\nconst { toggleTheme } = useTheme()\n```\n\nSee [Theme](/docs/theme).\n\n## Run this docs site\n\n```bash\npnpm --filter morya-ui dev\n# http://localhost:5182\n\n# Build the static docs site\npnpm --filter morya-ui build:docs\n```\n",
+          "markdown": "---\ntitle: Quick start\norder: 2\ndescription: Install the package, import styles, and render the first component.\n---\n\n# Quick start\n\n> Live docs: [morya-space.github.io/morya-ui](https://morya-space.github.io/morya-ui/) · Source: [GitHub](https://github.com/morya-space/morya-ui) · npm: [`morya-ui`](https://www.npmjs.com/package/morya-ui)\n\n## Install\n\n**In an application (npm / pnpm / yarn):**\n\n```bash\npnpm add morya-ui\n```\n\nOr:\n\n```bash\nnpx @morya-ui/setup app\n```\n\nThis installs the dependency and tries to inject styles at the app entry. More commands and options: [One-shot setup](/docs/setup). Requires Vue 3 (3.5+ recommended). Theme tokens, color-mode switching, and motion APIs are all included in `morya-ui`. For Agent skill / MCP, see [AI setup](/docs/ai-setup).\n\nAfter cloning this repository, run `pnpm install`. The docs playground resolves source via Vite aliases (see `playground/vite.config.ts`).\n\nTo debug from another app, use `link:` / `pnpm link` plus Vite aliases. A plain npm install always resolves `dist/`.\n\n## Choose an import mode\n\nThe library supports **full** and **on-demand** usage. Pick one per app (stay consistent within a project).\n\n| | Full | On-demand |\n| --- | --- | --- |\n| Best for | Many components, fastest setup | Bundle size, few components |\n| Components | `app.use(MoryaUI)` or named imports from `morya-ui` | `morya-ui/button` subpaths, or Vite auto-resolver |\n| Styles | Import `morya-ui/styles.css` at entry | Bundled with subpath imports (theme + deps) |\n| JS size | Full plugin bundles all components; named imports tree-shake | Only used components and their deps |\n\n## Full usage\n\n### 1. Plugin registration (recommended full mode)\n\nImport the **full stylesheet** and register all components once:\n\n```ts\nimport MoryaUI from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).use(MoryaUI).mount('#app')\n```\n\nTemplates can use `<MButton>`, `<MInput>`, etc. without per-file imports.\n\n### 2. Named imports + full CSS\n\nSkip the plugin; import components in SFCs. JS can tree-shake, but styles still need the full CSS file:\n\n```ts\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App).mount('#app')\n```\n\n```vue\n<script setup lang=\"ts\">\nimport { MButton, MInput } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst name = ref('')\n</script>\n\n<template>\n  <div style=\"display: grid; gap: 1rem; max-width: 20rem\">\n    <MInput v-model=\"name\" label=\"Name\" placeholder=\"Enter a name\" />\n    <MButton label=\"Submit\" @click=\"() => undefined\" />\n  </div>\n</template>\n```\n\n## On-demand usage\n\n### 1. Subpath imports\n\nImport from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, type declarations, internal dependencies, and styles — **no** `morya-ui/styles.css` required. Prop types come from the same path, for example `import type { ButtonProps } from 'morya-ui/button'`.\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\nStyles only:\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. Auto on-demand (Vite)\n\nWith `unplugin-vue-components`, add the resolver so templates can use `<MButton>` without manual imports:\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({\n      dts: 'src/components.d.ts',\n      resolvers: [MoryaUIResolver()],\n    }),\n  ],\n})\n```\n\n`dts` writes component declarations so the editor and `vue-tsc` can resolve components used in templates. That file must be covered by `include` in `tsconfig.json`. In on-demand mode, `createMoryaUI({ components: false })` still applies global config without registering components.\n\n## Optional: app-level defaults\n\n`createMoryaUI` applies global defaults and registers all components by default:\n\n```ts\nimport { createMoryaUI } from 'morya-ui'\nimport { createApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\ncreateApp(App)\n  .use(\n    createMoryaUI({\n      appendTo: 'body',\n      size: 'small',\n      zIndex: 1100,\n    }),\n  )\n  .mount('#app')\n```\n\nUse `components: false` for config-only install.\n\nSee [Configuration](/docs/config) for details.\n\n## Theme API\n\nColor-mode helpers come from the same package:\n\n```ts\nimport { useTheme } from 'morya-ui'\n\nconst { toggleTheme } = useTheme()\n```\n\nSee [Theme](/docs/theme).\n\n## Run this docs site\n\n```bash\npnpm --filter morya-ui dev\n# http://localhost:5182\n\n# Build the static docs site\npnpm --filter morya-ui build:docs\n```\n",
           "sections": [
             {
               "title": "",
@@ -24817,7 +25169,7 @@
             {
               "title": "On-demand usage",
               "id": "on-demand-usage",
-              "body": "### 1. Subpath imports\n\nImport from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `morya-ui/styles.css` required:\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\nStyles only:\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. Auto on-demand (Vite)\n\nWith `unplugin-vue-components`, add the resolver so templates can use `<MButton>` without manual imports:\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({ resolvers: [MoryaUIResolver()] }),\n  ],\n})\n```\n\nIn on-demand mode, `createMoryaUI({ components: false })` still applies global config without registering components."
+              "body": "### 1. Subpath imports\n\nImport from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, type declarations, internal dependencies, and styles — **no** `morya-ui/styles.css` required. Prop types come from the same path, for example `import type { ButtonProps } from 'morya-ui/button'`.\n\n```ts\nimport { MButton } from 'morya-ui/button'\nimport { MInput } from 'morya-ui/input'\n```\n\nStyles only:\n\n```ts\nimport 'morya-ui/button/style'\nimport 'morya-ui/button/style.css'\n```\n\n### 2. Auto on-demand (Vite)\n\nWith `unplugin-vue-components`, add the resolver so templates can use `<MButton>` without manual imports:\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineConfig({\n  plugins: [\n    vue(),\n    Components({\n      dts: 'src/components.d.ts',\n      resolvers: [MoryaUIResolver()],\n    }),\n  ],\n})\n```\n\n`dts` writes component declarations so the editor and `vue-tsc` can resolve components used in templates. That file must be covered by `include` in `tsconfig.json`. In on-demand mode, `createMoryaUI({ components: false })` still applies global config without registering components."
             },
             {
               "title": "Optional: app-level defaults",

@@ -401,6 +401,75 @@ export const componentDecisions: ComponentDecision[] = [
       },
     ],
   },
+  {
+    id: 'loading-choice',
+    title: '如何选择加载反馈',
+    titleEn: 'Choosing a loading indicator',
+    question: '这是区域或全屏等待、已知布局的占位、可量化进度，还是只需要阻止交互？',
+    questionEn: 'Is this a region or fullscreen wait, a placeholder for a known layout, measurable progress, or interaction blocking without a loading message?',
+    keywords: [
+      '加载',
+      '等待',
+      '遮罩',
+      '骨架',
+      '进度',
+      'loading',
+      'spinner',
+      'skeleton',
+      'progress',
+      'v-loading',
+      'mloading',
+    ],
+    options: [
+      {
+        component: 'Loading',
+        when: [
+          '一块区域或整页正在等待，用户暂时不能操作这块内容',
+          '需要加载文案、多种动效，或用 v-loading / loading.service 盖住已有节点',
+          '全屏提交、保存、跳转前的短暂等待',
+        ],
+        whenEn: [
+          'A region or the whole page is waiting and that content should not be operated',
+          'A caption, effect, v-loading, or loading.service mask over an existing node is needed',
+          'A short fullscreen wait before submit, save, or navigation',
+        ],
+        avoidWhen: ['布局已知、希望用占位块避免跳动', '进度可以量化', '只是按钮自己的 loading 状态'],
+        avoidWhenEn: [
+          'The layout is known and a placeholder should prevent jump',
+          'Progress can be measured',
+          'Only the button’s own loading state is needed',
+        ],
+      },
+      {
+        component: 'Skeleton',
+        when: ['内容结构已知，用占位块表示即将出现的卡片、文本或列表', '仪表盘或详情初次进入'],
+        whenEn: ['The content structure is known and placeholders stand in for cards, text, or lists', 'First paint of a dashboard or detail view'],
+        avoidWhen: ['需要明确的“正在加载”遮罩', '进度可量化'],
+        avoidWhenEn: ['An explicit loading mask is required', 'Progress can be measured'],
+      },
+      {
+        component: 'ProgressBar',
+        when: ['进度有百分比或可估算完成度', '上传、导入等长任务'],
+        whenEn: ['Progress has a percentage or an estimated completion', 'Long tasks such as upload or import'],
+        avoidWhen: ['不知道还要等多久', '只是挡住一块区域'],
+        avoidWhenEn: ['Duration is unknown', 'The only goal is to cover a region'],
+      },
+      {
+        component: 'ProgressSpinner',
+        when: ['行内或控件旁需要一个很小的转圈，不盖住内容'],
+        whenEn: ['A small inline spinner beside a control, without covering content'],
+        avoidWhen: ['区域遮罩、全屏等待或带文案的加载态'],
+        avoidWhenEn: ['A region mask, fullscreen wait, or loading state with a caption'],
+      },
+      {
+        component: 'BlockUI',
+        when: ['只需要阻止点击，不需要表达“正在加载”'],
+        whenEn: ['Interaction should be blocked without saying that something is loading'],
+        avoidWhen: ['用户需要知道正在等待结果'],
+        avoidWhenEn: ['The user needs to know a result is still pending'],
+      },
+    ],
+  },
 ]
 
 export function findDecision(name: string): ComponentDecision | undefined {

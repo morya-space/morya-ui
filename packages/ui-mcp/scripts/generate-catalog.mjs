@@ -15,7 +15,9 @@ function readJson(path) {
 }
 
 function readText(path) {
-  return existsSync(path) ? readFileSync(path, 'utf8').replace(/^\uFEFF/, '') : ''
+  return existsSync(path)
+    ? readFileSync(path, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n/g, '\n')
+    : ''
 }
 
 function parseFrontmatter(raw) {

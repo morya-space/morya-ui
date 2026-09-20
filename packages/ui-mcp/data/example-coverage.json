@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-18T07:52:19.611Z",
-  "catalogGeneratedAt": "2026-09-18T07:52:14.544Z",
+  "generatedAt": "2026-09-20T15:28:59.621Z",
+  "catalogGeneratedAt": "2026-09-20T15:28:58.793Z",
   "components": [
     {
       "id": "Accordion",
@@ -1605,6 +1605,41 @@
       }
     },
     {
+      "id": "Loading",
+      "exportName": "MLoading",
+      "examples": 14,
+      "props": {
+        "total": 11,
+        "covered": 4,
+        "missing": [
+          "ariaLabel",
+          "background",
+          "customClass",
+          "fullscreen",
+          "lock",
+          "delay",
+          "pt"
+        ]
+      },
+      "events": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "slots": {
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "indicator"
+        ]
+      },
+      "methods": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      }
+    },
+    {
       "id": "MegaMenu",
       "exportName": "MMegaMenu",
       "examples": 8,
@@ -3194,8 +3229,8 @@
     }
   ],
   "summary": {
-    "components": 92,
-    "componentsWithMissingCoverage": 87,
-    "totalExamples": 789
+    "components": 93,
+    "componentsWithMissingCoverage": 88,
+    "totalExamples": 803
   }
 }

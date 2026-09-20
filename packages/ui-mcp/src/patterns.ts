@@ -455,7 +455,7 @@ export const pagePatterns: PagePattern[] = [
       '不使用大面积自定义背景色覆盖组件库 surface Token',
     ],
     interactionRules: [
-      '详情加载中使用 Skeleton 或 ProgressSpinner',
+      '已知布局用 Skeleton 占位；区域或全屏等待用 Loading（MLoading / v-loading / loading.service）',
       '资源不存在用 MResult status="404"；列表空数据用 MEmpty，不要混用',
       '危险操作必须确认并在成功后刷新或离开当前详情页',
     ],
