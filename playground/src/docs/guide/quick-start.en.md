@@ -88,7 +88,7 @@ const name = ref('')
 
 ### 1. Subpath imports
 
-Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, internal dependencies, and styles — **no** `morya-ui/styles.css` required:
+Import from kebab-case subpaths (e.g. `button`, `input-password`, `tree-select`). Each entry bundles component JS, type declarations, internal dependencies, and styles — **no** `morya-ui/styles.css` required. Prop types come from the same path, for example `import type { ButtonProps } from 'morya-ui/button'`.
 
 ```ts
 import { MButton } from 'morya-ui/button'
@@ -113,12 +113,15 @@ import Components from 'unplugin-vue-components/vite'
 export default defineConfig({
   plugins: [
     vue(),
-    Components({ resolvers: [MoryaUIResolver()] }),
+    Components({
+      dts: 'src/components.d.ts',
+      resolvers: [MoryaUIResolver()],
+    }),
   ],
 })
 ```
 
-In on-demand mode, `createMoryaUI({ components: false })` still applies global config without registering components.
+`dts` writes component declarations so the editor and `vue-tsc` can resolve components used in templates. That file must be covered by `include` in `tsconfig.json`. In on-demand mode, `createMoryaUI({ components: false })` still applies global config without registering components.
 
 ## Optional: app-level defaults
 

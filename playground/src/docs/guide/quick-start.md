@@ -84,7 +84,7 @@ const name = ref('')
 
 ### 1. 子路径导入
 
-从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`：
+从 kebab-case 子路径导入（如 `button`、`input-password`、`tree-select`）。会带上组件 JS、类型声明、内部依赖与对应样式，**无需**再引 `morya-ui/styles.css`。Props 等类型从同一路径导入，例如 `import type { ButtonProps } from 'morya-ui/button'`。
 
 ```ts
 import { MButton } from 'morya-ui/button'
@@ -110,13 +110,14 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
+      dts: 'src/components.d.ts',
       resolvers: [MoryaUIResolver()],
     }),
   ],
 })
 ```
 
-按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。
+`dts` 会写出组件声明，编辑器和 `vue-tsc` 据此识别模板里的组件；该文件需落在 `tsconfig.json` 的 `include` 中。按需模式下，`createMoryaUI({ components: false })` 仍可注入全局配置而不注册组件。
 
 ## 可选：应用级全局配置
 
