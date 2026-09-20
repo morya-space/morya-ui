@@ -57,6 +57,7 @@ import MLayoutFooter from './components/Layout/LayoutFooter.vue'
 import MLayoutHeader from './components/Layout/LayoutHeader.vue'
 import MLayoutSider from './components/Layout/LayoutSider.vue'
 import MListbox from './components/Listbox/Listbox.vue'
+import MLoading from './components/Loading/Loading.vue'
 import MMegaMenu from './components/MegaMenu/MegaMenu.vue'
 import MMenu from './components/Menu/Menu.vue'
 import MMenubar from './components/Menubar/Menubar.vue'
@@ -163,6 +164,7 @@ export const mComponents: Record<string, Component> = {
   MLayoutHeader,
   MLayoutSider,
   MListbox,
+  MLoading,
   MMegaMenu,
   MMenu,
   MMenubar,

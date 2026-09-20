@@ -30,6 +30,7 @@
 @import "../components/Chip/styles.css";
 @import "../components/ProgressBar/styles.css";
 @import "../components/ProgressSpinner/styles.css";
+@import "../components/Loading/styles.css";
 @import "../components/Badge/styles.css";
 @import "../components/Message/styles.css";
 @import "../components/Status/styles.css";
