@@ -32,7 +32,11 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | `<MMessage>` | Persistent in-page error / warning |
 | `MEmpty` | No-data / first-use / filtered empty (not an error) |
 | `MResult` | Terminal outcome: success, failure, 403 / 404 / 500 |
-| `MProgressBar` / `MProgressSpinner` / `MSkeleton` / `MBlockUI` | Loading / blocking |
+| `MLoading` / `v-loading` / `loading.service` | **Default** region or fullscreen loading mask |
+| `MSkeleton` | Layout is already known; placeholder while content arrives |
+| `MProgressBar` | Determinate progress |
+| `MProgressSpinner` | Inline spinner only, not a region mask |
+| `MBlockUI` | Block interaction without a loading message |
 
 ## Overlays & menus
 
@@ -59,6 +63,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Marketing landing | `landing-page` golden + `MButton` / `MTag` / `MAccordion` |
 | Empty list / zero state | `MEmpty` (+ `empty-state` golden or `MTable` `#empty`) |
 | Submit success / HTTP error page | `MResult` |
+| Region or page is waiting | `MLoading`, `v-loading`, or `loading.service`; known layout → `MSkeleton` |
 | Local capped scroll | Explicit `MScrollbar` |
 | Admin sider nav | `MMenu` |
 
@@ -69,5 +74,6 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | `MDropdown` as form enum | `MSelect` |
 | Hand `<table>` | `MTable` |
 | Hand modal div | `MDialog` |
+| Hand spinner or `MProgressSpinner` as a region / page mask | `MLoading` / `v-loading` |
 | Extra `MCard` around every `MPage*` block | Use page components' own surface/gap |
 | Assume undocumented props | MCP / docs lookup |
