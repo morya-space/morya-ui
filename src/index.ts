@@ -162,6 +162,7 @@ export type {
   DropdownProps,
   DropdownTrigger,
 } from "./components/Dropdown/types";
+export { default as MEmpty } from "./components/Empty/Empty.vue";
 export type {
   EmptyIllustration,
   EmptyOutcomeIllustration,
@@ -174,7 +175,6 @@ export {
   isEmptyIllustration,
   loadEmptyIllustration,
 } from "./components/Empty/illustrations";
-export { default as MEmpty } from "./components/Empty/Empty.vue";
 export type { EmptyProps, EmptySize } from "./components/Empty/types";
 export { default as MFieldset } from "./components/Fieldset/Fieldset.vue";
 export type { FieldsetEmits, FieldsetProps } from "./components/Fieldset/types";
@@ -314,6 +314,19 @@ export type {
   ListboxProps,
   ListboxValue,
 } from "./components/Listbox/types";
+export { vLoading } from "./components/Loading/directive";
+export { loading } from "./components/Loading/loading";
+export { default as MLoading } from "./components/Loading/Loading.vue";
+export type {
+  LoadingBinding,
+  LoadingEffect,
+  LoadingProps,
+  LoadingServiceInstance,
+  LoadingServiceOptions,
+} from "./components/Loading/types";
+export { isLoadingEffect, LOADING_EFFECTS, normalizeLoadingEffect } from "./components/Loading/types";
+export { useLoading } from "./components/Loading/useLoading";
+export type { UseLoadingReturn } from "./components/Loading/useLoading";
 export { default as MMegaMenu } from "./components/MegaMenu/MegaMenu.vue";
 export type { MegaMenuItem, MegaMenuProps } from "./components/MegaMenu/types";
 export { default as MMenu } from "./components/Menu/Menu.vue";

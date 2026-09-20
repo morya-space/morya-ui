@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T09:38:12.593Z",
+  "generatedAt": "2026-09-20T08:45:18.538Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 331,
+  "tokenCount": 348,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1890,6 +1890,176 @@
       "description": {
         "zh-CN": "组件专用相关变量：Listbox Min Width",
         "en-US": "Component-specific token: Listbox Min Width"
+      }
+    },
+    {
+      "name": "--m-loading-aurora-glow",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "3s",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Aurora Glow",
+        "en-US": "Component-specific token: Loading Aurora Glow"
+      }
+    },
+    {
+      "name": "--m-loading-bounce",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "0.6s",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Bounce",
+        "en-US": "Component-specific token: Loading Bounce"
+      }
+    },
+    {
+      "name": "--m-loading-c1",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-color-primary)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading C1",
+        "en-US": "Component-specific token: Loading C1"
+      }
+    },
+    {
+      "name": "--m-loading-c2",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "color-mix(in srgb, var(--m-color-primary) 62%, white)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading C2",
+        "en-US": "Component-specific token: Loading C2"
+      }
+    },
+    {
+      "name": "--m-loading-c3",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-color-success)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading C3",
+        "en-US": "Component-specific token: Loading C3"
+      }
+    },
+    {
+      "name": "--m-loading-c4",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-color-warning)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading C4",
+        "en-US": "Component-specific token: Loading C4"
+      }
+    },
+    {
+      "name": "--m-loading-c5",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-color-danger)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading C5",
+        "en-US": "Component-specific token: Loading C5"
+      }
+    },
+    {
+      "name": "--m-loading-c6",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-color-text-muted)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading C6",
+        "en-US": "Component-specific token: Loading C6"
+      }
+    },
+    {
+      "name": "--m-loading-ep-dash",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-motion-spin-dash)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Ep Dash",
+        "en-US": "Component-specific token: Loading Ep Dash"
+      }
+    },
+    {
+      "name": "--m-loading-ep-rotate",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "2s",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Ep Rotate",
+        "en-US": "Component-specific token: Loading Ep Rotate"
+      }
+    },
+    {
+      "name": "--m-loading-mask-bg",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "color-mix(in srgb, var(--m-color-surface) 80%, transparent)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Mask Bg",
+        "en-US": "Component-specific token: Loading Mask Bg"
+      }
+    },
+    {
+      "name": "--m-loading-pulse",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "1.8s",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Pulse",
+        "en-US": "Component-specific token: Loading Pulse"
+      }
+    },
+    {
+      "name": "--m-loading-scale",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "1.15",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Scale",
+        "en-US": "Component-specific token: Loading Scale"
+      }
+    },
+    {
+      "name": "--m-loading-spin",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-motion-spin)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Spin",
+        "en-US": "Component-specific token: Loading Spin"
+      }
+    },
+    {
+      "name": "--m-loading-stardust",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "1.6s",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Stardust",
+        "en-US": "Component-specific token: Loading Stardust"
+      }
+    },
+    {
+      "name": "--m-loading-wave",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "var(--m-motion-spin-medium)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Wave",
+        "en-US": "Component-specific token: Loading Wave"
+      }
+    },
+    {
+      "name": "--m-loading-z-index",
+      "category": "component",
+      "source": "src/components/Loading/styles.css",
+      "default": "calc(var(--m-z-base) + 200)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Loading Z Index",
+        "en-US": "Component-specific token: Loading Z Index"
       }
     },
     {

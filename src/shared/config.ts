@@ -18,6 +18,7 @@ import {
   toValue
 } from 'vue'
 import { mComponents } from '../component-registry'
+import { vLoading } from '../components/Loading/directive'
 import { zhCN } from '../locale/zh-CN'
 import { applyDensity, applyReducedMotionPolicy } from '../theme'
 import {
@@ -227,6 +228,7 @@ function registerComponents(app: App, components: MInstallerOptions['components'
 export function installMoryaUI(app: App, options: MInstallerOptions = {}) {
   applyInstallerConfig(app, options)
   registerComponents(app, options.components)
+  if (options.components !== false) app.directive('loading', vLoading)
 }
 
 /**

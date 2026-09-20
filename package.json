@@ -66,6 +66,7 @@
     "**/label/index.js",
     "**/layout/index.js",
     "**/listbox/index.js",
+    "**/loading/index.js",
     "**/mega-menu/index.js",
     "**/menu/index.js",
     "**/menubar/index.js",
@@ -404,6 +405,12 @@
     },
     "./listbox/style": "./dist/listbox/style.js",
     "./listbox/style.css": "./dist/listbox/style.css",
+    "./loading": {
+      "types": "./dist/components/Loading/index.d.ts",
+      "import": "./dist/loading/index.js"
+    },
+    "./loading/style": "./dist/loading/style.js",
+    "./loading/style.css": "./dist/loading/style.css",
     "./mega-menu": {
       "types": "./dist/components/MegaMenu/index.d.ts",
       "import": "./dist/mega-menu/index.js"

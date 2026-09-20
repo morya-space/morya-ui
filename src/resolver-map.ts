@@ -59,6 +59,7 @@ export const componentImportMap: Record<string, string> = {
   "MLayoutHeader": "layout",
   "MLayoutSider": "layout",
   "MListbox": "listbox",
+  "MLoading": "loading",
   "MMegaMenu": "mega-menu",
   "MMenu": "menu",
   "MMenubar": "menubar",
