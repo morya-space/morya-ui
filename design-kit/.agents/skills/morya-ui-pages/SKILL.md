@@ -44,9 +44,7 @@ Full taxonomy: [references/surfaces.md](references/surfaces.md).
 
 1. `morya-ui` installed; `morya-ui/styles.css` imported.
 2. Prefer `@morya-ui/mcp` — never invent prop / event / slot names.
-3. If the AI config pack is merged, prefer project files over bundled copies:
-   - `DESIGN.md`
-   - `docs/golden-pages/*.vue`, `docs/components.md`, `docs/feedback-message-vs-toast.md`
+3. Golden pages, component APIs, and feedback rules come from `@morya-ui/mcp`. Without MCP, use this skill's `references/`. Project `DESIGN.md` overrides generic taste when the AI pack is merged.
 
 ## Workflow
 

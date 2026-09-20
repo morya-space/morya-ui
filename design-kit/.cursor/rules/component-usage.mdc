@@ -23,7 +23,7 @@ import { MButton, MInput } from 'morya-ui'
   - 单行操作结果 → `message.success/info/warn/error('…')`
   - 有标题 + 详情 / 异步通知 → `toast.*({ summary, detail })`
   - 表单区常驻错误 → `<MMessage>` 或字段 `errorMessage`
-  - 详见 `docs/feedback-message-vs-toast.md`
+  - 详见 skill `references/feedback.md`
 
 ## Props 约定
 
@@ -38,4 +38,4 @@ import { MButton, MInput } from 'morya-ui'
 - 用 `MDropdown` 代替 Select 做枚举选择。
 - 手写 table/modal 替代 `MTable` / `MDialog`。
 
-完整清单：`docs/components.md`
+完整清单：MCP，或 skill `references/component-index.md`

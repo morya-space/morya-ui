@@ -19,9 +19,9 @@ npx @morya-ui/setup
 默认会：
 
 1. 安装 `morya-ui`（按锁文件选用 pnpm / yarn / npm）
-2. 复制 `DESIGN.md`、Agent Skill、Cursor rules、黄金样例与检查脚本
+2. 复制 `DESIGN.md`、Agent Skill、Cursor rules 与检查脚本
 3. 合并 `.cursor/mcp.json`，接入 [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp)
-4. 尝试在入口注入 `import 'morya-ui/styles.css'`，并写入 `morya-app-shell.css`
+4. 尝试在入口注入 `import 'morya-ui/styles.css'`
 5. 若缺失则追加 `check:colors` 脚本
 
 也可以按场景选用：
@@ -65,10 +65,8 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | `DESIGN.md` | AI 设计第一信源 |
 | `.agents/skills/morya-ui-pages/` | 页面生成 Agent Skill（见 [Agent Skill](/docs/agent-skill)） |
 | `.cursor/rules/` | Cursor 常驻规则 |
-| `docs/`、`design-tokens/`、`src/examples/` | 组件索引、黄金样例、令牌 |
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
 | `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp`） |
-| `src/styles/morya-app-shell.css` | 页面高度链（默认命令或 `app` 写入） |
 
 模板源在仓库 [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit)。CLI 不调用 `app.use(MoryaUI)`，也不改 `App.vue`。
 

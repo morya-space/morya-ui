@@ -67,7 +67,7 @@ Unclear brief → Ops → nearest golden page; public marketing → Express.
 
 1. Pin subject, audience, surface, and the first viewport’s single job  
 2. Prefer MCP: `recommend_page` → `get_golden_page` → `get_component` / `get_example`  
-3. Without MCP, read project `docs/golden-pages/` and skill `references/`  
+3. Without MCP, read skill `references/` (layouts, surfaces, feedback)  
 4. Feedback defaults to `message`; `toast` only for summary+detail / async feel  
 5. Review with the skill checklist; run MCP `validate_page` when available  
 

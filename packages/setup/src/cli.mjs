@@ -19,7 +19,6 @@ const AI_TEMPLATE_INCLUDE = [
   'DESIGN.md',
   '.agents/skills/morya-ui-pages',
   '.cursor/rules',
-  'docs',
   'scripts/check-raw-colors.mjs',
 ]
 
@@ -44,12 +43,12 @@ export function printHelp() {
 Commands:
   (default) / full  Install morya-ui, AI template, MCP, styles, check:colors
   app               Install morya-ui and inject styles.css
-  ai                Copy Agent skill / rules / DESIGN / docs,
+  ai                Copy Agent skill / rules / DESIGN,
                     merge Cursor MCP, add check:colors
 
 Default command:
   - install morya-ui
-  - copy DESIGN.md, Agent skill, Cursor rules, docs
+  - copy DESIGN.md, Agent skill, Cursor rules
   - merge .cursor/mcp.json for @morya-ui/mcp
   - inject import 'morya-ui/styles.css' into the app entry when found
   - add check:colors script when missing

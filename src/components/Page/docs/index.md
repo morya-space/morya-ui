@@ -54,7 +54,7 @@ import {
 | KPI | `MPageStat` | 每页自定义 stat CSS |
 | 图表占位 | `MPagePlaceholder` |  dashed border 手写样式 |
 
-完整黄金样例见 `docs/golden-pages/`（MCP：`get_golden_page`）。**局部修改**时用 MCP `get_page_snippet`（如 `filters`、`toolbar`、`form-actions`）。
+完整黄金样例用 MCP `get_golden_page`。**局部修改**时用 MCP `get_page_snippet`（如 `filters`、`toolbar`、`form-actions`）。
 
 ## API
 

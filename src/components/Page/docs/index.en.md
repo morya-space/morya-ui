@@ -44,4 +44,4 @@ Use `MPageContent width="narrow"`, `MPageSection variant="form"`, and `variant="
 | Data table | `MTable` directly | `MCard` around bordered table |
 | KPI metric | `MPageStat` | Custom stat CSS per page |
 
-Golden references: `docs/golden-pages/` (MCP: `get_golden_page`).
+Golden references: MCP `get_golden_page`.

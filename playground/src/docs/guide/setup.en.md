@@ -19,9 +19,9 @@ npx @morya-ui/setup
 By default this will:
 
 1. Install `morya-ui` (pnpm / yarn / npm from the lockfile)
-2. Copy `DESIGN.md`, Agent skill, Cursor rules, golden pages, and check scripts
+2. Copy `DESIGN.md`, Agent skill, Cursor rules, and check scripts
 3. Merge `.cursor/mcp.json` for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp)
-4. Try to inject `import 'morya-ui/styles.css'` and write `morya-app-shell.css`
+4. Try to inject `import 'morya-ui/styles.css'`
 5. Add a `check:colors` script when missing
 
 Other common commands:
@@ -65,10 +65,8 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | `DESIGN.md` | Primary design brief for AI |
 | `.agents/skills/morya-ui-pages/` | Page-generation Agent skill (see [Agent Skill](/docs/agent-skill)) |
 | `.cursor/rules/` | Cursor always-on rules |
-| `docs/`, `design-tokens/`, `src/examples/` | Index, golden pages, tokens |
 | `scripts/check-raw-colors.mjs` | Raw color scan |
 | `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp`) |
-| `src/styles/morya-app-shell.css` | Height chain (default command or `app`) |
 
 Template source: [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit). The CLI does not call `app.use(MoryaUI)` or edit `App.vue`.
 

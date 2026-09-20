@@ -28,7 +28,7 @@ export const pagePatterns: PagePattern[] = [
     titleEn: 'Admin list page',
     description: '用于资源管理、设备管理、用户管理等带筛选和行操作的数据列表。',
     descriptionEn: 'A resource-management list with filters, actions, row operations, and pagination.',
-    goldenPage: 'docs/golden-pages/list-page.vue',
+    goldenPage: 'list-page',
     keywords: [
       '列表',
       '表格',
@@ -116,7 +116,7 @@ export const pagePatterns: PagePattern[] = [
     titleEn: 'Create or edit form page',
     description: '用于创建或编辑业务对象，包含分组字段、校验和提交状态。',
     descriptionEn: 'A create or edit page with grouped fields, validation, and submit states.',
-    goldenPage: 'docs/golden-pages/form-page.vue',
+    goldenPage: 'form-page',
     keywords: ['表单', '新增', '编辑', '创建', '配置', '设置', 'form', 'create', 'edit', 'settings'],
     components: [
       { component: 'ConfigProvider', role: '应用根包裹' },
@@ -239,7 +239,7 @@ export const pagePatterns: PagePattern[] = [
       { component: 'Button', role: '刷新、查看详情和快捷操作', required: false },
       { component: 'Skeleton', role: '初始加载占位', required: false },
     ],
-    goldenPage: 'docs/golden-pages/dashboard-page.vue',
+    goldenPage: 'dashboard-page',
     structure: [
       'ConfigProvider',
       '└── Layout',
@@ -290,7 +290,7 @@ export const pagePatterns: PagePattern[] = [
     titleEn: 'Empty state / no results page',
     description: '用于首次使用、搜索无结果、资源已清空或暂时没有内容的场景。',
     descriptionEn: 'For first use, no search results, empty resources, or temporarily unavailable content.',
-    goldenPage: 'docs/golden-pages/empty-state.vue',
+    goldenPage: 'empty-state',
     keywords: ['空状态', '无数据', '无结果', '首次使用', 'empty', 'no results', 'no data', 'zero state'],
     components: [
       { component: 'PageContent', role: '承载空态的内容区', required: false },
@@ -320,7 +320,7 @@ export const pagePatterns: PagePattern[] = [
     titleEn: 'Login / authentication page',
     description: '用于登录、注册、找回密码和二次认证流程。',
     descriptionEn: 'For login, registration, password recovery, and second-factor authentication flows.',
-    goldenPage: 'docs/golden-pages/login-page.vue',
+    goldenPage: 'login-page',
     keywords: ['登录', '注册', '认证', '密码', '验证码', 'login', 'register', 'authentication', 'password', 'otp'],
     components: [
       { component: 'ConfigProvider', role: '应用根包裹' },
@@ -352,7 +352,7 @@ export const pagePatterns: PagePattern[] = [
     titleEn: 'Marketing landing page',
     description: '用于产品官网、发布页、定价前导等公开营销表面；首屏单一任务，控件仍用 morya-ui。',
     descriptionEn: 'Public marketing surfaces (product home, launch, pre-pricing). One job in the first viewport; controls still use morya-ui.',
-    goldenPage: 'docs/golden-pages/landing-page.vue',
+    goldenPage: 'landing-page',
     keywords: [
       '落地页',
       '营销',

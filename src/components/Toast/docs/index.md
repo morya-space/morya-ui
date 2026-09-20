@@ -10,7 +10,7 @@ description: 四角浮层通知，支持 API 与受控列表。
 
 与 [Message](/components/Message) 的分工：Message 是**默认**的轻量单行反馈；Toast 仅在需要 `summary` / `detail` 或角落通知时使用。受控 `:messages` 时请自行限制条数，`max` 只作用于服务队列。
 
-> AI / 业务代码选型细则见 [`feedback-message-vs-toast.md`](../../../../design-kit/docs/feedback-message-vs-toast.md)。
+> AI / 业务代码选型细则见 [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md)。
 
 **不要**用 `toast.add({ summary: '已保存' })` 代替 `message.success('已保存')`。
 

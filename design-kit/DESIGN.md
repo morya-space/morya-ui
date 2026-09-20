@@ -1,6 +1,6 @@
 # Morya UI 设计系统（AI 第一信源）
 
-> 基于 `morya-ui` v0.2.6。生成或审查业务页面时，**必须先遵守本文**，再查阅 `docs/components.md` 与 `docs/golden-pages/`。
+> 基于 `morya-ui` v0.2.6。生成或审查业务页面时，**必须先遵守本文**。样例用 MCP `get_golden_page`，组件 API 用 MCP，反馈选型见 `morya-ui-pages` skill 的 `references/feedback.md`。
 
 ## 1. 设计原则
 
@@ -49,14 +49,14 @@ import 'morya-ui/styles.css'
 
 ## 3. 页面类型与黄金样例
 
-| 类型 | 参考文件 | 必备区块 |
+| 类型 | MCP `get_golden_page` | 必备区块 |
 | --- | --- | --- |
-| 列表页 | `docs/golden-pages/list-page.vue` | 面包屑、筛选区、工具栏、表格、分页 |
-| 表单页 | `docs/golden-pages/form-page.vue` | 面包屑、分组表单、`MForm` / `MFormItem`、提交/取消 |
-| 仪表盘 | `docs/golden-pages/dashboard-page.vue` | 统计卡片栅格、图表区占位、快捷入口 / 最近列表 |
-| 登录页 | `docs/golden-pages/login-page.vue` | 品牌区 + `MForm` / `MInputPassword`；表单级错误用 token 告警条 |
-| 营销落地 | `docs/golden-pages/landing-page.vue` | 单任务首屏、分节、`MButton` / `MTag` / `MAccordion` |
-| 空状态 | `docs/golden-pages/empty-state.vue` | `MEmpty` + 说明 + 主 CTA；可嵌列表 `#empty` |
+| 列表页 | `list-page` | 面包屑、筛选区、工具栏、表格、分页 |
+| 表单页 | `form-page` | 面包屑、分组表单、`MForm` / `MFormItem`、提交/取消 |
+| 仪表盘 | `dashboard-page` | 统计卡片栅格、图表区占位、快捷入口 / 最近列表 |
+| 登录页 | `login-page` | 品牌区 + `MForm` / `MInputPassword`；表单级错误用 token 告警条 |
+| 营销落地 | `landing-page` | 单任务首屏、分节、`MButton` / `MTag` / `MAccordion` |
+| 空状态 | `empty-state` | `MEmpty` + 说明 + 主 CTA；可嵌列表 `#empty` |
 
 生成 **Ops** 页面时：结构对齐对应黄金样例，用 `MPage*` 拼装，尽量少写 scoped CSS。  
 生成 **Account / Express / Flow** 页面时：对齐上表样例；允许有节制的 scoped 布局，但颜色/间距仍用 `--m-*`。
@@ -65,7 +65,7 @@ import 'morya-ui/styles.css'
 
 - 使用 `MForm` + `MFormItem`，`name` 与校验规则对应。
 - **从列表新建/编辑（字段约 ≤8、单段表单）默认用 `MDialog` + `MForm`，不要为每个实体再开独立路由表单页。**
-- 多分组、长流程、向导式录入再用独立表单页（`docs/golden-pages/form-page.vue`）或 `MDrawer`。
+- 多分组、长流程、向导式录入再用独立表单页（MCP `get_golden_page` `form-page`）或 `MDrawer`。
 - 字段组件自带 `label` / `invalid` / `helpText` 时优先用组件 prop（如 `MInput`、`MSelect`），复杂表单再用 `MFormItem` 包一层。
 - 尺寸：默认 medium；密集后台可 `size="small"` 或 ConfigProvider `globalDensity`。
 - 宽度：筛选项 `fluid` 慎用；独立表单页主栏 `max-width: 40rem` 左右。
@@ -88,11 +88,11 @@ import 'morya-ui/styles.css'
 | 表单区常驻错误 | token 告警条 / 字段 `errorMessage` |
 | 字段说明 | `MTooltip` |
 
-**选型细则见 [`docs/feedback-message-vs-toast.md`](docs/feedback-message-vs-toast.md)。AI 生成代码时：无 `detail` 的操作回执一律用 `message`，不要默认 Toast。**
+**选型细则见 `morya-ui-pages` skill 的 `references/feedback.md`。AI 生成代码时：无 `detail` 的操作回执一律用 `message`，不要默认 Toast。**
 
 ## 7. 设计令牌（摘要）
 
-完整定义见 `design-tokens/tokens.json`。
+完整定义见 MCP `get_design_rules`。运行时以 `morya-ui/styles.css` 为准。
 
 | 用途 | 变量 |
 | --- | --- |
@@ -117,11 +117,11 @@ import 'morya-ui/styles.css'
 ## 9. AI 工作流
 
 1. 读本文 → 确定页面类型（列表 / 表单 / 仪表盘）。
-2. 打开对应 `docs/golden-pages/*.vue` 与 `src/examples/*.vue`。
-3. 查 `docs/components.md` 选型。
+2. 用 MCP `get_golden_page` 读取对应样例。
+3. 用 MCP `search` / `get_component` / `recommend_component` 选型。
 4. 不确定 API 时查文档站或 MCP，**不要臆造 prop 名**。
 5. 完成后运行 `pnpm check:colors`（若已配置）。
-6. 操作反馈见 `docs/feedback-message-vs-toast.md`：**默认 `message`，有 detail 才用 `toast`**。
+6. 操作反馈见 skill `references/feedback.md`：**默认 `message`，有 detail 才用 `toast`**。
 
 ## 10. 相关资源
 

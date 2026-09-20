@@ -17,7 +17,7 @@ Pick a lane, then a surface. Prefer project golden pages for **Ops**; use the re
 
 | Surface | Job | Recipe |
 | --- | --- | --- |
-| Login / register | Authenticate with trust | Golden: `docs/golden-pages/login-page.vue` — split brand + `MForm` (`MInput`, `MInputPassword`); form-level errors via token `role="alert"` (not Toast) |
+| Login / register | Authenticate with trust | Golden: MCP `get_golden_page` `login-page` — split brand + `MForm` (`MInput`, `MInputPassword`); form-level errors via token `role="alert"` (not Toast) |
 | Invite / accept | Join org | Same shell; show org name clearly |
 | Forgot / reset | Recover access | Short form + success state with next step |
 | Profile / account | Edit self | Settings-like sections; avatar via `MAvatar` |
@@ -28,7 +28,7 @@ Keep credential forms quiet: one primary CTA, clear labels, no decorative noise 
 
 | Surface | Job | Recipe |
 | --- | --- | --- |
-| Empty state | Invite first action | Golden: `docs/golden-pages/empty-state.vue` — `MEmpty` + primary/secondary `MButton` in `#extra` |
+| Empty state | Invite first action | Golden: MCP `get_golden_page` `empty-state` — `MEmpty` + primary/secondary `MButton` in `#extra` |
 | Onboarding | Teach the product path | `MStepper` or paced cards; one decision per step; finish → Ops home |
 | Wizard | Multi-step create | `MStepper` + `MForm` per step + sticky actions (`上一步` / `下一步` / `提交`) |
 | Success / result | Confirm completion | `MResult` (`status="success"` / `error` …) + next actions (`查看详情` / `返回列表`) |
@@ -51,7 +51,7 @@ Use when the brief is landing, pricing, launch, or docs marketing — **not** fo
 
 | Surface | Job | Recipe |
 | --- | --- | --- |
-| Landing | Convert / explain product | Golden: `docs/golden-pages/landing-page.vue` — one-job hero; CTAs → `MButton`; chips → `MTag`; FAQ → `MAccordion` |
+| Landing | Convert / explain product | Golden: MCP `get_golden_page` `landing-page` — one-job hero; CTAs → `MButton`; chips → `MTag`; FAQ → `MAccordion` |
 | Pricing | Choose a plan | Clear plan cards (`MCard`) + primary CTA; highlight recommended plan without clutter |
 | Feature showcase | Prove capability | Alternating media/copy; live `M*` demo only if lightweight |
 | Docs marketing chrome | Frame documentation | Header + nav using `M*` where suitable; content area stays readable |

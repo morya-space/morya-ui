@@ -1,15 +1,15 @@
 # Page layouts
 
-When generating a full page, pick a type and **mirror the golden-page block order**. Prefer project files when present:
+When generating a full page, pick a type and **mirror the golden-page block order**. Source: MCP `get_golden_page`.
 
-| Type | Golden page | Runnable example |
-| --- | --- | --- |
-| List | `docs/golden-pages/list-page.vue` | `src/examples/ListPageExample.vue` |
-| Form | `docs/golden-pages/form-page.vue` | `src/examples/FormPageExample.vue` |
-| Dashboard | `docs/golden-pages/dashboard-page.vue` | `src/examples/DashboardPageExample.vue` |
-| Login | `docs/golden-pages/login-page.vue` | `src/examples/LoginPageExample.vue` |
-| Landing | `docs/golden-pages/landing-page.vue` | `src/examples/LandingPageExample.vue` |
-| Empty | `docs/golden-pages/empty-state.vue` | `src/examples/EmptyStateExample.vue` |
+| Type | `get_golden_page` id |
+| --- | --- |
+| List | `list-page` |
+| Form | `form-page` |
+| Dashboard | `dashboard-page` |
+| Login | `login-page` |
+| Landing | `landing-page` |
+| Empty | `empty-state` |
 
 Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet` (`filters`, `toolbar`, `form-actions`, `scrollable-panel`, …).
 

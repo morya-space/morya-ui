@@ -17,7 +17,6 @@ const INCLUDE = [
   'DESIGN.md',
   '.agents/skills/morya-ui-pages',
   '.cursor/rules',
-  'docs',
   'scripts/check-raw-colors.mjs',
 ]
 

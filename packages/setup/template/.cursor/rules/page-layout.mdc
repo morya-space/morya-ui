@@ -7,14 +7,14 @@ alwaysApply: false
 
 生成完整页面时，先确定类型并 **复制黄金样例结构**：
 
-| 类型 | 模板 |
+| 类型 | MCP `get_golden_page` |
 | --- | --- |
-| 列表页 | `docs/golden-pages/list-page.vue` |
-| 表单页 | `docs/golden-pages/form-page.vue`（仅长表单 / 独立配置页） |
-| 仪表盘 | `docs/golden-pages/dashboard-page.vue` |
-| 登录页 | `docs/golden-pages/login-page.vue` |
-| 营销落地 | `docs/golden-pages/landing-page.vue` |
-| 空状态 | `docs/golden-pages/empty-state.vue` |
+| 列表页 | `list-page` |
+| 表单页 | `form-page`（仅长表单 / 独立配置页） |
+| 仪表盘 | `dashboard-page` |
+| 登录页 | `login-page` |
+| 营销落地 | `landing-page` |
+| 空状态 | `empty-state` |
 
 ## 列表内新建 / 编辑（默认）
 
@@ -69,5 +69,3 @@ alwaysApply: false
 - 整页：`recommend_page` → `get_golden_page` → `get_design_rules`
 - 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions` / `scrollable-panel`）
 - 可选：`validate_page`（参考建议，不阻断）
-
-引用可运行示例：`src/examples/*PageExample.vue`

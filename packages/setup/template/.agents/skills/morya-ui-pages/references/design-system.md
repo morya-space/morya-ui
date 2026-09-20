@@ -87,7 +87,7 @@ import 'morya-ui/styles.css'
 | Card radius | `--m-radius-md` |
 | Card shadow | `--m-shadow-md` |
 
-Full machine-readable set: project `design-tokens/tokens.json` (runtime truth remains `morya-ui/styles.css`).
+Full set: MCP `get_design_rules`. Runtime truth remains `morya-ui/styles.css`.
 
 ## Bans
 

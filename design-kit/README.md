@@ -32,10 +32,7 @@ npx @morya-ui/setup ai
 | 路径 | 用途 |
 | --- | --- |
 | `DESIGN.md` | AI 第一信源：设计原则、布局、令牌、禁止项 |
-| `design-tokens/` | 机器可读 token + CSS 变量（与组件库 `--m-*` 对齐） |
-| `docs/components.md` | 组件清单与场景选型（替代零散 Skills） |
-| `docs/golden-pages/` | 黄金样例（列表 / 表单 / 仪表盘 / 登录 / 落地 / 空状态） |
-| `src/examples/` | 与 golden-pages 对应的可运行参考（供 `@` 引用） |
+| `docs/golden-pages/` | MCP 黄金样例源（不复制到业务项目） |
 | `scripts/check-raw-colors.mjs` | CI / 本地裸色值扫描 |
 | `.cursor/rules/` | Cursor 规则（设计系统、组件用法、页面布局、编码风格） |
 | `.agents/skills/morya-ui-pages/` | 消费方 Agent Skill：Ops / 账户 / 流程 / 系统 / 营销等全场景；可与 rules 并存 |
@@ -66,14 +63,14 @@ npx @morya-ui/setup ai
    }
    ```
 
-5. 生成页面前让 AI 先读 `DESIGN.md`，再读对应 `docs/golden-pages/*.vue` 与 `docs/components.md`。
+5. 生成页面前让 AI 先读 `DESIGN.md`，样例用 MCP `get_golden_page`。
 
 6. **（推荐）** 若客户端支持 Agent Skills，保留 `.agents/skills/morya-ui-pages/`。说明见文档站 [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill)；与 `.cursor/rules` 互补（rules 偏编辑器常驻，skill 偏按需工作流）。
 
 ## 与组件库的关系
 
-- **Token 单一事实源**：运行时以 `morya-ui` 的 `styles.css` 为准；本目录 `design-tokens/` 供 AI 与静态检查使用，发版后如有差异以 npm 包为准。
-- **组件 API**：以文档站 `/components` 或 MCP `@morya-ui/mcp` 为准；`docs/components.md` 仅作索引与场景指引。
+- **Token 单一事实源**：运行时以 `morya-ui` 的 `styles.css` 为准；Agent 查令牌用 MCP `get_design_rules`。
+- **组件 API**：以文档站 `/components` 或 MCP `@morya-ui/mcp` 为准。
 
 ## 可选：MCP 文档检索
 
