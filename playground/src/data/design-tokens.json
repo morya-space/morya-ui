@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T08:45:18.538Z",
+  "generatedAt": "2026-09-21T06:23:41.073Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -1973,23 +1973,23 @@
       }
     },
     {
-      "name": "--m-loading-ep-dash",
+      "name": "--m-loading-circular-dash",
       "category": "component",
       "source": "src/components/Loading/styles.css",
       "default": "var(--m-motion-spin-dash)",
       "description": {
-        "zh-CN": "组件专用相关变量：Loading Ep Dash",
-        "en-US": "Component-specific token: Loading Ep Dash"
+        "zh-CN": "组件专用相关变量：Loading Circular Dash",
+        "en-US": "Component-specific token: Loading Circular Dash"
       }
     },
     {
-      "name": "--m-loading-ep-rotate",
+      "name": "--m-loading-circular-rotate",
       "category": "component",
       "source": "src/components/Loading/styles.css",
       "default": "2s",
       "description": {
-        "zh-CN": "组件专用相关变量：Loading Ep Rotate",
-        "en-US": "Component-specific token: Loading Ep Rotate"
+        "zh-CN": "组件专用相关变量：Loading Circular Rotate",
+        "en-US": "Component-specific token: Loading Circular Rotate"
       }
     },
     {
