@@ -1,5 +1,21 @@
 # morya-ui
 
+## 0.2.8
+
+### 新功能
+
+- 新增 Loading 加载组件
+
+### 文档
+
+- 补充 Loading 中英文文档与示例
+- update quick start guide for kebab-case imports and dts configuration
+
+### 变更
+
+- stop copying docs into consumer apps
+- stop copying design tokens and page examples
+
 ## 0.2.7
 
 ### 新功能
