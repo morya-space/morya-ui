@@ -140,18 +140,8 @@
 }
 
 .m-password__toggle {
-    margin-right: var(--m-control-padding-x-medium);
     min-height: var(--m-password-toggle-size);
     min-width: var(--m-password-toggle-size);
-    padding: var(--m-space-1);
-}
-
-.m-password--small .m-password__toggle {
-    margin-right: var(--m-control-padding-x-small);
-}
-
-.m-password--large .m-password__toggle {
-    margin-right: var(--m-control-padding-x-large);
 }
 
 .m-password__clear:hover:not(:disabled),

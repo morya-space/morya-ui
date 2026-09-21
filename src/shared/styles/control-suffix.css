@@ -11,7 +11,7 @@
     height: var(--m-control-affix-size);
     pointer-events: none;
     position: absolute;
-    right: var(--m-space-1);
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     width: var(--m-control-affix-size);

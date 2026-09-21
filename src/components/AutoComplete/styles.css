@@ -56,10 +56,8 @@
     width: 100%;
 }
 
-.m-autocomplete__control:has(.m-autocomplete__clear) .m-autocomplete__input,
-.m-autocomplete__control:has(.m-autocomplete__spinner) .m-autocomplete__input,
 .m-autocomplete__control:has(.m-autocomplete__dropdown) .m-autocomplete__input {
-    padding-right: var(--m-space-1);
+    padding-right: var(--m-space-2);
 }
 
 .m-autocomplete--small .m-autocomplete__control {
@@ -217,7 +215,6 @@
     flex: 0 0 auto;
     height: var(--m-control-affix-size);
     justify-content: center;
-    margin-right: var(--m-space-1);
     width: var(--m-control-affix-size);
 }
 

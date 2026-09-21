@@ -96,10 +96,6 @@
     width: 100%;
 }
 
-.m-datepicker__control:has(.m-datepicker__clear) .m-datepicker__input {
-    padding-right: var(--m-space-1);
-}
-
 .m-datepicker--small .m-datepicker__control:has(.m-datepicker__input) {
     min-height: var(--m-control-height-small);
 }
@@ -120,11 +116,6 @@
     height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     padding: 0 var(--m-control-padding-x-large);
-}
-
-.m-datepicker--small .m-datepicker__control:has(.m-datepicker__clear) .m-datepicker__input,
-.m-datepicker--large .m-datepicker__control:has(.m-datepicker__clear) .m-datepicker__input {
-    padding-right: var(--m-space-1);
 }
 
 .m-datepicker__input:focus,
@@ -152,7 +143,6 @@
     font: inherit;
     height: var(--m-control-affix-size);
     justify-content: center;
-    margin-right: var(--m-space-1);
     padding: 0;
     width: var(--m-control-affix-size);
 }

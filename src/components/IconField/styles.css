@@ -29,11 +29,11 @@
 }
 
 .m-icon-field--left:not(.m-icon-field--anchored) .m-icon-field__icon {
-    left: var(--m-control-padding-x-medium);
+    left: var(--m-space-2);
 }
 
 .m-icon-field--right:not(.m-icon-field--anchored) .m-icon-field__icon {
-    right: var(--m-control-padding-x-medium);
+    right: var(--m-space-2);
 }
 
 .m-icon-field--left:not(.m-icon-field--anchored)
