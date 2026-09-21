@@ -732,8 +732,10 @@ export const designRules = {
   status: {
     preferred: 'MStatus',
     chip: 'MTag',
+    badge: 'MBadge',
+    entity: 'MChip',
     mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' },
-    note: '行内轻量状态用 MStatus；芯片/可关闭标签用 MTag',
+    note: '行内轻量状态用 MStatus；分类或可关闭标签用 MTag；数量角标用 MBadge；可移除实体用 MChip',
   },
   feedback: {
     default: 'message',
@@ -765,7 +767,7 @@ export const designRules = {
         'MMessage 组件当前主要为 message 服务宿主，勿臆造 severity 子节点 API',
       ],
     },
-    doc: 'docs/feedback-message-vs-toast.md',
+    doc: 'design-kit/.agents/skills/morya-ui-pages/references/feedback.md',
   },
   global: [
     '优先使用组件库组件和 --m-* Token',

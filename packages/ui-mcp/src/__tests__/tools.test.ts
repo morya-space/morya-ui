@@ -312,6 +312,26 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.options.some((option) => option.component === 'Drawer')).toBe(true)
   })
 
+  it('covers current selection, status, empty, and menu guides', () => {
+    const selection = read<{ options: Array<{ component: string }> }>(
+      handlers.recommendComponent({ decision: 'selection-choice' }),
+    )
+    expect(selection.options.map((option) => option.component)).toEqual(
+      expect.arrayContaining(['Select', 'CascadeSelect', 'Listbox', 'SelectButton', 'Radio']),
+    )
+
+    const status = read<{ id: string }>(handlers.recommendComponent({ decision: 'status-label-choice' }))
+    expect(status.id).toBe('status-label-choice')
+    const empty = read<{ options: Array<{ component: string }> }>(
+      handlers.recommendComponent({ decision: 'empty-result-choice' }),
+    )
+    expect(empty.options.map((option) => option.component)).toEqual(['Empty', 'Result'])
+    const menu = read<{ options: Array<{ component: string }> }>(
+      handlers.recommendComponent({ decision: 'action-menu-choice' }),
+    )
+    expect(menu.options.some((option) => option.component === 'ContextMenu')).toBe(true)
+  })
+
   it('exposes catalog health in version metadata', () => {
     const result = read<{
       health: { ok: boolean; patternReferences: unknown[] }

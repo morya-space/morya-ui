@@ -1177,13 +1177,25 @@ export function createToolHandlers(catalog = loadCatalog()) {
         destructive: { component: 'MButton', props: ['severity="danger"'], requiresConfirmation: true },
         cancel: { component: 'MButton', props: ['severity="secondary"', 'text'] },
       },
-      status: { component: 'MTag', mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' } },
+      status: {
+        preferred: 'MStatus',
+        chip: 'MTag',
+        badge: 'MBadge',
+        entity: 'MChip',
+        mapping: { active: 'success', pending: 'warn', disabled: 'secondary', error: 'danger' },
+        note: 'Inline status uses MStatus; category or closable labels use MTag; counts use MBadge.',
+      },
       feedback: {
         default: 'message',
         message: { when: ['single-line action result', 'save/delete/create confirmations'] },
         toast: { when: ['summary + detail', 'async or background notifications'] },
-        inlineMessage: { api: 'field errorMessage | token-styled role=alert', when: ['persistent form/auth errors'] },
-        doc: 'docs/feedback-message-vs-toast.md',
+        empty: { component: 'MEmpty', when: ['no rows', 'no filter matches', 'first use'] },
+        result: { component: 'MResult', when: ['terminal success/failure', '403 / 404 / 500'] },
+        inlineMessage: {
+          api: 'field errorMessage | token-styled role=alert',
+          when: ['persistent form/auth errors; MMessage is the message host, not an inline alert'],
+        },
+        doc: 'design-kit/.agents/skills/morya-ui-pages/references/feedback.md',
       },
       global: [
         'Prefer library components and --m-* tokens.',
@@ -1291,6 +1303,14 @@ export function createToolHandlers(catalog = loadCatalog()) {
       install: 'pnpm add morya-ui',
       peer: 'vue@^3.3.0',
       styles: "import 'morya-ui/styles.css'",
+      aiSetup: {
+        command: 'npx @morya-ui/setup',
+        skill: 'morya-ui-pages',
+        mcp: 'npx -y @morya-ui/mcp',
+        note: locale === 'en-US'
+          ? 'setup installs the library, copies the page skill and Cursor rules, and merges MCP. Table data uses the rows prop. MMessage is the message host, not an inline alert.'
+          : 'setup 会安装组件库、复制页面 skill 与 Cursor 规则，并合并 MCP。表格数据用 rows。MMessage 是 message 宿主，不是内嵌 Alert。',
+      },
       guides: {
         introduction: pickMarkdown(intro),
         quickStart: pickMarkdown(quickStart),
