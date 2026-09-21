@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：登录页（Account + 轻量品牌）
- * @see DESIGN.md · page-layouts.md · surfaces § Account
+ * @see DESIGN.md · surfaces § Account · visual-craft § Atmosphere
  */
 import {
   MButton,
@@ -56,7 +56,6 @@ async function onSubmit() {
             <p>使用工作邮箱进入后台。</p>
           </header>
 
-          <!-- 表单级常驻错误：token 样式告警条（字段错误优先用 errorMessage） -->
           <p v-if="formError" class="login-alert" role="alert">
             {{ formError }}
           </p>
@@ -82,7 +81,7 @@ async function onSubmit() {
             </MFormItem>
 
             <MSpace style="margin-top: var(--m-space-2)" alignment="center">
-              <MButton type="submit" label="登录" :loading="submitting" />
+              <MButton type="submit" label="登录" severity="primary" :loading="submitting" />
               <MButton type="button" label="忘记密码" severity="secondary" text />
             </MSpace>
           </MForm>
@@ -102,19 +101,43 @@ async function onSubmit() {
 }
 
 .login-brand {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: var(--m-space-4);
   padding: clamp(2rem, 6vw, 4.5rem);
+  overflow: hidden;
   background:
+    radial-gradient(
+      80% 60% at 10% 20%,
+      color-mix(in srgb, var(--m-color-primary) 22%, transparent),
+      transparent 55%
+    ),
     linear-gradient(
       165deg,
-      color-mix(in srgb, var(--m-color-primary) 18%, var(--m-color-surface)) 0%,
+      color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface)) 0%,
       var(--m-color-surface) 55%,
       color-mix(in srgb, var(--m-color-border) 35%, var(--m-color-surface)) 100%
     );
   border-right: 1px solid var(--m-color-border);
+}
+
+.login-brand::after {
+  content: '';
+  position: absolute;
+  inset: auto -10% -20% 40%;
+  height: 55%;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--m-color-primary) 12%, transparent);
+  pointer-events: none;
+}
+
+.login-brand__mark,
+.login-brand__title,
+.login-brand__lead {
+  position: relative;
+  z-index: 1;
 }
 
 .login-brand__mark {
@@ -175,6 +198,23 @@ async function onSubmit() {
   color: var(--m-color-danger);
   font-size: 0.875rem;
   line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .login-panel {
+    animation: login-panel-in 420ms ease both;
+  }
+}
+
+@keyframes login-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：仪表盘页
- * @see DESIGN.md · morya-ui-pages references/page-layouts.md
+ * @see DESIGN.md · morya-ui-pages references/page-layouts.md · visual-craft § Ops polish
  */
 import {
   MBreadcrumb,
@@ -16,6 +16,7 @@ import {
   MPageHeader,
   MPagePlaceholder,
   MPageStat,
+  MStatus,
   MTable,
   MTag,
   zhCN,
@@ -32,7 +33,7 @@ const recentColumns = [
   { key: 'id', label: '工单号', width: 96 },
   { key: 'title', label: '标题' },
   { key: 'priority', label: '优先级', width: 96 },
-  { key: 'status', label: '状态', width: 96 },
+  { key: 'status', label: '状态', width: 110 },
 ]
 
 const recentRows = [
@@ -47,10 +48,22 @@ function prioritySeverity(p: string) {
   return 'secondary'
 }
 
+function priorityLabel(p: string) {
+  if (p === 'high') return '高'
+  if (p === 'medium') return '中'
+  return '低'
+}
+
 function statusLabel(s: string) {
   if (s === 'open') return '待处理'
   if (s === 'progress') return '进行中'
   return '已完成'
+}
+
+function statusSeverity(s: string) {
+  if (s === 'open') return 'warn'
+  if (s === 'progress') return 'info'
+  return 'success'
 }
 </script>
 
@@ -63,7 +76,10 @@ function statusLabel(s: string) {
 
       <MLayoutContent>
         <MPageContent density="spacious">
-          <MPageHeader title="仪表盘" />
+          <MPageHeader
+            title="运营概览"
+            description="关注今日活跃与待处理工单，异常优先下钻。"
+          />
 
           <MGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
             <MGridItem v-for="item in stats" :key="item.label" :span="1">
@@ -77,20 +93,37 @@ function statusLabel(s: string) {
             </MGridItem>
           </MGrid>
 
-          <MGrid :cols="2" :x-gap="16" :y-gap="16">
+          <MGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
             <MGridItem :span="1">
               <MCard title="趋势概览">
-                <MPagePlaceholder aria-label="图表占位" description="图表区域（接入 ECharts / 业务组件）" />
+                <MPagePlaceholder
+                  aria-label="图表占位"
+                  description="接入图表组件后展示近 7 日活跃与转化。"
+                />
               </MCard>
             </MGridItem>
             <MGridItem :span="1">
               <MCard title="最近工单">
-                <MTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered>
+                <MTable
+                  :columns="recentColumns"
+                  :rows="recentRows"
+                  size="small"
+                  :paginator="false"
+                  bordered
+                  row-key="id"
+                  aria-label="最近工单"
+                >
                   <template #cell-priority="{ value }">
-                    <MTag :value="String(value)" :severity="prioritySeverity(String(value))" />
+                    <MTag
+                      :value="priorityLabel(String(value))"
+                      :severity="prioritySeverity(String(value))"
+                    />
                   </template>
                   <template #cell-status="{ value }">
-                    <MTag :value="statusLabel(String(value))" severity="info" />
+                    <MStatus
+                      :label="statusLabel(String(value))"
+                      :severity="statusSeverity(String(value))"
+                    />
                   </template>
                 </MTable>
               </MCard>

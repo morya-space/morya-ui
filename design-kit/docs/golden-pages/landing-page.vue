@@ -219,6 +219,36 @@ const faqTabs = [
   font-weight: 600;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .landing-hero__track span {
+    animation: landing-fade-up 480ms ease both;
+  }
+
+  .landing-hero__track span:nth-child(2) {
+    animation-delay: 60ms;
+  }
+
+  .landing-hero__track span:nth-child(3) {
+    animation-delay: 120ms;
+  }
+
+  .landing-hero__track span:nth-child(4) {
+    animation-delay: 180ms;
+  }
+}
+
+@keyframes landing-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .landing-section {
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 3rem);
   max-width: 72rem;

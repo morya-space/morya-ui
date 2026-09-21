@@ -53,6 +53,10 @@ import {
 
 <style scoped>
 .empty-state-shell {
+  display: grid;
+  place-items: center;
+  min-height: 18rem;
+  padding: var(--m-space-8) var(--m-space-6);
   border: 1px dashed color-mix(in srgb, var(--m-color-border) 80%, var(--m-color-primary));
   border-radius: var(--m-radius-md);
   background:
@@ -62,5 +66,22 @@ import {
       transparent 55%
     ),
     var(--m-color-surface);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .empty-state-shell {
+    animation: empty-in 400ms ease both;
+  }
+}
+
+@keyframes empty-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

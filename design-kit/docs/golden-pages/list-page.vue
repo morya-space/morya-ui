@@ -1,12 +1,13 @@
 <script setup lang="ts">
 /**
  * 黄金样例：列表页
- * @see DESIGN.md · morya-ui-pages references/page-layouts.md
+ * @see DESIGN.md · morya-ui-pages references/page-layouts.md · visual-craft § Ops polish
  */
 import {
   MBreadcrumb,
   MButton,
   MConfigProvider,
+  MEmpty,
   MInput,
   MLayout,
   MLayoutContent,
@@ -18,18 +19,20 @@ import {
   MPageToolbar,
   MSelect,
   MSpace,
+  MStatus,
   MTable,
-  MTag,
   zhCN,
 } from 'morya-ui'
 import { ref } from 'vue'
 
 const keyword = ref('')
 const status = ref<string | undefined>()
+const siderCollapsed = ref(false)
 
 const menuModel = [
   { key: 'users', label: '用户管理', icon: 'user', to: '/users' },
   { key: 'roles', label: '角色管理', icon: 'shield', to: '/roles' },
+  { key: 'settings', label: '系统设置', icon: 'settings', to: '/settings' },
 ]
 
 const statusOptions = [
@@ -40,9 +43,9 @@ const statusOptions = [
 
 const columns = [
   { key: 'name', label: '名称' },
-  { key: 'status', label: '状态' },
-  { key: 'updatedAt', label: '更新时间' },
-  { key: 'actions', label: '操作', width: 128 },
+  { key: 'status', label: '状态', width: 120 },
+  { key: 'updatedAt', label: '更新时间', width: 140 },
+  { key: 'actions', label: '操作', width: 148 },
 ]
 
 const rows = [
@@ -103,7 +106,7 @@ const rows = [
             <MTable
               :columns="columns"
               :rows="rows"
-              :rows-per-page="3"
+              :rows-per-page="5"
               paginator
               striped
               bordered
@@ -111,22 +114,33 @@ const rows = [
               aria-label="用户列表"
             >
               <template #cell-status="{ value }">
-                <MTag :value="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'" />
+                <MStatus
+                  :label="value === 'active' ? '启用' : '停用'"
+                  :severity="value === 'active' ? 'success' : 'secondary'"
+                />
               </template>
               <template #cell-actions>
                 <MSpace>
-                  <MButton severity="secondary" size="small">
+                  <MButton severity="secondary" size="small" text>
                     编辑
                   </MButton>
-                  <MButton severity="danger" size="small">
+                  <MButton severity="danger" size="small" text>
                     删除
                   </MButton>
                 </MSpace>
               </template>
               <template #empty>
-                <p style="margin: 0; padding: var(--m-space-8); text-align: center; color: var(--m-color-text-muted)">
-                  暂无用户数据
-                </p>
+                <MEmpty
+                  title="还没有用户"
+                  description="创建第一个用户后，即可分配角色与权限。"
+                  icon="user"
+                >
+                  <template #extra>
+                    <MButton severity="primary">
+                      新建用户
+                    </MButton>
+                  </template>
+                </MEmpty>
               </template>
             </MTable>
           </MPageContent>
