@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Copy whitelisted paths from repo design-kit/ into packages/setup/template/.
+ * Skill folders come from packages/setup/catalog/skills.json.
  */
-import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -11,11 +12,15 @@ const pkgRoot = resolve(__dirname, '..')
 const repoRoot = resolve(pkgRoot, '../..')
 const sourceRoot = join(repoRoot, 'design-kit')
 const templateRoot = join(pkgRoot, 'template')
+const catalogPath = join(pkgRoot, 'catalog', 'skills.json')
+
+const catalog = JSON.parse(readFileSync(catalogPath, 'utf8'))
+const skillPaths = catalog.skills.map((skill) => skill.path)
 
 /** Relative paths under design-kit to publish for consumers. */
 const INCLUDE = [
   'DESIGN.md',
-  '.agents/skills/morya-ui-pages',
+  ...skillPaths,
   '.cursor/rules',
   'scripts/check-raw-colors.mjs',
 ]

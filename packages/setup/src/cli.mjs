@@ -6,6 +6,12 @@ import { readJson } from './fs-utils.mjs'
 import { installMoryaUi } from './install.mjs'
 import { mergeMcpConfig } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
+import {
+  buildAiInclude,
+  loadSkillsCatalog,
+  parseSkillsFlag,
+  resolveSkillSelection,
+} from './skills.mjs'
 import { ensureStylesImport } from './styles.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -13,14 +19,6 @@ const PKG_ROOT = resolve(__dirname, '..')
 const TEMPLATE_ROOT = join(PKG_ROOT, 'template')
 
 const MODES = new Set(['app', 'ai', 'full'])
-
-/** AI pack paths under template/. */
-const AI_TEMPLATE_INCLUDE = [
-  'DESIGN.md',
-  '.agents/skills/morya-ui-pages',
-  '.cursor/rules',
-  'scripts/check-raw-colors.mjs',
-]
 
 /** Mode → default skips (user --skip-* can only add more skips). */
 const MODE_DEFAULTS = {
@@ -38,17 +36,23 @@ const SKIP_FLAGS = {
 }
 
 export function printHelp() {
+  const { skills } = loadSkillsCatalog()
+  const skillList = skills.map((s) => {
+    const tag = s.required ? 'required' : s.default ? 'default' : 'optional'
+    return `    ${s.id.padEnd(24)} (${tag}) ${s.description}`
+  }).join('\n')
+
   console.log(`Usage: morya-ui-setup [command] [options]
 
 Commands:
   (default) / full  Install morya-ui, AI template, MCP, styles, check:colors
   app               Install morya-ui and inject styles.css
-  ai                Copy Agent skill / rules / DESIGN,
+  ai                Copy Agent skills / rules / DESIGN,
                     merge Cursor MCP, add check:colors
 
 Default command:
   - install morya-ui
-  - copy DESIGN.md, Agent skill, Cursor rules
+  - copy DESIGN.md, selected Agent skills, Cursor rules
   - merge .cursor/mcp.json for @morya-ui/mcp
   - inject import 'morya-ui/styles.css' into the app entry when found
   - add check:colors script when missing
@@ -56,6 +60,8 @@ Default command:
 Options:
   --cwd <dir>       Target project root (default: process.cwd())
   --pm <name>       Package manager: pnpm | yarn | npm (auto-detect by lockfile)
+  --skills <list>   Comma-separated skill ids, or "all" (skips interactive prompt)
+  --yes             Use default skills without prompting (CI / non-interactive)
   --force           Overwrite existing template files and MCP server entry
   --dry-run         Print actions without writing or installing
   --skip-install    Skip dependency install
@@ -64,6 +70,9 @@ Options:
   --skip-styles     Skip injecting styles.css
   --skip-scripts    Skip adding check:colors to package.json
   -h, --help        Show this help
+
+Skills:
+${skillList}
 `)
 }
 
@@ -75,6 +84,8 @@ export function parseArgs(argv) {
     mode: 'full',
     cwd: process.cwd(),
     pm: undefined,
+    skills: undefined,
+    yes: false,
     force: false,
     dryRun: false,
     skipInstall: false,
@@ -103,6 +114,10 @@ export function parseArgs(argv) {
       options.dryRun = true
       continue
     }
+    if (arg === '--yes' || arg === '-y') {
+      options.yes = true
+      continue
+    }
     if (SKIP_FLAGS[arg]) {
       options[SKIP_FLAGS[arg]] = true
       continue
@@ -125,6 +140,16 @@ export function parseArgs(argv) {
     }
     if (arg.startsWith('--pm=')) {
       options.pm = arg.slice('--pm='.length)
+      continue
+    }
+    if (arg === '--skills') {
+      const value = argv[++i]
+      if (!value) throw new Error('--skills requires a comma-separated list or "all"')
+      options.skills = value
+      continue
+    }
+    if (arg.startsWith('--skills=')) {
+      options.skills = arg.slice('--skills='.length)
       continue
     }
     throw new Error(`Unknown argument: ${arg}`)
@@ -176,6 +201,8 @@ export async function runSetup(options) {
     skipStyles,
     skipScripts,
     pm,
+    skills: skillsFlag,
+    yes,
   } = options
 
   console.log(`@morya-ui/setup [${mode}] → ${cwd}${dryRun ? ' (dry-run)' : ''}`)
@@ -188,6 +215,24 @@ export async function runSetup(options) {
     console.log('')
   }
 
+  const catalog = loadSkillsCatalog()
+  let selectedSkills = []
+  let aiInclude
+
+  const needsTemplate = !skipTemplate && (mode === 'ai' || mode === 'full')
+  if (needsTemplate) {
+    if (skillsFlag != null) {
+      selectedSkills = parseSkillsFlag(skillsFlag, catalog.skills)
+    } else {
+      selectedSkills = await resolveSkillSelection(catalog.skills, {
+        skipPrompt: yes || dryRun,
+      })
+    }
+    aiInclude = buildAiInclude(selectedSkills, catalog.skills)
+    console.log(`Skills: ${selectedSkills.join(', ')}`)
+    console.log('')
+  }
+
   const install = installMoryaUi(cwd, { pm, dryRun, skipInstall })
 
   const template = skipTemplate
@@ -195,7 +240,7 @@ export async function runSetup(options) {
     : copyTemplate(TEMPLATE_ROOT, cwd, {
         force,
         dryRun,
-        include: mode === 'ai' || mode === 'full' ? AI_TEMPLATE_INCLUDE : undefined,
+        include: aiInclude,
       })
 
   const mcp = skipMcp
@@ -223,6 +268,7 @@ export async function runSetup(options) {
     console.log(
       `Template: ${template.copied.length} copied, ${template.forced.length} overwritten, ${template.skipped.length} skipped`,
     )
+    if (selectedSkills.length) console.log(`  skills: ${selectedSkills.join(', ')}`)
     if (template.skipped.length && template.skipped.length <= 8) {
       for (const file of template.skipped) console.log(`  skip ${file}`)
     } else if (template.skipped.length > 8) {
@@ -270,5 +316,5 @@ export async function runSetup(options) {
     console.log('  4. Optional: pnpm check:colors')
   }
 
-  return { mode, install, template, mcp, styles, scripts }
+  return { mode, install, template, mcp, styles, scripts, skills: selectedSkills }
 }

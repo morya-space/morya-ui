@@ -9,7 +9,7 @@ Docs (zh/en):
 - [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
 - [Quick start](https://morya-space.github.io/morya-ui/docs/quick-start) — install and first component
 
-Installs the UI library, copies Agent skill / Cursor rules / design docs from `design-kit`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and injects `import 'morya-ui/styles.css'`.
+Installs the UI library, copies Agent skills / Cursor rules / design docs from `design-kit`, merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and injects `import 'morya-ui/styles.css'`.
 
 ## Usage
 
@@ -19,6 +19,8 @@ In your app project root:
 npx @morya-ui/setup
 ```
 
+On a TTY, `full` / `ai` will prompt for optional Agent skills (required `morya-ui-pages` is always included).
+
 Other common commands:
 
 ```bash
@@ -27,6 +29,11 @@ npx @morya-ui/setup ai
 
 # Library + styles only
 npx @morya-ui/setup app
+
+# Non-interactive skill selection
+npx @morya-ui/setup ai --yes
+npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design
+npx @morya-ui/setup ai --skills=all
 ```
 
 ### Options
@@ -35,20 +42,26 @@ npx @morya-ui/setup app
 | --- | --- |
 | `--cwd <dir>` | Target project root (default: current directory) |
 | `--pm pnpm\|yarn\|npm` | Package manager (default: detect from lockfile, else `pnpm`) |
+| `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
+| `--yes` / `-y` | Use default skills without prompting |
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions without writing or installing |
 | `--skip-install` | Do not install `morya-ui` |
-| `--skip-template` | Do not copy AI skill / rules / docs / tokens |
+| `--skip-template` | Do not copy AI skill / rules / docs |
 | `--skip-mcp` | Do not write `.cursor/mcp.json` |
 | `--skip-styles` | Do not inject `styles.css` |
 | `--skip-scripts` | Do not add `check:colors` to `package.json` |
 | `-h`, `--help` | Show help |
 
-Example: MCP only:
+### Skills
 
-```bash
-npx @morya-ui/setup ai --skip-template --skip-scripts
-```
+| Id | Default | Role |
+| --- | --- | --- |
+| `morya-ui-pages` | required | Page generation with `M*` + golden layouts |
+| `frontend-design` | optional | Express / brand visual taste |
+| `fixing-accessibility` | optional | A11y audit and targeted fixes |
+
+Catalog: [`catalog/skills.json`](./catalog/skills.json).
 
 ### Conflict policy
 
@@ -61,8 +74,8 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 
 From the package `template/` (synced from repo `design-kit/`):
 
-- `DESIGN.md`
-- `.agents/skills/morya-ui-pages/`
+- `DESIGN.md` — core design contract (principles, tokens, bans)
+- `.agents/skills/<selected>/` — at least `morya-ui-pages`
 - `.cursor/rules/`
 - `scripts/check-raw-colors.mjs`
 
@@ -81,28 +94,4 @@ Writes / merges:
 }
 ```
 
-Restart Cursor (or reload MCP) after setup.
-
-Other clients can use the same stdio command; this CLI only writes `.cursor/mcp.json`.
-
-### Styles
-
-Looks for `src/main.ts` / `.js` / `.tsx` / `.jsx`, root `main.*`, `src/app.ts` / `.js`, or the module script in `index.html`. If none match, add manually:
-
-```ts
-import 'morya-ui/styles.css'
-```
-
-The CLI does **not** call `app.use(MoryaUI)` or edit `App.vue`.
-
-## Local development (this monorepo)
-
-```bash
-pnpm setup:sync-template   # refresh packages/setup/template from design-kit
-pnpm setup:build
-node packages/setup/bin/morya-ui-setup.js --cwd /path/to/app --dry-run
-```
-
-## License
-
-MIT
+Restart Cursor (or reload MCP) after install.

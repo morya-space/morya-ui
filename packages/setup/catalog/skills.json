@@ -1,0 +1,28 @@
+{
+  "skills": [
+    {
+      "id": "morya-ui-pages",
+      "name": "Morya UI Pages",
+      "description": "Build admin and product pages with M* components, golden layouts, and tokens.",
+      "required": true,
+      "default": true,
+      "path": ".agents/skills/morya-ui-pages"
+    },
+    {
+      "id": "frontend-design",
+      "name": "Frontend Design",
+      "description": "Distinctive visual direction for Express / brand surfaces (taste only; still remediate with M*).",
+      "required": false,
+      "default": false,
+      "path": ".agents/skills/frontend-design"
+    },
+    {
+      "id": "fixing-accessibility",
+      "name": "Fixing Accessibility",
+      "description": "Audit and fix names, keyboard, focus, forms, and WCAG basics.",
+      "required": false,
+      "default": false,
+      "path": ".agents/skills/fixing-accessibility"
+    }
+  ]
+}

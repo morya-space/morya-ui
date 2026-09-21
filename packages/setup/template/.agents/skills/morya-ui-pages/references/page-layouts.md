@@ -13,6 +13,12 @@ When generating a full page, pick a type and **mirror the golden-page block orde
 
 Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet` (`filters`, `toolbar`, `form-actions`, `scrollable-panel`, …).
 
+## Product defaults
+
+- **Short create/edit** (about ≤8 fields, single section): same-page `MDialog` + `MForm` — do not invent a new route form for every entity.
+- **Long / multi-section / wizard**: dedicated form page (`form-page`) or `MDrawer`.
+- **One-line success/error**: `message` API; title + detail or async notify → `toast` (see [feedback.md](feedback.md)).
+
 ## List page — block order
 
 1. `MLayout fillViewport` + optional `MLayoutSider bordered`
