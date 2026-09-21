@@ -80,7 +80,7 @@ const statusOptions = [
     descriptionEn: 'Standard MTable placed directly in MPageContent without an extra Card wrapper.',
     pageTypes: ['list'],
     keywords: ['表格', 'table', 'pagination', 'paginator', 'empty', 'columns', 'rows'],
-    imports: ['MTable'],
+    imports: ['MTable', 'MEmpty', 'MButton'],
     scriptSetup: `const columns = [
   { key: 'name', label: '名称' },
   { key: 'status', label: '状态' },
@@ -101,13 +101,19 @@ const loading = ref(false)`,
   aria-label="数据列表"
 >
   <template #empty>
-    <p style="margin:0;padding:var(--m-space-8);text-align:center;color:var(--m-color-text-muted)">
-      暂无数据
-    </p>
+    <MEmpty
+      title="还没有数据"
+      description="创建第一条记录后，这里会列出结果。"
+      icon="inbox"
+    >
+      <template #extra>
+        <MButton severity="primary">新建</MButton>
+      </template>
+    </MEmpty>
   </template>
 </MTable>`,
-    rules: ['表格直接放在 MPageContent 内', '空态用 #empty，不要留空白区域'],
-    rulesEn: ['Place the table directly in MPageContent', 'Use #empty for zero-data states'],
+    rules: ['表格直接放在 MPageContent 内', '空态用 MEmpty，不要留空白或单行灰字'],
+    rulesEn: ['Place the table directly in MPageContent', 'Use MEmpty for zero-data states, not a blank or muted sentence'],
     avoid: ['不要用 MCard 包裹 bordered MTable'],
     avoidEn: ['Do not wrap a bordered MTable with MCard'],
   },
@@ -122,12 +128,12 @@ const loading = ref(false)`,
     imports: ['MSpace', 'MButton'],
     template: `<template #cell-actions>
   <MSpace>
-    <MButton severity="secondary" size="small">编辑</MButton>
-    <MButton severity="danger" size="small">删除</MButton>
+    <MButton severity="secondary" size="small" text>编辑</MButton>
+    <MButton severity="danger" size="small" text>删除</MButton>
   </MSpace>
 </template>`,
-    rules: ['行内操作用 size="small"', '危险操作使用 severity="danger" 并配合确认弹窗'],
-    rulesEn: ['Use size="small" for row actions', 'Use severity="danger" with confirmation for destructive actions'],
+    rules: ['行内操作用 size="small" + text/outlined，避免一排实心按钮', '危险操作使用 severity="danger" 并配合确认弹窗'],
+    rulesEn: ['Use size="small" with text/outlined row actions', 'Use severity="danger" with confirmation for destructive actions'],
     avoid: ['不要用 Dropdown 代替明确的行内按钮组，除非操作很多'],
     avoidEn: ['Do not replace explicit row buttons with Dropdown unless there are many actions'],
   },
@@ -135,8 +141,8 @@ const loading = ref(false)`,
     id: 'list-status-tag',
     title: '表格状态列 Tag',
     titleEn: 'Table status tag cell',
-    description: '在 #cell-status 中用 MTag 展示业务状态。',
-    descriptionEn: 'Render business status with MTag in #cell-status.',
+    description: '在 #cell-status 中用 MTag 展示分类标签（业务状态优先用 list-status-dot / MStatus）。',
+    descriptionEn: 'Render category labels with MTag in #cell-status (prefer MStatus for business status).',
     pageTypes: ['list'],
     keywords: ['状态', 'tag', 'status', 'cell-status'],
     imports: ['MTag'],
@@ -332,18 +338,22 @@ const submitting = ref(false)`,
     descriptionEn: 'Recent records in a small MTable inside MCard.',
     pageTypes: ['dashboard'],
     keywords: ['recent', '最近', 'table', 'card', 'list'],
-    imports: ['MCard', 'MTable', 'MTag'],
+    imports: ['MCard', 'MTable', 'MStatus'],
     scriptSetup: `const recentColumns = [
   { key: 'id', label: '工单号', width: 96 },
   { key: 'title', label: '标题' },
-  { key: 'status', label: '状态', width: 96 },
+  { key: 'status', label: '状态', width: 110 },
 ]
 const recentRows = ref<Record<string, unknown>[]>([])`,
     template: `<MCard title="最近工单">
-  <MTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered />
+  <MTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered row-key="id">
+    <template #cell-status="{ value }">
+      <MStatus :label="String(value ?? '')" severity="secondary" />
+    </template>
+  </MTable>
 </MCard>`,
-    rules: ['明细列表放 MCard 内合理', 'size="small" 适合卡片内表格'],
-    rulesEn: ['Detail lists inside MCard are appropriate', 'Use size="small" for in-card tables'],
+    rules: ['明细列表放 MCard 内合理', 'size="small" 适合卡片内表格', '行内业务状态用 MStatus'],
+    rulesEn: ['Detail lists inside MCard are appropriate', 'Use size="small" for in-card tables', 'Use MStatus for row business status'],
     avoid: ['卡片内表格不要再外包一层 MPageContent'],
     avoidEn: ['Do not wrap in-card tables with another MPageContent'],
   },
