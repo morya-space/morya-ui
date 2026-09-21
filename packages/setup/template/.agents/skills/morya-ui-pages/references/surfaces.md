@@ -41,7 +41,7 @@ Copy must tell the user **what to do next**, not celebrate the system.
 | --- | --- | --- |
 | 404 / not found | Reorient | `MResult status="404"` + `返回首页` / `返回上一页` |
 | Permission denied | Explain + escape | `MResult status="403"` + request access / switch account / go home |
-| Maintenance / error | Honest status | `MResult status="500"` or persistent `<MMessage>` banner; what happened + retry + support |
+| Maintenance / error | Honest status | `MResult status="500"`; what happened + retry + support. Persistent form errors: field `errorMessage` or a token `role="alert"`, not `<MMessage>` as an alert |
 
 Avoid witty 404 essays that hide the exit paths.
 

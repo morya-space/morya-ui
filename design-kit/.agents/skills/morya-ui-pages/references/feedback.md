@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | Message service | Top-centered one-liner | `message.success('已保存')` | Most CRUD results |
 | Toast service | Corner notice with `summary` + optional `detail` | `toast.success({ summary, detail })` | Extra explanation, job results |
-| `MMessage` | In-page bar, stays | `<MMessage severity="error">…</MMessage>` | Persistent form / auth errors |
+| `MMessage` | Optional host for the `message` service | `<MMessage />` | Custom `appendTo` / placement only. Not an inline alert |
 
 ## Decision tree
 

@@ -76,7 +76,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 **Ops:** mirror golden-page block order; prefer `MPage*` over custom chrome.
 
-**Account / Flow / System:** centered or split shells with `MCard` / `MForm` / `MMessage` / `MEmpty` / `MResult` (see surfaces); keep controls as `M*`.
+**Account / Flow / System:** centered or split shells with `MCard` / `MForm` / `MEmpty` / `MResult` (see surfaces); keep controls as `M*`. Persistent form errors use field `errorMessage` or a token-styled `role="alert"` — `<MMessage>` is the `message` host, not an inline alert.
 
 **Express:** hero + sections with intentional hierarchy; interactive bits still `MButton` / `MTag` / etc.; atmosphere via layout, motion, and tokens — not a second component library.
 
@@ -86,7 +86,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 - Import from `morya-ui` (or documented subpath + style).
 - Forms: `MForm` + fields; `@submit` + `type="submit"`.
-- Tables: `columns` + `data` + `row-key`; `#cell-{key}`.
+- Tables: `columns` + `rows` + `row-key`; `#cell-{key}`. There is no `data` prop.
 - Enums → `MSelect` / `MTreeSelect`; action menus → `MDropdown`.
 - Destructive → `MConfirmDialog` / `MConfirmPopup`.
 - Feedback → default **`message`**; `toast` only for summary+detail / async. See [feedback.md](references/feedback.md).

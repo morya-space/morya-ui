@@ -12,7 +12,7 @@ description: 顶部居中浮层提示，支持 API 调用。
 
 - **Message（默认）**：轻量单行反馈，默认顶部居中，无标题/详情。**大多数 CRUD / 保存 / 删除回执应使用此项。**
 - **Toast**：四角通知，带 `summary` / `detail`；仅在有补充说明或异步通知感时使用。
-- **`<MMessage>` 组件**：页面内嵌条，用于表单区常驻错误（见下方「内嵌 Message」）。
+- **`<MMessage>` 组件**：可选的 message 服务宿主（自定义 `appendTo` / `placement`）。它不是页面内嵌 Alert；表单常驻错误用字段 `errorMessage`，或 token 样式的 `role="alert"`。
 
 > AI / 业务代码选型细则见 [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md)。
 

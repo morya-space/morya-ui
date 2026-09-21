@@ -68,7 +68,7 @@ description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分�
 1. 钉死主体、受众、表面、第一屏单一任务  
 2. 优先 MCP：`recommend_page` → `get_golden_page` → `get_component` / `get_example`  
 3. 无 MCP 时读 skill `references/`（布局、表面、反馈）  
-4. 反馈默认 `message`；`toast` 仅 summary+detail / 异步感（见 skill `references/feedback.md`）  
+4. 反馈默认 `message`；`toast` 仅 summary+detail / 异步感。表单常驻错误用字段 `errorMessage` 或 token 样式的 `role="alert"`，不要把 `<MMessage>` 当成内嵌 Alert。表格行数据用 `rows`。  
 5. 交付前对照 skill 检查清单；有 MCP 时跑 `validate_page`
 
 细节与硬边界以项目内 `SKILL.md` 为准，本文不重复全文。

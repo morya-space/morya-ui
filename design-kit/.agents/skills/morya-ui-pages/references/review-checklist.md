@@ -21,7 +21,7 @@
 ## Account / Flow / System
 
 - [ ] Primary CTA obvious; escape paths present (back / home / support)
-- [ ] Auth errors persistent via `<MMessage>` or field errors where appropriate
+- [ ] Auth errors stay on the form via field `errorMessage` or a token `role="alert"` (`<MMessage>` is the message host, not an inline alert)
 - [ ] Empty uses `MEmpty` (or table `#empty` with `MEmpty`); success / HTTP errors use `MResult`
 - [ ] Empty / success states tell the user the next action
 - [ ] Inline status prefers `MStatus`; chip-like labels use `MTag`
