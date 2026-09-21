@@ -235,6 +235,16 @@ export type {
 export { M_GRID_KEY } from "./components/Grid/types";
 export { default as MIcon } from "./components/Icon/Icon.vue";
 export {
+  getIconCategory,
+  getIconCategoryGroups,
+  iconCategoryMeta,
+} from "./components/Icon/icon-categories";
+export type {
+  IconCategoryGroup,
+  IconCategoryId,
+  IconCategoryMeta,
+} from "./components/Icon/icon-categories";
+export {
   getIconDefinition,
   iconNames,
   iconRegistry,

@@ -6,7 +6,7 @@ description: System outline icon registry. Use the default slot for business ico
 
 # Icon
 
-`MIcon` only maintains **component-library system icons** (close, arrows, status, actions, and so on). For full business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library so hundreds of SVGs are not bundled into `morya-ui`.
+`MIcon` maintains **component-library system icons** (close, arrows, status, navigation, common business icons from Tabler outline). For large business icon sets, use the default slot with [Lucide](https://lucide.dev) or another library.
 
 ## Import
 
@@ -21,7 +21,7 @@ import { iconNames, MIcon } from 'morya-ui'
 
 ## All system icons
 
-Click an icon to copy its name (for example `search`). Usage: `<MIcon name="search" />`.
+Click an icon to copy its name (for example `search`). Usage: `<MIcon name="search" />`. Filter by category or search by name.
 
 ```vue preview src="./demos/AllSystemIcons.en.vue"
 ```
@@ -80,6 +80,7 @@ When the default slot is present, it is **rendered first** and `name` is ignored
 | Export | Description |
 | --- | --- |
 | `iconNames` | Array of all system icon names. |
+| `iconCategoryMeta` / `getIconCategory` / `getIconCategoryGroups` | Category metadata and grouping helpers. |
 | `iconRegistry` / `getIconDefinition` / `isIconName` | Registry and type guards. |
 
 ## Events

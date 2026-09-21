@@ -6,7 +6,7 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 
 # Icon
 
-`MIcon` 只维护**组件库系统图标**（关闭、箭头、状态、操作等）。完整业务图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库，避免把数百个 SVG 打进 `morya-ui`。
+`MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，含 Tabler outline）。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
 
 ## 引入
 
@@ -21,7 +21,7 @@ import { iconNames, MIcon } from 'morya-ui'
 
 ## 全部系统图标
 
-点击图标即可复制名称（如 `search`），用法：`<MIcon name="search" />`。
+点击图标即可复制名称（如 `search`），用法：`<MIcon name="search" />`。可按分类筛选，或搜索名称。
 
 ```vue preview src="./demos/AllSystemIcons.zh.vue"
 ```
@@ -80,6 +80,7 @@ import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
 | 导出 | 说明 |
 | --- | --- |
 | `iconNames` | 全部系统图标名数组。 |
+| `iconCategoryMeta` / `getIconCategory` / `getIconCategoryGroups` | 图标分类元数据与分组。 |
 | `iconRegistry` / `getIconDefinition` / `isIconName` | 注册表与类型守卫。 |
 
 ## Events

@@ -7,5 +7,15 @@ export {
   iconRegistry,
   isIconName,
 } from './icons'
+export {
+  getIconCategory,
+  getIconCategoryGroups,
+  iconCategoryMeta,
+} from './icon-categories'
+export type {
+  IconCategoryGroup,
+  IconCategoryId,
+  IconCategoryMeta,
+} from './icon-categories'
 export type { IconDefinition, IconName, IconPrimitive } from './icons'
 export type { IconProps, IconSize } from './types'

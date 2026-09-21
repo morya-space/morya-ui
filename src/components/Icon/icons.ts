@@ -1,17 +1,9 @@
-/** Built-in system icons: 16×16, stroke currentColor. App icons → Lucide etc. via slot. */
+/** Built-in system icons: legacy 16×16 + Tabler 24×24 (icons MCP). App icons → Lucide etc. via slot. */
 
-export type IconPrimitive =
-  | { tag: 'path'; d: string }
-  | { tag: 'circle'; cx: number; cy: number; r: number; fill?: 'currentColor' | 'none' }
-  | { tag: 'line'; x1: number; y1: number; x2: number; y2: number }
-  | { tag: 'polyline'; points: string }
-  | { tag: 'rect'; x: number; y: number; width: number; height: number; rx?: number }
+import { tablerIconRegistry } from './icons-tabler'
+import type { IconDefinition } from './icons-types'
 
-export interface IconDefinition {
-  primitives: readonly IconPrimitive[]
-  /** Optional CSS modifier on the host (e.g. spin for loader). */
-  spin?: boolean
-}
+export type { IconDefinition, IconPrimitive } from './icons-types'
 
 export const iconRegistry = {
   check: {
@@ -285,6 +277,7 @@ export const iconRegistry = {
       { tag: 'path', d: 'M3.5 8.25c0 1.35 2.015 2.25 4.5 2.25s4.5-.9 4.5-2.25' },
     ],
   },
+  ...tablerIconRegistry,
 } as const satisfies Record<string, IconDefinition>
 
 export type IconName = keyof typeof iconRegistry
