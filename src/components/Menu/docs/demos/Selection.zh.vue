@@ -11,7 +11,7 @@ const model = [
 </script>
 
 <template>
-  <div>
+  <div class="w-[15rem]">
     <MMenu
       v-model:selected-key="selectedKey"
       :model="model"
