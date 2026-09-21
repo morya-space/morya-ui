@@ -382,10 +382,24 @@ if (process.argv.includes('--check')) {
   }
 } else {
   mkdirSync(outDir, { recursive: true })
-  writeFileSync(outFile, `${JSON.stringify(catalog, null, 2)}\n`)
-  console.error(
-    `Generated ${outFile} (${catalog.components.length} components, ${catalog.guides.length} guides)`,
-  )
+  if (existsSync(outFile)) {
+    const existing = readJson(outFile)
+    if (JSON.stringify(withoutTimestamp(catalog)) === JSON.stringify(withoutTimestamp(existing))) {
+      console.error(
+        `Catalog unchanged (${catalog.components.length} components, ${catalog.guides.length} guides); kept generatedAt`,
+      )
+    } else {
+      writeFileSync(outFile, `${JSON.stringify(catalog, null, 2)}\n`)
+      console.error(
+        `Generated ${outFile} (${catalog.components.length} components, ${catalog.guides.length} guides)`,
+      )
+    }
+  } else {
+    writeFileSync(outFile, `${JSON.stringify(catalog, null, 2)}\n`)
+    console.error(
+      `Generated ${outFile} (${catalog.components.length} components, ${catalog.guides.length} guides)`,
+    )
+  }
 }
 
 await import('./copy-golden-pages.mjs')

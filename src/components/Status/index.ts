@@ -1,4 +1,4 @@
-import "./style";
+import './style'
 export { default as MStatus } from "./Status.vue";
 export type {
   StatusProps,

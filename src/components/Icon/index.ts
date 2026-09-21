@@ -1,5 +1,4 @@
 import './style'
-
 export { default as MIcon } from './Icon.vue'
 export {
   getIconDefinition,

@@ -1,4 +1,4 @@
-import "./style";
+import './style'
 export type {
   EmptyIllustration,
   EmptyOutcomeIllustration,
