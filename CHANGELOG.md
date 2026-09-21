@@ -1,5 +1,32 @@
 # morya-ui
 
+## 0.2.9
+
+### 新功能
+
+- require a craft pass and add Ops polish recipes
+- add categorized Tabler built-in icons
+- add Loading component
+
+### 修复
+
+- align Table rows and MMessage host guidance with the real API
+- adjust width of selection demo for better layout
+- align trailing icon insets with input affixes
+- size input affixes from content instead of fixed padding
+- add block padding so vertical menus are not flush to edges
+
+### 文档
+
+- sync MCP and setup docs with the current AI tooling
+- document optional setup skills and companions
+- add Loading docs and demos
+
+### 变更
+
+- simplify sider and content into single-element shells
+- refresh Loading circular design tokens
+
 ## 0.2.8
 
 ### 新功能
