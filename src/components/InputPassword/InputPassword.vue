@@ -112,6 +112,7 @@ const rootClass = computed(() => [
     'm-password--invalid': props.invalid,
     'm-password--disabled': props.disabled,
     'm-password--toggle': props.toggleMask,
+    'm-password--clearable': showClear.value,
   },
 ])
 

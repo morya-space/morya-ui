@@ -12,7 +12,6 @@
 }
 
 .m-datepicker {
-    --m-datepicker-input-end-padding: calc(var(--m-space-2) + 1.25rem);
     display: inline-flex;
     flex-direction: column;
     gap: var(--m-space-2);
@@ -42,45 +41,96 @@
 }
 
 .m-datepicker__control {
-    align-items: center;
-    display: flex;
     position: relative;
 }
 
-.m-datepicker__input {
+.m-datepicker__control:has(.m-datepicker__input) {
+    align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
-    cursor: pointer;
-    font-family: var(--m-font-sans);
-    font-size: var(--m-control-font-medium);
+    box-sizing: border-box;
+    display: flex;
+    max-width: 100%;
     min-height: var(--m-control-height-medium);
-    padding: 0 var(--m-datepicker-input-end-padding) 0
-        var(--m-control-padding-x-medium);
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
-        box-shadow var(--m-motion-fast) var(--m-motion-ease),
-        opacity var(--m-motion-fast) var(--m-motion-ease);
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-datepicker__control:has(.m-datepicker__input):hover:not(:focus-within) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-datepicker__control:has(.m-datepicker__input):focus-within,
+.m-datepicker--open .m-datepicker__control:has(.m-datepicker__input) {
+    border-color: var(--m-color-primary-hover);
+    box-shadow: var(--m-focus-shadow);
+}
+
+.m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input) {
+    border-color: var(--m-color-danger);
+}
+
+.m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input):focus-within,
+.m-datepicker--invalid.m-datepicker--open
+    .m-datepicker__control:has(.m-datepicker__input) {
+    box-shadow: var(--m-focus-shadow-danger);
+}
+
+.m-datepicker__input {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--m-color-text);
+    cursor: pointer;
+    flex: 1 1 auto;
+    font-family: var(--m-font-sans);
+    font-size: var(--m-control-font-medium);
+    height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    min-height: 0;
+    min-width: 0;
+    padding: 0 var(--m-control-padding-x-medium);
     width: 100%;
+}
+
+.m-datepicker__control:has(.m-datepicker__clear) .m-datepicker__input {
+    padding-right: var(--m-space-1);
+}
+
+.m-datepicker--small .m-datepicker__control:has(.m-datepicker__input) {
+    min-height: var(--m-control-height-small);
 }
 
 .m-datepicker--small .m-datepicker__input {
     font-size: var(--m-control-font-small);
-    min-height: var(--m-control-height-small);
-    padding: 0 var(--m-datepicker-input-end-padding) 0
-        var(--m-control-padding-x-small);
+    height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    padding: 0 var(--m-control-padding-x-small);
+}
+
+.m-datepicker--large .m-datepicker__control:has(.m-datepicker__input) {
+    min-height: var(--m-control-height-large);
 }
 
 .m-datepicker--large .m-datepicker__input {
     font-size: var(--m-control-font-large);
-    min-height: var(--m-control-height-large);
-    padding: 0 var(--m-datepicker-input-end-padding) 0
-        var(--m-control-padding-x-large);
+    height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+    padding: 0 var(--m-control-padding-x-large);
 }
 
-.m-datepicker--invalid .m-datepicker__input {
-    border-color: var(--m-color-danger);
+.m-datepicker--small .m-datepicker__control:has(.m-datepicker__clear) .m-datepicker__input,
+.m-datepicker--large .m-datepicker__control:has(.m-datepicker__clear) .m-datepicker__input {
+    padding-right: var(--m-space-1);
+}
+
+.m-datepicker__input:focus,
+.m-datepicker__input:focus-visible {
+    box-shadow: none;
+    outline: none;
 }
 
 .m-datepicker--disabled {
@@ -91,16 +141,20 @@
 
 .m-datepicker__clear {
     align-items: center;
+    align-self: center;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
     display: inline-flex;
+    flex: 0 0 auto;
     font: inherit;
+    height: var(--m-control-affix-size);
     justify-content: center;
-    position: absolute;
-    right: var(--m-space-2);
+    margin-right: var(--m-space-1);
+    padding: 0;
+    width: var(--m-control-affix-size);
 }
 
 .m-datepicker__clear:hover:not(:disabled) {

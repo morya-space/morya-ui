@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import MInput from './Input.vue'
@@ -46,15 +48,28 @@ describe('muInput', () => {
     expect(wrapper.get('input').attributes('aria-describedby')).toContain('bio-count')
   })
 
-  it('renders prefix and suffix slots', () => {
+  it('renders prefix and suffix slots in a flex shell', () => {
     const wrapper = mount(MInput, {
       props: { modelValue: '12', label: '金额' },
-      slots: { prefix: () => '¥', suffix: () => '.00' },
+      slots: { prefix: () => '¥', suffix: () => '.well.design' },
     })
     expect(wrapper.get('.m-input__prefix').text()).toBe('¥')
-    expect(wrapper.get('.m-input__suffix').text()).toBe('.00')
-    expect(wrapper.get('input').classes()).toContain('m-input--has-prefix')
-    expect(wrapper.get('input').classes()).toContain('m-input--has-suffix')
+    expect(wrapper.get('.m-input__suffix').text()).toBe('.well.design')
+    expect(wrapper.get('.m-input-field__control').classes()).toEqual(
+      expect.arrayContaining([
+        'm-input-field__control--prefixed',
+        'm-input-field__control--suffixed',
+      ]),
+    )
+  })
+
+  it('lays out affixes in flow instead of fixed input padding', () => {
+    const styles = readFileSync(resolve(import.meta.dirname, './styles.css'), 'utf8')
+    expect(styles).toMatch(/\.m-input__prefix,\s*\n\.m-input__suffix \{[\s\S]*?flex:\s*0 0 auto/)
+    expect(styles).not.toMatch(/\.m-input--has-prefix\s*\{/)
+    expect(styles).toMatch(
+      /\.m-input-field__control--prefixed,\s*\n\.m-input-field__control--suffixed,\s*\n\.m-input-field__control--clearable \{[\s\S]*?display:\s*flex/,
+    )
   })
 
   it('emits focus, blur, and change and exposes focus/blur/select', async () => {

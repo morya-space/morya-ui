@@ -61,10 +61,17 @@ const inputClass = computed(() => [
     'm-input--filled': resolvedVariant.value === 'filled',
     'm-input--fluid': resolvedFluid.value,
     'm-input--invalid': isInvalid.value,
-    'm-input--has-prefix': hasPrefix.value,
-    'm-input--has-suffix': hasSuffix.value,
   },
 ])
+
+const showClear = computed(() => resolvedClearable.value && Boolean(props.modelValue))
+
+const controlClass = computed(() => ({
+  'm-input-field__control--clearable': showClear.value,
+  'm-input-field__control--counted': resolvedShowCount.value,
+  'm-input-field__control--prefixed': hasPrefix.value,
+  'm-input-field__control--suffixed': hasSuffix.value,
+}))
 
 function updateValue(event: Event) {
   emit('update:modelValue', (event.target as HTMLInputElement).value)
@@ -99,16 +106,8 @@ defineExpose({ focus, blur, select })
     :class="{ 'm-input-field--fluid': resolvedFluid }"
   >
     <label v-if="label" class="m-input-field__label" :for="inputId">{{ label }}</label>
-    <div
-      class="m-input-field__control"
-      :class="{
-        'm-input-field__control--clearable': resolvedClearable && modelValue,
-        'm-input-field__control--counted': resolvedShowCount,
-        'm-input-field__control--prefixed': hasPrefix,
-        'm-input-field__control--suffixed': Boolean($slots.suffix),
-      }"
-    >
-      <span v-if="$slots.prefix" class="m-input__prefix">
+    <div class="m-input-field__control" :class="controlClass">
+      <span v-if="hasPrefix" class="m-input__prefix">
         <slot name="prefix" />
       </span>
       <input
@@ -132,11 +131,11 @@ defineExpose({ focus, blur, select })
         @blur="emit('blur', $event)"
         @change="emit('change', ($event.target as HTMLInputElement).value)"
       >
-      <span v-if="$slots.suffix" class="m-input__suffix">
+      <span v-if="hasSuffix" class="m-input__suffix">
         <slot name="suffix" />
       </span>
       <button
-        v-if="resolvedClearable && modelValue"
+        v-if="showClear"
         class="m-input__clear"
         type="button"
         :aria-label="locale.clearInput"

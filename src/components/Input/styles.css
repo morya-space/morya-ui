@@ -46,16 +46,156 @@
     position: relative;
 }
 
+/*
+ * Affix/clear shell: prefix/suffix participate in flex flow so long slot
+ * content reserves real width instead of fighting fixed input padding.
+ */
 .m-input-field__control--prefixed,
-.m-input-field__control--suffixed {
+.m-input-field__control--suffixed,
+.m-input-field__control--clearable {
     align-items: center;
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-control);
+    box-sizing: border-box;
     display: flex;
+    max-width: 100%;
+    min-height: var(--m-control-height-medium);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-input-field--fluid .m-input-field__control--prefixed,
+.m-input-field--fluid .m-input-field__control--suffixed,
+.m-input-field--fluid .m-input-field__control--clearable {
+    width: 100%;
+}
+
+.m-input-field__control--prefixed:has(.m-input--small),
+.m-input-field__control--suffixed:has(.m-input--small),
+.m-input-field__control--clearable:has(.m-input--small),
+.m-input-field__control--prefixed:has(.m-input--sm),
+.m-input-field__control--suffixed:has(.m-input--sm),
+.m-input-field__control--clearable:has(.m-input--sm) {
+    min-height: var(--m-control-height-small);
+}
+
+.m-input-field__control--prefixed:has(.m-input--large),
+.m-input-field__control--suffixed:has(.m-input--large),
+.m-input-field__control--clearable:has(.m-input--large),
+.m-input-field__control--prefixed:has(.m-input--lg),
+.m-input-field__control--suffixed:has(.m-input--lg),
+.m-input-field__control--clearable:has(.m-input--lg) {
+    min-height: var(--m-control-height-large);
+}
+
+.m-input-field__control--prefixed:has(.m-input--filled),
+.m-input-field__control--suffixed:has(.m-input--filled),
+.m-input-field__control--clearable:has(.m-input--filled) {
+    background: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 12%,
+        var(--m-color-surface)
+    );
+    border-color: transparent;
+}
+
+.m-input-field__control--prefixed:has(.m-input--invalid),
+.m-input-field__control--suffixed:has(.m-input--invalid),
+.m-input-field__control--clearable:has(.m-input--invalid) {
+    border-color: var(--m-color-danger);
+}
+
+.m-input-field__control--prefixed:hover:not(:focus-within):has(
+        .m-input:not(:disabled)
+    ),
+.m-input-field__control--suffixed:hover:not(:focus-within):has(
+        .m-input:not(:disabled)
+    ),
+.m-input-field__control--clearable:hover:not(:focus-within):has(
+        .m-input:not(:disabled)
+    ) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-input-field__control--prefixed:focus-within,
+.m-input-field__control--suffixed:focus-within,
+.m-input-field__control--clearable:focus-within {
+    border-color: var(--m-color-primary-hover);
+    box-shadow: var(--m-focus-shadow);
+}
+
+.m-input-field__control--prefixed:has(.m-input--invalid):focus-within,
+.m-input-field__control--suffixed:has(.m-input--invalid):focus-within,
+.m-input-field__control--clearable:has(.m-input--invalid):focus-within {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
+}
+
+.m-input-field__control--prefixed:has(.m-input:disabled),
+.m-input-field__control--suffixed:has(.m-input:disabled),
+.m-input-field__control--clearable:has(.m-input:disabled) {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
 }
 
 .m-input-field__control--prefixed .m-input,
-.m-input-field__control--suffixed .m-input {
+.m-input-field__control--suffixed .m-input,
+.m-input-field__control--clearable .m-input {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
     flex: 1 1 auto;
+    height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    min-height: 0;
     min-width: 0;
+    width: auto;
+}
+
+.m-input-field__control--prefixed:has(.m-input--small) .m-input,
+.m-input-field__control--suffixed:has(.m-input--small) .m-input,
+.m-input-field__control--clearable:has(.m-input--small) .m-input,
+.m-input-field__control--prefixed:has(.m-input--sm) .m-input,
+.m-input-field__control--suffixed:has(.m-input--sm) .m-input,
+.m-input-field__control--clearable:has(.m-input--sm) .m-input {
+    height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+}
+
+.m-input-field__control--prefixed:has(.m-input--large) .m-input,
+.m-input-field__control--suffixed:has(.m-input--large) .m-input,
+.m-input-field__control--clearable:has(.m-input--large) .m-input,
+.m-input-field__control--prefixed:has(.m-input--lg) .m-input,
+.m-input-field__control--suffixed:has(.m-input--lg) .m-input,
+.m-input-field__control--clearable:has(.m-input--lg) .m-input {
+    height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+}
+
+.m-input-field__control--prefixed .m-input:hover:not(:disabled):not(:focus),
+.m-input-field__control--suffixed .m-input:hover:not(:disabled):not(:focus),
+.m-input-field__control--clearable .m-input:hover:not(:disabled):not(:focus),
+.m-input-field__control--prefixed .m-input:focus-visible,
+.m-input-field__control--suffixed .m-input:focus-visible,
+.m-input-field__control--clearable .m-input:focus-visible,
+.m-input-field__control--prefixed .m-input--invalid:focus-visible,
+.m-input-field__control--suffixed .m-input--invalid:focus-visible,
+.m-input-field__control--clearable .m-input--invalid:focus-visible {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.m-input-field__control--prefixed .m-input {
+    padding-left: 0;
+}
+
+.m-input-field__control--suffixed .m-input,
+.m-input-field__control--clearable.m-input-field__control--suffixed .m-input {
+    padding-right: 0;
 }
 
 .m-input__prefix,
@@ -64,41 +204,33 @@
     color: var(--m-color-text-muted);
     display: inline-flex;
     flex: 0 0 auto;
-    font-size: var(--m-font-size-md);
+    font-size: inherit;
     gap: var(--m-space-1);
     line-height: 1;
+    padding-inline: var(--m-space-2);
     pointer-events: none;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+    white-space: nowrap;
 }
 
-.m-input__prefix {
-    left: var(--m-control-padding-x-medium);
+.m-input-field__control--prefixed .m-input__prefix,
+.m-input-field__control--suffixed .m-input__suffix {
+    font-size: var(--m-control-font-medium);
 }
 
-.m-input__suffix {
-    right: var(--m-control-padding-x-medium);
+.m-input-field__control:has(.m-input--small) .m-input__prefix,
+.m-input-field__control:has(.m-input--small) .m-input__suffix,
+.m-input-field__control:has(.m-input--sm) .m-input__prefix,
+.m-input-field__control:has(.m-input--sm) .m-input__suffix {
+    font-size: var(--m-control-font-small);
+    padding-inline: var(--m-space-2);
 }
 
-.m-input-field__control--clearable .m-input__suffix {
-    right: var(--m-control-affix-gap);
-}
-
-.m-input--has-prefix {
-    padding-left: var(--m-control-affix-gap);
-}
-
-.m-input--has-suffix {
-    padding-right: var(--m-control-affix-gap);
-}
-
-.m-input-field__control--clearable.m-input-field__control--suffixed
-    .m-input--has-suffix {
-    padding-right: calc(
-        var(--m-control-affix-padding) + var(--m-control-affix-gap)
-    );
+.m-input-field__control:has(.m-input--large) .m-input__prefix,
+.m-input-field__control:has(.m-input--large) .m-input__suffix,
+.m-input-field__control:has(.m-input--lg) .m-input__prefix,
+.m-input-field__control:has(.m-input--lg) .m-input__suffix {
+    font-size: var(--m-control-font-large);
+    padding-inline: var(--m-space-3);
 }
 
 .m-input__prefix button,
@@ -115,6 +247,7 @@
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
+    line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
     transition:
@@ -144,12 +277,14 @@
 .m-input--small,
 .m-input--sm {
     font-size: var(--m-control-font-small);
+    line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     min-height: var(--m-control-height-small);
     padding: 0 var(--m-control-padding-x-small);
 }
 
 .m-input--normal {
     font-size: var(--m-control-font-medium);
+    line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-control-padding-x-medium);
 }
@@ -157,6 +292,7 @@
 .m-input--large,
 .m-input--lg {
     font-size: var(--m-control-font-large);
+    line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     min-height: var(--m-control-height-large);
     padding: 0 var(--m-control-padding-x-large);
 }
@@ -165,24 +301,27 @@
     width: 100%;
 }
 
+.m-input-field__control--prefixed .m-input,
+.m-input-field__control--suffixed .m-input,
+.m-input-field__control--clearable .m-input {
+    width: auto;
+}
+
 .m-input__clear {
     align-items: center;
+    align-self: center;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
     display: flex;
+    flex: 0 0 auto;
     font-size: var(--m-font-size-lg);
     height: var(--m-control-affix-size);
     justify-content: center;
     padding: 0;
-    position: absolute;
-    right: var(--m-space-1);
-    top: 50%;
-    transform: translateY(-50%);
     width: var(--m-control-affix-size);
-    z-index: 1;
 }
 
 .m-input__clear:hover:not(:disabled) {

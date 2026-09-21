@@ -47,6 +47,20 @@
     padding: var(--m-space-4) var(--m-control-padding-x-large);
 }
 
+.m-textarea-field__control--clearable .m-textarea {
+    padding-right: var(--m-control-affix-gap);
+}
+
+.m-textarea-field__control--clearable .m-textarea--small,
+.m-textarea-field__control--clearable .m-textarea--sm {
+    padding-right: var(--m-control-affix-gap);
+}
+
+.m-textarea-field__control--clearable .m-textarea--large,
+.m-textarea-field__control--clearable .m-textarea--lg {
+    padding-right: calc(var(--m-control-affix-gap) + var(--m-space-1));
+}
+
 .m-textarea--auto-resize {
     overflow: hidden;
 }

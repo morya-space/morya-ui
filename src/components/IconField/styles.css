@@ -1,9 +1,13 @@
 /* —— Form: IconField —— */
 .m-icon-field {
-    align-items: center;
-    display: inline-flex;
+    display: block;
     max-width: 100%;
     position: relative;
+    width: 100%;
+}
+
+.m-icon-field__body {
+    min-width: 0;
     width: 100%;
 }
 
@@ -11,65 +15,336 @@
     align-items: center;
     color: var(--m-color-text-muted);
     display: inline-flex;
+    flex: 0 0 auto;
+    line-height: 1;
     pointer-events: none;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 1;
 }
 
-.m-icon-field--left .m-icon-field__icon {
+/* Fallback when slot is a bare input/textarea (no control shell to anchor into). */
+.m-icon-field:not(.m-icon-field--anchored) .m-icon-field__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.m-icon-field--left:not(.m-icon-field--anchored) .m-icon-field__icon {
     left: var(--m-control-padding-x-medium);
 }
 
-.m-icon-field--right .m-icon-field__icon {
+.m-icon-field--right:not(.m-icon-field--anchored) .m-icon-field__icon {
     right: var(--m-control-padding-x-medium);
 }
 
-.m-icon-field--left :is(.m-input, .m-textarea, .m-password__input, .m-inputnumber__input) {
+.m-icon-field--left:not(.m-icon-field--anchored)
+    :is(.m-input, .m-textarea, input, textarea) {
     padding-left: var(--m-control-affix-padding);
 }
 
-.m-icon-field--right :is(.m-input, .m-textarea, .m-password__input, .m-inputnumber__input) {
+.m-icon-field--right:not(.m-icon-field--anchored)
+    :is(.m-input, .m-textarea, input, textarea) {
     padding-right: var(--m-control-affix-padding);
 }
 
-.m-icon-field--left:has(.m-input--small, .m-textarea--small, .m-password--small, .m-inputnumber--small)
+/*
+ * Anchored mode: icon teleports into the control shell and participates in
+ * flex flow (same model as Input prefix/suffix).
+ */
+.m-icon-field--anchored :is(
+    .m-input-field__control,
+    .m-textarea-field__control,
+    .m-password,
+    .m-inputnumber__input-wrap,
+    .m-autocomplete__control,
+    .m-datepicker__control
+) {
+    align-items: center;
+    display: flex;
+}
+
+.m-icon-field--anchored .m-icon-field__icon {
+    position: static;
+    transform: none;
+}
+
+.m-icon-field--left.m-icon-field--anchored .m-icon-field__icon {
+    order: -1;
+    padding-inline: var(--m-space-2);
+}
+
+.m-icon-field--right.m-icon-field--anchored .m-icon-field__icon {
+    order: 1;
+    padding-inline: var(--m-space-2);
+}
+
+.m-icon-field--right.m-icon-field--anchored :is(
+    .m-input__clear,
+    .m-password__clear,
+    .m-textarea__clear,
+    .m-inputnumber__clear,
+    .m-autocomplete__clear,
+    .m-autocomplete__spinner,
+    .m-autocomplete__dropdown,
+    .m-datepicker__clear,
+    .m-password__toggle
+) {
+    order: 2;
+}
+
+/* Promote plain bordered inputs into the control shell when IconField anchors. */
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ) {
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-control);
+    box-sizing: border-box;
+    min-height: var(--m-control-height-medium);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable) {
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-control);
+    box-sizing: border-box;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    )
+    .m-input {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    flex: 1 1 auto;
+    height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    min-height: 0;
+    min-width: 0;
+    width: auto;
+}
+
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable)
+    .m-textarea {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ):hover:not(:focus-within):has(.m-input:not(:disabled)),
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable):hover:not(
+        :focus-within
+    ):has(.m-textarea:not(:disabled)) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ):has(.m-input--filled),
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable):has(
+        .m-textarea--filled
+    ) {
+    background: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 12%,
+        var(--m-color-surface)
+    );
+    border-color: transparent;
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ):has(.m-input--invalid),
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable):has(
+        .m-textarea--invalid
+    ) {
+    border-color: var(--m-color-danger);
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:has(.m-input:disabled),
+.m-icon-field--anchored
+    .m-textarea-field__control:has(.m-textarea:disabled) {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ):focus-within,
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable):focus-within {
+    border-color: var(--m-color-primary-hover);
+    box-shadow: var(--m-focus-shadow);
+}
+
+.m-icon-field--anchored
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    )
+    .m-input:focus-visible,
+.m-icon-field--anchored
+    .m-textarea-field__control:not(.m-textarea-field__control--clearable)
+    .m-textarea:focus-visible {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.m-icon-field--left.m-icon-field--anchored :is(
+    .m-input,
+    .m-textarea,
+    .m-password__input,
+    .m-inputnumber__input,
+    .m-autocomplete__input,
+    .m-datepicker__input
+) {
+    padding-left: 0;
+}
+
+.m-icon-field--right.m-icon-field--anchored :is(
+    .m-input,
+    .m-textarea,
+    .m-password__input,
+    .m-inputnumber__input,
+    .m-autocomplete__input,
+    .m-datepicker__input
+) {
+    padding-right: 0;
+}
+
+/* Size-aware icon inset */
+.m-icon-field--anchored:has(
+        .m-input--small,
+        .m-textarea--small,
+        .m-password--small,
+        .m-inputnumber--small,
+        .m-autocomplete--small,
+        .m-datepicker--small,
+        .m-input--sm,
+        .m-textarea--sm
+    )
     .m-icon-field__icon {
-    left: var(--m-control-padding-x-small);
+    padding-inline: var(--m-space-2);
 }
 
-.m-icon-field--right:has(.m-input--small, .m-textarea--small, .m-password--small, .m-inputnumber--small)
+.m-icon-field--anchored:has(
+        .m-input--large,
+        .m-textarea--large,
+        .m-password--large,
+        .m-inputnumber--large,
+        .m-autocomplete--large,
+        .m-datepicker--large,
+        .m-input--lg,
+        .m-textarea--lg
+    )
     .m-icon-field__icon {
-    right: var(--m-control-padding-x-small);
+    padding-inline: var(--m-space-3);
 }
 
-.m-icon-field--left:has(.m-input--large, .m-textarea--large, .m-password--large, .m-inputnumber--large)
-    .m-icon-field__icon {
-    left: var(--m-control-padding-x-large);
+.m-icon-field--anchored:has(
+        .m-input--small,
+        .m-textarea--small,
+        .m-password--small,
+        .m-inputnumber--small,
+        .m-autocomplete--small,
+        .m-datepicker--small,
+        .m-input--sm,
+        .m-textarea--sm
+    )
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ) {
+    min-height: var(--m-control-height-small);
 }
 
-.m-icon-field--right:has(.m-input--large, .m-textarea--large, .m-password--large, .m-inputnumber--large)
-    .m-icon-field__icon {
-    right: var(--m-control-padding-x-large);
+.m-icon-field--anchored:has(
+        .m-input--small,
+        .m-inputnumber--small,
+        .m-autocomplete--small,
+        .m-datepicker--small,
+        .m-password--small,
+        .m-input--sm
+    )
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    )
+    .m-input {
+    height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
 }
 
-.m-icon-field--left:has(.m-input--small, .m-textarea--small, .m-password--small, .m-inputnumber--small)
-    :is(.m-input, .m-textarea, .m-password__input, .m-inputnumber__input) {
-    padding-left: var(--m-control-affix-gap);
+.m-icon-field--anchored:has(
+        .m-input--large,
+        .m-password--large,
+        .m-inputnumber--large,
+        .m-autocomplete--large,
+        .m-datepicker--large,
+        .m-input--lg
+    )
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    ) {
+    min-height: var(--m-control-height-large);
 }
 
-.m-icon-field--right:has(.m-input--small, .m-textarea--small, .m-password--small, .m-inputnumber--small)
-    :is(.m-input, .m-textarea, .m-password__input, .m-inputnumber__input) {
-    padding-right: var(--m-control-affix-gap);
-}
-
-.m-icon-field--left:has(.m-input--large, .m-textarea--large, .m-password--large, .m-inputnumber--large)
-    :is(.m-input, .m-textarea, .m-password__input, .m-inputnumber__input) {
-    padding-left: calc(var(--m-control-affix-padding) + var(--m-space-1));
-}
-
-.m-icon-field--right:has(.m-input--large, .m-textarea--large, .m-password--large, .m-inputnumber--large)
-    :is(.m-input, .m-textarea, .m-password__input, .m-inputnumber__input) {
-    padding-right: calc(var(--m-control-affix-padding) + var(--m-space-1));
+.m-icon-field--anchored:has(
+        .m-input--large,
+        .m-password--large,
+        .m-inputnumber--large,
+        .m-autocomplete--large,
+        .m-datepicker--large,
+        .m-input--lg
+    )
+    .m-input-field__control:not(
+        .m-input-field__control--prefixed,
+        .m-input-field__control--suffixed,
+        .m-input-field__control--clearable
+    )
+    .m-input {
+    height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
 }

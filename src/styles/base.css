@@ -92,6 +92,17 @@
     opacity: var(--m-opacity-disabled);
 }
 
+.m-input-field__control--prefixed .m-input:disabled,
+.m-input-field__control--suffixed .m-input:disabled,
+.m-input-field__control--clearable .m-input:disabled,
+.m-password--disabled .m-password__input,
+.m-inputnumber--disabled .m-inputnumber__input,
+.m-datepicker--disabled .m-datepicker__input,
+.m-icon-field--anchored .m-input:disabled,
+.m-icon-field--anchored .m-textarea:disabled {
+    opacity: 1;
+}
+
 .m-input::placeholder,
 .m-textarea::placeholder,
 .m-password__input::placeholder,
@@ -411,14 +422,6 @@
     opacity: var(--m-opacity-disabled);
 }
 
-.m-icon-field--left :is(.m-input, .m-password__input, .m-inputnumber__input, input) {
-    padding-left: var(--m-control-affix-padding);
-}
-
-.m-icon-field--right :is(.m-input, .m-password__input, .m-inputnumber__input, input) {
-    padding-right: var(--m-control-affix-padding);
-}
-
 .m-inputgroup > .m-input,
 .m-inputgroup > .m-input-field,
 .m-inputgroup > .m-password-field,
@@ -437,16 +440,22 @@
 
 .m-inputgroup > .m-input,
 .m-inputgroup .m-input,
-.m-inputgroup .m-password__input,
-.m-inputgroup .m-inputnumber__input {
+.m-inputgroup .m-password,
+.m-inputgroup .m-inputnumber__input-wrap,
+.m-inputgroup .m-input-field__control--prefixed,
+.m-inputgroup .m-input-field__control--suffixed,
+.m-inputgroup .m-input-field__control--clearable {
     border-radius: 0;
     width: 100%;
 }
 
 .m-inputgroup > :first-child.m-input,
 .m-inputgroup > :first-child .m-input,
-.m-inputgroup > :first-child .m-password__input,
-.m-inputgroup > :first-child .m-inputnumber__input,
+.m-inputgroup > :first-child .m-password,
+.m-inputgroup > :first-child .m-inputnumber__input-wrap,
+.m-inputgroup > :first-child .m-input-field__control--prefixed,
+.m-inputgroup > :first-child .m-input-field__control--suffixed,
+.m-inputgroup > :first-child .m-input-field__control--clearable,
 .m-inputgroup > :first-child.m-inputgroup-addon {
     border-bottom-left-radius: var(--m-radius-control);
     border-top-left-radius: var(--m-radius-control);
@@ -454,8 +463,11 @@
 
 .m-inputgroup > :last-child.m-input,
 .m-inputgroup > :last-child .m-input,
-.m-inputgroup > :last-child .m-password__input,
-.m-inputgroup > :last-child .m-inputnumber__input,
+.m-inputgroup > :last-child .m-password,
+.m-inputgroup > :last-child .m-inputnumber__input-wrap,
+.m-inputgroup > :last-child .m-input-field__control--prefixed,
+.m-inputgroup > :last-child .m-input-field__control--suffixed,
+.m-inputgroup > :last-child .m-input-field__control--clearable,
 .m-inputgroup > :last-child.m-inputgroup-addon {
     border-bottom-right-radius: var(--m-radius-control);
     border-top-right-radius: var(--m-radius-control);
@@ -606,9 +618,6 @@
 }
 
 /* Shared Naive-like hover/focus for remaining form triggers */
-.m-inputnumber__input:hover:not(:disabled):not(:focus),
-.m-password__input:hover:not(:disabled):not(:focus),
-.m-datepicker__input:hover:not(:disabled):not(:focus),
 .m-inputotp__input:hover:not(:disabled):not(:focus),
 .m-cascadeselect__trigger:hover:not(:disabled):not(:focus-visible),
 .m-treeselect__trigger:hover:not(:disabled):not(:focus-visible),
@@ -619,9 +628,6 @@
     border-color: var(--m-color-primary-hover);
 }
 
-.m-inputnumber__input:focus-visible,
-.m-password__input:focus-visible,
-.m-datepicker__input:focus-visible,
 .m-inputotp__input:focus-visible,
 .m-cascadeselect__trigger:focus-visible,
 .m-treeselect__trigger:focus-visible,
@@ -638,9 +644,6 @@
     outline: none;
 }
 
-.m-inputnumber--invalid .m-inputnumber__input:focus-visible,
-.m-password--invalid .m-password__input:focus-visible,
-.m-datepicker--invalid .m-datepicker__input:focus-visible,
 .m-inputotp--invalid .m-inputotp__input:focus-visible,
 .m-inputtags--invalid:focus-within,
 .m-inputcolor--invalid .m-inputcolor__text:focus-visible {
