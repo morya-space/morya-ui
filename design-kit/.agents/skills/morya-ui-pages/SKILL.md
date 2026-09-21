@@ -65,7 +65,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 | --- | --- | --- |
 | Ops pattern | `recommend_page` → `get_golden_page` | [page-layouts.md](references/page-layouts.md) |
 | Account / Express / empty | `recommend_page` → `get_golden_page` (`login-page` / `landing-page` / `empty-state`) | [surfaces.md](references/surfaces.md) |
-| Visual direction | — | [visual-craft.md](references/visual-craft.md) (Express / polish / anti-defaults) |
+| Visual direction | — | [visual-craft.md](references/visual-craft.md) (Ops polish / atmosphere / anti-defaults) |
 | Components | `search` / `get_component` / `recommend_component` | [component-index.md](references/component-index.md) |
 | Tokens / rules | `get_design_rules` | [design-system.md](references/design-system.md) |
 | Snippet | `get_page_snippet` | golden / surface excerpt |
@@ -91,18 +91,20 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 - Destructive → `MConfirmDialog` / `MConfirmPopup`.
 - Feedback → default **`message`**; `toast` only for summary+detail / async. See [feedback.md](references/feedback.md).
 
-### 5. Craft pass (lane-aware)
+### 5. Craft pass (always — lane-aware)
 
-- **Ops:** restraint — clarity over spectacle; cut decoration.
-- **Express / branded auth:** one signature moment; avoid AI-default looks listed in [visual-craft.md](references/visual-craft.md).
-- **All lanes:** responsive, focus visible, respect `prefers-reduced-motion` when adding motion.
-- Copy: user language, active voice, specific — not filler marketing on Ops screens.
+Run **before** delivery. Do not stop at a structurally correct shell.
 
-Optional polish modes (Impeccable-inspired): `quieter` | `bolder` | `clarify` | `audit` — apply as a second pass when the user asks. See [visual-craft.md](references/visual-craft.md) § Polish modes.
+- **Ops:** apply [visual-craft.md](references/visual-craft.md) § Ops polish (one primary, menu icons, `MStatus` in tables, designed empty, no decorative cards).
+- **Account / Flow:** one calm brand or empty-state cue from § Atmosphere recipes; form errors via `errorMessage` / token `role="alert"`.
+- **Express:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions with `prefers-reduced-motion`.
+- **All lanes:** responsive, focus visible, domain-real copy (active voice).
+
+Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): use as an **extra** pass when the user asks to improve an existing screen. See [visual-craft.md](references/visual-craft.md) § Polish modes.
 
 ### 6. Review
 
-Use [review-checklist.md](references/review-checklist.md) (Ops + Express sections). Run MCP `validate_page` when available (advisory).
+Use [review-checklist.md](references/review-checklist.md) (contract + craft sections). Run MCP `validate_page` when available (advisory).
 
 ## Hard boundaries
 
@@ -130,8 +132,9 @@ Details: [optional-companions.md](references/optional-companions.md). Distilled 
 
 - Vue 3 `<script setup lang="ts">`.
 - PascalCase `M*` in templates.
-- Domain-real copy and data shapes.
-- Scoped CSS minimal; tokens only (control widths may be inline).
+- Domain-real copy and data shapes (not placeholder “示例 / Name / No data” when the brief names a product).
+- Scoped CSS minimal; tokens only (`color-mix` / gradients from `--m-*` OK; control widths may be inline).
+- Craft pass completed for the lane (see step 5).
 - For multi-file asks: sensible `views/` / `components/` split; otherwise one SFC is fine.
 
 ## Bundled references
@@ -140,7 +143,7 @@ Details: [optional-companions.md](references/optional-companions.md). Distilled 
 | --- | --- |
 | [surfaces.md](references/surfaces.md) | Choosing / composing non-Ops (and hybrid) surfaces |
 | [page-layouts.md](references/page-layouts.md) | Ops golden layouts |
-| [visual-craft.md](references/visual-craft.md) | Design plan, anti-defaults, polish modes, Express craft |
+| [visual-craft.md](references/visual-craft.md) | Ops polish, atmosphere recipes, anti-defaults, polish modes |
 | [design-system.md](references/design-system.md) | Principles, tokens, bans |
 | [component-index.md](references/component-index.md) | Scenario → component |
 | [feedback.md](references/feedback.md) | message / toast / MMessage |

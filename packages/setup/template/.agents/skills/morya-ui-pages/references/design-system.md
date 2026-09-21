@@ -58,11 +58,13 @@ import 'morya-ui/styles.css'
 
 ## Data display
 
-- `MTable` with columns + data + `row-key`.
-- Row actions: text/link `MButton` or `MDropdown`.
+- `MTable` with `columns` + **`rows`** + `row-key` (default `id`). There is no `data` prop.
+- Row status → `MStatus`; categories / closable labels → `MTag`.
+- Row actions: text/link `MButton` or `MDropdown` (avoid a row of filled buttons).
 - Pagination: table `paginator` or sibling `MPagination`.
 - Empty states: `MEmpty` in `#empty` / Flow golden — never a silent blank table.
 - Terminal outcomes (success / 403 / 404 / 500): `MResult` — do not reuse `MEmpty` for errors.
+- Visual polish: [visual-craft.md](visual-craft.md) (Ops polish + atmosphere).
 
 ## Overlays
 

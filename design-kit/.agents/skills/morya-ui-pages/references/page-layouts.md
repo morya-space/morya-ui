@@ -22,14 +22,16 @@ Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet`
 ## List page — block order
 
 1. `MLayout fillViewport` + optional `MLayoutSider bordered`
-2. Sider `MMenu`
+2. Sider `MMenu` (**every item has `icon`**)
 3. `MLayoutHeader` → `MBreadcrumb`
 4. `MLayoutContent` → `MPageContent`
-5. `MPageFilters` — inner `MSpace` + Input/Select + query/reset
-6. `MPageToolbar` — title + `#actions` primary action
-7. `MTable` directly in content (usually **no** wrapping `MCard`)
+5. `MPageFilters` — inner `MSpace wrap` + Input/Select + query/reset (search ~`14rem`, select ~`10–12rem`)
+6. `MPageToolbar` — title + `#actions` primary action (**one** filled primary)
+7. `MTable` directly in content (usually **no** wrapping `MCard`); status → `MStatus`; `#empty` → `MEmpty`
 8. Pagination via `MTable` paginator or sibling `MPagination`
 9. Short create/edit → `MDialog` + `MForm` on the same page (default)
+
+Craft: [visual-craft.md](visual-craft.md) § Ops polish.
 
 ## Form page — block order
 
@@ -42,9 +44,11 @@ Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet`
 ## Dashboard — block order
 
 1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
-2. `MPageContent density="spacious"` → `MPageHeader`
-3. KPI row: `MGrid` + `MPageStat` (4 columns or responsive)
-4. Main split: `MCard` + `MPagePlaceholder` and/or recent `MTable`
+2. `MPageContent density="spacious"` → `MPageHeader` (title + short domain description when useful)
+3. KPI row: `MGrid` + `MPageStat` (4 columns or responsive) — real metric names, not “Metric 1”
+4. Main split: `MCard` + `MPagePlaceholder` and/or recent `MTable` (row status → `MStatus`)
+
+Craft: spacious density + Ops polish; do not turn the first viewport into a marketing hero.
 
 ## Composition standards
 

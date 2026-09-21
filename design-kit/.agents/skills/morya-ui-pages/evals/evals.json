@@ -3,38 +3,38 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "我们内部教务系统用 Vue3 + morya-ui。请做一个「课程列表」后台页：按课程名搜索、按开课状态（全部/开课中/已结课）筛选；表格列：名称、状态 Tag、学分、更新时间；行内「编辑」进抽屉表单，「删除」要二次确认；右上角「新建课程」。保存/删除成功只要一句话提示。输出单个 Vue SFC，结构对齐列表黄金样例。",
-      "expected_output": "Ops list: MLayout/MPageFilters/MPageToolbar/MTable, MSelect status, MDrawer or route edit, MConfirmDialog delete, message not toast, MTag for status, no second UI kit.",
+      "prompt": "我们内部教务系统用 Vue3 + morya-ui。请做一个「课程列表」后台页：按课程名搜索、按开课状态（全部/开课中/已结课）筛选；表格列：名称、状态、学分、更新时间；行内「编辑」进抽屉表单，「删除」要二次确认；右上角「新建课程」。保存/删除成功只要一句话提示。输出单个 Vue SFC，结构对齐列表黄金样例，并做 Ops 精致化（侧栏图标、状态用 MStatus、空态用 MEmpty、行操作不要一排实心按钮）。",
+      "expected_output": "Ops list: MLayout/MPageFilters/MPageToolbar/MTable rows, MSelect status, MDrawer edit, MConfirmDialog delete, message not toast, MStatus for status, MEmpty in #empty, menu icons, text/small row actions, craft pass applied, no second UI kit.",
       "files": []
     },
     {
       "id": 2,
       "prompt": "同一个 morya-ui 项目里，生成「新建员工」独立表单页：姓名、工作邮箱、部门（下拉）、入职日期；窄栏；页头有标题和一句说明；底栏保存（primary）/取消（secondary）。不要做成营销落地页，不要用 Toast 提示「已保存」。输出单个 Vue SFC。",
-      "expected_output": "Ops form golden: narrow MPageContent, MPageHeader, MPageSection form/actions, MForm + MSelect/MDatePicker, message for success if shown, no landing hero.",
+      "expected_output": "Ops form golden: narrow MPageContent, MPageHeader, MPageSection form/actions, MForm + MSelect/MDatePicker, message for success if shown, one primary, no landing hero.",
       "files": []
     },
     {
       "id": 3,
-      "prompt": "运营后台首页仪表盘：四个 KPI（今日订单、待处理、转化率、退款率）、中间一块图表占位、右侧或下方「最近告警」表格（级别、内容、时间）。Vue3 + morya-ui，可先用静态假数据。",
-      "expected_output": "Dashboard: MPageStat grid, MPagePlaceholder/chart card, recent MTable, MLayout shell, --m-* only.",
+      "prompt": "运营后台首页仪表盘：四个 KPI（今日订单、待处理、转化率、退款率）、中间一块图表占位、右侧或下方「最近告警」表格（级别、内容、时间）。Vue3 + morya-ui，可先用静态假数据；告警级别可用 Tag，状态用 MStatus。",
+      "expected_output": "Dashboard: MPageStat grid with domain labels, MPagePlaceholder/chart card, recent MTable with MStatus, MLayout shell, --m-* only, spacious density.",
       "files": []
     },
     {
       "id": 4,
-      "prompt": "给「青禾书房」这个独立书店品牌做登录页：左品牌、右表单（邮箱+密码+登录）。要有一点品牌感，但控件必须用 morya-ui；登录失败用表单区常驻错误，不要一闪而过的 Toast。输出单个 Vue SFC。",
-      "expected_output": "Account+craft: split shell, MForm/MInputPassword/MButton, MMessage or field error for failure, brand panel without second UI kit, tokens for colors.",
+      "prompt": "给「青禾书房」这个独立书店品牌做登录页：左品牌、右表单（邮箱+密码+登录）。要有一点品牌感（token 氛围即可），但控件必须用 morya-ui；登录失败用表单区常驻错误（字段 errorMessage 或 token role=alert），不要一闪而过的 Toast，也不要把 MMessage 当成内嵌 Alert。输出单个 Vue SFC。",
+      "expected_output": "Account+craft: split shell, MForm/MInputPassword/MButton, token role=alert or field error for failure, brand panel with --m-* color-mix, no MMessage severity alert, no second UI kit.",
       "files": []
     },
     {
       "id": 5,
-      "prompt": "课程列表在零数据时太空了。请设计一个空状态区块（可嵌在列表页内容区）：说明还没有课程、引导「创建第一门课程」，视觉克制但有一个记忆点。只要空状态相关模板片段或带空状态的列表 SFC 均可，须 morya-ui。",
-      "expected_output": "Flow empty: clear next action CTA with MButton, short copy, one signature visual, no emoji clutter, fits list content slot.",
+      "prompt": "课程列表在零数据时太空了。请设计一个空状态区块（可嵌在列表页内容区）：说明还没有课程、引导「创建第一门课程」，视觉克制但有一个记忆点（dashed shell + 轻径向光）。只要空状态相关模板片段或带空状态的列表 SFC 均可，须 morya-ui。",
+      "expected_output": "Flow empty: MEmpty + next-action MButton, short copy, token atmosphere shell, no emoji clutter, fits list content slot.",
       "files": []
     },
     {
       "id": 6,
-      "prompt": "为「流水线 CI」产品写一个营销落地首页（不是后台）：首屏只有品牌名、一句主标题、一句副文、一组 CTA；下面再分「为何选择」「能力」「客户」三节。技术实现用 Vue3 + morya-ui 组件做按钮/标签/折叠 FAQ；颜色走 --m-*，避免紫渐变和奶油衬线陶土那套 AI 默认脸。输出单个 Vue SFC。",
-      "expected_output": "Express landing: single-job hero, MButton CTAs, sections with one job each, MAccordion FAQ optional, no purple/cream-terracotta defaults, no admin MPageFilters shell.",
+      "prompt": "为「流水线 CI」产品写一个营销落地首页（不是后台）：首屏只有品牌名、一句主标题、一句副文、一组 CTA；下面再分「为何选择」「能力」「客户」三节。技术实现用 Vue3 + morya-ui 组件做按钮/标签/折叠 FAQ；颜色走 --m-*，避免紫渐变和奶油衬线陶土那套 AI 默认脸。可有 1–2 个微动效并尊重 prefers-reduced-motion。输出单个 Vue SFC。",
+      "expected_output": "Express landing: single-job hero, MButton CTAs, sections with one job each, MAccordion FAQ optional, no purple/cream-terracotta defaults, no admin MPageFilters shell, reduced-motion aware.",
       "files": []
     },
     {
@@ -46,7 +46,13 @@
     {
       "id": 8,
       "prompt": "用户点了删除项目但权限不足：做一张「无权限」系统页（或全页占位），说明原因，并提供返回上一页、联系管理员。用 morya-ui，文案直接别玩梗。",
-      "expected_output": "System surface: plain explanation, escape actions with MButton, no jokey 404 essay, on-token.",
+      "expected_output": "System surface: MResult 403 or equivalent, plain explanation, escape actions with MButton, no jokey 404 essay, on-token.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "把上面的课程列表再 polish 一轮：去掉多余实心按钮、保证只有一个主按钮、表格状态改成 MStatus、补上 MEmpty。不要改成营销页。",
+      "expected_output": "Ops quieter polish: one primary, MStatus, MEmpty, text row actions, still list golden structure.",
       "files": []
     }
   ]

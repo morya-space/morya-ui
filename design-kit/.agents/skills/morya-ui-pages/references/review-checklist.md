@@ -7,8 +7,17 @@
 - [ ] `MConfigProvider` at a sensible root when building a full screen
 - [ ] No invented props / events / slots (MCP or docs checked)
 - [ ] Select vs Dropdown roles correct
+- [ ] `MTable` uses `rows` (not `data`)
 - [ ] One-line results use `message`; summary+detail / async use `toast`
 - [ ] Destructive flows use confirm dialogs
+
+## Craft (all lanes — default pass)
+
+- [ ] Lane craft from [visual-craft.md](visual-craft.md) applied (Ops polish and/or atmosphere)
+- [ ] At most one primary filled button in the main viewport
+- [ ] Copy is domain-real; empty / error states say what to do next
+- [ ] No AI-default look clusters unless the brief asked for them
+- [ ] Motion (if any) is 1–3 intentional moments and respects `prefers-reduced-motion`
 
 ## Ops
 
@@ -16,6 +25,8 @@
 - [ ] `MPage*` used instead of ad-hoc page chrome where applicable
 - [ ] Tables not wrapped in decorative `MCard` solely for borders
 - [ ] Filters / toolbar / form actions follow documented patterns
+- [ ] Sider `MMenu` items have icons; status cells use `MStatus` (not decorative `MTag`)
+- [ ] Empty table uses `MEmpty` (or equivalent next-action empty)
 - [ ] No marketing hero bolted onto a CRUD shell
 
 ## Account / Flow / System
@@ -26,6 +37,7 @@
 - [ ] Empty / success states tell the user the next action
 - [ ] Inline status prefers `MStatus`; chip-like labels use `MTag`
 - [ ] Wizard steps: one job each; actions labeled clearly
+- [ ] Brand / empty atmosphere uses token-only CSS (see visual-craft recipes)
 
 ## Express
 
@@ -37,7 +49,7 @@
 
 ## Tokens, a11y, responsive
 
-- [ ] No raw hex/rgb theme colors in new CSS (control widths OK inline)
+- [ ] No raw hex/rgb theme colors in new CSS (control widths OK inline; `color-mix` from `--m-*` OK)
 - [ ] Labels visible; icon buttons have `aria-label`
 - [ ] Usable on a narrow viewport
 - [ ] Focus visible on interactive elements
