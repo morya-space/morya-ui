@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：列表空状态（Flow）
- * @see DESIGN.md §3 · morya-ui-pages surfaces § Flow
+ * @see DESIGN.md · page-layouts.md · surfaces § Flow
  * 可嵌在列表页 MPageContent / MTable #empty 中；此处给出完整可运行骨架。
  */
 import {

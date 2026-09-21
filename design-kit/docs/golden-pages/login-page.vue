@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：登录页（Account + 轻量品牌）
- * @see DESIGN.md §3 · morya-ui-pages surfaces § Account
+ * @see DESIGN.md · page-layouts.md · surfaces § Account
  */
 import {
   MButton,
