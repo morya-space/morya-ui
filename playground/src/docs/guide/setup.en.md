@@ -32,9 +32,14 @@ npx @morya-ui/setup app
 
 # AI config + MCP only (library already installed)
 npx @morya-ui/setup ai
+
+# Non-interactive skill selection
+npx @morya-ui/setup ai --yes
+npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design
+npx @morya-ui/setup ai --skills=all
 ```
 
-If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DESIGN.md` before generating pages.
+On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DESIGN.md` before generating pages.
 
 ## Options
 
@@ -42,6 +47,8 @@ If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DES
 | --- | --- |
 | `--cwd <dir>` | Target project root (default: cwd) |
 | `--pm pnpm\|yarn\|npm` | Package manager |
+| `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
+| `--yes` / `-y` | Use default skills without prompting |
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions only |
 | `--skip-install` | Skip dependency install |
@@ -51,6 +58,16 @@ If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DES
 | `--skip-scripts` | Skip `package.json` scripts |
 
 By default **existing files are not overwritten**; use `--force` to overwrite templates and the MCP entry.
+
+### Skills
+
+| Id | Default | Role |
+| --- | --- | --- |
+| `morya-ui-pages` | required | Page generation with `M*` + golden layouts |
+| `frontend-design` | optional | Express / brand visual taste |
+| `fixing-accessibility` | optional | A11y audit and targeted fixes |
+
+Catalog: [`packages/setup/catalog/skills.json`](https://github.com/morya-space/morya-ui/blob/main/packages/setup/catalog/skills.json).
 
 Example: MCP only:
 
@@ -62,8 +79,9 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 
 | Path | Role |
 | --- | --- |
-| `DESIGN.md` | Primary design brief for AI |
+| `DESIGN.md` | Primary design brief (principles, app root, token summary, bans) |
 | `.agents/skills/morya-ui-pages/` | Page-generation Agent skill (see [Agent Skill](/docs/agent-skill)) |
+| `.agents/skills/<optional>/` | Companion skills when selected |
 | `.cursor/rules/` | Cursor always-on rules |
 | `scripts/check-raw-colors.mjs` | Raw color scan |
 | `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp`) |

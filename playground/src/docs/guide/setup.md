@@ -32,9 +32,14 @@ npx @morya-ui/setup app
 
 # 已装库时，只写入 AI 配置与 MCP
 npx @morya-ui/setup ai
+
+# 非交互：默认 skill / 指定 / 全部
+npx @morya-ui/setup ai --yes
+npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design
+npx @morya-ui/setup ai --skills=all
 ```
 
-完成后若写入了 MCP，请 **重启 Cursor**（或重载 MCP）。生成页面前让 Agent 先读 `DESIGN.md`。
+在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。完成后若写入了 MCP，请 **重启 Cursor**（或重载 MCP）。生成页面前让 Agent 先读 `DESIGN.md`。
 
 ## 选项
 
@@ -42,6 +47,8 @@ npx @morya-ui/setup ai
 | --- | --- |
 | `--cwd <dir>` | 目标项目根（默认当前目录） |
 | `--pm pnpm\|yarn\|npm` | 指定包管理器 |
+| `--skills <list>` | 逗号分隔的 skill id，或 `all`（跳过交互提示） |
+| `--yes` / `-y` | 使用默认 skill，不提示 |
 | `--force` | 覆盖已有模板文件与 `morya-ui` MCP 条目 |
 | `--dry-run` | 只打印将要执行的操作 |
 | `--skip-install` | 不安装依赖 |
@@ -51,6 +58,16 @@ npx @morya-ui/setup ai
 | `--skip-scripts` | 不改 `package.json` scripts |
 
 默认 **不覆盖** 已有文件；只有 `--force` 才会覆盖模板与 MCP 条目。
+
+### Skills
+
+| Id | 默认 | 作用 |
+| --- | --- | --- |
+| `morya-ui-pages` | 必选 | 用 `M*` + 黄金布局生成页面 |
+| `frontend-design` | 可选 | Express / 品牌向视觉味觉 |
+| `fixing-accessibility` | 可选 | 无障碍审计与定向修复 |
+
+目录：[`packages/setup/catalog/skills.json`](https://github.com/morya-space/morya-ui/blob/main/packages/setup/catalog/skills.json)。
 
 示例：只补 MCP：
 
@@ -62,8 +79,9 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 
 | 路径 | 作用 |
 | --- | --- |
-| `DESIGN.md` | AI 设计第一信源 |
+| `DESIGN.md` | AI 设计第一信源（原则、应用根、令牌摘要、禁止项） |
 | `.agents/skills/morya-ui-pages/` | 页面生成 Agent Skill（见 [Agent Skill](/docs/agent-skill)） |
+| `.agents/skills/<optional>/` | 勾选时写入的 companion skill |
 | `.cursor/rules/` | Cursor 常驻规则 |
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
 | `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp`） |

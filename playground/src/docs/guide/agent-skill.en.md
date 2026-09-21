@@ -20,7 +20,7 @@ Install via [One-shot setup](/docs/setup) (`npx @morya-ui/setup` copies it into 
 
 Clients that auto-discover Agent Skills (e.g. Cursor) read `.agents/skills`. Prefer this skill before generating list / form / login / landing pages.
 
-Source: [`design-kit/.agents/skills/morya-ui-pages/`](https://github.com/morya-space/morya-ui/tree/main/design-kit/.agents/skills/morya-ui-pages), synced into the `@morya-ui/setup` template.
+Source: [`design-kit/.agents/skills/morya-ui-pages/`](https://github.com/morya-space/morya-ui/tree/main/design-kit/.agents/skills/morya-ui-pages), synced into the `@morya-ui/setup` template. Optional companions (`frontend-design`, `fixing-accessibility`) can be installed with `npx @morya-ui/setup ai --skills=…` — see [One-shot setup](/docs/setup).
 
 ## When it triggers
 
