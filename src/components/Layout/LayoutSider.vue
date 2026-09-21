@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import type { CSSProperties, StyleValue } from "vue";
-import type { LayoutExpose, LayoutSiderProps } from "./types";
-import { computed, inject, ref, useAttrs } from "vue";
+import type { LayoutSiderProps } from "./types";
+import { computed, inject, useAttrs } from "vue";
 import { useMLocale } from "../../locale";
 import { isSelfReferencingCssVar, toCssLength } from "../../shared/responsive";
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from "../Icon/Icon.vue";
 import { useLayoutSiderCollapse } from "./composables/useLayoutSiderCollapse";
 import { M_LAYOUT_KEY } from "./context";
-import LayoutScrollRegion from "./LayoutScrollRegion.vue";
 import { resolveLayoutTrigger } from "./utils";
 
 defineOptions({ name: "MLayoutSider", inheritAttrs: false });
@@ -28,14 +26,12 @@ const emit = defineEmits<{
     (event: "expand"): void;
     (event: "after-enter"): void;
     (event: "after-leave"): void;
-    (event: "scroll", eventPayload: Event): void;
 }>();
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale();
 const layout = inject(M_LAYOUT_KEY, null);
-const scrollRegionRef = ref<InstanceType<typeof LayoutScrollRegion>>();
 const { mergedCollapsed, toggle } = useLayoutSiderCollapse(props, emit);
 
 const siderPlacement = computed(() => layout?.siderPlacement ?? "left");
@@ -88,6 +84,11 @@ const rootStyle = computed(() => {
         maxWidth: layoutWidth.value,
     };
 
+    if (props.padding != null) {
+        const padding = toCssLength(props.padding);
+        if (padding) style.padding = padding;
+    }
+
     if (
         expandedWidth.value &&
         !isSelfReferencingCssVar(
@@ -110,27 +111,6 @@ const rootStyle = computed(() => {
     return style;
 });
 
-const siderPadding = computed(() =>
-    props.padding == null
-        ? "var(--m-layout-padding, var(--m-space-4))"
-        : toCssLength(props.padding),
-);
-
-const scrollStyle = computed((): StyleValue => {
-    const regionStyle: CSSProperties = {
-        padding: siderPadding.value,
-    };
-
-    return props.contentStyle == null
-        ? regionStyle
-        : [regionStyle, props.contentStyle];
-});
-
-const scrollClass = computed(() => [
-    "m-layout-sider__scroll",
-    props.contentClass,
-]);
-
 const triggerClass = computed(() =>
     mergedCollapsed.value ? props.collapsedTriggerClass : props.triggerClass,
 );
@@ -144,11 +124,6 @@ function onTransitionEnd(event: TransitionEvent) {
     if (mergedCollapsed.value) emit("after-leave");
     else emit("after-enter");
 }
-
-defineExpose<LayoutExpose>({
-    scrollTo: ((...args: Parameters<LayoutExpose["scrollTo"]>) =>
-        scrollRegionRef.value?.scrollTo(...args)) as LayoutExpose["scrollTo"],
-});
 </script>
 
 <template>
@@ -158,15 +133,7 @@ defineExpose<LayoutExpose>({
     :style="rootStyle"
     @transitionend="onTransitionEnd"
   >
-    <LayoutScrollRegion
-      ref="scrollRegionRef"
-      scrollbar-root-class="m-layout-sider__scrollbar"
-      :scroll-class="scrollClass"
-      :scroll-style="scrollStyle"
-      @scroll="emit('scroll', $event)"
-    >
-      <slot />
-    </LayoutScrollRegion>
+    <slot />
 
     <button
       v-if="triggerKind"

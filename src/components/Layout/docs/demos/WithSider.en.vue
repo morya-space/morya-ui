@@ -4,10 +4,17 @@ import {
   MLayoutContent,
   MLayoutHeader,
   MLayoutSider,
+  MMenu,
 } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
+const selectedKey = ref('overview')
+const model = [
+  { key: 'overview', label: 'Overview', icon: 'layout-dashboard' },
+  { key: 'projects', label: 'Projects', icon: 'folder' },
+  { key: 'settings', label: 'Settings', icon: 'settings' },
+]
 </script>
 
 <template>
@@ -21,17 +28,19 @@ const collapsed = ref(false)
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
-        :width="160"
-        content-style="padding:0.75rem"
+        collapse-mode="width"
+        :width="168"
+        :collapsed-width="64"
       >
-        <div style="display:grid;gap:0.5rem">
-          <div>Overview</div>
-          <div>Projects</div>
-          <div>Settings</div>
-        </div>
+        <MMenu
+          v-model:selected-key="selectedKey"
+          :model="model"
+          :collapsed="collapsed"
+          :collapsed-width="64"
+        />
       </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
-        Main area stretches both horizontally and vertically.
+      <MLayoutContent embedded style="padding:1rem">
+        Selected: {{ selectedKey }}
       </MLayoutContent>
     </MLayout>
   </MLayout>

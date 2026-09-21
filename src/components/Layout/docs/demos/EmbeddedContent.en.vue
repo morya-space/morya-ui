@@ -7,7 +7,7 @@ import { MLayout, MLayoutContent, MLayoutHeader } from 'morya-ui'
     <MLayoutHeader bordered style="padding:0.75rem 1rem">
       Settings
     </MLayoutHeader>
-    <MLayoutContent embedded content-style="padding:1rem">
+    <MLayoutContent embedded style="padding:1rem">
       Nested forms / lists go here.
     </MLayoutContent>
   </MLayout>

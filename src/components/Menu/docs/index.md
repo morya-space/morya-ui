@@ -47,7 +47,7 @@ import {  MMenu } from 'morya-ui'
 
 ## 折叠与飞出层
 
-`collapsed` 隐藏文案，仅保留图标；**每个可折叠展示的菜单项必须提供 `icon`**（否则折叠后几乎空白）。悬停时在右侧显示 `MTooltip` 标签，带子项的节点还会弹出飞出层（`.m-menu--flyout`）。飞出层经 `MPopover` Teleport 到 `body`，不会被侧栏或 `MLayoutSider` 滚动区域裁剪。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
+`collapsed` 隐藏文案，仅保留图标；**每个可折叠展示的菜单项必须提供 `icon`**（否则折叠后几乎空白）。悬停时在右侧显示 `MTooltip` 标签，带子项的节点还会弹出飞出层（`.m-menu--flyout`）。飞出层经 `MPopover` Teleport 到 `body`，不会被侧栏裁剪。`collapsed-width` 应与侧栏折叠宽度一致，用于居中图标。
 
 使用 `item.to` 时菜单项会渲染为 `RouterLink` / `<a>`；组件已重置链接的默认蓝色下划线，视觉与普通菜单项一致。
 

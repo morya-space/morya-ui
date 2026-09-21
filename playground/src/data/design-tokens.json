@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T06:23:41.073Z",
+  "generatedAt": "2026-09-21T07:56:54.030Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -1778,7 +1778,7 @@
       "name": "--m-layout-padding",
       "category": "layout",
       "source": "src/components/Layout/styles.css",
-      "default": "var(--m-space-4)",
+      "default": "0 var(--m-space-4)",
       "description": {
         "zh-CN": "布局相关变量：Layout Padding",
         "en-US": "Layout token: Layout Padding"

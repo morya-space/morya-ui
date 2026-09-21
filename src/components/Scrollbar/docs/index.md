@@ -32,7 +32,7 @@ import { MScrollbar } from 'morya-ui'
 
 内容宽度超出容器时显示横向滚动条。`trigger="none"` 与 `always` 都会常显滑块；默认 `trigger="hover"` 在悬停时显示。
 
-`MLayout` / `MLayoutContent` / `MLayoutSider`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MTreeTable`、`MVirtualScroller` 等组件已内置本组件。
+`MLayout`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MTreeTable`、`MVirtualScroller` 等组件已内置本组件。
 
 ```vue preview src="./demos/Horizontal.vue"
 ```

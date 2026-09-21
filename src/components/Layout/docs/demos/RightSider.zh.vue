@@ -13,10 +13,10 @@ import {
       Inspector
     </MLayoutHeader>
     <MLayout has-sider sider-placement="right">
-      <MLayoutSider bordered :width="140" content-style="padding:0.75rem">
+      <MLayoutSider bordered :width="140" style="padding:0.75rem">
         属性面板
       </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
+      <MLayoutContent embedded style="padding:1rem">
         画布 / 主区域
       </MLayoutContent>
     </MLayout>

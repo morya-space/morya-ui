@@ -29,7 +29,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ## With Sider
 
-顶栏 + 左侧栏 + 主内容。内层 `has-sider` 的 Layout 会吃掉 Header 以下的全部高度。
+顶栏 + 左侧栏 + 主内容。侧栏内嵌 `MMenu`，并通过 `v-model:collapsed` 与菜单折叠联动。内层 `has-sider` 的 Layout 会吃掉 Header 以下的全部高度。
 
 ```vue preview src="./demos/WithSider.zh.vue"
 ```
@@ -41,7 +41,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ## Full Shell
 
-完整后台骨架：顶栏 + 侧栏 + 内容 + 底栏。
+完整后台骨架：顶栏 + 反色侧栏（`MMenu` `inverted`）+ 内容 + 底栏。
 
 ```vue preview src="./demos/FullShell.zh.vue"
 ```
@@ -55,7 +55,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ## Scrollable Content
 
-内容超出时仅 Content 区域滚动，Header / Sider 保持固定。`MLayout` / `MLayoutContent` / `MLayoutSider` 通过内置 `MScrollbar` 提供统一滚动条。
+内容超出时，可在 `MLayoutContent` 上自行设置 `overflow: auto`（或包一层 `MScrollbar`）；Header / Sider 保持固定。`MLayout` 根容器仍内置 `MScrollbar`；`MLayoutContent` / `MLayoutSider` 为单层壳。
 
 ```vue preview src="./demos/ScrollableContent.zh.vue"
 ```
@@ -95,13 +95,14 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 | `bordered` / `inverted` | `boolean` | `false` | 边框 / 反色。 |
 | `triggerClass` / `triggerStyle` | — | — | 展开态触发器样式。 |
 | `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | 折叠态触发器样式。 |
-| `contentClass` / `contentStyle` | — | — | 滚动容器 class / style。 |
+| `padding` | `number \| string` | — | 可选内边距；无默认值。 |
+| `radius` | `number \| string` | — | 圆角。 |
 
 ## Events
 
 | 事件 | 说明 |
 | --- | --- |
-| `scroll` | 滚动容器滚动时触发。 |
+| `scroll` | `MLayout` 滚动容器滚动时触发。 |
 | `after-enter` | 侧栏展开动画结束。 |
 | `after-leave` | 侧栏收起动画结束。 |
 | `collapse` | 侧栏开始收起。 |
@@ -110,7 +111,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ## Expose
 
-`MLayout` / `MLayoutContent` / `MLayoutSider` 均暴露 `scrollTo(...)`。
+`MLayout` 暴露 `scrollTo(...)`。
 
 ## Components
 

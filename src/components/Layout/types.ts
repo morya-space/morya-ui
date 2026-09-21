@@ -55,13 +55,12 @@ export interface LayoutContentProps {
   pt?: RootPassThrough
   /** Content height. Defaults to filling the parent layout. */
   height?: number | string;
+  /** Optional padding; no default — apply only when set. */
   padding?: number | string;
   radius?: number | string;
   /** Soft background. */
   embedded?: boolean;
   position?: LayoutPosition;
-  contentClass?: string;
-  contentStyle?: string | CSSProperties;
 }
 
 export interface LayoutSiderProps {
@@ -73,6 +72,7 @@ export interface LayoutSiderProps {
   width?: number | string;
   /** Collapsed max-width. */
   collapsedWidth?: number | string;
+  /** Optional padding; no default — apply only when set. */
   padding?: number | string;
   radius?: number | string;
   /** Controlled collapsed state (`v-model:collapsed`). */
@@ -80,8 +80,8 @@ export interface LayoutSiderProps {
   /** Uncontrolled initial collapsed state. */
   defaultCollapsed?: boolean;
   /**
-   * `transform` (default): keep content width, clip with max-width.
-   * `width`: shrink content with the sider.
+   * `transform` (default): keep expanded `width`, collapse via `max-width`.
+   * `width`: shrink `width` with the sider.
    */
   collapseMode?: LayoutCollapseMode;
   /** Show sider content while collapsed. */
@@ -91,8 +91,6 @@ export interface LayoutSiderProps {
   triggerStyle?: string | CSSProperties;
   collapsedTriggerClass?: string;
   collapsedTriggerStyle?: string | CSSProperties;
-  contentClass?: string;
-  contentStyle?: string | CSSProperties;
 }
 
 export interface LayoutSiderEmits {
@@ -101,7 +99,6 @@ export interface LayoutSiderEmits {
   (event: "expand"): void;
   (event: "after-enter"): void;
   (event: "after-leave"): void;
-  (event: "scroll", eventPayload: Event): void;
 }
 
 export interface LayoutScrollEmits {

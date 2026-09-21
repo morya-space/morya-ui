@@ -32,7 +32,7 @@ The scrollbar appears only when content exceeds `max-height`.
 
 A horizontal scrollbar appears when content is wider than the container. `trigger="none"` and `always` keep the thumb visible; the default `trigger="hover"` shows it on hover.
 
-`MLayout`, `MLayoutContent`, `MLayoutSider`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, `MTreeTable`, and `MVirtualScroller` integrate this component internally.
+`MLayout`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, `MTreeTable`, and `MVirtualScroller` integrate this component internally.
 
 ```vue preview src="./demos/Horizontal.vue"
 ```

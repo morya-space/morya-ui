@@ -121,17 +121,14 @@ describe('muLayout', () => {
     const wrapper = mount(MLayoutSider, {
       props: { width: 240, collapsedWidth: 56, padding: 16, radius: 4 },
     });
-    const content = wrapper.find<HTMLElement>(".m-layout-sider__scroll");
     expect(wrapper.element.style.width).toBe("240px");
     expect(wrapper.element.style.maxWidth).toBe("240px");
     expect(wrapper.element.style.getPropertyValue("--m-layout-sider-width")).toBe(
       "240px",
     );
-    expect(wrapper.element.style.padding).toBe("");
+    expect(wrapper.element.style.padding).toBe("16px");
     expect(wrapper.element.style.borderRadius).toBe("4px");
-    expect(content.element.style.padding).toBe("16px");
-    expect(content.element.style.width).toBe("");
-    expect(content.element.style.minWidth).toBe("");
+    expect(wrapper.find(".m-layout-sider__scroll").exists()).toBe(false);
   });
 
   it("toggles sider collapsed state via max-width in transform mode", async () => {
@@ -155,9 +152,7 @@ describe('muLayout', () => {
     expect(wrapper.classes()).toContain("m-layout-sider--collapsed");
     expect(wrapper.element.style.width).toBe("200px");
     expect(wrapper.element.style.maxWidth).toBe("48px");
-    expect(wrapper.find(".m-layout-sider__scroll").element.style.padding).toBe(
-      "16px",
-    );
+    expect(wrapper.element.style.padding).toBe("16px");
   });
 
   it("shrinks sider width in width collapse mode", async () => {

@@ -29,7 +29,7 @@ Header / Content / Footer. Content fills the leftover height.
 
 ## With Sider
 
-Header + left sider + main. The inner `has-sider` layout consumes all height below the header.
+Header + left sider + main. The sider hosts `MMenu`, bound to `v-model:collapsed`. The inner `has-sider` layout consumes all height below the header.
 
 ```vue preview src="./demos/WithSider.en.vue"
 ```
@@ -41,7 +41,7 @@ Header + left sider + main. The inner `has-sider` layout consumes all height bel
 
 ## Full Shell
 
-Admin-style shell: header + sider + content + footer.
+Admin-style shell: header + inverted sider (`MMenu` `inverted`) + content + footer.
 
 ```vue preview src="./demos/FullShell.en.vue"
 ```
@@ -55,7 +55,7 @@ Admin-style shell: header + sider + content + footer.
 
 ## Scrollable Content
 
-Only the content pane scrolls; header and sider stay fixed. `MLayout`, `MLayoutContent`, and `MLayoutSider` use built-in `MScrollbar`.
+When content overflows, set `overflow: auto` on `MLayoutContent` (or wrap with `MScrollbar`); header and sider stay fixed. Root `MLayout` still has built-in `MScrollbar`; `MLayoutContent` / `MLayoutSider` are single-element shells.
 
 ```vue preview src="./demos/ScrollableContent.en.vue"
 ```
@@ -91,17 +91,23 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 | `bordered` / `inverted` | `boolean` | `false` | Border / inverted colors. |
 | `triggerClass` / `triggerStyle` | — | — | Expanded trigger styles. |
 | `collapsedTriggerClass` / `collapsedTriggerStyle` | — | — | Collapsed trigger styles. |
-| `contentClass` / `contentStyle` | — | — | Scroll container class / style. |
+| `padding` | `number \| string` | — | Optional padding; no default. |
+| `radius` | `number \| string` | — | Border radius. |
 
 ## Events
 
 | Event | Description |
 | --- | --- |
-| `scroll` | Fired when the scroll container scrolls. |
+| `scroll` | Fired when the `MLayout` scroll container scrolls. |
+| `after-enter` | Fired when the sider expand transition ends. |
+| `after-leave` | Fired when the sider collapse transition ends. |
+| `collapse` | Fired when the sider starts collapsing. |
+| `expand` | Fired when the sider starts expanding. |
+| `update:collapsed` | Collapsed state v-model. |
 
 ## Expose
 
-`MLayout` / `MLayoutContent` / `MLayoutSider` expose `scrollTo(...)`.
+`MLayout` exposes `scrollTo(...)`.
 
 ## Components
 

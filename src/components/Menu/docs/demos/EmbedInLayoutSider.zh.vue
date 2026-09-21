@@ -60,7 +60,7 @@ const model = [
           :collapsed-width="64"
         />
       </MLayoutSider>
-      <MLayoutContent embedded content-style="padding: var(--m-space-4)">
+      <MLayoutContent embedded style="padding: var(--m-space-4)">
         <p style="margin: 0; color: var(--m-color-text-muted); font-size: var(--m-font-size-sm)">
           当前选中：<strong style="color: var(--m-color-text)">{{ selectedKey }}</strong>
         </p>

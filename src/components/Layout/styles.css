@@ -91,19 +91,12 @@
 }
 
 .m-layout-content {
-    --m-layout-padding: var(--m-space-4);
     --m-layout-radius: 0;
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
     min-height: 0;
     min-width: 0;
-}
-
-.m-layout-content > .m-layout__scroll,
-.m-layout-content > .m-layout__scrollbar {
-    flex: 1 1 auto;
-    min-height: 0;
 }
 
 .m-layout-header,
@@ -184,7 +177,6 @@
 .m-layout-sider {
     --m-layout-sider-width: 12.5rem;
     --m-layout-sider-collapsed-width: 4rem;
-    --m-layout-padding: var(--m-space-4);
     --m-layout-radius: 0;
     --m-layout-trigger-size: 1.5rem;
     align-self: stretch;
@@ -193,8 +185,8 @@
     color: var(--m-color-text);
     display: flex;
     flex-basis: var(--m-layout-sider-width);
+    flex-direction: column;
     flex-shrink: 0;
-    justify-content: flex-end;
     min-width: 0;
     /* Do not clip the collapse trigger (it sits half outside the sider edge).
        Collapsed transform overflow is clipped by `.m-layout { overflow: hidden }`. */
@@ -205,46 +197,22 @@
         border-color var(--m-motion-normal) var(--m-motion-ease),
         width var(--m-motion-normal) var(--m-motion-ease),
         max-width var(--m-motion-normal) var(--m-motion-ease),
-        background-color var(--m-motion-normal) var(--m-motion-ease);
+        background-color var(--m-motion-normal) var(--m-motion-ease),
+        opacity var(--m-motion-normal) var(--m-motion-ease);
     z-index: 1;
 }
 
-.m-layout-sider--right-placement {
-    justify-content: flex-start;
-}
-
-.m-layout-sider__scroll,
-.m-layout-sider__scrollbar {
-    box-sizing: border-box;
-    flex: 1 1 auto;
-    height: 100%;
-    max-width: 100%;
-    min-height: 0;
-    min-width: 0;
-    overflow: hidden;
-    overflow-x: hidden;
-    width: 100%;
-}
-
-/* Opacity only on the scrollbar root. The wrap keeps `.m-layout-sider__scroll`
-   and must stay opaque once the root fades in. */
-.m-layout-sider__scrollbar {
+.m-layout-sider:not(.m-layout-sider--show-content) > :not(.m-layout-sider__trigger):not(.m-layout-sider__border) {
     opacity: 0;
+    pointer-events: none;
     transition: opacity var(--m-motion-normal) var(--m-motion-ease);
 }
 
-.m-layout-sider--collapse-transform > .m-layout-sider__scroll,
-.m-layout-sider--collapse-transform > .m-layout-sider__scrollbar {
+.m-layout-sider--collapse-transform {
     flex-shrink: 0;
-    min-width: var(--m-layout-sider-width);
 }
 
-.m-layout-sider--show-content > .m-layout-sider__scrollbar {
-    opacity: 1;
-}
-
-.m-layout-sider--collapse-width > .m-layout-sider__scroll,
-.m-layout-sider--collapse-width > .m-layout-sider__scrollbar {
+.m-layout-sider--collapse-width {
     flex-shrink: 1;
     min-width: 0;
 }
@@ -439,7 +407,6 @@
     html:not([data-m-ignore-reduced-motion]) .m-layout-header,
     html:not([data-m-ignore-reduced-motion]) .m-layout-footer,
     html:not([data-m-ignore-reduced-motion]) .m-layout-sider,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__scrollbar,
     html:not([data-m-ignore-reduced-motion]) .m-layout-sider__arrow,
     html:not([data-m-ignore-reduced-motion]) .m-layout-sider__bar-top,
     html:not([data-m-ignore-reduced-motion]) .m-layout-sider__bar-bottom {
@@ -451,7 +418,6 @@
 [data-m-motion="reduced"] .m-layout-header,
 [data-m-motion="reduced"] .m-layout-footer,
 [data-m-motion="reduced"] .m-layout-sider,
-[data-m-motion="reduced"] .m-layout-sider__scrollbar,
 [data-m-motion="reduced"] .m-layout-sider__arrow,
 [data-m-motion="reduced"] .m-layout-sider__bar-top,
 [data-m-motion="reduced"] .m-layout-sider__bar-bottom,
@@ -459,7 +425,6 @@
 [data-m-motion="none"] .m-layout-header,
 [data-m-motion="none"] .m-layout-footer,
 [data-m-motion="none"] .m-layout-sider,
-[data-m-motion="none"] .m-layout-sider__scrollbar,
 [data-m-motion="none"] .m-layout-sider__arrow,
 [data-m-motion="none"] .m-layout-sider__bar-top,
 [data-m-motion="none"] .m-layout-sider__bar-bottom {

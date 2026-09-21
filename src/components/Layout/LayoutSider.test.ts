@@ -1,11 +1,7 @@
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import MLayoutSider from './LayoutSider.vue'
-
-const siderStyles = readFileSync(resolve(import.meta.dirname, './styles.css'), 'utf8')
 
 describe('layoutSider', () => {
   it('toggles collapsed via trigger in transform mode', async () => {
@@ -35,28 +31,27 @@ describe('layoutSider', () => {
     expect(wrapper.classes()).toContain('m-layout-sider--bordered')
   })
 
-  it('nests menu wrap inside sider scrollbar when expanded', () => {
+  it('renders slot content directly on the root element', () => {
     const wrapper = mount(MLayoutSider, {
       props: { collapsed: false, showCollapsedContent: true },
       slots: { default: '<nav class="demo-nav">Nav</nav>' },
     })
 
     expect(wrapper.classes()).toContain('m-layout-sider--show-content')
-    const scrollbar = wrapper.get('.m-layout-sider__scrollbar')
-    const scroll = scrollbar.get('.m-layout-sider__scroll')
-    expect(scroll.exists()).toBe(true)
-    expect(scroll.get('.demo-nav').text()).toBe('Nav')
+    expect(wrapper.find('.m-layout-sider__scroll').exists()).toBe(false)
+    expect(wrapper.find('.m-layout-sider__scrollbar').exists()).toBe(false)
+    expect(wrapper.get('.demo-nav').text()).toBe('Nav')
   })
 
-  it('applies collapse opacity only on scrollbar root, not the inner wrap', () => {
-    expect(siderStyles).toMatch(
-      /\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*0/,
-    )
-    expect(siderStyles).toMatch(
-      /\.m-layout-sider--show-content\s*>\s*\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*1/,
-    )
-    expect(siderStyles).not.toMatch(
-      /\.m-layout-sider__scroll,[\t\v\f\r \xA0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]*\n\s*\.m-layout-sider__scrollbar\s*\{[^}]*opacity:\s*0/,
-    )
+  it('does not apply default padding', () => {
+    const wrapper = mount(MLayoutSider)
+    expect(wrapper.element.style.padding).toBe('')
+  })
+
+  it('applies explicit padding on the root', () => {
+    const wrapper = mount(MLayoutSider, {
+      props: { padding: 16 },
+    })
+    expect(wrapper.element.style.padding).toBe('16px')
   })
 })

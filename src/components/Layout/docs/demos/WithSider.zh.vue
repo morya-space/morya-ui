@@ -4,10 +4,17 @@ import {
   MLayoutContent,
   MLayoutHeader,
   MLayoutSider,
+  MMenu,
 } from 'morya-ui'
 import { ref } from 'vue'
 
 const collapsed = ref(false)
+const selectedKey = ref('overview')
+const model = [
+  { key: 'overview', label: '概览', icon: 'layout-dashboard' },
+  { key: 'projects', label: '项目', icon: 'folder' },
+  { key: 'settings', label: '设置', icon: 'settings' },
+]
 </script>
 
 <template>
@@ -21,17 +28,19 @@ const collapsed = ref(false)
         v-model:collapsed="collapsed"
         bordered
         show-trigger="arrow-circle"
-        :width="160"
-        content-style="padding:0.75rem"
+        collapse-mode="width"
+        :width="168"
+        :collapsed-width="64"
       >
-        <div style="display:grid;gap:0.5rem">
-          <div>概览</div>
-          <div>项目</div>
-          <div>设置</div>
-        </div>
+        <MMenu
+          v-model:selected-key="selectedKey"
+          :model="model"
+          :collapsed="collapsed"
+          :collapsed-width="64"
+        />
       </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
-        主内容区会横向、纵向同时撑满。
+      <MLayoutContent embedded style="padding:1rem">
+        当前选中：{{ selectedKey }}
       </MLayoutContent>
     </MLayout>
   </MLayout>

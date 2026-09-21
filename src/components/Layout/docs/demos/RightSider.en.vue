@@ -13,10 +13,10 @@ import {
       Inspector
     </MLayoutHeader>
     <MLayout has-sider sider-placement="right">
-      <MLayoutSider bordered :width="140" content-style="padding:0.75rem">
+      <MLayoutSider bordered :width="140" style="padding:0.75rem">
         Props panel
       </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
+      <MLayoutContent embedded style="padding:1rem">
         Canvas / main
       </MLayoutContent>
     </MLayout>

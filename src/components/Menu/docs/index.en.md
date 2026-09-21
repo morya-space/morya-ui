@@ -47,7 +47,7 @@ Click a group to expand/collapse. When a child is selected, the parent shows `ch
 
 ## Collapsed & flyout
 
-`collapsed` hides labels and keeps icons. Hover shows an `MTooltip` with the label; groups also open a right flyout (`.m-menu--flyout`) via `MPopover` teleported to `body`, so it is not clipped by sider scroll regions. Set `collapsed-width` to match the sider width for centered icons.
+`collapsed` hides labels and keeps icons. Hover shows an `MTooltip` with the label; groups also open a right flyout (`.m-menu--flyout`) via `MPopover` teleported to `body`, so it is not clipped by the sider. Set `collapsed-width` to match the sider width for centered icons.
 
 ```vue preview src="./demos/CollapsedAndFlyout.en.vue"
 ```

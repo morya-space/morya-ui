@@ -6,6 +6,8 @@ export interface LayoutRegionStyleInput {
     height?: number | string;
     heightFallback?: string;
     padding?: number | string;
+    /** When false, padding is only written if `padding` is set. Default true. */
+    applyDefaultPadding?: boolean;
     radius?: number | string;
 }
 
@@ -23,15 +25,18 @@ export function useLayoutRegionStyle(
     return computed(() => {
         const props = toValue(input);
         const style: Record<string, string> = {
-            padding: resolveTokenLength(
-                props.padding,
-                "var(--m-layout-padding, var(--m-space-4))",
-            ),
             borderRadius: resolveTokenLength(
                 props.radius,
                 "var(--m-layout-radius, 0)",
             ),
         };
+
+        if (props.padding != null) {
+            const padding = toCssLength(props.padding);
+            if (padding) style.padding = padding;
+        } else if (props.applyDefaultPadding !== false) {
+            style.padding = "var(--m-layout-padding, var(--m-space-4))";
+        }
 
         if (props.heightFallback != null) {
             style.height = resolveTokenLength(props.height, props.heightFallback);

@@ -13,10 +13,10 @@ import {
       Scroll demo
     </MLayoutHeader>
     <MLayout has-sider>
-      <MLayoutSider bordered :width="120" content-style="padding:0.75rem">
+      <MLayoutSider bordered :width="120" style="padding:0.75rem">
         固定侧栏
       </MLayoutSider>
-      <MLayoutContent embedded content-style="padding:1rem">
+      <MLayoutContent embedded style="padding:1rem;overflow:auto;min-height:0">
         <div style="display:grid;gap:0.5rem">
           <div v-for="n in 20" :key="n">
             行 {{ n }} — 向下滚动
