@@ -10,12 +10,13 @@
 npx @morya-ui/setup
 ```
 
-会安装 `morya-ui`、复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入样式。
+会安装 `morya-ui`、按交互/flags 复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入样式。
 
 已安装组件库时，可只写入本配置与 MCP：
 
 ```bash
 npx @morya-ui/setup ai
+npx @morya-ui/setup ai --skills=all   # 含 companion skills
 ```
 
 完整说明（flags、冲突策略）：
@@ -31,11 +32,13 @@ npx @morya-ui/setup ai
 
 | 路径 | 用途 |
 | --- | --- |
-| `DESIGN.md` | AI 第一信源：设计原则、布局、令牌、禁止项 |
+| `DESIGN.md` | AI 第一信源：原则、应用根、令牌摘要、禁止项（页面结构见 skill） |
 | `docs/golden-pages/` | MCP 黄金样例源（不复制到业务项目） |
 | `scripts/check-raw-colors.mjs` | CI / 本地裸色值扫描 |
 | `.cursor/rules/` | Cursor 规则（设计系统、组件用法、页面布局、编码风格） |
-| `.agents/skills/morya-ui-pages/` | 消费方 Agent Skill：Ops / 账户 / 流程 / 系统 / 营销等全场景；可与 rules 并存 |
+| `.agents/skills/morya-ui-pages/` | 必选：Ops / 账户 / 流程 / 系统 / 营销等；可与 rules 并存 |
+| `.agents/skills/frontend-design/` | 可选 companion：Express / 品牌视觉味觉 |
+| `.agents/skills/fixing-accessibility/` | 可选 companion：无障碍审计 |
 
 ## 手动接入步骤
 
@@ -65,7 +68,7 @@ npx @morya-ui/setup ai
 
 5. 生成页面前让 AI 先读 `DESIGN.md`，样例用 MCP `get_golden_page`。
 
-6. **（推荐）** 若客户端支持 Agent Skills，保留 `.agents/skills/morya-ui-pages/`。说明见文档站 [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill)；与 `.cursor/rules` 互补（rules 偏编辑器常驻，skill 偏按需工作流）。
+6. **（推荐）** 若客户端支持 Agent Skills，至少保留 `.agents/skills/morya-ui-pages/`；可选 companion 见 setup `--skills`。说明见文档站 [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill)；与 `.cursor/rules` 互补（rules 偏编辑器常驻，skill 偏按需工作流）。
 
 ## 与组件库的关系
 
