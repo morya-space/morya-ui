@@ -42,7 +42,10 @@
     border: 0;
     border-radius: 0;
     min-width: 0;
-    padding: 0;
+    /* Keep a block inset so the first item does not sit on a brand rule or sider edge.
+       Horizontal embed resets this below. */
+    padding-block: var(--m-space-2);
+    padding-inline: 0;
     width: 100%;
 }
 
