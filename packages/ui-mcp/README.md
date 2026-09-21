@@ -119,7 +119,7 @@ For a starter Vue file, pass `includeScaffold: true` to `recommend_page`:
 `recommend_component` modes:
 
 - omit `query` and `decision` → list decision guides
-- `decision` only → read one guide (e.g. `overlay-choice`)
+- `decision` only → read one guide (e.g. `overlay-choice`, `selection-choice`, `status-label-choice`, `empty-result-choice`, `action-menu-choice`)
 - `query` → recommend a component for a UI question
 
 ## Develop

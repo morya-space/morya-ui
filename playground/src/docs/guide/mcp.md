@@ -176,8 +176,10 @@ npx -y @morya-ui/mcp
 `recommend_component` 用法：
 
 - 不传 `query` 和 `decision` → 列出全部选型指南
-- 只传 `decision`（如 `overlay-choice`）→ 阅读某一指南
+- 只传 `decision` → 阅读某一指南
 - 传 `query` → 根据问题推荐组件
+
+当前指南包括：`form-surface-choice`、`overlay-choice`、`data-display-choice`、`selection-choice`（含 Select / TreeSelect / CascadeSelect / Listbox / SelectButton / Radio / AutoComplete）、`status-label-choice`、`empty-result-choice`、`action-menu-choice`、`loading-choice`、`page-scroll-choice`、`surface-choice`、`page-section-choice`、`layout-spacing-choice`、`surface-nesting-choice`。
 
 ## 对话示例
 

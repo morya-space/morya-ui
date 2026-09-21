@@ -15,4 +15,5 @@ External:
 
 - [README](../README.md) · [中文](../README.zh-CN.md)
 - [Release scripts](../scripts/README.md)
+- [MCP](../packages/ui-mcp/README.md) · [Setup](../packages/setup/README.md) · [Design kit](../design-kit/README.md)
 - [AGENTS.md](../AGENTS.md)

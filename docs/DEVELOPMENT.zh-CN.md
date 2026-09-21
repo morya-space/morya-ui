@@ -12,6 +12,8 @@
 | `playground/` | 文档站（Vite + Markdown 预览） |
 | `scripts/` | 发版与 CHANGELOG 工具 |
 | `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP 服务 |
+| `packages/setup/` | `@morya-ui/setup` CLI；`template/` 由 `design-kit/` 同步生成 |
+| `design-kit/` | 消费方 AI 配置：`DESIGN.md`、`morya-ui-pages` skill、Cursor 规则、黄金样例 |
 | `docs/` | 维护者文档 |
 | `dist/` | 构建产物（勿手改） |
 
@@ -36,9 +38,11 @@ pnpm release:push         # 推送分支与 tag
 pnpm release:npm          # 仅 build + publish（UI + MCP；需先改 version）
 pnpm release:git          # 仅补 tag / release 分支
 pnpm release:mcp          # 单独发布 MCP（一般不必；完整发版已包含）
+pnpm mcp:generate         # 组件或指南文档变更后重新生成 MCP catalog
 pnpm mcp:build            # 构建 @morya-ui/mcp（文档目录 + stdio 服务）
 pnpm mcp:audit-examples   # 审计 Props / Events / Slots / Methods 示例覆盖率
 pnpm mcp:start            # 本地启动 MCP（stdio）
+pnpm setup:sync-template  # 把 design-kit/ 同步到 packages/setup/template/
 ```
 
 ## 相关文档
@@ -49,4 +53,6 @@ pnpm mcp:start            # 本地启动 MCP（stdio）
 | [UI 开发](./ui-development.zh-CN.md) | 构建、发版、组件与文档约定 |
 | [scripts/README.md](../scripts/README.md) | 发版脚本说明 |
 | [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP 服务 |
+| [packages/setup/README.md](../packages/setup/README.md) | 消费方一键接入 CLI |
+| [design-kit/README.md](../design-kit/README.md) | AI skill / rules 配置源 |
 | [AGENTS.md](../AGENTS.md) | Agent / Skills 使用规则 |

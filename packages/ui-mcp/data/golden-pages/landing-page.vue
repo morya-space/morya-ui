@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：营销落地页（Express）
- * @see DESIGN.md §3 · morya-ui-pages surfaces § Express
+ * @see DESIGN.md · page-layouts.md · surfaces § Express
  * 首屏单一任务；控件用 M*；色彩只走 --m-*；避开 AI 默认脸。
  */
 import { MAccordion, MButton, MConfigProvider, MTag, zhCN } from 'morya-ui'

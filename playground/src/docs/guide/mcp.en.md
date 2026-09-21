@@ -144,16 +144,25 @@ Snippets for popular products. Key names may change across versions — check ea
 | `list_patterns` | List reusable page composition patterns |
 | `get_pattern` | Read a pattern's structure, layout, and rules |
 | `recommend_page` | Recommend a pattern from page intent; optional starter scaffold |
-| `get_design_rules` | Design-token and composition rules |
+| `get_design_rules` | Design-token and MPage* composition rules |
 | `recommend_component` | List, read, or recommend component selection guides |
+| `list_golden_pages` | List golden page samples |
+| `get_golden_page` | Read a golden page Vue source (`list-page`, `form-page`, `dashboard-page`, `login-page`, `landing-page`, `empty-state`) |
+| `list_page_snippets` | List reusable page-section snippets |
+| `get_page_snippet` | Read one snippet (filters, toolbar, form actions, …) |
+| `validate_page` | Check page composition, spacing, and double-border issues |
 
 Most tools accept `mode`: `zh` (default) or `en`.
+
+Component lookup accepts common aliases such as `DataTable`, `数据表格`, `Pager`, and `确认弹窗`.
 
 ### Recommended workflow
 
 **Look up a component:** `search` / `get_component` → `get_example` → `validate_usage`
 
-**Plan a page:** `recommend_page` → `get_pattern` → `get_component` / `get_example` → `get_design_rules`; use `recommend_component` when choosing between similar components
+**Plan a page:** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → `validate_page`. Use `recommend_component` when choosing between similar components.
+
+**Edit one section:** `list_page_snippets` → `get_page_snippet` → `get_component` / `get_example` → `validate_usage` → `validate_page`
 
 Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
 
@@ -162,6 +171,7 @@ Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
   "intent": "Oil well management list",
   "pageType": "list",
   "features": ["filters", "create", "pagination"],
+  "mode": "en",
   "includeScaffold": true
 }
 ```
@@ -169,8 +179,10 @@ Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
 `recommend_component` modes:
 
 - omit `query` and `decision` → list decision guides
-- `decision` only (e.g. `overlay-choice`) → read one guide
+- `decision` only → read one guide
 - `query` → recommend a component for a UI question
+
+Current guides include `form-surface-choice`, `overlay-choice`, `data-display-choice`, `selection-choice` (Select / TreeSelect / CascadeSelect / Listbox / SelectButton / Radio / AutoComplete), `status-label-choice`, `empty-result-choice`, `action-menu-choice`, `loading-choice`, `page-scroll-choice`, `surface-choice`, `page-section-choice`, `layout-spacing-choice`, and `surface-nesting-choice`.
 
 ## Prompt examples
 

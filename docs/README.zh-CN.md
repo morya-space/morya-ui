@@ -15,4 +15,5 @@
 
 - [README（中文）](../README.zh-CN.md) · [English](../README.md)
 - [发版脚本](../scripts/README.md)
+- [MCP](../packages/ui-mcp/README.md) · [一键接入](../packages/setup/README.md) · [设计配置](../design-kit/README.md)
 - [AGENTS.md](../AGENTS.md)

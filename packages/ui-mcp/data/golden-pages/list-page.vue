@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：列表页
- * @see DESIGN.md §3
+ * @see DESIGN.md · morya-ui-pages references/page-layouts.md
  */
 import {
   MBreadcrumb,
@@ -26,7 +26,6 @@ import { ref } from 'vue'
 
 const keyword = ref('')
 const status = ref<string | undefined>()
-const siderCollapsed = ref(false)
 
 const menuModel = [
   { key: 'users', label: '用户管理', icon: 'user', to: '/users' },

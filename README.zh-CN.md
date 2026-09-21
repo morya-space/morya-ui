@@ -126,6 +126,7 @@ createApp(App).use(createMoryaUI({ locale: zhCN })).mount('#app')
 | [`morya-ui`](https://www.npmjs.com/package/morya-ui) | 组件、样式、主题与语言工具 |
 | [`@morya-ui/nuxt`](./packages/nuxt) | Nuxt 3 模块（样式、transpile、overlay 上下文） |
 | [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) | 可选 MCP 服务，供 AI 客户端检索文档 |
+| [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) | 业务项目一键接入：组件库、样式、Agent Skill、Cursor 规则与 MCP |
 
 ## 参与贡献
 

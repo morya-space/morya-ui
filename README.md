@@ -126,6 +126,7 @@ See the [Quick start guide](https://morya-space.github.io/morya-ui/docs/quick-st
 | [`morya-ui`](https://www.npmjs.com/package/morya-ui) | Components, styles, theme & locale helpers |
 | [`@morya-ui/nuxt`](./packages/nuxt) | Nuxt 3 module (styles, transpile, overlay context) |
 | [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) | Optional MCP server for AI-assisted doc lookup |
+| [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) | One-shot consumer setup: library, styles, Agent skill, Cursor rules, and MCP |
 
 ## Contributing
 

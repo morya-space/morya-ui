@@ -12,6 +12,8 @@ Internal documentation for contributors. Public overview: [root README](../READM
 | `playground/` | Docs site (Vite + Markdown preview) |
 | `scripts/` | Release & CHANGELOG tooling |
 | `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP server |
+| `packages/setup/` | `@morya-ui/setup` CLI; `template/` is generated from `design-kit/` |
+| `design-kit/` | Consumer AI pack: `DESIGN.md`, `morya-ui-pages` skill, Cursor rules, golden pages |
 | `docs/` | Maintainer docs |
 | `dist/` | Build output (do not edit by hand) |
 
@@ -36,9 +38,11 @@ pnpm release:push         # push branches & tag
 pnpm release:npm          # build + publish only (UI + MCP; set version first)
 pnpm release:git          # create tag / release branch only
 pnpm release:mcp          # MCP-only publish (usually unnecessary; full release includes it)
+pnpm mcp:generate         # regenerate the MCP catalog after component or guide docs change
 pnpm mcp:build            # build @morya-ui/mcp (catalog + stdio server)
 pnpm mcp:audit-examples   # audit Props / Events / Slots / Methods example coverage
 pnpm mcp:start            # run MCP locally (stdio)
+pnpm setup:sync-template  # copy design-kit/ into packages/setup/template/
 ```
 
 ## Related docs
@@ -49,4 +53,6 @@ pnpm mcp:start            # run MCP locally (stdio)
 | [UI development](./ui-development.md) | Build, publish, component & docs conventions |
 | [scripts/README.md](../scripts/README.md) | Interactive release tooling |
 | [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP server |
+| [packages/setup/README.md](../packages/setup/README.md) | Consumer setup CLI |
+| [design-kit/README.md](../design-kit/README.md) | Source of the AI skill / rules pack |
 | [AGENTS.md](../AGENTS.md) | Agent / Skills rules |

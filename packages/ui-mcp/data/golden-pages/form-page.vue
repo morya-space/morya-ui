@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * 黄金样例：表单页
- * @see DESIGN.md §3
+ * @see DESIGN.md · morya-ui-pages references/page-layouts.md
  */
 import {
   MBreadcrumb,
