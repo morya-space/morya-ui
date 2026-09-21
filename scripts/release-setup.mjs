@@ -50,7 +50,8 @@ export function buildSetup() {
 
 export function publishSetup() {
   console.log('[publish] @morya-ui/setup')
-  run('pnpm --filter @morya-ui/setup publish --access public --no-git-checks')
+  // Template already synced in build; skip prepublishOnly rewrite churn.
+  run('pnpm --filter @morya-ui/setup publish --access public --no-git-checks --ignore-scripts')
 }
 
 /**

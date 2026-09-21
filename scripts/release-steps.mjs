@@ -279,7 +279,8 @@ export function stepBranch() {
 
 export async function stepPublish(options = {}) {
   console.log('[publish] morya-ui')
-  run('pnpm publish --access public --no-git-checks')
+  // Packages were built in stepBuild; skip package prepublishOnly regenerators.
+  run('pnpm publish --access public --no-git-checks --ignore-scripts')
   if (!options.noMcp) {
     const { publishMcp } = await loadMcp()
     publishMcp()

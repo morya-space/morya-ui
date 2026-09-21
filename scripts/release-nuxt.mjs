@@ -64,7 +64,7 @@ export function buildNuxt() {
 
 export function publishNuxt() {
   console.log('[publish] @morya-ui/nuxt')
-  run('pnpm --filter @morya-ui/nuxt publish --access public --no-git-checks')
+  run('pnpm --filter @morya-ui/nuxt publish --access public --no-git-checks --ignore-scripts')
 }
 
 const isCli =

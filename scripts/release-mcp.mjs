@@ -71,7 +71,8 @@ export function commitMcpRelease(version = readUiVersion().version) {
 
 export function publishMcp() {
   console.log('[publish] @morya-ui/mcp')
-  run('pnpm --filter @morya-ui/mcp publish --access public --no-git-checks')
+  // Already built in the release pipeline; skip prepublishOnly regenerate (catalog timestamp churn).
+  run('pnpm --filter @morya-ui/mcp publish --access public --no-git-checks --ignore-scripts')
 }
 
 /**
