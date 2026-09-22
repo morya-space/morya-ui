@@ -40,6 +40,13 @@ import { MSplitter } from 'morya-ui'
 ```vue preview src="./demos/Disabled.zh.vue"
 ```
 
+## 自定义分隔条
+
+`resizeTriggerClass` / `resizeTriggerStyle` 定制分隔条外观；`#resize-trigger`（别名 `#gutter`）放入手柄等内容。厚度仍用 `resizeTriggerSize`（参与拖拽可用宽度计算）。也可用 `pt.gutter` 透传。
+
+```vue preview src="./demos/CustomGutter.zh.vue"
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -51,9 +58,10 @@ import { MSplitter } from 'morya-ui'
 | `min` / `max` | `number \| string` | 随模式 | 下限 / 上限（单位与 `size` 一致）。 |
 | `disabled` | `boolean` | `false` | 禁用拖拽与键盘调整。 |
 | `resizeTriggerSize` | `number` | `6` | 分隔条厚度（px）。 |
+| `resizeTriggerClass` / `resizeTriggerStyle` | — | — | 分隔条 class / style。 |
 | `pane1Class` / `pane1Style` | — | — | 主面板 class / style。 |
 | `pane2Class` / `pane2Style` | — | — | 次面板 class / style。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+| `pt` | [SplitterPassThrough](/docs/types#SplitterPassThrough) `{ root?, gutter?, panel1?, panel2? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
 ## Slots
@@ -62,7 +70,7 @@ import { MSplitter } from 'morya-ui'
 | --- | --- |
 | `panel1` / `1` | 左侧 / 上方面板。 |
 | `panel2` / `2` | 右侧 / 下方面板。 |
-| `resize-trigger` | 自定义分隔条内容。 |
+| `resize-trigger` / `gutter` | 自定义分隔条内容（手柄、图标等）。 |
 | `default` | 未使用命名插槽时取前两个子节点。 |
 
 ## Events

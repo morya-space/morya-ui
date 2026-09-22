@@ -34,11 +34,23 @@
 }
 
 .m-splitter__gutter {
+    align-items: center;
     background: var(--m-color-border);
+    display: flex;
     flex: 0 0 var(--m-splitter-trigger-size);
+    justify-content: center;
     touch-action: none;
     transition: background-color var(--m-motion-fast) var(--m-motion-ease);
     z-index: var(--m-z-popper);
+}
+
+.m-splitter__gutter--slotted {
+    background: color-mix(in srgb, var(--m-color-border) 55%, var(--m-color-surface));
+}
+
+.m-splitter__gutter > * {
+    flex: 0 0 auto;
+    pointer-events: none;
 }
 
 .m-splitter--horizontal > .m-splitter__gutter {

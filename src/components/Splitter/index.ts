@@ -1,3 +1,9 @@
 import './style'
 export { default as MSplitter } from './Splitter.vue'
-export type { SplitterEmits, SplitterLayout, SplitterProps, SplitterSize } from './types'
+export type {
+  SplitterEmits,
+  SplitterLayout,
+  SplitterPassThrough,
+  SplitterProps,
+  SplitterSize,
+} from './types'

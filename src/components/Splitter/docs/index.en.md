@@ -40,6 +40,13 @@ import { MSplitter } from 'morya-ui'
 ```vue preview src="./demos/Disabled.en.vue"
 ```
 
+## Custom gutter
+
+Style the divider with `resizeTriggerClass` / `resizeTriggerStyle`, and put a handle or icon in `#resize-trigger` (alias `#gutter`). Keep thickness on `resizeTriggerSize` (used for drag usable-size math). `pt.gutter` is also supported.
+
+```vue preview src="./demos/CustomGutter.en.vue"
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -51,9 +58,10 @@ import { MSplitter } from 'morya-ui'
 | `min` / `max` | `number \| string` | mode-based | Bounds (same unit family as `size`). |
 | `disabled` | `boolean` | `false` | Disable drag and keyboard resize. |
 | `resizeTriggerSize` | `number` | `6` | Gutter thickness in px. |
+| `resizeTriggerClass` / `resizeTriggerStyle` | — | — | Gutter class / style. |
 | `pane1Class` / `pane1Style` | — | — | Primary pane class / style. |
 | `pane2Class` / `pane2Style` | — | — | Secondary pane class / style. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+| `pt` | [SplitterPassThrough](/docs/types#SplitterPassThrough) `{ root?, gutter?, panel1?, panel2? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
 ## Slots
@@ -62,7 +70,7 @@ import { MSplitter } from 'morya-ui'
 | --- | --- |
 | `panel1` / `1` | Left / top pane. |
 | `panel2` / `2` | Right / bottom pane. |
-| `resize-trigger` | Custom gutter content. |
+| `resize-trigger` / `gutter` | Custom gutter content (handle, icon, …). |
 | `default` | First two children when named slots are unused. |
 
 ## Events

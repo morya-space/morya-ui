@@ -506,6 +506,7 @@ export { default as MSplitter } from "./components/Splitter/Splitter.vue";
 export type {
   SplitterEmits,
   SplitterLayout,
+  SplitterPassThrough,
   SplitterProps,
   SplitterSize,
 } from "./components/Splitter/types";

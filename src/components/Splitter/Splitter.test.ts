@@ -92,4 +92,34 @@ describe('muSplitter', () => {
     expect(wrapper.emitted('drag-start')).toBeFalsy()
     wrapper.unmount()
   })
+
+  it('applies resize-trigger slot, class, and style on the gutter', () => {
+    const wrapper = mount(MSplitter, {
+      props: {
+        resizeTriggerClass: 'custom-gutter',
+        resizeTriggerStyle: { background: 'red' },
+      },
+      slots: {
+        panel1: 'A',
+        panel2: 'B',
+        'resize-trigger': () => h('span', { class: 'handle' }, '⋮'),
+      },
+    })
+    const gutter = wrapper.get('.m-splitter__gutter')
+    expect(gutter.classes()).toContain('custom-gutter')
+    expect(gutter.classes()).toContain('m-splitter__gutter--slotted')
+    expect(gutter.attributes('style')).toContain('background')
+    expect(gutter.find('.handle').text()).toBe('⋮')
+  })
+
+  it('supports gutter slot alias', () => {
+    const wrapper = mount(MSplitter, {
+      slots: {
+        panel1: 'A',
+        panel2: 'B',
+        gutter: () => h('span', 'grip'),
+      },
+    })
+    expect(wrapper.get('.m-splitter__gutter').text()).toBe('grip')
+  })
 })

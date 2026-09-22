@@ -1,13 +1,17 @@
 import type { CSSProperties } from 'vue'
-import type { RootPassThrough } from '../../shared/passThrough'
+import type { PassThroughPart, RootPassThrough } from '../../shared/passThrough'
 
 export type SplitterLayout = 'horizontal' | 'vertical'
 
 /** Size: percent `0–100`, ratio `0–1`, or pixel string like `'120px'`. */
 export type SplitterSize = number | string
 
+/** Pass-through parts for Splitter DOM nodes. */
+export type SplitterPassThrough = RootPassThrough &
+  Partial<Record<'gutter' | 'panel1' | 'panel2', PassThroughPart>>
+
 export interface SplitterProps {
-  pt?: RootPassThrough
+  pt?: SplitterPassThrough
   /** Split direction. Prefer this name; `direction` is an alias. */
   layout?: SplitterLayout
   /** Alias of `layout`. */
@@ -27,8 +31,12 @@ export interface SplitterProps {
   max?: SplitterSize
   /** Disable drag and keyboard resize. */
   disabled?: boolean
-  /** Gutter thickness in px. */
+  /** Gutter thickness in px (also used for drag usable-size math). */
   resizeTriggerSize?: number
+  /** Extra class on the gutter / resize trigger. */
+  resizeTriggerClass?: string
+  /** Extra style on the gutter / resize trigger. */
+  resizeTriggerStyle?: string | CSSProperties
   pane1Class?: string
   pane1Style?: string | CSSProperties
   pane2Class?: string

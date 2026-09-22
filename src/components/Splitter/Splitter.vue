@@ -4,7 +4,7 @@ import type {VNode} from 'vue';
 import type { SplitterProps, SplitterSize } from './types'
 import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
-import { useRootParts } from '../../shared/useComponentAttrs'
+import { mergeClasses, mergePtPart, useRootParts } from '../../shared/useComponentAttrs'
 import {
   clampPx,
   detectSizeMode,
@@ -95,6 +95,10 @@ const defaultPanels = computed(() => {
   return [children[0] ?? null, children[1] ?? null] as const
 })
 
+const hasGutterSlot = computed(
+  () => Boolean(slots['resize-trigger'] || slots.gutter),
+)
+
 function measureUsable(): number {
   const el = root.value
   if (!el) return 0
@@ -114,7 +118,19 @@ const panel1Style = computed(() => ({
 
 const panel2Style = computed(() => normalizeStyle(props.pane2Style))
 
-const gutterStyle = computed(() => ({}))
+const gutterAttrs = computed(() =>
+  mergePtPart(
+    {
+      class: mergeClasses(
+        'm-splitter__gutter',
+        { 'm-splitter__gutter--slotted': hasGutterSlot.value },
+        props.resizeTriggerClass,
+      ),
+      style: props.resizeTriggerStyle,
+    },
+    props.pt?.gutter,
+  ),
+)
 
 function commitSize(next: SplitterSize) {
   if (next === mergedSize.value) return
@@ -257,7 +273,7 @@ onBeforeUnmount(() => {
     </div>
 
     <div
-      class="m-splitter__gutter"
+      v-bind="gutterAttrs"
       role="separator"
       :tabindex="disabled ? -1 : 0"
       :aria-orientation="isVertical ? 'horizontal' : 'vertical'"
@@ -266,12 +282,12 @@ onBeforeUnmount(() => {
       :aria-valuemax="ariaMax"
       :aria-disabled="disabled || undefined"
       :aria-label="isVertical ? locale.resizeVertical : locale.resizeHorizontal"
-      :style="gutterStyle"
       @pointerdown="startDrag"
       @mousedown="startDrag"
       @keydown="onGutterKeydown"
     >
-      <slot name="resize-trigger" />
+      <slot v-if="slots['resize-trigger']" name="resize-trigger" />
+      <slot v-else name="gutter" />
     </div>
 
     <div class="m-splitter__panel m-splitter__panel--fill" :class="pane2Class" :style="panel2Style">
