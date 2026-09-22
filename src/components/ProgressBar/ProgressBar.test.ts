@@ -8,7 +8,8 @@ describe('muProgressBar', () => {
     expect(wrapper.attributes('role')).toBe('progressbar')
     expect(wrapper.attributes('aria-valuenow')).toBe('42')
     expect(wrapper.find('.m-progressbar__label').text()).toBe('42%')
-    expect(wrapper.find('.m-progressbar__value').attributes('style')).toContain('width: 42%')
+    expect(wrapper.find('.m-progressbar__value').attributes('style')).toContain('--m-progressbar-scale: 0.42')
+    expect(wrapper.find('.m-progressbar__fill').exists()).toBe(true)
   })
 
   it('clamps value between 0 and 100', () => {

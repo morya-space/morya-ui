@@ -37,7 +37,9 @@ const progressStyle = computed(() =>
 )
 
 const valueStyle = computed(() =>
-  isIndeterminate.value || isCircle.value ? undefined : { width: `${clampedValue.value}%` },
+  isIndeterminate.value || isCircle.value
+    ? undefined
+    : ({ '--m-progressbar-scale': String(clampedValue.value / 100) } as Record<string, string>),
 )
 
 const circleDash = computed(() => {
@@ -72,6 +74,7 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
       />
     </svg>
     <div v-else class="m-progressbar__value" :style="valueStyle">
+      <div class="m-progressbar__fill" aria-hidden="true" />
       <span v-if="showValue && !isIndeterminate" class="m-progressbar__label">{{ labelText }}</span>
     </div>
     <span v-if="isCircle && showValue && !isIndeterminate" class="m-progressbar__circle-label">{{ labelText }}</span>

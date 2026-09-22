@@ -14,14 +14,27 @@
 
 .m-progressbar__value {
     align-items: center;
-    background: var(--m-progressbar-fill);
-    border-radius: inherit;
     display: flex;
     height: 100%;
     justify-content: center;
     min-width: 0;
     overflow: hidden;
-    transition: width var(--m-motion-fast) var(--m-motion-ease);
+    position: relative;
+    width: 100%;
+}
+
+.m-progressbar__fill {
+    background: var(--m-progressbar-fill);
+    border-radius: inherit;
+    inset: 0;
+    position: absolute;
+    transform: scaleX(var(--m-progressbar-scale, 0));
+    transform-origin: left center;
+    transition: transform var(--m-motion-fast) var(--m-motion-ease);
+}
+
+[dir="rtl"] .m-progressbar__fill {
+    transform-origin: right center;
 }
 
 .m-progressbar__label {
@@ -30,12 +43,21 @@
     font-weight: 600;
     line-height: 1;
     padding: 0 var(--m-space-2);
+    position: relative;
     white-space: nowrap;
+    z-index: 1;
 }
 
-.m-progressbar--indeterminate .m-progressbar__value {
+.m-progressbar--indeterminate .m-progressbar__fill {
     animation: m-progressbar-indeterminate var(--m-motion-pulse) var(--m-motion-ease) infinite;
+    inset: 0 auto 0 0;
+    transform: none;
+    transition: none;
     width: 40%;
+}
+
+[dir="rtl"] .m-progressbar--indeterminate .m-progressbar__fill {
+    inset: 0 0 0 auto;
 }
 
 @keyframes m-progressbar-indeterminate {
@@ -48,7 +70,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-progressbar--indeterminate .m-progressbar__value,
+    html:not([data-m-ignore-reduced-motion]) .m-progressbar--indeterminate .m-progressbar__fill,
     html:not([data-m-ignore-reduced-motion])
         .m-progressbar--indeterminate.m-progressbar--circle
         .m-progressbar__circle-value {
@@ -56,11 +78,11 @@
     }
 }
 
-[data-m-motion="reduced"] .m-progressbar--indeterminate .m-progressbar__value,
+[data-m-motion="reduced"] .m-progressbar--indeterminate .m-progressbar__fill,
 [data-m-motion="reduced"]
     .m-progressbar--indeterminate.m-progressbar--circle
     .m-progressbar__circle-value,
-[data-m-motion="none"] .m-progressbar--indeterminate .m-progressbar__value,
+[data-m-motion="none"] .m-progressbar--indeterminate .m-progressbar__fill,
 [data-m-motion="none"]
     .m-progressbar--indeterminate.m-progressbar--circle
     .m-progressbar__circle-value {
