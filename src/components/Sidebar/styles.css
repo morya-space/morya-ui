@@ -5,16 +5,13 @@
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
-    min-width: var(--m-sidebar-width);
+    min-width: 0;
     padding: var(--m-space-2);
-    transition:
-        width var(--m-motion-normal) var(--m-motion-ease),
-        min-width var(--m-motion-normal) var(--m-motion-ease);
+    transition: width var(--m-motion-normal) var(--m-motion-ease);
     width: var(--m-sidebar-width);
 }
 
 .m-sidebar--collapsed {
-    min-width: var(--m-sidebar-collapsed-width);
     width: var(--m-sidebar-collapsed-width);
 }
 

@@ -195,17 +195,9 @@
     transition:
         color var(--m-motion-normal) var(--m-motion-ease),
         border-color var(--m-motion-normal) var(--m-motion-ease),
-        width var(--m-motion-normal) var(--m-motion-ease),
-        max-width var(--m-motion-normal) var(--m-motion-ease),
         background-color var(--m-motion-normal) var(--m-motion-ease),
         opacity var(--m-motion-normal) var(--m-motion-ease);
     z-index: 1;
-}
-
-.m-layout-sider:not(.m-layout-sider--show-content) > :not(.m-layout-sider__trigger):not(.m-layout-sider__border) {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--m-motion-normal) var(--m-motion-ease);
 }
 
 .m-layout-sider--collapse-transform {
@@ -215,6 +207,19 @@
 .m-layout-sider--collapse-width {
     flex-shrink: 1;
     min-width: 0;
+    transition:
+        color var(--m-motion-normal) var(--m-motion-ease),
+        border-color var(--m-motion-normal) var(--m-motion-ease),
+        width var(--m-motion-normal) var(--m-motion-ease),
+        max-width var(--m-motion-normal) var(--m-motion-ease),
+        background-color var(--m-motion-normal) var(--m-motion-ease),
+        opacity var(--m-motion-normal) var(--m-motion-ease);
+}
+
+.m-layout-sider:not(.m-layout-sider--show-content) > :not(.m-layout-sider__trigger):not(.m-layout-sider__border) {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--m-motion-normal) var(--m-motion-ease);
 }
 
 .m-layout-sider__border {

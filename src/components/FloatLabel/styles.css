@@ -7,17 +7,18 @@
 .m-float-label > label {
     color: var(--m-color-text-muted);
     font-family: var(--m-font-sans);
+    font-size: var(--m-font-size-md);
     left: var(--m-space-3);
     line-height: 1;
     pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    transform-origin: left center;
     transition:
-        top var(--m-motion-fast) var(--m-motion-ease),
         transform var(--m-motion-fast) var(--m-motion-ease),
-        font-size var(--m-motion-fast) var(--m-motion-ease),
-        color var(--m-motion-fast) var(--m-motion-ease);
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease);
     z-index: 1;
 }
 
@@ -26,8 +27,7 @@
 .m-float-label:has(textarea:not(:placeholder-shown)) > label {
     background: var(--m-color-surface);
     color: var(--m-color-primary);
-    font-size: var(--m-font-size-xs);
     padding: 0 var(--m-space-1);
-    top: 0;
-    transform: translateY(-50%);
+    /* Scale approximates xs size; translate lifts to the border without animating `top` / `font-size`. */
+    transform: translateY(calc(-50% - 0.9rem)) scale(0.75);
 }

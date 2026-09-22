@@ -59,8 +59,10 @@ function toggle() {
       </template>
     </legend>
     <Transition name="m-fieldset-collapse">
-      <div v-show="!isCollapsed" :id="contentId" class="m-fieldset__content">
-        <slot />
+      <div v-show="!isCollapsed" class="m-fieldset__collapse">
+        <div :id="contentId" class="m-fieldset__content">
+          <slot />
+        </div>
       </div>
     </Transition>
   </fieldset>

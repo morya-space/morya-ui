@@ -81,8 +81,10 @@ function toggle() {
       </button>
     </header>
     <Transition name="m-panel-collapse">
-      <div v-show="!isCollapsed" :id="contentId" class="m-panel__content">
-        <slot />
+      <div v-show="!isCollapsed" class="m-panel__collapse">
+        <div :id="contentId" class="m-panel__content">
+          <slot />
+        </div>
       </div>
     </Transition>
     <footer v-if="$slots.footer && !isCollapsed" class="m-panel__footer">
