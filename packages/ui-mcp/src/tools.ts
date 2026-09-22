@@ -1289,7 +1289,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         spacing: '--m-space-*',
         radius: '--m-radius-sm/md/lg',
         typography: '--m-font-size-xs/sm/md/lg',
-        motion: '--m-motion-fast/normal',
+        motion: '--m-motion-fast/normal/enter/exit + presets (fade, scale-fade, zoom, slide-*)',
       },
       composition: designRules.composition,
       actions: {

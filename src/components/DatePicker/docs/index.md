@@ -84,6 +84,7 @@ import { MDatePicker } from 'morya-ui'
 | `invalid` | `boolean` | `false` | 校验失败态。 |
 | `teleport` | `boolean` | `true` | 面板 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
 | `errorMessage` | `string` | — | — |
 | `helpText` | `string` | — | — |
 | `id` | `string` | — | — |

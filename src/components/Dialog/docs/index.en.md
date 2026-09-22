@@ -76,6 +76,7 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}`), clicking the 
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | Return `false` to keep the dialog open |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | Runs before X / Esc / mask dismiss; return `false` to keep open |
 | `ariaLabel` | `string` | — | Accessible dialog name. |
+| `transition` | `string \| false` | `'dialog'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Backdrop pass-through; key `root`. |
 
 ## Styling & attrs

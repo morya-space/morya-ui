@@ -97,6 +97,7 @@ close()
 | `fullscreen` | `boolean` | `false` | 遮罩铺满视口（Teleport 到 `body`）。 |
 | `lock` | `boolean` | `false` | 显示时禁止页面滚动。 |
 | `delay` | `number` | `0` | 显示前延迟（ms）。 |
+| `transition` | `string \| false` | `'loading'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs)。 |
 
 ## Events

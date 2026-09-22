@@ -50,6 +50,7 @@ The root list and side submenu use built-in `MScrollbar` (`max-height: min(18rem
 | `modelValue` | `boolean` | `false` | Popup visibility (`v-model`). |
 | `teleport` | `boolean` | `true` | Teleport when `popup`; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. |
+| `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 

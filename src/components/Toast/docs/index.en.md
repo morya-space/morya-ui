@@ -60,6 +60,7 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 | `max` | `number` | — | Max visible items; oldest is dropped (service queue only) |
 | `teleport` | `boolean` | `true` | Whether to Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target |
+| `transition` | `string \| false` | `'slide-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
 
 ### ToastMessage
 

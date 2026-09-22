@@ -61,6 +61,7 @@ import { MToast, toast, useToast } from 'morya-ui'
 | `teleport` | `boolean` | `true` | 浮层 Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
 | `auto` | `boolean` | — | — |
+| `transition` | `string \| false` | `'slide-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
 
 ### ToastMessage
 

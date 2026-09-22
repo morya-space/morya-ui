@@ -41,6 +41,7 @@ import { MButton, MDrawer } from 'morya-ui'
 | `blockScroll` | `boolean` | `true` | 打开时锁定 `body` 滚动。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
+| `transition` | `string \| false` | `'drawer'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
 | `beforeClose` | [AsyncGuard](/docs/types#AsyncGuard) | — | — |
 | `closeOnEsc` | `boolean` | — | — |
 | `closeOnOutsideClick` | `boolean` | — | — |

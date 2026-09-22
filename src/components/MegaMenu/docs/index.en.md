@@ -53,6 +53,7 @@ Top-level entries without `items` behave as plain links via `command`.
 | `model` | `MegaMenuItem[]` | `[]` | Top-level items. |
 | `teleport` | `boolean` | `true` | Panel Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. |
+| `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 

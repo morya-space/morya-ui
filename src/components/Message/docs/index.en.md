@@ -80,6 +80,7 @@ When a manual host exists, the API will not mount a second one.
 | --- | --- | --- | --- |
 | `teleport` | `boolean` | `true` | Whether to Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target |
+| `transition` | `string \| false` | `'message'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
 | `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | Host placement |
 | `max` | `number` | — | Max visible items; oldest is dropped |
 

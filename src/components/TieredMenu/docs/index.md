@@ -50,6 +50,7 @@ import { MTieredMenu  } from 'morya-ui'
 | `modelValue` | `boolean` | `false` | popup 可见性（`v-model`）。 |
 | `teleport` | `boolean` | `true` | popup 时 Teleport；默认 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标。 |
+| `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
 | `placement` | `FloatingOverlayPlacement` | — | — |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 

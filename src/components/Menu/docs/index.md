@@ -104,6 +104,7 @@ import {  MMenu } from 'morya-ui'
 | `embedded` | `boolean` | `!popup` | 嵌入布局：去边框与最小宽度。 |
 | `teleport` | `boolean` | `true` | popup 时 Teleport 到 `appendTo`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Teleport 目标；未传时使用 ConfigProvider。 |
+| `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 

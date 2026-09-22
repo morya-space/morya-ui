@@ -102,6 +102,7 @@ Use `inverted` with `MLayoutSider`'s `inverted` on dark backgrounds.
 | `embedded` | `boolean` | `!popup` | Embed in layout (no border/min-width). |
 | `teleport` | `boolean` | `true` | Teleport popup to `appendTo`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Teleport target; falls back to ConfigProvider. |
+| `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
