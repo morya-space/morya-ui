@@ -90,6 +90,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 - Enums → `MSelect` / `MTreeSelect`; action menus → `MDropdown`.
 - Destructive → `MConfirmDialog` / `MConfirmPopup`.
 - Feedback → default **`message`**; `toast` only for summary+detail / async. See [feedback.md](references/feedback.md).
+- Motion → intensity with `useMotion` (`full` / `reduced` / `none`); overlay enter/exit with `transition` prop or `createMoryaUI({ motion: { transitions } })` — do not invent a second animation stack. Prefer MCP / docs `motion` guide.
 - **Before craft:** for each unfamiliar or newly written `M*` usage, call MCP **`get_component` / `get_example`**, then **`validate_usage`**. Fix every `unknown-prop` / `unknown-event` before delivery.
 - `recommend_page(includeScaffold: true)` returns the **golden page source** when one exists — remap copy/data only; never treat generated fallback as the visual target.
 
@@ -99,7 +100,7 @@ Run **before** delivery. Do not stop at a structurally correct shell.
 
 - **Ops:** apply [visual-craft.md](references/visual-craft.md) § Ops polish (one primary, menu icons, `MStatus` in tables, designed empty, no decorative cards).
 - **Account / Flow:** one calm brand or empty-state cue from § Atmosphere recipes; form errors via `errorMessage` / token `role="alert"`.
-- **Express:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions with `prefers-reduced-motion`.
+- **Express:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions; honor `useMotion` / `prefers-reduced-motion` (or `respectReducedMotion`).
 - **All lanes:** responsive, focus visible, domain-real copy (active voice).
 
 Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): use as an **extra** pass when the user asks to improve an existing screen. See [visual-craft.md](references/visual-craft.md) § Polish modes.

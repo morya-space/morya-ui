@@ -684,7 +684,8 @@ export const designRules = {
     spacing: '--m-space-*',
     radius: '--m-radius-sm/md/lg',
     typography: '--m-font-size-xs/sm/md/lg',
-    motion: '--m-motion-fast/normal/enter/exit + presets (fade, scale-fade, zoom, slide-*)',
+    motion:
+      '--m-motion-fast/normal/enter/exit/distance/ease; intensity via useMotion (data-m-motion); enter/exit via motion.transitions / transition prop (fade, scale-fade, zoom, slide-*, dialog, drawer, …)',
   },
   composition: {
     workflow: [
@@ -794,6 +795,7 @@ export const designRules = {
     '图标按钮建议提供 aria-label；表单字段建议有可见 label',
     '浮层默认 Teleport 到 body；有明确布局约束时再改 appendTo',
     '优先使用组件 documented variant，少写深层 CSS 覆盖',
+    '动效强度用 useMotion；进出场预设用 motion.transitions / 组件 transition，勿臆造动画库 API',
   ],
 } as const
 

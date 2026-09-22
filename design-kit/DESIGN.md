@@ -31,6 +31,10 @@
 | 错误 | `--m-color-danger` |
 | 区块间距 | `--m-space-4` / `--m-space-6` |
 | 圆角 / 阴影 | `--m-radius-md` / `--m-shadow-md` |
+| 动效时长 | `--m-motion-fast/normal/enter/exit` |
+| 进出场位移 / 缓动 | `--m-motion-distance` / `--m-motion-ease` |
+
+动效强度用 `useMotion`（`data-m-motion`）；进出场预设用 `motion.transitions` / 组件 `transition`（见文档站「动效」）。
 
 ## 4. 禁止项
 
@@ -52,3 +56,4 @@
 - 包：`morya-ui` · 样式：`morya-ui/styles.css`
 - 页面配方：`.agents/skills/morya-ui-pages/`（及 setup 时勾选的 companion）
 - 主题 API：`useTheme` / `useDensity` / `useMotion`
+- 动效预设：`createMoryaUI({ motion })`、`componentDefaults.*.transition`、浮层 `transition` prop；详情见文档 `/docs/motion`
