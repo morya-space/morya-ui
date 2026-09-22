@@ -14,10 +14,10 @@ Morya UI components consume semantic CSS variables (`--m-*`) only. The catalog b
 | --- | --- |
 | `[data-theme="dark"]` | Light / dark theme |
 | `[data-m-density]` | Spacing and control height density |
-| `[data-m-motion]` | Motion duration preferences |
+| `[data-m-motion]` | Motion duration / intensity (`full` / `reduced` / `none`) |
 | `createMoryaUI({ zIndex })` / `MConfigProvider` | Writes globals such as `--m-z-base` |
 
-See [Theme](/docs/theme) for theme APIs and density behavior.
+See [Theme](/docs/theme) for theme APIs and density. See [Motion](/docs/motion) for enter/exit presets and `useMotion`.
 
 ## Full catalog
 

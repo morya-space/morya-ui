@@ -1,6 +1,6 @@
 ---
 title: AI setup
-order: 11
+order: 12
 description: How @morya-ui/setup, Agent skill, and MCP work together for AI-assisted pages.
 ---
 

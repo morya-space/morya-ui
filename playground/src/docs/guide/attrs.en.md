@@ -1,6 +1,6 @@
 ---
 title: Styling & attrs
-order: 6
+order: 7
 description: Where class, style, events, and pt land on each component.
 ---
 

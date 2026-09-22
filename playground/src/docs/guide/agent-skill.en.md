@@ -1,6 +1,6 @@
 ---
 title: Agent Skill
-order: 12
+order: 13
 description: Consumer morya-ui-pages skill — when it triggers, vs rules/MCP, and the surface map.
 ---
 

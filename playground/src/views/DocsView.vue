@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { DocSection } from '../composables/useDocSections'
 import type { ResolvedGuideDoc } from '../docs/guide/loadGuideDocs'
 import { MScrollbar } from 'morya-ui'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ComponentDocViewer from '../components/ComponentDocViewer.vue'
+import DocSectionNav from '../components/DocSectionNav.vue'
 import MobileSidebarShell from '../components/MobileSidebarShell.vue'
-import { SITE_LOGO_URL } from '../config/site'
 import { guideDocExists, listGuideDocs, resolveGuideDoc } from '../docs/guide/loadGuideDocs'
 import { useDocsI18n } from '../i18n'
 
@@ -15,13 +16,35 @@ const { lang, t } = useDocsI18n()
 const guides = computed(() => listGuideDocs(lang.value))
 const activeDoc = ref<ResolvedGuideDoc | null>(null)
 const docLoading = ref(false)
+const docViewerRef = ref<InstanceType<typeof ComponentDocViewer> | null>(null)
+const docSections = ref<DocSection[]>([])
+const activeDocSectionId = ref('')
+const contentScroll = ref<InstanceType<typeof MScrollbar> | null>(null)
 
 const activeSlug = computed(() => {
   const slug = route.params.slug
   return typeof slug === 'string' && slug ? slug : 'introduction'
 })
 
+function onDocSectionsChange(sections: DocSection[]) {
+  docSections.value = sections
+}
+
+function onActiveDocSectionChange(id: string) {
+  activeDocSectionId.value = id
+}
+
+function scrollToDocSection(id: string) {
+  activeDocSectionId.value = id
+  docViewerRef.value?.scrollToSection(id)
+}
+
 watch([activeSlug, lang], async () => {
+  await nextTick()
+  contentScroll.value?.setScrollTop?.(0)
+  docSections.value = []
+  activeDocSectionId.value = ''
+
   if (!guideDocExists(activeSlug.value, lang.value)) {
     if (guides.value[0]) {
       void router.replace({ name: 'docs', params: { slug: guides.value[0].slug } })
@@ -44,16 +67,6 @@ watch([activeSlug, lang], async () => {
       scroll-class="docs-scroll"
       body-class="docs-sidebar__body"
     >
-      <RouterLink class="docs-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-        <img
-          class="docs-brand__logo"
-          :src="SITE_LOGO_URL"
-          width="24"
-          height="24"
-          alt=""
-        >
-        <span>Morya UI</span>
-      </RouterLink>
       <h1 class="docs-sidebar__title">
         {{ t.docsTitle }}
       </h1>
@@ -71,15 +84,18 @@ watch([activeSlug, lang], async () => {
     </MobileSidebarShell>
 
     <main class="docs-main">
-      <MScrollbar class="docs-scroll">
+      <MScrollbar ref="contentScroll" class="docs-scroll">
         <div class="docs-main__body">
           <p v-if="docLoading" class="docs-loading" aria-live="polite">
             …
           </p>
           <ComponentDocViewer
             v-else-if="activeDoc"
+            ref="docViewerRef"
             :key="`${activeDoc.slug}-${lang}`"
             :doc="{ name: activeDoc.slug, frontmatter: activeDoc.frontmatter, component: activeDoc.component }"
+            @sections-change="onDocSectionsChange"
+            @active-section-change="onActiveDocSectionChange"
           />
           <section v-else class="docs-missing">
             <h2>{{ t.docsMissing }}</h2>
@@ -90,6 +106,18 @@ watch([activeSlug, lang], async () => {
         </div>
       </MScrollbar>
     </main>
+
+    <aside class="docs-toc" :aria-label="t.componentSection">
+      <MScrollbar class="docs-scroll">
+        <div class="docs-toc__body">
+          <DocSectionNav
+            :sections="docSections"
+            :active-id="activeDocSectionId"
+            @select="scrollToDocSection"
+          />
+        </div>
+      </MScrollbar>
+    </aside>
   </div>
 </template>
 
@@ -124,26 +152,9 @@ watch([activeSlug, lang], async () => {
 .docs-shell {
   display: grid;
   flex: 1;
-  grid-template-columns: 15.5rem minmax(0, 1fr);
+  grid-template-columns: 15.5rem minmax(0, 1fr) 14rem;
   min-height: 0;
   overflow: hidden;
-}
-
-.docs-brand {
-  align-items: center;
-  color: var(--m-color-text);
-  display: inline-flex;
-  font-family: var(--docs-display);
-  font-size: 0.92rem;
-  font-weight: 700;
-  gap: 0.5rem;
-  letter-spacing: -0.03em;
-  text-decoration: none;
-}
-
-.docs-brand__logo {
-  border-radius: 0.4rem;
-  display: block;
 }
 
 .docs-sidebar__title {
@@ -151,7 +162,7 @@ watch([activeSlug, lang], async () => {
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.04em;
-  margin: 1rem 0 1.15rem;
+  margin: 0 0 0.85rem;
 }
 
 .docs-nav {
@@ -184,20 +195,49 @@ watch([activeSlug, lang], async () => {
   font-weight: 700;
 }
 
-.docs-main {
+.docs-main,
+.docs-toc {
+  display: flex;
+  flex-direction: column;
   min-height: 0;
   min-width: 0;
+  overflow: hidden;
+}
+
+.docs-toc {
+  background: color-mix(in srgb, var(--m-color-surface) 94%, transparent);
+  border-left: 1px solid var(--docs-edge);
+}
+
+.docs-toc__body {
+  padding: 2.5rem 1.25rem;
+}
+
+.docs-toc__body :deep(.doc-section-nav) {
+  position: sticky;
+  top: 0;
 }
 
 .docs-main__body {
   margin: 0 auto;
   max-width: 48rem;
   padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+  width: 100%;
 }
 
 .docs-loading,
 .docs-missing {
   color: var(--m-color-text-muted);
+}
+
+@media (max-width: 1100px) {
+  .docs-shell {
+    grid-template-columns: 15.5rem minmax(0, 1fr);
+  }
+
+  .docs-toc {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
@@ -212,6 +252,10 @@ watch([activeSlug, lang], async () => {
 
   .docs-scroll {
     height: auto;
+  }
+
+  .docs-toc {
+    display: none;
   }
 }
 </style>

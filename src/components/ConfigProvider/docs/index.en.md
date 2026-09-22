@@ -18,7 +18,9 @@ Provide global defaults for the component tree via `MConfigProvider` or `createM
 | `inputVariant` | Default input style: `outlined` / `filled` |
 | `zIndex` | Base overlay z-index |
 | `locale` | Strings for confirm / empty / loading / placeholder, etc. Pass built-in packs `zhCN` / `enUS` |
-| `componentDefaults` | Per-component default props (e.g. `Input.size`, `Space.size`). Local props win |
+| `componentDefaults` | Per-component default props (e.g. `Input.size`, `Dialog.transition`). Local props win |
+| `motion` | Enter/exit presets by overlay role (`dialog` / `drawer` / `popup` / `toast` / `tooltip` / `overlay`) |
+| `respectReducedMotion` | Honor OS `prefers-reduced-motion` (default `true`) |
 
 ## Size
 
@@ -66,9 +68,11 @@ createApp(App)
       density: 'comfortable',
       zIndex: 1100,
       locale: enUS,
+      motion: { transitions: { popup: 'slide-up', dialog: 'zoom' } },
       componentDefaults: {
         Space: { size: 'small' },
         Input: { clearable: true },
+        Select: { transition: 'fade' },
       },
     }),
   )
@@ -89,14 +93,44 @@ Precedence: **component props > `MConfigProvider` > `createMoryaUI()` > built-in
 
 ## Theme and motion
 
-Theme and motion APIs are also exported from `morya-ui` and can be used alongside ConfigProvider:
+Intensity and enter/exit presets are separate layers:
+
+- **Intensity**: `useMotion()` → `full` / `reduced` / `none` (writes `data-m-motion`)
+- **Shape**: `motion.transitions[role]` / `componentDefaults.*.transition` / component `transition` prop
 
 ```ts
-import { useMotion, useTheme } from 'morya-ui'
+import { createMoryaUI, registerMotionPreset, useMotion, useTheme } from 'morya-ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
+
+app.use(createMoryaUI({
+  respectReducedMotion: false, // docs demos may ignore OS reduced motion
+  motion: { transitions: { popup: 'slide-up' } },
+}))
+
+registerMotionPreset('brand', { name: 'm-brand' })
 ```
+
+Full preset list and demos: [Motion](/docs/motion). Light/dark and density: [Theme](/docs/theme).
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `config` | `Partial<MGlobalConfig>` | — | Full config object (same as the shorthands below). |
+| `appendTo` | `string \| HTMLElement` | `'body'` | Default Teleport target for overlays. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | Default form control size. |
+| `inputVariant` | `'outlined' \| 'filled'` | — | Default input surface. |
+| `zIndex` | `number` | — | Base overlay z-index. |
+| `density` | `'compact' \| 'comfortable' \| 'spacious'` | — | Global content density. |
+| `theme` | `'light' \| 'dark' \| 'system'` | — | Color theme; `system` follows OS. |
+| `locale` | `MLocale` | — | Copy pack (`zhCN` / `enUS`). |
+| `componentDefaults` | `Record<string, object>` | — | Per-component default props (including `transition`). |
+| `motion` | `{ transitions?: Partial<Record<role, string>> }` | — | Enter/exit presets by overlay role. |
+| `respectReducedMotion` | `boolean` | `true` | Honor OS `prefers-reduced-motion`. |
+| `globalDensity` | `boolean` | `true` | Also write density / theme to `documentElement`. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## Events
 

@@ -24,7 +24,7 @@ import { MBlockUI } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `blocked` | `boolean` | `false` | 是否遮罩。 |
-| `transition` | `string \| false` | `'blockui'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
+| `transition` | `string \| false` | `'blockui'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 

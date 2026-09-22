@@ -97,7 +97,7 @@ close()
 | `fullscreen` | `boolean` | `false` | Cover the viewport (teleported to `body`). |
 | `lock` | `boolean` | `false` | Prevent page scrolling while visible. |
 | `delay` | `number` | `0` | Delay before showing (ms). |
-| `transition` | `string \| false` | `'loading'` | Enter/exit motion preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
+| `transition` | `string \| false` | `'loading'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## Events

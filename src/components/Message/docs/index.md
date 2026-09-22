@@ -80,7 +80,7 @@ import { message, MMessage, useMessage } from 'morya-ui'
 | --- | --- | --- | --- |
 | `teleport` | `boolean` | `true` | 是否 Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
-| `transition` | `string \| false` | `'message'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
+| `transition` | `string \| false` | `'message'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | 宿主位置 |
 | `max` | `number` | — | 同时可见条数；超出丢掉最旧一条 |
 | `auto` | `boolean` | — | — |

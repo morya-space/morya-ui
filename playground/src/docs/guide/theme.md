@@ -1,7 +1,7 @@
 ---
 title: 主题
 order: 5
-description: 亮暗主题、设计令牌与动效偏好。
+description: 亮暗主题、设计令牌与内容密度。
 ---
 
 # 主题
@@ -39,10 +39,8 @@ toggleTheme()
 | `--m-opacity-disabled` | 禁用态透明度 |
 | `--m-z-base` / `--m-z-overlay` / `--m-z-dropdown` / `--m-z-toast` | 浮层层叠（Config `zIndex` 会写 `--m-z-base`） |
 | `--m-menu-min-width` / `--m-control-affix-*` | 菜单最小宽、输入清除区尺寸 |
-| `--m-motion-fast/normal/enter/exit` | 过渡时长 |
-| `--m-motion-distance` / `--m-motion-ease` | 进出场位移与缓动 |
-| `--m-motion-spin*` / `--m-motion-pulse` / `--m-motion-skeleton` | 循环指示器（`reduced`/`none` 下为 `0ms`） |
-| `--m-motion-loading-*` | Loading 变体循环时长 |
+
+动效相关 token（`--m-motion-*`）见 [动效](/docs/motion)。
 
 ## 内容密度
 
@@ -57,53 +55,6 @@ setDensity('compact') // 'compact' | 'comfortable' | 'spacious'
 应用级可用 `createMoryaUI({ density: 'compact' })` 或 `<MConfigProvider density="compact">`。
 
 在组件页侧栏「主题」可临时改主色、圆角与密度，用于本地预览。
-
-## 动效偏好
-
-```ts
-import { useMotion } from 'morya-ui'
-
-const { preference, setMotion } = useMotion()
-setMotion('full') // 'full' | 'reduced' | 'none'
-```
-
-- `full`：标准过渡与浮层动画  
-- `reduced`：缩短时长、弱化位移  
-- `none`：立即切换  
-
-强度（`useMotion`）与「选哪套进出场效果」正交，见下节。
-
-## 动效预设（进出场）
-
-浮层组件通过命名预设选择 Vue `<Transition>` 效果，解析优先级：
-
-1. 组件 `transition` prop  
-2. `componentDefaults[Component].transition`  
-3. `motion.transitions[role]`（`dialog` / `drawer` / `popup` / `toast` / `tooltip` / `overlay`）  
-4. 组件内置默认  
-
-内置 id：`fade`、`scale-fade`、`slide-fade`、`zoom`、`dialog`、`slide-up` / `slide-down` / `slide-left` / `slide-right`、`drawer`、`popover`、`loading`、`blockui`、`message`、`none`。  
-`transition={false}` 或 `'none'` 关闭 CSS 过渡。
-
-```ts
-import { createMoryaUI, registerMotionPreset } from 'morya-ui'
-
-app.use(createMoryaUI({
-  motion: { transitions: { popup: 'slide-up', dialog: 'zoom' } },
-  componentDefaults: { Select: { transition: 'fade' } },
-}))
-
-// 自定义：先写好 .m-brand-enter-active 等 CSS，再注册
-registerMotionPreset('brand', { name: 'm-brand' })
-```
-
-```vue
-<MDialog transition="slide-up" />
-<MSelect :transition="false" />
-```
-
-```vue preview src="./demos/theme/MotionPresets.vue"
-```
 
 ## 控件尺寸与聚焦
 
@@ -127,3 +78,5 @@ box-shadow: var(--m-focus-shadow); /* 0 0 0 2px primary@20% */
 ## 与 ConfigProvider
 
 主题切换是「视觉层」；`MConfigProvider` / `createMoryaUI` 负责尺寸、文案、浮层挂载等「行为默认值」。二者可同时使用，详见 [全局配置](/docs/config)。
+
+进出场与 `useMotion` 见 [动效](/docs/motion)。

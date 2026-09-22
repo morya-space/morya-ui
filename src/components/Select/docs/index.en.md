@@ -113,7 +113,7 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | `teleport` | `boolean` | `true` | Menu Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target. `'self'` renders in place. |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | Menu alignment. |
-| `transition` | `string \| false` | `'scale-fade'` | Menu enter/exit preset; `false` / `'none'` disables. See [Theme · Motion presets](/docs/guide/theme). |
+| `transition` | `string \| false` | `'scale-fade'` | Menu enter/exit preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
 | `id` | `string` | — | Control id. |
 | `errorMessage` | `string` | — | Validation error copy. |
 | `name` | `string` | — | Native name when a hidden input is present. |

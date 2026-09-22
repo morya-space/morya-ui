@@ -1,6 +1,6 @@
 ---
 title: 全局配置
-order: 8
+order: 9
 description: ConfigProvider、createMoryaUI 与 useMConfig。
 ---
 

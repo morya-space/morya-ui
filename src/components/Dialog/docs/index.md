@@ -76,7 +76,7 @@ import { MButton, MDialog } from 'morya-ui'
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
 | `ariaLabel` | `string` | — | 对话框可访问名称。 |
-| `transition` | `string \| false` | `'dialog'` | 进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
+| `transition` | `string \| false` | `'dialog'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 遮罩层（backdrop）透传，键名 `root`。 |
 
 ## 样式与 attrs

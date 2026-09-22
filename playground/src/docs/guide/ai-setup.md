@@ -1,6 +1,6 @@
 ---
 title: AI 接入
-order: 11
+order: 12
 description: 用 AI 生成业务页面时，如何配合 @morya-ui/setup、Agent Skill 与 MCP。
 ---
 

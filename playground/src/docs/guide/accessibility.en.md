@@ -1,6 +1,6 @@
 ---
 title: Accessibility
-order: 10
+order: 11
 description: Accessibility conventions when using Morya UI components.
 ---
 
@@ -106,5 +106,5 @@ Recent work includes:
 
 ## See also
 
-- [Theme](/docs/theme): motion preference and tokens
+- [Motion](/docs/motion): intensity, enter/exit presets, and tokens\n- [Theme](/docs/theme): light/dark and density
 - [Configuration](/docs/config): locale and defaults

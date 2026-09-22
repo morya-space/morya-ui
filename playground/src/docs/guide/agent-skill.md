@@ -1,6 +1,6 @@
 ---
 title: Agent Skill
-order: 12
+order: 13
 description: 消费方 morya-ui-pages skill：何时触发、与 rules/MCP 分工、页面类型地图。
 ---
 

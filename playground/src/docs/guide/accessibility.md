@@ -1,6 +1,6 @@
 ---
 title: 无障碍
-order: 10
+order: 11
 description: 使用 Morya UI 组件时的无障碍约定与检查清单。
 ---
 
@@ -106,5 +106,5 @@ setMotion('reduced') // 或 'none'
 
 ## 相关
 
-- [主题](/docs/theme)：动效偏好与令牌
+- [动效](/docs/motion)：强度偏好、进出场预设与令牌\n- [主题](/docs/theme)：亮暗色与密度
 - [全局配置](/docs/config)：语言包与默认尺寸

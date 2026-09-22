@@ -18,7 +18,9 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 | `inputVariant` | 输入框默认 `outlined` / `filled` |
 | `zIndex` | 浮层基础层级 |
 | `locale` | 确认 / 空态 / 加载 / 占位等文案。可传入内置语言包 `zhCN` / `enUS` |
-| `componentDefaults` | 按组件覆盖默认 props（如 `Input.size`、`Space.size`）。局部 Props 优先 |
+| `componentDefaults` | 按组件覆盖默认 props（如 `Input.size`、`Space.size`、`Dialog.transition`）。局部 Props 优先 |
+| `motion` | 按角色覆盖进出场预设（`dialog` / `drawer` / `popup` / `toast` / `tooltip` / `overlay`） |
+| `respectReducedMotion` | 是否尊重系统 `prefers-reduced-motion`（默认 `true`） |
 
 ## Size
 
@@ -66,9 +68,11 @@ createApp(App)
       density: 'comfortable',
       zIndex: 1100,
       locale: enUS,
+      motion: { transitions: { popup: 'slide-up', dialog: 'zoom' } },
       componentDefaults: {
         Space: { size: 'small' },
         Input: { clearable: true },
+        Select: { transition: 'fade' },
       },
     }),
   )
@@ -89,14 +93,26 @@ const config = useMConfig()
 
 ## 主题与动效
 
-主题与动效 API 由 `morya-ui` 一并导出，可与 ConfigProvider 并用：
+主题强度与进出场预设是两层：
+
+- **强度**：`useMotion()` → `full` / `reduced` / `none`（写 `data-m-motion`）
+- **形态**：`motion.transitions[role]` / `componentDefaults.*.transition` / 组件 `transition` prop
 
 ```ts
-import { useMotion, useTheme } from 'morya-ui'
+import { createMoryaUI, registerMotionPreset, useMotion, useTheme } from 'morya-ui'
 
 const { setTheme, toggleTheme } = useTheme()
 const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
+
+app.use(createMoryaUI({
+  respectReducedMotion: false, // 演示站可忽略系统减弱动效
+  motion: { transitions: { popup: 'slide-up' } },
+}))
+
+registerMotionPreset('brand', { name: 'm-brand' })
 ```
+
+完整预设列表与 demo 见 [动效](/docs/motion)；亮暗与密度见 [主题](/docs/theme)。
 
 ## Props
 
@@ -110,7 +126,9 @@ const { setMotion } = useMotion() // 'full' | 'reduced' | 'none'
 | `density` | `'compact' \| 'comfortable' \| 'spacious'` | — | 全局内容密度。 |
 | `theme` | `'light' \| 'dark' \| 'system'` | — | 主题；`system` 跟随系统偏好。 |
 | `locale` | `MLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
-| `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props。 |
+| `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props（含 `transition`）。 |
+| `motion` | `{ transitions?: Partial<Record<role, string>> }` | — | 按浮层角色覆盖进出场预设。 |
+| `respectReducedMotion` | `boolean` | `true` | 是否尊重系统 `prefers-reduced-motion`。 |
 | `globalDensity` | `boolean` | `true` | 是否将 density / theme 写入 `documentElement`。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 

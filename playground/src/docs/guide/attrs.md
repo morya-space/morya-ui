@@ -1,6 +1,6 @@
 ---
 title: 样式与 attrs
-order: 6
+order: 7
 description: class、style、事件与 pt 在各组件上的落点约定。
 ---
 

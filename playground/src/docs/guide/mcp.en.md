@@ -1,6 +1,6 @@
 ﻿---
 title: Agent MCP
-order: 13
+order: 14
 description: Optional MCP server for AI clients that support the Model Context Protocol.
 ---
 

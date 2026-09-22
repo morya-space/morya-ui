@@ -49,7 +49,8 @@ pnpm add morya-ui
 - [快速上手](/docs/quick-start)：安装与最小示例
 - [一键接入](/docs/setup)：`@morya-ui/setup` 安装库与 AI 配置
 - [设计令牌](/docs/design-tokens)：全部 `--m-*` 变量与用途
-- [主题](/docs/theme)：亮暗色与动效
+- [主题](/docs/theme)：亮暗色与密度
+- [动效](/docs/motion)：强度偏好与进出场预设
 - [样式与 attrs](/docs/attrs)：fallthrough、`pt`、事件在各组件上的落点
 - [API 类型](/docs/types)：Props 里 `FieldPassThrough`、`SelectOption` 等类型的结构
 - [全局配置](/docs/config)：`ConfigProvider` / `createMoryaUI`

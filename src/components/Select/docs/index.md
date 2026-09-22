@@ -113,7 +113,7 @@ import { MSelect } from 'morya-ui'
 | `teleport` | `boolean` | `true` | 菜单 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | 菜单对齐。 |
-| `transition` | `string \| false` | `'scale-fade'` | 菜单进出场动效预设；`false` / `'none'` 关闭。见[主题 · 动效预设](/docs/guide/theme)。 |
+| `transition` | `string \| false` | `'scale-fade'` | 菜单进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `id` | `string` | — | 控件 id。 |
 | `errorMessage` | `string` | — | 校验错误文案；与 `invalid` 同时生效时优先展示。 |
 | `name` | `string` | — | 辅助原生 name（存在隐藏 input 时）。 |

@@ -14,10 +14,10 @@ Morya UI 组件只消费语义化 CSS 变量（`--m-*`），不维护第二套�
 | --- | --- |
 | `[data-theme="dark"]` | 亮 / 暗色主题 |
 | `[data-m-density]` | 间距与控件高度密度 |
-| `[data-m-motion]` | 动效时长 |
+| `[data-m-motion]` | 动效时长 / 强度（`full` / `reduced` / `none`） |
 | `createMoryaUI({ zIndex })` / `MConfigProvider` | 写入 `--m-z-base` 等全局配置 |
 
-主题 API 与密度说明见 [主题](/docs/theme)。
+主题与密度见 [主题](/docs/theme)；进出场预设与 `useMotion` 见 [动效](/docs/motion)。
 
 ## 完整列表
 

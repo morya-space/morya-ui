@@ -49,7 +49,8 @@ Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](
 - [Quick start](/docs/quick-start): install and a minimal example
 - [One-shot setup](/docs/setup): `@morya-ui/setup` for library and AI config
 - [Design tokens](/docs/design-tokens): full `--m-*` reference
-- [Theme](/docs/theme): light/dark and motion
+- [Theme](/docs/theme): light/dark and density
+- [Motion](/docs/motion): intensity preference and enter/exit presets
 - [Styling & attrs](/docs/attrs): fallthrough, `pt`, and event placement
 - [API types](/docs/types): shapes behind names like `FieldPassThrough`, `SelectOption`
 - [Configuration](/docs/config): `ConfigProvider` / `createMoryaUI`

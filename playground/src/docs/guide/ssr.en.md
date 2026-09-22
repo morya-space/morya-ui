@@ -1,6 +1,6 @@
 ﻿---
 title: SSR & meta-frameworks
-order: 9
+order: 10
 description: Use Morya UI with Nuxt, Astro, Vite SSR, and other server-rendered setups.
 ---
 
