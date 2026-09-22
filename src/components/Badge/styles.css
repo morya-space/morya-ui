@@ -22,6 +22,7 @@
     min-height: var(--m-badge-size);
     min-width: var(--m-badge-size);
     padding: var(--m-badge-padding-y) var(--m-badge-padding-x);
+    position: relative;
     vertical-align: middle;
 }
 
@@ -129,26 +130,43 @@
 }
 
 .m-badge--processing {
-    animation: m-badge-pulse var(--m-motion-pulse) ease-in-out infinite;
+    animation: none;
+    isolation: isolate;
 }
 
-@keyframes m-badge-pulse {
+.m-badge--processing::after {
+    background: currentColor;
+    border-radius: inherit;
+    content: '';
+    inset: 0;
+    opacity: 0.35;
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    animation: m-badge-pulse-ring var(--m-motion-pulse) ease-in-out infinite;
+}
+
+@keyframes m-badge-pulse-ring {
     0%,
     100% {
-        box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);
+        opacity: 0.35;
+        transform: scale(1);
     }
     70% {
-        box-shadow: 0 0 0 0.4rem transparent;
+        opacity: 0;
+        transform: scale(1.85);
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-badge--processing {
+    html:not([data-m-ignore-reduced-motion]) .m-badge--processing::after {
         animation: none;
+        opacity: 0;
     }
 }
 
-[data-m-motion="reduced"] .m-badge--processing,
-[data-m-motion="none"] .m-badge--processing {
+[data-m-motion="reduced"] .m-badge--processing::after,
+[data-m-motion="none"] .m-badge--processing::after {
     animation: none;
+    opacity: 0;
 }

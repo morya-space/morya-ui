@@ -53,6 +53,7 @@
 }
 
 .m-accordion__collapse {
+    contain: layout;
     display: grid;
     grid-template-rows: 1fr;
     min-height: 0;

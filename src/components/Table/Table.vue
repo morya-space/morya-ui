@@ -578,8 +578,8 @@ watch(() => props.filters, (value) => {
   emit('filter', value ?? null)
 }, { deep: true })
 
-watch(pageItems, (value) => emit('updatePageItems', value), { deep: true })
-watch(totalItems, (value) => emit('updateTotalItems', value), { deep: true })
+watch(pageItems, (value) => emit('updatePageItems', value))
+watch(totalItems, (value) => emit('updateTotalItems', value))
 watch(currentPaginationNumber, (value) => {
   emit('update:page', value)
   emit('page', value)

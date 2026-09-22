@@ -13,6 +13,7 @@ Column width rules:
 - Columns with `width` use a fixed width
 - Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally
 - Horizontal scrolling appears when the total minimum width exceeds the container
+- Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars
 
 ## Import
 

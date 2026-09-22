@@ -87,7 +87,7 @@ watch(
       innerExpanded.value = next
     }
   },
-  { immediate: true, deep: true },
+  { immediate: true },
 )
 
 watch(

@@ -423,6 +423,7 @@ a.m-menu__item-content--selected:visited {
 }
 
 .m-menu__submenu {
+    contain: layout;
     display: grid;
     grid-template-rows: 1fr;
 }

@@ -297,7 +297,10 @@ onMounted(() => {
 })
 
 onUpdated(() => {
-  if (!props.native) scheduleUpdate()
+  if (props.native) return
+  // Default path: ResizeObserver on wrap/view covers size changes.
+  // Keep Vue-update remeasure when observers are off (noresize) or unavailable.
+  if (props.noresize || typeof ResizeObserver === 'undefined') scheduleUpdate()
 })
 
 onActivated(() => {

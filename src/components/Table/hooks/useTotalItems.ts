@@ -1,7 +1,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { TableFilterOption, TableItem } from '../types'
 import type { ClientSortOptions, EmitsEventName } from './internal'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { getItemValue, sameTableItem } from '../utils'
 
 /** Compare two cell values; numeric when both sides are numbers, lexical otherwise. */
@@ -98,9 +98,6 @@ export function useTotalItems(
     }
     return itemsFiltered
   })
-
-  watch(itemsFiltering, (newVal) => {
-  }, { immediate: true, deep: true })
 
   function recursionMultiSort(
     sortByArr: string[],

@@ -75,6 +75,8 @@ watch(
 let startPos = 0
 let startPx = 0
 let usableSize = 0
+let dragRaf = 0
+let pendingDragEvent: MouseEvent | PointerEvent | null = null
 
 function unwrap(nodes: VNode[]): VNode[] {
   const result: VNode[] = []
@@ -152,15 +154,36 @@ function setFromPx(nextPx: number, container: number) {
   commitSize(pxToSize(clamped, container, mode))
 }
 
-function onMove(event: MouseEvent | PointerEvent) {
-  if (!dragging.value || usableSize <= 0 || props.disabled) return
+function flushDragMove() {
+  dragRaf = 0
+  const event = pendingDragEvent
+  pendingDragEvent = null
+  if (!event || !dragging.value || usableSize <= 0 || props.disabled) return
   const pos = isVertical.value ? event.clientY : event.clientX
   setFromPx(startPx + (pos - startPos), usableSize)
   emit('drag-move', event)
 }
 
+function onMove(event: MouseEvent | PointerEvent) {
+  if (!dragging.value || usableSize <= 0 || props.disabled) return
+  pendingDragEvent = event
+  if (dragRaf) return
+  dragRaf = requestAnimationFrame(flushDragMove)
+}
+
 function stopDrag(event?: Event) {
   if (!dragging.value) return
+  if (dragRaf) {
+    cancelAnimationFrame(dragRaf)
+    dragRaf = 0
+  }
+  const pending = pendingDragEvent
+  pendingDragEvent = null
+  if (pending && usableSize > 0 && !props.disabled) {
+    const pos = isVertical.value ? pending.clientY : pending.clientX
+    setFromPx(startPx + (pos - startPos), usableSize)
+    emit('drag-move', pending)
+  }
   dragging.value = false
   window.removeEventListener('mousemove', onMove, true)
   window.removeEventListener('mouseup', stopDragListener, true)
@@ -264,7 +287,6 @@ onBeforeUnmount(() => {
         'm-splitter--disabled': disabled,
       },
     ]"
-    :aria-orientation="isVertical ? 'vertical' : 'horizontal'"
   >
     <div class="m-splitter__panel" :class="pane1Class" :style="panel1Style">
       <slot v-if="slots.panel1" name="panel1" />

@@ -45,7 +45,7 @@ onMounted(async () => {
   observer = new MutationObserver(() => {
     syncControl()
   })
-  observer.observe(bodyRef.value, { childList: true, subtree: true })
+  observer.observe(bodyRef.value, { childList: true, subtree: false })
 })
 
 onBeforeUnmount(() => {
