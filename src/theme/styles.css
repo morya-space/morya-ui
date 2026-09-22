@@ -80,7 +80,7 @@
     --m-motion-ease: cubic-bezier(0.2, 0, 0, 1);
     --m-motion-enter: 180ms;
     --m-motion-exit: 130ms;
-    --m-motion-distance: 0.5rem;
+    --m-motion-distance: 1rem;
     --m-motion-spin: 1s;
     --m-motion-spin-dash: 1.5s;
     --m-motion-spin-fast: 0.8s;

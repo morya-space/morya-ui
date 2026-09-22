@@ -41,6 +41,101 @@
     transform: translateY(100%);
 }
 
+/*
+ * Generic presets on the backdrop: opacity-only mask, motion on `.m-drawer`.
+ */
+.m-drawer-backdrop.m-fade-enter-from,
+.m-drawer-backdrop.m-fade-leave-to,
+.m-drawer-backdrop.m-scale-fade-enter-from,
+.m-drawer-backdrop.m-scale-fade-leave-to,
+.m-drawer-backdrop.m-slide-fade-enter-from,
+.m-drawer-backdrop.m-slide-fade-leave-to,
+.m-drawer-backdrop.m-zoom-enter-from,
+.m-drawer-backdrop.m-zoom-leave-to,
+.m-drawer-backdrop.m-slide-up-enter-from,
+.m-drawer-backdrop.m-slide-up-leave-to,
+.m-drawer-backdrop.m-slide-down-enter-from,
+.m-drawer-backdrop.m-slide-down-leave-to,
+.m-drawer-backdrop.m-slide-left-enter-from,
+.m-drawer-backdrop.m-slide-left-leave-to,
+.m-drawer-backdrop.m-slide-right-enter-from,
+.m-drawer-backdrop.m-slide-right-leave-to {
+    transform: none;
+}
+
+.m-fade-enter-active .m-drawer,
+.m-scale-fade-enter-active .m-drawer,
+.m-slide-fade-enter-active .m-drawer,
+.m-zoom-enter-active .m-drawer,
+.m-slide-up-enter-active .m-drawer,
+.m-slide-down-enter-active .m-drawer,
+.m-slide-left-enter-active .m-drawer,
+.m-slide-right-enter-active .m-drawer {
+    transition:
+        opacity var(--m-motion-enter) var(--m-motion-ease),
+        transform var(--m-motion-enter) var(--m-motion-ease);
+}
+
+.m-fade-leave-active .m-drawer,
+.m-scale-fade-leave-active .m-drawer,
+.m-slide-fade-leave-active .m-drawer,
+.m-zoom-leave-active .m-drawer,
+.m-slide-up-leave-active .m-drawer,
+.m-slide-down-leave-active .m-drawer,
+.m-slide-left-leave-active .m-drawer,
+.m-slide-right-leave-active .m-drawer {
+    transition:
+        opacity var(--m-motion-exit) var(--m-motion-ease),
+        transform var(--m-motion-exit) var(--m-motion-ease);
+}
+
+.m-fade-enter-from .m-drawer,
+.m-fade-leave-to .m-drawer {
+    opacity: 0;
+}
+
+.m-scale-fade-enter-from .m-drawer,
+.m-scale-fade-leave-to .m-drawer {
+    opacity: 0;
+    transform: translateY(calc(var(--m-motion-distance) * -1)) scale(0.96);
+}
+
+.m-slide-fade-enter-from .m-drawer,
+.m-slide-fade-leave-to .m-drawer {
+    opacity: 0;
+    transform: translateY(calc(var(--m-motion-distance) * -1));
+}
+
+.m-zoom-enter-from .m-drawer,
+.m-zoom-leave-to .m-drawer {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.m-slide-up-enter-from .m-drawer,
+.m-slide-up-leave-to .m-drawer {
+    opacity: 0;
+    transform: translateY(var(--m-motion-distance));
+}
+
+.m-slide-down-enter-from .m-drawer,
+.m-slide-down-leave-to .m-drawer {
+    opacity: 0;
+    transform: translateY(calc(var(--m-motion-distance) * -1));
+}
+
+.m-slide-left-enter-from .m-drawer,
+.m-slide-left-leave-to .m-drawer {
+    opacity: 0;
+    transform: translateX(var(--m-motion-distance));
+}
+
+.m-slide-right-enter-from .m-drawer,
+.m-slide-right-leave-to .m-drawer {
+    opacity: 0;
+    transform: translateX(calc(var(--m-motion-distance) * -1));
+}
+
 .m-drawer-backdrop {
     inset: 0;
     position: fixed;
@@ -151,7 +246,23 @@
     html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-active,
     html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active,
     html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active .m-drawer {
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-fade-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-fade-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-active .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-active .m-drawer {
         transition: none;
     }
 
@@ -162,7 +273,21 @@
     html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--top,
     html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--top,
     html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--bottom,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--bottom {
+    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--bottom,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-to .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-to .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-to .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-to .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-to .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-to .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-from .m-drawer,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-to .m-drawer {
         transform: none;
     }
 }
@@ -171,10 +296,42 @@
 [data-m-motion="reduced"] .m-drawer-leave-active,
 [data-m-motion="reduced"] .m-drawer-enter-active .m-drawer,
 [data-m-motion="reduced"] .m-drawer-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-fade-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-fade-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-scale-fade-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-scale-fade-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-fade-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-fade-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-zoom-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-zoom-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-up-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-up-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-down-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-down-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-left-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-left-leave-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-right-enter-active .m-drawer,
+[data-m-motion="reduced"] .m-slide-right-leave-active .m-drawer,
 [data-m-motion="none"] .m-drawer-enter-active,
 [data-m-motion="none"] .m-drawer-leave-active,
 [data-m-motion="none"] .m-drawer-enter-active .m-drawer,
-[data-m-motion="none"] .m-drawer-leave-active .m-drawer {
+[data-m-motion="none"] .m-drawer-leave-active .m-drawer,
+[data-m-motion="none"] .m-fade-enter-active .m-drawer,
+[data-m-motion="none"] .m-fade-leave-active .m-drawer,
+[data-m-motion="none"] .m-scale-fade-enter-active .m-drawer,
+[data-m-motion="none"] .m-scale-fade-leave-active .m-drawer,
+[data-m-motion="none"] .m-slide-fade-enter-active .m-drawer,
+[data-m-motion="none"] .m-slide-fade-leave-active .m-drawer,
+[data-m-motion="none"] .m-zoom-enter-active .m-drawer,
+[data-m-motion="none"] .m-zoom-leave-active .m-drawer,
+[data-m-motion="none"] .m-slide-up-enter-active .m-drawer,
+[data-m-motion="none"] .m-slide-up-leave-active .m-drawer,
+[data-m-motion="none"] .m-slide-down-enter-active .m-drawer,
+[data-m-motion="none"] .m-slide-down-leave-active .m-drawer,
+[data-m-motion="none"] .m-slide-left-enter-active .m-drawer,
+[data-m-motion="none"] .m-slide-left-leave-active .m-drawer,
+[data-m-motion="none"] .m-slide-right-enter-active .m-drawer,
+[data-m-motion="none"] .m-slide-right-leave-active .m-drawer {
     transition: none;
 }
 
@@ -186,6 +343,20 @@
 [data-m-motion="reduced"] .m-drawer-leave-to .m-drawer--top,
 [data-m-motion="reduced"] .m-drawer-enter-from .m-drawer--bottom,
 [data-m-motion="reduced"] .m-drawer-leave-to .m-drawer--bottom,
+[data-m-motion="reduced"] .m-scale-fade-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-scale-fade-leave-to .m-drawer,
+[data-m-motion="reduced"] .m-slide-fade-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-slide-fade-leave-to .m-drawer,
+[data-m-motion="reduced"] .m-zoom-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-zoom-leave-to .m-drawer,
+[data-m-motion="reduced"] .m-slide-up-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-slide-up-leave-to .m-drawer,
+[data-m-motion="reduced"] .m-slide-down-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-slide-down-leave-to .m-drawer,
+[data-m-motion="reduced"] .m-slide-left-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-slide-left-leave-to .m-drawer,
+[data-m-motion="reduced"] .m-slide-right-enter-from .m-drawer,
+[data-m-motion="reduced"] .m-slide-right-leave-to .m-drawer,
 [data-m-motion="none"] .m-drawer-enter-from .m-drawer--left,
 [data-m-motion="none"] .m-drawer-leave-to .m-drawer--left,
 [data-m-motion="none"] .m-drawer-enter-from .m-drawer--right,
@@ -193,6 +364,20 @@
 [data-m-motion="none"] .m-drawer-enter-from .m-drawer--top,
 [data-m-motion="none"] .m-drawer-leave-to .m-drawer--top,
 [data-m-motion="none"] .m-drawer-enter-from .m-drawer--bottom,
-[data-m-motion="none"] .m-drawer-leave-to .m-drawer--bottom {
+[data-m-motion="none"] .m-drawer-leave-to .m-drawer--bottom,
+[data-m-motion="none"] .m-scale-fade-enter-from .m-drawer,
+[data-m-motion="none"] .m-scale-fade-leave-to .m-drawer,
+[data-m-motion="none"] .m-slide-fade-enter-from .m-drawer,
+[data-m-motion="none"] .m-slide-fade-leave-to .m-drawer,
+[data-m-motion="none"] .m-zoom-enter-from .m-drawer,
+[data-m-motion="none"] .m-zoom-leave-to .m-drawer,
+[data-m-motion="none"] .m-slide-up-enter-from .m-drawer,
+[data-m-motion="none"] .m-slide-up-leave-to .m-drawer,
+[data-m-motion="none"] .m-slide-down-enter-from .m-drawer,
+[data-m-motion="none"] .m-slide-down-leave-to .m-drawer,
+[data-m-motion="none"] .m-slide-left-enter-from .m-drawer,
+[data-m-motion="none"] .m-slide-left-leave-to .m-drawer,
+[data-m-motion="none"] .m-slide-right-enter-from .m-drawer,
+[data-m-motion="none"] .m-slide-right-leave-to .m-drawer {
     transform: none;
 }

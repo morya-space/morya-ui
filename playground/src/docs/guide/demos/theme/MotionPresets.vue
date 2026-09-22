@@ -10,7 +10,7 @@ import {
 } from 'morya-ui'
 import { computed, ref } from 'vue'
 
-const presets = [
+const sharedPresets = [
   'fade',
   'scale-fade',
   'slide-fade',
@@ -21,20 +21,24 @@ const presets = [
   'slide-right',
 ] as const
 
-const dialogPreset = ref<(typeof presets)[number]>('zoom')
-const popupPreset = ref<(typeof presets)[number]>('scale-fade')
-const drawerPreset = ref<(typeof presets)[number]>('drawer')
-const toastPreset = ref<(typeof presets)[number]>('slide-fade')
+const dialogPresets = ['dialog', ...sharedPresets] as const
+const drawerPresets = ['drawer', ...sharedPresets] as const
+
+const dialogPreset = ref<(typeof dialogPresets)[number]>('dialog')
+const popupPreset = ref<(typeof sharedPresets)[number]>('scale-fade')
+const drawerPreset = ref<(typeof drawerPresets)[number]>('drawer')
+const toastPreset = ref<(typeof sharedPresets)[number]>('slide-fade')
 
 const dialogOpen = ref(false)
 const drawerOpen = ref(false)
 const selectValue = ref<string | undefined>()
 
+/** Also publish via ConfigProvider so global `motion.transitions` path is exercised. */
 const motion = computed(() => ({
   transitions: {
     dialog: dialogPreset.value,
     popup: popupPreset.value,
-    drawer: drawerPreset.value === 'drawer' ? 'drawer' : drawerPreset.value,
+    drawer: drawerPreset.value,
     toast: toastPreset.value,
   },
 }))
@@ -52,32 +56,34 @@ function showToast() {
 
 <template>
   <MConfigProvider :motion="motion" :respect-reduced-motion="false" :global-density="false">
-    <MToast />
+    <MToast :transition="toastPreset" />
     <div class="motion-preset-lab">
+      <p class="motion-preset-lab__hint">
+        切换预设后重新打开组件；Dialog 推荐先对比 <code>dialog</code> 与 <code>slide-up</code>。
+      </p>
       <div class="motion-preset-lab__row">
         <label>
           Dialog
           <select v-model="dialogPreset">
-            <option v-for="id in presets" :key="id" :value="id">{{ id }}</option>
+            <option v-for="id in dialogPresets" :key="id" :value="id">{{ id }}</option>
           </select>
         </label>
         <label>
           Select / popup
           <select v-model="popupPreset">
-            <option v-for="id in presets" :key="id" :value="id">{{ id }}</option>
+            <option v-for="id in sharedPresets" :key="id" :value="id">{{ id }}</option>
           </select>
         </label>
         <label>
           Drawer
           <select v-model="drawerPreset">
-            <option value="drawer">drawer</option>
-            <option v-for="id in presets" :key="id" :value="id">{{ id }}</option>
+            <option v-for="id in drawerPresets" :key="id" :value="id">{{ id }}</option>
           </select>
         </label>
         <label>
           Toast
           <select v-model="toastPreset">
-            <option v-for="id in presets" :key="id" :value="id">{{ id }}</option>
+            <option v-for="id in sharedPresets" :key="id" :value="id">{{ id }}</option>
           </select>
         </label>
       </div>
@@ -90,15 +96,26 @@ function showToast() {
           v-model="selectValue"
           class="motion-preset-lab__select"
           :options="selectOptions"
+          :transition="popupPreset"
           placeholder="打开下拉"
           size="small"
         />
       </div>
 
-      <MDialog v-model="dialogOpen" title="Dialog 预设" width="22rem">
+      <MDialog
+        v-model="dialogOpen"
+        :transition="dialogPreset"
+        title="Dialog 预设"
+        width="22rem"
+      >
         <p style="margin:0;color:var(--m-color-text-muted)">当前：{{ dialogPreset }}</p>
       </MDialog>
-      <MDrawer v-model="drawerOpen" header="Drawer 预设" position="right">
+      <MDrawer
+        v-model="drawerOpen"
+        :transition="drawerPreset"
+        header="Drawer 预设"
+        position="right"
+      >
         <p style="margin:0;color:var(--m-color-text-muted)">当前：{{ drawerPreset }}</p>
       </MDrawer>
     </div>
@@ -112,6 +129,15 @@ function showToast() {
   padding: var(--m-space-3);
   border: 1px solid var(--m-color-border);
   border-radius: var(--m-radius-md);
+}
+.motion-preset-lab__hint {
+  margin: 0;
+  font-size: var(--m-font-size-sm);
+  color: var(--m-color-text-muted);
+}
+.motion-preset-lab__hint code {
+  font-family: var(--m-font-mono, ui-monospace, monospace);
+  font-size: 0.9em;
 }
 .motion-preset-lab__row {
   display: flex;

@@ -245,16 +245,142 @@
     transform: scale(0.36);
 }
 
+/*
+ * Generic presets put Vue Transition classes on the backdrop. Keep the mask as
+ * opacity-only and drive transform on `.m-dialog-zoom` (same structure as `dialog`).
+ */
+.m-dialog-backdrop.m-fade-enter-from,
+.m-dialog-backdrop.m-fade-leave-to,
+.m-dialog-backdrop.m-scale-fade-enter-from,
+.m-dialog-backdrop.m-scale-fade-leave-to,
+.m-dialog-backdrop.m-slide-fade-enter-from,
+.m-dialog-backdrop.m-slide-fade-leave-to,
+.m-dialog-backdrop.m-zoom-enter-from,
+.m-dialog-backdrop.m-zoom-leave-to,
+.m-dialog-backdrop.m-slide-up-enter-from,
+.m-dialog-backdrop.m-slide-up-leave-to,
+.m-dialog-backdrop.m-slide-down-enter-from,
+.m-dialog-backdrop.m-slide-down-leave-to,
+.m-dialog-backdrop.m-slide-left-enter-from,
+.m-dialog-backdrop.m-slide-left-leave-to,
+.m-dialog-backdrop.m-slide-right-enter-from,
+.m-dialog-backdrop.m-slide-right-leave-to {
+    transform: none;
+}
+
+.m-fade-enter-active .m-dialog-zoom,
+.m-scale-fade-enter-active .m-dialog-zoom,
+.m-slide-fade-enter-active .m-dialog-zoom,
+.m-zoom-enter-active .m-dialog-zoom,
+.m-slide-up-enter-active .m-dialog-zoom,
+.m-slide-down-enter-active .m-dialog-zoom,
+.m-slide-left-enter-active .m-dialog-zoom,
+.m-slide-right-enter-active .m-dialog-zoom {
+    transition:
+        opacity var(--m-motion-enter) var(--m-motion-ease),
+        transform var(--m-motion-enter) var(--m-motion-ease);
+}
+
+.m-fade-leave-active .m-dialog-zoom,
+.m-scale-fade-leave-active .m-dialog-zoom,
+.m-slide-fade-leave-active .m-dialog-zoom,
+.m-zoom-leave-active .m-dialog-zoom,
+.m-slide-up-leave-active .m-dialog-zoom,
+.m-slide-down-leave-active .m-dialog-zoom,
+.m-slide-left-leave-active .m-dialog-zoom,
+.m-slide-right-leave-active .m-dialog-zoom {
+    transition:
+        opacity var(--m-motion-exit) var(--m-motion-ease),
+        transform var(--m-motion-exit) var(--m-motion-ease);
+}
+
+.m-fade-enter-from .m-dialog-zoom,
+.m-fade-leave-to .m-dialog-zoom {
+    opacity: 0;
+}
+
+.m-scale-fade-enter-from .m-dialog-zoom,
+.m-scale-fade-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: translateY(calc(var(--m-motion-distance) * -1)) scale(0.96);
+}
+
+.m-slide-fade-enter-from .m-dialog-zoom,
+.m-slide-fade-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: translateY(calc(var(--m-motion-distance) * -1));
+}
+
+.m-zoom-enter-from .m-dialog-zoom,
+.m-zoom-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.m-slide-up-enter-from .m-dialog-zoom,
+.m-slide-up-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: translateY(var(--m-motion-distance));
+}
+
+.m-slide-down-enter-from .m-dialog-zoom,
+.m-slide-down-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: translateY(calc(var(--m-motion-distance) * -1));
+}
+
+.m-slide-left-enter-from .m-dialog-zoom,
+.m-slide-left-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: translateX(var(--m-motion-distance));
+}
+
+.m-slide-right-enter-from .m-dialog-zoom,
+.m-slide-right-leave-to .m-dialog-zoom {
+    opacity: 0;
+    transform: translateX(calc(var(--m-motion-distance) * -1));
+}
+
 @media (prefers-reduced-motion: reduce) {
     html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-active,
     html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active,
     html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active .m-dialog-zoom {
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-fade-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-fade-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-active .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-active .m-dialog-zoom {
         transition: none;
     }
 
     html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-to .m-dialog-zoom {
+    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-to .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-from .m-dialog-zoom,
+    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-to .m-dialog-zoom {
         transform: none;
     }
 }
@@ -263,16 +389,76 @@
 [data-m-motion="reduced"] .m-dialog-leave-active,
 [data-m-motion="reduced"] .m-dialog-enter-active .m-dialog-zoom,
 [data-m-motion="reduced"] .m-dialog-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-fade-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-fade-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-scale-fade-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-scale-fade-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-fade-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-fade-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-zoom-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-zoom-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-up-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-up-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-down-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-down-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-left-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-left-leave-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-right-enter-active .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-right-leave-active .m-dialog-zoom,
 [data-m-motion="none"] .m-dialog-enter-active,
 [data-m-motion="none"] .m-dialog-leave-active,
 [data-m-motion="none"] .m-dialog-enter-active .m-dialog-zoom,
-[data-m-motion="none"] .m-dialog-leave-active .m-dialog-zoom {
+[data-m-motion="none"] .m-dialog-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-fade-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-fade-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-scale-fade-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-scale-fade-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-fade-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-fade-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-zoom-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-zoom-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-up-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-up-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-down-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-down-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-left-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-left-leave-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-right-enter-active .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-right-leave-active .m-dialog-zoom {
     transition: none;
 }
 
 [data-m-motion="reduced"] .m-dialog-enter-from .m-dialog-zoom,
 [data-m-motion="reduced"] .m-dialog-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-scale-fade-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-scale-fade-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-fade-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-fade-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-zoom-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-zoom-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-up-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-up-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-down-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-down-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-left-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-left-leave-to .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-right-enter-from .m-dialog-zoom,
+[data-m-motion="reduced"] .m-slide-right-leave-to .m-dialog-zoom,
 [data-m-motion="none"] .m-dialog-enter-from .m-dialog-zoom,
-[data-m-motion="none"] .m-dialog-leave-to .m-dialog-zoom {
+[data-m-motion="none"] .m-dialog-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-scale-fade-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-scale-fade-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-fade-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-fade-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-zoom-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-zoom-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-up-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-up-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-down-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-down-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-left-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-left-leave-to .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-right-enter-from .m-dialog-zoom,
+[data-m-motion="none"] .m-slide-right-leave-to .m-dialog-zoom {
     transform: none;
 }

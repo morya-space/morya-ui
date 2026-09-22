@@ -73,7 +73,7 @@ const motionTokens: MotionTokens = {
   ease: "cubic-bezier(0.2, 0, 0, 1)",
   enter: "180ms",
   exit: "130ms",
-  distance: "0.5rem",
+  distance: "1rem",
   spin: "1s",
   spinDash: "1.5s",
   spinFast: "0.8s",

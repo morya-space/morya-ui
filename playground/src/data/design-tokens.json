@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T07:56:54.030Z",
+  "generatedAt": "2026-09-22T07:11:55.829Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 348,
+  "tokenCount": 352,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1294,16 +1294,6 @@
       }
     },
     {
-      "name": "--m-datepicker-input-end-padding",
-      "category": "component",
-      "source": "src/components/DatePicker/styles.css",
-      "default": "calc(var(--m-space-2) + 1.25rem)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Input End Padding",
-        "en-US": "Component-specific token: Datepicker Input End Padding"
-      }
-    },
-    {
       "name": "--m-datepicker-panel-min-width",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
@@ -1896,7 +1886,7 @@
       "name": "--m-loading-aurora-glow",
       "category": "component",
       "source": "src/components/Loading/styles.css",
-      "default": "3s",
+      "default": "var(--m-motion-loading-aurora)",
       "description": {
         "zh-CN": "组件专用相关变量：Loading Aurora Glow",
         "en-US": "Component-specific token: Loading Aurora Glow"
@@ -1906,7 +1896,7 @@
       "name": "--m-loading-bounce",
       "category": "component",
       "source": "src/components/Loading/styles.css",
-      "default": "0.6s",
+      "default": "var(--m-motion-loading-bounce)",
       "description": {
         "zh-CN": "组件专用相关变量：Loading Bounce",
         "en-US": "Component-specific token: Loading Bounce"
@@ -1986,7 +1976,7 @@
       "name": "--m-loading-circular-rotate",
       "category": "component",
       "source": "src/components/Loading/styles.css",
-      "default": "2s",
+      "default": "var(--m-motion-loading-circular-rotate)",
       "description": {
         "zh-CN": "组件专用相关变量：Loading Circular Rotate",
         "en-US": "Component-specific token: Loading Circular Rotate"
@@ -2006,7 +1996,7 @@
       "name": "--m-loading-pulse",
       "category": "component",
       "source": "src/components/Loading/styles.css",
-      "default": "1.8s",
+      "default": "var(--m-motion-loading-pulse)",
       "description": {
         "zh-CN": "组件专用相关变量：Loading Pulse",
         "en-US": "Component-specific token: Loading Pulse"
@@ -2036,7 +2026,7 @@
       "name": "--m-loading-stardust",
       "category": "component",
       "source": "src/components/Loading/styles.css",
-      "default": "1.6s",
+      "default": "var(--m-motion-loading-stardust)",
       "description": {
         "zh-CN": "组件专用相关变量：Loading Stardust",
         "en-US": "Component-specific token: Loading Stardust"
@@ -2454,6 +2444,76 @@
       }
     },
     {
+      "name": "--m-motion-loading-aurora",
+      "category": "motion",
+      "source": "src/theme/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "动效相关变量：Motion Loading Aurora",
+        "en-US": "Motion token: Motion Loading Aurora"
+      }
+    },
+    {
+      "name": "--m-motion-loading-bounce",
+      "category": "motion",
+      "source": "src/theme/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "动效相关变量：Motion Loading Bounce",
+        "en-US": "Motion token: Motion Loading Bounce"
+      }
+    },
+    {
+      "name": "--m-motion-loading-circular-rotate",
+      "category": "motion",
+      "source": "src/theme/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "动效相关变量：Motion Loading Circular Rotate",
+        "en-US": "Motion token: Motion Loading Circular Rotate"
+      }
+    },
+    {
+      "name": "--m-motion-loading-pulse",
+      "category": "motion",
+      "source": "src/theme/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "动效相关变量：Motion Loading Pulse",
+        "en-US": "Motion token: Motion Loading Pulse"
+      }
+    },
+    {
+      "name": "--m-motion-loading-stardust",
+      "category": "motion",
+      "source": "src/theme/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "动效相关变量：Motion Loading Stardust",
+        "en-US": "Motion token: Motion Loading Stardust"
+      }
+    },
+    {
       "name": "--m-motion-normal",
       "category": "motion",
       "source": "src/theme/styles.css",
@@ -2471,7 +2531,11 @@
       "name": "--m-motion-pulse",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "1.2s",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Pulse",
         "en-US": "Motion token: Motion Pulse"
@@ -2481,7 +2545,11 @@
       "name": "--m-motion-scrollbar-hide",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "120ms",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "80ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Scrollbar Hide",
         "en-US": "Motion token: Motion Scrollbar Hide"
@@ -2491,7 +2559,11 @@
       "name": "--m-motion-scrollbar-show",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "340ms",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "160ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Scrollbar Show",
         "en-US": "Motion token: Motion Scrollbar Show"
@@ -2501,7 +2573,11 @@
       "name": "--m-motion-skeleton",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "1.4s",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Skeleton",
         "en-US": "Motion token: Motion Skeleton"
@@ -2511,7 +2587,11 @@
       "name": "--m-motion-spin",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "1s",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Spin",
         "en-US": "Motion token: Motion Spin"
@@ -2521,7 +2601,11 @@
       "name": "--m-motion-spin-dash",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "1.5s",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Spin Dash",
         "en-US": "Motion token: Motion Spin Dash"
@@ -2531,7 +2615,11 @@
       "name": "--m-motion-spin-fast",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "0.8s",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Spin Fast",
         "en-US": "Motion token: Motion Spin Fast"
@@ -2541,7 +2629,11 @@
       "name": "--m-motion-spin-medium",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "0.7s",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "0ms",
+        "motion-none": "0ms"
+      },
       "description": {
         "zh-CN": "动效相关变量：Motion Spin Medium",
         "en-US": "Motion token: Motion Spin Medium"
