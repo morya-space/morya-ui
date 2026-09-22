@@ -33,6 +33,7 @@ function toSlug(folder) {
 }
 
 const PICKER_SUFFIX_COMPONENTS = new Set(['Select', 'TreeSelect', 'CascadeSelect'])
+const SELECT_OVERLAY_COMPONENTS = new Set(['Select', 'AutoComplete', 'CascadeSelect', 'TreeSelect'])
 
 const entries = componentFolders.map((folder) => {
   const slug = toSlug(folder)
@@ -45,6 +46,7 @@ const entries = componentFolders.map((folder) => {
           'shared/styles/control-affix-icon.css',
         ]
       : []),
+    ...(SELECT_OVERLAY_COMPONENTS.has(folder) ? ['shared/styles/select-overlay.css'] : []),
     ...deps[folder].flatMap((dep) => {
       const rel = `components/${dep}/styles.css`
       return existsSync(join(src, rel)) ? [rel] : []

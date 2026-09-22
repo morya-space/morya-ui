@@ -25,6 +25,7 @@ for (const c of comps) {
 }
 
 const PICKER_SUFFIX_COMPONENTS = new Set(['Select', 'TreeSelect', 'CascadeSelect'])
+const SELECT_OVERLAY_COMPONENTS = new Set(['Select', 'AutoComplete', 'CascadeSelect', 'TreeSelect'])
 const STYLE_IMPORT_RE = /^import\s+['"]\.\/style['"]\s*;?\s*\r?\n/gm
 
 function writeIfChanged(path, next) {
@@ -47,6 +48,9 @@ for (const c of comps) {
       "import '../../shared/styles/control-suffix.css'",
       "import '../../shared/styles/control-affix-icon.css'",
     )
+  }
+  if (SELECT_OVERLAY_COMPONENTS.has(c)) {
+    lines.push("import '../../shared/styles/select-overlay.css'")
   }
   for (const dep of deps[c]) {
     if (existsSync(join(compsDir, dep, 'styles.css'))) {
