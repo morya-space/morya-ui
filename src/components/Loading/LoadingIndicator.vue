@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { MSizeInput } from '../../shared/types'
 import type { LoadingEffect } from './types'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useMLocale } from '../../locale'
 import { useComponentDefaults } from '../../shared/config'
 import { resolveSizeClass } from '../../shared/types'
+import { usePauseOffscreen } from '../../shared/usePauseOffscreen'
 import { normalizeLoadingEffect } from './types'
 
 defineOptions({ name: 'MLoadingIndicator' })
@@ -17,6 +18,8 @@ const props = defineProps<{
 }>()
 
 const locale = useMLocale()
+const rootRef = ref<HTMLElement | null>(null)
+const { pauseAttrs } = usePauseOffscreen(rootRef, true)
 const defaults = useComponentDefaults('Loading')
 const effect = computed(() => normalizeLoadingEffect(props.effect ?? defaults.value.effect))
 const size = computed(() => props.size ?? (defaults.value.size as MSizeInput | undefined))
@@ -32,6 +35,8 @@ const accessibleName = computed(() => props.ariaLabel ?? (props.text ? undefined
 
 <template>
   <div
+    ref="rootRef"
+    v-bind="pauseAttrs"
     class="m-loading-indicator"
     :class="sizeClass"
     role="status"

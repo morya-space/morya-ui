@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { BadgeProps } from './types'
-import { computed, useSlots } from 'vue'
+import { computed, ref, useSlots } from 'vue'
 import { normalizeSeverity, resolveSizeClass } from '../../shared/types'
+import { usePauseOffscreen } from '../../shared/usePauseOffscreen'
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   severity: 'primary',
@@ -9,6 +10,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
 })
 
 const slots = useSlots()
+const animRef = ref<HTMLElement | null>(null)
+const { pauseAttrs } = usePauseOffscreen(animRef, () => props.processing)
 const hasContent = computed(() => Boolean(slots.default))
 const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
 const sizeTone = computed(() => resolveSizeClass(props.size))
@@ -43,11 +46,11 @@ const badgeStyle = computed(() => {
 <template>
   <span v-if="hasContent" class="m-badge-wrap">
     <slot />
-    <span :class="badgeClass" :style="badgeStyle">
+    <span ref="animRef" v-bind="pauseAttrs" :class="badgeClass" :style="badgeStyle">
       <template v-if="!isDot">{{ displayValue }}</template>
     </span>
   </span>
-  <span v-else :class="badgeClass">
+  <span v-else ref="animRef" v-bind="pauseAttrs" :class="badgeClass">
     <template v-if="!isDot">{{ displayValue }}</template>
   </span>
 </template>

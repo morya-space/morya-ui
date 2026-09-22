@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
 import type { SkeletonProps } from './types'
-import { computed, useAttrs } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { usePauseOffscreen } from '../../shared/usePauseOffscreen'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
@@ -15,6 +16,11 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
+const rootRef = ref<HTMLElement | null>(null)
+const { pauseAttrs } = usePauseOffscreen(
+  rootRef,
+  () => props.animation === 'wave',
+)
 
 const count = computed(() => Math.max(1, props.repeat ?? 1))
 
@@ -35,8 +41,20 @@ const itemStyle = computed(() => ({
 </script>
 
 <template>
-  <div v-if="count > 1" v-bind="rootAttrs" class="m-skeleton-repeat">
+  <div
+    v-if="count > 1"
+    ref="rootRef"
+    v-bind="{ ...rootAttrs, ...pauseAttrs }"
+    class="m-skeleton-repeat"
+  >
     <div v-for="index in count" :key="index" :class="itemClass" :style="itemStyle" aria-hidden="true" />
   </div>
-  <div v-else v-bind="rootAttrs" :class="itemClass" :style="itemStyle" aria-hidden="true" />
+  <div
+    v-else
+    ref="rootRef"
+    v-bind="{ ...rootAttrs, ...pauseAttrs }"
+    :class="itemClass"
+    :style="itemStyle"
+    aria-hidden="true"
+  />
 </template>

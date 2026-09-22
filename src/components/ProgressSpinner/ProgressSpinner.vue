@@ -5,6 +5,7 @@ import { computed, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { resolveSizeClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { usePauseOffscreen } from '../../shared/usePauseOffscreen'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ProgressSpinnerProps>(), {
@@ -23,6 +24,8 @@ const label = computed(() => props.ariaLabel ?? locale.value.loading)
 const wrapping = computed(() => Boolean(slots.default))
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const visible = ref(props.show && props.delay <= 0)
+const rootRef = ref<HTMLElement | SVGElement | null>(null)
+const { pauseAttrs } = usePauseOffscreen(rootRef, () => visible.value)
 let delayTimer: ReturnType<typeof setTimeout> | null = null
 
 function clearDelay() {
@@ -66,7 +69,7 @@ const sizeClass = computed(() => ({
 </script>
 
 <template>
-  <div v-if="wrapping" v-bind="rootAttrs" class="m-progress-spinner-wrap" :class="{ 'm-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
+  <div v-if="wrapping" ref="rootRef" v-bind="{ ...rootAttrs, ...pauseAttrs }" class="m-progress-spinner-wrap" :class="{ 'm-progress-spinner-wrap--active': visible }" :aria-busy="visible || undefined">
     <div class="m-progress-spinner-wrap__content" :inert="visible || undefined">
       <slot />
     </div>
@@ -95,7 +98,8 @@ const sizeClass = computed(() => ({
   </div>
   <svg
     v-else
-    v-bind="rootAttrs"
+    ref="rootRef"
+    v-bind="{ ...rootAttrs, ...pauseAttrs }"
     class="m-progress-spinner"
     :class="sizeClass"
     viewBox="0 0 50 50"

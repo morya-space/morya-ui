@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { IconName } from "../Icon/types";
 import type { StatusProps } from "./types";
-import { computed, useSlots } from "vue";
+import { computed, ref, useSlots } from "vue";
 import { useConfiguredSize } from "../../shared/config";
 import { normalizeSeverity } from "../../shared/types";
+import { usePauseOffscreen } from "../../shared/usePauseOffscreen";
 import MIcon from "../Icon/Icon.vue";
 
 const props = withDefaults(defineProps<StatusProps>(), {
@@ -14,6 +15,7 @@ const props = withDefaults(defineProps<StatusProps>(), {
 });
 
 const slots = useSlots();
+const rootRef = ref<HTMLElement | null>(null);
 const sizeClass = useConfiguredSize("Status", () => props.size);
 const severityTone = computed(
     () => normalizeSeverity(props.severity) ?? "secondary",
@@ -46,6 +48,11 @@ const showDot = computed(
     () => props.variant !== "text" && !showIcon.value,
 );
 
+const { pauseAttrs } = usePauseOffscreen(
+    rootRef,
+    () => props.processing && (showDot.value || showIcon.value),
+);
+
 const rootClass = computed(() => [
     "m-status",
     `m-status--${severityTone.value}`,
@@ -66,9 +73,9 @@ const rootStyle = computed(() =>
 </script>
 
 <template>
-  <span :class="rootClass" :style="rootStyle" role="status">
+  <span ref="rootRef" v-bind="pauseAttrs" :class="rootClass" :style="rootStyle" role="status">
     <span v-if="showDot" class="m-status__dot" aria-hidden="true" />
-<span v-else-if="showIcon" class="m-status__icon" aria-hidden="true">
+    <span v-else-if="showIcon" class="m-status__icon" aria-hidden="true">
       <slot name="icon">
         <MIcon v-if="resolvedIcon" :name="resolvedIcon" />
       </slot>

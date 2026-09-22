@@ -212,6 +212,16 @@
     scroll-behavior: auto !important;
 }
 
+/* Off-screen looping indicators (usePauseOffscreen → data-m-anim-paused) */
+[data-m-anim-paused],
+[data-m-anim-paused]::before,
+[data-m-anim-paused]::after,
+[data-m-anim-paused] *,
+[data-m-anim-paused] *::before,
+[data-m-anim-paused] *::after {
+    animation-play-state: paused !important;
+}
+
 /* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */
 :root,
 [data-m-density="comfortable"] {

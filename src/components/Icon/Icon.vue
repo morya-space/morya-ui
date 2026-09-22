@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { IconProps } from './types'
-import { computed, useSlots } from 'vue'
+import { computed, ref, useSlots } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
+import { usePauseOffscreen } from '../../shared/usePauseOffscreen'
 import { getIconDefinition, isIconName } from './icons'
 
 const props = withDefaults(defineProps<IconProps>(), { size: 'md' })
 const slots = useSlots()
+const rootRef = ref<HTMLElement | null>(null)
 const sizeClass = computed(() => resolveSizeClass(props.size))
 
 const definition = computed(() => {
@@ -15,17 +17,21 @@ const definition = computed(() => {
 
 const useSlot = computed(() => Boolean(slots.default))
 const hasContent = computed(() => useSlot.value || Boolean(definition.value))
+const isSpinning = computed(() => Boolean(definition.value?.spin))
+const { pauseAttrs } = usePauseOffscreen(rootRef, isSpinning)
 
 const rootClass = computed(() => [
   'm-icon',
   `m-icon--${sizeClass.value}`,
-  { 'm-icon--spin': definition.value?.spin },
+  { 'm-icon--spin': isSpinning.value },
 ])
 </script>
 
 <template>
   <span
     v-if="hasContent"
+    ref="rootRef"
+    v-bind="pauseAttrs"
     :class="rootClass"
     :aria-label="label"
     :aria-hidden="label ? undefined : 'true'"
