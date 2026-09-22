@@ -35,8 +35,8 @@ function updatePosition() {
   if (!props.open || !props.anchor) return
   panelStyle.value = computeFloatingOverlayStyle(props.anchor.getBoundingClientRect(), props.placement, {
     minWidth: props.minWidth,
-    maxHeight: 'min(18rem, 45vh)',
-    gap: 4,
+    maxHeight: 'var(--m-menu-popup-max-height, min(18rem, 45vh))',
+    gap: 4, // px; mirrors --m-space-1 at default density
   })
 }
 

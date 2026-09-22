@@ -318,10 +318,27 @@
     display: flex;
     flex: 0 0 auto;
     font-size: var(--m-font-size-lg);
-    height: var(--m-control-affix-size);
+    height: min(
+        var(--m-control-affix-size),
+        calc(var(--m-control-height-medium) - 2 * var(--m-border-width))
+    );
     justify-content: center;
+    max-height: 100%;
     padding: 0;
-    width: var(--m-control-affix-size);
+    width: min(
+        var(--m-control-affix-size),
+        calc(var(--m-control-height-medium) - 2 * var(--m-border-width))
+    );
+}
+
+.m-input-field__control:has(.m-input--small) .m-input__clear {
+    height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    width: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+}
+
+.m-input-field__control:has(.m-input--large) .m-input__clear {
+    height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+    width: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
 }
 
 .m-input__clear:hover:not(:disabled) {

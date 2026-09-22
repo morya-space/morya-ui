@@ -1,5 +1,7 @@
 /* —— Form: FloatLabel —— */
 .m-float-label {
+    --m-float-label-inset-x: var(--m-control-padding-x-medium);
+    --m-float-label-lift: calc(0.5 * var(--m-control-height-medium));
     display: block;
     position: relative;
 }
@@ -8,7 +10,7 @@
     color: var(--m-color-text-muted);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
-    left: var(--m-space-3);
+    left: var(--m-float-label-inset-x);
     line-height: 1;
     pointer-events: none;
     position: absolute;
@@ -29,5 +31,15 @@
     color: var(--m-color-primary);
     padding: 0 var(--m-space-1);
     /* Scale approximates xs size; translate lifts to the border without animating `top` / `font-size`. */
-    transform: translateY(calc(-50% - 0.9rem)) scale(0.75);
+    transform: translateY(calc(-50% - var(--m-float-label-lift))) scale(0.75);
+}
+
+.m-float-label:has(.m-input--small, .m-textarea--small) {
+    --m-float-label-inset-x: var(--m-control-padding-x-small);
+    --m-float-label-lift: calc(0.5 * var(--m-control-height-small));
+}
+
+.m-float-label:has(.m-input--large, .m-textarea--large) {
+    --m-float-label-inset-x: var(--m-control-padding-x-large);
+    --m-float-label-lift: calc(0.5 * var(--m-control-height-large));
 }

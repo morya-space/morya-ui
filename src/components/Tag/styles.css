@@ -1,5 +1,7 @@
 .m-tag {
     --m-tag-icon-size: 1rem;
+    --m-tag-small-padding-y: 0.15rem;
+    --m-tag-close-gap: 0.15rem;
     align-items: center;
     background: color-mix(in srgb, var(--m-color-primary) 12%, transparent);
     border-radius: var(--m-radius-sm);
@@ -73,7 +75,7 @@
 .m-tag--small {
     --m-tag-icon-size: 0.875rem;
     font-size: var(--m-tag-font-size-small);
-    padding: 0.15rem var(--m-space-2);
+    padding: var(--m-tag-small-padding-y) var(--m-space-2);
 }
 
 .m-tag--large {
@@ -109,7 +111,7 @@
     height: var(--m-tag-icon-size);
     justify-content: center;
     line-height: 1;
-    margin-left: 0.15rem;
+    margin-left: var(--m-tag-close-gap);
     padding: 0;
     width: var(--m-tag-icon-size);
 }

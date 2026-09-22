@@ -71,7 +71,7 @@
 
 .m-tree__toggler {
     color: var(--m-color-text-muted);
-    flex: 0 0 1.25rem;
+    flex: 0 0 var(--m-tree-toggler-size);
     justify-content: center;
     line-height: 1;
     padding: var(--m-space-1);

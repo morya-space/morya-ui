@@ -53,6 +53,16 @@
     grid-template-columns: auto minmax(0, 1fr);
 }
 
+.m-form-item--label-left:has(
+    .m-checkbox,
+    .m-radio,
+    .m-switch,
+    .m-checkbox-group,
+    .m-radio-group
+) {
+    align-items: center;
+}
+
 .m-form-item__label {
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
@@ -62,6 +72,17 @@
 }
 
 .m-form-item--label-top .m-form-item__label {
+    line-height: 1.4;
+}
+
+.m-form-item--label-left:has(
+    .m-checkbox,
+    .m-radio,
+    .m-switch,
+    .m-checkbox-group,
+    .m-radio-group
+)
+    .m-form-item__label {
     line-height: 1.4;
 }
 

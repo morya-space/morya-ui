@@ -1,5 +1,5 @@
 .m-progressbar {
-    --m-progressbar-height: 1.25rem;
+    --m-progressbar-height: var(--m-meter-track-height);
     --m-progressbar-track: color-mix(in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface));
     --m-progressbar-fill: var(--m-color-primary);
     background: var(--m-progressbar-track);

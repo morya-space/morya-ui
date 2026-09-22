@@ -38,11 +38,13 @@
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
+    box-sizing: border-box;
     color: var(--m-color-text);
     cursor: pointer;
     display: flex;
     font-family: var(--m-font-sans);
     gap: var(--m-space-2);
+    min-height: var(--m-menu-item-height);
     padding: var(--m-space-2) var(--m-space-3);
     text-align: start;
     transition:

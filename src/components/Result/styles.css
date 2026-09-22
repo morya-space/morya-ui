@@ -12,13 +12,13 @@
     --m-result-illustration-width: 15rem;
     --m-result-illustration-height: 8.75rem;
     --m-result-icon-margin: var(--m-space-5);
-    --m-result-footer-margin: 1.625rem;
+    --m-result-footer-margin: calc(var(--m-space-5) + var(--m-space-1));
     --m-result-desc-max-width: 25rem;
     align-items: center;
     display: flex;
     flex-direction: column;
     font-family: var(--m-font-sans);
-    padding: 2.5rem var(--m-space-6);
+    padding: calc(var(--m-space-8) + var(--m-space-2)) var(--m-space-6);
     text-align: center;
 }
 
@@ -113,34 +113,34 @@
 }
 
 .m-result--small {
-    --m-result-icon-size: 3rem;
-    --m-result-glyph-size: 1.375rem;
-    --m-result-title-size: 1rem;
+    --m-result-icon-size: calc(var(--m-space-8) + var(--m-space-4));
+    --m-result-glyph-size: calc(var(--m-space-5) + var(--m-space-1));
+    --m-result-title-size: var(--m-font-size-md);
     --m-result-illustration-width: 11.5rem;
     --m-result-illustration-height: 6.75rem;
-    --m-result-icon-margin: 0.875rem;
+    --m-result-icon-margin: calc(var(--m-space-3) + var(--m-space-1));
     --m-result-footer-margin: var(--m-space-5);
-    padding: 1.625rem 1.125rem;
+    padding: calc(var(--m-space-5) + var(--m-space-1)) var(--m-space-4);
 }
 
 .m-result--large {
-    --m-result-icon-size: 4.5rem;
-    --m-result-glyph-size: 2.125rem;
-    --m-result-title-size: 1.5rem;
+    --m-result-icon-size: calc(var(--m-space-8) + var(--m-space-4) + var(--m-space-2));
+    --m-result-glyph-size: calc(var(--m-space-8) + var(--m-space-1));
+    --m-result-title-size: var(--m-font-size-lg);
     --m-result-illustration-width: 17rem;
     --m-result-illustration-height: 9.75rem;
     --m-result-icon-margin: var(--m-space-6);
-    --m-result-footer-margin: 2rem;
-    padding: 3rem var(--m-space-8);
+    --m-result-footer-margin: var(--m-space-8);
+    padding: var(--m-space-8) var(--m-space-8);
 }
 
 .m-result--huge {
-    --m-result-icon-size: 5.25rem;
-    --m-result-glyph-size: 2.5rem;
-    --m-result-title-size: 1.75rem;
+    --m-result-icon-size: calc(var(--m-space-8) * 2 + var(--m-space-2) + var(--m-space-1));
+    --m-result-glyph-size: calc(var(--m-space-8) + var(--m-space-2));
+    --m-result-title-size: calc(var(--m-font-size-lg) + var(--m-space-1));
     --m-result-illustration-width: 19rem;
     --m-result-illustration-height: 11rem;
     --m-result-icon-margin: var(--m-space-6);
-    --m-result-footer-margin: 2.25rem;
-    padding: 3.5rem var(--m-space-8);
+    --m-result-footer-margin: calc(var(--m-space-8) + var(--m-space-1));
+    padding: calc(var(--m-space-8) + var(--m-space-6)) var(--m-space-8);
 }

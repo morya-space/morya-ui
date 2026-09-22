@@ -115,13 +115,11 @@
 }
 
 .m-layout-header {
-    --m-layout-header-height: 3.5rem;
     --m-layout-padding: 0 var(--m-space-4);
     --m-layout-radius: 0;
 }
 
 .m-layout-footer {
-    --m-layout-footer-height: 3rem;
     --m-layout-padding: 0 var(--m-space-4);
     --m-layout-radius: 0;
 }
@@ -175,10 +173,10 @@
 }
 
 .m-layout-sider {
-    --m-layout-sider-width: 12.5rem;
-    --m-layout-sider-collapsed-width: 4rem;
+    --m-layout-sider-width: var(--m-nav-rail-width);
+    --m-layout-sider-collapsed-width: var(--m-nav-rail-collapsed-width);
     --m-layout-radius: 0;
-    --m-layout-trigger-size: 1.5rem;
+    --m-layout-trigger-size: var(--m-space-6);
     align-self: stretch;
     background: var(--m-color-surface);
     box-sizing: border-box;
@@ -370,8 +368,8 @@
 .m-layout-sider__bar-bottom {
     background: var(--m-color-text-muted);
     border-radius: var(--m-radius-sm);
-    height: 2.375rem;
-    left: 0.875rem;
+    height: calc(var(--m-space-8) + var(--m-space-2) - var(--m-space-1));
+    left: calc(var(--m-space-3) + var(--m-space-1));
     position: absolute;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
@@ -384,7 +382,7 @@
 }
 
 .m-layout-sider__bar-bottom {
-    top: 2.125rem;
+    top: calc(var(--m-space-8) + var(--m-space-1));
 }
 
 .m-layout-sider__trigger--bar:hover .m-layout-sider__bar-top {

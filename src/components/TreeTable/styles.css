@@ -1,6 +1,6 @@
 /* —— Data: TreeTable —— */
 .m-treetable {
-    --m-treetable-toggler-size: 1.25rem;
+    --m-treetable-toggler-size: var(--m-tree-toggler-size);
     color: var(--m-table-text);
     font-family: var(--m-font-sans);
     width: 100%;

@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     font-family: var(--m-font-sans);
-    gap: calc(var(--m-space-2) + 0.125rem);
+    gap: var(--m-space-2);
     justify-content: center;
     padding: calc(var(--m-space-8) + var(--m-space-1)) var(--m-space-5);
     text-align: center;
@@ -89,9 +89,9 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: calc(var(--m-space-2) + 0.125rem);
+    gap: var(--m-space-2);
     justify-content: center;
-    margin-top: calc(var(--m-space-1) + 0.125rem);
+    margin-top: var(--m-space-1);
 }
 
 .m-empty--small {
@@ -105,7 +105,7 @@
 .m-empty--large {
     --m-empty-illustration-width: 15rem;
     --m-empty-illustration-height: 7.75rem;
-    --m-empty-icon-size: 2.5rem;
+    --m-empty-icon-size: calc(var(--m-space-8) + var(--m-space-2));
     --m-empty-font-size: var(--m-font-size-lg);
     padding: calc(var(--m-space-8) + var(--m-space-2)) var(--m-space-6);
 }
@@ -119,8 +119,8 @@
 }
 
 .m-empty--simple .m-empty__illustration {
-    height: 2.75rem;
-    width: 2.75rem;
+    height: calc(var(--m-control-height-large) + var(--m-space-1));
+    width: calc(var(--m-control-height-large) + var(--m-space-1));
 }
 
 .m-empty--simple .m-empty__icon :is(.m-icon, svg),

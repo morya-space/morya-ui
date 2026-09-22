@@ -57,11 +57,13 @@
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
+    box-sizing: border-box;
     color: inherit;
     cursor: pointer;
     display: flex;
     font: inherit;
     gap: var(--m-space-2);
+    min-height: var(--m-menu-item-height);
     padding: var(--m-space-2) var(--m-space-3);
     text-align: left;
     transition:

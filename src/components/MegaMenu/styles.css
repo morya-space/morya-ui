@@ -24,6 +24,7 @@
     display: inline-flex;
     font-family: var(--m-font-sans);
     gap: var(--m-space-1);
+    min-height: var(--m-menu-item-height);
     padding: var(--m-space-2) var(--m-space-3);
     transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }

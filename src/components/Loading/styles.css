@@ -188,7 +188,7 @@
 .m-loading-wave {
     align-items: center;
     display: flex;
-    gap: 0.375rem;
+    gap: var(--m-space-1);
     height: 3.125rem;
 }
 

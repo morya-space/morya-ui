@@ -1,8 +1,8 @@
 .m-avatar {
-    --m-avatar-size-small: 2rem;
-    --m-avatar-size-medium: 2.5rem;
-    --m-avatar-size-large: 3.5rem;
-    --m-avatar-size-xlarge: 5rem;
+    --m-avatar-size-small: var(--m-space-8);
+    --m-avatar-size-medium: calc(var(--m-space-8) + var(--m-space-2));
+    --m-avatar-size-large: calc(var(--m-space-8) + var(--m-space-6));
+    --m-avatar-size-xlarge: calc(var(--m-space-8) * 2 + var(--m-space-2));
     --m-avatar-size: var(--m-avatar-size-medium);
     --m-avatar-icon-size: 1rem;
     --m-avatar-font-size-xlarge: 1.5rem;

@@ -1,6 +1,6 @@
 /* —— Feedback: ProgressSpinner —— */
 .m-progress-spinner {
-    --m-progress-spinner-size: 2.5rem;
+    --m-progress-spinner-size: calc(var(--m-space-8) + var(--m-space-2));
     --m-progress-spinner-color: var(--m-color-primary);
     animation: m-progress-spinner-rotate var(--m-motion-spin) linear infinite;
     color: var(--m-progress-spinner-color);
@@ -35,11 +35,11 @@
 }
 
 .m-progress-spinner--small {
-    --m-progress-spinner-size: 1.5rem;
+    --m-progress-spinner-size: var(--m-control-height-medium);
 }
 
 .m-progress-spinner--large {
-    --m-progress-spinner-size: 3.5rem;
+    --m-progress-spinner-size: calc(var(--m-space-8) + var(--m-space-6));
 }
 
 .m-progress-spinner-wrap {

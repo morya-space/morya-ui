@@ -9,6 +9,7 @@
     font-family: var(--m-font-sans);
     gap: var(--m-space-3);
     justify-content: space-between;
+    min-height: calc(var(--m-control-height-medium) + 2 * var(--m-space-2));
     padding: var(--m-space-2) var(--m-space-3);
 }
 

@@ -33,7 +33,7 @@
     font-size: var(--m-font-size-sm);
     min-width: 10rem;
     overflow: hidden;
-    padding: 0 0 0.375rem;
+    padding: 0 0 var(--m-space-1);
     user-select: none;
 }
 
@@ -51,7 +51,7 @@
 
 .m-menu--flyout {
     --m-menu-flyout-gap: var(--m-space-1);
-    --m-menu-flyout-item-height: 2.5rem;
+    --m-menu-flyout-item-height: var(--m-menu-item-height);
     --m-menu-flyout-padding: var(--m-space-2);
     --m-menu-flyout-radius: var(--m-radius-md);
 
@@ -72,7 +72,7 @@
     flex-direction: column;
     max-height: var(--m-menu-popup-max-height);
     overflow: hidden;
-    padding: 0.375rem 0 0.5rem;
+    padding: var(--m-space-1) 0 var(--m-space-2);
     position: absolute;
     z-index: var(--m-z-popper);
 }
@@ -103,7 +103,7 @@
 
 .m-menu--horizontal {
     --m-menu-horizontal-gap: var(--m-space-1);
-    --m-menu-horizontal-height: 2.5rem;
+    --m-menu-horizontal-height: var(--m-menu-item-height);
 
     align-items: stretch;
     flex-direction: row;
@@ -213,7 +213,7 @@
 
 /* —— Collapsed (icon rail) —— */
 .m-menu--collapsed {
-    padding: 0.25rem 0;
+    padding: var(--m-space-1) 0;
 }
 
 .m-menu--collapsed .m-menu__label,
@@ -222,7 +222,7 @@
 }
 
 .m-menu--collapsed .m-menu__item {
-    margin-top: 0.25rem;
+    margin-top: var(--m-space-1);
 }
 
 .m-menu--collapsed .m-menu__item .m-tooltip,
@@ -236,14 +236,14 @@
     display: flex;
     grid-template-areas: none;
     grid-template-columns: unset;
-    height: 2.75rem;
+    height: var(--m-menu-item-height);
     justify-content: center;
     padding-inline: 0 !important;
     width: 100%;
 }
 
 .m-menu--collapsed .m-menu__item-content::before {
-    inset: 0 0.5rem;
+    inset: 0 var(--m-space-2);
 }
 
 .m-menu--collapsed .m-menu__icon {
@@ -525,7 +525,7 @@ a.m-menu__item-content--selected:visited {
 
 .m-menu--flyout .m-menu__item-content {
     height: var(--m-menu-flyout-item-height);
-    padding-inline: 0.75rem;
+    padding-inline: var(--m-space-3);
 }
 
 .m-menu--flyout .m-menu__item-content::before {

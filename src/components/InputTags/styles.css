@@ -24,7 +24,7 @@
     flex-wrap: wrap;
     gap: var(--m-space-1);
     min-height: var(--m-control-height-medium);
-    padding: var(--m-space-1) var(--m-space-2);
+    padding: var(--m-space-1) var(--m-control-padding-x-medium);
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
         box-shadow var(--m-motion-fast) var(--m-motion-ease),
@@ -40,10 +40,12 @@
 
 .m-inputtags--small {
     min-height: var(--m-control-height-small);
+    padding-inline: var(--m-control-padding-x-small);
 }
 
 .m-inputtags--large {
     min-height: var(--m-control-height-large);
+    padding-inline: var(--m-control-padding-x-large);
 }
 
 .m-inputtags--invalid {

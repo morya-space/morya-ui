@@ -1,7 +1,7 @@
 /* —— Navigation: Sidebar —— */
 .m-sidebar {
-    --m-sidebar-width: 12rem;
-    --m-sidebar-collapsed-width: 3.5rem;
+    --m-sidebar-width: var(--m-nav-rail-width);
+    --m-sidebar-collapsed-width: var(--m-nav-rail-collapsed-width);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);

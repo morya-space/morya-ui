@@ -62,13 +62,17 @@
 }
 
 .m-dropdown__item {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
+    box-sizing: border-box;
     color: var(--m-color-text);
     cursor: pointer;
+    display: flex;
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
+    min-height: var(--m-menu-item-height);
     padding: var(--m-space-2) var(--m-space-3);
     text-align: left;
     transition:
