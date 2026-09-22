@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-21T09:57:51.741Z",
-  "catalogGeneratedAt": "2026-09-21T09:57:47.817Z",
+  "generatedAt": "2026-09-22T12:50:04.888Z",
+  "catalogGeneratedAt": "2026-09-22T12:49:59.311Z",
   "components": [
     {
       "id": "Accordion",
@@ -37,13 +37,15 @@
       "exportName": "MAutoComplete",
       "examples": 8,
       "props": {
-        "total": 17,
+        "total": 19,
         "covered": 6,
         "missing": [
           "loading",
           "disabled",
           "teleport",
           "appendTo",
+          "transition",
+          "virtual",
           "emptyMessage",
           "errorMessage",
           "helpText",
@@ -138,9 +140,10 @@
       "exportName": "MBlockUI",
       "examples": 4,
       "props": {
-        "total": 2,
+        "total": 3,
         "covered": 1,
         "missing": [
+          "transition",
           "pt"
         ]
       },
@@ -291,7 +294,7 @@
       "exportName": "MCascadeSelect",
       "examples": 10,
       "props": {
-        "total": 16,
+        "total": 17,
         "covered": 4,
         "missing": [
           "label",
@@ -305,6 +308,7 @@
           "clearable",
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -401,11 +405,12 @@
       "exportName": "MCommandMenu",
       "examples": 6,
       "props": {
-        "total": 6,
+        "total": 7,
         "covered": 3,
         "missing": [
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -432,12 +437,13 @@
       "exportName": "MConfigProvider",
       "examples": 14,
       "props": {
-        "total": 11,
-        "covered": 6,
+        "total": 13,
+        "covered": 7,
         "missing": [
           "zIndex",
           "theme",
           "locale",
+          "respectReducedMotion",
           "globalDensity",
           "pt"
         ]
@@ -463,7 +469,7 @@
       "exportName": "MConfirmDialog",
       "examples": 4,
       "props": {
-        "total": 16,
+        "total": 17,
         "covered": 6,
         "missing": [
           "type",
@@ -472,6 +478,7 @@
           "beforeReject",
           "teleport",
           "appendTo",
+          "transition",
           "blockScroll",
           "closeOnEsc",
           "closeOnOutsideClick",
@@ -507,7 +514,7 @@
       "exportName": "MConfirmPopup",
       "examples": 6,
       "props": {
-        "total": 13,
+        "total": 14,
         "covered": 6,
         "missing": [
           "acceptLabel",
@@ -515,6 +522,7 @@
           "position",
           "teleport",
           "appendTo",
+          "transition",
           "acceptSeverity",
           "pt"
         ]
@@ -546,11 +554,12 @@
       "exportName": "MContextMenu",
       "examples": 8,
       "props": {
-        "total": 6,
+        "total": 7,
         "covered": 3,
         "missing": [
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -614,12 +623,13 @@
       "exportName": "MDatePicker",
       "examples": 22,
       "props": {
-        "total": 19,
+        "total": 20,
         "covered": 12,
         "missing": [
           "format",
           "clearable",
           "teleport",
+          "transition",
           "errorMessage",
           "helpText",
           "id",
@@ -655,7 +665,7 @@
       "exportName": "MDialog",
       "examples": 14,
       "props": {
-        "total": 23,
+        "total": 24,
         "covered": 11,
         "missing": [
           "title",
@@ -669,6 +679,7 @@
           "positiveSeverity",
           "onNegativeClick",
           "ariaLabel",
+          "transition",
           "pt"
         ]
       },
@@ -765,7 +776,7 @@
       "exportName": "MDrawer",
       "examples": 6,
       "props": {
-        "total": 15,
+        "total": 16,
         "covered": 3,
         "missing": [
           "modal",
@@ -776,6 +787,7 @@
           "blockScroll",
           "teleport",
           "appendTo",
+          "transition",
           "beforeClose",
           "closeOnEsc",
           "closeOnOutsideClick",
@@ -811,13 +823,14 @@
       "exportName": "MDropdown",
       "examples": 8,
       "props": {
-        "total": 10,
+        "total": 11,
         "covered": 5,
         "missing": [
           "placement",
           "closeOnSelect",
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -1573,10 +1586,11 @@
       "exportName": "MListbox",
       "examples": 4,
       "props": {
-        "total": 10,
+        "total": 11,
         "covered": 4,
         "missing": [
           "multiple",
+          "virtual",
           "disabled",
           "emptyMessage",
           "invalid",
@@ -1609,7 +1623,7 @@
       "exportName": "MLoading",
       "examples": 14,
       "props": {
-        "total": 11,
+        "total": 12,
         "covered": 4,
         "missing": [
           "ariaLabel",
@@ -1618,6 +1632,7 @@
           "fullscreen",
           "lock",
           "delay",
+          "transition",
           "pt"
         ]
       },
@@ -1644,11 +1659,12 @@
       "exportName": "MMegaMenu",
       "examples": 8,
       "props": {
-        "total": 5,
+        "total": 6,
         "covered": 1,
         "missing": [
           "teleport",
           "appendTo",
+          "transition",
           "selectedKey",
           "pt"
         ]
@@ -1677,7 +1693,7 @@
       "exportName": "MMenu",
       "examples": 20,
       "props": {
-        "total": 19,
+        "total": 20,
         "covered": 10,
         "missing": [
           "placement",
@@ -1688,6 +1704,7 @@
           "defaultExpandAll",
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -1715,11 +1732,12 @@
       "exportName": "MMenubar",
       "examples": 6,
       "props": {
-        "total": 5,
+        "total": 6,
         "covered": 2,
         "missing": [
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -1958,11 +1976,12 @@
       "exportName": "MPopover",
       "examples": 8,
       "props": {
-        "total": 9,
+        "total": 10,
         "covered": 5,
         "missing": [
           "teleport",
           "appendTo",
+          "transition",
           "disabled",
           "pt"
         ]
@@ -2216,17 +2235,19 @@
       "exportName": "MSelect",
       "examples": 26,
       "props": {
-        "total": 26,
+        "total": 28,
         "covered": 18,
         "missing": [
           "required",
           "clearable",
           "teleport",
           "placement",
+          "transition",
           "id",
           "errorMessage",
           "name",
-          "pt"
+          "pt",
+          "virtual"
         ]
       },
       "events": {
@@ -2422,13 +2443,14 @@
       "exportName": "MSpeedDial",
       "examples": 6,
       "props": {
-        "total": 8,
+        "total": 9,
         "covered": 3,
         "missing": [
           "disabled",
           "ariaLabel",
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -2460,7 +2482,7 @@
       "exportName": "MSplitButton",
       "examples": 4,
       "props": {
-        "total": 10,
+        "total": 11,
         "covered": 2,
         "missing": [
           "icon",
@@ -2470,6 +2492,7 @@
           "disabled",
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -2496,14 +2519,13 @@
     {
       "id": "Splitter",
       "exportName": "MSplitter",
-      "examples": 10,
+      "examples": 12,
       "props": {
-        "total": 13,
-        "covered": 5,
+        "total": 15,
+        "covered": 8,
         "missing": [
           "layout",
           "defaultSize",
-          "resizeTriggerSize",
           "pane1Class",
           "pane1Style",
           "pane2Class",
@@ -2522,10 +2544,10 @@
         ]
       },
       "slots": {
-        "total": 4,
-        "covered": 3,
+        "total": 5,
+        "covered": 4,
         "missing": [
-          "resize-trigger"
+          "gutter"
         ]
       },
       "methods": {
@@ -2888,11 +2910,12 @@
       "exportName": "MTieredMenu",
       "examples": 8,
       "props": {
-        "total": 7,
+        "total": 8,
         "covered": 3,
         "missing": [
           "teleport",
           "appendTo",
+          "transition",
           "placement",
           "pt"
         ]
@@ -2947,13 +2970,14 @@
       "exportName": "MToast",
       "examples": 10,
       "props": {
-        "total": 13,
+        "total": 14,
         "covered": 3,
         "missing": [
           "max",
           "teleport",
           "appendTo",
           "auto",
+          "transition",
           "id",
           "summary",
           "detail",
@@ -3045,12 +3069,13 @@
       "exportName": "MTooltip",
       "examples": 4,
       "props": {
-        "total": 9,
+        "total": 10,
         "covered": 5,
         "missing": [
           "disabled",
           "teleport",
           "appendTo",
+          "transition",
           "pt"
         ]
       },
@@ -3122,7 +3147,7 @@
       "exportName": "MTreeSelect",
       "examples": 10,
       "props": {
-        "total": 23,
+        "total": 24,
         "covered": 9,
         "missing": [
           "disabled",
@@ -3133,6 +3158,7 @@
           "selectionMode",
           "teleport",
           "appendTo",
+          "transition",
           "errorMessage",
           "helpText",
           "id",
@@ -3222,15 +3248,17 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "scrollToIndex"
+        ]
       }
     }
   ],
   "summary": {
     "components": 93,
     "componentsWithMissingCoverage": 88,
-    "totalExamples": 803
+    "totalExamples": 805
   }
 }

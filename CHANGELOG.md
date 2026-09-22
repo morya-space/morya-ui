@@ -1,5 +1,49 @@
 # morya-ui
 
+## 0.3.0
+
+### 新功能
+
+- align Select-like overlays and selection UX
+- enhance styling and line numbering for code previews
+- virtualize Select, Listbox, and AutoComplete menus
+- customize gutter via slot, class, and style
+- pause looping animations when off-screen
+- add collapse height transition
+- add global reduced-motion transition fallbacks
+- wire transition presets into overlay components
+- add global motion config and public exports
+- add named enter/exit preset registry
+- require validate_usage before page delivery
+
+### 修复
+
+- scale control affix and layout tokens with density
+- default Dialog and ConfirmDialog transition to zoom
+- animate Dialog and Drawer panels for shared presets
+- keep default presets when transition prop is omitted
+- harden reduced-motion tokens and ignore gates
+- make style entries and MCP catalog generation idempotent
+
+### 文档
+
+- sync Splitter gutter API in MCP and skills
+- add optional Animate.css integration example
+- add dedicated motion guide and docs section nav
+- document transition presets and playground demo
+- document new golden pages and validate_page contracts
+
+### 变更
+
+- sync on-demand style entries and design token catalog
+- replace hardcoded sizes with density-aware design tokens
+- extract useFloatingViewportSync for overlays
+- cut redundant observers and layout work
+- drive ProgressBar fill with scaleX
+- replace loading aurora blur with soft gradients
+- avoid width layout animation on sider chrome
+- avoid layout thrash in collapse and float label
+
 ## 0.2.9
 
 ### 新功能
