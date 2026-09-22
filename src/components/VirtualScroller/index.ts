@@ -1,3 +1,3 @@
 import './style'
-export type { VirtualScrollerItemSlotProps, VirtualScrollerProps } from './types'
+export type { VirtualScrollerExpose, VirtualScrollerItemSlotProps, VirtualScrollerProps } from './types'
 export { default as MVirtualScroller } from './VirtualScroller.vue'

@@ -19,6 +19,11 @@ export interface ListboxProps {
   filter?: boolean
   emptyMessage?: string
   listStyle?: string | Record<string, string>
+  /**
+   * Virtualize the option list. Default auto-enables when there are 80+ options.
+   * Pass `false` to always render the full list; `true` to always virtualize.
+   */
+  virtual?: boolean
   /** Pass-through attrs/classes/styles for the root element. */
   pt?: RootPassThrough
 }

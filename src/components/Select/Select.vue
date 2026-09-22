@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
+import type { VirtualScrollerExpose } from '../VirtualScroller/types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
 
 defineOptions({ inheritAttrs: false })
+
+const VIRTUAL_AUTO_THRESHOLD = 80
 
 const props = withDefaults(defineProps<SelectProps>(), {
   transition: undefined,
@@ -29,6 +34,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showClear: undefined,
   clearable: undefined,
   filter: undefined,
+  virtual: undefined,
 })
 
 const emit = defineEmits<{
@@ -163,6 +169,25 @@ const menuOptions = computed<MenuOption[]>(() => {
 const enabledOptions = computed(() => menuOptions.value.filter((option) => !option.disabled))
 const createLabel = computed(() => formatLocale(locale.value.createOption, { value: query.value }))
 const moreTagsLabel = computed(() => formatLocale(locale.value.moreTags, { count: hiddenTagCount.value }))
+
+const useVirtualMenu = computed(() => {
+  if (props.virtual === false) return false
+  if (props.virtual === true) return true
+  return menuOptions.value.length >= VIRTUAL_AUTO_THRESHOLD
+})
+const optionItemSize = computed(() => {
+  if (sizeClass.value === 'small') return 28
+  if (sizeClass.value === 'large') return 40
+  return 34
+})
+const menuViewportHeight = computed(() =>
+  Math.min(240, Math.max(optionItemSize.value * 4, menuOptions.value.length * optionItemSize.value)),
+)
+const virtualList = ref<VirtualScrollerExpose | null>(null)
+
+function menuOptionAt(item: unknown): MenuOption {
+  return item as MenuOption
+}
 
 function isSelected(value: SelectValue) {
   return selectedValues.value.some((item) => item === value)
@@ -301,6 +326,21 @@ function onViewportChange() {
   if (open.value) updateMenuPosition()
 }
 
+useFloatingViewportSync(
+  () => open.value && teleported.value,
+  onViewportChange,
+)
+
+watch(highlightedIndex, (index) => {
+  if (!useVirtualMenu.value || index < 0) return
+  const option = enabledOptions.value[index]
+  if (!option) return
+  const listIndex = menuOptions.value.findIndex(
+    (item) => item.value === option.value && Boolean(item.created) === Boolean(option.created),
+  )
+  if (listIndex >= 0) virtualList.value?.scrollToIndex(listIndex)
+})
+
 watch(filterQuery, (next) => {
   highlightedIndex.value = enabledOptions.value.length ? 0 : -1
   if (open.value && (resolvedFilter.value || resolvedRemote.value)) emit('search', next)
@@ -308,23 +348,12 @@ watch(filterQuery, (next) => {
 
 watch(open, (next) => {
   if (next && resolvedRemote.value) emit('search', filterQuery.value)
-  if (next) {
-    document.addEventListener('click', onDocumentClick)
-    if (teleported.value) {
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    }
-  } else {
-    document.removeEventListener('click', onDocumentClick)
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
-  }
+  if (next) document.addEventListener('click', onDocumentClick)
+  else document.removeEventListener('click', onDocumentClick)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 
@@ -445,7 +474,48 @@ onBeforeUnmount(() => {
             @click.stop
             @keydown.stop="onMenuKeydown"
           >
+          <MVirtualScroller
+            v-if="useVirtualMenu && !resolvedLoading && menuOptions.length"
+            :id="`${selectId}-listbox`"
+            ref="virtualList"
+            class="m-select__list m-select__list--virtual"
+            role="listbox"
+            :aria-label="label ?? placeholder ?? locale.selectOption"
+            :items="menuOptions"
+            :item-size="optionItemSize"
+            :height="menuViewportHeight"
+            :buffer="4"
+          >
+            <template #item="{ item }">
+              <button
+                class="m-select__option"
+                :class="{
+                  'm-select__option--selected': !menuOptionAt(item).created && isSelected(menuOptionAt(item).value),
+                  'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === menuOptionAt(item).value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(menuOptionAt(item).created),
+                  'm-select__option--create': menuOptionAt(item).created,
+                }"
+                type="button"
+                role="option"
+                :aria-selected="menuOptionAt(item).created ? undefined : isSelected(menuOptionAt(item).value)"
+                :disabled="menuOptionAt(item).disabled"
+                @mouseenter="!menuOptionAt(item).disabled && (highlightedIndex = enabledOptions.findIndex((entry) => entry.value === menuOptionAt(item).value && Boolean(entry.created) === Boolean(menuOptionAt(item).created)))"
+                @click="selectOption(menuOptionAt(item))"
+              >
+                <slot name="option" :option="menuOptionAt(item)">
+                  <span>{{ menuOptionAt(item).created ? createLabel : menuOptionAt(item).label }}</span>
+                </slot>
+                <MIcon
+                  v-if="!menuOptionAt(item).created && isSelected(menuOptionAt(item).value)"
+                  class="m-select__check"
+                  name="check"
+                  size="sm"
+                />
+              </button>
+            </template>
+          </MVirtualScroller>
           <MScrollbar
+            v-else
+            :id="`${selectId}-listbox`"
             class="m-select__list"
             fit-content
             wrap-class="m-select__list-wrap"
@@ -484,6 +554,20 @@ onBeforeUnmount(() => {
               {{ resolvedEmptyMessage }}
             </div>
           </MScrollbar>
+          <div
+            v-if="useVirtualMenu && resolvedLoading"
+            class="m-select__empty"
+            role="status"
+          >
+            {{ locale.loading }}
+          </div>
+          <div
+            v-else-if="useVirtualMenu && !menuOptions.length && !resolvedLoading"
+            class="m-select__empty"
+            role="status"
+          >
+            {{ resolvedEmptyMessage }}
+          </div>
         </div>
       </Transition>
     </Teleport>

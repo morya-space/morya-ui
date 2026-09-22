@@ -1,20 +1,25 @@
 <script setup lang="ts">
 import type { ListboxOption, ListboxProps, ListboxValue } from './types'
-import { computed, ref, useAttrs, watch } from 'vue'
+import type { VirtualScrollerExpose } from '../VirtualScroller/types'
+import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
 
 defineOptions({ inheritAttrs: false })
+
+const VIRTUAL_AUTO_THRESHOLD = 80
 
 const props = withDefaults(defineProps<ListboxProps>(), {
   multiple: false,
   disabled: false,
   invalid: false,
   filter: false,
+  virtual: undefined,
 })
 
 const emit = defineEmits<{
@@ -35,6 +40,22 @@ const filteredOptions = computed(() => {
   if (!query) return props.options
   return props.options.filter((option) => option.label.toLowerCase().includes(query))
 })
+
+const useVirtualList = computed(() => {
+  if (props.virtual === false) return false
+  if (props.virtual === true) return true
+  return filteredOptions.value.length >= VIRTUAL_AUTO_THRESHOLD
+})
+
+const optionItemSize = computed(() => {
+  if (sizeClass.value === 'small') return 28
+  if (sizeClass.value === 'large') return 40
+  return 34
+})
+
+const listViewportHeight = computed(() =>
+  Math.min(280, Math.max(optionItemSize.value * 5, filteredOptions.value.length * optionItemSize.value)),
+)
 
 const rootClass = computed(() => [
   'm-listbox',
@@ -67,9 +88,16 @@ function select(option: ListboxOption) {
   emit('update:modelValue', option.value)
 }
 
+function optionAt(item: unknown): ListboxOption {
+  return item as ListboxOption
+}
+
 const list = ref<InstanceType<typeof MScrollbar> | null>(null)
+const virtualHost = ref<HTMLElement | null>(null)
+const virtualList = ref<VirtualScrollerExpose | null>(null)
 
 function listRoot(): ParentNode | null {
+  if (useVirtualList.value) return virtualHost.value
   return list.value?.$el ?? null
 }
 
@@ -93,12 +121,17 @@ function optionTabindex(index: number): 0 | -1 {
   return index === fallback ? 0 : -1
 }
 
-function focusActiveOption() {
+async function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  listRoot()
-    ?.querySelectorAll<HTMLElement>('.m-listbox__option')
-    [index]?.focus({ preventScroll: true })
+  if (useVirtualList.value) {
+    virtualList.value?.scrollToIndex(index)
+    await nextTick()
+  }
+  const root = useVirtualList.value
+    ? virtualHost.value?.querySelector<HTMLElement>(`[data-index="${index}"] .m-listbox__option`)
+    : listRoot()?.querySelectorAll<HTMLElement>('.m-listbox__option')[index]
+  root?.focus({ preventScroll: true })
 }
 
 function onListKeydown(event: KeyboardEvent) {
@@ -108,14 +141,12 @@ function onListKeydown(event: KeyboardEvent) {
 function onFilterKeydown(event: KeyboardEvent) {
   if (['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter'].includes(event.key)) {
     keyboard.onKeydown(event)
-    focusActiveOption()
+    void focusActiveOption()
   }
 }
 
 watch(keyboard.activeIndex, () => {
-  // Follow the highlight only when focus is already inside the list, so
-  // typing in the filter input never steals focus.
-  if (listRoot()?.contains(document.activeElement)) focusActiveOption()
+  if (listRoot()?.contains(document.activeElement)) void focusActiveOption()
 })
 </script>
 
@@ -131,7 +162,43 @@ watch(keyboard.activeIndex, () => {
       :aria-label="locale.filterOptions"
       @keydown="onFilterKeydown"
     >
+    <div
+      v-if="useVirtualList && filteredOptions.length"
+      ref="virtualHost"
+      class="m-listbox__virtual-host"
+      @keydown="onListKeydown"
+    >
+      <MVirtualScroller
+        ref="virtualList"
+        class="m-listbox__list m-listbox__list--virtual"
+        role="listbox"
+        :aria-label="locale.selectOption"
+        :items="filteredOptions"
+        :item-size="optionItemSize"
+        :height="listViewportHeight"
+        :buffer="4"
+      >
+        <template #item="{ item, index }">
+          <button
+            type="button"
+            class="m-listbox__option"
+            role="option"
+            :class="{ 'm-listbox__option--selected': isSelected(optionAt(item).value) }"
+            :aria-selected="isSelected(optionAt(item).value)"
+            :disabled="disabled || optionAt(item).disabled"
+            :tabindex="optionTabindex(index)"
+            @click="select(optionAt(item))"
+            @focus="keyboard.setActive(index)"
+          >
+            <slot name="option" :option="optionAt(item)">
+              {{ optionAt(item).label }}
+            </slot>
+          </button>
+        </template>
+      </MVirtualScroller>
+    </div>
     <MScrollbar
+      v-else
       ref="list"
       tag="ul"
       role="listbox"
@@ -164,5 +231,8 @@ watch(keyboard.activeIndex, () => {
         {{ resolvedEmptyMessage }}
       </li>
     </MScrollbar>
+    <div v-if="useVirtualList && !filteredOptions.length" class="m-listbox__empty">
+      {{ resolvedEmptyMessage }}
+    </div>
   </div>
 </template>

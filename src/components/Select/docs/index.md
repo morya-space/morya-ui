@@ -118,6 +118,7 @@ import { MSelect } from 'morya-ui'
 | `errorMessage` | `string` | — | 校验错误文案；与 `invalid` 同时生效时优先展示。 |
 | `name` | `string` | — | 辅助原生 name（存在隐藏 input 时）。 |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 分段透传（`root`、`control` 等）。 |
+| `virtual` | `boolean` | 自动 | `true` 强制虚拟列表；`false` 关闭；默认选项 ≥80 时开启。 |
 
 ## Events
 

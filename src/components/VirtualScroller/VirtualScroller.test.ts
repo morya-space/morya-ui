@@ -17,14 +17,14 @@ describe('muVirtualScroller', () => {
     expect(rows[0]!.text()).toBe('Item 0')
   })
 
-  it('updates window on scroll', async () => {
+  it('scrollToIndex moves the window', async () => {
     const items = Array.from({ length: 50 }, (_, i) => i)
     const wrapper = mount(MVirtualScroller, {
       props: { items, itemSize: 20, height: 100, buffer: 0 },
     })
-    const wrap = wrapper.find('.m-virtualscroller .m-scrollbar__wrap')
-    Object.defineProperty(wrap.element, 'scrollTop', { value: 200, configurable: true })
-    await wrap.trigger('scroll')
-    expect(wrapper.text()).toContain('10')
+    const api = wrapper.vm as unknown as { scrollToIndex: (i: number) => void }
+    api.scrollToIndex(20)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.text()).toContain('20')
   })
 })

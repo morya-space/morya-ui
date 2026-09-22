@@ -28,6 +28,7 @@ import { MListbox } from 'morya-ui'
 | `multiple` | `boolean` | `false` | Multiple selection. |
 | `filter` | `boolean` | `false` | Show filter box. |
 | `listStyle` | `string` | — | Inline styles for the list. |
+| `virtual` | `boolean` | auto | `true` forces virtualization; `false` disables; auto-on at 80+ options. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 

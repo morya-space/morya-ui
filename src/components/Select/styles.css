@@ -241,3 +241,13 @@
     color: var(--m-color-primary);
     font-style: italic;
 }
+
+.m-select__list--virtual .m-virtualscroller__item {
+    display: flex;
+}
+
+.m-select__list--virtual .m-select__option {
+    height: 100%;
+    min-height: 0;
+    width: 100%;
+}

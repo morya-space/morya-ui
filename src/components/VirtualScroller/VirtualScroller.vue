@@ -1,10 +1,10 @@
 <script setup lang="ts">
-
 import type { ScrollbarScrollPayload } from '../Scrollbar/types'
 import type { VirtualScrollerProps } from './types'
 import { computed, ref, useAttrs } from 'vue'
 import ScrollBody from '../../shared/ScrollBody.vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
+
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<VirtualScrollerProps>(), {
@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<VirtualScrollerProps>(), {
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
+const scrollBody = ref<InstanceType<typeof ScrollBody> | null>(null)
 const scrollTop = ref(0)
 
 const viewportHeight = computed(() => {
@@ -49,14 +50,36 @@ const rootStyle = computed(() => ({
 function onScroll(payload: ScrollbarScrollPayload) {
   scrollTop.value = payload.scrollTop
 }
+
+/** Keep `index` in view; no-op when already visible. */
+function scrollToIndex(index: number) {
+  if (index < 0 || index >= props.items.length) return
+  const size = props.itemSize
+  const viewport = viewportHeight.value
+  const start = index * size
+  const end = start + size
+  const current = scrollTop.value
+  let next = current
+  if (start < current) next = start
+  else if (end > current + viewport) next = end - viewport
+  else return
+  next = Math.max(0, Math.min(next, Math.max(0, totalHeight.value - viewport)))
+  scrollTop.value = next
+  scrollBody.value?.setScrollTop(next)
+}
+
+defineExpose({ scrollToIndex })
 </script>
 
 <template>
   <ScrollBody
+    ref="scrollBody"
     v-bind="rootAttrs"
     root-class="m-virtualscroller m-virtualscroller__scrollbar"
     wrap-class="m-virtualscroller__scroll"
     :wrap-style="rootStyle"
+    :role="role"
+    :aria-label="ariaLabel"
     @scroll="onScroll"
   >
     <div class="m-virtualscroller__spacer" :style="{ height: `${totalHeight}px` }">
@@ -66,6 +89,7 @@ function onScroll(payload: ScrollbarScrollPayload) {
           :key="entry.index"
           class="m-virtualscroller__item"
           :style="{ height: `${itemSize}px` }"
+          :data-index="entry.index"
         >
           <slot name="item" :item="entry.item" :index="entry.index">
             {{ entry.item }}

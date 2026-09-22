@@ -46,6 +46,7 @@ import { MAutoComplete } from 'morya-ui'
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 | `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
+| `virtual` | `boolean` | auto | `true` forces virtual scroll; `false` disables; default enables when suggestions ≥ 80. |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 

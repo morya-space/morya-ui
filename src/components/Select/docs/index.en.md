@@ -114,6 +114,7 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target. `'self'` renders in place. |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | Menu alignment. |
 | `transition` | `string \| false` | `'scale-fade'` | Menu enter/exit preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
+| `virtual` | `boolean` | auto | `true` forces virtualization; `false` disables; auto-on at 80+ options. |
 | `id` | `string` | — | Control id. |
 | `errorMessage` | `string` | — | Validation error copy. |
 | `name` | `string` | — | Native name when a hidden input is present. |

@@ -115,3 +115,13 @@
 .m-listbox--invalid:focus-within {
     box-shadow: var(--m-focus-shadow-danger);
 }
+
+.m-listbox__list--virtual .m-virtualscroller__item {
+    display: flex;
+}
+
+.m-listbox__list--virtual .m-listbox__option {
+    height: 100%;
+    min-height: 0;
+    width: 100%;
+}

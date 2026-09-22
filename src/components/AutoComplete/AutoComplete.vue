@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AutoCompleteOption, AutoCompleteProps, AutoCompleteSuggestion } from './types'
+import type { VirtualScrollerExpose } from '../VirtualScroller/types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
@@ -7,12 +8,16 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
 
 defineOptions({ inheritAttrs: false })
+
+const VIRTUAL_AUTO_THRESHOLD = 80
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
   transition: undefined,
@@ -25,6 +30,7 @@ const props = withDefaults(defineProps<AutoCompleteProps>(), {
   loading: false,
   clearable: false,
   teleport: true,
+  virtual: undefined,
 })
 
 const emit = defineEmits<{
@@ -72,6 +78,25 @@ const filtered = computed(() => {
       item.label.toLowerCase().includes(query) || item.value.toLowerCase().includes(query),
   )
 })
+
+const useVirtualMenu = computed(() => {
+  if (props.virtual === false) return false
+  if (props.virtual === true) return true
+  return filtered.value.length >= VIRTUAL_AUTO_THRESHOLD
+})
+const optionItemSize = computed(() => {
+  if (sizeClass.value === 'small') return 28
+  if (sizeClass.value === 'large') return 40
+  return 34
+})
+const menuViewportHeight = computed(() =>
+  Math.min(240, Math.max(optionItemSize.value * 4, filtered.value.length * optionItemSize.value)),
+)
+const virtualList = ref<VirtualScrollerExpose | null>(null)
+
+function suggestionAt(item: unknown): AutoCompleteOption {
+  return item as AutoCompleteOption
+}
 
 const showClear = computed(() => props.clearable && Boolean(props.modelValue) && !props.disabled)
 
@@ -163,19 +188,23 @@ function onViewportChange() {
   if (open.value) updatePanelPosition()
 }
 
+useFloatingViewportSync(
+  () => open.value && teleported.value,
+  onViewportChange,
+)
+
+watch(highlight, (index) => {
+  if (!useVirtualMenu.value || index < 0) return
+  virtualList.value?.scrollToIndex(index)
+})
+
 watch(open, async (isOpen) => {
   if (isOpen) {
     document.addEventListener('click', onDocumentClick)
-    if (teleported.value) {
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    }
     await nextTick()
     updatePanelPosition()
   } else {
     document.removeEventListener('click', onDocumentClick)
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
   }
 })
 
@@ -186,8 +215,6 @@ watch(filtered, (items) => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 
 const panelOpen = computed(() => open.value)
@@ -249,7 +276,32 @@ const panelOpen = computed(() => open.value)
             :class="{ 'm-autocomplete__panel--teleported': teleported }"
             :style="teleported ? panelStyle : undefined"
           >
+            <MVirtualScroller
+              v-if="useVirtualMenu && filtered.length && !loading"
+              ref="virtualList"
+              class="m-autocomplete__panel-scroll m-autocomplete__panel-scroll--virtual"
+              role="listbox"
+              :items="filtered"
+              :item-size="optionItemSize"
+              :height="menuViewportHeight"
+              :buffer="4"
+            >
+              <template #item="{ item, index }">
+                <div
+                  class="m-autocomplete__item"
+                  role="option"
+                  :class="{ 'm-autocomplete__item--active': index === highlight }"
+                  :aria-selected="index === highlight"
+                  @mousedown.prevent="select(suggestionAt(item))"
+                >
+                  <slot name="item" :option="suggestionAt(item)">
+                    {{ suggestionAt(item).label }}
+                  </slot>
+                </div>
+              </template>
+            </MVirtualScroller>
             <MScrollbar
+              v-else
               tag="ul"
               role="listbox"
               class="m-autocomplete__panel-scroll"

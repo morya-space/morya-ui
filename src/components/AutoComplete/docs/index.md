@@ -46,6 +46,7 @@ import { MAutoComplete } from 'morya-ui'
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
 | `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
+| `virtual` | `boolean` | 自动 | `true` 强制虚拟列表；`false` 关闭；默认建议项 ≥80 时开启。 |
 | `emptyMessage` | `string` | — | — |
 | `errorMessage` | `string` | — | — |
 | `helpText` | `string` | — | — |

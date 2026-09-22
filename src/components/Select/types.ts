@@ -61,6 +61,11 @@ export interface SelectProps extends MNativeComboboxFieldProps {
   pt?: FieldPassThrough
   /** Named motion preset, or `false` to disable enter/exit transition. */
   transition?: MotionPresetId | false
+  /**
+   * Virtualize the option list. Default auto-enables when there are 80+ options.
+   * Pass `false` to always render the full list; `true` to always virtualize.
+   */
+  virtual?: boolean
 }
 
 export interface SelectEmits {

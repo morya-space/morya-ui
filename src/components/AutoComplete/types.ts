@@ -34,6 +34,11 @@ export interface AutoCompleteProps extends MNativeInputProps {
   pt?: FieldPassThrough
   /** Named motion preset, or `false` to disable enter/exit transition. */
   transition?: MotionPresetId | false
+  /**
+   * Virtualize suggestions. Default auto-enables when there are 80+ items.
+   * Pass `false` to always render the full list; `true` to always virtualize.
+   */
+  virtual?: boolean
 }
 
 export interface AutoCompleteEmits {

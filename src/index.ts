@@ -639,6 +639,7 @@ export type {
   TreeTableProps,
 } from "./components/TreeTable/types";
 export type {
+  VirtualScrollerExpose,
   VirtualScrollerItemSlotProps,
   VirtualScrollerProps,
 } from "./components/VirtualScroller/types";
