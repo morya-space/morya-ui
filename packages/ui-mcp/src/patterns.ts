@@ -209,6 +209,7 @@ export const pagePatterns: PagePattern[] = [
       '不要为 ≤8 字段的列表 CRUD 再开 /entities/new 路由',
       '不要用 Toast 代替单行 message 回执',
     ],
+    goldenPage: 'form-in-dialog',
   },
   {
     id: 'dashboard',
@@ -464,6 +465,7 @@ export const pagePatterns: PagePattern[] = [
       '不要使用颜色作为唯一的状态表达方式',
       '不要让详情页的操作按钮分散在多个无关区域',
     ],
+    goldenPage: 'detail-page',
   },
   {
     id: 'result-page',
@@ -721,7 +723,16 @@ export const designRules = {
         'Double borders on filter + table wrapper',
       ],
     },
-    goldenPages: ['list-page', 'form-page', 'dashboard-page', 'login-page', 'landing-page', 'empty-state'],
+    goldenPages: [
+      'list-page',
+      'form-page',
+      'dashboard-page',
+      'login-page',
+      'landing-page',
+      'empty-state',
+      'detail-page',
+      'form-in-dialog',
+    ],
   },
   actions: {
     primary: { component: 'MButton', props: ['severity omitted or primary'] },

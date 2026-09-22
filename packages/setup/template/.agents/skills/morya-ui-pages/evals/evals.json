@@ -54,6 +54,18 @@
       "prompt": "把上面的课程列表再 polish 一轮：去掉多余实心按钮、保证只有一个主按钮、表格状态改成 MStatus、补上 MEmpty。不要改成营销页。",
       "expected_output": "Ops quieter polish: one primary, MStatus, MEmpty, text row actions, still list golden structure.",
       "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "给「用户管理」做资源详情页：面包屑、标题旁启用状态、编辑/返回/删除；摘要标签；基本信息属性网格；下方近期活动表。Vue3 + morya-ui，对齐详情黄金样例，不要做成落地页。",
+      "expected_output": "Ops detail: MPageHeader + MStatus, property MCard, related MTable rows, --m-* only, no marketing hero.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "用户列表页上「新建/编辑」不要另开路由：同页 MDialog（约 32rem）里放短表单（姓名、邮箱、角色），页脚取消/保存；保存成功用 message 一句话。输出单个 Vue SFC。",
+      "expected_output": "form-in-dialog: list stays, MDialog + MForm + #footer, message.success not toast string, MTable rows.",
+      "files": []
     }
   ]
 }

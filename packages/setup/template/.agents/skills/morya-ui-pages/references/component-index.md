@@ -58,8 +58,9 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Intent | Prefer |
 | --- | --- |
 | Searchable list + paging | `MPageFilters` + `MTable` (+ paginator) |
-| Create / edit from a list (few–medium fields) | **`MDialog` + `MForm`** (stay on the list) |
+| Create / edit from a list (few–medium fields) | **`form-in-dialog`** golden (`MDialog` + `MForm`) |
 | Create / edit long / multi-section entity | Form golden page **or** `MDrawer` |
+| Resource detail / profile | `detail-page` golden |
 | Delete | `MConfirmDialog` |
 | Lightweight inline status | `MStatus` (dot + label) |
 | Status chip / closable label | `MTag` severities |

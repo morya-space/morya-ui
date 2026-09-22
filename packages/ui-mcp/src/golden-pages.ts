@@ -53,6 +53,20 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
     titleEn: 'Empty state golden sample',
     patternId: 'empty-state',
   },
+  {
+    id: 'detail-page',
+    file: 'detail-page.vue',
+    title: '详情页黄金样例',
+    titleEn: 'Detail page golden sample',
+    patternId: 'detail-page',
+  },
+  {
+    id: 'form-in-dialog',
+    file: 'form-in-dialog.vue',
+    title: '列表内弹窗表单黄金样例',
+    titleEn: 'List create/edit dialog golden sample',
+    patternId: 'form-in-dialog',
+  },
 ]
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')

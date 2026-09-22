@@ -5,7 +5,9 @@ When generating a full page, pick a type and **mirror the golden-page block orde
 | Type | `get_golden_page` id |
 | --- | --- |
 | List | `list-page` |
-| Form | `form-page` |
+| Form (long / dedicated) | `form-page` |
+| List create/edit dialog | `form-in-dialog` |
+| Detail | `detail-page` |
 | Dashboard | `dashboard-page` |
 | Login | `login-page` |
 | Landing | `landing-page` |
@@ -65,13 +67,24 @@ Craft: spacious density + Ops polish; do not turn the first viewport into a mark
 
 Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
 
-## Detail page — suggested order
+## Detail page — block order
 
 1. Same admin chrome as list (breadcrumb → `MPageContent`)
-2. `MPageHeader` — title, status via `MStatus` (light) or `MTag` (chip), primary/secondary actions
-3. Summary `MCard` or definition sections via `MPageSection`
-4. Related data: nested `MTabs` + `MTable` / timeline
-5. Edit via route, or `MDrawer` / `MDialog` — do not turn detail into a marketing page
+2. `MPageHeader` — title, `MStatus` in `#actions` (or chip `MTag` for categories), primary/secondary/danger actions
+3. Summary `MPageSection` + property `MCard` (definition grid with `--m-*` only)
+4. Related data: `MCard` + `MTable` / tabs / timeline
+5. Short edit → same-page `MDialog` (`form-in-dialog`); long edit → `form-page` / `MDrawer`
+
+Mirror MCP `get_golden_page` `detail-page`.
+
+## List create/edit dialog — block order
+
+1. Stay on the list page (`MPageToolbar` + `MTable`)
+2. `MDialog` ~`28–36rem` + `MForm` fields
+3. Actions in Dialog `#footer` (cancel secondary/text + save primary)
+4. Success → `message.success` one-liner, then close
+
+Mirror MCP `get_golden_page` `form-in-dialog`.
 
 ## Settings page — suggested order
 
@@ -82,7 +95,8 @@ Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
 
 ## Hybrids
 
-- List + row edit dialog → list golden page + `MDialog` form body.
+- List + row edit dialog → `form-in-dialog` golden (or list golden + dialog body).
 - List + side detail → list + `MDrawer`.
+- Resource detail → `detail-page` golden.
 - Settings without admin chrome → still use `MPageContent` + `MPageSection`; omit sider only if the host app already provides chrome.
 - Non-Ops surfaces (auth, landing, empty, wizard) → [surfaces.md](surfaces.md), not these golden orders.
