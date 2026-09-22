@@ -147,10 +147,10 @@ Snippets for popular products. Key names may change across versions — check ea
 | `get_design_rules` | Design-token and MPage* composition rules |
 | `recommend_component` | List, read, or recommend component selection guides |
 | `list_golden_pages` | List golden page samples |
-| `get_golden_page` | Read a golden page Vue source (`list-page`, `form-page`, `dashboard-page`, `login-page`, `landing-page`, `empty-state`) |
+| `get_golden_page` | Read a golden page Vue source (`list-page`, `form-page`, `form-in-dialog`, `detail-page`, `dashboard-page`, `login-page`, `landing-page`, `empty-state`) |
 | `list_page_snippets` | List reusable page-section snippets |
 | `get_page_snippet` | Read one snippet (filters, toolbar, form actions, …) |
-| `validate_page` | Check page composition, spacing, and double-border issues |
+| `validate_page` | Check page composition, spacing, double-border, and contract hints (`rows`, message, MStatus) |
 
 Most tools accept `mode`: `zh` (default) or `en`.
 

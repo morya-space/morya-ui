@@ -147,10 +147,10 @@ npx -y @morya-ui/mcp
 | `get_design_rules` | 设计令牌与 MPage* 组合配方 |
 | `recommend_component` | 列出、阅读或推荐组件选型指南 |
 | `list_golden_pages` | 列出黄金样例页面 |
-| `get_golden_page` | 读取黄金样例 Vue 源码 |
+| `get_golden_page` | 读取黄金样例 Vue 源码（含 `detail-page`、`form-in-dialog` 等） |
 | `list_page_snippets` | 列出可复用的页面区块 snippet |
 | `get_page_snippet` | 读取局部区块 snippet（筛选区、工具栏等） |
-| `validate_page` | 校验页面组合、间距与双边框问题 |
+| `validate_page` | 校验页面组合、间距、双边框，以及 rows / message / MStatus 等契约 |
 
 多数工具支持 `mode`：`zh`（默认）或 `en`。
 
