@@ -1,7 +1,6 @@
 /* —— Form: CascadeSelect —— */
 .m-cascadeselect {
     --m-cascadeselect-min-width: 12rem;
-    --m-cascadeselect-column-max-height: 16rem;
     display: inline-block;
     max-width: 100%;
     position: relative;
@@ -85,39 +84,60 @@
 }
 
 .m-cascadeselect__panel {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-md);
-    box-shadow: var(--m-shadow-md);
+    --m-cascadeselect-column-min-width: 10rem;
+    --m-cascadeselect-column-max-height: min(18rem, 45vh);
     box-sizing: border-box;
     display: flex;
     left: 0;
-    margin-top: var(--m-space-1);
     position: absolute;
     top: 100%;
-    width: 100%;
-    z-index: var(--m-z-popper);
+    width: max-content;
 }
 
 .m-cascadeselect__panel--teleported {
-    margin-top: 0;
-    position: fixed;
     top: auto;
-    z-index: var(--m-z-dropdown);
 }
 
 .m-cascadeselect__column {
-    flex: 1 1 0;
+    box-sizing: border-box;
+    flex: 0 0 auto;
     margin: 0;
-    max-height: var(--m-cascadeselect-column-max-height);
-    min-height: 0;
-    min-width: 0;
+    width: max-content;
+}
+
+/*
+ * First column keeps the trigger-width floor (panel min-width from JS).
+ * Later columns only add width — they must not redistribute/shrink the first.
+ */
+.m-cascadeselect__column:first-child {
+    min-width: inherit;
+}
+
+.m-cascadeselect__column:not(:first-child) {
+    min-width: var(--m-cascadeselect-column-min-width);
+}
+
+/* Lone column still fills the panel edge-to-edge. */
+.m-cascadeselect__column:only-child {
+    width: auto;
+    min-width: 100%;
+}
+
+.m-cascadeselect__column .m-scrollbar__wrap,
+.m-cascadeselect__column .m-scrollbar__view {
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .m-cascadeselect__column-list {
     list-style: none;
     margin: 0;
     padding: var(--m-space-1);
+    width: 100%;
+}
+
+.m-cascadeselect__column-list > li {
+    width: 100%;
 }
 
 .m-cascadeselect__column + .m-cascadeselect__column {
@@ -125,32 +145,13 @@
 }
 
 .m-cascadeselect__option {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    border-radius: var(--m-radius-sm);
-    color: inherit;
-    cursor: pointer;
-    display: flex;
-    font-family: var(--m-font-sans);
-    justify-content: space-between;
-    padding: var(--m-space-2) var(--m-space-3);
-    text-align: left;
-    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
     width: 100%;
 }
 
-.m-cascadeselect__option:hover:not(:disabled),
-.m-cascadeselect__option--selected {
-    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+.m-cascadeselect__option > span {
+    min-width: 0;
 }
 
-.m-cascadeselect__option:focus-visible {
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
-}
-
-.m-cascadeselect__option:disabled {
-    cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+.m-cascadeselect__option .m-icon {
+    flex-shrink: 0;
 }

@@ -21,6 +21,7 @@ defineEmits<{
   (event: 'toggle', key: string): void
   (event: 'select', node: TreeSelectNode): void
   (event: 'check', node: TreeSelectNode): void
+  (event: 'activate', node: TreeSelectNode): void
 }>()
 
 const locale = useMLocale()
@@ -64,6 +65,7 @@ const locale = useMLocale()
         :class="{ 'm-treeselect__option--selected': selectedKeys.includes(node.key) }"
         :disabled="node.disabled"
         :tabindex="node.key === activeKey ? 0 : -1"
+        @mouseenter="$emit('activate', node)"
         @click="$emit('select', node)"
       >
         <component :is="() => renderOption?.(node)" v-if="renderOption" />
@@ -87,6 +89,7 @@ const locale = useMLocale()
         @toggle="$emit('toggle', $event)"
         @select="$emit('select', $event)"
         @check="$emit('check', $event)"
+        @activate="$emit('activate', $event)"
       />
     </ul>
   </li>

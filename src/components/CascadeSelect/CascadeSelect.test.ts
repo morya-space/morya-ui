@@ -24,6 +24,15 @@ describe('muCascadeSelect', () => {
     expect(wrapper.findAll('.m-cascadeselect__column')).toHaveLength(1)
     await wrapper.findAll('.m-cascadeselect__option')[0]!.trigger('click')
     expect(wrapper.findAll('.m-cascadeselect__column')).toHaveLength(2)
+    expect(wrapper.findAll('.m-cascadeselect__option')[0]!.classes()).toContain(
+      'm-cascadeselect__option--in-path',
+    )
+    const leafOptions = wrapper
+      .findAll('.m-cascadeselect__column')[1]!
+      .findAll('.m-cascadeselect__option')
+    expect(leafOptions.every((node) => !node.classes().includes('m-cascadeselect__option--highlighted'))).toBe(
+      true,
+    )
     const phone = wrapper.findAll('.m-cascadeselect__option').find((node) => node.text().includes('Phone'))
     await phone!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['phone'])
@@ -81,12 +90,36 @@ describe('muCascadeSelect', () => {
     await wrapper.get('.m-cascadeselect__trigger').trigger('click')
     await nextTick()
     expect(wrapper.findAll('.m-cascadeselect__column')).toHaveLength(2)
+    const electronics = wrapper
+      .findAll('.m-cascadeselect__option')
+      .find((node) => node.text().includes('Electronics'))
     const laptop = wrapper
       .findAll('.m-cascadeselect__option')
       .find((node) => node.text().includes('Laptop'))
-    expect(document.activeElement).toBe(laptop!.element)
+    expect(electronics!.classes()).toContain('m-cascadeselect__option--in-path')
     expect(laptop!.classes()).toContain('m-cascadeselect__option--selected')
+    expect(laptop!.classes()).not.toContain('m-cascadeselect__option--highlighted')
+    expect(laptop!.find('.m-cascadeselect__check').exists()).toBe(true)
     wrapper.unmount()
+  })
+
+  it('does not pre-highlight options when opened with the mouse', async () => {
+    const wrapper = mount(MCascadeSelect, {
+      props: { options, modelValue: 'laptop', teleport: false },
+    })
+    await wrapper.get('.m-cascadeselect__trigger').trigger('click')
+    await nextTick()
+    const laptop = wrapper
+      .findAll('.m-cascadeselect__option')
+      .find((node) => node.text().includes('Laptop'))
+    expect(laptop!.classes()).toContain('m-cascadeselect__option--selected')
+    expect(laptop!.classes()).not.toContain('m-cascadeselect__option--highlighted')
+    expect(
+      wrapper.findAll('.m-cascadeselect__option').filter((node) =>
+        node.classes().includes('m-cascadeselect__option--highlighted'),
+      ),
+    ).toHaveLength(0)
+    expect(laptop!.find('.m-cascadeselect__check').exists()).toBe(true)
   })
 
   it('closes on Escape and returns focus to the trigger', async () => {
@@ -126,7 +159,7 @@ describe('muCascadeSelect', () => {
     wrapper.unmount()
   })
 
-  it('keeps the overlay as wide as the trigger', async () => {
+  it('keeps overlay at least as wide as the trigger and grows with columns', async () => {
     const wrapper = mount(MCascadeSelect, {
       props: { options, modelValue: null, teleport: false },
       attachTo: document.body,
@@ -150,11 +183,12 @@ describe('muCascadeSelect', () => {
     await wrapper.find('.m-cascadeselect__trigger').trigger('click')
     await nextTick()
     const panel = wrapper.get('.m-cascadeselect__panel')
-    expect(panel.attributes('style')).toContain('width: 240px')
+    expect(panel.attributes('style')).toContain('min-width: 240px')
+    expect(panel.attributes('style') ?? '').not.toMatch(/(?:^|;)\s*width:\s*240px/)
     await wrapper.findAll('.m-cascadeselect__option')[0]!.trigger('click')
     await nextTick()
     expect(wrapper.findAll('.m-cascadeselect__column')).toHaveLength(2)
-    expect(wrapper.get('.m-cascadeselect__panel').attributes('style')).toContain('width: 240px')
+    expect(wrapper.get('.m-cascadeselect__panel').attributes('style')).toContain('min-width: 240px')
     wrapper.unmount()
   })
 })

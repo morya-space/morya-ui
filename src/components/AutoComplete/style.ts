@@ -1,5 +1,6 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../../shared/styles/select-overlay.css'
 import '../Icon/styles.css'
 import '../Scrollbar/styles.css'
 import './styles.css'

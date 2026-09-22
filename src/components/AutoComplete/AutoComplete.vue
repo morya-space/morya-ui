@@ -118,10 +118,10 @@ function updatePanelPosition() {
   panelStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', { minWidth: width, width })
 }
 
-function requestComplete(query: string) {
+function requestComplete(query: string, highlightFirst = false) {
   emit('complete', query)
   open.value = true
-  highlight.value = filtered.value.length ? 0 : -1
+  highlight.value = highlightFirst && filtered.value.length ? 0 : -1
   void nextTick(() => updatePanelPosition())
 }
 
@@ -156,7 +156,7 @@ function toggleDropdown() {
 
 function onKeydown(event: KeyboardEvent) {
   if (!open.value && (event.key === 'ArrowDown' || event.key === 'Enter')) {
-    requestComplete(props.modelValue ?? '')
+    requestComplete(props.modelValue ?? '', true)
     return
   }
   if (!open.value) return
@@ -168,8 +168,12 @@ function onKeydown(event: KeyboardEvent) {
     event.preventDefault()
     const length = filtered.value.length
     if (!length) return
-    const direction = event.key === 'ArrowDown' ? 1 : -1
-    highlight.value = (highlight.value + direction + length) % length
+    if (highlight.value < 0) {
+      highlight.value = event.key === 'ArrowDown' ? 0 : length - 1
+    } else {
+      const direction = event.key === 'ArrowDown' ? 1 : -1
+      highlight.value = (highlight.value + direction + length) % length
+    }
   }
   if (event.key === 'Enter' && highlight.value >= 0) {
     event.preventDefault()
@@ -292,6 +296,7 @@ const panelOpen = computed(() => open.value)
                   role="option"
                   :class="{ 'm-autocomplete__item--active': index === highlight }"
                   :aria-selected="index === highlight"
+                  @mouseenter="highlight = index"
                   @mousedown.prevent="select(suggestionAt(item))"
                 >
                   <slot name="item" :option="suggestionAt(item)">
@@ -323,6 +328,7 @@ const panelOpen = computed(() => open.value)
                 role="option"
                 :class="{ 'm-autocomplete__item--active': index === highlight }"
                 :aria-selected="index === highlight"
+                @mouseenter="highlight = index"
                 @mousedown.prevent="select(item)"
               >
                 <slot name="item" :option="item">

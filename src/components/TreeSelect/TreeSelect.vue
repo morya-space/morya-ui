@@ -179,15 +179,20 @@ function updatePanelPosition() {
   })
 }
 
-function openPanel() {
+function openPanel(fromKeyboard = false) {
   open.value = true
   void nextTick(() => {
     updatePanelPosition()
-    const selectedIndex = flatNodes.value.findIndex((flat) => selectedKeys.value.includes(flat.node.key))
-    if (selectedIndex >= 0) keyboard.setActive(selectedIndex)
-    else keyboard.moveFirst()
-    if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-treeselect__filter')?.focus()
-    else focusActiveNode()
+    if (fromKeyboard) {
+      const selectedIndex = flatNodes.value.findIndex((flat) => selectedKeys.value.includes(flat.node.key))
+      if (selectedIndex >= 0) keyboard.setActive(selectedIndex)
+      else keyboard.moveFirst()
+      if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-treeselect__filter')?.focus()
+      else focusActiveNode()
+    } else {
+      keyboard.setActive(-1)
+      if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-treeselect__filter')?.focus()
+    }
   })
 }
 
@@ -197,7 +202,7 @@ function toggle() {
     open.value = false
     return
   }
-  openPanel()
+  openPanel(false)
 }
 
 function onTreeKeydown(event: KeyboardEvent) {
@@ -236,10 +241,10 @@ function onTriggerKeydown(event: KeyboardEvent) {
   if (!open.value) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
-      openPanel()
+      openPanel(true)
     } else if (event.key === 'Enter') {
       event.preventDefault()
-      toggle()
+      openPanel(false)
     }
     return
   }
@@ -285,6 +290,12 @@ function select(node: TreeSelectNode) {
     ? selectedKeys.value.filter((key) => key !== node.key)
     : [...selectedKeys.value, node.key]
   emitKeys(next)
+}
+
+function activateNode(node: TreeSelectNode) {
+  if (node.disabled) return
+  const index = flatNodes.value.findIndex((flat) => flat.node.key === node.key)
+  if (index >= 0) keyboard.setActive(index)
 }
 
 function toggleCheck(node: TreeSelectNode) {
@@ -475,6 +486,7 @@ onBeforeUnmount(() => {
                   @toggle="toggleExpand"
                   @select="select"
                   @check="toggleCheck"
+                  @activate="activateNode"
                 />
               </ul>
             </MScrollbar>

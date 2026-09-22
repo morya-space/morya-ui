@@ -1,0 +1,167 @@
+/* Shared floating option-list chrome for form select-likes. */
+
+.m-select__menu,
+.m-autocomplete__panel,
+.m-cascadeselect__panel,
+.m-treeselect__panel {
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-md);
+    box-shadow: var(--m-shadow-md);
+    margin-top: var(--m-space-2);
+    overflow: hidden;
+    z-index: var(--m-z-popper);
+}
+
+.m-select__menu--teleported,
+.m-autocomplete__panel--teleported,
+.m-cascadeselect__panel--teleported,
+.m-treeselect__panel--teleported {
+    margin-top: 0;
+    position: fixed;
+    z-index: var(--m-z-dropdown);
+}
+
+.m-select__list-view,
+.m-autocomplete__panel-list,
+.m-cascadeselect__column-list {
+    display: grid;
+    gap: var(--m-space-1);
+}
+
+.m-select__option,
+.m-autocomplete__item,
+.m-cascadeselect__option {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text);
+    cursor: pointer;
+    display: flex;
+    font-family: var(--m-font-sans);
+    font-size: var(--m-control-font-medium);
+    gap: var(--m-space-3);
+    justify-content: space-between;
+    min-height: var(--m-control-height-medium);
+    padding: 0 var(--m-control-padding-x-medium);
+    text-align: left;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+    white-space: nowrap;
+}
+
+.m-select__option:hover:not(:disabled),
+.m-select__option--highlighted:not(:disabled),
+.m-autocomplete__item:hover,
+.m-autocomplete__item--active,
+.m-cascadeselect__option:hover:not(:disabled),
+.m-cascadeselect__option--highlighted:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    color: var(--m-color-primary);
+}
+
+.m-select__option--selected,
+.m-cascadeselect__option--selected {
+    color: var(--m-color-primary);
+    font-weight: 600;
+}
+
+.m-cascadeselect__option--in-path {
+    font-weight: 600;
+}
+
+.m-select__check,
+.m-cascadeselect__check {
+    color: var(--m-color-primary);
+    flex: 0 0 auto;
+}
+
+.m-select__option:disabled,
+.m-cascadeselect__option:disabled {
+    color: var(--m-color-text-muted);
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-select__option:focus-visible,
+.m-autocomplete__item:focus-visible,
+.m-cascadeselect__option:focus-visible {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    box-shadow: none;
+    outline: none;
+}
+
+.m-select__empty,
+.m-autocomplete__status {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-md);
+    list-style: none;
+    padding: var(--m-space-3);
+    text-align: center;
+}
+
+/* TreeSelect options share interaction chrome; row layout keeps the expand toggler. */
+.m-treeselect__option {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text);
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    font-family: var(--m-font-sans);
+    font-size: var(--m-control-font-medium);
+    min-height: var(--m-control-height-medium);
+    padding: 0 var(--m-control-padding-x-medium);
+    text-align: left;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-treeselect__option:hover:not(:disabled),
+.m-treeselect__node--active > .m-treeselect__row .m-treeselect__option:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    color: var(--m-color-primary);
+}
+
+.m-treeselect__option--selected {
+    color: var(--m-color-primary);
+    font-weight: 600;
+}
+
+.m-treeselect__option:focus-visible {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    box-shadow: none;
+    outline: none;
+}
+
+.m-treeselect__option:disabled {
+    color: var(--m-color-text-muted);
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-select__filter,
+.m-treeselect__filter {
+    background: var(--m-color-surface);
+    border: 0;
+    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-sm);
+    box-sizing: border-box;
+    color: var(--m-color-text);
+    flex: 0 0 auto;
+    font: inherit;
+    margin: calc(var(--m-space-1) * -1) calc(var(--m-space-1) * -1) 0;
+    padding: var(--m-space-2) var(--m-space-3);
+    width: calc(100% + var(--m-space-1) * 2);
+}
+
+.m-select__filter:focus-visible,
+.m-treeselect__filter:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}

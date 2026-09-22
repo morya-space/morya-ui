@@ -210,15 +210,21 @@ function updateMenuPosition() {
   )
 }
 
-function setOpen(next: boolean) {
+function setOpen(next: boolean, highlight: 'none' | 'selected' | 'last' = 'none') {
   if (props.disabled || open.value === next) return
   open.value = next
   if (next) {
     filterQuery.value = ''
-    highlightedIndex.value = Math.max(
-      0,
-      enabledOptions.value.findIndex((option) => !option.created && isSelected(option.value)),
-    )
+    if (highlight === 'none') {
+      highlightedIndex.value = -1
+    } else if (highlight === 'last') {
+      highlightedIndex.value = Math.max(0, enabledOptions.value.length - 1)
+    } else {
+      const selectedIndex = enabledOptions.value.findIndex(
+        (option) => !option.created && isSelected(option.value),
+      )
+      highlightedIndex.value = selectedIndex >= 0 ? selectedIndex : enabledOptions.value.length ? 0 : -1
+    }
     emit('show')
     void nextTick(() => {
       updateMenuPosition()
@@ -281,7 +287,9 @@ function onTriggerKeydown(event: KeyboardEvent) {
   if (props.disabled) return
   if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(event.key)) {
     event.preventDefault()
-    if (!open.value) setOpen(true)
+    if (!open.value) {
+      setOpen(true, event.key === 'ArrowUp' ? 'last' : 'selected')
+    }
   }
 }
 
@@ -296,8 +304,12 @@ function onMenuKeydown(event: KeyboardEvent) {
   if (!length) return
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault()
-    highlightedIndex.value =
-      (highlightedIndex.value + (event.key === 'ArrowDown' ? 1 : -1) + length) % length
+    if (highlightedIndex.value < 0) {
+      highlightedIndex.value = event.key === 'ArrowDown' ? 0 : length - 1
+    } else {
+      highlightedIndex.value =
+        (highlightedIndex.value + (event.key === 'ArrowDown' ? 1 : -1) + length) % length
+    }
   }
   if (event.key === 'Home') {
     event.preventDefault()

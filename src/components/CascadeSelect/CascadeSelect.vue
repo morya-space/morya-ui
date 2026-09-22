@@ -112,10 +112,11 @@ function findLabel(options: CascadeSelectOption[], value: CascadeSelectValue): s
 function updatePanelPosition() {
   if (!trigger.value) return
   const rect = trigger.value.getBoundingClientRect()
-  const width = `${rect.width}px`
+  const minWidth = `${rect.width}px`
+  // Grow with columns; only keep trigger width as a floor so single-column still matches the field.
   panelStyle.value = teleported.value
-    ? computeFloatingOverlayStyle(rect, 'bottom-start', { minWidth: width, width })
-    : { minWidth: width, width }
+    ? computeFloatingOverlayStyle(rect, 'bottom-start', { minWidth })
+    : { minWidth }
 }
 
 function buildPathToValue(
@@ -140,19 +141,50 @@ function focusActiveOption() {
   optionEl?.focus({ preventScroll: true })
 }
 
-function openPanel() {
+function isOptionHighlighted(
+  option: CascadeSelectOption,
+  columnIndex: number,
+  optionIndex: number,
+): boolean {
+  return (
+    keyboard.activeIndex.value >= 0 &&
+    columnIndex === activeColumn.value &&
+    optionIndex === keyboard.activeIndex.value
+  )
+}
+
+function isOptionInPath(option: CascadeSelectOption, columnIndex: number): boolean {
+  return option.children != null && option.children === path.value[columnIndex + 1]
+}
+
+function onOptionMouseEnter(
+  option: CascadeSelectOption,
+  columnIndex: number,
+  optionIndex: number,
+) {
+  if (option.disabled) return
+  activeColumn.value = columnIndex
+  keyboard.setActive(optionIndex)
+}
+
+function openPanel(fromKeyboard = false) {
   open.value = true
   const resolved = props.modelValue != null ? buildPathToValue(props.options, props.modelValue) : null
   path.value = resolved ?? [props.options]
   activeColumn.value = path.value.length - 1
-  const column = path.value[activeColumn.value] ?? []
-  const selectedIndex = column.findIndex((option) => option.value === props.modelValue)
-  keyboard.setActive(selectedIndex)
-  if (selectedIndex < 0) keyboard.moveFirst()
-  void nextTick(() => {
-    updatePanelPosition()
-    focusActiveOption()
-  })
+  if (fromKeyboard) {
+    const column = path.value[activeColumn.value] ?? []
+    const selectedIndex = column.findIndex((option) => option.value === props.modelValue)
+    if (selectedIndex >= 0) keyboard.setActive(selectedIndex)
+    else keyboard.moveFirst()
+    void nextTick(() => {
+      updatePanelPosition()
+      focusActiveOption()
+    })
+  } else {
+    keyboard.setActive(-1)
+    void nextTick(() => updatePanelPosition())
+  }
 }
 
 function toggle() {
@@ -161,7 +193,7 @@ function toggle() {
     open.value = false
     return
   }
-  openPanel()
+  openPanel(false)
 }
 
 function enterChildren(option: CascadeSelectOption, columnIndex: number) {
@@ -212,7 +244,7 @@ function onTriggerKeydown(event: KeyboardEvent) {
   if (!open.value) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
-      openPanel()
+      openPanel(true)
     }
     return
   }
@@ -356,26 +388,41 @@ onBeforeUnmount(() => {
             tag="ul"
             class="m-cascadeselect__column"
             fit-content
+            max-height="var(--m-cascadeselect-column-max-height)"
             view-class="m-cascadeselect__column-list"
           >
-            <li v-for="option in column" :key="String(option.value)">
+            <li v-for="(option, optionIndex) in column" :key="String(option.value)">
               <button
                 type="button"
                 class="m-cascadeselect__option"
                 :class="{
                   'm-cascadeselect__option--selected': option.value === modelValue,
+                  'm-cascadeselect__option--in-path': isOptionInPath(option, columnIndex),
+                  'm-cascadeselect__option--highlighted': isOptionHighlighted(
+                    option,
+                    columnIndex,
+                    optionIndex,
+                  ),
                   'm-cascadeselect__option--parent': Boolean(option.children?.length),
                 }"
                 :disabled="option.disabled"
                 role="option"
                 :aria-selected="option.value === modelValue"
+                @mouseenter="onOptionMouseEnter(option, columnIndex, optionIndex)"
                 @click="enterLevel(option, columnIndex)"
               >
                 <slot name="option" :option="option">
                   <span>{{ option.label }}</span>
                 </slot>
                 <MIcon
-                  v-if="option.children?.length"
+                  v-if="option.value === modelValue"
+                  class="m-cascadeselect__check"
+                  name="check"
+                  size="sm"
+                  aria-hidden="true"
+                />
+                <MIcon
+                  v-else-if="option.children?.length"
                   name="chevron-right"
                   size="sm"
                   aria-hidden="true"

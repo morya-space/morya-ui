@@ -1,7 +1,7 @@
 /* —— Form: AutoComplete —— */
 .m-autocomplete {
     --m-autocomplete-min-width: 14rem;
-    --m-autocomplete-dropdown-max-height: 14rem;
+    --m-autocomplete-dropdown-max-height: min(18rem, 45vh);
     --m-autocomplete-spinner-size: 0.85rem;
     display: inline-block;
     font-family: var(--m-font-sans);
@@ -91,6 +91,7 @@
 
 .m-autocomplete__dropdown {
     align-items: center;
+    align-self: stretch;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
@@ -100,7 +101,6 @@
     display: inline-flex;
     flex-shrink: 0;
     justify-content: center;
-    min-height: var(--m-control-height-medium);
     outline: none;
     padding: 0 var(--m-control-padding-x-medium);
     transition: color var(--m-motion-fast) var(--m-motion-ease);
@@ -118,17 +118,11 @@
 }
 
 .m-autocomplete__panel {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-md);
-    box-shadow: var(--m-shadow-md);
+    --m-autocomplete-dropdown-max-height: min(18rem, 45vh);
     left: 0;
-    margin: var(--m-space-1) 0 0;
     max-height: var(--m-autocomplete-dropdown-max-height);
-    overflow: hidden;
     position: absolute;
     right: 0;
-    z-index: var(--m-z-popper);
 }
 
 .m-autocomplete__panel-scroll {
@@ -143,31 +137,17 @@
 }
 
 .m-autocomplete__panel--teleported {
-    margin: 0;
-    position: fixed;
     right: auto;
-    z-index: var(--m-z-dropdown);
 }
 
-.m-autocomplete__item {
-    border-radius: var(--m-radius-sm);
-    cursor: pointer;
-    padding: var(--m-space-2) var(--m-space-3);
-    transition: background-color var(--m-motion-fast) var(--m-motion-ease);
+.m-autocomplete__panel-scroll--virtual .m-virtualscroller__item {
+    display: flex;
 }
 
-.m-autocomplete__item--active,
-.m-autocomplete__item:hover {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 12%,
-        var(--m-color-surface)
-    );
-}
-
-.m-autocomplete__item:focus-visible {
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
+.m-autocomplete__panel-scroll--virtual .m-autocomplete__item {
+    height: 100%;
+    min-height: 0;
+    width: 100%;
 }
 
 .m-autocomplete__spinner {
@@ -190,12 +170,6 @@
 [data-m-motion="reduced"] .m-autocomplete__spinner {
     animation: none;
     border-top-color: var(--m-color-text-muted);
-}
-
-.m-autocomplete__status {
-    color: var(--m-color-text-muted);
-    list-style: none;
-    padding: var(--m-space-2) var(--m-space-3);
 }
 
 .m-autocomplete--invalid .m-autocomplete__control {
