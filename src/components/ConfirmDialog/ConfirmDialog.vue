@@ -10,6 +10,7 @@ import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
@@ -41,6 +42,12 @@ const acceptText = computed(() => props.acceptLabel ?? locale.value.accept)
 const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 const origin = ref(getLastPointer())
 const pending = ref<'accept' | 'reject' | null>(null)
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'dialog',
+  local: () => props.transition,
+  componentName: 'ConfirmDialog',
+  fallback: 'dialog',
+})
 const busy = computed(() => pending.value != null || props.loading)
 const resolvedType = computed(() => {
   const type = props.type
@@ -119,7 +126,7 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-dialog">
+    <Transition :name="transitionName" :css="transitionCss">
       <div
         v-if="modelValue"
         v-bind="rootAttrs"

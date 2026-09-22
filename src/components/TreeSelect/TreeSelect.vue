@@ -10,6 +10,7 @@ import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import {
@@ -50,6 +51,12 @@ const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const slots = useSlots()
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'TreeSelect',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
 const autoFieldId = useMId('m-treeselect')
@@ -429,7 +436,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="m-scale-fade">
+        <Transition :name="transitionName" :css="transitionCss">
           <div
             v-if="open"
             :id="panelId"

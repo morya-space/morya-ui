@@ -1,5 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type PopoverPlacement =
   | 'top'
@@ -30,6 +31,8 @@ export interface PopoverProps {
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
   appendTo?: MAppendTo
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface PopoverEmits {

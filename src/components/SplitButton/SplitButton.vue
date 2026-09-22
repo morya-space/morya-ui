@@ -10,6 +10,7 @@ import { resolveIconSizeFromClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
 defineOptions({ inheritAttrs: false })
@@ -29,6 +30,12 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'SplitButton',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -203,7 +210,7 @@ onBeforeUnmount(() => {
       <MIcon name="chevron-down" :size="iconSize" />
     </button>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <ul
           v-if="open"
           :id="menuId"

@@ -8,6 +8,7 @@ import { resolveMenuIcon } from '../../shared/menu'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 defineOptions({ inheritAttrs: false })
@@ -25,6 +26,12 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'tooltip',
+  local: () => props.transition,
+  componentName: 'CommandMenu',
+  fallback: 'fade',
+})
 const locale = useMLocale()
 const searchPlaceholder = computed(() => props.placeholder ?? locale.value.searchCommands)
 const query = ref('')
@@ -99,7 +106,7 @@ watch(filtered, () => {
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-fade">
+    <Transition :name="transitionName" :css="transitionCss">
       <div v-if="modelValue" v-bind="rootAttrs" class="m-commandmenu-backdrop" @click.self="close">
         <div
           ref="panelRef"

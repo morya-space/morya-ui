@@ -5,6 +5,7 @@ import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top',
@@ -15,6 +16,12 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 })
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'tooltip',
+  local: () => props.transition,
+  componentName: 'Tooltip',
+  fallback: 'fade',
+})
 const root = ref<HTMLElement | null>(null)
 const tipId = useMId()
 const visible = ref(false)
@@ -113,7 +120,7 @@ const contentStyle = computed(() => {
   >
     <slot />
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <span
           v-if="visible"
           :id="tipId"

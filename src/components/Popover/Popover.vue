@@ -10,6 +10,7 @@ import {
 import { computeFloatingOverlayStyle } from "../../shared/overlayPlacement";
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PopoverProps>(), {
@@ -28,8 +29,13 @@ const emit = defineEmits<{
 }>();
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
-;
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'Popover',
+  fallback: 'popover',
+})
 const panelId = useMId()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null);
@@ -210,7 +216,7 @@ onBeforeUnmount(() => {
       <slot />
     </span>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-popover">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="modelValue"
           :id="panelId"

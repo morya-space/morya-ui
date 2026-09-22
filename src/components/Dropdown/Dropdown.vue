@@ -6,6 +6,7 @@ import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import DropdownNodes from './DropdownNodes.vue'
 
@@ -28,6 +29,12 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'Dropdown',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
@@ -213,7 +220,7 @@ onBeforeUnmount(() => {
       <slot name="trigger">{{ locale.openMenu }}</slot>
     </span>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="modelValue"
           ref="menu"

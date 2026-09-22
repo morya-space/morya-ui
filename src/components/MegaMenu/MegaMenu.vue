@@ -9,6 +9,7 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
@@ -26,6 +27,12 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'MegaMenu',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const openIndex = ref<number | null>(null)
 const root = ref<HTMLElement | null>(null)
@@ -266,7 +273,7 @@ onBeforeUnmount(() => {
         {{ item.label }}
       </button>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="m-scale-fade">
+        <Transition :name="transitionName" :css="transitionCss">
           <div
             v-if="item.items?.length && openIndex === index"
             class="m-megamenu__panel"

@@ -1,6 +1,7 @@
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MotionPresetId } from '../../theme/motionPresets'
 import type { ButtonSeverity } from '../Button/types'
 import type { IconName } from '../Icon/types'
 
@@ -28,6 +29,8 @@ export interface ConfirmPopupProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface ConfirmPopupEmits {

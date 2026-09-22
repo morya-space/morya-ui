@@ -4,6 +4,7 @@ import { computed, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { useComponentDefaults, useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import { lockLoadingScroll, unlockLoadingScroll } from './loading'
 import LoadingIndicator from './LoadingIndicator.vue'
 import { normalizeLoadingEffect } from './types'
@@ -22,6 +23,12 @@ const slots = useSlots()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const defaults = useComponentDefaults('Loading')
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'overlay',
+  local: () => props.transition,
+  componentName: 'Loading',
+  fallback: 'loading',
+})
 
 const wrapping = computed(() => Boolean(slots.default))
 const overlay = computed(() => wrapping.value || props.fullscreen)
@@ -102,7 +109,7 @@ onBeforeUnmount(() => {
         <slot />
       </div>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="m-loading">
+        <Transition :name="transitionName" :css="transitionCss">
           <div
             v-if="visible"
             class="m-loading-mask"
@@ -122,7 +129,7 @@ onBeforeUnmount(() => {
       </Teleport>
     </div>
     <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-loading">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="visible"
           v-bind="rootAttrs"

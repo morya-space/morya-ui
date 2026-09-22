@@ -9,6 +9,7 @@ import { resolveOverlayTeleport } from '../../shared/overlay'
 import { MRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import {
   closeMessageItem,
@@ -30,6 +31,12 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'toast',
+  local: () => props.transition,
+  componentName: 'Message',
+  fallback: 'message',
+})
 const locale = useMLocale()
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const isService = computed(() => props.messages === undefined)
@@ -98,7 +105,7 @@ function onMouseLeave(item: MessageItem) {
       aria-live="polite"
       aria-atomic="false"
     >
-      <TransitionGroup name="m-message-slide">
+      <TransitionGroup :name="transitionName" :css="transitionCss">
         <div
           v-for="item in list"
           :key="item.id"

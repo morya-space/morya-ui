@@ -2,6 +2,7 @@ import type { MRenderable } from '../../shared/content'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MToastSeverity } from '../../shared/types'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type { MRenderable }
 
@@ -53,6 +54,8 @@ export interface ToastProps {
   max?: number
   /** Internal: auto-mounted service host. */
   auto?: boolean
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface ToastEmits {

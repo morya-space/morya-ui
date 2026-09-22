@@ -7,6 +7,7 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
@@ -48,6 +49,12 @@ const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const defaults = useComponentDefaults('Select')
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'Select',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
@@ -412,7 +419,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="open"
           :id="`${selectId}-listbox`"

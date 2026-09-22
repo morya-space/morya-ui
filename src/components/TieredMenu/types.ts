@@ -1,6 +1,7 @@
 import type { MAppendTo } from '../../shared/overlay'
 import type { FloatingOverlayPlacement } from '../../shared/overlayPlacement'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 export interface TieredMenuItem {
   label?: string
@@ -21,6 +22,8 @@ export interface TieredMenuProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface TieredMenuEmits {

@@ -1,5 +1,6 @@
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MotionPresetId } from '../../theme/motionPresets'
 import type { ButtonSeverity, ButtonSize } from '../Button/types'
 
 export interface SplitButtonItem {
@@ -24,6 +25,8 @@ export interface SplitButtonProps {
   teleport?: boolean
   /** 挂载目标，默认 `'body'`；`'self'` / `false` 表示就地渲染。 */
   appendTo?: MAppendTo
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface SplitButtonEmits {

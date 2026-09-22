@@ -1,6 +1,7 @@
 import type { MRenderable } from '../../shared/content'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 /** Built-in spinner graphics. */
 export const LOADING_EFFECTS = ['circular', 'aurora', 'bounce', 'wave', 'pulse', 'stardust'] as const
@@ -41,6 +42,8 @@ export interface LoadingProps {
   lock?: boolean
   /** Delay in ms before showing the mask. */
   delay?: number
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 /** Options for `v-loading` when the binding is an object. */

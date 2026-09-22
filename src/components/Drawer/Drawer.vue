@@ -8,6 +8,7 @@ import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
@@ -36,6 +37,12 @@ const locale = useMLocale()
 const drawerElement = ref<HTMLElement | null>(null)
 const pendingClose = ref(false)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'drawer',
+  local: () => props.transition,
+  componentName: 'Drawer',
+  fallback: 'drawer',
+})
 
 const isDismissableMask = computed(() => {
   if (props.closeOnOutsideClick !== undefined) return props.closeOnOutsideClick
@@ -102,7 +109,7 @@ useModalOverlay({
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-drawer" @after-leave="emit('after-leave')">
+    <Transition :name="transitionName" :css="transitionCss" @after-leave="emit('after-leave')">
       <div
         v-if="modelValue"
         v-bind="rootAttrs"

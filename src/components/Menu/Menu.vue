@@ -15,6 +15,7 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import { M_MENU_KEY } from './context'
 import MenuNodes from './MenuNodes.vue'
@@ -49,6 +50,12 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const slots = useSlots()
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'Menu',
+  fallback: 'scale-fade',
+})
 const root = ref<HTMLElement | null>(null)
 const triggerEl = ref<HTMLElement | null>(null)
 const popupStyle = ref<Record<string, string>>({})
@@ -430,7 +437,7 @@ const popupPanelStyle = computed(() =>
       <slot />
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="modelValue"
           ref="root"
@@ -452,7 +459,7 @@ const popupPanelStyle = computed(() =>
     </Teleport>
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-scale-fade">
+    <Transition :name="transitionName" :css="transitionCss">
       <div
         v-if="modelValue"
         ref="root"

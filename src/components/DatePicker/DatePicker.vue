@@ -13,6 +13,7 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -37,6 +38,12 @@ const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'DatePicker',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('DatePicker', () => props.size)
 const open = ref(false)
@@ -448,7 +455,7 @@ onBeforeUnmount(() => {
       {{ feedbackText }}
     </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="open"
           :id="panelId"

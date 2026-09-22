@@ -8,6 +8,7 @@ import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
@@ -34,6 +35,12 @@ const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { contr
 const slots = useSlots()
 const defaults = useComponentDefaults('CascadeSelect')
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'CascadeSelect',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('CascadeSelect', () => props.size)
 const open = ref(false)
@@ -336,7 +343,7 @@ onBeforeUnmount(() => {
       {{ feedbackText }}
     </p>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <div
           v-if="open"
           :id="panelId"

@@ -1,6 +1,7 @@
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MotionPresetId } from '../../theme/motionPresets'
 import type { ButtonSeverity } from '../Button/types'
 import type { DialogType } from '../Dialog/types'
 
@@ -30,6 +31,8 @@ export interface ConfirmDialogProps {
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */
   appendTo?: MAppendTo
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface ConfirmDialogEmits {

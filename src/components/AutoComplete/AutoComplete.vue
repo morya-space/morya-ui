@@ -8,6 +8,7 @@ import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 
@@ -34,6 +35,12 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'AutoComplete',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
 const autoFieldId = useMId('m-autocomplete')
@@ -233,7 +240,7 @@ const panelOpen = computed(() => open.value)
         </button>
       </div>
       <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-        <Transition name="m-scale-fade">
+        <Transition :name="transitionName" :css="transitionCss">
           <div
             v-if="panelOpen"
             ref="panel"

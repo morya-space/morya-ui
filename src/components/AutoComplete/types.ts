@@ -2,6 +2,7 @@ import type { MNativeInputProps } from '../../shared/nativeControlProps'
 import type { MAppendTo } from '../../shared/overlay'
 import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 export interface AutoCompleteOption {
   label: string
@@ -31,6 +32,8 @@ export interface AutoCompleteProps extends MNativeInputProps {
   appendTo?: MAppendTo
   /** Pass-through attrs/classes/styles per DOM part. */
   pt?: FieldPassThrough
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface AutoCompleteEmits {

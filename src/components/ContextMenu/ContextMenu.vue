@@ -5,6 +5,7 @@ import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import ContextMenuNodes from './ContextMenuNodes.vue'
 defineOptions({ inheritAttrs: false })
@@ -18,6 +19,12 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'ContextMenu',
+  fallback: 'scale-fade',
+})
 const root = ref<HTMLElement | null>(null)
 const localPosition = ref<ContextMenuPosition>({ x: 0, y: 0 })
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -105,7 +112,7 @@ defineExpose({ show, hide })
     <slot />
   </div>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-scale-fade">
+    <Transition :name="transitionName" :css="transitionCss">
       <div
         v-if="modelValue"
         ref="root"

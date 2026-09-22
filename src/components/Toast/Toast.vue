@@ -9,6 +9,7 @@ import { resolveOverlayTeleport } from '../../shared/overlay'
 import { MRenderableView } from '../../shared/Renderable'
 import { normalizeSeverity } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import {
   closeToastItem,
@@ -37,6 +38,12 @@ const list = computed(() => props.messages ?? toastState.messages)
 const resolvedPosition = computed(
   () => props.position ?? (isService.value ? toastState.position : 'top-right'),
 )
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'toast',
+  local: () => props.transition,
+  componentName: 'Toast',
+  fallback: 'slide-fade',
+})
 
 onMounted(() => {
   if (isService.value && !props.auto) registerToastManualHost()
@@ -89,7 +96,7 @@ function onMouseLeave(message: ToastMessage) {
       aria-live="polite"
       aria-atomic="true"
     >
-      <TransitionGroup name="m-slide-fade">
+      <TransitionGroup :name="transitionName" :css="transitionCss">
         <article
           v-for="message in list"
           :key="message.id"

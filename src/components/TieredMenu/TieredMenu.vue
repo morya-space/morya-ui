@@ -8,6 +8,7 @@ import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 defineOptions({ inheritAttrs: false })
@@ -26,6 +27,12 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'TieredMenu',
+  fallback: 'scale-fade',
+})
 const root = ref<HTMLElement | null>(null)
 const openIndex = ref<number | null>(null)
 const submenuAnchor = ref<HTMLElement | null>(null)
@@ -200,7 +207,7 @@ onBeforeUnmount(() => {
     </MScrollbar>
   </div>
   <Teleport v-else :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-scale-fade">
+    <Transition :name="transitionName" :css="transitionCss">
       <div
         v-if="modelValue"
         ref="root"

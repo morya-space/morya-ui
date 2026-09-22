@@ -1,10 +1,17 @@
-import type { AppContext } from 'vue'
+import type { AppContext, MaybeRefOrGetter } from 'vue'
 import type { MRenderable } from '../../shared/content'
 import type { MSizeInput } from '../../shared/types'
 import type { LoadingEffect, LoadingServiceInstance, LoadingServiceOptions } from './types'
-import { defineComponent, h, reactive, render, Transition } from 'vue'
+import { defineComponent, h, reactive, render, toValue, Transition } from 'vue'
+import {
+  getComponentDefault,
+  M_CONFIG_KEY,
+  type MGlobalConfig,
+} from '../../shared/config'
 import { renderMContent } from '../../shared/content'
 import { getMOverlayAppContext } from '../../shared/overlayHost'
+import { resolveMotionTransition } from '../../theme/motionPresets'
+import type { MotionPresetId } from '../../theme/motionPresets'
 import LoadingIndicator from './LoadingIndicator.vue'
 
 export interface LoadingMaskInstance extends LoadingServiceInstance {
@@ -49,6 +56,31 @@ interface MaskRecord {
   fullscreen: boolean
   destroy: () => void
   close: () => void
+}
+
+function readGlobalConfig(appContext?: AppContext | null): MGlobalConfig | undefined {
+  const ctx = appContext ?? getMOverlayAppContext()
+  if (!ctx) return undefined
+  const provided = (ctx.provides as Record<PropertyKey, unknown> | undefined)?.[
+    M_CONFIG_KEY as unknown as PropertyKey
+  ]
+  if (provided != null) {
+    return toValue(provided as MaybeRefOrGetter<MGlobalConfig>)
+  }
+  return ctx.config.globalProperties.$m
+}
+
+function resolveLoadingTransitionName(appContext?: AppContext | null): string | undefined {
+  const config = readGlobalConfig(appContext)
+  return resolveMotionTransition({
+    rolePreset: config?.motion?.transitions?.overlay,
+    componentDefault: getComponentDefault<MotionPresetId | false>(
+      config?.componentDefaults,
+      'Loading',
+      'transition',
+    ),
+    fallback: 'loading',
+  })
 }
 
 const openMasks = new Set<MaskRecord>()
@@ -212,11 +244,13 @@ export function mountLoadingMask(options: LoadingMaskOptions): LoadingMaskInstan
   const Mask = defineComponent({
     name: 'MLoadingMask',
     setup() {
+      const transitionName = resolveLoadingTransitionName(options.appContext)
       return () =>
         h(
           Transition,
           {
-            name: 'm-loading',
+            name: transitionName,
+            css: transitionName !== undefined,
             appear: true,
             // Keep leave completion reliable in jsdom / reduced-motion environments.
             duration: { enter: 180, leave: 130 },

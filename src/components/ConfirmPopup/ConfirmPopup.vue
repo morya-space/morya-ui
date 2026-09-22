@@ -8,6 +8,7 @@ import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
@@ -29,6 +30,12 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'ConfirmPopup',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
@@ -140,7 +147,7 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
 
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-    <Transition name="m-scale-fade">
+    <Transition :name="transitionName" :css="transitionCss">
       <div
         v-if="visible"
         ref="panel"

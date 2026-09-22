@@ -11,6 +11,7 @@ import { computeFloatingOverlayStyle  } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
+import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
@@ -30,6 +31,12 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const config = useMConfig()
+const { transitionName, transitionCss } = useMotionTransition({
+  role: 'popup',
+  local: () => props.transition,
+  componentName: 'SpeedDial',
+  fallback: 'scale-fade',
+})
 const locale = useMLocale()
 const speedDialLabel = computed(() => props.ariaLabel ?? locale.value.speedDial)
 const root = ref<HTMLElement | null>(null)
@@ -212,7 +219,7 @@ onBeforeUnmount(() => {
 <template>
   <div v-bind="rootAttrs" ref="root" :class="rootClass">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
-      <Transition name="m-scale-fade">
+      <Transition :name="transitionName" :css="transitionCss">
         <ul
           v-if="modelValue"
           :id="listId"

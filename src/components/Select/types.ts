@@ -2,6 +2,7 @@ import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
 import type { MAppendTo } from '../../shared/overlay'
 import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type SelectValue = string | number
 export type SelectSize = MSizeInput
@@ -58,6 +59,8 @@ export interface SelectProps extends MNativeComboboxFieldProps {
   placement?: 'bottom-start' | 'bottom-end'
   /** Pass-through attrs/classes/styles per DOM part. */
   pt?: FieldPassThrough
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface SelectEmits {

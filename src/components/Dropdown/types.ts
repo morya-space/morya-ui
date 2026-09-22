@@ -1,6 +1,7 @@
 import type { MenuNodeBase } from '../../shared/menu'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type DropdownItemType = 'item' | 'group' | 'divider'
 export type DropdownTrigger = 'click' | 'hover'
@@ -31,6 +32,8 @@ export interface DropdownProps {
   appendTo?: MAppendTo
   /** Pass-through attrs/classes/styles for the root element. */
   pt?: RootPassThrough
+  /** Named motion preset, or `false` to disable enter/exit transition. */
+  transition?: MotionPresetId | false
 }
 
 export interface DropdownEmits {
