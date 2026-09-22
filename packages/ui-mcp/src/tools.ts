@@ -1121,6 +1121,53 @@ export function createToolHandlers(catalog = loadCatalog()) {
       }
     }
 
+    if (/<MTable\b[^>]*(?::data|v-bind:data)\s*=/i.test(code) || /<MTable\b[^>]*\sdata\s*=/i.test(code)) {
+      suggestions.push({
+        standardId: 'feedback',
+        type: 'table-data-prop',
+        message:
+          locale === 'en-US'
+            ? 'Contract: MTable row data uses the rows prop (not data). See golden list-page / get_component Table.'
+            : '契约：MTable 行数据使用 rows，不要用 data。见黄金样例 list-page / get_component Table。',
+      })
+    }
+
+    if (/<MMessage\b[^>]*\bseverity\b/i.test(code)) {
+      suggestions.push({
+        standardId: 'feedback',
+        type: 'mmessage-as-alert',
+        message:
+          locale === 'en-US'
+            ? 'Contract: <MMessage> is the message service host, not an inline alert. Use field errorMessage or a token-styled role="alert".'
+            : '契约：<MMessage> 是 message 服务宿主，不是内嵌 Alert。表单常驻错误用字段 errorMessage 或 token 样式的 role="alert"。',
+      })
+    }
+
+    if (/toast\.(?:success|info|warn|warning|error)\s*\(\s*['"`][^'"`]+['"`]\s*\)/i.test(code)) {
+      suggestions.push({
+        standardId: 'feedback',
+        type: 'toast-one-liner',
+        message:
+          locale === 'en-US'
+            ? 'Contract: one-line feedback should use message.*; toast is for summary + detail or async feel.'
+            : '契约：单行操作回执用 message.*；toast 仅用于 summary + detail 或异步通知感。',
+      })
+    }
+
+    if (
+      /#cell-status[\s\S]{0,500}<MTag\b/i.test(code) &&
+      !/#cell-status[\s\S]{0,500}<MStatus\b/i.test(code)
+    ) {
+      suggestions.push({
+        standardId: 'feedback',
+        type: 'status-cell-tag',
+        message:
+          locale === 'en-US'
+            ? 'Prefer MStatus for business status in #cell-status; use MTag for categories / closable chips (see list-status-dot / detail-page).'
+            : '行内业务状态优先 MStatus（#cell-status）；分类或可关闭标签再用 MTag（见 list-status-dot / detail-page）。',
+      })
+    }
+
     return textResult({
       ok: true,
       advisory: true,

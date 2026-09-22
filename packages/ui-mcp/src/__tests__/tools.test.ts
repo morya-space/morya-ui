@@ -293,6 +293,58 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.suggestions.some((item) => item.type === 'menu-missing-icons')).toBe(false)
   })
 
+  it('flags MTable data prop as contract advisory', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MTable :columns="columns" :data="rows" />',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'table-data-prop')).toBe(true)
+  })
+
+  it('flags MMessage severity as inline-alert misuse', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MMessage severity="error">登录失败</MMessage>',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'mmessage-as-alert')).toBe(true)
+  })
+
+  it('flags one-line toast string as message preference', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: `toast.success('已保存')`,
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'toast-one-liner')).toBe(true)
+  })
+
+  it('flags MTag in cell-status when MStatus is missing', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: `<template #cell-status="{ value }"><MTag :value="value" /></template>`,
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'status-cell-tag')).toBe(true)
+  })
+
+  it('returns detail-page and form-in-dialog golden samples', () => {
+    const detail = read<{ id: string; source: string }>(handlers.getGoldenPage({ page: 'detail-page' }))
+    expect(detail.id).toBe('detail-page')
+    expect(detail.source).toContain('MPageHeader')
+    expect(detail.source).toContain('MStatus')
+
+    const dialog = read<{ id: string; source: string }>(handlers.getGoldenPage({ page: 'form-in-dialog' }))
+    expect(dialog.id).toBe('form-in-dialog')
+    expect(dialog.source).toContain('MDialog')
+    expect(dialog.source).toContain('message.success')
+  })
+
   it('lists component decision guides when query is omitted', () => {
     const result = read<{ kind: string; items: Array<{ id: string }> }>(
       handlers.recommendComponent({ limit: 5 }),
