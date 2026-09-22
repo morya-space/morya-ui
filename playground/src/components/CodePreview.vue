@@ -140,13 +140,14 @@ onBeforeUnmount(() => {
   border-top: 1px solid var(--docs-edge);
   margin: 0;
   overflow-x: auto;
-  padding: var(--m-space-4);
+  padding: var(--m-space-4) var(--m-space-4) var(--m-space-4) 0;
 }
 .code-preview__fallback {
   color: var(--m-color-text);
   font-family: var(--docs-mono);
   font-size: 0.75rem;
   line-height: 1.6;
+  padding-left: var(--m-space-4);
   white-space: pre;
 }
 .code-preview__fallback code {
@@ -158,6 +159,7 @@ onBeforeUnmount(() => {
 .code-preview__highlight :deep(pre),
 .code-preview__highlight :deep(.shiki) {
   background: transparent !important;
+  counter-reset: code-line;
   margin: 0;
   overflow-x: visible;
   padding: 0;
@@ -170,5 +172,23 @@ onBeforeUnmount(() => {
   line-height: 1.6;
   padding: 0;
   white-space: pre;
+}
+.code-preview__highlight :deep(.shiki .line::before) {
+  background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+  box-sizing: border-box;
+  color: var(--m-color-text-muted);
+  content: counter(code-line);
+  counter-increment: code-line;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  left: 0;
+  margin-right: 0.85rem;
+  opacity: 0.55;
+  padding-left: var(--m-space-3);
+  padding-right: 0.65rem;
+  position: sticky;
+  text-align: right;
+  user-select: none;
+  width: 2.75rem;
 }
 </style>
