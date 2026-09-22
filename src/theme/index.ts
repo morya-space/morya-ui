@@ -14,8 +14,25 @@ export type {
 } from "./tokens";
 export { applyDensity, useDensity } from "./useDensity";
 export type { DensityPreference } from "./useDensity";
+export {
+  builtinMotionPresets,
+  clearCustomMotionPresets,
+  listMotionPresets,
+  registerMotionPreset,
+  resolveMotionPreset,
+  resolveMotionTransition,
+  unregisterMotionPreset,
+} from "./motionPresets";
+export type {
+  MotionPresetDefinition,
+  MotionPresetId,
+  MotionTransitionRole,
+  ResolveMotionTransitionOptions,
+} from "./motionPresets";
 export { applyMotion, applyReducedMotionPolicy, getPreferredMotion, useMotion } from "./useMotion";
 export type { MotionPreference } from "./useMotion";
+export { useMotionTransition } from "./useMotionTransition";
+export type { UseMotionTransitionOptions } from "./useMotionTransition";
 export { useTheme } from "./useTheme";
 
 export function getPreferredTheme(): ThemeName {
