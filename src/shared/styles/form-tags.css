@@ -1,5 +1,7 @@
 /* Shared multi-select tag chips (Select, TreeSelect, InputTags). */
 .m-select__tag {
+    --m-select-tag-remove-size: 0.875rem;
+    --m-select-tag-padding-y: 0.15rem;
     align-items: center;
     background: color-mix(
         in srgb,
@@ -13,7 +15,7 @@
     gap: var(--m-space-1);
     line-height: 1.2;
     max-width: 100%;
-    padding: var(--m-space-1) var(--m-space-2) var(--m-space-1) var(--m-space-2);
+    padding: var(--m-select-tag-padding-y) var(--m-space-2);
 }
 
 .m-select__tag-label {
@@ -31,11 +33,18 @@
     color: var(--m-color-text-muted);
     cursor: pointer;
     display: inline-flex;
-    height: var(--m-control-affix-size);
+    flex-shrink: 0;
+    height: var(--m-select-tag-remove-size);
     justify-content: center;
     line-height: 1;
     padding: 0;
-    width: var(--m-control-affix-size);
+    width: var(--m-select-tag-remove-size);
+}
+
+.m-select__tag-remove :is(.m-icon, svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .m-select__tag-remove:hover:not(:disabled) {
