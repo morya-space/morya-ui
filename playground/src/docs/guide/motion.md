@@ -64,6 +64,40 @@ registerMotionPreset('brand', { name: 'm-brand' })
 
 切换下拉中的预设后，请重新打开 Dialog / Drawer / Select 或再点一次 Toast，才能看到新的进出场。
 
+## 可选：接入 Animate.css
+
+`morya-ui` **不依赖** Animate.css。若业务需要 bounce / zoomIn 等 keyframe 动效，可在应用侧安装后，用桥接 CSS + `registerMotionPreset` 挂到现有 `transition` API。时长继续用 `--m-motion-enter` / `--m-motion-exit`，即可跟 `useMotion` 强度联动。
+
+```bash
+pnpm add animate.css
+```
+
+```ts
+import { registerMotionPreset } from 'morya-ui'
+import 'animate.css'
+// 桥接 CSS：把 Animate.css keyframes 映射到 .m-animate-*-enter-active 等
+// 完整示例见 demos/theme/animate-css-bridge.css 或下方演示源码
+
+registerMotionPreset('animate-bounce', { name: 'm-animate-bounce' })
+registerMotionPreset('animate-zoom', { name: 'm-animate-zoom' })
+registerMotionPreset('animate-fade-up', { name: 'm-animate-fade-up' })
+```
+
+```vue
+<MDialog transition="animate-bounce" />
+<MSelect transition="animate-fade-up" />
+```
+
+要点：
+
+- Vue `<Transition>` 需要 `.{name}-enter-active` / `leave-active`；把 Animate.css 的 `@keyframes` 写进这些类即可。
+- **Dialog / Drawer** 的 Transition 类在遮罩上：遮罩用同时长的 `fadeIn` / `fadeOut`，表达性动画写在内部 `.m-dialog-zoom` / `.m-drawer`，否则面板动效容易被截断或整层遮罩一起弹跳。
+- **Select / Toast** 等浮层根节点即 Transition 目标，可直接在 `-enter-active` 上挂 keyframe。
+
+文档站已引入 Animate.css，可直接试用：
+
+```vue preview src="./demos/theme/AnimateCssPresets.vue"
+```
 
 ## 相关令牌
 

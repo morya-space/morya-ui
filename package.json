@@ -746,6 +746,7 @@
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-v8": "^4.1.10",
     "@vue/test-utils": "^2.4.11",
+    "animate.css": "^4.1.1",
     "eslint": "^10.9.1",
     "happy-dom": "^20.11.2",
     "husky": "^9.1.7",

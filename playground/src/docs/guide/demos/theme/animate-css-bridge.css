@@ -1,0 +1,94 @@
+/**
+ * Bridge Animate.css keyframes → Vue <Transition name> classes used by morya-ui.
+ * Register with registerMotionPreset('animate-bounce', { name: 'm-animate-bounce' }) etc.
+ *
+ * Dialog / Drawer put Transition classes on the backdrop: keep a same-duration fade on the
+ * root so Vue waits for animationend, and run the expressive keyframe on the nested panel.
+ */
+
+/* —— bounce —— */
+.m-animate-bounce-enter-active {
+  animation: bounceIn var(--m-motion-enter) both;
+}
+
+.m-animate-bounce-leave-active {
+  animation: bounceOut var(--m-motion-exit) both;
+}
+
+.m-dialog-backdrop.m-animate-bounce-enter-active,
+.m-drawer-backdrop.m-animate-bounce-enter-active {
+  animation: fadeIn var(--m-motion-enter) both;
+}
+
+.m-dialog-backdrop.m-animate-bounce-leave-active,
+.m-drawer-backdrop.m-animate-bounce-leave-active {
+  animation: fadeOut var(--m-motion-exit) both;
+}
+
+.m-animate-bounce-enter-active .m-dialog-zoom,
+.m-animate-bounce-enter-active .m-drawer {
+  animation: bounceIn var(--m-motion-enter) both;
+}
+
+.m-animate-bounce-leave-active .m-dialog-zoom,
+.m-animate-bounce-leave-active .m-drawer {
+  animation: bounceOut var(--m-motion-exit) both;
+}
+
+/* —— zoom (Animate.css zoomIn / zoomOut) —— */
+.m-animate-zoom-enter-active {
+  animation: zoomIn var(--m-motion-enter) both;
+}
+
+.m-animate-zoom-leave-active {
+  animation: zoomOut var(--m-motion-exit) both;
+}
+
+.m-dialog-backdrop.m-animate-zoom-enter-active,
+.m-drawer-backdrop.m-animate-zoom-enter-active {
+  animation: fadeIn var(--m-motion-enter) both;
+}
+
+.m-dialog-backdrop.m-animate-zoom-leave-active,
+.m-drawer-backdrop.m-animate-zoom-leave-active {
+  animation: fadeOut var(--m-motion-exit) both;
+}
+
+.m-animate-zoom-enter-active .m-dialog-zoom,
+.m-animate-zoom-enter-active .m-drawer {
+  animation: zoomIn var(--m-motion-enter) both;
+}
+
+.m-animate-zoom-leave-active .m-dialog-zoom,
+.m-animate-zoom-leave-active .m-drawer {
+  animation: zoomOut var(--m-motion-exit) both;
+}
+
+/* —— fade-up —— */
+.m-animate-fade-up-enter-active {
+  animation: fadeInUp var(--m-motion-enter) both;
+}
+
+.m-animate-fade-up-leave-active {
+  animation: fadeOutDown var(--m-motion-exit) both;
+}
+
+.m-dialog-backdrop.m-animate-fade-up-enter-active,
+.m-drawer-backdrop.m-animate-fade-up-enter-active {
+  animation: fadeIn var(--m-motion-enter) both;
+}
+
+.m-dialog-backdrop.m-animate-fade-up-leave-active,
+.m-drawer-backdrop.m-animate-fade-up-leave-active {
+  animation: fadeOut var(--m-motion-exit) both;
+}
+
+.m-animate-fade-up-enter-active .m-dialog-zoom,
+.m-animate-fade-up-enter-active .m-drawer {
+  animation: fadeInUp var(--m-motion-enter) both;
+}
+
+.m-animate-fade-up-leave-active .m-dialog-zoom,
+.m-animate-fade-up-leave-active .m-drawer {
+  animation: fadeOutDown var(--m-motion-exit) both;
+}

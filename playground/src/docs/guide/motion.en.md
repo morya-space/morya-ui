@@ -64,6 +64,40 @@ registerMotionPreset('brand', { name: 'm-brand' })
 
 After changing a preset in the dropdowns, reopen Dialog / Drawer / Select or trigger Toast again to replay enter/exit.
 
+## Optional: Animate.css
+
+`morya-ui` does **not** depend on Animate.css. If your app wants keyframe effects such as bounce / zoomIn, install it on the app side and wire it through bridge CSS + `registerMotionPreset` into the existing `transition` API. Keep durations on `--m-motion-enter` / `--m-motion-exit` so they stay linked to `useMotion` intensity.
+
+```bash
+pnpm add animate.css
+```
+
+```ts
+import { registerMotionPreset } from 'morya-ui'
+import 'animate.css'
+// Bridge CSS: map Animate.css keyframes onto .m-animate-*-enter-active etc.
+// Full example: demos/theme/animate-css-bridge.css or the live demo source below
+
+registerMotionPreset('animate-bounce', { name: 'm-animate-bounce' })
+registerMotionPreset('animate-zoom', { name: 'm-animate-zoom' })
+registerMotionPreset('animate-fade-up', { name: 'm-animate-fade-up' })
+```
+
+```vue
+<MDialog transition="animate-bounce" />
+<MSelect transition="animate-fade-up" />
+```
+
+Notes:
+
+- Vue `<Transition>` expects `.{name}-enter-active` / `leave-active`; map Animate.css `@keyframes` onto those classes.
+- **Dialog / Drawer** put Transition classes on the backdrop: use a same-duration `fadeIn` / `fadeOut` on the mask, and put the expressive animation on nested `.m-dialog-zoom` / `.m-drawer` so the panel is not cut short and the scrim does not bounce.
+- **Select / Toast** and similar overlays transition the panel root, so keyframes can sit directly on `-enter-active`.
+
+This docs site already depends on Animate.css for the live demo:
+
+```vue preview src="./demos/theme/AnimateCssPresets.vue"
+```
 
 ## Related tokens
 
