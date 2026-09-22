@@ -6,10 +6,10 @@
 
 ## 贡献方式
 
-- **报告 Bug** — 在 [Issues](https://github.com/morya-space/morya-ui/issues) 中提供复现步骤。
-- **功能建议** — 先在 Issue 中描述使用场景与期望 API。
-- **改进文档** — 修正笔误、补充指南或示例，欢迎 PR。
-- **提交代码** — Bug 修复与组件增强均可。
+- 报告 Bug — 在 [Issues](https://github.com/morya-space/morya-ui/issues) 中提供复现步骤。
+- 功能建议 — 先在 Issue 中描述使用场景与期望 API。
+- 改进文档 — 修正笔误、补充指南或示例，欢迎 PR。
+- 提交代码 — Bug 修复与组件增强均可。
 
 ## 开始之前
 
@@ -23,7 +23,8 @@
 - [ ] `pnpm typecheck` 通过。
 - [ ] `pnpm test` 通过（行为变更时请补充测试）。
 - [ ] 若公开 API 有变，更新组件文档（`docs/index.md` + `docs/index.en.md`）。
-- [ ] **不要**手动改 CHANGELOG — 发版时由 `pnpm release` 自动写入。
+- [ ] 涉及文档、MCP、design-kit 或导出时，对照 [组件变更同步清单](./docs/ui-development.zh-CN.md#组件变更同步清单)。
+- [ ] 不要手动改 CHANGELOG，发版时由 `pnpm release` 写入。
 
 ## 行为准则
 

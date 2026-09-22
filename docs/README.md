@@ -7,7 +7,7 @@ Maintainer documentation for the open-source `morya-ui` project. Public overview
 | Document | Description |
 | --- | --- |
 | [DEVELOPMENT.md](./DEVELOPMENT.md) | Layout and commands |
-| [ui-development.md](./ui-development.md) | Build & release |
+| [ui-development.md](./ui-development.md) | Build & release ([sync checklist](./ui-development.md#component-change-sync-checklist)) |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits |
 | [CONTRIBUTING.md](../CONTRIBUTING.md) | Contributing guide |
 

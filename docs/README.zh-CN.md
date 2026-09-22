@@ -7,7 +7,7 @@
 | 文档 | 说明 |
 | --- | --- |
 | [DEVELOPMENT.zh-CN.md](./DEVELOPMENT.zh-CN.md) | 仓库结构与常用命令 |
-| [ui-development.zh-CN.md](./ui-development.zh-CN.md) | 构建与发版 |
+| [ui-development.zh-CN.md](./ui-development.zh-CN.md) | 构建与发版（[同步清单](./ui-development.zh-CN.md#组件变更同步清单)） |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | 提交规范 |
 | [CONTRIBUTING.zh-CN.md](../CONTRIBUTING.zh-CN.md) | 参与贡献 |
 

@@ -24,8 +24,8 @@ Component styles live in `src/components/<Name>/styles.css` and are aggregated b
 
 ### Full vs on-demand (build)
 
-- **Full entry** (`src/index.ts` → `dist/index.js`): re-exports `.vue` files directly, not component `index.ts`, so on-demand style side-effects stay out of the main bundle; pair with `morya-ui/styles.css`.
-- **On-demand entries** (`src/components/<Name>/index.ts` → `dist/<slug>/index.js`): separate chunks with `import './style'`, including theme, base, and dependency CSS.
+- Full entry (`src/index.ts` → `dist/index.js`): re-exports `.vue` files directly, not component `index.ts`, so on-demand style side-effects stay out of the main bundle; pair with `morya-ui/styles.css`.
+- On-demand entries (`src/components/<Name>/index.ts` → `dist/<slug>/index.js`): separate chunks with `import './style'`, including theme, base, and dependency CSS.
 
 Both outputs are produced in one `pnpm build` and do not conflict.
 
@@ -37,7 +37,7 @@ pnpm build:docs
 pnpm preview
 ```
 
-Component pages: `src/components/*/docs/index.md` and `index.en.md`. Changelog pages read root `CHANGELOG.md` / `CHANGELOG.en.md`. Public guide pages live under `playground/src/docs/guide/` (introduction, quick start, theme, …). **Do not** put contributor-only conventions in the public docs sidebar.
+Component pages: `src/components/*/docs/index.md` and `index.en.md`. Changelog pages read root `CHANGELOG.md` / `CHANGELOG.en.md`. Public guide pages live under `playground/src/docs/guide/` (introduction, quick start, theme, …). Keep contributor-only conventions in this `docs/` folder, not in the public docs sidebar.
 
 ### Component folder
 
@@ -56,9 +56,9 @@ src/components/Button/
         └── Basic.vue
 ```
 
-- **Prefix**: `M*` exports, `.m-*` CSS classes.
-- **Types**: Props / Emits in `types.ts`, re-exported from the package entry.
-- **Tests**: behavior-oriented Vitest + Vue Test Utils.
+- Prefix: `M*` exports, `.m-*` CSS classes.
+- Types: Props / Emits in `types.ts`, re-exported from the package entry.
+- Tests: behavior-oriented Vitest + Vue Test Utils.
 
 ### Writing component docs
 
@@ -83,16 +83,53 @@ Prefer UnoCSS utilities for demo layout. Keep `category` identical across locale
 
 Attrs / `pt` fallthrough rules: public [Styling & attrs](https://morya-space.github.io/morya-ui/docs/attrs). When documenting:
 
-- PascalCase names in Props / Events tables link to the doc **Types** section or [API types](https://morya-space.github.io/morya-ui/docs/types); run `pnpm docs:sync-type-sections` to backfill from `types.ts`.
+- PascalCase names in Props / Events tables link to the doc Types section or [API types](https://morya-space.github.io/morya-ui/docs/types); run `pnpm docs:sync-type-sections` to backfill from `types.ts`.
 - List `pt` and DOM part keys when present.
 - For fields: events on the native control, other fallthrough on the field root; prefer props for `placeholder` / `name`.
+
+## Component change sync checklist
+
+When public API, behavior, or docs change, update the related files below. Component pages under `docs/` are the written API; regenerate the MCP catalog with `pnpm mcp:generate` (you usually won’t edit `packages/ui-mcp/data/catalog.json` directly).
+
+### Usual
+
+| Item | Notes |
+| --- | --- |
+| `docs/index.md` + `docs/index.en.md` (and demos) | Keep Props / Events / Slots / examples in sync with the code |
+| Behavior tests | `*.test.ts`; add or update when behavior changes |
+| `pnpm typecheck` / relevant `pnpm test` | Run locally |
+
+### By change
+
+| Change | Sync |
+| --- | --- |
+| New public component | Component folder (see above); export from `src/index.ts` (component + types); `@import` its `styles.css` in `src/styles/index.css`; zh/en docs + demos + tests; then `pnpm build` (updates exports / on-demand entries; `package.json` exports and `resolver-map.ts` are script-maintained) |
+| Props / Events / Slots / Methods | Update bilingual docs tables; run `pnpm docs:sync-type-sections` when useful; put shared type names in `playground/src/docs/guide/types.md` and `types.en.md` |
+| Styles / new `--m-*` tokens | Component `styles.css`; run `pnpm tokens:generate` if tokens were added |
+| Locale strings | `src/locale` and call sites |
+| Component or guide Markdown | `pnpm mcp:generate`, then `pnpm mcp:check-catalog` / `pnpm mcp:validate-catalog` (optional `pnpm mcp:audit-examples`) |
+| Selection / scenario hints | Edit `design-kit/` (e.g. `morya-ui-pages` `component-index.md`, `DESIGN.md`, golden pages), then `pnpm setup:sync-template` (overwrites `packages/setup/template/`) |
+| MCP recommend / decision copy | Edit `packages/ui-mcp/src/patterns.ts`, `decisions.ts`, etc. (ships with the MCP package) |
+| Release | Use `pnpm release*`; CHANGELOG is written by the release flow |
+
+### After docs change
+
+```bash
+pnpm mcp:generate
+pnpm mcp:check-catalog
+pnpm mcp:validate-catalog
+# If design-kit changed:
+pnpm setup:sync-template
+```
+
+Code-only fixes with unchanged docs do not need a catalog regenerate. `design-kit/`-only edits skip `mcp:generate` but still need `setup:sync-template`.
 
 ### Overlay and icon conventions
 
 Overlays Teleport to `body` by default (`teleport` / `appendTo`; `'self'` in place). Motion: `m-fade`, `m-scale-fade`, `m-slide-fade`, `m-message-slide`. Global mount via ConfigProvider `appendTo`.
 
-- **System icons**: `MIcon` + `name`.
-- **Product icons**: pass from the app; do not dump a full SVG set into the library.
+- System icons: `MIcon` + `name`.
+- Product icons: pass from the app; no need to ship a full SVG set in the library.
 
 ## Publish to npm only
 

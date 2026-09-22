@@ -15,7 +15,7 @@ Internal documentation for contributors. Public overview: [root README](../READM
 | `packages/setup/` | `@morya-ui/setup` CLI; `template/` is generated from `design-kit/` |
 | `design-kit/` | Consumer AI pack: `DESIGN.md`, `morya-ui-pages` skill, Cursor rules, golden pages |
 | `docs/` | Maintainer docs |
-| `dist/` | Build output (do not edit by hand) |
+| `dist/` | Build output |
 
 ## Commands
 
@@ -50,7 +50,7 @@ pnpm setup:sync-template  # copy design-kit/ into packages/setup/template/
 | Doc | Topic |
 | --- | --- |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits + husky / commitlint |
-| [UI development](./ui-development.md) | Build, publish, component & docs conventions |
+| [UI development](./ui-development.md) | Build, publish, component & docs conventions ([sync checklist](./ui-development.md#component-change-sync-checklist)) |
 | [scripts/README.md](../scripts/README.md) | Interactive release tooling |
 | [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP server |
 | [packages/setup/README.md](../packages/setup/README.md) | Consumer setup CLI |

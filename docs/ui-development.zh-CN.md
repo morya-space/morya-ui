@@ -14,18 +14,18 @@ pnpm build
 
 构建流程（`pnpm build`）会自动执行：
 
-1. `scripts/prepare-on-demand.mjs` — 生成各组件 `style.ts` 并在 `index.ts` 注入样式 side-effect  
-2. `scripts/generate-exports.mjs` — 同步 `package.json` 的 `exports` / `sideEffects` 与 `src/resolver-map.ts`  
-3. `vite build` — 全量入口 + `resolver`  
-4. `vite build --mode on-demand` — 各组件独立 chunk  
+1. `scripts/prepare-on-demand.mjs` — 生成各组件 `style.ts` 并在 `index.ts` 注入样式 side-effect
+2. `scripts/generate-exports.mjs` — 同步 `package.json` 的 `exports` / `sideEffects` 与 `src/resolver-map.ts`
+3. `vite build` — 全量入口 + `resolver`
+4. `vite build --mode on-demand` — 各组件独立 chunk
 5. `scripts/emit-style-entries.mjs` — 输出 `dist/<slug>/style.js` 与 `style.css`
 
 组件样式写在 `src/components/<Name>/styles.css`，由 `src/styles/index.css` `@import` 聚合。主题 token 仍在 `src/theme/styles.css`。
 
 ### 全量 vs 按需（构建层面）
 
-- **全量入口**（`src/index.ts` → `dist/index.js`）：直接从各 `.vue`  re-export，不经过组件 `index.ts`，避免把按需样式 side-effect 打进主包；配合 `morya-ui/styles.css` 使用。
-- **按需入口**（`src/components/<Name>/index.ts` → `dist/<slug>/index.js`）：独立 chunk，自动 `import './style'`，带上 theme、base 与依赖组件 CSS。
+- 全量入口（`src/index.ts` → `dist/index.js`）：直接从各 `.vue` re-export，不经过组件 `index.ts`，避免把按需样式 side-effect 打进主包；配合 `morya-ui/styles.css` 使用。
+- 按需入口（`src/components/<Name>/index.ts` → `dist/<slug>/index.js`）：独立 chunk，自动 `import './style'`，带上 theme、base 与依赖组件 CSS。
 
 两种产物由同一次 `pnpm build` 生成，互不冲突。
 
@@ -37,7 +37,7 @@ pnpm build:docs
 pnpm preview
 ```
 
-组件文档：`src/components/*/docs/index.md` 与 `index.en.md`。更新日志页读取根目录 `CHANGELOG.md` / `CHANGELOG.en.md`。对外指南页在 `playground/src/docs/guide/`（介绍、快速开始、主题等）；**不要**把贡献者约定写进文档站侧栏。
+组件文档：`src/components/*/docs/index.md` 与 `index.en.md`。更新日志页读取根目录 `CHANGELOG.md` / `CHANGELOG.en.md`。对外指南页在 `playground/src/docs/guide/`（介绍、快速开始、主题等）。贡献者约定留在本目录，不要写进文档站侧栏。
 
 ### 组件目录
 
@@ -56,9 +56,9 @@ src/components/Button/
         └── Basic.vue
 ```
 
-- **前缀**：组件导出为 `M*`，CSS 类为 `.m-*`。
-- **类型**：Props / Emits 放在 `types.ts`，并从包入口再导出。
-- **测试**：用户行为导向的 Vitest + Vue Test Utils。
+- 前缀：组件导出为 `M*`，CSS 类为 `.m-*`。
+- 类型：Props / Emits 放在 `types.ts`，并从包入口再导出。
+- 测试：用户行为导向的 Vitest + Vue Test Utils。
 
 ### 写组件文档
 
@@ -90,16 +90,53 @@ description: 触发动作的按钮
 
 Attrs / `pt` 落点约定见对外页 [样式与 attrs](https://morya-space.github.io/morya-ui/docs/attrs)。写组件文档时：
 
-- Props / Events 表里的 PascalCase 类型名会链到文末 **类型** 小节或 [API 类型](https://morya-space.github.io/morya-ui/docs/types)；可用 `pnpm docs:sync-type-sections` 从 `types.ts` 补全。
+- Props / Events 表里的 PascalCase 类型名会链到文末「类型」小节或 [API 类型](https://morya-space.github.io/morya-ui/docs/types)；可用 `pnpm docs:sync-type-sections` 从 `types.ts` 补全。
 - Props 表加上 `pt`（若有）及 DOM 键名。
 - 字段组件：事件在原生控件，其它 fallthrough 在 field 根；`placeholder` / `name` 等优先写 props。
+
+## 组件变更同步清单
+
+公开 API、行为或文档有变动时，对照下面补齐相关文件。说明写在组件 `docs/`；MCP catalog 用 `pnpm mcp:generate` 从文档生成（一般不必直接改 `packages/ui-mcp/data/catalog.json`）。
+
+### 常规
+
+| 项 | 说明 |
+| --- | --- |
+| `docs/index.md` + `docs/index.en.md`（及 demos） | Props / Events / Slots / 示例与实现对齐 |
+| 行为测试 | `*.test.ts`；行为变了就补测 |
+| `pnpm typecheck` / 相关 `pnpm test` | 本地跑一下 |
+
+### 按改动
+
+| 改动 | 同步 |
+| --- | --- |
+| 新增公开组件 | 组件目录（见上）；`src/index.ts` 导出组件与类型；`src/styles/index.css` `@import` 其 `styles.css`；中英文档 + demos + 测试；再 `pnpm build`（会更新 exports / 按需入口，`package.json` exports 和 `resolver-map.ts` 由脚本维护） |
+| Props / Events / Slots / Methods | 更新双语文档表；需要时跑 `pnpm docs:sync-type-sections`；跨组件复用的类型写到 `playground/src/docs/guide/types.md` 与 `types.en.md` |
+| 样式 / 新 `--m-*` token | 改组件 `styles.css`；有新 token 时跑 `pnpm tokens:generate` |
+| locale 文案 | `src/locale` 和组件里用到的地方 |
+| 文档或指南 Markdown | `pnpm mcp:generate`，再 `pnpm mcp:check-catalog` / `pnpm mcp:validate-catalog`（可选 `pnpm mcp:audit-examples`） |
+| 选型 / 场景提示 | 改 `design-kit/`（例如 `morya-ui-pages` 的 `component-index.md`、`DESIGN.md`、golden pages），再 `pnpm setup:sync-template`（会覆盖 `packages/setup/template/`） |
+| MCP 推荐 / 决策文案 | 改 `packages/ui-mcp/src/patterns.ts`、`decisions.ts` 等（随 MCP 包发布） |
+| 发版 | 用 `pnpm release*`；CHANGELOG 由发版流程写 |
+
+### 文档改完后常跑
+
+```bash
+pnpm mcp:generate
+pnpm mcp:check-catalog
+pnpm mcp:validate-catalog
+# 若动过 design-kit：
+pnpm setup:sync-template
+```
+
+只改实现、文档没动，不用重生 catalog。只改 `design-kit/` 时不用跑 `mcp:generate`，但仍要 `setup:sync-template`。
 
 ### 浮层与图标约定
 
 浮层默认 Teleport 到 `body`，支持 `teleport` / `appendTo`（`'self'` 就地渲染）。动效：`m-fade`（模态）、`m-scale-fade`（锚定菜单）、`m-slide-fade`（Toast）、`m-message-slide`（Message）。全局挂载点用 ConfigProvider 的 `appendTo`。
 
-- **系统图标**：`MIcon` + `name`。
-- **业务图标**：应用侧传入，不要往组件库堆全量 SVG。
+- 系统图标：`MIcon` + `name`。
+- 业务图标：应用侧传入，不必往组件库堆全量 SVG。
 
 ## 仅发布到 npm
 

@@ -6,10 +6,10 @@ Thank you for your interest in Morya UI!
 
 ## Ways to contribute
 
-- **Report bugs** — [Open an issue](https://github.com/morya-space/morya-ui/issues) with reproduction steps.
-- **Suggest features** — Describe the use case and expected API in an issue first.
-- **Improve docs** — Fix typos, clarify guides, or add examples via pull request.
-- **Submit code** — Bug fixes and component enhancements are welcome.
+- Report bugs — [Open an issue](https://github.com/morya-space/morya-ui/issues) with reproduction steps.
+- Suggest features — Describe the use case and expected API in an issue first.
+- Improve docs — Fix typos, clarify guides, or add examples via pull request.
+- Submit code — Bug fixes and component enhancements are welcome.
 
 ## Before you start
 
@@ -23,7 +23,8 @@ Thank you for your interest in Morya UI!
 - [ ] `pnpm typecheck` passes.
 - [ ] `pnpm test` passes (add tests when behavior changes).
 - [ ] Component docs updated if public API changed (`docs/index.md` + `docs/index.en.md`).
-- [ ] Changelog is **not** edited manually — releases update it via `pnpm release`.
+- [ ] If docs, MCP, design-kit, or exports are affected, see the [component change sync checklist](./docs/ui-development.md#component-change-sync-checklist).
+- [ ] Do not edit the changelog by hand; releases write it via `pnpm release`.
 
 ## Code of conduct
 

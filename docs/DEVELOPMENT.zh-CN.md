@@ -15,7 +15,7 @@
 | `packages/setup/` | `@morya-ui/setup` CLI；`template/` 由 `design-kit/` 同步生成 |
 | `design-kit/` | 消费方 AI 配置：`DESIGN.md`、`morya-ui-pages` skill、Cursor 规则、黄金样例 |
 | `docs/` | 维护者文档 |
-| `dist/` | 构建产物（勿手改） |
+| `dist/` | 构建产物（由构建生成） |
 
 ## 常用命令
 
@@ -50,7 +50,7 @@ pnpm setup:sync-template  # 把 design-kit/ 同步到 packages/setup/template/
 | 文档 | 内容 |
 | --- | --- |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | 提交规范 |
-| [UI 开发](./ui-development.zh-CN.md) | 构建、发版、组件与文档约定 |
+| [UI 开发](./ui-development.zh-CN.md) | 构建、发版、组件与文档约定（含 [同步清单](./ui-development.zh-CN.md#组件变更同步清单)） |
 | [scripts/README.md](../scripts/README.md) | 发版脚本说明 |
 | [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP 服务 |
 | [packages/setup/README.md](../packages/setup/README.md) | 消费方一键接入 CLI |
