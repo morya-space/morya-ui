@@ -12,6 +12,9 @@ When generating a full page, pick a type and **mirror the golden-page block orde
 | Login | `login-page` |
 | Landing | `landing-page` |
 | Empty | `empty-state` |
+| Result / 403 / terminal | `result-page` |
+| Settings | `settings-page` |
+| Wizard | `wizard-form` |
 
 Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet` (`filters`, `toolbar`, `form-actions`, `scrollable-panel`, …).
 
@@ -86,12 +89,24 @@ Mirror MCP `get_golden_page` `detail-page`.
 
 Mirror MCP `get_golden_page` `form-in-dialog`.
 
-## Settings page — suggested order
+## Settings page — block order
 
-1. Admin chrome + `MPageContent width="narrow"` (or split: side `MMenu`/`MTabs` + content)
-2. Grouped `MPageSection` or `MTabs` by concern (资料 / 通知 / 安全)
-3. Each group: `MForm` + save actions (section-level or page-level — be consistent)
-4. Dangerous zone last: `severity="danger"` + confirm
+1. Admin chrome + `MPageContent width="narrow"`
+2. `MPageHeader` (title + short description)
+3. `MTabs` with **`v-model` + `:tabs`** (not `:items` / `:value`)
+4. Per tab: `MPageSection variant="form"` + `MForm` + save in `variant="actions"`
+5. Dangerous zone last: `severity="danger"` + confirm
+
+Mirror MCP `get_golden_page` `settings-page`.
+
+## Wizard — block order
+
+1. Narrow `MPageContent` + `MPageHeader`
+2. `MStepper v-model` + **`:steps`** (not `:items`)
+3. One form/job per step; sticky `上一步` / `下一步` / `创建`
+4. Success → `result-page` / `MResult`
+
+Mirror MCP `get_golden_page` `wizard-form`.
 
 ## Hybrids
 

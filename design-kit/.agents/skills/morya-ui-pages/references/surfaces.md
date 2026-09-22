@@ -31,7 +31,7 @@ Keep credential forms quiet: one primary CTA, clear labels, no decorative noise 
 | Empty state | Invite first action | Golden: MCP `get_golden_page` `empty-state` — `MEmpty` + primary/secondary `MButton` in `#extra`; dashed shell + radial wash from visual-craft |
 | Onboarding | Teach the product path | `MStepper` or paced cards; one decision per step; finish → Ops home |
 | Wizard | Multi-step create | `MStepper` + `MForm` per step + sticky actions (`上一步` / `下一步` / `提交`) |
-| Success / result | Confirm completion | `MResult` (`status="success"` / `error` …) + next actions (`查看详情` / `返回列表`) |
+| Success / result | Confirm completion | `MResult status="success"` / `error` + `#footer` next actions (`查看详情` / `返回列表`); same shell idea as `result-page` |
 
 Copy must tell the user **what to do next**, not celebrate the system.
 
@@ -39,8 +39,8 @@ Copy must tell the user **what to do next**, not celebrate the system.
 
 | Surface | Job | Recipe |
 | --- | --- | --- |
-| 404 / not found | Reorient | `MResult status="404"` + `返回首页` / `返回上一页` |
-| Permission denied | Explain + escape | `MResult status="403"` + request access / switch account / go home |
+| Permission denied | Explain + escape | Golden: MCP `get_golden_page` `result-page` — `MResult status="403"` + `#footer` (not `#extra`) |
+| 404 / not found | Reorient | `MResult status="404"` + `返回首页` / `返回上一页` (mirror `result-page` shell) |
 | Maintenance / error | Honest status | `MResult status="500"`; what happened + retry + support. Persistent form errors: field `errorMessage` or a token `role="alert"`, not `<MMessage>` as an alert |
 
 Avoid witty 404 essays that hide the exit paths.

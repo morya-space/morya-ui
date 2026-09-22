@@ -40,13 +40,13 @@
     {
       "id": 7,
       "prompt": "做一个三步「创建工作空间」向导：1 名称与地区 2 邀请成员（邮箱标签）3 确认。用 morya-ui 的 Stepper + Form；每步一个主任务；最后提交成功进入结果页（查看工作空间 / 返回）。输出一个或两个 SFC。",
-      "expected_output": "Flow wizard: MStepper, per-step MForm, MInputTags or similar for invites, clear next/back/submit, success with next actions, message/toast per feedback rules.",
+      "expected_output": "Flow wizard: wizard-form golden — MStepper :steps, per-step MForm, MInputTags invites, clear next/back/submit, message success, validate_usage clean.",
       "files": []
     },
     {
       "id": 8,
       "prompt": "用户点了删除项目但权限不足：做一张「无权限」系统页（或全页占位），说明原因，并提供返回上一页、联系管理员。用 morya-ui，文案直接别玩梗。",
-      "expected_output": "System surface: MResult 403 or equivalent, plain explanation, escape actions with MButton, no jokey 404 essay, on-token.",
+      "expected_output": "System surface: result-page golden — MResult status=403, #footer escape actions, no jokey 404 essay, on-token, validate_usage clean.",
       "files": []
     },
     {

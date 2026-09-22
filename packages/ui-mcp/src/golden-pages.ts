@@ -67,6 +67,27 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
     titleEn: 'List create/edit dialog golden sample',
     patternId: 'form-in-dialog',
   },
+  {
+    id: 'result-page',
+    file: 'result-page.vue',
+    title: '结果 / 阻断页黄金样例',
+    titleEn: 'Result / terminal page golden sample',
+    patternId: 'result-page',
+  },
+  {
+    id: 'settings-page',
+    file: 'settings-page.vue',
+    title: '设置页黄金样例',
+    titleEn: 'Settings page golden sample',
+    patternId: 'settings-page',
+  },
+  {
+    id: 'wizard-form',
+    file: 'wizard-form.vue',
+    title: '分步向导黄金样例',
+    titleEn: 'Wizard form golden sample',
+    patternId: 'wizard-form',
+  },
 ]
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')

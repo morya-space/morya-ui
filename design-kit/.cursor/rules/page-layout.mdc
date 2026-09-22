@@ -13,6 +13,9 @@ alwaysApply: false
 | 表单页 | `form-page`（仅长表单 / 独立配置页） |
 | 列表内弹窗表单 | `form-in-dialog` |
 | 详情页 | `detail-page` |
+| 结果 / 阻断页 | `result-page` |
+| 设置页 | `settings-page` |
+| 分步向导 | `wizard-form` |
 | 仪表盘 | `dashboard-page` |
 | 登录页 | `login-page` |
 | 营销落地 | `landing-page` |

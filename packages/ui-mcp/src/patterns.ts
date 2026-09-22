@@ -284,6 +284,7 @@ export const pagePatterns: PagePattern[] = [
     styleRules: ['开关用于二元启用状态，不用 Select 模拟开关', '保存使用 primary，恢复默认值使用 secondary 或 text', '危险配置需要明确说明影响范围并使用 danger 语义', '使用 MConfigProvider 统一 size、density 和 locale'],
     interactionRules: ['显示未保存修改状态', '保存成功使用 message.success 单行反馈；仅有 summary+detail 时用 toast', '保存失败保留输入并显示字段或页面级错误', '切换 Tab 不应意外丢失未保存输入'],
     avoid: ['不要把所有设置塞进一个超长表单', '不要用 placeholder 代替配置项 label', '不要隐藏影响范围较大的配置说明'],
+    goldenPage: 'settings-page',
   },
   {
     id: 'empty-state',
@@ -415,6 +416,7 @@ export const pagePatterns: PagePattern[] = [
     styleRules: ['每一步只承载一个清晰目标', '步骤状态使用 Stepper，不用 Button 颜色模拟', '长流程使用 Card 分组但避免多层嵌套', '危险退出使用 ConfirmDialog 或 Dialog'],
     interactionRules: ['进入下一步前只校验当前步骤', '返回上一步保留输入', '完成前展示摘要或确认', '刷新和离开时处理未完成状态'],
     avoid: ['不要把所有字段一次性隐藏在一个超长页面', '不要允许跳过有前置依赖的步骤', '不要让完成按钮在每一步都使用相同文案'],
+    goldenPage: 'wizard-form',
   },
   {
     id: 'detail-page',
@@ -496,9 +498,9 @@ export const pagePatterns: PagePattern[] = [
     structure: [
       'MPageContent (optional shell)',
       '└── MResult',
-      '    ├── status icon',
+      '    ├── status icon / illustration',
       '    ├── title + description',
-      '    └── #extra primary + optional secondary MButton',
+      '    └── #footer primary + optional secondary MButton',
     ],
     layout: {
       page: '结果在内容区居中，不一定占满整屏',
@@ -507,8 +509,8 @@ export const pagePatterns: PagePattern[] = [
     },
     styleRules: [
       '使用 MResult 的 status 语义，不要手写大图标+文案拼盘',
-      '成功/失败用对应 severity 色；403/404 保持中性',
-      '主恢复动作使用 primary MButton，次动作使用 secondary 或 text',
+      '成功/失败用对应 status；403/404/500 用 HTTP 类 status',
+      '主恢复动作使用 primary MButton，次动作使用 secondary 或 text（放在 #footer，不是 #extra）',
       '颜色与间距使用 --m-* Token',
     ],
     interactionRules: [
@@ -520,7 +522,9 @@ export const pagePatterns: PagePattern[] = [
       '不要用 Empty 表达 403/404/提交失败',
       '不要只用颜色表达结果而无标题文案',
       '不要在结果页堆砌无关营销内容',
+      '不要使用已移除的 #extra 插槽；操作用 #footer',
     ],
+    goldenPage: 'result-page',
   },
 ]
 
@@ -732,6 +736,9 @@ export const designRules = {
       'empty-state',
       'detail-page',
       'form-in-dialog',
+      'result-page',
+      'settings-page',
+      'wizard-form',
     ],
   },
   actions: {

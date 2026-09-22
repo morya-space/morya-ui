@@ -70,7 +70,8 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Login / auth | `login-page` golden + `MInputPassword` |
 | Marketing landing | `landing-page` golden + `MButton` / `MTag` / `MAccordion` |
 | Empty list / zero state | `MEmpty` (+ `empty-state` golden or `MTable` `#empty`) |
-| Submit success / HTTP error page | `MResult` |
+| Preferences / settings | `settings-page` golden (`MTabs` + `tabs`) |
+| Multi-step create | `wizard-form` golden (`MStepper` + `steps`) |
 | Region or page is waiting | `MLoading`, `v-loading`, or `loading.service`; known layout → `MSkeleton` |
 | Local capped scroll | Explicit `MScrollbar` |
 | Admin sider nav | `MMenu` inside `MLayoutSider` (or `MSidebar` when the shell is not `MLayout`) |
