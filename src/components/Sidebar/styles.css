@@ -6,8 +6,9 @@
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     min-width: 0;
+    overflow: hidden;
     padding: var(--m-space-2);
-    transition: width var(--m-motion-normal) var(--m-motion-ease);
+    /* Instant width change — avoid layout thrashing on nav chrome */
     width: var(--m-sidebar-width);
 }
 
@@ -68,12 +69,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-sidebar {
+    html:not([data-m-ignore-reduced-motion]) .m-sidebar__link {
         transition: none;
     }
 }
 
-[data-m-motion="reduced"] .m-sidebar,
-[data-m-motion="none"] .m-sidebar {
+[data-m-motion="reduced"] .m-sidebar__link,
+[data-m-motion="none"] .m-sidebar__link {
     transition: none;
 }

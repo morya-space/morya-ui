@@ -120,7 +120,10 @@ const triggerStyle = computed(() =>
 );
 
 function onTransitionEnd(event: TransitionEvent) {
+    // Width mode animates max-width; transform mode clips instantly (opacity on children).
+    if (props.collapseMode !== "width") return;
     if (event.propertyName !== "max-width") return;
+    if (event.target !== event.currentTarget) return;
     if (mergedCollapsed.value) emit("after-leave");
     else emit("after-enter");
 }

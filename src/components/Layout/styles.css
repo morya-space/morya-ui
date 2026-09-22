@@ -200,11 +200,18 @@
     z-index: 1;
 }
 
+/* Default: clip via max-width (no size transition) + opacity — avoids layout thrashing. */
 .m-layout-sider--collapse-transform {
     flex-shrink: 0;
 }
 
+/*
+ * Opt-in layout animation for flex reflow. One-shot only; prefer `transform` mode.
+ * `contain: layout` limits reflow cost to the sider subtree where possible.
+ * Overflow stays visible so the collapse trigger (half outside the edge) is not clipped.
+ */
 .m-layout-sider--collapse-width {
+    contain: layout;
     flex-shrink: 1;
     min-width: 0;
     transition:

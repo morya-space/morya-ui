@@ -80,8 +80,10 @@ export interface LayoutSiderProps {
   /** Uncontrolled initial collapsed state. */
   defaultCollapsed?: boolean;
   /**
-   * `transform` (default): keep expanded `width`, collapse via `max-width`.
-   * `width`: shrink `width` with the sider.
+   * `transform` (default): keep expanded `width`, clip with `max-width` (no size
+   * transition — avoids layout thrashing on app chrome). Content fades via opacity.
+   * `width`: animate `width`/`max-width` so flex neighbors reflow smoothly (one-shot
+   * layout work; prefer `transform` unless that reflow is required).
    */
   collapseMode?: LayoutCollapseMode;
   /** Show sider content while collapsed. */
