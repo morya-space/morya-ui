@@ -125,8 +125,12 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.matchedPattern).toBe('admin-list')
   })
 
-  it('returns a dashboard scaffold when includeScaffold is true', () => {
-    const result = read<{ matchedPattern: string; scaffold: { files: { component: string } } }>(
+  it('returns golden-page source as scaffold when available', () => {
+    const result = read<{
+      matchedPattern: string
+      scaffold: { source: string; goldenPage: string; files: { component: string }; warnings: string[] }
+      nextStep: string
+    }>(
       handlers.recommendPage({
         intent: '生产监控仪表盘',
         pageType: 'dashboard',
@@ -135,9 +139,68 @@ describe('@morya-ui/mcp handlers', () => {
     )
 
     expect(result.matchedPattern).toBe('dashboard')
+    expect(result.scaffold.source).toBe('golden-page')
+    expect(result.scaffold.goldenPage).toBe('dashboard-page')
     expect(result.scaffold.files.component).toContain('MGrid')
     expect(result.scaffold.files.component).toContain('MPageStat')
-    expect(result.scaffold.files.component).toContain('MSkeleton')
+    expect(result.scaffold.files.component).toContain('黄金样例')
+    expect(result.nextStep).toContain('validate_usage')
+  })
+
+  it('prefers list-status-dot for status cell queries', () => {
+    const result = read<{ id: string; template: string }>(
+      handlers.getPageSnippet({ section: '状态' }),
+    )
+    expect(result.id).toBe('list-status-dot')
+    expect(result.template).toContain('MStatus')
+  })
+
+  it('returns result-page golden sample with MResult footer slot', () => {
+    const result = read<{ id: string; source: string }>(handlers.getGoldenPage({ page: 'result-page' }))
+    expect(result.id).toBe('result-page')
+    expect(result.source).toContain('MResult')
+    expect(result.source).toContain('status="403"')
+    expect(result.source).toContain('<template #footer>')
+    expect(result.source).not.toContain('<template #extra>')
+  })
+
+  it('returns settings-page and wizard-form golden samples with correct APIs', () => {
+    const settings = read<{ id: string; source: string }>(handlers.getGoldenPage({ page: 'settings-page' }))
+    expect(settings.id).toBe('settings-page')
+    expect(settings.source).toContain('MTabs')
+    expect(settings.source).toContain(':tabs=')
+    expect(settings.source).not.toContain(':items=')
+
+    const wizard = read<{ id: string; source: string }>(handlers.getGoldenPage({ page: 'wizard-form' }))
+    expect(wizard.id).toBe('wizard-form')
+    expect(wizard.source).toContain('MStepper')
+    expect(wizard.source).toContain(':steps=')
+    expect(wizard.source).not.toContain(':items=')
+  })
+
+  it('scaffolds settings from golden page source', () => {
+    const result = read<{ scaffold: { source: string; goldenPage: string; files: { component: string } } }>(
+      handlers.recommendPage({
+        intent: '系统设置页',
+        pageType: 'settings',
+        includeScaffold: true,
+      }),
+    )
+    expect(result.scaffold.source).toBe('golden-page')
+    expect(result.scaffold.goldenPage).toBe('settings-page')
+    expect(result.scaffold.files.component).toContain(':tabs=')
+  })
+
+  it('flags MTabs items and MStepper items as contract advisories', () => {
+    const tabs = read<{ suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({ code: `<MTabs :items="[]" />` }),
+    )
+    expect(tabs.suggestions.some((item) => item.type === 'tabs-items-prop')).toBe(true)
+
+    const stepper = read<{ suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({ code: `<MStepper :items="['a']" />` }),
+    )
+    expect(stepper.suggestions.some((item) => item.type === 'stepper-items-prop')).toBe(true)
   })
 
   it('returns a golden page source sample', () => {
@@ -217,7 +280,8 @@ describe('@morya-ui/mcp handlers', () => {
       handlers.recommendPage({ intent: '用户列表页', pageType: 'list' }),
     )
     expect(result.matchedPattern).toBe('admin-list')
-    expect(result.nextStep).toContain('get_design_rules')
+    expect(result.nextStep).toContain('validate_usage')
+    expect(result.nextStep).toContain('get_golden_page')
     expect(result.pageStandards).toBeUndefined()
     expect(result.scrollStandards).toBeUndefined()
   })
@@ -227,7 +291,7 @@ describe('@morya-ui/mcp handlers', () => {
       handlers.getGoldenPage({ page: 'list-page' }),
     )
     expect(result.source).toContain('MLayout')
-    expect(result.nextStep).toContain('get_design_rules')
+    expect(result.nextStep).toContain('validate_usage')
     expect(result.pageStandards).toBeUndefined()
     expect(result.scrollStandards).toBeUndefined()
   })

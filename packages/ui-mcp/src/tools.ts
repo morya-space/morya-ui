@@ -74,7 +74,7 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const isSettings = patternId === 'settings-page'
   const isAuth = patternId === 'auth-page'
   const isForm = patternId === 'form-page' || isSettings
-  const useLayoutShell = isList || isForm || isDashboard || isDetail || isSettings
+  const useLayoutShell = isList || isForm || isDashboard || isDetail || isSettings || isWizard
   const title = intent || (zh ? '业务页面' : 'Business page')
 
   const layoutImports = useLayoutShell
@@ -86,9 +86,9 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
   const listImports = isList ? ', MEmpty, MSelect, MSpace, MTable' : ''
   const formImports = isForm || isAuth || isWizard ? ', MForm, MFormItem, MSelect' : ''
   const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MPagePlaceholder, MPageStat, MSkeleton, MTable' : ''
-  const detailImports = isDetail ? ', MDivider' : ''
+  const detailImports = isDetail ? ', MSpace' : ''
   const emptyImports = isEmpty ? ', MEmpty, MPageToolbar' : ''
-  const wizardImports = isWizard ? ', MStepper' : ''
+  const wizardImports = isWizard ? ', MStepper, MSpace' : ''
   const settingsImports = isSettings ? ', MTabs' : ''
   const statusImports = isList || isDetail || isDashboard ? ', MStatus' : ''
 
@@ -98,6 +98,7 @@ import { MButton, MCard, MConfigProvider, MInput, MTag, zhCN${layoutImports}${pa
 
 const loading = ref(false)
 const error = ref('')
+const title = ${JSON.stringify(title)}
 ${isList ? `const keyword = ref('')
 const rows = ref<Record<string, unknown>[]>([])
 const columns = [{ key: 'name', label: '${zh ? '名称' : 'Name'}' }, { key: 'status', label: '${zh ? '状态' : 'Status'}' }]
@@ -106,7 +107,10 @@ const columns = [{ key: 'name', label: '${zh ? '名称' : 'Name'}' }, { key: 'st
   { label: '${zh ? '总用户' : 'Users'}', value: '0' },
   { label: '${zh ? '今日活跃' : 'Active today'}', value: '0' },
 ])
+` : ''}${isSettings ? `const activeTab = ref('general')
+const settingTabs = [{ label: '${zh ? '常规' : 'General'}', value: 'general' }]
 ` : ''}${isWizard ? `const activeStep = ref(0)
+const wizardSteps = [{ label: '${zh ? '基本信息' : 'Details'}' }, { label: '${zh ? '确认' : 'Confirm'}' }]
 ` : ''}
 
 async function submit() {
@@ -172,25 +176,50 @@ async function submit() {
               <MPagePlaceholder v-else :description="${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}" aria-label="${zh ? '图表占位' : 'Chart placeholder'}" />
             </MCard>`
 
-  const detailContent = `            <MPageToolbar :title="title">
+  const detailContent = `            <MPageHeader :title="title" :description="${zh ? '查看资源摘要与属性。' : 'Review summary and properties.'}">
               <template #actions>
-                <MButton severity="primary" outlined>${zh ? '编辑' : 'Edit'}</MButton>
+                <MSpace>
+                  <MStatus :label="${zh ? '启用' : 'Active'}" severity="success" />
+                  <MButton severity="primary">${zh ? '编辑' : 'Edit'}</MButton>
+                  <MButton severity="secondary">${zh ? '返回' : 'Back'}</MButton>
+                </MSpace>
               </template>
-            </MPageToolbar>
-            <MTag value="${zh ? '正常' : 'Active'}" severity="success" />
-            <MCard>
-              <MDivider />
-              <p style="margin:0;color:var(--m-color-text-muted)">${zh ? '示例资源详情' : 'Example resource details'}</p>
+            </MPageHeader>
+            <MCard :title="${zh ? '基本信息' : 'Basics'}">
+              <p style="margin:0;color:var(--m-color-text-muted)">${zh ? '用定义列表或网格展示属性；相关列表用 MTable + rows。' : 'Use a definition grid; related lists use MTable + rows.'}</p>
             </MCard>`
 
-  const settingsContent = `          <h1 class="m-generated-title">${title}</h1>
-          <MTabs :value="'general'" :items="[{ label: '${zh ? '常规' : 'General'}', value: 'general' }]" />
-          <MForm class="m-generated-form" @submit.prevent="submit">
-            <MFormItem label="${zh ? '显示名称' : 'Display name'}" name="name">
-              <MInput v-model="model.name" fluid />
-            </MFormItem>
-            <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存设置' : 'Save settings'}</MButton>
-          </MForm>`
+  const settingsContent = `            <MPageHeader :title="title" :description="${zh ? '按域分组配置偏好。' : 'Grouped preference settings.'}" />
+            <MTabs v-model="activeTab" :tabs="settingTabs">
+              <template #default="{ activeValue }">
+                <MPageSection v-if="activeValue === 'general'" variant="form" :title="${zh ? '常规' : 'General'}">
+                  <MForm @submit.prevent="submit">
+                    <MFormItem label="${zh ? '显示名称' : 'Display name'}" name="name" required>
+                      <MInput v-model="model.name" fluid />
+                    </MFormItem>
+                    <MPageSection variant="actions">
+                      <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
+                    </MPageSection>
+                  </MForm>
+                </MPageSection>
+              </template>
+            </MTabs>`
+
+  const wizardContent = `            <MPageHeader :title="title" :description="${zh ? '每步一个主任务。' : 'One job per step.'}" />
+            <MStepper v-model="activeStep" :steps="wizardSteps" linear />
+            <MPageSection variant="form">
+              <MForm @submit.prevent="submit">
+                <MFormItem label="${zh ? '名称' : 'Name'}" name="name" required>
+                  <MInput v-model="model.name" fluid />
+                </MFormItem>
+                <MPageSection variant="actions">
+                  <MSpace>
+                    <MButton severity="secondary" text :disabled="activeStep === 0" @click="activeStep = Math.max(activeStep - 1, 0)">${zh ? '上一步' : 'Back'}</MButton>
+                    <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</MButton>
+                  </MSpace>
+                </MPageSection>
+              </MForm>
+            </MPageSection>`
 
   let innerTemplate = ''
   if (isList) {
@@ -210,12 +239,21 @@ ${listContent}
   </MLayout>
 </MConfigProvider>`
   } else if (useLayoutShell) {
-    const content = isDashboard ? dashboardContent : isDetail ? detailContent : isSettings ? settingsContent : formContent
-    const pageContentAttrs = isForm || isSettings ? ' width="narrow"' : isDashboard ? ' density="spacious"' : ''
+    const content = isDashboard
+      ? dashboardContent
+      : isDetail
+        ? detailContent
+        : isSettings
+          ? settingsContent
+          : isWizard
+            ? wizardContent
+            : formContent
+    const pageContentAttrs =
+      isForm || isSettings || isWizard ? ' width="narrow"' : isDashboard ? ' density="spacious"' : ''
     innerTemplate = `<MConfigProvider :locale="zhCN">
   <MLayout fill-viewport>
     <MLayoutHeader :padding="'var(--m-space-4) var(--m-space-6)'">
-      <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
+      <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: title }]" />
     </MLayoutHeader>
     <MLayoutContent>
       <MPageContent${pageContentAttrs}>
@@ -257,18 +295,6 @@ ${content}
         <MButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
       </template>
     </MEmpty>
-  </main>
-</MConfigProvider>`
-  } else if (isWizard) {
-    innerTemplate = `<MConfigProvider :locale="zhCN">
-  <main class="m-generated-page">
-    <MCard>
-      <MStepper v-model="activeStep" :items="[${zh ? "'基本信息', '确认'" : "'Details', 'Confirm'"}]" />
-      <MForm label-position="top" @submit.prevent="submit">
-        <MFormItem label="${zh ? '名称' : 'Name'}" name="name"><MInput v-model="model.name" fluid /></MFormItem>
-        <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</MButton>
-      </MForm>
-    </MCard>
   </main>
 </MConfigProvider>`
   } else {
@@ -809,23 +835,48 @@ export function createToolHandlers(catalog = loadCatalog()) {
         const goldenId =
           best.pattern.goldenPage?.split('/').pop()?.replace(/\.vue$/i, '') ||
           listGoldenPages().find((item) => item.patternId === best.pattern.id)?.id ||
-          best.pattern.id
-        return locale === 'en-US'
-          ? `Call get_golden_page("${goldenId}"), get_pattern, get_design_rules, then get_component/get_example. Pass includeScaffold: true for starter code. Optionally validate_page.`
-          : `调用 get_golden_page("${goldenId}")、get_pattern、get_design_rules，再用 get_component/get_example 查 API。需要 starter 时传 includeScaffold: true。可选用 validate_page。`
+          null
+        if (locale === 'en-US') {
+          return goldenId
+            ? `Call get_golden_page("${goldenId}") and mirror it. Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page. includeScaffold returns the golden source when available — not a separate aesthetic template.`
+            : `No golden page for this pattern: use get_pattern + get_design_rules, look up APIs with get_component/get_example, then always run validate_usage and validate_page.`
+        }
+        return goldenId
+          ? `调用 get_golden_page("${goldenId}") 并镜像结构。不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。includeScaffold 有黄金样例时返回样例源码，不是另一套审美模板。`
+          : `该模式暂无黄金样例：用 get_pattern + get_design_rules，API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
       })(),
     }
     if (args.includeScaffold) {
-      const code = generatedPageCode(best.pattern.id, args.intent, locale)
-      const componentSource = `${code.script}\n\n${code.template}\n\n${code.style}`
-      result.scaffold = {
-        vue: code,
-        files: { component: componentSource },
-        warnings: [
-          locale === 'en-US'
-            ? 'Scaffold only: replace sample API state, data, and events with the application implementation.'
-            : '仅为脚手架：请将示例 API 状态、数据和事件替换为实际业务实现。',
-        ],
+      const goldenId =
+        best.pattern.goldenPage?.split('/').pop()?.replace(/\.vue$/i, '') ||
+        listGoldenPages().find((item) => item.patternId === best.pattern.id)?.id ||
+        null
+      const golden = goldenId ? readGoldenPageSource(goldenId) : null
+
+      if (golden) {
+        result.scaffold = {
+          source: 'golden-page',
+          goldenPage: golden.record.id,
+          files: { component: golden.source },
+          warnings: [
+            locale === 'en-US'
+              ? 'Scaffold is the golden page source. Remap domain copy/data only; never invent props. Then validate_usage + validate_page.'
+              : '脚手架即黄金样例源码。只替换域文案与数据，禁止臆造 prop。完成后必须 validate_usage + validate_page。',
+          ],
+        }
+      } else {
+        const code = generatedPageCode(best.pattern.id, args.intent, locale)
+        const componentSource = `${code.script}\n\n${code.template}\n\n${code.style}`
+        result.scaffold = {
+          source: 'generated-fallback',
+          vue: code,
+          files: { component: componentSource },
+          warnings: [
+            locale === 'en-US'
+              ? 'No golden page for this pattern — structural fallback only. Prefer get_pattern + get_component. Must validate_usage before delivery.'
+              : '该模式暂无黄金样例，仅为结构占位。优先 get_pattern + get_component。交付前必须 validate_usage。',
+          ],
+        }
       }
     }
     return textResult(result)
@@ -848,8 +899,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       source: payload.source,
       nextStep:
         locale === 'en-US'
-          ? 'Copy this structure and replace business data. Prefer MPage* components; see get_design_rules for page standards.'
-          : '复制此结构并替换业务数据。优先使用 MPage* 组件；页面标准见 get_design_rules。',
+          ? 'Mirror this structure and replace business data. Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page. See get_design_rules for page standards.'
+          : '镜像此结构并替换业务数据。不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。页面标准见 get_design_rules。',
     })
   }
 
@@ -892,9 +943,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
     const ranked = pageSnippets
       .map((snippet) => ({ snippet, score: scorePageSnippet(snippet, args.section) }))
       .sort((a, b) => b.score - a.score || a.snippet.id.localeCompare(b.snippet.id))
-    const match = findPageSnippet(args.section) || (ranked[0]?.score ? ranked[0].snippet : undefined)
+    const exact = findPageSnippet(args.section)
+    const match = exact || (ranked[0]?.score ? ranked[0].snippet : undefined)
 
-    if (!match || (ranked[0]?.score ?? 0) === 0) {
+    if (!match || (!exact && (ranked[0]?.score ?? 0) === 0)) {
       return textResult({
         error: `Page snippet not found: ${args.section}`,
         availableSnippets: pageSnippets.map((item) => item.id),
@@ -929,7 +981,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       }
     }
 
-    if (!findPageSnippet(args.section) && ranked.length > 1 && ranked[0]?.score) {
+    if (!exact && ranked.length > 1 && ranked[0]?.score) {
       payload.matchedBy = 'query'
       payload.alternatives = ranked
         .slice(1, 4)
@@ -1165,6 +1217,28 @@ export function createToolHandlers(catalog = loadCatalog()) {
           locale === 'en-US'
             ? 'Prefer MStatus for business status in #cell-status; use MTag for categories / closable chips (see list-status-dot / detail-page).'
             : '行内业务状态优先 MStatus（#cell-status）；分类或可关闭标签再用 MTag（见 list-status-dot / detail-page）。',
+      })
+    }
+
+    if (/<MTabs\b[^>]*(?::items|v-bind:items)\s*=/i.test(code) || /<MTabs\b[^>]*\sitems\s*=/i.test(code)) {
+      suggestions.push({
+        standardId: 'feedback',
+        type: 'tabs-items-prop',
+        message:
+          locale === 'en-US'
+            ? 'Contract: MTabs uses the tabs prop with v-model (not items / value). See settings-page golden.'
+            : '契约：MTabs 使用 v-model + tabs（不是 items / value）。见黄金样例 settings-page。',
+      })
+    }
+
+    if (/<MStepper\b[^>]*(?::items|v-bind:items)\s*=/i.test(code) || /<MStepper\b[^>]*\sitems\s*=/i.test(code)) {
+      suggestions.push({
+        standardId: 'feedback',
+        type: 'stepper-items-prop',
+        message:
+          locale === 'en-US'
+            ? 'Contract: MStepper uses the steps prop with v-model (not items). See wizard-form golden.'
+            : '契约：MStepper 使用 v-model + steps（不是 items）。见黄金样例 wizard-form。',
       })
     }
 

@@ -139,43 +139,43 @@ const loading = ref(false)`,
   },
   {
     id: 'list-status-tag',
-    title: '表格状态列 Tag',
-    titleEn: 'Table status tag cell',
-    description: '在 #cell-status 中用 MTag 展示分类标签（业务状态优先用 list-status-dot / MStatus）。',
-    descriptionEn: 'Render category labels with MTag in #cell-status (prefer MStatus for business status).',
+    title: '表格分类标签列 Tag',
+    titleEn: 'Table category tag cell',
+    description: '仅用于分类 / 可关闭标签。业务状态（启用/停用/在线）请用 list-status-dot / MStatus。',
+    descriptionEn: 'Category or closable chips only. Prefer list-status-dot / MStatus for business status.',
     pageTypes: ['list'],
-    keywords: ['状态', 'tag', 'status', 'cell-status'],
+    keywords: ['分类', '标签', '可关闭', 'chip', 'category', 'tag-only'],
     imports: ['MTag'],
-    template: `<template #cell-status="{ value }">
+    template: `<template #cell-category="{ value }">
   <MTag
-    :value="value === 'active' ? '启用' : '停用'"
-    :severity="value === 'active' ? 'success' : 'secondary'"
+    :value="String(value ?? '')"
+    severity="info"
   />
 </template>`,
-    rules: ['分类/强调态用 MTag；更轻的圆点+文案用 MStatus', '不要用 Button 颜色表达状态'],
-    rulesEn: ['Use MTag for chip-like status; use MStatus for lighter dot+label', 'Do not use Button colors for status'],
-    avoid: ['不要用裸文本颜色区分状态'],
-    avoidEn: ['Do not rely on raw text color for status'],
+    rules: ['分类/强调态用 MTag；行内业务状态用 MStatus（list-status-dot）', '不要用 Button 颜色表达状态'],
+    rulesEn: ['Use MTag for categories; use MStatus for business status (list-status-dot)', 'Do not use Button colors for status'],
+    avoid: ['不要在 #cell-status 里默认用 MTag 表示启用/停用'],
+    avoidEn: ['Do not default #cell-status to MTag for active/inactive'],
   },
   {
     id: 'list-status-dot',
     title: '表格状态列 Status',
     titleEn: 'Table status dot cell',
-    description: '在 #cell-status 中用 MStatus 展示轻量业务状态。',
-    descriptionEn: 'Render lightweight business status with MStatus in #cell-status.',
+    description: '在 #cell-status 中用 MStatus 展示轻量业务状态（默认首选）。',
+    descriptionEn: 'Render lightweight business status with MStatus in #cell-status (default preference).',
     pageTypes: ['list'],
-    keywords: ['状态', 'status', 'dot', 'cell-status', '在线'],
+    keywords: ['状态', 'status', 'dot', 'cell-status', '在线', '启用', '停用', '业务状态'],
     imports: ['MStatus'],
     template: `<template #cell-status="{ value }">
   <MStatus
-    :label="value === 'online' ? '在线' : '离线'"
-    :severity="value === 'online' ? 'success' : 'secondary'"
+    :label="value === 'active' || value === 'online' ? '启用' : '停用'"
+    :severity="value === 'active' || value === 'online' ? 'success' : 'secondary'"
   />
 </template>`,
-    rules: ['行内轻量状态优先 MStatus', '不要用 Button 颜色表达状态'],
-    rulesEn: ['Prefer MStatus for lightweight inline status', 'Do not use Button colors for status'],
-    avoid: ['不要用裸文本颜色区分状态'],
-    avoidEn: ['Do not rely on raw text color for status'],
+    rules: ['行内轻量业务状态优先 MStatus', '不要用 Button 颜色表达状态'],
+    rulesEn: ['Prefer MStatus for lightweight inline business status', 'Do not use Button colors for status'],
+    avoid: ['不要用裸文本颜色区分状态', '不要默认改用 MTag 表达启用/停用'],
+    avoidEn: ['Do not rely on raw text color for status', 'Do not default to MTag for active/inactive'],
   },
   {
     id: 'empty-block',
