@@ -8,6 +8,7 @@ import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overla
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
@@ -327,29 +328,26 @@ function onViewportChange() {
   if (open.value) updatePanelPosition()
 }
 
+useFloatingViewportSync(
+  () => open.value && teleported.value,
+  onViewportChange,
+)
+
 watch(open, (isOpen) => {
   if (isOpen) {
     document.addEventListener('click', onDocumentClick)
     document.addEventListener('focusin', onDocumentFocusIn)
-    if (teleported.value) {
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    }
   } else {
     query.value = ''
     keyboard.reset()
     document.removeEventListener('click', onDocumentClick)
     document.removeEventListener('focusin', onDocumentFocusIn)
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
   }
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
   document.removeEventListener('focusin', onDocumentFocusIn)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 

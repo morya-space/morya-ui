@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { FloatingOverlayPlacement } from './overlayPlacement'
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useMConfig } from './config'
 import { resolveOverlayTeleport } from './overlay'
 import { computeFloatingOverlayStyle } from './overlayPlacement'
+import { useFloatingViewportSync } from './useFloatingViewportSync'
 
 defineOptions({ name: 'MFlyoutSubmenu', inheritAttrs: false })
 
@@ -39,28 +40,17 @@ function updatePosition() {
   })
 }
 
-function onViewportChange() {
-  if (props.open) updatePosition()
-}
+useFloatingViewportSync(
+  () => props.open && Boolean(props.anchor),
+  updatePosition,
+)
 
 watch(
   () => [props.open, props.anchor] as const,
   ([open]) => {
-    if (open) {
-      void nextTick(updatePosition)
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    } else {
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
-    }
+    if (open) void nextTick(updatePosition)
   },
 )
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
-})
 </script>
 
 <template>

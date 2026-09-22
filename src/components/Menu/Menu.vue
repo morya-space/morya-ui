@@ -13,6 +13,7 @@ import {
 } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMotionTransition } from '../../theme/useMotionTransition'
@@ -380,23 +381,20 @@ watch(
     if (open) {
       void nextTick(updatePopupPosition)
       document.addEventListener('click', onOutsideClick)
-      if (teleported.value) {
-        window.addEventListener('resize', onViewportChange)
-        window.addEventListener('scroll', onViewportChange, true)
-      }
     } else {
       document.removeEventListener('click', onOutsideClick)
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
     }
   },
   { immediate: true },
 )
 
+useFloatingViewportSync(
+  () => Boolean(props.popup && props.modelValue && teleported.value),
+  onViewportChange,
+)
+
 onBeforeUnmount(() => {
   document.removeEventListener('click', onOutsideClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 
 const menuClass = computed(() => [

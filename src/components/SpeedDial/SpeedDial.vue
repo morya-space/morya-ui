@@ -8,6 +8,7 @@ import { useMConfig } from '../../shared/config'
 import { resolveMenuIcon } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle  } from '../../shared/overlayPlacement'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
@@ -183,6 +184,11 @@ watch(keyboard.activeIndex, () => {
   if (props.modelValue) focusActiveAction()
 })
 
+useFloatingViewportSync(
+  () => props.modelValue && teleported.value,
+  onViewportChange,
+)
+
 watch(
   () => props.modelValue,
   (open) => {
@@ -194,16 +200,10 @@ watch(
       })
       document.addEventListener('click', onDocumentClick)
       document.addEventListener('focusin', onDocumentFocusIn)
-      if (teleported.value) {
-        window.addEventListener('resize', onViewportChange)
-        window.addEventListener('scroll', onViewportChange, true)
-      }
     } else {
       keyboard.reset()
       document.removeEventListener('click', onDocumentClick)
       document.removeEventListener('focusin', onDocumentFocusIn)
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
     }
   },
   { immediate: true },
@@ -212,8 +212,6 @@ watch(
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
   document.removeEventListener('focusin', onDocumentFocusIn)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 

@@ -6,6 +6,7 @@ import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import DropdownNodes from './DropdownNodes.vue'
@@ -181,25 +182,19 @@ function onDocumentClick(event: MouseEvent) {
 watch(
   () => props.modelValue,
   (open) => {
-    if (open) {
-      document.addEventListener('click', onDocumentClick)
-      if (teleported.value) {
-        window.addEventListener('resize', onViewportChange)
-        window.addEventListener('scroll', onViewportChange, true)
-      }
-    } else {
-      document.removeEventListener('click', onDocumentClick)
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
-    }
+    if (open) document.addEventListener('click', onDocumentClick)
+    else document.removeEventListener('click', onDocumentClick)
   },
   { immediate: true },
 )
 
+useFloatingViewportSync(
+  () => props.modelValue && teleported.value,
+  onViewportChange,
+)
+
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
   clearHoverTimers()
 })
 </script>

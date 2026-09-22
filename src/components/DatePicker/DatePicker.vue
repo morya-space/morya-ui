@@ -12,6 +12,7 @@ import { useConfiguredSize, useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
@@ -379,31 +380,28 @@ function onViewportChange() {
   if (open.value) updatePanelPosition()
 }
 
+useFloatingViewportSync(
+  () => open.value && teleported.value,
+  onViewportChange,
+)
+
 watch(open, async (isOpen) => {
   if (isOpen) {
     emit('show')
     document.addEventListener('click', onDocumentClick)
     document.addEventListener('keydown', onKeydown)
-    if (teleported.value) {
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    }
     await nextTick()
     focusActiveDay()
   } else {
     emit('hide')
     document.removeEventListener('click', onDocumentClick)
     document.removeEventListener('keydown', onKeydown)
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
   }
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
   document.removeEventListener('keydown', onKeydown)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 

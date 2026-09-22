@@ -6,6 +6,7 @@ import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { resolveIconSizeFromClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
@@ -154,29 +155,26 @@ watch(keyboard.activeIndex, () => {
   if (open.value) focusActiveItem()
 })
 
+useFloatingViewportSync(
+  () => open.value && teleported.value,
+  onViewportChange,
+)
+
 watch(open, (isOpen) => {
   if (isOpen) {
     document.addEventListener('click', onDocumentClick)
     document.addEventListener('focusin', onDocumentFocusIn)
     void nextTick(() => updateMenuPosition())
-    if (teleported.value) {
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    }
   } else {
     keyboard.reset()
     document.removeEventListener('click', onDocumentClick)
     document.removeEventListener('focusin', onDocumentFocusIn)
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
   }
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
   document.removeEventListener('focusin', onDocumentFocusIn)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 

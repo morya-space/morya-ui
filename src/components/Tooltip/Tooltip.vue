@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle, toCssSize } from '../../shared/overlayPlacement'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 
@@ -86,20 +87,13 @@ function onViewportChange() {
   if (visible.value) updateTipPosition()
 }
 
-watch(visible, (next) => {
-  if (next && teleported.value) {
-    window.addEventListener('resize', onViewportChange)
-    window.addEventListener('scroll', onViewportChange, true)
-  } else {
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
-  }
-})
+useFloatingViewportSync(
+  () => visible.value && teleported.value,
+  onViewportChange,
+)
 
 onBeforeUnmount(() => {
   clearTimers()
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 
 const contentStyle = computed(() => {

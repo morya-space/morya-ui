@@ -7,6 +7,7 @@ import { useMConfig } from '../../shared/config'
 import { resolveMenuIcon } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMotionTransition } from '../../theme/useMotionTransition'
@@ -222,21 +223,14 @@ function onViewportChange() {
   if (openIndex.value != null) updateSubmenuPosition()
 }
 
-watch(openIndex, (index) => {
-  if (index != null && teleported.value) {
-    window.addEventListener('resize', onViewportChange)
-    window.addEventListener('scroll', onViewportChange, true)
-  } else {
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
-  }
-})
+useFloatingViewportSync(
+  () => openIndex.value != null && teleported.value,
+  onViewportChange,
+)
 
 onMounted(() => document.addEventListener('click', onDocumentClick))
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 

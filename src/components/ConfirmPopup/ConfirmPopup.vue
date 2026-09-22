@@ -8,6 +8,7 @@ import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
@@ -108,8 +109,6 @@ watch(
   async (open) => {
     if (open) {
       document.addEventListener('keydown', onKeydown)
-      window.addEventListener('resize', updatePosition)
-      window.addEventListener('scroll', updatePosition, true)
       await nextTick()
       updatePosition()
       panel.value?.focus()
@@ -117,14 +116,17 @@ watch(
     } else {
       document.removeEventListener('keydown', onKeydown)
       document.removeEventListener('click', onDocumentClick)
-      window.removeEventListener('resize', updatePosition)
-      window.removeEventListener('scroll', updatePosition, true)
       if (panel.value?.contains(document.activeElement)) {
         props.target?.focus({ preventScroll: true })
       }
     }
   },
   { immediate: true },
+)
+
+useFloatingViewportSync(
+  () => props.modelValue,
+  updatePosition,
 )
 
 watch(
@@ -137,8 +139,6 @@ watch(
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', onKeydown)
   document.removeEventListener('click', onDocumentClick)
-  window.removeEventListener('resize', updatePosition)
-  window.removeEventListener('scroll', updatePosition, true)
 })
 
 const visible = computed(() => props.modelValue)

@@ -7,6 +7,7 @@ import FlyoutSubmenu from '../../shared/FlyoutSubmenu.vue'
 import { getLastPointer } from '../../shared/lastPointer'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
@@ -121,24 +122,18 @@ watch(
   () => props.modelValue,
   (open) => {
     if (!props.popup) return
-    if (open) {
-      void nextTick(updatePopupPosition)
-      if (teleported.value) {
-        window.addEventListener('resize', onViewportChange)
-        window.addEventListener('scroll', onViewportChange, true)
-      }
-    } else {
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
-    }
+    if (open) void nextTick(updatePopupPosition)
   },
   { immediate: true },
 )
 
+useFloatingViewportSync(
+  () => Boolean(props.popup && props.modelValue && teleported.value),
+  onViewportChange,
+)
+
 onBeforeUnmount(() => {
   document.removeEventListener('click', onOutsideClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 

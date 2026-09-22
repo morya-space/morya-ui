@@ -6,6 +6,7 @@ import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../share
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
@@ -253,24 +254,18 @@ function onViewportChange() {
   if (open.value) updatePanelPosition()
 }
 
+useFloatingViewportSync(
+  () => open.value && teleported.value,
+  onViewportChange,
+)
+
 watch(open, (isOpen) => {
-  if (isOpen) {
-    document.addEventListener('click', onDocumentClick)
-    if (teleported.value) {
-      window.addEventListener('resize', onViewportChange)
-      window.addEventListener('scroll', onViewportChange, true)
-    }
-  } else {
-    document.removeEventListener('click', onDocumentClick)
-    window.removeEventListener('resize', onViewportChange)
-    window.removeEventListener('scroll', onViewportChange, true)
-  }
+  if (isOpen) document.addEventListener('click', onDocumentClick)
+  else document.removeEventListener('click', onDocumentClick)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
-  window.removeEventListener('resize', onViewportChange)
-  window.removeEventListener('scroll', onViewportChange, true)
 })
 </script>
 
