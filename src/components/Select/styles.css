@@ -115,7 +115,7 @@
 
 .m-select__menu:has(.m-select__filter) {
     --m-select-list-max-height: calc(
-        var(--m-select-menu-max-height) - var(--m-control-height-medium) - var(--m-space-2)
+        var(--m-select-menu-max-height) - var(--m-control-height-small) - var(--m-space-6)
     );
 }
 

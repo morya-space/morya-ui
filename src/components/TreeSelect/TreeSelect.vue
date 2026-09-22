@@ -461,6 +461,7 @@ onBeforeUnmount(() => {
               v-model="query"
               class="m-treeselect__filter"
               type="search"
+              size="1"
               :placeholder="locale.searchPlaceholder"
               @click.stop
               @keydown="onFilterKeydown"

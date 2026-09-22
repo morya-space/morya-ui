@@ -481,6 +481,7 @@ onBeforeUnmount(() => {
             v-model="filterQuery"
             class="m-select__filter"
             type="search"
+            size="1"
             :placeholder="locale.searchPlaceholder"
             :aria-label="locale.filterOptions"
             @click.stop

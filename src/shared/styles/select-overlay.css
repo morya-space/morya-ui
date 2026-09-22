@@ -147,21 +147,29 @@
 
 .m-select__filter,
 .m-treeselect__filter {
+    /* size="1" + min-width:0 keep intrinsic width from inflating width:max-content menus */
+    align-self: stretch;
     background: var(--m-color-surface);
-    border: 0;
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-sm);
     box-sizing: border-box;
     color: var(--m-color-text);
     flex: 0 0 auto;
-    font: inherit;
-    margin: calc(var(--m-space-1) * -1) calc(var(--m-space-1) * -1) 0;
-    padding: var(--m-space-2) var(--m-space-3);
-    width: calc(100% + var(--m-space-1) * 2);
+    font-family: var(--m-font-sans);
+    font-size: var(--m-control-font-small);
+    height: var(--m-control-height-small);
+    line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    margin: var(--m-space-2);
+    max-width: calc(100% - 2 * var(--m-space-2));
+    min-width: 0;
+    outline: none;
+    padding: 0 var(--m-control-padding-x-small);
+    width: auto;
 }
 
 .m-select__filter:focus-visible,
 .m-treeselect__filter:focus-visible {
+    border-color: var(--m-color-primary-hover);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }

@@ -102,7 +102,7 @@
 
 .m-treeselect__panel:has(.m-treeselect__filter) {
     --m-treeselect-list-max-height: calc(
-        var(--m-treeselect-panel-max-height) - var(--m-control-height-medium) - var(--m-space-2)
+        var(--m-treeselect-panel-max-height) - var(--m-control-height-small) - var(--m-space-6)
     );
 }
 
