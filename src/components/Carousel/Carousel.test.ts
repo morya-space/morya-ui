@@ -2,6 +2,10 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import MCarousel from './Carousel.vue'
 
+function trackPage(wrapper: ReturnType<typeof mount>) {
+  return wrapper.find('.m-carousel__track').attributes('style') ?? ''
+}
+
 describe('muCarousel', () => {
   it('pages through items', async () => {
     const wrapper = mount(MCarousel, {
@@ -10,9 +14,10 @@ describe('muCarousel', () => {
         item: `<template #item="{ item }"><span class="slide">{{ item }}</span></template>`,
       },
     })
-    expect(wrapper.find('.slide').text()).toBe('a')
+    expect(trackPage(wrapper)).toContain('--m-carousel-page: 0')
+    expect(wrapper.findAll('.slide').map((node) => node.text())).toEqual(['a', 'b', 'c'])
     await wrapper.find('[aria-label="下一页"]').trigger('click')
-    expect(wrapper.find('.slide').text()).toBe('b')
+    expect(trackPage(wrapper)).toContain('--m-carousel-page: 1')
     expect(wrapper.emitted('update:page')?.at(-1)).toEqual([1])
   })
 
@@ -21,6 +26,7 @@ describe('muCarousel', () => {
       props: { value: ['a', 'b'], numVisible: 1, circular: true },
     })
     await wrapper.find('[aria-label="上一页"]').trigger('click')
+    expect(trackPage(wrapper)).toContain('--m-carousel-page: 1')
     expect(wrapper.text()).toContain('b')
   })
 
@@ -47,10 +53,10 @@ describe('muCarousel', () => {
         item: `<template #item="{ item }"><span class="slide">{{ item }}</span></template>`,
       },
     })
-    expect(wrapper.find('.slide').text()).toBe('c')
+    expect(trackPage(wrapper)).toContain('--m-carousel-page: 2')
     await wrapper.find('[aria-label="上一页"]').trigger('click')
     expect(wrapper.emitted('update:page')?.at(-1)).toEqual([1])
-    expect(wrapper.find('.slide').text()).toBe('b')
+    expect(trackPage(wrapper)).toContain('--m-carousel-page: 1')
   })
 
   it('navigates with arrow keys', async () => {

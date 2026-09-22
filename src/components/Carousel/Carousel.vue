@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import type { CarouselProps } from './types'
-import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
@@ -25,29 +25,50 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const innerPage = ref(0)
 const page = computed(() => props.page ?? innerPage.value)
 const locale = useMLocale()
+const suppressMotion = ref(false)
 let timer: ReturnType<typeof setInterval> | null = null
 
-const maxPage = computed(() => Math.max(0, props.value.length - props.numVisible))
+const itemCount = computed(() => props.value.length)
+const visibleCount = computed(() => Math.max(1, props.numVisible))
+const maxPage = computed(() => Math.max(0, itemCount.value - visibleCount.value))
 const pages = computed(() => Array.from({ length: maxPage.value + 1 }, (_, index) => index))
 
-const visibleItems = computed(() => {
-  const start = Math.min(page.value, maxPage.value)
-  return props.value.slice(start, start + props.numVisible).map((item, offset) => ({
-    item,
-    index: start + offset,
-  }))
+const trackStyle = computed(() => {
+  const count = Math.max(itemCount.value, 1)
+  const visible = visibleCount.value
+  return {
+    '--m-carousel-page': String(page.value),
+    '--m-carousel-count': String(count),
+    '--m-carousel-visible': String(visible),
+  }
 })
 
 function go(next: number) {
+  const from = page.value
   let target = next
+  let wrapped = false
   if (props.circular) {
     const span = maxPage.value + 1
+    if (span <= 0) return
+    if (next < 0 || next > maxPage.value) wrapped = true
     target = ((next % span) + span) % span
   } else {
     target = Math.min(maxPage.value, Math.max(0, next))
   }
+  if (target === from) return
+
+  if (wrapped) {
+    suppressMotion.value = true
+  }
   innerPage.value = target
   emit('update:page', target)
+  if (wrapped) {
+    void nextTick(() => {
+      requestAnimationFrame(() => {
+        suppressMotion.value = false
+      })
+    })
+  }
 }
 
 watch(maxPage, (limit) => {
@@ -155,14 +176,19 @@ onBeforeUnmount(stopAutoplay)
         @pointercancel="onPointerCancel"
       >
         <div
-          v-for="entry in visibleItems"
-          :key="entry.index"
-          class="m-carousel__item"
-          :style="{ flex: `0 0 ${100 / numVisible}%` }"
+          class="m-carousel__track"
+          :class="{ 'm-carousel__track--instant': suppressMotion }"
+          :style="trackStyle"
         >
-          <slot name="item" :item="entry.item" :index="entry.index">
-            {{ entry.item }}
-          </slot>
+          <div
+            v-for="(item, index) in value"
+            :key="index"
+            class="m-carousel__item"
+          >
+            <slot name="item" :item="item" :index="index">
+              {{ item }}
+            </slot>
+          </div>
         </div>
       </div>
       <div v-if="showIndicators && pages.length > 1" class="m-carousel__indicators">

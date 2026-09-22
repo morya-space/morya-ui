@@ -1,6 +1,7 @@
 /* —— Media: Carousel —— */
 .m-carousel {
     --m-carousel-indicator-size: 0.45rem;
+    --m-carousel-gap: var(--m-space-2);
     align-items: center;
     display: flex;
     gap: var(--m-space-2);
@@ -8,20 +9,36 @@
 }
 
 .m-carousel__viewport {
-    display: flex;
-    flex: 1;
-    gap: var(--m-space-2);
-    min-width: 0;
+    margin-inline: calc(var(--m-carousel-gap) / -2);
     overflow: hidden;
     touch-action: pan-y;
+    width: 100%;
+}
+
+.m-carousel__track {
+    --m-carousel-page: 0;
+    --m-carousel-count: 1;
+    --m-carousel-visible: 1;
+    display: flex;
+    transform: translate3d(
+        calc(-100% * var(--m-carousel-page) / var(--m-carousel-count)),
+        0,
+        0
+    );
+    transition: transform var(--m-motion-normal) var(--m-motion-ease);
+    width: calc(100% * var(--m-carousel-count) / var(--m-carousel-visible));
+    will-change: transform;
+}
+
+.m-carousel__track--instant {
+    transition: none;
 }
 
 .m-carousel__item {
     box-sizing: border-box;
+    flex: 0 0 calc(100% / var(--m-carousel-count));
     min-width: 0;
-    transition:
-        opacity var(--m-motion-normal) var(--m-motion-ease),
-        transform var(--m-motion-normal) var(--m-motion-ease);
+    padding-inline: calc(var(--m-carousel-gap) / 2);
 }
 
 .m-carousel__main {
@@ -79,12 +96,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-carousel__item {
+    html:not([data-m-ignore-reduced-motion]) .m-carousel__track {
         transition: none;
     }
 }
 
-[data-m-motion="reduced"] .m-carousel__item,
-[data-m-motion="none"] .m-carousel__item {
+[data-m-motion="reduced"] .m-carousel__track,
+[data-m-motion="none"] .m-carousel__track {
     transition: none;
 }
