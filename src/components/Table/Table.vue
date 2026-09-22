@@ -668,9 +668,15 @@ defineExpose({
                   <slot v-else-if="slots[`header-${header.value.toLowerCase()}`]" :name="`header-${header.value.toLowerCase()}`" v-bind="header" />
                   <slot v-else-if="slots.header" name="header" v-bind="header" />
                   <span v-else class="m-table__header-text" :title="header.text">{{ header.text }}</span>
-                  <span v-if="header.sortable" class="m-table__caret-wrapper">
-                    <i class="m-table__sort-caret m-table__sort-caret--ascending" />
-                    <i class="m-table__sort-caret m-table__sort-caret--descending" />
+                  <span v-if="header.sortable" class="m-table__sort" aria-hidden="true">
+                    <MIcon
+                      name="triangle-up"
+                      class="m-table__sort-icon m-table__sort-icon--ascending"
+                    />
+                    <MIcon
+                      name="triangle-down"
+                      class="m-table__sort-icon m-table__sort-icon--descending"
+                    />
                   </span>
                   <span v-if="multiSort && isMultiSorting(header.value)" class="m-table__multi-sort-number">
                     {{ getMultiSortNumber(header.value) }}

@@ -1,5 +1,5 @@
 export type IconPrimitive =
-  | { tag: 'path'; d: string }
+  | { tag: 'path'; d: string; fill?: 'currentColor' | 'none'; stroke?: 'currentColor' | 'none' }
   | { tag: 'circle'; cx: number; cy: number; r: number; fill?: 'currentColor' | 'none' }
   | { tag: 'line'; x1: number; y1: number; x2: number; y2: number }
   | { tag: 'polyline'; points: string }

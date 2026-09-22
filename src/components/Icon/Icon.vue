@@ -48,7 +48,12 @@ const rootClass = computed(() => [
       stroke-linejoin="round"
     >
       <template v-for="(node, index) in definition.primitives" :key="index">
-        <path v-if="node.tag === 'path'" :d="node.d" />
+        <path
+          v-if="node.tag === 'path'"
+          :d="node.d"
+          :fill="node.fill ?? 'none'"
+          :stroke="node.stroke"
+        />
         <circle
           v-else-if="node.tag === 'circle'"
           :cx="node.cx"

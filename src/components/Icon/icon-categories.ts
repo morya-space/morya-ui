@@ -49,6 +49,8 @@ const categorizedIcons: Record<Exclude<IconCategoryId, 'other'>, readonly IconNa
     'chevron-down',
     'chevron-left',
     'chevron-right',
+    'triangle-up',
+    'triangle-down',
     'arrow-up',
     'arrow-down',
     'arrow-left',

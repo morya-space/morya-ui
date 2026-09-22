@@ -54,6 +54,28 @@ export const iconRegistry = {
   'chevron-right': {
     primitives: [{ tag: 'path', d: 'm6 4 4 4-4 4' }],
   },
+  'triangle-up': {
+    viewBox: '69.730643 279.608186 905.415184 452.708615',
+    primitives: [
+      {
+        tag: 'path',
+        d: 'M522.439258 279.608186 69.730643 732.316801 975.145827 732.316801Z',
+        fill: 'currentColor',
+        stroke: 'none',
+      },
+    ],
+  },
+  'triangle-down': {
+    viewBox: '69.730643 291.683199 905.415184 452.708615',
+    primitives: [
+      {
+        tag: 'path',
+        d: 'M522.439258 744.391814 69.730643 291.683199 975.145827 291.683199Z',
+        fill: 'currentColor',
+        stroke: 'none',
+      },
+    ],
+  },
   'arrow-up': {
     primitives: [{ tag: 'path', d: 'M8 12.5V3.5M4.5 7 8 3.5 11.5 7' }],
   },

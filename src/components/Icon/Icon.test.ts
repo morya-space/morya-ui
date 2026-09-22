@@ -27,6 +27,15 @@ describe('muIcon', () => {
     expect(mount(MIcon, { props: { name: 'loader' } }).classes()).toContain('m-icon--spin')
   })
 
+  it('renders filled path icons without stroke', () => {
+    for (const name of ['triangle-up', 'triangle-down'] as const) {
+      expect(isIconName(name)).toBe(true)
+      const path = mount(MIcon, { props: { name } }).find('path')
+      expect(path.attributes('fill')).toBe('currentColor')
+      expect(path.attributes('stroke')).toBe('none')
+    }
+  })
+
   it('includes common Tabler-sourced icons used by Menu and Layout', () => {
     for (const name of [
       'layout-dashboard',

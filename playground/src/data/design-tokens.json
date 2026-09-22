@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T12:44:21.291Z",
+  "generatedAt": "2026-09-22T16:31:13.394Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 361,
+  "tokenCount": 367,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -715,6 +715,26 @@
       }
     },
     {
+      "name": "--m-carousel-count",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "1",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Count",
+        "en-US": "Component-specific token: Carousel Count"
+      }
+    },
+    {
+      "name": "--m-carousel-gap",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Gap",
+        "en-US": "Component-specific token: Carousel Gap"
+      }
+    },
+    {
       "name": "--m-carousel-indicator-size",
       "category": "component",
       "source": "src/components/Carousel/styles.css",
@@ -722,6 +742,26 @@
       "description": {
         "zh-CN": "组件专用相关变量：Carousel Indicator Size",
         "en-US": "Component-specific token: Carousel Indicator Size"
+      }
+    },
+    {
+      "name": "--m-carousel-page",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "0",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Page",
+        "en-US": "Component-specific token: Carousel Page"
+      }
+    },
+    {
+      "name": "--m-carousel-visible",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "1",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Visible",
+        "en-US": "Component-specific token: Carousel Visible"
       }
     },
     {
@@ -3103,7 +3143,7 @@
       "name": "--m-select-list-max-height",
       "category": "component",
       "source": "src/components/Select/styles.css",
-      "default": "calc( var(--m-select-menu-max-height) - var(--m-control-height-medium) - var(--m-space-2) )",
+      "default": "calc( var(--m-select-menu-max-height) - var(--m-control-height-small) - var(--m-space-6) )",
       "description": {
         "zh-CN": "组件专用相关变量：Select List Max Height",
         "en-US": "Component-specific token: Select List Max Height"
@@ -3127,6 +3167,26 @@
       "description": {
         "zh-CN": "组件专用相关变量：Select Spinner Size",
         "en-US": "Component-specific token: Select Spinner Size"
+      }
+    },
+    {
+      "name": "--m-select-tag-padding-y",
+      "category": "component",
+      "source": "src/shared/styles/form-tags.css",
+      "default": "0.15rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Select Tag Padding Y",
+        "en-US": "Component-specific token: Select Tag Padding Y"
+      }
+    },
+    {
+      "name": "--m-select-tag-remove-size",
+      "category": "component",
+      "source": "src/shared/styles/form-tags.css",
+      "default": "0.875rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Select Tag Remove Size",
+        "en-US": "Component-specific token: Select Tag Remove Size"
       }
     },
     {
@@ -3977,7 +4037,7 @@
       "name": "--m-treeselect-list-max-height",
       "category": "component",
       "source": "src/components/TreeSelect/styles.css",
-      "default": "calc( var(--m-treeselect-panel-max-height) - var(--m-control-height-medium) - var(--m-space-2) )",
+      "default": "calc( var(--m-treeselect-panel-max-height) - var(--m-control-height-small) - var(--m-space-6) )",
       "description": {
         "zh-CN": "组件专用相关变量：Treeselect List Max Height",
         "en-US": "Component-specific token: Treeselect List Max Height"
