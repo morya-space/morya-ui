@@ -47,7 +47,49 @@
 .m-accordion__content {
     background: var(--m-color-surface);
     color: var(--m-color-text);
+    min-height: 0;
+    overflow: hidden;
     padding: 0 var(--m-space-4) var(--m-space-4);
+}
+
+.m-accordion__collapse {
+    display: grid;
+    grid-template-rows: 1fr;
+    min-height: 0;
+}
+
+.m-accordion-collapse-enter-active,
+.m-accordion-collapse-leave-active {
+    display: grid;
+    overflow: hidden;
+    transition:
+        grid-template-rows var(--m-motion-normal) var(--m-motion-ease),
+        opacity var(--m-motion-normal) var(--m-motion-ease);
+}
+
+.m-accordion-collapse-enter-active,
+.m-accordion-collapse-leave-active {
+    grid-template-rows: 1fr;
+}
+
+.m-accordion-collapse-enter-from,
+.m-accordion-collapse-leave-to {
+    grid-template-rows: 0fr;
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) .m-accordion-collapse-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-accordion-collapse-leave-active {
+        transition: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-accordion-collapse-enter-active,
+[data-m-motion="reduced"] .m-accordion-collapse-leave-active,
+[data-m-motion="none"] .m-accordion-collapse-enter-active,
+[data-m-motion="none"] .m-accordion-collapse-leave-active {
+    transition: none;
 }
 
 .m-accordion__header-extra {

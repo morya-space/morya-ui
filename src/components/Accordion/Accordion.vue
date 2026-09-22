@@ -83,15 +83,19 @@ function toggle(value: string, disabled?: boolean) {
           <slot name="extra" :tab="tab" />
         </span>
       </button>
-      <div
-        v-show="isActive(tab.value)"
-        :id="panelId(tab.value)"
-        class="m-accordion__content"
-        role="region"
-        :aria-labelledby="headerId(tab.value)"
-      >
-        <slot :name="tab.value" />
-      </div>
+      <Transition name="m-accordion-collapse">
+        <div
+          v-show="isActive(tab.value)"
+          :id="panelId(tab.value)"
+          class="m-accordion__collapse"
+          role="region"
+          :aria-labelledby="headerId(tab.value)"
+        >
+          <div class="m-accordion__content">
+            <slot :name="tab.value" />
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
