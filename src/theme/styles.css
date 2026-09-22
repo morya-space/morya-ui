@@ -60,9 +60,22 @@
     --m-z-toast: calc(var(--m-z-base) + 100);
     --m-z-popper: 40;
 
-    --m-control-affix-size: 2rem;
+    /* Affix hitbox tracks control height so small/compact shells do not overflow */
+    --m-control-affix-size: calc(
+        var(--m-control-height-medium) - 2 * var(--m-border-width)
+    );
     --m-control-affix-gap: 2.35rem;
     --m-control-affix-padding: 2.5rem;
+    --m-meter-track-height: var(--m-space-5);
+    --m-tree-toggler-size: var(--m-checkbox-control-size);
+    --m-nav-rail-width: 12.5rem;
+    --m-nav-rail-collapsed-width: 4rem;
+    --m-layout-header-height: calc(
+        var(--m-control-height-medium) + 2 * var(--m-space-3)
+    );
+    --m-layout-footer-height: calc(
+        var(--m-control-height-medium) + 2 * var(--m-space-2)
+    );
     --m-space-1: 0.25rem;
     --m-space-2: 0.5rem;
     --m-space-3: 0.75rem;
@@ -235,6 +248,8 @@
     --m-control-affix-padding: 2.15rem;
     --m-control-affix-gap: 2rem;
     --m-checkbox-control-size: 1rem;
+    --m-nav-rail-width: 15rem;
+    --m-nav-rail-collapsed-width: 3.25rem;
     --m-space-1: 0.2rem;
     --m-space-2: 0.4rem;
     --m-space-3: 0.6rem;
@@ -262,6 +277,8 @@
     --m-control-affix-padding: 2.85rem;
     --m-control-affix-gap: 2.65rem;
     --m-checkbox-control-size: 1.25rem;
+    --m-nav-rail-width: 18rem;
+    --m-nav-rail-collapsed-width: 4.5rem;
     --m-space-1: 0.3rem;
     --m-space-2: 0.6rem;
     --m-space-3: 0.9rem;
@@ -292,22 +309,12 @@
     --m-layout-footer-height: 2.5rem;
 }
 
-[data-m-density="compact"] .m-layout-sider {
-    --m-layout-sider-width: 15rem;
-    --m-layout-sider-collapsed-width: 3.25rem;
-}
-
 [data-m-density="spacious"] .m-layout-header {
     --m-layout-header-height: 4rem;
 }
 
 [data-m-density="spacious"] .m-layout-footer {
     --m-layout-footer-height: 3.5rem;
-}
-
-[data-m-density="spacious"] .m-layout-sider {
-    --m-layout-sider-width: 18rem;
-    --m-layout-sider-collapsed-width: 4.5rem;
 }
 
 [data-theme="dark"] {

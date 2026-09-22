@@ -8,13 +8,20 @@
 .m-select__suffix {
     align-items: center;
     display: block;
-    height: var(--m-control-affix-size);
+    height: min(
+        var(--m-control-affix-size),
+        calc(var(--m-control-height-medium) - 2 * var(--m-border-width))
+    );
+    max-height: 100%;
     pointer-events: none;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: var(--m-control-affix-size);
+    width: min(
+        var(--m-control-affix-size),
+        calc(var(--m-control-height-medium) - 2 * var(--m-border-width))
+    );
 }
 
 .m-select__clear {
@@ -81,6 +88,8 @@
 .m-select__control:has(.m-treeselect--small) .m-select__suffix,
 .m-select__control:has(.m-cascadeselect--small) .m-select__suffix {
     --m-affix-icon-size: 0.875rem;
+    height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
+    width: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
 }
 
 .m-select__control:has(.m-select--large) .m-select__suffix,
@@ -88,6 +97,8 @@
 .m-select__control:has(.m-treeselect--large) .m-select__suffix,
 .m-select__control:has(.m-cascadeselect--large) .m-select__suffix {
     --m-affix-icon-size: 1.125rem;
+    height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
+    width: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
 }
 
 .m-select__suffix .m-select__clear .m-icon,
