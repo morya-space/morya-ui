@@ -77,7 +77,7 @@ const { transitionName, transitionCss } = useMotionTransition({
   role: 'dialog',
   local: () => props.transition,
   componentName: 'Dialog',
-  fallback: 'dialog',
+  fallback: 'zoom',
 })
 
 const dialogTitle = computed(() => props.header ?? props.title)

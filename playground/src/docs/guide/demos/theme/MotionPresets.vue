@@ -24,7 +24,7 @@ const sharedPresets = [
 const dialogPresets = ['dialog', ...sharedPresets] as const
 const drawerPresets = ['drawer', ...sharedPresets] as const
 
-const dialogPreset = ref<(typeof dialogPresets)[number]>('dialog')
+const dialogPreset = ref<(typeof dialogPresets)[number]>('zoom')
 const popupPreset = ref<(typeof sharedPresets)[number]>('scale-fade')
 const drawerPreset = ref<(typeof drawerPresets)[number]>('drawer')
 const toastPreset = ref<(typeof sharedPresets)[number]>('slide-fade')
@@ -59,7 +59,7 @@ function showToast() {
     <MToast :transition="toastPreset" />
     <div class="motion-preset-lab">
       <p class="motion-preset-lab__hint">
-        切换预设后重新打开组件；Dialog 推荐先对比 <code>dialog</code> 与 <code>slide-up</code>。
+        切换预设后重新打开组件；Dialog 默认 <code>zoom</code>，也可对比 <code>dialog</code> / <code>slide-up</code>。
       </p>
       <div class="motion-preset-lab__row">
         <label>

@@ -196,7 +196,7 @@ describe('muDialog', () => {
     await nextTick()
     expect(wrapper.props('transition')).toBeUndefined()
     const vm = wrapper.vm as unknown as { transitionName: string | undefined; transitionCss: boolean }
-    expect(vm.transitionName).toBe('m-dialog')
+    expect(vm.transitionName).toBe('m-zoom')
     expect(vm.transitionCss).toBe(true)
     wrapper.unmount()
   })

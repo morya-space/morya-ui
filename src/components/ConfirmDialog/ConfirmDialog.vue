@@ -47,7 +47,7 @@ const { transitionName, transitionCss } = useMotionTransition({
   role: 'dialog',
   local: () => props.transition,
   componentName: 'ConfirmDialog',
-  fallback: 'dialog',
+  fallback: 'zoom',
 })
 const busy = computed(() => pending.value != null || props.loading)
 const resolvedType = computed(() => {

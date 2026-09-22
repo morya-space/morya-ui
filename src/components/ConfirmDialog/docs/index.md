@@ -35,7 +35,7 @@ import { MButton, MConfirmDialog } from 'morya-ui'
 | `beforeReject` | `() => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭、不触发 `reject`。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
-| `transition` | `string \| false` | `'dialog'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
+| `transition` | `string \| false` | `'zoom'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `blockScroll` | `boolean` | — | — |
 | `closeOnEsc` | `boolean` | — | — |
 | `closeOnOutsideClick` | `boolean` | — | — |
