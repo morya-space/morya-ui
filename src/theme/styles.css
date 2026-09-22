@@ -177,6 +177,41 @@
     --m-motion-loading-circular-rotate: 0ms;
 }
 
+/*
+ * Global motion policy (complements per-component rules):
+ * - `reduced` / OS prefers-reduced-motion: keep short paint transitions; stop loops
+ *   and layout/transform size animation.
+ * - `none`: zero all transition/animation durations.
+ */
+@media (prefers-reduced-motion: reduce) {
+    html:not([data-m-ignore-reduced-motion]) *,
+    html:not([data-m-ignore-reduced-motion]) *::before,
+    html:not([data-m-ignore-reduced-motion]) *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-property: background-color, border-color, color, opacity, box-shadow,
+            outline, fill, stroke, stroke-dashoffset !important;
+    }
+}
+
+[data-m-motion="reduced"] *,
+[data-m-motion="reduced"] *::before,
+[data-m-motion="reduced"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: background-color, border-color, color, opacity, box-shadow, outline,
+        fill, stroke, stroke-dashoffset !important;
+}
+
+[data-m-motion="none"] *,
+[data-m-motion="none"] *::before,
+[data-m-motion="none"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
 /* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */
 :root,
 [data-m-density="comfortable"] {
