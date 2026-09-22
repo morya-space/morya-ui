@@ -89,6 +89,11 @@
     --m-motion-pulse: 1.2s;
     --m-motion-scrollbar-show: 340ms;
     --m-motion-scrollbar-hide: 120ms;
+    --m-motion-loading-aurora: 3s;
+    --m-motion-loading-bounce: 0.6s;
+    --m-motion-loading-pulse: 1.8s;
+    --m-motion-loading-stardust: 1.6s;
+    --m-motion-loading-circular-rotate: 2s;
     --m-dataview-grid-min: 10rem;
     --m-tree-indent: 0.7rem;
     --m-tree-indent-padding: var(--m-space-3);
@@ -135,6 +140,20 @@
     --m-motion-enter: 100ms;
     --m-motion-exit: 80ms;
     --m-motion-distance: 0;
+    /* Looping indicators: keep a short pulse so state is still perceptible */
+    --m-motion-spin: 0ms;
+    --m-motion-spin-dash: 0ms;
+    --m-motion-spin-fast: 0ms;
+    --m-motion-spin-medium: 0ms;
+    --m-motion-skeleton: 0ms;
+    --m-motion-pulse: 0ms;
+    --m-motion-scrollbar-show: 160ms;
+    --m-motion-scrollbar-hide: 80ms;
+    --m-motion-loading-aurora: 0ms;
+    --m-motion-loading-bounce: 0ms;
+    --m-motion-loading-pulse: 0ms;
+    --m-motion-loading-stardust: 0ms;
+    --m-motion-loading-circular-rotate: 0ms;
 }
 
 :root[data-m-motion="none"] {
@@ -143,6 +162,19 @@
     --m-motion-enter: 0ms;
     --m-motion-exit: 0ms;
     --m-motion-distance: 0;
+    --m-motion-spin: 0ms;
+    --m-motion-spin-dash: 0ms;
+    --m-motion-spin-fast: 0ms;
+    --m-motion-spin-medium: 0ms;
+    --m-motion-skeleton: 0ms;
+    --m-motion-pulse: 0ms;
+    --m-motion-scrollbar-show: 0ms;
+    --m-motion-scrollbar-hide: 0ms;
+    --m-motion-loading-aurora: 0ms;
+    --m-motion-loading-bounce: 0ms;
+    --m-motion-loading-pulse: 0ms;
+    --m-motion-loading-stardust: 0ms;
+    --m-motion-loading-circular-rotate: 0ms;
 }
 
 /* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */

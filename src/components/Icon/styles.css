@@ -43,7 +43,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .m-icon--spin svg {
+    html:not([data-m-ignore-reduced-motion]) .m-icon--spin svg {
         animation: none;
     }
 }

@@ -143,7 +143,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .m-badge--processing {
+    html:not([data-m-ignore-reduced-motion]) .m-badge--processing {
         animation: none;
     }
 }

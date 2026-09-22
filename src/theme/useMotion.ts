@@ -27,6 +27,12 @@ export function applyReducedMotionPolicy(respect: boolean | undefined, target?: 
 }
 
 export function getPreferredMotion(): MotionPreference {
+  if (
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  ) {
+    return 'reduced'
+  }
   return 'full'
 }
 

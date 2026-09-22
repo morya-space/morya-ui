@@ -123,9 +123,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .m-scrollbar__thumb,
-    .m-scrollbar-fade-enter-active,
-    .m-scrollbar-fade-leave-active {
+    html:not([data-m-ignore-reduced-motion]) .m-scrollbar__thumb,
+    html:not([data-m-ignore-reduced-motion]) .m-scrollbar-fade-enter-active,
+    html:not([data-m-ignore-reduced-motion]) .m-scrollbar-fade-leave-active {
         transition: none;
     }
 }

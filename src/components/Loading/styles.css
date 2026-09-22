@@ -66,12 +66,12 @@
     --m-loading-c5: var(--m-color-danger);
     --m-loading-c6: var(--m-color-text-muted);
     --m-loading-spin: var(--m-motion-spin);
-    --m-loading-aurora-glow: 3s;
-    --m-loading-bounce: 0.6s;
+    --m-loading-aurora-glow: var(--m-motion-loading-aurora);
+    --m-loading-bounce: var(--m-motion-loading-bounce);
     --m-loading-wave: var(--m-motion-spin-medium);
-    --m-loading-pulse: 1.8s;
-    --m-loading-stardust: 1.6s;
-    --m-loading-circular-rotate: 2s;
+    --m-loading-pulse: var(--m-motion-loading-pulse);
+    --m-loading-stardust: var(--m-motion-loading-stardust);
+    --m-loading-circular-rotate: var(--m-motion-loading-circular-rotate);
     --m-loading-circular-dash: var(--m-motion-spin-dash);
     --m-loading-scale: 1;
 

@@ -24,10 +24,27 @@ export interface RadiusTokens {
   full: string;
 }
 
+/** JS mirror of `--m-motion-*` (CSS in `theme/styles.css` is authoritative). */
 export interface MotionTokens {
   fast: string;
   normal: string;
   ease: string;
+  enter: string;
+  exit: string;
+  distance: string;
+  spin: string;
+  spinDash: string;
+  spinFast: string;
+  spinMedium: string;
+  skeleton: string;
+  pulse: string;
+  scrollbarShow: string;
+  scrollbarHide: string;
+  loadingAurora: string;
+  loadingBounce: string;
+  loadingPulse: string;
+  loadingStardust: string;
+  loadingCircularRotate: string;
 }
 
 export interface LayoutTokens {
@@ -50,6 +67,28 @@ export interface DesignTokens {
   layout: LayoutTokens;
 }
 
+const motionTokens: MotionTokens = {
+  fast: "150ms",
+  normal: "250ms",
+  ease: "cubic-bezier(0.2, 0, 0, 1)",
+  enter: "180ms",
+  exit: "130ms",
+  distance: "0.5rem",
+  spin: "1s",
+  spinDash: "1.5s",
+  spinFast: "0.8s",
+  spinMedium: "0.7s",
+  skeleton: "1.4s",
+  pulse: "1.2s",
+  scrollbarShow: "340ms",
+  scrollbarHide: "120ms",
+  loadingAurora: "3s",
+  loadingBounce: "0.6s",
+  loadingPulse: "1.8s",
+  loadingStardust: "1.6s",
+  loadingCircularRotate: "2s",
+};
+
 export const lightTokens: DesignTokens = {
   color: {
     primary: "#2563eb",
@@ -70,11 +109,7 @@ export const lightTokens: DesignTokens = {
   },
   radius: { sm: "0.25rem", md: "0.5rem", lg: "0.75rem", full: "9999px" },
   fontSans: "Inter, ui-sans-serif, system-ui, sans-serif",
-  motion: {
-    fast: "150ms",
-    normal: "250ms",
-    ease: "cubic-bezier(0.2, 0, 0, 1)",
-  },
+  motion: motionTokens,
   layout: {
     height: "100%",
     headerHeight: "56px",

@@ -178,8 +178,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .m-status--processing .m-status__dot::after,
-    .m-status--processing.m-status--has-icon .m-status__icon::after {
+    html:not([data-m-ignore-reduced-motion]) .m-status--processing .m-status__dot::after,
+    html:not([data-m-ignore-reduced-motion]) .m-status--processing.m-status--has-icon .m-status__icon::after {
         animation: none;
     }
 }
