@@ -74,6 +74,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | Multi-step create | `wizard-form` golden (`MStepper` + `steps`) |
 | Region or page is waiting | `MLoading`, `v-loading`, or `loading.service`; known layout → `MSkeleton` |
 | Local capped scroll | Explicit `MScrollbar` |
+| Resizable two-pane (editor / preview, master-detail) | `MSplitter` |
 | Admin sider nav | `MMenu` inside `MLayoutSider` (or `MSidebar` when the shell is not `MLayout`) |
 | Few options, all visible | `MRadio` or `MSelectButton` |
 | Always-visible option list | `MListbox` |

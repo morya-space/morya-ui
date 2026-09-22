@@ -67,6 +67,20 @@ type InputPassThrough = FieldPassThrough & {
 }
 ```
 
+<h3 id="SplitterPassThrough">SplitterPassThrough</h3>
+
+[`Splitter`](/components/Splitter) 在 `RootPassThrough` 上增加分隔条与面板：
+
+```ts
+type SplitterPassThrough = RootPassThrough & {
+  gutter?: PassThroughPart
+  panel1?: PassThroughPart
+  panel2?: PassThroughPart
+}
+```
+
+分隔条外观也可用 `resizeTriggerClass` / `resizeTriggerStyle`，内容用 `#resize-trigger`（别名 `#gutter`）。
+
 <h3 id="MSizeInput">MSizeInput</h3>
 
 控件尺寸，多数表单 / 按钮组件的 `size` prop：

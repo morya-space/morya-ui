@@ -67,6 +67,20 @@ type InputPassThrough = FieldPassThrough & {
 }
 ```
 
+<h3 id="SplitterPassThrough">SplitterPassThrough</h3>
+
+[`Splitter`](/components/Splitter) extends `RootPassThrough` with gutter and panes:
+
+```ts
+type SplitterPassThrough = RootPassThrough & {
+  gutter?: PassThroughPart
+  panel1?: PassThroughPart
+  panel2?: PassThroughPart
+}
+```
+
+Gutter look can also use `resizeTriggerClass` / `resizeTriggerStyle`; content goes in `#resize-trigger` (alias `#gutter`).
+
 <h3 id="MSizeInput">MSizeInput</h3>
 
 Control size for many form / button props:
