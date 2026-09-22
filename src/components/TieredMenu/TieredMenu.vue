@@ -14,6 +14,7 @@ import MScrollbar from '../Scrollbar/Scrollbar.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TieredMenuProps>(), {
+  transition: undefined,
   popup: false,
   modelValue: false,
   placement: 'bottom-start',

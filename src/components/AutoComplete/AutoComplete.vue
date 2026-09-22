@@ -15,6 +15,7 @@ import MScrollbar from '../Scrollbar/Scrollbar.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AutoCompleteProps>(), {
+  transition: undefined,
   modelValue: '',
   suggestions: () => [],
   dropdown: false,

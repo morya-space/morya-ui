@@ -8,6 +8,7 @@ import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
+  transition: undefined,
   placement: 'top',
   disabled: false,
   showDelay: 0,

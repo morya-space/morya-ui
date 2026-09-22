@@ -187,4 +187,17 @@ describe('muDialog', () => {
     expect(panel.style.width).toBe('28rem')
     wrapper.unmount()
   })
+
+  it('keeps default dialog preset when transition prop is omitted', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Motion' },
+    })
+    await nextTick()
+    expect(wrapper.props('transition')).toBeUndefined()
+    const vm = wrapper.vm as unknown as { transitionName: string | undefined; transitionCss: boolean }
+    expect(vm.transitionName).toBe('m-dialog')
+    expect(vm.transitionCss).toBe(true)
+    wrapper.unmount()
+  })
 })

@@ -16,6 +16,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DialogProps>(), {
+  transition: undefined,
   modelValue: false,
   closeOnEsc: true,
   closable: true,

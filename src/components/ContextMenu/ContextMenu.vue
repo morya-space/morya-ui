@@ -11,6 +11,7 @@ import ContextMenuNodes from './ContextMenuNodes.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<Omit<ContextMenuProps, 'modelValue' | 'position'>>(), {
+  transition: undefined,
   teleport: true,
 })
 const modelValue = defineModel<boolean>({ default: false })

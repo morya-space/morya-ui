@@ -13,6 +13,7 @@ import DropdownNodes from './DropdownNodes.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DropdownProps>(), {
+  transition: undefined,
   modelValue: false,
   placement: 'bottom-start',
   closeOnSelect: true,

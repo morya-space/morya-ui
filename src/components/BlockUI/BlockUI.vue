@@ -7,6 +7,7 @@ import { useMotionTransition } from '../../theme/useMotionTransition'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<BlockUIProps>(), {
+  transition: undefined,
   blocked: false,
 })
 const { transitionName, transitionCss } = useMotionTransition({

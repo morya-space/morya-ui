@@ -14,6 +14,7 @@ import MScrollbar from '../Scrollbar/Scrollbar.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CommandMenuProps>(), {
+  transition: undefined,
   model: () => [],
   modelValue: false,
   teleport: true,

@@ -14,6 +14,7 @@ import { useMotionTransition } from '../../theme/useMotionTransition'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PopoverProps>(), {
+    transition: undefined,
     modelValue: false,
     disabled: false,
     placement: "bottom",

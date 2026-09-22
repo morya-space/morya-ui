@@ -26,6 +26,7 @@ import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
+  transition: undefined,
   modelValue: null,
   placeholder: undefined,
   disabled: false,

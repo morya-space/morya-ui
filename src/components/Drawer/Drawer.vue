@@ -13,6 +13,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DrawerProps>(), {
+  transition: undefined,
   modelValue: false,
   position: 'left',
   modal: true,

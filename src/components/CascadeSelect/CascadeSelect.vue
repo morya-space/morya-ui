@@ -15,6 +15,7 @@ import MScrollbar from '../Scrollbar/Scrollbar.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CascadeSelectProps>(), {
+  transition: undefined,
   modelValue: null,
   placeholder: undefined,
   invalid: false,

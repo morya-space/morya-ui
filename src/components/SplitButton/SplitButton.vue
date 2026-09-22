@@ -16,6 +16,7 @@ import { isIconName } from '../Icon/icons'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SplitButtonProps>(), {
+  transition: undefined,
   model: () => [],
   disabled: false,
   outlined: false,

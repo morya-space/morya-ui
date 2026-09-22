@@ -14,6 +14,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<MegaMenuProps>(), {
+  transition: undefined,
   model: () => [],
   selectedKey: null,
   teleport: true,

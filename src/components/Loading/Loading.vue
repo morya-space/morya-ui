@@ -12,6 +12,7 @@ import { normalizeLoadingEffect } from './types'
 defineOptions({ name: 'MLoading', inheritAttrs: false })
 
 const props = withDefaults(defineProps<LoadingProps>(), {
+  transition: undefined,
   loading: true,
   fullscreen: false,
   lock: false,

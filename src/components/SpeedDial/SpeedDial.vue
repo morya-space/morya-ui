@@ -16,6 +16,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SpeedDialProps>(), {
+  transition: undefined,
   model: () => [],
   direction: 'up',
   modelValue: false,

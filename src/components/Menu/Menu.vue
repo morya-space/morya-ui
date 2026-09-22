@@ -22,6 +22,7 @@ import MenuNodes from './MenuNodes.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<MenuProps>(), {
+  transition: undefined,
   popup: false,
   modelValue: false,
   placement: 'bottom-start',

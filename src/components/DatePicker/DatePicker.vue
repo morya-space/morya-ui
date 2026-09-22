@@ -19,6 +19,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
+  transition: undefined,
   modelValue: null,
   type: 'date',
   id: undefined,

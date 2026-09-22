@@ -16,6 +16,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
+  transition: undefined,
   modelValue: false,
   acceptSeverity: undefined,
   loading: false,

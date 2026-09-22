@@ -23,6 +23,7 @@ import {
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ToastProps>(), {
+  transition: undefined,
   teleport: true,
   auto: false,
 })
