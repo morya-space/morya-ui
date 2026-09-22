@@ -147,7 +147,7 @@ npx -y @morya-ui/mcp
 | `get_design_rules` | 设计令牌与 MPage* 组合配方 |
 | `recommend_component` | 列出、阅读或推荐组件选型指南 |
 | `list_golden_pages` | 列出黄金样例页面 |
-| `get_golden_page` | 读取黄金样例 Vue 源码（含 `detail-page`、`form-in-dialog` 等） |
+| `get_golden_page` | 读取黄金样例 Vue 源码（含 settings / wizard / result / detail / form-in-dialog 等；`includeScaffold` 有样例时返回样例源码） |
 | `list_page_snippets` | 列出可复用的页面区块 snippet |
 | `get_page_snippet` | 读取局部区块 snippet（筛选区、工具栏等） |
 | `validate_page` | 校验页面组合、间距、双边框，以及 rows / message / MStatus 等契约 |
@@ -158,11 +158,11 @@ npx -y @morya-ui/mcp
 
 **查单个组件：** `search` / `get_component` → `get_example` → `validate_usage`
 
-**规划整页：** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → `validate_page`
+**规划整页：** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → **`validate_usage`** → `validate_page`
 
 **改局部区块：** `get_page_snippet(section)` → `get_component` / `get_example` → `validate_usage` → `validate_page`
 
-需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`：
+需要 starter 代码时，给 `recommend_page` 传 `includeScaffold: true`（有黄金样例时返回样例源码，不是另一套模板）：
 
 ```json
 {

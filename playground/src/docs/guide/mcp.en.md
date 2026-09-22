@@ -147,9 +147,9 @@ Snippets for popular products. Key names may change across versions — check ea
 | `get_design_rules` | Design-token and MPage* composition rules |
 | `recommend_component` | List, read, or recommend component selection guides |
 | `list_golden_pages` | List golden page samples |
-| `get_golden_page` | Read a golden page Vue source (`list-page`, `form-page`, `form-in-dialog`, `detail-page`, `dashboard-page`, `login-page`, `landing-page`, `empty-state`) |
-| `list_page_snippets` | List reusable page-section snippets |
-| `get_page_snippet` | Read one snippet (filters, toolbar, form actions, …) |
+| `get_golden_page` | Read a golden page Vue source (`list-page` … `settings-page`, `wizard-form`, …) |
+| `list_page_snippets` | List reusable page section snippets |
+| `get_page_snippet` | Read a local section snippet (filters, toolbar, …) |
 | `validate_page` | Check page composition, spacing, double-border, and contract hints (`rows`, message, MStatus) |
 
 Most tools accept `mode`: `zh` (default) or `en`.
@@ -160,11 +160,11 @@ Component lookup accepts common aliases such as `DataTable`, `数据表格`, `Pa
 
 **Look up a component:** `search` / `get_component` → `get_example` → `validate_usage`
 
-**Plan a page:** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → `validate_page`. Use `recommend_component` when choosing between similar components.
+**Plan a page:** `recommend_page` → `get_golden_page` → `get_pattern` → `get_design_rules` → `get_component` / `get_example` → **`validate_usage`** → `validate_page`. Use `recommend_component` when choosing between similar components.
 
 **Edit one section:** `list_page_snippets` → `get_page_snippet` → `get_component` / `get_example` → `validate_usage` → `validate_page`
 
-Pass `includeScaffold: true` to `recommend_page` for starter Vue code:
+Pass `includeScaffold: true` to `recommend_page` for starter Vue code (returns the golden page source when one exists):
 
 ```json
 {

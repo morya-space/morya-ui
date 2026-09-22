@@ -66,10 +66,10 @@ Unclear brief → Ops → nearest golden page; public marketing → Express.
 ## Recommended agent workflow (summary)
 
 1. Pin subject, audience, surface, and the first viewport’s single job  
-2. Prefer MCP: `recommend_page` → `get_golden_page` → `get_component` / `get_example`  
+2. Prefer MCP: `recommend_page` → **`get_golden_page` (mirror)** → `get_component` / `get_example`  
 3. Without MCP, read skill `references/` (layouts, surfaces, feedback)  
 4. Feedback defaults to `message`; `toast` only for summary+detail / async feel. Persistent form errors use field `errorMessage` or a token-styled `role="alert"` — `<MMessage>` is not an inline alert. Table rows use `rows`. Always run a light craft pass before delivery (Ops polish / atmosphere — see skill `visual-craft`).  
-5. Review with the skill checklist; run MCP `validate_page` when available  
+5. **Always** run MCP `validate_usage` (API accuracy) and `validate_page` (layout/contract advisories); use the skill checklist  
 
 Full rules and hard boundaries live in the project’s `SKILL.md` — this page does not duplicate it.
 

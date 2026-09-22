@@ -5,11 +5,13 @@
 - [ ] Only `morya-ui` UI primitives (no second kit)
 - [ ] `morya-ui/styles.css` imported at app/demo entry
 - [ ] `MConfigProvider` at a sensible root when building a full screen
-- [ ] No invented props / events / slots (MCP or docs checked)
+- [ ] No invented props / events / slots (MCP `get_component` / docs checked)
+- [ ] MCP **`validate_usage`** run; no unresolved `unknown-prop` / `unknown-event`
 - [ ] Select vs Dropdown roles correct
 - [ ] `MTable` uses `rows` (not `data`)
 - [ ] One-line results use `message`; summary+detail / async use `toast`
 - [ ] Destructive flows use confirm dialogs
+- [ ] MCP **`validate_page`** run when generating a full page (advisory suggestions addressed or consciously waived)
 
 ## Craft (all lanes — default pass)
 
@@ -54,8 +56,6 @@
 - [ ] Usable on a narrow viewport
 - [ ] Focus visible on interactive elements
 
-## Optional MCP
-
-- [ ] `validate_page` / `validate_usage` reviewed when available
+When MCP is available, contract checks above (**`validate_usage`** / **`validate_page`**) are required — not optional.
 
 If the project has `pnpm check:colors`, suggest running it after edits.

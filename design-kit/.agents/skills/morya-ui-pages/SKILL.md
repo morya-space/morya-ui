@@ -63,14 +63,14 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 | Need | Prefer (MCP) | Else read |
 | --- | --- | --- |
-| Ops pattern | `recommend_page` → `get_golden_page` | [page-layouts.md](references/page-layouts.md) |
-| Account / Express / empty | `recommend_page` → `get_golden_page` (`login-page` / `landing-page` / `empty-state`) | [surfaces.md](references/surfaces.md) |
+| Ops pattern | `recommend_page` → **`get_golden_page`** (mirror; do not invent a parallel scaffold aesthetic) | [page-layouts.md](references/page-layouts.md) |
+| Account / Express / empty / result | `recommend_page` → `get_golden_page` (`login-page` / `landing-page` / `empty-state` / `result-page`) | [surfaces.md](references/surfaces.md) |
 | Visual direction | — | [visual-craft.md](references/visual-craft.md) (Ops polish / atmosphere / anti-defaults) |
-| Components | `search` / `get_component` / `recommend_component` | [component-index.md](references/component-index.md) |
+| Components / **API truth** | `search` / **`get_component`** / `get_example` / `recommend_component` | [component-index.md](references/component-index.md) |
 | Tokens / rules | `get_design_rules` | [design-system.md](references/design-system.md) |
 | Snippet | `get_page_snippet` | golden / surface excerpt |
 | Feedback API | — | [feedback.md](references/feedback.md) |
-| Soft check | `validate_page` | [review-checklist.md](references/review-checklist.md) |
+| **Required checks** | **`validate_usage`** (every `M*` you used) + `validate_page` | [review-checklist.md](references/review-checklist.md) |
 
 ### 3. Compose
 
@@ -90,6 +90,8 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 - Enums → `MSelect` / `MTreeSelect`; action menus → `MDropdown`.
 - Destructive → `MConfirmDialog` / `MConfirmPopup`.
 - Feedback → default **`message`**; `toast` only for summary+detail / async. See [feedback.md](references/feedback.md).
+- **Before craft:** for each unfamiliar or newly written `M*` usage, call MCP **`get_component` / `get_example`**, then **`validate_usage`**. Fix every `unknown-prop` / `unknown-event` before delivery.
+- `recommend_page(includeScaffold: true)` returns the **golden page source** when one exists — remap copy/data only; never treat generated fallback as the visual target.
 
 ### 5. Craft pass (always — lane-aware)
 
@@ -104,7 +106,14 @@ Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): use as an
 
 ### 6. Review
 
-Use [review-checklist.md](references/review-checklist.md) (contract + craft sections). Run MCP `validate_page` when available (advisory).
+Use [review-checklist.md](references/review-checklist.md) (contract + craft sections).
+
+**Required when MCP is available:**
+
+1. `validate_usage` on the page (or per component) — API accuracy gate  
+2. `validate_page` — layout / token / contract advisories  
+
+Do not deliver with unresolved `unknown-prop` / `unknown-event`.
 
 ## Hard boundaries
 
@@ -112,6 +121,7 @@ Use [review-checklist.md](references/review-checklist.md) (contract + craft sect
 - No hand-rolled table/modal when `MTable` / `MDialog` / `MDrawer` fit.
 - No invented props / events / slots.
 - No defaulting every success to `toast`.
+- No substituting a generated scaffold for `get_golden_page` when a golden sample exists.
 - Ops surfaces follow golden layouts first — do not replace them with marketing heroes.
 - Express surfaces still use `M*` for controls and `--m-*` for color/space; do not introduce shadcn/Element/etc. stacks suggested by generic design skills.
 - Soft-load companions only; never require Impeccable / UI-UX-Pro-Max / Frontend Design to be installed.
