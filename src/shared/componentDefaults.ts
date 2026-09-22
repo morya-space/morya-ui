@@ -1,9 +1,12 @@
+import type { MotionPresetId } from '../theme/motionPresets'
 import type { MGapSize } from './gap'
 import type { MInputVariant, MSizeInput } from './types'
 
 export type MShowPasswordOn = 'click' | 'mousedown'
 
 export type MTextareaAutosize = boolean | { minRows?: number; maxRows?: number }
+
+export type MTransitionDefault = MotionPresetId | false
 
 /**
  * Per-component default props, keyed by unprefixed name (`Input`) or `M*` alias.
@@ -45,6 +48,7 @@ export interface MComponentDefaultMap {
     multiple?: boolean
     tag?: boolean
     remote?: boolean
+    transition?: MTransitionDefault
   }
   Button?: {
     size?: MSizeInput
@@ -56,14 +60,37 @@ export interface MComponentDefaultMap {
     size?: MGapSize
   }
   InputNumber?: { size?: MSizeInput }
-  DatePicker?: { size?: MSizeInput }
+  DatePicker?: { size?: MSizeInput; transition?: MTransitionDefault }
   Table?: { size?: MSizeInput }
-  AutoComplete?: { size?: MSizeInput }
-  CascadeSelect?: { size?: MSizeInput; fluid?: boolean; clearable?: boolean }
-  TreeSelect?: { size?: MSizeInput; clearable?: boolean }
-  SplitButton?: { size?: MSizeInput }
+  AutoComplete?: { size?: MSizeInput; transition?: MTransitionDefault }
+  CascadeSelect?: {
+    size?: MSizeInput
+    fluid?: boolean
+    clearable?: boolean
+    transition?: MTransitionDefault
+  }
+  TreeSelect?: { size?: MSizeInput; clearable?: boolean; transition?: MTransitionDefault }
+  SplitButton?: { size?: MSizeInput; transition?: MTransitionDefault }
   SelectButton?: { size?: MSizeInput }
   ToggleButton?: { size?: MSizeInput }
+  Dialog?: { transition?: MTransitionDefault }
+  ConfirmDialog?: { transition?: MTransitionDefault }
+  Drawer?: { transition?: MTransitionDefault }
+  Toast?: { transition?: MTransitionDefault }
+  Popover?: { transition?: MTransitionDefault }
+  Tooltip?: { transition?: MTransitionDefault }
+  Menu?: { transition?: MTransitionDefault }
+  Menubar?: { transition?: MTransitionDefault }
+  MegaMenu?: { transition?: MTransitionDefault }
+  TieredMenu?: { transition?: MTransitionDefault }
+  Dropdown?: { transition?: MTransitionDefault }
+  ContextMenu?: { transition?: MTransitionDefault }
+  ConfirmPopup?: { transition?: MTransitionDefault }
+  CommandMenu?: { transition?: MTransitionDefault }
+  SpeedDial?: { transition?: MTransitionDefault }
+  BlockUI?: { transition?: MTransitionDefault }
+  Loading?: { transition?: MTransitionDefault }
+  Message?: { transition?: MTransitionDefault }
 }
 
 export type MComponentDefaults = MComponentDefaultMap & {

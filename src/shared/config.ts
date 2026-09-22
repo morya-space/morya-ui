@@ -1,42 +1,38 @@
-import type {App, Component, ComputedRef, InjectionKey, MaybeRefOrGetter, Plugin} from 'vue';
+import type { App, Component, ComputedRef, InjectionKey, MaybeRefOrGetter, Plugin } from 'vue'
 import type { MLocaleConfig } from '../locale/types'
-import type {DensityPreference} from '../theme';
-import type {MComponentDefaults} from './componentDefaults';
+import type { MotionPresetId, MotionTransitionRole } from '../theme/motionPresets'
+import type { DensityPreference } from '../theme/useDensity'
+import type { MComponentDefaults } from './componentDefaults'
 import type { MGapSize } from './gap'
 import type { MAppendTo } from './overlay'
-import type {MInputVariant, MSizeInput} from './types';
-import {
-  
-  
-  computed,
-  
-  inject,
-  
-  
-  
-  provide,
-  toValue
-} from 'vue'
+import type { MInputVariant, MSizeInput } from './types'
+import { computed, inject, provide, toValue } from 'vue'
 import { mComponents } from '../component-registry'
 import { vLoading } from '../components/Loading/directive'
 import { zhCN } from '../locale/zh-CN'
-import { applyDensity, applyReducedMotionPolicy } from '../theme'
+import { applyDensity } from '../theme/useDensity'
+import { applyReducedMotionPolicy } from '../theme/useMotion'
 import {
   getComponentDefault,
   getComponentDefaults,
-  mergeComponentDefaults
-  
+  mergeComponentDefaults,
 } from './componentDefaults'
 import { setMOverlayAppContext } from './overlayHost'
-import { resolveSizeClass   } from './types'
+import { resolveSizeClass } from './types'
 
 export type { MComponentDefaultMap, MComponentDefaults, MShowPasswordOn, MTextareaAutosize } from './componentDefaults'
 export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } from './componentDefaults'
 
 export type MDensity = DensityPreference
 export type { MLocaleConfig }
+export type { MotionPresetId, MotionTransitionRole }
 
 export type ThemePreference = 'light' | 'dark' | 'system'
+
+/** Global enter/exit motion preset overrides by overlay role. */
+export interface MMotionConfig {
+  transitions?: Partial<Record<MotionTransitionRole, MotionPresetId>>
+}
 
 /** Application-level default configuration. */
 export interface MGlobalConfig {
@@ -60,6 +56,11 @@ export interface MGlobalConfig {
    * Set to `false` to keep component transitions regardless of OS preference.
    */
   respectReducedMotion?: boolean
+  /**
+   * Named enter/exit motion presets by overlay role.
+   * Component `transition` prop and `componentDefaults` override these.
+   */
+  motion?: MMotionConfig
   /** Shared UI copy. Pass `zhCN` / `enUS` or a partial override. Default is Chinese. */
   locale?: MLocaleConfig
   /**
@@ -109,7 +110,7 @@ export function provideMConfig(config: MaybeRefOrGetter<MGlobalConfig>) {
   provide(M_CONFIG_KEY, config)
 }
 
-/** Merge nested / plugin config. Child keys win; `locale` and `componentDefaults` merge. */
+/** Merge nested / plugin config. Child keys win; `locale`, `componentDefaults`, and `motion` merge. */
 export function mergeMConfig(parent: MGlobalConfig, child: MGlobalConfig): MGlobalConfig {
   return {
     ...parent,
@@ -117,6 +118,17 @@ export function mergeMConfig(parent: MGlobalConfig, child: MGlobalConfig): MGlob
     locale:
       parent.locale || child.locale ? { ...parent.locale, ...child.locale } : undefined,
     componentDefaults: mergeComponentDefaults(parent.componentDefaults, child.componentDefaults),
+    motion:
+      parent.motion || child.motion
+        ? {
+            ...parent.motion,
+            ...child.motion,
+            transitions: {
+              ...parent.motion?.transitions,
+              ...child.motion?.transitions,
+            },
+          }
+        : undefined,
   }
 }
 

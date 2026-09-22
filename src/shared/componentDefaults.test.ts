@@ -30,18 +30,20 @@ describe('componentDefaults', () => {
 })
 
 describe('mergeMConfig', () => {
-  it('inherits parent keys and merges locale / componentDefaults', () => {
+  it('inherits parent keys and merges locale / componentDefaults / motion', () => {
     const merged = mergeMConfig(
       {
         size: 'small',
         appendTo: 'body',
         locale: { accept: 'OK', reject: 'No' },
         componentDefaults: { Space: { size: 8 } },
+        motion: { transitions: { popup: 'fade', dialog: 'zoom' } },
       },
       {
         density: 'compact',
         locale: { accept: 'Yes' },
         componentDefaults: { Input: { clearable: true } },
+        motion: { transitions: { popup: 'slide-up' } },
       },
     )
     expect(merged.size).toBe('small')
@@ -51,6 +53,9 @@ describe('mergeMConfig', () => {
     expect(merged.componentDefaults).toEqual({
       Space: { size: 8 },
       Input: { clearable: true },
+    })
+    expect(merged.motion).toEqual({
+      transitions: { popup: 'slide-up', dialog: 'zoom' },
     })
   })
 })

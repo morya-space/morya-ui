@@ -92,6 +92,7 @@ export type {
   MDensity,
   MGlobalConfig,
   MLocaleConfig,
+  MMotionConfig,
 } from "./components/ConfigProvider/types";
 export { default as MConfirmDialog } from "./components/ConfirmDialog/ConfirmDialog.vue";
 export type {
@@ -685,13 +686,21 @@ export {
   applyMotion,
   applyReducedMotionPolicy,
   applyTheme,
+  builtinMotionPresets,
+  clearCustomMotionPresets,
   darkTokens,
   getPreferredMotion,
   getPreferredTheme,
   lightTokens,
+  listMotionPresets,
+  registerMotionPreset,
+  resolveMotionPreset,
+  resolveMotionTransition,
   themeNames,
+  unregisterMotionPreset,
   useDensity,
   useMotion,
+  useMotionTransition,
   useTheme,
 } from "./theme";
 
@@ -701,8 +710,13 @@ export type {
   DesignTokens,
   LayoutTokens,
   MotionPreference,
+  MotionPresetDefinition,
+  MotionPresetId,
   MotionTokens,
+  MotionTransitionRole,
   RadiusTokens,
+  ResolveMotionTransitionOptions,
   SpacingTokens,
   ThemeName,
+  UseMotionTransitionOptions,
 } from "./theme";

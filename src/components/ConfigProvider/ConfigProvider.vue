@@ -31,6 +31,8 @@ const props = defineProps<{
   locale?: MGlobalConfig['locale']
   /** Shorthand: per-component default props. */
   componentDefaults?: MGlobalConfig['componentDefaults']
+  /** Shorthand: named enter/exit motion presets by overlay role. */
+  motion?: MGlobalConfig['motion']
   /**
    * When true (default), honor `prefers-reduced-motion`.
    * Set false to keep transitions when the OS requests reduced motion.
@@ -60,6 +62,7 @@ const local = computed<MGlobalConfig>(() => ({
   ...(props.theme !== undefined ? { theme: props.theme } : {}),
   ...(props.locale !== undefined ? { locale: props.locale } : {}),
   ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
+  ...(props.motion !== undefined ? { motion: props.motion } : {}),
   ...(props.respectReducedMotion !== undefined
     ? { respectReducedMotion: props.respectReducedMotion }
     : {}),

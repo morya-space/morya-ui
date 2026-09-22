@@ -3,4 +3,5 @@ export type {
   MDensity,
   MGlobalConfig,
   MLocaleConfig,
+  MMotionConfig,
 } from '../../shared/config'
