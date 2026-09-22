@@ -130,18 +130,26 @@
 
 .m-loading-aurora__glow {
     animation: m-loading-spin var(--m-loading-aurora-glow) linear infinite reverse;
-    background: conic-gradient(
-        from 0deg,
-        var(--m-loading-c1),
-        var(--m-loading-c5),
-        var(--m-loading-c2),
-        var(--m-loading-c3),
-        var(--m-loading-c1)
-    );
+    /* Soft radial layers instead of animated blur (≤8px / no continuous filter). */
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            color-mix(in srgb, var(--m-loading-c1) 55%, transparent),
+            transparent 62%
+        ),
+        radial-gradient(
+            circle at 70% 65%,
+            color-mix(in srgb, var(--m-loading-c5) 45%, transparent),
+            transparent 58%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            color-mix(in srgb, var(--m-loading-c2) 35%, transparent),
+            transparent 70%
+        );
     border-radius: 50%;
-    filter: blur(10px);
-    inset: -6px;
-    opacity: 0.22;
+    inset: -10px;
+    opacity: 0.55;
     position: absolute;
     z-index: 1;
 }
