@@ -13,8 +13,8 @@ import {
   MLayoutContent,
   MLayoutHeader,
   MPageContent,
+  MEmpty,
   MPageHeader,
-  MPagePlaceholder,
   MPageStat,
   MStatus,
   MTable,
@@ -23,9 +23,9 @@ import {
 } from 'morya-ui'
 
 const stats = [
-  { label: '总用户', value: '12,480', trend: '+8.2%', icon: 'users' },
-  { label: '今日活跃', value: '1,926', trend: '+3.1%', icon: 'activity' },
-  { label: '待处理工单', value: '47', trend: '-12%', trendSeverity: 'warn' as const, icon: 'clipboard' },
+  { label: '总用户', value: '12,480', trend: '+8.2%', trendDirection: 'up' as const, trendLabel: '较上月', icon: 'users' },
+  { label: '今日活跃', value: '1,926', trend: '+3.1%', trendDirection: 'up' as const, trendLabel: '较昨日', icon: 'activity' },
+  { label: '待处理工单', value: '47', trend: '-12%', trendDirection: 'down' as const, trendLabel: '较上周', trendSeverity: 'warn' as const, icon: 'clipboard' },
   { label: '系统健康', value: '99.9%', trend: '稳定', trendSeverity: 'secondary' as const, icon: 'heart' },
 ]
 
@@ -88,6 +88,8 @@ function statusSeverity(s: string) {
                 :value="item.value"
                 :trend="item.trend"
                 :trend-severity="item.trendSeverity ?? 'primary'"
+                :trend-direction="item.trendDirection"
+                :trend-label="item.trendLabel"
                 :icon="item.icon"
               />
             </MGridItem>
@@ -95,15 +97,15 @@ function statusSeverity(s: string) {
 
           <MGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
             <MGridItem :span="1">
-              <MCard title="趋势概览">
-                <MPagePlaceholder
-                  aria-label="图表占位"
+              <MCard title="趋势概览" shadow="always">
+                <MEmpty
                   description="接入图表组件后展示近 7 日活跃与转化。"
+                  icon="chart-bar"
                 />
               </MCard>
             </MGridItem>
             <MGridItem :span="1">
-              <MCard title="最近工单">
+              <MCard title="最近工单" shadow="always">
                 <MTable
                   :columns="recentColumns"
                   :rows="recentRows"
