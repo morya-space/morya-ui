@@ -1,5 +1,37 @@
 # morya-ui
 
+## 0.3.1
+
+### 新功能
+
+- replace hand-drawn icons with a generated Tabler registry
+- add option groups and header/footer slots
+- add triangle icons and update icon rendering logic
+- animate pages with a sliding track
+
+### 修复
+
+- keep the range start thumb above the overlapping track
+- keep submenus open on hover and align items with Select
+- make the expanded-row loading line visible
+- let popup menus grow with their content
+- let the menu grow with its content
+- close the gap in the sider bar trigger
+- compact dropdown filter and keep menu width aligned
+- shrink oversized multi-select tags
+
+### 文档
+
+- describe the all-Tabler registry and the generator script
+- complete component API tables and instance methods
+
+### 变更
+
+- fix export order and prefer template literals in gallery demos
+- resolve newly registered icons directly and drop dead aliases
+- replace the custom loading overlay with MLoading
+- update header and sort styles for improved layout
+
 ## 0.3.0
 
 ### 新功能

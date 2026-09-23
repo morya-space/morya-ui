@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-22T12:50:04.888Z",
-  "catalogGeneratedAt": "2026-09-22T12:49:59.311Z",
+  "generatedAt": "2026-09-23T09:00:43.642Z",
+  "catalogGeneratedAt": "2026-09-23T09:00:38.573Z",
   "components": [
     {
       "id": "Accordion",
@@ -279,8 +279,8 @@
         ]
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -608,9 +608,14 @@
         ]
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 5,
+        "covered": 1,
+        "missing": [
+          "list",
+          "empty",
+          "header",
+          "loading"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1017,9 +1022,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "label"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1060,14 +1067,22 @@
       "exportName": "MForm",
       "examples": 10,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 20,
+        "covered": 15,
+        "missing": [
+          "requireMark",
+          "disabled",
+          "size",
+          "pt",
+          "error"
+        ]
       },
       "events": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "validate"
+        ]
       },
       "slots": {
         "total": 1,
@@ -1119,9 +1134,14 @@
       "exportName": "MGrid",
       "examples": 10,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 13,
+        "covered": 9,
+        "missing": [
+          "responsive",
+          "layoutShiftDisabled",
+          "itemStyle",
+          "pt"
+        ]
       },
       "events": {
         "total": 0,
@@ -1156,8 +1176,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1183,8 +1203,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 2,
+        "covered": 2,
         "missing": []
       },
       "methods": {
@@ -1217,8 +1237,8 @@
         ]
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 2,
+        "covered": 2,
         "missing": []
       },
       "methods": {
@@ -1312,9 +1332,11 @@
       "exportName": "MInputGroup",
       "examples": 4,
       "props": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "pt"
+        ]
       },
       "events": {
         "total": 0,
@@ -1322,8 +1344,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1546,8 +1568,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1561,14 +1583,34 @@
       "exportName": "MLayout",
       "examples": 16,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 24,
+        "covered": 11,
+        "missing": [
+          "fillViewport",
+          "contentClass",
+          "contentStyle",
+          "height",
+          "padding",
+          "radius",
+          "pt",
+          "defaultCollapsed",
+          "showCollapsedContent",
+          "triggerClass",
+          "triggerStyle",
+          "collapsedTriggerClass",
+          "collapsedTriggerStyle"
+        ]
       },
       "events": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 6,
+        "covered": 1,
+        "missing": [
+          "scroll",
+          "after-enter",
+          "after-leave",
+          "collapse",
+          "expand"
+        ]
       },
       "slots": {
         "total": 1,
@@ -1576,9 +1618,11 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 1,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "scrollTo"
+        ]
       }
     },
     {
@@ -1623,8 +1667,8 @@
       "exportName": "MLoading",
       "examples": 14,
       "props": {
-        "total": 12,
-        "covered": 4,
+        "total": 15,
+        "covered": 5,
         "missing": [
           "ariaLabel",
           "background",
@@ -1633,7 +1677,9 @@
           "lock",
           "delay",
           "transition",
-          "pt"
+          "pt",
+          "body",
+          "spinner"
         ]
       },
       "events": {
@@ -1717,8 +1763,8 @@
         ]
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -1767,9 +1813,17 @@
       "exportName": "MMessage",
       "examples": 9,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 8,
+        "covered": 1,
+        "missing": [
+          "teleport",
+          "transition",
+          "placement",
+          "max",
+          "auto",
+          "messages",
+          "pt"
+        ]
       },
       "events": {
         "total": 0,
@@ -1782,9 +1836,19 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 9,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "message.success",
+          "message.info",
+          "message.warn",
+          "message.error",
+          "message.open",
+          "message.close",
+          "message.closeAll",
+          "message.destroyAll",
+          "message.config"
+        ]
       }
     },
     {
@@ -1840,9 +1904,12 @@
         ]
       },
       "slots": {
-        "total": 0,
+        "total": 2,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "item",
+          "empty"
+        ]
       },
       "methods": {
         "total": 0,
@@ -1855,9 +1922,13 @@
       "exportName": "MPageContent",
       "examples": 6,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 13,
+        "covered": 10,
+        "missing": [
+          "headingLevel",
+          "trendSeverity",
+          "minHeight"
+        ]
       },
       "events": {
         "total": 0,
@@ -1865,8 +1936,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 2,
+        "covered": 2,
         "missing": []
       },
       "methods": {
@@ -1961,9 +2032,11 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 2,
+        "covered": 1,
+        "missing": [
+          "empty"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2175,9 +2248,29 @@
       "exportName": "MScrollbar",
       "examples": 16,
       "props": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 23,
+        "covered": 4,
+        "missing": [
+          "ariaLabel",
+          "ariaOrientation",
+          "distance",
+          "id",
+          "minSize",
+          "noresize",
+          "role",
+          "tabindex",
+          "tag",
+          "trigger",
+          "viewClass",
+          "viewStyle",
+          "wrapClass",
+          "wrapStyle",
+          "width",
+          "maxWidth",
+          "ariaMultiselectable",
+          "pt",
+          "fitContent"
+        ]
       },
       "events": {
         "total": 2,
@@ -2233,7 +2326,7 @@
     {
       "id": "Select",
       "exportName": "MSelect",
-      "examples": 26,
+      "examples": 32,
       "props": {
         "total": 28,
         "covered": 18,
@@ -2263,8 +2356,8 @@
         ]
       },
       "slots": {
-        "total": 2,
-        "covered": 0,
+        "total": 4,
+        "covered": 2,
         "missing": [
           "value",
           "option"
@@ -2738,9 +2831,19 @@
         ]
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 10,
+        "covered": 1,
+        "missing": [
+          "body-cell",
+          "empty",
+          "loading",
+          "pagination",
+          "body",
+          "body-append",
+          "body-prepend",
+          "customize-headers",
+          "header"
+        ]
       },
       "methods": {
         "total": 14,
@@ -2955,9 +3058,14 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
+        "total": 5,
+        "covered": 1,
+        "missing": [
+          "content",
+          "opposite",
+          "marker",
+          "connector"
+        ]
       },
       "methods": {
         "total": 0,
@@ -2970,19 +3078,14 @@
       "exportName": "MToast",
       "examples": 10,
       "props": {
-        "total": 14,
-        "covered": 3,
+        "total": 8,
+        "covered": 2,
         "missing": [
           "max",
           "teleport",
           "appendTo",
           "auto",
           "transition",
-          "id",
-          "summary",
-          "detail",
-          "closable",
-          "life",
           "pt"
         ]
       },
@@ -2997,9 +3100,18 @@
         "missing": []
       },
       "methods": {
-        "total": 0,
+        "total": 8,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "toast.success / info / warn / error",
+          "toast.add",
+          "toast.remove",
+          "toast.close",
+          "toast.clear",
+          "toast.closeAll",
+          "toast.destroyAll",
+          "toast.setDefaults"
+        ]
       }
     },
     {
@@ -3117,12 +3229,15 @@
         ]
       },
       "events": {
-        "total": 7,
-        "covered": 0,
+        "total": 11,
+        "covered": 1,
         "missing": [
-          "node-select",
+          "update:expandedKeys",
+          "check",
           "node-expand",
           "node-collapse",
+          "node-drop",
+          "node-select",
           "node-load-error",
           "node-unselect",
           "update:modelValue",
@@ -3130,9 +3245,10 @@
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 2,
         "covered": 0,
         "missing": [
+          "default",
           "empty"
         ]
       },
@@ -3230,11 +3346,13 @@
       "exportName": "MVirtualScroller",
       "examples": 4,
       "props": {
-        "total": 5,
+        "total": 7,
         "covered": 3,
         "missing": [
           "buffer",
-          "pt"
+          "pt",
+          "role",
+          "ariaLabel"
         ]
       },
       "events": {
@@ -3243,8 +3361,8 @@
         "missing": []
       },
       "slots": {
-        "total": 0,
-        "covered": 0,
+        "total": 1,
+        "covered": 1,
         "missing": []
       },
       "methods": {
@@ -3258,7 +3376,7 @@
   ],
   "summary": {
     "components": 93,
-    "componentsWithMissingCoverage": 88,
-    "totalExamples": 805
+    "componentsWithMissingCoverage": 93,
+    "totalExamples": 811
   }
 }
