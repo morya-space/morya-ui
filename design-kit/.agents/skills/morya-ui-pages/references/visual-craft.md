@@ -31,7 +31,7 @@ Apply after the golden block order is correct. These are **required**, not optio
 2. **Sider icons** — every top-level `MMenu` item has an `icon`; icons come from one set (built-in Tabler names). No random emoji.
 3. **Status cells** — row business state → `MStatus` (dot + label). `MTag` only for categories, filters, or closable chips.
 4. **Row actions** — secondary `text` / `outlined` / `size="small"`; danger only on destructive. Prefer `MSpace` with a consistent gap; avoid a wall of filled buttons.
-5. **Filter rhythm** — search ~`14rem`, compact selects ~`10–12rem`; wrap with `MSpace wrap`. Do not stretch filters full-bleed.
+5. **Filter rhythm** — search ~`14rem`, compact selects ~`10–12rem`; wrap with `MSpace wrap`. Do not stretch filters full-bleed. Secondary fields → `MPageFilters collapsible` + `#advanced`; active criteria → `MPageFilterChips` + closable `MTag`.
 6. **Empty is designed** — `MEmpty` (or table `#empty` with `MEmpty`) with a next action; never a silent blank table or a lone muted sentence.
 7. **No extra cards** — do not wrap `MPageFilters` / `MTable` in decorative `MCard` “for polish”. Dashboard chart/detail modules may use `MCard`.
 8. **Domain copy** — column labels, placeholders, and empty titles use product vernacular, not “Name / Status / No data”.

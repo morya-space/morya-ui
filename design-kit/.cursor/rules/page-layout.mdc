@@ -31,11 +31,13 @@ alwaysApply: false
 2. 侧栏 `MMenu`
 3. `MLayoutHeader` → `MBreadcrumb`
 4. `MLayoutContent` → `MPageContent`
-5. `MPageFilters`（内 `MSpace` + Input/Select + 查询/重置）
-6. `MPageToolbar`（标题 + `#actions` 主操作）
-7. `MTable`（直接放置，通常不必包 `MCard`）
-8. 分页由 `MTable paginator` 或同级 `MPagination`
-9. 短新建/编辑：同页 `MDialog` + `MForm`
+5. `MPageHeader`（页面标题 + `#actions` 主操作；视口内 **唯一** filled primary）
+6. `MPageFilters`（可选 `variant="filled"`、`collapsible` + `#advanced`；查询/重置用 secondary）
+7. 可选 `MPageFilterChips` + 可关闭 `MTag`（有已选条件时，放在筛选与表格之间）
+8. 可选 `MPageToolbar`（仅批量操作，**不要**页面标题）
+9. `MTable`（直接放置；`#empty` → `MEmpty`）
+10. 分页由 `MTable paginator` 或同级 `MPagination`
+11. 短新建/编辑：同页 `MDialog` + `MForm`
 
 ## 表单页区块顺序
 
@@ -50,7 +52,7 @@ alwaysApply: false
 1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
 2. `MPageContent density="spacious"` → `MPageHeader`
 3. KPI：`MGrid` + `MPageStat`（4 列或响应式）
-4. 主区两栏：`MCard` + `MPagePlaceholder` / 最近列表 `MTable`
+4. 主区两栏：`MCard shadow="always"` + `MEmpty`（图表未接入）/ 最近列表 `MTable`
 
 ## 页面标准
 

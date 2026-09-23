@@ -43,9 +43,9 @@ import 'morya-ui/styles.css'
 | Admin chrome | `MLayout fillViewport` + sider / header / content |
 | Sider nav | `MMenu` |
 | Page stack | `MPageContent` inside `MLayoutContent` |
-| Filters / toolbar | `MPageFilters` + `MPageToolbar` |
+| List chrome | `MPageHeader` + `MPageFilters` (+ optional batch `MPageToolbar`) |
 | Form surfaces | `MPageHeader` + `MPageSection variant="form|actions"` |
-| Dashboard KPI | `MPageStat` + `MPagePlaceholder` |
+| Dashboard KPI / chart pending | `MPageStat` + `MCard shadow="always"` + `MEmpty` |
 | Module cards | `MCard` / `MPanel` / `MFieldset` |
 | Grid / spacing | `MGrid` + `MGridItem`, or `MFlex` / `MSpace` |
 

@@ -30,11 +30,13 @@ Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet`
 2. Sider `MMenu` (**every item has `icon`**)
 3. `MLayoutHeader` → `MBreadcrumb`
 4. `MLayoutContent` → `MPageContent`
-5. `MPageFilters` — inner `MSpace wrap` + Input/Select + query/reset (search ~`14rem`, select ~`10–12rem`)
-6. `MPageToolbar` — title + `#actions` primary action (**one** filled primary)
-7. `MTable` directly in content (usually **no** wrapping `MCard`); status → `MStatus`; `#empty` → `MEmpty`
-8. Pagination via `MTable` paginator or sibling `MPagination`
-9. Short create/edit → `MDialog` + `MForm` on the same page (default)
+5. `MPageHeader` — page title + `#actions` primary (**one** filled primary in viewport)
+6. `MPageFilters` — `variant="filled"` optional; inner `MSpace wrap` + Input/Select + query/reset (query/reset → secondary); optional `collapsible` + `#advanced` for secondary fields
+7. Optional `MPageFilterChips` + closable `MTag` when filters are applied (after filters, before table)
+8. Optional `MPageToolbar` — batch actions only (no page title)
+9. `MTable` directly in content (usually **no** wrapping `MCard`); status → `MStatus`; `#empty` → `MEmpty`
+10. Pagination via `MTable` paginator or sibling `MPagination`
+11. Short create/edit → `MDialog` + `MForm` on the same page (default)
 
 Craft: [visual-craft.md](visual-craft.md) § Ops polish.
 
@@ -51,7 +53,7 @@ Craft: [visual-craft.md](visual-craft.md) § Ops polish.
 1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
 2. `MPageContent density="spacious"` → `MPageHeader` (title + short domain description when useful)
 3. KPI row: `MGrid` + `MPageStat` (4 columns or responsive) — real metric names, not “Metric 1”
-4. Main split: `MCard` + `MPagePlaceholder` and/or recent `MTable` (row status → `MStatus`)
+4. Main split: `MCard shadow="always"` + `MEmpty` (chart pending) and/or recent `MTable` (row status → `MStatus`)
 
 Craft: spacious density + Ops polish; do not turn the first viewport into a marketing hero.
 
@@ -82,7 +84,7 @@ Mirror MCP `get_golden_page` `detail-page`.
 
 ## List create/edit dialog — block order
 
-1. Stay on the list page (`MPageToolbar` + `MTable`)
+1. Stay on the list page (`MPageHeader` + filters/table; optional batch `MPageToolbar`)
 2. `MDialog` ~`28–36rem` + `MForm` fields
 3. Actions in Dialog `#footer` (cancel secondary/text + save primary)
 4. Success → `message.success` one-liner, then close

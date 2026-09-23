@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "我们内部教务系统用 Vue3 + morya-ui。请做一个「课程列表」后台页：按课程名搜索、按开课状态（全部/开课中/已结课）筛选；表格列：名称、状态、学分、更新时间；行内「编辑」进抽屉表单，「删除」要二次确认；右上角「新建课程」。保存/删除成功只要一句话提示。输出单个 Vue SFC，结构对齐列表黄金样例，并做 Ops 精致化（侧栏图标、状态用 MStatus、空态用 MEmpty、行操作不要一排实心按钮）。",
-      "expected_output": "Ops list: MLayout/MPageFilters/MPageToolbar/MTable rows, MSelect status, MDrawer edit, MConfirmDialog delete, message not toast, MStatus for status, MEmpty in #empty, menu icons, text/small row actions, craft pass applied, no second UI kit.",
+      "expected_output": "Ops list: MLayout/MPageHeader/MPageFilters/MTable rows, optional batch MPageToolbar, MSelect status, MDrawer edit, MConfirmDialog delete, message not toast, MStatus for status, MEmpty in #empty, menu icons, text/small row actions, craft pass applied, no second UI kit.",
       "files": []
     },
     {
@@ -16,7 +16,7 @@
     {
       "id": 3,
       "prompt": "运营后台首页仪表盘：四个 KPI（今日订单、待处理、转化率、退款率）、中间一块图表占位、右侧或下方「最近告警」表格（级别、内容、时间）。Vue3 + morya-ui，可先用静态假数据；告警级别可用 Tag，状态用 MStatus。",
-      "expected_output": "Dashboard: MPageStat grid with domain labels, MPagePlaceholder/chart card, recent MTable with MStatus, MLayout shell, --m-* only, spacious density.",
+      "expected_output": "Dashboard: MPageStat grid with domain labels, MCard shadow=always + MEmpty chart pending, recent MTable with MStatus, MLayout shell, --m-* only, spacious density.",
       "files": []
     },
     {
@@ -27,8 +27,8 @@
     },
     {
       "id": 5,
-      "prompt": "课程列表在零数据时太空了。请设计一个空状态区块（可嵌在列表页内容区）：说明还没有课程、引导「创建第一门课程」，视觉克制但有一个记忆点（dashed shell + 轻径向光）。只要空状态相关模板片段或带空状态的列表 SFC 均可，须 morya-ui。",
-      "expected_output": "Flow empty: MEmpty + next-action MButton, short copy, token atmosphere shell, no emoji clutter, fits list content slot.",
+      "prompt": "课程列表在零数据时太空了。请设计一个空状态区块（可嵌在列表页内容区）：说明还没有课程、引导「创建第一门课程」；视觉克制，用 morya-ui 默认空态即可，不要自定义 dashed 框或径向光晕。只要空状态相关模板片段或带空状态的列表 SFC 均可。",
+      "expected_output": "Flow empty: MPageHeader + MEmpty + next-action MButton, short copy, no custom dashed/radial shell, fits list content slot.",
       "files": []
     },
     {
