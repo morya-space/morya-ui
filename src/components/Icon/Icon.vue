@@ -40,10 +40,10 @@ const rootClass = computed(() => [
     <slot v-if="useSlot" />
     <svg
       v-else-if="definition"
-      :viewBox="definition.viewBox ?? '0 0 16 16'"
+      :viewBox="definition.viewBox ?? '0 0 24 24'"
       fill="none"
       stroke="currentColor"
-      :stroke-width="definition.strokeWidth ?? 1.8"
+      :stroke-width="definition.strokeWidth ?? 2"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
