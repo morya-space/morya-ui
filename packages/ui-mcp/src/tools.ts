@@ -85,9 +85,9 @@ function generatedPageCode(patternId: string, intent: string, locale: Locale): {
     : ''
   const listImports = isList ? ', MEmpty, MSelect, MSpace, MTable' : ''
   const formImports = isForm || isAuth || isWizard ? ', MForm, MFormItem, MSelect' : ''
-  const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MPagePlaceholder, MPageStat, MSkeleton, MTable' : ''
+  const dashboardImports = isDashboard ? ', MCard, MGrid, MGridItem, MEmpty, MPageStat, MSkeleton, MTable' : ''
   const detailImports = isDetail ? ', MSpace' : ''
-  const emptyImports = isEmpty ? ', MEmpty, MPageToolbar' : ''
+  const emptyImports = isEmpty ? ', MEmpty, MPageContent, MPageHeader' : ''
   const wizardImports = isWizard ? ', MStepper, MSpace' : ''
   const settingsImports = isSettings ? ', MTabs' : ''
   const statusImports = isList || isDetail || isDashboard ? ', MStatus' : ''
@@ -124,18 +124,18 @@ async function submit() {
 }
 </script>`
 
-  const listContent = `            <MPageFilters :aria-label="${zh ? '筛选' : 'Filters'}">
-              <MSpace wrap>
-                <MInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
-                <MButton severity="primary">${zh ? '查询' : 'Search'}</MButton>
-                <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
-              </MSpace>
-            </MPageFilters>
-            <MPageToolbar :title="title">
+  const listContent = `            <MPageHeader :title="title">
               <template #actions>
                 <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
               </template>
-            </MPageToolbar>
+            </MPageHeader>
+            <MPageFilters variant="filled" :aria-label="${zh ? '筛选' : 'Filters'}">
+              <MSpace wrap>
+                <MInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
+                <MButton severity="secondary">${zh ? '查询' : 'Search'}</MButton>
+                <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
+              </MSpace>
+            </MPageFilters>
             <MTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
               <template #cell-status="{ value }">
                 <MStatus :label="String(value ?? '')" :severity="value === 'active' ? 'success' : 'secondary'" />
@@ -171,9 +171,14 @@ async function submit() {
                 <MPageStat :label="metric.label" :value="metric.value" icon="activity" />
               </MGridItem>
             </MGrid>
-            <MCard :title="${zh ? '趋势概览' : 'Trend overview'}">
+            <MCard shadow="always" :title="${zh ? '趋势概览' : 'Trend overview'}">
               <MSkeleton v-if="loading" height="8rem" />
-              <MPagePlaceholder v-else :description="${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}" aria-label="${zh ? '图表占位' : 'Chart placeholder'}" />
+              <MEmpty
+                v-else
+                :title="${zh ? '暂无图表数据' : 'No chart data yet'}"
+                :description="${zh ? '接入图表或业务组件。' : 'Connect charts or business widgets here.'}"
+                aria-label="${zh ? '图表占位' : 'Chart placeholder'}"
+              />
             </MCard>`
 
   const detailContent = `            <MPageHeader :title="title" :description="${zh ? '查看资源摘要与属性。' : 'Review summary and properties.'}">
@@ -281,11 +286,12 @@ ${content}
   } else if (isEmpty) {
     innerTemplate = `<MConfigProvider :locale="zhCN">
   <main class="m-generated-page">
-    <MPageToolbar :title="title">
-      <template #actions>
-        <MButton severity="primary" @click="submit">${zh ? '新建' : 'Create'}</MButton>
-      </template>
-    </MPageToolbar>
+    <MPageContent>
+      <MPageHeader :title="title">
+        <template #actions>
+          <MButton severity="primary" @click="submit">${zh ? '新建' : 'Create'}</MButton>
+        </template>
+      </MPageHeader>
     <MEmpty
       :title="${zh ? '暂无内容' : 'Nothing here yet'}"
       :description="${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}"
@@ -295,6 +301,7 @@ ${content}
         <MButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
       </template>
     </MEmpty>
+    </MPageContent>
   </main>
 </MConfigProvider>`
   } else {

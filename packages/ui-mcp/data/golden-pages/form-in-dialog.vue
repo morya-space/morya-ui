@@ -16,7 +16,7 @@ import {
   MLayoutContent,
   MLayoutHeader,
   MPageContent,
-  MPageToolbar,
+  MPageHeader,
   MSelect,
   MSpace,
   MStatus,
@@ -101,13 +101,13 @@ async function onSave() {
 
       <MLayoutContent>
         <MPageContent>
-          <MPageToolbar title="用户管理">
+          <MPageHeader title="用户管理" description="短表单留在列表内弹窗；字段多时再走独立表单页。">
             <template #actions>
               <MButton severity="primary" @click="openCreate">
                 新建用户
               </MButton>
             </template>
-          </MPageToolbar>
+          </MPageHeader>
 
           <MTable
             :columns="columns"

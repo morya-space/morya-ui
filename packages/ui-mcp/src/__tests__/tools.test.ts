@@ -232,7 +232,7 @@ describe('@morya-ui/mcp handlers', () => {
     const result = read<{ items: Array<{ type: string; id: string }> }>(
       handlers.search({ query: 'toolbar', scope: 'snippets', limit: 5 }),
     )
-    expect(result.items.some((item) => item.type === 'snippet' && item.id === 'list-toolbar')).toBe(true)
+    expect(result.items.some((item) => item.type === 'snippet' && item.id === 'list-batch-toolbar')).toBe(true)
   })
 
   it('suggests double-border page composition as advisory standard', () => {

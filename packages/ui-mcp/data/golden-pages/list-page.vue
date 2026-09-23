@@ -15,18 +15,22 @@ import {
   MLayoutSider,
   MMenu,
   MPageContent,
+  MPageFilterChips,
   MPageFilters,
-  MPageToolbar,
+  MPageHeader,
   MSelect,
   MSpace,
   MStatus,
   MTable,
+  MTag,
   zhCN,
 } from 'morya-ui'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const keyword = ref('')
 const status = ref<string | undefined>()
+const department = ref<string | null>(null)
+const filtersExpanded = ref(false)
 const siderCollapsed = ref(false)
 
 const menuModel = [
@@ -40,6 +44,39 @@ const statusOptions = [
   { label: '启用', value: 'active' },
   { label: '停用', value: 'inactive' },
 ]
+
+const departmentOptions = [
+  { label: '研发', value: '研发' },
+  { label: '运营', value: '运营' },
+  { label: '市场', value: '市场' },
+]
+
+const activeFilters = computed(() => {
+  const items: Array<{ key: string; label: string }> = []
+  if (keyword.value.trim()) {
+    items.push({ key: 'keyword', label: `关键词：${keyword.value.trim()}` })
+  }
+  if (status.value) {
+    const label = statusOptions.find((o) => o.value === status.value)?.label ?? status.value
+    items.push({ key: 'status', label: `状态：${label}` })
+  }
+  if (department.value) {
+    items.push({ key: 'department', label: `部门：${department.value}` })
+  }
+  return items
+})
+
+function clearFilter(key: string) {
+  if (key === 'keyword') keyword.value = ''
+  if (key === 'status') status.value = undefined
+  if (key === 'department') department.value = null
+}
+
+function resetFilters() {
+  keyword.value = ''
+  status.value = undefined
+  department.value = null
+}
 
 const columns = [
   { key: 'name', label: '名称' },
@@ -76,7 +113,20 @@ const rows = [
 
         <MLayoutContent>
           <MPageContent>
-            <MPageFilters aria-label="筛选">
+            <MPageHeader title="用户管理" description="维护账号、角色与权限。">
+              <template #actions>
+                <MButton severity="primary">
+                  新建用户
+                </MButton>
+              </template>
+            </MPageHeader>
+
+            <MPageFilters
+              v-model:expanded="filtersExpanded"
+              aria-label="筛选"
+              variant="filled"
+              collapsible
+            >
               <MSpace wrap>
                 <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
                 <MSelect
@@ -86,22 +136,37 @@ const rows = [
                   clearable
                   style="width: 10rem"
                 />
-                <MButton severity="primary">
+                <MButton severity="secondary">
                   查询
                 </MButton>
-                <MButton severity="secondary">
+                <MButton severity="secondary" text @click="resetFilters">
                   重置
                 </MButton>
               </MSpace>
+              <template #advanced>
+                <MSpace wrap>
+                  <MSelect
+                    v-model="department"
+                    :options="departmentOptions"
+                    placeholder="部门"
+                    clearable
+                    style="width: 10rem"
+                  />
+                </MSpace>
+              </template>
             </MPageFilters>
 
-            <MPageToolbar title="用户管理">
-              <template #actions>
-                <MButton severity="primary">
-                  新建用户
-                </MButton>
-              </template>
-            </MPageToolbar>
+            <MPageFilterChips v-if="activeFilters.length" label="已选" aria-label="已选筛选">
+              <MTag
+                v-for="item in activeFilters"
+                :key="item.key"
+                :value="item.label"
+                size="small"
+                bordered
+                closable
+                @close="clearFilter(item.key)"
+              />
+            </MPageFilterChips>
 
             <MTable
               :columns="columns"

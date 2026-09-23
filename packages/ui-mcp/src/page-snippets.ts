@@ -25,7 +25,7 @@ export const pageSnippets: PageSnippet[] = [
     description: '在 MPageContent 内追加或替换筛选区，使用 MPageFilters + MSpace 包裹控件。',
     descriptionEn: 'Add or replace a filter region inside MPageContent using MPageFilters and MSpace.',
     pageTypes: ['list'],
-    keywords: ['筛选', '搜索', '查询', 'filter', 'search', 'keyword', 'reset'],
+    keywords: ['筛选', '搜索', '查询', 'filters', 'filter', 'search', 'keyword', 'reset'],
     imports: ['MPageFilters', 'MSpace', 'MInput', 'MSelect', 'MButton'],
     scriptSetup: `const keyword = ref('')
 const status = ref<string | undefined>()
@@ -34,7 +34,7 @@ const statusOptions = [
   { label: '启用', value: 'active' },
   { label: '停用', value: 'inactive' },
 ]`,
-    template: `<MPageFilters aria-label="筛选">
+    template: `<MPageFilters aria-label="筛选" variant="filled">
   <MSpace wrap>
     <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
     <MSelect
@@ -44,33 +44,119 @@ const statusOptions = [
       clearable
       style="width: 10rem"
     />
-    <MButton severity="primary">查询</MButton>
-    <MButton severity="secondary">重置</MButton>
+    <MButton severity="secondary">查询</MButton>
+    <MButton severity="secondary" text>重置</MButton>
   </MSpace>
 </MPageFilters>`,
-    rules: ['放在 MPageContent 内、MPageToolbar 之前', '不要外包 MCard', '筛选项宽度用 inline style，区块样式交给 MPageFilters'],
-    rulesEn: ['Place inside MPageContent before MPageToolbar', 'Do not wrap with MCard', 'Use inline width on controls; let MPageFilters own the surface'],
+    rules: ['放在 MPageHeader 之后、表格之前', 'viewport 内仅一个 primary（通常在 Header）', '不要外包 MCard'],
+    rulesEn: ['Place after MPageHeader and before the table', 'Keep one primary in the viewport (usually in Header)', 'Do not wrap with MCard'],
     avoid: ['不要手写 .page-filters 类', '不要用 MCard 包筛选区'],
     avoidEn: ['Do not hand-write .page-filters classes', 'Do not wrap filters in MCard'],
   },
   {
-    id: 'list-toolbar',
-    title: '列表页工具栏',
-    titleEn: 'List page toolbar',
-    description: '标题 + 主操作按钮，放在筛选区之后、表格之前。',
-    descriptionEn: 'Page title and primary action between filters and the table.',
+    id: 'list-filters-collapsible',
+    title: '列表页折叠筛选',
+    titleEn: 'Collapsible list filters',
+    description: 'MPageFilters collapsible + #advanced 隐藏次要字段。',
+    descriptionEn: 'Hide secondary fields with collapsible MPageFilters and an #advanced slot.',
     pageTypes: ['list'],
-    keywords: ['工具栏', '标题', '新建', 'toolbar', 'title', 'create', 'actions'],
-    imports: ['MPageToolbar', 'MButton'],
-    template: `<MPageToolbar title="用户管理">
+    keywords: ['折叠', '高级筛选', 'collapse', 'advanced', 'expand', 'filter'],
+    imports: ['MPageFilters', 'MSpace', 'MInput', 'MSelect', 'MButton'],
+    scriptSetup: `const filtersExpanded = ref(false)
+const keyword = ref('')
+const department = ref<string | null>(null)`,
+    template: `<MPageFilters
+  v-model:expanded="filtersExpanded"
+  aria-label="筛选"
+  variant="filled"
+  collapsible
+>
+  <MSpace wrap>
+    <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
+    <MButton severity="secondary">查询</MButton>
+    <MButton severity="secondary" text>重置</MButton>
+  </MSpace>
+  <template #advanced>
+    <MSpace wrap>
+      <MSelect
+        v-model="department"
+        :options="[{ label: '研发', value: '研发' }, { label: '运营', value: '运营' }]"
+        placeholder="部门"
+        clearable
+        style="width: 10rem"
+      />
+    </MSpace>
+  </template>
+</MPageFilters>`,
+    rules: ['常用条件放 default，次要条件放 #advanced', '查询/重置保持 secondary'],
+    rulesEn: ['Keep primary filters in default; secondary filters in #advanced', 'Query/reset stay secondary'],
+    avoid: ['不要用 MCard 包整个筛选区'],
+    avoidEn: ['Do not wrap the whole filter bar in MCard'],
+  },
+  {
+    id: 'list-filter-chips',
+    title: '列表页已选筛选',
+    titleEn: 'Active filter chips',
+    description: 'MPageFilterChips + MTag closable 展示并清除已选条件。',
+    descriptionEn: 'Show and clear active filters with MPageFilterChips and closable MTag.',
+    pageTypes: ['list'],
+    keywords: ['已选', 'chip', 'tag', 'active', 'clear', '筛选'],
+    imports: ['MPageFilterChips', 'MTag'],
+    template: `<MPageFilterChips label="已选" aria-label="已选筛选">
+  <MTag
+    v-for="item in activeFilters"
+    :key="item.key"
+    :value="item.label"
+    size="small"
+    bordered
+    closable
+    @close="clearFilter(item.key)"
+  />
+</MPageFilterChips>`,
+    rules: ['放在 MPageFilters 之后、表格之前', '用业务 computed 生成 activeFilters'],
+    rulesEn: ['Place after MPageFilters and before the table', 'Derive activeFilters from filter state'],
+    avoid: ['不要手写 pill 样式或 dashed 壳'],
+    avoidEn: ['Do not hand-write pill or dashed shells'],
+  },
+  {
+    id: 'list-toolbar',
+    title: '列表页页头',
+    titleEn: 'List page header',
+    description: '页面身份 + 唯一 primary（新建），放在 MPageContent 顶部。',
+    descriptionEn: 'Page identity and the single primary action at the top of MPageContent.',
+    pageTypes: ['list'],
+    keywords: ['页头', '标题', '新建', 'header', 'title', 'create', 'actions'],
+    imports: ['MPageHeader', 'MButton'],
+    template: `<MPageHeader title="用户管理" description="维护账号、角色与权限。">
   <template #actions>
     <MButton severity="primary">新建用户</MButton>
   </template>
+</MPageHeader>`,
+    rules: ['页级标题用 MPageHeader，不要用 MPageToolbar 当第二页头', '主操作放 #actions'],
+    rulesEn: ['Use MPageHeader for page identity; do not use MPageToolbar as a second page title', 'Put primary actions in #actions'],
+    avoid: ['不要在 Toolbar 上写页面 H1 标题'],
+    avoidEn: ['Do not put the page H1 on MPageToolbar'],
+  },
+  {
+    id: 'list-batch-toolbar',
+    title: '列表页批量操作条',
+    titleEn: 'List batch action row',
+    description: '表格多选时的批量操作，放在筛选区之后（可选）。',
+    descriptionEn: 'Optional batch actions after filters when rows are selectable.',
+    pageTypes: ['list'],
+    keywords: ['批量', '已选', 'toolbar', 'batch', 'export', 'delete'],
+    imports: ['MPageToolbar', 'MButton'],
+    template: `<MPageToolbar>
+  <span style="color:var(--m-color-text-muted);font-size:var(--m-font-size-sm)">已选 0 项</span>
+  <template #actions>
+    <MButton severity="secondary" text>导出</MButton>
+    <MButton severity="danger" text>删除</MButton>
+  </template>
 </MPageToolbar>`,
-    rules: ['主操作放 #actions', '标题优先用 title prop，不用裸 h1 + flex'],
-    rulesEn: ['Put primary actions in #actions', 'Prefer the title prop over raw h1 + flex'],
-    avoid: ['不要再用自定义 toolbar CSS'],
-    avoidEn: ['Do not add custom toolbar CSS'],
+    rules: ['左侧用 default 插槽展示已选数量', '批量操作用 text/outlined，danger 仅 destructive'],
+    rulesEn: ['Use the default slot for selection count', 'Batch actions use text/outlined; danger only for destructive ops'],
+    avoid: ['不要用 Toolbar title 充当页面标题'],
+    avoidEn: ['Do not use Toolbar title as the page heading'],
   },
   {
     id: 'list-table',
@@ -290,8 +376,8 @@ const submitting = ref(false)`,
     keywords: ['kpi', '指标', 'stat', 'grid', 'metrics'],
     imports: ['MGrid', 'MGridItem', 'MPageStat'],
     scriptSetup: `const metrics = ref([
-  { label: '总用户', value: '12,480', trend: '+8.2%', icon: 'users' },
-  { label: '今日活跃', value: '1,926', trend: '+3.1%', icon: 'activity' },
+  { label: '总用户', value: '12,480', trend: '+8.2%', trendDirection: 'up' as const, trendLabel: '较上月', icon: 'users' },
+  { label: '今日活跃', value: '1,926', trend: '+3.1%', trendDirection: 'up' as const, trendLabel: '较昨日', icon: 'activity' },
 ])`,
     template: `<MGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
   <MGridItem v-for="metric in metrics" :key="metric.label" :span="1">
@@ -299,7 +385,9 @@ const submitting = ref(false)`,
       :label="metric.label"
       :value="metric.value"
       :trend="metric.trend"
-      icon="activity"
+      :trend-direction="metric.trendDirection"
+      :trend-label="metric.trendLabel"
+      :icon="metric.icon"
     />
   </MGridItem>
 </MGrid>`,
@@ -312,16 +400,17 @@ const submitting = ref(false)`,
     id: 'dashboard-chart-card',
     title: '仪表盘图表卡片',
     titleEn: 'Dashboard chart card',
-    description: 'MCard 标题 + MPagePlaceholder 作为图表占位。',
-    descriptionEn: 'MCard title with MPagePlaceholder for chart area.',
+    description: 'MCard shadow="always" + MEmpty 作为图表占位。',
+    descriptionEn: 'MCard with shadow="always" and MEmpty for chart pending state.',
     pageTypes: ['dashboard'],
     keywords: ['chart', '图表', 'placeholder', 'card', 'trend'],
-    imports: ['MCard', 'MPagePlaceholder', 'MSkeleton'],
-    template: `<MCard title="趋势概览">
+    imports: ['MCard', 'MEmpty', 'MSkeleton'],
+    template: `<MCard title="趋势概览" shadow="always">
   <MSkeleton v-if="loading" height="8rem" />
-  <MPagePlaceholder
+  <MEmpty
     v-else
     aria-label="图表占位"
+    title="暂无图表数据"
     description="图表区域（接入 ECharts / 业务组件）"
   />
 </MCard>`,
@@ -399,19 +488,22 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     id: 'detail-toolbar',
     title: '详情页顶栏',
     titleEn: 'Detail page header actions',
-    description: '详情页标题与编辑操作。',
-    descriptionEn: 'Detail page title and edit action.',
+    description: '详情页标题、状态与编辑操作。',
+    descriptionEn: 'Detail page title, status, and edit actions.',
     pageTypes: ['detail'],
-    keywords: ['detail', '详情', 'edit', 'toolbar'],
-    imports: ['MPageToolbar', 'MButton', 'MTag'],
-    template: `<MPageToolbar title="示例资源">
+    keywords: ['detail', '详情', 'edit', 'header'],
+    imports: ['MPageHeader', 'MButton', 'MStatus', 'MSpace'],
+    template: `<MPageHeader title="示例资源" description="查看摘要与属性。">
   <template #actions>
-    <MButton severity="primary" outlined>编辑</MButton>
+    <MSpace>
+      <MStatus label="正常" severity="success" />
+      <MButton severity="primary">编辑</MButton>
+      <MButton severity="danger" text>删除</MButton>
+    </MSpace>
   </template>
-</MPageToolbar>
-<MTag value="正常" severity="success" />`,
-    rules: ['状态 Tag 放在标题区附近', '编辑为主操作，删除放低强调区域'],
-    rulesEn: ['Keep status Tag near the header area', 'Edit is primary; delete stays low emphasis'],
+</MPageHeader>`,
+    rules: ['状态用 MStatus 放在 actions 区', '编辑为 primary，删除用 danger text'],
+    rulesEn: ['Use MStatus in the actions area', 'Edit is primary; delete uses danger text'],
     avoid: ['不要把操作散落到多个无关区域'],
     avoidEn: ['Do not scatter actions across unrelated areas'],
   },

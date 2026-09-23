@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T16:31:13.394Z",
+  "generatedAt": "2026-09-23T12:49:56.748Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 367,
+  "tokenCount": 373,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -712,6 +712,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Button Spinner Size",
         "en-US": "Component-specific token: Button Spinner Size"
+      }
+    },
+    {
+      "name": "--m-card-shadow-rest",
+      "category": "component",
+      "source": "src/components/Card/styles.css",
+      "default": "var(--m-shadow-raised)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Card Shadow Rest",
+        "en-US": "Component-specific token: Card Shadow Rest"
       }
     },
     {
@@ -1637,6 +1647,26 @@
       }
     },
     {
+      "name": "--m-font-size-2xl",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "1.5rem",
+      "description": {
+        "zh-CN": "字体相关变量：Font Size 2xl",
+        "en-US": "Typography token: Font Size 2xl"
+      }
+    },
+    {
+      "name": "--m-font-size-3xl",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "1.75rem",
+      "description": {
+        "zh-CN": "字体相关变量：Font Size 3xl",
+        "en-US": "Typography token: Font Size 3xl"
+      }
+    },
+    {
       "name": "--m-font-size-lg",
       "category": "typography",
       "source": "src/theme/styles.css",
@@ -1664,6 +1694,16 @@
       "description": {
         "zh-CN": "字体相关变量：Font Size Sm",
         "en-US": "Typography token: Font Size Sm"
+      }
+    },
+    {
+      "name": "--m-font-size-xl",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "1.25rem",
+      "description": {
+        "zh-CN": "字体相关变量：Font Size Xl",
+        "en-US": "Typography token: Font Size Xl"
       }
     },
     {
@@ -2760,6 +2800,16 @@
       }
     },
     {
+      "name": "--m-page-content-body-lead",
+      "category": "component",
+      "source": "src/components/Page/styles.css",
+      "default": "0",
+      "description": {
+        "zh-CN": "组件专用相关变量：Page Content Body Lead",
+        "en-US": "Component-specific token: Page Content Body Lead"
+      }
+    },
+    {
       "name": "--m-page-content-gap",
       "category": "component",
       "source": "src/components/Page/styles.css",
@@ -2780,10 +2830,20 @@
       }
     },
     {
+      "name": "--m-page-content-tools-pull",
+      "category": "component",
+      "source": "src/components/Page/styles.css",
+      "default": "0",
+      "description": {
+        "zh-CN": "组件专用相关变量：Page Content Tools Pull",
+        "en-US": "Component-specific token: Page Content Tools Pull"
+      }
+    },
+    {
       "name": "--m-page-stat-value-size",
       "category": "component",
       "source": "src/components/Page/styles.css",
-      "default": "1.5rem",
+      "default": "var(--m-font-size-xl)",
       "description": {
         "zh-CN": "组件专用相关变量：Page Stat Value Size",
         "en-US": "Component-specific token: Page Stat Value Size"

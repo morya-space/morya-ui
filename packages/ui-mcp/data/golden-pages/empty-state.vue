@@ -13,7 +13,7 @@ import {
   MLayoutContent,
   MLayoutHeader,
   MPageContent,
-  MPageToolbar,
+  MPageHeader,
   zhCN,
 } from 'morya-ui'
 </script>
@@ -27,61 +27,30 @@ import {
 
       <MLayoutContent>
         <MPageContent>
-          <MPageToolbar title="课程">
+          <MPageHeader title="课程" description="管理目录与可见性。">
             <template #actions>
-              <MButton label="新建课程" />
+              <MButton severity="primary">
+                新建课程
+              </MButton>
             </template>
-          </MPageToolbar>
+          </MPageHeader>
 
-          <div class="empty-state-shell">
-            <MEmpty
-              title="还没有课程"
-              description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。"
-              icon="book"
-            >
-              <template #extra>
-                <MButton label="创建第一门课程" />
-                <MButton label="从模板导入" severity="secondary" text />
-              </template>
-            </MEmpty>
-          </div>
+          <MEmpty
+            title="还没有课程"
+            description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。"
+            icon="book"
+          >
+            <template #extra>
+              <MButton severity="primary">
+                创建第一门课程
+              </MButton>
+              <MButton severity="secondary" text>
+                从模板导入
+              </MButton>
+            </template>
+          </MEmpty>
         </MPageContent>
       </MLayoutContent>
     </MLayout>
   </MConfigProvider>
 </template>
-
-<style scoped>
-.empty-state-shell {
-  display: grid;
-  place-items: center;
-  min-height: 18rem;
-  padding: var(--m-space-8) var(--m-space-6);
-  border: 1px dashed color-mix(in srgb, var(--m-color-border) 80%, var(--m-color-primary));
-  border-radius: var(--m-radius-md);
-  background:
-    radial-gradient(
-      120% 80% at 50% 0%,
-      color-mix(in srgb, var(--m-color-primary) 10%, transparent),
-      transparent 55%
-    ),
-    var(--m-color-surface);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .empty-state-shell {
-    animation: empty-in 400ms ease both;
-  }
-}
-
-@keyframes empty-in {
-  from {
-    opacity: 0;
-    transform: translateY(0.35rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>
