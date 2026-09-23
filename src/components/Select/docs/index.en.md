@@ -62,6 +62,20 @@ With `multiple`, `v-model` is an array. Selected values render as removable tags
 ```vue preview src="./demos/Tag.vue"
 ```
 
+## Group
+
+`options` can mix in `{ label, items }` groups ([SelectOptionGroup](/docs/types#SelectOptionGroup)) to render group header rows. Groups are not selectable; `filter` narrows items within each group and hides empty groups.
+
+```vue preview src="./demos/Group.vue"
+```
+
+## Header / Footer
+
+The `header` / `footer` slots render custom content above / below the option list in the popup (e.g. hints or a "create" action) and do not scroll with the options.
+
+```vue preview src="./demos/HeaderFooter.vue"
+```
+
 ## Remote
 
 `remote` skips local filtering and emits `search` as the query changes. Use `loading` for in-flight requests.
@@ -92,7 +106,7 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `modelValue` | `string \| number \| Array<string \| number>` | — | Selected value; an array when `multiple`. |
-| `options` | [SelectOption](/docs/types#SelectOption)`[]` | — | Options list. |
+| `options` | `Array<`[SelectOption](/docs/types#SelectOption)` \| `[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | — | Options list; may mix in `{ label, items }` groups. |
 | `label` | `string` | — | Field label. |
 | `helpText` | `string` | — | Help text. |
 | `invalid` | `boolean` | `false` | Invalid state. |
@@ -138,6 +152,8 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | --- | --- |
 | `value` | Custom single-select trigger display. |
 | `option` | Option `{ option }`. |
+| `header` | Custom content above the option list in the popup. |
+| `footer` | Custom content below the option list in the popup. |
 
 ## Types
 
@@ -148,6 +164,15 @@ interface SelectOption {
   label: string
   value: string | number
   disabled?: boolean
+}
+```
+
+<h4 id="SelectOptionGroup">SelectOptionGroup</h4>
+
+```ts
+interface SelectOptionGroup {
+  label: string
+  items: SelectOption[]
 }
 ```
 

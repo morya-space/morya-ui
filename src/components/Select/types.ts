@@ -15,9 +15,21 @@ export interface SelectOption {
   disabled?: boolean
 }
 
+/**
+ * One-level option group (PrimeVue-style). Mix into `options` to render a
+ * group header row above its `items`; groups are not selectable.
+ */
+export interface SelectOptionGroup {
+  label: string
+  items: SelectOption[]
+}
+
+export type SelectOptionEntry = SelectOption | SelectOptionGroup
+
 export interface SelectProps extends MNativeComboboxFieldProps {
   modelValue?: SelectModelValue
-  options: SelectOption[]
+  /** Flat options, optionally mixed with {@link SelectOptionGroup} entries. */
+  options: SelectOptionEntry[]
   label?: string
   helpText?: string
   invalid?: boolean

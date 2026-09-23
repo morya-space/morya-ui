@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
 import type { VirtualScrollerExpose } from '../VirtualScroller/types'
+import type { SelectModelValue, SelectOption, SelectOptionEntry, SelectOptionGroup, SelectProps, SelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
@@ -15,8 +15,6 @@ import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
 
 defineOptions({ inheritAttrs: false })
-
-const VIRTUAL_AUTO_THRESHOLD = 80
 
 const props = withDefaults(defineProps<SelectProps>(), {
   transition: undefined,
@@ -47,8 +45,30 @@ const emit = defineEmits<{
   (event: 'create', option: SelectOption): void
 }>()
 
+const VIRTUAL_AUTO_THRESHOLD = 80
+
 interface MenuOption extends SelectOption {
   created?: boolean
+}
+
+/* Flat render model shared by the plain list and the virtual scroller:
+   group header rows + option rows. */
+interface MenuGroupRow {
+  type: 'group'
+  label: string
+  key: string
+}
+
+interface MenuOptionRow {
+  type: 'option'
+  option: MenuOption
+  key: string
+}
+
+type MenuRow = MenuGroupRow | MenuOptionRow
+
+function isOptionGroup(entry: SelectOptionEntry): entry is SelectOptionGroup {
+  return Array.isArray((entry as SelectOptionGroup).items)
 }
 
 const slots = useSlots()
@@ -107,8 +127,12 @@ const selectedValues = computed<SelectValue[]>(() => {
   return [props.modelValue]
 })
 
+const flatOptions = computed<SelectOption[]>(() =>
+  props.options.flatMap((entry): SelectOption[] => (isOptionGroup(entry) ? entry.items : [entry])),
+)
+
 const lookupOptions = computed(() => {
-  const seen = new Set(props.options.map((option) => String(option.value)))
+  const seen = new Set(flatOptions.value.map((option) => String(option.value)))
   const extras: SelectOption[] = []
   for (const option of createdOptions.value) {
     if (seen.has(String(option.value))) continue
@@ -120,7 +144,7 @@ const lookupOptions = computed(() => {
     extras.push({ label: String(value), value })
     seen.add(String(value))
   }
-  return [...props.options, ...extras]
+  return [...flatOptions.value, ...extras]
 })
 
 function findOption(value: SelectValue): SelectOption | undefined {
@@ -154,17 +178,60 @@ const canCreate = computed(() => {
   )
 })
 
-const filteredOptions = computed(() => {
+/* Grouped entries for the menu. Created tags and selected values missing from
+   `options` are appended as ungrouped tail entries; filtering keeps a group
+   only while some of its items match. */
+const menuEntries = computed<SelectOptionEntry[]>(() => {
   if (resolvedRemote.value) return props.options
+  const seen = new Set(flatOptions.value.map((option) => String(option.value)))
+  const extras: SelectOption[] = []
+  for (const option of createdOptions.value) {
+    if (seen.has(String(option.value))) continue
+    extras.push(option)
+    seen.add(String(option.value))
+  }
+  for (const value of selectedValues.value) {
+    if (seen.has(String(value))) continue
+    extras.push({ label: String(value), value })
+    seen.add(String(value))
+  }
+  const entries: SelectOptionEntry[] = [...props.options, ...extras]
   const needle = query.value.toLowerCase()
-  if (!needle) return lookupOptions.value
-  return lookupOptions.value.filter((option) => option.label.toLowerCase().includes(needle))
+  if (!needle) return entries
+  return entries.flatMap((entry): SelectOptionEntry[] => {
+    if (isOptionGroup(entry)) {
+      const items = entry.items.filter((option) => option.label.toLowerCase().includes(needle))
+      return items.length ? [{ ...entry, items }] : []
+    }
+    return entry.label.toLowerCase().includes(needle) ? [entry] : []
+  })
 })
 
-const menuOptions = computed<MenuOption[]>(() => {
-  if (!canCreate.value) return filteredOptions.value
-  return [{ label: query.value, value: query.value, created: true }, ...filteredOptions.value]
+const menuRows = computed<MenuRow[]>(() => {
+  const rows: MenuRow[] = []
+  if (canCreate.value) {
+    rows.push({
+      type: 'option',
+      option: { label: query.value, value: query.value, created: true },
+      key: `__create:${query.value}`,
+    })
+  }
+  menuEntries.value.forEach((entry, index) => {
+    if (isOptionGroup(entry)) {
+      rows.push({ type: 'group', label: entry.label, key: `__group:${index}:${entry.label}` })
+      for (const option of entry.items) {
+        rows.push({ type: 'option', option, key: String(option.value) })
+      }
+    } else {
+      rows.push({ type: 'option', option: entry, key: String(entry.value) })
+    }
+  })
+  return rows
 })
+
+const menuOptions = computed<MenuOption[]>(() =>
+  menuRows.value.flatMap((row) => (row.type === 'option' ? [row.option] : [])),
+)
 
 const enabledOptions = computed(() => menuOptions.value.filter((option) => !option.disabled))
 const createLabel = computed(() => formatLocale(locale.value.createOption, { value: query.value }))
@@ -173,7 +240,7 @@ const moreTagsLabel = computed(() => formatLocale(locale.value.moreTags, { count
 const useVirtualMenu = computed(() => {
   if (props.virtual === false) return false
   if (props.virtual === true) return true
-  return menuOptions.value.length >= VIRTUAL_AUTO_THRESHOLD
+  return menuRows.value.length >= VIRTUAL_AUTO_THRESHOLD
 })
 const optionItemSize = computed(() => {
   if (sizeClass.value === 'small') return 28
@@ -181,12 +248,20 @@ const optionItemSize = computed(() => {
   return 34
 })
 const menuViewportHeight = computed(() =>
-  Math.min(240, Math.max(optionItemSize.value * 4, menuOptions.value.length * optionItemSize.value)),
+  Math.min(240, Math.max(optionItemSize.value * 4, menuRows.value.length * optionItemSize.value)),
 )
 const virtualList = ref<VirtualScrollerExpose | null>(null)
 
+function menuRowAt(item: unknown): MenuRow {
+  return item as MenuRow
+}
+
+function menuGroupLabelAt(item: unknown): string {
+  return (item as MenuGroupRow).label
+}
+
 function menuOptionAt(item: unknown): MenuOption {
-  return item as MenuOption
+  return (item as MenuOptionRow).option
 }
 
 function isSelected(value: SelectValue) {
@@ -347,10 +422,13 @@ watch(highlightedIndex, (index) => {
   if (!useVirtualMenu.value || index < 0) return
   const option = enabledOptions.value[index]
   if (!option) return
-  const listIndex = menuOptions.value.findIndex(
-    (item) => item.value === option.value && Boolean(item.created) === Boolean(option.created),
+  const rowIndex = menuRows.value.findIndex(
+    (row) =>
+      row.type === 'option' &&
+      row.option.value === option.value &&
+      Boolean(row.option.created) === Boolean(option.created),
   )
-  if (listIndex >= 0) virtualList.value?.scrollToIndex(listIndex)
+  if (rowIndex >= 0) virtualList.value?.scrollToIndex(rowIndex)
 })
 
 watch(filterQuery, (next) => {
@@ -475,6 +553,9 @@ onBeforeUnmount(() => {
           :aria-label="label ?? placeholder ?? locale.selectOption"
           @keydown="onMenuKeydown"
         >
+          <div v-if="$slots.header" class="m-select__header">
+            <slot name="header" />
+          </div>
           <input
             v-if="resolvedFilter"
             ref="filterInput"
@@ -494,13 +575,21 @@ onBeforeUnmount(() => {
             class="m-select__list m-select__list--virtual"
             role="listbox"
             :aria-label="label ?? placeholder ?? locale.selectOption"
-            :items="menuOptions"
+            :items="menuRows"
             :item-size="optionItemSize"
             :height="menuViewportHeight"
             :buffer="4"
           >
             <template #item="{ item }">
+              <div
+                v-if="menuRowAt(item).type === 'group'"
+                class="m-select__group-label"
+                role="presentation"
+              >
+                {{ menuGroupLabelAt(item) }}
+              </div>
               <button
+                v-else
                 class="m-select__option"
                 :class="{
                   'm-select__option--selected': !menuOptionAt(item).created && isSelected(menuOptionAt(item).value),
@@ -537,32 +626,40 @@ onBeforeUnmount(() => {
             <div v-if="resolvedLoading" class="m-select__empty" role="status">
               {{ locale.loading }}
             </div>
-            <button
-              v-for="option in menuOptions"
-              :key="option.created ? `__create:${String(option.value)}` : String(option.value)"
-              class="m-select__option"
-              :class="{
-                'm-select__option--selected': !option.created && isSelected(option.value),
-                'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(option.created),
-                'm-select__option--create': option.created,
-              }"
-              type="button"
-              role="option"
-              :aria-selected="option.created ? undefined : isSelected(option.value)"
-              :disabled="option.disabled"
-              @mouseenter="!option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === option.value && Boolean(item.created) === Boolean(option.created)))"
-              @click="selectOption(option)"
-            >
-              <slot name="option" :option="option">
-                <span>{{ option.created ? createLabel : option.label }}</span>
-              </slot>
-              <MIcon
-                v-if="!option.created && isSelected(option.value)"
-                class="m-select__check"
-                name="check"
-                size="sm"
-              />
-            </button>
+            <template v-for="row in menuRows" :key="row.key">
+              <div
+                v-if="row.type === 'group'"
+                class="m-select__group-label"
+                role="presentation"
+              >
+                {{ row.label }}
+              </div>
+              <button
+                v-else
+                class="m-select__option"
+                :class="{
+                  'm-select__option--selected': !row.option.created && isSelected(row.option.value),
+                  'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === row.option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(row.option.created),
+                  'm-select__option--create': row.option.created,
+                }"
+                type="button"
+                role="option"
+                :aria-selected="row.option.created ? undefined : isSelected(row.option.value)"
+                :disabled="row.option.disabled"
+                @mouseenter="!row.option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === row.option.value && Boolean(item.created) === Boolean(row.option.created)))"
+                @click="selectOption(row.option)"
+              >
+                <slot name="option" :option="row.option">
+                  <span>{{ row.option.created ? createLabel : row.option.label }}</span>
+                </slot>
+                <MIcon
+                  v-if="!row.option.created && isSelected(row.option.value)"
+                  class="m-select__check"
+                  name="check"
+                  size="sm"
+                />
+              </button>
+            </template>
             <div v-if="!menuOptions.length && !resolvedLoading" class="m-select__empty" role="status">
               {{ resolvedEmptyMessage }}
             </div>
@@ -580,6 +677,9 @@ onBeforeUnmount(() => {
             role="status"
           >
             {{ resolvedEmptyMessage }}
+          </div>
+          <div v-if="$slots.footer" class="m-select__footer">
+            <slot name="footer" />
           </div>
         </div>
       </Transition>

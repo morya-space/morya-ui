@@ -151,6 +151,17 @@ interface SelectOption {
 }
 ```
 
+<h3 id="SelectOptionGroup">SelectOptionGroup</h3>
+
+[`Select`](/components/Select) 选项分组（混入 `options` 渲染分组标题行）：
+
+```ts
+interface SelectOptionGroup {
+  label: string
+  items: SelectOption[]
+}
+```
+
 <h3 id="SelectModelValue">SelectModelValue</h3>
 
 ```ts

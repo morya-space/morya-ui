@@ -62,6 +62,20 @@ import { MSelect } from 'morya-ui'
 ```vue preview src="./demos/Tag.vue"
 ```
 
+## Group
+
+`options` 可混入 `{ label, items }` 分组（[SelectOptionGroup](/docs/types#SelectOptionGroup)），菜单显示分组标题行；分组本身不可选，`filter` 会按组内选项过滤并隐藏空组。
+
+```vue preview src="./demos/Group.vue"
+```
+
+## Header / Footer
+
+`header` / `footer` 插槽在浮窗列表的上方 / 下方渲染自定义内容（如说明文字、「新建」入口），不随选项列表滚动。
+
+```vue preview src="./demos/HeaderFooter.vue"
+```
+
 ## Remote
 
 `remote` 关闭本地筛选，输入时发出 `search`。用 `loading` 表示异步进行中。
@@ -92,7 +106,7 @@ import { MSelect } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `modelValue` | `string \| number \| Array<string \| number>` | — | 选中值；`multiple` 时为数组。 |
-| `options` | [SelectOption](/docs/types#SelectOption)`[]` | — | 选项列表。 |
+| `options` | `Array<`[SelectOption](/docs/types#SelectOption)` \| `[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | — | 选项列表；可混入 `{ label, items }` 分组。 |
 | `label` | `string` | — | 字段标签。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
@@ -138,6 +152,8 @@ import { MSelect } from 'morya-ui'
 | --- | --- |
 | `value` | 自定义触发器展示（单选）。 |
 | `option` | 选项 `{ option }`。 |
+| `header` | 浮窗列表上方的自定义内容。 |
+| `footer` | 浮窗列表下方的自定义内容。 |
 
 ## 类型
 
@@ -148,6 +164,15 @@ interface SelectOption {
   label: string
   value: string | number
   disabled?: boolean
+}
+```
+
+<h4 id="SelectOptionGroup">SelectOptionGroup</h4>
+
+```ts
+interface SelectOptionGroup {
+  label: string
+  items: SelectOption[]
 }
 ```
 

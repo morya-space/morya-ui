@@ -214,4 +214,87 @@ describe('muSelect', () => {
     await wrapper.get('[role="combobox"]').trigger('click')
     expect(wrapper.find('.custom-option').text()).toBe('Small?')
   })
+
+  it('renders option groups and selects a grouped value', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        options: [
+          {
+            label: 'Fruit',
+            items: [
+              { label: 'Apple', value: 'apple' },
+              { label: 'Banana', value: 'banana' },
+            ],
+          },
+          { label: 'Loose', value: 'loose' },
+        ],
+      },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+
+    const groupLabels = wrapper.findAll('.m-select__group-label')
+    expect(groupLabels).toHaveLength(1)
+    expect(groupLabels[0]!.text()).toBe('Fruit')
+    expect(wrapper.findAll('[role="option"]')).toHaveLength(3)
+
+    await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([['banana']])
+    await wrapper.setProps({ modelValue: 'banana' })
+    expect(wrapper.get('[role="combobox"]').text()).toContain('Banana')
+  })
+
+  it('filters grouped options and drops empty groups', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        filter: true,
+        teleport: false,
+        options: [
+          { label: 'Fruit', items: [{ label: 'Apple', value: 'apple' }] },
+          { label: 'Vegetable', items: [{ label: 'Carrot', value: 'carrot' }] },
+        ],
+      },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await wrapper.get('.m-select__filter').setValue('carr')
+    await nextTick()
+
+    expect(wrapper.findAll('[role="option"]')).toHaveLength(1)
+    const groupLabels = wrapper.findAll('.m-select__group-label')
+    expect(groupLabels).toHaveLength(1)
+    expect(groupLabels[0]!.text()).toBe('Vegetable')
+  })
+
+  it('keeps keyboard highlight on options when groups are present', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        options: [
+          { label: 'Group', items: [{ label: 'One', value: 'one' }] },
+          { label: 'Two', value: 'two' },
+        ],
+      },
+    })
+    await wrapper.get('[role="combobox"]').trigger('keydown', { key: 'ArrowDown' })
+    await wrapper.get('[role="listbox"]').trigger('keydown', { key: 'ArrowDown' })
+    await wrapper.get('[role="listbox"]').trigger('keydown', { key: 'Enter' })
+    expect(wrapper.emitted('update:modelValue')).toEqual([['two']])
+  })
+
+  it('renders header and footer slots around the list', async () => {
+    const wrapper = mount(MSelect, {
+      props: { options, teleport: false },
+      slots: {
+        header: '<div class="custom-header">Select a size</div>',
+        footer: '<div class="custom-footer">3 options</div>',
+      },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+
+    const menu = wrapper.get('.m-select__menu')
+    expect(menu.find('.custom-header').text()).toBe('Select a size')
+    expect(menu.find('.custom-footer').text()).toBe('3 options')
+    expect(menu.element.firstElementChild?.classList.contains('m-select__header')).toBe(true)
+    expect(menu.element.lastElementChild?.classList.contains('m-select__footer')).toBe(true)
+  })
 })

@@ -163,3 +163,32 @@
     min-height: 0;
     width: 100%;
 }
+
+.m-select__group-label {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-xs);
+    padding: var(--m-space-2) var(--m-control-padding-x-medium) var(--m-space-1);
+}
+
+/* Virtual rows are fixed-height: center the group label like an option row. */
+.m-select__list--virtual .m-select__group-label {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.m-select__header,
+.m-select__footer {
+    flex: 0 0 auto;
+    padding: var(--m-space-2) var(--m-control-padding-x-medium);
+}
+
+/* Header/footer live outside the scroll list; let the menu grow past the list
+   cap so the panel's overflow:hidden does not clip them. */
+.m-select__menu:has(.m-select__header),
+.m-select__menu:has(.m-select__footer) {
+    max-height: none;
+}

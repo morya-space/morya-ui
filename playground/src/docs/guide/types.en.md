@@ -149,6 +149,17 @@ interface SelectOption {
 }
 ```
 
+<h3 id="SelectOptionGroup">SelectOptionGroup</h3>
+
+[`Select`](/components/Select) option group (mix into `options` to render a group header row):
+
+```ts
+interface SelectOptionGroup {
+  label: string
+  items: SelectOption[]
+}
+```
+
 <h3 id="SelectModelValue">SelectModelValue</h3>
 
 ```ts
