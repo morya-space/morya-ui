@@ -30,10 +30,15 @@
     box-shadow: var(--m-shadow-md);
     display: grid;
     gap: var(--m-space-1);
+    max-width: calc(100vw - 2 * var(--m-space-4));
     min-width: var(--m-dropdown-menu-min-width);
     padding: var(--m-space-1);
     position: absolute;
     top: calc(100% + var(--m-space-2));
+    /* Grow with the content: the default shrink-to-fit width of an abs/fixed
+       box is clamped by its containing block (the trigger width when not
+       teleported), so long items would be clipped instead of widening the menu. */
+    width: max-content;
     z-index: var(--m-z-popper);
 }
 

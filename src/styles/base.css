@@ -164,9 +164,13 @@
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
     max-height: var(--m-dropdown-submenu-max-height);
+    max-width: calc(100vw - 2 * var(--m-space-4));
     min-width: 10rem;
     overflow: hidden;
     padding: var(--m-space-1);
+    /* Same as .m-dropdown__menu: size to content instead of being clamped
+       by the space left of the anchor in the viewport. */
+    width: max-content;
 }
 
 .m-dropdown__submenu--teleported {
