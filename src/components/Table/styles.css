@@ -393,26 +393,6 @@
     background: var(--m-table-expanded-bg) !important;
 }
 
-.m-table__loading {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.m-table__loading-mask {
-    position: absolute;
-    inset: 0;
-    background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
-}
-
-.m-table__loading-body {
-    position: relative;
-    z-index: 1;
-}
-
 .m-table__message {
     position: sticky;
     left: 0;

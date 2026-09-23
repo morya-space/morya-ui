@@ -47,7 +47,17 @@ describe('muDataView', () => {
     const wrapper = mount(MDataView, {
       props: { value: ['a'], loading: true },
     })
-    expect(wrapper.find('.m-dataview__loading').exists()).toBe(true)
+    expect(wrapper.find('.m-loading-mask').exists()).toBe(true)
+    expect(wrapper.find('.m-loading-indicator').exists()).toBe(true)
+  })
+
+  it('renders a custom loading slot as the mask indicator', () => {
+    const wrapper = mount(MDataView, {
+      props: { value: ['a'], loading: true },
+      slots: { loading: '<em class="custom-loading">载入中</em>' },
+    })
+    expect(wrapper.get('.m-loading-mask .custom-loading').text()).toBe('载入中')
+    expect(wrapper.find('.m-loading-indicator').exists()).toBe(false)
   })
 
   it('supports controlled page via v-model:page', async () => {

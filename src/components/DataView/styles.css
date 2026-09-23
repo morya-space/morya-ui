@@ -43,26 +43,6 @@
     align-self: center;
 }
 
-.m-dataview__loading {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.m-dataview__loading-mask {
-    position: absolute;
-    inset: 0;
-    background: color-mix(in srgb, var(--m-color-surface) 72%, transparent);
-}
-
-.m-dataview__loading-body {
-    position: relative;
-    z-index: 1;
-}
-
 .m-dataview__message {
     display: flex;
     align-items: center;

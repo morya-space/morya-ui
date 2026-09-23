@@ -1,5 +1,5 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Loading/styles.css'
 import '../Pagination/styles.css'
-import '../ProgressSpinner/styles.css'
 import './styles.css'

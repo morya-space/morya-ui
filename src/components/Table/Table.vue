@@ -10,8 +10,8 @@ import { useRootParts } from '../../shared/useComponentAttrs'
 import { useControllable } from '../../shared/useControllable'
 import MCheckbox from '../Checkbox/Checkbox.vue'
 import MIcon from '../Icon/Icon.vue'
+import MLoading from '../Loading/Loading.vue'
 import MPagination from '../Pagination/Pagination.vue'
-import MProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
 import MRadio from '../Radio/Radio.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MTooltip from '../Tooltip/Tooltip.vue'
@@ -611,237 +611,234 @@ defineExpose({
     :class="tableRootClass"
     :aria-label="ariaLabel || undefined"
   >
-    <MScrollbar
-      ref="scrollbarRef"
-      class="m-table__scrollbar"
-      :height="tableHeightPx || undefined"
-      :wrap-style="scrollbarWrapStyle"
-      :wrap-class="mainWrapClass"
-      noresize
-      @scroll="onScrollbarScroll"
-    >
-      <div class="m-table__surface" :aria-busy="loading || undefined">
-        <table :id="tableNodeId || undefined">
-          <colgroup>
-            <col
-              v-for="(header, index) in headersForRender"
-              :key="index"
-              :style="getColStyle(header)"
-            >
-          </colgroup>
-          <slot v-if="slots['customize-headers']" name="customize-headers" />
-          <thead
-            v-else-if="headersForRender.length && showHeaderComputed"
-            class="m-table__header"
-            :class="[headerClassName]"
-          >
-            <tr>
-              <th
+    <MLoading :loading="loading" size="sm">
+      <MScrollbar
+        ref="scrollbarRef"
+        class="m-table__scrollbar"
+        :height="tableHeightPx || undefined"
+        :wrap-style="scrollbarWrapStyle"
+        :wrap-class="mainWrapClass"
+        noresize
+        @scroll="onScrollbarScroll"
+      >
+        <div class="m-table__surface" :aria-busy="loading || undefined">
+          <table :id="tableNodeId || undefined">
+            <colgroup>
+              <col
                 v-for="(header, index) in headersForRender"
                 :key="index"
-                :class="headerCellClass(header, index)"
-                :style="getFixedDistance(header.value)"
-                :aria-sort="getAriaSort(header)"
-                :tabindex="header.sortable ? 0 : undefined"
-                @click.stop="onSortHeaderClick(header)"
-                @keydown="onSortHeaderKeydown(header, $event)"
+                :style="getColStyle(header)"
               >
-                <div
-                  v-if="header.text === 'checkbox'"
-                  class="m-table__cell-inner m-table__cell-inner--selection"
-                >
-                  <MCheckbox
-                    :key="multipleSelectStatus"
-                    :model-value="multipleSelectStatus === 'allSelected'"
-                    :indeterminate="multipleSelectStatus === 'partSelected'"
-                    :aria-label="locale.selectAllPage"
-                    @update:model-value="toggleSelectAll"
-                    @click.stop
-                  />
-                </div>
-                <div
-                  v-else-if="header.value === 'radio'"
-                  class="m-table__cell-inner m-table__cell-inner--selection"
-                />
-                <span v-else :class="headerInnerClass()">
-                  <slot v-if="slots[`header-${header.value}`]" :name="`header-${header.value}`" v-bind="header" />
-                  <slot v-else-if="slots[`header-${header.value.toLowerCase()}`]" :name="`header-${header.value.toLowerCase()}`" v-bind="header" />
-                  <slot v-else-if="slots.header" name="header" v-bind="header" />
-                  <span v-else class="m-table__header-text" :title="header.text">{{ header.text }}</span>
-                  <span v-if="header.sortable" class="m-table__sort" aria-hidden="true">
-                    <MIcon
-                      name="triangle-up"
-                      class="m-table__sort-icon m-table__sort-icon--ascending"
-                    />
-                    <MIcon
-                      name="triangle-down"
-                      class="m-table__sort-icon m-table__sort-icon--descending"
-                    />
-                  </span>
-                  <span v-if="multiSort && isMultiSorting(header.value)" class="m-table__multi-sort-number">
-                    {{ getMultiSortNumber(header.value) }}
-                  </span>
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <slot v-if="ifHasBodySlot" name="body" v-bind="pageItems" />
-          <tbody
-            v-else-if="headerColumns.length"
-            class="m-table__body"
-          >
-            <slot
-              name="body-prepend"
-              v-bind="{
-                items: pageItems,
-                pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage },
-                headers: headersForRender,
-              }"
-            />
-            <template v-for="(item, index) in pageItems" :key="getRowKey(item, index)">
-              <tr
-                :class="[
-                  {
-                    'm-table__row--striped': resolvedStriped && (index + 1) % 2 === 0,
-                    'm-table__row--selected': isRowSelected(item, index),
-                    'm-table__row--current': isCurrentRow(item, index),
-                  },
-                  typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, index + 1),
-                ]"
-                @click="($event) => {
-                  onRowClick(item, index, 'single', $event)
-                  clickRowToExpand && toggleExpandRow(item, index, $event)
-                }"
-                @dblclick="($event) => onRowClick(item, index, 'double', $event)"
-                @contextmenu="($event) => contextMenuRow(item, $event)"
-              >
-                <td
-                  v-for="(column, i) in headerColumns"
-                  :key="i"
-                  :style="getFixedDistance(column, 'td')"
-                  :class="[
-                    {
-                      'm-table__cell--shadow': column === lastFixedColumn,
-                      'm-table__cell--shadow-end': column === firstRightFixedColumn,
-                      'm-table__cell--expand': column === 'expand',
-                      'm-table__cell--selection': column === 'checkbox' || column === 'radio',
-                    },
-                    resolveCellAlign(column),
-                    typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, index + 1),
-                  ]"
-                  @click="column === 'expand' ? toggleExpandRow(item, index, $event) : null"
+            </colgroup>
+            <slot v-if="slots['customize-headers']" name="customize-headers" />
+            <thead
+              v-else-if="headersForRender.length && showHeaderComputed"
+              class="m-table__header"
+              :class="[headerClassName]"
+            >
+              <tr>
+                <th
+                  v-for="(header, index) in headersForRender"
+                  :key="index"
+                  :class="headerCellClass(header, index)"
+                  :style="getFixedDistance(header.value)"
+                  :aria-sort="getAriaSort(header)"
+                  :tabindex="header.sortable ? 0 : undefined"
+                  @click.stop="onSortHeaderClick(header)"
+                  @keydown="onSortHeaderKeydown(header, $event)"
                 >
                   <div
-                    class="m-table__cell-inner"
-                    :class="{
-                      'm-table__cell-inner--expand': column === 'expand',
-                      'm-table__cell-inner--selection': column === 'checkbox' || column === 'radio',
-                    }"
+                    v-if="header.text === 'checkbox'"
+                    class="m-table__cell-inner m-table__cell-inner--selection"
                   >
-                    <slot
-                      v-if="slots[`cell-${column}`]"
-                      :name="`cell-${column}`"
-                      v-bind="cellSlotProps(column, item)"
+                    <MCheckbox
+                      :key="multipleSelectStatus"
+                      :model-value="multipleSelectStatus === 'allSelected'"
+                      :indeterminate="multipleSelectStatus === 'partSelected'"
+                      :aria-label="locale.selectAllPage"
+                      @update:model-value="toggleSelectAll"
+                      @click.stop
                     />
-                    <slot
-                      v-else-if="slots[`cell-${column.toLowerCase()}`]"
-                      :name="`cell-${column.toLowerCase()}`"
-                      v-bind="cellSlotProps(column, item)"
-                    />
-                    <template v-else-if="column === 'expand'">
-                      <button
-                        type="button"
-                        class="m-table__expand-btn"
-                        :class="{ 'm-table__expand-btn--expanded': isRowExpanded(item, index) }"
-                        :aria-expanded="isRowExpanded(item, index)"
-                        :aria-label="locale.expand"
-                        @click.stop="toggleExpandRow(item, index, $event)"
-                      >
-                        <MIcon name="chevron-right" />
-                      </button>
-                    </template>
-                    <template v-else-if="column === 'checkbox'">
-                      <MCheckbox
-                        :model-value="Boolean((item as TableItem).checkbox)"
-                        :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
-                        @update:model-value="toggleSelectItem(item)"
-                        @click.stop
-                      />
-                    </template>
-                    <template v-else-if="column === 'radio'">
-                      <MRadio
-                        :model-value="singleSelectedRowKey ?? undefined"
-                        :value="getRowKey(item, index)"
-                        :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
-                        @update:model-value="onSingleSelect(item)"
-                        @click.stop
-                      />
-                    </template>
-                    <slot
-                      v-else-if="slots['body-cell']"
-                      name="body-cell"
-                      v-bind="{ column, item, row: item, value: getItemValue(column, item) }"
-                    />
-                    <template v-else-if="columnRenderMap.get(column)">
-                      <span class="m-table__cell-text">{{ columnRenderMap.get(column)!(item) }}</span>
-                    </template>
-                    <MTooltip
-                      v-else
-                      :content="generateColumnContent(column, item)"
-                      :disabled="!columnOverflowTooltip(column)"
-                    >
-                      <span class="m-table__tooltip-trigger">
-                        <span class="m-table__cell-text">{{ generateColumnContent(column, item) }}</span>
-                      </span>
-                    </MTooltip>
                   </div>
-                </td>
+                  <div
+                    v-else-if="header.value === 'radio'"
+                    class="m-table__cell-inner m-table__cell-inner--selection"
+                  />
+                  <span v-else :class="headerInnerClass()">
+                    <slot v-if="slots[`header-${header.value}`]" :name="`header-${header.value}`" v-bind="header" />
+                    <slot v-else-if="slots[`header-${header.value.toLowerCase()}`]" :name="`header-${header.value.toLowerCase()}`" v-bind="header" />
+                    <slot v-else-if="slots.header" name="header" v-bind="header" />
+                    <span v-else class="m-table__header-text" :title="header.text">{{ header.text }}</span>
+                    <span v-if="header.sortable" class="m-table__sort" aria-hidden="true">
+                      <MIcon
+                        name="triangle-up"
+                        class="m-table__sort-icon m-table__sort-icon--ascending"
+                      />
+                      <MIcon
+                        name="triangle-down"
+                        class="m-table__sort-icon m-table__sort-icon--descending"
+                      />
+                    </span>
+                    <span v-if="multiSort && isMultiSorting(header.value)" class="m-table__multi-sort-number">
+                      {{ getMultiSortNumber(header.value) }}
+                    </span>
+                  </span>
+                </th>
               </tr>
-              <tr
-                v-if="ifHasExpandSlot && isRowExpanded(item, index)"
-                :class="[
-                  { 'm-table__row--striped': resolvedStriped && (index + 1) % 2 === 0 },
-                  typeof bodyExpandRowClassName === 'string' ? bodyExpandRowClassName : bodyExpandRowClassName(item, index + 1),
-                ]"
-              >
-                <td :colspan="headersForRender.length" class="m-table__cell--expanded">
-                  <TableLoadingLine v-if="(item as TableItem).expandLoading" class="expand-loading" />
-                  <slot name="expansion" v-bind="{ row: item }" />
-                </td>
-              </tr>
-            </template>
-            <slot
-              name="body-append"
-              v-bind="{
-                items: pageItems,
-                pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage, updatePage },
-                headers: headersForRender,
-              }"
-            />
-          </tbody>
-        </table>
+            </thead>
+            <slot v-if="ifHasBodySlot" name="body" v-bind="pageItems" />
+            <tbody
+              v-else-if="headerColumns.length"
+              class="m-table__body"
+            >
+              <slot
+                name="body-prepend"
+                v-bind="{
+                  items: pageItems,
+                  pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage },
+                  headers: headersForRender,
+                }"
+              />
+              <template v-for="(item, index) in pageItems" :key="getRowKey(item, index)">
+                <tr
+                  :class="[
+                    {
+                      'm-table__row--striped': resolvedStriped && (index + 1) % 2 === 0,
+                      'm-table__row--selected': isRowSelected(item, index),
+                      'm-table__row--current': isCurrentRow(item, index),
+                    },
+                    typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, index + 1),
+                  ]"
+                  @click="($event) => {
+                    onRowClick(item, index, 'single', $event)
+                    clickRowToExpand && toggleExpandRow(item, index, $event)
+                  }"
+                  @dblclick="($event) => onRowClick(item, index, 'double', $event)"
+                  @contextmenu="($event) => contextMenuRow(item, $event)"
+                >
+                  <td
+                    v-for="(column, i) in headerColumns"
+                    :key="i"
+                    :style="getFixedDistance(column, 'td')"
+                    :class="[
+                      {
+                        'm-table__cell--shadow': column === lastFixedColumn,
+                        'm-table__cell--shadow-end': column === firstRightFixedColumn,
+                        'm-table__cell--expand': column === 'expand',
+                        'm-table__cell--selection': column === 'checkbox' || column === 'radio',
+                      },
+                      resolveCellAlign(column),
+                      typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, index + 1),
+                    ]"
+                    @click="column === 'expand' ? toggleExpandRow(item, index, $event) : null"
+                  >
+                    <div
+                      class="m-table__cell-inner"
+                      :class="{
+                        'm-table__cell-inner--expand': column === 'expand',
+                        'm-table__cell-inner--selection': column === 'checkbox' || column === 'radio',
+                      }"
+                    >
+                      <slot
+                        v-if="slots[`cell-${column}`]"
+                        :name="`cell-${column}`"
+                        v-bind="cellSlotProps(column, item)"
+                      />
+                      <slot
+                        v-else-if="slots[`cell-${column.toLowerCase()}`]"
+                        :name="`cell-${column.toLowerCase()}`"
+                        v-bind="cellSlotProps(column, item)"
+                      />
+                      <template v-else-if="column === 'expand'">
+                        <button
+                          type="button"
+                          class="m-table__expand-btn"
+                          :class="{ 'm-table__expand-btn--expanded': isRowExpanded(item, index) }"
+                          :aria-expanded="isRowExpanded(item, index)"
+                          :aria-label="locale.expand"
+                          @click.stop="toggleExpandRow(item, index, $event)"
+                        >
+                          <MIcon name="chevron-right" />
+                        </button>
+                      </template>
+                      <template v-else-if="column === 'checkbox'">
+                        <MCheckbox
+                          :model-value="Boolean((item as TableItem).checkbox)"
+                          :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
+                          @update:model-value="toggleSelectItem(item)"
+                          @click.stop
+                        />
+                      </template>
+                      <template v-else-if="column === 'radio'">
+                        <MRadio
+                          :model-value="singleSelectedRowKey ?? undefined"
+                          :value="getRowKey(item, index)"
+                          :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + index))"
+                          @update:model-value="onSingleSelect(item)"
+                          @click.stop
+                        />
+                      </template>
+                      <slot
+                        v-else-if="slots['body-cell']"
+                        name="body-cell"
+                        v-bind="{ column, item, row: item, value: getItemValue(column, item) }"
+                      />
+                      <template v-else-if="columnRenderMap.get(column)">
+                        <span class="m-table__cell-text">{{ columnRenderMap.get(column)!(item) }}</span>
+                      </template>
+                      <MTooltip
+                        v-else
+                        :content="generateColumnContent(column, item)"
+                        :disabled="!columnOverflowTooltip(column)"
+                      >
+                        <span class="m-table__tooltip-trigger">
+                          <span class="m-table__cell-text">{{ generateColumnContent(column, item) }}</span>
+                        </span>
+                      </MTooltip>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  v-if="ifHasExpandSlot && isRowExpanded(item, index)"
+                  :class="[
+                    { 'm-table__row--striped': resolvedStriped && (index + 1) % 2 === 0 },
+                    typeof bodyExpandRowClassName === 'string' ? bodyExpandRowClassName : bodyExpandRowClassName(item, index + 1),
+                  ]"
+                >
+                  <td :colspan="headersForRender.length" class="m-table__cell--expanded">
+                    <TableLoadingLine v-if="(item as TableItem).expandLoading" />
+                    <slot name="expansion" v-bind="{ row: item }" />
+                  </td>
+                </tr>
+              </template>
+              <slot
+                name="body-append"
+                v-bind="{
+                  items: pageItems,
+                  pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage, updatePage },
+                  headers: headersForRender,
+                }"
+              />
+            </tbody>
+          </table>
 
-        <div v-if="loading" class="m-table__loading">
-          <div class="m-table__loading-mask" />
-          <div class="m-table__loading-body">
-            <slot v-if="ifHasLoadingSlot" name="loading" />
-            <MProgressSpinner v-else size="sm" />
+          <div v-if="!pageItems.length && !loading" class="m-table__message" role="status">
+            <slot v-if="slots.empty" name="empty" />
+            <slot v-else name="empty">
+              <p class="m-table__empty-text">
+                {{ resolvedEmptyMessage }}
+              </p>
+              <p v-if="emptyDescription" class="m-table__empty-description">
+                {{ emptyDescription }}
+              </p>
+            </slot>
           </div>
         </div>
-
-        <div v-if="!pageItems.length && !loading" class="m-table__message" role="status">
-          <slot v-if="slots.empty" name="empty" />
-          <slot v-else name="empty">
-            <p class="m-table__empty-text">
-              {{ resolvedEmptyMessage }}
-            </p>
-            <p v-if="emptyDescription" class="m-table__empty-description">
-              {{ emptyDescription }}
-            </p>
-          </slot>
-        </div>
-      </div>
-    </MScrollbar>
+      </MScrollbar>
+      <template v-if="ifHasLoadingSlot" #indicator>
+        <slot name="loading" />
+      </template>
+    </MLoading>
 
     <div v-if="paginator" class="m-table__footer">
       <div class="m-table__items-index">

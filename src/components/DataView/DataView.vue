@@ -4,8 +4,8 @@ import type { DataViewEmits, DataViewProps } from './types'
 import { computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import MLoading from '../Loading/Loading.vue'
 import MPagination from '../Pagination/Pagination.vue'
-import MProgressSpinner from '../ProgressSpinner/ProgressSpinner.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DataViewProps>(), {
@@ -74,38 +74,35 @@ watch(
     <div v-if="slots.header" class="m-dataview__header">
       <slot name="header" />
     </div>
-    <div class="m-dataview__content">
-      <slot v-if="layout === 'list'" name="list" :items="pagedValue">
-        <ul v-if="pagedValue.length" class="m-dataview__list">
-          <li v-for="(item, index) in pagedValue" :key="index" class="m-dataview__list-item">
-            {{ item }}
-          </li>
-        </ul>
-      </slot>
-      <slot v-else name="grid" :items="pagedValue">
-        <div v-if="pagedValue.length" class="m-dataview__grid">
-          <div v-for="(item, index) in pagedValue" :key="index" class="m-dataview__grid-item">
-            {{ item }}
-          </div>
-        </div>
-      </slot>
-
-      <div v-if="loading" class="m-dataview__loading">
-        <div class="m-dataview__loading-mask" />
-        <div class="m-dataview__loading-body">
-          <slot v-if="slots.loading" name="loading" />
-          <MProgressSpinner v-else size="sm" />
-        </div>
-      </div>
-
-      <div v-if="isEmpty && !loading" class="m-dataview__message" role="status">
-        <slot name="empty">
-          <p class="m-dataview__empty-text">
-            {{ resolvedEmptyMessage }}
-          </p>
+    <MLoading :loading="loading" size="sm">
+      <div class="m-dataview__content">
+        <slot v-if="layout === 'list'" name="list" :items="pagedValue">
+          <ul v-if="pagedValue.length" class="m-dataview__list">
+            <li v-for="(item, index) in pagedValue" :key="index" class="m-dataview__list-item">
+              {{ item }}
+            </li>
+          </ul>
         </slot>
+        <slot v-else name="grid" :items="pagedValue">
+          <div v-if="pagedValue.length" class="m-dataview__grid">
+            <div v-for="(item, index) in pagedValue" :key="index" class="m-dataview__grid-item">
+              {{ item }}
+            </div>
+          </div>
+        </slot>
+
+        <div v-if="isEmpty && !loading" class="m-dataview__message" role="status">
+          <slot name="empty">
+            <p class="m-dataview__empty-text">
+              {{ resolvedEmptyMessage }}
+            </p>
+          </slot>
+        </div>
       </div>
-    </div>
+      <template v-if="slots.loading" #indicator>
+        <slot name="loading" />
+      </template>
+    </MLoading>
     <MPagination
       v-if="paginator"
       v-model="page"

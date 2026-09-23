@@ -81,8 +81,23 @@ describe('mTable', () => {
         paginator: false,
       },
     })
-    expect(wrapper.find('.m-table__loading').exists()).toBe(true)
+    expect(wrapper.find('.m-loading-mask').exists()).toBe(true)
+    expect(wrapper.find('.m-loading-indicator').exists()).toBe(true)
     expect(wrapper.find('.m-table__message').exists()).toBe(false)
+  })
+
+  it('renders a custom loading slot as the mask indicator', () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns,
+        rows: [],
+        loading: true,
+        paginator: false,
+      },
+      slots: { loading: '<em class="custom-loading">载入中</em>' },
+    })
+    expect(wrapper.get('.m-loading-mask .custom-loading').text()).toBe('载入中')
+    expect(wrapper.find('.m-loading-indicator').exists()).toBe(false)
   })
 
   it('sorts rows when sortable header is clicked', async () => {
