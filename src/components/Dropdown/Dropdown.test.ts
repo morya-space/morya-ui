@@ -1,6 +1,6 @@
 import type { DropdownItem } from './types'
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 import MDropdown from './Dropdown.vue'
 
@@ -77,5 +77,43 @@ describe('muDropdown', () => {
     expect(submenu?.textContent).toContain('Deep')
     await submenu!.querySelector('.m-dropdown__item')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ value: 'deep' })
+    wrapper.unmount()
+  })
+
+  it('stays open while a teleported submenu panel is hovered (hover trigger)', async () => {
+    document.body.innerHTML = ''
+    vi.useFakeTimers()
+    const wrapper = mount(MDropdown, {
+      props: {
+        modelValue: true,
+        trigger: 'hover',
+        hideDelay: 200,
+        items: [{ value: 'more', label: 'More', items: [{ value: 'deep', label: 'Deep' }] }],
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    const menu = document.body.querySelector('.m-dropdown__menu') as HTMLElement
+    const wrap = menu.querySelector('.m-dropdown__submenu-wrap') as HTMLElement
+    wrap.dispatchEvent(new MouseEvent('mouseenter'))
+    await nextTick()
+    const submenu = document.body.querySelector('.m-dropdown__submenu--teleported') as HTMLElement
+    expect(submenu).toBeTruthy()
+
+    // Moving from the menu into the teleported panel fires the menu's
+    // mouseleave; the panel's mouseenter must cancel the pending close.
+    menu.dispatchEvent(new MouseEvent('mouseleave'))
+    submenu.dispatchEvent(new MouseEvent('mouseenter'))
+    await nextTick()
+    await vi.advanceTimersByTimeAsync(300)
+    expect(wrapper.emitted('update:modelValue') ?? []).not.toContainEqual([false])
+    expect(document.body.querySelector('.m-dropdown__submenu--teleported')).toBeTruthy()
+
+    // Leaving the panel to the outside closes the whole hover menu.
+    submenu.dispatchEvent(new MouseEvent('mouseleave'))
+    await vi.advanceTimersByTimeAsync(250)
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
+    vi.useRealTimers()
+    wrapper.unmount()
   })
 })

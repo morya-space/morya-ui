@@ -32,6 +32,7 @@
     gap: var(--m-space-1);
     max-width: calc(100vw - 2 * var(--m-space-4));
     min-width: var(--m-dropdown-menu-min-width);
+    overflow: hidden;
     padding: var(--m-space-1);
     position: absolute;
     top: calc(100% + var(--m-space-2));
@@ -76,14 +77,19 @@
     cursor: pointer;
     display: flex;
     font-family: var(--m-font-sans);
-    font-size: var(--m-font-size-md);
-    min-height: var(--m-menu-item-height);
-    padding: var(--m-space-2) var(--m-space-3);
+    font-size: var(--m-control-font-medium);
+    gap: var(--m-space-2);
+    min-height: var(--m-control-height-medium);
+    padding: 0 var(--m-control-padding-x-medium);
     text-align: left;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
         color var(--m-motion-fast) var(--m-motion-ease);
     white-space: nowrap;
+}
+
+.m-dropdown__caret {
+    margin-left: auto;
 }
 
 .m-dropdown__item:hover:not(:disabled),
@@ -93,7 +99,8 @@
 }
 
 .m-dropdown__item:focus-visible {
-    box-shadow: var(--m-focus-shadow);
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    box-shadow: none;
     outline: none;
 }
 
@@ -109,8 +116,15 @@
     margin: var(--m-space-1) 0;
 }
 
+/* Groups nest items in a wrapper div, outside the scroll-view grid: restate
+   the grid so grouped items keep the same gap rhythm and stretch full width. */
+.m-dropdown__group {
+    display: grid;
+    gap: var(--m-space-1);
+}
+
 .m-dropdown__group-label {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
-    padding: var(--m-space-2) var(--m-space-3) var(--m-space-1);
+    padding: var(--m-space-2) var(--m-control-padding-x-medium) var(--m-space-1);
 }

@@ -240,6 +240,8 @@ onBeforeUnmount(() => {
               :highlighted-value="highlightedValue"
               @select="selectItem"
               @highlight="(value) => (highlightedIndex = enabledItems.findIndex((item) => item.value === value))"
+              @submenu-enter="onMenuEnter"
+              @submenu-leave="onMenuLeave"
             >
               <template v-if="$slots.item" #item="{ item }">
                 <slot name="item" :item="item" />

@@ -15,6 +15,17 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'select', item: DropdownItem): void
   (event: 'highlight', value: string | undefined): void
+  /* Submenu panels are teleported out of the menu DOM, so the root Dropdown
+     cannot see hover on them; forward enter/leave up the recursion chain to
+     keep hover-trigger menus from closing while a submenu is hovered. */
+  (event: 'submenuEnter'): void
+  (event: 'submenuLeave'): void
+}>()
+
+/* Explicit slot typing: the recursive self-reference would otherwise make the
+   forwarded #item slot props circular and uninferable. */
+defineSlots<{
+  item?: (props: { item: DropdownItem }) => unknown
 }>()
 
 const openValue = ref<string | null>(null)
@@ -66,10 +77,12 @@ function onLeave() {
 
 function onSubmenuEnter() {
   clearHideTimer()
+  emit('submenuEnter')
 }
 
 function onSubmenuLeave() {
   scheduleClose()
+  emit('submenuLeave')
 }
 </script>
 
@@ -86,7 +99,13 @@ function onSubmenuLeave() {
         :highlighted-value="highlightedValue"
         @select="$emit('select', $event)"
         @highlight="$emit('highlight', $event)"
-      />
+        @submenu-enter="onSubmenuEnter"
+        @submenu-leave="onSubmenuLeave"
+      >
+        <template v-if="$slots.item" #item="{ item: childItem }">
+          <slot name="item" :item="childItem" />
+        </template>
+      </DropdownNodes>
     </div>
     <div
       v-else-if="item.items?.length"
@@ -130,7 +149,13 @@ function onSubmenuLeave() {
             :highlighted-value="highlightedValue"
             @select="$emit('select', $event)"
             @highlight="$emit('highlight', $event)"
-          />
+            @submenu-enter="onSubmenuEnter"
+            @submenu-leave="onSubmenuLeave"
+          >
+            <template v-if="$slots.item" #item="{ item: childItem }">
+              <slot name="item" :item="childItem" />
+            </template>
+          </DropdownNodes>
         </MScrollbar>
       </FlyoutSubmenu>
     </div>
