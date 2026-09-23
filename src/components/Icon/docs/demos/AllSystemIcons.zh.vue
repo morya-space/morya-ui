@@ -37,10 +37,10 @@ const grouped = computed(() => getIconCategoryGroups(filteredNames.value))
 function chipStyle(id: IconCategoryId | 'all') {
   const active = category.value === id
   return [
-    'background:' + (active ? 'var(--m-color-primary-soft, color-mix(in srgb, var(--m-color-primary) 14%, transparent))' : 'var(--m-color-surface)'),
-    'border:1px solid ' + (active ? 'var(--m-color-primary)' : 'var(--m-color-border)'),
+    `background:${active ? 'var(--m-color-primary-soft, color-mix(in srgb, var(--m-color-primary) 14%, transparent))' : 'var(--m-color-surface)'}`,
+    `border:1px solid ${active ? 'var(--m-color-primary)' : 'var(--m-color-border)'}`,
     'border-radius:var(--m-radius-full, 999px)',
-    'color:' + (active ? 'var(--m-color-primary)' : 'var(--m-color-text)'),
+    `color:${active ? 'var(--m-color-primary)' : 'var(--m-color-text)'}`,
     'cursor:pointer',
     'font:inherit',
     'font-size:0.8125rem',
