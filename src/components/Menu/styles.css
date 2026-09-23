@@ -71,9 +71,13 @@
     display: flex;
     flex-direction: column;
     max-height: var(--m-menu-popup-max-height);
+    max-width: calc(100vw - 2 * var(--m-space-4));
     overflow: hidden;
     padding: var(--m-space-1) 0 var(--m-space-2);
     position: absolute;
+    /* Grow with the content: shrink-to-fit would clamp to the anchor width
+       (the containing block) when not teleported. */
+    width: max-content;
     z-index: var(--m-z-popper);
 }
 
@@ -93,6 +97,8 @@
 
 .m-menu-popup .m-menu--popup:not(.m-menu--teleported) {
     left: 0;
+    /* Keep the in-place popup at least as wide as its anchor. */
+    min-width: 100%;
     top: calc(100% + var(--m-space-2));
 }
 

@@ -167,12 +167,17 @@
     box-shadow: var(--m-shadow-md);
     list-style: none;
     margin: var(--m-space-1) 0 0;
+    max-width: calc(100vw - 2 * var(--m-space-4));
     min-width: 100%;
     padding: var(--m-space-1);
     position: absolute;
     right: 0;
     top: 100%;
     transform-origin: top right;
+    /* Grow with the content: shrink-to-fit would clamp to the button width
+       (the containing block) when not teleported. Teleported mode overrides
+       min-width with the inline button width. */
+    width: max-content;
     z-index: var(--m-z-popper);
 }
 

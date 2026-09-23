@@ -70,11 +70,15 @@
     gap: var(--m-menubar-item-gap);
     left: 0;
     max-height: var(--m-menubar-submenu-max-height);
+    max-width: calc(100vw - 2 * var(--m-space-4));
     min-width: var(--m-menubar-menu-min-width);
     overflow: hidden;
     padding: var(--m-space-1);
     position: absolute;
     top: calc(100% + var(--m-space-1));
+    /* Grow with the content: shrink-to-fit would clamp to the trigger item
+       width (the containing block) when not teleported. */
+    width: max-content;
     z-index: var(--m-z-popper);
 }
 

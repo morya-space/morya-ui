@@ -52,7 +52,12 @@ function updateSubmenuPosition() {
   const trigger = triggerEls.value[openIndex.value]
   if (!trigger) return
   const rect = trigger.getBoundingClientRect()
-  submenuStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', { gap: 4 })
+  submenuStyle.value = computeFloatingOverlayStyle(rect, 'bottom-start', {
+    gap: 4,
+    // --m-menubar-menu-min-width is defined on .m-menubar and does not cross
+    // the teleport boundary; reference the root-level shared token instead.
+    minWidth: 'var(--m-menu-min-width, 12rem)',
+  })
 }
 
 function itemKey(item: MenubarItem) {
