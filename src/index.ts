@@ -53,7 +53,7 @@ export type {
   ButtonVariant,
 } from "./components/Button/types";
 export { default as MCard } from "./components/Card/Card.vue";
-export type { CardProps, CardSize } from "./components/Card/types";
+export type { CardProps, CardShadow, CardSize } from "./components/Card/types";
 export { default as MCarousel } from "./components/Carousel/Carousel.vue";
 export type { CarouselEmits, CarouselProps } from "./components/Carousel/types";
 export { default as MCascadeSelect } from "./components/CascadeSelect/CascadeSelect.vue";
@@ -371,6 +371,7 @@ export type {
   OrderListProps,
 } from "./components/OrderList/types";
 export { default as MPageContent } from "./components/Page/PageContent.vue";
+export { default as MPageFilterChips } from "./components/Page/PageFilterChips.vue";
 export { default as MPageFilters } from "./components/Page/PageFilters.vue";
 export { default as MPageHeader } from "./components/Page/PageHeader.vue";
 export { default as MPagePlaceholder } from "./components/Page/PagePlaceholder.vue";
@@ -378,15 +379,22 @@ export { default as MPageSection } from "./components/Page/PageSection.vue";
 export { default as MPageStat } from "./components/Page/PageStat.vue";
 export { default as MPageToolbar } from "./components/Page/PageToolbar.vue";
 export type {
+  PageContentBands,
   PageContentDensity,
   PageContentProps,
   PageContentWidth,
+  PageFilterChipsProps,
   PageFiltersProps,
+  PageFiltersVariant,
   PageHeaderProps,
   PagePlaceholderProps,
   PageSectionProps,
   PageSectionVariant,
+  PageStatDensity,
+  PageStatLayout,
+  PageStatOrientation,
   PageStatProps,
+  PageStatTrendDirection,
   PageStatTrendSeverity,
   PageToolbarProps,
 } from "./components/Page/types";

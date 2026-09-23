@@ -8,6 +8,7 @@ defineOptions({ name: 'MPageContent', inheritAttrs: false })
 const props = withDefaults(defineProps<PageContentProps>(), {
   density: 'default',
   width: 'full',
+  bands: 'auto',
 })
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
@@ -18,6 +19,7 @@ const rootClass = computed(() => [
     'm-page-content--compact': props.density === 'compact',
     'm-page-content--spacious': props.density === 'spacious',
     'm-page-content--narrow': props.width === 'narrow',
+    'm-page-content--bands-uniform': props.bands === 'uniform',
   },
 ])
 </script>

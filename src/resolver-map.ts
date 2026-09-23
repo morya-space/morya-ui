@@ -67,6 +67,7 @@ export const componentImportMap: Record<string, string> = {
   "MMeterGroup": "meter-group",
   "MOrderList": "order-list",
   "MPageContent": "page",
+  "MPageFilterChips": "page",
   "MPageFilters": "page",
   "MPageHeader": "page",
   "MPagePlaceholder": "page",

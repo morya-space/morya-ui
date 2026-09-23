@@ -19,10 +19,18 @@ const hasActions = computed(() => Boolean(slots.actions))
 <template>
   <header v-bind="rootAttrs" class="m-page-header">
     <div class="m-page-header__main">
-      <component :is="titleTag" v-if="title" class="m-page-header__title">
-        {{ title }}
-      </component>
-      <slot v-else name="title" />
+      <div v-if="slots.breadcrumb" class="m-page-header__breadcrumb">
+        <slot name="breadcrumb" />
+      </div>
+      <div class="m-page-header__heading">
+        <component :is="titleTag" v-if="title" class="m-page-header__title">
+          {{ title }}
+        </component>
+        <slot v-else name="title" />
+        <span v-if="slots.tags" class="m-page-header__tags">
+          <slot name="tags" />
+        </span>
+      </div>
       <p v-if="description" class="m-page-header__description">
         {{ description }}
       </p>
