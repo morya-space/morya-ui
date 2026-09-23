@@ -368,7 +368,10 @@
 .m-layout-sider__bar-bottom {
     background: var(--m-color-text-muted);
     border-radius: var(--m-radius-sm);
-    height: calc(var(--m-space-8) + var(--m-space-2) - var(--m-space-1));
+    /* The bars overlap by --m-space-1 at the joint: the rounded tips stay
+       hidden inside each other when straight, and close the chevron vertex
+       on hover. */
+    height: calc(var(--m-space-8) + var(--m-space-2) - var(--m-space-1) / 2);
     left: calc(var(--m-space-3) + var(--m-space-1));
     position: absolute;
     transition:
@@ -382,7 +385,7 @@
 }
 
 .m-layout-sider__bar-bottom {
-    top: calc(var(--m-space-8) + var(--m-space-1));
+    top: calc(var(--m-space-8) + var(--m-space-1) / 2);
 }
 
 .m-layout-sider__trigger--bar:hover .m-layout-sider__bar-top {
