@@ -387,10 +387,41 @@
 .m-table__cell--expanded {
     padding: var(--m-space-4) calc(var(--m-table-cell-padding-inline) * 2);
     background: var(--m-table-expanded-bg);
+    position: relative;
 }
 
 .m-table__cell--expanded:hover {
     background: var(--m-table-expanded-bg) !important;
+}
+
+.m-table__loading-line {
+    background: color-mix(in srgb, var(--m-color-primary) 16%, transparent);
+    border-radius: var(--m-radius-full);
+    height: calc(var(--m-space-1) / 2);
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.m-table__loading-line::before {
+    animation: m-table-loading-line var(--m-motion-pulse) var(--m-motion-ease) infinite;
+    background: var(--m-color-primary);
+    border-radius: inherit;
+    content: '';
+    inset: 0 auto 0 0;
+    position: absolute;
+    width: 40%;
+}
+
+@keyframes m-table-loading-line {
+    0% {
+        transform: translateX(-120%);
+    }
+    100% {
+        transform: translateX(320%);
+    }
 }
 
 .m-table__message {
@@ -456,4 +487,13 @@
     html:not([data-m-ignore-reduced-motion]) .m-table__expand-btn {
         transition: none;
     }
+
+    html:not([data-m-ignore-reduced-motion]) .m-table__loading-line::before {
+        animation: none;
+    }
+}
+
+[data-m-motion="reduced"] .m-table__loading-line::before,
+[data-m-motion="none"] .m-table__loading-line::before {
+    animation: none;
 }
