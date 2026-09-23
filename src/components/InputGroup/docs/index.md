@@ -19,6 +19,12 @@ import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
+## Props
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+
 ## Slots
 
 | 名称 | 说明 |

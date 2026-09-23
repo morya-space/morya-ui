@@ -53,6 +53,14 @@ import { MButton, MPopover } from 'morya-ui'
 | `show` | — | Emitted when opened. |
 | `hide` | — | Emitted after close. |
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `show()` | Show the popover. |
+| `hide()` | Hide the popover. |
+| `toggle()` | Toggle visibility. |
+
 ## Slots
 
 | Slot | Description |

@@ -110,7 +110,22 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 
 ## Instance
 
-Exposed pagination helpers include `nextPage`, `prevPage`, `updatePage`, `currentPaginationNumber`, and `maxPaginationNumber`.
+Pagination and filter controls exposed via `ref`:
+
+| Method / Property | Description |
+| --- | --- |
+| `currentPageFirstIndex` | Index of the first record on the current page (`-1` when empty). |
+| `currentPageLastIndex` | Index of the last record on the current page. |
+| `clientItemsLength` | Total item count (server total in server mode). |
+| `maxPaginationNumber` | Last page number. |
+| `currentPaginationNumber` | Current page number. |
+| `isLastPage` / `isFirstPage` | Whether the current page is the last / first. |
+| `nextPage()` / `prevPage()` | Go to the next / previous page. |
+| `updatePage(page)` | Jump to a page. |
+| `rowsPerPageOptions` | Rows-per-page options. |
+| `rowsPerPageActiveOption` | Active rows-per-page value. |
+| `updateRowsPerPageActiveOption(n)` | Change rows per page. |
+| `setFilters(filters)` | Set filters programmatically. |
 
 ## Types
 

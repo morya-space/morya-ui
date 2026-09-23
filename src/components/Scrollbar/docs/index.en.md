@@ -78,6 +78,10 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 | id / role / ariaLabel / ariaOrientation | a11y | — | Accessible attributes for the content area |
 | tabindex | `number \| string` | — | tabindex on the wrap |
 | distance | `number` | `0` | Edge distance that triggers `end-reached` |
+| width | `string \| number` | — | Viewport width |
+| maxWidth | `string \| number` | — | Maximum width |
+| ariaMultiselectable | `boolean` | — | `aria-multiselectable` on the content area |
+| pt | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ### Events
 
@@ -88,7 +92,14 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 
 ### Expose
 
-`wrapRef`, `update`, `scrollTo`, `setScrollTop`, `setScrollLeft`, `handleScroll`
+| Method / Property | Description |
+| --- | --- |
+| `wrapRef` | Reference to the wrap element. |
+| `update()` | Recompute thumb size and position. |
+| `scrollTo(...)` | Scroll to a position (same as native `scrollTo`). |
+| `setScrollTop(y)` | Set vertical scroll offset. |
+| `setScrollLeft(x)` | Set horizontal scroll offset. |
+| `handleScroll(event)` | Wrap scroll handler; forward manually when needed. |
 
 ## Events
 

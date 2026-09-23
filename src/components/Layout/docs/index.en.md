@@ -76,6 +76,7 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 | `embedded` | `boolean` | `false` | Soft background for nested content. |
 | `position` | `'static' \| 'absolute'` | `'static'` | Positioning mode. |
 | `contentClass` / `contentStyle` | — | — | Scroll container class / style. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## LayoutSider Props
 
@@ -107,7 +108,9 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 
 ## Expose
 
-`MLayout` exposes `scrollTo(...)`.
+| Method | Description |
+| --- | --- |
+| `scrollTo(...)` | Scroll the content region; accepts `(options: ScrollToOptions)` or `(x, y)`. |
 
 ## Components
 

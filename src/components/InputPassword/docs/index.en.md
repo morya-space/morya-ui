@@ -73,6 +73,14 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 | `update:modelValue` | `string` | Value changed. |
 | `clear` | — | Emitted when the value is cleared. |
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `focus()` | Focus the underlying input. |
+| `blur()` | Blur the underlying input. |
+| `select()` | Select all text in the input. |
+
 ## Slots
 
 | Slot | Props | Description |

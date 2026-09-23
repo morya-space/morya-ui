@@ -132,6 +132,8 @@ Pass-through per DOM part. Common keys: `root`, `input`, `label`, `prefix`, `suf
 | Method | Description |
 | --- | --- |
 | `focus()` | Focus the underlying input. |
+| `blur()` | Blur the underlying input. |
+| `select()` | Select all text in the input. |
 
 ## Types
 

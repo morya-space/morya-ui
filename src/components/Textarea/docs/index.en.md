@@ -70,6 +70,14 @@ import { MTextarea } from 'morya-ui'
 | `update:modelValue` | `string` | Emitted when the value changes. |
 | `clear` | — | Emitted when the value is cleared. |
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `focus()` | Focus the underlying textarea. |
+| `blur()` | Blur the underlying textarea. |
+| `select()` | Select all text in the textarea. |
+
 ## Slots
 
 No slots.

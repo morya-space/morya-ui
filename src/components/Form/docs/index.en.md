@@ -51,6 +51,7 @@ import { MForm, MFormItem } from 'morya-ui'
 | `requireMark` | `boolean` | `true` | Required asterisk (`required` or `rules.required`) |
 | `disabled` | `boolean` | `false` | Disabled state |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| array` | `['submit']` | Default timing; rules without `trigger` inherit this |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## Props — FormItem
 
@@ -73,14 +74,22 @@ import { MForm, MFormItem } from 'morya-ui'
 | `trigger` | `'blur' \| 'change' \| 'input' \| 'submit'`; omit to inherit Form `validateOn` |
 | `validator` | `(value) => string \| false \| Promise<…>`; `true` / `undefined` pass |
 
-## Events / Expose — Form
+## Events — Form
 
-| Name | Description |
+| Event | Payload | Description |
+| --- | --- | --- |
+| `submit` | `{ valid }` | Auto-validates only when `validateOn` includes `submit` |
+| `validate` | `{ valid, errors }` | A validation pass finished |
+
+## Expose — Form
+
+| Method / Property | Description |
 | --- | --- |
-| `submit` | `{ valid }`. Auto-validates only when `validateOn` includes `submit` |
-| `validate` | `{ valid, errors }` |
 | `validate(name?)` | **Always resolves** `{ valid, errors }`; never rejects on failure |
 | `clearValidate(name?)` | Clears internal errors |
+| `reset()` | Reset the model to the initial snapshot and clear validation |
+| `resetFields(names?)` | Reset the given fields (default: all) to the initial snapshot |
+| `errors` | Read-only; current validation error map (`Record<string, string>`) |
 
 ## Slots
 

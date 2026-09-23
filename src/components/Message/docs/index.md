@@ -85,6 +85,7 @@ import { message, MMessage, useMessage } from 'morya-ui'
 | `max` | `number` | — | 同时可见条数；超出丢掉最旧一条 |
 | `auto` | `boolean` | — | — |
 | `messages` | `MessageItem[]` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## Events
 

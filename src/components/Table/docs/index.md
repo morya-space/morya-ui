@@ -193,7 +193,22 @@ import { MTable, MTag } from 'morya-ui'
 
 ## 实例方法
 
-通过 `ref` 可访问分页控制：`nextPage`、`prevPage`、`updatePage`、`currentPaginationNumber`、`maxPaginationNumber` 等。
+通过 `ref` 可访问以下分页与筛选控制：
+
+| 方法 / 属性 | 说明 |
+| --- | --- |
+| `currentPageFirstIndex` | 当前页首条记录的索引（无数据时为 `-1`）。 |
+| `currentPageLastIndex` | 当前页末条记录的索引。 |
+| `clientItemsLength` | 数据总条数（服务端模式下为服务端总数）。 |
+| `maxPaginationNumber` | 最大页码。 |
+| `currentPaginationNumber` | 当前页码。 |
+| `isLastPage` / `isFirstPage` | 是否末页 / 首页。 |
+| `nextPage()` / `prevPage()` | 下一页 / 上一页。 |
+| `updatePage(page)` | 跳到指定页码。 |
+| `rowsPerPageOptions` | 每页条数选项。 |
+| `rowsPerPageActiveOption` | 当前生效的每页条数。 |
+| `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |
+| `setFilters(filters)` | 程序化设置筛选条件。 |
 
 ## 类型
 

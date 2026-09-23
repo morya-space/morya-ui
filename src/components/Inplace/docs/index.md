@@ -30,6 +30,13 @@ import { MInplace } from 'morya-ui'
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `activate()` | 进入编辑态。 |
+| `deactivate()` | 退出编辑态。 |
+
 ## Slots
 
 | 插槽 | 说明 |

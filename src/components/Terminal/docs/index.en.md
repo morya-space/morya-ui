@@ -34,6 +34,13 @@ import { MTerminal } from 'morya-ui'
 | --- | --- | --- |
 | `command` | `string` | Submitted command. |
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `appendResponse(text)` | Append a response entry. |
+| `focus()` | Focus the command input. |
+
 ## Slots
 
 No slots.

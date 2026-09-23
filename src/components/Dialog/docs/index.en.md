@@ -94,6 +94,14 @@ After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `t
 | `maximize` | — | Enter maximize. |
 | `unmaximize` | — | Exit maximize. |
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `close()` | Close the dialog (same as the cancel/close action). |
+| `maximize()` | Maximize; no-op when already maximized. |
+| `unmaximize()` | Leave the maximized state. |
+
 ## Slots
 
 | Slot | Description |

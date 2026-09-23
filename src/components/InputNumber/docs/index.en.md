@@ -57,6 +57,14 @@ import { MInputNumber } from 'morya-ui'
 | --- | --- | --- |
 | `update:modelValue` | `number \| null` | Value changed. |
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `focus()` | Focus the underlying input. |
+| `blur()` | Blur the underlying input. |
+| `select()` | Select all text in the input. |
+
 ## Slots
 
 | Slot | Description |

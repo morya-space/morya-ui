@@ -54,6 +54,14 @@ import { MButton, MPopover } from 'morya-ui'
 | `show` | — | 打开时触发。 |
 | `hide` | — | 关闭后触发。 |
 
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `show()` | 显示浮层。 |
+| `hide()` | 隐藏浮层。 |
+| `toggle()` | 切换显示状态。 |
+
 ## Slots
 
 | 插槽名 | 说明 |

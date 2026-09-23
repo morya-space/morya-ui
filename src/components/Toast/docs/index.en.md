@@ -61,6 +61,7 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 | `teleport` | `boolean` | `true` | Whether to Teleport |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target |
 | `transition` | `string \| false` | `'slide-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ### ToastMessage
 

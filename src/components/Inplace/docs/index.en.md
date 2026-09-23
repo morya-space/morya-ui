@@ -28,6 +28,13 @@ import { MInplace } from 'morya-ui'
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `activate()` | Switch to edit mode. |
+| `deactivate()` | Leave edit mode. |
+
 ## Slots
 
 | Slot | Description |

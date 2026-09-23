@@ -62,6 +62,7 @@ import { MToast, toast, useToast } from 'morya-ui'
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标 |
 | `auto` | `boolean` | — | — |
 | `transition` | `string \| false` | `'slide-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ### ToastMessage
 

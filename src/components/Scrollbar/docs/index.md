@@ -82,6 +82,10 @@ import { MScrollbar } from 'morya-ui'
 | `viewStyle` | `StyleValue` | — | — |
 | `wrapClass` | `ScrollbarClassValue` | — | — |
 | `wrapStyle` | `StyleValue` | — | — |
+| `width` | `string \| number` | — | 可视区域宽度。 |
+| `maxWidth` | `string \| number` | — | 最大宽度。 |
+| `ariaMultiselectable` | `boolean` | — | 内容区 `aria-multiselectable`。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -109,7 +113,14 @@ import { MScrollbar } from 'morya-ui'
 
 ### Expose
 
-`wrapRef`、`update`、`scrollTo`、`setScrollTop`、`setScrollLeft`、`handleScroll`
+| 方法 / 属性 | 说明 |
+| --- | --- |
+| `wrapRef` | wrap 容器元素引用。 |
+| `update()` | 重新计算滑块尺寸与位置。 |
+| `scrollTo(...)` | 滚动到指定位置（同原生 `scrollTo`）。 |
+| `setScrollTop(y)` | 设置纵向滚动位置。 |
+| `setScrollLeft(x)` | 设置横向滚动位置。 |
+| `handleScroll(event)` | wrap 的 scroll 事件处理，可手动转发。 |
 
 ## Events
 

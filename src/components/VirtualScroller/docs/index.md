@@ -36,6 +36,8 @@ import { MVirtualScroller } from 'morya-ui'
 | `height` | `number \| string` | `240` | 视口高度。 |
 | `buffer` | `number` | `3` | 视口上下额外渲染行数。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+| `role` | `string` | — | 容器 `role`。 |
+| `ariaLabel` | `string` | — | 容器无障碍名称。 |
 
 
 ## Slots
@@ -43,6 +45,12 @@ import { MVirtualScroller } from 'morya-ui'
 | 插槽 | 作用域 | 说明 |
 | --- | --- | --- |
 | `item` | `{ item, index }` | 单行内容；容器高度由 `itemSize` 决定。 |
+
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `scrollToIndex(index)` | 滚动到指定索引的行。 |
 
 ## 无障碍
 

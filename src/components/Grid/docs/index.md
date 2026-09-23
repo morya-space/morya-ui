@@ -50,6 +50,7 @@ import { MGrid, MGridItem } from 'morya-ui'
 | `collapsedRows` | `number` | `1` | 折叠时可见行数。 |
 | `layoutShiftDisabled` | `boolean` | `false` | 关闭折叠/布局计算，退化为纯 CSS Grid。 |
 | `itemStyle` | `string \| object` | — | 应用到每个 GridItem 的样式。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## GridItem Props
 

@@ -53,6 +53,7 @@ import { MForm, MFormItem } from 'morya-ui'
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |
 | `for` | `string` | — | — |
 | `size` | [MSizeInput](/docs/types#MSizeInput) | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## Props — FormItem
 
@@ -75,14 +76,22 @@ import { MForm, MFormItem } from 'morya-ui'
 | `trigger` | `'blur' \| 'change' \| 'input' \| 'submit'`；省略则继承 Form `validateOn` |
 | `validator` | `(value) => string \| false \| Promise<…>`；`true` / `undefined` 视为通过 |
 
-## Events / Expose — Form
+## Events — Form
 
-| 名称 | 说明 |
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `submit` | `{ valid }` | 仅当 `validateOn` 含 `submit` 时自动跑校验 |
+| `validate` | `{ valid, errors }` | 一次校验流程结束 |
+
+## Expose — Form
+
+| 方法 / 属性 | 说明 |
 | --- | --- |
-| `submit` | `{ valid }`。仅当 `validateOn` 含 `submit` 时自动跑校验 |
-| `validate` | `{ valid, errors }` |
 | `validate(name?)` | **始终 resolve** `{ valid, errors }`，不会因失败 reject |
 | `clearValidate(name?)` | 清除内部错误 |
+| `reset()` | 重置 model 为初始快照并清除校验 |
+| `resetFields(names?)` | 将指定字段（默认全部）重置为初始快照 |
+| `errors` | 只读；当前校验错误表（`Record<string, string>`） |
 
 ## Slots
 

@@ -135,6 +135,8 @@ import { MInput } from 'morya-ui'
 | 方法 | 说明 |
 | --- | --- |
 | `focus()` | 聚焦底层 input。 |
+| `blur()` | 使底层 input 失焦。 |
+| `select()` | 选中底层 input 的全部文本。 |
 
 ## 类型
 

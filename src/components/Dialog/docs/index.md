@@ -94,6 +94,14 @@ Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`clas
 | `maximize` | — | 进入最大化。 |
 | `unmaximize` | — | 退出最大化。 |
 
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `close()` | 关闭对话框（等同取消/关闭动作）。 |
+| `maximize()` | 最大化；已最大化时无操作。 |
+| `unmaximize()` | 退出最大化。 |
+
 ## Slots
 
 | 插槽名 | 说明 |

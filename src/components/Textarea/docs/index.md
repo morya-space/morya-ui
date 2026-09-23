@@ -73,6 +73,14 @@ import { MTextarea } from 'morya-ui'
 | `change` | — | — |
 | `focus` | — | — |
 
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `focus()` | 聚焦底层文本域。 |
+| `blur()` | 使底层文本域失焦。 |
+| `select()` | 选中文本域的全部文本。 |
+
 ## Slots
 
 无插槽。

@@ -38,6 +38,13 @@ import { MTerminal } from 'morya-ui'
 | `update:lines` | — | — |
 | `update:responses` | — | — |
 
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `appendResponse(text)` | 追加一条响应输出。 |
+| `focus()` | 聚焦命令输入框。 |
+
 ## Slots
 
 无插槽。

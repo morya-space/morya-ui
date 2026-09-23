@@ -36,6 +36,8 @@ import { MVirtualScroller } from 'morya-ui'
 | `height` | `number \| string` | `240` | Viewport height. |
 | `buffer` | `number` | `3` | Extra rows rendered above/below the viewport. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+| `role` | `string` | — | `role` of the container. |
+| `ariaLabel` | `string` | — | Accessible name for the container. |
 
 
 ## Slots
@@ -43,6 +45,12 @@ import { MVirtualScroller } from 'morya-ui'
 | Slot | Scope | Description |
 | --- | --- | --- |
 | `item` | `{ item, index }` | Row content; container height follows `itemSize`. |
+
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `scrollToIndex(index)` | Scroll to the row at the given index. |
 
 ## Accessibility
 

@@ -19,6 +19,12 @@ import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+
 ## Slots
 
 | Slot | Description |

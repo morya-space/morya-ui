@@ -80,6 +80,7 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 | `height` | `number \| string` | — | — |
 | `padding` | `number \| string` | — | — |
 | `radius` | `number \| string` | — | — |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## LayoutSider Props
 
@@ -111,7 +112,9 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 ## Expose
 
-`MLayout` 暴露 `scrollTo(...)`。
+| 方法 | 说明 |
+| --- | --- |
+| `scrollTo(...)` | 滚动内容区；接受 `(options: ScrollToOptions)` 或 `(x, y)`。 |
 
 ## Components
 

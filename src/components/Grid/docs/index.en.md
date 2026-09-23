@@ -50,6 +50,7 @@ When `cols` / gaps are plain numbers but items still need responsive `span`, ena
 | `collapsedRows` | `number` | `1` | Visible rows when collapsed. |
 | `layoutShiftDisabled` | `boolean` | `false` | Plain CSS Grid without collapse bookkeeping. |
 | `itemStyle` | `string \| object` | — | Style applied to every GridItem. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## GridItem Props
 

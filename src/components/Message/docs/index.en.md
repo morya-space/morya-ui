@@ -83,6 +83,7 @@ When a manual host exists, the API will not mount a second one.
 | `transition` | `string \| false` | `'message'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
 | `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | Host placement |
 | `max` | `number` | — | Max visible items; oldest is dropped |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## Events
 

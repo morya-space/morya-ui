@@ -77,6 +77,14 @@ import { MInputPassword } from 'morya-ui'
 | `change` | — | — |
 | `focus` | — | — |
 
+## Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `focus()` | 聚焦底层输入框。 |
+| `blur()` | 使底层输入框失焦。 |
+| `select()` | 选中输入框的全部文本。 |
+
 ## Slots
 
 | 插槽名 | 参数 | 说明 |
