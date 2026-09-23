@@ -29,6 +29,13 @@ import { MButton, MCard } from 'morya-ui'
 ```vue preview src="./demos/CoverAndHover.vue"
 ```
 
+## Shadow
+
+`shadow` controls **when** the elevation shadow appears: `never` (flat), `hover` (on pointer hover), or `always` (resting). `hover` and `always` share `--m-card-shadow-rest`.
+
+```vue preview src="./demos/Shadow.vue"
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -38,7 +45,7 @@ import { MButton, MCard } from 'morya-ui'
 | `ariaLabel` | `string` | — | Accessible name; falls back to `title` by default. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Padding size. |
 | `bordered` | `boolean` | `true` | Show a border. |
-| `hoverable` | `boolean` | `false` | Elevate on hover. |
+| `shadow` | `'never' \| 'hover' \| 'always'` | `'never'` | Shadow timing: `never`; `hover` and `always` share `--m-card-shadow-rest` (`hover` shows it only on hover). |
 | `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | `2` | Heading level for the title. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Root pass-through; key `root`. |
 

@@ -2,6 +2,8 @@ import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type CardSize = MSizeInput
+/** When to show the elevation shadow. */
+export type CardShadow = 'never' | 'hover' | 'always'
 
 export interface CardProps {
   pt?: RootPassThrough
@@ -14,6 +16,6 @@ export interface CardProps {
   size?: CardSize
   /** Draw a border. Defaults to `true`. */
   bordered?: boolean
-  /** Elevate on hover. */
-  hoverable?: boolean
+  /** Elevation shadow timing. Defaults to `never`. */
+  shadow?: CardShadow
 }

@@ -8,7 +8,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CardProps>(), {
   bordered: true,
-  hoverable: false,
+  shadow: 'never',
   headingLevel: 2,
 })
 const attrs = useAttrs()
@@ -23,7 +23,8 @@ const rootClass = computed(() => [
   {
     'm-card--bordered': props.bordered,
     'm-card--borderless': !props.bordered,
-    'm-card--hoverable': props.hoverable,
+    'm-card--shadow-hover': props.shadow === 'hover',
+    'm-card--shadow-always': props.shadow === 'always',
     'm-card--small': sizeTone.value === 'small',
     'm-card--large': sizeTone.value === 'large',
   },

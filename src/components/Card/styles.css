@@ -1,8 +1,14 @@
 .m-card {
+    --m-card-shadow-rest: var(--m-shadow-raised);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-lg);
+    box-shadow: none;
     color: var(--m-color-text);
+    overflow: visible;
+}
+
+.m-card:has(> .m-card__cover) {
     overflow: hidden;
 }
 
@@ -39,16 +45,23 @@
     border-color: transparent;
 }
 
-.m-card--hoverable {
-    transition: box-shadow var(--m-motion-fast) var(--m-motion-ease), border-color var(--m-motion-fast) var(--m-motion-ease);
+.m-card--shadow-hover,
+.m-card--shadow-always {
+    transition:
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-card--hoverable:hover {
-    border-color: color-mix(in srgb, var(--m-color-primary) 35%, var(--m-color-border));
-    box-shadow: var(--m-shadow-md);
+.m-card--shadow-always {
+    box-shadow: var(--m-card-shadow-rest);
 }
 
-.m-card--hoverable:focus-within {
+.m-card--shadow-hover:hover {
+    box-shadow: var(--m-card-shadow-rest);
+}
+
+.m-card--shadow-hover:focus-within,
+.m-card--shadow-always:focus-within {
     border-color: var(--m-color-primary-hover);
     box-shadow: var(--m-focus-shadow);
 }
@@ -66,6 +79,7 @@
 }
 
 .m-card__cover {
+    border-radius: var(--m-radius-lg) var(--m-radius-lg) 0 0;
     display: block;
     overflow: hidden;
 }

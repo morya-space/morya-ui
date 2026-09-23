@@ -29,6 +29,13 @@ import { MButton, MCard } from 'morya-ui'
 ```vue preview src="./demos/CoverAndHover.vue"
 ```
 
+## Shadow
+
+`shadow` 控制卡片**阴影**出现时机：`never` 平面、`hover` 悬停抬起、`always` 常驻抬起（均使用 `--m-card-shadow-rest`）。
+
+```vue preview src="./demos/Shadow.vue"
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -38,7 +45,7 @@ import { MButton, MCard } from 'morya-ui'
 | `ariaLabel` | `string` | — | 可访问名称；默认回退到 `title`。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 内边距尺寸。 |
 | `bordered` | `boolean` | `true` | 是否描边。 |
-| `hoverable` | `boolean` | `false` | 悬停抬起。 |
+| `shadow` | `'never' \| 'hover' \| 'always'` | `'never'` | 阴影时机：`never` 无阴影；`hover` / `always` 均使用 `--m-card-shadow-rest`（`hover` 仅悬停时出现）。 |
 | `headingLevel` | `1 \| 2 \| 3 \| 4 \| 5 \| 6` | `2` | 标题 heading 级别。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 根节点透传，键名 `root`。 |
 

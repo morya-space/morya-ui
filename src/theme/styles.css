@@ -50,6 +50,10 @@
     --m-font-size-sm: 0.8125rem;
     --m-font-size-md: 0.875rem;
     --m-font-size-lg: 1.125rem;
+    /* Display scale (page titles, KPI figures) */
+    --m-font-size-xl: 1.25rem;
+    --m-font-size-2xl: 1.5rem;
+    --m-font-size-3xl: 1.75rem;
     --m-opacity-disabled: 0.55;
     /* Layering: override --m-z-base via ConfigProvider / createMoryaUI */
     --m-z-base: 1000;
