@@ -144,6 +144,153 @@ for (const component of catalog.components) {
   }
 }
 
+// —— Source ↔ catalog API drift ——
+// The catalog is parsed from docs tables, so docs can silently drift from the
+// real API. Extract Props/Emits/Slots/Expose from each component's source and
+// fail when something public is undocumented.
+
+function readTextSafe(path) {
+  return existsSync(path) ? readFileSync(path, 'utf8') : ''
+}
+
+function stripComments(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^[ \t]*\/\/.*$/gm, '')
+}
+
+function extractBracedBlock(source, openBraceIndex) {
+  let depth = 0
+  for (let i = openBraceIndex; i < source.length; i++) {
+    if (source[i] === '{') depth++
+    else if (source[i] === '}') {
+      depth--
+      if (depth === 0) return source.slice(openBraceIndex + 1, i)
+    }
+  }
+  return ''
+}
+
+// Keys declared directly at the interface/object top level. Inherited members
+// (`extends …`) are intentionally out of scope — docs may list them, source
+// extraction simply never sees them, so they can only be under-reported here.
+function topLevelKeys(block) {
+  const keys = []
+  let depth = 0
+  for (const line of block.split('\n')) {
+    if (depth === 0) {
+      const match = line.match(/^\s*(?:readonly\s+)?['"]?([\w-]+)['"]?\s*\??\s*:/)
+      if (match) keys.push(match[1])
+    }
+    for (const ch of line) {
+      if (ch === '{' || ch === '(' || ch === '[') depth++
+      else if (ch === '}' || ch === ')' || ch === ']') depth--
+    }
+  }
+  return keys
+}
+
+function interfaceBlock(source, name) {
+  const match = source.match(new RegExp(`interface\\s+${name}\\b[^{]*\\{`))
+  if (!match) return null
+  return extractBracedBlock(source, source.indexOf('{', match.index))
+}
+
+function interfaceKeys(source, name) {
+  const block = interfaceBlock(source, name)
+  return block === null ? null : topLevelKeys(block)
+}
+
+function interfaceEvents(source, name) {
+  const block = interfaceBlock(source, name)
+  if (block === null) return null
+  return [...block.matchAll(/\(\s*event:\s*'([^']+)'/g)].map((match) => match[1])
+}
+
+function macroBlock(vueSource, macro) {
+  const index = vueSource.indexOf(macro)
+  if (index === -1) return null
+  const braceIndex = vueSource.indexOf('{', index)
+  if (braceIndex === -1 || braceIndex > index + 200) return null
+  return extractBracedBlock(vueSource, braceIndex)
+}
+
+function macroEvents(vueSource) {
+  const block = macroBlock(vueSource, 'defineEmits')
+  if (block === null) return null
+  const names = new Set()
+  for (const match of block.matchAll(/\(\s*event:\s*'([^']+)'/g)) names.add(match[1])
+  for (const match of block.matchAll(/^\s{1,4}'?([a-z][\w:-]*)'?\s*:\s*[\[(]/gm)) names.add(match[1])
+  return [...names]
+}
+
+function macroExpose(vueSource) {
+  const block = macroBlock(vueSource, 'defineExpose')
+  if (block === null) return null
+  // Split into top-level entries: commas inside method bodies sit at a deeper
+  // bracket level and must not split. This keeps single-line shorthand lists
+  // (`{ focus, blur }`) and multi-line object literals equally parseable.
+  const entries = []
+  let depth = 0
+  let current = ''
+  for (const ch of block) {
+    if (ch === '{' || ch === '(' || ch === '[') depth++
+    else if (ch === '}' || ch === ')' || ch === ']') depth--
+    if (ch === ',' && depth === 0) {
+      entries.push(current)
+      current = ''
+      continue
+    }
+    current += ch
+  }
+  entries.push(current)
+  const names = new Set()
+  for (const entry of entries) {
+    const match = entry.match(/^\s*(?:async\s+)?['"]?(\w+)['"]?\s*(?::|\(|$)/)
+    if (match) names.add(match[1])
+  }
+  return [...names]
+}
+
+// Public API surface that is intentionally not documented in docs tables.
+const driftAllowlist = {
+  Button: { methods: ['ref'] }, // native element escape hatch; `focus` is the documented entry
+  Dropdown: { events: ['highlight'] }, // keyboard highlight is an internal affordance
+}
+
+for (const component of catalog.components) {
+  const dir = join(componentsDir, component.id)
+  const types = stripComments(readTextSafe(join(dir, 'types.ts')))
+  const mainVue = stripComments(readTextSafe(join(dir, `${component.id}.vue`)))
+
+  const source = {
+    props: interfaceKeys(types, `${component.id}Props`),
+    events: interfaceEvents(types, `${component.id}Emits`) ?? macroEvents(mainVue),
+    slots: interfaceKeys(types, `${component.id}Slots`),
+    methods: interfaceKeys(types, `${component.id}Expose`) ?? macroExpose(mainVue),
+  }
+  const documented = {
+    props: new Set(component.props.map((item) => item.name)),
+    events: new Set(component.events.map((item) => item.name)),
+    slots: new Set(component.slots.map((item) => item.name)),
+    methods: new Set((component.methods || []).map((item) => item.name)),
+  }
+  const allow = driftAllowlist[component.id] || {}
+  for (const kind of ['props', 'events', 'slots', 'methods']) {
+    const names = source[kind]
+    if (!names) continue // no extractable source of truth for this kind
+    const allowed = new Set(allow[kind] || [])
+    // Docs may document the template-facing kebab-case name (`update:server-options`)
+    // for a camelCase source emit (`update:serverOptions`) — both are correct.
+    const missing = names.filter(
+      (name) => !allowed.has(name) && !documented[kind].has(name) && !documented[kind].has(kebab(name)),
+    )
+    if (missing.length) {
+      error(`API drift: ${component.id}.${kind} missing from docs: ${missing.join(', ')}`)
+    }
+  }
+}
+
 if (errors.length > 0) {
   console.error(`Catalog validation failed with ${errors.length} issue(s):`)
   for (const item of errors) console.error(`- ${item}`)

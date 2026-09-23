@@ -79,26 +79,85 @@ function splitTableRow(line) {
     .map((cell) => cell.trim().replaceAll(placeholder, '|'))
 }
 
-function parseMarkdownTable(body) {
+function isTableSeparator(line) {
+  return /^\|[\s:|-]+\|$/.test(line) && line.includes('-')
+}
+
+// A section may contain several tables (e.g. Props + a sub-type table).
+// Split them at separator lines so sub-tables never leak rows into the first one.
+function parseMarkdownTables(body) {
   const lines = body
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean)
   const tableLines = lines.filter((line) => line.startsWith('|'))
-  if (tableLines.length < 2) return []
-
-  const headers = splitTableRow(tableLines[0])
-  const rows = []
-  for (const line of tableLines.slice(2)) {
-    const parts = splitTableRow(line)
-    if (parts.length === 0) continue
-    const row = {}
-    headers.forEach((header, index) => {
-      row[header] = parts[index] ?? ''
+  const tables = []
+  let i = 0
+  while (i < tableLines.length) {
+    if (i + 1 >= tableLines.length || !isTableSeparator(tableLines[i + 1])) {
+      i++
+      continue
+    }
+    const headers = splitTableRow(tableLines[i])
+    const rows = []
+    let j = i + 2
+    while (j < tableLines.length) {
+      // A line followed by a separator is the header of the next table.
+      if (j + 1 < tableLines.length && isTableSeparator(tableLines[j + 1])) break
+      rows.push(tableLines[j])
+      j++
+    }
+    tables.push({
+      headers,
+      rows: rows.map((line) => {
+        const parts = splitTableRow(line)
+        if (parts.length === 0) return null
+        const row = {}
+        headers.forEach((header, index) => {
+          row[header] = parts[index] ?? ''
+        })
+        return row
+      }).filter(Boolean),
     })
-    rows.push(row)
+    i = j
   }
-  return rows
+  return tables
+}
+
+// API sections use a variety of headings: `Props`, `Props — Form`, `Grid Props`,
+// `Props（MMessage）`, `Expose`, `Events / Expose — Form`, `### Props` under `## API`…
+function apiKindFromTitle(title) {
+  const text = String(title || '').trim()
+  if (!text) return null
+  const props = /\bprops?\b/i.test(text) || text.includes('属性')
+  const events = /\bevents?\b/i.test(text) || text.includes('事件')
+  const slots = /\bslots?\b/i.test(text) || text.includes('插槽')
+  const methods = /\b(methods?|instance|expose)\b/i.test(text) || text.includes('方法') || text.includes('实例')
+  const kinds = [props, events, slots, methods].filter(Boolean).length
+  if (kinds > 1) {
+    // `Events / Expose` tables share one ambiguously-headed table; split rows
+    // by call signature. Other combos (e.g. `Slots / Events`) carry separate
+    // tables per kind — let each table's header decide instead.
+    if (events && methods && !props && !slots) return 'events+methods'
+    return null
+  }
+  if (props) return 'props'
+  if (events) return 'events'
+  if (slots) return 'slots'
+  if (methods) return 'methods'
+  return null
+}
+
+// Fallback for untitled API tables (e.g. `### MPageContent` under `## API`):
+// classify by the first header cell. Events tables also carry a `参数` column,
+// so only the first cell is authoritative.
+function apiKindFromHeader(headers) {
+  const first = String(headers[0] || '').trim()
+  if (/prop|参数/i.test(first)) return 'props'
+  if (/slot|插槽/i.test(first)) return 'slots'
+  if (/event|事件/i.test(first)) return 'events'
+  if (/method|方法/i.test(first)) return 'methods'
+  return null
 }
 
 function unwrapCodeName(name = '') {
@@ -106,16 +165,21 @@ function unwrapCodeName(name = '') {
 }
 
 function splitApiNames(value) {
-  return unwrapCodeName(value)
-    .split(/\s*[`/|,]\s*/)
-    .map((name) => unwrapCodeName(name).trim())
-    .filter(Boolean)
+  const raw = String(value || '').trim()
+  // Backtick-quoted names are atomic: `` `toast.setDefaults({ position, max })` ``
+  // must not split on the comma inside the signature.
+  const quoted = [...raw.matchAll(/`([^`]+)`/g)].map((match) => match[1].trim()).filter(Boolean)
+  const names = quoted.length ? quoted : raw.split(/\s*[/|,]\s*/)
+  return names.map((name) => unwrapCodeName(name).trim()).filter(Boolean)
 }
 
 function mapApiRows(rows, kind) {
   return rows.flatMap((row) => {
+    // The name column is virtually always first; fall back to it when the
+    // header uses an unlisted label (e.g. `方法 / 属性`, `Method / Property`).
+    const firstCell = row[Object.keys(row)[0]] ?? ''
     if (kind === 'props') {
-      const names = splitApiNames(row['参数'] || row.Prop || row.Name || '')
+      const names = splitApiNames(row['参数'] || row.Prop || row.Name || firstCell)
       return names.map((name) => ({
         name,
         type: unwrapCodeName(row['类型'] || row.Type || ''),
@@ -124,14 +188,22 @@ function mapApiRows(rows, kind) {
       }))
     }
     if (kind === 'events') {
-      const names = splitApiNames(row['事件名'] || row.Event || row.Name || '')
+      const names = splitApiNames(row['事件名'] || row.Event || row.Name || firstCell)
       return names.map((name) => ({
         name,
         payload: unwrapCodeName(row['参数'] || row.Payload || row.Args || '') || undefined,
         description: row['说明'] || row.Description || '',
       }))
     }
-    return splitApiNames(row['插槽名'] || row.Slot || row.Name || '').map((name) => ({
+    if (kind === 'methods') {
+      const names = splitApiNames(row['方法'] || row.Method || row['名称'] || row.Name || firstCell)
+      return names.map((name) => ({
+        name: name.replace(/\(.*\)/, '').trim(),
+        type: unwrapCodeName(row['类型'] || row.Type || '') || undefined,
+        description: row['说明'] || row.Description || '',
+      }))
+    }
+    return splitApiNames(row['插槽名'] || row.Slot || row.Name || firstCell).map((name) => ({
       name,
       description: row['说明'] || row.Description || '',
     }))
@@ -207,28 +279,63 @@ function buildDocLocale(raw, exportName, mdPath = '') {
     }
   }
 
-  const propsSection = sections.find((section) => /^(props|属性)$/i.test(section.title))
-  const eventsSection = sections.find((section) => /^(events|事件)$/i.test(section.title))
-  const slotsSection = sections.find((section) => /^(slots|插槽)$/i.test(section.title))
+  // Expand h2 sections into API candidates: the part before any h3 keeps the
+  // section title, each `### …` becomes its own candidate. Fenced code is
+  // stripped first so `###` inside examples never splits a section.
+  const apiSections = sections.flatMap((section) => {
+    const clean = section.body.replace(/```[\s\S]*?```/g, '')
+    const subs = [{ title: '', lines: [] }]
+    for (const line of clean.split(/\r?\n/)) {
+      const heading = line.match(/^#{3,6}\s+(.+?)\s*$/)
+      if (heading) subs.push({ title: heading[1], lines: [] })
+      else subs[subs.length - 1].lines.push(line)
+    }
+    return subs.map((sub) => ({
+      title: sub.title || section.title,
+      body: sub.lines.join('\n'),
+    }))
+  })
+
+  const props = []
+  const events = []
+  const slots = []
+  const methods = []
+
+  for (const section of apiSections) {
+    const tables = parseMarkdownTables(section.body)
+    if (!tables.length) continue
+    const titleKind = apiKindFromTitle(section.title)
+    for (const table of tables) {
+      const kind = titleKind ?? apiKindFromHeader(table.headers)
+      if (kind === 'events+methods') {
+        // Combined tables (e.g. `Events / Expose — Form`): rows whose name
+        // carries a call signature are expose methods, the rest are events.
+        for (const row of table.rows) {
+          const rawName = unwrapCodeName(row['名称'] || row.Name || row[Object.keys(row)[0]] || '')
+          if (!rawName) continue
+          const description = row['说明'] || row.Description || ''
+          const call = rawName.match(/^([\w$-]+)\s*\((.*)\)$/)
+          if (call) methods.push({ name: call[1], type: `(${call[2]})`, description })
+          else events.push({ name: rawName, payload: undefined, description })
+        }
+      } else if (kind) {
+        const target = { props, events, slots, methods }[kind]
+        target.push(...mapApiRows(table.rows, kind))
+      }
+    }
+  }
+
+  const dedupeByName = (list) => [...new Map(list.map((item) => [item.name, item])).values()]
 
   return {
     title: data.title || '',
     category: data.category || '',
     description: data.description || '',
     import: extractImportHint(body, exportName),
-    props: propsSection ? mapApiRows(parseMarkdownTable(propsSection.body), 'props') : [],
-    events: eventsSection ? mapApiRows(parseMarkdownTable(eventsSection.body), 'events') : [],
-    slots: slotsSection ? mapApiRows(parseMarkdownTable(slotsSection.body), 'slots') : [],
-    methods: (() => {
-      const methodsSection = sections.find((section) => /^(methods|instance|实例|方法)$/i.test(section.title))
-      return methodsSection
-        ? parseMarkdownTable(methodsSection.body).map((row) => ({
-            name: splitApiNames(row['方法'] || row.Method || row.Name || '')[0] || '',
-            type: unwrapCodeName(row['类型'] || row.Type || '') || undefined,
-            description: row['说明'] || row.Description || '',
-          })).filter((item) => item.name)
-        : []
-    })(),
+    props: dedupeByName(props),
+    events: dedupeByName(events),
+    slots: dedupeByName(slots),
+    methods: dedupeByName(methods),
     examples,
     sections: sections.map((section) => ({
       id: section.id,
@@ -268,6 +375,7 @@ function collectComponents() {
       props: primary?.props || [],
       events: primary?.events || [],
       slots: primary?.slots || [],
+      methods: primary?.methods || [],
       examples: [
         ...(zh?.examples || []).map((item) => ({ ...item, locale: 'zh-CN' })),
         ...(en?.examples || []).map((item) => ({ ...item, locale: 'en-US' })),
