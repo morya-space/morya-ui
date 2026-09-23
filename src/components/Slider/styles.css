@@ -65,6 +65,15 @@
     pointer-events: auto;
 }
 
+/* range 模式下 end 输入框绘制在上层，其滑轨会盖住 start 的滚顶点，因此隐藏它的滑轨 */
+.m-slider--range .m-slider__input--end::-webkit-slider-runnable-track {
+    background: transparent;
+}
+
+.m-slider--range .m-slider__input--end::-moz-range-track {
+    background: transparent;
+}
+
 .m-slider__input::-webkit-slider-runnable-track {
     background: color-mix(
         in srgb,
