@@ -13,8 +13,11 @@ describe('resolveMenuIcon', () => {
   })
 
   it('maps common external icon aliases', () => {
-    expect(resolveMenuIcon('layout-dashboard')).toBe('home')
-    expect(resolveMenuIcon('users-group')).toBe('user')
+    // Names that are now registered resolve directly…
+    expect(resolveMenuIcon('layout-dashboard')).toBe('layout-dashboard')
+    expect(resolveMenuIcon('users-group')).toBe('users-group')
+    // …while unregistered aliases still fall back to a built-in icon.
     expect(resolveMenuIcon('report-analytics')).toBe('chart-bar')
+    expect(resolveMenuIcon('user-shield')).toBe('shield-check')
   })
 })

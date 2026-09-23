@@ -3,22 +3,13 @@ import { isIconName } from '../../components/Icon/icons'
 
 /** Map common Tabler / Lucide-style names to built-in icons. */
 const menuIconAliases: Record<string, IconName> = {
-  'layout-dashboard': 'home',
-  'users': 'user',
-  'user-shield': 'shield',
-  'users-group': 'user',
-  'user-check': 'user',
-  'history': 'clock',
+  'user-shield': 'shield-check',
   'school': 'book',
-  'building': 'home',
   'forms': 'edit',
-  'stack-2': 'grip',
+  'stack-2': 'layers',
   'git-branch': 'link',
   'adjustments': 'settings',
-  'adjustments-horizontal': 'settings',
-  'list-details': 'menu',
   'alert-triangle': 'warning',
-  'sparkles': 'star',
   'report-analytics': 'chart-bar',
   'report': 'chart-bar',
 }
