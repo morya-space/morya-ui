@@ -16,6 +16,7 @@ describe('motionPresets', () => {
   it('resolves built-in presets to transition names', () => {
     expect(resolveMotionPreset('fade').name).toBe('m-fade')
     expect(resolveMotionPreset('scale-fade').name).toBe('m-scale-fade')
+    expect(resolveMotionPreset('popover').name).toBe('m-scale-fade')
     expect(resolveMotionPreset('zoom').name).toBe('m-zoom')
     expect(resolveMotionPreset('dialog').name).toBe('m-dialog')
     expect(resolveMotionPreset('drawer').name).toBe('m-drawer')

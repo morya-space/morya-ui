@@ -22,45 +22,47 @@
     z-index: var(--m-z-popper);
 }
 
+/*
+ * Placement uses the independent `translate` property so scale-fade's
+ * `transform` (opacity + scale/slide) can compose without fighting layout.
+ */
 .m-popover__content--top {
     bottom: calc(100% + var(--m-space-2));
     left: 50%;
-    transform: translateX(-50%);
     transform-origin: bottom center;
+    translate: -50% 0;
 }
 
 .m-popover__content--bottom {
     left: 50%;
     top: calc(100% + var(--m-space-2));
-    transform: translateX(-50%);
     transform-origin: top center;
+    translate: -50% 0;
 }
 
 .m-popover__content--left {
     right: calc(100% + var(--m-space-2));
     top: 50%;
-    transform: translateY(-50%);
     transform-origin: right center;
+    translate: 0 -50%;
 }
 
 .m-popover__content--right {
     left: calc(100% + var(--m-space-2));
     top: 50%;
-    transform: translateY(-50%);
     transform-origin: left center;
+    translate: 0 -50%;
 }
 
 .m-popover__content--right-start {
     left: calc(100% + var(--m-space-2));
     top: 0;
-    transform: none;
     transform-origin: top left;
 }
 
 .m-popover__content--left-start {
     right: calc(100% + var(--m-space-2));
     top: 0;
-    transform: none;
     transform-origin: top right;
 }
 
@@ -83,71 +85,8 @@
     position: fixed;
     right: auto;
     top: auto;
-    transform: none;
+    /* Reset non-teleport placement translates; inline `translate` from
+       computeFloatingOverlayStyle provides the teleported alignment. */
+    translate: none;
     z-index: var(--m-z-tooltip);
-}
-
-.m-popover-enter-active {
-    transition:
-        opacity var(--m-motion-enter) var(--m-motion-ease),
-        transform var(--m-motion-enter) var(--m-motion-ease);
-}
-
-.m-popover-leave-active {
-    transition:
-        opacity var(--m-motion-exit) var(--m-motion-ease),
-        transform var(--m-motion-exit) var(--m-motion-ease);
-}
-
-.m-popover-enter-from,
-.m-popover-leave-to {
-    opacity: 0;
-}
-
-.m-popover__content--teleported.m-popover-enter-from,
-.m-popover__content--teleported.m-popover-leave-to {
-    transform: scale(0.96);
-}
-
-.m-popover-enter-from:not(.m-popover__content--teleported),
-.m-popover-leave-to:not(.m-popover__content--teleported) {
-    transform: translateY(calc(var(--m-motion-distance) * -1)) scale(0.96);
-}
-
-.m-popover__content--top.m-popover-enter-from,
-.m-popover__content--top.m-popover-leave-to {
-    transform: translate(-50%, calc(-100% - var(--m-motion-distance))) scale(0.96);
-}
-
-.m-popover__content--bottom.m-popover-enter-from,
-.m-popover__content--bottom.m-popover-leave-to,
-.m-popover__content--bottom-start.m-popover-enter-from,
-.m-popover__content--bottom-start.m-popover-leave-to,
-.m-popover__content--bottom-end.m-popover-enter-from,
-.m-popover__content--bottom-end.m-popover-leave-to {
-    transform: translateY(var(--m-motion-distance)) scale(0.96);
-}
-
-.m-popover__content--left.m-popover-enter-from,
-.m-popover__content--left.m-popover-leave-to {
-    transform: translate(calc(-100% - var(--m-motion-distance)), -50%) scale(0.96);
-}
-
-.m-popover__content--right.m-popover-enter-from,
-.m-popover__content--right.m-popover-leave-to {
-    transform: translate(var(--m-motion-distance), -50%) scale(0.96);
-}
-
-[data-m-motion="reduced"] .m-popover-enter-active,
-[data-m-motion="reduced"] .m-popover-leave-active,
-[data-m-motion="none"] .m-popover-enter-active,
-[data-m-motion="none"] .m-popover-leave-active {
-    transition: none;
-}
-
-[data-m-motion="reduced"] .m-popover-enter-from,
-[data-m-motion="reduced"] .m-popover-leave-to,
-[data-m-motion="none"] .m-popover-enter-from,
-[data-m-motion="none"] .m-popover-leave-to {
-    transform: none;
 }

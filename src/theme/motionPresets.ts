@@ -26,7 +26,8 @@ export const builtinMotionPresets: Readonly<Record<string, MotionPresetDefinitio
   'slide-left': { name: 'm-slide-left' },
   'slide-right': { name: 'm-slide-right' },
   drawer: { name: 'm-drawer' },
-  popover: { name: 'm-popover' },
+  /** Alias of `scale-fade` — kept for backward-compatible `transition="popover"`. */
+  popover: { name: 'm-scale-fade' },
   loading: { name: 'm-loading' },
   blockui: { name: 'm-blockui' },
   message: { name: 'm-message-slide' },

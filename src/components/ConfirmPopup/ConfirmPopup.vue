@@ -90,7 +90,7 @@ function updatePosition() {
   panelStyle.value = {
     left: '50%',
     top: '30%',
-    transform: 'translateX(-50%)',
+    translate: '-50% 0',
   }
 }
 

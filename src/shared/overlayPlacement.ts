@@ -58,7 +58,7 @@ function horizontalAlign(placement: FloatingOverlayPlacement): HorizontalAlign {
     case 'top-end':
     case 'left':
     case 'left-start':
-      // These use translateX(-100%), so `left` marks the overlay's right edge.
+      // These use translate -100% on X, so `left` marks the overlay's right edge.
       return 'end'
     default:
       return 'start'
@@ -170,33 +170,38 @@ export function computeFloatingOverlayStyle(
 
   const leftCss = `${left}px`
 
+  /*
+   * Use the independent `translate` property (not `transform`) so overlay
+   * enter/exit presets like scale-fade can animate `transform` without fighting
+   * layout alignment.
+   */
   switch (resolved) {
     case 'top':
       return {
         left: leftCss,
         top: `${anchor.top - gap}px`,
-        transform: 'translate(-50%, -100%)',
+        translate: '-50% -100%',
         ...extra,
       }
     case 'bottom':
       return {
         left: leftCss,
         top: `${anchor.bottom + gap}px`,
-        transform: 'translateX(-50%)',
+        translate: '-50% 0',
         ...extra,
       }
     case 'left':
       return {
         left: leftCss,
         top: `${centerY}px`,
-        transform: 'translate(-100%, -50%)',
+        translate: '-100% -50%',
         ...extra,
       }
     case 'right':
       return {
         left: leftCss,
         top: `${centerY}px`,
-        transform: 'translateY(-50%)',
+        translate: '0 -50%',
         ...extra,
       }
     case 'right-start':
@@ -209,14 +214,14 @@ export function computeFloatingOverlayStyle(
       return {
         left: leftCss,
         top: `${anchor.top}px`,
-        transform: 'translateX(-100%)',
+        translate: '-100% 0',
         ...extra,
       }
     case 'bottom-end':
       return {
         left: leftCss,
         top: `${anchor.bottom + gap}px`,
-        transform: 'translateX(-100%)',
+        translate: '-100% 0',
         ...extra,
       }
     case 'bottom-start':
@@ -229,14 +234,14 @@ export function computeFloatingOverlayStyle(
       return {
         left: leftCss,
         top: `${anchor.top - gap}px`,
-        transform: 'translateY(-100%)',
+        translate: '0 -100%',
         ...extra,
       }
     case 'top-end':
       return {
         left: leftCss,
         top: `${anchor.top - gap}px`,
-        transform: 'translate(-100%, -100%)',
+        translate: '-100% -100%',
         ...extra,
       }
     default:

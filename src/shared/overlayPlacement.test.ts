@@ -40,12 +40,12 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(anchor, 'top')).toEqual({
       left: '150px',
       top: '192px',
-      transform: 'translate(-50%, -100%)',
+      translate: '-50% -100%',
     })
     expect(computeFloatingOverlayStyle(anchor, 'bottom')).toEqual({
       left: '150px',
       top: '248px',
-      transform: 'translateX(-50%)',
+      translate: '-50% 0',
     })
   })
 
@@ -55,12 +55,12 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(anchor, 'left')).toEqual({
       left: '108px',
       top: '220px',
-      transform: 'translate(-100%, -50%)',
+      translate: '-100% -50%',
     })
     expect(computeFloatingOverlayStyle(anchor, 'right')).toEqual({
       left: '208px',
       top: '220px',
-      transform: 'translateY(-50%)',
+      translate: '0 -50%',
     })
   })
 
@@ -72,7 +72,7 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(anchor, 'bottom-end')).toEqual({
       left: '200px',
       top: '248px',
-      transform: 'translateX(-100%)',
+      translate: '-100% 0',
     })
   })
 
@@ -88,7 +88,7 @@ describe('overlayPlacement', () => {
     ).toEqual({
       left: '150px',
       top: '244px',
-      transform: 'translateX(-50%)',
+      translate: '-50% 0',
       minWidth: '120px',
       maxWidth: '240px',
       width: '100px',
@@ -102,7 +102,7 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(lowAnchor, 'bottom-start')).toEqual({
       left: '100px',
       top: '292px',
-      transform: 'translateY(-100%)',
+      translate: '0 -100%',
     })
   })
 
@@ -112,7 +112,7 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(lowAnchor, 'bottom-end')).toEqual({
       left: '200px',
       top: '292px',
-      transform: 'translate(-100%, -100%)',
+      translate: '-100% -100%',
     })
   })
 
@@ -122,7 +122,7 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(lowAnchor, 'bottom')).toEqual({
       left: '150px',
       top: '292px',
-      transform: 'translate(-50%, -100%)',
+      translate: '-50% -100%',
     })
   })
 
@@ -160,7 +160,7 @@ describe('overlayPlacement', () => {
     expect(computeFloatingOverlayStyle(leftEdgeAnchor, 'bottom-end')).toEqual({
       left: '58px',
       top: '248px',
-      transform: 'translateX(-100%)',
+      translate: '-100% 0',
     })
   })
 
@@ -187,7 +187,7 @@ describe('overlayPlacement', () => {
     ).toEqual({
       left: '92px',
       top: '292px',
-      transform: 'translateY(-100%)',
+      translate: '0 -100%',
     })
   })
 })

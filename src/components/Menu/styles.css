@@ -502,14 +502,14 @@ a.m-menu__item-content--selected:visited {
     padding: 0;
 }
 
-.m-popover__content--right-start:has(.m-menu--flyout).m-popover-enter-from,
-.m-popover__content--right-start:has(.m-menu--flyout).m-popover-leave-to {
+.m-popover__content--right-start:has(.m-menu--flyout).m-scale-fade-enter-from,
+.m-popover__content--right-start:has(.m-menu--flyout).m-scale-fade-leave-to {
     opacity: 0;
     transform: translateX(calc(var(--m-motion-distance) * -0.5)) scale(0.98);
 }
 
-.m-popover__content--bottom-start:has(.m-menu--flyout).m-popover-enter-from,
-.m-popover__content--bottom-start:has(.m-menu--flyout).m-popover-leave-to {
+.m-popover__content--bottom-start:has(.m-menu--flyout).m-scale-fade-enter-from,
+.m-popover__content--bottom-start:has(.m-menu--flyout).m-scale-fade-leave-to {
     opacity: 0;
     transform: translateY(calc(var(--m-motion-distance) * -0.35)) scale(0.98);
 }

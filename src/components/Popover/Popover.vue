@@ -35,7 +35,7 @@ const { transitionName, transitionCss } = useMotionTransition({
   role: 'popup',
   local: () => props.transition,
   componentName: 'Popover',
-  fallback: 'popover',
+  fallback: 'scale-fade',
 })
 const panelId = useMId()
 const root = ref<HTMLElement | null>(null)

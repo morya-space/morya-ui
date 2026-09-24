@@ -27,20 +27,22 @@ describe('muPopover', () => {
     wrapper.unmount();
   });
 
-  it("uses the popover transition for its floating content", async () => {
+  it("uses the scale-fade transition for its floating content", async () => {
     const wrapper = mount(MPopover, {
       attachTo: document.body,
-      props: { modelValue: false, teleport: false },
+      props: { modelValue: true, teleport: false },
       slots: {
         default: '<button type="button">Open</button>',
         content: "<p>Body</p>",
       },
     });
 
-    await wrapper.setProps({ modelValue: true });
     expect(wrapper.find(".m-popover__content").exists()).toBe(true);
     expect(wrapper.find(".m-popover__content").classes()).toContain(
       "m-popover__content--bottom",
+    );
+    expect(wrapper.findComponent({ name: "Transition" }).props("name")).toBe(
+      "m-scale-fade",
     );
     wrapper.unmount();
   });
