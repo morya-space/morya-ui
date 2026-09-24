@@ -5,11 +5,14 @@ import { computed, nextTick, onBeforeUnmount, provide, reactive, ref, useAttrs, 
 import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import {
-  collectExpandableKeys,
   collectTopLevelKeys,
   findMenuKeyPath,
+  flattenVisibleMenuEntries,
   menuHasDescendantKey,
+  mergeExpandedKeysForSelection,
+  resolveInitialExpandedKeys,
   resolveMenuItemKey,
+  toggleExpandedKeys,
 } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
@@ -114,20 +117,11 @@ function onViewportChange() {
 }
 
 function initExpandedKeys() {
-  if (props.defaultExpandAll) {
-    expandedKeysInternal.value = collectExpandableKeys(props.model)
-    return
-  }
-  if (props.defaultExpandedKeys.length) {
-    expandedKeysInternal.value = [...props.defaultExpandedKeys]
-    return
-  }
-  if (props.selectedKey) {
-    const path = findMenuKeyPath(props.model, props.selectedKey)
-    expandedKeysInternal.value = path ?? []
-    return
-  }
-  expandedKeysInternal.value = []
+  expandedKeysInternal.value = resolveInitialExpandedKeys(props.model, {
+    defaultExpandAll: props.defaultExpandAll,
+    defaultExpandedKeys: props.defaultExpandedKeys,
+    selectedKey: props.selectedKey,
+  })
 }
 
 initExpandedKeys()
@@ -147,35 +141,20 @@ function isExpanded(key: string) {
 }
 
 function toggleExpand(key: string) {
-  const next = [...expandedKeysRef.value]
-  const index = next.indexOf(key)
-  if (index >= 0) {
-    next.splice(index, 1)
-  } else {
-    if (props.accordion && topLevelKeys.value.includes(key)) {
-      for (const openKey of [...next]) {
-        if (topLevelKeys.value.includes(openKey) && openKey !== key) {
-          const removeIndex = next.indexOf(openKey)
-          if (removeIndex >= 0) next.splice(removeIndex, 1)
-        }
-      }
-    }
-    next.push(key)
-  }
-  expandedKeysRef.value = next
+  expandedKeysRef.value = toggleExpandedKeys(expandedKeysRef.value, key, {
+    accordion: props.accordion,
+    topLevelKeys: topLevelKeys.value,
+  })
 }
 
 function expandToSelected(key: string | null) {
   if (!key) return
   const path = findMenuKeyPath(props.model, key)
   if (!path?.length) return
-  const merged = new Set([...expandedKeysRef.value, ...path])
-  if (props.accordion) {
-    for (const topKey of topLevelKeys.value) {
-      if (merged.has(topKey) && !path.includes(topKey)) merged.delete(topKey)
-    }
-  }
-  expandedKeysRef.value = Array.from(merged)
+  expandedKeysRef.value = mergeExpandedKeysForSelection(expandedKeysRef.value, path, {
+    accordion: props.accordion,
+    topLevelKeys: topLevelKeys.value,
+  })
 }
 
 watch(() => props.selectedKey, expandToSelected)
@@ -240,21 +219,12 @@ interface FlatMenuEntry {
 }
 
 /** Visible entries in DOM order; flyout (collapsed/horizontal) children are excluded. */
-const flatEntries = computed<FlatMenuEntry[]>(() => {
-  const flyout = props.collapsed || props.mode === 'horizontal'
-  const list: FlatMenuEntry[] = []
-  const walk = (items: MenuItem[], prefix: string, parentKey: string | null) => {
-    items.forEach((item, index) => {
-      if (item.separator) return
-      const key = resolveMenuItemKey(item, index, prefix)
-      const hasChildren = Boolean(item.items?.length)
-      list.push({ item, key, parentKey, hasChildren })
-      if (hasChildren && !flyout && isExpanded(key)) walk(item.items!, `${prefix}-${index}`, key)
-    })
-  }
-  walk(props.model, 'item', null)
-  return list
-})
+const flatEntries = computed<FlatMenuEntry[]>(() =>
+  flattenVisibleMenuEntries(props.model, {
+    isExpanded,
+    excludeChildren: props.collapsed || props.mode === 'horizontal',
+  }),
+)
 
 const keyboard = useMenuKeyboard({
   itemCount: () => flatEntries.value.length,
