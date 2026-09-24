@@ -5,6 +5,7 @@
 ### 新功能
 
 - add click ripple and a press-scale toggle
+- add link underline toggle
 - replace quick jumper with a filterable Select
 - refine ops layout primitives and P2 filter/stat APIs
 - add shadow prop and remove hoverable

@@ -54,10 +54,22 @@ describe('muButton', () => {
         'm-button--outlined',
         'm-button--text',
         'm-button--link',
+        'm-button--link-underline',
         'm-button--plain',
         'm-button--fluid',
       ]),
     )
+  })
+
+  it('can disable link underline', () => {
+    const withUnderline = mount(MButton, { props: { label: 'Link', link: true } })
+    const withoutUnderline = mount(MButton, {
+      props: { label: 'Plain Link', link: true, underline: false },
+    })
+
+    expect(withUnderline.classes()).toContain('m-button--link-underline')
+    expect(withoutUnderline.classes()).toContain('m-button--link')
+    expect(withoutUnderline.classes()).not.toContain('m-button--link-underline')
   })
 
   it('supports variant shortcut and size aliases', () => {

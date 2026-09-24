@@ -37,7 +37,7 @@ import { MButton } from 'morya-ui'
 
 ## Text & Link
 
-`text` 为轻量文字按钮；`link` 呈现为无背景的内联链接样式。二者均可与 `severity` 组合。
+`text` 为轻量文字按钮；`link` 呈现为无背景的内联链接样式，默认悬浮下划线，设 `:underline="false"` 可关闭。二者均可与 `severity` 组合。
 
 ```vue preview src="./demos/TextAndLink.vue"
 ```
@@ -92,6 +92,7 @@ import { MButton } from 'morya-ui'
 | `outlined` | `boolean` | `false` | 描边按钮。 |
 | `text` | `boolean` | `false` | 文字按钮。 |
 | `link` | `boolean` | `false` | 链接按钮。 |
+| `underline` | `boolean` | `true` | `link` 悬浮下划线。设为 `false` 可关闭。 |
 | `ghost` | `boolean` | `false` | 浅色填充，等同于 `text` 的悬浮态。 |
 | `quaternary` | `boolean` | `false` | 极轻量文字按钮。 |
 | `plain` | `boolean` | `false` | 浅色填充，等同于 `outlined` 的悬浮态；也可与 `text` / `outlined` 组合弱化。 |

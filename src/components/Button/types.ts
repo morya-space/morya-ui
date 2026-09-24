@@ -47,6 +47,11 @@ export interface ButtonProps {
   outlined?: boolean
   /** Link-styled button. */
   link?: boolean
+  /**
+   * Underline on hover for `link` buttons. Default `true`.
+   * Set `false` for a compact link look without underline.
+   */
+  underline?: boolean
   /** Soft fill matching text hover. */
   ghost?: boolean
   /** Extra-quiet text button. */

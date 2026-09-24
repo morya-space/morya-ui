@@ -37,7 +37,7 @@ Use `severity` for semantic color; defaults to primary when omitted.
 
 ## Text & Link
 
-`text` is a lightweight text button; `link` renders as a backgroundless inline link style. Both can be combined with `severity`.
+`text` is a lightweight text button; `link` renders as a backgroundless inline link style with underline on hover by default. Set `:underline="false"` to disable. Both can be combined with `severity`.
 
 ```vue preview src="./demos/TextAndLink.vue"
 ```
@@ -92,6 +92,7 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 | `outlined` | `boolean` | `false` | Outlined button. |
 | `text` | `boolean` | `false` | Text button. |
 | `link` | `boolean` | `false` | Link button. |
+| `underline` | `boolean` | `true` | Underline on hover for `link`. Set `false` to disable. |
 | `ghost` | `boolean` | `false` | Soft fill matching text hover. |
 | `quaternary` | `boolean` | `false` | Extra-quiet text button. |
 | `plain` | `boolean` | `false` | Soft fill matching outlined hover; can also mute `text` / `outlined`. |
