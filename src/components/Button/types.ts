@@ -69,9 +69,9 @@ export interface ButtonProps {
   nativeType?: ButtonHTMLAttributes['type']
   /** Accessible name, recommended for icon-only buttons. */
   ariaLabel?: string
-  /** Click ripple ink. Default `true`. Disabled when theme motion is `none`. */
+  /** Click ripple ink. Default `false`. Disabled when theme motion is `none`. */
   ripple?: boolean
-  /** Press scale on click. Default `true`. */
+  /** Press scale on click. Default `false`. */
   press?: boolean
 }
 

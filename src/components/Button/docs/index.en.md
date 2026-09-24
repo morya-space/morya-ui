@@ -100,8 +100,8 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 | `fluid` | `boolean` | `false` | Stretch to full container width. |
 | `loading` | `boolean` | `false` | Loading state; disables clicks and shows a spinner. |
 | `disabled` | `boolean` | `false` | Disabled. |
-| `ripple` | `boolean` | `true` | Click ripple ink. Set `false` to disable. |
-| `press` | `boolean` | `true` | Slight scale while pressed. Set `false` to disable. |
+| `ripple` | `boolean` | `false` | Click ripple ink. Set `true` to enable. |
+| `press` | `boolean` | `false` | Slight scale while pressed. Set `true` to enable. |
 | `nativeType` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. |
 | `autofocus` | `boolean` | `false` | Native autofocus. |
 | `ariaLabel` | `string` | — | Accessible name; recommended for icon-only buttons. |

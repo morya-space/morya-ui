@@ -27,8 +27,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   autofocus: false,
   nativeType: 'button',
   badgeSeverity: null,
-  ripple: true,
-  press: true,
+  ripple: false,
+  press: false,
 })
 
 const emit = defineEmits<{ (event: 'click', value: MouseEvent): void }>()

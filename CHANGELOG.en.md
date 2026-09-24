@@ -22,6 +22,8 @@
 
 ### Changes
 
+- disable button click ripple by default
+- disable button press scale by default
 - extract filter and expanded-key helpers
 - extract label filter helpers for option lists
 - extract sort, filter, and selection helpers

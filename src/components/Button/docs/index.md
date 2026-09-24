@@ -100,8 +100,8 @@ import { MButton } from 'morya-ui'
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
 | `loading` | `boolean` | `false` | 加载中，禁用点击并显示 spinner。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
-| `ripple` | `boolean` | `true` | 点击水波纹。设为 `false` 可关闭。 |
-| `press` | `boolean` | `true` | 按下时轻微缩放。设为 `false` 可关闭。 |
+| `ripple` | `boolean` | `false` | 点击水波纹。设为 `true` 可开启。 |
+| `press` | `boolean` | `false` | 按下时轻微缩放。设为 `true` 可开启。 |
 | `nativeType` | `'button' \| 'submit' \| 'reset'` | `'button'` | 原生 button type。 |
 | `autofocus` | `boolean` | `false` | 原生 autofocus。 |
 | `ariaLabel` | `string` | — | 可访问名称；图标按钮建议提供。 |
