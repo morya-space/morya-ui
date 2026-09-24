@@ -725,6 +725,7 @@
     "release:nuxt": "node scripts/release-nuxt.mjs",
     "release:setup": "node scripts/release-setup.mjs",
     "mcp:generate": "pnpm --filter @morya-ui/mcp generate",
+    "mcp:generate-recipes": "pnpm --filter @morya-ui/mcp generate:recipes",
     "mcp:check-catalog": "pnpm --filter @morya-ui/mcp check-catalog",
     "mcp:validate-catalog": "pnpm --filter @morya-ui/mcp validate-catalog",
     "mcp:audit-examples": "pnpm --filter @morya-ui/mcp audit-example-coverage",

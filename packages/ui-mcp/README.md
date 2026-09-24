@@ -119,8 +119,10 @@ For a starter Vue file, pass `includeScaffold: true` to `recommend_page`:
 `recommend_component` modes:
 
 - omit `query` and `decision` → list decision guides
-- `decision` only → read one guide (e.g. `overlay-choice`, `selection-choice`, `status-label-choice`, `empty-result-choice`, `action-menu-choice`)
-- `query` → recommend a component for a UI question
+- `decision` only → read one guide with **when / avoidWhen / recipe (props, slots, events) / antiPatterns** (e.g. `overlay-choice`, `selection-choice`, `feedback-choice`, `confirm-choice`)
+- `query` → recommend a guide for a UI question (same recipe payload)
+
+Offline mirror for the page skill: `design-kit/.../references/decision-recipes.md` (regenerate with `pnpm --filter @morya-ui/mcp generate:recipes`).
 
 ## Develop
 
@@ -130,7 +132,7 @@ pnpm mcp:generate
 pnpm mcp:build
 ```
 
-Catalog sources: `src/components/*/docs` and `playground/src/docs/guide/*.md`.
+After editing `src/decisions.ts`, run `pnpm --filter @morya-ui/mcp generate:recipes` (also runs as part of `build`) so the skill offline recipes stay in sync.
 
 ```bash
 pnpm mcp:generate

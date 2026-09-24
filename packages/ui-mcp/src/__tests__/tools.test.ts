@@ -428,6 +428,39 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.options.some((option) => option.component === 'Drawer')).toBe(true)
   })
 
+  it('returns L2 recipes and antiPatterns on decision reads', () => {
+    const result = read<{
+      options: Array<{
+        component: string
+        recipe?: { props?: string[]; slots?: string[]; events?: string[] }
+        antiPatterns?: string[]
+      }>
+    }>(handlers.recommendComponent({ decision: 'data-display-choice' }))
+
+    const table = result.options.find((option) => option.component === 'Table')
+    expect(table?.recipe?.props?.length).toBeGreaterThanOrEqual(3)
+    expect(table?.recipe?.props?.some((line) => /rows/i.test(line))).toBe(true)
+    expect(table?.antiPatterns?.length).toBeGreaterThan(0)
+  })
+
+  it('covers feedback and confirm decision guides', () => {
+    const feedback = read<{ options: Array<{ component: string; recipe?: { props?: string[] } }> }>(
+      handlers.recommendComponent({ decision: 'feedback-choice' }),
+    )
+    expect(feedback.options.map((option) => option.component)).toEqual(
+      expect.arrayContaining(['message', 'toast', 'field errorMessage / role="alert"']),
+    )
+    expect(feedback.options.every((option) => (option.recipe?.props?.length ?? 0) >= 3)).toBe(true)
+
+    const confirm = read<{ options: Array<{ component: string }> }>(
+      handlers.recommendComponent({ decision: 'confirm-choice' }),
+    )
+    expect(confirm.options.map((option) => option.component)).toEqual([
+      'ConfirmDialog',
+      'ConfirmPopup',
+    ])
+  })
+
   it('covers current selection, status, empty, and menu guides', () => {
     const selection = read<{ options: Array<{ component: string }> }>(
       handlers.recommendComponent({ decision: 'selection-choice' }),

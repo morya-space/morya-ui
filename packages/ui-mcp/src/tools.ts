@@ -9,6 +9,7 @@ import {
   toKebab,
 } from './catalog.js'
 import { componentDecisions, findDecision, scoreDecision } from './decisions.js'
+import type { ComponentDecisionOption } from './decisions.js'
 import { listGoldenPages, readGoldenPageSource } from './golden-pages.js'
 import { filterPageSnippets, findPageSnippet, pageSnippets, scorePageSnippet } from './page-snippets.js'
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
@@ -62,6 +63,26 @@ function pickLocale<T extends { locales: Partial<Record<Locale, unknown>> }>(
 
 function vueName(name: string): string {
   return `M${name}`
+}
+
+function mapDecisionOption(option: ComponentDecisionOption, locale: Locale) {
+  const zh = locale !== 'en-US'
+  const recipe = {
+    props: zh ? option.recipe.props : option.recipe.propsEn,
+    ...(option.recipe.slots?.length
+      ? { slots: zh ? option.recipe.slots : option.recipe.slotsEn }
+      : {}),
+    ...(option.recipe.events?.length
+      ? { events: zh ? option.recipe.events : option.recipe.eventsEn }
+      : {}),
+  }
+  return {
+    component: option.component,
+    when: zh ? option.when : option.whenEn,
+    avoidWhen: zh ? option.avoidWhen : option.avoidWhenEn,
+    recipe,
+    antiPatterns: zh ? option.antiPatterns : option.antiPatternsEn,
+  }
 }
 
 function generatedPageCode(patternId: string, intent: string, locale: Locale): { script: string; template: string; style: string } {
@@ -1372,11 +1393,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         title: locale === 'en-US' ? decision.titleEn : decision.title,
         question: locale === 'en-US' ? decision.questionEn : decision.question,
         keywords: decision.keywords,
-        options: decision.options.map((option) => ({
-          component: option.component,
-          when: locale === 'en-US' ? option.whenEn : option.when,
-          avoidWhen: locale === 'en-US' ? option.avoidWhenEn : option.avoidWhen,
-        })),
+        options: decision.options.map((option) => mapDecisionOption(option, locale)),
       })
     }
 
@@ -1398,14 +1415,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
       decision: matched.id,
       title: locale === 'en-US' ? matched.titleEn : matched.title,
       question: locale === 'en-US' ? matched.questionEn : matched.question,
-      recommendations: matched.options.map((option) => ({
-        component: option.component,
-        when: locale === 'en-US' ? option.whenEn : option.when,
-        avoidWhen: locale === 'en-US' ? option.avoidWhenEn : option.avoidWhen,
-      })),
+      recommendations: matched.options.map((option) => mapDecisionOption(option, locale)),
       nextStep: locale === 'en-US'
-        ? 'Use get_component and get_example for the selected component before implementing.'
-        : '实现前请用 get_component 和 get_example 核对所选组件 API。',
+        ? 'Apply the recipe props/slots/events, then use get_component and get_example before implementing. Run validate_usage before delivery.'
+        : '先按 recipe 的 props/slots/events 落地，再用 get_component / get_example 核对 API；交付前跑 validate_usage。',
     })
   }
 
