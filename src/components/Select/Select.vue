@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { VirtualScrollerExpose } from '../VirtualScroller/types'
-import type { SelectModelValue, SelectOption, SelectOptionEntry, SelectOptionGroup, SelectProps, SelectValue } from './types'
+import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
@@ -13,6 +13,19 @@ import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
+import {
+  buildLookupOptions,
+  buildMenuEntries,
+  buildMenuRows,
+  canCreateFromQuery,
+  normalizeSelectedValues,
+  sliceVisibleTags,
+  toggleSelectedValue,
+  type MenuGroupRow,
+  type MenuOption,
+  type MenuOptionRow,
+  type MenuRow,
+} from './selectOptions'
 
 defineOptions({ inheritAttrs: false })
 
@@ -46,30 +59,6 @@ const emit = defineEmits<{
 }>()
 
 const VIRTUAL_AUTO_THRESHOLD = 80
-
-interface MenuOption extends SelectOption {
-  created?: boolean
-}
-
-/* Flat render model shared by the plain list and the virtual scroller:
-   group header rows + option rows. */
-interface MenuGroupRow {
-  type: 'group'
-  label: string
-  key: string
-}
-
-interface MenuOptionRow {
-  type: 'option'
-  option: MenuOption
-  key: string
-}
-
-type MenuRow = MenuGroupRow | MenuOptionRow
-
-function isOptionGroup(entry: SelectOptionEntry): entry is SelectOptionGroup {
-  return Array.isArray((entry as SelectOptionGroup).items)
-}
 
 const slots = useSlots()
 const attrs = useAttrs()
@@ -117,35 +106,13 @@ const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
 const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
 
-const selectedValues = computed<SelectValue[]>(() => {
-  if (resolvedMultiple.value) {
-    if (Array.isArray(props.modelValue)) return props.modelValue
-    if (props.modelValue == null) return []
-    return [props.modelValue]
-  }
-  if (props.modelValue == null || Array.isArray(props.modelValue)) return []
-  return [props.modelValue]
-})
-
-const flatOptions = computed<SelectOption[]>(() =>
-  props.options.flatMap((entry): SelectOption[] => (isOptionGroup(entry) ? entry.items : [entry])),
+const selectedValues = computed(() =>
+  normalizeSelectedValues(props.modelValue, resolvedMultiple.value),
 )
 
-const lookupOptions = computed(() => {
-  const seen = new Set(flatOptions.value.map((option) => String(option.value)))
-  const extras: SelectOption[] = []
-  for (const option of createdOptions.value) {
-    if (seen.has(String(option.value))) continue
-    extras.push(option)
-    seen.add(String(option.value))
-  }
-  for (const value of selectedValues.value) {
-    if (seen.has(String(value))) continue
-    extras.push({ label: String(value), value })
-    seen.add(String(value))
-  }
-  return [...flatOptions.value, ...extras]
-})
+const lookupOptions = computed(() =>
+  buildLookupOptions(props.options, createdOptions.value, selectedValues.value),
+)
 
 function findOption(value: SelectValue): SelectOption | undefined {
   return lookupOptions.value.find((option) => option.value === value)
@@ -155,12 +122,9 @@ const selectedOptions = computed(() =>
   selectedValues.value.map((value) => findOption(value) ?? { label: String(value), value }),
 )
 
-const visibleTags = computed(() => {
-  const all = selectedOptions.value
-  if (props.maxTagCount == null || all.length <= props.maxTagCount) return all
-  return all.slice(0, props.maxTagCount)
-})
-const hiddenTagCount = computed(() => Math.max(0, selectedOptions.value.length - visibleTags.value.length))
+const tagSlice = computed(() => sliceVisibleTags(selectedOptions.value, props.maxTagCount))
+const visibleTags = computed(() => tagSlice.value.visible)
+const hiddenTagCount = computed(() => tagSlice.value.hiddenCount)
 
 const selectedOption = computed(() => (resolvedMultiple.value ? undefined : selectedOptions.value[0]))
 const displayLabel = computed(
@@ -170,64 +134,26 @@ const hasValue = computed(() => selectedValues.value.length > 0)
 const showClearButton = computed(() => resolvedShowClear.value && hasValue.value && !props.disabled)
 
 const query = computed(() => filterQuery.value.trim())
-const canCreate = computed(() => {
-  if (!resolvedTag.value || !resolvedFilter.value) return false
-  if (!query.value) return false
-  return !lookupOptions.value.some(
-    (option) => option.label.toLowerCase() === query.value.toLowerCase() || String(option.value) === query.value,
-  )
-})
+const canCreate = computed(() =>
+  canCreateFromQuery(query.value, lookupOptions.value, {
+    tag: resolvedTag.value,
+    filter: resolvedFilter.value,
+  }),
+)
 
-/* Grouped entries for the menu. Created tags and selected values missing from
-   `options` are appended as ungrouped tail entries; filtering keeps a group
-   only while some of its items match. */
-const menuEntries = computed<SelectOptionEntry[]>(() => {
-  if (resolvedRemote.value) return props.options
-  const seen = new Set(flatOptions.value.map((option) => String(option.value)))
-  const extras: SelectOption[] = []
-  for (const option of createdOptions.value) {
-    if (seen.has(String(option.value))) continue
-    extras.push(option)
-    seen.add(String(option.value))
-  }
-  for (const value of selectedValues.value) {
-    if (seen.has(String(value))) continue
-    extras.push({ label: String(value), value })
-    seen.add(String(value))
-  }
-  const entries: SelectOptionEntry[] = [...props.options, ...extras]
-  const needle = query.value.toLowerCase()
-  if (!needle) return entries
-  return entries.flatMap((entry): SelectOptionEntry[] => {
-    if (isOptionGroup(entry)) {
-      const items = entry.items.filter((option) => option.label.toLowerCase().includes(needle))
-      return items.length ? [{ ...entry, items }] : []
-    }
-    return entry.label.toLowerCase().includes(needle) ? [entry] : []
-  })
-})
+const menuEntries = computed(() =>
+  buildMenuEntries(
+    props.options,
+    createdOptions.value,
+    selectedValues.value,
+    query.value,
+    resolvedRemote.value,
+  ),
+)
 
-const menuRows = computed<MenuRow[]>(() => {
-  const rows: MenuRow[] = []
-  if (canCreate.value) {
-    rows.push({
-      type: 'option',
-      option: { label: query.value, value: query.value, created: true },
-      key: `__create:${query.value}`,
-    })
-  }
-  menuEntries.value.forEach((entry, index) => {
-    if (isOptionGroup(entry)) {
-      rows.push({ type: 'group', label: entry.label, key: `__group:${index}:${entry.label}` })
-      for (const option of entry.items) {
-        rows.push({ type: 'option', option, key: String(option.value) })
-      }
-    } else {
-      rows.push({ type: 'option', option: entry, key: String(entry.value) })
-    }
-  })
-  return rows
-})
+const menuRows = computed(() =>
+  buildMenuRows(menuEntries.value, canCreate.value ? query.value : undefined),
+)
 
 const menuOptions = computed<MenuOption[]>(() =>
   menuRows.value.flatMap((row) => (row.type === 'option' ? [row.option] : [])),
@@ -319,10 +245,7 @@ function selectOption(option: MenuOption) {
     return
   }
   if (resolvedMultiple.value) {
-    const next = isSelected(option.value)
-      ? selectedValues.value.filter((value) => value !== option.value)
-      : [...selectedValues.value, option.value]
-    emitValue(next)
+    emitValue(toggleSelectedValue(selectedValues.value, option.value))
     return
   }
   emitValue(option.value)
