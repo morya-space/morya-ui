@@ -186,4 +186,22 @@ describe('muFileUpload', () => {
     await nextTick()
     expect(wrapper.emitted('change')?.length).toBe(changesAfterSelect)
   })
+
+  it('opens the picker from the drop zone with Enter or Space', async () => {
+    const wrapper = mount(MFileUpload, { props: { drag: true } })
+    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
+    const zone = wrapper.find('.m-fileupload__dragger')
+    await zone.trigger('keydown', { key: 'Enter' })
+    await zone.trigger('keydown', { key: ' ' })
+    expect(click).toHaveBeenCalledTimes(2)
+  })
+
+  it('does not open the picker while disabled', async () => {
+    const wrapper = mount(MFileUpload, { props: { drag: true, disabled: true } })
+    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
+    await wrapper.find('.m-fileupload__dragger').trigger('keydown', { key: 'Enter' })
+    expect(click).not.toHaveBeenCalled()
+  })
 })
