@@ -35,11 +35,11 @@ npx @morya-ui/setup ai
 
 # 非交互：默认 skill / 指定 / 全部
 npx @morya-ui/setup ai --yes
-npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design
+npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
 ```
 
-在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。完成后若写入了 MCP，请 **重启 Cursor**（或重载 MCP）。生成页面前让 Agent 先读 `DESIGN.md`。
+在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**。完成后若写入了 MCP，请 **重启 Cursor**（或重载 MCP）。生成页面前让 Agent 先读 `DESIGN.md`。
 
 ## 选项
 
@@ -52,20 +52,21 @@ npx @morya-ui/setup ai --skills=all
 | `--force` | 覆盖已有模板文件与 `morya-ui` MCP 条目 |
 | `--dry-run` | 只打印将要执行的操作 |
 | `--skip-install` | 不安装依赖 |
-| `--skip-template` | 不复制 skill / rules / docs |
+| `--skip-template` | 不复制 skill / rules / docs（也不装 companion） |
 | `--skip-mcp` | 不写 MCP 配置 |
 | `--skip-styles` | 不注入样式 import |
 | `--skip-scripts` | 不改 `package.json` scripts |
 
-默认 **不覆盖** 已有文件；只有 `--force` 才会覆盖模板与 MCP 条目。
+模板文件默认 **不覆盖**；只有 `--force` 才会覆盖模板与 MCP 条目。勾选的 companion skill 会始终拉取最新版。
 
 ### Skills
 
-| Id | 默认 | 作用 |
-| --- | --- | --- |
-| `morya-ui-pages` | 必选 | 用 `M*` + 黄金布局生成页面 |
-| `frontend-design` | 可选 | Express / 品牌向视觉味觉 |
-| `fixing-accessibility` | 可选 | 无障碍审计与定向修复 |
+| Id | 默认 | 安装方式 | 作用 |
+| --- | --- | --- | --- |
+| `morya-ui-pages` | 必选 | 包内 template | 用 `M*` + 黄金布局生成页面 |
+| `frontend-design` | 可选 | skills CLI（`anthropics/skills` 最新） | Express / 品牌向视觉味觉 |
+| `fixing-accessibility` | 可选 | skills CLI（`ibelick/ui-skills` 最新） | 无障碍审计与定向修复 |
+| `impeccable` | 可选 | skills CLI（`pbakaus/impeccable` 最新） | 命名化 polish / 审计 / 改版 |
 
 目录：[`packages/setup/catalog/skills.json`](https://github.com/morya-space/morya-ui/blob/main/packages/setup/catalog/skills.json)。
 
@@ -81,7 +82,7 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | --- | --- |
 | `DESIGN.md` | AI 设计第一信源（原则、应用根、令牌摘要、禁止项） |
 | `.agents/skills/morya-ui-pages/` | 页面生成 Agent Skill（见 [Agent Skill](/docs/agent-skill)） |
-| `.agents/skills/<optional>/` | 勾选时写入的 companion skill |
+| `.agents/skills/<optional>/` | 勾选时由 skills CLI 写入的最新 companion |
 | `.cursor/rules/` | Cursor 常驻规则 |
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
 | `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp`） |
@@ -91,6 +92,7 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 ## 冲突策略
 
 - 模板文件与 `.cursor/rules/*`：目标已存在则跳过（除非 `--force`）
+- Companion skills（skills CLI）：勾选时始终安装/更新为最新版
 - `.cursor/mcp.json`：合并其它 server；已有 `morya-ui` 条目则跳过（除非 `--force`）
 - `check:colors`：仅在缺失时追加（除非 `--force`）
 - 样式：找到入口且尚未引入时才注入

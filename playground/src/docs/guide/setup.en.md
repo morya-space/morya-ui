@@ -35,11 +35,11 @@ npx @morya-ui/setup ai
 
 # Non-interactive skill selection
 npx @morya-ui/setup ai --yes
-npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design
+npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
 ```
 
-On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DESIGN.md` before generating pages.
+On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/). If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DESIGN.md` before generating pages.
 
 ## Options
 
@@ -52,20 +52,21 @@ On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pa
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions only |
 | `--skip-install` | Skip dependency install |
-| `--skip-template` | Skip copying skill / rules / docs |
+| `--skip-template` | Skip copying skill / rules / docs (also skips companion install) |
 | `--skip-mcp` | Skip writing MCP config |
 | `--skip-styles` | Skip styles import injection |
 | `--skip-scripts` | Skip `package.json` scripts |
 
-By default **existing files are not overwritten**; use `--force` to overwrite templates and the MCP entry.
+Template files are **not** overwritten by default; use `--force` for templates and the MCP entry. Selected companion skills always refresh to latest.
 
 ### Skills
 
-| Id | Default | Role |
-| --- | --- | --- |
-| `morya-ui-pages` | required | Page generation with `M*` + golden layouts |
-| `frontend-design` | optional | Express / brand visual taste |
-| `fixing-accessibility` | optional | A11y audit and targeted fixes |
+| Id | Default | Install | Role |
+| --- | --- | --- | --- |
+| `morya-ui-pages` | required | package template | Page generation with `M*` + golden layouts |
+| `frontend-design` | optional | skills CLI (`anthropics/skills`, latest) | Express / brand visual taste |
+| `fixing-accessibility` | optional | skills CLI (`ibelick/ui-skills`, latest) | A11y audit and targeted fixes |
+| `impeccable` | optional | skills CLI (`pbakaus/impeccable`, latest) | Named polish / audit / redesign |
 
 Catalog: [`packages/setup/catalog/skills.json`](https://github.com/morya-space/morya-ui/blob/main/packages/setup/catalog/skills.json).
 
@@ -81,7 +82,7 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | --- | --- |
 | `DESIGN.md` | Primary design brief (principles, app root, token summary, bans) |
 | `.agents/skills/morya-ui-pages/` | Page-generation Agent skill (see [Agent Skill](/docs/agent-skill)) |
-| `.agents/skills/<optional>/` | Companion skills when selected |
+| `.agents/skills/<optional>/` | Latest companion skills via skills CLI when selected |
 | `.cursor/rules/` | Cursor always-on rules |
 | `scripts/check-raw-colors.mjs` | Raw color scan |
 | `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp`) |
@@ -91,6 +92,7 @@ Template source: [`design-kit/`](https://github.com/morya-space/morya-ui/tree/ma
 ## Conflict policy
 
 - Template files and `.cursor/rules/*`: skip if the destination exists (unless `--force`)
+- Companion skills (skills CLI): always install/update to latest when selected
 - `.cursor/mcp.json`: merge other servers; skip an existing `morya-ui` entry unless `--force`
 - `check:colors`: add only if missing (unless `--force`)
 - Styles: inject only when an entry is found and the import is not already present
