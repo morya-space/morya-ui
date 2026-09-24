@@ -32,11 +32,12 @@ alwaysApply: false
 3. `MLayoutHeader` → `MBreadcrumb`
 4. `MLayoutContent` → `MPageContent`
 5. `MPageHeader`（页面标题 + `#actions` 主操作；视口内 **唯一** filled primary）
-6. `MPageFilters`（可选 `variant="filled"`；内 `MSpace` + Input/Select；查询/重置用 secondary）
-7. 可选 `MPageToolbar`（仅批量操作，**不要**页面标题）
-8. `MTable`（直接放置，通常不必包 `MCard`；`#empty` → `MEmpty`）
-9. 分页由 `MTable paginator` 或同级 `MPagination`
-10. 短新建/编辑：同页 `MDialog` + `MForm`
+6. `MPageFilters`（可选 `variant="filled"`、`collapsible` + `#advanced`；查询/重置用 secondary）
+7. 可选 `MPageFilterChips` + 可关闭 `MTag`（有已选条件时，放在筛选与表格之间）
+8. 可选 `MPageToolbar`（仅批量操作，**不要**页面标题）
+9. `MTable`（直接放置；`#empty` → `MEmpty`）
+10. 分页由 `MTable paginator` 或同级 `MPagination`
+11. 短新建/编辑：同页 `MDialog` + `MForm`
 
 ## 表单页区块顺序
 

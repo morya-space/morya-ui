@@ -100,7 +100,7 @@ Run **before** delivery. Do not stop at a structurally correct shell.
 
 - **Ops:** apply [visual-craft.md](references/visual-craft.md) § Ops polish (one primary, menu icons, `MStatus` in tables, designed empty, no decorative cards).
 - **Account / Flow:** one calm brand or empty-state cue from § Atmosphere recipes; form errors via `errorMessage` / token `role="alert"`.
-- **Express:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions; honor `useMotion` / `prefers-reduced-motion` (or `respectReducedMotion`).
+- **Express:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions; intensity via `useMotion` (`full` / `reduced` / `none`), not the OS `prefers-reduced-motion` setting.
 - **All lanes:** responsive, focus visible, domain-real copy (active voice).
 
 Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): use as an **extra** pass when the user asks to improve an existing screen. See [visual-craft.md](references/visual-craft.md) § Polish modes.

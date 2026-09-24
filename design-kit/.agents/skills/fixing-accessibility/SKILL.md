@@ -105,7 +105,7 @@ Reference these guidelines when:
 
 - images must have correct alt text (meaningful or empty)
 - videos with speech should provide captions when relevant
-- respect prefers-reduced-motion for non-essential motion
+- for morya-ui / page motion, follow `useMotion` (`data-m-motion`); do not gate M* motion on OS `prefers-reduced-motion`
 - avoid autoplaying media with sound
 
 ### 9. tool boundaries (critical)

@@ -19,7 +19,7 @@
 - [ ] At most one primary filled button in the main viewport
 - [ ] Copy is domain-real; empty / error states say what to do next
 - [ ] No AI-default look clusters unless the brief asked for them
-- [ ] Motion (if any) is 1–3 intentional moments and respects `prefers-reduced-motion`
+- [ ] Motion (if any) is 1–3 intentional moments and follows `useMotion` / `data-m-motion` (not OS `prefers-reduced-motion`)
 
 ## Ops
 

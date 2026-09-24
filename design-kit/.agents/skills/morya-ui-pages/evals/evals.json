@@ -33,8 +33,8 @@
     },
     {
       "id": 6,
-      "prompt": "为「流水线 CI」产品写一个营销落地首页（不是后台）：首屏只有品牌名、一句主标题、一句副文、一组 CTA；下面再分「为何选择」「能力」「客户」三节。技术实现用 Vue3 + morya-ui 组件做按钮/标签/折叠 FAQ；颜色走 --m-*，避免紫渐变和奶油衬线陶土那套 AI 默认脸。可有 1–2 个微动效并尊重 prefers-reduced-motion。输出单个 Vue SFC。",
-      "expected_output": "Express landing: single-job hero, MButton CTAs, sections with one job each, MAccordion FAQ optional, no purple/cream-terracotta defaults, no admin MPageFilters shell, reduced-motion aware.",
+      "prompt": "为「流水线 CI」产品写一个营销落地首页（不是后台）：首屏只有品牌名、一句主标题、一句副文、一组 CTA；下面再分「为何选择」「能力」「客户」三节。技术实现用 Vue3 + morya-ui 组件做按钮/标签/折叠 FAQ；颜色走 --m-*，避免紫渐变和奶油衬线陶土那套 AI 默认脸。可有 1–2 个微动效，强度跟 useMotion / data-m-motion。输出单个 Vue SFC。",
+      "expected_output": "Express landing: single-job hero, MButton CTAs, sections with one job each, MAccordion FAQ optional, no purple/cream-terracotta defaults, no admin MPageFilters shell, motion gated by useMotion / data-m-motion.",
       "files": []
     },
     {

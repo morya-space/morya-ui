@@ -57,7 +57,7 @@ Also avoid: Inter/Roboto/Arial as the *expressive* display choice on Express sur
 - **Hero is a thesis** (Express): one job in the first viewport — not stats + schedule + promos together.
 - **Structure encodes meaning**: numbered steps only when order is real information.
 - **Cards**: default off for Express heroes; use `MCard` when it groups an interaction or plan choice.
-- **Motion**: orchestrate 2–3 intentional moments max; respect `prefers-reduced-motion`. Prefer transform/opacity over layout thrash.
+- **Motion**: orchestrate 2–3 intentional moments max; gate custom CSS motion with `[data-m-motion="full"]` (library intensity from `useMotion`). Prefer transform/opacity over layout thrash.
 - **Density**: Ops may be compact; Express needs breathing room — match the lane.
 
 ## Atmosphere recipes (token-only)
@@ -121,14 +121,12 @@ Full-bleed thesis: brand mark (small) → one headline → one lead → CTA grou
 Optional micro-motion (one signature only):
 
 ```css
-@media (prefers-reduced-motion: no-preference) {
-  .landing-hero__track span {
-    animation: m-craft-fade-up 480ms ease both;
-  }
-  .landing-hero__track span:nth-child(2) { animation-delay: 60ms; }
-  .landing-hero__track span:nth-child(3) { animation-delay: 120ms; }
-  .landing-hero__track span:nth-child(4) { animation-delay: 180ms; }
+[data-m-motion="full"] .landing-hero__track span {
+  animation: m-craft-fade-up 480ms ease both;
 }
+[data-m-motion="full"] .landing-hero__track span:nth-child(2) { animation-delay: 60ms; }
+[data-m-motion="full"] .landing-hero__track span:nth-child(3) { animation-delay: 120ms; }
+[data-m-motion="full"] .landing-hero__track span:nth-child(4) { animation-delay: 180ms; }
 @keyframes m-craft-fade-up {
   from { opacity: 0; transform: translateY(0.4rem); }
   to { opacity: 1; transform: translateY(0); }

@@ -34,7 +34,7 @@
 | 动效时长 | `--m-motion-fast/normal/enter/exit` |
 | 进出场位移 / 缓动 | `--m-motion-distance` / `--m-motion-ease` |
 
-动效强度用 `useMotion`（`data-m-motion`）；进出场预设用 `motion.transitions` / 组件 `transition`（见文档站「动效」）。
+动效强度用 `useMotion`（`data-m-motion`：`full` / `reduced` / `none`），不跟随系统 `prefers-reduced-motion`；进出场预设用 `motion.transitions` / 组件 `transition`（见文档站「动效」）。
 
 ## 4. 禁止项
 
