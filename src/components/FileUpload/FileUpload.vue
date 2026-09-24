@@ -6,6 +6,7 @@ import { useMLocale } from '../../locale'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 import { ajaxUpload } from './ajax'
+import { formatSize, isImageFile, matchesAccept } from './fileUtils'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
@@ -98,29 +99,6 @@ function emitChange(file: FileUploadFile, fileList: FileUploadFile[]) {
   emit('change', file, fileList)
 }
 
-function matchesAccept(file: File) {
-  const accept = props.accept?.trim()
-  if (!accept) return true
-  return accept.split(',').some((raw) => {
-    const rule = raw.trim().toLowerCase()
-    if (!rule) return false
-    if (rule.startsWith('.')) return file.name.toLowerCase().endsWith(rule)
-    if (rule.endsWith('/*')) return file.type.toLowerCase().startsWith(rule.slice(0, -1))
-    return file.type.toLowerCase() === rule
-  })
-}
-
-function isImageFile(file: FileUploadFile) {
-  if (file.type?.startsWith('image/')) return true
-  return /\.(avif|bmp|gif|jpe?g|png|svg|webp)$/i.test(file.name)
-}
-
-function formatSize(size = 0) {
-  if (size < 1024) return `${size} B`
-  if (size < 1024 * 1024) return `${Math.round(size / 1024)} KB`
-  return `${(size / (1024 * 1024)).toFixed(1)} MB`
-}
-
 function createItem(file: File): FileUploadFile {
   return {
     uid: nextUid(),
@@ -142,7 +120,7 @@ async function applyFiles(incoming: File[]) {
   if (props.disabled) return
   const accepted: File[] = []
   for (const file of incoming) {
-    if (!matchesAccept(file)) continue
+    if (!matchesAccept(file, props.accept)) continue
     if (props.maxSize != null && file.size > props.maxSize) {
       emit('exceed-size', file)
       continue
