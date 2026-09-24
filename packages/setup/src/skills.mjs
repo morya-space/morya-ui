@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process'
 import { createInterface } from 'node:readline'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -13,6 +14,9 @@ const CATALOG_PATH = join(__dirname, '..', 'catalog', 'skills.json')
  *   description: string
  *   required?: boolean
  *   default?: boolean
+ *   install?: 'template' | 'skills-cli'
+ *   source?: string
+ *   skill?: string
  *   path: string
  * }} SkillEntry
  */
@@ -22,6 +26,20 @@ const CATALOG_PATH = join(__dirname, '..', 'catalog', 'skills.json')
  */
 export function loadSkillsCatalog() {
   return readJson(CATALOG_PATH)
+}
+
+/**
+ * @param {SkillEntry} skill
+ */
+export function isTemplateSkill(skill) {
+  return !skill.install || skill.install === 'template'
+}
+
+/**
+ * @param {SkillEntry} skill
+ */
+export function isSkillsCliSkill(skill) {
+  return skill.install === 'skills-cli'
 }
 
 /**
@@ -63,21 +81,23 @@ export function parseSkillsFlag(raw, skills) {
 }
 
 /**
+ * Template-relative paths for skills that ship inside the package template.
  * @param {string[]} skillIds
  * @param {SkillEntry[]} skills
  * @returns {string[]}
  */
 export function skillPathsForIds(skillIds, skills) {
   const byId = new Map(skills.map((s) => [s.id, s]))
-  return skillIds.map((id) => {
+  return skillIds.flatMap((id) => {
     const entry = byId.get(id)
     if (!entry) throw new Error(`Unknown skill id: ${id}`)
-    return entry.path
+    if (!isTemplateSkill(entry)) return []
+    return [entry.path]
   })
 }
 
 /**
- * Build template include prefixes for the AI pack.
+ * Build template include prefixes for the AI pack (first-party files only).
  * @param {string[]} skillIds
  * @param {SkillEntry[]} skills
  */
@@ -88,6 +108,54 @@ export function buildAiInclude(skillIds, skills) {
     '.cursor/rules',
     'scripts/check-raw-colors.mjs',
   ]
+}
+
+/**
+ * Install selected companion skills via the skills CLI (always latest from source).
+ * @param {string} cwd
+ * @param {string[]} skillIds
+ * @param {SkillEntry[]} skills
+ * @param {{ dryRun?: boolean }} [options]
+ * @returns {{ installed: string[], commands: string[], dryRun?: boolean, skipped?: boolean }}
+ */
+export function installSkillsCli(cwd, skillIds, skills, { dryRun = false } = {}) {
+  const selected = skills.filter((s) => skillIds.includes(s.id) && isSkillsCliSkill(s))
+  if (!selected.length) {
+    return { installed: [], commands: [], skipped: true }
+  }
+
+  for (const entry of selected) {
+    if (!entry.source) {
+      throw new Error(`Skill "${entry.id}" is marked skills-cli but has no source`)
+    }
+  }
+
+  /** @type {Map<string, string[]>} */
+  const bySource = new Map()
+  for (const entry of selected) {
+    const name = entry.skill || entry.id
+    const list = bySource.get(entry.source) || []
+    list.push(name)
+    bySource.set(entry.source, list)
+  }
+
+  const commands = []
+  for (const [source, names] of bySource) {
+    const skillFlags = names.map((name) => `-s ${name}`).join(' ')
+    commands.push(`npx -y skills add ${source} ${skillFlags} -a cursor -y`)
+  }
+
+  if (dryRun) {
+    return { installed: selected.map((s) => s.id), commands, dryRun: true }
+  }
+
+  console.log('Companion skills (latest via skills CLI):')
+  for (const command of commands) {
+    console.log(`  $ ${command}`)
+    execSync(command, { cwd, stdio: 'inherit', shell: true })
+  }
+
+  return { installed: selected.map((s) => s.id), commands }
 }
 
 /**
@@ -108,7 +176,8 @@ export async function resolveSkillSelection(skills, { skipPrompt = false } = {})
   console.log('Select optional Agent skills (in addition to required):')
   optional.forEach((skill, index) => {
     const mark = skill.default ? 'x' : ' '
-    console.log(`  ${index + 1}. [${mark}] ${skill.id} — ${skill.description}`)
+    const via = isSkillsCliSkill(skill) ? ' [latest via skills CLI]' : ''
+    console.log(`  ${index + 1}. [${mark}] ${skill.id} — ${skill.description}${via}`)
   })
   console.log('')
   console.log('Enter comma-separated numbers or ids (empty = defaults only).')

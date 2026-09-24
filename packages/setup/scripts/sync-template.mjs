@@ -15,7 +15,10 @@ const templateRoot = join(pkgRoot, 'template')
 const catalogPath = join(pkgRoot, 'catalog', 'skills.json')
 
 const catalog = JSON.parse(readFileSync(catalogPath, 'utf8'))
-const skillPaths = catalog.skills.map((skill) => skill.path)
+// Only first-party template skills are vendored; companions install via skills CLI at setup time.
+const skillPaths = catalog.skills
+  .filter((skill) => !skill.install || skill.install === 'template')
+  .map((skill) => skill.path)
 
 /** Relative paths under design-kit to publish for consumers. */
 const INCLUDE = [

@@ -10,13 +10,13 @@
 npx @morya-ui/setup
 ```
 
-会安装 `morya-ui`、按交互/flags 复制本目录中的 skill / rules / `DESIGN.md` 等、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入样式。
+会安装 `morya-ui`、复制本目录中的 `morya-ui-pages` / rules / `DESIGN.md` 等、按需用 skills CLI 安装最新 companion skills、写入 Cursor MCP（`@morya-ui/mcp`），并尽量在入口注入样式。
 
 已安装组件库时，可只写入本配置与 MCP：
 
 ```bash
 npx @morya-ui/setup ai
-npx @morya-ui/setup ai --skills=all   # 含 companion skills
+npx @morya-ui/setup ai --skills=all   # 含最新 companion skills（skills CLI）
 ```
 
 完整说明（flags、冲突策略）：
@@ -37,8 +37,7 @@ npx @morya-ui/setup ai --skills=all   # 含 companion skills
 | `scripts/check-raw-colors.mjs` | CI / 本地裸色值扫描 |
 | `.cursor/rules/` | Cursor 规则（设计系统、组件用法、页面布局、编码风格） |
 | `.agents/skills/morya-ui-pages/` | 必选：Ops / 账户 / 流程 / 系统 / 营销等；可与 rules 并存 |
-| `.agents/skills/frontend-design/` | 可选 companion：Express / 品牌视觉味觉 |
-| `.agents/skills/fixing-accessibility/` | 可选 companion：无障碍审计 |
+| （setup 可选）`frontend-design` / `fixing-accessibility` / `impeccable` | 不在本目录 vendoring；由 setup 通过 skills CLI 安装最新版 |
 
 ## 手动接入步骤
 

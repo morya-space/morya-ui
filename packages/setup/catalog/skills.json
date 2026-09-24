@@ -6,6 +6,7 @@
       "description": "Build admin and product pages with M* components, golden layouts, and tokens.",
       "required": true,
       "default": true,
+      "install": "template",
       "path": ".agents/skills/morya-ui-pages"
     },
     {
@@ -14,6 +15,9 @@
       "description": "Distinctive visual direction for Express / brand surfaces (taste only; still remediate with M*).",
       "required": false,
       "default": false,
+      "install": "skills-cli",
+      "source": "anthropics/skills",
+      "skill": "frontend-design",
       "path": ".agents/skills/frontend-design"
     },
     {
@@ -22,7 +26,21 @@
       "description": "Audit and fix names, keyboard, focus, forms, and WCAG basics.",
       "required": false,
       "default": false,
+      "install": "skills-cli",
+      "source": "ibelick/ui-skills",
+      "skill": "fixing-accessibility",
       "path": ".agents/skills/fixing-accessibility"
+    },
+    {
+      "id": "impeccable",
+      "name": "Impeccable",
+      "description": "Named polish / audit / redesign passes for frontend UI (latest from pbakaus/impeccable).",
+      "required": false,
+      "default": false,
+      "install": "skills-cli",
+      "source": "pbakaus/impeccable",
+      "skill": "impeccable",
+      "path": ".agents/skills/impeccable"
     }
   ]
 }

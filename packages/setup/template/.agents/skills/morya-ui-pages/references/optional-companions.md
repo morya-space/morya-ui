@@ -1,6 +1,6 @@
 # Optional companions
 
-This skill is **standalone**. Distilled craft lives in [visual-craft.md](visual-craft.md). Companions are optional soft upgrades installed by `@morya-ui/setup` (or already present in the repo).
+This skill is **standalone**. Distilled craft lives in [visual-craft.md](visual-craft.md). Companions are optional soft upgrades installed by `@morya-ui/setup` via the [skills CLI](https://skills.sh/) (always the latest published version).
 
 ## Conflict rule
 
@@ -13,15 +13,15 @@ This skill is **standalone**. Distilled craft lives in [visual-craft.md](visual-
 npx @morya-ui/setup ai
 
 # Non-interactive
-npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,fixing-accessibility
+npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,fixing-accessibility,impeccable
 npx @morya-ui/setup ai --skills=all
 ```
 
-| Companion | Safe use | Unsafe use |
-| --- | --- | --- |
-| `frontend-design` | Express / brand panel taste after surface + contract are fixed | Replacing Ops golden shell or introducing a second UI kit |
-| `fixing-accessibility` | Names, keyboard, focus, form errors on top of `M*` | Replacing library dialogs/menus with custom ARIA widgets |
-| `impeccable` (if present locally) | Named polish passes aligned with [visual-craft.md](visual-craft.md) | New token schema or swapping `M*` for raw HTML controls |
+| Companion | Source | Safe use | Unsafe use |
+| --- | --- | --- | --- |
+| `frontend-design` | `anthropics/skills` | Express / brand panel taste after surface + contract are fixed | Replacing Ops golden shell or introducing a second UI kit |
+| `fixing-accessibility` | `ibelick/ui-skills` | Names, keyboard, focus, form errors on top of `M*` | Replacing library dialogs/menus with custom ARIA widgets |
+| `impeccable` | `pbakaus/impeccable` | Named polish / audit passes aligned with [visual-craft.md](visual-craft.md) | New token schema or swapping `M*` for raw HTML controls |
 
 ## Load budget
 

@@ -8,6 +8,7 @@ import { mergeMcpConfig } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
 import {
   buildAiInclude,
+  installSkillsCli,
   loadSkillsCatalog,
   parseSkillsFlag,
   resolveSkillSelection,
@@ -39,7 +40,8 @@ export function printHelp() {
   const { skills } = loadSkillsCatalog()
   const skillList = skills.map((s) => {
     const tag = s.required ? 'required' : s.default ? 'default' : 'optional'
-    return `    ${s.id.padEnd(24)} (${tag}) ${s.description}`
+    const via = s.install === 'skills-cli' ? ' [skills-cli latest]' : ''
+    return `    ${s.id.padEnd(24)} (${tag})${via} ${s.description}`
   }).join('\n')
 
   console.log(`Usage: morya-ui-setup [command] [options]
@@ -243,6 +245,10 @@ export async function runSetup(options) {
         include: aiInclude,
       })
 
+  const remoteSkills = skipTemplate || !selectedSkills.length
+    ? { installed: [], commands: [], skipped: true }
+    : installSkillsCli(cwd, selectedSkills, catalog.skills, { dryRun })
+
   const mcp = skipMcp
     ? { path: join(cwd, '.cursor', 'mcp.json'), action: 'skipped-flag' }
     : mergeMcpConfig(cwd, { force, dryRun })
@@ -275,6 +281,15 @@ export async function runSetup(options) {
       for (const file of template.skipped.slice(0, 5)) console.log(`  skip ${file}`)
       console.log(`  … and ${template.skipped.length - 5} more (use --force to overwrite)`)
     }
+  }
+
+  if (remoteSkills.skipped) {
+    // no companions selected or template step skipped
+  } else if (remoteSkills.dryRun) {
+    console.log(`Skills CLI: dry-run — would install ${remoteSkills.installed.join(', ')}`)
+    for (const command of remoteSkills.commands) console.log(`  $ ${command}`)
+  } else {
+    console.log(`Skills CLI: installed ${remoteSkills.installed.join(', ')} (latest)`)
   }
 
   if (mcp.action === 'skipped-flag') {
@@ -316,5 +331,5 @@ export async function runSetup(options) {
     console.log('  4. Optional: pnpm check:colors')
   }
 
-  return { mode, install, template, mcp, styles, scripts, skills: selectedSkills }
+  return { mode, install, template, remoteSkills, mcp, styles, scripts, skills: selectedSkills }
 }
