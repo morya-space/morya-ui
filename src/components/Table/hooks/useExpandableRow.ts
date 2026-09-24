@@ -2,6 +2,7 @@ import type { ComputedRef, Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { EmitsEventName } from './internal'
 import { computed, ref } from 'vue'
+import { toggleExpandedRowKeys } from '../tableQuery'
 import { resolveRowKey } from '../utils'
 
 export function useExpandableRow(
@@ -21,12 +22,7 @@ export function useExpandableRow(
 
   const toggleExpandRow = (item: TableItem, pageIndex: number, event: Event) => {
     event.stopPropagation()
-    const key = keyOf(item, pageIndex)
-    const index = expandedKeys.value.indexOf(key)
-    const expanded = index === -1
-    const next = expanded
-      ? [...expandedKeys.value, key]
-      : expandedKeys.value.filter((existing) => existing !== key)
+    const { next, expanded } = toggleExpandedRowKeys(expandedKeys.value, keyOf(item, pageIndex))
     internalExpandedKeys.value = next
     emits('update:expandedRowKeys', next)
     emits('expand', { row: item, expanded })
