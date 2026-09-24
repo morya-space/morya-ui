@@ -22,6 +22,7 @@ import {
   setCheckedCascade,
   syncAncestors,
 } from '../Tree/checkStrategy'
+import { filterTreePrune, toggleTreeExpandedKey } from '../Tree/treeQuery'
 import TreeSelectNodeItem from './TreeSelectNodeItem.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -115,17 +116,7 @@ const visibleTags = computed(() => {
 })
 const hiddenTagCount = computed(() => Math.max(0, selectedTags.value.length - visibleTags.value.length))
 const showClearButton = computed(() => props.clearable && selectedKeys.value.length > 0 && !props.disabled)
-const filteredOptions = computed(() => {
-  const q = query.value.trim().toLowerCase()
-  if (!q) return props.options
-  const match = (node: TreeSelectNode): TreeSelectNode | null => {
-    const self = node.label.toLowerCase().includes(q)
-    const children = (node.children ?? []).map(match).filter((item): item is TreeSelectNode => item != null)
-    if (self || children.length) return { ...node, children: children.length ? children : node.children }
-    return null
-  }
-  return props.options.map(match).filter((item): item is TreeSelectNode => item != null)
-})
+const filteredOptions = computed(() => filterTreePrune(props.options, query.value))
 
 interface FlatTreeNode {
   node: TreeSelectNode
@@ -266,7 +257,7 @@ watch(keyboard.activeIndex, () => {
 })
 
 function toggleExpand(key: string) {
-  expanded.value = { ...expanded.value, [key]: !expanded.value[key] }
+  expanded.value = toggleTreeExpandedKey(expanded.value, key, { mode: 'boolean' })
 }
 
 function emitKeys(keys: string[]) {

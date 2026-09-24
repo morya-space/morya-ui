@@ -15,13 +15,20 @@ import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
 import {
   buildChildMap,
   expandCheckedKeys,
+  findNode,
   projectCheckedKeys,
   setCheckedCascade,
   syncAncestors,
-  walkTree,
 } from './checkStrategy'
 import { M_TREE_KEY, M_TREE_NODE_SLOT } from './context'
 import TreeNodeItem from './TreeNodeItem.vue'
+import {
+  collectExpandableTreeKeys,
+  filterTreeRoots,
+  matchTreeNodeByLabel,
+  toggleTreeExpandedKey,
+  treeNodeMatchesFilter,
+} from './treeQuery'
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<TreeProps>(), {
   selectionMode: 'single',
@@ -80,11 +87,7 @@ watch(
       return
     }
     if (props.defaultExpandAll) {
-      const next: TreeExpandedKeys = {}
-      walkTree(props.value, (node) => {
-        if (node.children?.length) next[node.key] = true
-      })
-      innerExpanded.value = next
+      innerExpanded.value = collectExpandableTreeKeys(props.value)
     }
   },
   { immediate: true },
@@ -108,22 +111,15 @@ const checked = computed(() =>
   expandCheckedKeys(props.value, props.checkedKeys ?? {}, checkStrategy.value, props.checkStrictly),
 )
 
-function defaultFilter(value: string, data: TreeNode) {
-  return data.label.toLowerCase().includes(value.toLowerCase())
-}
+const filterMatcher = computed(() => props.filterNode ?? matchTreeNodeByLabel)
 
 function nodeMatches(node: TreeNode): boolean {
-  const query = props.filter?.trim()
-  if (!query) return true
-  const matcher = props.filterNode ?? defaultFilter
-  if (matcher(query, node)) return true
-  return (node.children ?? []).some((child) => nodeMatches(child))
+  return treeNodeMatchesFilter(node, props.filter ?? '', filterMatcher.value)
 }
 
-const visibleRoots = computed(() => {
-  if (!props.filter?.trim()) return props.value
-  return props.value.filter((node) => nodeMatches(node))
-})
+const visibleRoots = computed(() =>
+  filterTreeRoots(props.value, props.filter ?? '', filterMatcher.value),
+)
 
 const isFilterEmpty = computed(
   () => Boolean(props.filter?.trim()) && visibleRoots.value.length === 0,
@@ -131,19 +127,10 @@ const isFilterEmpty = computed(
 
 function isExpanded(key: string) {
   if (props.filter?.trim()) {
-    const node = findNodeByKey(props.value, key)
+    const node = findNode(props.value, key)
     if (node && (node.children ?? []).some((child) => nodeMatches(child))) return true
   }
   return Boolean(innerExpanded.value[key])
-}
-
-function findNodeByKey(nodes: TreeNode[], key: string): TreeNode | null {
-  for (const node of nodes) {
-    if (node.key === key) return node
-    const found = findNodeByKey(node.children ?? [], key)
-    if (found) return found
-  }
-  return null
 }
 
 function isSelected(key: string) {
@@ -190,22 +177,19 @@ function childrenOf(node: TreeNode) {
 function isMatch(node: TreeNode) {
   const query = props.filter?.trim()
   if (!query) return false
-  const matcher = props.filterNode ?? defaultFilter
-  return matcher(query, node)
+  return filterMatcher.value(query, node)
 }
 
 async function toggleExpand(node: TreeNode) {
   if (isDisabled(node)) return
   const open = isExpanded(node.key)
-  let next: TreeExpandedKeys = { ...innerExpanded.value }
+  let next = toggleTreeExpandedKey(innerExpanded.value, node.key, {
+    open,
+    accordion: props.accordion,
+  })
   if (open) {
-    delete next[node.key]
     emit('node-collapse', node)
   } else {
-    if (props.accordion) {
-      next = {}
-    }
-    next[node.key] = true
     emit('node-expand', node)
     if (props.lazy && props.load && !node.children?.length && !loadedKeys[node.key] && !node.isLeaf) {
       loadingKeys[node.key] = true
@@ -215,6 +199,7 @@ async function toggleExpand(node: TreeNode) {
         loadedKeys[node.key] = true
       } catch (error) {
         loadFailedKeys[node.key] = true
+        next = { ...next }
         delete next[node.key]
         emit('node-load-error', { node, error })
       } finally {
