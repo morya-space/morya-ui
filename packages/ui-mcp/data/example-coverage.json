@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-23T09:00:43.642Z",
-  "catalogGeneratedAt": "2026-09-23T09:00:38.573Z",
+  "generatedAt": "2026-09-24T03:18:19.583Z",
+  "catalogGeneratedAt": "2026-09-24T03:18:15.247Z",
   "components": [
     {
       "id": "Accordion",
@@ -198,12 +198,14 @@
       "exportName": "MButton",
       "examples": 20,
       "props": {
-        "total": 24,
+        "total": 26,
         "covered": 21,
         "missing": [
           "variant",
-          "autofocus",
-          "nativeType"
+          "ripple",
+          "press",
+          "nativeType",
+          "autofocus"
         ]
       },
       "events": {
@@ -231,7 +233,7 @@
     {
       "id": "Card",
       "exportName": "MCard",
-      "examples": 8,
+      "examples": 10,
       "props": {
         "total": 8,
         "covered": 4,
@@ -1920,13 +1922,15 @@
     {
       "id": "Page",
       "exportName": "MPageContent",
-      "examples": 6,
+      "examples": 10,
       "props": {
-        "total": 13,
-        "covered": 10,
+        "total": 24,
+        "covered": 19,
         "missing": [
+          "bands",
+          "expandLabel",
+          "collapseLabel",
           "headingLevel",
-          "trendSeverity",
           "minHeight"
         ]
       },
@@ -1936,9 +1940,15 @@
         "missing": []
       },
       "slots": {
-        "total": 2,
-        "covered": 2,
-        "missing": []
+        "total": 8,
+        "covered": 3,
+        "missing": [
+          "active",
+          "breadcrumb",
+          "tags",
+          "icon",
+          "extra"
+        ]
       },
       "methods": {
         "total": 0,
@@ -3377,6 +3387,6 @@
   "summary": {
     "components": 93,
     "componentsWithMissingCoverage": 93,
-    "totalExamples": 811
+    "totalExamples": 817
   }
 }

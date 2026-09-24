@@ -1,5 +1,37 @@
 # morya-ui
 
+## 0.3.2
+
+### 新功能
+
+- add click ripple and a press-scale toggle
+- replace quick jumper with a filterable Select
+- refine ops layout primitives and P2 filter/stat APIs
+- add shadow prop and remove hoverable
+
+### 修复
+
+- Panel component change demo component width
+- remove OS reduced-motion media queries from components
+- control intensity via library preference only
+
+### 文档
+
+- document impeccable and skills-cli companion install
+- document library-only motion control
+
+### 变更
+
+- extract filter and expanded-key helpers
+- extract label filter helpers for option lists
+- extract sort, filter, and selection helpers
+- extract expand and visible-entry helpers
+- extract option filter and multi-select helpers
+- cover CommandMenu keys and FileUpload dropzone keyboard
+- extract accept and size helpers
+- polish overlay scale, press feedback, and scroll containment
+- refresh snippets, generators, and golden page copies
+
 ## 0.3.1
 
 ### 新功能
