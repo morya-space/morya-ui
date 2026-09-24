@@ -1,5 +1,5 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
 import '../Icon/styles.css'
-import '../Select/style'
+import '../Select/styles.css'
 import './styles.css'
