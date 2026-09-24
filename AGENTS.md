@@ -39,12 +39,15 @@
 
 - Vue3 组件库工程：`vue3-component-library`
 - 单个组件 API / 设计：`vue3-component-design`
-- Vue3 单元测试：`vue3-unit-testing`
+- Vue3 通用写法：`vue`、`vue-best-practices`
+- Vue3 单元测试：`vue3-unit-testing`、`vue-testing-best-practices`
 - 页面视觉设计：`frontend-design`
 - 主题与设计令牌：`theme-system`
 - 现有界面只读审计：`improve-ui`
+- 界面规范审查：`web-design-guidelines`
 - 无障碍：`fixing-accessibility`
 - 动画性能：`fixing-motion-performance`
+- 动效手感：`emil-design-eng`、`review-animations`
 - Vite 相关：`vite-docs`
 - 本地 Web 测试：`webapp-testing`
 - 文档共写：`doc-coauthoring`

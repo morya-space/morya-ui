@@ -1,47 +1,89 @@
-﻿{
-    "version":  1,
-    "skills":  {
-                   "create-design-md":  {
-                                            "source":  "ibelick/ui-skills",
-                                            "sourceType":  "github",
-                                            "skillPath":  "skills/create-design-md/SKILL.md",
-                                            "computedHash":  "67691b3fe0bea438415652a8743c60ae77f41a70cdaff893fb50cc2da43e2a59"
-                                        },
-                   "fixing-accessibility":  {
-                                                "source":  "ibelick/ui-skills",
-                                                "sourceType":  "github",
-                                                "skillPath":  "skills/fixing-accessibility/SKILL.md",
-                                                "computedHash":  "f8ddcb0a8c7b8728105eab18e17223e41d74fb8649becba58a6deb90c6a5ce8d"
-                                            },
-                   "fixing-motion-performance":  {
-                                                     "source":  "ibelick/ui-skills",
-                                                     "sourceType":  "github",
-                                                     "skillPath":  "skills/fixing-motion-performance/SKILL.md",
-                                                     "computedHash":  "c1aca76fe18e8594f401cf78e5e76be24f182ce63167a398bdd4458f2a07639f"
-                                                 },
-                   "improve-ui":  {
-                                      "source":  "ibelick/ui-skills",
-                                      "sourceType":  "github",
-                                      "skillPath":  "skills/improve-ui/SKILL.md",
-                                      "computedHash":  "31c09b79a1c196adccb1637a225cef54f537da87430fda0ba309ef83e78f10e5"
-                                  },
-                   "ui-skills-root":  {
-                                          "source":  "ibelick/ui-skills",
-                                          "sourceType":  "github",
-                                          "skillPath":  "skills/ui-skills-root/SKILL.md",
-                                          "computedHash":  "76a520772c9532b141562d2b2e659f4e6636cf04d2f2c9b9cf5828702f0ad048"
-                                      },
-                   "impeccable":  {
-                                      "source":  "pbakaus/impeccable",
-                                      "sourceType":  "github",
-                                      "skillPath":  ".agents/skills/impeccable/SKILL.md",
-                                      "computedHash":  "manual-install-v4.3.1"
-                                  },
-                   "ui-ux-pro-max":  {
-                                         "source":  "nextlevelbuilder/ui-ux-pro-max-skill",
-                                         "sourceType":  "github",
-                                         "skillPath":  ".agents/skills/ui-ux-pro-max/SKILL.md",
-                                         "computedHash":  "uipro-cli-universal"
-                                     }
-               }
+{
+  "version": 1,
+  "skills": {
+    "create-design-md": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/create-design-md/SKILL.md",
+      "computedHash": "67691b3fe0bea438415652a8743c60ae77f41a70cdaff893fb50cc2da43e2a59"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "51f2537e04d15911b41d78e2de24c36a0e26d41beae15e82a954fe5496a5eda9"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
+    },
+    "fixing-accessibility": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/fixing-accessibility/SKILL.md",
+      "computedHash": "f8ddcb0a8c7b8728105eab18e17223e41d74fb8649becba58a6deb90c6a5ce8d"
+    },
+    "fixing-motion-performance": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/fixing-motion-performance/SKILL.md",
+      "computedHash": "c1aca76fe18e8594f401cf78e5e76be24f182ce63167a398bdd4458f2a07639f"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "manual-install-v4.3.1"
+    },
+    "improve-ui": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/improve-ui/SKILL.md",
+      "computedHash": "31c09b79a1c196adccb1637a225cef54f537da87430fda0ba309ef83e78f10e5"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "computedHash": "b4e5f0f4fe3e2743c85bf7354108f48a0b9d502cb20ef5c4a9c195da91f93736"
+    },
+    "ui-skills-root": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ui-skills-root/SKILL.md",
+      "computedHash": "76a520772c9532b141562d2b2e659f4e6636cf04d2f2c9b9cf5828702f0ad048"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "uipro-cli-universal"
+    },
+    "vue": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vue/SKILL.md",
+      "computedHash": "9c241141e07e836e4f0537c63e8f929fba3767c2997250be38e699f19b75e3f2"
+    },
+    "vue-best-practices": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vue-best-practices/SKILL.md",
+      "computedHash": "d7d22c8cb343583c3904692c4d1d7b50382945e433e4f6e053f4aabb9846cbc3"
+    },
+    "vue-testing-best-practices": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vue-testing-best-practices/SKILL.md",
+      "computedHash": "18c7d8f42f350f927e37de055e34c97b8cfb9f79c12cf942f7f3d2a0821057b5"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    }
+  }
 }

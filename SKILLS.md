@@ -37,11 +37,15 @@
 | --- | --- |
 | 新增 / 重构可复用组件或组件库工程 | `vue3-component-library` |
 | 单个组件 Props / Emits / Slots | `vue3-component-design` |
-| 组件 / composable 单元测试 | `vue3-unit-testing` |
+| 组件 / composable 单元测试 | `vue3-unit-testing`，通用 Vue 测试陷阱用 `vue-testing-best-practices` |
+| Vue 3 通用写法（Composition API、`<script setup>`） | `vue`、`vue-best-practices`。库的公开 API、token 与主题仍以 `vue3-component-library`、`vue3-component-design`、`theme-system` 为准 |
 | 优化已有页面或文档站 UI | `frontend-design`、`improve-ui`、可选 `impeccable` / `ui-ux-pro-max` |
+| 按 Web Interface Guidelines 审查界面 | `web-design-guidelines` |
 | 主题、token、亮暗模式 | `theme-system` |
+| 查找并安装外部 skill | `find-skills` |
 | 无障碍检查 | `fixing-accessibility` |
 | 动画卡顿或滚动性能问题 | `fixing-motion-performance` |
+| 动效手感与审查 | `emil-design-eng`、`review-animations` |
 | Vite 配置 / 构建问题 | `vite-docs` |
 | 测试本地文档站、截图、验证交互 | `webapp-testing` |
 | 撰写维护者文档 / 规范 | `doc-coauthoring` |
@@ -86,6 +90,9 @@ skill 通常会规定适用场景、调查顺序、约束、验证命令和交�
 | --- | --- |
 | `create-design-md` | 从已有项目提取设计语言与 token，创建或更新 `DESIGN.md`；只读产品源代码。 |
 | `doc-coauthoring` | 结构化共写文档、提案、技术说明。 |
+| `emil-design-eng` | 组件交互与动效取舍（Emil Kowalski 的设计工程标准）。不覆盖本库 token 与组件契约。 |
+| `review-animations` | 按同一套动效标准审查现有动画，只出审查结论。 |
+| `find-skills` | 在 skills.sh 检索并安装外部 skill。安装前核对来源与安装量，并遵守本仓库只写入 `.agents/skills` 的约定。 |
 | `fixing-accessibility` | 检查和修复无障碍问题（ARIA、键盘、焦点、对比度等）。 |
 | `fixing-motion-performance` | 排查动画卡顿、布局抖动、滚动关联动画等性能问题。 |
 | `frontend-design` | 创建或重塑有明确视觉方向的前端界面。 |
@@ -96,9 +103,13 @@ skill 通常会规定适用场景、调查顺序、约束、验证命令和交�
 | `ui-skills-root` | UI 相关任务入口，通过 ui-skills CLI 选择最小必要上下文。 |
 | `ui-ux-pro-max` | UI/UX 设计情报：风格、配色、字体配对、行业/产品建议（审美参考，不覆盖本库令牌与组件契约）。 |
 | `vite-docs` | Vite 官方文档优先：配置、插件、构建与优化。 |
+| `vue` | Vue 3.5 Composition API、`<script setup>` 宏、Teleport、Suspense 等参考。 |
+| `vue-best-practices` | Vue 3 写组件前的数据流、拆分与 composable 约定。 |
+| `vue-testing-best-practices` | Vue 测试常见陷阱：异步、Teleport、黑盒组件测试。库内断言仍以 `vue3-unit-testing` 为准。 |
 | `vue3-component-design` | Vue3 组件 API、v-model、Slots、样式隔离与无障碍。 |
 | `vue3-component-library` | Vue3 组件库工程规范：token、主题、API、测试、文档与兼容性。 |
 | `vue3-unit-testing` | Vitest + Vue Test Utils 组件 / composable 测试。 |
+| `web-design-guidelines` | 按 Vercel Web Interface Guidelines 审查界面（间距、排版、交互、无障碍）。不覆盖本库 token 与组件契约。 |
 | `webapp-testing` | 用 Playwright 测试本地 Web 应用、截图与交互验证。 |
 
 ## 新增 Skill
