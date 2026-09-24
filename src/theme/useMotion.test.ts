@@ -41,26 +41,12 @@ describe('useMotion', () => {
     expect(document.documentElement.dataset.mIgnoreReducedMotion).toBeUndefined()
   })
 
-  it('getPreferredMotion follows prefers-reduced-motion', async () => {
+  it('getPreferredMotion stays full and ignores the OS setting', async () => {
     const { getPreferredMotion } = await import('./useMotion')
     const original = window.matchMedia
     window.matchMedia = ((query: string) =>
       ({
         matches: query.includes('prefers-reduced-motion: reduce'),
-        media: query,
-        onchange: null,
-        addListener: () => {},
-        removeListener: () => {},
-        addEventListener: () => {},
-        removeEventListener: () => {},
-        dispatchEvent: () => false,
-      })) as typeof window.matchMedia
-
-    expect(getPreferredMotion()).toBe('reduced')
-
-    window.matchMedia = ((query: string) =>
-      ({
-        matches: false,
         media: query,
         onchange: null,
         addListener: () => {},

@@ -52,8 +52,8 @@ export interface MGlobalConfig {
    */
   density?: MDensity
   /**
-   * When true (default), honor `prefers-reduced-motion` and soften/disable motion.
-   * Set to `false` to keep component transitions regardless of OS preference.
+   * Unused by component motion. Intensity follows `useMotion` / `data-m-motion` only.
+   * @deprecated OS `prefers-reduced-motion` no longer changes component animations.
    */
   respectReducedMotion?: boolean
   /**

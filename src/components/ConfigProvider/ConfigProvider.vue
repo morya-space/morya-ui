@@ -34,8 +34,8 @@ const props = defineProps<{
   /** Shorthand: named enter/exit motion presets by overlay role. */
   motion?: MGlobalConfig['motion']
   /**
-   * When true (default), honor `prefers-reduced-motion`.
-   * Set false to keep transitions when the OS requests reduced motion.
+   * Retained for compatibility. Component motion follows `useMotion` / `data-m-motion` only.
+   * @deprecated OS `prefers-reduced-motion` no longer changes component animations.
    */
   respectReducedMotion?: MGlobalConfig['respectReducedMotion']
   /**

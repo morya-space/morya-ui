@@ -15,7 +15,10 @@ export function applyMotion(preference: MotionPreference, target?: HTMLElement) 
   el.dataset.mMotion = preference
 }
 
-/** When `respect` is false, ignore OS `prefers-reduced-motion`. Default is to respect it. */
+/**
+ * Kept for config compatibility. Component motion no longer reads the OS
+ * `prefers-reduced-motion` media query; intensity follows `data-m-motion` only.
+ */
 export function applyReducedMotionPolicy(respect: boolean | undefined, target?: HTMLElement) {
   const el = target ?? (typeof document !== 'undefined' ? document.documentElement : undefined)
   if (!el) return
@@ -26,13 +29,8 @@ export function applyReducedMotionPolicy(respect: boolean | undefined, target?: 
   }
 }
 
+/** Default library motion. Does not follow the OS reduced-motion setting. */
 export function getPreferredMotion(): MotionPreference {
-  if (
-    typeof window !== 'undefined' &&
-    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-  ) {
-    return 'reduced'
-  }
   return 'full'
 }
 

@@ -295,44 +295,6 @@
     transform: translateX(calc(var(--m-motion-distance) * -1));
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-fade-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-fade-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-active {
-        transition: none;
-    }
-
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-to,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-to,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-to,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-to,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-to,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-to,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-to {
-        transform: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-fade-enter-active,
 [data-m-motion="reduced"] .m-fade-leave-active,
 [data-m-motion="reduced"] .m-scale-fade-enter-active,
@@ -825,15 +787,4 @@
 [data-m-motion="reduced"] .m-select__loading-icon,
 [data-m-motion="reduced"] .m-switch__loading-icon {
     animation: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) *,
-    html:not([data-m-ignore-reduced-motion]) *::before,
-    html:not([data-m-ignore-reduced-motion]) *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-    }
 }
