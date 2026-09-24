@@ -43,19 +43,23 @@
         border-color var(--m-motion-fast) var(--m-motion-ease),
         color var(--m-motion-fast) var(--m-motion-ease),
         box-shadow var(--m-motion-fast) var(--m-motion-ease),
-        opacity var(--m-motion-fast) var(--m-motion-ease);
+        opacity var(--m-motion-fast) var(--m-motion-ease),
+        transform 160ms var(--m-motion-ease);
     vertical-align: middle;
     white-space: nowrap;
 }
 
-.m-button:hover:not(:disabled) {
-    background: var(--m-button-hover-bg);
-    border-color: var(--m-button-hover-border);
-    color: var(--m-button-hover-fg);
+@media (hover: hover) and (pointer: fine) {
+    .m-button:hover:not(:disabled) {
+        background: var(--m-button-hover-bg);
+        border-color: var(--m-button-hover-border);
+        color: var(--m-button-hover-fg);
+    }
 }
 
 .m-button:active:not(:disabled) {
     background: var(--m-button-active-bg);
+    transform: scale(0.97);
 }
 
 /* Naive-style focus: soft glow, not outline-offset ring */

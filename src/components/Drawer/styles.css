@@ -109,7 +109,7 @@
 .m-zoom-enter-from .m-drawer,
 .m-zoom-leave-to .m-drawer {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
 .m-slide-up-enter-from .m-drawer,
@@ -239,6 +239,7 @@
 .m-drawer__body {
     flex: 1;
     overflow: auto;
+    overscroll-behavior: contain;
     padding: var(--m-space-4);
 }
 

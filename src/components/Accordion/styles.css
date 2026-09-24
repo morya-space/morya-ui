@@ -59,13 +59,20 @@
     min-height: 0;
 }
 
-.m-accordion-collapse-enter-active,
+.m-accordion-collapse-enter-active {
+    display: grid;
+    overflow: hidden;
+    transition:
+        grid-template-rows var(--m-motion-enter) var(--m-motion-ease),
+        opacity var(--m-motion-enter) var(--m-motion-ease);
+}
+
 .m-accordion-collapse-leave-active {
     display: grid;
     overflow: hidden;
     transition:
-        grid-template-rows var(--m-motion-normal) var(--m-motion-ease),
-        opacity var(--m-motion-normal) var(--m-motion-ease);
+        grid-template-rows var(--m-motion-exit) var(--m-motion-ease),
+        opacity var(--m-motion-exit) var(--m-motion-ease);
 }
 
 .m-accordion-collapse-enter-active,

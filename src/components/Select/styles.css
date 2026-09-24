@@ -108,8 +108,10 @@
     flex-direction: column;
     max-height: var(--m-select-menu-max-height);
     min-width: 100%;
+    overscroll-behavior: contain;
     padding: var(--m-space-1);
     position: absolute;
+    transform-origin: top center;
     width: max-content;
 }
 
@@ -122,14 +124,17 @@
 .m-select__list {
     max-height: var(--m-select-list-max-height);
     min-height: 0;
+    overscroll-behavior: contain;
 }
 
 .m-select__menu--bottom-start {
     left: 0;
+    transform-origin: top left;
 }
 
 .m-select__menu--bottom-end {
     right: 0;
+    transform-origin: top right;
 }
 
 .m-select__required-input {

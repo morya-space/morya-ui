@@ -193,6 +193,7 @@
 .m-dialog__body {
     flex: 1 1 auto;
     overflow: auto;
+    overscroll-behavior: contain;
     padding: var(--m-space-4);
 }
 
@@ -242,7 +243,7 @@
 .m-dialog-enter-from .m-dialog-zoom,
 .m-dialog-leave-to .m-dialog-zoom {
     opacity: 0;
-    transform: scale(0.36);
+    transform: scale(0.95);
 }
 
 /*
@@ -314,7 +315,7 @@
 .m-zoom-enter-from .m-dialog-zoom,
 .m-zoom-leave-to .m-dialog-zoom {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
 .m-slide-up-enter-from .m-dialog-zoom,
