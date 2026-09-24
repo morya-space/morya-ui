@@ -27,7 +27,7 @@ export function useFloatingViewportSync(active: WatchSource<boolean>, onChange: 
       if (isActive) attach()
       else detach()
     },
-    { flush: 'sync' },
+    { flush: 'sync', immediate: true },
   )
 
   onBeforeUnmount(detach)

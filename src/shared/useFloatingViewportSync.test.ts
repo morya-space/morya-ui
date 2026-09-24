@@ -32,4 +32,24 @@ describe('useFloatingViewportSync', () => {
     add.mockRestore()
     remove.mockRestore()
   })
+
+  it('attaches immediately when already active on setup', () => {
+    const add = vi.spyOn(window, 'addEventListener')
+    const onChange = vi.fn()
+    const active = ref(true)
+
+    const Host = defineComponent({
+      setup() {
+        useFloatingViewportSync(active, onChange)
+        return () => null
+      },
+    })
+    const wrapper = mount(Host)
+
+    expect(add).toHaveBeenCalledWith('resize', onChange)
+    expect(add).toHaveBeenCalledWith('scroll', onChange, true)
+
+    wrapper.unmount()
+    add.mockRestore()
+  })
 })

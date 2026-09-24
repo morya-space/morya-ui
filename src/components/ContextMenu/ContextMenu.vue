@@ -5,6 +5,7 @@ import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import ContextMenuNodes from './ContextMenuNodes.vue'
@@ -75,6 +76,23 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') hide()
 }
 
+/** Keep the panel open when scrolling inside the menu or a teleported submenu. */
+function isScrollInsideMenu(event?: Event) {
+  if (!event || event.type !== 'scroll') return false
+  const target = event.target
+  if (!(target instanceof Node)) return false
+  if (root.value?.contains(target)) return true
+  if (target instanceof Element) {
+    return Boolean(target.closest('.m-contextmenu, .m-contextmenu__submenu'))
+  }
+  return false
+}
+
+function onViewportChange(event?: Event) {
+  if (!modelValue.value || isScrollInsideMenu(event)) return
+  hide()
+}
+
 let contextMenuListenerToken = 0
 
 function removeDocumentListeners() {
@@ -100,6 +118,8 @@ watch(
   },
   { immediate: true },
 )
+
+useFloatingViewportSync(modelValue, onViewportChange)
 
 onBeforeUnmount(() => {
   removeDocumentListeners()

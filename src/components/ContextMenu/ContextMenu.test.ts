@@ -136,4 +136,50 @@ describe('muContextMenu', () => {
     expect(command).toHaveBeenCalledOnce()
     wrapper.unmount()
   })
+
+  it('hides when the page scrolls or the viewport resizes', async () => {
+    const wrapper = mount(MContextMenu, {
+      props: {
+        model: [{ label: 'Copy' }],
+        modelValue: true,
+        position: { x: 40, y: 60 },
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+
+    window.dispatchEvent(new Event('scroll', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
+
+    await wrapper.setProps({ modelValue: true })
+    await nextTick()
+    window.dispatchEvent(new Event('resize'))
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
+    wrapper.unmount()
+  })
+
+  it('stays open when scrolling inside the menu panel', async () => {
+    const wrapper = mount(MContextMenu, {
+      props: {
+        model: Array.from({ length: 20 }, (_, i) => ({ label: `Item ${i}` })),
+        modelValue: true,
+        position: { x: 0, y: 0 },
+      },
+      attachTo: document.body,
+    })
+    await nextTick()
+    const panel = document.body.querySelector('.m-contextmenu') as HTMLElement
+    const scrollTarget =
+      panel.querySelector('.m-scrollbar__wrap') ??
+      panel.querySelector('.m-contextmenu__scroll') ??
+      panel
+    scrollTarget.dispatchEvent(new Event('scroll', { bubbles: true }))
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    wrapper.unmount()
+  })
 })
