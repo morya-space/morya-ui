@@ -20,7 +20,7 @@ Provide global defaults for the component tree via `MConfigProvider` or `createM
 | `locale` | Strings for confirm / empty / loading / placeholder, etc. Pass built-in packs `zhCN` / `enUS` |
 | `componentDefaults` | Per-component default props (e.g. `Input.size`, `Dialog.transition`). Local props win |
 | `motion` | Enter/exit presets by overlay role (`dialog` / `drawer` / `popup` / `toast` / `tooltip` / `overlay`) |
-| `respectReducedMotion` | Honor OS `prefers-reduced-motion` (default `true`) |
+| `respectReducedMotion` | Deprecated. Component motion follows `useMotion` / `data-m-motion` only. |
 
 ## Size
 
@@ -128,7 +128,7 @@ Full preset list and demos: [Motion](/docs/motion). Light/dark and density: [The
 | `locale` | `MLocale` | — | Copy pack (`zhCN` / `enUS`). |
 | `componentDefaults` | `Record<string, object>` | — | Per-component default props (including `transition`). |
 | `motion` | `{ transitions?: Partial<Record<role, string>> }` | — | Enter/exit presets by overlay role. |
-| `respectReducedMotion` | `boolean` | `true` | Honor OS `prefers-reduced-motion`. |
+| `respectReducedMotion` | `boolean` | `true` | Deprecated. Component motion does not read OS `prefers-reduced-motion`. |
 | `globalDensity` | `boolean` | `true` | Also write density / theme to `documentElement`. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [Styling & attrs](/docs/attrs). |
 

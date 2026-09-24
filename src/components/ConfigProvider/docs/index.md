@@ -20,7 +20,7 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 | `locale` | 确认 / 空态 / 加载 / 占位等文案。可传入内置语言包 `zhCN` / `enUS` |
 | `componentDefaults` | 按组件覆盖默认 props（如 `Input.size`、`Space.size`、`Dialog.transition`）。局部 Props 优先 |
 | `motion` | 按角色覆盖进出场预设（`dialog` / `drawer` / `popup` / `toast` / `tooltip` / `overlay`） |
-| `respectReducedMotion` | 是否尊重系统 `prefers-reduced-motion`（默认 `true`） |
+| `respectReducedMotion` | 已废弃。组件动效只跟 `useMotion` / `data-m-motion`，不读系统减少动态效果。 |
 
 ## Size
 
@@ -128,7 +128,7 @@ registerMotionPreset('brand', { name: 'm-brand' })
 | `locale` | `MLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
 | `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props（含 `transition`）。 |
 | `motion` | `{ transitions?: Partial<Record<role, string>> }` | — | 按浮层角色覆盖进出场预设。 |
-| `respectReducedMotion` | `boolean` | `true` | 是否尊重系统 `prefers-reduced-motion`。 |
+| `respectReducedMotion` | `boolean` | `true` | 已废弃。组件动效不读取系统 `prefers-reduced-motion`。 |
 | `globalDensity` | `boolean` | `true` | 是否将 density / theme 写入 `documentElement`。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 

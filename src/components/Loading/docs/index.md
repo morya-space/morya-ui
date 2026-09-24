@@ -133,7 +133,7 @@ close()
 
 指示器颜色走语义色：`--m-color-primary`、`--m-color-success`、`--m-color-warning`、`--m-color-danger`、`--m-color-text-muted`。遮罩默认是表面色的半透明混合，可用 `background` 或 `--m-loading-mask-bg` 覆盖。全屏层级是 `--m-loading-z-index`（默认 `--m-z-base + 200`）。
 
-`prefers-reduced-motion: reduce` 时循环动效关闭。
+主题动效为 `reduced` 或 `none` 时循环动效关闭。
 
 ## 无障碍
 

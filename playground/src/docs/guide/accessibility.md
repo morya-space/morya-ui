@@ -102,7 +102,7 @@ setMotion('reduced') // 或 'none'
 
 - 使用键盘完成主流程（Tab、Enter、Esc、方向键）。
 - 使用系统屏幕阅读器（NVDA / VoiceOver）抽查表单与对话框。
-- 在 `prefers-reduced-motion: reduce` 或 `useMotion('none')` 下确认界面仍可用。
+- 在 `useMotion('reduced')` 或 `useMotion('none')` 下确认界面仍可用。
 
 ## 相关
 

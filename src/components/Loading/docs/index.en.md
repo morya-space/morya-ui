@@ -133,7 +133,7 @@ No custom events.
 
 Indicator colors use semantic tokens: `--m-color-primary`, `--m-color-success`, `--m-color-warning`, `--m-color-danger`, and `--m-color-text-muted`. The mask defaults to a translucent surface mix. Override it with `background` or `--m-loading-mask-bg`. Fullscreen stacking uses `--m-loading-z-index` (default `--m-z-base + 200`).
 
-Looping motion is disabled under `prefers-reduced-motion: reduce`.
+Looping motion stops when theme motion is `reduced` or `none`.
 
 ## Accessibility
 

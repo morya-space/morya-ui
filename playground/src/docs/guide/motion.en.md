@@ -26,9 +26,7 @@ setMotion('full') // 'full' | 'reduced' | 'none'
 - `reduced`: shorter duration, less travel; looping indicators stop  
 - `none`: instant switches  
 
-The Components page sidebar Motion control uses the same API. The preference is persisted in `localStorage` (`morya-ui-motion`).
-
-When the OS enables `prefers-reduced-motion`, reduced policies apply by default. Set `respectReducedMotion: false` on `createMoryaUI` / `MConfigProvider` to keep full transitions.
+The Components page sidebar Motion control uses the same API. The preference is persisted in `localStorage` (`morya-ui-motion`). Component motion follows this setting only and does not read the OS `prefers-reduced-motion` media query.
 
 ## Motion presets (enter/exit)
 

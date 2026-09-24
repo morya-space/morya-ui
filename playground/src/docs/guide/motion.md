@@ -26,9 +26,7 @@ setMotion('full') // 'full' | 'reduced' | 'none'
 - `reduced`：缩短时长、弱化位移；循环指示器停掉  
 - `none`：立即切换  
 
-文档站组件页侧栏「动效」分段控件调用的是同一套 API。偏好会持久化到 `localStorage`（键名 `morya-ui-motion`）。
-
-系统开启 `prefers-reduced-motion` 时，默认会按减弱策略处理。若仍要保留完整过渡，可在 `createMoryaUI` / `MConfigProvider` 上设 `respectReducedMotion: false`。
+文档站组件页侧栏「动效」分段控件调用的是同一套 API。偏好会持久化到 `localStorage`（键名 `morya-ui-motion`）。组件动效只跟这一套配置走，不读取系统的 `prefers-reduced-motion`。
 
 ## 动效预设（进出场）
 

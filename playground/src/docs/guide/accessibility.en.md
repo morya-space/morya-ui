@@ -102,7 +102,7 @@ Recent work includes:
 
 - Complete primary flows with keyboard only (Tab, Enter, Esc, arrows).
 - Spot-check forms and dialogs with NVDA or VoiceOver.
-- Verify usability under `prefers-reduced-motion: reduce` or `useMotion('none')`.
+- Verify usability under `useMotion('reduced')` or `useMotion('none')`.
 
 ## See also
 
