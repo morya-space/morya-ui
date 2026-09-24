@@ -415,18 +415,6 @@
     top: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-layout,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-header,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-footer,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-sider,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__arrow,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__bar-top,
-    html:not([data-m-ignore-reduced-motion]) .m-layout-sider__bar-bottom {
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-layout,
 [data-m-motion="reduced"] .m-layout-header,
 [data-m-motion="reduced"] .m-layout-footer,

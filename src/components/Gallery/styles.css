@@ -90,14 +90,6 @@
     width: var(--m-gallery-thumb-width);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-gallery__image,
-    html:not([data-m-ignore-reduced-motion]) .m-gallery-fade-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-gallery-fade-leave-active {
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-gallery__image,
 [data-m-motion="reduced"] .m-gallery-fade-enter-active,
 [data-m-motion="reduced"] .m-gallery-fade-leave-active,

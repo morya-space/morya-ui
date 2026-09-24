@@ -48,12 +48,6 @@
     outline: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-knob__value {
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-knob__value {
     transition: none;
 }

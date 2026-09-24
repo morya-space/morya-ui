@@ -715,12 +715,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-button__spinner {
-        animation: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-button__spinner,
 [data-m-motion="none"] .m-button__spinner {
     animation: none;

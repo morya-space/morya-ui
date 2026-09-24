@@ -64,13 +64,6 @@
     opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-fieldset-collapse-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-fieldset-collapse-leave-active {
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-fieldset-collapse-enter-active,
 [data-m-motion="reduced"] .m-fieldset-collapse-leave-active,
 [data-m-motion="none"] .m-fieldset-collapse-enter-active,

@@ -86,13 +86,6 @@
     opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-accordion-collapse-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-accordion-collapse-leave-active {
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-accordion-collapse-enter-active,
 [data-m-motion="reduced"] .m-accordion-collapse-leave-active,
 [data-m-motion="none"] .m-accordion-collapse-enter-active,

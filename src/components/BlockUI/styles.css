@@ -33,13 +33,6 @@
     opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-blockui-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-blockui-leave-active {
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-blockui-enter-active,
 [data-m-motion="reduced"] .m-blockui-leave-active,
 [data-m-motion="none"] .m-blockui-enter-active,

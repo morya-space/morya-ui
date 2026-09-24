@@ -122,14 +122,6 @@
     opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-scrollbar__thumb,
-    html:not([data-m-ignore-reduced-motion]) .m-scrollbar-fade-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-scrollbar-fade-leave-active {
-        transition: none;
-    }
-}
-
 :root[data-m-motion='none'] .m-scrollbar__thumb,
 :root[data-m-motion='none'] .m-scrollbar-fade-enter-active,
 :root[data-m-motion='none'] .m-scrollbar-fade-leave-active,

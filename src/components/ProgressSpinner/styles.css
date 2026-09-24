@@ -70,13 +70,6 @@
     margin: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-progress-spinner,
-    html:not([data-m-ignore-reduced-motion]) .m-progress-spinner__circle {
-        animation: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-progress-spinner,
 [data-m-motion="reduced"] .m-progress-spinner__circle,
 [data-m-motion="none"] .m-progress-spinner,

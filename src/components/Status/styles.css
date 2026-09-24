@@ -179,13 +179,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-status--processing .m-status__dot::after,
-    html:not([data-m-ignore-reduced-motion]) .m-status--processing.m-status--has-icon .m-status__icon::after {
-        animation: none;
-    }
-}
-
 :root[data-m-motion="none"] .m-status--processing .m-status__dot::after,
 :root[data-m-motion="reduced"] .m-status--processing .m-status__dot::after,
 :root[data-m-motion="none"]

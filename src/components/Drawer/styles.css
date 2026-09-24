@@ -243,56 +243,6 @@
     padding: var(--m-space-4);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-fade-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-fade-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-active .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-active .m-drawer {
-        transition: none;
-    }
-
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--left,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--left,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--right,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--right,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--top,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--top,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-enter-from .m-drawer--bottom,
-    html:not([data-m-ignore-reduced-motion]) .m-drawer-leave-to .m-drawer--bottom,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-to .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-to .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-to .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-to .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-to .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-to .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-from .m-drawer,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-to .m-drawer {
-        transform: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-drawer-enter-active,
 [data-m-motion="reduced"] .m-drawer-leave-active,
 [data-m-motion="reduced"] .m-drawer-enter-active .m-drawer,

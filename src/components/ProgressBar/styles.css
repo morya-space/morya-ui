@@ -69,15 +69,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-progressbar--indeterminate .m-progressbar__fill,
-    html:not([data-m-ignore-reduced-motion])
-        .m-progressbar--indeterminate.m-progressbar--circle
-        .m-progressbar__circle-value {
-        animation: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-progressbar--indeterminate .m-progressbar__fill,
 [data-m-motion="reduced"]
     .m-progressbar--indeterminate.m-progressbar--circle

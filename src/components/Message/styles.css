@@ -233,19 +233,6 @@
     transition: transform var(--m-motion-enter) var(--m-motion-ease);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-message-slide-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-message-slide-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-message-slide-move {
-        transition: none;
-    }
-
-    html:not([data-m-ignore-reduced-motion]) .m-message-slide-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-message-slide-leave-to {
-        transform: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-message-slide-enter-active,
 [data-m-motion="reduced"] .m-message-slide-leave-active,
 [data-m-motion="reduced"] .m-message-slide-move,

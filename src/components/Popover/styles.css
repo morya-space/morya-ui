@@ -138,18 +138,6 @@
     transform: translate(var(--m-motion-distance), -50%) scale(0.96);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-popover-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-popover-leave-active {
-        transition: none;
-    }
-
-    html:not([data-m-ignore-reduced-motion]) .m-popover-enter-from,
-    html:not([data-m-ignore-reduced-motion]) .m-popover-leave-to {
-        transform: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-popover-enter-active,
 [data-m-motion="reduced"] .m-popover-leave-active,
 [data-m-motion="none"] .m-popover-enter-active,

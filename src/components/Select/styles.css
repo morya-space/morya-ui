@@ -64,13 +64,6 @@
     animation: m-progress-spinner-rotate var(--m-motion-spin-medium) linear infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-select__spinner {
-        animation: none;
-        border-top-color: var(--m-color-text-muted);
-    }
-}
-
 [data-m-motion="reduced"] .m-select__spinner {
     animation: none;
     border-top-color: var(--m-color-text-muted);

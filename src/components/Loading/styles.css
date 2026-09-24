@@ -353,22 +353,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-loading-aurora__ring,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-aurora__glow,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-bounce__ball,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-wave__bar,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-pulse__ring,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-stardust__dot,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-circular__svg,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-circular__path,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-loading-leave-active {
-        animation: none;
-        transition: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-loading-aurora__ring,
 [data-m-motion="reduced"] .m-loading-aurora__glow,
 [data-m-motion="reduced"] .m-loading-bounce__ball,

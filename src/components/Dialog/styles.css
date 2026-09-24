@@ -342,50 +342,6 @@
     transform: translateX(calc(var(--m-motion-distance) * -1));
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-active,
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active,
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-fade-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-fade-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-active .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-active .m-dialog-zoom {
-        transition: none;
-    }
-
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-dialog-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-scale-fade-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-fade-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-zoom-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-up-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-down-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-left-leave-to .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-enter-from .m-dialog-zoom,
-    html:not([data-m-ignore-reduced-motion]) .m-slide-right-leave-to .m-dialog-zoom {
-        transform: none;
-    }
-}
-
 [data-m-motion="reduced"] .m-dialog-enter-active,
 [data-m-motion="reduced"] .m-dialog-leave-active,
 [data-m-motion="reduced"] .m-dialog-enter-active .m-dialog-zoom,

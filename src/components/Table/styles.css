@@ -481,16 +481,13 @@
     max-width: 100%;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-table__header th,
-    html:not([data-m-ignore-reduced-motion]) .m-table__body td,
-    html:not([data-m-ignore-reduced-motion]) .m-table__expand-btn {
-        transition: none;
-    }
-
-    html:not([data-m-ignore-reduced-motion]) .m-table__loading-line::before {
-        animation: none;
-    }
+[data-m-motion="reduced"] .m-table__header th,
+[data-m-motion="reduced"] .m-table__body td,
+[data-m-motion="reduced"] .m-table__expand-btn,
+[data-m-motion="none"] .m-table__header th,
+[data-m-motion="none"] .m-table__body td,
+[data-m-motion="none"] .m-table__expand-btn {
+    transition: none;
 }
 
 [data-m-motion="reduced"] .m-table__loading-line::before,

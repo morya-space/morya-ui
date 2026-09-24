@@ -158,13 +158,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html:not([data-m-ignore-reduced-motion]) .m-badge--processing::after {
-        animation: none;
-        opacity: 0;
-    }
-}
-
 [data-m-motion="reduced"] .m-badge--processing::after,
 [data-m-motion="none"] .m-badge--processing::after {
     animation: none;
