@@ -83,25 +83,27 @@ import { MButton } from 'morya-ui'
 | `icon` | `IconName \| Component` | — | 图标名称或自定义组件。 |
 | `iconPos` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | 图标相对标签的位置。 |
 | `iconOnly` | `boolean` | `false` | 强制方形纯图标按钮。 |
+| `badge` | `string` | — | 徽标文本。 |
+| `badgeSeverity` | `'secondary' \| 'info' \| 'success' \| 'warn' \| 'danger' \| 'contrast' \| null` | `null` | 徽标语义色。 |
 | `severity` | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | — | 语义色。省略时为 primary。 |
+| `color` | `string` | — | 自定义颜色，覆盖 `severity`。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。默认中等；兼容 `sm` / `lg`。 |
 | `variant` | `'outlined' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'` | — | 样式变体快捷方式，等价于对应布尔 prop。 |
 | `outlined` | `boolean` | `false` | 描边按钮。 |
 | `text` | `boolean` | `false` | 文字按钮。 |
 | `link` | `boolean` | `false` | 链接按钮。 |
 | `ghost` | `boolean` | `false` | 透明底按钮。 |
 | `quaternary` | `boolean` | `false` | 极轻量文字按钮。 |
-| `color` | `string` | — | 自定义颜色，覆盖 `severity`。 |
+| `plain` | `boolean` | `false` | 弱化色，常与 `text` / `outlined` 组合。 |
 | `raised` | `boolean` | `false` | 浮起阴影。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
-| `plain` | `boolean` | `false` | 弱化色，常与 `text` / `outlined` 组合。 |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。默认中等；兼容 `sm` / `lg`。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
 | `loading` | `boolean` | `false` | 加载中，禁用点击并显示 spinner。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
-| `badge` | `string` | — | 徽标文本。 |
-| `badgeSeverity` | `'secondary' \| 'info' \| 'success' \| 'warn' \| 'danger' \| 'contrast' \| null` | `null` | 徽标语义色。 |
-| `autofocus` | `boolean` | `false` | 原生 autofocus。 |
+| `ripple` | `boolean` | `true` | 点击水波纹。设为 `false` 可关闭。 |
+| `press` | `boolean` | `true` | 按下时轻微缩放。设为 `false` 可关闭。 |
 | `nativeType` | `'button' \| 'submit' \| 'reset'` | `'button'` | 原生 button type。 |
+| `autofocus` | `boolean` | `false` | 原生 autofocus。 |
 | `ariaLabel` | `string` | — | 可访问名称；图标按钮建议提供。 |
 
 ## Events

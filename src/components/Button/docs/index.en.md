@@ -83,25 +83,27 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 | `icon` | `IconName \| Component` | — | Icon name or custom component. |
 | `iconPos` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | Icon position relative to the label. |
 | `iconOnly` | `boolean` | `false` | Force a square icon-only button. |
+| `badge` | `string` | — | Badge text. |
+| `badgeSeverity` | `'secondary' \| 'info' \| 'success' \| 'warn' \| 'danger' \| 'contrast' \| null` | `null` | Badge semantic color. |
 | `severity` | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | — | Semantic color. Defaults to primary when omitted. |
+| `color` | `string` | — | Custom color; overrides `severity`. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. Medium by default; `sm` / `lg` aliases supported. |
 | `variant` | `'outlined' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'` | — | Style variant shortcut, equivalent to the matching boolean prop. |
 | `outlined` | `boolean` | `false` | Outlined button. |
 | `text` | `boolean` | `false` | Text button. |
 | `link` | `boolean` | `false` | Link button. |
 | `ghost` | `boolean` | `false` | Transparent fill. |
 | `quaternary` | `boolean` | `false` | Extra-quiet text button. |
-| `color` | `string` | — | Custom color; overrides `severity`. |
+| `plain` | `boolean` | `false` | Muted color; often combined with `text` / `outlined`. |
 | `raised` | `boolean` | `false` | Raised shadow. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
-| `plain` | `boolean` | `false` | Muted color; often combined with `text` / `outlined`. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. Medium by default; `sm` / `lg` aliases supported. |
 | `fluid` | `boolean` | `false` | Stretch to full container width. |
 | `loading` | `boolean` | `false` | Loading state; disables clicks and shows a spinner. |
 | `disabled` | `boolean` | `false` | Disabled. |
-| `badge` | `string` | — | Badge text. |
-| `badgeSeverity` | `'secondary' \| 'info' \| 'success' \| 'warn' \| 'danger' \| 'contrast' \| null` | `null` | Badge semantic color. |
-| `autofocus` | `boolean` | `false` | Native autofocus. |
+| `ripple` | `boolean` | `true` | Click ripple ink. Set `false` to disable. |
+| `press` | `boolean` | `true` | Slight scale while pressed. Set `false` to disable. |
 | `nativeType` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. |
+| `autofocus` | `boolean` | `false` | Native autofocus. |
 | `ariaLabel` | `string` | — | Accessible name; recommended for icon-only buttons. |
 
 ## Events

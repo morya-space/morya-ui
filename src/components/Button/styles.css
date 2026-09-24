@@ -59,6 +59,9 @@
 
 .m-button:active:not(:disabled) {
     background: var(--m-button-active-bg);
+}
+
+.m-button--press:active:not(:disabled) {
     transform: scale(0.97);
 }
 
@@ -583,6 +586,52 @@
     justify-content: center;
 }
 
+.m-button__icon,
+.m-button__label,
+.m-button__badge {
+    position: relative;
+    z-index: 1;
+}
+
+.m-button__ripple {
+    border-radius: inherit;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+}
+
+.m-button__ripple-wave {
+    background: currentColor;
+    border-radius: var(--m-radius-full);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(0);
+    will-change: transform, opacity;
+}
+
+/* Used only when Web Animations API is unavailable. */
+.m-button__ripple-wave--fallback {
+    animation: m-button-ripple 560ms var(--m-motion-ease) forwards;
+}
+
+@keyframes m-button-ripple {
+    0% {
+        opacity: 0.42;
+        transform: scale(0);
+    }
+    55% {
+        opacity: 0.22;
+        transform: scale(0.55);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
 .m-button__icon {
     flex: 0 0 auto;
     width: var(--m-button-icon-size);
@@ -675,4 +724,8 @@
 [data-m-motion="reduced"] .m-button__spinner,
 [data-m-motion="none"] .m-button__spinner {
     animation: none;
+}
+
+[data-m-motion="none"] .m-button__ripple-wave {
+    display: none;
 }

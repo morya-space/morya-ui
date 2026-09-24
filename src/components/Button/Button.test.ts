@@ -130,4 +130,43 @@ describe('muButton', () => {
 
     expect(wrapper.find('[data-testid="custom-icon"]').classes()).toContain('m-button__icon-graphic')
   })
+
+  it('spawns a click ripple by default and can disable it', async () => {
+    document.documentElement.dataset.mMotion = 'full'
+
+    const withRipple = mount(MButton, {
+      props: { label: 'Ripple' },
+      attachTo: document.body,
+    })
+    const button = withRipple.get('button').element as HTMLButtonElement
+    button.getBoundingClientRect = () =>
+      ({
+        width: 120,
+        height: 40,
+        left: 10,
+        top: 20,
+        right: 130,
+        bottom: 60,
+        x: 10,
+        y: 20,
+        toJSON: () => ({}),
+      }) as DOMRect
+
+    await withRipple.get('button').trigger('pointerdown', { clientX: 40, clientY: 35, button: 0 })
+    expect(withRipple.classes()).toContain('m-button--ripple')
+    expect(withRipple.find('.m-button__ripple-wave').exists()).toBe(true)
+
+    const withoutRipple = mount(MButton, { props: { label: 'Plain', ripple: false } })
+    await withoutRipple.get('button').trigger('pointerdown', { clientX: 40, clientY: 35, button: 0 })
+    expect(withoutRipple.classes()).not.toContain('m-button--ripple')
+    expect(withoutRipple.find('.m-button__ripple-wave').exists()).toBe(false)
+    expect(withRipple.classes()).toContain('m-button--press')
+
+    const withoutPress = mount(MButton, { props: { label: 'Flat', press: false } })
+    expect(withoutPress.classes()).not.toContain('m-button--press')
+    withoutPress.unmount()
+
+    withRipple.unmount()
+    withoutRipple.unmount()
+  })
 })
