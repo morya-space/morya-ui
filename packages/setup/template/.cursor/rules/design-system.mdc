@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Morya UI 设计系统
 
-1. **先读** 项目根目录 `DESIGN.md`。组件选型用 MCP，或 skill `references/component-index.md`。
+1. **先读** 项目根目录 `DESIGN.md`。组件选型用 MCP `recommend_component`（含 recipe），或 skill `references/decision-recipes.md` / `component-index.md`。
 2. **只用** `morya-ui` 的 `M*` 组件；全局样式 `morya-ui/styles.css`。
 3. **颜色/间距/圆角** 使用 `--m-*` CSS 变量，禁止裸 hex/rgb（见 `scripts/check-raw-colors.mjs`）。
 4. **页面结构** 用 MCP `get_golden_page`（`list-page` / `form-page` / `form-in-dialog` / `detail-page` / `dashboard-page` / `login-page` / `landing-page` / `empty-state` / `result-page` / `settings-page` / `wizard-form`），不要发明新布局范式。

@@ -38,4 +38,4 @@ import { MButton, MInput } from 'morya-ui'
 - 用 `MDropdown` 代替 Select 做枚举选择。
 - 手写 table/modal 替代 `MTable` / `MDialog`。
 
-完整清单：MCP，或 skill `references/component-index.md`
+完整清单：MCP `recommend_component`（含 recipe），或 skill `references/decision-recipes.md` / `component-index.md`。

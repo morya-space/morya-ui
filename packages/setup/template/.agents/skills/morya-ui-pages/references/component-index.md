@@ -1,6 +1,9 @@
 # Component index (scenario map)
 
-Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_usage`). This file is for **selection**, not prop manuals.
+Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_usage`).
+
+- **Selection + key props**: MCP `recommend_component`, or offline [decision-recipes.md](./decision-recipes.md) (generated from `packages/ui-mcp/src/decisions.ts`).
+- This file is a **catalog + decision-id index**, not a prop manual.
 
 ## Shell
 
@@ -31,68 +34,66 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Feedback
 
-| API / component | When |
-| --- | --- |
-| `message` | **Default** one-line CRUD result |
-| `toast` | `summary` + `detail`, or async / background feel |
-| `<MMessage>` | Optional host for the `message` service (`appendTo` / placement). **Not** an inline alert |
-| field `errorMessage` or token `role="alert"` | Persistent form / auth error |
-| `MEmpty` | No-data / first-use / filtered empty (not an error) |
-| `MResult` | Terminal outcome: success, failure, 403 / 404 / 500 |
-| `MLoading` / `v-loading` / `loading.service` | **Default** region or fullscreen loading mask |
-| `MSkeleton` | Layout is already known; placeholder while content arrives |
-| `MProgressBar` | Determinate progress |
-| `MProgressSpinner` | Inline spinner only, not a region mask |
-| `MBlockUI` | Block interaction without a loading message |
+| API / component | When | Decision |
+| --- | --- | --- |
+| `message` | **Default** one-line CRUD result | `feedback-choice` |
+| `toast` | `summary` + `detail`, or async / background feel | `feedback-choice` |
+| `<MMessage>` | Optional host for the `message` service. **Not** an inline alert | `feedback-choice` |
+| field `errorMessage` or token `role="alert"` | Persistent form / auth error | `feedback-choice` |
+| `MEmpty` | No-data / first-use / filtered empty | `empty-result-choice` |
+| `MResult` | Terminal outcome: success, failure, 403 / 404 / 500 | `empty-result-choice` |
+| `MLoading` / `v-loading` / `loading.service` | **Default** region or fullscreen loading mask | `loading-choice` |
+| `MSkeleton` | Layout known; placeholder while content arrives | `loading-choice` |
+| `MProgressBar` | Determinate progress | `loading-choice` |
+| `MProgressSpinner` | Inline spinner only, not a region mask | `loading-choice` |
+| `MBlockUI` | Block interaction without a loading message | `loading-choice` |
 
 ## Overlays & menus
 
-`MDialog`, `MDrawer`, `MConfirmDialog` / `MConfirmPopup`, `MPopover`, `MTooltip`, `MDropdown` (**actions only**), `MContextMenu` (right-click), `MCommandMenu` (searchable command palette), `MMenu` / `MMenubar` / `MTieredMenu` / `MMegaMenu`, `MTabs`, `MStepper`
+`MDialog`, `MDrawer`, `MConfirmDialog` / `MConfirmPopup`, `MPopover`, `MTooltip`, `MDropdown` (**actions only**), `MContextMenu`, `MCommandMenu`, `MMenu` / `MMenubar` / `MTieredMenu` / `MMegaMenu`, `MTabs`, `MStepper`
 
 ## Surfaces / media
 
 `MCard`, `MPanel`, `MAccordion`, `MCarousel`, `MGallery`, `MIcon`, `MScrollbar`, `MInplace`, `MScrollTop`, `MTerminal`
 
-## Scenario → pick
+## Scenario → decision
 
-| Intent | Prefer |
+Open MCP `recommend_component({ decision })` or the matching section in [decision-recipes.md](./decision-recipes.md) for **when / avoid / recipe props / anti-patterns**.
+
+| Intent | Decision id |
 | --- | --- |
-| Searchable list + paging | `MPageFilters` + `MTable` (+ paginator) |
-| Create / edit from a list (few–medium fields) | **`form-in-dialog`** golden (`MDialog` + `MForm`) |
-| Create / edit long / multi-section entity | Form golden page **or** `MDrawer` |
-| Resource detail / profile | `detail-page` golden |
-| Delete | `MConfirmDialog` |
-| Lightweight inline status | `MStatus` (dot + label) |
-| Status chip / closable label | `MTag` severities |
-| Primary / secondary actions | `MSpace` + `MButton` |
-| Dashboard KPIs | `MGrid` + `MPageStat` |
-| Org tree | `MTree` / `MTreeSelect` |
-| Login / auth | `login-page` golden + `MInputPassword` |
-| Marketing landing | `landing-page` golden + `MButton` / `MTag` / `MAccordion` |
-| Empty list / zero state | `MEmpty` (+ `empty-state` golden or `MTable` `#empty`) |
-| Preferences / settings | `settings-page` golden (`MTabs` + `tabs`) |
-| Multi-step create | `wizard-form` golden (`MStepper` + `steps`) |
-| Region or page is waiting | `MLoading`, `v-loading`, or `loading.service`; known layout → `MSkeleton` |
-| Local capped scroll | Explicit `MScrollbar` |
-| Resizable two-pane (editor / preview, master-detail) | `MSplitter` |
-| Admin sider nav | `MMenu` inside `MLayoutSider` (or `MSidebar` when the shell is not `MLayout`) |
-| Few options, all visible | `MRadio` or `MSelectButton` |
-| Always-visible option list | `MListbox` |
-| Multi-level cascade (not a tree dropdown) | `MCascadeSelect` |
-| Right-click actions | `MContextMenu` |
-| Global command search | `MCommandMenu` |
-| Count or dot on a control | `MBadge` |
-| Removable entity chip | `MChip` |
+| Create / edit from a list (few–medium fields) vs long form page | `form-surface-choice` |
+| Dialog vs Drawer vs Popover vs Tooltip | `overlay-choice` |
+| Table vs DataView vs Tree / TreeTable | `data-display-choice` |
+| Select vs TreeSelect vs AutoComplete vs Radio / … | `selection-choice` |
+| Card vs Panel vs Fieldset | `surface-choice` |
+| PageContent vs Flex vs Space vs Grid | `layout-spacing-choice` |
+| PageFilters / Toolbar / Header / Section / Stat / Placeholder | `page-section-choice` |
+| Layout scroll vs MScrollbar vs built-in | `page-scroll-choice` |
+| Avoid double borders / extra Card wrappers | `surface-nesting-choice` |
+| Loading vs Skeleton vs Progress* vs BlockUI | `loading-choice` |
+| Status vs Tag vs Chip vs Badge | `status-label-choice` |
+| Empty vs Result | `empty-result-choice` |
+| Dropdown vs Menu vs ContextMenu vs CommandMenu | `action-menu-choice` |
+| message vs toast vs field / form alert | `feedback-choice` |
+| ConfirmDialog vs ConfirmPopup | `confirm-choice` |
+| Searchable list + paging | `page-section-choice` + `data-display-choice` (+ list golden) |
+| Delete / destructive | `confirm-choice` |
+| Login / auth | `feedback-choice` + `login-page` golden |
+| Marketing landing | `landing-page` golden (Express) |
+| Multi-step create | `wizard-form` golden |
+| Preferences / settings | `settings-page` golden |
+| Resizable two-pane | use `MSplitter` (see docs / `get_component`) |
 
 ## Common mistakes
 
 | Wrong | Right |
 | --- | --- |
-| `MDropdown` as form enum | `MSelect` |
-| `MTable` `:data` | `:rows` (`row-key` defaults to `id`) |
-| `<MMessage severity>` as an inline alert | Field `errorMessage`, or a token-styled `role="alert"` |
+| `MDropdown` as form enum | `MSelect` (`selection-choice`) |
+| `MTable` `:data` | `:rows` (`data-display-choice`) |
+| `<MMessage severity>` as an inline alert | Field `errorMessage`, or token `role="alert"` (`feedback-choice`) |
 | Hand `<table>` | `MTable` |
-| Hand modal div | `MDialog` |
-| Hand spinner or `MProgressSpinner` as a region / page mask | `MLoading` / `v-loading` |
-| Extra `MCard` around every `MPage*` block | Use page components' own surface/gap |
-| Assume undocumented props | MCP / docs lookup |
+| Hand modal div | `MDialog` / `MConfirmDialog` |
+| Hand spinner or `MProgressSpinner` as a region / page mask | `MLoading` / `v-loading` (`loading-choice`) |
+| Extra `MCard` around every `MPage*` block | `surface-nesting-choice` |
+| Assume undocumented props | MCP / docs lookup + `validate_usage` |
