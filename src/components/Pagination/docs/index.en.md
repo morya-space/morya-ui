@@ -37,7 +37,7 @@ import { MPagination } from 'morya-ui'
 | `pageLinkSize` | `number` | `5` | Number of page link buttons. |
 | `showSizePicker` | `boolean` | `false` | Show the page-size select. |
 | `pageSizes` | `number[]` | `[10, 20, 50, 100]` | Options for `showSizePicker`. |
-| `showQuickJumper` | `boolean` | `false` | Jump-to-page input. |
+| `showQuickJumper` | `boolean` | `false` | Page select for jumping to a page. The menu can be filtered when there are more than 10 pages. |
 | `simple` | `boolean` | `false` | Compact prev / current / next. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |

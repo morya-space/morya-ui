@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
+import type { SelectModelValue, SelectOption } from '../Select/types'
 import type { PaginationProps } from './types'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+import MSelect from '../Select/Select.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -27,7 +29,6 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
-const jumpDraft = ref('')
 const resolvedRows = computed(() => Math.max(1, props.pageSize ?? props.rows))
 const pageCount = computed(() => Math.max(1, Math.ceil(props.totalRecords / resolvedRows.value)))
 const currentPage = computed(() => Math.min(Math.max(1, props.modelValue), pageCount.value))
@@ -43,6 +44,16 @@ const sizeOptions = computed(() => {
   if (!sizes.includes(resolvedRows.value)) sizes.unshift(resolvedRows.value)
   return sizes
 })
+const pageOptions = computed<SelectOption[]>(() => {
+  if (!props.showQuickJumper || props.simple) return []
+  return Array.from({ length: pageCount.value }, (_, index) => {
+    const value = index + 1
+    return { label: String(value), value }
+  })
+})
+const jumperPt = computed(() => ({
+  control: { 'aria-label': locale.value.jumpToPage },
+}))
 
 function setPage(page: number) {
   const nextPage = Math.min(Math.max(1, page), pageCount.value)
@@ -68,10 +79,10 @@ function onSizeChange(event: Event) {
   if (Number.isFinite(value)) setRows(value)
 }
 
-function commitJump() {
-  const value = Number.parseInt(jumpDraft.value, 10)
-  jumpDraft.value = ''
-  if (Number.isFinite(value)) setPage(value)
+function onPageJump(value: SelectModelValue) {
+  if (typeof value !== 'number' && typeof value !== 'string') return
+  const page = typeof value === 'number' ? value : Number(value)
+  if (Number.isFinite(page)) setPage(page)
 }
 
 function pageLabel(page: number) {
@@ -108,20 +119,19 @@ defineExpose({ first, pageCount })
         <option v-for="size in sizeOptions" :key="size" :value="size">{{ size }}</option>
       </select>
     </label>
-    <label v-if="showQuickJumper && !simple" class="m-pagination__jumper">
+    <div v-if="showQuickJumper && !simple" class="m-pagination__jumper">
       <span>{{ locale.jumpToPage }}</span>
-      <input
-        class="m-pagination__input"
-        type="number"
-        min="1"
-        :max="pageCount"
+      <MSelect
+        class="m-pagination__jumper-select"
+        size="small"
+        :model-value="currentPage"
+        :options="pageOptions"
         :disabled="disabled"
-        :value="jumpDraft"
-        @input="jumpDraft = ($event.target as HTMLInputElement).value"
-        @keydown.enter.prevent="commitJump"
-        @blur="commitJump"
-      >
+        :filter="pageCount > 10"
+        :pt="jumperPt"
+        @update:model-value="onPageJump"
+      />
       <span v-if="locale.pageClassifier">{{ locale.pageClassifier }}</span>
-    </label>
+    </div>
   </nav>
 </template>

@@ -13,7 +13,7 @@ export interface PaginationProps {
   showSizePicker?: boolean
   /** Options for `showSizePicker`. */
   pageSizes?: number[]
-  /** Jump-to-page input. */
+  /** Jump to a page with a page select. */
   showQuickJumper?: boolean
   /** Compact prev / current / next. */
   simple?: boolean

@@ -37,7 +37,7 @@ import { MPagination } from 'morya-ui'
 | `pageLinkSize` | `number` | `5` | 页码按钮数量。 |
 | `showSizePicker` | `boolean` | `false` | 显示每页条数选择器。 |
 | `pageSizes` | `number[]` | `[10, 20, 50, 100]` | `showSizePicker` 的选项。 |
-| `showQuickJumper` | `boolean` | `false` | 显示跳转到指定页。 |
+| `showQuickJumper` | `boolean` | `false` | 显示跳转页码选择器。页数超过 10 时可在下拉中筛选。 |
 | `simple` | `boolean` | `false` | 精简为上一页 / 当前页 / 下一页。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
