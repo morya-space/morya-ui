@@ -4,6 +4,7 @@ import type { CommandMenuItem, CommandMenuProps } from './types'
 import { computed, nextTick, ref, toRef, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
+import { filterItemsByLabel } from '../../shared/filterByQuery'
 import { resolveMenuIcon } from '../../shared/menu'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
@@ -41,11 +42,7 @@ const inputRef = ref<HTMLInputElement | null>(null)
 const activeIndex = ref(0)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 
-const filtered = computed(() => {
-  const q = query.value.trim().toLowerCase()
-  if (!q) return props.model
-  return props.model.filter((item) => item.label.toLowerCase().includes(q))
-})
+const filtered = computed(() => filterItemsByLabel(props.model, query.value))
 
 function close() {
   emit('update:modelValue', false)

@@ -4,6 +4,7 @@ import type { VirtualScrollerExpose } from '../VirtualScroller/types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
+import { filterItemsByLabelOrValue } from '../../shared/filterByQuery'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFieldParts } from '../../shared/useComponentAttrs'
@@ -70,14 +71,7 @@ function normalize(item: AutoCompleteSuggestion): AutoCompleteOption {
 
 const options = computed(() => props.suggestions.map(normalize))
 
-const filtered = computed(() => {
-  const query = (props.modelValue ?? '').trim().toLowerCase()
-  if (!query) return options.value
-  return options.value.filter(
-    (item) =>
-      item.label.toLowerCase().includes(query) || item.value.toLowerCase().includes(query),
-  )
-})
+const filtered = computed(() => filterItemsByLabelOrValue(options.value, props.modelValue ?? ''))
 
 const useVirtualMenu = computed(() => {
   if (props.virtual === false) return false

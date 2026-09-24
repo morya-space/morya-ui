@@ -4,6 +4,7 @@ import type { VirtualScrollerExpose } from '../VirtualScroller/types'
 import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
+import { filterItemsByLabel } from '../../shared/filterByQuery'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useFieldFeedback } from '../../shared/useFieldFeedback'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
@@ -35,11 +36,7 @@ const { isInvalid } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
 const resolvedListStyle = computed(() => props.listStyle)
 
-const filteredOptions = computed(() => {
-  const query = filterQuery.value.trim().toLowerCase()
-  if (!query) return props.options
-  return props.options.filter((option) => option.label.toLowerCase().includes(query))
-})
+const filteredOptions = computed(() => filterItemsByLabel(props.options, filterQuery.value))
 
 const useVirtualList = computed(() => {
   if (props.virtual === false) return false
