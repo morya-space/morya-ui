@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T12:49:56.748Z",
+  "generatedAt": "2026-09-24T07:37:54.439Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -578,7 +578,7 @@
       "name": "--m-button-active-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "color-mix( in srgb, var(--m-button-color) 75%, black )",
+      "default": "transparent",
       "description": {
         "zh-CN": "组件专用相关变量：Button Active Bg",
         "en-US": "Component-specific token: Button Active Bg"
@@ -628,7 +628,7 @@
       "name": "--m-button-hover-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "color-mix( in srgb, var(--m-button-color) 12%, transparent )",
+      "default": "transparent",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Bg",
         "en-US": "Component-specific token: Button Hover Bg"
@@ -2853,7 +2853,7 @@
       "name": "--m-pagination-jumper-width",
       "category": "component",
       "source": "src/components/Pagination/styles.css",
-      "default": "3.5rem",
+      "default": "5.5rem",
       "description": {
         "zh-CN": "组件专用相关变量：Pagination Jumper Width",
         "en-US": "Component-specific token: Pagination Jumper Width"

@@ -11,6 +11,9 @@
 
 ### 修复
 
+- keep link buttons backgroundless on hover and press
+- make plain match outlined hover fill
+- make ghost match text hover fill
 - Panel component change demo component width
 - remove OS reduced-motion media queries from components
 - control intensity via library preference only

@@ -37,14 +37,14 @@ import { MButton } from 'morya-ui'
 
 ## Text & Link
 
-`text` 为轻量文字按钮；`link` 呈现为内联链接样式。二者均可与 `severity` 组合。
+`text` 为轻量文字按钮；`link` 呈现为无背景的内联链接样式。二者均可与 `severity` 组合。
 
 ```vue preview src="./demos/TextAndLink.vue"
 ```
 
 ## Ghost & Quaternary
 
-`ghost` 为透明底 + 描边色文字；`quaternary` 更克制，适合工具栏次要操作。也可通过 `variant` 指定。
+`ghost` 为浅色填充，等同于 `text` 的悬浮态；`quaternary` 更克制，适合工具栏次要操作。也可通过 `variant` 指定。
 
 ```vue preview src="./demos/GhostAndQuaternary.vue"
 ```
@@ -92,9 +92,9 @@ import { MButton } from 'morya-ui'
 | `outlined` | `boolean` | `false` | 描边按钮。 |
 | `text` | `boolean` | `false` | 文字按钮。 |
 | `link` | `boolean` | `false` | 链接按钮。 |
-| `ghost` | `boolean` | `false` | 透明底按钮。 |
+| `ghost` | `boolean` | `false` | 浅色填充，等同于 `text` 的悬浮态。 |
 | `quaternary` | `boolean` | `false` | 极轻量文字按钮。 |
-| `plain` | `boolean` | `false` | 弱化色，常与 `text` / `outlined` 组合。 |
+| `plain` | `boolean` | `false` | 浅色填充，等同于 `outlined` 的悬浮态；也可与 `text` / `outlined` 组合弱化。 |
 | `raised` | `boolean` | `false` | 浮起阴影。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |

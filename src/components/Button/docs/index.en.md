@@ -37,14 +37,14 @@ Use `severity` for semantic color; defaults to primary when omitted.
 
 ## Text & Link
 
-`text` is a lightweight text button; `link` renders as an inline link style. Both can be combined with `severity`.
+`text` is a lightweight text button; `link` renders as a backgroundless inline link style. Both can be combined with `severity`.
 
 ```vue preview src="./demos/TextAndLink.vue"
 ```
 
 ## Ghost & Quaternary
 
-`ghost` is a transparent fill with tinted text; `quaternary` is quieter for secondary toolbar actions. Both can be set via `variant`.
+`ghost` is a soft fill matching text hover; `quaternary` is quieter for secondary toolbar actions. Both can be set via `variant`.
 
 ```vue preview src="./demos/GhostAndQuaternary.vue"
 ```
@@ -92,9 +92,9 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 | `outlined` | `boolean` | `false` | Outlined button. |
 | `text` | `boolean` | `false` | Text button. |
 | `link` | `boolean` | `false` | Link button. |
-| `ghost` | `boolean` | `false` | Transparent fill. |
+| `ghost` | `boolean` | `false` | Soft fill matching text hover. |
 | `quaternary` | `boolean` | `false` | Extra-quiet text button. |
-| `plain` | `boolean` | `false` | Muted color; often combined with `text` / `outlined`. |
+| `plain` | `boolean` | `false` | Soft fill matching outlined hover; can also mute `text` / `outlined`. |
 | `raised` | `boolean` | `false` | Raised shadow. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
 | `fluid` | `boolean` | `false` | Stretch to full container width. |

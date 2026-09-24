@@ -225,7 +225,30 @@
     );
 }
 
-.m-button--secondary.m-button--outlined {
+/* Idle matches outlined hover; hover/active deepen the tint. */
+.m-button--plain {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-button-border) 10%,
+        transparent
+    );
+    --m-button-fg: var(--m-button-border);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-button-border) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-button-border);
+    --m-button-hover-border: var(--m-button-border);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-button-border) 22%,
+        transparent
+    );
+}
+
+.m-button--secondary.m-button--outlined,
+.m-button--secondary.m-button--plain {
     --m-button-border: var(--m-color-border);
     --m-button-fg: var(--m-color-text);
     --m-button-hover-fg: var(--m-color-text);
@@ -236,13 +259,16 @@
     --m-button-bg: transparent;
     --m-button-border: transparent;
     --m-button-fg: var(--m-color-primary);
+    --m-button-hover-fg: var(--m-color-primary);
+    --m-button-hover-border: transparent;
+}
+
+.m-button--text {
     --m-button-hover-bg: color-mix(
         in srgb,
         var(--m-color-primary) 10%,
         transparent
     );
-    --m-button-hover-fg: var(--m-color-primary);
-    --m-button-hover-border: transparent;
     --m-button-active-bg: color-mix(
         in srgb,
         var(--m-color-primary) 16%,
@@ -250,8 +276,20 @@
     );
 }
 
-.m-button--secondary.m-button--text,
-.m-button--secondary.m-button--link {
+.m-button--link {
+    --m-button-bg: transparent;
+    --m-button-hover-bg: transparent;
+    --m-button-active-bg: transparent;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+}
+
+.m-button--link:hover:not(:disabled) {
+    text-decoration: underline;
+}
+
+.m-button--secondary.m-button--text {
     --m-button-fg: var(--m-color-text-muted);
     --m-button-hover-bg: color-mix(
         in srgb,
@@ -261,8 +299,12 @@
     --m-button-hover-fg: var(--m-color-text);
 }
 
+.m-button--secondary.m-button--link {
+    --m-button-fg: var(--m-color-text-muted);
+    --m-button-hover-fg: var(--m-color-text);
+}
+
 .m-button--success.m-button--text,
-.m-button--success.m-button--link,
 .m-button--success.m-button--outlined {
     --m-button-fg: var(--m-color-success);
     --m-button-border: var(--m-color-success);
@@ -275,8 +317,12 @@
     --m-button-hover-border: var(--m-color-success);
 }
 
+.m-button--success.m-button--link {
+    --m-button-fg: var(--m-color-success);
+    --m-button-hover-fg: var(--m-color-success);
+}
+
 .m-button--info.m-button--text,
-.m-button--info.m-button--link,
 .m-button--info.m-button--outlined {
     --m-button-fg: var(--m-color-info);
     --m-button-border: var(--m-color-info);
@@ -289,8 +335,12 @@
     --m-button-hover-border: var(--m-color-info);
 }
 
+.m-button--info.m-button--link {
+    --m-button-fg: var(--m-color-info);
+    --m-button-hover-fg: var(--m-color-info);
+}
+
 .m-button--warn.m-button--text,
-.m-button--warn.m-button--link,
 .m-button--warn.m-button--outlined {
     --m-button-fg: var(--m-color-warn);
     --m-button-border: var(--m-color-warn);
@@ -303,8 +353,12 @@
     --m-button-hover-border: var(--m-color-warn);
 }
 
+.m-button--warn.m-button--link {
+    --m-button-fg: var(--m-color-warn);
+    --m-button-hover-fg: var(--m-color-warn);
+}
+
 .m-button--help.m-button--text,
-.m-button--help.m-button--link,
 .m-button--help.m-button--outlined {
     --m-button-fg: var(--m-color-help);
     --m-button-border: var(--m-color-help);
@@ -317,8 +371,12 @@
     --m-button-hover-border: var(--m-color-help);
 }
 
+.m-button--help.m-button--link {
+    --m-button-fg: var(--m-color-help);
+    --m-button-hover-fg: var(--m-color-help);
+}
+
 .m-button--danger.m-button--text,
-.m-button--danger.m-button--link,
 .m-button--danger.m-button--outlined {
     --m-button-fg: var(--m-color-danger);
     --m-button-border: var(--m-color-danger);
@@ -331,8 +389,12 @@
     --m-button-hover-border: var(--m-color-danger);
 }
 
+.m-button--danger.m-button--link {
+    --m-button-fg: var(--m-color-danger);
+    --m-button-hover-fg: var(--m-color-danger);
+}
+
 .m-button--contrast.m-button--text,
-.m-button--contrast.m-button--link,
 .m-button--contrast.m-button--outlined {
     --m-button-fg: var(--m-color-contrast);
     --m-button-border: var(--m-color-contrast);
@@ -345,9 +407,14 @@
     --m-button-hover-border: var(--m-color-contrast);
 }
 
+.m-button--contrast.m-button--link {
+    --m-button-fg: var(--m-color-contrast);
+    --m-button-hover-fg: var(--m-color-contrast);
+}
+
 .m-button--plain.m-button--text,
-.m-button--plain.m-button--outlined,
-.m-button--plain.m-button--link {
+.m-button--plain.m-button--outlined {
+    --m-button-bg: transparent;
     --m-button-fg: var(--m-color-text-muted);
     --m-button-border: var(--m-color-border);
     --m-button-hover-bg: color-mix(
@@ -357,69 +424,178 @@
     );
     --m-button-hover-fg: var(--m-color-text);
     --m-button-hover-border: var(--m-color-border);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 18%,
+        transparent
+    );
 }
 
-.m-button--link {
-    height: auto;
-    min-height: 0;
-    padding: 0;
-}
-
-.m-button--link:hover:not(:disabled) {
-    text-decoration: underline;
+.m-button--plain.m-button--link {
+    --m-button-fg: var(--m-color-text-muted);
+    --m-button-hover-fg: var(--m-color-text);
 }
 
 .m-button--ghost {
-    --m-button-bg: transparent;
-    --m-button-fg: var(--m-button-border);
-    --m-button-hover-bg: color-mix(
+    --m-button-bg: color-mix(
         in srgb,
-        var(--m-button-border) 12%,
+        var(--m-color-primary) 10%,
         transparent
     );
-    --m-button-hover-fg: var(--m-button-border);
-    --m-button-hover-border: var(--m-button-border);
+    --m-button-border: transparent;
+    --m-button-fg: var(--m-color-primary);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-primary) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-primary);
+    --m-button-hover-border: transparent;
     --m-button-active-bg: color-mix(
         in srgb,
-        var(--m-button-border) 18%,
+        var(--m-color-primary) 22%,
         transparent
     );
 }
 
 .m-button--secondary.m-button--ghost {
-    --m-button-border: var(--m-color-border);
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 12%,
+        transparent
+    );
     --m-button-fg: var(--m-color-text);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 18%,
+        transparent
+    );
     --m-button-hover-fg: var(--m-color-text);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 24%,
+        transparent
+    );
 }
 
 .m-button--success.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-success) 10%,
+        transparent
+    );
     --m-button-fg: var(--m-color-success);
-    --m-button-border: var(--m-color-success);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-success) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-success);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-success) 22%,
+        transparent
+    );
 }
 
 .m-button--info.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-info) 10%,
+        transparent
+    );
     --m-button-fg: var(--m-color-info);
-    --m-button-border: var(--m-color-info);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-info) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-info);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-info) 22%,
+        transparent
+    );
 }
 
 .m-button--warn.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-warn) 10%,
+        transparent
+    );
     --m-button-fg: var(--m-color-warn);
-    --m-button-border: var(--m-color-warn);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-warn) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-warn);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-warn) 22%,
+        transparent
+    );
 }
 
 .m-button--help.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-help) 10%,
+        transparent
+    );
     --m-button-fg: var(--m-color-help);
-    --m-button-border: var(--m-color-help);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-help) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-help);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-help) 22%,
+        transparent
+    );
 }
 
 .m-button--danger.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-danger) 10%,
+        transparent
+    );
     --m-button-fg: var(--m-color-danger);
-    --m-button-border: var(--m-color-danger);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-danger) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-danger);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-danger) 22%,
+        transparent
+    );
 }
 
 .m-button--contrast.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-color-contrast) 10%,
+        transparent
+    );
     --m-button-fg: var(--m-color-contrast);
-    --m-button-border: var(--m-color-contrast);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-contrast) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-color-contrast);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-color-contrast) 22%,
+        transparent
+    );
 }
 
 .m-button--quaternary {
@@ -458,11 +634,7 @@
     );
 }
 
-.m-button--custom.m-button--outlined,
-.m-button--custom.m-button--ghost,
-.m-button--custom.m-button--text,
-.m-button--custom.m-button--quaternary,
-.m-button--custom.m-button--link {
+.m-button--custom.m-button--outlined {
     --m-button-bg: transparent;
     --m-button-fg: var(--m-button-color);
     --m-button-border: var(--m-button-color);
@@ -475,11 +647,72 @@
     --m-button-hover-border: var(--m-button-color);
 }
 
-.m-button--custom.m-button--text,
-.m-button--custom.m-button--quaternary,
-.m-button--custom.m-button--link {
+.m-button--custom.m-button--ghost {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 10%,
+        transparent
+    );
+    --m-button-fg: var(--m-button-color);
     --m-button-border: transparent;
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-button-color);
     --m-button-hover-border: transparent;
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 22%,
+        transparent
+    );
+}
+
+.m-button--custom.m-button--text,
+.m-button--custom.m-button--quaternary {
+    --m-button-bg: transparent;
+    --m-button-fg: var(--m-button-color);
+    --m-button-border: transparent;
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 12%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-button-color);
+    --m-button-hover-border: transparent;
+}
+
+.m-button--custom.m-button--plain {
+    --m-button-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 10%,
+        transparent
+    );
+    --m-button-fg: var(--m-button-color);
+    --m-button-border: var(--m-button-color);
+    --m-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 16%,
+        transparent
+    );
+    --m-button-hover-fg: var(--m-button-color);
+    --m-button-hover-border: var(--m-button-color);
+    --m-button-active-bg: color-mix(
+        in srgb,
+        var(--m-button-color) 22%,
+        transparent
+    );
+}
+
+.m-button--custom.m-button--link {
+    --m-button-bg: transparent;
+    --m-button-fg: var(--m-button-color);
+    --m-button-border: transparent;
+    --m-button-hover-bg: transparent;
+    --m-button-hover-fg: var(--m-button-color);
+    --m-button-hover-border: transparent;
+    --m-button-active-bg: transparent;
 }
 
 .m-button-group {

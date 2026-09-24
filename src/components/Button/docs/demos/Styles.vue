@@ -12,6 +12,7 @@ import { MButton } from 'morya-ui'
     <div class="flex flex-wrap gap-3 items-center">
       <MButton label="Raised" raised />
       <MButton label="Rounded" rounded />
+      <MButton label="Plain" plain />
       <MButton label="Plain Text" text plain />
     </div>
     <div class="flex flex-wrap gap-3 items-center">

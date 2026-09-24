@@ -47,11 +47,11 @@ export interface ButtonProps {
   outlined?: boolean
   /** Link-styled button. */
   link?: boolean
-  /** Ghost (transparent fill, tinted hover). */
+  /** Soft fill matching text hover. */
   ghost?: boolean
   /** Extra-quiet text button. */
   quaternary?: boolean
-  /** Muted/plain treatment for text or outlined. */
+  /** Soft fill matching outlined hover. Can also mute `text` / `outlined` / `link`. */
   plain?: boolean
   /** Shortcut for outlined / text / link / ghost / quaternary. */
   variant?: ButtonVariant
