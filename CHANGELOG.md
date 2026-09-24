@@ -1,5 +1,29 @@
 # morya-ui
 
+## 0.3.3
+
+### 新功能
+
+- add L2 decision recipes for component selection
+- support disabling the link underline
+
+### 修复
+
+- dismiss overlay on page scroll or resize
+- align overlay motion with scale-fade
+- correct link, plain, and ghost variant styles
+- disable ripple and press by default
+- correct import paths for styles in Card, Icon, Page, and Pagination components
+
+### 文档
+
+- wire morya-ui-pages to decision recipes
+
+### 变更
+
+- align menu item chrome with Select and Dropdown
+- add full Button prop demos
+
 ## 0.3.2
 
 ### 新功能

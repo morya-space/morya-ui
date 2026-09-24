@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-24T03:18:19.583Z",
-  "catalogGeneratedAt": "2026-09-24T03:18:15.247Z",
+  "generatedAt": "2026-09-24T08:45:50.660Z",
+  "catalogGeneratedAt": "2026-09-24T08:45:45.036Z",
   "components": [
     {
       "id": "Accordion",
@@ -198,8 +198,8 @@
       "exportName": "MButton",
       "examples": 20,
       "props": {
-        "total": 26,
-        "covered": 21,
+        "total": 27,
+        "covered": 22,
         "missing": [
           "variant",
           "ripple",
