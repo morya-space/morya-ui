@@ -15,6 +15,7 @@
     overflow: hidden;
     padding: var(--m-space-1);
     position: fixed;
+    width: max-content;
     z-index: var(--m-z-popper);
 }
 
@@ -24,8 +25,7 @@
 }
 
 .m-contextmenu__scroll-view {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: var(--m-contextmenu-item-gap);
 }
 
@@ -43,31 +43,32 @@
     cursor: pointer;
     display: flex;
     font-family: var(--m-font-sans);
+    font-size: var(--m-control-font-medium);
     gap: var(--m-space-2);
-    min-height: var(--m-menu-item-height);
-    padding: var(--m-space-2) var(--m-space-3);
-    text-align: start;
+    min-height: var(--m-control-height-medium);
+    padding: 0 var(--m-control-padding-x-medium);
+    text-align: left;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
-        opacity var(--m-motion-fast) var(--m-motion-ease);
+        color var(--m-motion-fast) var(--m-motion-ease);
+    white-space: nowrap;
     width: 100%;
 }
 
 .m-contextmenu__item:hover:not(:disabled) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        var(--m-color-surface)
-    );
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    color: var(--m-color-primary);
 }
 
 .m-contextmenu__item:disabled {
+    color: var(--m-color-text-muted);
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
 .m-contextmenu__item:focus-visible {
-    box-shadow: var(--m-focus-shadow);
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    box-shadow: none;
     outline: none;
 }
 
@@ -100,6 +101,10 @@
     flex-shrink: 0;
 }
 
+.m-contextmenu__caret {
+    margin-left: auto;
+}
+
 .m-contextmenu__submenu-wrap {
     position: relative;
 }
@@ -114,6 +119,7 @@
     min-width: var(--m-contextmenu-min-width);
     overflow: hidden;
     padding: var(--m-space-1);
+    width: max-content;
 }
 
 .m-contextmenu__submenu--teleported {
@@ -127,7 +133,6 @@
 }
 
 .m-contextmenu__submenu-view {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: var(--m-contextmenu-item-gap);
 }
