@@ -2,6 +2,8 @@
 
 **Default rule:** operation feedback uses the `message` API. Use `toast` only when you need a title plus detail, or an async / background notification feel.
 
+Authoritative selection + key API notes also live in MCP / skill decision **`feedback-choice`** ([decision-recipes.md](./decision-recipes.md)). Keep this file and that decision aligned.
+
 ## Three different things
 
 | Name | Shape | API | Typical use |

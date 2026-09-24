@@ -66,6 +66,24 @@
       "prompt": "用户列表页上「新建/编辑」不要另开路由：同页 MDialog（约 32rem）里放短表单（姓名、邮箱、角色），页脚取消/保存；保存成功用 message 一句话。输出单个 Vue SFC。",
       "expected_output": "form-in-dialog: list stays, MDialog + MForm + #footer, message.success not toast string, MTable rows.",
       "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "做一个用户列表表格页：列姓名、角色、状态。状态列必须用 MStatus；行数据绑定用 rows（不要写 data prop）；空表用 #empty + MEmpty。Vue3 + morya-ui，输出单个 SFC。",
+      "expected_output": "Prop accuracy: MTable columns+rows (not :data), #cell or Status for status, #empty+MEmpty, validate_usage clean.",
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "列表行删除：点删除后用 MConfirmDialog（危险确认），确认后 message.success('已删除')。不要用 toast，也不要手写 Dialog 当确认框。输出片段或 SFC 均可。",
+      "expected_output": "confirm-choice + feedback-choice: MConfirmDialog v-model header/message acceptSeverity=danger @accept, message.success not toast, no hand Dialog confirm.",
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "短新建弹窗：MDialog v-model + header + #footer（取消 secondary、保存 primary）；表单字段 fluid。保存成功 message 一句话。不要用 v-model:visible。",
+      "expected_output": "form-surface Dialog recipe: v-model not visible, #footer actions, fluid fields, message.success.",
+      "files": []
     }
   ]
 }

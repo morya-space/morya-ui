@@ -66,7 +66,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 | Ops pattern | `recommend_page` → **`get_golden_page`** (mirror; do not invent a parallel scaffold aesthetic) | [page-layouts.md](references/page-layouts.md) |
 | Account / Express / empty / result | `recommend_page` → `get_golden_page` (`login-page` / `landing-page` / `empty-state` / `result-page`) | [surfaces.md](references/surfaces.md) |
 | Visual direction | — | [visual-craft.md](references/visual-craft.md) (Ops polish / atmosphere / anti-defaults) |
-| Components / **API truth** | `search` / **`get_component`** / `get_example` / `recommend_component` | [component-index.md](references/component-index.md) |
+| Components / **API truth** | `search` / **`get_component`** / `get_example` / **`recommend_component`** (includes L2 recipes) | [decision-recipes.md](references/decision-recipes.md) + [component-index.md](references/component-index.md) |
 | Tokens / rules | `get_design_rules` | [design-system.md](references/design-system.md) |
 | Snippet | `get_page_snippet` | golden / surface excerpt |
 | Feedback API | — | [feedback.md](references/feedback.md) |
@@ -85,11 +85,12 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 ### 4. Wire real API usage
 
 - Import from `morya-ui` (or documented subpath + style).
-- Forms: `MForm` + fields; `@submit` + `type="submit"`.
+- **Selection + key props:** call MCP **`recommend_component`** (by query or `decision` id) and apply the returned **recipe** (`props` / `slots` / `events`) and **antiPatterns**. Without MCP, read [decision-recipes.md](references/decision-recipes.md). Then confirm full API with `get_component` / `get_example`.
+- Forms: `MForm` + fields; `@submit` + `type="submit"` (or documented footer button pattern on `form-in-dialog`).
 - Tables: `columns` + `rows` + `row-key`; `#cell-{key}`. There is no `data` prop.
 - Enums → `MSelect` / `MTreeSelect`; action menus → `MDropdown`.
-- Destructive → `MConfirmDialog` / `MConfirmPopup`.
-- Feedback → default **`message`**; `toast` only for summary+detail / async. See [feedback.md](references/feedback.md).
+- Destructive → `MConfirmDialog` / `MConfirmPopup` (`confirm-choice`).
+- Feedback → default **`message`**; `toast` only for summary+detail / async; persistent form errors → `errorMessage` / `role="alert"` (`feedback-choice`). See [feedback.md](references/feedback.md).
 - Motion → intensity with `useMotion` (`full` / `reduced` / `none`); overlay enter/exit with `transition` prop or `createMoryaUI({ motion: { transitions } })` — do not invent a second animation stack. Prefer MCP / docs `motion` guide.
 - **Before craft:** for each unfamiliar or newly written `M*` usage, call MCP **`get_component` / `get_example`**, then **`validate_usage`**. Fix every `unknown-prop` / `unknown-event` before delivery.
 - `recommend_page(includeScaffold: true)` returns the **golden page source** when one exists — remap copy/data only; never treat generated fallback as the visual target.
@@ -156,7 +157,8 @@ Details: [optional-companions.md](references/optional-companions.md). Distilled 
 | [page-layouts.md](references/page-layouts.md) | Ops golden layouts |
 | [visual-craft.md](references/visual-craft.md) | Ops polish, atmosphere recipes, anti-defaults, polish modes |
 | [design-system.md](references/design-system.md) | Principles, tokens, bans |
-| [component-index.md](references/component-index.md) | Scenario → component |
+| [component-index.md](references/component-index.md) | Catalog + decision-id index |
+| [decision-recipes.md](references/decision-recipes.md) | Scenario → component → key props (generated; offline MCP mirror) |
 | [feedback.md](references/feedback.md) | message / toast / MMessage |
 | [review-checklist.md](references/review-checklist.md) | Pre-delivery checks |
 | [optional-companions.md](references/optional-companions.md) | Combining with external design skills |
