@@ -6,7 +6,7 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <MPanel v-model="collapsed" header="Panel" toggleable>
+  <MPanel v-model="collapsed" header="Panel" toggleable class="w-[300px]">
     <p style="margin:0">
       Collapsible panel content.
     </p>
