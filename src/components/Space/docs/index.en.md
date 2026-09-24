@@ -47,7 +47,7 @@ Set `wrapItem=false` to skip the per-child wrapper (useful when children manage 
 | `inline` | `boolean` | `false` | Use `inline-flex`. |
 | `vertical` | `boolean` | `false` | Column direction. |
 | `reverse` | `boolean` | `false` | Reverse main axis. |
-| `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | Gap size. |
+| `size` | `'small' \| 'medium' \| 'large' \| number \| string \| [number \| string, number \| string]` | `'medium'` | Gap size. Numbers are `px`; strings may be CSS lengths (`8px`, `1rem`, `var(--m-space-4)`). |
 | `wrap` | `boolean` | `true` | Allow wrapping. |
 | `wrapItem` | `boolean` | `true` | Wrap each child in a container. |
 | `itemClass` / `itemStyle` | — | — | Wrapper class / style when `wrapItem` is true. |

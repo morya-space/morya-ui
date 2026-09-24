@@ -47,7 +47,7 @@ import { MSpace } from 'morya-ui'
 | `inline` | `boolean` | `false` | 是否为 `inline-flex`。 |
 | `vertical` | `boolean` | `false` | 纵向排列。 |
 | `reverse` | `boolean` | `false` | 主轴反向。 |
-| `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 间距。 |
+| `size` | `'small' \| 'medium' \| 'large' \| number \| string \| [number \| string, number \| string]` | `'medium'` | 间距。数字按 `px`；字符串可为 CSS 长度（如 `8px`、`1rem`、`var(--m-space-4)`）。 |
 | `wrap` | `boolean` | `true` | 是否换行。 |
 | `wrapItem` | `boolean` | `true` | 是否用容器包裹每个子节点。 |
 | `itemClass` / `itemStyle` | — | — | 包裹层 class / style（`wrapItem` 为 true 时生效）。 |

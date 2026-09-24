@@ -38,7 +38,7 @@ import { MFlex } from 'morya-ui'
 | `inline` | `boolean` | `false` | Use `inline-flex`. |
 | `vertical` | `boolean` | `false` | Column direction. |
 | `reverse` | `boolean` | `false` | Reverse main axis. |
-| `size` | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | Gap between items. |
+| `size` | `'small' \| 'medium' \| 'large' \| number \| string \| [number \| string, number \| string]` | `'medium'` | Gap between items. Numbers are `px`; strings may be CSS lengths. |
 | `wrap` | `boolean` | `true` | Allow wrapping (forced off when vertical). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 

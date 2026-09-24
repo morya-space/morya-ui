@@ -36,4 +36,24 @@ describe('muSpace', () => {
     })
     expect(wrapper.element.style.gap).toBe('var(--m-space-3)')
   })
+
+  it('accepts CSS length strings for size', () => {
+    const rem = mount(MSpace, {
+      props: { size: '1rem' },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(rem.element.style.gap).toBe('1rem')
+
+    const tokenVar = mount(MSpace, {
+      props: { size: 'var(--m-space-4)' },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(tokenVar.element.style.gap).toBe('var(--m-space-4)')
+
+    const numericString = mount(MSpace, {
+      props: { size: '12' },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(numericString.element.style.gap).toBe('12px')
+  })
 })

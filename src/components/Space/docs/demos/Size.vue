@@ -12,5 +12,9 @@ import { MButton, MSpace } from 'morya-ui'
       <MButton label="20px" size="small" />
       <MButton label="20px" size="small" severity="secondary" />
     </MSpace>
+    <MSpace size="1rem">
+      <MButton label="1rem" size="small" />
+      <MButton label="1rem" size="small" severity="secondary" />
+    </MSpace>
   </div>
 </template>

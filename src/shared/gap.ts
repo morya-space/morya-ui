@@ -1,7 +1,12 @@
 import type { CSSProperties } from 'vue'
 
 export type MGapToken = 'small' | 'medium' | 'large'
-export type MGapSize = MGapToken | number | [number, number]
+/** Token, px number, CSS length string (`8px`, `1rem`, `var(--m-space-4)`), or `[col, row]`. */
+export type MGapSize =
+  | MGapToken
+  | number
+  | string
+  | [number | string, number | string]
 
 const TOKEN_GAP: Record<MGapToken, string> = {
   small: 'var(--m-space-2)',
@@ -18,36 +23,37 @@ export interface ResolvedGap {
   css: string
 }
 
+function isGapToken(value: string): value is MGapToken {
+  return value === 'small' || value === 'medium' || value === 'large'
+}
+
+/** Resolve one gap axis to a CSS length. */
+export function resolveGapLength(size: string | number): string {
+  if (typeof size === 'number') return `${size}px`
+  const raw = size.trim()
+  if (!raw) return '0'
+  if (isGapToken(raw)) return TOKEN_GAP[raw]
+  if (/^\d+(\.\d+)?$/.test(raw)) return `${raw}px`
+  return raw
+}
+
 /** Resolve Space / Flex / Grid gap tokens to CSS lengths. */
 export function resolveGapCSSValue(
   size: MGapSize | string | number | undefined | null,
 ): string {
   if (size == null || size === '') return '0'
-  if (typeof size === 'string') {
-    const token = size.trim() as MGapToken
-    if (token in TOKEN_GAP) return TOKEN_GAP[token]
-    if (/^\d+(\.\d+)?$/.test(size.trim())) return `${size.trim()}px`
-    return TOKEN_GAP.medium
-  }
-  if (typeof size === 'number') return `${size}px`
-  if (Array.isArray(size)) {
-    const gap = resolveGap(size)
-    return gap.css
-  }
-  return TOKEN_GAP.medium
+  if (Array.isArray(size)) return resolveGap(size).css
+  return resolveGapLength(size)
 }
+
 /** Resolve Space / Flex size prop into CSS gap lengths. */
 export function resolveGap(size: MGapSize = 'medium'): ResolvedGap {
   if (Array.isArray(size)) {
-    const col = `${size[0]}px`
-    const row = `${size[1]}px`
+    const col = resolveGapLength(size[0])
+    const row = resolveGapLength(size[1])
     return { row, col, css: `${row} ${col}` }
   }
-  if (typeof size === 'number') {
-    const value = `${size}px`
-    return { row: value, col: value, css: value }
-  }
-  const value = TOKEN_GAP[size] ?? TOKEN_GAP.medium
+  const value = resolveGapLength(size)
   return { row: value, col: value, css: value }
 }
 
