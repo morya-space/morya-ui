@@ -1,7 +1,7 @@
 {
   "name": "@morya-ui/setup",
   "type": "module",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "packageManager": "pnpm@10.12.4",
   "description": "One-shot setup for morya-ui: install the library, Cursor MCP, Agent skills, and design config.",
   "license": "MIT",

@@ -35,7 +35,7 @@ Via MCP: `recommend_page({ style? })` → use **`suggestedSnippets`** + `recomme
 3. `MLayoutHeader` → `MBreadcrumb`
 4. `MLayoutContent` → `MPageContent` (**add `fill` only when the height rule below applies**) → `page-content-list`
 5. `MPageHeader` — page title + `#actions` primary (**one** filled primary in viewport) → `page-header-actions`
-6. `MPageFilters` — 默认 **`list-filters-stack`**（collapsible + `#advanced` + `MPageFilterChips`）；条件少无高级区用 `list-filters`；dense craft 用 `list-filters-dense`（plain + small）
+6. `MPageFilters` — 默认 **`list-filters-stack`**（`#actions` 查询/重置 + collapsible「高级筛选/收起」chevron + `#advanced` + FilterChips）；条件少无高级区用 `list-filters`；dense craft 用 `list-filters-dense`
 7. Optional `MPageFilterChips` — 已含在 `list-filters-stack`；单独增量用 `list-filter-chips`
 8. Optional `MPageToolbar` — batch actions only → `list-toolbar` / `list-batch-toolbar`
 9. `MTable` directly in content; status → `MStatus`; `#empty` → `MEmpty` → `list-table` + `list-status-dot` + `empty-block`

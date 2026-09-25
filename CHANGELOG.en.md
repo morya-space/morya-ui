@@ -1,5 +1,12 @@
 # morya-ui
 
+## 0.3.5
+
+### Features
+
+- upgrade morya-ui and @morya-ui packages to latest on run
+- add trailing actions slot and advanced toggle chrome
+
 ## 0.3.4
 
 ### Features
