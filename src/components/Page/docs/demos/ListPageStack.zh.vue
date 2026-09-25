@@ -29,10 +29,12 @@ const keyword = ref('')
       <MPageFilters aria-label="筛选" variant="filled">
         <MSpace wrap>
           <MInput v-model="keyword" placeholder="搜索" clearable class="w-48" />
+        </MSpace>
+        <template #actions>
           <MButton severity="secondary">
             查询
           </MButton>
-        </MSpace>
+        </template>
       </MPageFilters>
       <MPageToolbar>
         <span style="color:var(--m-color-text-muted);font-size:var(--m-font-size-sm)">已选 0 项</span>

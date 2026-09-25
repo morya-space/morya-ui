@@ -76,6 +76,8 @@ export const enUS: MLocaleMessages = {
   createOption: 'Create "{value}"',
   moreTags: '{count} more',
   filterOptions: 'Filter options',
+  advancedFilters: 'Advanced',
+  collapseFilters: 'Collapse',
   showSuggestions: 'Show suggestions',
   commandPalette: 'Command palette',
   searchCommands: 'Search commands',

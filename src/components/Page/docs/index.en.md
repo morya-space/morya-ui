@@ -34,7 +34,7 @@ import {
 ```vue preview src="./demos/ListPageStack.en.vue"
 ```
 
-Use `MPageFilters collapsible` + `#advanced` for secondary fields; show active criteria with `MPageFilterChips` and closable `MTag`.
+Use `MPageFilters collapsible` + `#advanced` for secondary fields; put query/reset in `#actions` (trailing cluster with the chevron toggle); show active criteria with `MPageFilterChips` and closable `MTag`.
 
 ```vue preview src="./demos/ListFiltersAdvanced.en.vue"
 ```

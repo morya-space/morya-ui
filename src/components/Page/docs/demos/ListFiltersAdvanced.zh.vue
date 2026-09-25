@@ -50,7 +50,7 @@ function resetAll() {
     style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:visible;background:var(--m-color-surface)"
   >
     <MPageContent>
-      <MPageHeader title="用户管理" description="折叠高级筛选，已选条件用 Tag 展示。">
+      <MPageHeader title="用户管理" description="折叠高级筛选（chevron + 收起），查询/重置放 #actions。">
         <template #actions>
           <MButton severity="primary">
             新建
@@ -75,13 +75,15 @@ function resetAll() {
             placeholder="状态"
             style="width: 10rem"
           />
+        </MSpace>
+        <template #actions>
           <MButton severity="secondary">
             查询
           </MButton>
           <MButton severity="secondary" text @click="resetAll">
             重置
           </MButton>
-        </MSpace>
+        </template>
         <template #advanced>
           <MSpace wrap>
             <MSelect

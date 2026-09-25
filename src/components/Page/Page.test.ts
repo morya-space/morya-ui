@@ -69,8 +69,37 @@ describe('mPageFilters', () => {
       },
     })
     expect(wrapper.find('.advanced').exists()).toBe(false)
-    await wrapper.find('.m-page-filters__toggle').trigger('click')
+    const toggle = wrapper.find('.m-page-filters__toggle')
+    expect(toggle.exists()).toBe(true)
+    expect(toggle.text()).toContain('高级筛选')
+    await toggle.trigger('click')
     expect(wrapper.emitted('update:expanded')?.[0]).toEqual([true])
+  })
+
+  it('shows collapse label and chevron-up when expanded', () => {
+    const wrapper = mount(MPageFilters, {
+      props: { collapsible: true, expanded: true, ariaLabel: 'Filters' },
+      slots: {
+        default: '<span />',
+        advanced: '<span class="advanced">Advanced</span>',
+      },
+    })
+    expect(wrapper.find('.advanced').exists()).toBe(true)
+    const toggle = wrapper.find('.m-page-filters__toggle')
+    expect(toggle.text()).toContain('收起')
+    expect(toggle.html()).toMatch(/chevron-up|m-icon/)
+  })
+
+  it('renders query actions in the trailing cluster', () => {
+    const wrapper = mount(MPageFilters, {
+      props: { ariaLabel: 'Filters' },
+      slots: {
+        default: '<span class="field">Field</span>',
+        actions: '<button type="button" class="query">查询</button>',
+      },
+    })
+    expect(wrapper.find('.m-page-filters__trailing .query').exists()).toBe(true)
+    expect(wrapper.find('.m-page-filters__controls .query').exists()).toBe(false)
   })
 })
 

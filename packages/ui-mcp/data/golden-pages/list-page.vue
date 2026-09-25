@@ -139,13 +139,15 @@ const rows = [
                   clearable
                   style="width: 10rem"
                 />
+              </MSpace>
+              <template #actions>
                 <MButton severity="secondary">
                   查询
                 </MButton>
                 <MButton severity="secondary" text @click="resetFilters">
                   重置
                 </MButton>
-              </MSpace>
+              </template>
               <template #advanced>
                 <MSpace wrap>
                   <MSelect

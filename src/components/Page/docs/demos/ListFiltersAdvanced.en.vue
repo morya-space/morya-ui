@@ -53,7 +53,7 @@ function resetAll() {
     style="border:1px solid var(--m-color-border);border-radius:var(--m-radius-md);overflow:visible;background:var(--m-color-surface)"
   >
     <MPageContent>
-      <MPageHeader title="Users" description="Collapsible advanced filters and active tags.">
+      <MPageHeader title="Users" description="Collapsible advanced filters (chevron + Collapse); query/reset in #actions.">
         <template #actions>
           <MButton severity="primary">
             Create
@@ -78,13 +78,15 @@ function resetAll() {
             placeholder="Status"
             style="width: 10rem"
           />
+        </MSpace>
+        <template #actions>
           <MButton severity="secondary">
             Search
           </MButton>
           <MButton severity="secondary" text @click="resetAll">
             Reset
           </MButton>
-        </MSpace>
+        </template>
         <template #advanced>
           <MSpace wrap>
             <MSelect

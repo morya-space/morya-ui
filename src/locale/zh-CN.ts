@@ -76,6 +76,8 @@ export const zhCN: MLocaleMessages = {
   createOption: '创建 “{value}”',
   moreTags: '还有 {count} 项',
   filterOptions: '筛选选项',
+  advancedFilters: '高级筛选',
+  collapseFilters: '收起',
   showSuggestions: '显示建议',
   commandPalette: '命令面板',
   searchCommands: '搜索命令',

@@ -111,13 +111,15 @@ const rows = [
                   size="small"
                   style="width: 8rem"
                 />
+              </MSpace>
+              <template #actions>
                 <MButton severity="secondary" size="small">
                   查询
                 </MButton>
                 <MButton severity="secondary" size="small" text @click="resetFilters">
                   重置
                 </MButton>
-              </MSpace>
+              </template>
             </MPageFilters>
 
             <MTable

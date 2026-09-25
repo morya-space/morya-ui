@@ -34,7 +34,7 @@ import {
 ```vue preview src="./demos/ListPageStack.zh.vue"
 ```
 
-字段较多时：`MPageFilters collapsible` + `#advanced` 折叠高级项；已选条件用 `MPageFilterChips` 包一层 `MTag closable`（不要用自定义 dashed 壳）。
+字段较多时：`MPageFilters collapsible` + `#advanced` 折叠高级项；查询/重置放 `#actions`（与「高级筛选」chevron 切换同列）；已选条件用 `MPageFilterChips` 包一层 `MTag closable`（不要用自定义 dashed 壳）。
 
 ```vue preview src="./demos/ListFiltersAdvanced.zh.vue"
 ```
@@ -92,13 +92,14 @@ import {
 | --- | --- | --- | --- |
 | `ariaLabel` | `string` | — | 筛选区无障碍名称。 |
 | `variant` | `'plain' \| 'filled'` | `'plain'` | 表面处理；`filled` 与 Table header 同色浅底，无圆角。 |
-| `collapsible` | `boolean` | `false` | 为 true 且提供 `#advanced` 时显示展开/收起。 |
+| `collapsible` | `boolean` | `false` | 为 true 且提供 `#advanced` 时显示展开/收起（默认文案「高级筛选」/「收起」，右侧 chevron）。 |
 | `expanded` | `boolean` | `false` | 高级区展开状态（`v-model:expanded`）。 |
 | `expandLabel` / `collapseLabel` | `string` | — | 覆盖默认展开/收起文案。 |
 
 | Slot | 说明 |
 | --- | --- |
-| `default` | 常用筛选控件行。 |
+| `default` | 常用筛选控件（Input / Select 等）。 |
+| `actions` | 查询/重置等操作，与折叠切换组成右侧尾部簇（推荐）。 |
 | `advanced` | 折叠区（需 `collapsible`）。 |
 | `active` | 可选；已选摘要（更常见是下方 `MPageFilterChips`）。 |
 

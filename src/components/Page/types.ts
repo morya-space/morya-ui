@@ -39,9 +39,9 @@ export interface PageFiltersProps {
   collapsible?: boolean
   /** Collapsible open state (v-model). */
   expanded?: boolean
-  /** Toggle button label when collapsed. */
+  /** Toggle button label when collapsed (default: locale.advancedFilters). */
   expandLabel?: string
-  /** Toggle button label when expanded. */
+  /** Toggle button label when expanded (default: locale.collapseFilters). */
   collapseLabel?: string
 }
 

@@ -23,11 +23,12 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const hasAdvanced = computed(() => Boolean(slots.advanced))
 const showCollapsible = computed(() => props.collapsible && hasAdvanced.value)
+const showTrailing = computed(() => Boolean(slots.actions) || showCollapsible.value)
 
-const expandText = computed(
-  () => props.expandLabel ?? `${locale.expand ?? 'Expand'} ${locale.filterOptions ?? 'filters'}`,
-)
-const collapseText = computed(() => props.collapseLabel ?? locale.collapse)
+const expandText = computed(() => props.expandLabel ?? locale.value.advancedFilters ?? '高级筛选')
+const collapseText = computed(() => props.collapseLabel ?? locale.value.collapseFilters ?? '收起')
+const toggleIcon = computed(() => (props.expanded ? 'chevron-up' : 'chevron-down'))
+const toggleLabel = computed(() => (props.expanded ? collapseText.value : expandText.value))
 
 const rootClass = computed(() => [
   'm-page-filters',
@@ -52,18 +53,30 @@ function toggleExpanded() {
       <div class="m-page-filters__controls">
         <slot />
       </div>
-      <MButton
-        v-if="showCollapsible"
-        type="button"
-        severity="secondary"
-        text
-        class="m-page-filters__toggle"
-        :aria-expanded="expanded"
-        :aria-controls="advancedId"
-        @click="toggleExpanded"
+      <div
+        v-if="showTrailing"
+        class="m-page-filters__trailing"
       >
-        {{ expanded ? collapseText : expandText }}
-      </MButton>
+        <div
+          v-if="$slots.actions"
+          class="m-page-filters__actions"
+        >
+          <slot name="actions" />
+        </div>
+        <MButton
+          v-if="showCollapsible"
+          type="button"
+          severity="secondary"
+          text
+          class="m-page-filters__toggle"
+          :icon="toggleIcon"
+          icon-pos="right"
+          :label="toggleLabel"
+          :aria-expanded="expanded"
+          :aria-controls="advancedId"
+          @click="toggleExpanded"
+        />
+      </div>
     </div>
     <div
       v-if="showCollapsible && expanded"
@@ -72,7 +85,10 @@ function toggleExpanded() {
     >
       <slot name="advanced" />
     </div>
-    <div v-if="$slots.active" class="m-page-filters__active">
+    <div
+      v-if="$slots.active"
+      class="m-page-filters__active"
+    >
       <slot name="active" />
     </div>
   </section>

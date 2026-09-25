@@ -77,6 +77,10 @@ export interface MLocaleConfig {
   createOption?: string
   moreTags?: string
   filterOptions?: string
+  /** PageFilters collapsible toggle when collapsed (e.g. 高级筛选). */
+  advancedFilters?: string
+  /** PageFilters collapsible toggle when expanded (e.g. 收起). */
+  collapseFilters?: string
   showSuggestions?: string
   commandPalette?: string
   searchCommands?: string

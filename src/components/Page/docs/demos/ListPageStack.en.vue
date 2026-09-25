@@ -29,10 +29,12 @@ const keyword = ref('')
       <MPageFilters aria-label="Filters" variant="filled">
         <MSpace wrap>
           <MInput v-model="keyword" placeholder="Search" clearable class="w-48" />
+        </MSpace>
+        <template #actions>
           <MButton severity="secondary">
             Search
           </MButton>
-        </MSpace>
+        </template>
       </MPageFilters>
       <MPageToolbar>
         <span style="color:var(--m-color-text-muted);font-size:var(--m-font-size-sm)">0 selected</span>
