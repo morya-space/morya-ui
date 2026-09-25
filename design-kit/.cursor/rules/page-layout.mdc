@@ -91,6 +91,7 @@ alwaysApply: false
 
 ## MCP
 
-- 整页：`recommend_page` → `get_golden_page` → `get_design_rules`
+- 整页：`recommend_page`（可传 `style`）→ `get_golden_page` → `get_design_rules` / `list_style_presets`
+- 风格：有参考则跟参考；否则按 `styleDirection` 或请用户从 quiet/soft/dense/rail/studio/ink 选
 - 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions` / `scrollable-panel`）
 - 可选：`validate_page`（参考建议，不阻断）

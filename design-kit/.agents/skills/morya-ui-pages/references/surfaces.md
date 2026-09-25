@@ -77,13 +77,15 @@ Host page stays stable; focus management comes from the overlay component.
 
 | Ask | Treat as |
 | --- | --- |
-| “后台列表 + 好看一点” | Ops first, light craft (spacing/type), no landing hero |
+| “后台列表 + 好看一点” | Ops + pick a non-quiet preset (`soft`/`studio`) or ask once |
+| “像附件截图一样” | Reference-first style resolution; still M* + `--m-*` |
 | “登录页有品牌感” | Account + Express craft on brand panel only |
 | “产品官网” | Express; Ops patterns do not apply |
 | “空状态设计精致一点” | Flow empty + visual-craft signature (one risk) |
 
 ## MCP hints
 
-- Ops whole page: `recommend_page` → `get_golden_page` → `get_design_rules`
+- Ops whole page: `recommend_page({ style? })` → `get_golden_page` → apply `styleDirection` / reference
+- Styles: `list_style_presets` / `get_style_preset`
 - Section: `get_page_snippet`
 - Any lane: `search` / `get_component` before unfamiliar APIs

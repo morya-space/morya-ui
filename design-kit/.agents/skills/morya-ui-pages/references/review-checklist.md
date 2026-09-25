@@ -15,7 +15,9 @@
 
 ## Craft (all lanes — default pass)
 
-- [ ] Lane craft from [visual-craft.md](visual-craft.md) applied (Ops polish and/or atmosphere)
+- [ ] Style direction resolved (reference / named preset / inferred / offered) — not silent `quiet` every time
+- [ ] Lane craft from [visual-craft.md](visual-craft.md) + [style-presets.md](style-presets.md) applied
+- [ ] If companions ran: still only `M*` + `--m-*`; no second kit ([optional-companions.md](optional-companions.md))
 - [ ] At most one primary filled button in the main viewport
 - [ ] Copy is domain-real; empty / error states say what to do next
 - [ ] No AI-default look clusters unless the brief asked for them

@@ -9,7 +9,8 @@ description: >
   列表页, 表单页, 仪表盘, 登录页, 注册, 空状态, 向导, 落地页, 官网, landing,
   login, dashboard, settings, onboarding, or “用组件库做页面”. Prefer this
   skill over generic frontend-design, impeccable, or ui-ux-pro-max when the
-  implementation stack is morya-ui; those companions may inform taste only.
+  implementation stack is morya-ui; those companions may deepen taste and polish
+  after structure/contract are fixed (see references/optional-companions.md).
   Do not use for backend-only work or for authoring new components inside the
   morya-ui library source itself.
 ---
@@ -48,7 +49,7 @@ Full taxonomy: [references/surfaces.md](references/surfaces.md).
 
 ## Workflow
 
-### 1. Pin subject, audience, surface, job
+### 1. Pin subject, audience, surface, job, **style**
 
 State explicitly (even briefly in thinking):
 
@@ -56,16 +57,24 @@ State explicitly (even briefly in thinking):
 - **Audience** — who uses this screen
 - **Surface** — from the map above
 - **Single job** — what the first viewport must accomplish
+- **Style direction** — resolve in this order (see [style-presets.md](references/style-presets.md)):
+  1. User **reference** (screenshot / mock / existing page / “像 XX”) → extract cues, map to `--m-*` + `M*`
+  2. User **named preset** (`soft` / 柔和留白 / …) → apply it
+  3. **Prompt cues** (行业/气质) → infer a preset and name it
+  4. Still unclear → ask **one** question with 3–4 presets; if “直接写” → domain heuristic (**not** always `quiet`)
 
-For Express / branded Account moments, also draft a tiny **design plan** (see [visual-craft.md](references/visual-craft.md)): palette roles mapped to `--m-*` (extend only if the project already customizes theme), type roles, layout concept, one signature element. Skip the full plan for routine Ops CRUD unless the user asks for a redesign.
+Golden pages lock **structure/API**, not the only aesthetic. Blindly cloning golden visuals makes pages feel stiff.
+
+For Express / branded Account moments, also draft a tiny **design plan** (see [visual-craft.md](references/visual-craft.md)): palette roles mapped to `--m-*` (extend only if the project already customizes theme), type roles, layout concept, one signature element. For Ops, a named preset + Ops polish is enough unless the user asks for a redesign.
 
 ### 2. Load the smallest useful references
 
 | Need | Prefer (MCP) | Else read |
 | --- | --- | --- |
-| Ops pattern | `recommend_page` → **`get_golden_page`** (mirror; do not invent a parallel scaffold aesthetic) | [page-layouts.md](references/page-layouts.md) |
+| Ops pattern | `recommend_page` → **`get_golden_page`** (mirror structure; craft from style direction) | [page-layouts.md](references/page-layouts.md) |
+| Style direction | `recommend_page({ style })` / **`list_style_presets`** / **`get_style_preset`** | [style-presets.md](references/style-presets.md) |
 | Account / Express / empty / result | `recommend_page` → `get_golden_page` (`login-page` / `landing-page` / `empty-state` / `result-page`) | [surfaces.md](references/surfaces.md) |
-| Visual direction | — | [visual-craft.md](references/visual-craft.md) (Ops polish / atmosphere / anti-defaults) |
+| Visual direction | — | [visual-craft.md](references/visual-craft.md) + [style-presets.md](references/style-presets.md) |
 | Components / **API truth** | `search` / **`get_component`** / `get_example` / **`recommend_component`** (includes L2 recipes) | [decision-recipes.md](references/decision-recipes.md) + [component-index.md](references/component-index.md) |
 | Tokens / rules | `get_design_rules` | [design-system.md](references/design-system.md) |
 | Snippet | `get_page_snippet` | golden / surface excerpt |
@@ -74,7 +83,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 ### 3. Compose
 
-**Ops:** mirror golden-page block order; prefer `MPage*` over custom chrome.
+**Ops:** mirror golden-page **block order**; apply the resolved **style preset** (or reference cues) for density/chrome/copy; prefer `MPage*` over custom chrome. Do not freeze every Ops page into identical quiet chrome. List craft variants: `list-page` (soft structure), `list-page-dense`, `list-page-rail` — `recommend_page({ style })` routes them.
 
 **Account / Flow / System:** centered or split shells with `MCard` / `MForm` / `MEmpty` / `MResult` (see surfaces); keep controls as `M*`. Persistent form errors use field `errorMessage` or a token-styled `role="alert"` — `<MMessage>` is the `message` host, not an inline alert.
 
@@ -95,16 +104,25 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 - **Before craft:** for each unfamiliar or newly written `M*` usage, call MCP **`get_component` / `get_example`**, then **`validate_usage`**. Fix every `unknown-prop` / `unknown-event` before delivery.
 - `recommend_page(includeScaffold: true)` returns the **golden page source** when one exists — remap copy/data only; never treat generated fallback as the visual target.
 
-### 5. Craft pass (always — lane-aware)
+### 5. Craft pass (always — lane-aware + companions)
 
 Run **before** delivery. Do not stop at a structurally correct shell.
 
-- **Ops:** apply [visual-craft.md](references/visual-craft.md) § Ops polish (one primary, menu icons, `MStatus` in tables, designed empty, no decorative cards).
-- **Account / Flow:** one calm brand or empty-state cue from § Atmosphere recipes; form errors via `errorMessage` / token `role="alert"`.
-- **Express:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions; intensity via `useMotion` (`full` / `reduced` / `none`), not the OS `prefers-reduced-motion` setting.
-- **All lanes:** responsive, focus visible, domain-real copy (active voice).
+1. Resolve **style direction** ([style-presets.md](references/style-presets.md)) — reference → preset → cues → ask.
+2. Apply lane craft from [visual-craft.md](references/visual-craft.md):
+   - **Ops / Operate:** style preset + § Ops polish (one primary, menu icons, `MStatus`, designed empty, no decorative cards).
+   - **Account / Flow:** one calm brand or empty-state cue from § Atmosphere; form errors via `errorMessage` / token `role="alert"`.
+   - **Express / Persuade:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions via `useMotion`.
+3. **If companions are already installed** (see [optional-companions.md](references/optional-companions.md)):
+   - Express / brand → may load **`frontend-design`** for POV after contract is fixed
+   - User asks 更大胆/更克制/polish/audit → may load **`impeccable`** command (`bolder` / `quieter` / `polish` / …)
+   - Mood/industry keywords only → optional **`ui-ux-pro-max`** search, then map to tokens/preset
+   - a11y pass → optional **`fixing-accessibility`** after visual
+   - Max **one** visual companion per task; always remediate with `M*` + `--m-*`
+4. If companions are **absent**, use distilled visual-craft / style-presets — do **not** block or ask to install mid-task.
+5. **All lanes:** responsive, focus visible, domain-real copy. User **reference** overrides companion taste within the morya contract.
 
-Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): use as an **extra** pass when the user asks to improve an existing screen. See [visual-craft.md](references/visual-craft.md) § Polish modes.
+Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): extra pass when the user asks to improve an existing screen.
 
 ### 6. Review
 
@@ -130,15 +148,16 @@ Do not deliver with unresolved `unknown-prop` / `unknown-event`.
 
 ## Soft companions
 
-If already installed in the consumer project:
+If already installed in the consumer project, **combine** them after structure + contract (do not replace this skill):
 
-| Companion | After contract is fixed, may help with |
-| --- | --- |
-| `frontend-design` | Distinctive Express / brand moments |
-| `impeccable` | Named polish / audit passes |
-| `ui-ux-pro-max` | Mood / industry keywords for Express only |
+| Companion | Load when | Role |
+| --- | --- | --- |
+| `frontend-design` | Express / branded Account moments | Distinctive design plan + signature (taste) |
+| `impeccable` | Polish / bolder / quieter / audit / delight asks | Named Operate/Persuade craft passes |
+| `ui-ux-pro-max` | Mood / industry keyword search for Express | Keywords → map to `--m-*` + style preset |
+| `fixing-accessibility` | a11y audit after visual | Names, keyboard, focus on top of `M*` |
 
-Details: [optional-companions.md](references/optional-companions.md). Distilled craft lives in [visual-craft.md](references/visual-craft.md) so this skill works **standalone**.
+Routing, conflict rules, and load budget: [optional-companions.md](references/optional-companions.md). Distilled craft in [visual-craft.md](references/visual-craft.md) + [style-presets.md](references/style-presets.md) keeps this skill **standalone**.
 
 ## Output expectations
 
@@ -155,6 +174,7 @@ Details: [optional-companions.md](references/optional-companions.md). Distilled 
 | --- | --- |
 | [surfaces.md](references/surfaces.md) | Choosing / composing non-Ops (and hybrid) surfaces |
 | [page-layouts.md](references/page-layouts.md) | Ops golden layouts |
+| [style-presets.md](references/style-presets.md) | Style resolution + named presets users can pick |
 | [visual-craft.md](references/visual-craft.md) | Ops polish, atmosphere recipes, anti-defaults, polish modes |
 | [design-system.md](references/design-system.md) | Principles, tokens, bans |
 | [component-index.md](references/component-index.md) | Catalog + decision-id index |

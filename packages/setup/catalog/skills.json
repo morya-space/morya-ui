@@ -12,7 +12,7 @@
     {
       "id": "frontend-design",
       "name": "Frontend Design",
-      "description": "Distinctive visual direction for Express / brand surfaces (taste only; still remediate with M*).",
+      "description": "Distinctive visual direction for Express / brand surfaces; use after morya-ui-pages contract (taste only; still remediate with M*).",
       "required": false,
       "default": false,
       "install": "skills-cli",
@@ -34,7 +34,7 @@
     {
       "id": "impeccable",
       "name": "Impeccable",
-      "description": "Named polish / audit / redesign passes for frontend UI (latest from pbakaus/impeccable).",
+      "description": "Named polish / audit / bolder / quieter passes; pair with morya-ui-pages Operate/Persuade modes (latest from pbakaus/impeccable).",
       "required": false,
       "default": false,
       "install": "skills-cli",

@@ -12,20 +12,43 @@ Portable craft for morya-ui consumers. Inspired by **Frontend Design**, **Impecc
 
 Do **not** skip craft because the page is “just admin”. Polished Ops is quiet, aligned, and specific — not decorative.
 
-## Design plan (Express & branded moments)
+**Style is not fixed to the golden look.** Resolve direction first ([style-presets.md](style-presets.md)): reference → named preset → prompt cues → offer a choice. Golden pages define structure; presets / references define craft variety so pages do not all look stiff and identical.
+
+Market skills (**Frontend Design**, **Impeccable**, **UI-UX-Pro-Max**) deepen taste when installed — see [optional-companions.md](optional-companions.md). This file keeps a **distilled** subset so the skill stays standalone.
+
+## Companion bridge (distilled)
+
+Use these even when companions are **not** installed. If they **are** installed, run the matching companion pass **after** structure + contract, then remediate with `M*` + `--m-*`.
+
+### Subject first (Frontend Design)
+
+- Name a concrete **subject**, **audience**, and **single job** before visual choices.
+- Pull personality from the subject’s world (materials, artifacts, vernacular) — not from a generic “SaaS admin” mood board.
+- **One signature risk** per surface; everything else quieter (Chanel: remove one accessory).
+
+### Mode (Impeccable)
+
+| Mode | Use when | Craft budget |
+| --- | --- | --- |
+| **Operate** | Ops lists, forms, settings, tools | Clarity, density, style preset; no marketing hero |
+| **Persuade** | Landing, pricing, campaign | Design plan + signature; controls still `M*` |
+| **Read** | Docs / long detail | Typeset + measure; calm chrome |
+| **Experience** | Gallery / showcase | Artifact leads; UI recedes |
+
+### Design plan (Express & branded Account — Frontend Design)
 
 Before code, decide:
 
-1. **Color** — 4–6 roles (bg, surface, text, muted, accent, danger). Prefer existing `--m-*`. If the project already customizes theme, extend that system; do not invent a parallel hex soup in scoped CSS.
-2. **Type** — display vs body vs utility. For Ops, stick to theme fonts. For Express, a distinctive pairing is OK if fonts are loadable and fallbacks exist.
-3. **Layout concept** — one sentence + rough hierarchy (ASCII wireframe optional).
+1. **Color** — 4–6 roles (bg, surface, text, muted, accent, danger). Prefer existing `--m-*`. If the project already customizes theme, extend that system; do not invent a parallel hex soup in scoped CSS. (Companions may suggest hex — **map** them onto tokens.)
+2. **Type** — display vs body vs utility. For Ops / Operate, stick to theme fonts. For Express / Persuade, a distinctive pairing is OK if fonts are loadable and fallbacks exist.
+3. **Layout concept** — one sentence + rough hierarchy (ASCII wireframe optional). Structure encodes meaning; numbered `01/02/03` only when order is real information.
 4. **Signature** — the single memorable element (motion, crop, editorial type, product artifact). Everything else quieter.
 
-Critique the plan: if it looks like the plan you would write for *any* SaaS, revise until it fits **this** subject.
+Critique the plan: if it looks like the plan you would write for *any* SaaS, revise until it fits **this** subject. Brief / reference / named style preset **wins** over companion defaults.
 
-## Ops polish (default — every Ops page)
+## Ops polish (baseline — every Operate / Ops page)
 
-Apply after the golden block order is correct. These are **required**, not optional taste:
+Apply after the golden block order is correct **and** a style direction is resolved. These are **required** baseline rules; presets may change density/chrome on top:
 
 1. **One primary** — exactly one filled `severity="primary"` in the main viewport (usually toolbar create / form save). Query can be primary; reset stays secondary.
 2. **Sider icons** — every top-level `MMenu` item has an `icon`; icons come from one set (built-in Tabler names). No random emoji.
@@ -161,21 +184,22 @@ Pair with `MEmpty` + primary next step + optional secondary text button. One mem
 
 ## Polish modes (Impeccable-inspired)
 
-**Default:** after compose, run a lane-appropriate light pass (§ Ops polish and/or atmosphere).
+**Default:** after compose, run a lane-appropriate light pass (§ Ops polish and/or atmosphere / design plan).
 
-When the user asks to improve an existing surface, pick a named mode:
+When the user asks to improve an existing surface — or when `impeccable` is installed — pick a named mode:
 
-| Mode | Intent |
-| --- | --- |
-| `audit` | Hierarchy, contrast, a11y, spacing, anti-patterns — report then fix |
-| `clarify` | Labels, errors, empty copy, button verbs |
-| `quieter` | Remove competing accents, chips, shadows; keep one focus |
-| `bolder` | Strengthen the signature only; do not shout everywhere |
-| `typeset` | Scale, weight, line-length, truncation |
-| `adapt` | Responsive breakpoints; touch targets |
-| `delight` | One tasteful micro-interaction — never clutter |
+| Mode | Intent | Companion command (if installed) |
+| --- | --- | --- |
+| `audit` | Hierarchy, contrast, a11y, spacing, anti-patterns — report then fix | `impeccable audit` / `critique` |
+| `clarify` | Labels, errors, empty copy, button verbs | `impeccable clarify` |
+| `quieter` | Remove competing accents, chips, shadows; keep one focus | `impeccable quieter` |
+| `bolder` | Strengthen the signature / style preset only; do not shout everywhere | `impeccable bolder` |
+| `typeset` | Scale, weight, line-length, truncation | `impeccable typeset` |
+| `adapt` | Responsive breakpoints; touch targets | `impeccable adapt` |
+| `delight` | One tasteful micro-interaction — never clutter | `impeccable delight` / `animate` |
+| `polish` | Final ship pass: Ops polish + style cues + a11y basics | `impeccable polish` |
 
-Always remediate with `M*` + tokens, not raw replacement controls.
+Always remediate with `M*` + tokens, not raw replacement controls. Full routing: [optional-companions.md](optional-companions.md).
 
 ## Industry / mood (UI-UX-Pro-Max-inspired)
 
@@ -183,8 +207,8 @@ For Express briefs that only say “modern / professional / playful”:
 
 1. Infer industry from the product (fintech ≠ kids education).
 2. Pick mood keywords (e.g. “editorial + precise”, “warm workshop”, “clinical calm”).
-3. Map mood → token roles and signature — **then** implement with morya-ui.
-4. Discard any suggestion to switch stacks (shadcn, generic Tailwind kit, etc.).
+3. Map mood → [style preset](style-presets.md) and/or token roles and signature — **then** implement with morya-ui.
+4. If `ui-ux-pro-max` is installed, use it for **keyword / palette search only**; discard any suggestion to switch stacks (shadcn, generic Tailwind kit, etc.).
 
 ## Quality floor (all lanes)
 
@@ -193,4 +217,5 @@ For Express briefs that only say “modern / professional / playful”:
 - Keyboard reaches primary actions
 - No raw theme colors that break dark mode when the app supports it
 - Icons decorative vs informative handled correctly (`aria-hidden` vs `aria-label`)
-- Craft pass completed for the lane (Ops polish and/or atmosphere) before delivery
+- Craft pass completed for the lane (Ops polish and/or atmosphere / design plan) before delivery
+- If a companion ran: still pass MCP `validate_usage` / `validate_page`
