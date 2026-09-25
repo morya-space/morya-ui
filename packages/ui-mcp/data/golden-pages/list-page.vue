@@ -1,8 +1,10 @@
 <script setup lang="ts">
 /**
- * 黄金样例：列表页（全视口后台主列表 → 使用 fill）
- * 嵌入表 / 短页 / 整页文档滚动不要硬套 fill，见 page-layouts § List height
- * @see DESIGN.md · morya-ui-pages references/page-layouts.md · visual-craft § Ops polish
+ * 黄金样例：列表页（结构母版 · style: soft）
+ * structure: list · style: soft
+ * 全视口主列表使用 fill；气质变体见 list-page-dense / list-page-rail。
+ * 镜像区块顺序；视觉跟 styleDirection / 参考走，不要把 soft 当唯一正确答案。
+ * @see DESIGN.md · page-layouts.md · style-presets.md · visual-craft § Ops polish
  */
 import {
   MBreadcrumb,

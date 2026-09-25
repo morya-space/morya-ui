@@ -1,10 +1,9 @@
 <script setup lang="ts">
 /**
- * 黄金样例：列表页（结构母版 · style: soft）
- * structure: list · style: soft
- * 全视口主列表使用 fill；气质变体见 list-page-dense / list-page-rail。
- * 镜像区块顺序；视觉跟 styleDirection / 参考走，不要把 soft 当唯一正确答案。
- * @see DESIGN.md · page-layouts.md · style-presets.md · visual-craft § Ops polish
+ * 黄金样例：列表页 · rail（侧栏强调）
+ * structure: list · style: rail
+ * 氛围只在 chrome（侧栏）；内容区保持克制。镜像区块顺序。
+ * @see list-page.vue · style-presets.md · visual-craft § Atmosphere
  */
 import {
   MBreadcrumb,
@@ -100,7 +99,16 @@ const rows = [
 <template>
   <MConfigProvider :locale="zhCN">
     <MLayout has-sider fill-viewport>
-      <MLayoutSider v-model:collapsed="siderCollapsed" bordered :collapsed-width="72">
+      <MLayoutSider
+        v-model:collapsed="siderCollapsed"
+        bordered
+        :collapsed-width="72"
+        class="gp-rail-sider"
+      >
+        <div class="gp-rail-sider__brand">
+          <span class="gp-rail-sider__mark" aria-hidden="true" />
+          <span v-if="!siderCollapsed" class="gp-rail-sider__name">Acme Ops</span>
+        </div>
         <MMenu
           :model="menuModel"
           :collapsed="siderCollapsed"
@@ -110,7 +118,7 @@ const rows = [
       </MLayoutSider>
 
       <MLayout>
-        <MLayoutHeader padding="var(--m-space-4) var(--m-space-6)">
+        <MLayoutHeader padding="var(--m-space-4) var(--m-space-6)" class="gp-rail-header">
           <MBreadcrumb :model="[{ label: '首页', to: '/' }, { label: '用户管理' }]" />
         </MLayoutHeader>
 
@@ -218,3 +226,45 @@ const rows = [
     </MLayout>
   </MConfigProvider>
 </template>
+
+<style scoped>
+.gp-rail-sider {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--m-color-primary) 14%, var(--m-color-surface)) 0%,
+      var(--m-color-surface) 42%
+    );
+}
+
+.gp-rail-sider__brand {
+  align-items: center;
+  display: flex;
+  gap: var(--m-space-2);
+  min-height: 3rem;
+  padding: var(--m-space-3) var(--m-space-4);
+}
+
+.gp-rail-sider__mark {
+  background: var(--m-color-primary);
+  border-radius: var(--m-radius-sm);
+  flex-shrink: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.gp-rail-sider__name {
+  color: var(--m-color-text);
+  font-size: var(--m-font-size-md);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gp-rail-header {
+  border-bottom: 1px solid var(--m-color-border);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--m-color-primary) 18%, transparent);
+}
+</style>

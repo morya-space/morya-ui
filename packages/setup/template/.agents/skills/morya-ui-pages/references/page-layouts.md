@@ -4,7 +4,9 @@ When generating a full page, pick a type and **mirror the golden-page block orde
 
 | Type | `get_golden_page` id |
 | --- | --- |
-| List | `list-page` |
+| List (structure · soft) | `list-page` |
+| List · dense craft | `list-page-dense` |
+| List · rail craft | `list-page-rail` |
 | Form (long / dedicated) | `form-page` |
 | List create/edit dialog | `form-in-dialog` |
 | Detail | `detail-page` |
@@ -16,7 +18,9 @@ When generating a full page, pick a type and **mirror the golden-page block orde
 | Settings | `settings-page` |
 | Wizard | `wizard-form` |
 
-Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet` (`filters`, `toolbar`, `form-actions`, `scrollable-panel`, …).
+Via MCP: `recommend_page({ style? })` → resolves list craft (`dense`→`list-page-dense`, `rail`→`list-page-rail`, else `list-page`) → `get_golden_page`; then apply `styleDirection` (or a user reference). Local edits: `get_page_snippet` (`filters`, `toolbar`, `form-actions`, `scrollable-panel`, …). Styles: `list_style_presets` / `get_style_preset`.
+
+**List craft variants** share the same block order; only density / chrome / copy change. Prefer `recommend_page` style routing over hand-picking unless the user named a variant id.
 
 ## Product defaults
 
