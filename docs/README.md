@@ -9,6 +9,7 @@ Maintainer documentation for the open-source `morya-ui` project. Public overview
 | [DEVELOPMENT.md](./DEVELOPMENT.md) | Layout and commands |
 | [ui-development.md](./ui-development.md) | Build & release ([sync checklist](./ui-development.md#component-change-sync-checklist)) |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits |
+| [ai-composition-roadmap.md](./ai-composition-roadmap.md) | Future plan: MCP / skill composition-first (zh) |
 | [CONTRIBUTING.md](../CONTRIBUTING.md) | Contributing guide |
 
 External:
