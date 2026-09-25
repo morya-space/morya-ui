@@ -18,25 +18,28 @@ npx @morya-ui/setup
 
 默认会：
 
-1. 安装 `morya-ui`（按锁文件选用 pnpm / yarn / npm）
+1. 将 `morya-ui`（以及项目中已有的 `@morya-ui/*`，如 `@morya-ui/nuxt`）升级到 npm `latest`（按锁文件选用 pnpm / yarn / npm）
 2. 复制 `DESIGN.md`、Agent Skill、Cursor rules 与检查脚本
-3. 合并 `.cursor/mcp.json`，接入 [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp)
+3. 合并 `.cursor/mcp.json`，接入 [`@morya-ui/mcp@latest`](https://www.npmjs.com/package/@morya-ui/mcp)
 4. 尝试在入口注入 `import 'morya-ui/styles.css'`
 5. 若缺失则追加 `check:colors` 脚本
 
 也可以按场景选用：
 
 ```bash
-# 只安装组件库并注入样式
+# 只升级依赖并注入样式
 npx @morya-ui/setup app
 
-# 已装库时，只写入 AI 配置与 MCP
+# 升级依赖 + 写入 AI 配置与 MCP（不注入样式）
 npx @morya-ui/setup ai
 
 # 非交互：默认 skill / 指定 / 全部
 npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
+
+# 只刷新 AI 模板 / MCP，不改动依赖
+npx @morya-ui/setup ai --skip-install
 ```
 
 在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**。完成后若写入了 MCP，请 **重启 Cursor**（或重载 MCP）。生成页面前让 Agent 先读 `DESIGN.md`。
@@ -51,13 +54,13 @@ npx @morya-ui/setup ai --skills=all
 | `--yes` / `-y` | 使用默认 skill，不提示 |
 | `--force` | 覆盖已有模板文件与 `morya-ui` MCP 条目 |
 | `--dry-run` | 只打印将要执行的操作 |
-| `--skip-install` | 不安装依赖 |
+| `--skip-install` | 不安装 / 升级 `morya-ui` 与 `@morya-ui/*` |
 | `--skip-template` | 不复制 skill / rules / docs（也不装 companion） |
 | `--skip-mcp` | 不写 MCP 配置 |
 | `--skip-styles` | 不注入样式 import |
 | `--skip-scripts` | 不改 `package.json` scripts |
 
-模板文件默认 **不覆盖**；只有 `--force` 才会覆盖模板与 MCP 条目。勾选的 companion skill 会始终拉取最新版。
+模板文件默认 **不覆盖**；只有 `--force` 才会覆盖模板与 MCP 条目。勾选的 companion skill 会始终拉取最新版。执行时默认会把相关依赖升到最新；需要跳过时加 `--skip-install`。
 
 ### Skills
 
@@ -85,15 +88,16 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | `.agents/skills/<optional>/` | 勾选时由 skills CLI 写入的最新 companion |
 | `.cursor/rules/` | Cursor 常驻规则 |
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
-| `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp`） |
+| `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp@latest`） |
 
 模板源在仓库 [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit)。CLI 不调用 `app.use(MoryaUI)`，也不改 `App.vue`。
 
 ## 冲突策略
 
+- 依赖：默认将 `morya-ui@latest` 以及项目中已有的 `@morya-ui/*` 升到最新（可用 `--skip-install` 跳过）
 - 模板文件与 `.cursor/rules/*`：目标已存在则跳过（除非 `--force`）
 - Companion skills（skills CLI）：勾选时始终安装/更新为最新版
-- `.cursor/mcp.json`：合并其它 server；已有 `morya-ui` 条目则跳过（除非 `--force`）
+- `.cursor/mcp.json`：合并其它 server；已有 `morya-ui` 条目则跳过（除非 `--force`）；新建或强制覆盖时使用 `@morya-ui/mcp@latest`
 - `check:colors`：仅在缺失时追加（除非 `--force`）
 - 样式：找到入口且尚未引入时才注入
 

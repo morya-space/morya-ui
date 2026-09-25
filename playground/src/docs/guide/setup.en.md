@@ -18,25 +18,28 @@ npx @morya-ui/setup
 
 By default this will:
 
-1. Install `morya-ui` (pnpm / yarn / npm from the lockfile)
+1. Install / upgrade `morya-ui` and any existing `@morya-ui/*` (e.g. `@morya-ui/nuxt`) to npm `latest` (pnpm / yarn / npm from the lockfile)
 2. Copy `DESIGN.md`, Agent skill, Cursor rules, and check scripts
-3. Merge `.cursor/mcp.json` for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp)
+3. Merge `.cursor/mcp.json` for [`@morya-ui/mcp@latest`](https://www.npmjs.com/package/@morya-ui/mcp)
 4. Try to inject `import 'morya-ui/styles.css'`
 5. Add a `check:colors` script when missing
 
 Other common commands:
 
 ```bash
-# Library + styles only
+# Upgrade deps + styles only
 npx @morya-ui/setup app
 
-# AI config + MCP only (library already installed)
+# Upgrade deps + AI config + MCP (skips styles injection)
 npx @morya-ui/setup ai
 
 # Non-interactive skill selection
 npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
+
+# Refresh AI template / MCP without touching dependencies
+npx @morya-ui/setup ai --skip-install
 ```
 
 On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/). If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DESIGN.md` before generating pages.
@@ -51,13 +54,13 @@ On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pa
 | `--yes` / `-y` | Use default skills without prompting |
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions only |
-| `--skip-install` | Skip dependency install |
+| `--skip-install` | Skip install / upgrade of `morya-ui` and `@morya-ui/*` |
 | `--skip-template` | Skip copying skill / rules / docs (also skips companion install) |
 | `--skip-mcp` | Skip writing MCP config |
 | `--skip-styles` | Skip styles import injection |
 | `--skip-scripts` | Skip `package.json` scripts |
 
-Template files are **not** overwritten by default; use `--force` for templates and the MCP entry. Selected companion skills always refresh to latest.
+Template files are **not** overwritten by default; use `--force` for templates and the MCP entry. Selected companion skills always refresh to latest. Dependencies are bumped to latest by default; pass `--skip-install` to leave them alone.
 
 ### Skills
 
@@ -85,15 +88,16 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | `.agents/skills/<optional>/` | Latest companion skills via skills CLI when selected |
 | `.cursor/rules/` | Cursor always-on rules |
 | `scripts/check-raw-colors.mjs` | Raw color scan |
-| `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp`) |
+| `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp@latest`) |
 
 Template source: [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit). The CLI does not call `app.use(MoryaUI)` or edit `App.vue`.
 
 ## Conflict policy
 
+- Dependencies: always install / upgrade `morya-ui@latest` and any existing `@morya-ui/*` to `@latest` unless `--skip-install`
 - Template files and `.cursor/rules/*`: skip if the destination exists (unless `--force`)
 - Companion skills (skills CLI): always install/update to latest when selected
-- `.cursor/mcp.json`: merge other servers; skip an existing `morya-ui` entry unless `--force`
+- `.cursor/mcp.json`: merge other servers; skip an existing `morya-ui` entry unless `--force`; new or forced entries use `@morya-ui/mcp@latest`
 - `check:colors`: add only if missing (unless `--force`)
 - Styles: inject only when an entry is found and the import is not already present
 

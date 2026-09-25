@@ -9,7 +9,7 @@ Docs (zh/en):
 - [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
 - [Quick start](https://morya-space.github.io/morya-ui/docs/quick-start) — install and first component
 
-Installs the UI library, copies first-party Agent skills / Cursor rules / design docs from `design-kit`, installs optional companion skills at **latest** via the [skills CLI](https://skills.sh/), merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and injects `import 'morya-ui/styles.css'`.
+Installs / upgrades the UI library and any existing `@morya-ui/*` packages to **latest**, copies first-party Agent skills / Cursor rules / design docs from `design-kit`, installs optional companion skills at **latest** via the [skills CLI](https://skills.sh/), merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and injects `import 'morya-ui/styles.css'`.
 
 ## Usage
 
@@ -24,16 +24,19 @@ On a TTY, `full` / `ai` will prompt for optional Agent skills (required `morya-u
 Other common commands:
 
 ```bash
-# AI config + MCP only (library already installed)
+# Upgrade deps + AI config + MCP (skips styles injection)
 npx @morya-ui/setup ai
 
-# Library + styles only
+# Upgrade deps + styles only
 npx @morya-ui/setup app
 
 # Non-interactive skill selection
 npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
+
+# Refresh AI template / MCP without touching dependencies
+npx @morya-ui/setup ai --skip-install
 ```
 
 ### Options
@@ -46,7 +49,7 @@ npx @morya-ui/setup ai --skills=all
 | `--yes` / `-y` | Use default skills without prompting |
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions without writing or installing |
-| `--skip-install` | Do not install `morya-ui` |
+| `--skip-install` | Do not install / upgrade `morya-ui` or `@morya-ui/*` |
 | `--skip-template` | Do not copy AI skill / rules / docs (also skips companion skill install) |
 | `--skip-mcp` | Do not write `.cursor/mcp.json` |
 | `--skip-styles` | Do not inject `styles.css` |
@@ -66,9 +69,10 @@ Catalog: [`catalog/skills.json`](./catalog/skills.json).
 
 ### Conflict policy
 
+- Dependencies: always install / upgrade `morya-ui@latest` and any existing `@morya-ui/*` (e.g. `@morya-ui/nuxt`) to `@latest` unless `--skip-install`.
 - Template files and `.cursor/rules/*`: **skip** if the destination exists (unless `--force`).
 - Companion skills (`skills-cli`): always reinstall/update to **latest** when selected.
-- `.cursor/mcp.json`: merge other servers; skip existing `morya-ui` entry unless `--force`.
+- `.cursor/mcp.json`: merge other servers; skip existing `morya-ui` entry unless `--force`. New or forced entries use `npx -y @morya-ui/mcp@latest`.
 - `package.json` `check:colors`: add only if missing (unless `--force`).
 - Styles: inject only when an entry file is found and the import is not already present.
 
@@ -94,7 +98,7 @@ Writes / merges:
   "mcpServers": {
     "morya-ui": {
       "command": "npx",
-      "args": ["-y", "@morya-ui/mcp"]
+      "args": ["-y", "@morya-ui/mcp@latest"]
     }
   }
 }

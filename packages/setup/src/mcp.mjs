@@ -5,7 +5,7 @@ import { readJson, writeJson } from './fs-utils.mjs'
 const SERVER_NAME = 'morya-ui'
 const SERVER_CONFIG = {
   command: 'npx',
-  args: ['-y', '@morya-ui/mcp'],
+  args: ['-y', '@morya-ui/mcp@latest'],
 }
 
 /**

@@ -12,7 +12,7 @@ description: 用 AI 生成业务页面时，如何配合 @morya-ui/setup、Agent
 
 ## 推荐流程
 
-1. 在业务项目根目录执行 `npx @morya-ui/setup`（或已装库时用 `npx @morya-ui/setup ai`）
+1. 在业务项目根目录执行 `npx @morya-ui/setup`（会把 `morya-ui` / 已有 `@morya-ui/*` 升到最新；只要写 AI 配置可用 `npx @morya-ui/setup ai`）
 2. **重启 Cursor**（或重载 MCP）
 3. 生成页面前让 Agent 先读 `DESIGN.md`，需要时再读黄金样例与 [Agent Skill](/docs/agent-skill)
 4. 不确定组件 API 时走 [Agent MCP](/docs/mcp)，不要臆造 props

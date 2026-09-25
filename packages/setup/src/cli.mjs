@@ -1,8 +1,6 @@
-import { existsSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { copyTemplate } from './copy-template.mjs'
-import { readJson } from './fs-utils.mjs'
 import { installMoryaUi } from './install.mjs'
 import { mergeMcpConfig } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
@@ -25,7 +23,8 @@ const MODES = new Set(['app', 'ai', 'full'])
 const MODE_DEFAULTS = {
   full: {},
   app: { skipTemplate: true, skipMcp: true, skipScripts: true },
-  ai: { skipInstall: true, skipStyles: true },
+  // ai still upgrades morya-ui / @morya-ui/* to latest unless --skip-install
+  ai: { skipStyles: true },
 }
 
 const SKIP_FLAGS = {
@@ -47,15 +46,15 @@ export function printHelp() {
   console.log(`Usage: morya-ui-setup [command] [options]
 
 Commands:
-  (default) / full  Install morya-ui, AI template, MCP, styles, check:colors
-  app               Install morya-ui and inject styles.css
-  ai                Copy Agent skills / rules / DESIGN,
+  (default) / full  Upgrade morya packages to latest, AI template, MCP, styles, check:colors
+  app               Upgrade morya packages to latest and inject styles.css
+  ai                Upgrade morya packages to latest, copy Agent skills / rules / DESIGN,
                     merge Cursor MCP, add check:colors
 
 Default command:
-  - install morya-ui
+  - install / upgrade morya-ui@latest and any existing @morya-ui/* to @latest
   - copy DESIGN.md, selected Agent skills, Cursor rules
-  - merge .cursor/mcp.json for @morya-ui/mcp
+  - merge .cursor/mcp.json for @morya-ui/mcp@latest
   - inject import 'morya-ui/styles.css' into the app entry when found
   - add check:colors script when missing
 
@@ -66,7 +65,7 @@ Options:
   --yes             Use default skills without prompting (CI / non-interactive)
   --force           Overwrite existing template files and MCP server entry
   --dry-run         Print actions without writing or installing
-  --skip-install    Skip dependency install
+  --skip-install    Skip dependency install / upgrade
   --skip-template   Skip copying AI template files
   --skip-mcp        Skip writing .cursor/mcp.json
   --skip-styles     Skip injecting styles.css
@@ -171,24 +170,6 @@ function rel(cwd, path) {
 }
 
 /**
- * @param {string} cwd
- */
-function hasMoryaUiDependency(cwd) {
-  const path = join(cwd, 'package.json')
-  if (!existsSync(path)) return false
-  try {
-    const pkg = readJson(path)
-    return Boolean(
-      pkg.dependencies?.['morya-ui']
-      || pkg.devDependencies?.['morya-ui']
-      || pkg.peerDependencies?.['morya-ui'],
-    )
-  } catch {
-    return false
-  }
-}
-
-/**
  * @param {ReturnType<typeof parseArgs>} options
  */
 export async function runSetup(options) {
@@ -210,13 +191,6 @@ export async function runSetup(options) {
   console.log(`@morya-ui/setup [${mode}] → ${cwd}${dryRun ? ' (dry-run)' : ''}`)
   console.log('')
 
-  if (mode === 'ai' && !hasMoryaUiDependency(cwd)) {
-    console.log(
-      'Warning: morya-ui is not listed in package.json. Run `npx @morya-ui/setup app` first (or pnpm add morya-ui).',
-    )
-    console.log('')
-  }
-
   const catalog = loadSkillsCatalog()
   let selectedSkills = []
   let aiInclude
@@ -235,7 +209,8 @@ export async function runSetup(options) {
     console.log('')
   }
 
-  const install = installMoryaUi(cwd, { pm, dryRun, skipInstall })
+  // Always ensure morya-ui@latest; also bump any existing @morya-ui/* (nuxt, mcp, …).
+  const install = installMoryaUi(cwd, { pm, dryRun, skipInstall, ensureCore: true })
 
   const template = skipTemplate
     ? { copied: [], skipped: [], forced: [], skippedStep: true }
@@ -262,10 +237,12 @@ export async function runSetup(options) {
     : ensureCheckColorsScript(cwd, { force, dryRun })
 
   console.log('--- Summary ---')
+  const pkgList = (install.packages || []).join(', ') || 'morya-ui'
   if (install.skipped) {
     console.log(`Install: skipped (${install.reason}) — would run: ${install.command}`)
   } else {
-    console.log(`Install: ok (${install.pm}) — ${install.command}`)
+    console.log(`Install: upgraded to latest (${install.pm}) — ${pkgList}`)
+    console.log(`  $ ${install.command}`)
   }
 
   if (template.skippedStep) {
