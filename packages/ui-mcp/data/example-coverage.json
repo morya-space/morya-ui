@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-24T08:45:50.660Z",
-  "catalogGeneratedAt": "2026-09-24T08:45:45.036Z",
+  "generatedAt": "2026-09-25T03:12:09.409Z",
+  "catalogGeneratedAt": "2026-09-25T03:12:04.732Z",
   "components": [
     {
       "id": "Accordion",
@@ -1924,10 +1924,11 @@
       "exportName": "MPageContent",
       "examples": 10,
       "props": {
-        "total": 24,
+        "total": 25,
         "covered": 19,
         "missing": [
           "bands",
+          "fill",
           "expandLabel",
           "collapseLabel",
           "headingLevel",
@@ -2764,11 +2765,12 @@
       "exportName": "MTable",
       "examples": 26,
       "props": {
-        "total": 65,
+        "total": 66,
         "covered": 16,
         "missing": [
           "fit",
           "selectedItem",
+          "fill",
           "rowHover",
           "sortField",
           "sortOrder",

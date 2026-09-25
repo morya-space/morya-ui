@@ -1,5 +1,12 @@
 # morya-ui
 
+## 0.3.4
+
+### 新功能
+
+- add conditional fill height for admin list pages
+- enhance size prop to accept CSS length strings and update documentation
+
 ## 0.3.3
 
 ### 新功能
