@@ -15,17 +15,18 @@
 
 ## Craft (all lanes — default pass)
 
-- [ ] Style direction resolved (reference / named preset / inferred / offered) — not silent `quiet` every time
-- [ ] Lane craft from [visual-craft.md](visual-craft.md) + [style-presets.md](style-presets.md) applied
+- [ ] Style direction resolved: followed user reference/description, or inferred from clear cues, or **asked** when uncertain — never silent invent; **no preset catalog**
+- [ ] Lane craft from [visual-craft.md](visual-craft.md) applied
 - [ ] If companions ran: still only `M*` + `--m-*`; no second kit ([optional-companions.md](optional-companions.md))
 - [ ] At most one primary filled button in the main viewport
 - [ ] Copy is domain-real; empty / error states say what to do next
-- [ ] No AI-default look clusters unless the brief asked for them
-- [ ] Motion (if any) is 1–3 intentional moments and follows `useMotion` / `data-m-motion` (not OS `prefers-reduced-motion`)
+- [ ] No AI-default look clusters unless the user/reference asked for them
+- [ ] No unearned atmosphere: stacked radial+linear washes, purple mesh, frosted glass, neon glow stacks
+- [ ] Motion (if any) is 1–3 intentional moments and follows `useMotion` / `data-m-motion`
 
 ## Ops
 
-- [ ] Matches golden / [page-layouts.md](page-layouts.md) block order
+- [ ] Matches [page-layouts.md](page-layouts.md) block order (snippets composed; golden page optional check only)
 - [ ] `MPage*` used instead of ad-hoc page chrome where applicable
 - [ ] List height: if this is a full-viewport main data list, consider `MPageContent fill` + `MTable fill`; if embedded/short/document-scroll, skip `fill`
 - [ ] Tables not wrapped in decorative `MCard` solely for borders
@@ -37,20 +38,18 @@
 ## Account / Flow / System
 
 - [ ] Primary CTA obvious; escape paths present (back / home / support)
-- [ ] Auth errors stay on the form via field `errorMessage` or a token `role="alert"` (`<MMessage>` is the message host, not an inline alert)
-- [ ] Empty uses `MEmpty` (or table `#empty` with `MEmpty`); success / HTTP errors use `MResult`
-- [ ] Empty / success states tell the user the next action
-- [ ] Inline status prefers `MStatus`; chip-like labels use `MTag`
+- [ ] Auth errors stay on the form via field `errorMessage` or a token `role="alert"`
+- [ ] Empty uses `MEmpty`; success / HTTP errors use `MResult`
+- [ ] Brand / empty atmosphere follows the **resolved direction** (defaults are flat token shells)
 - [ ] Wizard steps: one job each; actions labeled clearly
-- [ ] Brand / empty atmosphere uses token-only CSS (see visual-craft recipes)
 
 ## Express
 
 - [ ] Short design plan existed (subject, palette roles, signature)
-- [ ] First viewport has one job (not a dashboard of promos)
-- [ ] Controls still `M*`; colors/spacing map to `--m-*` / theme
-- [ ] Avoided AI-default looks unless brief requested them ([visual-craft.md](visual-craft.md))
-- [ ] Motion limited and respectful of reduced-motion
+- [ ] First viewport has one job
+- [ ] Controls still `M*`; colors/spacing map to `--m-*`
+- [ ] Avoided AI-default looks unless user/reference requested them
+- [ ] Motion limited and gated by `useMotion` / `data-m-motion`
 
 ## Tokens, a11y, responsive
 
@@ -59,6 +58,6 @@
 - [ ] Usable on a narrow viewport
 - [ ] Focus visible on interactive elements
 
-When MCP is available, contract checks above (**`validate_usage`** / **`validate_page`**) are required — not optional.
+When MCP is available, contract checks (**`validate_usage`** / **`validate_page`**) are required.
 
 If the project has `pnpm check:colors`, suggest running it after edits.

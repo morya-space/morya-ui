@@ -57,7 +57,7 @@ npx @morya-ui/setup ai --skills=all
 
 | Id | Default | Install | Role |
 | --- | --- | --- | --- |
-| `morya-ui-pages` | required | template (from this package) | Page generation with `M*` + golden layouts |
+| `morya-ui-pages` | required | template (from this package) | Page generation with `M*` + snippets / decisions (composition-first) |
 | `frontend-design` | optional | skills CLI → `anthropics/skills` (latest) | Express / brand visual taste |
 | `fixing-accessibility` | optional | skills CLI → `ibelick/ui-skills` (latest) | A11y audit and targeted fixes |
 | `impeccable` | optional | skills CLI → `pbakaus/impeccable` (latest) | Named polish / audit / redesign passes |

@@ -1,73 +1,45 @@
-# Style direction & presets
+# Style direction (no preset catalog)
 
-Golden pages lock **block order and APIs**. They are **not** the only allowed look. Pick a visual direction **before** coding so generated pages stop looking identical and stiff.
+Golden pages lock **block order and APIs**. They are **not** the only allowed look. There is **no** named style-preset table (`simple` / `glass` / …). Resolve the look from the **user**, then map onto `M*` + `--m-*`.
 
 ## Resolution order (required)
 
-1. **Reference first** — user supplied a screenshot, mock, existing page, URL, or “像 XX / like X”.
-   - Extract: density, hierarchy, surfaces (flat vs filled), accent placement, copy tone.
-   - Remap onto `--m-*` + `M*` only. Do **not** switch UI kits or copy hex themes.
-2. **Named preset** — user asked for `soft` / 柔和留白 / `dense` / …
-3. **Prompt cues** — industry or mood words in the brief → infer the closest preset and **name it** in the reply.
-4. **Offer a choice** — still unclear → ask **one** short question with 3–4 options (ids below). If the user says “直接写 / just ship”, pick by domain heuristic — **do not always use `quiet`**.
+1. **User reference or explicit description (highest)**  
+   Screenshot / mock / existing page / URL / “像 XX”, or clear words (“毛玻璃一点”、“深蓝科技风”).  
+   **Must follow.** Remap to `--m-*` + `M*`. Do not switch kits, do not “improve” into another face.
 
-MCP: `list_style_presets` / `get_style_preset` / `recommend_page({ style })` → `styleDirection`.
+2. **Clear prompt cues (when not explicit)**  
+   Industry / mood words in the brief → infer and **state your reading in one sentence**.  
+   Decorative glass / neon / full-page gradients only when the prompt clearly asks.
 
-## Presets (user-selectable)
+3. **Uncertain → ask (required)**  
+   No reference, vague cues → **ask once** for a short description or a reference.  
+   Do not invent the full look in silence.
 
-| Id | 中文 | Best for | Distinct craft | List golden |
-| --- | --- | --- | --- | --- |
-| `quiet` | 克制经典 | Serious enterprise admin | Flat chrome, golden-like Ops polish | `list-page` |
-| `soft` | 柔和留白 | Ops / content admin | `density="spacious"`, filled filters, short descriptions | `list-page` |
-| `dense` | 高密度工具台 | Monitoring / power users | `density="compact"`, `size="small"` table, tight filters | `list-page-dense` |
-| `rail` | 侧栏强调 | Branded B2B shells | Token `color-mix` wash on sider/header only | `list-page-rail` |
-| `studio` | 工作室呼吸感 | Design / collab / knowledge | Stronger header hierarchy; optional one radial wash | `list-page` |
-| `ink` | 线框极简 | Tool / docs feel | Plain filters, bordered table, little fill | `list-page` |
+4. **Only if user declines**  
+   “你看着办 / 直接写” with still no cues → quiet flat on-token admin face, **say so**, continue.  
+   Never default to aurora / neon / unsolicited glass / cream-serif-terracotta.
 
-Full apply/avoid lists: MCP `get_style_preset` or `@morya-ui/mcp` `style-presets`. `recommend_page({ style })` routes list scaffolds to the matching golden when a craft variant exists.
+MCP: `get_style_direction` / `recommend_page({ style? })` → `styleDirection`.  
+`resolution: "ask"` means **ask the user**, not free-style.
 
-### Domain heuristics (when user says “直接写”)
+## What `style` means
 
-| Cue in brief | Prefer |
-| --- | --- |
-| 金融 / 合规 / 政务 | `quiet` or `ink` |
-| 运营 / 内容 / 教育 | `soft` |
-| 监控 / 运维 / 交易 | `dense` |
-| 强调品牌色 / LOGO | `rail` |
-| 设计 / 协作 / 知识库 | `studio` |
-| 登录 / 落地 / 品牌营销 | Account/Express atmosphere — not an Ops preset |
+- Free-text from the user (or a short paraphrase of their reference).  
+- **Not** a preset id.  
+- Optional craft cues for list goldens only: words like `dense` / `compact` / `高密` → `list-page-dense`; `rail` / `品牌侧栏` → `list-page-rail`.
 
-## How to apply on Ops pages
+## Anti-defaults (unless user/reference asks)
 
-1. Mirror golden **structure** via `recommend_page` / `get_golden_page` (list: `list-page` / `list-page-dense` / `list-page-rail` by style).
-2. Apply the chosen preset’s density / filter surface / header copy / chrome wash (or follow the craft golden when one exists).
-3. Still run [visual-craft.md](visual-craft.md) § Ops polish (one primary, menu icons, `MStatus`, designed empty).
-4. Fill height remains **conditional** — see [page-layouts.md](page-layouts.md) § List height.
+- Purple→indigo / aurora / mesh washes  
+- Warm cream + serif + terracotta kit  
+- Broadsheet newspaper columns  
+- Unsolicited glassmorphism, neon glow stacks, neumorph on dense tables  
+- Companion “atmosphere” that overrides the user’s words  
 
-## Reference style checklist
+## How to apply
 
-When following a reference:
-
-- [ ] Hierarchy (what is loud vs quiet) matched with type/space, not random cards
-- [ ] Density matched (`compact` / default / `spacious`)
-- [ ] Surfaces matched (plain vs filled filters; bordered table or not)
-- [ ] Accent placement matched (chrome only vs content) using `--m-*` / `color-mix`
-- [ ] Interaction patterns stay morya-ui (`MTable` `rows`, `message`, etc.)
-
-## Anti-patterns
-
-- Treating the golden page as the only allowed aesthetic
-- Asking nothing and always emitting `quiet`
-- Inventing a second component library to “match the reference”
-- Turning Ops into a marketing landing to “look less stiff”
-- Letting Frontend Design / Impeccable / UI-UX-Pro-Max swap stacks or ignore `M*` / `--m-*` (see [optional-companions.md](optional-companions.md))
-
-## Companion pairing
-
-| Preset | Pairs well with |
-| --- | --- |
-| `quiet` / `ink` | Impeccable Operate + `quieter` / `polish` |
-| `soft` / `studio` | Frontend Design hierarchy cues; Impeccable `bolder` (one signature only) |
-| `dense` | Impeccable Operate — scanability over decoration |
-| `rail` | Frontend Design brand panel taste on **chrome only** |
-| Express (no Ops preset) | Frontend Design design plan → Impeccable `polish` |
+1. Mirror golden **structure** via `recommend_page` / `get_golden_page`.  
+2. Apply the resolved direction with tokens + layout/type — see [visual-craft.md](visual-craft.md).  
+3. Run Ops polish when on Operate surfaces.  
+4. Companions deepen **inside** the resolved direction only ([optional-companions.md](optional-companions.md)).

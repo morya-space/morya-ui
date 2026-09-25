@@ -1,46 +1,46 @@
 # Page layouts
 
-When generating a full page, pick a type and **mirror the golden-page block order**. Source: MCP `get_golden_page`.
+When generating a full page, pick a type and follow the **block-order checklist** below. Fill each block with MCP **`get_page_snippet`** / `recommend_page.suggestedSnippets` (composition-first). Optional: `get_golden_page` only to cross-check whole-page order or when the user asks to mirror a golden sample.
 
-| Type | `get_golden_page` id |
-| --- | --- |
-| List (structure · soft) | `list-page` |
-| List · dense craft | `list-page-dense` |
-| List · rail craft | `list-page-rail` |
-| Form (long / dedicated) | `form-page` |
-| List create/edit dialog | `form-in-dialog` |
-| Detail | `detail-page` |
-| Dashboard | `dashboard-page` |
-| Login | `login-page` |
-| Landing | `landing-page` |
-| Empty | `empty-state` |
-| Result / 403 / terminal | `result-page` |
-| Settings | `settings-page` |
-| Wizard | `wizard-form` |
+Golden pages are **assembly demos / structure baselines**, not the default clone source. Do not add new craft variants (`list-page-*`); density / sider cues inform polish via style direction.
 
-Via MCP: `recommend_page({ style? })` → resolves list craft (`dense`→`list-page-dense`, `rail`→`list-page-rail`, else `list-page`) → `get_golden_page`; then apply `styleDirection` (or a user reference). Local edits: `get_page_snippet` (`filters`, `toolbar`, `form-actions`, `scrollable-panel`, …). Styles: `list_style_presets` / `get_style_preset`.
+| Type | Checklist below | Optional `get_golden_page` | Typical snippets |
+| --- | --- | --- | --- |
+| List | List page | `list-page` (`list-page-dense` / `list-page-rail` craft only) | `layout-app-shell`, `page-header-actions`, **`list-filters-stack`** (dense → `list-filters-dense`), `list-table`, `form-in-dialog`, `confirm-delete` |
+| Form (long / dedicated) | Form page | `form-page` | `page-content-form`, `form-header`, `form-body`, `form-actions` |
+| List create/edit dialog | List create/edit dialog | `form-in-dialog` | **`form-in-dialog`** (preferred) |
+| Detail | Detail page | `detail-page` | `detail-toolbar`, `form-in-dialog` |
+| Dashboard | Dashboard | `dashboard-page` | `dashboard-kpi-grid`, `dashboard-chart-card`, `dashboard-recent-table` |
+| Login | — (see [surfaces.md](surfaces.md)) | `login-page` | **`auth-split-shell`** |
+| Landing | — (see [surfaces.md](surfaces.md)) | `landing-page` | — |
+| Empty | — | `empty-state` | **`empty-block`** |
+| Result / 403 / terminal | — | `result-page` | **`result-block`** |
+| Settings | Settings page | `settings-page` | `form-header`, `form-body`, `form-actions` |
+| Wizard | Wizard | `wizard-form` | **`wizard-steps`** |
 
-**List craft variants** share the same block order; only density / chrome / copy change. Prefer `recommend_page` style routing over hand-picking unless the user named a variant id.
+Via MCP: `recommend_page({ style? })` → use **`suggestedSnippets`** + `recommend_component` / `get_page_snippet`; apply `styleDirection` (user reference/description — no preset catalog). Call `get_golden_page` only when needed for block-order check. Style: `get_style_direction`.
+
+**List craft variants** share the same block order; only density / chrome / copy change. Prefer style-direction cues over inventing new golden ids.
 
 ## Product defaults
 
-- **Short create/edit** (about ≤8 fields, single section): same-page `MDialog` + `MForm` — do not invent a new route form for every entity.
-- **Long / multi-section / wizard**: dedicated form page (`form-page`) or `MDrawer`.
+- **Short create/edit** (about ≤8 fields, single section): same-page `MDialog` + `MForm` — snippet `form-in-dialog`; do not invent a new route form for every entity.
+- **Long / multi-section / wizard**: dedicated form page (`form-page`) or `MDrawer` (`form-in-drawer`).
 - **One-line success/error**: `message` API; title + detail or async notify → `toast` (see [feedback.md](feedback.md)).
 
 ## List page — block order
 
-1. `MLayout fillViewport` + optional `MLayoutSider bordered`
+1. `MLayout fillViewport` + optional `MLayoutSider bordered` → snippet `layout-app-shell`
 2. Sider `MMenu` (**every item has `icon`**)
 3. `MLayoutHeader` → `MBreadcrumb`
-4. `MLayoutContent` → `MPageContent` (**add `fill` only when the height rule below applies**)
-5. `MPageHeader` — page title + `#actions` primary (**one** filled primary in viewport)
-6. `MPageFilters` — `variant="filled"` optional; inner `MSpace wrap` + Input/Select + query/reset (query/reset → secondary); optional `collapsible` + `#advanced` for secondary fields
-7. Optional `MPageFilterChips` + closable `MTag` when filters are applied (after filters, before table)
-8. Optional `MPageToolbar` — batch actions only (no page title)
-9. `MTable` directly in content (usually **no** wrapping `MCard`); status → `MStatus`; `#empty` → `MEmpty`
+4. `MLayoutContent` → `MPageContent` (**add `fill` only when the height rule below applies**) → `page-content-list`
+5. `MPageHeader` — page title + `#actions` primary (**one** filled primary in viewport) → `page-header-actions`
+6. `MPageFilters` — 默认 **`list-filters-stack`**（`#actions` 查询/重置 + collapsible「高级筛选/收起」chevron + `#advanced` + FilterChips）；条件少无高级区用 `list-filters`；dense craft 用 `list-filters-dense`
+7. Optional `MPageFilterChips` — 已含在 `list-filters-stack`；单独增量用 `list-filter-chips`
+8. Optional `MPageToolbar` — batch actions only → `list-toolbar` / `list-batch-toolbar`
+9. `MTable` directly in content; status → `MStatus`; `#empty` → `MEmpty` → `list-table` + `list-status-dot` + `empty-block`
 10. Pagination via `MTable paginator` or sibling `MPagination`
-11. Short create/edit → `MDialog` + `MForm` on the same page (default)
+11. Short create/edit → same-page `MDialog` + `MForm` → **`form-in-dialog`**; delete → **`confirm-delete`**
 
 ### List height — decide, don’t always fill
 
@@ -65,17 +65,17 @@ Craft: [visual-craft.md](visual-craft.md) § Ops polish.
 ## Form page — block order
 
 1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
-2. `MPageContent width="narrow"`
-3. `MPageHeader` (title + description)
-4. `MPageSection variant="form"` → `MForm`
-5. `MPageSection variant="actions"` — save (`primary`) + cancel (`secondary`)
+2. `MPageContent width="narrow"` → `page-content-form`
+3. `MPageHeader` (title + description) → `form-header`
+4. `MPageSection variant="form"` → `MForm` → `form-body`
+5. `MPageSection variant="actions"` — save (`primary`) + cancel (`secondary`) → `form-actions`
 
 ## Dashboard — block order
 
 1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
 2. `MPageContent density="spacious"` → `MPageHeader` (title + short domain description when useful)
-3. KPI row: `MGrid` + `MPageStat` (4 columns or responsive) — real metric names, not “Metric 1”
-4. Main split: `MCard shadow="always"` + `MEmpty` (chart pending) and/or recent `MTable` (row status → `MStatus`)
+3. KPI row: `MGrid` + `MPageStat` (4 columns or responsive) — `dashboard-kpi-grid`
+4. Main split: `MCard shadow="always"` + `MEmpty` (chart pending) and/or recent `MTable` — `dashboard-chart-card` / `dashboard-recent-table`
 
 Craft: spacious density + Ops polish; do not turn the first viewport into a marketing hero.
 
@@ -97,21 +97,17 @@ Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
 ## Detail page — block order
 
 1. Same admin chrome as list (breadcrumb → `MPageContent`)
-2. `MPageHeader` — title, `MStatus` in `#actions` (or chip `MTag` for categories), primary/secondary/danger actions
+2. `MPageHeader` — title, `MStatus` in `#actions`, primary/secondary/danger → `detail-toolbar`
 3. Summary `MPageSection` + property `MCard` (definition grid with `--m-*` only)
 4. Related data: `MCard` + `MTable` / tabs / timeline
-5. Short edit → same-page `MDialog` (`form-in-dialog`); long edit → `form-page` / `MDrawer`
-
-Mirror MCP `get_golden_page` `detail-page`.
+5. Short edit → `form-in-dialog`; long edit → form page / `form-in-drawer`
 
 ## List create/edit dialog — block order
 
 1. Stay on the list page (`MPageHeader` + filters/table; optional batch `MPageToolbar`)
-2. `MDialog` ~`28–36rem` + `MForm` fields
+2. `MDialog` ~`28–36rem` + `MForm` fields → snippet **`form-in-dialog`**
 3. Actions in Dialog `#footer` (cancel secondary/text + save primary)
 4. Success → `message.success` one-liner, then close
-
-Mirror MCP `get_golden_page` `form-in-dialog`.
 
 ## Settings page — block order
 
@@ -121,21 +117,17 @@ Mirror MCP `get_golden_page` `form-in-dialog`.
 4. Per tab: `MPageSection variant="form"` + `MForm` + save in `variant="actions"`
 5. Dangerous zone last: `severity="danger"` + confirm
 
-Mirror MCP `get_golden_page` `settings-page`.
-
 ## Wizard — block order
 
 1. Narrow `MPageContent` + `MPageHeader`
-2. `MStepper v-model` + **`:steps`** (not `:items`)
+2. `MStepper v-model` + **`:steps`** (not `:items`) → snippet **`wizard-steps`**
 3. One form/job per step; sticky `上一步` / `下一步` / `创建`
-4. Success → `result-page` / `MResult`
-
-Mirror MCP `get_golden_page` `wizard-form`.
+4. Success → `result-block` / `MResult`
 
 ## Hybrids
 
-- List + row edit dialog → `form-in-dialog` golden (or list golden + dialog body).
-- List + side detail → list + `MDrawer`.
-- Resource detail → `detail-page` golden.
+- List + row edit dialog → `form-in-dialog` snippet on the list.
+- List + side detail → list + `form-in-drawer`.
+- Resource detail → detail checklist + `detail-toolbar`.
 - Settings without admin chrome → still use `MPageContent` + `MPageSection`; omit sider only if the host app already provides chrome.
-- Non-Ops surfaces (auth, landing, empty, wizard) → [surfaces.md](surfaces.md), not these golden orders.
+- Non-Ops surfaces (auth, landing, empty, wizard) → [surfaces.md](surfaces.md) + matching snippets, not Ops list chrome.

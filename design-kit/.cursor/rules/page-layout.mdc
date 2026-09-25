@@ -5,25 +5,25 @@ alwaysApply: false
 
 # 页面布局（Agent Requested）
 
-生成完整页面时，先确定类型并 **复制黄金样例结构**：
+生成完整页面时，先确定类型，按 **块顺序 checklist** 用 MCP **`get_page_snippet`** / `recommend_page.suggestedSnippets` 拼装（composition-first）。仅在不确定整页顺序或用户要求对齐样例时再读 `get_golden_page`。
 
-| 类型 | MCP `get_golden_page` |
-| --- | --- |
-| 列表页 | `list-page` |
-| 表单页 | `form-page`（仅长表单 / 独立配置页） |
-| 列表内弹窗表单 | `form-in-dialog` |
-| 详情页 | `detail-page` |
-| 结果 / 阻断页 | `result-page` |
-| 设置页 | `settings-page` |
-| 分步向导 | `wizard-form` |
-| 仪表盘 | `dashboard-page` |
-| 登录页 | `login-page` |
-| 营销落地 | `landing-page` |
-| 空状态 | `empty-state` |
+| 类型 | 主要 snippets | 可选黄金样例 |
+| --- | --- | --- |
+| 列表页 | `layout-app-shell` / `page-header-actions` / **`list-filters-stack`**（dense → `list-filters-dense`）/ `list-table` / `form-in-dialog` / `confirm-delete` | `list-page` |
+| 表单页 | `form-header` / `form-body` / `form-actions` | `form-page`（仅长表单 / 独立配置页） |
+| 列表内弹窗表单 | **`form-in-dialog`** | `form-in-dialog` |
+| 详情页 | `detail-toolbar` / `form-in-dialog` | `detail-page` |
+| 结果 / 阻断页 | **`result-block`** | `result-page` |
+| 设置页 | `form-header` / `form-body` / `form-actions` | `settings-page` |
+| 分步向导 | **`wizard-steps`** | `wizard-form` |
+| 仪表盘 | `dashboard-kpi-grid` / `dashboard-chart-card` / `dashboard-recent-table` | `dashboard-page` |
+| 登录页 | **`auth-split-shell`** | `login-page` |
+| 营销落地 | —（见 surfaces） | `landing-page` |
+| 空状态 | **`empty-block`** | `empty-state` |
 
 ## 列表内新建 / 编辑（默认）
 
-后台 CRUD **优先**：列表页 + `MDialog`（或 `MDrawer`）内 `MForm`，不要把「新建用户 / 编辑角色」做成单独路由，除非字段很多或多步骤。
+后台 CRUD **优先**：列表页 + `MDialog`（或 `MDrawer`）内 `MForm`（snippets `form-in-dialog` / `form-in-drawer`），不要把「新建用户 / 编辑角色」做成单独路由，除非字段很多或多步骤。
 
 ## 列表页区块顺序
 
@@ -31,13 +31,13 @@ alwaysApply: false
 2. 侧栏 `MMenu`
 3. `MLayoutHeader` → `MBreadcrumb`
 4. `MLayoutContent` → `MPageContent`（**仅在下方高度规则适用时**再加 `fill`）
-5. `MPageHeader`（页面标题 + `#actions` 主操作；视口内 **唯一** filled primary）
-6. `MPageFilters`（可选 `variant="filled"`、`collapsible` + `#advanced`；查询/重置用 secondary）
-7. 可选 `MPageFilterChips` + 可关闭 `MTag`（有已选条件时，放在筛选与表格之间）
+5. `MPageHeader`（页面标题 + `#actions` 主操作；视口内 **唯一** filled primary）→ `page-header-actions`
+6. `MPageFilters`（默认 **`list-filters-stack`**：折叠高级 + FilterChips；查询/重置 secondary；dense → `list-filters-dense`）
+7. 可选独立 `MPageFilterChips`（若未用 stack）
 8. 可选 `MPageToolbar`（仅批量操作，**不要**页面标题）
 9. `MTable`（直接放置；`#empty` → `MEmpty`）
 10. 分页由 `MTable paginator` 或同级 `MPagination`
-11. 短新建/编辑：同页 `MDialog` + `MForm`
+11. 短新建/编辑：同页 `MDialog` + `MForm`；删除：`MConfirmDialog`（`confirm-delete`）
 
 ### 列表高度 — 先判断，再决定是否 fill
 
@@ -91,7 +91,7 @@ alwaysApply: false
 
 ## MCP
 
-- 整页：`recommend_page`（可传 `style`）→ `get_golden_page` → `get_design_rules` / `list_style_presets`
-- 风格：有参考则跟参考；否则按 `styleDirection` 或请用户从 quiet/soft/dense/rail/studio/ink 选
-- 局部：`get_page_snippet`（如 `filters` / `toolbar` / `form-actions` / `scrollable-panel`）
+- 整页：`recommend_page`（可传 `style`）→ **`suggestedSnippets` / `get_page_snippet`** + `recommend_component` → `get_design_rules` / `get_style_direction`；可选 `get_golden_page` 核对块顺序
+- 风格：有明确参考或明确描述 → 跟用户；有提示词线索 → 推断并说明；不确定 → 先问（无预设表）
+- 局部：`get_page_snippet`（如 `form-in-dialog` / `confirm-delete` / `list-filters` / `wizard-steps`）
 - 可选：`validate_page`（参考建议，不阻断）

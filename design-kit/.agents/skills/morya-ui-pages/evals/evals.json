@@ -3,68 +3,68 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "我们内部教务系统用 Vue3 + morya-ui。请做一个「课程列表」后台页：按课程名搜索、按开课状态（全部/开课中/已结课）筛选；表格列：名称、状态、学分、更新时间；行内「编辑」进抽屉表单，「删除」要二次确认；右上角「新建课程」。保存/删除成功只要一句话提示。输出单个 Vue SFC，结构对齐列表黄金样例，并做 Ops 精致化（侧栏图标、状态用 MStatus、空态用 MEmpty、行操作不要一排实心按钮）。",
-      "expected_output": "Ops list: MLayout/MPageHeader/MPageFilters/MTable rows, optional batch MPageToolbar, MSelect status, MDrawer edit, MConfirmDialog delete, message not toast, MStatus for status, MEmpty in #empty, menu icons, text/small row actions, craft pass applied, no second UI kit.",
+      "prompt": "我们内部教务系统用 Vue3 + morya-ui。请做一个「课程列表」后台页：按课程名搜索、按开课状态（全部/开课中/已结课）筛选；表格列：名称、状态、学分、更新时间；行内「编辑」进抽屉表单，「删除」要二次确认；右上角「新建课程」。保存/删除成功只要一句话提示。输出单个 Vue SFC，用 list-filters-stack / list-table / form-in-drawer / confirm-delete / page-header-actions 等 snippets 拼装并对齐 page-layouts 块顺序，并做 Ops 精致化（侧栏图标、状态用 MStatus、空态用 MEmpty、行操作不要一排实心按钮）。",
+      "expected_output": "Ops list composition-first: MLayout/MPageHeader/list-filters-stack (collapsible+#advanced+FilterChips)/MTable rows, page-header-actions one primary, form-in-drawer edit, confirm-delete, message not toast, MStatus, MEmpty in #empty, menu icons, text/small row actions, craft pass, no second UI kit; do not require whole golden-page clone.",
       "files": []
     },
     {
       "id": 2,
       "prompt": "同一个 morya-ui 项目里，生成「新建员工」独立表单页：姓名、工作邮箱、部门（下拉）、入职日期；窄栏；页头有标题和一句说明；底栏保存（primary）/取消（secondary）。不要做成营销落地页，不要用 Toast 提示「已保存」。输出单个 Vue SFC。",
-      "expected_output": "Ops form golden: narrow MPageContent, MPageHeader, MPageSection form/actions, MForm + MSelect/MDatePicker, message for success if shown, one primary, no landing hero.",
+      "expected_output": "Ops form snippets: page-content-form + form-header/body/actions, narrow MPageContent, MForm + MSelect/MDatePicker, message for success if shown, one primary, no landing hero.",
       "files": []
     },
     {
       "id": 3,
       "prompt": "运营后台首页仪表盘：四个 KPI（今日订单、待处理、转化率、退款率）、中间一块图表占位、右侧或下方「最近告警」表格（级别、内容、时间）。Vue3 + morya-ui，可先用静态假数据；告警级别可用 Tag，状态用 MStatus。",
-      "expected_output": "Dashboard: MPageStat grid with domain labels, MCard shadow=always + MEmpty chart pending, recent MTable with MStatus, MLayout shell, --m-* only, spacious density.",
+      "expected_output": "Dashboard snippets: dashboard-kpi-grid, dashboard-chart-card, dashboard-recent-table, MLayout shell, --m-* only, spacious density.",
       "files": []
     },
     {
       "id": 4,
       "prompt": "给「青禾书房」这个独立书店品牌做登录页：左品牌、右表单（邮箱+密码+登录）。要有一点品牌感（token 氛围即可），但控件必须用 morya-ui；登录失败用表单区常驻错误（字段 errorMessage 或 token role=alert），不要一闪而过的 Toast，也不要把 MMessage 当成内嵌 Alert。输出单个 Vue SFC。",
-      "expected_output": "Account+craft: split shell, MForm/MInputPassword/MButton, token role=alert or field error for failure, brand panel with --m-* color-mix, no MMessage severity alert, no second UI kit.",
+      "expected_output": "Account+craft via auth-split-shell: split shell, MForm/MInputPassword/MButton, token role=alert or field error for failure, brand panel with flat --m-* color-mix (no stacked radial+linear aurora), no MMessage severity alert, no second UI kit.",
       "files": []
     },
     {
       "id": 5,
       "prompt": "课程列表在零数据时太空了。请设计一个空状态区块（可嵌在列表页内容区）：说明还没有课程、引导「创建第一门课程」；视觉克制，用 morya-ui 默认空态即可，不要自定义 dashed 框或径向光晕。只要空状态相关模板片段或带空状态的列表 SFC 均可。",
-      "expected_output": "Flow empty: MPageHeader + MEmpty + next-action MButton, short copy, no custom dashed/radial shell, fits list content slot.",
+      "expected_output": "Flow empty via empty-block: MEmpty + next-action MButton, short copy, no custom dashed/radial shell, fits list content slot.",
       "files": []
     },
     {
       "id": 6,
-      "prompt": "为「流水线 CI」产品写一个营销落地首页（不是后台）：首屏只有品牌名、一句主标题、一句副文、一组 CTA；下面再分「为何选择」「能力」「客户」三节。技术实现用 Vue3 + morya-ui 组件做按钮/标签/折叠 FAQ；颜色走 --m-*，避免紫渐变和奶油衬线陶土那套 AI 默认脸。可有 1–2 个微动效，强度跟 useMotion / data-m-motion。输出单个 Vue SFC。",
-      "expected_output": "Express landing: single-job hero, MButton CTAs, sections with one job each, MAccordion FAQ optional, no purple/cream-terracotta defaults, no admin MPageFilters shell, motion gated by useMotion / data-m-motion.",
+      "prompt": "为「流水线 CI」产品写一个营销落地首页（不是后台）：首屏只有品牌名、一句主标题、一句副文、一组 CTA；下面再分「为何选择」「能力」「客户」三节。技术实现用 Vue3 + morya-ui 组件做按钮/标签/折叠 FAQ；颜色走 --m-*，风格偏简洁扁平（不要紫渐变 aurora、奶油衬线陶土、霓虹毛玻璃）。可有 1–2 个微动效，强度跟 useMotion / data-m-motion。输出单个 Vue SFC。",
+      "expected_output": "Express landing: single-job hero, MButton CTAs, sections with one job each, MAccordion FAQ optional, flat/simple surfaces (no purple aurora / cream-terracotta / unsolicited glass-neon), no admin MPageFilters shell, motion gated by useMotion / data-m-motion.",
       "files": []
     },
     {
       "id": 7,
       "prompt": "做一个三步「创建工作空间」向导：1 名称与地区 2 邀请成员（邮箱标签）3 确认。用 morya-ui 的 Stepper + Form；每步一个主任务；最后提交成功进入结果页（查看工作空间 / 返回）。输出一个或两个 SFC。",
-      "expected_output": "Flow wizard: wizard-form golden — MStepper :steps, per-step MForm, MInputTags invites, clear next/back/submit, message success, validate_usage clean.",
+      "expected_output": "Flow wizard via wizard-steps (+ result-block): MStepper :steps, per-step MForm, MInputTags invites, clear next/back/submit, message success, validate_usage clean.",
       "files": []
     },
     {
       "id": 8,
       "prompt": "用户点了删除项目但权限不足：做一张「无权限」系统页（或全页占位），说明原因，并提供返回上一页、联系管理员。用 morya-ui，文案直接别玩梗。",
-      "expected_output": "System surface: result-page golden — MResult status=403, #footer escape actions, no jokey 404 essay, on-token, validate_usage clean.",
+      "expected_output": "System surface via result-block: MResult status=403, #footer escape actions, no jokey 404 essay, on-token, validate_usage clean.",
       "files": []
     },
     {
       "id": 9,
       "prompt": "把上面的课程列表再 polish 一轮：去掉多余实心按钮、保证只有一个主按钮、表格状态改成 MStatus、补上 MEmpty。不要改成营销页。",
-      "expected_output": "Ops quieter polish: one primary, MStatus, MEmpty, text row actions, still list golden structure.",
+      "expected_output": "Ops quieter polish: one primary, MStatus, MEmpty, text row actions, still list block-order / snippets structure.",
       "files": []
     },
     {
       "id": 10,
-      "prompt": "给「用户管理」做资源详情页：面包屑、标题旁启用状态、编辑/返回/删除；摘要标签；基本信息属性网格；下方近期活动表。Vue3 + morya-ui，对齐详情黄金样例，不要做成落地页。",
-      "expected_output": "Ops detail: MPageHeader + MStatus, property MCard, related MTable rows, --m-* only, no marketing hero.",
+      "prompt": "给「用户管理」做资源详情页：面包屑、标题旁启用状态、编辑/返回/删除；摘要标签；基本信息属性网格；下方近期活动表。Vue3 + morya-ui，按 detail 块顺序 + detail-toolbar 拼装，不要做成落地页。",
+      "expected_output": "Ops detail composition: detail-toolbar MPageHeader + MStatus, property MCard, related MTable rows, --m-* only, no marketing hero.",
       "files": []
     },
     {
       "id": 11,
       "prompt": "用户列表页上「新建/编辑」不要另开路由：同页 MDialog（约 32rem）里放短表单（姓名、邮箱、角色），页脚取消/保存；保存成功用 message 一句话。输出单个 Vue SFC。",
-      "expected_output": "form-in-dialog: list stays, MDialog + MForm + #footer, message.success not toast string, MTable rows.",
+      "expected_output": "form-in-dialog snippet: list stays, MDialog + MForm + #footer, message.success not toast string, MTable rows.",
       "files": []
     },
     {
@@ -76,13 +76,13 @@
     {
       "id": 13,
       "prompt": "列表行删除：点删除后用 MConfirmDialog（危险确认），确认后 message.success('已删除')。不要用 toast，也不要手写 Dialog 当确认框。输出片段或 SFC 均可。",
-      "expected_output": "confirm-choice + feedback-choice: MConfirmDialog v-model header/message acceptSeverity=danger @accept, message.success not toast, no hand Dialog confirm.",
+      "expected_output": "confirm-delete snippet + feedback-choice: MConfirmDialog v-model header/message acceptSeverity=danger @accept, message.success not toast, no hand Dialog confirm.",
       "files": []
     },
     {
       "id": 14,
       "prompt": "短新建弹窗：MDialog v-model + header + #footer（取消 secondary、保存 primary）；表单字段 fluid。保存成功 message 一句话。不要用 v-model:visible。",
-      "expected_output": "form-surface Dialog recipe: v-model not visible, #footer actions, fluid fields, message.success.",
+      "expected_output": "form-in-dialog / form-surface Dialog recipe: v-model not visible, #footer actions, fluid fields, message.success, relatedSnippets include form-in-dialog.",
       "files": []
     }
   ]

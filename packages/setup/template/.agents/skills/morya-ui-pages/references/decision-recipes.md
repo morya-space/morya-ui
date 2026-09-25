@@ -6,7 +6,7 @@ Generated from `packages/ui-mcp/src/decisions.ts`. **Do not hand-edit** this fil
 pnpm --filter @morya-ui/mcp generate:recipes
 ```
 
-MCP: `recommend_component` (list / read by `decision` / query). Full prop manuals still come from `get_component` + `validate_usage`.
+MCP: `recommend_component` (list / read by `decision` / query; options may include `relatedSnippets`). Full prop manuals still come from `get_component` + `validate_usage`. Prefer page snippets for composition; golden pages are optional block-order checks.
 
 This file is the **offline** mirror for agents without MCP.
 
@@ -31,7 +31,7 @@ This file is the **offline** mirror for agents without MCP.
 
 - v-model / modelValue 控制开关（不要用 visible）
 - header 或 title 设弹窗标题
-- width 约 32rem 适配短表单（见 form-in-dialog 黄金样例）
+- width 约 32rem 适配短表单（见 form-in-dialog snippet）
 - 表单字段用 fluid；主按钮 severity="primary"
 
 **Recipe · slots**
@@ -43,6 +43,11 @@ This file is the **offline** mirror for agents without MCP.
 
 - @close 重置表单模型
 - 保存可用按钮 @click，或 MForm @submit + type="submit"
+
+**Related snippets**
+
+- `form-in-dialog`
+- `page-header-actions`
 
 **Anti-patterns**
 
@@ -77,6 +82,10 @@ This file is the **offline** mirror for agents without MCP.
 
 - @close 清理草稿
 
+**Related snippets**
+
+- `form-in-drawer`
+
 **Anti-patterns**
 
 - 极短 2–3 字段也用 Drawer → Dialog
@@ -109,6 +118,13 @@ This file is the **offline** mirror for agents without MCP.
 
 - MForm @submit（或 @submit.prevent）
 - 提交按钮 type="submit" + severity="primary"
+
+**Related snippets**
+
+- `page-content-form`
+- `form-header`
+- `form-body`
+- `form-actions`
 
 **Anti-patterns**
 
@@ -151,6 +167,10 @@ This file is the **offline** mirror for agents without MCP.
 
 - @close / @update:modelValue
 
+**Related snippets**
+
+- `form-in-dialog`
+
 **Anti-patterns**
 
 - Dialog + 手写「确定删除」→ MConfirmDialog
@@ -183,6 +203,10 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · events**
 
 - @close
+
+**Related snippets**
+
+- `form-in-drawer`
 
 **Anti-patterns**
 
@@ -727,17 +751,30 @@ This file is the **offline** mirror for agents without MCP.
 
 **Recipe · props**
 
-- 内放 MInput / MSelect 等筛选控件
-- 可 collapsible + #advanced
-- 不要外包 MCard
+- 内放 MInput / MSelect；同行用 MSpace wrap
+- 查询/重置放 #actions（与折叠切换同列）
+- 默认 variant="filled"；dense craft 用 plain + size="small"
+- 有次要条件：collapsible + v-model:expanded + #advanced
+- toggle 默认「高级筛选/收起」+ chevron；已选用 FilterChips
 
 **Recipe · slots**
 
+- #actions 查询/重置
 - #advanced 高级筛选
+- #active 可选；更常见是下方 FilterChips
+
+**Related snippets**
+
+- `list-filters-stack`
+- `list-filters`
+- `list-filters-collapsible`
+- `list-filter-chips`
+- `list-filters-dense`
 
 **Anti-patterns**
 
 - 表单字段组用 PageFilters → PageSection form / Fieldset
+- 手写已选条 → list-filter-chips / list-filters-stack
 
 
 ### PageToolbar
@@ -1299,6 +1336,10 @@ This file is the **offline** mirror for agents without MCP.
 
 - #extra 放下一步按钮（创建…）
 
+**Related snippets**
+
+- `empty-block`
+
 **Anti-patterns**
 
 - 403/404 用 Empty → Result
@@ -1327,6 +1368,10 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · slots**
 
 - #footer 逃逸/下一步按钮
+
+**Related snippets**
+
+- `result-block`
 
 **Anti-patterns**
 
@@ -1357,6 +1402,11 @@ This file is the **offline** mirror for agents without MCP.
 - :model / items 操作项
 - 触发器放默认插槽（按钮/图标）
 - 危险项用文档 severity / 确认流
+
+**Related snippets**
+
+- `row-actions-menu`
+- `list-row-actions`
 
 **Anti-patterns**
 
@@ -1475,6 +1525,11 @@ This file is the **offline** mirror for agents without MCP.
 - message.success('已保存') / info / warn / error
 - 大多数操作反馈的默认选择
 
+**Related snippets**
+
+- `confirm-delete`
+- `form-in-dialog`
+
 **Anti-patterns**
 
 - toast.add({ summary: '已保存' }) → message.success('已保存')
@@ -1520,6 +1575,10 @@ This file is the **offline** mirror for agents without MCP.
 - 表单级：token 样式的 role="alert" 条（见 login-page）
 - <MMessage> 只是 message 宿主，不是内嵌 Alert
 
+**Related snippets**
+
+- `auth-split-shell`
+
 **Anti-patterns**
 
 - 登录失败只闪 Toast → 表单区 alert / errorMessage
@@ -1557,6 +1616,10 @@ This file is the **offline** mirror for agents without MCP.
 - @accept 执行删除
 - @reject 关闭
 
+**Related snippets**
+
+- `confirm-delete`
+
 **Anti-patterns**
 
 - 普通 Dialog 手写「确定/取消」删除 → ConfirmDialog
@@ -1585,6 +1648,10 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · events**
 
 - @accept / @reject
+
+**Related snippets**
+
+- `confirm-delete`
 
 **Anti-patterns**
 

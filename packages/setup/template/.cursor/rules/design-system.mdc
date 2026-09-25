@@ -5,13 +5,13 @@ alwaysApply: true
 
 # Morya UI 设计系统
 
-1. **先读** 项目根目录 `DESIGN.md`。组件选型用 MCP `recommend_component`（含 recipe），或 skill `references/decision-recipes.md` / `component-index.md`。
+1. **先读** 项目根目录 `DESIGN.md`。组件选型用 MCP `recommend_component`（含 recipe + `relatedSnippets`），或 skill `references/decision-recipes.md` / `component-index.md`。
 2. **只用** `morya-ui` 的 `M*` 组件；全局样式 `morya-ui/styles.css`。
 3. **颜色/间距/圆角** 使用 `--m-*` CSS 变量，禁止裸 hex/rgb（见 `scripts/check-raw-colors.mjs`）。
-4. **页面结构** 用 MCP `get_golden_page` 对齐区块顺序与 API；**视觉方向**按参考样式 / 用户指定风格 / 提示词推断（`list_style_presets`：quiet、soft、dense、rail、studio、ink）。已安装 `frontend-design` / `impeccable` 时只加深审美与抛光，**不得**换组件库或推翻黄金结构。
+4. **页面组装（composition-first）**：用 MCP `recommend_page` → `suggestedSnippets` / `get_page_snippet` + `recommend_component` 拼装；`page-layouts` 块顺序作 checklist。`get_golden_page` **可选**（核对整页块顺序或用户明确要求对齐样例时）。**视觉方向**：有明确参考或明确描述 → 必须跟用户；提示词有清晰线索 → 推断并说明；不确定 → 先问（`get_style_direction`）。**没有命名风格预设表。** 禁止未询问就套 AI 默认渐变/霓虹/毛玻璃。已安装 `frontend-design` / `impeccable` 时只加深已定方向，**不得**换组件库或推翻块顺序 / 用户指定。
 5. **表单选项** 用 `MSelect` / `MTreeSelect`；**动作菜单** 用 `MDropdown`。
 6. 不确定 API 时查文档站或 MCP `get_component`，**禁止臆造 prop**；写完后必须 `validate_usage`。
 7. 根节点用 `MConfigProvider`；后台布局用 `MLayout` 系列。
 8. **操作反馈默认 `message` API**；仅 `summary + detail` 或异步通知用 `toast`；表单常驻错误用字段 `errorMessage` 或 token 样式的 `role="alert"`（`<MMessage>` 只是 message 宿主）。见 skill `references/feedback.md`。
 
-Token / 风格 / companion：MCP `get_design_rules`、`list_style_presets`；skill `optional-companions.md`（运行时以 `morya-ui/styles.css` 为准）
+Token / 风格 / companion：MCP `get_design_rules`、`get_style_direction`；skill `optional-companions.md`（运行时以 `morya-ui/styles.css` 为准）
