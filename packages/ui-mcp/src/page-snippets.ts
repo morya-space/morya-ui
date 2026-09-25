@@ -162,10 +162,23 @@ const department = ref<string | null>(null)`,
     id: 'list-table',
     title: '列表页表格',
     titleEn: 'List page table',
-    description: '标准 MTable，直接放在 MPageContent 内，不额外包 Card。',
-    descriptionEn: 'Standard MTable placed directly in MPageContent without an extra Card wrapper.',
+    description:
+      '标准 MTable，直接放在 MPageContent 内。全视口主列表可再加 fill（表体滚、分页贴底）；嵌入/短页不要 fill。',
+    descriptionEn:
+      'Standard MTable in MPageContent. Add fill only for full-viewport main lists; skip fill for embedded/short pages.',
     pageTypes: ['list'],
-    keywords: ['表格', 'table', 'pagination', 'paginator', 'empty', 'columns', 'rows'],
+    keywords: [
+      '表格',
+      'table',
+      'pagination',
+      'paginator',
+      'empty',
+      'columns',
+      'rows',
+      'fill',
+      '撑满',
+      '分页',
+    ],
     imports: ['MTable', 'MEmpty', 'MButton'],
     scriptSetup: `const columns = [
   { key: 'name', label: '名称' },
@@ -175,10 +188,12 @@ const department = ref<string | null>(null)`,
 ]
 const rows = ref<Record<string, unknown>[]>([])
 const loading = ref(false)`,
-    template: `<MTable
+    template: `<!-- 全视口主列表再加 fill；嵌入/短页去掉 fill -->
+<MTable
   :columns="columns"
   :rows="rows"
   :loading="loading"
+  fill
   paginator
   :rows-per-page="10"
   striped
@@ -198,10 +213,26 @@ const loading = ref(false)`,
     </MEmpty>
   </template>
 </MTable>`,
-    rules: ['表格直接放在 MPageContent 内', '空态用 MEmpty，不要留空白或单行灰字'],
-    rulesEn: ['Place the table directly in MPageContent', 'Use MEmpty for zero-data states, not a blank or muted sentence'],
-    avoid: ['不要用 MCard 包裹 bordered MTable'],
-    avoidEn: ['Do not wrap a bordered MTable with MCard'],
+    rules: [
+      '先判断是否适合 fill：全视口后台主列表 + 表格是主任务 → MPageContent fill + MTable fill',
+      '嵌入表、短页、整页文档滚动 → 不要 fill，内容高度即可',
+      '表格直接放在 MPageContent 内；空态用 MEmpty',
+    ],
+    rulesEn: [
+      'Decide fill first: full-viewport admin main list → MPageContent fill + MTable fill',
+      'Embedded / short / document-scroll pages → skip fill',
+      'Place the table directly in MPageContent; use MEmpty for zero-data states',
+    ],
+    avoid: [
+      '不要用 MCard 包裹 bordered MTable',
+      '不要对嵌入/短页硬套 fill',
+      '适合 fill 时不要手写 min-height / calc',
+    ],
+    avoidEn: [
+      'Do not wrap a bordered MTable with MCard',
+      'Do not force fill on embedded or short pages',
+      'Do not hand-write min-height / calc when fill is appropriate',
+    ],
   },
   {
     id: 'list-row-actions',

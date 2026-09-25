@@ -87,7 +87,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 - Import from `morya-ui` (or documented subpath + style).
 - **Selection + key props:** call MCP **`recommend_component`** (by query or `decision` id) and apply the returned **recipe** (`props` / `slots` / `events`) and **antiPatterns**. Without MCP, read [decision-recipes.md](references/decision-recipes.md). Then confirm full API with `get_component` / `get_example`.
 - Forms: `MForm` + fields; `@submit` + `type="submit"` (or documented footer button pattern on `form-in-dialog`).
-- Tables: `columns` + `rows` + `row-key`; `#cell-{key}`. There is no `data` prop.
+- Tables: `columns` + `rows` + `row-key`; `#cell-{key}`. There is no `data` prop. For full-viewport admin lists whose main job is one table, consider `MPageContent fill` + `MTable fill paginator`; skip `fill` for embedded/short/whole-page-scroll cases (see [page-layouts.md](references/page-layouts.md)).
 - Enums → `MSelect` / `MTreeSelect`; action menus → `MDropdown`.
 - Destructive → `MConfirmDialog` / `MConfirmPopup` (`confirm-choice`).
 - Feedback → default **`message`**; `toast` only for summary+detail / async; persistent form errors → `errorMessage` / `role="alert"` (`feedback-choice`). See [feedback.md](references/feedback.md).

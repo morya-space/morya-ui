@@ -46,6 +46,19 @@ describe('mTable', () => {
     expect(wrapper.find('.m-table__scrollbar.m-scrollbar').exists()).toBe(true)
   })
 
+  it('fills parent height so paginator can sit at the page bottom', () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns,
+        rows: [{ id: 1, name: 'A' }],
+        fill: true,
+        paginator: true,
+      },
+    })
+    expect(wrapper.classes()).toContain('m-table--fill')
+    expect(wrapper.find('.m-table__footer').exists()).toBe(true)
+  })
+
   it('applies density size class', () => {
     const wrapper = mount(MTable, {
       props: {

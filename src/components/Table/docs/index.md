@@ -14,6 +14,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 - 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列
 - 总最小宽度超出容器时出现横向滚动
 - 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条
+- **全视口主列表（按需）**：`MPageContent fill` + `MTable fill paginator`——表体滚动、分页贴底；嵌入表/短页不要硬套 `fill`
 
 ## 引入
 
@@ -96,6 +97,7 @@ import { MTable, MTag } from 'morya-ui'
 | `paginator` | `boolean` | `false` | 显示内置分页页脚。 |
 | `page` | `number` | `1` | 当前页（`v-model:page`）。 |
 | `rowsPerPage` | `number` | `25` | 每页条数。 |
+| `fill` | `boolean` | `false` | 撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。 |
 | `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |
 | `striped` | `boolean` | `false` | 斑马纹行。 |
 | `bordered` | `boolean` | `false` | 单元格边框。 |

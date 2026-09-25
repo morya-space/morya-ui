@@ -262,6 +262,7 @@ This file is the **offline** mirror for agents without MCP.
 
 - columns + rows（没有 data prop）
 - row-key 默认 id；不稳定时显式指定
+- 全视口主列表可 MPageContent fill + MTable fill；嵌入/短页跳过
 - 分页：paginator + rows-per-page 或 v-model:page
 - 行选择：selectionMode + v-model:selection
 
@@ -274,6 +275,7 @@ This file is the **offline** mirror for agents without MCP.
 
 - :data → :rows
 - 手写 <table> → MTable
+- 嵌入表硬套 fill → 去掉 fill
 
 
 ### DataView
@@ -882,11 +884,39 @@ This file is the **offline** mirror for agents without MCP.
 
 - MLayout fill-viewport（或 :fill-viewport="true"）
 - 内容放 MLayoutContent
+- 是否再 fill 表格：见下方「MPageContent fill + MTable fill」判断
 - 侧栏用 MLayoutSider + MMenu，不是随便一个 Drawer
 
 **Anti-patterns**
 
 - 在 Layout 外再包一层 100vh 滚动 → 去掉
+
+
+### MPageContent fill + MTable fill
+
+**When**
+
+- 全视口后台列表，页面主任务就是浏览一张表
+- 内容高度表格会留下大块空白、分页悬在中间不好看
+- 希望只有表体滚动、分页贴在页面最下方
+
+**Avoid when**
+
+- 仪表盘/详情里的嵌入小表
+- 内容本身很短、内容高度即可
+- 整页应作为文档滚动（长筛选+说明+表格）
+- Dialog / Drawer 内表格
+
+**Recipe · props**
+
+- 先判断是否适合 fill，再写 MPageContent fill + MTable fill
+- paginator 或同级 MPagination
+- 适合时不要手写 min-height / calc
+
+**Anti-patterns**
+
+- 嵌入/短页硬套 fill → 去掉
+- 适合 fill 却手写 calc → 改用 fill
 
 
 ### MScrollbar
@@ -957,11 +987,13 @@ This file is the **offline** mirror for agents without MCP.
 
 - MPageContent > MPageFilters + MTable
 - 表格直接放 PageContent，不套 Card
+- 高度：全视口主列表再考虑 fill；嵌入/短页跳过
 - 空态用 Table #empty + MEmpty
 
 **Anti-patterns**
 
 - Table 外包 MCard → 去掉 Card
+- 嵌入表硬套 fill → 去掉 fill
 
 
 ### MCard

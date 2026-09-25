@@ -30,7 +30,7 @@ alwaysApply: false
 1. `MLayout fillViewport` + 可选 `MLayoutSider bordered`
 2. 侧栏 `MMenu`
 3. `MLayoutHeader` → `MBreadcrumb`
-4. `MLayoutContent` → `MPageContent`
+4. `MLayoutContent` → `MPageContent`（**仅在下方高度规则适用时**再加 `fill`）
 5. `MPageHeader`（页面标题 + `#actions` 主操作；视口内 **唯一** filled primary）
 6. `MPageFilters`（可选 `variant="filled"`、`collapsible` + `#advanced`；查询/重置用 secondary）
 7. 可选 `MPageFilterChips` + 可关闭 `MTag`（有已选条件时，放在筛选与表格之间）
@@ -38,6 +38,24 @@ alwaysApply: false
 9. `MTable`（直接放置；`#empty` → `MEmpty`）
 10. 分页由 `MTable paginator` 或同级 `MPagination`
 11. 短新建/编辑：同页 `MDialog` + `MForm`
+
+### 列表高度 — 先判断，再决定是否 fill
+
+仅当 **多数** 条件成立时使用 `MPageContent fill` + `MTable fill paginator`：
+
+- 全视口后台列表（`MLayout fillViewport`），页面主任务就是浏览一张表
+- 表格按内容高度会留下大块空白、分页悬在中间不好看
+- 希望表体内部滚动、分页贴在页面最下方
+
+以下情况 **不要** 用 `fill`：
+
+- 嵌入/次要表格（仪表盘「最近」、详情关联表、Card 内）
+- 内容本身很短，内容高度表格即可
+- 整页应作为文档滚动（长筛选 + 说明 + 表格）
+- Dialog / Drawer 内表格
+- 表格不是中间唯一主区域的混合布局
+
+适合 `fill` 时不要手写 `min-height` / `calc`；不适合时不要硬套 `fill`。
 
 ## 表单页区块顺序
 
@@ -62,9 +80,9 @@ alwaysApply: false
 | --- | --- | --- |
 | 骨架 | `MLayout fillViewport` + `MPageContent` | `MLayoutContent` 再写 padding |
 | 区块 | `MPageFilters` / `MPageToolbar` / `MPageSection` | 手写 `.page-*`；`MCard` 再包一层 |
-| 列表表格 | `MTable` 直接放在 `MPageContent` | 用 `MCard` 再包 bordered 表格 |
+| 列表表格 | `MTable` 直接放 `MPageContent`；高度规则适用时再 `fill` | 用 `MCard` 再包 bordered 表格；不适合时硬套 `fill` |
 | 控件间距 | 同行用 `MSpace` / `MFlex`；区块靠 `MPageContent` gap | 外包 padded `div` 叠间距 |
-| 滚动 | 组件内置滚动壳用 `MScrollbar`；Dialog/Drawer 等内容留给业务 | 在用户内容区强行内置滚动 |
+| 滚动 | 全视口主列表可表体滚动（`fill`）；否则 Layout / 局部 `MScrollbar` | 在用户内容区强行内置滚动；无理由双滚动条 |
 | 颜色 | `--m-*` Token | 页面级 hex / 裸 rgb() |
 | 反馈 | 单行结果用 `message`；危险操作用 `MConfirmDialog` | 仅一行文案却用 toast |
 | 无障碍 | 图标按钮 `aria-label`、表单可见 label | — |

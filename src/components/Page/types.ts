@@ -22,6 +22,11 @@ export interface PageContentProps {
   width?: PageContentWidth
   /** Band spacing rhythm between header, filters, toolbar, and body. */
   bands?: PageContentBands
+  /**
+   * Stretch to fill `MLayoutContent` remaining height.
+   * Use only for full-viewport admin main lists; pair with `MTable fill`. Skip for embedded/short pages.
+   */
+  fill?: boolean
 }
 
 export interface PageFiltersProps {

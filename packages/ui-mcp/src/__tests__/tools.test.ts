@@ -266,6 +266,36 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.suggestions.some((item) => item.type === 'native-scroll')).toBe(true)
   })
 
+  it('suggests list fill height only for fillViewport admin lists missing fill', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string; standardId: string }> }>(
+      handlers.validatePage({
+        code: '<MLayout fill-viewport><MPageContent><MTable :columns="c" :rows="r" paginator /></MPageContent></MLayout>',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.suggestions.some((item) => item.type === 'list-fill-height' && item.standardId === 'page-sections')).toBe(
+      true,
+    )
+  })
+
+  it('does not suggest list fill when PageContent and Table already fill', () => {
+    const result = read<{ suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MLayout fill-viewport><MPageContent fill><MTable fill paginator :columns="c" :rows="r" /></MPageContent></MLayout>',
+      }),
+    )
+    expect(result.suggestions.some((item) => item.type === 'list-fill-height')).toBe(false)
+  })
+
+  it('does not suggest list fill for paginator tables outside fillViewport shells', () => {
+    const result = read<{ suggestions: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MPageContent><MTable :columns="c" :rows="r" paginator /></MPageContent>',
+      }),
+    )
+    expect(result.suggestions.some((item) => item.type === 'list-fill-height')).toBe(false)
+  })
+
   it('returns scrollable-panel snippet for scroll queries', () => {
     const result = read<{ id: string; template: string; imports: string[] }>(
       handlers.getPageSnippet({ section: 'scrollable-panel' }),

@@ -71,6 +71,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   fixedHeader: true,
   tableHeight: null,
   tableMinHeight: 180,
+  fill: false,
   showIndex: false,
   showIndexSymbol: '#',
   indexColumnWidth: 60,
@@ -153,6 +154,7 @@ const {
   sortMode,
   tableHeight,
   tableMinHeight,
+  fill,
   rowsOfPageSeparatorMessage,
   showIndexSymbol,
   preventContextMenuRow,
@@ -203,6 +205,7 @@ const tableRootClass = computed(() => [
     'm-table--border': resolvedBorderCell.value,
     'm-table--striped': resolvedStriped.value,
     'm-table--enable-row-hover': !resolvedNoHover.value,
+    'm-table--fill': fill.value && !resolvedTableHeight.value,
   },
 ])
 
@@ -215,7 +218,12 @@ const resolvedEmptyMessage = computed(
 const showHeaderComputed = computed(() => showHeader.value ?? !hideHeader.value)
 const resolvedTableHeight = computed(() => maxHeight.value ?? tableHeight.value)
 
-const tableHeightPx = computed(() => (resolvedTableHeight.value ? `${resolvedTableHeight.value}px` : null))
+const tableFillsParent = computed(() => fill.value && !resolvedTableHeight.value)
+const tableHeightPx = computed(() => {
+  if (resolvedTableHeight.value) return `${resolvedTableHeight.value}px`
+  if (tableFillsParent.value) return '100%'
+  return null
+})
 const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
 
 const slots = useSlots()
@@ -275,7 +283,7 @@ const mainWrapClass = computed(() => [
   'm-table__main',
   {
     'm-table__main--fixed-header': fixedHeader.value,
-    'm-table__main--fixed-height': Boolean(resolvedTableHeight.value),
+    'm-table__main--fixed-height': Boolean(resolvedTableHeight.value) || tableFillsParent.value,
     'm-table__main--shadow': showShadow.value,
     'm-table__main--shadow-end': showShadowEnd.value,
     'm-table__main--table-fixed': useTableFixedLayout.value,

@@ -27,6 +27,8 @@ import {
 
 `MPageContent` 负责内容区 **padding**（默认 `--m-space-6`）与子区块 **gap**（默认 `--m-space-4`），文档预览中外框仅模拟 `MLayoutContent` 边界。
 
+**列表高度（按需）**：仅当这是 `MLayout fillViewport` 下的**后台主列表**、表格是页面主任务时，再用 `MPageContent fill` + `MTable fill paginator`（表体滚动、分页贴底）。嵌入表、短页、整页文档滚动不要硬套 `fill`。
+
 `MPageFilters` 默认是 **无框的控件行**（`variant="plain"`）；需要一条可辨识的工具带时再用 `variant="filled"`（与 Table header 相同的 `--m-color-fill-light`，无圆角）。`MPageHeader` 是页面身份（约 `--m-font-size-xl`）；`MPageToolbar` 是列表操作条（`--m-font-size-md`），不要当成第二页头。
 
 ```vue preview src="./demos/ListPageStack.zh.vue"
@@ -80,6 +82,7 @@ import {
 | `density` | `'default' \| 'compact' \| 'spacious'` | `'default'` | 子区块垂直间距。 |
 | `width` | `'full' \| 'narrow'` | `'full'` | `narrow` 约 42rem，适合表单页。 |
 | `bands` | `'auto' \| 'uniform'` | `'auto'` | `auto` 收紧 Header/筛选/Toolbar 与表格之间的 band；`uniform` 仅用 `gap`。 |
+| `fill` | `boolean` | `false` | 撑满 `MLayoutContent` 剩余高度；仅全视口主列表与 `MTable fill` 联用。 |
 
 `bands="auto"` 时可通过 CSS 变量微调：`--m-page-content-body-lead`、`--m-page-content-tools-pull`（见 `styles.css`）。
 

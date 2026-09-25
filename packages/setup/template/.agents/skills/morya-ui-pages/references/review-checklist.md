@@ -25,6 +25,7 @@
 
 - [ ] Matches golden / [page-layouts.md](page-layouts.md) block order
 - [ ] `MPage*` used instead of ad-hoc page chrome where applicable
+- [ ] List height: if this is a full-viewport main data list, consider `MPageContent fill` + `MTable fill`; if embedded/short/document-scroll, skip `fill`
 - [ ] Tables not wrapped in decorative `MCard` solely for borders
 - [ ] Filters / toolbar / form actions follow documented patterns
 - [ ] Sider `MMenu` items have icons; status cells use `MStatus` (not decorative `MTag`)

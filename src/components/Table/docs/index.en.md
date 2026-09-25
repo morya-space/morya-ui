@@ -14,6 +14,7 @@ Column width rules:
 - Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally
 - Horizontal scrolling appears when the total minimum width exceeds the container
 - Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars
+- **Full-viewport main lists (when it fits):** `MPageContent fill` + `MTable fill paginator` — body scrolls; pagination at the page bottom. Skip `fill` for embedded/short tables
 
 ## Import
 
@@ -79,6 +80,7 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 | `paginator` | `boolean` | `false` | Built-in pagination footer. |
 | `page` | `number` | `1` | Current page (`v-model:page`). |
 | `rowsPerPage` | `number` | `25` | Page size. |
+| `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |
 | `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |
 | `highlightCurrent` | `boolean` | `false` | Highlight current row. |
 | `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |

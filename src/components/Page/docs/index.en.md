@@ -27,6 +27,8 @@ import {
 
 `MPageContent` owns content **padding** (default `--m-space-6`) and section **gap** (default `--m-space-4`). The bordered frame in previews simulates `MLayoutContent` only.
 
+**List height (when it fits):** only for a **full-viewport admin main list** under `MLayout fillViewport`, use `MPageContent fill` + `MTable fill paginator`. Skip `fill` for embedded, short, or whole-page-scroll tables.
+
 `MPageFilters` defaults to a borderless control row (`variant="plain"`); `variant="filled"` uses the same `--m-color-fill-light` as the Table header, with no radius. `MPageHeader` is page identity (`--m-font-size-xl`); `MPageToolbar` is a list action row (`--m-font-size-md`), not a second page title. `MPageStat` supports `trendDirection`, `trendLabel`, `loading`, and `shadow` (defaults to `always`).
 
 ```vue preview src="./demos/ListPageStack.en.vue"

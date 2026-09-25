@@ -34,6 +34,34 @@
     border-radius: var(--m-radius-sm);
 }
 
+/* Full-viewport main lists: fill remaining height; body scrolls; paginator at bottom. Skip for embedded tables. */
+.m-table--fill {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.m-table--fill > .m-loading,
+.m-table--fill > .m-loading > .m-loading__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.m-table--fill .m-table__scrollbar {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+}
+
+.m-table--fill .m-table__footer {
+    flex-shrink: 0;
+}
+
 .m-table__scrollbar {
     width: 100%;
 }

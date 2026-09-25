@@ -157,7 +157,7 @@ async function submit() {
                 <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
               </MSpace>
             </MPageFilters>
-            <MTable :columns="columns" :rows="rows" :loading="loading" paginator :rows-per-page="10" striped bordered row-key="id">
+            <MTable :columns="columns" :rows="rows" :loading="loading" fill paginator :rows-per-page="10" striped bordered row-key="id">
               <template #cell-status="{ value }">
                 <MStatus :label="String(value ?? '')" :severity="value === 'active' ? 'success' : 'secondary'" />
               </template>
@@ -257,7 +257,7 @@ async function submit() {
         <MBreadcrumb :model="[{ label: '${zh ? '首页' : 'Home'}', to: '/' }, { label: '${title}' }]" />
       </MLayoutHeader>
       <MLayoutContent>
-        <MPageContent>
+        <MPageContent fill>
 ${listContent}
         </MPageContent>
       </MLayoutContent>
@@ -1209,6 +1209,25 @@ export function createToolHandlers(catalog = loadCatalog()) {
           locale === 'en-US'
             ? 'Contract: MTable row data uses the rows prop (not data). See golden list-page / get_component Table.'
             : '契约：MTable 行数据使用 rows，不要用 data。见黄金样例 list-page / get_component Table。',
+      })
+    }
+
+    if (
+      /fill-viewport|fillViewport/i.test(code)
+      && /<MTable\b[^>]*\bpaginator\b/i.test(code)
+      && /<MPageContent\b/i.test(code)
+      && !(
+        /<MPageContent\b[^>]*\bfill\b/i.test(code)
+        && /<MTable\b[^>]*\bfill\b/i.test(code)
+      )
+    ) {
+      suggestions.push({
+        standardId: 'page-sections',
+        type: 'list-fill-height',
+        message:
+          locale === 'en-US'
+            ? 'Advisory: for a full-viewport admin list whose main job is one table, consider MPageContent fill + MTable fill so the body scrolls and pagination stays at the page bottom. Skip fill for embedded/short/document-scroll tables (see page-scroll-choice / golden list-page).'
+            : '参考建议：若这是全视口后台主列表且表格是页面主任务，可考虑 MPageContent fill + MTable fill（表体滚动、分页贴底）。嵌入表/短页/整页文档滚动则跳过 fill（见 page-scroll-choice / 黄金样例 list-page）。',
       })
     }
 

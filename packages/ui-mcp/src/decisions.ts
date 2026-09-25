@@ -287,6 +287,7 @@ export const componentDecisions: ComponentDecision[] = [
           [
             ['columns + rows（没有 data prop）', 'columns + rows (no data prop)'],
             ['row-key 默认 id；不稳定时显式指定', 'row-key defaults to id; set explicitly when needed'],
+            ['全视口主列表可 MPageContent fill + MTable fill；嵌入/短页跳过', 'Full-viewport main lists may use fill; skip for embedded/short pages'],
             ['分页：paginator + rows-per-page 或 v-model:page', 'Paging: paginator + rows-per-page or v-model:page'],
             ['行选择：selectionMode + v-model:selection', 'Row select: selectionMode + v-model:selection'],
           ],
@@ -298,6 +299,7 @@ export const componentDecisions: ComponentDecision[] = [
         ...anti([
           [':data → :rows', ':data → :rows'],
           ['手写 <table> → MTable', 'Hand-rolled <table> → MTable'],
+          ['嵌入表硬套 fill → 去掉 fill', 'Forced fill on embedded table → remove fill'],
         ]),
       },
       {
@@ -845,10 +847,47 @@ export const componentDecisions: ComponentDecision[] = [
           [
             ['MLayout fill-viewport（或 :fill-viewport="true"）', 'MLayout fill-viewport (or :fill-viewport="true")'],
             ['内容放 MLayoutContent', 'Content in MLayoutContent'],
+            ['是否再 fill 表格：见下方「MPageContent fill + MTable fill」判断', 'Whether to fill the table: see “MPageContent fill + MTable fill” below'],
             ['侧栏用 MLayoutSider + MMenu，不是随便一个 Drawer', 'Sider: MLayoutSider + MMenu, not a random Drawer'],
           ],
         ),
         ...anti([['在 Layout 外再包一层 100vh 滚动 → 去掉', 'Extra 100vh scroll wrapper outside Layout → remove']]),
+      },
+      {
+        component: 'MPageContent fill + MTable fill',
+        when: [
+          '全视口后台列表，页面主任务就是浏览一张表',
+          '内容高度表格会留下大块空白、分页悬在中间不好看',
+          '希望只有表体滚动、分页贴在页面最下方',
+        ],
+        whenEn: [
+          'Full-viewport admin list whose main job is browsing one table',
+          'A content-sized table would leave a large empty band with mid-page pagination',
+          'Only the table body should scroll; pagination should stay at the page bottom',
+        ],
+        avoidWhen: [
+          '仪表盘/详情里的嵌入小表',
+          '内容本身很短、内容高度即可',
+          '整页应作为文档滚动（长筛选+说明+表格）',
+          'Dialog / Drawer 内表格',
+        ],
+        avoidWhenEn: [
+          'Embedded tables on dashboards or detail pages',
+          'Short content where a content-sized table is fine',
+          'Whole page should scroll as a document',
+          'Tables inside Dialog / Drawer',
+        ],
+        recipe: recipe(
+          [
+            ['先判断是否适合 fill，再写 MPageContent fill + MTable fill', 'Decide fill first, then MPageContent fill + MTable fill'],
+            ['paginator 或同级 MPagination', 'paginator or sibling MPagination'],
+            ['适合时不要手写 min-height / calc', 'When fill fits, do not hand-write min-height / calc'],
+          ],
+        ),
+        ...anti([
+          ['嵌入/短页硬套 fill → 去掉', 'Forced fill on embedded/short page → remove'],
+          ['适合 fill 却手写 calc → 改用 fill', 'Hand-written calc when fill fits → use fill'],
+        ]),
       },
       {
         component: 'MScrollbar',
@@ -922,10 +961,14 @@ export const componentDecisions: ComponentDecision[] = [
           [
             ['MPageContent > MPageFilters + MTable', 'MPageContent > MPageFilters + MTable'],
             ['表格直接放 PageContent，不套 Card', 'Table directly under PageContent, no Card'],
+            ['高度：全视口主列表再考虑 fill；嵌入/短页跳过', 'Height: consider fill only for full-viewport main lists'],
             ['空态用 Table #empty + MEmpty', 'Empty: Table #empty + MEmpty'],
           ],
         ),
-        ...anti([['Table 外包 MCard → 去掉 Card', 'MCard around Table → remove Card']]),
+        ...anti([
+          ['Table 外包 MCard → 去掉 Card', 'MCard around Table → remove Card'],
+          ['嵌入表硬套 fill → 去掉 fill', 'Forced fill on embedded table → remove fill'],
+        ]),
       },
       {
         component: 'MCard',

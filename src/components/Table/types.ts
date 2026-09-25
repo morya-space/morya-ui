@@ -103,6 +103,12 @@ export interface TableProps {
   fixedHeader?: boolean
   tableHeight?: number | null
   tableMinHeight?: number
+  /**
+   * Stretch to fill the parent. Use with `MPageContent fill` only for full-viewport admin main lists.
+   * Table body scrolls; built-in `paginator` footer stays at the bottom. Skip for embedded/short tables.
+   * Ignored when `maxHeight` / `tableHeight` is set.
+   */
+  fill?: boolean
   showIndex?: boolean
   showIndexSymbol?: string
   indexColumnWidth?: number

@@ -28,6 +28,14 @@ describe('mPageContent', () => {
     })
     expect(wrapper.classes()).toContain('m-page-content--bands-uniform')
   })
+
+  it('opts into fill remaining height for list pages', () => {
+    const wrapper = mount(MPageContent, {
+      props: { fill: true },
+      slots: { default: '<span />' },
+    })
+    expect(wrapper.classes()).toContain('m-page-content--fill')
+  })
 })
 
 describe('mPageFilters', () => {

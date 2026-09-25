@@ -1,6 +1,7 @@
 <script setup lang="ts">
 /**
- * 黄金样例：列表页
+ * 黄金样例：列表页（全视口后台主列表 → 使用 fill）
+ * 嵌入表 / 短页 / 整页文档滚动不要硬套 fill，见 page-layouts § List height
  * @see DESIGN.md · morya-ui-pages references/page-layouts.md · visual-craft § Ops polish
  */
 import {
@@ -112,7 +113,7 @@ const rows = [
         </MLayoutHeader>
 
         <MLayoutContent>
-          <MPageContent>
+          <MPageContent fill>
             <MPageHeader title="用户管理" description="维护账号、角色与权限。">
               <template #actions>
                 <MButton severity="primary">
@@ -172,6 +173,7 @@ const rows = [
               :columns="columns"
               :rows="rows"
               :rows-per-page="5"
+              fill
               paginator
               striped
               bordered

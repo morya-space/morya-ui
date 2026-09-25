@@ -29,14 +29,32 @@ Via MCP: `recommend_page` → `get_golden_page`; local edits: `get_page_snippet`
 1. `MLayout fillViewport` + optional `MLayoutSider bordered`
 2. Sider `MMenu` (**every item has `icon`**)
 3. `MLayoutHeader` → `MBreadcrumb`
-4. `MLayoutContent` → `MPageContent`
+4. `MLayoutContent` → `MPageContent` (**add `fill` only when the height rule below applies**)
 5. `MPageHeader` — page title + `#actions` primary (**one** filled primary in viewport)
 6. `MPageFilters` — `variant="filled"` optional; inner `MSpace wrap` + Input/Select + query/reset (query/reset → secondary); optional `collapsible` + `#advanced` for secondary fields
 7. Optional `MPageFilterChips` + closable `MTag` when filters are applied (after filters, before table)
 8. Optional `MPageToolbar` — batch actions only (no page title)
 9. `MTable` directly in content (usually **no** wrapping `MCard`); status → `MStatus`; `#empty` → `MEmpty`
-10. Pagination via `MTable` paginator or sibling `MPagination`
+10. Pagination via `MTable paginator` or sibling `MPagination`
 11. Short create/edit → `MDialog` + `MForm` on the same page (default)
+
+### List height — decide, don’t always fill
+
+Use **`MPageContent fill` + `MTable fill paginator`** only when **most** of these are true:
+
+- The screen is a **full-viewport admin list** (`MLayout fillViewport`) whose **main job** is browsing one data table
+- Leaving the table content-sized would leave a large empty band with pagination floating mid-page
+- You want **table-body scroll** and pagination pinned to the **bottom of the page**
+
+Skip `fill` when any of these apply:
+
+- Embedded / secondary tables (dashboard “recent”, detail related lists, cards)
+- Short or sparse pages where a content-sized table looks fine
+- The page should **scroll as a whole document** (long filters + notes + table)
+- Tables inside `MDialog` / `MDrawer`
+- Mixed layouts where the table is not the sole middle region
+
+Do not invent `min-height` / `calc` hacks when `fill` is the right tool — and do not force `fill` when it isn’t.
 
 Craft: [visual-craft.md](visual-craft.md) § Ops polish.
 
@@ -63,9 +81,9 @@ Craft: spacious density + Ops polish; do not turn the first viewport into a mark
 | --- | --- | --- |
 | Shell | `MLayout fillViewport` + `MPageContent` | Padding on `MLayoutContent` |
 | Sections | `MPageFilters` / `MPageToolbar` / `MPageSection` | Custom `.page-*`; extra `MCard` wrappers |
-| List table | `MTable` in `MPageContent` | Border card solely to wrap the table |
+| List table | `MTable` in `MPageContent`; add `fill` only when the height rule applies | Border card solely to wrap the table; forcing `fill` on every table |
 | Spacing | `MSpace` / `MFlex` for peers; page gap from `MPageContent` | Nested padded divs stacking gaps |
-| Scroll | Rely on layout scroll; explicit `MScrollbar` for local panes | Forcing overflow on every content slot |
+| Scroll | Full-viewport main lists may use table-body scroll via `fill`; otherwise layout / local `MScrollbar` | Forcing overflow on every content slot; stacked page + table scrollbars without reason |
 | Color | `--m-*` | Page-level hex / rgb |
 | Feedback | One-line → `message`; danger → confirm dialog | Toast for a single short string |
 | A11y | Labels + icon `aria-label` | Unlabeled icon controls |

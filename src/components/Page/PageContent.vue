@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<PageContentProps>(), {
   density: 'default',
   width: 'full',
   bands: 'auto',
+  fill: false,
 })
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
@@ -20,6 +21,7 @@ const rootClass = computed(() => [
     'm-page-content--spacious': props.density === 'spacious',
     'm-page-content--narrow': props.width === 'narrow',
     'm-page-content--bands-uniform': props.bands === 'uniform',
+    'm-page-content--fill': props.fill,
   },
 ])
 </script>

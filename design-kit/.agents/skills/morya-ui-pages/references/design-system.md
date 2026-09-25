@@ -59,6 +59,7 @@ import 'morya-ui/styles.css'
 ## Data display
 
 - `MTable` with `columns` + **`rows`** + `row-key` (default `id`). There is no `data` prop.
+- Height: only for **full-viewport admin lists** whose main job is one table, use `MPageContent fill` + `MTable fill paginator`. Skip `fill` for embedded/short/document-scroll tables — see [page-layouts.md](page-layouts.md) § List height.
 - Row status → `MStatus`; categories / closable labels → `MTag`.
 - Row actions: text/link `MButton` or `MDropdown` (avoid a row of filled buttons).
 - Pagination: table `paginator` or sibling `MPagination`.
