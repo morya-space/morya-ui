@@ -8,15 +8,38 @@ export interface GoldenPageRecord {
   title: string
   titleEn: string
   patternId: string
+  /** Visual style preset this sample demonstrates (structure may be shared). */
+  style?: string
+  /** Canonical structure id when this is a craft variant. */
+  variantOf?: string
 }
 
 export const goldenPageCatalog: GoldenPageRecord[] = [
   {
     id: 'list-page',
     file: 'list-page.vue',
-    title: '列表页黄金样例',
-    titleEn: 'List page golden sample',
+    title: '列表页黄金样例（soft）',
+    titleEn: 'List page golden sample (soft)',
     patternId: 'admin-list',
+    style: 'soft',
+  },
+  {
+    id: 'list-page-dense',
+    file: 'list-page-dense.vue',
+    title: '列表页黄金样例（dense）',
+    titleEn: 'List page golden sample (dense)',
+    patternId: 'admin-list',
+    style: 'dense',
+    variantOf: 'list-page',
+  },
+  {
+    id: 'list-page-rail',
+    file: 'list-page-rail.vue',
+    title: '列表页黄金样例（rail）',
+    titleEn: 'List page golden sample (rail)',
+    patternId: 'admin-list',
+    style: 'rail',
+    variantOf: 'list-page',
   },
   {
     id: 'form-page',
@@ -90,6 +113,16 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
   },
 ]
 
+/** Map style preset → list golden craft variant (same structure). */
+const listStyleGolden: Record<string, string> = {
+  soft: 'list-page',
+  quiet: 'list-page',
+  studio: 'list-page',
+  ink: 'list-page',
+  dense: 'list-page-dense',
+  rail: 'list-page-rail',
+}
+
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 const bundledDir = join(pkgRoot, 'data/golden-pages')
 const repoDir = join(pkgRoot, '../../design-kit/docs/golden-pages')
@@ -107,6 +140,37 @@ export function listGoldenPages() {
 export function findGoldenPage(id: string): GoldenPageRecord | undefined {
   const key = id.trim().toLowerCase().replace(/\.vue$/i, '').replace(/[-_\s]/g, '')
   return goldenPageCatalog.find((item) => item.id.replace(/[-_\s]/g, '') === key)
+}
+
+/**
+ * Pick the best golden for a pattern + optional style preset.
+ * Falls back to the pattern's canonical sample when no style variant exists.
+ */
+export function resolveGoldenPageId(args: {
+  patternId?: string | null
+  canonicalGoldenId?: string | null
+  styleId?: string | null
+}): string | null {
+  const style = args.styleId?.trim().toLowerCase() || ''
+  const canonical =
+    args.canonicalGoldenId?.split('/').pop()?.replace(/\.vue$/i, '') ||
+    (args.patternId
+      ? goldenPageCatalog.find((item) => item.patternId === args.patternId && !item.variantOf)?.id
+      : null) ||
+    null
+
+  if (args.patternId === 'admin-list' || canonical === 'list-page' || canonical?.startsWith('list-page')) {
+    const styled = style ? listStyleGolden[style] : null
+    if (styled && findGoldenPage(styled)) return styled
+    return 'list-page'
+  }
+
+  if (canonical && findGoldenPage(canonical)) return canonical
+  if (args.patternId) {
+    const match = goldenPageCatalog.find((item) => item.patternId === args.patternId && !item.variantOf)
+    return match?.id ?? null
+  }
+  return null
 }
 
 export function readGoldenPageSource(id: string): { record: GoldenPageRecord; source: string } | null {

@@ -10,10 +10,16 @@ import {
 } from './catalog.js'
 import { componentDecisions, findDecision, scoreDecision } from './decisions.js'
 import type { ComponentDecisionOption } from './decisions.js'
-import { listGoldenPages, readGoldenPageSource } from './golden-pages.js'
+import { listGoldenPages, readGoldenPageSource, resolveGoldenPageId } from './golden-pages.js'
 import { filterPageSnippets, findPageSnippet, pageSnippets, scorePageSnippet } from './page-snippets.js'
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
 import { countCatalogResources, countCatalogResourceTemplates } from './resources.js'
+import {
+  findStylePreset,
+  resolveStyleDirection,
+  stylePresets,
+  styleResolution,
+} from './style-presets.js'
 
 function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
   const pairedTagRe = /<MButton\b([^>]*)>([\s\S]*?)<\/MButton>/gi
@@ -830,6 +836,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
     intent: string
     pageType?: string
     features?: string[]
+    style?: string
     mode?: string
     includeScaffold?: boolean
   }) {
@@ -845,13 +852,49 @@ export function createToolHandlers(catalog = loadCatalog()) {
       })
     }
     const locale = resolveLocale(args.mode)
+    const styleDirection = resolveStyleDirection({ intent: args.intent, style: args.style })
+    const stylePayload = {
+      resolution: styleDirection.resolution,
+      confidence: styleDirection.confidence,
+      preset: styleDirection.preset
+        ? {
+            id: styleDirection.preset.id,
+            title: locale === 'en-US' ? styleDirection.preset.titleEn : styleDirection.preset.title,
+            summary: locale === 'en-US' ? styleDirection.preset.summaryEn : styleDirection.preset.summary,
+            apply: locale === 'en-US' ? styleDirection.preset.applyEn : styleDirection.preset.apply,
+            avoid: locale === 'en-US' ? styleDirection.preset.avoidEn : styleDirection.preset.avoid,
+          }
+        : null,
+      candidates: styleDirection.candidates.map((item) => ({
+        id: item.id,
+        title: locale === 'en-US' ? item.titleEn : item.title,
+        score: item.score,
+      })),
+      guidance: locale === 'en-US' ? styleDirection.guidanceEn : styleDirection.guidanceZh,
+      priority: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
+      note:
+        locale === 'en-US'
+          ? 'If the user supplied a visual reference, follow that first (map to --m-* + M*). Golden pages lock structure, not the only aesthetic.'
+          : '若用户提供了参考样式，优先跟参考（映射到 --m-* + M*）。黄金样例锁结构，不是唯一审美。',
+    }
+    const resolvedGoldenId = resolveGoldenPageId({
+      patternId: best.pattern.id,
+      canonicalGoldenId: best.pattern.goldenPage,
+      styleId: styleDirection.preset?.id || args.style || null,
+    })
+    const resolvedGoldenPath = resolvedGoldenId
+      ? `docs/golden-pages/${resolvedGoldenId}.vue`
+      : best.pattern.goldenPage
+
     const result: Record<string, unknown> = {
       intent: args.intent,
       pageType: args.pageType,
+      style: args.style,
       matchedPattern: best.pattern.id,
       title: locale === 'en-US' ? best.pattern.titleEn : best.pattern.title,
       confidence: best.score,
-      goldenPage: best.pattern.goldenPage,
+      goldenPage: resolvedGoldenPath,
+      styleDirection: stylePayload,
       components: best.pattern.components,
       structure: best.pattern.structure,
       layout: best.pattern.layout,
@@ -860,25 +903,27 @@ export function createToolHandlers(catalog = loadCatalog()) {
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
       nextStep: (() => {
-        const goldenId =
-          best.pattern.goldenPage?.split('/').pop()?.replace(/\.vue$/i, '') ||
-          listGoldenPages().find((item) => item.patternId === best.pattern.id)?.id ||
-          null
+        const goldenId = resolvedGoldenId
+        const styleHint =
+          locale === 'en-US'
+            ? styleDirection.resolution === 'offer'
+              ? ' Resolve style first (reference → preset → ask among quiet/soft/dense/rail/studio/ink).'
+              : ` Apply styleDirection preset "${styleDirection.preset?.id || 'n/a'}".`
+            : styleDirection.resolution === 'offer'
+              ? ' 先定风格（参考 → 预设 → 请用户从 quiet/soft/dense/rail/studio/ink 选）。'
+              : ` 套用 styleDirection 预设「${styleDirection.preset?.id || 'n/a'}」。`
         if (locale === 'en-US') {
           return goldenId
-            ? `Call get_golden_page("${goldenId}") and mirror it. Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page. includeScaffold returns the golden source when available — not a separate aesthetic template.`
-            : `No golden page for this pattern: use get_pattern + get_design_rules, look up APIs with get_component/get_example, then always run validate_usage and validate_page.`
+            ? `Call get_golden_page("${goldenId}") and mirror structure.${styleHint} Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page.`
+            : `No golden page for this pattern: use get_pattern + get_design_rules.${styleHint} Look up APIs with get_component/get_example, then always run validate_usage and validate_page.`
         }
         return goldenId
-          ? `调用 get_golden_page("${goldenId}") 并镜像结构。不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。includeScaffold 有黄金样例时返回样例源码，不是另一套审美模板。`
-          : `该模式暂无黄金样例：用 get_pattern + get_design_rules，API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
+          ? `调用 get_golden_page("${goldenId}") 并镜像结构。${styleHint} 不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
+          : `该模式暂无黄金样例：用 get_pattern + get_design_rules。${styleHint} API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
       })(),
     }
     if (args.includeScaffold) {
-      const goldenId =
-        best.pattern.goldenPage?.split('/').pop()?.replace(/\.vue$/i, '') ||
-        listGoldenPages().find((item) => item.patternId === best.pattern.id)?.id ||
-        null
+      const goldenId = resolvedGoldenId
       const golden = goldenId ? readGoldenPageSource(goldenId) : null
 
       if (golden) {
@@ -924,6 +969,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
       patternId: payload.record.patternId,
       title: locale === 'en-US' ? payload.record.titleEn : payload.record.title,
       file: payload.record.file,
+      style: payload.record.style ?? null,
+      variantOf: payload.record.variantOf ?? null,
       source: payload.source,
       nextStep:
         locale === 'en-US'
@@ -940,6 +987,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
         patternId: item.patternId,
         title: locale === 'en-US' ? item.titleEn : item.title,
         file: item.file,
+        style: item.style ?? null,
+        variantOf: item.variantOf ?? null,
       })),
     })
   }
@@ -1310,10 +1359,21 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
   function getDesignRules(args: { mode?: string } = {}) {
     const locale = resolveLocale(args.mode)
+    const styles = {
+      resolution: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
+      hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
+      presets: stylePresets.map((preset) => ({
+        id: preset.id,
+        title: locale === 'en-US' ? preset.titleEn : preset.title,
+        summary: locale === 'en-US' ? preset.summaryEn : preset.summary,
+        lanes: preset.lanes,
+      })),
+    }
     if (locale === 'zh-CN') {
       return textResult({
         meta: designRules.meta,
         standards: designRules.standards,
+        styles,
         tokens: designRules.tokens,
         composition: designRules.composition,
         actions: designRules.actions,
@@ -1331,6 +1391,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         discouraged: item.discouragedEn,
         mcp: item.mcp,
       })),
+      styles,
       tokens: {
         colors: ['--m-color-primary', '--m-color-surface', '--m-color-text', '--m-color-border'],
         spacing: '--m-space-*',
@@ -1373,7 +1434,47 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'Form controls should have a visible label or an equivalent accessible name.',
         'Overlays teleport to body by default; only change appendTo for a clear layout constraint.',
         'Prefer documented component variants over deep CSS overrides.',
+        'Resolve visual style via reference → preset → prompt cues → offer quiet/soft/dense/rail/studio/ink; golden pages lock structure, not aesthetics.',
       ],
+    })
+  }
+
+  function listStylePresets(args: { mode?: string } = {}) {
+    const locale = resolveLocale(args.mode)
+    return textResult({
+      resolution: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
+      hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
+      presets: stylePresets.map((preset) => ({
+        id: preset.id,
+        title: locale === 'en-US' ? preset.titleEn : preset.title,
+        summary: locale === 'en-US' ? preset.summaryEn : preset.summary,
+        lanes: preset.lanes,
+        keywords: preset.keywords,
+        listGoldenPage: preset.listGoldenPage ?? null,
+      })),
+    })
+  }
+
+  function getStylePreset(args: { style: string; mode?: string }) {
+    const locale = resolveLocale(args.mode)
+    const preset = findStylePreset(args.style)
+    if (!preset) {
+      return textResult({
+        error: `Style preset not found: ${args.style}`,
+        available: stylePresets.map((item) => item.id),
+      })
+    }
+    return textResult({
+      id: preset.id,
+      title: locale === 'en-US' ? preset.titleEn : preset.title,
+      summary: locale === 'en-US' ? preset.summaryEn : preset.summary,
+      lanes: preset.lanes,
+      keywords: preset.keywords,
+      listGoldenPage: preset.listGoldenPage ?? null,
+      cues: locale === 'en-US' ? preset.cuesEn : preset.cues,
+      apply: locale === 'en-US' ? preset.applyEn : preset.apply,
+      avoid: locale === 'en-US' ? preset.avoidEn : preset.avoid,
+      resolution: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
     })
   }
 
@@ -1632,6 +1733,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'get_pattern',
         'recommend_page',
         'get_design_rules',
+        'list_style_presets',
+        'get_style_preset',
         'recommend_component',
         'list_golden_pages',
         'get_golden_page',
@@ -1656,6 +1759,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
     getPattern,
     recommendPage,
     getDesignRules,
+    listStylePresets,
+    getStylePreset,
     recommendComponent,
     listGoldenPageCatalog,
     getGoldenPage,

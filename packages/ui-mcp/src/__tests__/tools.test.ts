@@ -306,14 +306,106 @@ describe('@morya-ui/mcp handlers', () => {
   })
 
   it('keeps recommend_page focused on pattern matching', () => {
-    const result = read<{ matchedPattern: string; nextStep: string; pageStandards?: unknown; scrollStandards?: unknown }>(
-      handlers.recommendPage({ intent: '用户列表页', pageType: 'list' }),
-    )
+    const result = read<{
+      matchedPattern: string
+      nextStep: string
+      pageStandards?: unknown
+      scrollStandards?: unknown
+      styleDirection?: { resolution: string; candidates: Array<{ id: string }> }
+    }>(handlers.recommendPage({ intent: '用户列表页', pageType: 'list' }))
     expect(result.matchedPattern).toBe('admin-list')
     expect(result.nextStep).toContain('validate_usage')
     expect(result.nextStep).toContain('get_golden_page')
     expect(result.pageStandards).toBeUndefined()
     expect(result.scrollStandards).toBeUndefined()
+    expect(result.styleDirection?.candidates?.length).toBeGreaterThan(0)
+  })
+
+  it('resolves an explicit style preset on recommend_page', () => {
+    const result = read<{
+      styleDirection: { resolution: string; preset: { id: string } | null; guidance: string }
+      goldenPage: string
+    }>(handlers.recommendPage({ intent: '用户列表', pageType: 'list', style: 'soft' }))
+    expect(result.styleDirection.resolution).toBe('preset')
+    expect(result.styleDirection.preset?.id).toBe('soft')
+    expect(result.styleDirection.guidance).toContain('soft')
+    expect(result.goldenPage).toContain('list-page')
+  })
+
+  it('routes dense/rail styles to list craft golden variants', () => {
+    const dense = read<{
+      goldenPage: string
+      scaffold: { goldenPage: string; files: { component: string } }
+      nextStep: string
+    }>(
+      handlers.recommendPage({
+        intent: '监控告警列表',
+        pageType: 'list',
+        style: 'dense',
+        includeScaffold: true,
+      }),
+    )
+    expect(dense.goldenPage).toContain('list-page-dense')
+    expect(dense.scaffold.goldenPage).toBe('list-page-dense')
+    expect(dense.scaffold.files.component).toContain('density="compact"')
+    expect(dense.nextStep).toContain('list-page-dense')
+
+    const rail = read<{
+      goldenPage: string
+      scaffold: { goldenPage: string; files: { component: string } }
+    }>(
+      handlers.recommendPage({
+        intent: '品牌色后台列表',
+        pageType: 'list',
+        style: 'rail',
+        includeScaffold: true,
+      }),
+    )
+    expect(rail.goldenPage).toContain('list-page-rail')
+    expect(rail.scaffold.goldenPage).toBe('list-page-rail')
+    expect(rail.scaffold.files.component).toContain('gp-rail-sider')
+  })
+
+  it('returns dense and rail golden page sources', () => {
+    const dense = read<{ id: string; style: string | null; variantOf: string | null; source: string }>(
+      handlers.getGoldenPage({ page: 'list-page-dense' }),
+    )
+    expect(dense.id).toBe('list-page-dense')
+    expect(dense.style).toBe('dense')
+    expect(dense.variantOf).toBe('list-page')
+    expect(dense.source).toContain('size="small"')
+
+    const rail = read<{ id: string; style: string | null; source: string }>(
+      handlers.getGoldenPage({ page: 'list-page-rail' }),
+    )
+    expect(rail.id).toBe('list-page-rail')
+    expect(rail.style).toBe('rail')
+    expect(rail.source).toContain('color-mix')
+  })
+
+  it('lists style presets with resolution priority', () => {
+    const result = read<{ presets: Array<{ id: string }>; resolution: string[] }>(
+      handlers.listStylePresets({ mode: 'zh-CN' }),
+    )
+    expect(result.presets.map((item) => item.id)).toEqual(
+      expect.arrayContaining(['quiet', 'soft', 'dense', 'rail', 'studio', 'ink']),
+    )
+    expect(result.resolution[0]).toContain('参考')
+  })
+
+  it('reads a style preset by alias', () => {
+    const result = read<{ id: string; apply: string[] }>(
+      handlers.getStylePreset({ style: '柔和留白', mode: 'zh-CN' }),
+    )
+    expect(result.id).toBe('soft')
+    expect(result.apply.length).toBeGreaterThan(0)
+  })
+
+  it('exposes style presets from get_design_rules', () => {
+    const result = read<{ styles: { presets: Array<{ id: string }> } }>(
+      handlers.getDesignRules({ mode: 'zh-CN' }),
+    )
+    expect(result.styles.presets.some((item) => item.id === 'dense')).toBe(true)
   })
 
   it('keeps get_golden_page focused on source code', () => {
@@ -524,9 +616,11 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.counts.decisions).toBeGreaterThan(0)
     expect(result.counts.resources).toBeGreaterThan(100)
     expect(result.counts.resourceTemplates).toBe(3)
-    expect(result.tools).toHaveLength(18)
+    expect(result.tools).toHaveLength(20)
     expect(result.tools).toContain('get_golden_page')
     expect(result.tools).toContain('get_page_snippet')
+    expect(result.tools).toContain('list_style_presets')
+    expect(result.tools).toContain('get_style_preset')
     expect(result.tools).toContain('validate_page')
     expect(result.tools).not.toContain('create_page')
   })

@@ -695,11 +695,14 @@ export const designRules = {
   },
   composition: {
     workflow: [
-      'For full pages: recommend_page → get_golden_page → get_design_rules.',
+      'Resolve style first: reference → named preset → prompt cues → offer quiet/soft/dense/rail/studio/ink (see list_style_presets).',
+      'For full pages: recommend_page({ style? }) → get_golden_page → apply styleDirection → get_design_rules.',
+      'Craft: visual-craft Ops polish or Express design plan; optional frontend-design / impeccable only after contract (companions never replace M*).',
       'For local edits: get_page_snippet(section) for filters/toolbar/form-actions/KPI/scrollable-panel blocks.',
       'Use MLayout fillViewport as the app shell; put MPageContent inside MLayoutContent.',
       'Prefer MPage* components over scoped CSS for filters, toolbars, headers, form surfaces, and KPI cards.',
       'Use MSpace or MFlex for control groups inside MPageFilters; use MPageToolbar for title + primary action.',
+      'Golden pages lock structure/API, not the only aesthetic — do not emit identical quiet chrome every time.',
     ],
     snippets: [
       'list-filters',
@@ -736,6 +739,8 @@ export const designRules = {
     },
     goldenPages: [
       'list-page',
+      'list-page-dense',
+      'list-page-rail',
       'form-page',
       'dashboard-page',
       'login-page',
