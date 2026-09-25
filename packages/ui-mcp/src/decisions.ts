@@ -17,6 +17,8 @@ export interface ComponentDecisionOption {
   recipe: ComponentDecisionRecipe
   antiPatterns: string[]
   antiPatternsEn: string[]
+  /** Page-snippet ids to compose after choosing this option (composition-first). */
+  relatedSnippets?: string[]
 }
 
 export interface ComponentDecision {
@@ -81,7 +83,7 @@ export const componentDecisions: ComponentDecision[] = [
           [
             ['v-model / modelValue 控制开关（不要用 visible）', 'v-model / modelValue for open state (not visible)'],
             ['header 或 title 设弹窗标题', 'header or title for the dialog title'],
-            ['width 约 32rem 适配短表单（见 form-in-dialog 黄金样例）', 'width ~32rem for short forms (see form-in-dialog golden)'],
+            ['width 约 32rem 适配短表单（见 form-in-dialog snippet）', 'width ~32rem for short forms (see form-in-dialog snippet)'],
             ['表单字段用 fluid；主按钮 severity="primary"', 'Form fields use fluid; primary button severity="primary"'],
           ],
           [
@@ -93,6 +95,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['保存可用按钮 @click，或 MForm @submit + type="submit"', 'Save via button @click, or MForm @submit + type="submit"'],
           ],
         ),
+        relatedSnippets: ['form-in-dialog', 'page-header-actions'],
         ...anti([
           ['用普通 Dialog 手写删除确认 → MConfirmDialog', 'Hand-rolled delete confirm in Dialog → MConfirmDialog'],
           ['长多分组配置塞进 Dialog → Form 页或 Drawer', 'Long multi-section config in Dialog → Form page or Drawer'],
@@ -117,6 +120,7 @@ export const componentDecisions: ComponentDecision[] = [
           ],
           [['@close 清理草稿', '@close to clear draft state']],
         ),
+        relatedSnippets: ['form-in-drawer'],
         ...anti([
           ['极短 2–3 字段也用 Drawer → Dialog', 'Tiny 2–3 field form in Drawer → Dialog'],
           ['危险删除只用 Drawer 无确认 → MConfirmDialog', 'Destructive delete in Drawer without confirm → MConfirmDialog'],
@@ -144,6 +148,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['提交按钮 type="submit" + severity="primary"', 'Submit button type="submit" + severity="primary"'],
           ],
         ),
+        relatedSnippets: ['page-content-form', 'form-header', 'form-body', 'form-actions'],
         ...anti([
           ['列表短 CRUD 开独立路由 → form-in-dialog', 'Short list CRUD as a route → form-in-dialog'],
           ['表单外再套装饰性 MCard → 用 PageSection form', 'Extra decorative MCard around form → PageSection form'],
@@ -202,6 +207,7 @@ export const componentDecisions: ComponentDecision[] = [
           [['#footer 主/次操作', '#footer primary / secondary actions']],
           [['@close / @update:modelValue', '@close / @update:modelValue']],
         ),
+        relatedSnippets: ['form-in-dialog'],
         ...anti([
           ['Dialog + 手写「确定删除」→ MConfirmDialog', 'Dialog + hand-rolled Delete? → MConfirmDialog'],
           ['v-model:visible → v-model / modelValue', 'v-model:visible → v-model / modelValue'],
@@ -226,6 +232,7 @@ export const componentDecisions: ComponentDecision[] = [
           [['#footer 操作区', '#footer actions']],
           [['@close', '@close']],
         ),
+        relatedSnippets: ['form-in-drawer'],
         ...anti([['简单 Yes/No 确认用 Drawer → ConfirmDialog / ConfirmPopup', 'Simple Yes/No in Drawer → ConfirmDialog / ConfirmPopup']]),
       },
       {
@@ -719,13 +726,29 @@ export const componentDecisions: ComponentDecision[] = [
         avoidWhenEn: ['Regular form field grouping', 'KPI metric display'],
         recipe: recipe(
           [
-            ['内放 MInput / MSelect 等筛选控件', 'Place MInput / MSelect filters inside'],
-            ['可 collapsible + #advanced', 'Optional collapsible + #advanced'],
-            ['不要外包 MCard', 'Do not wrap in MCard'],
+            ['内放 MInput / MSelect；同行用 MSpace wrap', 'Place MInput / MSelect inside; peers in MSpace wrap'],
+            ['查询/重置放 #actions（与折叠切换同列）', 'Query/reset in #actions (trailing with toggle)'],
+            ['默认 variant="filled"；dense craft 用 plain + size="small"', 'Default variant="filled"; dense craft: plain + size="small"'],
+            ['有次要条件：collapsible + v-model:expanded + #advanced', 'Secondary fields: collapsible + v-model:expanded + #advanced'],
+            ['toggle 默认「高级筛选/收起」+ chevron；已选用 FilterChips', 'Toggle defaults to Advanced/Collapse + chevron; active via FilterChips'],
           ],
-          [['#advanced 高级筛选', '#advanced for advanced filters']],
+          [
+            ['#actions 查询/重置', '#actions for query / reset'],
+            ['#advanced 高级筛选', '#advanced for advanced filters'],
+            ['#active 可选；更常见是下方 FilterChips', '#active optional; sibling FilterChips is more common'],
+          ],
         ),
-        ...anti([['表单字段组用 PageFilters → PageSection form / Fieldset', 'Form field groups via PageFilters → PageSection form / Fieldset']]),
+        relatedSnippets: [
+          'list-filters-stack',
+          'list-filters',
+          'list-filters-collapsible',
+          'list-filter-chips',
+          'list-filters-dense',
+        ],
+        ...anti([
+          ['表单字段组用 PageFilters → PageSection form / Fieldset', 'Form field groups via PageFilters → PageSection form / Fieldset'],
+          ['手写已选条 → list-filter-chips / list-filters-stack', 'Hand-rolled active bar → list-filter-chips / list-filters-stack'],
+        ]),
       },
       {
         component: 'PageToolbar',
@@ -1256,6 +1279,7 @@ export const componentDecisions: ComponentDecision[] = [
           ],
           [['#extra 放下一步按钮（创建…）', '#extra for next-step button (Create…)']],
         ),
+        relatedSnippets: ['empty-block'],
         ...anti([
           ['403/404 用 Empty → Result', '403/404 via Empty → Result'],
           ['#action → #extra', '#action → #extra'],
@@ -1283,6 +1307,7 @@ export const componentDecisions: ComponentDecision[] = [
           ],
           [['#footer 逃逸/下一步按钮', '#footer escape / next actions']],
         ),
+        relatedSnippets: ['result-block'],
         ...anti([
           ['表格无数据用 Result → Empty', 'Table no-rows via Result → Empty'],
           ['操作插槽写成 #extra → #footer', 'Actions slot #extra → #footer'],
@@ -1321,6 +1346,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['危险项用文档 severity / 确认流', 'Danger items: docs severity / confirm flow'],
           ],
         ),
+        relatedSnippets: ['row-actions-menu', 'list-row-actions'],
         ...anti([['表单枚举用 Dropdown → Select', 'Form enum via Dropdown → Select']]),
       },
       {
@@ -1420,6 +1446,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['大多数操作反馈的默认选择', 'Default for most operation feedback'],
           ],
         ),
+        relatedSnippets: ['confirm-delete', 'form-in-dialog'],
         ...anti([
           ["toast.add({ summary: '已保存' }) → message.success('已保存')", "toast.add({ summary: 'Saved' }) → message.success('Saved')"],
           ['<MMessage severity> 当内嵌 Alert → errorMessage / role="alert"', '<MMessage severity> as inline Alert → errorMessage / role="alert"'],
@@ -1456,6 +1483,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['<MMessage> 只是 message 宿主，不是内嵌 Alert', '<MMessage> is the message host, not an inline Alert'],
           ],
         ),
+        relatedSnippets: ['auth-split-shell'],
         ...anti([
           ['登录失败只闪 Toast → 表单区 alert / errorMessage', 'Login failure only via Toast → form alert / errorMessage'],
           ['编造 MMessage severity 插槽 Alert API', 'Invented MMessage severity slot Alert API'],
@@ -1504,6 +1532,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['@reject 关闭', '@reject to dismiss'],
           ],
         ),
+        relatedSnippets: ['confirm-delete'],
         ...anti([
           ['普通 Dialog 手写「确定/取消」删除 → ConfirmDialog', 'Hand-rolled Dialog Yes/No delete → ConfirmDialog'],
           ['编辑表单误用 ConfirmDialog → Dialog + Form', 'Edit form via ConfirmDialog → Dialog + Form'],
@@ -1531,6 +1560,7 @@ export const componentDecisions: ComponentDecision[] = [
           undefined,
           [['@accept / @reject', '@accept / @reject']],
         ),
+        relatedSnippets: ['confirm-delete'],
         ...anti([['无 target 的全局危险确认 → ConfirmDialog', 'Global dangerous confirm without target → ConfirmDialog']]),
       },
     ],

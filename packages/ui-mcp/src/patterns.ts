@@ -13,6 +13,8 @@ export interface PagePattern {
   descriptionEn: string
   keywords: string[]
   goldenPage?: string
+  /** Composition-first: prefer these page-snippet ids over cloning the golden page. */
+  suggestedSnippets?: string[]
   components: PatternComponent[]
   structure: string[]
   layout: Record<string, string>
@@ -29,6 +31,16 @@ export const pagePatterns: PagePattern[] = [
     description: '用于资源管理、设备管理、用户管理等带筛选和行操作的数据列表。',
     descriptionEn: 'A resource-management list with filters, actions, row operations, and pagination.',
     goldenPage: 'list-page',
+    suggestedSnippets: [
+      'layout-app-shell',
+      'page-header-actions',
+      'list-filters-stack',
+      'list-table',
+      'list-status-dot',
+      'empty-block',
+      'form-in-dialog',
+      'confirm-delete',
+    ],
     keywords: [
       '列表',
       '表格',
@@ -117,6 +129,7 @@ export const pagePatterns: PagePattern[] = [
     description: '用于创建或编辑业务对象，包含分组字段、校验和提交状态。',
     descriptionEn: 'A create or edit page with grouped fields, validation, and submit states.',
     goldenPage: 'form-page',
+    suggestedSnippets: ['page-content-form', 'form-header', 'form-body', 'form-actions'],
     keywords: ['表单', '新增', '编辑', '创建', '配置', '设置', 'form', 'create', 'edit', 'settings'],
     components: [
       { component: 'ConfigProvider', role: '应用根包裹' },
@@ -178,6 +191,7 @@ export const pagePatterns: PagePattern[] = [
     description: '从列表触发的短表单 CRUD：留在列表页，用 MDialog 承载 MForm。',
     descriptionEn: 'Short CRUD forms launched from a list: keep the list page and host MForm in MDialog.',
     keywords: ['弹窗表单', '新建弹窗', '编辑弹窗', '列表新建', 'dialog form', 'modal form', 'inline create', 'inline edit'],
+    suggestedSnippets: ['form-in-dialog', 'page-header-actions', 'list-table'],
     components: [
       { component: 'Dialog', role: '承载短表单' },
       { component: 'Form', role: '声明式校验' },
@@ -218,6 +232,13 @@ export const pagePatterns: PagePattern[] = [
     description: '用于展示关键指标、趋势、告警和需要优先处理的业务信息。',
     descriptionEn: 'A workspace for KPIs, trends, alerts, and prioritized operational information.',
     keywords: ['仪表盘', '工作台', '监控', '指标', '趋势', '告警', 'dashboard', 'monitoring', 'kpi', 'analytics'],
+    suggestedSnippets: [
+      'layout-app-shell',
+      'page-header-actions',
+      'dashboard-kpi-grid',
+      'dashboard-chart-card',
+      'dashboard-recent-table',
+    ],
     components: [
       { component: 'ConfigProvider', role: '应用根包裹' },
       { component: 'Layout', role: '页面骨架' },
@@ -285,6 +306,7 @@ export const pagePatterns: PagePattern[] = [
     interactionRules: ['显示未保存修改状态', '保存成功使用 message.success 单行反馈；仅有 summary+detail 时用 toast', '保存失败保留输入并显示字段或页面级错误', '切换 Tab 不应意外丢失未保存输入'],
     avoid: ['不要把所有设置塞进一个超长表单', '不要用 placeholder 代替配置项 label', '不要隐藏影响范围较大的配置说明'],
     goldenPage: 'settings-page',
+    suggestedSnippets: ['page-content-form', 'form-header', 'form-body', 'form-actions'],
   },
   {
     id: 'empty-state',
@@ -293,6 +315,7 @@ export const pagePatterns: PagePattern[] = [
     description: '用于首次使用、搜索无结果、资源已清空或暂时没有内容的场景。',
     descriptionEn: 'For first use, no search results, empty resources, or temporarily unavailable content.',
     goldenPage: 'empty-state',
+    suggestedSnippets: ['empty-block'],
     keywords: ['空状态', '无数据', '无结果', '首次使用', 'empty', 'no results', 'no data', 'zero state'],
     components: [
       { component: 'PageContent', role: '承载空态的内容区', required: false },
@@ -323,6 +346,7 @@ export const pagePatterns: PagePattern[] = [
     description: '用于登录、注册、找回密码和二次认证流程。',
     descriptionEn: 'For login, registration, password recovery, and second-factor authentication flows.',
     goldenPage: 'login-page',
+    suggestedSnippets: ['auth-split-shell'],
     keywords: ['登录', '注册', '认证', '密码', '验证码', 'login', 'register', 'authentication', 'password', 'otp'],
     components: [
       { component: 'ConfigProvider', role: '应用根包裹' },
@@ -355,6 +379,7 @@ export const pagePatterns: PagePattern[] = [
     description: '用于产品官网、发布页、定价前导等公开营销表面；首屏单一任务，控件仍用 morya-ui。',
     descriptionEn: 'Public marketing surfaces (product home, launch, pre-pricing). One job in the first viewport; controls still use morya-ui.',
     goldenPage: 'landing-page',
+    suggestedSnippets: [],
     keywords: [
       '落地页',
       '营销',
@@ -388,8 +413,8 @@ export const pagePatterns: PagePattern[] = [
     },
     styleRules: [
       '交互控件使用 MButton / MTag / MAccordion 等',
-      '颜色与间距使用 --m-*，可用 color-mix 做氛围',
-      '避开紫渐变、奶油衬线陶土、报纸风等 AI 默认脸（除非 brief 指定）',
+      '颜色与间距使用 --m-*；氛围跟已选 style preset（默认扁平/简洁，勿擅自渐变）',
+      '未点名 expressive 预设时：禁止紫蓝 aurora、奶油衬线陶土、报纸风、霓虹、毛玻璃默认脸',
       '首屏不要堆统计条、促销胶囊、日程碎片',
     ],
     interactionRules: ['CTA 指向明确下一步', 'FAQ 用 Accordion 降低长页噪声', '尊重 prefers-reduced-motion 若加动画'],
@@ -417,6 +442,7 @@ export const pagePatterns: PagePattern[] = [
     interactionRules: ['进入下一步前只校验当前步骤', '返回上一步保留输入', '完成前展示摘要或确认', '刷新和离开时处理未完成状态'],
     avoid: ['不要把所有字段一次性隐藏在一个超长页面', '不要允许跳过有前置依赖的步骤', '不要让完成按钮在每一步都使用相同文案'],
     goldenPage: 'wizard-form',
+    suggestedSnippets: ['wizard-steps', 'form-body', 'result-block'],
   },
   {
     id: 'detail-page',
@@ -468,6 +494,7 @@ export const pagePatterns: PagePattern[] = [
       '不要让详情页的操作按钮分散在多个无关区域',
     ],
     goldenPage: 'detail-page',
+    suggestedSnippets: ['detail-toolbar', 'form-in-dialog', 'confirm-delete', 'list-status-dot'],
   },
   {
     id: 'result-page',
@@ -525,6 +552,7 @@ export const pagePatterns: PagePattern[] = [
       '不要使用已移除的 #extra 插槽；操作用 #footer',
     ],
     goldenPage: 'result-page',
+    suggestedSnippets: ['result-block'],
   },
 ]
 
@@ -695,17 +723,20 @@ export const designRules = {
   },
   composition: {
     workflow: [
-      'Resolve style first: reference → named preset → prompt cues → offer quiet/soft/dense/rail/studio/ink (see list_style_presets).',
-      'For full pages: recommend_page({ style? }) → get_golden_page → apply styleDirection → get_design_rules.',
+      'Resolve style first: user reference/description → prompt cues → ask when uncertain (get_style_direction; no preset catalog).',
+      'For full pages: recommend_page({ style? }) → suggestedSnippets / get_page_snippet → optional get_golden_page → apply styleDirection.',
       'Craft: visual-craft Ops polish or Express design plan; optional frontend-design / impeccable only after contract (companions never replace M*).',
-      'For local edits: get_page_snippet(section) for filters/toolbar/form-actions/KPI/scrollable-panel blocks.',
+      'For local edits: get_page_snippet(section) — list filters prefer list-filters-stack; also toolbar/form-actions/KPI/scrollable-panel.',
       'Use MLayout fillViewport as the app shell; put MPageContent inside MLayoutContent.',
       'Prefer MPage* components over scoped CSS for filters, toolbars, headers, form surfaces, and KPI cards.',
-      'Use MSpace or MFlex for control groups inside MPageFilters; use MPageToolbar for title + primary action.',
+      'Use MSpace or MFlex for control groups inside MPageFilters; default filter composition is list-filters-stack.',
       'Golden pages lock structure/API, not the only aesthetic — do not emit identical quiet chrome every time.',
     ],
     snippets: [
+      'list-filters-stack',
       'list-filters',
+      'list-filters-dense',
+      'list-filter-chips',
       'list-toolbar',
       'list-table',
       'list-row-actions',

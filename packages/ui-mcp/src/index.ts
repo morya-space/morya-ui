@@ -159,12 +159,12 @@ register(
 
 register(
   'recommend_page',
-  'Recommend a page pattern and component composition from product intent. Pass style for a visual preset (quiet/soft/dense/rail/studio/ink). Pass includeScaffold: true for starter Vue code.',
+  'Recommend a page pattern and component composition from product intent. Pass style as free-text user description when they specified a look (no preset catalog). Pass includeScaffold: true for starter Vue code.',
   {
     intent: z.string().min(1),
     pageType: z.string().optional(),
     features: z.array(z.string()).max(20).optional(),
-    style: z.string().optional().describe('Optional visual style preset id or alias, e.g. soft / dense / 柔和留白.'),
+    style: z.string().optional().describe('Optional free-text style description from the user (not a preset id).'),
     mode: z.string().optional(),
     includeScaffold: z.boolean().optional(),
   },
@@ -173,26 +173,20 @@ register(
 
 register(
   'get_design_rules',
-  'Return design-token, style presets, semantic-action, accessibility, and composition rules for generated pages.',
+  'Return design-token, style-direction rules, semantic-action, accessibility, and composition rules for generated pages.',
   { mode: z.string().optional() },
   async (args) => handlers.getDesignRules(args),
 )
 
 register(
-  'list_style_presets',
-  'List selectable page visual styles (quiet/soft/dense/rail/studio/ink) and resolution priority (reference → preset → prompt → ask).',
-  { mode: z.string().optional() },
-  async (args) => handlers.listStylePresets(args),
-)
-
-register(
-  'get_style_preset',
-  'Read apply/avoid cues for one visual style preset (quiet, soft, dense, rail, studio, ink, or Chinese aliases).',
+  'get_style_direction',
+  'Resolve visual style direction: follow user reference/description, infer from clear cues, or ask when uncertain. No named preset catalog.',
   {
-    style: z.string().min(1).describe('Style preset id or alias.'),
+    intent: z.string().optional(),
+    style: z.string().optional().describe('Free-text style description from the user.'),
     mode: z.string().optional(),
   },
-  async (args) => handlers.getStylePreset(args),
+  async (args) => handlers.getStyleDirection(args),
 )
 
 register(
@@ -217,7 +211,7 @@ register(
 
 register(
   'get_golden_page',
-  'Read a golden page Vue source sample (list-page, list-page-dense, list-page-rail, form-page, dashboard-page, login-page, landing-page, empty-state, detail-page, form-in-dialog, result-page, settings-page, wizard-form). List craft variants: dense/rail when style is dense/rail; soft structure is list-page.',
+  'Read a golden page Vue source sample (list-page, list-page-dense, list-page-rail, form-page, dashboard-page, login-page, landing-page, empty-state, detail-page, form-in-dialog, result-page, settings-page, wizard-form). List craft variants: dense/compact cues → dense; rail/brand-sider cues → rail; otherwise list-page.',
   {
     page: z.string().min(1),
     mode: z.string().optional(),

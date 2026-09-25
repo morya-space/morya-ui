@@ -1,301 +1,72 @@
 /**
- * Named visual directions for generated pages.
- * Structure still comes from golden pages; presets only change craft (density, chrome, atmosphere).
+ * Visual style direction for generated pages — no named preset catalog.
+ * Structure still comes from golden pages; look follows the user’s reference / words.
  */
-
-export interface StylePreset {
-  id: string
-  title: string
-  titleEn: string
-  summary: string
-  summaryEn: string
-  lanes: Array<'ops' | 'account' | 'flow' | 'express' | 'system'>
-  keywords: string[]
-  cues: string[]
-  cuesEn: string[]
-  apply: string[]
-  applyEn: string[]
-  avoid: string[]
-  avoidEn: string[]
-  /** Preferred list golden craft variant when pattern is admin-list. */
-  listGoldenPage?: string
-}
 
 /** How agents pick a visual direction before coding. */
 export const styleResolution = {
   priorityZh: [
-    '用户给了参考样式（截图 / 设计稿 / 现有页 / URL /「像 XX」）→ 提取层级、密度、表面、强调色，映射到 --m-* + M*，不要换组件库',
-    '用户点名了风格 id / 中文名（如 soft、柔和留白）→ 套用该预设',
-    '提示词里有气质/行业线索（严谨、活泼、医疗、金融…）→ 推断最接近的预设，并在回复里点名；可选 ui-ux-pro-max 只搜关键词',
-    '以上都没有 → 用一句话列出 3～4 个可选风格请用户选；若用户明确说「直接写」→ 按域启发式选一个，不要永远 quiet',
-    '已安装 frontend-design / impeccable 时：结构与契约仍用 morya-ui-pages + MCP；companion 只加深审美/抛光（见 skill optional-companions）',
+    '【最高优先】用户给了明确参考（截图 / 设计稿 / 现有页 / URL /「像 XX」）或明确描述了风格 → 必须按用户指定执行，映射到 --m-* + M*，不要换组件库、不要改成另一套脸',
+    '用户未点名、但提示词有明确气质/行业线索 → 按提示推断并在回复里用一句话点名你理解的风格；装饰性毛玻璃/霓虹/整页渐变等仅当提示明确要求',
+    '不确定（无参考、无线索）→ 必须先向用户询问一次，请其说明或贴参考；在用户回答前不要擅自发明完整视觉',
+    '用户回答「你看着办 / 直接写」且仍无线索 → 用克制、扁平、token 实色的安静后台脸，并在回复里说明；禁止默认毛玻璃/霓虹/紫渐变/新拟态',
+    '已安装 frontend-design / impeccable 时：结构与契约仍用 morya-ui-pages + MCP；companion 只加深已定方向，不得推翻用户指定或未询问就换脸',
   ],
   priorityEn: [
-    'User supplied a reference (screenshot / mock / existing page / URL / “like X”) → extract hierarchy, density, surfaces, accent; map to --m-* + M*; never switch UI kits',
-    'User named a style id / label (e.g. soft) → apply that preset',
-    'Prompt has mood / industry cues → infer the closest preset and name it; optional ui-ux-pro-max for keywords only',
-    'None of the above → ask once with 3–4 style options; if user says “just ship it” → pick by domain heuristic, do not always use quiet',
-    'If frontend-design / impeccable are installed: structure + contract still from morya-ui-pages + MCP; companions only deepen taste/polish (see skill optional-companions)',
+    '【Highest】User gave a clear reference (screenshot / mock / page / URL / “like X”) or explicitly described a style → follow it; map to --m-* + M*; never switch kits or substitute another look',
+    'No explicit description, but the prompt has clear mood / industry cues → infer and state your reading in one sentence; decorative glass/neon/full-page gradients only when clearly requested',
+    'Uncertain (no reference, vague cues) → must ask once for a description or reference before inventing the full look',
+    'User says “your call / just ship” with still no cues → use a quiet flat on-token admin face and say so; never default glass/neon/purple-mesh/neumorph',
+    'If frontend-design / impeccable are installed: structure + contract still from morya-ui-pages + MCP; companions only deepen the chosen direction — never override an explicit user choice or invent a look without asking',
   ],
   hardRulesZh: [
-    '黄金样例管区块顺序与 API，不管死审美；结构可镜像，视觉必须跟参考 / 风格 / 提示词走',
-    '任何风格仍只用 morya-ui 的 M* 与 --m-*（可用 color-mix），禁止第二套 UI kit 与裸 hex 主题色',
-    'Ops 页不要做成营销落地页；Express 不要假装后台 CRUD',
+    '用户明确参考 / 明确描述优先于一切 companion 与默认启发式',
+    '没有命名风格预设表；不要把页面硬套进固定「风格 id」',
+    '黄金样例管区块顺序与 API，不管死审美；结构可镜像，视觉必须跟参考 / 用户描述 / 已说明的推断走',
+    '任何方向仍只用 morya-ui 的 M* 与 --m-*（可用 color-mix），禁止第二套 UI kit 与裸 hex 主题色',
+    '风格不确定时先问用户，禁止静默套一套 AI 默认脸（紫蓝 aurora、奶油衬线陶土、霓虹、未要求的毛玻璃/渐变）',
     'Frontend Design / Impeccable / UI-UX-Pro-Max 与本 skill 冲突时，以 morya-ui-pages + DESIGN.md + MCP 为准',
   ],
   hardRulesEn: [
-    'Golden pages lock block order and APIs, not the only aesthetic; mirror structure, follow reference / style / prompt for craft',
-    'Every style still uses morya-ui M* and --m-* only (color-mix OK); no second UI kit or raw hex theme colors',
-    'Ops pages must not become marketing landings; Express must not pretend to be admin CRUD',
+    'An explicit user reference or style description outranks every companion and every heuristic',
+    'There is no named style-preset catalog; do not force pages into fixed style ids',
+    'Golden pages lock block order and APIs, not the only aesthetic; mirror structure, follow reference / user words / stated inference for craft',
+    'Every look still uses morya-ui M* and --m-* only (color-mix OK); no second UI kit or raw hex theme colors',
+    'When style is uncertain, ask first — never silently apply an AI-default face (purple aurora, cream+serif+terracotta, neon, unsolicited glass/gradients)',
     'When Frontend Design / Impeccable / UI-UX-Pro-Max conflict with this skill, morya-ui-pages + DESIGN.md + MCP win',
   ],
 }
 
-export const stylePresets: StylePreset[] = [
-  {
-    id: 'quiet',
-    title: '克制经典',
-    titleEn: 'Quiet classic',
-    summary: '接近黄金样例：扁平 chrome、单主按钮、少装饰，适合严肃后台。',
-    summaryEn: 'Closest to golden pages: flat chrome, one primary, little decoration — serious admin.',
-    lanes: ['ops', 'system'],
-    keywords: ['quiet', 'classic', '克制', '经典', '默认', '朴素', '严肃', 'enterprise', 'plain'],
-    cues: ['扁平表面', 'MPageFilters plain 或轻 filled', '默认 density', '无侧栏氛围色'],
-    cuesEn: ['Flat surfaces', 'Plain or light filled filters', 'Default density', 'No sider wash'],
-    apply: [
-      '镜像 list/form 黄金结构与 Ops polish',
-      'MPageContent 默认 density；筛选可 plain',
-      '不要额外氛围渐变或大段说明',
-    ],
-    applyEn: [
-      'Mirror list/form golden structure + Ops polish',
-      'Default MPageContent density; filters may stay plain',
-      'No atmosphere gradients or long marketing copy',
-    ],
-    avoid: ['营销 hero', '多主色块抢焦点'],
-    avoidEn: ['Marketing hero', 'Competing accent blocks'],
-    listGoldenPage: 'list-page',
-  },
-  {
-    id: 'soft',
-    title: '柔和留白',
-    titleEn: 'Soft spacious',
-    summary: '更松的间距与说明文案，筛选带浅底，表格仍干净，适合运营/内容后台。',
-    summaryEn: 'Roomier spacing and descriptions, soft filter band, clean table — ops/content admin.',
-    lanes: ['ops', 'account', 'flow'],
-    keywords: ['soft', 'spacious', '柔和', '留白', '轻松', '友好', '运营', '内容', 'breathing'],
-    cues: ['MPageContent density="spacious"', 'MPageFilters variant="filled"', 'MPageHeader 带短 description', '状态用 MStatus'],
-    cuesEn: ['MPageContent density="spacious"', 'Filled filters', 'Short header description', 'MStatus for row state'],
-    apply: [
-      '标题下保留一句域说明',
-      '筛选用 filled；高级项 collapsible',
-      '行操作 text/small；空态 MEmpty 带下一步',
-    ],
-    applyEn: [
-      'Keep one domain sentence under the title',
-      'Filled filters; collapsible advanced fields',
-      'Text/small row actions; MEmpty with a next step',
-    ],
-    avoid: ['compact 挤成工具台', '装饰 Card 包表格'],
-    avoidEn: ['Forced compact toolkit feel', 'Decorative Card around the table'],
-    listGoldenPage: 'list-page',
-  },
-  {
-    id: 'dense',
-    title: '高密度工具台',
-    titleEn: 'Dense toolkit',
-    summary: '紧凑控件与表格，信息优先，适合监控、运维、交易员类界面。',
-    summaryEn: 'Tight controls and tables, information-first — monitoring, ops, trader-like UIs.',
-    lanes: ['ops'],
-    keywords: ['dense', 'compact', '高密', '紧凑', '工具台', '运维', '监控', 'power user', 'trading'],
-    cues: ['MPageContent density="compact"', '表格 size="small"', '筛选控件更窄', '少 description'],
-    cuesEn: ['Compact page density', 'size="small" table', 'Narrower filters', 'Minimal descriptions'],
-    apply: [
-      'compact + 小尺寸表格/按钮',
-      '筛选一行尽量排完；高级项折叠',
-      '全视口主列表可考虑 fill',
-    ],
-    applyEn: [
-      'Compact density + small table/buttons',
-      'Fit filters on one row; collapse advanced',
-      'Full-viewport main lists may use fill',
-    ],
-    avoid: ['大留白 KPI 条', '营销文案腔'],
-    avoidEn: ['Large airy KPI strips', 'Marketing voice'],
-    listGoldenPage: 'list-page-dense',
-  },
-  {
-    id: 'rail',
-    title: '侧栏强调',
-    titleEn: 'Accent rail',
-    summary: '侧栏/顶栏用 primary 的 token 氛围，主内容仍克制，适合有品牌色的 B 端。',
-    summaryEn: 'Token wash on sider/header, calm content — branded B2B shells.',
-    lanes: ['ops', 'account'],
-    keywords: ['rail', 'accent', '侧栏', '强调', '品牌', 'brand', 'colored sider', '主色'],
-    cues: [
-      '侧栏或顶栏 scoped 背景用 color-mix(primary)',
-      '菜单项全带 icon',
-      '内容区保持安静',
-    ],
-    cuesEn: [
-      'Sider/header scoped bg via color-mix(primary)',
-      'Menu icons on every item',
-      'Content area stays calm',
-    ],
-    apply: [
-      '仅 chrome 做氛围，不把表格做成营销块',
-      '主按钮仍唯一 primary',
-      '颜色只用 --m-* / color-mix',
-    ],
-    applyEn: [
-      'Atmosphere on chrome only — not on the data table',
-      'Still one filled primary',
-      'Colors only via --m-* / color-mix',
-    ],
-    avoid: ['整页渐变背景', '紫蓝 AI 默认渐变'],
-    avoidEn: ['Full-page gradient backgrounds', 'Purple-indigo AI default gradients'],
-    listGoldenPage: 'list-page-rail',
-  },
-  {
-    id: 'studio',
-    title: '工作室呼吸感',
-    titleEn: 'Studio breath',
-    summary: '更强的标题层级与章节感，适合设计/协作/知识类产品后台。',
-    summaryEn: 'Stronger title hierarchy and sectioning — design, collab, knowledge products.',
-    lanes: ['ops', 'flow', 'express'],
-    keywords: ['studio', 'editorial', '工作室', '呼吸', '设计', '协作', '知识', 'creative', 'craft'],
-    cues: [
-      'MPageHeader 标题更醒目 + description',
-      '可用 MPageSection 分组次要块',
-      '空态/引导更精致（仍 MEmpty）',
-    ],
-    cuesEn: [
-      'Stronger MPageHeader + description',
-      'MPageSection for secondary groups',
-      'Richer empty/guidance still via MEmpty',
-    ],
-    apply: [
-      '层级靠字号与间距，不靠花哨阴影',
-      '可加 1 个 token 氛围（径向淡彩）',
-      '表格保持直接放 PageContent',
-    ],
-    applyEn: [
-      'Hierarchy via type and space, not heavy shadows',
-      'Optional one token wash (radial tint)',
-      'Keep the table directly in PageContent',
-    ],
-    avoid: ['报纸多栏排版', '一排实心按钮'],
-    avoidEn: ['Broadsheet multi-column look', 'Wall of filled buttons'],
-    listGoldenPage: 'list-page',
-  },
-  {
-    id: 'ink',
-    title: '线框极简',
-    titleEn: 'Ink minimal',
-    summary: '强调边框与结构线，少填充，适合偏工具/文档气质的界面。',
-    summaryEn: 'Border-forward, little fill — tool/docs-like calm.',
-    lanes: ['ops', 'system', 'flow'],
-    keywords: ['ink', 'minimal', '线框', '极简', 'border', 'outline', '文档', 'docs', 'hairline'],
-    cues: [
-      'MPageFilters variant="plain"',
-      'MTable bordered',
-      '少用 filled 表面与 muted section',
-    ],
-    cuesEn: [
-      'Plain filters',
-      'Bordered table',
-      'Few filled/muted surfaces',
-    ],
-    apply: [
-      '用边框分区，不用大底色块',
-      '字重克制；主按钮仍唯一',
-      '避免零圆角报纸风（反 AI 默认）',
-    ],
-    applyEn: [
-      'Partition with borders, not large fills',
-      'Restrained weight; one primary button',
-      'Avoid zero-radius broadsheet (anti AI-default)',
-    ],
-    avoid: ['暖奶油衬线套装', '多层阴影当个性'],
-    avoidEn: ['Warm cream + serif kit', 'Multi-layer shadows as personality'],
-    listGoldenPage: 'list-page',
-  },
-]
-
-const aliasToId: Record<string, string> = {
-  quiet: 'quiet',
-  classic: 'quiet',
-  克制: 'quiet',
-  经典: 'quiet',
-  默认: 'quiet',
-  soft: 'soft',
-  spacious: 'soft',
-  柔和: 'soft',
-  留白: 'soft',
-  柔和留白: 'soft',
-  dense: 'dense',
-  compact: 'dense',
-  高密: 'dense',
-  紧凑: 'dense',
-  工具台: 'dense',
-  rail: 'rail',
-  accent: 'rail',
-  侧栏: 'rail',
-  强调: 'rail',
-  品牌: 'rail',
-  studio: 'studio',
-  editorial: 'studio',
-  工作室: 'studio',
-  呼吸: 'studio',
-  ink: 'ink',
-  minimal: 'ink',
-  线框: 'ink',
-  极简: 'ink',
-}
-
-export function findStylePreset(idOrAlias: string): StylePreset | undefined {
-  const raw = idOrAlias.trim()
-  if (!raw) return undefined
-  const key = raw.toLowerCase().replace(/[-_\s]/g, '')
-  const aliased = aliasToId[key]
-  if (aliased) return stylePresets.find((p) => p.id === aliased)
-
-  const byId = stylePresets.find((p) => p.id.replace(/[-_\s]/g, '') === key)
-  if (byId) return byId
-
-  const ranked = stylePresets
-    .map((preset) => ({ preset, score: scoreStylePreset(preset, raw) }))
-    .sort((a, b) => b.score - a.score)
-  return ranked[0] && ranked[0].score >= 25 ? ranked[0].preset : undefined
-}
-
-export function scoreStylePreset(preset: StylePreset, query: string): number {
-  const normalized = query.toLowerCase().trim()
-  if (!normalized) return 0
-  let score = 0
-  if (normalized === preset.id || normalized.includes(preset.id)) score += 50
-  for (const keyword of preset.keywords) {
-    const key = keyword.toLowerCase()
-    if (normalized === key) score += 40
-    else if (normalized.includes(key)) score += 12
-  }
-  if (normalized.includes(preset.title.toLowerCase())) score += 25
-  if (normalized.includes(preset.titleEn.toLowerCase())) score += 25
-  return score
-}
+export type StyleResolutionKind = 'explicit' | 'inferred' | 'ask'
 
 export interface StyleDirectionResult {
-  resolution: 'preset' | 'inferred' | 'offer'
-  preset?: StylePreset
+  resolution: StyleResolutionKind
+  /** Free-text summary of the direction (user words or inferred reading). */
+  summary?: string
   confidence: number
-  candidates: Array<{ id: string; title: string; titleEn: string; score: number }>
   guidanceZh: string
   guidanceEn: string
 }
 
+/** List golden craft keywords only (density / sider chrome) — not a style catalog. */
+const denseHints = /dense|compact|高密|紧凑|工具台|监控列表|cms/i
+const railHints = /rail|侧栏强调|品牌侧栏|colored\s*sider|accent\s*rail/i
+
 /**
- * Resolve a named style from an explicit id or free-text intent.
- * Reference styles are handled by the agent (cannot be detected from text alone).
+ * Pick list golden craft variant from free-text style/intent.
+ * Returns null to keep the canonical list-page.
+ */
+export function resolveListCraftVariant(text: string | null | undefined): 'list-page-dense' | 'list-page-rail' | null {
+  const raw = (text || '').trim()
+  if (!raw) return null
+  if (railHints.test(raw)) return 'list-page-rail'
+  if (denseHints.test(raw)) return 'list-page-dense'
+  return null
+}
+
+/**
+ * Resolve visual direction from an optional free-text style string and/or intent.
+ * No preset catalog — explicit user words win; otherwise ask or carefully infer.
  */
 export function resolveStyleDirection(args: {
   intent?: string
@@ -303,55 +74,66 @@ export function resolveStyleDirection(args: {
 }): StyleDirectionResult {
   const explicit = args.style?.trim()
   if (explicit) {
-    const preset = findStylePreset(explicit)
-    if (preset) {
-      return {
-        resolution: 'preset',
-        preset,
-        confidence: 100,
-        candidates: [{ id: preset.id, title: preset.title, titleEn: preset.titleEn, score: 100 }],
-        guidanceZh: `已选风格「${preset.title}」(${preset.id})。在黄金结构上套用该预设的 apply，并遵守 avoid。`,
-        guidanceEn: `Style “${preset.titleEn}” (${preset.id}) selected. Apply its cues on the golden structure; honor avoid.`,
-      }
+    return {
+      resolution: 'explicit',
+      summary: explicit,
+      confidence: 100,
+      guidanceZh: `用户已指定风格方向：「${explicit}」。在黄金结构上落实到 M* + --m-*，不要换成另一套脸。`,
+      guidanceEn: `User specified style direction: “${explicit}”. Implement on the golden structure with M* + --m-*; do not substitute another look.`,
     }
   }
 
-  const query = [args.style || '', args.intent || ''].join(' ').trim()
-  const ranked = stylePresets
-    .map((preset) => ({ preset, score: scoreStylePreset(preset, query) }))
-    .sort((a, b) => b.score - a.score || a.preset.id.localeCompare(b.preset.id))
-
-  const best = ranked[0]
-  const candidates = ranked.slice(0, 4).map((item) => ({
-    id: item.preset.id,
-    title: item.preset.title,
-    titleEn: item.preset.titleEn,
-    score: item.score,
-  }))
-
-  if (best && best.score >= 20) {
+  const intent = (args.intent || '').trim()
+  const cueScore = scoreStyleCues(intent)
+  if (intent && cueScore >= 20) {
+    const summary = summarizeStyleCues(intent)
     return {
       resolution: 'inferred',
-      preset: best.preset,
-      confidence: best.score,
-      candidates,
-      guidanceZh: `从提示词推断风格「${best.preset.title}」(${best.preset.id})。若不符，用户可改选：${candidates.map((c) => `${c.id}/${c.title}`).join('、')}。`,
-      guidanceEn: `Inferred style “${best.preset.titleEn}” (${best.preset.id}). User may switch: ${candidates.map((c) => `${c.id}/${c.titleEn}`).join(', ')}.`,
+      summary,
+      confidence: cueScore,
+      guidanceZh: `从提示词推断风格方向：「${summary}」。若不符请用户纠正。不确定时应先问，不要静默发明。`,
+      guidanceEn: `Inferred style direction: “${summary}”. Ask the user to correct if wrong. When unsure, ask — do not invent silently.`,
     }
   }
 
   return {
-    resolution: 'offer',
+    resolution: 'ask',
     confidence: 0,
-    candidates: stylePresets.slice(0, 4).map((preset) => ({
-      id: preset.id,
-      title: preset.title,
-      titleEn: preset.titleEn,
-      score: 0,
-    })),
     guidanceZh:
-      '未检测到明确风格。若用户已给参考样式，按参考提取并映射到 --m-*；否则用一句话请用户从 quiet/soft/dense/rail/studio/ink 中选，或按提示词域启发式选择（不要永远 quiet）。',
+      '风格不确定：请先向用户询问（描述气质，或贴参考图/现有页）。有明确参考或明确描述时必须跟用户。禁止在未询问时套 AI 默认渐变/霓虹/毛玻璃。',
     guidanceEn:
-      'No clear style. If the user gave a reference, extract cues onto --m-*; otherwise ask once among quiet/soft/dense/rail/studio/ink, or pick by domain heuristic (do not always use quiet).',
+      'Style uncertain: ask the user for a short description or a reference. When they give a reference or clear words, follow them. Never apply AI-default gradients/neon/glass without asking.',
   }
+}
+
+function scoreStyleCues(query: string): number {
+  const q = query.toLowerCase()
+  let score = 0
+  const hits: Array<[RegExp, number]> = [
+    [/毛玻璃|glass|frosted|霓虹|neon|渐变|gradient|新拟态|neumorph|大屏|datav|暗黑|cyber/i, 35],
+    [/简洁|克制|扁平|flat|商务|erp|crm|政企|政务|国企|留白|极简|黑白|卡片|看板|仪表盘|cms|内容管理/i, 28],
+    [/像.+一样|参考|截图|设计稿|mock|figma/i, 40],
+    [/saas|工具后台|运营后台|监控|安全/i, 18],
+  ]
+  for (const [re, pts] of hits) {
+    if (re.test(q)) score += pts
+  }
+  return score
+}
+
+function summarizeStyleCues(intent: string): string {
+  const q = intent.toLowerCase()
+  if (/毛玻璃|glass|frosted/.test(q)) return '半透明毛玻璃气质（仅当用户明确要求）'
+  if (/霓虹|neon|暗黑科技|cyber/.test(q)) return '深色 + 克制科技强调'
+  if (/渐变|gradient/.test(q)) return '有克制的色彩渐变（chrome/品牌条，非 aurora）'
+  if (/新拟态|neumorph/.test(q)) return '新拟态柔和凹凸（展示向）'
+  if (/大屏|wallboard|datav/.test(q)) return '深色数据大屏：大数字、轻动态'
+  if (/政企|政务|国企/.test(q)) return '方正严谨、偏政企正式'
+  if (/erp|crm|商务/.test(q)) return '稳重商务、清晰分区'
+  if (/看板|仪表盘|kpi|卡片/.test(q)) return '模块化卡片/指标看板'
+  if (/cms|内容管理/.test(q)) return '紧凑表格优先的内容管理'
+  if (/极简|黑白|排版/.test(q)) return '黑白灰、排版层级'
+  if (/扁平|flat/.test(q)) return '纯色扁平、少阴影'
+  if (/简洁|克制|留白|saas|工具/.test(q)) return '简洁克制、少装饰'
+  return '按提示词气质落地（克制、token 实色优先）'
 }

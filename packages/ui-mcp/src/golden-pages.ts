@@ -1,14 +1,20 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { resolveListCraftVariant } from './style-presets.js'
 
+/**
+ * Golden pages = optional whole-page assembly demos / block-order baselines.
+ * Default agent path is composition-first (page snippets + decision recipes).
+ * FROZEN: do not add new craft variants (e.g. more list-page-*). Express density/sider via style direction + Ops polish.
+ */
 export interface GoldenPageRecord {
   id: string
   file: string
   title: string
   titleEn: string
   patternId: string
-  /** Visual style preset this sample demonstrates (structure may be shared). */
+  /** Optional craft cue this sample demonstrates (structure may be shared). Not a style-preset catalog. */
   style?: string
   /** Canonical structure id when this is a craft variant. */
   variantOf?: string
@@ -18,16 +24,16 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
   {
     id: 'list-page',
     file: 'list-page.vue',
-    title: '列表页黄金样例（soft）',
-    titleEn: 'List page golden sample (soft)',
+    title: '列表页结构样例（soft）',
+    titleEn: 'List page structure sample (soft)',
     patternId: 'admin-list',
     style: 'soft',
   },
   {
     id: 'list-page-dense',
     file: 'list-page-dense.vue',
-    title: '列表页黄金样例（dense）',
-    titleEn: 'List page golden sample (dense)',
+    title: '列表页结构样例（dense）',
+    titleEn: 'List page structure sample (dense)',
     patternId: 'admin-list',
     style: 'dense',
     variantOf: 'list-page',
@@ -35,8 +41,8 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
   {
     id: 'list-page-rail',
     file: 'list-page-rail.vue',
-    title: '列表页黄金样例（rail）',
-    titleEn: 'List page golden sample (rail)',
+    title: '列表页结构样例（rail）',
+    titleEn: 'List page structure sample (rail)',
     patternId: 'admin-list',
     style: 'rail',
     variantOf: 'list-page',
@@ -44,82 +50,79 @@ export const goldenPageCatalog: GoldenPageRecord[] = [
   {
     id: 'form-page',
     file: 'form-page.vue',
-    title: '表单页黄金样例',
-    titleEn: 'Form page golden sample',
+    title: '表单页结构样例',
+    titleEn: 'Form page structure sample',
     patternId: 'form-page',
   },
   {
     id: 'dashboard-page',
     file: 'dashboard-page.vue',
-    title: '仪表盘黄金样例',
-    titleEn: 'Dashboard golden sample',
+    title: '仪表盘结构样例',
+    titleEn: 'Dashboard structure sample',
     patternId: 'dashboard',
   },
   {
     id: 'login-page',
     file: 'login-page.vue',
-    title: '登录页黄金样例',
-    titleEn: 'Login page golden sample',
+    title: '登录页结构样例',
+    titleEn: 'Login page structure sample',
     patternId: 'auth-page',
   },
   {
     id: 'landing-page',
     file: 'landing-page.vue',
-    title: '营销落地页黄金样例',
-    titleEn: 'Marketing landing golden sample',
+    title: '营销落地页结构样例',
+    titleEn: 'Marketing landing structure sample',
     patternId: 'marketing-landing',
   },
   {
     id: 'empty-state',
     file: 'empty-state.vue',
-    title: '空状态黄金样例',
-    titleEn: 'Empty state golden sample',
+    title: '空状态结构样例',
+    titleEn: 'Empty state structure sample',
     patternId: 'empty-state',
   },
   {
     id: 'detail-page',
     file: 'detail-page.vue',
-    title: '详情页黄金样例',
-    titleEn: 'Detail page golden sample',
+    title: '详情页结构样例',
+    titleEn: 'Detail page structure sample',
     patternId: 'detail-page',
   },
   {
     id: 'form-in-dialog',
     file: 'form-in-dialog.vue',
-    title: '列表内弹窗表单黄金样例',
-    titleEn: 'List create/edit dialog golden sample',
+    title: '列表内弹窗表单结构样例',
+    titleEn: 'List create/edit dialog structure sample',
     patternId: 'form-in-dialog',
   },
   {
     id: 'result-page',
     file: 'result-page.vue',
-    title: '结果 / 阻断页黄金样例',
-    titleEn: 'Result / terminal page golden sample',
+    title: '结果 / 阻断页结构样例',
+    titleEn: 'Result / terminal page structure sample',
     patternId: 'result-page',
   },
   {
     id: 'settings-page',
     file: 'settings-page.vue',
-    title: '设置页黄金样例',
-    titleEn: 'Settings page golden sample',
+    title: '设置页结构样例',
+    titleEn: 'Settings page structure sample',
     patternId: 'settings-page',
   },
   {
     id: 'wizard-form',
     file: 'wizard-form.vue',
-    title: '分步向导黄金样例',
-    titleEn: 'Wizard form golden sample',
+    title: '分步向导结构样例',
+    titleEn: 'Wizard form structure sample',
     patternId: 'wizard-form',
   },
 ]
 
-/** Map style preset → list golden craft variant (same structure). */
-const listStyleGolden: Record<string, string> = {
-  soft: 'list-page',
-  quiet: 'list-page',
-  studio: 'list-page',
-  ink: 'list-page',
+/** Optional legacy exact keys for list craft (density / sider) — not a style catalog. */
+const listCraftGolden: Record<string, string> = {
   dense: 'list-page-dense',
+  compact: 'list-page-dense',
   rail: 'list-page-rail',
 }
 
@@ -160,7 +163,10 @@ export function resolveGoldenPageId(args: {
     null
 
   if (args.patternId === 'admin-list' || canonical === 'list-page' || canonical?.startsWith('list-page')) {
-    const styled = style ? listStyleGolden[style] : null
+    const key = style.replace(/[-_\s]/g, '')
+    const exact = style ? listCraftGolden[style] || listCraftGolden[key] : null
+    const fromText = resolveListCraftVariant(args.styleId)
+    const styled = exact || fromText
     if (styled && findGoldenPage(styled)) return styled
     return 'list-page'
   }

@@ -15,9 +15,8 @@ import { filterPageSnippets, findPageSnippet, pageSnippets, scorePageSnippet } f
 import { designRules, findPattern, pagePatterns, scorePattern } from './patterns.js'
 import { countCatalogResources, countCatalogResourceTemplates } from './resources.js'
 import {
-  findStylePreset,
+  resolveListCraftVariant,
   resolveStyleDirection,
-  stylePresets,
   styleResolution,
 } from './style-presets.js'
 
@@ -88,6 +87,7 @@ function mapDecisionOption(option: ComponentDecisionOption, locale: Locale) {
     avoidWhen: zh ? option.avoidWhen : option.avoidWhenEn,
     recipe,
     antiPatterns: zh ? option.antiPatterns : option.antiPatternsEn,
+    ...(option.relatedSnippets?.length ? { relatedSnippets: option.relatedSnippets } : {}),
   }
 }
 
@@ -856,35 +856,34 @@ export function createToolHandlers(catalog = loadCatalog()) {
     const stylePayload = {
       resolution: styleDirection.resolution,
       confidence: styleDirection.confidence,
-      preset: styleDirection.preset
-        ? {
-            id: styleDirection.preset.id,
-            title: locale === 'en-US' ? styleDirection.preset.titleEn : styleDirection.preset.title,
-            summary: locale === 'en-US' ? styleDirection.preset.summaryEn : styleDirection.preset.summary,
-            apply: locale === 'en-US' ? styleDirection.preset.applyEn : styleDirection.preset.apply,
-            avoid: locale === 'en-US' ? styleDirection.preset.avoidEn : styleDirection.preset.avoid,
-          }
-        : null,
-      candidates: styleDirection.candidates.map((item) => ({
-        id: item.id,
-        title: locale === 'en-US' ? item.titleEn : item.title,
-        score: item.score,
-      })),
+      summary: styleDirection.summary ?? null,
       guidance: locale === 'en-US' ? styleDirection.guidanceEn : styleDirection.guidanceZh,
       priority: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
-      note:
+      hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
+          note:
         locale === 'en-US'
-          ? 'If the user supplied a visual reference, follow that first (map to --m-* + M*). Golden pages lock structure, not the only aesthetic.'
-          : '若用户提供了参考样式，优先跟参考（映射到 --m-* + M*）。黄金样例锁结构，不是唯一审美。',
+          ? 'No named style-preset catalog. Follow an explicit user reference/description; if styleDirection.resolution is ask, ask before inventing the look. Prefer snippets for composition; golden pages are optional block-order checks, not aesthetics.'
+          : '没有命名风格预设表。有明确参考/描述就跟用户；若 styleDirection.resolution 为 ask，先询问再写完整视觉。优先用 snippets 拼装；黄金样例仅可选核对块顺序，不是审美模板。',
     }
+    const craftText = [args.style || '', args.intent || ''].join(' ')
     const resolvedGoldenId = resolveGoldenPageId({
       patternId: best.pattern.id,
       canonicalGoldenId: best.pattern.goldenPage,
-      styleId: styleDirection.preset?.id || args.style || null,
+      styleId: craftText || null,
     })
     const resolvedGoldenPath = resolvedGoldenId
       ? `docs/golden-pages/${resolvedGoldenId}.vue`
       : best.pattern.goldenPage
+
+    let suggestedSnippets = [...(best.pattern.suggestedSnippets ?? [])]
+    if (best.pattern.id === 'admin-list') {
+      const listCraft = resolveListCraftVariant(craftText)
+      if (listCraft === 'list-page-dense') {
+        suggestedSnippets = suggestedSnippets.map((id) =>
+          id === 'list-filters-stack' ? 'list-filters-dense' : id,
+        )
+      }
+    }
 
     const result: Record<string, unknown> = {
       intent: args.intent,
@@ -902,24 +901,38 @@ export function createToolHandlers(catalog = loadCatalog()) {
       interactionRules: best.pattern.interactionRules,
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
+      suggestedSnippets,
       nextStep: (() => {
         const goldenId = resolvedGoldenId
+        const snippets = suggestedSnippets
+        const snippetHint =
+          snippets.length > 0
+            ? locale === 'en-US'
+              ? ` Compose with get_page_snippet for: ${snippets.join(', ')}. Use recommend_component for L2 recipes (relatedSnippets).`
+              : ` 用 get_page_snippet 拼装：${snippets.join(', ')}。选型用 recommend_component（含 relatedSnippets）。`
+            : locale === 'en-US'
+              ? ' Compose with get_page_snippet + recommend_component (relatedSnippets).'
+              : ' 用 get_page_snippet + recommend_component（relatedSnippets）拼装。'
         const styleHint =
           locale === 'en-US'
-            ? styleDirection.resolution === 'offer'
-              ? ' Resolve style first (reference → preset → ask among quiet/soft/dense/rail/studio/ink).'
-              : ` Apply styleDirection preset "${styleDirection.preset?.id || 'n/a'}".`
-            : styleDirection.resolution === 'offer'
-              ? ' 先定风格（参考 → 预设 → 请用户从 quiet/soft/dense/rail/studio/ink 选）。'
-              : ` 套用 styleDirection 预设「${styleDirection.preset?.id || 'n/a'}」。`
+            ? styleDirection.resolution === 'ask'
+              ? ' Style is uncertain — ask the user for a short description or reference before inventing the look.'
+              : ` Follow styleDirection (${styleDirection.resolution}): “${styleDirection.summary || 'user/reference'}”; honor explicit user words over companions.`
+            : styleDirection.resolution === 'ask'
+              ? ' 风格不确定 — 先请用户说明气质或贴参考，再写完整视觉。'
+              : ` 按 styleDirection（${styleDirection.resolution}）落实「${styleDirection.summary || '用户参考/描述'}」；用户明确指定优先于 companion。`
+        const goldenHint =
+          goldenId
+            ? locale === 'en-US'
+              ? ` Optional: get_golden_page("${goldenId}") only to check whole-page block order (not the default clone target).`
+              : ` 可选：仅当需核对整页块顺序时再 get_golden_page("${goldenId}")（默认不要整页克隆）。`
+            : locale === 'en-US'
+              ? ' No golden page for this pattern — follow get_pattern structure + snippets.'
+              : ' 该模式暂无黄金样例：按 get_pattern 结构 + snippets 拼装。'
         if (locale === 'en-US') {
-          return goldenId
-            ? `Call get_golden_page("${goldenId}") and mirror structure.${styleHint} Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page.`
-            : `No golden page for this pattern: use get_pattern + get_design_rules.${styleHint} Look up APIs with get_component/get_example, then always run validate_usage and validate_page.`
+          return `${snippetHint.trim()}${styleHint}${goldenHint} Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page.`
         }
-        return goldenId
-          ? `调用 get_golden_page("${goldenId}") 并镜像结构。${styleHint} 不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
-          : `该模式暂无黄金样例：用 get_pattern + get_design_rules。${styleHint} API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
+        return `${snippetHint.trim()}${styleHint}${goldenHint} 不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
       })(),
     }
     if (args.includeScaffold) {
@@ -933,8 +946,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
           files: { component: golden.source },
           warnings: [
             locale === 'en-US'
-              ? 'Scaffold is the golden page source. Remap domain copy/data only; never invent props. Then validate_usage + validate_page.'
-              : '脚手架即黄金样例源码。只替换域文案与数据，禁止臆造 prop。完成后必须 validate_usage + validate_page。',
+              ? 'Scaffold is an optional structure reference from the golden sample. Prefer composing suggestedSnippets; remap domain copy/data only if you use this source. Never invent props. Then validate_usage + validate_page.'
+              : '脚手架是黄金样例的可选结构参考。默认优先拼装 suggestedSnippets；若使用本源码只替换域文案与数据。禁止臆造 prop。完成后必须 validate_usage + validate_page。',
           ],
         }
       } else {
@@ -946,8 +959,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
           files: { component: componentSource },
           warnings: [
             locale === 'en-US'
-              ? 'No golden page for this pattern — structural fallback only. Prefer get_pattern + get_component. Must validate_usage before delivery.'
-              : '该模式暂无黄金样例，仅为结构占位。优先 get_pattern + get_component。交付前必须 validate_usage。',
+              ? 'No golden page for this pattern — structural fallback only. Prefer suggestedSnippets + get_component. Must validate_usage before delivery.'
+              : '该模式暂无黄金样例，仅为结构占位。优先 suggestedSnippets + get_component。交付前必须 validate_usage。',
           ],
         }
       }
@@ -1362,12 +1375,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
     const styles = {
       resolution: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
       hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
-      presets: stylePresets.map((preset) => ({
-        id: preset.id,
-        title: locale === 'en-US' ? preset.titleEn : preset.title,
-        summary: locale === 'en-US' ? preset.summaryEn : preset.summary,
-        lanes: preset.lanes,
-      })),
+      note:
+        locale === 'en-US'
+          ? 'No named style-preset catalog. Follow user reference/description; ask when uncertain.'
+          : '没有命名风格预设表。跟用户参考/描述；不确定就先问。',
     }
     if (locale === 'zh-CN') {
       return textResult({
@@ -1434,47 +1445,25 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'Form controls should have a visible label or an equivalent accessible name.',
         'Overlays teleport to body by default; only change appendTo for a clear layout constraint.',
         'Prefer documented component variants over deep CSS overrides.',
-        'Resolve visual style via reference → preset → prompt cues → offer quiet/soft/dense/rail/studio/ink; golden pages lock structure, not aesthetics.',
+        'Resolve visual style: follow explicit user reference/description first; else infer from clear prompt cues; if uncertain ask once. No named preset catalog. Golden pages lock structure, not aesthetics.',
       ],
     })
   }
 
-  function listStylePresets(args: { mode?: string } = {}) {
+  function getStyleDirection(args: { intent?: string; style?: string; mode?: string } = {}) {
     const locale = resolveLocale(args.mode)
+    const direction = resolveStyleDirection({ intent: args.intent, style: args.style })
     return textResult({
-      resolution: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
+      resolution: direction.resolution,
+      confidence: direction.confidence,
+      summary: direction.summary ?? null,
+      guidance: locale === 'en-US' ? direction.guidanceEn : direction.guidanceZh,
+      priority: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
       hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
-      presets: stylePresets.map((preset) => ({
-        id: preset.id,
-        title: locale === 'en-US' ? preset.titleEn : preset.title,
-        summary: locale === 'en-US' ? preset.summaryEn : preset.summary,
-        lanes: preset.lanes,
-        keywords: preset.keywords,
-        listGoldenPage: preset.listGoldenPage ?? null,
-      })),
-    })
-  }
-
-  function getStylePreset(args: { style: string; mode?: string }) {
-    const locale = resolveLocale(args.mode)
-    const preset = findStylePreset(args.style)
-    if (!preset) {
-      return textResult({
-        error: `Style preset not found: ${args.style}`,
-        available: stylePresets.map((item) => item.id),
-      })
-    }
-    return textResult({
-      id: preset.id,
-      title: locale === 'en-US' ? preset.titleEn : preset.title,
-      summary: locale === 'en-US' ? preset.summaryEn : preset.summary,
-      lanes: preset.lanes,
-      keywords: preset.keywords,
-      listGoldenPage: preset.listGoldenPage ?? null,
-      cues: locale === 'en-US' ? preset.cuesEn : preset.cues,
-      apply: locale === 'en-US' ? preset.applyEn : preset.apply,
-      avoid: locale === 'en-US' ? preset.avoidEn : preset.avoid,
-      resolution: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
+      note:
+        locale === 'en-US'
+          ? 'No named style-preset catalog. Pass style as free-text user description when they specified one.'
+          : '没有命名风格预设表。用户有描述时把原文放进 style；不确定时 resolution 为 ask，应先问用户。',
     })
   }
 
@@ -1733,8 +1722,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'get_pattern',
         'recommend_page',
         'get_design_rules',
-        'list_style_presets',
-        'get_style_preset',
+        'get_style_direction',
         'recommend_component',
         'list_golden_pages',
         'get_golden_page',
@@ -1759,8 +1747,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
     getPattern,
     recommendPage,
     getDesignRules,
-    listStylePresets,
-    getStylePreset,
+    getStyleDirection,
     recommendComponent,
     listGoldenPageCatalog,
     getGoldenPage,

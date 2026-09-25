@@ -61,6 +61,15 @@ function renderOption(option) {
     parts.push('', '**Recipe · events**', '', bullets(option.recipe.events))
   }
 
+  if (option.relatedSnippets?.length) {
+    parts.push(
+      '',
+      '**Related snippets**',
+      '',
+      bullets(option.relatedSnippets.map((id) => `\`${id}\``)),
+    )
+  }
+
   parts.push('', '**Anti-patterns**', '', bullets(option.antiPatterns), '')
   return parts.join('\n')
 }
@@ -83,7 +92,7 @@ Generated from \`packages/ui-mcp/src/decisions.ts\`. **Do not hand-edit** this f
 pnpm --filter @morya-ui/mcp generate:recipes
 \`\`\`
 
-MCP: \`recommend_component\` (list / read by \`decision\` / query). Full prop manuals still come from \`get_component\` + \`validate_usage\`.
+MCP: \`recommend_component\` (list / read by \`decision\` / query; options may include \`relatedSnippets\`). Full prop manuals still come from \`get_component\` + \`validate_usage\`. Prefer page snippets for composition; golden pages are optional block-order checks.
 
 This file is the **offline** mirror for agents without MCP.
 
