@@ -35,9 +35,9 @@
     --m-color-contrast-active: #020617;
     --m-color-on-emphasis: #ffffff;
     --m-overlay-scrim: rgb(15 23 42 / 0.55);
-    --m-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.25);
-    --m-shadow-md: 0 0.75rem 2rem rgb(15 23 42 / 0.16);
-    --m-shadow-lg: 0 1rem 3rem rgb(15 23 42 / 0.25);
+    --m-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.12);
+    --m-shadow-md: 0 0 12px rgba(0, 0, 0, 0.12);
+    --m-shadow-lg: 0 12px 32px 4px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.08);
     --m-shadow-raised: 0 0.25rem 0.75rem
         color-mix(in srgb, var(--m-color-text) 14%, transparent);
     --m-shadow-sticky: 4px 0 8px
@@ -132,7 +132,7 @@
     --m-slider-marks-side: 0.5rem;
     --m-stepper-connector-color: var(--m-color-border);
 
-    /* Table (Element Plus–aligned) */
+    /* Table */
     --m-color-fill-light: color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
     --m-color-fill-lighter: color-mix(in srgb, var(--m-color-text) 3.5%, var(--m-color-surface));
     --m-table-border-color: var(--m-color-border);
@@ -335,9 +335,9 @@
     --m-color-contrast-hover: #e2e8f0;
     --m-color-contrast-active: #cbd5e1;
     --m-overlay-scrim: rgb(2 6 23 / 0.72);
-    --m-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
-    --m-shadow-md: 0 0.75rem 2rem rgb(0 0 0 / 0.45);
-    --m-shadow-lg: 0 1rem 3rem rgb(0 0 0 / 0.55);
+    --m-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.12);
+    --m-shadow-md: 0 0 12px rgba(0, 0, 0, 0.12);
+    --m-shadow-lg: 0 12px 32px 4px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.08);
     --m-shadow-raised: 0 0.25rem 0.75rem
         color-mix(in srgb, var(--m-color-text) 22%, transparent);
     --m-shadow-sticky: 4px 0 8px
