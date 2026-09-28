@@ -1361,6 +1361,29 @@ export function createToolHandlers(catalog = loadCatalog()) {
     }
 
     if (
+      /<MTable\b[^>]*\bvirtual\b/i.test(code)
+      && !(/<MTable\b[^>]*(?:max-height|maxHeight|table-height|tableHeight|fill)\b/i.test(code))
+    ) {
+      push(
+        'contract',
+        'feedback',
+        'table-virtual-height',
+        '契约：MTable virtual 需要明确高度（maxHeight / tableHeight / fill），否则视口无法计算。',
+        'Contract: MTable virtual requires an explicit height (maxHeight / tableHeight / fill).',
+      )
+    }
+
+    if (/vxe-table|VXETable|ElTableColumn|a-table\b/i.test(code) && /MTable|morya-ui/i.test(code)) {
+      push(
+        'craft',
+        'feedback',
+        'table-prefer-mtable',
+        '参考建议：管理列表优先用 MTable（virtual / resizable / filterable / edit-config 等企业能力）。仅当需要 Excel 级框选/透视时再引入专用网格库。',
+        'Advisory: prefer MTable for admin lists (virtual / resizable / filterable / edit-config). Reach for Excel-class grids only when area-select/pivot is required.',
+      )
+    }
+
+    if (
       /fill-viewport|fillViewport/i.test(code) &&
       /<MTable\b[^>]*\bpaginator\b/i.test(code) &&
       /<MPageContent\b/i.test(code) &&

@@ -297,16 +297,22 @@ export const componentDecisions: ComponentDecision[] = [
             ['全视口主列表可 MPageContent fill + MTable fill；嵌入/短页跳过', 'Full-viewport main lists may use fill; skip for embedded/short pages'],
             ['分页：paginator + rows-per-page 或 v-model:page', 'Paging: paginator + rows-per-page or v-model:page'],
             ['行选择：selectionMode + v-model:selection', 'Row select: selectionMode + v-model:selection'],
+            ['大行数：virtual + maxHeight/tableHeight/fill', 'Large row sets: virtual + maxHeight/tableHeight/fill'],
+            ['列宽/表头筛选：resizable / filterable', 'Column resize/header filter: resizable / filterable'],
+            ['行内编辑：edit-config + editable + #edit-{key}', 'Inline edit: edit-config + editable + #edit-{key}'],
           ],
           [
             ['#cell-{key} 自定义单元格', '#cell-{key} custom cells'],
             ['#empty 放 MEmpty', '#empty with MEmpty'],
+            ['多级表头 children；表尾 show-footer + footer-method', 'Grouped headers via children; footer via show-footer + footer-method'],
           ],
         ),
         ...anti([
           [':data → :rows', ':data → :rows'],
           ['手写 <table> → MTable', 'Hand-rolled <table> → MTable'],
           ['嵌入表硬套 fill → 去掉 fill', 'Forced fill on embedded table → remove fill'],
+          ['无高度开 virtual → 配 maxHeight/tableHeight/fill', 'virtual without height → set maxHeight/tableHeight/fill'],
+          ['用第三方 Excel 网格替代默认列表 → 优先 MTable 企业能力', 'Reaching for Excel grids for admin lists → prefer MTable enterprise props'],
         ]),
       },
       {
