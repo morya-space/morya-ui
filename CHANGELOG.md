@@ -2,9 +2,27 @@
 
 ## 0.3.6
 
+### 新功能
+
+- MTable 企业网格能力（自研对齐）：列宽拖拽、表头筛选、行虚拟滚动、列显隐/顺序、多级表头、表尾汇总、单元格合并与行内编辑
+- MTable 分层重构（core / state / columns / render）与合成列内部命名空间
+
+### 破坏性变更
+
+- `serverItemsLength` → `serverTotal`；`rowsItems` → `pageSizes`
+- 移除 `hideHeader` / `hideRowsPerPage`，改用 `showHeader` / `showRowsPerPage`（均默认 `true`）
+- 移除 `clickEventType`、`tableNodeId`、分页文案 props、`preventContextMenuRow`
+- 事件重命名为 kebab-case：`row-contextmenu`、`select-row`、`deselect-row`、`select-all`；新增 `row-dblclick`
+- 移除 `updatePageItems`、`updateTotalItems`、`page`（保留 `update:page`）；移除 `TableClickEventType` 导出
+
+### 修复
+
+- MTable 服务端/客户端 multiSort、受控 page/rowsPerPage/sort、表头全选当前页、aria-label 挂 table、展开按钮文案与排序 focus-ring
+
 ### 文档
 
 - add portable AGENTS.md and multi-editor MCP docs
+- MTable 能力矩阵与企业能力 demo；ui-mcp 选型/审查提示对齐 MTable 企业 props
 
 ## 0.3.5
 

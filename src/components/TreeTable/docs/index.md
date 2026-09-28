@@ -6,7 +6,7 @@ description: 可展开的树形表格。
 
 # TreeTable
 
-用列配置展示带 children 的树形数据。
+用列配置展示带 children 的树形数据。适合轻量树表；需要虚拟滚动、列拖拽、行内编辑或复杂筛选时，优先使用 [`MTable`](/components/Table) 的企业能力（或后续树模式），不要把 TreeTable 当 Excel 网格。
 
 ## 引入
 

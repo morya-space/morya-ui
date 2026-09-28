@@ -6,7 +6,7 @@ description: Expandable tree table.
 
 # TreeTable
 
-Display tree data with children using column configuration.
+Display tree data with children using column configuration. Prefer this for lightweight trees; for virtual scroll, column resize, inline edit, or complex filters, use [`MTable`](/components/Table) enterprise props instead of treating TreeTable as an Excel grid.
 
 ## Import
 

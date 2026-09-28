@@ -2,9 +2,27 @@
 
 ## 0.3.6
 
+### Features
+
+- MTable enterprise grid (self-built): column resize, header filters, row virtualization, column visibility/order, multi-level headers, footer summary, cell span, and inline edit
+- MTable layered architecture (core / state / columns / render) with namespaced synthetic columns
+
+### Breaking
+
+- `serverItemsLength` → `serverTotal`; `rowsItems` → `pageSizes`
+- Removed `hideHeader` / `hideRowsPerPage` in favor of `showHeader` / `showRowsPerPage` (both default `true`)
+- Removed `clickEventType`, `tableNodeId`, paginator message props, `preventContextMenuRow`
+- Events renamed to kebab-case: `row-contextmenu`, `select-row`, `deselect-row`, `select-all`; added `row-dblclick`
+- Removed `updatePageItems`, `updateTotalItems`, `page` (keep `update:page`); dropped `TableClickEventType` export
+
+### Fixes
+
+- MTable multiSort (client/server), controlled page/rowsPerPage/sort sync, select-all scoped to current page, table aria-label, expand button labels, sort focus-ring
+
 ### Docs
 
 - add portable AGENTS.md and multi-editor MCP docs
+- MTable capability matrix / enterprise demos; ui-mcp recipes and review hints for MTable enterprise props
 
 ## 0.3.5
 

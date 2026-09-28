@@ -30,7 +30,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Data
 
-`MTable` (`columns` + **`rows`**, not `data`), `MTreeTable`, `MDataView`, `MTree`, `MPagination`, `MOrderList`, `MPickList`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
+`MTable` (`columns` + **`rows`**, not `data`; optional enterprise props: `virtual`, `resizable`/`filterable`, `edit-config`, `children`, `span-method`), `MTreeTable` (lightweight tree; heavy grids → MTable), `MDataView`, `MTree`, `MPagination`, `MOrderList`, `MPickList`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
 
 ## Feedback
 
