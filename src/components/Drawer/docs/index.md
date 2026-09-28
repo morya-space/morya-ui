@@ -26,6 +26,13 @@ import { MButton, MDrawer } from 'morya-ui'
 ```vue preview src="./demos/Position.vue"
 ```
 
+## Footer
+
+用 `#footer` 放取消 / 保存等操作；正文区可独立滚动。
+
+```vue preview src="./demos/Footer.vue"
+```
+
 ## Props
 
 | 参数 | 类型 | 默认值 | 说明 |
@@ -64,3 +71,4 @@ import { MButton, MDrawer } from 'morya-ui'
 | --- | --- |
 | `default` | 抽屉内容。 |
 | `header` | 自定义标题区。 |
+| `footer` | 底部操作区。 |

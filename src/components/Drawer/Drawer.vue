@@ -147,6 +147,9 @@ useModalOverlay({
           <div class="m-drawer__body">
             <slot />
           </div>
+          <footer v-if="$slots.footer" class="m-drawer__footer">
+            <slot name="footer" />
+          </footer>
         </aside>
       </div>
     </Transition>

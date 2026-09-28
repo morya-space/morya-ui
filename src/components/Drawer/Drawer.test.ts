@@ -90,4 +90,28 @@ describe('muDrawer', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     wrapper.unmount()
   })
+
+  it('renders footer slot when provided', async () => {
+    const wrapper = mount(MDrawer, {
+      attachTo: document.body,
+      props: { modelValue: true, header: 'Edit' },
+      slots: {
+        footer: '<button type="button" class="drawer-footer-action">Save</button>',
+      },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-drawer__footer')).toBeTruthy()
+    expect(document.body.querySelector('.drawer-footer-action')?.textContent).toBe('Save')
+    wrapper.unmount()
+  })
+
+  it('omits footer when slot is empty', async () => {
+    const wrapper = mount(MDrawer, {
+      attachTo: document.body,
+      props: { modelValue: true },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-drawer__footer')).toBeNull()
+    wrapper.unmount()
+  })
 })

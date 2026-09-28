@@ -26,6 +26,13 @@ Supports `left` / `right` / `top` / `bottom`.
 ```vue preview src="./demos/Position.vue"
 ```
 
+## Footer
+
+Use `#footer` for cancel / save actions; the body scrolls independently.
+
+```vue preview src="./demos/Footer.vue"
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -60,3 +67,4 @@ Supports `left` / `right` / `top` / `bottom`.
 | --- | --- |
 | `default` | Drawer content. |
 | `header` | Custom header area. |
+| `footer` | Footer actions. |
