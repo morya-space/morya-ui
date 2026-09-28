@@ -104,6 +104,7 @@ export function skillPathsForIds(skillIds, skills) {
 export function buildAiInclude(skillIds, skills) {
   return [
     'DESIGN.md',
+    'AGENTS.md',
     ...skillPathsForIds(skillIds, skills),
     '.cursor/rules',
     'scripts/check-raw-colors.mjs',

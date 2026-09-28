@@ -18,7 +18,7 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
-For Agent skill, Cursor rules, and writing MCP in one step, see [One-shot setup](/docs/setup). AI workflow: [AI setup](/docs/ai-setup). Skill behavior: [Agent Skill](/docs/agent-skill).
+For Agent skill, rules, and multi-editor MCP in one step, see [One-shot setup](/docs/setup) (writes Cursor / VS Code / Zed plus `.mcp.json` by default). AI workflow: [AI setup](/docs/ai-setup). Skill behavior: [Agent Skill](/docs/agent-skill).
 
 ## How to connect
 
@@ -43,7 +43,7 @@ Field names differ by client. Any client that supports MCP stdio can connect.
 
 Snippets for popular products. Key names may change across versions — check each product’s docs.
 
-**Cursor** (`.cursor/mcp.json` or user-level MCP settings):
+**Cursor** (`.cursor/mcp.json` or user-level MCP settings; written by setup):
 
 ```json
 {
@@ -56,7 +56,34 @@ Snippets for popular products. Key names may change across versions — check ea
 }
 ```
 
-**Claude Desktop / Claude Code** (`claude_desktop_config.json`, etc.):
+**VS Code** (workspace `.vscode/mcp.json`; written by setup):
+
+```json
+{
+  "servers": {
+    "morya-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@morya-ui/mcp"]
+    }
+  }
+}
+```
+
+**Portable** (project-root `.mcp.json`; written by setup for Agent Host / cross-tool discovery):
+
+```json
+{
+  "mcpServers": {
+    "morya-ui": {
+      "command": "npx",
+      "args": ["-y", "@morya-ui/mcp"]
+    }
+  }
+}
+```
+
+**Claude Desktop / Claude Code** (`claude_desktop_config.json`, etc.; configure manually — setup does not write these):
 
 ```json
 {
@@ -95,7 +122,7 @@ Snippets for popular products. Key names may change across versions — check ea
 }
 ```
 
-**Zed** (`settings.json` → `context_servers`):
+**Zed** (project `.zed/settings.json` → `context_servers`; merged by setup):
 
 ```json
 {

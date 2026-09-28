@@ -6,7 +6,7 @@ description: Use @morya-ui/setup to install the library and optionally write sty
 
 # One-shot setup
 
-[`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) onboards a consumer Vue app to `morya-ui`: install the dependency, inject styles, and optionally write the Agent skill, Cursor rules, and MCP. For manual install see [Quick start](/docs/quick-start). For AI page-generation workflow see [AI setup](/docs/ai-setup).
+[`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) onboards a consumer Vue app to `morya-ui`: install the dependency, inject styles, and optionally write the Agent skill, Cursor rules, portable `AGENTS.md`, and multi-editor MCP. For manual install see [Quick start](/docs/quick-start). For AI page-generation workflow see [AI setup](/docs/ai-setup).
 
 ## Commands
 
@@ -19,8 +19,8 @@ npx @morya-ui/setup
 By default this will:
 
 1. Install / upgrade `morya-ui` and any existing `@morya-ui/*` (e.g. `@morya-ui/nuxt`) to npm `latest` (pnpm / yarn / npm from the lockfile)
-2. Copy `DESIGN.md`, Agent skill, Cursor rules, and check scripts
-3. Merge `.cursor/mcp.json` for [`@morya-ui/mcp@latest`](https://www.npmjs.com/package/@morya-ui/mcp)
+2. Copy `DESIGN.md`, `AGENTS.md`, Agent skill, Cursor rules, and check scripts
+3. Merge MCP configs (Cursor / VS Code / Zed + root `.mcp.json`) for [`@morya-ui/mcp@latest`](https://www.npmjs.com/package/@morya-ui/mcp)
 4. Try to inject `import 'morya-ui/styles.css'`
 5. Add a `check:colors` script when missing
 
@@ -38,11 +38,14 @@ npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
 
+# Subset of MCP editor targets (still writes .mcp.json)
+npx @morya-ui/setup ai --editors=cursor,vscode
+
 # Refresh AI template / MCP without touching dependencies
 npx @morya-ui/setup ai --skip-install
 ```
 
-On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/). If MCP was written, **restart Cursor** (or reload MCP). Have the agent read `DESIGN.md` before generating pages.
+On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/). If MCP was written, **restart your editor or reload MCP**. Have the agent read `DESIGN.md` (and `AGENTS.md`) before generating pages.
 
 ## Options
 
@@ -51,6 +54,7 @@ On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pa
 | `--cwd <dir>` | Target project root (default: cwd) |
 | `--pm pnpm\|yarn\|npm` | Package manager |
 | `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
+| `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three; always also writes `.mcp.json`) |
 | `--yes` / `-y` | Use default skills without prompting |
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions only |
@@ -84,11 +88,15 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | Path | Role |
 | --- | --- |
 | `DESIGN.md` | Primary design brief (principles, app root, token summary, bans) |
+| `AGENTS.md` | Portable always-on checklist (VS Code / Zed / CLI agents) |
 | `.agents/skills/morya-ui-pages/` | Page-generation Agent skill (see [Agent Skill](/docs/agent-skill)) |
 | `.agents/skills/<optional>/` | Latest companion skills via skills CLI when selected |
 | `.cursor/rules/` | Cursor always-on rules |
 | `scripts/check-raw-colors.mjs` | Raw color scan |
-| `.cursor/mcp.json` | Cursor MCP (`npx -y @morya-ui/mcp@latest`) |
+| `.cursor/mcp.json` | Cursor MCP |
+| `.vscode/mcp.json` | VS Code MCP |
+| `.zed/settings.json` | Zed `context_servers` (merged; other settings kept) |
+| `.mcp.json` | Portable MCP (Agent Host / cross-tool discovery) |
 
 Template source: [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit). The CLI does not call `app.use(MoryaUI)` or edit `App.vue`.
 
@@ -97,7 +105,7 @@ Template source: [`design-kit/`](https://github.com/morya-space/morya-ui/tree/ma
 - Dependencies: always install / upgrade `morya-ui@latest` and any existing `@morya-ui/*` to `@latest` unless `--skip-install`
 - Template files and `.cursor/rules/*`: skip if the destination exists (unless `--force`)
 - Companion skills (skills CLI): always install/update to latest when selected
-- `.cursor/mcp.json`: merge other servers; skip an existing `morya-ui` entry unless `--force`; new or forced entries use `@morya-ui/mcp@latest`
+- MCP configs: merge other servers / settings; skip an existing `morya-ui` entry unless `--force`; new or forced entries use `@morya-ui/mcp@latest`
 - `check:colors`: add only if missing (unless `--force`)
 - Styles: inject only when an entry is found and the import is not already present
 

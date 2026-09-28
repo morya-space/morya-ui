@@ -23,6 +23,7 @@ const skillPaths = catalog.skills
 /** Relative paths under design-kit to publish for consumers. */
 const INCLUDE = [
   'DESIGN.md',
+  'AGENTS.md',
   ...skillPaths,
   '.cursor/rules',
   'scripts/check-raw-colors.mjs',

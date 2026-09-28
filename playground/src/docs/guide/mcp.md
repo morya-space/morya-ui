@@ -18,7 +18,7 @@ pnpm add morya-ui
 import 'morya-ui/styles.css'
 ```
 
-若要连同 Agent Skill、Cursor 规则一起装好，见 [一键接入](/docs/setup)；AI 流程见 [AI 接入](/docs/ai-setup)；Skill 本身说明见 [Agent Skill](/docs/agent-skill)。
+若要连同 Agent Skill、规则与多编辑器 MCP 一起装好，见 [一键接入](/docs/setup)（默认写入 Cursor / VS Code / Zed 与 `.mcp.json`）；AI 流程见 [AI 接入](/docs/ai-setup)；Skill 本身说明见 [Agent Skill](/docs/agent-skill)。
 
 ## 接入方式
 
@@ -43,7 +43,7 @@ npx -y @morya-ui/mcp
 
 以下为常见产品的配置片段，键名可能随版本变化，以各产品官方文档为准。
 
-**Cursor**（`.cursor/mcp.json` 或用户级 MCP 配置）：
+**Cursor**（`.cursor/mcp.json` 或用户级 MCP 配置；setup 会写入）：
 
 ```json
 {
@@ -56,7 +56,34 @@ npx -y @morya-ui/mcp
 }
 ```
 
-**Claude Desktop / Claude Code**（`claude_desktop_config.json` 等）：
+**VS Code**（工作区 `.vscode/mcp.json`；setup 会写入）：
+
+```json
+{
+  "servers": {
+    "morya-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@morya-ui/mcp"]
+    }
+  }
+}
+```
+
+**便携**（项目根 `.mcp.json`；setup 会写入，供 Agent Host / 跨工具发现）：
+
+```json
+{
+  "mcpServers": {
+    "morya-ui": {
+      "command": "npx",
+      "args": ["-y", "@morya-ui/mcp"]
+    }
+  }
+}
+```
+
+**Claude Desktop / Claude Code**（`claude_desktop_config.json` 等；需手写，setup 不自动写）：
 
 ```json
 {
@@ -95,7 +122,7 @@ npx -y @morya-ui/mcp
 }
 ```
 
-**Zed**（`settings.json` → `context_servers`）：
+**Zed**（项目 `.zed/settings.json` → `context_servers`；setup 会合并写入）：
 
 ```json
 {
@@ -211,7 +238,7 @@ import { MButton } from 'morya-ui'
 
 ## 下一步
 
-- [AI 接入](/docs/ai-setup)：`npx @morya-ui/setup`、skill 与 Cursor MCP
+- [AI 接入](/docs/ai-setup)：`npx @morya-ui/setup`、skill 与多编辑器 MCP
 - [Agent Skill](/docs/agent-skill)：`morya-ui-pages` 何时用、表面地图
 - [快速上手](/docs/quick-start)：在应用中安装并使用组件
 - [组件](/components)：浏览全部组件与交互示例

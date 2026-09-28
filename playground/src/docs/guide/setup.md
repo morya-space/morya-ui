@@ -6,7 +6,7 @@ description: 用 @morya-ui/setup 安装组件库，并按需写入样式、Agent
 
 # 一键接入
 
-[`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) 用于在业务 Vue 项目中接入 `morya-ui`：安装依赖、注入样式，并可一并写入 Agent Skill、Cursor 规则与 MCP。手写安装见 [快速上手](/docs/quick-start)；AI 生成页面的约定见 [AI 接入](/docs/ai-setup)。
+[`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) 用于在业务 Vue 项目中接入 `morya-ui`：安装依赖、注入样式，并可一并写入 Agent Skill、Cursor 规则、便携 `AGENTS.md` 与多编辑器 MCP。手写安装见 [快速上手](/docs/quick-start)；AI 生成页面的约定见 [AI 接入](/docs/ai-setup)。
 
 ## 命令
 
@@ -19,8 +19,8 @@ npx @morya-ui/setup
 默认会：
 
 1. 将 `morya-ui`（以及项目中已有的 `@morya-ui/*`，如 `@morya-ui/nuxt`）升级到 npm `latest`（按锁文件选用 pnpm / yarn / npm）
-2. 复制 `DESIGN.md`、Agent Skill、Cursor rules 与检查脚本
-3. 合并 `.cursor/mcp.json`，接入 [`@morya-ui/mcp@latest`](https://www.npmjs.com/package/@morya-ui/mcp)
+2. 复制 `DESIGN.md`、`AGENTS.md`、Agent Skill、Cursor rules 与检查脚本
+3. 合并 MCP 配置（Cursor / VS Code / Zed + 根目录 `.mcp.json`），接入 [`@morya-ui/mcp@latest`](https://www.npmjs.com/package/@morya-ui/mcp)
 4. 尝试在入口注入 `import 'morya-ui/styles.css'`
 5. 若缺失则追加 `check:colors` 脚本
 
@@ -38,11 +38,14 @@ npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
 
+# 只写部分编辑器的 MCP（仍会写 .mcp.json）
+npx @morya-ui/setup ai --editors=cursor,vscode
+
 # 只刷新 AI 模板 / MCP，不改动依赖
 npx @morya-ui/setup ai --skip-install
 ```
 
-在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**。完成后若写入了 MCP，请 **重启 Cursor**（或重载 MCP）。生成页面前让 Agent 先读 `DESIGN.md`。
+在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**。完成后若写入了 MCP，请 **重启编辑器或重载 MCP**。生成页面前让 Agent 先读 `DESIGN.md`（及 `AGENTS.md`）。
 
 ## 选项
 
@@ -51,6 +54,7 @@ npx @morya-ui/setup ai --skip-install
 | `--cwd <dir>` | 目标项目根（默认当前目录） |
 | `--pm pnpm\|yarn\|npm` | 指定包管理器 |
 | `--skills <list>` | 逗号分隔的 skill id，或 `all`（跳过交互提示） |
+| `--editors <list>` | MCP 目标：`cursor`、`vscode`、`zed` 或 `all`（默认三者；始终另写 `.mcp.json`） |
 | `--yes` / `-y` | 使用默认 skill，不提示 |
 | `--force` | 覆盖已有模板文件与 `morya-ui` MCP 条目 |
 | `--dry-run` | 只打印将要执行的操作 |
@@ -84,11 +88,15 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | 路径 | 作用 |
 | --- | --- |
 | `DESIGN.md` | AI 设计第一信源（原则、应用根、令牌摘要、禁止项） |
+| `AGENTS.md` | 编辑器无关的常驻清单（VS Code / Zed / CLI 等） |
 | `.agents/skills/morya-ui-pages/` | 页面生成 Agent Skill（见 [Agent Skill](/docs/agent-skill)） |
 | `.agents/skills/<optional>/` | 勾选时由 skills CLI 写入的最新 companion |
 | `.cursor/rules/` | Cursor 常驻规则 |
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
-| `.cursor/mcp.json` | Cursor MCP（`npx -y @morya-ui/mcp@latest`） |
+| `.cursor/mcp.json` | Cursor MCP |
+| `.vscode/mcp.json` | VS Code MCP |
+| `.zed/settings.json` | Zed `context_servers`（合并，不覆盖其它设置） |
+| `.mcp.json` | 便携 MCP（Agent Host / 跨工具发现） |
 
 模板源在仓库 [`design-kit/`](https://github.com/morya-space/morya-ui/tree/main/design-kit)。CLI 不调用 `app.use(MoryaUI)`，也不改 `App.vue`。
 
@@ -97,7 +105,7 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 - 依赖：默认将 `morya-ui@latest` 以及项目中已有的 `@morya-ui/*` 升到最新（可用 `--skip-install` 跳过）
 - 模板文件与 `.cursor/rules/*`：目标已存在则跳过（除非 `--force`）
 - Companion skills（skills CLI）：勾选时始终安装/更新为最新版
-- `.cursor/mcp.json`：合并其它 server；已有 `morya-ui` 条目则跳过（除非 `--force`）；新建或强制覆盖时使用 `@morya-ui/mcp@latest`
+- MCP 配置：合并其它 server / 设置；已有 `morya-ui` 条目则跳过（除非 `--force`）；新建或强制覆盖时使用 `@morya-ui/mcp@latest`
 - `check:colors`：仅在缺失时追加（除非 `--force`）
 - 样式：找到入口且尚未引入时才注入
 

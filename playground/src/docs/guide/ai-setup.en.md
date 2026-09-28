@@ -13,8 +13,8 @@ Hand-written apps can still use only `pnpm add morya-ui` — see [Quick start](/
 ## Recommended flow
 
 1. From the app root run `npx @morya-ui/setup` (upgrades `morya-ui` / existing `@morya-ui/*` to latest; use `npx @morya-ui/setup ai` when you mainly need the AI pack)
-2. **Restart Cursor** (or reload MCP)
-3. Have the agent read `DESIGN.md` before generating pages; use golden pages and [Agent Skill](/docs/agent-skill) as needed
+2. **Restart your editor or reload MCP** (Cursor / VS Code / Zed, …)
+3. Have the agent read `DESIGN.md` and `AGENTS.md` before generating pages; use [Agent Skill](/docs/agent-skill) and MCP snippets as needed
 4. Look up real APIs via [Agent MCP](/docs/mcp) — do not invent props
 
 ## Relation to Skill / MCP

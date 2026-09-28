@@ -9,7 +9,7 @@ Docs (zh/en):
 - [Agent Skill](https://morya-space.github.io/morya-ui/docs/agent-skill) — `morya-ui-pages` behavior
 - [Quick start](https://morya-space.github.io/morya-ui/docs/quick-start) — install and first component
 
-Installs / upgrades the UI library and any existing `@morya-ui/*` packages to **latest**, copies first-party Agent skills / Cursor rules / design docs from `design-kit`, installs optional companion skills at **latest** via the [skills CLI](https://skills.sh/), merges Cursor MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp), and injects `import 'morya-ui/styles.css'`.
+Installs / upgrades the UI library and any existing `@morya-ui/*` packages to **latest**, copies first-party Agent skills / Cursor rules / design docs from `design-kit`, installs optional companion skills at **latest** via the [skills CLI](https://skills.sh/), merges MCP for [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) across Cursor / VS Code / Zed (plus portable `.mcp.json`), and injects `import 'morya-ui/styles.css'`.
 
 ## Usage
 
@@ -35,6 +35,9 @@ npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
 
+# Only Cursor + VS Code MCP targets (still writes .mcp.json)
+npx @morya-ui/setup ai --editors=cursor,vscode
+
 # Refresh AI template / MCP without touching dependencies
 npx @morya-ui/setup ai --skip-install
 ```
@@ -46,12 +49,13 @@ npx @morya-ui/setup ai --skip-install
 | `--cwd <dir>` | Target project root (default: current directory) |
 | `--pm pnpm\|yarn\|npm` | Package manager (default: detect from lockfile, else `pnpm`) |
 | `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
+| `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three). Always also writes root `.mcp.json` |
 | `--yes` / `-y` | Use default skills without prompting |
 | `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
 | `--dry-run` | Print actions without writing or installing |
 | `--skip-install` | Do not install / upgrade `morya-ui` or `@morya-ui/*` |
 | `--skip-template` | Do not copy AI skill / rules / docs (also skips companion skill install) |
-| `--skip-mcp` | Do not write `.cursor/mcp.json` |
+| `--skip-mcp` | Do not write editor MCP configs or `.mcp.json` |
 | `--skip-styles` | Do not inject `styles.css` |
 | `--skip-scripts` | Do not add `check:colors` to `package.json` |
 | `-h`, `--help` | Show help |
@@ -72,7 +76,7 @@ Catalog: [`catalog/skills.json`](./catalog/skills.json).
 - Dependencies: always install / upgrade `morya-ui@latest` and any existing `@morya-ui/*` (e.g. `@morya-ui/nuxt`) to `@latest` unless `--skip-install`.
 - Template files and `.cursor/rules/*`: **skip** if the destination exists (unless `--force`).
 - Companion skills (`skills-cli`): always reinstall/update to **latest** when selected.
-- `.cursor/mcp.json`: merge other servers; skip existing `morya-ui` entry unless `--force`. New or forced entries use `npx -y @morya-ui/mcp@latest`.
+- MCP configs: merge other servers / settings; skip existing `morya-ui` entry unless `--force`. New or forced entries use `npx -y @morya-ui/mcp@latest`.
 - `package.json` `check:colors`: add only if missing (unless `--force`).
 - Styles: inject only when an entry file is found and the import is not already present.
 
@@ -81,27 +85,35 @@ Catalog: [`catalog/skills.json`](./catalog/skills.json).
 From the package `template/` (synced from repo `design-kit/`):
 
 - `DESIGN.md` — core design contract (principles, tokens, bans)
+- `AGENTS.md` — portable always-on agent checklist (editor-neutral)
 - `.agents/skills/morya-ui-pages/` — first-party page skill
-- `.cursor/rules/`
+- `.cursor/rules/` — Cursor-specific always-apply rules
 - `scripts/check-raw-colors.mjs`
 
 Via `npx skills add …` when optional companions are selected:
 
 - `.agents/skills/frontend-design/`, `fixing-accessibility/`, and/or `impeccable/` (latest upstream)
 
-### MCP (Cursor)
+### MCP (multi-editor)
 
-Writes / merges:
+| Editor | Path | JSON key |
+| --- | --- | --- |
+| Cursor | `.cursor/mcp.json` | `mcpServers.morya-ui` |
+| VS Code | `.vscode/mcp.json` | `servers.morya-ui` |
+| Zed | `.zed/settings.json` | `context_servers.morya-ui` |
+| Portable | `.mcp.json` | `mcpServers.morya-ui` |
+
+Shared server payload:
 
 ```json
 {
-  "mcpServers": {
-    "morya-ui": {
-      "command": "npx",
-      "args": ["-y", "@morya-ui/mcp@latest"]
-    }
-  }
+  "command": "npx",
+  "args": ["-y", "@morya-ui/mcp@latest"]
 }
 ```
 
-Restart Cursor (or reload MCP) after install.
+VS Code entries also set `"type": "stdio"`. Root `.mcp.json` is always written when MCP is not skipped (useful for Agent Host / cross-tool discovery).
+
+Claude Code / Windsurf / other clients: configure manually with the same `command` / `args` (see [Agent MCP](https://morya-space.github.io/morya-ui/docs/mcp)).
+
+Reload MCP in your editor after install.
