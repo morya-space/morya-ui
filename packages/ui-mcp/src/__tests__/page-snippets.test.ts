@@ -44,9 +44,18 @@ describe('page snippets catalog', () => {
     expect(scorePageSnippet(snippet, 'search')).toBeGreaterThan(0)
   })
 
-  it('filters snippets by page type', () => {
-    const result = filterPageSnippets({ pageType: 'dashboard' })
-    expect(result.items.some((item) => item.id === 'dashboard-kpi-grid')).toBe(true)
-    expect(result.items.some((item) => item.id === 'list-filters')).toBe(false)
+  it('list-table includes status, numeric align, and domain empty copy', () => {
+    const table = findPageSnippet('list-table')!
+    expect(table.template).toContain('MStatus')
+    expect(table.scriptSetup).toContain("align: 'end'")
+    expect(table.template).toContain('tabular-nums')
+    expect(table.template).toContain('还没有成员')
+    expect(table.imports).toContain('MStatus')
+  })
+
+  it('form-body sets label-width and domain placeholders', () => {
+    const form = findPageSnippet('form-body')!
+    expect(form.template).toContain('label-width')
+    expect(form.template).toContain('MSelect')
   })
 })

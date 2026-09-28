@@ -487,9 +487,9 @@ function resetFilters() {
     title: '列表页表格',
     titleEn: 'List page table',
     description:
-      '标准 MTable，直接放在 MPageContent 内。全视口主列表可再加 fill（表体滚、分页贴底）；嵌入/短页不要 fill。',
+      '标准 MTable：状态列 MStatus、数字列 align end、行操作 small text、空态带下一步。全视口主列表可加 fill；嵌入/短页不要 fill。',
     descriptionEn:
-      'Standard MTable in MPageContent. Add fill only for full-viewport main lists; skip fill for embedded/short pages.',
+      'MTable with MStatus status, end-aligned numbers, small text row actions, next-step empty. Add fill only for full-viewport main lists.',
     pageTypes: ['list'],
     keywords: [
       '表格',
@@ -502,12 +502,15 @@ function resetFilters() {
       'fill',
       '撑满',
       '分页',
+      'tabular',
+      '对齐',
     ],
-    imports: ['MTable', 'MEmpty', 'MButton'],
+    imports: ['MTable', 'MEmpty', 'MButton', 'MStatus', 'MSpace'],
     scriptSetup: `const columns = [
   { key: 'name', label: '名称' },
-  { key: 'status', label: '状态' },
-  { key: 'updatedAt', label: '更新时间' },
+  { key: 'status', label: '状态', width: 110 },
+  { key: 'count', label: '数量', width: 96, align: 'end' as const },
+  { key: 'updatedAt', label: '更新时间', width: 160 },
   { key: 'actions', label: '操作', width: 128 },
 ]
 const rows = ref<Record<string, unknown>[]>([])
@@ -525,14 +528,29 @@ const loading = ref(false)`,
   row-key="id"
   aria-label="数据列表"
 >
+  <template #cell-status="{ value }">
+    <MStatus
+      :label="value === 'active' || value === 'online' ? '启用' : '停用'"
+      :severity="value === 'active' || value === 'online' ? 'success' : 'secondary'"
+    />
+  </template>
+  <template #cell-count="{ value }">
+    <span style="font-variant-numeric: tabular-nums">{{ value ?? '—' }}</span>
+  </template>
+  <template #cell-actions>
+    <MSpace>
+      <MButton severity="secondary" size="small" text>编辑</MButton>
+      <MButton severity="danger" size="small" text>删除</MButton>
+    </MSpace>
+  </template>
   <template #empty>
     <MEmpty
-      title="还没有数据"
-      description="创建第一条记录后，这里会列出结果。"
+      title="还没有成员"
+      description="新建第一条后，这里会列出姓名、状态与更新时间。"
       icon="inbox"
     >
       <template #extra>
-        <MButton severity="primary">新建</MButton>
+        <MButton severity="primary">新建成员</MButton>
       </template>
     </MEmpty>
   </template>
@@ -540,22 +558,28 @@ const loading = ref(false)`,
     rules: [
       '先判断是否适合 fill：全视口后台主列表 + 表格是主任务 → MPageContent fill + MTable fill',
       '嵌入表、短页、整页文档滚动 → 不要 fill，内容高度即可',
-      '表格直接放在 MPageContent 内；空态用 MEmpty',
+      '业务状态列用 MStatus；分类标签才用 MTag',
+      '数量/金额列 columns.align = end，并用 tabular-nums',
+      '行操作用 size="small" + text；空态文案写领域下一步，禁止「示例 / Name / No data」',
     ],
     rulesEn: [
       'Decide fill first: full-viewport admin main list → MPageContent fill + MTable fill',
       'Embedded / short / document-scroll pages → skip fill',
-      'Place the table directly in MPageContent; use MEmpty for zero-data states',
+      'Business status → MStatus; categories → MTag',
+      'Numeric columns: align end + tabular-nums',
+      'Row actions: size="small" + text; empty copy is domain-real — no “示例 / Name / No data”',
     ],
     avoid: [
       '不要用 MCard 包裹 bordered MTable',
       '不要对嵌入/短页硬套 fill',
       '适合 fill 时不要手写 min-height / calc',
+      '不要在 #cell-status 默认用 MTag',
     ],
     avoidEn: [
       'Do not wrap a bordered MTable with MCard',
       'Do not force fill on embedded or short pages',
       'Do not hand-write min-height / calc when fill is appropriate',
+      'Do not default #cell-status to MTag',
     ],
   },
   {
@@ -622,25 +646,33 @@ const loading = ref(false)`,
     id: 'empty-block',
     title: '空状态 MEmpty',
     titleEn: 'Empty state with MEmpty',
-    description: '列表或内容区无数据时使用 MEmpty，操作放在 #extra。',
-    descriptionEn: 'Use MEmpty for no-data regions; put actions in #extra.',
+    description: '列表或内容区无数据时使用 MEmpty；标题/说明写领域下一步，#extra 放唯一 primary。',
+    descriptionEn: 'MEmpty for no-data; domain next-step copy; one primary in #extra.',
     pageTypes: ['list', 'common'],
     keywords: ['空状态', '无数据', 'empty', 'zero state', 'no data'],
     imports: ['MEmpty', 'MButton'],
     template: `<MEmpty
-  title="还没有数据"
-  description="创建第一条记录后即可在此查看。"
-  icon="database"
+  title="还没有成员"
+  description="邀请或新建第一位成员后，这里会显示状态与最近活动。"
+  icon="users"
 >
   <template #extra>
-    <MButton label="新建" />
-    <MButton label="导入" severity="secondary" text />
+    <MButton severity="primary">新建成员</MButton>
+    <MButton severity="secondary" text>导入名单</MButton>
   </template>
 </MEmpty>`,
-    rules: ['正常无数据用 MEmpty，不要用错误色', '主 CTA 用 primary，次动作用 text/secondary'],
-    rulesEn: ['Use MEmpty for normal emptiness, not error colors', 'Primary CTA + secondary/text for lesser actions'],
-    avoid: ['不要用手写 div 拼空态', '不要用 MResult 表达无数据'],
-    avoidEn: ['Do not hand-roll empty markup', 'Do not use MResult for no-data'],
+    rules: [
+      '正常无数据用 MEmpty，不要用错误色',
+      '主 CTA 用 severity="primary"，次动作用 text/secondary',
+      '文案写清「现在可以做什么」，禁止「暂无数据 / No data / 示例」',
+    ],
+    rulesEn: [
+      'Use MEmpty for normal emptiness, not error colors',
+      'Primary CTA with severity="primary"; lesser actions text/secondary',
+      'Copy says what to do next — no “暂无数据 / No data / 示例”',
+    ],
+    avoid: ['不要用手写 div 拼空态', '不要用 MResult 表达无数据', '不要放两个 filled primary'],
+    avoidEn: ['Do not hand-roll empty markup', 'Do not use MResult for no-data', 'Do not place two filled primaries'],
   },
   {
     id: 'result-block',
@@ -681,25 +713,54 @@ const loading = ref(false)`,
     id: 'form-body',
     title: '表单主体',
     titleEn: 'Form body surface',
-    description: 'MPageSection variant="form" 包裹 MForm 字段。',
-    descriptionEn: 'Wrap MForm fields with MPageSection variant="form".',
+    description:
+      'MPageSection variant="form" + MForm；左标签时设 label-position/label-width；常驻错误用字段 errorMessage。',
+    descriptionEn:
+      'MPageSection form + MForm; set label-position/label-width for left labels; persistent errors via errorMessage.',
     pageTypes: ['form'],
-    keywords: ['表单', 'form', 'fields', 'formitem'],
-    imports: ['MPageSection', 'MForm', 'MFormItem', 'MInput'],
-    scriptSetup: `const model = reactive({ name: '' })
-const submitting = ref(false)`,
+    keywords: ['表单', 'form', 'fields', 'formitem', 'label-width', 'errorMessage'],
+    imports: ['MPageSection', 'MForm', 'MFormItem', 'MInput', 'MSelect'],
+    scriptSetup: `const model = reactive({ name: '', role: undefined as string | undefined })
+const submitting = ref(false)
+const roleOptions = [
+  { label: '管理员', value: 'admin' },
+  { label: '成员', value: 'member' },
+]`,
     template: `<MPageSection variant="form">
-  <MForm @submit.prevent="onSubmit">
+  <MForm
+    label-position="left"
+    label-width="6rem"
+    @submit.prevent="onSubmit"
+  >
     <MFormItem label="姓名" name="name" required>
-      <MInput v-model="model.name" placeholder="请输入姓名" fluid />
+      <MInput v-model="model.name" placeholder="与工牌一致的姓名" fluid />
     </MFormItem>
-    <!-- 更多字段 -->
+    <MFormItem label="角色" name="role" required>
+      <MSelect
+        v-model="model.role"
+        :options="roleOptions"
+        placeholder="选择角色"
+        clearable
+        fluid
+      />
+    </MFormItem>
+    <!-- 更多字段；常驻错误：error-message="请填写必填项" -->
   </MForm>
 </MPageSection>`,
-    rules: ['字段用 MFormItem + fluid 控件', '表单表面由 MPageSection 提供，不要重复 MCard'],
-    rulesEn: ['Use MFormItem with fluid controls', 'Let MPageSection provide the surface; do not duplicate MCard'],
-    avoid: ['不要绕过 MForm 手写校验状态'],
-    avoidEn: ['Do not bypass MForm for validation state'],
+    rules: [
+      '字段用 MFormItem + fluid 控件',
+      '左标签布局设 label-position="left" + label-width（约 5–7rem）',
+      '表单表面由 MPageSection 提供，不要重复 MCard',
+      '常驻错误用字段 errorMessage 或 token 样式 role="alert"，不要用 <MMessage> 当内嵌 Alert',
+    ],
+    rulesEn: [
+      'Use MFormItem with fluid controls',
+      'Left labels: label-position="left" + label-width (~5–7rem)',
+      'Let MPageSection provide the surface; do not duplicate MCard',
+      'Persistent errors: field errorMessage or token role="alert" — not <MMessage> as inline alert',
+    ],
+    avoid: ['不要绕过 MForm 手写校验状态', '不要把错误只画成红色边框而无文案'],
+    avoidEn: ['Do not bypass MForm for validation state', 'Do not show errors as red borders without copy'],
   },
   {
     id: 'form-actions',
@@ -725,14 +786,32 @@ const submitting = ref(false)`,
     id: 'dashboard-kpi-grid',
     title: '仪表盘 KPI 栅格',
     titleEn: 'Dashboard KPI grid',
-    description: 'MGrid + MPageStat 展示关键指标。',
-    descriptionEn: 'Key metrics with MGrid and MPageStat.',
+    description:
+      'MGrid + MPageStat：带 trend / trendDirection / trendSeverity；高密条可用 density="compact"。',
+    descriptionEn:
+      'MGrid + MPageStat with trend / trendDirection / trendSeverity; use density="compact" for dense strips.',
     pageTypes: ['dashboard'],
-    keywords: ['kpi', '指标', 'stat', 'grid', 'metrics'],
+    keywords: ['kpi', '指标', 'stat', 'grid', 'metrics', 'trend', 'compact'],
     imports: ['MGrid', 'MGridItem', 'MPageStat'],
     scriptSetup: `const metrics = ref([
-  { label: '总用户', value: '12,480', trend: '+8.2%', trendDirection: 'up' as const, trendLabel: '较上月', icon: 'users' },
-  { label: '今日活跃', value: '1,926', trend: '+3.1%', trendDirection: 'up' as const, trendLabel: '较昨日', icon: 'activity' },
+  {
+    label: '在册成员',
+    value: '12,480',
+    trend: '+8.2%',
+    trendDirection: 'up' as const,
+    trendSeverity: 'success' as const,
+    trendLabel: '较上月',
+    icon: 'users',
+  },
+  {
+    label: '今日活跃',
+    value: '1,926',
+    trend: '-3.1%',
+    trendDirection: 'down' as const,
+    trendSeverity: 'warn' as const,
+    trendLabel: '较昨日',
+    icon: 'activity',
+  },
 ])`,
     template: `<MGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
   <MGridItem v-for="metric in metrics" :key="metric.label" :span="1">
@@ -741,15 +820,27 @@ const submitting = ref(false)`,
       :value="metric.value"
       :trend="metric.trend"
       :trend-direction="metric.trendDirection"
+      :trend-severity="metric.trendSeverity"
       :trend-label="metric.trendLabel"
       :icon="metric.icon"
     />
   </MGridItem>
-</MGrid>`,
-    rules: ['KPI 用 MPageStat，不要每页自定义 stat CSS', 'responsive="screen" 便于窄屏降列'],
-    rulesEn: ['Use MPageStat for KPIs', 'Use responsive="screen" for narrow layouts'],
-    avoid: ['不要每个指标手写 font-size/颜色'],
-    avoidEn: ['Do not hand-write font sizes/colors per metric'],
+</MGrid>
+<!-- 高密条带示例：density="compact" layout="plain" orientation="inline" -->`,
+    rules: [
+      'KPI 用 MPageStat，不要每页自定义 stat CSS',
+      '趋势务必带 trendDirection + trendSeverity（升 success / 降 warn|danger）',
+      'responsive="screen" 便于窄屏降列',
+      '密集工作台可用 density="compact"；加载中用 loading',
+    ],
+    rulesEn: [
+      'Use MPageStat for KPIs — no per-page stat CSS',
+      'Always set trendDirection + trendSeverity (up→success, down→warn|danger)',
+      'Use responsive="screen" for narrow layouts',
+      'Dense dashboards may use density="compact"; use loading while fetching',
+    ],
+    avoid: ['不要每个指标手写 font-size/颜色', '不要只有数字没有趋势语义（用户要求趋势时）'],
+    avoidEn: ['Do not hand-write font sizes/colors per metric', 'Do not omit trend semantics when the brief asks for trends'],
   },
   {
     id: 'dashboard-chart-card',
