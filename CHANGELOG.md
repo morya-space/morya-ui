@@ -1,5 +1,11 @@
 # morya-ui
 
+## 0.3.6
+
+### 文档
+
+- add portable AGENTS.md and multi-editor MCP docs
+
 ## 0.3.5
 
 ### 新功能
