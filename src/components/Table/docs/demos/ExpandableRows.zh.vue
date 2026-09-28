@@ -1,19 +1,24 @@
 <script setup lang="ts">
+import type { TableItem } from 'morya-ui'
 import { MTable } from 'morya-ui'
 
+type Row = { id: number; name: string; role: string; extra: string }
+
 const columns = [
-  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },
-  { key: 'q1', label: 'Q1 营收', width: 140 },
-  { key: 'q2', label: 'Q2 营收', width: 140 },
-  { key: 'q3', label: 'Q3 营收', width: 140 },
-  { key: 'action', label: '操作', width: 100 },
+  { key: 'name', label: '姓名' },
+  { key: 'role', label: '角色' },
 ]
-const rows = [
-  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },
-  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },
-]
+const rows: Row[] = [{ id: 1, name: 'Ada', role: '设计师', extra: '设计系统细节' }]
+
+function extraOf(row: TableItem) {
+  return (row as Row).extra
+}
 </script>
 
 <template>
-  <MTable :columns="columns" :rows="rows" bordered :paginator="false" />
+  <MTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
+    <template #expansion="{ row }">
+      {{ extraOf(row) }}
+    </template>
+  </MTable>
 </template>

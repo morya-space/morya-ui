@@ -8,6 +8,29 @@ description: Data table with sorting, filtering, selection, pagination, frozen c
 
 `MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.
 
+Header “select all” applies to the **current page** only. Enterprise capabilities (virtual scroll, column resize, header filters, inline edit, etc.) are optional props on the same `MTable`—no separate grid component.
+
+### Capability matrix
+
+| Capability | Prop / column field | Default |
+| --- | --- | --- |
+| Sort / multi-sort | `sortable` / `multiSort` | off |
+| Programmatic filter | `filters` / `filterOptions` / `searchValue` | — |
+| Header filter UI | column `filterable` (+ `filters`) | off |
+| Pagination | `paginator` | off |
+| Selection | `selectionMode` | off |
+| Fixed columns | column `fixed` | — |
+| Expandable rows | `expandable` | off |
+| Column resize | column `resizable` / `v-model:column-widths` | off |
+| Virtual scroll | `virtual` + height | off |
+| Column hide / order | `hiddenColumns` / `columnOrder` | — |
+| Grouped headers | column `children` | — |
+| Footer summary | `showFooter` + `footerMethod` | off |
+| Cell merge | `spanMethod` | — |
+| Inline edit | `editConfig` + column `editable` | off |
+
+Out of scope: Excel area-select/copy, pivot, embedded charts.
+
 Column width rules:
 
 - Columns with `width` use a fixed width
@@ -49,10 +72,56 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 ```vue preview src="./demos/ExpandableRows.en.vue"
 ```
 
+## Fixed columns
+
+Set `fixed: 'left' | 'right'` on a column (or `fixed: true` for left).
+
+```vue preview src="./demos/FixedColumns.en.vue"
+```
+
+## Column resize and header filters
+
+Set `resizable` to drag column widths (`v-model:column-widths`). Set `filterable` for a header filter; optional `filters` for checkbox options, otherwise free-text contains.
+
+```vue preview src="./demos/ResizeAndFilter.en.vue"
+```
+
+## Virtual scroll
+
+Enable `virtual` with `maxHeight` / `tableHeight` / `fill`. Expandable tables skip virtualization.
+
+```vue preview src="./demos/VirtualScroll.en.vue"
+```
+
+## Multi-header, footer, and editing
+
+Use column `children` for grouped headers; `show-footer` + `footer-method` for summaries; `edit-config` + column `editable` for cell editing (`#edit-{key}` / `edit-change`); `span-method` for merges.
+
+```vue preview src="./demos/GridFeatures.en.vue"
+```
+
 ## Empty and loading
 
 ```vue preview src="./demos/EmptyAndLoading.en.vue"
 ```
+
+## Server mode
+
+Pass `server-options` with `server-total`, and sync page / page size / sort via `v-model:server-options`.
+
+```vue preview src="./demos/Demo7.vue"
+```
+
+## Breaking changes
+
+- `serverItemsLength` → `serverTotal`
+- `rowsItems` → `pageSizes`
+- Removed `hideHeader`; use `showHeader` (default `true`)
+- Removed `hideRowsPerPage`; use `showRowsPerPage` (default `true`)
+- Removed: `clickEventType`, `rowsPerPageMessage`, `rowsOfPageSeparatorMessage`, `preventContextMenuRow`, `tableNodeId`
+- Events: `contextmenuRow` → `row-contextmenu`; `selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`
+- Removed events: `updatePageItems`, `updateTotalItems`, `page` (keep `update:page`)
+- Row interaction: click and dblclick always emit (`row-click` / `row-dblclick`); context menu always `preventDefault`s and emits `row-contextmenu`
 
 ## TableColumnDefinition
 
@@ -67,6 +136,11 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 | `align` | `'start' \| 'center' \| 'end'` | Cell alignment. |
 | `render` | `(row) => unknown` | Custom cell renderer. |
 | `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |
+| `resizable` | `boolean` | Drag to resize column width. |
+| `filterable` | `boolean` | Show header filter trigger. |
+| `filters` | `TableColumnFilter[]` | Header filter options; omit for text filter. |
+| `children` | `TableColumnDefinition[]` | Nested columns for multi-level headers. |
+| `editable` | `boolean` | Editable when `editConfig` is set. |
 
 ## Props
 
@@ -77,9 +151,14 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 | `fit` | `boolean` | `true` | Flexible columns fill remaining width. |
 | `selectionMode` | `'single' \| 'multiple' \| null` | `null` | Row selection mode. |
 | `selection` | `TableItem[] \| null` | `null` | Multi-select (`v-model:selection`). |
+| `serverOptions` | `TableServerOptions \| null` | `null` | Server paging/sort options. |
+| `serverTotal` | `number` | `0` | Total row count in server mode. |
 | `paginator` | `boolean` | `false` | Built-in pagination footer. |
 | `page` | `number` | `1` | Current page (`v-model:page`). |
 | `rowsPerPage` | `number` | `25` | Page size. |
+| `pageSizes` | `number[]` | `[25, 50, 100]` | Page size options. |
+| `showHeader` | `boolean` | `true` | Show table header. |
+| `showRowsPerPage` | `boolean` | `true` | Show page-size picker. |
 | `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |
 | `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |
 | `highlightCurrent` | `boolean` | `false` | Highlight current row. |
@@ -98,14 +177,18 @@ Set `expandable` and provide the `expansion` slot. Column `render` works for cus
 | `body-cell` | Any cell; scope `{ row, column, value }`. |
 | `expansion` | Expanded row; scope `{ row }`. |
 | `empty` / `loading` | Empty and loading placeholders. |
+| `header-{key}` | Header slot (exact key case). |
 
 ## Events
 
 | Event | Payload | Description |
 | --- | --- | --- |
 | `sort` | `{ sortField?, sortOrder? }` | Sort changed. |
-| `page` | `number` | Page changed. |
-| `row-click` | `{ row, index }` | Row clicked. |
+| `row-click` | `{ row, index }`, `Event` | Row clicked. |
+| `row-dblclick` | `{ row, index }`, `Event` | Row double-clicked. |
+| `row-contextmenu` | `item`, `MouseEvent` | Row context menu. |
+| `select-row` / `deselect-row` | `TableItem` | Row selection toggled. |
+| `select-all` | — | Select all on current page. |
 | `current-change` | `row \| null, oldRow \| null` | Current row changed. |
 | `update:selection` | `TableItem[]` | Selection v-model. |
 | `update:page` | `number` | Page v-model. |
@@ -153,17 +236,20 @@ interface TableColumnDefinition {
   minWidth?: number
   sortable?: boolean
   fixed?: boolean | 'left' | 'right'
-  align?: 'start' | 'center' | 'end' | 'left' | 'right'
+  align?: 'start' | 'center' | 'end'
   render?: (row: TableItem) => unknown
   filterable?: boolean
-  filters?: { label: string; value: string | number }[]
+  filters?: TableColumnFilter[]
+  resizable?: boolean
+  children?: TableColumnDefinition[]
+  editable?: boolean
   showOverflowTooltip?: boolean
 }
 ```
 
 <h4 id="TableServerOptions">TableServerOptions</h4>
 
-Server-side paging/sorting payload for `serverOptions`, with `serverItemsLength`:
+Server-side paging/sorting payload for `serverOptions`, with `serverTotal`:
 
 ```ts
 interface TableServerOptions {

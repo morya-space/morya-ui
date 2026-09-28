@@ -8,6 +8,29 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 
 `MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。
 
+多选表头「全选」仅作用于**当前页**（与文案「全选当前页」一致）。企业级能力（虚拟滚动、列宽拖拽、表头筛选、行内编辑等）在同一 `MTable` 上以可选 props 逐步开放，无需切换组件。
+
+### 能力矩阵
+
+| 能力 | Prop / 列字段 | 默认 |
+| --- | --- | --- |
+| 排序 / 多列排序 | `sortable` / `multiSort` | 关 |
+| 程序化筛选 | `filters` / `filterOptions` / `searchValue` | — |
+| 表头筛选 UI | 列 `filterable` (+ `filters`) | 关 |
+| 分页 | `paginator` | 关 |
+| 选择 | `selectionMode` | 关 |
+| 固定列 | 列 `fixed` | — |
+| 展开行 | `expandable` | 关 |
+| 列宽拖拽 | 列 `resizable` / `v-model:column-widths` | 关 |
+| 虚拟滚动 | `virtual` + 高度 | 关 |
+| 列显隐 / 顺序 | `hiddenColumns` / `columnOrder` | — |
+| 多级表头 | 列 `children` | — |
+| 表尾汇总 | `showFooter` + `footerMethod` | 关 |
+| 单元格合并 | `spanMethod` | — |
+| 行内编辑 | `editConfig` + 列 `editable` | 关 |
+
+不做：Excel 框选复制、透视、内嵌图表（超出本组件边界）。
+
 列宽规则：
 
 - 设置了 `width` 的列为固定宽度
@@ -30,43 +53,75 @@ import { MTable, MTag } from 'morya-ui'
 
 ## 行选择
 
-多选配合 `selection-mode="multiple"` 与 `v-model:selection`；单选使用 `selection-mode="single"` 与 `v-model:selected-item`。
+多选配合 `selection-mode="multiple"` 与 `v-model:selection`；单选使用 `selection-mode="single"` 与 `v-model:selected-item`。表头全选仅选中当前页。
 
 ```vue preview src="./demos/Selection.zh.vue"
 ```
 
 ## 筛选与分页
 
-客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`。
+客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`（受控同步）。
 
 ```vue preview src="./demos/FilterAndPagination.zh.vue"
 ```
 
 ## 固定列
 
-列定义中设置 `fixed: 'left'` 可冻结左侧列（当前批次支持左固定）。
+列定义中设置 `fixed: 'left' | 'right'`（或 `fixed: true` 视为左固定）。
 
-```vue preview src="./demos/ExpandableRows.zh.vue"
+```vue preview src="./demos/FixedColumns.zh.vue"
 ```
 
 ## 展开行与列渲染
 
 列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。
 
-```vue preview src="./demos/EmptyAndLoading.zh.vue"
+```vue preview src="./demos/ExpandableRows.zh.vue"
+```
+
+## 列宽拖拽与表头筛选
+
+列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，可选 `filters` 为多选选项，否则为文本包含筛选。
+
+```vue preview src="./demos/ResizeAndFilter.zh.vue"
+```
+
+## 虚拟滚动
+
+开启 `virtual`，并提供 `maxHeight` / `tableHeight` / `fill` 之一。展开行场景会自动降级为普通渲染。
+
+```vue preview src="./demos/VirtualScroll.zh.vue"
+```
+
+## 多级表头、表尾与编辑
+
+列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计；`edit-config` + 列 `editable` 启用单元格编辑（`#edit-{key}` / `edit-change`）；`span-method` 合并单元格。
+
+```vue preview src="./demos/GridFeatures.zh.vue"
 ```
 
 ## 空态与加载
 
-```vue preview src="./demos/Demo6.vue"
+```vue preview src="./demos/EmptyAndLoading.zh.vue"
 ```
 
 ## 服务端模式
 
-传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。
+传入 `server-options` 与 `server-total`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。
 
 ```vue preview src="./demos/Demo7.vue"
 ```
+
+## Breaking changes
+
+- `serverItemsLength` → `serverTotal`
+- `rowsItems` → `pageSizes`
+- `hideHeader` 移除；改用 `showHeader`（默认 `true`）
+- `hideRowsPerPage` 移除；改用 `showRowsPerPage`（默认 `true`）
+- 移除：`clickEventType`、`rowsPerPageMessage`、`rowsOfPageSeparatorMessage`、`preventContextMenuRow`、`tableNodeId`
+- 事件：`contextmenuRow` → `row-contextmenu`；`selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`
+- 移除事件：`updatePageItems`、`updateTotalItems`、`page`（保留 `update:page`）
+- 行交互：始终同时支持单击 / 双击（`row-click` / `row-dblclick`）；右键始终 `preventDefault` 并抛出 `row-contextmenu`
 
 ## TableColumnDefinition
 
@@ -77,10 +132,15 @@ import { MTable, MTag } from 'morya-ui'
 | `width` | `number` | 固定列宽（px）。 |
 | `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |
 | `sortable` | `boolean` | 是否可排序。 |
-| `fixed` | `boolean \| 'left' \| 'right'` | 固定列；当前实现左固定。 |
+| `fixed` | `boolean \| 'left' \| 'right'` | 固定列；`true` 等同 `'left'`。 |
 | `align` | `'start' \| 'center' \| 'end'` | 单元格对齐。 |
 | `render` | `(row) => unknown` | 自定义单元格渲染。 |
 | `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |
+| `resizable` | `boolean` | 可拖拽调整列宽。 |
+| `filterable` | `boolean` | 显示表头筛选。 |
+| `filters` | `TableColumnFilter[]` | 表头筛选选项；省略则为文本筛选。 |
+| `children` | `TableColumnDefinition[]` | 多级表头子列。 |
+| `editable` | `boolean` | 配合 `editConfig` 可编辑。 |
 
 ## Props
 
@@ -93,11 +153,23 @@ import { MTable, MTag } from 'morya-ui'
 | `selection` | `TableItem[] \| null` | `null` | 多选绑定（`v-model:selection`）。 |
 | `selectedItem` | `TableItem \| null` | `null` | 单选绑定（`v-model:selected-item`）。 |
 | `serverOptions` | `TableServerOptions \| null` | `null` | 服务端分页/排序选项。 |
-| `serverItemsLength` | `number` | `0` | 服务端总条数。 |
+| `serverTotal` | `number` | `0` | 服务端总条数。 |
 | `paginator` | `boolean` | `false` | 显示内置分页页脚。 |
 | `page` | `number` | `1` | 当前页（`v-model:page`）。 |
 | `rowsPerPage` | `number` | `25` | 每页条数。 |
+| `pageSizes` | `number[]` | `[25, 50, 100]` | 分页每页条数选项。 |
+| `showHeader` | `boolean` | `true` | 是否显示表头。 |
+| `showRowsPerPage` | `boolean` | `true` | 是否显示每页条数选择器。 |
 | `fill` | `boolean` | `false` | 撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。 |
+| `columnWidths` | `Record<string, number> \| null` | `null` | 列宽（`v-model:column-widths`）。 |
+| `virtual` | `boolean` | `false` | 行虚拟滚动（需高度；展开行时跳过）。 |
+| `virtualRowHeight` | `number` | `40` | 虚拟行高估算。 |
+| `hiddenColumns` | `string[] \| null` | `null` | 隐藏列键（`v-model:hidden-columns`）。 |
+| `columnOrder` | `string[] \| null` | `null` | 叶列顺序（`v-model:column-order`）。 |
+| `showFooter` | `boolean` | `false` | 显示表尾。 |
+| `footerMethod` | `TableFooterMethod \| null` | `null` | 表尾数据。 |
+| `spanMethod` | `TableSpanMethod \| null` | `null` | 单元格合并。 |
+| `editConfig` | `TableEditConfig \| null` | `null` | 单元格编辑配置。 |
 | `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |
 | `striped` | `boolean` | `false` | 斑马纹行。 |
 | `bordered` | `boolean` | `false` | 单元格边框。 |
@@ -120,7 +192,6 @@ import { MTable, MTag } from 'morya-ui'
 | `bodyRowClassName` | `TableBodyRowClassName` | — | — |
 | `bodyTextDirection` | `TableTextDirection` | — | — |
 | `checkboxColumnWidth` | `number \| null` | — | — |
-| `clickEventType` | `TableClickEventType` | — | — |
 | `clickRowToExpand` | `boolean` | — | — |
 | `currentRowKey` | `string \| number \| null` | — | — |
 | `expandColumnWidth` | `number` | — | — |
@@ -133,22 +204,14 @@ import { MTable, MTag } from 'morya-ui'
 | `headerClassName` | `string` | — | — |
 | `headerItemClassName` | `TableHeaderItemClassName` | — | — |
 | `headerTextDirection` | `TableTextDirection` | — | — |
-| `hideHeader` | `boolean` | — | — |
-| `hideRowsPerPage` | `boolean` | — | — |
 | `indexColumnWidth` | `number` | — | — |
 | `multiSort` | `boolean` | — | — |
 | `mustSort` | `boolean` | — | — |
-| `preventContextMenuRow` | `boolean` | — | — |
-| `rowsItems` | `number[]` | — | — |
-| `rowsOfPageSeparatorMessage` | `string` | — | — |
-| `rowsPerPageMessage` | `string` | — | — |
-| `showHeader` | `boolean` | — | — |
 | `showIndex` | `boolean` | — | — |
 | `showIndexSymbol` | `string` | — | — |
 | `tableClassName` | `string` | — | — |
 | `tableHeight` | `number \| null` | — | — |
 | `tableMinHeight` | `number` | — | — |
-| `tableNodeId` | `string` | — | — |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
@@ -157,6 +220,8 @@ import { MTable, MTag } from 'morya-ui'
 | 插槽 | 说明 |
 | --- | --- |
 | `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`。 |
+| `edit-{key}` | 列 `{key}` 编辑态，作用域含 `value` / `setValue` / `commit` / `cancel`。 |
+| `footer` | 自定义表尾。 |
 | `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |
 | `expansion` | 展开行内容，作用域 `{ row }`。 |
 | `empty` | 自定义空态。 |
@@ -167,31 +232,33 @@ import { MTable, MTag } from 'morya-ui'
 | `body-prepend` | 自定义 `body-prepend` 内容。 |
 | `customize-headers` | 自定义 `customize-headers` 内容。 |
 | `header` | 自定义 `header` 内容。 |
-| `header-*` | 动态插槽（前缀 `header-`）。 |
+| `header-{key}` | 列头插槽（键名大小写与 `columns[].key` 一致）。 |
 
 ## Events
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |
-| `page` | `number` | 页码变化。 |
-| `row-click` | `{ row, index }` | 行单击。 |
+| `row-click` | `{ row, index }`, `Event` | 行单击。 |
+| `row-dblclick` | `{ row, index }`, `Event` | 行双击。 |
+| `row-contextmenu` | `item`, `MouseEvent` | 行右键。 |
+| `select-row` | `TableItem` | 选中一行。 |
+| `deselect-row` | `TableItem` | 取消选中一行。 |
+| `select-all` | — | 全选当前页。 |
 | `current-change` | `row \| null, oldRow \| null` | 当前高亮行变化。 |
 | `expand` | `{ row, expanded }` | 行展开。 |
 | `update:selection` | `TableItem[]` | 多选 v-model。 |
 | `update:page` | `number` | 页码 v-model。 |
 | `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |
 | `update:current-row-key` | `string \| number \| null` | 当前行键 v-model。 |
-| `contextmenuRow` | — | — |
-| `deselectRow` | — | — |
 | `filter` | — | — |
-| `selectAll` | — | — |
-| `selectRow` | — | — |
 | `update:expandedRowKeys` | — | — |
 | `update:filters` | — | — |
+| `update:columnWidths` | `Record<string, number>` | 列宽 v-model。 |
+| `update:hiddenColumns` | `string[]` | 隐藏列 v-model。 |
+| `update:columnOrder` | `string[]` | 列顺序 v-model。 |
+| `edit-change` | `TableEditChangePayload` | 单元格编辑提交。 |
 | `update:selectedItem` | — | — |
-| `updatePageItems` | — | — |
-| `updateTotalItems` | — | — |
 
 ## 实例方法
 
@@ -228,14 +295,6 @@ type TableItem = Record<string, unknown>
 
 ```ts
 type TableTextDirection = 'left' | 'center' | 'right'
-```
-
-<h4 id="TableClickEventType">TableClickEventType</h4>
-
-完整定义见源码 `types.ts`。
-
-```ts
-type TableClickEventType = 'single' | 'double'
 ```
 
 <h4 id="TableFilterOption">TableFilterOption</h4>
@@ -288,17 +347,15 @@ interface TableColumnDefinition {
   minWidth?: number
   sortable?: boolean
   fixed?: boolean | 'left' | 'right'
-  align?: 'start' | 'center' | 'end' | 'left' | 'right'
+  align?: 'start' | 'center' | 'end'
   render?: (row: TableItem) => unknown
-  filterable?: boolean
-  filters?: { label: string; value: string | number }[]
   showOverflowTooltip?: boolean
 }
 ```
 
 <h4 id="TableServerOptions">TableServerOptions</h4>
 
-服务端分页/排序时传给 `serverOptions`，配合 `serverItemsLength`：
+服务端分页/排序时传给 `serverOptions`，配合 `serverTotal`：
 
 ```ts
 interface TableServerOptions {

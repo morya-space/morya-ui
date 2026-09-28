@@ -19,7 +19,7 @@ const total = ref(42)
     v-model:server-options="serverOptions"
     :columns="columns"
     :rows="rows"
-    :server-items-length="total"
+    :server-total="total"
     :loading="false"
   />
 </template>

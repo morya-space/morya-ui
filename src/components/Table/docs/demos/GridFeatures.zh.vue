@@ -1,0 +1,48 @@
+<script setup lang="ts">
+import type { TableColumnDefinition, TableItem } from 'morya-ui'
+import { MTable } from 'morya-ui'
+import { ref } from 'vue'
+
+const columns: TableColumnDefinition[] = [
+  {
+    key: 'info',
+    label: '基本信息',
+    children: [
+      { key: 'name', label: '姓名', editable: true },
+      { key: 'role', label: '角色' },
+    ],
+  },
+  { key: 'score', label: '分数', align: 'end' },
+]
+
+const rows = ref<TableItem[]>([
+  { id: 1, name: 'Ada', role: 'Designer', score: 96 },
+  { id: 2, name: 'Lin', role: 'Engineer', score: 88 },
+  { id: 3, name: 'Kai', role: 'Engineer', score: 91 },
+])
+
+const hiddenColumns = ref<string[]>([])
+</script>
+
+<template>
+  <MTable
+    v-model:hidden-columns="hiddenColumns"
+    :columns="columns"
+    :rows="rows"
+    bordered
+    show-footer
+    :footer-method="({ data }) => [[
+      '合计',
+      '',
+      data.reduce((sum, row) => sum + Number(row.score ?? 0), 0),
+    ]]"
+    :edit-config="{ mode: 'cell', trigger: 'click' }"
+    :span-method="({ column, rowIndex }) => {
+      if (column.value === 'role' && rowIndex === 1) return { rowspan: 2, colspan: 1 }
+      if (column.value === 'role' && rowIndex === 2) return { rowspan: 0, colspan: 0 }
+      return { rowspan: 1, colspan: 1 }
+    }"
+    :paginator="false"
+    @edit-change="({ row, column, value }) => { row[column] = value }"
+  />
+</template>

@@ -1,26 +1,24 @@
 <script setup lang="ts">
-import type { TableColumnDefinition, TableItem } from 'morya-ui'
-import { MTable } from 'morya-ui'
+import { MButton, MTable } from 'morya-ui'
+import { ref } from 'vue'
 
-type Row = { id: number; name: string; role: string; extra: string }
-
-const columns: TableColumnDefinition[] = [
-  { key: 'name', label: '姓名', render: (row) => `*${(row as Row).name}*` },
-  { key: 'role', label: '角色' },
+const loading = ref(false)
+const columns = [
+  { key: 'name', label: '姓名', minWidth: 120 },
+  { key: 'role', label: '角色', minWidth: 120 },
 ]
-const rows: Row[] = [
-  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },
-]
-
-function extraOf(row: TableItem) {
-  return (row as Row).extra
-}
 </script>
 
 <template>
-  <MTable :columns="columns" :rows="rows" expandable bordered :paginator="false">
-    <template #expansion="{ row }">
-      {{ extraOf(row) }}
-    </template>
-  </MTable>
+  <div class="grid gap-3">
+    <MButton :label="loading ? '结束加载' : '开始加载'" @click="loading = !loading" />
+    <MTable
+      :columns="columns"
+      :rows="[]"
+      :loading="loading"
+      empty-text="还没有数据"
+      empty-description="创建第一条记录后会显示在这里"
+      :paginator="false"
+    />
+  </div>
 </template>
