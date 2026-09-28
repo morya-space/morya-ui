@@ -1,7 +1,8 @@
 import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 import type { TableHeader, TableSortMode, TableSortType } from '../types'
-import type { ClientSortOptions, EmitsEventName, HeaderForRender, ServerOptionsComputed } from './internal'
-import { computed, ref } from 'vue'
+import type { ClientSortOptions, EmitsEventName, HeaderForRender, ServerOptionsComputed } from '../state/internal'
+import { computed, ref, watch } from 'vue'
+import { SYNTHETIC } from './keys'
 
 /** 选择列默认宽度（容纳标准 MCheckbox / MRadio + focus ring） */
 export const DEFAULT_SELECTION_COLUMN_WIDTH = 48
@@ -62,6 +63,11 @@ export function useHeaders(
     generateClientSortOptions(sortBy.value, sortType.value),
   )
 
+  watch([sortBy, sortType], () => {
+    if (sortMode.value === 'emit') return
+    internalClientSortOptions.value = generateClientSortOptions(sortBy.value, sortType.value)
+  })
+
   /**
    * In `emit` sort mode the parent owns sorting: indicators derive from the
    * controlled `sortField`/`sortOrder` props and internal state is never mutated.
@@ -84,7 +90,14 @@ export function useHeaders(
     ] as HeaderForRender[]
 
     const headersSorting = orderedHeaders.map((header) => {
-      const headerSorting: HeaderForRender = { ...header }
+      const headerSorting: HeaderForRender = {
+        ...header,
+        resizable: header.resizable,
+        filterable: header.filterable,
+        filters: header.filters,
+        editable: header.editable,
+        minWidth: header.minWidth,
+      }
       if (headerSorting.sortable) headerSorting.sortType = 'none'
 
       if (serverOptionsComputed.value) {
@@ -121,7 +134,7 @@ export function useHeaders(
     const headersWithExpand: HeaderForRender[] = ifHasExpandSlot.value
       ? [{
           text: '',
-          value: 'expand',
+          value: SYNTHETIC.expand,
           fixed: fixedExpand.value || hasFixedColumnsFromUser.value,
           width: expandColumnWidth.value,
         }, ...headersSorting]
@@ -130,7 +143,7 @@ export function useHeaders(
     const headersWithIndex: HeaderForRender[] = showIndex.value
       ? [{
           text: showIndexSymbol.value,
-          value: 'index',
+          value: SYNTHETIC.index,
           fixed: fixedIndex.value || hasFixedColumnsFromUser.value,
           width: indexColumnWidth.value,
         }, ...headersWithExpand]
@@ -140,14 +153,14 @@ export function useHeaders(
       selectionColumn.value === 'checkbox'
         ? [{
             text: 'checkbox',
-            value: 'checkbox',
+            value: SYNTHETIC.checkbox,
             fixed: fixedCheckbox.value || hasFixedColumnsFromUser.value,
             width: checkboxColumnWidth.value ?? DEFAULT_SELECTION_COLUMN_WIDTH,
           }]
         : selectionColumn.value === 'radio'
           ? [{
               text: '',
-              value: 'radio',
+              value: SYNTHETIC.radio,
               fixed: fixedCheckbox.value || hasFixedColumnsFromUser.value,
               width: checkboxColumnWidth.value ?? DEFAULT_SELECTION_COLUMN_WIDTH,
             }]
@@ -171,23 +184,41 @@ export function useHeaders(
     }
 
     if (sortMode.value !== 'emit') {
-      if (
-        internalClientSortOptions.value
-        && Array.isArray(internalClientSortOptions.value.sortBy)
-        && Array.isArray(internalClientSortOptions.value.sortDesc)
-      ) {
-        const index = internalClientSortOptions.value.sortBy.indexOf(newSortBy)
+      if (multiSort.value) {
+        const current = internalClientSortOptions.value
+        let sortByList: string[]
+        let sortDescList: boolean[]
+        if (
+          current
+          && Array.isArray(current.sortBy)
+          && Array.isArray(current.sortDesc)
+        ) {
+          sortByList = [...current.sortBy]
+          sortDescList = [...current.sortDesc]
+        } else if (current && typeof current.sortBy === 'string') {
+          sortByList = [current.sortBy]
+          sortDescList = [Boolean(current.sortDesc)]
+        } else {
+          sortByList = []
+          sortDescList = []
+        }
+
+        const index = sortByList.indexOf(newSortBy)
         if (index === -1) {
           if (newSortType !== null) {
-            internalClientSortOptions.value.sortBy.push(newSortBy)
-            internalClientSortOptions.value.sortDesc.push(newSortType === 'desc')
+            sortByList.push(newSortBy)
+            sortDescList.push(newSortType === 'desc')
           }
         } else if (newSortType === null) {
-          internalClientSortOptions.value.sortDesc.splice(index, 1)
-          internalClientSortOptions.value.sortBy.splice(index, 1)
+          sortByList.splice(index, 1)
+          sortDescList.splice(index, 1)
         } else {
-          internalClientSortOptions.value.sortDesc[index] = newSortType === 'desc'
+          sortDescList[index] = newSortType === 'desc'
         }
+
+        internalClientSortOptions.value = sortByList.length
+          ? { sortBy: sortByList, sortDesc: sortDescList }
+          : null
       } else if (newSortType === null) {
         internalClientSortOptions.value = null
       } else {

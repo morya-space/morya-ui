@@ -1,4 +1,4 @@
-import type { TableSortType } from '../types'
+import type { TableColumnFilter, TableSortType } from '../types'
 
 export interface ServerOptionsComputed {
   page: number
@@ -14,6 +14,13 @@ export interface HeaderForRender {
   sortType?: TableSortType | 'none'
   fixed?: boolean | 'left' | 'right'
   width?: number
+  minWidth?: number
+  resizable?: boolean
+  filterable?: boolean
+  filters?: TableColumnFilter[]
+  editable?: boolean
+  colspan?: number
+  rowspan?: number
 }
 
 export interface ClientSortOptions {
@@ -25,17 +32,20 @@ export type MultipleSelectStatus = 'allSelected' | 'noneSelected' | 'partSelecte
 
 export type EmitsEventName =
   | 'row-click'
-  | 'contextmenuRow'
-  | 'selectRow'
-  | 'deselectRow'
+  | 'row-dblclick'
+  | 'row-contextmenu'
+  | 'select-row'
+  | 'deselect-row'
   | 'expand'
   | 'sort'
   | 'update:selection'
   | 'update:serverOptions'
   | 'update:expandedRowKeys'
   | 'filter'
-  | 'updatePageItems'
-  | 'updateTotalItems'
-  | 'selectAll'
+  | 'select-all'
+  | 'update:columnWidths'
+  | 'update:hiddenColumns'
+  | 'update:columnOrder'
+  | 'edit-change'
 
 export type TableEmitFn = (event: EmitsEventName, ...args: unknown[]) => void

@@ -3,6 +3,23 @@ import type { TableServerOptions, TableSortType } from '../types'
 import type { EmitsEventName, ServerOptionsComputed } from './internal'
 import { computed } from 'vue'
 
+function asSortArrays(
+  sortBy: string | string[] | null,
+  sortType: TableSortType | TableSortType[] | null,
+): { sortBy: string[]; sortType: TableSortType[] } {
+  const by = Array.isArray(sortBy)
+    ? [...sortBy]
+    : sortBy
+      ? [sortBy]
+      : []
+  const type = Array.isArray(sortType)
+    ? [...sortType]
+    : sortType
+      ? [sortType]
+      : []
+  return { sortBy: by, sortType: type }
+}
+
 export function useServerOptions(
   serverOptions: Ref<TableServerOptions | null>,
   multiSort: Ref<boolean>,
@@ -38,27 +55,38 @@ export function useServerOptions(
 
   const updateServerOptionsSort = (newSortBy: string, newSortType: TableSortType | null) => {
     if (!serverOptionsComputed.value) return
-    if (
-      multiSort.value
-      && Array.isArray(serverOptionsComputed.value.sortBy)
-      && Array.isArray(serverOptionsComputed.value.sortType)
-    ) {
-      const index = serverOptionsComputed.value.sortBy.findIndex((val) => val === newSortBy)
+    if (multiSort.value) {
+      const { sortBy, sortType } = asSortArrays(
+        serverOptionsComputed.value.sortBy,
+        serverOptionsComputed.value.sortType,
+      )
+      const index = sortBy.findIndex((val) => val === newSortBy)
       if (index === -1 && newSortType !== null) {
-        serverOptionsComputed.value.sortBy.push(newSortBy)
-        serverOptionsComputed.value.sortType.push(newSortType)
+        sortBy.push(newSortBy)
+        sortType.push(newSortType)
       } else if (newSortType === null) {
-        serverOptionsComputed.value.sortBy.splice(index, 1)
-        serverOptionsComputed.value.sortType.splice(index, 1)
+        if (index !== -1) {
+          sortBy.splice(index, 1)
+          sortType.splice(index, 1)
+        }
+      } else if (index === -1) {
+        sortBy.push(newSortBy)
+        sortType.push(newSortType)
       } else {
-        serverOptionsComputed.value.sortType[index] = newSortType
+        sortType[index] = newSortType
       }
-    } else {
       serverOptionsComputed.value = {
         ...serverOptionsComputed.value,
-        sortBy: newSortType !== null ? newSortBy : null,
-        sortType: newSortType,
+        sortBy,
+        sortType,
       }
+      return
+    }
+
+    serverOptionsComputed.value = {
+      ...serverOptionsComputed.value,
+      sortBy: newSortType !== null ? newSortBy : undefined,
+      sortType: newSortType ?? undefined,
     }
   }
 

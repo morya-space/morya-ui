@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import type { TableServerOptions } from '../types'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export function usePagination(
   currentPage: Ref<number>,
@@ -19,6 +19,21 @@ export function usePagination(
     () => maxPaginationNumber.value === 0 || currentPaginationNumber.value === maxPaginationNumber.value,
   )
   const isFirstPage = computed(() => currentPaginationNumber.value === 1)
+
+  watch(currentPage, (page) => {
+    if (!isServerSideMode.value && page !== currentPaginationNumber.value) {
+      currentPaginationNumber.value = page
+    }
+  })
+
+  watch(
+    () => serverOptions.value?.page,
+    (page) => {
+      if (isServerSideMode.value && page != null && page !== currentPaginationNumber.value) {
+        currentPaginationNumber.value = page
+      }
+    },
+  )
 
   const nextPage = () => {
     if (totalItemsLength.value === 0 || isLastPage.value || loading.value) return

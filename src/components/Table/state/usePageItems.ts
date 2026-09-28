@@ -2,7 +2,8 @@ import type { ComputedRef, Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { MultipleSelectStatus } from './internal'
 import { computed } from 'vue'
-import { sameTableItem } from '../utils'
+import { SYNTHETIC } from '../columns/keys'
+import { sameTableItem } from '../core/utils'
 
 export function usePageItems(
   currentPaginationNumber: Ref<number>,
@@ -35,44 +36,37 @@ export function usePageItems(
   const itemsWithIndex = computed(() => {
     if (!showIndex.value) return itemsInPage.value
     return itemsInPage.value.map((item, index) => ({
-      index: currentPageFirstIndex.value + index,
       ...item,
+      [SYNTHETIC.index]: currentPageFirstIndex.value + index,
     }))
   })
 
+  /** Header checkbox status is scoped to the current page. */
   const multipleSelectStatus = computed((): MultipleSelectStatus => {
-    if (selectItemsComputed.value.length === 0) return 'noneSelected'
+    const page = itemsInPage.value
+    if (page.length === 0 || selectItemsComputed.value.length === 0) return 'noneSelected'
 
-    const isNoneSelected = selectItemsComputed.value.every((itemSelected) =>
-      totalItems.value.every((item) => !sameTableItem(itemSelected, item, rowKey.value)),
-    )
-    if (isNoneSelected) return 'noneSelected'
-
-    if (selectItemsComputed.value.length === totalItems.value.length) {
-      const isAllSelected = selectItemsComputed.value.every((itemSelected) =>
-        totalItems.value.some((item) => sameTableItem(itemSelected, item, rowKey.value)),
-      )
-      return isAllSelected ? 'allSelected' : 'partSelected'
+    let selectedOnPage = 0
+    for (const item of page) {
+      if (selectItemsComputed.value.some((selected) => sameTableItem(selected, item, rowKey.value))) {
+        selectedOnPage += 1
+      }
     }
-
+    if (selectedOnPage === 0) return 'noneSelected'
+    if (selectedOnPage === page.length) return 'allSelected'
     return 'partSelected'
   })
 
   const pageItems = computed(() => {
     if (!isMultipleSelectable.value) return itemsWithIndex.value
-    if (multipleSelectStatus.value === 'allSelected') {
-      return itemsWithIndex.value.map((item) => ({ checkbox: true, ...item }))
-    }
-    if (multipleSelectStatus.value === 'noneSelected') {
-      return itemsWithIndex.value.map((item) => ({ checkbox: false, ...item }))
-    }
     return itemsWithIndex.value.map((item) => {
       const clone = { ...item }
-      delete clone.index
+      delete clone[SYNTHETIC.index]
+      delete clone[SYNTHETIC.checkbox]
       const isSelected = selectItemsComputed.value.some((selectItem) =>
         sameTableItem(selectItem, clone as TableItem, rowKey.value),
       )
-      return { checkbox: isSelected, ...item }
+      return { ...item, [SYNTHETIC.checkbox]: isSelected }
     })
   })
 
@@ -81,5 +75,6 @@ export function usePageItems(
     currentPageLastIndex,
     multipleSelectStatus,
     pageItems,
+    itemsInPage,
   }
 }

@@ -7,7 +7,18 @@ import {
   searchTableItems,
   sortTableItems,
   toggleSelectedItems,
-} from '../tableQuery'
+} from '../core/tableQuery'
+import { SYNTHETIC } from '../columns/keys'
+import { sameTableItem } from '../core/utils'
+
+function stripRowMeta(item: TableItem): TableItem {
+  const next = { ...item }
+  delete next[SYNTHETIC.index]
+  delete next[SYNTHETIC.checkbox]
+  delete next.index
+  delete next.checkbox
+  return next
+}
 
 export function useTotalItems(
   clientSortOptions: Ref<ClientSortOptions | null>,
@@ -18,7 +29,7 @@ export function useTotalItems(
   itemsSelected: Ref<TableItem[] | null>,
   searchField: Ref<string | string[]>,
   searchValue: Ref<string>,
-  serverItemsLength: Ref<number>,
+  serverTotal: Ref<number>,
   multiSort: Ref<boolean>,
   rowKey: Ref<string>,
   emits: (event: EmitsEventName, ...args: unknown[]) => void,
@@ -40,7 +51,7 @@ export function useTotalItems(
   })
 
   const totalItemsLength = computed(() =>
-    isServerSideMode.value ? serverItemsLength.value : totalItems.value.length,
+    isServerSideMode.value ? serverTotal.value : totalItems.value.length,
   )
 
   const selectItemsComputed = computed({
@@ -48,19 +59,34 @@ export function useTotalItems(
     set: (value) => emits('update:selection', value),
   })
 
-  const toggleSelectAll = (isChecked: boolean) => {
-    selectItemsComputed.value = isChecked ? totalItems.value : []
-    if (isChecked) emits('selectAll')
+  /** Select / deselect rows on the current page only (matches locale `selectAllPage`). */
+  const toggleSelectAll = (isChecked: boolean, pageRows: TableItem[]) => {
+    const key = rowKey.value
+    const pageClean = pageRows.map(stripRowMeta)
+    if (isChecked) {
+      const next = [...selectItemsComputed.value]
+      for (const row of pageClean) {
+        if (!next.some((selected) => sameTableItem(selected, row, key))) {
+          next.push(row)
+        }
+      }
+      selectItemsComputed.value = next
+      emits('select-all')
+      return
+    }
+    selectItemsComputed.value = selectItemsComputed.value.filter(
+      (selected) => !pageClean.some((row) => sameTableItem(selected, row, key)),
+    )
   }
 
   const toggleSelectItem = (item: TableItem) => {
     const { next, selected, row } = toggleSelectedItems(
       selectItemsComputed.value,
-      item,
+      stripRowMeta(item),
       rowKey.value,
     )
     selectItemsComputed.value = next
-    emits(selected ? 'selectRow' : 'deselectRow', row)
+    emits(selected ? 'select-row' : 'deselect-row', row)
   }
 
   return {

@@ -543,14 +543,16 @@ export { default as MTable } from "./components/Table/Table.vue";
 export type {
   TableBodyItemClassName,
   TableBodyRowClassName,
-  TableClickEventType,
   TableColumn,
   TableColumnAlign,
   TableColumnDefinition,
   TableColumnFilter,
+  TableEditChangePayload,
+  TableEditConfig,
   TableEmits,
   TableFilterComparison,
   TableFilterOption,
+  TableFooterMethod,
   TableHeaderItemClassName,
   TableItem,
   TableProps,
@@ -559,6 +561,7 @@ export type {
   TableSortMode,
   TableSortPayload,
   TableSortType,
+  TableSpanMethod,
   TableTextDirection,
 } from "./components/Table/types";
 export { default as MTabs } from "./components/Tabs/Tabs.vue";

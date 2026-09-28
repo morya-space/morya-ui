@@ -2,8 +2,8 @@ import type { ComputedRef, Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { EmitsEventName } from './internal'
 import { computed, ref } from 'vue'
-import { toggleExpandedRowKeys } from '../tableQuery'
-import { resolveRowKey } from '../utils'
+import { toggleExpandedRowKeys } from '../core/tableQuery'
+import { resolveRowKey } from '../core/utils'
 
 export function useExpandableRow(
   expandedRowKeys: Ref<Array<string | number> | undefined>,

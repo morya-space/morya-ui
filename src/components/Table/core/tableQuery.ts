@@ -1,4 +1,4 @@
-import type { TableFilterOption, TableItem } from './types'
+import type { TableFilterOption, TableItem } from '../types'
 import { getItemValue, sameTableItem } from './utils'
 
 /** Compare two cell values; numeric when both sides are numbers, lexical otherwise. */
@@ -20,7 +20,15 @@ export function matchesFilterCriteria(itemValue: unknown, criteria: unknown): bo
   if (typeof criteria === 'function') {
     return (criteria as (value: unknown) => boolean)(itemValue)
   }
-  if (Array.isArray(criteria)) return criteria.includes(itemValue)
+  if (Array.isArray(criteria)) {
+    if (criteria.length === 0) return true
+    return criteria.some(
+      (entry) => entry === itemValue || String(entry) === String(itemValue ?? ''),
+    )
+  }
+  if (typeof criteria === 'string') {
+    return String(itemValue ?? '').toLowerCase().includes(criteria.toLowerCase())
+  }
   return itemValue === criteria || String(itemValue ?? '') === String(criteria)
 }
 

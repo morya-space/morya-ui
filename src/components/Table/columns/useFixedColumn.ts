@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { HeaderForRender } from './internal'
+import type { HeaderForRender } from '../state/internal'
 import { computed } from 'vue'
 
 interface FixedColumnInfo {

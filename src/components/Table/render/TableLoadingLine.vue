@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMLocale } from '../../locale'
+import { useMLocale } from '../../../locale'
 
 const locale = useMLocale()
 </script>

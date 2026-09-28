@@ -1,4 +1,4 @@
-import type { TableItem } from './types'
+import type { TableItem } from '../types'
 
 export function getItemValue(column: string, item: TableItem): unknown {
   if (column.includes('.')) {
