@@ -36,6 +36,25 @@
 
 动效强度用 `useMotion`（`data-m-motion`：`full` / `reduced` / `none`），不跟随系统 `prefers-reduced-motion`；进出场预设用 `motion.transitions` / 组件 `transition`（见文档站「动效」）。
 
+## 3.1 主题覆盖（品牌差异放这里）
+
+换品牌时**优先改主题变量**，不要在每个业务页写死色：
+
+```css
+/* 例如 src/styles/brand.css，在 styles.css 之后引入 */
+:root {
+  --m-color-primary: #0b6e4f; /* 仅主题入口允许；页面仍用 var(--m-*) */
+  --m-font-family: "Your Brand Sans", system-ui, sans-serif;
+}
+[data-theme="dark"] {
+  --m-color-primary: #3ecf8e;
+}
+```
+
+也可用 `createMoryaUI` / `MConfigProvider` 的主题 API（见文档「主题」）。`pnpm check:colors` 扫描业务源码中的裸 hex；主题入口文件可按项目约定排除。
+
+登录 / 落地页的「好看」用 MCP `get_style_shells` 的 token 壳（`account-split`、`express-hero` 等），签名仍映射到 `--m-*`。
+
 ## 4. 禁止项
 
 - 禁止同一界面混用第二套 UI 库。
@@ -46,10 +65,12 @@
 
 ## 5. AI 工作流
 
-1. 读本文，确认契约。
-2. 加载 `morya-ui-pages`，由 skill 选定表面与布局；可选 companion 只补充视觉或无障碍，冲突时本文 + skill + MCP 优先。
-3. 用 MCP 查真实 API 与样例后再写代码。
-4. 完成后可运行 `pnpm check:colors`（若已配置）。
+1. 读本文，确认契约与主题覆盖位置。
+2. 加载 `morya-ui-pages`，由 skill 选定表面与布局；有参考图/描述时先 MCP `map_reference`（或 `recommend_page` + `brief`）。
+3. 用 MCP 查真实 API 与片段后再写代码；签名壳用 `get_style_shells`。
+4. `validate_usage` + `validate_page`（同一 `brief`）；契约问题必须修，工艺建议可说明后放过。
+5. 可选：起本地页对照参考截首屏（见 skill review-checklist「截图自检」）。
+6. 完成后可运行 `pnpm check:colors`（若已配置）。
 
 ## 6. 相关资源
 
@@ -57,3 +78,4 @@
 - 页面配方：`.agents/skills/morya-ui-pages/`（及 setup 时勾选的 companion）
 - 主题 API：`useTheme` / `useDensity` / `useMotion`
 - 动效预设：`createMoryaUI({ motion })`、`componentDefaults.*.transition`、浮层 `transition` prop；详情见文档 `/docs/motion`
+- MCP：`map_reference` · `get_style_shells` · `recommend_page` · `validate_page`

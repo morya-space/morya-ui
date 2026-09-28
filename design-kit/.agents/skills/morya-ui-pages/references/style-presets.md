@@ -20,14 +20,36 @@ Golden pages lock **block order and APIs**. They are **not** the only allowed lo
    “你看着办 / 直接写” with still no cues → quiet flat on-token admin face, **say so**, continue.  
    Never default to aurora / neon / unsolicited glass / cream-serif-terracotta.
 
-MCP: `get_style_direction` / `recommend_page({ style? })` → `styleDirection`.  
+MCP: `get_style_direction` / `recommend_page({ style?, density?, brief? })` → `styleDirection` + optional `referenceMapping`.  
+`map_reference` turns a reference description / required blocks into snippet + shell mapping.  
 `resolution: "ask"` means **ask the user**, not free-style.
+
+## Density (explicit)
+
+Pass `density` to `recommend_page` / `map_reference` — do not rely only on regex in the intent string:
+
+| Value | Effect |
+| --- | --- |
+| `compact` | Prefer `list-filters-dense` / `list-page-dense` cues |
+| `default` | Standard Ops polish |
+| `spacious` | More section gap; avoid packing |
 
 ## What `style` means
 
 - Free-text from the user (or a short paraphrase of their reference).  
 - **Not** a preset id.  
 - Optional craft cues for list goldens only: words like `dense` / `compact` / `高密` → `list-page-dense`; `rail` / `品牌侧栏` → `list-page-rail`.
+
+## Reference brief (fidelity)
+
+When the user provides a screenshot / mock / “像 XX”, call **`map_reference`** (or pass `brief` into `recommend_page`) with:
+
+- `description` — what you see (layout, density, primary CTA)
+- `requiredBlocks` — e.g. `filters`, `table`, `status`, `kpi`, `auth`
+- `requiredComponents` — e.g. `Table`, `Status`
+- `density` / `primaryAction` when visible
+
+Then compose **only** via returned `mapping[].snippetId`. Pass the **same brief** to `validate_page` so missing blocks fail as contract issues.
 
 ## Anti-defaults (unless user/reference asks)
 
@@ -39,7 +61,8 @@ MCP: `get_style_direction` / `recommend_page({ style? })` → `styleDirection`.
 
 ## How to apply
 
-1. Mirror golden **structure** via `recommend_page` / `get_golden_page`.  
-2. Apply the resolved direction with tokens + layout/type — see [visual-craft.md](visual-craft.md).  
-3. Run Ops polish when on Operate surfaces.  
-4. Companions deepen **inside** the resolved direction only ([optional-companions.md](optional-companions.md)).
+1. Map reference → snippets (`map_reference` / `recommend_page.referenceMapping`).  
+2. Apply a signature shell when Account / Express / Flow need presence (`get_style_shells`).  
+3. Brand color via theme `--m-color-primary` (DESIGN.md § 主题覆盖), not page hex.  
+4. Run Ops polish when on Operate surfaces.  
+5. Companions deepen **inside** the resolved direction only ([optional-companions.md](optional-companions.md)).

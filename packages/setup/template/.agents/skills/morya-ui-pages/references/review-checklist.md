@@ -11,19 +11,32 @@
 - [ ] `MTable` uses `rows` (not `data`)
 - [ ] One-line results use `message`; summary+detail / async use `toast`
 - [ ] Destructive flows use confirm dialogs
-- [ ] MCP **`validate_page`** run when generating a full page (advisory suggestions addressed or consciously waived)
+- [ ] MCP **`validate_page`** run when generating a full page — **`ok` must be true** (contract); craft suggestions addressed or consciously waived
+- [ ] Same **`brief`** as `map_reference` / `recommend_page` passed into `validate_page` when a reference exists
 
 ## Craft (all lanes — default pass)
 
 - [ ] Style direction resolved: followed user reference/description, or inferred from clear cues, or **asked** when uncertain — never silent invent; **no preset catalog**
+- [ ] Reference fidelity: `map_reference` mapping blocks present (filters/table/status/… as required)
+- [ ] Signature shell from `get_style_shells` when Account / Express / Flow need presence
 - [ ] Lane craft from [visual-craft.md](visual-craft.md) applied
 - [ ] If companions ran: still only `M*` + `--m-*`; no second kit ([optional-companions.md](optional-companions.md))
 - [ ] At most one primary filled button in the main viewport
 - [ ] Copy is domain-real; empty / error states say what to do next
+- [ ] Numeric table columns use `align: 'end'` + tabular nums when amounts/counts are shown
 - [ ] No AI-default look clusters unless the user/reference asked for them
 - [ ] No unearned atmosphere: stacked radial+linear washes, purple mesh, frosted glass, neon glow stacks
 - [ ] Motion (if any) is 1–3 intentional moments and follows `useMotion` / `data-m-motion`
+- [ ] Brand differences via theme `--m-*` overrides, not page hex
 
+## Screenshot self-check (optional — when user gave a visual reference)
+
+1. Start the consumer app locally (Vite / Nuxt preview).
+2. Open the generated route; capture the first viewport.
+3. Compare to the reference: block order, primary CTA, density, status treatment — not pixel-perfect chrome.
+4. If blocks are missing, fix via snippets + re-run `validate_page({ brief })`.
+
+If Playwright / `webapp-testing` is available in the project, prefer an automated screenshot; otherwise a manual capture is enough.
 ## Ops
 
 - [ ] Matches [page-layouts.md](page-layouts.md) block order (snippets composed; golden page optional check only)

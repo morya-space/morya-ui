@@ -72,7 +72,9 @@ Unless the user **asks** or a reference **shows** them, do not use:
 
 ## Shell recipes (token-only — defaults are flat)
 
-### Account — split brand panel
+Prefer MCP **`get_style_shells`** for pasteable CSS (`account-split`, `account-centered`, `express-hero`, `flow-empty-frame`, `flow-result-hero`, `ops-quiet`). Below are the same defaults for offline use.
+
+### Account — split brand panel (`account-split`)
 
 ```css
 .login-brand {
@@ -86,7 +88,7 @@ Unless the user **asks** or a reference **shows** them, do not use:
 }
 ```
 
-### Express — hero plane
+### Express — hero plane (`express-hero`)
 
 ```css
 .landing-hero__visual {
@@ -94,11 +96,11 @@ Unless the user **asks** or a reference **shows** them, do not use:
   padding: var(--m-space-5);
   border: 1px solid var(--m-color-border);
   border-radius: var(--m-radius-md);
-  background: var(--m-color-surface);
+  background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
 }
 ```
 
-### Flow — empty shell
+### Flow — empty shell (`flow-empty-frame`)
 
 Prefer stock `MEmpty`. Optional light frame:
 
@@ -111,7 +113,7 @@ Prefer stock `MEmpty`. Optional light frame:
 }
 ```
 
-If the user asked for glass / gradient / dark-tech, implement **that** request with `--m-*` — do not escalate into AI mesh.
+If the user asked for glass / gradient / dark-tech, implement **that** request with `--m-*` — do not escalate into AI mesh. Brand palette changes belong in theme overrides (project `DESIGN.md` § 主题覆盖).
 
 ## Polish modes (Impeccable-inspired)
 

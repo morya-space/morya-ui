@@ -24,7 +24,7 @@ Two layers always apply:
 1. **Contract** — only `M*` controls, `--m-*` tokens, real APIs (MCP/docs). Never invent props or mix UI kits.
 2. **Craft** — pick the right surface pattern, then apply intentional visual direction (distilled from Frontend Design / Impeccable / UI-UX-Pro-Max ideas). Ops stays disciplined; expressive surfaces (landing, auth brand moments, empty states) may take a justified aesthetic risk — still on-token and on-component.
 
-**Default build path (composition-first):** pin surface → L2 decisions + page snippets → craft → validate. Golden pages are an **optional** whole-page block-order check — not the default clone target.
+**Default build path (composition-first):** pin surface → **`map_reference` / `recommend_page({ brief, density })`** → L2 decisions + page snippets → signature shell (`get_style_shells`) → craft → **`validate_usage` + `validate_page({ brief })`**. Golden pages are an **optional** whole-page block-order check — not the default clone target.
 
 When companions conflict with this skill or project `DESIGN.md`, **this skill wins**.
 
@@ -73,15 +73,17 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 | Need | Prefer (MCP) | Else read |
 | --- | --- | --- |
-| Ops pattern + snippets | `recommend_page` → **`suggestedSnippets`** / **`get_page_snippet`** + **`recommend_component`** | [page-layouts.md](references/page-layouts.md) + [decision-recipes.md](references/decision-recipes.md) |
+| Reference fidelity | **`map_reference`** (description / requiredBlocks / density) → follow `mapping` | Describe blocks in chat; compose matching snippets |
+| Ops pattern + snippets | `recommend_page({ density, brief })` → **`suggestedSnippets`** / **`referenceMapping`** / **`get_page_snippet`** + **`recommend_component`** | [page-layouts.md](references/page-layouts.md) + [decision-recipes.md](references/decision-recipes.md) |
 | Style direction | `recommend_page({ style })` / **`get_style_direction`** | [style-presets.md](references/style-presets.md) |
+| Signature shells (Account / Express / Flow) | **`get_style_shells`** (`account-split`, `express-hero`, …) | [visual-craft.md](references/visual-craft.md) |
 | Account / Express / empty / result | snippets (`auth-split-shell`, `empty-block`, `result-block`, …) + `recommend_page` | [surfaces.md](references/surfaces.md) |
 | Optional whole-page block order | `get_golden_page` only when unsure of section order or user asks to mirror a golden sample | [page-layouts.md](references/page-layouts.md) |
 | Visual direction | — | [visual-craft.md](references/visual-craft.md) + [style-presets.md](references/style-presets.md) |
 | Components / **API truth** | `search` / **`get_component`** / `get_example` / **`recommend_component`** (L2 recipes + `relatedSnippets`) | [decision-recipes.md](references/decision-recipes.md) + [component-index.md](references/component-index.md) |
-| Tokens / rules | `get_design_rules` | [design-system.md](references/design-system.md) |
+| Tokens / rules / theme override | `get_design_rules` | [design-system.md](references/design-system.md) + project `DESIGN.md` § 主题覆盖 |
 | Feedback API | — | [feedback.md](references/feedback.md) |
-| **Required checks** | **`validate_usage`** (every `M*` you used) + `validate_page` | [review-checklist.md](references/review-checklist.md) |
+| **Required checks** | **`validate_usage`** + **`validate_page({ brief })`** (contract must pass; craft may be waived) | [review-checklist.md](references/review-checklist.md) |
 
 ### 3. Compose
 
@@ -133,9 +135,10 @@ Use [review-checklist.md](references/review-checklist.md) (contract + craft sect
 **Required when MCP is available:**
 
 1. `validate_usage` on the page (or per component) — API accuracy gate  
-2. `validate_page` — layout / token / contract advisories  
+2. `validate_page` with the **same `brief`** used in `map_reference` / `recommend_page` — **`ok` must be true** (contract); craft suggestions addressed or consciously waived  
+3. Optional screenshot self-check when the user gave a visual reference (see [review-checklist.md](references/review-checklist.md))
 
-Do not deliver with unresolved `unknown-prop` / `unknown-event`.
+Do not deliver with unresolved `unknown-prop` / `unknown-event` or `validate_page` contract failures (`brief-missing-*`, wrong table props, …).
 
 ## Hard boundaries
 
