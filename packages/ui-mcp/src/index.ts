@@ -159,12 +159,25 @@ register(
 
 register(
   'recommend_page',
-  'Recommend a page pattern and component composition from product intent. Pass style as free-text user description when they specified a look (no preset catalog). Pass includeScaffold: true for starter Vue code.',
+  'Recommend a page pattern and component composition from product intent. Pass style as free-text look; density=compact|default|spacious; brief for reference fidelity mapping; includeScaffold for optional golden structure.',
   {
     intent: z.string().min(1),
     pageType: z.string().optional(),
     features: z.array(z.string()).max(20).optional(),
     style: z.string().optional().describe('Optional free-text style description from the user (not a preset id).'),
+    density: z.string().optional().describe('compact | default | spacious'),
+    brief: z
+      .object({
+        description: z.string().optional(),
+        intent: z.string().optional(),
+        surface: z.string().optional(),
+        density: z.string().optional(),
+        requiredBlocks: z.array(z.string()).max(30).optional(),
+        requiredComponents: z.array(z.string()).max(30).optional(),
+        primaryAction: z.string().optional(),
+        style: z.string().optional(),
+      })
+      .optional(),
     mode: z.string().optional(),
     includeScaffold: z.boolean().optional(),
   },
@@ -172,8 +185,25 @@ register(
 )
 
 register(
+  'map_reference',
+  'Map a reference brief (screenshot/mock description, required blocks) to snippets, token roles, and a signature shell. Pass the same brief to validate_page.',
+  {
+    description: z.string().optional(),
+    intent: z.string().optional(),
+    surface: z.string().optional(),
+    density: z.string().optional(),
+    requiredBlocks: z.array(z.string()).max(30).optional(),
+    requiredComponents: z.array(z.string()).max(30).optional(),
+    primaryAction: z.string().optional(),
+    style: z.string().optional(),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.mapReference(args),
+)
+
+register(
   'get_design_rules',
-  'Return design-token, style-direction rules, semantic-action, accessibility, and composition rules for generated pages.',
+  'Return design-token, style-direction rules, signature shell catalog, semantic-action, accessibility, and composition rules for generated pages.',
   { mode: z.string().optional() },
   async (args) => handlers.getDesignRules(args),
 )
@@ -187,6 +217,17 @@ register(
     mode: z.string().optional(),
   },
   async (args) => handlers.getStyleDirection(args),
+)
+
+register(
+  'get_style_shells',
+  'List or read token-only signature shells (ops-quiet, account-split, express-hero, …) with pasteable CSS.',
+  {
+    shell: z.string().optional().describe('Shell id for full CSS.'),
+    surface: z.string().optional().describe('Filter: ops | account | flow | express'),
+    mode: z.string().optional(),
+  },
+  async (args) => handlers.getStyleShells(args),
 )
 
 register(
@@ -221,10 +262,24 @@ register(
 
 register(
   'validate_page',
-  'Validate a generated page for composition, spacing, and border anti-patterns.',
+  'Validate generated page code: contract issues (ok=false) vs craft suggestions. Pass brief/requiredBlocks for fidelity checks against a reference map.',
   {
     code: z.string().min(1),
     mode: z.string().optional(),
+    requiredBlocks: z.array(z.string()).max(30).optional(),
+    requiredComponents: z.array(z.string()).max(30).optional(),
+    brief: z
+      .object({
+        description: z.string().optional(),
+        intent: z.string().optional(),
+        surface: z.string().optional(),
+        density: z.string().optional(),
+        requiredBlocks: z.array(z.string()).max(30).optional(),
+        requiredComponents: z.array(z.string()).max(30).optional(),
+        primaryAction: z.string().optional(),
+        style: z.string().optional(),
+      })
+      .optional(),
   },
   async (args) => handlers.validatePage(args),
 )

@@ -19,6 +19,14 @@ import {
   resolveStyleDirection,
   styleResolution,
 } from './style-presets.js'
+import {
+  codeCoversBlock,
+  codeCoversComponent,
+  mapReferenceBrief,
+  type BriefDensity,
+  type ReferenceBriefInput,
+} from './reference-brief.js'
+import { findStyleShell, listStyleShells, styleShells } from './style-shells.js'
 
 function inspectButtonIconOnlyUsage(code: string, issues: Array<{ type: string; message: string }>) {
   const pairedTagRe = /<MButton\b([^>]*)>([\s\S]*?)<\/MButton>/gi
@@ -837,6 +845,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
     pageType?: string
     features?: string[]
     style?: string
+    density?: string
+    brief?: ReferenceBriefInput
     mode?: string
     includeScaffold?: boolean
   }) {
@@ -852,7 +862,11 @@ export function createToolHandlers(catalog = loadCatalog()) {
       })
     }
     const locale = resolveLocale(args.mode)
-    const styleDirection = resolveStyleDirection({ intent: args.intent, style: args.style })
+    const styleFromBrief = args.brief?.style || args.brief?.description
+    const styleDirection = resolveStyleDirection({
+      intent: args.intent,
+      style: args.style || styleFromBrief,
+    })
     const stylePayload = {
       resolution: styleDirection.resolution,
       confidence: styleDirection.confidence,
@@ -860,12 +874,32 @@ export function createToolHandlers(catalog = loadCatalog()) {
       guidance: locale === 'en-US' ? styleDirection.guidanceEn : styleDirection.guidanceZh,
       priority: locale === 'en-US' ? styleResolution.priorityEn : styleResolution.priorityZh,
       hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
-          note:
+      note:
         locale === 'en-US'
-          ? 'No named style-preset catalog. Follow an explicit user reference/description; if styleDirection.resolution is ask, ask before inventing the look. Prefer snippets for composition; golden pages are optional block-order checks, not aesthetics.'
-          : '没有命名风格预设表。有明确参考/描述就跟用户；若 styleDirection.resolution 为 ask，先询问再写完整视觉。优先用 snippets 拼装；黄金样例仅可选核对块顺序，不是审美模板。',
+          ? 'No named style-preset catalog. Follow an explicit user reference/description; if styleDirection.resolution is ask, ask before inventing the look. Prefer snippets for composition; golden pages are optional block-order checks, not aesthetics. Pass brief for fidelity mapping; density=compact|default|spacious.'
+          : '没有命名风格预设表。有明确参考/描述就跟用户；若 styleDirection.resolution 为 ask，先询问再写完整视觉。优先用 snippets 拼装；黄金样例仅可选核对块顺序。传 brief 做还原映射；density=compact|default|spacious。',
     }
-    const craftText = [args.style || '', args.intent || ''].join(' ')
+    const craftText = [args.style || '', args.intent || '', args.density || '', args.brief?.description || ''].join(' ')
+    const density: BriefDensity =
+      args.density === 'compact' || args.density === 'dense'
+        ? 'compact'
+        : args.density === 'spacious'
+          ? 'spacious'
+          : resolveListCraftVariant(craftText) === 'list-page-dense'
+            ? 'compact'
+            : 'default'
+
+    const briefMapped =
+      args.brief || args.density || styleFromBrief
+        ? mapReferenceBrief({
+            ...(args.brief || {}),
+            intent: args.intent,
+            style: args.style || args.brief?.style,
+            density: args.density || args.brief?.density || density,
+            surface: args.brief?.surface || args.pageType,
+          })
+        : null
+
     const resolvedGoldenId = resolveGoldenPageId({
       patternId: best.pattern.id,
       canonicalGoldenId: best.pattern.goldenPage,
@@ -877,18 +911,30 @@ export function createToolHandlers(catalog = loadCatalog()) {
 
     let suggestedSnippets = [...(best.pattern.suggestedSnippets ?? [])]
     if (best.pattern.id === 'admin-list') {
-      const listCraft = resolveListCraftVariant(craftText)
+      const listCraft =
+        density === 'compact' ? 'list-page-dense' : resolveListCraftVariant(craftText)
       if (listCraft === 'list-page-dense') {
         suggestedSnippets = suggestedSnippets.map((id) =>
           id === 'list-filters-stack' ? 'list-filters-dense' : id,
         )
       }
     }
+    if (briefMapped?.suggestedSnippets.length) {
+      for (const id of briefMapped.suggestedSnippets) {
+        if (!suggestedSnippets.includes(id)) suggestedSnippets.push(id)
+      }
+    }
+
+    const shell =
+      briefMapped?.suggestedShellId
+        ? findStyleShell(briefMapped.suggestedShellId)
+        : undefined
 
     const result: Record<string, unknown> = {
       intent: args.intent,
       pageType: args.pageType,
       style: args.style,
+      density,
       matchedPattern: best.pattern.id,
       title: locale === 'en-US' ? best.pattern.titleEn : best.pattern.title,
       confidence: best.score,
@@ -902,6 +948,34 @@ export function createToolHandlers(catalog = loadCatalog()) {
       avoid: best.pattern.avoid,
       alternatives: ranked.slice(1, 3).filter((item) => item.score > 0).map((item) => ({ id: item.pattern.id, score: item.score })),
       suggestedSnippets,
+      referenceMapping: briefMapped
+        ? {
+            surface: briefMapped.surface,
+            density: briefMapped.density,
+            mapping: briefMapped.mapping.map((item) => ({
+              block: item.block,
+              snippetId: item.snippetId,
+              notes: locale === 'en-US' ? item.notesEn : item.notesZh,
+            })),
+            suggestedShellId: briefMapped.suggestedShellId,
+            craftCues: locale === 'en-US' ? briefMapped.craftCuesEn : briefMapped.craftCuesZh,
+            validationHints: briefMapped.validationHints,
+            tokenRoles: briefMapped.tokenRoles.map((item) => ({
+              role: item.role,
+              token: item.token,
+              notes: locale === 'en-US' ? item.notesEn : item.notesZh,
+            })),
+          }
+        : null,
+      styleShell: shell
+        ? {
+            id: shell.id,
+            title: locale === 'en-US' ? shell.titleEn : shell.titleZh,
+            signature: locale === 'en-US' ? shell.signatureEn : shell.signatureZh,
+            css: shell.css,
+            htmlHint: locale === 'en-US' ? shell.htmlHintEn : shell.htmlHintZh,
+          }
+        : null,
       nextStep: (() => {
         const goldenId = resolvedGoldenId
         const snippets = suggestedSnippets
@@ -913,26 +987,33 @@ export function createToolHandlers(catalog = loadCatalog()) {
             : locale === 'en-US'
               ? ' Compose with get_page_snippet + recommend_component (relatedSnippets).'
               : ' 用 get_page_snippet + recommend_component（relatedSnippets）拼装。'
-        const styleHint =
-          locale === 'en-US'
-            ? styleDirection.resolution === 'ask'
-              ? ' Style is uncertain — ask the user for a short description or reference before inventing the look.'
-              : ` Follow styleDirection (${styleDirection.resolution}): “${styleDirection.summary || 'user/reference'}”; honor explicit user words over companions.`
-            : styleDirection.resolution === 'ask'
-              ? ' 风格不确定 — 先请用户说明气质或贴参考，再写完整视觉。'
-              : ` 按 styleDirection（${styleDirection.resolution}）落实「${styleDirection.summary || '用户参考/描述'}」；用户明确指定优先于 companion。`
+        const briefHint = briefMapped
+          ? locale === 'en-US'
+            ? ' Follow referenceMapping block-by-block; pass the same brief to validate_page.'
+            : ' 按 referenceMapping 逐块落地；同一 brief 传给 validate_page。'
+          : ''
+        const shellHint = shell
+          ? locale === 'en-US'
+            ? ` Optional shell CSS from styleShell id=${shell.id} (or get_style_shells).`
+            : ` 可选签名壳 CSS：styleShell id=${shell.id}（或 get_style_shells）。`
+          : ''
         const goldenHint =
-          goldenId
+          goldenId && args.includeScaffold
             ? locale === 'en-US'
-              ? ` Optional: get_golden_page("${goldenId}") only to check whole-page block order (not the default clone target).`
-              : ` 可选：仅当需核对整页块顺序时再 get_golden_page("${goldenId}")（默认不要整页克隆）。`
-            : locale === 'en-US'
-              ? ' No golden page for this pattern — follow get_pattern structure + snippets.'
-              : ' 该模式暂无黄金样例：按 get_pattern 结构 + snippets 拼装。'
-        if (locale === 'en-US') {
-          return `${snippetHint.trim()}${styleHint}${goldenHint} Look up unfamiliar APIs with get_component/get_example, then always run validate_usage and validate_page.`
-        }
-        return `${snippetHint.trim()}${styleHint}${goldenHint} 不熟悉的 API 用 get_component/get_example 核对，然后必须跑 validate_usage 与 validate_page。`
+              ? ` Scaffold mirrors ${goldenId} structure only.`
+              : ` scaffold 仅镜像 ${goldenId} 结构。`
+            : goldenId
+              ? locale === 'en-US'
+                ? ` Optional: get_golden_page("${goldenId}") only to check whole-page block order.`
+                : ` 可选：仅当需核对整页块顺序时再 get_golden_page("${goldenId}")。`
+              : locale === 'en-US'
+                ? ' Golden pages are optional block-order checks.'
+                : ' 黄金样例仅可选核对块顺序。'
+        const validateHint =
+          locale === 'en-US'
+            ? ' Then always run validate_usage and validate_page (pass the same brief when used).'
+            : ' 然后必须跑 validate_usage 与 validate_page（若用了 brief 则原样传入）。'
+        return `${snippetHint}${briefHint}${shellHint}${goldenHint}${validateHint}`
       })(),
     }
     if (args.includeScaffold) {
@@ -1082,53 +1163,69 @@ export function createToolHandlers(catalog = loadCatalog()) {
     return textResult(payload)
   }
 
-  function validatePage(args: { code?: string; mode?: string }) {
+  function validatePage(args: {
+    code?: string
+    mode?: string
+    brief?: ReferenceBriefInput
+    requiredBlocks?: string[]
+    requiredComponents?: string[]
+  }) {
     const locale = resolveLocale(args.mode)
     const code = args.code || ''
-    const suggestions: Array<{ standardId: string; type: string; message: string }> = []
+    type Suggestion = {
+      standardId: string
+      type: string
+      message: string
+      severity: 'contract' | 'craft'
+    }
+    const suggestions: Suggestion[] = []
+    const push = (
+      severity: 'contract' | 'craft',
+      standardId: string,
+      type: string,
+      messageZh: string,
+      messageEn: string,
+    ) => {
+      suggestions.push({
+        severity,
+        standardId,
+        type,
+        message: locale === 'en-US' ? messageEn : messageZh,
+      })
+    }
 
     if (/#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})\b/i.test(code)) {
-      suggestions.push({
-        standardId: 'tokens',
-        type: 'raw-color',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer --m-* design tokens over hex colors.'
-            : '标准建议：颜色优先使用 --m-* 设计令牌，而非 hex 色值。',
-      })
+      push('craft', 'tokens', 'raw-color', '标准建议：颜色优先使用 --m-* 设计令牌，而非 hex 色值。', 'Standard: prefer --m-* design tokens over hex colors.')
     }
 
     if (/\brgb\s*\(/i.test(code) && !/--m-/.test(code)) {
-      suggestions.push({
-        standardId: 'tokens',
-        type: 'raw-color',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer --m-* tokens over raw rgb()/rgba() in page styles.'
-            : '标准建议：页面样式优先 --m-* 令牌，而非裸 rgb()/rgba()。',
-      })
+      push(
+        'craft',
+        'tokens',
+        'raw-color',
+        '标准建议：页面样式优先 --m-* 令牌，而非裸 rgb()/rgba()。',
+        'Standard: prefer --m-* tokens over raw rgb()/rgba() in page styles.',
+      )
     }
 
     if (/<MCard\b[^>]*>[\s\S]*?<MTable\b[^>]*\bbordered\b/i.test(code)) {
-      suggestions.push({
-        standardId: 'page-sections',
-        type: 'double-border',
-        message:
-          locale === 'en-US'
-            ? 'Standard: place bordered MTable directly in MPageContent instead of wrapping it with MCard.'
-            : '标准建议：bordered 的 MTable 直接放在 MPageContent 内，通常不必再包 MCard。',
-      })
+      push(
+        'craft',
+        'page-sections',
+        'double-border',
+        '标准建议：bordered 的 MTable 直接放在 MPageContent 内，通常不必再包 MCard。',
+        'Standard: place bordered MTable directly in MPageContent instead of wrapping it with MCard.',
+      )
     }
 
     if (/<MLayoutContent\b/i.test(code) && !/<MPageContent\b/i.test(code)) {
-      suggestions.push({
-        standardId: 'layout-shell',
-        type: 'missing-page-content',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer MPageContent inside MLayoutContent for consistent page spacing.'
-            : '标准建议：MLayoutContent 内使用 MPageContent 统一页面间距。',
-      })
+      push(
+        'craft',
+        'layout-shell',
+        'missing-page-content',
+        '标准建议：MLayoutContent 内使用 MPageContent 统一页面间距。',
+        'Standard: prefer MPageContent inside MLayoutContent for consistent page spacing.',
+      )
     }
 
     if (
@@ -1136,50 +1233,46 @@ export function createToolHandlers(catalog = loadCatalog()) {
         /class="[^"]*filters/i.test(code)) &&
       !/<MPage(?:Content|Filters|Toolbar|Header|Section|Stat)\b/i.test(code)
     ) {
-      suggestions.push({
-        standardId: 'page-sections',
-        type: 'custom-page-css',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer MPageFilters, MPageToolbar, MPageHeader, or MPageSection over custom page section CSS.'
-            : '标准建议：筛选/工具栏/表单区块优先 MPage* 组件，少写自定义 page section CSS。',
-      })
+      push(
+        'craft',
+        'page-sections',
+        'custom-page-css',
+        '标准建议：筛选/工具栏/表单区块优先 MPage* 组件，少写自定义 page section CSS。',
+        'Standard: prefer MPageFilters, MPageToolbar, MPageHeader, or MPageSection over custom page section CSS.',
+      )
     }
 
     if (/<MPageFilters\b/i.test(code) && /<MCard\b[^>]*>[\s\S]*?<MPageFilters\b/i.test(code)) {
-      suggestions.push({
-        standardId: 'page-sections',
-        type: 'redundant-wrapper',
-        message:
-          locale === 'en-US'
-            ? 'Standard: MPageFilters already provides a surface; wrapping it in MCard is usually redundant.'
-            : '标准建议：MPageFilters 已自带表面样式，通常不必再用 MCard 包裹。',
-      })
+      push(
+        'craft',
+        'page-sections',
+        'redundant-wrapper',
+        '标准建议：MPageFilters 已自带表面样式，通常不必再用 MCard 包裹。',
+        'Standard: MPageFilters already provides a surface; wrapping it in MCard is usually redundant.',
+      )
     }
 
     if (
       /<MPageSection\b[^>]*variant=["']form["']/i.test(code) &&
       /<MCard\b[^>]*>[\s\S]*?<MPageSection\b/i.test(code)
     ) {
-      suggestions.push({
-        standardId: 'page-sections',
-        type: 'redundant-wrapper',
-        message:
-          locale === 'en-US'
-            ? 'Standard: MPageSection variant="form" already provides a surface; wrapping it in MCard is usually redundant.'
-            : '标准建议：MPageSection variant="form" 已自带表面样式，通常不必再用 MCard 包裹。',
-      })
+      push(
+        'craft',
+        'page-sections',
+        'redundant-wrapper',
+        '标准建议：MPageSection variant="form" 已自带表面样式，通常不必再用 MCard 包裹。',
+        'Standard: MPageSection variant="form" already provides a surface; wrapping it in MCard is usually redundant.',
+      )
     }
 
     if (/<MPageContent\b[^>]*>[\s\S]*?<MPageContent\b/i.test(code)) {
-      suggestions.push({
-        standardId: 'layout-shell',
-        type: 'redundant-wrapper',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer a single MPageContent shell for page padding and section gap.'
-            : '标准建议：页面 padding 与区块间距优先只用一层 MPageContent。',
-      })
+      push(
+        'craft',
+        'layout-shell',
+        'redundant-wrapper',
+        '标准建议：页面 padding 与区块间距优先只用一层 MPageContent。',
+        'Standard: prefer a single MPageContent shell for page padding and section gap.',
+      )
     }
 
     if (
@@ -1187,64 +1280,59 @@ export function createToolHandlers(catalog = loadCatalog()) {
         code,
       )
     ) {
-      suggestions.push({
-        standardId: 'page-sections',
-        type: 'redundant-wrapper',
-        message:
-          locale === 'en-US'
-            ? 'Standard: avoid extra padded wrappers around MPage* blocks; prefer the components’ built-in spacing.'
-            : '标准建议：少在 MPage* 外包带 padding 的容器；优先使用组件自带间距。',
-      })
+      push(
+        'craft',
+        'page-sections',
+        'redundant-wrapper',
+        '标准建议：少在 MPage* 外包带 padding 的容器；优先使用组件自带间距。',
+        'Standard: avoid extra padded wrappers around MPage* blocks; prefer the components’ built-in spacing.',
+      )
     }
 
     if (
       /style="[^"]*overflow(?:-y|-x)?\s*:\s*(auto|scroll)/i.test(code) ||
       /<style\b[^>]*>[\s\S]*?overflow(?:-y|-x)?\s*:\s*(auto|scroll)/i.test(code)
     ) {
-      suggestions.push({
-        standardId: 'scroll',
-        type: 'native-scroll',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer MScrollbar or MLayout scroll regions over overflow:auto/scroll in page styles.'
-            : '标准建议：页面滚动优先 MLayout 主滚动或 MScrollbar，少写 overflow:auto/scroll。',
-      })
+      push(
+        'craft',
+        'scroll',
+        'native-scroll',
+        '标准建议：页面滚动优先 MLayout 主滚动或 MScrollbar，少写 overflow:auto/scroll。',
+        'Standard: prefer MScrollbar or MLayout scroll regions over overflow:auto/scroll in page styles.',
+      )
     }
 
     if (/::-webkit-scrollbar|scrollbar-width\s*:/i.test(code)) {
-      suggestions.push({
-        standardId: 'scroll',
-        type: 'custom-scrollbar-css',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer MScrollbar or layout defaults over native scrollbar CSS in product code.'
-            : '标准建议：业务代码优先 MScrollbar 或 Layout 默认滚动，少定制原生滚动条样式。',
-      })
+      push(
+        'craft',
+        'scroll',
+        'custom-scrollbar-css',
+        '标准建议：业务代码优先 MScrollbar 或 Layout 默认滚动，少定制原生滚动条样式。',
+        'Standard: prefer MScrollbar or layout defaults over native scrollbar CSS in product code.',
+      )
     }
 
     if (/min-height\s*:\s*100vh/i.test(code) && !/<MLayout\b[^>]*fill-viewport/i.test(code)) {
-      suggestions.push({
-        standardId: 'layout-shell',
-        type: 'viewport-height',
-        message:
-          locale === 'en-US'
-            ? 'Standard: prefer MLayout fillViewport over hand-written min-height:100vh page shells.'
-            : '标准建议：整页高度优先 MLayout fillViewport，少写 min-height:100vh。',
-      })
+      push(
+        'craft',
+        'layout-shell',
+        'viewport-height',
+        '标准建议：整页高度优先 MLayout fillViewport，少写 min-height:100vh。',
+        'Standard: prefer MLayout fillViewport over hand-written min-height:100vh page shells.',
+      )
     }
 
     if (
-      (/fill-viewport|fillViewport/i.test(code) || /<MLayout\b/i.test(code))
-      && !/html\s*,\s*body\s*,\s*#app[\s\S]{0,80}height\s*:\s*100%/i.test(code)
+      (/fill-viewport|fillViewport/i.test(code) || /<MLayout\b/i.test(code)) &&
+      !/html\s*,\s*body\s*,\s*#app[\s\S]{0,80}height\s*:\s*100%/i.test(code)
     ) {
-      suggestions.push({
-        standardId: 'layout-shell',
-        type: 'height-chain',
-        message:
-          locale === 'en-US'
-            ? 'Prefer layout-app-shell / golden pages: with MLayout, set html, body, #app { height: 100% } when the shell is not using fillViewport.'
-            : '对齐 layout-app-shell / 黄金样例：未使用 fillViewport 时，配合 MLayout 设置 html, body, #app { height: 100% }。',
-      })
+      push(
+        'craft',
+        'layout-shell',
+        'height-chain',
+        '对齐 layout-app-shell / 黄金样例：未使用 fillViewport 时，配合 MLayout 设置 html, body, #app { height: 100% }。',
+        'Prefer layout-app-shell / golden pages: with MLayout, set html, body, #app { height: 100% } when the shell is not using fillViewport.',
+      )
     }
 
     if (/<MMenu\b/i.test(code)) {
@@ -1252,123 +1340,211 @@ export function createToolHandlers(catalog = loadCatalog()) {
       const looksLikeMenuModel =
         /MMenu[\s\S]{0,1200}\b(label|model)\s*[:=]/i.test(code) || /:model=/i.test(code)
       if (looksLikeMenuModel && iconCount === 0) {
-        suggestions.push({
-          standardId: 'layout-shell',
-          type: 'menu-missing-icons',
-          message:
-            locale === 'en-US'
-              ? 'Prefer golden / layout-app-shell menu items that include icon (e.g. user, shield, home).'
-              : '对齐黄金样例 / layout-app-shell：侧栏菜单项带上 icon（如 user、shield、home）。',
-        })
+        push(
+          'craft',
+          'layout-shell',
+          'menu-missing-icons',
+          '对齐黄金样例 / layout-app-shell：侧栏菜单项带上 icon（如 user、shield、home）。',
+          'Prefer golden / layout-app-shell menu items that include icon (e.g. user, shield, home).',
+        )
       }
     }
 
     if (/<MTable\b[^>]*(?::data|v-bind:data)\s*=/i.test(code) || /<MTable\b[^>]*\sdata\s*=/i.test(code)) {
-      suggestions.push({
-        standardId: 'feedback',
-        type: 'table-data-prop',
-        message:
-          locale === 'en-US'
-            ? 'Contract: MTable row data uses the rows prop (not data). See golden list-page / get_component Table.'
-            : '契约：MTable 行数据使用 rows，不要用 data。见黄金样例 list-page / get_component Table。',
-      })
+      push(
+        'contract',
+        'feedback',
+        'table-data-prop',
+        '契约：MTable 行数据使用 rows，不要用 data。见黄金样例 list-page / get_component Table。',
+        'Contract: MTable row data uses the rows prop (not data). See golden list-page / get_component Table.',
+      )
     }
 
     if (
-      /fill-viewport|fillViewport/i.test(code)
-      && /<MTable\b[^>]*\bpaginator\b/i.test(code)
-      && /<MPageContent\b/i.test(code)
-      && !(
-        /<MPageContent\b[^>]*\bfill\b/i.test(code)
-        && /<MTable\b[^>]*\bfill\b/i.test(code)
-      )
+      /fill-viewport|fillViewport/i.test(code) &&
+      /<MTable\b[^>]*\bpaginator\b/i.test(code) &&
+      /<MPageContent\b/i.test(code) &&
+      !(/<MPageContent\b[^>]*\bfill\b/i.test(code) && /<MTable\b[^>]*\bfill\b/i.test(code))
     ) {
-      suggestions.push({
-        standardId: 'page-sections',
-        type: 'list-fill-height',
-        message:
-          locale === 'en-US'
-            ? 'Advisory: for a full-viewport admin list whose main job is one table, consider MPageContent fill + MTable fill so the body scrolls and pagination stays at the page bottom. Skip fill for embedded/short/document-scroll tables (see page-scroll-choice / golden list-page).'
-            : '参考建议：若这是全视口后台主列表且表格是页面主任务，可考虑 MPageContent fill + MTable fill（表体滚动、分页贴底）。嵌入表/短页/整页文档滚动则跳过 fill（见 page-scroll-choice / 黄金样例 list-page）。',
-      })
+      push(
+        'craft',
+        'page-sections',
+        'list-fill-height',
+        '参考建议：若这是全视口后台主列表且表格是页面主任务，可考虑 MPageContent fill + MTable fill（表体滚动、分页贴底）。嵌入表/短页/整页文档滚动则跳过 fill（见 page-scroll-choice / 黄金样例 list-page）。',
+        'Advisory: for a full-viewport admin list whose main job is one table, consider MPageContent fill + MTable fill so the body scrolls and pagination stays at the page bottom. Skip fill for embedded/short/document-scroll tables (see page-scroll-choice / golden list-page).',
+      )
     }
 
     if (/<MMessage\b[^>]*\bseverity\b/i.test(code)) {
-      suggestions.push({
-        standardId: 'feedback',
-        type: 'mmessage-as-alert',
-        message:
-          locale === 'en-US'
-            ? 'Contract: <MMessage> is the message service host, not an inline alert. Use field errorMessage or a token-styled role="alert".'
-            : '契约：<MMessage> 是 message 服务宿主，不是内嵌 Alert。表单常驻错误用字段 errorMessage 或 token 样式的 role="alert"。',
-      })
+      push(
+        'contract',
+        'feedback',
+        'mmessage-as-alert',
+        '契约：<MMessage> 是 message 服务宿主，不是内嵌 Alert。表单常驻错误用字段 errorMessage 或 token 样式的 role="alert"。',
+        'Contract: <MMessage> is the message service host, not an inline alert. Use field errorMessage or a token-styled role="alert".',
+      )
     }
 
     if (/toast\.(?:success|info|warn|warning|error)\s*\(\s*['"`][^'"`]+['"`]\s*\)/i.test(code)) {
-      suggestions.push({
-        standardId: 'feedback',
-        type: 'toast-one-liner',
-        message:
-          locale === 'en-US'
-            ? 'Contract: one-line feedback should use message.*; toast is for summary + detail or async feel.'
-            : '契约：单行操作回执用 message.*；toast 仅用于 summary + detail 或异步通知感。',
-      })
+      push(
+        'contract',
+        'feedback',
+        'toast-one-liner',
+        '契约：单行操作回执用 message.*；toast 仅用于 summary + detail 或异步通知感。',
+        'Contract: one-line feedback should use message.*; toast is for summary + detail or async feel.',
+      )
     }
 
     if (
       /#cell-status[\s\S]{0,500}<MTag\b/i.test(code) &&
       !/#cell-status[\s\S]{0,500}<MStatus\b/i.test(code)
     ) {
-      suggestions.push({
-        standardId: 'feedback',
-        type: 'status-cell-tag',
-        message:
-          locale === 'en-US'
-            ? 'Prefer MStatus for business status in #cell-status; use MTag for categories / closable chips (see list-status-dot / detail-page).'
-            : '行内业务状态优先 MStatus（#cell-status）；分类或可关闭标签再用 MTag（见 list-status-dot / detail-page）。',
-      })
+      push(
+        'craft',
+        'feedback',
+        'status-cell-tag',
+        '行内业务状态优先 MStatus（#cell-status）；分类或可关闭标签再用 MTag（见 list-status-dot / detail-page）。',
+        'Prefer MStatus for business status in #cell-status; use MTag for categories / closable chips (see list-status-dot / detail-page).',
+      )
     }
 
     if (/<MTabs\b[^>]*(?::items|v-bind:items)\s*=/i.test(code) || /<MTabs\b[^>]*\sitems\s*=/i.test(code)) {
-      suggestions.push({
-        standardId: 'feedback',
-        type: 'tabs-items-prop',
-        message:
-          locale === 'en-US'
-            ? 'Contract: MTabs uses the tabs prop with v-model (not items / value). See settings-page golden.'
-            : '契约：MTabs 使用 v-model + tabs（不是 items / value）。见黄金样例 settings-page。',
-      })
+      push(
+        'contract',
+        'feedback',
+        'tabs-items-prop',
+        '契约：MTabs 使用 v-model + tabs（不是 items / value）。见黄金样例 settings-page。',
+        'Contract: MTabs uses the tabs prop with v-model (not items / value). See settings-page golden.',
+      )
     }
 
     if (/<MStepper\b[^>]*(?::items|v-bind:items)\s*=/i.test(code) || /<MStepper\b[^>]*\sitems\s*=/i.test(code)) {
-      suggestions.push({
-        standardId: 'feedback',
-        type: 'stepper-items-prop',
-        message:
-          locale === 'en-US'
-            ? 'Contract: MStepper uses the steps prop with v-model (not items). See wizard-form golden.'
-            : '契约：MStepper 使用 v-model + steps（不是 items）。见黄金样例 wizard-form。',
-      })
+      push(
+        'contract',
+        'feedback',
+        'stepper-items-prop',
+        '契约：MStepper 使用 v-model + steps（不是 items）。见黄金样例 wizard-form。',
+        'Contract: MStepper uses the steps prop with v-model (not items). See wizard-form golden.',
+      )
     }
 
+    // Craft: placeholder / lorem copy
+    if (
+      /(?:title|description|label|placeholder)\s*=\s*["'](?:示例|样例|Name|No data|暂无数据|lorem|placeholder)["']/i.test(
+        code,
+      ) ||
+      />\s*(?:示例|样例|No data|暂无数据|Lorem ipsum)\s*</i.test(code)
+    ) {
+      push(
+        'craft',
+        'craft',
+        'placeholder-copy',
+        '工艺建议：用领域真实文案，避免「示例 / Name / No data / 暂无数据」。',
+        'Craft: use domain-real copy — avoid “示例 / Name / No data / 暂无数据”.',
+      )
+    }
+
+    // Craft: more than one filled primary in viewport (heuristic)
+    {
+      const primaryFilled = code.match(
+        /<MButton\b(?![^>]*(?:\btext\b|\boutlined\b|\blink\b))[^>]*\bseverity\s*=\s*["']primary["'][^>]*>|<MButton\b(?![^>]*(?:\btext\b|\boutlined\b|\blink\b|\bseverity\s*=))[^>]*>/gi,
+      )
+      // Count explicit severity="primary" without text/outlined
+      const explicitPrimary = (
+        code.match(/<MButton\b(?![^>]*(?:\btext\b|\boutlined\b))[^>]*severity\s*=\s*["']primary["']/gi) || []
+      ).length
+      if (explicitPrimary > 1) {
+        push(
+          'craft',
+          'craft',
+          'multiple-primary',
+          '工艺建议：主视口内通常只需一个 filled primary 按钮。',
+          'Craft: usually only one filled primary button in the main viewport.',
+        )
+      }
+      void primaryFilled
+    }
+
+    // Craft: icon-only without accessible name
+    {
+      const iconOnlyRe = /<MButton\b([^>]*)\b(?:icon-only|iconOnly)\b([^>]*)\/?>/gi
+      let m = iconOnlyRe.exec(code)
+      while (m !== null) {
+        const attrs = `${m[1] || ''}${m[2] || ''}`
+        if (!/\baria-label\b|\bariaLabel\b|\baria-labelledby\b/i.test(attrs)) {
+          push(
+            'craft',
+            'a11y',
+            'icon-only-missing-aria',
+            '工艺建议：仅图标的 MButton 需要 aria-label / ariaLabel。',
+            'Craft: icon-only MButton needs aria-label / ariaLabel.',
+          )
+          break
+        }
+        m = iconOnlyRe.exec(code)
+      }
+    }
+
+    // Brief fidelity: required blocks / components
+    const mapped = args.brief
+      ? mapReferenceBrief(args.brief)
+      : null
+    const requiredBlocks = [
+      ...(args.requiredBlocks || []),
+      ...(mapped?.validationHints.requiredBlocks || []),
+    ]
+    const requiredComponents = [
+      ...(args.requiredComponents || []),
+      ...(mapped?.validationHints.requiredComponents || []),
+    ]
+    for (const block of requiredBlocks) {
+      if (!codeCoversBlock(code, block)) {
+        push(
+          'contract',
+          'fidelity',
+          'brief-missing-block',
+          `还原度：参考要求的区块「${block}」未在代码中检测到。`,
+          `Fidelity: required reference block “${block}” was not detected in the code.`,
+        )
+      }
+    }
+    for (const component of requiredComponents) {
+      if (!codeCoversComponent(code, component)) {
+        push(
+          'contract',
+          'fidelity',
+          'brief-missing-component',
+          `还原度：参考要求的组件 M${component.replace(/^M/, '')} 未出现。`,
+          `Fidelity: required component M${component.replace(/^M/, '')} is missing.`,
+        )
+      }
+    }
+
+    const contract = suggestions.filter((item) => item.severity === 'contract')
+    const craft = suggestions.filter((item) => item.severity === 'craft')
+    const ok = contract.length === 0
+
     return textResult({
-      ok: true,
+      ok,
       advisory: true,
       summary:
         locale === 'en-US'
           ? suggestions.length === 0
             ? 'No deviations from page standards detected.'
-            : `${suggestions.length} advisory suggestion(s).`
+            : `${contract.length} contract issue(s), ${craft.length} craft suggestion(s).`
           : suggestions.length === 0
             ? '未发现与页面标准的明显偏差。'
-            : `${suggestions.length} 条参考建议。`,
+            : `${contract.length} 条契约问题，${craft.length} 条工艺建议。`,
+      contract,
+      craft,
       suggestions,
       nextStep:
         locale === 'en-US'
-          ? 'See get_design_rules.standards for the full recommended page standards.'
-          : '完整页面标准见 get_design_rules.standards。',
+          ? 'Fix contract issues before delivery; craft suggestions may be waived with justification. Pass the same brief used in map_reference / recommend_page. See get_design_rules / get_style_shells.'
+          : '契约问题交付前必须修好；工艺建议可说明后放过。brief 与 map_reference / recommend_page 保持一致。另见 get_design_rules / get_style_shells。',
     })
   }
+
 
   function getDesignRules(args: { mode?: string } = {}) {
     const locale = resolveLocale(args.mode)
@@ -1377,20 +1553,30 @@ export function createToolHandlers(catalog = loadCatalog()) {
       hardRules: locale === 'en-US' ? styleResolution.hardRulesEn : styleResolution.hardRulesZh,
       note:
         locale === 'en-US'
-          ? 'No named style-preset catalog. Follow user reference/description; ask when uncertain.'
-          : '没有命名风格预设表。跟用户参考/描述；不确定就先问。',
+          ? 'No named style-preset catalog. Follow user reference/description; ask when uncertain. Use map_reference for fidelity mapping and get_style_shells for pasteable token CSS.'
+          : '没有命名风格预设表。跟用户参考/描述；不确定就先问。还原用 map_reference；可粘贴签名壳见 get_style_shells。',
     }
+    const shells = styleShells.map((shell) => ({
+      id: shell.id,
+      surface: shell.surface,
+      title: locale === 'en-US' ? shell.titleEn : shell.titleZh,
+      signature: locale === 'en-US' ? shell.signatureEn : shell.signatureZh,
+      when: locale === 'en-US' ? shell.whenEn : shell.whenZh,
+    }))
     if (locale === 'zh-CN') {
       return textResult({
         meta: designRules.meta,
         standards: designRules.standards,
         styles,
+        shells,
         tokens: designRules.tokens,
         composition: designRules.composition,
         actions: designRules.actions,
         status: designRules.status,
         feedback: designRules.feedback,
         global: designRules.global,
+        themeOverride:
+          '品牌差异优先在应用入口覆盖 --m-color-primary / 字体等主题变量，页面 CSS 只用 --m-*；见 DESIGN.md「主题覆盖」。',
       })
     }
     return textResult({
@@ -1403,6 +1589,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
         mcp: item.mcp,
       })),
       styles,
+      shells,
       tokens: {
         colors: ['--m-color-primary', '--m-color-surface', '--m-color-text', '--m-color-border'],
         spacing: '--m-space-*',
@@ -1438,6 +1625,8 @@ export function createToolHandlers(catalog = loadCatalog()) {
         },
         doc: 'design-kit/.agents/skills/morya-ui-pages/references/feedback.md',
       },
+      themeOverride:
+        'Prefer brand differences via theme overrides (--m-color-primary / fonts) at the app entry; page CSS uses --m-* only. See DESIGN.md theme override section.',
       global: [
         'Prefer library components and --m-* tokens.',
         'Default action feedback to message; prefer message over toast for single-line-only text.',
@@ -1446,7 +1635,83 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'Overlays teleport to body by default; only change appendTo for a clear layout constraint.',
         'Prefer documented component variants over deep CSS overrides.',
         'Resolve visual style: follow explicit user reference/description first; else infer from clear prompt cues; if uncertain ask once. No named preset catalog. Golden pages lock structure, not aesthetics.',
+        'Pass brief to map_reference / recommend_page / validate_page for fidelity.',
       ],
+    })
+  }
+
+  function mapReference(args: ReferenceBriefInput & { mode?: string }) {
+    const locale = resolveLocale(args.mode)
+    const mapped = mapReferenceBrief(args)
+    const shell = mapped.suggestedShellId ? findStyleShell(mapped.suggestedShellId) : undefined
+    return textResult({
+      surface: mapped.surface,
+      density: mapped.density,
+      styleSummary: mapped.styleSummary,
+      suggestedSnippets: mapped.suggestedSnippets,
+      suggestedShellId: mapped.suggestedShellId,
+      mapping: mapped.mapping.map((item) => ({
+        block: item.block,
+        snippetId: item.snippetId,
+        notes: locale === 'en-US' ? item.notesEn : item.notesZh,
+      })),
+      tokenRoles: mapped.tokenRoles.map((item) => ({
+        role: item.role,
+        token: item.token,
+        notes: locale === 'en-US' ? item.notesEn : item.notesZh,
+      })),
+      craftCues: locale === 'en-US' ? mapped.craftCuesEn : mapped.craftCuesZh,
+      validationHints: mapped.validationHints,
+      styleShell: shell
+        ? {
+            id: shell.id,
+            title: locale === 'en-US' ? shell.titleEn : shell.titleZh,
+            signature: locale === 'en-US' ? shell.signatureEn : shell.signatureZh,
+            css: shell.css,
+            htmlHint: locale === 'en-US' ? shell.htmlHintEn : shell.htmlHintZh,
+          }
+        : null,
+      nextStep:
+        locale === 'en-US'
+          ? 'Compose get_page_snippet for each mapping.snippetId; apply styleShell.css when needed; pass the same brief to validate_page.'
+          : '按 mapping.snippetId 逐个 get_page_snippet；需要时粘贴 styleShell.css；同一 brief 交给 validate_page。',
+    })
+  }
+
+  function getStyleShells(args: { shell?: string; surface?: string; mode?: string } = {}) {
+    const locale = resolveLocale(args.mode)
+    if (args.shell) {
+      const shell = findStyleShell(args.shell)
+      if (!shell) {
+        return textResult({
+          error: `Style shell not found: ${args.shell}`,
+          available: styleShells.map((item) => item.id),
+        })
+      }
+      return textResult({
+        id: shell.id,
+        surface: shell.surface,
+        title: locale === 'en-US' ? shell.titleEn : shell.titleZh,
+        signature: locale === 'en-US' ? shell.signatureEn : shell.signatureZh,
+        when: locale === 'en-US' ? shell.whenEn : shell.whenZh,
+        htmlHint: locale === 'en-US' ? shell.htmlHintEn : shell.htmlHintZh,
+        css: shell.css,
+      })
+    }
+    const items = listStyleShells(args.surface).map((shell) => ({
+      id: shell.id,
+      surface: shell.surface,
+      title: locale === 'en-US' ? shell.titleEn : shell.titleZh,
+      signature: locale === 'en-US' ? shell.signatureEn : shell.signatureZh,
+      when: locale === 'en-US' ? shell.whenEn : shell.whenZh,
+    }))
+    return textResult({
+      total: items.length,
+      items,
+      nextStep:
+        locale === 'en-US'
+          ? 'Pass shell id to get_style_shells({ shell }) for pasteable CSS. Brand color via theme --m-color-primary, not page hex.'
+          : '传 shell id 给 get_style_shells({ shell }) 取可粘贴 CSS。品牌色走主题 --m-color-primary，不要在页面写 hex。',
     })
   }
 
@@ -1721,8 +1986,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
         'list_patterns',
         'get_pattern',
         'recommend_page',
+        'map_reference',
         'get_design_rules',
         'get_style_direction',
+        'get_style_shells',
         'recommend_component',
         'list_golden_pages',
         'get_golden_page',
@@ -1746,8 +2013,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
     listPatterns,
     getPattern,
     recommendPage,
+    mapReference,
     getDesignRules,
     getStyleDirection,
+    getStyleShells,
     recommendComponent,
     listGoldenPageCatalog,
     getGoldenPage,

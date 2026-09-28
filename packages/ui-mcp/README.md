@@ -66,14 +66,17 @@ Resource templates:
 | --------------------- | ------------------------------------------------------------- |
 | `list_patterns`       | List reusable page composition patterns                       |
 | `get_pattern`         | Read a pattern's structure, layout, and rules                 |
-| `recommend_page`      | Recommend a pattern from page intent; optional starter scaffold |
-| `get_design_rules`    | Design-token and composition rules                            |
-| `recommend_component` | List, read, or recommend component selection guides           |
-| `list_golden_pages`   | List golden page samples (list / form / dashboard)            |
-| `get_golden_page`     | Read golden page Vue source                                   |
-| `list_page_snippets`  | List section snippets for local page edits                      |
-| `get_page_snippet`    | Read a section snippet (`filters`, `toolbar`, `form-actions`…)  |
-| `validate_page`       | Check page composition, spacing, and border anti-patterns     |
+| `recommend_page`      | Recommend a pattern from page intent; optional `density`, `brief`, starter scaffold |
+| `map_reference`       | Map a reference brief → snippets, token roles, signature shell                     |
+| `get_design_rules`    | Design-token, shells catalog, and composition rules                            |
+| `recommend_component` | List, read, or recommend component selection guides                           |
+| `list_golden_pages`   | List golden page samples (list / form / dashboard)                            |
+| `get_golden_page`     | Read golden page Vue source                                                   |
+| `list_page_snippets`  | List section snippets for local page edits                                      |
+| `get_page_snippet`    | Read a section snippet (`filters`, `toolbar`, `form-actions`…)                  |
+| `get_style_direction` | Resolve visual style from user words / cues (or ask)                            |
+| `get_style_shells`    | List or read token-only signature shells with pasteable CSS                     |
+| `validate_page`       | Contract (`ok`) + craft suggestions; pass `brief` for fidelity checks           |
 
 `mode`: `zh` (default) or `en`.
 
@@ -89,13 +92,13 @@ Component lookup accepts common aliases such as `DataTable`, `数据表格`, `Pa
 
 **Plan a page:**
 
-1. `recommend_page` with business intent, page type, and features
-2. `get_golden_page` for the matched golden sample (`list-page`, `form-page`, `form-in-dialog`, `detail-page`, `dashboard-page`, `login-page`, `landing-page`, `empty-state`, `result-page`, `settings-page`, `wizard-form`). `includeScaffold` returns that golden source when available.
-3. `get_pattern` for the returned `matchedPattern`
-4. `get_design_rules` for MPage* composition recipes
-5. `get_component` / `get_example` for core components (including `Page`)
+1. `recommend_page` with business intent, page type, features, optional `density` / `brief`
+2. If the user gave a screenshot/mock description → `map_reference` (or reuse `recommend_page.referenceMapping`)
+3. `get_page_snippet` for each mapped block; optional `get_style_shells` for Account / Express / Flow
+4. `get_golden_page` only when unsure of whole-page block order
+5. `get_design_rules` / `get_component` / `get_example` for APIs
 6. `recommend_component` when choosing between similar components
-7. `validate_page` on generated Vue code before finishing
+7. `validate_usage` + `validate_page({ brief })` — contract must pass (`ok: true`)
 
 **Edit one section of an existing page:**
 

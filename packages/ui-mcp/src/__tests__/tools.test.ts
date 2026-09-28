@@ -492,34 +492,34 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.suggestions.some((item) => item.type === 'menu-missing-icons')).toBe(false)
   })
 
-  it('flags MTable data prop as contract advisory', () => {
-    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+  it('flags MTable data prop as contract failure', () => {
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string; severity?: string }> }>(
       handlers.validatePage({
         code: '<MTable :columns="columns" :data="rows" />',
       }),
     )
-    expect(result.ok).toBe(true)
-    expect(result.suggestions.some((item) => item.type === 'table-data-prop')).toBe(true)
+    expect(result.ok).toBe(false)
+    expect(result.suggestions.some((item) => item.type === 'table-data-prop' && item.severity === 'contract')).toBe(true)
   })
 
   it('flags MMessage severity as inline-alert misuse', () => {
-    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string; severity?: string }> }>(
       handlers.validatePage({
         code: '<MMessage severity="error">登录失败</MMessage>',
       }),
     )
-    expect(result.ok).toBe(true)
-    expect(result.suggestions.some((item) => item.type === 'mmessage-as-alert')).toBe(true)
+    expect(result.ok).toBe(false)
+    expect(result.suggestions.some((item) => item.type === 'mmessage-as-alert' && item.severity === 'contract')).toBe(true)
   })
 
   it('flags one-line toast string as message preference', () => {
-    const result = read<{ ok: boolean; suggestions: Array<{ type: string }> }>(
+    const result = read<{ ok: boolean; suggestions: Array<{ type: string; severity?: string }> }>(
       handlers.validatePage({
         code: `toast.success('已保存')`,
       }),
     )
-    expect(result.ok).toBe(true)
-    expect(result.suggestions.some((item) => item.type === 'toast-one-liner')).toBe(true)
+    expect(result.ok).toBe(false)
+    expect(result.suggestions.some((item) => item.type === 'toast-one-liner' && item.severity === 'contract')).toBe(true)
   })
 
   it('flags MTag in cell-status when MStatus is missing', () => {
@@ -644,10 +644,12 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.counts.decisions).toBeGreaterThan(0)
     expect(result.counts.resources).toBeGreaterThan(100)
     expect(result.counts.resourceTemplates).toBe(3)
-    expect(result.tools).toHaveLength(19)
+    expect(result.tools).toHaveLength(21)
     expect(result.tools).toContain('get_golden_page')
     expect(result.tools).toContain('get_page_snippet')
     expect(result.tools).toContain('get_style_direction')
+    expect(result.tools).toContain('map_reference')
+    expect(result.tools).toContain('get_style_shells')
     expect(result.tools).not.toContain('list_style_presets')
     expect(result.tools).not.toContain('get_style_preset')
     expect(result.tools).toContain('validate_page')
