@@ -2,7 +2,7 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { copyTemplate } from './copy-template.mjs'
 import { installMoryaUi } from './install.mjs'
-import { mergeMcpConfig } from './mcp.mjs'
+import { DEFAULT_EDITORS, mergeMcpConfig, parseEditorsFlag } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
 import {
   buildAiInclude,
@@ -49,12 +49,12 @@ Commands:
   (default) / full  Upgrade morya packages to latest, AI template, MCP, styles, check:colors
   app               Upgrade morya packages to latest and inject styles.css
   ai                Upgrade morya packages to latest, copy Agent skills / rules / DESIGN,
-                    merge Cursor MCP, add check:colors
+                    merge MCP for Cursor / VS Code / Zed, add check:colors
 
 Default command:
   - install / upgrade morya-ui@latest and any existing @morya-ui/* to @latest
-  - copy DESIGN.md, selected Agent skills, Cursor rules
-  - merge .cursor/mcp.json for @morya-ui/mcp@latest
+  - copy DESIGN.md, AGENTS.md, selected Agent skills, Cursor rules
+  - merge MCP configs for @morya-ui/mcp@latest (Cursor, VS Code, Zed, + .mcp.json)
   - inject import 'morya-ui/styles.css' into the app entry when found
   - add check:colors script when missing
 
@@ -62,12 +62,13 @@ Options:
   --cwd <dir>       Target project root (default: process.cwd())
   --pm <name>       Package manager: pnpm | yarn | npm (auto-detect by lockfile)
   --skills <list>   Comma-separated skill ids, or "all" (skips interactive prompt)
+  --editors <list>  MCP targets: cursor,vscode,zed (default: all); always also writes .mcp.json
   --yes             Use default skills without prompting (CI / non-interactive)
   --force           Overwrite existing template files and MCP server entry
   --dry-run         Print actions without writing or installing
   --skip-install    Skip dependency install / upgrade
   --skip-template   Skip copying AI template files
-  --skip-mcp        Skip writing .cursor/mcp.json
+  --skip-mcp        Skip writing editor MCP configs and .mcp.json
   --skip-styles     Skip injecting styles.css
   --skip-scripts    Skip adding check:colors to package.json
   -h, --help        Show this help
@@ -86,6 +87,7 @@ export function parseArgs(argv) {
     cwd: process.cwd(),
     pm: undefined,
     skills: undefined,
+    editors: undefined,
     yes: false,
     force: false,
     dryRun: false,
@@ -153,6 +155,16 @@ export function parseArgs(argv) {
       options.skills = arg.slice('--skills='.length)
       continue
     }
+    if (arg === '--editors') {
+      const value = argv[++i]
+      if (!value) throw new Error('--editors requires a comma-separated list or "all"')
+      options.editors = value
+      continue
+    }
+    if (arg.startsWith('--editors=')) {
+      options.editors = arg.slice('--editors='.length)
+      continue
+    }
     throw new Error(`Unknown argument: ${arg}`)
   }
 
@@ -185,8 +197,11 @@ export async function runSetup(options) {
     skipScripts,
     pm,
     skills: skillsFlag,
+    editors: editorsFlag,
     yes,
   } = options
+
+  const editors = editorsFlag != null ? parseEditorsFlag(editorsFlag) : [...DEFAULT_EDITORS]
 
   console.log(`@morya-ui/setup [${mode}] → ${cwd}${dryRun ? ' (dry-run)' : ''}`)
   console.log('')
@@ -225,8 +240,8 @@ export async function runSetup(options) {
     : installSkillsCli(cwd, selectedSkills, catalog.skills, { dryRun })
 
   const mcp = skipMcp
-    ? { path: join(cwd, '.cursor', 'mcp.json'), action: 'skipped-flag' }
-    : mergeMcpConfig(cwd, { force, dryRun })
+    ? { skipped: true, results: [] }
+    : mergeMcpConfig(cwd, { force, dryRun, editors })
 
   const styles = skipStyles
     ? { action: 'skipped', reason: 'skip-styles' }
@@ -269,10 +284,13 @@ export async function runSetup(options) {
     console.log(`Skills CLI: installed ${remoteSkills.installed.join(', ')} (latest)`)
   }
 
-  if (mcp.action === 'skipped-flag') {
+  if (mcp.skipped) {
     console.log('MCP: skipped (--skip-mcp or app mode)')
   } else {
-    console.log(`MCP: ${mcp.action} (${rel(cwd, mcp.path) || '.cursor/mcp.json'})`)
+    console.log(`MCP: editors=${editors.join(',')}+portable`)
+    for (const entry of mcp.results) {
+      console.log(`  ${entry.editor}: ${entry.action} (${rel(cwd, entry.path)})`)
+    }
   }
 
   if (styles.reason === 'skip-styles') {
@@ -298,15 +316,15 @@ export async function runSetup(options) {
     console.log('  1. Ensure the styles.css import is in your app entry.')
     console.log('  2. Optional AI pack: npx @morya-ui/setup ai')
   } else if (mode === 'ai') {
-    console.log('  1. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
-    console.log('  2. Have the agent read DESIGN.md before generating pages.')
+    console.log('  1. Restart / reload MCP in your editor so morya-ui tools appear.')
+    console.log('  2. Have the agent read DESIGN.md (and AGENTS.md) before generating pages.')
     console.log('  3. Optional: pnpm check:colors')
   } else {
     console.log('  1. Ensure the styles.css import is in your app entry.')
-    console.log('  2. Restart Cursor (or reload MCP) so morya-ui MCP tools appear.')
-    console.log('  3. Have the agent read DESIGN.md before generating pages.')
+    console.log('  2. Restart / reload MCP in your editor so morya-ui tools appear.')
+    console.log('  3. Have the agent read DESIGN.md (and AGENTS.md) before generating pages.')
     console.log('  4. Optional: pnpm check:colors')
   }
 
-  return { mode, install, template, remoteSkills, mcp, styles, scripts, skills: selectedSkills }
+  return { mode, install, template, remoteSkills, mcp, styles, scripts, skills: selectedSkills, editors }
 }

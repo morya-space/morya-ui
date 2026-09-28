@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.3.5",
   "packageManager": "pnpm@10.12.4",
-  "description": "One-shot setup for morya-ui: install the library, Cursor MCP, Agent skills, and design config.",
+  "description": "One-shot setup for morya-ui: install the library, multi-editor MCP, Agent skills, and design config.",
   "license": "MIT",
   "homepage": "https://github.com/morya-space/morya-ui/tree/main/packages/setup#readme",
   "repository": {
@@ -33,6 +33,7 @@
   "scripts": {
     "sync-template": "node ./scripts/sync-template.mjs",
     "build": "pnpm run sync-template",
+    "test": "node --test src/__tests__/**/*.test.mjs",
     "prepublishOnly": "pnpm run build"
   }
 }
