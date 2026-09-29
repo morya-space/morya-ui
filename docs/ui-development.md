@@ -76,6 +76,7 @@ Body in Markdown. Put demos in `docs/demos/*.vue` and reference them:
 
 ````md
 ```vue preview src="./demos/Basic.vue"
+
 ```
 ````
 
@@ -93,28 +94,32 @@ When public API, behavior, or docs change, update the related files below. Compo
 
 ### Usual
 
-| Item | Notes |
-| --- | --- |
+| Item                                             | Notes                                                        |
+| ------------------------------------------------ | ------------------------------------------------------------ |
 | `docs/index.md` + `docs/index.en.md` (and demos) | Keep Props / Events / Slots / examples in sync with the code |
-| Behavior tests | `*.test.ts`; add or update when behavior changes |
-| `pnpm typecheck` / relevant `pnpm test` | Run locally |
+| Behavior tests                                   | `*.test.ts`; add or update when behavior changes             |
+| `pnpm typecheck` / relevant `pnpm test`          | Run locally                                                  |
 
 ### By change
 
-| Change | Sync |
-| --- | --- |
-| New public component | Component folder (see above); export from `src/index.ts` (component + types); `@import` its `styles.css` in `src/styles/index.css`; zh/en docs + demos + tests; then `pnpm build` (updates exports / on-demand entries; `package.json` exports and `resolver-map.ts` are script-maintained) |
-| Props / Events / Slots / Methods | Update bilingual docs tables; run `pnpm docs:sync-type-sections` when useful; put shared type names in `playground/src/docs/guide/types.md` and `types.en.md` |
-| Styles / new `--m-*` tokens | Component `styles.css`; run `pnpm tokens:generate` if tokens were added |
-| Locale strings | `src/locale` and call sites |
-| Component or guide Markdown | `pnpm mcp:generate`, then `pnpm mcp:check-catalog` / `pnpm mcp:validate-catalog` (optional `pnpm mcp:audit-examples`) |
-| Selection / scenario hints | Edit `design-kit/` (e.g. `morya-ui-pages` `component-index.md`, `DESIGN.md`, golden pages), then `pnpm setup:sync-template` (overwrites `packages/setup/template/`) |
-| MCP recommend / decision copy | Edit `packages/ui-mcp/src/patterns.ts`, `decisions.ts`, etc. (ships with the MCP package) |
-| Release | Use `pnpm release*`; CHANGELOG is written by the release flow |
+| Change                           | Sync                                                                                                                                                                                                                                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| New public component             | Component folder (see above); export from `src/index.ts` (component + types); `@import` its `styles.css` in `src/styles/index.css`; zh/en docs + demos + tests; then `pnpm build` (updates exports / on-demand entries; `package.json` exports and `resolver-map.ts` are script-maintained) |
+| Props / Events / Slots / Methods | Update bilingual docs tables; run `pnpm docs:sync-type-sections` when useful; put shared type names in `playground/src/docs/guide/types.md` and `types.en.md`                                                                                                                               |
+| Styles / new `--m-*` tokens      | Component `styles.css`; run `pnpm tokens:generate` if tokens were added                                                                                                                                                                                                                     |
+| Locale strings                   | `src/locale` and call sites                                                                                                                                                                                                                                                                 |
+| Component or guide Markdown      | `pnpm mcp:generate`, then `pnpm mcp:check-catalog` / `pnpm mcp:validate-catalog` (optional `pnpm mcp:audit-examples`)                                                                                                                                                                       |
+| Selection / scenario hints       | Edit `design-kit/` (e.g. `morya-ui-pages` `component-index.md`, `DESIGN.md`, golden pages), then `pnpm setup:sync-template` (overwrites `packages/setup/template/`)                                                                                                                         |
+| MCP recommend / decision copy    | Edit `packages/ui-mcp/src/patterns.ts`, `decisions.ts`, etc. (ships with the MCP package)                                                                                                                                                                                                   |
+| Release                          | Use `pnpm release*`; CHANGELOG is written by the release flow                                                                                                                                                                                                                               |
 
 ### After docs change
 
 ```bash
+pnpm check:docs-skeleton   # when-to-use + preview + API skeleton gate
+pnpm build:docs:pages && pnpm check:docs-smoke   # SEO shells / a11y basics (optional when docs site changes)
+pnpm build && pnpm check:size                    # bundle budget (when dist changes)
+pnpm test:visual                                 # key-component visual regression (when visuals change)
 pnpm mcp:generate
 pnpm mcp:check-catalog
 pnpm mcp:validate-catalog

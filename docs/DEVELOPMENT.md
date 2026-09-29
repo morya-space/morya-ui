@@ -6,16 +6,16 @@ Internal documentation for contributors. Public overview: [root README](../READM
 
 ## Layout
 
-| Path | Role |
-| --- | --- |
-| `src/` | Library source (components, theme, locale, styles) |
-| `playground/` | Docs site (Vite + Markdown preview) |
-| `scripts/` | Release & CHANGELOG tooling |
-| `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP server |
-| `packages/setup/` | `@morya-ui/setup` CLI; `template/` is generated from `design-kit/` |
-| `design-kit/` | Consumer AI pack: `DESIGN.md`, `morya-ui-pages` skill, Cursor rules, golden pages |
-| `docs/` | Maintainer docs |
-| `dist/` | Build output |
+| Path               | Role                                                                              |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `src/`             | Library source (components, theme, locale, styles)                                |
+| `playground/`      | Docs site (Vite + Markdown preview)                                               |
+| `scripts/`         | Release & CHANGELOG tooling                                                       |
+| `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP server                                                  |
+| `packages/setup/`  | `@morya-ui/setup` CLI; `template/` is generated from `design-kit/`                |
+| `design-kit/`      | Consumer AI pack: `DESIGN.md`, `morya-ui-pages` skill, Cursor rules, golden pages |
+| `docs/`            | Maintainer docs                                                                   |
+| `dist/`            | Build output                                                                      |
 
 ## Commands
 
@@ -27,6 +27,10 @@ pnpm build:docs
 pnpm typecheck
 pnpm test
 pnpm test:coverage
+pnpm check:docs-skeleton   # component doc skeleton gate
+pnpm check:docs-smoke      # docs SEO/a11y shells (needs build:docs:pages)
+pnpm check:size            # bundle size budget (needs build)
+pnpm test:visual           # key-component visual regression (needs playwright chromium)
 pnpm release              # full pipeline (prepare → build → commit → … → push; includes MCP)
 pnpm release:prepare      # write version & CHANGELOG; sync MCP version
 pnpm release:build        # build UI + MCP, validate catalog, and write API coverage report
@@ -47,12 +51,12 @@ pnpm setup:sync-template  # copy design-kit/ into packages/setup/template/
 
 ## Related docs
 
-| Doc | Topic |
-| --- | --- |
-| [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Conventional Commits + husky / commitlint |
-| [UI development](./ui-development.md) | Build, publish, component & docs conventions ([sync checklist](./ui-development.md#component-change-sync-checklist)) |
-| [scripts/README.md](../scripts/README.md) | Interactive release tooling |
-| [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP server |
-| [packages/setup/README.md](../packages/setup/README.md) | Consumer setup CLI |
-| [design-kit/README.md](../design-kit/README.md) | Source of the AI skill / rules pack |
-| [AGENTS.md](../AGENTS.md) | Agent / Skills rules |
+| Doc                                                       | Topic                                                                                                                |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md)            | Conventional Commits + husky / commitlint                                                                            |
+| [UI development](./ui-development.md)                     | Build, publish, component & docs conventions ([sync checklist](./ui-development.md#component-change-sync-checklist)) |
+| [scripts/README.md](../scripts/README.md)                 | Interactive release tooling                                                                                          |
+| [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP server                                                                                                        |
+| [packages/setup/README.md](../packages/setup/README.md)   | Consumer setup CLI                                                                                                   |
+| [design-kit/README.md](../design-kit/README.md)           | Source of the AI skill / rules pack                                                                                  |
+| [AGENTS.md](../AGENTS.md)                                 | Agent / Skills rules                                                                                                 |

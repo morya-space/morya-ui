@@ -6,16 +6,16 @@
 
 ## 仓库结构
 
-| 路径 | 作用 |
-| --- | --- |
-| `src/` | 组件库源码（组件、主题、locale、样式） |
-| `playground/` | 文档站（Vite + Markdown 预览） |
-| `scripts/` | 发版与 CHANGELOG 工具 |
-| `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP 服务 |
-| `packages/setup/` | `@morya-ui/setup` CLI；`template/` 由 `design-kit/` 同步生成 |
-| `design-kit/` | 消费方 AI 配置：`DESIGN.md`、`morya-ui-pages` skill、Cursor 规则、黄金样例 |
-| `docs/` | 维护者文档 |
-| `dist/` | 构建产物（由构建生成） |
+| 路径               | 作用                                                                       |
+| ------------------ | -------------------------------------------------------------------------- |
+| `src/`             | 组件库源码（组件、主题、locale、样式）                                     |
+| `playground/`      | 文档站（Vite + Markdown 预览）                                             |
+| `scripts/`         | 发版与 CHANGELOG 工具                                                      |
+| `packages/ui-mcp/` | `@morya-ui/mcp` stdio MCP 服务                                             |
+| `packages/setup/`  | `@morya-ui/setup` CLI；`template/` 由 `design-kit/` 同步生成               |
+| `design-kit/`      | 消费方 AI 配置：`DESIGN.md`、`morya-ui-pages` skill、Cursor 规则、黄金样例 |
+| `docs/`            | 维护者文档                                                                 |
+| `dist/`            | 构建产物（由构建生成）                                                     |
 
 ## 常用命令
 
@@ -27,6 +27,10 @@ pnpm build:docs
 pnpm typecheck
 pnpm test
 pnpm test:coverage
+pnpm check:docs-skeleton   # 组件文档骨架机检
+pnpm check:docs-smoke      # 文档站 SEO/a11y shell（需先 build:docs:pages）
+pnpm check:size            # 包体积预算（需先 build）
+pnpm test:visual           # 关键组件视觉回归（需 playwright chromium）
 pnpm release              # 一键发版（prepare → build → commit → … → push；含 MCP）
 pnpm release:prepare      # 写版本与 CHANGELOG，并同步 MCP 版本
 pnpm release:build        # 构建 UI + MCP，并校验 catalog、生成 API 覆盖率报告
@@ -47,12 +51,12 @@ pnpm setup:sync-template  # 把 design-kit/ 同步到 packages/setup/template/
 
 ## 相关文档
 
-| 文档 | 内容 |
-| --- | --- |
-| [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | 提交规范 |
-| [UI 开发](./ui-development.zh-CN.md) | 构建、发版、组件与文档约定（含 [同步清单](./ui-development.zh-CN.md#组件变更同步清单)） |
-| [scripts/README.md](../scripts/README.md) | 发版脚本说明 |
-| [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP 服务 |
-| [packages/setup/README.md](../packages/setup/README.md) | 消费方一键接入 CLI |
-| [design-kit/README.md](../design-kit/README.md) | AI skill / rules 配置源 |
-| [AGENTS.md](../AGENTS.md) | Agent / Skills 使用规则 |
+| 文档                                                      | 内容                                                                                    |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md)            | 提交规范                                                                                |
+| [UI 开发](./ui-development.zh-CN.md)                      | 构建、发版、组件与文档约定（含 [同步清单](./ui-development.zh-CN.md#组件变更同步清单)） |
+| [scripts/README.md](../scripts/README.md)                 | 发版脚本说明                                                                            |
+| [packages/ui-mcp/README.md](../packages/ui-mcp/README.md) | UI MCP 服务                                                                             |
+| [packages/setup/README.md](../packages/setup/README.md)   | 消费方一键接入 CLI                                                                      |
+| [design-kit/README.md](../design-kit/README.md)           | AI skill / rules 配置源                                                                 |
+| [AGENTS.md](../AGENTS.md)                                 | Agent / Skills 使用规则                                                                 |

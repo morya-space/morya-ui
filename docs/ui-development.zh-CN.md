@@ -76,17 +76,18 @@ description: 触发动作的按钮
 
 ````md
 ```vue preview src="./demos/Basic.vue"
+
 ```
 ````
 
 引用；布局优先 UnoCSS 工具类。两种语言的 `category` 保持一致（英文缺失则回退中文）。分类前缀决定侧栏排序，例如：
 
-| 前缀 | 分类 |
-| --- | --- |
-| `00 / GUIDE` | 指南类（如 ConfigProvider） |
-| `01 / PRIMITIVE` | 基础 |
-| `02 / FORM` | 表单 |
-| `03 / OVERLAY` | 浮层 |
+| 前缀             | 分类                        |
+| ---------------- | --------------------------- |
+| `00 / GUIDE`     | 指南类（如 ConfigProvider） |
+| `01 / PRIMITIVE` | 基础                        |
+| `02 / FORM`      | 表单                        |
+| `03 / OVERLAY`   | 浮层                        |
 
 Attrs / `pt` 落点约定见对外页 [样式与 attrs](https://morya-space.github.io/morya-ui/docs/attrs)。写组件文档时：
 
@@ -100,28 +101,32 @@ Attrs / `pt` 落点约定见对外页 [样式与 attrs](https://morya-space.gith
 
 ### 常规
 
-| 项 | 说明 |
-| --- | --- |
+| 项                                               | 说明                                    |
+| ------------------------------------------------ | --------------------------------------- |
 | `docs/index.md` + `docs/index.en.md`（及 demos） | Props / Events / Slots / 示例与实现对齐 |
-| 行为测试 | `*.test.ts`；行为变了就补测 |
-| `pnpm typecheck` / 相关 `pnpm test` | 本地跑一下 |
+| 行为测试                                         | `*.test.ts`；行为变了就补测             |
+| `pnpm typecheck` / 相关 `pnpm test`              | 本地跑一下                              |
 
 ### 按改动
 
-| 改动 | 同步 |
-| --- | --- |
-| 新增公开组件 | 组件目录（见上）；`src/index.ts` 导出组件与类型；`src/styles/index.css` `@import` 其 `styles.css`；中英文档 + demos + 测试；再 `pnpm build`（会更新 exports / 按需入口，`package.json` exports 和 `resolver-map.ts` 由脚本维护） |
-| Props / Events / Slots / Methods | 更新双语文档表；需要时跑 `pnpm docs:sync-type-sections`；跨组件复用的类型写到 `playground/src/docs/guide/types.md` 与 `types.en.md` |
-| 样式 / 新 `--m-*` token | 改组件 `styles.css`；有新 token 时跑 `pnpm tokens:generate` |
-| locale 文案 | `src/locale` 和组件里用到的地方 |
-| 文档或指南 Markdown | `pnpm mcp:generate`，再 `pnpm mcp:check-catalog` / `pnpm mcp:validate-catalog`（可选 `pnpm mcp:audit-examples`） |
-| 选型 / 场景提示 | 改 `design-kit/`（例如 `morya-ui-pages` 的 `component-index.md`、`DESIGN.md`、golden pages），再 `pnpm setup:sync-template`（会覆盖 `packages/setup/template/`） |
-| MCP 推荐 / 决策文案 | 改 `packages/ui-mcp/src/patterns.ts`、`decisions.ts` 等（随 MCP 包发布） |
-| 发版 | 用 `pnpm release*`；CHANGELOG 由发版流程写 |
+| 改动                             | 同步                                                                                                                                                                                                                             |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 新增公开组件                     | 组件目录（见上）；`src/index.ts` 导出组件与类型；`src/styles/index.css` `@import` 其 `styles.css`；中英文档 + demos + 测试；再 `pnpm build`（会更新 exports / 按需入口，`package.json` exports 和 `resolver-map.ts` 由脚本维护） |
+| Props / Events / Slots / Methods | 更新双语文档表；需要时跑 `pnpm docs:sync-type-sections`；跨组件复用的类型写到 `playground/src/docs/guide/types.md` 与 `types.en.md`                                                                                              |
+| 样式 / 新 `--m-*` token          | 改组件 `styles.css`；有新 token 时跑 `pnpm tokens:generate`                                                                                                                                                                      |
+| locale 文案                      | `src/locale` 和组件里用到的地方                                                                                                                                                                                                  |
+| 文档或指南 Markdown              | `pnpm mcp:generate`，再 `pnpm mcp:check-catalog` / `pnpm mcp:validate-catalog`（可选 `pnpm mcp:audit-examples`）                                                                                                                 |
+| 选型 / 场景提示                  | 改 `design-kit/`（例如 `morya-ui-pages` 的 `component-index.md`、`DESIGN.md`、golden pages），再 `pnpm setup:sync-template`（会覆盖 `packages/setup/template/`）                                                                 |
+| MCP 推荐 / 决策文案              | 改 `packages/ui-mcp/src/patterns.ts`、`decisions.ts` 等（随 MCP 包发布）                                                                                                                                                         |
+| 发版                             | 用 `pnpm release*`；CHANGELOG 由发版流程写                                                                                                                                                                                       |
 
 ### 文档改完后常跑
 
 ```bash
+pnpm check:docs-skeleton   # 何时使用 + preview + API 骨架机检
+pnpm build:docs:pages && pnpm check:docs-smoke   # SEO shell / a11y 基础（可选，改文档站时）
+pnpm build && pnpm check:size                    # 体积预算（改构建产物时）
+pnpm test:visual                                 # 关键组件视觉回归（改视觉时）
 pnpm mcp:generate
 pnpm mcp:check-catalog
 pnpm mcp:validate-catalog
