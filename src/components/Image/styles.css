@@ -1,0 +1,96 @@
+.m-image {
+    display: inline-block;
+    line-height: 0;
+    max-width: 100%;
+    position: relative;
+}
+
+.m-image__trigger {
+    background: none;
+    border: none;
+    cursor: zoom-in;
+    display: block;
+    padding: 0;
+}
+
+.m-image__trigger:focus-visible {
+    outline: 2px solid var(--m-color-focus-ring);
+    outline-offset: 2px;
+}
+
+.m-image__img {
+    display: block;
+    max-width: 100%;
+}
+
+.m-image-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--m-space-3);
+}
+
+.m-image-preview {
+    align-items: center;
+    background: var(--m-overlay-scrim);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    padding: var(--m-space-8);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: calc(var(--m-z-overlay) + 20);
+}
+
+.m-image-preview__img {
+    max-height: min(90vh, 100%);
+    max-width: min(90vw, 100%);
+    object-fit: contain;
+}
+
+.m-image-preview__close {
+    align-items: center;
+    background: color-mix(in srgb, var(--m-color-surface) 18%, transparent);
+    border: none;
+    border-radius: var(--m-radius-full);
+    color: var(--m-color-on-emphasis);
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.5rem;
+    justify-content: center;
+    position: absolute;
+    right: var(--m-space-4);
+    top: var(--m-space-4);
+    width: 2.5rem;
+}
+
+.m-image-preview__close:focus-visible,
+.m-image-preview__nav:focus-visible {
+    outline: 2px solid var(--m-color-focus-ring);
+    outline-offset: 2px;
+}
+
+.m-image-preview__nav {
+    align-items: center;
+    background: color-mix(in srgb, var(--m-color-surface) 18%, transparent);
+    border: none;
+    border-radius: var(--m-radius-full);
+    color: var(--m-color-on-emphasis);
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.75rem;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.75rem;
+}
+
+.m-image-preview__nav--prev {
+    left: var(--m-space-4);
+}
+
+.m-image-preview__nav--next {
+    right: var(--m-space-4);
+}
