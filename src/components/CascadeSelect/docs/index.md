@@ -8,10 +8,15 @@ description: 多级联级选择，支持嵌套 options 与分栏面板。
 
 从嵌套选项中逐级选择一个值。
 
+## 何时使用
+
+- 需要在嵌套分类中选择**单个叶子节点**时。
+- 当前仅单选；尚无搜索、多选或远程 `loadData`。
+
 ## 引入
 
 ```ts
-import { MCascadeSelect } from 'morya-ui'
+import { MCascadeSelect } from "morya-ui";
 ```
 
 ## 基础用法
@@ -24,41 +29,47 @@ import { MCascadeSelect } from 'morya-ui'
 ```vue preview src="./demos/Size.zh.vue"
 ```
 
+## 多级嵌套
+
+三级嵌套选项，可清除，并展示当前选中值。
+
+```vue preview src="./demos/Nested.zh.vue"
+```
+
 ## Props
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `modelValue` | `string \| number \| null` | `null` | 选中值。 |
-| `options` | `CascadeSelectOption[]` | — | 嵌套选项。 |
-| `label` | `string` | — | 字段标签。 |
-| `helpText` | `string` | — | 帮助文案。 |
-| `invalid` | `boolean` | `false` | 无效状态。 |
-| `errorMessage` | `string` | — | 错误文案；设置时视为 invalid。 |
-| `id` | `string` | — | 控件 id。 |
-| `placeholder` | `string` | `'请选择'` | 占位文案。 |
-| `disabled` | `boolean` | `false` | 禁用。 |
-| `required` | `boolean` | `false` | 表单必填辅助。 |
-| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
-| `fluid` | `boolean` | `false` | 宽度撑满容器。 |
-| `clearable` | `boolean` | `false` | 有值时显示清除按钮（hover 单槽 suffix）。 |
-| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
-| `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
-| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
-
+| 参数           | 类型                                                                                   | 默认值         | 说明                                                              |
+| -------------- | -------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------- |
+| `modelValue`   | `string \| number \| null`                                                             | `null`         | 选中值。                                                          |
+| `options`      | `CascadeSelectOption[]`                                                                | —              | 嵌套选项。                                                        |
+| `label`        | `string`                                                                               | —              | 字段标签。                                                        |
+| `helpText`     | `string`                                                                               | —              | 帮助文案。                                                        |
+| `invalid`      | `boolean`                                                                              | `false`        | 无效状态。                                                        |
+| `errorMessage` | `string`                                                                               | —              | 错误文案；设置时视为 invalid。                                    |
+| `id`           | `string`                                                                               | —              | 控件 id。                                                         |
+| `placeholder`  | `string`                                                                               | `'请选择'`     | 占位文案。                                                        |
+| `disabled`     | `boolean`                                                                              | `false`        | 禁用。                                                            |
+| `required`     | `boolean`                                                                              | `false`        | 表单必填辅助。                                                    |
+| `size`         | [MSizeInput](/docs/types#MSizeInput)                                                   | —              | `small` / `large`；可继承 ConfigProvider。                        |
+| `fluid`        | `boolean`                                                                              | `false`        | 宽度撑满容器。                                                    |
+| `clearable`    | `boolean`                                                                              | `false`        | 有值时显示清除按钮（hover 单槽 suffix）。                         |
+| `teleport`     | `boolean`                                                                              | `true`         | 浮层 Teleport；默认挂到 `body`。                                  |
+| `appendTo`     | `string \| HTMLElement \| 'self' \| false`                                             | `'body'`       | 挂载目标；`'self'` / `false` 就地渲染。                           |
+| `transition`   | `string \| false`                                                                      | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
+| `pt`           | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | —              | DOM 透传，见 [样式与 attrs](/docs/attrs).                         |
 
 ## Events
 
-| 事件名 | 参数 | 说明 |
-| --- | --- | --- |
-| `update:modelValue` | `CascadeSelectValue` | 选中变化。 |
-| `clear` | — | 点击清除时触发。 |
+| 事件名              | 参数                 | 说明             |
+| ------------------- | -------------------- | ---------------- |
+| `update:modelValue` | `CascadeSelectValue` | 选中变化。       |
+| `clear`             | —                    | 点击清除时触发。 |
 
 ## Slots
 
-| 插槽名 | 说明 |
-| --- | --- |
-| `value` | 触发器展示内容。 |
+| 插槽名   | 说明                |
+| -------- | ------------------- |
+| `value`  | 触发器展示内容。    |
 | `option` | 选项 `{ option }`。 |
 
 ## 类型
@@ -68,9 +79,8 @@ import { MCascadeSelect } from 'morya-ui'
 完整定义见源码 `types.ts`。
 
 ```ts
-type CascadeSelectValue = string | number | null
+type CascadeSelectValue = string | number | null;
 ```
-
 
 <h4 id="CascadeSelectOption">CascadeSelectOption</h4>
 
@@ -78,9 +88,13 @@ type CascadeSelectValue = string | number | null
 
 ```ts
 interface CascadeSelectOption {
-  label: string
-  value: string | number
-  children?: CascadeSelectOption[]
-  disabled?: boolean
+  label: string;
+  value: string | number;
+  children?: CascadeSelectOption[];
+  disabled?: boolean;
 }
 ```
+
+## 与 ant-design
+
+对应 antd `Cascader` 的级联选值角色，但能力更窄：仅单叶子、无 search / multiple / `loadData`。详见 [antd 映射](/docs/antd-mapping)。
