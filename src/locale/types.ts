@@ -27,8 +27,16 @@ export interface MLocaleConfig {
   close?: string
   loading?: string
   required?: string
+  invalidValue?: string
+  invalidEmail?: string
+  invalidUrl?: string
+  invalidDate?: string
   expand?: string
   collapse?: string
+  copy?: string
+  copied?: string
+  edit?: string
+  cancelEdit?: string
   prevPage?: string
   nextPage?: string
   pagination?: string
