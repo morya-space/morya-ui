@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-29T01:04:03.454Z",
-  "catalogGeneratedAt": "2026-09-29T01:04:02.416Z",
+  "generatedAt": "2026-09-29T02:20:58.845Z",
+  "catalogGeneratedAt": "2026-09-29T02:20:54.304Z",
   "components": [
     {
       "id": "Accordion",
@@ -2764,7 +2764,7 @@
       "exportName": "MTable",
       "examples": 36,
       "props": {
-        "total": 70,
+        "total": 72,
         "covered": 27,
         "missing": [
           "fit",
@@ -2774,6 +2774,8 @@
           "showRowsPerPage",
           "fill",
           "columnOrder",
+          "expandConfig",
+          "radioConfig",
           "rowHover",
           "sortField",
           "sortOrder",
@@ -2813,8 +2815,8 @@
         ]
       },
       "events": {
-        "total": 21,
-        "covered": 7,
+        "total": 20,
+        "covered": 6,
         "missing": [
           "sort",
           "row-click",
@@ -2849,7 +2851,7 @@
         ]
       },
       "methods": {
-        "total": 17,
+        "total": 39,
         "covered": 0,
         "missing": [
           "currentPageFirstIndex",
@@ -2866,9 +2868,31 @@
           "rowsPerPageActiveOption",
           "updateRowsPerPageActiveOption",
           "setFilters",
+          "clearFilter",
           "setColumnWidths",
           "setHiddenColumns",
-          "setColumnOrder"
+          "setColumnOrder",
+          "clearSort",
+          "getCheckboxRecords",
+          "setCheckboxRow",
+          "clearCheckboxRow",
+          "isCheckedByCheckboxRow",
+          "isAllCheckboxChecked",
+          "getCheckboxIndeterminateRecords",
+          "scrollTo",
+          "scrollToRow",
+          "setRowExpand",
+          "setAllRowExpand",
+          "toggleRowExpand",
+          "clearRowExpand",
+          "isRowExpandByRow",
+          "getRowExpandRecords",
+          "setTreeExpand",
+          "setAllTreeExpand",
+          "toggleTreeExpand",
+          "clearTreeExpand",
+          "isTreeExpandByRow",
+          "getTreeExpandRecords"
         ]
       }
     },

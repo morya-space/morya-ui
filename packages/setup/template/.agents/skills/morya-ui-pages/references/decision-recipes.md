@@ -289,17 +289,23 @@ This file is the **offline** mirror for agents without MCP.
 - 全视口主列表可 MPageContent fill + MTable fill；嵌入/短页跳过
 - 分页：paginator + rows-per-page 或 v-model:page
 - 行选择：selectionMode + v-model:selection
+- 大行数：virtual + maxHeight/tableHeight/fill
+- 列宽/表头筛选：resizable / filterable
+- 树表：tree-config + v-model:expanded-row-keys（children 或 transform）
 
 **Recipe · slots**
 
 - #cell-{key} 自定义单元格
 - #empty 放 MEmpty
+- 多级表头 children；表尾 show-footer + footer-method
 
 **Anti-patterns**
 
 - :data → :rows
 - 手写 <table> → MTable
 - 嵌入表硬套 fill → 去掉 fill
+- 无高度开 virtual → 配 maxHeight/tableHeight/fill
+- 无层级硬套 treeConfig → 普通 Table
 
 
 ### DataView
@@ -328,33 +334,6 @@ This file is the **offline** mirror for agents without MCP.
 **Anti-patterns**
 
 - 需要列对齐比较仍用 DataView → Table
-
-
-### Table（树模式）
-
-**When**
-
-- 数据同时具有表格列和父子层级
-- 用户需要展开、收起层级节点
-
-**Avoid when**
-
-- 数据没有真实层级关系
-- 只需节点浏览/选择 → Tree / TreeSelect
-
-**Recipe · props**
-
-- `columns` + 带 `children` 的 `rows`（或 `tree-config.transform` + `parentId`）
-- `:tree-config="{}"` + `v-model:expanded-row-keys`
-- `row-key` 稳定
-
-**Recipe · slots**
-
-- #cell-{key}
-
-**Anti-patterns**
-
-- 无层级硬套 treeConfig → 普通 Table
 
 
 ### Tree

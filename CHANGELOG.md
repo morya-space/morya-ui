@@ -1,5 +1,28 @@
 # morya-ui
 
+## 0.3.7
+
+### 新功能
+
+- add tree mode, instance APIs, and drop cell editing
+- enhance selection handling and refactor utility functions
+- rebuild as self-aligned enterprise grid
+- add footer slot support and update styles
+
+### 修复
+
+- adjust sort icon styles for better alignment
+
+### 文档
+
+- update decision recipes and enhance documentation for new features
+- sync changelog and Table guidance across packages
+- document enterprise capabilities and demos
+
+### 变更
+
+- update shadow styles for improved visual consistency
+
 ## 0.3.6
 
 ### 新功能
