@@ -88,6 +88,24 @@
     font-size: var(--m-font-size-md);
 }
 
+.m-toast__heading {
+    align-items: center;
+    display: flex;
+    gap: var(--m-space-2);
+}
+
+.m-toast__icon {
+    color: var(--m-color-primary);
+    flex: none;
+}
+
+.m-toast__actions {
+    align-items: center;
+    display: flex;
+    gap: var(--m-space-2);
+    margin-top: var(--m-space-1);
+}
+
 .m-toast__content p {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);

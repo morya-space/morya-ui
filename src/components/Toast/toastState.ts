@@ -106,11 +106,28 @@ export function closeToastItem(id?: string | number) {
   }
   clearToastLife(id)
   toastState.messages = toastState.messages.filter((item) => item.id !== id)
+  runToastCloseCallback(id)
 }
 
 export function clearToastItems() {
   for (const id of [...lifeTimers.keys()]) clearToastLife(id)
+  const ids = toastState.messages.map((item) => item.id)
   toastState.messages = []
+  for (const id of ids) runToastCloseCallback(id)
+}
+
+const closeCallbacks = new Map<string | number, () => void>()
+
+/** Register an `onClose` callback for a message id. */
+export function setToastCloseCallback(id: string | number, callback: () => void) {
+  closeCallbacks.set(id, callback)
+}
+
+function runToastCloseCallback(id: string | number) {
+  const callback = closeCallbacks.get(id)
+  if (!callback) return
+  closeCallbacks.delete(id)
+  callback()
 }
 
 export function applyToastMax(max?: number) {

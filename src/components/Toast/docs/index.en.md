@@ -86,7 +86,48 @@ interface ToastMessage {
   detail?: MRenderable
   severity?: ToastSeverity
   closable?: boolean
+  /** Custom leading icon */
+  icon?: IconName
+  /** Action area rendered under the detail (usually buttons) */
+  actions?: MRenderable
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
   life?: number
 }
 ```
+
+## Notification (useNotification / notification)
+
+Matches Ant Design's `notification` surface and reuses the same toast service underneath, so every transient message shares one overlay host and motion stack:
+
+```ts
+import { notification, useNotification } from 'morya-ui'
+
+const api = useNotification()
+
+api.success({ message: 'Saved', description: 'All changes are stored.', duration: 3 })
+api.open({ message: 'Background job', key: 'job', btn: h(MButton, {}, () => 'View') })
+// Re-opening with the same key updates in place instead of stacking
+api.open({ message: 'Done', key: 'job', type: 'success' })
+```
+
+| Method | Description |
+| --- | --- |
+| `open(options)` | Open one notification |
+| `info` / `success` / `warning` / `error` | Type shortcuts |
+| `close(key)` | Close by key |
+| `destroy()` | Close all |
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `message` | `MRenderable` | — | Title |
+| `description` | `MRenderable` | — | Body |
+| `btn` | `MRenderable` | — | Action area |
+| `icon` | `IconName` | — | Custom icon |
+| `type` | `NotificationType` | `'info'` | Tone and default icon |
+| `key` | `string \| number` | — | Unique key; passing it again updates in place |
+| `duration` | `number` | `4.5` | Auto-close in **seconds** (`0` keeps it open) |
+| `placement` | `NotificationPlacement` | `'topRight'` | `topLeft` / `topRight` / `bottomLeft` / `bottomRight` / `top` / `bottom` |
+| `closable` | `boolean` | `true` | Show the close button |
+| `onClose` | `() => void` | — | Called after closing |
+
+> `duration` is in **seconds** (Ant Design convention), while the native `toast` API uses `life` in milliseconds.

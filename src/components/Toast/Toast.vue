@@ -108,10 +108,21 @@ function onMouseLeave(message: ToastMessage) {
           @mouseleave="onMouseLeave(message)"
         >
           <div class="m-toast__content">
-            <strong><MRenderableView :value="message.summary" /></strong>
+            <div class="m-toast__heading">
+              <MIcon
+                v-if="message.icon"
+                class="m-toast__icon"
+                :name="message.icon"
+                size="sm"
+              />
+              <strong><MRenderableView :value="message.summary" /></strong>
+            </div>
             <p v-if="message.detail != null && message.detail !== ''">
               <MRenderableView :value="message.detail" />
             </p>
+            <div v-if="message.actions != null && message.actions !== ''" class="m-toast__actions">
+              <MRenderableView :value="message.actions" />
+            </div>
           </div>
           <button
             v-if="message.closable !== false"

@@ -3,6 +3,7 @@ import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MToastSeverity } from '../../shared/types'
 import type { MotionPresetId } from '../../theme/motionPresets'
+import type { IconName } from '../Icon/types'
 
 export type { MRenderable }
 
@@ -23,6 +24,10 @@ export interface ToastMessage {
   detail?: MRenderable
   severity?: ToastSeverity
   closable?: boolean
+  /** Custom leading icon. Defaults to the icon implied by `severity`. */
+  icon?: IconName
+  /** Extra action area rendered under the detail (e.g. buttons). */
+  actions?: MRenderable
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
   life?: number
 }
@@ -33,6 +38,8 @@ export type ToastOptions = Omit<ToastMessage, 'id' | 'summary'> & {
   position?: ToastPosition
   /** When true (default service setting), refresh life for duplicate summary+detail. */
   dedupe?: boolean
+  /** Called once the message has been closed (manually or by its life timer). */
+  onClose?: () => void
 }
 
 /** String / VNode / component / render factory, or a full options object. */

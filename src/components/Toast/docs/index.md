@@ -87,7 +87,48 @@ interface ToastMessage {
   detail?: MRenderable
   severity?: ToastSeverity
   closable?: boolean
+  /** 自定义前置图标 */
+  icon?: IconName
+  /** 详情下方的操作区（通常是按钮） */
+  actions?: MRenderable
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
   life?: number
 }
 ```
+
+## Notification（useNotification / notification）
+
+对齐 antd `notification` 的接口形状，底层复用同一套 toast 服务（单一浮层宿主与动画栈）：
+
+```ts
+import { notification, useNotification } from 'morya-ui'
+
+const api = useNotification()
+
+api.success({ message: '已保存', description: '所有修改已写入', duration: 3 })
+api.open({ message: '后台任务', key: 'job', btn: h(MButton, {}, () => '查看') })
+// 同 key 再次 open 会原位更新，而不是堆叠新的一条
+api.open({ message: '完成', key: 'job', type: 'success' })
+```
+
+| 方法 | 说明 |
+| --- | --- |
+| `open(options)` | 打开一条通知 |
+| `info` / `success` / `warning` / `error` | 类型快捷方法 |
+| `close(key)` | 按 key 关闭 |
+| `destroy()` | 关闭全部 |
+
+| 字段 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `message` | `MRenderable` | — | 标题 |
+| `description` | `MRenderable` | — | 正文 |
+| `btn` | `MRenderable` | — | 操作区 |
+| `icon` | `IconName` | — | 自定义图标 |
+| `type` | `NotificationType` | `'info'` | 语义色调与默认图标 |
+| `key` | `string \| number` | — | 唯一键；重复传入会原位更新 |
+| `duration` | `number` | `4.5` | 自动关闭秒数（`0` 不自动关闭） |
+| `placement` | `NotificationPlacement` | `'topRight'` | `topLeft` / `topRight` / `bottomLeft` / `bottomRight` / `top` / `bottom` |
+| `closable` | `boolean` | `true` | 显示关闭按钮 |
+| `onClose` | `() => void` | — | 关闭后回调 |
+
+> `duration` 单位是**秒**（antd 习惯），而 `toast` 原生 API 的 `life` 是毫秒。
