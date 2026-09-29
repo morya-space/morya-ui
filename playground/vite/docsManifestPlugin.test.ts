@@ -22,14 +22,18 @@ describe('docsManifestPlugin', () => {
       'ai-setup',
       'attrs',
       'config',
+      'conventions',
       'design-tokens',
       'introduction',
       'mcp',
+      'motion',
       'quick-start',
+      'setup',
       'ssr',
       'theme',
       'types',
     ])
     expect(manifest.introduction['zh-CN'].title).toBe('介绍')
+    expect(manifest.conventions['zh-CN'].title).toBe('约定')
   })
 })

@@ -46,9 +46,9 @@ const motionOptions = computed(
 );
 
 const accentOptions = [
-    { name: "blue", label: "Ocean", color: "#2563eb", hover: "#1d4ed8" },
+    { name: "blue", label: "Ocean", color: "#1677ff", hover: "#4096ff" },
     { name: "violet", label: "Violet", color: "#7c3aed", hover: "#6d28d9" },
-    { name: "green", label: "Meadow", color: "#159570", hover: "#0f766e" },
+    { name: "green", label: "Meadow", color: "#52c41a", hover: "#73d13d" },
     { name: "orange", label: "Ember", color: "#ea580c", hover: "#c2410c" },
 ] as const;
 
