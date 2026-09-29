@@ -1,0 +1,180 @@
+.m-calendar {
+    --m-calendar-cell-size: var(--m-control-affix-size, 2rem);
+    --m-calendar-date-min-height: calc(var(--m-calendar-cell-size) * 1.75);
+    background: var(--m-color-surface);
+    box-sizing: border-box;
+    color: var(--m-color-text);
+    font-family: var(--m-font-sans);
+    width: 100%;
+}
+
+.m-calendar--card {
+    border: 1px solid var(--m-color-border);
+    border-radius: var(--m-radius-md);
+    padding: var(--m-space-3);
+}
+
+.m-calendar--fullscreen {
+    padding: var(--m-space-4);
+}
+
+.m-calendar__header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--m-space-2);
+    justify-content: space-between;
+    margin-bottom: var(--m-space-3);
+}
+
+.m-calendar__header-main {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--m-space-2);
+    min-width: 0;
+}
+
+.m-calendar__year-select,
+.m-calendar__month-select {
+    max-width: 8rem;
+    min-width: 5rem;
+}
+
+.m-calendar__mode-switch {
+    flex-shrink: 0;
+}
+
+.m-calendar__weekdays,
+.m-calendar__row {
+    display: grid;
+    gap: var(--m-space-1);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.m-calendar--week .m-calendar__weekdays,
+.m-calendar--week .m-calendar__row {
+    grid-template-columns: 2.25rem repeat(7, minmax(0, 1fr));
+}
+
+.m-calendar__weekday,
+.m-calendar__week-label {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-xs);
+    text-align: center;
+}
+
+.m-calendar__week-num {
+    align-items: center;
+    color: var(--m-color-text-muted);
+    display: flex;
+    font-size: var(--m-font-size-xs);
+    justify-content: center;
+}
+
+.m-calendar__row + .m-calendar__row {
+    margin-top: var(--m-space-1);
+}
+
+.m-calendar__cell-wrap {
+    min-width: 0;
+}
+
+.m-calendar__cell {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--m-radius-sm);
+    box-sizing: border-box;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font: inherit;
+    min-height: var(--m-calendar-date-min-height);
+    padding: var(--m-space-1);
+    text-align: left;
+    transition: background-color var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease);
+    width: 100%;
+}
+
+.m-calendar__cell--date {
+    align-items: flex-start;
+}
+
+.m-calendar__cell-value {
+    font-size: var(--m-font-size-sm);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.m-calendar__cell-content {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-xs);
+    line-height: 1.3;
+    margin-top: var(--m-space-1);
+    min-height: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.m-calendar__cell--other .m-calendar__cell-value {
+    color: var(--m-color-text-muted);
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-calendar__cell--today {
+    border-color: var(--m-color-primary);
+}
+
+.m-calendar__cell--selected {
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 14%,
+        var(--m-color-surface)
+    );
+}
+
+.m-calendar__cell--selected .m-calendar__cell-value {
+    color: var(--m-color-primary);
+}
+
+.m-calendar__cell:hover:not(:disabled):not(.m-calendar__cell--selected) {
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 8%,
+        var(--m-color-surface)
+    );
+}
+
+.m-calendar__cell:disabled,
+.m-calendar__cell--disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-calendar__cell:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-calendar__months {
+    display: grid;
+    gap: var(--m-space-2);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.m-calendar__cell--month {
+    align-items: center;
+    justify-content: center;
+    min-height: calc(var(--m-calendar-cell-size) * 2);
+    text-align: center;
+}
+
+.m-calendar--card {
+    --m-calendar-date-min-height: calc(var(--m-calendar-cell-size) * 1.5);
+}
+
+.m-calendar--card .m-calendar__months {
+    gap: var(--m-space-1);
+}
