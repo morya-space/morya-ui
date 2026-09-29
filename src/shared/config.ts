@@ -1,6 +1,7 @@
 import type { App, Component, ComputedRef, InjectionKey, MaybeRefOrGetter, Plugin } from 'vue'
 import type { MLocaleConfig } from '../locale/types'
 import type { MotionPresetId, MotionTransitionRole } from '../theme/motionPresets'
+import type { MThemeConfig } from '../theme/createTheme'
 import type { DensityPreference } from '../theme/useDensity'
 import type { MComponentDefaults } from './componentDefaults'
 import type { MGapSize } from './gap'
@@ -26,6 +27,9 @@ export { getComponentDefault, getComponentDefaults, mergeComponentDefaults } fro
 export type MDensity = DensityPreference
 export type { MLocaleConfig }
 export type { MotionPresetId, MotionTransitionRole }
+
+/** Layout writing direction. `rtl` enables right-to-left rendering. */
+export type MDirection = 'ltr' | 'rtl'
 
 export type ThemePreference = 'light' | 'dark' | 'system'
 
@@ -68,6 +72,19 @@ export interface MGlobalConfig {
    * Keys: unprefixed names (`Input`, `Space`) or `M*` aliases.
    */
   componentDefaults?: MComponentDefaults
+  /** Layout writing direction. Defaults to `ltr`. */
+  direction?: MDirection
+  /**
+   * Disable every descendant form control at once.
+   * Local `disabled` props win (they can also re-enable a control).
+   */
+  disabled?: boolean
+  /**
+   * Seed-driven theme configuration.
+   * Overrides the shipped CSS variables so a brand change propagates
+   * to every derived hover / active / border / background / size token.
+   */
+  themeConfig?: MThemeConfig
 }
 
 /**
@@ -118,6 +135,15 @@ export function mergeMConfig(parent: MGlobalConfig, child: MGlobalConfig): MGlob
     locale:
       parent.locale || child.locale ? { ...parent.locale, ...child.locale } : undefined,
     componentDefaults: mergeComponentDefaults(parent.componentDefaults, child.componentDefaults),
+    themeConfig:
+      parent.themeConfig || child.themeConfig
+        ? {
+            ...parent.themeConfig,
+            ...child.themeConfig,
+            seed: { ...parent.themeConfig?.seed, ...child.themeConfig?.seed },
+            components: { ...parent.themeConfig?.components, ...child.themeConfig?.components },
+          }
+        : undefined,
     motion:
       parent.motion || child.motion
         ? {
@@ -150,6 +176,31 @@ export function useMConfig() {
 export function useComponentDefaults(name: string): ComputedRef<Record<string, unknown>> {
   const config = useMConfig()
   return computed(() => getComponentDefaults(config.value.componentDefaults, name))
+}
+
+/** Writing direction: `ltr` unless a ConfigProvider sets `rtl`. */
+export function useDirection(): ComputedRef<MDirection> {
+  const config = useMConfig()
+  return computed(() => config.value.direction ?? 'ltr')
+}
+
+/** True when `direction` is `rtl`. */
+export function useIsRtl(): ComputedRef<boolean> {
+  const direction = useDirection()
+  return computed(() => direction.value === 'rtl')
+}
+
+/**
+ * Global disabled state.
+ * `local` (when defined) always wins, so a component can opt back in.
+ */
+export function useDisabled(local?: MaybeRefOrGetter<boolean | undefined>): ComputedRef<boolean> {
+  const config = useMConfig()
+  return computed(() => {
+    const own = local === undefined ? undefined : toValue(local)
+    if (own !== undefined) return own
+    return Boolean(config.value.disabled)
+  })
 }
 
 /** Control size: local prop > componentDefaults[name].size > global size > medium. */

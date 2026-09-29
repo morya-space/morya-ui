@@ -2,13 +2,14 @@
 
 import type { MGlobalConfig } from '../../shared/config'
 import type { RootPassThrough } from '../../shared/passThrough'
-import { computed, inject, onBeforeUnmount, toValue, useAttrs, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, ref, toValue, useAttrs, watch } from 'vue'
 import {
   M_CONFIG_KEY,
   mergeMConfig,
   provideMConfig,
 } from '../../shared/config'
 import { useRootParts } from '../../shared/useComponentAttrs'
+import { createTheme } from '../../theme/createTheme'
 import { applyDensity, applyReducedMotionPolicy, applyTheme, getPreferredTheme  } from '../../theme'
 defineOptions({ inheritAttrs: false })
 
@@ -31,6 +32,12 @@ const props = defineProps<{
   locale?: MGlobalConfig['locale']
   /** Shorthand: per-component default props. */
   componentDefaults?: MGlobalConfig['componentDefaults']
+  /** Shorthand: layout writing direction. */
+  direction?: MGlobalConfig['direction']
+  /** Shorthand: disable every descendant form control. */
+  disabled?: MGlobalConfig['disabled']
+  /** Shorthand: seed-driven theme tokens (brand colors, sizing, component overrides). */
+  themeConfig?: MGlobalConfig['themeConfig']
   /** Shorthand: named enter/exit motion presets by overlay role. */
   motion?: MGlobalConfig['motion']
   /**
@@ -62,6 +69,9 @@ const local = computed<MGlobalConfig>(() => ({
   ...(props.theme !== undefined ? { theme: props.theme } : {}),
   ...(props.locale !== undefined ? { locale: props.locale } : {}),
   ...(props.componentDefaults !== undefined ? { componentDefaults: props.componentDefaults } : {}),
+  ...(props.direction !== undefined ? { direction: props.direction } : {}),
+  ...(props.disabled !== undefined ? { disabled: props.disabled } : {}),
+  ...(props.themeConfig !== undefined ? { themeConfig: props.themeConfig } : {}),
   ...(props.motion !== undefined ? { motion: props.motion } : {}),
   ...(props.respectReducedMotion !== undefined
     ? { respectReducedMotion: props.respectReducedMotion }
@@ -89,6 +99,43 @@ const layerStyle = computed(() => {
   if (base == null) return undefined
   return { '--m-z-base': String(base) } as Record<string, string>
 })
+
+const directionAttr = computed(() => resolved.value.direction ?? 'ltr')
+
+const rootEl = ref<HTMLElement | null>(null)
+
+/**
+ * Seed-driven theme tokens. In global mode we inject a stylesheet so
+ * component-scoped overrides get real selectors; in scoped mode we write
+ * inline variables onto the wrapper only.
+ */
+let disposeThemeStyles: (() => void) | null = null
+
+function clearThemeStyles() {
+  disposeThemeStyles?.()
+  disposeThemeStyles = null
+}
+
+function syncThemeConfig() {
+  clearThemeStyles()
+  const themeConfig = resolved.value.themeConfig
+  if (!themeConfig) return
+
+  const theme = createTheme(themeConfig)
+  if (applyGlobal.value) {
+    disposeThemeStyles = theme.inject()
+    return
+  }
+  if (rootEl.value) theme.apply(rootEl.value)
+}
+
+watch(
+  () => [resolved.value.themeConfig, applyGlobal.value] as const,
+  syncThemeConfig,
+  { immediate: true, deep: true },
+)
+
+onBeforeUnmount(clearThemeStyles)
 
 let previousDensity: string | undefined
 let previousZBase: string | undefined
@@ -181,10 +228,12 @@ onBeforeUnmount(() => {
 
 <template>
   <div
+    ref="rootEl"
     v-bind="rootAttrs"
     class="m-config-provider"
     :data-m-density="densityAttr"
     :data-theme="themeAttr"
+    :dir="directionAttr"
     :style="layerStyle"
   >
     <slot />
