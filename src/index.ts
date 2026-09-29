@@ -161,6 +161,15 @@ export type {
   DatePickerType,
   DatePickerValue,
 } from "./components/DatePicker/types";
+export { default as MTimePicker } from "./components/TimePicker/TimePicker.vue";
+export type {
+  TimePickerDateValue,
+  TimePickerEmits,
+  TimePickerModel,
+  TimePickerProps,
+  TimePickerShortcut,
+  TimePickerValue,
+} from "./components/TimePicker/types";
 export { default as MDescriptions } from "./components/Descriptions/Descriptions.vue";
 export { default as MDescriptionsItem } from "./components/Descriptions/DescriptionsItem.vue";
 export type {

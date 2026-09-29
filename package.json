@@ -114,6 +114,7 @@
     "**/terminal/index.js",
     "**/textarea/index.js",
     "**/tiered-menu/index.js",
+    "**/time-picker/index.js",
     "**/timeline/index.js",
     "**/toast/index.js",
     "**/toggle-button/index.js",
@@ -706,6 +707,12 @@
     },
     "./tiered-menu/style": "./dist/tiered-menu/style.js",
     "./tiered-menu/style.css": "./dist/tiered-menu/style.css",
+    "./time-picker": {
+      "types": "./dist/components/TimePicker/index.d.ts",
+      "import": "./dist/time-picker/index.js"
+    },
+    "./time-picker/style": "./dist/time-picker/style.js",
+    "./time-picker/style.css": "./dist/time-picker/style.css",
     "./timeline": {
       "types": "./dist/components/Timeline/index.d.ts",
       "import": "./dist/timeline/index.js"
