@@ -1,0 +1,144 @@
+/* —— Primitive: Typography (Title / Text / Paragraph / Link) —— */
+.m-typography {
+  box-sizing: border-box;
+  color: var(--m-color-text);
+  font-family: var(--m-font-sans);
+  margin: 0;
+}
+
+.m-typography-root {
+  color: var(--m-color-text);
+  font-size: var(--m-font-size-md);
+  line-height: 1.5715;
+}
+
+.m-typography-title {
+  color: var(--m-color-text);
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+.m-typography-title--h1 {
+  font-size: var(--m-font-size-3xl);
+}
+
+.m-typography-title--h2 {
+  font-size: var(--m-font-size-2xl);
+}
+
+.m-typography-title--h3 {
+  font-size: var(--m-font-size-xl);
+}
+
+.m-typography-title--h4 {
+  font-size: var(--m-font-size-lg);
+}
+
+.m-typography-title--h5 {
+  font-size: var(--m-font-size-md);
+}
+
+.m-typography-text {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.m-typography-paragraph {
+  font-size: var(--m-font-size-md);
+  line-height: 1.5715;
+  word-wrap: break-word;
+}
+
+.m-typography-paragraph--spacing {
+  margin-bottom: 1em;
+}
+
+.m-typography-link {
+  color: var(--m-color-primary);
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  transition: color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-typography-link:hover {
+  color: var(--m-color-primary-hover);
+}
+
+.m-typography-link:focus-visible {
+  outline: 2px solid var(--m-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.m-typography-link.m-typography--underline {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.m-typography--secondary {
+  color: var(--m-color-text-muted);
+}
+
+.m-typography--success {
+  color: var(--m-color-success);
+}
+
+.m-typography--warning {
+  color: var(--m-color-warning);
+}
+
+.m-typography--danger {
+  color: var(--m-color-danger);
+}
+
+.m-typography--code {
+  background: var(--m-color-fill-light);
+  border: var(--m-border-width) solid var(--m-color-border);
+  border-radius: var(--m-radius-sm);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  margin: 0 0.2em;
+  padding: 0.1em 0.4em;
+}
+
+.m-typography--delete {
+  text-decoration: line-through;
+}
+
+.m-typography--mark {
+  background: color-mix(in srgb, var(--m-color-warning) 45%, transparent);
+  padding: 0 0.2em;
+}
+
+.m-typography--underline {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.m-typography--strong {
+  font-weight: 600;
+}
+
+.m-typography--italic {
+  font-style: italic;
+}
+
+.m-typography--ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.m-typography--disabled,
+.m-typography--disabled:hover {
+  color: var(--m-color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.m-typography-link.m-typography--disabled {
+  color: var(--m-color-text-muted);
+}
