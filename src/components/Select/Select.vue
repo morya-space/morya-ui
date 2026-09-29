@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import type { PropType, VNodeChild } from 'vue'
+import type { IconName } from '../Icon/types'
 import type { VirtualScrollerExpose } from '../VirtualScroller/types'
-import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
-import { computed, inject, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
+import type { MenuFilterConfig, MenuGroupRow, MenuOption, MenuOptionRow, MenuRow } from './selectOptions'
+import type {
+  SelectMode,
+  SelectModelValue,
+  SelectOption,
+  SelectProps,
+  SelectValue,
+} from './types'
+import { computed, defineComponent, inject, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
+import { MRenderableView } from '../../shared/Renderable'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
@@ -14,39 +24,30 @@ import { M_FORM_KEY } from '../Form/context'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
-import {
-  buildLookupOptions,
-  buildMenuEntries,
-  buildMenuRows,
-  canCreateFromQuery,
-  normalizeSelectedValues,
-  sliceVisibleTags,
-  toggleSelectedValue,
-  type MenuGroupRow,
-  type MenuOption,
-  type MenuOptionRow,
-  type MenuRow,
-} from './selectOptions'
+import { buildLookupOptions, buildMenuEntries, buildMenuRows, canCreateFromQuery, normalizeOptions, normalizeSelectedValues, sliceVisibleTags, toggleSelectedValue } from './selectOptions'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps>(), {
   transition: undefined,
   modelValue: undefined,
+  options: undefined,
+  fieldNames: undefined,
+  mode: undefined,
   invalid: false,
   disabled: false,
   required: false,
   teleport: true,
   placement: 'bottom-start',
-  multiple: undefined,
-  tag: undefined,
   remote: undefined,
   loading: undefined,
   fluid: undefined,
-  showClear: undefined,
-  clearable: undefined,
-  filter: undefined,
+  allowClear: undefined,
+  showSearch: undefined,
   virtual: undefined,
+  // Declared as `boolean | Function`; without an explicit default Vue casts the
+  // absent prop to `false`, which would silently disable local filtering.
+  filterOption: undefined,
 })
 
 const emit = defineEmits<{
@@ -56,8 +57,27 @@ const emit = defineEmits<{
   (event: 'show'): void
   (event: 'hide'): void
   (event: 'search', query: string): void
+  (event: 'select', value: SelectValue, option: SelectOption): void
+  (event: 'deselect', value: SelectValue, option: SelectOption): void
   (event: 'create', option: SelectOption): void
 }>()
+
+/** Applies `popupRender` around the dropdown when provided. */
+const PopupWrapper = defineComponent({
+  name: 'MSelectPopupWrapper',
+  props: {
+    render: {
+      type: Function as PropType<(menu: VNodeChild) => VNodeChild>,
+      default: undefined,
+    },
+  },
+  setup(wrapperProps, { slots }) {
+    return (): VNodeChild => {
+      const content = slots.default?.()
+      return wrapperProps.render ? wrapperProps.render(content) : content
+    }
+  },
+})
 
 const VIRTUAL_AUTO_THRESHOLD = 80
 
@@ -86,21 +106,31 @@ const createdOptions = ref<SelectOption[]>([])
 const autoSelectId = useMId('m-select')
 const selectId = computed(() => props.id ?? autoSelectId)
 
-const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
-const resolvedMultiple = computed(() => props.multiple ?? (defaults.value.multiple as boolean | undefined) ?? false)
-const resolvedTag = computed(() => props.tag ?? (defaults.value.tag as boolean | undefined) ?? false)
+const resolvedNotFound = computed(() => props.notFoundContent ?? locale.value.emptyOptions)
+const resolvedMode = computed<SelectMode | undefined>(
+  () => props.mode ?? (defaults.value.mode as SelectMode | undefined),
+)
+const resolvedMultiple = computed(
+  () => resolvedMode.value === 'multiple' || resolvedMode.value === 'tags',
+)
+const resolvedTags = computed(() => resolvedMode.value === 'tags')
 const resolvedRemote = computed(() => props.remote ?? (defaults.value.remote as boolean | undefined) ?? false)
 const resolvedLoading = computed(() => props.loading ?? false)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
-const resolvedShowClear = computed(
-  () =>
-    props.showClear
-    ?? props.clearable
-    ?? (defaults.value.showClear as boolean | undefined)
-    ?? (defaults.value.clearable as boolean | undefined)
-    ?? false,
+const resolvedAllowClear = computed(
+  () => props.allowClear ?? (defaults.value.allowClear as boolean | undefined) ?? false,
 )
-const resolvedFilter = computed(() => props.filter ?? (defaults.value.filter as boolean | undefined) ?? false)
+const resolvedShowSearch = computed(
+  () => props.showSearch ?? (defaults.value.showSearch as boolean | undefined) ?? false,
+)
+const resolvedSuffixIcon = computed<IconName>(() => props.suffixIcon ?? 'chevron-down')
+const menuFilter = computed<MenuFilterConfig>(() => ({
+  filterOption: props.filterOption,
+  optionFilterProp: props.optionFilterProp,
+}))
+
+/** Options normalized through `fieldNames` into the internal shape. */
+const normalizedOptions = computed(() => normalizeOptions(props.options, props.fieldNames))
 const sizeClass = useConfiguredSize('Select', () => props.size ?? form?.value.size)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
@@ -116,7 +146,7 @@ const selectedValues = computed(() =>
 )
 
 const lookupOptions = computed(() =>
-  buildLookupOptions(props.options, createdOptions.value, selectedValues.value),
+  buildLookupOptions(normalizedOptions.value, createdOptions.value, selectedValues.value),
 )
 
 function findOption(value: SelectValue): SelectOption | undefined {
@@ -136,23 +166,24 @@ const displayLabel = computed(
   () => selectedOption.value?.label ?? props.placeholder ?? locale.value.selectPlaceholder,
 )
 const hasValue = computed(() => selectedValues.value.length > 0)
-const showClearButton = computed(() => resolvedShowClear.value && hasValue.value && !props.disabled)
+const showClearButton = computed(() => resolvedAllowClear.value && hasValue.value && !props.disabled)
 
 const query = computed(() => filterQuery.value.trim())
 const canCreate = computed(() =>
   canCreateFromQuery(query.value, lookupOptions.value, {
-    tag: resolvedTag.value,
-    filter: resolvedFilter.value,
+    tags: resolvedTags.value,
+    showSearch: resolvedShowSearch.value,
   }),
 )
 
 const menuEntries = computed(() =>
   buildMenuEntries(
-    props.options,
+    normalizedOptions.value,
     createdOptions.value,
     selectedValues.value,
     query.value,
     resolvedRemote.value,
+    menuFilter.value,
   ),
 )
 
@@ -166,7 +197,21 @@ const menuOptions = computed<MenuOption[]>(() =>
 
 const enabledOptions = computed(() => menuOptions.value.filter((option) => !option.disabled))
 const createLabel = computed(() => formatLocale(locale.value.createOption, { value: query.value }))
-const moreTagsLabel = computed(() => formatLocale(locale.value.moreTags, { count: hiddenTagCount.value }))
+const omittedTags = computed(() => tagSlice.value.omitted)
+const moreTagsLabel = computed(() =>
+  props.maxTagPlaceholder
+    ? props.maxTagPlaceholder(omittedTags.value)
+    : formatLocale(locale.value.moreTags, { count: hiddenTagCount.value }),
+)
+const moreTagsAriaLabel = computed(() =>
+  formatLocale(locale.value.moreTags, { count: hiddenTagCount.value }),
+)
+
+/** Option row content: `optionRender` → the built-in label. */
+function renderOption(option: MenuOption) {
+  if (props.optionRender) return props.optionRender(option)
+  return option.created ? createLabel.value : option.label
+}
 
 const useVirtualMenu = computed(() => {
   if (props.virtual === false) return false
@@ -199,7 +244,19 @@ function isSelected(value: SelectValue) {
   return selectedValues.value.some((item) => item === value)
 }
 
-function emitValue(next: SelectModelValue) {
+/** Build the value emitted to `v-model` / `change`. */
+function toEmittedValues(values: SelectValue[]): SelectModelValue {
+  if (!props.labelInValue) return resolvedMultiple.value ? values : values[0]
+
+  const labeled = values.map((value) => ({
+    value,
+    label: findOption(value)?.label ?? String(value),
+  }))
+  return resolvedMultiple.value ? labeled : labeled[0]
+}
+
+function emitValue(values: SelectValue[]) {
+  const next = toEmittedValues(values)
   emit('update:modelValue', next)
   emit('change', next)
 }
@@ -234,7 +291,7 @@ function setOpen(next: boolean, highlight: 'none' | 'selected' | 'last' = 'none'
     emit('show')
     void nextTick(() => {
       updateMenuPosition()
-      if (resolvedFilter.value) filterInput.value?.focus({ preventScroll: true })
+      if (resolvedShowSearch.value) filterInput.value?.focus({ preventScroll: true })
       else menu.value?.focus({ preventScroll: true })
     })
   } else {
@@ -249,11 +306,19 @@ function selectOption(option: MenuOption) {
     createFromQuery()
     return
   }
+
+  const resolvedOption = findOption(option.value) ?? option
+
   if (resolvedMultiple.value) {
-    emitValue(toggleSelectedValue(selectedValues.value, option.value))
+    const next = toggleSelectedValue(selectedValues.value, option.value)
+    emitValue(next)
+    if (next.includes(option.value)) emit('select', option.value, resolvedOption)
+    else emit('deselect', option.value, resolvedOption)
     return
   }
-  emitValue(option.value)
+
+  emitValue([option.value])
+  emit('select', option.value, resolvedOption)
   setOpen(false)
   trigger.value?.focus({ preventScroll: true })
 }
@@ -275,13 +340,14 @@ function removeTag(value: SelectValue, event: Event) {
   event.preventDefault()
   if (props.disabled || !resolvedMultiple.value) return
   emitValue(selectedValues.value.filter((item) => item !== value))
+  emit('deselect', value, findOption(value) ?? { label: String(value), value })
 }
 
 function clear(event?: Event) {
   event?.stopPropagation()
   event?.preventDefault()
   if (props.disabled || !hasValue.value) return
-  emitValue(resolvedMultiple.value ? [] : undefined)
+  emitValue([])
   emit('clear')
   trigger.value?.focus({ preventScroll: true })
 }
@@ -361,7 +427,7 @@ watch(highlightedIndex, (index) => {
 
 watch(filterQuery, (next) => {
   highlightedIndex.value = enabledOptions.value.length ? 0 : -1
-  if (open.value && (resolvedFilter.value || resolvedRemote.value)) emit('search', next)
+  if (open.value && (resolvedShowSearch.value || resolvedRemote.value)) emit('search', next)
 })
 
 watch(open, (next) => {
@@ -437,9 +503,9 @@ onBeforeUnmount(() => {
           <span
             v-if="hiddenTagCount"
             class="m-select__tag m-select__tag--more"
-            :aria-label="moreTagsLabel"
+            :aria-label="moreTagsAriaLabel"
           >
-            +{{ hiddenTagCount }}
+            <MRenderableView :value="moreTagsLabel" />
           </span>
         </div>
         <span v-else class="m-select__value">
@@ -463,154 +529,155 @@ onBeforeUnmount(() => {
           :class="{ 'm-select__indicator--open': open }"
           aria-hidden="true"
         >
-          <MIcon name="chevron-down" class="m-control-affix-icon" />
+          <MIcon :name="resolvedSuffixIcon" class="m-control-affix-icon" />
         </span>
       </div>
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <Transition :name="transitionName" :css="transitionCss">
-        <div
-          v-if="open"
-          :id="`${selectId}-listbox`"
-          ref="menu"
-          class="m-select__menu"
-          :class="[`m-select__menu--${placement}`, { 'm-select__menu--teleported': teleported }]"
-          :style="teleported ? menuStyle : undefined"
-          role="listbox"
-          tabindex="-1"
-          :aria-multiselectable="resolvedMultiple || undefined"
-          :aria-label="label ?? placeholder ?? locale.selectOption"
-          @keydown="onMenuKeydown"
-        >
-          <div v-if="$slots.header" class="m-select__header">
-            <slot name="header" />
-          </div>
-          <input
-            v-if="resolvedFilter"
-            ref="filterInput"
-            v-model="filterQuery"
-            class="m-select__filter"
-            type="search"
-            size="1"
-            :placeholder="locale.searchPlaceholder"
-            :aria-label="locale.filterOptions"
-            @click.stop
-            @keydown.stop="onMenuKeydown"
-          >
-          <MVirtualScroller
-            v-if="useVirtualMenu && !resolvedLoading && menuOptions.length"
+        <PopupWrapper v-if="open" :render="popupRender">
+          <div
             :id="`${selectId}-listbox`"
-            ref="virtualList"
-            class="m-select__list m-select__list--virtual"
+            ref="menu"
+            class="m-select__menu"
+            :class="[`m-select__menu--${placement}`, { 'm-select__menu--teleported': teleported }]"
+            :style="teleported ? menuStyle : undefined"
             role="listbox"
+            tabindex="-1"
+            :aria-multiselectable="resolvedMultiple || undefined"
             :aria-label="label ?? placeholder ?? locale.selectOption"
-            :items="menuRows"
-            :item-size="optionItemSize"
-            :height="menuViewportHeight"
-            :buffer="4"
+            @keydown="onMenuKeydown"
           >
-            <template #item="{ item }">
-              <div
-                v-if="menuRowAt(item).type === 'group'"
-                class="m-select__group-label"
-                role="presentation"
-              >
-                {{ menuGroupLabelAt(item) }}
+            <div v-if="$slots.header" class="m-select__header">
+              <slot name="header" />
+            </div>
+            <input
+              v-if="resolvedShowSearch"
+              ref="filterInput"
+              v-model="filterQuery"
+              class="m-select__filter"
+              type="search"
+              size="1"
+              :placeholder="locale.searchPlaceholder"
+              :aria-label="locale.filterOptions"
+              @click.stop
+              @keydown.stop="onMenuKeydown"
+            >
+            <MVirtualScroller
+              v-if="useVirtualMenu && !resolvedLoading && menuOptions.length"
+              :id="`${selectId}-listbox`"
+              ref="virtualList"
+              class="m-select__list m-select__list--virtual"
+              role="listbox"
+              :aria-label="label ?? placeholder ?? locale.selectOption"
+              :items="menuRows"
+              :item-size="optionItemSize"
+              :height="menuViewportHeight"
+              :buffer="4"
+            >
+              <template #item="{ item }">
+                <div
+                  v-if="menuRowAt(item).type === 'group'"
+                  class="m-select__group-label"
+                  role="presentation"
+                >
+                  {{ menuGroupLabelAt(item) }}
+                </div>
+                <button
+                  v-else
+                  class="m-select__option"
+                  :class="{
+                    'm-select__option--selected': !menuOptionAt(item).created && isSelected(menuOptionAt(item).value),
+                    'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === menuOptionAt(item).value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(menuOptionAt(item).created),
+                    'm-select__option--create': menuOptionAt(item).created,
+                  }"
+                  type="button"
+                  role="option"
+                  :aria-selected="menuOptionAt(item).created ? undefined : isSelected(menuOptionAt(item).value)"
+                  :disabled="menuOptionAt(item).disabled"
+                  @mouseenter="!menuOptionAt(item).disabled && (highlightedIndex = enabledOptions.findIndex((entry) => entry.value === menuOptionAt(item).value && Boolean(entry.created) === Boolean(menuOptionAt(item).created)))"
+                  @click="selectOption(menuOptionAt(item))"
+                >
+                  <slot name="option" :option="menuOptionAt(item)">
+                    <MRenderableView :value="renderOption(menuOptionAt(item))" />
+                  </slot>
+                  <MIcon
+                    v-if="!menuOptionAt(item).created && isSelected(menuOptionAt(item).value)"
+                    class="m-select__check"
+                    name="check"
+                    size="sm"
+                  />
+                </button>
+              </template>
+            </MVirtualScroller>
+            <MScrollbar
+              v-else
+              :id="`${selectId}-listbox`"
+              class="m-select__list"
+              fit-content
+              wrap-class="m-select__list-wrap"
+              view-class="m-select__list-view"
+            >
+              <div v-if="resolvedLoading" class="m-select__empty" role="status">
+                {{ locale.loading }}
               </div>
-              <button
-                v-else
-                class="m-select__option"
-                :class="{
-                  'm-select__option--selected': !menuOptionAt(item).created && isSelected(menuOptionAt(item).value),
-                  'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === menuOptionAt(item).value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(menuOptionAt(item).created),
-                  'm-select__option--create': menuOptionAt(item).created,
-                }"
-                type="button"
-                role="option"
-                :aria-selected="menuOptionAt(item).created ? undefined : isSelected(menuOptionAt(item).value)"
-                :disabled="menuOptionAt(item).disabled"
-                @mouseenter="!menuOptionAt(item).disabled && (highlightedIndex = enabledOptions.findIndex((entry) => entry.value === menuOptionAt(item).value && Boolean(entry.created) === Boolean(menuOptionAt(item).created)))"
-                @click="selectOption(menuOptionAt(item))"
-              >
-                <slot name="option" :option="menuOptionAt(item)">
-                  <span>{{ menuOptionAt(item).created ? createLabel : menuOptionAt(item).label }}</span>
-                </slot>
-                <MIcon
-                  v-if="!menuOptionAt(item).created && isSelected(menuOptionAt(item).value)"
-                  class="m-select__check"
-                  name="check"
-                  size="sm"
-                />
-              </button>
-            </template>
-          </MVirtualScroller>
-          <MScrollbar
-            v-else
-            :id="`${selectId}-listbox`"
-            class="m-select__list"
-            fit-content
-            wrap-class="m-select__list-wrap"
-            view-class="m-select__list-view"
-          >
-            <div v-if="resolvedLoading" class="m-select__empty" role="status">
+              <template v-for="row in menuRows" :key="row.key">
+                <div
+                  v-if="row.type === 'group'"
+                  class="m-select__group-label"
+                  role="presentation"
+                >
+                  {{ row.label }}
+                </div>
+                <button
+                  v-else
+                  class="m-select__option"
+                  :class="{
+                    'm-select__option--selected': !row.option.created && isSelected(row.option.value),
+                    'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === row.option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(row.option.created),
+                    'm-select__option--create': row.option.created,
+                  }"
+                  type="button"
+                  role="option"
+                  :aria-selected="row.option.created ? undefined : isSelected(row.option.value)"
+                  :disabled="row.option.disabled"
+                  @mouseenter="!row.option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === row.option.value && Boolean(item.created) === Boolean(row.option.created)))"
+                  @click="selectOption(row.option)"
+                >
+                  <slot name="option" :option="row.option">
+                    <MRenderableView :value="renderOption(row.option)" />
+                  </slot>
+                  <MIcon
+                    v-if="!row.option.created && isSelected(row.option.value)"
+                    class="m-select__check"
+                    name="check"
+                    size="sm"
+                  />
+                </button>
+              </template>
+              <div v-if="!menuOptions.length && !resolvedLoading" class="m-select__empty" role="status">
+                <MRenderableView :value="resolvedNotFound" />
+              </div>
+            </MScrollbar>
+            <div
+              v-if="useVirtualMenu && resolvedLoading"
+              class="m-select__empty"
+              role="status"
+            >
               {{ locale.loading }}
             </div>
-            <template v-for="row in menuRows" :key="row.key">
-              <div
-                v-if="row.type === 'group'"
-                class="m-select__group-label"
-                role="presentation"
-              >
-                {{ row.label }}
-              </div>
-              <button
-                v-else
-                class="m-select__option"
-                :class="{
-                  'm-select__option--selected': !row.option.created && isSelected(row.option.value),
-                  'm-select__option--highlighted': enabledOptions[highlightedIndex]?.value === row.option.value && Boolean(enabledOptions[highlightedIndex]?.created) === Boolean(row.option.created),
-                  'm-select__option--create': row.option.created,
-                }"
-                type="button"
-                role="option"
-                :aria-selected="row.option.created ? undefined : isSelected(row.option.value)"
-                :disabled="row.option.disabled"
-                @mouseenter="!row.option.disabled && (highlightedIndex = enabledOptions.findIndex((item) => item.value === row.option.value && Boolean(item.created) === Boolean(row.option.created)))"
-                @click="selectOption(row.option)"
-              >
-                <slot name="option" :option="row.option">
-                  <span>{{ row.option.created ? createLabel : row.option.label }}</span>
-                </slot>
-                <MIcon
-                  v-if="!row.option.created && isSelected(row.option.value)"
-                  class="m-select__check"
-                  name="check"
-                  size="sm"
-                />
-              </button>
-            </template>
-            <div v-if="!menuOptions.length && !resolvedLoading" class="m-select__empty" role="status">
-              {{ resolvedEmptyMessage }}
+            <div
+              v-else-if="useVirtualMenu && !menuOptions.length && !resolvedLoading"
+              class="m-select__empty"
+              role="status"
+            >
+              <MRenderableView :value="resolvedNotFound" />
             </div>
-          </MScrollbar>
-          <div
-            v-if="useVirtualMenu && resolvedLoading"
-            class="m-select__empty"
-            role="status"
-          >
-            {{ locale.loading }}
+            <div v-if="$slots.footer" class="m-select__footer">
+              <slot name="footer" />
+            </div>
           </div>
-          <div
-            v-else-if="useVirtualMenu && !menuOptions.length && !resolvedLoading"
-            class="m-select__empty"
-            role="status"
-          >
-            {{ resolvedEmptyMessage }}
-          </div>
-          <div v-if="$slots.footer" class="m-select__footer">
-            <slot name="footer" />
-          </div>
-        </div>
+        </PopupWrapper>
       </Transition>
     </Teleport>
     <input

@@ -12,7 +12,7 @@ const cities = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MSelect v-model="value" :options="[]" empty-message="No options" placeholder="Empty list" />
-    <MSelect v-model="value" :options="cities" filter placeholder="Filter cities" />
+    <MSelect v-model="value" :options="[]" not-found-content="No options" placeholder="Empty list" />
+    <MSelect v-model="value" :options="cities" show-search placeholder="Filter cities" />
   </div>
 </template>

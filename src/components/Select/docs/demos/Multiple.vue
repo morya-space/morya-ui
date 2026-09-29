@@ -12,7 +12,7 @@ const options = [
 
 <template>
   <div style="display:grid;gap:1rem;width:min(24rem,100%)">
-    <MSelect v-model="value" :options="options" multiple show-clear placeholder="Teams" />
-    <MSelect v-model="value" :options="options" multiple :max-tag-count="1" placeholder="Collapsed tags" />
+    <MSelect v-model="value" :options="options" mode="multiple" allow-clear placeholder="Teams" />
+    <MSelect v-model="value" :options="options" mode="multiple" :max-tag-count="1" placeholder="Collapsed tags" />
   </div>
 </template>

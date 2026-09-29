@@ -130,7 +130,7 @@ defineExpose({ first, pageCount })
         :model-value="currentPage"
         :options="pageOptions"
         :disabled="disabled"
-        :filter="pageCount > 10"
+        :show-search="pageCount > 10"
         :pt="jumperPt"
         @update:model-value="onPageJump"
       />

@@ -1,7 +1,7 @@
 ---
 title: Select
 category: 02 / FORM
-description: Form select. Supports multiple tags, remote search, invalid, size, fluid, showClear, and filter. Distinct from the Dropdown action menu.
+description: Form select, aligned with antd Select: mode="multiple" | "tags", labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender.
 ---
 
 # Select
@@ -23,7 +23,7 @@ import { MSelect } from 'morya-ui'
 
 ## Clearable
 
-`showClear` (alias: `clearable`) shows a clear button when a value is selected.
+`allowClear` shows a clear button when a value is selected.
 
 ```vue preview src="./demos/Clearable.vue"
 ```
@@ -48,44 +48,69 @@ import { MSelect } from 'morya-ui'
 ```vue preview src="./demos/Fluid.vue"
 ```
 
-## Multiple
+## Multiple and tag creation
 
-With `multiple`, `v-model` is an array. Selected values render as removable tags and the menu stays open after a pick. `maxTagCount` collapses extra tags.
+With `mode="multiple"`, `v-model` is an array, selected values render as removable tags, and the menu stays open after a pick.
+`mode="tags"` additionally lets the user create an option from the current query (Enter or the create row).
 
 ```vue preview src="./demos/Multiple.vue"
 ```
 
-## Tag
-
-`tag` + `filter` lets the user create an option from the current query (Enter or the create row). Virtual lists are deferred.
-
 ```vue preview src="./demos/Tag.vue"
 ```
 
+`maxTagCount` collapses extra tags; the summary is customizable via `maxTagPlaceholder` and defaults to the `moreTags` locale copy.
+
+## labelInValue
+
+When enabled, `v-model` and event payloads become `{ value, label }`:
+
+```vue
+<MSelect v-model="picked" label-in-value :options="options" />
+```
+
+## fieldNames
+
+Remap option keys when they are not `label` / `value` (works for group children too):
+
+```vue
+<MSelect :options="[{ title: 'Apple', id: 'apple' }]" :field-names="{ label: 'title', value: 'id' }" />
+```
+
+Extra keys are preserved, so `optionFilterProp` can target a custom field.
+
 ## Group
 
-`options` can mix in `{ label, items }` groups ([SelectOptionGroup](/docs/types#SelectOptionGroup)) to render group header rows. Groups are not selectable; `filter` narrows items within each group and hides empty groups.
+`options` can mix in `{ label, options }` groups ([SelectOptionGroup](/docs/types#SelectOptionGroup)) to render group header rows. Groups are not selectable; searching narrows options within each group and hides empty groups.
 
 ```vue preview src="./demos/Group.vue"
 ```
 
-## Header / Footer
+## Search and filtering
 
-The `header` / `footer` slots render custom content above / below the option list in the popup (e.g. hints or a "create" action) and do not scroll with the options.
+`showSearch` renders a search input in the popup. Local filtering rules:
 
-```vue preview src="./demos/HeaderFooter.vue"
-```
+- `filterOption` omitted / `true`: fuzzy match on `optionFilterProp` (default `label`);
+- `filterOption: false`: disable local filtering;
+- `filterOption: (input, option) => boolean`: custom predicate.
 
-## Remote
-
-`remote` skips local filtering and emits `search` as the query changes. Use `loading` for in-flight requests.
+`remote` skips local filtering and emits `search` as the query changes (pair it with `showSearch`); use `loading` for in-flight requests.
 
 ```vue preview src="./demos/Remote.vue"
 ```
 
+## Custom option rendering
+
+- `optionRender(option)`: custom row content (wins over the `option` slot);
+- `popupRender(menu)`: wrap the popup menu;
+- `suffixIcon`: replace the trigger chevron.
+
+```vue preview src="./demos/HeaderFooter.vue"
+```
+
 ## Empty
 
-Shows empty-state text when there are no options or the filter has no matches. Override with `emptyMessage`, otherwise it reads ConfigProvider `locale.emptyMessage`.
+Shows empty-state text when there are no options or no matches. Override with `notFoundContent`, otherwise it reads ConfigProvider `locale.emptyOptions`.
 
 ```vue preview src="./demos/Empty.en.vue"
 ```
@@ -105,8 +130,10 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `modelValue` | `string \| number \| Array<string \| number>` | — | Selected value; an array when `multiple`. |
-| `options` | `Array<`[SelectOption](/docs/types#SelectOption)` \| `[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | — | Options list; may mix in `{ label, items }` groups. |
+| `modelValue` | `string \| number \| Array<string \| number> \| SelectLabeledValue` | — | Selected value; an array in `mode`, or `{ value, label }` with `labelInValue`. |
+| `options` | `Array<`[SelectOption](/docs/types#SelectOption)` \| `[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | — | Options list; may mix in `{ label, options }` groups. |
+| `fieldNames` | `{ label?, value?, disabled?, options? }` | — | Remap raw option keys. |
+| `labelInValue` | `boolean` | `false` | `v-model` / events return `{ value, label }`. |
 | `label` | `string` | — | Field label. |
 | `helpText` | `string` | — | Help text. |
 | `invalid` | `boolean` | `false` | Invalid state. |
@@ -115,20 +142,29 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Form required hint. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; inherits Form `size` when omitted. |
+| `variant` | `'outlined' \| 'filled'` | — | Input surface style. |
 | `fluid` | `boolean` | `false` | Stretch to the container width. |
-| `multiple` | `boolean` | `false` | Allow multiple values. |
-| `tag` | `boolean` | `false` | Create an option from the filter query (requires `filter`). |
+| `mode` | `'multiple' \| 'tags'` | — | Multi-value; `tags` also allows creating options. |
 | `remote` | `boolean` | `false` | Skip local filtering and emit `search`. |
 | `loading` | `boolean` | `false` | Async loading state. |
-| `maxTagCount` | `number` | — | Max visible tags in multiple mode; extras collapse to +N. |
-| `showClear` | `boolean` | `false` | Show a clear button when a value is selected. |
-| `clearable` | `boolean` | `false` | Alias for `showClear`. |
-| `emptyMessage` | `string` | — | Empty-options text. Defaults to ConfigProvider `locale.emptyOptions`. |
-| `filter` | `boolean` | `false` | Show a filter input when the menu is open. |
+| `maxTagCount` | `number` | — | Max visible tags; extras collapse. |
+| `maxTagPlaceholder` | `(omitted) => MRenderable` | `moreTags` locale | Collapsed-tag summary. |
+| `allowClear` | `boolean` | `false` | Show a clear button when a value is selected. |
+| `notFoundContent` | `MRenderable` | `emptyOptions` locale | Empty / no-match copy. |
+| `showSearch` | `boolean` | `false` | Render a search input in the popup. |
+| `optionFilterProp` | `string` | `'label'` | Option key used for local matching. |
+| `filterOption` | `boolean \| (input, option) => boolean` | match on `optionFilterProp` | Local filter rule; `false` disables. |
+| `optionRender` | `(option) => MRenderable` | — | Custom option row (wins over the `option` slot). |
+| `popupRender` | `(menu) => VNodeChild` | — | Wrap the popup menu. |
+| `suffixIcon` | `IconName` | `'chevron-down'` | Trigger icon. |
 | `teleport` | `boolean` | `true` | Menu Teleport. Mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target. `'self'` renders in place. |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | Menu alignment. |
 | `transition` | `string \| false` | `'scale-fade'` | Menu enter/exit preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
+| `id` | `string` | — | Control id. |
+| `errorMessage` | `string` | — | Validation copy; shown when combined with `invalid`. |
+| `name` | `string` | — | Native name helper (hidden input). |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Per-part DOM pass-through. |
 | `virtual` | `boolean` | auto | `true` forces virtualization; `false` disables; auto-on at 80+ options. |
 | `id` | `string` | — | Control id. |
 | `errorMessage` | `string` | — | Validation error copy. |

@@ -1,4 +1,14 @@
-import type { SelectModelValue, SelectOption, SelectOptionEntry, SelectOptionGroup, SelectValue } from './types'
+import type {
+  SelectFieldNames,
+  SelectLabeledValue,
+  SelectModelValue,
+  SelectOption,
+  SelectOptionEntry,
+  SelectOptionGroup,
+  SelectOptions,
+  SelectRawOption,
+  SelectValue,
+} from './types'
 
 export interface MenuOption extends SelectOption {
   created?: boolean
@@ -18,27 +28,92 @@ export interface MenuOptionRow {
 
 export type MenuRow = MenuGroupRow | MenuOptionRow
 
+/** Local-filter configuration derived from the Select props. */
+export interface MenuFilterConfig {
+  filterOption?: boolean | ((input: string, option: SelectOption) => boolean)
+  optionFilterProp?: string
+}
+
 export function isOptionGroup(entry: SelectOptionEntry): entry is SelectOptionGroup {
-  return Array.isArray((entry as SelectOptionGroup).items)
+  return Array.isArray((entry as SelectOptionGroup).options)
+}
+
+/**
+ * Normalize raw option data into the internal `{ label, value, disabled }` shape,
+ * honouring `fieldNames` for renamed keys and group children.
+ */
+export function normalizeOptions(
+  input: SelectOptions | undefined,
+  fieldNames?: SelectFieldNames,
+): SelectOptionEntry[] {
+  if (!input?.length) return []
+
+  const labelKey = fieldNames?.label ?? 'label'
+  const valueKey = fieldNames?.value ?? 'value'
+  const disabledKey = fieldNames?.disabled ?? 'disabled'
+  const groupKey = fieldNames?.options ?? 'options'
+
+  return input.flatMap((entry): SelectOptionEntry[] => {
+    if (entry == null || typeof entry !== 'object') return []
+    const record = entry as SelectRawOption
+
+    const children = record[groupKey]
+    if (Array.isArray(children)) {
+      const options = normalizeOptions(children as SelectOptions, fieldNames)
+        .filter((child): child is SelectOption => !isOptionGroup(child))
+      if (!options.length) return []
+      return [{ ...record, label: String(record[labelKey] ?? ''), options }]
+    }
+
+    const value = record[valueKey]
+    if (typeof value !== 'string' && typeof value !== 'number') return []
+
+    // Extra keys are preserved so `optionFilterProp` can target custom fields.
+    const option: SelectOption = {
+      ...record,
+      label: String(record[labelKey] ?? value),
+      value,
+    }
+    if (record[disabledKey]) option.disabled = true
+    else delete (option as unknown as Record<string, unknown>)[disabledKey]
+    return [option]
+  })
+}
+
+/** Unwrap a possibly `labelInValue` entry into its raw value. */
+export function selectValueOf(
+  value: SelectValue | SelectLabeledValue | undefined,
+): SelectValue | undefined {
+  if (value == null) return undefined
+  if (typeof value === 'object') return value.value
+  return value
 }
 
 /** Flatten groups into a single option list. */
 export function flattenOptions(entries: SelectOptionEntry[]): SelectOption[] {
-  return entries.flatMap((entry): SelectOption[] => (isOptionGroup(entry) ? entry.items : [entry]))
+  return entries.flatMap((entry): SelectOption[] => (isOptionGroup(entry) ? entry.options : [entry]))
 }
 
-/** Normalize v-model into a selected-value array for both single and multiple modes. */
+/**
+ * Normalize v-model into a selected-value array, unwrapping `labelInValue`
+ * entries and collapsing to a single value for single-select.
+ */
 export function normalizeSelectedValues(
   modelValue: SelectModelValue,
   multiple: boolean,
 ): SelectValue[] {
-  if (multiple) {
-    if (Array.isArray(modelValue)) return modelValue
-    if (modelValue == null) return []
-    return [modelValue]
+  const unwrap = (value: unknown): SelectValue[] => {
+    if (value == null) return []
+    if (Array.isArray(value)) return value.flatMap(unwrap)
+    if (typeof value === 'object') {
+      const inner = (value as SelectLabeledValue).value
+      return inner == null ? [] : [inner]
+    }
+    return [value as SelectValue]
   }
-  if (modelValue == null || Array.isArray(modelValue)) return []
-  return [modelValue]
+
+  const values = unwrap(modelValue)
+  return multiple ? values : values.slice(0, 1)
 }
 
 /**
@@ -66,13 +141,13 @@ export function buildLookupOptions(
   return [...flat, ...extras]
 }
 
-/** Whether Enter should create a tag from the current query. */
+/** Whether Enter should create an option from the current query. */
 export function canCreateFromQuery(
   query: string,
   lookupOptions: SelectOption[],
-  options: { tag: boolean; filter: boolean },
+  options: { tags: boolean; showSearch: boolean },
 ) {
-  if (!options.tag || !options.filter) return false
+  if (!options.tags || !options.showSearch) return false
   const needle = query.trim()
   if (!needle) return false
   return !lookupOptions.some(
@@ -81,10 +156,25 @@ export function canCreateFromQuery(
   )
 }
 
+/** Local filter predicate: honours `filterOption` and `optionFilterProp`. */
+export function matchesMenuFilter(
+  option: SelectOption,
+  needle: string,
+  config: MenuFilterConfig,
+): boolean {
+  const { filterOption } = config
+  if (typeof filterOption === 'function') return filterOption(needle, option)
+  if (filterOption === false) return true
+
+  const prop = config.optionFilterProp ?? 'label'
+  const raw = (option as unknown as Record<string, unknown>)[prop]
+  return String(raw ?? '').toLowerCase().includes(needle)
+}
+
 /**
- * Build menu entries with optional local label filtering.
- * Remote mode returns `options` unchanged; created/selected extras are still
- * appended only in local mode.
+ * Build menu entries with optional local filtering.
+ * Remote mode returns `options` unchanged; created/selected extras are only
+ * appended in local mode.
  */
 export function buildMenuEntries(
   options: SelectOptionEntry[],
@@ -92,6 +182,7 @@ export function buildMenuEntries(
   selectedValues: SelectValue[],
   query: string,
   remote: boolean,
+  filter: MenuFilterConfig = {},
 ): SelectOptionEntry[] {
   if (remote) return options
   const flat = flattenOptions(options)
@@ -112,10 +203,10 @@ export function buildMenuEntries(
   if (!needle) return entries
   return entries.flatMap((entry): SelectOptionEntry[] => {
     if (isOptionGroup(entry)) {
-      const items = entry.items.filter((option) => option.label.toLowerCase().includes(needle))
-      return items.length ? [{ ...entry, items }] : []
+      const options = entry.options.filter((option) => matchesMenuFilter(option, needle, filter))
+      return options.length ? [{ ...entry, options }] : []
     }
-    return entry.label.toLowerCase().includes(needle) ? [entry] : []
+    return matchesMenuFilter(entry, needle, filter) ? [entry] : []
   })
 }
 
@@ -136,7 +227,7 @@ export function buildMenuRows(
   entries.forEach((entry, index) => {
     if (isOptionGroup(entry)) {
       rows.push({ type: 'group', label: entry.label, key: `__group:${index}:${entry.label}` })
-      for (const option of entry.items) {
+      for (const option of entry.options) {
         rows.push({ type: 'option', option, key: String(option.value) })
       }
     } else {
@@ -156,10 +247,11 @@ export function toggleSelectedValue(selected: SelectValue[], value: SelectValue)
 /** Collapse selected options for maxTagCount display. */
 export function sliceVisibleTags<T>(all: T[], maxTagCount?: number) {
   if (maxTagCount == null || all.length <= maxTagCount) {
-    return { visible: all, hiddenCount: 0 }
+    return { visible: all, omitted: [] as T[], hiddenCount: 0 }
   }
   return {
     visible: all.slice(0, maxTagCount),
+    omitted: all.slice(maxTagCount),
     hiddenCount: all.length - maxTagCount,
   }
 }

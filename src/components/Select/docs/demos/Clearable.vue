@@ -10,5 +10,5 @@ const options = [
 </script>
 
 <template>
-  <MSelect v-model="value" label="Team" :options="options" show-clear />
+  <MSelect v-model="value" label="Team" :options="options" allow-clear />
 </template>

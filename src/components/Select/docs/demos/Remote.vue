@@ -29,7 +29,7 @@ function onSearch(query: string) {
   <MSelect
     v-model="value"
     :options="options"
-    filter
+    show-search
     remote
     :loading="loading"
     placeholder="Search a city"

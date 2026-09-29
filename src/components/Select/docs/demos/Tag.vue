@@ -10,5 +10,5 @@ const options = [
 </script>
 
 <template>
-  <MSelect v-model="value" :options="options" multiple filter tag placeholder="Add a stack" />
+  <MSelect v-model="value" :options="options" mode="tags" show-search placeholder="Add a stack" />
 </template>

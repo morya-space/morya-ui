@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import MSelect from './Select.vue'
 
 const options = [
@@ -81,9 +81,9 @@ describe('muSelect', () => {
     wrapper.unmount()
   })
 
-  it('clears the value when showClear is enabled', async () => {
+  it('clears the value when allowClear is enabled', async () => {
     const wrapper = mount(MSelect, {
-      props: { options, modelValue: 'sm', showClear: true, teleport: false },
+      props: { options, modelValue: 'sm', allowClear: true, teleport: false },
     })
     await wrapper.get('.m-select__control').trigger('mouseenter')
     await wrapper.get('.m-select__clear').trigger('click')
@@ -91,22 +91,30 @@ describe('muSelect', () => {
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
-  it('supports clearable as an alias for showClear', async () => {
-    const wrapper = mount(MSelect, {
-      props: { options, modelValue: 'sm', clearable: true, teleport: false },
-    })
-    await wrapper.get('.m-select__control').trigger('mouseenter')
-    await wrapper.get('.m-select__clear').trigger('click')
-    expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
-    expect(wrapper.emitted('clear')).toHaveLength(1)
-  })
-
-  it('filters options by label and shows empty message', async () => {
+  it('emits labelInValue entries when labelInValue is on', async () => {
     const wrapper = mount(MSelect, {
       props: {
         options,
-        filter: true,
-        emptyMessage: '暂无选项',
+        labelInValue: true,
+        modelValue: { value: 'sm', label: 'Small' },
+        teleport: false,
+      },
+    })
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await nextTick()
+    await wrapper.findAll('[role="option"]')[1]!.trigger('click')
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([
+      [{ value: 2, label: 'Large' }],
+    ])
+  })
+
+  it('filters options by label and shows the empty message', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        options,
+        showSearch: true,
+        notFoundContent: '暂无选项',
         teleport: false,
       },
     })
@@ -124,7 +132,7 @@ describe('muSelect', () => {
 
   it('shows empty message when options are empty', async () => {
     const wrapper = mount(MSelect, {
-      props: { options: [], emptyMessage: '没有可选内容', teleport: false },
+      props: { options: [], notFoundContent: '没有可选内容', teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
     expect(wrapper.get('.m-select__empty').text()).toBe('没有可选内容')
@@ -132,7 +140,7 @@ describe('muSelect', () => {
 
   it('selects multiple values and keeps the menu open', async () => {
     const wrapper = mount(MSelect, {
-      props: { options, multiple: true, modelValue: [], teleport: false },
+      props: { options, mode: 'multiple', modelValue: [], teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
     const items = wrapper.findAll('[role="option"]')
@@ -148,21 +156,43 @@ describe('muSelect', () => {
     const wrapper = mount(MSelect, {
       props: {
         options,
-        multiple: true,
+        mode: 'multiple',
         modelValue: ['sm', 2],
         maxTagCount: 1,
         teleport: false,
       },
     })
     expect(wrapper.get('.m-select__tag-label').text()).toBe('Small')
-    expect(wrapper.get('.m-select__tag--more').text()).toBe('+1')
+    // Default collapsed-tag summary comes from the `moreTags` locale copy.
+    expect(wrapper.get('.m-select__tag--more').text()).toContain('1')
     await wrapper.get('.m-select__tag-remove').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[[2]]])
   })
 
+  it('renders a custom maxTagPlaceholder', () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        options,
+        mode: 'multiple',
+        modelValue: ['sm', 2],
+        maxTagCount: 1,
+        maxTagPlaceholder: (omitted: unknown[]) => `+${omitted.length}`,
+        teleport: false,
+      },
+    })
+
+    expect(wrapper.get('.m-select__tag--more').text()).toBe('+1')
+  })
+
   it('clears all selected values in multiple mode', async () => {
     const wrapper = mount(MSelect, {
-      props: { options, multiple: true, modelValue: ['sm', 2], showClear: true, teleport: false },
+      props: {
+        options,
+        mode: 'multiple',
+        modelValue: ['sm', 2],
+        allowClear: true,
+        teleport: false,
+      },
     })
     await wrapper.get('.m-select__control').trigger('mouseenter')
     await wrapper.get('.m-select__clear').trigger('click')
@@ -171,7 +201,7 @@ describe('muSelect', () => {
 
   it('skips local filtering when remote and emits search', async () => {
     const wrapper = mount(MSelect, {
-      props: { options, filter: true, remote: true, teleport: false },
+      props: { options, showSearch: true, remote: true, teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
     await wrapper.get('.m-select__filter').setValue('zzz')
@@ -189,7 +219,7 @@ describe('muSelect', () => {
     expect(loading.get('[role="combobox"]').attributes('aria-busy')).toBe('true')
 
     const wrapper = mount(MSelect, {
-      props: { options, filter: true, tag: true, teleport: false },
+      props: { options, showSearch: true, mode: 'tags', teleport: false },
     })
     await wrapper.get('[role="combobox"]').trigger('click')
     await wrapper.get('.m-select__filter').setValue('Brand new')
@@ -198,7 +228,8 @@ describe('muSelect', () => {
     expect(create.text()).toContain('Brand new')
     await create.trigger('click')
     expect(wrapper.emitted('create')?.[0]?.[0]).toEqual({ label: 'Brand new', value: 'Brand new' })
-    expect(wrapper.emitted('update:modelValue')).toEqual([['Brand new']])
+    // `mode="tags"` is multi-value, so the payload is an array.
+    expect(wrapper.emitted('update:modelValue')).toEqual([[['Brand new']]])
   })
 
   it('renders value and option slots', async () => {
@@ -222,7 +253,7 @@ describe('muSelect', () => {
         options: [
           {
             label: 'Fruit',
-            items: [
+            options: [
               { label: 'Apple', value: 'apple' },
               { label: 'Banana', value: 'banana' },
             ],
@@ -247,11 +278,11 @@ describe('muSelect', () => {
   it('filters grouped options and drops empty groups', async () => {
     const wrapper = mount(MSelect, {
       props: {
-        filter: true,
+        showSearch: true,
         teleport: false,
         options: [
-          { label: 'Fruit', items: [{ label: 'Apple', value: 'apple' }] },
-          { label: 'Vegetable', items: [{ label: 'Carrot', value: 'carrot' }] },
+          { label: 'Fruit', options: [{ label: 'Apple', value: 'apple' }] },
+          { label: 'Vegetable', options: [{ label: 'Carrot', value: 'carrot' }] },
         ],
       },
     })
@@ -270,7 +301,7 @@ describe('muSelect', () => {
       props: {
         teleport: false,
         options: [
-          { label: 'Group', items: [{ label: 'One', value: 'one' }] },
+          { label: 'Group', options: [{ label: 'One', value: 'one' }] },
           { label: 'Two', value: 'two' },
         ],
       },
@@ -306,5 +337,106 @@ describe('muSelect', () => {
     const error = mount(MSelect, { props: { options, status: 'error', teleport: false } })
     expect(error.get('[role="combobox"]').classes()).toContain('m-select--invalid')
     expect(error.get('[role="combobox"]').attributes('aria-invalid')).toBe('true')
+  })
+})
+
+describe('muSelect — antd-aligned options', () => {
+  it('reads renamed keys through fieldNames', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        fieldNames: { label: 'title', value: 'id' },
+        options: [{ title: 'Apple', id: 'apple' }],
+      },
+    })
+
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await nextTick()
+
+    expect(wrapper.get('[role="option"]').text()).toContain('Apple')
+    await wrapper.get('[role="option"]').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toEqual([['apple']])
+  })
+
+  it('filters on a custom optionFilterProp', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        showSearch: true,
+        optionFilterProp: 'code',
+        options: [
+          { label: 'Small', value: 'sm', code: 'AA1' },
+          { label: 'Large', value: 2, code: 'BB2' },
+        ],
+      },
+    })
+
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await wrapper.get('.m-select__filter').setValue('bb')
+    await nextTick()
+
+    const rendered = wrapper.findAll('[role="option"]')
+    expect(rendered).toHaveLength(1)
+    expect(rendered[0]!.text()).toContain('Large')
+  })
+
+  it('honours a custom filterOption predicate', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        showSearch: true,
+        filterOption: (_input: string, option: { value: string | number }) => option.value === 2,
+        options,
+      },
+    })
+
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await wrapper.get('.m-select__filter').setValue('anything')
+    await nextTick()
+
+    const rendered = wrapper.findAll('[role="option"]')
+    expect(rendered).toHaveLength(1)
+    expect(rendered[0]!.text()).toContain('Large')
+  })
+
+  it('renders optionRender output', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        options,
+        optionRender: (option: { label: string }) => `#${option.label}`,
+      },
+    })
+
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await nextTick()
+
+    expect(wrapper.get('[role="option"]').text()).toContain('#Small')
+  })
+
+  it('wraps the menu through popupRender', async () => {
+    const wrapper = mount(MSelect, {
+      props: {
+        teleport: false,
+        options,
+        popupRender: (menu: unknown) => h('div', { class: 'custom-popup' }, menu as never),
+      },
+    })
+
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await nextTick()
+
+    expect(wrapper.find('.custom-popup').exists()).toBe(true)
+  })
+
+  it('swaps the trigger icon through suffixIcon', () => {
+    const fallback = mount(MSelect, { props: { options, teleport: false } })
+    const custom = mount(MSelect, {
+      props: { options, teleport: false, suffixIcon: 'search' },
+    })
+
+    expect(custom.get('.m-select__suffix').html()).not.toBe(
+      fallback.get('.m-select__suffix').html(),
+    )
   })
 })

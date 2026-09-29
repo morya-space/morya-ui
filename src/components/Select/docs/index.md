@@ -1,7 +1,7 @@
 ---
 title: Select
 category: 02 / FORM
-description: 表单选择器，支持多选标签、远程搜索、invalid、size、fluid、showClear、filter；选项禁用；与动作菜单 Dropdown 不同。
+description: 表单选择器，对齐 antd Select：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender。
 ---
 
 # Select
@@ -23,7 +23,7 @@ import { MSelect } from 'morya-ui'
 
 ## Clearable
 
-`showClear`（或别名 `clearable`）在已选值时显示清除按钮。
+`allowClear` 在已选值时显示清除按钮。
 
 ```vue preview src="./demos/Clearable.vue"
 ```
@@ -48,44 +48,69 @@ import { MSelect } from 'morya-ui'
 ```vue preview src="./demos/Fluid.vue"
 ```
 
-## Multiple
+## 多选与标签创建
 
-`multiple` 时 `v-model` 为数组；已选项以可移除标签展示。菜单在选择后保持打开。`maxTagCount` 可折叠多余标签。
+`mode="multiple"` 时 `v-model` 为数组，已选项以可移除标签展示，菜单在选择后保持打开。
+`mode="tags"` 在此基础上允许用当前搜索词创建选项（回车或点击「创建」行）。
 
 ```vue preview src="./demos/Multiple.vue"
 ```
 
-## Tag
-
-`tag` + `filter` 允许用当前筛选词创建选项（回车或点击「创建」行）。大量选项时默认开启虚拟列表（见 `virtual`）。
-
 ```vue preview src="./demos/Tag.vue"
 ```
 
+`maxTagCount` 折叠多余标签；折叠摘要由 `maxTagPlaceholder` 自定义，默认取 locale `moreTags`。
+
+## labelInValue
+
+打开后 `v-model` 与事件载荷为 `{ value, label }`：
+
+```vue
+<MSelect v-model="picked" label-in-value :options="options" />
+```
+
+## fieldNames
+
+选项字段名不叫 `label` / `value` 时，用 `fieldNames` 重映射（支持分组子项）：
+
+```vue
+<MSelect :options="[{ title: 'Apple', id: 'apple' }]" :field-names="{ label: 'title', value: 'id' }" />
+```
+
+多余字段会被保留，因此 `optionFilterProp` 可以指向自定义键。
+
 ## Group
 
-`options` 可混入 `{ label, items }` 分组（[SelectOptionGroup](/docs/types#SelectOptionGroup)），菜单显示分组标题行；分组本身不可选，`filter` 会按组内选项过滤并隐藏空组。
+`options` 可混入 `{ label, options }` 分组（[SelectOptionGroup](/docs/types#SelectOptionGroup)），菜单显示分组标题行；分组本身不可选，搜索会按组内选项过滤并隐藏空组。
 
 ```vue preview src="./demos/Group.vue"
 ```
 
-## Header / Footer
+## 搜索与过滤
 
-`header` / `footer` 插槽在浮窗列表的上方 / 下方渲染自定义内容（如说明文字、「新建」入口），不随选项列表滚动。
+`showSearch` 在浮层中显示搜索输入。本地过滤规则：
 
-```vue preview src="./demos/HeaderFooter.vue"
-```
+- `filterOption` 省略 / `true`：按 `optionFilterProp`（默认 `label`）模糊匹配；
+- `filterOption: false`：关闭本地过滤；
+- `filterOption: (input, option) => boolean`：自定义谓词。
 
-## Remote
-
-`remote` 关闭本地筛选，输入时发出 `search`。用 `loading` 表示异步进行中。
+`remote` 跳过本地过滤并随输入发出 `search`（需配合 `showSearch`），用 `loading` 表示请求进行中。
 
 ```vue preview src="./demos/Remote.vue"
 ```
 
+## 自定义选项渲染
+
+- `optionRender(option)`：自定义每行内容（优先于 `option` 插槽）；
+- `popupRender(menu)`：在浮层外层包一层自定义结构；
+- `suffixIcon`：替换右侧箭头图标。
+
+```vue preview src="./demos/HeaderFooter.vue"
+```
+
 ## Empty
 
-无选项或筛选无结果时展示空态文案；可用 `emptyMessage` 覆盖，否则读取 ConfigProvider `locale.emptyMessage`。
+无选项或筛选无结果时展示空态文案；可用 `notFoundContent` 覆盖，否则读取 ConfigProvider `locale.emptyOptions`。
 
 ```vue preview src="./demos/Empty.zh.vue"
 ```
@@ -105,8 +130,10 @@ import { MSelect } from 'morya-ui'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `modelValue` | `string \| number \| Array<string \| number>` | — | 选中值；`multiple` 时为数组。 |
-| `options` | `Array<`[SelectOption](/docs/types#SelectOption)` \| `[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | — | 选项列表；可混入 `{ label, items }` 分组。 |
+| `modelValue` | `string \| number \| Array<string \| number> \| SelectLabeledValue` | — | 选中值；`mode` 时数组，`labelInValue` 时为 `{ value, label }`。 |
+| `options` | `Array<`[SelectOption](/docs/types#SelectOption)` \| `[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | — | 选项列表；可混入 `{ label, options }` 分组。 |
+| `fieldNames` | `{ label?, value?, disabled?, options? }` | — | 重映射原始选项字段名。 |
+| `labelInValue` | `boolean` | `false` | `v-model` / 事件返回 `{ value, label }`。 |
 | `label` | `string` | — | 字段标签。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
@@ -115,16 +142,21 @@ import { MSelect } from 'morya-ui'
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 表单必填辅助。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；可继承 Form `size`。 |
+| `variant` | `'outlined' \| 'filled'` | — | 输入面样式。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
-| `multiple` | `boolean` | `false` | 多选。 |
-| `tag` | `boolean` | `false` | 允许用筛选词创建选项（需 `filter`）。 |
+| `mode` | `'multiple' \| 'tags'` | — | 多选；`tags` 额外允许创建选项。 |
 | `remote` | `boolean` | `false` | 关闭本地筛选，输入时发出 `search`。 |
 | `loading` | `boolean` | `false` | 异步加载中。 |
-| `maxTagCount` | `number` | — | 多选时最多展示的标签数，其余折叠为 +N。 |
-| `showClear` | `boolean` | `false` | 有值时显示清除按钮。 |
-| `clearable` | `boolean` | `false` | `showClear` 的别名。 |
-| `emptyMessage` | `string` | — | 空选项文案；默认取 `locale.emptyOptions`。 |
-| `filter` | `boolean` | `false` | 打开菜单时显示筛选输入。 |
+| `maxTagCount` | `number` | — | 多选时最多展示的标签数，其余折叠。 |
+| `maxTagPlaceholder` | `(omitted) => MRenderable` | locale `moreTags` | 折叠标签摘要。 |
+| `allowClear` | `boolean` | `false` | 有值时显示清除按钮。 |
+| `notFoundContent` | `MRenderable` | locale `emptyOptions` | 空选项 / 无匹配文案。 |
+| `showSearch` | `boolean` | `false` | 浮层中显示搜索输入。 |
+| `optionFilterProp` | `string` | `'label'` | 本地匹配读取的选项字段。 |
+| `filterOption` | `boolean \| (input, option) => boolean` | 按 `optionFilterProp` 匹配 | 本地过滤规则；`false` 关闭。 |
+| `optionRender` | `(option) => MRenderable` | — | 自定义选项行（优先于 `option` 插槽）。 |
+| `popupRender` | `(menu) => VNodeChild` | — | 包裹浮层菜单。 |
+| `suffixIcon` | `IconName` | `'chevron-down'` | 右侧图标。 |
 | `teleport` | `boolean` | `true` | 菜单 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
 | `placement` | `'bottom-start' \| 'bottom-end'` | `'bottom-start'` | 菜单对齐。 |
@@ -132,7 +164,7 @@ import { MSelect } from 'morya-ui'
 | `id` | `string` | — | 控件 id。 |
 | `errorMessage` | `string` | — | 校验错误文案；与 `invalid` 同时生效时优先展示。 |
 | `name` | `string` | — | 辅助原生 name（存在隐藏 input 时）。 |
-| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 分段透传（`root`、`control` 等）。 |
+| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 分段透传。 |
 | `virtual` | `boolean` | 自动 | `true` 强制虚拟列表；`false` 关闭；默认选项 ≥80 时开启。 |
 
 ## Events

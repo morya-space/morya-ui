@@ -5,6 +5,7 @@ import type {
   CalendarProps,
   CalendarValue,
 } from './types'
+import type { SelectModelValue } from '../Select/types'
 import { computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useRootParts } from '../../shared/useComponentAttrs'
@@ -225,14 +226,14 @@ const headerMonthYear = computed(() =>
   }),
 )
 
-function onYearSelect(year: number | string) {
-  const y = Number(year)
+function onYearSelect(year: SelectModelValue) {
+  const y = Number(Array.isArray(year) ? year[0] : year)
   const next = clampDateToMonth(panelDate.value, y, panelDate.value.getMonth())
   applyHeaderDate(next)
 }
 
-function onMonthSelect(month: number | string) {
-  const m = Number(month)
+function onMonthSelect(month: SelectModelValue) {
+  const m = Number(Array.isArray(month) ? month[0] : month)
   const next = clampDateToMonth(panelDate.value, panelDate.value.getFullYear(), m)
   applyHeaderDate(next)
 }

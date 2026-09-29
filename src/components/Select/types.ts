@@ -1,13 +1,29 @@
+import type { VNodeChild } from 'vue'
+import type { MRenderable } from '../../shared/content'
 import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
 import type { MAppendTo } from '../../shared/overlay'
 import type { FieldPassThrough } from '../../shared/passThrough'
-import type { MFieldStatus, MSizeInput } from '../../shared/types'
+import type { MFieldStatus, MInputVariant, MSizeInput } from '../../shared/types'
 import type { MotionPresetId } from '../../theme/motionPresets'
+import type { IconName } from '../Icon/types'
 
 export type SelectValue = string | number
 export type SelectSize = MSizeInput
-/** Single-select uses a scalar; multiple uses an array. */
-export type SelectModelValue = SelectValue | SelectValue[] | undefined
+/** `tags` behaves like `multiple` but also lets the user create options. */
+export type SelectMode = 'multiple' | 'tags'
+
+/** Selected value shape when `labelInValue` is on. */
+export interface SelectLabeledValue {
+  value: SelectValue
+  label: string
+}
+
+export type SelectModelValue =
+  | SelectValue
+  | SelectValue[]
+  | SelectLabeledValue
+  | SelectLabeledValue[]
+  | undefined
 
 export interface SelectOption {
   label: string
@@ -15,21 +31,43 @@ export interface SelectOption {
   disabled?: boolean
 }
 
-/**
- * One-level option group (PrimeVue-style). Mix into `options` to render a
- * group header row above its `items`; groups are not selectable.
- */
+/** One-level option group; groups are headers and are not selectable. */
 export interface SelectOptionGroup {
   label: string
-  items: SelectOption[]
+  options: SelectOption[]
 }
 
 export type SelectOptionEntry = SelectOption | SelectOptionGroup
 
+/** Remap the keys the component reads from raw option objects. */
+export interface SelectFieldNames {
+  /** Key read for the display label. Default `'label'`. */
+  label?: string
+  /** Key read for the value. Default `'value'`. */
+  value?: string
+  /** Key read for the disabled flag. Default `'disabled'`. */
+  disabled?: string
+  /** Key read for nested group options. Default `'options'`. */
+  options?: string
+}
+
+/** Raw option shape accepted when `fieldNames` remaps the default keys. */
+export type SelectRawOption = Record<string, unknown>
+
+export type SelectOptionInput = SelectOptionEntry | SelectRawOption
+export type SelectOptions = Array<SelectOptionEntry | SelectRawOption>
+
+export interface SelectFilterOptionContext {
+  input: string
+  option: SelectOption
+}
+
 export interface SelectProps extends MNativeComboboxFieldProps {
   modelValue?: SelectModelValue
-  /** Flat options, optionally mixed with {@link SelectOptionGroup} entries. */
-  options: SelectOptionEntry[]
+  /** Options, optionally mixed with group entries. */
+  options?: SelectOptions
+  /** Remap the `label` / `value` / `disabled` / `options` keys of raw option objects. */
+  fieldNames?: SelectFieldNames
   label?: string
   helpText?: string
   invalid?: boolean
@@ -44,31 +82,45 @@ export interface SelectProps extends MNativeComboboxFieldProps {
   disabled?: boolean
   required?: boolean
   size?: SelectSize
+  /** Input surface style. */
+  variant?: MInputVariant
   fluid?: boolean
-  /** Allow selecting more than one value. `v-model` is then `SelectValue[]`. */
-  multiple?: boolean
+  /** Multi-select mode. Omit for single select. */
+  mode?: SelectMode
   /**
-   * Create an option from the current filter query (Enter). Requires `filter`.
-   * Created values use the query string as both label and value.
+   * Return `{ value, label }` instead of the raw value from `v-model` and events.
    */
-  tag?: boolean
+  labelInValue?: boolean
   /**
    * Skip local filtering and emit `search` as the query changes.
-   * Pair with `filter` so the user can type a query.
+   * Pair with `showSearch` so the user can type a query.
    */
   remote?: boolean
   /** Show a loading state in the menu (async options). */
   loading?: boolean
-  /** Collapse extra selected tags after this count. Ignored unless `multiple`. */
+  /** Collapse extra selected tags after this count. Ignored unless `mode` is set. */
   maxTagCount?: number
-  /** Show clear button when a value is selected. Alias: `clearable`. */
-  showClear?: boolean
-  /** Alias for `showClear`. */
-  clearable?: boolean
-  /** Empty / no-match message. Falls back to ConfigProvider `locale.emptyOptions`. */
-  emptyMessage?: string
-  /** Show a filter input when the menu is open (matches option labels unless `remote`). */
-  filter?: boolean
+  /** Render the collapsed-tag summary. Defaults to the locale `moreTags` copy. */
+  maxTagPlaceholder?: (omitted: SelectOption[]) => MRenderable
+  /** Show the clear button when a value is selected. */
+  allowClear?: boolean
+  /** Empty / no-match content. Falls back to ConfigProvider `locale.emptyOptions`. */
+  notFoundContent?: MRenderable
+  /** Show a search input when the menu is open. */
+  showSearch?: boolean
+  /** Property of the option used for local matching. Default `'label'`. */
+  optionFilterProp?: string
+  /**
+   * Local filter predicate. `false` disables local filtering,
+   * `true` matches on `optionFilterProp`.
+   */
+  filterOption?: boolean | ((input: string, option: SelectOption) => boolean)
+  /** Render an option row. Falls back to the `option` slot, then the label. */
+  optionRender?: (option: SelectOption) => MRenderable
+  /** Wrap the dropdown menu (extra chrome around the list). */
+  popupRender?: (menu: VNodeChild) => VNodeChild
+  /** Custom trigger icon. */
+  suffixIcon?: IconName
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Mount target. Defaults to `'body'`. */
@@ -92,5 +144,7 @@ export interface SelectEmits {
   (event: 'show'): void
   (event: 'hide'): void
   (event: 'search', query: string): void
+  (event: 'select', value: SelectValue, option: SelectOption): void
+  (event: 'deselect', value: SelectValue, option: SelectOption): void
   (event: 'create', option: SelectOption): void
 }
