@@ -13,19 +13,62 @@ description: Form layout and field validation. Declarative rules, label alignmen
 
 Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and native submit (when `validateOn` includes `submit`) run every rule on the field.
 
-**Validation contract:** no external schema validator dependency. `validate()` **always resolves** `{ valid, errors }` and does not `reject` on failure. Nested paths such as `user.name` are not supported; use flat field names.
+**Validation contract:** no external schema validator dependency. `validate()` **always resolves** `{ valid, errors, warnings }` and does not `reject` on failure.
+
+**Field names:** nested paths are supported — `'user.name'`, `'items[0].title'`, or the array form `['items', index, 'title']`. Registration keys and `errors` keys use the canonical path string.
+
+**Warning rules:** add `warningOnly: true` to a rule to surface a message without blocking submit. Warnings land in `warnings` and render in the warning tone.
 
 ## Import
 
 ```ts
 import type { FormInstance, FormRules } from 'morya-ui'
-import { MForm, MFormItem } from 'morya-ui'
+import { MForm, MFormItem, MFormList, useForm } from 'morya-ui'
 ```
 
 ## Declarative rules
 
 ```vue preview src="./demos/DeclarativeRules.en.vue"
 ```
+
+## Controlled instance (useForm)
+
+`useForm()` returns a stable handle. Pass it to `<MForm :form="form">` for imperative access to the model and validation:
+
+```ts
+const form = useForm()
+
+form.setFieldsValue({ name: 'Ada', 'user.role': 'admin' })
+form.getFieldValue('name')        // 'Ada'
+form.getFieldsValue()             // { name: 'Ada', user: { role: 'admin' } }
+
+const { valid, errors } = await form.validate()
+```
+
+When no `model` prop is given the form uses an internal model, so `useForm` works standalone.
+
+## Dynamic fields (MFormList)
+
+`MFormList` manages an array field and exposes `fields` / `add` / `remove` / `move` through its scoped slot:
+
+```vue
+<MFormList name="items" :initial-value="() => ({ title: '' })" :rules="{ required: true, message: 'At least one row' }">
+  <template #default="{ fields, add, remove }">
+    <MFormItem
+      v-for="field in fields"
+      :key="field.key"
+      :name="['items', field.name, 'title']"
+      label="Title"
+    >
+      <MInput v-model="model.items[field.name].title" />
+    </MFormItem>
+    <MButton @click="add()">Add</MButton>
+    <MButton @click="remove(fields.length - 1)">Remove</MButton>
+  </template>
+</MFormList>
+```
+
+> The slot exposes `path`, not `name` — `name` is Vue's reserved slot attribute.
 
 ## Callback validation (compatible)
 
@@ -41,7 +84,9 @@ import { MForm, MFormItem } from 'morya-ui'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `model` | `Record<string, unknown>` | — | Values read by `rules` |
+| `model` | `Record<string, unknown>` | — | Values read by `rules`; omit to use an internal model |
+| `form` | `FormInstance` | — | Controlled instance from `useForm()` |
+| `initialValues` | `Record<string, unknown>` | — | Seeded into the model once on mount; keys accept dot paths |
 | `rules` | `FormRules` | — | Rules keyed by field `name` |
 | `labelPosition` | `'top' \| 'left'` | `'top'` | Label placement |
 | `labelPlacement` | `'top' \| 'left'` | — | Alias of `labelPosition` |
@@ -60,20 +105,29 @@ import { MForm, MFormItem } from 'morya-ui'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `string` | — | Field name (registered on Form; matches `model` / `rules`; also sets `data-m-field` for scroll helpers) |
+| `name` | `NamePath` | — | Field name; nested paths supported (registered on Form, matches `model` / `rules`, also sets `data-m-field`) |
+| `dependencies` | `NamePath[]` | — | Paths this field depends on; the field re-validates when any change |
 | `rules` | `FormItemRule \| FormItemRule[]` | — | Item rules, merged after Form `rules[name]` |
 | `validate` | `(trigger?) => string \| boolean \| void \| Promise<…>` | — | Callback validator; return error text or `false` |
 | `error` | `string` | — | Controlled error (wins over internal result) |
 | `invalid` / `help` / `required` / `label` | — | — | Layout and display |
+
+> A field reports only the first failing rule. Use `warningOnly` when the message should not block submission.
 
 ## FormItemRule
 
 | Field | Description |
 | --- | --- |
 | `required` | Fails on `null`, blank strings, and empty arrays |
+| `type` | Built-in type check: `string` / `number` / `integer` / `boolean` / `array` / `object` / `email` / `url` / `date`; empty values are skipped |
 | `min` / `max` | String/array length, or a finite number value |
+| `len` | Exact length (string / array) or exact value (number) |
 | `pattern` | Checked only for non-empty strings |
-| `message` | Error copy; falls back to locale `required` |
+| `enum` | Value must belong to the given set |
+| `transform` | Transform the value before evaluation, e.g. `v => String(v).toUpperCase()` |
+| `whitespace` | Set `false` so `required` accepts whitespace-only strings |
+| `warningOnly` | Produce a warning only; the form stays valid |
+| `message` | Error copy; falls back to the matching locale message |
 | `trigger` | `'blur' \| 'change' \| 'input' \| 'submit'`; omit to inherit Form `validateOn` |
 | `validator` | `(value) => string \| false \| Promise<…>`; `true` / `undefined` pass |
 
@@ -82,19 +136,26 @@ import { MForm, MFormItem } from 'morya-ui'
 | Event | Payload | Description |
 | --- | --- | --- |
 | `submit` | `{ valid }` | Auto-validates only when `validateOn` includes `submit` |
-| `validate` | `{ valid, errors }` | A validation pass finished |
+| `validate` | `{ valid, errors, warnings }` | A validation pass finished |
 
 ## Expose — Form
 
 | Method / Property | Description |
 | --- | --- |
-| `validate(name?)` | **Always resolves** `{ valid, errors }`; never rejects on failure |
-| `clearValidate(name?)` | Clears internal errors |
+| `validate(nameList?)` | **Always resolves** `{ valid, errors, warnings }`; never rejects on failure |
+| `validateFields(nameList?)` | Alias of `validate` |
+| `getFieldValue(name)` | Read one field (nested paths supported) |
+| `getFieldsValue()` | Snapshot of the current model |
+| `setFieldValue(name, value)` | Write one field |
+| `setFieldsValue(values)` | Write several fields; keys accept dot paths |
+| `clearValidate(nameList?)` | Clear validation state |
 | `reset()` | Reset the model to the initial snapshot and clear validation |
-| `resetFields(names?)` | Reset the given fields (default: all) to the initial snapshot |
+| `resetFields(nameList?)` | Reset the given fields (default: all) to the initial snapshot |
 | `scrollToField(name, options?)` | Scroll to the FormItem with `name`; `options.focus` focuses the first focusable control |
 | `scrollToFirstError(options?)` | Scroll to the first field currently in `errors` (registration order) |
-| `errors` | Read-only; current validation error map (`Record<string, string>`) |
+| `errors` / `warnings` | Read-only; current error / warning maps (`Record<string, string>`) |
+
+> `validate` / `clearValidate` / `resetFields` accept a single name or an array of names. An array is treated as multiple field names, so a single nested path must be wrapped: `validate([['items', 0]])`.
 
 ### Scroll helpers after validation
 

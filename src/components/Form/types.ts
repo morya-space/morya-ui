@@ -1,5 +1,9 @@
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
+import type { NamePath } from './paths'
+import type { FormInstance } from './useForm'
+
+export type { NamePath, NamePathKey } from './paths'
 
 export type FormLabelPosition = 'top' | 'left'
 export type FormLabelAlign = 'left' | 'center' | 'right'
@@ -11,12 +15,39 @@ export type FormFieldValidator = (
 
 export type FormModel = Record<string, unknown>
 
+/** Value kinds recognised by the built-in `type` rule. */
+export type FormRuleType =
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'array'
+  | 'object'
+  | 'email'
+  | 'url'
+  | 'integer'
+  | 'date'
+
 export interface FormItemRule {
   required?: boolean
   message?: string
   min?: number
   max?: number
+  /** Exact length (string / array) or exact value (number). */
+  len?: number
   pattern?: RegExp
+  /** Built-in value type check. */
+  type?: FormRuleType
+  /** Reject strings that are only whitespace (defaults to `true` for `required`). */
+  whitespace?: boolean
+  /** Allowed values. */
+  enum?: unknown[]
+  /** Transform the value before the rule is evaluated. */
+  transform?: (value: unknown) => unknown
+  /**
+   * Report a warning instead of an error.
+   * Warnings are surfaced but do not make the form invalid.
+   */
+  warningOnly?: boolean
   /**
    * When this rule runs. Omit to inherit Form `validateOn`.
    * Programmatic `validate()` / submit always runs every rule.
@@ -34,6 +65,8 @@ export type FormRules = Record<string, FormItemRule | FormItemRule[]>
 export interface FormValidateResult {
   valid: boolean
   errors: Record<string, string>
+  /** Messages produced by `warningOnly` rules. */
+  warnings: Record<string, string>
 }
 
 export type FormScrollToFieldOptions = ScrollIntoViewOptions & {
@@ -41,21 +74,16 @@ export type FormScrollToFieldOptions = ScrollIntoViewOptions & {
   focus?: boolean
 }
 
-export interface FormInstance {
-  validate: (name?: string) => Promise<FormValidateResult>
-  clearValidate: (name?: string) => void
-  reset: () => void
-  resetFields: (names?: string | string[]) => void
-  /** Scroll the named FormItem into view (requires `name` on the item). */
-  scrollToField: (name: string, options?: FormScrollToFieldOptions) => void
-  /** Scroll to the first field currently in `errors`. */
-  scrollToFirstError: (options?: FormScrollToFieldOptions) => void
-  errors: Record<string, string>
-}
+/** The instance returned by `useForm()` and exposed by `MForm`. */
+export type { FormInstance }
 
 export interface FormProps {
-  /** Bound values used by declarative `rules`. */
+  /** Bound values used by declarative `rules`. Omit to use an internal model. */
   model?: FormModel
+  /** Controlled instance from `useForm()`. */
+  form?: FormInstance
+  /** Initial values applied to the model once, on mount. */
+  initialValues?: FormModel
   /** Declarative rules keyed by FormItem `name`. */
   rules?: FormRules
   /** Label placement for FormItem children. */
@@ -97,8 +125,16 @@ export interface FormItemProps {
   label?: string
   /** Associates label with a control id. */
   for?: string
-  /** Field name used for Form.validate / rules lookup. */
-  name?: string
+  /**
+   * Field name used for validation / rules lookup.
+   * Supports nested paths: `'user.name'`, `'items[0].title'`, or `['items', index, 'title']`.
+   */
+  name?: NamePath
+  /**
+   * Name paths this field depends on.
+   * The field re-validates when any of them changes.
+   */
+  dependencies?: NamePath[]
   required?: boolean
   /** Explicit invalid state (also implied by non-empty `error`). */
   invalid?: boolean

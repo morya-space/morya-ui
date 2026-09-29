@@ -13,19 +13,62 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 
 未指定 `trigger` 的规则继承 Form 的 `validateOn`。程序化 `validate()` 与 `validateOn` 含 `submit` 的原生提交会跑完该字段全部规则。
 
-**校验约定：** 不依赖外部校验库；`validate()` **始终 resolve** `{ valid, errors }`，校验失败不会 `reject`。Nested path（如 `user.name`）暂不支持，请用扁平字段名。
+**校验约定：** 不依赖外部校验库；`validate()` **始终 resolve** `{ valid, errors, warnings }`，校验失败不会 `reject`。
+
+**字段名：** 支持嵌套路径 —— `'user.name'`、`'items[0].title'`，或数组形式 `['items', index, 'title']`。注册键与 `errors` 的 key 统一为规范路径字符串。
+
+**警告规则：** 规则加 `warningOnly: true` 时只提示、不阻断提交，消息进 `warnings` 并以警告色展示。
 
 ## 引入
 
 ```ts
 import type { FormInstance, FormRules } from 'morya-ui'
-import { MForm, MFormItem } from 'morya-ui'
+import { MForm, MFormItem, MFormList, useForm } from 'morya-ui'
 ```
 
 ## 声明式 rules
 
 ```vue preview src="./demos/DeclarativeRules.zh.vue"
 ```
+
+## 受控实例 useForm
+
+`useForm()` 返回一个稳定句柄，交给 `<MForm :form="form">` 后即可命令式读写模型与触发校验：
+
+```ts
+const form = useForm()
+
+form.setFieldsValue({ name: 'Ada', 'user.role': 'admin' })
+form.getFieldValue('name')        // 'Ada'
+form.getFieldsValue()             // { name: 'Ada', user: { role: 'admin' } }
+
+const { valid, errors } = await form.validate()
+```
+
+未传 `model` 时 Form 会使用内部模型，因此 `useForm` 可以独立使用。
+
+## 动态字段 MFormList
+
+`MFormList` 管理数组字段，通过作用域插槽提供 `fields` / `add` / `remove` / `move`：
+
+```vue
+<MFormList name="items" :initial-value="() => ({ title: '' })" :rules="{ required: true, message: '至少一项' }">
+  <template #default="{ fields, add, remove }">
+    <MFormItem
+      v-for="field in fields"
+      :key="field.key"
+      :name="['items', field.name, 'title']"
+      label="标题"
+    >
+      <MInput v-model="model.items[field.name].title" />
+    </MFormItem>
+    <MButton @click="add()">新增</MButton>
+    <MButton @click="remove(fields.length - 1)">删除</MButton>
+  </template>
+</MFormList>
+```
+
+> 插槽属性用 `path`（不是 `name`，`name` 是 Vue 的保留插槽属性）。
 
 ## 回调校验（兼容）
 
@@ -41,7 +84,9 @@ import { MForm, MFormItem } from 'morya-ui'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `model` | `Record<string, unknown>` | — | 供 `rules` 读取的字段值 |
+| `model` | `Record<string, unknown>` | — | 供 `rules` 读取的字段值；不传则使用内部模型 |
+| `form` | `FormInstance` | — | `useForm()` 返回的受控实例 |
+| `initialValues` | `Record<string, unknown>` | — | 首次挂载写入模型的初始值，键支持点路径 |
 | `rules` | `FormRules` | — | 按 `name` 声明的规则 |
 | `labelPosition` | `'top' \| 'left'` | `'top'` | 标签位置 |
 | `labelPlacement` | `'top' \| 'left'` | — | `labelPosition` 的别名 |
@@ -60,20 +105,29 @@ import { MForm, MFormItem } from 'morya-ui'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `name` | `string` | — | 字段名（注册到 Form，对应 `model` / `rules`；亦写入 `data-m-field` 供滚动定位） |
+| `name` | `NamePath` | — | 字段名，支持嵌套路径（注册到 Form，对应 `model` / `rules`；亦写入 `data-m-field` 供滚动定位） |
+| `dependencies` | `NamePath[]` | — | 依赖的字段路径；变化时该字段自动重新校验 |
 | `rules` | `FormItemRule \| FormItemRule[]` | — | 字段级规则，排在 Form `rules[name]` 之后 |
 | `validate` | `(trigger?) => string \| boolean \| void \| Promise<…>` | — | 回调校验；返回错误文案或 `false` |
 | `error` | `string` | — | 受控错误（优先于内部结果） |
 | `invalid` / `help` / `required` / `label` | — | — | 布局与展示 |
+
+> 一个字段只展示首条命中的规则消息；需要“只提示不阻断”时用规则的 `warningOnly`。
 
 ## FormItemRule
 
 | 字段 | 说明 |
 | --- | --- |
 | `required` | 空值（`null` / 空白字符串 / 空数组）时报错 |
+| `type` | 内置类型校验：`string` / `number` / `integer` / `boolean` / `array` / `object` / `email` / `url` / `date`；空值自动跳过 |
 | `min` / `max` | 字符串/数组长度，或有限数字本身 |
+| `len` | 精确长度（字符串 / 数组）或精确值（数字） |
 | `pattern` | 非空字符串才检测 |
-| `message` | 错误文案；缺省回退到 locale `required` |
+| `enum` | 值必须属于给定集合 |
+| `transform` | 求值前转换值，如 `v => String(v).toUpperCase()` |
+| `whitespace` | 设为 `false` 时 `required` 接受纯空白字符串 |
+| `warningOnly` | 只产生警告，不使表单变为无效 |
+| `message` | 错误文案；缺省回退到 locale 对应文案 |
 | `trigger` | `'blur' \| 'change' \| 'input' \| 'submit'`；省略则继承 Form `validateOn` |
 | `validator` | `(value) => string \| false \| Promise<…>`；`true` / `undefined` 视为通过 |
 
@@ -82,19 +136,26 @@ import { MForm, MFormItem } from 'morya-ui'
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `submit` | `{ valid }` | 仅当 `validateOn` 含 `submit` 时自动跑校验 |
-| `validate` | `{ valid, errors }` | 一次校验流程结束 |
+| `validate` | `{ valid, errors, warnings }` | 一次校验流程结束 |
 
 ## Expose — Form
 
 | 方法 / 属性 | 说明 |
 | --- | --- |
-| `validate(name?)` | **始终 resolve** `{ valid, errors }`，不会因失败 reject |
-| `clearValidate(name?)` | 清除内部错误 |
+| `validate(nameList?)` | **始终 resolve** `{ valid, errors, warnings }`，不会因失败 reject |
+| `validateFields(nameList?)` | `validate` 的别名 |
+| `getFieldValue(name)` | 读取单个字段（支持嵌套路径） |
+| `getFieldsValue()` | 取当前模型快照 |
+| `setFieldValue(name, value)` | 写入单个字段 |
+| `setFieldsValue(values)` | 批量写入，键支持点路径 |
+| `clearValidate(nameList?)` | 清除校验状态 |
 | `reset()` | 重置 model 为初始快照并清除校验 |
-| `resetFields(names?)` | 将指定字段（默认全部）重置为初始快照 |
+| `resetFields(nameList?)` | 将指定字段（默认全部）重置为初始快照 |
 | `scrollToField(name, options?)` | 滚动到带 `name` 的 FormItem；`options.focus` 可聚焦首个可聚焦控件 |
 | `scrollToFirstError(options?)` | 按注册顺序滚到当前 `errors` 中的第一个字段 |
-| `errors` | 只读；当前校验错误表（`Record<string, string>`） |
+| `errors` / `warnings` | 只读；当前错误 / 警告表（`Record<string, string>`） |
+
+> `validate` / `clearValidate` / `resetFields` 既接受单个名称（字符串），也接受名称数组。数组按“多个字段名”处理，单个嵌套路径需再包一层：`validate([['items', 0]])`。
 
 ### 校验失败滚动
 

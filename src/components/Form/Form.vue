@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import type { MFormFieldRegistration } from './context'
+import type { NamePath } from './paths'
 import type { FormProps, FormScrollToFieldOptions, FormValidateTrigger } from './types'
-import { computed, provide, reactive, ref, toRaw, useAttrs, watch } from 'vue'
+import type { FormInstance, FormInstanceApi } from './useForm'
+import { computed, onBeforeUnmount, provide, reactive, ref, toRaw, useAttrs, watch } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import {
   M_FORM_ERRORS_KEY,
   M_FORM_KEY,
+  M_FORM_WARNINGS_KEY,
 } from './context'
+import { getPathValue, pathContains, setPathValue, toKey, toPath } from './paths'
+import { bindFormInstance } from './useForm'
 
 defineOptions({ inheritAttrs: false })
 
@@ -25,7 +30,7 @@ const props = withDefaults(defineProps<FormProps>(), {
 
 const emit = defineEmits<{
   (event: 'submit', payload: { valid: boolean }): void
-  (event: 'validate', payload: { valid: boolean; errors: Record<string, string> }): void
+  (event: 'validate', payload: { valid: boolean; errors: Record<string, string>; warnings: Record<string, string> }): void
 }>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
@@ -33,14 +38,29 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const formRoot = ref<HTMLFormElement | null>(null)
 const fields = new Map<string, MFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
+const internalWarnings = reactive<Record<string, string>>({})
 const initialSnapshot = ref<Record<string, unknown> | undefined>(undefined)
+
+/** Fallback store used when no `model` prop is provided. */
+const internalModel = reactive<Record<string, unknown>>({})
+
+const activeModel = computed<Record<string, unknown>>(
+  () => (props.model as Record<string, unknown> | undefined) ?? internalModel,
+)
 
 function cloneModel(model: Record<string, unknown>) {
   return JSON.parse(JSON.stringify(toRaw(model))) as Record<string, unknown>
 }
 
+// `initialValues` seeds the model once, before the first snapshot is taken.
+if (props.initialValues) {
+  for (const [key, value] of Object.entries(props.initialValues)) {
+    setPathValue(activeModel.value, toPath(key), value)
+  }
+}
+
 watch(
-  () => props.model,
+  activeModel,
   (model) => {
     if (model && initialSnapshot.value == null) {
       initialSnapshot.value = cloneModel(model)
@@ -61,9 +81,54 @@ const resolvedRequireMark = computed(() => {
 })
 const sizeClass = computed(() => (props.size ? resolveSizeClass(props.size) : undefined))
 
-function setError(name: string, message?: string) {
-  if (message) internalErrors[name] = message
-  else delete internalErrors[name]
+/** Clear (or set) a field's error message. Passing nothing clears both stores. */
+function setError(key: string, message?: string) {
+  if (message) internalErrors[key] = message
+  else {
+    delete internalErrors[key]
+    delete internalWarnings[key]
+  }
+}
+
+/** Apply a validation outcome for one field. */
+function applyOutcome(key: string, message: string | undefined, warning = false) {
+  if (!message) {
+    setError(key)
+    return
+  }
+  if (warning) {
+    internalWarnings[key] = message
+    delete internalErrors[key]
+    return
+  }
+  internalErrors[key] = message
+  delete internalWarnings[key]
+}
+
+/**
+ * Accept a single name or a list of names.
+ * An array is treated as a list of names (Ant Design convention), so a nested
+ * path used on its own must be wrapped: `validate([['items', 0]])`.
+ */
+function normalizeNameList(input?: NamePath | NamePath[]): NamePath[] | undefined {
+  if (input == null) return undefined
+  if (typeof input === 'string' || typeof input === 'number') return [input]
+  return input as NamePath[]
+}
+
+/** Field keys matching a name list (a path matches itself and everything nested under it). */
+function resolveFieldKeys(nameList?: NamePath[]): string[] {
+  if (!nameList || nameList.length === 0) return [...fields.keys()]
+
+  const requested = nameList.map((name) => toPath(name))
+  return [...fields.keys()].filter((key) => {
+    const field = fields.get(key)
+    if (!field) return false
+    const fieldPath = toPath(field.name)
+    return requested.some(
+      (path) => pathContains(fieldPath, path) || pathContains(path, fieldPath),
+    )
+  })
 }
 
 function resolveScrollOptions(
@@ -105,45 +170,40 @@ function maybeScrollAfterValidate(valid: boolean) {
   scrollToFirstError(resolveScrollOptions(props.scrollToFirstError))
 }
 
-async function runField(name: string, trigger: FormValidateTrigger | 'all' = 'all'): Promise<boolean> {
-  const field = fields.get(name)
+async function runField(key: string, trigger: FormValidateTrigger | 'all' = 'all'): Promise<boolean> {
+  const field = fields.get(key)
   if (!field) return true
-  const result = await field.validate(trigger)
-  const message = typeof result === 'string' && result.trim() ? result.trim() : undefined
-  setError(name, message)
-  return !message
+  const outcome = await field.validate(trigger)
+  const message = outcome.message?.trim() || undefined
+  applyOutcome(key, message, outcome.warning)
+  // Warning-only failures do not make the form invalid.
+  return !message || Boolean(outcome.warning)
 }
 
-async function validate(name?: string) {
-  if (name) {
-    const valid = await runField(name, 'all')
-    const errors = { ...internalErrors }
-    emit('validate', { valid, errors })
-    maybeScrollAfterValidate(valid)
-    return { valid, errors }
-  }
-  const names = [...fields.keys()]
-  const results = await Promise.all(names.map((fieldName) => runField(fieldName, 'all')))
+async function validate(input?: NamePath | NamePath[]) {
+  const keys = resolveFieldKeys(normalizeNameList(input))
+  const results = await Promise.all(keys.map((key) => runField(key, 'all')))
   const valid = results.every(Boolean)
   const errors = { ...internalErrors }
-  emit('validate', { valid, errors })
+  const warnings = { ...internalWarnings }
+  emit('validate', { valid, errors, warnings })
   maybeScrollAfterValidate(valid)
-  return { valid, errors }
+  return { valid, errors, warnings }
 }
 
-function clearValidate(name?: string) {
-  if (name) setError(name, undefined)
-  else Object.keys(internalErrors).forEach((key) => setError(key, undefined))
+function clearValidate(input?: NamePath | NamePath[]) {
+  for (const key of resolveFieldKeys(normalizeNameList(input))) setError(key)
 }
 
 function resetModel(snapshot?: Record<string, unknown>) {
-  if (!props.model || !snapshot) return
-  for (const key of Object.keys(props.model)) {
-    if (key in snapshot) props.model[key] = cloneModel({ [key]: snapshot[key] })[key]
-    else delete props.model[key]
+  if (!snapshot) return
+  const model = activeModel.value
+
+  for (const key of Object.keys(model)) {
+    if (!(key in snapshot)) delete model[key]
   }
   for (const key of Object.keys(snapshot)) {
-    if (!(key in props.model)) props.model[key] = cloneModel({ [key]: snapshot[key] })[key]
+    model[key] = cloneModel({ [key]: snapshot[key] })[key]
   }
 }
 
@@ -152,41 +212,52 @@ function reset() {
   clearValidate()
 }
 
-function resetFields(names?: string | string[]) {
+function resetFields(input?: NamePath | NamePath[]) {
   const snapshot = initialSnapshot.value
-  if (!props.model || !snapshot) return
-  const list = names == null ? Object.keys(snapshot) : Array.isArray(names) ? names : [names]
-  for (const name of list) {
-    if (name in snapshot) props.model[name] = cloneModel({ [name]: snapshot[name] })[name]
+  if (!snapshot) return
+
+  const nameList = normalizeNameList(input)
+  if (nameList == null || nameList.length === 0) {
+    reset()
+    return
   }
-  if (names == null) clearValidate()
-  else if (Array.isArray(names)) names.forEach((name) => clearValidate(name))
-  else clearValidate(names)
+
+  const model = activeModel.value
+  for (const path of nameList.map((name) => toPath(name))) {
+    const value = getPathValue(snapshot, path)
+    if (value === undefined) continue
+    setPathValue(model, path, cloneModel({ value }).value)
+  }
+  clearValidate(nameList)
 }
 
 function registerField(field: MFormFieldRegistration) {
-  fields.set(field.name, field)
+  fields.set(field.key, field)
 }
 
-function unregisterField(name: string) {
-  fields.delete(name)
-  setError(name, undefined)
+function unregisterField(key: string) {
+  fields.delete(key)
+  setError(key)
 }
 
-function notifyBlur(name: string) {
-  void runField(name, 'blur')
+function notifyBlur(key: string) {
+  void runField(key, 'blur')
 }
 
-function notifyChange(name: string) {
-  void runField(name, 'change')
+function notifyChange(key: string) {
+  void runField(key, 'change')
 }
 
-function notifyInput(name: string) {
-  void runField(name, 'input')
+function notifyInput(key: string) {
+  void runField(key, 'input')
+}
+
+function revalidate(key: string) {
+  void runField(key, 'all')
 }
 
 const context = computed(() => ({
-  model: props.model,
+  model: activeModel.value,
   rules: props.rules,
   labelPosition: resolvedLabelPosition.value,
   labelAlign: props.labelAlign,
@@ -200,10 +271,43 @@ const context = computed(() => ({
   notifyBlur,
   notifyChange,
   notifyInput,
+  revalidate,
 }))
 
 provide(M_FORM_KEY, context)
 provide(M_FORM_ERRORS_KEY, internalErrors)
+provide(M_FORM_WARNINGS_KEY, internalWarnings)
+
+/** Imperative API bound to a `useForm()` instance. */
+const api: FormInstanceApi = {
+  getFieldValue: name => getPathValue(activeModel.value, toPath(name)),
+  getFieldsValue: () => cloneModel(activeModel.value),
+  setFieldValue: (name, value) => setPathValue(activeModel.value, toPath(name), value),
+  validate: nameList => validate(nameList),
+  clearValidate: nameList => clearValidate(nameList),
+  resetFields: nameList => resetFields(nameList),
+  reset: () => reset(),
+  scrollToField: (name, options) => scrollToField(toKey(name), options),
+  scrollToFirstError: options => scrollToFirstError(options),
+  getErrors: () => ({ ...internalErrors }),
+  getWarnings: () => ({ ...internalWarnings }),
+}
+
+let unbindForm: (() => void) | null = null
+
+watch(
+  () => props.form,
+  (instance) => {
+    unbindForm?.()
+    unbindForm = instance ? bindFormInstance(instance as FormInstance, api) : null
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  unbindForm?.()
+  unbindForm = null
+})
 
 async function onSubmit() {
   if (validateOn.value.includes('submit')) {
@@ -215,13 +319,9 @@ async function onSubmit() {
 }
 
 defineExpose({
-  validate,
-  clearValidate,
-  reset,
-  resetFields,
-  scrollToField,
-  scrollToFirstError,
+  ...api,
   errors: internalErrors,
+  warnings: internalWarnings,
 })
 </script>
 

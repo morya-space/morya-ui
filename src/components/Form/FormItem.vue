@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import type { MFormFieldValidation } from './context'
+import type { NamePathKey } from './paths'
 import type { FormItemProps, FormItemRule, FormValidateTrigger } from './types'
 import { computed, inject, onBeforeUnmount, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
-import { M_FORM_ERRORS_KEY, M_FORM_KEY } from './context'
+import { M_FORM_ERRORS_KEY, M_FORM_KEY, M_FORM_WARNINGS_KEY } from './context'
+import { getPathValue, pathKey, toPath } from './paths'
 import {
   evaluateFormRule,
   normalizeFormRules,
@@ -23,36 +26,62 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const form = inject(M_FORM_KEY, null)
 const formErrors = inject(M_FORM_ERRORS_KEY, null)
+const formWarnings = inject(M_FORM_WARNINGS_KEY, null)
 const locale = useMLocale()
 const autoId = useMId()
 
 const labelPosition = computed(() => props.labelPosition ?? form?.value.labelPosition ?? 'top')
 const labelAlign = computed(() => props.labelAlign ?? form?.value.labelAlign ?? 'left')
 const labelWidth = computed(() => toCssSize(props.labelWidth ?? form?.value.labelWidth))
-const fieldName = computed(() => props.name ?? props.for)
+
+/** Explicit path for the field; empty when the item is not bound to a model value. */
+const fieldPath = computed<NamePathKey[]>(() => {
+  if (props.name != null && props.name !== '') return toPath(props.name)
+  return props.for ? [props.for] : []
+})
+/** Canonical registration / error key. */
+const fieldKey = computed(() => pathKey(fieldPath.value))
+const fieldName = computed(() => fieldKey.value)
+
 const mergedRules = computed<FormItemRule[]>(() => {
-  const name = fieldName.value
-  const fromForm = name ? normalizeFormRules(form?.value.rules?.[name]) : []
+  const rules = form?.value.rules
+  const keys = [fieldKey.value, typeof props.name === 'string' ? props.name : undefined]
+    .filter((key): key is string => Boolean(key))
+
+  const fromForm = keys.flatMap((key) => normalizeFormRules(rules?.[key]))
   return [...fromForm, ...normalizeFormRules(props.rules)]
 })
 const showRequireMark = computed(
   () => Boolean((form?.value.requireMark ?? true) && (props.required || mergedRules.value.some((rule) => rule.required))),
 )
 const internalError = computed(() => {
-  const name = fieldName.value
-  if (!name || !formErrors) return undefined
-  return formErrors[name]
+  const key = fieldKey.value
+  if (!key || !formErrors) return undefined
+  return formErrors[key]
+})
+const internalWarning = computed(() => {
+  const key = fieldKey.value
+  if (!key || !formWarnings) return undefined
+  return formWarnings[key]
 })
 const displayError = computed(() => props.error ?? internalError.value)
+const displayWarning = computed(() => (displayError.value ? undefined : internalWarning.value))
 const isInvalid = computed(() => props.invalid || Boolean(displayError.value))
 const controlId = computed(() => props.for ?? `m-form-item-${autoId}`)
 const messageId = computed(() => `${controlId.value}-message`)
 const requiredLabel = computed(() => locale.value.required)
 const fieldValue = computed(() => {
-  const name = fieldName.value
-  if (!name) return undefined
-  return form?.value.model?.[name]
+  if (fieldPath.value.length === 0) return undefined
+  return getPathValue(form?.value.model, fieldPath.value)
 })
+
+const ruleMessages = computed(() => ({
+  required: locale.value.required,
+  invalidValue: locale.value.invalidValue,
+  invalidEmail: locale.value.invalidEmail,
+  invalidUrl: locale.value.invalidUrl,
+  invalidDate: locale.value.invalidDate,
+}))
 
 const rootClass = computed(() => [
   'm-form-item',
@@ -60,6 +89,7 @@ const rootClass = computed(() => [
   `m-form-item--align-${labelAlign.value}`,
   {
     'm-form-item--invalid': isInvalid.value,
+    'm-form-item--warning': Boolean(displayWarning.value),
     'm-form-item--required': showRequireMark.value,
   },
 ])
@@ -70,54 +100,78 @@ const labelStyle = computed(() => {
   return style
 })
 
-async function validateField(trigger: FormValidateTrigger | 'all' = 'all') {
+async function validateField(trigger: FormValidateTrigger | 'all' = 'all'): Promise<MFormFieldValidation> {
   const value = fieldValue.value
   const formTriggers = form?.value.validateOn ?? ['submit']
+
+  let warning: string | undefined
+
   for (const rule of mergedRules.value) {
     if (!ruleMatchesTrigger(rule, trigger, formTriggers)) continue
-    const message = await evaluateFormRule(rule, value, locale.value.required)
-    if (message) return message
+    const message = await evaluateFormRule(rule, value, ruleMessages.value)
+    if (!message) continue
+    if (rule.warningOnly) {
+      warning ??= message
+      continue
+    }
+    return { message }
   }
+
   if (props.validate && ruleMatchesTrigger({}, trigger, formTriggers)) {
     const result = await props.validate(trigger)
-    if (typeof result === 'string' && result.trim()) return result.trim()
-    if (result === false) return locale.value.required
+    const message = typeof result === 'string' && result.trim()
+      ? result.trim()
+      : result === false ? locale.value.required : undefined
+    if (message) return { message }
   }
-  return undefined
+
+  return warning ? { message: warning, warning: true } : {}
 }
 
 watch(
-  () => [fieldName.value, mergedRules.value, props.validate] as const,
-  ([name], previous) => {
-    const previousName = previous?.[0]
-    if (previousName && previousName !== name) form?.value.unregisterField(previousName)
-    if (!form?.value || !name) return
+  () => [fieldKey.value, fieldPath.value, mergedRules.value, props.validate, props.dependencies] as const,
+  (_next, previous) => {
+    const previousKey = previous?.[0]
+    if (previousKey && previousKey !== fieldKey.value) form?.value.unregisterField(previousKey)
+    if (!form?.value || !fieldKey.value) return
     form.value.registerField({
-      name,
-      validate: (trigger) => validateField(trigger ?? 'all'),
+      key: fieldKey.value,
+      name: fieldPath.value,
+      dependencies: props.dependencies,
+      validate: trigger => validateField(trigger ?? 'all'),
     })
   },
   { immediate: true },
 )
 
+// Re-validate as soon as any declared dependency value changes.
+watch(
+  () => (props.dependencies ?? []).map(dep => getPathValue(form?.value.model, toPath(dep))),
+  () => {
+    if (!props.dependencies?.length || !fieldKey.value) return
+    form?.value.revalidate(fieldKey.value)
+  },
+  { deep: true },
+)
+
 onBeforeUnmount(() => {
-  const name = fieldName.value
-  if (name) form?.value.unregisterField(name)
+  const key = fieldKey.value
+  if (key) form?.value.unregisterField(key)
 })
 
 function onFocusOut() {
-  const name = fieldName.value
-  if (name) form?.value.notifyBlur(name)
+  const key = fieldKey.value
+  if (key) form?.value.notifyBlur(key)
 }
 
 function onChange() {
-  const name = fieldName.value
-  if (name) form?.value.notifyChange(name)
+  const key = fieldKey.value
+  if (key) form?.value.notifyChange(key)
 }
 
 function onInput() {
-  const name = fieldName.value
-  if (name) form?.value.notifyInput(name)
+  const key = fieldKey.value
+  if (key) form?.value.notifyInput(key)
 }
 </script>
 
@@ -144,7 +198,7 @@ function onInput() {
         <slot
           :id="controlId"
           :invalid="isInvalid"
-          :described-by="displayError || help ? messageId : undefined"
+          :described-by="displayError || displayWarning || help ? messageId : undefined"
           :error="displayError"
         />
       </div>
@@ -155,6 +209,14 @@ function onInput() {
         role="alert"
       >
         {{ displayError }}
+      </p>
+      <p
+        v-else-if="displayWarning"
+        :id="messageId"
+        class="m-form-item__warning"
+        role="status"
+      >
+        {{ displayWarning }}
       </p>
       <p
         v-else-if="help"

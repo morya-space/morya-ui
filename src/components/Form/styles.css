@@ -1,4 +1,4 @@
-/* —�?Form / FormItem —�?*/
+/* —�?Form / FormItem —�?*/
 .m-form {
     --m-form-inline-item-min-width: 12rem;
     display: grid;
@@ -111,4 +111,15 @@
     color: var(--m-color-danger);
     font-size: var(--m-font-size-xs);
     margin: 0;
+}
+
+/* `warningOnly` rules surface here without blocking submit. */
+.m-form-item__warning {
+    color: var(--m-color-warning);
+    font-size: var(--m-font-size-xs);
+    margin: 0;
+}
+
+.m-form-list {
+    display: contents;
 }
