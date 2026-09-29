@@ -3,28 +3,23 @@
 import type { ScrollbarInstance } from '../Scrollbar/types'
 import type { HeaderForRender, TableEmitFn } from './hooks'
 import type {
-  TableEditChangePayload,
   TableEmits,
   TableHeader,
   TableItem,
   TableProps,
-  TableSpanMethodResult,
 } from './types'
-import { computed, onBeforeUnmount, provide, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
+import { computed, nextTick, onMounted, provide, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useControllable } from '../../shared/useControllable'
-import MCheckbox from '../Checkbox/Checkbox.vue'
-import MIcon from '../Icon/Icon.vue'
-import MInput from '../Input/Input.vue'
 import MLoading from '../Loading/Loading.vue'
 import MPagination from '../Pagination/Pagination.vue'
-import MRadio from '../Radio/Radio.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
-import MTooltip from '../Tooltip/Tooltip.vue'
 import {
+  useCellEdit,
   useClickRow,
+  useColumnResize,
   useExpandableRow,
   useFixedColumn,
   useHeaders,
@@ -35,7 +30,7 @@ import {
   useTotalItems,
   useVirtualRows,
 } from './hooks'
-import { SYNTHETIC, isSyntheticColumn } from './columns/keys'
+import { M_TABLE_ROOT_KEY, SYNTHETIC, isSyntheticColumn } from './columns/keys'
 import {
   buildHeaderRows,
   normalizeAlign,
@@ -44,10 +39,17 @@ import {
   resolveSortOrder,
   resolveVisibleColumns,
 } from './core/normalize'
-import TableHeaderFilter from './render/TableHeaderFilter.vue'
-import TableLoadingLine from './render/TableLoadingLine.vue'
-import { generateColumnContent, getItemValue, resolveRowKey, sameTableItem } from './core/utils'
+import {
+  getColStyleForHeader,
+  getFixedDistanceStyle,
+  resolveCellAlignClass,
+  useDisplayHeaderRows,
+} from './core/layout'
+import TableThead from './render/TableThead.vue'
+import TableTbody from './render/TableTbody.vue'
+import { resolveRowKey, sameTableItem, stripSyntheticFields } from './core/utils'
 defineOptions({ inheritAttrs: false })
+
 
 const props = withDefaults(defineProps<TableProps>(), {
   rows: () => [],
@@ -316,7 +318,7 @@ const columnAlignMap = computed(() => {
 
 const dataTable = ref<HTMLElement>()
 const scrollbarRef = ref<ScrollbarInstance>()
-provide('dataTable', dataTable)
+provide(M_TABLE_ROOT_KEY, dataTable)
 
 const showShadow = ref(false)
 const showShadowEnd = ref(false)
@@ -379,7 +381,7 @@ const {
   updateSortField,
   isMultiSorting,
   getMultiSortNumber,
-} = useHeaders(
+} = useHeaders({
   showIndexSymbol,
   checkboxColumnWidth,
   expandColumnWidth,
@@ -399,8 +401,8 @@ const {
   multiSort,
   sortMode,
   updateServerOptionsSort,
-  tableEmit,
-)
+  emits: tableEmit,
+})
 
 /** In `emit` sort mode the parent owns sorting — skip client-side sorting entirely. */
 const effectiveClientSortOptions = computed(() =>
@@ -467,9 +469,9 @@ const {
   multipleSelectStatus,
   pageItems,
   itemsInPage,
+  isItemSelected,
 } = usePageItems(
   currentPaginationNumber,
-  isMultipleSelectable,
   isServerSideMode,
   items,
   rowsPerPageRef,
@@ -495,7 +497,7 @@ const {
 } = useExpandableRow(expandedRowKeys, rowKey, prevPageEndIndex, tableEmit)
 
 const { fixedHeaders, lastFixedColumn, firstRightFixedColumn, fixedColumnsInfos } = useFixedColumn(headersForRender)
-const { clickRow, dblClickRow } = useClickRow(isMultipleSelectable, showIndex, tableEmit)
+const { clickRow, dblClickRow } = useClickRow(tableEmit)
 
 const virtualEnabled = computed(
   () =>
@@ -534,8 +536,9 @@ const footerRows = computed(() => {
   })
 })
 
-const editingCell = ref<{ rowKey: string | number; column: string } | null>(null)
-const editingValue = ref('')
+const { onResizeStart } = useColumnResize(headers, activeColumnWidths, setActiveColumnWidths)
+
+const displayHeaderRows = useDisplayHeaderRows(headerRows, headersForRender)
 
 function contextMenuRow(item: TableItem, event: MouseEvent) {
   event.preventDefault()
@@ -543,94 +546,25 @@ function contextMenuRow(item: TableItem, event: MouseEvent) {
 }
 
 function getColStyle(header: HeaderForRender) {
-  const source = headers.value.find((item) => item.value === header.value)
-  const width = header.width ?? source?.width ?? (fixedHeaders.value.length ? 100 : null)
-  if (width && useTableFixedLayout.value) return `width: ${width}px; min-width: ${width}px;`
-  const minWidth = header.minWidth ?? source?.minWidth
-  if (minWidth && useTableFixedLayout.value) return `min-width: ${minWidth}px;`
-  return undefined
+  return getColStyleForHeader(
+    header,
+    headers.value,
+    fixedHeaders.value.length,
+    useTableFixedLayout.value,
+  )
 }
 
 function getFixedDistance(column: string, type: 'td' | 'th' = 'th') {
-  if (!fixedHeaders.value.length) return undefined
-  const columnInfo = fixedColumnsInfos.value.find((info) => info.value === column)
-  if (columnInfo) {
-    const side = columnInfo.fixed === 'right' ? 'right' : 'left'
-    return `${side}: ${columnInfo.distance}px;z-index: ${type === 'th' ? 3 : 1};position: sticky;`
-  }
-  return undefined
-}
-
-function headerCellClass(header: HeaderForRender, index: number) {
-  const custom = typeof headerItemClassName.value === 'string'
-    ? headerItemClassName.value
-    : headerItemClassName.value(header as TableHeader, index + 1)
-  const isSelectionCell = header.value === SYNTHETIC.checkbox || header.value === SYNTHETIC.radio
-  return [
-    {
-      'm-table__cell--selection': isSelectionCell,
-      'm-table__header-cell--sortable': header.sortable,
-      'm-table__header-cell--ascending': header.sortable && header.sortType === 'asc',
-      'm-table__header-cell--descending': header.sortable && header.sortType === 'desc',
-      'm-table__header-cell--shadow': header.value === lastFixedColumn.value,
-      'm-table__header-cell--shadow-end': header.value === firstRightFixedColumn.value,
-      'm-table__header-cell--filterable': header.filterable,
-    },
-    custom,
-  ]
-}
-
-function headerInnerClass() {
-  return [
-    'm-table__header-inner',
-    `m-table__header-inner--${headerTextDirection.value}`,
-  ]
-}
-
-function cellAlignClass(direction: string) {
-  if (direction === 'center') return 'm-table__cell--center'
-  if (direction === 'right' || direction === 'end') return 'm-table__cell--right'
-  return undefined
+  return getFixedDistanceStyle(
+    column,
+    type,
+    fixedColumnsInfos.value,
+    fixedHeaders.value.length > 0,
+  )
 }
 
 function resolveCellAlign(column: string) {
-  const columnAlign = columnAlignMap.value.get(column)
-  if (columnAlign) return cellAlignClass(columnAlign)
-  return cellAlignClass(bodyTextDirection.value)
-}
-
-function cellSlotProps(column: string, item: TableItem) {
-  return {
-    row: item,
-    item,
-    column,
-    value: getItemValue(column, item),
-  }
-}
-
-function columnOverflowTooltip(column: string) {
-  if (props.showOverflowTooltip) return true
-  const header = headers.value.find((item) => item.value === column)
-  return Boolean(header?.showOverflowTooltip)
-}
-
-function getAriaSort(header: HeaderForRender): 'ascending' | 'descending' | 'none' | undefined {
-  if (!header.sortable) return undefined
-  if (header.sortType === 'asc') return 'ascending'
-  if (header.sortType === 'desc') return 'descending'
-  return 'none'
-}
-
-function onSortHeaderClick(header: HeaderForRender) {
-  if (header.sortable && header.sortType) {
-    updateSortField(header.value, header.sortType)
-  }
-}
-
-function onSortHeaderKeydown(header: HeaderForRender, event: KeyboardEvent) {
-  if (event.key !== 'Enter' && event.key !== ' ') return
-  event.preventDefault()
-  onSortHeaderClick(header)
+  return resolveCellAlignClass(column, columnAlignMap.value, bodyTextDirection.value)
 }
 
 function getRowKey(item: TableItem, index: number) {
@@ -648,8 +582,23 @@ function bodyRowIndex(index: number) {
   return virtualEnabled.value ? virtualStartIndex.value + index : index
 }
 
+const {
+  editingValue,
+  isEditing,
+  commitEdit,
+  cancelEdit,
+  onCellActivate,
+  setEditingValue,
+} = useCellEdit({
+  editConfig,
+  headers,
+  getBodyRowKey,
+  bodyRowIndex,
+  onEditChange: (payload) => emit('edit-change', payload),
+})
+
 function isRowSelected(item: TableItem, index: number) {
-  if (isMultipleSelectable.value) return Boolean(item[SYNTHETIC.checkbox])
+  if (isMultipleSelectable.value) return isItemSelected(item)
   if (isSingleSelectable.value) return singleSelectedRowKey.value === getBodyRowKey(item, index)
   return false
 }
@@ -657,15 +606,6 @@ function isRowSelected(item: TableItem, index: number) {
 function onSingleSelect(item: TableItem) {
   emit('update:selectedItem', stripSyntheticFields(item))
   emit('select-row', stripSyntheticFields(item))
-}
-
-function stripSyntheticFields(item: TableItem): TableItem {
-  const next = { ...item }
-  delete next[SYNTHETIC.index]
-  delete next[SYNTHETIC.checkbox]
-  delete next.index
-  delete next.checkbox
-  return next
 }
 
 function onPaginationRowsChange(rows: number) {
@@ -700,77 +640,6 @@ function onRowDblClick(item: TableItem, index: number, event: Event) {
   dblClickRow(item, prevPageEndIndex.value + bodyRowIndex(index), event)
 }
 
-function resolveSpan(
-  item: TableItem,
-  column: string,
-  rowIndex: number,
-  columnIndex: number,
-): { rowspan: number; colspan: number } {
-  if (!spanMethod.value) return { rowspan: 1, colspan: 1 }
-  const header = headersForRender.value.find((entry) => entry.value === column) as TableHeader | undefined
-  const result: TableSpanMethodResult = spanMethod.value({
-    row: item,
-    column: header ?? { text: column, value: column },
-    rowIndex,
-    columnIndex,
-  })
-  if (Array.isArray(result)) {
-    return { rowspan: result[0] ?? 1, colspan: result[1] ?? 1 }
-  }
-  if (result && typeof result === 'object') {
-    return {
-      rowspan: result.rowspan ?? 1,
-      colspan: result.colspan ?? 1,
-    }
-  }
-  return { rowspan: 1, colspan: 1 }
-}
-
-function isColumnEditable(column: string) {
-  if (!editConfig.value) return false
-  if (isSyntheticColumn(column)) return false
-  const header = headers.value.find((item) => item.value === column)
-  return Boolean(header?.editable)
-}
-
-function isEditing(item: TableItem, index: number, column: string) {
-  if (!editingCell.value) return false
-  return editingCell.value.rowKey === getBodyRowKey(item, index) && editingCell.value.column === column
-}
-
-function beginEdit(item: TableItem, index: number, column: string) {
-  if (!isColumnEditable(column)) return
-  editingCell.value = { rowKey: getBodyRowKey(item, index), column }
-  editingValue.value = String(getItemValue(column, item) ?? '')
-}
-
-function commitEdit(item: TableItem, index: number, column: string) {
-  if (!editingCell.value) return
-  const oldValue = getItemValue(column, item)
-  const value = editingValue.value
-  const payload: TableEditChangePayload = {
-    row: stripSyntheticFields(item),
-    column,
-    value,
-    oldValue,
-    rowIndex: bodyRowIndex(index),
-  }
-  editingCell.value = null
-  if (value === oldValue || String(oldValue ?? '') === value) return
-  emit('edit-change', payload)
-}
-
-function cancelEdit() {
-  editingCell.value = null
-}
-
-function onCellActivate(item: TableItem, index: number, column: string, event: MouseEvent) {
-  if (!editConfig.value || !isColumnEditable(column)) return
-  const trigger = editConfig.value.trigger ?? 'click'
-  if (trigger === 'click' && event.type === 'click') beginEdit(item, index, column)
-  if (trigger === 'dblclick' && event.type === 'dblclick') beginEdit(item, index, column)
-}
-
 function onHeaderFilterApply(columnKey: string, value: unknown) {
   const next = { ...(activeFilters.value ?? {}) }
   if (value == null || value === '' || (Array.isArray(value) && value.length === 0)) {
@@ -781,103 +650,19 @@ function onHeaderFilterApply(columnKey: string, value: unknown) {
   setActiveFilters(Object.keys(next).length ? next : null)
 }
 
-function getHeaderFilterValue(columnKey: string) {
-  return activeFilters.value?.[columnKey]
-}
-
-function enrichHeaderRow(row: TableHeader[]): HeaderForRender[] {
-  return row.map((header) => {
-    const isGroup = (header.colspan ?? 1) > 1
-    const rendered = headersForRender.value.find((item) => item.value === header.value)
-    if (!rendered || isGroup) {
-      return {
-        text: header.text,
-        value: header.value,
-        width: header.width,
-        minWidth: header.minWidth,
-        fixed: header.fixed,
-        colspan: header.colspan,
-        rowspan: header.rowspan,
-        sortable: false,
-        filterable: false,
-        resizable: false,
-      }
-    }
-    return {
-      ...rendered,
-      colspan: header.colspan,
-      rowspan: header.rowspan,
-      width: rendered.width ?? header.width,
-      minWidth: rendered.minWidth ?? header.minWidth,
-    }
-  })
-}
-
-const displayHeaderRows = computed((): HeaderForRender[][] => {
-  if (headerRows.value.length <= 1) {
-    return [headersForRender.value]
+function onSortHeader(header: HeaderForRender) {
+  if (header.sortable && header.sortType) {
+    updateSortField(header.value, header.sortType)
   }
-  const depth = headerRows.value.length
-  const [first, ...rest] = headerRows.value
-  const synthetic = headersForRender.value
-    .filter((header) => isSyntheticColumn(header.value))
-    .map((header) => ({
-      ...header,
-      rowspan: depth,
-      colspan: 1,
-    }))
-  return [[...synthetic, ...enrichHeaderRow(first ?? [])], ...rest.map(enrichHeaderRow)]
-})
-
-function cellSpan(
-  item: TableItem,
-  column: string,
-  rowIndex: number,
-  columnIndex: number,
-) {
-  return resolveSpan(item, column, rowIndex, columnIndex)
 }
 
-function setEditingValue(value: unknown) {
-  editingValue.value = String(value ?? '')
+function syncViewportHeight() {
+  const wrap = scrollbarRef.value?.wrapRef
+  if (wrap) viewportHeight.value = wrap.clientHeight
 }
 
-// --- column resize ---
-const resizing = ref<{ key: string; startX: number; startWidth: number } | null>(null)
-
-function onResizeStart(header: HeaderForRender, event: MouseEvent) {
-  if (!header.resizable || isSyntheticColumn(header.value)) return
-  event.preventDefault()
-  event.stopPropagation()
-  const width = header.width
-    ?? headers.value.find((item) => item.value === header.value)?.width
-    ?? (event.currentTarget as HTMLElement).parentElement?.getBoundingClientRect().width
-    ?? 100
-  resizing.value = { key: header.value, startX: event.clientX, startWidth: width }
-  window.addEventListener('mousemove', onResizeMove)
-  window.addEventListener('mouseup', onResizeEnd)
-}
-
-function onResizeMove(event: MouseEvent) {
-  if (!resizing.value) return
-  const header = headers.value.find((item) => item.value === resizing.value!.key)
-  const minWidth = header?.minWidth ?? 40
-  const nextWidth = Math.max(minWidth, resizing.value.startWidth + (event.clientX - resizing.value.startX))
-  setActiveColumnWidths({
-    ...(activeColumnWidths.value ?? {}),
-    [resizing.value.key]: nextWidth,
-  })
-}
-
-function onResizeEnd() {
-  resizing.value = null
-  window.removeEventListener('mousemove', onResizeMove)
-  window.removeEventListener('mouseup', onResizeEnd)
-}
-
-onBeforeUnmount(() => {
-  window.removeEventListener('mousemove', onResizeMove)
-  window.removeEventListener('mouseup', onResizeEnd)
+onMounted(() => {
+  if (virtualEnabled.value) syncViewportHeight()
 })
 
 watch(() => props.currentRowKey, (value) => {
@@ -901,11 +686,21 @@ watch(currentPaginationNumber, (value) => {
   emit('update:page', value)
 })
 
-watch(virtualEnabled, (enabled) => {
+watch(virtualEnabled, async (enabled) => {
   if (!enabled) return
-  const wrap = scrollbarRef.value?.wrapRef
-  if (wrap) viewportHeight.value = wrap.clientHeight
+  await nextTick()
+  syncViewportHeight()
 })
+
+const tbodyPagination = computed(() => ({
+  isFirstPage: isFirstPage.value,
+  isLastPage: isLastPage.value,
+  currentPaginationNumber: currentPaginationNumber.value,
+  maxPaginationNumber: maxPaginationNumber.value,
+  nextPage,
+  prevPage,
+  updatePage,
+}))
 
 defineExpose({
   currentPageFirstIndex,
@@ -957,264 +752,99 @@ defineExpose({
               >
             </colgroup>
             <slot v-if="slots['customize-headers']" name="customize-headers" />
-            <thead
+            <TableThead
               v-else-if="headersForRender.length && showHeader"
-              class="m-table__header"
-              :class="[headerClassName]"
+              :rows="displayHeaderRows"
+              :header-class-name="headerClassName"
+              :header-item-class-name="headerItemClassName"
+              :header-text-direction="headerTextDirection"
+              :multi-sort="multiSort"
+              :multiple-select-status="multipleSelectStatus"
+              :last-fixed-column="lastFixedColumn"
+              :first-right-fixed-column="firstRightFixedColumn"
+              :fixed-columns-infos="fixedColumnsInfos"
+              :has-fixed-headers="fixedHeaders.length > 0"
+              :filter-values="activeFilters"
+              :is-multi-sorting="isMultiSorting"
+              :get-multi-sort-number="getMultiSortNumber"
+              @sort="onSortHeader"
+              @toggle-select-all="onToggleSelectAll"
+              @filter-apply="onHeaderFilterApply"
+              @resize-start="onResizeStart"
             >
-              <tr v-for="(row, rowIndex) in displayHeaderRows" :key="rowIndex">
-                <th
-                  v-for="(header, index) in row"
-                  :key="`${header.value}-${index}`"
-                  :class="headerCellClass(header, index)"
-                  :style="getFixedDistance(header.value)"
-                  :colspan="header.colspan || 1"
-                  :rowspan="header.rowspan || 1"
-                  :aria-sort="getAriaSort(header)"
-                  :tabindex="header.sortable ? 0 : undefined"
-                  @click.stop="onSortHeaderClick(header)"
-                  @keydown="onSortHeaderKeydown(header, $event)"
-                >
-                  <div
-                    v-if="header.value === SYNTHETIC.checkbox"
-                    class="m-table__cell-inner m-table__cell-inner--selection"
-                  >
-                    <MCheckbox
-                      :key="multipleSelectStatus"
-                      :model-value="multipleSelectStatus === 'allSelected'"
-                      :indeterminate="multipleSelectStatus === 'partSelected'"
-                      :aria-label="locale.selectAllPage"
-                      @update:model-value="onToggleSelectAll"
-                      @click.stop
-                    />
-                  </div>
-                  <div
-                    v-else-if="header.value === SYNTHETIC.radio"
-                    class="m-table__cell-inner m-table__cell-inner--selection"
-                    role="columnheader"
-                    :aria-label="locale.selectOption"
-                  />
-                  <span v-else :class="headerInnerClass()">
-                    <slot v-if="slots[`header-${header.value}`]" :name="`header-${header.value}`" v-bind="header" />
-                    <slot v-else-if="slots.header" name="header" v-bind="header" />
-                    <span v-else class="m-table__header-text" :title="header.text">{{ header.text }}</span>
-                    <span v-if="header.sortable" class="m-table__sort" aria-hidden="true">
-                      <MIcon
-                        name="triangle-up"
-                        class="m-table__sort-icon m-table__sort-icon--ascending"
-                      />
-                      <MIcon
-                        name="triangle-down"
-                        class="m-table__sort-icon m-table__sort-icon--descending"
-                      />
-                    </span>
-                    <span v-if="multiSort && isMultiSorting(header.value)" class="m-table__multi-sort-number">
-                      {{ getMultiSortNumber(header.value) }}
-                    </span>
-                    <TableHeaderFilter
-                      v-if="header.filterable"
-                      :column-key="header.value"
-                      :label="header.text"
-                      :filters="header.filters"
-                      :model-value="getHeaderFilterValue(header.value)"
-                      @apply="(value) => onHeaderFilterApply(header.value, value)"
-                      @clear="onHeaderFilterApply(header.value, null)"
-                    />
-                  </span>
-                  <span
-                    v-if="header.resizable"
-                    class="m-table__resize-handle"
-                    @mousedown="onResizeStart(header, $event)"
-                    @click.stop
-                  />
-                </th>
-              </tr>
-            </thead>
-            <slot v-if="ifHasBodySlot" name="body" v-bind="pageItems" />
-            <tbody
-              v-else-if="headerColumns.length"
-              class="m-table__body"
-            >
-              <slot
-                name="body-prepend"
-                v-bind="{
-                  items: pageItems,
-                  pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage },
-                  headers: headersForRender,
-                }"
-              />
-              <tr
-                v-if="virtualEnabled && offsetTop > 0"
-                class="m-table__virtual-spacer"
-                aria-hidden="true"
+              <template
+                v-for="(_, name) in slots"
+                :key="name"
+                #[name]="slotData"
               >
-                <td
-                  :colspan="headersForRender.length"
-                  :style="{ height: `${offsetTop}px`, padding: 0, border: 0 }"
+                <slot
+                  :name="name"
+                  v-bind="slotData ?? {}"
                 />
-              </tr>
-              <template v-for="(item, index) in bodyItems" :key="getBodyRowKey(item, index)">
-                <tr
-                  :class="[
-                    {
-                      'm-table__row--striped': resolvedStriped && (bodyRowIndex(index) + 1) % 2 === 0,
-                      'm-table__row--selected': isRowSelected(item, index),
-                      'm-table__row--current': isCurrentRow(item, index),
-                    },
-                    typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, bodyRowIndex(index) + 1),
-                  ]"
-                  @click="($event) => {
-                    onRowClick(item, index, $event)
-                    clickRowToExpand && toggleExpandRow(item, bodyRowIndex(index), $event)
-                  }"
-                  @dblclick="($event) => onRowDblClick(item, index, $event)"
-                  @contextmenu="($event) => contextMenuRow(item, $event)"
-                >
-                  <template v-for="(column, i) in headerColumns" :key="i">
-                    <td
-                      v-if="cellSpan(item, column, bodyRowIndex(index), i).rowspan > 0 && cellSpan(item, column, bodyRowIndex(index), i).colspan > 0"
-                      :style="getFixedDistance(column, 'td')"
-                      :rowspan="cellSpan(item, column, bodyRowIndex(index), i).rowspan"
-                      :colspan="cellSpan(item, column, bodyRowIndex(index), i).colspan"
-                      :class="[
-                        {
-                          'm-table__cell--shadow': column === lastFixedColumn,
-                          'm-table__cell--shadow-end': column === firstRightFixedColumn,
-                          'm-table__cell--expand': column === SYNTHETIC.expand,
-                          'm-table__cell--selection': column === SYNTHETIC.checkbox || column === SYNTHETIC.radio,
-                          'm-table__cell--editing': isEditing(item, index, column),
-                        },
-                        resolveCellAlign(column),
-                        typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, bodyRowIndex(index) + 1),
-                      ]"
-                      @click="(event) => {
-                        if (column === SYNTHETIC.expand) toggleExpandRow(item, bodyRowIndex(index), event)
-                        else onCellActivate(item, index, column, event)
-                      }"
-                      @dblclick="(event) => onCellActivate(item, index, column, event)"
-                    >
-                      <div
-                        class="m-table__cell-inner"
-                        :class="{
-                          'm-table__cell-inner--expand': column === SYNTHETIC.expand,
-                          'm-table__cell-inner--selection': column === SYNTHETIC.checkbox || column === SYNTHETIC.radio,
-                        }"
-                      >
-                        <template v-if="isEditing(item, index, column)">
-                          <slot
-                            v-if="slots[`edit-${column}`]"
-                            :name="`edit-${column}`"
-                            v-bind="{
-                              ...cellSlotProps(column, item),
-                              value: editingValue,
-                              setValue: setEditingValue,
-                              commit: () => commitEdit(item, index, column),
-                              cancel: cancelEdit,
-                            }"
-                          />
-                          <MInput
-                            v-else
-                            v-model="editingValue"
-                            size="sm"
-                            fluid
-                            @keydown.enter.prevent="commitEdit(item, index, column)"
-                            @keydown.esc.prevent="cancelEdit"
-                            @blur="commitEdit(item, index, column)"
-                            @click.stop
-                          />
-                        </template>
-                        <slot
-                          v-else-if="slots[`cell-${column}`]"
-                          :name="`cell-${column}`"
-                          v-bind="cellSlotProps(column, item)"
-                        />
-                        <slot
-                          v-else-if="slots[`cell-${column.toLowerCase()}`]"
-                          :name="`cell-${column.toLowerCase()}`"
-                          v-bind="cellSlotProps(column, item)"
-                        />
-                        <template v-else-if="column === SYNTHETIC.expand">
-                          <button
-                            type="button"
-                            class="m-table__expand-btn"
-                            :class="{ 'm-table__expand-btn--expanded': isRowExpanded(item, bodyRowIndex(index)) }"
-                            :aria-expanded="isRowExpanded(item, bodyRowIndex(index))"
-                            :aria-label="isRowExpanded(item, bodyRowIndex(index)) ? locale.collapse : locale.expand"
-                            @click.stop="toggleExpandRow(item, bodyRowIndex(index), $event)"
-                          >
-                            <MIcon name="chevron-right" />
-                          </button>
-                        </template>
-                        <template v-else-if="column === SYNTHETIC.checkbox">
-                          <MCheckbox
-                            :model-value="Boolean(item[SYNTHETIC.checkbox])"
-                            :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + bodyRowIndex(index)))"
-                            @update:model-value="toggleSelectItem(item)"
-                            @click.stop
-                          />
-                        </template>
-                        <template v-else-if="column === SYNTHETIC.radio">
-                          <MRadio
-                            :model-value="singleSelectedRowKey ?? undefined"
-                            :value="getBodyRowKey(item, index)"
-                            :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + bodyRowIndex(index)))"
-                            @update:model-value="onSingleSelect(item)"
-                            @click.stop
-                          />
-                        </template>
-                        <slot
-                          v-else-if="slots['body-cell']"
-                          name="body-cell"
-                          v-bind="{ column, item, row: item, value: getItemValue(column, item) }"
-                        />
-                        <template v-else-if="columnRenderMap.get(column)">
-                          <span class="m-table__cell-text">{{ columnRenderMap.get(column)!(item) }}</span>
-                        </template>
-                        <MTooltip
-                          v-else
-                          :content="generateColumnContent(column, item)"
-                          :disabled="!columnOverflowTooltip(column)"
-                        >
-                          <span class="m-table__tooltip-trigger">
-                            <span class="m-table__cell-text">{{ generateColumnContent(column, item) }}</span>
-                          </span>
-                        </MTooltip>
-                      </div>
-                    </td>
-                  </template>
-                </tr>
-                <tr
-                  v-if="ifHasExpandSlot && isRowExpanded(item, bodyRowIndex(index))"
-                  :class="[
-                    { 'm-table__row--striped': resolvedStriped && (bodyRowIndex(index) + 1) % 2 === 0 },
-                    typeof bodyExpandRowClassName === 'string' ? bodyExpandRowClassName : bodyExpandRowClassName(item, bodyRowIndex(index) + 1),
-                  ]"
-                >
-                  <td :colspan="headersForRender.length" class="m-table__cell--expanded">
-                    <TableLoadingLine v-if="(item as TableItem).expandLoading" />
-                    <slot name="expansion" v-bind="{ row: item }" />
-                  </td>
-                </tr>
               </template>
-              <tr
-                v-if="virtualEnabled && offsetBottom > 0"
-                class="m-table__virtual-spacer"
-                aria-hidden="true"
+            </TableThead>
+            <slot
+              v-if="ifHasBodySlot"
+              name="body"
+              v-bind="pageItems"
+            />
+            <TableTbody
+              v-else-if="headerColumns.length"
+              :body-items="bodyItems"
+              :page-items="pageItems"
+              :headers-for-render="headersForRender"
+              :header-columns="headerColumns"
+              :column-align-map="columnAlignMap"
+              :column-render-map="columnRenderMap"
+              :body-text-direction="bodyTextDirection"
+              :body-row-class-name="bodyRowClassName"
+              :body-expand-row-class-name="bodyExpandRowClassName"
+              :body-item-class-name="bodyItemClassName"
+              :striped="resolvedStriped"
+              :last-fixed-column="lastFixedColumn"
+              :first-right-fixed-column="firstRightFixedColumn"
+              :fixed-columns-infos="fixedColumnsInfos"
+              :has-fixed-headers="fixedHeaders.length > 0"
+              :span-method="spanMethod"
+              :show-overflow-tooltip="props.showOverflowTooltip"
+              :headers="headers"
+              :virtual-enabled="virtualEnabled"
+              :offset-top="offsetTop"
+              :offset-bottom="offsetBottom"
+              :current-page-first-index="currentPageFirstIndex"
+              :single-selected-row-key="singleSelectedRowKey"
+              :click-row-to-expand="clickRowToExpand"
+              :if-has-expand-slot="ifHasExpandSlot"
+              :editing-value="editingValue"
+              :pagination="tbodyPagination"
+              :body-row-index="bodyRowIndex"
+              :get-body-row-key="getBodyRowKey"
+              :is-row-selected="isRowSelected"
+              :is-current-row="isCurrentRow"
+              :is-row-expanded="isRowExpanded"
+              :is-editing="isEditing"
+              @row-click="onRowClick"
+              @row-dblclick="onRowDblClick"
+              @row-contextmenu="contextMenuRow"
+              @toggle-expand="(item, pageIndex, event) => toggleExpandRow(item, pageIndex, event)"
+              @cell-activate="onCellActivate"
+              @toggle-select="toggleSelectItem"
+              @single-select="onSingleSelect"
+              @commit-edit="commitEdit"
+              @cancel-edit="cancelEdit"
+              @update:editing-value="setEditingValue"
+            >
+              <template
+                v-for="(_, name) in slots"
+                :key="name"
+                #[name]="slotData"
               >
-                <td
-                  :colspan="headersForRender.length"
-                  :style="{ height: `${offsetBottom}px`, padding: 0, border: 0 }"
+                <slot
+                  :name="name"
+                  v-bind="slotData ?? {}"
                 />
-              </tr>
-              <slot
-                name="body-append"
-                v-bind="{
-                  items: pageItems,
-                  pagination: { isFirstPage, isLastPage, currentPaginationNumber, maxPaginationNumber, nextPage, prevPage, updatePage },
-                  headers: headersForRender,
-                }"
-              />
-            </tbody>
+              </template>
+            </TableTbody>
             <tfoot v-if="showFooter && (ifHasFooterSlot || footerRows.length)" class="m-table__tfoot">
               <slot
                 v-if="ifHasFooterSlot"

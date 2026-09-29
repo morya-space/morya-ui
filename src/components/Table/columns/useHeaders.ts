@@ -7,28 +7,52 @@ import { SYNTHETIC } from './keys'
 /** 选择列默认宽度（容纳标准 MCheckbox / MRadio + focus ring） */
 export const DEFAULT_SELECTION_COLUMN_WIDTH = 48
 
-export function useHeaders(
-  showIndexSymbol: Ref<string>,
-  checkboxColumnWidth: Ref<number | null>,
-  expandColumnWidth: Ref<number>,
-  fixedCheckbox: Ref<boolean>,
-  fixedExpand: Ref<boolean>,
-  fixedIndex: Ref<boolean>,
-  headers: Ref<TableHeader[]>,
-  ifHasExpandSlot: ComputedRef<boolean>,
-  indexColumnWidth: Ref<number>,
-  selectionColumn: ComputedRef<'checkbox' | 'radio' | null>,
-  isServerSideMode: ComputedRef<boolean>,
-  mustSort: Ref<boolean>,
-  serverOptionsComputed: WritableComputedRef<ServerOptionsComputed | null>,
-  showIndex: Ref<boolean>,
-  sortBy: Ref<string | string[]>,
-  sortType: Ref<TableSortType | TableSortType[]>,
-  multiSort: Ref<boolean>,
-  sortMode: Ref<TableSortMode>,
-  updateServerOptionsSort: (newSortBy: string, newSortType: TableSortType | null) => void,
-  emits: (event: EmitsEventName, ...args: unknown[]) => void,
-) {
+export interface UseHeadersOptions {
+  showIndexSymbol: Ref<string>
+  checkboxColumnWidth: Ref<number | null>
+  expandColumnWidth: Ref<number>
+  fixedCheckbox: Ref<boolean>
+  fixedExpand: Ref<boolean>
+  fixedIndex: Ref<boolean>
+  headers: Ref<TableHeader[]>
+  ifHasExpandSlot: ComputedRef<boolean>
+  indexColumnWidth: Ref<number>
+  selectionColumn: ComputedRef<'checkbox' | 'radio' | null>
+  isServerSideMode: ComputedRef<boolean>
+  mustSort: Ref<boolean>
+  serverOptionsComputed: WritableComputedRef<ServerOptionsComputed | null>
+  showIndex: Ref<boolean>
+  sortBy: Ref<string | string[]>
+  sortType: Ref<TableSortType | TableSortType[]>
+  multiSort: Ref<boolean>
+  sortMode: Ref<TableSortMode>
+  updateServerOptionsSort: (newSortBy: string, newSortType: TableSortType | null) => void
+  emits: (event: EmitsEventName, ...args: unknown[]) => void
+}
+
+export function useHeaders(options: UseHeadersOptions) {
+  const {
+    showIndexSymbol,
+    checkboxColumnWidth,
+    expandColumnWidth,
+    fixedCheckbox,
+    fixedExpand,
+    fixedIndex,
+    headers,
+    ifHasExpandSlot,
+    indexColumnWidth,
+    selectionColumn,
+    isServerSideMode,
+    mustSort,
+    serverOptionsComputed,
+    showIndex,
+    sortBy,
+    sortType,
+    multiSort,
+    sortMode,
+    updateServerOptionsSort,
+    emits,
+  } = options
   const hasFixedColumnsFromUser = computed(() => headers.value.some((header) => header.fixed))
   const leftFixedHeadersFromUser = computed(() =>
     hasFixedColumnsFromUser.value

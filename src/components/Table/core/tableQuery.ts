@@ -1,5 +1,5 @@
 import type { TableFilterOption, TableItem } from '../types'
-import { getItemValue, sameTableItem } from './utils'
+import { getItemValue, sameTableItem, stripSyntheticFields } from './utils'
 
 /** Compare two cell values; numeric when both sides are numbers, lexical otherwise. */
 export function compareTableValues(left: unknown, right: unknown, sortDesc: boolean): number {
@@ -170,17 +170,16 @@ export function toggleExpandedRowKeys(
 
 /**
  * Compute the next multi-select selection for a row toggle.
- * Strips transient `checkbox` / `index` fields from the toggled row.
+ * Selection state is derived from the current `selected` list (by rowKey),
+ * not from transient checkbox fields on the row object.
  */
 export function toggleSelectedItems(
   selected: TableItem[],
   item: TableItem,
   rowKey = 'id',
 ): { next: TableItem[]; selected: boolean; row: TableItem } {
-  const row = { ...item }
-  delete row.checkbox
-  delete row.index
-  const isAlreadyChecked = Boolean(item.checkbox)
+  const row = stripSyntheticFields(item)
+  const isAlreadyChecked = selected.some((entry) => sameTableItem(entry, row, rowKey))
   if (!isAlreadyChecked) {
     return { next: [row, ...selected], selected: true, row }
   }

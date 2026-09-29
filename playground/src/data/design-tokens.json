@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T07:37:54.439Z",
+  "generatedAt": "2026-09-28T13:39:38.409Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -3253,7 +3253,7 @@
       "name": "--m-shadow-lg",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 1rem 3rem rgb(0 0 0 / 0.55)",
+      "default": "0 12px 32px 4px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.08)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Lg",
         "en-US": "Shadow token: Shadow Lg"
@@ -3263,7 +3263,7 @@
       "name": "--m-shadow-md",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 0.75rem 2rem rgb(0 0 0 / 0.45)",
+      "default": "0 0 12px rgba(0, 0, 0, 0.12)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Md",
         "en-US": "Shadow token: Shadow Md"
@@ -3283,7 +3283,7 @@
       "name": "--m-shadow-sm",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 1px 2px rgb(0 0 0 / 0.45)",
+      "default": "0 0 6px rgba(0, 0, 0, 0.12)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Sm",
         "en-US": "Shadow token: Shadow Sm"

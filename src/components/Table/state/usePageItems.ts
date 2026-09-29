@@ -3,11 +3,13 @@ import type { TableItem } from '../types'
 import type { MultipleSelectStatus } from './internal'
 import { computed } from 'vue'
 import { SYNTHETIC } from '../columns/keys'
-import { sameTableItem } from '../core/utils'
+import {
+  buildSelectedKeySet,
+  isItemInSelection,
+} from '../core/utils'
 
 export function usePageItems(
   currentPaginationNumber: Ref<number>,
-  isMultipleSelectable: ComputedRef<boolean>,
   isServerSideMode: ComputedRef<boolean>,
   items: Ref<TableItem[]>,
   rowsPerPageRef: Ref<number>,
@@ -33,13 +35,25 @@ export function usePageItems(
     return totalItems.value.slice(currentPageFirstIndex.value - 1, currentPageLastIndex.value)
   })
 
-  const itemsWithIndex = computed(() => {
+  const pageItems = computed(() => {
     if (!showIndex.value) return itemsInPage.value
     return itemsInPage.value.map((item, index) => ({
       ...item,
       [SYNTHETIC.index]: currentPageFirstIndex.value + index,
     }))
   })
+
+  const selectedKeySet = computed(() =>
+    buildSelectedKeySet(selectItemsComputed.value, rowKey.value),
+  )
+
+  const isItemSelected = (item: TableItem) =>
+    isItemInSelection(
+      item,
+      selectItemsComputed.value,
+      selectedKeySet.value,
+      rowKey.value,
+    )
 
   /** Header checkbox status is scoped to the current page. */
   const multipleSelectStatus = computed((): MultipleSelectStatus => {
@@ -48,26 +62,11 @@ export function usePageItems(
 
     let selectedOnPage = 0
     for (const item of page) {
-      if (selectItemsComputed.value.some((selected) => sameTableItem(selected, item, rowKey.value))) {
-        selectedOnPage += 1
-      }
+      if (isItemSelected(item)) selectedOnPage += 1
     }
     if (selectedOnPage === 0) return 'noneSelected'
     if (selectedOnPage === page.length) return 'allSelected'
     return 'partSelected'
-  })
-
-  const pageItems = computed(() => {
-    if (!isMultipleSelectable.value) return itemsWithIndex.value
-    return itemsWithIndex.value.map((item) => {
-      const clone = { ...item }
-      delete clone[SYNTHETIC.index]
-      delete clone[SYNTHETIC.checkbox]
-      const isSelected = selectItemsComputed.value.some((selectItem) =>
-        sameTableItem(selectItem, clone as TableItem, rowKey.value),
-      )
-      return { ...item, [SYNTHETIC.checkbox]: isSelected }
-    })
   })
 
   return {
@@ -76,5 +75,7 @@ export function usePageItems(
     multipleSelectStatus,
     pageItems,
     itemsInPage,
+    isItemSelected,
+    selectedKeySet,
   }
 }

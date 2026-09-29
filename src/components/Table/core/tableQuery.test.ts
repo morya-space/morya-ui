@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { SYNTHETIC } from '../columns/keys'
 import {
   compareTableValues,
   filterTableItems,
@@ -43,12 +44,19 @@ describe('tableQuery', () => {
     expect(toggleExpandedRowKeys([1], 2)).toEqual({ next: [1, 2], expanded: true })
     expect(toggleExpandedRowKeys([1, 2], 1)).toEqual({ next: [2], expanded: false })
 
-    const selected = toggleSelectedItems([], { id: 1, name: 'Ann', checkbox: false })
+    const selected = toggleSelectedItems([], { id: 1, name: 'Ann' })
     expect(selected.selected).toBe(true)
     expect(selected.row).toEqual({ id: 1, name: 'Ann' })
     expect(selected.next).toEqual([{ id: 1, name: 'Ann' }])
-    const removed = toggleSelectedItems(selected.next, { id: 1, name: 'Ann', checkbox: true })
+    const removed = toggleSelectedItems(selected.next, { id: 1, name: 'Ann' })
     expect(removed.selected).toBe(false)
     expect(removed.next).toEqual([])
+    const withMeta = toggleSelectedItems([], {
+      id: 2,
+      name: 'Bob',
+      [SYNTHETIC.checkbox]: true,
+      [SYNTHETIC.index]: 1,
+    })
+    expect(withMeta.row).toEqual({ id: 2, name: 'Bob' })
   })
 })

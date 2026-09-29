@@ -1,20 +1,8 @@
-import type { Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { EmitsEventName } from './internal'
-import { SYNTHETIC } from '../columns/keys'
-
-function stripSynthetic(item: TableItem): TableItem {
-  const row = { ...item }
-  delete row.checkbox
-  delete row.index
-  delete row[SYNTHETIC.checkbox]
-  delete row[SYNTHETIC.index]
-  return row
-}
+import { stripSyntheticFields } from '../core/utils'
 
 export function useClickRow(
-  isMultipleSelectable: Ref<boolean> | { value: boolean },
-  showIndex: Ref<boolean>,
   emits: (event: EmitsEventName, ...args: unknown[]) => void,
 ) {
   const emitRow = (
@@ -23,7 +11,7 @@ export function useClickRow(
     index: number,
     nativeEvent: Event,
   ) => {
-    emits(eventName, { row: stripSynthetic(item), index }, nativeEvent)
+    emits(eventName, { row: stripSyntheticFields(item), index }, nativeEvent)
   }
 
   const clickRow = (item: TableItem, index: number, event: Event) => {

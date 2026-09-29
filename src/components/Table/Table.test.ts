@@ -146,6 +146,11 @@ describe('mTable', () => {
     })
     await wrapper.findAll('.m-checkbox__input')[1]!.setValue(true)
     expect(wrapper.emitted('update:selection')?.at(-1)?.[0]).toEqual([rows[0]])
+
+    await wrapper.setProps({ selection: [rows[0]] })
+    await wrapper.findAll('.m-checkbox__input')[1]!.setValue(false)
+    expect(wrapper.emitted('update:selection')?.at(-1)?.[0]).toEqual([])
+    expect(wrapper.emitted('deselect-row')?.at(-1)?.[0]).toEqual(rows[0])
   })
 
   it('emits selected-item in single-select mode', async () => {

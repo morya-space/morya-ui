@@ -1,3 +1,5 @@
+import type { InjectionKey, Ref } from 'vue'
+
 /** Internal synthetic column keys — never collide with user row fields. */
 export const SYNTHETIC = {
   expand: '__m_expand',
@@ -11,3 +13,6 @@ export type SyntheticColumnKey = (typeof SYNTHETIC)[keyof typeof SYNTHETIC]
 export function isSyntheticColumn(value: string): boolean {
   return (Object.values(SYNTHETIC) as string[]).includes(value)
 }
+
+/** Root table element ref for nested table parts. */
+export const M_TABLE_ROOT_KEY: InjectionKey<Ref<HTMLElement | undefined>> = Symbol('mTableRoot')

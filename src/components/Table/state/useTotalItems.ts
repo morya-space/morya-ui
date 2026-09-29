@@ -8,17 +8,7 @@ import {
   sortTableItems,
   toggleSelectedItems,
 } from '../core/tableQuery'
-import { SYNTHETIC } from '../columns/keys'
-import { sameTableItem } from '../core/utils'
-
-function stripRowMeta(item: TableItem): TableItem {
-  const next = { ...item }
-  delete next[SYNTHETIC.index]
-  delete next[SYNTHETIC.checkbox]
-  delete next.index
-  delete next.checkbox
-  return next
-}
+import { sameTableItem, stripSyntheticFields } from '../core/utils'
 
 export function useTotalItems(
   clientSortOptions: Ref<ClientSortOptions | null>,
@@ -62,7 +52,7 @@ export function useTotalItems(
   /** Select / deselect rows on the current page only (matches locale `selectAllPage`). */
   const toggleSelectAll = (isChecked: boolean, pageRows: TableItem[]) => {
     const key = rowKey.value
-    const pageClean = pageRows.map(stripRowMeta)
+    const pageClean = pageRows.map(stripSyntheticFields)
     if (isChecked) {
       const next = [...selectItemsComputed.value]
       for (const row of pageClean) {
@@ -82,7 +72,7 @@ export function useTotalItems(
   const toggleSelectItem = (item: TableItem) => {
     const { next, selected, row } = toggleSelectedItems(
       selectItemsComputed.value,
-      stripRowMeta(item),
+      item,
       rowKey.value,
     )
     selectItemsComputed.value = next
