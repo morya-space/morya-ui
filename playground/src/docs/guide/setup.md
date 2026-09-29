@@ -41,11 +41,17 @@ npx @morya-ui/setup ai --skills=all
 # 只写部分编辑器的 MCP（仍会写 .mcp.json）
 npx @morya-ui/setup ai --editors=cursor,vscode
 
+# 收窄 Skill 目标 agents（默认：cursor, github-copilot, zed, claude-code, windsurf）
+npx @morya-ui/setup ai --agents=github-copilot,zed
+
+# companion 装到 skills CLI 支持的全部 agents（目录会很多）
+npx @morya-ui/setup ai --agents=all
+
 # 只刷新 AI 模板 / MCP，不改动依赖
 npx @morya-ui/setup ai --skip-install
 ```
 
-在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**。完成后若写入了 MCP，请 **重启编辑器或重载 MCP**。生成页面前让 Agent 先读 `DESIGN.md`（及 `AGENTS.md`）。
+在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**，并同步到默认 5 个 skill agents。完成后若写入了 MCP，请 **重启编辑器或重载 MCP**。Zed 需信任 worktree 后才会加载项目 skills。生成页面前让 Agent 先读 `DESIGN.md`（及 `AGENTS.md`）。
 
 ## 选项
 
@@ -55,8 +61,9 @@ npx @morya-ui/setup ai --skip-install
 | `--pm pnpm\|yarn\|npm` | 指定包管理器 |
 | `--skills <list>` | 逗号分隔的 skill id，或 `all`（跳过交互提示） |
 | `--editors <list>` | MCP 目标：`cursor`、`vscode`、`zed` 或 `all`（默认三者；始终另写 `.mcp.json`） |
+| `--agents <list>` | Skill agents：`cursor`、`github-copilot`、`zed`、`claude-code`、`windsurf`（默认），或 `all` |
 | `--yes` / `-y` | 使用默认 skill，不提示 |
-| `--force` | 覆盖已有模板文件与 `morya-ui` MCP 条目 |
+| `--force` | 覆盖已有模板文件、`morya-ui` MCP 条目与 skill 目录链接 |
 | `--dry-run` | 只打印将要执行的操作 |
 | `--skip-install` | 不安装 / 升级 `morya-ui` 与 `@morya-ui/*` |
 | `--skip-template` | 不复制 skill / rules / docs（也不装 companion） |
@@ -91,6 +98,7 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | `AGENTS.md` | 编辑器无关的常驻清单（VS Code / Zed / CLI 等） |
 | `.agents/skills/morya-ui-pages/` | 页面生成 Agent Skill（见 [Agent Skill](/docs/agent-skill)） |
 | `.agents/skills/<optional>/` | 勾选时由 skills CLI 写入的最新 companion |
+| `.claude/skills/`、`.windsurf/skills/`、`.github/skills/` | 从 `.agents/skills` 同步的镜像（Claude Code / Windsurf / Copilot） |
 | `.cursor/rules/` | Cursor 常驻规则 |
 | `scripts/check-raw-colors.mjs` | 裸色值扫描 |
 | `.cursor/mcp.json` | Cursor MCP |

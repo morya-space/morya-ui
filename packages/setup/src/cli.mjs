@@ -5,11 +5,17 @@ import { installMoryaUi } from './install.mjs'
 import { DEFAULT_EDITORS, mergeMcpConfig, parseEditorsFlag } from './mcp.mjs'
 import { ensureCheckColorsScript } from './package-json.mjs'
 import {
+  DEFAULT_SKILL_AGENTS,
   buildAiInclude,
   installSkillsCli,
+  listCanonicalSkillFolders,
   loadSkillsCatalog,
+  parseAgentsFlag,
   parseSkillsFlag,
+  resolveSkillAgents,
   resolveSkillSelection,
+  skillFolderNames,
+  syncProjectSkillsToAgents,
 } from './skills.mjs'
 import { ensureStylesImport } from './styles.mjs'
 
@@ -54,6 +60,7 @@ Commands:
 Default command:
   - install / upgrade morya-ui@latest and any existing @morya-ui/* to @latest
   - copy DESIGN.md, AGENTS.md, selected Agent skills, Cursor rules
+  - install companion skills + sync into multi-agent skill dirs
   - merge MCP configs for @morya-ui/mcp@latest (Cursor, VS Code, Zed, + .mcp.json)
   - inject import 'morya-ui/styles.css' into the app entry when found
   - add check:colors script when missing
@@ -63,8 +70,9 @@ Options:
   --pm <name>       Package manager: pnpm | yarn | npm (auto-detect by lockfile)
   --skills <list>   Comma-separated skill ids, or "all" (skips interactive prompt)
   --editors <list>  MCP targets: cursor,vscode,zed (default: all); always also writes .mcp.json
+  --agents <list>   Skill agents: cursor,github-copilot,zed,claude-code,windsurf (default), or all
   --yes             Use default skills without prompting (CI / non-interactive)
-  --force           Overwrite existing template files and MCP server entry
+  --force           Overwrite existing template files, MCP entry, and skill dir links
   --dry-run         Print actions without writing or installing
   --skip-install    Skip dependency install / upgrade
   --skip-template   Skip copying AI template files
@@ -88,6 +96,7 @@ export function parseArgs(argv) {
     pm: undefined,
     skills: undefined,
     editors: undefined,
+    agents: undefined,
     yes: false,
     force: false,
     dryRun: false,
@@ -165,6 +174,16 @@ export function parseArgs(argv) {
       options.editors = arg.slice('--editors='.length)
       continue
     }
+    if (arg === '--agents') {
+      const value = argv[++i]
+      if (!value) throw new Error('--agents requires a comma-separated list or "all"')
+      options.agents = value
+      continue
+    }
+    if (arg.startsWith('--agents=')) {
+      options.agents = arg.slice('--agents='.length)
+      continue
+    }
     throw new Error(`Unknown argument: ${arg}`)
   }
 
@@ -198,10 +217,13 @@ export async function runSetup(options) {
     pm,
     skills: skillsFlag,
     editors: editorsFlag,
+    agents: agentsFlag,
     yes,
   } = options
 
   const editors = editorsFlag != null ? parseEditorsFlag(editorsFlag) : [...DEFAULT_EDITORS]
+  const agents = agentsFlag != null ? parseAgentsFlag(agentsFlag) : [...DEFAULT_SKILL_AGENTS]
+  const agentsLabel = agents === '*' ? 'all (*)' : resolveSkillAgents(agents).join(',')
 
   console.log(`@morya-ui/setup [${mode}] → ${cwd}${dryRun ? ' (dry-run)' : ''}`)
   console.log('')
@@ -221,6 +243,7 @@ export async function runSetup(options) {
     }
     aiInclude = buildAiInclude(selectedSkills, catalog.skills)
     console.log(`Skills: ${selectedSkills.join(', ')}`)
+    console.log(`Skill agents: ${agentsLabel}`)
     console.log('')
   }
 
@@ -236,8 +259,21 @@ export async function runSetup(options) {
       })
 
   const remoteSkills = skipTemplate || !selectedSkills.length
-    ? { installed: [], commands: [], skipped: true }
-    : installSkillsCli(cwd, selectedSkills, catalog.skills, { dryRun })
+    ? { installed: [], commands: [], agents, skipped: true }
+    : installSkillsCli(cwd, selectedSkills, catalog.skills, { dryRun, agents })
+
+  const skillNamesForSync = needsTemplate
+    ? [
+        ...new Set([
+          ...skillFolderNames(selectedSkills, catalog.skills),
+          ...(dryRun ? [] : listCanonicalSkillFolders(cwd)),
+        ]),
+      ]
+    : []
+
+  const skillSync = skipTemplate || !skillNamesForSync.length
+    ? { results: [], skipped: true }
+    : syncProjectSkillsToAgents(cwd, skillNamesForSync, { force, dryRun, agents })
 
   const mcp = skipMcp
     ? { skipped: true, results: [] }
@@ -278,10 +314,27 @@ export async function runSetup(options) {
   if (remoteSkills.skipped) {
     // no companions selected or template step skipped
   } else if (remoteSkills.dryRun) {
-    console.log(`Skills CLI: dry-run — would install ${remoteSkills.installed.join(', ')}`)
+    console.log(`Skills CLI: dry-run — would install ${remoteSkills.installed.join(', ')} → ${agentsLabel}`)
     for (const command of remoteSkills.commands) console.log(`  $ ${command}`)
   } else {
-    console.log(`Skills CLI: installed ${remoteSkills.installed.join(', ')} (latest)`)
+    console.log(`Skills CLI: installed ${remoteSkills.installed.join(', ')} (latest) → ${agentsLabel}`)
+  }
+
+  if (skillSync.skipped) {
+    // nothing to mirror
+  } else {
+    const linked = skillSync.results.filter((r) => r.action === 'linked' || r.action === 'copied')
+    const skippedLinks = skillSync.results.filter((r) => r.action === 'skipped')
+    console.log(
+      `Skill dirs: ${linked.length} linked/copied, ${skippedLinks.length} skipped` +
+        (skillSync.dryRun ? ' (dry-run)' : ''),
+    )
+    for (const entry of skillSync.results.slice(0, 8)) {
+      console.log(`  ${entry.action} ${entry.dir}/${entry.skill}`)
+    }
+    if (skillSync.results.length > 8) {
+      console.log(`  … and ${skillSync.results.length - 8} more`)
+    }
   }
 
   if (mcp.skipped) {
@@ -326,5 +379,17 @@ export async function runSetup(options) {
     console.log('  4. Optional: pnpm check:colors')
   }
 
-  return { mode, install, template, remoteSkills, mcp, styles, scripts, skills: selectedSkills, editors }
+  return {
+    mode,
+    install,
+    template,
+    remoteSkills,
+    skillSync,
+    mcp,
+    styles,
+    scripts,
+    skills: selectedSkills,
+    editors,
+    agents,
+  }
 }

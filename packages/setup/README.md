@@ -38,6 +38,12 @@ npx @morya-ui/setup ai --skills=all
 # Only Cursor + VS Code MCP targets (still writes .mcp.json)
 npx @morya-ui/setup ai --editors=cursor,vscode
 
+# Narrow skill agents (default: cursor, github-copilot, zed, claude-code, windsurf)
+npx @morya-ui/setup ai --agents=github-copilot,zed
+
+# Install companion skills to every skills-CLI agent (many dirs)
+npx @morya-ui/setup ai --agents=all
+
 # Refresh AI template / MCP without touching dependencies
 npx @morya-ui/setup ai --skip-install
 ```
@@ -50,8 +56,9 @@ npx @morya-ui/setup ai --skip-install
 | `--pm pnpm\|yarn\|npm` | Package manager (default: detect from lockfile, else `pnpm`) |
 | `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
 | `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three). Always also writes root `.mcp.json` |
+| `--agents <list>` | Skill agents: `cursor`, `github-copilot`, `zed`, `claude-code`, `windsurf` (default), or `all` (`-a '*'`) |
 | `--yes` / `-y` | Use default skills without prompting |
-| `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
+| `--force` | Overwrite existing template files, MCP `morya-ui` entry, and skill-dir links |
 | `--dry-run` | Print actions without writing or installing |
 | `--skip-install` | Do not install / upgrade `morya-ui` or `@morya-ui/*` |
 | `--skip-template` | Do not copy AI skill / rules / docs (also skips companion skill install) |
@@ -75,7 +82,8 @@ Catalog: [`catalog/skills.json`](./catalog/skills.json).
 
 - Dependencies: always install / upgrade `morya-ui@latest` and any existing `@morya-ui/*` (e.g. `@morya-ui/nuxt`) to `@latest` unless `--skip-install`.
 - Template files and `.cursor/rules/*`: **skip** if the destination exists (unless `--force`).
-- Companion skills (`skills-cli`): always reinstall/update to **latest** when selected.
+- Companion skills (`skills-cli`): always reinstall/update to **latest** when selected (default agents: the five listed under `--agents`).
+- Mirrored skill dirs (`.claude/skills`, `.windsurf/skills`, `.github/skills`): **skip** if the destination exists (unless `--force`).
 - MCP configs: merge other servers / settings; skip existing `morya-ui` entry unless `--force`. New or forced entries use `npx -y @morya-ui/mcp@latest`.
 - `package.json` `check:colors`: add only if missing (unless `--force`).
 - Styles: inject only when an entry file is found and the import is not already present.
@@ -90,9 +98,19 @@ From the package `template/` (synced from repo `design-kit/`):
 - `.cursor/rules/` — Cursor-specific always-apply rules
 - `scripts/check-raw-colors.mjs`
 
-Via `npx skills add …` when optional companions are selected:
+Via `npx skills add …` when optional companions are selected (default agents: Cursor, GitHub Copilot, Zed, Claude Code, Windsurf):
 
 - `.agents/skills/frontend-design/`, `fixing-accessibility/`, and/or `impeccable/` (latest upstream)
+
+Setup then mirrors selected skills from `.agents/skills/` into agent-specific dirs that do not share that path:
+
+| Agent | Extra project dir |
+| --- | --- |
+| Claude Code | `.claude/skills/` |
+| Windsurf | `.windsurf/skills/` |
+| GitHub Copilot | `.github/skills/` (in addition to `.agents/skills`) |
+
+Cursor / Zed / Copilot already read `.agents/skills` directly.
 
 ### MCP (multi-editor)
 

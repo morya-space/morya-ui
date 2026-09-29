@@ -41,11 +41,17 @@ npx @morya-ui/setup ai --skills=all
 # Subset of MCP editor targets (still writes .mcp.json)
 npx @morya-ui/setup ai --editors=cursor,vscode
 
+# Narrow skill agents (default: cursor, github-copilot, zed, claude-code, windsurf)
+npx @morya-ui/setup ai --agents=github-copilot,zed
+
+# Install companions to every skills-CLI agent (many dirs)
+npx @morya-ui/setup ai --agents=all
+
 # Refresh AI template / MCP without touching dependencies
 npx @morya-ui/setup ai --skip-install
 ```
 
-On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/). If MCP was written, **restart your editor or reload MCP**. Have the agent read `DESIGN.md` (and `AGENTS.md`) before generating pages.
+On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/) for the default five skill agents, and mirrored into agent-specific dirs. If MCP was written, **restart your editor or reload MCP**. Zed may require trusting the worktree before project skills load. Have the agent read `DESIGN.md` (and `AGENTS.md`) before generating pages.
 
 ## Options
 
@@ -55,8 +61,9 @@ On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pa
 | `--pm pnpm\|yarn\|npm` | Package manager |
 | `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
 | `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three; always also writes `.mcp.json`) |
+| `--agents <list>` | Skill agents: `cursor`, `github-copilot`, `zed`, `claude-code`, `windsurf` (default), or `all` |
 | `--yes` / `-y` | Use default skills without prompting |
-| `--force` | Overwrite existing template files and the `morya-ui` MCP entry |
+| `--force` | Overwrite existing template files, MCP `morya-ui` entry, and skill-dir links |
 | `--dry-run` | Print actions only |
 | `--skip-install` | Skip install / upgrade of `morya-ui` and `@morya-ui/*` |
 | `--skip-template` | Skip copying skill / rules / docs (also skips companion install) |
@@ -91,6 +98,7 @@ npx @morya-ui/setup ai --skip-template --skip-scripts
 | `AGENTS.md` | Portable always-on checklist (VS Code / Zed / CLI agents) |
 | `.agents/skills/morya-ui-pages/` | Page-generation Agent skill (see [Agent Skill](/docs/agent-skill)) |
 | `.agents/skills/<optional>/` | Latest companion skills via skills CLI when selected |
+| `.claude/skills/`, `.windsurf/skills/`, `.github/skills/` | Mirrors from `.agents/skills` (Claude Code / Windsurf / Copilot) |
 | `.cursor/rules/` | Cursor always-on rules |
 | `scripts/check-raw-colors.mjs` | Raw color scan |
 | `.cursor/mcp.json` | Cursor MCP |
