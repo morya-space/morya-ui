@@ -1,30 +1,30 @@
-# 开源 Vue 3 组件库 Morya UI：从设计令牌到 AI 可生成页面
+# 开源 Vue 3 组件库 Morya UI：主题、文档与 AI 一站式，再用它快速搭一套中后台
 
 ![封面：Morya UI](./assets/cover.png)
 
-如果你最近在做 Vue 3 管理后台或 SaaS 控制台，大概率踩过这几件事：
+如果你做过 Vue 3 中后台，大概都经历过：组件够用但主题难统一、文档和真实 API 对不上、交给 AI 写页面却总「发明」不存在的 props。
 
-- Element Plus / Ant Design Vue / Naive 都很成熟，但业务页一旦堆起来，**视觉和交互还是容易漂**——同一套库，两个同事写出来像两个产品。
-- 主题切换、密度、浮层层叠、空状态文案……这些「不是业务却天天写」的东西，耗掉不少时间。
-- 现在团队开始用 Cursor / Agent 写页面了，结果它更爱手搓 `div`，**装了组件库也不用**，审代码比自己写还累。
-
-**Morya UI**（npm：`morya-ui`）就是冲着这些问题做的一套开源 Vue 3 组件库：组件齐全、主题靠 `--m-*` 令牌、文档可交互预览，并且可选地把 Skill / MCP / 黄金样例一起塞进业务项目，让人和 AI 用同一套契约。
+**Morya UI**（npm：`morya-ui`）想解决的，就是把「组件 + 设计令牌 + 可交互文档 + AI 可检索知识」捆成一套能真正落地的工具链。本文结合官方文档站，以及用它快速做出来的演示项目 **morya-admin**，把特色讲清楚。
 
 - 文档站：<https://morya-space.github.io/morya-ui/>
 - GitHub：<https://github.com/morya-space/morya-ui>
+- npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)
+- 演示后台：<https://github.com/xcGoGo2/morya-admin>
 - 许可证：MIT
 
 ![文档站首页](./assets/01-docs-home.png)
 
-> 配图来自本地文档站截图（`pnpm dev` → `capture_screenshots.py`）。发掘金等平台时上传同目录 PNG 即可。上一篇：[别手搓了，搓也搓不过 Agent](../dont-handcraft-agent-wins/article.md)。
+> 配图来自文档站与本地 `morya-admin` 截图；发掘金等平台时可上传同目录 PNG，或使用已传图床链接。上一篇：[别手搓了，搓也搓不过 Agent](../dont-handcraft-agent-wins/article.md)。
 
 ---
 
-## 它是什么、适合谁
+## 一、Morya UI 是什么？
 
-一句话：**给 Vue 3 中大型应用用的开源组件库**，自带设计令牌、亮暗主题、国际化，以及带 live preview 的文档站。
+**Morya UI** 是一套开源的 **Vue 3** 组件库，当前约 **v0.3.8**，组件数量 **90+**（文档侧统计约 92）。
 
-公开文档里写的是 **88 个组件**，覆盖基础控件、表单、导航、数据展示、布局和反馈。适合：
+一句话概括：
+
+> 安装一个包，就能获得统一视觉语言的控件、亮暗主题与密度/动效控制，以及可在线预览的完整文档；若你用 Cursor / VS Code 等支持 MCP 的 AI 编辑器，还可以把官方文档「喂」给 Agent，按真实 API 生成页面。
 
 | 场景 | 为什么合适 |
 | --- | --- |
@@ -39,21 +39,79 @@
 
 ---
 
-## 和「又一个组件库」差在哪
+## 二、它和「又一个组件库」差在哪？
 
-组件数量本身不是壁垒。Morya 想强调的是这几层叠在一起：
+同类库很多。Morya UI 更值得关注的，是下面几条**成体系**的能力，而不是某一个单独的按钮样式。
 
-1. **令牌驱动外观**：组件吃 `--m-*`，不各自维护色板。
-2. **接入方式灵活**：全量 / 按名 / 子路径按需 / Resolver，同一应用选一种即可。
-3. **文档即预览**：Markdown + 可交互示例，查 API 和抄写法同一处。
-4. **SSR 友好**：Nuxt 模块、Astro / Vite SSR 有指南。
-5. **可选 AI 流水线**：`@morya-ui/setup`、`@morya-ui/mcp`、黄金样例页——不是营销口号，是可跑的包。
+### 1. 组件齐全，且按业务场景覆盖
 
-下面按「人怎么用」展开。
+基础、表单、导航、数据展示、布局、反馈都有。中后台最常用的布局壳、表格筛选、表单浮层、消息反馈等，不必东拼西凑多个库。
+
+单个组件页是「说明 + 可交互预览 + API」一体，例如 Button 的 severity、样式变体都能直接点着看：
+
+![Button 组件文档与实时预览](./assets/04-button-preview.png)
+
+文档站还有 Table、Layout 等更重的组件页可对照：
+
+![Table 文档预览](./assets/05-table-preview.png)
+
+![Layout 文档](./assets/06-layout-shell.png)
+
+### 2. 设计令牌驱动的主题系统（`--m-*`）
+
+颜色、间距、圆角等统一走 CSS 变量。亮 / 暗主题、密度（`useDensity`）、动效强度（`useMotion`）同包导出；局部可用 `MConfigProvider` 覆盖，品牌色优先改 `--m-color-primary` 一类 token，而不是到处写死 hex。
+
+![主题文档](./assets/03-theme-docs.png)
+
+![设计令牌文档](./assets/09-tokens.png)
+
+业务项目里还可以用配套的 `check:colors` 脚本拦截裸 hex/rgb，逼着团队吃设计系统，而不是「看起来差不多」。暗色模式下同一套组件也保持可读性：
+
+![暗色主题下的组件预览](./assets/03-theme-dark.png)
+
+### 3. TypeScript 优先 + 多种接入方式
+
+Composition API + 完整 Props / Emits / locale 类型。接入方式包括：
+
+- 全量 `app.use(MoryaUI)`
+- 具名导入
+- 子路径按需（如 `morya-ui/button`）
+- `unplugin-vue-components` + `MoryaUIResolver`
+
+还提供 `@morya-ui/nuxt`，以及 Nuxt / Astro / Vite SSR 指南，适合不只做 SPA 的团队。
+
+### 4. 「文档即预览」——文档站本身就是最好的样板间
+
+每个组件自带 Markdown 与可交互 `vue preview`。文档站支持中英切换、⌘K 搜索、暗色模式，组件页还带章节目录，适合一边对照 API 一边抄写法。
+
+### 5. AI 原生工具链：Skill + MCP + 一键 setup（差异化最大）
+
+这是 Morya UI 很鲜明的特色：**不为 AI 包装一层口号，而是把「查真实文档 → 拼页面 → 校验用法」做成可执行协议。**
+
+| 包 | 作用 |
+| --- | --- |
+| `morya-ui` | 组件、样式、主题、locale |
+| `@morya-ui/mcp` | MCP 服务：组件 API、示例、页面配方、`validate_usage` / `validate_page` |
+| `@morya-ui/setup` | 一键给业务项目装库、样式、`DESIGN.md`、Agent Skill、Cursor 规则、多编辑器 MCP |
+
+![Agent MCP 文档](./assets/08-mcp.png)
+
+![一键接入文档](./assets/08-ai-setup.png)
+
+推荐工作流可以概括成：
+
+1. `recommend_page` / `map_reference` 定页面结构
+2. `get_page_snippet` 拿区块片段拼装
+3. `get_component` / `get_example` 查真实 API（禁止瞎编 prop）
+4. `validate_usage` + `validate_page` 做契约校验
+
+对 Cursor 这类 Agent 友好编辑器来说，这相当于给组件库装了「官方知识库 + 质检闸」。黄金样例列表页也能直接对照块顺序：
+
+![黄金样例列表页](./assets/07-golden-list.png)
 
 ---
 
-## 五分钟跑起来
+## 三、五分钟上手
 
 需要 Vue 3（推荐 3.5+），以及能解析 package `exports` 的构建工具（Vite、webpack 5+ 等）。
 
@@ -82,7 +140,7 @@ import { MButton } from 'morya-ui/button'
 import { MInput } from 'morya-ui/input'
 ```
 
-子路径会自动带上主题与依赖样式，不必再手动拼一堆 CSS。
+子路径会自动带上主题与依赖样式。
 
 ### 应用级默认（语言、尺寸等）
 
@@ -92,176 +150,106 @@ import { createMoryaUI, zhCN } from 'morya-ui'
 createApp(App).use(createMoryaUI({ locale: zhCN })).mount('#app')
 ```
 
-子树覆盖用 `<MConfigProvider>`。完整对照见文档：[快速上手](https://morya-space.github.io/morya-ui/docs/quick-start)。
-
----
-
-## 主题：亮暗、密度、动效都是一等公民
-
-引入 `morya-ui/styles.css` 后，语义变量已经就位。组件不写死 `#409EFF` 这种裸色值，而是吃令牌：
-
-| Token | 用途 |
-| --- | --- |
-| `--m-color-primary` | 品牌主色 |
-| `--m-color-surface` | 页面底色 |
-| `--m-color-text` | 正文 |
-| `--m-color-border` | 分割线 / 描边 |
-| `--m-radius-*` / `--m-space-*` | 圆角与间距阶梯 |
-| `--m-z-overlay` 等 | 浮层层叠 |
-
-切换亮暗：
-
-```ts
-import { useTheme } from 'morya-ui'
-
-const { isDark, setTheme, toggleTheme } = useTheme()
-toggleTheme() // 写到 documentElement 的 data-theme
-```
-
-密度与动效同包导出：
-
-```ts
-import { useDensity, useMotion } from 'morya-ui'
-
-useDensity().setDensity('compact') // compact | comfortable | spacious
-useMotion().setMotion('reduced')   // full | reduced | none
-```
-
-文档站右上角的主题按钮，用的就是同一套 API。完整令牌列表：[设计令牌](https://morya-space.github.io/morya-ui/docs/design-tokens) · [主题](https://morya-space.github.io/morya-ui/docs/theme)。
-
-![暗色主题](./assets/03-theme-dark.png)
-
-![设计令牌页](./assets/09-tokens.png)
-
-业务项目里如果怕有人偷偷写裸色值，setup 脚本还可以挂一个 `check:colors`——本地直接抓 `#xxx`。这不是吹，是真的会省 code review 里「这灰是哪来的」那种扯皮。
-
----
-
-## 组件面：后台需要的基本都有
-
-按职责粗分（名字以文档站为准）：
-
-| 类别 | 例子 |
-| --- | --- |
-| 基础 | Button、Icon、Tag、Divider、Space、Flex、Grid |
-| 表单 | Input、Select、DatePicker、Checkbox、Switch、Form、Upload… |
-| 数据 | Table、Tree、TreeTable、Pagination、DataView、Empty、Result |
-| 导航 | Menu、Menubar、Tabs、Breadcrumb、Steps（Stepper）、Sidebar |
-| 浮层 | Dialog、Drawer、Popover、Dropdown、Toast、Confirm* |
-| 布局 | Layout、Page、Splitter、Panel、Toolbar |
-
-文档站每个组件页都是 **Markdown + 可点可改的 preview**，不是纯静态截图：
-
-![Button 预览](./assets/04-button-preview.png)
-
-![Table 预览](./assets/05-table-preview.png)
-
-做列表页时，最耗时间的往往不是「会不会写表格」，而是排序、筛选、分页、空状态、操作列和外壳怎么凑齐。Morya 把这些拆成稳定积木，再配 `MPageContent` / `MPageFilters` / `MPageToolbar` 一类页面层组件，后台骨架会短很多。
-
-![Layout 壳层](./assets/06-layout-shell.png)
-
----
-
-## 搭一页「像样」的后台列表长什么样
-
-不必从零拼侧栏。黄金样例里有列表 / 表单 / 仪表盘 / 登录等模板（setup 会拷进业务仓库的 `docs/golden-pages/`）。列表页大致是：
-
-- `MLayout` 管壳（侧栏 + 顶栏 + 内容区）
-- `MPage*` 管页内结构（标题、筛选、工具条）
-- `MTable` 管数据
-- 颜色只用 `--m-*`，不臆造不存在的 prop
-
-跑起来的观感接近：
-
-![黄金样例列表页](./assets/07-golden-list.png)
-
-手写时打开文档站抄 preview；让 Agent 写时，提示词里钉死「对齐黄金样例 + 不要臆造 API」，成功率会高一个数量级。这点和上一篇是同一条结论，这里只强调：**组件库提供的是契约，不是一堆长得像的组件名。**
-
----
-
-## 生态：四个包各管一段
-
-| 包 | 干什么 |
-| --- | --- |
-| [`morya-ui`](https://www.npmjs.com/package/morya-ui) | 组件、样式、主题、locale |
-| [`@morya-ui/nuxt`](https://www.npmjs.com/package/@morya-ui/nuxt) | Nuxt 3 模块（样式、transpile、overlay） |
-| [`@morya-ui/mcp`](https://www.npmjs.com/package/@morya-ui/mcp) | 可选 MCP：给 AI 查真实 props / 示例 |
-| [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) | 一键装库 + DESIGN.md + Skill + rules + MCP |
-
-只想当普通组件库用：
-
-```bash
-pnpm add morya-ui
-```
-
-想让 Cursor / Agent 按库的规矩生成页面：
+若希望「装库 + AI 配置」一步到位，在业务项目根目录：
 
 ```bash
 npx @morya-ui/setup
+# 或只升级 AI / MCP：
+npx @morya-ui/setup ai
 ```
 
-默认**不覆盖**你已有文件；需要硬盖才加 `--force`。装完记得重启 Cursor 或重载 MCP。细节：[AI 接入](https://morya-space.github.io/morya-ui/docs/ai-setup)。
-
-![AI 接入页](./assets/08-ai-setup.png)
+更多细节见文档：[快速上手](https://morya-space.github.io/morya-ui/docs/quick-start)、[一键接入](https://morya-space.github.io/morya-ui/docs/setup)。
 
 ---
 
-## TypeScript、按需与 SSR（工程向）
+## 四、案例：用 Morya UI 快速做出的 morya-admin
 
-- **TS 优先**：Composition API 编写，Props / Emits / locale 有完整类型，编辑器补全是可用的。
-- **Resolver**：可配合 `unplugin-vue-components` 的 `MoryaUIResolver`，少写一堆 import。
-- **SSR**：Nuxt / Astro + Vue / Vite SSR 有专门指南；Nuxt 用 `@morya-ui/nuxt` 少踩 hydrate / 浮层挂载的坑。见 [SSR](https://morya-space.github.io/morya-ui/docs/ssr)。
-- **样式与 attrs**：fallthrough、`pt`、事件落点有统一约定，见 [样式与 attrs](https://morya-space.github.io/morya-ui/docs/attrs)。
+光看组件还不够。**morya-admin** 是用 `morya-ui` 搭起来的中后台高保真演示：登录、工作台、系统管理（用户/角色/菜单/部门/字典/参数）、业务订单与商品、日志、异常页、主题与布局设置等，一套中后台骨架基本齐了。
 
-这些是「能不能安心进生产」的细节。组件库如果只晒组件截图、不交代打包和 SSR，上线那周就会还债。
+仓库：<https://github.com/xcGoGo2/morya-admin>
+
+技术栈很干净：`Vue 3 + Vite + TypeScript + Vue Router + morya-ui`，接口层是 mock，方便本地跑通体验。
+
+### 1. 登录页：品牌区 + 表单组件落地
+
+分栏登录、记住我、暗色切换，表单与按钮直接用库内组件，视觉和文档站同一套 token：
+
+![morya-admin 登录页](./assets/10-admin-login.png)
+
+试用账号提示里写了：`admin` 全权限、`ops` 偏业务权限——任意非空密码即可登录，方便演示 RBAC。
+
+### 2. 工作台：布局壳 + 统计卡 + 图表区 + 时间线
+
+`MLayout` 一类布局、侧栏菜单、顶栏工具、多标签、统计指标、时间线等拼成完整 dashboard：
+
+![morya-admin 工作台](./assets/11-admin-dashboard.png)
+
+### 3. 列表页范式：筛选 + 工具栏 + 表格 + 分页
+
+用户管理是典型 CRUD 列表：搜索、状态下拉、高级筛选、新建、行内编辑/删除、状态 Tag、分页器——中后台 80% 的页面都是这个形状：
+
+![用户管理列表](./assets/12-admin-users.png)
+
+订单管理同样是业务列表范式，说明组件库不只适合「系统管理」页：
+
+![订单管理列表](./assets/13-admin-orders.png)
+
+### 4. 布局与主题可调
+
+顶栏可进布局设置，配合亮暗切换、密度等，体现「主题系统不是文档里的概念，是产品里的开关」：
+
+![布局设置抽屉](./assets/14-admin-settings.png)
+
+### 这个案例想证明什么？
+
+1. **组件覆盖够**：登录、壳层、表单、表格、反馈、空/错页，不必再混搭另一套 UI。
+2. **视觉一致**：`--m-*` token + 统一组件皮肤，后台不会「每一页一种风格」。
+3. **开发路径短**：Vite 脚手架 + `morya-ui` 就能搭出可演示的中后台；若再接 `@morya-ui/setup` + MCP，列表/表单页可以用 Agent 按配方生成，再人工收口业务逻辑。
+4. **可扩展**：权限指令、动态菜单、多 Tab 等是业务层能力，但交互表面仍落在 `M*` 组件上，后续换接口、接真实后端时 UI 层不用推倒重来。
 
 ---
 
-## 本地开发与贡献
+## 五、适合谁用？不太适合谁？
 
-仓库本身是 monorepo 风格的组件库工程：
+**比较适合：**
 
-```bash
-pnpm install
-pnpm dev              # 文档站，默认 http://localhost:5182
-pnpm build            # 打出 dist/
-pnpm test
-pnpm typecheck
-```
+- Vue 3 中后台、SaaS 控制台、内部运营平台
+- 希望主题 / 密度 / 动效可控、禁止业务侧乱写色值的团队
+- 已经在用 Cursor 等 AI 编码工具，希望组件库能「被 Agent 正确调用」的团队
 
-文档站通过 Vite alias 直连 `src/`，改组件即时可见。欢迎 Issue / PR，中文贡献指南：[CONTRIBUTING.zh-CN.md](https://github.com/morya-space/morya-ui/blob/main/CONTRIBUTING.zh-CN.md)。
+**需要心里有数的：**
 
----
-
-## 什么时候选它、什么时候别硬选
-
-**可以认真考虑：**
-
-- 新开或重构 Vue 3 后台，希望主题和页面骨架统一
-- 团队开始用 AI 写页面，需要可检索的组件契约
-- 需要亮暗、密度、浮层、i18n，又不想自己维护第二套设计系统
-
-**需要想清楚：**
-
-- 已有深度定制的 Element / AntD 主题与业务组件海——迁移成本是真实的，不必为了「新」而迁
-- 强品牌营销站、高度异形动效——更适合专用设计实现，组件库只作局部控件
-- 纯 React / 小程序栈——这是 Vue 3 库
-
-开源项目还在演进，API 以文档站与 npm 版本为准；遇到问题直接提 Issue 通常比在评论区猜更快。
+- 库仍在较快迭代（0.x），发版节奏跟得上即可，要锁版本就锁
+- 图表类（如工作台折线/环图）通常仍需业务侧自绘或接图表库；Morya UI 负责控件与布局语言
+- AI 工具链是加分项，不是门槛：日常只装 `morya-ui` 完全够用
 
 ---
 
-## 小结
+## 六、小结
 
-Morya UI 想交付的不只是「88 个好看的组件」，而是：
+Morya UI 不只是「又一个 Vue 3 组件合集」，而是更接近一条**中后台前端生产线**：
 
-1. **令牌化主题**——视觉可调、可检查、可统一  
-2. **可交互文档**——人和 AI 都能抄到真东西  
-3. **可选 AI 接入**——Skill / MCP / 黄金样例，把「用我们的组件」写进工作流  
+- **组件层**：90+ `M*` 控件，ESM / 按需 / TS
+- **设计层**：`--m-*` 令牌，亮暗、密度、动效同包
+- **文档层**：可交互文档站，预览即真相
+- **AI 层**：`@morya-ui/mcp` + Skill + `@morya-ui/setup`，让 Agent 查真实 API、拼页面、做校验
+- **落地层**：morya-admin 证明用这套东西，可以很快拼出完整后台体验
 
-如果你只是要按钮和表格，`pnpm add morya-ui` 就够。  
-如果你已经烦透了 Agent 手搓后台，再跑一次 `npx @morya-ui/setup`。
+如果你正在选 Vue 3 组件库，或者想给团队补一条「文档 + Agent 可复用」的工程化路径，不妨：
 
-* 文档站：<https://morya-space.github.io/morya-ui/>  
-* GitHub：<https://github.com/morya-space/morya-ui>  
-* npm：`morya-ui` · `@morya-ui/setup` · `@morya-ui/mcp` · `@morya-ui/nuxt`
+1. 打开 [文档站](https://morya-space.github.io/morya-ui/) 逛几页组件预览
+2. clone [morya-admin](https://github.com/xcGoGo2/morya-admin) 本地 `pnpm i && pnpm dev` 点一遍
+3. 在自己的业务仓跑一次 `npx @morya-ui/setup`，体验「装库 + AI 配置」
+
+欢迎 Star、提 Issue，也欢迎直接拿 morya-admin 当脚手架骨架改造成自己的后台。
+
+---
+
+**参考链接**
+
+- 文档站：https://morya-space.github.io/morya-ui/
+- 组件库：https://github.com/morya-space/morya-ui
+- npm：https://www.npmjs.com/package/morya-ui
+- MCP：https://www.npmjs.com/package/@morya-ui/mcp
+- Setup：https://www.npmjs.com/package/@morya-ui/setup
+- morya-admin：https://github.com/xcGoGo2/morya-admin
