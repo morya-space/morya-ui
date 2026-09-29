@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T13:39:38.409Z",
+  "generatedAt": "2026-09-29T01:39:37.025Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 373,
+  "tokenCount": 372,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -4131,16 +4131,6 @@
       "description": {
         "zh-CN": "组件专用相关变量：Treeselect Toggler Size",
         "en-US": "Component-specific token: Treeselect Toggler Size"
-      }
-    },
-    {
-      "name": "--m-treetable-toggler-size",
-      "category": "component",
-      "source": "src/components/TreeTable/styles.css",
-      "default": "var(--m-tree-toggler-size)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Treetable Toggler Size",
-        "en-US": "Component-specific token: Treetable Toggler Size"
       }
     },
     {

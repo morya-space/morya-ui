@@ -111,6 +111,5 @@ export const componentImportMap: Record<string, string> = {
   "MTooltip": "tooltip",
   "MTree": "tree",
   "MTreeSelect": "tree-select",
-  "MTreeTable": "tree-table",
   "MVirtualScroller": "virtual-scroller",
 }

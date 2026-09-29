@@ -6,9 +6,9 @@ import { ref } from 'vue'
 const columns: TableColumnDefinition[] = [
   {
     key: 'info',
-    label: 'Basics',
+    label: 'Info',
     children: [
-      { key: 'name', label: 'Name', editable: true },
+      { key: 'name', label: 'Name' },
       { key: 'role', label: 'Role' },
     ],
   },
@@ -36,13 +36,11 @@ const hiddenColumns = ref<string[]>([])
       '',
       data.reduce((sum, row) => sum + Number(row.score ?? 0), 0),
     ]]"
-    :edit-config="{ mode: 'cell', trigger: 'click' }"
     :span-method="({ column, rowIndex }) => {
       if (column.value === 'role' && rowIndex === 1) return { rowspan: 2, colspan: 1 }
       if (column.value === 'role' && rowIndex === 2) return { rowspan: 0, colspan: 0 }
       return { rowspan: 1, colspan: 1 }
     }"
     :paginator="false"
-    @edit-change="({ row, column, value }) => { row[column] = value }"
   />
 </template>

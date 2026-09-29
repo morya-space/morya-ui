@@ -21,7 +21,6 @@ const REMOVE_ROOT_BIND = [
   'Menu/MenuNodes.vue',
   'Tree/TreeNodeItem.vue',
   'TreeSelect/TreeSelectNodeItem.vue',
-  'TreeTable/TreeTableRow.vue',
   'InputGroup/InputGroupAddon.vue',
   'Message/Message.vue',
   'TieredMenu/TieredMenu.vue',

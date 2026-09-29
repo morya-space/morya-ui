@@ -67,7 +67,6 @@
 .m-orderlist,
 .m-picklist,
 .m-virtualscroller,
-.m-treetable,
 .m-megamenu,
 .m-dock,
 .m-sidebar,
@@ -579,7 +578,6 @@
     overflow-x: hidden;
 }
 
-.m-treetable__scrollbar > .m-scrollbar__wrap,
 .m-terminal__scrollbar > .m-scrollbar__wrap {
     height: 100%;
     overflow-x: hidden;

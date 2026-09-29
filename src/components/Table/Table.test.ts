@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
+import type { TableItem } from './types'
 import MTable from './Table.vue'
 
 const columns = [
@@ -620,11 +621,113 @@ describe('mTable', () => {
     expect(wrapper.get('tfoot').text()).toContain('30')
   })
 
-  it('applies spanMethod and emits edit-change', async () => {
+  it('expands tree nodes with treeConfig and expandedRowKeys', async () => {
     const wrapper = mount(MTable, {
       props: {
         columns: [
-          { key: 'name', label: 'Name', editable: true },
+          { key: 'name', label: 'Name' },
+          { key: 'size', label: 'Size' },
+        ],
+        rows: [
+          {
+            id: 1,
+            name: 'Apps',
+            size: '100kb',
+            children: [
+              { id: 11, name: 'Vue', size: '25kb' },
+              { id: 12, name: 'React', size: '30kb' },
+            ],
+          },
+        ],
+        treeConfig: { childrenField: 'children' },
+        expandedRowKeys: [],
+        'onUpdate:expandedRowKeys': (keys: Array<string | number>) =>
+          wrapper.setProps({ expandedRowKeys: keys }),
+        paginator: false,
+      },
+    })
+    expect(wrapper.get('table').attributes('role')).toBe('treegrid')
+    expect(wrapper.text()).toContain('Apps')
+    expect(wrapper.text()).not.toContain('Vue')
+    await wrapper.get('.m-table__tree-toggler').trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.text()).toContain('Vue')
+    expect(wrapper.emitted('update:expandedRowKeys')?.at(-1)).toEqual([[1]])
+    expect(wrapper.findAll('tbody tr')[0]!.attributes('aria-level')).toBe('1')
+    expect(wrapper.findAll('tbody tr')[1]!.attributes('aria-level')).toBe('2')
+  })
+
+  it('cascades tree checkbox selection and exposes tree helpers', async () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [
+          { key: 'name', label: 'Name' },
+          { key: 'size', label: 'Size' },
+        ],
+        rows: [
+          {
+            id: 1,
+            name: 'Apps',
+            size: '100kb',
+            children: [
+              { id: 11, name: 'Vue', size: '25kb' },
+              { id: 12, name: 'React', size: '30kb' },
+            ],
+          },
+        ],
+        treeConfig: { childrenField: 'children', expandAll: true },
+        selectionMode: 'multiple',
+        selection: [],
+        'onUpdate:selection': (value: TableItem[]) => wrapper.setProps({ selection: value }),
+        checkboxConfig: { checkStrictly: false },
+        paginator: false,
+      },
+    })
+    await wrapper.vm.$nextTick()
+    const checkboxes = wrapper.findAll('tbody .m-checkbox input')
+    expect(checkboxes.length).toBeGreaterThan(0)
+    await checkboxes[0]!.setValue(true)
+    await wrapper.vm.$nextTick()
+    const selection = wrapper.props('selection') as TableItem[]
+    expect(selection.map((row) => row.id).sort((a, b) => Number(a) - Number(b))).toEqual([1, 11, 12])
+
+    const vm = wrapper.vm as {
+      isTreeExpandByRow: (row: TableItem) => boolean
+      clearTreeExpand: () => void
+      setAllTreeExpand: (expanded: boolean) => Promise<void>
+      getTreeExpandRecords: () => TableItem[]
+    }
+    expect(vm.isTreeExpandByRow({ id: 1, name: 'Apps' })).toBe(true)
+    vm.clearTreeExpand()
+    await wrapper.vm.$nextTick()
+    expect(vm.getTreeExpandRecords()).toEqual([])
+    await vm.setAllTreeExpand(true)
+    await wrapper.vm.$nextTick()
+    expect(vm.getTreeExpandRecords().map((row) => row.id)).toContain(1)
+  })
+
+  it('transforms flat parentId rows when treeConfig.transform is set', async () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [{ key: 'name', label: 'Name' }],
+        rows: [
+          { id: 1, parentId: null, name: 'Root' },
+          { id: 11, parentId: 1, name: 'Child' },
+        ],
+        treeConfig: { transform: true, expandAll: true },
+        paginator: false,
+      },
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.text()).toContain('Root')
+    expect(wrapper.text()).toContain('Child')
+  })
+
+  it('applies spanMethod for merged cells', () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [
+          { key: 'name', label: 'Name' },
           { key: 'role', label: 'Role' },
         ],
         rows: [
@@ -636,23 +739,47 @@ describe('mTable', () => {
           if (column.value === 'role' && rowIndex === 1) return { rowspan: 0, colspan: 0 }
           return { rowspan: 1, colspan: 1 }
         },
-        editConfig: { mode: 'cell', trigger: 'click' },
         paginator: false,
       },
     })
     const firstRowCells = wrapper.findAll('tbody tr')[0]!.findAll('td')
     expect(firstRowCells[1]!.attributes('rowspan')).toBe('2')
     expect(wrapper.findAll('tbody tr')[1]!.findAll('td')).toHaveLength(1)
+  })
 
-    await firstRowCells[0]!.trigger('click')
-    await wrapper.vm.$nextTick()
-    const input = wrapper.get('tbody input')
-    await input.setValue('Ada Lovelace')
-    await input.trigger('keydown', { key: 'Enter' })
-    expect(wrapper.emitted('edit-change')?.at(-1)?.[0]).toMatchObject({
-      column: 'name',
-      value: 'Ada Lovelace',
-      oldValue: 'Ada',
+  it('exposes selection and scroll helpers', async () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [
+          { key: 'name', label: 'Name' },
+          { key: 'status', label: 'Status' },
+        ],
+        rows: [
+          { id: 1, name: 'Ada', status: 'A' },
+          { id: 2, name: 'Lin', status: 'B' },
+        ],
+        selectionMode: 'multiple',
+        selection: [],
+        'onUpdate:selection': (value: TableItem[]) => wrapper.setProps({ selection: value }),
+        maxHeight: 240,
+        paginator: false,
+      },
     })
+    const vm = wrapper.vm as {
+      setCheckboxRow: (rows: TableItem | TableItem[], checked: boolean) => void
+      getCheckboxRecords: () => TableItem[]
+      clearCheckboxRow: () => void
+      isCheckedByCheckboxRow: (row: TableItem) => boolean
+      scrollToRow: (row: TableItem) => Promise<void>
+    }
+    vm.setCheckboxRow({ id: 1, name: 'Ada', status: 'A' }, true)
+    await wrapper.vm.$nextTick()
+    expect(vm.getCheckboxRecords().map((row) => row.id)).toEqual([1])
+    expect(vm.isCheckedByCheckboxRow({ id: 1, name: 'Ada' })).toBe(true)
+    vm.clearCheckboxRow()
+    await wrapper.vm.$nextTick()
+    expect(vm.getCheckboxRecords()).toEqual([])
+    await vm.scrollToRow({ id: 2, name: 'Lin', status: 'B' })
+    expect(wrapper.find('[data-row-key="2"]').exists()).toBe(true)
   })
 })

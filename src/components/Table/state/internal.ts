@@ -18,7 +18,6 @@ export interface HeaderForRender {
   resizable?: boolean
   filterable?: boolean
   filters?: TableColumnFilter[]
-  editable?: boolean
   colspan?: number
   rowspan?: number
 }
@@ -46,6 +45,5 @@ export type EmitsEventName =
   | 'update:columnWidths'
   | 'update:hiddenColumns'
   | 'update:columnOrder'
-  | 'edit-change'
 
 export type TableEmitFn = (event: EmitsEventName, ...args: unknown[]) => void

@@ -101,7 +101,6 @@ import MToolbar from './components/Toolbar/Toolbar.vue'
 import MTooltip from './components/Tooltip/Tooltip.vue'
 import MTree from './components/Tree/Tree.vue'
 import MTreeSelect from './components/TreeSelect/TreeSelect.vue'
-import MTreeTable from './components/TreeTable/TreeTable.vue'
 import MVirtualScroller from './components/VirtualScroller/VirtualScroller.vue'
 
 /** Public components available for global registration (`app.use`). */
@@ -208,7 +207,6 @@ export const mComponents: Record<string, Component> = {
   MTooltip,
   MTree,
   MTreeSelect,
-  MTreeTable,
   MVirtualScroller,
 }
 

@@ -617,12 +617,66 @@
     border-right: 0;
 }
 
-.m-table__cell--editing {
-    background: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-table-row-bg));
+/* —— Tree mode —— */
+.m-table__tree-cell {
+    align-items: center;
+    display: flex;
+    gap: var(--m-space-1);
+    min-width: 0;
 }
 
-.m-table__cell--editing .m-table__cell-inner {
-    overflow: visible;
+.m-table__tree-toggler,
+.m-table__tree-toggler-spacer {
+    background: transparent;
+    border: 0;
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text-muted);
+    flex: 0 0 var(--m-tree-toggler-size, 1.25rem);
+    font: inherit;
+    height: var(--m-tree-toggler-size, 1.25rem);
+    padding: 0;
+    width: var(--m-tree-toggler-size, 1.25rem);
+}
+
+.m-table__tree-toggler {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    transition: color var(--m-motion-fast) var(--m-motion-ease),
+        background-color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-table__tree-toggler:hover:not(:disabled) {
+    color: var(--m-color-primary);
+    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+}
+
+.m-table__tree-toggler:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-table__tree-toggler:disabled {
+    cursor: progress;
+    opacity: 0.7;
+}
+
+.m-table__tree-toggler-spacer {
+    pointer-events: none;
+}
+
+.m-table--tree-line .m-table__tree-cell {
+    position: relative;
+}
+
+.m-table--tree-line .m-table__tree-cell::before {
+    border-left: var(--m-border-width) solid var(--m-color-border);
+    bottom: 0;
+    content: '';
+    left: calc(var(--m-space-1) + 0.35rem);
+    position: absolute;
+    top: 0;
 }
 
 .m-table__main--fixed-header .m-table__tfoot td {

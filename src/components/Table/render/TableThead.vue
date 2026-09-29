@@ -20,6 +20,7 @@ const props = defineProps<{
   headerTextDirection: TableTextDirection
   multiSort: boolean
   multipleSelectStatus: MultipleSelectStatus
+  showCheckboxHeader?: boolean
   lastFixedColumn: string
   firstRightFixedColumn: string
   fixedColumnsInfos: Array<{ value: string; distance: number; fixed?: boolean | 'left' | 'right' }>
@@ -111,6 +112,7 @@ function fixedStyle(column: string) {
           class="m-table__cell-inner m-table__cell-inner--selection"
         >
           <MCheckbox
+            v-if="showCheckboxHeader !== false"
             :key="multipleSelectStatus"
             :model-value="multipleSelectStatus === 'allSelected'"
             :indeterminate="multipleSelectStatus === 'partSelected'"

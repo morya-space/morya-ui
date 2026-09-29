@@ -37,7 +37,6 @@ export interface TableColumnDefinition {
   filterable?: boolean
   filters?: TableColumnFilter[]
   children?: TableColumnDefinition[]
-  editable?: boolean
 }
 
 /** Normalized column used inside the component. */
@@ -54,7 +53,6 @@ export interface TableColumn {
   resizable?: boolean
   filterable?: boolean
   filters?: TableColumnFilter[]
-  editable?: boolean
 }
 
 export interface TableServerOptions {
@@ -69,9 +67,53 @@ export interface TableSortPayload {
   sortOrder?: TableSortType | null
 }
 
-export interface TableEditConfig {
-  mode?: 'cell'
-  trigger?: 'click' | 'dblclick'
+/** Tree mode. Nested `children` or flat `parentId` via `transform`. */
+export interface TableTreeConfig {
+  childrenField?: string
+  indent?: number
+  expandAll?: boolean
+  expandRowKeys?: Array<string | number>
+  accordion?: boolean
+  trigger?: 'default' | 'row' | 'manual'
+  toggleMethod?: (params: { row: TableItem; expanded: boolean }) => boolean
+  lazy?: boolean
+  hasChildField?: string
+  loadMethod?: (row: TableItem) => Promise<TableItem[]> | TableItem[]
+  transform?: boolean
+  rowField?: string
+  parentField?: string
+  treeNode?: string
+  showLine?: boolean
+}
+
+/** Detail row expand. Mutually exclusive with `treeConfig`. */
+export interface TableExpandConfig {
+  expandAll?: boolean
+  expandRowKeys?: Array<string | number>
+  accordion?: boolean
+  /** `default` = expand column; `row` = whole row; `manual` = API only. */
+  trigger?: 'default' | 'row' | 'manual'
+  toggleMethod?: (params: { row: TableItem; expanded: boolean }) => boolean
+}
+
+/** Multi-select options. */
+export interface TableCheckboxConfig {
+  checkStrictly?: boolean
+  checkMethod?: (row: TableItem) => boolean
+  showHeader?: boolean
+  /** Initial checked row keys (applied once when uncontrolled). */
+  checkRowKeys?: Array<string | number>
+  /** Keep selection for rows not in the current `rows` snapshot. Default true. */
+  reserve?: boolean
+  /** `default` = checkbox only; `row` = clicking the row toggles selection. */
+  trigger?: 'default' | 'row'
+}
+
+/** Single-select options. */
+export interface TableRadioConfig {
+  strict?: boolean
+  checkMethod?: (row: TableItem) => boolean
+  trigger?: 'default' | 'row'
 }
 
 export interface TableSpanMethodParams {
@@ -96,14 +138,6 @@ export interface TableFooterMethodParams {
 
 export type TableFooterMethod = (params: TableFooterMethodParams) => Array<Array<string | number | null | undefined>>
 
-export interface TableEditChangePayload {
-  row: TableItem
-  column: string
-  value: unknown
-  oldValue: unknown
-  rowIndex: number
-}
-
 export type TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)
 export type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)
 export type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)
@@ -115,9 +149,7 @@ export interface TableProps {
   selection?: TableItem[] | null
   selectionMode?: 'multiple' | 'single' | null
   selectedItem?: TableItem | null
-  /** Server mode when non-null; sync with `v-model:serverOptions`. */
   serverOptions?: TableServerOptions | null
-  /** Total row count in server mode. */
   serverTotal?: number
   sortField?: string | string[]
   sortOrder?: TableSortType | TableSortType[]
@@ -129,7 +161,6 @@ export interface TableProps {
   searchField?: string | string[]
   searchValue?: string
   rowsPerPage?: number
-  /** Page size options for the built-in paginator. */
   pageSizes?: number[]
   page?: number
   paginator?: boolean
@@ -148,10 +179,6 @@ export interface TableProps {
   fixedHeader?: boolean
   tableHeight?: number | null
   tableMinHeight?: number
-  /**
-   * Stretch to fill the parent. Use with `MPageContent fill` only for full-viewport admin main lists.
-   * Ignored when `maxHeight` / `tableHeight` is set.
-   */
   fill?: boolean
   showIndex?: boolean
   showIndexSymbol?: string
@@ -163,6 +190,7 @@ export interface TableProps {
   checkboxColumnWidth?: number | null
   showRowsPerPage?: boolean
   expandable?: boolean
+  expandConfig?: TableExpandConfig | null
   expandedRowKeys?: Array<string | number>
   clickRowToExpand?: boolean
   headerTextDirection?: TableTextDirection
@@ -184,7 +212,9 @@ export interface TableProps {
   showFooter?: boolean
   footerMethod?: TableFooterMethod | null
   spanMethod?: TableSpanMethod | null
-  editConfig?: TableEditConfig | null
+  treeConfig?: TableTreeConfig | null
+  checkboxConfig?: TableCheckboxConfig | null
+  radioConfig?: TableRadioConfig | null
 }
 
 export interface TableEmits {
@@ -208,7 +238,6 @@ export interface TableEmits {
   (event: 'update:columnWidths', value: Record<string, number>): void
   (event: 'update:hiddenColumns', value: string[]): void
   (event: 'update:columnOrder', value: string[]): void
-  (event: 'edit-change', payload: TableEditChangePayload): void
 }
 
 /** @internal */
@@ -225,7 +254,6 @@ export interface TableHeader {
   resizable?: boolean
   filterable?: boolean
   filters?: TableColumnFilter[]
-  editable?: boolean
   children?: TableHeader[]
   colspan?: number
   rowspan?: number

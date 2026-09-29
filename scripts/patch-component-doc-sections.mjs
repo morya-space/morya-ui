@@ -288,10 +288,6 @@ const DOC_SECTIONS = {
     slots: '| 插槽名 | 说明 |\n| --- | --- |\n| `value` | 触发器展示。 |\n| `option` | 树节点 `{ node }`。 |',
     slotsEn: '| Slot | Description |\n| --- | --- |\n| `value` | Trigger display. |\n| `option` | Tree node `{ node }`. |',
   },
-  TreeTable: {
-    slots: '| 插槽名 | 说明 |\n| --- | --- |\n| `expansion` | 展开行 `{ row }`。 |',
-    slotsEn: '| Slot | Description |\n| --- | --- |\n| `expansion` | Expanded row `{ row }`. |',
-  },
   VirtualScroller: {
     events: '无自定义事件。',
     eventsEn: 'No custom events.',

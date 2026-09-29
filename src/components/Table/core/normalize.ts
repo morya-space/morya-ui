@@ -44,7 +44,6 @@ export function normalizeColumnDefinition(column: TableColumnDefinition): TableH
     resizable: column.resizable,
     filterable: column.filterable,
     filters: column.filters,
-    editable: column.editable,
     children,
   }
 }

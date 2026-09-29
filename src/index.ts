@@ -547,15 +547,16 @@ export type {
   TableColumnAlign,
   TableColumnDefinition,
   TableColumnFilter,
-  TableEditChangePayload,
-  TableEditConfig,
+  TableCheckboxConfig,
   TableEmits,
+  TableExpandConfig,
   TableFilterComparison,
   TableFilterOption,
   TableFooterMethod,
   TableHeaderItemClassName,
   TableItem,
   TableProps,
+  TableRadioConfig,
   TableServerOptions,
   TableSize,
   TableSortMode,
@@ -563,6 +564,7 @@ export type {
   TableSortType,
   TableSpanMethod,
   TableTextDirection,
+  TableTreeConfig,
 } from "./components/Table/types";
 export { default as MTabs } from "./components/Tabs/Tabs.vue";
 export type {
@@ -641,14 +643,6 @@ export type {
   TreeSelectProps,
   TreeSelectValue,
 } from "./components/TreeSelect/types";
-export { default as MTreeTable } from "./components/TreeTable/TreeTable.vue";
-
-export type {
-  TreeTableColumn,
-  TreeTableEmits,
-  TreeTableNode,
-  TreeTableProps,
-} from "./components/TreeTable/types";
 export type {
   VirtualScrollerExpose,
   VirtualScrollerItemSlotProps,

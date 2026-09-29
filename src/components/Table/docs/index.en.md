@@ -6,30 +6,7 @@ description: Data table with sorting, filtering, selection, pagination, frozen c
 
 # Table
 
-`MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.
-
-Header “select all” applies to the **current page** only. Enterprise capabilities (virtual scroll, column resize, header filters, inline edit, etc.) are optional props on the same `MTable`—no separate grid component.
-
-### Capability matrix
-
-| Capability | Prop / column field | Default |
-| --- | --- | --- |
-| Sort / multi-sort | `sortable` / `multiSort` | off |
-| Programmatic filter | `filters` / `filterOptions` / `searchValue` | — |
-| Header filter UI | column `filterable` (+ `filters`) | off |
-| Pagination | `paginator` | off |
-| Selection | `selectionMode` | off |
-| Fixed columns | column `fixed` | — |
-| Expandable rows | `expandable` | off |
-| Column resize | column `resizable` / `v-model:column-widths` | off |
-| Virtual scroll | `virtual` + height | off |
-| Column hide / order | `hiddenColumns` / `columnOrder` | — |
-| Grouped headers | column `children` | — |
-| Footer summary | `showFooter` + `footerMethod` | off |
-| Cell merge | `spanMethod` | — |
-| Inline edit | `editConfig` + column `editable` | off |
-
-Out of scope: Excel area-select/copy, pivot, embedded charts.
+`MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination. Header “select all” applies to the current page only.
 
 Column width rules:
 
@@ -37,7 +14,7 @@ Column width rules:
 - Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally
 - Horizontal scrolling appears when the total minimum width exceeds the container
 - Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars
-- **Full-viewport main lists (when it fits):** `MPageContent fill` + `MTable fill paginator` — body scrolls; pagination at the page bottom. Skip `fill` for embedded/short tables
+- For full-viewport main lists, use `MPageContent fill` + `MTable fill paginator` (body scrolls; pagination at the bottom). Skip `fill` for embedded or short tables.
 
 ## Import
 
@@ -67,7 +44,7 @@ Use `search-value` / `filter-options` for client filtering. Enable `paginator` w
 
 ## Expandable rows
 
-Set `expandable` and provide the `expansion` slot. Column `render` works for custom cells; a `cell-{key}` slot overrides `render`.
+Customize cells with `render` or `#cell-{key}`. Set `expandable` (or `expandConfig`) and provide the `#expansion` slot. In tree mode, `expandedRowKeys` controls tree nodes and cannot be used for detail expansion at the same time.
 
 ```vue preview src="./demos/ExpandableRows.en.vue"
 ```
@@ -93,9 +70,9 @@ Enable `virtual` with `maxHeight` / `tableHeight` / `fill`. Expandable tables sk
 ```vue preview src="./demos/VirtualScroll.en.vue"
 ```
 
-## Multi-header, footer, and editing
+## Multi-header, footer, and merges
 
-Use column `children` for grouped headers; `show-footer` + `footer-method` for summaries; `edit-config` + column `editable` for cell editing (`#edit-{key}` / `edit-change`); `span-method` for merges.
+Use column `children` for grouped headers; `show-footer` + `footer-method` for summaries; `span-method` for merges.
 
 ```vue preview src="./demos/GridFeatures.en.vue"
 ```
@@ -103,6 +80,17 @@ Use column `children` for grouped headers; `show-footer` + `footer-method` for s
 ## Empty and loading
 
 ```vue preview src="./demos/EmptyAndLoading.en.vue"
+```
+
+## Tree table
+
+Pass `tree-config` for hierarchical rows: nested `children`, or flat `parentId` with `transform`. Bind expand state with `v-model:expanded-row-keys`. Supports `expandAll` / `expandRowKeys`, `accordion`, `trigger`, `toggleMethod`, and lazy `loadMethod`.
+
+Instance methods: `setTreeExpand`, `setAllTreeExpand`, `toggleTreeExpand`, `isTreeExpandByRow`, `getTreeExpandRecords`, `clearTreeExpand`.
+
+With multi-select, parent/child cascade and indeterminate are on by default (`checkbox-config.check-strictly=false`). Use `checkMethod` to disable specific rows.
+
+```vue preview src="./demos/Tree.en.vue"
 ```
 
 ## Server mode
@@ -114,6 +102,8 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 
 ## Breaking changes
 
+- Removed built-in cell editing: `editConfig`, column `editable`, `edit-change`, `#edit-{key}`; use `#cell-{key}` / `render` instead
+- Removed `MTreeTable` (including `morya-ui/tree-table`); use `MTable` + `treeConfig`
 - `serverItemsLength` → `serverTotal`
 - `rowsItems` → `pageSizes`
 - Removed `hideHeader`; use `showHeader` (default `true`)
@@ -140,7 +130,6 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 | `filterable` | `boolean` | Show header filter trigger. |
 | `filters` | `TableColumnFilter[]` | Header filter options; omit for text filter. |
 | `children` | `TableColumnDefinition[]` | Nested columns for multi-level headers. |
-| `editable` | `boolean` | Editable when `editConfig` is set. |
 
 ## Props
 
@@ -151,6 +140,7 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 | `fit` | `boolean` | `true` | Flexible columns fill remaining width. |
 | `selectionMode` | `'single' \| 'multiple' \| null` | `null` | Row selection mode. |
 | `selection` | `TableItem[] \| null` | `null` | Multi-select (`v-model:selection`). |
+| `selectedItem` | `TableItem \| null` | `null` | Single-select (`v-model:selected-item`). |
 | `serverOptions` | `TableServerOptions \| null` | `null` | Server paging/sort options. |
 | `serverTotal` | `number` | `0` | Total row count in server mode. |
 | `paginator` | `boolean` | `false` | Built-in pagination footer. |
@@ -160,6 +150,10 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 | `showHeader` | `boolean` | `true` | Show table header. |
 | `showRowsPerPage` | `boolean` | `true` | Show page-size picker. |
 | `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |
+| `treeConfig` | `TableTreeConfig \| null` | `null` | Tree rows. |
+| `expandConfig` | `TableExpandConfig \| null` | `null` | Detail expand (mutually exclusive with tree). |
+| `checkboxConfig` | `TableCheckboxConfig \| null` | `null` | Multi-select options. |
+| `radioConfig` | `TableRadioConfig \| null` | `null` | Single-select options. |
 | `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |
 | `highlightCurrent` | `boolean` | `false` | Highlight current row. |
 | `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |
@@ -173,7 +167,7 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 
 | Slot | Description |
 | --- | --- |
-| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }`. |
+| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }` (use this for custom editors). |
 | `body-cell` | Any cell; scope `{ row, column, value }`. |
 | `expansion` | Expanded row; scope `{ row }`. |
 | `empty` / `loading` | Empty and loading placeholders. |
@@ -195,7 +189,7 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 
 ## Instance
 
-Pagination and filter controls exposed via `ref`:
+Pagination, filter, selection, scroll, and expand controls via `ref`:
 
 | Method / Property | Description |
 | --- | --- |
@@ -210,7 +204,12 @@ Pagination and filter controls exposed via `ref`:
 | `rowsPerPageOptions` | Rows-per-page options. |
 | `rowsPerPageActiveOption` | Active rows-per-page value. |
 | `updateRowsPerPageActiveOption(n)` | Change rows per page. |
-| `setFilters(filters)` | Set filters programmatically. |
+| `setFilters(filters)` / `clearFilter()` | Set / clear filters. |
+| `clearSort()` | Clear sort. |
+| `getCheckboxRecords()` / `setCheckboxRow` / `clearCheckboxRow` / `isCheckedByCheckboxRow` / `isAllCheckboxChecked` | Selection APIs. |
+| `scrollTo(...)` / `scrollToRow(row)` | Scroll helpers. |
+| `setRowExpand` / `toggleRowExpand` / `clearRowExpand` / … | Detail expand (non-tree). |
+| `setTreeExpand` / `toggleTreeExpand` / `clearTreeExpand` / … | Tree expand. |
 
 ## Types
 
@@ -242,7 +241,6 @@ interface TableColumnDefinition {
   filters?: TableColumnFilter[]
   resizable?: boolean
   children?: TableColumnDefinition[]
-  editable?: boolean
   showOverflowTooltip?: boolean
 }
 ```

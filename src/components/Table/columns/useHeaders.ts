@@ -119,7 +119,6 @@ export function useHeaders(options: UseHeadersOptions) {
         resizable: header.resizable,
         filterable: header.filterable,
         filters: header.filters,
-        editable: header.editable,
         minWidth: header.minWidth,
       }
       if (headerSorting.sortable) headerSorting.sortType = 'none'
@@ -256,6 +255,20 @@ export function useHeaders(options: UseHeadersOptions) {
     emits('sort', { sortField: newSortBy, sortOrder: newSortType })
   }
 
+  const clearSort = () => {
+    if (sortMode.value !== 'emit') {
+      internalClientSortOptions.value = null
+    }
+    if (isServerSideMode.value && serverOptionsComputed.value) {
+      serverOptionsComputed.value = {
+        ...serverOptionsComputed.value,
+        sortBy: null,
+        sortType: null,
+      }
+    }
+    emits('sort', { sortField: undefined, sortOrder: null })
+  }
+
   const isMultiSorting = (headerValue: string): boolean => {
     if (serverOptionsComputed.value && Array.isArray(serverOptionsComputed.value.sortBy)) {
       return serverOptionsComputed.value.sortBy.includes(headerValue)
@@ -281,6 +294,7 @@ export function useHeaders(options: UseHeadersOptions) {
     headerColumns,
     headersForRender,
     updateSortField,
+    clearSort,
     isMultiSorting,
     getMultiSortNumber,
   }

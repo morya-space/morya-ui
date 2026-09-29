@@ -7,11 +7,11 @@ import type {
   TableSpanMethod,
   TableTextDirection,
 } from '../types'
+import type { TableTreeNodeMeta } from '../core/tree'
 import { computed, useSlots } from 'vue'
 import { useMLocale } from '../../../locale'
 import MCheckbox from '../../Checkbox/Checkbox.vue'
 import MIcon from '../../Icon/Icon.vue'
-import MInput from '../../Input/Input.vue'
 import MRadio from '../../Radio/Radio.vue'
 import { SYNTHETIC } from '../columns/keys'
 import {
@@ -50,7 +50,6 @@ const props = defineProps<{
   singleSelectedRowKey: string | number | null
   clickRowToExpand: boolean
   ifHasExpandSlot: boolean
-  editingValue: string
   pagination: {
     isFirstPage: boolean
     isLastPage: boolean
@@ -63,9 +62,15 @@ const props = defineProps<{
   bodyRowIndex: (index: number) => number
   getBodyRowKey: (item: TableItem, index: number) => string | number
   isRowSelected: (item: TableItem, index: number) => boolean
+  isRowIndeterminate?: (item: TableItem, index: number) => boolean
+  isRowCheckDisabled?: (item: TableItem) => boolean
   isCurrentRow: (item: TableItem, index: number) => boolean
   isRowExpanded: (item: TableItem, pageIndex: number) => boolean
-  isEditing: (item: TableItem, index: number, column: string) => boolean
+  treeEnabled?: boolean
+  treeNodeColumn?: string | null
+  treeIndent?: number
+  getTreeMeta?: (item: TableItem, index: number) => TableTreeNodeMeta | undefined
+  isTreeNodeExpanded?: (item: TableItem, index: number) => boolean
 }>()
 
 const emit = defineEmits<{
@@ -73,12 +78,9 @@ const emit = defineEmits<{
   'row-dblclick': [item: TableItem, index: number, event: Event]
   'row-contextmenu': [item: TableItem, event: MouseEvent]
   'toggle-expand': [item: TableItem, pageIndex: number, event: Event]
-  'cell-activate': [item: TableItem, index: number, column: string, event: MouseEvent]
+  'toggle-tree': [item: TableItem, pageIndex: number, event: Event]
   'toggle-select': [item: TableItem]
   'single-select': [item: TableItem]
-  'commit-edit': [item: TableItem, index: number, column: string]
-  'cancel-edit': []
-  'update:editingValue': [value: string]
 }>()
 
 const slots = useSlots()
@@ -125,6 +127,14 @@ function onRowClick(item: TableItem, index: number, event: Event) {
     emit('toggle-expand', item, props.bodyRowIndex(index), event)
   }
 }
+
+function treeMetaOf(item: TableItem, index: number) {
+  return props.getTreeMeta?.(item, index)
+}
+
+function isTreeColumn(column: string) {
+  return Boolean(props.treeEnabled && props.treeNodeColumn && column === props.treeNodeColumn)
+}
 </script>
 
 <template>
@@ -160,6 +170,11 @@ function onRowClick(item: TableItem, index: number, event: Event) {
           },
           typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, bodyRowIndex(index) + 1),
         ]"
+        :data-row-key="String(getBodyRowKey(item, index))"
+        :aria-level="treeEnabled ? (treeMetaOf(item, index)?.depth ?? 0) + 1 : undefined"
+        :aria-expanded="treeEnabled && treeMetaOf(item, index)?.hasChildren
+          ? isTreeNodeExpanded?.(item, index) ?? false
+          : undefined"
         @click="onRowClick(item, index, $event)"
         @dblclick="emit('row-dblclick', item, index, $event)"
         @contextmenu="emit('row-contextmenu', item, $event)"
@@ -179,16 +194,13 @@ function onRowClick(item: TableItem, index: number, event: Event) {
                 'm-table__cell--shadow-end': cell.column === firstRightFixedColumn,
                 'm-table__cell--expand': cell.column === SYNTHETIC.expand,
                 'm-table__cell--selection': cell.column === SYNTHETIC.checkbox || cell.column === SYNTHETIC.radio,
-                'm-table__cell--editing': isEditing(item, index, cell.column),
               },
               cellAlign(cell.column),
               bodyItemClassNameOf(bodyItemClassName, cell.column, bodyRowIndex(index) + 1),
             ]"
             @click="(event) => {
               if (cell.column === SYNTHETIC.expand) emit('toggle-expand', item, bodyRowIndex(index), event)
-              else emit('cell-activate', item, index, cell.column, event)
             }"
-            @dblclick="(event) => emit('cell-activate', item, index, cell.column, event)"
           >
             <div
               class="m-table__cell-inner"
@@ -197,30 +209,53 @@ function onRowClick(item: TableItem, index: number, event: Event) {
                 'm-table__cell-inner--selection': cell.column === SYNTHETIC.checkbox || cell.column === SYNTHETIC.radio,
               }"
             >
-              <template v-if="isEditing(item, index, cell.column)">
-                <slot
-                  v-if="slots[`edit-${cell.column}`]"
-                  :name="`edit-${cell.column}`"
-                  v-bind="{
-                    ...cellSlotProps(cell.column, item),
-                    value: editingValue,
-                    setValue: (value: unknown) => emit('update:editingValue', String(value ?? '')),
-                    commit: () => emit('commit-edit', item, index, cell.column),
-                    cancel: () => emit('cancel-edit'),
+              <div
+                v-if="isTreeColumn(cell.column)"
+                class="m-table__tree-cell"
+                :style="{
+                  paddingLeft: `${(treeMetaOf(item, index)?.depth ?? 0) * (treeIndent ?? 16)}px`,
+                }"
+              >
+                <button
+                  v-if="treeMetaOf(item, index)?.hasChildren"
+                  type="button"
+                  class="m-table__tree-toggler"
+                  :class="{
+                    'm-table__tree-toggler--expanded': isTreeNodeExpanded?.(item, index),
+                    'm-table__tree-toggler--loading': treeMetaOf(item, index)?.loading,
                   }"
+                  :aria-label="isTreeNodeExpanded?.(item, index) ? locale.collapse : locale.expand"
+                  :disabled="treeMetaOf(item, index)?.loading"
+                  @click.stop="emit('toggle-tree', item, bodyRowIndex(index), $event)"
+                >
+                  <MIcon
+                    :name="treeMetaOf(item, index)?.loading
+                      ? 'loader'
+                      : isTreeNodeExpanded?.(item, index) ? 'chevron-down' : 'chevron-right'"
+                    size="sm"
+                  />
+                </button>
+                <span v-else class="m-table__tree-toggler-spacer" />
+                <slot
+                  v-if="slots[`cell-${cell.column}`]"
+                  :name="`cell-${cell.column}`"
+                  v-bind="cellSlotProps(cell.column, item)"
                 />
-                <MInput
+                <slot
+                  v-else-if="slots[`cell-${cell.column.toLowerCase()}`]"
+                  :name="`cell-${cell.column.toLowerCase()}`"
+                  v-bind="cellSlotProps(cell.column, item)"
+                />
+                <template v-else-if="columnRenderMap.get(cell.column)">
+                  <span class="m-table__cell-text">{{ columnRenderMap.get(cell.column)!(item) }}</span>
+                </template>
+                <TableDefaultCell
                   v-else
-                  :model-value="editingValue"
-                  size="sm"
-                  fluid
-                  @update:model-value="emit('update:editingValue', String($event ?? ''))"
-                  @keydown.enter.prevent="emit('commit-edit', item, index, cell.column)"
-                  @keydown.esc.prevent="emit('cancel-edit')"
-                  @blur="emit('commit-edit', item, index, cell.column)"
-                  @click.stop
+                  :column="cell.column"
+                  :item="item"
+                  :show-tooltip="columnOverflowTooltip(cell.column)"
                 />
-              </template>
+              </div>
               <slot
                 v-else-if="slots[`cell-${cell.column}`]"
                 :name="`cell-${cell.column}`"
@@ -246,6 +281,8 @@ function onRowClick(item: TableItem, index: number, event: Event) {
               <template v-else-if="cell.column === SYNTHETIC.checkbox">
                 <MCheckbox
                   :model-value="isRowSelected(item, index)"
+                  :indeterminate="isRowIndeterminate?.(item, index) ?? false"
+                  :disabled="isRowCheckDisabled?.(item) ?? false"
                   :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + bodyRowIndex(index)))"
                   @update:model-value="emit('toggle-select', item)"
                   @click.stop
@@ -255,6 +292,7 @@ function onRowClick(item: TableItem, index: number, event: Event) {
                 <MRadio
                   :model-value="singleSelectedRowKey ?? undefined"
                   :value="getBodyRowKey(item, index)"
+                  :disabled="isRowCheckDisabled?.(item) ?? false"
                   :aria-label="locale.selectRow.replace('{index}', String(currentPageFirstIndex + bodyRowIndex(index)))"
                   @update:model-value="emit('single-select', item)"
                   @click.stop

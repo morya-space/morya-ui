@@ -110,7 +110,6 @@
     "**/tooltip/index.js",
     "**/tree/index.js",
     "**/tree-select/index.js",
-    "**/tree-table/index.js",
     "**/virtual-scroller/index.js"
   ],
   "exports": {
@@ -669,12 +668,6 @@
     },
     "./tree-select/style": "./dist/tree-select/style.js",
     "./tree-select/style.css": "./dist/tree-select/style.css",
-    "./tree-table": {
-      "types": "./dist/components/TreeTable/index.d.ts",
-      "import": "./dist/tree-table/index.js"
-    },
-    "./tree-table/style": "./dist/tree-table/style.js",
-    "./tree-table/style.css": "./dist/tree-table/style.css",
     "./virtual-scroller": {
       "types": "./dist/components/VirtualScroller/index.d.ts",
       "import": "./dist/virtual-scroller/index.js"

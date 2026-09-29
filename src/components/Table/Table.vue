@@ -17,7 +17,6 @@ import MLoading from '../Loading/Loading.vue'
 import MPagination from '../Pagination/Pagination.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import {
-  useCellEdit,
   useClickRow,
   useColumnResize,
   useExpandableRow,
@@ -28,6 +27,7 @@ import {
   useRows,
   useServerOptions,
   useTotalItems,
+  useTreeRows,
   useVirtualRows,
 } from './hooks'
 import { M_TABLE_ROOT_KEY, SYNTHETIC, isSyntheticColumn } from './columns/keys'
@@ -48,6 +48,13 @@ import {
 import TableThead from './render/TableThead.vue'
 import TableTbody from './render/TableTbody.vue'
 import { resolveRowKey, sameTableItem, stripSyntheticFields } from './core/utils'
+import {
+  collectSubtree,
+  computeTreeIndeterminateKeys,
+  isRowCheckable,
+  syncTreeParentSelection,
+  toggleTreeCheckboxSelection,
+} from './core/treeSelection'
 defineOptions({ inheritAttrs: false })
 
 
@@ -118,7 +125,10 @@ const props = withDefaults(defineProps<TableProps>(), {
   showFooter: false,
   footerMethod: null,
   spanMethod: null,
-  editConfig: null,
+  expandConfig: null,
+  treeConfig: null,
+  checkboxConfig: null,
+  radioConfig: null,
 })
 
 const emit = defineEmits<TableEmits>()
@@ -218,6 +228,7 @@ const {
   showRowsPerPage,
   clickRowToExpand,
   expandable,
+  expandConfig,
   emptyDescription,
   fit,
   emptyText,
@@ -232,7 +243,9 @@ const {
   showFooter,
   footerMethod,
   spanMethod,
-  editConfig,
+  treeConfig,
+  checkboxConfig,
+  radioConfig,
 } = toRefs(props)
 
 const visibleColumnDefs = computed(() =>
@@ -247,7 +260,35 @@ const headers = computed(() => normalizeColumnList(visibleColumnDefs.value))
 
 const headerRows = computed(() => buildHeaderRows(visibleColumnDefs.value))
 
-const items = computed(() => props.rows)
+const sourceRows = computed(() => props.rows)
+
+const {
+  treeEnabled,
+  treeResolved,
+  treeRoots,
+  flatRows,
+  treeMeta,
+  expandedKeys: treeExpandedKeys,
+  toggleTreeNode,
+  isTreeExpandByRow,
+  getTreeExpandRecords,
+  setTreeExpand,
+  setAllTreeExpand,
+  clearTreeExpand,
+  toggleTreeExpand,
+} = useTreeRows(
+  treeConfig,
+  sourceRows,
+  rowKey,
+  expandedRowKeys,
+  searchValue,
+  searchField,
+  tableEmit,
+)
+
+/** Tree mode feeds flattened visible rows into the existing query/page pipeline. */
+const items = computed(() => (treeEnabled.value ? flatRows.value : props.rows))
+const pipelineSearchValue = computed(() => (treeEnabled.value ? '' : searchValue.value))
 const itemsSelected = computed(() => props.selection ?? null)
 const sortBy = computed(() => resolveSortField(props.sortField))
 const sortType = computed(() => resolveSortOrder(props.sortOrder))
@@ -273,8 +314,39 @@ const tableRootClass = computed(() => [
     'm-table--enable-row-hover': !resolvedNoHover.value,
     'm-table--fill': fill.value && !resolvedTableHeight.value,
     'm-table--virtual': virtualEnabled.value,
+    'm-table--tree': treeEnabled.value,
+    'm-table--tree-line': treeEnabled.value && treeResolved.value.showLine,
   },
 ])
+
+const treeNodeColumn = computed(() => {
+  if (!treeEnabled.value) return null as string | null
+  if (treeResolved.value.treeNode) return treeResolved.value.treeNode
+  return headers.value[0]?.value ?? null
+})
+
+const treeRowTrigger = computed(
+  () => treeEnabled.value && treeResolved.value.trigger === 'row',
+)
+
+const resolvedCheckboxConfig = computed(() => ({
+  checkStrictly: checkboxConfig.value?.checkStrictly ?? false,
+  checkMethod: checkboxConfig.value?.checkMethod,
+  showHeader: checkboxConfig.value?.showHeader !== false,
+  checkRowKeys: checkboxConfig.value?.checkRowKeys,
+  reserve: checkboxConfig.value?.reserve !== false,
+  trigger: checkboxConfig.value?.trigger ?? 'default',
+}))
+
+const resolvedRadioConfig = computed(() => ({
+  strict: radioConfig.value?.strict !== false,
+  checkMethod: radioConfig.value?.checkMethod,
+  trigger: radioConfig.value?.trigger ?? 'default',
+}))
+
+const treeCascadeSelection = computed(
+  () => treeEnabled.value && !resolvedCheckboxConfig.value.checkStrictly,
+)
 
 const useTableFixedLayout = computed(() => fixedHeaders.value.length > 0 || fit.value !== false)
 
@@ -295,7 +367,11 @@ const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
 const slots = useSlots()
 const ifHasPaginationSlot = computed(() => !!slots.pagination)
 const ifHasLoadingSlot = computed(() => !!slots.loading)
-const ifHasExpandSlot = computed(() => expandable.value || !!slots.expansion)
+/** Detail expansion is disabled while tree mode owns `expandedRowKeys`. */
+const ifHasExpandSlot = computed(
+  () => !treeEnabled.value && (expandable.value || !!expandConfig.value || !!slots.expansion),
+)
+const expandableEnabled = ifHasExpandSlot
 const ifHasBodySlot = computed(() => !!slots.body)
 const ifHasFooterSlot = computed(() => !!slots.footer)
 
@@ -379,6 +455,7 @@ const {
   headerColumns,
   headersForRender,
   updateSortField,
+  clearSort,
   isMultiSorting,
   getMultiSortNumber,
 } = useHeaders({
@@ -404,10 +481,11 @@ const {
   emits: tableEmit,
 })
 
-/** In `emit` sort mode the parent owns sorting — skip client-side sorting entirely. */
-const effectiveClientSortOptions = computed(() =>
-  sortMode.value === 'emit' ? null : clientSortOptions.value,
-)
+/** In `emit` sort mode (or tree mode) the parent owns sorting — skip client-side sorting. */
+const effectiveClientSortOptions = computed(() => {
+  if (treeEnabled.value) return null
+  return sortMode.value === 'emit' ? null : clientSortOptions.value
+})
 
 const { pageSizesComputed, rowsPerPageRef, updateRowsPerPage } = useRows(
   isServerSideMode,
@@ -430,12 +508,23 @@ const {
   items,
   itemsSelected,
   searchField,
-  searchValue,
+  pipelineSearchValue,
   serverTotal,
   multiSort,
   rowKey,
   tableEmit,
 )
+
+const indeterminateKeys = computed(() => {
+  if (!treeCascadeSelection.value) return new Set<string | number>()
+  return computeTreeIndeterminateKeys(
+    treeRoots.value,
+    selectItemsComputed.value,
+    rowKey.value,
+    treeResolved.value.childrenField,
+    resolvedCheckboxConfig.value.checkMethod,
+  )
+})
 
 const singleSelectedRowKey = computed(() => {
   if (!selectedItem.value) return null
@@ -483,7 +572,77 @@ const {
 )
 
 function onToggleSelectAll(checked: boolean | unknown) {
+  if (treeCascadeSelection.value) {
+    const key = rowKey.value
+    const childrenField = treeResolved.value.childrenField
+    const checkMethod = resolvedCheckboxConfig.value.checkMethod
+    let next = [...selectItemsComputed.value]
+    if (checked) {
+      for (const row of itemsInPage.value) {
+        const targets = collectSubtree(stripSyntheticFields(row), childrenField)
+          .filter((item) => isRowCheckable(item, checkMethod))
+          .map(stripSyntheticFields)
+        for (const target of targets) {
+          if (!next.some((entry) => sameTableItem(entry, target, key))) {
+            next.push(target)
+          }
+        }
+      }
+      next = syncTreeParentSelection(
+        treeRoots.value,
+        next,
+        key,
+        childrenField,
+        checkMethod,
+      )
+      selectItemsComputed.value = next
+      tableEmit('select-all')
+      return
+    }
+    for (const row of itemsInPage.value) {
+      const targets = collectSubtree(stripSyntheticFields(row), childrenField)
+      next = next.filter(
+        (entry) => !targets.some((target) => sameTableItem(entry, target, key)),
+      )
+    }
+    next = syncTreeParentSelection(
+      treeRoots.value,
+      next,
+      key,
+      childrenField,
+      checkMethod,
+    )
+    selectItemsComputed.value = next
+    return
+  }
   toggleSelectAll(Boolean(checked), itemsInPage.value)
+}
+
+function onToggleSelectItem(item: TableItem) {
+  const checkMethod = resolvedCheckboxConfig.value.checkMethod
+  if (checkMethod && !checkMethod(item)) return
+
+  if (treeCascadeSelection.value) {
+    const { next, selected } = toggleTreeCheckboxSelection({
+      selected: selectItemsComputed.value,
+      row: item,
+      rowKey: rowKey.value,
+      childrenField: treeResolved.value.childrenField,
+      checkStrictly: false,
+      checkMethod,
+    })
+    const synced = syncTreeParentSelection(
+      treeRoots.value,
+      next,
+      rowKey.value,
+      treeResolved.value.childrenField,
+      checkMethod,
+    )
+    selectItemsComputed.value = synced
+    tableEmit(selected ? 'select-row' : 'deselect-row', stripSyntheticFields(item))
+    return
+  }
+  toggleSelectItem(item)
 }
 
 const prevPageEndIndex = computed(() => {
@@ -492,9 +651,30 @@ const prevPageEndIndex = computed(() => {
 })
 
 const {
+  expandResolved,
   isRowExpanded,
+  isRowExpandByRow,
+  getRowExpandRecords,
+  setRowExpand,
+  setAllRowExpand,
+  clearRowExpand,
+  toggleRowExpand,
   toggleExpandRow,
-} = useExpandableRow(expandedRowKeys, rowKey, prevPageEndIndex, tableEmit)
+} = useExpandableRow(
+  expandedRowKeys,
+  rowKey,
+  prevPageEndIndex,
+  tableEmit,
+  expandConfig,
+  expandableEnabled,
+  totalItems,
+)
+
+const detailExpandOnRowClick = computed(
+  () =>
+    !treeEnabled.value
+    && (clickRowToExpand.value || expandResolved.value.trigger === 'row'),
+)
 
 const { fixedHeaders, lastFixedColumn, firstRightFixedColumn, fixedColumnsInfos } = useFixedColumn(headersForRender)
 const { clickRow, dblClickRow } = useClickRow(tableEmit)
@@ -582,30 +762,44 @@ function bodyRowIndex(index: number) {
   return virtualEnabled.value ? virtualStartIndex.value + index : index
 }
 
-const {
-  editingValue,
-  isEditing,
-  commitEdit,
-  cancelEdit,
-  onCellActivate,
-  setEditingValue,
-} = useCellEdit({
-  editConfig,
-  headers,
-  getBodyRowKey,
-  bodyRowIndex,
-  onEditChange: (payload) => emit('edit-change', payload),
-})
-
 function isRowSelected(item: TableItem, index: number) {
+  const key = getBodyRowKey(item, index)
+  if (indeterminateKeys.value.has(key)) return false
   if (isMultipleSelectable.value) return isItemSelected(item)
-  if (isSingleSelectable.value) return singleSelectedRowKey.value === getBodyRowKey(item, index)
+  if (isSingleSelectable.value) return singleSelectedRowKey.value === key
+  return false
+}
+
+function isRowIndeterminate(item: TableItem, index: number) {
+  return indeterminateKeys.value.has(getBodyRowKey(item, index))
+}
+
+function isRowCheckDisabled(item: TableItem) {
+  if (isMultipleSelectable.value) {
+    const method = resolvedCheckboxConfig.value.checkMethod
+    return method ? !method(item) : false
+  }
+  if (isSingleSelectable.value) {
+    const method = resolvedRadioConfig.value.checkMethod
+    return method ? !method(item) : false
+  }
   return false
 }
 
 function onSingleSelect(item: TableItem) {
-  emit('update:selectedItem', stripSyntheticFields(item))
-  emit('select-row', stripSyntheticFields(item))
+  if (isRowCheckDisabled(item)) return
+  const clean = stripSyntheticFields(item)
+  if (
+    !resolvedRadioConfig.value.strict
+    && selectedItem.value
+    && sameTableItem(selectedItem.value, clean, rowKey.value)
+  ) {
+    emit('update:selectedItem', null)
+    emit('deselect-row', clean)
+    return
+  }
+  emit('update:selectedItem', clean)
+  emit('select-row', clean)
 }
 
 function onPaginationRowsChange(rows: number) {
@@ -634,6 +828,32 @@ function onRowClick(item: TableItem, index: number, event: Event) {
   const absoluteIndex = prevPageEndIndex.value + bodyRowIndex(index)
   clickRow(item, absoluteIndex, event)
   setCurrentRow(item, index)
+  if (treeRowTrigger.value) {
+    void toggleTreeNode(item, bodyRowIndex(index), event)
+  }
+  if (
+    isMultipleSelectable.value
+    && resolvedCheckboxConfig.value.trigger === 'row'
+  ) {
+    onToggleSelectItem(item)
+  } else if (
+    isSingleSelectable.value
+    && resolvedRadioConfig.value.trigger === 'row'
+  ) {
+    onSingleSelect(item)
+  }
+}
+
+function onToggleTree(item: TableItem, pageIndex: number, event: Event) {
+  void toggleTreeNode(item, pageIndex, event)
+}
+
+function bodyTreeMeta(item: TableItem, index: number) {
+  return treeMeta.value.get(getBodyRowKey(item, index))
+}
+
+function isTreeNodeExpanded(item: TableItem, index: number) {
+  return treeExpandedKeys.value.includes(getBodyRowKey(item, index))
 }
 
 function onRowDblClick(item: TableItem, index: number, event: Event) {
@@ -661,8 +881,107 @@ function syncViewportHeight() {
   if (wrap) viewportHeight.value = wrap.clientHeight
 }
 
+function getCheckboxRecords() {
+  return selectItemsComputed.value
+}
+
+function setCheckboxRow(rows: TableItem | TableItem[], checked: boolean) {
+  const list = Array.isArray(rows) ? rows : [rows]
+  for (const row of list) {
+    const selected = isItemSelected(row)
+    if (selected === checked) continue
+    onToggleSelectItem(row)
+  }
+}
+
+function clearCheckboxRow() {
+  selectItemsComputed.value = []
+}
+
+function getCheckboxIndeterminateRecords() {
+  const keys = indeterminateKeys.value
+  if (!keys.size) return [] as TableItem[]
+  if (treeEnabled.value) {
+    const childrenField = treeResolved.value.childrenField
+    const out: TableItem[] = []
+    for (const root of treeRoots.value) {
+      for (const node of collectSubtree(root, childrenField)) {
+        const key = resolveRowKey(node, 0, rowKey.value)
+        if (keys.has(key)) out.push(stripSyntheticFields(node))
+      }
+    }
+    return out
+  }
+  return totalItems.value
+    .filter((row, index) => keys.has(resolveRowKey(row, index, rowKey.value)))
+    .map(stripSyntheticFields)
+}
+
+function isCheckedByCheckboxRow(row: TableItem) {
+  return isItemSelected(row)
+}
+
+function isAllCheckboxChecked() {
+  return multipleSelectStatus.value === 'allSelected'
+}
+
+function scrollTo(...args: Parameters<NonNullable<ScrollbarInstance['scrollTo']>>) {
+  scrollbarRef.value?.scrollTo(...args)
+}
+
+async function scrollToRow(row: TableItem) {
+  const key = resolveRowKey(row, 0, rowKey.value)
+  const index = totalItems.value.findIndex((item, itemIndex) =>
+    resolveRowKey(item, itemIndex, rowKey.value) === key
+    || sameTableItem(item, row, rowKey.value),
+  )
+  if (index < 0) return
+  if (!isServerSideMode.value && rowsPerPageRef.value > 0) {
+    const page = Math.floor(index / rowsPerPageRef.value) + 1
+    if (page !== currentPaginationNumber.value) updatePage(page)
+  }
+  await nextTick()
+  const el = dataTable.value?.querySelector(`[data-row-key="${CSS.escape(String(key))}"]`)
+  if (el instanceof HTMLElement) {
+    el.scrollIntoView({ block: 'nearest' })
+    return
+  }
+  if (virtualEnabled.value && virtualRowHeight.value) {
+    scrollbarRef.value?.setScrollTop(index * virtualRowHeight.value)
+  }
+}
+
+function clearFilter() {
+  setActiveFilters(null)
+}
+
+function seedCheckboxRowKeys() {
+  const keys = resolvedCheckboxConfig.value.checkRowKeys
+  if (!keys?.length) return
+  if (props.selection != null) return
+  if (selectItemsComputed.value.length > 0) return
+  const keySet = new Set(keys)
+  let matched: TableItem[]
+  if (treeEnabled.value) {
+    const childrenField = treeResolved.value.childrenField
+    matched = []
+    for (const root of treeRoots.value) {
+      for (const node of collectSubtree(root, childrenField)) {
+        const key = resolveRowKey(node, 0, rowKey.value)
+        if (keySet.has(key)) matched.push(stripSyntheticFields(node))
+      }
+    }
+  } else {
+    matched = totalItems.value
+      .filter((row, index) => keySet.has(resolveRowKey(row, index, rowKey.value)))
+      .map(stripSyntheticFields)
+  }
+  if (matched.length) selectItemsComputed.value = matched
+}
+
 onMounted(() => {
   if (virtualEnabled.value) syncViewportHeight()
+  seedCheckboxRowKeys()
 })
 
 watch(() => props.currentRowKey, (value) => {
@@ -720,6 +1039,32 @@ defineExpose({
   setColumnWidths: setActiveColumnWidths,
   setHiddenColumns: setActiveHiddenColumns,
   setColumnOrder: setActiveColumnOrder,
+  // selection
+  getCheckboxRecords,
+  setCheckboxRow,
+  clearCheckboxRow,
+  getCheckboxIndeterminateRecords,
+  isCheckedByCheckboxRow,
+  isAllCheckboxChecked,
+  // scroll / query
+  scrollTo,
+  scrollToRow,
+  clearSort,
+  clearFilter,
+  // detail expand
+  setRowExpand,
+  setAllRowExpand,
+  clearRowExpand,
+  toggleRowExpand,
+  isRowExpandByRow,
+  getRowExpandRecords,
+  // tree
+  isTreeExpandByRow,
+  getTreeExpandRecords,
+  setTreeExpand,
+  setAllTreeExpand,
+  clearTreeExpand,
+  toggleTreeExpand,
 })
 </script>
 
@@ -743,6 +1088,7 @@ defineExpose({
         <div class="m-table__surface" :aria-busy="loading || undefined">
           <table
             :aria-label="ariaLabel || undefined"
+            :role="treeEnabled ? 'treegrid' : undefined"
           >
             <colgroup>
               <col
@@ -760,6 +1106,7 @@ defineExpose({
               :header-text-direction="headerTextDirection"
               :multi-sort="multiSort"
               :multiple-select-status="multipleSelectStatus"
+              :show-checkbox-header="resolvedCheckboxConfig.showHeader"
               :last-fixed-column="lastFixedColumn"
               :first-right-fixed-column="firstRightFixedColumn"
               :fixed-columns-infos="fixedColumnsInfos"
@@ -813,26 +1160,28 @@ defineExpose({
               :offset-bottom="offsetBottom"
               :current-page-first-index="currentPageFirstIndex"
               :single-selected-row-key="singleSelectedRowKey"
-              :click-row-to-expand="clickRowToExpand"
+              :click-row-to-expand="detailExpandOnRowClick"
               :if-has-expand-slot="ifHasExpandSlot"
-              :editing-value="editingValue"
               :pagination="tbodyPagination"
               :body-row-index="bodyRowIndex"
               :get-body-row-key="getBodyRowKey"
               :is-row-selected="isRowSelected"
+              :is-row-indeterminate="isRowIndeterminate"
+              :is-row-check-disabled="isRowCheckDisabled"
               :is-current-row="isCurrentRow"
               :is-row-expanded="isRowExpanded"
-              :is-editing="isEditing"
+              :tree-enabled="treeEnabled"
+              :tree-node-column="treeNodeColumn"
+              :tree-indent="treeResolved.indent"
+              :get-tree-meta="bodyTreeMeta"
+              :is-tree-node-expanded="isTreeNodeExpanded"
               @row-click="onRowClick"
               @row-dblclick="onRowDblClick"
               @row-contextmenu="contextMenuRow"
               @toggle-expand="(item, pageIndex, event) => toggleExpandRow(item, pageIndex, event)"
-              @cell-activate="onCellActivate"
-              @toggle-select="toggleSelectItem"
+              @toggle-tree="onToggleTree"
+              @toggle-select="onToggleSelectItem"
               @single-select="onSingleSelect"
-              @commit-edit="commitEdit"
-              @cancel-edit="cancelEdit"
-              @update:editing-value="setEditingValue"
             >
               <template
                 v-for="(_, name) in slots"

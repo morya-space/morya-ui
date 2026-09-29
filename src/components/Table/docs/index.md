@@ -6,30 +6,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 
 # Table
 
-`MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。
-
-多选表头「全选」仅作用于**当前页**（与文案「全选当前页」一致）。企业级能力（虚拟滚动、列宽拖拽、表头筛选、行内编辑等）在同一 `MTable` 上以可选 props 逐步开放，无需切换组件。
-
-### 能力矩阵
-
-| 能力 | Prop / 列字段 | 默认 |
-| --- | --- | --- |
-| 排序 / 多列排序 | `sortable` / `multiSort` | 关 |
-| 程序化筛选 | `filters` / `filterOptions` / `searchValue` | — |
-| 表头筛选 UI | 列 `filterable` (+ `filters`) | 关 |
-| 分页 | `paginator` | 关 |
-| 选择 | `selectionMode` | 关 |
-| 固定列 | 列 `fixed` | — |
-| 展开行 | `expandable` | 关 |
-| 列宽拖拽 | 列 `resizable` / `v-model:column-widths` | 关 |
-| 虚拟滚动 | `virtual` + 高度 | 关 |
-| 列显隐 / 顺序 | `hiddenColumns` / `columnOrder` | — |
-| 多级表头 | 列 `children` | — |
-| 表尾汇总 | `showFooter` + `footerMethod` | 关 |
-| 单元格合并 | `spanMethod` | — |
-| 行内编辑 | `editConfig` + 列 `editable` | 关 |
-
-不做：Excel 框选复制、透视、内嵌图表（超出本组件边界）。
+`MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。多选表头「全选」仅作用于当前页。
 
 列宽规则：
 
@@ -37,7 +14,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 - 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列
 - 总最小宽度超出容器时出现横向滚动
 - 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条
-- **全视口主列表（按需）**：`MPageContent fill` + `MTable fill paginator`——表体滚动、分页贴底；嵌入表/短页不要硬套 `fill`
+- 全视口主列表可用 `MPageContent fill` + `MTable fill paginator`（表体滚动、分页贴底）；嵌入表或短页不必使用 `fill`
 
 ## 引入
 
@@ -74,7 +51,7 @@ import { MTable, MTag } from 'morya-ui'
 
 ## 展开行与列渲染
 
-列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。
+列可通过 `render` 或 `#cell-{key}` 自定义单元格。展开行设置 `expandable`（或 `expandConfig`），详情由 `#expansion` 提供。树模式下 `expandedRowKeys` 用于树节点展开，不可同时用于详情展开。
 
 ```vue preview src="./demos/ExpandableRows.zh.vue"
 ```
@@ -93,9 +70,9 @@ import { MTable, MTag } from 'morya-ui'
 ```vue preview src="./demos/VirtualScroll.zh.vue"
 ```
 
-## 多级表头、表尾与编辑
+## 多级表头、表尾与合并
 
-列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计；`edit-config` + 列 `editable` 启用单元格编辑（`#edit-{key}` / `edit-change`）；`span-method` 合并单元格。
+列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计；`span-method` 合并单元格。
 
 ```vue preview src="./demos/GridFeatures.zh.vue"
 ```
@@ -103,6 +80,17 @@ import { MTable, MTag } from 'morya-ui'
 ## 空态与加载
 
 ```vue preview src="./demos/EmptyAndLoading.zh.vue"
+```
+
+## 树形表格
+
+传入 `tree-config` 启用树模式：嵌套 `children`，或 `transform` + `parentId` 扁平数据。展开状态用 `v-model:expanded-row-keys`。支持 `expandAll` / `expandRowKeys`、`accordion`、`trigger`、`toggleMethod`、懒加载 `lazy` + `loadMethod`。
+
+实例方法：`setTreeExpand`、`setAllTreeExpand`、`toggleTreeExpand`、`isTreeExpandByRow`、`getTreeExpandRecords`、`clearTreeExpand`。
+
+树 + 多选时默认父子级联与半选（`checkbox-config.check-strictly=false`）；`checkMethod` 可禁用单行勾选。
+
+```vue preview src="./demos/Tree.zh.vue"
 ```
 
 ## 服务端模式
@@ -114,8 +102,9 @@ import { MTable, MTag } from 'morya-ui'
 
 ## Breaking changes
 
-- `serverItemsLength` → `serverTotal`
-- `rowsItems` → `pageSizes`
+- 移除内置单元格编辑：`editConfig`、列 `editable`、`edit-change`、`#edit-{key}`；请用 `#cell-{key}` / `render` 自定义
+- 移除 `MTreeTable`（含 `morya-ui/tree-table`）；树表改用 `MTable` + `treeConfig`
+- `serverItemsLength` → `serverTotal`；`rowsItems` → `pageSizes`
 - `hideHeader` 移除；改用 `showHeader`（默认 `true`）
 - `hideRowsPerPage` 移除；改用 `showRowsPerPage`（默认 `true`）
 - 移除：`clickEventType`、`rowsPerPageMessage`、`rowsOfPageSeparatorMessage`、`preventContextMenuRow`、`tableNodeId`
@@ -140,7 +129,6 @@ import { MTable, MTag } from 'morya-ui'
 | `filterable` | `boolean` | 显示表头筛选。 |
 | `filters` | `TableColumnFilter[]` | 表头筛选选项；省略则为文本筛选。 |
 | `children` | `TableColumnDefinition[]` | 多级表头子列。 |
-| `editable` | `boolean` | 配合 `editConfig` 可编辑。 |
 
 ## Props
 
@@ -169,8 +157,11 @@ import { MTable, MTag } from 'morya-ui'
 | `showFooter` | `boolean` | `false` | 显示表尾。 |
 | `footerMethod` | `TableFooterMethod \| null` | `null` | 表尾数据。 |
 | `spanMethod` | `TableSpanMethod \| null` | `null` | 单元格合并。 |
-| `editConfig` | `TableEditConfig \| null` | `null` | 单元格编辑配置。 |
-| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |
+| `treeConfig` | `TableTreeConfig \| null` | `null` | 树形行。 |
+| `expandConfig` | `TableExpandConfig \| null` | `null` | 详情展开配置（与树互斥）。 |
+| `checkboxConfig` | `TableCheckboxConfig \| null` | `null` | 多选：级联 / `checkMethod` / `checkRowKeys` / `trigger` / `reserve`。 |
+| `radioConfig` | `TableRadioConfig \| null` | `null` | 单选：`strict` / `checkMethod` / `trigger`。 |
+| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 或 `expandConfig` 启用）。 |
 | `striped` | `boolean` | `false` | 斑马纹行。 |
 | `bordered` | `boolean` | `false` | 单元格边框。 |
 | `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |
@@ -219,8 +210,7 @@ import { MTable, MTag } from 'morya-ui'
 
 | 插槽 | 说明 |
 | --- | --- |
-| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`。 |
-| `edit-{key}` | 列 `{key}` 编辑态，作用域含 `value` / `setValue` / `commit` / `cancel`。 |
+| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`（可自行实现编辑器）。 |
 | `footer` | 自定义表尾。 |
 | `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |
 | `expansion` | 展开行内容，作用域 `{ row }`。 |
@@ -257,12 +247,11 @@ import { MTable, MTag } from 'morya-ui'
 | `update:columnWidths` | `Record<string, number>` | 列宽 v-model。 |
 | `update:hiddenColumns` | `string[]` | 隐藏列 v-model。 |
 | `update:columnOrder` | `string[]` | 列顺序 v-model。 |
-| `edit-change` | `TableEditChangePayload` | 单元格编辑提交。 |
 | `update:selectedItem` | — | — |
 
 ## 实例方法
 
-通过 `ref` 可访问以下分页与筛选控制：
+通过 `ref` 可访问分页、筛选、选择、滚动与展开控制：
 
 | 方法 / 属性 | 说明 |
 | --- | --- |
@@ -277,7 +266,17 @@ import { MTable, MTag } from 'morya-ui'
 | `rowsPerPageOptions` | 每页条数选项。 |
 | `rowsPerPageActiveOption` | 当前生效的每页条数。 |
 | `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |
-| `setFilters(filters)` | 程序化设置筛选条件。 |
+| `setFilters(filters)` / `clearFilter()` | 设置 / 清空筛选。 |
+| `clearSort()` | 清空排序。 |
+| `getCheckboxRecords()` | 当前多选行。 |
+| `setCheckboxRow(rows, checked)` | 设置行选中状态。 |
+| `clearCheckboxRow()` | 清空多选。 |
+| `isCheckedByCheckboxRow(row)` | 行是否选中。 |
+| `isAllCheckboxChecked()` | 当前页是否全选。 |
+| `getCheckboxIndeterminateRecords()` | 半选行（树级联）。 |
+| `scrollTo(...)` / `scrollToRow(row)` | 滚动定位。 |
+| `setRowExpand` / `setAllRowExpand` / `toggleRowExpand` / `clearRowExpand` / `isRowExpandByRow` / `getRowExpandRecords` | 详情展开（非树模式）。 |
+| `setTreeExpand` / `setAllTreeExpand` / `toggleTreeExpand` / `clearTreeExpand` / `isTreeExpandByRow` / `getTreeExpandRecords` | 树节点展开。 |
 
 ## 类型
 
@@ -334,6 +333,26 @@ type TableBodyItemClassName = string | ((column: string, rowNumber: number) => s
 ```
 
 
+
+<h4 id="TableTreeConfig">TableTreeConfig</h4>
+
+```ts
+interface TableTreeConfig {
+  childrenField?: string // default 'children'
+  indent?: number // default 16
+  expandAll?: boolean
+  accordion?: boolean
+  trigger?: 'default' | 'row'
+  lazy?: boolean
+  hasChildField?: string // default 'hasChild'
+  loadMethod?: (row: TableItem) => Promise<TableItem[]> | TableItem[]
+  transform?: boolean // flat parentId → tree
+  rowField?: string
+  parentField?: string // default 'parentId'
+  treeNode?: string // column key for toggler; default first column
+  showLine?: boolean
+}
+```
 
 <h4 id="TableColumnDefinition">TableColumnDefinition</h4>
 

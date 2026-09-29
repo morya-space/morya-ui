@@ -25,7 +25,6 @@ describe('table normalize', () => {
       resizable: undefined,
       filterable: undefined,
       filters: undefined,
-      editable: undefined,
       children: undefined,
     })
   })
@@ -45,7 +44,6 @@ describe('table normalize', () => {
         resizable: undefined,
         filterable: undefined,
         filters: undefined,
-        editable: undefined,
         children: undefined,
       },
     ])

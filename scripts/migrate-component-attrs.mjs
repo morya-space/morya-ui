@@ -68,7 +68,6 @@ const MUST_FIX = [
   'Toast/Toast.vue',
   'Toolbar/Toolbar.vue',
   'Tree/Tree.vue',
-  'TreeTable/TreeTable.vue',
   'VirtualScroller/VirtualScroller.vue',
 ]
 

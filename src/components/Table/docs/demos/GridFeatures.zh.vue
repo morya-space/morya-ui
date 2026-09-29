@@ -8,7 +8,7 @@ const columns: TableColumnDefinition[] = [
     key: 'info',
     label: '基本信息',
     children: [
-      { key: 'name', label: '姓名', editable: true },
+      { key: 'name', label: '姓名' },
       { key: 'role', label: '角色' },
     ],
   },
@@ -36,13 +36,11 @@ const hiddenColumns = ref<string[]>([])
       '',
       data.reduce((sum, row) => sum + Number(row.score ?? 0), 0),
     ]]"
-    :edit-config="{ mode: 'cell', trigger: 'click' }"
     :span-method="({ column, rowIndex }) => {
       if (column.value === 'role' && rowIndex === 1) return { rowspan: 2, colspan: 1 }
       if (column.value === 'role' && rowIndex === 2) return { rowspan: 0, colspan: 0 }
       return { rowspan: 1, colspan: 1 }
     }"
     :paginator="false"
-    @edit-change="({ row, column, value }) => { row[column] = value }"
   />
 </template>
