@@ -8,6 +8,12 @@ description: 列表或网格布局展示数据，可分页。
 
 以 list / grid 布局渲染集合，可选分页。
 
+
+## 何时使用
+
+- 列表或网格布局展示数据，可分页。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

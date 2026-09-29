@@ -8,6 +8,12 @@ description: 基于 flex 的弹性布局容器，控制方向、对齐与间距�
 
 弹性布局容器。优先使用 CSS `gap` 控制子项间距。
 
+
+## 何时使用
+
+- 基于 flex 的弹性布局容器，控制方向、对齐与间距。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

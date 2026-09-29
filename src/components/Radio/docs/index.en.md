@@ -8,6 +8,12 @@ description: Radio button. Supports invalid.
 
 Radio button.
 
+
+## When to use
+
+- Radio button. Supports invalid
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

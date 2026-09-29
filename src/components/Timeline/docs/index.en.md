@@ -8,6 +8,12 @@ description: Vertical or horizontal timeline with icon markers and custom slots.
 
 Display event nodes in chronological order.
 
+
+## When to use
+
+- Vertical or horizontal timeline with icon markers and custom slots
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

@@ -8,6 +8,12 @@ description: 简易命令提示符 UI。
 
 展示欢迎语与命令历史，提交时触发 `command`。
 
+
+## 何时使用
+
+- 简易命令提示符 UI。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

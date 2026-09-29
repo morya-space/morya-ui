@@ -18,6 +18,12 @@ description: 顶部居中浮层提示，支持 API 调用。
 
 **快速判断**：只有一句话 → `message.success('已保存')`；有标题 + 详情 → `toast.success({ summary, detail })`。
 
+
+## 何时使用
+
+- 顶部居中浮层提示，支持 API 调用。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

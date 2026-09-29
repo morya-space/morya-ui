@@ -8,6 +8,12 @@ description: 水平菜单栏，支持一级下拉。
 
 水平导航菜单，子项以一层下拉展示。`selectedKey` / `icon` 用于高亮与图标；响应式折叠本期不做。
 
+
+## 何时使用
+
+- 水平菜单栏，支持一级下拉。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

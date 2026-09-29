@@ -14,6 +14,12 @@ description: 四角浮层通知，支持 API 与受控列表。
 
 **不要**用 `toast.add({ summary: '已保存' })` 代替 `message.success('已保存')`。
 
+
+## 何时使用
+
+- 四角浮层通知，支持 API 与受控列表。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,6 +8,12 @@ description: 在子元素之间自动加入一致间距的布局容器。
 
 在子元素之间自动加入间距。新项目更推荐使用 [`Flex`](/components/Flex/)（直接用 `gap`）。
 
+
+## 何时使用
+
+- 在子元素之间自动加入一致间距的布局容器。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

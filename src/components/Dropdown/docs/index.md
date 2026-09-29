@@ -12,6 +12,12 @@ description: 动作菜单覆盖层（非表单选择器）。与 Select 不同�
 
 支持分组（`type: 'group'`）、分割线（`separator` / `type: 'divider'`）、嵌套 `items`，以及 `trigger: 'hover'` + `showDelay` / `hideDelay`。键盘高亮仍只覆盖顶层叶子项。
 
+
+## 何时使用
+
+- 动作菜单覆盖层（非表单选择器）。与 Select 不同：用于触发编辑、删除等操作项。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

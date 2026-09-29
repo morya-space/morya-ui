@@ -8,6 +8,12 @@ description: Typography primitives — title, text, paragraph, and link.
 
 Typography primitives for headings, body text, and links. Semantic tags: `MTitle` → `h1`–`h5`, `MText` → `span`, `MParagraph` → `p`, `MLink` → `a`. Use `MTypography` as an article wrapper, or compound access via `MTypography.Title` and siblings.
 
+
+## When to use
+
+- Typography primitives — title, text, paragraph, and link
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

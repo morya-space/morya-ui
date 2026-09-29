@@ -8,6 +8,12 @@ description: Display data in a list or grid layout, with optional pagination.
 
 Render a collection in list / grid layout, with optional pagination.
 
+
+## When to use
+
+- Display data in a list or grid layout, with optional pagination
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

@@ -8,6 +8,12 @@ description: 可搜索的命令面板对话框。
 
 命令面板：搜索并执行 `model` 中的命令。适合全局快捷键（如 Cmd/Ctrl+K）场景。
 
+
+## 何时使用
+
+- 可搜索的命令面板对话框。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

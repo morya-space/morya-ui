@@ -8,6 +8,12 @@ description: 模态对话框。支持预设页脚、异步关闭拦截、状态 
 
 模态对话框。可见性使用 `v-model`（`modelValue`），对应 的 `visible`。
 
+
+## 何时使用
+
+- 模态对话框。支持预设页脚、异步关闭拦截、状态 type。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

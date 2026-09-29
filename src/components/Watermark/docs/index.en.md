@@ -8,6 +8,12 @@ description: Canvas repeating watermark overlay for children.
 
 Repeating canvas watermark over the default slot.
 
+
+## When to use
+
+- Canvas repeating watermark overlay for children
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

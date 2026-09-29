@@ -10,6 +10,12 @@ Hierarchical node tree with expand, check, filter, and drag-and-drop.
 
 The default slot `{ node, data }` customizes node content. `checkStrategy` is `'all' | 'parent' | 'child'` (ignored when `checkStrictly`). Cascade still drives the UI; `v-model:checked-keys` is projected by strategy. Virtual scroll is out of scope.
 
+
+## When to use
+
+- Tree structure. Supports check with indeterminate state, filter, controlled expand, lazy load, and drag-and-drop
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

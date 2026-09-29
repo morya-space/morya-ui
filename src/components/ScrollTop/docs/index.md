@@ -8,10 +8,15 @@ description: 滚动超过阈值后显示回到顶部按钮。
 
 监听窗口或父容器滚动，一键回到顶部。
 
+## 何时使用
+
+- 页面或容器滚动超过阈值后，需要固定的「回到顶部」入口时。
+- 不要用 SpeedDial / Dock 替代回顶场景。
+
 ## 引入
 
 ```ts
-import { MScrollTop } from 'morya-ui'
+import { MScrollTop } from "morya-ui";
 ```
 
 ## 基础用法
@@ -25,17 +30,16 @@ import { MScrollTop } from 'morya-ui'
 
 ## Props
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `threshold` | `number` | `400` | 显示阈值（px）。 |
-| `target` | `'window' \| 'parent'` | `'window'` | 滚动目标。 |
-| `shape` | `'circle' \| 'square'` | `'circle'` | 按钮形状。 |
-| `right` | `string \| number` | — | 距右边缘；数字为 px。 |
-| `bottom` | `string \| number` | — | 距底边缘；数字为 px。 |
-| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
-
+| 参数        | 类型                                                       | 默认值     | 说明                                      |
+| ----------- | ---------------------------------------------------------- | ---------- | ----------------------------------------- |
+| `threshold` | `number`                                                   | `400`      | 显示阈值（px）。                          |
+| `target`    | `'window' \| 'parent'`                                     | `'window'` | 滚动目标。                                |
+| `shape`     | `'circle' \| 'square'`                                     | `'circle'` | 按钮形状。                                |
+| `right`     | `string \| number`                                         | —          | 距右边缘；数字为 px。                     |
+| `bottom`    | `string \| number`                                         | —          | 距底边缘；数字为 px。                     |
+| `teleport`  | `boolean`                                                  | `true`     | 浮层 Teleport；默认挂到 `body`。          |
+| `appendTo`  | `string \| HTMLElement \| 'self' \| false`                 | `'body'`   | 挂载目标；`'self'` / `false` 就地渲染。   |
+| `pt`        | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | —          | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## Events
 
@@ -43,7 +47,10 @@ import { MScrollTop } from 'morya-ui'
 
 ## Slots
 
-| 插槽名 | 说明 |
-| --- | --- |
+| 插槽名    | 说明       |
+| --------- | ---------- |
 | `default` | 默认内容。 |
 
+## 与 ant-design
+
+对应 antd `FloatButton.BackTop`。morya 将回顶拆成独立的 `ScrollTop`，而不是通用 `FloatButton`。详见 [antd 映射](/docs/antd-mapping)。

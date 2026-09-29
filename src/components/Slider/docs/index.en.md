@@ -8,6 +8,12 @@ description: Slider for a single value or a range.
 
 Drag to pick a number. In `range` mode there are two thumbs and the bound value is `[min, max]`.
 
+
+## When to use
+
+- Slider for a single value or a range
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

@@ -10,6 +10,12 @@ description: 分页器，v-model 为页码；实例暴露 first（零基首条�
 
 `pageSize` 是 `rows` 的别名（同时传入时 `pageSize` 优先）；另支持 `showSizePicker` / `showSizeChanger`、`showQuickJumper`、`simple`、`size`。
 
+
+## 何时使用
+
+- 分页器，v-model 为页码；实例暴露 first（零基首条索引）。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,6 +8,12 @@ description: 主操作按钮附带下拉菜单项。
 
 左侧主按钮触发 `click`，右侧展开菜单项触发 `command`。
 
+
+## 何时使用
+
+- 主操作按钮附带下拉菜单项。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,6 +8,12 @@ description: Loading placeholder skeleton. Supports rectangle/circle shapes, cus
 
 Loading placeholder skeleton for visual feedback while content is not ready.
 
+
+## When to use
+
+- Loading placeholder skeleton. Supports rectangle/circle shapes, custom sizes, and a wave animation
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

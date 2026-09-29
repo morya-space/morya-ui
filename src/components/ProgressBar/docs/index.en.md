@@ -8,6 +8,12 @@ description: Progress bar for determinate or indeterminate progress.
 
 Shows task completion, or an indeterminate loading state.
 
+
+## When to use
+
+- Progress bar for determinate or indeterminate progress
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

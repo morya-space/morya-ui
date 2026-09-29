@@ -16,6 +16,12 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 - 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条
 - 全视口主列表可用 `MPageContent fill` + `MTable fill paginator`（表体滚动、分页贴底）；嵌入表或短页不必使用 `fill`
 
+
+## 何时使用
+
+- 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

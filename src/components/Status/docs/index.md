@@ -10,6 +10,12 @@ description: 行内状态标识：圆点 / 语义图标 + 文案。
 
 语义色（非 `secondary` / `contrast`）默认带对应图标，避免「纯色文字」难以扫读。
 
+
+## 何时使用
+
+- 行内状态标识：圆点 / 语义图标 + 文案。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

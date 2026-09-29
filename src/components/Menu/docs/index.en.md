@@ -15,6 +15,12 @@ Navigation menu rendered from a `model`. Typical uses: admin sidebar, top naviga
 
 > One-level hover submenus: [TieredMenu](/components/TieredMenu). Top bar: [Menubar](/components/Menubar). Action lists: [Dropdown](/components/Dropdown).
 
+
+## When to use
+
+- Vertical/horizontal navigation menu with nested items, controlled selection, accordion, and collapsed flyout submenus
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

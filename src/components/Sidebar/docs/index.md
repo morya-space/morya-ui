@@ -8,6 +8,12 @@ description: 导航轨侧栏，可折叠。
 
 应用导航侧栏（非 Drawer 浮层）。导出为 `MSidebar`。
 
+
+## 何时使用
+
+- 导航轨侧栏，可折叠。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

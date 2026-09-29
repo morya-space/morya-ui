@@ -8,6 +8,12 @@ description: 排版原语：标题、正文、段落与链接。
 
 文字排版原语。语义标签：`MTitle` → `h1`–`h5`，`MText` → `span`，`MParagraph` → `p`，`MLink` → `a`。可用 `MTypography` 作为文章容器，或通过 `MTypography.Title` 等复合写法引用子组件。
 
+
+## 何时使用
+
+- 排版原语：标题、正文、段落与链接。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,10 +8,15 @@ description: 悬浮快捷操作按钮组。
 
 主按钮展开一组方向性快捷操作。
 
+## 何时使用
+
+- 需要一颗悬浮主按钮，展开一组相关快捷操作时。
+- 与 [ScrollTop](/components/ScrollTop)（回顶）、[Dock](/components/Dock)（应用级图标启动栏）按角色区分，不要混用。
+
 ## 引入
 
 ```ts
-import { MSpeedDial } from 'morya-ui'
+import { MSpeedDial } from "morya-ui";
 ```
 
 ## 基础用法
@@ -21,35 +26,34 @@ import { MSpeedDial } from 'morya-ui'
 
 ## Props
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `model` | `SpeedDialItem[]` | `[]` | 操作项。 |
-| `direction` | `'up' \| 'down' \| 'left' \| 'right'` | `'up'` | 展开方向。 |
-| `shape` | `'circle' \| 'square'` | `'circle'` | 按钮形状。 |
-| `type` | `'default' \| 'primary'` | `'primary'` | 主按钮色调。 |
-| `modelValue` | `boolean` | `false` | 是否展开。 |
-| `disabled` | `boolean` | `false` | 禁用。 |
-| `ariaLabel` | `string` | `'快捷操作'` | 主按钮无障碍标签。 |
-| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
-| `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
-
+| 参数         | 类型                                                       | 默认值         | 说明                                                              |
+| ------------ | ---------------------------------------------------------- | -------------- | ----------------------------------------------------------------- |
+| `model`      | `SpeedDialItem[]`                                          | `[]`           | 操作项。                                                          |
+| `direction`  | `'up' \| 'down' \| 'left' \| 'right'`                      | `'up'`         | 展开方向。                                                        |
+| `shape`      | `'circle' \| 'square'`                                     | `'circle'`     | 按钮形状。                                                        |
+| `type`       | `'default' \| 'primary'`                                   | `'primary'`    | 主按钮色调。                                                      |
+| `modelValue` | `boolean`                                                  | `false`        | 是否展开。                                                        |
+| `disabled`   | `boolean`                                                  | `false`        | 禁用。                                                            |
+| `ariaLabel`  | `string`                                                   | `'快捷操作'`   | 主按钮无障碍标签。                                                |
+| `teleport`   | `boolean`                                                  | `true`         | 浮层 Teleport；默认挂到 `body`。                                  |
+| `appendTo`   | `string \| HTMLElement \| 'self' \| false`                 | `'body'`       | 挂载目标；`'self'` / `false` 就地渲染。                           |
+| `transition` | `string \| false`                                          | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
+| `pt`         | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | —              | DOM 透传，见 [样式与 attrs](/docs/attrs).                         |
 
 ## Events
 
-| 事件名 | 参数 | 说明 |
-| --- | --- | --- |
+| 事件名              | 参数      | 说明         |
+| ------------------- | --------- | ------------ |
 | `update:modelValue` | `boolean` | 展开态变化。 |
-| `item-click` | — | — |
+| `item-click`        | —         | —            |
 
 ## Slots
 
-| 插槽名 | 说明 |
-| --- | --- |
-| `button` | 自定义主按钮。 |
-| `item` | 动作项 `{ item }`。 |
-| `icon` | 自定义 `icon` 内容。 |
+| 插槽名   | 说明                 |
+| -------- | -------------------- |
+| `button` | 自定义主按钮。       |
+| `item`   | 动作项 `{ item }`。  |
+| `icon`   | 自定义 `icon` 内容。 |
 
 ## 类型
 
@@ -58,7 +62,11 @@ import { MSpeedDial } from 'morya-ui'
 完整定义见源码 `types.ts`。
 
 ```ts
-interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
-  label: string
+interface SpeedDialItem extends Omit<MenuNodeBase, "label"> {
+  label: string;
 }
 ```
+
+## 与 ant-design
+
+对应 antd `FloatButton` 的**操作簇 / 主按钮组**角色；morya 无单一 `FloatButton`。回顶用 ScrollTop，应用启动栏用 Dock。详见 [antd 映射](/docs/antd-mapping)。

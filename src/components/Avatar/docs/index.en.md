@@ -8,6 +8,12 @@ description: Avatar displays a user or entity identity. Supports image, icon, an
 
 Avatar displays a user or entity identity. Display priority: `image` > `icon` > `label`.
 
+
+## When to use
+
+- Avatar displays a user or entity identity. Supports image, icon, and text fallback; shape and size are configurable
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

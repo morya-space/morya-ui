@@ -16,6 +16,12 @@ Column width rules:
 - Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars
 - For full-viewport main lists, use `MPageContent fill` + `MTable fill paginator` (body scrolls; pagination at the bottom). Skip `fill` for embedded or short tables.
 
+
+## When to use
+
+- Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

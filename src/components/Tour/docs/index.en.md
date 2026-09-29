@@ -8,6 +8,12 @@ description: Step-by-step guided overlay with spotlight and panel.
 
 **Product tours and onboarding**. Spotlight mask plus floating panel with prev / next / finish / close.
 
+
+## When to use
+
+- Step-by-step guided overlay with spotlight and panel
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

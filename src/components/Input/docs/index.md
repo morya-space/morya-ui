@@ -8,6 +8,12 @@ description: 文本输入框。
 
 单行文本输入。
 
+
+## 何时使用
+
+- 文本输入框。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

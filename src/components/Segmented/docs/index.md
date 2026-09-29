@@ -8,6 +8,12 @@ description: 分段控制器，单选切换。
 
 在互斥选项间切换视图或模式。与 [SelectButton](/components/SelectButton) 不同：Segmented 为轨道 + 选中块样式，且为 **单选** `radiogroup` 语义（非 `aria-pressed` 多选）。
 
+
+## 何时使用
+
+- 分段控制器，单选切换。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

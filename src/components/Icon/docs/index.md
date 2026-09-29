@@ -8,6 +8,12 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 
 `MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，统一为 Tabler 24×24 线框风格，由 `scripts/generate-system-icons.mjs` 生成）。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
 
+
+## 何时使用
+
+- 系统线框图标注册表。业务图标用默认插槽接入 Lucide 等库。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

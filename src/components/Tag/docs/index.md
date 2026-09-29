@@ -8,6 +8,12 @@ description: 标签用于展示状态或分类。
 
 标签用于展示状态或分类。
 
+
+## 何时使用
+
+- 标签用于展示状态或分类。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

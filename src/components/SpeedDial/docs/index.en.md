@@ -8,10 +8,15 @@ description: Floating shortcut action button group.
 
 A main button that expands a set of directional shortcut actions.
 
+## When to use
+
+- Use for a floating primary control that expands into a cluster of related actions.
+- Distinguish by role from [ScrollTop](/components/ScrollTop) (back to top) and [Dock](/components/Dock) (app launcher strip).
+
 ## Import
 
 ```ts
-import { MSpeedDial } from 'morya-ui'
+import { MSpeedDial } from "morya-ui";
 ```
 
 ## Basic
@@ -21,31 +26,30 @@ import { MSpeedDial } from 'morya-ui'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `model` | `SpeedDialItem[]` | `[]` | Action items. |
-| `direction` | `'up' \| 'down' \| 'left' \| 'right'` | `'up'` | Expand direction. |
-| `modelValue` | `boolean` | `false` | Whether it is expanded. |
-| `disabled` | `boolean` | `false` | Disabled. |
-| `ariaLabel` | `string` | locale `speedDial` | Accessible label for the main button. |
-| `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
-| `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
-
+| Prop         | Type                                                       | Default            | Description                                                                        |
+| ------------ | ---------------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------- |
+| `model`      | `SpeedDialItem[]`                                          | `[]`               | Action items.                                                                      |
+| `direction`  | `'up' \| 'down' \| 'left' \| 'right'`                      | `'up'`             | Expand direction.                                                                  |
+| `modelValue` | `boolean`                                                  | `false`            | Whether it is expanded.                                                            |
+| `disabled`   | `boolean`                                                  | `false`            | Disabled.                                                                          |
+| `ariaLabel`  | `string`                                                   | locale `speedDial` | Accessible label for the main button.                                              |
+| `teleport`   | `boolean`                                                  | `true`             | Overlay Teleport; mounts to `body` by default.                                     |
+| `appendTo`   | `string \| HTMLElement \| 'self' \| false`                 | `'body'`           | Mount target; `'self'` / `false` renders in place.                                 |
+| `transition` | `string \| false`                                          | `'scale-fade'`     | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
+| `pt`         | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | —                  | Pass-through; see [Styling & attrs](/docs/attrs).                                  |
 
 ## Events
 
-| Event | Prop | Description |
-| --- | --- | --- |
+| Event               | Prop      | Description                              |
+| ------------------- | --------- | ---------------------------------------- |
 | `update:modelValue` | `boolean` | Emitted when the expanded state changes. |
 
 ## Slots
 
-| Slot | Description |
-| --- | --- |
+| Slot     | Description         |
+| -------- | ------------------- |
 | `button` | Custom main button. |
-| `item` | Action `{ item }`. |
+| `item`   | Action `{ item }`.  |
 
 ## Types
 
@@ -54,7 +58,11 @@ import { MSpeedDial } from 'morya-ui'
 See source `types.ts` for the full definition.
 
 ```ts
-interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
-  label: string
+interface SpeedDialItem extends Omit<MenuNodeBase, "label"> {
+  label: string;
 }
 ```
+
+## vs ant-design
+
+Maps to the **action cluster / main FAB group** role of antd `FloatButton`; morya has no single `FloatButton`. Use ScrollTop for back-to-top and Dock for an app launcher bar. See [antd mapping](/docs/antd-mapping).

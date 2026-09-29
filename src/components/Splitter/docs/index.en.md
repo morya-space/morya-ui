@@ -8,6 +8,12 @@ description: Two-pane resizable split layout (horizontal / vertical).
 
 Split content into two panes with a draggable gutter.
 
+
+## When to use
+
+- Two-pane resizable split layout (horizontal / vertical)
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

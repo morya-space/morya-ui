@@ -8,6 +8,12 @@ description: 锚定在目标旁的确认气泡。
 
 轻量确认浮层，支持 `target` 或坐标定位。
 
+
+## 何时使用
+
+- 锚定在目标旁的确认气泡。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

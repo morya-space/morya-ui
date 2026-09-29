@@ -13,6 +13,12 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 
 两套可混用，但同一层级内建议只选一套。
 
+
+## 何时使用
+
+- 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,6 +8,12 @@ description: Grouped fields with a legend, optionally collapsible.
 
 Group a form or related content with a legend.
 
+
+## When to use
+
+- Grouped fields with a legend, optionally collapsible
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

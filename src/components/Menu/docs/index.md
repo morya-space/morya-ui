@@ -15,6 +15,12 @@ description: 垂直/水平导航菜单，支持多级嵌套、受控选中、手
 
 > 单层悬停子菜单见 [TieredMenu](/components/TieredMenu)；顶栏菜单见 [Menubar](/components/Menubar)；操作列表见 [Dropdown](/components/Dropdown)。
 
+
+## 何时使用
+
+- 垂直/水平导航菜单，支持多级嵌套、受控选中、手风琴展开与折叠侧栏飞出层。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

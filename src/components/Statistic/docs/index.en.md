@@ -8,6 +8,12 @@ description: Numeric KPI display with prefix/suffix and countdown.
 
 **KPI numbers** for dashboards and detail headers. Uses `--m-*` typography tokens; `loading` shows `MSkeleton`.
 
+
+## When to use
+
+- Numeric KPI display with prefix/suffix and countdown
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

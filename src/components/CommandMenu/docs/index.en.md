@@ -8,6 +8,12 @@ description: Searchable command palette dialog.
 
 Searchable command palette for running actions from `model`. Fits global shortcuts such as Cmd/Ctrl+K.
 
+
+## When to use
+
+- Searchable command palette dialog
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

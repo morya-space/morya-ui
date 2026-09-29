@@ -8,6 +8,12 @@ description: Month/year calendar panels with card mode and cell slots.
 
 **Calendar panel** for schedules and month views. Parsing reuses `MDatePicker` `dateUtils`; weekday and month labels come from `useMLocale`.
 
+
+## When to use
+
+- Month/year calendar panels with card mode and cell slots
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

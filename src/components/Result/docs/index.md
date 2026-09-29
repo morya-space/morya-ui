@@ -10,6 +10,12 @@ description: 操作结果 / 阻断页：成功、失败、403、404 等。
 
 核心 API：`status` + `size` + `title` / `description`，插槽 `icon` / `default` / `footer`。
 
+
+## 何时使用
+
+- 操作结果 / 阻断页：成功、失败、403、404 等。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

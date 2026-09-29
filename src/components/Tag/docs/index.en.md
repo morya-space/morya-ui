@@ -8,6 +8,12 @@ description: Tag for status or category.
 
 Tags display status or category.
 
+
+## When to use
+
+- Tag for status or category
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

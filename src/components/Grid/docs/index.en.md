@@ -13,6 +13,12 @@ Two layout systems live on this page:
 
 Both can coexist, but prefer one per level.
 
+
+## When to use
+
+- CSS Grid layout with GridItem span / offset control
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

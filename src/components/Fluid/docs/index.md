@@ -8,6 +8,12 @@ description: 让子元素宽度撑满的布局包裹。
 
 为子控件添加 `width: 100%` 的流体布局容器。
 
+
+## 何时使用
+
+- 让子元素宽度撑满的布局包裹。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

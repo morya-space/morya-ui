@@ -8,10 +8,15 @@ description: 日历弹层选择日期、时间、月份或年份。单值或范�
 
 带月份导航与日网格的日期选择器；也可切换为时间列、月/年面板。
 
+## 何时使用
+
+- 需要选择日期、日期范围、日期时间、月或年时。
+- 仅选时刻时优先使用独立入口 [TimePicker](/components/TimePicker)（仍可用 `type="time"`）。
+
 ## 引入
 
 ```ts
-import { MDatePicker } from 'morya-ui'
+import { MDatePicker } from "morya-ui";
 ```
 
 ## 基础用法
@@ -64,6 +69,8 @@ import { MDatePicker } from 'morya-ui'
 
 `type` 支持 `month` / `year` / `time` / `datetime` / `datetimerange`。`showSeconds` 控制是否包含秒。
 
+仅时间场景优先用独立组件 [TimePicker](/components/TimePicker)；本页 `type="time"` 仍可用。
+
 `datetimerange`：两次点击选定日期后以两端 `00:00`（或 `00:00:00`）发出；面板保持打开时可用时间列调整终点时刻，点选最细粒度单位后关闭。
 
 ```vue preview src="./demos/Types.vue"
@@ -76,45 +83,44 @@ import { MDatePicker } from 'morya-ui'
 
 ## Props
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `modelValue` | `string \| Date \| [string, string] \| null` | `null` | 按 `type`：`YYYY-MM-DD`、`[start,end]`、`YYYY-MM-DD HH:mm`、`HH:mm`、`YYYY-MM`、`YYYY` 等。 |
-| `type` | `'date' \| 'daterange' \| 'datetime' \| 'datetimerange' \| 'time' \| 'month' \| 'year'` | `'date'` | 面板与值格式。 |
-| `showSeconds` | `boolean` | `false` | `time` / `datetime` / `datetimerange` 是否含秒。 |
-| `label` | `string` | — | 标签。 |
-| `minDate` | `string \| Date \| null` | — | 可选下限。 |
-| `maxDate` | `string \| Date \| null` | — | 可选上限。 |
-| `placeholder` | `string` | locale | 占位。 |
-| `format` | `string` | `'YYYY-MM-DD'` | 输入框展示格式（`YYYY`/`MM`/`DD`/`HH`/`mm`/`ss`）；提交值仍按 `type` 约定。 |
-| `clearable` | `boolean` | `true` | 显示清除按钮。 |
-| `shortcuts` | `DatePickerShortcut[]` | `[]` | 面板快捷选项。 |
-| `fluid` | `boolean` | `false` | 宽度撑满。 |
-| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
-| `disabled` | `boolean` | `false` | 禁用。 |
-| `invalid` | `boolean` | `false` | 校验失败态。 |
-| `teleport` | `boolean` | `true` | 面板 Teleport；默认挂到 `body`。 |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
-| `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
-| `errorMessage` | `string` | — | — |
-| `helpText` | `string` | — | — |
-| `id` | `string` | — | — |
-| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
-
+| 参数           | 类型                                                                                    | 默认值         | 说明                                                                                        |
+| -------------- | --------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------- |
+| `modelValue`   | `string \| Date \| [string, string] \| null`                                            | `null`         | 按 `type`：`YYYY-MM-DD`、`[start,end]`、`YYYY-MM-DD HH:mm`、`HH:mm`、`YYYY-MM`、`YYYY` 等。 |
+| `type`         | `'date' \| 'daterange' \| 'datetime' \| 'datetimerange' \| 'time' \| 'month' \| 'year'` | `'date'`       | 面板与值格式。                                                                              |
+| `showSeconds`  | `boolean`                                                                               | `false`        | `time` / `datetime` / `datetimerange` 是否含秒。                                            |
+| `label`        | `string`                                                                                | —              | 标签。                                                                                      |
+| `minDate`      | `string \| Date \| null`                                                                | —              | 可选下限。                                                                                  |
+| `maxDate`      | `string \| Date \| null`                                                                | —              | 可选上限。                                                                                  |
+| `placeholder`  | `string`                                                                                | locale         | 占位。                                                                                      |
+| `format`       | `string`                                                                                | `'YYYY-MM-DD'` | 输入框展示格式（`YYYY`/`MM`/`DD`/`HH`/`mm`/`ss`）；提交值仍按 `type` 约定。                 |
+| `clearable`    | `boolean`                                                                               | `true`         | 显示清除按钮。                                                                              |
+| `shortcuts`    | `DatePickerShortcut[]`                                                                  | `[]`           | 面板快捷选项。                                                                              |
+| `fluid`        | `boolean`                                                                               | `false`        | 宽度撑满。                                                                                  |
+| `size`         | [MSizeInput](/docs/types#MSizeInput)                                                    | —              | `small` / `large`；可继承 ConfigProvider。                                                  |
+| `disabled`     | `boolean`                                                                               | `false`        | 禁用。                                                                                      |
+| `invalid`      | `boolean`                                                                               | `false`        | 校验失败态。                                                                                |
+| `teleport`     | `boolean`                                                                               | `true`         | 面板 Teleport；默认挂到 `body`。                                                            |
+| `appendTo`     | `string \| HTMLElement \| 'self' \| false`                                              | `'body'`       | 挂载目标；`'self'` / `false` 就地渲染。                                                     |
+| `transition`   | `string \| false`                                                                       | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。                           |
+| `errorMessage` | `string`                                                                                | —              | —                                                                                           |
+| `helpText`     | `string`                                                                                | —              | —                                                                                           |
+| `id`           | `string`                                                                                | —              | —                                                                                           |
+| `pt`           | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }`  | —              | DOM 透传，见 [样式与 attrs](/docs/attrs).                                                   |
 
 ## Events
 
-| 事件名 | 参数 | 说明 |
-| --- | --- | --- |
-| `update:modelValue` | `string \| [string, string] \| null` | 值变化。 |
-| `clear` | — | 点击清除时触发。 |
-| `change` | — | — |
-| `hide` | — | — |
-| `show` | — | — |
+| 事件名              | 参数                                 | 说明             |
+| ------------------- | ------------------------------------ | ---------------- |
+| `update:modelValue` | `string \| [string, string] \| null` | 值变化。         |
+| `clear`             | —                                    | 点击清除时触发。 |
+| `change`            | —                                    | —                |
+| `hide`              | —                                    | —                |
+| `show`              | —                                    | —                |
 
 ## Slots
 
-| 插槽名 | 说明 |
-| --- | --- |
+| 插槽名    | 说明                             |
+| --------- | -------------------------------- |
 | `trigger` | 自定义触发器 `{ value, open }`。 |
 
 ## 类型
@@ -125,10 +131,14 @@ import { MDatePicker } from 'morya-ui'
 
 ```ts
 interface DatePickerShortcut {
-  label: string
+  label: string;
   value:
     | DatePickerDateValue
     | [DatePickerDateValue, DatePickerDateValue]
-    | (() => DatePickerDateValue | [DatePickerDateValue, DatePickerDateValue])
+    | (() => DatePickerDateValue | [DatePickerDateValue, DatePickerDateValue]);
 }
 ```
+
+## 与 ant-design
+
+对应 antd `DatePicker` / `RangePicker`：用 `type` 区分模式（含 `daterange`、`datetime`、`time` 等），API 仍是 morya 词表。详见 [antd 映射](/docs/antd-mapping)。

@@ -8,6 +8,12 @@ description: Content panel with optional collapse.
 
 Panel for grouping content. Collapse can be enabled.
 
+
+## When to use
+
+- Content panel with optional collapse
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

@@ -8,6 +8,12 @@ description: Canvas 平铺水印，包裹业务内容。
 
 在子元素上方叠加 repeating 水印。颜色与透明度走 `--m-*` 解析后的 canvas 绘制。
 
+
+## 何时使用
+
+- Canvas 平铺水印，包裹业务内容。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,6 +8,12 @@ description: Inline page notice with severity, close, and action slot.
 
 Persistent **in-page** notice for form intros, permission hints, and read-only warnings. Prefer [Message](/components/Message) / [Toast](/components/Toast) for brief action feedback, and [Result](/components/Result) for full-page outcomes.
 
+
+## When to use
+
+- Inline page notice with severity, close, and action slot
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

@@ -10,6 +10,12 @@ description: 表单选择器，对齐 antd Select：mode="multiple" | "tags"、l
 
 **与 Dropdown 的区别：** `MSelect` 是表单控件；动作菜单请使用 `MDropdown`。
 
+
+## 何时使用
+
+- 表单选择器，对齐 antd Select：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

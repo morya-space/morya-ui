@@ -8,6 +8,12 @@ description: 多段占比计量条。
 
 展示多段 `{ label, value, color }` 占比。
 
+
+## 何时使用
+
+- 多段占比计量条。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

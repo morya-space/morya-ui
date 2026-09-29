@@ -8,6 +8,12 @@ description: 复选框。二进制 modelValue，支持 invalid。
 
 二进制复选框。 的 binary 用法。
 
+
+## 何时使用
+
+- 复选框。二进制 modelValue，支持 invalid。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

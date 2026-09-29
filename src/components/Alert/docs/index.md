@@ -8,6 +8,12 @@ description: 页面内嵌常驻提示，支持语义色、关闭与操作区。
 
 页面内**常驻**反馈条，适合表单顶部说明、权限提示、只读页警告等。短暂操作回执请用 [Message](/components/Message) / [Toast](/components/Toast)；整页结果用 [Result](/components/Result)。
 
+
+## 何时使用
+
+- 页面内嵌常驻提示，支持语义色、关闭与操作区。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

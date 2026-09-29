@@ -8,6 +8,12 @@ description: Tree select in a dropdown. Supports single/multiple, cascade checks
 
 Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-select; `filterable`, `clearable`, and `showPath` are also available.
 
+
+## When to use
+
+- Tree select in a dropdown. Supports single/multiple, cascade checks, filter, clear, and path labels
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

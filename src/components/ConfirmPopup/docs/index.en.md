@@ -8,6 +8,12 @@ description: Confirmation popover anchored to a target.
 
 Lightweight confirmation overlay. Supports `target` or coordinate positioning.
 
+
+## When to use
+
+- Confirmation popover anchored to a target
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

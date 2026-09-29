@@ -8,6 +8,12 @@ description: Horizontal menu with multi-column mega panels.
 
 Horizontal top navigation. Sub-links render in a **multi-column panel**—suited to site-wide nav.
 
+
+## When to use
+
+- Horizontal menu with multi-column mega panels
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

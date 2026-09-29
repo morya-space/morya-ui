@@ -8,6 +8,12 @@ description: 可访问的表单标签。
 
 简单 label，支持 `htmlFor` / `for` 与默认插槽。
 
+
+## 何时使用
+
+- 可访问的表单标签。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

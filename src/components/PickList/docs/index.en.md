@@ -8,10 +8,15 @@ description: Dual-list picker for moving items between lists.
 
 Move items between the source and target lists.
 
+## When to use
+
+- Use for dual-list transfer: move candidates into a selected list.
+- Keep morya `source` / `target` APIs; do not migrate antd Transfer props literally.
+
 ## Import
 
 ```ts
-import { MPickList } from 'morya-ui'
+import { MPickList } from "morya-ui";
 ```
 
 ## Basic
@@ -26,25 +31,28 @@ import { MPickList } from 'morya-ui'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `source` | `unknown[]` | `[]` | Source list. |
-| `target` | `unknown[]` | `[]` | Target list. |
-| `sourceHeader` | `string` | locale `sourceHeader` | Source header. |
-| `targetHeader` | `string` | locale `targetHeader` | Target header. |
-| `dataKey` | `string` | — | Unique key for object items. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
-
+| Prop           | Type                                                       | Default               | Description                                       |
+| -------------- | ---------------------------------------------------------- | --------------------- | ------------------------------------------------- |
+| `source`       | `unknown[]`                                                | `[]`                  | Source list.                                      |
+| `target`       | `unknown[]`                                                | `[]`                  | Target list.                                      |
+| `sourceHeader` | `string`                                                   | locale `sourceHeader` | Source header.                                    |
+| `targetHeader` | `string`                                                   | locale `targetHeader` | Target header.                                    |
+| `dataKey`      | `string`                                                   | —                     | Unique key for object items.                      |
+| `pt`           | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | —                     | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## Events
 
-| Event | Prop | Description |
-| --- | --- | --- |
+| Event           | Prop        | Description                           |
+| --------------- | ----------- | ------------------------------------- |
 | `update:source` | `unknown[]` | Emitted when the source list changes. |
 | `update:target` | `unknown[]` | Emitted when the target list changes. |
 
 ## Slots
 
-| Slot | Prop | Description |
-| --- | --- | --- |
+| Slot   | Prop              | Description               |
+| ------ | ----------------- | ------------------------- |
 | `item` | `{ item, index }` | Custom list item content. |
+
+## vs ant-design
+
+Maps to antd `Transfer` for dual-list picking; keep morya `source` / `target` data and API—do not copy Transfer props. See [antd mapping](/docs/antd-mapping).

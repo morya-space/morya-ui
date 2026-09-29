@@ -8,6 +8,12 @@ description: 全局配置入口。统一浮层挂载、尺寸、密度、文案�
 
 通过 `MConfigProvider` 或 `createMoryaUI` 为整棵组件树提供全局默认值。局部 Props 优先级高于全局配置。
 
+
+## 何时使用
+
+- 全局配置入口。统一浮层挂载、尺寸、密度、文案等应用级默认值。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 能力一览
 
 | 能力 | 说明 |

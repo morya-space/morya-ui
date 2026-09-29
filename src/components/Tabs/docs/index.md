@@ -8,6 +8,12 @@ description: 标签页切换。支持 line/card、关闭/新增、extra 与溢�
 
 标签页用于在同一视图内切换内容分区。
 
+
+## 何时使用
+
+- 标签页切换。支持 line/card、关闭/新增、extra 与溢出滚动。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -18,6 +18,12 @@ Renders a homogeneous collection (notifications, articles, user rows). Unlike la
 
 
 
+
+## When to use
+
+- General list with data-driven rows, Meta pattern, pagination, and optional grid
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 

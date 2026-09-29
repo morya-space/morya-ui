@@ -8,6 +8,12 @@ description: 主图 + 缩略图的图片画廊。
 
 浏览图片列表并同步 `activeIndex`。
 
+
+## 何时使用
+
+- 主图 + 缩略图的图片画廊。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

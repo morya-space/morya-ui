@@ -10,6 +10,12 @@ description: 空状态：插图 / 图标 + 标题 + 说明 + 操作。
 
 默认展示轻量空态图标与 locale `emptyMessage`。内置彩色插图按需加载，通过 `illustration` 显式选用；也可用 `icon`、`image` 或插槽替换视觉。
 
+
+## 何时使用
+
+- 空状态：插图 / 图标 + 标题 + 说明 + 操作。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

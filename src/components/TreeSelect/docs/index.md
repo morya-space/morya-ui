@@ -8,6 +8,12 @@ description: 下拉树选择。支持单选/多选、勾选级联、过滤、清
 
 在下拉中展示可展开树。`multiple` / `checkable` 打开多选；另支持 `filterable`、`clearable`、`showPath`。
 
+
+## 何时使用
+
+- 下拉树选择。支持单选/多选、勾选级联、过滤、清空与路径展示。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

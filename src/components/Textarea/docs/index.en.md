@@ -8,6 +8,12 @@ description: Multi-line text input.
 
 Multi-line text input.
 
+
+## When to use
+
+- Multi-line text input
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

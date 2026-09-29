@@ -8,10 +8,15 @@ description: Shows a back-to-top button after scrolling past a threshold.
 
 Listens to window or parent scroll and jumps back to the top.
 
+## When to use
+
+- Use when a fixed back-to-top control should appear after scrolling past a threshold.
+- Do not substitute SpeedDial or Dock for this role.
+
 ## Import
 
 ```ts
-import { MScrollTop } from 'morya-ui'
+import { MScrollTop } from "morya-ui";
 ```
 
 ## Basic
@@ -25,16 +30,15 @@ When `target="parent"`, ScrollTop walks up the DOM for the nearest `.m-scrollbar
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `threshold` | `number` | `400` | Show threshold in px. |
-| `target` | `'window' \| 'parent'` | `'window'` | Scroll target. |
-| `right` | `string \| number` | — | Distance from the right edge; a number is pixels. |
-| `bottom` | `string \| number` | — | Distance from the bottom edge; a number is pixels. |
-| `teleport` | `boolean` | `true` | Overlay Teleport. Mounts to `body` by default. |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target. `'self'` / `false` renders in place. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
-
+| Prop        | Type                                                       | Default    | Description                                        |
+| ----------- | ---------------------------------------------------------- | ---------- | -------------------------------------------------- |
+| `threshold` | `number`                                                   | `400`      | Show threshold in px.                              |
+| `target`    | `'window' \| 'parent'`                                     | `'window'` | Scroll target.                                     |
+| `right`     | `string \| number`                                         | —          | Distance from the right edge; a number is pixels.  |
+| `bottom`    | `string \| number`                                         | —          | Distance from the bottom edge; a number is pixels. |
+| `teleport`  | `boolean`                                                  | `true`     | Overlay Teleport. Mounts to `body` by default.     |
+| `appendTo`  | `string \| HTMLElement \| 'self' \| false`                 | `'body'`   | Mount target. `'self'` / `false` renders in place. |
+| `pt`        | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | —          | Pass-through; see [Styling & attrs](/docs/attrs).  |
 
 ## Events
 
@@ -43,3 +47,7 @@ No custom events.
 ## Slots
 
 No slots.
+
+## vs ant-design
+
+Analogue of antd `FloatButton.BackTop`. morya ships a dedicated `ScrollTop` instead of a generic `FloatButton`. See [antd mapping](/docs/antd-mapping).

@@ -8,6 +8,12 @@ description: Chip-style tag input; press Enter to add, removable.
 
 Manage string tags as a chip list.
 
+
+## When to use
+
+- Chip-style tag input; press Enter to add, removable
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

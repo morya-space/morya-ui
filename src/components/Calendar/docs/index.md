@@ -8,6 +8,12 @@ description: 按日/月面板展示日期，支持卡片模式与单元格自定
 
 **日历面板**（日程、排班、活动月视图）。日期解析与 `MDatePicker` 共用 `dateUtils`；星期与月份文案来自 `useMLocale`。
 
+
+## 何时使用
+
+- 按日/月面板展示日期，支持卡片模式与单元格自定义。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

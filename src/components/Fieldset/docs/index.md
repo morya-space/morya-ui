@@ -8,6 +8,12 @@ description: 带图例的字段分组，可折叠。
 
 用图例分组表单或相关内容。
 
+
+## 何时使用
+
+- 带图例的字段分组，可折叠。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

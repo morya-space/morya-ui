@@ -8,6 +8,12 @@ description: Image display with click-to-preview; PreviewGroup for multi-image b
 
 Thumbnail with lightbox preview. For gallery chrome, use [Gallery](/components/Gallery).
 
+
+## When to use
+
+- Image display with click-to-preview; PreviewGroup for multi-image browsing
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

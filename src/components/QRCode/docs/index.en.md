@@ -8,6 +8,12 @@ description: QR code with status overlay and refresh.
 
 Canvas QR codes. Encoding uses embedded Nayuki MIT `qrcodegen` (no extra runtime npm deps).
 
+
+## When to use
+
+- QR code with status overlay and refresh
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

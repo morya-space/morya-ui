@@ -8,6 +8,12 @@ description: Floating label wrapper. The label floats up when focused or when th
 
 Wraps an input. The label floats up on focus or when the field has content. Nested inputs should set a non-empty `placeholder` (such as a space) so `:placeholder-shown` works as expected.
 
+
+## When to use
+
+- Floating label wrapper. The label floats up when focused or when the field has a value
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

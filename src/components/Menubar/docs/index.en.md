@@ -8,6 +8,12 @@ description: Horizontal menubar with one level of dropdowns.
 
 Horizontal navigation menu. Child items appear in a single-level dropdown. `selectedKey` / `icon` cover highlight and icons. Responsive collapse is out of scope this batch.
 
+
+## When to use
+
+- Horizontal menubar with one level of dropdowns
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts

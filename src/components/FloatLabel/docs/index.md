@@ -8,6 +8,12 @@ description: 浮动标签容器，聚焦或有值时上浮。
 
 包裹输入控件，标签在聚焦或有内容时上浮。子输入建议设置非空 `placeholder`（如空格）以配合 `:placeholder-shown`。
 
+
+## 何时使用
+
+- 浮动标签容器，聚焦或有值时上浮。
+- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+
 ## 引入
 
 ```ts

@@ -8,6 +8,12 @@ description: Single or multiple selection presented as a button group.
 
 Present options as a button group, with single and multiple selection.
 
+
+## When to use
+
+- Single or multiple selection presented as a button group
+- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+
 ## Import
 
 ```ts
