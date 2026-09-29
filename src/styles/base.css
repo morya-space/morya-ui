@@ -378,7 +378,7 @@
     display: inline-flex;
     font-family: var(--m-font-sans);
     gap: var(--m-space-2);
-    /* ?????? input ???? MScrollbar????????????�?*/
+    /* 与输入框圆角保持一致，配合 MScrollbar 使用 */
     position: relative;
 }
 
