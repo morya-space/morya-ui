@@ -170,6 +170,12 @@ export type {
   DescriptionsSize,
 } from "./components/Descriptions/types";
 export { default as MDialog } from "./components/Dialog/Dialog.vue";
+export { modal, useModal, useModalCleanup } from "./components/Dialog/useModal";
+export type {
+  ModalStaticApi,
+  ModalStaticHandle,
+  ModalStaticOptions,
+} from "./components/Dialog/useModal";
 export type {
   DialogClickGuard,
   DialogCloseGuard,
@@ -241,22 +247,29 @@ export { default as MFloatLabel } from "./components/FloatLabel/FloatLabel.vue";
 export type { FloatLabelProps } from "./components/FloatLabel/types";
 export { default as MFluid } from "./components/Fluid/Fluid.vue";
 export type { FluidProps } from "./components/Fluid/types";
-export { M_FORM_ERRORS_KEY, M_FORM_KEY } from "./components/Form/context";
+export { M_FORM_ERRORS_KEY, M_FORM_KEY, M_FORM_WARNINGS_KEY } from "./components/Form/context";
 export type {
   FormFieldValidator,
   MFormContext,
   MFormFieldRegistration,
+  MFormFieldValidation,
+  MFormFieldValidator,
 } from "./components/Form/context";
 export { default as MForm } from "./components/Form/Form.vue";
 export { default as MFormItem } from "./components/Form/FormItem.vue";
+export { default as MFormList } from "./components/Form/FormList.vue";
+export type { FormListItem, FormListSlotProps } from "./components/Form/FormList.types";
+export { isFormInstance, useForm } from "./components/Form/useForm";
+export type { FormInstance, FormInstanceApi } from "./components/Form/useForm";
+export type { NamePath, NamePathKey } from "./components/Form/paths";
 export type {
-  FormInstance,
   FormItemProps,
   FormItemRule,
   FormLabelAlign,
   FormLabelPosition,
   FormModel,
   FormProps,
+  FormRuleType,
   FormRules,
   FormScrollToFieldOptions,
   FormValidateResult,
@@ -267,6 +280,28 @@ export type { GalleryEmits, GalleryProps } from "./components/Gallery/types";
 export { default as MGrid } from "./components/Grid/Grid.vue";
 export { default as MGridItem } from "./components/Grid/GridItem.vue";
 export { default as MGi } from "./components/Grid/GridItem.vue";
+export { default as MRow } from "./components/Grid/Row.vue";
+export { default as MCol } from "./components/Grid/Col.vue";
+export {
+  GRID_BREAKPOINT_ORDER,
+  GRID_BREAKPOINTS,
+  M_ROW_KEY,
+  mergeColResponsive,
+  resolveGutter,
+  resolveGutterValue,
+  useGridBreakpoint,
+} from "./components/Grid";
+export type {
+  ColProps,
+  ColResponsive,
+  ColResponsiveConfig,
+  GridBreakpoint,
+  GridGutter,
+  GridGutterValue,
+  RowAlign,
+  RowJustify,
+  RowProps,
+} from "./components/Grid";
 export type {
   GridItemProps,
   GridProps,
@@ -540,9 +575,18 @@ export type {
 export { default as MSelect } from "./components/Select/Select.vue";
 export type {
   SelectEmits,
+  SelectFieldNames,
+  SelectFilterOptionContext,
+  SelectLabeledValue,
+  SelectMode,
   SelectModelValue,
   SelectOption,
+  SelectOptionEntry,
+  SelectOptionGroup,
+  SelectOptionInput,
+  SelectOptions,
   SelectProps,
+  SelectRawOption,
   SelectSize,
   SelectValue,
 } from "./components/Select/types";
@@ -714,11 +758,24 @@ export type {
   TextProps,
   TitleLevel,
   TitleProps,
+  TypographyCopyable,
+  TypographyCopyableConfig,
   TypographyDecorations,
+  TypographyEditable,
+  TypographyEditableConfig,
+  TypographyEllipsis,
+  TypographyEllipsisConfig,
   TypographyProps,
   TypographyType,
 } from "./components/Typography/types";
 export { toast, useToast } from "./components/Toast/toast";
+export { notification, useNotification } from "./components/Toast/useNotification";
+export type {
+  NotificationApi,
+  NotificationOptions,
+  NotificationPlacement,
+  NotificationType,
+} from "./components/Toast/useNotification";
 export { default as MToast } from "./components/Toast/Toast.vue";
 export type {
   ToastEmits,
@@ -793,9 +850,12 @@ export {
   useConfiguredGapSize,
   useConfiguredSize,
   useConfiguredVariant,
+  useDirection,
+  useDisabled,
+  useIsRtl,
   useMConfig,
 } from "./shared/config";
-export type { MInstallerOptions } from "./shared/config";
+export type { MDirection, MInstallerOptions } from "./shared/config";
 export { MoryaUI as default } from "./shared/config";
 export type { MRenderable } from "./shared/content";
 export { renderMContent } from "./shared/content";
@@ -820,16 +880,28 @@ export {
   applyReducedMotionPolicy,
   applyTheme,
   builtinMotionPresets,
+  camelToKebab,
   clearCustomMotionPresets,
+  compactSeed,
+  createTheme,
+  darkSeed,
   darkTokens,
+  deriveCompatCssVars,
+  deriveCssVars,
+  deriveMapTokens,
   getPreferredMotion,
   getPreferredTheme,
+  lightSeed,
   lightTokens,
   listMotionPresets,
   registerMotionPreset,
   resolveMotionPreset,
   resolveMotionTransition,
+  resolveThemeCssVars,
+  seedForAlgorithm,
+  themeCssVarNames,
   themeNames,
+  tokensToCssVars,
   unregisterMotionPreset,
   useDensity,
   useMotion,
@@ -839,7 +911,10 @@ export {
 
 export type {
   ColorTokens,
+  ComponentTokenOverrides,
+  CssVarMap,
   DensityPreference,
+  DeriveOptions,
   DesignTokens,
   LayoutTokens,
   MotionPreference,
@@ -847,9 +922,14 @@ export type {
   MotionPresetId,
   MotionTokens,
   MotionTransitionRole,
+  MSeedTokens,
+  MTheme,
+  MThemeAlgorithm,
+  MThemeConfig,
   RadiusTokens,
   ResolveMotionTransitionOptions,
   SpacingTokens,
   ThemeName,
+  TokenMap,
   UseMotionTransitionOptions,
 } from "./theme";

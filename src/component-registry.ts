@@ -41,10 +41,13 @@ import MFloatLabel from './components/FloatLabel/FloatLabel.vue'
 import MFluid from './components/Fluid/Fluid.vue'
 import MForm from './components/Form/Form.vue'
 import MFormItem from './components/Form/FormItem.vue'
+import MFormList from './components/Form/FormList.vue'
 import MGallery from './components/Gallery/Gallery.vue'
 import MGrid from './components/Grid/Grid.vue'
 import MGi from './components/Grid/GridItem.vue'
 import MGridItem from './components/Grid/GridItem.vue'
+import MCol from './components/Grid/Col.vue'
+import MRow from './components/Grid/Row.vue'
 import MIcon from './components/Icon/Icon.vue'
 import MIconField from './components/IconField/IconField.vue'
 import MImage from './components/Image/Image.vue'
@@ -167,10 +170,13 @@ export const mComponents: Record<string, Component> = {
   MFluid,
   MForm,
   MFormItem,
+  MFormList,
   MGallery,
   MGi,
   MGrid,
   MGridItem,
+  MCol,
+  MRow,
   MIcon,
   MIconField,
   MImage,
