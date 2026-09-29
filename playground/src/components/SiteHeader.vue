@@ -1,358 +1,407 @@
 <script setup lang="ts">
-import { useTheme } from 'morya-ui'
-import { computed } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import { useTheme } from "morya-ui";
+import { computed } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import {
-  SITE_GITHUB_URL,
-  SITE_LOGO_URL,
-  SITE_NAME,
-  SITE_NPM_URL,
-} from '../config/site'
-import { getUiPackageMeta } from '../docs/packageMeta'
-import { useDocsI18n } from '../i18n'
-import SiteSearch from './SiteSearch.vue'
+    SITE_GITHUB_URL,
+    SITE_LOGO_URL,
+    SITE_NAME,
+    SITE_NPM_URL,
+} from "../config/site";
+import { getUiPackageMeta } from "../docs/packageMeta";
+import { useDocsI18n } from "../i18n";
+import SiteSearch from "./SiteSearch.vue";
 
-const uiMeta = getUiPackageMeta()
+const uiMeta = getUiPackageMeta();
 
-const route = useRoute()
-const { isDark, toggleTheme } = useTheme()
-const { lang, t, setLang } = useDocsI18n()
+const route = useRoute();
+const { isDark, toggleTheme } = useTheme();
+const { lang, t, setLang } = useDocsI18n();
 
 const activeSection = computed(() => {
-  const name = String(route.name ?? '')
-  if (name === 'home') return 'home'
-  if (name.startsWith('docs')) return 'docs'
-  if (name.startsWith('component')) return 'components'
-  if (name === 'changelog') return 'changelog'
-  return ''
-})
+    const name = String(route.name ?? "");
+    const slug = typeof route.params.slug === "string" ? route.params.slug : "";
+    if (name === "home") return "home";
+    if (name === "docs" && (slug === "design" || slug.startsWith("design-")))
+        return "design";
+    if (name === "theme-editor" || (name === "docs" && slug === "theme"))
+        return "theme";
+    if (name.startsWith("docs")) return "docs";
+    if (name.startsWith("component")) return "components";
+    if (name === "changelog") return "changelog";
+    return "";
+});
 </script>
 
 <template>
-  <header class="site-header">
-    <RouterLink class="site-brand" :to="{ name: 'home' }" :aria-label="t.homeAria">
-      <img class="site-brand__logo" :src="SITE_LOGO_URL" width="32" height="32" alt="">
-      <span class="site-brand__text">
-        <span class="site-brand__name">{{ SITE_NAME }}</span>
-        <span class="site-brand__version">v{{ uiMeta.version }}</span>
-      </span>
-    </RouterLink>
+    <header class="site-header">
+        <RouterLink
+            class="site-brand"
+            :to="{ name: 'home' }"
+            :aria-label="t.homeAria"
+        >
+            <img
+                class="site-brand__logo"
+                :src="SITE_LOGO_URL"
+                width="32"
+                height="32"
+                alt=""
+            />
+            <span class="site-brand__text">
+                <span class="site-brand__name">{{ SITE_NAME }}</span>
+                <span class="site-brand__version">v{{ uiMeta.version }}</span>
+            </span>
+        </RouterLink>
 
-    <nav class="site-nav" :aria-label="t.navAria">
-      <RouterLink
-        class="site-nav__link"
-        :class="{ 'is-active': activeSection === 'home' }"
-        :to="{ name: 'home' }"
-      >
-        {{ t.home }}
-      </RouterLink>
-      <RouterLink
-        class="site-nav__link"
-        :class="{ 'is-active': activeSection === 'docs' }"
-        :to="{ name: 'docs', params: { slug: 'introduction' } }"
-      >
-        {{ t.docs }}
-      </RouterLink>
-      <RouterLink
-        class="site-nav__link"
-        :class="{ 'is-active': activeSection === 'components' }"
-        :to="{ name: 'components' }"
-      >
-        {{ t.components }}
-      </RouterLink>
-      <RouterLink
-        class="site-nav__link"
-        :class="{ 'is-active': activeSection === 'changelog' }"
-        :to="{ name: 'changelog' }"
-      >
-        {{ t.changelog }}
-      </RouterLink>
-    </nav>
+        <nav class="site-nav" :aria-label="t.navAria">
+            <RouterLink
+                class="site-nav__link"
+                :class="{ 'is-active': activeSection === 'home' }"
+                :to="{ name: 'home' }"
+            >
+                {{ t.home }}
+            </RouterLink>
+            <RouterLink
+                class="site-nav__link"
+                :class="{ 'is-active': activeSection === 'docs' }"
+                :to="{ name: 'docs', params: { slug: 'introduction' } }"
+            >
+                {{ t.docs }}
+            </RouterLink>
+            <RouterLink
+                class="site-nav__link"
+                :class="{ 'is-active': activeSection === 'components' }"
+                :to="{ name: 'components' }"
+            >
+                {{ t.components }}
+            </RouterLink>
+            <RouterLink
+                class="site-nav__link"
+                :class="{ 'is-active': activeSection === 'design' }"
+                :to="{ name: 'docs', params: { slug: 'design' } }"
+            >
+                {{ t.design }}
+            </RouterLink>
+            <RouterLink
+                class="site-nav__link"
+                :class="{ 'is-active': activeSection === 'theme' }"
+                :to="{ name: 'theme-editor' }"
+            >
+                {{ t.themeEditor }}
+            </RouterLink>
+            <RouterLink
+                class="site-nav__link"
+                :class="{ 'is-active': activeSection === 'changelog' }"
+                :to="{ name: 'changelog' }"
+            >
+                {{ t.changelog }}
+            </RouterLink>
+        </nav>
 
-    <div class="site-header__actions">
-      <SiteSearch />
-      <div class="site-lang" role="group" :aria-label="t.langSwitch">
-        <button
-          class="site-lang__btn"
-          type="button"
-          :class="{ 'is-active': lang === 'zh-CN' }"
-          :aria-pressed="lang === 'zh-CN'"
-          @click="setLang('zh-CN')"
-        >
-          中
-        </button>
-        <button
-          class="site-lang__btn"
-          type="button"
-          :class="{ 'is-active': lang === 'en-US' }"
-          :aria-pressed="lang === 'en-US'"
-          @click="setLang('en-US')"
-        >
-          EN
-        </button>
-      </div>
-      <button
-        class="site-icon-btn"
-        type="button"
-        :aria-label="isDark ? t.switchToLight : t.switchToDark"
-        :title="isDark ? t.lightMode : t.darkMode"
-        @click="toggleTheme"
-      >
-        <svg
-          v-if="isDark"
-          viewBox="0 0 24 24"
-          width="16"
-          height="16"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-        </svg>
-        <svg
-          v-else
-          viewBox="0 0 24 24"
-          width="16"
-          height="16"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z" />
-        </svg>
-      </button>
-      <a
-        class="site-icon-btn site-icon-btn--npm"
-        :href="SITE_NPM_URL"
-        target="_blank"
-        rel="noopener noreferrer"
-        :aria-label="t.openNpm"
-        :title="t.npmPackage"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          width="16"
-          height="16"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M1 8h22v7h-12v2h-4v-2h-6l0-7" />
-          <path d="M7 8v7" />
-          <path d="M14 8v7" />
-          <path d="M17 11v4" />
-          <path d="M4 11v4" />
-          <path d="M11 11v1" />
-          <path d="M20 11v4" />
-        </svg>
-      </a>
-      <a
-        class="site-icon-btn"
-        :href="SITE_GITHUB_URL"
-        target="_blank"
-        rel="noopener noreferrer"
-        :aria-label="t.openGithub"
-        :title="t.githubRepo"
-      >
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
-          <path
-            d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.12-1.52-1.12-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85.004 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.48A10.05 10.05 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
-          />
-        </svg>
-      </a>
-    </div>
-  </header>
+        <div class="site-header__actions">
+            <SiteSearch />
+            <div class="site-lang" role="group" :aria-label="t.langSwitch">
+                <button
+                    class="site-lang__btn"
+                    type="button"
+                    :class="{ 'is-active': lang === 'zh-CN' }"
+                    :aria-pressed="lang === 'zh-CN'"
+                    @click="setLang('zh-CN')"
+                >
+                    中
+                </button>
+                <button
+                    class="site-lang__btn"
+                    type="button"
+                    :class="{ 'is-active': lang === 'en-US' }"
+                    :aria-pressed="lang === 'en-US'"
+                    @click="setLang('en-US')"
+                >
+                    EN
+                </button>
+            </div>
+            <button
+                class="site-icon-btn"
+                type="button"
+                :aria-label="isDark ? t.switchToLight : t.switchToDark"
+                :title="isDark ? t.lightMode : t.darkMode"
+                @click="toggleTheme"
+            >
+                <svg
+                    v-if="isDark"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <circle cx="12" cy="12" r="4" />
+                    <path
+                        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                    />
+                </svg>
+                <svg
+                    v-else
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z" />
+                </svg>
+            </button>
+            <a
+                class="site-icon-btn site-icon-btn--npm"
+                :href="SITE_NPM_URL"
+                target="_blank"
+                rel="noopener noreferrer"
+                :aria-label="t.openNpm"
+                :title="t.npmPackage"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M1 8h22v7h-12v2h-4v-2h-6l0-7" />
+                    <path d="M7 8v7" />
+                    <path d="M14 8v7" />
+                    <path d="M17 11v4" />
+                    <path d="M4 11v4" />
+                    <path d="M11 11v1" />
+                    <path d="M20 11v4" />
+                </svg>
+            </a>
+            <a
+                class="site-icon-btn"
+                :href="SITE_GITHUB_URL"
+                target="_blank"
+                rel="noopener noreferrer"
+                :aria-label="t.openGithub"
+                :title="t.githubRepo"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                    fill="currentColor"
+                >
+                    <path
+                        d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.12-1.52-1.12-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85.004 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.48A10.05 10.05 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+                    />
+                </svg>
+            </a>
+        </div>
+    </header>
 </template>
 
 <style scoped>
 .site-header {
-  align-items: center;
-  background: color-mix(in srgb, var(--m-color-surface) 92%, transparent);
-  border-bottom: 1px solid var(--docs-edge);
-  display: grid;
-  flex: 0 0 auto;
-  gap: 1rem;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  height: 3.75rem;
-  padding: 0 clamp(1rem, 3vw, 2.5rem);
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 200;
-  backdrop-filter: blur(10px);
+    align-items: center;
+    background: color-mix(in srgb, var(--m-color-surface) 92%, transparent);
+    border-bottom: 1px solid var(--docs-edge);
+    display: grid;
+    flex: 0 0 auto;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    height: 3.75rem;
+    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 200;
+    backdrop-filter: blur(10px);
 }
 
 .site-brand {
-  align-items: center;
-  color: var(--m-color-text);
-  display: inline-flex;
-  gap: 0.75rem;
-  text-decoration: none;
-  width: max-content;
+    align-items: center;
+    color: var(--m-color-text);
+    display: inline-flex;
+    gap: 0.75rem;
+    text-decoration: none;
+    width: max-content;
 }
 
 .site-brand__logo {
-  border-radius: 0.45rem;
-  display: block;
-  flex: 0 0 auto;
-  height: 1.85rem;
-  width: 1.85rem;
+    border-radius: 0.45rem;
+    display: block;
+    flex: 0 0 auto;
+    height: 1.85rem;
+    width: 1.85rem;
 }
 
 .site-brand__text {
-  display: grid;
-  gap: 0.05rem;
-  line-height: 1.1;
+    display: grid;
+    gap: 0.05rem;
+    line-height: 1.1;
 }
 
 .site-brand__name {
-  font-family: var(--docs-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+    font-family: var(--docs-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
 }
 
 .site-brand__version {
-  color: var(--m-color-text-muted);
-  font-family: var(--docs-mono);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+    color: var(--m-color-text-muted);
+    font-family: var(--docs-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
 }
 
 .site-nav {
-  align-items: center;
-  display: flex;
-  gap: 0.1rem;
-  justify-content: center;
-  padding: 0;
+    align-items: center;
+    display: flex;
+    gap: 0.1rem;
+    justify-content: center;
+    padding: 0;
 }
 
 .site-nav__link {
-  border-radius: 0.55rem;
-  color: var(--m-color-text-muted);
-  font-size: 0.84rem;
-  font-weight: 500;
-  padding: 0.4rem 0.85rem;
-  text-decoration: none;
-  transition:
-    color var(--m-motion-fast) var(--m-motion-ease),
-    background var(--m-motion-fast) var(--m-motion-ease);
+    border-radius: 0.55rem;
+    color: var(--m-color-text-muted);
+    font-size: 0.84rem;
+    font-weight: 500;
+    padding: 0.4rem 0.85rem;
+    text-decoration: none;
+    transition:
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .site-nav__link:hover {
-  color: var(--m-color-text);
+    color: var(--m-color-text);
 }
 
 .site-nav__link.is-active {
-  background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
-  color: var(--m-color-primary);
-  font-weight: 600;
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        var(--m-color-surface)
+    );
+    color: var(--m-color-primary);
+    font-weight: 600;
 }
 
 .site-header__actions {
-  align-items: center;
-  display: flex;
-  gap: 0.4rem;
-  justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    gap: 0.4rem;
+    justify-content: flex-end;
 }
 
 .site-lang {
-  background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
-  border: 1px solid var(--docs-edge);
-  border-radius: 0.65rem;
-  display: inline-flex;
-  overflow: hidden;
-  padding: 0.12rem;
+    background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
+    border: 1px solid var(--docs-edge);
+    border-radius: 0.65rem;
+    display: inline-flex;
+    overflow: hidden;
+    padding: 0.12rem;
 }
 
 .site-lang__btn {
-  background: transparent;
-  border: 0;
-  border-radius: 0.5rem;
-  color: var(--m-color-text-muted);
-  cursor: pointer;
-  font-family: var(--docs-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  min-width: 1.85rem;
-  padding: 0.28rem 0.4rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0.5rem;
+    color: var(--m-color-text-muted);
+    cursor: pointer;
+    font-family: var(--docs-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    min-width: 1.85rem;
+    padding: 0.28rem 0.4rem;
 }
 
 .site-lang__btn:hover {
-  color: var(--m-color-text);
+    color: var(--m-color-text);
 }
 
 .site-lang__btn.is-active {
-  background: color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface));
-  color: var(--m-color-primary);
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 16%,
+        var(--m-color-surface)
+    );
+    color: var(--m-color-primary);
 }
 
 .site-icon-btn {
-  align-items: center;
-  background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
-  border: 1px solid var(--docs-edge);
-  border-radius: 0.65rem;
-  color: var(--m-color-text);
-  cursor: pointer;
-  display: inline-flex;
-  height: 2.2rem;
-  justify-content: center;
-  text-decoration: none;
-  transition:
-    border-color var(--m-motion-fast) var(--m-motion-ease),
-    color var(--m-motion-fast) var(--m-motion-ease);
-  width: 2.2rem;
+    align-items: center;
+    background: color-mix(in srgb, var(--m-color-surface) 70%, transparent);
+    border: 1px solid var(--docs-edge);
+    border-radius: 0.65rem;
+    color: var(--m-color-text);
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.2rem;
+    justify-content: center;
+    text-decoration: none;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+    width: 2.2rem;
 }
 
 .site-icon-btn:hover {
-  border-color: color-mix(in srgb, var(--m-color-primary) 40%, var(--m-color-border));
-  color: var(--m-color-primary);
+    border-color: color-mix(
+        in srgb,
+        var(--m-color-primary) 40%,
+        var(--m-color-border)
+    );
+    color: var(--m-color-primary);
 }
 
 .site-icon-btn--npm {
-  color: #cb3837;
+    color: #cb3837;
 }
 
 .site-icon-btn--npm:hover {
-  border-color: color-mix(in srgb, #cb3837 45%, var(--m-color-border));
-  color: #cb3837;
+    border-color: color-mix(in srgb, #cb3837 45%, var(--m-color-border));
+    color: #cb3837;
 }
 
 @media (max-width: 700px) {
-  .site-header {
-    grid-template-columns: 1fr auto;
-    height: auto;
-    padding: 0.7rem 0.85rem;
-    row-gap: 0.55rem;
-  }
+    .site-header {
+        grid-template-columns: 1fr auto;
+        height: auto;
+        padding: 0.7rem 0.85rem;
+        row-gap: 0.55rem;
+    }
 
-  .site-brand__version {
-    display: none;
-  }
+    .site-brand__version {
+        display: none;
+    }
 
-  .site-nav {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-    order: 3;
-    overflow-x: auto;
-    width: 100%;
-  }
+    .site-nav {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        order: 3;
+        overflow-x: auto;
+        width: 100%;
+    }
 
-  .site-header__actions {
-    grid-column: 2;
-    grid-row: 1;
-  }
+    .site-header__actions {
+        grid-column: 2;
+        grid-row: 1;
+    }
 }
 </style>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T11:39:04.833Z",
+  "generatedAt": "2026-09-29T16:18:46.606Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 419,
+  "tokenCount": 420,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -4601,6 +4601,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Treeselect Toggler Size",
         "en-US": "Component-specific token: Treeselect Toggler Size"
+      }
+    },
+    {
+      "name": "--m-typography-rows",
+      "category": "component",
+      "source": "src/components/Typography/styles.css",
+      "default": "1",
+      "description": {
+        "zh-CN": "组件专用相关变量：Typography Rows",
+        "en-US": "Component-specific token: Typography Rows"
       }
     },
     {

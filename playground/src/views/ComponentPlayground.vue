@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { DocSection } from "../composables/useDocSections";
-import type { DocumentedComponentMeta, ResolvedComponentDoc } from "../docs/loadComponentDocs";
+import type {
+    DocumentedComponentMeta,
+    ResolvedComponentDoc,
+} from "../docs/loadComponentDocs";
 
 import {
     MCard,
@@ -198,7 +201,7 @@ const activePackageDoc = ref<ResolvedComponentDoc | null>(null);
 const docLoading = ref(false);
 const docViewerRef = ref<InstanceType<typeof ComponentDocViewer> | null>(null);
 const docSections = ref<DocSection[]>([]);
-const activeDocSectionId = ref('');
+const activeDocSectionId = ref("");
 
 function onDocSectionsChange(sections: DocSection[]) {
     docSections.value = sections;
@@ -213,20 +216,27 @@ function scrollToDocSection(id: string) {
     docViewerRef.value?.scrollToSection(id);
 }
 
-watch([selectedComponent, lang], async () => {
-    await nextTick();
-    contentScroll.value?.setScrollTop(0);
-    if (selectedComponent.value === OVERVIEW) {
-        activePackageDoc.value = null;
-        docSections.value = [];
-        activeDocSectionId.value = '';
+watch(
+    [selectedComponent, lang],
+    async () => {
+        await nextTick();
+        contentScroll.value?.setScrollTop(0);
+        if (selectedComponent.value === OVERVIEW) {
+            activePackageDoc.value = null;
+            docSections.value = [];
+            activeDocSectionId.value = "";
+            docLoading.value = false;
+            return;
+        }
+        docLoading.value = true;
+        activePackageDoc.value = await resolveComponentDoc(
+            selectedComponent.value,
+            lang.value,
+        );
         docLoading.value = false;
-        return;
-    }
-    docLoading.value = true;
-    activePackageDoc.value = await resolveComponentDoc(selectedComponent.value, lang.value);
-    docLoading.value = false;
-}, { immediate: true });
+    },
+    { immediate: true },
+);
 
 const filteredDocumented = computed(() => {
     const query = search.value.trim().toLowerCase();
@@ -245,376 +255,394 @@ const filteredDocumented = computed(() => {
 });
 
 const navGroups = computed(() => groupByCategory(filteredDocumented.value));
-const overviewGroups = computed(() => groupByCategory(documented.value));
+const overviewGroups = computed(() =>
+    groupByCategory(filteredDocumented.value),
+);
+const overviewCount = computed(() => filteredDocumented.value.length);
 </script>
 
 <template>
-  <div class="components-shell">
-    <div class="workspace">
-      <MobileSidebarShell
-        class="sidebar"
-        :title="t.componentNav"
-        :toggle-label="t.openNav"
-        scroll-class="column-scroll"
-        body-class="sidebar-body"
-      >
-        <label class="search-box">
-          <MIcon name="search" size="sm" />
-          <input
-            v-model="search"
-            type="search"
-            :placeholder="t.filterComponents"
-            :aria-label="t.filterComponents"
-          >
-        </label>
-
-        <section class="theme-panel">
-          <button
-            type="button"
-            class="theme-panel__toggle"
-            :aria-expanded="themeOpen"
-            @click="themeOpen = !themeOpen"
-          >
-            <span class="theme-panel__title">{{
-              t.theme
-            }}</span>
-            <span class="theme-panel__summary">{{
-              themeSummary
-            }}</span>
-            <span
-              class="theme-panel__chevron"
-              aria-hidden="true"
-            >{{ themeOpen ? "▾" : "▸" }}</span>
-          </button>
-          <div
-            v-show="themeOpen"
-            class="theme-panel__body"
-            aria-labelledby="appearance-title"
-          >
-            <h2 id="appearance-title" class="sr-only">
-              {{ t.themeSettings }}
-            </h2>
-            <div class="setting-group">
-              <span class="setting-label">{{
-                t.themeMode
-              }}</span>
-              <div class="segmented-control">
-                <button
-                  type="button"
-                  :class="{ 'is-selected': !isDark }"
-                  @click="setTheme('light')"
-                >
-                  {{ t.light }}
-                </button>
-                <button
-                  type="button"
-                  :class="{ 'is-selected': isDark }"
-                  @click="setTheme('dark')"
-                >
-                  {{ t.dark }}
-                </button>
-              </div>
-            </div>
-            <div class="setting-group">
-              <span class="setting-label">{{
-                t.brandColor
-              }}</span>
-              <div class="accent-list">
-                <button
-                  v-for="option in accentOptions"
-                  :key="option.name"
-                  type="button"
-                  class="accent-swatch"
-                  :class="{
-                    'is-selected':
-                      accent === option.name,
-                  }"
-                  :style="{
-                    '--swatch-color': option.color,
-                  }"
-                  :aria-label="
-                    interpolate(t.useAccent, {
-                      label: option.label,
-                    })
-                  "
-                  @click="accent = option.name"
-                />
-              </div>
-            </div>
-            <div class="setting-group">
-              <span class="setting-label">{{
-                t.radius
-              }}</span>
-              <div
-                class="segmented-control segmented-control--triple"
-                role="group"
-                :aria-label="t.radius"
-              >
-                <button
-                  v-for="option in radiusOptions"
-                  :key="option.name"
-                  type="button"
-                  :class="{
-                    'is-selected':
-                      radius === option.name,
-                  }"
-                  @click="radius = option.name"
-                >
-                  {{ option.label }}
-                </button>
-              </div>
-            </div>
-            <div class="setting-group">
-              <span class="setting-label">{{
-                t.density
-              }}</span>
-              <div
-                class="segmented-control segmented-control--triple"
-                role="group"
-                :aria-label="t.density"
-              >
-                <button
-                  v-for="option in densityOptions"
-                  :key="option.name"
-                  type="button"
-                  :class="{
-                    'is-selected':
-                      density === option.name,
-                  }"
-                  @click="setDensity(option.name)"
-                >
-                  {{ option.label }}
-                </button>
-              </div>
-            </div>
-            <div class="setting-group motion-setting">
-              <span class="setting-label">{{
-                t.motion
-              }}</span>
-              <div
-                class="segmented-control segmented-control--triple"
-                role="group"
-                :aria-label="t.motion"
-              >
-                <button
-                  v-for="option in motionOptions"
-                  :key="option.name"
-                  type="button"
-                  :class="{
-                    'is-selected':
-                      motionPreference ===
-                      option.name,
-                  }"
-                  @click="setMotion(option.name)"
-                >
-                  {{ option.label }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <nav
-          class="component-nav"
-          :aria-label="t.componentCatalog"
-        >
-          <RouterLink
-            class="nav-item nav-item--overview"
-            :class="{
-              'nav-item--active':
-                selectedComponent === OVERVIEW,
-            }"
-            :to="componentRoute(OVERVIEW)"
-          >
-            <span>{{ t.overview }}</span>
-            <span class="nav-count">{{
-              documented.length
-            }}</span>
-          </RouterLink>
-
-          <section
-            v-for="group in navGroups"
-            :key="group.label"
-            class="nav-group"
-          >
-            <p class="nav-heading">
-              <span>{{ group.title }}</span>
-              <span class="nav-heading__count">{{
-                group.items.length
-              }}</span>
-            </p>
-            <RouterLink
-              v-for="component in group.items"
-              :key="component.name"
-              class="nav-item"
-              :class="{
-                'nav-item--active':
-                  selectedComponent ===
-                  component.name,
-              }"
-              :to="componentRoute(component.name)"
+    <div class="components-shell">
+        <div class="workspace">
+            <MobileSidebarShell
+                class="sidebar"
+                :title="t.componentNav"
+                :toggle-label="t.openNav"
+                scroll-class="column-scroll"
+                body-class="sidebar-body"
             >
-              <span>{{ component.name }}</span>
-            </RouterLink>
-          </section>
+                <label class="search-box">
+                    <MIcon name="search" size="sm" />
+                    <input
+                        v-model="search"
+                        type="search"
+                        :placeholder="t.filterComponents"
+                        :aria-label="t.filterComponents"
+                    />
+                </label>
 
-          <p
-            v-if="navGroups.length === 0"
-            class="empty-search"
-          >
-            {{ t.noComponent }}
-          </p>
-        </nav>
-      </MobileSidebarShell>
-
-      <main class="content">
-        <MScrollbar ref="contentScroll" class="column-scroll">
-          <div
-            class="content-body"
-            :class="{
-              'content-body--doc': selectedComponent !== OVERVIEW,
-            }"
-          >
-            <template v-if="selectedComponent === OVERVIEW">
-              <section class="hero">
-                <div>
-                  <h1>{{ t.labTitle }}</h1>
-                  <p class="hero-copy">
-                    {{ t.labCopy }}
-                  </p>
-                  <div class="doc-meta">
-                    <span>Vue 3</span><span>TypeScript</span><span>Live Preview</span>
-                  </div>
-                </div>
-              </section>
-
-              <template
-                v-for="group in overviewGroups"
-                :key="group.label"
-              >
-                <div class="section-heading">
-                  <div>
-                    <h2>{{ group.title }}</h2>
-                  </div>
-                  <span class="section-rule" />
-                </div>
-                <section
-                  class="demo-grid overview-section"
-                  :aria-label="
-                    interpolate(t.groupAria, {
-                      title: group.title,
-                    })
-                  "
-                >
-                  <MCard
-                    v-for="item in group.items"
-                    :key="item.name"
-                    class="overview-card"
-                  >
-                    <h2>{{ item.name }}</h2>
-                    <p>
-                      {{
-                        item.description ?? t.defaultDoc
-                      }}
-                    </p>
-                    <RouterLink
-                      class="text-link"
-                      :to="componentRoute(item.name)"
+                <section class="theme-panel">
+                    <button
+                        type="button"
+                        class="theme-panel__toggle"
+                        :aria-expanded="themeOpen"
+                        @click="themeOpen = !themeOpen"
                     >
-                      {{ t.viewDetails }} <span>→</span>
-                    </RouterLink>
-                  </MCard>
+                        <span class="theme-panel__title">{{ t.theme }}</span>
+                        <span class="theme-panel__summary">{{
+                            themeSummary
+                        }}</span>
+                        <span class="theme-panel__chevron" aria-hidden="true">{{
+                            themeOpen ? "▾" : "▸"
+                        }}</span>
+                    </button>
+                    <div
+                        v-show="themeOpen"
+                        class="theme-panel__body"
+                        aria-labelledby="appearance-title"
+                    >
+                        <h2 id="appearance-title" class="sr-only">
+                            {{ t.themeSettings }}
+                        </h2>
+                        <div class="setting-group">
+                            <span class="setting-label">{{ t.themeMode }}</span>
+                            <div class="segmented-control">
+                                <button
+                                    type="button"
+                                    :class="{ 'is-selected': !isDark }"
+                                    @click="setTheme('light')"
+                                >
+                                    {{ t.light }}
+                                </button>
+                                <button
+                                    type="button"
+                                    :class="{ 'is-selected': isDark }"
+                                    @click="setTheme('dark')"
+                                >
+                                    {{ t.dark }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-group">
+                            <span class="setting-label">{{
+                                t.brandColor
+                            }}</span>
+                            <div class="accent-list">
+                                <button
+                                    v-for="option in accentOptions"
+                                    :key="option.name"
+                                    type="button"
+                                    class="accent-swatch"
+                                    :class="{
+                                        'is-selected': accent === option.name,
+                                    }"
+                                    :style="{
+                                        '--swatch-color': option.color,
+                                    }"
+                                    :aria-label="
+                                        interpolate(t.useAccent, {
+                                            label: option.label,
+                                        })
+                                    "
+                                    @click="accent = option.name"
+                                />
+                            </div>
+                        </div>
+                        <div class="setting-group">
+                            <span class="setting-label">{{ t.radius }}</span>
+                            <div
+                                class="segmented-control segmented-control--triple"
+                                role="group"
+                                :aria-label="t.radius"
+                            >
+                                <button
+                                    v-for="option in radiusOptions"
+                                    :key="option.name"
+                                    type="button"
+                                    :class="{
+                                        'is-selected': radius === option.name,
+                                    }"
+                                    @click="radius = option.name"
+                                >
+                                    {{ option.label }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-group">
+                            <span class="setting-label">{{ t.density }}</span>
+                            <div
+                                class="segmented-control segmented-control--triple"
+                                role="group"
+                                :aria-label="t.density"
+                            >
+                                <button
+                                    v-for="option in densityOptions"
+                                    :key="option.name"
+                                    type="button"
+                                    :class="{
+                                        'is-selected': density === option.name,
+                                    }"
+                                    @click="setDensity(option.name)"
+                                >
+                                    {{ option.label }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-group motion-setting">
+                            <span class="setting-label">{{ t.motion }}</span>
+                            <div
+                                class="segmented-control segmented-control--triple"
+                                role="group"
+                                :aria-label="t.motion"
+                            >
+                                <button
+                                    v-for="option in motionOptions"
+                                    :key="option.name"
+                                    type="button"
+                                    :class="{
+                                        'is-selected':
+                                            motionPreference === option.name,
+                                    }"
+                                    @click="setMotion(option.name)"
+                                >
+                                    {{ option.label }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </section>
-              </template>
-            </template>
 
-            <p v-if="docLoading" class="missing-doc">
-              …
-            </p>
+                <nav class="component-nav" :aria-label="t.componentCatalog">
+                    <RouterLink
+                        class="nav-item nav-item--overview"
+                        :class="{
+                            'nav-item--active': selectedComponent === OVERVIEW,
+                        }"
+                        :to="componentRoute(OVERVIEW)"
+                    >
+                        <span>{{ t.overview }}</span>
+                        <span class="nav-count">{{ documented.length }}</span>
+                    </RouterLink>
 
-            <ComponentDocViewer
-              v-else-if="activePackageDoc"
-              ref="docViewerRef"
-              :key="`${activePackageDoc.name}-${lang}`"
-              :doc="activePackageDoc"
-              @sections-change="onDocSectionsChange"
-              @active-section-change="onActiveDocSectionChange"
-            />
+                    <section
+                        v-for="group in navGroups"
+                        :key="group.label"
+                        class="nav-group"
+                    >
+                        <p class="nav-heading">
+                            <span>{{ group.title }}</span>
+                            <span class="nav-heading__count">{{
+                                group.items.length
+                            }}</span>
+                        </p>
+                        <RouterLink
+                            v-for="component in group.items"
+                            :key="component.name"
+                            class="nav-item"
+                            :class="{
+                                'nav-item--active':
+                                    selectedComponent === component.name,
+                            }"
+                            :to="componentRoute(component.name)"
+                        >
+                            <span>{{ component.name }}</span>
+                        </RouterLink>
+                    </section>
 
-            <section v-else class="missing-doc">
-              <h2>{{ selectedComponent }}</h2>
-              <p>{{ t.missingDoc }}</p>
-              <RouterLink
-                class="text-link"
-                :to="{ name: 'components' }"
-              >
-                {{ t.backAll }} <span>→</span>
-              </RouterLink>
-            </section>
-          </div>
-        </MScrollbar>
-      </main>
+                    <p v-if="navGroups.length === 0" class="empty-search">
+                        {{ t.noComponent }}
+                    </p>
+                </nav>
+            </MobileSidebarShell>
 
-      <aside
-        class="token-panel"
-        :aria-label="activePackageDoc ? t.componentSection : t.tokens"
-      >
-        <MScrollbar class="column-scroll">
-          <div class="token-panel-body">
-            <DocSectionNav
-              v-if="activePackageDoc"
-              :sections="docSections"
-              :active-id="activeDocSectionId"
-              @select="scrollToDocSection"
-            />
-            <template v-else>
-              <div class="token-heading">
-                <h2>Tokens</h2>
-              </div>
-              <p class="token-description">
-                {{ t.tokenDesc }}
-              </p>
-              <div class="token-group">
-                <h3>Color</h3>
-                <div class="swatch-row">
-                  <span class="swatch swatch--primary" /><span>primary</span><code>brand</code>
-                </div>
-                <div class="swatch-row">
-                  <span class="swatch swatch--surface" /><span>surface</span><code>canvas</code>
-                </div>
-                <div class="swatch-row">
-                  <span class="swatch swatch--border" /><span>border</span><code>line</code>
-                </div>
-              </div>
-              <div class="token-group">
-                <h3>Radius</h3>
-                <div class="radius-row">
-                  <span
-                    class="radius-sample radius-sample--sm"
-                  /><span>sm</span><span
-                    class="radius-sample radius-sample--md"
-                  /><span>md</span><span
-                    class="radius-sample radius-sample--lg"
-                  /><span>lg</span>
-                </div>
-              </div>
-              <div class="token-group">
-                <h3>Spacing</h3>
-                <div class="spacing-bars">
-                  <span style="--bar: 25%">1</span><span style="--bar: 50%">2</span><span style="--bar: 75%">3</span><span style="--bar: 100%">4</span>
-                </div>
-              </div>
-              <div class="token-note">
-                <MIcon name="info" size="sm" /><span>{{
-                  t.tokenNote
-                }}</span>
-              </div>
-            </template>
-          </div>
-        </MScrollbar>
-      </aside>
+            <main class="content">
+                <MScrollbar ref="contentScroll" class="column-scroll">
+                    <div
+                        class="content-body"
+                        :class="{
+                            'content-body--doc': selectedComponent !== OVERVIEW,
+                        }"
+                    >
+                        <template v-if="selectedComponent === OVERVIEW">
+                            <section class="hero">
+                                <div>
+                                    <h1>{{ t.labTitle }}</h1>
+                                    <p class="hero-copy">
+                                        {{ t.labCopy }}
+                                    </p>
+                                    <div class="doc-meta">
+                                        <span>Vue 3</span>
+                                        <span>TypeScript</span>
+                                        <span>Live Preview</span>
+                                        <span>{{
+                                            interpolate(t.overviewCount, {
+                                                count: String(overviewCount),
+                                            })
+                                        }}</span>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <p
+                                v-if="overviewGroups.length === 0"
+                                class="empty-search overview-empty"
+                            >
+                                {{ t.noComponent }}
+                            </p>
+
+                            <template
+                                v-for="group in overviewGroups"
+                                :key="group.label"
+                            >
+                                <div class="section-heading">
+                                    <div class="section-heading__title">
+                                        <h2>{{ group.title }}</h2>
+                                        <span class="section-heading__count">{{
+                                            group.items.length
+                                        }}</span>
+                                    </div>
+                                    <span class="section-rule" />
+                                </div>
+                                <section
+                                    class="demo-grid overview-section"
+                                    :aria-label="
+                                        interpolate(t.groupAria, {
+                                            title: group.title,
+                                        })
+                                    "
+                                >
+                                    <RouterLink
+                                        v-for="item in group.items"
+                                        :key="item.name"
+                                        class="overview-card-link"
+                                        :to="componentRoute(item.name)"
+                                    >
+                                        <MCard class="overview-card">
+                                            <div class="overview-card__head">
+                                                <h2>{{ item.name }}</h2>
+                                                <span
+                                                    class="overview-card__badge"
+                                                    >{{
+                                                        categoryTitle(
+                                                            item.categoryLabel,
+                                                        )
+                                                    }}</span
+                                                >
+                                            </div>
+                                            <p>
+                                                {{
+                                                    item.description ??
+                                                    t.defaultDoc
+                                                }}
+                                            </p>
+                                            <span
+                                                class="text-link overview-card__cta"
+                                            >
+                                                {{ t.viewDetails }}
+                                                <span>→</span>
+                                            </span>
+                                        </MCard>
+                                    </RouterLink>
+                                </section>
+                            </template>
+                        </template>
+
+                        <p v-if="docLoading" class="missing-doc">…</p>
+
+                        <ComponentDocViewer
+                            v-else-if="activePackageDoc"
+                            ref="docViewerRef"
+                            :key="`${activePackageDoc.name}-${lang}`"
+                            :doc="activePackageDoc"
+                            @sections-change="onDocSectionsChange"
+                            @active-section-change="onActiveDocSectionChange"
+                        />
+
+                        <section v-else class="missing-doc">
+                            <h2>{{ selectedComponent }}</h2>
+                            <p>{{ t.missingDoc }}</p>
+                            <RouterLink
+                                class="text-link"
+                                :to="{ name: 'components' }"
+                            >
+                                {{ t.backAll }} <span>→</span>
+                            </RouterLink>
+                        </section>
+                    </div>
+                </MScrollbar>
+            </main>
+
+            <aside
+                class="token-panel"
+                :aria-label="activePackageDoc ? t.componentSection : t.tokens"
+            >
+                <MScrollbar class="column-scroll">
+                    <div class="token-panel-body">
+                        <DocSectionNav
+                            v-if="activePackageDoc"
+                            :sections="docSections"
+                            :active-id="activeDocSectionId"
+                            @select="scrollToDocSection"
+                        />
+                        <template v-else>
+                            <div class="token-heading">
+                                <h2>Tokens</h2>
+                            </div>
+                            <p class="token-description">
+                                {{ t.tokenDesc }}
+                            </p>
+                            <div class="token-group">
+                                <h3>Color</h3>
+                                <div class="swatch-row">
+                                    <span class="swatch swatch--primary" /><span
+                                        >primary</span
+                                    ><code>brand</code>
+                                </div>
+                                <div class="swatch-row">
+                                    <span class="swatch swatch--surface" /><span
+                                        >surface</span
+                                    ><code>canvas</code>
+                                </div>
+                                <div class="swatch-row">
+                                    <span class="swatch swatch--border" /><span
+                                        >border</span
+                                    ><code>line</code>
+                                </div>
+                            </div>
+                            <div class="token-group">
+                                <h3>Radius</h3>
+                                <div class="radius-row">
+                                    <span
+                                        class="radius-sample radius-sample--sm"
+                                    /><span>sm</span
+                                    ><span
+                                        class="radius-sample radius-sample--md"
+                                    /><span>md</span
+                                    ><span
+                                        class="radius-sample radius-sample--lg"
+                                    /><span>lg</span>
+                                </div>
+                            </div>
+                            <div class="token-group">
+                                <h3>Spacing</h3>
+                                <div class="spacing-bars">
+                                    <span style="--bar: 25%">1</span
+                                    ><span style="--bar: 50%">2</span
+                                    ><span style="--bar: 75%">3</span
+                                    ><span style="--bar: 100%">4</span>
+                                </div>
+                            </div>
+                            <div class="token-note">
+                                <MIcon name="info" size="sm" /><span>{{
+                                    t.tokenNote
+                                }}</span>
+                            </div>
+                        </template>
+                    </div>
+                </MScrollbar>
+            </aside>
+        </div>
     </div>
-  </div>
 </template>
 
 <style>
@@ -814,11 +842,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 }
 .nav-heading {
     align-items: baseline;
-    color: color-mix(
-        in srgb,
-        var(--m-color-text) 72%,
-        var(--m-color-surface)
-    );
+    color: color-mix(in srgb, var(--m-color-text) 72%, var(--m-color-surface));
     display: flex;
     gap: 0.45rem;
     justify-content: space-between;
@@ -840,11 +864,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
-    color: color-mix(
-        in srgb,
-        var(--m-color-text) 78%,
-        var(--m-color-surface)
-    );
+    color: color-mix(in srgb, var(--m-color-text) 78%, var(--m-color-surface));
     cursor: pointer;
     display: flex;
     font-size: 0.92rem;
@@ -862,11 +882,7 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .nav-item:hover,
 .nav-item--active {
     background: color-mix(in srgb, var(--m-color-primary) 9%, transparent);
-    color: color-mix(
-        in srgb,
-        var(--m-color-primary) 82%,
-        var(--m-color-text)
-    );
+    color: color-mix(in srgb, var(--m-color-primary) 82%, var(--m-color-text));
 }
 .nav-item--active {
     font-weight: 700;
@@ -934,12 +950,23 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .section-heading:first-of-type {
     margin-top: 0;
 }
+.section-heading__title {
+    align-items: baseline;
+    display: inline-flex;
+    gap: 0.55rem;
+}
 .section-heading h2 {
     font-family: var(--docs-display);
     font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: -0.03em;
     margin: 0;
+}
+.section-heading__count {
+    color: var(--m-color-text-muted);
+    font-family: var(--docs-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
 }
 .section-rule {
     background: var(--m-color-border);
@@ -955,15 +982,62 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
 .overview-section {
     margin-bottom: 1rem;
 }
+.overview-empty {
+    margin: 1.5rem 0 0;
+}
+.overview-card-link {
+    color: inherit;
+    display: block;
+    text-decoration: none;
+}
+.overview-card-link:focus-visible {
+    outline: 2px solid var(--m-color-focus-ring, var(--m-color-primary));
+    outline-offset: 3px;
+    border-radius: var(--m-radius-md, 0.65rem);
+}
 .overview-card {
+    height: 100%;
     min-height: auto;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
+}
+.overview-card-link:hover .overview-card {
+    border-color: color-mix(
+        in srgb,
+        var(--m-color-primary) 35%,
+        var(--m-color-border)
+    );
+    box-shadow: 0 0.45rem 1.25rem
+        color-mix(in srgb, var(--m-color-text) 6%, transparent);
+    transform: translateY(-1px);
+}
+.overview-card__head {
+    align-items: start;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: space-between;
+    margin-bottom: 0.45rem;
 }
 .overview-card h2 {
     font-family: var(--docs-display);
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.03em;
-    margin: 0 0 0.45rem;
+    margin: 0;
+}
+.overview-card__badge {
+    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    border-radius: 999px;
+    color: var(--m-color-primary);
+    flex-shrink: 0;
+    font-family: var(--docs-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    padding: 0.28rem 0.5rem;
 }
 .overview-card p {
     color: var(--m-color-text-muted);
@@ -971,6 +1045,9 @@ const overviewGroups = computed(() => groupByCategory(documented.value));
     line-height: 1.55;
     margin: 0;
     max-width: 22rem;
+}
+.overview-card__cta {
+    margin-top: 0.85rem;
 }
 .text-link {
     background: transparent;

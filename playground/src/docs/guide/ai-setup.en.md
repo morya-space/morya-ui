@@ -19,16 +19,18 @@ Hand-written apps can still use only `pnpm add morya-ui` — see [Quick start](/
 
 ## Relation to Skill / MCP
 
-- **[One-shot setup](/docs/setup)**: write the library and AI config into the project  
-- **[Agent Skill](/docs/agent-skill)**: on-demand guidance for building pages with `morya-ui`  
-- **MCP**: runtime doc lookup for AI clients  
+- **[One-shot setup](/docs/setup)**: write the library and AI config into the project
+- **[Agent Skill](/docs/agent-skill)**: on-demand guidance for building pages with `morya-ui`
+- **MCP**: runtime doc lookup for AI clients
 
 Tools and multi-client configs: [Agent MCP](/docs/mcp). You can configure MCP by hand from that page without running setup.
 
 ## Next steps
 
-- [One-shot setup](/docs/setup): `@morya-ui/setup` commands and files  
-- [Agent Skill](/docs/agent-skill): when to use `morya-ui-pages`, surface map  
-- [Agent MCP](/docs/mcp): tools and client config  
-- [Quick start](/docs/quick-start): manual install and a minimal example  
+- [For agents](/docs/for-agents): curated agent / LLM entry and hard rules
+- [One-shot setup](/docs/setup): `@morya-ui/setup` commands and files
+- [Agent Skill](/docs/agent-skill): when to use `morya-ui-pages`, surface map
+- [Agent MCP](/docs/mcp): tools and client config
+- [llms.txt](/llms.txt): machine-readable docs index
+- [Quick start](/docs/quick-start): manual install and a minimal example
 - [Components](/components): browse APIs and previews

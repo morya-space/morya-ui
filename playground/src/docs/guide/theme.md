@@ -13,12 +13,12 @@ description: 亮暗主题、设计令牌与内容密度。
 ## 亮 / 暗色
 
 ```ts
-import { useTheme } from 'morya-ui'
+import { useTheme } from "morya-ui";
 
-const { isDark, setTheme, toggleTheme } = useTheme()
+const { isDark, setTheme, toggleTheme } = useTheme();
 
-setTheme('light') // 或 'dark'
-toggleTheme()
+setTheme("light"); // 或 'dark'
+toggleTheme();
 ```
 
 文档站右上角的按钮调用的就是同一套 API。主题偏好会写到 `document.documentElement` 的 `data-theme`。
@@ -27,44 +27,44 @@ toggleTheme()
 
 常用变量示例见 [设计令牌](/docs/design-tokens) 完整列表（支持搜索与分类）。
 
-| Token | 用途 |
-| --- | --- |
-| `--m-color-primary` | 品牌主色 |
-| `--m-color-surface` | 页面底色 |
-| `--m-color-text` | 正文 |
-| `--m-color-border` | 分割线 / 描边 |
-| `--m-radius-sm/md/lg` | 圆角阶梯 |
-| `--m-space-*` | 间距阶梯 |
-| `--m-font-size-xs/sm/md/lg` | 组件正文字号阶梯 |
-| `--m-opacity-disabled` | 禁用态透明度 |
+| Token                                                             | 用途                                          |
+| ----------------------------------------------------------------- | --------------------------------------------- |
+| `--m-color-primary`                                               | 品牌主色                                      |
+| `--m-color-surface`                                               | 页面底色                                      |
+| `--m-color-text`                                                  | 正文                                          |
+| `--m-color-border`                                                | 分割线 / 描边                                 |
+| `--m-radius-sm/md/lg`                                             | 圆角阶梯                                      |
+| `--m-space-*`                                                     | 间距阶梯                                      |
+| `--m-font-size-xs/sm/md/lg`                                       | 组件正文字号阶梯                              |
+| `--m-opacity-disabled`                                            | 禁用态透明度                                  |
 | `--m-z-base` / `--m-z-overlay` / `--m-z-dropdown` / `--m-z-toast` | 浮层层叠（Config `zIndex` 会写 `--m-z-base`） |
-| `--m-menu-min-width` / `--m-control-affix-*` | 菜单最小宽、输入清除区尺寸 |
+| `--m-menu-min-width` / `--m-control-affix-*`                      | 菜单最小宽、输入清除区尺寸                    |
 
 动效相关 token（`--m-motion-*`）见 [动效](/docs/motion)。
 
 ## 内容密度
 
 ```ts
-import { useDensity } from 'morya-ui'
+import { useDensity } from "morya-ui";
 
-const { preference, setDensity } = useDensity()
-setDensity('compact') // 'compact' | 'comfortable' | 'spacious'
+const { preference, setDensity } = useDensity();
+setDensity("compact"); // 'compact' | 'comfortable' | 'spacious'
 ```
 
 也会写到 `document.documentElement` 的 `data-m-density`，并缩放 `--m-space-*` 与 `--m-control-height-*`。  
 应用级可用 `createMoryaUI({ density: 'compact' })` 或 `<MConfigProvider density="compact">`。
 
-在组件页侧栏「主题」可临时改主色、圆角与密度，用于本地预览。
+在组件页侧栏「主题」可临时改主色、圆角与密度，用于本地预览。完整交互页见 [主题编辑器](/theme-editor)（可导出 `createTheme` / CSS）。
 
 ## 控件尺寸与聚焦
 
 默认控件高度采用 compact 节奏：
 
-| Size | 高度 | 字号 |
-| --- | --- | --- |
-| `small` | `28px`（`--m-control-height-small`） | `14px` |
-| 默认 / `medium` | `34px` | `14px` |
-| `large` | `40px` | `15px` |
+| Size            | 高度                                 | 字号   |
+| --------------- | ------------------------------------ | ------ |
+| `small`         | `28px`（`--m-control-height-small`） | `14px` |
+| 默认 / `medium` | `34px`                               | `14px` |
+| `large`         | `40px`                               | `15px` |
 
 聚焦样式为 **主色描边 + 2px 淡色光晕**（非外扩 outline ring）：
 
@@ -74,6 +74,24 @@ box-shadow: var(--m-focus-shadow); /* 0 0 0 2px primary@20% */
 ```
 
 相关 token：`--m-radius-control`、`--m-control-padding-x-*`、`--m-button-padding-x-*`、`--m-focus-shadow` / `--m-focus-shadow-danger`。
+
+## createTheme
+
+从 seed 推导完整 `--m-*` 并应用到文档或作用域元素：
+
+```ts
+import { createTheme } from "morya-ui";
+
+const theme = createTheme({
+  seed: { colorPrimary: "#0b6e4f", borderRadius: 8 },
+  // algorithm: 'dark' | 'compact' | ['dark', 'compact']
+});
+
+theme.apply(); // 写到 :root（或传入元素做局部主题）
+// const dispose = theme.inject()  // 写入 <style data-m-theme>（组件级覆盖需要）
+```
+
+在线调色与导出片段：[主题编辑器](/theme-editor)。
 
 ## 与 ConfigProvider
 
