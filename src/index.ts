@@ -8,6 +8,25 @@ export type {
   AccordionProps,
   AccordionTab,
 } from "./components/Accordion/types";
+export { default as MAffix } from "./components/Affix/Affix.vue";
+export type { AffixEmits, AffixProps } from "./components/Affix/types";
+export { default as MAlert } from "./components/Alert/Alert.vue";
+export type {
+  AlertEmits,
+  AlertProps,
+  AlertSeverity,
+  AlertSize,
+} from "./components/Alert/types";
+export { MAnchor, MAnchorLink } from "./components/Anchor";
+export type {
+  AnchorContainer,
+  AnchorDirection,
+  AnchorEmits,
+  AnchorLinkEmits,
+  AnchorLinkItem,
+  AnchorLinkProps,
+  AnchorProps,
+} from "./components/Anchor/types";
 export { default as MAutoComplete } from "./components/AutoComplete/AutoComplete.vue";
 export type {
   AutoCompleteEmits,
@@ -49,11 +68,22 @@ export type {
   ButtonInstance,
   ButtonProps,
   ButtonSeverity,
+  ButtonShape,
   ButtonSize,
   ButtonVariant,
 } from "./components/Button/types";
 export { default as MCard } from "./components/Card/Card.vue";
 export type { CardProps, CardShadow, CardSize } from "./components/Card/types";
+export { default as MCalendar } from "./components/Calendar/Calendar.vue";
+export type {
+  CalendarDateCellSlotProps,
+  CalendarEmits,
+  CalendarHeaderSlotProps,
+  CalendarMode,
+  CalendarMonthCellSlotProps,
+  CalendarProps,
+  CalendarValue,
+} from "./components/Calendar/types";
 export { default as MCarousel } from "./components/Carousel/Carousel.vue";
 export type { CarouselEmits, CarouselProps } from "./components/Carousel/types";
 export { default as MCascadeSelect } from "./components/CascadeSelect/CascadeSelect.vue";
@@ -131,6 +161,14 @@ export type {
   DatePickerType,
   DatePickerValue,
 } from "./components/DatePicker/types";
+export { default as MDescriptions } from "./components/Descriptions/Descriptions.vue";
+export { default as MDescriptionsItem } from "./components/Descriptions/DescriptionsItem.vue";
+export type {
+  DescriptionsItemProps,
+  DescriptionsLayout,
+  DescriptionsProps,
+  DescriptionsSize,
+} from "./components/Descriptions/types";
 export { default as MDialog } from "./components/Dialog/Dialog.vue";
 export type {
   DialogClickGuard,
@@ -220,6 +258,7 @@ export type {
   FormModel,
   FormProps,
   FormRules,
+  FormScrollToFieldOptions,
   FormValidateResult,
   FormValidateTrigger,
 } from "./components/Form/types";
@@ -259,6 +298,14 @@ export type {
 export type { IconProps, IconSize } from "./components/Icon/types";
 export { default as MIconField } from "./components/IconField/IconField.vue";
 export type { IconFieldProps } from "./components/IconField/types";
+export { default as MImage } from "./components/Image/Image.vue";
+export { default as MImagePreviewGroup } from "./components/Image/ImagePreviewGroup.vue";
+export type {
+  ImageEmits,
+  ImageFit,
+  ImagePreviewGroupProps,
+  ImageProps,
+} from "./components/Image/types";
 export { default as MInplace } from "./components/Inplace/Inplace.vue";
 export type { InplaceEmits, InplaceProps } from "./components/Inplace/types";
 export { default as MInput } from "./components/Input/Input.vue";
@@ -318,6 +365,21 @@ export type {
   LayoutSiderProps,
   LayoutTrigger,
 } from "./components/Layout/types";
+export { default as MList } from "./components/List/List.vue";
+export { default as MListItem } from "./components/List/ListItem.vue";
+export { default as MListItemMeta } from "./components/List/ListItemMeta.vue";
+export type {
+  ListGridType,
+  ListItemLayout,
+  ListItemMetaProps,
+  ListItemProps,
+  ListPaginationAlign,
+  ListPaginationConfig,
+  ListPaginationPosition,
+  ListProps,
+  ListRowKey,
+  ListSize,
+} from "./components/List/types";
 export { default as MListbox } from "./components/Listbox/Listbox.vue";
 export type {
   ListboxEmits,
@@ -365,6 +427,13 @@ export type {
   MeterGroupItem,
   MeterGroupProps,
 } from "./components/MeterGroup/types";
+export { default as MMentions } from "./components/Mentions/Mentions.vue";
+export type {
+  MentionsEmits,
+  MentionsOption,
+  MentionsProps,
+  MentionsRawOption,
+} from "./components/Mentions/types";
 export { default as MOrderList } from "./components/OrderList/OrderList.vue";
 export type {
   OrderListEmits,
@@ -428,6 +497,14 @@ export type {
 } from "./components/ProgressBar/types";
 export { default as MProgressSpinner } from "./components/ProgressSpinner/ProgressSpinner.vue";
 export type { ProgressSpinnerProps } from "./components/ProgressSpinner/types";
+export { default as MQRCode } from "./components/QRCode/QRCode.vue";
+export type {
+  QRCodeEmits,
+  QRCodeErrorLevel,
+  QRCodeIcon,
+  QRCodeProps,
+  QRCodeStatus,
+} from "./components/QRCode/types";
 export { default as MRadio } from "./components/Radio/Radio.vue";
 export { default as MRadioGroup } from "./components/Radio/RadioGroup.vue";
 export type {
@@ -476,6 +553,14 @@ export type {
   SelectButtonProps,
   SelectButtonValue,
 } from "./components/SelectButton/types";
+export { default as MSegmented } from "./components/Segmented/Segmented.vue";
+export type {
+  SegmentedEmits,
+  SegmentedOption,
+  SegmentedProps,
+  SegmentedRawOption,
+  SegmentedValue,
+} from "./components/Segmented/types";
 export { default as MSidebar } from "./components/Sidebar/Sidebar.vue";
 export type { SidebarItem, SidebarProps } from "./components/Sidebar/types";
 export { default as MSkeleton } from "./components/Skeleton/Skeleton.vue";
@@ -518,6 +603,19 @@ export type {
   SplitterProps,
   SplitterSize,
 } from "./components/Splitter/types";
+export {
+  MStatistic,
+  MStatisticCountdown,
+} from "./components/Statistic";
+export type {
+  StatisticCountdownEmits,
+  StatisticCountdownProps,
+  StatisticProps,
+} from "./components/Statistic/types";
+export type {
+  StatisticFormatter,
+  StatisticValue,
+} from "./components/Statistic/utils";
 export { default as MStatus } from "./components/Status/Status.vue";
 export type {
   StatusProps,
@@ -603,6 +701,23 @@ export type {
   TimelineProps,
   TimelineSeverity,
 } from "./components/Timeline/types";
+export {
+  MLink,
+  MParagraph,
+  MText,
+  MTitle,
+  MTypography,
+} from "./components/Typography";
+export type {
+  LinkProps,
+  ParagraphProps,
+  TextProps,
+  TitleLevel,
+  TitleProps,
+  TypographyDecorations,
+  TypographyProps,
+  TypographyType,
+} from "./components/Typography/types";
 export { toast, useToast } from "./components/Toast/toast";
 export { default as MToast } from "./components/Toast/Toast.vue";
 export type {
@@ -620,6 +735,14 @@ export type {
   ToggleButtonEmits,
   ToggleButtonProps,
 } from "./components/ToggleButton/types";
+export { default as MTour } from "./components/Tour/Tour.vue";
+export type {
+  TourEmits,
+  TourProps,
+  TourStep,
+  TourStepButtonProps,
+  TourType,
+} from "./components/Tour/types";
 export { default as MToolbar } from "./components/Toolbar/Toolbar.vue";
 export type { ToolbarProps } from "./components/Toolbar/types";
 export { default as MTooltip } from "./components/Tooltip/Tooltip.vue";
@@ -649,6 +772,8 @@ export type {
   VirtualScrollerProps,
 } from "./components/VirtualScroller/types";
 export { default as MVirtualScroller } from "./components/VirtualScroller/VirtualScroller.vue";
+export { default as MWatermark } from "./components/Watermark/Watermark.vue";
+export type { WatermarkFont, WatermarkProps } from "./components/Watermark/types";
 export { enUS, formatLocale, mergeLocale, useMLocale, zhCN } from "./locale";
 export type { MLocaleMessages, MLocaleName } from "./locale";
 export type { MComponentDefaultMap } from "./shared/componentDefaults";
@@ -677,6 +802,7 @@ export { renderMContent } from "./shared/content";
 export type { MAppendTo, MOverlayMountProps } from "./shared/overlay";
 export { isOverlayTeleported, resolveOverlayTeleport } from "./shared/overlay";
 export type {
+  MFieldStatus,
   MInputVariant,
   MSeverity,
   MSize,

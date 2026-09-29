@@ -20,12 +20,16 @@
     "**/*.css",
     "**/*/style.js",
     "**/accordion/index.js",
+    "**/affix/index.js",
+    "**/alert/index.js",
+    "**/anchor/index.js",
     "**/auto-complete/index.js",
     "**/avatar/index.js",
     "**/badge/index.js",
     "**/block-ui/index.js",
     "**/breadcrumb/index.js",
     "**/button/index.js",
+    "**/calendar/index.js",
     "**/card/index.js",
     "**/carousel/index.js",
     "**/cascade-select/index.js",
@@ -38,6 +42,7 @@
     "**/context-menu/index.js",
     "**/data-view/index.js",
     "**/date-picker/index.js",
+    "**/descriptions/index.js",
     "**/dialog/index.js",
     "**/divider/index.js",
     "**/dock/index.js",
@@ -54,6 +59,7 @@
     "**/grid/index.js",
     "**/icon/index.js",
     "**/icon-field/index.js",
+    "**/image/index.js",
     "**/inplace/index.js",
     "**/input/index.js",
     "**/input-color/index.js",
@@ -65,9 +71,11 @@
     "**/knob/index.js",
     "**/label/index.js",
     "**/layout/index.js",
+    "**/list/index.js",
     "**/listbox/index.js",
     "**/loading/index.js",
     "**/mega-menu/index.js",
+    "**/mentions/index.js",
     "**/menu/index.js",
     "**/menubar/index.js",
     "**/message/index.js",
@@ -80,11 +88,13 @@
     "**/popover/index.js",
     "**/progress-bar/index.js",
     "**/progress-spinner/index.js",
+    "**/qr-code/index.js",
     "**/radio/index.js",
     "**/rating/index.js",
     "**/result/index.js",
     "**/scroll-top/index.js",
     "**/scrollbar/index.js",
+    "**/segmented/index.js",
     "**/select/index.js",
     "**/select-button/index.js",
     "**/sidebar/index.js",
@@ -94,6 +104,7 @@
     "**/speed-dial/index.js",
     "**/split-button/index.js",
     "**/splitter/index.js",
+    "**/statistic/index.js",
     "**/status/index.js",
     "**/stepper/index.js",
     "**/switch/index.js",
@@ -108,9 +119,12 @@
     "**/toggle-button/index.js",
     "**/toolbar/index.js",
     "**/tooltip/index.js",
+    "**/tour/index.js",
     "**/tree/index.js",
     "**/tree-select/index.js",
-    "**/virtual-scroller/index.js"
+    "**/typography/index.js",
+    "**/virtual-scroller/index.js",
+    "**/watermark/index.js"
   ],
   "exports": {
     ".": {
@@ -128,6 +142,24 @@
     },
     "./accordion/style": "./dist/accordion/style.js",
     "./accordion/style.css": "./dist/accordion/style.css",
+    "./affix": {
+      "types": "./dist/components/Affix/index.d.ts",
+      "import": "./dist/affix/index.js"
+    },
+    "./affix/style": "./dist/affix/style.js",
+    "./affix/style.css": "./dist/affix/style.css",
+    "./alert": {
+      "types": "./dist/components/Alert/index.d.ts",
+      "import": "./dist/alert/index.js"
+    },
+    "./alert/style": "./dist/alert/style.js",
+    "./alert/style.css": "./dist/alert/style.css",
+    "./anchor": {
+      "types": "./dist/components/Anchor/index.d.ts",
+      "import": "./dist/anchor/index.js"
+    },
+    "./anchor/style": "./dist/anchor/style.js",
+    "./anchor/style.css": "./dist/anchor/style.css",
     "./auto-complete": {
       "types": "./dist/components/AutoComplete/index.d.ts",
       "import": "./dist/auto-complete/index.js"
@@ -164,6 +196,12 @@
     },
     "./button/style": "./dist/button/style.js",
     "./button/style.css": "./dist/button/style.css",
+    "./calendar": {
+      "types": "./dist/components/Calendar/index.d.ts",
+      "import": "./dist/calendar/index.js"
+    },
+    "./calendar/style": "./dist/calendar/style.js",
+    "./calendar/style.css": "./dist/calendar/style.css",
     "./card": {
       "types": "./dist/components/Card/index.d.ts",
       "import": "./dist/card/index.js"
@@ -236,6 +274,12 @@
     },
     "./date-picker/style": "./dist/date-picker/style.js",
     "./date-picker/style.css": "./dist/date-picker/style.css",
+    "./descriptions": {
+      "types": "./dist/components/Descriptions/index.d.ts",
+      "import": "./dist/descriptions/index.js"
+    },
+    "./descriptions/style": "./dist/descriptions/style.js",
+    "./descriptions/style.css": "./dist/descriptions/style.css",
     "./dialog": {
       "types": "./dist/components/Dialog/index.d.ts",
       "import": "./dist/dialog/index.js"
@@ -332,6 +376,12 @@
     },
     "./icon-field/style": "./dist/icon-field/style.js",
     "./icon-field/style.css": "./dist/icon-field/style.css",
+    "./image": {
+      "types": "./dist/components/Image/index.d.ts",
+      "import": "./dist/image/index.js"
+    },
+    "./image/style": "./dist/image/style.js",
+    "./image/style.css": "./dist/image/style.css",
     "./inplace": {
       "types": "./dist/components/Inplace/index.d.ts",
       "import": "./dist/inplace/index.js"
@@ -398,6 +448,12 @@
     },
     "./layout/style": "./dist/layout/style.js",
     "./layout/style.css": "./dist/layout/style.css",
+    "./list": {
+      "types": "./dist/components/List/index.d.ts",
+      "import": "./dist/list/index.js"
+    },
+    "./list/style": "./dist/list/style.js",
+    "./list/style.css": "./dist/list/style.css",
     "./listbox": {
       "types": "./dist/components/Listbox/index.d.ts",
       "import": "./dist/listbox/index.js"
@@ -416,6 +472,12 @@
     },
     "./mega-menu/style": "./dist/mega-menu/style.js",
     "./mega-menu/style.css": "./dist/mega-menu/style.css",
+    "./mentions": {
+      "types": "./dist/components/Mentions/index.d.ts",
+      "import": "./dist/mentions/index.js"
+    },
+    "./mentions/style": "./dist/mentions/style.js",
+    "./mentions/style.css": "./dist/mentions/style.css",
     "./menu": {
       "types": "./dist/components/Menu/index.d.ts",
       "import": "./dist/menu/index.js"
@@ -488,6 +550,12 @@
     },
     "./progress-spinner/style": "./dist/progress-spinner/style.js",
     "./progress-spinner/style.css": "./dist/progress-spinner/style.css",
+    "./qr-code": {
+      "types": "./dist/components/QRCode/index.d.ts",
+      "import": "./dist/qr-code/index.js"
+    },
+    "./qr-code/style": "./dist/qr-code/style.js",
+    "./qr-code/style.css": "./dist/qr-code/style.css",
     "./radio": {
       "types": "./dist/components/Radio/index.d.ts",
       "import": "./dist/radio/index.js"
@@ -518,6 +586,12 @@
     },
     "./scrollbar/style": "./dist/scrollbar/style.js",
     "./scrollbar/style.css": "./dist/scrollbar/style.css",
+    "./segmented": {
+      "types": "./dist/components/Segmented/index.d.ts",
+      "import": "./dist/segmented/index.js"
+    },
+    "./segmented/style": "./dist/segmented/style.js",
+    "./segmented/style.css": "./dist/segmented/style.css",
     "./select": {
       "types": "./dist/components/Select/index.d.ts",
       "import": "./dist/select/index.js"
@@ -572,6 +646,12 @@
     },
     "./splitter/style": "./dist/splitter/style.js",
     "./splitter/style.css": "./dist/splitter/style.css",
+    "./statistic": {
+      "types": "./dist/components/Statistic/index.d.ts",
+      "import": "./dist/statistic/index.js"
+    },
+    "./statistic/style": "./dist/statistic/style.js",
+    "./statistic/style.css": "./dist/statistic/style.css",
     "./status": {
       "types": "./dist/components/Status/index.d.ts",
       "import": "./dist/status/index.js"
@@ -656,6 +736,12 @@
     },
     "./tooltip/style": "./dist/tooltip/style.js",
     "./tooltip/style.css": "./dist/tooltip/style.css",
+    "./tour": {
+      "types": "./dist/components/Tour/index.d.ts",
+      "import": "./dist/tour/index.js"
+    },
+    "./tour/style": "./dist/tour/style.js",
+    "./tour/style.css": "./dist/tour/style.css",
     "./tree": {
       "types": "./dist/components/Tree/index.d.ts",
       "import": "./dist/tree/index.js"
@@ -668,12 +754,24 @@
     },
     "./tree-select/style": "./dist/tree-select/style.js",
     "./tree-select/style.css": "./dist/tree-select/style.css",
+    "./typography": {
+      "types": "./dist/components/Typography/index.d.ts",
+      "import": "./dist/typography/index.js"
+    },
+    "./typography/style": "./dist/typography/style.js",
+    "./typography/style.css": "./dist/typography/style.css",
     "./virtual-scroller": {
       "types": "./dist/components/VirtualScroller/index.d.ts",
       "import": "./dist/virtual-scroller/index.js"
     },
     "./virtual-scroller/style": "./dist/virtual-scroller/style.js",
     "./virtual-scroller/style.css": "./dist/virtual-scroller/style.css",
+    "./watermark": {
+      "types": "./dist/components/Watermark/index.d.ts",
+      "import": "./dist/watermark/index.js"
+    },
+    "./watermark/style": "./dist/watermark/style.js",
+    "./watermark/style.css": "./dist/watermark/style.css",
     "./docs": "./src/docs/index.ts"
   },
   "module": "./dist/index.js",

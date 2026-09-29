@@ -18,6 +18,10 @@ export interface MLocaleConfig {
   result418?: string
   searchPlaceholder?: string
   datePickerPlaceholder?: string
+  timePickerPlaceholder?: string
+  dateTimePlaceholder?: string
+  monthPlaceholder?: string
+  yearPlaceholder?: string
   selectPlaceholder?: string
   clear?: string
   close?: string
@@ -31,6 +35,8 @@ export interface MLocaleConfig {
   page?: string
   prevMonth?: string
   nextMonth?: string
+  prevYear?: string
+  nextYear?: string
   weekdays?: string[]
   monthNames?: string[]
   monthYear?: string
@@ -63,6 +69,12 @@ export interface MLocaleConfig {
   targetHeader?: string
   moreActions?: string
   backToTop?: string
+  qrCodeExpired?: string
+  qrCodeRefresh?: string
+  qrCodeScanned?: string
+  tourPrev?: string
+  tourNext?: string
+  tourFinish?: string
   clearRating?: string
   rating?: string
   decrease?: string
