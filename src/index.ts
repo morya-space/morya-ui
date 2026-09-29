@@ -256,7 +256,11 @@ export { default as MFloatLabel } from "./components/FloatLabel/FloatLabel.vue";
 export type { FloatLabelProps } from "./components/FloatLabel/types";
 export { default as MFluid } from "./components/Fluid/Fluid.vue";
 export type { FluidProps } from "./components/Fluid/types";
-export { M_FORM_ERRORS_KEY, M_FORM_KEY, M_FORM_WARNINGS_KEY } from "./components/Form/context";
+export {
+  M_FORM_ERRORS_KEY,
+  M_FORM_KEY,
+  M_FORM_WARNINGS_KEY,
+} from "./components/Form/context";
 export type {
   FormFieldValidator,
   MFormContext,
@@ -267,7 +271,10 @@ export type {
 export { default as MForm } from "./components/Form/Form.vue";
 export { default as MFormItem } from "./components/Form/FormItem.vue";
 export { default as MFormList } from "./components/Form/FormList.vue";
-export type { FormListItem, FormListSlotProps } from "./components/Form/FormList.types";
+export type {
+  FormListItem,
+  FormListSlotProps,
+} from "./components/Form/FormList.types";
 export { isFormInstance, useForm } from "./components/Form/useForm";
 export type { FormInstance, FormInstanceApi } from "./components/Form/useForm";
 export type { NamePath, NamePathKey } from "./components/Form/paths";
@@ -441,7 +448,11 @@ export type {
   LoadingServiceInstance,
   LoadingServiceOptions,
 } from "./components/Loading/types";
-export { isLoadingEffect, LOADING_EFFECTS, normalizeLoadingEffect } from "./components/Loading/types";
+export {
+  isLoadingEffect,
+  LOADING_EFFECTS,
+  normalizeLoadingEffect,
+} from "./components/Loading/types";
 export { useLoading } from "./components/Loading/useLoading";
 export type { UseLoadingReturn } from "./components/Loading/useLoading";
 export { default as MMegaMenu } from "./components/MegaMenu/MegaMenu.vue";
@@ -656,10 +667,7 @@ export type {
   SplitterProps,
   SplitterSize,
 } from "./components/Splitter/types";
-export {
-  MStatistic,
-  MStatisticCountdown,
-} from "./components/Statistic";
+export { MStatistic, MStatisticCountdown } from "./components/Statistic";
 export type {
   StatisticCountdownEmits,
   StatisticCountdownProps,
@@ -778,7 +786,10 @@ export type {
   TypographyType,
 } from "./components/Typography/types";
 export { toast, useToast } from "./components/Toast/toast";
-export { notification, useNotification } from "./components/Toast/useNotification";
+export {
+  notification,
+  useNotification,
+} from "./components/Toast/useNotification";
 export type {
   NotificationApi,
   NotificationOptions,
@@ -839,8 +850,25 @@ export type {
 } from "./components/VirtualScroller/types";
 export { default as MVirtualScroller } from "./components/VirtualScroller/VirtualScroller.vue";
 export { default as MWatermark } from "./components/Watermark/Watermark.vue";
-export type { WatermarkFont, WatermarkProps } from "./components/Watermark/types";
-export { enUS, formatLocale, mergeLocale, useMLocale, zhCN } from "./locale";
+export type {
+  WatermarkFont,
+  WatermarkProps,
+} from "./components/Watermark/types";
+export {
+  deDE,
+  enUS,
+  esES,
+  formatLocale,
+  frFR,
+  jaJP,
+  koKR,
+  mergeLocale,
+  ptBR,
+  ruRU,
+  useMLocale,
+  zhCN,
+  zhTW,
+} from "./locale";
 export type { MLocaleMessages, MLocaleName } from "./locale";
 export type { MComponentDefaultMap } from "./shared/componentDefaults";
 export {
