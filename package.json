@@ -807,8 +807,10 @@
     "docs:extract-demos": "node scripts/extract-doc-demos.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "vitest run && node --test scripts/docs-seo.test.mjs",
+    "test": "vitest run && node --test scripts/docs-seo.test.mjs scripts/check-size-limit.test.mjs scripts/docs-smoke.test.mjs scripts/visual-regression.test.mjs",
     "test:coverage": "vitest run --coverage",
+    "test:visual": "node scripts/visual-regression.mjs",
+    "test:visual:update": "node scripts/visual-regression.mjs --update",
     "release": "node scripts/release.mjs",
     "release:prepare": "node scripts/release.mjs prepare",
     "release:build": "node scripts/release.mjs build",
@@ -833,7 +835,10 @@
     "setup:build": "pnpm --filter @morya-ui/setup build",
     "check:colors": "node design-kit/scripts/check-raw-colors.mjs src design-kit/docs/golden-pages",
     "check:tokens": "node design-kit/scripts/check-undefined-tokens.mjs src",
-    "check:docs": "node design-kit/scripts/check-docs-drift.mjs"
+    "check:docs": "node design-kit/scripts/check-docs-drift.mjs",
+    "check:docs-skeleton": "node scripts/check-component-docs.mjs --require-when",
+    "check:docs-smoke": "node scripts/docs-smoke.mjs",
+    "check:size": "node scripts/check-size-limit.mjs"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
@@ -850,6 +855,9 @@
     "happy-dom": "^20.11.2",
     "husky": "^9.1.7",
     "markdown-it": "^15.0.2",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0",
     "shiki": "^4.4.3",
     "typescript": "^5.9.3",
     "unocss": "^66.10.2",

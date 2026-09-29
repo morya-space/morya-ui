@@ -1,0 +1,122 @@
+name: Quality check
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "scripts/check-size-limit.*"
+      - "scripts/docs-smoke.*"
+      - "scripts/visual-regression.mjs"
+      - "scripts/docs-seo.mjs"
+      - "tests/visual/**"
+      - ".size-limit.json"
+      - "package.json"
+      - "pnpm-lock.yaml"
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "scripts/check-size-limit.*"
+      - "scripts/docs-smoke.*"
+      - "scripts/visual-regression.mjs"
+      - "scripts/docs-seo.mjs"
+      - "tests/visual/**"
+      - ".size-limit.json"
+      - "package.json"
+      - "pnpm-lock.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  size-limit:
+    name: Bundle size budget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Build library
+        run: pnpm build
+
+      - name: Check size-limit
+        run: pnpm check:size
+
+  docs-smoke:
+    name: Docs smoke / a11y shells
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Build docs pages (SEO shells)
+        run: pnpm build:docs:pages
+        env:
+          GITHUB_PAGES: "true"
+
+      - name: Docs smoke
+        run: pnpm check:docs-smoke
+
+  visual:
+    name: Visual regression
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Visual regression
+        id: visual
+        run: |
+          if compgen -G "tests/visual/baselines/linux/*.png" > /dev/null; then
+            pnpm test:visual
+          else
+            echo "::warning::Missing tests/visual/baselines/linux — generating bootstrap artifact; commit it to enforce diffs."
+            pnpm test:visual:update
+            echo "bootstrap=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload linux baselines (bootstrap)
+        if: steps.visual.outputs.bootstrap == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines-linux
+          path: tests/visual/baselines/linux
+          if-no-files-found: error

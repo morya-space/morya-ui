@@ -1,0 +1,26 @@
+[
+  {
+    "name": "morya-ui full bundle (gzip)",
+    "path": "dist/index.js",
+    "limit": "160 KB",
+    "gzip": true
+  },
+  {
+    "name": "morya-ui styles (gzip)",
+    "path": "dist/styles.css",
+    "limit": "50 KB",
+    "gzip": true
+  },
+  {
+    "name": "button style.css (gzip)",
+    "path": "dist/button/style.css",
+    "limit": "12 KB",
+    "gzip": true
+  },
+  {
+    "name": "table entry (gzip)",
+    "path": "dist/table/index.js",
+    "limit": "14 KB",
+    "gzip": true
+  }
+]

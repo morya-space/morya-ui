@@ -1,0 +1,55 @@
+name: Docs check
+
+on:
+  pull_request:
+    paths:
+      - 'src/components/**/docs/**'
+      - 'playground/src/docs/**'
+      - 'scripts/check-component-docs.mjs'
+      - 'scripts/docs-seo.mjs'
+      - 'scripts/docs-seo.test.mjs'
+      - 'package.json'
+  push:
+    branches: [main]
+    paths:
+      - 'src/components/**/docs/**'
+      - 'playground/src/docs/**'
+      - 'scripts/check-component-docs.mjs'
+      - 'scripts/docs-seo.mjs'
+      - 'scripts/docs-seo.test.mjs'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  skeleton:
+    name: Component doc skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check component doc skeleton
+        run: node scripts/check-component-docs.mjs --require-when
+
+  seo-unit:
+    name: Docs SEO unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run docs-seo tests
+        run: node --test scripts/docs-seo.test.mjs

@@ -5,3 +5,6 @@ coverage/
 *.log
 .DS_Store
 .tmp-blog-shots/
+tests/visual/.actual/
+tests/visual/.diff/
+tests/visual/dist/
