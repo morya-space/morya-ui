@@ -1,0 +1,40 @@
+.m-qrcode {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: var(--m-color-surface);
+}
+
+.m-qrcode--bordered {
+  padding: var(--m-space-3);
+  border: var(--m-border-width) solid var(--m-color-border);
+  border-radius: var(--m-radius-md);
+}
+
+.m-qrcode__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.m-qrcode__mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--m-space-2);
+  padding: var(--m-space-2);
+  background: color-mix(in srgb, var(--m-color-surface) 82%, transparent);
+  text-align: center;
+}
+
+.m-qrcode__status-text {
+  margin: 0;
+  font-size: var(--m-font-size-sm);
+  color: var(--m-color-text-muted);
+}

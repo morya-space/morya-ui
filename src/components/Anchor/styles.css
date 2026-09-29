@@ -1,0 +1,89 @@
+/* —— Navigation: Anchor (in-page section nav) —— */
+.m-anchor {
+    --m-anchor-link-color: var(--m-color-text-muted);
+    --m-anchor-link-active: var(--m-color-primary);
+    --m-anchor-ink-width: 2px;
+    --m-anchor-gap: var(--m-space-2);
+    box-sizing: border-box;
+    font-family: var(--m-font-sans);
+    font-size: var(--m-font-size-md);
+}
+
+.m-anchor__affix {
+    position: relative;
+}
+
+.m-anchor--affix .m-anchor__affix {
+    position: sticky;
+    z-index: var(--m-z-sticky, 10);
+}
+
+.m-anchor__list {
+    position: relative;
+}
+
+.m-anchor--vertical .m-anchor__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-anchor-gap);
+    padding-inline-start: var(--m-space-3);
+    border-inline-start: var(--m-border-width) solid var(--m-color-border);
+}
+
+.m-anchor--horizontal .m-anchor__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--m-space-4);
+    border-block-end: var(--m-border-width) solid var(--m-color-border);
+    padding-block-end: var(--m-space-2);
+}
+
+.m-anchor__ink {
+    background: var(--m-anchor-link-active);
+    border-radius: var(--m-radius-full);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition:
+        top 0.2s ease,
+        left 0.2s ease,
+        width 0.2s ease,
+        height 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.m-anchor--vertical .m-anchor__ink {
+    inset-inline-start: calc(-1 * var(--m-space-3) - var(--m-anchor-ink-width) / 2);
+    transform: translateY(-50%);
+    width: var(--m-anchor-ink-width);
+}
+
+.m-anchor--horizontal .m-anchor__ink {
+    block-size: var(--m-anchor-ink-width);
+    inset-block-end: calc(-1 * var(--m-space-2) - var(--m-border-width));
+}
+
+.m-anchor__link {
+    color: var(--m-anchor-link-color);
+    line-height: var(--m-line-height-md);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.m-anchor__link:hover {
+    color: var(--m-anchor-link-active);
+}
+
+.m-anchor__link--active {
+    color: var(--m-anchor-link-active);
+    font-weight: var(--m-font-weight-medium, 500);
+}
+
+.m-anchor__sub {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-anchor-gap);
+    margin-block-start: var(--m-anchor-gap);
+    padding-inline-start: var(--m-space-4);
+}

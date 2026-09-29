@@ -1,0 +1,10 @@
+.m-watermark {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.m-watermark__overlay {
+  visibility: visible !important;
+  pointer-events: none;
+}

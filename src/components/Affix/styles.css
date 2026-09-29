@@ -1,0 +1,16 @@
+.m-affix {
+  box-sizing: border-box;
+}
+
+.m-affix__fixed {
+  box-sizing: border-box;
+}
+
+.m-affix__fixed--active {
+  z-index: var(--m-z-sticky, 10);
+}
+
+.m-affix__placeholder {
+  pointer-events: none;
+  visibility: hidden;
+}

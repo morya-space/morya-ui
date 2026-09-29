@@ -1,0 +1,111 @@
+/* —— Other: Tour (guided overlay) —— */
+.m-tour {
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+}
+
+.m-tour__mask {
+    inset: 0;
+    pointer-events: auto;
+    position: fixed;
+}
+
+.m-tour__spotlight {
+    border-radius: var(--m-radius-control);
+    box-shadow: 0 0 0 9999px color-mix(in srgb, var(--m-color-text) 45%, transparent);
+    pointer-events: none;
+    position: fixed;
+    transition:
+        top 0.2s ease,
+        left 0.2s ease,
+        width 0.2s ease,
+        height 0.2s ease;
+}
+
+.m-tour__panel {
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-control);
+    box-shadow: var(--m-shadow-lg);
+    box-sizing: border-box;
+    color: var(--m-color-text);
+    font-family: var(--m-font-sans);
+    max-width: min(22rem, calc(100vw - var(--m-space-8)));
+    min-width: 16rem;
+    padding: var(--m-space-4);
+    pointer-events: auto;
+    position: fixed;
+}
+
+.m-tour__panel--primary {
+    background: var(--m-color-primary);
+    border-color: color-mix(in srgb, var(--m-color-primary) 80%, var(--m-color-border));
+    color: var(--m-color-on-primary, var(--m-color-surface));
+}
+
+.m-tour__panel--primary .m-tour__description {
+    color: color-mix(in srgb, var(--m-color-on-primary, #fff) 85%, transparent);
+}
+
+.m-tour__close {
+    align-items: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--m-radius-control);
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    inset-block-start: var(--m-space-2);
+    inset-inline-end: var(--m-space-2);
+    justify-content: center;
+    opacity: 0.75;
+    padding: var(--m-space-1);
+    position: absolute;
+}
+
+.m-tour__close:hover {
+    opacity: 1;
+}
+
+.m-tour__cover {
+    margin-block-end: var(--m-space-3);
+}
+
+.m-tour__title {
+    font-size: var(--m-font-size-lg);
+    font-weight: var(--m-font-weight-medium, 500);
+    line-height: var(--m-line-height-md);
+    padding-inline-end: var(--m-space-6);
+}
+
+.m-tour__description {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-md);
+    line-height: var(--m-line-height-md);
+    margin-block-start: var(--m-space-2);
+}
+
+.m-tour__footer {
+    align-items: center;
+    display: flex;
+    gap: var(--m-space-3);
+    justify-content: space-between;
+    margin-block-start: var(--m-space-4);
+}
+
+.m-tour__indicators {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-sm);
+}
+
+.m-tour__panel--primary .m-tour__indicators {
+    color: color-mix(in srgb, var(--m-color-on-primary, #fff) 75%, transparent);
+}
+
+.m-tour__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--m-space-2);
+    justify-content: flex-end;
+}
