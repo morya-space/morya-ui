@@ -20,6 +20,8 @@ const props = withDefaults(defineProps<SpeedDialProps>(), {
   transition: undefined,
   model: () => [],
   direction: 'up',
+  shape: 'circle',
+  type: 'primary',
   modelValue: false,
   disabled: false,
   teleport: true,
@@ -52,6 +54,8 @@ const teleported = computed(() => isOverlayTeleported(props, config.value.append
 const rootClass = computed(() => [
   'm-speeddial',
   `m-speeddial--${props.direction}`,
+  `m-speeddial--${props.shape}`,
+  `m-speeddial--${props.type}`,
   {
     'm-speeddial--open': props.modelValue,
     'm-speeddial--disabled': props.disabled,

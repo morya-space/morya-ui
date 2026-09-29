@@ -16,7 +16,16 @@ export type ButtonSeverity =
   | 'contrast'
 
 /** Visual variant aligned with `variant`. */
-export type ButtonVariant = 'outlined' | 'text' | 'link' | 'ghost' | 'quaternary'
+export type ButtonVariant =
+  | 'outlined'
+  | 'dashed'
+  | 'text'
+  | 'link'
+  | 'ghost'
+  | 'quaternary'
+
+/** Corner shape. Legacy `rounded` prop maps to `round`. */
+export type ButtonShape = 'default' | 'circle' | 'round' | 'square'
 
 export type ButtonSize = 'small' | 'medium' | 'large'
 
@@ -39,12 +48,16 @@ export interface ButtonProps {
   color?: string
   /** Elevated shadow. */
   raised?: boolean
-  /** Fully rounded corners. */
+  /** Fully rounded corners. Prefer `shape="round"`; kept for compatibility. */
   rounded?: boolean
+  /** Corner shape; `rounded` prop implies `round`. */
+  shape?: ButtonShape
   /** Textual button without solid fill. */
   text?: boolean
   /** Border-only button. */
   outlined?: boolean
+  /** Dashed border (`variant="dashed"` or `dashed`). */
+  dashed?: boolean
   /** Link-styled button. */
   link?: boolean
   /**
@@ -58,11 +71,11 @@ export interface ButtonProps {
   quaternary?: boolean
   /** Soft fill matching outlined hover. Can also mute `text` / `outlined` / `link`. */
   plain?: boolean
-  /** Shortcut for outlined / text / link / ghost / quaternary. */
+  /** Shortcut for outlined / dashed / text / link / ghost / quaternary. */
   variant?: ButtonVariant
   /** Size alternative to the default. Also accepts legacy `sm` / `md` / `lg`. */
   size?: ButtonSize | 'sm' | 'md' | 'lg'
-  /** Full-width button. */
+  /** Full-width button (`fluid`). */
   fluid?: boolean
   loading?: boolean
   disabled?: boolean

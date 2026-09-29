@@ -9,6 +9,7 @@ export type {
   ButtonInstance,
   ButtonProps,
   ButtonSeverity,
+  ButtonShape,
   ButtonSize,
   ButtonVariant,
 } from './types'

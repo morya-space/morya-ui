@@ -25,6 +25,8 @@ import { MSpeedDial } from 'morya-ui'
 | --- | --- | --- | --- |
 | `model` | `SpeedDialItem[]` | `[]` | 操作项。 |
 | `direction` | `'up' \| 'down' \| 'left' \| 'right'` | `'up'` | 展开方向。 |
+| `shape` | `'circle' \| 'square'` | `'circle'` | 按钮形状。 |
+| `type` | `'default' \| 'primary'` | `'primary'` | 主按钮色调。 |
 | `modelValue` | `boolean` | `false` | 是否展开。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `ariaLabel` | `string` | `'快捷操作'` | 主按钮无障碍标签。 |

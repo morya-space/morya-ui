@@ -21,6 +21,20 @@ Show button text via the default slot or the `label` prop.
 ```vue preview src="./demos/Basic.vue"
 ```
 
+## Types
+
+Common combinations: default primary, `severity="secondary"`, `variant="dashed"`, `text` / `link`, `severity="danger"`, and `fluid` for full width.
+
+```vue preview src="./demos/VariantTypes.vue"
+```
+
+## Shape
+
+`shape`: `default` / `round` / `circle` / `square`. Legacy `rounded` maps to `shape="round"`.
+
+```vue preview src="./demos/Shape.vue"
+```
+
 ## Severity
 
 Use `severity` for semantic color; defaults to primary when omitted.

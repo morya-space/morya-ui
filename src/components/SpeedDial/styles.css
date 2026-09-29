@@ -26,6 +26,22 @@
     background: var(--m-color-primary-hover);
 }
 
+.m-speeddial--square .m-speeddial__button,
+.m-speeddial--square .m-speeddial__action {
+    border-radius: var(--m-radius-control);
+}
+
+.m-speeddial--default .m-speeddial__button {
+    background: var(--m-color-surface);
+    border: var(--m-border-width) solid var(--m-color-border);
+    color: var(--m-color-text);
+}
+
+.m-speeddial--default .m-speeddial__button:hover:not(:disabled) {
+    border-color: var(--m-color-primary-hover);
+    color: var(--m-color-primary-hover);
+}
+
 .m-speeddial__button:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;

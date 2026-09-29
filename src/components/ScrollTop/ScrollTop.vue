@@ -12,6 +12,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<ScrollTopProps>(), {
   threshold: 400,
   target: 'window',
+  shape: 'circle',
   teleport: true,
 })
 const attrs = useAttrs()
@@ -33,6 +34,7 @@ function toCssSize(value?: string | number) {
 
 const rootClass = computed(() => [
   'm-scrolltop',
+  `m-scrolltop--${props.shape}`,
   {
     'm-scrolltop--visible': visible.value,
     'm-scrolltop--parent': props.target === 'parent',

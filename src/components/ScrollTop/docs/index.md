@@ -29,6 +29,7 @@ import { MScrollTop } from 'morya-ui'
 | --- | --- | --- | --- |
 | `threshold` | `number` | `400` | 显示阈值（px）。 |
 | `target` | `'window' \| 'parent'` | `'window'` | 滚动目标。 |
+| `shape` | `'circle' \| 'square'` | `'circle'` | 按钮形状。 |
 | `right` | `string \| number` | — | 距右边缘；数字为 px。 |
 | `bottom` | `string \| number` | — | 距底边缘；数字为 px。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |

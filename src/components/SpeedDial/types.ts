@@ -4,6 +4,10 @@ import type { RootPassThrough } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type SpeedDialDirection = 'up' | 'down' | 'left' | 'right'
+/** Main button shape. */
+export type SpeedDialShape = 'circle' | 'square'
+/** Main button surface tone. */
+export type SpeedDialType = 'default' | 'primary'
 
 export interface SpeedDialItem extends Omit<MenuNodeBase, 'label'> {
   label: string
@@ -13,6 +17,10 @@ export interface SpeedDialProps {
   pt?: RootPassThrough
   model?: SpeedDialItem[]
   direction?: SpeedDialDirection
+  /** Button shape. Default `circle`. */
+  shape?: SpeedDialShape
+  /** Surface tone. Default `primary`. */
+  type?: SpeedDialType
   modelValue?: boolean
   disabled?: boolean
   ariaLabel?: string

@@ -38,6 +38,10 @@
     transform: translateY(0);
 }
 
+.m-scrolltop--square {
+    border-radius: var(--m-radius-control);
+}
+
 .m-scrolltop:hover:not(:disabled) {
     background: var(--m-color-primary-hover);
 }

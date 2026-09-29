@@ -15,8 +15,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconOnly: false,
   raised: false,
   rounded: false,
+  shape: undefined,
   text: false,
   outlined: false,
+  dashed: false,
   link: false,
   underline: true,
   ghost: false,
@@ -42,11 +44,18 @@ const hasDefaultContent = computed(() => Boolean(slots.default?.().some((node) =
 const hasLabel = computed(() => hasDefaultContent.value || Boolean(props.label?.trim()))
 
 const isOutlined = computed(() => props.outlined || props.variant === 'outlined')
+const isDashed = computed(() => props.dashed || props.variant === 'dashed')
 const isText = computed(() => props.text || props.variant === 'text')
 const isLink = computed(() => props.link || props.variant === 'link')
 const isGhost = computed(() => props.ghost || props.variant === 'ghost')
 const isQuaternary = computed(() => props.quaternary || props.variant === 'quaternary')
 const isFluid = computed(() => props.fluid)
+
+const resolvedShape = computed(() => {
+  if (props.shape) return props.shape
+  if (props.rounded) return 'round'
+  return 'default'
+})
 
 const resolvedSize = useConfiguredSize('Button', () => props.size)
 
@@ -64,11 +73,13 @@ const buttonClass = computed(() => [
   `m-button--${severityTone.value}`,
   `m-button--${resolvedSize.value}`,
   `m-button--icon-${props.iconPos}`,
+  `m-button--shape-${resolvedShape.value}`,
   {
     'm-button--raised': props.raised,
-    'm-button--rounded': props.rounded,
+    'm-button--rounded': resolvedShape.value === 'round' || resolvedShape.value === 'circle',
     'm-button--text': isText.value,
-    'm-button--outlined': isOutlined.value,
+    'm-button--outlined': isOutlined.value && !isDashed.value,
+    'm-button--dashed': isDashed.value,
     'm-button--link': isLink.value,
     'm-button--link-underline': isLink.value && props.underline,
     'm-button--ghost': isGhost.value,

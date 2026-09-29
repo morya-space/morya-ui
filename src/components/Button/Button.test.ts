@@ -72,6 +72,22 @@ describe('muButton', () => {
     expect(withoutUnderline.classes()).not.toContain('m-button--link-underline')
   })
 
+  it('supports dashed variant and shape', () => {
+    const dashed = mount(MButton, { props: { label: 'Dash', variant: 'dashed' } })
+    const circle = mount(MButton, {
+      props: { icon: 'edit', iconOnly: true, shape: 'circle', ariaLabel: 'Edit' },
+    })
+    const round = mount(MButton, { props: { label: 'Round', shape: 'round' } })
+    const roundedCompat = mount(MButton, { props: { label: 'R', rounded: true } })
+
+    expect(dashed.classes()).toContain('m-button--dashed')
+    expect(circle.classes()).toEqual(
+      expect.arrayContaining(['m-button--shape-circle', 'm-button--rounded']),
+    )
+    expect(round.classes()).toContain('m-button--shape-round')
+    expect(roundedCompat.classes()).toContain('m-button--shape-round')
+  })
+
   it('supports variant shortcut and size aliases', () => {
     const outlined = mount(MButton, { props: { label: 'A', variant: 'outlined', size: 'small' } })
     const large = mount(MButton, { props: { label: 'B', size: 'lg' } })

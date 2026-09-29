@@ -21,6 +21,20 @@ import { MButton } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
+## 类型
+
+常用组合：`severity="secondary"` 默认样式、`variant="dashed"` 虚线、`text` / `link` 文字链、`severity="danger"` 危险、`fluid` 通栏。
+
+```vue preview src="./demos/VariantTypes.vue"
+```
+
+## Shape
+
+`shape`：`default` / `round` / `circle` / `square`。旧 `rounded` 等价于 `shape="round"`。
+
+```vue preview src="./demos/Shape.vue"
+```
+
 ## Severity
 
 使用 `severity` 定义按钮语义色；省略时为 primary。
@@ -88,8 +102,9 @@ import { MButton } from 'morya-ui'
 | `severity` | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | — | 语义色。省略时为 primary。 |
 | `color` | `string` | — | 自定义颜色，覆盖 `severity`。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。默认中等；兼容 `sm` / `lg`。 |
-| `variant` | `'outlined' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'` | — | 样式变体快捷方式，等价于对应布尔 prop。 |
+| `variant` | `'outlined' \| 'dashed' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'` | — | 样式变体快捷方式，等价于对应布尔 prop。 |
 | `outlined` | `boolean` | `false` | 描边按钮。 |
+| `dashed` | `boolean` | `false` | 虚线边框。 |
 | `text` | `boolean` | `false` | 文字按钮。 |
 | `link` | `boolean` | `false` | 链接按钮。 |
 | `underline` | `boolean` | `true` | `link` 悬浮下划线。设为 `false` 可关闭。 |
@@ -97,7 +112,8 @@ import { MButton } from 'morya-ui'
 | `quaternary` | `boolean` | `false` | 极轻量文字按钮。 |
 | `plain` | `boolean` | `false` | 浅色填充，等同于 `outlined` 的悬浮态；也可与 `text` / `outlined` 组合弱化。 |
 | `raised` | `boolean` | `false` | 浮起阴影。 |
-| `rounded` | `boolean` | `false` | 全圆角。 |
+| `rounded` | `boolean` | `false` | 全圆角（兼容；推荐 `shape="round"`）。 |
+| `shape` | `'default' \| 'circle' \| 'round' \| 'square'` | `'default'` | 形状。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
 | `loading` | `boolean` | `false` | 加载中，禁用点击并显示 spinner。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
