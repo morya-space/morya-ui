@@ -1,0 +1,38 @@
+/* —— Data display: Statistic —— */
+.m-statistic {
+    box-sizing: border-box;
+    color: var(--m-color-text);
+    font-family: var(--m-font-sans);
+}
+
+.m-statistic__title {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-md);
+    line-height: var(--m-line-height-md);
+    margin-block-end: var(--m-space-1);
+}
+
+.m-statistic__content {
+    min-block-size: 1.75rem;
+}
+
+.m-statistic__value-row {
+    align-items: baseline;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--m-space-1);
+}
+
+.m-statistic__value {
+    color: var(--m-color-text);
+    font-size: var(--m-font-size-2xl, 1.5rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--m-font-weight-medium, 500);
+    line-height: 1.2;
+}
+
+.m-statistic__affix {
+    color: var(--m-color-text-muted);
+    font-size: var(--m-font-size-md);
+    line-height: var(--m-line-height-md);
+}
