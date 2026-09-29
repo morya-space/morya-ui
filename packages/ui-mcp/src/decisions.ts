@@ -299,7 +299,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['行选择：selectionMode + v-model:selection', 'Row select: selectionMode + v-model:selection'],
             ['大行数：virtual + maxHeight/tableHeight/fill', 'Large row sets: virtual + maxHeight/tableHeight/fill'],
             ['列宽/表头筛选：resizable / filterable', 'Column resize/header filter: resizable / filterable'],
-            ['行内编辑：edit-config + editable + #edit-{key}', 'Inline edit: edit-config + editable + #edit-{key}'],
+            ['树表：tree-config + v-model:expanded-row-keys（children 或 transform）', 'Tree: tree-config + v-model:expanded-row-keys (children or transform)'],
           ],
           [
             ['#cell-{key} 自定义单元格', '#cell-{key} custom cells'],
@@ -312,7 +312,7 @@ export const componentDecisions: ComponentDecision[] = [
           ['手写 <table> → MTable', 'Hand-rolled <table> → MTable'],
           ['嵌入表硬套 fill → 去掉 fill', 'Forced fill on embedded table → remove fill'],
           ['无高度开 virtual → 配 maxHeight/tableHeight/fill', 'virtual without height → set maxHeight/tableHeight/fill'],
-          ['用第三方 Excel 网格替代默认列表 → 优先 MTable 企业能力', 'Reaching for Excel grids for admin lists → prefer MTable enterprise props'],
+          ['无层级硬套 treeConfig → 普通 Table', 'No hierarchy but treeConfig → plain Table'],
         ]),
       },
       {
@@ -334,25 +334,6 @@ export const componentDecisions: ComponentDecision[] = [
           [['#list / #grid 等项模板', '#list / #grid item templates']],
         ),
         ...anti([['需要列对齐比较仍用 DataView → Table', 'Need column compare but used DataView → Table']]),
-      },
-      {
-        component: 'TreeTable',
-        when: ['数据同时具有表格列和父子层级', '用户需要展开、收起层级节点'],
-        whenEn: [
-          'Data has both table columns and parent-child hierarchy',
-          'Users need to expand and collapse hierarchy nodes',
-        ],
-        avoidWhen: ['数据没有真实层级关系', '普通 Table 已能表达关系'],
-        avoidWhenEn: ['There is no real hierarchy', 'A regular Table already expresses the relationship'],
-        recipe: recipe(
-          [
-            ['columns + 带 children 的行数据', 'columns + rows with children'],
-            ['展开相关 prop 按文档（expandedKeys 等）', 'Expansion props per docs (expandedKeys etc.)'],
-            ['row-key 稳定', 'Stable row-key'],
-          ],
-          [['#cell-{key}', '#cell-{key}']],
-        ),
-        ...anti([['无层级硬用 TreeTable → Table', 'No hierarchy but TreeTable → Table']]),
       },
       {
         component: 'Tree',

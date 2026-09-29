@@ -30,7 +30,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Data
 
-`MTable` (`columns` + **`rows`**, not `data`; optional enterprise props: `virtual`, `resizable`/`filterable`, `edit-config`, `children`, `span-method`), `MTreeTable` (lightweight tree; heavy grids → MTable), `MDataView`, `MTree`, `MPagination`, `MOrderList`, `MPickList`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
+`MTable` (`columns` + **`rows`**, not `data`; optional `virtual`, `resizable`/`filterable`, `children`, `span-method`, `tree-config`), `MDataView`, `MTree`, `MPagination`, `MOrderList`, `MPickList`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
 
 ## Feedback
 
@@ -64,7 +64,7 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | --- | --- |
 | Create / edit from a list (few–medium fields) vs long form page | `form-surface-choice` |
 | Dialog vs Drawer vs Popover vs Tooltip | `overlay-choice` |
-| Table vs DataView vs Tree / TreeTable | `data-display-choice` |
+| Table vs DataView vs Tree（树表用 Table `tree-config`） | `data-display-choice` |
 | Select vs TreeSelect vs AutoComplete vs Radio / … | `selection-choice` |
 | Card vs Panel vs Fieldset | `surface-choice` |
 | PageContent vs Flex vs Space vs Grid | `layout-spacing-choice` |

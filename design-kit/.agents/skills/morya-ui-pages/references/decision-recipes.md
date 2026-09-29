@@ -330,7 +330,7 @@ This file is the **offline** mirror for agents without MCP.
 - 需要列对齐比较仍用 DataView → Table
 
 
-### TreeTable
+### Table（树模式）
 
 **When**
 
@@ -340,13 +340,13 @@ This file is the **offline** mirror for agents without MCP.
 **Avoid when**
 
 - 数据没有真实层级关系
-- 普通 Table 已能表达关系
+- 只需节点浏览/选择 → Tree / TreeSelect
 
 **Recipe · props**
 
-- columns + 带 children 的行数据
-- 展开相关 prop 按文档（expandedKeys 等）
-- row-key 稳定
+- `columns` + 带 `children` 的 `rows`（或 `tree-config.transform` + `parentId`）
+- `:tree-config="{}"` + `v-model:expanded-row-keys`
+- `row-key` 稳定
 
 **Recipe · slots**
 
@@ -354,7 +354,7 @@ This file is the **offline** mirror for agents without MCP.
 
 **Anti-patterns**
 
-- 无层级硬用 TreeTable → Table
+- 无层级硬套 treeConfig → 普通 Table
 
 
 ### Tree

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28T02:51:11.051Z",
-  "catalogGeneratedAt": "2026-09-28T02:51:06.797Z",
+  "generatedAt": "2026-09-29T01:04:03.454Z",
+  "catalogGeneratedAt": "2026-09-29T01:04:02.416Z",
   "components": [
     {
       "id": "Accordion",
@@ -781,15 +781,14 @@
     {
       "id": "Drawer",
       "exportName": "MDrawer",
-      "examples": 6,
+      "examples": 8,
       "props": {
         "total": 16,
-        "covered": 3,
+        "covered": 4,
         "missing": [
           "modal",
           "dismissable",
           "showCloseIcon",
-          "width",
           "height",
           "blockScroll",
           "teleport",
@@ -813,8 +812,8 @@
         ]
       },
       "slots": {
-        "total": 2,
-        "covered": 1,
+        "total": 3,
+        "covered": 2,
         "missing": [
           "header"
         ]
@@ -2763,14 +2762,18 @@
     {
       "id": "Table",
       "exportName": "MTable",
-      "examples": 26,
+      "examples": 36,
       "props": {
-        "total": 66,
-        "covered": 16,
+        "total": 70,
+        "covered": 27,
         "missing": [
           "fit",
           "selectedItem",
+          "pageSizes",
+          "showHeader",
+          "showRowsPerPage",
           "fill",
+          "columnOrder",
           "rowHover",
           "sortField",
           "sortOrder",
@@ -2778,7 +2781,6 @@
           "searchField",
           "searchValue",
           "filterOptions",
-          "maxHeight",
           "showOverflowTooltip",
           "rowKey",
           "size",
@@ -2788,11 +2790,9 @@
           "bodyRowClassName",
           "bodyTextDirection",
           "checkboxColumnWidth",
-          "clickEventType",
           "clickRowToExpand",
           "currentRowKey",
           "expandColumnWidth",
-          "expandedRowKeys",
           "filters",
           "fixedCheckbox",
           "fixedExpand",
@@ -2801,51 +2801,42 @@
           "headerClassName",
           "headerItemClassName",
           "headerTextDirection",
-          "hideHeader",
-          "hideRowsPerPage",
           "indexColumnWidth",
           "multiSort",
           "mustSort",
-          "preventContextMenuRow",
-          "rowsItems",
-          "rowsOfPageSeparatorMessage",
-          "rowsPerPageMessage",
-          "showHeader",
           "showIndex",
           "showIndexSymbol",
           "tableClassName",
           "tableHeight",
           "tableMinHeight",
-          "tableNodeId",
           "pt"
         ]
       },
       "events": {
-        "total": 19,
-        "covered": 3,
+        "total": 21,
+        "covered": 7,
         "missing": [
           "sort",
-          "page",
           "row-click",
+          "row-dblclick",
+          "row-contextmenu",
+          "select-row",
+          "deselect-row",
+          "select-all",
           "current-change",
           "expand",
           "update:current-row-key",
-          "contextmenuRow",
-          "deselectRow",
           "filter",
-          "selectAll",
-          "selectRow",
-          "update:expandedRowKeys",
           "update:filters",
-          "update:selectedItem",
-          "updatePageItems",
-          "updateTotalItems"
+          "update:columnOrder",
+          "update:selectedItem"
         ]
       },
       "slots": {
-        "total": 10,
+        "total": 11,
         "covered": 1,
         "missing": [
+          "footer",
           "body-cell",
           "empty",
           "loading",
@@ -2858,7 +2849,7 @@
         ]
       },
       "methods": {
-        "total": 14,
+        "total": 17,
         "covered": 0,
         "missing": [
           "currentPageFirstIndex",
@@ -2874,7 +2865,10 @@
           "rowsPerPageOptions",
           "rowsPerPageActiveOption",
           "updateRowsPerPageActiveOption",
-          "setFilters"
+          "setFilters",
+          "setColumnWidths",
+          "setHiddenColumns",
+          "setColumnOrder"
         ]
       }
     },
@@ -3318,42 +3312,6 @@
       }
     },
     {
-      "id": "TreeTable",
-      "exportName": "MTreeTable",
-      "examples": 8,
-      "props": {
-        "total": 5,
-        "covered": 2,
-        "missing": [
-          "emptyMessage",
-          "expandedKeys",
-          "pt"
-        ]
-      },
-      "events": {
-        "total": 3,
-        "covered": 0,
-        "missing": [
-          "node-expand",
-          "node-collapse",
-          "update:expandedKeys"
-        ]
-      },
-      "slots": {
-        "total": 2,
-        "covered": 0,
-        "missing": [
-          "expansion",
-          "empty"
-        ]
-      },
-      "methods": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
-      }
-    },
-    {
       "id": "VirtualScroller",
       "exportName": "MVirtualScroller",
       "examples": 4,
@@ -3387,8 +3345,8 @@
     }
   ],
   "summary": {
-    "components": 93,
-    "componentsWithMissingCoverage": 93,
-    "totalExamples": 817
+    "components": 92,
+    "componentsWithMissingCoverage": 92,
+    "totalExamples": 821
   }
 }

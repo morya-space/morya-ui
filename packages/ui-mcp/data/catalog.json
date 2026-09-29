@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T02:51:06.797Z",
+  "generatedAt": "2026-09-29T01:39:06.983Z",
   "library": {
     "name": "morya-ui",
     "version": "0.3.6"
@@ -6485,6 +6485,10 @@
         {
           "name": "header",
           "description": "自定义标题区。"
+        },
+        {
+          "name": "footer",
+          "description": "底部操作区。"
         }
       ],
       "methods": [],
@@ -6517,6 +6521,15 @@
           "locale": "zh-CN"
         },
         {
+          "id": "footer-1",
+          "section": "Footer",
+          "sectionId": "footer",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MButton, MDrawer, MSpace } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\n</script>\n\n<template>\n  <div>\n    <MButton label=\"With Footer\" @click=\"open = true\" />\n    <MDrawer v-model=\"open\" header=\"Edit details\" position=\"right\" :width=\"360\">\n      <p style=\"margin:0\">\n        Put primary and secondary actions in the footer slot so the body can scroll independently.\n      </p>\n      <template #footer>\n        <MSpace style=\"justify-content: flex-end; width: 100%\">\n          <MButton label=\"Cancel\" severity=\"secondary\" text @click=\"open = false\" />\n          <MButton label=\"Save\" @click=\"open = false\" />\n        </MSpace>\n      </template>\n    </MDrawer>\n  </div>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
           "id": "import-1",
           "section": "Import",
           "sectionId": "import",
@@ -6541,6 +6554,15 @@
           "lang": "vue",
           "preview": true,
           "code": "<script setup lang=\"ts\">\nimport { MButton, MDrawer } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\nconst position = ref<'left' | 'right' | 'top' | 'bottom'>('right')\n\nfunction openAt(next: 'left' | 'right' | 'top' | 'bottom') {\n  position.value = next\n  open.value = true\n}\n</script>\n\n<template>\n  <div class=\"flex flex-wrap gap-3\">\n    <MButton label=\"Left\" size=\"small\" @click=\"openAt('left')\" />\n    <MButton label=\"Right\" size=\"small\" severity=\"secondary\" @click=\"openAt('right')\" />\n    <MButton label=\"Top\" size=\"small\" severity=\"secondary\" @click=\"openAt('top')\" />\n    <MButton label=\"Bottom\" size=\"small\" severity=\"secondary\" @click=\"openAt('bottom')\" />\n    <MDrawer v-model=\"open\" :header=\"`Position: ${position}`\" :position=\"position\">\n      <p style=\"margin:0\">\n        Use <code>dismissable</code> to control mask dismiss.\n      </p>\n    </MDrawer>\n  </div>\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "footer-1",
+          "section": "Footer",
+          "sectionId": "footer",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MButton, MDrawer, MSpace } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst open = ref(false)\n</script>\n\n<template>\n  <div>\n    <MButton label=\"With Footer\" @click=\"open = true\" />\n    <MDrawer v-model=\"open\" header=\"Edit details\" position=\"right\" :width=\"360\">\n      <p style=\"margin:0\">\n        Put primary and secondary actions in the footer slot so the body can scroll independently.\n      </p>\n      <template #footer>\n        <MSpace style=\"justify-content: flex-end; width: 100%\">\n          <MButton label=\"Cancel\" severity=\"secondary\" text @click=\"open = false\" />\n          <MButton label=\"Save\" @click=\"open = false\" />\n        </MSpace>\n      </template>\n    </MDrawer>\n  </div>\n</template>",
           "locale": "en-US"
         }
       ],
@@ -6570,6 +6592,11 @@
               "body": "支持 `left` / `right` / `top` / `bottom`。\n\n```vue preview src=\"./demos/Position.vue\"\n```"
             },
             {
+              "id": "footer",
+              "title": "Footer",
+              "body": "用 `#footer` 放取消 / 保存等操作；正文区可独立滚动。\n\n```vue preview src=\"./demos/Footer.vue\"\n```"
+            },
+            {
               "id": "props",
               "title": "Props",
               "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |\n| `position` | `'left' \\| 'right' \\| 'top' \\| 'bottom'` | `'left'` | 抽屉出现位置。 |\n| `modal` | `boolean` | `true` | 显示遮罩层。 |\n| `dismissable` | `boolean` | `true` | 点击遮罩关闭。 |\n| `showCloseIcon` | `boolean` | `true` | 显示关闭按钮。 |\n| `header` | `string` | — | 标题文案。 |\n| `width` | `string \\| number` | — | 左右抽屉宽度。 |\n| `height` | `string \\| number` | — | 上下抽屉高度。 |\n| `blockScroll` | `boolean` | `true` | 打开时锁定 `body` 滚动。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n| `transition` | `string \\| false` | `'drawer'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |\n| `beforeClose` | [AsyncGuard](/docs/types#AsyncGuard) | — | — |\n| `closeOnEsc` | `boolean` | — | — |\n| `closeOnOutsideClick` | `boolean` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |"
@@ -6582,10 +6609,10 @@
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 抽屉内容。 |\n| `header` | 自定义标题区。 |"
+              "body": "| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 抽屉内容。 |\n| `header` | 自定义标题区。 |\n| `footer` | 底部操作区。 |"
             }
           ],
-          "markdown": "---\ntitle: Drawer\ncategory: 05 / FEEDBACK\ndescription: 侧边抽屉面板。\n---\n\n# Drawer\n\n侧边抽屉，从屏幕边缘滑出，适合导航、筛选或详情面板。\n\n## 引入\n\n```ts\nimport { MButton, MDrawer } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Position\n\n支持 `left` / `right` / `top` / `bottom`。\n\n```vue preview src=\"./demos/Position.vue\"\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |\n| `position` | `'left' \\| 'right' \\| 'top' \\| 'bottom'` | `'left'` | 抽屉出现位置。 |\n| `modal` | `boolean` | `true` | 显示遮罩层。 |\n| `dismissable` | `boolean` | `true` | 点击遮罩关闭。 |\n| `showCloseIcon` | `boolean` | `true` | 显示关闭按钮。 |\n| `header` | `string` | — | 标题文案。 |\n| `width` | `string \\| number` | — | 左右抽屉宽度。 |\n| `height` | `string \\| number` | — | 上下抽屉高度。 |\n| `blockScroll` | `boolean` | `true` | 打开时锁定 `body` 滚动。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n| `transition` | `string \\| false` | `'drawer'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |\n| `beforeClose` | [AsyncGuard](/docs/types#AsyncGuard) | — | — |\n| `closeOnEsc` | `boolean` | — | — |\n| `closeOnOutsideClick` | `boolean` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | 可见性变化。 |\n| `show` | — | 打开时触发。 |\n| `hide` | — | 关闭后触发。 |\n| `after-leave` | — | 离场动画结束。 |\n| `close` | — | — |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 抽屉内容。 |\n| `header` | 自定义标题区。 |\n"
+          "markdown": "---\ntitle: Drawer\ncategory: 05 / FEEDBACK\ndescription: 侧边抽屉面板。\n---\n\n# Drawer\n\n侧边抽屉，从屏幕边缘滑出，适合导航、筛选或详情面板。\n\n## 引入\n\n```ts\nimport { MButton, MDrawer } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Position\n\n支持 `left` / `right` / `top` / `bottom`。\n\n```vue preview src=\"./demos/Position.vue\"\n```\n\n## Footer\n\n用 `#footer` 放取消 / 保存等操作；正文区可独立滚动。\n\n```vue preview src=\"./demos/Footer.vue\"\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |\n| `position` | `'left' \\| 'right' \\| 'top' \\| 'bottom'` | `'left'` | 抽屉出现位置。 |\n| `modal` | `boolean` | `true` | 显示遮罩层。 |\n| `dismissable` | `boolean` | `true` | 点击遮罩关闭。 |\n| `showCloseIcon` | `boolean` | `true` | 显示关闭按钮。 |\n| `header` | `string` | — | 标题文案。 |\n| `width` | `string \\| number` | — | 左右抽屉宽度。 |\n| `height` | `string \\| number` | — | 上下抽屉高度。 |\n| `blockScroll` | `boolean` | `true` | 打开时锁定 `body` 滚动。 |\n| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |\n| `transition` | `string \\| false` | `'drawer'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |\n| `beforeClose` | [AsyncGuard](/docs/types#AsyncGuard) | — | — |\n| `closeOnEsc` | `boolean` | — | — |\n| `closeOnOutsideClick` | `boolean` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | 可见性变化。 |\n| `show` | — | 打开时触发。 |\n| `hide` | — | 关闭后触发。 |\n| `after-leave` | — | 离场动画结束。 |\n| `close` | — | — |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 抽屉内容。 |\n| `header` | 自定义标题区。 |\n| `footer` | 底部操作区。 |\n"
         },
         "en-US": {
           "title": "Drawer",
@@ -6612,6 +6639,11 @@
               "body": "Supports `left` / `right` / `top` / `bottom`.\n\n```vue preview src=\"./demos/Position.vue\"\n```"
             },
             {
+              "id": "footer",
+              "title": "Footer",
+              "body": "Use `#footer` for cancel / save actions; the body scrolls independently.\n\n```vue preview src=\"./demos/Footer.vue\"\n```"
+            },
+            {
               "id": "props",
               "title": "Props",
               "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |\n| `position` | `'left' \\| 'right' \\| 'top' \\| 'bottom'` | `'left'` | Edge the drawer appears from. |\n| `modal` | `boolean` | `true` | Show the overlay mask. |\n| `dismissable` | `boolean` | `true` | Close when clicking the mask. |\n| `showCloseIcon` | `boolean` | `true` | Show the close button. |\n| `header` | `string` | — | Header text. |\n| `width` | `number \\| string` | — | Width for left/right drawers (`number` = px). |\n| `height` | `number \\| string` | — | Height for top/bottom drawers (`number` = px). |\n| `blockScroll` | `boolean` | `true` | Lock `body` scroll while open. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n| `transition` | `string \\| false` | `'drawer'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |"
@@ -6624,10 +6656,10 @@
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| Slot | Description |\n| --- | --- |\n| `default` | Drawer content. |\n| `header` | Custom header area. |"
+              "body": "| Slot | Description |\n| --- | --- |\n| `default` | Drawer content. |\n| `header` | Custom header area. |\n| `footer` | Footer actions. |"
             }
           ],
-          "markdown": "---\ntitle: Drawer\ncategory: 05 / FEEDBACK\ndescription: Side drawer panel.\n---\n\n# Drawer\n\nSide drawer that slides in from the screen edge. Suited to navigation, filters, or detail panels.\n\n## Import\n\n```ts\nimport { MButton, MDrawer } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Position\n\nSupports `left` / `right` / `top` / `bottom`.\n\n```vue preview src=\"./demos/Position.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |\n| `position` | `'left' \\| 'right' \\| 'top' \\| 'bottom'` | `'left'` | Edge the drawer appears from. |\n| `modal` | `boolean` | `true` | Show the overlay mask. |\n| `dismissable` | `boolean` | `true` | Close when clicking the mask. |\n| `showCloseIcon` | `boolean` | `true` | Show the close button. |\n| `header` | `string` | — | Header text. |\n| `width` | `number \\| string` | — | Width for left/right drawers (`number` = px). |\n| `height` | `number \\| string` | — | Height for top/bottom drawers (`number` = px). |\n| `blockScroll` | `boolean` | `true` | Lock `body` scroll while open. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n| `transition` | `string \\| false` | `'drawer'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Visibility change. |\n| `show` | — | Emitted when opening. |\n| `hide` | — | Emitted after closing. |\n| `after-leave` | — | Emitted when the leave animation finishes. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Drawer content. |\n| `header` | Custom header area. |\n"
+          "markdown": "---\ntitle: Drawer\ncategory: 05 / FEEDBACK\ndescription: Side drawer panel.\n---\n\n# Drawer\n\nSide drawer that slides in from the screen edge. Suited to navigation, filters, or detail panels.\n\n## Import\n\n```ts\nimport { MButton, MDrawer } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Position\n\nSupports `left` / `right` / `top` / `bottom`.\n\n```vue preview src=\"./demos/Position.vue\"\n```\n\n## Footer\n\nUse `#footer` for cancel / save actions; the body scrolls independently.\n\n```vue preview src=\"./demos/Footer.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |\n| `position` | `'left' \\| 'right' \\| 'top' \\| 'bottom'` | `'left'` | Edge the drawer appears from. |\n| `modal` | `boolean` | `true` | Show the overlay mask. |\n| `dismissable` | `boolean` | `true` | Close when clicking the mask. |\n| `showCloseIcon` | `boolean` | `true` | Show the close button. |\n| `header` | `string` | — | Header text. |\n| `width` | `number \\| string` | — | Width for left/right drawers (`number` = px). |\n| `height` | `number \\| string` | — | Height for top/bottom drawers (`number` = px). |\n| `blockScroll` | `boolean` | `true` | Lock `body` scroll while open. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n| `transition` | `string \\| false` | `'drawer'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `boolean` | Visibility change. |\n| `show` | — | Emitted when opening. |\n| `hide` | — | Emitted after closing. |\n| `after-leave` | — | Emitted when the leave animation finishes. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Drawer content. |\n| `header` | Custom header area. |\n| `footer` | Footer actions. |\n"
         }
       }
     },
@@ -18197,7 +18229,7 @@
             {
               "id": "horizontal",
               "title": "Horizontal",
-              "body": "内容宽度超出容器时显示横向滚动条。`trigger=\"none\"` 与 `always` 都会常显滑块；默认 `trigger=\"hover\"` 在悬停时显示。\n\n`MLayout`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MTreeTable`、`MVirtualScroller` 等组件已内置本组件。\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```"
+              "body": "内容宽度超出容器时显示横向滚动条。`trigger=\"none\"` 与 `always` 都会常显滑块；默认 `trigger=\"hover\"` 在悬停时显示。\n\n`MLayout`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MVirtualScroller` 等组件已内置本组件。\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```"
             },
             {
               "id": "always-native",
@@ -18235,7 +18267,7 @@
               "body": "<h4 id=\"ScrollbarAriaOrientation\">ScrollbarAriaOrientation</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype ScrollbarAriaOrientation = 'horizontal' | 'vertical'\n```\n\n<h4 id=\"ScrollbarClassValue\">ScrollbarClassValue</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype ScrollbarClassValue = | string\n  | string[]\n  | Record<string, boolean>\n  | Array<string | Record<string, boolean> | null | undefined | false>\n```"
             }
           ],
-          "markdown": "---\ntitle: Scrollbar\ncategory: 01 / BASIC\ndescription: 可换肤自定义滚动条，提供一致的滚动体验。\n---\n\n# Scrollbar\n\n用于替换浏览器原生滚动条，提供跨浏览器一致的可换肤滚动体验。\n\n## 引入\n\n```ts\nimport { MScrollbar } from 'morya-ui'\n```\n\n## 基础用法\n\n用 `height` 固定可视区域高度；不设时跟随父容器高度。\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Max height\n\n仅当内容超出 `max-height` 时出现滚动条。\n\n```vue preview src=\"./demos/MaxHeight.vue\"\n```\n\n## Horizontal\n\n内容宽度超出容器时显示横向滚动条。`trigger=\"none\"` 与 `always` 都会常显滑块；默认 `trigger=\"hover\"` 在悬停时显示。\n\n`MLayout`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MTreeTable`、`MVirtualScroller` 等组件已内置本组件。\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```\n\n## Always / Native\n\n`always` 常显自定义滑块；`native` 使用浏览器原生滚动条。\n\n```vue preview src=\"./demos/AlwaysNative.vue\"\n```\n\n## Manual scroll\n\n通过实例方法 `setScrollTop` / `setScrollLeft` / `scrollTo` / `update` 控制滚动。\n\n```vue preview src=\"./demos/ManualScroll.zh.vue\"\n```\n\n## Infinite scroll\n\n滚动到边缘时触发 `end-reached`，可用于无限加载。\n\n```vue preview src=\"./demos/InfiniteScroll.zh.vue\"\n```\n\n## API\n\n### Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `always` | `boolean` | — | — |\n| `ariaLabel` | `string` | — | — |\n| `ariaOrientation` | `ScrollbarAriaOrientation` | — | — |\n| `distance` | `number` | — | — |\n| `height` | `string \\| number` | — | — |\n| `id` | `string` | — | — |\n| `maxHeight` | `string \\| number` | — | — |\n| `minSize` | `number` | — | — |\n| `native` | `boolean` | — | — |\n| `noresize` | `boolean` | — | — |\n| `role` | `string` | — | — |\n| `tabindex` | `number \\| string` | — | — |\n| `tag` | `string` | — | — |\n| `trigger` | `'hover' \\| 'none'` | — | — |\n| `viewClass` | `ScrollbarClassValue` | — | — |\n| `viewStyle` | `StyleValue` | — | — |\n| `wrapClass` | `ScrollbarClassValue` | — | — |\n| `wrapStyle` | `StyleValue` | — | — |\n| `width` | `string \\| number` | — | 可视区域宽度。 |\n| `maxWidth` | `string \\| number` | — | 最大宽度。 |\n| `ariaMultiselectable` | `boolean` | — | 内容区 `aria-multiselectable`。 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n| Name | Type | Default | Description |\n| --- | --- | --- | --- |\n| height | `string \\| number` | — | 可视区域高度 |\n| maxHeight | `string \\| number` | — | 最大高度 |\n| fitContent | `boolean` | `false` | 随内容增高，配合根节点 CSS `max-height` 使用（下拉面板） |\n| native | `boolean` | `false` | 使用原生滚动条 |\n| wrapStyle / wrapClass | style / class | — | wrap 容器样式 |\n| viewStyle / viewClass | style / class | — | 内容区样式 |\n| noresize | `boolean` | `false` | 不监听尺寸变化 |\n| tag | `string` | `div` | 内容区标签 |\n| always | `boolean` | `false` | 始终显示滑块 |\n| trigger | `'hover' \\| 'none'` | `'hover'` | `none` 常显滑块；`always` 为 true 时仍常显 |\n| minSize | `number` | `20` | 滑块最小尺寸 |\n| id / role / ariaLabel / ariaOrientation | a11y | — | 内容区无障碍属性 |\n| tabindex | `number \\| string` | — | wrap 的 tabindex |\n| distance | `number` | `0` | 触发 `end-reached` 的边缘距离 |\n\n### Events\n\n| Name | Payload |\n| --- | --- |\n| scroll | `{ scrollTop, scrollLeft }` |\n| end-reached | `'top' \\| 'bottom' \\| 'left' \\| 'right'` |\n\n### Expose\n\n| 方法 / 属性 | 说明 |\n| --- | --- |\n| `wrapRef` | wrap 容器元素引用。 |\n| `update()` | 重新计算滑块尺寸与位置。 |\n| `scrollTo(...)` | 滚动到指定位置（同原生 `scrollTo`）。 |\n| `setScrollTop(y)` | 设置纵向滚动位置。 |\n| `setScrollLeft(x)` | 设置横向滚动位置。 |\n| `handleScroll(event)` | wrap 的 scroll 事件处理，可手动转发。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `scroll` | `{ scrollTop, scrollLeft }` | 滚动位置变化。 |\n| `end-reached` | `'top' \\| 'bottom' \\| 'left' \\| 'right'` | 滚动到边缘。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 可滚动内容。 |\n\n## 类型\n\n<h4 id=\"ScrollbarAriaOrientation\">ScrollbarAriaOrientation</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype ScrollbarAriaOrientation = 'horizontal' | 'vertical'\n```\n\n<h4 id=\"ScrollbarClassValue\">ScrollbarClassValue</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype ScrollbarClassValue = | string\n  | string[]\n  | Record<string, boolean>\n  | Array<string | Record<string, boolean> | null | undefined | false>\n```\n"
+          "markdown": "---\ntitle: Scrollbar\ncategory: 01 / BASIC\ndescription: 可换肤自定义滚动条，提供一致的滚动体验。\n---\n\n# Scrollbar\n\n用于替换浏览器原生滚动条，提供跨浏览器一致的可换肤滚动体验。\n\n## 引入\n\n```ts\nimport { MScrollbar } from 'morya-ui'\n```\n\n## 基础用法\n\n用 `height` 固定可视区域高度；不设时跟随父容器高度。\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Max height\n\n仅当内容超出 `max-height` 时出现滚动条。\n\n```vue preview src=\"./demos/MaxHeight.vue\"\n```\n\n## Horizontal\n\n内容宽度超出容器时显示横向滚动条。`trigger=\"none\"` 与 `always` 都会常显滑块；默认 `trigger=\"hover\"` 在悬停时显示。\n\n`MLayout`、`MDialog`、`MConfirmDialog`、`MDrawer`、`MSplitter`、`MTable`、`MSelect`、`MTreeSelect`、`MDropdown`、`MContextMenu`、`MPopover`、`MConfirmPopup`、`MMenu`（popup）、`MMenubar`、`MTieredMenu`、`MTabs`、`MGallery`、`MTimeline`（horizontal）、`MTextarea`（autosize `maxRows`）、`MTerminal`、`MOrderList`、`MPickList`、`MVirtualScroller` 等组件已内置本组件。\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```\n\n## Always / Native\n\n`always` 常显自定义滑块；`native` 使用浏览器原生滚动条。\n\n```vue preview src=\"./demos/AlwaysNative.vue\"\n```\n\n## Manual scroll\n\n通过实例方法 `setScrollTop` / `setScrollLeft` / `scrollTo` / `update` 控制滚动。\n\n```vue preview src=\"./demos/ManualScroll.zh.vue\"\n```\n\n## Infinite scroll\n\n滚动到边缘时触发 `end-reached`，可用于无限加载。\n\n```vue preview src=\"./demos/InfiniteScroll.zh.vue\"\n```\n\n## API\n\n### Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `always` | `boolean` | — | — |\n| `ariaLabel` | `string` | — | — |\n| `ariaOrientation` | `ScrollbarAriaOrientation` | — | — |\n| `distance` | `number` | — | — |\n| `height` | `string \\| number` | — | — |\n| `id` | `string` | — | — |\n| `maxHeight` | `string \\| number` | — | — |\n| `minSize` | `number` | — | — |\n| `native` | `boolean` | — | — |\n| `noresize` | `boolean` | — | — |\n| `role` | `string` | — | — |\n| `tabindex` | `number \\| string` | — | — |\n| `tag` | `string` | — | — |\n| `trigger` | `'hover' \\| 'none'` | — | — |\n| `viewClass` | `ScrollbarClassValue` | — | — |\n| `viewStyle` | `StyleValue` | — | — |\n| `wrapClass` | `ScrollbarClassValue` | — | — |\n| `wrapStyle` | `StyleValue` | — | — |\n| `width` | `string \\| number` | — | 可视区域宽度。 |\n| `maxWidth` | `string \\| number` | — | 最大宽度。 |\n| `ariaMultiselectable` | `boolean` | — | 内容区 `aria-multiselectable`。 |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n| Name | Type | Default | Description |\n| --- | --- | --- | --- |\n| height | `string \\| number` | — | 可视区域高度 |\n| maxHeight | `string \\| number` | — | 最大高度 |\n| fitContent | `boolean` | `false` | 随内容增高，配合根节点 CSS `max-height` 使用（下拉面板） |\n| native | `boolean` | `false` | 使用原生滚动条 |\n| wrapStyle / wrapClass | style / class | — | wrap 容器样式 |\n| viewStyle / viewClass | style / class | — | 内容区样式 |\n| noresize | `boolean` | `false` | 不监听尺寸变化 |\n| tag | `string` | `div` | 内容区标签 |\n| always | `boolean` | `false` | 始终显示滑块 |\n| trigger | `'hover' \\| 'none'` | `'hover'` | `none` 常显滑块；`always` 为 true 时仍常显 |\n| minSize | `number` | `20` | 滑块最小尺寸 |\n| id / role / ariaLabel / ariaOrientation | a11y | — | 内容区无障碍属性 |\n| tabindex | `number \\| string` | — | wrap 的 tabindex |\n| distance | `number` | `0` | 触发 `end-reached` 的边缘距离 |\n\n### Events\n\n| Name | Payload |\n| --- | --- |\n| scroll | `{ scrollTop, scrollLeft }` |\n| end-reached | `'top' \\| 'bottom' \\| 'left' \\| 'right'` |\n\n### Expose\n\n| 方法 / 属性 | 说明 |\n| --- | --- |\n| `wrapRef` | wrap 容器元素引用。 |\n| `update()` | 重新计算滑块尺寸与位置。 |\n| `scrollTo(...)` | 滚动到指定位置（同原生 `scrollTo`）。 |\n| `setScrollTop(y)` | 设置纵向滚动位置。 |\n| `setScrollLeft(x)` | 设置横向滚动位置。 |\n| `handleScroll(event)` | wrap 的 scroll 事件处理，可手动转发。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `scroll` | `{ scrollTop, scrollLeft }` | 滚动位置变化。 |\n| `end-reached` | `'top' \\| 'bottom' \\| 'left' \\| 'right'` | 滚动到边缘。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `default` | 可滚动内容。 |\n\n## 类型\n\n<h4 id=\"ScrollbarAriaOrientation\">ScrollbarAriaOrientation</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype ScrollbarAriaOrientation = 'horizontal' | 'vertical'\n```\n\n<h4 id=\"ScrollbarClassValue\">ScrollbarClassValue</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype ScrollbarClassValue = | string\n  | string[]\n  | Record<string, boolean>\n  | Array<string | Record<string, boolean> | null | undefined | false>\n```\n"
         },
         "en-US": {
           "title": "Scrollbar",
@@ -18264,7 +18296,7 @@
             {
               "id": "horizontal",
               "title": "Horizontal",
-              "body": "A horizontal scrollbar appears when content is wider than the container. `trigger=\"none\"` and `always` keep the thumb visible; the default `trigger=\"hover\"` shows it on hover.\n\n`MLayout`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, `MTreeTable`, and `MVirtualScroller` integrate this component internally.\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```"
+              "body": "A horizontal scrollbar appears when content is wider than the container. `trigger=\"none\"` and `always` keep the thumb visible; the default `trigger=\"hover\"` shows it on hover.\n\n`MLayout`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, and `MVirtualScroller` integrate this component internally.\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```"
             },
             {
               "id": "always-native",
@@ -18297,7 +18329,7 @@
               "body": "| Slot | Description |\n| --- | --- |\n| `default` | Scrollable content. |"
             }
           ],
-          "markdown": "---\ntitle: Scrollbar\ncategory: 01 / BASIC\ndescription: Themeable custom scrollbar for a consistent scrolling experience.\n---\n\n# Scrollbar\n\nReplaces the native browser scrollbar with a themeable, cross-browser scrolling experience.\n\n## Import\n\n```ts\nimport { MScrollbar } from 'morya-ui'\n```\n\n## Basic\n\nUse `height` to fix the viewport height. If omitted, it follows the parent height.\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Max height\n\nThe scrollbar appears only when content exceeds `max-height`.\n\n```vue preview src=\"./demos/MaxHeight.vue\"\n```\n\n## Horizontal\n\nA horizontal scrollbar appears when content is wider than the container. `trigger=\"none\"` and `always` keep the thumb visible; the default `trigger=\"hover\"` shows it on hover.\n\n`MLayout`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, `MTreeTable`, and `MVirtualScroller` integrate this component internally.\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```\n\n## Always / Native\n\n`always` keeps the custom thumb visible. `native` uses the browser scrollbar.\n\n```vue preview src=\"./demos/AlwaysNative.vue\"\n```\n\n## Manual scroll\n\nControl scrolling with instance methods `setScrollTop` / `setScrollLeft` / `scrollTo` / `update`.\n\n```vue preview src=\"./demos/ManualScroll.en.vue\"\n```\n\n## Infinite scroll\n\nEmits `end-reached` at the edge. Use it for infinite loading.\n\n```vue preview src=\"./demos/InfiniteScroll.en.vue\"\n```\n\n## API\n\n### Props\n\n| Name | Type | Default | Description |\n| --- | --- | --- | --- |\n| height | `string \\| number` | — | Viewport height |\n| maxHeight | `string \\| number` | — | Maximum height |\n| fitContent | `boolean` | `false` | Grow with content; pair with CSS `max-height` on the root (dropdown panels) |\n| native | `boolean` | `false` | Use the native scrollbar |\n| wrapStyle / wrapClass | style / class | — | Wrap container styles |\n| viewStyle / viewClass | style / class | — | Content area styles |\n| noresize | `boolean` | `false` | Do not listen for size changes |\n| tag | `string` | `div` | Content area tag |\n| always | `boolean` | `false` | Always show the thumb |\n| trigger | `'hover' \\| 'none'` | `'hover'` | `none` keeps thumbs visible; `always` still wins |\n| minSize | `number` | `20` | Minimum thumb size |\n| id / role / ariaLabel / ariaOrientation | a11y | — | Accessible attributes for the content area |\n| tabindex | `number \\| string` | — | tabindex on the wrap |\n| distance | `number` | `0` | Edge distance that triggers `end-reached` |\n| width | `string \\| number` | — | Viewport width |\n| maxWidth | `string \\| number` | — | Maximum width |\n| ariaMultiselectable | `boolean` | — | `aria-multiselectable` on the content area |\n| pt | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n### Events\n\n| Name | Payload |\n| --- | --- |\n| scroll | `{ scrollTop, scrollLeft }` |\n| end-reached | `'top' \\| 'bottom' \\| 'left' \\| 'right'` |\n\n### Expose\n\n| Method / Property | Description |\n| --- | --- |\n| `wrapRef` | Reference to the wrap element. |\n| `update()` | Recompute thumb size and position. |\n| `scrollTo(...)` | Scroll to a position (same as native `scrollTo`). |\n| `setScrollTop(y)` | Set vertical scroll offset. |\n| `setScrollLeft(x)` | Set horizontal scroll offset. |\n| `handleScroll(event)` | Wrap scroll handler; forward manually when needed. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `scroll` | `{ scrollTop, scrollLeft }` | Scroll position change. |\n| `end-reached` | `'top' \\| 'bottom' \\| 'left' \\| 'right'` | Scroll boundary reached. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Scrollable content. |\n"
+          "markdown": "---\ntitle: Scrollbar\ncategory: 01 / BASIC\ndescription: Themeable custom scrollbar for a consistent scrolling experience.\n---\n\n# Scrollbar\n\nReplaces the native browser scrollbar with a themeable, cross-browser scrolling experience.\n\n## Import\n\n```ts\nimport { MScrollbar } from 'morya-ui'\n```\n\n## Basic\n\nUse `height` to fix the viewport height. If omitted, it follows the parent height.\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Max height\n\nThe scrollbar appears only when content exceeds `max-height`.\n\n```vue preview src=\"./demos/MaxHeight.vue\"\n```\n\n## Horizontal\n\nA horizontal scrollbar appears when content is wider than the container. `trigger=\"none\"` and `always` keep the thumb visible; the default `trigger=\"hover\"` shows it on hover.\n\n`MLayout`, `MDialog`, `MConfirmDialog`, `MDrawer`, `MSplitter`, `MTable`, `MSelect`, `MTreeSelect`, `MDropdown`, `MContextMenu`, `MPopover`, `MConfirmPopup`, `MMenu` (popup), `MMenubar`, `MTieredMenu`, `MTabs`, `MGallery`, `MTimeline` (horizontal), `MTextarea` (autosize `maxRows`), `MTerminal`, `MOrderList`, `MPickList`, and `MVirtualScroller` integrate this component internally.\n\n```vue preview src=\"./demos/Horizontal.vue\"\n```\n\n## Always / Native\n\n`always` keeps the custom thumb visible. `native` uses the browser scrollbar.\n\n```vue preview src=\"./demos/AlwaysNative.vue\"\n```\n\n## Manual scroll\n\nControl scrolling with instance methods `setScrollTop` / `setScrollLeft` / `scrollTo` / `update`.\n\n```vue preview src=\"./demos/ManualScroll.en.vue\"\n```\n\n## Infinite scroll\n\nEmits `end-reached` at the edge. Use it for infinite loading.\n\n```vue preview src=\"./demos/InfiniteScroll.en.vue\"\n```\n\n## API\n\n### Props\n\n| Name | Type | Default | Description |\n| --- | --- | --- | --- |\n| height | `string \\| number` | — | Viewport height |\n| maxHeight | `string \\| number` | — | Maximum height |\n| fitContent | `boolean` | `false` | Grow with content; pair with CSS `max-height` on the root (dropdown panels) |\n| native | `boolean` | `false` | Use the native scrollbar |\n| wrapStyle / wrapClass | style / class | — | Wrap container styles |\n| viewStyle / viewClass | style / class | — | Content area styles |\n| noresize | `boolean` | `false` | Do not listen for size changes |\n| tag | `string` | `div` | Content area tag |\n| always | `boolean` | `false` | Always show the thumb |\n| trigger | `'hover' \\| 'none'` | `'hover'` | `none` keeps thumbs visible; `always` still wins |\n| minSize | `number` | `20` | Minimum thumb size |\n| id / role / ariaLabel / ariaOrientation | a11y | — | Accessible attributes for the content area |\n| tabindex | `number \\| string` | — | tabindex on the wrap |\n| distance | `number` | `0` | Edge distance that triggers `end-reached` |\n| width | `string \\| number` | — | Viewport width |\n| maxWidth | `string \\| number` | — | Maximum width |\n| ariaMultiselectable | `boolean` | — | `aria-multiselectable` on the content area |\n| pt | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n### Events\n\n| Name | Payload |\n| --- | --- |\n| scroll | `{ scrollTop, scrollLeft }` |\n| end-reached | `'top' \\| 'bottom' \\| 'left' \\| 'right'` |\n\n### Expose\n\n| Method / Property | Description |\n| --- | --- |\n| `wrapRef` | Reference to the wrap element. |\n| `update()` | Recompute thumb size and position. |\n| `scrollTo(...)` | Scroll to a position (same as native `scrollTo`). |\n| `setScrollTop(y)` | Set vertical scroll offset. |\n| `setScrollLeft(x)` | Set horizontal scroll offset. |\n| `handleScroll(event)` | Wrap scroll handler; forward manually when needed. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `scroll` | `{ scrollTop, scrollLeft }` | Scroll position change. |\n| `end-reached` | `'top' \\| 'bottom' \\| 'left' \\| 'right'` | Scroll boundary reached. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Scrollable content. |\n"
         }
       }
     },
@@ -22119,7 +22151,7 @@
           "description": "服务端分页/排序选项。"
         },
         {
-          "name": "serverItemsLength",
+          "name": "serverTotal",
           "type": "number",
           "default": "0",
           "description": "服务端总条数。"
@@ -22143,16 +22175,106 @@
           "description": "每页条数。"
         },
         {
+          "name": "pageSizes",
+          "type": "number[]",
+          "default": "[25, 50, 100]",
+          "description": "分页每页条数选项。"
+        },
+        {
+          "name": "showHeader",
+          "type": "boolean",
+          "default": "true",
+          "description": "是否显示表头。"
+        },
+        {
+          "name": "showRowsPerPage",
+          "type": "boolean",
+          "default": "true",
+          "description": "是否显示每页条数选择器。"
+        },
+        {
           "name": "fill",
           "type": "boolean",
           "default": "false",
           "description": "撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。"
         },
         {
+          "name": "columnWidths",
+          "type": "Record<string, number> | null",
+          "default": "null",
+          "description": "列宽（`v-model:column-widths`）。"
+        },
+        {
+          "name": "virtual",
+          "type": "boolean",
+          "default": "false",
+          "description": "行虚拟滚动（需高度；展开行时跳过）。"
+        },
+        {
+          "name": "virtualRowHeight",
+          "type": "number",
+          "default": "40",
+          "description": "虚拟行高估算。"
+        },
+        {
+          "name": "hiddenColumns",
+          "type": "string[] | null",
+          "default": "null",
+          "description": "隐藏列键（`v-model:hidden-columns`）。"
+        },
+        {
+          "name": "columnOrder",
+          "type": "string[] | null",
+          "default": "null",
+          "description": "叶列顺序（`v-model:column-order`）。"
+        },
+        {
+          "name": "showFooter",
+          "type": "boolean",
+          "default": "false",
+          "description": "显示表尾。"
+        },
+        {
+          "name": "footerMethod",
+          "type": "TableFooterMethod | null",
+          "default": "null",
+          "description": "表尾数据。"
+        },
+        {
+          "name": "spanMethod",
+          "type": "TableSpanMethod | null",
+          "default": "null",
+          "description": "单元格合并。"
+        },
+        {
+          "name": "treeConfig",
+          "type": "TableTreeConfig | null",
+          "default": "null",
+          "description": "树形行。"
+        },
+        {
+          "name": "expandConfig",
+          "type": "TableExpandConfig | null",
+          "default": "null",
+          "description": "详情展开配置（与树互斥）。"
+        },
+        {
+          "name": "checkboxConfig",
+          "type": "TableCheckboxConfig | null",
+          "default": "null",
+          "description": "多选：级联 / `checkMethod` / `checkRowKeys` / `trigger` / `reserve`。"
+        },
+        {
+          "name": "radioConfig",
+          "type": "TableRadioConfig | null",
+          "default": "null",
+          "description": "单选：`strict` / `checkMethod` / `trigger`。"
+        },
+        {
           "name": "expandable",
           "type": "boolean",
           "default": "false",
-          "description": "显示展开列（也可由 `#expansion` 插槽隐式启用）。"
+          "description": "显示展开列（也可由 `#expansion` 或 `expandConfig` 启用）。"
         },
         {
           "name": "striped",
@@ -22293,12 +22415,6 @@
           "description": "—"
         },
         {
-          "name": "clickEventType",
-          "type": "TableClickEventType",
-          "default": "—",
-          "description": "—"
-        },
-        {
           "name": "clickRowToExpand",
           "type": "boolean",
           "default": "—",
@@ -22371,18 +22487,6 @@
           "description": "—"
         },
         {
-          "name": "hideHeader",
-          "type": "boolean",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "hideRowsPerPage",
-          "type": "boolean",
-          "default": "—",
-          "description": "—"
-        },
-        {
           "name": "indexColumnWidth",
           "type": "number",
           "default": "—",
@@ -22396,36 +22500,6 @@
         },
         {
           "name": "mustSort",
-          "type": "boolean",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "preventContextMenuRow",
-          "type": "boolean",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "rowsItems",
-          "type": "number[]",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "rowsOfPageSeparatorMessage",
-          "type": "string",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "rowsPerPageMessage",
-          "type": "string",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "showHeader",
           "type": "boolean",
           "default": "—",
           "description": "—"
@@ -22461,12 +22535,6 @@
           "description": "—"
         },
         {
-          "name": "tableNodeId",
-          "type": "string",
-          "default": "—",
-          "description": "—"
-        },
-        {
           "name": "pt",
           "type": "[RootPassThrough](/docs/types#RootPassThrough) `{ root? }",
           "default": "—",
@@ -22480,14 +22548,34 @@
           "description": "排序变化。"
         },
         {
-          "name": "page",
-          "payload": "number",
-          "description": "页码变化。"
+          "name": "row-click",
+          "payload": "{ row, index }`, `Event",
+          "description": "行单击。"
         },
         {
-          "name": "row-click",
-          "payload": "{ row, index }",
-          "description": "行单击。"
+          "name": "row-dblclick",
+          "payload": "{ row, index }`, `Event",
+          "description": "行双击。"
+        },
+        {
+          "name": "row-contextmenu",
+          "payload": "item`, `MouseEvent",
+          "description": "行右键。"
+        },
+        {
+          "name": "select-row",
+          "payload": "TableItem",
+          "description": "选中一行。"
+        },
+        {
+          "name": "deselect-row",
+          "payload": "TableItem",
+          "description": "取消选中一行。"
+        },
+        {
+          "name": "select-all",
+          "payload": "—",
+          "description": "全选当前页。"
         },
         {
           "name": "current-change",
@@ -22520,27 +22608,7 @@
           "description": "当前行键 v-model。"
         },
         {
-          "name": "contextmenuRow",
-          "payload": "—",
-          "description": "—"
-        },
-        {
-          "name": "deselectRow",
-          "payload": "—",
-          "description": "—"
-        },
-        {
           "name": "filter",
-          "payload": "—",
-          "description": "—"
-        },
-        {
-          "name": "selectAll",
-          "payload": "—",
-          "description": "—"
-        },
-        {
-          "name": "selectRow",
           "payload": "—",
           "description": "—"
         },
@@ -22555,17 +22623,22 @@
           "description": "—"
         },
         {
+          "name": "update:columnWidths",
+          "payload": "Record<string, number>",
+          "description": "列宽 v-model。"
+        },
+        {
+          "name": "update:hiddenColumns",
+          "payload": "string[]",
+          "description": "隐藏列 v-model。"
+        },
+        {
+          "name": "update:columnOrder",
+          "payload": "string[]",
+          "description": "列顺序 v-model。"
+        },
+        {
           "name": "update:selectedItem",
-          "payload": "—",
-          "description": "—"
-        },
-        {
-          "name": "updatePageItems",
-          "payload": "—",
-          "description": "—"
-        },
-        {
-          "name": "updateTotalItems",
           "payload": "—",
           "description": "—"
         }
@@ -22573,7 +22646,11 @@
       "slots": [
         {
           "name": "cell-{key}",
-          "description": "列 `{key}` 单元格，作用域 `{ row, value, column }`。"
+          "description": "列 `{key}` 单元格，作用域 `{ row, value, column }`（可自行实现编辑器）。"
+        },
+        {
+          "name": "footer",
+          "description": "自定义表尾。"
         },
         {
           "name": "body-cell",
@@ -22616,8 +22693,8 @@
           "description": "自定义 `header` 内容。"
         },
         {
-          "name": "header-*",
-          "description": "动态插槽（前缀 `header-`）。"
+          "name": "header-{key}",
+          "description": "列头插槽（键名大小写与 `columns[].key` 一致）。"
         }
       ],
       "methods": [
@@ -22675,7 +22752,95 @@
         },
         {
           "name": "setFilters",
-          "description": "程序化设置筛选条件。"
+          "description": "设置 / 清空筛选。"
+        },
+        {
+          "name": "clearFilter",
+          "description": "设置 / 清空筛选。"
+        },
+        {
+          "name": "clearSort",
+          "description": "清空排序。"
+        },
+        {
+          "name": "getCheckboxRecords",
+          "description": "当前多选行。"
+        },
+        {
+          "name": "setCheckboxRow",
+          "description": "设置行选中状态。"
+        },
+        {
+          "name": "clearCheckboxRow",
+          "description": "清空多选。"
+        },
+        {
+          "name": "isCheckedByCheckboxRow",
+          "description": "行是否选中。"
+        },
+        {
+          "name": "isAllCheckboxChecked",
+          "description": "当前页是否全选。"
+        },
+        {
+          "name": "getCheckboxIndeterminateRecords",
+          "description": "半选行（树级联）。"
+        },
+        {
+          "name": "scrollTo",
+          "description": "滚动定位。"
+        },
+        {
+          "name": "scrollToRow",
+          "description": "滚动定位。"
+        },
+        {
+          "name": "setRowExpand",
+          "description": "详情展开（非树模式）。"
+        },
+        {
+          "name": "setAllRowExpand",
+          "description": "详情展开（非树模式）。"
+        },
+        {
+          "name": "toggleRowExpand",
+          "description": "详情展开（非树模式）。"
+        },
+        {
+          "name": "clearRowExpand",
+          "description": "详情展开（非树模式）。"
+        },
+        {
+          "name": "isRowExpandByRow",
+          "description": "详情展开（非树模式）。"
+        },
+        {
+          "name": "getRowExpandRecords",
+          "description": "详情展开（非树模式）。"
+        },
+        {
+          "name": "setTreeExpand",
+          "description": "树节点展开。"
+        },
+        {
+          "name": "setAllTreeExpand",
+          "description": "树节点展开。"
+        },
+        {
+          "name": "toggleTreeExpand",
+          "description": "树节点展开。"
+        },
+        {
+          "name": "clearTreeExpand",
+          "description": "树节点展开。"
+        },
+        {
+          "name": "isTreeExpandByRow",
+          "description": "树节点展开。"
+        },
+        {
+          "name": "getTreeExpandRecords",
+          "description": "树节点展开。"
         }
       ],
       "examples": [
@@ -22721,7 +22886,7 @@
           "sectionId": "固定列",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'action', label: '操作', width: 100 },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },\n]\n</script>\n\n<template>\n  <MTable :columns=\"columns\" :rows=\"rows\" bordered :paginator=\"false\" />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\n\nconst columns = [\n  { key: 'name', label: '姓名', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 营收', width: 140 },\n  { key: 'q2', label: 'Q2 营收', width: 140 },\n  { key: 'q3', label: 'Q3 营收', width: 140 },\n  { key: 'action', label: '操作', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '12.4万', q2: '13.1万', q3: '14.0万', action: '编辑' },\n  { id: 2, name: 'Lin', q1: '9.8万', q2: '10.2万', q3: '11.5万', action: '编辑' },\n]\n</script>\n\n<template>\n  <MTable :columns=\"columns\" :rows=\"rows\" bordered :paginator=\"false\" />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -22730,7 +22895,34 @@
           "sectionId": "展开行与列渲染",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable } from 'morya-ui'\n\ntype Row = { id: number; name: string; role: string; extra: string }\n\nconst columns: TableColumnDefinition[] = [\n  { key: 'name', label: '姓名', render: (row) => `*${(row as Row).name}*` },\n  { key: 'role', label: '角色' },\n]\nconst rows: Row[] = [\n  { id: 1, name: 'Ada', role: 'Designer', extra: 'Design system' },\n]\n\nfunction extraOf(row: TableItem) {\n  return (row as Row).extra\n}\n</script>\n\n<template>\n  <MTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ extraOf(row) }}\n    </template>\n  </MTable>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport type { TableItem } from 'morya-ui'\nimport { MTable } from 'morya-ui'\n\ntype Row = { id: number; name: string; role: string; extra: string }\n\nconst columns = [\n  { key: 'name', label: '姓名' },\n  { key: 'role', label: '角色' },\n]\nconst rows: Row[] = [{ id: 1, name: 'Ada', role: '设计师', extra: '设计系统细节' }]\n\nfunction extraOf(row: TableItem) {\n  return (row as Row).extra\n}\n</script>\n\n<template>\n  <MTable :columns=\"columns\" :rows=\"rows\" expandable bordered :paginator=\"false\">\n    <template #expansion=\"{ row }\">\n      {{ extraOf(row) }}\n    </template>\n  </MTable>\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "列宽拖拽与表头筛选-1",
+          "section": "列宽拖拽与表头筛选",
+          "sectionId": "列宽拖拽与表头筛选",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition } from 'morya-ui'\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns: TableColumnDefinition[] = [\n  {\n    key: 'name',\n    label: '姓名',\n    width: 140,\n    resizable: true,\n    filterable: true,\n  },\n  {\n    key: 'status',\n    label: '状态',\n    width: 120,\n    resizable: true,\n    filterable: true,\n    filters: [\n      { text: '草稿', value: 'Draft' },\n      { text: '上线', value: 'Live' },\n    ],\n  },\n  { key: 'role', label: '角色', minWidth: 120 },\n]\n\nconst rows = [\n  { id: 1, name: 'Ada', status: 'Draft', role: 'Designer' },\n  { id: 2, name: 'Lin', status: 'Live', role: 'Engineer' },\n  { id: 3, name: 'Kai', status: 'Live', role: 'Engineer' },\n  { id: 4, name: 'Mia', status: 'Draft', role: 'Designer' },\n]\n\nconst columnWidths = ref<Record<string, number>>({})\n</script>\n\n<template>\n  <MTable\n    v-model:column-widths=\"columnWidths\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    bordered\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "虚拟滚动-1",
+          "section": "虚拟滚动",
+          "sectionId": "虚拟滚动",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\n\nconst columns = [\n  { key: 'id', label: 'ID', width: 80 },\n  { key: 'name', label: '姓名', minWidth: 160 },\n]\n\nconst rows = Array.from({ length: 5000 }, (_, i) => ({\n  id: i + 1,\n  name: `行 ${i + 1}`,\n}))\n</script>\n\n<template>\n  <MTable\n    :columns=\"columns\"\n    :rows=\"rows\"\n    virtual\n    :virtual-row-height=\"40\"\n    :max-height=\"320\"\n    bordered\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "多级表头-表尾与合并-1",
+          "section": "多级表头、表尾与合并",
+          "sectionId": "多级表头-表尾与合并",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns: TableColumnDefinition[] = [\n  {\n    key: 'info',\n    label: '基本信息',\n    children: [\n      { key: 'name', label: '姓名' },\n      { key: 'role', label: '角色' },\n    ],\n  },\n  { key: 'score', label: '分数', align: 'end' },\n]\n\nconst rows = ref<TableItem[]>([\n  { id: 1, name: 'Ada', role: 'Designer', score: 96 },\n  { id: 2, name: 'Lin', role: 'Engineer', score: 88 },\n  { id: 3, name: 'Kai', role: 'Engineer', score: 91 },\n])\n\nconst hiddenColumns = ref<string[]>([])\n</script>\n\n<template>\n  <MTable\n    v-model:hidden-columns=\"hiddenColumns\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    bordered\n    show-footer\n    :footer-method=\"({ data }) => [[\n      '合计',\n      '',\n      data.reduce((sum, row) => sum + Number(row.score ?? 0), 0),\n    ]]\"\n    :span-method=\"({ column, rowIndex }) => {\n      if (column.value === 'role' && rowIndex === 1) return { rowspan: 2, colspan: 1 }\n      if (column.value === 'role' && rowIndex === 2) return { rowspan: 0, colspan: 0 }\n      return { rowspan: 1, colspan: 1 }\n    }\"\n    :paginator=\"false\"\n  />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -22743,12 +22935,21 @@
           "locale": "zh-CN"
         },
         {
+          "id": "树形表格-1",
+          "section": "树形表格",
+          "sectionId": "树形表格",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns: TableColumnDefinition[] = [\n  { key: 'name', label: '名称' },\n  { key: 'size', label: '大小' },\n]\n\nconst rows = ref<TableItem[]>([\n  {\n    id: 1,\n    name: '应用',\n    size: '100kb',\n    children: [\n      { id: 11, name: 'Vue', size: '25kb' },\n      { id: 12, name: 'React', size: '30kb' },\n    ],\n  },\n  {\n    id: 2,\n    name: '文档',\n    size: '40kb',\n    children: [{ id: 21, name: 'README.md', size: '4kb' }],\n  },\n])\n\nconst expandedRowKeys = ref<Array<string | number>>([1])\nconst selection = ref<TableItem[]>([])\n</script>\n\n<template>\n  <MTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    v-model:selection=\"selection\"\n    selection-mode=\"multiple\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :tree-config=\"{ childrenField: 'children', indent: 16 }\"\n    :checkbox-config=\"{ checkStrictly: false }\"\n    bordered\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
           "id": "服务端模式-1",
           "section": "服务端模式",
           "sectionId": "服务端模式",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '项目', sortable: true, minWidth: 140 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n]\nconst rows = ref([\n  { id: 1, name: 'Landing', owner: 'Ada' },\n  { id: 2, name: 'Dashboard', owner: 'Lin' },\n])\nconst serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })\nconst total = ref(42)\n</script>\n\n<template>\n  <MTable\n    v-model:server-options=\"serverOptions\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :server-items-length=\"total\"\n    :loading=\"false\"\n  />\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '项目', sortable: true, minWidth: 140 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n]\nconst rows = ref([\n  { id: 1, name: 'Landing', owner: 'Ada' },\n  { id: 2, name: 'Dashboard', owner: 'Lin' },\n])\nconst serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })\nconst total = ref(42)\n</script>\n\n<template>\n  <MTable\n    v-model:server-options=\"serverOptions\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :server-total=\"total\"\n    :loading=\"false\"\n  />\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -22775,7 +22976,7 @@
           "sectionId": "类型",
           "lang": "ts",
           "preview": false,
-          "code": "type TableClickEventType = 'single' | 'double'",
+          "code": "type TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }\n  | { field: string; comparison: '=' | '!='; criteria: number | string }\n  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }\n  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }\n  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }",
           "locale": "zh-CN"
         },
         {
@@ -22784,7 +22985,7 @@
           "sectionId": "类型",
           "lang": "ts",
           "preview": false,
-          "code": "type TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }\n  | { field: string; comparison: '=' | '!='; criteria: number | string }\n  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }\n  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }\n  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }",
+          "code": "type TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)",
           "locale": "zh-CN"
         },
         {
@@ -22793,7 +22994,7 @@
           "sectionId": "类型",
           "lang": "ts",
           "preview": false,
-          "code": "type TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)",
+          "code": "type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)",
           "locale": "zh-CN"
         },
         {
@@ -22802,7 +23003,7 @@
           "sectionId": "类型",
           "lang": "ts",
           "preview": false,
-          "code": "type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)",
+          "code": "type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)",
           "locale": "zh-CN"
         },
         {
@@ -22811,7 +23012,7 @@
           "sectionId": "类型",
           "lang": "ts",
           "preview": false,
-          "code": "type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)",
+          "code": "interface TableTreeConfig {\n  childrenField?: string // default 'children'\n  indent?: number // default 16\n  expandAll?: boolean\n  accordion?: boolean\n  trigger?: 'default' | 'row'\n  lazy?: boolean\n  hasChildField?: string // default 'hasChild'\n  loadMethod?: (row: TableItem) => Promise<TableItem[]> | TableItem[]\n  transform?: boolean // flat parentId → tree\n  rowField?: string\n  parentField?: string // default 'parentId'\n  treeNode?: string // column key for toggler; default first column\n  showLine?: boolean\n}",
           "locale": "zh-CN"
         },
         {
@@ -22820,7 +23021,7 @@
           "sectionId": "类型",
           "lang": "ts",
           "preview": false,
-          "code": "interface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end' | 'left' | 'right'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: { label: string; value: string | number }[]\n  showOverflowTooltip?: boolean\n}",
+          "code": "interface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end'\n  render?: (row: TableItem) => unknown\n  showOverflowTooltip?: boolean\n}",
           "locale": "zh-CN"
         },
         {
@@ -22878,12 +23079,66 @@
           "locale": "en-US"
         },
         {
+          "id": "fixed-columns-1",
+          "section": "Fixed columns",
+          "sectionId": "fixed-columns",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\n\nconst columns = [\n  { key: 'name', label: 'Name', width: 120, fixed: 'left' as const },\n  { key: 'q1', label: 'Q1 Revenue', width: 140 },\n  { key: 'q2', label: 'Q2 Revenue', width: 140 },\n  { key: 'q3', label: 'Q3 Revenue', width: 140 },\n  { key: 'action', label: 'Action', width: 100, fixed: 'right' as const },\n]\nconst rows = [\n  { id: 1, name: 'Ada', q1: '124k', q2: '131k', q3: '140k', action: 'Edit' },\n  { id: 2, name: 'Lin', q1: '98k', q2: '102k', q3: '115k', action: 'Edit' },\n]\n</script>\n\n<template>\n  <MTable :columns=\"columns\" :rows=\"rows\" bordered :paginator=\"false\" />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "column-resize-and-header-filters-1",
+          "section": "Column resize and header filters",
+          "sectionId": "column-resize-and-header-filters",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition } from 'morya-ui'\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns: TableColumnDefinition[] = [\n  {\n    key: 'name',\n    label: 'Name',\n    width: 140,\n    resizable: true,\n    filterable: true,\n  },\n  {\n    key: 'status',\n    label: 'Status',\n    width: 120,\n    resizable: true,\n    filterable: true,\n    filters: [\n      { text: 'Draft', value: 'Draft' },\n      { text: 'Live', value: 'Live' },\n    ],\n  },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\n\nconst rows = [\n  { id: 1, name: 'Ada', status: 'Draft', role: 'Designer' },\n  { id: 2, name: 'Lin', status: 'Live', role: 'Engineer' },\n  { id: 3, name: 'Kai', status: 'Live', role: 'Engineer' },\n  { id: 4, name: 'Mia', status: 'Draft', role: 'Designer' },\n]\n\nconst columnWidths = ref<Record<string, number>>({})\n</script>\n\n<template>\n  <MTable\n    v-model:column-widths=\"columnWidths\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    bordered\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "virtual-scroll-1",
+          "section": "Virtual scroll",
+          "sectionId": "virtual-scroll",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\n\nconst columns = [\n  { key: 'id', label: 'ID', width: 80 },\n  { key: 'name', label: 'Name', minWidth: 160 },\n]\n\nconst rows = Array.from({ length: 5000 }, (_, i) => ({\n  id: i + 1,\n  name: `Row ${i + 1}`,\n}))\n</script>\n\n<template>\n  <MTable\n    :columns=\"columns\"\n    :rows=\"rows\"\n    virtual\n    :virtual-row-height=\"40\"\n    :max-height=\"320\"\n    bordered\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "multi-header-footer-and-merges-1",
+          "section": "Multi-header, footer, and merges",
+          "sectionId": "multi-header-footer-and-merges",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns: TableColumnDefinition[] = [\n  {\n    key: 'info',\n    label: 'Info',\n    children: [\n      { key: 'name', label: 'Name' },\n      { key: 'role', label: 'Role' },\n    ],\n  },\n  { key: 'score', label: 'Score', align: 'end' },\n]\n\nconst rows = ref<TableItem[]>([\n  { id: 1, name: 'Ada', role: 'Designer', score: 96 },\n  { id: 2, name: 'Lin', role: 'Engineer', score: 88 },\n  { id: 3, name: 'Kai', role: 'Engineer', score: 91 },\n])\n\nconst hiddenColumns = ref<string[]>([])\n</script>\n\n<template>\n  <MTable\n    v-model:hidden-columns=\"hiddenColumns\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    bordered\n    show-footer\n    :footer-method=\"({ data }) => [[\n      'Total',\n      '',\n      data.reduce((sum, row) => sum + Number(row.score ?? 0), 0),\n    ]]\"\n    :span-method=\"({ column, rowIndex }) => {\n      if (column.value === 'role' && rowIndex === 1) return { rowspan: 2, colspan: 1 }\n      if (column.value === 'role' && rowIndex === 2) return { rowspan: 0, colspan: 0 }\n      return { rowspan: 1, colspan: 1 }\n    }\"\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "en-US"
+        },
+        {
           "id": "empty-and-loading-1",
           "section": "Empty and loading",
           "sectionId": "empty-and-loading",
           "lang": "vue",
           "preview": true,
           "code": "<script setup lang=\"ts\">\nimport { MButton, MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst loading = ref(false)\nconst columns = [\n  { key: 'name', label: 'Name', minWidth: 120 },\n  { key: 'role', label: 'Role', minWidth: 120 },\n]\n</script>\n\n<template>\n  <div class=\"grid gap-3\">\n    <MButton :label=\"loading ? 'Stop loading' : 'Start loading'\" @click=\"loading = !loading\" />\n    <MTable\n      :columns=\"columns\"\n      :rows=\"[]\"\n      :loading=\"loading\"\n      empty-text=\"No data yet\"\n      empty-description=\"Records will appear here after you create the first one\"\n      :paginator=\"false\"\n    />\n  </div>\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "tree-table-1",
+          "section": "Tree table",
+          "sectionId": "tree-table",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns: TableColumnDefinition[] = [\n  { key: 'name', label: 'Name' },\n  { key: 'size', label: 'Size' },\n]\n\nconst rows = ref<TableItem[]>([\n  {\n    id: 1,\n    name: 'Applications',\n    size: '100kb',\n    children: [\n      { id: 11, name: 'Vue', size: '25kb' },\n      { id: 12, name: 'React', size: '30kb' },\n    ],\n  },\n  {\n    id: 2,\n    name: 'Documents',\n    size: '40kb',\n    children: [{ id: 21, name: 'README.md', size: '4kb' }],\n  },\n])\n\nconst expandedRowKeys = ref<Array<string | number>>([1])\nconst selection = ref<TableItem[]>([])\n</script>\n\n<template>\n  <MTable\n    v-model:expanded-row-keys=\"expandedRowKeys\"\n    v-model:selection=\"selection\"\n    selection-mode=\"multiple\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :tree-config=\"{ childrenField: 'children', indent: 16 }\"\n    :checkbox-config=\"{ checkStrictly: false }\"\n    bordered\n    :paginator=\"false\"\n  />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "server-mode-1",
+          "section": "Server mode",
+          "sectionId": "server-mode",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MTable } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst columns = [\n  { key: 'name', label: '项目', sortable: true, minWidth: 140 },\n  { key: 'owner', label: '负责人', minWidth: 100 },\n]\nconst rows = ref([\n  { id: 1, name: 'Landing', owner: 'Ada' },\n  { id: 2, name: 'Dashboard', owner: 'Lin' },\n])\nconst serverOptions = ref({ page: 1, rowsPerPage: 10, sortBy: 'name', sortType: 'asc' as const })\nconst total = ref(42)\n</script>\n\n<template>\n  <MTable\n    v-model:server-options=\"serverOptions\"\n    :columns=\"columns\"\n    :rows=\"rows\"\n    :server-total=\"total\"\n    :loading=\"false\"\n  />\n</template>",
           "locale": "en-US"
         },
         {
@@ -22901,7 +23156,7 @@
           "sectionId": "types",
           "lang": "ts",
           "preview": false,
-          "code": "interface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end' | 'left' | 'right'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: { label: string; value: string | number }[]\n  showOverflowTooltip?: boolean\n}",
+          "code": "interface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: TableColumnFilter[]\n  resizable?: boolean\n  children?: TableColumnDefinition[]\n  showOverflowTooltip?: boolean\n}",
           "locale": "en-US"
         },
         {
@@ -22922,7 +23177,7 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# Table\n\n`MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。\n\n列宽规则：\n\n- 设置了 `width` 的列为固定宽度\n- 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列\n- 总最小宽度超出容器时出现横向滚动\n- 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条\n- **全视口主列表（按需）**：`MPageContent fill` + `MTable fill paginator`——表体滚动、分页贴底；嵌入表/短页不要硬套 `fill`"
+              "body": "# Table\n\n`MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。多选表头「全选」仅作用于当前页。\n\n列宽规则：\n\n- 设置了 `width` 的列为固定宽度\n- 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列\n- 总最小宽度超出容器时出现横向滚动\n- 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条\n- 全视口主列表可用 `MPageContent fill` + `MTable fill paginator`（表体滚动、分页贴底）；嵌入表或短页不必使用 `fill`"
             },
             {
               "id": "引入",
@@ -22937,65 +23192,90 @@
             {
               "id": "行选择",
               "title": "行选择",
-              "body": "多选配合 `selection-mode=\"multiple\"` 与 `v-model:selection`；单选使用 `selection-mode=\"single\"` 与 `v-model:selected-item`。\n\n```vue preview src=\"./demos/Selection.zh.vue\"\n```"
+              "body": "多选配合 `selection-mode=\"multiple\"` 与 `v-model:selection`；单选使用 `selection-mode=\"single\"` 与 `v-model:selected-item`。表头全选仅选中当前页。\n\n```vue preview src=\"./demos/Selection.zh.vue\"\n```"
             },
             {
               "id": "筛选与分页",
               "title": "筛选与分页",
-              "body": "客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`。\n\n```vue preview src=\"./demos/FilterAndPagination.zh.vue\"\n```"
+              "body": "客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`（受控同步）。\n\n```vue preview src=\"./demos/FilterAndPagination.zh.vue\"\n```"
             },
             {
               "id": "固定列",
               "title": "固定列",
-              "body": "列定义中设置 `fixed: 'left'` 可冻结左侧列（当前批次支持左固定）。\n\n```vue preview src=\"./demos/ExpandableRows.zh.vue\"\n```"
+              "body": "列定义中设置 `fixed: 'left' | 'right'`（或 `fixed: true` 视为左固定）。\n\n```vue preview src=\"./demos/FixedColumns.zh.vue\"\n```"
             },
             {
               "id": "展开行与列渲染",
               "title": "展开行与列渲染",
-              "body": "列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。\n\n```vue preview src=\"./demos/EmptyAndLoading.zh.vue\"\n```"
+              "body": "列可通过 `render` 或 `#cell-{key}` 自定义单元格。展开行设置 `expandable`（或 `expandConfig`），详情由 `#expansion` 提供。树模式下 `expandedRowKeys` 用于树节点展开，不可同时用于详情展开。\n\n```vue preview src=\"./demos/ExpandableRows.zh.vue\"\n```"
+            },
+            {
+              "id": "列宽拖拽与表头筛选",
+              "title": "列宽拖拽与表头筛选",
+              "body": "列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，可选 `filters` 为多选选项，否则为文本包含筛选。\n\n```vue preview src=\"./demos/ResizeAndFilter.zh.vue\"\n```"
+            },
+            {
+              "id": "虚拟滚动",
+              "title": "虚拟滚动",
+              "body": "开启 `virtual`，并提供 `maxHeight` / `tableHeight` / `fill` 之一。展开行场景会自动降级为普通渲染。\n\n```vue preview src=\"./demos/VirtualScroll.zh.vue\"\n```"
+            },
+            {
+              "id": "多级表头-表尾与合并",
+              "title": "多级表头、表尾与合并",
+              "body": "列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计；`span-method` 合并单元格。\n\n```vue preview src=\"./demos/GridFeatures.zh.vue\"\n```"
             },
             {
               "id": "空态与加载",
               "title": "空态与加载",
-              "body": "```vue preview src=\"./demos/Demo6.vue\"\n```"
+              "body": "```vue preview src=\"./demos/EmptyAndLoading.zh.vue\"\n```"
+            },
+            {
+              "id": "树形表格",
+              "title": "树形表格",
+              "body": "传入 `tree-config` 启用树模式：嵌套 `children`，或 `transform` + `parentId` 扁平数据。展开状态用 `v-model:expanded-row-keys`。支持 `expandAll` / `expandRowKeys`、`accordion`、`trigger`、`toggleMethod`、懒加载 `lazy` + `loadMethod`。\n\n实例方法：`setTreeExpand`、`setAllTreeExpand`、`toggleTreeExpand`、`isTreeExpandByRow`、`getTreeExpandRecords`、`clearTreeExpand`。\n\n树 + 多选时默认父子级联与半选（`checkbox-config.check-strictly=false`）；`checkMethod` 可禁用单行勾选。\n\n```vue preview src=\"./demos/Tree.zh.vue\"\n```"
             },
             {
               "id": "服务端模式",
               "title": "服务端模式",
-              "body": "传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。\n\n```vue preview src=\"./demos/Demo7.vue\"\n```"
+              "body": "传入 `server-options` 与 `server-total`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。\n\n```vue preview src=\"./demos/Demo7.vue\"\n```"
+            },
+            {
+              "id": "breaking-changes",
+              "title": "Breaking changes",
+              "body": "- 移除内置单元格编辑：`editConfig`、列 `editable`、`edit-change`、`#edit-{key}`；请用 `#cell-{key}` / `render` 自定义\n- 移除 `MTreeTable`（含 `morya-ui/tree-table`）；树表改用 `MTable` + `treeConfig`\n- `serverItemsLength` → `serverTotal`；`rowsItems` → `pageSizes`\n- `hideHeader` 移除；改用 `showHeader`（默认 `true`）\n- `hideRowsPerPage` 移除；改用 `showRowsPerPage`（默认 `true`）\n- 移除：`clickEventType`、`rowsPerPageMessage`、`rowsOfPageSeparatorMessage`、`preventContextMenuRow`、`tableNodeId`\n- 事件：`contextmenuRow` → `row-contextmenu`；`selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`\n- 移除事件：`updatePageItems`、`updateTotalItems`、`page`（保留 `update:page`）\n- 行交互：始终同时支持单击 / 双击（`row-click` / `row-dblclick`）；右键始终 `preventDefault` 并抛出 `row-contextmenu`"
             },
             {
               "id": "tablecolumndefinition",
               "title": "TableColumnDefinition",
-              "body": "| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `key` | `string` | 列字段名（绑定行数据的键）。 |\n| `label` | `string` | 列头文案。 |\n| `width` | `number` | 固定列宽（px）。 |\n| `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |\n| `sortable` | `boolean` | 是否可排序。 |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | 固定列；当前实现左固定。 |\n| `align` | `'start' \\| 'center' \\| 'end'` | 单元格对齐。 |\n| `render` | `(row) => unknown` | 自定义单元格渲染。 |\n| `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |"
+              "body": "| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `key` | `string` | 列字段名（绑定行数据的键）。 |\n| `label` | `string` | 列头文案。 |\n| `width` | `number` | 固定列宽（px）。 |\n| `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |\n| `sortable` | `boolean` | 是否可排序。 |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | 固定列；`true` 等同 `'left'`。 |\n| `align` | `'start' \\| 'center' \\| 'end'` | 单元格对齐。 |\n| `render` | `(row) => unknown` | 自定义单元格渲染。 |\n| `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |\n| `resizable` | `boolean` | 可拖拽调整列宽。 |\n| `filterable` | `boolean` | 显示表头筛选。 |\n| `filters` | `TableColumnFilter[]` | 表头筛选选项；省略则为文本筛选。 |\n| `children` | `TableColumnDefinition[]` | 多级表头子列。 |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | 列定义。 |\n| `rows` | `TableItem[]` | — | 行数据。 |\n| `fit` | `boolean` | `true` | 弹性列是否撑满表格宽度。 |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | 行选择模式。 |\n| `selection` | `TableItem[] \\| null` | `null` | 多选绑定（`v-model:selection`）。 |\n| `selectedItem` | `TableItem \\| null` | `null` | 单选绑定（`v-model:selected-item`）。 |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | 服务端分页/排序选项。 |\n| `serverItemsLength` | `number` | `0` | 服务端总条数。 |\n| `paginator` | `boolean` | `false` | 显示内置分页页脚。 |\n| `page` | `number` | `1` | 当前页（`v-model:page`）。 |\n| `rowsPerPage` | `number` | `25` | 每页条数。 |\n| `fill` | `boolean` | `false` | 撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。 |\n| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |\n| `striped` | `boolean` | `false` | 斑马纹行。 |\n| `bordered` | `boolean` | `false` | 单元格边框。 |\n| `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |\n| `rowHover` | `boolean` | `true` | 行 hover 高亮。 |\n| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |\n| `searchField` / `searchValue` | — | — | 客户端搜索。 |\n| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |\n| `loading` | `boolean` | `false` | 加载中。 |\n| `emptyText` | `string` | — | 空数据文案。 |\n| `emptyDescription` | `string` | — | 空数据补充说明。 |\n| `maxHeight` | `number \\| null` | `null` | 表格最大高度，超出滚动。 |\n| `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |\n| `rowKey` | `string` | `'id'` | 行唯一键字段。 |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | 表格密度。 |\n| `ariaLabel` | `string` | — | — |\n| `bodyExpandRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyItemClassName` | `TableBodyItemClassName` | — | — |\n| `bodyRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyTextDirection` | `TableTextDirection` | — | — |\n| `checkboxColumnWidth` | `number \\| null` | — | — |\n| `clickEventType` | `TableClickEventType` | — | — |\n| `clickRowToExpand` | `boolean` | — | — |\n| `currentRowKey` | `string \\| number \\| null` | — | — |\n| `expandColumnWidth` | `number` | — | — |\n| `expandedRowKeys` | `Array<string \\| number>` | — | — |\n| `filters` | `Record<string, unknown> \\| null` | — | — |\n| `fixedCheckbox` | `boolean` | — | — |\n| `fixedExpand` | `boolean` | — | — |\n| `fixedHeader` | `boolean` | — | — |\n| `fixedIndex` | `boolean` | — | — |\n| `headerClassName` | `string` | — | — |\n| `headerItemClassName` | `TableHeaderItemClassName` | — | — |\n| `headerTextDirection` | `TableTextDirection` | — | — |\n| `hideHeader` | `boolean` | — | — |\n| `hideRowsPerPage` | `boolean` | — | — |\n| `indexColumnWidth` | `number` | — | — |\n| `multiSort` | `boolean` | — | — |\n| `mustSort` | `boolean` | — | — |\n| `preventContextMenuRow` | `boolean` | — | — |\n| `rowsItems` | `number[]` | — | — |\n| `rowsOfPageSeparatorMessage` | `string` | — | — |\n| `rowsPerPageMessage` | `string` | — | — |\n| `showHeader` | `boolean` | — | — |\n| `showIndex` | `boolean` | — | — |\n| `showIndexSymbol` | `string` | — | — |\n| `tableClassName` | `string` | — | — |\n| `tableHeight` | `number \\| null` | — | — |\n| `tableMinHeight` | `number` | — | — |\n| `tableNodeId` | `string` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |"
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | 列定义。 |\n| `rows` | `TableItem[]` | — | 行数据。 |\n| `fit` | `boolean` | `true` | 弹性列是否撑满表格宽度。 |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | 行选择模式。 |\n| `selection` | `TableItem[] \\| null` | `null` | 多选绑定（`v-model:selection`）。 |\n| `selectedItem` | `TableItem \\| null` | `null` | 单选绑定（`v-model:selected-item`）。 |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | 服务端分页/排序选项。 |\n| `serverTotal` | `number` | `0` | 服务端总条数。 |\n| `paginator` | `boolean` | `false` | 显示内置分页页脚。 |\n| `page` | `number` | `1` | 当前页（`v-model:page`）。 |\n| `rowsPerPage` | `number` | `25` | 每页条数。 |\n| `pageSizes` | `number[]` | `[25, 50, 100]` | 分页每页条数选项。 |\n| `showHeader` | `boolean` | `true` | 是否显示表头。 |\n| `showRowsPerPage` | `boolean` | `true` | 是否显示每页条数选择器。 |\n| `fill` | `boolean` | `false` | 撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。 |\n| `columnWidths` | `Record<string, number> \\| null` | `null` | 列宽（`v-model:column-widths`）。 |\n| `virtual` | `boolean` | `false` | 行虚拟滚动（需高度；展开行时跳过）。 |\n| `virtualRowHeight` | `number` | `40` | 虚拟行高估算。 |\n| `hiddenColumns` | `string[] \\| null` | `null` | 隐藏列键（`v-model:hidden-columns`）。 |\n| `columnOrder` | `string[] \\| null` | `null` | 叶列顺序（`v-model:column-order`）。 |\n| `showFooter` | `boolean` | `false` | 显示表尾。 |\n| `footerMethod` | `TableFooterMethod \\| null` | `null` | 表尾数据。 |\n| `spanMethod` | `TableSpanMethod \\| null` | `null` | 单元格合并。 |\n| `treeConfig` | `TableTreeConfig \\| null` | `null` | 树形行。 |\n| `expandConfig` | `TableExpandConfig \\| null` | `null` | 详情展开配置（与树互斥）。 |\n| `checkboxConfig` | `TableCheckboxConfig \\| null` | `null` | 多选：级联 / `checkMethod` / `checkRowKeys` / `trigger` / `reserve`。 |\n| `radioConfig` | `TableRadioConfig \\| null` | `null` | 单选：`strict` / `checkMethod` / `trigger`。 |\n| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 或 `expandConfig` 启用）。 |\n| `striped` | `boolean` | `false` | 斑马纹行。 |\n| `bordered` | `boolean` | `false` | 单元格边框。 |\n| `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |\n| `rowHover` | `boolean` | `true` | 行 hover 高亮。 |\n| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |\n| `searchField` / `searchValue` | — | — | 客户端搜索。 |\n| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |\n| `loading` | `boolean` | `false` | 加载中。 |\n| `emptyText` | `string` | — | 空数据文案。 |\n| `emptyDescription` | `string` | — | 空数据补充说明。 |\n| `maxHeight` | `number \\| null` | `null` | 表格最大高度，超出滚动。 |\n| `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |\n| `rowKey` | `string` | `'id'` | 行唯一键字段。 |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | 表格密度。 |\n| `ariaLabel` | `string` | — | — |\n| `bodyExpandRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyItemClassName` | `TableBodyItemClassName` | — | — |\n| `bodyRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyTextDirection` | `TableTextDirection` | — | — |\n| `checkboxColumnWidth` | `number \\| null` | — | — |\n| `clickRowToExpand` | `boolean` | — | — |\n| `currentRowKey` | `string \\| number \\| null` | — | — |\n| `expandColumnWidth` | `number` | — | — |\n| `expandedRowKeys` | `Array<string \\| number>` | — | — |\n| `filters` | `Record<string, unknown> \\| null` | — | — |\n| `fixedCheckbox` | `boolean` | — | — |\n| `fixedExpand` | `boolean` | — | — |\n| `fixedHeader` | `boolean` | — | — |\n| `fixedIndex` | `boolean` | — | — |\n| `headerClassName` | `string` | — | — |\n| `headerItemClassName` | `TableHeaderItemClassName` | — | — |\n| `headerTextDirection` | `TableTextDirection` | — | — |\n| `indexColumnWidth` | `number` | — | — |\n| `multiSort` | `boolean` | — | — |\n| `mustSort` | `boolean` | — | — |\n| `showIndex` | `boolean` | — | — |\n| `showIndexSymbol` | `string` | — | — |\n| `tableClassName` | `string` | — | — |\n| `tableHeight` | `number \\| null` | — | — |\n| `tableMinHeight` | `number` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |"
             },
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`。 |\n| `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 自定义空态。 |\n| `loading` | 自定义加载态。 |\n| `pagination` | 自定义分页区域。 |\n| `body` | 自定义 `body` 内容。 |\n| `body-append` | 自定义 `body-append` 内容。 |\n| `body-prepend` | 自定义 `body-prepend` 内容。 |\n| `customize-headers` | 自定义 `customize-headers` 内容。 |\n| `header` | 自定义 `header` 内容。 |\n| `header-*` | 动态插槽（前缀 `header-`）。 |"
+              "body": "| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`（可自行实现编辑器）。 |\n| `footer` | 自定义表尾。 |\n| `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 自定义空态。 |\n| `loading` | 自定义加载态。 |\n| `pagination` | 自定义分页区域。 |\n| `body` | 自定义 `body` 内容。 |\n| `body-append` | 自定义 `body-append` 内容。 |\n| `body-prepend` | 自定义 `body-prepend` 内容。 |\n| `customize-headers` | 自定义 `customize-headers` 内容。 |\n| `header` | 自定义 `header` 内容。 |\n| `header-{key}` | 列头插槽（键名大小写与 `columns[].key` 一致）。 |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |\n| `page` | `number` | 页码变化。 |\n| `row-click` | `{ row, index }` | 行单击。 |\n| `current-change` | `row \\| null, oldRow \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开。 |\n| `update:selection` | `TableItem[]` | 多选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |\n| `update:current-row-key` | `string \\| number \\| null` | 当前行键 v-model。 |\n| `contextmenuRow` | — | — |\n| `deselectRow` | — | — |\n| `filter` | — | — |\n| `selectAll` | — | — |\n| `selectRow` | — | — |\n| `update:expandedRowKeys` | — | — |\n| `update:filters` | — | — |\n| `update:selectedItem` | — | — |\n| `updatePageItems` | — | — |\n| `updateTotalItems` | — | — |"
+              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |\n| `row-click` | `{ row, index }`, `Event` | 行单击。 |\n| `row-dblclick` | `{ row, index }`, `Event` | 行双击。 |\n| `row-contextmenu` | `item`, `MouseEvent` | 行右键。 |\n| `select-row` | `TableItem` | 选中一行。 |\n| `deselect-row` | `TableItem` | 取消选中一行。 |\n| `select-all` | — | 全选当前页。 |\n| `current-change` | `row \\| null, oldRow \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开。 |\n| `update:selection` | `TableItem[]` | 多选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |\n| `update:current-row-key` | `string \\| number \\| null` | 当前行键 v-model。 |\n| `filter` | — | — |\n| `update:expandedRowKeys` | — | — |\n| `update:filters` | — | — |\n| `update:columnWidths` | `Record<string, number>` | 列宽 v-model。 |\n| `update:hiddenColumns` | `string[]` | 隐藏列 v-model。 |\n| `update:columnOrder` | `string[]` | 列顺序 v-model。 |\n| `update:selectedItem` | — | — |"
             },
             {
               "id": "实例方法",
               "title": "实例方法",
-              "body": "通过 `ref` 可访问以下分页与筛选控制：\n\n| 方法 / 属性 | 说明 |\n| --- | --- |\n| `currentPageFirstIndex` | 当前页首条记录的索引（无数据时为 `-1`）。 |\n| `currentPageLastIndex` | 当前页末条记录的索引。 |\n| `clientItemsLength` | 数据总条数（服务端模式下为服务端总数）。 |\n| `maxPaginationNumber` | 最大页码。 |\n| `currentPaginationNumber` | 当前页码。 |\n| `isLastPage` / `isFirstPage` | 是否末页 / 首页。 |\n| `nextPage()` / `prevPage()` | 下一页 / 上一页。 |\n| `updatePage(page)` | 跳到指定页码。 |\n| `rowsPerPageOptions` | 每页条数选项。 |\n| `rowsPerPageActiveOption` | 当前生效的每页条数。 |\n| `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |\n| `setFilters(filters)` | 程序化设置筛选条件。 |"
+              "body": "通过 `ref` 可访问分页、筛选、选择、滚动与展开控制：\n\n| 方法 / 属性 | 说明 |\n| --- | --- |\n| `currentPageFirstIndex` | 当前页首条记录的索引（无数据时为 `-1`）。 |\n| `currentPageLastIndex` | 当前页末条记录的索引。 |\n| `clientItemsLength` | 数据总条数（服务端模式下为服务端总数）。 |\n| `maxPaginationNumber` | 最大页码。 |\n| `currentPaginationNumber` | 当前页码。 |\n| `isLastPage` / `isFirstPage` | 是否末页 / 首页。 |\n| `nextPage()` / `prevPage()` | 下一页 / 上一页。 |\n| `updatePage(page)` | 跳到指定页码。 |\n| `rowsPerPageOptions` | 每页条数选项。 |\n| `rowsPerPageActiveOption` | 当前生效的每页条数。 |\n| `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |\n| `setFilters(filters)` / `clearFilter()` | 设置 / 清空筛选。 |\n| `clearSort()` | 清空排序。 |\n| `getCheckboxRecords()` | 当前多选行。 |\n| `setCheckboxRow(rows, checked)` | 设置行选中状态。 |\n| `clearCheckboxRow()` | 清空多选。 |\n| `isCheckedByCheckboxRow(row)` | 行是否选中。 |\n| `isAllCheckboxChecked()` | 当前页是否全选。 |\n| `getCheckboxIndeterminateRecords()` | 半选行（树级联）。 |\n| `scrollTo(...)` / `scrollToRow(row)` | 滚动定位。 |\n| `setRowExpand` / `setAllRowExpand` / `toggleRowExpand` / `clearRowExpand` / `isRowExpandByRow` / `getRowExpandRecords` | 详情展开（非树模式）。 |\n| `setTreeExpand` / `setAllTreeExpand` / `toggleTreeExpand` / `clearTreeExpand` / `isTreeExpandByRow` / `getTreeExpandRecords` | 树节点展开。 |"
             },
             {
               "id": "类型",
               "title": "类型",
-              "body": "<h4 id=\"TableItem\">TableItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n<h4 id=\"TableTextDirection\">TableTextDirection</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableTextDirection = 'left' | 'center' | 'right'\n```\n\n<h4 id=\"TableClickEventType\">TableClickEventType</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableClickEventType = 'single' | 'double'\n```\n\n<h4 id=\"TableFilterOption\">TableFilterOption</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }\n  | { field: string; comparison: '=' | '!='; criteria: number | string }\n  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }\n  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }\n  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }\n```\n\n<h4 id=\"TableHeaderItemClassName\">TableHeaderItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)\n```\n\n<h4 id=\"TableBodyRowClassName\">TableBodyRowClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)\n```\n\n<h4 id=\"TableBodyItemClassName\">TableBodyItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)\n```\n\n\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\n列定义，传给 `columns`：\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end' | 'left' | 'right'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: { label: string; value: string | number }[]\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\n服务端分页/排序时传给 `serverOptions`，配合 `serverItemsLength`：\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n更多见 [API 类型](/docs/types)。"
+              "body": "<h4 id=\"TableItem\">TableItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n<h4 id=\"TableTextDirection\">TableTextDirection</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableTextDirection = 'left' | 'center' | 'right'\n```\n\n<h4 id=\"TableFilterOption\">TableFilterOption</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }\n  | { field: string; comparison: '=' | '!='; criteria: number | string }\n  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }\n  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }\n  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }\n```\n\n<h4 id=\"TableHeaderItemClassName\">TableHeaderItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)\n```\n\n<h4 id=\"TableBodyRowClassName\">TableBodyRowClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)\n```\n\n<h4 id=\"TableBodyItemClassName\">TableBodyItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)\n```\n\n\n\n<h4 id=\"TableTreeConfig\">TableTreeConfig</h4>\n\n```ts\ninterface TableTreeConfig {\n  childrenField?: string // default 'children'\n  indent?: number // default 16\n  expandAll?: boolean\n  accordion?: boolean\n  trigger?: 'default' | 'row'\n  lazy?: boolean\n  hasChildField?: string // default 'hasChild'\n  loadMethod?: (row: TableItem) => Promise<TableItem[]> | TableItem[]\n  transform?: boolean // flat parentId → tree\n  rowField?: string\n  parentField?: string // default 'parentId'\n  treeNode?: string // column key for toggler; default first column\n  showLine?: boolean\n}\n```\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\n列定义，传给 `columns`：\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end'\n  render?: (row: TableItem) => unknown\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\n服务端分页/排序时传给 `serverOptions`，配合 `serverTotal`：\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n更多见 [API 类型](/docs/types)。"
             }
           ],
-          "markdown": "---\ntitle: Table\ncategory: 03 / DATA\ndescription: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。\n---\n\n# Table\n\n`MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。\n\n列宽规则：\n\n- 设置了 `width` 的列为固定宽度\n- 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列\n- 总最小宽度超出容器时出现横向滚动\n- 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条\n- **全视口主列表（按需）**：`MPageContent fill` + `MTable fill paginator`——表体滚动、分页贴底；嵌入表/短页不要硬套 `fill`\n\n## 引入\n\n```ts\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable, MTag } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.zh.vue\"\n```\n\n## 行选择\n\n多选配合 `selection-mode=\"multiple\"` 与 `v-model:selection`；单选使用 `selection-mode=\"single\"` 与 `v-model:selected-item`。\n\n```vue preview src=\"./demos/Selection.zh.vue\"\n```\n\n## 筛选与分页\n\n客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`。\n\n```vue preview src=\"./demos/FilterAndPagination.zh.vue\"\n```\n\n## 固定列\n\n列定义中设置 `fixed: 'left'` 可冻结左侧列（当前批次支持左固定）。\n\n```vue preview src=\"./demos/ExpandableRows.zh.vue\"\n```\n\n## 展开行与列渲染\n\n列可通过 `render` 函数渲染；展开行设置 `expandable`，详情内容由插槽 `expansion` 提供。`cell-{key}` 插槽优先于 `render`。\n\n```vue preview src=\"./demos/EmptyAndLoading.zh.vue\"\n```\n\n## 空态与加载\n\n```vue preview src=\"./demos/Demo6.vue\"\n```\n\n## 服务端模式\n\n传入 `server-options` 与 `server-items-length`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。\n\n```vue preview src=\"./demos/Demo7.vue\"\n```\n\n## TableColumnDefinition\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `key` | `string` | 列字段名（绑定行数据的键）。 |\n| `label` | `string` | 列头文案。 |\n| `width` | `number` | 固定列宽（px）。 |\n| `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |\n| `sortable` | `boolean` | 是否可排序。 |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | 固定列；当前实现左固定。 |\n| `align` | `'start' \\| 'center' \\| 'end'` | 单元格对齐。 |\n| `render` | `(row) => unknown` | 自定义单元格渲染。 |\n| `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | 列定义。 |\n| `rows` | `TableItem[]` | — | 行数据。 |\n| `fit` | `boolean` | `true` | 弹性列是否撑满表格宽度。 |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | 行选择模式。 |\n| `selection` | `TableItem[] \\| null` | `null` | 多选绑定（`v-model:selection`）。 |\n| `selectedItem` | `TableItem \\| null` | `null` | 单选绑定（`v-model:selected-item`）。 |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | 服务端分页/排序选项。 |\n| `serverItemsLength` | `number` | `0` | 服务端总条数。 |\n| `paginator` | `boolean` | `false` | 显示内置分页页脚。 |\n| `page` | `number` | `1` | 当前页（`v-model:page`）。 |\n| `rowsPerPage` | `number` | `25` | 每页条数。 |\n| `fill` | `boolean` | `false` | 撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。 |\n| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 插槽隐式启用）。 |\n| `striped` | `boolean` | `false` | 斑马纹行。 |\n| `bordered` | `boolean` | `false` | 单元格边框。 |\n| `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |\n| `rowHover` | `boolean` | `true` | 行 hover 高亮。 |\n| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |\n| `searchField` / `searchValue` | — | — | 客户端搜索。 |\n| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |\n| `loading` | `boolean` | `false` | 加载中。 |\n| `emptyText` | `string` | — | 空数据文案。 |\n| `emptyDescription` | `string` | — | 空数据补充说明。 |\n| `maxHeight` | `number \\| null` | `null` | 表格最大高度，超出滚动。 |\n| `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |\n| `rowKey` | `string` | `'id'` | 行唯一键字段。 |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | 表格密度。 |\n| `ariaLabel` | `string` | — | — |\n| `bodyExpandRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyItemClassName` | `TableBodyItemClassName` | — | — |\n| `bodyRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyTextDirection` | `TableTextDirection` | — | — |\n| `checkboxColumnWidth` | `number \\| null` | — | — |\n| `clickEventType` | `TableClickEventType` | — | — |\n| `clickRowToExpand` | `boolean` | — | — |\n| `currentRowKey` | `string \\| number \\| null` | — | — |\n| `expandColumnWidth` | `number` | — | — |\n| `expandedRowKeys` | `Array<string \\| number>` | — | — |\n| `filters` | `Record<string, unknown> \\| null` | — | — |\n| `fixedCheckbox` | `boolean` | — | — |\n| `fixedExpand` | `boolean` | — | — |\n| `fixedHeader` | `boolean` | — | — |\n| `fixedIndex` | `boolean` | — | — |\n| `headerClassName` | `string` | — | — |\n| `headerItemClassName` | `TableHeaderItemClassName` | — | — |\n| `headerTextDirection` | `TableTextDirection` | — | — |\n| `hideHeader` | `boolean` | — | — |\n| `hideRowsPerPage` | `boolean` | — | — |\n| `indexColumnWidth` | `number` | — | — |\n| `multiSort` | `boolean` | — | — |\n| `mustSort` | `boolean` | — | — |\n| `preventContextMenuRow` | `boolean` | — | — |\n| `rowsItems` | `number[]` | — | — |\n| `rowsOfPageSeparatorMessage` | `string` | — | — |\n| `rowsPerPageMessage` | `string` | — | — |\n| `showHeader` | `boolean` | — | — |\n| `showIndex` | `boolean` | — | — |\n| `showIndexSymbol` | `string` | — | — |\n| `tableClassName` | `string` | — | — |\n| `tableHeight` | `number \\| null` | — | — |\n| `tableMinHeight` | `number` | — | — |\n| `tableNodeId` | `string` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Slots\n\n| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`。 |\n| `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 自定义空态。 |\n| `loading` | 自定义加载态。 |\n| `pagination` | 自定义分页区域。 |\n| `body` | 自定义 `body` 内容。 |\n| `body-append` | 自定义 `body-append` 内容。 |\n| `body-prepend` | 自定义 `body-prepend` 内容。 |\n| `customize-headers` | 自定义 `customize-headers` 内容。 |\n| `header` | 自定义 `header` 内容。 |\n| `header-*` | 动态插槽（前缀 `header-`）。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |\n| `page` | `number` | 页码变化。 |\n| `row-click` | `{ row, index }` | 行单击。 |\n| `current-change` | `row \\| null, oldRow \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开。 |\n| `update:selection` | `TableItem[]` | 多选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |\n| `update:current-row-key` | `string \\| number \\| null` | 当前行键 v-model。 |\n| `contextmenuRow` | — | — |\n| `deselectRow` | — | — |\n| `filter` | — | — |\n| `selectAll` | — | — |\n| `selectRow` | — | — |\n| `update:expandedRowKeys` | — | — |\n| `update:filters` | — | — |\n| `update:selectedItem` | — | — |\n| `updatePageItems` | — | — |\n| `updateTotalItems` | — | — |\n\n## 实例方法\n\n通过 `ref` 可访问以下分页与筛选控制：\n\n| 方法 / 属性 | 说明 |\n| --- | --- |\n| `currentPageFirstIndex` | 当前页首条记录的索引（无数据时为 `-1`）。 |\n| `currentPageLastIndex` | 当前页末条记录的索引。 |\n| `clientItemsLength` | 数据总条数（服务端模式下为服务端总数）。 |\n| `maxPaginationNumber` | 最大页码。 |\n| `currentPaginationNumber` | 当前页码。 |\n| `isLastPage` / `isFirstPage` | 是否末页 / 首页。 |\n| `nextPage()` / `prevPage()` | 下一页 / 上一页。 |\n| `updatePage(page)` | 跳到指定页码。 |\n| `rowsPerPageOptions` | 每页条数选项。 |\n| `rowsPerPageActiveOption` | 当前生效的每页条数。 |\n| `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |\n| `setFilters(filters)` | 程序化设置筛选条件。 |\n\n## 类型\n\n<h4 id=\"TableItem\">TableItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n<h4 id=\"TableTextDirection\">TableTextDirection</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableTextDirection = 'left' | 'center' | 'right'\n```\n\n<h4 id=\"TableClickEventType\">TableClickEventType</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableClickEventType = 'single' | 'double'\n```\n\n<h4 id=\"TableFilterOption\">TableFilterOption</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }\n  | { field: string; comparison: '=' | '!='; criteria: number | string }\n  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }\n  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }\n  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }\n```\n\n<h4 id=\"TableHeaderItemClassName\">TableHeaderItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)\n```\n\n<h4 id=\"TableBodyRowClassName\">TableBodyRowClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)\n```\n\n<h4 id=\"TableBodyItemClassName\">TableBodyItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)\n```\n\n\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\n列定义，传给 `columns`：\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end' | 'left' | 'right'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: { label: string; value: string | number }[]\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\n服务端分页/排序时传给 `serverOptions`，配合 `serverItemsLength`：\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n更多见 [API 类型](/docs/types)。\n"
+          "markdown": "---\ntitle: Table\ncategory: 03 / DATA\ndescription: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。\n---\n\n# Table\n\n`MTable` 用于展示结构化行数据。通过 `columns` 定义列、`rows` 传入数据；内置客户端排序、筛选、分页与行选择，也支持服务端分页模式。多选表头「全选」仅作用于当前页。\n\n列宽规则：\n\n- 设置了 `width` 的列为固定宽度\n- 未设 `width` 的列以 `minWidth`（默认 `80`）为弹性下限；`fit` 为 `true`（默认）时，剩余宽度按比例分配给弹性列\n- 总最小宽度超出容器时出现横向滚动\n- 需要表体自己滚动时用 `maxHeight` / `tableHeight`；与 `MLayout` 根滚动叠用时优先固定表高，避免双层滚动条\n- 全视口主列表可用 `MPageContent fill` + `MTable fill paginator`（表体滚动、分页贴底）；嵌入表或短页不必使用 `fill`\n\n## 引入\n\n```ts\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable, MTag } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.zh.vue\"\n```\n\n## 行选择\n\n多选配合 `selection-mode=\"multiple\"` 与 `v-model:selection`；单选使用 `selection-mode=\"single\"` 与 `v-model:selected-item`。表头全选仅选中当前页。\n\n```vue preview src=\"./demos/Selection.zh.vue\"\n```\n\n## 筛选与分页\n\n客户端筛选可通过 `search-value` / `filter-options`；分页开启 `paginator` 并配合 `v-model:page` 与 `rows-per-page`（受控同步）。\n\n```vue preview src=\"./demos/FilterAndPagination.zh.vue\"\n```\n\n## 固定列\n\n列定义中设置 `fixed: 'left' | 'right'`（或 `fixed: true` 视为左固定）。\n\n```vue preview src=\"./demos/FixedColumns.zh.vue\"\n```\n\n## 展开行与列渲染\n\n列可通过 `render` 或 `#cell-{key}` 自定义单元格。展开行设置 `expandable`（或 `expandConfig`），详情由 `#expansion` 提供。树模式下 `expandedRowKeys` 用于树节点展开，不可同时用于详情展开。\n\n```vue preview src=\"./demos/ExpandableRows.zh.vue\"\n```\n\n## 列宽拖拽与表头筛选\n\n列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，可选 `filters` 为多选选项，否则为文本包含筛选。\n\n```vue preview src=\"./demos/ResizeAndFilter.zh.vue\"\n```\n\n## 虚拟滚动\n\n开启 `virtual`，并提供 `maxHeight` / `tableHeight` / `fill` 之一。展开行场景会自动降级为普通渲染。\n\n```vue preview src=\"./demos/VirtualScroll.zh.vue\"\n```\n\n## 多级表头、表尾与合并\n\n列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计；`span-method` 合并单元格。\n\n```vue preview src=\"./demos/GridFeatures.zh.vue\"\n```\n\n## 空态与加载\n\n```vue preview src=\"./demos/EmptyAndLoading.zh.vue\"\n```\n\n## 树形表格\n\n传入 `tree-config` 启用树模式：嵌套 `children`，或 `transform` + `parentId` 扁平数据。展开状态用 `v-model:expanded-row-keys`。支持 `expandAll` / `expandRowKeys`、`accordion`、`trigger`、`toggleMethod`、懒加载 `lazy` + `loadMethod`。\n\n实例方法：`setTreeExpand`、`setAllTreeExpand`、`toggleTreeExpand`、`isTreeExpandByRow`、`getTreeExpandRecords`、`clearTreeExpand`。\n\n树 + 多选时默认父子级联与半选（`checkbox-config.check-strictly=false`）；`checkMethod` 可禁用单行勾选。\n\n```vue preview src=\"./demos/Tree.zh.vue\"\n```\n\n## 服务端模式\n\n传入 `server-options` 与 `server-total`，通过 `v-model:server-options` 同步页码、每页条数与排序字段。\n\n```vue preview src=\"./demos/Demo7.vue\"\n```\n\n## Breaking changes\n\n- 移除内置单元格编辑：`editConfig`、列 `editable`、`edit-change`、`#edit-{key}`；请用 `#cell-{key}` / `render` 自定义\n- 移除 `MTreeTable`（含 `morya-ui/tree-table`）；树表改用 `MTable` + `treeConfig`\n- `serverItemsLength` → `serverTotal`；`rowsItems` → `pageSizes`\n- `hideHeader` 移除；改用 `showHeader`（默认 `true`）\n- `hideRowsPerPage` 移除；改用 `showRowsPerPage`（默认 `true`）\n- 移除：`clickEventType`、`rowsPerPageMessage`、`rowsOfPageSeparatorMessage`、`preventContextMenuRow`、`tableNodeId`\n- 事件：`contextmenuRow` → `row-contextmenu`；`selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`\n- 移除事件：`updatePageItems`、`updateTotalItems`、`page`（保留 `update:page`）\n- 行交互：始终同时支持单击 / 双击（`row-click` / `row-dblclick`）；右键始终 `preventDefault` 并抛出 `row-contextmenu`\n\n## TableColumnDefinition\n\n| 字段 | 类型 | 说明 |\n| --- | --- | --- |\n| `key` | `string` | 列字段名（绑定行数据的键）。 |\n| `label` | `string` | 列头文案。 |\n| `width` | `number` | 固定列宽（px）。 |\n| `minWidth` | `number` | 弹性列最小宽度，默认 `80`。 |\n| `sortable` | `boolean` | 是否可排序。 |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | 固定列；`true` 等同 `'left'`。 |\n| `align` | `'start' \\| 'center' \\| 'end'` | 单元格对齐。 |\n| `render` | `(row) => unknown` | 自定义单元格渲染。 |\n| `showOverflowTooltip` | `boolean` | 该列文本溢出时显示 Tooltip。 |\n| `resizable` | `boolean` | 可拖拽调整列宽。 |\n| `filterable` | `boolean` | 显示表头筛选。 |\n| `filters` | `TableColumnFilter[]` | 表头筛选选项；省略则为文本筛选。 |\n| `children` | `TableColumnDefinition[]` | 多级表头子列。 |\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | 列定义。 |\n| `rows` | `TableItem[]` | — | 行数据。 |\n| `fit` | `boolean` | `true` | 弹性列是否撑满表格宽度。 |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | 行选择模式。 |\n| `selection` | `TableItem[] \\| null` | `null` | 多选绑定（`v-model:selection`）。 |\n| `selectedItem` | `TableItem \\| null` | `null` | 单选绑定（`v-model:selected-item`）。 |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | 服务端分页/排序选项。 |\n| `serverTotal` | `number` | `0` | 服务端总条数。 |\n| `paginator` | `boolean` | `false` | 显示内置分页页脚。 |\n| `page` | `number` | `1` | 当前页（`v-model:page`）。 |\n| `rowsPerPage` | `number` | `25` | 每页条数。 |\n| `pageSizes` | `number[]` | `[25, 50, 100]` | 分页每页条数选项。 |\n| `showHeader` | `boolean` | `true` | 是否显示表头。 |\n| `showRowsPerPage` | `boolean` | `true` | 是否显示每页条数选择器。 |\n| `fill` | `boolean` | `false` | 撑满父级剩余高度（仅全视口主列表配 `MPageContent fill`）；表体滚动，分页贴底。设置 `maxHeight` / `tableHeight` 时忽略。 |\n| `columnWidths` | `Record<string, number> \\| null` | `null` | 列宽（`v-model:column-widths`）。 |\n| `virtual` | `boolean` | `false` | 行虚拟滚动（需高度；展开行时跳过）。 |\n| `virtualRowHeight` | `number` | `40` | 虚拟行高估算。 |\n| `hiddenColumns` | `string[] \\| null` | `null` | 隐藏列键（`v-model:hidden-columns`）。 |\n| `columnOrder` | `string[] \\| null` | `null` | 叶列顺序（`v-model:column-order`）。 |\n| `showFooter` | `boolean` | `false` | 显示表尾。 |\n| `footerMethod` | `TableFooterMethod \\| null` | `null` | 表尾数据。 |\n| `spanMethod` | `TableSpanMethod \\| null` | `null` | 单元格合并。 |\n| `treeConfig` | `TableTreeConfig \\| null` | `null` | 树形行。 |\n| `expandConfig` | `TableExpandConfig \\| null` | `null` | 详情展开配置（与树互斥）。 |\n| `checkboxConfig` | `TableCheckboxConfig \\| null` | `null` | 多选：级联 / `checkMethod` / `checkRowKeys` / `trigger` / `reserve`。 |\n| `radioConfig` | `TableRadioConfig \\| null` | `null` | 单选：`strict` / `checkMethod` / `trigger`。 |\n| `expandable` | `boolean` | `false` | 显示展开列（也可由 `#expansion` 或 `expandConfig` 启用）。 |\n| `striped` | `boolean` | `false` | 斑马纹行。 |\n| `bordered` | `boolean` | `false` | 单元格边框。 |\n| `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |\n| `rowHover` | `boolean` | `true` | 行 hover 高亮。 |\n| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |\n| `sortMode` | `'client' \\| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |\n| `searchField` / `searchValue` | — | — | 客户端搜索。 |\n| `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |\n| `loading` | `boolean` | `false` | 加载中。 |\n| `emptyText` | `string` | — | 空数据文案。 |\n| `emptyDescription` | `string` | — | 空数据补充说明。 |\n| `maxHeight` | `number \\| null` | `null` | 表格最大高度，超出滚动。 |\n| `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |\n| `rowKey` | `string` | `'id'` | 行唯一键字段。 |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | 表格密度。 |\n| `ariaLabel` | `string` | — | — |\n| `bodyExpandRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyItemClassName` | `TableBodyItemClassName` | — | — |\n| `bodyRowClassName` | `TableBodyRowClassName` | — | — |\n| `bodyTextDirection` | `TableTextDirection` | — | — |\n| `checkboxColumnWidth` | `number \\| null` | — | — |\n| `clickRowToExpand` | `boolean` | — | — |\n| `currentRowKey` | `string \\| number \\| null` | — | — |\n| `expandColumnWidth` | `number` | — | — |\n| `expandedRowKeys` | `Array<string \\| number>` | — | — |\n| `filters` | `Record<string, unknown> \\| null` | — | — |\n| `fixedCheckbox` | `boolean` | — | — |\n| `fixedExpand` | `boolean` | — | — |\n| `fixedHeader` | `boolean` | — | — |\n| `fixedIndex` | `boolean` | — | — |\n| `headerClassName` | `string` | — | — |\n| `headerItemClassName` | `TableHeaderItemClassName` | — | — |\n| `headerTextDirection` | `TableTextDirection` | — | — |\n| `indexColumnWidth` | `number` | — | — |\n| `multiSort` | `boolean` | — | — |\n| `mustSort` | `boolean` | — | — |\n| `showIndex` | `boolean` | — | — |\n| `showIndexSymbol` | `string` | — | — |\n| `tableClassName` | `string` | — | — |\n| `tableHeight` | `number \\| null` | — | — |\n| `tableMinHeight` | `number` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Slots\n\n| 插槽 | 说明 |\n| --- | --- |\n| `cell-{key}` | 列 `{key}` 单元格，作用域 `{ row, value, column }`（可自行实现编辑器）。 |\n| `footer` | 自定义表尾。 |\n| `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |\n| `expansion` | 展开行内容，作用域 `{ row }`。 |\n| `empty` | 自定义空态。 |\n| `loading` | 自定义加载态。 |\n| `pagination` | 自定义分页区域。 |\n| `body` | 自定义 `body` 内容。 |\n| `body-append` | 自定义 `body-append` 内容。 |\n| `body-prepend` | 自定义 `body-prepend` 内容。 |\n| `customize-headers` | 自定义 `customize-headers` 内容。 |\n| `header` | 自定义 `header` 内容。 |\n| `header-{key}` | 列头插槽（键名大小写与 `columns[].key` 一致）。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |\n| `row-click` | `{ row, index }`, `Event` | 行单击。 |\n| `row-dblclick` | `{ row, index }`, `Event` | 行双击。 |\n| `row-contextmenu` | `item`, `MouseEvent` | 行右键。 |\n| `select-row` | `TableItem` | 选中一行。 |\n| `deselect-row` | `TableItem` | 取消选中一行。 |\n| `select-all` | — | 全选当前页。 |\n| `current-change` | `row \\| null, oldRow \\| null` | 当前高亮行变化。 |\n| `expand` | `{ row, expanded }` | 行展开。 |\n| `update:selection` | `TableItem[]` | 多选 v-model。 |\n| `update:page` | `number` | 页码 v-model。 |\n| `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |\n| `update:current-row-key` | `string \\| number \\| null` | 当前行键 v-model。 |\n| `filter` | — | — |\n| `update:expandedRowKeys` | — | — |\n| `update:filters` | — | — |\n| `update:columnWidths` | `Record<string, number>` | 列宽 v-model。 |\n| `update:hiddenColumns` | `string[]` | 隐藏列 v-model。 |\n| `update:columnOrder` | `string[]` | 列顺序 v-model。 |\n| `update:selectedItem` | — | — |\n\n## 实例方法\n\n通过 `ref` 可访问分页、筛选、选择、滚动与展开控制：\n\n| 方法 / 属性 | 说明 |\n| --- | --- |\n| `currentPageFirstIndex` | 当前页首条记录的索引（无数据时为 `-1`）。 |\n| `currentPageLastIndex` | 当前页末条记录的索引。 |\n| `clientItemsLength` | 数据总条数（服务端模式下为服务端总数）。 |\n| `maxPaginationNumber` | 最大页码。 |\n| `currentPaginationNumber` | 当前页码。 |\n| `isLastPage` / `isFirstPage` | 是否末页 / 首页。 |\n| `nextPage()` / `prevPage()` | 下一页 / 上一页。 |\n| `updatePage(page)` | 跳到指定页码。 |\n| `rowsPerPageOptions` | 每页条数选项。 |\n| `rowsPerPageActiveOption` | 当前生效的每页条数。 |\n| `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |\n| `setFilters(filters)` / `clearFilter()` | 设置 / 清空筛选。 |\n| `clearSort()` | 清空排序。 |\n| `getCheckboxRecords()` | 当前多选行。 |\n| `setCheckboxRow(rows, checked)` | 设置行选中状态。 |\n| `clearCheckboxRow()` | 清空多选。 |\n| `isCheckedByCheckboxRow(row)` | 行是否选中。 |\n| `isAllCheckboxChecked()` | 当前页是否全选。 |\n| `getCheckboxIndeterminateRecords()` | 半选行（树级联）。 |\n| `scrollTo(...)` / `scrollToRow(row)` | 滚动定位。 |\n| `setRowExpand` / `setAllRowExpand` / `toggleRowExpand` / `clearRowExpand` / `isRowExpandByRow` / `getRowExpandRecords` | 详情展开（非树模式）。 |\n| `setTreeExpand` / `setAllTreeExpand` / `toggleTreeExpand` / `clearTreeExpand` / `isTreeExpandByRow` / `getTreeExpandRecords` | 树节点展开。 |\n\n## 类型\n\n<h4 id=\"TableItem\">TableItem</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n<h4 id=\"TableTextDirection\">TableTextDirection</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableTextDirection = 'left' | 'center' | 'right'\n```\n\n<h4 id=\"TableFilterOption\">TableFilterOption</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }\n  | { field: string; comparison: '=' | '!='; criteria: number | string }\n  | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }\n  | { field: number | string; comparison: 'in'; criteria: number[] | string[] }\n  | { field: string; comparison: (value: unknown, criteria: string) => boolean; criteria: string }\n```\n\n<h4 id=\"TableHeaderItemClassName\">TableHeaderItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)\n```\n\n<h4 id=\"TableBodyRowClassName\">TableBodyRowClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)\n```\n\n<h4 id=\"TableBodyItemClassName\">TableBodyItemClassName</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ntype TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)\n```\n\n\n\n<h4 id=\"TableTreeConfig\">TableTreeConfig</h4>\n\n```ts\ninterface TableTreeConfig {\n  childrenField?: string // default 'children'\n  indent?: number // default 16\n  expandAll?: boolean\n  accordion?: boolean\n  trigger?: 'default' | 'row'\n  lazy?: boolean\n  hasChildField?: string // default 'hasChild'\n  loadMethod?: (row: TableItem) => Promise<TableItem[]> | TableItem[]\n  transform?: boolean // flat parentId → tree\n  rowField?: string\n  parentField?: string // default 'parentId'\n  treeNode?: string // column key for toggler; default first column\n  showLine?: boolean\n}\n```\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\n列定义，传给 `columns`：\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end'\n  render?: (row: TableItem) => unknown\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\n服务端分页/排序时传给 `serverOptions`，配合 `serverTotal`：\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n更多见 [API 类型](/docs/types)。\n"
         },
         "en-US": {
           "title": "Table",
@@ -23004,7 +23284,7 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# Table\n\n`MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.\n\nColumn width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n- Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars\n- **Full-viewport main lists (when it fits):** `MPageContent fill` + `MTable fill paginator` — body scrolls; pagination at the page bottom. Skip `fill` for embedded/short tables"
+              "body": "# Table\n\n`MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination. Header “select all” applies to the current page only.\n\nColumn width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n- Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars\n- For full-viewport main lists, use `MPageContent fill` + `MTable fill paginator` (body scrolls; pagination at the bottom). Skip `fill` for embedded or short tables."
             },
             {
               "id": "import",
@@ -23029,7 +23309,27 @@
             {
               "id": "expandable-rows",
               "title": "Expandable rows",
-              "body": "Set `expandable` and provide the `expansion` slot. Column `render` works for custom cells; a `cell-{key}` slot overrides `render`.\n\n```vue preview src=\"./demos/ExpandableRows.en.vue\"\n```"
+              "body": "Customize cells with `render` or `#cell-{key}`. Set `expandable` (or `expandConfig`) and provide the `#expansion` slot. In tree mode, `expandedRowKeys` controls tree nodes and cannot be used for detail expansion at the same time.\n\n```vue preview src=\"./demos/ExpandableRows.en.vue\"\n```"
+            },
+            {
+              "id": "fixed-columns",
+              "title": "Fixed columns",
+              "body": "Set `fixed: 'left' | 'right'` on a column (or `fixed: true` for left).\n\n```vue preview src=\"./demos/FixedColumns.en.vue\"\n```"
+            },
+            {
+              "id": "column-resize-and-header-filters",
+              "title": "Column resize and header filters",
+              "body": "Set `resizable` to drag column widths (`v-model:column-widths`). Set `filterable` for a header filter; optional `filters` for checkbox options, otherwise free-text contains.\n\n```vue preview src=\"./demos/ResizeAndFilter.en.vue\"\n```"
+            },
+            {
+              "id": "virtual-scroll",
+              "title": "Virtual scroll",
+              "body": "Enable `virtual` with `maxHeight` / `tableHeight` / `fill`. Expandable tables skip virtualization.\n\n```vue preview src=\"./demos/VirtualScroll.en.vue\"\n```"
+            },
+            {
+              "id": "multi-header-footer-and-merges",
+              "title": "Multi-header, footer, and merges",
+              "body": "Use column `children` for grouped headers; `show-footer` + `footer-method` for summaries; `span-method` for merges.\n\n```vue preview src=\"./demos/GridFeatures.en.vue\"\n```"
             },
             {
               "id": "empty-and-loading",
@@ -23037,37 +23337,52 @@
               "body": "```vue preview src=\"./demos/EmptyAndLoading.en.vue\"\n```"
             },
             {
+              "id": "tree-table",
+              "title": "Tree table",
+              "body": "Pass `tree-config` for hierarchical rows: nested `children`, or flat `parentId` with `transform`. Bind expand state with `v-model:expanded-row-keys`. Supports `expandAll` / `expandRowKeys`, `accordion`, `trigger`, `toggleMethod`, and lazy `loadMethod`.\n\nInstance methods: `setTreeExpand`, `setAllTreeExpand`, `toggleTreeExpand`, `isTreeExpandByRow`, `getTreeExpandRecords`, `clearTreeExpand`.\n\nWith multi-select, parent/child cascade and indeterminate are on by default (`checkbox-config.check-strictly=false`). Use `checkMethod` to disable specific rows.\n\n```vue preview src=\"./demos/Tree.en.vue\"\n```"
+            },
+            {
+              "id": "server-mode",
+              "title": "Server mode",
+              "body": "Pass `server-options` with `server-total`, and sync page / page size / sort via `v-model:server-options`.\n\n```vue preview src=\"./demos/Demo7.vue\"\n```"
+            },
+            {
+              "id": "breaking-changes",
+              "title": "Breaking changes",
+              "body": "- Removed built-in cell editing: `editConfig`, column `editable`, `edit-change`, `#edit-{key}`; use `#cell-{key}` / `render` instead\n- Removed `MTreeTable` (including `morya-ui/tree-table`); use `MTable` + `treeConfig`\n- `serverItemsLength` → `serverTotal`\n- `rowsItems` → `pageSizes`\n- Removed `hideHeader`; use `showHeader` (default `true`)\n- Removed `hideRowsPerPage`; use `showRowsPerPage` (default `true`)\n- Removed: `clickEventType`, `rowsPerPageMessage`, `rowsOfPageSeparatorMessage`, `preventContextMenuRow`, `tableNodeId`\n- Events: `contextmenuRow` → `row-contextmenu`; `selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`\n- Removed events: `updatePageItems`, `updateTotalItems`, `page` (keep `update:page`)\n- Row interaction: click and dblclick always emit (`row-click` / `row-dblclick`); context menu always `preventDefault`s and emits `row-contextmenu`"
+            },
+            {
               "id": "tablecolumndefinition",
               "title": "TableColumnDefinition",
-              "body": "| Field | Type | Description |\n| --- | --- | --- |\n| `key` | `string` | Field name bound to row data. |\n| `label` | `string` | Column header text. |\n| `width` | `number` | Fixed width in px. |\n| `minWidth` | `number` | Flex column minimum width; default `80`. |\n| `sortable` | `boolean` | Enable sorting. |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | Freeze column (left freeze supported). |\n| `align` | `'start' \\| 'center' \\| 'end'` | Cell alignment. |\n| `render` | `(row) => unknown` | Custom cell renderer. |\n| `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |"
+              "body": "| Field | Type | Description |\n| --- | --- | --- |\n| `key` | `string` | Field name bound to row data. |\n| `label` | `string` | Column header text. |\n| `width` | `number` | Fixed width in px. |\n| `minWidth` | `number` | Flex column minimum width; default `80`. |\n| `sortable` | `boolean` | Enable sorting. |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | Freeze column (left freeze supported). |\n| `align` | `'start' \\| 'center' \\| 'end'` | Cell alignment. |\n| `render` | `(row) => unknown` | Custom cell renderer. |\n| `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |\n| `resizable` | `boolean` | Drag to resize column width. |\n| `filterable` | `boolean` | Show header filter trigger. |\n| `filters` | `TableColumnFilter[]` | Header filter options; omit for text filter. |\n| `children` | `TableColumnDefinition[]` | Nested columns for multi-level headers. |"
             },
             {
               "id": "props",
               "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | Column definitions. |\n| `rows` | `TableItem[]` | — | Row data. |\n| `fit` | `boolean` | `true` | Flexible columns fill remaining width. |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | Row selection mode. |\n| `selection` | `TableItem[] \\| null` | `null` | Multi-select (`v-model:selection`). |\n| `paginator` | `boolean` | `false` | Built-in pagination footer. |\n| `page` | `number` | `1` | Current page (`v-model:page`). |\n| `rowsPerPage` | `number` | `25` | Page size. |\n| `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |\n| `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |\n| `highlightCurrent` | `boolean` | `false` | Highlight current row. |\n| `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |\n| `maxHeight` | `number \\| null` | `null` | Scrollable body max height. |\n| `rowKey` | `string` | `'id'` | Stable row key field. |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | Table density. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |"
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | Column definitions. |\n| `rows` | `TableItem[]` | — | Row data. |\n| `fit` | `boolean` | `true` | Flexible columns fill remaining width. |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | Row selection mode. |\n| `selection` | `TableItem[] \\| null` | `null` | Multi-select (`v-model:selection`). |\n| `selectedItem` | `TableItem \\| null` | `null` | Single-select (`v-model:selected-item`). |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | Server paging/sort options. |\n| `serverTotal` | `number` | `0` | Total row count in server mode. |\n| `paginator` | `boolean` | `false` | Built-in pagination footer. |\n| `page` | `number` | `1` | Current page (`v-model:page`). |\n| `rowsPerPage` | `number` | `25` | Page size. |\n| `pageSizes` | `number[]` | `[25, 50, 100]` | Page size options. |\n| `showHeader` | `boolean` | `true` | Show table header. |\n| `showRowsPerPage` | `boolean` | `true` | Show page-size picker. |\n| `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |\n| `treeConfig` | `TableTreeConfig \\| null` | `null` | Tree rows. |\n| `expandConfig` | `TableExpandConfig \\| null` | `null` | Detail expand (mutually exclusive with tree). |\n| `checkboxConfig` | `TableCheckboxConfig \\| null` | `null` | Multi-select options. |\n| `radioConfig` | `TableRadioConfig \\| null` | `null` | Single-select options. |\n| `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |\n| `highlightCurrent` | `boolean` | `false` | Highlight current row. |\n| `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |\n| `maxHeight` | `number \\| null` | `null` | Scrollable body max height. |\n| `rowKey` | `string` | `'id'` | Stable row key field. |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | Table density. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |"
             },
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }`. |\n| `body-cell` | Any cell; scope `{ row, column, value }`. |\n| `expansion` | Expanded row; scope `{ row }`. |\n| `empty` / `loading` | Empty and loading placeholders. |"
+              "body": "| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }` (use this for custom editors). |\n| `body-cell` | Any cell; scope `{ row, column, value }`. |\n| `expansion` | Expanded row; scope `{ row }`. |\n| `empty` / `loading` | Empty and loading placeholders. |\n| `header-{key}` | Header slot (exact key case). |"
             },
             {
               "id": "events",
               "title": "Events",
-              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | Sort changed. |\n| `page` | `number` | Page changed. |\n| `row-click` | `{ row, index }` | Row clicked. |\n| `current-change` | `row \\| null, oldRow \\| null` | Current row changed. |\n| `update:selection` | `TableItem[]` | Selection v-model. |\n| `update:page` | `number` | Page v-model. |"
+              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | Sort changed. |\n| `row-click` | `{ row, index }`, `Event` | Row clicked. |\n| `row-dblclick` | `{ row, index }`, `Event` | Row double-clicked. |\n| `row-contextmenu` | `item`, `MouseEvent` | Row context menu. |\n| `select-row` / `deselect-row` | `TableItem` | Row selection toggled. |\n| `select-all` | — | Select all on current page. |\n| `current-change` | `row \\| null, oldRow \\| null` | Current row changed. |\n| `update:selection` | `TableItem[]` | Selection v-model. |\n| `update:page` | `number` | Page v-model. |"
             },
             {
               "id": "instance",
               "title": "Instance",
-              "body": "Pagination and filter controls exposed via `ref`:\n\n| Method / Property | Description |\n| --- | --- |\n| `currentPageFirstIndex` | Index of the first record on the current page (`-1` when empty). |\n| `currentPageLastIndex` | Index of the last record on the current page. |\n| `clientItemsLength` | Total item count (server total in server mode). |\n| `maxPaginationNumber` | Last page number. |\n| `currentPaginationNumber` | Current page number. |\n| `isLastPage` / `isFirstPage` | Whether the current page is the last / first. |\n| `nextPage()` / `prevPage()` | Go to the next / previous page. |\n| `updatePage(page)` | Jump to a page. |\n| `rowsPerPageOptions` | Rows-per-page options. |\n| `rowsPerPageActiveOption` | Active rows-per-page value. |\n| `updateRowsPerPageActiveOption(n)` | Change rows per page. |\n| `setFilters(filters)` | Set filters programmatically. |"
+              "body": "Pagination, filter, selection, scroll, and expand controls via `ref`:\n\n| Method / Property | Description |\n| --- | --- |\n| `currentPageFirstIndex` | Index of the first record on the current page (`-1` when empty). |\n| `currentPageLastIndex` | Index of the last record on the current page. |\n| `clientItemsLength` | Total item count (server total in server mode). |\n| `maxPaginationNumber` | Last page number. |\n| `currentPaginationNumber` | Current page number. |\n| `isLastPage` / `isFirstPage` | Whether the current page is the last / first. |\n| `nextPage()` / `prevPage()` | Go to the next / previous page. |\n| `updatePage(page)` | Jump to a page. |\n| `rowsPerPageOptions` | Rows-per-page options. |\n| `rowsPerPageActiveOption` | Active rows-per-page value. |\n| `updateRowsPerPageActiveOption(n)` | Change rows per page. |\n| `setFilters(filters)` / `clearFilter()` | Set / clear filters. |\n| `clearSort()` | Clear sort. |\n| `getCheckboxRecords()` / `setCheckboxRow` / `clearCheckboxRow` / `isCheckedByCheckboxRow` / `isAllCheckboxChecked` | Selection APIs. |\n| `scrollTo(...)` / `scrollToRow(row)` | Scroll helpers. |\n| `setRowExpand` / `toggleRowExpand` / `clearRowExpand` / … | Detail expand (non-tree). |\n| `setTreeExpand` / `toggleTreeExpand` / `clearTreeExpand` / … | Tree expand. |"
             },
             {
               "id": "types",
               "title": "Types",
-              "body": "<h4 id=\"TableItem\">TableItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\nColumn definition passed to `columns`:\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end' | 'left' | 'right'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: { label: string; value: string | number }[]\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\nServer-side paging/sorting payload for `serverOptions`, with `serverItemsLength`:\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n`TableItem` is `Record<string, unknown>`. See also [API types](/docs/types)."
+              "body": "<h4 id=\"TableItem\">TableItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\nColumn definition passed to `columns`:\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: TableColumnFilter[]\n  resizable?: boolean\n  children?: TableColumnDefinition[]\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\nServer-side paging/sorting payload for `serverOptions`, with `serverTotal`:\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n`TableItem` is `Record<string, unknown>`. See also [API types](/docs/types)."
             }
           ],
-          "markdown": "---\ntitle: Table\ncategory: 03 / DATA\ndescription: Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.\n---\n\n# Table\n\n`MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination.\n\nColumn width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n- Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars\n- **Full-viewport main lists (when it fits):** `MPageContent fill` + `MTable fill paginator` — body scrolls; pagination at the page bottom. Skip `fill` for embedded/short tables\n\n## Import\n\n```ts\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable, MTag } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.en.vue\"\n```\n\n## Selection\n\nUse `selection-mode=\"multiple\"` with `v-model:selection`, or `selection-mode=\"single\"` with `v-model:selected-item`.\n\n```vue preview src=\"./demos/Selection.en.vue\"\n```\n\n## Filter and pagination\n\nUse `search-value` / `filter-options` for client filtering. Enable `paginator` with `v-model:page` and `rows-per-page`.\n\n```vue preview src=\"./demos/FilterAndPagination.en.vue\"\n```\n\n## Expandable rows\n\nSet `expandable` and provide the `expansion` slot. Column `render` works for custom cells; a `cell-{key}` slot overrides `render`.\n\n```vue preview src=\"./demos/ExpandableRows.en.vue\"\n```\n\n## Empty and loading\n\n```vue preview src=\"./demos/EmptyAndLoading.en.vue\"\n```\n\n## TableColumnDefinition\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `key` | `string` | Field name bound to row data. |\n| `label` | `string` | Column header text. |\n| `width` | `number` | Fixed width in px. |\n| `minWidth` | `number` | Flex column minimum width; default `80`. |\n| `sortable` | `boolean` | Enable sorting. |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | Freeze column (left freeze supported). |\n| `align` | `'start' \\| 'center' \\| 'end'` | Cell alignment. |\n| `render` | `(row) => unknown` | Custom cell renderer. |\n| `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | Column definitions. |\n| `rows` | `TableItem[]` | — | Row data. |\n| `fit` | `boolean` | `true` | Flexible columns fill remaining width. |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | Row selection mode. |\n| `selection` | `TableItem[] \\| null` | `null` | Multi-select (`v-model:selection`). |\n| `paginator` | `boolean` | `false` | Built-in pagination footer. |\n| `page` | `number` | `1` | Current page (`v-model:page`). |\n| `rowsPerPage` | `number` | `25` | Page size. |\n| `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |\n| `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |\n| `highlightCurrent` | `boolean` | `false` | Highlight current row. |\n| `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |\n| `maxHeight` | `number \\| null` | `null` | Scrollable body max height. |\n| `rowKey` | `string` | `'id'` | Stable row key field. |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | Table density. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }`. |\n| `body-cell` | Any cell; scope `{ row, column, value }`. |\n| `expansion` | Expanded row; scope `{ row }`. |\n| `empty` / `loading` | Empty and loading placeholders. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | Sort changed. |\n| `page` | `number` | Page changed. |\n| `row-click` | `{ row, index }` | Row clicked. |\n| `current-change` | `row \\| null, oldRow \\| null` | Current row changed. |\n| `update:selection` | `TableItem[]` | Selection v-model. |\n| `update:page` | `number` | Page v-model. |\n\n## Instance\n\nPagination and filter controls exposed via `ref`:\n\n| Method / Property | Description |\n| --- | --- |\n| `currentPageFirstIndex` | Index of the first record on the current page (`-1` when empty). |\n| `currentPageLastIndex` | Index of the last record on the current page. |\n| `clientItemsLength` | Total item count (server total in server mode). |\n| `maxPaginationNumber` | Last page number. |\n| `currentPaginationNumber` | Current page number. |\n| `isLastPage` / `isFirstPage` | Whether the current page is the last / first. |\n| `nextPage()` / `prevPage()` | Go to the next / previous page. |\n| `updatePage(page)` | Jump to a page. |\n| `rowsPerPageOptions` | Rows-per-page options. |\n| `rowsPerPageActiveOption` | Active rows-per-page value. |\n| `updateRowsPerPageActiveOption(n)` | Change rows per page. |\n| `setFilters(filters)` | Set filters programmatically. |\n\n## Types\n\n<h4 id=\"TableItem\">TableItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\nColumn definition passed to `columns`:\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end' | 'left' | 'right'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: { label: string; value: string | number }[]\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\nServer-side paging/sorting payload for `serverOptions`, with `serverItemsLength`:\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n`TableItem` is `Record<string, unknown>`. See also [API types](/docs/types).\n"
+          "markdown": "---\ntitle: Table\ncategory: 03 / DATA\ndescription: Data table with sorting, filtering, selection, pagination, frozen columns, and empty/loading states. Column width supports width / minWidth / fit.\n---\n\n# Table\n\n`MTable` displays structured row data. Define columns with `columns`, pass data with `rows`, and use built-in client-side sort, filter, pagination, and row selection—or switch to server-driven pagination. Header “select all” applies to the current page only.\n\nColumn width rules:\n\n- Columns with `width` use a fixed width\n- Columns without `width` are flexible with a `minWidth` lower bound (default `80`); when `fit` is `true` (default), remaining width is distributed proportionally\n- Horizontal scrolling appears when the total minimum width exceeds the container\n- Prefer `maxHeight` / `tableHeight` when the table body should scroll on its own; when nested under `MLayout` root scroll, fix the table height to avoid stacked scrollbars\n- For full-viewport main lists, use `MPageContent fill` + `MTable fill paginator` (body scrolls; pagination at the bottom). Skip `fill` for embedded or short tables.\n\n## Import\n\n```ts\nimport type { TableColumnDefinition, TableItem } from 'morya-ui'\nimport { MTable, MTag } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.en.vue\"\n```\n\n## Selection\n\nUse `selection-mode=\"multiple\"` with `v-model:selection`, or `selection-mode=\"single\"` with `v-model:selected-item`.\n\n```vue preview src=\"./demos/Selection.en.vue\"\n```\n\n## Filter and pagination\n\nUse `search-value` / `filter-options` for client filtering. Enable `paginator` with `v-model:page` and `rows-per-page`.\n\n```vue preview src=\"./demos/FilterAndPagination.en.vue\"\n```\n\n## Expandable rows\n\nCustomize cells with `render` or `#cell-{key}`. Set `expandable` (or `expandConfig`) and provide the `#expansion` slot. In tree mode, `expandedRowKeys` controls tree nodes and cannot be used for detail expansion at the same time.\n\n```vue preview src=\"./demos/ExpandableRows.en.vue\"\n```\n\n## Fixed columns\n\nSet `fixed: 'left' | 'right'` on a column (or `fixed: true` for left).\n\n```vue preview src=\"./demos/FixedColumns.en.vue\"\n```\n\n## Column resize and header filters\n\nSet `resizable` to drag column widths (`v-model:column-widths`). Set `filterable` for a header filter; optional `filters` for checkbox options, otherwise free-text contains.\n\n```vue preview src=\"./demos/ResizeAndFilter.en.vue\"\n```\n\n## Virtual scroll\n\nEnable `virtual` with `maxHeight` / `tableHeight` / `fill`. Expandable tables skip virtualization.\n\n```vue preview src=\"./demos/VirtualScroll.en.vue\"\n```\n\n## Multi-header, footer, and merges\n\nUse column `children` for grouped headers; `show-footer` + `footer-method` for summaries; `span-method` for merges.\n\n```vue preview src=\"./demos/GridFeatures.en.vue\"\n```\n\n## Empty and loading\n\n```vue preview src=\"./demos/EmptyAndLoading.en.vue\"\n```\n\n## Tree table\n\nPass `tree-config` for hierarchical rows: nested `children`, or flat `parentId` with `transform`. Bind expand state with `v-model:expanded-row-keys`. Supports `expandAll` / `expandRowKeys`, `accordion`, `trigger`, `toggleMethod`, and lazy `loadMethod`.\n\nInstance methods: `setTreeExpand`, `setAllTreeExpand`, `toggleTreeExpand`, `isTreeExpandByRow`, `getTreeExpandRecords`, `clearTreeExpand`.\n\nWith multi-select, parent/child cascade and indeterminate are on by default (`checkbox-config.check-strictly=false`). Use `checkMethod` to disable specific rows.\n\n```vue preview src=\"./demos/Tree.en.vue\"\n```\n\n## Server mode\n\nPass `server-options` with `server-total`, and sync page / page size / sort via `v-model:server-options`.\n\n```vue preview src=\"./demos/Demo7.vue\"\n```\n\n## Breaking changes\n\n- Removed built-in cell editing: `editConfig`, column `editable`, `edit-change`, `#edit-{key}`; use `#cell-{key}` / `render` instead\n- Removed `MTreeTable` (including `morya-ui/tree-table`); use `MTable` + `treeConfig`\n- `serverItemsLength` → `serverTotal`\n- `rowsItems` → `pageSizes`\n- Removed `hideHeader`; use `showHeader` (default `true`)\n- Removed `hideRowsPerPage`; use `showRowsPerPage` (default `true`)\n- Removed: `clickEventType`, `rowsPerPageMessage`, `rowsOfPageSeparatorMessage`, `preventContextMenuRow`, `tableNodeId`\n- Events: `contextmenuRow` → `row-contextmenu`; `selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`\n- Removed events: `updatePageItems`, `updateTotalItems`, `page` (keep `update:page`)\n- Row interaction: click and dblclick always emit (`row-click` / `row-dblclick`); context menu always `preventDefault`s and emits `row-contextmenu`\n\n## TableColumnDefinition\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `key` | `string` | Field name bound to row data. |\n| `label` | `string` | Column header text. |\n| `width` | `number` | Fixed width in px. |\n| `minWidth` | `number` | Flex column minimum width; default `80`. |\n| `sortable` | `boolean` | Enable sorting. |\n| `fixed` | `boolean \\| 'left' \\| 'right'` | Freeze column (left freeze supported). |\n| `align` | `'start' \\| 'center' \\| 'end'` | Cell alignment. |\n| `render` | `(row) => unknown` | Custom cell renderer. |\n| `showOverflowTooltip` | `boolean` | Tooltip when cell text overflows. |\n| `resizable` | `boolean` | Drag to resize column width. |\n| `filterable` | `boolean` | Show header filter trigger. |\n| `filters` | `TableColumnFilter[]` | Header filter options; omit for text filter. |\n| `children` | `TableColumnDefinition[]` | Nested columns for multi-level headers. |\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `columns` | `TableColumnDefinition[]` | — | Column definitions. |\n| `rows` | `TableItem[]` | — | Row data. |\n| `fit` | `boolean` | `true` | Flexible columns fill remaining width. |\n| `selectionMode` | `'single' \\| 'multiple' \\| null` | `null` | Row selection mode. |\n| `selection` | `TableItem[] \\| null` | `null` | Multi-select (`v-model:selection`). |\n| `selectedItem` | `TableItem \\| null` | `null` | Single-select (`v-model:selected-item`). |\n| `serverOptions` | `TableServerOptions \\| null` | `null` | Server paging/sort options. |\n| `serverTotal` | `number` | `0` | Total row count in server mode. |\n| `paginator` | `boolean` | `false` | Built-in pagination footer. |\n| `page` | `number` | `1` | Current page (`v-model:page`). |\n| `rowsPerPage` | `number` | `25` | Page size. |\n| `pageSizes` | `number[]` | `[25, 50, 100]` | Page size options. |\n| `showHeader` | `boolean` | `true` | Show table header. |\n| `showRowsPerPage` | `boolean` | `true` | Show page-size picker. |\n| `fill` | `boolean` | `false` | Fill remaining parent height (only for full-viewport main lists with `MPageContent fill`). Body scrolls; paginator stays at the bottom. Ignored when `maxHeight` / `tableHeight` is set. |\n| `treeConfig` | `TableTreeConfig \\| null` | `null` | Tree rows. |\n| `expandConfig` | `TableExpandConfig \\| null` | `null` | Detail expand (mutually exclusive with tree). |\n| `checkboxConfig` | `TableCheckboxConfig \\| null` | `null` | Multi-select options. |\n| `radioConfig` | `TableRadioConfig \\| null` | `null` | Single-select options. |\n| `striped` / `bordered` | `boolean` | `false` | Striped rows / cell borders. |\n| `highlightCurrent` | `boolean` | `false` | Highlight current row. |\n| `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |\n| `maxHeight` | `number \\| null` | `null` | Scrollable body max height. |\n| `rowKey` | `string` | `'id'` | Stable row key field. |\n| `size` | `'sm' \\| 'md' \\| 'lg'` | — | Table density. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `cell-{key}` | Cell for column `{key}`; scope `{ row, value, column }` (use this for custom editors). |\n| `body-cell` | Any cell; scope `{ row, column, value }`. |\n| `expansion` | Expanded row; scope `{ row }`. |\n| `empty` / `loading` | Empty and loading placeholders. |\n| `header-{key}` | Header slot (exact key case). |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `sort` | `{ sortField?, sortOrder? }` | Sort changed. |\n| `row-click` | `{ row, index }`, `Event` | Row clicked. |\n| `row-dblclick` | `{ row, index }`, `Event` | Row double-clicked. |\n| `row-contextmenu` | `item`, `MouseEvent` | Row context menu. |\n| `select-row` / `deselect-row` | `TableItem` | Row selection toggled. |\n| `select-all` | — | Select all on current page. |\n| `current-change` | `row \\| null, oldRow \\| null` | Current row changed. |\n| `update:selection` | `TableItem[]` | Selection v-model. |\n| `update:page` | `number` | Page v-model. |\n\n## Instance\n\nPagination, filter, selection, scroll, and expand controls via `ref`:\n\n| Method / Property | Description |\n| --- | --- |\n| `currentPageFirstIndex` | Index of the first record on the current page (`-1` when empty). |\n| `currentPageLastIndex` | Index of the last record on the current page. |\n| `clientItemsLength` | Total item count (server total in server mode). |\n| `maxPaginationNumber` | Last page number. |\n| `currentPaginationNumber` | Current page number. |\n| `isLastPage` / `isFirstPage` | Whether the current page is the last / first. |\n| `nextPage()` / `prevPage()` | Go to the next / previous page. |\n| `updatePage(page)` | Jump to a page. |\n| `rowsPerPageOptions` | Rows-per-page options. |\n| `rowsPerPageActiveOption` | Active rows-per-page value. |\n| `updateRowsPerPageActiveOption(n)` | Change rows per page. |\n| `setFilters(filters)` / `clearFilter()` | Set / clear filters. |\n| `clearSort()` | Clear sort. |\n| `getCheckboxRecords()` / `setCheckboxRow` / `clearCheckboxRow` / `isCheckedByCheckboxRow` / `isAllCheckboxChecked` | Selection APIs. |\n| `scrollTo(...)` / `scrollToRow(row)` | Scroll helpers. |\n| `setRowExpand` / `toggleRowExpand` / `clearRowExpand` / … | Detail expand (non-tree). |\n| `setTreeExpand` / `toggleTreeExpand` / `clearTreeExpand` / … | Tree expand. |\n\n## Types\n\n<h4 id=\"TableItem\">TableItem</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ntype TableItem = Record<string, unknown>\n```\n\n\n\n<h4 id=\"TableColumnDefinition\">TableColumnDefinition</h4>\n\nColumn definition passed to `columns`:\n\n```ts\ninterface TableColumnDefinition {\n  key: string\n  label: string\n  width?: number\n  minWidth?: number\n  sortable?: boolean\n  fixed?: boolean | 'left' | 'right'\n  align?: 'start' | 'center' | 'end'\n  render?: (row: TableItem) => unknown\n  filterable?: boolean\n  filters?: TableColumnFilter[]\n  resizable?: boolean\n  children?: TableColumnDefinition[]\n  showOverflowTooltip?: boolean\n}\n```\n\n<h4 id=\"TableServerOptions\">TableServerOptions</h4>\n\nServer-side paging/sorting payload for `serverOptions`, with `serverTotal`:\n\n```ts\ninterface TableServerOptions {\n  page: number\n  rowsPerPage: number\n  sortBy?: string | string[]\n  sortType?: 'asc' | 'desc' | ('asc' | 'desc')[]\n}\n```\n\n`TableItem` is `Record<string, unknown>`. See also [API types](/docs/types).\n"
         }
       }
     },
@@ -26373,235 +26688,6 @@
             }
           ],
           "markdown": "---\ntitle: TreeSelect\ncategory: 02 / FORM\ndescription: Tree select in a dropdown. Supports single/multiple, cascade checks, filter, clear, and path labels.\n---\n\n# TreeSelect\n\nShow an expandable tree in a dropdown. `multiple` / `checkable` enable multi-select; `filterable`, `clearable`, and `showPath` are also available.\n\n## Import\n\n```ts\nimport { MTreeSelect } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.en.vue\"\n```\n\n## Multiple / filter / path\n\n```vue preview src=\"./demos/MultipleFilterPath.en.vue\"\n```\n\n## Size\n\n```vue preview src=\"./demos/Size.en.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `options` | `TreeSelectNode[]` | — | Tree nodes. |\n| `modelValue` | `string \\| string[] \\| null` | `null` | Selected key(s); array when multiple. |\n| `placeholder` | `string` | locale `selectPlaceholder` | Placeholder text. |\n| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `multiple` | `boolean` | `false` | Multiple selection. |\n| `checkable` | `boolean` | `false` | Show checkboxes (cascade like Tree). |\n| `checkStrictly` | `boolean` | `false` | Independent parent/child checks. |\n| `checkStrategy` | `'all' \\| 'parent' \\| 'child'` | `'all'` | Which keys to bind when cascading. |\n| `clearable` | `boolean` | `false` | Show a clear button. |\n| `filterable` | `boolean` | `false` | Filter inside the panel. |\n| `showPath` | `boolean` | `false` | Show ancestor labels. |\n| `separator` | `string` | `' / '` | Path separator. |\n| `maxTagCount` | `number` | — | Max visible tags when multiple. |\n| `selectionMode` | `'single' \\| 'multiple'` | `'single'` | Compatibility; prefer `multiple`. |\n| `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |\n| `appendTo` | `string \\| HTMLElement \\| 'self' \\| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |\n| `transition` | `string \\| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |\n| `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `string \\| string[] \\| null` | Emitted when the selection changes. |\n| `clear` | — | Emitted when cleared. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `value` | Trigger display. |\n| `option` | Tree node `{ node }`. |\n\n## Types\n\n<h4 id=\"TreeSelectNode\">TreeSelectNode</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TreeSelectNode {\n  key: string\n  label: string\n  children?: TreeSelectNode[]\n  disabled?: boolean\n}\n```\n"
-        }
-      }
-    },
-    {
-      "id": "TreeTable",
-      "name": "TreeTable",
-      "exportName": "MTreeTable",
-      "category": "03 / DATA",
-      "description": "可展开的树形表格。",
-      "descriptionEn": "Expandable tree table.",
-      "import": "import { MTreeTable } from 'morya-ui'",
-      "props": [
-        {
-          "name": "value",
-          "type": "TreeTableNode[]",
-          "default": "—",
-          "description": "树形行数据。"
-        },
-        {
-          "name": "columns",
-          "type": "TreeTableColumn[]",
-          "default": "—",
-          "description": "列定义。"
-        },
-        {
-          "name": "emptyMessage",
-          "type": "string",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "expandedKeys",
-          "type": "Record<string, boolean>",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "pt",
-          "type": "[RootPassThrough](/docs/types#RootPassThrough) `{ root? }",
-          "default": "—",
-          "description": "DOM 透传，见 [样式与 attrs](/docs/attrs)."
-        }
-      ],
-      "events": [
-        {
-          "name": "node-expand",
-          "payload": "TreeTableNode",
-          "description": "节点展开。"
-        },
-        {
-          "name": "node-collapse",
-          "payload": "TreeTableNode",
-          "description": "节点折叠。"
-        },
-        {
-          "name": "update:expandedKeys",
-          "payload": "—",
-          "description": "—"
-        }
-      ],
-      "slots": [
-        {
-          "name": "expansion",
-          "description": "展开行 `{ row }`。"
-        },
-        {
-          "name": "empty",
-          "description": "自定义 `empty` 内容。"
-        }
-      ],
-      "methods": [],
-      "examples": [
-        {
-          "id": "引入-1",
-          "section": "引入",
-          "sectionId": "引入",
-          "lang": "ts",
-          "preview": false,
-          "code": "import { MTreeTable } from 'morya-ui'",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "基础用法-1",
-          "section": "基础用法",
-          "sectionId": "基础用法",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MTreeTable } from 'morya-ui'\n\nconst columns = [\n  { field: 'name', header: '名称' },\n  { field: 'size', header: '大小' },\n]\nconst value = [\n  {\n    key: '0',\n    data: { name: '应用', size: '100kb' },\n    children: [\n      { key: '0-0', data: { name: 'Vue', size: '25kb' } },\n      { key: '0-1', data: { name: 'React', size: '30kb' } },\n    ],\n  },\n]\n</script>\n\n<template>\n  <MTreeTable :value=\"value\" :columns=\"columns\" />\n</template>",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "类型-1",
-          "section": "类型",
-          "sectionId": "类型",
-          "lang": "ts",
-          "preview": false,
-          "code": "interface TreeTableColumn {\n  field: string\n  header: string\n}",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "类型-2",
-          "section": "类型",
-          "sectionId": "类型",
-          "lang": "ts",
-          "preview": false,
-          "code": "interface TreeTableNode {\n  key: string\n  data: Record<string, unknown>\n  children?: TreeTableNode[]\n}",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "import-1",
-          "section": "Import",
-          "sectionId": "import",
-          "lang": "ts",
-          "preview": false,
-          "code": "import { MTreeTable } from 'morya-ui'",
-          "locale": "en-US"
-        },
-        {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MTreeTable } from 'morya-ui'\n\nconst columns = [\n  { field: 'name', header: 'Name' },\n  { field: 'size', header: 'Size' },\n]\nconst value = [\n  {\n    key: '0',\n    data: { name: 'Applications', size: '100kb' },\n    children: [\n      { key: '0-0', data: { name: 'Vue', size: '25kb' } },\n      { key: '0-1', data: { name: 'React', size: '30kb' } },\n    ],\n  },\n]\n</script>\n\n<template>\n  <MTreeTable :value=\"value\" :columns=\"columns\" />\n</template>",
-          "locale": "en-US"
-        },
-        {
-          "id": "types-1",
-          "section": "Types",
-          "sectionId": "types",
-          "lang": "ts",
-          "preview": false,
-          "code": "interface TreeTableColumn {\n  field: string\n  header: string\n}",
-          "locale": "en-US"
-        },
-        {
-          "id": "types-2",
-          "section": "Types",
-          "sectionId": "types",
-          "lang": "ts",
-          "preview": false,
-          "code": "interface TreeTableNode {\n  key: string\n  data: Record<string, unknown>\n  children?: TreeTableNode[]\n}",
-          "locale": "en-US"
-        }
-      ],
-      "locales": {
-        "zh-CN": {
-          "title": "TreeTable",
-          "description": "可展开的树形表格。",
-          "sections": [
-            {
-              "id": "overview",
-              "title": "",
-              "body": "# TreeTable\n\n用列配置展示带 children 的树形数据。"
-            },
-            {
-              "id": "引入",
-              "title": "引入",
-              "body": "```ts\nimport { MTreeTable } from 'morya-ui'\n```"
-            },
-            {
-              "id": "基础用法",
-              "title": "基础用法",
-              "body": "```vue preview src=\"./demos/Basic.zh.vue\"\n```"
-            },
-            {
-              "id": "props",
-              "title": "Props",
-              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `value` | `TreeTableNode[]` | — | 树形行数据。 |\n| `columns` | `TreeTableColumn[]` | — | 列定义。 |\n| `emptyMessage` | `string` | — | — |\n| `expandedKeys` | `Record<string, boolean>` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |"
-            },
-            {
-              "id": "events",
-              "title": "Events",
-              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `node-expand` | `TreeTableNode` | 节点展开。 |\n| `node-collapse` | `TreeTableNode` | 节点折叠。 |\n| `update:expandedKeys` | — | — |"
-            },
-            {
-              "id": "slots",
-              "title": "Slots",
-              "body": "| 插槽名 | 说明 |\n| --- | --- |\n| `expansion` | 展开行 `{ row }`。 |\n| `empty` | 自定义 `empty` 内容。 |"
-            },
-            {
-              "id": "类型",
-              "title": "类型",
-              "body": "<h4 id=\"TreeTableColumn\">TreeTableColumn</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TreeTableColumn {\n  field: string\n  header: string\n}\n```\n\n<h4 id=\"TreeTableNode\">TreeTableNode</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TreeTableNode {\n  key: string\n  data: Record<string, unknown>\n  children?: TreeTableNode[]\n}\n```"
-            }
-          ],
-          "markdown": "---\ntitle: TreeTable\ncategory: 03 / DATA\ndescription: 可展开的树形表格。\n---\n\n# TreeTable\n\n用列配置展示带 children 的树形数据。\n\n## 引入\n\n```ts\nimport { MTreeTable } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.zh.vue\"\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `value` | `TreeTableNode[]` | — | 树形行数据。 |\n| `columns` | `TreeTableColumn[]` | — | 列定义。 |\n| `emptyMessage` | `string` | — | — |\n| `expandedKeys` | `Record<string, boolean>` | — | — |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `node-expand` | `TreeTableNode` | 节点展开。 |\n| `node-collapse` | `TreeTableNode` | 节点折叠。 |\n| `update:expandedKeys` | — | — |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| `expansion` | 展开行 `{ row }`。 |\n| `empty` | 自定义 `empty` 内容。 |\n\n## 类型\n\n<h4 id=\"TreeTableColumn\">TreeTableColumn</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TreeTableColumn {\n  field: string\n  header: string\n}\n```\n\n<h4 id=\"TreeTableNode\">TreeTableNode</h4>\n\n完整定义见源码 `types.ts`。\n\n```ts\ninterface TreeTableNode {\n  key: string\n  data: Record<string, unknown>\n  children?: TreeTableNode[]\n}\n```\n"
-        },
-        "en-US": {
-          "title": "TreeTable",
-          "description": "Expandable tree table.",
-          "sections": [
-            {
-              "id": "overview",
-              "title": "",
-              "body": "# TreeTable\n\nDisplay tree data with children using column configuration."
-            },
-            {
-              "id": "import",
-              "title": "Import",
-              "body": "```ts\nimport { MTreeTable } from 'morya-ui'\n```"
-            },
-            {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview src=\"./demos/Basic.en.vue\"\n```"
-            },
-            {
-              "id": "props",
-              "title": "Props",
-              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `value` | `TreeTableNode[]` | — | Tree row data. |\n| `columns` | `TreeTableColumn[]` | — | Column definitions. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |"
-            },
-            {
-              "id": "events",
-              "title": "Events",
-              "body": "| Event | Prop | Description |\n| --- | --- | --- |\n| `node-expand` | `TreeTableNode` | Emitted when a node expands. |\n| `node-collapse` | `TreeTableNode` | Emitted when a node collapses. |"
-            },
-            {
-              "id": "slots",
-              "title": "Slots",
-              "body": "| Slot | Description |\n| --- | --- |\n| `expansion` | Expanded row `{ row }`. |"
-            },
-            {
-              "id": "types",
-              "title": "Types",
-              "body": "<h4 id=\"TreeTableColumn\">TreeTableColumn</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TreeTableColumn {\n  field: string\n  header: string\n}\n```\n\n<h4 id=\"TreeTableNode\">TreeTableNode</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TreeTableNode {\n  key: string\n  data: Record<string, unknown>\n  children?: TreeTableNode[]\n}\n```"
-            }
-          ],
-          "markdown": "---\ntitle: TreeTable\ncategory: 03 / DATA\ndescription: Expandable tree table.\n---\n\n# TreeTable\n\nDisplay tree data with children using column configuration.\n\n## Import\n\n```ts\nimport { MTreeTable } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.en.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `value` | `TreeTableNode[]` | — | Tree row data. |\n| `columns` | `TreeTableColumn[]` | — | Column definitions. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `node-expand` | `TreeTableNode` | Emitted when a node expands. |\n| `node-collapse` | `TreeTableNode` | Emitted when a node collapses. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `expansion` | Expanded row `{ row }`. |\n\n## Types\n\n<h4 id=\"TreeTableColumn\">TreeTableColumn</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TreeTableColumn {\n  field: string\n  header: string\n}\n```\n\n<h4 id=\"TreeTableNode\">TreeTableNode</h4>\n\nSee source `types.ts` for the full definition.\n\n```ts\ninterface TreeTableNode {\n  key: string\n  data: Record<string, unknown>\n  children?: TreeTableNode[]\n}\n```\n"
         }
       }
     },

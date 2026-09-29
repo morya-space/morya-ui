@@ -4,11 +4,15 @@
 
 ### 新功能
 
-- MTable 企业网格能力（自研对齐）：列宽拖拽、表头筛选、行虚拟滚动、列显隐/顺序、多级表头、表尾汇总、单元格合并与行内编辑
+- MTable：列宽拖拽、表头筛选、行虚拟滚动、列显隐/顺序、多级表头、表尾汇总、单元格合并
+- MTable 树模式与树 API、`checkboxConfig` / `radioConfig`、详情 `expandConfig`
+- MTable 实例方法：选择 / 滚动 / `clearSort` / `clearFilter` / 详情展开
 - MTable 分层重构（core / state / columns / render）与合成列内部命名空间
 
 ### 破坏性变更
 
+- 移除内置单元格编辑：`editConfig`、列 `editable`、`edit-change`、`#edit-{key}`；请用 `#cell-{key}` / `render` 自定义
+- 移除 `MTreeTable`（含 `morya-ui/tree-table`）；树表改用 `MTable` + `treeConfig`
 - `serverItemsLength` → `serverTotal`；`rowsItems` → `pageSizes`
 - 移除 `hideHeader` / `hideRowsPerPage`，改用 `showHeader` / `showRowsPerPage`（均默认 `true`）
 - 移除 `clickEventType`、`tableNodeId`、分页文案 props、`preventContextMenuRow`
@@ -22,8 +26,7 @@
 ### 文档
 
 - add portable AGENTS.md and multi-editor MCP docs
-- MTable 能力矩阵与企业能力 demo；ui-mcp 选型/审查提示对齐 MTable 企业 props
-
+- MTable 文档与 ui-mcp catalog 同步
 ## 0.3.5
 
 ### 新功能

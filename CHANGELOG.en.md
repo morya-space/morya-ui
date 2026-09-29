@@ -4,11 +4,15 @@
 
 ### Features
 
-- MTable enterprise grid (self-built): column resize, header filters, row virtualization, column visibility/order, multi-level headers, footer summary, cell span, and inline edit
+- MTable: column resize, header filters, row virtualization, column visibility/order, multi-level headers, footer summary, cell span
+- MTable tree mode and tree APIs, `checkboxConfig` / `radioConfig`, detail `expandConfig`
+- MTable instance methods: selection / scroll / `clearSort` / `clearFilter` / detail expand
 - MTable layered architecture (core / state / columns / render) with namespaced synthetic columns
 
 ### Breaking
 
+- Removed built-in cell editing: `editConfig`, column `editable`, `edit-change`, `#edit-{key}`; use `#cell-{key}` / `render` instead
+- Removed `MTreeTable` (including `morya-ui/tree-table`); use `MTable` + `treeConfig` instead
 - `serverItemsLength` → `serverTotal`; `rowsItems` → `pageSizes`
 - Removed `hideHeader` / `hideRowsPerPage` in favor of `showHeader` / `showRowsPerPage` (both default `true`)
 - Removed `clickEventType`, `tableNodeId`, paginator message props, `preventContextMenuRow`
@@ -22,7 +26,7 @@
 ### Docs
 
 - add portable AGENTS.md and multi-editor MCP docs
-- MTable capability matrix / enterprise demos; ui-mcp recipes and review hints for MTable enterprise props
+- MTable docs and ui-mcp catalog sync
 
 ## 0.3.5
 
