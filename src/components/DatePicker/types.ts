@@ -4,7 +4,14 @@ import type { FieldPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 import type { MotionPresetId } from '../../theme/motionPresets'
 
-export type DatePickerType = 'date' | 'daterange'
+export type DatePickerType =
+  | 'date'
+  | 'daterange'
+  | 'datetime'
+  | 'datetimerange'
+  | 'time'
+  | 'month'
+  | 'year'
 export type DatePickerDateValue = string | Date
 export type DatePickerValue =
   | DatePickerDateValue
@@ -37,8 +44,13 @@ export interface DatePickerProps extends MNativeDateInputProps {
   errorMessage?: string
   /** Help text shown below the field. */
   helpText?: string
-  /** Display pattern using `YYYY` / `MM` / `DD`. Output remains ISO (`YYYY-MM-DD`). */
+  /**
+   * Display pattern using `YYYY` / `MM` / `DD` / `HH` / `mm` / `ss`.
+   * Emitted values stay type-specific strings (e.g. `YYYY-MM-DD`, `YYYY-MM-DD HH:mm`).
+   */
   format?: string
+  /** Include seconds in `time` / `datetime` / `datetimerange` values. Default `false` (`HH:mm`). */
+  showSeconds?: boolean
   clearable?: boolean
   shortcuts?: DatePickerShortcut[]
   /** Teleport overlay. Defaults to `true`. */

@@ -1,12 +1,12 @@
 ---
 title: DatePicker
 category: 02 / FORM
-description: 日历弹层选择日期。单日或日期范围，值优先为 ISO 日期字符串。支持 min/max、shortcuts、format、clearable。
+description: 日历弹层选择日期、时间、月份或年份。单值或范围，字符串格式按 `type` 约定。支持 min/max、shortcuts、format、showSeconds、clearable。
 ---
 
 # DatePicker
 
-带月份导航与日网格的日期选择器。
+带月份导航与日网格的日期选择器；也可切换为时间列、月/年面板。
 
 ## 引入
 
@@ -60,6 +60,15 @@ import { MDatePicker } from 'morya-ui'
 ```vue preview src="./demos/Range.zh.vue"
 ```
 
+## 类型扩展
+
+`type` 支持 `month` / `year` / `time` / `datetime` / `datetimerange`。`showSeconds` 控制是否包含秒。
+
+`datetimerange`：两次点击选定日期后以两端 `00:00`（或 `00:00:00`）发出；面板保持打开时可用时间列调整终点时刻，点选最细粒度单位后关闭。
+
+```vue preview src="./demos/Types.vue"
+```
+
 ## Shortcuts
 
 ```vue preview src="./demos/Shortcuts.zh.vue"
@@ -69,13 +78,14 @@ import { MDatePicker } from 'morya-ui'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `modelValue` | `string \| Date \| [string, string] \| null` | `null` | 单日输出 `YYYY-MM-DD`；范围输出 `[start, end]`。 |
-| `type` | `'date' \| 'daterange'` | `'date'` | 单日或范围。 |
+| `modelValue` | `string \| Date \| [string, string] \| null` | `null` | 按 `type`：`YYYY-MM-DD`、`[start,end]`、`YYYY-MM-DD HH:mm`、`HH:mm`、`YYYY-MM`、`YYYY` 等。 |
+| `type` | `'date' \| 'daterange' \| 'datetime' \| 'datetimerange' \| 'time' \| 'month' \| 'year'` | `'date'` | 面板与值格式。 |
+| `showSeconds` | `boolean` | `false` | `time` / `datetime` / `datetimerange` 是否含秒。 |
 | `label` | `string` | — | 标签。 |
 | `minDate` | `string \| Date \| null` | — | 可选下限。 |
 | `maxDate` | `string \| Date \| null` | — | 可选上限。 |
 | `placeholder` | `string` | locale | 占位。 |
-| `format` | `string` | `'YYYY-MM-DD'` | 输入框展示格式；提交值仍为 ISO。 |
+| `format` | `string` | `'YYYY-MM-DD'` | 输入框展示格式（`YYYY`/`MM`/`DD`/`HH`/`mm`/`ss`）；提交值仍按 `type` 约定。 |
 | `clearable` | `boolean` | `true` | 显示清除按钮。 |
 | `shortcuts` | `DatePickerShortcut[]` | `[]` | 面板快捷选项。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |

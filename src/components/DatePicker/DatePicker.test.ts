@@ -152,4 +152,71 @@ describe('muDatePicker', () => {
     expect(input.attributes('aria-expanded')).toBe('true')
     wrapper.unmount()
   })
+
+  it('emits YYYY-MM for month type', async () => {
+    const wrapper = mount(MDatePicker, {
+      props: { type: 'month', modelValue: '2024-01' },
+      attachTo: document.body,
+    })
+    await wrapper.find('.m-datepicker__input').trigger('click')
+    await nextTick()
+    const cells = document.body.querySelectorAll('.m-datepicker__month-grid .m-datepicker__cell')
+    ;(cells[5] as HTMLButtonElement).click()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe('2024-06')
+    wrapper.unmount()
+  })
+
+  it('emits YYYY for year type', async () => {
+    const wrapper = mount(MDatePicker, {
+      props: { type: 'year', modelValue: '2024' },
+      attachTo: document.body,
+    })
+    await wrapper.find('.m-datepicker__input').trigger('click')
+    await nextTick()
+    const cells = document.body.querySelectorAll('.m-datepicker__year-grid .m-datepicker__cell')
+    const target = Array.from(cells).find((el) => el.textContent?.trim() === '2025') as HTMLButtonElement
+    target.click()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe('2025')
+    wrapper.unmount()
+  })
+
+  it('emits HH:mm for time type when minute is picked', async () => {
+    const wrapper = mount(MDatePicker, {
+      props: { type: 'time', modelValue: '08:00' },
+      attachTo: document.body,
+    })
+    await wrapper.find('.m-datepicker__input').trigger('click')
+    await nextTick()
+    const cols = document.body.querySelectorAll('.m-datepicker__time-col')
+    const hourBtn = cols[0]!.querySelectorAll('.m-datepicker__time-item')[14] as HTMLButtonElement
+    const minuteBtn = cols[1]!.querySelectorAll('.m-datepicker__time-item')[30] as HTMLButtonElement
+    hourBtn.click()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    minuteBtn.click()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe('14:30')
+    wrapper.unmount()
+  })
+
+  it('emits YYYY-MM-DD HH:mm for datetime after day + minute', async () => {
+    const wrapper = mount(MDatePicker, {
+      props: { type: 'datetime', modelValue: '2024-01-15 09:00' },
+      attachTo: document.body,
+    })
+    await wrapper.find('.m-datepicker__input').trigger('click')
+    await nextTick()
+    const day = document.body.querySelector('[data-m-date="2024-01-16"]') as HTMLButtonElement
+    day.click()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    const cols = document.body.querySelectorAll('.m-datepicker__time-col')
+    const minuteBtn = cols[1]!.querySelectorAll('.m-datepicker__time-item')[45] as HTMLButtonElement
+    minuteBtn.click()
+    await nextTick()
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe('2024-01-16 09:45')
+    wrapper.unmount()
+  })
 })

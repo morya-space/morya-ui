@@ -1,12 +1,12 @@
 ---
 title: DatePicker
 category: 02 / FORM
-description: Calendar overlay for a date or date range. Values are ISO date strings. Supports min/max, shortcuts, format, and clearable.
+description: Calendar overlay for a date, time, month, or year. String shape follows `type`. Supports min/max, shortcuts, format, showSeconds, and clearable.
 ---
 
 # DatePicker
 
-Date picker with month navigation and a day grid.
+Date picker with month navigation and a day grid; also supports time columns and month/year panels.
 
 ## Import
 
@@ -60,6 +60,15 @@ With `type="daterange"`, click the start date then the end date. The value is `[
 ```vue preview src="./demos/Range.en.vue"
 ```
 
+## Type variants
+
+`type` also supports `month` / `year` / `time` / `datetime` / `datetimerange`. Use `showSeconds` to include seconds.
+
+`datetimerange`: after two date clicks, emits both ends with `00:00` (or `00:00:00`); while the panel stays open, time columns adjust the end time and selecting the finest unit closes.
+
+```vue preview src="./demos/Types.vue"
+```
+
 ## Shortcuts
 
 ```vue preview src="./demos/Shortcuts.en.vue"
@@ -69,13 +78,14 @@ With `type="daterange"`, click the start date then the end date. The value is `[
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `modelValue` | `string \| Date \| [string, string] \| null` | `null` | Single day emits `YYYY-MM-DD`; range emits `[start, end]`. |
-| `type` | `'date' \| 'daterange'` | `'date'` | Single day or range. |
+| `modelValue` | `string \| Date \| [string, string] \| null` | `null` | By `type`: `YYYY-MM-DD`, `[start,end]`, `YYYY-MM-DD HH:mm`, `HH:mm`, `YYYY-MM`, `YYYY`, etc. |
+| `type` | `'date' \| 'daterange' \| 'datetime' \| 'datetimerange' \| 'time' \| 'month' \| 'year'` | `'date'` | Panel and value shape. |
+| `showSeconds` | `boolean` | `false` | Include seconds for `time` / `datetime` / `datetimerange`. |
 | `label` | `string` | — | Label. |
 | `minDate` | `string \| Date \| null` | — | Optional lower bound. |
 | `maxDate` | `string \| Date \| null` | — | Optional upper bound. |
 | `placeholder` | `string` | locale | Placeholder. |
-| `format` | `string` | `'YYYY-MM-DD'` | Input display pattern; the emitted value stays ISO. |
+| `format` | `string` | `'YYYY-MM-DD'` | Input display pattern (`YYYY`/`MM`/`DD`/`HH`/`mm`/`ss`); emitted value follows `type`. |
 | `clearable` | `boolean` | `true` | Show a clear button. |
 | `shortcuts` | `DatePickerShortcut[]` | `[]` | Panel shortcuts. |
 | `fluid` | `boolean` | `false` | Stretch to full width. |
@@ -85,6 +95,9 @@ With `type="daterange"`, click the start date then the end date. The value is `[
 | `teleport` | `boolean` | `true` | Panel Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 | `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
+| `errorMessage` | `string` | — | — |
+| `helpText` | `string` | — | — |
+| `id` | `string` | — | — |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
@@ -94,6 +107,9 @@ With `type="daterange"`, click the start date then the end date. The value is `[
 | --- | --- | --- |
 | `update:modelValue` | `string \| [string, string] \| null` | Value change. |
 | `clear` | — | Fired when the clear button is clicked. |
+| `change` | — | — |
+| `hide` | — | — |
+| `show` | — | — |
 
 ## Slots
 
