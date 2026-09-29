@@ -12,6 +12,33 @@ export type {
   RadiusTokens,
   SpacingTokens,
 } from "./tokens";
+
+/* Token derivation engine */
+export {
+  camelToKebab,
+  deriveCompatCssVars,
+  deriveCssVars,
+  deriveMapTokens,
+  tokensToCssVars,
+} from "./derive";
+export type { CssVarMap, DeriveOptions, TokenMap } from "./derive";
+
+export {
+  darkSeed,
+  compactSeed,
+  lightSeed,
+  defaultFontFamily,
+  defaultFontFamilyCode,
+  seedForAlgorithm,
+} from "./seed";
+export type { MSeedTokens, MThemeAlgorithm } from "./seed";
+
+export { createTheme, resolveThemeCssVars, themeCssVarNames } from "./createTheme";
+export type {
+  ComponentTokenOverrides,
+  MTheme,
+  MThemeConfig,
+} from "./createTheme";
 export { applyDensity, useDensity } from "./useDensity";
 export type { DensityPreference } from "./useDensity";
 export {
