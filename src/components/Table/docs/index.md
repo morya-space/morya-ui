@@ -267,6 +267,9 @@ import { MTable, MTag } from 'morya-ui'
 | `rowsPerPageActiveOption` | 当前生效的每页条数。 |
 | `updateRowsPerPageActiveOption(n)` | 修改每页条数。 |
 | `setFilters(filters)` / `clearFilter()` | 设置 / 清空筛选。 |
+| `setColumnWidths(widths)` | 设置列宽（等同 `v-model:column-widths`）。 |
+| `setHiddenColumns(keys)` | 设置隐藏列键（等同 `v-model:hidden-columns`）。 |
+| `setColumnOrder(keys)` | 设置叶列顺序（等同 `v-model:column-order`）。 |
 | `clearSort()` | 清空排序。 |
 | `getCheckboxRecords()` | 当前多选行。 |
 | `setCheckboxRow(rows, checked)` | 设置行选中状态。 |

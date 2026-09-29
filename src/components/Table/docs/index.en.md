@@ -205,6 +205,9 @@ Pagination, filter, selection, scroll, and expand controls via `ref`:
 | `rowsPerPageActiveOption` | Active rows-per-page value. |
 | `updateRowsPerPageActiveOption(n)` | Change rows per page. |
 | `setFilters(filters)` / `clearFilter()` | Set / clear filters. |
+| `setColumnWidths(widths)` | Set column widths (same as `v-model:column-widths`). |
+| `setHiddenColumns(keys)` | Set hidden column keys (same as `v-model:hidden-columns`). |
+| `setColumnOrder(keys)` | Set leaf column order (same as `v-model:column-order`). |
 | `clearSort()` | Clear sort. |
 | `getCheckboxRecords()` / `setCheckboxRow` / `clearCheckboxRow` / `isCheckedByCheckboxRow` / `isAllCheckboxChecked` | Selection APIs. |
 | `scrollTo(...)` / `scrollToRow(row)` | Scroll helpers. |
