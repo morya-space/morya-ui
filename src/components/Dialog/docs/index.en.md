@@ -111,3 +111,51 @@ After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `t
 | `default` | Dialog content. |
 | `header` | Custom header area. |
 | `footer` | Footer actions. |
+
+## Imperative API (useModal / modal)
+
+Open dialogs without writing a template — aligned with Ant Design's `Modal.info` / `Modal.confirm`:
+
+```ts
+import { modal, useModal } from 'morya-ui'
+
+// Module-level singleton
+modal.confirm({
+  title: 'Delete this item?',
+  content: 'This cannot be undone',
+  onOk: async () => { await remove() },
+})
+
+// Or a component-scoped instance
+const dialog = useModal()
+dialog.success({ title: 'Saved' })
+```
+
+Every call returns `{ destroy, update }`: `update` patches the title / content while open, `destroy` closes and unmounts immediately. `modal.destroyAll()` closes every dialog created through the API.
+
+| Method | Description |
+| --- | --- |
+| `info(options)` | Message dialog (no cancel button by default) |
+| `success(options)` | Success dialog |
+| `warning(options)` | Warning dialog |
+| `error(options)` | Error dialog |
+| `confirm(options)` | Confirmation dialog (cancel button shown by default) |
+| `destroyAll()` | Close all |
+
+Passing a string as `options` is shorthand for `{ content: '...' }`.
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `title` | `string` | — | Title |
+| `content` | `string \| VNode` | — | Body |
+| `type` | `DialogType` | — | Header status icon |
+| `okText` / `cancelText` | `string` | locale | Button labels |
+| `showCancel` | `boolean` | `false` for status helpers, `true` for `confirm` | Show the cancel button |
+| `okSeverity` | `ButtonSeverity` | `'primary'` | Confirm button tone |
+| `width` / `position` / `centered` | as Dialog | — | Layout |
+| `maskClosable` | `boolean` | `false` | Dismiss by clicking the mask |
+| `onOk` | `() => void \| Promise<void>` | — | Confirm handler; a returned Promise puts the button in a loading state |
+| `onCancel` | `() => void` | — | Cancel / dismiss handler |
+| `afterClose` | `() => void` | — | Called after the close transition |
+
+> Imperative dialogs render in place inside their mount container (no Teleport) so they can be destroyed precisely.

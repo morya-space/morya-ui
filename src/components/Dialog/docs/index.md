@@ -110,4 +110,52 @@ Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`clas
 | --- | --- |
 | `default` | 对话框内容。 |
 | `header` | 自定义标题区。 |
+
+## 命令式调用（useModal / modal）
+
+不写模板也能弹出对话框，对齐 antd 的 `Modal.info` / `Modal.confirm`：
+
+```ts
+import { modal, useModal } from 'morya-ui'
+
+// 模块级单例
+modal.confirm({
+  title: '确认删除？',
+  content: '删除后不可恢复',
+  onOk: async () => { await remove() },
+})
+
+// 或组件内作用域实例
+const dialog = useModal()
+dialog.success({ title: '已保存' })
+```
+
+每个调用返回 `{ destroy, update }`：`update` 可在打开时改标题/内容，`destroy` 立即关闭并卸载。`modal.destroyAll()` 关闭全部由该 API 创建的对话框。
+
+| 方法 | 说明 |
+| --- | --- |
+| `info(options)` | 信息弹窗（默认无取消按钮） |
+| `success(options)` | 成功弹窗 |
+| `warning(options)` | 警告弹窗 |
+| `error(options)` | 错误弹窗 |
+| `confirm(options)` | 确认弹窗（默认显示取消按钮） |
+| `destroyAll()` | 关闭全部 |
+
+`options` 传字符串等价于 `{ content: '...' }`。
+
+| 字段 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `title` | `string` | — | 标题 |
+| `content` | `string \| VNode` | — | 内容 |
+| `type` | `DialogType` | — | 头部状态图标 |
+| `okText` / `cancelText` | `string` | locale | 按钮文案 |
+| `showCancel` | `boolean` | 状态弹窗 `false`，`confirm` `true` | 是否显示取消按钮 |
+| `okSeverity` | `ButtonSeverity` | `'primary'` | 确认按钮语义色 |
+| `width` / `position` / `centered` | 同 Dialog | — | 布局 |
+| `maskClosable` | `boolean` | `false` | 点击遮罩关闭 |
+| `onOk` | `() => void \| Promise<void>` | — | 确认回调；返回 Promise 时按钮进入 loading |
+| `onCancel` | `() => void` | — | 取消 / 关闭回调 |
+| `afterClose` | `() => void` | — | 关闭动画结束后回调 |
+
+> 命令式弹窗就地渲染在挂载容器内（不 Teleport），便于精确销毁。
 | `footer` | 底部操作区。 |
