@@ -196,7 +196,7 @@
 }
 
 .m-drawer__header {
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
 }
 
 .m-drawer__header h2 {
@@ -250,7 +250,7 @@
 }
 
 .m-drawer__footer {
-    border-top: var(--m-border-width) solid var(--m-color-border);
+    border-top: var(--m-border-width) solid var(--m-color-split);
     gap: var(--m-space-2);
     width: 100%;
 }

@@ -256,8 +256,15 @@
     "--m-color-border": {
       "category": "color",
       "description": {
-        "zh-CN": "分割线、输入框与卡片描边。",
-        "en-US": "Dividers, input outlines, and card borders."
+        "zh-CN": "控件描边（输入框、卡片外边框）。",
+        "en-US": "Control outlines (inputs, card outer borders)."
+      }
+    },
+    "--m-color-split": {
+      "category": "color",
+      "description": {
+        "zh-CN": "分割线与表头/页脚内部分隔，弱于 `--m-color-border`。",
+        "en-US": "Splitters and inner header/footer rules; weaker than `--m-color-border`."
       }
     },
     "--m-color-focus-ring": {
@@ -375,8 +382,64 @@
     "--m-opacity-disabled": {
       "category": "state",
       "description": {
-        "zh-CN": "禁用控件的不透明度。",
-        "en-US": "Opacity applied to disabled controls."
+        "zh-CN": "部分控件禁用态后备不透明度；优先使用 text/bg disabled 色。",
+        "en-US": "Fallback opacity for disabled controls; prefer text/bg disabled colors."
+      }
+    },
+    "--m-color-text-disabled": {
+      "category": "color",
+      "description": {
+        "zh-CN": "禁用态文字色。",
+        "en-US": "Text color for disabled controls."
+      }
+    },
+    "--m-color-bg-disabled": {
+      "category": "color",
+      "description": {
+        "zh-CN": "禁用态控件背景填充。",
+        "en-US": "Background fill for disabled controls."
+      }
+    },
+    "--m-font-weight": {
+      "category": "typography",
+      "description": {
+        "zh-CN": "正文默认字重（400）。",
+        "en-US": "Default body font weight (400)."
+      }
+    },
+    "--m-font-weight-medium": {
+      "category": "typography",
+      "description": {
+        "zh-CN": "控件标签、表头、页签等 UI 字重（500）。",
+        "en-US": "UI chrome weight for labels, headers, and tabs (500)."
+      }
+    },
+    "--m-font-weight-strong": {
+      "category": "typography",
+      "description": {
+        "zh-CN": "页面标题与强调标题字重（600）。",
+        "en-US": "Heading / emphasis font weight (600)."
+      }
+    },
+    "--m-font-sans": {
+      "category": "typography",
+      "description": {
+        "zh-CN": "系统无衬线字体栈。",
+        "en-US": "System sans-serif font stack."
+      }
+    },
+    "--m-motion-ease": {
+      "category": "motion",
+      "description": {
+        "zh-CN": "默认缓动（ease-out cubic）。",
+        "en-US": "Default easing (ease-out cubic)."
+      }
+    },
+    "--m-motion-distance": {
+      "category": "motion",
+      "description": {
+        "zh-CN": "进入/退出位移距离。",
+        "en-US": "Enter/exit travel distance."
       }
     },
     "--m-overlay-scrim": {
@@ -389,8 +452,8 @@
     "--m-focus-shadow": {
       "category": "focus",
       "description": {
-        "zh-CN": "默认聚焦光晕（主色 20% 混合）。",
-        "en-US": "Default focus glow (primary at 20% mix)."
+        "zh-CN": "默认聚焦光晕（主色约 45% 混合）。",
+        "en-US": "Default focus glow (primary at ~45% mix)."
       }
     },
     "--m-focus-shadow-danger": {
@@ -398,6 +461,13 @@
       "description": {
         "zh-CN": "危险态控件聚焦光晕。",
         "en-US": "Focus glow for danger-styled controls."
+      }
+    },
+    "--m-focus-shadow-warning": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "警告态控件聚焦光晕。",
+        "en-US": "Focus glow for warning-styled controls."
       }
     },
     "--m-density-scale": {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T01:39:37.025Z",
+  "generatedAt": "2026-09-29T11:39:04.833Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 372,
+  "tokenCount": 419,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -302,6 +302,126 @@
       "description": {
         "zh-CN": "组件专用相关变量：Affix Icon Size",
         "en-US": "Component-specific token: Affix Icon Size"
+      }
+    },
+    {
+      "name": "--m-alert-bg",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "color-mix( in srgb, var(--m-alert-tone) 8%, var(--m-color-surface) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Bg",
+        "en-US": "Component-specific token: Alert Bg"
+      }
+    },
+    {
+      "name": "--m-alert-border",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "color-mix( in srgb, var(--m-alert-tone) 35%, var(--m-color-border) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Border",
+        "en-US": "Component-specific token: Alert Border"
+      }
+    },
+    {
+      "name": "--m-alert-desc-size",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "var(--m-font-size-sm)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Desc Size",
+        "en-US": "Component-specific token: Alert Desc Size"
+      }
+    },
+    {
+      "name": "--m-alert-gap",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Gap",
+        "en-US": "Component-specific token: Alert Gap"
+      }
+    },
+    {
+      "name": "--m-alert-padding-block",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "var(--m-space-4)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Padding Block",
+        "en-US": "Component-specific token: Alert Padding Block"
+      }
+    },
+    {
+      "name": "--m-alert-padding-inline",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Padding Inline",
+        "en-US": "Component-specific token: Alert Padding Inline"
+      }
+    },
+    {
+      "name": "--m-alert-title-size",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "var(--m-font-size-lg)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Title Size",
+        "en-US": "Component-specific token: Alert Title Size"
+      }
+    },
+    {
+      "name": "--m-alert-tone",
+      "category": "component",
+      "source": "src/components/Alert/styles.css",
+      "default": "var(--m-color-danger)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Alert Tone",
+        "en-US": "Component-specific token: Alert Tone"
+      }
+    },
+    {
+      "name": "--m-anchor-gap",
+      "category": "component",
+      "source": "src/components/Anchor/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Anchor Gap",
+        "en-US": "Component-specific token: Anchor Gap"
+      }
+    },
+    {
+      "name": "--m-anchor-ink-width",
+      "category": "component",
+      "source": "src/components/Anchor/styles.css",
+      "default": "2px",
+      "description": {
+        "zh-CN": "组件专用相关变量：Anchor Ink Width",
+        "en-US": "Component-specific token: Anchor Ink Width"
+      }
+    },
+    {
+      "name": "--m-anchor-link-active",
+      "category": "component",
+      "source": "src/components/Anchor/styles.css",
+      "default": "var(--m-color-primary)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Anchor Link Active",
+        "en-US": "Component-specific token: Anchor Link Active"
+      }
+    },
+    {
+      "name": "--m-anchor-link-color",
+      "category": "component",
+      "source": "src/components/Anchor/styles.css",
+      "default": "var(--m-color-text-muted)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Anchor Link Color",
+        "en-US": "Component-specific token: Anchor Link Color"
       }
     },
     {
@@ -578,7 +698,7 @@
       "name": "--m-button-active-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "transparent",
+      "default": "var(--m-color-surface)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Active Bg",
         "en-US": "Component-specific token: Button Active Bg"
@@ -598,7 +718,7 @@
       "name": "--m-button-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "transparent",
+      "default": "var(--m-color-surface)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Bg",
         "en-US": "Component-specific token: Button Bg"
@@ -608,7 +728,7 @@
       "name": "--m-button-border",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "transparent",
+      "default": "var(--m-color-border)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Border",
         "en-US": "Component-specific token: Button Border"
@@ -618,7 +738,7 @@
       "name": "--m-button-fg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-button-color)",
+      "default": "var(--m-color-text)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Fg",
         "en-US": "Component-specific token: Button Fg"
@@ -628,7 +748,7 @@
       "name": "--m-button-hover-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "transparent",
+      "default": "var(--m-color-surface)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Bg",
         "en-US": "Component-specific token: Button Hover Bg"
@@ -638,7 +758,7 @@
       "name": "--m-button-hover-border",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "transparent",
+      "default": "var(--m-color-primary-hover)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Border",
         "en-US": "Component-specific token: Button Hover Border"
@@ -648,7 +768,7 @@
       "name": "--m-button-hover-fg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-button-color)",
+      "default": "var(--m-color-primary-hover)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Fg",
         "en-US": "Component-specific token: Button Hover Fg"
@@ -712,6 +832,26 @@
       "description": {
         "zh-CN": "组件专用相关变量：Button Spinner Size",
         "en-US": "Component-specific token: Button Spinner Size"
+      }
+    },
+    {
+      "name": "--m-calendar-cell-size",
+      "category": "component",
+      "source": "src/components/Calendar/styles.css",
+      "default": "var(--m-control-affix-size, 2rem)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Calendar Cell Size",
+        "en-US": "Component-specific token: Calendar Cell Size"
+      }
+    },
+    {
+      "name": "--m-calendar-date-min-height",
+      "category": "component",
+      "source": "src/components/Calendar/styles.css",
+      "default": "calc(var(--m-calendar-cell-size) * 1.5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Calendar Date Min Height",
+        "en-US": "Component-specific token: Calendar Date Min Height"
       }
     },
     {
@@ -860,20 +1000,30 @@
       }
     },
     {
+      "name": "--m-color-bg-disabled",
+      "category": "color",
+      "source": "src/theme/styles.css",
+      "default": "rgba(255, 255, 255, 0.08)",
+      "description": {
+        "zh-CN": "禁用态控件背景填充。",
+        "en-US": "Background fill for disabled controls."
+      }
+    },
+    {
       "name": "--m-color-border",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#334155",
+      "default": "#424242",
       "description": {
-        "zh-CN": "分割线、输入框与卡片描边。",
-        "en-US": "Dividers, input outlines, and card borders."
+        "zh-CN": "控件描边（输入框、卡片外边框）。",
+        "en-US": "Control outlines (inputs, card outer borders)."
       }
     },
     {
       "name": "--m-color-contrast",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#f8fafc",
+      "default": "rgba(255, 255, 255, 0.85)",
       "description": {
         "zh-CN": "高对比按钮（contrast 变体）背景色。",
         "en-US": "High-contrast button (contrast variant) background."
@@ -883,7 +1033,7 @@
       "name": "--m-color-contrast-active",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#cbd5e1",
+      "default": "#d9d9d9",
       "description": {
         "zh-CN": "颜色相关变量：Color Contrast Active",
         "en-US": "Color token: Color Contrast Active"
@@ -893,7 +1043,7 @@
       "name": "--m-color-contrast-fg",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#0f172a",
+      "default": "#141414",
       "description": {
         "zh-CN": "高对比按钮前景文字色。",
         "en-US": "High-contrast button foreground text."
@@ -903,7 +1053,7 @@
       "name": "--m-color-contrast-hover",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#e2e8f0",
+      "default": "#f5f5f5",
       "description": {
         "zh-CN": "颜色相关变量：Color Contrast Hover",
         "en-US": "Color token: Color Contrast Hover"
@@ -913,7 +1063,7 @@
       "name": "--m-color-danger",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#dc2626",
+      "default": "#dc4446",
       "description": {
         "zh-CN": "错误 / 危险语义色。",
         "en-US": "Error / danger semantic color."
@@ -943,7 +1093,7 @@
       "name": "--m-color-focus-ring",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#93c5fd",
+      "default": "#3c89e8",
       "description": {
         "zh-CN": "无障碍聚焦环颜色（部分组件直接使用）。",
         "en-US": "Accessibility focus ring color (used directly by some components)."
@@ -963,7 +1113,7 @@
       "name": "--m-color-info",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#1d4ed8",
+      "default": "#1668dc",
       "description": {
         "zh-CN": "信息语义色。",
         "en-US": "Info semantic color."
@@ -983,7 +1133,7 @@
       "name": "--m-color-primary",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#60a5fa",
+      "default": "#1668dc",
       "description": {
         "zh-CN": "品牌主色，用于 primary 按钮、链接与聚焦描边。",
         "en-US": "Brand primary color for primary buttons, links, and focus rings."
@@ -993,17 +1143,27 @@
       "name": "--m-color-primary-hover",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#93c5fd",
+      "default": "#3c89e8",
       "description": {
         "zh-CN": "主色 hover / active 态，也用于聚焦边框色。",
         "en-US": "Primary hover/active state; also used for focused control borders."
       }
     },
     {
+      "name": "--m-color-split",
+      "category": "color",
+      "source": "src/theme/styles.css",
+      "default": "#303030",
+      "description": {
+        "zh-CN": "分割线与表头/页脚内部分隔，弱于 `--m-color-border`。",
+        "en-US": "Splitters and inner header/footer rules; weaker than `--m-color-border`."
+      }
+    },
+    {
       "name": "--m-color-success",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#0f766e",
+      "default": "#49aa19",
       "description": {
         "zh-CN": "成功语义色。",
         "en-US": "Success semantic color."
@@ -1013,7 +1173,7 @@
       "name": "--m-color-surface",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#0f172a",
+      "default": "#141414",
       "description": {
         "zh-CN": "页面与卡片默认背景色。",
         "en-US": "Default page and card background."
@@ -1023,17 +1183,27 @@
       "name": "--m-color-text",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#f8fafc",
+      "default": "rgba(255, 255, 255, 0.85)",
       "description": {
         "zh-CN": "正文与标题默认文字色。",
         "en-US": "Default body and heading text color."
       }
     },
     {
+      "name": "--m-color-text-disabled",
+      "category": "color",
+      "source": "src/theme/styles.css",
+      "default": "rgba(255, 255, 255, 0.3)",
+      "description": {
+        "zh-CN": "禁用态文字色。",
+        "en-US": "Text color for disabled controls."
+      }
+    },
+    {
       "name": "--m-color-text-muted",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#94a3b8",
+      "default": "rgba(255, 255, 255, 0.45)",
       "description": {
         "zh-CN": "次要说明、占位符与弱化文字。",
         "en-US": "Secondary copy, placeholders, and muted text."
@@ -1053,7 +1223,7 @@
       "name": "--m-color-warning",
       "category": "color",
       "source": "src/theme/styles.css",
-      "default": "#b45309",
+      "default": "#d89614",
       "description": {
         "zh-CN": "警告语义色。",
         "en-US": "Warning semantic color."
@@ -1387,6 +1557,66 @@
       }
     },
     {
+      "name": "--m-descriptions-content-color",
+      "category": "component",
+      "source": "src/components/Descriptions/styles.css",
+      "default": "var(--m-color-text)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Descriptions Content Color",
+        "en-US": "Component-specific token: Descriptions Content Color"
+      }
+    },
+    {
+      "name": "--m-descriptions-font-size",
+      "category": "component",
+      "source": "src/components/Descriptions/styles.css",
+      "default": "var(--m-font-size-lg)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Descriptions Font Size",
+        "en-US": "Component-specific token: Descriptions Font Size"
+      }
+    },
+    {
+      "name": "--m-descriptions-gap",
+      "category": "component",
+      "source": "src/components/Descriptions/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Descriptions Gap",
+        "en-US": "Component-specific token: Descriptions Gap"
+      }
+    },
+    {
+      "name": "--m-descriptions-label-color",
+      "category": "component",
+      "source": "src/components/Descriptions/styles.css",
+      "default": "var(--m-color-text-muted)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Descriptions Label Color",
+        "en-US": "Component-specific token: Descriptions Label Color"
+      }
+    },
+    {
+      "name": "--m-descriptions-label-width",
+      "category": "component",
+      "source": "src/components/Descriptions/styles.css",
+      "default": "9rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Descriptions Label Width",
+        "en-US": "Component-specific token: Descriptions Label Width"
+      }
+    },
+    {
+      "name": "--m-descriptions-pad",
+      "category": "component",
+      "source": "src/components/Descriptions/styles.css",
+      "default": "var(--m-space-4)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Descriptions Pad",
+        "en-US": "Component-specific token: Descriptions Pad"
+      }
+    },
+    {
       "name": "--m-dialog-max-height",
       "category": "component",
       "source": "src/components/Dialog/styles.css",
@@ -1620,30 +1850,40 @@
       "name": "--m-focus-shadow",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-primary) 28%, transparent)",
+      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-primary) 50%, transparent)",
       "description": {
-        "zh-CN": "默认聚焦光晕（主色 20% 混合）。",
-        "en-US": "Default focus glow (primary at 20% mix)."
+        "zh-CN": "默认聚焦光晕（主色约 45% 混合）。",
+        "en-US": "Default focus glow (primary at ~45% mix)."
       }
     },
     {
       "name": "--m-focus-shadow-danger",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-danger) 28%, transparent)",
+      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-danger) 50%, transparent)",
       "description": {
         "zh-CN": "危险态控件聚焦光晕。",
         "en-US": "Focus glow for danger-styled controls."
       }
     },
     {
+      "name": "--m-focus-shadow-warning",
+      "category": "focus",
+      "source": "src/theme/styles.css",
+      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-warning) 50%, transparent)",
+      "description": {
+        "zh-CN": "警告态控件聚焦光晕。",
+        "en-US": "Focus glow for warning-styled controls."
+      }
+    },
+    {
       "name": "--m-font-sans",
       "category": "typography",
       "source": "src/theme/styles.css",
-      "default": "Inter, ui-sans-serif, system-ui, sans-serif",
+      "default": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
       "description": {
-        "zh-CN": "字体相关变量：Font Sans",
-        "en-US": "Typography token: Font Sans"
+        "zh-CN": "系统无衬线字体栈。",
+        "en-US": "System sans-serif font stack."
       }
     },
     {
@@ -1714,6 +1954,36 @@
       "description": {
         "zh-CN": "字体相关变量：Font Size Xs",
         "en-US": "Typography token: Font Size Xs"
+      }
+    },
+    {
+      "name": "--m-font-weight",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "400",
+      "description": {
+        "zh-CN": "正文默认字重（400）。",
+        "en-US": "Default body font weight (400)."
+      }
+    },
+    {
+      "name": "--m-font-weight-medium",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "500",
+      "description": {
+        "zh-CN": "控件标签、表头、页签等 UI 字重（500）。",
+        "en-US": "UI chrome weight for labels, headers, and tabs (500)."
+      }
+    },
+    {
+      "name": "--m-font-weight-strong",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "600",
+      "description": {
+        "zh-CN": "页面标题与强调标题字重（600）。",
+        "en-US": "Heading / emphasis font weight (600)."
       }
     },
     {
@@ -1962,6 +2232,76 @@
       "description": {
         "zh-CN": "布局相关变量：Layout Trigger Size",
         "en-US": "Layout token: Layout Trigger Size"
+      }
+    },
+    {
+      "name": "--m-list-font-size",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-font-size-lg)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Font Size",
+        "en-US": "Component-specific token: List Font Size"
+      }
+    },
+    {
+      "name": "--m-list-grid-gutter",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-space-4)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Gutter",
+        "en-US": "Component-specific token: List Grid Gutter"
+      }
+    },
+    {
+      "name": "--m-list-item-gap",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Item Gap",
+        "en-US": "Component-specific token: List Item Gap"
+      }
+    },
+    {
+      "name": "--m-list-meta-desc-color",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-color-text-muted)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Meta Desc Color",
+        "en-US": "Component-specific token: List Meta Desc Color"
+      }
+    },
+    {
+      "name": "--m-list-meta-title-size",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-font-size-lg)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Meta Title Size",
+        "en-US": "Component-specific token: List Meta Title Size"
+      }
+    },
+    {
+      "name": "--m-list-pad-x",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Pad X",
+        "en-US": "Component-specific token: List Pad X"
+      }
+    },
+    {
+      "name": "--m-list-pad-y",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-space-5)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Pad Y",
+        "en-US": "Component-specific token: List Pad Y"
       }
     },
     {
@@ -2499,18 +2839,18 @@
         "motion-none": "0"
       },
       "description": {
-        "zh-CN": "动效相关变量：Motion Distance",
-        "en-US": "Motion token: Motion Distance"
+        "zh-CN": "进入/退出位移距离。",
+        "en-US": "Enter/exit travel distance."
       }
     },
     {
       "name": "--m-motion-ease",
       "category": "motion",
       "source": "src/theme/styles.css",
-      "default": "cubic-bezier(0.2, 0, 0, 1)",
+      "default": "cubic-bezier(0.215, 0.61, 0.355, 1)",
       "description": {
-        "zh-CN": "动效相关变量：Motion Ease",
-        "en-US": "Motion token: Motion Ease"
+        "zh-CN": "默认缓动（ease-out cubic）。",
+        "en-US": "Default easing (ease-out cubic)."
       }
     },
     {
@@ -2755,10 +3095,10 @@
       "name": "--m-nav-rail-collapsed-width",
       "category": "component",
       "source": "src/theme/styles.css",
-      "default": "4.5rem",
+      "default": "5.5rem",
       "variants": {
-        "density-compact": "3.25rem",
-        "density-spacious": "4.5rem"
+        "density-compact": "4rem",
+        "density-spacious": "5.5rem"
       },
       "description": {
         "zh-CN": "组件专用相关变量：Nav Rail Collapsed Width",
@@ -2785,15 +3125,15 @@
       "source": "src/theme/styles.css",
       "default": "0.55",
       "description": {
-        "zh-CN": "禁用控件的不透明度。",
-        "en-US": "Opacity applied to disabled controls."
+        "zh-CN": "部分控件禁用态后备不透明度；优先使用 text/bg disabled 色。",
+        "en-US": "Fallback opacity for disabled controls; prefer text/bg disabled colors."
       }
     },
     {
       "name": "--m-overlay-scrim",
       "category": "overlay",
       "source": "src/theme/styles.css",
-      "default": "rgb(2 6 23 / 0.72)",
+      "default": "rgb(0 0 0 / 0.65)",
       "description": {
         "zh-CN": "Modal / Drawer 等遮罩背景色。",
         "en-US": "Scrim background for Modal, Drawer, and similar overlays."
@@ -2850,6 +3190,26 @@
       }
     },
     {
+      "name": "--m-pagination-font",
+      "category": "component",
+      "source": "src/components/Pagination/styles.css",
+      "default": "var(--m-control-font-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Pagination Font",
+        "en-US": "Component-specific token: Pagination Font"
+      }
+    },
+    {
+      "name": "--m-pagination-height",
+      "category": "component",
+      "source": "src/components/Pagination/styles.css",
+      "default": "var(--m-control-height-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Pagination Height",
+        "en-US": "Component-specific token: Pagination Height"
+      }
+    },
+    {
       "name": "--m-pagination-jumper-width",
       "category": "component",
       "source": "src/components/Pagination/styles.css",
@@ -2857,6 +3217,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Pagination Jumper Width",
         "en-US": "Component-specific token: Pagination Jumper Width"
+      }
+    },
+    {
+      "name": "--m-pagination-padding-x",
+      "category": "component",
+      "source": "src/components/Pagination/styles.css",
+      "default": "var(--m-control-padding-x-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Pagination Padding X",
+        "en-US": "Component-specific token: Pagination Padding X"
       }
     },
     {
@@ -2953,7 +3323,7 @@
       "name": "--m-radius-control",
       "category": "radius",
       "source": "src/theme/styles.css",
-      "default": "3px",
+      "default": "6px",
       "description": {
         "zh-CN": "输入框、按钮等控件的默认圆角。",
         "en-US": "Default corner radius for inputs, buttons, and controls."
@@ -2973,7 +3343,7 @@
       "name": "--m-radius-lg",
       "category": "radius",
       "source": "src/theme/styles.css",
-      "default": "0.75rem",
+      "default": "0.5rem",
       "description": {
         "zh-CN": "圆角相关变量：Radius Lg",
         "en-US": "Radius token: Radius Lg"
@@ -3200,6 +3570,16 @@
       }
     },
     {
+      "name": "--m-segmented-track-padding",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-space-1)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Track Padding",
+        "en-US": "Component-specific token: Segmented Track Padding"
+      }
+    },
+    {
       "name": "--m-select-list-max-height",
       "category": "component",
       "source": "src/components/Select/styles.css",
@@ -3253,7 +3633,7 @@
       "name": "--m-shadow-lg",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 12px 32px 4px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.08)",
+      "default": "0 6px 16px 0 rgb(0 0 0 / 0.32), 0 3px 6px -4px rgb(0 0 0 / 0.48), 0 9px 28px 8px rgb(0 0 0 / 0.2)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Lg",
         "en-US": "Shadow token: Shadow Lg"
@@ -3263,7 +3643,7 @@
       "name": "--m-shadow-md",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 0 12px rgba(0, 0, 0, 0.12)",
+      "default": "0 6px 16px 0 rgb(0 0 0 / 0.32), 0 3px 6px -4px rgb(0 0 0 / 0.48), 0 9px 28px 8px rgb(0 0 0 / 0.2)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Md",
         "en-US": "Shadow token: Shadow Md"
@@ -3273,7 +3653,7 @@
       "name": "--m-shadow-raised",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 0.25rem 0.75rem color-mix(in srgb, var(--m-color-text) 22%, transparent)",
+      "default": "0 1px 2px -2px rgb(0 0 0 / 0.64), 0 3px 6px 0 rgb(0 0 0 / 0.48), 0 5px 12px 4px rgb(0 0 0 / 0.36)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Raised",
         "en-US": "Shadow token: Shadow Raised"
@@ -3283,7 +3663,7 @@
       "name": "--m-shadow-sm",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "0 0 6px rgba(0, 0, 0, 0.12)",
+      "default": "0 1px 2px 0 rgb(0 0 0 / 0.16), 0 1px 6px -1px rgb(0 0 0 / 0.12), 0 2px 4px 0 rgb(0 0 0 / 0.08)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Sm",
         "en-US": "Shadow token: Shadow Sm"
@@ -3293,7 +3673,7 @@
       "name": "--m-shadow-sticky",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "4px 0 8px color-mix(in srgb, #000 35%, transparent)",
+      "default": "6px 0 16px -8px rgb(0 0 0 / 0.45)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Sticky",
         "en-US": "Shadow token: Shadow Sticky"
@@ -3303,7 +3683,7 @@
       "name": "--m-shadow-sticky-end",
       "category": "shadow",
       "source": "src/theme/styles.css",
-      "default": "-4px 0 8px color-mix(in srgb, #000 35%, transparent)",
+      "default": "-6px 0 16px -8px rgb(0 0 0 / 0.45)",
       "description": {
         "zh-CN": "阴影相关变量：Shadow Sticky End",
         "en-US": "Shadow token: Shadow Sticky End"
@@ -3621,20 +4001,50 @@
       "name": "--m-stepper-connector-width",
       "category": "stepper",
       "source": "src/components/Stepper/styles.css",
-      "default": "var(--m-space-5)",
+      "default": "var(--m-space-4)",
       "description": {
         "zh-CN": "步骤条相关变量：Stepper Connector Width",
         "en-US": "Stepper token: Stepper Connector Width"
       }
     },
     {
+      "name": "--m-stepper-font",
+      "category": "stepper",
+      "source": "src/components/Stepper/styles.css",
+      "default": "var(--m-control-font-small)",
+      "description": {
+        "zh-CN": "步骤条相关变量：Stepper Font",
+        "en-US": "Stepper token: Stepper Font"
+      }
+    },
+    {
       "name": "--m-stepper-marker-size",
       "category": "stepper",
       "source": "src/components/Stepper/styles.css",
-      "default": "1.5rem",
+      "default": "1.25rem",
       "description": {
         "zh-CN": "步骤条相关变量：Stepper Marker Size",
         "en-US": "Stepper token: Stepper Marker Size"
+      }
+    },
+    {
+      "name": "--m-stepper-pad-x",
+      "category": "stepper",
+      "source": "src/components/Stepper/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "步骤条相关变量：Stepper Pad X",
+        "en-US": "Stepper token: Stepper Pad X"
+      }
+    },
+    {
+      "name": "--m-stepper-pad-y",
+      "category": "stepper",
+      "source": "src/components/Stepper/styles.css",
+      "default": "var(--m-space-1)",
+      "description": {
+        "zh-CN": "步骤条相关变量：Stepper Pad Y",
+        "en-US": "Stepper token: Stepper Pad Y"
       }
     },
     {
@@ -3691,7 +4101,7 @@
       "name": "--m-table-border-color",
       "category": "table",
       "source": "src/theme/styles.css",
-      "default": "color-mix(in srgb, var(--m-color-border) 88%, var(--m-color-text))",
+      "default": "var(--m-color-split)",
       "description": {
         "zh-CN": "表格相关变量：Table Border Color",
         "en-US": "Table token: Table Border Color"
@@ -3854,6 +4264,16 @@
       }
     },
     {
+      "name": "--m-tabs-font",
+      "category": "component",
+      "source": "src/components/Tabs/styles.css",
+      "default": "var(--m-control-font-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Tabs Font",
+        "en-US": "Component-specific token: Tabs Font"
+      }
+    },
+    {
       "name": "--m-tabs-indicator-width",
       "category": "component",
       "source": "src/components/Tabs/styles.css",
@@ -3864,10 +4284,40 @@
       }
     },
     {
+      "name": "--m-tabs-min-height",
+      "category": "component",
+      "source": "src/components/Tabs/styles.css",
+      "default": "var(--m-control-height-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Tabs Min Height",
+        "en-US": "Component-specific token: Tabs Min Height"
+      }
+    },
+    {
+      "name": "--m-tabs-pad-x",
+      "category": "component",
+      "source": "src/components/Tabs/styles.css",
+      "default": "var(--m-space-3)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Tabs Pad X",
+        "en-US": "Component-specific token: Tabs Pad X"
+      }
+    },
+    {
+      "name": "--m-tabs-pad-y",
+      "category": "component",
+      "source": "src/components/Tabs/styles.css",
+      "default": "var(--m-space-4)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Tabs Pad Y",
+        "en-US": "Component-specific token: Tabs Pad Y"
+      }
+    },
+    {
       "name": "--m-tag-close-gap",
       "category": "tag",
       "source": "src/components/Tag/styles.css",
-      "default": "0.15rem",
+      "default": "calc(var(--m-space-1) - var(--m-border-width))",
       "description": {
         "zh-CN": "标签相关变量：Tag Close Gap",
         "en-US": "Tag token: Tag Close Gap"
@@ -3887,20 +4337,40 @@
       "name": "--m-tag-icon-size",
       "category": "tag",
       "source": "src/components/Tag/styles.css",
-      "default": "1.25rem",
+      "default": "0.875rem",
       "description": {
         "zh-CN": "标签相关变量：Tag Icon Size",
         "en-US": "Tag token: Tag Icon Size"
       }
     },
     {
-      "name": "--m-tag-small-padding-y",
+      "name": "--m-tag-line-height",
       "category": "tag",
       "source": "src/components/Tag/styles.css",
-      "default": "0.15rem",
+      "default": "1.6667",
       "description": {
-        "zh-CN": "标签相关变量：Tag Small Padding Y",
-        "en-US": "Tag token: Tag Small Padding Y"
+        "zh-CN": "标签相关变量：Tag Line Height",
+        "en-US": "Tag token: Tag Line Height"
+      }
+    },
+    {
+      "name": "--m-tag-padding-block",
+      "category": "tag",
+      "source": "src/components/Tag/styles.css",
+      "default": "var(--m-space-1)",
+      "description": {
+        "zh-CN": "标签相关变量：Tag Padding Block",
+        "en-US": "Tag token: Tag Padding Block"
+      }
+    },
+    {
+      "name": "--m-tag-padding-inline",
+      "category": "tag",
+      "source": "src/components/Tag/styles.css",
+      "default": "var(--m-space-3)",
+      "description": {
+        "zh-CN": "标签相关变量：Tag Padding Inline",
+        "en-US": "Tag token: Tag Padding Inline"
       }
     },
     {

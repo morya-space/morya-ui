@@ -1,4 +1,4 @@
-/* —— Form: Listbox —— */
+/* —�?Form: Listbox —�?*/
 .m-listbox {
     --m-listbox-min-width: 12rem;
     --m-listbox-list-max-height: 14rem;
@@ -25,7 +25,7 @@
 .m-listbox__filter {
     background: var(--m-color-surface);
     border: 0;
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
     color: var(--m-color-text);
     font: inherit;
     padding: var(--m-space-2) var(--m-space-3);
@@ -71,7 +71,7 @@
         var(--m-color-surface)
     );
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-listbox__option:hover:not(:disabled):not(.m-listbox__option--selected) {

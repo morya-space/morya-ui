@@ -1,4 +1,4 @@
-/* —— Data: Timeline —— */
+/* —�?Data: Timeline —�?*/
 .m-timeline {
     display: flex;
     flex-direction: column;
@@ -95,7 +95,7 @@
 .m-timeline__status {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: var(--m-space-1);
 }
 

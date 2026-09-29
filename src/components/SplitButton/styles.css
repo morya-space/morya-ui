@@ -1,4 +1,4 @@
-/* —— Primitive: SplitButton —— */
+/* —�?Primitive: SplitButton —�?*/
 .m-splitbutton {
     --m-button-padding-x-medium: calc(
         var(--m-control-padding-x-medium) + var(--m-space-1)
@@ -20,7 +20,7 @@
     font: inherit;
     font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
-    font-weight: 600;
+    font-weight: 500;
     gap: var(--m-space-2);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);

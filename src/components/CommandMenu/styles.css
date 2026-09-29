@@ -28,7 +28,7 @@
 .m-commandmenu__input {
     background: transparent;
     border: 0;
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
     color: inherit;
     font: inherit;
     outline: none;

@@ -1,49 +1,58 @@
 :root {
-    --m-color-primary: #2563eb;
-    --m-color-primary-hover: #1d4ed8;
+    /* Default morya palette (--m-* token names) */
+    --m-color-primary: #1677ff;
+    --m-color-primary-hover: #4096ff;
     --m-color-surface: #ffffff;
-    --m-color-text: #0f172a;
-    --m-color-text-muted: #64748b;
-    --m-color-border: #e2e8f0;
-    --m-color-focus-ring: #2563eb;
-    /* Naive-inspired control sizing (tiny omitted; medium = default) */
-    --m-control-height-small: 28px;
-    --m-control-height-medium: 34px;
+    --m-color-text: rgba(0, 0, 0, 0.88);
+    --m-color-text-muted: rgba(0, 0, 0, 0.45);
+    --m-color-border: #d9d9d9;
+    --m-color-split: #f0f0f0;
+    --m-color-focus-ring: #1677ff;
+    /* Control sizing: medium control height 32px */
+    --m-control-height-small: 24px;
+    --m-control-height-medium: 32px;
     --m-control-height-large: 40px;
     --m-control-font-small: 14px;
     --m-control-font-medium: 14px;
     --m-control-font-large: 15px;
     --m-control-padding-x-small: 10px;
-    --m-control-padding-x-medium: 12px;
-    --m-control-padding-x-large: 14px;
+    --m-control-padding-x-medium: 15px;
+    --m-control-padding-x-large: 16px;
 
-    --m-radius-control: 3px;
+    --m-radius-control: 6px;
     --m-border-width: 1px;
     --m-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-primary) 20%, transparent);
+        color-mix(in srgb, var(--m-color-primary) 45%, transparent);
     --m-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-danger) 20%, transparent);
-    --m-color-success: #159570;
-    --m-color-info: #2563eb;
-    --m-color-warning: #d97706;
+        color-mix(in srgb, var(--m-color-danger) 45%, transparent);
+    --m-focus-shadow-warning: 0 0 0 2px
+        color-mix(in srgb, var(--m-color-warning) 45%, transparent);
+    --m-color-success: #52c41a;
+    --m-color-info: #1677ff;
+    --m-color-warning: #faad14;
     --m-color-warn: var(--m-color-warning);
     --m-color-help: #9333ea;
-    --m-color-danger: #dc2626;
-    --m-color-contrast: #0f172a;
+    --m-color-danger: #ff4d4f;
+    --m-color-contrast: rgba(0, 0, 0, 0.88);
     --m-color-contrast-fg: #ffffff;
-    --m-color-contrast-hover: #1e293b;
-    --m-color-contrast-active: #020617;
+    --m-color-contrast-hover: #1f1f1f;
+    --m-color-contrast-active: #141414;
     --m-color-on-emphasis: #ffffff;
-    --m-overlay-scrim: rgb(15 23 42 / 0.55);
-    --m-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.12);
-    --m-shadow-md: 0 0 12px rgba(0, 0, 0, 0.12);
-    --m-shadow-lg: 0 12px 32px 4px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.08);
-    --m-shadow-raised: 0 0.25rem 0.75rem
-        color-mix(in srgb, var(--m-color-text) 14%, transparent);
-    --m-shadow-sticky: 4px 0 8px
-        color-mix(in srgb, var(--m-color-text) 6%, transparent);
-    --m-shadow-sticky-end: -4px 0 8px
-        color-mix(in srgb, var(--m-color-text) 6%, transparent);
+    --m-overlay-scrim: rgb(0 0 0 / 0.45);
+    --m-shadow-sm:
+        0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 6px -1px rgb(0 0 0 / 0.02),
+        0 2px 4px 0 rgb(0 0 0 / 0.02);
+    --m-shadow-md:
+        0 6px 16px 0 rgb(0 0 0 / 0.08), 0 3px 6px -4px rgb(0 0 0 / 0.12),
+        0 9px 28px 8px rgb(0 0 0 / 0.05);
+    --m-shadow-lg:
+        0 6px 16px 0 rgb(0 0 0 / 0.08), 0 3px 6px -4px rgb(0 0 0 / 0.12),
+        0 9px 28px 8px rgb(0 0 0 / 0.05);
+    --m-shadow-raised:
+        0 1px 2px -2px rgb(0 0 0 / 0.16), 0 3px 6px 0 rgb(0 0 0 / 0.12),
+        0 5px 12px 4px rgb(0 0 0 / 0.09);
+    --m-shadow-sticky: 6px 0 16px -8px rgb(0 0 0 / 0.08);
+    --m-shadow-sticky-end: -6px 0 16px -8px rgb(0 0 0 / 0.08);
 
     /* Typography scale (component text, not control-height fonts) */
     --m-font-size-xs: 0.75rem;
@@ -55,6 +64,11 @@
     --m-font-size-2xl: 1.5rem;
     --m-font-size-3xl: 1.75rem;
     --m-opacity-disabled: 0.55;
+    --m-color-text-disabled: rgba(0, 0, 0, 0.25);
+    --m-color-bg-disabled: rgba(0, 0, 0, 0.04);
+    --m-font-weight: 400;
+    --m-font-weight-medium: 500;
+    --m-font-weight-strong: 600;
     /* Layering: override --m-z-base via ConfigProvider / createMoryaUI */
     --m-z-base: 1000;
     --m-z-overlay: var(--m-z-base);
@@ -73,7 +87,7 @@
     --m-meter-track-height: var(--m-space-5);
     --m-tree-toggler-size: var(--m-checkbox-control-size);
     --m-nav-rail-width: 12.5rem;
-    --m-nav-rail-collapsed-width: 4rem;
+    --m-nav-rail-collapsed-width: 5rem;
     --m-layout-header-height: calc(
         var(--m-control-height-medium) + 2 * var(--m-space-3)
     );
@@ -89,15 +103,18 @@
     --m-space-8: 2rem;
     --m-radius-sm: 0.25rem;
     --m-radius-md: 0.5rem;
-    --m-radius-lg: 0.75rem;
+    --m-radius-lg: 0.5rem;
     --m-radius-full: 9999px;
-    --m-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+    --m-font-sans:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
     --m-motion-fast: 150ms;
     --m-motion-normal: 250ms;
-    --m-motion-ease: cubic-bezier(0.2, 0, 0, 1);
-    --m-motion-enter: 180ms;
-    --m-motion-exit: 130ms;
-    --m-motion-distance: 1rem;
+    --m-motion-ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --m-motion-enter: 200ms;
+    --m-motion-exit: 150ms;
+    --m-motion-distance: 0.5rem;
     --m-motion-spin: 1s;
     --m-motion-spin-dash: 1.5s;
     --m-motion-spin-fast: 0.8s;
@@ -135,7 +152,7 @@
     /* Table */
     --m-color-fill-light: color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
     --m-color-fill-lighter: color-mix(in srgb, var(--m-color-text) 3.5%, var(--m-color-surface));
-    --m-table-border-color: var(--m-color-border);
+    --m-table-border-color: var(--m-color-split);
     --m-table-header-bg: var(--m-color-fill-light);
     --m-table-header-text: var(--m-color-text);
     --m-table-text: var(--m-color-text);
@@ -243,7 +260,7 @@
     --m-control-affix-gap: 2rem;
     --m-checkbox-control-size: 1rem;
     --m-nav-rail-width: 15rem;
-    --m-nav-rail-collapsed-width: 3.25rem;
+    --m-nav-rail-collapsed-width: 4rem;
     --m-space-1: 0.2rem;
     --m-space-2: 0.4rem;
     --m-space-3: 0.6rem;
@@ -272,7 +289,7 @@
     --m-control-affix-gap: 2.65rem;
     --m-checkbox-control-size: 1.25rem;
     --m-nav-rail-width: 18rem;
-    --m-nav-rail-collapsed-width: 4.5rem;
+    --m-nav-rail-collapsed-width: 5.5rem;
     --m-space-1: 0.3rem;
     --m-space-2: 0.6rem;
     --m-space-3: 0.9rem;
@@ -312,40 +329,51 @@
 }
 
 [data-theme="dark"] {
-    --m-color-primary: #60a5fa;
-    --m-color-primary-hover: #93c5fd;
-    --m-color-surface: #0f172a;
-    --m-color-text: #f8fafc;
-    --m-color-text-muted: #94a3b8;
-    --m-color-border: #334155;
-    --m-color-focus-ring: #93c5fd;
+    /* Dark theme solids on dark surfaces (readable mid tones) */
+    --m-color-primary: #1668dc;
+    --m-color-primary-hover: #3c89e8;
+    --m-color-surface: #141414;
+    --m-color-text: rgba(255, 255, 255, 0.85);
+    --m-color-text-muted: rgba(255, 255, 255, 0.45);
+    --m-color-text-disabled: rgba(255, 255, 255, 0.3);
+    --m-color-bg-disabled: rgba(255, 255, 255, 0.08);
+    --m-color-border: #424242;
+    --m-color-split: #303030;
+    --m-color-focus-ring: #3c89e8;
     --m-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-primary) 28%, transparent);
+        color-mix(in srgb, var(--m-color-primary) 50%, transparent);
     --m-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-danger) 28%, transparent);
+        color-mix(in srgb, var(--m-color-danger) 50%, transparent);
+    --m-focus-shadow-warning: 0 0 0 2px
+        color-mix(in srgb, var(--m-color-warning) 50%, transparent);
     /* Mid solids: keep ≥~4.5:1 with --m-color-on-emphasis on dark surfaces */
-    --m-color-success: #0f766e;
-    --m-color-info: #1d4ed8;
-    --m-color-warning: #b45309;
+    --m-color-success: #49aa19;
+    --m-color-info: #1668dc;
+    --m-color-warning: #d89614;
     --m-color-warn: var(--m-color-warning);
     --m-color-help: #7e22ce;
-    --m-color-danger: #dc2626;
-    --m-color-contrast: #f8fafc;
-    --m-color-contrast-fg: #0f172a;
-    --m-color-contrast-hover: #e2e8f0;
-    --m-color-contrast-active: #cbd5e1;
-    --m-overlay-scrim: rgb(2 6 23 / 0.72);
-    --m-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.12);
-    --m-shadow-md: 0 0 12px rgba(0, 0, 0, 0.12);
-    --m-shadow-lg: 0 12px 32px 4px rgba(0, 0, 0, 0.04), 0 8px 20px rgba(0, 0, 0, 0.08);
-    --m-shadow-raised: 0 0.25rem 0.75rem
-        color-mix(in srgb, var(--m-color-text) 22%, transparent);
-    --m-shadow-sticky: 4px 0 8px
-        color-mix(in srgb, #000 35%, transparent);
-    --m-shadow-sticky-end: -4px 0 8px
-        color-mix(in srgb, #000 35%, transparent);
+    --m-color-danger: #dc4446;
+    --m-color-contrast: rgba(255, 255, 255, 0.85);
+    --m-color-contrast-fg: #141414;
+    --m-color-contrast-hover: #f5f5f5;
+    --m-color-contrast-active: #d9d9d9;
+    --m-overlay-scrim: rgb(0 0 0 / 0.65);
+    --m-shadow-sm:
+        0 1px 2px 0 rgb(0 0 0 / 0.16), 0 1px 6px -1px rgb(0 0 0 / 0.12),
+        0 2px 4px 0 rgb(0 0 0 / 0.08);
+    --m-shadow-md:
+        0 6px 16px 0 rgb(0 0 0 / 0.32), 0 3px 6px -4px rgb(0 0 0 / 0.48),
+        0 9px 28px 8px rgb(0 0 0 / 0.2);
+    --m-shadow-lg:
+        0 6px 16px 0 rgb(0 0 0 / 0.32), 0 3px 6px -4px rgb(0 0 0 / 0.48),
+        0 9px 28px 8px rgb(0 0 0 / 0.2);
+    --m-shadow-raised:
+        0 1px 2px -2px rgb(0 0 0 / 0.64), 0 3px 6px 0 rgb(0 0 0 / 0.48),
+        0 5px 12px 4px rgb(0 0 0 / 0.36);
+    --m-shadow-sticky: 6px 0 16px -8px rgb(0 0 0 / 0.45);
+    --m-shadow-sticky-end: -6px 0 16px -8px rgb(0 0 0 / 0.45);
 
-    --m-table-border-color: color-mix(in srgb, var(--m-color-border) 88%, var(--m-color-text));
+    --m-table-border-color: var(--m-color-split);
     --m-color-fill-light: color-mix(in srgb, var(--m-color-text) 10%, var(--m-color-surface));
     --m-color-fill-lighter: color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
     --m-table-header-bg: var(--m-color-fill-light);

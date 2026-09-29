@@ -65,11 +65,11 @@
 .m-select__option--selected,
 .m-cascadeselect__option--selected {
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-cascadeselect__option--in-path {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-select__check,
@@ -80,9 +80,9 @@
 
 .m-select__option:disabled,
 .m-cascadeselect__option:disabled {
-    color: var(--m-color-text-muted);
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-select__option:focus-visible,
@@ -130,7 +130,7 @@
 
 .m-treeselect__option--selected {
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-treeselect__option:focus-visible {
@@ -140,9 +140,9 @@
 }
 
 .m-treeselect__option:disabled {
-    color: var(--m-color-text-muted);
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-select__filter,

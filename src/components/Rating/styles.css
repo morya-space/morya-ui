@@ -1,4 +1,4 @@
-/* —— Form: Rating —— */
+/* —�?Form: Rating —�?*/
 .m-rating-field {
     display: grid;
     gap: var(--m-space-2);
@@ -8,7 +8,7 @@
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-rating-field__help {

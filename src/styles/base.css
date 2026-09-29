@@ -81,16 +81,18 @@
     box-sizing: border-box;
 }
 
-.m-button:disabled,
 .m-input:disabled,
+.m-textarea:disabled,
 .m-password__input:disabled,
 .m-inputnumber__input:disabled,
 .m-inputotp__input:disabled,
 .m-inputcolor__text:disabled,
 .m-inputcolor__swatch:disabled,
 .m-inputtags--disabled {
+    background-color: var(--m-color-bg-disabled);
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-input-field__control--prefixed .m-input:disabled,
@@ -376,16 +378,16 @@
     display: inline-flex;
     font-family: var(--m-font-sans);
     gap: var(--m-space-2);
-    /* 避免绝对定位 input 挂到上层 MScrollbar，聚焦时把滚动容器拽回顶部 */
+    /* ?????? input ???? MScrollbar????????????�?*/
     position: relative;
 }
 
 .m-checkbox--disabled,
 .m-radio--disabled,
 .m-switch--disabled {
-    color: var(--m-color-text-muted);
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-checkbox--invalid .m-checkbox__control,
@@ -468,7 +470,7 @@
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-textarea-field__help,
@@ -506,8 +508,10 @@
 .m-textarea:disabled,
 .m-select:disabled,
 .m-select--disabled {
+    background-color: var(--m-color-bg-disabled);
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-inputgroup > .m-input,
@@ -682,7 +686,7 @@
 .m-picklist__item--selected {
     background: color-mix(in srgb, var(--m-color-primary) 14%, var(--m-color-surface));
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-carousel__nav,

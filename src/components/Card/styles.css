@@ -20,18 +20,18 @@
 
 .m-card__header,
 .m-card__footer {
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
 }
 
 .m-card__footer {
     border-bottom: 0;
-    border-top: var(--m-border-width) solid var(--m-color-border);
+    border-top: var(--m-border-width) solid var(--m-color-split);
 }
 
 .m-card__title {
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-lg);
-    font-weight: 600;
+    font-weight: 500;
     margin: 0;
 }
 

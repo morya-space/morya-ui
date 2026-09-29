@@ -16,7 +16,7 @@
     cursor: pointer;
     display: flex;
     font-family: var(--m-font-sans);
-    font-weight: 600;
+    font-weight: 500;
     gap: var(--m-space-2);
     justify-content: space-between;
     padding: var(--m-space-3) var(--m-space-4);

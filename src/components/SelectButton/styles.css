@@ -1,4 +1,4 @@
-/* —— Form: SelectButton —— */
+/* —�?Form: SelectButton —�?*/
 .m-selectbutton {
     --m-button-padding-x-small: var(--m-control-padding-x-small);
     --m-button-padding-x-medium: calc(
@@ -19,7 +19,7 @@
     cursor: pointer;
     font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
-    font-weight: 600;
+    font-weight: 500;
     margin-left: calc(var(--m-border-width) * -1);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);

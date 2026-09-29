@@ -1,4 +1,4 @@
-/* —— Form: FileUpload —— */
+/* —�?Form: FileUpload —�?*/
 .m-fileupload {
     --m-fileupload-dropzone-min-height: 10rem;
     --m-fileupload-icon-size: 2.5rem;
@@ -24,7 +24,7 @@
     color: var(--m-color-on-emphasis);
     cursor: pointer;
     font-family: var(--m-font-sans);
-    font-weight: 600;
+    font-weight: 500;
     padding: var(--m-space-2) var(--m-space-3);
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
@@ -130,7 +130,7 @@
 .m-fileupload__text em {
     color: var(--m-color-primary);
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-fileupload__tip {

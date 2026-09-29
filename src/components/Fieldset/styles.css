@@ -1,4 +1,4 @@
-/* —— Form: Fieldset —— */
+/* —�?Form: Fieldset —�?*/
 .m-fieldset {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -12,7 +12,7 @@
 .m-fieldset__legend {
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
-    font-weight: 600;
+    font-weight: 500;
     padding: 0 var(--m-space-1);
 }
 

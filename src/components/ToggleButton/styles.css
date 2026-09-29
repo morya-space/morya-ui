@@ -1,4 +1,4 @@
-/* —— Form: ToggleButton —— */
+/* —�?Form: ToggleButton —�?*/
 .m-togglebutton {
     --m-button-padding-x-small: var(--m-control-padding-x-small);
     --m-button-padding-x-medium: calc(
@@ -16,7 +16,7 @@
     display: inline-flex;
     font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
-    font-weight: 600;
+    font-weight: 500;
     gap: var(--m-space-2);
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);

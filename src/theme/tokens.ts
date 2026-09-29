@@ -70,10 +70,10 @@ export interface DesignTokens {
 const motionTokens: MotionTokens = {
   fast: "150ms",
   normal: "250ms",
-  ease: "cubic-bezier(0.2, 0, 0, 1)",
-  enter: "180ms",
-  exit: "130ms",
-  distance: "1rem",
+  ease: "cubic-bezier(0.215, 0.61, 0.355, 1)",
+  enter: "200ms",
+  exit: "150ms",
+  distance: "0.5rem",
   spin: "1s",
   spinDash: "1.5s",
   spinFast: "0.8s",
@@ -90,14 +90,14 @@ const motionTokens: MotionTokens = {
 };
 
 export const lightTokens: DesignTokens = {
-  color: {
-    primary: "#2563eb",
-    primaryHover: "#1d4ed8",
+    color: {
+    primary: "#1677ff",
+    primaryHover: "#4096ff",
     surface: "#ffffff",
-    text: "#0f172a",
-    textMuted: "#64748b",
-    border: "#e2e8f0",
-    focusRing: "#2563eb",
+    text: "rgba(0, 0, 0, 0.88)",
+    textMuted: "rgba(0, 0, 0, 0.45)",
+    border: "#d9d9d9",
+    focusRing: "#1677ff",
   },
   space: {
     1: "0.25rem",
@@ -107,8 +107,9 @@ export const lightTokens: DesignTokens = {
     6: "1.5rem",
     8: "2rem",
   },
-  radius: { sm: "0.25rem", md: "0.5rem", lg: "0.75rem", full: "9999px" },
-  fontSans: "Inter, ui-sans-serif, system-ui, sans-serif",
+  radius: { sm: "0.25rem", md: "0.5rem", lg: "0.5rem", full: "9999px" },
+  fontSans:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
   motion: motionTokens,
   layout: {
     height: "100%",
@@ -126,12 +127,12 @@ export const darkTokens: DesignTokens = {
   ...lightTokens,
   color: {
     ...lightTokens.color,
-    primary: "#60a5fa",
-    primaryHover: "#93c5fd",
-    surface: "#0f172a",
-    text: "#f8fafc",
-    textMuted: "#94a3b8",
-    border: "#334155",
-    focusRing: "#93c5fd",
+    primary: "#1668dc",
+    primaryHover: "#3c89e8",
+    surface: "#141414",
+    text: "rgba(255, 255, 255, 0.85)",
+    textMuted: "rgba(255, 255, 255, 0.45)",
+    border: "#424242",
+    focusRing: "#3c89e8",
   },
 };

@@ -1,4 +1,4 @@
-/* —— Data: Panel —— */
+/* —�?Data: Panel —�?*/
 .m-panel {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -19,7 +19,7 @@
 .m-panel__title {
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-panel__toggler {
@@ -85,7 +85,7 @@
 }
 
 .m-panel__footer {
-    border-top: var(--m-border-width) solid var(--m-color-border);
+    border-top: var(--m-border-width) solid var(--m-color-split);
     padding: var(--m-space-4);
 }
 
