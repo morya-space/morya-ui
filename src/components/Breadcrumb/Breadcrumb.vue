@@ -14,15 +14,24 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
 
+function itemHref(item: Pick<BreadcrumbItem, 'to' | 'href'>) {
+  return item.to ?? item.href
+}
+
 const items = computed(() => {
   const list: BreadcrumbItem[] = []
   if (props.home) {
     list.push({
       label: props.home.label ?? locale.value.home,
-      to: props.home.to,
+      to: itemHref(props.home),
     })
   }
-  list.push(...props.model)
+  list.push(
+    ...props.model.map((item) => ({
+      ...item,
+      to: itemHref(item),
+    })),
+  )
   return list
 })
 </script>

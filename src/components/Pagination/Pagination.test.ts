@@ -78,4 +78,18 @@ describe('muPagination', () => {
     expect(labels).not.toContain('3')
     wrapper.unmount()
   })
+
+  it('supports size and showSizeChanger alias', () => {
+    const sized = mount(MPagination, {
+      props: { totalRecords: 40, rows: 10, size: 'large' },
+    })
+    expect(sized.classes()).toContain('m-pagination--large')
+    sized.unmount()
+
+    const changer = mount(MPagination, {
+      props: { totalRecords: 40, rows: 10, showSizeChanger: true },
+    })
+    expect(changer.find('.m-pagination__sizer').exists()).toBe(true)
+    changer.unmount()
+  })
 })

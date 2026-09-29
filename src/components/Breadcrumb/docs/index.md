@@ -6,7 +6,7 @@ description: 展示当前页面在层级中的位置。
 
 # Breadcrumb
 
-面包屑导航。有 `to` 时渲染为链接，否则为文本。
+面包屑导航。有 `to` / `href` 时渲染为链接，否则为文本。
 
 ## 引入
 
@@ -30,8 +30,8 @@ import { MBreadcrumb } from 'morya-ui'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `model` | `{ label: string; to?: string; disabled?: boolean }[]` | — | 路径项。 |
-| `home` | `{ label?: string; to?: string }` | — | 首页项；默认文案 `Home`。 |
+| `model` | `{ label: string; to?: string; href?: string; disabled?: boolean }[]` | — | 路径项；`href` 为 `to` 的别名。 |
+| `home` | `{ label?: string; to?: string; href?: string }` | — | 首页项；默认文案 `Home`。 |
 | `separator` | `string` | `'/'` | 分隔符。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 

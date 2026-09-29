@@ -14,7 +14,9 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   rows: 10,
   pageLinkSize: 5,
   disabled: false,
+  size: 'medium',
   showSizePicker: false,
+  showSizeChanger: false,
   pageSizes: () => [10, 20, 50, 100],
   showQuickJumper: false,
   simple: false,
@@ -30,6 +32,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
 const resolvedRows = computed(() => Math.max(1, props.pageSize ?? props.rows))
+const showSizer = computed(() => props.showSizePicker || props.showSizeChanger)
 const pageCount = computed(() => Math.max(1, Math.ceil(props.totalRecords / resolvedRows.value)))
 const currentPage = computed(() => Math.min(Math.max(1, props.modelValue), pageCount.value))
 /** Zero-based index of the first record on the current page . */
@@ -96,7 +99,7 @@ defineExpose({ first, pageCount })
   <nav
     v-bind="rootAttrs"
     class="m-pagination"
-    :class="{ 'm-pagination--simple': simple }"
+    :class="[`m-pagination--${size}`, { 'm-pagination--simple': simple }]"
     :aria-label="locale.pagination"
   >
     <button type="button" class="m-pagination__button" :disabled="disabled || currentPage === 1" :aria-label="locale.prevPage" @click="setPage(currentPage - 1)">
@@ -113,7 +116,7 @@ defineExpose({ first, pageCount })
     <button type="button" class="m-pagination__button" :disabled="disabled || currentPage === pageCount" :aria-label="locale.nextPage" @click="setPage(currentPage + 1)">
       <MIcon name="chevron-right" size="sm" />
     </button>
-    <label v-if="showSizePicker && !simple" class="m-pagination__sizer">
+    <label v-if="showSizer && !simple" class="m-pagination__sizer">
       <span class="m-pagination__sizer-label">{{ locale.itemsPerPage }}</span>
       <select class="m-pagination__select" :disabled="disabled" :value="resolvedRows" @change="onSizeChange">
         <option v-for="size in sizeOptions" :key="size" :value="size">{{ size }}</option>

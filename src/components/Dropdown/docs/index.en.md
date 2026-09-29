@@ -42,6 +42,7 @@ Both the root menu and nested `items` flyouts use built-in `MScrollbar` with `ma
 | `closeOnSelect` | `boolean` | `true` | Close after selection. |
 | `trigger` | `'click' \| 'hover'` | `'click'` | How the menu opens. |
 | `showDelay` / `hideDelay` | `number` | `0` / `200` | Hover delays in ms. |
+| `disabled` | `boolean` | `false` | Disable the trigger (menu stays closed). |
 | `teleport` | `boolean` | `true` | Teleport the menu; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 | `transition` | `string \| false` | `'scale-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |

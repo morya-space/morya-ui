@@ -17,6 +17,11 @@
     transition: color var(--m-motion-fast) var(--m-motion-ease);
 }
 
+.m-dropdown--disabled .m-dropdown__trigger {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
 .m-dropdown__trigger:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;

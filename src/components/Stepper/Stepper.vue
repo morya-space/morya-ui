@@ -10,6 +10,8 @@ const props = withDefaults(defineProps<StepperProps>(), {
   modelValue: 0,
   linear: false,
   vertical: false,
+  status: 'process',
+  size: 'medium',
 })
 const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
@@ -35,12 +37,13 @@ function select(index: number, disabled?: boolean) {
 function stepStatus(index: number, explicit?: StepperStatus): StepperStatus {
   if (explicit) return explicit
   if (index < activeIndex.value) return 'finish'
-  if (index === activeIndex.value) return 'process'
+  if (index === activeIndex.value) return props.status
   return 'wait'
 }
 
 const rootClass = computed(() => [
   'm-stepper',
+  `m-stepper--${props.size}`,
   { 'm-stepper--vertical': isVertical.value },
 ])
 </script>

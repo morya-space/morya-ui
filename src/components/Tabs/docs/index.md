@@ -33,6 +33,8 @@ import { MTabs } from 'morya-ui'
 | `modelValue` | `string` | — | 当前活动 tab。 |
 | `tabs` | `TabItem[]` | — | 标签列表；支持 `disabled` / `closable`。 |
 | `type` | `'line' \| 'card'` | `'line'` | 外观。 |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签栏密度（`--m-control-height-*`）。 |
+| `centered` | `boolean` | `false` | 标签居中。 |
 | `closable` | `boolean` | `false` | 显示关闭按钮；单项 `closable` 优先。 |
 | `addable` | `boolean` | `false` | 显示新增按钮。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |

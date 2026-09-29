@@ -1,6 +1,7 @@
 import type { RootPassThrough } from '../../shared/passThrough'
 export type StepperOrientation = 'horizontal' | 'vertical'
 export type StepperStatus = 'wait' | 'process' | 'finish' | 'error'
+export type StepperSize = 'small' | 'medium'
 
 export interface StepperStep {
   label: string
@@ -20,6 +21,10 @@ export interface StepperProps {
   vertical?: boolean
   /** Alias of `vertical` when set to `'vertical'`. */
   orientation?: StepperOrientation
+  /** Status applied to the active step when the step has no explicit `status`. */
+  status?: StepperStatus
+  /** Marker / typography density. */
+  size?: StepperSize
 }
 
 export interface StepperEmits {

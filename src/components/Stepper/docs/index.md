@@ -32,6 +32,8 @@ import { MStepper } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `number` | `0` | 当前步骤索引（从 0 开始）。 |
 | `steps` | `{ label: string; description?: string; disabled?: boolean; status?: 'wait' \| 'process' \| 'finish' \| 'error' }[]` | — | 步骤列表。 |
+| `status` | `'wait' \| 'process' \| 'finish' \| 'error'` | `'process'` | 当前步骤状态（单项 `status` 优先）。 |
+| `size` | `'small' \| 'medium'` | `'medium'` | 标记与字号密度。 |
 | `linear` | `boolean` | `false` | 仅允许选择当前及之前步骤。 |
 | `vertical` | `boolean` | `false` | 竖排。 |
 | `orientation` | `'horizontal' \| 'vertical'` | — | `vertical` 的别名。 |

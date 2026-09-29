@@ -116,4 +116,12 @@ describe('muDropdown', () => {
     vi.useRealTimers()
     wrapper.unmount()
   })
+
+  it('does not open when disabled', async () => {
+    const wrapper = mount(MDropdown, { props: { items, disabled: true } })
+    await wrapper.get('.m-dropdown__trigger').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    expect(wrapper.classes()).toContain('m-dropdown--disabled')
+    expect(wrapper.get('.m-dropdown__trigger').attributes('aria-disabled')).toBe('true')
+  })
 })

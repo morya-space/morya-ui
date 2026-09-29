@@ -23,6 +23,8 @@ export interface DropdownProps {
   trigger?: DropdownTrigger
   showDelay?: number
   hideDelay?: number
+  /** 禁用触发器（不打开菜单）。 */
+  disabled?: boolean
   /**
    * 是否将菜单 Teleport 出去。默认 `true`。
    * 设为 `false` 时等价于 `appendTo: 'self'`。

@@ -42,6 +42,7 @@ import { MButton, MDropdown } from 'morya-ui'
 | `closeOnSelect` | `boolean` | `true` | 选择后关闭。 |
 | `trigger` | `'click' \| 'hover'` | `'click'` | 打开方式。 |
 | `showDelay` / `hideDelay` | `number` | `0` / `200` | hover 延迟（ms）。 |
+| `disabled` | `boolean` | `false` | 禁用触发器（不打开菜单）。 |
 | `teleport` | `boolean` | `true` | 将菜单 Teleport 出去；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 表示就地渲染。 |
 | `transition` | `string \| false` | `'scale-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |

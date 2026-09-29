@@ -58,4 +58,23 @@ describe('muBreadcrumb', () => {
     expect(wrapper.text()).toContain('[A]')
     expect(wrapper.text()).toContain('[B*]')
   })
+
+  it('accepts href as an alias of to', () => {
+    const wrapper = mount(MBreadcrumb, {
+      props: {
+        home: { href: '/' },
+        model: [{ label: 'Docs', href: '/docs' }, { label: 'API' }],
+      },
+    })
+    expect(wrapper.get('a[href="/"]').text()).toBe('首页')
+    expect(wrapper.get('a[href="/docs"]').text()).toBe('Docs')
+  })
+
+  it('supports separator slot', () => {
+    const wrapper = mount(MBreadcrumb, {
+      props: { model: [{ label: 'A', to: '/a' }, { label: 'B' }] },
+      slots: { separator: () => '·' },
+    })
+    expect(wrapper.get('.m-breadcrumb__separator').text()).toBe('·')
+  })
 })

@@ -33,6 +33,8 @@ When tabs overflow the container, scroll buttons appear at both ends.
 | `modelValue` | `string` | — | Currently active tab. |
 | `tabs` | `TabItem[]` | — | Tab list; supports `disabled` / `closable`. |
 | `type` | `'line' \| 'card'` | `'line'` | Appearance. |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Tab bar density (`--m-control-height-*`). |
+| `centered` | `boolean` | `false` | Center the tab list. |
 | `closable` | `boolean` | `false` | Show close buttons; per-item `closable` wins. |
 | `addable` | `boolean` | `false` | Show an add button. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |

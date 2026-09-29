@@ -8,7 +8,7 @@ description: Pagination. v-model is the page number. The instance exposes first 
 
 Pagination. `v-model` uses a **1-based page number**. The instance property `first` is the zero-based index of the first record on the page: `(page - 1) * rows`.
 
-`pageSize` is an alias of `rows` (`pageSize` wins when both are set). Also supports `showSizePicker`, `showQuickJumper`, and `simple`.
+`pageSize` is an alias of `rows` (`pageSize` wins when both are set). Also supports `showSizePicker` / `showSizeChanger`, `showQuickJumper`, `simple`, and `size`.
 
 ## Import
 
@@ -35,7 +35,9 @@ import { MPagination } from 'morya-ui'
 | `rows` | `number` | `10` | Rows per page. |
 | `pageSize` | `number` | — | Alias of `rows`; `pageSize` wins when both are set. |
 | `pageLinkSize` | `number` | `5` | Number of page link buttons. |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Control height (`--m-control-height-*`). |
 | `showSizePicker` | `boolean` | `false` | Show the page-size select. |
+| `showSizeChanger` | `boolean` | `false` | Alias of `showSizePicker` ; either enables the picker. |
 | `pageSizes` | `number[]` | `[10, 20, 50, 100]` | Options for `showSizePicker`. |
 | `showQuickJumper` | `boolean` | `false` | Page select for jumping to a page. The menu can be filtered when there are more than 10 pages. |
 | `simple` | `boolean` | `false` | Compact prev / current / next. |

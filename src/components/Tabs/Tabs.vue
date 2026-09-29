@@ -12,6 +12,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TabsProps>(), {
   type: 'line',
+  size: 'medium',
+  centered: false,
   closable: false,
   addable: false,
 })
@@ -104,7 +106,11 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-tabs" :class="`m-tabs--${type}`">
+  <div
+    v-bind="rootAttrs"
+    class="m-tabs"
+    :class="[`m-tabs--${type}`, `m-tabs--${size}`, { 'm-tabs--centered': centered }]"
+  >
     <div class="m-tabs__bar">
       <button
         v-if="overflowed"

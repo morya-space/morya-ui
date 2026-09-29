@@ -1,5 +1,23 @@
 .m-tabs {
     font-family: var(--m-font-sans);
+    --m-tabs-font: var(--m-control-font-medium);
+    --m-tabs-pad-y: var(--m-space-3);
+    --m-tabs-pad-x: var(--m-space-2);
+    --m-tabs-min-height: var(--m-control-height-medium);
+}
+
+.m-tabs--small {
+    --m-tabs-font: var(--m-control-font-small);
+    --m-tabs-pad-y: var(--m-space-2);
+    --m-tabs-pad-x: var(--m-space-2);
+    --m-tabs-min-height: var(--m-control-height-small);
+}
+
+.m-tabs--large {
+    --m-tabs-font: var(--m-control-font-large);
+    --m-tabs-pad-y: var(--m-space-4);
+    --m-tabs-pad-x: var(--m-space-3);
+    --m-tabs-min-height: var(--m-control-height-large);
 }
 
 .m-tabs__bar {
@@ -8,13 +26,25 @@
     gap: var(--m-space-2);
 }
 
+.m-tabs--centered .m-tabs__bar {
+    justify-content: center;
+}
+
+.m-tabs--centered .m-tabs__scroller {
+    flex: 0 1 auto;
+}
+
+.m-tabs--centered .m-tabs__extra {
+    margin-left: 0;
+}
+
 .m-tabs__scroller {
     flex: 1;
     min-width: 0;
 }
 
 .m-tabs__list {
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
     display: flex;
     gap: var(--m-space-2);
     min-width: max-content;
@@ -40,7 +70,9 @@
     color: var(--m-color-text-muted);
     cursor: pointer;
     font-family: var(--m-font-sans);
-    padding: var(--m-space-3) var(--m-space-2);
+    font-size: var(--m-tabs-font);
+    min-height: var(--m-tabs-min-height);
+    padding: var(--m-tabs-pad-y) var(--m-tabs-pad-x);
     transition:
         color var(--m-motion-fast) var(--m-motion-ease),
         border-color var(--m-motion-fast) var(--m-motion-ease),
@@ -54,7 +86,7 @@
 .m-tabs__tab--active {
     border-color: var(--m-color-primary);
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-tabs--card .m-tabs__tab {
@@ -75,8 +107,9 @@
 }
 
 .m-tabs__tab:disabled {
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-tabs__tab:focus-visible {
@@ -94,6 +127,7 @@
     cursor: pointer;
     font: inherit;
     line-height: 1;
+    min-height: var(--m-tabs-min-height);
     padding: var(--m-space-1) var(--m-space-2);
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),

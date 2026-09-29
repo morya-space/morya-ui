@@ -32,6 +32,8 @@ import { MStepper } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `number` | `0` | Current step index (0-based). |
 | `steps` | `{ label: string; description?: string; disabled?: boolean; status?: 'wait' \| 'process' \| 'finish' \| 'error' }[]` | — | Step list. |
+| `status` | `'wait' \| 'process' \| 'finish' \| 'error'` | `'process'` | Status for the active step (per-step `status` wins). |
+| `size` | `'small' \| 'medium'` | `'medium'` | Marker and typography density. |
 | `linear` | `boolean` | `false` | Only the current and previous steps can be selected. |
 | `vertical` | `boolean` | `false` | Vertical layout. |
 | `orientation` | `'horizontal' \| 'vertical'` | — | Alias of `vertical`. |

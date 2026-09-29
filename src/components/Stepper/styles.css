@@ -1,12 +1,23 @@
-/* —— Navigation: Stepper —— */
+/* —�?Navigation: Stepper —�?*/
 .m-stepper {
     --m-stepper-marker-size: 1.5rem;
     --m-stepper-connector-width: var(--m-space-5);
+    --m-stepper-font: var(--m-control-font-medium);
+    --m-stepper-pad-y: var(--m-space-2);
+    --m-stepper-pad-x: var(--m-space-3);
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     gap: var(--m-space-2);
     position: relative;
+}
+
+.m-stepper--small {
+    --m-stepper-marker-size: 1.25rem;
+    --m-stepper-connector-width: var(--m-space-4);
+    --m-stepper-font: var(--m-control-font-small);
+    --m-stepper-pad-y: var(--m-space-1);
+    --m-stepper-pad-x: var(--m-space-2);
 }
 
 .m-stepper__step:not(:last-child)::after {
@@ -26,12 +37,18 @@
     cursor: pointer;
     display: inline-flex;
     font-family: var(--m-font-sans);
+    font-size: var(--m-stepper-font);
     gap: var(--m-space-2);
-    padding: var(--m-space-2) var(--m-space-3);
+    min-height: var(--m-control-height-medium);
+    padding: var(--m-stepper-pad-y) var(--m-stepper-pad-x);
     transition:
         color var(--m-motion-fast) var(--m-motion-ease),
         background-color var(--m-motion-fast) var(--m-motion-ease),
         opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-stepper--small .m-stepper__step {
+    min-height: var(--m-control-height-small);
 }
 
 .m-stepper__step:hover:not(:disabled):not(.m-stepper__step--disabled):not(
@@ -43,7 +60,7 @@
 
 .m-stepper__step--active {
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-stepper__step--completed {
@@ -131,5 +148,5 @@
 
 .m-stepper__step--process {
     color: var(--m-color-primary);
-    font-weight: 600;
+    font-weight: 500;
 }

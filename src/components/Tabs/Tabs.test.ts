@@ -48,4 +48,19 @@ describe('muTabs', () => {
     expect(panel.attributes('aria-labelledby')).toBe(`m-tab-${tabs[0]!.value}`)
     expect(panel.attributes('id')).toBe(tab.attributes('aria-controls'))
   })
+
+  it('supports card type, size, and centered', () => {
+    const wrapper = mount(MTabs, {
+      props: {
+        tabs,
+        modelValue: 'design',
+        type: 'card',
+        size: 'small',
+        centered: true,
+      },
+    })
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(['m-tabs--card', 'm-tabs--small', 'm-tabs--centered']),
+    )
+  })
 })

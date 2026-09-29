@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   trigger: 'click',
   showDelay: 0,
   hideDelay: 200,
+  disabled: false,
   teleport: true,
 })
 const emit = defineEmits<{
@@ -75,6 +76,7 @@ function updateMenuPosition() {
 }
 
 function setOpen(open: boolean) {
+  if (props.disabled && open) return
   emit('update:modelValue', open)
   if (open) {
     initHighlight()
@@ -86,6 +88,7 @@ function setOpen(open: boolean) {
 }
 
 function toggle() {
+  if (props.disabled) return
   setOpen(!props.modelValue)
 }
 
@@ -108,7 +111,7 @@ function clearHoverTimers() {
 }
 
 function onTriggerEnter() {
-  if (props.trigger !== 'hover') return
+  if (props.disabled || props.trigger !== 'hover') return
   clearHoverTimers()
   showTimer = setTimeout(setOpen, props.showDelay, true)
 }
@@ -162,11 +165,19 @@ function onKeydown(event: KeyboardEvent) {
 }
 
 function onTriggerKeydown(event: KeyboardEvent) {
+  if (props.disabled) return
   if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
     event.preventDefault()
     if (!props.modelValue) setOpen(true)
   }
 }
+
+watch(
+  () => props.disabled,
+  (disabled) => {
+    if (disabled && props.modelValue) setOpen(false)
+  },
+)
 
 function onDocumentClick(event: MouseEvent) {
   if (
@@ -200,13 +211,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="root" v-bind="rootAttrs" class="m-dropdown">
+  <div ref="root" v-bind="rootAttrs" class="m-dropdown" :class="{ 'm-dropdown--disabled': disabled }">
     <span
       ref="trigger"
       class="m-dropdown__trigger"
       role="button"
-      tabindex="0"
+      :tabindex="disabled ? -1 : 0"
       :aria-expanded="modelValue"
+      :aria-disabled="disabled || undefined"
       aria-haspopup="menu"
       @click="props.trigger === 'click' && toggle()"
       @mouseenter="onTriggerEnter"

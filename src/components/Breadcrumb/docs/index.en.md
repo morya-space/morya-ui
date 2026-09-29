@@ -6,7 +6,7 @@ description: Shows the current page position in a hierarchy.
 
 # Breadcrumb
 
-Breadcrumb navigation. Items with `to` render as links; otherwise as text.
+Breadcrumb navigation. Items with `to` / `href` render as links; otherwise as text.
 
 ## Import
 
@@ -30,8 +30,8 @@ import { MBreadcrumb } from 'morya-ui'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `model` | `{ label: string; to?: string; disabled?: boolean }[]` | — | Path items. |
-| `home` | `{ label?: string; to?: string }` | — | Home item; default label is `Home`. |
+| `model` | `{ label: string; to?: string; href?: string; disabled?: boolean }[]` | — | Path items; `href` is an alias of `to`. |
+| `home` | `{ label?: string; to?: string; href?: string }` | — | Home item; default label is `Home`. |
 | `separator` | `string` | `'/'` | Separator text. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
@@ -41,6 +41,7 @@ import { MBreadcrumb } from 'morya-ui'
 | Slot | Description |
 | --- | --- |
 | `separator` | Custom separator. |
+| `item` | Custom item content. |
 
 ## Events
 

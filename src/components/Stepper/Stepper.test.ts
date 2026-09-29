@@ -42,4 +42,17 @@ describe('muStepper', () => {
     expect(wrapper.get('.m-stepper__description').text()).toBe('Start')
     expect(wrapper.find('.m-stepper__step--error').exists()).toBe(true)
   })
+
+  it('applies root status and size', () => {
+    const wrapper = mount(MStepper, {
+      props: {
+        steps: [{ label: 'A' }, { label: 'B' }],
+        modelValue: 0,
+        status: 'error',
+        size: 'small',
+      },
+    })
+    expect(wrapper.get('.m-stepper').classes()).toContain('m-stepper--small')
+    expect(wrapper.findAll('.m-stepper__step')[0]!.classes()).toContain('m-stepper__step--error')
+  })
 })

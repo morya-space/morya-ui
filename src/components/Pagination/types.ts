@@ -1,4 +1,8 @@
 import type { RootPassThrough } from '../../shared/passThrough'
+import type { MSize } from '../../shared/types'
+
+export type PaginationSize = MSize
+
 export interface PaginationProps {
   pt?: RootPassThrough
   /** Current page (1-based). Use with `v-model`. */
@@ -9,8 +13,12 @@ export interface PaginationProps {
   pageSize?: number
   pageLinkSize?: number
   disabled?: boolean
+  /** Control size; uses `--m-control-height-*`. */
+  size?: PaginationSize
   /** Show a page-size `<select>`. */
   showSizePicker?: boolean
+  /** Alias of `showSizePicker` (`showSizeChanger`). Either flag enables the picker. */
+  showSizeChanger?: boolean
   /** Options for `showSizePicker`. */
   pageSizes?: number[]
   /** Jump to a page with a page select. */
