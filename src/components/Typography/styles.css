@@ -142,3 +142,71 @@
 .m-typography-link.m-typography--disabled {
   color: var(--m-color-text-muted);
 }
+
+/* —— Content wrapper: ellipsis + inline actions —— */
+.m-typography__content {
+  display: inline;
+}
+
+.m-typography__content.m-typography--ellipsis {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.m-typography__content.m-typography--ellipsis-multiline {
+    /* Row count is overridden inline by the component (`--m-typography-rows`). */
+    --m-typography-rows: 1;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--m-typography-rows);
+    display: -webkit-box;
+    white-space: normal;
+}
+
+.m-typography__content.m-typography--ellipsis-expanded {
+    -webkit-line-clamp: unset;
+    display: block;
+    overflow: visible;
+}
+
+.m-typography__ellipsis-suffix {
+  color: var(--m-color-text-muted);
+}
+
+.m-typography__action {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: var(--m-color-text-muted);
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+  margin-inline-start: var(--m-space-1);
+  padding: 0;
+  vertical-align: baseline;
+  transition: color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-typography__action:hover {
+  color: var(--m-color-text);
+}
+
+.m-typography__action:focus-visible {
+  border-radius: var(--m-radius-sm);
+  outline: 2px solid var(--m-color-focus-ring);
+  outline-offset: 1px;
+}
+
+.m-typography__expand {
+  color: var(--m-color-primary);
+}
+
+.m-typography__expand:hover {
+  color: var(--m-color-primary-hover);
+}
+
+.m-typography__editor {
+  margin-block: calc(-1 * var(--m-space-1));
+  width: 100%;
+}

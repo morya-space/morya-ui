@@ -3,6 +3,7 @@ import type { TitleProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { typographyDecorationClass } from './decoration'
+import MTypographyContent from './TypographyContent.vue'
 
 defineOptions({ inheritAttrs: false, name: 'MTitle' })
 
@@ -36,6 +37,8 @@ const rootClass = computed(() => [
     v-bind="rootAttrs"
     :class="rootClass"
   >
-    <slot />
+    <MTypographyContent :decorations="props">
+      <slot />
+    </MTypographyContent>
   </component>
 </template>

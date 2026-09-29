@@ -3,6 +3,7 @@ import type { TextProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { typographyDecorationClass } from './decoration'
+import MTypographyContent from './TypographyContent.vue'
 
 defineOptions({ inheritAttrs: false, name: 'MText' })
 
@@ -32,6 +33,8 @@ const rootClass = computed(() => [
     v-bind="rootAttrs"
     :class="rootClass"
   >
-    <slot />
+    <MTypographyContent :decorations="props" :disabled="props.disabled">
+      <slot />
+    </MTypographyContent>
   </span>
 </template>

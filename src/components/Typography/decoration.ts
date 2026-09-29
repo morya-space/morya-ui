@@ -1,6 +1,12 @@
 import type { TypographyDecorations, TypographyType } from './types'
 
-/** Shared BEM modifiers for Title / Text / Paragraph decorations. */
+/**
+ * Shared BEM modifiers for Title / Text / Paragraph decorations.
+ *
+ * `ellipsis` is intentionally not part of this map: clamping is applied to the
+ * inner content element by `TypographyContent` so multi-line ellipsis and the
+ * trailing actions are not clipped by the root box.
+ */
 export function typographyDecorationClass(
   props: TypographyDecorations & { disabled?: boolean },
 ): Record<string, boolean> {
@@ -15,7 +21,6 @@ export function typographyDecorationClass(
     'm-typography--underline': Boolean(props.underline),
     'm-typography--strong': Boolean(props.strong),
     'm-typography--italic': Boolean(props.italic),
-    'm-typography--ellipsis': Boolean(props.ellipsis),
     'm-typography--disabled': Boolean(props.disabled),
   }
 }

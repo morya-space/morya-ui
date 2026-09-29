@@ -3,6 +3,7 @@ import type { LinkProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { typographyTypeClass } from './decoration'
+import MTypographyContent from './TypographyContent.vue'
 
 defineOptions({ inheritAttrs: false, name: 'MLink' })
 
@@ -47,6 +48,8 @@ function onClick(event: MouseEvent) {
     :tabindex="disabled ? -1 : undefined"
     @click="onClick"
   >
-    <slot />
+    <MTypographyContent :decorations="{ copyable: props.copyable }" :disabled="props.disabled">
+      <slot />
+    </MTypographyContent>
   </a>
 </template>

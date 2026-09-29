@@ -11,7 +11,13 @@ export type {
   TextProps,
   TitleLevel,
   TitleProps,
+  TypographyCopyable,
+  TypographyCopyableConfig,
   TypographyDecorations,
+  TypographyEditable,
+  TypographyEditableConfig,
+  TypographyEllipsis,
+  TypographyEllipsisConfig,
   TypographyProps,
   TypographyType,
 } from './types'
