@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MTextareaAutosize } from '../../shared/componentDefaults'
 import type { TextareaProps } from './types'
-import { computed, nextTick, onMounted, ref, useAttrs, watch } from 'vue'
+import { computed, inject, nextTick, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import {
   useComponentDefaults,
@@ -10,6 +10,7 @@ import {
 } from '../../shared/config'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { M_FORM_KEY } from '../Form/context'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   readonly: false,
   invalid: false,
   clearable: undefined,
+  allowClear: undefined,
   showCount: undefined,
   fluid: undefined,
   autosize: undefined,
@@ -35,15 +37,26 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const defaults = useComponentDefaults('Textarea')
+const form = inject(M_FORM_KEY, null)
 const locale = useMLocale()
 const textareaElement = ref<HTMLTextAreaElement | null>(null)
 const autoTextareaId = useMId('m-textarea')
 const textareaId = computed(() => props.id ?? autoTextareaId)
-const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
-const sizeClass = useConfiguredSize('Textarea', () => props.size)
+const isInvalid = computed(
+  () => props.invalid || props.status === 'error' || Boolean(props.errorMessage),
+)
+const isWarning = computed(() => props.status === 'warning' && !isInvalid.value)
+const sizeClass = useConfiguredSize('Textarea', () => props.size ?? form?.value.size)
 const resolvedVariant = useConfiguredVariant('Textarea', () => props.variant)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
-const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
+const resolvedClearable = computed(
+  () =>
+    props.clearable
+    ?? props.allowClear
+    ?? (defaults.value.clearable as boolean | undefined)
+    ?? (defaults.value.allowClear as boolean | undefined)
+    ?? false,
+)
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
 
 const resolvedAutosize = computed<MTextareaAutosize | false>(() => {
@@ -82,6 +95,7 @@ const textareaClass = computed(() => [
     'm-textarea--filled': resolvedVariant.value === 'filled',
     'm-textarea--fluid': resolvedFluid.value,
     'm-textarea--invalid': isInvalid.value,
+    'm-textarea--warning': isWarning.value,
     'm-textarea--auto-resize': isAutosize.value,
   },
 ])

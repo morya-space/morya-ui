@@ -147,6 +147,22 @@
     border-color: var(--m-color-danger);
 }
 
+.m-select--warning {
+    border-color: var(--m-color-warning);
+}
+
+.m-select--invalid:focus-visible,
+.m-select--invalid.m-select--open {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
+}
+
+.m-select--warning:focus-visible,
+.m-select--warning.m-select--open {
+    border-color: var(--m-color-warning);
+    box-shadow: var(--m-focus-shadow-warning);
+}
+
 .m-select__option--create {
     color: var(--m-color-primary);
     font-style: italic;

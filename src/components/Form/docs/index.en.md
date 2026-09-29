@@ -49,15 +49,18 @@ import { MForm, MFormItem } from 'morya-ui'
 | `labelWidth` | `string \| number` | — | Left label width; numbers are px |
 | `inline` | `boolean` | `false` | Place items in a wrapping row |
 | `requireMark` | `boolean` | `true` | Required asterisk (`required` or `rules.required`) |
+| `requiredMark` | `boolean` | — | Alias of `requireMark`  |
 | `disabled` | `boolean` | `false` | Disabled state |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | Inherited by nested controls that omit their own `size` |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| array` | `['submit']` | Default timing; rules without `trigger` inherit this |
+| `scrollToFirstError` | `boolean \| ScrollIntoViewOptions` | `false` | After a failed validate, scroll to the first error field |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 ## Props — FormItem
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `string` | — | Field name (registered on Form; matches `model` / `rules`) |
+| `name` | `string` | — | Field name (registered on Form; matches `model` / `rules`; also sets `data-m-field` for scroll helpers) |
 | `rules` | `FormItemRule \| FormItemRule[]` | — | Item rules, merged after Form `rules[name]` |
 | `validate` | `(trigger?) => string \| boolean \| void \| Promise<…>` | — | Callback validator; return error text or `false` |
 | `error` | `string` | — | Controlled error (wins over internal result) |
@@ -89,7 +92,13 @@ import { MForm, MFormItem } from 'morya-ui'
 | `clearValidate(name?)` | Clears internal errors |
 | `reset()` | Reset the model to the initial snapshot and clear validation |
 | `resetFields(names?)` | Reset the given fields (default: all) to the initial snapshot |
+| `scrollToField(name, options?)` | Scroll to the FormItem with `name`; `options.focus` focuses the first focusable control |
+| `scrollToFirstError(options?)` | Scroll to the first field currently in `errors` (registration order) |
 | `errors` | Read-only; current validation error map (`Record<string, string>`) |
+
+### Scroll helpers after validation
+
+Custom controls should keep a focusable node inside the FormItem slot, or ensure the item has `name` (`data-m-field` on the root). You can also call `scrollToField` / `scrollToFirstError` after `validate()`.
 
 ## Slots
 

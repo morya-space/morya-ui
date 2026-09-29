@@ -1,7 +1,7 @@
 import type { MTextareaAutosize } from '../../shared/componentDefaults'
 import type { MNativeInputProps } from '../../shared/nativeControlProps'
 import type { FieldPassThrough } from '../../shared/passThrough'
-import type { MInputVariant, MSizeInput } from '../../shared/types'
+import type { MFieldStatus, MInputVariant, MSizeInput } from '../../shared/types'
 
 export type { MTextareaAutosize }
 
@@ -11,6 +11,11 @@ export interface TextareaProps extends MNativeInputProps {
   helpText?: string
   /** Marks the field invalid. */
   invalid?: boolean
+  /**
+   * Visual validate status. `error` aligns with `invalid`; `warning` is caution chrome.
+   * Error/`invalid` wins over `warning`.
+   */
+  status?: MFieldStatus
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string
@@ -30,6 +35,8 @@ export interface TextareaProps extends MNativeInputProps {
   disabled?: boolean
   readonly?: boolean
   clearable?: boolean
+  /** Alias of `clearable` . `clearable` wins. */
+  allowClear?: boolean
   maxlength?: number
   showCount?: boolean
   /** Pass-through attrs/classes/styles per DOM part. */

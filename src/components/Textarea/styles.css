@@ -111,6 +111,15 @@
     box-shadow: var(--m-focus-shadow-danger);
 }
 
+.m-textarea--warning {
+    border-color: var(--m-color-warning);
+}
+
+.m-textarea--warning:focus-visible {
+    border-color: var(--m-color-warning);
+    box-shadow: var(--m-focus-shadow-warning);
+}
+
 .m-textarea:focus {
     outline: none;
 }

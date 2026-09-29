@@ -1,4 +1,4 @@
-/* —— Form / FormItem —— */
+/* —�?Form / FormItem —�?*/
 .m-form {
     --m-form-inline-item-min-width: 12rem;
     display: grid;
@@ -67,7 +67,7 @@
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--m-control-height-medium);
 }
 

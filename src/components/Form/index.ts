@@ -12,6 +12,7 @@ export type {
   FormModel,
   FormProps,
   FormRules,
+  FormScrollToFieldOptions,
   FormValidateResult,
   FormValidateTrigger,
 } from './types'

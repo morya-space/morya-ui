@@ -1,6 +1,6 @@
 import type { MNativeInputProps } from '../../shared/nativeControlProps'
 import type { FieldPassThrough, PassThroughPart } from '../../shared/passThrough'
-import type { MInputVariant, MSizeInput } from '../../shared/types'
+import type { MFieldStatus, MInputVariant, MSizeInput } from '../../shared/types'
 
 export type InputPassThrough = FieldPassThrough &
   Partial<Record<'prefix' | 'suffix' | 'help' | 'count', PassThroughPart>>
@@ -11,6 +11,11 @@ export interface InputProps extends MNativeInputProps {
   helpText?: string
   /** Marks the field invalid. */
   invalid?: boolean
+  /**
+   * Visual validate status. `error` aligns with `invalid`; `warning` is caution chrome.
+   * Error/`invalid` wins over `warning`.
+   */
+  status?: MFieldStatus
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string
@@ -24,6 +29,8 @@ export interface InputProps extends MNativeInputProps {
   disabled?: boolean
   readonly?: boolean
   clearable?: boolean
+  /** Alias of `clearable` . `clearable` wins. */
+  allowClear?: boolean
   /** Native maxlength. */
   maxlength?: number
   /** Show character count (with maxlength when set). */

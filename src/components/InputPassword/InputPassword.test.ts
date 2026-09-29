@@ -82,4 +82,14 @@ describe('muInputPassword', () => {
     await peek.vm.$nextTick()
     expect(peek.get('input').attributes('type')).toBe('password')
   })
+
+  it('supports allowClear alias and warning status', async () => {
+    const clearable = mount(MInputPassword, { props: { modelValue: 'secret', allowClear: true } })
+    await clearable.get('.m-password__clear').trigger('click')
+    expect(clearable.emitted('update:modelValue')).toEqual([['']])
+
+    const warning = mount(MInputPassword, { props: { status: 'warning' } })
+    expect(warning.get('.m-password').classes()).toContain('m-password--warning')
+    expect(warning.get('input').attributes('aria-invalid')).toBeUndefined()
+  })
 })

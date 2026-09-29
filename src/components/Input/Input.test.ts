@@ -2,6 +2,9 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
+import { h } from 'vue'
+import MForm from '../Form/Form.vue'
+import MFormItem from '../Form/FormItem.vue'
 import MInput from './Input.vue'
 
 describe('muInput', () => {
@@ -85,5 +88,31 @@ describe('muInput', () => {
     const selectSpy = vi.spyOn(input.element as HTMLInputElement, 'select')
     wrapper.vm.select()
     expect(selectSpy).toHaveBeenCalled()
+  })
+
+  it('supports allowClear alias and warning status', async () => {
+    const clearable = mount(MInput, { props: { modelValue: 'Draft', allowClear: true } })
+    expect(clearable.find('.m-input__clear').exists()).toBe(true)
+    await clearable.get('.m-input__clear').trigger('click')
+    expect(clearable.emitted('update:modelValue')).toEqual([['']])
+
+    const warning = mount(MInput, { props: { status: 'warning' } })
+    expect(warning.get('input').classes()).toContain('m-input--warning')
+    expect(warning.get('input').attributes('aria-invalid')).toBeUndefined()
+
+    const errorStatus = mount(MInput, { props: { status: 'error' } })
+    expect(errorStatus.get('input').classes()).toContain('m-input--invalid')
+    expect(errorStatus.get('input').attributes('aria-invalid')).toBe('true')
+  })
+
+  it('inherits size from Form when local size is omitted', () => {
+    const wrapper = mount(MForm, {
+      props: { size: 'small' },
+      slots: {
+        default: () =>
+          h(MFormItem, { label: '名称' }, { default: () => h(MInput, { modelValue: '' }) }),
+      },
+    })
+    expect(wrapper.get('input').classes()).toContain('m-input--small')
   })
 })

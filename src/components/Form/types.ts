@@ -36,11 +36,20 @@ export interface FormValidateResult {
   errors: Record<string, string>
 }
 
+export type FormScrollToFieldOptions = ScrollIntoViewOptions & {
+  /** Focus the first focusable control inside the field after scrolling. */
+  focus?: boolean
+}
+
 export interface FormInstance {
   validate: (name?: string) => Promise<FormValidateResult>
   clearValidate: (name?: string) => void
   reset: () => void
   resetFields: (names?: string | string[]) => void
+  /** Scroll the named FormItem into view (requires `name` on the item). */
+  scrollToField: (name: string, options?: FormScrollToFieldOptions) => void
+  /** Scroll to the first field currently in `errors`. */
+  scrollToFirstError: (options?: FormScrollToFieldOptions) => void
   errors: Record<string, string>
 }
 
@@ -61,15 +70,25 @@ export interface FormProps {
   inline?: boolean
   /** Show required mark on FormItem with `required` or a required rule. */
   requireMark?: boolean
+  /** Alias of `requireMark` . `requireMark` wins. */
+  requiredMark?: boolean
   /** Disable all nested fields (informational; FormItem forwards via CSS). */
   disabled?: boolean
-  /** Default control size for nested fields. */
+  /**
+   * Default control size inherited by nested fields that omit their own `size`
+   * (Input / Textarea / InputPassword / Select, etc.).
+   */
   size?: MSizeInput
   /**
    * When to run field validation.
    * Also the default `trigger` for rules that omit one.
    */
   validateOn?: FormValidateTrigger | FormValidateTrigger[]
+  /**
+   * After a failed `validate()` / submit validation, scroll to the first error field.
+   * Pass `true` for default `scrollIntoView`, or ScrollIntoView options.
+   */
+  scrollToFirstError?: boolean | FormScrollToFieldOptions
   /** Pass-through attrs/classes/styles for the root `<form>` element. */
   pt?: RootPassThrough
 }

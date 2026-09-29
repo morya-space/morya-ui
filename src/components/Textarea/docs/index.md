@@ -44,19 +44,21 @@ import { MTextarea } from 'morya-ui'
 | `label` | `string` | — | 标签文案。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
+| `status` | `'error' \| 'warning'` | — | 视觉校验态；`error` 等同 invalid，`warning` 为警告描边。 |
+| `errorMessage` | `string` | — | 错误文案；有值时视为 invalid。 |
 | `id` | `string` | — | 原生 id。 |
 | `rows` | `number` | `4` | 可见行数。 |
 | `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | CSS resize；autosize 时强制 `none`。 |
 | `autosize` | `boolean \| { minRows?: number; maxRows?: number }` | `false` | 按内容自动增高，可限制行数。 |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；可继承 Form `size`。 |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | 样式变体。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
+| `allowClear` | `boolean` | — | `clearable` 的别名。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
-| `errorMessage` | `string` | — | 错误文案。 |
 | `placeholder` | `string` | — | 占位符。 |
 | `name` | `string` | — | 原生 name。 |
 | `autocomplete` | `string` | — | 原生 autocomplete。 |

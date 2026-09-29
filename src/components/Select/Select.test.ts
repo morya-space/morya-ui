@@ -297,4 +297,14 @@ describe('muSelect', () => {
     expect(menu.element.firstElementChild?.classList.contains('m-select__header')).toBe(true)
     expect(menu.element.lastElementChild?.classList.contains('m-select__footer')).toBe(true)
   })
+
+  it('maps status to invalid and warning chrome', () => {
+    const warning = mount(MSelect, { props: { options, status: 'warning', teleport: false } })
+    expect(warning.get('[role="combobox"]').classes()).toContain('m-select--warning')
+    expect(warning.get('[role="combobox"]').attributes('aria-invalid')).toBeUndefined()
+
+    const error = mount(MSelect, { props: { options, status: 'error', teleport: false } })
+    expect(error.get('[role="combobox"]').classes()).toContain('m-select--invalid')
+    expect(error.get('[role="combobox"]').attributes('aria-invalid')).toBe('true')
+  })
 })

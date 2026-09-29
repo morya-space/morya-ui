@@ -35,6 +35,12 @@ export type MSizeInput = MSize | 'sm' | 'md' | 'lg'
 
 export type MInputVariant = 'outlined' | 'filled'
 
+/**
+ * Visual validate status for form controls.
+ * Prefer boolean `invalid` for error; use `status="warning"` for caution chrome.
+ */
+export type MFieldStatus = 'error' | 'warning'
+
 export function resolveSizeClass(size?: MSizeInput): 'small' | 'normal' | 'large' {
   if (size === 'sm' || size === 'small') return 'small'
   if (size === 'lg' || size === 'large') return 'large'

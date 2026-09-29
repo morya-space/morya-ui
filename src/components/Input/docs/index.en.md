@@ -96,14 +96,16 @@ Pass-through per DOM part. Common keys: `root`, `input`, `label`, `prefix`, `suf
 | `label` | `string` | — | Label text. |
 | `helpText` | `string` | — | Helper text. |
 | `invalid` | `boolean` | `false` | Validation failed state. |
+| `status` | `'error' \| 'warning'` | — | Visual status; `error` matches invalid, `warning` is caution chrome. Error wins over warning. |
 | `id` | `string` | — | Native id; auto-generated when omitted. |
 | `type` | `'text' \| 'email' \| 'password' \| 'search' \| 'url' \| 'tel'` | `'text'` | Native type. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; medium by default. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; medium by default. Inherits Form `size` when omitted. |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | Style variant. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `clearable` | `boolean` | `false` | Show clear button. |
+| `allowClear` | `boolean` | — | Alias of `clearable` . |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
 | `errorMessage` | `string` | — | Error copy; implies invalid when set. |

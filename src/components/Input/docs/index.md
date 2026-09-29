@@ -96,14 +96,16 @@ import { MInput } from 'morya-ui'
 | `label` | `string` | — | 标签文案。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
+| `status` | `'error' \| 'warning'` | — | 视觉校验态；`error` 等同 invalid，`warning` 为警告描边。与 `invalid` 并存时以错误优先。 |
 | `id` | `string` | — | 原生 id；未传时自动生成。 |
 | `type` | `'text' \| 'email' \| 'password' \| 'search' \| 'url' \| 'tel'` | `'text'` | 原生 type。 |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；默认中等。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；默认中等。可继承外层 Form `size`。 |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | 样式变体。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
+| `allowClear` | `boolean` | — | `clearable` 的别名。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
 | `errorMessage` | `string` | — | 错误文案；有值时视为 invalid。 |

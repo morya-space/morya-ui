@@ -1,7 +1,7 @@
 import type { MNativeComboboxFieldProps } from '../../shared/nativeControlProps'
 import type { MAppendTo } from '../../shared/overlay'
 import type { FieldPassThrough } from '../../shared/passThrough'
-import type { MSizeInput } from '../../shared/types'
+import type { MFieldStatus, MSizeInput } from '../../shared/types'
 import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type SelectValue = string | number
@@ -33,6 +33,11 @@ export interface SelectProps extends MNativeComboboxFieldProps {
   label?: string
   helpText?: string
   invalid?: boolean
+  /**
+   * Visual validate status. `error` aligns with `invalid`; `warning` is caution chrome.
+   * Error/`invalid` wins over `warning`.
+   */
+  status?: MFieldStatus
   /** Error copy under the field; implies invalid when set. */
   errorMessage?: string
   id?: string

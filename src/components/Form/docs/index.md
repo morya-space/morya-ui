@@ -49,17 +49,18 @@ import { MForm, MFormItem } from 'morya-ui'
 | `labelWidth` | `string \| number` | — | 左侧标签宽度；数字视为 px |
 | `inline` | `boolean` | `false` | 表单项横向排列 |
 | `requireMark` | `boolean` | `true` | 必填星号（`required` 或 `rules.required`） |
+| `requiredMark` | `boolean` | — | `requireMark` 的别名 |
 | `disabled` | `boolean` | `false` | 禁用态 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | 未设 `size` 的嵌套录入控件继承此尺寸 |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |
-| `for` | `string` | — | — |
-| `size` | [MSizeInput](/docs/types#MSizeInput) | — | — |
+| `scrollToFirstError` | `boolean \| ScrollIntoViewOptions` | `false` | 校验失败后自动滚到首个错误字段 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## Props — FormItem
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `name` | `string` | — | 字段名（注册到 Form，对应 `model` / `rules`） |
+| `name` | `string` | — | 字段名（注册到 Form，对应 `model` / `rules`；亦写入 `data-m-field` 供滚动定位） |
 | `rules` | `FormItemRule \| FormItemRule[]` | — | 字段级规则，排在 Form `rules[name]` 之后 |
 | `validate` | `(trigger?) => string \| boolean \| void \| Promise<…>` | — | 回调校验；返回错误文案或 `false` |
 | `error` | `string` | — | 受控错误（优先于内部结果） |
@@ -91,7 +92,13 @@ import { MForm, MFormItem } from 'morya-ui'
 | `clearValidate(name?)` | 清除内部错误 |
 | `reset()` | 重置 model 为初始快照并清除校验 |
 | `resetFields(names?)` | 将指定字段（默认全部）重置为初始快照 |
+| `scrollToField(name, options?)` | 滚动到带 `name` 的 FormItem；`options.focus` 可聚焦首个可聚焦控件 |
+| `scrollToFirstError(options?)` | 按注册顺序滚到当前 `errors` 中的第一个字段 |
 | `errors` | 只读；当前校验错误表（`Record<string, string>`） |
+
+### 校验失败滚动
+
+自定义控件需把可聚焦节点放在 FormItem 插槽内，或保证 FormItem 带 `name`（根节点有 `data-m-field`）。也可在 `validate()` 后自行调用 `scrollToField` / `scrollToFirstError`。
 
 ## Slots
 

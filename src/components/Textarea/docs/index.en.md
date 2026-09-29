@@ -44,19 +44,21 @@ import { MTextarea } from 'morya-ui'
 | `label` | `string` | — | Label text. |
 | `helpText` | `string` | — | Helper text. |
 | `invalid` | `boolean` | `false` | Invalid (validation failed) state. |
+| `status` | `'error' \| 'warning'` | — | Visual status; `error` matches invalid, `warning` is caution chrome. |
 | `id` | `string` | — | Native id. |
 | `rows` | `number` | `4` | Visible rows. |
 | `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | CSS resize; forced to `none` when autosize is on. |
 | `autosize` | `boolean \| { minRows?: number; maxRows?: number }` | `false` | Auto-grow with content; optional row clamp. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; inherits Form `size` when omitted. |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | Visual variant. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `clearable` | `boolean` | `false` | Show a clear button. |
+| `allowClear` | `boolean` | — | Alias of `clearable` . |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
-| `errorMessage` | `string` | — | Error copy. |
+| `errorMessage` | `string` | — | Error copy; implies invalid when set. |
 | `placeholder` | `string` | — | Placeholder. |
 | `name` | `string` | — | Native name. |
 | `autocomplete` | `string` | — | Native autocomplete. |

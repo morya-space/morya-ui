@@ -1,4 +1,4 @@
-/* ‚Äî‚Äî Form: InputPassword ‚Äî‚Äî */
+/* óù?Form: InputPassword óù?*/
 .m-password-field {
     display: grid;
     gap: var(--m-space-2);
@@ -12,7 +12,7 @@
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .m-password {
@@ -58,6 +58,10 @@
     border-color: var(--m-color-danger);
 }
 
+.m-password--warning {
+    border-color: var(--m-color-warning);
+}
+
 .m-password:hover:not(.m-password--disabled):not(:focus-within) {
     border-color: var(--m-color-primary-hover);
 }
@@ -72,9 +76,16 @@
     box-shadow: var(--m-focus-shadow-danger);
 }
 
+.m-password--warning:focus-within {
+    border-color: var(--m-color-warning);
+    box-shadow: var(--m-focus-shadow-warning);
+}
+
 .m-password--disabled {
+    background-color: var(--m-color-bg-disabled);
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    opacity: 1;
 }
 
 .m-password__input {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MFormFieldRegistration } from './context'
-import type { FormProps, FormValidateTrigger } from './types'
+import type { FormProps, FormScrollToFieldOptions, FormValidateTrigger } from './types'
 import { computed, provide, reactive, ref, toRaw, useAttrs, watch } from 'vue'
 import { resolveSizeClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
@@ -16,8 +16,10 @@ const props = withDefaults(defineProps<FormProps>(), {
   labelPlacement: undefined,
   labelAlign: 'left',
   inline: false,
-  requireMark: true,
+  requireMark: undefined,
+  requiredMark: undefined,
   disabled: false,
+  scrollToFirstError: false,
   validateOn: () => ['submit'] as FormValidateTrigger[],
 })
 
@@ -28,6 +30,7 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
+const formRoot = ref<HTMLFormElement | null>(null)
 const fields = new Map<string, MFormFieldRegistration>()
 const internalErrors = reactive<Record<string, string>>({})
 const initialSnapshot = ref<Record<string, unknown> | undefined>(undefined)
@@ -51,11 +54,55 @@ const validateOn = computed<FormValidateTrigger[]>(() => {
   return Array.isArray(value) ? value : [value]
 })
 const resolvedLabelPosition = computed(() => props.labelPosition ?? props.labelPlacement ?? 'top')
+const resolvedRequireMark = computed(() => {
+  if (props.requireMark !== undefined) return props.requireMark
+  if (props.requiredMark !== undefined) return props.requiredMark
+  return true
+})
 const sizeClass = computed(() => (props.size ? resolveSizeClass(props.size) : undefined))
 
 function setError(name: string, message?: string) {
   if (message) internalErrors[name] = message
   else delete internalErrors[name]
+}
+
+function resolveScrollOptions(
+  options?: boolean | FormScrollToFieldOptions,
+): FormScrollToFieldOptions | undefined {
+  if (options === false || options == null) return undefined
+  if (options === true) return { behavior: 'smooth', block: 'center' }
+  return { behavior: 'smooth', block: 'center', ...options }
+}
+
+function scrollToField(name: string, options?: FormScrollToFieldOptions) {
+  const root = formRoot.value
+  if (!root || !name) return
+  const selector = `[data-m-field="${CSS.escape(name)}"]`
+  const el = root.querySelector<HTMLElement>(selector)
+  if (!el) return
+  const scrollOptions = resolveScrollOptions(options ?? true)
+  if (scrollOptions) {
+    const { focus: _focus, ...intoView } = scrollOptions
+    el.scrollIntoView(intoView)
+  }
+  if (options?.focus) {
+    const focusable = el.querySelector<HTMLElement>(
+      'input:not([type="hidden"]), textarea, select, button, [tabindex]:not([tabindex="-1"])',
+    )
+    focusable?.focus({ preventScroll: true })
+  }
+}
+
+function scrollToFirstError(options?: FormScrollToFieldOptions) {
+  const order = [...fields.keys()]
+  const first = order.find((name) => Boolean(internalErrors[name]))
+    ?? Object.keys(internalErrors)[0]
+  if (first) scrollToField(first, options)
+}
+
+function maybeScrollAfterValidate(valid: boolean) {
+  if (valid || !props.scrollToFirstError) return
+  scrollToFirstError(resolveScrollOptions(props.scrollToFirstError))
 }
 
 async function runField(name: string, trigger: FormValidateTrigger | 'all' = 'all'): Promise<boolean> {
@@ -72,6 +119,7 @@ async function validate(name?: string) {
     const valid = await runField(name, 'all')
     const errors = { ...internalErrors }
     emit('validate', { valid, errors })
+    maybeScrollAfterValidate(valid)
     return { valid, errors }
   }
   const names = [...fields.keys()]
@@ -79,6 +127,7 @@ async function validate(name?: string) {
   const valid = results.every(Boolean)
   const errors = { ...internalErrors }
   emit('validate', { valid, errors })
+  maybeScrollAfterValidate(valid)
   return { valid, errors }
 }
 
@@ -142,7 +191,7 @@ const context = computed(() => ({
   labelPosition: resolvedLabelPosition.value,
   labelAlign: props.labelAlign,
   labelWidth: props.labelWidth,
-  requireMark: props.requireMark,
+  requireMark: resolvedRequireMark.value,
   disabled: props.disabled,
   size: props.size,
   validateOn: validateOn.value,
@@ -165,11 +214,20 @@ async function onSubmit() {
   emit('submit', { valid: true })
 }
 
-defineExpose({ validate, clearValidate, reset, resetFields, errors: internalErrors })
+defineExpose({
+  validate,
+  clearValidate,
+  reset,
+  resetFields,
+  scrollToField,
+  scrollToFirstError,
+  errors: internalErrors,
+})
 </script>
 
 <template>
   <form
+    ref="formRoot"
     v-bind="rootAttrs"
     class="m-form"
     :class="[

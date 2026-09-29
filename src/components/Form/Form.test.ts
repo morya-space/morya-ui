@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import MForm from './Form.vue'
 import MFormItem from './FormItem.vue'
@@ -233,5 +233,43 @@ describe('muForm / MFormItem', () => {
     expect(wrapper.get('form').attributes('aria-disabled')).toBe('true')
     expect(wrapper.get('fieldset').attributes('disabled')).toBeDefined()
     expect(wrapper.get('.m-form').classes()).toContain('m-form--size-small')
+  })
+
+  it('accepts requiredMark as an alias of requireMark', () => {
+    const wrapper = mount(MForm, {
+      props: { requiredMark: false },
+      slots: {
+        default: () =>
+          h(MFormItem, { label: '名称', required: true }, { default: () => h('input') }),
+      },
+    })
+    expect(wrapper.find('.m-form-item__required').exists()).toBe(false)
+  })
+
+  it('exposes scrollToField using data-m-field on FormItem', async () => {
+    const scrollIntoView = vi.fn()
+    const Host = defineComponent({
+      setup() {
+        return () =>
+          h(
+            MForm,
+            { model: { bio: '' }, rules: { bio: { required: true, message: '必填' } } },
+            {
+              default: () =>
+                h(MFormItem, { label: '简介', name: 'bio' }, { default: () => h('input') }),
+            },
+          )
+      },
+    })
+    const wrapper = mount(Host, { attachTo: document.body })
+    const item = wrapper.get('[data-m-field="bio"]').element as HTMLElement
+    item.scrollIntoView = scrollIntoView
+    const form = wrapper.getComponent(MForm)
+    form.vm.scrollToField('bio')
+    expect(scrollIntoView).toHaveBeenCalled()
+    await form.vm.validate()
+    form.vm.scrollToFirstError()
+    expect(scrollIntoView).toHaveBeenCalledTimes(2)
+    wrapper.unmount()
   })
 })

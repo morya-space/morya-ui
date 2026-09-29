@@ -3,7 +3,7 @@ import type {Component} from 'vue';
 import type { MShowPasswordOn } from '../../shared/componentDefaults'
 import type { IconName } from '../Icon/types'
 import type { InputPasswordProps } from './types'
-import {  computed, onBeforeUnmount, ref, useAttrs } from 'vue'
+import {  computed, inject, onBeforeUnmount, ref, useAttrs } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import {
   useComponentDefaults,
@@ -13,6 +13,7 @@ import {
 import { resolveIconSizeFromClass } from '../../shared/types'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { M_FORM_KEY } from '../Form/context'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<InputPasswordProps>(), {
   showIcon: 'eye',
   hideIcon: 'eye-off',
   clearable: undefined,
+  allowClear: undefined,
   showCount: undefined,
   fluid: undefined,
 })
@@ -40,16 +42,26 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const defaults = useComponentDefaults('InputPassword')
+const form = inject(M_FORM_KEY, null)
 const locale = useMLocale()
 const unmasked = ref(false)
 const inputElement = ref<HTMLInputElement | null>(null)
 const autoInputId = useMId('m-password')
 const inputId = computed(() => props.id ?? autoInputId)
-const sizeClass = useConfiguredSize('InputPassword', () => props.size)
+const isInvalid = computed(() => props.invalid || props.status === 'error')
+const isWarning = computed(() => props.status === 'warning' && !isInvalid.value)
+const sizeClass = useConfiguredSize('InputPassword', () => props.size ?? form?.value.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const resolvedVariant = useConfiguredVariant('InputPassword', () => props.variant)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
-const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
+const resolvedClearable = computed(
+  () =>
+    props.clearable
+    ?? props.allowClear
+    ?? (defaults.value.clearable as boolean | undefined)
+    ?? (defaults.value.allowClear as boolean | undefined)
+    ?? false,
+)
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
 const resolvedShowPasswordOn = computed<MShowPasswordOn>(
   () => props.showPasswordOn ?? (defaults.value.showPasswordOn as MShowPasswordOn | undefined) ?? 'click',
@@ -109,7 +121,8 @@ const rootClass = computed(() => [
   {
     'm-password--filled': resolvedVariant.value === 'filled',
     'm-password--fluid': resolvedFluid.value,
-    'm-password--invalid': props.invalid,
+    'm-password--invalid': isInvalid.value,
+    'm-password--warning': isWarning.value,
     'm-password--disabled': props.disabled,
     'm-password--toggle': props.toggleMask,
     'm-password--clearable': showClear.value,
@@ -218,7 +231,7 @@ defineExpose({ focus, blur, select })
         :name="name"
         :autocomplete="autocomplete ?? 'current-password'"
         :autofocus="autofocus || undefined"
-        :aria-invalid="invalid || undefined"
+        :aria-invalid="isInvalid || undefined"
         :aria-describedby="describedBy"
         @input="updateValue"
         @focus="emit('focus', $event)"

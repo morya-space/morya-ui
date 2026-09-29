@@ -110,10 +110,11 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | `label` | `string` | — | Field label. |
 | `helpText` | `string` | — | Help text. |
 | `invalid` | `boolean` | `false` | Invalid state. |
+| `status` | `'error' \| 'warning'` | — | Visual status; `error` matches invalid, `warning` is caution chrome. |
 | `placeholder` | `string` | — | Placeholder text. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `required` | `boolean` | `false` | Form required hint. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; inherits Form `size` when omitted. |
 | `fluid` | `boolean` | `false` | Stretch to the container width. |
 | `multiple` | `boolean` | `false` | Allow multiple values. |
 | `tag` | `boolean` | `false` | Create an option from the filter query (requires `filter`). |

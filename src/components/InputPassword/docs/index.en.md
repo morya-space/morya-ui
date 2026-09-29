@@ -54,13 +54,15 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 | `showPasswordOn` | `'click' \| 'mousedown'` | `'click'` | How to reveal; `mousedown` is hold-to-peek. |
 | `showIcon` | `IconName \| Component` | `'eye'` | Icon while masked (click to reveal). |
 | `hideIcon` | `IconName \| Component` | `'eye-off'` | Icon while visible (click to hide). |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; inherits Form `size` when omitted. |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | Visual variant. |
 | `fluid` | `boolean` | `false` | Full width. |
 | `invalid` | `boolean` | `false` | Validation failed state. |
+| `status` | `'error' \| 'warning'` | — | Visual status; `error` matches invalid, `warning` is caution chrome. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `clearable` | `boolean` | `false` | Show a clear button. |
+| `allowClear` | `boolean` | — | Alias of `clearable` . |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |

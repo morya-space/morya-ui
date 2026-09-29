@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { InputProps } from './types'
-import { computed, ref, useAttrs, useSlots } from 'vue'
+import { computed, inject, ref, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useConfiguredVariant } from '../../shared/config'
 import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
+import { M_FORM_KEY } from '../Form/context'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -15,6 +16,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   readonly: false,
   invalid: false,
   clearable: undefined,
+  allowClear: undefined,
   showCount: undefined,
   fluid: undefined,
 })
@@ -29,14 +31,25 @@ const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const slots = useSlots()
 const defaults = useComponentDefaults('Input')
+const form = inject(M_FORM_KEY, null)
 const locale = useMLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
 const autoInputId = useMId('m-input')
 const inputId = computed(() => props.id ?? autoInputId)
-const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
-const sizeClass = useConfiguredSize('Input', () => props.size)
+const isInvalid = computed(
+  () => props.invalid || props.status === 'error' || Boolean(props.errorMessage),
+)
+const isWarning = computed(() => props.status === 'warning' && !isInvalid.value)
+const sizeClass = useConfiguredSize('Input', () => props.size ?? form?.value.size)
 const resolvedVariant = useConfiguredVariant('Input', () => props.variant)
-const resolvedClearable = computed(() => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false)
+const resolvedClearable = computed(
+  () =>
+    props.clearable
+    ?? props.allowClear
+    ?? (defaults.value.clearable as boolean | undefined)
+    ?? (defaults.value.allowClear as boolean | undefined)
+    ?? false,
+)
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
 const charCount = computed(() => props.modelValue.length)
@@ -61,6 +74,7 @@ const inputClass = computed(() => [
     'm-input--filled': resolvedVariant.value === 'filled',
     'm-input--fluid': resolvedFluid.value,
     'm-input--invalid': isInvalid.value,
+    'm-input--warning': isWarning.value,
   },
 ])
 

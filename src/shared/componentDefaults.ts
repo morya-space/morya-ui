@@ -72,6 +72,8 @@ export interface MComponentDefaultMap {
   TreeSelect?: { size?: MSizeInput; clearable?: boolean; transition?: MTransitionDefault }
   SplitButton?: { size?: MSizeInput; transition?: MTransitionDefault }
   SelectButton?: { size?: MSizeInput }
+  Segmented?: { size?: MSizeInput }
+  Mentions?: { size?: MSizeInput; rows?: number; fluid?: boolean; variant?: MInputVariant }
   ToggleButton?: { size?: MSizeInput }
   Dialog?: { transition?: MTransitionDefault }
   ConfirmDialog?: { transition?: MTransitionDefault }

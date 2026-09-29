@@ -125,6 +125,7 @@ function onInput() {
   <div
     v-bind="rootAttrs"
     :class="rootClass"
+    :data-m-field="fieldName || undefined"
     @focusout="onFocusOut"
     @change="onChange"
     @input="onInput"

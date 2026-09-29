@@ -2,7 +2,7 @@ import type { Component } from 'vue'
 import type { MShowPasswordOn } from '../../shared/componentDefaults'
 import type { MNativeInputProps } from '../../shared/nativeControlProps'
 import type { FieldPassThrough } from '../../shared/passThrough'
-import type { MInputVariant, MSizeInput } from '../../shared/types'
+import type { MFieldStatus, MInputVariant, MSizeInput } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
 export type { MShowPasswordOn }
@@ -13,6 +13,11 @@ export interface InputPasswordProps extends MNativeInputProps {
   disabled?: boolean
   readonly?: boolean
   invalid?: boolean
+  /**
+   * Visual validate status. `error` aligns with `invalid`; `warning` is caution chrome.
+   * Error/`invalid` wins over `warning`.
+   */
+  status?: MFieldStatus
   fluid?: boolean
   size?: MSizeInput
   variant?: MInputVariant
@@ -26,6 +31,8 @@ export interface InputPasswordProps extends MNativeInputProps {
    */
   showPasswordOn?: MShowPasswordOn
   clearable?: boolean
+  /** Alias of `clearable` . `clearable` wins. */
+  allowClear?: boolean
   maxlength?: number
   showCount?: boolean
   /** Icon when the value is masked (click to reveal). Built-in `MIcon` name or a Vue component. */

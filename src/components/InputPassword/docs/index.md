@@ -54,13 +54,15 @@ import { MInputPassword } from 'morya-ui'
 | `showPasswordOn` | `'click' \| 'mousedown'` | `'click'` | 显示明文的方式；`mousedown` 为按住预览。 |
 | `showIcon` | `IconName \| Component` | `'eye'` | 密文态图标（点击显示）。 |
 | `hideIcon` | `IconName \| Component` | `'eye-off'` | 明文态图标（点击隐藏）。 |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；可继承 Form `size`。 |
 | `variant` | `'outlined' \| 'filled'` | `'outlined'` | 样式变体。 |
 | `fluid` | `boolean` | `false` | 宽度撑满。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
+| `status` | `'error' \| 'warning'` | — | 视觉校验态；`error` 等同 invalid，`warning` 为警告描边。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
+| `allowClear` | `boolean` | — | `clearable` 的别名。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
 | `id` | `string` | — | — |

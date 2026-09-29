@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { VirtualScrollerExpose } from '../VirtualScroller/types'
 import type { SelectModelValue, SelectOption, SelectProps, SelectValue } from './types'
-import { computed, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
 import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
@@ -10,6 +10,7 @@ import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
+import { M_FORM_KEY } from '../Form/context'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MVirtualScroller from '../VirtualScroller/VirtualScroller.vue'
@@ -64,6 +65,7 @@ const slots = useSlots()
 const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'control' })
 const defaults = useComponentDefaults('Select')
+const form = inject(M_FORM_KEY, null)
 const config = useMConfig()
 const { transitionName, transitionCss } = useMotionTransition({
   role: 'popup',
@@ -99,10 +101,13 @@ const resolvedShowClear = computed(
     ?? false,
 )
 const resolvedFilter = computed(() => props.filter ?? (defaults.value.filter as boolean | undefined) ?? false)
-const sizeClass = useConfiguredSize('Select', () => props.size)
+const sizeClass = useConfiguredSize('Select', () => props.size ?? form?.value.size)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
-const isInvalid = computed(() => props.invalid || Boolean(props.errorMessage))
+const isInvalid = computed(
+  () => props.invalid || props.status === 'error' || Boolean(props.errorMessage),
+)
+const isWarning = computed(() => props.status === 'warning' && !isInvalid.value)
 const feedbackText = computed(() => props.errorMessage || props.helpText)
 const feedbackIsError = computed(() => Boolean(props.errorMessage) || (isInvalid.value && Boolean(props.helpText)))
 
@@ -394,6 +399,7 @@ onBeforeUnmount(() => {
           `m-select--${sizeClass}`,
           {
             'm-select--invalid': isInvalid,
+            'm-select--warning': isWarning,
             'm-select--open': open,
             'm-select--placeholder': !hasValue,
             'm-select--fluid': resolvedFluid,

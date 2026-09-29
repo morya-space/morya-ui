@@ -57,7 +57,7 @@ import { MSelect } from 'morya-ui'
 
 ## Tag
 
-`tag` + `filter` 允许用当前筛选词创建选项（回车或点击「创建」行）。虚拟列表本批不做。
+`tag` + `filter` 允许用当前筛选词创建选项（回车或点击「创建」行）。大量选项时默认开启虚拟列表（见 `virtual`）。
 
 ```vue preview src="./demos/Tag.vue"
 ```
@@ -110,10 +110,11 @@ import { MSelect } from 'morya-ui'
 | `label` | `string` | — | 字段标签。 |
 | `helpText` | `string` | — | 辅助说明。 |
 | `invalid` | `boolean` | `false` | 校验失败态。 |
+| `status` | `'error' \| 'warning'` | — | 视觉校验态；`error` 等同 invalid，`warning` 为警告描边。 |
 | `placeholder` | `string` | — | 占位文案。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `required` | `boolean` | `false` | 表单必填辅助。 |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；可继承 Form `size`。 |
 | `fluid` | `boolean` | `false` | 宽度撑满容器。 |
 | `multiple` | `boolean` | `false` | 多选。 |
 | `tag` | `boolean` | `false` | 允许用筛选词创建选项（需 `filter`）。 |
