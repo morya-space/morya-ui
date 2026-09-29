@@ -5,6 +5,38 @@
 ### Features
 
 - enhance agent skill management and documentation
+- Add `MAlert` for in-page persistent notices (severity / closable / banner / action)
+- `MDatePicker` expands `type` with `datetime` / `datetimerange` / `time` / `month` / `year`, plus `showSeconds`
+- Add `MDescriptions` / `MDescriptionsItem`
+- Add `MImage` / `MImagePreviewGroup` (click-to-preview)
+- Add `MTypography` (`MTitle` / `MText` / `MParagraph` / `MLink`)
+- Button: `variant="dashed"` / `shape`, outlined secondary default, font-weight 400, disabled gray fill; full width via `fluid`
+- Layout: `Divider` plain/size/orientation, `Flex` `gap` alias, `Splitter` min2, sider collapsed width token default 80px
+- Navigation: Breadcrumb `href`, Pagination `size`/`showSizeChanger`, Stepper `status`/`size`, Tabs `size`/`centered`, Dropdown `disabled`
+- Data display: `MTag` density and `checkable`; `MTable` size cell padding
+- Feedback: Dialog `maskClosable`/`centered`, ProgressBar `exception`/`active`, Loading/ProgressSpinner `tip`
+- Forms: Form `requiredMark` alias / `scrollToField` / `scrollToFirstError` / size inheritance; inputs `allowClear` and `status`; Select `status`; `--m-focus-shadow-warning`
+- Add `MAffix`, `MWatermark`, and `MQRCode` (affix / watermark / QR with status overlay)
+- Add `MSegmented` (`options` / `block` / `shape` / `size`, `radiogroup` keyboard)
+- Add `MMentions` (`prefix` / `split` / suggest-and-insert / `@select`)
+- Add `MCalendar` (`fullscreen` / `showWeek` / `validRange` / `#dateCell` / `#header`)
+- `MTour` keyboard + `gap`; `MMentions` `allowClear` / `loading`; `MWatermark` overlay re-mount; `MQRCode` `#statusRender` slot
+- `MTable` header filter reset/confirm, footer summary docs, virtual scroll constraints
+- Add `MAnchor` / `MAnchorLink`, `MTour` (`v-model:open` / `v-model:current`)
+- Add `MStatistic` / `MStatisticCountdown`
+- Add `MList` / `MListItem` / `MListItemMeta` (`items` + Meta + pagination / grid)
+
+### Changes
+
+- Default theme: primary `#1677FF`, neutral text/borders, medium control height `32px`, control radius `6px`, card radius `8px`, layered shadows, and a stronger focus ring
+- System sans font stack; control labels / table headers / tabs at weight 500 (page titles stay 600); motion ease-out with `0.5rem` travel
+- Disabled states prefer `--m-color-text-disabled` / `--m-color-bg-disabled` over opacity alone for inputs, tabs, and similar controls
+- Pagination default size moves from fixed small to `size="medium"` (overridable via `size`)
+- `MTag` default font-weight 400 and ~8px horizontal padding; border uses real `border` with transparent placeholder
+
+### Docs
+
+- Guide: conventions page (`severity` / `variant` / feedback / layout vocabulary)
 
 ## 0.3.7
 

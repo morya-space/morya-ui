@@ -5,6 +5,38 @@
 ### 新功能
 
 - enhance agent skill management and documentation
+- 新增 `MAlert`：页面内嵌常驻提示（severity / closable / banner / action）
+- `MDatePicker` 扩展 `type`：`datetime` / `datetimerange` / `time` / `month` / `year`，并支持 `showSeconds`
+- 新增 `MList` / `MListItem` / `MListItemMeta`（`items` + Meta + 分页 / grid）
+- 新增 `MDescriptions` / `MDescriptionsItem`
+- 新增 `MImage` / `MImagePreviewGroup`（点击预览）
+- 新增 `MTypography`（`MTitle` / `MText` / `MParagraph` / `MLink`）
+- 按钮补齐 `variant="dashed"` / `shape`、描边默认态、字重 400、disabled 灰底；通栏用 `fluid`
+- 布局：`Divider` plain/size/orientation、`Flex` `gap` 别名、`Splitter` min2、sider 折叠宽 token 默认 80px
+- 导航：Breadcrumb `href`、Pagination `size`/`showSizeChanger`、Stepper `status`/`size`、Tabs `size`/`centered`、Dropdown `disabled`
+- 数据展示：`MTag` 密度与 `checkable`；`MTable` `size` 单元格 padding
+- 反馈：Dialog `maskClosable`/`centered`、ProgressBar `exception`/`active`、Loading/ProgressSpinner `tip`
+- 表单：Form `requiredMark` 别名 / `scrollToField` / `scrollToFirstError` / `size` 继承；输入类 `allowClear` 与 `status`；Select `status`；`--m-focus-shadow-warning`
+- 新增 `MAffix` / `MWatermark` / `MQRCode`（固钉 / 水印 / 二维码与状态遮罩）
+- 新增 `MAnchor` / `MAnchorLink`、`MTour`（`v-model:open` / `v-model:current`）
+- 新增 `MStatistic` / `MStatisticCountdown`
+- 新增 `MSegmented`（`options` / `block` / `shape` / `size`，`radiogroup` 键盘）
+- 新增 `MMentions`（`prefix` / `split` / 建议插入 / `@select`）
+- 新增 `MCalendar`（`fullscreen` / `showWeek` / `validRange` / `#dateCell` / `#header`）
+- `MTour` 键盘漫游 + `gap`；`MMentions` `allowClear` / `loading`；`MWatermark` overlay 防误删重绘；`MQRCode` `#statusRender`
+- `MTable` 表头筛选清除/确认分离、页脚合计与虚拟滚动约束提示
+
+### 变更
+
+- 默认主题：主色 `#1677FF`、中性字色/描边、控件高度 medium `32px`、控件圆角 `6px`、卡片圆角 `8px`、多层投影与更实的聚焦环
+- 字体栈改为系统无衬线；控件标签/表头/页签字重 500（页面标题仍 600）；动效 ease-out + 位移 `0.5rem`
+- 禁用态优先 `--m-color-text-disabled` / `--m-color-bg-disabled`，输入与页签等不再只靠 opacity
+- Pagination 默认尺寸由固定 small 改为 `size="medium"`（可用 `size` 调整）
+- `MTag` 默认字重 400、水平内边距约 8px，描边改为真实 `border`（保留透明边框占位）
+
+### 文档
+
+- 指南新增「约定」：命名、`severity` / `variant`、反馈与布局词表
 
 ## 0.3.7
 
