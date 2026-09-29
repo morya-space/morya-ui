@@ -1,5 +1,11 @@
 # morya-ui
 
+## 0.3.8
+
+### Features
+
+- enhance agent skill management and documentation
+
 ## 0.3.7
 
 ### Features
