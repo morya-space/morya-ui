@@ -49,6 +49,11 @@ describe('mLoading', () => {
     }
   })
 
+  it('accepts tip as an alias of text', () => {
+    const wrapper = mount(MLoading, { props: { tip: '稍候' } })
+    expect(wrapper.get('.m-loading-indicator__tip').text()).toBe('稍候')
+  })
+
   it('falls back to circular for unknown ids', () => {
     const unknown = mount(MLoading, { props: { effect: 'orbit' as 'circular' } })
     expect(unknown.find('.m-loading-circular').exists()).toBe(true)

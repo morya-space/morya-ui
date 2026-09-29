@@ -37,6 +37,7 @@ import { MProgressSpinner } from 'morya-ui'
 | `delay` | `number` | `0` | 显示前延迟（ms）。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `description` | `string` | — | 遮罩下方说明。 |
+| `tip` | `string` | — | `description` 的别名。完整遮罩能力请用 [Loading](/components/Loading)。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 

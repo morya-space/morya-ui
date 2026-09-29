@@ -41,7 +41,7 @@ function resolveOptions(el: HTMLElement, binding: DirectiveBinding<boolean | Loa
 
   return {
     visible,
-    text: fromObject?.text ?? readAttr(el, 'm-loading-text'),
+    text: fromObject?.text ?? fromObject?.tip ?? readAttr(el, 'm-loading-text'),
     effect,
     background: fromObject?.background ?? readAttr(el, 'm-loading-background'),
     customClass: fromObject?.customClass ?? readAttr(el, 'm-loading-custom-class'),

@@ -23,6 +23,11 @@ const props = withDefaults(defineProps<DialogProps>(), {
   maximizable: false,
   modal: true,
   position: 'center',
+  /** Keep unset so boolean aliases can use `!== undefined` (Vue Boolean casting → false). */
+  centered: undefined,
+  maskClosable: undefined,
+  dismissableMask: undefined,
+  closeOnOutsideClick: undefined,
   teleport: true,
   blockScroll: true,
 })
@@ -111,12 +116,25 @@ const backdropStyle = computed(() => ({
   '--m-dialog-origin-x': `${origin.value.x}px`,
   '--m-dialog-origin-y': `${origin.value.y}px`,
 }))
+const resolvedPosition = computed(() => {
+  if (props.centered === true) return 'center'
+  if (props.centered === false) return 'top'
+  return props.position
+})
+const backdropClass = computed(() => [
+  `m-dialog-backdrop--${resolvedPosition.value}`,
+  {
+    'm-dialog-backdrop--modal': props.modal,
+    'm-dialog-backdrop--maximized': maximized.value,
+  },
+])
 const panelStyle = computed(() => {
   if (maximized.value) return undefined
   const width = props.width ?? fallthroughPanelWidth.value
   return width ? { width } : undefined
 })
 const isDismissableMask = computed(() => {
+  if (props.maskClosable !== undefined) return props.maskClosable
   if (props.dismissableMask !== undefined) return props.dismissableMask
   if (props.closeOnOutsideClick !== undefined) return props.closeOnOutsideClick
   return true
@@ -216,13 +234,7 @@ defineExpose({
         v-if="modelValue"
         v-bind="rootAttrs"
         class="m-dialog-backdrop"
-        :class="[
-          `m-dialog-backdrop--${position}`,
-          {
-            'm-dialog-backdrop--modal': modal,
-            'm-dialog-backdrop--maximized': maximized,
-          },
-        ]"
+        :class="backdropClass"
         :style="backdropStyle"
       >
         <div class="m-dialog-zoom" @click.self="onOutsideClick">

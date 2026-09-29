@@ -13,12 +13,13 @@ const props = withDefaults(defineProps<ProgressBarProps>(), {
 const clampedValue = computed(() => Math.min(100, Math.max(0, props.value)))
 const isIndeterminate = computed(() => props.mode === 'indeterminate')
 const isCircle = computed(() => props.type === 'circle')
+const isActive = computed(() => props.status === 'active' && !isIndeterminate.value && !isCircle.value)
 const statusTone = computed(() => {
-  if (!props.status) return undefined
-  // `error` → `danger` stays local: shared normalizeSeverity must pass `error` through
+  if (!props.status || props.status === 'active' || props.status === 'normal') return undefined
+  // `error` / `exception` → `danger` stays local: shared normalizeSeverity must pass `error` through
   // unchanged for Toast/Message/Timeline (their styles and the Message icon map key on
   // `error`) until Toast/Message/Timeline migrate off the `error` alias.
-  if (props.status === 'error') return 'danger'
+  if (props.status === 'error' || props.status === 'exception') return 'danger'
   return normalizeSeverity(props.status)
 })
 
@@ -28,6 +29,7 @@ const progressClass = computed(() => [
     'm-progressbar--indeterminate': isIndeterminate.value,
     'm-progressbar--circle': isCircle.value,
     [`m-progressbar--${statusTone.value}`]: Boolean(statusTone.value),
+    'm-progressbar--active': isActive.value,
     'm-progressbar--custom': Boolean(props.color),
   },
 ])

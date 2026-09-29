@@ -32,10 +32,9 @@ import { MProgressBar } from 'morya-ui'
 | `mode` | `'determinate' \| 'indeterminate'` | `'determinate'` | Determinate / indeterminate mode. |
 | `showValue` | `boolean` | `true` | Whether to show the percentage label. |
 | `type` | `'line' \| 'circle'` | `'line'` | Line or circle. |
-| `status` | `'success' \| 'info' \| 'warn' \| 'danger' \| 'error'` | — | Semantic fill. |
+| `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| …` | — | Semantic fill. `exception`→danger; `active`→line stripe; `normal`→primary. |
 | `color` | `string` | — | Custom fill color. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
-
 
 ## Events
 

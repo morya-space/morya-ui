@@ -37,6 +37,7 @@ When wrapping content, `show` toggles the overlay and `delay` waits before it ap
 | `delay` | `number` | `0` | Delay before showing (ms). |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `description` | `string` | — | Caption under the spinner. |
+| `tip` | `string` | — | Alias of `description` . Prefer [Loading](/components/Loading) for full overlay features. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 

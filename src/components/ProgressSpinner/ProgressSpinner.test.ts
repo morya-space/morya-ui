@@ -35,6 +35,14 @@ describe('muProgressSpinner', () => {
     expect(shown.get('.m-progress-spinner-wrap__overlay').text()).toContain('Saving')
   })
 
+  it('accepts tip as an alias of description', () => {
+    const wrapper = mount(MProgressSpinner, {
+      props: { show: true, tip: 'Please wait' },
+      slots: { default: '<p>Form</p>' },
+    })
+    expect(wrapper.get('.m-progress-spinner__description').text()).toBe('Please wait')
+  })
+
   it('marks wrapped content inert while loading overlay is visible', () => {
     const wrapper = mount(MProgressSpinner, {
       props: { show: true },

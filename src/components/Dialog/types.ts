@@ -31,13 +31,21 @@ export interface DialogProps {
   closeOnEsc?: boolean
   /** Close when clicking the mask. Alias of `dismissableMask`. */
   closeOnOutsideClick?: boolean
-  /** alias for `closeOnOutsideClick`. */
+  /** Alias for `closeOnOutsideClick`. */
   dismissableMask?: boolean
+  /** Alias for `closeOnOutsideClick` (`maskClosable`). */
+  maskClosable?: boolean
   closable?: boolean
   /** Show maximize / restore toggle in the header. */
   maximizable?: boolean
   modal?: boolean
   position?: DialogPosition
+  /**
+   * Vertically center the dialog (`centered`).
+   * `true` → `position="center"`; `false` → `position="top"`.
+   * When omitted, `position` wins (default already `center`).
+   */
+  centered?: boolean
   width?: string
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean

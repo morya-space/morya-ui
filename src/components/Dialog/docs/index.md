@@ -33,7 +33,7 @@ import { MButton, MDialog } from 'morya-ui'
 
 ## No dismiss mask
 
-`dismissableMask={false}`（或 `closeOnOutsideClick={false}`）时点击遮罩不关闭。
+`dismissableMask={false}`（或 `closeOnOutsideClick={false}` / `maskClosable={false}`）时点击遮罩不关闭。
 
 ```vue preview src="./demos/NoDismissMask.vue"
 ```
@@ -56,17 +56,19 @@ import { MButton, MDialog } from 'morya-ui'
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用（对应 `visible`）。 |
+| `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |
 | `title` | `string` | — | 标题文案。 |
-| `header` | `string` | — | `title` 的 别名。 |
+| `header` | `string` | — | `title` 的别名。 |
 | `closeOnEsc` | `boolean` | `true` | 按 Esc 关闭。 |
 | `blockScroll` | `boolean` | `true` | 打开时锁定页面滚动（`modal` 时生效）。 |
 | `closeOnOutsideClick` | `boolean` | `true` | 点击遮罩关闭。 |
-| `dismissableMask` | `boolean` | — | `closeOnOutsideClick` 的 别名。 |
+| `dismissableMask` | `boolean` | — | `closeOnOutsideClick` 的别名。 |
+| `maskClosable` | `boolean` | — | `closeOnOutsideClick` 的别名。 |
 | `closable` | `boolean` | `true` | 显示关闭按钮。 |
 | `maximizable` | `boolean` | `false` | 显示最大化 / 还原按钮。 |
 | `modal` | `boolean` | `true` | 遮罩层。 |
 | `position` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'topleft' \| 'topright' \| 'bottomleft' \| 'bottomright'` | `'center'` | 对话框位置。 |
+| `centered` | `boolean` | — | 垂直居中：`true` → `center`，`false` → `top`；省略时用 `position`。 |
 | `width` | `string` | — | 对话框宽度（最大化时忽略）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |

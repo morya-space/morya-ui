@@ -90,6 +90,7 @@ close()
 | `loading` | `boolean` | `true` | Mask visibility when wrapping content or using `fullscreen`. A bare indicator is always shown. |
 | `effect` | `'circular' \| 'aurora' \| 'bounce' \| 'wave' \| 'pulse' \| 'stardust'` | `'circular'` | Graphic. Override the default with `componentDefaults.Loading.effect`. |
 | `text` | `string` | — | Caption under the indicator. Hidden when omitted. |
+| `tip` | `string` | — | Alias of `text`. |
 | `ariaLabel` | `string` | locale `loading` | Accessible name when there is no caption. A caption is used as the name when present. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Indicator scale. |
 | `background` | `string` | — | Mask background, any CSS color. |
@@ -122,6 +123,7 @@ No custom events.
 | `body` | `boolean` | `false` | Mount the mask on `body`, positioned over `target`. |
 | `lock` | `boolean` | `false` | Lock page scrolling. |
 | `text` | `string` | — | Caption. |
+| `tip` | `string` | — | Alias of `text`. |
 | `effect` | same as the component | `'circular'` | Graphic. |
 | `spinner` | `MRenderable` | — | Custom indicator; skips built-in effects when set. |
 | `background` | `string` | — | Mask background. |

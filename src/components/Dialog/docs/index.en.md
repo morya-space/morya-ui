@@ -33,7 +33,7 @@ Supports `center` / `top` / `bottom` / `left` / `right` and the four corner posi
 
 ## No dismiss mask
 
-With `dismissableMask={false}` (or `closeOnOutsideClick={false}`), clicking the mask does not close the dialog.
+With `dismissableMask={false}` (or `closeOnOutsideClick={false}` / `maskClosable={false}`), clicking the mask does not close the dialog.
 
 ```vue preview src="./demos/NoDismissMask.vue"
 ```
@@ -56,17 +56,19 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}`), clicking the 
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `modelValue` | `boolean` | `false` | Visibility. Use with `v-model` (corresponding to `visible`). |
+| `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |
 | `title` | `string` | — | Title text. |
 | `header` | `string` | — | Alias of `title`. |
 | `closeOnEsc` | `boolean` | `true` | Close on Esc. |
 | `blockScroll` | `boolean` | `true` | Lock page scroll while open (when `modal` is true). |
 | `closeOnOutsideClick` | `boolean` | `true` | Close when clicking the mask. |
 | `dismissableMask` | `boolean` | — | Alias of `closeOnOutsideClick`. |
+| `maskClosable` | `boolean` | — | Alias of `closeOnOutsideClick` . |
 | `closable` | `boolean` | `true` | Show the close button. |
 | `maximizable` | `boolean` | `false` | Show the maximize / restore button. |
 | `modal` | `boolean` | `true` | Overlay mask. |
 | `position` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'topleft' \| 'topright' \| 'bottomleft' \| 'bottomright'` | `'center'` | Dialog position. |
+| `centered` | `boolean` | — | Vertical centering: `true` → `center`, `false` → `top`; omit to use `position`. |
 | `width` | `string` | — | Dialog width (ignored when maximized). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` renders in place. |

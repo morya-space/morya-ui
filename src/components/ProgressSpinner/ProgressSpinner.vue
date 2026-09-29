@@ -21,6 +21,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const slots = useSlots()
 const locale = useMLocale()
 const label = computed(() => props.ariaLabel ?? locale.value.loading)
+const caption = computed(() => props.description ?? props.tip)
 const wrapping = computed(() => Boolean(slots.default))
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const visible = ref(props.show && props.delay <= 0)
@@ -91,8 +92,8 @@ const sizeClass = computed(() => ({
           :stroke-width="strokeWidth"
         />
       </svg>
-      <p v-if="description" class="m-progress-spinner__description">
-        {{ description }}
+      <p v-if="caption" class="m-progress-spinner__description">
+        {{ caption }}
       </p>
     </div>
   </div>

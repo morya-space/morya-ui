@@ -27,6 +27,7 @@
     background: var(--m-progressbar-fill);
     border-radius: inherit;
     inset: 0;
+    overflow: hidden;
     position: absolute;
     transform: scaleX(var(--m-progressbar-scale, 0));
     transform-origin: left center;
@@ -40,7 +41,7 @@
 .m-progressbar__label {
     color: var(--m-color-on-emphasis);
     font-size: var(--m-font-size-xs);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     padding: 0 var(--m-space-2);
     position: relative;
@@ -96,6 +97,33 @@
     --m-progressbar-fill: var(--m-color-danger);
 }
 
+/* `status="active"`: determinate stripe shimmer on the fill (line only). */
+.m-progressbar--active .m-progressbar__fill::after {
+    animation: m-progressbar-active var(--m-motion-pulse) var(--m-motion-ease) infinite;
+    background: color-mix(in srgb, var(--m-color-surface) 55%, transparent);
+    border-radius: inherit;
+    content: '';
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+}
+
+@keyframes m-progressbar-active {
+    0% {
+        opacity: 0.45;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
+[data-m-motion='reduced'] .m-progressbar--active .m-progressbar__fill::after,
+[data-m-motion='none'] .m-progressbar--active .m-progressbar__fill::after {
+    animation: none;
+}
+
 .m-progressbar--circle {
     --m-progressbar-size: 5.5rem;
     background: transparent;
@@ -134,5 +162,5 @@
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: var(--m-font-size-sm);
-    font-weight: 600;
+    font-weight: 500;
 }

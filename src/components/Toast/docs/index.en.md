@@ -63,19 +63,6 @@ A string argument is treated as `summary`. Default `life` is `3000`; use `0` to 
 | `transition` | `string \| false` | `'slide-fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
-### ToastMessage
-
-| Field | Type | Default | Description |
-| --- | --- | --- | --- |
-| `id` | `string \| number` | — | Unique key |
-| `summary` | `string \| number \| VNode \| Component \| (() => VNodeChild)` | — | Title |
-| `detail` | same as above | — | Detail |
-| `severity` | `'success' \| 'info' \| 'warn' \| 'error' \| …` | `'info'` | Tone |
-| `closable` | `boolean` | `true` | Close button |
-| `life` | `number` | API default `3000` | Auto-close ms |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
-
-
 ## Events
 
 | Event | Payload | Description |

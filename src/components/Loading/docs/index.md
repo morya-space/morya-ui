@@ -90,6 +90,7 @@ close()
 | `loading` | `boolean` | `true` | 包裹内容或 `fullscreen` 时是否显示遮罩。单独指示器始终显示。 |
 | `effect` | `'circular' \| 'aurora' \| 'bounce' \| 'wave' \| 'pulse' \| 'stardust'` | `'circular'` | 动效。可用 `componentDefaults.Loading.effect` 改默认值。 |
 | `text` | `string` | — | 指示器下方文案。不传则不显示。 |
+| `tip` | `string` | — | `text` 的别名。 |
 | `ariaLabel` | `string` | locale `loading` | 无文案时的可访问名称。有文案时以文案为准。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 指示器缩放。 |
 | `background` | `string` | — | 遮罩背景，任意 CSS 颜色。 |
@@ -122,6 +123,7 @@ close()
 | `body` | `boolean` | `false` | 遮罩挂到 `body`，定位到 `target` 上。 |
 | `lock` | `boolean` | `false` | 锁定页面滚动。 |
 | `text` | `string` | — | 文案。 |
+| `tip` | `string` | — | `text` 的别名。 |
 | `effect` | 同组件 | `'circular'` | 动效。 |
 | `spinner` | `MRenderable` | — | 自定义指示器；设置后忽略内置 `effect`。 |
 | `background` | `string` | — | 遮罩背景。 |

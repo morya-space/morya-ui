@@ -12,7 +12,7 @@ Vs [Toast](/components/Toast):
 
 - **Message (default)**: short single-line feedback; no title/detail. Use for most CRUD / save / delete confirmations.
 - **Toast**: corner notifications with `summary` / `detail`; use only when supplementary detail is needed.
-- **`<MMessage>` component**: optional host for the `message` service (custom `appendTo` / `placement`). It is not an inline alert; persistent form errors use field `errorMessage` or a token-styled `role="alert"`.
+- **`<MMessage>` component**: optional host for the `message` service (custom `appendTo` / `placement`). It is not an inline notice; use [Alert](/components/Alert) for in-page banners, and field `errorMessage` or a token-styled `role="alert"` for persistent form errors.
 
 > Selection guide: [`feedback.md`](../../../../design-kit/.agents/skills/morya-ui-pages/references/feedback.md).
 

@@ -1,6 +1,10 @@
 export type ProgressBarMode = 'determinate' | 'indeterminate'
 export type ProgressBarType = 'line' | 'circle'
-/** Canonical: success/info/warning/danger. `warn` / `error` are accepted as deprecated aliases. */
+/**
+ * Canonical: success/info/warning/danger.
+ * Legacy status aliases: `exception` → danger, `active` → stripe animation (line), `normal` → primary.
+ * `warn` / `error` are accepted as deprecated aliases.
+ */
 export type ProgressBarStatus =
   | 'success'
   | 'info'
@@ -10,6 +14,12 @@ export type ProgressBarStatus =
   | 'danger'
   /** @deprecated Use `'danger'` instead. */
   | 'error'
+  /** Alias of `danger`. */
+  | 'exception'
+  /** Determinate line fill with animated stripe (not indeterminate). */
+  | 'active'
+  /** Alias of the default primary fill. */
+  | 'normal'
 
 export interface ProgressBarProps {
   /** Progress percentage from 0 to 100. */

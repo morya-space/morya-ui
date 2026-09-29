@@ -37,4 +37,13 @@ describe('muProgressBar', () => {
     expect(wrapper.find('.m-progressbar__circle').exists()).toBe(true)
     expect(wrapper.get('.m-progressbar__circle-label').text()).toBe('40%')
   })
+
+  it('maps exception to danger and active to stripe class', () => {
+    const exception = mount(MProgressBar, { props: { value: 70, status: 'exception' } })
+    expect(exception.classes()).toContain('m-progressbar--danger')
+
+    const active = mount(MProgressBar, { props: { value: 50, status: 'active' } })
+    expect(active.classes()).toContain('m-progressbar--active')
+    expect(active.classes()).not.toContain('m-progressbar--indeterminate')
+  })
 })

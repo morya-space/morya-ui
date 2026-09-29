@@ -64,19 +64,6 @@ import { MToast, toast, useToast } from 'morya-ui'
 | `transition` | `string \| false` | `'slide-fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
-### ToastMessage
-
-| 字段 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `id` | `string \| number` | — | 唯一键 |
-| `summary` | `string \| number \| VNode \| Component \| (() => VNodeChild)` | — | 标题 |
-| `detail` | 同上 | — | 详情 |
-| `severity` | `'success' \| 'info' \| 'warn' \| 'error' \| …` | `'info'` | 语义色 |
-| `closable` | `boolean` | `true` | 关闭按钮 |
-| `life` | `number` | API 默认 `3000` | 自动关闭毫秒 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
-
-
 ## Events
 
 | 事件名 | 参数 | 说明 |

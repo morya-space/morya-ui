@@ -107,7 +107,7 @@
 }
 
 .m-dialog__header {
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
     flex: 0 0 auto;
     gap: var(--m-space-3);
 }
@@ -204,7 +204,7 @@
 }
 
 .m-dialog__footer {
-    border-top: var(--m-border-width) solid var(--m-color-border);
+    border-top: var(--m-border-width) solid var(--m-color-split);
     flex: 0 0 auto;
 }
 

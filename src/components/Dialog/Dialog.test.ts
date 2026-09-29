@@ -47,6 +47,34 @@ describe('muDialog', () => {
     wrapper.unmount()
   })
 
+  it('accepts maskClosable and centered aliases', async () => {
+    const mask = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Mask', maskClosable: false },
+    })
+    await nextTick()
+    document.body.querySelector('.m-dialog-backdrop')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(mask.emitted('close')).toBeUndefined()
+    mask.unmount()
+
+    const centered = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Centered', centered: true },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop--center')).toBeTruthy()
+    centered.unmount()
+
+    const top = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Top', centered: false },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop--top')).toBeTruthy()
+    top.unmount()
+  })
+
   it('toggles maximized state when maximizable', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
