@@ -35,9 +35,23 @@ Pass a `MIcon` icon name to `icon`.
 ```vue preview src="./demos/Icons.vue"
 ```
 
+## Bordered
+
+`bordered` draws a tone-colored outline. Default is borderless with a filled tone background.
+
+```vue preview src="./demos/Bordered.vue"
+```
+
 ## Closable
 
 ```vue preview src="./demos/Closable.vue"
+```
+
+## Checkable
+
+`checkable` + `v-model:checked` toggles selection. When combined with `closable`, the close control is hidden.
+
+```vue preview src="./demos/Checkable.vue"
 ```
 
 ## Props
@@ -48,11 +62,13 @@ Pass a `MIcon` icon name to `icon`.
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
 | `icon` | [IconName](/docs/types#IconName) | — | `MIcon` icon name. |
-| `closable` | `boolean` | `false` | Show a close control. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `closable` | `boolean` | `false` | Show a close control (ignored when `checkable`). |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `bordered` | `boolean` | `false` | Draw a border. |
 | `color` | `string` | — | Custom color. |
-| `disabled` | `boolean` | `false` | Disable the close control. |
+| `disabled` | `boolean` | `false` | Disable interaction. |
+| `checkable` | `boolean` | `false` | Toggleable selection. |
+| `checked` | `boolean` | `false` | Checked state; use with `v-model:checked`. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
@@ -61,6 +77,8 @@ Pass a `MIcon` icon name to `icon`.
 | Event | Payload | Description |
 | --- | --- | --- |
 | `close` | `MouseEvent` | Fired when close is clicked. |
+| `update:checked` | `boolean` | Checked state change (`v-model:checked`). |
+| `change` | `boolean` | Checked state change. |
 
 ## Slots
 

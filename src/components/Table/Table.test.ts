@@ -500,6 +500,42 @@ describe('mTable', () => {
     expect(wrapper.emitted('update:columnWidths')?.at(-1)?.[0]).toMatchObject({ name: 160 })
   })
 
+  it('applies header filter only after confirm', async () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [
+          {
+            key: 'status',
+            label: 'Status',
+            filterable: true,
+            filters: [
+              { text: 'Draft', value: 'Draft' },
+              { text: 'Live', value: 'Live' },
+            ],
+          },
+        ],
+        rows: [
+          { id: 1, status: 'Draft' },
+          { id: 2, status: 'Live' },
+        ],
+        paginator: false,
+      },
+      attachTo: document.body,
+    })
+    await wrapper.get('.m-table__filter-btn').trigger('click')
+    await wrapper.vm.$nextTick()
+    const panel = document.body.querySelector('.m-table__filter-panel')
+    expect(panel).toBeTruthy()
+    const buttons = panel!.querySelectorAll('.m-table__filter-actions button')
+    await buttons[0]?.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.findAll('tbody tr')).toHaveLength(2)
+    await buttons[1]?.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.findAll('tbody tr')).toHaveLength(2)
+    wrapper.unmount()
+  })
+
   it('shows header filter controls for filterable columns', async () => {
     const wrapper = mount(MTable, {
       props: {

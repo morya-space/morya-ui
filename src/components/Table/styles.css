@@ -1,5 +1,5 @@
 /**
- * MTable — Morya UI design tokens and table interaction patterns.
+ * MTable �?Morya UI design tokens and table interaction patterns.
  */
 
 .m-table {
@@ -17,11 +17,13 @@
 
 .m-table--small {
     --m-table-cell-padding-block: var(--m-space-1);
+    --m-table-cell-padding-inline: var(--m-space-2);
     --m-table-font-size: var(--m-font-size-sm);
 }
 
 .m-table--large {
     --m-table-cell-padding-block: var(--m-space-3);
+    --m-table-cell-padding-inline: var(--m-space-4);
     --m-table-font-size: var(--m-font-size-lg);
 }
 
@@ -165,7 +167,7 @@
     border-bottom: var(--m-border-width) solid var(--m-table-border-color);
     color: inherit;
     font-size: var(--m-table-font-size);
-    font-weight: 600;
+    font-weight: 500;
     text-align: left;
     background: var(--m-table-header-bg);
     vertical-align: middle;
@@ -563,8 +565,15 @@
     display: flex;
     flex-direction: column;
     gap: var(--m-space-2);
-    min-width: 10rem;
+    min-width: 12rem;
     padding: var(--m-space-2);
+}
+
+.m-table__filter-title {
+    color: var(--m-color-text);
+    font-size: var(--m-font-size-sm);
+    font-weight: 500;
+    margin: 0;
 }
 
 .m-table__filter-options {
@@ -585,9 +594,12 @@
 }
 
 .m-table__filter-actions {
+    border-top: var(--m-border-width) solid var(--m-color-border);
     display: flex;
-    justify-content: flex-end;
-    gap: var(--m-space-1);
+    justify-content: space-between;
+    gap: var(--m-space-2);
+    margin-top: var(--m-space-1);
+    padding-top: var(--m-space-2);
 }
 
 .m-table__virtual-spacer td {
@@ -602,7 +614,7 @@
     border-top: var(--m-border-width) solid var(--m-table-border-color);
     color: var(--m-table-header-text);
     font-size: var(--m-table-font-size);
-    font-weight: 600;
+    font-weight: 500;
     background: var(--m-table-header-bg);
     vertical-align: middle;
 }
@@ -617,7 +629,7 @@
     border-right: 0;
 }
 
-/* —— Tree mode —— */
+/* —�?Tree mode —�?*/
 .m-table__tree-cell {
     align-items: center;
     display: flex;

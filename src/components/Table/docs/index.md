@@ -58,21 +58,21 @@ import { MTable, MTag } from 'morya-ui'
 
 ## 列宽拖拽与表头筛选
 
-列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，可选 `filters` 为多选选项，否则为文本包含筛选。
+列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，可选 `filters` 为多选选项，否则为文本包含筛选。面板内 **清除** 仅重置草稿，**确认** 后才写入 `v-model:filters`。
 
 ```vue preview src="./demos/ResizeAndFilter.zh.vue"
 ```
 
 ## 虚拟滚动
 
-开启 `virtual`，并提供 `maxHeight` / `tableHeight` / `fill` 之一。展开行场景会自动降级为普通渲染。
+开启 `virtual`，并提供 `maxHeight` / `tableHeight` / `fill` 之一以形成滚动视口；缺高度时开发环境会 `console.warn`。展开行 / `#expansion` / `expandConfig` 与虚拟滚动互斥，会自动降级为普通渲染（开发环境会提示）。
 
 ```vue preview src="./demos/VirtualScroll.zh.vue"
 ```
 
 ## 多级表头、表尾与合并
 
-列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计；`span-method` 合并单元格。
+列支持 `children` 多级表头；`show-footer` + `footer-method` 渲染合计（`footerMethod({ columns, data })` 返回行矩阵，或使用 `#footer` 插槽完全自定义）；`span-method` 合并单元格。
 
 ```vue preview src="./demos/GridFeatures.zh.vue"
 ```
@@ -176,7 +176,7 @@ import { MTable, MTag } from 'morya-ui'
 | `maxHeight` | `number \| null` | `null` | 表格最大高度，超出滚动。 |
 | `showOverflowTooltip` | `boolean` | `false` | 全局单元格溢出 Tooltip。 |
 | `rowKey` | `string` | `'id'` | 行唯一键字段。 |
-| `size` | `'sm' \| 'md' \| 'lg'` | — | 表格密度。 |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 表格密度（`large`/`small` 同步单元格 padding）。 |
 | `ariaLabel` | `string` | — | — |
 | `bodyExpandRowClassName` | `TableBodyRowClassName` | — | — |
 | `bodyItemClassName` | `TableBodyItemClassName` | — | — |
@@ -334,7 +334,6 @@ type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => s
 ```ts
 type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)
 ```
-
 
 
 <h4 id="TableTreeConfig">TableTreeConfig</h4>

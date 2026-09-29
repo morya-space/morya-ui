@@ -76,12 +76,9 @@ function apply() {
   open.value = false
 }
 
-function clear() {
+function resetDraft() {
   draftText.value = ''
   draftValues.value = []
-  emit('update:modelValue', null)
-  emit('clear')
-  open.value = false
 }
 </script>
 
@@ -99,6 +96,9 @@ function clear() {
       </button>
       <template #content>
         <div class="m-table__filter-panel" @click.stop>
+          <p class="m-table__filter-title">
+            {{ filterAria }}
+          </p>
           <div v-if="hasOptions" class="m-table__filter-options" role="group" :aria-label="filterAria">
             <label
               v-for="(option, index) in filters"
@@ -120,10 +120,10 @@ function clear() {
             @keydown.enter.prevent="apply"
           />
           <div class="m-table__filter-actions">
-            <MButton size="sm" text @click="clear">
+            <MButton size="sm" variant="text" @click="resetDraft">
               {{ locale.clear }}
             </MButton>
-            <MButton size="sm" @click="apply">
+            <MButton size="sm" severity="primary" @click="apply">
               {{ locale.confirm }}
             </MButton>
           </div>

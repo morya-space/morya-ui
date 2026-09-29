@@ -35,9 +35,23 @@ import { MTag } from 'morya-ui'
 ```vue preview src="./demos/Icons.vue"
 ```
 
+## Bordered
+
+`bordered` 使用色调描边。默认无描边、填充色调背景。
+
+```vue preview src="./demos/Bordered.vue"
+```
+
 ## Closable
 
 ```vue preview src="./demos/Closable.vue"
+```
+
+## Checkable
+
+`checkable` + `v-model:checked` 可切换选中。与 `closable` 同时设置时关闭按钮不显示。
+
+```vue preview src="./demos/Checkable.vue"
 ```
 
 ## Props
@@ -48,11 +62,13 @@ import { MTag } from 'morya-ui'
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
 | `icon` | [IconName](/docs/types#IconName) | — | `MIcon` 图标名称。 |
-| `closable` | `boolean` | `false` | 显示关闭按钮。 |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `closable` | `boolean` | `false` | 显示关闭按钮（`checkable` 时忽略）。 |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `bordered` | `boolean` | `false` | 描边。 |
 | `color` | `string` | — | 自定义颜色。 |
-| `disabled` | `boolean` | `false` | 禁用关闭。 |
+| `disabled` | `boolean` | `false` | 禁用交互。 |
+| `checkable` | `boolean` | `false` | 可切换选中。 |
+| `checked` | `boolean` | `false` | 选中态；配合 `v-model:checked`。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
@@ -61,6 +77,8 @@ import { MTag } from 'morya-ui'
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `close` | `MouseEvent` | 点击关闭。 |
+| `update:checked` | `boolean` | 选中态变更（`v-model:checked`）。 |
+| `change` | `boolean` | 选中态变更。 |
 
 ## Slots
 

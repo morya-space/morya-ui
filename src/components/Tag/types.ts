@@ -16,17 +16,26 @@ export interface TagProps {
   rounded?: boolean
   /** Icon name from MIcon. */
   icon?: IconName
-  /** Show a close control. */
+  /** Show a close control. Ignored when `checkable`. */
   closable?: boolean
   /** Size. Also accepts legacy `sm` / `lg`. */
   size?: TagSize
-  /** Draw a border using the tone color. */
+  /** Draw a border using the tone color (`bordered` / outlined look). */
   bordered?: boolean
   /** Custom color. Overrides `severity` when set. */
   color?: string
   disabled?: boolean
+  /**
+   * Toggleable tag (`checkable` + `v-model:checked`).
+   * Use with `v-model:checked`.
+   */
+  checkable?: boolean
+  /** Selected state when `checkable`. */
+  checked?: boolean
 }
 
 export interface TagEmits {
   (event: 'close', value: MouseEvent): void
+  (event: 'update:checked', value: boolean): void
+  (event: 'change', value: boolean): void
 }

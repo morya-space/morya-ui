@@ -33,4 +33,44 @@ describe('muTag', () => {
     await wrapper.get('.m-tag__close').trigger('click')
     expect(wrapper.emitted('close')).toHaveLength(1)
   })
+
+  it('applies custom color via CSS variable', () => {
+    const wrapper = mount(MTag, { props: { value: 'Hex', color: '#1677ff' } })
+    expect(wrapper.classes()).toContain('m-tag--custom')
+    expect(wrapper.attributes('style')).toContain('--m-tag-color')
+  })
+
+  it('toggles checked when checkable', async () => {
+    const wrapper = mount(MTag, {
+      props: { value: 'Movies', checkable: true, checked: false },
+    })
+    expect(wrapper.classes()).toContain('m-tag--checkable')
+    expect(wrapper.classes()).not.toContain('m-tag--checked')
+    expect(wrapper.attributes('role')).toBe('button')
+    expect(wrapper.attributes('aria-pressed')).toBe('false')
+
+    await wrapper.trigger('click')
+    expect(wrapper.emitted('update:checked')?.[0]).toEqual([true])
+    expect(wrapper.emitted('change')?.[0]).toEqual([true])
+
+    await wrapper.setProps({ checked: true })
+    expect(wrapper.classes()).toContain('m-tag--checked')
+    expect(wrapper.attributes('aria-pressed')).toBe('true')
+  })
+
+  it('hides close control when checkable', () => {
+    const wrapper = mount(MTag, {
+      props: { value: 'Both', checkable: true, closable: true },
+    })
+    expect(wrapper.find('.m-tag__close').exists()).toBe(false)
+    expect(wrapper.classes()).not.toContain('m-tag--closable')
+  })
+
+  it('does not toggle when checkable and disabled', async () => {
+    const wrapper = mount(MTag, {
+      props: { value: 'Off', checkable: true, checked: false, disabled: true },
+    })
+    await wrapper.trigger('click')
+    expect(wrapper.emitted('update:checked')).toBeUndefined()
+  })
 })

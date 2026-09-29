@@ -58,21 +58,21 @@ Set `fixed: 'left' | 'right'` on a column (or `fixed: true` for left).
 
 ## Column resize and header filters
 
-Set `resizable` to drag column widths (`v-model:column-widths`). Set `filterable` for a header filter; optional `filters` for checkbox options, otherwise free-text contains.
+Set `resizable` to drag column widths (`v-model:column-widths`). Set `filterable` for a header filter; optional `filters` for checkbox options, otherwise free-text contains. **Clear** resets the draft only; **Confirm** applies to `v-model:filters`.
 
 ```vue preview src="./demos/ResizeAndFilter.en.vue"
 ```
 
 ## Virtual scroll
 
-Enable `virtual` with `maxHeight` / `tableHeight` / `fill`. Expandable tables skip virtualization.
+Enable `virtual` with `maxHeight` / `tableHeight` / `fill` so the body scrolls; dev mode warns if height is missing. Expandable rows (`#expansion` / `expandConfig`) disable virtualization (dev warning when both are set).
 
 ```vue preview src="./demos/VirtualScroll.en.vue"
 ```
 
 ## Multi-header, footer, and merges
 
-Use column `children` for grouped headers; `show-footer` + `footer-method` for summaries; `span-method` for merges.
+Use column `children` for grouped headers; `show-footer` + `footer-method` for summaries (`footerMethod({ columns, data })` matrix or `#footer` slot); `span-method` for merges.
 
 ```vue preview src="./demos/GridFeatures.en.vue"
 ```
@@ -159,7 +159,7 @@ Pass `server-options` with `server-total`, and sync page / page size / sort via 
 | `loading` / `emptyText` / `emptyDescription` | — | — | Loading and empty states. |
 | `maxHeight` | `number \| null` | `null` | Scrollable body max height. |
 | `rowKey` | `string` | `'id'` | Stable row key field. |
-| `size` | `'sm' \| 'md' \| 'lg'` | — | Table density. |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Table density (`large`/`small` also adjust cell padding). |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
@@ -223,7 +223,6 @@ See source `types.ts` for the full definition.
 ```ts
 type TableItem = Record<string, unknown>
 ```
-
 
 
 <h4 id="TableColumnDefinition">TableColumnDefinition</h4>

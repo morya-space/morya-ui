@@ -1011,6 +1011,31 @@ watch(virtualEnabled, async (enabled) => {
   syncViewportHeight()
 })
 
+if (import.meta.env.DEV) {
+  watch(
+    () => virtual.value && ifHasExpandSlot.value,
+    (conflict) => {
+      if (conflict) {
+        console.warn(
+          '[MTable] `virtual` is disabled while expandable rows are active (#expansion / expandConfig). Use pagination or disable `virtual`.',
+        )
+      }
+    },
+    { immediate: true },
+  )
+  watch(
+    () => virtual.value && !ifHasExpandSlot.value && !resolvedTableHeight.value && !tableFillsParent.value,
+    (missingViewport) => {
+      if (missingViewport) {
+        console.warn(
+          '[MTable] `virtual` needs a scroll viewport: set `maxHeight`, `tableHeight`, or `fill`.',
+        )
+      }
+    },
+    { immediate: true },
+  )
+}
+
 const tbodyPagination = computed(() => ({
   isFirstPage: isFirstPage.value,
   isLastPage: isLastPage.value,
