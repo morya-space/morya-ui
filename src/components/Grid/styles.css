@@ -8,3 +8,62 @@
     box-sizing: border-box;
     min-width: 0;
 }
+
+/* —— 24-column flex grid (MRow / MCol) —— */
+.m-row {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    min-width: 0;
+}
+
+.m-row--nowrap {
+    flex-wrap: nowrap;
+}
+
+.m-row--justify-start {
+    justify-content: flex-start;
+}
+
+.m-row--justify-end {
+    justify-content: flex-end;
+}
+
+.m-row--justify-center {
+    justify-content: center;
+}
+
+.m-row--justify-space-around {
+    justify-content: space-around;
+}
+
+.m-row--justify-space-between {
+    justify-content: space-between;
+}
+
+.m-row--justify-space-evenly {
+    justify-content: space-evenly;
+}
+
+.m-row--align-top {
+    align-items: flex-start;
+}
+
+.m-row--align-middle {
+    align-items: center;
+}
+
+.m-row--align-bottom {
+    align-items: flex-end;
+}
+
+.m-row--align-stretch {
+    align-items: stretch;
+}
+
+.m-col {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 1px;
+    position: relative;
+}
