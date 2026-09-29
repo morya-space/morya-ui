@@ -27,6 +27,11 @@ export interface SplitterProps {
   defaultSize?: SplitterSize
   /** Minimum primary size (same unit family as `size`). */
   min?: SplitterSize
+  /**
+   * Minimum secondary (panel2) size. Tightens the effective max of the primary
+   * pane so panel2 never shrinks below this threshold.
+   */
+  min2?: SplitterSize
   /** Maximum primary size (same unit family as `size`). */
   max?: SplitterSize
   /** Disable drag and keyboard resize. */

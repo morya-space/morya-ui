@@ -125,11 +125,11 @@
 }
 
 .m-layout-header--bordered {
-    border-bottom: var(--m-border-width) solid var(--m-color-border);
+    border-bottom: var(--m-border-width) solid var(--m-color-split);
 }
 
 .m-layout-footer--bordered {
-    border-top: var(--m-border-width) solid var(--m-color-border);
+    border-top: var(--m-border-width) solid var(--m-color-split);
 }
 
 .m-layout-header--inverted,

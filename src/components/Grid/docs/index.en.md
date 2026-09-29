@@ -8,6 +8,8 @@ description: CSS Grid layout with GridItem span / offset control.
 
 24-column grid layout (override with `cols`). Use `MGridItem` (alias `MGi`) as children.
 
+`MRow` / `MCol` grid: `xGap` / `yGap` set spacing (split a `[horizontal, vertical]` pair into the two props); `span` / `offset` control column width and offset; breakpoints use responsive strings (`1 s:2 m:3`).
+
 ## Import
 
 ```ts

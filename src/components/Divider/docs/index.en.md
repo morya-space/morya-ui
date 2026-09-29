@@ -44,9 +44,16 @@ When the divider is horizontal and has a label, use `align` to control the label
 
 ## Layout
 
-`layout` controls horizontal / vertical orientation.
+`layout` controls horizontal / vertical; `orientation` is an alias.
 
 ```vue preview src="./demos/Layout.vue"
+```
+
+## Plain
+
+`plain` uses body text styling for the label (default is stronger heading weight).
+
+```vue preview src="./demos/Plain.vue"
 ```
 
 ## Props
@@ -54,9 +61,12 @@ When the divider is horizontal and has a label, use `align` to control the label
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction. |
-| `type` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` | Line style. |
+| `orientation` | `'horizontal' \| 'vertical'` | — | Alias of `layout`. |
+| `type` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` | Line style (solid / dashed / dotted). |
 | `align` | `'left' \| 'center' \| 'right'` | `'center'` | Label alignment for a horizontal divider with a label. |
 | `titlePlacement` | `'left' \| 'center' \| 'right'` | — | Alias of `align`; takes precedence when set. |
+| `plain` | `boolean` | `false` | Use body text style for the label. |
+| `size` | `'small' \| 'medium' \| 'large'` | — | Vertical margin for horizontal dividers (`--m-space-*`). |
 | `label` | `string` | — | Center label text. The default slot takes precedence when present. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 

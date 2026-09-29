@@ -8,6 +8,8 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 
 24 列栅格布局（可用 `cols` 调整）。子项请使用 `MGridItem`（别名 `MGi`）。
 
+`MRow` / `MCol` 栅格：`xGap` / `yGap` 控制间距（数字或 `[水平, 垂直]` 时拆开写）；`span` / `offset` 控制列宽与偏移；断点用响应式字符串（`1 s:2 m:3`）。
+
 ## 引入
 
 ```ts

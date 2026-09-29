@@ -56,4 +56,18 @@ describe('muSpace', () => {
     })
     expect(numericString.element.style.gap).toBe('12px')
   })
+
+  it('maps size tokens to --m-space-* gaps', () => {
+    const small = mount(MSpace, {
+      props: { size: 'small' },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(small.element.style.gap).toBe('var(--m-space-2)')
+
+    const large = mount(MSpace, {
+      props: { size: 'large' },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(large.element.style.gap).toBe('var(--m-space-4)')
+  })
 })

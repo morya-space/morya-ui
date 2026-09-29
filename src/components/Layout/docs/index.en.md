@@ -82,8 +82,8 @@ Root `position="absolute"` fills a relatively positioned parent with an explicit
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `width` | `number \| string` | `272` | Expanded width (always set as `width`). |
-| `collapsedWidth` | `number` | `48` | Collapsed `max-width`. |
+| `width` | `number \| string` | `var(--m-layout-sider-width)` → `--m-nav-rail-width` (default `12.5rem` / 200px) | Expanded width. |
+| `collapsedWidth` | `number \| string` | `var(--m-layout-sider-collapsed-width)` → `--m-nav-rail-collapsed-width` (default `5rem` / 80px) | Collapsed `max-width`. |
 | `collapsed` | `boolean` | — | Collapsed state (`v-model:collapsed`). |
 | `defaultCollapsed` | `boolean` | `false` | Uncontrolled initial collapsed state. |
 | `showTrigger` | `boolean \| 'bar' \| 'arrow-circle' \| 'arrow'` | `false` | Collapse trigger; `arrow` aliases `arrow-circle`. |

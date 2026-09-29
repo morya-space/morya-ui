@@ -122,4 +122,36 @@ describe('muSplitter', () => {
     })
     expect(wrapper.get('.m-splitter__gutter').text()).toBe('grip')
   })
+
+  it('clamps resize with min and min2', async () => {
+    const wrapper = mount(MSplitter, {
+      props: { size: 50, min: 20, min2: 30 },
+      slots: {
+        panel1: () => h('div', 'Left'),
+        panel2: () => h('div', 'Right'),
+      },
+      attachTo: document.body,
+    })
+
+    const root = wrapper.get('.m-splitter').element as HTMLElement
+    Object.defineProperty(root, 'getBoundingClientRect', {
+      value: () => ({ left: 0, top: 0, width: 206, height: 100, right: 206, bottom: 100 }),
+    })
+
+    // usable = 200; try drag primary to 180px (90%) → clamped by min2 30% → 70%
+    await wrapper.get('.m-splitter__gutter').trigger('mousedown', {
+      clientX: 100,
+      clientY: 50,
+    })
+    window.dispatchEvent(new MouseEvent('mousemove', { clientX: 180, clientY: 50, bubbles: true }))
+    window.dispatchEvent(new MouseEvent('mouseup', { clientX: 180, clientY: 50, bubbles: true }))
+    await nextTick()
+
+    expect(wrapper.emitted('update:size')?.at(-1)?.[0]).toBe(70)
+
+    const panels = wrapper.findAll('.m-splitter__panel')
+    expect(panels[0]!.attributes('style')).toContain('min-width')
+    expect(panels[1]!.attributes('style')).toContain('min-width')
+    wrapper.unmount()
+  })
 })

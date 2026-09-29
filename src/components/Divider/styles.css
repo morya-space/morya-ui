@@ -1,15 +1,31 @@
 .m-divider {
     --m-divider-stub: var(--m-space-5);
     align-items: center;
-    color: var(--m-color-text-muted);
+    color: var(--m-color-text);
     display: flex;
     font-family: var(--m-font-sans);
     gap: var(--m-space-3);
     width: 100%;
 }
 
+.m-divider--horizontal {
+    margin-block: var(--m-space-6);
+}
+
+.m-divider--horizontal.m-divider--size-small {
+    margin-block: var(--m-space-2);
+}
+
+.m-divider--horizontal.m-divider--size-medium {
+    margin-block: var(--m-space-4);
+}
+
+.m-divider--horizontal.m-divider--size-large {
+    margin-block: var(--m-space-6);
+}
+
 .m-divider__line {
-    background: var(--m-color-border);
+    background: var(--m-color-split);
     border: 0;
     flex: 1 1 0;
     height: var(--m-border-width);
@@ -17,10 +33,23 @@
 }
 
 .m-divider__label {
-    font-size: var(--m-font-size-xs);
+    color: var(--m-color-text);
+    font-size: var(--m-font-size-md);
     font-weight: 500;
     line-height: 1.25;
     white-space: nowrap;
+}
+
+.m-divider--with-label:not(.m-divider--plain) .m-divider__label {
+    color: var(--m-color-text);
+    font-size: var(--m-font-size-lg);
+    font-weight: 500;
+}
+
+.m-divider--plain .m-divider__label {
+    color: var(--m-color-text);
+    font-size: var(--m-font-size-md);
+    font-weight: 400;
 }
 
 .m-divider--dashed .m-divider__line,
@@ -50,6 +79,8 @@
     display: inline-flex;
     flex-direction: column;
     height: auto;
+    margin-block: 0;
+    margin-inline: var(--m-space-2);
     vertical-align: middle;
     width: auto;
 }

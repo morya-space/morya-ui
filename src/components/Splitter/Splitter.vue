@@ -113,12 +113,30 @@ function normalizeStyle(style: SplitterProps['pane1Style']) {
   return typeof style === 'string' || style == null ? undefined : style
 }
 
-const panel1Style = computed(() => ({
-  flex: `0 0 ${sizeToFlexBasis(mergedSize.value, sizeMode.value)}`,
-  ...normalizeStyle(props.pane1Style),
-}))
+const panel1Style = computed(() => {
+  const style: Record<string, string | undefined> = {
+    flex: `0 0 ${sizeToFlexBasis(mergedSize.value, sizeMode.value)}`,
+    ...normalizeStyle(props.pane1Style),
+  }
+  if (props.min != null) {
+    const basis = sizeToFlexBasis(props.min, detectSizeMode(props.min, sizeMode.value))
+    if (isVertical.value) style.minHeight = basis
+    else style.minWidth = basis
+  }
+  return style
+})
 
-const panel2Style = computed(() => normalizeStyle(props.pane2Style))
+const panel2Style = computed(() => {
+  const style: Record<string, string | undefined> = {
+    ...normalizeStyle(props.pane2Style),
+  }
+  if (props.min2 != null) {
+    const basis = sizeToFlexBasis(props.min2, detectSizeMode(props.min2, sizeMode.value))
+    if (isVertical.value) style.minHeight = basis
+    else style.minWidth = basis
+  }
+  return style
+})
 
 const gutterAttrs = computed(() =>
   mergePtPart(
@@ -146,10 +164,14 @@ function setFromPx(nextPx: number, container: number) {
   if (container <= 0) return
   const minPx = parseToPx(defaultMin.value, container, detectSizeMode(defaultMin.value, mode))
   const maxSource = defaultMax.value
-  const maxPx =
+  let maxPx =
     maxSource === undefined && mode === 'px'
       ? container
       : parseToPx(maxSource ?? (mode === 'ratio' ? 1 : 100), container, detectSizeMode(maxSource ?? 100, mode))
+  if (props.min2 !== undefined) {
+    const min2Px = parseToPx(props.min2, container, detectSizeMode(props.min2, mode))
+    maxPx = Math.min(maxPx, Math.max(0, container - min2Px))
+  }
   const clamped = clampPx(nextPx, minPx, maxPx, container)
   commitSize(pxToSize(clamped, container, mode))
 }
@@ -263,10 +285,18 @@ const ariaMin = computed(() => {
 
 const ariaMax = computed(() => {
   const v = defaultMax.value
-  if (v === undefined) return undefined
-  if (typeof v === 'string') return Math.round(Number.parseFloat(v))
-  if (sizeMode.value === 'ratio') return Math.round(v * 100)
-  return Math.round(v)
+  let max = v === undefined ? 100 : typeof v === 'string' ? Math.round(Number.parseFloat(v)) : sizeMode.value === 'ratio' ? Math.round(v * 100) : Math.round(v)
+  if (props.min2 !== undefined) {
+    const min2 = props.min2
+    const min2Pct =
+      typeof min2 === 'string'
+        ? undefined
+        : sizeMode.value === 'ratio'
+          ? Math.round(min2 * 100)
+          : Math.round(min2)
+    if (min2Pct != null) max = Math.min(max, 100 - min2Pct)
+  }
+  return max
 })
 
 onBeforeUnmount(() => {

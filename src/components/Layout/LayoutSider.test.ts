@@ -48,6 +48,14 @@ describe('layoutSider', () => {
     expect(wrapper.element.style.padding).toBe('')
   })
 
+  it('defaults width tokens when collapsedWidth/width omitted', () => {
+    const wrapper = mount(MLayoutSider, {
+      props: { collapsed: true },
+    })
+    expect(wrapper.element.style.maxWidth).toBe('var(--m-layout-sider-collapsed-width)')
+    expect(wrapper.element.style.width).toBe('var(--m-layout-sider-width)')
+  })
+
   it('applies explicit padding on the root', () => {
     const wrapper = mount(MLayoutSider, {
       props: { padding: 16 },

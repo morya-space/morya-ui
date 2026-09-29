@@ -35,6 +35,13 @@ import { MSplitter } from 'morya-ui'
 ```vue preview src="./demos/SizeModes.vue"
 ```
 
+## Panel min sizes
+
+`min` bounds the primary pane (panel1); `min2` bounds the secondary pane and tightens the primary effective max while dragging.
+
+```vue preview src="./demos/PanelMins.vue"
+```
+
 ## Disabled
 
 ```vue preview src="./demos/Disabled.en.vue"
@@ -55,7 +62,8 @@ Style the divider with `resizeTriggerClass` / `resizeTriggerStyle`, and put a ha
 | `direction` | same | — | Alias of `layout`. |
 | `size` | `number \| string` | — | Controlled size; `>1` = `%`, `≤1` = ratio, `'Npx'` = pixels. |
 | `defaultSize` | `number \| string` | `50` | Uncontrolled initial size. |
-| `min` / `max` | `number \| string` | mode-based | Bounds (same unit family as `size`). |
+| `min` / `max` | `number \| string` | mode-based | Primary pane bounds (same unit family as `size`). |
+| `min2` | `number \| string` | — | Secondary pane minimum; tightens primary effective max while dragging. |
 | `disabled` | `boolean` | `false` | Disable drag and keyboard resize. |
 | `resizeTriggerSize` | `number` | `6` | Gutter thickness in px. |
 | `resizeTriggerClass` / `resizeTriggerStyle` | — | — | Gutter class / style. |

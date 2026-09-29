@@ -26,10 +26,16 @@ import { MSpace } from 'morya-ui'
 
 ## Size
 
+`size` 支持 token 映射：`small` → `--m-space-2`、`medium` → `--m-space-3`、`large` → `--m-space-4`，也可传数字 / CSS 长度 / `[列, 行]`。
+
 ```vue preview src="./demos/Size.vue"
 ```
 
 未传 `size` 时默认 `medium`。可用 `MConfigProvider` 的 `componentDefaults.Space.size` 改全局间距（与控件 `size` 无关）。
+
+## Compact（按钮紧凑）
+
+相邻按钮拼合请用 [`MButtonGroup`](/components/Button/#button-group)；表单控件 addon 请用各自组件的前缀/后缀能力，不在 `MSpace` 上重复实现。
 
 ## Without Item Wrapper
 

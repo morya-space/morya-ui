@@ -29,4 +29,27 @@ describe('muFlex', () => {
     })
     expect(wrapper.element.style.gap).toBe('12px')
   })
+
+  it('uses gap as an alias of size', () => {
+    const wrapper = mount(MFlex, {
+      props: { gap: 'large' },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(wrapper.element.style.gap).toBe('var(--m-space-4)')
+  })
+
+  it('supports wrap and vertical', () => {
+    const horizontal = mount(MFlex, {
+      props: { wrap: false },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(horizontal.element.style.flexWrap).toBe('nowrap')
+
+    const vertical = mount(MFlex, {
+      props: { vertical: true, wrap: true },
+      slots: { default: '<span>A</span>' },
+    })
+    expect(vertical.element.style.flexDirection).toBe('column')
+    expect(vertical.element.style.flexWrap).toBe('nowrap')
+  })
 })

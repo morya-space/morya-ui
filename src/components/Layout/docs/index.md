@@ -86,8 +86,8 @@ Header / Content / Footer。Content 会占满中间剩余高度。
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `width` | `number \| string` | `272` | 展开宽度（始终写在 `width` 上）。 |
-| `collapsedWidth` | `number` | `48` | 折叠时的 `max-width`。 |
+| `width` | `number \| string` | `var(--m-layout-sider-width)` → `--m-nav-rail-width`（默认 `12.5rem` / 200px） | 展开宽度。 |
+| `collapsedWidth` | `number \| string` | `var(--m-layout-sider-collapsed-width)` → `--m-nav-rail-collapsed-width`（默认 `5rem` / 80px） | 折叠时的 `max-width`。 |
 | `collapsed` | `boolean` | — | 折叠状态，支持 `v-model:collapsed`。 |
 | `defaultCollapsed` | `boolean` | `false` | 非受控初始折叠。 |
 | `showTrigger` | `boolean \| 'bar' \| 'arrow-circle' \| 'arrow'` | `false` | 折叠触发器；`arrow` 等同 `arrow-circle`。 |

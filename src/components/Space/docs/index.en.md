@@ -26,10 +26,16 @@ import { MSpace } from 'morya-ui'
 
 ## Size
 
+`size` token map: `small` → `--m-space-2`, `medium` → `--m-space-3`, `large` → `--m-space-4`. Also accepts numbers, CSS lengths, or `[column, row]`.
+
 ```vue preview src="./demos/Size.vue"
 ```
 
 When `size` is omitted it defaults to `medium`. Override the global gap with `MConfigProvider` `componentDefaults.Space.size` (independent of control `size`).
+
+## Compact (joined buttons)
+
+Use [`MButtonGroup`](/components/Button/#button-group) to join adjacent buttons. Form control addons belong on those inputs — `MSpace` is spacing only.
 
 ## Without Item Wrapper
 

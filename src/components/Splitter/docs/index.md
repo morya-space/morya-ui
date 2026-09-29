@@ -35,6 +35,13 @@ import { MSplitter } from 'morya-ui'
 ```vue preview src="./demos/SizeModes.vue"
 ```
 
+## Panel min sizes
+
+`min` 限制主面板（panel1）；`min2` 限制次面板，拖拽时会收紧主面板的有效上限。
+
+```vue preview src="./demos/PanelMins.vue"
+```
+
 ## Disabled
 
 ```vue preview src="./demos/Disabled.zh.vue"
@@ -55,7 +62,8 @@ import { MSplitter } from 'morya-ui'
 | `direction` | 同上 | — | `layout` 的别名。 |
 | `size` | `number \| string` | — | 受控尺寸；`>1` 为 `%`，`≤1` 为比例，`'Npx'` 为像素。 |
 | `defaultSize` | `number \| string` | `50` | 非受控初始尺寸。 |
-| `min` / `max` | `number \| string` | 随模式 | 下限 / 上限（单位与 `size` 一致）。 |
+| `min` / `max` | `number \| string` | 随模式 | 主面板下限 / 上限（单位与 `size` 一致）。 |
+| `min2` | `number \| string` | — | 次面板下限；拖拽时会收紧主面板有效上限。 |
 | `disabled` | `boolean` | `false` | 禁用拖拽与键盘调整。 |
 | `resizeTriggerSize` | `number` | `6` | 分隔条厚度（px）。 |
 | `resizeTriggerClass` / `resizeTriggerStyle` | — | — | 分隔条 class / style。 |

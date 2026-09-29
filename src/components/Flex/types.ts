@@ -17,8 +17,10 @@ export interface FlexProps {
   vertical?: boolean
   /** Reverse main axis. */
   reverse?: boolean
-  /** Gap between items. */
+  /** Gap between items. Preferred over `gap`. */
   size?: FlexSize
+  /** Alias of `size` (`gap`). */
+  gap?: FlexSize
   /** Allow wrapping (ignored when `vertical`). */
   wrap?: boolean
 }

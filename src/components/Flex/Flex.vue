@@ -26,7 +26,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
 const slots = useSlots()
-const resolvedSize = useConfiguredGapSize('Flex', () => props.size)
+const resolvedSize = useConfiguredGapSize('Flex', () => props.size ?? props.gap)
 const children = computed(() => flattenVNodes(slots.default?.()))
 
 const rootStyle = computed((): CSSProperties | undefined => {
