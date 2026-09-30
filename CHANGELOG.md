@@ -1,5 +1,73 @@
 # morya-ui
 
+## 0.4.0
+
+### 破坏性变更
+
+- align with the antd API and add advanced options
+
+### 新功能
+
+- wire filled variant and allow null model values
+- add eight additional locale packs
+- add thin DatePicker time wrapper
+- add a notification API and richer messages
+- add an imperative modal API
+- add a 24-column flex grid with responsive Row/Col
+- add a controlled form instance, nested fields and FormList
+- add copyable, editable and multi-line ellipsis
+- add copy, edit and field validation messages
+- support theme overrides, global disabled and RTL
+- add a seed-driven token derivation engine
+- add MList with meta rows and pagination
+- add MCalendar with fullscreen and range guards
+- add Segmented, Mentions, and Statistic
+- add Affix, Anchor, Tour, Watermark, and QRCode
+- deepen Dialog, Progress, Loading, and docs tone
+- polish Tag density and Table filter summary
+- deepen Form, inputs, and Select status handling
+- deepen Breadcrumb, Dropdown, Pagination, Stepper, Tabs
+- deepen Divider, Flex, Splitter, Space, and Layout
+- expand type coverage for time and ranges
+- add dashed variant, shapes, and float polish
+- add MTitle, MText, MParagraph, and MLink
+- add MImage with click-to-preview group
+- add MDescriptions and MDescriptionsItem
+- add MAlert for persistent in-page notices
+- refresh default tokens for enterprise visual feel
+
+### 修复
+
+- allow FormList initialValue factories and document FormList
+- add missing tokens and tokenize Button active color
+- unblock typecheck and map morya-ui to source
+- tile the overlay at the real pattern size
+- repair an invalid byte in the base stylesheet comment
+
+### 文档
+
+- repair List docs and restore corrupted Chinese API pages
+- clear remaining component API docs drift
+- cut List/Page/Grid docs drift and harden the auditor
+- add TimePicker events table and improve drift audits
+- drop when-to-use sections that restate the description
+- restructure navigation and add recipe walkthroughs
+- remove boilerplate tip from when-to-use sections
+- drop third-party parity references from docs and code
+- add design specs, mapping and theme editor
+- backfill when-to-use sections
+- add nested options demo
+- add conventions page for naming and feedback vocabulary
+
+### 变更
+
+- normalize double-spaced sources and CSS file headers
+- cut false positives in the API auditor
+- add typecheck and unit-test gates; fix Vitest includes
+- add size, docs-smoke and visual quality gates
+- export and register the new components
+- export and register new enterprise components
+
 ## 0.3.8
 
 ### 新功能
