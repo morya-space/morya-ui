@@ -71,9 +71,9 @@ const PopupWrapper = defineComponent({
       default: undefined,
     },
   },
-  setup(wrapperProps, { slots }) {
+  setup(wrapperProps, ctx) {
     return (): VNodeChild => {
-      const content = slots.default?.()
+      const content = ctx.slots.default?.()
       return wrapperProps.render ? wrapperProps.render(content) : content
     }
   },

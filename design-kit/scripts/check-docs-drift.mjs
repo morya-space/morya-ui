@@ -157,6 +157,15 @@ function parseTypesFile(text) {
         pendingComment = ''
         continue
       }
+      // Emits 属性形态：'update:open': [boolean] / finish: []
+      if (name.endsWith('Emits')) {
+        const quotedEv = raw.match(/^\s*(?:readonly\s+)?['"]([^'"]+)['"]\s*(?:\?\s*)?:\s*(.*)$/)
+        if (quotedEv) {
+          events.push({ name: quotedEv[1], line: lineNo })
+          pendingComment = ''
+          continue
+        }
+      }
       const fm = raw.match(/^\s*(?:readonly\s+)?([A-Za-z_$][\w$]*)\s*(?:\?\s*)?:\s*(.*)$/)
       if (fm) {
         let type = fm[2].replace(/;+\s*$/, '').trim()
@@ -168,6 +177,7 @@ function parseTypesFile(text) {
         }
         k = k2
         fields.set(fm[1], { line: lineNo, type, internal: internal || /@internal/.test(pendingComment) })
+        if (name.endsWith('Emits')) events.push({ name: fm[1], line: lineNo })
       }
       pendingComment = ''
     }
@@ -352,6 +362,7 @@ function parseDoc(text, compName) {
 
   // ---- 表格 ----
   let headingKinds = []
+  let currentHeading = ''
   let inCode = false
   let i = 0
   while (i < lines.length) {
@@ -367,6 +378,7 @@ function parseDoc(text, compName) {
     }
     const h = line.match(/^#{2,4}\s+(.+?)\s*$/)
     if (h) {
+      currentHeading = h[1]
       headingKinds = classifyHeading(h[1])
       for (const kind of headingKinds) sectionsFound[kind] = true
       i += 1
@@ -378,7 +390,15 @@ function parseDoc(text, compName) {
         block.push({ text: lines[i], line: i + 1 })
         i += 1
       }
-      const kind = classifyTableHeader(block[0].text) ?? headingKinds[0]
+      let kind = classifyTableHeader(block[0].text) ?? headingKinds[0]
+      // 服务 / 命令式 API 参数表（如 loading.service options）不当作组件 Props
+      if (
+        kind === 'props'
+        && !headingKinds.includes('props')
+        && /服务|service|imperative|命令式|api\s*options/i.test(currentHeading)
+      ) {
+        continue
+      }
       if (!kind) continue
       sectionsFound[kind] = true
       const target = kind === 'props' ? props : kind === 'events' ? events : slots
@@ -390,6 +410,8 @@ function parseDoc(text, compName) {
         for (const token of tokens) {
           if (!token) continue
           if (kind === 'events' && /\(/.test(token)) continue // expose 方法写法，如 validate(name?)
+          // `v-model` / `v-model:mode` 是文档写法，对应 modelValue / mode
+          if (kind === 'props' && /^v-model\b/i.test(token)) continue
           if (target.has(token)) continue
           target.set(token, { line: row.line, type: kind === 'props' ? cells[1] ?? '' : '' })
         }
@@ -511,6 +533,17 @@ function parseVueFile(text) {
       const evRe = /\(\s*event:\s*['"]([^'"]+)['"]/g
       let ev
       while ((ev = evRe.exec(body))) inlineEmits.push({ name: ev[1], line: baseLine + lineOf(body, ev.index) - 1 })
+      // 属性形态（须为元组类型）：finish: [] / 'update:open': [boolean]
+      // 避免把 (event: 'click', value: MouseEvent) 里的形参 value 当成事件名
+      const propEvRe = /(?:^|[,;\n])\s*(?:['"]([^'"]+)['"]|([A-Za-z_$][\w$]*))\s*\??\s*:\s*(\[[^\]]*\])/g
+      let pev
+      while ((pev = propEvRe.exec(body))) {
+        const ename = pev[1] ?? pev[2]
+        if (!ename) continue
+        if (!inlineEmits.some((e) => e.name === ename)) {
+          inlineEmits.push({ name: ename, line: baseLine + lineOf(body, pev.index) - 1 })
+        }
+      }
     } else {
       const nm = rest.match(/^([A-Z_$][\w$]*)\s*>/i)
       if (nm) emitTypeRefs.push(nm[1])
@@ -643,12 +676,13 @@ function mergeFieldsInto(target, fields, locPrefix, inheritedKeys) {
  * Pull props from `extends Foo` bases and `type XProps = Omit<YProps, …>` aliases.
  * Inherited fields count for docs-only checks but are skipped for impl-only (wrappers document a subset).
  */
-function absorbInheritedProps(implProps, { dir, typesPath, typesText, parsed, propsIfaceRe }) {
+function absorbInheritedProps(implProps, { dir, typesPath, typesText, parsed, propsIfaceRe, usedPropIfaces }) {
   const imports = parseTypeImports(typesText, typesPath)
   const inheritedKeys = new Set()
 
   for (const [ifaceName] of parsed.interfaces) {
     if (!propsIfaceRe.test(ifaceName) || ifaceName.endsWith('SlotProps')) continue
+    if (usedPropIfaces && !usedPropIfaces.has(ifaceName)) continue
     const extRe = new RegExp(
       `interface\\s+${escapeRegExp(ifaceName)}\\s+extends\\s+([^{]+)\\{`,
     )
@@ -776,11 +810,16 @@ function analyzeComponent(dir) {
   for (const file of vueFiles) allVueParsed.set(file, parseVueFile(readFileSync(file, 'utf8')))
   const mainParsed = allVueParsed.get(mainVuePath) ?? null
 
-  // props：目录内全部 *Props（排除 *SlotProps）∪ defineProps 引用 ∪ 主组件内联
+  // props：defineProps 引用的 *Props（含内联）∪ 主组件 NameProps；排除仅作嵌套类型的 *Props（如 TourStepButtonProps）
   const implProps = new Map() // name -> { loc, type, internal }
   const propsIfaceRe = /Props$/
+  const usedPropIfaces = new Set([`${name}Props`])
+  for (const pv of allVueParsed.values()) {
+    for (const ref of pv.propTypeRefs) usedPropIfaces.add(ref)
+  }
   for (const [ifaceName, iface] of parsed.interfaces) {
     if (!propsIfaceRe.test(ifaceName) || ifaceName.endsWith('SlotProps')) continue
+    if (!usedPropIfaces.has(ifaceName)) continue
     const locFile = iface._file || 'types.ts'
     for (const [fieldName, field] of iface.fields) {
       if (!implProps.has(fieldName)) {
@@ -801,6 +840,7 @@ function analyzeComponent(dir) {
       : (typeFiles[0] ? readFileSync(typeFiles[0], 'utf8') : ''),
     parsed,
     propsIfaceRe,
+    usedPropIfaces,
   })
   for (const pv of allVueParsed.values()) {
     for (const ref of pv.propTypeRefs) {
@@ -822,7 +862,7 @@ function analyzeComponent(dir) {
     }
   }
 
-  // events：目录内全部 *Emits ∪ defineEmits ∪ emit() 调用
+  // events：目录内全部 *Emits ∪ defineEmits ∪ emit() 调用（含子组件 .vue）
   const implEvents = new Map() // name -> loc
   const emitsIfaceRe = /Emits$/
   for (const [ifaceName, iface] of parsed.interfaces) {
@@ -849,6 +889,7 @@ function analyzeComponent(dir) {
       for (const ev of iface.events) if (!implEvents.has(ev.name)) implEvents.set(ev.name, `${locFile}:${ev.line}`)
     }
   }
+  // 仅主组件 .vue 的 defineEmits / emit()；子文件内部事件不当作对账表面
   if (mainParsed) {
     for (const ev of mainParsed.inlineEmits) if (!implEvents.has(ev.name)) implEvents.set(ev.name, `${name}.vue:${ev.line}`)
     for (const ev of mainParsed.emitCalls) if (!implEvents.has(ev.name)) implEvents.set(ev.name, `${name}.vue:${ev.line}`)
@@ -937,11 +978,17 @@ function analyzeComponent(dir) {
     if (!loc.startsWith('types.ts')) continue
     // emit 形参在 composable 中常命名为 emits（如 Table hooks），两种形态都认
     const re = new RegExp(`\\$?emits?\\s*\\(\\s*['"]${escapeRegExp(n)}['"]`)
-    if (!re.test(searchText)) {
-      add('declared-unused', 'event', n,
-        docEventsNorm.has(normKey(n)) ? `docs/index.md:${docEventsNorm.get(normKey(n)).line}` : null,
-        loc, 'types.ts 已声明，但未检索到 emit() 调用（疑似未接线，需人工确认）')
-    }
+    if (re.test(searchText)) continue
+    // defineModel() → update:modelValue；defineModel('x') → update:x
+    if (n === 'update:modelValue' && /defineModel\s*(?:<[^>]*>)?\s*\(/.test(searchText)) continue
+    const modelKey = n.match(/^update:(.+)$/)
+    if (
+      modelKey
+      && new RegExp(`defineModel\\s*(?:<[^>]*>)?\\s*\\(\\s*['"]${escapeRegExp(modelKey[1])}['"]`).test(searchText)
+    ) continue
+    add('declared-unused', 'event', n,
+      docEventsNorm.has(normKey(n)) ? `docs/index.md:${docEventsNorm.get(normKey(n)).line}` : null,
+      loc, 'types.ts 已声明，但未检索到 emit() 调用（疑似未接线，需人工确认）')
   }
 
   result.implMeta = {
