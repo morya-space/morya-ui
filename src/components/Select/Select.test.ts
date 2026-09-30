@@ -429,6 +429,25 @@ describe('muSelect — field remapping and options', () => {
     expect(wrapper.find('.custom-popup').exists()).toBe(true)
   })
 
+  it('keeps a single popup root so overlay Transition classes can apply', async () => {
+    const wrapper = mount(MSelect, {
+      props: { options, teleport: false },
+    })
+
+    const transition = wrapper.findAllComponents({ name: 'Transition' })[0]
+    expect(transition?.props('name')).toBe('m-scale-fade')
+    expect(transition?.props('css')).toBe(true)
+
+    await wrapper.get('[role="combobox"]').trigger('click')
+    await nextTick()
+
+    const menu = wrapper.get('.m-select__menu')
+    // PopupWrapper must unwrap the slot array to a real element root; otherwise
+    // Transition receives a Fragment and never applies m-scale-fade-* classes.
+    expect(menu.element.nodeType).toBe(Node.ELEMENT_NODE)
+    expect(menu.element.className).toContain('m-select__menu')
+  })
+
   it('swaps the trigger icon through suffixIcon', () => {
     const fallback = mount(MSelect, { props: { options, teleport: false } })
     const custom = mount(MSelect, {

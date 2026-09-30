@@ -62,7 +62,10 @@ const emit = defineEmits<{
   (event: 'create', option: SelectOption): void
 }>()
 
-/** Applies `popupRender` around the dropdown when provided. */
+/** Applies `popupRender` around the dropdown when provided.
+ * Must return a single root vnode — `<Transition>` cannot attach enter/leave
+ * classes to a Fragment (the raw `slots.default()` array).
+ */
 const PopupWrapper = defineComponent({
   name: 'MSelectPopupWrapper',
   props: {
@@ -73,8 +76,12 @@ const PopupWrapper = defineComponent({
   },
   setup(wrapperProps, ctx) {
     return (): VNodeChild => {
-      const content = ctx.slots.default?.()
-      return wrapperProps.render ? wrapperProps.render(content) : content
+      const nodes = ctx.slots.default?.() ?? []
+      const menu: VNodeChild = nodes.length === 1 ? nodes[0]! : nodes
+      if (!wrapperProps.render) return menu
+      const wrapped = wrapperProps.render(menu)
+      if (Array.isArray(wrapped) && wrapped.length === 1) return wrapped[0]!
+      return wrapped
     }
   },
 })

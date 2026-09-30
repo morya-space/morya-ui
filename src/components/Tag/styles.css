@@ -1,9 +1,9 @@
 .m-tag {
-    --m-tag-icon-size: 0.75rem;
-    --m-tag-padding-block: 0;
+    --m-tag-icon-size: 0.875rem;
+    --m-tag-padding-block: var(--m-space-1);
     --m-tag-padding-inline: var(--m-space-2);
     --m-tag-close-gap: calc(var(--m-space-1) - var(--m-border-width));
-    --m-tag-line-height: 1.6667;
+    --m-tag-line-height: 1.4286;
     align-items: center;
     background: color-mix(in srgb, var(--m-color-primary) 12%, transparent);
     border: var(--m-border-width) solid transparent;
@@ -12,7 +12,7 @@
     color: var(--m-color-primary);
     display: inline-flex;
     font-family: var(--m-font-sans);
-    font-size: var(--m-font-size-xs);
+    font-size: var(--m-font-size-sm);
     font-weight: 400;
     gap: var(--m-space-1);
     height: auto;
@@ -84,17 +84,19 @@
 }
 
 .m-tag--small {
-    --m-tag-icon-size: 0.625rem;
+    --m-tag-icon-size: 0.75rem;
     --m-tag-padding-block: 0;
-    --m-tag-padding-inline: var(--m-space-1);
+    --m-tag-padding-inline: var(--m-space-2);
+    --m-tag-line-height: 1.6667;
     font-size: var(--m-tag-font-size-small);
 }
 
 .m-tag--large {
-    --m-tag-icon-size: 0.875rem;
+    --m-tag-icon-size: 1rem;
     --m-tag-padding-block: var(--m-space-1);
     --m-tag-padding-inline: var(--m-space-3);
-    font-size: var(--m-font-size-sm);
+    --m-tag-line-height: 1.375;
+    font-size: var(--m-font-size-md);
 }
 
 .m-tag--bordered {
