@@ -49,7 +49,13 @@ Inherits [DatePicker](/components/DatePicker) props except `type` (always `time`
 
 ## Events
 
-Same as DatePicker: `update:modelValue`, `change`, `clear`, `show`, `hide`.
+| Event | Payload | Description |
+| --- | --- | --- |
+| `update:modelValue` | `string \| Date \| null` | Value changed. |
+| `change` | `string \| Date \| null` | Selection finished. |
+| `clear` | — | Clear clicked. |
+| `show` | — | Panel opened. |
+| `hide` | — | Panel closed. |
 
 ## FAQ
 

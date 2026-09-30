@@ -595,6 +595,120 @@ function collectFiles(dir, filter) {
   return out
 }
 
+/** Resolve `from '../X'` / `from './x'` to an absolute .ts path when possible. */
+function resolveTypeImport(fromPath, spec) {
+  if (!spec.startsWith('.')) return null
+  const base = path.resolve(path.dirname(fromPath), spec)
+  for (const candidate of [`${base}.ts`, path.join(base, 'index.ts'), base]) {
+    if (existsSync(candidate) && candidate.endsWith('.ts')) return candidate
+  }
+  return null
+}
+
+/** Map imported symbol → absolute types file path. */
+function parseTypeImports(typesText, typesPath) {
+  const map = new Map()
+  if (!typesText || !typesPath) return map
+  const re = /import\s+type\s*\{([^}]+)\}\s*from\s*['"]([^'"]+)['"]/g
+  let m
+  while ((m = re.exec(typesText))) {
+    const resolved = resolveTypeImport(typesPath, m[2])
+    if (!resolved) continue
+    for (const part of m[1].split(',')) {
+      const token = part.trim()
+      if (!token) continue
+      const [local] = token.split(/\s+as\s+/).map((s) => s.trim())
+      if (local) map.set(local, resolved)
+    }
+  }
+  return map
+}
+
+function mergeFieldsInto(target, fields, locPrefix, inheritedKeys) {
+  for (const [fieldName, field] of fields) {
+    if (target.has(fieldName)) continue
+    target.set(fieldName, {
+      loc: `${locPrefix}:${field.line}`,
+      type: field.type,
+      internal: Boolean(field.internal),
+      inherited: true,
+    })
+    inheritedKeys?.add(fieldName)
+  }
+}
+
+/**
+ * Pull props from `extends Foo` bases and `type XProps = Omit<YProps, …>` aliases.
+ * Inherited fields count for docs-only checks but are skipped for impl-only (wrappers document a subset).
+ */
+function absorbInheritedProps(implProps, { dir, typesPath, typesText, parsed, propsIfaceRe }) {
+  const imports = parseTypeImports(typesText, typesPath)
+  const inheritedKeys = new Set()
+
+  for (const [ifaceName] of parsed.interfaces) {
+    if (!propsIfaceRe.test(ifaceName) || ifaceName.endsWith('SlotProps')) continue
+    const extRe = new RegExp(
+      `interface\\s+${escapeRegExp(ifaceName)}\\s+extends\\s+([^{]+)\\{`,
+    )
+    const ext = typesText.match(extRe)
+    if (!ext) continue
+    for (const base of ext[1].split(',').map((s) => s.trim()).filter(Boolean)) {
+      const id = base.replace(/<.*>/, '').trim()
+      const file = imports.get(id)
+      if (!file) continue
+      const remote = parseTypesFile(readFileSync(file, 'utf8'))
+      const iface = remote.interfaces.get(id)
+      if (iface) mergeFieldsInto(implProps, iface.fields, path.relative(dir, file).replace(/\\/g, '/'), inheritedKeys)
+    }
+  }
+
+  for (const [aliasName, alias] of parsed.aliases) {
+    if (!propsIfaceRe.test(aliasName)) continue
+    const omitPick = alias.type.match(/^(?:Omit|Pick)<\s*([A-Za-z_$][\w$]*)\s*,/)
+    if (!omitPick) continue
+    const refName = omitPick[1]
+    let file = imports.get(refName)
+    if (!file) {
+      const sibling = path.join(dir, '..', refName.replace(/Props$/, ''), 'types.ts')
+      if (existsSync(sibling)) file = sibling
+    }
+    if (!file) continue
+    const remote = parseTypesFile(readFileSync(file, 'utf8'))
+    const iface = remote.interfaces.get(refName)
+    if (iface) mergeFieldsInto(implProps, iface.fields, path.relative(dir, file).replace(/\\/g, '/'), inheritedKeys)
+  }
+  return inheritedKeys
+}
+
+/** Pull emits from `type XEmits = YEmits` aliases. Returns inherited event names. */
+function absorbInheritedEmits(implEvents, { dir, typesPath, typesText, parsed, emitsIfaceRe }) {
+  const imports = parseTypeImports(typesText, typesPath)
+  const inheritedKeys = new Set()
+  for (const [aliasName, alias] of parsed.aliases) {
+    if (!emitsIfaceRe.test(aliasName)) continue
+    const ref = alias.type.match(/^([A-Za-z_$][\w$]*)$/)
+    if (!ref) continue
+    const refName = ref[1]
+    let file = imports.get(refName)
+    if (!file) {
+      const sibling = path.join(dir, '..', refName.replace(/Emits$/, ''), 'types.ts')
+      if (existsSync(sibling)) file = sibling
+    }
+    if (!file) continue
+    const remote = parseTypesFile(readFileSync(file, 'utf8'))
+    const iface = remote.interfaces.get(refName)
+    if (!iface) continue
+    const rel = path.relative(dir, file).replace(/\\/g, '/')
+    for (const ev of iface.events) {
+      if (!implEvents.has(ev.name)) {
+        implEvents.set(ev.name, `${rel}:${ev.line}`)
+        inheritedKeys.add(ev.name)
+      }
+    }
+  }
+  return inheritedKeys
+}
+
 function analyzeComponent(dir) {
   const name = path.basename(dir)
   const result = {
@@ -645,6 +759,14 @@ function analyzeComponent(dir) {
       }
     }
   }
+  // 继承 / Omit / Pick：把跨文件 Props 基座字段并入（避免文档误报「文档有实现无」）
+  const inheritedPropKeys = absorbInheritedProps(implProps, {
+    dir,
+    typesPath,
+    typesText: existsSync(typesPath) ? readFileSync(typesPath, 'utf8') : '',
+    parsed,
+    propsIfaceRe,
+  })
   for (const pv of allVueParsed.values()) {
     for (const ref of pv.propTypeRefs) {
       const iface = parsed.interfaces.get(ref)
@@ -673,6 +795,13 @@ function analyzeComponent(dir) {
       if (!implEvents.has(ev.name)) implEvents.set(ev.name, `types.ts:${ev.line}`)
     }
   }
+  const inheritedEventKeys = absorbInheritedEmits(implEvents, {
+    dir,
+    typesPath,
+    typesText: existsSync(typesPath) ? readFileSync(typesPath, 'utf8') : '',
+    parsed,
+    emitsIfaceRe,
+  })
   for (const pv of allVueParsed.values()) {
     for (const ref of pv.emitTypeRefs) {
       const iface = parsed.interfaces.get(ref)
@@ -714,7 +843,7 @@ function analyzeComponent(dir) {
     }
   }
   for (const [n, meta] of implProps) {
-    if (meta.internal) continue
+    if (meta.internal || meta.inherited || inheritedPropKeys.has(n)) continue
     if (!docPropsNorm.has(normKey(n))) {
       add('impl-only', 'prop', n, null, meta.loc,
         sectionsNote(doc.sectionsFound.props, 'Props', '文档 Props 表未记载'))
@@ -728,6 +857,7 @@ function analyzeComponent(dir) {
     }
   }
   for (const [n, loc] of implEvents) {
+    if (inheritedEventKeys.has(n)) continue
     if (!docEventsNorm.has(normKey(n))) {
       add('impl-only', 'event', n, null, loc,
         sectionsNote(doc.sectionsFound.events, 'Events', '文档 Events 表未记载'))

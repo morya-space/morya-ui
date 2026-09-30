@@ -24,7 +24,10 @@ for (const file of await walk(ROOT)) {
   const src = await readFile(file, 'utf8')
   const hasComposable = /use(?:Root|Field|ControlRoot)Parts/.test(src)
   const hasInherit = /inheritAttrs\s*:\s*false/.test(src)
-  const hasRootBind = /v-bind="rootAttrs"/.test(src)
+  const hasRootBind =
+    /v-bind="rootAttrs"/.test(src)
+    || /v-bind="\{\s*\.\.\.rootAttrs/.test(src)
+    || /\.\.\.rootAttrs\.value/.test(src)
   const hasControlOnly = /v-bind="controlAttrs"/.test(src) && !hasRootBind
 
   if (hasComposable && hasInherit && !hasRootBind && !hasControlOnly) {

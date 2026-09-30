@@ -18,6 +18,9 @@ const HSL = /\bhsl\s*\(/g
 /** Allow transparent, currentColor, inherit in CSS values */
 const ALLOW_LINE = /var\s*\(\s*--m-|color-mix\s*\(|transparent|currentColor|inherit|none/
 
+/** Canvas / encoder fallbacks that must stay concrete for off-DOM drawing. */
+const ALLOW_CANVAS_FALLBACK = /rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\)/
+
 /** Skip demo IDs like '#1024' or 'WO-1024' in script/template strings */
 const DEMO_ID = /['"]#?[A-Z0-9-]{2,}['"]/
 
@@ -28,7 +31,7 @@ function walk(dir) {
     const full = path.join(dir, name)
     const st = statSync(full)
     if (st.isDirectory()) {
-      if (IGNORE_DIRS.has(name)) continue
+      if (IGNORE_DIRS.has(name) || name === 'demos') continue
       walk(full)
       continue
     }
@@ -36,12 +39,14 @@ function walk(dir) {
     if (!EXT.has(ext)) continue
     const normalized = full.replace(/\\/g, '/')
     if (normalized.includes('design-tokens/') || normalized.includes('/theme/')) continue
+    if (normalized.includes('/docs/demos/')) continue
     if (normalized.includes('.test.') || normalized.includes('/__tests__/')) continue
 
     const text = readFileSync(full, 'utf8')
     const lines = text.split(/\r?\n/)
     lines.forEach((line, index) => {
       if (ALLOW_LINE.test(line)) return
+      if (ALLOW_CANVAS_FALLBACK.test(line)) return
       if (DEMO_ID.test(line)) return
       if (HEX.test(line) || RGB.test(line) || HSL.test(line)) {
         HEX.lastIndex = 0

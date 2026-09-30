@@ -49,7 +49,13 @@ import { MTimePicker } from 'morya-ui'
 
 ## Events
 
-与 DatePicker 相同：`update:modelValue`、`change`、`clear`、`show`、`hide`。
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `update:modelValue` | `string \| Date \| null` | 值变化。 |
+| `change` | `string \| Date \| null` | 选择完成。 |
+| `clear` | — | 点击清除。 |
+| `show` | — | 面板打开。 |
+| `hide` | — | 面板关闭。 |
 
 ## FAQ
 
