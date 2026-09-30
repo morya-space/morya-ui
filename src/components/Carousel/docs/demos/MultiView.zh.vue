@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { MCarousel, MCarouselItem } from 'morya-ui'
 
-const slides = ['01', '02', '03', '04']
+const slides = ['一', '二', '三', '四', '五', '六']
 </script>
 
 <template>
   <MCarousel
-    autoplay
-    :interval="4000"
+    :slides-per-view="3"
+    :space-between="12"
+    :loop="false"
     show-arrow
-    style="height: 160px"
+    draggable
+    style="height: 120px"
   >
     <MCarouselItem
       v-for="slide in slides"
@@ -21,7 +23,6 @@ const slides = ['01', '02', '03', '04']
           background: var(--m-color-surface-muted, #f3f4f6);
           border-radius: var(--m-radius-md);
           display: flex;
-          font-size: 2rem;
           height: 100%;
           justify-content: center;
         "

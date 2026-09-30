@@ -1,15 +1,33 @@
 <script setup lang="ts">
-import { MCarousel } from 'morya-ui'
+import { MCarousel, MCarouselItem } from 'morya-ui'
 
-const value = ['Spring', 'Summer', 'Autumn', 'Winter']
+const slides = [
+  { title: 'Spring', color: 'color-mix(in srgb, var(--m-color-success) 18%, var(--m-color-surface))' },
+  { title: 'Summer', color: 'color-mix(in srgb, var(--m-color-warning) 18%, var(--m-color-surface))' },
+  { title: 'Autumn', color: 'color-mix(in srgb, var(--m-color-danger) 16%, var(--m-color-surface))' },
+  { title: 'Winter', color: 'color-mix(in srgb, var(--m-color-info) 18%, var(--m-color-surface))' },
+]
 </script>
 
 <template>
-  <MCarousel :value="value" :num-visible="1" circular>
-    <template #item="{ item }">
-      <div style="padding:2rem;text-align:center;background:var(--m-color-surface-muted, #f3f4f6);border-radius:var(--m-radius-md)">
-        {{ item }}
+  <MCarousel show-arrow style="height: 180px">
+    <MCarouselItem
+      v-for="slide in slides"
+      :key="slide.title"
+    >
+      <div
+        style="
+          align-items: center;
+          display: flex;
+          font-size: 1.5rem;
+          height: 100%;
+          justify-content: center;
+          border-radius: var(--m-radius-md);
+        "
+        :style="{ background: slide.color }"
+      >
+        {{ slide.title }}
       </div>
-    </template>
+    </MCarouselItem>
   </MCarousel>
 </template>
