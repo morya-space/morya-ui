@@ -8,7 +8,7 @@
  * The output is a plain `Record<cssVarName, value>`; apply it to a DOM element
  * (see `createTheme`) to override the defaults shipped in `styles.css`.
  *
- * Derivation rules follow Ant Design's seed → map → alias pipeline so the
+ * Derivation rules follow the classic seed → map → alias pipeline so the
  * results stay compatible with the design language this library targets.
  * For the default seeds the output reproduces the values already authored in
  * `src/theme/styles.css` exactly.
@@ -54,7 +54,7 @@ function pick(tokens: TokenMap, name: string): string {
 }
 
 /**
- * Map the raw 10-step generated palette onto Ant Design's 1-based token
+ * Map the raw 10-step generated palette onto 1-based token
  * indices. Light and dark themes read the palette in different orders.
  */
 function toIndexedPalette(baseColor: string, dark: boolean): IndexedPalette {
@@ -124,7 +124,7 @@ function deriveColorTokens(seed: MSeedTokens, dark: boolean): TokenMap {
     tokens[`color${name}TextActive`] = palette[10]
   }
 
-  // Family-specific deviations from the shared shape, mirroring Ant Design.
+  // Family-specific deviations from the shared shape.
   tokens.colorSuccessHover = palettes.success[4]
   tokens.colorWarningHover = palettes.warning[4]
   tokens.colorInfoHover = palettes.info[4]
@@ -377,7 +377,7 @@ export function deriveMapTokens(seed: MSeedTokens, options: DeriveOptions = {}):
 /**
  * Convert camelCase token names into `--m-*` custom properties.
  *
- * A few Ant Design token names collide with legacy Morya tokens that carry a
+ * A few derived token names collide with legacy Morya tokens that carry a
  * different meaning (a different concrete value). Those are intentionally not
  * emitted here — the legacy scale stays authoritative, and the derived value is
  * still available on the token map itself (`deriveMapTokens`).
@@ -396,7 +396,7 @@ export function tokensToCssVars(tokens: TokenMap): CssVarMap {
  * different value. Skipped on purpose to avoid regressing the shipped scale.
  */
 const LEGACY_NAME_COLLISIONS = new Set([
-  // Legacy: 13px / 18px. Ant Design: 12px / 16px.
+  // Legacy: 13px / 18px. Derived scale: 12px / 16px.
   'fontSizeSM',
   'fontSizeLG',
 ])

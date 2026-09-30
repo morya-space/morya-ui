@@ -422,7 +422,7 @@ export function buildLlmsTxt(pages) {
     ">",
     `> Docs: ${SITE_ORIGIN}/`,
     "",
-    "Prefer morya API vocabulary (`severity`, `variant`, `--m-*`). Do not invent Ant Design prop names on morya components — see antd mapping. Unsure about an API? use MCP / component docs.",
+    "Prefer morya API vocabulary (`severity`, `variant`, `--m-*`). Do not invent prop names that are not documented on morya components. Unsure about an API? use MCP / component docs.",
     "",
     "## Guides",
     "",

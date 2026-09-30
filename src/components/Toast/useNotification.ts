@@ -1,6 +1,5 @@
 /**
- * Notification API — the Ant Design `notification` / `useNotification` shape
- * on top of the toast service.
+ * Notification API on top of the toast service.
  *
  * ```ts
  * const notification = useNotification()
@@ -16,7 +15,7 @@ import type { IconName } from '../Icon/types'
 import type { ToastHandle, ToastPosition } from './types'
 import { toast } from './toast'
 
-/** Camel-cased placements, matching Ant Design's `notification` API. */
+/** Camel-cased notification placements. */
 export type NotificationPlacement =
   | 'topLeft'
   | 'topRight'
@@ -109,5 +108,5 @@ export function useNotification(): NotificationApi {
   }
 }
 
-/** Module-level notification API, mirroring Ant Design's static `notification.*`. */
+/** Module-level notification API. */
 export const notification: NotificationApi = useNotification()

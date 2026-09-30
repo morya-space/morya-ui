@@ -1,5 +1,5 @@
 /**
- * Bundle size gate for dist/ artifacts (antd-style size budget, zero deps).
+ * Bundle size gate for dist/ artifacts (zero deps).
  *
  * Reads `.size-limit.json` entries:
  *   { name, path, limit: "160 KB" | "160KB" | bytes number, gzip?: true }

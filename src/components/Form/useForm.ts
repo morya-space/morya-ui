@@ -2,8 +2,7 @@
  * Controlled form instance (`useForm`).
  *
  * `useForm()` returns a stable handle that `MForm` binds to on mount, giving
- * imperative access to the form model and validation — the equivalent of
- * Ant Design's `Form.useForm()`.
+ * imperative access to the form model and validation.
  *
  * ```ts
  * const form = useForm()
@@ -30,7 +29,7 @@ export interface FormInstance {
   setFieldsValue: (values: Record<string, unknown>) => void
   /** Validate every field, or only the given name paths. */
   validate: (nameList?: NamePath | NamePath[]) => Promise<FormValidateResult>
-  /** Alias of `validate`, matching Ant Design naming. */
+  /** Alias of `validate`. */
   validateFields: (nameList?: NamePath | NamePath[]) => Promise<FormValidateResult>
   /** Clear validation state (all fields, or the given name paths). */
   clearValidate: (nameList?: NamePath | NamePath[]) => void

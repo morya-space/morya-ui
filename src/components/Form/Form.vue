@@ -106,9 +106,8 @@ function applyOutcome(key: string, message: string | undefined, warning = false)
 }
 
 /**
- * Accept a single name or a list of names.
- * An array is treated as a list of names (Ant Design convention), so a nested
- * path used on its own must be wrapped: `validate([['items', 0]])`.
+ * Accept a single name or a list of names. An array is treated as a list of
+ * names, so a nested path used on its own must be wrapped: `validate([['items', 0]])`.
  */
 function normalizeNameList(input?: NamePath | NamePath[]): NamePath[] | undefined {
   if (input == null) return undefined

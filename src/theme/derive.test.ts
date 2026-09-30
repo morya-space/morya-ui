@@ -4,7 +4,7 @@ import { generateColorPalette } from './color'
 import { compactSeed, darkSeed, lightSeed } from './seed'
 
 describe('generateColorPalette', () => {
-  it('reproduces the Ant Design blue ramp for #1677ff', () => {
+  it('reproduces the blue ramp for #1677ff', () => {
     expect(generateColorPalette('#1677ff')).toEqual([
       '#e6f4ff',
       '#bae0ff',

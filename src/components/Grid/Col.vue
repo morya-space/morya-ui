@@ -22,7 +22,7 @@ const gutter = inject(M_ROW_KEY, null)
 
 /**
  * Merge responsive overrides in ascending breakpoint order, so the largest
- * satisfied breakpoint wins — the same result Ant Design's media queries give.
+ * satisfied breakpoint wins.
  */
 const resolved = computed<ColResponsiveConfig>(() => {
   let current: ColResponsiveConfig = {

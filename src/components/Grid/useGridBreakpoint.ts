@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-/** Grid breakpoints, matching the Ant Design scale. */
+/** Grid breakpoints. */
 export const GRID_BREAKPOINTS = {
   xs: 0,
   sm: 576,

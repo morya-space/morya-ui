@@ -1,6 +1,5 @@
 /**
- * Imperative modal API — the equivalent of Ant Design's `Modal.info` /
- * `Modal.confirm` / `useModal`.
+ * Imperative modal API — open dialogs without writing a template.
  *
  * ```ts
  * const modal = useModal()
@@ -223,7 +222,7 @@ export function useModal(): ModalStaticApi {
   }
 }
 
-/** Module-level modal API, mirroring Ant Design's static `Modal.*` methods. */
+/** Module-level modal API for imperative dialogs. */
 export const modal: ModalStaticApi = useModal()
 
 /** Detach every dialog created by the module-level `modal` API on unmount. */

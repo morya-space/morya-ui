@@ -6,7 +6,7 @@ description: 给编码 Agent / LLM 的文档入口：先读什么、再调什么
 
 # 面向 Agent
 
-本页是 **编码 Agent / LLM** 使用 Morya UI 文档站的总入口。业务项目里生成页面时，按下面顺序加载；不要臆造 props 或把 ant-design API 硬套过来。
+本页是 **编码 Agent / LLM** 使用 Morya UI 文档站的总入口。业务项目里生成页面时，按下面顺序加载；不要臆造 props 或堆砌文档之外的 API。
 
 机器可读索引：[llms.txt](/llms.txt)（站点根路径，构建文档站时生成）。
 
@@ -27,13 +27,12 @@ description: 给编码 Agent / LLM 的文档入口：先读什么、再调什么
 | class / style / `pt` 落点 | [样式与 attrs](/docs/attrs) |
 | 命名与 severity | [约定](/docs/conventions) |
 | 设计令牌 `--m-*` | [设计令牌](/docs/design-tokens) |
-| 从 antd 迁移 | [antd 组件映射](/docs/antd-mapping) |
 
 ## 硬规则（摘要）
 
 - 只组合文档中的 `M*` 组件与 `--m-*` token  
-- 外观词表：`severity` / `variant` / `size`（不要改回 antd 的 `type="primary"` 等）  
-- 迁自 ant-design：先查 [antd 映射](/docs/antd-mapping)，按角色选型，不照抄同名 props  
+- 外观词表：`severity` / `variant` / `size`；不要引入文档之外的 prop 名  
+- 选型按场景与角色判断，不照抄其他库的同名 props  
 - 反馈：短结果用 `message`；摘要+详情或异步感用 `toast`；确认用 Confirm 系列  
 
 ## 速查

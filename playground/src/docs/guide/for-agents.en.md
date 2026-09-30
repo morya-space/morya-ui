@@ -6,7 +6,7 @@ description: Entry point for coding agents / LLMs — what to read first and whi
 
 # For agents
 
-Curated entry for **coding agents / LLMs** using the Morya UI docs site. When generating consumer app pages, follow this order. Do not invent props or paste Ant Design APIs onto morya components.
+Curated entry for **coding agents / LLMs** using the Morya UI docs site. When generating consumer app pages, follow this order. Do not invent props or introduce APIs that are not documented.
 
 Machine-readable index: [llms.txt](/llms.txt) (site root; emitted when the docs site is built).
 
@@ -27,13 +27,12 @@ If an API is unclear: **MCP / docs first — never guess.**
 | class / style / `pt` landing | [Styling & attrs](/docs/attrs) |
 | Naming & severity | [Conventions](/docs/conventions) |
 | Design tokens `--m-*` | [Design tokens](/docs/design-tokens) |
-| Migrating from antd | [antd mapping](/docs/antd-mapping) |
 
 ## Hard rules (summary)
 
 - Compose documented `M*` components and `--m-*` tokens only  
-- Appearance vocabulary: `severity` / `variant` / `size` (do not rename back to antd `type="primary"`, etc.)  
-- Coming from ant-design: check [antd mapping](/docs/antd-mapping) and pick by role — do not copy same-named props blindly  
+- Appearance vocabulary: `severity` / `variant` / `size`; do not introduce prop names outside the docs  
+- Pick by scenario and role — do not copy same-named props blindly  
 - Feedback: short results → `message`; summary + detail / async feel → `toast`; confirms → Confirm family  
 
 ## Quick links

@@ -1,6 +1,6 @@
 # 组件文档模板（Phase 1）
 
-新建或大改组件文档时，中英文（`docs/index.md` / `docs/index.en.md`）请按此骨架。目标对齐 ant-design 组件页信息结构，同时保留 morya API 词汇。
+新建或大改组件文档时，中英文（`docs/index.md` / `docs/index.en.md`）请按此骨架，信息结构保持统一，使用 morya API 词汇。
 
 ## Frontmatter
 

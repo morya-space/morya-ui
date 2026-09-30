@@ -2,7 +2,7 @@
  * Color utilities used by the token derivation engine.
  *
  * Pure functions only — no DOM access. The palette generator mirrors the
- * algorithm used by Ant Design's `@ant-design/colors` so that derived
+ * algorithm used by mature design systems so that derived
  * palettes stay compatible with the design language the tokens target.
  */
 
@@ -202,8 +202,8 @@ export interface GeneratePaletteOptions {
  * Generate the 10-step palette for a base color, index `0` being the lightest
  * tint and index `9` the darkest shade. Index `5` is the base color itself.
  *
- * Mirrors `@ant-design/colors#generate` so derived palettes line up with the
- * design language this library targets.
+ * Palette generation follows the widely-used 10-step tint/shade model so
+ * derived palettes line up with the design language this library targets.
  */
 export function generateColorPalette(input: string, options: GeneratePaletteOptions = {}): string[] {
   const base = parseHex(input)
@@ -318,7 +318,7 @@ export function hslToRgb({ h, s, l }: HslColor): RgbColor {
 }
 
 /**
- * Shift a color's lightness by `amount` (0-100 scale), matching Ant Design's
+ * Shift a color's lightness by `amount` (0-100 scale), matching classic
  * neutral tone generation: light bases get darker, dark bases get lighter
  * (relative to the remaining headroom so pure black/white stay neutral).
  */

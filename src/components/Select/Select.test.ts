@@ -340,7 +340,7 @@ describe('muSelect', () => {
   })
 })
 
-describe('muSelect — antd-aligned options', () => {
+describe('muSelect — field remapping and options', () => {
   it('reads renamed keys through fieldNames', async () => {
     const wrapper = mount(MSelect, {
       props: {

@@ -1,7 +1,7 @@
 /**
  * Seed tokens — the single source of truth every other token is derived from.
  *
- * Mirrors the Ant Design seed layer (same names, same meanings) so palettes
+ * Mirrors the classic seed layer (same names, same meanings) so palettes
  * derived here stay compatible with the design language the library targets.
  * Values are plain data; no CSS units, no `var()` references.
  */
@@ -92,7 +92,7 @@ export const lightSeed: MSeedTokens = {
 
 /**
  * Dark seed. Inverting the base colors is what drives the neutral derivation
- * (text/surface/border), matching Ant Design's `darkAlgorithm` entry point.
+ * (text/surface/border), matching the classic dark algorithm entry point.
  */
 export const darkSeed: MSeedTokens = {
   ...lightSeed,
@@ -100,7 +100,7 @@ export const darkSeed: MSeedTokens = {
   colorBgBase: '#000000',
 }
 
-/** Compact seed — tighter sizing, matching Ant Design's `compactAlgorithm`. */
+/** Compact seed — tighter sizing, matching the classic compact algorithm. */
 export const compactSeed: MSeedTokens = {
   ...lightSeed,
   controlHeight: 28,
