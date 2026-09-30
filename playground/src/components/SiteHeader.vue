@@ -8,6 +8,7 @@ import {
     SITE_NAME,
     SITE_NPM_URL,
 } from "../config/site";
+import { findGuideNavSectionId } from "../docs/guide/guideNav";
 import { getUiPackageMeta } from "../docs/packageMeta";
 import { useDocsI18n } from "../i18n";
 import SiteSearch from "./SiteSearch.vue";
@@ -22,11 +23,8 @@ const activeSection = computed(() => {
     const name = String(route.name ?? "");
     const slug = typeof route.params.slug === "string" ? route.params.slug : "";
     if (name === "home") return "home";
-    if (name === "docs" && (slug === "design" || slug.startsWith("design-")))
-        return "design";
-    if (name === "theme-editor" || (name === "docs" && slug === "theme"))
-        return "theme";
-    if (name.startsWith("docs")) return "docs";
+    if (name === "docs") return findGuideNavSectionId(slug);
+    if (name === "theme-editor") return "docs";
     if (name.startsWith("component")) return "components";
     if (name === "changelog") return "changelog";
     return "";
@@ -81,13 +79,6 @@ const activeSection = computed(() => {
                 :to="{ name: 'docs', params: { slug: 'design' } }"
             >
                 {{ t.design }}
-            </RouterLink>
-            <RouterLink
-                class="site-nav__link"
-                :class="{ 'is-active': activeSection === 'theme' }"
-                :to="{ name: 'theme-editor' }"
-            >
-                {{ t.themeEditor }}
             </RouterLink>
             <RouterLink
                 class="site-nav__link"

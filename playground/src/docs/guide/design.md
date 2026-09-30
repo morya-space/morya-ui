@@ -20,14 +20,14 @@ Morya UI 是一套**令牌驱动**的 Vue 3 组件库：颜色、间距、圆角
 
 ## 章节
 
-| 章节                                  | 内容                                            |
-| ------------------------------------- | ----------------------------------------------- |
-| [色彩](/docs/design-color)            | 品牌色、语义色、中性面、对比与覆盖              |
-| [字体与排版](/docs/design-typography) | 字号阶梯、字重、控件字号                        |
-| [间距](/docs/design-spacing)          | `--m-space-*` 节奏与密度缩放                    |
-| [布局](/docs/design-layout)           | `MLayout` / `MPage*` / `MSpace` 与页面框架      |
-| [动效（设计）](/docs/design-motion)   | 时长、缓动、减弱；API 详见 [动效](/docs/motion) |
-| [反馈](/docs/design-feedback)         | Message / Toast / Dialog / Alert 层级           |
+| 章节                                  | 内容                                       |
+| ------------------------------------- | ------------------------------------------ |
+| [色彩](/docs/design-color)            | 品牌色、语义色、中性面、对比与覆盖         |
+| [字体与排版](/docs/design-typography) | 字号阶梯、字重、控件字号                   |
+| [间距](/docs/design-spacing)          | `--m-space-*` 节奏与密度缩放               |
+| [布局](/docs/design-layout)           | `MLayout` / `MPage*` / `MSpace` 与页面框架 |
+| [动效](/docs/motion)                  | 设计原则、时长、缓动、减弱与 API           |
+| [反馈](/docs/design-feedback)         | Message / Toast / Dialog / Alert 层级      |
 
 工程接入另见 [主题](/docs/theme)、[全局配置](/docs/config)、[约定](/docs/conventions)、[Common Props](/docs/common-props)。
 

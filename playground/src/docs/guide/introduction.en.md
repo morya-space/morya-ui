@@ -14,13 +14,13 @@ description: What Morya UI is, who it is for, and how to get started.
 
 ## Why Morya UI
 
-| | |
-| --- | --- |
-| **90+ components** | Basics, forms, navigation, data display, layout, and feedback |
-| **Theme system** | `--m-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
-| **TypeScript** | Built with Composition API; fully typed props, emits, and locale |
-| **On-demand** | ESM subpaths + `MoryaUIResolver` with tree-shaking |
-| **Docs as preview** | Markdown + interactive `vue preview` for every component |
+|                     |                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| **90+ components**  | Basics, forms, navigation, data display, layout, and feedback                      |
+| **Theme system**    | `--m-*` design tokens; `useTheme` / `useDensity` / `useMotion` in the same package |
+| **TypeScript**      | Built with Composition API; fully typed props, emits, and locale                   |
+| **On-demand**       | ESM subpaths + `MoryaUIResolver` with tree-shaking                                 |
+| **Docs as preview** | Markdown + interactive `vue preview` for every component                           |
 
 ## Use cases
 
@@ -30,11 +30,11 @@ description: What Morya UI is, who it is for, and how to get started.
 
 ## Packages
 
-| Package | Role |
-| --- | --- |
-| `morya-ui` | Components, styles, theme APIs, docs site source |
+| Package           | Role                                                                 |
+| ----------------- | -------------------------------------------------------------------- |
+| `morya-ui`        | Components, styles, theme APIs, docs site source                     |
 | `@morya-ui/setup` | (Optional) One-shot app onboarding: library + AI skill / rules + MCP |
-| `@morya-ui/mcp` | (Optional) MCP server for AI clients that support the protocol |
+| `@morya-ui/mcp`   | (Optional) MCP server for AI clients that support the protocol       |
 
 ## Install
 
@@ -44,8 +44,17 @@ pnpm add morya-ui
 
 Requires Vue 3 (3.5+ recommended). Works with [Nuxt, Astro, Vite SSR, and more](/docs/ssr). See [Quick start](/docs/quick-start).
 
+## Learning path
+
+Pick a tier by time; full guide: [Learning path](/docs/learning-path).
+
+- **5 minutes**: [Quick start](/docs/quick-start) → render basics → [Components](/components)
+- **Half hour**: [Theme](/docs/theme) · [Configuration](/docs/config) · [Styling & attrs](/docs/attrs) → [Login form](/docs/recipe-form-login) or [Table filter](/docs/recipe-table-filter)
+- **Go deeper**: [Design language](/docs/design) · [Design tokens](/docs/design-tokens) · [Motion](/docs/motion) · [SSR](/docs/ssr) · [Accessibility](/docs/accessibility) · [For agents](/docs/for-agents)
+
 ## Next steps
 
+- [Learning path](/docs/learning-path): 5-minute / half-hour / deep-dive map
 - [Quick start](/docs/quick-start): install and a minimal example
 - [One-shot setup](/docs/setup): `@morya-ui/setup` for library and AI config
 - [Design tokens](/docs/design-tokens): full `--m-*` reference

@@ -20,14 +20,14 @@ This page is the Design Spec hub. Principles come from [`design-kit/DESIGN.md`](
 
 ## Chapters
 
-| Chapter                                | Focus                                                            |
-| -------------------------------------- | ---------------------------------------------------------------- |
-| [Color](/docs/design-color)            | Brand, severity, neutrals, contrast, overrides                   |
-| [Typography](/docs/design-typography)  | Type ramp, weights, control fonts                                |
-| [Spacing](/docs/design-spacing)        | `--m-space-*` rhythm and density scaling                         |
-| [Layout](/docs/design-layout)          | `MLayout` / `MPage*` / `MSpace` and app chrome                   |
-| [Motion (design)](/docs/design-motion) | Duration, easing, reduced motion; APIs in [Motion](/docs/motion) |
-| [Feedback](/docs/design-feedback)      | Message / Toast / Dialog / Alert hierarchy                       |
+| Chapter                               | Focus                                                         |
+| ------------------------------------- | ------------------------------------------------------------- |
+| [Color](/docs/design-color)           | Brand, severity, neutrals, contrast, overrides                |
+| [Typography](/docs/design-typography) | Type ramp, weights, control fonts                             |
+| [Spacing](/docs/design-spacing)       | `--m-space-*` rhythm and density scaling                      |
+| [Layout](/docs/design-layout)         | `MLayout` / `MPage*` / `MSpace` and app chrome                |
+| [Motion](/docs/motion)                | Design principles, duration, easing, reduced motion, and APIs |
+| [Feedback](/docs/design-feedback)     | Message / Toast / Dialog / Alert hierarchy                    |
 
 Engineering guides: [Theme](/docs/theme), [Configuration](/docs/config), [Conventions](/docs/conventions), [Common Props](/docs/common-props).
 

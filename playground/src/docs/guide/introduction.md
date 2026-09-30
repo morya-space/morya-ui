@@ -14,13 +14,13 @@ description: Morya UI 是什么、适合谁用、如何开始。
 
 ## 为什么选择 Morya UI
 
-| | |
-| --- | --- |
-| **90+ 个组件** | 基础、表单、导航、数据展示、布局、反馈一应俱全 |
-| **主题系统** | `--m-*` 设计令牌，亮/暗色、`useTheme` / `useDensity` / `useMotion` 同包导出 |
-| **TypeScript** | Composition API 编写，Props / Emits / locale 完整类型 |
-| **按需加载** | ESM 子路径 + `MoryaUIResolver`，支持 tree-shaking |
-| **文档即预览** | 每个组件自带 Markdown + 可交互 `vue preview` |
+|                |                                                                             |
+| -------------- | --------------------------------------------------------------------------- |
+| **90+ 个组件** | 基础、表单、导航、数据展示、布局、反馈一应俱全                              |
+| **主题系统**   | `--m-*` 设计令牌，亮/暗色、`useTheme` / `useDensity` / `useMotion` 同包导出 |
+| **TypeScript** | Composition API 编写，Props / Emits / locale 完整类型                       |
+| **按需加载**   | ESM 子路径 + `MoryaUIResolver`，支持 tree-shaking                           |
+| **文档即预览** | 每个组件自带 Markdown + 可交互 `vue preview`                                |
 
 ## 适用场景
 
@@ -30,11 +30,11 @@ description: Morya UI 是什么、适合谁用、如何开始。
 
 ## 包结构
 
-| 包 | 说明 |
-| --- | --- |
-| `morya-ui` | 组件、样式、主题 API、文档站源码 |
+| 包                | 说明                                                  |
+| ----------------- | ----------------------------------------------------- |
+| `morya-ui`        | 组件、样式、主题 API、文档站源码                      |
 | `@morya-ui/setup` | （可选）业务项目一键接入：库 + AI Skill / rules + MCP |
-| `@morya-ui/mcp` | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档 |
+| `@morya-ui/mcp`   | （可选）MCP 服务，供支持该协议的 AI 客户端检索文档    |
 
 ## 安装
 
@@ -44,8 +44,17 @@ pnpm add morya-ui
 
 需要 Vue 3（推荐 3.5 及以上）。支持 [Nuxt / Astro / Vite SSR 等](/docs/ssr)。详见 [快速上手](/docs/quick-start)。
 
+## 学习路径
+
+按时间选档；完整说明见 [学习路径](/docs/learning-path)。
+
+- **5 分钟**：[快速上手](/docs/quick-start) → 渲染基础组件 → [组件](/components)
+- **半小时**：[主题](/docs/theme) · [全局配置](/docs/config) · [样式与 attrs](/docs/attrs) → [登录表单](/docs/recipe-form-login) 或 [表格筛选](/docs/recipe-table-filter)
+- **深入**：[设计语言](/docs/design) · [设计令牌](/docs/design-tokens) · [动效](/docs/motion) · [SSR](/docs/ssr) · [无障碍](/docs/accessibility) · [面向 Agent](/docs/for-agents)
+
 ## 下一步
 
+- [学习路径](/docs/learning-path)：5 分钟 / 半小时 / 深入三档导航
 - [快速上手](/docs/quick-start)：安装与最小示例
 - [一键接入](/docs/setup)：`@morya-ui/setup` 安装库与 AI 配置
 - [设计令牌](/docs/design-tokens)：全部 `--m-*` 变量与用途

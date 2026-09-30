@@ -26,6 +26,10 @@ const router = createRouter({
       redirect: { name: "theme-editor" },
     },
     {
+      path: "/docs/design-motion",
+      redirect: { name: "docs", params: { slug: "motion" } },
+    },
+    {
       path: "/docs/:slug",
       name: "docs",
       component: () => import("./views/DocsView.vue"),
