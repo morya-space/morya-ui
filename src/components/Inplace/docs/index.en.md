@@ -12,7 +12,6 @@ Toggle between display and content views.
 ## When to use
 
 - Click the display area to switch to editable content
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

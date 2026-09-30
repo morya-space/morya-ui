@@ -12,7 +12,6 @@ description: 为输入框添加左/右侧图标的容器。
 ## 何时使用
 
 - 为输入框添加左/右侧图标的容器。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

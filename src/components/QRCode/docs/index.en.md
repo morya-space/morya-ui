@@ -12,7 +12,6 @@ Canvas QR codes. Encoding uses embedded Nayuki MIT `qrcodegen` (no extra runtime
 ## When to use
 
 - QR code with status overlay and refresh
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

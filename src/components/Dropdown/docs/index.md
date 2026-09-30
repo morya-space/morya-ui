@@ -16,7 +16,6 @@ description: 动作菜单覆盖层（非表单选择器）。与 Select 不同�
 ## 何时使用
 
 - 动作菜单覆盖层（非表单选择器）。与 Select 不同：用于触发编辑、删除等操作项。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

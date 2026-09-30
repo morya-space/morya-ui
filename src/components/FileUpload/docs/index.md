@@ -16,7 +16,6 @@ description: 选择、拖拽、列表、预览与上传。
 ## 何时使用
 
 - 选择、拖拽、列表、预览与上传。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

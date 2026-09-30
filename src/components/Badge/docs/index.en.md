@@ -12,7 +12,6 @@ Status badge or dot for counts and status cues.
 ## When to use
 
 - Status badge or dot
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -12,7 +12,6 @@ Chip displays short tagged information, with optional icon/image and a remove bu
 ## When to use
 
 - Chip displays tagged information, optionally with an icon, image, and remove action
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

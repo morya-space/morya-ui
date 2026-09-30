@@ -12,7 +12,6 @@ description: 芯片式标签输入，回车添加、可移除。
 ## 何时使用
 
 - 芯片式标签输入，回车添加、可移除。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

@@ -16,7 +16,6 @@ By default it shows a lightweight empty glyph and locale `emptyMessage`. Overrid
 ## When to use
 
 - Empty states with illustration / icon, title, description, and actions
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

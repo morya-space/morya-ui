@@ -1,7 +1,7 @@
 ---
 title: Select
 category: 02 / FORM
-description: "Form select, aligned with antd Select: mode=multiple|tags, labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender."
+description: "Form select: mode=multiple|tags, labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender."
 ---
 
 # Select
@@ -13,8 +13,7 @@ Form select for choosing one or more values from a list of options.
 
 ## When to use
 
-- Form select, aligned with antd Select: mode=multiple|tags, labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
+- Form select: mode=multiple|tags, labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender
 
 ## Import
 

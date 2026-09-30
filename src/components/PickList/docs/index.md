@@ -11,7 +11,7 @@ description: 双列表穿梭选择。
 ## 何时使用
 
 - 需要左右双列表穿梭、把候选项移入已选列表时。
-- API 使用 morya 的 `source` / `target`，不要按 antd Transfer 的 props 迁移。
+- API 使用 morya 的 `source` / `target`。
 
 ## 引入
 
@@ -55,6 +55,6 @@ import { MPickList } from "morya-ui";
 | `item`  | `{ item, index }`     | 自定义列表项内容。 |
 | `empty` | 自定义 `empty` 内容。 |
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `Transfer` 的双列表选值角色；数据结构与 props 仍用 morya（`source` / `target`），不复制 Transfer API。详见 [antd 映射](/docs/antd-mapping)。
+双列表选值；数据结构与 props 使用 morya 的 `source` / `target`。

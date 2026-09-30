@@ -95,6 +95,6 @@ interface CascadeSelectOption {
 }
 ```
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `Cascader` 的级联选值角色，但能力更窄：仅单叶子、无 search / multiple / `loadData`。详见 [antd 映射](/docs/antd-mapping)。
+级联选值：单叶子、无 search / multiple / `loadData`。

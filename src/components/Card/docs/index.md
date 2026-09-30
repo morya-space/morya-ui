@@ -12,7 +12,6 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 ## 何时使用
 
 - 内容容器。通过 title / subtitle 或 header / footer 插槽组织结构。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

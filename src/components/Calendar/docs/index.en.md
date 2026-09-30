@@ -12,7 +12,6 @@ description: Month/year calendar panels with card mode and cell slots.
 ## When to use
 
 - Month/year calendar panels with card mode and cell slots
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

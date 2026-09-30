@@ -12,7 +12,6 @@ description: 数字输入框，支持步进按钮、上下限与尺寸。
 ## 何时使用
 
 - 数字输入框，支持步进按钮、上下限与尺寸。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

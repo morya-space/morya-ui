@@ -12,7 +12,6 @@ Adds consistent spacing between children. Prefer [`Flex`](/components/Flex/) for
 ## When to use
 
 - Layout helper that adds consistent gaps between children
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

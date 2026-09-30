@@ -12,7 +12,6 @@ description: 在子元素之间自动加入一致间距的布局容器。
 ## 何时使用
 
 - 在子元素之间自动加入一致间距的布局容器。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

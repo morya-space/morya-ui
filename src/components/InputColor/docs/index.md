@@ -50,9 +50,9 @@ import { MInputColor } from "morya-ui";
 | ------------------- | -------- | ---------- |
 | `update:modelValue` | `string` | 颜色变化。 |
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `ColorPicker` 的选色角色，但实现是**原生色板 + hex 文本 + 可选 swatches**，不是完整 antd 面板体验。组件名保持 `InputColor`。详见 [antd 映射](/docs/antd-mapping)。
+选色实现是**原生色板 + hex 文本 + 可选 swatches**，不是完整的面板级取色体验。
 
 ## Slots
 

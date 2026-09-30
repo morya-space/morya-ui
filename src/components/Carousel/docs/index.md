@@ -12,7 +12,6 @@ description: 轮播展示一组内容项。
 ## 何时使用
 
 - 轮播展示一组内容项。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

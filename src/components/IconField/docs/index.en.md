@@ -12,7 +12,6 @@ Place an icon to the left or right of an input control.
 ## When to use
 
 - Container that places an icon on the left or right of an input
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -12,7 +12,6 @@ Windowed list rendering based on scroll position. Best for large, **equal-height
 ## When to use
 
 - Renders long lists within the visible viewport
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

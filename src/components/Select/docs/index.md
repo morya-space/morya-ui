@@ -1,7 +1,7 @@
 ---
 title: Select
 category: 02 / FORM
-description: 表单选择器，对齐 antd Select：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender。
+description: 表单选择器：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender。
 ---
 
 # Select
@@ -13,8 +13,7 @@ description: 表单选择器，对齐 antd Select：mode="multiple" | "tags"、l
 
 ## 何时使用
 
-- 表单选择器，对齐 antd Select：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
+- 表单选择器：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender
 
 ## 引入
 

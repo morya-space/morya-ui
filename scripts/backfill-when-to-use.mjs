@@ -54,10 +54,7 @@ function insertWhenSection(raw, lang, description) {
     : lang === 'en'
       ? '- Use this component when the UI needs the behavior described above.'
       : '- 需要本页描述的交互能力时使用。'
-  const tip = lang === 'en'
-    ? '- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).'
-    : '- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。'
-  const block = `\n${heading}\n\n${bullet}\n${tip}\n`
+  const block = `\n${heading}\n\n${bullet}\n`
 
   // After frontmatter + H1 + first paragraph(s), before first ## heading or ## Import/引入
   const fmEnd = raw.search(/\r?\n---\r?\n/)

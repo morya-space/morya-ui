@@ -12,7 +12,6 @@ Content container for grouping title, body, and actions. Footer is extended via 
 ## When to use
 
 - Content container. Structure content with title / subtitle or header / footer slots
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

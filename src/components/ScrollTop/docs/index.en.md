@@ -48,6 +48,6 @@ No custom events.
 
 No slots.
 
-## vs ant-design
+## Boundaries
 
-Analogue of antd `FloatButton.BackTop`. morya ships a dedicated `ScrollTop` instead of a generic `FloatButton`. See [antd mapping](/docs/antd-mapping).
+A dedicated `ScrollTop` component rather than a generic floating button.

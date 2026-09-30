@@ -22,7 +22,6 @@ description: 通用列表，支持 data 驱动、Meta 行、分页与网格布�
 ## 何时使用
 
 - 通用列表，支持 data 驱动、Meta 行、分页与网格布局。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

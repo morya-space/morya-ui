@@ -12,7 +12,6 @@ description: 模态对话框。支持预设页脚、异步关闭拦截、状态 
 ## 何时使用
 
 - 模态对话框。支持预设页脚、异步关闭拦截、状态 type。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 
@@ -119,7 +118,7 @@ Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`clas
 
 ## 命令式调用（useModal / modal）
 
-不写模板也能弹出对话框，对齐 antd 的 `Modal.info` / `Modal.confirm`：
+不写模板也能弹出对话框：
 
 ```ts
 import { modal, useModal } from 'morya-ui'

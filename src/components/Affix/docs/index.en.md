@@ -12,7 +12,6 @@ Pins children with `position: fixed` after scrolling past `offsetTop` / `offsetB
 ## When to use
 
 - Fix child content when scroll passes a threshold
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

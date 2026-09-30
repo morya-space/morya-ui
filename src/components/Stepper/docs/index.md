@@ -12,7 +12,6 @@ description: 步骤指示器，支持线性前进约束。
 ## 何时使用
 
 - 步骤指示器，支持线性前进约束。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

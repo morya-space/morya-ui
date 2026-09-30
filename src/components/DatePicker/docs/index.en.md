@@ -139,6 +139,6 @@ interface DatePickerShortcut {
 }
 ```
 
-## vs ant-design
+## Boundaries
 
-Maps to antd `DatePicker` / `RangePicker` via `type` modes (`daterange`, `datetime`, `time`, etc.); keep morya API vocabulary. See [antd mapping](/docs/antd-mapping).
+Date, range, and time modes are selected via `type` (`daterange`, `datetime`, `time`, etc.).

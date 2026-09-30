@@ -12,7 +12,6 @@ Detail panels and read-only drawers: label + content pairs.
 ## When to use
 
 - Read-only field list with columns, borders, and horizontal/vertical layout
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

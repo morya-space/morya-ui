@@ -12,7 +12,6 @@ description: 进度条用于展示确定或不确定进度。
 ## 何时使用
 
 - 进度条用于展示确定或不确定进度。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

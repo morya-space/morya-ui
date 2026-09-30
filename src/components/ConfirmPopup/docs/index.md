@@ -12,7 +12,6 @@ description: 锚定在目标旁的确认气泡。
 ## 何时使用
 
 - 锚定在目标旁的确认气泡。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

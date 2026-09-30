@@ -12,7 +12,6 @@ Binary checkbox.
 ## When to use
 
 - Checkbox. Boolean modelValue; supports invalid
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

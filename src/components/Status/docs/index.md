@@ -14,7 +14,6 @@ description: 行内状态标识：圆点 / 语义图标 + 文案。
 ## 何时使用
 
 - 行内状态标识：圆点 / 语义图标 + 文案。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

@@ -12,7 +12,6 @@ A boolean toggle button with configurable on/off labels and icons.
 ## When to use
 
 - A button that switches between on and off labels
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

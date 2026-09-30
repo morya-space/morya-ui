@@ -12,7 +12,6 @@ description: 点击展示区切换为可编辑内容。
 ## 何时使用
 
 - 点击展示区切换为可编辑内容。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

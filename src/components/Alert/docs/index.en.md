@@ -12,7 +12,6 @@ Persistent **in-page** notice for form intros, permission hints, and read-only w
 ## When to use
 
 - Inline page notice with severity, close, and action slot
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

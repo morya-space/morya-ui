@@ -12,7 +12,6 @@ Horizontal top navigation. Sub-links render in a **multi-column panel**—suited
 ## When to use
 
 - Horizontal menu with multi-column mega panels
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

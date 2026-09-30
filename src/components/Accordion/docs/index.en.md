@@ -12,7 +12,6 @@ Collapsible panels for organizing grouped content in limited space.
 ## When to use
 
 - Collapsible panel group. Supports single or multiple open panels; configure headers and disabled state via tabs
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -12,7 +12,6 @@ description: 多格单字符输入，适用于验证码。
 ## 何时使用
 
 - 多格单字符输入，适用于验证码。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

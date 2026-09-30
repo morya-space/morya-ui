@@ -12,7 +12,6 @@ description: 带一层子菜单的垂直分层菜单。
 ## 何时使用
 
 - 带一层子菜单的垂直分层菜单。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

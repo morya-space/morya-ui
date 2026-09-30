@@ -67,6 +67,6 @@ interface SpeedDialItem extends Omit<MenuNodeBase, "label"> {
 }
 ```
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `FloatButton` 的**操作簇 / 主按钮组**角色；morya 无单一 `FloatButton`。回顶用 ScrollTop，应用启动栏用 Dock。详见 [antd 映射](/docs/antd-mapping)。
+**操作簇 / 主按钮组**角色。回顶用 ScrollTop，应用启动栏用 Dock。

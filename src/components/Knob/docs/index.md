@@ -12,7 +12,6 @@ description: SVG 圆形旋钮，用于选择数值。
 ## 何时使用
 
 - SVG 圆形旋钮，用于选择数值。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

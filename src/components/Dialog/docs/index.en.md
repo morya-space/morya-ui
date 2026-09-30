@@ -12,7 +12,6 @@ Modal dialog. Visibility uses `v-model` (`modelValue`), corresponding to `visibl
 ## When to use
 
 - Modal dialog with preset footer actions, async close guards, and status type
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 
@@ -120,7 +119,7 @@ After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `t
 
 ## Imperative API (useModal / modal)
 
-Open dialogs without writing a template — aligned with Ant Design's `Modal.info` / `Modal.confirm`:
+Open dialogs without writing a template:
 
 ```ts
 import { modal, useModal } from 'morya-ui'

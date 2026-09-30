@@ -12,7 +12,6 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 ## 何时使用
 
 - 右键上下文菜单，支持 show(event) / hide()。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

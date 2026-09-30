@@ -12,7 +12,6 @@ description: 页内锚点导航，滚动高亮与平滑定位。
 ## 何时使用
 
 - 页内锚点导航，滚动高亮与平滑定位。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

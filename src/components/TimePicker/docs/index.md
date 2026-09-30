@@ -12,7 +12,7 @@ description: 独立时间选择入口；内部等价于 `MDatePicker` 的 `type=
 
 - 表单里只要「时刻」，不需要日期网格
 - 想从组件总览 / 搜索直接找到 TimePicker（而不是翻 DatePicker 类型章节）
-- 从 ant-design `TimePicker` 迁移时，优先用本组件；仍可用 `MDatePicker type="time"`
+- 优先用本组件；仍可用 `MDatePicker type="time"`
 
 与 `MDatePicker` 的边界：日期、日期时间、范围请继续用 [DatePicker](/components/DatePicker)。
 
@@ -57,6 +57,6 @@ import { MTimePicker } from 'morya-ui'
 
 行为一致。`MTimePicker` 只是独立入口与更清晰的类型（无 `type` prop），便于文档站与按需引入。
 
-### 与 ant-design TimePicker？
+### 何时用本组件？
 
-语义对应；API 仍用 morya 词表（`severity` / `size` / `showSeconds` 等），见 [antd 映射](/docs/antd-mapping)。
+只需要时间（无日期）时用它，API 更窄（`severity` / `size` / `showSeconds` 等）。

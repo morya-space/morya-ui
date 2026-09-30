@@ -12,7 +12,6 @@ Overlay positioned relative to a trigger. Use it for filters, quick actions, or 
 ## When to use
 
 - Floating panel positioned relative to a trigger. Supports placement and Teleport. Closes on outside click or Esc
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -12,7 +12,6 @@ description: 排版原语：标题、正文、段落与链接。
 ## 何时使用
 
 - 排版原语：标题、正文、段落与链接。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

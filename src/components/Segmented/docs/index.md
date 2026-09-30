@@ -12,7 +12,6 @@ description: 分段控制器，单选切换。
 ## 何时使用
 
 - 分段控制器，单选切换。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

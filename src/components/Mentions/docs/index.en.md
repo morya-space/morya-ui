@@ -12,7 +12,6 @@ Multi-line field that opens a suggestion list after a **prefix** (default `@`). 
 ## When to use
 
 - Suggest and insert mention tokens when typing a prefix
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

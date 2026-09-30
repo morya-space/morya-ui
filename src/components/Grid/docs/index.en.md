@@ -9,7 +9,7 @@ description: CSS Grid layout with GridItem span / offset control.
 Two layout systems live on this page:
 
 - **CSS Grid (`MGrid` / `MGridItem`):** a 24-column grid (override with `cols`) with container responsiveness and collapsing. Use `MGridItem` (alias `MGi`) as children.
-- **Flex 24-column grid (`MRow` / `MCol`):** aligned with Ant Design's `Row` / `Col` — `gutter` / `span` / `offset` / `push` / `pull` / `order` / `flex` plus six breakpoints.
+- **Flex 24-column grid (`MRow` / `MCol`):** `gutter` / `span` / `offset` / `push` / `pull` / `order` / `flex` plus six breakpoints.
 
 Both can coexist, but prefer one per level.
 
@@ -17,7 +17,6 @@ Both can coexist, but prefer one per level.
 ## When to use
 
 - CSS Grid layout with GridItem span / offset control
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 
@@ -96,7 +95,7 @@ No custom events.
 </MRow>
 ```
 
-Breakpoints: `xs` `<576`, `sm` `≥576`, `md` `≥768`, `lg` `≥992`, `xl` `≥1200`, `xxl` `≥1600`. Responsive values merge **ascending**, so the largest satisfied breakpoint wins — the same result Ant Design's media queries produce.
+Breakpoints: `xs` `<576`, `sm` `≥576`, `md` `≥768`, `lg` `≥992`, `xl` `≥1200`, `xxl` `≥1600`. Responsive values merge **ascending**, so the largest satisfied breakpoint wins.
 
 > Responsiveness is driven by one shared `matchMedia` subscription for the whole app, so column widths update on resize without generating a CSS class for every combination.
 

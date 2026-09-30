@@ -12,7 +12,6 @@ description: 输入 @ 等前缀时弹出建议并插入提及文本。
 ## 何时使用
 
 - 输入 @ 等前缀时弹出建议并插入提及文本。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

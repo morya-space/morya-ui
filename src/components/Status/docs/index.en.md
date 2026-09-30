@@ -14,7 +14,6 @@ Non-neutral severities show a semantic icon by default so the status reads as a 
 ## When to use
 
 - Inline status marker with a colored dot or semantic icon plus label
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

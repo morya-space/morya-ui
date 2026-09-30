@@ -12,7 +12,6 @@ Shows a welcome message and command history; submitting emits `command`.
 ## When to use
 
 - Simple command-prompt UI
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

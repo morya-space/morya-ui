@@ -12,7 +12,6 @@ Single-line text input.
 ## When to use
 
 - Text input field
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

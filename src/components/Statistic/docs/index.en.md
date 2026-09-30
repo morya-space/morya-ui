@@ -12,7 +12,6 @@ description: Numeric KPI display with prefix/suffix and countdown.
 ## When to use
 
 - Numeric KPI display with prefix/suffix and countdown
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

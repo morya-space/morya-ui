@@ -12,7 +12,6 @@ description: 垂直 / 水平时间轴，支持图标 marker 与自定义插槽�
 ## 何时使用
 
 - 垂直 / 水平时间轴，支持图标 marker 与自定义插槽。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

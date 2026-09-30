@@ -14,7 +14,6 @@ Core API: `status` + `size` + `title` / `description`, slots `icon` / `default` 
 ## When to use
 
 - Outcome / terminal pages for success, failure, 403, 404, and more
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

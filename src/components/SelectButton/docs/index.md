@@ -12,7 +12,6 @@ description: 按钮组形式的单选或多选控件。
 ## 何时使用
 
 - 按钮组形式的单选或多选控件。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

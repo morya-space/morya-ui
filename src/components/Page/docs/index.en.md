@@ -11,7 +11,6 @@ Page composition components. Use them with `MLayout` to encode filter bars, tool
 ## When to use
 
 - Composable page sections for spacing, borders, and headings with little or no custom CSS
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

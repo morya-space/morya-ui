@@ -12,7 +12,6 @@ Show an expandable tree in a dropdown. `multiple` / `checkable` enable multi-sel
 ## When to use
 
 - Tree select in a dropdown. Supports single/multiple, cascade checks, filter, clear, and path labels
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -12,7 +12,6 @@ Breadcrumb navigation. Items with `to` / `href` render as links; otherwise as te
 ## When to use
 
 - Shows the current page position in a hierarchy
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

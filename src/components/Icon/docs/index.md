@@ -12,7 +12,6 @@ description: 系统线框图标注册表。业务图标用默认插槽接入 Luc
 ## 何时使用
 
 - 系统线框图标注册表。业务图标用默认插槽接入 Lucide 等库。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

@@ -54,6 +54,6 @@ interface DockItem extends Omit<MenuNodeBase, "label"> {
 }
 ```
 
-## vs ant-design
+## Boundaries
 
-Maps to the **app launcher bar** role within antd `FloatButton` scenarios; not a single floating button. See [antd mapping](/docs/antd-mapping).
+The **app launcher bar** role. Not a single floating button.

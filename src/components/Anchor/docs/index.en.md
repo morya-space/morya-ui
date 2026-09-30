@@ -12,7 +12,6 @@ description: In-page anchor nav with scroll spy and smooth scroll.
 ## When to use
 
 - In-page anchor nav with scroll spy and smooth scroll
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

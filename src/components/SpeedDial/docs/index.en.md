@@ -63,6 +63,6 @@ interface SpeedDialItem extends Omit<MenuNodeBase, "label"> {
 }
 ```
 
-## vs ant-design
+## Boundaries
 
-Maps to the **action cluster / main FAB group** role of antd `FloatButton`; morya has no single `FloatButton`. Use ScrollTop for back-to-top and Dock for an app launcher bar. See [antd mapping](/docs/antd-mapping).
+The **action cluster / main FAB group** role. Use ScrollTop for back-to-top and Dock for an app launcher bar.

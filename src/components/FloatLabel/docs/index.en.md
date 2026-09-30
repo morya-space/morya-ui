@@ -12,7 +12,6 @@ Wraps an input. The label floats up on focus or when the field has content. Nest
 ## When to use
 
 - Floating label wrapper. The label floats up when focused or when the field has a value
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

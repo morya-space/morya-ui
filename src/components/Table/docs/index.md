@@ -20,7 +20,6 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 何时使用
 
 - 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

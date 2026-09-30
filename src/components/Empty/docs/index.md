@@ -14,7 +14,6 @@ description: 空状态：插图 / 图标 + 标题 + 说明 + 操作。
 ## 何时使用
 
 - 空状态：插图 / 图标 + 标题 + 说明 + 操作。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

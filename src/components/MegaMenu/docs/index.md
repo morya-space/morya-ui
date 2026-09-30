@@ -12,7 +12,6 @@ description: 水平菜单，子项按多列面板展示。
 ## 何时使用
 
 - 水平菜单，子项按多列面板展示。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

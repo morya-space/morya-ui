@@ -14,7 +14,6 @@ The default slot `{ node, data }` customizes node content. `checkStrategy` is `'
 ## When to use
 
 - Tree structure. Supports check with indeterminate state, filter, controlled expand, lazy load, and drag-and-drop
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

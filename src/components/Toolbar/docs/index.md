@@ -12,7 +12,6 @@ description: 工具栏布局，分 start / center / end 区域。
 ## 何时使用
 
 - 工具栏布局，分 start / center / end 区域。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

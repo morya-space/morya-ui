@@ -139,6 +139,6 @@ interface DatePickerShortcut {
 }
 ```
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `DatePicker` / `RangePicker`：用 `type` 区分模式（含 `daterange`、`datetime`、`time` 等），API 仍是 morya 词表。详见 [antd 映射](/docs/antd-mapping)。
+用 `type` 区分日期/范围/时间模式（含 `daterange`、`datetime`、`time` 等）。

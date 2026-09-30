@@ -12,7 +12,6 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 ## 何时使用
 
 - 页面级布局骨架，含 Header / Sider / Content / Footer。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

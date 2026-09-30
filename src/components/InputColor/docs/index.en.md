@@ -47,9 +47,9 @@ import { MInputColor } from "morya-ui";
 | ------------------- | -------- | -------------- |
 | `update:modelValue` | `string` | Color changed. |
 
-## vs ant-design
+## Boundaries
 
-Maps to antd `ColorPicker` by role, but morya is **native picker + hex text + optional swatches**, not the full antd panel. Keep the name `InputColor`. See [antd mapping](/docs/antd-mapping).
+A **native picker + hex text + optional swatches**, not a full panel-level color experience.
 
 ## Slots
 

@@ -12,7 +12,6 @@ Combine an input with prefix and suffix addons. Use `MInputGroupAddon` for addon
 ## When to use
 
 - Combine an input with prefix and suffix addons into one control group
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

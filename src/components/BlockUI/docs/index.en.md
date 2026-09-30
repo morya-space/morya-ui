@@ -12,7 +12,6 @@ Wraps content and shows a mask when `blocked` is true.
 ## When to use
 
 - Overlays content with a mask to block interaction
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

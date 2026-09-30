@@ -12,7 +12,6 @@ description: 状态角标或圆点。
 ## 何时使用
 
 - 状态角标或圆点。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

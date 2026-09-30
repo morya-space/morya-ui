@@ -23,7 +23,6 @@ Rules without `trigger` inherit Form `validateOn`. Programmatic `validate()` and
 ## When to use
 
 - Form layout and field validation. Declarative rules, label alignment, and inline layout. validate() always resolves and never rejects
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

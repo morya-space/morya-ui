@@ -12,7 +12,6 @@ description: 确认 / 取消对话框，复用 Dialog 浮层样式。
 ## 何时使用
 
 - 确认 / 取消对话框，复用 Dialog 浮层样式。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

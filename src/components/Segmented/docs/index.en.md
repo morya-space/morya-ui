@@ -12,7 +12,6 @@ Switch between mutually exclusive modes or views. Unlike [SelectButton](/compone
 ## When to use
 
 - Single-choice segmented control
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

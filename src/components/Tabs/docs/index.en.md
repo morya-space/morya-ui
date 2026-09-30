@@ -12,7 +12,6 @@ Tabs switch content panels within the same view.
 ## When to use
 
 - Tab switcher with line/card types, closable/addable tabs, extra slot, and overflow scrolling
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

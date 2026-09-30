@@ -12,7 +12,6 @@ Number input. Can show increment and decrement buttons, and constrain values wit
 ## When to use
 
 - Number input with optional steppers, min/max bounds, and sizes
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

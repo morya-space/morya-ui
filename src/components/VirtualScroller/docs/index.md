@@ -12,7 +12,6 @@ description: 按可视窗口渲染长列表。
 ## 何时使用
 
 - 按可视窗口渲染长列表。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

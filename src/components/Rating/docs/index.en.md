@@ -12,7 +12,6 @@ Click stars to rate. A clear button is shown by default.
 ## When to use
 
 - Star rating control with clear and readonly support
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

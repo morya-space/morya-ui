@@ -12,7 +12,6 @@ Context menu that opens at the pointer position. Nested `items` are supported. `
 ## When to use
 
 - Right-click context menu with show(event) / hide()
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

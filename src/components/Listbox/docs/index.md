@@ -12,7 +12,6 @@ description: 列表形式的单选或多选控件，可筛选。
 ## 何时使用
 
 - 列表形式的单选或多选控件，可筛选。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

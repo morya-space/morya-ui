@@ -11,7 +11,7 @@ Move items between the source and target lists.
 ## When to use
 
 - Use for dual-list transfer: move candidates into a selected list.
-- Keep morya `source` / `target` APIs; do not migrate antd Transfer props literally.
+- Use morya `source` / `target` APIs.
 
 ## Import
 
@@ -53,6 +53,6 @@ import { MPickList } from "morya-ui";
 | ------ | ----------------- | ------------------------- |
 | `item` | `{ item, index }` | Custom list item content. |
 
-## vs ant-design
+## Boundaries
 
-Maps to antd `Transfer` for dual-list picking; keep morya `source` / `target` data and API—do not copy Transfer props. See [antd mapping](/docs/antd-mapping).
+Dual-list picking backed by morya's `source` / `target` data and API.

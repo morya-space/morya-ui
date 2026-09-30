@@ -16,7 +16,6 @@ description: 加载指示与遮罩：多种动效、区域加载、v-loading 指
 ## 何时使用
 
 - 加载指示与遮罩：多种动效、区域加载、v-loading 指令和命令式 service。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

@@ -51,6 +51,6 @@ import { MScrollTop } from "morya-ui";
 | --------- | ---------- |
 | `default` | 默认内容。 |
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `FloatButton.BackTop`。morya 将回顶拆成独立的 `ScrollTop`，而不是通用 `FloatButton`。详见 [antd 映射](/docs/antd-mapping)。
+回顶是独立的 `ScrollTop` 组件，而不是通用悬浮按钮。

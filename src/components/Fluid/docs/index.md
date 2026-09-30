@@ -12,7 +12,6 @@ description: 让子元素宽度撑满的布局包裹。
 ## 何时使用
 
 - 让子元素宽度撑满的布局包裹。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

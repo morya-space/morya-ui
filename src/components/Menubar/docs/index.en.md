@@ -12,7 +12,6 @@ Horizontal navigation menu. Child items appear in a single-level dropdown. `sele
 ## When to use
 
 - Horizontal menubar with one level of dropdowns
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

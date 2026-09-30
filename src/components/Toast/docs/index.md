@@ -18,7 +18,6 @@ description: 四角浮层通知，支持 API 与受控列表。
 ## 何时使用
 
 - 四角浮层通知，支持 API 与受控列表。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 
@@ -104,7 +103,7 @@ interface ToastMessage {
 
 ## Notification（useNotification / notification）
 
-对齐 antd `notification` 的接口形状，底层复用同一套 toast 服务（单一浮层宿主与动画栈）：
+底层复用同一套 toast 服务（单一浮层宿主与动画栈）：
 
 ```ts
 import { notification, useNotification } from 'morya-ui'
@@ -137,4 +136,4 @@ api.open({ message: '完成', key: 'job', type: 'success' })
 | `closable` | `boolean` | `true` | 显示关闭按钮 |
 | `onClose` | `() => void` | — | 关闭后回调 |
 
-> `duration` 单位是**秒**（antd 习惯），而 `toast` 原生 API 的 `life` 是毫秒。
+> `duration` 单位是**秒**，而 `toast` 原生 API 的 `life` 是毫秒。

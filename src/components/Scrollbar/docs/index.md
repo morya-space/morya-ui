@@ -12,7 +12,6 @@ description: 可换肤自定义滚动条，提供一致的滚动体验。
 ## 何时使用
 
 - 可换肤自定义滚动条，提供一致的滚动体验。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

@@ -12,7 +12,6 @@ Searchable command palette for running actions from `model`. Fits global shortcu
 ## When to use
 
 - Searchable command palette dialog
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

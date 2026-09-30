@@ -12,7 +12,6 @@ description: 浮动标签容器，聚焦或有值时上浮。
 ## 何时使用
 
 - 浮动标签容器，聚焦或有值时上浮。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

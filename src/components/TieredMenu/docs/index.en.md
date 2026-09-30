@@ -12,7 +12,6 @@ Vertical menu with **one** submenu level on hover or click. Use `popup` for over
 ## When to use
 
 - A vertical layered menu with one submenu level
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

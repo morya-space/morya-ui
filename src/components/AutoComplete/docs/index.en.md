@@ -12,7 +12,6 @@ Input suggestions and completion; the `complete` event makes async loading from 
 ## When to use
 
 - Shows suggestion lists while typing; filter locally or supply suggestions from the parent
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

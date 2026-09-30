@@ -12,7 +12,6 @@ Shows progress through a multi-step flow and lets users switch steps.
 ## When to use
 
 - Step indicator with optional linear-progress constraint
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

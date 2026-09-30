@@ -16,7 +16,6 @@ Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), n
 ## When to use
 
 - Action menu overlay (not a form select). Unlike Select, it is used to trigger actions such as edit and delete
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

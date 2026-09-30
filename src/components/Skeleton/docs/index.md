@@ -12,7 +12,6 @@ description: 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 
 ## 何时使用
 
 - 加载占位骨架。支持矩形/圆形、自定义尺寸与 wave 动画。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

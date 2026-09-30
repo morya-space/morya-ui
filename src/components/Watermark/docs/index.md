@@ -12,7 +12,6 @@ description: Canvas 平铺水印，包裹业务内容。
 ## 何时使用
 
 - Canvas 平铺水印，包裹业务内容。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

@@ -12,7 +12,6 @@ Typography primitives for headings, body text, and links. Semantic tags: `MTitle
 ## When to use
 
 - Typography primitives — title, text, paragraph, and link
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

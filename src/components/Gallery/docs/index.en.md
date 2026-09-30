@@ -12,7 +12,6 @@ Browse an image list and keep `activeIndex` in sync.
 ## When to use
 
 - Image gallery with a main image and thumbnails
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

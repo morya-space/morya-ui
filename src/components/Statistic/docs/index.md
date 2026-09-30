@@ -12,7 +12,6 @@ description: 数字指标展示，支持前缀后缀与倒计时。
 ## 何时使用
 
 - 数字指标展示，支持前缀后缀与倒计时。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

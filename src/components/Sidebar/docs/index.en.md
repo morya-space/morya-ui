@@ -12,7 +12,6 @@ Application navigation sidebar (not a Drawer overlay). Exported as `MSidebar`.
 ## When to use
 
 - Collapsible navigation rail
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

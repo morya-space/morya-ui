@@ -12,7 +12,6 @@ Reorder with a drag handle (native HTML5 DnD, no external library). Up and down 
 ## When to use
 
 - Reorder a list with drag-and-drop and up/down buttons
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

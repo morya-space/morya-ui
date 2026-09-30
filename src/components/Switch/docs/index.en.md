@@ -12,7 +12,6 @@ Toggle switch control.
 ## When to use
 
 - Toggle switch
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -12,7 +12,7 @@ Pick hours and minutes (optional seconds). Thin wrapper around `MDatePicker` wit
 
 - Forms that need a clock time only (no day grid)
 - Discoverability from the component overview / search as TimePicker
-- Migrating from ant-design `TimePicker` — prefer this export; `MDatePicker type="time"` still works
+- Prefer this export; `MDatePicker type="time"` still works
 
 For dates, date-times, and ranges, use [DatePicker](/components/DatePicker).
 
@@ -57,6 +57,6 @@ Same as DatePicker: `update:modelValue`, `change`, `clear`, `show`, `hide`.
 
 Same behavior. `MTimePicker` is a dedicated entry and clearer types (no `type` prop).
 
-### vs ant-design TimePicker?
+### When to use this one?
 
-Same product role; keep morya API vocabulary. See [antd mapping](/docs/antd-mapping).
+Use it when you need a time only (no date) and a narrower API (`severity` / `size` / `showSeconds`, etc.).

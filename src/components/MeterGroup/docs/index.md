@@ -12,7 +12,6 @@ description: 多段占比计量条。
 ## 何时使用
 
 - 多段占比计量条。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

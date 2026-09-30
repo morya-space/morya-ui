@@ -18,7 +18,6 @@ Do **not** use `toast.add({ summary: 'Saved' })` when `message.success('Saved')`
 ## When to use
 
 - Corner floating notifications with API and controlled lists
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 
@@ -103,7 +102,7 @@ interface ToastMessage {
 
 ## Notification (useNotification / notification)
 
-Matches Ant Design's `notification` surface and reuses the same toast service underneath, so every transient message shares one overlay host and motion stack:
+Reuses the same toast service underneath, so every transient message shares one overlay host and motion stack:
 
 ```ts
 import { notification, useNotification } from 'morya-ui'
@@ -136,4 +135,4 @@ api.open({ message: 'Done', key: 'job', type: 'success' })
 | `closable` | `boolean` | `true` | Show the close button |
 | `onClose` | `() => void` | — | Called after closing |
 
-> `duration` is in **seconds** (Ant Design convention), while the native `toast` API uses `life` in milliseconds.
+> `duration` is in **seconds**, while the native `toast` API uses `life` in milliseconds.

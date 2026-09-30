@@ -12,7 +12,6 @@ Flexbox layout container. Prefer CSS `gap` for spacing between children.
 ## When to use
 
 - Flexbox layout container for direction, alignment, and gap
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

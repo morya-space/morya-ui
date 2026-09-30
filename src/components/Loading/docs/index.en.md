@@ -16,7 +16,6 @@ Fullscreen masks teleport to `body` so parent `overflow` / `transform` cannot cl
 ## When to use
 
 - Loading indicator and mask, with multiple effects, a region overlay, the v-loading directive, and an imperative service
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

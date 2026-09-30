@@ -12,7 +12,6 @@ description: 分步引导遮罩，高亮目标并展示说明面板。
 ## 何时使用
 
 - 分步引导遮罩，高亮目标并展示说明面板。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

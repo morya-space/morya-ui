@@ -12,7 +12,6 @@ description: System outline icon registry. Use the default slot for business ico
 ## When to use
 
 - System outline icon registry. Use the default slot for business icons from Lucide and similar libraries
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

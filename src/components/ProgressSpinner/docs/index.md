@@ -12,7 +12,6 @@ SVG 环形加载指示器。
 ## 何时使用
 
 - SVG 环形加载指示器，可配置描边宽度与动画时长。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

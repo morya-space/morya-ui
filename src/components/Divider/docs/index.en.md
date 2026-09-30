@@ -12,7 +12,6 @@ Content divider, optionally with a label.
 ## When to use
 
 - Content divider
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

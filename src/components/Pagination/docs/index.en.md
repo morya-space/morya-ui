@@ -14,7 +14,6 @@ Pagination. `v-model` uses a **1-based page number**. The instance property `fir
 ## When to use
 
 - Pagination. v-model is the page number. The instance exposes first (zero-based index of the first record)
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

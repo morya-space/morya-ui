@@ -12,7 +12,6 @@ description: 图片展示与点击预览；可用 PreviewGroup 浏览多图。
 ## 何时使用
 
 - 图片展示与点击预览；可用 PreviewGroup 浏览多图。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

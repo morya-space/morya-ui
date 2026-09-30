@@ -22,7 +22,6 @@ Vs [Toast](/components/Toast):
 ## When to use
 
 - Top-center floating notice with an imperative API
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

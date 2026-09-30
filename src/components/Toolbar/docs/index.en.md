@@ -11,7 +11,6 @@ Horizontal action bar, commonly used as a list page header.
 ## When to use
 
 - Toolbar layout with start / center / end regions
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

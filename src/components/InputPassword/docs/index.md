@@ -12,7 +12,6 @@ description: 密码输入框，支持显示/隐藏与强度提示。
 ## 何时使用
 
 - 密码输入框，支持显示/隐藏与强度提示。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

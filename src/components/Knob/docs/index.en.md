@@ -12,7 +12,6 @@ Circular dial control with drag and keyboard adjustment.
 ## When to use
 
 - SVG circular knob for selecting a numeric value
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

@@ -95,6 +95,6 @@ interface CascadeSelectOption {
 }
 ```
 
-## vs ant-design
+## Boundaries
 
-Maps to antd `Cascader` by role, with a narrower surface: single leaf only; no search / multiple / `loadData` yet. See [antd mapping](/docs/antd-mapping).
+Cascading value picking with a narrower surface: single leaf only; no search / multiple / `loadData`.

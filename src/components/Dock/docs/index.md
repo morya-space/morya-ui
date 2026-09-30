@@ -54,6 +54,6 @@ interface DockItem extends Omit<MenuNodeBase, "label"> {
 }
 ```
 
-## 与 ant-design
+## 功能边界
 
-对应 antd `FloatButton` 场景中的**应用级启动栏**角色；不是单一悬浮按钮。详见 [antd 映射](/docs/antd-mapping)。
+**应用级启动栏**角色；不是单一悬浮按钮。

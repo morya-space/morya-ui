@@ -23,7 +23,6 @@ description: 表单布局与字段校验。声明式 rules、label 对齐/行内
 ## 何时使用
 
 - 表单布局与字段校验。声明式 rules、label 对齐/行内布局；validate() 始终 resolve，不 reject。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

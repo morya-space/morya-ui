@@ -12,7 +12,6 @@ Side drawer that slides in from the screen edge. Suited to navigation, filters, 
 ## When to use
 
 - Side drawer panel
-- Prefer composing documented `M*` APIs; see [Common Props](/docs/common-props).
 
 ## Import
 

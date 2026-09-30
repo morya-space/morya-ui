@@ -12,7 +12,6 @@ description: 星级评分控件，支持清除与只读。
 ## 何时使用
 
 - 星级评分控件，支持清除与只读。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 

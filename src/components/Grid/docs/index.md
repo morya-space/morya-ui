@@ -9,7 +9,7 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 本页含两套布局：
 
 - **CSS Grid（`MGrid` / `MGridItem`）**：24 列栅格（可用 `cols` 调整），支持容器响应式与折叠。子项请使用 `MGridItem`（别名 `MGi`）。
-- **Flex 24 栅格（`MRow` / `MCol`）**：与 antd 的 `Row` / `Col` 对齐，支持 `gutter` / `span` / `offset` / `push` / `pull` / `order` / `flex` 与六档断点。
+- **Flex 24 栅格（`MRow` / `MCol`）**：支持 `gutter` / `span` / `offset` / `push` / `pull` / `order` / `flex` 与六档断点。
 
 两套可混用，但同一层级内建议只选一套。
 
@@ -17,7 +17,6 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 ## 何时使用
 
 - 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列。
-- 优先组合文档中的 `M*` API；共性约定见 [Common Props](/docs/common-props)。
 
 ## 引入
 
@@ -96,7 +95,7 @@ import { MGrid, MGridItem, MRow, MCol } from 'morya-ui'
 </MRow>
 ```
 
-断点：`xs` `<576`、`sm` `≥576`、`md` `≥768`、`lg` `≥992`、`xl` `≥1200`、`xxl` `≥1600`。响应式值按**从小到大**合并，命中的最大断点生效（与 antd 媒体查询结果一致）。
+断点：`xs` `<576`、`sm` `≥576`、`md` `≥768`、`lg` `≥992`、`xl` `≥1200`、`xxl` `≥1600`。响应式值按**从小到大**合并，命中的最大断点生效。
 
 > 响应式由共享的 `matchMedia` 订阅驱动（全局仅一套监听），因此列宽随视口变化即时更新，无需为每个组合生成 CSS 类。
 
