@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T07:47:17.177Z",
-  "catalogGeneratedAt": "2026-09-30T07:47:11.558Z",
+  "generatedAt": "2026-09-30T09:28:56.715Z",
+  "catalogGeneratedAt": "2026-09-30T09:28:54.470Z",
   "components": [
     {
       "id": "Accordion",
@@ -412,13 +412,20 @@
     {
       "id": "Carousel",
       "exportName": "MCarousel",
-      "examples": 6,
+      "examples": 12,
       "props": {
-        "total": 9,
-        "covered": 6,
+        "total": 21,
+        "covered": 11,
         "missing": [
-          "showIndicators",
-          "page",
+          "currentIndex",
+          "defaultIndex",
+          "showDots",
+          "centeredSlides",
+          "trigger",
+          "touchable",
+          "mousewheel",
+          "keyboard",
+          "transitionDuration",
           "pt"
         ]
       },
@@ -426,18 +433,26 @@
         "total": 1,
         "covered": 0,
         "missing": [
-          "update:page"
+          "update:currentIndex"
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 3,
         "covered": 1,
-        "missing": []
+        "missing": [
+          "arrow",
+          "dots"
+        ]
       },
       "methods": {
-        "total": 0,
+        "total": 4,
         "covered": 0,
-        "missing": []
+        "missing": [
+          "prev",
+          "next",
+          "to",
+          "getCurrentIndex"
+        ]
       }
     },
     {
@@ -3985,6 +4000,6 @@
   "summary": {
     "components": 107,
     "componentsWithMissingCoverage": 106,
-    "totalExamples": 945
+    "totalExamples": 951
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T07:19:02.670Z",
+  "generatedAt": "2026-09-30T09:36:22.722Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 433,
+  "tokenCount": 436,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -865,53 +865,83 @@
       }
     },
     {
-      "name": "--m-carousel-count",
+      "name": "--m-carousel-arrow-inset",
       "category": "component",
       "source": "src/components/Carousel/styles.css",
-      "default": "1",
+      "default": "var(--m-space-3)",
       "description": {
-        "zh-CN": "组件专用相关变量：Carousel Count",
-        "en-US": "Component-specific token: Carousel Count"
+        "zh-CN": "组件专用相关变量：Carousel Arrow Inset",
+        "en-US": "Component-specific token: Carousel Arrow Inset"
+      }
+    },
+    {
+      "name": "--m-carousel-dot-line-thickness",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "0.25rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Dot Line Thickness",
+        "en-US": "Component-specific token: Carousel Dot Line Thickness"
+      }
+    },
+    {
+      "name": "--m-carousel-dot-line-width",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "1rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Dot Line Width",
+        "en-US": "Component-specific token: Carousel Dot Line Width"
+      }
+    },
+    {
+      "name": "--m-carousel-dot-line-width-active",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "1.75rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Dot Line Width Active",
+        "en-US": "Component-specific token: Carousel Dot Line Width Active"
+      }
+    },
+    {
+      "name": "--m-carousel-dot-size",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "0.5rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Dot Size",
+        "en-US": "Component-specific token: Carousel Dot Size"
+      }
+    },
+    {
+      "name": "--m-carousel-dots-inset",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "var(--m-space-3)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Dots Inset",
+        "en-US": "Component-specific token: Carousel Dots Inset"
+      }
+    },
+    {
+      "name": "--m-carousel-duration",
+      "category": "component",
+      "source": "src/components/Carousel/styles.css",
+      "default": "300ms",
+      "description": {
+        "zh-CN": "组件专用相关变量：Carousel Duration",
+        "en-US": "Component-specific token: Carousel Duration"
       }
     },
     {
       "name": "--m-carousel-gap",
       "category": "component",
       "source": "src/components/Carousel/styles.css",
-      "default": "var(--m-space-2)",
+      "default": "0px",
       "description": {
         "zh-CN": "组件专用相关变量：Carousel Gap",
         "en-US": "Component-specific token: Carousel Gap"
-      }
-    },
-    {
-      "name": "--m-carousel-indicator-size",
-      "category": "component",
-      "source": "src/components/Carousel/styles.css",
-      "default": "0.45rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Carousel Indicator Size",
-        "en-US": "Component-specific token: Carousel Indicator Size"
-      }
-    },
-    {
-      "name": "--m-carousel-page",
-      "category": "component",
-      "source": "src/components/Carousel/styles.css",
-      "default": "0",
-      "description": {
-        "zh-CN": "组件专用相关变量：Carousel Page",
-        "en-US": "Component-specific token: Carousel Page"
-      }
-    },
-    {
-      "name": "--m-carousel-visible",
-      "category": "component",
-      "source": "src/components/Carousel/styles.css",
-      "default": "1",
-      "description": {
-        "zh-CN": "组件专用相关变量：Carousel Visible",
-        "en-US": "Component-specific token: Carousel Visible"
       }
     },
     {
@@ -4457,7 +4487,7 @@
       "name": "--m-tag-icon-size",
       "category": "tag",
       "source": "src/components/Tag/styles.css",
-      "default": "0.875rem",
+      "default": "1rem",
       "description": {
         "zh-CN": "标签相关变量：Tag Icon Size",
         "en-US": "Tag token: Tag Icon Size"
@@ -4467,7 +4497,7 @@
       "name": "--m-tag-line-height",
       "category": "tag",
       "source": "src/components/Tag/styles.css",
-      "default": "1.6667",
+      "default": "1.375",
       "description": {
         "zh-CN": "标签相关变量：Tag Line Height",
         "en-US": "Tag token: Tag Line Height"
