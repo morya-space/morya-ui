@@ -12,6 +12,8 @@ on:
       - ".size-limit.json"
       - "package.json"
       - "pnpm-lock.yaml"
+      - "tsconfig.json"
+      - "vitest.config.ts"
   push:
     branches: [main]
     paths:
@@ -24,6 +26,8 @@ on:
       - ".size-limit.json"
       - "package.json"
       - "pnpm-lock.yaml"
+      - "tsconfig.json"
+      - "vitest.config.ts"
   workflow_dispatch:
 
 permissions:
@@ -34,6 +38,46 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+  unit-test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Run tests
+        run: pnpm test
+
   size-limit:
     name: Bundle size budget
     runs-on: ubuntu-latest

@@ -7,7 +7,13 @@ export default defineConfig({
     conditions: ['node'],
   },
   test: {
-    exclude: ['**/node_modules/**', '**/dist/**'],
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      // node:test suites — run via `node --test` in the npm test script
+      'scripts/**',
+      'packages/setup/**',
+    ],
     environment: 'happy-dom',
     clearMocks: true,
     restoreMocks: true,
