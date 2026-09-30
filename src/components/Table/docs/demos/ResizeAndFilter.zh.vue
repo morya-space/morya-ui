@@ -18,8 +18,8 @@ const columns: TableColumnDefinition[] = [
     resizable: true,
     filterable: true,
     filters: [
-      { text: '草稿', value: 'Draft' },
-      { text: '上线', value: 'Live' },
+      { label: '草稿', value: 'Draft' },
+      { label: '上线', value: 'Live' },
     ],
   },
   { key: 'role', label: '角色', minWidth: 120 },

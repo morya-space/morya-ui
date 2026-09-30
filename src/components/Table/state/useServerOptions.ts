@@ -85,8 +85,8 @@ export function useServerOptions(
 
     serverOptionsComputed.value = {
       ...serverOptionsComputed.value,
-      sortBy: newSortType !== null ? newSortBy : undefined,
-      sortType: newSortType ?? undefined,
+      sortBy: newSortType !== null ? newSortBy : null,
+      sortType: newSortType,
     }
   }
 

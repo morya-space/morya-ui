@@ -3,6 +3,10 @@
     "target": "ES2022",
     "jsx": "preserve",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "morya-ui": ["./src/index.ts"]
+    },
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,

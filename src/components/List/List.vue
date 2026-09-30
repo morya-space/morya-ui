@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T = unknown">
 
-import type { ListGridType, ListProps } from './types'
+import type { ListGridType, ListPaginationConfig, ListProps } from './types'
 
 import { computed, provide, ref, toRef, useAttrs, useSlots, watch } from 'vue'
 
@@ -62,9 +62,13 @@ const dataMode = computed(() => sourceItems.value.length > 0)
 
 
 
-const paginationEnabled = computed(() => props.pagination !== false && props.pagination != null)
+const paginationConfig = computed((): ListPaginationConfig | null => {
+  const pagination = props.pagination
+  if (pagination === false || pagination == null) return null
+  return pagination
+})
 
-const paginationConfig = computed(() => (paginationEnabled.value ? props.pagination! : null))
+const paginationEnabled = computed(() => paginationConfig.value != null)
 
 
 

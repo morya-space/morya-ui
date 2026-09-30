@@ -49,7 +49,7 @@ loaders +=
 loaders +=
   'const ILLUSTRATION_LOADERS: Record<EmptyIllustration, IllustrationLoader> = {\n'
 for (const key of keys) {
-  loaders += `  '${key}': () => import('./markup/${key}.ts'),\n`
+  loaders += `  '${key}': () => import('./markup/${key}'),\n`
 }
 loaders += '}\n\n'
 loaders +=

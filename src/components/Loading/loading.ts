@@ -311,7 +311,7 @@ export function mountLoadingMask(options: LoadingMaskOptions): LoadingMaskInstan
   if (state.fullscreen) fullscreenMask = record
 
   const vnode = h(Mask)
-  vnode.appContext = options.appContext ?? getMOverlayAppContext()
+  vnode.appContext = options.appContext ?? getMOverlayAppContext() ?? null
   render(vnode, host)
 
   return {

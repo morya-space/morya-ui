@@ -18,8 +18,8 @@ const columns: TableColumnDefinition[] = [
     resizable: true,
     filterable: true,
     filters: [
-      { text: 'Draft', value: 'Draft' },
-      { text: 'Live', value: 'Live' },
+      { label: 'Draft', value: 'Draft' },
+      { label: 'Live', value: 'Live' },
     ],
   },
   { key: 'role', label: 'Role', minWidth: 120 },

@@ -114,7 +114,7 @@ function normalizeStyle(style: SplitterProps['pane1Style']) {
 }
 
 const panel1Style = computed(() => {
-  const style: Record<string, string | undefined> = {
+  const style: Record<string, string | number | undefined> = {
     flex: `0 0 ${sizeToFlexBasis(mergedSize.value, sizeMode.value)}`,
     ...normalizeStyle(props.pane1Style),
   }
@@ -127,7 +127,7 @@ const panel1Style = computed(() => {
 })
 
 const panel2Style = computed(() => {
-  const style: Record<string, string | undefined> = {
+  const style: Record<string, string | number | undefined> = {
     ...normalizeStyle(props.pane2Style),
   }
   if (props.min2 != null) {

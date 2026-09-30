@@ -5,20 +5,20 @@ import type { EmptyIllustration } from './catalog'
 type IllustrationLoader = () => Promise<{ default: string }>
 
 const ILLUSTRATION_LOADERS: Record<EmptyIllustration, IllustrationLoader> = {
-  'no-content': () => import('./markup/no-content.ts'),
-  'no-result': () => import('./markup/no-result.ts'),
-  'no-message': () => import('./markup/no-message.ts'),
-  'no-schedule': () => import('./markup/no-schedule.ts'),
-  'no-issue': () => import('./markup/no-issue.ts'),
-  'network-error': () => import('./markup/network-error.ts'),
-  'server-error': () => import('./markup/server-error.ts'),
-  'building': () => import('./markup/building.ts'),
-  'churn-high': () => import('./markup/churn-high.ts'),
-  'conversion-low': () => import('./markup/conversion-low.ts'),
-  'activity-low': () => import('./markup/activity-low.ts'),
-  'profile-unclear': () => import('./markup/profile-unclear.ts'),
-  'input-irregular': () => import('./markup/input-irregular.ts'),
-  'payment-cycle-long': () => import('./markup/payment-cycle-long.ts'),
+  'no-content': () => import('./markup/no-content'),
+  'no-result': () => import('./markup/no-result'),
+  'no-message': () => import('./markup/no-message'),
+  'no-schedule': () => import('./markup/no-schedule'),
+  'no-issue': () => import('./markup/no-issue'),
+  'network-error': () => import('./markup/network-error'),
+  'server-error': () => import('./markup/server-error'),
+  'building': () => import('./markup/building'),
+  'churn-high': () => import('./markup/churn-high'),
+  'conversion-low': () => import('./markup/conversion-low'),
+  'activity-low': () => import('./markup/activity-low'),
+  'profile-unclear': () => import('./markup/profile-unclear'),
+  'input-irregular': () => import('./markup/input-irregular'),
+  'payment-cycle-long': () => import('./markup/payment-cycle-long'),
 }
 
 /** Load one built-in illustration SVG string (code-split friendly). */
