@@ -166,6 +166,14 @@ import { MButton } from "morya-ui";
 | `focus()`   | 聚焦底层 button。          |
 | `ref`       | 底层 `HTMLButtonElement`。 |
 
+### Props — ButtonGroup
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `fluid` | `boolean` | `false` | 宽度撑满容器。 |
+| `ariaLabel` | `string` | — | 组合的可访问名称。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 组容器透传。 |
+
 ## Design Token
 
 复用全局 `--m-*` 令牌，见[设计令牌](/docs/design-tokens)。组件级 `--m-button-*` 表将在后续补充。

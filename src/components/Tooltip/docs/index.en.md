@@ -1,4 +1,4 @@
----
+﻿---
 title: Tooltip
 category: 05 / FEEDBACK
 description: A short hint shown on hover or focus. Supports placement, disabled, and showDelay.
@@ -23,16 +23,15 @@ import { MButton, MTooltip } from 'morya-ui'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `content` | `string` | — | Tooltip text. |
+| `content` | `string` | 鈥?| Tooltip text. |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Position relative to the trigger. |
 | `disabled` | `boolean` | `false` | Disable the tooltip. |
 | `showDelay` | `number` | `0` | Delay before showing, in milliseconds. |
 | `hideDelay` | `number` | `0` | Delay before hiding, in milliseconds. |
-| `maxWidth` | `string \| number` | — | Max content width; a number is pixels. |
+| `maxWidth` | `string \| number` | 鈥?| Max content width; a number is pixels. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; defaults to `body`. |
 | `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | Mount target; `'self'` / `false` renders in place. |
 | `transition` | `string \| false` | `'fade'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
 ## Slots
@@ -45,7 +44,7 @@ import { MButton, MTooltip } from 'morya-ui'
 
 - Tooltip content is exposed with `role="tooltip"` on hover/focus.
 - Triggers must be focusable; icon-only controls need `aria-label`.
-- Do not hide critical information in tooltips only—provide visible text or labels.
+- Do not hide critical information in tooltips only鈥攑rovide visible text or labels.
 
 ## Events
 

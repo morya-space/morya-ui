@@ -1,4 +1,4 @@
----
+﻿---
 title: Tag
 category: 01 / BASIC
 description: Tag for status or category.
@@ -58,18 +58,17 @@ Pass a `MIcon` icon name to `icon`.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string` | — | Tag text. The default slot takes precedence when present. |
+| `value` | `string` | 鈥?| Tag text. The default slot takes precedence when present. |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
-| `icon` | [IconName](/docs/types#IconName) | — | `MIcon` icon name. |
+| `icon` | [IconName](/docs/types#IconName) | 鈥?| `MIcon` icon name. |
 | `closable` | `boolean` | `false` | Show a close control (ignored when `checkable`). |
-| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| Size. |
 | `bordered` | `boolean` | `false` | Draw a border. |
-| `color` | `string` | — | Custom color. |
+| `color` | `string` | 鈥?| Custom color. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
 | `checkable` | `boolean` | `false` | Toggleable selection. |
 | `checked` | `boolean` | `false` | Checked state; use with `v-model:checked`. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
 ## Events

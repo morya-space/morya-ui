@@ -36,6 +36,7 @@ import { MAvatar } from 'morya-ui'
 | `shape` | `'circle' \| 'square'` | `'circle'` | 形状。 |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | 尺寸；`sm`/`lg` 为别名。 |
 | `max` | `number` | — | `MAvatarGroup`：最多展示个数，超出显示 +N。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | `MAvatarGroup` 根节点透传。 |
 
 ## Events
 
@@ -45,8 +46,8 @@ import { MAvatar } from 'morya-ui'
 
 `MAvatarGroup`：`max` 最多展示个数；`size` 作用于溢出标记。
 
-## Slots
+## Slots — AvatarGroup
 
 | 插槽名 | 说明 |
 | --- | --- |
-| `default` | 无 `src` 时的占位内容。 |
+| `default` | 子头像。 |

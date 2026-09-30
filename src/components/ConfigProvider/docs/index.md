@@ -128,6 +128,9 @@ registerMotionPreset('brand', { name: 'm-brand' })
 | `locale` | `MLocale` | — | 文案语言包（如 `zhCN` / `enUS`）。 |
 | `componentDefaults` | `Record<string, object>` | — | 按组件名覆盖默认 props（含 `transition`）。 |
 | `motion` | `{ transitions?: Partial<Record<role, string>> }` | — | 按浮层角色覆盖进出场预设。 |
+| `direction` | `'ltr' \| 'rtl'` | — | 书写方向。 |
+| `disabled` | `boolean` | — | 禁用所有后代表单控件。 |
+| `themeConfig` | `MThemeConfig` | — | 种子主题（品牌色、尺寸、组件覆盖）。 |
 | `respectReducedMotion` | `boolean` | `true` | 已废弃。组件动效不读取系统 `prefers-reduced-motion`。 |
 | `globalDensity` | `boolean` | `true` | 是否将 density / theme 写入 `documentElement`。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |

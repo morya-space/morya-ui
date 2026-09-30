@@ -34,6 +34,12 @@ import { MWatermark } from 'morya-ui'
 | `inherit` | `boolean` | `true` | Inherit flag (class hook) |
 | `pt` | `RootPassThrough` | — | Root pass-through |
 
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Content under the watermark. |
+
 ## Anti-tamper (lightweight)
 
 If the overlay node is removed from the DOM, a `MutationObserver` re-renders it (not a security boundary—guards accidental removal).

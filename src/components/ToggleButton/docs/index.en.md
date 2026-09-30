@@ -1,4 +1,4 @@
----
+﻿---
 title: ToggleButton
 category: 02 / FORM
 description: A button that switches between on and off labels.
@@ -30,10 +30,9 @@ import { MToggleButton } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | Whether it is on. |
 | `onLabel` / `offLabel` | `string` | `On` / `Off` | Labels. |
-| `onIcon` / `offIcon` | `string` | — | Optional icon characters. |
-| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`; can inherit from ConfigProvider. |
+| `onIcon` / `offIcon` | `string` | 鈥?| Optional icon characters. |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | 鈥?| `small` / `large`; can inherit from ConfigProvider. |
 | `disabled` | `boolean` | `false` | Disabled. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
 ## Events

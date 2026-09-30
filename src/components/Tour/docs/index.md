@@ -27,6 +27,7 @@ import { MTour } from 'morya-ui'
 | --- | --- | --- | --- |
 | `steps` | `TourStep[]` | `[]` | 步骤配置 |
 | `open` | `boolean` | — | 显隐（`v-model:open`） |
+| `modelValue` | `boolean` | — | `open` 的别名（`v-model`） |
 | `current` | `number` | `0` | 当前步（`v-model:current`） |
 | `placement` | 浮层方位 | `'bottom'` | 默认面板方位 |
 | `mask` | `boolean` | `true` | 遮罩聚光灯 |
@@ -52,6 +53,7 @@ import { MTour } from 'morya-ui'
 | 事件 | 说明 |
 | --- | --- |
 | `update:open` | 显隐变化 |
+| `update:modelValue` | 同 `update:open`（`v-model`） |
 | `update:current` | 步骤变化 |
 | `change` | 同 `update:current` |
 | `close` | 关闭时 |

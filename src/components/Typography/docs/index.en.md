@@ -68,6 +68,12 @@ Same as Text, plus:
 | `copyable` | `TypographyCopyable` | `false` | Copy affordance |
 | `pt` | `RootPassThrough` | — | Root pass-through |
 
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Text content. |
+
 ## Behaviour
 
 ### Ellipsis

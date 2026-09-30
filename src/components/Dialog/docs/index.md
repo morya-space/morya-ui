@@ -110,6 +110,7 @@ Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`clas
 | --- | --- |
 | `default` | 对话框内容。 |
 | `header` | 自定义标题区。 |
+| `footer` | 底部操作区。 |
 
 ## 命令式调用（useModal / modal）
 

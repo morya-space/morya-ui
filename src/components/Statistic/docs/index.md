@@ -58,3 +58,12 @@ import { MStatistic, MStatisticCountdown } from 'morya-ui'
 | `finish` | 倒计时结束 |
 | `change` | 剩余毫秒变化 |
 
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `title` | 自定义标题 |
+| `prefix` | 自定义前缀 |
+| `suffix` | 自定义后缀 |
+| `value` | 自定义数值区 |
+

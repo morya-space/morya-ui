@@ -1,52 +1,45 @@
----
+﻿---
 title: Tooltip
 category: 05 / FEEDBACK
-description: 悬停或聚焦时显示的短提示。支持 placement、disabled 与 showDelay。
----
+description: 鎮仠鎴栬仛鐒︽椂鏄剧ず鐨勭煭鎻愮ず銆傛敮鎸?placement銆乨isabled 涓?showDelay銆?---
 
 # Tooltip
 
-为触发元素提供短提示，适合图标按钮或截断文本说明。
-
-## 引入
+涓鸿Е鍙戝厓绱犳彁渚涚煭鎻愮ず锛岄€傚悎鍥炬爣鎸夐挳鎴栨埅鏂枃鏈鏄庛€?
+## 寮曞叆
 
 ```ts
 import { MButton, MTooltip } from 'morya-ui'
 ```
 
-## 基础用法
+## 鍩虹鐢ㄦ硶
 
 ```vue preview src="./demos/Basic.vue"
 ```
 
 ## Props
 
-| 参数 | 类型 | 默认值 | 说明 |
+| 鍙傛暟 | 绫诲瀷 | 榛樿鍊?| 璇存槑 |
 | --- | --- | --- | --- |
-| `content` | `string` | — | 提示文案。 |
-| `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | 相对触发元素的位置。 |
-| `disabled` | `boolean` | `false` | 禁用提示。 |
-| `showDelay` | `number` | `0` | 显示前延迟（毫秒）。 |
-| `hideDelay` | `number` | `0` | 隐藏前延迟（毫秒）。 |
-| `maxWidth` | `string \| number` | — | 提示最大宽度；数字为 px。 |
-| `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
-| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 挂载目标；`'self'` / `false` 就地渲染。 |
-| `transition` | `string \| false` | `'fade'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+| `content` | `string` | 鈥?| 鎻愮ず鏂囨銆?|
+| `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | 鐩稿瑙﹀彂鍏冪礌鐨勪綅缃€?|
+| `disabled` | `boolean` | `false` | 绂佺敤鎻愮ず銆?|
+| `showDelay` | `number` | `0` | 鏄剧ず鍓嶅欢杩燂紙姣锛夈€?|
+| `hideDelay` | `number` | `0` | 闅愯棌鍓嶅欢杩燂紙姣锛夈€?|
+| `maxWidth` | `string \| number` | 鈥?| 鎻愮ず鏈€澶у搴︼紱鏁板瓧涓?px銆?|
+| `teleport` | `boolean` | `true` | 娴眰 Teleport锛涢粯璁ゆ寕鍒?`body`銆?|
+| `appendTo` | `string \| HTMLElement \| 'self' \| false` | `'body'` | 鎸傝浇鐩爣锛沗'self'` / `false` 灏卞湴娓叉煋銆?|
+| `transition` | `string \| false` | `'fade'` | 杩涘嚭鍦哄姩鏁堥璁撅紱`false` / `'none'` 鍏抽棴銆傝[鍔ㄦ晥](/docs/motion)銆?|
 
 
 ## Slots
 
-| 插槽名 | 说明 |
+| 鎻掓Ы鍚?| 璇存槑 |
 | --- | --- |
-| `default` | 触发元素。 |
+| `default` | 瑙﹀彂鍏冪礌銆?|
 
-## 无障碍
-
-- 提示内容会通过 `role="tooltip"` 关联到触发元素（hover / focus 显示）。
-- 触发控件需可聚焦；纯图标按钮请设置 `aria-label`。
-- 重要信息不要只放在 Tooltip 中，应提供可见文案或 `aria-label`。
-
+## 鏃犻殰纰?
+- 鎻愮ず鍐呭浼氶€氳繃 `role="tooltip"` 鍏宠仈鍒拌Е鍙戝厓绱狅紙hover / focus 鏄剧ず锛夈€?- 瑙﹀彂鎺т欢闇€鍙仛鐒︼紱绾浘鏍囨寜閽璁剧疆 `aria-label`銆?- 閲嶈淇℃伅涓嶈鍙斁鍦?Tooltip 涓紝搴旀彁渚涘彲瑙佹枃妗堟垨 `aria-label`銆?
 ## Events
 
-无自定义事件。
+鏃犺嚜瀹氫箟浜嬩欢銆?

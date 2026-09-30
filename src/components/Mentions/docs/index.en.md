@@ -44,6 +44,7 @@ import { MMentions } from 'morya-ui'
 | `clearable` | `boolean` | `false` | Show clear control |
 | `allowClear` | `boolean` | — | Alias of `clearable`  |
 | `loading` | `boolean` | `false` | Spinner in suggestion panel |
+| `id` | `string` | — | Control id |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) | — | Field pass-through |
 
 ## Async suggestions

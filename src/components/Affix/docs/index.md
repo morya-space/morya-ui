@@ -35,3 +35,9 @@ import { MAffix } from 'morya-ui'
 | --- | --- | --- |
 | `change` | `affixed: boolean` | 固钉状态变化 |
 
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `default` | 被固钉的内容。 |
+

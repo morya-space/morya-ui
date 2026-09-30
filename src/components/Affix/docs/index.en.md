@@ -35,3 +35,9 @@ import { MAffix } from 'morya-ui'
 | --- | --- | --- |
 | `change` | `affixed: boolean` | Affixed state changed |
 
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Content to affix. |
+

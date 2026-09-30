@@ -1,4 +1,4 @@
----
+﻿---
 title: Chip
 category: 01 / BASIC
 description: Chip displays tagged information, optionally with an icon, image, and remove action.
@@ -23,14 +23,13 @@ import { MChip } from 'morya-ui'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `label` | `string` | — | Chip text. |
-| `icon` | [IconName](/docs/types#IconName) | — | Leading icon name. |
-| `image` | `string` | — | Leading image URL (takes precedence over icon). |
-| `removable` | `boolean` | `false` | Show × remove button. |
+| `label` | `string` | 鈥?| Chip text. |
+| `icon` | [IconName](/docs/types#IconName) | 鈥?| Leading icon name. |
+| `image` | `string` | 鈥?| Leading image URL (takes precedence over icon). |
+| `removable` | `boolean` | `false` | Show 脳 remove button. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
-| `severity` | `MTagSeverity \| 'warning'` | — | Semantic color. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+| `severity` | `MTagSeverity \| 'warning'` | 鈥?| Semantic color. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| Size. |
 
 
 ## Events

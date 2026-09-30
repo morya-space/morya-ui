@@ -1,4 +1,4 @@
----
+﻿---
 title: Badge
 category: 01 / BASIC
 description: Status badge or dot.
@@ -46,13 +46,12 @@ Wrap content with the default slot. `max` caps numeric values; `processing` puls
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string \| number` | — | Badge content. Renders as a dot when omitted. |
+| `value` | `string \| number` | 鈥?| Badge content. Renders as a dot when omitted. |
 | `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; `sm` / `lg` are aliases. |
-| `max` | `number` | — | Cap numeric values as `{max}+`. |
-| `offset` | `[number, number]` | — | Offset `[x, y]` when wrapping content. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| Size; `sm` / `lg` are aliases. |
+| `max` | `number` | 鈥?| Cap numeric values as `{max}+`. |
+| `offset` | `[number, number]` | 鈥?| Offset `[x, y]` when wrapping content. |
 | `processing` | `boolean` | `false` | Pulse animation. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 
 ## Slots

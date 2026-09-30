@@ -68,6 +68,12 @@ import { MTypography, MTitle, MText, MParagraph, MLink } from 'morya-ui'
 | `copyable` | `TypographyCopyable` | `false` | 复制按钮 |
 | `pt` | `RootPassThrough` | — | 透传根节点 |
 
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `default` | 文字内容。 |
+
 ## 行为
 
 ### 省略

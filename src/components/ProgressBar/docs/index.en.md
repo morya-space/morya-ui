@@ -1,4 +1,4 @@
----
+﻿---
 title: ProgressBar
 category: 03 / DATA
 description: Progress bar for determinate or indeterminate progress.
@@ -28,13 +28,12 @@ import { MProgressBar } from 'morya-ui'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `number` | `0` | Progress 0–100 (determinate). |
+| `value` | `number` | `0` | Progress 0鈥?00 (determinate). |
 | `mode` | `'determinate' \| 'indeterminate'` | `'determinate'` | Determinate / indeterminate mode. |
 | `showValue` | `boolean` | `true` | Whether to show the percentage label. |
 | `type` | `'line' \| 'circle'` | `'line'` | Line or circle. |
-| `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| …` | — | Semantic fill. `exception`→danger; `active`→line stripe; `normal`→primary. |
-| `color` | `string` | — | Custom fill color. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
+| `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| 鈥 | 鈥?| Semantic fill. `exception`鈫抎anger; `active`鈫抣ine stripe; `normal`鈫抪rimary. |
+| `color` | `string` | 鈥?| Custom fill color. |
 
 ## Events
 

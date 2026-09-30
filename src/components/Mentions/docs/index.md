@@ -44,6 +44,7 @@ import { MMentions } from 'morya-ui'
 | `clearable` | `boolean` | `false` | 显示清除按钮 |
 | `allowClear` | `boolean` | — | `clearable` 的别名 |
 | `loading` | `boolean` | `false` | 建议面板内显示加载中 |
+| `id` | `string` | — | 控件 id |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) | — | 字段透传 |
 
 ## 异步建议

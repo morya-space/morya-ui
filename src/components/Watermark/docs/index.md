@@ -34,6 +34,12 @@ import { MWatermark } from 'morya-ui'
 | `inherit` | `boolean` | `true` | 预留：子树继承（样式标记） |
 | `pt` | `RootPassThrough` | — | 根透传 |
 
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `default` | 被水印覆盖的内容。 |
+
 ## 防篡改（轻量）
 
 若水印 DOM 被移除，组件会通过 `MutationObserver` 重新绘制 overlay（非安全边界，仅防误删）。

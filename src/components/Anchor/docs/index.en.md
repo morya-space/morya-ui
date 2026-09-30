@@ -42,7 +42,15 @@ Prefer declarative `items`, or nest `MAnchorLink` children.
 | --- | --- | --- |
 | `href` | `string` | Target hash (e.g. `#section-1`) |
 | `title` | `string` | Link label |
+| `target` | `string` | Native `target` (e.g. `_blank`) |
 | `targetOffset` | `number` | Per-link scroll offset |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Nested links (or custom structure); prefer `items` when possible. |
+| `title` | `MAnchorLink` custom title area. |
 
 ## Events
 

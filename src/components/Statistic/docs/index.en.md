@@ -58,3 +58,12 @@ Extends Statistic (except value formatting), plus:
 | `finish` | Countdown completed |
 | `change` | Remaining ms updated |
 
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `title` | Custom title |
+| `prefix` | Custom prefix |
+| `suffix` | Custom suffix |
+| `value` | Custom value area |
+

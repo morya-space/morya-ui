@@ -35,6 +35,8 @@ import { MAvatar } from 'morya-ui'
 | `icon` | [IconName](/docs/types#IconName) | — | `MIcon` icon name. |
 | `shape` | `'circle' \| 'square'` | `'circle'` | Shape. |
 | `size` | `'normal' \| 'large' \| 'xlarge' \| 'sm' \| 'lg'` | `'normal'` | Size; `sm`/`lg` are aliases. |
+| `max` | `number` | — | `MAvatarGroup`: max visible avatars; overflow shows `+N`. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | `MAvatarGroup` root pass-through. |
 
 ## Events
 
@@ -44,8 +46,8 @@ import { MAvatar } from 'morya-ui'
 
 `MAvatarGroup`: `max` limits visible avatars; `size` styles the overflow marker.
 
-## Slots
+## Slots — AvatarGroup
 
 | Slot | Description |
 | --- | --- |
-| `default` | Fallback when `src` is omitted. |
+| `default` | Child avatars. |

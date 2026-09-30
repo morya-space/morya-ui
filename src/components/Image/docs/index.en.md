@@ -48,3 +48,10 @@ import { MImage, MImagePreviewGroup } from 'morya-ui'
 | --- | --- |
 | `MImage` | Single image |
 | `MImagePreviewGroup` | Wrap multiple `MImage` for shared preview |
+
+## Slots — PreviewGroup
+
+| Slot | Description |
+| --- | --- |
+| `default` | Child `MImage` nodes. |
+

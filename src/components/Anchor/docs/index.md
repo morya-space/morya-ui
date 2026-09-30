@@ -42,7 +42,15 @@ import { MAnchor, MAnchorLink } from 'morya-ui'
 | --- | --- | --- |
 | `href` | `string` | 目标 hash（如 `#section-1`） |
 | `title` | `string` | 链接文案 |
+| `target` | `string` | 原生 `target`（如 `_blank`） |
 | `targetOffset` | `number` | 单项滚动偏移 |
+
+## Slots
+
+| 插槽 | 说明 |
+| --- | --- |
+| `default` | 子链接（或自定义结构）；亦可用 `items`。 |
+| `title` | `MAnchorLink` 自定义标题区。 |
 
 ## Events
 

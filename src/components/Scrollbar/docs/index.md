@@ -65,6 +65,7 @@ import { MScrollbar } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `always` | `boolean` | — | — |
+| `fitContent` | `boolean` | `false` | 随内容增高，配合根节点 CSS `max-height`（如下拉面板）。 |
 | `ariaLabel` | `string` | — | — |
 | `ariaOrientation` | `ScrollbarAriaOrientation` | — | — |
 | `distance` | `number` | — | — |

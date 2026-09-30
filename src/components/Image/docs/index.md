@@ -48,3 +48,16 @@ import { MImage, MImagePreviewGroup } from 'morya-ui'
 | --- | --- |
 | `MImage` | 单图 |
 | `MImagePreviewGroup` | 包裹多个 `MImage`，共享预览层 |
+
+## Slots — PreviewGroup
+
+| 插槽 | 说明 |
+| --- | --- |
+| `default` | 组内的 `MImage` 子节点。 |
+
+## Slots — PreviewGroup
+
+| 插槽 | 说明 |
+| --- | --- |
+| `default` | 组内的 `MImage` 子节点。 |
+

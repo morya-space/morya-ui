@@ -27,6 +27,7 @@ Use `v-model:open` and `v-model:current`. Each step’s `target` returns the ele
 | --- | --- | --- | --- |
 | `steps` | `TourStep[]` | `[]` | Step definitions |
 | `open` | `boolean` | — | Visibility (`v-model:open`) |
+| `modelValue` | `boolean` | — | Alias of `open` (`v-model`) |
 | `current` | `number` | `0` | Active index (`v-model:current`) |
 | `placement` | overlay placement | `'bottom'` | Default panel placement |
 | `mask` | `boolean` | `true` | Dimming + spotlight |
@@ -52,6 +53,7 @@ Use `v-model:open` and `v-model:current`. Each step’s `target` returns the ele
 | Event | Description |
 | --- | --- |
 | `update:open` | Visibility |
+| `update:modelValue` | Same as `update:open` (`v-model`) |
 | `update:current` | Step index |
 | `change` | Same as `update:current` |
 | `close` | Closed |

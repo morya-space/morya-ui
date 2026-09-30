@@ -164,6 +164,14 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 | `focus()`         | Focus the underlying button.    |
 | `ref`             | Underlying `HTMLButtonElement`. |
 
+### Props — ButtonGroup
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fluid` | `boolean` | `false` | Stretch to full container width. |
+| `ariaLabel` | `string` | — | Accessible name for the group. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Group wrapper pass-through. |
+
 ## Design Token
 
 Reuses global `--m-*` tokens; see [Design Tokens](/docs/design-tokens). A component-level `--m-button-*` table will follow later.

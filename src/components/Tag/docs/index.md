@@ -1,44 +1,38 @@
----
+﻿---
 title: Tag
 category: 01 / BASIC
-description: 标签用于展示状态或分类。
----
+description: 鏍囩鐢ㄤ簬灞曠ず鐘舵€佹垨鍒嗙被銆?---
 
 # Tag
 
-标签用于展示状态或分类。
-
-## 引入
+鏍囩鐢ㄤ簬灞曠ず鐘舵€佹垨鍒嗙被銆?
+## 寮曞叆
 
 ```ts
 import { MTag } from 'morya-ui'
 ```
 
-## 基础用法
+## 鍩虹鐢ㄦ硶
 
-通过 `value` 或默认插槽展示文案。
-
+閫氳繃 `value` 鎴栭粯璁ゆ彃妲藉睍绀烘枃妗堛€?
 ```vue preview src="./demos/Basic.vue"
 ```
 
 ## Severity
 
-使用 `severity` 定义语义色；省略时为 primary。兼容旧值 `warning`（映射为 `warn`）。
-
+浣跨敤 `severity` 瀹氫箟璇箟鑹诧紱鐪佺暐鏃朵负 primary銆傚吋瀹规棫鍊?`warning`锛堟槧灏勪负 `warn`锛夈€?
 ```vue preview src="./demos/Severity.vue"
 ```
 
 ## Icons
 
-`icon` 传入 `MIcon` 的图标名称。
-
+`icon` 浼犲叆 `MIcon` 鐨勫浘鏍囧悕绉般€?
 ```vue preview src="./demos/Icons.vue"
 ```
 
 ## Bordered
 
-`bordered` 使用色调描边。默认无描边、填充色调背景。
-
+`bordered` 浣跨敤鑹茶皟鎻忚竟銆傞粯璁ゆ棤鎻忚竟銆佸～鍏呰壊璋冭儗鏅€?
 ```vue preview src="./demos/Bordered.vue"
 ```
 
@@ -49,39 +43,37 @@ import { MTag } from 'morya-ui'
 
 ## Checkable
 
-`checkable` + `v-model:checked` 可切换选中。与 `closable` 同时设置时关闭按钮不显示。
-
+`checkable` + `v-model:checked` 鍙垏鎹㈤€変腑銆備笌 `closable` 鍚屾椂璁剧疆鏃跺叧闂寜閽笉鏄剧ず銆?
 ```vue preview src="./demos/Checkable.vue"
 ```
 
 ## Props
 
-| 参数 | 类型 | 默认值 | 说明 |
+| 鍙傛暟 | 绫诲瀷 | 榛樿鍊?| 璇存槑 |
 | --- | --- | --- | --- |
-| `value` | `string` | — | 标签文案。存在默认插槽内容时以插槽为准。 |
-| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
-| `rounded` | `boolean` | `false` | 全圆角。 |
-| `icon` | [IconName](/docs/types#IconName) | — | `MIcon` 图标名称。 |
-| `closable` | `boolean` | `false` | 显示关闭按钮（`checkable` 时忽略）。 |
-| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
-| `bordered` | `boolean` | `false` | 描边。 |
-| `color` | `string` | — | 自定义颜色。 |
-| `disabled` | `boolean` | `false` | 禁用交互。 |
-| `checkable` | `boolean` | `false` | 可切换选中。 |
-| `checked` | `boolean` | `false` | 选中态；配合 `v-model:checked`。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
+| `value` | `string` | 鈥?| 鏍囩鏂囨銆傚瓨鍦ㄩ粯璁ゆ彃妲藉唴瀹规椂浠ユ彃妲戒负鍑嗐€?|
+| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 璇箟鑹层€俙warning` 涓哄吋瀹瑰埆鍚嶏紝鏄犲皠涓?`warn`銆?|
+| `rounded` | `boolean` | `false` | 鍏ㄥ渾瑙掋€?|
+| `icon` | [IconName](/docs/types#IconName) | 鈥?| `MIcon` 鍥炬爣鍚嶇О銆?|
+| `closable` | `boolean` | `false` | 鏄剧ず鍏抽棴鎸夐挳锛坄checkable` 鏃跺拷鐣ワ級銆?|
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| 灏哄銆?|
+| `bordered` | `boolean` | `false` | 鎻忚竟銆?|
+| `color` | `string` | 鈥?| 鑷畾涔夐鑹层€?|
+| `disabled` | `boolean` | `false` | 绂佺敤浜や簰銆?|
+| `checkable` | `boolean` | `false` | 鍙垏鎹㈤€変腑銆?|
+| `checked` | `boolean` | `false` | 閫変腑鎬侊紱閰嶅悎 `v-model:checked`銆?|
 
 
 ## Events
 
-| 事件名 | 参数 | 说明 |
+| 浜嬩欢鍚?| 鍙傛暟 | 璇存槑 |
 | --- | --- | --- |
-| `close` | `MouseEvent` | 点击关闭。 |
-| `update:checked` | `boolean` | 选中态变更（`v-model:checked`）。 |
-| `change` | `boolean` | 选中态变更。 |
+| `close` | `MouseEvent` | 鐐瑰嚮鍏抽棴銆?|
+| `update:checked` | `boolean` | 閫変腑鎬佸彉鏇达紙`v-model:checked`锛夈€?|
+| `change` | `boolean` | 閫変腑鎬佸彉鏇淬€?|
 
 ## Slots
 
-| 插槽名 | 说明 |
+| 鎻掓Ы鍚?| 璇存槑 |
 | --- | --- |
-| `default` | 标签内容，优先于 `value`。 |
+| `default` | 鏍囩鍐呭锛屼紭鍏堜簬 `value`銆?|

@@ -66,7 +66,7 @@ Emits `end-reached` at the edge. Use it for infinite loading.
 | --- | --- | --- | --- |
 | height | `string \| number` | — | Viewport height |
 | maxHeight | `string \| number` | — | Maximum height |
-| fitContent | `boolean` | `false` | Grow with content; pair with CSS `max-height` on the root (dropdown panels) |
+| `fitContent` | `boolean` | `false` | Grow with content; pair with CSS `max-height` on the root (dropdown panels) |
 | native | `boolean` | `false` | Use the native scrollbar |
 | wrapStyle / wrapClass | style / class | — | Wrap container styles |
 | viewStyle / viewClass | style / class | — | Content area styles |
