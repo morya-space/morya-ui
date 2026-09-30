@@ -18,6 +18,9 @@ const HSL = /\bhsl\s*\(/g
 /** Allow transparent, currentColor, inherit in CSS values */
 const ALLOW_LINE = /var\s*\(\s*--m-|color-mix\s*\(|transparent|currentColor|inherit|none/
 
+/** Theme seed / createTheme brand inputs must be concrete colors. */
+const ALLOW_THEME_SEED = /\bcolorPrimary\s*:|\bseed\s*:\s*\{[^}]*colorPrimary/
+
 /** Canvas / encoder fallbacks that must stay concrete for off-DOM drawing. */
 const ALLOW_CANVAS_FALLBACK = /rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\)/
 
@@ -46,6 +49,7 @@ function walk(dir) {
     const lines = text.split(/\r?\n/)
     lines.forEach((line, index) => {
       if (ALLOW_LINE.test(line)) return
+      if (ALLOW_THEME_SEED.test(line)) return
       if (ALLOW_CANVAS_FALLBACK.test(line)) return
       if (DEMO_ID.test(line)) return
       if (HEX.test(line) || RGB.test(line) || HSL.test(line)) {

@@ -1261,7 +1261,7 @@ export const componentDecisions: ComponentDecision[] = [
         recipe: recipe(
           [
             ['title + description', 'title + description'],
-            ['icon 或 illustration 按需（默认即可）', 'icon or illustration as needed (default OK)'],
+            ['主区域优先 illustration（no-content / no-result…）', 'Prefer illustration on main regions (no-content / no-result…)'],
             ['表格内放在 #empty', 'Inside tables: #empty slot'],
           ],
           [['#extra 放下一步按钮（创建…）', '#extra for next-step button (Create…)']],

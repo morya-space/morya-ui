@@ -8,16 +8,20 @@ import {
   MButton,
   MCard,
   MConfigProvider,
+  MDescriptions,
+  MDescriptionsItem,
   MDivider,
   MLayout,
   MLayoutContent,
   MLayoutHeader,
+  MList,
+  MListItem,
+  MListItemMeta,
   MPageContent,
   MPageHeader,
   MPageSection,
   MSpace,
   MStatus,
-  MTable,
   MTag,
   zhCN,
 } from 'morya-ui'
@@ -30,12 +34,6 @@ const profile = {
   joinedAt: '2025-03-12',
   status: 'active' as const,
 }
-
-const activityColumns = [
-  { key: 'time', label: '时间', width: 160 },
-  { key: 'action', label: '动作' },
-  { key: 'channel', label: '来源', width: 100 },
-]
 
 const activityRows = [
   { id: '1', time: '2026-09-20 14:22', action: '更新了个人资料', channel: 'Web' },
@@ -92,51 +90,47 @@ const activityRows = [
             </p>
           </MPageSection>
 
-          <MCard title="基本信息">
-            <dl class="detail-props">
-              <div>
-                <dt>姓名</dt>
-                <dd>{{ profile.name }}</dd>
-              </div>
-              <div>
-                <dt>邮箱</dt>
-                <dd>{{ profile.email }}</dd>
-              </div>
-              <div>
-                <dt>角色</dt>
-                <dd>{{ profile.role }}</dd>
-              </div>
-              <div>
-                <dt>部门</dt>
-                <dd>{{ profile.dept }}</dd>
-              </div>
-              <div>
-                <dt>入职日期</dt>
-                <dd>{{ profile.joinedAt }}</dd>
-              </div>
-              <div>
-                <dt>状态</dt>
-                <dd>
-                  <MStatus
-                    :label="profile.status === 'active' ? '启用' : '停用'"
-                    :severity="profile.status === 'active' ? 'success' : 'secondary'"
-                  />
-                </dd>
-              </div>
-            </dl>
-          </MCard>
+          <MDescriptions title="基本信息" bordered :column="2">
+            <MDescriptionsItem label="姓名">
+              {{ profile.name }}
+            </MDescriptionsItem>
+            <MDescriptionsItem label="邮箱">
+              {{ profile.email }}
+            </MDescriptionsItem>
+            <MDescriptionsItem label="角色">
+              {{ profile.role }}
+            </MDescriptionsItem>
+            <MDescriptionsItem label="部门">
+              {{ profile.dept }}
+            </MDescriptionsItem>
+            <MDescriptionsItem label="入职日期">
+              {{ profile.joinedAt }}
+            </MDescriptionsItem>
+            <MDescriptionsItem label="状态">
+              <MStatus
+                :label="profile.status === 'active' ? '启用' : '停用'"
+                :severity="profile.status === 'active' ? 'success' : 'secondary'"
+              />
+            </MDescriptionsItem>
+          </MDescriptions>
 
           <MDivider />
 
           <MCard title="近期活动">
-            <MTable
-              :columns="activityColumns"
-              :rows="activityRows"
+            <MList
+              :items="activityRows"
               row-key="id"
-              striped
-              bordered
-              aria-label="近期活动"
-            />
+              size="small"
+            >
+              <template #item="{ item }">
+                <MListItem>
+                  <MListItemMeta
+                    :title="item.action"
+                    :description="`${item.time} · ${item.channel}`"
+                  />
+                </MListItem>
+              </template>
+            </MList>
           </MCard>
         </MPageContent>
       </MLayoutContent>
@@ -149,30 +143,5 @@ const activityRows = [
   margin: var(--m-space-3) 0 0;
   color: var(--m-color-text-muted);
   font-size: var(--m-font-size-sm);
-}
-
-.detail-props {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--m-space-4) var(--m-space-6);
-  margin: 0;
-}
-
-.detail-props dt {
-  margin: 0 0 var(--m-space-1);
-  color: var(--m-color-text-muted);
-  font-size: var(--m-font-size-xs);
-}
-
-.detail-props dd {
-  margin: 0;
-  color: var(--m-color-text);
-  font-size: var(--m-font-size-md);
-}
-
-@media (max-width: 640px) {
-  .detail-props {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

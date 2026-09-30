@@ -13,9 +13,27 @@ describe('page snippets catalog', () => {
       'page-header-actions',
       'list-filters-stack',
       'list-filters-dense',
+      'detail-descriptions',
+      'empty-block',
     ]) {
       expect(findPageSnippet(id)?.id).toBe(id)
     }
+  })
+
+  it('empty-block prefers illustration', () => {
+    const empty = findPageSnippet('empty-block')!
+    expect(empty.template).toContain('illustration=')
+  })
+
+  it('auth-split-shell uses filled inputs', () => {
+    const auth = findPageSnippet('auth-split-shell')!
+    expect(auth.template).toContain('input-variant="filled"')
+  })
+
+  it('detail-descriptions uses MDescriptions', () => {
+    const detail = findPageSnippet('detail-descriptions')!
+    expect(detail.template).toContain('MDescriptions')
+    expect(detail.imports).toContain('MDescriptionsItem')
   })
 
   it('list-filters-stack includes chips, advanced, and #actions', () => {

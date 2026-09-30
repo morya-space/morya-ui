@@ -38,7 +38,7 @@ import {
           <MEmpty
             title="还没有课程"
             description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。"
-            icon="book"
+            illustration="no-content"
           >
             <template #extra>
               <MButton severity="primary">

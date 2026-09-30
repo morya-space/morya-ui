@@ -4,7 +4,15 @@
  * @see DESIGN.md · page-layouts.md · surfaces § Express
  * 首屏单一任务；控件用 M*；色彩只走 --m-*；避开 AI 默认脸。
  */
-import { MAccordion, MButton, MConfigProvider, MTag, zhCN } from 'morya-ui'
+import {
+  MAccordion,
+  MButton,
+  MConfigProvider,
+  MParagraph,
+  MTag,
+  MTitle,
+  zhCN,
+} from 'morya-ui'
 
 const faqTabs = [
   { value: 'stack', header: '必须用特定框架吗？' },
@@ -28,10 +36,12 @@ const faqTabs = [
 
       <section class="landing-hero" aria-labelledby="hero-title">
         <p class="landing-hero__brand">流水线 CI</p>
-        <h1 id="hero-title">把每次提交变成可回放的交付</h1>
-        <p class="landing-hero__lead">
+        <MTitle id="hero-title" class="landing-hero__title">
+          把每次提交变成可回放的交付
+        </MTitle>
+        <MParagraph class="landing-hero__lead" type="secondary">
           为工程团队准备的构建与发布编排。少点配置，多看结果。
-        </p>
+        </MParagraph>
         <div class="landing-hero__cta">
           <MButton label="开始使用" />
           <MButton label="查看文档" severity="secondary" text />
@@ -47,8 +57,12 @@ const faqTabs = [
       </section>
 
       <section id="why" class="landing-section">
-        <h2>为何选择</h2>
-        <p class="landing-section__lead">面向真实仓库节奏，而不是演示用的仪表盘皮肤。</p>
+        <MTitle :level="2">
+          为何选择
+        </MTitle>
+        <MParagraph class="landing-section__lead" type="secondary">
+          面向真实仓库节奏，而不是演示用的仪表盘皮肤。
+        </MParagraph>
         <ul class="landing-points">
           <li>
             <strong>可回放</strong>
@@ -66,44 +80,62 @@ const faqTabs = [
       </section>
 
       <section id="capabilities" class="landing-section landing-section--alt">
-        <h2>能力</h2>
-        <p class="landing-section__lead">用组件库控件表达交互，不引入第二套 UI。</p>
+        <MTitle :level="2">
+          能力
+        </MTitle>
+        <MParagraph class="landing-section__lead" type="secondary">
+          用组件库控件表达交互，不引入第二套 UI。
+        </MParagraph>
         <div class="landing-cards">
           <article>
             <MTag value="构建" severity="info" />
-            <h3>并行矩阵</h3>
-            <p>按系统与 Node 版本展开任务，失败任务可单独重跑。</p>
+            <MTitle :level="3">
+              并行矩阵
+            </MTitle>
+            <MParagraph type="secondary">
+              按系统与 Node 版本展开任务，失败任务可单独重跑。
+            </MParagraph>
           </article>
           <article>
             <MTag value="发布" severity="success" />
-            <h3>环境门禁</h3>
-            <p>生产发布需要审批与变更说明，记录谁在何时放行。</p>
+            <MTitle :level="3">
+              环境门禁
+            </MTitle>
+            <MParagraph type="secondary">
+              生产发布需要审批与变更说明，记录谁在何时放行。
+            </MParagraph>
           </article>
           <article>
             <MTag value="观测" />
-            <h3>耗时对比</h3>
-            <p>同分支历史耗时并排，找出突然变慢的步骤。</p>
+            <MTitle :level="3">
+              耗时对比
+            </MTitle>
+            <MParagraph type="secondary">
+              同分支历史耗时并排，找出突然变慢的步骤。
+            </MParagraph>
           </article>
         </div>
       </section>
 
       <section id="faq" class="landing-section">
-        <h2>常见问题</h2>
+        <MTitle :level="2">
+          常见问题
+        </MTitle>
         <MAccordion :tabs="faqTabs" default-value="stack">
           <template #stack>
-            <p class="landing-faq">
+            <MParagraph class="landing-faq" type="secondary">
               任意可容器化的仓库即可。示例以 Vue / Node 为主，不绑定单一前端脚手架。
-            </p>
+            </MParagraph>
           </template>
           <template #hosting>
-            <p class="landing-faq">
+            <MParagraph class="landing-faq" type="secondary">
               可自托管 runner，也可使用托管队列。密钥不进入日志明文。
-            </p>
+            </MParagraph>
           </template>
           <template #migrate>
-            <p class="landing-faq">
+            <MParagraph class="landing-faq" type="secondary">
               从现有 YAML 映射阶段与缓存键；保留原有制品路径可降低切换成本。
-            </p>
+            </MParagraph>
           </template>
         </MAccordion>
       </section>
@@ -168,10 +200,10 @@ const faqTabs = [
   color: var(--m-color-text-muted);
 }
 
-.landing-hero h1 {
+.landing-hero__title {
   margin: 0;
   max-width: 14em;
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem) !important;
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.035em;
@@ -182,7 +214,6 @@ const faqTabs = [
   max-width: 36rem;
   font-size: 1.125rem;
   line-height: 1.55;
-  color: var(--m-color-text-muted);
 }
 
 .landing-hero__cta {
@@ -260,7 +291,7 @@ const faqTabs = [
   max-width: none;
 }
 
-.landing-section h2 {
+.landing-section :deep(.m-typography-title--h2) {
   margin: 0 0 var(--m-space-3);
   font-size: 1.75rem;
   letter-spacing: -0.02em;
@@ -269,7 +300,6 @@ const faqTabs = [
 .landing-section__lead {
   margin: 0 0 var(--m-space-5);
   max-width: 36rem;
-  color: var(--m-color-text-muted);
 }
 
 .landing-points {
@@ -311,20 +341,14 @@ const faqTabs = [
   background: var(--m-color-surface);
 }
 
-.landing-cards h3 {
+.landing-cards :deep(.m-typography-title--h3) {
   margin: 0;
   font-size: 1.125rem;
 }
 
-.landing-cards p {
-  margin: 0;
-  color: var(--m-color-text-muted);
-  line-height: 1.55;
-}
-
+.landing-cards :deep(.m-typography),
 .landing-faq {
   margin: 0;
-  color: var(--m-color-text-muted);
   line-height: 1.55;
 }
 

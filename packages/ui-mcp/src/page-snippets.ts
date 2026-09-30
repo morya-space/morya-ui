@@ -646,15 +646,17 @@ const loading = ref(false)`,
     id: 'empty-block',
     title: '空状态 MEmpty',
     titleEn: 'Empty state with MEmpty',
-    description: '列表或内容区无数据时使用 MEmpty；标题/说明写领域下一步，#extra 放唯一 primary。',
-    descriptionEn: 'MEmpty for no-data; domain next-step copy; one primary in #extra.',
+    description:
+      '列表或内容区无数据时使用 MEmpty；主区域优先 illustration（no-content / no-result / …）；标题/说明写领域下一步，#extra 放唯一 primary。',
+    descriptionEn:
+      'MEmpty for no-data; prefer illustration on main empties; domain next-step copy; one primary in #extra.',
     pageTypes: ['list', 'common'],
-    keywords: ['空状态', '无数据', 'empty', 'zero state', 'no data'],
+    keywords: ['空状态', '无数据', 'empty', 'zero state', 'no data', 'illustration'],
     imports: ['MEmpty', 'MButton'],
     template: `<MEmpty
   title="还没有成员"
   description="邀请或新建第一位成员后，这里会显示状态与最近活动。"
-  icon="users"
+  illustration="no-content"
 >
   <template #extra>
     <MButton severity="primary">新建成员</MButton>
@@ -663,11 +665,13 @@ const loading = ref(false)`,
 </MEmpty>`,
     rules: [
       '正常无数据用 MEmpty，不要用错误色',
+      '主区域空态优先 illustration（no-content / no-result / no-message / network-error…）；轻量内嵌可用 icon',
       '主 CTA 用 severity="primary"，次动作用 text/secondary',
       '文案写清「现在可以做什么」，禁止「暂无数据 / No data / 示例」',
     ],
     rulesEn: [
       'Use MEmpty for normal emptiness, not error colors',
+      'Main-region empties prefer illustration; light in-table empties may use icon',
       'Primary CTA with severity="primary"; lesser actions text/secondary',
       'Copy says what to do next — no “暂无数据 / No data / 示例”',
     ],
@@ -846,8 +850,8 @@ const roleOptions = [
     id: 'dashboard-chart-card',
     title: '仪表盘图表卡片',
     titleEn: 'Dashboard chart card',
-    description: 'MCard shadow="always" + MEmpty 作为图表占位。',
-    descriptionEn: 'MCard with shadow="always" and MEmpty for chart pending state.',
+    description: 'MCard shadow="always" + MEmpty illustration 作为图表占位。',
+    descriptionEn: 'MCard with shadow="always" and illustrated MEmpty for chart pending state.',
     pageTypes: ['dashboard'],
     keywords: ['chart', '图表', 'placeholder', 'card', 'trend'],
     imports: ['MCard', 'MEmpty', 'MSkeleton'],
@@ -856,12 +860,17 @@ const roleOptions = [
   <MEmpty
     v-else
     aria-label="图表占位"
-    title="暂无图表数据"
-    description="图表区域（接入 ECharts / 业务组件）"
+    title="还没有趋势数据"
+    description="接入图表后将展示近 7 日活跃与转化。"
+    illustration="activity-low"
   />
 </MCard>`,
-    rules: ['图表区适合 MCard，因为需要 card 标题', '加载中用 MSkeleton'],
-    rulesEn: ['Charts belong in MCard when a card title is needed', 'Use MSkeleton while loading'],
+    rules: ['图表区适合 MCard，因为需要 card 标题', '加载中用 MSkeleton', '占位空态用 illustration，避免裸 icon'],
+    rulesEn: [
+      'Charts belong in MCard when a card title is needed',
+      'Use MSkeleton while loading',
+      'Pending chart empties prefer illustration over a bare icon',
+    ],
     avoid: ['不要用 MPageFilters 风格包裹图表'],
     avoidEn: ['Do not wrap charts with MPageFilters styling'],
   },
@@ -939,10 +948,10 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     pageTypes: ['detail'],
     keywords: ['detail', '详情', 'edit', 'header'],
     imports: ['MPageHeader', 'MButton', 'MStatus', 'MSpace'],
-    template: `<MPageHeader title="示例资源" description="查看摘要与属性。">
+    template: `<MPageHeader title="林晓" description="查看账号摘要、属性与近期活动。">
   <template #actions>
     <MSpace>
-      <MStatus label="正常" severity="success" />
+      <MStatus label="启用" severity="success" />
       <MButton severity="primary">编辑</MButton>
       <MButton severity="danger" text>删除</MButton>
     </MSpace>
@@ -952,6 +961,38 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     rulesEn: ['Use MStatus in the actions area', 'Edit is primary; delete uses danger text'],
     avoid: ['不要把操作散落到多个无关区域'],
     avoidEn: ['Do not scatter actions across unrelated areas'],
+  },
+  {
+    id: 'detail-descriptions',
+    title: '详情属性 Descriptions',
+    titleEn: 'Detail attributes with MDescriptions',
+    description: '详情页属性网格用 MDescriptions / MDescriptionsItem；多字段对比可 bordered。',
+    descriptionEn: 'Detail attribute grids use MDescriptions / MDescriptionsItem; bordered when comparing many fields.',
+    pageTypes: ['detail'],
+    keywords: ['descriptions', '属性', '详情字段', 'detail props', 'dl'],
+    imports: ['MDescriptions', 'MDescriptionsItem', 'MStatus'],
+    template: `<MDescriptions title="基本信息" bordered :column="2">
+  <MDescriptionsItem label="姓名">林晓</MDescriptionsItem>
+  <MDescriptionsItem label="邮箱">linxiao@example.com</MDescriptionsItem>
+  <MDescriptionsItem label="角色">成员</MDescriptionsItem>
+  <MDescriptionsItem label="部门">产品设计</MDescriptionsItem>
+  <MDescriptionsItem label="入职日期">2025-03-12</MDescriptionsItem>
+  <MDescriptionsItem label="状态">
+    <MStatus label="启用" severity="success" />
+  </MDescriptionsItem>
+</MDescriptions>`,
+    rules: [
+      '属性网格用 MDescriptions，不要手写 <dl> / 嵌套表格',
+      '字段较多或需对齐对比时用 bordered',
+      '状态值内嵌 MStatus，不要裸色文本',
+    ],
+    rulesEn: [
+      'Use MDescriptions for attribute grids — not hand-rolled <dl> / nested tables',
+      'Use bordered when comparing many fields',
+      'Embed MStatus for status values — no raw colored text',
+    ],
+    avoid: ['不要用自定义 CSS grid 复刻 Descriptions', '不要把叙事型活动流硬塞进 Descriptions'],
+    avoidEn: ['Do not reinvent Descriptions with custom CSS grids', 'Do not force narrative activity into Descriptions'],
   },
   {
     id: 'page-header-actions',
@@ -1242,14 +1283,17 @@ async function finish() {
     id: 'auth-split-shell',
     title: '登录左右分栏壳',
     titleEn: 'Auth split brand + form shell',
-    description: '左品牌 / 右表单；控件 M*；失败用 role="alert" 或 errorMessage，不用 Toast。',
-    descriptionEn: 'Brand left / form right; M* controls; failures via role="alert" or errorMessage, not Toast.',
+    description:
+      '左品牌 / 右表单；MConfigProvider input-variant="filled"；可选 themeConfig 品牌种子；失败用 role="alert" 或 errorMessage，不用 Toast。',
+    descriptionEn:
+      'Brand left / form right; filled inputs via ConfigProvider; optional themeConfig seed; failures via role="alert" or errorMessage, not Toast.',
     pageTypes: ['common'],
-    keywords: ['登录', '认证', '分栏', 'login', 'auth', 'split', 'brand'],
+    keywords: ['登录', '认证', '分栏', 'login', 'auth', 'split', 'brand', 'filled', 'themeConfig'],
     imports: ['MForm', 'MFormItem', 'MInput', 'MInputPassword', 'MButton', 'MSpace', 'MConfigProvider', 'zhCN'],
     scriptSetup: `const submitting = ref(false)
 const formError = ref('')
 const model = reactive({ email: '', password: '' })
+const themeConfig = { seed: { colorPrimary: '#0b6e4f' } }
 
 async function onSubmit() {
   formError.value = ''
@@ -1262,7 +1306,7 @@ async function onSubmit() {
     submitting.value = false
   }
 }`,
-    template: `<MConfigProvider :locale="zhCN">
+    template: `<MConfigProvider :locale="zhCN" input-variant="filled" :theme-config="themeConfig">
   <div class="login-shell">
     <aside class="login-brand" aria-label="品牌">
       <p class="login-brand__mark">产品名</p>
@@ -1293,11 +1337,13 @@ async function onSubmit() {
   </div>
 </MConfigProvider>`,
     rules: [
+      '认证表单默认 input-variant="filled"；品牌色走 themeConfig.seed，不要页级 hex',
       '品牌区用 --m-* / color-mix，默认扁平勿叠 aurora',
       '失败留在表单区（role="alert" 或 errorMessage），不要 Toast',
       '窄屏改为单栏：表单在上或品牌收短',
     ],
     rulesEn: [
+      'Auth forms default to input-variant="filled"; brand via themeConfig.seed — no page-level hex',
       'Brand panel: --m-* / color-mix; flat by default — no stacked aurora',
       'Keep failures in the form (role="alert" or errorMessage), not Toast',
       'Narrow screens: single column',

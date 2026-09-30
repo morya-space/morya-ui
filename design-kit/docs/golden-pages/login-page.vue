@@ -10,7 +10,9 @@ import {
   MFormItem,
   MInput,
   MInputPassword,
+  MParagraph,
   MSpace,
+  MTitle,
   zhCN,
 } from 'morya-ui'
 import { reactive, ref } from 'vue'
@@ -22,6 +24,11 @@ const model = reactive({
   email: '',
   password: '',
 })
+
+/** Brand seed for Account surfaces — prefer themeConfig over page-level hex. */
+const themeConfig = {
+  seed: { colorPrimary: '#0b6e4f' },
+}
 
 async function onSubmit() {
   formError.value = ''
@@ -39,7 +46,11 @@ async function onSubmit() {
 </script>
 
 <template>
-  <MConfigProvider :locale="zhCN">
+  <MConfigProvider
+    :locale="zhCN"
+    input-variant="filled"
+    :theme-config="themeConfig"
+  >
     <div class="login-shell">
       <aside class="login-brand" aria-label="品牌">
         <p class="login-brand__mark">青禾书房</p>
@@ -52,8 +63,12 @@ async function onSubmit() {
       <main class="login-main">
         <div class="login-panel">
           <header class="login-panel__header">
-            <h2>登录</h2>
-            <p>使用工作邮箱进入后台。</p>
+            <MTitle :level="3">
+              登录
+            </MTitle>
+            <MParagraph type="secondary">
+              使用工作邮箱进入后台。
+            </MParagraph>
           </header>
 
           <p v-if="formError" class="login-alert" role="alert">
@@ -178,15 +193,13 @@ async function onSubmit() {
   margin-bottom: var(--m-space-5);
 }
 
-.login-panel__header h2 {
-  margin: 0 0 var(--m-space-2);
-  font-size: 1.5rem;
-  font-weight: 650;
+.login-panel__header :deep(.m-typography-title),
+.login-panel__header :deep(.m-typography) {
+  margin: 0;
 }
 
-.login-panel__header p {
-  margin: 0;
-  color: var(--m-color-text-muted);
+.login-panel__header :deep(.m-typography-title) {
+  margin-bottom: var(--m-space-2);
 }
 
 .login-alert {

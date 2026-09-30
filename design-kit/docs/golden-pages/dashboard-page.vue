@@ -4,6 +4,7 @@
  * @see DESIGN.md · morya-ui-pages references/page-layouts.md · visual-craft § Ops polish
  */
 import {
+  MAlert,
   MBreadcrumb,
   MCard,
   MConfigProvider,
@@ -16,6 +17,7 @@ import {
   MEmpty,
   MPageHeader,
   MPageStat,
+  MStatistic,
   MStatus,
   MTable,
   MTag,
@@ -81,6 +83,13 @@ function statusSeverity(s: string) {
             description="关注今日活跃与待处理工单，异常优先下钻。"
           />
 
+          <MAlert
+            severity="info"
+            title="报表管道延迟约 15 分钟"
+            description="实时告警仍可用；看板数字以管道落库为准。"
+            closable
+          />
+
           <MGrid :cols="4" :x-gap="16" :y-gap="16" responsive="screen">
             <MGridItem v-for="item in stats" :key="item.label" :span="1">
               <MPageStat
@@ -99,13 +108,18 @@ function statusSeverity(s: string) {
             <MGridItem :span="1">
               <MCard title="趋势概览" shadow="always">
                 <MEmpty
-                  description="接入图表组件后展示近 7 日活跃与转化。"
-                  icon="chart-bar"
+                  title="还没有趋势数据"
+                  description="接入图表后将展示近 7 日活跃与转化。"
+                  illustration="activity-low"
                 />
               </MCard>
             </MGridItem>
             <MGridItem :span="1">
               <MCard title="最近工单" shadow="always">
+                <div class="dashboard-plain-stats">
+                  <MStatistic title="本周新建" :value="128" />
+                  <MStatistic title="平均处理时长" :value="2.4" suffix="h" :precision="1" />
+                </div>
                 <MTable
                   :columns="recentColumns"
                   :rows="recentRows"
@@ -136,3 +150,12 @@ function statusSeverity(s: string) {
     </MLayout>
   </MConfigProvider>
 </template>
+
+<style scoped>
+.dashboard-plain-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--m-space-6);
+  margin-bottom: var(--m-space-4);
+}
+</style>

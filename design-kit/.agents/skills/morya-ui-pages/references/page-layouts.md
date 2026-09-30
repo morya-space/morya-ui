@@ -9,7 +9,7 @@ Golden pages are **assembly demos / structure baselines**, not the default clone
 | List | List page | `list-page` (`list-page-dense` / `list-page-rail` craft only) | `layout-app-shell`, `page-header-actions`, **`list-filters-stack`** (dense → `list-filters-dense`), `list-table`, `form-in-dialog`, `confirm-delete` |
 | Form (long / dedicated) | Form page | `form-page` | `page-content-form`, `form-header`, `form-body`, `form-actions` |
 | List create/edit dialog | List create/edit dialog | `form-in-dialog` | **`form-in-dialog`** (preferred) |
-| Detail | Detail page | `detail-page` | `detail-toolbar`, `form-in-dialog` |
+| Detail | Detail page | `detail-page` | `detail-toolbar`, `detail-descriptions`, `form-in-dialog` |
 | Dashboard | Dashboard | `dashboard-page` | `dashboard-kpi-grid`, `dashboard-chart-card`, `dashboard-recent-table` |
 | Login | — (see [surfaces.md](surfaces.md)) | `login-page` | **`auth-split-shell`** |
 | Landing | — (see [surfaces.md](surfaces.md)) | `landing-page` | — |
@@ -74,8 +74,10 @@ Craft: [visual-craft.md](visual-craft.md) § Ops polish.
 
 1. `MLayout fillViewport` → `MLayoutHeader` → `MBreadcrumb`
 2. `MPageContent density="spacious"` → `MPageHeader` (title + short domain description when useful)
-3. KPI row: `MGrid` + `MPageStat` (4 columns or responsive) — `dashboard-kpi-grid`
-4. Main split: `MCard shadow="always"` + `MEmpty` (chart pending) and/or recent `MTable` — `dashboard-chart-card` / `dashboard-recent-table`
+3. Optional `MAlert` for ops tip / degraded dependency (dismissible when appropriate)
+4. KPI row: `MGrid` + **`MPageStat`** (trend + icon) — `dashboard-kpi-grid`
+5. Main split: `MCard shadow="always"` + **`MEmpty illustration`** (chart pending) and/or recent `MTable` / `MList` — `dashboard-chart-card` / `dashboard-recent-table`
+6. Plain numeric callouts inside a card (no trend UI) → `MStatistic`, not a second custom KPI CSS
 
 Craft: spacious density + Ops polish; do not turn the first viewport into a marketing hero.
 
@@ -89,7 +91,7 @@ Craft: spacious density + Ops polish; do not turn the first viewport into a mark
 | Spacing | `MSpace` / `MFlex` for peers; page gap from `MPageContent` | Nested padded divs stacking gaps |
 | Scroll | Full-viewport main lists may use table-body scroll via `fill`; otherwise layout / local `MScrollbar` | Forcing overflow on every content slot; stacked page + table scrollbars without reason |
 | Color | `--m-*` | Page-level hex / rgb |
-| Feedback | One-line → `message`; danger → confirm dialog | Toast for a single short string |
+| Feedback | One-line → `message`; danger → confirm dialog; sticky page tip → `MAlert` | Toast for a single short string |
 | A11y | Labels + icon `aria-label` | Unlabeled icon controls |
 
 Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
@@ -98,9 +100,10 @@ Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
 
 1. Same admin chrome as list (breadcrumb → `MPageContent`)
 2. `MPageHeader` — title, `MStatus` in `#actions`, primary/secondary/danger → `detail-toolbar`
-3. Summary `MPageSection` + property `MCard` (definition grid with `--m-*` only)
-4. Related data: `MCard` + `MTable` / tabs / timeline
-5. Short edit → `form-in-dialog`; long edit → form page / `form-in-drawer`
+3. Summary chips optional (`MTag`) — keep quiet
+4. **Attributes** → `MDescriptions` / `MDescriptionsItem` (bordered when comparing many fields) — `detail-descriptions`
+5. Related activity: prefer `MList` + `MListItemMeta` for narrative feeds; `MTable` when columns matter
+6. Short edit → `form-in-dialog`; long edit → form page / `form-in-drawer`
 
 ## List create/edit dialog — block order
 

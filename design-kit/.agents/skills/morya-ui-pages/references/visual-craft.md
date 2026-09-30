@@ -48,13 +48,32 @@ If the plan looks like any-SaaS (purple wash, cream serif, neon glow) and the us
 3. **Status** → `MStatus`; `MTag` for categories/filters only.
 4. **Row actions** — text / outlined / small.
 5. **Filter rhythm** — search ~`14rem`, selects ~`10–12rem`.
-6. **Empty** — `MEmpty` with next action.
+6. **Empty** — `MEmpty` with domain next-step copy + **one** primary in `#extra`. Prefer `illustration` (`no-content` / `no-result` / `no-message` / `network-error` / …) over a generic icon when the empty is a main region.
 7. **No extra cards** around filters/table “for polish”.
 8. **Domain copy**.
 9. **Density** — follow user cues (`compact` / spacious); don’t invent a second scale.
 10. **Quiet chrome** — no marketing heroes / glow unless the user asked.
+11. **Page alerts** — persistent in-page notices → `MAlert` (not Toast, not `<MMessage>` as markup).
+12. **Detail fields** — attribute grids → `MDescriptions` / `MDescriptionsItem` (not hand-rolled `<dl>`).
+13. **Plain metrics** — numbers without trend chrome → `MStatistic` inside a section/card; KPI strips with trend → keep `MPageStat`.
+14. **Activity / feed rows** — same-shape items without dense columns → `MList` + `MListItem` / `MListItemMeta`; tabular compare → `MTable`.
 
-Ops beauty = alignment + semantics + restraint, **not** gradients.
+Ops beauty = alignment + semantics + restraint + the right `M*` for the job, **not** gradients.
+
+## Component craft map (post-library upgrades)
+
+| Need | Prefer | Avoid |
+| --- | --- | --- |
+| Admin KPI with trend | `MPageStat` (`dashboard-kpi-grid`) | Custom stat CSS |
+| Inline / detail number | `MStatistic` | Fake big numbers with raw `<p>` |
+| Detail attribute grid | `MDescriptions` (`detail-descriptions`) | Hand-written `<dl>` / nested tables |
+| Lightweight feed | `MList` + Meta | Forcing a full `MTable` for 3–5 narrative rows |
+| Empty main region | `MEmpty` + `illustration` | “暂无数据” + bare icon only |
+| In-page notice | `MAlert` | Toast for sticky page tips |
+| Auth / form inputs | `MConfigProvider input-variant="filled"` (or filled controls) | Mixing outlined/filled without reason |
+| Brand seed | `themeConfig` / project theme CSS | Page-level hex |
+| Express headings | `MTypography` / `MTitle` / `MParagraph` where it helps hierarchy | Second font kit |
+| First-run teach | `MTour` after empty/onboarding | Modal essay walls |
 
 ## Anti-default looks
 

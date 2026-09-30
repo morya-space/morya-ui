@@ -127,8 +127,8 @@ const BLOCK_TO_SNIPPET: Record<string, { snippetId: string; notesZh: string; not
   },
   empty: {
     snippetId: 'empty-block',
-    notesZh: '空态带下一步 CTA',
-    notesEn: 'Empty state with a next-step CTA',
+    notesZh: '空态带下一步 CTA；主区域优先 illustration',
+    notesEn: 'Empty state with next-step CTA; prefer illustration on main regions',
   },
   'form-header': {
     snippetId: 'form-header',
@@ -152,8 +152,8 @@ const BLOCK_TO_SNIPPET: Record<string, { snippetId: string; notesZh: string; not
   },
   chart: {
     snippetId: 'dashboard-chart-card',
-    notesZh: '图表区 MCard + MSkeleton / MEmpty 占位',
-    notesEn: 'Chart area: MCard + MSkeleton / MEmpty placeholder',
+    notesZh: '图表区 MCard + MSkeleton / 带 illustration 的 MEmpty',
+    notesEn: 'Chart area: MCard + MSkeleton / illustrated MEmpty',
   },
   recent: {
     snippetId: 'dashboard-recent-table',
@@ -164,6 +164,11 @@ const BLOCK_TO_SNIPPET: Record<string, { snippetId: string; notesZh: string; not
     snippetId: 'detail-toolbar',
     notesZh: '详情顶栏：状态 + 唯一编辑 primary',
     notesEn: 'Detail toolbar: status + one edit primary',
+  },
+  descriptions: {
+    snippetId: 'detail-descriptions',
+    notesZh: '属性网格用 MDescriptions，不要手写 dl',
+    notesEn: 'Attribute grids use MDescriptions, not hand-rolled dl',
   },
   result: {
     snippetId: 'result-block',
@@ -177,8 +182,8 @@ const BLOCK_TO_SNIPPET: Record<string, { snippetId: string; notesZh: string; not
   },
   auth: {
     snippetId: 'auth-split-shell',
-    notesZh: '登录分栏壳；品牌面只用 --m-*',
-    notesEn: 'Auth split shell; brand panel uses --m-* only',
+    notesZh: '登录分栏壳；filled + 可选 themeConfig；品牌面只用 --m-*',
+    notesEn: 'Auth split shell; filled + optional themeConfig; brand panel uses --m-* only',
   },
   shell: {
     snippetId: 'layout-app-shell',
