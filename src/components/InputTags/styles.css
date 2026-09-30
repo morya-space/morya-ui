@@ -48,6 +48,15 @@
     padding-inline: var(--m-control-padding-x-large);
 }
 
+.m-inputtags:hover:not(.m-inputtags--disabled):not(:focus-within) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-inputtags:focus-within {
+    border-color: var(--m-color-primary);
+    box-shadow: var(--m-focus-shadow);
+}
+
 .m-inputtags--invalid {
     border-color: var(--m-color-danger);
 }

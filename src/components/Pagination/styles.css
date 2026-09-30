@@ -100,12 +100,13 @@
         opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-pagination__select:hover:not(:disabled) {
+.m-pagination__select:hover:not(:disabled):not(:focus) {
     border-color: var(--m-color-primary-hover);
 }
 
+.m-pagination__select:focus,
 .m-pagination__select:focus-visible {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }

@@ -89,6 +89,7 @@
 }
 
 .m-selectbutton--invalid .m-selectbutton__button:focus-visible {
+    border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 
@@ -99,6 +100,7 @@
 }
 
 .m-selectbutton__button:focus-visible {
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
     z-index: 2;

@@ -31,7 +31,9 @@
     padding: var(--m-space-2) var(--m-space-3);
 }
 
+.m-listbox__filter:focus,
 .m-listbox__filter:focus-visible {
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
@@ -113,6 +115,7 @@
 }
 
 .m-listbox--invalid:focus-within {
+    border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 

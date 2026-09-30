@@ -274,6 +274,34 @@
         "en-US": "Accessibility focus ring color (used directly by some components)."
       }
     },
+    "--m-color-control-outline": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "表单控件聚焦光晕底色（对齐 Ant Design controlOutline / getAlphaColor）。",
+        "en-US": "Soft outline color for focused form controls (Ant Design controlOutline via getAlphaColor)."
+      }
+    },
+    "--m-color-control-outline-danger": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "危险态控件聚焦光晕底色。",
+        "en-US": "Soft outline color for danger-focused controls."
+      }
+    },
+    "--m-color-control-outline-warning": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "警告态控件聚焦光晕底色。",
+        "en-US": "Soft outline color for warning-focused controls."
+      }
+    },
+    "--m-focus-outline-width": {
+      "category": "focus",
+      "description": {
+        "zh-CN": "聚焦光晕宽度（默认 2px）。",
+        "en-US": "Focus outline width (default 2px)."
+      }
+    },
     "--m-color-success": {
       "category": "color",
       "description": { "zh-CN": "成功语义色。", "en-US": "Success semantic color." }
@@ -487,8 +515,8 @@
     "--m-focus-shadow": {
       "category": "focus",
       "description": {
-        "zh-CN": "默认聚焦光晕（主色约 45% 混合）。",
-        "en-US": "Default focus glow (primary at ~45% mix)."
+        "zh-CN": "默认聚焦光晕（Ant Design 风格软描边）。",
+        "en-US": "Default focus glow (soft Ant Design–style outline)."
       }
     },
     "--m-focus-shadow-danger": {

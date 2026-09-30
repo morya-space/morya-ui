@@ -62,7 +62,7 @@
 
 .m-card--shadow-hover:focus-within,
 .m-card--shadow-always:focus-within {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 

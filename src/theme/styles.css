@@ -9,6 +9,10 @@
     --m-color-border: #d9d9d9;
     --m-color-split: #f0f0f0;
     --m-color-focus-ring: #1677ff;
+    /* Ant Design controlOutline = getAlphaColor(colorPrimaryBg, colorBgContainer) */
+    --m-color-control-outline: rgba(5, 145, 255, 0.1);
+    --m-color-control-outline-danger: rgba(255, 38, 5, 0.06);
+    --m-color-control-outline-warning: rgba(255, 215, 5, 0.1);
     /* Control sizing: medium control height 32px */
     --m-control-height-small: 24px;
     --m-control-height-medium: 32px;
@@ -22,12 +26,12 @@
 
     --m-radius-control: 6px;
     --m-border-width: 1px;
-    --m-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-primary) 45%, transparent);
-    --m-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-danger) 45%, transparent);
-    --m-focus-shadow-warning: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-warning) 45%, transparent);
+    --m-focus-outline-width: 2px;
+    --m-focus-shadow: 0 0 0 var(--m-focus-outline-width) var(--m-color-control-outline);
+    --m-focus-shadow-danger: 0 0 0 var(--m-focus-outline-width)
+        var(--m-color-control-outline-danger);
+    --m-focus-shadow-warning: 0 0 0 var(--m-focus-outline-width)
+        var(--m-color-control-outline-warning);
     --m-color-success: #52c41a;
     --m-color-info: #1677ff;
     --m-color-warning: #faad14;
@@ -348,12 +352,15 @@
     --m-color-border: #424242;
     --m-color-split: #303030;
     --m-color-focus-ring: #3c89e8;
-    --m-focus-shadow: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-primary) 50%, transparent);
-    --m-focus-shadow-danger: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-danger) 50%, transparent);
-    --m-focus-shadow-warning: 0 0 0 2px
-        color-mix(in srgb, var(--m-color-warning) 50%, transparent);
+    /* Dark: getAlphaColor(color*Bg, colorBgContainer) */
+    --m-color-control-outline: rgba(23, 117, 249, 0.31);
+    --m-color-control-outline-danger: rgba(249, 75, 78, 0.31);
+    --m-color-control-outline-warning: rgba(250, 173, 20, 0.3);
+    --m-focus-shadow: 0 0 0 var(--m-focus-outline-width) var(--m-color-control-outline);
+    --m-focus-shadow-danger: 0 0 0 var(--m-focus-outline-width)
+        var(--m-color-control-outline-danger);
+    --m-focus-shadow-warning: 0 0 0 var(--m-focus-outline-width)
+        var(--m-color-control-outline-warning);
     /* Mid solids: keep ≥~4.5:1 with --m-color-on-emphasis on dark surfaces */
     --m-color-success: #49aa19;
     --m-color-info: #1668dc;

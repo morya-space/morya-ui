@@ -52,7 +52,15 @@
     padding-right: var(--m-control-end-padding);
 }
 
+.m-cascadeselect:not(.m-cascadeselect--disabled):not(.m-cascadeselect--open)
+    .m-cascadeselect__trigger:hover:not(:focus):not(:focus-visible) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-cascadeselect--open .m-cascadeselect__trigger,
+.m-cascadeselect__trigger:focus,
 .m-cascadeselect__trigger:focus-visible {
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
@@ -61,7 +69,10 @@
     border-color: var(--m-color-danger);
 }
 
-.m-cascadeselect__trigger--invalid:focus-visible {
+.m-cascadeselect__trigger--invalid:focus,
+.m-cascadeselect__trigger--invalid:focus-visible,
+.m-cascadeselect--open .m-cascadeselect__trigger--invalid {
+    border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 

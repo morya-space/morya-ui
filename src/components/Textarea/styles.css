@@ -106,30 +106,41 @@
     border-color: var(--m-color-danger);
 }
 
+.m-textarea--invalid:hover:not(:disabled):not(:focus) {
+    border-color: var(--m-color-danger);
+}
+
+.m-textarea--invalid:focus,
 .m-textarea--invalid:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
+    outline: 0;
 }
 
 .m-textarea--warning {
     border-color: var(--m-color-warning);
 }
 
+.m-textarea--warning:hover:not(:disabled):not(:focus) {
+    border-color: var(--m-color-warning);
+}
+
+.m-textarea--warning:focus,
 .m-textarea--warning:focus-visible {
     border-color: var(--m-color-warning);
     box-shadow: var(--m-focus-shadow-warning);
+    outline: 0;
 }
 
-.m-textarea:focus {
-    outline: none;
-}
-
-.m-textarea:hover:not(:disabled):not(:focus) {
+.m-textarea:hover:not(:disabled):not(:focus):not(.m-textarea--invalid):not(
+        .m-textarea--warning
+    ) {
     border-color: var(--m-color-primary-hover);
 }
 
+.m-textarea:focus,
 .m-textarea:focus-visible {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
-    outline: none;
+    outline: 0;
 }

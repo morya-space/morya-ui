@@ -14,7 +14,7 @@
  * `src/theme/styles.css` exactly.
  */
 
-import { alphaOf, darken, generateColorPalette, isDarkColor, mixColors } from './color'
+import { alphaOf, darken, generateColorPalette, getAlphaColor, isDarkColor, mixColors } from './color'
 import type { MSeedTokens } from './seed'
 
 export interface DeriveOptions {
@@ -228,8 +228,15 @@ function deriveAliasTokens(seed: MSeedTokens, dark: boolean, tokens: TokenMap): 
     colorBgMask: alphaOf('#000000', 0.45),
     colorWhite: '#ffffff',
     colorSplit: pick(tokens, 'colorBorderSecondary'),
-    controlOutline: pick(tokens, 'colorPrimaryBg'),
+    // Ant Design: controlOutline = getAlphaColor(colorPrimaryBg, colorBgContainer)
+    // → soft translucent ring, e.g. rgba(5, 145, 255, 0.1) for the default light theme.
+    controlOutline: getAlphaColor(pick(tokens, 'colorPrimaryBg'), pick(tokens, 'colorBgContainer')),
     controlOutlineWidth: '2px',
+    controlOutlineDanger: getAlphaColor(pick(tokens, 'colorErrorBg'), pick(tokens, 'colorBgContainer')),
+    controlOutlineWarning: getAlphaColor(
+      pick(tokens, 'colorWarningBg'),
+      pick(tokens, 'colorBgContainer'),
+    ),
     controlItemBgHover: pick(tokens, 'colorFillTertiary'),
     controlItemBgActive: pick(tokens, 'colorPrimaryBg'),
     controlItemBgActiveHover: pick(tokens, 'colorPrimaryBgHover'),
@@ -424,6 +431,13 @@ export function deriveCompatCssVars(seed: MSeedTokens, tokens: TokenMap): CssVar
     '--m-color-warn': pick(tokens, 'colorWarning'),
     '--m-color-info': pick(tokens, 'colorInfo'),
     '--m-color-focus-ring': pick(tokens, 'colorPrimary'),
+    '--m-color-control-outline': pick(tokens, 'controlOutline'),
+    '--m-color-control-outline-danger': pick(tokens, 'controlOutlineDanger'),
+    '--m-color-control-outline-warning': pick(tokens, 'controlOutlineWarning'),
+    '--m-focus-outline-width': pick(tokens, 'controlOutlineWidth'),
+    '--m-focus-shadow': `0 0 0 ${pick(tokens, 'controlOutlineWidth')} ${pick(tokens, 'controlOutline')}`,
+    '--m-focus-shadow-danger': `0 0 0 ${pick(tokens, 'controlOutlineWidth')} ${pick(tokens, 'controlOutlineDanger')}`,
+    '--m-focus-shadow-warning': `0 0 0 ${pick(tokens, 'controlOutlineWidth')} ${pick(tokens, 'controlOutlineWarning')}`,
     '--m-color-primary-active': pick(tokens, 'colorPrimaryActive'),
     '--m-color-on-emphasis': pick(tokens, 'colorTextLightSolid'),
     '--m-color-on-primary': pick(tokens, 'colorTextLightSolid'),

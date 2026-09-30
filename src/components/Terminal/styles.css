@@ -68,6 +68,7 @@
     outline: none;
 }
 
+.m-terminal__input:focus,
 .m-terminal__input:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;

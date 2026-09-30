@@ -264,6 +264,26 @@ export function withAlpha(color: string, alpha: number): string {
   return toRgbaString(parseHex(color), clamp(alpha, 0, 1))
 }
 
+/**
+ * Ant Design `getAlphaColor`: find an rgba string that composites to
+ * `frontColor` when drawn over `backgroundColor`. Used for controlOutline.
+ */
+export function getAlphaColor(frontColor: string, backgroundColor: string): string {
+  const front = parseHex(frontColor)
+  const background = parseHex(backgroundColor)
+
+  for (let alpha = 0.01; alpha <= 1; alpha += 0.01) {
+    const r = Math.round((front.r - background.r * (1 - alpha)) / alpha)
+    const g = Math.round((front.g - background.g * (1 - alpha)) / alpha)
+    const b = Math.round((front.b - background.b * (1 - alpha)) / alpha)
+    if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+      return toRgbaString({ r, g, b }, Math.round(alpha * 100) / 100)
+    }
+  }
+
+  return toRgbaString(front, 1)
+}
+
 /** Relative luminance based darkness check (perceptual, WCAG-ish). */
 export function isDarkColor(color: string): boolean {
   const { r, g, b } = parseHex(color)

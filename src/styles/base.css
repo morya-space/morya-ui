@@ -498,8 +498,10 @@
     width: 100%;
 }
 
+.m-textarea--invalid:focus,
 .m-textarea--invalid:focus-visible,
 .m-select--invalid.m-select--open,
+.m-select--invalid:focus,
 .m-select--invalid:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
@@ -708,20 +710,28 @@
     opacity: var(--m-opacity-disabled);
 }
 
-/* Shared Naive-like hover/focus for remaining form triggers */
+/* Shared hover/focus for remaining form triggers (Ant-like active border + soft outline) */
 .m-inputotp__input:hover:not(:disabled):not(:focus),
-.m-cascadeselect__trigger:hover:not(:disabled):not(:focus-visible),
-.m-treeselect__trigger:hover:not(:disabled):not(:focus-visible),
+.m-cascadeselect:not(.m-cascadeselect--open)
+    .m-cascadeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
+.m-treeselect:not(.m-treeselect--open)
+    .m-treeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
 .m-inputcolor__text:hover:not(:disabled):not(:focus),
-.m-inputtags:hover:not(.m-inputtags--disabled),
-.m-togglebutton:hover:not(:disabled):not(.m-togglebutton--checked),
-.m-inplace__display:hover {
+.m-inputtags:hover:not(.m-inputtags--disabled):not(:focus-within),
+.m-togglebutton:hover:not(:disabled):not(.m-togglebutton--checked):not(:focus-visible),
+.m-inplace__display:hover:not(:focus-visible) {
     border-color: var(--m-color-primary-hover);
 }
 
+.m-inputotp__input:focus,
 .m-inputotp__input:focus-visible,
+.m-cascadeselect--open .m-cascadeselect__trigger,
+.m-cascadeselect__trigger:focus,
 .m-cascadeselect__trigger:focus-visible,
+.m-treeselect--open .m-treeselect__trigger,
+.m-treeselect__trigger:focus,
 .m-treeselect__trigger:focus-visible,
+.m-inputcolor__text:focus,
 .m-inputcolor__text:focus-visible,
 .m-inputtags:focus-within,
 .m-togglebutton:focus-visible,
@@ -730,13 +740,15 @@
 .m-splitbutton__trigger:focus-visible,
 .m-inplace__display:focus-visible,
 .m-pagination__button:focus-visible {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
+.m-inputotp--invalid .m-inputotp__input:focus,
 .m-inputotp--invalid .m-inputotp__input:focus-visible,
 .m-inputtags--invalid:focus-within,
+.m-inputcolor--invalid .m-inputcolor__text:focus,
 .m-inputcolor--invalid .m-inputcolor__text:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);

@@ -11,7 +11,8 @@
 }
 
 .m-radio__input:focus-visible + .m-radio__control {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
+    box-shadow: var(--m-focus-shadow);
 }
 
 .m-radio--invalid .m-radio__input:focus-visible + .m-radio__control {

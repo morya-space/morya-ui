@@ -1,25 +1,37 @@
-.m-input:focus {
-    outline: none;
-}
-
-.m-input:hover:not(:disabled):not(:focus) {
+.m-input:hover:not(:disabled):not(:focus):not(.m-input--invalid):not(
+        .m-input--warning
+    ) {
     border-color: var(--m-color-primary-hover);
 }
 
+/* Ant Design outlined active: borderColor + soft controlOutline shadow */
+.m-input:focus,
 .m-input:focus-visible {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
-    outline: none;
+    outline: 0;
 }
 
+.m-input--invalid:hover:not(:disabled):not(:focus) {
+    border-color: var(--m-color-danger);
+}
+
+.m-input--invalid:focus,
 .m-input--invalid:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
+    outline: 0;
 }
 
+.m-input--warning:hover:not(:disabled):not(:focus) {
+    border-color: var(--m-color-warning);
+}
+
+.m-input--warning:focus,
 .m-input--warning:focus-visible {
     border-color: var(--m-color-warning);
     box-shadow: var(--m-focus-shadow-warning);
+    outline: 0;
 }
 
 .m-input-field {
@@ -134,7 +146,7 @@
 .m-input-field__control--prefixed:focus-within,
 .m-input-field__control--suffixed:focus-within,
 .m-input-field__control--clearable:focus-within {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 

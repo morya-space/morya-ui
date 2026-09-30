@@ -65,7 +65,7 @@
 }
 
 .m-inputnumber__input-wrap:focus-within {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 
@@ -74,6 +74,7 @@
 }
 
 .m-inputnumber--invalid .m-inputnumber__input-wrap:focus-within {
+    border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 

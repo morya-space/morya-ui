@@ -71,15 +71,16 @@
 
 .m-select:hover:not(:disabled):not(.m-select--disabled):not(
         .m-select--open
-    ) {
+    ):not(:focus):not(.m-select--invalid):not(.m-select--warning) {
     border-color: var(--m-color-primary-hover);
 }
 
 .m-select--open,
+.m-select:focus,
 .m-select:focus-visible {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
-    outline: none;
+    outline: 0;
 }
 
 .m-select--placeholder .m-select__value {
@@ -160,16 +161,20 @@
     border-color: var(--m-color-warning);
 }
 
+.m-select--invalid:focus,
 .m-select--invalid:focus-visible,
 .m-select--invalid.m-select--open {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
+    outline: 0;
 }
 
+.m-select--warning:focus,
 .m-select--warning:focus-visible,
 .m-select--warning.m-select--open {
     border-color: var(--m-color-warning);
     box-shadow: var(--m-focus-shadow-warning);
+    outline: 0;
 }
 
 .m-select__option--create {

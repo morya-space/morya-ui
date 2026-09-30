@@ -44,6 +44,14 @@
     border-color: var(--m-color-danger);
 }
 
+.m-inputotp__input:focus,
+.m-inputotp__input:focus-visible {
+    border-color: var(--m-color-primary);
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
+.m-inputotp--invalid .m-inputotp__input:focus,
 .m-inputotp--invalid .m-inputotp__input:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);

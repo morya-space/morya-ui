@@ -64,7 +64,7 @@
 
 .m-datepicker__control:has(.m-datepicker__input):focus-within,
 .m-datepicker--open .m-datepicker__control:has(.m-datepicker__input) {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 
@@ -75,6 +75,7 @@
 .m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input):focus-within,
 .m-datepicker--invalid.m-datepicker--open
     .m-datepicker__control:has(.m-datepicker__input) {
+    border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 

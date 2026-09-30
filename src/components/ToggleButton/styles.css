@@ -42,7 +42,7 @@
 
 .m-togglebutton:hover:not(:disabled):not(.m-togglebutton--disabled):not(
         .m-togglebutton--checked
-    ) {
+    ):not(:focus-visible) {
     background: color-mix(in srgb, var(--m-color-text-muted) 22%, var(--m-color-surface));
     border-color: var(--m-color-primary-hover);
 }
@@ -65,6 +65,7 @@
 }
 
 .m-togglebutton:focus-visible {
+    border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
