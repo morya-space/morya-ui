@@ -61,33 +61,19 @@ Primary data prop is `items`; `dataSource` / `data` are aliases of `items`. Use 
 
 
 | Prop | Type | Default | Description |
-
 | --- | --- | --- | --- |
-
 | `items` | `unknown[]` | — | Data array (primary name) |
-
 | `dataSource` | `unknown[]` | — | Alias of `items` |
-
 | `data` | `unknown[]` | — | Alias of `items` |
-
 | `bordered` | `boolean` | `false` | Outer border |
-
 | `split` | `boolean` | `true` | Dividers between items |
-
 | `loading` | `boolean` | `false` | `MLoading` overlay |
-
 | `size` | `ListSize` | — | Density |
-
 | `itemLayout` | `'horizontal' \| 'vertical'` | `'horizontal'` | Row layout |
-
 | `header` / `footer` | `string` | — | Text; slots override |
-
 | `pagination` | `ListPaginationConfig \| false` | `false` | Uses `MPagination` |
-
 | `grid` | `ListGridType` | — | CSS grid columns |
-
 | `rowKey` | `string \| (item, index) => string` | — | Stable keys |
-
 | `pt` | `RootPassThrough` | — | Pass-through |
 
 
@@ -101,11 +87,8 @@ See the Chinese doc for `ListPaginationConfig` / `ListGridType` field tables (sa
 
 
 | Component | Props | Slots |
-
 | --- | --- | --- |
-
 | Item | `actions`, `extra` | `default`, `actions`, `extra` |
-
 | Meta | `avatar`, `title`, `description` | `avatar`, `title`, `description`, `default` |
 
 
@@ -115,13 +98,9 @@ See the Chinese doc for `ListPaginationConfig` / `ListGridType` field tables (sa
 
 
 | Slot | Description |
-
 | --- | --- |
-
 | `default` | Manual `MListItem` children when no `items` |
-
 | `item` | Scoped `{ item, index }` for data mode |
-
 | `header` / `footer` / `loadMore` | Chrome and load-more |
 
 

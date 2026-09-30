@@ -318,9 +318,9 @@ function classifyHeading(text) {
 }
 
 function classifyTableHeader(headerLine) {
-  if (/插槽/.test(headerLine)) return 'slots'
-  if (/事件/.test(headerLine)) return 'events'
-  if (/参数/.test(headerLine)) return 'props'
+  if (/插槽|slots?/i.test(headerLine)) return 'slots'
+  if (/事件|events?/i.test(headerLine)) return 'events'
+  if (/参数|props?/i.test(headerLine)) return 'props'
   return null
 }
 
@@ -372,13 +372,15 @@ function parseDoc(text, compName) {
       i += 1
       continue
     }
-    if (headingKinds.length && /^\s*\|/.test(line)) {
+    if (/^\s*\|/.test(line)) {
       const block = []
       while (i < lines.length && /^\s*\|/.test(lines[i])) {
         block.push({ text: lines[i], line: i + 1 })
         i += 1
       }
       const kind = classifyTableHeader(block[0].text) ?? headingKinds[0]
+      if (!kind) continue
+      sectionsFound[kind] = true
       const target = kind === 'props' ? props : kind === 'events' ? events : slots
       for (const row of block.slice(1)) {
         if (isSeparatorRow(row.text)) continue
@@ -650,10 +652,29 @@ function absorbInheritedProps(implProps, { dir, typesPath, typesText, parsed, pr
     const extRe = new RegExp(
       `interface\\s+${escapeRegExp(ifaceName)}\\s+extends\\s+([^{]+)\\{`,
     )
-    const ext = typesText.match(extRe)
+    // Prefer the file that declared this interface when scanning extends text
+    const ifaceMeta = parsed.interfaces.get(ifaceName)
+    const localText = ifaceMeta?._file && typesPath && ifaceMeta._file !== path.basename(typesPath)
+      ? (() => {
+          const sibling = path.join(dir, ifaceMeta._file)
+          return existsSync(sibling) ? readFileSync(sibling, 'utf8') : typesText
+        })()
+      : typesText
+    const ext = localText.match(extRe) ?? typesText.match(extRe)
     if (!ext) continue
     for (const base of ext[1].split(',').map((s) => s.trim()).filter(Boolean)) {
       const id = base.replace(/<.*>/, '').trim()
+      // Same-file interface first, then imported file
+      const localIface = parsed.interfaces.get(id)
+      if (localIface) {
+        mergeFieldsInto(
+          implProps,
+          localIface.fields,
+          localIface._file || path.basename(typesPath || 'types.ts'),
+          inheritedKeys,
+        )
+        continue
+      }
       const file = imports.get(id)
       if (!file) continue
       const remote = parseTypesFile(readFileSync(file, 'utf8'))
@@ -730,11 +751,22 @@ function analyzeComponent(dir) {
   }
   const doc = parseDoc(readFileSync(docsPath, 'utf8'), name)
 
-  // ---- 实现侧 ----
+  // ---- 实现侧：合并目录内全部 .ts（types / rowColTypes 等），覆盖复合组件 ----
   const typesPath = path.join(dir, 'types.ts')
-  const parsed = existsSync(typesPath)
-    ? parseTypesFile(readFileSync(typesPath, 'utf8'))
-    : { interfaces: new Map(), aliases: new Map(), typeNames: new Set() }
+  const parsed = { interfaces: new Map(), aliases: new Map(), typeNames: new Set() }
+  const typeFiles = collectFiles(dir, (f) => f.endsWith('.ts') && !/\.test\./.test(f))
+  if (!typeFiles.length && existsSync(typesPath)) typeFiles.push(typesPath)
+  for (const file of typeFiles) {
+    const part = parseTypesFile(readFileSync(file, 'utf8'))
+    const rel = path.basename(file)
+    for (const [k, v] of part.interfaces) {
+      if (!parsed.interfaces.has(k)) parsed.interfaces.set(k, { ...v, _file: rel })
+    }
+    for (const [k, v] of part.aliases) {
+      if (!parsed.aliases.has(k)) parsed.aliases.set(k, v)
+    }
+    for (const n of part.typeNames) parsed.typeNames.add(n)
+  }
   // 类型展开映射：export type 别名 + 本文件 interface（字段类型并集）
   const expandMap = new Map([...interfaceExpansions(parsed), ...parsed.aliases])
 
@@ -744,15 +776,16 @@ function analyzeComponent(dir) {
   for (const file of vueFiles) allVueParsed.set(file, parseVueFile(readFileSync(file, 'utf8')))
   const mainParsed = allVueParsed.get(mainVuePath) ?? null
 
-  // props：types.ts 中 ^<Name>\w*Props$（排除 *SlotProps）∪ defineProps 引用接口 ∪ 主组件内联 defineProps
+  // props：目录内全部 *Props（排除 *SlotProps）∪ defineProps 引用 ∪ 主组件内联
   const implProps = new Map() // name -> { loc, type, internal }
-  const propsIfaceRe = new RegExp(`^${escapeRegExp(name)}\\w*Props$`)
+  const propsIfaceRe = /Props$/
   for (const [ifaceName, iface] of parsed.interfaces) {
     if (!propsIfaceRe.test(ifaceName) || ifaceName.endsWith('SlotProps')) continue
+    const locFile = iface._file || 'types.ts'
     for (const [fieldName, field] of iface.fields) {
       if (!implProps.has(fieldName)) {
         implProps.set(fieldName, {
-          loc: `types.ts:${field.line}`,
+          loc: `${locFile}:${field.line}`,
           type: field.type,
           internal: iface.internal || field.internal,
         })
@@ -762,18 +795,21 @@ function analyzeComponent(dir) {
   // 继承 / Omit / Pick：把跨文件 Props 基座字段并入（避免文档误报「文档有实现无」）
   const inheritedPropKeys = absorbInheritedProps(implProps, {
     dir,
-    typesPath,
-    typesText: existsSync(typesPath) ? readFileSync(typesPath, 'utf8') : '',
+    typesPath: existsSync(typesPath) ? typesPath : typeFiles[0],
+    typesText: existsSync(typesPath)
+      ? readFileSync(typesPath, 'utf8')
+      : (typeFiles[0] ? readFileSync(typeFiles[0], 'utf8') : ''),
     parsed,
     propsIfaceRe,
   })
   for (const pv of allVueParsed.values()) {
     for (const ref of pv.propTypeRefs) {
       const iface = parsed.interfaces.get(ref)
-      if (!iface || propsIfaceRe.test(ref) || ref.endsWith('SlotProps')) continue
+      if (!iface || ref.endsWith('SlotProps') || ref.endsWith('Props')) continue
+      const locFile = iface._file || 'types.ts'
       for (const [fieldName, field] of iface.fields) {
         if (!implProps.has(fieldName)) {
-          implProps.set(fieldName, { loc: `types.ts:${field.line}`, type: field.type, internal: false })
+          implProps.set(fieldName, { loc: `${locFile}:${field.line}`, type: field.type, internal: false })
         }
       }
     }
@@ -786,27 +822,31 @@ function analyzeComponent(dir) {
     }
   }
 
-  // events：types.ts 中 ^<Name>\w*Emits$ ∪ defineEmits 引用接口 ∪ 主组件内联 defineEmits ∪ 主组件 emit() 调用
+  // events：目录内全部 *Emits ∪ defineEmits ∪ emit() 调用
   const implEvents = new Map() // name -> loc
-  const emitsIfaceRe = new RegExp(`^${escapeRegExp(name)}\\w*Emits$`)
+  const emitsIfaceRe = /Emits$/
   for (const [ifaceName, iface] of parsed.interfaces) {
     if (!emitsIfaceRe.test(ifaceName)) continue
+    const locFile = iface._file || 'types.ts'
     for (const ev of iface.events) {
-      if (!implEvents.has(ev.name)) implEvents.set(ev.name, `types.ts:${ev.line}`)
+      if (!implEvents.has(ev.name)) implEvents.set(ev.name, `${locFile}:${ev.line}`)
     }
   }
   const inheritedEventKeys = absorbInheritedEmits(implEvents, {
     dir,
-    typesPath,
-    typesText: existsSync(typesPath) ? readFileSync(typesPath, 'utf8') : '',
+    typesPath: existsSync(typesPath) ? typesPath : typeFiles[0],
+    typesText: existsSync(typesPath)
+      ? readFileSync(typesPath, 'utf8')
+      : (typeFiles[0] ? readFileSync(typeFiles[0], 'utf8') : ''),
     parsed,
-    emitsIfaceRe,
+    emitsIfaceRe: new RegExp(`^${escapeRegExp(name)}\\w*Emits$`),
   })
   for (const pv of allVueParsed.values()) {
     for (const ref of pv.emitTypeRefs) {
       const iface = parsed.interfaces.get(ref)
-      if (!iface || emitsIfaceRe.test(ref)) continue
-      for (const ev of iface.events) if (!implEvents.has(ev.name)) implEvents.set(ev.name, `types.ts:${ev.line}`)
+      if (!iface || ref.endsWith('Emits')) continue
+      const locFile = iface._file || 'types.ts'
+      for (const ev of iface.events) if (!implEvents.has(ev.name)) implEvents.set(ev.name, `${locFile}:${ev.line}`)
     }
   }
   if (mainParsed) {

@@ -79,6 +79,7 @@ Golden references: MCP `get_golden_page`. For local edits use MCP `get_page_snip
 | `width`   | `'full' \| 'narrow'`                   | `'full'`    | `narrow` ~42rem for form pages.                                                          |
 | `bands`   | `'auto' \| 'uniform'`                  | `'auto'`    | `auto` tightens Header/filters/Toolbar vs table; `uniform` uses gap only.                |
 | `fill`    | `boolean`                              | `false`     | Fill remaining `MLayoutContent` height; pair with `MTable fill` for full-viewport lists. |
+| `pt`      | [RootPassThrough](/docs/types#RootPassThrough) | —   | DOM pass-through (shared across Page components).                                        |
 
 Tune with `--m-page-content-body-lead` / `--m-page-content-tools-pull` when `bands="auto"`.
 
@@ -131,6 +132,8 @@ Default slot: closable `MTag`s or similar.
 | Slot         | Description                              |
 | ------------ | ---------------------------------------- |
 | `breadcrumb` | Trail above the title (`MBreadcrumb`).   |
+| `title`      | Custom title (overrides `title` prop).   |
+| `description`| Custom blurb (overrides `description`).  |
 | `tags`       | Status / category tags beside the title. |
 | `actions`    | Trailing actions.                        |
 

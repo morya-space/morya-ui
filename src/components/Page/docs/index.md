@@ -83,6 +83,7 @@ import {
 | `width` | `'full' \| 'narrow'` | `'full'` | `narrow` 约 42rem，适合表单页。 |
 | `bands` | `'auto' \| 'uniform'` | `'auto'` | `auto` 收紧 Header/筛选/Toolbar 与表格之间的 band；`uniform` 仅用 `gap`。 |
 | `fill` | `boolean` | `false` | 撑满 `MLayoutContent` 剩余高度；仅全视口主列表与 `MTable fill` 联用。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) | — | DOM 透传（Page 系列组件通用）。 |
 
 `bands="auto"` 时可通过 CSS 变量微调：`--m-page-content-body-lead`、`--m-page-content-tools-pull`（见 `styles.css`）。
 
@@ -135,6 +136,8 @@ import {
 | Slot | 说明 |
 | --- | --- |
 | `breadcrumb` | 标题上方的面包屑（放 `MBreadcrumb`）。 |
+| `title` | 自定义标题内容（覆盖 `title` prop）。 |
+| `description` | 自定义说明内容（覆盖 `description` prop）。 |
 | `tags` | 标题右侧的状态/分类标记（放 `MTag` / `MStatus`）。 |
 | `actions` | 右侧操作。 |
 
