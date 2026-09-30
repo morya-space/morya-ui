@@ -1,3 +1,6 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Form/styles.css'
+import '../Icon/styles.css'
+import '../ProgressSpinner/styles.css'
 import './styles.css'

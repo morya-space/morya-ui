@@ -1,3 +1,6 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Empty/styles.css'
+import '../Loading/styles.css'
+import '../Pagination/styles.css'
 import './styles.css'

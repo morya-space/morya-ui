@@ -1308,7 +1308,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · props**
 
 - title + description
-- icon 或 illustration 按需（默认即可）
+- 主区域优先 illustration（no-content / no-result…）
 - 表格内放在 #empty
 
 **Recipe · slots**

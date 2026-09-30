@@ -1,3 +1,5 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Icon/styles.css'
+import '../Textarea/styles.css'
 import './styles.css'
