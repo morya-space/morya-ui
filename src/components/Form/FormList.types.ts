@@ -29,6 +29,6 @@ export interface FormListProps {
   /** Rules for the array itself (e.g. `{ required: true }` for "at least one row"). */
   rules?: FormItemRule | FormItemRule[]
   /** Value used for a new row. Pass a factory to create a fresh object each time. */
-  initialValue?: unknown
+  initialValue?: unknown | (() => unknown)
   pt?: RootPassThrough
 }

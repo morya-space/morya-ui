@@ -111,8 +111,18 @@ When no `model` prop is given the form uses an internal model, so `useForm` work
 | `validate` | `(trigger?) => string \| boolean \| void \| Promise<…>` | — | Callback validator; return error text or `false` |
 | `error` | `string` | — | Controlled error (wins over internal result) |
 | `invalid` / `help` / `required` / `label` | — | — | Layout and display |
+| `for` | `string` | — | Associates the label with a control `id` |
 
 > A field reports only the first failing rule. Use `warningOnly` when the message should not block submission.
+
+## Props — FormList
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `name` | `NamePath` | — | Array field path |
+| `rules` | `FormItemRule \| FormItemRule[]` | — | Rules for the array itself (e.g. at least one row) |
+| `initialValue` | `unknown \| () => unknown` | — | Seed for a new row; pass a factory for a fresh object each time |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) | — | Root pass-through |
 
 ## FormItemRule
 

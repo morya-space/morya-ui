@@ -111,8 +111,18 @@ const { valid, errors } = await form.validate()
 | `validate` | `(trigger?) => string \| boolean \| void \| Promise<…>` | — | 回调校验；返回错误文案或 `false` |
 | `error` | `string` | — | 受控错误（优先于内部结果） |
 | `invalid` / `help` / `required` / `label` | — | — | 布局与展示 |
+| `for` | `string` | — | 关联控件 `id`（label `for`） |
 
 > 一个字段只展示首条命中的规则消息；需要“只提示不阻断”时用规则的 `warningOnly`。
+
+## Props — FormList
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `name` | `NamePath` | — | 数组字段路径 |
+| `rules` | `FormItemRule \| FormItemRule[]` | — | 数组本身的规则（如至少一项） |
+| `initialValue` | `unknown \| () => unknown` | — | 新增行的初始值；传工厂函数可每次新建对象 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) | — | 根透传 |
 
 ## FormItemRule
 
