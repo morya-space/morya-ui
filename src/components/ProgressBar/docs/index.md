@@ -1,18 +1,20 @@
-﻿---
+---
 title: ProgressBar
 category: 03 / DATA
-description: 杩涘害鏉＄敤浜庡睍绀虹‘瀹氭垨涓嶇‘瀹氳繘搴︺€?---
+description: 进度条用于展示确定或不确定进度。
+---
 
 # ProgressBar
 
-杩涘害鏉＄敤浜庡睍绀轰换鍔″畬鎴愭瘮渚嬶紝鎴栦笉纭畾鍔犺浇鎬併€?
-## 寮曞叆
+进度条用于展示任务完成比例，或不确定加载态。
+
+## 引入
 
 ```ts
 import { MProgressBar } from 'morya-ui'
 ```
 
-## 鍩虹鐢ㄦ硶
+## 基础用法
 
 ```vue preview src="./demos/Basic.vue"
 ```
@@ -24,18 +26,19 @@ import { MProgressBar } from 'morya-ui'
 
 ## Props
 
-| 鍙傛暟 | 绫诲瀷 | 榛樿鍊?| 璇存槑 |
+| 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `value` | `number` | `0` | 杩涘害 0鈥?00锛坉eterminate锛夈€?|
-| `mode` | `'determinate' \| 'indeterminate'` | `'determinate'` | 纭畾 / 涓嶇‘瀹氭ā寮忋€?|
-| `showValue` | `boolean` | `true` | 鏄惁鏄剧ず鐧惧垎姣旀枃妗堛€?|
-| `type` | `'line' \| 'circle'` | `'line'` | 绾垮舰鎴栫幆褰€?|
-| `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| 鈥 | 鈥?| 璇箟鑹层€俙exception`鈫抎anger锛沗active`鈫掔嚎褰㈡潯绾瑰姩鏁堬紱`normal`鈫掍富鑹层€?|
-| `color` | `string` | 鈥?| 鑷畾涔夊～鍏呰壊銆?|
+| `value` | `number` | `0` | 进度 0–100（determinate）。 |
+| `mode` | `'determinate' \| 'indeterminate'` | `'determinate'` | 确定 / 不确定模式。 |
+| `showValue` | `boolean` | `true` | 是否显示百分比文案。 |
+| `type` | `'line' \| 'circle'` | `'line'` | 线形或环形。 |
+| `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| …` | — | 语义色。`exception`→danger；`active`→线形条纹动效；`normal`→主色。 |
+| `color` | `string` | — | 自定义填充色。 |
 
 ## Events
 
-鏃犺嚜瀹氫箟浜嬩欢銆?
+无自定义事件。
+
 ## Slots
 
-鏃犳彃妲姐€?
+无插槽。

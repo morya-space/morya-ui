@@ -1,30 +1,34 @@
-﻿---
+---
 title: Icon
 category: 01 / BASIC
-description: 绯荤粺绾挎鍥炬爣娉ㄥ唽琛ㄣ€備笟鍔″浘鏍囩敤榛樿鎻掓Ы鎺ュ叆 Lucide 绛夊簱銆?---
+description: 系统线框图标注册表。业务图标用默认插槽接入 Lucide 等库。
+---
 
 # Icon
 
-`MIcon` 缁存姢**缁勪欢搴撶郴缁熷浘鏍?*锛堝叧闂€佺澶淬€佺姸鎬併€佸鑸€佷笟鍔″父鐢ㄧ瓑锛岀粺涓€涓?Tabler 24脳24 绾挎椋庢牸锛岀敱 `scripts/generate-system-icons.mjs` 鐢熸垚锛夈€傚畬鏁存捣閲忓浘鏍囪鐢ㄩ粯璁ゆ彃妲芥帴鍏?[Lucide](https://lucide.dev) 绛夊簱銆?
-## 寮曞叆
+`MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，统一为 Tabler 24×24 线框风格，由 `scripts/generate-system-icons.mjs` 生成）。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
+
+## 引入
 
 ```ts
 import { iconNames, MIcon } from 'morya-ui'
 ```
 
-## 鍩虹鐢ㄦ硶
+## 基础用法
 
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## 鍏ㄩ儴绯荤粺鍥炬爣
+## 全部系统图标
 
-鐐瑰嚮鍥炬爣鍗冲彲澶嶅埗鍚嶇О锛堝 `search`锛夛紝鐢ㄦ硶锛歚<MIcon name="search" />`銆傚彲鎸夊垎绫荤瓫閫夛紝鎴栨悳绱㈠悕绉般€?
+点击图标即可复制名称（如 `search`），用法：`<MIcon name="search" />`。可按分类筛选，或搜索名称。
+
 ```vue preview src="./demos/AllSystemIcons.zh.vue"
 ```
 
-## 鑷畾涔?/ Lucide锛堟帹鑽愪笟鍔′晶锛?
-绯荤粺鍥炬爣涓嶅鏃讹紝涓嶈寰€缁勪欢搴撳爢 SVG锛岀敤榛樿鎻掓Ы鎸備换鎰忓浘鏍囩粍浠讹細
+## 自定义 / Lucide（推荐业务侧）
+
+系统图标不够时，不要往组件库堆 SVG，用默认插槽挂任意图标组件：
 
 ```vue
 <script setup lang="ts">
@@ -33,7 +37,7 @@ import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
 </script>
 
 <template>
-  <MIcon label="鐢ㄦ埛" size="md">
+  <MIcon label="用户" size="md">
     <User :size="16" :stroke-width="1.8" />
   </MIcon>
 
@@ -43,39 +47,41 @@ import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
         <User :size="14" :stroke-width="1.8" />
       </MIcon>
     </template>
-    <MInput placeholder="鎼滅储鐢ㄦ埛" />
+    <MInput placeholder="搜索用户" />
   </MIconField>
 
-  <!-- Button 涔熷彲鐩存帴浼犵粍浠讹紝涓嶅繀鍖?MIcon -->
-  <MButton :icon="User" label="璧勬枡" />
+  <!-- Button 也可直接传组件，不必包 MIcon -->
+  <MButton :icon="User" label="资料" />
 </template>
 ```
 
-瀹夎绀轰緥锛歚pnpm add lucide-vue-next`銆傜嚎瀹藉缓璁?`2`锛屼笌绯荤粺鍥炬爣锛圱abler outline锛変竴鑷淬€?
-鏈夐粯璁ゆ彃妲芥椂**浼樺厛娓叉煋鎻掓Ы**锛屽拷鐣?`name`銆?
+安装示例：`pnpm add lucide-vue-next`。线宽建议 `2`，与系统图标（Tabler outline）一致。
+
+有默认插槽时**优先渲染插槽**，忽略 `name`。
+
 ## Props
 
-| 鍙傛暟 | 绫诲瀷 | 榛樿鍊?| 璇存槑 |
+| 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `name` | [IconName](/docs/types#IconName) | 鈥?| 绯荤粺鍥炬爣鍚嶏紱鎻掓Ы瀛樺湪鏃跺彲鐪佺暐銆?|
-| `label` | `string` | 鈥?| 鍙闂悕绉帮紱鐪佺暐鏃?`aria-hidden`銆?|
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | `'md'` | 灏哄锛沗sm`/`lg` 鏄犲皠鍒?small/large銆?|
+| `name` | [IconName](/docs/types#IconName) | — | 系统图标名；插槽存在时可省略。 |
+| `label` | `string` | — | 可访问名称；省略时 `aria-hidden`。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | `'md'` | 尺寸；`sm`/`lg` 映射到 small/large。 |
 
 
 ## Slots
 
-| 鎻掓Ы | 璇存槑 |
+| 插槽 | 说明 |
 | --- | --- |
-| `default` | 鑷畾涔?SVG / 绗笁鏂瑰浘鏍囩粍浠躲€?|
+| `default` | 自定义 SVG / 第三方图标组件。 |
 
-## 宸ュ叿瀵煎嚭
+## 工具导出
 
-| 瀵煎嚭 | 璇存槑 |
+| 导出 | 说明 |
 | --- | --- |
-| `iconNames` | 鍏ㄩ儴绯荤粺鍥炬爣鍚嶆暟缁勩€?|
-| `iconCategoryMeta` / `getIconCategory` / `getIconCategoryGroups` | 鍥炬爣鍒嗙被鍏冩暟鎹笌鍒嗙粍銆?|
-| `iconRegistry` / `getIconDefinition` / `isIconName` | 娉ㄥ唽琛ㄤ笌绫诲瀷瀹堝崼銆?|
+| `iconNames` | 全部系统图标名数组。 |
+| `iconCategoryMeta` / `getIconCategory` / `getIconCategoryGroups` | 图标分类元数据与分组。 |
+| `iconRegistry` / `getIconDefinition` / `isIconName` | 注册表与类型守卫。 |
 
 ## Events
 
-鏃犺嚜瀹氫箟浜嬩欢銆?
+无自定义事件。

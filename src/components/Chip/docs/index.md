@@ -1,44 +1,46 @@
-﻿---
+---
 title: Chip
 category: 01 / BASIC
-description: 鑺墖鐢ㄤ簬灞曠ず鏍囩鍖栦俊鎭紝鍙甫鍥炬爣銆佸浘鐗囦笌绉婚櫎鎿嶄綔銆?---
+description: 芯片用于展示标签化信息，可带图标、图片与移除操作。
+---
 
 # Chip
 
-鑺墖鐢ㄤ簬灞曠ず绠€鐭爣绛句俊鎭紝鍙€夊浘鏍?鍥剧墖涓庣Щ闄ゆ寜閽€?
-## 寮曞叆
+芯片用于展示简短标签信息，可选图标/图片与移除按钮。
+
+## 引入
 
 ```ts
 import { MChip } from 'morya-ui'
 ```
 
-## 鍩虹鐢ㄦ硶
+## 基础用法
 
 ```vue preview src="./demos/Basic.vue"
 ```
 
 ## Props
 
-| 鍙傛暟 | 绫诲瀷 | 榛樿鍊?| 璇存槑 |
+| 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `label` | `string` | 鈥?| 鑺墖鏂囨銆?|
-| `icon` | [IconName](/docs/types#IconName) | 鈥?| 鍓嶇疆鍥炬爣鍚嶇О銆?|
-| `image` | `string` | 鈥?| 鍓嶇疆鍥剧墖 URL锛堜紭鍏堜簬 icon锛夈€?|
-| `removable` | `boolean` | `false` | 鏄剧ず 脳 绉婚櫎鎸夐挳銆?|
-| `disabled` | `boolean` | `false` | 绂佺敤浜や簰銆?|
-| `severity` | `MTagSeverity \| 'warning'` | 鈥?| 璇箟鑹层€?|
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| 灏哄銆?|
+| `label` | `string` | — | 芯片文案。 |
+| `icon` | [IconName](/docs/types#IconName) | — | 前置图标名称。 |
+| `image` | `string` | — | 前置图片 URL（优先于 icon）。 |
+| `removable` | `boolean` | `false` | 显示 × 移除按钮。 |
+| `disabled` | `boolean` | `false` | 禁用交互。 |
+| `severity` | `MTagSeverity \| 'warning'` | — | 语义色。 |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 
 
 ## Events
 
-| 浜嬩欢鍚?| 鍙傛暟 | 璇存槑 |
+| 事件名 | 参数 | 说明 |
 | --- | --- | --- |
-| `remove` | `MouseEvent` | 鐐瑰嚮绉婚櫎鎸夐挳鏃惰Е鍙戙€?|
+| `remove` | `MouseEvent` | 点击移除按钮时触发。 |
 
 ## Slots
 
-| 鎻掓Ы鍚?| 璇存槑 |
+| 插槽名 | 说明 |
 | --- | --- |
-| `default` | 鏍囩鍐呭銆?|
-| `icon` | 鍓嶇疆鍥炬爣銆?|
+| `default` | 标签内容。 |
+| `icon` | 前置图标。 |

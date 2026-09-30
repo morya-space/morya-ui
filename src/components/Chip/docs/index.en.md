@@ -1,4 +1,4 @@
-﻿---
+---
 title: Chip
 category: 01 / BASIC
 description: Chip displays tagged information, optionally with an icon, image, and remove action.

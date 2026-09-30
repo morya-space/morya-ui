@@ -1,4 +1,4 @@
-﻿---
+---
 title: ProgressBar
 category: 03 / DATA
 description: Progress bar for determinate or indeterminate progress.

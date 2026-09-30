@@ -1,4 +1,4 @@
-﻿---
+---
 title: Badge
 category: 01 / BASIC
 description: Status badge or dot.

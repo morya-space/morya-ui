@@ -1,4 +1,4 @@
-﻿---
+---
 title: Icon
 category: 01 / BASIC
 description: System outline icon registry. Use the default slot for business icons from Lucide and similar libraries.

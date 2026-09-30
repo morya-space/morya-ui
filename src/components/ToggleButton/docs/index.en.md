@@ -1,4 +1,4 @@
-﻿---
+---
 title: ToggleButton
 category: 02 / FORM
 description: A button that switches between on and off labels.

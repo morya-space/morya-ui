@@ -1,4 +1,4 @@
-﻿---
+---
 title: Divider
 category: 01 / BASIC
 description: Content divider.

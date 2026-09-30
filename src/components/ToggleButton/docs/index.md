@@ -1,18 +1,20 @@
-﻿---
+---
 title: ToggleButton
 category: 02 / FORM
-description: 鍦ㄥ紑/鍏充袱绉嶆爣绛剧姸鎬侀棿鍒囨崲鐨勬寜閽€?---
+description: 在开/关两种标签状态间切换的按钮。
+---
 
 # ToggleButton
 
-甯冨皵鍒囨崲鎸夐挳锛屽彲閰嶇疆寮€/鍏虫枃妗堜笌鍥炬爣銆?
-## 寮曞叆
+布尔切换按钮，可配置开/关文案与图标。
+
+## 引入
 
 ```ts
 import { MToggleButton } from 'morya-ui'
 ```
 
-## 鍩虹鐢ㄦ硶
+## 基础用法
 
 ```vue preview src="./demos/Basic.zh.vue"
 ```
@@ -24,23 +26,23 @@ import { MToggleButton } from 'morya-ui'
 
 ## Props
 
-| 鍙傛暟 | 绫诲瀷 | 榛樿鍊?| 璇存槑 |
+| 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `modelValue` | `boolean` | `false` | 鏄惁寮€鍚€?|
-| `onLabel` / `offLabel` | `string` | `On` / `Off` | 鏂囨銆?|
-| `onIcon` / `offIcon` | `string` | 鈥?| 鍙€夊浘鏍囧瓧绗︺€?|
-| `size` | [MSizeInput](/docs/types#MSizeInput) | 鈥?| `small` / `large`锛涘彲缁ф壙 ConfigProvider銆?|
-| `disabled` | `boolean` | `false` | 绂佺敤銆?|
+| `modelValue` | `boolean` | `false` | 是否开启。 |
+| `onLabel` / `offLabel` | `string` | `On` / `Off` | 文案。 |
+| `onIcon` / `offIcon` | `string` | — | 可选图标字符。 |
+| `size` | [MSizeInput](/docs/types#MSizeInput) | — | `small` / `large`；可继承 ConfigProvider。 |
+| `disabled` | `boolean` | `false` | 禁用。 |
 
 
 ## Events
 
-| 浜嬩欢鍚?| 鍙傛暟 | 璇存槑 |
+| 事件名 | 参数 | 说明 |
 | --- | --- | --- |
-| `update:modelValue` | `boolean` | 鍊煎彉鍖栥€?|
+| `update:modelValue` | `boolean` | 值变化。 |
 
 ## Slots
 
-| 鎻掓Ы鍚?| 璇存槑 |
+| 插槽名 | 说明 |
 | --- | --- |
-| `default` | 鎸夐挳鍐呭銆?|
+| `default` | 按钮内容。 |
