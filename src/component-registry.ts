@@ -15,6 +15,7 @@ import MButtonGroup from "./components/Button/ButtonGroup.vue";
 import MCard from "./components/Card/Card.vue";
 import MCalendar from "./components/Calendar/Calendar.vue";
 import MCarousel from "./components/Carousel/Carousel.vue";
+import MCarouselItem from "./components/Carousel/CarouselItem.vue";
 import MCascadeSelect from "./components/CascadeSelect/CascadeSelect.vue";
 import MCheckbox from "./components/Checkbox/Checkbox.vue";
 import MCheckboxGroup from "./components/Checkbox/CheckboxGroup.vue";
@@ -151,6 +152,7 @@ export const mComponents: Record<string, Component> = {
   MCard,
   MCalendar,
   MCarousel,
+  MCarouselItem,
   MCascadeSelect,
   MCheckbox,
   MCheckboxGroup,

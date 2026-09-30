@@ -85,7 +85,21 @@ export type {
   CalendarValue,
 } from "./components/Calendar/types";
 export { default as MCarousel } from "./components/Carousel/Carousel.vue";
-export type { CarouselEmits, CarouselProps } from "./components/Carousel/types";
+export { default as MCarouselItem } from "./components/Carousel/CarouselItem.vue";
+export type {
+  CarouselArrowSlotProps,
+  CarouselDirection,
+  CarouselDotPlacement,
+  CarouselDotsSlotProps,
+  CarouselDotType,
+  CarouselEffect,
+  CarouselEmits,
+  CarouselInstance,
+  CarouselItemProps,
+  CarouselProps,
+  CarouselSlidesPerView,
+  CarouselTrigger,
+} from "./components/Carousel/types";
 export { default as MCascadeSelect } from "./components/CascadeSelect/CascadeSelect.vue";
 export type {
   CascadeSelectEmits,

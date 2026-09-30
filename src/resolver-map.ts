@@ -17,6 +17,7 @@ export const componentImportMap: Record<string, string> = {
   "MCalendar": "calendar",
   "MCard": "card",
   "MCarousel": "carousel",
+  "MCarouselItem": "carousel",
   "MCascadeSelect": "cascade-select",
   "MCheckbox": "checkbox",
   "MCheckboxGroup": "checkbox",
