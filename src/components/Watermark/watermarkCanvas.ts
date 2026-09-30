@@ -14,25 +14,23 @@ function getFontSize(font: WatermarkFont, ratio: number) {
   return size * ratio
 }
 
-function getCanvasFont(font: WatermarkFont, ratio: number, height: number) {
+function getCanvasFont(font: WatermarkFont, ratio: number) {
   const size = getFontSize(font, ratio)
   const weight = font.fontWeight ?? 'normal'
   const family = font.fontFamily ?? 'sans-serif'
-  return `${weight} ${size}px ${family}, sans-serif`
+  return `${weight} ${size}px ${family}`
 }
 
 function prepareCanvas(width: number, height: number, ratio: number) {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
   if (!ctx) throw new Error('Canvas unsupported')
-  const realWidth = width * ratio
-  const realHeight = height * ratio
-  canvas.width = realWidth
-  canvas.height = realHeight
-  ctx.save()
-  return { ctx, canvas, realWidth, realHeight }
+  canvas.width = Math.max(1, width * ratio)
+  canvas.height = Math.max(1, height * ratio)
+  return { ctx, canvas }
 }
 
+/** Offsets of a point rotated about the origin. */
 function getRotatePos(x: number, y: number, angle: number) {
   return [
     x * Math.cos(angle) - y * Math.sin(angle),
@@ -51,9 +49,16 @@ export interface WatermarkPatternOptions {
   font?: WatermarkFont
 }
 
+export interface WatermarkPattern {
+  base64: string
+  /** Tile size in CSS pixels. Both values are needed for an aligned repeat. */
+  width: number
+  height: number
+}
+
 export async function createWatermarkPattern(
   options: WatermarkPatternOptions,
-): Promise<{ base64: string; markWidth: number }> {
+): Promise<WatermarkPattern> {
   const {
     content,
     image,
@@ -67,19 +72,19 @@ export async function createWatermarkPattern(
 
   const ratio = getPixelRatio()
   const [gapX, gapY] = gap
-  const gapXCenter = gapX / 2
-  const gapYCenter = gapY / 2
-  const offsetLeft = offset?.[0] ?? gapXCenter
-  const offsetTop = offset?.[1] ?? gapYCenter
+  const offsetLeft = offset?.[0] ?? gapX / 2
+  const offsetTop = offset?.[1] ?? gapY / 2
 
-  const { ctx, canvas, realWidth, realHeight } = prepareCanvas(width, height, ratio)
+  const mark = prepareCanvas(width, height, ratio)
+  const realWidth = mark.canvas.width
+  const realHeight = mark.canvas.height
 
   if (image) {
     await new Promise<void>((resolve, reject) => {
       const img = new Image()
       img.crossOrigin = 'anonymous'
       img.onload = () => {
-        ctx.drawImage(img, 0, 0, realWidth, realHeight)
+        mark.ctx.drawImage(img, 0, 0, realWidth, realHeight)
         resolve()
       }
       img.onerror = () => reject(new Error('Watermark image failed to load'))
@@ -88,57 +93,68 @@ export async function createWatermarkPattern(
   }
   else {
     const lines = Array.isArray(content) ? content : content ? [content] : ['Watermark']
-    ctx.textBaseline = 'top'
-    ctx.textAlign = 'center'
-    let top = 0
-    ctx.globalAlpha = 0.15
-    for (const line of lines) {
-      ctx.font = getCanvasFont(font, ratio, height)
-      ctx.fillStyle = font.color ?? 'rgb(0, 0, 0)'
-      ctx.fillText(line, realWidth / 2, top)
-      top += getFontSize(font, ratio) + FONT_GAP * ratio
-    }
+    mark.ctx.textBaseline = 'top'
+    mark.ctx.textAlign = 'center'
+    mark.ctx.globalAlpha = 0.15
+    mark.ctx.font = getCanvasFont(font, ratio)
+    mark.ctx.fillStyle = font.color ?? 'rgb(0, 0, 0)'
+    const lineHeight = getFontSize(font, ratio) + FONT_GAP * ratio
+    lines.forEach((line, index) => {
+      mark.ctx.fillText(line, realWidth / 2, index * lineHeight)
+    })
   }
 
+  // Rotate inside a square that fits the mark at any angle.
   const angle = (Math.PI / 180) * Number(rotate)
-  const maxSize = Math.max(width, height)
-  const rotated = prepareCanvas(maxSize, maxSize, ratio)
-  rotated.ctx.translate(rotated.realWidth / 2, rotated.realHeight / 2)
+  const side = Math.ceil(Math.hypot(realWidth, realHeight))
+  const rotated = prepareCanvas(side, side, ratio)
+  rotated.ctx.translate(rotated.canvas.width / 2, rotated.canvas.height / 2)
   rotated.ctx.rotate(angle)
-  if (realWidth > 0 && realHeight > 0) {
-    rotated.ctx.drawImage(canvas, -realWidth / 2, -realHeight / 2)
-  }
-  rotated.ctx.restore()
+  rotated.ctx.drawImage(mark.canvas, -realWidth / 2, -realHeight / 2)
 
-  const left = rotated.realWidth / 2
-  const topPos = rotated.realHeight / 2
-  const [rLeft, rTop] = getRotatePos(-left, -topPos, angle)
-  const [pLeft, pTop] = getRotatePos(-left + realWidth, -topPos, angle)
-  const [cLeft, cTop] = getRotatePos(-left, -topPos + realHeight, angle)
-  const rotatedWidth = Math.max(rLeft, pLeft, cLeft) - Math.min(rLeft, pLeft, cLeft)
-  const rotatedHeight = Math.max(rTop, pTop, cTop) - Math.min(rTop, pTop, cTop)
+  // Axis-aligned bounding box of the rotated mark.
+  const halfW = realWidth / 2
+  const halfH = realHeight / 2
+  const corners = [
+    getRotatePos(-halfW, -halfH, angle),
+    getRotatePos(halfW, -halfH, angle),
+    getRotatePos(-halfW, halfH, angle),
+    getRotatePos(halfW, halfH, angle),
+  ]
+  const minX = Math.min(...corners.map(corner => corner[0]))
+  const minY = Math.min(...corners.map(corner => corner[1]))
+  const maxX = Math.max(...corners.map(corner => corner[0]))
+  const maxY = Math.max(...corners.map(corner => corner[1]))
+  const rotatedWidth = maxX - minX
+  const rotatedHeight = maxY - minY
 
-  const cut = prepareCanvas(rotatedWidth, rotatedHeight, ratio)
-  cut.ctx.drawImage(
-    rotated.canvas,
-    -Math.min(rLeft, pLeft, cLeft),
-    -Math.min(rTop, pTop, cTop),
-  )
+  const cropped = prepareCanvas(rotatedWidth, rotatedHeight, ratio)
+  cropped.ctx.drawImage(rotated.canvas, -minX, -minY)
 
-  const patternWidth = gapX + rotatedWidth / ratio
-  const patternHeight = gapY + rotatedHeight / ratio
+  // Tile = rotated mark plus gap, so the repeat closes on itself exactly.
+  const markW = Math.ceil(rotatedWidth / ratio)
+  const markH = Math.ceil(rotatedHeight / ratio)
+  const patternWidth = Math.ceil(gapX + markW)
+  const patternHeight = Math.ceil(gapY + markH)
+
   const pattern = prepareCanvas(patternWidth, patternHeight, ratio)
-  const drawLeft = offsetLeft * ratio - gapXCenter * ratio
-  const drawTop = offsetTop * ratio - gapYCenter * ratio
-  pattern.ctx.drawImage(cut.canvas, drawLeft, drawTop)
+  const drawLeft = Math.round((gapX / 2 + offsetLeft - markW / 2) * ratio)
+  const drawTop = Math.round((gapY / 2 + offsetTop - markH / 2) * ratio)
+  pattern.ctx.drawImage(cropped.canvas, drawLeft, drawTop)
 
   return {
     base64: pattern.canvas.toDataURL(),
-    markWidth: patternWidth,
+    width: patternWidth,
+    height: patternHeight,
   }
 }
 
-export function watermarkOverlayStyle(base64: string, markWidth: number, zIndex: number) {
+export function watermarkOverlayStyle(
+  base64: string,
+  width: number,
+  height: number,
+  zIndex: number,
+) {
   return {
     zIndex: String(zIndex),
     position: 'absolute',
@@ -148,6 +164,6 @@ export function watermarkOverlayStyle(base64: string, markWidth: number, zIndex:
     pointerEvents: 'none',
     backgroundImage: `url('${base64}')`,
     backgroundRepeat: 'repeat',
-    backgroundSize: `${Math.floor(markWidth)}px`,
+    backgroundSize: `${width}px ${height}px`,
   } as const
 }

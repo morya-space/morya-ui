@@ -8,8 +8,8 @@ import {
   useAttrs,
   watch,
 } from 'vue'
+import { resolveCssColor } from '../../shared/resolveCssColor'
 import { useRootParts } from '../../shared/useComponentAttrs'
-import { resolveCssColor } from '../QRCode/qrEncoder'
 import { createWatermarkPattern, watermarkOverlayStyle } from './watermarkCanvas'
 
 defineOptions({ inheritAttrs: false })
@@ -59,7 +59,7 @@ function ensureOverlayObserver() {
 async function renderWatermark() {
   try {
     const textColor = resolveCssColor(props.font?.color ?? 'var(--m-color-text)', 'rgb(0, 0, 0)')
-    const { base64, markWidth } = await createWatermarkPattern({
+    const { base64, width, height } = await createWatermarkPattern({
       content: props.content,
       image: props.image,
       width: props.width,
@@ -74,13 +74,14 @@ async function renderWatermark() {
         fontFamily: props.font?.fontFamily,
       },
     })
-    overlayStyle.value = { ...watermarkOverlayStyle(base64, markWidth, mergedZIndex.value) }
+    overlayStyle.value = { ...watermarkOverlayStyle(base64, width, height, mergedZIndex.value) }
     await nextTick()
     ensureOverlayObserver()
   }
-  catch {
+  catch (error) {
     overlayStyle.value = null
     disconnectOverlayObserver()
+    console.error('[MWatermark] Failed to render watermark', error)
   }
 }
 

@@ -1,5 +1,8 @@
-import { qrcodegen } from './qrcodegen'
 import type { QRCodeErrorLevel } from './types'
+import { resolveCssColor } from '../../shared/resolveCssColor'
+import { qrcodegen } from './qrcodegen'
+
+export { resolveCssColor }
 
 // Vendored Nayuki namespace; keep runtime access without fighting export-namespace typings.
 const QrCode = qrcodegen.QrCode as unknown as {
@@ -29,19 +32,6 @@ export function encodeQrMatrix(text: string, errorLevel: QRCodeErrorLevel = 'M')
     matrix.push(row)
   }
   return { matrix, size }
-}
-
-export function resolveCssColor(value: string | undefined, fallback: string) {
-  if (!value) return fallback
-  if (typeof document === 'undefined') return value
-  if (!value.startsWith('var(')) return value
-  const probe = document.createElement('span')
-  probe.style.color = value
-  probe.style.display = 'none'
-  document.documentElement.append(probe)
-  const resolved = getComputedStyle(probe).color || fallback
-  probe.remove()
-  return resolved || fallback
 }
 
 export async function drawQrToCanvas(
