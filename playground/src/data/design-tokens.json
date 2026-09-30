@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T16:18:46.606Z",
+  "generatedAt": "2026-09-30T06:49:27.692Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 420,
+  "tokenCount": 433,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1130,6 +1130,16 @@
       }
     },
     {
+      "name": "--m-color-on-primary",
+      "category": "color",
+      "source": "src/theme/styles.css",
+      "default": "var(--m-color-on-emphasis)",
+      "description": {
+        "zh-CN": "主色面上的前景；默认等同 `--m-color-on-emphasis`。",
+        "en-US": "Foreground on primary surfaces; defaults to `--m-color-on-emphasis`."
+      }
+    },
+    {
       "name": "--m-color-primary",
       "category": "color",
       "source": "src/theme/styles.css",
@@ -1137,6 +1147,16 @@
       "description": {
         "zh-CN": "品牌主色，用于 primary 按钮、链接与聚焦描边。",
         "en-US": "Brand primary color for primary buttons, links, and focus rings."
+      }
+    },
+    {
+      "name": "--m-color-primary-active",
+      "category": "color",
+      "source": "src/theme/styles.css",
+      "default": "#1554ad",
+      "description": {
+        "zh-CN": "主色按下 / 激活态。",
+        "en-US": "Primary color for pressed / active state."
       }
     },
     {
@@ -2235,6 +2255,36 @@
       }
     },
     {
+      "name": "--m-line-height-lg",
+      "category": "component",
+      "source": "src/theme/styles.css",
+      "default": "1.5",
+      "description": {
+        "zh-CN": "组件专用相关变量：Line Height Lg",
+        "en-US": "Component-specific token: Line Height Lg"
+      }
+    },
+    {
+      "name": "--m-line-height-md",
+      "category": "typography",
+      "source": "src/theme/styles.css",
+      "default": "1.5714",
+      "description": {
+        "zh-CN": "正文默认行高。",
+        "en-US": "Default body line height."
+      }
+    },
+    {
+      "name": "--m-line-height-sm",
+      "category": "component",
+      "source": "src/theme/styles.css",
+      "default": "1.6667",
+      "description": {
+        "zh-CN": "组件专用相关变量：Line Height Sm",
+        "en-US": "Component-specific token: Line Height Sm"
+      }
+    },
+    {
       "name": "--m-list-font-size",
       "category": "component",
       "source": "src/components/List/styles.css",
@@ -2242,6 +2292,66 @@
       "description": {
         "zh-CN": "组件专用相关变量：List Font Size",
         "en-US": "Component-specific token: List Font Size"
+      }
+    },
+    {
+      "name": "--m-list-grid-column",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "1",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Column",
+        "en-US": "Component-specific token: List Grid Column"
+      }
+    },
+    {
+      "name": "--m-list-grid-column-lg",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-list-grid-column)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Column Lg",
+        "en-US": "Component-specific token: List Grid Column Lg"
+      }
+    },
+    {
+      "name": "--m-list-grid-column-md",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-list-grid-column)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Column Md",
+        "en-US": "Component-specific token: List Grid Column Md"
+      }
+    },
+    {
+      "name": "--m-list-grid-column-sm",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-list-grid-column)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Column Sm",
+        "en-US": "Component-specific token: List Grid Column Sm"
+      }
+    },
+    {
+      "name": "--m-list-grid-column-xl",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-list-grid-column)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Column Xl",
+        "en-US": "Component-specific token: List Grid Column Xl"
+      }
+    },
+    {
+      "name": "--m-list-grid-column-xs",
+      "category": "component",
+      "source": "src/components/List/styles.css",
+      "default": "var(--m-list-grid-column)",
+      "description": {
+        "zh-CN": "组件专用相关变量：List Grid Column Xs",
+        "en-US": "Component-specific token: List Grid Column Xs"
       }
     },
     {
@@ -3357,6 +3467,16 @@
       "description": {
         "zh-CN": "圆角相关变量：Radius Md",
         "en-US": "Radius token: Radius Md"
+      }
+    },
+    {
+      "name": "--m-radius-pill",
+      "category": "radius",
+      "source": "src/theme/styles.css",
+      "default": "var(--m-radius-full)",
+      "description": {
+        "zh-CN": "胶囊形圆角；等同 `--m-radius-full`。",
+        "en-US": "Pill radius; aliases `--m-radius-full`."
       }
     },
     {
@@ -4661,6 +4781,16 @@
       "description": {
         "zh-CN": "层级相关变量：Z Popper",
         "en-US": "Layering token: Z Popper"
+      }
+    },
+    {
+      "name": "--m-z-sticky",
+      "category": "layering",
+      "source": "src/theme/styles.css",
+      "default": "10",
+      "description": {
+        "zh-CN": "粘性定位层（Affix / Anchor 等），低于浮层。",
+        "en-US": "Sticky layer (Affix / Anchor); below overlays."
       }
     },
     {

@@ -16,7 +16,7 @@
     --m-button-hover-bg: var(--m-color-primary-hover);
     --m-button-hover-fg: var(--m-color-on-emphasis);
     --m-button-hover-border: var(--m-color-primary-hover);
-    --m-button-active-bg: #0958d9;
+    --m-button-active-bg: var(--m-color-primary-active);
     align-items: center;
     background: var(--m-button-bg);
     border: var(--m-border-width) solid var(--m-button-border);
@@ -94,7 +94,7 @@
     --m-button-hover-bg: var(--m-color-primary-hover);
     --m-button-hover-fg: var(--m-color-on-emphasis);
     --m-button-hover-border: var(--m-color-primary-hover);
-    --m-button-active-bg: #0958d9;
+    --m-button-active-bg: var(--m-color-primary-active);
 }
 
 .m-button--secondary {

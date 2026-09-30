@@ -2,6 +2,7 @@
     /* Default morya palette (--m-* token names) */
     --m-color-primary: #1677ff;
     --m-color-primary-hover: #4096ff;
+    --m-color-primary-active: #0958d9;
     --m-color-surface: #ffffff;
     --m-color-text: rgba(0, 0, 0, 0.88);
     --m-color-text-muted: rgba(0, 0, 0, 0.45);
@@ -38,6 +39,7 @@
     --m-color-contrast-hover: #1f1f1f;
     --m-color-contrast-active: #141414;
     --m-color-on-emphasis: #ffffff;
+    --m-color-on-primary: var(--m-color-on-emphasis);
     --m-overlay-scrim: rgb(0 0 0 / 0.45);
     --m-shadow-sm:
         0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 6px -1px rgb(0 0 0 / 0.02),
@@ -59,6 +61,9 @@
     --m-font-size-sm: 0.8125rem;
     --m-font-size-md: 0.875rem;
     --m-font-size-lg: 1.125rem;
+    --m-line-height-sm: 1.6667;
+    --m-line-height-md: 1.5714;
+    --m-line-height-lg: 1.5;
     /* Display scale (page titles, KPI figures) */
     --m-font-size-xl: 1.25rem;
     --m-font-size-2xl: 1.5rem;
@@ -77,6 +82,7 @@
     --m-z-tooltip: calc(var(--m-z-base) + 60);
     --m-z-toast: calc(var(--m-z-base) + 100);
     --m-z-popper: 40;
+    --m-z-sticky: 10;
 
     /* Affix hitbox tracks control height so small/compact shells do not overflow */
     --m-control-affix-size: calc(
@@ -105,6 +111,7 @@
     --m-radius-md: 0.5rem;
     --m-radius-lg: 0.5rem;
     --m-radius-full: 9999px;
+    --m-radius-pill: var(--m-radius-full);
     --m-font-sans:
         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
         Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -332,6 +339,7 @@
     /* Dark theme solids on dark surfaces (readable mid tones) */
     --m-color-primary: #1668dc;
     --m-color-primary-hover: #3c89e8;
+    --m-color-primary-active: #1554ad;
     --m-color-surface: #141414;
     --m-color-text: rgba(255, 255, 255, 0.85);
     --m-color-text-muted: rgba(255, 255, 255, 0.45);

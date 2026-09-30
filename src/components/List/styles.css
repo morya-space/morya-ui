@@ -16,6 +16,18 @@
 
     --m-list-grid-gutter: var(--m-space-4);
 
+    --m-list-grid-column: 1;
+
+    --m-list-grid-column-xs: var(--m-list-grid-column);
+
+    --m-list-grid-column-sm: var(--m-list-grid-column);
+
+    --m-list-grid-column-md: var(--m-list-grid-column);
+
+    --m-list-grid-column-lg: var(--m-list-grid-column);
+
+    --m-list-grid-column-xl: var(--m-list-grid-column);
+
     box-sizing: border-box;
 
     color: var(--m-color-text);

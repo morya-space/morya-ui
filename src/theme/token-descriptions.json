@@ -322,6 +322,20 @@
         "en-US": "Foreground on emphasis surfaces (icons, text)."
       }
     },
+    "--m-color-on-primary": {
+      "category": "color",
+      "description": {
+        "zh-CN": "主色面上的前景；默认等同 `--m-color-on-emphasis`。",
+        "en-US": "Foreground on primary surfaces; defaults to `--m-color-on-emphasis`."
+      }
+    },
+    "--m-color-primary-active": {
+      "category": "color",
+      "description": {
+        "zh-CN": "主色按下 / 激活态。",
+        "en-US": "Primary color for pressed / active state."
+      }
+    },
     "--m-color-fill-light": {
       "category": "color",
       "description": {
@@ -377,6 +391,27 @@
       "description": {
         "zh-CN": "浮层 z-index 基准；可通过全局配置覆盖。",
         "en-US": "Base z-index for overlays; overridable via global config."
+      }
+    },
+    "--m-z-sticky": {
+      "category": "layering",
+      "description": {
+        "zh-CN": "粘性定位层（Affix / Anchor 等），低于浮层。",
+        "en-US": "Sticky layer (Affix / Anchor); below overlays."
+      }
+    },
+    "--m-radius-pill": {
+      "category": "radius",
+      "description": {
+        "zh-CN": "胶囊形圆角；等同 `--m-radius-full`。",
+        "en-US": "Pill radius; aliases `--m-radius-full`."
+      }
+    },
+    "--m-line-height-md": {
+      "category": "typography",
+      "description": {
+        "zh-CN": "正文默认行高。",
+        "en-US": "Default body line height."
       }
     },
     "--m-opacity-disabled": {

@@ -424,11 +424,15 @@ export function deriveCompatCssVars(seed: MSeedTokens, tokens: TokenMap): CssVar
     '--m-color-warn': pick(tokens, 'colorWarning'),
     '--m-color-info': pick(tokens, 'colorInfo'),
     '--m-color-focus-ring': pick(tokens, 'colorPrimary'),
+    '--m-color-primary-active': pick(tokens, 'colorPrimaryActive'),
     '--m-color-on-emphasis': pick(tokens, 'colorTextLightSolid'),
+    '--m-color-on-primary': pick(tokens, 'colorTextLightSolid'),
     '--m-radius-control': pick(tokens, 'borderRadius'),
     '--m-radius-sm': pick(tokens, 'borderRadiusSM'),
     '--m-radius-md': pick(tokens, 'borderRadiusLG'),
     '--m-radius-lg': pick(tokens, 'borderRadiusLG'),
+    '--m-radius-pill': '9999px',
+    '--m-line-height-md': pick(tokens, 'lineHeight'),
     '--m-border-width': pick(tokens, 'lineWidth'),
     '--m-font-sans': pick(tokens, 'fontFamily'),
     '--m-font-size-md': pick(tokens, 'fontSize'),
@@ -449,6 +453,7 @@ export function deriveCompatCssVars(seed: MSeedTokens, tokens: TokenMap): CssVar
     '--m-motion-enter': toMs(2),
     '--m-motion-exit': toMs(1.5),
     '--m-motion-ease': pick(tokens, 'motionEaseOut'),
+    '--m-z-sticky': '10',
   }
 }
 
