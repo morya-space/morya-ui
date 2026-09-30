@@ -22,7 +22,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Forms · inputs
 
-`MForm`, `MFormItem`, `MInput`, `MInputPassword`, `MInputNumber`, `MTextarea`, `MInputOtp`, `MInputColor`, `MInputGroup`, `MInputTags`, `MSelect`, `MTreeSelect`, `MCascadeSelect`, `MListbox`, `MSelectButton`, `MDatePicker`, `MAutoComplete`, `MCheckbox` / `MCheckboxGroup`, `MRadio` / `MRadioGroup`, `MSwitch`, `MToggleButton`, `MSlider`, `MRating`, `MKnob`, `MFileUpload`, `MFloatLabel`, `MIconField`, `MLabel`
+`MForm` / `MFormItem` / `MFormList`, `MInput`, `MInputPassword`, `MInputNumber`, `MTextarea`, `MInputOtp`, `MInputColor`, `MInputGroup`, `MInputTags`, `MMentions`, `MSelect`, `MTreeSelect`, `MCascadeSelect`, `MListbox`, `MSelectButton`, `MDatePicker`, `MTimePicker`, `MCalendar`, `MAutoComplete`, `MCheckbox` / `MCheckboxGroup`, `MRadio` / `MRadioGroup`, `MSwitch`, `MToggleButton`, `MSlider`, `MRating`, `MKnob`, `MFileUpload`, `MFloatLabel`, `MIconField`, `MLabel`
 
 ## Layout helpers
 
@@ -30,7 +30,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Data
 
-`MTable` (`columns` + **`rows`**, not `data`; optional `virtual`, `resizable`/`filterable`, `children`, `span-method`, `tree-config`), `MDataView`, `MTree`, `MPagination`, `MOrderList`, `MPickList`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
+`MTable` (`columns` + **`rows`**, not `data`; optional `virtual`, `resizable`/`filterable`, `children`, `span-method`, `tree-config`), `MDataView`, `MList` / `MListItem` / `MListItemMeta`, `MTree`, `MPagination`, `MOrderList`, `MPickList`, `MDescriptions`, `MStatistic`, `MStatus` / `MTag` / `MChip` / `MBadge`, `MAvatar` / `MAvatarGroup`, `MTimeline`, `MMeterGroup`, `MVirtualScroller`
 
 ## Feedback
 
@@ -40,6 +40,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 | `toast` | `summary` + `detail`, or async / background feel | `feedback-choice` |
 | `<MMessage>` | Optional host for the `message` service. **Not** an inline alert | `feedback-choice` |
 | field `errorMessage` or token `role="alert"` | Persistent form / auth error | `feedback-choice` |
+| `MAlert` | Persistent in-page notice (not a toast) | `feedback-choice` |
 | `MEmpty` | No-data / first-use / filtered empty | `empty-result-choice` |
 | `MResult` | Terminal outcome: success, failure, 403 / 404 / 500 | `empty-result-choice` |
 | `MLoading` / `v-loading` / `loading.service` | **Default** region or fullscreen loading mask | `loading-choice` |
@@ -50,11 +51,11 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Overlays & menus
 
-`MDialog`, `MDrawer`, `MConfirmDialog` / `MConfirmPopup`, `MPopover`, `MTooltip`, `MDropdown` (**actions only**), `MContextMenu`, `MCommandMenu`, `MMenu` / `MMenubar` / `MTieredMenu` / `MMegaMenu`, `MTabs`, `MStepper`
+`MDialog`, `MDrawer`, `MConfirmDialog` / `MConfirmPopup`, `MPopover`, `MTooltip`, `MDropdown` (**actions only**), `MContextMenu`, `MCommandMenu`, `MMenu` / `MMenubar` / `MTieredMenu` / `MMegaMenu`, `MTabs`, `MStepper`, `MTour`, `MAffix`, `MAnchor`
 
 ## Surfaces / media
 
-`MCard`, `MPanel`, `MAccordion`, `MCarousel`, `MGallery`, `MIcon`, `MScrollbar`, `MInplace`, `MScrollTop`, `MTerminal`
+`MCard`, `MPanel`, `MAccordion`, `MCarousel`, `MGallery`, `MImage`, `MIcon`, `MQRCode`, `MScrollbar`, `MInplace`, `MScrollTop`, `MTerminal`, `MTypography` / `MTitle` / `MText` / `MParagraph` / `MLink`, `MWatermark`
 
 ## Scenario → decision
 
